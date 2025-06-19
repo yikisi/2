@@ -15,10 +15,10 @@ const add_meek_or_hate = require('#/event/ero/snippets/add-meek-or-hate');
 const EroParticipant = require('#/data/ero/ero-participant');
 const { base_emotion_juel } = require('#/data/ero/juel-const');
 const {
-  motion_const,
+  motion_enum,
   part_enum,
   part_talents,
-  towards_const,
+  towards_enum,
 } = require('#/data/ero/part-const');
 const { stain_enum } = require('#/data/ero/stain-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
@@ -385,10 +385,10 @@ module.exports = (handlers) => {
       base_emotion_juel / ((era.get(`talent:${defender}:淫核`) === 2) + 1),
     );
     add_attr_exp(attacker, attr_enum.speed, 1);
-    era.set(`tcvar:${attacker}:体位`, motion_const.stand);
-    era.set(`tcvar:${defender}:体位`, motion_const.lie);
-    era.set(`tcvar:${attacker}:朝向`, towards_const.left);
-    era.set(`tcvar:${defender}:朝向`, towards_const.right);
+    era.set(`tcvar:${attacker}:体位`, motion_enum.stand);
+    era.set(`tcvar:${defender}:体位`, motion_enum.lie);
+    era.set(`tcvar:${attacker}:朝向`, towards_enum.left);
+    era.set(`tcvar:${defender}:朝向`, towards_enum.right);
   };
 
   handlers[ero_hooks.ask_virgin_foot_job] = (
@@ -406,9 +406,9 @@ module.exports = (handlers) => {
     add_juel(defender, '羞耻', base_emotion_juel / 2);
     add_juel(attacker, '顺从', base_emotion_juel);
     add_attr_exp(defender, attr_enum.strength, 1);
-    era.set(`tcvar:${attacker}:体位`, motion_const.rev);
-    era.set(`tcvar:${defender}:体位`, motion_const.stand);
-    era.set(`tcvar:${attacker}:朝向`, towards_const.left);
-    era.set(`tcvar:${defender}:朝向`, towards_const.right);
+    era.set(`tcvar:${attacker}:体位`, motion_enum.rev);
+    era.set(`tcvar:${defender}:体位`, motion_enum.stand);
+    era.set(`tcvar:${attacker}:朝向`, towards_enum.left);
+    era.set(`tcvar:${defender}:朝向`, towards_enum.right);
   };
 };

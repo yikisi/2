@@ -12,9 +12,9 @@ const set_motion = require('#/event/ero/snippets/set-motion');
 const EroParticipant = require('#/data/ero/ero-participant');
 const { base_emotion_juel } = require('#/data/ero/juel-const');
 const {
-  motion_const,
+  motion_enum,
   part_enum,
-  towards_const,
+  towards_enum,
 } = require('#/data/ero/part-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 const { attr_enum } = require('#/data/train-const');
@@ -29,10 +29,10 @@ function common_suspended_congress(attacker, defender, check) {
   add_meek_or_hate(defender, check, (c) => c / 10);
   add_juel(defender, '羞耻', base_emotion_juel / 2);
   add_attr_exp(attacker, attr_enum.strength, 1.5);
-  set(`tcvar:${attacker}:体位`, motion_const.stand);
-  set(`tcvar:${defender}:体位`, motion_const.sit);
-  set(`tcvar:${attacker}:朝向`, towards_const.left);
-  set(`tcvar:${defender}:朝向`, towards_const.right);
+  set(`tcvar:${attacker}:体位`, motion_enum.stand);
+  set(`tcvar:${defender}:体位`, motion_enum.sit);
+  set(`tcvar:${attacker}:朝向`, towards_enum.left);
+  set(`tcvar:${defender}:朝向`, towards_enum.right);
 }
 
 /**
@@ -44,10 +44,10 @@ function common_ask_cowgirl(attacker, defender, check) {
   add_meek_or_hate(defender, check, (c) => c / 10);
   add_juel(defender, '羞耻', base_emotion_juel);
   add_attr_exp(defender, attr_enum.strength, 1);
-  set_motion(attacker, motion_const.rev, motion_const.sit);
-  set_motion(defender, motion_const.sit, motion_const.rev);
-  set(`tcvar:${attacker}:朝向`, towards_const.left);
-  set(`tcvar:${defender}:朝向`, towards_const.right);
+  set_motion(attacker, motion_enum.rev, motion_enum.sit);
+  set_motion(defender, motion_enum.sit, motion_enum.rev);
+  set(`tcvar:${attacker}:朝向`, towards_enum.left);
+  set(`tcvar:${defender}:朝向`, towards_enum.right);
 }
 
 /**
@@ -60,12 +60,12 @@ function common_cowgirl(attacker, defender, check) {
   add_juel(defender, '羞耻', base_emotion_juel);
   add_juel(attacker, '顺从', base_emotion_juel);
   add_attr_exp(defender, attr_enum.strength, 1);
-  set_motion(attacker, motion_const.sit, motion_const.lie);
-  set_motion(defender, motion_const.lie, motion_const.sit);
-  set(`tcvar:${attacker}:体位`, motion_const.sit);
-  set(`tcvar:${defender}:体位`, motion_const.lie);
-  set(`tcvar:${attacker}:朝向`, towards_const.left);
-  set(`tcvar:${defender}:朝向`, towards_const.right);
+  set_motion(attacker, motion_enum.sit, motion_enum.lie);
+  set_motion(defender, motion_enum.lie, motion_enum.sit);
+  set(`tcvar:${attacker}:体位`, motion_enum.sit);
+  set(`tcvar:${defender}:体位`, motion_enum.lie);
+  set(`tcvar:${attacker}:朝向`, towards_enum.left);
+  set(`tcvar:${defender}:朝向`, towards_enum.right);
 }
 
 /** @param {Record<string,function(number,number,HookArg,{check:number})>} handlers */
@@ -80,10 +80,10 @@ module.exports = (handlers) => {
     );
     add_attr_exp(attacker, attr_enum.strength, 1);
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
-    set_motion(attacker, motion_const.sit, motion_const.lie);
-    set(`tcvar:${defender}:体位`, motion_const.lie);
-    set(`tcvar:${attacker}:朝向`, towards_const.left);
-    set(`tcvar:${defender}:朝向`, towards_const.right);
+    set_motion(attacker, motion_enum.sit, motion_enum.lie);
+    set(`tcvar:${defender}:体位`, motion_enum.lie);
+    set(`tcvar:${attacker}:朝向`, towards_enum.left);
+    set(`tcvar:${defender}:朝向`, towards_enum.right);
   };
 
   handlers[ero_hooks.doggy_style] = handlers[ero_hooks.doggy_style_anal_sex] = (
@@ -103,10 +103,10 @@ module.exports = (handlers) => {
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
     add_juel(defender, '恐惧', base_emotion_juel / 4);
     add_juel(defender, '羞耻', base_emotion_juel / 4);
-    set_motion(attacker, motion_const.sit, motion_const.lie);
-    set(`tcvar:${defender}:体位`, motion_const.lie);
-    set(`tcvar:${attacker}:朝向`, towards_const.left);
-    set(`tcvar:${defender}:朝向`, towards_const.left);
+    set_motion(attacker, motion_enum.sit, motion_enum.lie);
+    set(`tcvar:${defender}:体位`, motion_enum.lie);
+    set(`tcvar:${attacker}:朝向`, towards_enum.left);
+    set(`tcvar:${defender}:朝向`, towards_enum.left);
   };
 
   handlers[ero_hooks.sitting] = (attacker, defender, hook, extra_flag) => {
@@ -118,10 +118,10 @@ module.exports = (handlers) => {
     add_attr_exp(attacker, attr_enum.strength, 1);
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
     add_juel(defender, '羞耻', base_emotion_juel / 2);
-    set(`tcvar:${attacker}:体位`, motion_const.sit);
-    set(`tcvar:${defender}:体位`, motion_const.sit);
-    set(`tcvar:${attacker}:朝向`, towards_const.left);
-    set(`tcvar:${defender}:朝向`, towards_const.right);
+    set(`tcvar:${attacker}:体位`, motion_enum.sit);
+    set(`tcvar:${defender}:体位`, motion_enum.sit);
+    set(`tcvar:${attacker}:朝向`, towards_enum.left);
+    set(`tcvar:${defender}:朝向`, towards_enum.right);
   };
 
   handlers[ero_hooks.hug_sitting] = handlers[ero_hooks.hug_sitting_anal_sex] = (
@@ -141,10 +141,10 @@ module.exports = (handlers) => {
     add_juel(defender, '恐惧', base_emotion_juel / 4);
     add_juel(defender, '羞耻', base_emotion_juel / 4);
     add_attr_exp(attacker, attr_enum.strength, 1);
-    set(`tcvar:${attacker}:体位`, motion_const.sit);
-    set(`tcvar:${defender}:体位`, motion_const.sit);
-    set(`tcvar:${attacker}:朝向`, towards_const.left);
-    set(`tcvar:${defender}:朝向`, towards_const.left);
+    set(`tcvar:${attacker}:体位`, motion_enum.sit);
+    set(`tcvar:${defender}:体位`, motion_enum.sit);
+    set(`tcvar:${attacker}:朝向`, towards_enum.left);
+    set(`tcvar:${defender}:朝向`, towards_enum.left);
   };
 
   handlers[ero_hooks.standing] = handlers[ero_hooks.standing_anal_sex] = (
@@ -163,10 +163,10 @@ module.exports = (handlers) => {
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
     add_juel(defender, '羞耻', base_emotion_juel / 2);
     add_attr_exp(attacker, attr_enum.strength, 1);
-    set(`tcvar:${attacker}:体位`, motion_const.stand);
-    set(`tcvar:${defender}:体位`, motion_const.stand);
-    set(`tcvar:${attacker}:朝向`, towards_const.left);
-    set(`tcvar:${defender}:朝向`, towards_const.right);
+    set(`tcvar:${attacker}:体位`, motion_enum.stand);
+    set(`tcvar:${defender}:体位`, motion_enum.stand);
+    set(`tcvar:${attacker}:朝向`, towards_enum.left);
+    set(`tcvar:${defender}:朝向`, towards_enum.right);
   };
 
   handlers[ero_hooks.hug_standing] = handlers[ero_hooks.hug_standing_anal_sex] =
@@ -183,10 +183,10 @@ module.exports = (handlers) => {
       add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
       add_juel(defender, '恐惧', base_emotion_juel / 2);
       add_attr_exp(attacker, attr_enum.strength, 1);
-      set(`tcvar:${attacker}:体位`, motion_const.stand);
-      set(`tcvar:${defender}:体位`, motion_const.stand);
-      set(`tcvar:${attacker}:朝向`, towards_const.left);
-      set(`tcvar:${defender}:朝向`, towards_const.left);
+      set(`tcvar:${attacker}:体位`, motion_enum.stand);
+      set(`tcvar:${defender}:体位`, motion_enum.stand);
+      set(`tcvar:${attacker}:朝向`, towards_enum.left);
+      set(`tcvar:${defender}:朝向`, towards_enum.left);
     };
 
   handlers[ero_hooks.suspended_congress] = (
@@ -237,10 +237,10 @@ module.exports = (handlers) => {
     add_juel(defender, '羞耻', base_emotion_juel / 2);
     add_attr_exp(attacker, attr_enum.strength, 1.5);
     add(`nowex:${attacker}:体力消耗`, get(`tcvar:${defender}:体重`) / 4);
-    set(`tcvar:${attacker}:体位`, motion_const.stand);
-    set(`tcvar:${defender}:体位`, motion_const.sit);
-    set(`tcvar:${attacker}:朝向`, towards_const.left);
-    set(`tcvar:${defender}:朝向`, towards_const.left);
+    set(`tcvar:${attacker}:体位`, motion_enum.stand);
+    set(`tcvar:${defender}:体位`, motion_enum.sit);
+    set(`tcvar:${attacker}:朝向`, towards_enum.left);
+    set(`tcvar:${defender}:朝向`, towards_enum.left);
   };
 
   handlers[ero_hooks.ask_cowgirl] = (attacker, defender, hook, extra_flag) => {
@@ -401,10 +401,10 @@ module.exports = (handlers) => {
     );
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
     add_attr_exp(attacker, attr_enum.strength, 1);
-    set_motion(attacker, motion_const.sit, motion_const.lie);
-    set(`tcvar:${defender}:体位`, motion_const.lie);
-    set(`tcvar:${attacker}:朝向`, towards_const.left);
-    set(`tcvar:${defender}:朝向`, towards_const.right);
+    set_motion(attacker, motion_enum.sit, motion_enum.lie);
+    set(`tcvar:${defender}:体位`, motion_enum.lie);
+    set(`tcvar:${attacker}:朝向`, towards_enum.left);
+    set(`tcvar:${defender}:朝向`, towards_enum.right);
   };
 
   handlers[ero_hooks.sitting_anal_sex] = (
@@ -420,10 +420,10 @@ module.exports = (handlers) => {
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
     add_juel(defender, '羞耻', base_emotion_juel / 2);
     add_attr_exp(attacker, attr_enum.strength, 1);
-    set(`tcvar:${attacker}:体位`, motion_const.sit);
-    set(`tcvar:${defender}:体位`, motion_const.sit);
-    set(`tcvar:${attacker}:朝向`, towards_const.left);
-    set(`tcvar:${defender}:朝向`, towards_const.right);
+    set(`tcvar:${attacker}:体位`, motion_enum.sit);
+    set(`tcvar:${defender}:体位`, motion_enum.sit);
+    set(`tcvar:${attacker}:朝向`, towards_enum.left);
+    set(`tcvar:${defender}:朝向`, towards_enum.right);
   };
 
   handlers[ero_hooks.suspended_congress_anal_sex] = (

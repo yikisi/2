@@ -13,10 +13,10 @@ const {
   lust_border,
 } = require('#/data/ero/orgasm-const');
 const {
-  motion_const,
+  motion_enum,
   part_enum,
   part_names,
-  towards_const,
+  towards_enum,
 } = require('#/data/ero/part-const');
 const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const { stain_enum } = require('#/data/ero/stain-const');
@@ -169,10 +169,10 @@ module.exports = {
     const _old = era.get('tflag:主导权');
     era.set(
       `tcvar:${_new}:体位`,
-      era.set(`tcvar:${_old}:体位`, motion_const.lie),
+      era.set(`tcvar:${_old}:体位`, motion_enum.lie),
     );
-    era.set(`tcvar:${_old}:朝向`, towards_const.right);
-    era.set(`tcvar:${_new}:朝向`, towards_const.left);
+    era.set(`tcvar:${_old}:朝向`, towards_enum.right);
+    era.set(`tcvar:${_new}:朝向`, towards_enum.left);
     era.set('tflag:主导权', _new);
     era.set('tflag:前回行动', -1);
     era.set('tflag:对手行动', -1);

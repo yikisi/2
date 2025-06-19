@@ -9,9 +9,9 @@ const set_motion = require('#/event/ero/snippets/set-motion');
 const EroParticipant = require('#/data/ero/ero-participant');
 const { base_emotion_juel } = require('#/data/ero/juel-const');
 const {
-  motion_const,
+  motion_enum,
   part_enum,
-  towards_const,
+  towards_enum,
 } = require('#/data/ero/part-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 
@@ -21,9 +21,9 @@ const { ero_hooks } = require('#/data/event/ero-hooks');
  * @param {number} supporter
  */
 function set_ask_towards(attacker, defender, supporter) {
-  era.set(`tcvar:${attacker}:朝向`, towards_const.left);
-  era.set(`tcvar:${defender}:朝向`, towards_const.right);
-  era.set(`tcvar:${supporter}:朝向`, towards_const.right);
+  era.set(`tcvar:${attacker}:朝向`, towards_enum.left);
+  era.set(`tcvar:${defender}:朝向`, towards_enum.right);
+  era.set(`tcvar:${supporter}:朝向`, towards_enum.right);
 }
 
 /**
@@ -32,9 +32,9 @@ function set_ask_towards(attacker, defender, supporter) {
  * @param {number} supporter
  */
 function set_towards(attacker, defender, supporter) {
-  era.set(`tcvar:${attacker}:朝向`, towards_const.left);
-  era.set(`tcvar:${defender}:朝向`, towards_const.right);
-  era.set(`tcvar:${supporter}:朝向`, towards_const.left);
+  era.set(`tcvar:${attacker}:朝向`, towards_enum.left);
+  era.set(`tcvar:${defender}:朝向`, towards_enum.right);
+  era.set(`tcvar:${supporter}:朝向`, towards_enum.left);
 }
 
 /**
@@ -43,9 +43,9 @@ function set_towards(attacker, defender, supporter) {
  * @param {number} supporter
  */
 function set_ask_double_lie(attacker, defender, supporter) {
-  era.set(`tcvar:${attacker}:体位`, motion_const.rev);
-  era.set(`tcvar:${defender}:体位`, motion_const.rev);
-  era.set(`tcvar:${supporter}:体位`, motion_const.rev);
+  era.set(`tcvar:${attacker}:体位`, motion_enum.rev);
+  era.set(`tcvar:${defender}:体位`, motion_enum.rev);
+  era.set(`tcvar:${supporter}:体位`, motion_enum.rev);
   set_ask_towards(attacker, defender, supporter);
 }
 
@@ -55,9 +55,9 @@ function set_ask_double_lie(attacker, defender, supporter) {
  * @param {number} supporter
  */
 function set_double_lie(attacker, defender, supporter) {
-  era.set(`tcvar:${attacker}:体位`, motion_const.lie);
-  era.set(`tcvar:${defender}:体位`, motion_const.lie);
-  era.set(`tcvar:${supporter}:体位`, motion_const.lie);
+  era.set(`tcvar:${attacker}:体位`, motion_enum.lie);
+  era.set(`tcvar:${defender}:体位`, motion_enum.lie);
+  era.set(`tcvar:${supporter}:体位`, motion_enum.lie);
   set_towards(attacker, defender, supporter);
 }
 
@@ -67,11 +67,11 @@ function set_double_lie(attacker, defender, supporter) {
  * @param {number} supporter
  */
 function set_ask_double_fuck(attacker, defender, supporter) {
-  era.set(`tcvar:${attacker}:体位`, motion_const.rev);
-  set_motion(defender, motion_const.sit, motion_const.rev);
-  set_motion(supporter, motion_const.sit, motion_const.rev);
-  era.set(`tcvar:${defender}:体位`, motion_const.sit);
-  era.set(`tcvar:${supporter}:体位`, motion_const.sit);
+  era.set(`tcvar:${attacker}:体位`, motion_enum.rev);
+  set_motion(defender, motion_enum.sit, motion_enum.rev);
+  set_motion(supporter, motion_enum.sit, motion_enum.rev);
+  era.set(`tcvar:${defender}:体位`, motion_enum.sit);
+  era.set(`tcvar:${supporter}:体位`, motion_enum.sit);
   set_ask_towards(attacker, defender, supporter);
 }
 
@@ -81,9 +81,9 @@ function set_ask_double_fuck(attacker, defender, supporter) {
  * @param {number} supporter
  */
 function set_double_fuck(attacker, defender, supporter) {
-  era.set(`tcvar:${attacker}:体位`, motion_const.sit);
-  era.set(`tcvar:${defender}:体位`, motion_const.lie);
-  era.set(`tcvar:${supporter}:体位`, motion_const.sit);
+  era.set(`tcvar:${attacker}:体位`, motion_enum.sit);
+  era.set(`tcvar:${defender}:体位`, motion_enum.lie);
+  era.set(`tcvar:${supporter}:体位`, motion_enum.sit);
   set_ask_towards(attacker, defender, supporter);
 }
 
@@ -93,12 +93,12 @@ function set_double_fuck(attacker, defender, supporter) {
  * @param {number} supporter
  */
 function set_69(attacker, defender, supporter) {
-  era.set(`tcvar:${attacker}:体位`, motion_const.sit);
-  era.set(`tcvar:${defender}:体位`, motion_const.lie);
-  era.set(`tcvar:${supporter}:体位`, motion_const.rev);
-  era.set(`tcvar:${attacker}:朝向`, towards_const.left);
-  era.set(`tcvar:${defender}:朝向`, towards_const.right);
-  era.set(`tcvar:${supporter}:朝向`, towards_const.right);
+  era.set(`tcvar:${attacker}:体位`, motion_enum.sit);
+  era.set(`tcvar:${defender}:体位`, motion_enum.lie);
+  era.set(`tcvar:${supporter}:体位`, motion_enum.rev);
+  era.set(`tcvar:${attacker}:朝向`, towards_enum.left);
+  era.set(`tcvar:${defender}:朝向`, towards_enum.right);
+  era.set(`tcvar:${supporter}:朝向`, towards_enum.right);
 }
 
 /** @param {Record<string,function(number,number,HookArg,{supporter:number})>} handlers */
@@ -181,12 +181,12 @@ module.exports = (handlers) => {
       new EroParticipant(defender, part_enum.mouth, -0.5),
       new EroParticipant(attacker, part_enum.penis, -0.5),
     );
-    era.set(`tcvar:${attacker}:体位`, motion_const.sit);
-    era.set(`tcvar:${defender}:体位`, motion_const.rev);
-    era.set(`tcvar:${supporter}:体位`, motion_const.rev);
-    era.set(`tcvar:${attacker}:朝向`, towards_const.left);
-    era.set(`tcvar:${defender}:朝向`, towards_const.right);
-    era.set(`tcvar:${supporter}:朝向`, towards_const.right);
+    era.set(`tcvar:${attacker}:体位`, motion_enum.sit);
+    era.set(`tcvar:${defender}:体位`, motion_enum.rev);
+    era.set(`tcvar:${supporter}:体位`, motion_enum.rev);
+    era.set(`tcvar:${attacker}:朝向`, towards_enum.left);
+    era.set(`tcvar:${defender}:朝向`, towards_enum.right);
+    era.set(`tcvar:${supporter}:朝向`, towards_enum.right);
   };
 
   handlers[ero_hooks.double_blow_job] = (
@@ -207,12 +207,12 @@ module.exports = (handlers) => {
       new EroParticipant(attacker, part_enum.mouth, -0.5),
       new EroParticipant(defender, part_enum.penis, -0.5),
     );
-    era.set(`tcvar:${attacker}:体位`, motion_const.lie);
-    era.set(`tcvar:${defender}:体位`, motion_const.sit);
-    era.set(`tcvar:${supporter}:体位`, motion_const.lie);
-    era.set(`tcvar:${attacker}:朝向`, towards_const.left);
-    era.set(`tcvar:${defender}:朝向`, towards_const.right);
-    era.set(`tcvar:${supporter}:朝向`, towards_const.left);
+    era.set(`tcvar:${attacker}:体位`, motion_enum.lie);
+    era.set(`tcvar:${defender}:体位`, motion_enum.sit);
+    era.set(`tcvar:${supporter}:体位`, motion_enum.lie);
+    era.set(`tcvar:${attacker}:朝向`, towards_enum.left);
+    era.set(`tcvar:${defender}:朝向`, towards_enum.right);
+    era.set(`tcvar:${supporter}:朝向`, towards_enum.left);
   };
 
   handlers[ero_hooks.ask_double_cunnilingus] = (
@@ -425,12 +425,12 @@ module.exports = (handlers) => {
       new EroParticipant(supporter, part_enum.penis),
       new EroParticipant(attacker, part_enum.anal),
     );
-    era.set(`tcvar:${attacker}:体位`, motion_const.rev);
-    era.set(`tcvar:${defender}:体位`, motion_const.sit);
-    era.set(`tcvar:${supporter}:体位`, motion_const.rev);
-    era.set(`tcvar:${attacker}:朝向`, towards_const.left);
-    era.set(`tcvar:${defender}:朝向`, towards_const.right);
-    era.set(`tcvar:${supporter}:朝向`, towards_const.left);
+    era.set(`tcvar:${attacker}:体位`, motion_enum.rev);
+    era.set(`tcvar:${defender}:体位`, motion_enum.sit);
+    era.set(`tcvar:${supporter}:体位`, motion_enum.rev);
+    era.set(`tcvar:${attacker}:朝向`, towards_enum.left);
+    era.set(`tcvar:${defender}:朝向`, towards_enum.right);
+    era.set(`tcvar:${supporter}:朝向`, towards_enum.left);
   };
 
   handlers[ero_hooks.ask_spit_roast] = (
@@ -500,12 +500,12 @@ module.exports = (handlers) => {
       new EroParticipant(defender, part_enum.anal),
     );
     add_juel(defender, '顺从', base_emotion_juel);
-    era.set(`tcvar:${attacker}:体位`, motion_const.sit);
-    era.set(`tcvar:${defender}:体位`, motion_const.lie);
-    era.set(`tcvar:${supporter}:体位`, motion_const.lie);
-    era.set(`tcvar:${attacker}:朝向`, towards_const.left);
-    era.set(`tcvar:${defender}:朝向`, towards_const.right);
-    era.set(`tcvar:${supporter}:朝向`, towards_const.right);
+    era.set(`tcvar:${attacker}:体位`, motion_enum.sit);
+    era.set(`tcvar:${defender}:体位`, motion_enum.lie);
+    era.set(`tcvar:${supporter}:体位`, motion_enum.lie);
+    era.set(`tcvar:${attacker}:朝向`, towards_enum.left);
+    era.set(`tcvar:${defender}:朝向`, towards_enum.right);
+    era.set(`tcvar:${supporter}:朝向`, towards_enum.right);
   };
 
   handlers[ero_hooks.spit_roast] = (attacker, defender, _, extra_flag) => {

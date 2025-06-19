@@ -4,7 +4,8 @@ const { clean_part } = require('#/system/ero/sys-calc-ero-part');
 
 const EroParticipant = require('#/data/ero/ero-participant');
 const EroTouch = require('#/data/ero/ero-touch');
-const { part_enum } = require('#/data/ero/part-const');
+const base_dict = require('#/data/ero/motion-const');
+const { base_enum, part_enum } = require('#/data/ero/part-const');
 
 const clean_touch_parts = [
   part_enum.mouth,
@@ -18,8 +19,8 @@ const clean_touch_parts = [
 ];
 
 /** @type {Record<string,1>} */
-const c_t_p_dict = clean_touch_parts.reduce((p, c) => {
-  p[c] = 1;
+const c_t_p_dict = clean_touch_parts.reduce((p, c, i) => {
+  p[c] = i + 1;
   return p;
 }, {});
 
@@ -33,10 +34,31 @@ const main_parts = [
 ];
 
 /** @type {Record<string,1>} */
-const m_p_dict = main_parts.reduce((p, c) => {
-  p[c] = 1;
+const m_p_dict = main_parts.reduce((p, c, i) => {
+  p[c] = i + 1;
   return p;
 }, {});
+
+/**
+ * @param {number} cid
+ * @param {number} part
+ */
+function get_part_len(cid, part) {
+  switch (part) {
+    case part_enum.mouth:
+      return era.get(`tcvar:${cid}:嘴唇位置`);
+    case part_enum.breast:
+      return era.get(`tcvar:${cid}:乳房位置`);
+    case part_enum.penis:
+    case part_enum.clitoris:
+    case part_enum.virgin:
+    case part_enum.anal:
+      return era.get(`tcvar:${cid}:会阴位置`);
+    case part_enum.foot:
+      return era.get(`cflag:${cid}:身高`);
+  }
+  return 0;
+}
 
 /**
  * @param {number} cid
@@ -92,9 +114,43 @@ function check_distance(
   if (!main_parts) {
     return false;
   }
-  const master = era.get('tflag:主导权');
-  const up = era.get(`tcvar:${cid}:上下`);
-  console.debug(aim_parts, motions, towards, master, up);
+  const base =
+    base_dict[motions.a][motions.d][towards.a][towards.d][
+      era.get(`tcvar:${cid}:上下`)
+    ];
+  let a_loc;
+  let d_loc;
+  switch (base) {
+    case base_enum.same:
+      d_loc = get_part_len(oid, aim_parts.d) - get_part_len(oid, main_parts.d);
+      if (aim_parts.a === part_enum.hand) {
+        a_loc =
+          era.get(`tcvar:${cid}:肩膀位置`) - get_part_len(cid, main_parts.a);
+        const aim_len = era.get(`tcvar:${cid}:臂长`);
+        return d_loc >= a_loc - aim_len && d_loc <= a_loc + aim_len;
+      }
+      a_loc = get_part_len(cid, aim_parts.a) - get_part_len(cid, main_parts.a);
+      return (
+        a_loc !== 0 && a_loc * d_loc >= 0 && Math.abs(a_loc) >= Math.abs(d_loc)
+      );
+    case base_enum.diff:
+      if (c_t_p_dict[aim_parts.d] < c_t_p_dict[main_parts.d]) {
+        return false;
+      }
+      break;
+    case base_enum.s_tri:
+      if (c_t_p_dict[aim_parts.d] > c_t_p_dict[main_parts.d]) {
+        return false;
+      }
+      break;
+    case base_enum.d_tri:
+      if (c_t_p_dict[aim_parts.d] < c_t_p_dict[main_parts.d]) {
+        return false;
+      }
+      break;
+    case base_enum.foot:
+      return aim_parts.a === part_enum.foot;
+  }
   return false;
 }
 

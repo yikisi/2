@@ -92,6 +92,7 @@ part_names4item[part_enum.breast] = '乳头';
 part_names4item[part_enum.clitoris] = '阴蒂';
 
 module.exports = {
+  base_enum: { no: 0, same: 1, diff: 2, s_tri: 3, d_tri: 4, foot: 5 },
   /** 身体部位的枚举类型 */
   get_skill_list: (sex) => [
     '甜言蜜语',
@@ -112,14 +113,24 @@ module.exports = {
       .filter((e, i, l) => i === l.indexOf(e)),
   ],
   /** 身体部位对应的快感名称 */
+  motion_enum: {
+    // 躺
+    lie: 0,
+    // 坐
+    sit: 1,
+    // 站
+    stand: 2,
+    // 反向躺
+    rev: 3,
+  },
   part_enum,
   part_gifts,
+  /** 身体部位对应的部位名称 */
   part_names,
   part_names4item,
-  /** 身体部位对应的部位名称 */
-  part_skills,
+  part_skills /** 快感条名称数组 */,
   part_talents,
-  part_touch /** 快感条名称数组 */,
+  part_touch,
   pleasure_list: [
     part_enum.mouth,
     part_enum.breast,
@@ -145,20 +156,11 @@ module.exports = {
     part_enum.sadism,
     part_enum.masochism,
   ],
-  motion_const: {
-    // 躺
-    lie: 0,
-    // 坐
-    sit: 1,
-    // 站
-    stand: 2,
-    // 反向躺
-    rev: 3,
-  },
-  towards_const: {
+  towards_enum: {
     // 顺时针
     right: 0,
     // 逆时针
     left: 1,
   },
+  up_enum: { down: 0, up: 1 },
 };

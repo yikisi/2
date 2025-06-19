@@ -18,9 +18,9 @@ const print_ero_gif = require('#/event/ero/snippets/print-ero-gif');
 const EroParticipant = require('#/data/ero/ero-participant');
 const { base_emotion_juel } = require('#/data/ero/juel-const');
 const {
-  motion_const,
+  motion_enum,
   part_enum,
-  towards_const,
+  towards_enum,
 } = require('#/data/ero/part-const');
 const { stain_enum } = require('#/data/ero/stain-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
@@ -810,10 +810,10 @@ module.exports = (handlers) => {
       '羞耻',
       base_emotion_juel * (1 - extra_flag.check / 10),
     );
-    era.set(`tcvar:${attacker}:体位`, motion_const.rev);
-    era.set(`tcvar:${defender}:体位`, motion_const.lie);
-    era.set(`tcvar:${attacker}:朝向`, towards_const.right);
-    era.set(`tcvar:${defender}:朝向`, towards_const.right);
+    era.set(`tcvar:${attacker}:体位`, motion_enum.rev);
+    era.set(`tcvar:${defender}:体位`, motion_enum.lie);
+    era.set(`tcvar:${attacker}:朝向`, towards_enum.right);
+    era.set(`tcvar:${defender}:朝向`, towards_enum.right);
   };
 
   handlers[ero_hooks.ask_hair_fuck] = (attacker, defender, _, extra_flag) => {

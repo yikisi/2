@@ -16,9 +16,9 @@ const {
 } = require('#/event/ero/common-lines/snippets');
 
 const {
-  motion_const,
+  motion_enum,
   part_enum,
-  towards_const,
+  towards_enum,
 } = require('#/data/ero/part-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 
@@ -438,8 +438,8 @@ async function common_ask_fuck(attacker, defender, hook) {
       await after_refusing_by_attacker(attacker, defender, hook);
       return;
     }
-    const motion = era.get(`tcvar:${attacker}:体位`) === motion_const.rev;
-    const towards = era.get(`tcvar:${attacker}:朝向`) === towards_const.right;
+    const motion = era.get(`tcvar:${attacker}:体位`) === motion_enum.rev;
+    const towards = era.get(`tcvar:${attacker}:朝向`) === towards_enum.right;
     await attacker.print_and_wait('真是丢人……');
     await attacker.print_and_wait('为了乞求快感，居然能做出这种事……');
     await attacker.say_and_wait('哈……❤️');
