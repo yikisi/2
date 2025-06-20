@@ -17,6 +17,7 @@ const {
   part_enum,
   part_names,
   towards_enum,
+  up_enum,
 } = require('#/data/ero/part-const');
 const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const { stain_enum } = require('#/data/ero/stain-const');
@@ -173,6 +174,8 @@ module.exports = {
     );
     era.set(`tcvar:${_old}:朝向`, towards_enum.right);
     era.set(`tcvar:${_new}:朝向`, towards_enum.left);
+    era.set(`tcvar:${_new}:上下`, up_enum.up);
+    era.set(`tcvar:${_old}:上下`, up_enum.down);
     era.set('tflag:主导权', _new);
     era.set('tflag:前回行动', -1);
     era.set('tflag:对手行动', -1);

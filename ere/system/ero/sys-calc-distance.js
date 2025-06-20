@@ -121,6 +121,7 @@ function check_distance(
     base_dict[motions.a][motions.d][towards.a][towards.d][
       era.get(`tcvar:${cid}:上下`)
     ];
+  const is_up = era.get(`tcvar:${cid}:上下`);
   let a_loc;
   let d_loc;
   switch (base) {
@@ -211,7 +212,7 @@ function check_distance(
                 get_part_len(oid, main_parts.d)) **
                 2
           );
-        } else if (aim_parts.a === part_enum.foot) {
+        } else if (aim_parts.a === part_enum.foot && is_up > 0) {
           a_loc =
             get_part_len(cid, main_parts.a) - get_part_len(cid, aim_parts.a);
           const m_d_loc = get_part_len(oid, main_parts.d);
@@ -224,12 +225,30 @@ function check_distance(
       return false;
     case base_enum.d_tri:
       if (
-        c_t_p_dict[aim_parts.a] < c_t_p_dict[main_parts.a] ||
-        c_t_p_dict[aim_parts.d] < c_t_p_dict[main_parts.d]
+        get_part_len(cid, aim_parts.a) !== get_part_len(cid, main_parts.a) &&
+        c_t_p_dict[aim_parts.d] >= c_t_p_dict[main_parts.d]
       ) {
-        return false;
+        if (aim_parts.a === part_enum.hand) {
+          return (
+            era.get(`tcvar:${cid}:臂长`) ** 2 >=
+            (era.get(`tcvar:${cid}:肩膀位置`) -
+              get_part_len(cid, main_parts.a)) **
+              2 +
+              (get_part_len(oid, aim_parts.d) -
+                get_part_len(oid, main_parts.d)) **
+                2
+          );
+        } else if (aim_parts.a === part_enum.foot && is_up > 0) {
+          a_loc =
+            get_part_len(cid, aim_parts.a) - get_part_len(cid, main_parts.a);
+          const m_d_loc = get_part_len(oid, main_parts.d);
+          return (
+            a_loc <= get_part_len(oid, part_enum.foot) - m_d_loc &&
+            a_loc >= get_part_len(oid, part_enum.virgin) + 1 - m_d_loc
+          );
+        }
       }
-      break;
+      return false;
     case base_enum.foot:
       return aim_parts.a === part_enum.foot;
   }
@@ -240,9 +259,13 @@ module.exports = {
   /**
    * @param {number} attacker
    * @param {number} defender
-   * @param {{a:number,d:number}} main_parts
+   * @param {{a:number,d:number}|0} main_parts
    */
-  clean_oor_parts(attacker, defender, main_parts) {
+  clean_oor_parts(
+    attacker,
+    defender,
+    main_parts = find_main_parts(attacker, defender),
+  ) {
     const motions = {
       a: era.get(`tcvar:${attacker}:体位`),
       d: era.get(`tcvar:${defender}:体位`),
