@@ -39,7 +39,7 @@ module.exports = (handlers) => {
       new EroParticipant(defender, part_enum.mouth),
     );
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
-    sys_change_motion(attacker, defender, [base_enum.same, base_enum.diff]);
+    sys_change_motion(attacker, defender, [base_enum.same]);
     clean_oor_parts(attacker, defender, {
       a: part_enum.mouth,
       d: part_enum.mouth,
@@ -52,7 +52,7 @@ module.exports = (handlers) => {
       new EroParticipant(defender, part_enum.mouth, 0.2),
     );
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 5);
-    sys_change_motion(attacker, defender, [base_enum.same, base_enum.diff]);
+    sys_change_motion(attacker, defender, [base_enum.same]);
     clean_oor_parts(attacker, defender, {
       a: part_enum.mouth,
       d: part_enum.mouth,

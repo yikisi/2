@@ -367,9 +367,9 @@ module.exports = {
       .map((_, i) => Math.floor(aim / 10 ** i) % 10);
     console.log(attacker, defender, motion_list, now, aim, result);
     era.set(`tcvar:${attacker}:上下`, result[4]);
-    era.set(`tcvar:${defender}:体位`, result[3]);
-    era.set(`tcvar:${defender}:朝向`, result[2]);
-    era.set(`tcvar:${attacker}:体位`, result[1]);
-    era.set(`tcvar:${attacker}:朝向`, result[0]);
+    era.set(`tcvar:${defender}:朝向`, result[3]);
+    era.set(`tcvar:${defender}:体位`, result[2]);
+    era.set(`tcvar:${attacker}:朝向`, result[1]);
+    era.set(`tcvar:${attacker}:体位`, result[0]);
   },
 };

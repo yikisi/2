@@ -92,7 +92,15 @@ part_names4item[part_enum.breast] = '乳头';
 part_names4item[part_enum.clitoris] = '阴蒂';
 
 module.exports = {
-  base_enum: { no: 0, same: 1, diff: 2, s_tri: 3, d_tri: 4, foot: 5 },
+  base_enum: {
+    no: 0,
+    same: 1,
+    diff: 2,
+    s_tri: 3,
+    d_tri: 4,
+    foot: 5,
+    b_foot: 6,
+  },
   /** 身体部位的枚举类型 */
   get_skill_list: (sex) => [
     '甜言蜜语',
