@@ -1,6 +1,6 @@
 const era = require('#/era-electron');
 
-const { clean_parts_oor } = require('#/system/ero/sys-calc-distance');
+const { clean_oor_parts } = require('#/system/ero/sys-calc-distance');
 const sys_do_sex = require('#/system/ero/sys-calc-ero');
 const {
   clean_part,
@@ -36,7 +36,7 @@ module.exports = (handlers) => {
       new EroParticipant(defender, part_enum.mouth),
     );
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
-    clean_parts_oor(attacker, defender, {
+    clean_oor_parts(attacker, defender, {
       a: part_enum.mouth,
       d: part_enum.mouth,
     });
@@ -48,7 +48,7 @@ module.exports = (handlers) => {
       new EroParticipant(defender, part_enum.mouth, 0.2),
     );
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 5);
-    clean_parts_oor(attacker, defender, {
+    clean_oor_parts(attacker, defender, {
       a: part_enum.mouth,
       d: part_enum.mouth,
     });

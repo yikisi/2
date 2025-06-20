@@ -83,9 +83,9 @@ function find_main_parts(cid, oid) {
     if (ret === undefined) {
       ret = f_parts.at(-1);
     }
-    return { a: ret[0], d: ret[1].part };
+    return era.set(`tcvar:${cid}:前回接触`, { a: ret[0], d: ret[1].part });
   }
-  return era.get(`tcvar:${cid}:前回接触`);
+  return ret;
 }
 
 /**
@@ -125,6 +125,7 @@ function check_distance(
   let d_loc;
   switch (base) {
     case base_enum.same:
+      // 坐标系相同
       if (aim_parts.a === part_enum.hand) {
         a_loc =
           era.get(`tcvar:${cid}:肩膀位置`) - get_part_len(cid, main_parts.a);
@@ -143,14 +144,14 @@ function check_distance(
         d_loc =
           get_part_len(oid, aim_parts.d) - get_part_len(oid, main_parts.d);
         const m_a_loc = get_part_len(cid, main_parts.a);
-        const v_loc = get_part_len(cid, part_enum.virgin);
+        const v_loc = get_part_len(cid, part_enum.virgin) + 1;
         const f_loc = get_part_len(cid, part_enum.foot);
         return d_loc <= f_loc - m_a_loc && d_loc >= v_loc - m_a_loc;
       } else if (aim_parts.d === part_enum.foot) {
         a_loc =
           get_part_len(cid, aim_parts.a) - get_part_len(cid, main_parts.a);
         const m_d_loc = get_part_len(oid, main_parts.d);
-        const v_loc = get_part_len(oid, part_enum.virgin);
+        const v_loc = get_part_len(oid, part_enum.virgin) + 1;
         const f_loc = get_part_len(oid, part_enum.foot);
         return a_loc <= f_loc - m_d_loc && a_loc >= v_loc - m_d_loc;
       }
@@ -160,17 +161,72 @@ function check_distance(
         a_loc !== 0 && a_loc * d_loc >= 0 && Math.abs(a_loc) >= Math.abs(d_loc)
       );
     case base_enum.diff:
-      if (c_t_p_dict[aim_parts.d] < c_t_p_dict[main_parts.d]) {
-        return false;
+      // 坐标系相反，攻方目标位置反向相减
+      if (aim_parts.a === part_enum.hand) {
+        a_loc =
+          get_part_len(cid, main_parts.a) - era.get(`tcvar:${cid}:肩膀位置`);
+        d_loc =
+          get_part_len(oid, aim_parts.d) - get_part_len(oid, main_parts.d);
+        const arm_len = era.get(`tcvar:${cid}:臂长`);
+        return d_loc >= a_loc - arm_len && d_loc <= a_loc + arm_len;
+      } else if (aim_parts.d === part_enum.hand) {
+        a_loc =
+          get_part_len(cid, main_parts.a) - get_part_len(cid, aim_parts.a);
+        d_loc =
+          era.get(`tcvar:${oid}:肩膀位置`) - get_part_len(oid, main_parts.d);
+        const arm_len = era.get(`tcvar:${oid}:臂长`);
+        return a_loc >= d_loc - arm_len && a_loc <= d_loc + arm_len;
+      } else if (aim_parts.a === part_enum.foot) {
+        d_loc =
+          get_part_len(oid, aim_parts.d) - get_part_len(oid, main_parts.d);
+        const m_a_loc = get_part_len(cid, main_parts.a);
+        const v_loc = get_part_len(cid, part_enum.virgin) + 1;
+        const f_loc = get_part_len(cid, part_enum.foot);
+        return d_loc <= m_a_loc - v_loc && d_loc >= m_a_loc - f_loc;
+      } else if (aim_parts.d === part_enum.foot) {
+        a_loc =
+          get_part_len(cid, main_parts.a) - get_part_len(cid, aim_parts.a);
+        const m_d_loc = get_part_len(oid, main_parts.d);
+        const v_loc = get_part_len(oid, part_enum.virgin) + 1;
+        const f_loc = get_part_len(oid, part_enum.foot);
+        return a_loc <= f_loc - m_d_loc && a_loc >= v_loc - m_d_loc;
       }
-      break;
+      a_loc = get_part_len(cid, aim_parts.a) - get_part_len(cid, main_parts.a);
+      d_loc = get_part_len(oid, aim_parts.d) - get_part_len(oid, main_parts.d);
+      return (
+        a_loc !== 0 && a_loc * d_loc <= 0 && Math.abs(a_loc) >= Math.abs(d_loc)
+      );
     case base_enum.s_tri:
-      if (c_t_p_dict[aim_parts.d] > c_t_p_dict[main_parts.d]) {
-        return false;
+      if (
+        get_part_len(cid, aim_parts.a) !== get_part_len(cid, main_parts.a) &&
+        c_t_p_dict[aim_parts.d] <= c_t_p_dict[main_parts.d]
+      ) {
+        if (aim_parts.a === part_enum.hand) {
+          return (
+            era.get(`tcvar:${cid}:臂长`) ** 2 >=
+            (era.get(`tcvar:${cid}:肩膀位置`) -
+              get_part_len(cid, main_parts.a)) **
+              2 +
+              (get_part_len(oid, aim_parts.d) -
+                get_part_len(oid, main_parts.d)) **
+                2
+          );
+        } else if (aim_parts.a === part_enum.foot) {
+          a_loc =
+            get_part_len(cid, main_parts.a) - get_part_len(cid, aim_parts.a);
+          const m_d_loc = get_part_len(oid, main_parts.d);
+          return (
+            a_loc <= get_part_len(oid, part_enum.foot) - m_d_loc &&
+            a_loc >= get_part_len(oid, part_enum.virgin) + 1 - m_d_loc
+          );
+        }
       }
-      break;
+      return false;
     case base_enum.d_tri:
-      if (c_t_p_dict[aim_parts.d] < c_t_p_dict[main_parts.d]) {
+      if (
+        c_t_p_dict[aim_parts.a] < c_t_p_dict[main_parts.a] ||
+        c_t_p_dict[aim_parts.d] < c_t_p_dict[main_parts.d]
+      ) {
         return false;
       }
       break;
@@ -186,7 +242,7 @@ module.exports = {
    * @param {number} defender
    * @param {{a:number,d:number}} main_parts
    */
-  clean_parts_oor(attacker, defender, main_parts) {
+  clean_oor_parts(attacker, defender, main_parts) {
     const motions = {
       a: era.get(`tcvar:${attacker}:体位`),
       d: era.get(`tcvar:${defender}:体位`),
@@ -218,4 +274,12 @@ module.exports = {
     }
   },
   sys_check_distance: check_distance,
+  /**
+   * @param {number} cid
+   * @param {number} oid
+   */
+  sys_check_main_touch(cid, oid) {
+    era.set(`tcvar:${cid}:前回接触`, 0);
+    find_main_parts(cid, oid);
+  },
 };
