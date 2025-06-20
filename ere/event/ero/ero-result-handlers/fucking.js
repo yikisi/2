@@ -1,5 +1,6 @@
 const { add, get, set } = require('#/era-electron');
 
+const { sys_change_motion } = require('#/system/ero/sys-calc-distance');
 const sys_do_sex = require('#/system/ero/sys-calc-ero');
 const { add_juel } = require('#/system/ero/sys-calc-juel');
 const { add_palam } = require('#/system/ero/sys-calc-palam');
@@ -12,9 +13,11 @@ const set_motion = require('#/event/ero/snippets/set-motion');
 const EroParticipant = require('#/data/ero/ero-participant');
 const { base_emotion_juel } = require('#/data/ero/juel-const');
 const {
+  base_enum,
   motion_enum,
   part_enum,
   towards_enum,
+  up_enum,
 } = require('#/data/ero/part-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 const { attr_enum } = require('#/data/train-const');
@@ -60,12 +63,6 @@ function common_cowgirl(attacker, defender, check) {
   add_juel(defender, '羞耻', base_emotion_juel);
   add_juel(attacker, '顺从', base_emotion_juel);
   add_attr_exp(defender, attr_enum.strength, 1);
-  set_motion(attacker, motion_enum.sit, motion_enum.lie);
-  set_motion(defender, motion_enum.lie, motion_enum.sit);
-  set(`tcvar:${attacker}:体位`, motion_enum.sit);
-  set(`tcvar:${defender}:体位`, motion_enum.lie);
-  set(`tcvar:${attacker}:朝向`, towards_enum.left);
-  set(`tcvar:${defender}:朝向`, towards_enum.right);
 }
 
 /** @param {Record<string,function(number,number,HookArg,{check:number})>} handlers */
@@ -355,6 +352,21 @@ module.exports = (handlers) => {
       new EroParticipant(attacker, part_enum.virgin),
       new EroParticipant(defender, part_enum.penis),
     );
+    if (hook.arg) {
+      sys_change_motion(
+        attacker,
+        defender,
+        [base_enum.s_tri, base_enum.d_tri],
+        up_enum.up,
+      );
+    } else {
+      sys_change_motion(
+        attacker,
+        defender,
+        [base_enum.same, base_enum.diff, base_enum.s_tri, base_enum.d_tri],
+        up_enum.up,
+      );
+    }
     common_cowgirl(attacker, defender, extra_flag.check);
   };
 

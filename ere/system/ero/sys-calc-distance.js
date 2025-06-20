@@ -314,9 +314,10 @@ module.exports = {
   /**
    * @param {number} attacker
    * @param {number} defender
-   * @param {number} compat_motions
+   * @param {number[]} compat_motions
+   * @param {number} is_up
    */
-  sys_change_motion(attacker, defender, ...compat_motions) {
+  sys_change_motion(attacker, defender, compat_motions, is_up = -2) {
     const param = [
       era.get(`tcvar:${attacker}:体位`),
       era.get(`tcvar:${defender}:体位`),
@@ -324,7 +325,11 @@ module.exports = {
       era.get(`tcvar:${defender}:朝向`),
       era.get(`tcvar:${attacker}:上下`),
     ];
+    if (is_up === -2) {
+      is_up = param[4];
+    }
     if (
+      (is_up === -1 || param[4] === is_up) &&
       compat_motions.indexOf(
         base_dict[param[0]][param[1]][param[2]][param[3]][param[4]],
       ) !== -1
@@ -332,11 +337,15 @@ module.exports = {
       return;
     }
     const now = get_motion_code(...param);
-    const motion_list = sort_list(
-      compat_motions.reduce((p, c) => p.concat(base2motion[c]), []),
-      (e) => e,
-      true,
+    /** @type {number[]} */
+    let motion_list = compat_motions.reduce(
+      (p, c) => p.concat(base2motion[c]),
+      [],
     );
+    if (is_up !== -1) {
+      motion_list = motion_list.filter((e) => Math.floor(e / 10000) === is_up);
+    }
+    motion_list = sort_list(motion_list, (e) => e, true);
     let index = 0;
     while (motion_list.length > index && motion_list[index] < now) {
       index++;
@@ -356,10 +365,11 @@ module.exports = {
     const result = new Array(5)
       .fill(void 0)
       .map((_, i) => Math.floor(aim / 10 ** i) % 10);
-    era.set(`tcvar:${attacker}:上下`, result[0]);
-    era.set(`tcvar:${defender}:体位`, result[1]);
+    console.log(attacker, defender, motion_list, now, aim, result);
+    era.set(`tcvar:${attacker}:上下`, result[4]);
+    era.set(`tcvar:${defender}:体位`, result[3]);
     era.set(`tcvar:${defender}:朝向`, result[2]);
-    era.set(`tcvar:${attacker}:体位`, result[3]);
-    era.set(`tcvar:${attacker}:朝向`, result[4]);
+    era.set(`tcvar:${attacker}:体位`, result[1]);
+    era.set(`tcvar:${attacker}:朝向`, result[0]);
   },
 };

@@ -1,6 +1,9 @@
 const era = require('#/era-electron');
 
-const { clean_oor_parts } = require('#/system/ero/sys-calc-distance');
+const {
+  clean_oor_parts,
+  sys_change_motion,
+} = require('#/system/ero/sys-calc-distance');
 const sys_do_sex = require('#/system/ero/sys-calc-ero');
 const {
   clean_part,
@@ -20,7 +23,7 @@ const add_meek_or_hate = require('#/event/ero/snippets/add-meek-or-hate');
 
 const EroParticipant = require('#/data/ero/ero-participant');
 const { base_emotion_juel } = require('#/data/ero/juel-const');
-const { part_enum, part_touch } = require('#/data/ero/part-const');
+const { base_enum, part_enum, part_touch } = require('#/data/ero/part-const');
 const { stain_enum } = require('#/data/ero/stain-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 
@@ -36,6 +39,7 @@ module.exports = (handlers) => {
       new EroParticipant(defender, part_enum.mouth),
     );
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
+    sys_change_motion(attacker, defender, [base_enum.same, base_enum.diff]);
     clean_oor_parts(attacker, defender, {
       a: part_enum.mouth,
       d: part_enum.mouth,
@@ -48,6 +52,7 @@ module.exports = (handlers) => {
       new EroParticipant(defender, part_enum.mouth, 0.2),
     );
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 5);
+    sys_change_motion(attacker, defender, [base_enum.same, base_enum.diff]);
     clean_oor_parts(attacker, defender, {
       a: part_enum.mouth,
       d: part_enum.mouth,
