@@ -80,396 +80,1064 @@ const base_dict = [
   ],
 ];
 
-base_dict[motion_enum.lie][motion_enum.lie][towards_enum.right][
-  towards_enum.right
-][up_enum.up] = base_enum.no;
-base_dict[motion_enum.lie][motion_enum.lie][towards_enum.right][
-  towards_enum.left
-][up_enum.up] = base_enum.no;
-base_dict[motion_enum.lie][motion_enum.lie][towards_enum.left][
-  towards_enum.right
-][up_enum.up] = base_enum.same;
-base_dict[motion_enum.lie][motion_enum.lie][towards_enum.left][
-  towards_enum.left
-][up_enum.up] = base_enum.same;
-base_dict[motion_enum.lie][motion_enum.sit][towards_enum.right][
-  towards_enum.right
-][up_enum.up] = base_enum.d_tri;
-base_dict[motion_enum.lie][motion_enum.sit][towards_enum.right][
-  towards_enum.left
-][up_enum.up] = base_enum.no;
-base_dict[motion_enum.lie][motion_enum.sit][towards_enum.left][
-  towards_enum.right
-][up_enum.up] = base_enum.s_tri;
-base_dict[motion_enum.lie][motion_enum.sit][towards_enum.left][
-  towards_enum.left
-][up_enum.up] = base_enum.s_tri;
-base_dict[motion_enum.lie][motion_enum.stand][towards_enum.right][
-  towards_enum.right
-][up_enum.up] = base_enum.foot;
-base_dict[motion_enum.lie][motion_enum.stand][towards_enum.right][
-  towards_enum.left
-][up_enum.up] = base_enum.foot;
-base_dict[motion_enum.lie][motion_enum.stand][towards_enum.left][
-  towards_enum.right
-][up_enum.up] = base_enum.foot;
-base_dict[motion_enum.lie][motion_enum.stand][towards_enum.left][
-  towards_enum.left
-][up_enum.up] = base_enum.foot;
-base_dict[motion_enum.lie][motion_enum.rev][towards_enum.right][
-  towards_enum.right
-][up_enum.up] = base_enum.same;
-base_dict[motion_enum.lie][motion_enum.rev][towards_enum.right][
-  towards_enum.left
-][up_enum.up] = base_enum.same;
-base_dict[motion_enum.lie][motion_enum.rev][towards_enum.left][
-  towards_enum.right
-][up_enum.up] = base_enum.no;
-base_dict[motion_enum.lie][motion_enum.rev][towards_enum.left][
-  towards_enum.left
-][up_enum.up] = base_enum.no;
+const base2motion = [[], [], [], [], [], []];
 
-base_dict[motion_enum.sit][motion_enum.lie][towards_enum.right][
-  towards_enum.right
-][up_enum.up] = base_enum.no;
-base_dict[motion_enum.sit][motion_enum.lie][towards_enum.right][
-  towards_enum.left
-][up_enum.up] = base_enum.no;
-base_dict[motion_enum.sit][motion_enum.lie][towards_enum.left][
-  towards_enum.right
-][up_enum.up] = base_enum.no;
-base_dict[motion_enum.sit][motion_enum.lie][towards_enum.left][
-  towards_enum.left
-][up_enum.up] = base_enum.no;
-base_dict[motion_enum.sit][motion_enum.sit][towards_enum.right][
-  towards_enum.right
-][up_enum.up] = base_enum.no;
-base_dict[motion_enum.sit][motion_enum.sit][towards_enum.right][
-  towards_enum.left
-][up_enum.up] = base_enum.no;
-base_dict[motion_enum.sit][motion_enum.sit][towards_enum.left][
-  towards_enum.right
-][up_enum.up] = base_enum.same;
-base_dict[motion_enum.sit][motion_enum.sit][towards_enum.left][
-  towards_enum.left
-][up_enum.up] = base_enum.no;
-base_dict[motion_enum.sit][motion_enum.stand][towards_enum.right][
-  towards_enum.right
-][up_enum.up] = base_enum.foot;
-base_dict[motion_enum.sit][motion_enum.stand][towards_enum.right][
-  towards_enum.left
-][up_enum.up] = base_enum.foot;
-base_dict[motion_enum.sit][motion_enum.stand][towards_enum.left][
-  towards_enum.right
-][up_enum.up] = base_enum.foot;
-base_dict[motion_enum.sit][motion_enum.stand][towards_enum.left][
-  towards_enum.left
-][up_enum.up] = base_enum.foot;
-base_dict[motion_enum.sit][motion_enum.rev][towards_enum.right][
-  towards_enum.right
-][up_enum.up] = base_enum.no;
-base_dict[motion_enum.sit][motion_enum.rev][towards_enum.right][
-  towards_enum.left
-][up_enum.up] = base_enum.no;
-base_dict[motion_enum.sit][motion_enum.rev][towards_enum.left][
-  towards_enum.right
-][up_enum.up] = base_enum.no;
-base_dict[motion_enum.sit][motion_enum.rev][towards_enum.left][
-  towards_enum.left
-][up_enum.up] = base_enum.no;
+/**
+ * @param {number} m_atk
+ * @param {number} m_def
+ * @param {number} t_atk
+ * @param {number} t_def
+ * @param {number} is_up
+ */
+function get_motion_code(m_atk, m_def, t_atk, t_def, is_up) {
+  return is_up * 10000 + m_def * 1000 + t_def * 100 + m_atk * 10 + t_atk;
+}
 
-base_dict[motion_enum.stand][motion_enum.lie][towards_enum.right][
-  towards_enum.right
-][up_enum.up] = base_enum.no;
-base_dict[motion_enum.stand][motion_enum.lie][towards_enum.right][
-  towards_enum.left
-][up_enum.up] = base_enum.no;
-base_dict[motion_enum.stand][motion_enum.lie][towards_enum.left][
-  towards_enum.right
-][up_enum.up] = base_enum.no;
-base_dict[motion_enum.stand][motion_enum.lie][towards_enum.left][
-  towards_enum.left
-][up_enum.up] = base_enum.no;
-base_dict[motion_enum.stand][motion_enum.sit][towards_enum.right][
-  towards_enum.right
-][up_enum.up] = base_enum.no;
-base_dict[motion_enum.stand][motion_enum.sit][towards_enum.right][
-  towards_enum.left
-][up_enum.up] = base_enum.no;
-base_dict[motion_enum.stand][motion_enum.sit][towards_enum.left][
-  towards_enum.right
-][up_enum.up] = base_enum.same;
-base_dict[motion_enum.stand][motion_enum.sit][towards_enum.left][
-  towards_enum.left
-][up_enum.up] = base_enum.no;
-base_dict[motion_enum.stand][motion_enum.stand][towards_enum.right][
-  towards_enum.right
-][up_enum.up] = base_enum.same;
-base_dict[motion_enum.stand][motion_enum.stand][towards_enum.right][
-  towards_enum.left
-][up_enum.up] = base_enum.no;
-base_dict[motion_enum.stand][motion_enum.stand][towards_enum.left][
-  towards_enum.right
-][up_enum.up] = base_enum.same;
-base_dict[motion_enum.stand][motion_enum.stand][towards_enum.left][
-  towards_enum.left
-][up_enum.up] = base_enum.same;
-base_dict[motion_enum.stand][motion_enum.rev][towards_enum.right][
-  towards_enum.right
-][up_enum.up] = base_enum.no;
-base_dict[motion_enum.stand][motion_enum.rev][towards_enum.right][
-  towards_enum.left
-][up_enum.up] = base_enum.no;
-base_dict[motion_enum.stand][motion_enum.rev][towards_enum.left][
-  towards_enum.right
-][up_enum.up] = base_enum.no;
-base_dict[motion_enum.stand][motion_enum.rev][towards_enum.left][
-  towards_enum.left
-][up_enum.up] = base_enum.no;
+/**
+ * @param {number} m_atk
+ * @param {number} m_def
+ * @param {number} t_atk
+ * @param {number} t_def
+ * @param {number} is_up
+ * @param {number} val
+ */
+function register_motion(m_atk, m_def, t_atk, t_def, is_up, val) {
+  base2motion[val].push(get_motion_code(m_atk, m_def, t_atk, t_def, is_up));
+  base_dict[m_atk][m_def][t_atk][t_def][is_up] = val;
+}
 
-base_dict[motion_enum.rev][motion_enum.lie][towards_enum.right][
-  towards_enum.right
-][up_enum.up] = base_enum.no;
-base_dict[motion_enum.rev][motion_enum.lie][towards_enum.right][
-  towards_enum.left
-][up_enum.up] = base_enum.diff;
-base_dict[motion_enum.rev][motion_enum.lie][towards_enum.left][
-  towards_enum.right
-][up_enum.up] = base_enum.diff;
-base_dict[motion_enum.rev][motion_enum.lie][towards_enum.left][
-  towards_enum.left
-][up_enum.up] = base_enum.diff;
-base_dict[motion_enum.rev][motion_enum.sit][towards_enum.right][
-  towards_enum.right
-][up_enum.up] = base_enum.s_tri;
-base_dict[motion_enum.rev][motion_enum.sit][towards_enum.right][
-  towards_enum.left
-][up_enum.up] = base_enum.s_tri;
-base_dict[motion_enum.rev][motion_enum.sit][towards_enum.left][
-  towards_enum.right
-][up_enum.up] = base_enum.no;
-base_dict[motion_enum.rev][motion_enum.sit][towards_enum.left][
-  towards_enum.left
-][up_enum.up] = base_enum.d_tri;
-base_dict[motion_enum.rev][motion_enum.stand][towards_enum.right][
-  towards_enum.right
-][up_enum.up] = base_enum.foot;
-base_dict[motion_enum.rev][motion_enum.stand][towards_enum.right][
-  towards_enum.left
-][up_enum.up] = base_enum.foot;
-base_dict[motion_enum.rev][motion_enum.stand][towards_enum.left][
-  towards_enum.right
-][up_enum.up] = base_enum.foot;
-base_dict[motion_enum.rev][motion_enum.stand][towards_enum.left][
-  towards_enum.left
-][up_enum.up] = base_enum.foot;
-base_dict[motion_enum.rev][motion_enum.rev][towards_enum.right][
-  towards_enum.right
-][up_enum.up] = base_enum.same;
-base_dict[motion_enum.rev][motion_enum.rev][towards_enum.right][
-  towards_enum.left
-][up_enum.up] = base_enum.same;
-base_dict[motion_enum.rev][motion_enum.rev][towards_enum.left][
-  towards_enum.right
-][up_enum.up] = base_enum.no;
-base_dict[motion_enum.rev][motion_enum.rev][towards_enum.left][
-  towards_enum.left
-][up_enum.up] = base_enum.no;
+register_motion(
+  motion_enum.lie,
+  motion_enum.lie,
+  towards_enum.right,
+  towards_enum.right,
+  up_enum.up,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.lie,
+  motion_enum.lie,
+  towards_enum.right,
+  towards_enum.left,
+  up_enum.up,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.lie,
+  motion_enum.lie,
+  towards_enum.left,
+  towards_enum.right,
+  up_enum.up,
+  base_enum.same,
+);
+register_motion(
+  motion_enum.lie,
+  motion_enum.lie,
+  towards_enum.left,
+  towards_enum.left,
+  up_enum.up,
+  base_enum.same,
+);
+register_motion(
+  motion_enum.lie,
+  motion_enum.sit,
+  towards_enum.right,
+  towards_enum.right,
+  up_enum.up,
+  base_enum.d_tri,
+);
+register_motion(
+  motion_enum.lie,
+  motion_enum.sit,
+  towards_enum.right,
+  towards_enum.left,
+  up_enum.up,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.lie,
+  motion_enum.sit,
+  towards_enum.left,
+  towards_enum.right,
+  up_enum.up,
+  base_enum.s_tri,
+);
+register_motion(
+  motion_enum.lie,
+  motion_enum.sit,
+  towards_enum.left,
+  towards_enum.left,
+  up_enum.up,
+  base_enum.s_tri,
+);
+register_motion(
+  motion_enum.lie,
+  motion_enum.stand,
+  towards_enum.right,
+  towards_enum.right,
+  up_enum.up,
+  base_enum.foot,
+);
+register_motion(
+  motion_enum.lie,
+  motion_enum.stand,
+  towards_enum.right,
+  towards_enum.left,
+  up_enum.up,
+  base_enum.foot,
+);
+register_motion(
+  motion_enum.lie,
+  motion_enum.stand,
+  towards_enum.left,
+  towards_enum.right,
+  up_enum.up,
+  base_enum.foot,
+);
+register_motion(
+  motion_enum.lie,
+  motion_enum.stand,
+  towards_enum.left,
+  towards_enum.left,
+  up_enum.up,
+  base_enum.foot,
+);
+register_motion(
+  motion_enum.lie,
+  motion_enum.rev,
+  towards_enum.right,
+  towards_enum.right,
+  up_enum.up,
+  base_enum.same,
+);
+register_motion(
+  motion_enum.lie,
+  motion_enum.rev,
+  towards_enum.right,
+  towards_enum.left,
+  up_enum.up,
+  base_enum.same,
+);
+register_motion(
+  motion_enum.lie,
+  motion_enum.rev,
+  towards_enum.left,
+  towards_enum.right,
+  up_enum.up,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.lie,
+  motion_enum.rev,
+  towards_enum.left,
+  towards_enum.left,
+  up_enum.up,
+  base_enum.no,
+);
 
-base_dict[motion_enum.lie][motion_enum.lie][towards_enum.right][
-  towards_enum.right
-][up_enum.down] = base_enum.same;
-base_dict[motion_enum.lie][motion_enum.lie][towards_enum.right][
-  towards_enum.left
-][up_enum.down] = base_enum.same;
-base_dict[motion_enum.lie][motion_enum.lie][towards_enum.left][
-  towards_enum.right
-][up_enum.down] = base_enum.no;
-base_dict[motion_enum.lie][motion_enum.lie][towards_enum.left][
-  towards_enum.left
-][up_enum.down] = base_enum.no;
-base_dict[motion_enum.lie][motion_enum.sit][towards_enum.right][
-  towards_enum.right
-][up_enum.down] = base_enum.no;
-base_dict[motion_enum.lie][motion_enum.sit][towards_enum.right][
-  towards_enum.left
-][up_enum.down] = base_enum.no;
-base_dict[motion_enum.lie][motion_enum.sit][towards_enum.left][
-  towards_enum.right
-][up_enum.down] = base_enum.no;
-base_dict[motion_enum.lie][motion_enum.sit][towards_enum.left][
-  towards_enum.left
-][up_enum.down] = base_enum.no;
-base_dict[motion_enum.lie][motion_enum.stand][towards_enum.right][
-  towards_enum.right
-][up_enum.down] = base_enum.no;
-base_dict[motion_enum.lie][motion_enum.stand][towards_enum.right][
-  towards_enum.left
-][up_enum.down] = base_enum.no;
-base_dict[motion_enum.lie][motion_enum.stand][towards_enum.left][
-  towards_enum.right
-][up_enum.down] = base_enum.no;
-base_dict[motion_enum.lie][motion_enum.stand][towards_enum.left][
-  towards_enum.left
-][up_enum.down] = base_enum.no;
-base_dict[motion_enum.lie][motion_enum.rev][towards_enum.right][
-  towards_enum.right
-][up_enum.down] = base_enum.no;
-base_dict[motion_enum.lie][motion_enum.rev][towards_enum.right][
-  towards_enum.left
-][up_enum.down] = base_enum.no;
-base_dict[motion_enum.lie][motion_enum.rev][towards_enum.left][
-  towards_enum.right
-][up_enum.down] = base_enum.same;
-base_dict[motion_enum.lie][motion_enum.rev][towards_enum.left][
-  towards_enum.left
-][up_enum.down] = base_enum.same;
+register_motion(
+  motion_enum.sit,
+  motion_enum.lie,
+  towards_enum.right,
+  towards_enum.right,
+  up_enum.up,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.sit,
+  motion_enum.lie,
+  towards_enum.right,
+  towards_enum.left,
+  up_enum.up,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.sit,
+  motion_enum.lie,
+  towards_enum.left,
+  towards_enum.right,
+  up_enum.up,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.sit,
+  motion_enum.lie,
+  towards_enum.left,
+  towards_enum.left,
+  up_enum.up,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.sit,
+  motion_enum.sit,
+  towards_enum.right,
+  towards_enum.right,
+  up_enum.up,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.sit,
+  motion_enum.sit,
+  towards_enum.right,
+  towards_enum.left,
+  up_enum.up,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.sit,
+  motion_enum.sit,
+  towards_enum.left,
+  towards_enum.right,
+  up_enum.up,
+  base_enum.same,
+);
+register_motion(
+  motion_enum.sit,
+  motion_enum.sit,
+  towards_enum.left,
+  towards_enum.left,
+  up_enum.up,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.sit,
+  motion_enum.stand,
+  towards_enum.right,
+  towards_enum.right,
+  up_enum.up,
+  base_enum.foot,
+);
+register_motion(
+  motion_enum.sit,
+  motion_enum.stand,
+  towards_enum.right,
+  towards_enum.left,
+  up_enum.up,
+  base_enum.foot,
+);
+register_motion(
+  motion_enum.sit,
+  motion_enum.stand,
+  towards_enum.left,
+  towards_enum.right,
+  up_enum.up,
+  base_enum.foot,
+);
+register_motion(
+  motion_enum.sit,
+  motion_enum.stand,
+  towards_enum.left,
+  towards_enum.left,
+  up_enum.up,
+  base_enum.foot,
+);
+register_motion(
+  motion_enum.sit,
+  motion_enum.rev,
+  towards_enum.right,
+  towards_enum.right,
+  up_enum.up,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.sit,
+  motion_enum.rev,
+  towards_enum.right,
+  towards_enum.left,
+  up_enum.up,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.sit,
+  motion_enum.rev,
+  towards_enum.left,
+  towards_enum.right,
+  up_enum.up,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.sit,
+  motion_enum.rev,
+  towards_enum.left,
+  towards_enum.left,
+  up_enum.up,
+  base_enum.no,
+);
 
-base_dict[motion_enum.sit][motion_enum.lie][towards_enum.right][
-  towards_enum.right
-][up_enum.down] = base_enum.s_tri;
-base_dict[motion_enum.sit][motion_enum.lie][towards_enum.right][
-  towards_enum.left
-][up_enum.down] = base_enum.s_tri;
-base_dict[motion_enum.sit][motion_enum.lie][towards_enum.left][
-  towards_enum.right
-][up_enum.down] = base_enum.no;
-base_dict[motion_enum.sit][motion_enum.lie][towards_enum.left][
-  towards_enum.left
-][up_enum.down] = base_enum.no;
-base_dict[motion_enum.sit][motion_enum.sit][towards_enum.right][
-  towards_enum.right
-][up_enum.down] = base_enum.same;
-base_dict[motion_enum.sit][motion_enum.sit][towards_enum.right][
-  towards_enum.left
-][up_enum.down] = base_enum.same;
-base_dict[motion_enum.sit][motion_enum.sit][towards_enum.left][
-  towards_enum.right
-][up_enum.down] = base_enum.no;
-base_dict[motion_enum.sit][motion_enum.sit][towards_enum.left][
-  towards_enum.left
-][up_enum.down] = base_enum.same;
-base_dict[motion_enum.sit][motion_enum.stand][towards_enum.right][
-  towards_enum.right
-][up_enum.down] = base_enum.same;
-base_dict[motion_enum.sit][motion_enum.stand][towards_enum.right][
-  towards_enum.left
-][up_enum.down] = base_enum.same;
-base_dict[motion_enum.sit][motion_enum.stand][towards_enum.left][
-  towards_enum.right
-][up_enum.down] = base_enum.no;
-base_dict[motion_enum.sit][motion_enum.stand][towards_enum.left][
-  towards_enum.left
-][up_enum.down] = base_enum.same;
-base_dict[motion_enum.sit][motion_enum.rev][towards_enum.right][
-  towards_enum.right
-][up_enum.down] = base_enum.no;
-base_dict[motion_enum.sit][motion_enum.rev][towards_enum.right][
-  towards_enum.left
-][up_enum.down] = base_enum.no;
-base_dict[motion_enum.sit][motion_enum.rev][towards_enum.left][
-  towards_enum.right
-][up_enum.down] = base_enum.s_tri;
-base_dict[motion_enum.sit][motion_enum.rev][towards_enum.left][
-  towards_enum.left
-][up_enum.down] = base_enum.s_tri;
+register_motion(
+  motion_enum.stand,
+  motion_enum.lie,
+  towards_enum.right,
+  towards_enum.right,
+  up_enum.up,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.stand,
+  motion_enum.lie,
+  towards_enum.right,
+  towards_enum.left,
+  up_enum.up,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.stand,
+  motion_enum.lie,
+  towards_enum.left,
+  towards_enum.right,
+  up_enum.up,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.stand,
+  motion_enum.lie,
+  towards_enum.left,
+  towards_enum.left,
+  up_enum.up,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.stand,
+  motion_enum.sit,
+  towards_enum.right,
+  towards_enum.right,
+  up_enum.up,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.stand,
+  motion_enum.sit,
+  towards_enum.right,
+  towards_enum.left,
+  up_enum.up,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.stand,
+  motion_enum.sit,
+  towards_enum.left,
+  towards_enum.right,
+  up_enum.up,
+  base_enum.same,
+);
+register_motion(
+  motion_enum.stand,
+  motion_enum.sit,
+  towards_enum.left,
+  towards_enum.left,
+  up_enum.up,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.stand,
+  motion_enum.stand,
+  towards_enum.right,
+  towards_enum.right,
+  up_enum.up,
+  base_enum.same,
+);
+register_motion(
+  motion_enum.stand,
+  motion_enum.stand,
+  towards_enum.right,
+  towards_enum.left,
+  up_enum.up,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.stand,
+  motion_enum.stand,
+  towards_enum.left,
+  towards_enum.right,
+  up_enum.up,
+  base_enum.same,
+);
+register_motion(
+  motion_enum.stand,
+  motion_enum.stand,
+  towards_enum.left,
+  towards_enum.left,
+  up_enum.up,
+  base_enum.same,
+);
+register_motion(
+  motion_enum.stand,
+  motion_enum.rev,
+  towards_enum.right,
+  towards_enum.right,
+  up_enum.up,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.stand,
+  motion_enum.rev,
+  towards_enum.right,
+  towards_enum.left,
+  up_enum.up,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.stand,
+  motion_enum.rev,
+  towards_enum.left,
+  towards_enum.right,
+  up_enum.up,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.stand,
+  motion_enum.rev,
+  towards_enum.left,
+  towards_enum.left,
+  up_enum.up,
+  base_enum.no,
+);
 
-base_dict[motion_enum.stand][motion_enum.lie][towards_enum.right][
-  towards_enum.right
-][up_enum.down] = base_enum.no;
-base_dict[motion_enum.stand][motion_enum.lie][towards_enum.right][
-  towards_enum.left
-][up_enum.down] = base_enum.no;
-base_dict[motion_enum.stand][motion_enum.lie][towards_enum.left][
-  towards_enum.right
-][up_enum.down] = base_enum.no;
-base_dict[motion_enum.stand][motion_enum.lie][towards_enum.left][
-  towards_enum.left
-][up_enum.down] = base_enum.no;
-base_dict[motion_enum.stand][motion_enum.sit][towards_enum.right][
-  towards_enum.right
-][up_enum.down] = base_enum.no;
-base_dict[motion_enum.stand][motion_enum.sit][towards_enum.right][
-  towards_enum.left
-][up_enum.down] = base_enum.no;
-base_dict[motion_enum.stand][motion_enum.sit][towards_enum.left][
-  towards_enum.right
-][up_enum.down] = base_enum.no;
-base_dict[motion_enum.stand][motion_enum.sit][towards_enum.left][
-  towards_enum.left
-][up_enum.down] = base_enum.no;
-base_dict[motion_enum.stand][motion_enum.stand][towards_enum.right][
-  towards_enum.right
-][up_enum.down] = base_enum.no;
-base_dict[motion_enum.stand][motion_enum.stand][towards_enum.right][
-  towards_enum.left
-][up_enum.down] = base_enum.same;
-base_dict[motion_enum.stand][motion_enum.stand][towards_enum.left][
-  towards_enum.right
-][up_enum.down] = base_enum.no;
-base_dict[motion_enum.stand][motion_enum.stand][towards_enum.left][
-  towards_enum.left
-][up_enum.down] = base_enum.no;
-base_dict[motion_enum.stand][motion_enum.rev][towards_enum.right][
-  towards_enum.right
-][up_enum.down] = base_enum.no;
-base_dict[motion_enum.stand][motion_enum.rev][towards_enum.right][
-  towards_enum.left
-][up_enum.down] = base_enum.no;
-base_dict[motion_enum.stand][motion_enum.rev][towards_enum.left][
-  towards_enum.right
-][up_enum.down] = base_enum.no;
-base_dict[motion_enum.stand][motion_enum.rev][towards_enum.left][
-  towards_enum.left
-][up_enum.down] = base_enum.no;
+register_motion(
+  motion_enum.rev,
+  motion_enum.lie,
+  towards_enum.right,
+  towards_enum.right,
+  up_enum.up,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.rev,
+  motion_enum.lie,
+  towards_enum.right,
+  towards_enum.left,
+  up_enum.up,
+  base_enum.diff,
+);
+register_motion(
+  motion_enum.rev,
+  motion_enum.lie,
+  towards_enum.left,
+  towards_enum.right,
+  up_enum.up,
+  base_enum.diff,
+);
+register_motion(
+  motion_enum.rev,
+  motion_enum.lie,
+  towards_enum.left,
+  towards_enum.left,
+  up_enum.up,
+  base_enum.diff,
+);
+register_motion(
+  motion_enum.rev,
+  motion_enum.sit,
+  towards_enum.right,
+  towards_enum.right,
+  up_enum.up,
+  base_enum.s_tri,
+);
+register_motion(
+  motion_enum.rev,
+  motion_enum.sit,
+  towards_enum.right,
+  towards_enum.left,
+  up_enum.up,
+  base_enum.s_tri,
+);
+register_motion(
+  motion_enum.rev,
+  motion_enum.sit,
+  towards_enum.left,
+  towards_enum.right,
+  up_enum.up,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.rev,
+  motion_enum.sit,
+  towards_enum.left,
+  towards_enum.left,
+  up_enum.up,
+  base_enum.d_tri,
+);
+register_motion(
+  motion_enum.rev,
+  motion_enum.stand,
+  towards_enum.right,
+  towards_enum.right,
+  up_enum.up,
+  base_enum.foot,
+);
+register_motion(
+  motion_enum.rev,
+  motion_enum.stand,
+  towards_enum.right,
+  towards_enum.left,
+  up_enum.up,
+  base_enum.foot,
+);
+register_motion(
+  motion_enum.rev,
+  motion_enum.stand,
+  towards_enum.left,
+  towards_enum.right,
+  up_enum.up,
+  base_enum.foot,
+);
+register_motion(
+  motion_enum.rev,
+  motion_enum.stand,
+  towards_enum.left,
+  towards_enum.left,
+  up_enum.up,
+  base_enum.foot,
+);
+register_motion(
+  motion_enum.rev,
+  motion_enum.rev,
+  towards_enum.right,
+  towards_enum.right,
+  up_enum.up,
+  base_enum.same,
+);
+register_motion(
+  motion_enum.rev,
+  motion_enum.rev,
+  towards_enum.right,
+  towards_enum.left,
+  up_enum.up,
+  base_enum.same,
+);
+register_motion(
+  motion_enum.rev,
+  motion_enum.rev,
+  towards_enum.left,
+  towards_enum.right,
+  up_enum.up,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.rev,
+  motion_enum.rev,
+  towards_enum.left,
+  towards_enum.left,
+  up_enum.up,
+  base_enum.no,
+);
 
-base_dict[motion_enum.rev][motion_enum.lie][towards_enum.right][
-  towards_enum.right
-][up_enum.down] = base_enum.diff;
-base_dict[motion_enum.rev][motion_enum.lie][towards_enum.right][
-  towards_enum.left
-][up_enum.down] = base_enum.diff;
-base_dict[motion_enum.rev][motion_enum.lie][towards_enum.left][
-  towards_enum.right
-][up_enum.down] = base_enum.diff;
-base_dict[motion_enum.rev][motion_enum.lie][towards_enum.left][
-  towards_enum.left
-][up_enum.down] = base_enum.no;
-base_dict[motion_enum.rev][motion_enum.sit][towards_enum.right][
-  towards_enum.right
-][up_enum.down] = base_enum.no;
-base_dict[motion_enum.rev][motion_enum.sit][towards_enum.right][
-  towards_enum.left
-][up_enum.down] = base_enum.no;
-base_dict[motion_enum.rev][motion_enum.sit][towards_enum.left][
-  towards_enum.right
-][up_enum.down] = base_enum.no;
-base_dict[motion_enum.rev][motion_enum.sit][towards_enum.left][
-  towards_enum.left
-][up_enum.down] = base_enum.no;
-base_dict[motion_enum.rev][motion_enum.stand][towards_enum.right][
-  towards_enum.right
-][up_enum.down] = base_enum.no;
-base_dict[motion_enum.rev][motion_enum.stand][towards_enum.right][
-  towards_enum.left
-][up_enum.down] = base_enum.no;
-base_dict[motion_enum.rev][motion_enum.stand][towards_enum.left][
-  towards_enum.right
-][up_enum.down] = base_enum.no;
-base_dict[motion_enum.rev][motion_enum.stand][towards_enum.left][
-  towards_enum.left
-][up_enum.down] = base_enum.no;
-base_dict[motion_enum.rev][motion_enum.rev][towards_enum.right][
-  towards_enum.right
-][up_enum.down] = base_enum.no;
-base_dict[motion_enum.rev][motion_enum.rev][towards_enum.right][
-  towards_enum.left
-][up_enum.down] = base_enum.no;
-base_dict[motion_enum.rev][motion_enum.rev][towards_enum.left][
-  towards_enum.right
-][up_enum.down] = base_enum.same;
-base_dict[motion_enum.rev][motion_enum.rev][towards_enum.left][
-  towards_enum.left
-][up_enum.down] = base_enum.same;
+register_motion(
+  motion_enum.lie,
+  motion_enum.lie,
+  towards_enum.right,
+  towards_enum.right,
+  up_enum.down,
+  base_enum.same,
+);
+register_motion(
+  motion_enum.lie,
+  motion_enum.lie,
+  towards_enum.right,
+  towards_enum.left,
+  up_enum.down,
+  base_enum.same,
+);
+register_motion(
+  motion_enum.lie,
+  motion_enum.lie,
+  towards_enum.left,
+  towards_enum.right,
+  up_enum.down,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.lie,
+  motion_enum.lie,
+  towards_enum.left,
+  towards_enum.left,
+  up_enum.down,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.lie,
+  motion_enum.sit,
+  towards_enum.right,
+  towards_enum.right,
+  up_enum.down,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.lie,
+  motion_enum.sit,
+  towards_enum.right,
+  towards_enum.left,
+  up_enum.down,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.lie,
+  motion_enum.sit,
+  towards_enum.left,
+  towards_enum.right,
+  up_enum.down,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.lie,
+  motion_enum.sit,
+  towards_enum.left,
+  towards_enum.left,
+  up_enum.down,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.lie,
+  motion_enum.stand,
+  towards_enum.right,
+  towards_enum.right,
+  up_enum.down,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.lie,
+  motion_enum.stand,
+  towards_enum.right,
+  towards_enum.left,
+  up_enum.down,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.lie,
+  motion_enum.stand,
+  towards_enum.left,
+  towards_enum.right,
+  up_enum.down,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.lie,
+  motion_enum.stand,
+  towards_enum.left,
+  towards_enum.left,
+  up_enum.down,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.lie,
+  motion_enum.rev,
+  towards_enum.right,
+  towards_enum.right,
+  up_enum.down,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.lie,
+  motion_enum.rev,
+  towards_enum.right,
+  towards_enum.left,
+  up_enum.down,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.lie,
+  motion_enum.rev,
+  towards_enum.left,
+  towards_enum.right,
+  up_enum.down,
+  base_enum.same,
+);
+register_motion(
+  motion_enum.lie,
+  motion_enum.rev,
+  towards_enum.left,
+  towards_enum.left,
+  up_enum.down,
+  base_enum.same,
+);
 
-module.exports = base_dict;
+register_motion(
+  motion_enum.sit,
+  motion_enum.lie,
+  towards_enum.right,
+  towards_enum.right,
+  up_enum.down,
+  base_enum.s_tri,
+);
+register_motion(
+  motion_enum.sit,
+  motion_enum.lie,
+  towards_enum.right,
+  towards_enum.left,
+  up_enum.down,
+  base_enum.s_tri,
+);
+register_motion(
+  motion_enum.sit,
+  motion_enum.lie,
+  towards_enum.left,
+  towards_enum.right,
+  up_enum.down,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.sit,
+  motion_enum.lie,
+  towards_enum.left,
+  towards_enum.left,
+  up_enum.down,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.sit,
+  motion_enum.sit,
+  towards_enum.right,
+  towards_enum.right,
+  up_enum.down,
+  base_enum.same,
+);
+register_motion(
+  motion_enum.sit,
+  motion_enum.sit,
+  towards_enum.right,
+  towards_enum.left,
+  up_enum.down,
+  base_enum.same,
+);
+register_motion(
+  motion_enum.sit,
+  motion_enum.sit,
+  towards_enum.left,
+  towards_enum.right,
+  up_enum.down,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.sit,
+  motion_enum.sit,
+  towards_enum.left,
+  towards_enum.left,
+  up_enum.down,
+  base_enum.same,
+);
+register_motion(
+  motion_enum.sit,
+  motion_enum.stand,
+  towards_enum.right,
+  towards_enum.right,
+  up_enum.down,
+  base_enum.same,
+);
+register_motion(
+  motion_enum.sit,
+  motion_enum.stand,
+  towards_enum.right,
+  towards_enum.left,
+  up_enum.down,
+  base_enum.same,
+);
+register_motion(
+  motion_enum.sit,
+  motion_enum.stand,
+  towards_enum.left,
+  towards_enum.right,
+  up_enum.down,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.sit,
+  motion_enum.stand,
+  towards_enum.left,
+  towards_enum.left,
+  up_enum.down,
+  base_enum.same,
+);
+register_motion(
+  motion_enum.sit,
+  motion_enum.rev,
+  towards_enum.right,
+  towards_enum.right,
+  up_enum.down,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.sit,
+  motion_enum.rev,
+  towards_enum.right,
+  towards_enum.left,
+  up_enum.down,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.sit,
+  motion_enum.rev,
+  towards_enum.left,
+  towards_enum.right,
+  up_enum.down,
+  base_enum.s_tri,
+);
+register_motion(
+  motion_enum.sit,
+  motion_enum.rev,
+  towards_enum.left,
+  towards_enum.left,
+  up_enum.down,
+  base_enum.s_tri,
+);
+
+register_motion(
+  motion_enum.stand,
+  motion_enum.lie,
+  towards_enum.right,
+  towards_enum.right,
+  up_enum.down,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.stand,
+  motion_enum.lie,
+  towards_enum.right,
+  towards_enum.left,
+  up_enum.down,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.stand,
+  motion_enum.lie,
+  towards_enum.left,
+  towards_enum.right,
+  up_enum.down,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.stand,
+  motion_enum.lie,
+  towards_enum.left,
+  towards_enum.left,
+  up_enum.down,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.stand,
+  motion_enum.sit,
+  towards_enum.right,
+  towards_enum.right,
+  up_enum.down,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.stand,
+  motion_enum.sit,
+  towards_enum.right,
+  towards_enum.left,
+  up_enum.down,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.stand,
+  motion_enum.sit,
+  towards_enum.left,
+  towards_enum.right,
+  up_enum.down,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.stand,
+  motion_enum.sit,
+  towards_enum.left,
+  towards_enum.left,
+  up_enum.down,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.stand,
+  motion_enum.stand,
+  towards_enum.right,
+  towards_enum.right,
+  up_enum.down,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.stand,
+  motion_enum.stand,
+  towards_enum.right,
+  towards_enum.left,
+  up_enum.down,
+  base_enum.same,
+);
+register_motion(
+  motion_enum.stand,
+  motion_enum.stand,
+  towards_enum.left,
+  towards_enum.right,
+  up_enum.down,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.stand,
+  motion_enum.stand,
+  towards_enum.left,
+  towards_enum.left,
+  up_enum.down,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.stand,
+  motion_enum.rev,
+  towards_enum.right,
+  towards_enum.right,
+  up_enum.down,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.stand,
+  motion_enum.rev,
+  towards_enum.right,
+  towards_enum.left,
+  up_enum.down,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.stand,
+  motion_enum.rev,
+  towards_enum.left,
+  towards_enum.right,
+  up_enum.down,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.stand,
+  motion_enum.rev,
+  towards_enum.left,
+  towards_enum.left,
+  up_enum.down,
+  base_enum.no,
+);
+
+register_motion(
+  motion_enum.rev,
+  motion_enum.lie,
+  towards_enum.right,
+  towards_enum.right,
+  up_enum.down,
+  base_enum.diff,
+);
+register_motion(
+  motion_enum.rev,
+  motion_enum.lie,
+  towards_enum.right,
+  towards_enum.left,
+  up_enum.down,
+  base_enum.diff,
+);
+register_motion(
+  motion_enum.rev,
+  motion_enum.lie,
+  towards_enum.left,
+  towards_enum.right,
+  up_enum.down,
+  base_enum.diff,
+);
+register_motion(
+  motion_enum.rev,
+  motion_enum.lie,
+  towards_enum.left,
+  towards_enum.left,
+  up_enum.down,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.rev,
+  motion_enum.sit,
+  towards_enum.right,
+  towards_enum.right,
+  up_enum.down,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.rev,
+  motion_enum.sit,
+  towards_enum.right,
+  towards_enum.left,
+  up_enum.down,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.rev,
+  motion_enum.sit,
+  towards_enum.left,
+  towards_enum.right,
+  up_enum.down,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.rev,
+  motion_enum.sit,
+  towards_enum.left,
+  towards_enum.left,
+  up_enum.down,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.rev,
+  motion_enum.stand,
+  towards_enum.right,
+  towards_enum.right,
+  up_enum.down,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.rev,
+  motion_enum.stand,
+  towards_enum.right,
+  towards_enum.left,
+  up_enum.down,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.rev,
+  motion_enum.stand,
+  towards_enum.left,
+  towards_enum.right,
+  up_enum.down,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.rev,
+  motion_enum.stand,
+  towards_enum.left,
+  towards_enum.left,
+  up_enum.down,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.rev,
+  motion_enum.rev,
+  towards_enum.right,
+  towards_enum.right,
+  up_enum.down,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.rev,
+  motion_enum.rev,
+  towards_enum.right,
+  towards_enum.left,
+  up_enum.down,
+  base_enum.no,
+);
+register_motion(
+  motion_enum.rev,
+  motion_enum.rev,
+  towards_enum.left,
+  towards_enum.right,
+  up_enum.down,
+  base_enum.same,
+);
+register_motion(
+  motion_enum.rev,
+  motion_enum.rev,
+  towards_enum.left,
+  towards_enum.left,
+  up_enum.down,
+  base_enum.same,
+);
+
+Object.values(base2motion).forEach((l) => l.sort((a, b) => a - b));
+
+module.exports = { base_dict, base2motion, get_motion_code };

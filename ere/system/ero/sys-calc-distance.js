@@ -2,9 +2,15 @@ const era = require('#/era-electron');
 
 const { clean_part } = require('#/system/ero/sys-calc-ero-part');
 
+const { get_random_entry, sort_list } = require('#/utils/list-utils');
+
 const EroParticipant = require('#/data/ero/ero-participant');
 const EroTouch = require('#/data/ero/ero-touch');
-const base_dict = require('#/data/ero/motion-const');
+const {
+  base2motion,
+  base_dict,
+  get_motion_code,
+} = require('#/data/ero/motion-const');
 const { base_enum, part_enum } = require('#/data/ero/part-const');
 
 const clean_touch_parts = [
@@ -304,5 +310,56 @@ module.exports = {
   sys_check_main_touch(cid, oid) {
     era.set(`tcvar:${cid}:前回接触`, 0);
     find_main_parts(cid, oid);
+  },
+  /**
+   * @param {number} attacker
+   * @param {number} defender
+   * @param {number} compat_motions
+   */
+  sys_change_motion(attacker, defender, ...compat_motions) {
+    const param = [
+      era.get(`tcvar:${attacker}:体位`),
+      era.get(`tcvar:${defender}:体位`),
+      era.get(`tcvar:${attacker}:朝向`),
+      era.get(`tcvar:${defender}:朝向`),
+      era.get(`tcvar:${attacker}:上下`),
+    ];
+    if (
+      compat_motions.indexOf(
+        base_dict[param[0]][param[1]][param[2]][param[3]][param[4]],
+      ) !== -1
+    ) {
+      return;
+    }
+    const now = get_motion_code(...param);
+    const motion_list = sort_list(
+      compat_motions.reduce((p, c) => p.concat(base2motion[c]), []),
+      (e) => e,
+      true,
+    );
+    let index = 0;
+    while (motion_list.length > index && motion_list[index] < now) {
+      index++;
+    }
+    let aim = 0;
+    if (index === 0) {
+      aim = motion_list[0];
+    } else if (index === motion_list.length) {
+      aim = motion_list.at(-1);
+    } else if (now - motion_list[index - 1] > motion_list[index] - now) {
+      aim = motion_list[index];
+    } else if (now - motion_list[index - 1] < motion_list[index] - now) {
+      aim = motion_list[index - 1];
+    } else {
+      aim = get_random_entry(motion_list.slice(index - 1, index + 1));
+    }
+    const result = new Array(5)
+      .fill(void 0)
+      .map((_, i) => Math.floor(aim / 10 ** i) % 10);
+    era.set(`tcvar:${attacker}:上下`, result[0]);
+    era.set(`tcvar:${defender}:体位`, result[1]);
+    era.set(`tcvar:${defender}:朝向`, result[2]);
+    era.set(`tcvar:${attacker}:体位`, result[3]);
+    era.set(`tcvar:${attacker}:朝向`, result[4]);
   },
 };

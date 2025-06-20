@@ -19,10 +19,10 @@ function get_random_entry(list) {
  * @template T
  * @param {T[]} list
  * @param {function(T,number):number} order_by
- * @param {boolean} [is_asc]
+ * @param {boolean} is_asc
  * @returns {T[]}
  */
-function sort_list(list, order_by, is_asc) {
+function sort_list(list, order_by, is_asc = false) {
   if (typeof order_by !== 'function') {
     return list;
   }
