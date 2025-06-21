@@ -13,9 +13,10 @@ const sys_get_strength_ratio_in_fight = require('#/system/ero/fight/sys-get-stre
 const sys_auto_rape = require('#/system/ero/sub/sys-auto-rape');
 const sys_auto_react = require('#/system/ero/sub/sys-auto-react');
 const {
-  clean_all_parts_without_item,
-  clean_part,
-} = require('#/system/ero/sys-calc-ero-part');
+  sys_check_main_touch,
+  sys_clean_oor_parts,
+} = require('#/system/ero/sys-calc-distance');
+const { clean_part } = require('#/system/ero/sys-calc-ero-part');
 const {
   check_want_to_escape,
   get_penis_size,
@@ -33,7 +34,7 @@ const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const { print_chara_info } = require('#/page/page-exp');
 
-const { run_custom_ero } = require('#/event/ero/ero-factory');
+const { get_custom_ero, run_custom_ero } = require('#/event/ero/ero-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
@@ -169,6 +170,14 @@ async function next_turn(shown) {
   ) {
     change_master(-1, shown);
   }
+  for (const cid of train_list) {
+    if (cid !== master) {
+      sys_check_main_touch(cid, cid > 0 ? 0 : master);
+    }
+    if (cid > 0) {
+      await get_custom_ero(cid).next_round();
+    }
+  }
 }
 
 /**
@@ -181,7 +190,9 @@ async function sys_handle_ero_act(command, filters, shown = true) {
   const cur_lover = era.get('tflag:当前对手');
   const chara = get_chara_talk(cur_lover);
   const supporter = era.get('tflag:当前助手');
-  shown && era.drawLine();
+  if (shown) {
+    era.drawLine();
+  }
   if (command < 900) {
     let action_success = true;
     const check = sys_check_ero_enabled(cur_lover, supporter, command);
@@ -250,7 +261,9 @@ async function sys_handle_ero_act(command, filters, shown = true) {
       });
     }
     if (action_success) {
-      shown && era.println();
+      if (shown) {
+        era.println();
+      }
       if (!era.get('tflag:主导权')) {
         era.set('tflag:前回行动', command);
         era.set('tflag:前回助手', supporter);
@@ -268,7 +281,11 @@ async function sys_handle_ero_act(command, filters, shown = true) {
   } else if (command === 900) {
     era.set('tcvar:0:朝向', 1 - era.get('tcvar:0:朝向'));
     era.set('tflag:前回行动', -1);
-    clean_all_parts_without_item(0);
+    for (const cid of get_characters_in_train()) {
+      if (cid > 0) {
+        sys_clean_oor_parts(0, cid);
+      }
+    }
   } else if (command === 901) {
     let option_flag = 1;
     while (option_flag) {

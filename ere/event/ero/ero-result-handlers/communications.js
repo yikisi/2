@@ -1,8 +1,8 @@
 const era = require('#/era-electron');
 
 const {
-  clean_oor_parts,
-  sys_change_motion,
+  sys_change_motion_by_base,
+  sys_clean_oor_parts,
 } = require('#/system/ero/sys-calc-distance');
 const sys_do_sex = require('#/system/ero/sys-calc-ero');
 const {
@@ -39,8 +39,8 @@ module.exports = (handlers) => {
       new EroParticipant(defender, part_enum.mouth),
     );
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
-    sys_change_motion(attacker, defender, [base_enum.same]);
-    clean_oor_parts(attacker, defender, {
+    sys_change_motion_by_base(attacker, defender, [base_enum.same]);
+    sys_clean_oor_parts(attacker, defender, {
       a: part_enum.mouth,
       d: part_enum.mouth,
     });
@@ -52,8 +52,8 @@ module.exports = (handlers) => {
       new EroParticipant(defender, part_enum.mouth, 0.2),
     );
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 5);
-    sys_change_motion(attacker, defender, [base_enum.same]);
-    clean_oor_parts(attacker, defender, {
+    sys_change_motion_by_base(attacker, defender, [base_enum.same]);
+    sys_clean_oor_parts(attacker, defender, {
       a: part_enum.mouth,
       d: part_enum.mouth,
     });

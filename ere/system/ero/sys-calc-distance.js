@@ -2,7 +2,11 @@ const era = require('#/era-electron');
 
 const { clean_part } = require('#/system/ero/sys-calc-ero-part');
 
-const { get_random_entry, sort_list } = require('#/utils/list-utils');
+const {
+  get_extremum_entry,
+  get_random_entry,
+  sort_list,
+} = require('#/utils/list-utils');
 
 const EroParticipant = require('#/data/ero/ero-participant');
 const EroTouch = require('#/data/ero/ero-touch');
@@ -123,11 +127,8 @@ function check_distance(
   if (aim_parts.a === main_parts.a && aim_parts.d === main_parts.d) {
     return true;
   }
-  const base =
-    base_dict[motions.a][motions.d][towards.a][towards.d][
-      era.get(`tcvar:${cid}:上下`)
-    ];
-  const is_up = era.get(`tcvar:${cid}:上下`);
+  const is_up = +(era.get(`tcvar:${cid}:上下`) > era.get(`tcvar:${oid}:上下`));
+  const base = base_dict[motions.a][motions.d][towards.a][towards.d][is_up];
   let a_loc;
   let d_loc;
   switch (base) {
@@ -257,8 +258,27 @@ function check_distance(
       return false;
     case base_enum.foot:
       return aim_parts.a === part_enum.foot;
+    case base_enum.b_foot:
+      return aim_parts.d === part_enum.foot;
   }
   return false;
+}
+
+/**
+ * @param {number} attacker
+ * @param {number} defender
+ * @param {number} motion
+ */
+function change_motion_by_code(attacker, defender, motion) {
+  const result = new Array(5)
+    .fill(void 0)
+    .map((_, i) => Math.floor(motion / 10 ** i) % 10);
+  era.set(`tcvar:${attacker}:上下`, result[4]);
+  era.set(`tcvar:${defender}:上下`, 1 - result[4]);
+  era.set(`tcvar:${defender}:朝向`, result[3]);
+  era.set(`tcvar:${defender}:体位`, result[2]);
+  era.set(`tcvar:${attacker}:朝向`, result[1]);
+  era.set(`tcvar:${attacker}:体位`, result[0]);
 }
 
 module.exports = {
@@ -267,7 +287,7 @@ module.exports = {
    * @param {number} defender
    * @param {{a:number,d:number}|0} main_parts
    */
-  clean_oor_parts(
+  sys_clean_oor_parts(
     attacker,
     defender,
     main_parts = find_main_parts(attacker, defender),
@@ -302,14 +322,28 @@ module.exports = {
       }
     }
   },
-  sys_check_distance: check_distance,
   /**
-   * @param {number} cid
-   * @param {number} oid
+   * @param {number} attacker
+   * @param {number} defender
+   * @param {number} aim_motions
    */
-  sys_check_main_touch(cid, oid) {
-    era.set(`tcvar:${cid}:前回接触`, 0);
-    find_main_parts(cid, oid);
+  sys_change_motion(attacker, defender, ...aim_motions) {
+    if (aim_motions.length === 0) {
+      return false;
+    }
+    const curr = get_motion_code(
+      era.get(`tcvar:${attacker}:体位`),
+      era.get(`tcvar:${defender}:体位`),
+      era.get(`tcvar:${attacker}:朝向`),
+      era.get(`tcvar:${defender}:朝向`),
+      +(era.get(`tcvar:${attacker}:上下`) > era.get(`tcvar:${defender}:上下`)),
+    );
+    if (aim_motions.indexOf(curr) !== -1) {
+      return false;
+    }
+    const aim = get_extremum_entry(aim_motions, (e) => Math.abs(e - curr)).min;
+    change_motion_by_code(attacker, defender, aim);
+    return true;
   },
   /**
    * @param {number} attacker
@@ -317,13 +351,13 @@ module.exports = {
    * @param {number[]} compat_motions
    * @param {number} is_up
    */
-  sys_change_motion(attacker, defender, compat_motions, is_up = -2) {
+  sys_change_motion_by_base(attacker, defender, compat_motions, is_up = -2) {
     const param = [
       era.get(`tcvar:${attacker}:体位`),
       era.get(`tcvar:${defender}:体位`),
       era.get(`tcvar:${attacker}:朝向`),
       era.get(`tcvar:${defender}:朝向`),
-      era.get(`tcvar:${attacker}:上下`),
+      +(era.get(`tcvar:${attacker}:上下`) > era.get(`tcvar:${defender}:上下`)),
     ];
     if (is_up === -2) {
       is_up = param[4];
@@ -334,7 +368,7 @@ module.exports = {
         base_dict[param[0]][param[1]][param[2]][param[3]][param[4]],
       ) !== -1
     ) {
-      return;
+      return false;
     }
     const now = get_motion_code(...param);
     /** @type {number[]} */
@@ -362,14 +396,23 @@ module.exports = {
     } else {
       aim = get_random_entry(motion_list.slice(index - 1, index + 1));
     }
-    const result = new Array(5)
-      .fill(void 0)
-      .map((_, i) => Math.floor(aim / 10 ** i) % 10);
-    console.log(attacker, defender, motion_list, now, aim, result);
-    era.set(`tcvar:${attacker}:上下`, result[4]);
-    era.set(`tcvar:${defender}:朝向`, result[3]);
-    era.set(`tcvar:${defender}:体位`, result[2]);
-    era.set(`tcvar:${attacker}:朝向`, result[1]);
-    era.set(`tcvar:${attacker}:体位`, result[0]);
+    era.logger.debug(
+      `[closet motion] atk=${attacker}, def=${defender},\naim motion list=[${motion_list
+        .map((e) => e.toString().padStart(5, '0'))
+        .join(',')}]\ncurrent=${now.toString().padStart(5, '0')}\nselected=${aim
+        .toString()
+        .padStart(5, '0')}`,
+    );
+    change_motion_by_code(attacker, defender, aim);
+    return true;
+  },
+  sys_check_distance: check_distance,
+  /**
+   * @param {number} cid
+   * @param {number} oid
+   */
+  sys_check_main_touch(cid, oid) {
+    era.set(`tcvar:${cid}:前回接触`, 0);
+    find_main_parts(cid, oid);
   },
 };

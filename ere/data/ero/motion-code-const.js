@@ -1,0 +1,218 @@
+const { get_motion_code } = require('#/data/ero/motion-const');
+const { motion_enum, towards_enum, up_enum } = require('#/data/ero/part-const');
+
+const sit = [
+  get_motion_code(
+    motion_enum.sit,
+    motion_enum.sit,
+    towards_enum.left,
+    towards_enum.right,
+    up_enum.up,
+  ),
+  get_motion_code(
+    motion_enum.sit,
+    motion_enum.sit,
+    towards_enum.right,
+    towards_enum.left,
+    up_enum.down,
+  ),
+];
+const hug_sit = [
+  get_motion_code(
+    motion_enum.sit,
+    motion_enum.sit,
+    towards_enum.left,
+    towards_enum.left,
+    up_enum.up,
+  ),
+  get_motion_code(
+    motion_enum.sit,
+    motion_enum.sit,
+    towards_enum.right,
+    towards_enum.right,
+    up_enum.down,
+  ),
+];
+
+const motion_codes = {
+  missionary: [
+    get_motion_code(
+      motion_enum.lie,
+      motion_enum.lie,
+      towards_enum.left,
+      towards_enum.right,
+      up_enum.up,
+    ),
+    get_motion_code(
+      motion_enum.sit,
+      motion_enum.lie,
+      towards_enum.left,
+      towards_enum.right,
+      up_enum.up,
+    ),
+    get_motion_code(
+      motion_enum.sit,
+      motion_enum.rev,
+      towards_enum.right,
+      towards_enum.left,
+      up_enum.up,
+    ),
+    get_motion_code(
+      motion_enum.rev,
+      motion_enum.rev,
+      towards_enum.right,
+      towards_enum.left,
+      up_enum.up,
+    ),
+  ],
+  doggy: [
+    get_motion_code(
+      motion_enum.lie,
+      motion_enum.lie,
+      towards_enum.left,
+      towards_enum.left,
+      up_enum.up,
+    ),
+    get_motion_code(
+      motion_enum.sit,
+      motion_enum.lie,
+      towards_enum.left,
+      towards_enum.left,
+      up_enum.up,
+    ),
+    get_motion_code(
+      motion_enum.sit,
+      motion_enum.rev,
+      towards_enum.right,
+      towards_enum.right,
+      up_enum.up,
+    ),
+    get_motion_code(
+      motion_enum.rev,
+      motion_enum.rev,
+      towards_enum.right,
+      towards_enum.right,
+      up_enum.up,
+    ),
+  ],
+  sit,
+  hug_sit,
+  stand: [
+    get_motion_code(
+      motion_enum.stand,
+      motion_enum.stand,
+      towards_enum.left,
+      towards_enum.right,
+      up_enum.up,
+    ),
+    get_motion_code(
+      motion_enum.stand,
+      motion_enum.stand,
+      towards_enum.right,
+      towards_enum.left,
+      up_enum.down,
+    ),
+  ],
+  hug_stand: [
+    get_motion_code(
+      motion_enum.stand,
+      motion_enum.stand,
+      towards_enum.left,
+      towards_enum.left,
+      up_enum.up,
+    ),
+    get_motion_code(
+      motion_enum.stand,
+      motion_enum.stand,
+      towards_enum.right,
+      towards_enum.right,
+      up_enum.down,
+    ),
+  ],
+  suspended_congress: [
+    get_motion_code(
+      motion_enum.stand,
+      motion_enum.sit,
+      towards_enum.right,
+      towards_enum.left,
+      up_enum.down,
+    ),
+  ],
+  hug_suspended_congress: [
+    get_motion_code(
+      motion_enum.stand,
+      motion_enum.sit,
+      towards_enum.right,
+      towards_enum.right,
+      up_enum.down,
+    ),
+  ],
+  cowgirl: [
+    ...sit,
+    ...hug_sit,
+    get_motion_code(
+      motion_enum.sit,
+      motion_enum.lie,
+      towards_enum.right,
+      towards_enum.right,
+      up_enum.up,
+    ),
+    get_motion_code(
+      motion_enum.sit,
+      motion_enum.lie,
+      towards_enum.left,
+      towards_enum.right,
+      up_enum.up,
+    ),
+    get_motion_code(
+      motion_enum.sit,
+      motion_enum.rev,
+      towards_enum.right,
+      towards_enum.left,
+      up_enum.up,
+    ),
+    get_motion_code(
+      motion_enum.sit,
+      motion_enum.rev,
+      towards_enum.left,
+      towards_enum.left,
+      up_enum.up,
+    ),
+  ],
+  ask_cowgirl: [
+    ...sit,
+    ...hug_sit,
+    get_motion_code(
+      motion_enum.lie,
+      motion_enum.sit,
+      towards_enum.right,
+      towards_enum.right,
+      up_enum.down,
+    ),
+    get_motion_code(
+      motion_enum.lie,
+      motion_enum.sit,
+      towards_enum.right,
+      towards_enum.left,
+      up_enum.down,
+    ),
+    get_motion_code(
+      motion_enum.rev,
+      motion_enum.sit,
+      towards_enum.left,
+      towards_enum.right,
+      up_enum.down,
+    ),
+    get_motion_code(
+      motion_enum.rev,
+      motion_enum.sit,
+      towards_enum.left,
+      towards_enum.left,
+      up_enum.down,
+    ),
+  ],
+};
+
+Object.values(motion_codes).forEach((l) => l.sort((a, b) => a - b));
+
+module.exports = motion_codes;

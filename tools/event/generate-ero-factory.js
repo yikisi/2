@@ -1,6 +1,7 @@
 const { readdirSync, writeFileSync } = require('fs');
+const { join } = require('path');
 
-const scripts = readdirSync('../../ere/event/ero')
+const scripts = readdirSync(join(__dirname, '../../ere/event/ero'))
   .filter(
     (e) =>
       e.endsWith('.js') &&
@@ -105,21 +106,21 @@ class EroFactory extends CommonKojoFactory {
   }
 
   /**
-   * @param {number} id
+   * @param {number} cid
    * @returns {CustomizedEro}
    */
-  get_custom_ero(id) {
-    return this.get(id);
+  get_custom_ero(cid) {
+    return this.get(cid);
   }
 
   /**
-   * @param {number} id
+   * @param {number} cid
    * @param {number} action
    * @param [extra_flag={}]
    */
-  async run_custom_ero(id, action, extra_flag = {}) {
-    const handler = this.get(id),
-      hook = new HookArg(action);
+  async run_custom_ero(cid, action, extra_flag = {}) {
+    const handler = this.get(cid);
+    const hook = new HookArg(action);
     let ret;
     if (extra_flag.shown !== false) {
       if (ero_action_names[action] !== undefined) {
@@ -128,8 +129,8 @@ class EroFactory extends CommonKojoFactory {
             (ero_tagged_hooks[action] || default_tags).condition ===
             condition_type.active
               ? master > 0
-                ? { attacker: id, defender: 0 }
-                : { attacker: 0, defender: id }
+                ? { attacker: cid, defender: 0 }
+                : { attacker: 0, defender: cid }
               : extra_flag;
         if (_a === master) {
           hook.arg = get('tflag:前回行动') !== hook.hook;
@@ -170,7 +171,7 @@ class EroFactory extends CommonKojoFactory {
       }
     }
     if (!hook.override) {
-      ret = (await ero_result(id, hook, extra_flag)) || ret;
+      ret = (await ero_result(cid, hook, extra_flag)) || ret;
     }
     return ret;
   }
@@ -189,7 +190,7 @@ update_marks.init(ero_factory.get_custom_ero);
 module.exports = ero_factory;
 `;
 
-writeFileSync('../../ere/event/ero/ero-factory.js', output);
+writeFileSync(join(__dirname, '../../ere/event/ero/ero-factory.js'), output);
 
 console.log(
   `[generate-ero-factory.js] registers ${scripts.length} ero scripts`,
