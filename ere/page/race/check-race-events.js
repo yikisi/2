@@ -34,9 +34,12 @@ const { sys_check_remote } = require('#/system/sys-calc-chara-param');
 
 const page_ero = require('#/page/page-ero');
 
+const { check_edu_script } = require('#/event/edu/edu-factory');
+const { check_rec_script } = require('#/event/rec/rec-factory');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { get_random_value } = require('#/utils/value-utils');
 
 const CharaInmon = require('#/data/ero/chara-inmon');
 const EroParticipant = require('#/data/ero/ero-participant');
@@ -50,7 +53,6 @@ const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
 const { class_enum, track_names } = require('#/data/race/model/race-info');
 const { race_enum } = require('#/data/race/race-const');
-const { get_random_value } = require('#/utils/value-utils');
 
 const rec_list = {};
 [race_enum.prix_lat].forEach((e) => (rec_list[e] ||= []).push(204));
@@ -78,13 +80,13 @@ const rec_list = {};
 async function check_race_events(race, info, team_contestants) {
   const may_life_marks = new MayLifeMarks();
   let handler = undefined;
-  const best = Math.min(...team_contestants.map((e) => e.rank.curr)),
-    mvp = team_contestants.find((e) => e.rank.curr === best).index_chara,
-    my_edu_marks = new MyEduMarks();
+  const best = Math.min(...team_contestants.map((e) => e.rank.curr));
+  const mvp = team_contestants.find((e) => e.rank.curr === best).index_chara;
+  const my_edu_marks = new MyEduMarks();
   if (best === 1) {
-    (rec_list[race] || []).forEach((e) => {
-      if (!get(`cflag:${e}:招募状态`) && get(`cflag:${e}:随机招募`) <= 0) {
-        add(`cflag:${e}:随机招募`, -1);
+    (rec_list[race] || []).forEach((cid) => {
+      if (!get(`cflag:${cid}:招募状态`) && get(`cflag:${cid}:随机招募`) <= 0) {
+        add(`cflag:${cid}:随机招募`, -1);
       }
     });
   }
@@ -97,8 +99,8 @@ async function check_race_events(race, info, team_contestants) {
      * @author 无名黑奴
      */
     handler = async () => {
-      const etsuko = get_chara_talk(303),
-        me = get_chara_talk(0);
+      const etsuko = get_chara_talk(303);
+      const me = get_chara_talk(0);
       await print_event_name('开始采访', etsuko);
       await printAndWait([
         '在离开',
@@ -502,6 +504,7 @@ async function check_race_events(race, info, team_contestants) {
     get(`cflag:${mvp}:性别`) !== 1 &&
     !my_edu_marks.we_are_one &&
     mvp > 0 &&
+    (!check_rec_script(mvp) || !check_edu_script(mvp)) &&
     !sys_check_remote(mvp) &&
     best === 1 &&
     get(`love:${mvp}`) >= 75 &&
@@ -509,11 +512,14 @@ async function check_race_events(race, info, team_contestants) {
     !CharaInmon.get(mvp).on(plugin_enum.tuna) &&
     !CharaInmon.get(mvp).on(plugin_enum.meek)
   ) {
-    /** @author Mr.E. */
+    /**
+     * 「」心「」体
+     * @author Mr.E.
+     */
     handler = async () => {
       my_edu_marks.we_are_one = get_random_value(4, 8);
-      const chara = get_chara_talk(mvp),
-        me = get_chara_talk(0);
+      const chara = get_chara_talk(mvp);
+      const me = get_chara_talk(0);
       await print_event_name(['「」心「」体'], chara);
       await printAndWait([
         '回到训练室，',
