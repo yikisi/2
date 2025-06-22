@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const { sys_cm_b_and_cop } = require('#/system/ero/sys-calc-distance');
 const sys_do_sex = require('#/system/ero/sys-calc-ero');
 const {
   clean_all_parts_without_item,
@@ -15,6 +16,7 @@ const add_meek_or_hate = require('#/event/ero/snippets/add-meek-or-hate');
 const EroParticipant = require('#/data/ero/ero-participant');
 const { base_emotion_juel } = require('#/data/ero/juel-const');
 const {
+  base_enum,
   motion_enum,
   part_enum,
   part_talents,
@@ -52,19 +54,21 @@ module.exports = (handlers) => {
       new EroParticipant(attacker, part_enum.abuse),
       new EroParticipant(defender, part_enum.masochism),
     );
-    add_meek_or_hate(
-      defender,
-      defender > 0
-        ? get_action_base_check(defender) +
-            50 * era.get(`talent:${defender}:喜欢责骂`) +
-            50 * (era.get(`tflag:主导权`) === defender) +
-            25 * era.get(`talent:${defender}:圣母`) +
-            10 * era.get('talent:0:抖S') -
-            50 * (era.get('tflag:强奸') === 0) -
-            50
-        : 0,
-      (c) => c / 5,
-    );
+    if (defender > 0) {
+      add_meek_or_hate(
+        defender,
+        get_action_base_check(defender) +
+          50 * era.get(`talent:${defender}:喜欢责骂`) +
+          50 * (era.get(`tflag:主导权`) === defender) +
+          25 * era.get(`talent:${defender}:圣母`) +
+          10 * era.get('talent:0:抖S') -
+          50 * (era.get('tflag:强奸') === 0) -
+          50,
+        (c) => c / 5,
+      );
+    } else {
+      add_meek_or_hate(defender, 0, (c) => c / 5);
+    }
     add_juel(
       defender,
       '羞耻',
@@ -114,6 +118,22 @@ module.exports = (handlers) => {
         ((era.get(`talent:${defender}:喜欢痛苦`) + 1) *
           Math.max(era.get(`talent:${defender}:淫臀`) + 1, 1)),
     );
+    sys_cm_b_and_cop(
+      attacker,
+      defender,
+      [
+        base_enum.same,
+        base_enum.b_same,
+        base_enum.diff,
+        base_enum.s_tri,
+        base_enum.b_tri,
+        base_enum.d_tri,
+      ],
+      {
+        a: part_enum.hand,
+        d: part_enum.anal,
+      },
+    );
   };
 
   handlers[ero_hooks.hit_anal_hard] = (attacker, defender) => {
@@ -121,22 +141,24 @@ module.exports = (handlers) => {
       new EroParticipant(attacker, part_enum.hit),
       new EroParticipant(defender, part_enum.anal, 0.5),
     );
-    add_meek_or_hate(
-      defender,
-      defender > 0
-        ? get_sm_check(defender, part_enum.anal) +
-            10 *
-              count_part_stain_in_range(
-                defender,
-                part_enum.hand,
-                stain_enum.dirt,
-                undefined,
-                (e) => e + 1,
-              ) -
-            60
-        : 0,
-      (c) => c / 5,
-    );
+    if (defender > 0) {
+      add_meek_or_hate(
+        defender,
+        get_sm_check(defender, part_enum.anal) +
+          10 *
+            count_part_stain_in_range(
+              defender,
+              part_enum.hand,
+              stain_enum.dirt,
+              undefined,
+              (e) => e + 1,
+            ) -
+          60,
+        (c) => c / 5,
+      );
+    } else {
+      add_meek_or_hate(defender, 0, (c) => c / 5);
+    }
     add_juel(
       defender,
       '痛苦',
@@ -163,22 +185,24 @@ module.exports = (handlers) => {
       new EroParticipant(attacker, part_enum.hit),
       new EroParticipant(defender, part_enum.breast),
     );
-    add_meek_or_hate(
-      defender,
-      defender > 0
-        ? get_sm_check(defender, part_enum.breast) +
-            10 *
-              count_part_stain_in_range(
-                defender,
-                part_enum.hand,
-                stain_enum.lubricant,
-                stain_enum.dirt,
-                (e) => 2 + e,
-              ) -
-            50
-        : 0,
-      (c) => c / 5,
-    );
+    if (defender > 0) {
+      add_meek_or_hate(
+        defender,
+        get_sm_check(defender, part_enum.breast) +
+          10 *
+            count_part_stain_in_range(
+              defender,
+              part_enum.hand,
+              stain_enum.lubricant,
+              stain_enum.dirt,
+              (e) => 2 + e,
+            ) -
+          50,
+        (c) => c / 5,
+      );
+    } else {
+      add_meek_or_hate(defender, 0, (c) => c / 5);
+    }
     add_juel(
       defender,
       '痛苦',
@@ -186,6 +210,10 @@ module.exports = (handlers) => {
         ((era.get(`talent:${defender}:喜欢痛苦`) + 1) *
           Math.max(era.get(`talent:${defender}:淫乳`) + 1, 1)),
     );
+    sys_cm_b_and_cop(attacker, defender, [base_enum.same, base_enum.s_tri], {
+      a: part_enum.hand,
+      d: part_enum.breast,
+    });
   };
 
   handlers[ero_hooks.hit_breast_hard] = (attacker, defender) => {
@@ -193,22 +221,24 @@ module.exports = (handlers) => {
       new EroParticipant(attacker, part_enum.hit),
       new EroParticipant(defender, part_enum.breast, 0.5),
     );
-    add_meek_or_hate(
-      defender,
-      defender > 0
-        ? get_sm_check(defender, part_enum.breast) +
-            10 *
-              count_part_stain_in_range(
-                defender,
-                part_enum.hand,
-                stain_enum.lubricant,
-                stain_enum.dirt,
-                (e) => 2 + e,
-              ) -
-            60
-        : 0,
-      (c) => c / 5,
-    );
+    if (defender > 0) {
+      add_meek_or_hate(
+        defender,
+        get_sm_check(defender, part_enum.breast) +
+          10 *
+            count_part_stain_in_range(
+              defender,
+              part_enum.hand,
+              stain_enum.lubricant,
+              stain_enum.dirt,
+              (e) => 2 + e,
+            ) -
+          60,
+        (c) => c / 5,
+      );
+    } else {
+      add_meek_or_hate(defender, 0, (c) => c / 5);
+    }
     add_juel(
       defender,
       '痛苦',
@@ -228,6 +258,10 @@ module.exports = (handlers) => {
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 5);
     add_juel(defender, '羞耻', base_emotion_juel / 2);
     add_juel(attacker, '顺从', base_emotion_juel);
+    sys_cm_b_and_cop(attacker, defender, [base_enum.same, base_enum.s_tri], {
+      a: part_enum.breast,
+      d: part_enum.hand,
+    });
   };
 
   handlers[ero_hooks.hit_face] = (attacker, defender) => {

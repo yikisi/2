@@ -322,139 +322,144 @@ function change_motion_by_code(attacker, defender, motion) {
   era.set(`tcvar:${attacker}:体位`, result[0]);
 }
 
-module.exports = {
-  /**
-   * @param {number} attacker
-   * @param {number} defender
-   * @param {{a:number,d:number}|0} main_parts
-   */
-  sys_clean_oor_parts(
-    attacker,
-    defender,
-    main_parts = find_main_parts(attacker, defender),
-  ) {
-    const motions = {
-      a: era.get(`tcvar:${attacker}:体位`),
-      d: era.get(`tcvar:${defender}:体位`),
-    };
-    const towards = {
-      a: era.get(`tcvar:${attacker}:朝向`),
-      d: era.get(`tcvar:${defender}:朝向`),
-    };
-    for (const p of clean_touch_parts) {
-      if (p === main_parts.a) {
-        continue;
-      }
-      const touch = new EroTouch(attacker, p);
-      if (touch.owner !== defender || !c_t_p_dict[touch.part]) {
-        continue;
-      }
-      if (
-        !check_distance(
-          attacker,
-          defender,
-          { a: p, d: touch.part },
-          motions,
-          towards,
-          main_parts,
-        )
-      ) {
-        clean_part(new EroParticipant(attacker, p));
-      }
+/**
+ * @param {number} attacker
+ * @param {number} defender
+ * @param {{a:number,d:number}|0} main_parts
+ */
+function clean_oor_parts(
+  attacker,
+  defender,
+  main_parts = find_main_parts(attacker, defender),
+) {
+  const motions = {
+    a: era.get(`tcvar:${attacker}:体位`),
+    d: era.get(`tcvar:${defender}:体位`),
+  };
+  const towards = {
+    a: era.get(`tcvar:${attacker}:朝向`),
+    d: era.get(`tcvar:${defender}:朝向`),
+  };
+  for (const p of clean_touch_parts) {
+    if (p === main_parts.a) {
+      continue;
     }
-  },
-  /**
-   * @param {number} attacker
-   * @param {number} defender
-   * @param {number} aim_motions
-   */
-  sys_change_motion(attacker, defender, ...aim_motions) {
-    if (attacker !== era.get('tflag:主导权') || aim_motions.length === 0) {
-      return false;
-    }
-    let curr = get_motion_code(
-      era.get(`tcvar:${attacker}:体位`),
-      era.get(`tcvar:${defender}:体位`),
-      era.get(`tcvar:${attacker}:朝向`),
-      era.get(`tcvar:${defender}:朝向`),
-      +(era.get(`tcvar:${attacker}:上下`) > era.get(`tcvar:${defender}:上下`)),
-    );
-    if (aim_motions.indexOf(curr) !== -1) {
-      return false;
-    }
-    const { max, min } = get_extremum_entry(aim_motions, (e) => e);
-    if (min >= 10000 && curr < 10000) {
-      curr += 10000;
-    } else if (max < 10000 && curr >= 10000) {
-      curr -= 10000;
-    }
-    const aim = get_extremum_entry(aim_motions, (e) => Math.abs(e - curr)).min;
-    era.logger.debug(
-      `[closet motion] atk=${attacker}, def=${defender},\naim motion list=[${aim_motions
-        .map((e) => e.toString().padStart(5, '0'))
-        .join(
-          ',',
-        )}]\ncurrent=${curr.toString().padStart(5, '0')}\nselected=${aim
-        .toString()
-        .padStart(5, '0')}`,
-    );
-    change_motion_by_code(attacker, defender, aim);
-    return true;
-  },
-  /**
-   * @param {number} attacker
-   * @param {number} defender
-   * @param {number[]} compat_motions
-   * @param {number} is_up
-   */
-  sys_change_motion_by_base(attacker, defender, compat_motions, is_up = -2) {
-    const param = [
-      era.get(`tcvar:${attacker}:体位`),
-      era.get(`tcvar:${defender}:体位`),
-      era.get(`tcvar:${attacker}:朝向`),
-      era.get(`tcvar:${defender}:朝向`),
-      +(era.get(`tcvar:${attacker}:上下`) > era.get(`tcvar:${defender}:上下`)),
-    ];
-    if (is_up === -2) {
-      is_up = param[4];
+    const touch = new EroTouch(attacker, p);
+    if (
+      touch.owner !== defender ||
+      !c_t_p_dict[touch.part] ||
+      touch.part === main_parts.d
+    ) {
+      continue;
     }
     if (
-      (is_up === -1 || param[4] === is_up) &&
-      compat_motions.indexOf(
-        base_dict[param[0]][param[1]][param[2]][param[3]][param[4]],
-      ) !== -1
+      !check_distance(
+        attacker,
+        defender,
+        { a: p, d: touch.part },
+        motions,
+        towards,
+        main_parts,
+      )
     ) {
-      return false;
+      clean_part(new EroParticipant(attacker, p));
     }
-    let curr = get_motion_code(...param);
-    /** @type {number[]} */
-    let motion_list = compat_motions.reduce(
-      (p, c) => p.concat(base2motion[c]),
-      [],
-    );
-    if (is_up !== -1) {
-      motion_list = motion_list.filter((e) => Math.floor(e / 10000) === is_up);
-    }
-    motion_list = sort_list(motion_list, (e) => e, true);
-    const { max, min } = get_extremum_entry(motion_list, (e) => e);
-    if (min >= 10000 && curr < 10000) {
-      curr += 10000;
-    } else if (max < 10000 && curr >= 10000) {
-      curr -= 10000;
-    }
-    const aim = get_extremum_entry(motion_list, (e) => Math.abs(e - curr)).min;
-    era.logger.debug(
-      `[closet motion] atk=${attacker}, def=${defender},\naim motion list=[${motion_list
-        .map((e) => e.toString().padStart(5, '0'))
-        .join(
-          ',',
-        )}]\ncurrent=${curr.toString().padStart(5, '0')}\nselected=${aim
-        .toString()
-        .padStart(5, '0')}`,
-    );
-    change_motion_by_code(attacker, defender, aim);
-    return true;
-  },
+  }
+}
+
+/**
+ * @param {number} attacker
+ * @param {number} defender
+ * @param {number} aim_motions
+ */
+function change_motion(attacker, defender, ...aim_motions) {
+  if (attacker !== era.get('tflag:主导权') || aim_motions.length === 0) {
+    return false;
+  }
+  let curr = get_motion_code(
+    era.get(`tcvar:${attacker}:体位`),
+    era.get(`tcvar:${defender}:体位`),
+    era.get(`tcvar:${attacker}:朝向`),
+    era.get(`tcvar:${defender}:朝向`),
+    +(era.get(`tcvar:${attacker}:上下`) > era.get(`tcvar:${defender}:上下`)),
+  );
+  if (aim_motions.indexOf(curr) !== -1) {
+    return false;
+  }
+  const { max, min } = get_extremum_entry(aim_motions, (e) => e);
+  if (min >= 10000 && curr < 10000) {
+    curr += 10000;
+  } else if (max < 10000 && curr >= 10000) {
+    curr -= 10000;
+  }
+  const aim = get_extremum_entry(aim_motions, (e) => Math.abs(e - curr)).min;
+  era.logger.debug(
+    `[closet motion] atk=${attacker}, def=${defender},\naim motion list=[${aim_motions
+      .map((e) => e.toString().padStart(5, '0'))
+      .join(',')}]\ncurrent=${curr.toString().padStart(5, '0')}\nselected=${aim
+      .toString()
+      .padStart(5, '0')}`,
+  );
+  change_motion_by_code(attacker, defender, aim);
+  return true;
+}
+
+/**
+ * @param {number} attacker
+ * @param {number} defender
+ * @param {number[]} compat_motions
+ * @param {number} is_up
+ */
+function change_motion_by_base(attacker, defender, compat_motions, is_up = -2) {
+  const param = [
+    era.get(`tcvar:${attacker}:体位`),
+    era.get(`tcvar:${defender}:体位`),
+    era.get(`tcvar:${attacker}:朝向`),
+    era.get(`tcvar:${defender}:朝向`),
+    +(era.get(`tcvar:${attacker}:上下`) > era.get(`tcvar:${defender}:上下`)),
+  ];
+  if (is_up === -2) {
+    is_up = param[4];
+  }
+  if (
+    (is_up === -1 || param[4] === is_up) &&
+    compat_motions.indexOf(
+      base_dict[param[0]][param[1]][param[2]][param[3]][param[4]],
+    ) !== -1
+  ) {
+    return false;
+  }
+  let curr = get_motion_code(...param);
+  /** @type {number[]} */
+  let motion_list = compat_motions.reduce(
+    (p, c) => p.concat(base2motion[c]),
+    [],
+  );
+  if (is_up !== -1) {
+    motion_list = motion_list.filter((e) => Math.floor(e / 10000) === is_up);
+  }
+  motion_list = sort_list(motion_list, (e) => e, true);
+  const { max, min } = get_extremum_entry(motion_list, (e) => e);
+  if (min >= 10000 && curr < 10000) {
+    curr += 10000;
+  } else if (max < 10000 && curr >= 10000) {
+    curr -= 10000;
+  }
+  const aim = get_extremum_entry(motion_list, (e) => Math.abs(e - curr)).min;
+  era.logger.debug(
+    `[closet motion] atk=${attacker}, def=${defender},\naim motion list=[${motion_list
+      .map((e) => e.toString().padStart(5, '0'))
+      .join(',')}]\ncurrent=${curr.toString().padStart(5, '0')}\nselected=${aim
+      .toString()
+      .padStart(5, '0')}`,
+  );
+  change_motion_by_code(attacker, defender, aim);
+  return true;
+}
+
+module.exports = {
+  sys_change_motion: change_motion,
+  sys_change_motion_by_base: change_motion_by_base,
   sys_check_distance: check_distance,
   /**
    * @param {number} cid
@@ -463,5 +468,29 @@ module.exports = {
   sys_check_main_touch(cid, oid) {
     era.set(`tcvar:${cid}:前回接触`, 0);
     find_main_parts(cid, oid);
+  },
+  sys_clean_oor_parts: clean_oor_parts,
+  /**
+   * @param {number} attacker
+   * @param {number} defender
+   * @param {{a:number,d:number}|0} main_parts
+   * @param {number[]} aim_motions
+   */
+  sys_cm_and_cop(attacker, defender, main_parts, aim_motions) {
+    if (change_motion(attacker, defender, ...aim_motions)) {
+      clean_oor_parts(attacker, defender, main_parts);
+    }
+  },
+  /**
+   * @param {number} attacker
+   * @param {number} defender
+   * @param {number[]} compat_motions
+   * @param {{a:number,d:number}|0} main_parts
+   * @param {number} is_up
+   */
+  sys_cm_b_and_cop(attacker, defender, compat_motions, main_parts, is_up = -2) {
+    if (change_motion_by_base(attacker, defender, compat_motions, is_up)) {
+      clean_oor_parts(attacker, defender, main_parts);
+    }
   },
 };
