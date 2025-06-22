@@ -95,11 +95,15 @@ module.exports = {
   base_enum: {
     no: 0,
     same: 1,
-    diff: 2,
-    s_tri: 3,
-    d_tri: 4,
-    foot: 5,
-    b_foot: 6,
+    b_same: 2,
+    s_con: 3,
+    b_con: 4,
+    diff: 5,
+    s_tri: 6,
+    b_tri: 7,
+    d_tri: 8,
+    foot: 9,
+    b_foot: 10,
   },
   /** 身体部位的枚举类型 */
   get_skill_list: (sex) => [

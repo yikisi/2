@@ -211,8 +211,64 @@ const motion_codes = {
       up_enum.down,
     ),
   ],
+  ask_fuck: [
+    get_motion_code(
+      motion_enum.lie,
+      motion_enum.lie,
+      towards_enum.right,
+      towards_enum.left,
+      up_enum.down,
+    ),
+    get_motion_code(
+      motion_enum.lie,
+      motion_enum.lie,
+      towards_enum.left,
+      towards_enum.left,
+      up_enum.down,
+    ),
+    get_motion_code(
+      motion_enum.lie,
+      motion_enum.sit,
+      towards_enum.right,
+      towards_enum.left,
+      up_enum.down,
+    ),
+    get_motion_code(
+      motion_enum.lie,
+      motion_enum.sit,
+      towards_enum.left,
+      towards_enum.left,
+      up_enum.down,
+    ),
+    get_motion_code(
+      motion_enum.rev,
+      motion_enum.sit,
+      towards_enum.right,
+      towards_enum.right,
+      up_enum.down,
+    ),
+    get_motion_code(
+      motion_enum.rev,
+      motion_enum.sit,
+      towards_enum.left,
+      towards_enum.right,
+      up_enum.down,
+    ),
+    get_motion_code(
+      motion_enum.rev,
+      motion_enum.rev,
+      towards_enum.right,
+      towards_enum.right,
+      up_enum.down,
+    ),
+    get_motion_code(
+      motion_enum.rev,
+      motion_enum.rev,
+      towards_enum.left,
+      towards_enum.right,
+      up_enum.down,
+    ),
+  ],
 };
-
-Object.values(motion_codes).forEach((l) => l.sort((a, b) => a - b));
 
 module.exports = motion_codes;

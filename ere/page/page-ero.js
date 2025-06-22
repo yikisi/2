@@ -27,6 +27,7 @@ const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const get_color = require('#/utils/gradient-color');
+const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { buff_colors, palam_colors } = require('#/data/color-const');
@@ -39,7 +40,12 @@ const {
 } = require('#/data/const.json');
 const { mark_abbr, part_abbr } = require('#/data/ero/ero-alias.json');
 const { lust_border, lust_from_palam } = require('#/data/ero/orgasm-const');
-const { part_enum, part_names, up_enum } = require('#/data/ero/part-const');
+const {
+  motion_enum,
+  part_enum,
+  part_names,
+  up_enum,
+} = require('#/data/ero/part-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const {
   ero_action_names,
@@ -552,6 +558,13 @@ async function page_ero(lover, skip_start_end = false) {
   }
 
   let master = era.get('tflag:主导权');
+  get_characters_in_train().forEach((cid) => {
+    era.set(
+      `tcvar:${cid}:体位`,
+      get_random_entry([motion_enum.lie, motion_enum.sit, motion_enum.rev]),
+    );
+    era.set(`tcvar:${cid}:朝向`, get_random_value(0, 1));
+  });
   era.set(`tcvar:${master}:上下`, up_enum.up);
   while (ero_flag) {
     await era.clear();

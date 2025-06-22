@@ -2,11 +2,7 @@ const era = require('#/era-electron');
 
 const { clean_part } = require('#/system/ero/sys-calc-ero-part');
 
-const {
-  get_extremum_entry,
-  get_random_entry,
-  sort_list,
-} = require('#/utils/list-utils');
+const { get_extremum_entry, sort_list } = require('#/utils/list-utils');
 
 const EroParticipant = require('#/data/ero/ero-participant');
 const EroTouch = require('#/data/ero/ero-touch');
@@ -102,6 +98,45 @@ function find_main_parts(cid, oid) {
  * @param {number} cid the operator of the action
  * @param {number} oid the target of the action
  * @param {{a:number,d:number}} aim_parts
+ * @param {{a:number,d:number}} main_parts
+ */
+function common_same(cid, oid, aim_parts, main_parts) {
+  let a_loc;
+  let d_loc;
+  if (aim_parts.a === part_enum.hand) {
+    a_loc = era.get(`tcvar:${cid}:肩膀位置`) - get_part_len(cid, main_parts.a);
+    d_loc = get_part_len(oid, aim_parts.d) - get_part_len(oid, main_parts.d);
+    const arm_len = era.get(`tcvar:${cid}:臂长`);
+    return d_loc >= a_loc - arm_len && d_loc <= a_loc + arm_len;
+  } else if (aim_parts.d === part_enum.hand) {
+    a_loc = get_part_len(cid, aim_parts.a) - get_part_len(cid, main_parts.a);
+    d_loc = era.get(`tcvar:${oid}:肩膀位置`) - get_part_len(oid, main_parts.d);
+    const arm_len = era.get(`tcvar:${oid}:臂长`);
+    return a_loc >= d_loc - arm_len && a_loc <= d_loc + arm_len;
+  } else if (aim_parts.a === part_enum.foot) {
+    d_loc = get_part_len(oid, aim_parts.d) - get_part_len(oid, main_parts.d);
+    const m_a_loc = get_part_len(cid, main_parts.a);
+    const v_loc = get_part_len(cid, part_enum.virgin) + 1;
+    const f_loc = get_part_len(cid, part_enum.foot);
+    return d_loc <= f_loc - m_a_loc && d_loc >= v_loc - m_a_loc;
+  } else if (aim_parts.d === part_enum.foot) {
+    a_loc = get_part_len(cid, aim_parts.a) - get_part_len(cid, main_parts.a);
+    const m_d_loc = get_part_len(oid, main_parts.d);
+    const v_loc = get_part_len(oid, part_enum.virgin) + 1;
+    const f_loc = get_part_len(oid, part_enum.foot);
+    return a_loc <= f_loc - m_d_loc && a_loc >= v_loc - m_d_loc;
+  }
+  a_loc = get_part_len(cid, aim_parts.a) - get_part_len(cid, main_parts.a);
+  d_loc = get_part_len(oid, aim_parts.d) - get_part_len(oid, main_parts.d);
+  return (
+    a_loc !== 0 && a_loc * d_loc >= 0 && Math.abs(a_loc) >= Math.abs(d_loc)
+  );
+}
+
+/**
+ * @param {number} cid the operator of the action
+ * @param {number} oid the target of the action
+ * @param {{a:number,d:number}} aim_parts
  * @param {{a:number,d:number}} motions
  * @param {{a:number,d:number}} towards directions
  * @param {{a:number,d:number}|0} main_parts
@@ -132,44 +167,37 @@ function check_distance(
   let a_loc;
   let d_loc;
   switch (base) {
-    case base_enum.same:
-      // 坐标系相同
-      if (aim_parts.a === part_enum.hand) {
-        a_loc =
-          era.get(`tcvar:${cid}:肩膀位置`) - get_part_len(cid, main_parts.a);
-        d_loc =
-          get_part_len(oid, aim_parts.d) - get_part_len(oid, main_parts.d);
-        const arm_len = era.get(`tcvar:${cid}:臂长`);
-        return d_loc >= a_loc - arm_len && d_loc <= a_loc + arm_len;
-      } else if (aim_parts.d === part_enum.hand) {
-        a_loc =
-          get_part_len(cid, aim_parts.a) - get_part_len(cid, main_parts.a);
-        d_loc =
-          era.get(`tcvar:${oid}:肩膀位置`) - get_part_len(oid, main_parts.d);
-        const arm_len = era.get(`tcvar:${oid}:臂长`);
-        return a_loc >= d_loc - arm_len && a_loc <= d_loc + arm_len;
-      } else if (aim_parts.a === part_enum.foot) {
-        d_loc =
-          get_part_len(oid, aim_parts.d) - get_part_len(oid, main_parts.d);
-        const m_a_loc = get_part_len(cid, main_parts.a);
-        const v_loc = get_part_len(cid, part_enum.virgin) + 1;
-        const f_loc = get_part_len(cid, part_enum.foot);
-        return d_loc <= f_loc - m_a_loc && d_loc >= v_loc - m_a_loc;
-      } else if (aim_parts.d === part_enum.foot) {
-        a_loc =
-          get_part_len(cid, aim_parts.a) - get_part_len(cid, main_parts.a);
-        const m_d_loc = get_part_len(oid, main_parts.d);
-        const v_loc = get_part_len(oid, part_enum.virgin) + 1;
-        const f_loc = get_part_len(oid, part_enum.foot);
-        return a_loc <= f_loc - m_d_loc && a_loc >= v_loc - m_d_loc;
+    // 坐标系相同
+    case base_enum.b_same:
+      // 后方同向：主动方会阴不能攻击被动方阴茎
+      if (
+        get_part_len(cid, part_enum.penis) === get_part_len(cid, aim_parts.a) &&
+        aim_parts.d === part_enum.penis
+      ) {
+        return false;
       }
-      a_loc = get_part_len(cid, aim_parts.a) - get_part_len(cid, main_parts.a);
-      d_loc = get_part_len(oid, aim_parts.d) - get_part_len(oid, main_parts.d);
-      return (
-        a_loc !== 0 && a_loc * d_loc >= 0 && Math.abs(a_loc) >= Math.abs(d_loc)
-      );
+    // eslint-disable-next-line no-fallthrough
+    case base_enum.same:
+      // 同向
+      return common_same(cid, oid, aim_parts, main_parts);
+    case base_enum.b_con:
+      // 背向火车便当后方同向
+      if (
+        get_part_len(cid, part_enum.penis) === get_part_len(cid, aim_parts.a) &&
+        aim_parts.d === part_enum.penis
+      ) {
+        return false;
+      }
+    // eslint-disable-next-line no-fallthrough
+    case base_enum.s_con:
+      // 火车便当主动方不能用手（在被动方腿上呢）
+      if (aim_parts.a === part_enum.hand) {
+        return false;
+      }
+      return common_same(cid, oid, aim_parts, main_parts);
+    // 坐标系相反，攻方目标位置反向相减
     case base_enum.diff:
-      // 坐标系相反，攻方目标位置反向相减
+      // 反向
       if (aim_parts.a === part_enum.hand) {
         a_loc =
           get_part_len(cid, main_parts.a) - era.get(`tcvar:${cid}:肩膀位置`);
@@ -204,7 +232,17 @@ function check_distance(
       return (
         a_loc !== 0 && a_loc * d_loc <= 0 && Math.abs(a_loc) >= Math.abs(d_loc)
       );
+    case base_enum.b_tri:
+      // 后方同向直角：主动方会阴不能攻击被动方阴茎
+      if (
+        get_part_len(cid, part_enum.penis) === get_part_len(cid, aim_parts.a) &&
+        aim_parts.d === part_enum.penis
+      ) {
+        return false;
+      }
+    // eslint-disable-next-line no-fallthrough
     case base_enum.s_tri:
+      // 同向直角
       if (
         get_part_len(cid, aim_parts.a) !== get_part_len(cid, main_parts.a) &&
         c_t_p_dict[aim_parts.d] <= c_t_p_dict[main_parts.d]
@@ -231,6 +269,7 @@ function check_distance(
       }
       return false;
     case base_enum.d_tri:
+      // 反向直角
       if (
         get_part_len(cid, aim_parts.a) !== get_part_len(cid, main_parts.a) &&
         c_t_p_dict[aim_parts.d] >= c_t_p_dict[main_parts.d]
@@ -257,8 +296,10 @@ function check_distance(
       }
       return false;
     case base_enum.foot:
+      // 只能踩
       return aim_parts.a === part_enum.foot;
     case base_enum.b_foot:
+      // 只能被踩
       return aim_parts.d === part_enum.foot;
   }
   return false;
@@ -328,10 +369,10 @@ module.exports = {
    * @param {number} aim_motions
    */
   sys_change_motion(attacker, defender, ...aim_motions) {
-    if (aim_motions.length === 0) {
+    if (attacker !== era.get('tflag:主导权') || aim_motions.length === 0) {
       return false;
     }
-    const curr = get_motion_code(
+    let curr = get_motion_code(
       era.get(`tcvar:${attacker}:体位`),
       era.get(`tcvar:${defender}:体位`),
       era.get(`tcvar:${attacker}:朝向`),
@@ -341,7 +382,22 @@ module.exports = {
     if (aim_motions.indexOf(curr) !== -1) {
       return false;
     }
+    const { max, min } = get_extremum_entry(aim_motions, (e) => e);
+    if (min >= 10000 && curr < 10000) {
+      curr += 10000;
+    } else if (max < 10000 && curr >= 10000) {
+      curr -= 10000;
+    }
     const aim = get_extremum_entry(aim_motions, (e) => Math.abs(e - curr)).min;
+    era.logger.debug(
+      `[closet motion] atk=${attacker}, def=${defender},\naim motion list=[${aim_motions
+        .map((e) => e.toString().padStart(5, '0'))
+        .join(
+          ',',
+        )}]\ncurrent=${curr.toString().padStart(5, '0')}\nselected=${aim
+        .toString()
+        .padStart(5, '0')}`,
+    );
     change_motion_by_code(attacker, defender, aim);
     return true;
   },
@@ -370,7 +426,7 @@ module.exports = {
     ) {
       return false;
     }
-    const now = get_motion_code(...param);
+    let curr = get_motion_code(...param);
     /** @type {number[]} */
     let motion_list = compat_motions.reduce(
       (p, c) => p.concat(base2motion[c]),
@@ -380,26 +436,19 @@ module.exports = {
       motion_list = motion_list.filter((e) => Math.floor(e / 10000) === is_up);
     }
     motion_list = sort_list(motion_list, (e) => e, true);
-    let index = 0;
-    while (motion_list.length > index && motion_list[index] < now) {
-      index++;
+    const { max, min } = get_extremum_entry(motion_list, (e) => e);
+    if (min >= 10000 && curr < 10000) {
+      curr += 10000;
+    } else if (max < 10000 && curr >= 10000) {
+      curr -= 10000;
     }
-    let aim = 0;
-    if (index === 0) {
-      aim = motion_list[0];
-    } else if (index === motion_list.length) {
-      aim = motion_list.at(-1);
-    } else if (now - motion_list[index - 1] > motion_list[index] - now) {
-      aim = motion_list[index];
-    } else if (now - motion_list[index - 1] < motion_list[index] - now) {
-      aim = motion_list[index - 1];
-    } else {
-      aim = get_random_entry(motion_list.slice(index - 1, index + 1));
-    }
+    const aim = get_extremum_entry(motion_list, (e) => Math.abs(e - curr)).min;
     era.logger.debug(
       `[closet motion] atk=${attacker}, def=${defender},\naim motion list=[${motion_list
         .map((e) => e.toString().padStart(5, '0'))
-        .join(',')}]\ncurrent=${now.toString().padStart(5, '0')}\nselected=${aim
+        .join(
+          ',',
+        )}]\ncurrent=${curr.toString().padStart(5, '0')}\nselected=${aim
         .toString()
         .padStart(5, '0')}`,
     );

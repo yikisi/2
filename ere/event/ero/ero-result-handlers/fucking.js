@@ -2,7 +2,6 @@ const { add, get } = require('#/era-electron');
 
 const {
   sys_change_motion,
-  sys_change_motion_by_base,
   sys_clean_oor_parts,
 } = require('#/system/ero/sys-calc-distance');
 const sys_do_sex = require('#/system/ero/sys-calc-ero');
@@ -16,7 +15,7 @@ const print_ero_gif = require('#/event/ero/snippets/print-ero-gif');
 const EroParticipant = require('#/data/ero/ero-participant');
 const { base_emotion_juel } = require('#/data/ero/juel-const');
 const motion_codes = require('#/data/ero/motion-code-const');
-const { base_enum, part_enum, up_enum } = require('#/data/ero/part-const');
+const { part_enum } = require('#/data/ero/part-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 const { attr_enum } = require('#/data/train-const');
 
@@ -30,7 +29,11 @@ function common_suspended_congress(attacker, defender, check) {
   add_meek_or_hate(defender, check, (c) => c / 10);
   add_juel(defender, '羞耻', base_emotion_juel / 2);
   add_attr_exp(attacker, attr_enum.strength, 1.5);
-  sys_change_motion(attacker, defender, ...motion_codes.suspended_congress);
+  return sys_change_motion(
+    attacker,
+    defender,
+    ...motion_codes.suspended_congress,
+  );
 }
 
 /**
@@ -42,10 +45,7 @@ function common_ask_cowgirl(attacker, defender, check) {
   add_meek_or_hate(defender, check, (c) => c / 10);
   add_juel(defender, '羞耻', base_emotion_juel);
   add_attr_exp(defender, attr_enum.strength, 1);
-  if (get('tflag:主导权') === attacker) {
-    return sys_change_motion(attacker, defender, ...motion_codes.ask_cowgirl);
-  }
-  return false;
+  return sys_change_motion(attacker, defender, ...motion_codes.ask_cowgirl);
 }
 
 /**
@@ -58,7 +58,7 @@ function common_cowgirl(attacker, defender, check) {
   add_juel(defender, '羞耻', base_emotion_juel);
   add_juel(attacker, '顺从', base_emotion_juel);
   add_attr_exp(defender, attr_enum.strength, 1);
-  sys_change_motion(attacker, defender, ...motion_codes.cowgirl);
+  return sys_change_motion(attacker, defender, ...motion_codes.cowgirl);
 }
 
 /**
@@ -71,15 +71,7 @@ function common_ask_fuck(attacker, defender, check) {
   add_juel(defender, '羞耻', base_emotion_juel / 2);
   add_juel(attacker, '顺从', base_emotion_juel);
   add_attr_exp(defender, attr_enum.strength, 1);
-  if (get('tflag:主导权') === attacker) {
-    return sys_change_motion_by_base(
-      attacker,
-      defender,
-      [base_enum.same, base_enum.s_tri],
-      up_enum.down,
-    );
-  }
-  return false;
+  return sys_change_motion(attacker, defender, ...motion_codes.ask_fuck);
 }
 
 /** @param {Record<string,function(number,number,HookArg,{check:number})>} handlers */
@@ -426,11 +418,12 @@ module.exports = (handlers) => {
       new EroParticipant(attacker, part_enum.virgin),
       new EroParticipant(defender, part_enum.penis),
     );
-    common_cowgirl(attacker, defender, extra_flag.check);
-    sys_clean_oor_parts(attacker, defender, {
-      a: part_enum.virgin,
-      d: part_enum.penis,
-    });
+    if (common_cowgirl(attacker, defender, extra_flag.check)) {
+      sys_clean_oor_parts(attacker, defender, {
+        a: part_enum.virgin,
+        d: part_enum.penis,
+      });
+    }
   };
 
   handlers[ero_hooks.stimulate_glans_by_virgin] = (
@@ -515,11 +508,12 @@ module.exports = (handlers) => {
       new EroParticipant(attacker, part_enum.penis, 0.2),
       new EroParticipant(defender, part_enum.anal, 0.8),
     );
-    common_suspended_congress(attacker, defender, extra_flag.check);
-    sys_clean_oor_parts(attacker, defender, {
-      a: part_enum.penis,
-      d: part_enum.anal,
-    });
+    if (common_suspended_congress(attacker, defender, extra_flag.check)) {
+      sys_clean_oor_parts(attacker, defender, {
+        a: part_enum.penis,
+        d: part_enum.anal,
+      });
+    }
   };
 
   handlers[ero_hooks.ask_fuck_anal] = (attacker, defender, _, extra_flag) => {
@@ -545,11 +539,12 @@ module.exports = (handlers) => {
       new EroParticipant(attacker, part_enum.anal),
       new EroParticipant(defender, part_enum.penis),
     );
-    common_cowgirl(attacker, defender, extra_flag.check);
-    sys_clean_oor_parts(attacker, defender, {
-      a: part_enum.anal,
-      d: part_enum.penis,
-    });
+    if (common_cowgirl(attacker, defender, extra_flag.check)) {
+      sys_clean_oor_parts(attacker, defender, {
+        a: part_enum.anal,
+        d: part_enum.penis,
+      });
+    }
   };
 
   handlers[ero_hooks.stimulate_glans_by_anal] = (

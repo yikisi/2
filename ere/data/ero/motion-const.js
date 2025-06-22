@@ -81,7 +81,7 @@ const base_dict = [
 ];
 
 const base2motion = new Array(Object.keys(base_enum).length)
-  .fill(0)
+  .fill(void 0)
   .map(() => []);
 
 /**
@@ -141,7 +141,7 @@ register_motion(
   towards_enum.left,
   towards_enum.left,
   up_enum.up,
-  base_enum.same,
+  base_enum.b_same,
 );
 register_motion(
   motion_enum.sit,
@@ -173,7 +173,7 @@ register_motion(
   towards_enum.left,
   towards_enum.left,
   up_enum.up,
-  base_enum.s_tri,
+  base_enum.b_tri,
 );
 register_motion(
   motion_enum.stand,
@@ -302,7 +302,7 @@ register_motion(
   towards_enum.left,
   towards_enum.left,
   up_enum.up,
-  base_enum.same,
+  base_enum.b_same,
 );
 register_motion(
   motion_enum.stand,
@@ -463,7 +463,7 @@ register_motion(
   towards_enum.left,
   towards_enum.left,
   up_enum.up,
-  base_enum.same,
+  base_enum.b_same,
 );
 register_motion(
   motion_enum.rev,
@@ -536,7 +536,7 @@ register_motion(
   towards_enum.right,
   towards_enum.right,
   up_enum.up,
-  base_enum.s_tri,
+  base_enum.b_tri,
 );
 register_motion(
   motion_enum.sit,
@@ -600,7 +600,7 @@ register_motion(
   towards_enum.right,
   towards_enum.right,
   up_enum.up,
-  base_enum.same,
+  base_enum.b_same,
 );
 register_motion(
   motion_enum.rev,
@@ -633,7 +633,7 @@ register_motion(
   towards_enum.right,
   towards_enum.right,
   up_enum.down,
-  base_enum.same,
+  base_enum.b_same,
 );
 register_motion(
   motion_enum.lie,
@@ -762,7 +762,7 @@ register_motion(
   towards_enum.right,
   towards_enum.right,
   up_enum.down,
-  base_enum.s_tri,
+  base_enum.b_tri,
 );
 register_motion(
   motion_enum.lie,
@@ -794,7 +794,7 @@ register_motion(
   towards_enum.right,
   towards_enum.right,
   up_enum.down,
-  base_enum.same,
+  base_enum.b_same,
 );
 register_motion(
   motion_enum.sit,
@@ -955,7 +955,7 @@ register_motion(
   towards_enum.right,
   towards_enum.right,
   up_enum.down,
-  base_enum.same,
+  base_enum.b_same,
 );
 register_motion(
   motion_enum.stand,
@@ -1140,11 +1140,9 @@ register_motion(
   towards_enum.left,
   towards_enum.left,
   up_enum.down,
-  base_enum.same,
+  base_enum.b_same,
 );
 
 Object.values(base2motion).forEach((l) => l.sort((a, b) => a - b));
-
-console.log(base2motion);
 
 module.exports = { base_dict, base2motion, get_motion_code };

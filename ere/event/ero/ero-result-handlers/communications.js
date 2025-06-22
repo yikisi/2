@@ -6,8 +6,8 @@ const {
 } = require('#/system/ero/sys-calc-distance');
 const sys_do_sex = require('#/system/ero/sys-calc-ero');
 const {
+  clean_all_parts_without_item,
   clean_part,
-  clean_part_without_item,
 } = require('#/system/ero/sys-calc-ero-part');
 const { change_ero_master } = require('#/system/ero/sys-calc-ero-status');
 const { add_juel } = require('#/system/ero/sys-calc-juel');
@@ -39,11 +39,12 @@ module.exports = (handlers) => {
       new EroParticipant(defender, part_enum.mouth),
     );
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
-    sys_change_motion_by_base(attacker, defender, [base_enum.same]);
-    sys_clean_oor_parts(attacker, defender, {
-      a: part_enum.mouth,
-      d: part_enum.mouth,
-    });
+    if (sys_change_motion_by_base(attacker, defender, [base_enum.same])) {
+      sys_clean_oor_parts(attacker, defender, {
+        a: part_enum.mouth,
+        d: part_enum.mouth,
+      });
+    }
   };
 
   handlers[ero_hooks.french_kiss] = (attacker, defender, _, extra_flag) => {
@@ -52,11 +53,6 @@ module.exports = (handlers) => {
       new EroParticipant(defender, part_enum.mouth, 0.2),
     );
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 5);
-    sys_change_motion_by_base(attacker, defender, [base_enum.same]);
-    sys_clean_oor_parts(attacker, defender, {
-      a: part_enum.mouth,
-      d: part_enum.mouth,
-    });
   };
 
   handlers[ero_hooks.relax] = (_, defender, hook) => {
@@ -127,8 +123,8 @@ module.exports = (handlers) => {
   handlers[ero_hooks.gargle] = (attacker, defender) => {
     let r_stains = [attacker, defender].map((cid) => {
       if (sys_check_awake(cid) && era.get(`tequip:${cid}:口腔`) === -1) {
-        const ret = clean_stain(cid, part_enum.mouth);
         clean_part(new EroParticipant(cid, part_enum.mouth));
+        const ret = clean_stain(cid, part_enum.mouth);
         era.add(`nowex:${cid}:精力消耗`, 10);
         return ret;
       }
@@ -142,6 +138,7 @@ module.exports = (handlers) => {
   };
 
   handlers[ero_hooks.wipe_body] = (attacker, defender) => {
+    clean_all_parts_without_item(attacker, defender);
     const r_stains = [attacker, defender].map((cid) => {
       let tmp = 0;
       if (era.get(`tcvar:${cid}:避孕套`)) {
@@ -150,14 +147,12 @@ module.exports = (handlers) => {
       }
       const part_list = [part_enum.hand, part_enum.foot, part_enum.body];
       [part_enum.penis, part_enum.clitoris]
-        .filter((part) => era.get(`tequip:${cid}:${part_touch[part]}`) === -1)
-        .forEach((e) => part_list.push(e));
+        .filter((p) => era.get(`tequip:${cid}:${part_touch[p]}`) === -1)
+        .forEach((p) => part_list.push(p));
       tmp += clean_stain(cid, ...part_list);
-      clean_part(...part_list.map((e) => new EroParticipant(cid, e)));
       era.add(`nowex:${attacker}:精力消耗`, 20);
       era.add(`nowex:${attacker}:体力消耗`, 10);
       tmp += clean_part_stain(cid, part_enum.breast, stain_enum.milk);
-      clean_part_without_item(new EroParticipant(cid, part_enum.breast));
       if (era.get(`tequip:${cid}:阴道`) === -1) {
         tmp += clean_part_stain(
           cid,
@@ -167,7 +162,6 @@ module.exports = (handlers) => {
           stain_enum.secretion,
           stain_enum.semen,
         );
-        clean_part(new EroParticipant(cid, part_enum.virgin));
         era.add(`nowex:${attacker}:体力消耗`, 10);
       }
       if (era.get(`tequip:${cid}:肛门`) === -1) {
@@ -178,7 +172,6 @@ module.exports = (handlers) => {
           stain_enum.anal,
           stain_enum.semen,
         );
-        clean_part(new EroParticipant(cid, part_enum.anal));
         era.add(`nowex:${attacker}:体力消耗`, 10);
       }
       return tmp;

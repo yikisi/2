@@ -96,7 +96,7 @@ const base_dict = [
   ],
 ];
 
-const base2motion = [[], [], [], [], [], []];
+const base2motion = new Array(Object.keys(base_enum).length).fill(void 0).map(()=>[]);
 
 /**
  * @param {number} m_atk
@@ -157,14 +157,23 @@ function generate(a, u) {
           const ati = Math.floor(ti / 2);
           const dti = ti % 2;
           let base = 'no';
-          if (a[ami][ti].endsWith('同向直角')) {
+          const motion = a[ami][ti];
+          if (motion.endsWith('后方同向直角')) {
+            base = 'b_tri';
+          } else if (motion.endsWith('同向直角')) {
             base = 's_tri';
-          } else if (a[ami][ti].endsWith('反向直角')) {
+          } else if (motion.endsWith('反向直角')) {
             base = 'd_tri';
-          } else if (a[ami][ti].endsWith('同向')) {
+          } else if (motion.endsWith('后方同向')) {
+            base = 'b_same';
+          } else if (motion.endsWith('同向')) {
             base = 'same';
-          } else if (a[ami][ti].endsWith('反向')) {
+          } else if (motion.endsWith('反向')) {
             base = 'diff';
+          } else if (motion.endsWith('火车便当主导同向')) {
+            base = 's_con';
+          } else if (motion.endsWith('背向火车便当同向')) {
+            base = 'b_con';
           }
           output += `register_motion(motion_enum.${motion_names[ami]},motion_enum.${motion_names[dmi]},towards_enum.${towards_names[ati]},towards_enum.${towards_names[dti]},up_enum.${up},base_enum.${base});\n`;
         }
