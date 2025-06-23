@@ -1,5 +1,7 @@
 const era = require('#/era-electron');
 
+const { sys_check_distance } = require('#/system/ero/sys-calc-distance');
+
 const { part_enum } = require('#/data/ero/part-const');
 const { ero_action_tags, ero_actions } = require('#/data/event/ero-actions');
 const EroHookTag = require('#/data/event/ero-hook-tag');
@@ -272,6 +274,12 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
       ero_action_tags.pet,
       EroHookTag.generate_touch_check(part_enum.mouth, part_enum.breast),
       EroHookTag.generate_touch_check(part_enum.penis, part_enum.hand),
+      (cid, oid) =>
+        sys_check_distance(cid, oid, {
+          a: part_enum.mouth,
+          d: part_enum.breast,
+        }) &&
+        sys_check_distance(cid, oid, { a: part_enum.penis, d: part_enum.hand }),
     ],
     [ero_action_tags.awake, ero_action_tags.hand, ero_action_tags.nipple],
     EroHookTag.condition_type.no,

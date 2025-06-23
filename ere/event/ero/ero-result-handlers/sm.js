@@ -178,6 +178,10 @@ module.exports = (handlers) => {
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 5);
     add_juel(defender, '羞耻', base_emotion_juel / 2);
     add_juel(attacker, '顺从', base_emotion_juel);
+    sys_cm_b_and_cop(attacker, defender, [base_enum.f_same], {
+      a: part_enum.anal,
+      d: part_enum.hand,
+    });
   };
 
   handlers[ero_hooks.hit_breast] = (attacker, defender) => {

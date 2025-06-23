@@ -174,6 +174,11 @@ function generate(a, u) {
             base = 's_con';
           } else if (motion.endsWith('背向火车便当同向')) {
             base = 'b_con';
+          } else if (
+            motion.endsWith('摸不到') &&
+            !motion.endsWith('火车便当摸不到')
+          ) {
+            base = 'f_same';
           }
           output += `register_motion(motion_enum.${motion_names[ami]},motion_enum.${motion_names[dmi]},towards_enum.${towards_names[ati]},towards_enum.${towards_names[dti]},up_enum.${up},base_enum.${base});\n`;
         }

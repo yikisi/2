@@ -91,20 +91,24 @@ const part_names4item = {};
 part_names4item[part_enum.breast] = '乳头';
 part_names4item[part_enum.clitoris] = '阴蒂';
 
+const base_enum = {
+  no: 0,
+  same: 0,
+  b_same: 0,
+  f_same: 0,
+  s_con: 0,
+  b_con: 0,
+  diff: 0,
+  s_tri: 0,
+  b_tri: 0,
+  d_tri: 0,
+  foot: 0,
+  b_foot: 0,
+};
+Object.keys(base_enum).forEach((k, i) => (base_enum[k] = i));
+
 module.exports = {
-  base_enum: {
-    no: 0,
-    same: 1,
-    b_same: 2,
-    s_con: 3,
-    b_con: 4,
-    diff: 5,
-    s_tri: 6,
-    b_tri: 7,
-    d_tri: 8,
-    foot: 9,
-    b_foot: 10,
-  },
+  base_enum,
   /** 身体部位的枚举类型 */
   get_skill_list: (sex) => [
     '甜言蜜语',

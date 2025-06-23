@@ -117,7 +117,7 @@ register_motion(
   towards_enum.right,
   towards_enum.right,
   up_enum.up,
-  base_enum.no,
+  base_enum.f_same,
 );
 register_motion(
   motion_enum.lie,
@@ -278,7 +278,7 @@ register_motion(
   towards_enum.right,
   towards_enum.right,
   up_enum.up,
-  base_enum.no,
+  base_enum.f_same,
 );
 register_motion(
   motion_enum.sit,
@@ -439,7 +439,7 @@ register_motion(
   towards_enum.right,
   towards_enum.right,
   up_enum.up,
-  base_enum.no,
+  base_enum.f_same,
 );
 register_motion(
   motion_enum.stand,
@@ -624,7 +624,7 @@ register_motion(
   towards_enum.left,
   towards_enum.left,
   up_enum.up,
-  base_enum.no,
+  base_enum.f_same,
 );
 
 register_motion(
@@ -657,7 +657,7 @@ register_motion(
   towards_enum.left,
   towards_enum.left,
   up_enum.down,
-  base_enum.no,
+  base_enum.f_same,
 );
 register_motion(
   motion_enum.sit,
@@ -786,7 +786,7 @@ register_motion(
   towards_enum.left,
   towards_enum.left,
   up_enum.down,
-  base_enum.no,
+  base_enum.f_same,
 );
 register_motion(
   motion_enum.sit,
@@ -818,7 +818,7 @@ register_motion(
   towards_enum.left,
   towards_enum.left,
   up_enum.down,
-  base_enum.no,
+  base_enum.f_same,
 );
 register_motion(
   motion_enum.stand,
@@ -858,7 +858,7 @@ register_motion(
   towards_enum.right,
   towards_enum.right,
   up_enum.down,
-  base_enum.no,
+  base_enum.f_same,
 );
 register_motion(
   motion_enum.rev,
@@ -979,7 +979,7 @@ register_motion(
   towards_enum.left,
   towards_enum.left,
   up_enum.down,
-  base_enum.no,
+  base_enum.f_same,
 );
 register_motion(
   motion_enum.rev,
@@ -1116,7 +1116,7 @@ register_motion(
   towards_enum.right,
   towards_enum.right,
   up_enum.down,
-  base_enum.no,
+  base_enum.f_same,
 );
 register_motion(
   motion_enum.rev,
