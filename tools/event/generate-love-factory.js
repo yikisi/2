@@ -1,6 +1,7 @@
 const { readdirSync, writeFileSync } = require('fs');
+const { join } = require('path');
 
-const love_scripts = readdirSync('../../ere/event/love')
+const love_scripts = readdirSync(join(__dirname, '../../ere/event/love'))
   .filter(
     (e) =>
       e.endsWith('.js') &&
@@ -74,7 +75,7 @@ love_factory.run_custom_love = love_factory.run_custom_love.bind(love_factory);
 module.exports = love_factory;
 `;
 
-writeFileSync('../../ere/event/love/love-factory.js', output);
+writeFileSync(join(__dirname, '../../ere/event/love/love-factory.js'), output);
 
 console.log(
   `[generate-love-factory.js] registers ${love_scripts.length} love scripts`,

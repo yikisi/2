@@ -5,7 +5,7 @@ const { join } = require('path');
 const uma_colors = require('../../common/uma/uma-colors.json');
 
 writeFileSync(
-  '../../ere/data/chara-colors.js',
+  join(__dirname, '../../ere/data/chara-colors.js'),
   `const chara_colors = ${JSON.stringify(uma_colors)};
   
 module.exports = {

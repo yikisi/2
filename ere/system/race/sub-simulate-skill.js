@@ -921,6 +921,7 @@ function sub_simulate_skill(
                     (e) => (e.race.lane_move_buff += skill.values[i][j]),
                   );
                   break;
+                case ability_type_enum.Genesis:
                 case ability_type_enum.TargetLane:
                   break;
                 case ability_type_enum.ShareOrgasm:

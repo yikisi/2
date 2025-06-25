@@ -1,6 +1,7 @@
 const { readdirSync, writeFileSync } = require('fs');
+const { join } = require('path');
 
-const base_scripts = readdirSync('../../ere/event/basement')
+const base_scripts = readdirSync(join(__dirname, '../../ere/event/basement'))
   .filter(
     (e) =>
       e.endsWith('.js') &&
@@ -68,7 +69,10 @@ basement_factory.get_custom_basement =
 module.exports = basement_factory;
 `;
 
-writeFileSync('../../ere/event/basement/basement-factory.js', output);
+writeFileSync(
+  join(__dirname, '../../ere/event/basement/basement-factory.js'),
+  output,
+);
 
 console.log(
   `[generate-basement-factory.js] registers ${base_scripts.length} basement scripts`,

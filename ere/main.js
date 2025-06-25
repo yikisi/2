@@ -1,3 +1,20 @@
+/**
+ * EraUma - 愛若駑馬（EraUma）是以某頁遊公司旗下馬耳學生妹作品爲世界觀製作的一款同人文字冒險遊戲。
+ * 該世界觀的核心圍繞娘化的名賽馬和歷史上曾發生過的比賽展開。
+ * 玩家將在遊戲中扮演訓練員——即負責訓練馬娘的角色——與諸多馬娘邂逅並創作獨屬於玩家和其負責馬娘的故事。
+ *
+ * Copyright (C) 2025 UmaERA Team <erauma@tutanota.com>
+ *
+ * 本程序是免费软件；您可以根据自由软件基金会发布的 GNU 通用公共许可证
+ * 的条款重新分发和/或修改它；许可证的版本可以是第2版，也可以是（由您选择）
+ * 任何更高版本。
+ *
+ * 本程序的分发是希望它会有用，但没有任何担保；甚至没有适销性或特定用途
+ * 适用性的暗示担保。请参阅 GNU 通用公共许可证以获取更多详细信息。
+ *
+ * 您应该已经随本程序收到了 GNU 通用公共许可证的副本；如果没有，请联系
+ * UmaERA Team <erauma@tutanota.com>。
+ */
 const era = require('#/era-electron');
 
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
@@ -588,8 +605,10 @@ module.exports = async () => {
               '植物牙线',
               { isDivider: true },
               'フィンランド',
-              { isDivider: true },
+              { isBr: true },
               '提交bug',
+              { isDivider: true },
+              '洗发水',
             ],
             type: 'text',
           },

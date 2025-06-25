@@ -1,4 +1,5 @@
 const { writeFileSync } = require('fs');
+const { join } = require('path');
 
 const mob = require('../../common/uma/uma-mob.json');
 
@@ -14,6 +15,8 @@ mob.forEach((e) => {
 });
 
 writeFileSync(
-  '../../ere/data/race/contestants/uma-mob.json',
+  join(__dirname, '../../ere/data/race/contestants/uma-mob.json'),
   JSON.stringify(passer_bys),
 );
+
+console.log('done!');

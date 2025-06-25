@@ -1,8 +1,12 @@
 const { existsSync, readFileSync, writeFileSync } = require('fs');
+const { join } = require('path');
 
 const id2suffix = require('../../common/clothe-id2suffix');
 
-const lines = readFileSync('../../common/uma/uma-data.csv', 'utf-8')
+const lines = readFileSync(
+  join(__dirname, '../../common/uma/uma-data.csv'),
+  'utf-8',
+)
   .replace(/^\ufeff/, '')
   .split('\n')
   .filter((e) => e);
@@ -49,13 +53,13 @@ function check_and_add_to_csv(file_name, img_name, img_regex) {
   const icon = `chr_icon_${img_regex}_01.png`;
   const stand = `chara_stand_${img_regex}.png`;
   const gif = `chara_stand_${img_regex}.gif`;
-  if (existsSync(`../../res/${file_name}/${icon}`)) {
+  if (existsSync(join(__dirname, `../../res/${file_name}/${icon}`))) {
     buffer[file_name] += `${img_name},${icon},0,0,200,219\n`;
   }
-  if (existsSync(`../../res/${file_name}/${stand}`)) {
+  if (existsSync(join(__dirname, `../../res/${file_name}/${stand}`))) {
     buffer[file_name] += `${img_name}_半身,${stand},0,0,512,512\n`;
   }
-  if (existsSync(`../../res/${file_name}/${gif}`)) {
+  if (existsSync(join(__dirname, `../../res/${file_name}/${gif}`))) {
     buffer[file_name] += `${img_name}_gif,${gif},0,0,512,512\n`;
   }
 }
@@ -105,14 +109,17 @@ Object.entries(buffer).forEach(
   (e) => (buffer[e[0]] = e[1].replace(/\s+$/, '')),
 );
 
-writeFileSync('../../res/others/others.csv', buffer.others);
-writeFileSync('../../res/race/race.csv', buffer.race);
-writeFileSync('../../res/sportswear/sportswear.csv', buffer.sportswear);
+writeFileSync(join(__dirname, '../../res/others/others.csv'), buffer.others);
+writeFileSync(join(__dirname, '../../res/race/race.csv'), buffer.race);
 writeFileSync(
-  '../../res/uniform-summer/summer-uniform.csv',
+  join(__dirname, '../../res/sportswear/sportswear.csv'),
+  buffer.sportswear,
+);
+writeFileSync(
+  join(__dirname, '../../res/uniform-summer/summer-uniform.csv'),
   buffer['uniform-summer'],
 );
 writeFileSync(
-  '../../res/uniform-winter/winter-uniform.csv',
+  join(__dirname, '../../res/uniform-winter/winter-uniform.csv'),
   buffer['uniform-winter'],
 );

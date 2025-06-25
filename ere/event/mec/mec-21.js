@@ -123,6 +123,7 @@ module.exports = class extends CustomizedMec {
 
   is_race_disabled(race) {
     switch (new TamaEduMarks().lightning) {
+      case 1:
       case 2:
         return race_infos[race].race_class < class_enum.OP;
       case 3:

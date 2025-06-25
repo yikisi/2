@@ -1,8 +1,9 @@
 const { readdirSync, writeFileSync } = require('fs');
+const { join } = require('path');
 
 const relative_path = '../../ere/utils/chara-talk-extended';
 
-const scripts = readdirSync(relative_path)
+const scripts = readdirSync(join(__dirname, relative_path))
   .map((e) => e.substring(11).replace(/\.js$/, ''))
   .sort((a, b) => {
     const num_a = Number(a),
@@ -69,7 +70,7 @@ module.exports = {
 };
 `;
 
-writeFileSync('../../ere/utils/chara-talk-factory.js', output);
+writeFileSync(join(__dirname, '../../ere/utils/chara-talk-factory.js'), output);
 
 console.log(
   `[generate-chara-talk-factory.js] registers ${scripts.length} chara talk constructors`,
