@@ -1,9 +1,10 @@
 const era = require('#/era-electron');
 
+const { sys_check_distance } = require('#/system/ero/sys-calc-distance');
+
 const { part_enum } = require('#/data/ero/part-const');
 const { ero_action_tags, ero_actions } = require('#/data/event/ero-actions');
 const EroHookTag = require('#/data/event/ero-hook-tag');
-const { sys_check_distance } = require('#/system/ero/sys-calc-distance');
 
 /**
  * @param {string[]} ero_action_names
@@ -93,9 +94,13 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
       ero_action_tags.awake,
       ero_action_tags.body,
       ero_action_tags.m_hit,
-      (chara_id, other_id) =>
-        era.get('tflag:主导权') === chara_id ||
-        era.get(`tcvar:${other_id}:手部接触部位`) === -1,
+      (cid, oid) =>
+        era.get('tflag:主导权') === cid ||
+        (era.get(`tcvar:${oid}:手部接触部位`) === -1 &&
+          sys_check_distance(cid, oid, {
+            a: part_enum.mouth,
+            d: part_enum.hand,
+          })),
     ],
     [ero_action_tags.awake],
     EroHookTag.condition_type.no,

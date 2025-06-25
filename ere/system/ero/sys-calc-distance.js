@@ -410,7 +410,7 @@ function change_motion(attacker, defender, ...aim_motions) {
  * @param {number[]} compat_motions
  * @param {number} is_up
  */
-function change_motion_by_base(attacker, defender, compat_motions, is_up = -2) {
+function change_motion_by_base(attacker, defender, compat_motions, is_up = -1) {
   const param = [
     era.get(`tcvar:${attacker}:体位`),
     era.get(`tcvar:${defender}:体位`),
@@ -418,11 +418,11 @@ function change_motion_by_base(attacker, defender, compat_motions, is_up = -2) {
     era.get(`tcvar:${defender}:朝向`),
     +(era.get(`tcvar:${attacker}:上下`) > era.get(`tcvar:${defender}:上下`)),
   ];
-  if (is_up === -2) {
+  if (is_up === -1) {
     is_up = param[4];
   }
   if (
-    (is_up === -1 || param[4] === is_up) &&
+    param[4] === is_up &&
     compat_motions.indexOf(
       base_dict[param[0]][param[1]][param[2]][param[3]][param[4]],
     ) !== -1
@@ -435,8 +435,9 @@ function change_motion_by_base(attacker, defender, compat_motions, is_up = -2) {
     (p, c) => p.concat(base2motion[c]),
     [],
   );
-  if (is_up !== -1) {
-    motion_list = motion_list.filter((e) => Math.floor(e / 10000) === is_up);
+  const filtered = motion_list.filter((e) => Math.floor(e / 10000) === is_up);
+  if (filtered.length > 0) {
+    motion_list = filtered;
   }
   motion_list = sort_list(motion_list, (e) => e, true);
   const { max, min } = get_extremum_entry(motion_list, (e) => e);
@@ -468,6 +469,19 @@ module.exports = {
   sys_check_main_touch(cid, oid) {
     era.set(`tcvar:${cid}:前回接触`, 0);
     find_main_parts(cid, oid);
+  },
+  /**
+   * @param {number} attacker
+   * @param {number} defender
+   */
+  sys_check_mh_dis(attacker, defender) {
+    return (
+      era.get(`tcvar:${attacker}:肩膀位置`) -
+        get_part_len(attacker, part_enum.breast) +
+        era.get(`tcvar:${attacker}:臂长`) >=
+      get_part_len(defender, part_enum.penis) -
+        get_part_len(defender, part_enum.mouth)
+    );
   },
   sys_clean_oor_parts: clean_oor_parts,
   /**

@@ -1,6 +1,9 @@
 const era = require('#/era-electron');
 
-const { sys_cm_b_and_cop } = require('#/system/ero/sys-calc-distance');
+const {
+  sys_change_motion_by_base,
+  sys_cm_b_and_cop,
+} = require('#/system/ero/sys-calc-distance');
 const sys_do_sex = require('#/system/ero/sys-calc-ero');
 const {
   clean_all_parts_without_item,
@@ -15,13 +18,7 @@ const add_meek_or_hate = require('#/event/ero/snippets/add-meek-or-hate');
 
 const EroParticipant = require('#/data/ero/ero-participant');
 const { base_emotion_juel } = require('#/data/ero/juel-const');
-const {
-  base_enum,
-  motion_enum,
-  part_enum,
-  part_talents,
-  towards_enum,
-} = require('#/data/ero/part-const');
+const { base_enum, part_enum, part_talents } = require('#/data/ero/part-const');
 const { stain_enum } = require('#/data/ero/stain-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 const { attr_enum } = require('#/data/train-const');
@@ -277,22 +274,24 @@ module.exports = (handlers) => {
       new EroParticipant(attacker, part_enum.hit),
       new EroParticipant(defender, part_enum.mouth, -0.5),
     );
-    add_meek_or_hate(
-      defender,
-      defender > 0
-        ? get_sm_check(defender, part_enum.mouth, part_enum.body) +
-            10 *
-              count_part_stain_in_range(
-                defender,
-                part_enum.hand,
-                stain_enum.lubricant,
-                stain_enum.anal,
-                (e) => 1 + e,
-              ) -
-            50
-        : 0,
-      (c) => c / 5,
-    );
+    if (defender > 0) {
+      add_meek_or_hate(
+        defender,
+        get_sm_check(defender, part_enum.mouth, part_enum.body) +
+          10 *
+            count_part_stain_in_range(
+              defender,
+              part_enum.hand,
+              stain_enum.lubricant,
+              stain_enum.anal,
+              (e) => 1 + e,
+            ) -
+          50,
+        (c) => c / 5,
+      );
+    } else {
+      add_meek_or_hate(defender, 0, (c) => c / 5);
+    }
     add_juel(
       defender,
       '痛苦',
@@ -312,22 +311,24 @@ module.exports = (handlers) => {
       new EroParticipant(attacker, part_enum.hit, 0.5),
       new EroParticipant(defender, part_enum.mouth),
     );
-    add_meek_or_hate(
-      defender,
-      defender > 0
-        ? get_sm_check(defender, part_enum.mouth, part_enum.body) +
-            10 *
-              count_part_stain_in_range(
-                defender,
-                part_enum.hand,
-                stain_enum.lubricant,
-                stain_enum.anal,
-                (e) => 1 + e,
-              ) -
-            60
-        : 0,
-      (c) => c / 5,
-    );
+    if (defender > 0) {
+      add_meek_or_hate(
+        defender,
+        get_sm_check(defender, part_enum.mouth, part_enum.body) +
+          10 *
+            count_part_stain_in_range(
+              defender,
+              part_enum.hand,
+              stain_enum.lubricant,
+              stain_enum.anal,
+              (e) => 1 + e,
+            ) -
+          60,
+        (c) => c / 5,
+      );
+    } else {
+      add_meek_or_hate(defender, 0, (c) => c / 5);
+    }
     add_juel(
       defender,
       '痛苦',
@@ -347,22 +348,24 @@ module.exports = (handlers) => {
       new EroParticipant(defender, part_enum.mouth, -0.5),
     );
     clean_part(attacker_penis);
-    add_meek_or_hate(
-      defender,
-      defender > 0
-        ? get_sm_check(defender, part_enum.mouth) +
-            10 *
-              count_part_stain_in_range(
-                defender,
-                part_enum.penis,
-                stain_enum.lubricant,
-                stain_enum.anal,
-                (e) => 1 + e,
-              ) -
-            50
-        : 0,
-      (c) => c / 5,
-    );
+    if (defender > 0) {
+      add_meek_or_hate(
+        defender,
+        get_sm_check(defender, part_enum.mouth) +
+          10 *
+            count_part_stain_in_range(
+              defender,
+              part_enum.penis,
+              stain_enum.lubricant,
+              stain_enum.anal,
+              (e) => 1 + e,
+            ) -
+          50,
+        (c) => c / 5,
+      );
+    } else {
+      add_meek_or_hate(defender, 0, (c) => c / 5);
+    }
     add_juel(
       defender,
       '羞耻',
@@ -423,10 +426,7 @@ module.exports = (handlers) => {
       base_emotion_juel / ((era.get(`talent:${defender}:淫核`) === 2) + 1),
     );
     add_attr_exp(attacker, attr_enum.speed, 1);
-    era.set(`tcvar:${attacker}:体位`, motion_enum.stand);
-    era.set(`tcvar:${defender}:体位`, motion_enum.lie);
-    era.set(`tcvar:${attacker}:朝向`, towards_enum.left);
-    era.set(`tcvar:${defender}:朝向`, towards_enum.right);
+    sys_change_motion_by_base(attacker, defender, [base_enum.foot]);
   };
 
   handlers[ero_hooks.ask_virgin_foot_job] = (
@@ -444,9 +444,6 @@ module.exports = (handlers) => {
     add_juel(defender, '羞耻', base_emotion_juel / 2);
     add_juel(attacker, '顺从', base_emotion_juel);
     add_attr_exp(defender, attr_enum.strength, 1);
-    era.set(`tcvar:${attacker}:体位`, motion_enum.rev);
-    era.set(`tcvar:${defender}:体位`, motion_enum.stand);
-    era.set(`tcvar:${attacker}:朝向`, towards_enum.left);
-    era.set(`tcvar:${defender}:朝向`, towards_enum.right);
+    sys_change_motion_by_base(attacker, defender, [base_enum.b_foot]);
   };
 };

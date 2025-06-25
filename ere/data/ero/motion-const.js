@@ -826,7 +826,7 @@ register_motion(
   towards_enum.right,
   towards_enum.right,
   up_enum.down,
-  base_enum.same,
+  base_enum.b_con,
 );
 register_motion(
   motion_enum.stand,
@@ -834,7 +834,7 @@ register_motion(
   towards_enum.right,
   towards_enum.left,
   up_enum.down,
-  base_enum.same,
+  base_enum.s_con,
 );
 register_motion(
   motion_enum.stand,

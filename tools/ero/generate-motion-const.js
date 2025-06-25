@@ -166,14 +166,14 @@ function generate(a, u) {
             base = 'd_tri';
           } else if (motion.endsWith('后方同向')) {
             base = 'b_same';
-          } else if (motion.endsWith('同向')) {
-            base = 'same';
-          } else if (motion.endsWith('反向')) {
-            base = 'diff';
           } else if (motion.endsWith('火车便当主导同向')) {
             base = 's_con';
           } else if (motion.endsWith('背向火车便当同向')) {
             base = 'b_con';
+          } else if (motion.endsWith('同向')) {
+            base = 'same';
+          } else if (motion.endsWith('反向')) {
+            base = 'diff';
           } else if (
             motion.endsWith('摸不到') &&
             !motion.endsWith('火车便当摸不到')
