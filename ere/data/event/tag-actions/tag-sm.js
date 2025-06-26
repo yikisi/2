@@ -128,12 +128,12 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
   ero_tagged_hooks[ero_actions.hit_anal_hard] = new EroHookTag(
     [ero_action_tags.super_sadism],
     [
-      (chara_id) => {
+      (cid) => {
         const last_action = era.get('tflag:前回行动');
         return (
           (last_action === ero_actions.hit_anal ||
             last_action === ero_actions.hit_anal_hard) &&
-          era.get(`tflag:前回对手`) === chara_id
+          era.get(`tflag:前回对手`) === cid
         );
       },
     ],
@@ -145,12 +145,12 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
     [ero_action_tags.super_sadism],
     [
       ero_action_tags.breast,
-      (chara_id) => {
+      (cid) => {
         const last_action = era.get('tflag:前回行动');
         return (
           (last_action === ero_actions.hit_breast ||
             last_action === ero_actions.hit_breast_hard) &&
-          era.get(`tflag:前回对手`) === chara_id
+          era.get(`tflag:前回对手`) === cid
         );
       },
     ],
@@ -161,12 +161,12 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
   ero_tagged_hooks[ero_actions.hit_face_hard] = new EroHookTag(
     [ero_action_tags.super_sadism],
     [
-      (chara_id) => {
+      (cid) => {
         const last_action = era.get('tflag:前回行动');
         return (
           (last_action === ero_actions.hit_face ||
             last_action === ero_actions.hit_face_hard) &&
-          era.get(`tflag:前回对手`) === chara_id
+          era.get(`tflag:前回对手`) === cid
         );
       },
     ],

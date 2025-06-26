@@ -165,6 +165,22 @@ module.exports = (handlers) => {
           2),
     );
     add_attr_exp(attacker, attr_enum.strength, 1);
+    sys_cm_b_and_cop(
+      attacker,
+      defender,
+      [
+        base_enum.same,
+        base_enum.b_same,
+        base_enum.diff,
+        base_enum.s_tri,
+        base_enum.b_tri,
+        base_enum.d_tri,
+      ],
+      {
+        a: part_enum.hand,
+        d: part_enum.anal,
+      },
+    );
   };
 
   handlers[ero_hooks.ask_hit_anal] = (attacker, defender, _, extra_flag) => {
@@ -249,6 +265,10 @@ module.exports = (handlers) => {
           2),
     );
     add_attr_exp(attacker, attr_enum.strength, 1);
+    sys_cm_b_and_cop(attacker, defender, [base_enum.same, base_enum.s_tri], {
+      a: part_enum.hand,
+      d: part_enum.breast,
+    });
   };
 
   handlers[ero_hooks.ask_hit_breast] = (attacker, defender, _, extra_flag) => {
@@ -300,6 +320,10 @@ module.exports = (handlers) => {
           Math.max(era.get(`talent:${defender}:淫口`) + 1, 1) *
           Math.max(era.get(`talent:${defender}:淫身`) + 1, 1)),
     );
+    sys_cm_b_and_cop(attacker, defender, [base_enum.same, base_enum.s_tri], {
+      a: part_enum.hand,
+      d: part_enum.mouth,
+    });
   };
 
   handlers[ero_hooks.hit_face_hard] = (attacker, defender) => {
@@ -338,6 +362,10 @@ module.exports = (handlers) => {
           Math.max(era.get(`talent:${defender}:淫身`) + 1, 1)),
     );
     add_attr_exp(attacker, attr_enum.strength, 1);
+    sys_cm_b_and_cop(attacker, defender, [base_enum.same, base_enum.s_tri], {
+      a: part_enum.hand,
+      d: part_enum.mouth,
+    });
   };
 
   handlers[ero_hooks.hit_face_by_penis] = (attacker, defender) => {
@@ -376,6 +404,10 @@ module.exports = (handlers) => {
       '痛苦',
       base_emotion_juel / ((era.get(`talent:${defender}:喜欢痛苦`) + 1) * 2),
     );
+    sys_cm_b_and_cop(attacker, defender, [base_enum.same, base_enum.diff], {
+      a: part_enum.penis,
+      d: part_enum.mouth,
+    });
   };
 
   handlers[ero_hooks.ask_hit_face] = (attacker, defender, _, extra_flag) => {
