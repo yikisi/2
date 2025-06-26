@@ -80,7 +80,7 @@
 50211,502,金身不坏,1,6,不会伤病,args.id>0&&args.chara!==undefined,no_pain
 50212,502,不知疲倦,2,14,不会疲惫及伤病,args.id>0&&args.chara!==undefined,no_tired
 50213,502,欢愉之骨,3,32,不会疲惫、伤病或怀孕,args.id>0&&args.sex!==1&&args.pregnant===false,no_preg
-50221,502,无暇思考,1,2,不再有不应期,args.sex>0,pe_up_0
+50221,502,无暇思考,1,2,不再有贤者时间,args.sex>0,pe_up_0
 50222,502,金枪不倒,2,2,永远挺立,args.sex>0,pe_up_1
 50311,503,多汁,1,4,体液分泌+100%,,juicy
 50312,503,喷泉,2,8,体液分泌+200%,,fountain

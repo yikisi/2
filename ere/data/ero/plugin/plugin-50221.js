@@ -6,7 +6,7 @@ module.exports = new InmonPlugin(
   502,
   1,
   2,
-  '不再有不应期。',
+  '不再有贤者时间。',
   (args) => args.sex > 0,
   160,
 );
