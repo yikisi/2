@@ -1,10 +1,12 @@
 const era = require('#/era-electron');
 
+const { sys_check_distance } = require('#/system/ero/sys-calc-distance');
 const {
   get_expansion,
   get_penis_size,
 } = require('#/system/ero/sys-calc-ero-status');
 
+const EroTouch = require('#/data/ero/ero-touch');
 const { item_enum } = require('#/data/ero/item-const');
 const { lust_palam_border } = require('#/data/ero/orgasm-const');
 const {
@@ -15,7 +17,6 @@ const {
 } = require('#/data/ero/part-const');
 const { vp_status_enum } = require('#/data/ero/status-const');
 const { get_breast_cup } = require('#/data/info-generator');
-const { sys_check_distance } = require('#/system/ero/sys-calc-distance');
 
 class EroHookTag {
   /** @type {(number|function(number,number):boolean)[]} */
@@ -58,7 +59,7 @@ class EroHookTag {
    * @returns {boolean}
    */
   static bite_nipple_check(cid, oid) {
-    const touch = era.get(`tcvar:${cid}:胸部接触部位`);
+    const touch = new EroTouch(cid, part_enum.breast);
     return touch.owner === oid && touch.part === part_enum.mouth;
   }
 

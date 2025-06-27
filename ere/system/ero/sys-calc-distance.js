@@ -13,10 +13,10 @@ const {
 } = require('#/data/ero/motion-const');
 const { base_enum, part_enum, part_touch } = require('#/data/ero/part-const');
 
-const part_hand = 99;
+const part_head = 99;
 
 const clean_touch_parts = [
-  part_hand,
+  part_head,
   part_enum.mouth,
   part_enum.breast,
   part_enum.hand,
@@ -60,13 +60,10 @@ function get_part_len(cid, part) {
     case part_enum.breast:
       return [era.get(`tcvar:${cid}:乳房位置`)];
     case part_enum.hand:
-      return new Array(2)
-        .fill(era.get(`tcvar:${cid}:肩膀位置`))
-        .map((e, i) =>
-          i > 0
-            ? e - era.get(`tcvar:${cid}:臂长`)
-            : e + era.get(`tcvar:${cid}:臂长`),
-        );
+      return [
+        era.get(`tcvar:${cid}:肩膀位置`) - era.get(`tcvar:${cid}:臂长`),
+        era.get(`tcvar:${cid}:肩膀位置`) + era.get(`tcvar:${cid}:臂长`),
+      ];
     case part_enum.penis:
     case part_enum.clitoris:
     case part_enum.virgin:
@@ -177,6 +174,7 @@ function common_same(cid, oid, aim_parts, main_parts) {
  * @param {number} towards.a the direction of the operator
  * @param {number} towards.d the direction of the target
  * @param {{a:number,d:number}|0} main_parts main body parts
+ * @param {0|1} is_up
  * @returns {boolean}
  */
 function check_distance(
@@ -192,6 +190,7 @@ function check_distance(
     d: era.get(`tcvar:${oid}:朝向`),
   },
   main_parts = find_main_parts(cid, oid),
+  is_up = +(era.get(`tcvar:${cid}:上下`) > era.get(`tcvar:${oid}:上下`)),
 ) {
   if (!main_parts) {
     return false;
@@ -199,7 +198,6 @@ function check_distance(
   if (aim_parts.a === main_parts.a && aim_parts.d === main_parts.d) {
     return true;
   }
-  const is_up = +(era.get(`tcvar:${cid}:上下`) > era.get(`tcvar:${oid}:上下`));
   const base = base_dict[motions.a][motions.d][towards.a][towards.d][is_up];
   let a_loc;
   let d_loc;
@@ -352,6 +350,9 @@ function clean_oor_parts(
   defender,
   main_parts = find_main_parts(attacker, defender),
 ) {
+  if (attacker !== era.get('tflag:主导权')) {
+    return false;
+  }
   const motions = {
     a: era.get(`tcvar:${attacker}:体位`),
     d: era.get(`tcvar:${defender}:体位`),
@@ -393,8 +394,8 @@ function clean_oor_parts(
  * @param {number} aim_motions
  */
 function change_motion(attacker, defender, ...aim_motions) {
-  if (attacker !== era.get('tflag:主导权') || aim_motions.length === 0) {
-    return false;
+  if (aim_motions.length === 0) {
+    return;
   }
   let curr = get_motion_code(
     era.get(`tcvar:${attacker}:体位`),
@@ -421,7 +422,6 @@ function change_motion(attacker, defender, ...aim_motions) {
       .padStart(5, '0')}`,
   );
   change_motion_by_code(attacker, defender, aim);
-  return true;
 }
 
 /**
@@ -431,6 +431,9 @@ function change_motion(attacker, defender, ...aim_motions) {
  * @param {number} is_up
  */
 function change_motion_by_base(attacker, defender, compat_motions, is_up = -1) {
+  if (compat_motions.length === 0) {
+    return;
+  }
   const param = [
     era.get(`tcvar:${attacker}:体位`),
     era.get(`tcvar:${defender}:体位`),
@@ -447,7 +450,7 @@ function change_motion_by_base(attacker, defender, compat_motions, is_up = -1) {
       base_dict[param[0]][param[1]][param[2]][param[3]][param[4]],
     ) !== -1
   ) {
-    return false;
+    return;
   }
   let curr = get_motion_code(...param);
   /** @type {number[]} */
@@ -475,11 +478,10 @@ function change_motion_by_base(attacker, defender, compat_motions, is_up = -1) {
       .padStart(5, '0')}`,
   );
   change_motion_by_code(attacker, defender, aim);
-  return true;
 }
 
 module.exports = {
-  part_hand,
+  part_head,
   sys_change_motion: change_motion,
   sys_change_motion_by_base: change_motion_by_base,
   sys_check_distance: check_distance,
@@ -513,7 +515,8 @@ module.exports = {
    * @param {number[]} aim_motions
    */
   sys_cm_and_cop(attacker, defender, main_parts, aim_motions) {
-    if (change_motion(attacker, defender, ...aim_motions)) {
+    if (attacker !== era.get('tflag:主导权')) {
+      change_motion(attacker, defender, ...aim_motions);
       clean_oor_parts(attacker, defender, main_parts);
     }
   },
@@ -525,8 +528,10 @@ module.exports = {
    * @param {number} is_up
    */
   sys_cm_b_and_cop(attacker, defender, compat_motions, main_parts, is_up = -2) {
-    if (change_motion_by_base(attacker, defender, compat_motions, is_up)) {
+    if (attacker !== era.get('tflag:主导权')) {
+      change_motion_by_base(attacker, defender, compat_motions, is_up);
       clean_oor_parts(attacker, defender, main_parts);
     }
   },
+  sys_find_main_parts: find_main_parts,
 };

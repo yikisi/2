@@ -269,6 +269,36 @@ const motion_codes = {
       up_enum.down,
     ),
   ],
+  sixty_nine: [
+    get_motion_code(
+      motion_enum.rev,
+      motion_enum.lie,
+      towards_enum.right,
+      towards_enum.right,
+      up_enum.up,
+    ),
+    get_motion_code(
+      motion_enum.lie,
+      motion_enum.rev,
+      towards_enum.left,
+      towards_enum.left,
+      up_enum.up,
+    ),
+    get_motion_code(
+      motion_enum.rev,
+      motion_enum.lie,
+      towards_enum.left,
+      towards_enum.left,
+      up_enum.down,
+    ),
+    get_motion_code(
+      motion_enum.lie,
+      motion_enum.rev,
+      towards_enum.right,
+      towards_enum.right,
+      up_enum.down,
+    ),
+  ],
 };
 
 module.exports = motion_codes;

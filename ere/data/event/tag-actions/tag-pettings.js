@@ -1,7 +1,7 @@
 const era = require('#/era-electron');
 
 const {
-  part_hand,
+  part_head,
   sys_check_distance,
   sys_check_mh_dis,
 } = require('#/system/ero/sys-calc-distance');
@@ -24,7 +24,7 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
       EroHookTag.hand_touch_check_for_body,
       (cid, oid) =>
         era.get('tflag:主导权') === cid ||
-        sys_check_distance(cid, oid, { a: part_enum.hand, d: part_hand }),
+        sys_check_distance(cid, oid, { a: part_enum.hand, d: part_head }),
     ],
     [ero_action_tags.body],
     EroHookTag.condition_type.no,
@@ -347,9 +347,7 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
               a: part_enum.penis,
               d: part_enum.clitoris,
             })) ||
-          (touch.owner === oid &&
-            (touch.part === part_enum.body ||
-              touch.part === part_enum.clitoris))
+          (touch.owner === oid && touch.part === part_enum.clitoris)
         );
       },
     ],
@@ -614,7 +612,7 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
       ero_action_tags.sadism,
       (cid, oid) =>
         era.get('tflag:主导权') === cid ||
-        sys_check_distance(cid, oid, { a: part_enum.hand, d: part_hand }),
+        sys_check_distance(cid, oid, { a: part_enum.hand, d: part_head }),
     ],
     [
       ero_action_tags.body,

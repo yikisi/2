@@ -67,7 +67,7 @@ function sys_filter_ero_act(
       !era.get(`tcvar:${cid}:失神`);
     tag_checks[cid][ero_hook_tags.body] = true;
     tag_checks[cid][ero_hook_tags.breast] =
-      era.get(`cflag:${cid}:性别`) - 1 &&
+      era.get(`cflag:${cid}:性别`) !== 1 &&
       (!d_tit ||
         (get_breast_cup(cid).charCodeAt(0) >= c_cup_code &&
           check_lubrication(cid, part_enum.breast)));
@@ -135,7 +135,7 @@ function sys_filter_ero_act(
     supporter > 0 && era.get(`tequip:${supporter}:口腔`) === -1;
   supporter_tag_checks[ero_hook_tags.supporter_breast] =
     supporter > 0 &&
-    era.get(`cflag:${supporter}:性别`) - 1 &&
+    era.get(`cflag:${supporter}:性别`) !== 1 &&
     (!d_tit ||
       (get_breast_cup(supporter).charCodeAt(0) >= c_cup_code &&
         check_lubrication(supporter, part_enum.breast)));
