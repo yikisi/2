@@ -40,6 +40,8 @@ function check_tags(tags, cid, oid, chara_check, common_check) {
   return fail === -1;
 }
 
+const c_cup_code = 'C'.charCodeAt(0);
+
 /**
  * @param {number} attacker
  * @param {number} defender
@@ -67,7 +69,7 @@ function sys_filter_ero_act(
     tag_checks[cid][ero_hook_tags.breast] =
       era.get(`cflag:${cid}:性别`) - 1 &&
       (!d_tit ||
-        (get_breast_cup(cid) >= 'C' &&
+        (get_breast_cup(cid).charCodeAt(0) >= c_cup_code &&
           check_lubrication(cid, part_enum.breast)));
     tag_checks[cid][ero_hook_tags.clitoris] =
       !d_vir &&
@@ -135,7 +137,7 @@ function sys_filter_ero_act(
     supporter > 0 &&
     era.get(`cflag:${supporter}:性别`) - 1 &&
     (!d_tit ||
-      (get_breast_cup(supporter) >= 'C' &&
+      (get_breast_cup(supporter).charCodeAt(0) >= c_cup_code &&
         check_lubrication(supporter, part_enum.breast)));
   supporter_tag_checks[ero_hook_tags.supporter_insert] =
     supporter > 0 && get_penis_size(supporter) > 0 && check_erect(supporter);

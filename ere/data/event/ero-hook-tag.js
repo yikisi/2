@@ -15,6 +15,7 @@ const {
 } = require('#/data/ero/part-const');
 const { vp_status_enum } = require('#/data/ero/status-const');
 const { get_breast_cup } = require('#/data/info-generator');
+const { sys_check_distance } = require('#/system/ero/sys-calc-distance');
 
 class EroHookTag {
   /** @type {(number|function(number,number):boolean)[]} */
@@ -37,13 +38,17 @@ class EroHookTag {
    * @returns {boolean}
    */
   static ask_blow_job_check(cid, oid) {
-    const chara_touch = era.get(`tcvar:${cid}:阴茎接触部位`),
-      other_touch = era.get(`tcvar:${oid}:口腔接触部位`);
+    const ctouch = era.get(`tcvar:${cid}:阴茎接触部位`);
+    const otouch = era.get(`tcvar:${oid}:口腔接触部位`);
     return (
       era.get('tflag:主导权') === cid ||
-      (chara_touch === -1 &&
-        (other_touch === -1 || other_touch.item === item_enum.gag)) ||
-      (chara_touch.owner === oid && chara_touch.part === part_enum.mouth)
+      (ctouch === -1 &&
+        (otouch === -1 || otouch.item === item_enum.gag) &&
+        sys_check_distance(cid, oid, {
+          a: part_enum.penis,
+          d: part_enum.mouth,
+        })) ||
+      (ctouch.owner === oid && ctouch.part === part_enum.mouth)
     );
   }
 
@@ -71,199 +76,192 @@ class EroHookTag {
   }
 
   /**
-   * @param {number} chara_part
+   * @param {number} cpart
    * @returns {function(number):boolean}
    */
-  static generate_self_talent_check(chara_part) {
-    return (chara_id) => {
+  static generate_self_talent_check(cpart) {
+    return (cid) => {
       return (
-        !chara_id ||
-        era.get(`talent:${chara_id}:${part_talents[chara_part]}`) === 2 ||
-        era.get(`palam:${chara_id}:${part_names[chara_part]}快感`) >=
-          era.get(`tcvar:${chara_id}:${part_names[chara_part]}快感上限`) *
+        !cid ||
+        era.get(`talent:${cid}:${part_talents[cpart]}`) === 2 ||
+        era.get(`palam:${cid}:${part_names[cpart]}快感`) >=
+          era.get(`tcvar:${cid}:${part_names[cpart]}快感上限`) *
             lust_palam_border
       );
     };
   }
 
   /**
-   * @param {number} chara_part
+   * @param {number} cpart
    * @returns {function(number):boolean}
    */
-  static generate_self_touch_check(chara_part) {
-    return (chara_id) => {
-      const touch = era.get(`tcvar:${chara_id}:手部接触部位`),
-        other_part_touch = era.get(
-          `tcvar:${chara_id}:${part_touch[chara_part]}接触部位`,
-        );
+  static generate_self_touch_check(cpart) {
+    return (cid) => {
+      const touch = era.get(`tcvar:${cid}:手部接触部位`);
+      const otouch = era.get(`tcvar:${cid}:${part_touch[cpart]}接触部位`);
       return (
-        era.get('tflag:主导权') === chara_id ||
-        ((touch === -1 || touch.owner === chara_id) &&
-          (other_part_touch === -1 ||
-            (other_part_touch.owner === chara_id &&
-              other_part_touch.part !== part_enum.item)))
+        era.get('tflag:主导权') === cid ||
+        ((touch === -1 || touch.owner === cid) &&
+          (otouch === -1 ||
+            (otouch.owner === cid && otouch.part !== part_enum.item)))
       );
     };
   }
 
   /**
-   * @param {number} chara_part
-   * @param {number} other_part
+   * @param {number} cpart
+   * @param {number} opart
    * @returns {function(number,number):boolean}
    */
-  static generate_touch_check(chara_part, other_part) {
-    return (chara_id, other_id) => {
-      const touch = era.get(
-        `tcvar:${chara_id}:${part_touch[chara_part]}接触部位`,
-      );
+  static generate_touch_check(cpart, opart) {
+    return (cid, oid) => {
+      const touch = era.get(`tcvar:${cid}:${part_touch[cpart]}接触部位`);
       return (
-        era.get('tflag:主导权') === chara_id ||
+        era.get('tflag:主导权') === cid ||
         (touch === -1 &&
-          era.get(`tcvar:${other_id}:${part_touch[other_part]}接触部位`) ===
-            -1) ||
-        (touch.owner === other_id && touch.part === other_part)
+          era.get(`tcvar:${oid}:${part_touch[opart]}接触部位`) === -1 &&
+          sys_check_distance(cid, oid, { a: cpart, d: opart })) ||
+        (touch.owner === oid && touch.part === opart)
       );
     };
   }
 
   /**
-   * @param {number} chara_id
-   * @param {number} other_id
+   * @param {number} cid
+   * @param {number} oid
    * @returns {boolean}
    */
-  static hand_and_blow_job_check(chara_id, other_id) {
-    const touch = era.get(`tcvar:${other_id}:阴茎接触部位`);
+  static hand_and_blow_job_check(cid, oid) {
+    const touch = era.get(`tcvar:${oid}:阴茎接触部位`);
     return (
-      touch.owner === chara_id &&
+      touch.owner === cid &&
       (touch.part === part_enum.mouth || touch.part === part_enum.hand)
     );
   }
 
   /**
-   * @param {number} chara_id
-   * @param {number} other_id
+   * @param {number} cid
+   * @param {number} oid
    * @returns {boolean}
    */
-  static hand_touch_check_for_body(chara_id, other_id) {
-    const touch = era.get(`tcvar:${chara_id}:手部接触部位`);
+  static hand_touch_check_for_body(cid, oid) {
+    const touch = era.get(`tcvar:${cid}:手部接触部位`);
     return (
-      era.get('tflag:主导权') === chara_id ||
+      era.get('tflag:主导权') === cid ||
       touch === -1 ||
-      (touch.owner === other_id && touch.part === part_enum.body)
+      (touch.owner === oid && touch.part === part_enum.body)
     );
   }
 
   /**
-   * @param {number} chara_id
-   * @param {number} other_id
+   * @param {number} cid
+   * @param {number} oid
    * @returns {boolean}
    */
-  static npc_anal_sex_check(chara_id, other_id) {
-    if (!chara_id) {
+  static npc_anal_sex_check(cid, oid) {
+    if (!cid) {
       return true;
     }
-    if (era.get(`status:${chara_id}:超马跳Z`) > 0) {
+    if (era.get(`status:${cid}:超马跳Z`) > 0) {
       return true;
     }
-    if (era.get(`ex:${chara_id}:肛门撕裂`)) {
+    if (era.get(`ex:${cid}:肛门撕裂`)) {
       return false;
     }
     let upper_border = 1;
-    if (!era.get(`exp:${chara_id}:肛交次数`)) {
+    if (!era.get(`exp:${cid}:肛交次数`)) {
       if (
-        era.get(`talent:${chara_id}:淫臀`) !== 2 &&
-        !era.get(`talent:${chara_id}:淫乱`)
+        era.get(`talent:${cid}:淫臀`) !== 2 &&
+        !era.get(`talent:${cid}:淫乱`)
       ) {
         upper_border = 0;
       }
-      upper_border += Math.min(era.get(`exp:${chara_id}:肛门高潮次数`) / 5, 2);
+      upper_border += Math.min(era.get(`exp:${cid}:肛门高潮次数`) / 5, 2);
     }
-    upper_border += Math.min(era.get(`ex:${chara_id}:肛门高潮`) / 2, 2);
+    upper_border += Math.min(era.get(`ex:${cid}:肛门高潮`) / 2, 2);
     return (
-      get_expansion(get_penis_size(other_id), chara_id, part_enum.anal) <=
-      upper_border
+      get_expansion(get_penis_size(oid), cid, part_enum.anal) <= upper_border
     );
   }
 
   /**
-   * @param {number} chara_id
-   * @param {number} other_id
+   * @param {number} cid
+   * @param {number} oid
    * @returns {boolean}
    */
-  static npc_virgin_sex_check(chara_id, other_id) {
-    if (!chara_id) {
+  static npc_virgin_sex_check(cid, oid) {
+    if (!cid) {
       return true;
     }
-    if (era.get(`status:${chara_id}:超马跳Z`) > 0) {
+    if (era.get(`status:${cid}:超马跳Z`) > 0) {
       return true;
     }
-    if (era.get(`ex:${chara_id}:阴道撕裂`)) {
+    if (era.get(`ex:${cid}:阴道撕裂`)) {
       return false;
     }
-    const virgin_state = era.get(`talent:${chara_id}:处女`);
+    const virgin_state = era.get(`talent:${cid}:处女`);
     let upper_border = 1;
     if (
       virgin_state === vp_status_enum.yes ||
       virgin_state === vp_status_enum.dont_know
     ) {
       if (
-        !era.get(`talent:${chara_id}:淫乱`) &&
-        era.get(`talent:${chara_id}:淫壶`) !== 2
+        !era.get(`talent:${cid}:淫乱`) &&
+        era.get(`talent:${cid}:淫壶`) !== 2
       ) {
         upper_border = 0;
       }
-      upper_border += Math.min(era.get(`exp:${chara_id}:阴道高潮次数`) / 5, 2);
+      upper_border += Math.min(era.get(`exp:${cid}:阴道高潮次数`) / 5, 2);
     }
-    upper_border += Math.min(era.get(`ex:${chara_id}:阴道高潮`) / 2, 2);
+    upper_border += Math.min(era.get(`ex:${cid}:阴道高潮`) / 2, 2);
     return (
-      get_expansion(get_penis_size(other_id), chara_id, part_enum.virgin) <=
-      upper_border
+      get_expansion(get_penis_size(oid), cid, part_enum.virgin) <= upper_border
     );
   }
 
   /**
-   * @param {number} chara_id
-   * @param {number} other_id
+   * @param {number} cid
+   * @param {number} oid
    * @returns {boolean}
    */
-  static penis_in_anal_check(chara_id, other_id) {
-    const touch = era.get(`tcvar:${chara_id}:肛门接触部位`);
-    return touch.owner === other_id && touch.part === part_enum.penis;
+  static penis_in_anal_check(cid, oid) {
+    const touch = era.get(`tcvar:${cid}:肛门接触部位`);
+    return touch.owner === oid && touch.part === part_enum.penis;
   }
 
   /**
-   * @param {number} chara_id
-   * @param {number} other_id
+   * @param {number} cid
+   * @param {number} oid
    * @returns {boolean}
    */
-  static penis_in_virgin_check(chara_id, other_id) {
-    const touch = era.get(`tcvar:${chara_id}:阴道接触部位`);
-    return touch.owner === other_id && touch.part === part_enum.penis;
+  static penis_in_virgin_check(cid, oid) {
+    const touch = era.get(`tcvar:${cid}:阴道接触部位`);
+    return touch.owner === oid && touch.part === part_enum.penis;
   }
 
   /**
-   * @param {number} chara_id
+   * @param {number} cid
    * @returns {boolean}
    */
-  static speak_check(chara_id) {
+  static speak_check(cid) {
     return (
-      era.get('tflag:主导权') === chara_id ||
-      era.get(`tcvar:${chara_id}:口腔接触部位`) === -1
+      era.get('tflag:主导权') === cid ||
+      era.get(`tcvar:${cid}:口腔接触部位`) === -1
     );
   }
 
   /**
-   * @param {number} chara_id
-   * @param {number} other_id
+   * @param {number} cid
+   * @param {number} oid
    * @returns {boolean}
    */
-  static tit_and_blow_job_check(chara_id, other_id) {
-    const touch = era.get(`tcvar:${other_id}:阴茎接触部位`);
+  static tit_and_blow_job_check(cid, oid) {
+    const touch = era.get(`tcvar:${oid}:阴茎接触部位`);
     return (
-      touch.owner === chara_id &&
+      touch.owner === cid &&
       (touch.part === part_enum.mouth || touch.part === part_enum.breast) &&
-      get_breast_cup(chara_id, true).charCodeAt(0) >= 'C'.charCodeAt(0) &&
-      get_penis_size(other_id) >= 3
+      get_breast_cup(cid, true).charCodeAt(0) >= 'C'.charCodeAt(0) &&
+      get_penis_size(oid) >= 3
     );
   }
 

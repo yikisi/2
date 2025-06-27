@@ -44,9 +44,6 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
       ero_action_tags.body,
       ero_action_tags.m_hit,
       EroHookTag.generate_touch_check(part_enum.anal, part_enum.hand),
-      (cid, oid) =>
-        cid === era.get('tflag:主导权') ||
-        sys_check_distance(cid, oid, { a: part_enum.anal, d: part_enum.hand }),
     ],
     [ero_action_tags.awake],
     EroHookTag.condition_type.no,
@@ -65,12 +62,6 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
       ero_action_tags.breast,
       ero_action_tags.m_hit,
       EroHookTag.generate_touch_check(part_enum.breast, part_enum.hand),
-      (cid, oid) =>
-        cid === era.get('tflag:主导权') ||
-        sys_check_distance(cid, oid, {
-          a: part_enum.breast,
-          d: part_enum.hand,
-        }),
     ],
     [ero_action_tags.awake],
     EroHookTag.condition_type.no,

@@ -13,7 +13,10 @@ const {
 } = require('#/data/ero/motion-const');
 const { base_enum, part_enum, part_touch } = require('#/data/ero/part-const');
 
+const part_hand = 99;
+
 const clean_touch_parts = [
+  part_hand,
   part_enum.mouth,
   part_enum.breast,
   part_enum.hand,
@@ -136,8 +139,8 @@ function find_main_parts(cid, oid) {
  */
 function common_same(cid, oid, aim_parts, main_parts) {
   // 如果是两个范围，检查两个范围有没有交集
-  // 如果是一个值和一个范围，检查值是不是能力落到范围里
-  // 如果是两个值，要求两个范围正负号相同，攻击者的距离值不能是0，
+  // 如果是一个值和一个范围，检查值是不是能落到范围里
+  // 如果是两个值，要求正负号相同，攻击者距离更长点
   const a_loc = get_part_dis(cid, aim_parts.a, main_parts.a);
   const d_loc = get_part_dis(oid, aim_parts.d, main_parts.d);
   era.logger.debug(
@@ -164,10 +167,16 @@ function common_same(cid, oid, aim_parts, main_parts) {
 /**
  * @param {number} cid the operator of the action
  * @param {number} oid the target of the action
- * @param {{a:number,d:number}} aim_parts
- * @param {{a:number,d:number}} motions
+ * @param aim_parts aim body parts
+ * @param {number} aim_parts.a the aim body part of the operator
+ * @param {number} aim_parts.d the aim body part of the target
+ * @param motions motions
+ * @param {number} motions.a the motion of the operator
+ * @param {number} motions.d the motion of the target
  * @param {{a:number,d:number}} towards directions
- * @param {{a:number,d:number}|0} main_parts
+ * @param {number} towards.a the direction of the operator
+ * @param {number} towards.d the direction of the target
+ * @param {{a:number,d:number}|0} main_parts main body parts
  * @returns {boolean}
  */
 function check_distance(
@@ -199,7 +208,7 @@ function check_distance(
     case base_enum.b_same:
       // 后方同向：主动方会阴不能攻击被动方阴茎
       if (
-        get_part_len(cid, part_enum.penis) === get_part_len(cid, aim_parts.a) &&
+        get_part_dis(cid, aim_parts.a, part_enum.penis)[0] === 0 &&
         aim_parts.d === part_enum.penis
       ) {
         return false;
@@ -211,7 +220,7 @@ function check_distance(
     case base_enum.b_con:
       // 背向火车便当后方同向
       if (
-        get_part_len(cid, part_enum.penis) === get_part_len(cid, aim_parts.a) &&
+        get_part_dis(cid, aim_parts.a, part_enum.penis)[0] === 0 &&
         aim_parts.d === part_enum.penis
       ) {
         return false;
@@ -235,6 +244,14 @@ function check_distance(
           part_touch[main_parts.d]
         }`,
       );
+      // 六九式
+      if (
+        a_loc[0] ===
+          get_part_dis(cid, part_enum.mouth, part_enum.clitoris)[0] &&
+        d_loc[0] === get_part_dis(oid, part_enum.mouth, part_enum.clitoris)[0]
+      ) {
+        return true;
+      }
       if (a_loc.length === 1 && d_loc.length === 1) {
         return (
           c_t_p_dict[aim_parts.a] > c_t_p_dict[main_parts.a] !==
@@ -250,7 +267,7 @@ function check_distance(
     case base_enum.b_tri:
       // 后方同向直角：主动方会阴不能攻击被动方阴茎
       if (
-        get_part_len(cid, part_enum.penis) === get_part_len(cid, aim_parts.a) &&
+        get_part_dis(cid, aim_parts.a, part_enum.penis)[0] === 0 &&
         aim_parts.d === part_enum.penis
       ) {
         return false;
@@ -259,54 +276,42 @@ function check_distance(
     case base_enum.s_tri:
       // 同向直角
       if (
-        get_part_len(cid, aim_parts.a) !== get_part_len(cid, main_parts.a) &&
+        get_part_dis(cid, aim_parts.a, main_parts.a)[0] !== 0 &&
         c_t_p_dict[aim_parts.d] <= c_t_p_dict[main_parts.d]
       ) {
         if (aim_parts.a === part_enum.hand) {
           return (
             era.get(`tcvar:${cid}:臂长`) ** 2 >=
             (era.get(`tcvar:${cid}:肩膀位置`) -
-              get_part_len(cid, main_parts.a)) **
+              get_part_len(cid, main_parts.a)[0]) **
               2 +
-              (get_part_len(oid, aim_parts.d) -
-                get_part_len(oid, main_parts.d)) **
-                2
+              get_part_dis(oid, aim_parts.d, main_parts.d)[0] ** 2
           );
         } else if (aim_parts.a === part_enum.foot && is_up > 0) {
-          a_loc =
-            get_part_len(cid, main_parts.a) - get_part_len(cid, aim_parts.a);
-          const m_d_loc = get_part_len(oid, main_parts.d);
-          return (
-            a_loc <= get_part_len(oid, part_enum.foot) - m_d_loc &&
-            a_loc >= get_part_len(oid, part_enum.virgin) + 1 - m_d_loc
-          );
+          a_loc = get_part_dis(cid, aim_parts.a, main_parts.a);
+          d_loc = get_part_dis(oid, aim_parts.d, main_parts.d);
+          return -d_loc[0] >= a_loc[0] && -d_loc[0] <= a_loc[1];
         }
       }
       return false;
     case base_enum.d_tri:
       // 反向直角
       if (
-        get_part_len(cid, aim_parts.a) !== get_part_len(cid, main_parts.a) &&
+        get_part_dis(cid, aim_parts.a, main_parts.a)[0] !== 0 &&
         c_t_p_dict[aim_parts.d] >= c_t_p_dict[main_parts.d]
       ) {
         if (aim_parts.a === part_enum.hand) {
           return (
             era.get(`tcvar:${cid}:臂长`) ** 2 >=
             (era.get(`tcvar:${cid}:肩膀位置`) -
-              get_part_len(cid, main_parts.a)) **
+              get_part_len(cid, main_parts.a)[0]) **
               2 +
-              (get_part_len(oid, aim_parts.d) -
-                get_part_len(oid, main_parts.d)) **
-                2
+              get_part_dis(oid, aim_parts.d, main_parts.d)[0] ** 2
           );
         } else if (aim_parts.a === part_enum.foot && is_up > 0) {
-          a_loc =
-            get_part_len(cid, aim_parts.a) - get_part_len(cid, main_parts.a);
-          const m_d_loc = get_part_len(oid, main_parts.d);
-          return (
-            a_loc <= get_part_len(oid, part_enum.foot) - m_d_loc &&
-            a_loc >= get_part_len(oid, part_enum.virgin) + 1 - m_d_loc
-          );
+          a_loc = get_part_dis(cid, aim_parts.a, main_parts.a);
+          d_loc = get_part_dis(oid, aim_parts.d, main_parts.d);
+          return d_loc[0] >= a_loc[0] && d_loc[0] <= a_loc[1];
         }
       }
       return false;
@@ -474,6 +479,7 @@ function change_motion_by_base(attacker, defender, compat_motions, is_up = -1) {
 }
 
 module.exports = {
+  part_hand,
   sys_change_motion: change_motion,
   sys_change_motion_by_base: change_motion_by_base,
   sys_check_distance: check_distance,
