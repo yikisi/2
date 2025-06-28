@@ -15,8 +15,11 @@ const { base_enum, part_enum, part_touch } = require('#/data/ero/part-const');
 
 const part_head = 99;
 
+const part_shoulder = 98;
+
 const clean_touch_parts = [
   part_head,
+  part_shoulder,
   part_enum.mouth,
   part_enum.breast,
   part_enum.hand,
@@ -57,6 +60,8 @@ function get_part_len(cid, part) {
   switch (part) {
     case part_enum.mouth:
       return [era.get(`tcvar:${cid}:嘴唇位置`)];
+    case part_shoulder:
+      return [era.get(`tcvar:${cid}:肩膀位置`)];
     case part_enum.breast:
       return [era.get(`tcvar:${cid}:乳房位置`)];
     case part_enum.hand:
@@ -361,7 +366,8 @@ function clean_oor_parts(
     a: era.get(`tcvar:${attacker}:朝向`),
     d: era.get(`tcvar:${defender}:朝向`),
   };
-  for (const p of clean_touch_parts) {
+  for (let i = 2; i < clean_touch_parts.length; ++i) {
+    const p = clean_touch_parts[i];
     if (p === main_parts.a) {
       continue;
     }
@@ -482,6 +488,7 @@ function change_motion_by_base(attacker, defender, compat_motions, is_up = -1) {
 
 module.exports = {
   part_head,
+  part_shoulder,
   sys_change_motion: change_motion,
   sys_change_motion_by_base: change_motion_by_base,
   sys_check_distance: check_distance,

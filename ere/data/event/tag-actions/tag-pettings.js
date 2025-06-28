@@ -393,9 +393,8 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
     [
       ero_action_tags.awake,
       ero_action_tags.body,
-      (chara_id) => era.get(`cflag:${chara_id}:头发长度`) > 0,
+      (cid) => era.get(`cflag:${cid}:头发长度`) > 0,
     ],
-    EroHookTag.condition_type.no,
   );
 
   ero_action_names[ero_actions.force_hair_fuck] = '强制发交';
@@ -406,10 +405,7 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
       ero_action_tags.pet,
       ero_action_tags.sadism,
     ],
-    [
-      ero_action_tags.body,
-      (chara_id) => era.get(`cflag:${chara_id}:头发长度`) > 0,
-    ],
+    [ero_action_tags.body, (cid) => era.get(`cflag:${cid}:头发长度`) > 0],
   );
 
   ero_action_names[ero_actions.hair_fuck] = '发交';
@@ -418,7 +414,7 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
       ero_action_tags.awake,
       ero_action_tags.body,
       ero_action_tags.pet,
-      (chara_id) => era.get(`cflag:${chara_id}:头发长度`) > 0,
+      (cid) => era.get(`cflag:${cid}:头发长度`) > 0,
     ],
     [ero_action_tags.penis],
   );
@@ -429,16 +425,14 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
       ero_action_tags.awake,
       ero_action_tags.penis,
       ero_action_tags.pet,
-      (chara_id, other_id) => {
-        const touch = era.get(`tcvar:${chara_id}:阴茎接触部位`);
+      (cid, oid) => {
+        const touch = era.get(`tcvar:${cid}:阴茎接触部位`);
         return (
-          touch === -1 ||
-          (touch.owner === other_id && touch.part === part_enum.body)
+          touch === -1 || (touch.owner === oid && touch.part === part_enum.body)
         );
       },
     ],
     [ero_action_tags.awake, ero_action_tags.body],
-    EroHookTag.condition_type.no,
   );
 
   ero_action_names[ero_actions.force_armpit_intercourse] = '强制腋交';
@@ -467,7 +461,6 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
       EroHookTag.generate_touch_check(part_enum.penis, part_enum.foot),
     ],
     [ero_action_tags.awake, ero_action_tags.foot],
-    EroHookTag.condition_type.no,
   );
 
   ero_action_names[ero_actions.force_foot_job] = '强制足交';
@@ -499,16 +492,14 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
       ero_action_tags.awake,
       ero_action_tags.penis,
       ero_action_tags.pet,
-      (chara_id, other_id) => {
-        const touch = era.get(`tcvar:${chara_id}:阴茎接触部位`);
+      (cid, oid) => {
+        const touch = era.get(`tcvar:${cid}:阴茎接触部位`);
         return (
-          touch === -1 ||
-          (touch.owner === other_id && touch.part === part_enum.body)
+          touch === -1 || (touch.owner === oid && touch.part === part_enum.body)
         );
       },
     ],
     [ero_action_tags.awake, ero_action_tags.body, ero_action_tags.race],
-    EroHookTag.condition_type.no,
   );
 
   ero_action_names[ero_actions.force_tail_job] = '强制尾交';
