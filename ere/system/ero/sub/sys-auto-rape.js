@@ -440,10 +440,9 @@ async function sys_auto_rape(shown) {
   );
   const last_action = era.get('tflag:前回行动');
   const action = get_random_act(master, random_list, last_action, ...filters);
-  const change_ratio = 0.16 - 0.08 * era.get(`talent:${master}:工口好奇`);
   (last_action === action ? era.add : era.set)(
     `tcvar:${master}:变招`,
-    change_ratio,
+    0.16 - 0.08 * era.get(`talent:${master}:工口好奇`),
   );
   era.logger.debug(
     `raping done! ${(new Date().getTime() - current).toLocaleString()}ms`,

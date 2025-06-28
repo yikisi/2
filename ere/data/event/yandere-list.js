@@ -6,15 +6,15 @@ class YandereList {
     return get('flag:病娇列表') || set('flag:病娇列表', []);
   }
 
-  /** @param {number} chara_id */
-  push(chara_id) {
-    const yandere = get(`talent:${chara_id}:病娇`);
-    if (!yandere && get(`love:${chara_id}`) >= 50) {
-      set(`status:${chara_id}:爱意克制`, 1);
+  /** @param {number} cid */
+  push(cid) {
+    const yandere = get(`talent:${cid}:病娇`);
+    if (!yandere && get(`love:${cid}`) >= 50) {
+      set(`status:${cid}:爱意克制`, 1);
     }
-    set(`talent:${chara_id}:病娇`, yandere || 1);
+    set(`talent:${cid}:病娇`, yandere || 1);
     const obj = this.#obj;
-    obj.push(chara_id);
+    obj.push(cid);
     set(
       'flag:病娇列表',
       obj.filter((e, i, l) => i === l.indexOf(e)),

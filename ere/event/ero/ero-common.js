@@ -18,6 +18,7 @@ const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
 const common_pregnant_report_in_love = require('#/event/ero/common-lines/common-pregnant-report-in-love');
+const cum_in_womb = require('#/event/ero/common-lines/cum-in-womb');
 const NormalCommandLines = require('#/event/ero/common-lines/normal/normal-common');
 const RapeCommandLines = require('#/event/ero/common-lines/rape/rape-common');
 const SleepCommandLines = require('#/event/ero/common-lines/sleep/sleep-common');
@@ -26,11 +27,9 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { buff_colors } = require('#/data/color-const');
-const CharaInmon = require('#/data/ero/chara-inmon');
 const { shop_result_type_enum } = require('#/data/ero/juel-const');
 const { mark_enum } = require('#/data/ero/mark-const');
 const { part_enum, part_names } = require('#/data/ero/part-const');
-const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const {
   breast_size,
   penis_desc,
@@ -325,9 +324,12 @@ class CustomizedEro {
    * @param {boolean} stop_success 如果寸止的话是否成功
    */
   async orgasm_denial(stop_success) {
-    const chara = get_chara_talk(this.id),
-      me = get_chara_talk(0),
-      touch = era.get(`tcvar:${this.id}:阴茎接触部位`);
+    if (era.get('tflag:主导权') > 0 && era.get('flag:惩戒力度') >= 2) {
+      return 0;
+    }
+    const chara = get_chara_talk(this.id);
+    const me = get_chara_talk(0);
+    const touch = era.get(`tcvar:${this.id}:阴茎接触部位`);
     if (
       touch.part === part_enum.mouth ||
       touch.part === part_enum.virgin ||
@@ -456,139 +458,7 @@ class CustomizedEro {
    * @param {{father_id:number,mother_id:number}} extra_flag
    */
   async cum_in_womb(chara, me, callname, hook, extra_flag) {
-    const father = get_chara_talk(extra_flag.father_id),
-      mother = get_chara_talk(extra_flag.mother_id),
-      talent_palam =
-        era.get(`talent:${mother.id}:子宫敏感`) > 0 ||
-        era.get(`mark:${mother.id}:欢愉`) >= 2,
-      talent_sex =
-        era.get(`talent:${mother.id}:淫乱`) > 0 ||
-        era.get(`talent:${mother.id}:榨精成瘾`) > 0,
-      sex_mark = era.get(`mark:${mother.id}:淫纹`) >= 2,
-      is_awake = sys_check_awake(mother.id);
-    let talent_check = talent_palam || talent_sex;
-    if (sex_mark) {
-      await era.printAndWait([
-        '在 ',
-        mother.get_colored_name(),
-        ' 的小腹上，代表子宫的心形图案正在慢慢填充……',
-      ]);
-    }
-    if (
-      era.get(`status:${mother.id}:经期`) > 0 ||
-      era.get(`cflag:${mother.id}:妊娠阶段`) !== 1 << pregnant_stage_enum.no ||
-      era.get(`status:${mother.id}:长效避孕药`) > 0 ||
-      era.get(`status:${mother.id}:短效避孕药`) > 0 ||
-      CharaInmon.get(mother.id).on(plugin_enum.no_preg)
-    ) {
-      if (is_awake && talent_check) {
-        if (talent_palam) {
-          await era.printAndWait([
-            father.get_colored_name(),
-            ' 温热的精液正在充盈 ',
-            mother.get_colored_name(),
-            ' 发疼的子宫……',
-          ]);
-          await era.printAndWait([
-            mother.get_colored_name(),
-            ' 沉溺在快感之中……',
-          ]);
-        } else if (era.get('tflag:强奸') === father.id) {
-          await era.printAndWait([
-            mother.get_colored_name(),
-            ' 在屈辱中感受到了身为 ',
-            {
-              content: era.get(`cflag:${mother.id}:性别`) ? '扶她' : '女性',
-              color: buff_colors[2],
-            },
-            ' 的极乐……',
-          ]);
-        } else {
-          await era.printAndWait([
-            mother.get_colored_name(),
-            ' 欣喜地品尝着身为 ',
-            {
-              content: era.get(`cflag:${mother.id}:性别`) ? '扶她' : '女性',
-              color: buff_colors[2],
-            },
-            ' 的极乐……',
-          ]);
-        }
-      }
-    } else {
-      const love = era.get(`love:${mother.id || father.id}`);
-      if (love < 75) {
-        await era.printAndWait([
-          father.get_colored_name(),
-          ' 射出的大量精子正朝向 ',
-          mother.get_colored_name(),
-          ' 毫无防备的卵子前进……',
-        ]);
-        if (is_awake && !talent_check) {
-          await era.printAndWait([
-            mother.get_colored_name(),
-            ' 惊恐地意识到自己可能会怀孕的事实……',
-          ]);
-        }
-      } else if (love < 90) {
-        await era.printAndWait([
-          father.get_colored_name(),
-          ' 射出的大量精子正朝向 ',
-          mother.get_colored_name(),
-          ' 卸下防备的卵子前进……',
-        ]);
-        if (is_awake && !talent_check) {
-          await era.printAndWait([
-            mother.get_colored_name(),
-            ' 朦胧地意识到自己可能会怀孕的事实……',
-          ]);
-        }
-      } else {
-        if (
-          era.get(`status:${mother.id}:反避孕套`) > 0 &&
-          era.get(`tcvar:${father.id}:避孕套`) > 0 &&
-          sys_check_awake(father.id)
-        ) {
-          await era.printAndWait([
-            father.get_colored_name(),
-            ' 惊恐地发现自己射出的精液畅通无阻……',
-          ]);
-        } else {
-          await era.printAndWait([
-            father.get_colored_name(),
-            ' 射出的大量精子正朝向 ',
-            mother.get_colored_name(),
-            ' 渴望怀孕的卵子前进……',
-          ]);
-        }
-        if (is_awake && !talent_check) {
-          await era.printAndWait([
-            mother.get_colored_name(),
-            ' 欣喜地品味着即将成为母亲的感觉……',
-          ]);
-        }
-      }
-      if (is_awake && talent_check) {
-        if (talent_palam) {
-          await era.printAndWait([
-            mother.get_colored_name(),
-            ' 沉溺在发疼的子宫被精液充盈的快感之中，丝毫没有顾及到怀孕的可能性……',
-          ]);
-        } else {
-          await era.printAndWait([
-            mother.get_colored_name(),
-            era.get('tflag:强奸') !== father.id
-              ? ' 在屈辱中感受到了身为 '
-              : ' 欣喜地品尝着身为 ',
-            {
-              content: era.get(`cflag:${mother.id}:性别`) ? '扶她' : '女性',
-              color: buff_colors[2],
-            },
-            ' 的极乐……',
-          ]);
-        }
-      }
-    }
+    await cum_in_womb.call(this, chara, me, callname, hook, extra_flag);
   }
 
   /**
@@ -912,26 +782,22 @@ class CustomizedEro {
    */
   // eslint-disable-next-line no-unused-vars
   async after_betrayed(chara, me, callname, hook, extra_flag) {
-    const race = era.get(`cflag:${this.id}:种族`),
-      like_betrayed = sys_check_cuckold(this.id);
+    const race = era.get(`cflag:${this.id}:种族`);
+    const cuckold = sys_check_cuckold(this.id);
     switch (era.get(`exp:${this.id}:被绿次数`) + 1) {
       case 1:
         era.drawLine();
         await era.printAndWait([
-          race ? chara.get_uma_sex_title() + '的鼻子十分灵敏，而 ' : '',
+          race > 0 ? chara.get_uma_sex_title() + '的鼻子十分灵敏，而 ' : '',
           me.get_colored_name(),
           ' 身上传来的淫臭味无时无刻不在向周遭宣布着自己刚才马儿跳过的事实。',
           { isBr: true },
-          race ? '嗅到气味的 ' : '察觉此事 ',
+          race > 0 ? '嗅到气味的 ' : '察觉此事 ',
           chara.get_colored_name(),
           ' 对 ',
           me.get_colored_name(),
           ' 的不忠产生了',
-          like_betrayed
-            ? '情欲'
-            : sys_get_chara(this.id) >= 0
-              ? '愤慨'
-              : '悲伤',
+          cuckold ? '情欲' : sys_get_chara(this.id) >= 0 ? '愤慨' : '悲伤',
           '的情绪……',
         ]);
         break;
@@ -945,21 +811,17 @@ class CustomizedEro {
           { isBr: true },
           '在一时性欲释放的背后，又有多少感情纠葛正在蔓延缠绕？',
           { isBr: true },
-          race ? '嗅到气味的 ' : '察觉此事 ',
+          race > 0 ? '嗅到气味的 ' : '察觉此事 ',
           chara.get_colored_name(),
           ' 对 ',
           me.get_colored_name(),
           ' 的不忠产生了',
-          like_betrayed
-            ? '情欲'
-            : sys_get_chara(this.id) >= 0
-              ? '愤慨'
-              : '悲伤',
+          cuckold ? '情欲' : sys_get_chara(this.id) >= 0 ? '愤慨' : '悲伤',
           '的情绪……',
         ]);
         break;
       default:
-        if (like_betrayed) {
+        if (cuckold) {
           await era.printAndWait([
             me.get_colored_name(),
             ' 的不忠让 ',

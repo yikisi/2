@@ -270,7 +270,7 @@ function sub_simulate_ero(list_chara, timer_record, timer, events, reports) {
         stamina_times *
           (1 - damage_buff + damage_buff * orgasm + uma.ero.cost.sex);
       if (era.get('flag:道具影响') !== 0) {
-        uma.race.velocityReal -= 0.1;
+        uma.race.velocityReal -= 0.025;
       }
     } else {
       uma.race.conditionParams.orgasm = 0;

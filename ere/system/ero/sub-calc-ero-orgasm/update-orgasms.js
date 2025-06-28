@@ -472,7 +472,7 @@ async function update_orgasms(shown, ...ids) {
         era.print([
           chara.get_colored_name(),
           ' 的 ',
-          { content: '阴道', color: buff_colors[2] },
+          { content: '蜜穴', color: buff_colors[2] },
           ' ',
           ...squirt_info,
           '！',

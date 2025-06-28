@@ -253,8 +253,7 @@ module.exports = (handlers) => {
             `tcvar:${extra_flag.user}:阴道扩张`,
             1 + !era.get(`tcvar:${extra_flag.user}:阴道扩张`),
           );
-        }
-        if (extra_flag.part === part_enum.anal) {
+        } else if (extra_flag.part === part_enum.anal) {
           era.add(
             `tcvar:${extra_flag.user}:肛门扩张`,
             1 + !era.get(`tcvar:${extra_flag.user}:肛门扩张`),

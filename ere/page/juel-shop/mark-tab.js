@@ -248,7 +248,7 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
   const slave = inmon.slave;
   if (sex_level > 0 || (pleasure_level > 0 && meek_level > 0)) {
     era.drawLine({
-      content: chara.get_full_name() + ' 的 淫纹',
+      content: chara.full_name + ' 的 淫纹',
     });
     if (sex_level > 0) {
       const limit = inmon_limit[sex_level];
@@ -258,22 +258,23 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
       const sex_mark_col = get_mark_cols(chara.id, '淫纹', sex_level);
       delete sex_mark_col.config.width;
       sex_mark_col.content.unshift({ isBr: true });
-      const p_buffer = inmon.to_list.map((e) => {
-        const p = inmon_plugin_dict[e];
-        group_dict[p.group] = 1;
-        const name = p.colored_name;
-        name.content += ` (${p.size})`;
-        return {
-          accelerator: plugins.find((e) => e.p.id === p.id).a,
-          config: {
-            align: 'center',
-            color: name.color,
-            title: name.title,
-          },
-          content: name.content,
-          type: 'button',
-        };
-      });
+      const p_buffer = plugins
+        .filter((e) => inmon.on(e.p.id))
+        .map((e) => {
+          group_dict[e.p.group] = 1;
+          const name = e.p.colored_name;
+          name.content += ` (${e.p.size})`;
+          return {
+            accelerator: e.a,
+            config: {
+              align: 'center',
+              color: name.color,
+              title: name.title,
+            },
+            content: name.content,
+            type: 'button',
+          };
+        });
       const buffer = [];
       const keys = Object.keys(groups).slice(pointer.sub, pointer.sub + 2);
       buffer.push({

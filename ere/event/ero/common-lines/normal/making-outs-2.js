@@ -6,8 +6,8 @@ const era = require('#/era-electron');
 
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
-const { hand_and_blow_job } = require('#/event/ero/common-lines/ero-snippets');
 const EroNormalMakingOuts1 = require('#/event/ero/common-lines/normal/making-outs-1');
+const { hand_and_blow_job } = require('#/event/ero/common-lines/snippets');
 const {
   after_refusing_by_attacker,
   after_refusing_by_defender,

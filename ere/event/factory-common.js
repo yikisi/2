@@ -17,28 +17,30 @@ class CommonKojoFactory {
     this.#child = child;
   }
 
-  check(id) {
-    return this.#cons[id] !== undefined;
+  check(cid) {
+    return this.#cons[cid] !== undefined;
   }
 
   clean() {
-    const keys = Object.keys(this.#dict).filter((e) => e >= first_child_id);
-    for (const k of keys) {
-      delete this.#dict[k];
+    const keys = Object.keys(this.#dict).filter(
+      (cid) => Number(cid) >= first_child_id,
+    );
+    for (const cid of keys) {
+      delete this.#dict[cid];
     }
   }
 
-  get(id) {
-    if (!this.#dict[id]) {
+  get(cid) {
+    if (!this.#dict[cid]) {
       const { c: con, n: script_name } =
-        id >= first_child_id
-          ? { c: this.#child, n: get(`callname:${id}:-2`) }
-          : { c: this.#common, n: id };
-      this.#dict[id] = new (this.#cons[
+        cid >= first_child_id
+          ? { c: this.#child, n: get(`callname:${cid}:-2`) }
+          : { c: this.#common, n: cid };
+      this.#dict[cid] = new (this.#cons[
         script_dict[script_name] || script_name
-      ] || con)(id);
+      ] || con)(cid);
     }
-    return this.#dict[id].get_this();
+    return this.#dict[cid].get_this();
   }
 }
 

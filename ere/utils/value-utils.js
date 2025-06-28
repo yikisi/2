@@ -4,19 +4,25 @@ module.exports = {
    * @returns {{content:string,[title]:string}}
    */
   get_abbr_number(_num) {
-    if (_num >= 10000000) {
-      return {
-        content: `${Math.round(_num / 1000000).toLocaleString()}M`,
-        title: _num.toLocaleString(),
-      };
+    if (_num < 10000) {
+      return { content: _num.toLocaleString() };
     }
-    if (_num >= 10000) {
+    if (_num < 10000000) {
       return {
         content: `${Math.round(_num / 1000).toLocaleString()}K`,
         title: _num.toLocaleString(),
       };
     }
-    return { content: _num.toLocaleString() };
+    if (_num < 10000000000) {
+      return {
+        content: `${Math.round(_num / 1000000).toLocaleString()}M`,
+        title: _num.toLocaleString(),
+      };
+    }
+    return {
+      content: `${Math.round(_num / 1000000000).toLocaleString()}B`,
+      title: _num.toLocaleString(),
+    };
   },
   /**
    * @param {number} min

@@ -109,7 +109,7 @@ handlers[event_hooks.office_study] = async (cid) => {
   sys_like_chara(cid, 0, get_random_value(5, 10));
   await era.printAndWait([
     get_chara_talk(cid).get_colored_name(),
-    ' 获得了 4 点技能点数！',
+    ' 获得了 4 点技能点数',
   ]);
   era.add(`exp:${cid}:技能点数`, 4);
 };
@@ -159,7 +159,7 @@ handlers[event_hooks.office_prepare] = async (cid) => {
     sys_change_motivation(cid, 1);
   await era.printAndWait([
     get_chara_talk(cid).get_colored_name(),
-    ' 获得了 10 点技能点数！',
+    ' 获得了 10 点技能点数',
   ]);
   era.add(`exp:${cid}:技能点数`, 10);
 };

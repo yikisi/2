@@ -6,11 +6,11 @@ const era = require('#/era-electron');
 
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
+const EroFucking = require('#/event/ero/common-lines/interface/ero-fucking');
 const {
   stimulate_glans_by_hole_1,
   stimulate_glans_by_hole_2,
-} = require('#/event/ero/common-lines/ero-snippets');
-const EroFucking = require('#/event/ero/common-lines/interface/ero-fucking');
+} = require('#/event/ero/common-lines/snippets');
 
 const { ero_hooks } = require('#/data/event/ero-hooks');
 

@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const EroTouch = require('#/data/ero/ero-touch');
 const { part_enum } = require('#/data/ero/part-const');
 const { ero_action_tags, ero_actions } = require('#/data/event/ero-actions');
 const EroHookTag = require('#/data/event/ero-hook-tag');
@@ -62,7 +63,7 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
 
   ero_action_names[ero_actions.resist] = '反抗';
   ero_tagged_hooks[ero_actions.resist] = new EroHookTag(
-    [ero_action_tags.awake, (chara_id) => !chara_id],
+    [ero_action_tags.awake, (cid) => !cid],
     [],
     EroHookTag.condition_type.in_active,
   );
@@ -85,9 +86,9 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
     [ero_action_tags.mouth],
     [
       ero_action_tags.mouth,
-      (chara_id, other_id) => {
-        const touch = era.get(`tcvar:${chara_id}:口腔接触部位`);
-        return touch.owner === other_id && touch.part === part_enum.mouth;
+      (cid, oid) => {
+        const touch = new EroTouch(cid, part_enum.mouth);
+        return touch.owner === oid && touch.part === part_enum.mouth;
       },
     ],
   );

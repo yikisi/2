@@ -245,19 +245,19 @@ async function duty(chara, me) {
 }
 
 async function morning_sex() {
-  const chara_id = get('flag:床伴');
+  const cid = get('flag:床伴');
   if (
-    chara_id > 0 &&
+    cid > 0 &&
     get('flag:当前位置') !== location_enum.basement &&
-    get(`mark:${chara_id}:反抗`) === 0 &&
-    get(`mark:${chara_id}:羞耻`) === 0
+    get(`mark:${cid}:反抗`) === 0 &&
+    get(`mark:${cid}:羞耻`) === 0
   ) {
     const buffer = [],
-      love = get(`love:${chara_id}`);
+      love = get(`love:${cid}`);
     if (get('flag:惩戒力度') >= 2) {
       buffer.push(duty);
-    } else if (love >= 75 || get(`mark:${chara_id}:欢愉`) >= 1) {
-      if (get_custom_check(chara_id).is_want_make_love()) {
+    } else if (love >= 75 || get(`mark:${cid}:欢愉`) >= 1) {
+      if (get_custom_check(cid).is_want_make_love()) {
         buffer.push(blowjob);
       }
       if (Math.random() < 0.5) {
@@ -268,16 +268,16 @@ async function morning_sex() {
     if (handler) {
       const my_cache = { s: get('base:0:体力'), t: get('base:0:精力') },
         chara_cache = {
-          s: get(`base:${chara_id}:体力`),
-          t: get(`base:${chara_id}:精力`),
+          s: get(`base:${cid}:体力`),
+          t: get(`base:${cid}:精力`),
         };
-      await handler(get_chara_talk(chara_id), get_chara_talk(0));
+      await handler(get_chara_talk(cid), get_chara_talk(0));
       set(`status:0:沉睡`, 0);
       set('base:0:体力', my_cache.s);
       set('base:0:精力', my_cache.t);
-      set(`status:${chara_id}:沉睡`, 0);
-      set(`base:${chara_id}:体力`, chara_cache.s);
-      set(`base:${chara_id}:精力`, chara_cache.t);
+      set(`status:${cid}:沉睡`, 0);
+      set(`base:${cid}:体力`, chara_cache.s);
+      set(`base:${cid}:精力`, chara_cache.t);
     }
   }
 }

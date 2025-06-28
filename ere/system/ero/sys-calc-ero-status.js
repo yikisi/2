@@ -12,7 +12,13 @@ const {
   erect_border,
   lust_border,
 } = require('#/data/ero/orgasm-const');
-const { part_enum, part_names } = require('#/data/ero/part-const');
+const {
+  motion_enum,
+  part_enum,
+  part_names,
+  towards_enum,
+  up_enum,
+} = require('#/data/ero/part-const');
 const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const { stain_enum } = require('#/data/ero/stain-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
@@ -159,12 +165,22 @@ function get_sex_acceptable(cid) {
 }
 
 module.exports = {
-  change_ero_master(new_master) {
-    era.set('tflag:主导权', new_master);
+  /** @param {number} _new */
+  change_ero_master(_new) {
+    const _old = era.get('tflag:主导权');
+    era.set(
+      `tcvar:${_new}:体位`,
+      era.set(`tcvar:${_old}:体位`, motion_enum.lie),
+    );
+    era.set(`tcvar:${_old}:朝向`, towards_enum.right);
+    era.set(`tcvar:${_new}:朝向`, towards_enum.left);
+    era.set(`tcvar:${_new}:上下`, up_enum.up);
+    era.set(`tcvar:${_old}:上下`, up_enum.down);
+    era.set('tflag:主导权', _new);
     era.set('tflag:前回行动', -1);
     era.set('tflag:对手行动', -1);
     era.set('tflag:当前助手', 0);
-    era.set(`tcvar:${new_master}:高潮满足`, 0);
+    era.set(`tcvar:${_new}:高潮满足`, 0);
   },
   /**
    * @param {number} cid
@@ -175,7 +191,8 @@ module.exports = {
     const ret =
       era.get(`status:${cid}:弗隆K`) > 0 ||
       era.get(`status:${cid}:弗隆P`) > 0 ||
-      (get_penis_size(cid) > 0 &&
+      CharaInmon.get(cid).on(plugin_enum.pe_up_1) ||
+      (era.get(`cflag:${cid}:阴茎尺寸`) > 0 &&
         (val || era.get(`palam:${cid}:阴茎快感`)) >=
           era.get(`tcvar:${cid}:阴茎快感上限`) *
             (erect_border / (1 + era.get(`tcvar:${cid}:发情`))));
@@ -188,7 +205,7 @@ module.exports = {
   check_pregnant_unprotect,
   /**
    * @param cid
-   * @returns {number} 0 - 完全没爽够，1 - 爽够了但是还想再爽，2 - 不能再爽了
+   * @returns {0|1|2} 0 - 完全没爽够，1 - 爽够了但是还想再爽，2 - 不能再爽了
    */
   check_satisfied(cid) {
     if (era.get(`tcvar:${cid}:脱力`) || era.get(`tcvar:${cid}:失神`)) {
@@ -222,7 +239,7 @@ module.exports = {
   /**
    * 检查角色是否能进行阴道性行为<br>
    * 必须有阴道&未经期&未处于孕期保护
-   * @param cid
+   * @param {number} cid
    * @returns {boolean}
    */
   check_virgin_enabled(cid) {
@@ -350,7 +367,7 @@ module.exports = {
    * @param {number} [oid]
    * @returns {number}
    */
-  get_pregnant_ratio(cid, oid) {
+  get_pregnant_ratio(cid, oid = -1) {
     if (
       // 本格化后才能怀孕
       era.get(`cflag:${cid}:成长阶段`) < 2 ||
@@ -359,7 +376,7 @@ module.exports = {
         (era.get(`cflag:${cid}:妊娠回合计时`) ||
           (cid > 0 && era.get(`mark:${cid}:淫纹`) >= 2))) ||
       era.get(`status:${cid}:经期`) ||
-      (oid !== undefined &&
+      (oid >= 0 &&
         !era.get(`cflag:${oid}:性别`) &&
         !era.get(`status:${oid}:弗隆P`)) ||
       CharaInmon.get(cid).on(plugin_enum.no_preg)
@@ -407,11 +424,11 @@ module.exports = {
     );
   },
   /**
-   * 结算顺序：先次要部位，再有快感联动的次要部位，再有分泌物部位，最后主要部位
-   * 口腔身体施虐受虐是次要部位
-   * 外阴与阴道、肛门与阴茎有等额快感联动
-   * 胸部肛门有分泌物
-   * 阴茎阴道是主要部位
+   * 结算顺序：先次要部位，再有快感联动的次要部位，再有分泌物部位，最后主要部位<br>
+   * 口腔身体施虐受虐是次要部位<br>
+   * 外阴与阴道、肛门与阴茎有等额快感联动<br>
+   * 胸部肛门有分泌物<br>
+   * 阴茎阴道是主要部位<br>
    * @type {number[]}
    */
   orgasm_check_list: [

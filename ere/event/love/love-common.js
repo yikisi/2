@@ -20,9 +20,9 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const event_hooks = require('#/data/event/event-hooks');
 
 class CustomizedLove {
-  /** @param {number} chara_id */
-  constructor(chara_id) {
-    this.id = chara_id;
+  /** @param {number} cid */
+  constructor(cid) {
+    this.id = cid;
   }
 
   get_this() {

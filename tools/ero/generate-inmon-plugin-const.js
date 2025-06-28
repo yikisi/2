@@ -55,7 +55,7 @@ try {
     }),
   );
 } catch (e) {
-  process.stdout.write(e.stdout);
+  process.stderr.write(e.stdout);
 }
 
 console.log('done!');

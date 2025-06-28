@@ -218,7 +218,9 @@ class CustomizedDaily {
     return await common_celebration.call(this);
   }
 
-  async end_talk() {}
+  /** @param {boolean} hentai */
+  // eslint-disable-next-line no-unused-vars
+  async end_talk(hentai) {}
 
   /** @author 雞雞 */
   good_morning() {

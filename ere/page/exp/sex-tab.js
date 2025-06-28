@@ -10,7 +10,6 @@ const CharaTalk = require('#/utils/chara-talk');
 const get_gradient_color = require('#/utils/gradient-color');
 const { get_abbr_number } = require('#/utils/value-utils');
 
-const sex_color = require('#/data/const.json').mark_colors['淫纹'];
 const { attr_change_colors, palam_colors } = require('#/data/color-const');
 const { mark_colors } = require('#/data/const.json');
 const CharaInmon = require('#/data/ero/chara-inmon');
@@ -25,6 +24,8 @@ const {
 const { get_breast_cup, get_talent, get_xp } = require('#/data/info-generator');
 
 const page_name = '性爱情况';
+
+const sex_color = mark_colors['淫纹'];
 
 /**
  * @param {number} chara_id
@@ -69,7 +70,7 @@ module.exports = {
     } else if (!chara.id || flags.show_exp) {
       const in_train = era.get(`ex:${chara.id}:TotalEX`) !== undefined;
       if (in_train) {
-        const plugin_list = CharaInmon.get(chara.id).to_list;
+        const plugin_list = CharaInmon.get(chara.id).list;
         const inmon_info =
           plugin_list.length > 0
             ? [

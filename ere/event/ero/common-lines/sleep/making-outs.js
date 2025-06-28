@@ -6,12 +6,12 @@ const era = require('#/era-electron');
 
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
+const EroMakingOuts = require('#/event/ero/common-lines/interface/ero-making-outs');
 const {
   hand_and_blow_job,
   pet_leg,
   pet_tail,
-} = require('#/event/ero/common-lines/ero-snippets');
-const EroMakingOuts = require('#/event/ero/common-lines/interface/ero-making-outs');
+} = require('#/event/ero/common-lines/snippets');
 
 class EroSleepMakingOuts extends EroMakingOuts {
   /**

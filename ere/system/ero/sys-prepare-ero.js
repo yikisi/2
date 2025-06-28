@@ -3,7 +3,7 @@ const era = require('#/era-electron');
 const { sys_check_yandere } = require('#/system/chara/sys-calc-cheat');
 const sys_count_juels = require('#/system/chara/sys-count-juels');
 const get_ex_result_in_the_end = require('#/system/ero/sub-begin-and-end/get-ex-result-in-the-end');
-const get_juel_result = require('#/system/ero/sub-begin-and-end/get-juel-result');
+const get_jewel_result = require('#/system/ero/sub-begin-and-end/get-jewel-result');
 const sys_calc_ero_items = require('#/system/ero/sys-calc-ero-item');
 const {
   clean_all_parts,
@@ -345,11 +345,16 @@ function init_ero(...ids) {
   reset_parts(...ids);
   sys_calc_ero_items.init_items(...ids);
   for (const cid of ids) {
+    const height = era.get(`cflag:${cid}:身高`);
     era.set(
       `tcvar:${cid}:体重`,
-      20 * (era.get(`cflag:${cid}:身高`) / 100) ** 2 +
-        (era.get(`base:${cid}:体重偏差`) * 10) / 2000,
+      20 * (height / 100) ** 2 + (era.get(`base:${cid}:体重偏差`) * 10) / 2000,
     );
+    era.set(`tcvar:${cid}:嘴唇位置`, height * 0.12);
+    era.set(`tcvar:${cid}:肩膀位置`, height * 0.2);
+    era.set(`tcvar:${cid}:乳房位置`, height * 0.28);
+    era.set(`tcvar:${cid}:会阴位置`, height * 0.5);
+    era.set(`tcvar:${cid}:臂长`, height * 0.4);
     era.set(`tcvar:${cid}:性欲缓存`, era.get(`base:${cid}:性欲`));
     era.set(`tcvar:${cid}:压力缓存`, era.get(`base:${cid}:压力`));
     let temp;
@@ -630,7 +635,7 @@ async function end_ero_and_show_result(shown = true) {
   if (shown) {
     if (era.get('flag:马跳结果显示简报') > 0) {
       for (const chara_id of chara_list) {
-        const buffer = get_juel_result(
+        const buffer = get_jewel_result(
           chara_id,
           jewel_names,
           info.jewel[chara_id],
@@ -670,7 +675,7 @@ async function end_ero_and_show_result(shown = true) {
         switch (page) {
           case 0:
             era.printMultiColumns(
-              get_juel_result(
+              get_jewel_result(
                 chara_list[chara_index],
                 jewel_names,
                 info.jewel[chara_list[chara_index]],

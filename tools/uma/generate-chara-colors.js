@@ -29,11 +29,11 @@ module.exports = {
 );
 
 try {
-  console.log(
+  process.stdout.write(
     execSync('npx eslint --fix ./ere/data/chara-colors.js', {
       cwd: join(process.cwd(), '../..'),
     }),
   );
 } catch (e) {
-  process.stdout.write(e.stdout);
+  process.stderr.write(e.stdout);
 }

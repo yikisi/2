@@ -76,6 +76,9 @@ function add_palam(cid, part, _attack) {
       coff -= 0.1;
     }
   }
+  // 自己拿自己的宝珠
+  // 淫纹不会加成宝珠获取
+  add_juel(cid, `${key}快感`, attack * coff);
   const inmon = CharaInmon.get(cid);
   if (inmon.on(plugin_enum.al_u1)) {
     coff += 0.5;
@@ -112,8 +115,6 @@ function add_palam(cid, part, _attack) {
   } else {
     tmp[cid][key] += attack;
   }
-  // 自己拿自己的宝珠
-  add_juel(cid, `${key}快感`, attack);
 }
 
 /**
@@ -194,12 +195,14 @@ function update_palam(chara_id, part, shown) {
   if (shown && _new !== _old) {
     era.print([
       get_chara_talk(chara_id).get_colored_name(),
-      ` 的 ${param_name} `,
+      ` 的 ${param_name}：`,
+      _old.toLocaleString(),
+      ' + ',
       {
-        content: `+${(_new - _old).toLocaleString()}`,
+        content: (_new - _old).toLocaleString(),
         color: palam_colors.notifications[1],
       },
-      '！现在是 ',
+      ' → ',
       {
         content: `${_new.toLocaleString()}`,
         color: get_color(...palam_colors.notifications, new_val / limit),

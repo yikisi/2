@@ -1,5 +1,7 @@
 const era = require('#/era-electron');
 
+const { sys_check_distance } = require('#/system/ero/sys-calc-distance');
+
 const { part_enum } = require('#/data/ero/part-const');
 const { ero_action_tags, ero_actions } = require('#/data/event/ero-actions');
 const EroHookTag = require('#/data/event/ero-hook-tag');
@@ -83,9 +85,13 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
       ero_action_tags.awake,
       ero_action_tags.body,
       ero_action_tags.m_hit,
-      (chara_id, other_id) =>
-        era.get('tflag:主导权') === chara_id ||
-        era.get(`tcvar:${other_id}:手部接触部位`) === -1,
+      (cid, oid) =>
+        era.get('tflag:主导权') === cid ||
+        (era.get(`tcvar:${oid}:手部接触部位`) === -1 &&
+          sys_check_distance(cid, oid, {
+            a: part_enum.mouth,
+            d: part_enum.hand,
+          })),
     ],
     [ero_action_tags.awake],
     EroHookTag.condition_type.no,
@@ -113,12 +119,12 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
   ero_tagged_hooks[ero_actions.hit_anal_hard] = new EroHookTag(
     [ero_action_tags.super_sadism],
     [
-      (chara_id) => {
+      (cid) => {
         const last_action = era.get('tflag:前回行动');
         return (
           (last_action === ero_actions.hit_anal ||
             last_action === ero_actions.hit_anal_hard) &&
-          era.get(`tflag:前回对手`) === chara_id
+          era.get(`tflag:前回对手`) === cid
         );
       },
     ],
@@ -130,12 +136,12 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
     [ero_action_tags.super_sadism],
     [
       ero_action_tags.breast,
-      (chara_id) => {
+      (cid) => {
         const last_action = era.get('tflag:前回行动');
         return (
           (last_action === ero_actions.hit_breast ||
             last_action === ero_actions.hit_breast_hard) &&
-          era.get(`tflag:前回对手`) === chara_id
+          era.get(`tflag:前回对手`) === cid
         );
       },
     ],
@@ -146,12 +152,12 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
   ero_tagged_hooks[ero_actions.hit_face_hard] = new EroHookTag(
     [ero_action_tags.super_sadism],
     [
-      (chara_id) => {
+      (cid) => {
         const last_action = era.get('tflag:前回行动');
         return (
           (last_action === ero_actions.hit_face ||
             last_action === ero_actions.hit_face_hard) &&
-          era.get(`tflag:前回对手`) === chara_id
+          era.get(`tflag:前回对手`) === cid
         );
       },
     ],

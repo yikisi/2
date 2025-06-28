@@ -4,6 +4,7 @@ const {
   get_penis_size,
   get_pregnant_ratio,
 } = require('#/system/ero/sys-calc-ero-status');
+const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
 const {
   get_filled_exp_str,
@@ -20,7 +21,9 @@ const {
   hair_desc,
   pregnant_stage_enum,
   pregnant_stage_names,
+  unexpected_pregnant_enum,
 } = require('#/data/ero/status-const');
+const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { growth_info, unknown_info } = require('#/data/exp-const');
 
 const page_name = '肉体情报【女阴】';
@@ -256,8 +259,9 @@ module.exports = {
     }
     push_link_break(virgin_exp_list);
 
-    const pregnant_stage = era.get(`cflag:${chara.id}:妊娠阶段`),
-      pregnant_timer = era.get(`cflag:${chara.id}:妊娠回合计时`);
+    const pregnant_stage = era.get(`cflag:${chara.id}:妊娠阶段`);
+    const pregnant_timer = era.get(`cflag:${chara.id}:妊娠回合计时`);
+    let is_preg = false;
     let pregnant_buffer = '';
     if (flags.in_growth) {
       pregnant_buffer = '初潮还没有来';
@@ -273,7 +277,7 @@ module.exports = {
       (pregnant_timer < 4 && flags.true_mark_level <= 2)
     ) {
       if (
-        chara.id &&
+        chara.id > 0 &&
         flags.mark_level >= 2 &&
         era.get(`exp:${chara.id}:生产次数`) >= baby_limit
       ) {
@@ -302,6 +306,7 @@ module.exports = {
         ).toFixed(2)}%)`;
       }
     } else {
+      is_preg = true;
       if (flags.mark_level >= 2) {
         pregnant_buffer = pregnant_stage_names[pregnant_stage];
       } else if (pregnant_stage >> pregnant_stage_enum.fetal > 0) {
@@ -315,6 +320,18 @@ module.exports = {
       }
     }
     virgin_exp_list.push(pregnant_buffer);
+    const life_marks = LifeEventMarks.get_marks(chara.id);
+    if (
+      is_preg &&
+      life_marks.unexpected_pregnant !==
+        unexpected_pregnant_enum.mother_sleep &&
+      (flags.true_mark_level === 3 || !life_marks.report)
+    ) {
+      virgin_exp_list.push([
+        '孩子的父亲确认为是 ',
+        sys_get_colored_callname(chara.id, life_marks.sperm),
+      ]);
+    }
 
     remove_end_line_breaks(virgin_exp_list);
     return {
