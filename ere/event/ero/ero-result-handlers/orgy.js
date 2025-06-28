@@ -1,7 +1,10 @@
 const era = require('#/era-electron');
 
 const sys_do_sex = require('#/system/ero/sys-calc-ero');
-const { get_nipple_buff } = require('#/system/ero/sys-calc-ero-status');
+const {
+  get_nipple_buff,
+  get_penis_size,
+} = require('#/system/ero/sys-calc-ero-status');
 const { add_juel } = require('#/system/ero/sys-calc-juel');
 
 const set_motion = require('#/event/ero/snippets/set-motion');
@@ -12,6 +15,7 @@ const {
   motion_enum,
   part_enum,
   towards_enum,
+  up_enum,
 } = require('#/data/ero/part-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 
@@ -24,6 +28,9 @@ function set_ask_towards(attacker, defender, supporter) {
   era.set(`tcvar:${attacker}:朝向`, towards_enum.left);
   era.set(`tcvar:${defender}:朝向`, towards_enum.right);
   era.set(`tcvar:${supporter}:朝向`, towards_enum.right);
+  era.set(`tcvar:${attacker}:上下`, up_enum.down);
+  era.set(`tcvar:${defender}:上下`, up_enum.up);
+  era.set(`tcvar:${supporter}:上下`, up_enum.up);
 }
 
 /**
@@ -35,6 +42,9 @@ function set_towards(attacker, defender, supporter) {
   era.set(`tcvar:${attacker}:朝向`, towards_enum.left);
   era.set(`tcvar:${defender}:朝向`, towards_enum.right);
   era.set(`tcvar:${supporter}:朝向`, towards_enum.left);
+  era.set(`tcvar:${attacker}:上下`, up_enum.up);
+  era.set(`tcvar:${defender}:上下`, up_enum.down);
+  era.set(`tcvar:${supporter}:上下`, up_enum.up);
 }
 
 /**
@@ -99,6 +109,9 @@ function set_69(attacker, defender, supporter) {
   era.set(`tcvar:${attacker}:朝向`, towards_enum.left);
   era.set(`tcvar:${defender}:朝向`, towards_enum.right);
   era.set(`tcvar:${supporter}:朝向`, towards_enum.right);
+  era.set(`tcvar:${attacker}:上下`, 2);
+  era.set(`tcvar:${defender}:上下`, 0);
+  era.set(`tcvar:${supporter}:上下`, 1);
 }
 
 /** @param {Record<string,function(number,number,HookArg,{supporter:number})>} handlers */
@@ -184,9 +197,7 @@ module.exports = (handlers) => {
     era.set(`tcvar:${attacker}:体位`, motion_enum.sit);
     era.set(`tcvar:${defender}:体位`, motion_enum.rev);
     era.set(`tcvar:${supporter}:体位`, motion_enum.rev);
-    era.set(`tcvar:${attacker}:朝向`, towards_enum.left);
-    era.set(`tcvar:${defender}:朝向`, towards_enum.right);
-    era.set(`tcvar:${supporter}:朝向`, towards_enum.right);
+    set_ask_towards(attacker, defender, supporter);
   };
 
   handlers[ero_hooks.double_blow_job] = (
@@ -210,9 +221,7 @@ module.exports = (handlers) => {
     era.set(`tcvar:${attacker}:体位`, motion_enum.lie);
     era.set(`tcvar:${defender}:体位`, motion_enum.sit);
     era.set(`tcvar:${supporter}:体位`, motion_enum.lie);
-    era.set(`tcvar:${attacker}:朝向`, towards_enum.left);
-    era.set(`tcvar:${defender}:朝向`, towards_enum.right);
-    era.set(`tcvar:${supporter}:朝向`, towards_enum.left);
+    set_towards(attacker, defender, supporter);
   };
 
   handlers[ero_hooks.ask_double_cunnilingus] = (
@@ -295,11 +304,7 @@ module.exports = (handlers) => {
       new EroParticipant(extra_flag.supporter, part_enum.mouth),
       new EroParticipant(
         defender,
-        era.get(`talent:${defender}:阴道尺寸`) > 0 &&
-        !era.get(`status:${defender}:弗隆K`) &&
-        !era.get(`status:${defender}:弗隆P`)
-          ? part_enum.clitoris
-          : part_enum.virgin,
+        get_penis_size(defender) > 0 ? part_enum.virgin : part_enum.clitoris,
       ),
     );
     set_double_lie(attacker, defender, extra_flag.supporter);
@@ -375,11 +380,7 @@ module.exports = (handlers) => {
       new EroParticipant(supporter, part_enum.mouth),
       new EroParticipant(
         defender,
-        era.get(`cflag:${defender}:阴茎尺寸`) > 0 ||
-        era.get(`status:${defender}:弗隆K`) > 0 ||
-        era.get(`status:${defender}:弗隆P`) > 0
-          ? part_enum.penis
-          : part_enum.clitoris,
+        get_penis_size(defender) > 0 ? part_enum.penis : part_enum.clitoris,
       ),
     );
     sys_do_sex(
@@ -431,6 +432,9 @@ module.exports = (handlers) => {
     era.set(`tcvar:${attacker}:朝向`, towards_enum.left);
     era.set(`tcvar:${defender}:朝向`, towards_enum.right);
     era.set(`tcvar:${supporter}:朝向`, towards_enum.left);
+    era.set(`tcvar:${attacker}:上下`, 1);
+    era.set(`tcvar:${defender}:上下`, 2);
+    era.set(`tcvar:${supporter}:上下`, 0);
   };
 
   handlers[ero_hooks.ask_spit_roast] = (
@@ -506,6 +510,9 @@ module.exports = (handlers) => {
     era.set(`tcvar:${attacker}:朝向`, towards_enum.left);
     era.set(`tcvar:${defender}:朝向`, towards_enum.right);
     era.set(`tcvar:${supporter}:朝向`, towards_enum.right);
+    era.set(`tcvar:${attacker}:上下`, 2);
+    era.set(`tcvar:${defender}:上下`, 1);
+    era.set(`tcvar:${supporter}:上下`, 0);
   };
 
   handlers[ero_hooks.spit_roast] = (attacker, defender, _, extra_flag) => {
