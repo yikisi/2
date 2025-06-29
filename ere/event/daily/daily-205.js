@@ -308,8 +308,8 @@ module.exports = class extends CustomizedDaily {
   }
 
   async basement_end() {
-    const me = get_chara_talk(0),
-      vp = get_chara_talk(205);
+    const me = get_chara_talk(0);
+    const vp = get_chara_talk(205);
     await era.printAndWait('某一天，在巴黎的街道上。');
     await vp.say_and_wait(`${sys_get_callname(205, 0)}！`);
     await era.printAndWait(
