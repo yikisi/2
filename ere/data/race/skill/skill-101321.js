@@ -42,7 +42,7 @@ module.exports = new UmaSkill(
   ],
   [
     [
-      UmaSkill.ability_usage_enum.Love,
+      UmaSkill.ability_usage_enum.MultiplyLove,
       UmaSkill.ability_usage_enum.Direct,
       UmaSkill.ability_usage_enum.Direct,
     ],

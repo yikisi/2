@@ -29,9 +29,9 @@ async function page_clinic() {
     vehicle ? `${vehicle_verbs[vehicle]}着${vehicle_names[vehicle]}` : '',
     '抵达了保健室】',
   ]);
-  const celebration = get_celebration(),
-    chara = get_chara_talk(loc_characters.get(location_enum.clinic)[0]),
-    title = CharaTitles.get(chara.id).get_colored_curr_title();
+  const celebration = get_celebration();
+  const chara = get_chara_talk(loc_characters.get(location_enum.clinic)[0]);
+  const title = CharaTitles.get(chara.id).get_colored_curr_title();
   while (flag_page) {
     const temp = await npc_common(
       chara,

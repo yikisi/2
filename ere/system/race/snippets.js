@@ -3,6 +3,7 @@ const { get, logger } = require('#/era-electron');
 const { get_random_value } = require('#/utils/value-utils');
 
 const recruit_flags = require('#/data/event/recruit-flags');
+const { get_trainer_level } = require('#/data/info-generator');
 const { ability_usage_enum } = require('#/data/race/model/uma-skill');
 const { frame_rate } = require('#/data/race/race-sim-const');
 const { skills_dict } = require('#/data/race/skill/skill-const');
@@ -330,6 +331,7 @@ module.exports = {
    * @param {PseudoUma} uma
    */
   simulate_ability_usage(skill, i, j, uma) {
+    const cid = uma.index_chara;
     let temp;
     switch (skill.data.ability_value_usages[i][j]) {
       case ability_usage_enum.MultiplySkillNum:
@@ -439,14 +441,16 @@ module.exports = {
         break;
       case ability_usage_enum.MultiplyFanCount:
       case ability_usage_enum.MultiplyFanCount2:
-        skill.values[i][j] =
-          (1 +
-            uma.base.fame *
+        skill.values[i][j] = skill.data.ability_values[i][j];
+        if (get(`cflag:${cid}:招募状态`) === recruit_flags.yes) {
+          skill.values[i][j] *=
+            1 +
+            get_trainer_level() *
               (0.05 +
                 0.01 *
                   (skill.data.ability_value_usages[i][j] -
-                    ability_usage_enum.MultiplyFanCount))) *
-          skill.data.ability_values[i][j];
+                    ability_usage_enum.MultiplyFanCount));
+        }
         break;
       case ability_usage_enum.MultiplyMaximumRawStatus:
         temp = Math.max(...uma.attrs);
@@ -479,8 +483,11 @@ module.exports = {
         break;
       case ability_usage_enum.MultiplyCookingPt:
         skill.values[i][j] = skill.data.ability_values[i][j];
-        if (uma.base.weight < 4000) {
-          skill.values[i][j] *= 1 + ((4000 - uma.base.weight) * 0.2) / 4000;
+        if (get(`cflag:${cid}:招募状态`) === recruit_flags.yes) {
+          const weight = get(`base:${cid}:体重偏差`);
+          if (weight < 4000) {
+            skill.values[i][j] *= 1 + ((4000 - weight) * 0.2) / 4000;
+          }
         }
         break;
       case ability_usage_enum.MultiplyResearchLv:
@@ -491,16 +498,35 @@ module.exports = {
           skill.values[i][j] *= 1.1;
         }
         break;
-      case ability_usage_enum.Love:
+      case ability_usage_enum.MultiplyLove:
         skill.values[i][j] = skill.data.ability_values[i][j];
-        if (get(`cflag:${uma.index_chara}:招募状态`) === recruit_flags.yes) {
-          temp = get(`love:${uma.index_chara}`);
+        if (get(`cflag:${cid}:招募状态`) === recruit_flags.yes && cid > 0) {
+          temp = get(`love:${cid}`);
           if (temp >= 90) {
             skill.values[i][j] *= 4;
           } else if (temp >= 75) {
             skill.values[i][j] *= 3;
           } else if (temp >= 50) {
             skill.values[i][j] *= 2;
+          }
+        }
+        break;
+      case ability_usage_enum.MultiplyIsland:
+        skill.values[i][j] = skill.data.ability_values[i][j];
+        if (get(`cflag:${cid}:招募状态`) === recruit_flags.yes) {
+          const money = get('flag:当前马币');
+          if (money >= 100000) {
+            skill.values[i] += 0.15;
+          } else if (money >= 10000) {
+            skill.values[i] += 0.125;
+          } else if (money >= 5000) {
+            skill.values[i] += 0.1;
+          } else if (money >= 2000) {
+            skill.values[i] += 0.075;
+          } else if (money >= 1000) {
+            skill.values[i] += 0.05;
+          } else if (money >= 500) {
+            skill.values[i] += 0.025;
           }
         }
         break;

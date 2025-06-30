@@ -509,14 +509,16 @@ async function check_new_activities(cur_round, in_team_list) {
       ),
     );
 
-  if (
-    sys_check_npc_working(345) &&
-    (era.get('cflag:345:招募状态') === recruit_flags.yes ||
-      era.get('love:345') >= 30 ||
-      Math.random() < 0.5)
-  ) {
-    loc_characters.get(location_enum.visitor).push(345);
-  }
+  [345, 349].forEach((cid) => {
+    if (
+      sys_check_npc_working(cid) &&
+      (era.get(`cflag:${cid}:招募状态`) === recruit_flags.yes ||
+        era.get(`love:${cid}`) >= 30 ||
+        Math.random() < 0.5)
+    ) {
+      loc_characters.get(location_enum.visitor).push(cid);
+    }
+  });
   loc_characters.set(
     location_enum.visitor,
     sort_list(loc_characters.get(location_enum.visitor), (e) => e, true),

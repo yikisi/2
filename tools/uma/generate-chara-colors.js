@@ -4,21 +4,27 @@ const { join } = require('path');
 
 const uma_colors = require('../../common/uma/uma-colors.json');
 
+uma_colors[7] = [uma_colors[7], '#ffff00'];
+uma_colors[17] = [uma_colors[17], '#ff755e'];
+uma_colors[34] = [uma_colors[34], '#dda0dd'];
+uma_colors[38] = [uma_colors[38], '#ff68bc'];
+uma_colors[52] = [uma_colors[52], '#ff6d9f'];
+
 writeFileSync(
   join(__dirname, '../../ere/data/chara-colors.js'),
   `const chara_colors = ${JSON.stringify(uma_colors)};
-  
+
 module.exports = {
   chara_colors,
-  /** @param {number} chara_id */
-  get_chara_color(chara_id) {
-    if (chara_id === undefined) {
+  /** @param {number} [cid] */
+  get_chara_color(cid) {
+    if (cid === undefined) {
       return '#9f9f9f';
     }
-    let ret = chara_colors[chara_id];
+    let ret = chara_colors[cid];
     ret = ret instanceof Array ? ret[0] : ret;
     if (!ret) {
-      const id_color = chara_id.toString(9).padStart(3, '0');
+      const id_color = cid.toString(9).padStart(3, '0');
       ret = \`#\${[id_color[0], id_color[1], id_color[2]]
     .map((e) => (0xff - Number(e) * 16).toString(16).padStart(2, '0'))
     .join('')}\`;

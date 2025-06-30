@@ -25,8 +25,7 @@ cons_dict[301] = require('#/event/init/init-301');
 cons_dict[302] = require('#/event/init/init-302');
 cons_dict[308] = require('#/event/init/init-308');
 cons_dict[343] = require('#/event/init/init-343');
-cons_dict[344] = require('#/event/init/init-344');
-cons_dict[345] = require('#/event/init/init-345');
+cons_dict[349] = require('#/event/init/init-349');
 
 console.log(
   '[init-factory.js] constructor dictionary init done!',

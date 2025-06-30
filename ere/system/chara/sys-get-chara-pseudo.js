@@ -11,7 +11,6 @@ const CharaSkills = require('#/data/chara-skills');
 const CharaInmon = require('#/data/ero/chara-inmon');
 const { lust_border } = require('#/data/ero/orgasm-const');
 const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
-const { get_trainer_level } = require('#/data/info-generator');
 const PseudoUma = require('#/data/race/model/pseudo-uma');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_infos } = require('#/data/race/race-const');
@@ -117,12 +116,10 @@ function sys_get_chara_pseudo(cid) {
   }
   temp = uma.attrs.reduce((p, c) => p + c, 0) / 5;
   uma.base.attr_err = uma.attrs.reduce((p, c) => p + (c - temp) ** 2, 0) / 5;
-  uma.base.weight = era.get(`base:${cid}:体重偏差`);
   uma.base.research_lv = attr_names.reduce(
     (p, c) => p + era.get(`abl:${cid}:${c}训练等级`),
     0,
   );
-  uma.base.fame = get_trainer_level();
 
   // 带玩具比赛
   uma.ero.main = [];

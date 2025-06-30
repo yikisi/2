@@ -147,7 +147,8 @@ const ability_usage_enum = {
   MultiplyUAFWins: 26,
   MultiplyCookingPt: 27,
   MultiplyResearchLv: 28,
-  Love: 30,
+  MultiplyLove: 30,
+  MultiplyIsland: 31,
 };
 
 const target_type_enum = {

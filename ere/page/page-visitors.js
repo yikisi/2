@@ -34,43 +34,45 @@ const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
 /** @type {Record<string,function(CharaTalk,CharaTalk):{[handle]:function:Promise,[name]:string}>} */
 const handlers = {};
 
-[204, 346, 347, 348].forEach(
-  (e) =>
-    (handlers[e] = () =>
-      get(`cflag:${e}:招募状态`) !== recruit_flags.yes
-        ? {
-            name: '「请来帮助我吧！」（招募）',
-            handle() {
-              set(`cflag:${e}:招募状态`, recruit_flags.yes);
-              if (get(`talent:${e}:病娇`) > 0) {
-                yandere_list.push(e);
-              }
-              return printAndWait([
-                get_chara_talk(e).get_colored_name(),
-                ' 加入了队伍！',
-              ]);
-            },
-          }
-        : {}),
-);
+[204, 346, 347, 348].forEach((cid) => {
+  handlers[cid] = () =>
+    get(`cflag:${cid}:招募状态`) !== recruit_flags.yes
+      ? {
+          name: '「请来帮助我吧！」（招募）',
+          handle() {
+            set(`cflag:${cid}:招募状态`, recruit_flags.yes);
+            if (get(`talent:${cid}:病娇`) > 0) {
+              yandere_list.push(cid);
+            }
+            return printAndWait([
+              get_chara_talk(cid).get_colored_name(),
+              ' 加入了队伍！',
+            ]);
+          },
+        }
+      : {};
+});
 
-handlers[207] = () =>
-  get('cflag:207:招募状态') !== recruit_flags.yes && get('love:207') >= 40
-    ? {
-        name: '「一起努力吧！」（招募）',
-        handle() {
-          set('callname:207:-2', '索侬艾尔菲');
-          set('cflag:207:招募状态', recruit_flags.yes);
-          if (get('talent:207:病娇')) {
-            yandere_list.push(207);
-          }
-          return printAndWait([
-            get_chara_talk(207).get_colored_name(),
-            ' 加入了队伍！',
-          ]);
-        },
-      }
-    : {};
+[207, 308, 345, 349].forEach((cid) => {
+  handlers[cid] = () =>
+    get(`cflag:${cid}:招募状态`) !== recruit_flags.yes &&
+    get(`love:${cid}`) >= 40
+      ? {
+          name: '「一起努力吧！」（招募）',
+          handle() {
+            set(`callname:${cid}:-2`, get(`callname:${cid}:-1`));
+            set(`cflag:${cid}:招募状态`, recruit_flags.yes);
+            if (get(`talent:${cid}:病娇`) > 0) {
+              yandere_list.push(cid);
+            }
+            return printAndWait([
+              get_chara_talk(cid).get_colored_name(),
+              ' 加入了队伍！',
+            ]);
+          },
+        }
+      : {};
+});
 
 handlers[303] = () =>
   get('cflag:303:招募状态') !== recruit_flags.yes
@@ -78,24 +80,6 @@ handlers[303] = () =>
         name: '给予更多许可（招募）',
         handle() {
           return run_custom_rec(303, event_hooks.recruit);
-        },
-      }
-    : {};
-
-handlers[308] = () =>
-  get('cflag:308:招募状态') !== recruit_flags.yes && get('love:308') >= 40
-    ? {
-        name: '「一起努力吧！」（招募）',
-        handle() {
-          set('callname:308:-2', '光辉致意');
-          set('cflag:308:招募状态', recruit_flags.yes);
-          if (get('talent:308:病娇')) {
-            yandere_list.push(308);
-          }
-          return printAndWait([
-            get_chara_talk(308).get_colored_name(),
-            ' 加入了队伍！',
-          ]);
         },
       }
     : {};
@@ -120,7 +104,7 @@ handlers[343] = () =>
     : {};
 
 handlers[344] = () =>
-  get('cflag:344:招募状态') !== recruit_flags.yes && get('love:344') >= 40
+  get('cflag:344:招募状态') !== recruit_flags.yes && get('love:344') >= 25
     ? {
         name: '「一起努力吧！」（招募）',
         handle() {
@@ -128,24 +112,6 @@ handlers[344] = () =>
           set('cflag:344:招募状态', recruit_flags.yes);
           return printAndWait([
             get_chara_talk(344).get_colored_name(),
-            ' 加入了队伍！',
-          ]);
-        },
-      }
-    : {};
-
-handlers[345] = () =>
-  get('cflag:345:招募状态') !== recruit_flags.yes && get('love:345') >= 40
-    ? {
-        name: '「一起努力吧！」（招募）',
-        handle() {
-          set('callname:345:-2', '砂糖灯');
-          set('cflag:345:招募状态', recruit_flags.yes);
-          if (get('talent:345:病娇')) {
-            yandere_list.push(345);
-          }
-          return printAndWait([
-            get_chara_talk(345).get_colored_name(),
             ' 加入了队伍！',
           ]);
         },
@@ -196,10 +162,10 @@ async function page_visitors() {
         [{ accelerator: 999, type: 'button', content: '离开' }],
       );
       setHorizontalAlign('start');
-      const chara_id = await input();
-      if (chara_id !== 999) {
-        const chara = get_chara_talk(chara_id),
-          title = CharaTitles.get(chara.id).get_curr_title();
+      const cid = await input();
+      if (cid !== 999) {
+        const chara = get_chara_talk(cid);
+        const title = CharaTitles.get(chara.id).get_curr_title();
         flag_visitor = true;
         while (flag_visitor) {
           const temp_flag = await npc_common(
@@ -224,7 +190,7 @@ async function page_visitors() {
             {
               name: `庆祝 ${celebration}`,
             },
-            handlers[chara_id](chara, me),
+            handlers[cid](chara, me),
             { name: '再见' },
           );
           if ((flag_visitor &&= temp_flag)) {

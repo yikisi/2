@@ -127,8 +127,6 @@ class PseudoUma {
     // 五项属性方差
     attr_err: 0,
     change_order_finalcorner: 0,
-    // 训练员声望
-    fame: 0,
     // 发动绿技能个数
     greenCount: 0,
     // 比赛地语言等级
@@ -141,8 +139,6 @@ class PseudoUma {
     velocityIdeal: 0,
     velocityMaxRush: 0,
     velocityMin: 0,
-    // 体重
-    weight: 4000,
     // 训练等级和
     research_lv: 0,
     // 胜场数
