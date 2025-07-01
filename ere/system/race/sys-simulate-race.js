@@ -397,9 +397,9 @@ function sys_sim_race(list_chara, info, race_id, shown = true) {
         uma.rank.curr = finished_count + i + 1;
         uma.race.conditionParams.bashin_diff_infront =
           (i === 0 ? 50 : l[i - 1].race.location - uma.race.location) / 2.5;
-        uma.race.conditionParams.blocked_front = Number(
+        uma.race.conditionParams.blocked_front = +(
           uma.race.conditionParams.bashin_diff_infront < 0.8 &&
-            uma.race.velocityReal > l[i - 1].race.velocityReal,
+          uma.race.velocityReal > l[i - 1].race.velocityReal
         );
         uma.race.conditionParams.bashin_diff_behind =
           (i === l.length - 1
@@ -718,11 +718,8 @@ function sys_sim_race(list_chara, info, race_id, shown = true) {
       } else {
         uma.race.loc_mind = 0;
       }
-      const strength_coff =
-        uma.race.location >= info.phases[2]
-          ? get_random_value(0.9, 1, true)
-          : get_random_value(0.7, 0.8, true);
       // 阻挡计算
+      const strength_coff = get_random_value(0.9349, 0.9354, true);
       const block_percent =
         uma.race.location >= 150 &&
         uma.race.conditionParams.blocked_front > 0 &&
