@@ -906,8 +906,8 @@ class CustomizedDaily {
   /** @param {HookArg} hook */
   // eslint-disable-next-line no-unused-vars
   async birthday(hook) {
-    const chara = get_chara_talk(this.id),
-      me = get_chara_talk(0);
+    const chara = get_chara_talk(this.id);
+    const me = get_chara_talk(0);
     if (sys_check_remote(this.id)) {
       await era.printAndWait([
         me.get_colored_name(),

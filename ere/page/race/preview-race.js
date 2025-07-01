@@ -360,7 +360,7 @@ async function preview_race(
             accelerator: 120,
             config: {
               align: 'center',
-              disabed: item_chara.length === 0,
+              disabled: item_chara.length === 0,
               width: 8,
             },
             content: '使用玩具',
