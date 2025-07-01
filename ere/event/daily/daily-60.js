@@ -7,6 +7,7 @@ const era = require('#/era-electron');
 const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
 const {
   sys_get_callname,
+  sys_get_colored_callname,
   sys_like_chara,
 } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
@@ -323,9 +324,9 @@ module.exports = class extends CustomizedDaily {
   }
 
   async out_shopping(hook) {
-    const callname = sys_get_callname(60, 0),
-      chara_self_name = sys_get_callname(60, 60),
-      chara_talk = get_chara_talk(60);
+    const callname = sys_get_callname(60, 0);
+    const chara_self_name = sys_get_callname(60, 60);
+    const chara_talk = get_chara_talk(60);
     const temp = await select_action_in_shopping_street();
     hook.arg = temp <= 1;
     switch (temp) {
@@ -540,46 +541,37 @@ module.exports = class extends CustomizedDaily {
   }
 
   async load_talk() {
-    const nice_nature = get_chara_talk(60);
+    const nice_nature = get_chara_talk(this.id);
     if (
       era.get('cflag:60:妊娠阶段') >> pregnant_stage_enum.embryo &&
-      !LifeEventMarks.get_marks(60).report
+      !LifeEventMarks.get_marks(this.id).report
     ) {
-      await nice_nature.say_and_wait(
-        `啊哈，是吗，果然内恰小姐还是……但是等等，不行，${sys_get_callname(
-          60,
-          0,
-        )}，我们的孩子，至少，至少给我们的孩子一个名字吧……`,
-      );
+      const callname = sys_get_colored_callname(this.id, 0);
+      await nice_nature.say_and_wait([
+        '啊哈，是吗，果然内恰小姐还是……但是等等，不行，',
+        callname,
+        '，我们的孩子，至少，至少给我们的孩子一个名字吧……',
+      ]);
       await nice_nature.say_and_wait(
         '这孩子没有爸爸也无所谓，我能一个人养大，但至少，求求你，一个名字……',
       );
-      await nice_nature.say_and_wait(
-        `『花月自然』？『优雅素质』？类似的，名字，这是内恰小姐麻烦你的最后一件事，${sys_get_callname(
-          60,
-          0,
-        )}，给我一个名字吧……`,
-      );
+      await nice_nature.say_and_wait([
+        '『花月自然』？『优雅素质』？类似的，名字，这是内恰小姐麻烦你的最后一件事，',
+        callname,
+        '，给我一个名字吧……',
+      ]);
       await era.printAndWait(
-        [
-          nice_nature.get_colored_name(),
-          {
-            color: nice_nature.color,
-            content: `「${sys_get_callname(60, 0)}————！！」`,
-          },
-        ],
-        { fontSize: '3rem' },
+        [nice_nature.get_colored_name(), '「', callname, '————！！」'],
+        { color: nice_nature.color, fontSize: '3rem' },
       );
     } else {
-      await nice_nature.say_and_wait(
-        `如果是 ${sys_get_callname(
-          60,
-          0,
-        )} 的话，一定能找到更好的路线吧……${sys_get_callname(
-          60,
-          60,
-        )} 相信着你哦？不管是现在还是之前，亦或是未来……`,
-      );
+      await nice_nature.say_and_wait([
+        '如果是 ',
+        sys_get_colored_callname(this.id, 0),
+        ' 的话，一定能找到更好的路线吧……',
+        sys_get_callname(this.id, this.id),
+        ' 相信着你哦？不管是现在还是之前，亦或是未来……',
+      ]);
     }
   }
 };

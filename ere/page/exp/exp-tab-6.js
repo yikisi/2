@@ -25,6 +25,7 @@ const {
 } = require('#/data/ero/status-const');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { growth_info, unknown_info } = require('#/data/exp-const');
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const page_name = '肉体情报【女阴】';
 
@@ -321,16 +322,31 @@ module.exports = {
     }
     virgin_exp_list.push(pregnant_buffer);
     const life_marks = LifeEventMarks.get_marks(chara.id);
-    if (
-      is_preg &&
-      life_marks.unexpected_pregnant !==
-        unexpected_pregnant_enum.mother_sleep &&
-      (flags.true_mark_level === 3 || !life_marks.report)
-    ) {
-      virgin_exp_list.push([
-        '孩子的父亲确认为是 ',
-        sys_get_colored_callname(chara.id, life_marks.sperm),
-      ]);
+    if (is_preg) {
+      if (
+        life_marks.unexpected_pregnant !== unexpected_pregnant_enum.mother_sleep
+      ) {
+        if (flags.true_mark_level === 3 || !life_marks.report) {
+          virgin_exp_list.push([
+            '孩子的父亲确认为是 ',
+            sys_get_colored_callname(chara.id, life_marks.sperm),
+          ]);
+        }
+      } else if (chara.id > 0) {
+        const me = get_chara_talk(0);
+        virgin_exp_list.push([
+          me.get_colored_name(),
+          ' 知道 ',
+          chara.get_colored_name(),
+          ' 腹中孩子的父亲是 ',
+          me.get_colored_name(),
+        ]);
+      } else if (life_marks.report === -1) {
+        virgin_exp_list.push([
+          '孩子的父亲确认为是 ',
+          sys_get_colored_callname(chara.id, life_marks.sperm),
+        ]);
+      }
     }
 
     remove_end_line_breaks(virgin_exp_list);

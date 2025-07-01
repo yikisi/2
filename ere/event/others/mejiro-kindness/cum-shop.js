@@ -16,8 +16,10 @@ const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const {
   penis_desc,
   skin_desc,
+  unexpected_pregnant_enum,
   vp_status_enum,
 } = require('#/data/ero/status-const');
+const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const extra_base = require('#/data/extra-base');
 const { get_breast_cup, get_hair_color } = require('#/data/info-generator');
 const { check_chara_ero_image } = require('#/data/other-const');
@@ -464,15 +466,15 @@ async function cum_shop(chara, me) {
         },
       },
       {
-        c: '「大药房」',
+        c: '「医院」',
         async h() {
           await say_by_waiter_and_wait(
-            '这里是目白城大药房！头寒脑热、腰酸背痛、手震心疼、腿颤脚麻，我们全都——',
+            '这里是目白城医院！头寒脑热、腰酸背痛、手震心疼、腿颤脚麻，我们全都——',
           );
           await say_by_waiter_and_wait('……不包治哦……');
           await say_by_waiter_and_wait('开个玩笑啦，有什么可以帮您的？');
-          await say_by_waiter_and_wait('所有药膏都是一周后见效～');
           const lines = era.getLineCount();
+          const life_marks = LifeEventMarks.get_marks(0);
           let _flag = true;
           while (_flag) {
             await era.clear(era.getLineCount() - lines);
@@ -503,10 +505,18 @@ async function cum_shop(chara, me) {
               2,
               { disabled: extra_base.time === 1000 },
             );
+            if (
+              life_marks.unexpected_pregnant ===
+                unexpected_pregnant_enum.mother_sleep &&
+              !life_marks.report
+            ) {
+              era.printButton('B超（-10「恩宠」）', 3);
+            }
             era.printButton('离开', 99);
             switch (await era.input()) {
               case 1:
                 await say_by_waiter_and_wait('好的，「大力丸」一份～');
+                await say_by_waiter_and_wait('一周后见效哦～');
                 money = era.add(
                   'item:「恩宠」',
                   -(extra_base.stamina / 10 + 10),
@@ -515,8 +525,27 @@ async function cum_shop(chara, me) {
                 break;
               case 2:
                 await say_by_waiter_and_wait('好的，「醒神膏」一份～');
+                await say_by_waiter_and_wait('一周后见效哦～');
                 money = era.add('item:「恩宠」', -(extra_base.time / 10 + 10));
                 extra_base.time += 50;
+                break;
+              case 3:
+                await say_by_waiter_and_wait(
+                  '恭喜恭喜，我们来看看孩子的成长状态……',
+                );
+                await era.printAndWait(
+                  [
+                    '＜仪器的屏幕上显示出孩子的影像，',
+                    me.get_colored_name(),
+                    ' 莫名从黑白的画面中看到了 ',
+                    get_chara_talk(life_marks.sperm).get_colored_name(),
+                    ' 的脸＞',
+                  ],
+                  { isParagraph: true },
+                );
+                await say_by_waiter_and_wait('真可爱！有没有感觉长得像谁呢？');
+                life_marks.report = -1;
+                money = era.add('item:「恩宠」', 10);
                 break;
               default:
                 _flag = false;

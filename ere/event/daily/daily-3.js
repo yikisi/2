@@ -367,7 +367,7 @@ module.exports = class extends CustomizedDaily {
         !teio_marks.report) ||
       (my_marks.sperm === 3 &&
         era.get('cflag:0:妊娠阶段') !== 1 << pregnant_stage_enum.no &&
-        !my_marks.report) ||
+        my_marks.report !== 1) ||
       era.get('exp:3:生产次数') > 0 ||
       era.get('exp:3:孩子数量') > 0
     ) {

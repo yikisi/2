@@ -375,7 +375,7 @@ module.exports = {
       (era.get(`cflag:${cid}:妊娠阶段`) !== 1 << pregnant_stage_enum.no &&
         (era.get(`cflag:${cid}:妊娠回合计时`) ||
           (cid > 0 && era.get(`mark:${cid}:淫纹`) >= 2))) ||
-      era.get(`status:${cid}:经期`) ||
+      era.get(`status:${cid}:经期`) > 0 ||
       (oid >= 0 &&
         !era.get(`cflag:${oid}:性别`) &&
         !era.get(`status:${oid}:弗隆P`)) ||
@@ -390,13 +390,12 @@ module.exports = {
     // 生够了锁5%
     // 怀孕基础概率1%，排卵期+50%，发情期+25%，弗隆P+20%
     ratio = 0.05;
-
     if (!cid || era.get(`exp:${cid}:生产次数`) < baby_limit) {
       ratio +=
         0.5 * era.get(`status:${cid}:排卵期`) +
         0.25 * era.get(`status:${cid}:发情`) +
         0.1 * era.get(`status:${cid}:反避孕套`);
-      if (oid !== undefined) {
+      if (oid >= 0) {
         ratio += 0.2 * era.get(`status:${oid}:弗隆P`);
       }
     }

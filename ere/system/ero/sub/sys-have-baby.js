@@ -69,25 +69,25 @@ async function rename() {
   }
 }
 
-async function name_baby(child_id, father_id, mother_id) {
+/**
+ * @param {number} cid child id
+ * @param {number} fid father id
+ * @param {number} mid mother id
+ */
+async function name_baby(cid, fid, mid) {
   let ret, random_param;
-  // chara_id一定是母亲
   // 虽然不是很情愿，但是还是留一下吧，只有玩家是孩子父亲或者母亲的情况下才拥有命名决定权
-  if (mother_id > 0 && father_id > 0) {
+  if (mid > 0 && fid > 0) {
     // 如果和玩家没关系，直接用母亲来命名
-    random_param = mother_id;
+    random_param = mid;
   } else if (era.get('flag:惩戒力度') >= 2) {
     // 性奴和孕袋没有命名权
-    random_param = mother_id || father_id;
+    random_param = mid || fid;
   } else {
     if (
-      await select_yes_or_no(
-        '',
-        `让${mother_id ? '母亲' : '父亲'}起名`,
-        '亲自起名',
-      )
+      await select_yes_or_no('', `让${mid ? '母亲' : '父亲'}起名`, '亲自起名')
     ) {
-      random_param = mother_id || father_id;
+      random_param = mid || fid;
     } else {
       era.print('想给孩子起什么名字呢？');
       ret = await rename();
@@ -100,13 +100,13 @@ async function name_baby(child_id, father_id, mother_id) {
     era.print(`已经有名为 ${ret} 的角色！请重新输入：`);
     ret = await rename();
   } else if (
-    (!mother_id || !father_id) &&
+    (!mid || !fid) &&
     random_param > 0 &&
     ret.replace(/\d+$/, '').length !== ret.length &&
     (await select_yes_or_no([
-      get_chara_talk(mother_id).get_colored_name(),
+      get_chara_talk(mid).get_colored_name(),
       ' 的孩子起名为 ',
-      get_chara_talk(child_id).get_colored_name(),
+      get_chara_talk(cid).get_colored_name(),
       '……',
       { isBr: true },
       '要重新取名吗？',
@@ -114,11 +114,11 @@ async function name_baby(child_id, father_id, mother_id) {
   ) {
     ret = await rename();
   }
-  era.set(`callname:${child_id}:-2`, era.set(`callname:${child_id}:-1`, ret));
+  era.set(`callname:${cid}:-2`, era.set(`callname:${cid}:-1`, ret));
   await era.printAndWait([
-    get_chara_talk(mother_id).get_colored_name(),
+    get_chara_talk(mid).get_colored_name(),
     ' 的孩子最终起名为 ',
-    get_chara_talk(child_id).get_colored_name(),
+    get_chara_talk(cid).get_colored_name(),
     '！',
   ]);
 }
@@ -430,8 +430,8 @@ async function sys_have_baby(mother_id) {
   await name_baby(child_id, father_id, mother_id);
 
   get_custom_mec(child_id).set_callname();
-  const child = get_chara_talk(child_id),
-    child_callname = child.sex_code === 1 ? '长子' : '长女';
+  const child = get_chara_talk(child_id);
+  const child_callname = child.sex_code === 1 ? '长子' : '长女';
   if (!era.get(`cstr:${father_id}:长子女经历`)) {
     era.set(`cstr:${father_id}:长子女经历`, [
       `${child_callname} `,
@@ -454,6 +454,7 @@ async function sys_have_baby(mother_id) {
   const child_life_marks = LifeEventMarks.get_marks(child_id);
   child_life_marks.unexpected_child = mother_life_marks.unexpected_pregnant;
   mother_life_marks.unexpected_pregnant = 0;
+  mother_life_marks.report = 0;
 
   if (
     !father_id &&
