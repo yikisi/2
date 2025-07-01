@@ -37,9 +37,11 @@ module.exports = {
 try {
   process.stdout.write(
     execSync('npx eslint --fix ./ere/data/chara-colors.js', {
-      cwd: join(process.cwd(), '../..'),
+      cwd: join(__dirname, '../..'),
     }),
   );
 } catch (e) {
   process.stderr.write(e.stdout);
 }
+
+console.log('done!');

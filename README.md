@@ -1,13 +1,13 @@
 # EraUma
 
-EraUma 和 ERE 引擎（EraElectron、ere.app）将保持开源，请各位开发者以internal或private方式fork本项目，不要以public方式fork本项目，以避免不必要的麻烦！
+EraUma 和 ERE 引擎（EraElectron、ere.app）将保持开源，请各位开发者以 internal（所有 gitgud.io 登陆用户可见） 或 private（除项目成员外不可见） 方式 fork 本项目，不要以 public 方式 fork 本项目，以避免不必要的麻烦！
 
 [Release Notes](RELEASE.md)
 
 [Changelogs](CHANGELOG.md)
 
 ## LICENSE
-本项目采用GNU通用公共许可证2.0版本（GPLv2）许可。
+本项目采用GNU通用公共许可证 2.0 版本（GPLv2）许可。
 完整的许可证文本请参见 [LICENSE](LICENSE) 文件。
 
 ### 您可以：
