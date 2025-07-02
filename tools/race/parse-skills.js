@@ -633,11 +633,11 @@ async function chara_skill() {
   Object.values(dict).forEach((e) => e.forEach((s) => (skill_dict[s] = 1)));
   console.log('角色卡技能', Object.keys(skill_dict).length);
   let buffer =
-      '/** @type {Record<string,number[]>} */\nconst chara_skill_dict={};\n/** @type {Record<string,UmaSkill>} */\nconst skills_dict = {};\n\n',
-    buffer_common_skills = [
-      202051, 200791, 200801, 200811, 200821, 990011, 990021, 660011, 660012,
-      660021, 660022, 660031, 660032, 660041, 660042, 660051, 660052,
-    ];
+    '/** @type {Record<string,number[]>} */\nconst chara_skill_dict={};\n/** @type {Record<string,UmaSkill>} */\nconst skills_dict = {};\n\n';
+  let buffer_common_skills = [
+    202051, 200791, 200801, 200811, 200821, 990011, 990021, 660011, 660012,
+    660021, 660022, 660031, 660032, 660041, 660042, 660051, 660052,
+  ];
   for (const chara_id in dict) {
     buffer += `chara_skill_dict[${Number(chara_id) % 1000}] = [${dict[chara_id].join(',')}];`;
   }
@@ -873,7 +873,12 @@ async function chara_skill() {
   }
   writeFileSync(
     '../../ere/data/race/skill/skill-const.js',
-    `${buffer}\n\nconsole.log('[skill-const.js] skill list init done!',(new Date().getTime()-current).toLocaleString(),'ms')\n\nconst common_skills = [${buffer_common_skills.sort().join(',')}];\n\nmodule.exports = {chara_skill_dict,common_skills,skills_dict,skill_sets};`,
+    `${buffer}\n\nconsole.log('[skill-const.js] skill list init done!',(new Date().getTime()-current).toLocaleString(),'ms')\n\nconst common_skills = [${buffer_common_skills
+      .sort()
+      .filter((e, i, l) => i === l.indexOf(e))
+      .join(
+        ',',
+      )}];\n\nmodule.exports = {chara_skill_dict,common_skills,skills_dict,skill_sets};`,
   );
   buffer = 'class ConditionParams { ';
   c_dict['orgasm'] = c_dict['milk'] = c_dict['item'] = 1;
