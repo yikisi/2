@@ -124,6 +124,10 @@ module.exports = class extends CustomizedMec {
   is_race_disabled(race) {
     switch (new TamaEduMarks().lightning) {
       case 1:
+        return (
+          era.get(`cflag:${this.id}:育成次数`) === 0 &&
+          race_infos[race].race_class < class_enum.OP
+        );
       case 2:
         return race_infos[race].race_class < class_enum.OP;
       case 3:

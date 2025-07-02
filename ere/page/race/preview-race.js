@@ -265,8 +265,8 @@ async function preview_race(
             type: 'text',
           },
           { config: { content: '出走策略' }, type: 'divider' },
-          ...new Array(4).fill(0).map((_, i) => {
-            return team_list.indexOf(cur_chara) !== -1
+          ...new Array(4).fill(0).map((_, i) =>
+            team_list.indexOf(cur_chara) !== -1
               ? {
                   accelerator: 21 + i,
                   config: {
@@ -287,8 +287,8 @@ async function preview_race(
                   },
                   content: `${adaptability_names[6 + i].substring(0, 1)} ${strategy_ability[i]}`,
                   type: 'text',
-                };
-          }),
+                },
+          ),
           { config: { content: '习得技能' }, type: 'divider' },
           {
             config: { align: 'center' },
@@ -312,27 +312,25 @@ async function preview_race(
       {
         columns: [
           { type: 'divider' },
-          ...contestants.map((uma, i) => {
-            const id = uma.index_chara;
-            return {
-              accelerator: i + 1,
-              config: {
-                align: 'center',
-                buttonType: uma.legend
-                  ? 'danger'
-                  : team_list.indexOf(uma) !== -1
-                    ? 'success'
-                    : 'warning',
-                disabled: id === cur_chara.index_chara,
-                disableWarning: true,
-                width: 4,
-              },
-              content: `${uma.name} ${adaptability_names[
-                6 + uma.style
-              ].substring(0, 1)}`,
-              type: 'button',
-            };
-          }),
+          ...contestants.map((uma, i) => ({
+            accelerator: i + 1,
+            config: {
+              align: 'center',
+              buttonType: uma.legend
+                ? 'danger'
+                : team_list.indexOf(uma) !== -1
+                  ? 'success'
+                  : 'warning',
+              disabled: uma.index_chara === cur_chara.index_chara,
+              disableWarning: true,
+              width: 4,
+            },
+            content: `${uma.name} ${adaptability_names[6 + uma.style].substring(
+              0,
+              1,
+            )}`,
+            type: 'button',
+          })),
           {
             config: { align: 'center' },
             content: [

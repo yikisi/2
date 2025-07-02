@@ -230,7 +230,7 @@ class CallOfMejiro extends MejiroCity {
           '目光所及除了迷雾就是一对对疯狂做爱的情侣，他们的面容依稀有着你们的影子。',
         ]);
         await era.printAndWait(
-          '性爱的声音盖过了其他所有，呼吸的空气中满是淫水和汗水的臭味……',
+          '性爱的声音盖过了其他所有，呼吸的空气中满是淫臭……',
         );
         if (my_lust >= lust_border.want_sex) {
           await era.printAndWait([
@@ -310,7 +310,7 @@ class CallOfMejiro extends MejiroCity {
         ]);
         if (lust >= lust_border.absent_mind) {
           era.print(
-            '周围是成双成对疯狂做爱的人群，放肆的呻吟、肉体碰撞的声音和喷溅的水声充斥着整片空间。',
+            '周围是成双成对纵欲狂欢的人群，放肆的呻吟、肉体碰撞的声音和喷溅的水声充斥着整片空间。',
           );
         } else if (lust >= lust_border.itch) {
           era.print(
@@ -418,6 +418,14 @@ class CallOfMejiro extends MejiroCity {
               era.add('base:0:性欲', get_random_value(100, 500));
               sys_change_attr_and_print(0, '体力', get_random_value(25, 75));
               await events.avg_event(progress, lust);
+            },
+          },
+          {
+            a: 301,
+            c: '放弃抵抗（性欲++，体力+）',
+            async h() {
+              era.set('base:0:性欲', lust_border.want_sex);
+              era.set(`base:${chara.id}:性欲`, lust_border.want_sex);
             },
           },
         ];
