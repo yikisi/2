@@ -493,6 +493,18 @@ module.exports = {
   sys_change_motion_by_base: change_motion_by_base,
   sys_check_distance: check_distance,
   /**
+   * @param {number} a
+   * @param {number} d
+   * @retuns {number}
+   */
+  sys_get_motion(a, d) {
+    return base_dict[era.get(`tcvar:${a}:体位`)][era.get(`tcvar:${a}:朝向`)][
+      era.get(`tcvar:${a}:朝向`)
+    ][era.get(`tcvar:${d}:朝向`)][
+      +(era.get(`tcvar:${a}:上下`) > era.get(`tcvar:${d}:上下`))
+    ];
+  },
+  /**
    * @param {number} cid
    * @param {number} oid
    */

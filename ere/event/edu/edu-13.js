@@ -14,40 +14,87 @@ const lines = require('#/event/edu/edu-13.kojo');
 const CustomizedEdu = require('#/event/edu/edu-common');
 const { add_event, cb_enum } = require('#/event/queue');
 const print_event_name = require('#/event/snippets/print-event-name');
+const print_name_and_show_kojo = require('#/event/snippets/print-name-and-show-kojo');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
-const { get_chara_color } = require('#/data/chara-colors');
 const McqueenEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-13');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const { race_enum } = require('#/data/race/race-const');
+const { attr_enum, fumble_result } = require('#/data/train-const');
+const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
 
 module.exports = class extends CustomizedEdu {
   get #dict() {
     const dict = {};
-    dict['代表色'] = get_chara_color(this.id);
-    dict['训练员'] = '你';
-    dict['麦昆'] = era.get(`callname:${this.id}:-2`);
-    if (era.get(`cflag:${this.id}:性别`) === 1) {
+    dict['训练员'] = era.get('callname:0:-2');
+    const mcqueen = get_chara_talk(this.id);
+    dict['代表色'] = mcqueen.color;
+    dict['马娘'] = mcqueen.get_uma_sex_title();
+    dict['她'] = mcqueen.sex;
+    dict['姐妹'] = mcqueen.get_siblings_sex_title();
+    if (mcqueen.sex_code === 1) {
       dict['马娘'] = '马郎';
       dict['大小姐'] = '大少爷';
-      dict['她'] = '他';
-      dict['姐妹'] = '兄弟';
     } else {
-      dict['马娘'] = '马娘';
       dict['大小姐'] = '大小姐';
-      dict['她'] = '她';
-      dict['姐妹'] = '姐妹';
     }
     const ryan = get_chara_talk(27);
     dict['称呼'] = '训练员' + (era.get('cflag:0:性别') === 1 ? '先生' : '小姐');
-    dict['莱恩代表色'] = ryan.color;
-    dict['莱恩'] = ryan.name;
+    dict['莱恩色'] = ryan.color;
     dict['麦昆称呼莱恩'] = sys_get_callname(this.id, 27);
     dict['莱恩称呼麦昆'] = sys_get_callname(27, this.id);
     return dict;
+  }
+
+  async train(attr) {
+    await super.train(attr);
+    await lines['训练'](this.#dict);
+  }
+
+  async train_fail(mcqueen, me, callname, hook, extra_flag) {
+    await CustomizedEdu.print_fail_info_in_train(
+      mcqueen,
+      extra_flag.train,
+      extra_flag.fumble,
+    );
+    era.println();
+    extra_flag.args = extra_flag.fumble
+      ? fumble_result.fumble
+      : fumble_result.fail;
+    if (extra_flag.train !== attr_enum.intelligence) {
+      const [select] = await print_name_and_show_kojo(
+        '训练失败',
+        mcqueen,
+        lines,
+        this.#dict,
+      );
+      if (select === 1) {
+        hook.arg = 0;
+      } else if (Math.random() < extra_flag.args.ratio.fail_again) {
+        hook.arg = -1;
+      } else {
+        hook.arg = 1;
+      }
+    }
+  }
+
+  train_success_content() {
+    lines['训练成功'](this.#dict);
+  }
+
+  async train_success_add(mcqueen) {
+    return (
+      (
+        await print_name_and_show_kojo('不想落后', mcqueen, lines, this.#dict)
+      )[1] === 1
+    );
+  }
+
+  async train_success_sex() {
+    return (await lines['训练后求爱'](this.#dict))[1] === 1;
   }
 
   async race_start(mcqueen, me, callname, hook, extra_flag) {
@@ -79,7 +126,8 @@ module.exports = class extends CustomizedEdu {
       await print_event_name(name, mcqueen);
       await lines[name](this.#dict);
     } else {
-      return await super.race_start(mcqueen, me, callname, hook, extra_flag);
+      await print_event_name('竞赛之前', mcqueen);
+      await lines['通用赛前'](this.#dict);
     }
   }
 
@@ -119,11 +167,11 @@ module.exports = class extends CustomizedEdu {
     return true;
   }
 
-  async race_end(mcqueen, me, callname, hook, extra_flag) {
+  async race_end(mcqueen, me, callname, hook, extra) {
     const edu_weeks = era.get(`cflag:${this.id}:育成回合计时`);
     let name;
-    if (extra_flag.rank === 1) {
-      switch (extra_flag.race) {
+    if (extra.rank === 1) {
+      switch (extra.race) {
         case race_enum.begin_race:
           name = '向着目标迈进';
           break;
@@ -152,7 +200,14 @@ module.exports = class extends CustomizedEdu {
       await print_event_name(name, mcqueen);
       await lines[name](this.#dict);
     } else {
-      return await super.race_end(mcqueen, me, callname, hook, extra_flag);
+      if (extra.rank === 1) {
+        name = '竞赛获胜';
+      } else if (extra.rank <= 5) {
+        name = '竞赛上榜';
+      } else {
+        name = '竞赛败北';
+      }
+      await print_name_and_show_kojo(name, mcqueen, lines, this.#dict);
     }
   }
 
@@ -161,8 +216,15 @@ module.exports = class extends CustomizedEdu {
       add_event(hook.hook, event_object);
       return;
     }
-    let wait_flag = false;
+    let wait = false;
     switch (event_object.arg) {
+      case 12:
+        await print_event_name(
+          '初识目白家' + mcqueen.get_siblings_sex_title(),
+          mcqueen,
+        );
+        await lines['初识目白家姐妹'](this.#dict);
+        break;
       case 47 + 1:
         await print_event_name('新年', mcqueen);
         await lines['新年'](this.#dict);
@@ -173,7 +235,7 @@ module.exports = class extends CustomizedEdu {
           era.println();
           era.print('获得了【情人节巧克力】！');
           era.add('item:情人节巧克力', 1);
-          wait_flag = true;
+          wait = true;
         } else {
           sys_change_attr_and_print(0, '体力', 200);
         }
@@ -194,10 +256,30 @@ module.exports = class extends CustomizedEdu {
     }
     era.set(`cflag:${this.id}:节日事件标记`, 0);
     era.println();
-    wait_flag =
-      sys_like_chara(this.id, 0, get_random_value(0, 25)) || wait_flag;
-    if (wait_flag) {
+    wait = sys_like_chara(this.id, 0, get_random_value(0, 25)) || wait;
+    if (wait) {
       await era.waitAnyKey();
     }
+  }
+
+  async out_shopping(mcqueen, me, callname, hook, extra_flag, event_object) {
+    if (era.get('flag:当前互动角色') !== this.id) {
+      add_event(hook.hook, event_object);
+      return;
+    }
+    let wait;
+    if (
+      (
+        await print_name_and_show_kojo('想吃甜品', mcqueen, lines, this.#dict)
+      )[0] === 1
+    ) {
+      wait = all_reward_in_event(this.id, { motivation: 1, relation: 10 });
+    } else {
+      wait = all_reward_in_event(this.id, { attr: [0, 0, 0, 10] });
+    }
+    if (wait) {
+      await era.waitAnyKey();
+    }
+    return true;
   }
 };

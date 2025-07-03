@@ -18,13 +18,14 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_chara_color } = require('#/data/chara-colors');
 const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const McqueenLifeMarks = require('#/data/event/life-event-marks/life-event-marks-13');
+const print_name_and_show_kojo = require('#/event/snippets/print-name-and-show-kojo');
 
 module.exports = class extends CustomizedDaily {
   get #dict() {
     const dict = {};
     dict['代表色'] = get_chara_color(this.id);
     dict['称呼'] = sys_get_callname(this.id, 0);
-    dict['你'] = era.get('callname:0:-2');
+    dict['训练员'] = era.get('callname:0:-2');
     if (era.get('flag:角色性别') === 1) {
       dict['她'] = '他';
       dict['马娘'] = '马郎';
@@ -191,5 +192,35 @@ module.exports = class extends CustomizedDaily {
     dict['麦昆称呼狄杜斯'] = sys_get_callname(this.id, 63);
     dict.check = new McqueenLifeMarks().love_40;
     await lines['闲聊'](dict);
+  }
+
+  async birthday(hook) {
+    const edu_weeks = era.get(`cflag:${this.id}:育成回合计时`);
+    if (edu_weeks < 48) {
+      const dict = this.#dict;
+      dict['高峰色'] = get_chara_talk(86).color;
+      await print_name_and_show_kojo(
+        '初见时的生日',
+        get_chara_talk(this.id),
+        lines,
+        dict,
+      );
+    } else if (edu_weeks < 96) {
+      await print_name_and_show_kojo(
+        '第二年生日',
+        get_chara_talk(this.id),
+        lines,
+        this.#dict,
+      );
+    } else if (edu_weeks <= 144) {
+      await print_name_and_show_kojo(
+        '第三年生日',
+        get_chara_talk(this.id),
+        lines,
+        this.#dict,
+      );
+    } else {
+      await super.birthday(hook);
+    }
   }
 };

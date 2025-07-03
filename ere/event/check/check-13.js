@@ -17,6 +17,7 @@ const McqueenLifeMarks = require('#/data/event/life-event-marks/life-event-marks
 const recruit_flags = require('#/data/event/recruit-flags');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
+const check_and_add_event = require('#/event/check/snippets/check-and-add-event');
 
 /** @type {Record<string,number>} */
 const aim_races = {
@@ -76,7 +77,15 @@ module.exports = class extends CustomizedCheck {
       const event_obj_s = new EventObject(this.id, cb_enum.edu, true).set_arg(
         edu_weeks,
       );
+      check_and_add_event(
+        new McqueenEduMarks(),
+        edu_weeks,
+        'sudden_look_back',
+        event_hooks.out_shopping,
+        new EventObject(this.id, cb_enum.edu),
+      );
       switch (edu_weeks) {
+        case 12:
         case 47 + 1:
         case 47 + 6:
         case 47 + 40:
