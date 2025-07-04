@@ -67,7 +67,7 @@ module.exports = new UmaEroSkill(
   [0, 0],
   [0, 0],
   0,
-  100,
+  66,
   false,
   false,
   [],

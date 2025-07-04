@@ -5,8 +5,8 @@ module.exports = new InmonPlugin(
   '有容乃大',
   403,
   2,
-  16,
+  12,
   '不再妒忌。',
   (args) => args.id > 0,
-  920,
+  720,
 );

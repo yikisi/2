@@ -12,13 +12,13 @@ const select_action_around_river = require('#/event/daily/snippets/select-action
 const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
 const select_action_in_shopping_street = require('#/event/daily/snippets/select-action-in-shopping-street');
 const select_action_in_station = require('#/event/daily/snippets/select-action-in-station');
+const print_name_and_show_kojo = require('#/event/snippets/print-name-and-show-kojo');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { get_chara_color } = require('#/data/chara-colors');
 const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const McqueenLifeMarks = require('#/data/event/life-event-marks/life-event-marks-13');
-const print_name_and_show_kojo = require('#/event/snippets/print-name-and-show-kojo');
 
 module.exports = class extends CustomizedDaily {
   get #dict() {
@@ -113,10 +113,11 @@ module.exports = class extends CustomizedDaily {
     dict['称呼'] = sys_get_callname(this.id, 0);
     dict['父亲'] = era.get('cflag:0:性别') === 1 ? '父亲' : '母亲';
     dict['她'] = era.get('flag:角色性别') === 1 ? '他' : '她';
-    hook.arg = temp <= 1;
+    let name;
     switch (temp) {
+      default:
       case 0:
-        await lines['街机厅'](dict);
+        name = '街机厅';
         break;
       case 1:
         dict.hot_spring =
@@ -126,14 +127,16 @@ module.exports = class extends CustomizedDaily {
         if (dict.hot_spring) {
           edu_marks.hot_spring = 1;
         }
-        await lines['抽奖'](dict);
+        name = '抽奖';
         break;
       case 2:
-        await lines['卡拉OK'](dict);
+        name = '卡拉OK';
         break;
       case 3:
-        await lines['看电影'](dict);
+        name = '看电影';
     }
+    hook.arg = temp <= 1;
+    await lines[name](dict);
   }
 
   async out_station(hook) {

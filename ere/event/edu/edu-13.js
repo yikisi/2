@@ -4,7 +4,10 @@
  */
 const era = require('#/era-electron');
 
-const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
+const {
+  sys_change_attr_and_print,
+  sys_change_weight,
+} = require('#/system/sys-calc-base-cflag');
 const {
   sys_get_callname,
   sys_like_chara,
@@ -274,6 +277,7 @@ module.exports = class extends CustomizedEdu {
       )[0] === 1
     ) {
       wait = all_reward_in_event(this.id, { motivation: 1, relation: 10 });
+      sys_change_weight(this.id, get_random_value(800, 1200));
     } else {
       wait = all_reward_in_event(this.id, { attr: [0, 0, 0, 10] });
     }
