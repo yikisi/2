@@ -18,23 +18,23 @@ module.exports = class extends CustomizedMec {
     switch (era.get('flag:当前赛事')) {
       case race_enum.hoch_sho:
       case race_enum.sats_sho:
-        return [new LegendUmaSelector(65, 1.1)];
+        return [new LegendUmaSelector(65, 1.05)];
       case race_enum.toky_yus:
         return [
-          new LegendUmaSelector(57, 1.1),
-          new LegendUmaSelector(104, 1.1),
+          new LegendUmaSelector(57, 1.05),
+          new LegendUmaSelector(104, 1.05),
         ];
       case race_enum.arim_kin:
         if (era.get(`cflag:${this.id}:育成回合计时`) < 96) {
           return [
-            new LegendUmaSelector(57, 1.1),
-            new LegendUmaSelector(104, 1.1),
+            new LegendUmaSelector(57, 1.05),
+            new LegendUmaSelector(104, 1.05),
           ];
         }
         return [
           new LegendUmaFilter(
             '美浦神赞',
-            1.1,
+            1.05,
             (e) =>
               e.adapt_ground[0] >= 6 &&
               e.adapt_distance[3] >= 6 &&
@@ -42,10 +42,10 @@ module.exports = class extends CustomizedMec {
           ).set_image('麦昆_半身'),
         ];
       case race_enum.tenn_spr:
-        return [new LegendUmaSelector(57, 1.1)];
+        return [new LegendUmaSelector(57, 1.05)];
       case race_enum.takz_kin:
         if (era.get('cflag:17:育成回合计时') >= 96) {
-          return [new LegendUmaSelector(70, 1.1)];
+          return [new LegendUmaSelector(70, 1.05)];
         }
         break;
       case race_enum.tenn_sho:
@@ -53,13 +53,13 @@ module.exports = class extends CustomizedMec {
           return [
             new LegendUmaFilter(
               '疾驰戴拿',
-              1.1,
+              1.05,
               (e) =>
                 e.adapt_ground[0] >= 6 &&
                 e.adapt_distance[2] >= 5 &&
                 e.adapt_style[3] >= 6,
             ).set_image('老爹_半身'),
-            new LegendUmaSelector(78, 1.1),
+            new LegendUmaSelector(78, 1.05),
           ];
         }
         break;
@@ -68,13 +68,13 @@ module.exports = class extends CustomizedMec {
           return [
             new LegendUmaFilter(
               '疾驰戴拿',
-              1.1,
+              1.05,
               (e) =>
                 e.adapt_ground[0] >= 6 &&
                 e.adapt_distance[2] >= 5 &&
                 e.adapt_style[3] >= 6,
             ).set_image('老爹_半身'),
-            new LegendUmaSelector(6, 1.1),
+            new LegendUmaSelector(6, 1.05),
           ];
         }
     }

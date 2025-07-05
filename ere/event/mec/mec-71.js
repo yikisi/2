@@ -28,7 +28,10 @@ module.exports = class extends CustomizedMec {
     switch (era.get('flag:当前赛事')) {
       case race_enum.toky_yus:
       case race_enum.sank_hai:
-        return [new LegendUmaSelector(69, 1.1), new LegendUmaSelector(72, 1.1)];
+        return [
+          new LegendUmaSelector(69, 1.05),
+          new LegendUmaSelector(72, 1.05),
+        ];
     }
     return [];
   }

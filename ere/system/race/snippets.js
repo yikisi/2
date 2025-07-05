@@ -323,6 +323,25 @@ module.exports = {
   },
   progress_width,
   reset_loc_mind_other_diff,
+  /**
+   * @param {PseudoUma} uma
+   * @param {[number,number,number,number]} rs_counts
+   * @param {number} all
+   */
+  reset_running_style(uma, rs_counts, all) {
+    uma.race.conditionParams.running_style = uma.style + 1;
+    uma.race.conditionParams.running_style_count_nige_otherself =
+      rs_counts[0] - (uma.style === 0);
+    uma.race.conditionParams.running_style_count_senko_otherself =
+      rs_counts[1] - (uma.style === 1);
+    uma.race.conditionParams.running_style_count_sashi_otherself =
+      rs_counts[2] - (uma.style === 2);
+    uma.race.conditionParams.running_style_count_oikomi_otherself =
+      rs_counts[3] - (uma.style === 3);
+    uma.race.conditionParams.running_style_count_same = rs_counts[uma.style];
+    uma.race.conditionParams.running_style_count_same_rate =
+      (uma.race.conditionParams.running_style_count_same * 100) / all;
+  },
   screen_size: 8,
   /**
    * @param {RaceSkill} skill
@@ -516,17 +535,17 @@ module.exports = {
         if (get(`cflag:${cid}:招募状态`) === recruit_flags.yes) {
           const money = get('flag:当前马币');
           if (money >= 100000) {
-            skill.values[i] += 0.15;
+            skill.values[i][j] += 0.15;
           } else if (money >= 10000) {
-            skill.values[i] += 0.125;
+            skill.values[i][j] += 0.125;
           } else if (money >= 5000) {
-            skill.values[i] += 0.1;
+            skill.values[i][j] += 0.1;
           } else if (money >= 2000) {
-            skill.values[i] += 0.075;
+            skill.values[i][j] += 0.075;
           } else if (money >= 1000) {
-            skill.values[i] += 0.05;
+            skill.values[i][j] += 0.05;
           } else if (money >= 500) {
-            skill.values[i] += 0.025;
+            skill.values[i][j] += 0.025;
           }
         }
         break;

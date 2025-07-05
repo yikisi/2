@@ -13,16 +13,16 @@ module.exports = class extends CustomizedMec {
     switch (era.get('flag:当前赛事')) {
       case race_enum.mile_cha:
         if (edu_weeks < 96) {
-          return [new LegendUmaSelector(53, 1.1)];
+          return [new LegendUmaSelector(53, 1.05)];
         }
         break;
       case race_enum.kiku_sho:
-        return [340, 341, 342].map((e) => new LegendUmaSelector(e, 1.2));
+        return [340, 341, 342].map((e) => new LegendUmaSelector(e, 1.1));
       case race_enum.arim_kin:
         if (edu_weeks < 96) {
-          return [2, 21, 45, 63].map((e) => new LegendUmaSelector(e, 1.1));
+          return [2, 21, 45, 63].map((e) => new LegendUmaSelector(e, 1.05));
         } else {
-          return [27, 71, 72].map((e) => new LegendUmaSelector(e, 1.2));
+          return [27, 71, 72].map((e) => new LegendUmaSelector(e, 1.1));
         }
     }
     return super.get_race_contestants(info);

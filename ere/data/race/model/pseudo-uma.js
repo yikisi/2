@@ -1,5 +1,9 @@
 const { sort_list } = require('#/utils/list-utils');
 
+const {
+  calc_attr_score,
+  get_attr_by_score,
+} = require('#/data/calc-attr-score');
 const ConditionParams = require('#/data/race/model/condition-params');
 const { attr_names } = require('#/data/train-const');
 
@@ -327,11 +331,19 @@ class PseudoUma {
   }
 
   /**
-   * @param {number} [_legend]
+   * @param {number} level
+   * @param {number} aim
+   * @param {boolean|2} [_legend]
    * @returns {PseudoUma}
    */
-  set_legend(_legend) {
-    this.legend = _legend || true;
+  set_legend(level, aim, _legend = true) {
+    const a_scores = this.o_attrs.map(calc_attr_score);
+    if (level < aim - 5) {
+      const buff = (aim - level) / 5;
+      this.o_attrs = a_scores.map((e) => get_attr_by_score(e + buff));
+      this.attrs = [...this.o_attrs];
+    }
+    this.legend = _legend;
     return this;
   }
 

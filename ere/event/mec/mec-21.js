@@ -33,7 +33,7 @@ module.exports = class extends CustomizedMec {
           return [
             new LegendUmaFilter(
               '秋津帝王',
-              1.1,
+              1.05,
               (e) =>
                 e.adapt_ground[0] >= 6 &&
                 e.adapt_distance[2] >= 6 &&

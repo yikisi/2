@@ -114,7 +114,7 @@ function set_from_theme(theme) {
     case 0:
       era.set('flag:训练难度', 25);
       era.set('flag:训练加成', 25);
-      era.set('flag:比赛难度', -25);
+      era.set('flag:比赛难度', -40);
       era.set('flag:可能伤病', 0);
       era.set('flag:马娘初始好感', 150);
       era.set('flag:马娘初始爱慕', 0);
@@ -230,7 +230,7 @@ function set_from_theme(theme) {
     case 4:
       era.set('flag:训练难度', 25);
       era.set('flag:训练加成', 25);
-      era.set('flag:比赛难度', -25);
+      era.set('flag:比赛难度', -40);
       era.set('flag:可能伤病', 0);
       era.set('flag:马娘初始好感', 225);
       era.set('flag:马娘初始爱慕', 50);
@@ -259,7 +259,7 @@ function set_from_theme(theme) {
     case 5:
       era.set('flag:训练难度', 25);
       era.set('flag:训练加成', 25);
-      era.set('flag:比赛难度', -25);
+      era.set('flag:比赛难度', -40);
       era.set('flag:可能伤病', 0);
       era.set('flag:马娘初始好感', 150);
       era.set('flag:马娘初始爱慕', 0);
@@ -288,7 +288,7 @@ function set_from_theme(theme) {
     case 6:
       era.set('flag:训练难度', 25);
       era.set('flag:训练加成', 25);
-      era.set('flag:比赛难度', -25);
+      era.set('flag:比赛难度', -40);
       era.set('flag:可能伤病', 0);
       era.set('flag:马娘初始好感', 225);
       era.set('flag:马娘初始爱慕', 50);
@@ -317,7 +317,7 @@ function set_from_theme(theme) {
     case 7:
       era.set('flag:训练难度', 25);
       era.set('flag:训练加成', 25);
-      era.set('flag:比赛难度', -25);
+      era.set('flag:比赛难度', -40);
       era.set('flag:可能伤病', 0);
       era.set('flag:马娘初始好感', 225);
       era.set('flag:马娘初始爱慕', 50);

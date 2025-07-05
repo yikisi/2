@@ -12,10 +12,10 @@ module.exports = class extends CustomizedMec {
       case race_enum.yush_him:
       case race_enum.shuk_sho:
       case race_enum.sank_hai:
-        return [new LegendUmaSelector(116, 1.2)];
+        return [new LegendUmaSelector(116, 1.1)];
       case race_enum.japa_cup:
         if (era.get(`cflag:${this.id}:育成回合计时`) > 96) {
-          return [new LegendUmaSelector(116, 1.2)];
+          return [new LegendUmaSelector(116, 1.1)];
         }
     }
     return [];

@@ -11,7 +11,7 @@ module.exports = class extends CustomizedMec {
       get('cflag:68:育成回合计时') > 96 &&
       get('flag:当前赛事') === race_enum.takz_kin
     ) {
-      return [new LegendUmaSelector(108, 1.2)];
+      return [new LegendUmaSelector(108, 1.1)];
     }
     return super.get_race_contestants(info);
   }

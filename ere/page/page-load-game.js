@@ -454,6 +454,9 @@ module.exports = async () => {
               } else {
                 era.set('flag:道具影响', -25);
               }
+              if (era.get('flag:比赛难度') < 0) {
+                era.set('flag:比赛难度', -40);
+              }
             }
             return true;
           } else {

@@ -3,7 +3,7 @@ const { writeFileSync } = require('node:fs');
 const { PrismaClient } = require('@prisma/client');
 
 const id2suffix = require('../../common/clothe-id2suffix');
-const calc_attr_score = require('../../ere/data/calc-attr-score');
+const { calc_attr_score } = require('../../ere/data/calc-attr-score');
 const legend_skill_sets = require('./custom-skill-sets');
 
 const prisma = new PrismaClient();
@@ -315,7 +315,9 @@ async function task() {
   writeFileSync(
     '../../ere/data/race/contestants/unnamed.json',
     JSON.stringify(
-      contestants.unnamed.sort((a, b) => a.level - b.level),
+      contestants.unnamed
+        .sort((a, b) => a.level - b.level)
+        .filter((e) => e.level < 20000),
       undefined,
       2,
     ),

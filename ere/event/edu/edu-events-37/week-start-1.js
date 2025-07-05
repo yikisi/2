@@ -546,24 +546,20 @@ module.exports = (handlers) => {
       '已经可以预料到会是一场很尽兴的比赛了，我可不会放水的哦。',
     );
     const pseudo = sys_get_chara_pseudo(37);
-    await simulation_game_in_event(
-      pseudo,
-      [
-        new PseudoUma(
-          57,
-          '千明代表',
-          get_chara_color(57),
-          2,
-          new Array(5).fill(1200),
-          get_random_value(2, 3),
-          [0, 2, 6, 6],
-          [0, 5, 6, 6],
-          [6, 0],
-          skill_sets[1105703].map((e) => skills_dict[e]),
-        ).set_legend(),
-      ],
-      race_enum.toky_yus,
+    const p = new PseudoUma(
+      57,
+      '千明代表',
+      get_chara_color(57),
+      2,
+      new Array(5).fill(1200),
+      get_random_value(2, 3),
+      [0, 2, 6, 6],
+      [0, 5, 6, 6],
+      [6, 0],
+      skill_sets[1105703].map((e) => skills_dict[e]),
     );
+    p.legend = true;
+    await simulation_game_in_event(pseudo, [p], race_enum.toky_yus);
     await era.printAndWait([
       mr_cb.get_colored_name(),
       ' 是赛',

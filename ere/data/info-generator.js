@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const { sys_check_cuckold } = require('#/system/chara/sys-calc-cheat');
 const sys_get_item_status = require('#/system/chara/sys-get-item-status');
 const {
   check_erect,
@@ -14,7 +15,7 @@ const {
 
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 
-const calc_attr_score = require('#/data/calc-attr-score');
+const { calc_attr_score } = require('#/data/calc-attr-score');
 const chara_score = require('#/data/chara-score-table.json');
 const {
   buff_colors,
@@ -42,7 +43,6 @@ const {
 } = require('#/data/ero/status-const');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { attr_names } = require('#/data/train-const');
-const { sys_check_cuckold } = require('#/system/chara/sys-calc-cheat');
 
 const level_and_desc = {
   love: {
