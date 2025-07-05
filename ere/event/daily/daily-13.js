@@ -56,7 +56,7 @@ module.exports = class extends CustomizedDaily {
   async office_game() {
     const dict = {};
     dict['代表色'] = get_chara_color(this.id);
-    dict['你'] = era.get('callname:0:-2');
+    dict['训练员'] = era.get('callname:0:-2');
     await lines['一起打游戏机'](dict);
   }
 
@@ -71,7 +71,7 @@ module.exports = class extends CustomizedDaily {
     const dict = {};
     dict['代表色'] = get_chara_color(this.id);
     dict['称呼'] = sys_get_callname(this.id, 0);
-    dict['你'] = era.get('callname:0:-2');
+    dict['训练员'] = era.get('callname:0:-2');
     dict['她'] = era.get('flag:角色性别') === 1 ? '他' : '她';
     await lines['一起休息'](dict);
   }
@@ -88,7 +88,7 @@ module.exports = class extends CustomizedDaily {
     hook.arg = Math.random() < 0.5;
     const dict = { dice: hook.arg };
     dict['代表色'] = get_chara_color(this.id);
-    dict['你'] = era.get('callname:0:-2');
+    dict['训练员'] = era.get('callname:0:-2');
     dict['玩家名'] = era.get('callname:0:-1');
     dict['她'] = era.get(`cflag:${this.id}:性别`) === 1 ? '他' : '她';
     await lines['外出神社祈福'](dict);
@@ -109,7 +109,7 @@ module.exports = class extends CustomizedDaily {
     const temp = await select_action_in_shopping_street();
     const edu_marks = EduEventMarks.get_marks(this.id);
     dict['代表色'] = get_chara_color(this.id);
-    dict['你'] = era.get('callname:0:-2');
+    dict['训练员'] = era.get('callname:0:-2');
     dict['称呼'] = sys_get_callname(this.id, 0);
     dict['父亲'] = era.get('cflag:0:性别') === 1 ? '父亲' : '母亲';
     dict['她'] = era.get('flag:角色性别') === 1 ? '他' : '她';
@@ -142,7 +142,7 @@ module.exports = class extends CustomizedDaily {
   async out_station(hook) {
     const dict = {};
     dict['代表色'] = get_chara_color(this.id);
-    dict['你'] = era.get('callname:0:-2');
+    dict['训练员'] = era.get('callname:0:-2');
     dict['称呼'] = sys_get_callname(this.id, 0);
     switch ((hook.arg = await select_action_in_station(this.id))) {
       case 0:
@@ -161,7 +161,7 @@ module.exports = class extends CustomizedDaily {
     dict['代表色'] = get_chara_color(this.id);
     dict['她'] = era.get(`cflag:${this.id}:性别`) === 1 ? '他' : '她';
     if ((hook.arg = !(await select_action_in_atrium()))) {
-      dict['你'] = era.get('callname:0:-2');
+      dict['训练员'] = era.get('callname:0:-2');
       await lines['枯树洞'](dict);
     } else {
       await lines['中庭约会'](dict);
@@ -171,14 +171,14 @@ module.exports = class extends CustomizedDaily {
   async school_rooftop() {
     const dict = {};
     dict['代表色'] = get_chara_color(this.id);
-    dict['你'] = era.get('callname:0:-2');
+    dict['训练员'] = era.get('callname:0:-2');
     dict['称呼'] = sys_get_callname(this.id, 0);
     await lines['吃便当'](dict);
   }
 
   select() {
     const dict = {};
-    dict['你'] = era.get('callname:0:-2');
+    dict['训练员'] = era.get('callname:0:-2');
     dict['代表色'] = get_chara_color(this.id);
     dict['称呼'] = sys_get_callname(this.id, 0);
     lines['选中互动对象'](dict);

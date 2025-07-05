@@ -15,9 +15,9 @@ function add_attr_exp(cid, attr, val) {
     const inmon = CharaInmon.get(cid);
     let times = 1;
     if (inmon.on(plugin_enum.sex_1)) {
-      times += 4;
+      times += 5;
     } else if (inmon.on(plugin_enum.sex_2)) {
-      times += 9;
+      times += 15;
     }
     era.add(`nowex:${cid}:${attr_names[attr]}获取`, val * times);
     if (in_edu && times > 1) {

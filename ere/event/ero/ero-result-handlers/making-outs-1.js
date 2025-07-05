@@ -254,6 +254,7 @@ module.exports = (handlers) => {
       extra_flag.check,
       (c) => c / (1 + 4 * !era.get(`cflag:${defender}:种族`)),
     );
+    add_attr_exp(defender, attr_enum.speed, 0.8);
   };
 
   handlers[ero_hooks.pet_tail] = (attacker, defender, _, extra_flag) => {
