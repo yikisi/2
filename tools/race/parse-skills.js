@@ -650,7 +650,7 @@ async function chara_skill() {
     ...(await prisma.heroes_race_default_npc.findMany()),
     ...(await prisma.challenge_match_boss_npc.findMany()),
   ]
-    .filter((e) => e.chara_id < 9000)
+    .filter((e) => e.chara_id < 9040 || e.chara_id > 9042)
     .map((e) => e.skill_set_id);
   [
     ...(await prisma.ultimate_race_npc.findMany()),

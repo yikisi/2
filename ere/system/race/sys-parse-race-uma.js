@@ -430,7 +430,7 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
         (e) =>
           e.adapt_ground[info.ground] >= 4 &&
           e.adapt_distance[info.distance] >= 4 &&
-          e.level <= passer_by_difficulty + 200,
+          e.level <= passer_by_difficulty,
       );
       if (back_up_list.length > info.gates - ret.length) {
         back_up_list = back_up_list.slice(
