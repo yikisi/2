@@ -144,7 +144,7 @@ async function task() {
     } else {
       tmp.id = e.chara_id % 1000;
       if (e.chara_id > 9000) {
-        if (e.chara_id <= 9042) {
+        if (e.chara_id >= 9040 && e.chara_id <= 9042) {
           return;
         }
         tmp.id += 300;

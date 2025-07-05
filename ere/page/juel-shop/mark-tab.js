@@ -577,11 +577,11 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
           sex_level = era.set(`mark:${chara.id}:淫纹`, pleasure_level);
           total_delta.pleasure_delta = pleasure_level;
           total_delta.sex_delta = pleasure_level;
-          sys_change_fame(-100 * [1, 3, 6][sex_level - 1]);
+          sys_change_fame(-50 * [1, 3, 6][sex_level - 1]);
         } else {
           sex_level = era.add(`mark:${chara.id}:淫纹`, 1);
           total_delta.sex_delta = (total_delta.sex_delta || 0) + 1;
-          sys_change_fame(-100 * sex_level);
+          sys_change_fame(-50 * sex_level);
         }
         await get_custom_ero(chara.id).get_mark(
           sex_level,
