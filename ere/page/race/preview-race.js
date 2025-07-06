@@ -713,10 +713,10 @@ async function preview_race(
             }
             break;
           case 10:
-            chara = get_chara_talk(--index);
+            chara = get_chara_talk(item_chara[--index].index_chara);
             break;
           case 11:
-            chara = get_chara_talk(++index);
+            chara = get_chara_talk(item_chara[++index].index_chara);
             break;
           case 99:
             flag = false;
