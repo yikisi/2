@@ -41,14 +41,14 @@ class NormalCom extends EroNormalCommunications {
 
 class NormalMakingOuts extends EroNormalMakingOuts {
   async ask_blow_job(attacker, defender, hook) {
-    if (attacker.id !== 0 || hook.arg) {
+    if (attacker.id !== 0 || !hook.arg) {
       return await super.ask_blow_job(attacker, defender, hook);
     }
     await kojo['请求口交'](dict());
   }
 
   async ask_hand_and_blow_job(attacker, defender, hook) {
-    if (attacker.id !== 0 || hook.arg) {
+    if (attacker.id !== 0 || !hook.arg) {
       return await super.ask_hand_and_blow_job(attacker, defender, hook);
     }
     await kojo['请求手搓口交'](dict());
