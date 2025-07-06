@@ -23,6 +23,7 @@ const { get_random_value } = require('#/utils/value-utils');
 const { action_type_enum } = require('#/data/basement-const');
 const { get_chara_color } = require('#/data/chara-colors');
 const CharaTitles = require('#/data/chara-titles');
+const { adaptability_colors } = require('#/data/color-const');
 const { trainer_salary } = require('#/data/const.json');
 const CharaInmon = require('#/data/ero/chara-inmon');
 const basement_owners = require('#/data/event/basement-owners');
@@ -416,13 +417,19 @@ module.exports = async () => {
             }
             if (version <= 1340) {
               const chara_list = era.getAddedCharacters();
-              chara_list.forEach((id) => {
-                era.set(`equip:${id}:淫纹奴役`, era.get(`equip:${id}:10`));
-                if (era.get(`exp:${id}:性爱次数`) > 0) {
-                  era.set(`cstr:${id}:初次潮吹经历`, []);
-                  era.set(`cstr:${id}:无自觉初次潮吹经历`, []);
-                  era.set(`cstr:${id}:初次饮爱液经历`, []);
-                  era.set(`cstr:${id}:无自觉初次饮爱液经历`, []);
+              chara_list.forEach((cid) => {
+                era.set(`equip:${cid}:淫纹奴役`, era.get(`equip:${cid}:10`));
+                if (era.get(`exp:${cid}:性爱次数`) > 0) {
+                  era.set(`cstr:${cid}:初次潮吹经历`, []);
+                  era.set(`cstr:${cid}:无自觉初次潮吹经历`, []);
+                  era.set(`cstr:${cid}:初次饮爱液经历`, []);
+                  era.set(`cstr:${cid}:无自觉初次饮爱液经历`, []);
+                }
+                const tokino = CharaTitles.get(cid)
+                  .get()
+                  .find((t) => t.n === '傲视一切');
+                if (tokino !== undefined) {
+                  tokino.c = adaptability_colors.at(-2);
                 }
               });
               era.getAllCharacters().forEach((cid) => {

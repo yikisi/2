@@ -109,7 +109,13 @@ function sys_handle_palace(cid) {
     g1_count >= 10 &&
     races.findIndex((e) => e.pop !== 1 || e.rank !== 1) === -1
   ) {
-    titles.push({ n: '傲视一切', c: adaptability_colors.at(-1) });
+    titles.push({ n: '傲视一切', c: adaptability_colors.at(-2) });
+  }
+  if (races.length >= 101) {
+    titles.push({ n: '苛己执着', c: adaptability_colors.at(-2) });
+    if (races.findIndex((e) => e.rank !== 1) === -1) {
+      titles.push({ n: '百战百胜', c: adaptability_colors.at(-1) });
+    }
   }
   if (
     era.get(`talent:${cid}:童贞`) === vp_status_enum.virgin &&
