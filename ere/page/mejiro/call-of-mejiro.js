@@ -137,8 +137,8 @@ class CallOfMejiro extends MejiroCity {
 
   async page(chara_id) {
     this.limit--;
-    const chara = get_chara_talk(chara_id),
-      me = get_chara_talk(0);
+    const chara = get_chara_talk(chara_id);
+    const me = get_chara_talk(0);
     await era.printAndWait([
       me.get_colored_name(),
       ' 和 ',

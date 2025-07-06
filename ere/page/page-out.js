@@ -185,7 +185,7 @@ async function out_page() {
                   );
                   era.set('flag:当前位置', positions[aim - 1].l);
                   if (positions[aim - 1].l === location_enum.mejiro) {
-                    await MejiroCity.instance().page(chara_id);
+                    await MejiroCity.instance().page(301);
                   } else if (
                     !(await sys_get_random_event(positions[aim - 1].s)())
                   ) {

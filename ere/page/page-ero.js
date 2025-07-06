@@ -422,51 +422,47 @@ function get_chara_info(cid) {
   palam_list
     .splice(0, 4)
     .forEach((e) => ret.push(...get_palam_progress(cid, e)));
-  if (
+  ret.push({
+    config: { width: 1 },
+    content: '欲',
+    type: 'text',
+  });
+  if (era.get('flag:当前位置') === location_enum.mejiro) {
+    ret.push({
+      config: { color: palam_colors.progress[1], height: 22, width: 3 },
+      inContent: '一心同体',
+      percentage: 100,
+      type: 'progress',
+    });
+  } else if (
     (sys_check_hide_relation_and_love(cid) & 0b1) > 0 ||
     sys_check_limit_relation_and_love(cid)
   ) {
     const random_lust = get_random_value(0, lust_border.max) / lust_border.max;
-    ret.push(
-      {
-        config: { width: 1 },
-        content: '欲',
-        type: 'text',
+    ret.push({
+      config: {
+        color: get_color(...palam_colors.progress, random_lust),
+        height: 22,
+        width: 3,
       },
-      {
-        config: {
-          color: get_color(...palam_colors.progress, random_lust),
-          height: 22,
-          width: 3,
-        },
-        inContent: '？',
-        percentage: random_lust * 100,
-        type: 'progress',
-      },
-    );
+      inContent: '？',
+      percentage: random_lust * 100,
+      type: 'progress',
+    });
   } else {
     const lust = era.get(`base:${cid}:性欲`);
     const l_percent = Math.min(lust / lust_border.max, 1);
-    ret.push(
-      {
-        config: { width: 1 },
-        content: '欲',
-        type: 'text',
+    ret.push({
+      config: {
+        color: get_color(...palam_colors.progress, l_percent),
+        height: 22,
+        width: 3,
       },
-      {
-        config: {
-          color: get_color(...palam_colors.progress, l_percent),
-          height: 22,
-          width: 3,
-        },
-        inContent:
-          lust === lust_border.limit
-            ? '！'
-            : `${(l_percent * 100).toFixed(2)}%`,
-        percentage: l_percent * 100,
-        type: 'progress',
-      },
-    );
+      inContent:
+        lust === lust_border.limit ? '！' : `${(l_percent * 100).toFixed(2)}%`,
+      percentage: l_percent * 100,
+      type: 'progress',
+    });
   }
   ret.push(...get_palam_progress(cid, palam_list.shift(), 4));
   palam_list.forEach((e) => ret.push(...get_palam_progress(cid, e)));
