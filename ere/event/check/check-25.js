@@ -198,10 +198,10 @@ module.exports = class extends CustomizedCheck {
     return ['漆黑幻影'];
   }
 
-  is_aim_race(race, edu_weeks) {
+  is_aim_race(race, edu_weeks, rank) {
     if (new CoffeeEduMarks().toky_yus > 0 && race === race_enum.toky_yus) {
       return 0;
     }
-    return aim_races[`${edu_weeks}_${race}`] ?? aim_races[race] ?? 0;
+    return super.is_aim_race(race, edu_weeks, rank);
   }
 };

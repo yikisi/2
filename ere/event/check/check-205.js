@@ -162,11 +162,11 @@ module.exports = class extends CustomizedCheck {
     return buffer;
   }
 
-  is_aim_race(race, edu_weeks) {
+  is_aim_race(race, edu_weeks, rank) {
     if (race === race_enum.japa_cup) {
       return new TreveEduMarks().japa_cup;
     }
-    return aim_races[`${edu_weeks}_${race}`] || aim_races[race];
+    return super.is_aim_race(race, edu_weeks, rank);
   }
 
   is_prison() {
