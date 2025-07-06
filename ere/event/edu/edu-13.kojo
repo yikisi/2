@@ -1443,7 +1443,6 @@
         content: 目白家主
       - 「之后您也是目白家认可的训练员了，请您在外不管对人对事，都要注意行为。像酗酒和赌博这些不良嗜好……」
   - if: era.get('love:13') >= 75
-    random: true
     lines:
       - content:
           - fontWeight: bold

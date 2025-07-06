@@ -105,7 +105,6 @@
   sync: true
   lines:
     - if: era.get('status:13:沉睡') > 0 || era.get('status:13:马跳S') > 0
-      random: true
       lines:
         - if: era.get('status:13:马跳S') === 0
           content: 「真是喜欢勉强自己……」
@@ -114,7 +113,6 @@
         - 宿舍长点了点头，小心地将麦昆接过去。
         - 放下担子的%训练员%深吸了一口气，看了看灯火通明的学生宿舍，便转头回到自己的宿舍。
     - if: era.get('status:13:沉睡') === 0 && era.get('status:13:马跳S') === 0
-      random: true
       lines:
         - color: %代表色%
           content:

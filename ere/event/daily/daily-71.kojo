@@ -2,13 +2,10 @@
   sync: true
   lines:
     - if: era.get('status:71:沉睡') === 0 && era.get('status:71:马跳S') === 0
-      random: true
       lines:
         - if: era.get('love:71') < 75
-          random: true
           lines:
             - if: era.get('cflag:71:育成回合计时') < 3 * 48
-              random: true
               lines:
                 - random: true
                   lines:
@@ -32,7 +29,6 @@
                           content: 目白阿尔丹
                         - 「前几天找到了我和姐姐小时候的照片，真是令人怀念呢。」
             - if: era.get('cflag:71:育成回合计时') >= 3 * 48
-              random: true
               lines:
                 - random: true
                   lines:
@@ -56,10 +52,8 @@
                           content: 目白阿尔丹
                         - 「%称呼%，好久不见，真的非常感谢您那时候对我的支持和帮助。」
         - if: era.get('love:71') >= 75
-          random: true
           lines:
             - if: era.get('cflag:71:育成回合计时') < 3 * 48
-              random: true
               lines:
                 - random: true
                   lines:
@@ -83,7 +77,6 @@
                           content: 目白阿尔丹
                         - 「%称呼%，看起来很疲劳呢，让我来为你按摩下，好好放松下身体吧。」
             - if: era.get('cflag:71:育成回合计时') >= 3 * 48
-              random: true
               lines:
                 - random: true
                   lines:
@@ -114,28 +107,21 @@
                           content: 目白阿尔丹
                         - 「亲爱的这样逞强可不行哦，嘿🎵看我专属的劝阻亲爱的熬夜法。」
     - if: era.get('status:71:沉睡') > 0 || era.get('status:71:马跳S') > 0
-      random: true
       lines:
         - if: era.get('love:71') < 75
-          random: true
           lines:
             - if: era.get('cflag:71:育成回合计时') < 3 * 48
-              random: true
               lines:
                 - 坐在沙发上睡着的阿尔丹，就像是一副瑰丽又静谧的画，让%你%的动作都轻柔了起来。
             - if: era.get('cflag:71:育成回合计时') >= 3 * 48
-              random: true
               lines:
                 - 疲惫的目白阿尔丹打了一个小哈欠。
         - if: era.get('love:71') >= 75
-          random: true
           lines:
             - if: era.get('cflag:71:育成回合计时') < 3 * 48
-              random: true
               lines:
                 - 过于疲惫而依靠在%你%身上睡着的阿尔丹，就像是找到了归宿地的小鸟一样。
             - if: era.get('cflag:71:育成回合计时') >= 3 * 48
-              random: true
               lines:
                 - 阿尔丹在休息室里的床上安心地睡着。
 
@@ -144,7 +130,6 @@
   sync: true
   lines:
     - if: era.get('love:71') < 75
-      random: true
       lines:
         - color: %代表色%
           content:
@@ -152,7 +137,6 @@
               content: 目白阿尔丹
             - 「生日快乐～%称呼%，我已经为你准备好了生日派对呢。」
     - if: era.get('love:71') >= 75
-      random: true
       lines:
         - color: %代表色%
           content:
@@ -164,7 +148,6 @@
   sync: true
   lines:
     - if: era.get('love:71') < 75
-      random: true
       lines:
         - random: true
           lines:
@@ -212,7 +195,6 @@
                   content: 目白阿尔丹
                 - 「非常抱歉，虽然昨天是准时躺下了，但是却因为身体不适而没有睡好。」
     - if: era.get('love:71') >= 75
-      random: true
       lines:
         - random: true
           lines:
@@ -264,10 +246,8 @@
   sync: true
   lines:
     - if: era.get('status:71:沉睡') === 0 && era.get('status:71:马跳S') === 0
-      random: true
       lines:
         - if: era.get('love:71') < 75
-          random: true
           lines:
             - color: %代表色%
               content:
@@ -277,7 +257,6 @@
             - 和 目白阿尔丹 一天的训练结束后%你%站在宿舍楼门口外面，目送着阿尔丹回到宿舍。
             - %你%看着微笑着挥手告别的的目白阿尔丹，也微笑着回以同样的动作。
         - if: era.get('love:71') >= 75
-          random: true
           lines:
             - color: %代表色%
               content:
@@ -292,10 +271,8 @@
                   content: 目白阿尔丹
                 - 「那就拜托你咯，亲爱的🎵」
     - if: era.get('status:71:沉睡') > 0 || era.get('status:71:马跳S') > 0
-      random: true
       lines:
         - if: era.get('love:71') < 75
-          random: true
           lines:
             - if: era.get('status:71:马跳S') === 0
               content: 「看来今天让%她%有点努力过头了呢。」
@@ -313,7 +290,6 @@
                 - 「谢谢您，%称呼%，麻烦你了。」
             - %你%陪着偶尔打着哈欠的 目白阿尔丹 回到了%她%的宿舍楼，看到 樱花千代王 接手后才放心回去。
         - if: era.get('love:71') >= 75
-          random: true
           lines:
             - if: era.get('status:71:马跳S') === 0
               content: 「今天也辛苦你了呢，阿尔丹」

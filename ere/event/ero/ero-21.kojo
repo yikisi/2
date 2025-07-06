@@ -51,7 +51,6 @@
     content:
       - 玉藻十字想要张口说话却无法搜索到合适的词汇，于是索性以双臂环抱住%你%的脖子，二人就此迷失在深情的亲吻当中。
   - if: era.get('relation:21:0') <= 225
-    random: true
     lines:
       - color: %玉藻色%
         content:

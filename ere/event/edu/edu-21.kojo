@@ -130,7 +130,6 @@
   - acc: 1
     content: 「怎么了吗？」
   - if: era.get('relation:21:0') > 225
-    random: true
     lines:
       - color: %玉藻色%
         content:
@@ -184,7 +183,6 @@
                 content: 玉藻十字
               - 「……」
   - if: era.get('relation:21:0') <= 225
-    random: true
     lines:
       - color: %玉藻色%
         content:
@@ -607,7 +605,6 @@
   - 而被称为《德比魔咒》的传说更是让人莫名地感到不安——德比%马娘%里有为数不少无以为继，泯然众人。
   - 而若采百家之言，则「因为挑战三冠导致消耗过度」的说法最为可信。
   - if: era.get('cflag:301:扩展变量').who_am_i > 0
-    random: true
     lines:
       - 比方说……丰收时刻——
       - 在东京优骏后患上伤病而被迫退役的传说赛%马娘%……

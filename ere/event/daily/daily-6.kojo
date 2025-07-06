@@ -221,7 +221,6 @@
   - 在那之后，小栗帽似乎感觉到了什么异样……
   -
   - if: d.dice > 0.5
-    random: true
     lines:
       - color: %代表色%
         content:
@@ -232,7 +231,6 @@
       - 小栗帽惊讶地从口袋里掏出一张纸，但%你%觉得这只是%她%之前就把这玩意忘在口袋里面了而已。
       - 不过不论如何，看着%她%的笑脸，你也没必要破坏这个气氛了。
   - if: d.dice < 0.5
-    random: true
     lines:
       - color: %代表色%
         content:
@@ -290,7 +288,7 @@
           - fontSize: bold
             content: 小栗帽
           - 「为什么爪子的力道那么弱啊……！」
-  - if: era.get('cflag:21:招募状态') === 1
+  - if: era.get('cflag:21:招募状态') === 1 && era.get('cflag:45:招募状态') === 1
     random: true
     lines:
       - color: %代表色%
@@ -330,7 +328,7 @@
           - fontSize: bold
             content: 小栗帽
           - 「唱歌和比赛一样都让人热血沸腾啊。」
-  - if: era.get('cflag:21:招募状态') === 1
+  - if: era.get('cflag:21:招募状态') === 1 && era.get('cflag:45:招募状态') === 1
     random: true
     lines:
       - color: %代表色%
