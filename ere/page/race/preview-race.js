@@ -713,10 +713,10 @@ async function preview_race(
             }
             break;
           case 10:
-            index--;
+            chara = get_chara_talk(--index);
             break;
           case 11:
-            index++;
+            chara = get_chara_talk(++index);
             break;
           case 99:
             flag = false;
@@ -735,6 +735,9 @@ async function preview_race(
           (p, c) => p || c > 0,
           false,
         );
+        if (o_has_item === u.race.conditionParams.item) {
+          return;
+        }
         const ero_skill_level = u.list_skill.find(
           (s) => s.data.group_id === 66003,
         )?.data?.group_level;

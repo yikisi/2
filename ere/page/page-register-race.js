@@ -191,24 +191,23 @@ async function reg_race_page() {
           : []
         ).forEach((e) => {
           const ground = adaptability_names[race_infos[e].ground].substring(
-              0,
-              1,
-            ),
-            distance = adaptability_names[race_infos[e].distance + 2].substring(
-              0,
-              1,
-            ),
-            ag = adaptability_dict[ground],
-            ad = adaptability_dict[distance],
-            is_aim_race = get_custom_check(chara_id).is_aim_race(
-              e,
-              edu_weeks + round - cur_round,
-            ),
-            is_foreign = race_infos[e].track >= track_enum.longchamp,
-            is_grand_live = grand_lives.check(
-              e,
-              Number(round - year_begin >= 48),
-            );
+            0,
+            1,
+          );
+          const distance = adaptability_names[
+            race_infos[e].distance + 2
+          ].substring(0, 1);
+          const ag = adaptability_dict[ground];
+          const ad = adaptability_dict[distance];
+          const is_aim_race = get_custom_check(chara_id).is_aim_race(
+            e,
+            edu_weeks + round - cur_round,
+          );
+          const is_foreign = race_infos[e].track >= track_enum.longchamp;
+          const is_grand_live = grand_lives.check(
+            e,
+            +(round - year_begin >= 48),
+          );
           if (
             e === race_enum.begin_race ||
             registered_race.race === e ||
