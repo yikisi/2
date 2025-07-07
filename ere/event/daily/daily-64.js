@@ -34,6 +34,7 @@ const quick_into_sex = require('#/event/snippets/quick-into-sex');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
+const { buff_colors } = require('#/data/color-const');
 const EroParticipant = require('#/data/ero/ero-participant');
 const { item_enum } = require('#/data/ero/item-const');
 const { part_enum } = require('#/data/ero/part-const');
@@ -134,7 +135,7 @@ module.exports = class extends CustomizedDaily {
         kojo,
         {
           代表色: pama.color,
-          你: era.get(`callname:${this.id}:-2`),
+          T: era.get(`callname:${this.id}:-2`),
           她: pama.sex,
           少女: pama.teen_sex_title,
           称呼: sys_get_callname(this.id, 0),
@@ -317,7 +318,7 @@ module.exports = class extends CustomizedDaily {
           (await print_name_and_show_kojo('圣诞节', pama, kojo, dict))[6] === 1
         ) {
           const cache = era.get('flag:当前位置');
-          era.set('flag:当前位置', location_enum.love_hotel);
+          era.set('flag:当前位置', location_enum.home);
           await quick_into_sex(this.id);
           era.set('flag:当前位置', cache);
         }
@@ -325,5 +326,33 @@ module.exports = class extends CustomizedDaily {
       default:
         return await super.celebration(hook);
     }
+  }
+
+  async basement_end() {
+    const pama = get_chara_talk(this.id);
+    let name;
+    if (new PamaEduMarks().half_life > 0) {
+      name = '无终的逃亡';
+    } else if (era.get(`love:${this.id}`) >= 75) {
+      name = '明日再会';
+    } else {
+      return await super.basement_end();
+    }
+    await kojo[name](this.#dict);
+    await print_event_name([{ color: buff_colors[3], content: name }], pama);
+  }
+
+  async slave_end() {
+    const pama = get_chara_talk(this.id);
+    let name;
+    if (new PamaEduMarks().half_life > 0) {
+      name = '无终的逃亡';
+    } else if (era.get(`love:${this.id}`) >= 75) {
+      name = '迷途终点';
+    } else {
+      return await super.slave_end();
+    }
+    await kojo[name](this.#dict);
+    await print_event_name([{ color: buff_colors[3], content: name }], pama);
   }
 };

@@ -10,7 +10,11 @@ const kojo = require('#/event/edu/edu-64.kojo');
 const CustomizedEdu = require('#/event/edu/edu-common');
 const print_event_name = require('#/event/snippets/print-event-name');
 
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
+
 const { get_chara_color } = require('#/data/chara-colors');
+const { buff_colors } = require('#/data/color-const');
+const PamaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-64');
 const { attr_enum, fumble_result } = require('#/data/train-const');
 
 module.exports = class extends CustomizedEdu {
@@ -53,5 +57,19 @@ module.exports = class extends CustomizedEdu {
       await print_event_name('在保健室', pama);
       await kojo['训练失败'](this.#dict);
     }
+  }
+
+  async crazy_fan_end() {
+    const pama = get_chara_talk(this.id);
+    let name;
+    if (new PamaEduMarks().half_life > 0) {
+      name = '无终的逃亡';
+    } else if (era.get(`love:${this.id}`) >= 75) {
+      name = '无力逃亡';
+    } else {
+      return await super.slave_end();
+    }
+    await kojo[name](this.#dict);
+    await print_event_name([{ color: buff_colors[3], content: name }], pama);
   }
 };
