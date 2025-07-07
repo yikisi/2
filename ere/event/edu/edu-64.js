@@ -9,6 +9,7 @@ const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 const kojo = require('#/event/edu/edu-64.kojo');
 const CustomizedEdu = require('#/event/edu/edu-common');
 const print_event_name = require('#/event/snippets/print-event-name');
+const print_name_and_show_kojo = require('#/event/snippets/print-name-and-show-kojo');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
@@ -39,8 +40,8 @@ module.exports = class extends CustomizedEdu {
   }
 
   async train_success_add(pama, me, callname, hook) {
-    await print_event_name('热血的追加训练！', pama);
-    hook.arg = (await kojo['加练'](this.#dict))[0] === 1;
+    hook.arg =
+      (await print_name_and_show_kojo('加练', pama, kojo, this.#dict))[0] === 1;
   }
 
   async train_fail(pama, me, callname, hook, extra_flag) {

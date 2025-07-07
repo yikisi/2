@@ -231,19 +231,20 @@ module.exports = class extends CustomizedDaily {
   }
 
   async good_night(hook) {
-    const dict = {
-      ...this.#dict,
-      check: get_custom_check(this.id).is_want_make_love(),
-    };
-    const ret = await kojo['晚安'](dict);
-    if (ret[0] === 1) {
-      hook.arg = 1;
-    } else if (ret[0] === 2) {
-      if (dict.check === 2) {
-        hook.arg = 2;
-      } else {
-        hook.arg = 0;
+    const check = get_custom_check(this.id).is_want_make_love();
+    if (check > 0) {
+      const ret = await kojo['晚安求爱'](this.#dict);
+      if (ret[0] === 1) {
+        hook.arg = 1;
+      } else if (ret[0] === 2) {
+        if (check === 2) {
+          hook.arg = 2;
+        } else {
+          hook.arg = 0;
+        }
       }
+    } else {
+      kojo['晚安'](this.#dict);
     }
   }
 

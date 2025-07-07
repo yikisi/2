@@ -1033,74 +1033,73 @@
       - %善信% 的眼睛里闪着光，似乎是完全没在意门禁的事情。
 
 晚安:
-  - if: era.get('status:0:沉睡') === 0 && era.get('status:64:沉睡') === 0 && era.get('status:64:马跳S') === 0
+  sync: true
+  lines:
+    - if: era.get('status:0:沉睡') === 0 && era.get('status:64:沉睡') === 0 && era.get('status:64:马跳S') === 0
+      lines:
+        - random: true
+          lines:
+            - %善信% 迈着欢快的步伐，向着送自己回到宿舍 %T% 打着招呼。
+            - color: %代表色%
+              content:
+                - fontWeight: bold
+                  content: %善信%
+                - 「明天还会再见的对吧？再会啦！」
+        - random: true
+          lines:
+            - 繁忙的一天过去之后，把同样累的快要趴下的 %善信% 送回了宿舍。
+            - color: %代表色%
+              content:
+                - fontWeight: bold
+                  content: %善信%
+                - 「嗯……好像稍微努力过度了点啊，嘿嘿～」
+    - if: era.get('status:0:沉睡') === 0 && (era.get('status:64:沉睡') > 0 || era.get('status:64:马跳S') > 0)
+      lines:
+        - 陷入沉睡中的 %T% 在朦胧中似乎看见了 %善信% 想要动手却又犹豫不决的样子，最后留下的只有一声亲切又温柔的道别声。
+    - if: era.get('status:0:沉睡') > 0
+      lines:
+        - 看着正在沉睡的 %善信%，完全做不到主动去叫醒%她%，只能辛苦一下把%她%送回宿舍了。
+        - 这个时候耍坏的话，%她%会不会醒过来呢？
+
+晚安求爱:
+  - 将 %善信% 送回宿舍之后，却被轻轻拉了一下袖子。
+  - 站在 %T% 身后的 %善信% 有些口齿不清，但却能听见清楚的最后的声音。
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: %善信%
+      - 「外宿之类的事情，我会处理的，所以……」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: %善信%
+      - 「我……可以逃到%称呼%的身边吗？」
+  - acc: 1
+    content: 「可以哦。」
     lines:
-      - if: d.check > 0
-        random: true
-        lines:
-          - 将 %善信% 送回宿舍之后，却被轻轻拉了一下袖子。
-          - 站在 %T% 身后的 %善信% 有些口齿不清，但却能听见清楚的最后的声音。
-          - color: %代表色%
-            content:
-              - fontWeight: bold
-                content: %善信%
-              - 「外宿之类的事情，我会处理的，所以……」
-          - color: %代表色%
-            content:
-              - fontWeight: bold
-                content: %善信%
-              - 「我……可以逃到%称呼%的身边吗？」
-          - acc: 1
-            content: 「可以哦。」
-            lines:
-              - 外宿的申请已经无所谓了，现在已经有了更加重要的事情……
-              - 就是带着粘在手臂上不肯松手的 %善信% 回家。
-          - acc: 2
-            content: 「别那么任性。」
-            lines:
-              - if: d.check === 2
-                lines:
-                  - color: %代表色%
-                    content:
-                      - fontWeight: bold
-                        content: %善信%
-                      - 「但是……」
-                  - 客观来看，%马娘%的力气比一般人要大得多……
-                  - 自然也能轻松的抓住现在的 %T%。
-                  - color: %代表色%
-                    content:
-                      - fontWeight: bold
-                        content: %善信%
-                      - 「不去做的话，怎么叫做任性呢？」
-              - if: d.check !== 2
-                lines:
-                  - %善信% 的表情从期待变成了阴暗，把失落收进了下垂的刘海里。
-                  - 转过身乖巧的走进了宿舍，却在门口又偷偷看了一眼 %T% 的身影，这才低着头消失在拐角里。
-      - if: d.check === 0
-        random: true
-        lines:
-          - %善信% 迈着欢快的步伐，向着送自己回到宿舍 %T% 打着招呼。
-          - color: %代表色%
-            content:
-              - fontWeight: bold
-                content: %善信%
-              - 「明天还会再见的对吧？再会啦！」
-      - if: d.check === 0
-        random: true
-        lines:
-          - 繁忙的一天过去之后，把同样累的快要趴下的 %善信% 送回了宿舍。
-          - color: %代表色%
-            content:
-              - fontWeight: bold
-                content: %善信%
-              - 「嗯……好像稍微努力过度了点啊，嘿嘿～」
-  - if: era.get('status:0:沉睡') === 0 && (era.get('status:64:沉睡') > 0 || era.get('status:64:马跳S') > 0)
+      - 外宿的申请已经无所谓了，现在已经有了更加重要的事情……
+      - 就是带着粘在手臂上不肯松手的 %善信% 回家。
+  - acc: 2
+    content: 「别那么任性。」
     lines:
-      - 陷入沉睡中的 %T% 在朦胧中似乎看见了 %善信% 想要动手却又犹豫不决的样子，最后留下的只有一声亲切又温柔的道别声。
-  - if: era.get('status:0:沉睡') > 0
-    lines:
-      - 看着正在沉睡的 %善信%，完全做不到主动去叫醒%她%，只能辛苦一下把%她%送回宿舍了。
-      - 这个时候耍坏的话，%她%会不会醒过来呢？
+      - if: d.check === 2
+        lines:
+          - color: %代表色%
+            content:
+              - fontWeight: bold
+                content: %善信%
+              - 「但是……」
+          - 客观来看，%马娘%的力气比一般人要大得多……
+          - 自然也能轻松的抓住现在的 %T%。
+          - color: %代表色%
+            content:
+              - fontWeight: bold
+                content: %善信%
+              - 「不去做的话，怎么叫做任性呢？」
+      - if: d.check !== 2
+        lines:
+          - %善信% 的表情从期待变成了阴暗，把失落收进了下垂的刘海里。
+          - 转过身乖巧的走进了宿舍，却在门口又偷偷看了一眼 %T% 的身影，这才低着头消失在拐角里。
 
 读档对话:
   - if: (era.get('cflag:64:妊娠阶段') !== 2 && !era.get('cflag:64:扩展变量').report) || era.get('exp:64:生产次数') > 0

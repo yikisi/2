@@ -803,6 +803,7 @@ class CustomizedEdu extends ICustomizedEdu {
           hook,
           extra,
         );
+        era.println();
       }
     } else if (
       extra.attr !== attr_enum.intelligence &&
