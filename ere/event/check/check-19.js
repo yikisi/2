@@ -197,7 +197,7 @@ module.exports = class extends CustomizedCheck {
     return ['我推的马娘'];
   }
 
-  is_aim_race(race, edu_weeks) {
+  is_aim_race(race, edu_weeks, rank) {
     switch (race) {
       case race_enum.mile_cha:
         if (
@@ -214,6 +214,6 @@ module.exports = class extends CustomizedCheck {
           return 0;
         }
     }
-    return aim_races[`${edu_weeks}_${race}`] || aim_races[race];
+    return super.is_aim_race(race, edu_weeks, rank);
   }
 };

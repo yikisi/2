@@ -110,7 +110,7 @@
     },
     "26": {
       "": "MB-19890425",
-      "_仆": "CODE：淋面"
+      "_仆": "CODE: Glaçage"
     },
     "27": {
       "": "Straight・Line",
@@ -168,6 +168,7 @@
       "_江户": "水干抚子"
     },
     "40": {
+      "2": "Boho Flare",
       "": "真我/1928",
       "_江户": "秋樱舞者"
     },
@@ -340,7 +341,8 @@
       "_礼": "Flowing Blue"
     },
     "86": {
-      "": "Onyx・Line"
+      "": "Onyx・Line",
+      "_婚": "Untouchable Eden"
     },
     "87": {
       "": "Flare",
@@ -351,6 +353,9 @@
     },
     "89": {
       "": "Grand itinéraire"
+    },
+    "90": {
+      "": "Le beau sommet"
     },
     "91": {
       "": "Voyage étincelant"
@@ -397,7 +402,8 @@
       "": "Red in Black"
     },
     "110": {
-      "": "Future Weaver"
+      "": "Future Weaver",
+      "_婚": "Twinbell Queen"
     },
     "115": {
       "": "总览"
@@ -422,6 +428,16 @@
     },
     "131": {
       "": "Smile My Way!"
+    },
+    "132": {
+      "": "9927 Wishes"
+    },
+    "133": {
+      "": "光彩陆离的编纂者"
+    },
+    "345": {
+      "2": "从零到零",
+      "": "ST2"
     }
   },
   "race_clothe_list": [

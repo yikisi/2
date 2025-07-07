@@ -1,6 +1,7 @@
 const { readdirSync, writeFileSync } = require('fs');
+const { join } = require('path');
 
-const base_scripts = readdirSync('../../ere/event/basement')
+const base_scripts = readdirSync(join(__dirname, '../../ere/event/basement'))
   .filter(
     (e) =>
       e.endsWith('.js') &&
@@ -26,15 +27,10 @@ const base_scripts = readdirSync('../../ere/event/basement')
     }
   });
 
-let output = `const { get } = require('#/era-electron');
+let output = `const CustomizedBase = require('#/event/basement/basement-common');
+const CommonKojoFactory = require('#/event/factory-common');
 
-const common_basement = require('#/event/basement/basement-common');
-const script_dict = require('#/event/script-dict.json');
-
-const { first_child_id } = require('#/data/other-const');
-
-const cons_dict = {},
-  obj_dict = {};
+const cons_dict = {};
 
 const current = new Date().getTime();
 
@@ -52,25 +48,31 @@ console.log(
   'ms',
 );
 
-module.exports = {
+class BasementFactory extends CommonKojoFactory {
+  constructor() {
+    super(cons_dict, CustomizedBase);
+  }
+
   /**
-   * @param {number} chara_id
+   * @param {number} id
    * @returns {CustomizedBase}
    */
-  get_custom_basement(chara_id) {
-    if (obj_dict[chara_id]) {
-      return obj_dict[chara_id];
-    }
-    const script_name =
-        chara_id >= first_child_id ? get(\`callname:$\{chara_id}:-2\`) : chara_id,
-      class_cons =
-        cons_dict[script_dict[script_name] || script_name] || common_basement;
-    return (obj_dict[chara_id] = new class_cons(chara_id)).get_this();
-  },
-};
+  get_custom_basement(id) {
+    return this.get(id);
+  }
+}
+
+const basement_factory = new BasementFactory();
+basement_factory.get_custom_basement =
+  basement_factory.get_custom_basement.bind(basement_factory);
+
+module.exports = basement_factory;
 `;
 
-writeFileSync('../../ere/event/basement/basement-factory.js', output);
+writeFileSync(
+  join(__dirname, '../../ere/event/basement/basement-factory.js'),
+  output,
+);
 
 console.log(
   `[generate-basement-factory.js] registers ${base_scripts.length} basement scripts`,

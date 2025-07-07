@@ -8,16 +8,16 @@ const dict = {};
 
 class CharaTitles {
   /** @returns {CharaTitles} */
-  static get(id) {
-    return dict[id] || (dict[id] = new CharaTitles(id));
+  static get(cid) {
+    return dict[cid] || (dict[cid] = new CharaTitles(cid));
   }
 
   /** @type {number} */
   #id;
 
-  /** @param {number} chara_id */
-  constructor(chara_id) {
-    this.#id = chara_id;
+  /** @param {number} cid */
+  constructor(cid) {
+    this.#id = cid;
   }
 
   count() {

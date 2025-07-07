@@ -14,6 +14,15 @@ const sys_personal_achievement = {
   get(chara_id) {
     return global_object[chara_id] || 0;
   },
+  init() {
+    return (global_object =
+      era.get('global:角色成就') || era.set('global:角色成就', {}));
+  },
+  list() {
+    return Object.entries(global_object)
+      .filter((e) => e[1])
+      .map((e) => Number(e[0]));
+  },
   /**
    * @param {number} chara_id
    * @param {number} _val
@@ -26,16 +35,16 @@ const sys_personal_achievement = {
         [
           {
             color,
-            content: era.get(`static:${chara_id}:name`),
+            content: `[${title}] `,
             fontSize: '1rem',
           },
-          '：',
           {
             color,
-            content: title,
+            content: era.get(`static:${chara_id}:name`),
             fontSize: '1rem',
             fontWeight: 'bold',
           },
+          '：',
           { isBr: true },
           title_desc[title] || '在一次育成周期内赢取了六次以上的G1比赛胜利',
         ],
@@ -45,15 +54,6 @@ const sys_personal_achievement = {
       );
     }
     return (global_object[chara_id] = _val);
-  },
-  init() {
-    return (global_object =
-      era.get('global:角色成就') || era.set('global:角色成就', {}));
-  },
-  list() {
-    return Object.entries(global_object)
-      .filter((e) => e[1])
-      .map((e) => Number(e[0]));
   },
 };
 

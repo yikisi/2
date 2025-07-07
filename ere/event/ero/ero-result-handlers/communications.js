@@ -1,9 +1,13 @@
 const era = require('#/era-electron');
 
+const {
+  sys_change_motion_by_base,
+  sys_clean_oor_parts,
+} = require('#/system/ero/sys-calc-distance');
 const sys_do_sex = require('#/system/ero/sys-calc-ero');
 const {
+  clean_all_parts_without_item,
   clean_part,
-  clean_part_without_item,
 } = require('#/system/ero/sys-calc-ero-part');
 const { change_ero_master } = require('#/system/ero/sys-calc-ero-status');
 const { add_juel } = require('#/system/ero/sys-calc-juel');
@@ -12,21 +16,21 @@ const {
   clean_stain,
   rollback_penis_stain,
 } = require('#/system/ero/sys-calc-stain');
+const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const add_meek_or_hate = require('#/event/ero/snippets/add-meek-or-hate');
 
 const EroParticipant = require('#/data/ero/ero-participant');
 const { base_emotion_juel } = require('#/data/ero/juel-const');
-const { part_enum, part_touch } = require('#/data/ero/part-const');
+const { base_enum, part_enum, part_touch } = require('#/data/ero/part-const');
 const { stain_enum } = require('#/data/ero/stain-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
-const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
 /** @param {Record<string,function(number,number,HookArg,{check:number})>} handlers */
 module.exports = (handlers) => {
   handlers[ero_hooks.go_on] = () => {
-    return era.set('tflag:投降', 1);
+    era.set('tflag:投降', 1);
   };
 
   handlers[ero_hooks.kiss] = (attacker, defender, _, extra_flag) => {
@@ -35,6 +39,12 @@ module.exports = (handlers) => {
       new EroParticipant(defender, part_enum.mouth),
     );
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
+    if (sys_change_motion_by_base(attacker, defender, [base_enum.same])) {
+      sys_clean_oor_parts(attacker, defender, {
+        a: part_enum.mouth,
+        d: part_enum.mouth,
+      });
+    }
   };
 
   handlers[ero_hooks.french_kiss] = (attacker, defender, _, extra_flag) => {
@@ -45,8 +55,11 @@ module.exports = (handlers) => {
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 5);
   };
 
-  handlers[ero_hooks.relax] = (_, defender, hook) =>
-    hook.arg === true && add_juel(defender, '恐惧', base_emotion_juel);
+  handlers[ero_hooks.relax] = (_, defender, hook) => {
+    if (hook.arg === true) {
+      add_juel(defender, '恐惧', base_emotion_juel);
+    }
+  };
 
   handlers[ero_hooks.lure] = (attacker, defender, hook) => {
     era.add(`nowex:${attacker}:精力消耗`, 20);
@@ -86,99 +99,88 @@ module.exports = (handlers) => {
     add_juel(defender, '顺从', base_emotion_juel / 5);
   };
 
-  handlers[ero_hooks.switch] = (_, defender) => {
-    change_ero_master(defender);
-    add_juel(defender, '顺从', base_emotion_juel);
+  handlers[ero_hooks.switch] = (a, d) => {
+    change_ero_master(d);
+    add_juel(d, '顺从', base_emotion_juel);
   };
 
   /**
-   * @param {number} attacker
-   * @param {number} defender
+   * @param {number} a
+   * @param {number} d
    * @param {HookArg} hook
-   * @param {{success:boolean}} extra_flag
+   * @param {{success:boolean}} extra
    */
-  handlers[ero_hooks.resist] = (attacker, defender, hook, extra_flag) => {
-    era.add(`nowex:${attacker}:体力消耗`, 25);
-    if (extra_flag.success) {
-      change_ero_master(attacker);
-      add_juel(defender, '恐惧', base_emotion_juel);
+  handlers[ero_hooks.resist] = (a, d, hook, { success: s_flag }) => {
+    era.add(`nowex:${a}:体力消耗`, 25);
+    if (s_flag) {
+      change_ero_master(a);
+      add_juel(d, '恐惧', base_emotion_juel);
     } else {
-      add_juel(attacker, '恐惧', base_emotion_juel / 4);
+      add_juel(a, '恐惧', base_emotion_juel / 4);
     }
   };
 
   handlers[ero_hooks.gargle] = (attacker, defender) => {
-    let remove_stains = [0, 0];
-    [attacker, defender].forEach((chara_id, i) => {
-      if (
-        sys_check_awake(chara_id) &&
-        era.get(`tequip:${chara_id}:口腔`) === -1
-      ) {
-        remove_stains[i] = clean_stain(chara_id, part_enum.mouth);
-        clean_part(new EroParticipant(chara_id, part_enum.mouth));
-        era.add(`nowex:${chara_id}:精力消耗`, 10);
+    let r_stains = [attacker, defender].map((cid) => {
+      if (sys_check_awake(cid) && era.get(`tequip:${cid}:口腔`) === -1) {
+        clean_part(new EroParticipant(cid, part_enum.mouth));
+        const ret = clean_stain(cid, part_enum.mouth);
+        era.add(`nowex:${cid}:精力消耗`, 10);
+        return ret;
       }
+      return 0;
     });
-    if (remove_stains[1]) {
+    if (r_stains[1]) {
       add_juel(defender, '顺从', base_emotion_juel / 2);
-    } else if (!remove_stains[0]) {
+    } else if (!r_stains[0]) {
       add_juel(defender, '反感', base_emotion_juel * 0.5);
     }
   };
 
   handlers[ero_hooks.wipe_body] = (attacker, defender) => {
-    let removed_stains;
-    [attacker, defender].forEach((chara_id) => {
-      removed_stains = 0;
-      if (era.get(`tcvar:${chara_id}:避孕套`)) {
-        era.set(`tcvar:${chara_id}:避孕套`, 0);
-        rollback_penis_stain(chara_id);
+    clean_all_parts_without_item(attacker, defender);
+    const r_stains = [attacker, defender].map((cid) => {
+      let tmp = 0;
+      if (era.get(`tcvar:${cid}:避孕套`)) {
+        era.set(`tcvar:${cid}:避孕套`, 0);
+        rollback_penis_stain(cid);
       }
       const part_list = [part_enum.hand, part_enum.foot, part_enum.body];
       [part_enum.penis, part_enum.clitoris]
-        .filter(
-          (part) => era.get(`tequip:${chara_id}:${part_touch[part]}`) === -1,
-        )
-        .forEach((e) => part_list.push(e));
-      removed_stains += clean_stain(chara_id, ...part_list);
-      clean_part(...part_list.map((e) => new EroParticipant(chara_id, e)));
+        .filter((p) => era.get(`tequip:${cid}:${part_touch[p]}`) === -1)
+        .forEach((p) => part_list.push(p));
+      tmp += clean_stain(cid, ...part_list);
       era.add(`nowex:${attacker}:精力消耗`, 20);
       era.add(`nowex:${attacker}:体力消耗`, 10);
-      removed_stains += clean_part_stain(
-        chara_id,
-        part_enum.breast,
-        stain_enum.milk,
-      );
-      clean_part_without_item(new EroParticipant(chara_id, part_enum.breast));
-      if (era.get(`tequip:${chara_id}:阴道`) === -1) {
-        removed_stains += clean_part_stain(
-          chara_id,
+      tmp += clean_part_stain(cid, part_enum.breast, stain_enum.milk);
+      if (era.get(`tequip:${cid}:阴道`) === -1) {
+        tmp += clean_part_stain(
+          cid,
           part_enum.virgin,
           stain_enum.virgin,
           stain_enum.lubricant,
           stain_enum.secretion,
           stain_enum.semen,
         );
-        clean_part(new EroParticipant(chara_id, part_enum.virgin));
         era.add(`nowex:${attacker}:体力消耗`, 10);
       }
-      if (era.get(`tequip:${chara_id}:肛门`) === -1) {
-        removed_stains += clean_part_stain(
-          chara_id,
+      if (era.get(`tequip:${cid}:肛门`) === -1) {
+        tmp += clean_part_stain(
+          cid,
           part_enum.anal,
           stain_enum.lubricant,
           stain_enum.anal,
           stain_enum.semen,
         );
-        clean_part(new EroParticipant(chara_id, part_enum.anal));
         era.add(`nowex:${attacker}:体力消耗`, 10);
       }
+      return tmp;
     });
     add_juel(
       defender,
       '顺从',
-      removed_stains
-        ? (base_emotion_juel * (Math.min(removed_stains, 6) + 4)) / 5
+      r_stains[1] > 0
+        ? (base_emotion_juel * (Math.min(r_stains[1], 6) + 4)) / 5
         : base_emotion_juel / 2,
     );
   };

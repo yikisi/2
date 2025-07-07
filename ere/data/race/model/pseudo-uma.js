@@ -1,3 +1,9 @@
+const { sort_list } = require('#/utils/list-utils');
+
+const {
+  calc_attr_score,
+  get_attr_by_score,
+} = require('#/data/calc-attr-score');
 const ConditionParams = require('#/data/race/model/condition-params');
 const { attr_names } = require('#/data/train-const');
 
@@ -53,6 +59,8 @@ class PseudoUma {
    * @type {number[]}
    */
   attrs;
+  /** @type {number[]} */
+  o_attrs;
   /**
    * 本次使用的跑法
    * @type {number}
@@ -123,14 +131,11 @@ class PseudoUma {
     // 五项属性方差
     attr_err: 0,
     change_order_finalcorner: 0,
-    // 训练员声望
-    fame: 0,
     // 发动绿技能个数
     greenCount: 0,
     // 比赛地语言等级
     language: 0,
     loc_mind_other_diff_random: [0, 0],
-    loc_mind_style: 0,
     skill_count: 0,
     stamina: 0,
     temptationSpan: 0,
@@ -138,8 +143,6 @@ class PseudoUma {
     velocityIdeal: 0,
     velocityMaxRush: 0,
     velocityMin: 0,
-    // 体重
-    weight: 4000,
     // 训练等级和
     research_lv: 0,
     // 胜场数
@@ -168,6 +171,8 @@ class PseudoUma {
     staminaCost: 0,
     // 用于阻挡计算的实时力量
     strength: 0,
+    // 实际采取的跑法策略
+    style: 0,
     // 焦躁计时
     temptation: 0,
     totalTime: '',
@@ -242,6 +247,14 @@ class PseudoUma {
     // 下坡时进入状态的概率
     down: 0,
   };
+  // 带玩具比赛用的系数
+  ero = {
+    item: { anal: 0, breast: 0, clitoris: 0, penis: 0, virgin: 0 },
+    param: { anal: 0, breast: 0, clitoris: 0, penis: 0, virgin: 0, sex: 0 },
+    buff: { anal: 0, breast: 0, clitoris: 0, penis: 0, virgin: 0, sex: 0 },
+    cost: { anal: 0, breast: 0, clitoris: 0, penis: 0, virgin: 0, sex: 0 },
+    main: ['sex'],
+  };
   /**
    * 传奇对手标记
    * @type {boolean|2}
@@ -282,6 +295,7 @@ class PseudoUma {
     this.color = color;
     this.motivation = motivation;
     this.attrs = attrs;
+    this.o_attrs = [...this.attrs];
     this.style = style;
     this.adapt_style_list = adapt_style_list;
     this.adapt_distance_list = adapt_distance_list;
@@ -293,12 +307,43 @@ class PseudoUma {
     this.pop = new Array(4);
   }
 
+  calc_attrs() {
+    this.attr_buffs = this.attr_buffs.map((l, i) => {
+      const buffs = l.map((e) => {
+        const ret = { buff: e },
+          val_str = e.substring(0, e.indexOf('['));
+        if (val_str.endsWith('%')) {
+          ret.val = Number(val_str.substring(0, val_str.length - 1));
+          ret.p = true;
+        } else {
+          ret.val = Number(val_str);
+        }
+        return ret;
+      });
+      this.attrs[i] = this.o_attrs[i];
+      this.attrs[i] *=
+        (100 + buffs.filter((e) => e.p).reduce((p, c) => p + c.val, 0)) / 100;
+      this.attrs[i] += buffs.filter((e) => !e.p).reduce((p, c) => p + c.val, 0);
+      return sort_list(buffs, (e) => (e.p ? 10000 + e.val : e.val), false).map(
+        (e) => e.buff,
+      );
+    });
+  }
+
   /**
-   * @param {number} [_legend]
+   * @param {number} level
+   * @param {number} aim
+   * @param {boolean|2} [_legend]
    * @returns {PseudoUma}
    */
-  set_legend(_legend) {
-    this.legend = _legend || true;
+  set_legend(level, aim, _legend = true) {
+    const a_scores = this.o_attrs.map(calc_attr_score);
+    if (level < aim - 5) {
+      const buff = (aim - level) / 5;
+      this.o_attrs = a_scores.map((e) => get_attr_by_score(e + buff));
+      this.attrs = [...this.o_attrs];
+    }
+    this.legend = _legend;
     return this;
   }
 

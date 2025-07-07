@@ -1,6 +1,9 @@
 class EroParticipant {
+  /** @type {number} */
   id;
+  /** @type {number} */
   part;
+  /** @type {number} */
   times;
 
   /**
@@ -8,13 +11,10 @@ class EroParticipant {
    * @param {number} part character part
    * @param {number} [buff] extra buff of attack
    */
-  constructor(id, part, buff) {
+  constructor(id, part, buff = 0) {
     this.id = id;
     this.part = part;
-    this.times = 1 + (buff || 0);
-    if (this.times < 0) {
-      this.times = 0;
-    }
+    this.times = Math.max(1 + buff, 0.01);
   }
 }
 

@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   203141,
   '剔透玲珑',
-  '比赛中盘一段时间内少量提升速度，并少量回复体力',
+  '比赛中盘一段时间内少量提升速度，并少量回复持久力',
   20314,
   2,
   17,

@@ -19,6 +19,7 @@ const {
 
 const print_ero_page = require('#/page/page-ero');
 
+const lines = require('#/event/edu/edu-7.kojo');
 const Edu7UntilWeekStart = require('#/event/edu/edu-events-7/week-start');
 const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
@@ -32,6 +33,20 @@ const { lust_border } = require('#/data/ero/orgasm-const');
 const recruit_flags = require('#/data/event/recruit-flags');
 
 module.exports = class extends Edu7UntilWeekStart {
+  get #dict() {
+    const o = {};
+    o['你'] = era.get('callname:0:-2');
+    const gold_ship = get_chara_talk(this.id);
+    o['她'] = gold_ship.sex;
+    o['马娘'] = gold_ship.get_uma_sex_title();
+    o['代表色'] = gold_ship.color;
+    return o;
+  }
+
+  async crazy_fan_end() {
+    await lines['crazy_fan_end'](this.#dict);
+  }
+
   async out_church(gold_ship, me, callname, hook, extra_flag, event_object) {
     if (era.get('flag:当前互动角色') !== 7) {
       add_event(hook.hook, event_object);

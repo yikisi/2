@@ -501,8 +501,7 @@ module.exports = class extends CustomizedCheck {
     return buffer;
   }
 
-  is_aim_race(race, edu_weeks) {
-    const { plan_b } = new TachyonEduMarks();
-    return aim_races[plan_b][`${edu_weeks}_${race}`] || aim_races[plan_b][race];
+  get_aim_races() {
+    return aim_races[new TachyonEduMarks().plan_b];
   }
 };

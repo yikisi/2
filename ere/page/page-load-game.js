@@ -16,13 +16,14 @@ const { get_custom_check } = require('#/event/check/check-factory');
 const { get_custom_daily } = require('#/event/daily/daily-factory');
 const { add_event, cb_enum, get: get_queue } = require('#/event/queue');
 
-//const select_yes_or_no = require('#/page/components/select-yes-or-no');
+const select_yes_or_no = require('#/page/components/select-yes-or-no');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { action_type_enum } = require('#/data/basement-const');
 const { get_chara_color } = require('#/data/chara-colors');
 const CharaTitles = require('#/data/chara-titles');
+const { adaptability_colors } = require('#/data/color-const');
 const { trainer_salary } = require('#/data/const.json');
 const CharaInmon = require('#/data/ero/chara-inmon');
 const basement_owners = require('#/data/event/basement-owners');
@@ -415,11 +416,27 @@ module.exports = async () => {
               }
             }
             if (version <= 1340) {
-              era
-                .getAddedCharacters()
-                .forEach((e) =>
-                  era.set(`equip:${e}:淫纹奴役`, era.get(`equip:${e}:10`)),
-                );
+              const chara_list = era.getAddedCharacters();
+              chara_list.forEach((cid) => {
+                era.set(`equip:${cid}:淫纹奴役`, era.get(`equip:${cid}:10`));
+                if (era.get(`exp:${cid}:性爱次数`) > 0) {
+                  era.set(`cstr:${cid}:初次潮吹经历`, []);
+                  era.set(`cstr:${cid}:无自觉初次潮吹经历`, []);
+                  era.set(`cstr:${cid}:初次饮爱液经历`, []);
+                  era.set(`cstr:${cid}:无自觉初次饮爱液经历`, []);
+                }
+                const tokino = CharaTitles.get(cid)
+                  .get()
+                  .find((t) => t.n === '傲视一切');
+                if (tokino !== undefined) {
+                  tokino.c = adaptability_colors.at(-2);
+                }
+              });
+              era.getAllCharacters().forEach((cid) => {
+                if (cid > 200 && chara_list.indexOf(cid) === -1) {
+                  init_chara(cid);
+                }
+              });
               if (era.get('flag:惩戒力度') >= 2) {
                 era.set('talent:0:调教度', 5);
               }
@@ -433,6 +450,20 @@ module.exports = async () => {
               era.set('flag:目白城风格', 1);
               era.set('flag:目白城变量', { limit: 1 });
               //              }
+              if (
+                await select_yes_or_no(
+                  '请选择带玩具参赛的影响',
+                  '无影响',
+                  '有影响',
+                )
+              ) {
+                era.set('flag:道具影响', 0);
+              } else {
+                era.set('flag:道具影响', -25);
+              }
+              if (era.get('flag:比赛难度') < 0) {
+                era.set('flag:比赛难度', -40);
+              }
             }
             return true;
           } else {

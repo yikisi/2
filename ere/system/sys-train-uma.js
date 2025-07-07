@@ -11,6 +11,8 @@ const { get_custom_mec } = require('#/event/mec/mec-factory');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
+const CharaInmon = require('#/data/ero/chara-inmon');
+const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const event_hooks = require('#/data/event/event-hooks');
 const TrainFailParams = require('#/data/event/extra-flag/train-fail-params');
 const TrainSuccessParams = require('#/data/event/extra-flag/train-success-params');
@@ -29,25 +31,25 @@ const {
 } = require('#/data/train-const');
 
 /**
- * @param {number} id
+ * @param {number} cid
  * @param {number} attr
  * @param {number} exp
  */
-function add_train_exp(id, attr, exp) {
+function add_train_exp(cid, attr, exp) {
   const train = attr_names[attr];
   if (exp <= 0) {
-    return era.get(`exp:${id}:${train}训练经验`);
+    return era.get(`exp:${cid}:${train}训练经验`);
   }
   if (era.get('cflag:345:招募状态') === recruit_flags.yes) {
     exp *= 1 + 0.25 * (1 + new LightLifeMarks().buff);
   }
   exp = Math.floor(exp);
-  return era.add(`exp:${id}:${train}训练经验`, exp);
+  return era.add(`exp:${cid}:${train}训练经验`, exp);
 }
 
 /**
  * 计算训练的基础奖励
- * @param {number} chara_id
+ * @param {number} cid
  * @param {number} attr
  * @param {number} train_level
  * @param {{stamina:number,time:number}} train_cost
@@ -55,7 +57,7 @@ function add_train_exp(id, attr, exp) {
  * @param {{[buff]:number,[teach_chara]:number}} [between_weeks]
  */
 function get_success_base_reward(
-  chara_id,
+  cid,
   attr,
   train_level,
   train_cost,
@@ -65,8 +67,8 @@ function get_success_base_reward(
   let base_inc = train_level * 2 + get_random_value(3, 8);
 
   let train_buff =
-    get_train_bonus(chara_id, attr, between_weeks) +
-    10 * (era.get(`cflag:${chara_id}:位置`) === location_enum.beach);
+    get_train_bonus(cid, attr, between_weeks) +
+    10 * (era.get(`cflag:${cid}:位置`) === location_enum.beach);
   if (between_weeks !== undefined) {
     if (between_weeks.teach_chara > 0) {
       train_buff +=
@@ -77,7 +79,7 @@ function get_success_base_reward(
           0,
         ) +
         get_custom_mec(between_weeks.teach_chara).get_take_care_buff(
-          chara_id,
+          cid,
           attr,
         ) +
         50;
@@ -116,7 +118,7 @@ function get_success_base_reward(
       train_cost.stamina = -train_cost.stamina / 4;
       changes.pt_change = 8;
   }
-  if (sys_get_chara(chara_id) === -1) {
+  if (sys_get_chara(cid) === -1) {
     changes.attr_change = changes.attr_change.map((e) => e + (e > 0));
   }
   changes.pt_change += 1.25 * (train_level - 1);
@@ -135,20 +137,24 @@ function get_success_base_reward(
 }
 
 /**
- * @param {number} id
+ * @param {number} cid
  * @param {number} attr
  * @param {{teach_chara:number}} [between_weeks]
  */
-function get_train_bonus(id, attr, between_weeks) {
-  const chara_loc = era.get(`cflag:${id}:位置`);
+function get_train_bonus(cid, attr, between_weeks) {
+  const chara_loc = era.get(`cflag:${cid}:位置`);
+  const inmon = CharaInmon.get(cid);
   let train_buff =
-    era.get(`cflag:${id}:${attr_names[attr]}加成`) +
+    era.get(`cflag:${cid}:${attr_names[attr]}加成`) +
     era.get('flag:训练加成') +
-    (5 + (sys_get_chara(id) === 2)) *
-      (era.get(`status:${id}:摸鱼`) ? -4 : era.get(`cflag:${id}:干劲`)) +
-    (sys_get_chara(id) === -3) -
-    0.004 * era.get(`base:${id}:压力`) +
-    get_custom_mec(id).get_train_buff();
+    (5 + (sys_get_chara(cid) === 2)) *
+      (era.get(`status:${cid}:摸鱼`) ? -4 : era.get(`cflag:${cid}:干劲`)) +
+    (sys_get_chara(cid) === -3) -
+    0.004 * era.get(`base:${cid}:压力`) +
+    get_custom_mec(cid).get_train_buff() -
+    5 * era.get(`status:${cid}:疲惫`) -
+    50 * inmon.on(plugin_enum.sex_1) -
+    999 * inmon.on(plugin_enum.sex_2);
   if (chara_loc > 0 && chara_loc !== location_enum.beach) {
     train_buff -= 25;
   }
@@ -171,20 +177,20 @@ function get_train_bonus(id, attr, between_weeks) {
       }
   }
   if (!between_weeks || between_weeks.teach_chara > 0) {
-    train_buff += get_trainer_train_buff(id);
+    train_buff += get_trainer_train_buff(cid);
   }
   return Math.max(train_buff, -100);
 }
 
 /**
- * @param {number} id
+ * @param {number} cid
  * @param {string} train
  * @returns {boolean}
  */
-function update_train_level(id, train) {
-  if (era.get(`abl:${id}:${train}训练等级`) < 5) {
-    era.add(`abl:${id}:${train}训练等级`, 1);
-    era.set(`exp:${id}:${train}训练经验`, 0);
+function update_train_level(cid, train) {
+  if (era.get(`abl:${cid}:${train}训练等级`) < 5) {
+    era.add(`abl:${cid}:${train}训练等级`, 1);
+    era.set(`exp:${cid}:${train}训练经验`, 0);
     return true;
   }
   return false;
@@ -195,31 +201,31 @@ module.exports = {
   get_success_base_reward,
   get_train_bonus,
   /**
-   * @param {number} id
+   * @param {number} cid
    * @param {number} attr
    * @param {number} extra_buff
    * @return {Promise<void>}
    */
-  async train_uma(id, attr, extra_buff) {
-    era.set(`cflag:${id}:自主训练`, 0);
+  async train_uma(cid, attr, extra_buff) {
+    era.set(`cflag:${cid}:自主训练`, 0);
     const buffer = [],
       changes = { attr_change: new Array(5).fill(0), pt_change: 0 },
       train_level =
-        era.get(`cflag:${id}:位置`) === location_enum.beach
+        era.get(`cflag:${cid}:位置`) === location_enum.beach
           ? 5
-          : era.get(`abl:${id}:${attr_names[attr]}训练等级`) || 1,
+          : era.get(`abl:${cid}:${attr_names[attr]}训练等级`) || 1,
       train_cost = {
         stamina: -time_cost[train_level - 1] * get_random_value(0.9, 1.2, true),
         time: -time_cost[train_level - 1],
       };
-    let relation_change = era.get(`status:${id}:摸鱼`) ? -10 : 0;
+    let relation_change = era.get(`status:${cid}:摸鱼`) ? -10 : 0;
 
     const stamina_ratio =
-        era.get(`base:${id}:体力`) / era.get(`maxbase:${id}:体力`),
-      success_rate = sys_get_succ_rate(id, attr, extra_buff);
+        era.get(`base:${cid}:体力`) / era.get(`maxbase:${cid}:体力`),
+      success_rate = sys_get_succ_rate(cid, attr, extra_buff);
     const flag_success = Math.random() * 100 < success_rate;
 
-    if (await get_custom_edu(id).train(attr)) {
+    if (await get_custom_edu(cid).train(attr)) {
       return;
     }
     era.println();
@@ -227,22 +233,22 @@ module.exports = {
     if (flag_success) {
       // 训练成功时的处理（成功才扣体力）
       get_success_base_reward(
-        id,
+        cid,
         attr,
         train_level,
         train_cost,
         changes,
-        era.get(`cflag:${id}:位置`) !== era.get('cflag:0:位置')
+        era.get(`cflag:${cid}:位置`) !== era.get('cflag:0:位置')
           ? { teach_chara: 0 }
           : undefined,
       );
 
       /** @type {TrainSuccessParams} */
       const ret = await run_custom_edu(
-        id,
+        cid,
         event_hooks.train_success,
         new TrainSuccessParams(
-          stamina_ratio * !era.get(`status:${id}:摸鱼`),
+          stamina_ratio * !era.get(`status:${cid}:摸鱼`),
           attr,
         ),
       );
@@ -258,7 +264,7 @@ module.exports = {
       if (ret.pt_change !== 0) {
         changes.pt_change += ret.pt_change;
       }
-      if (!id) {
+      if (!cid) {
         changes.attr_change[attr_enum.intelligence] += get_random_value(1, 2);
       }
 
@@ -266,15 +272,15 @@ module.exports = {
 
       // 结算训练等级变动
       const exp = add_train_exp(
-        id,
+        cid,
         attr,
-        100 + era.get(`cflag:${id}:${attr_names[attr]}加成`),
+        100 + era.get(`cflag:${cid}:${attr_names[attr]}加成`),
       );
 
       if (
         exp >= 800 &&
         exp >= train_level * 800 + get_random_value(0, 800) &&
-        update_train_level(id, attr_names[attr])
+        update_train_level(cid, attr_names[attr])
       ) {
         buffer.push({
           config: { offset: 1, width: 23 },
@@ -291,7 +297,7 @@ module.exports = {
           train_cost.stamina = -train_cost.stamina / 10;
       }
       const ret = await run_custom_edu(
-        id,
+        cid,
         event_hooks.train_fail,
         new TrainFailParams(
           Math.random() < 1 - stamina_ratio / fumble_border,
@@ -306,10 +312,10 @@ module.exports = {
       }
     }
 
-    const chara_talk = get_chara_talk(id),
-      me = id === 0 ? chara_talk : get_chara_talk(0);
+    const chara = get_chara_talk(cid);
+    const me = cid === 0 ? chara : get_chara_talk(0);
     // 无论成功与否都会扣去精力（=时间）
-    if (id > 0) {
+    if (cid > 0) {
       // 训自己不额外消耗时间
       era.print([
         me.get_colored_name(),
@@ -318,19 +324,19 @@ module.exports = {
       ]);
     }
     let to_print = [
-      sys_change_attr_and_print(id, '体力', train_cost.stamina),
-      sys_change_attr_and_print(id, '精力', train_cost.time),
+      sys_change_attr_and_print(cid, '体力', train_cost.stamina),
+      sys_change_attr_and_print(cid, '精力', train_cost.time),
     ];
     era.print(
       [
-        chara_talk.get_colored_name(),
+        chara.get_colored_name(),
         ' 的 ',
         ...to_print[0],
         to_print[0].length && to_print[1].length ? '，' : undefined,
         ...to_print[1],
       ].filter((e) => e),
     );
-    sys_like_chara(id, 0, relation_change);
+    sys_like_chara(cid, 0, relation_change);
 
     // 结算数值变动
     changes.attr_change
@@ -342,7 +348,7 @@ module.exports = {
             : Math.min((stat * (100 - era.get('flag:训练加成'))) / 100, -1)),
       )
       .forEach((stat, index) => {
-        const to_print = sys_change_attr_and_print(id, index, stat);
+        const to_print = sys_change_attr_and_print(cid, index, stat);
         if (to_print.length) {
           buffer.push({
             config: { offset: 1, width: 23 },
@@ -354,14 +360,14 @@ module.exports = {
     if (changes.pt_change) {
       buffer.push({
         config: { offset: 1, width: 23 },
-        content: `获得了 ${changes.pt_change} 点技能点数`,
+        content: `获得了 ${changes.pt_change.toLocaleString()} 点技能点数`,
         type: 'text',
       });
-      era.add(`exp:${id}:技能点数`, changes.pt_change);
+      era.add(`exp:${cid}:技能点数`, changes.pt_change);
     }
     if (
       flag_success &&
-      id &&
+      cid > 0 &&
       (to_print = sys_change_attr_and_print(
         0,
         attr_enum.intelligence,
@@ -381,7 +387,7 @@ module.exports = {
           content: [
             { isBr: true },
             `经过训练，`,
-            chara_talk.get_colored_name(),
+            chara.get_colored_name(),
             ' 的属性有了如下变化：',
           ],
           type: 'text',

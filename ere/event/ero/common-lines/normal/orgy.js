@@ -9,6 +9,9 @@ const { get_penis_size } = require('#/system/ero/sys-calc-ero-status');
 
 const EroOrgy = require('#/event/ero/common-lines/interface/ero-orgy');
 
+const { get_random_entry } = require('#/utils/list-utils');
+
+const { motion_enum, towards_enum } = require('#/data/ero/part-const');
 const { penis_desc } = require('#/data/ero/status-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 
@@ -21,9 +24,12 @@ const { ero_hooks } = require('#/data/event/ero-hooks');
 async function common_ask_spit_roast(attacker, defender, supporter, hook) {
   const part_name = hook.hook === ero_hooks.ask_spit_roast ? '小穴' : '屁穴';
   if (hook.arg) {
+    const motion = era.get(`tcvar:${attacker}:体位`) === motion_enum.rev;
+    const towards = era.get(`tcvar:${attacker}:朝向`) === towards_enum.right;
     await era.printAndWait([
       attacker.get_colored_name(),
-      ` ${Math.random() < 0.5 ? '张开双腿' : '四肢着地'}摇晃着屁股，示意 `,
+      (motion ^ towards) > 0 ? ' 张开双腿' : ' 四肢着地',
+      '摇晃着屁股，示意 ',
       defender.get_colored_name(),
       ' 插入自己的',
       part_name,
@@ -141,49 +147,92 @@ class EroNormalOrgy extends EroOrgy {
    * @param {HookArg} hook
    */
   async ask_double_fuck(attacker, defender, supporter, hook) {
+    const buffer = [];
     if (hook.arg) {
-      await era.printAndWait([
-        attacker.get_colored_name(),
-        ' 张开大腿，向着 ',
-        defender.get_colored_name(),
-        ' 与 ',
-        supporter.get_colored_name(),
-        ' 撑开小穴，看着二人挺立的肉棒舔着嘴唇',
-      ]);
-      await era.printAndWait([
-        '在 ',
-        attacker.get_colored_name(),
-        ' 赤裸裸的邀请下，',
-        defender.get_colored_name(),
-        ' 与 ',
-        supporter.get_colored_name(),
-        ' 按捺不住，扑到 ',
-        attacker.get_colored_name(),
-        ' 身上交替抽插着那诱人的小穴……',
-      ]);
+      buffer.push(
+        async () => {
+          await era.printAndWait([
+            attacker.get_colored_name(),
+            ' 张开大腿，向着 ',
+            defender.get_colored_name(),
+            ' 与 ',
+            supporter.get_colored_name(),
+            ' 撑开小穴，看着二人挺立的肉棒舔着嘴唇',
+          ]);
+          await era.printAndWait([
+            '在 ',
+            attacker.get_colored_name(),
+            ' 赤裸裸的邀请下，',
+            defender.get_colored_name(),
+            ' 与 ',
+            supporter.get_colored_name(),
+            ' 按捺不住，扑到 ',
+            attacker.get_colored_name(),
+            ' 身上交替抽插着那诱人的小穴……',
+          ]);
+        },
+        async () => {
+          const motion = era.get(`tcvar:${attacker}:体位`) === motion_enum.rev;
+          const towards =
+            era.get(`tcvar:${attacker}:朝向`) === towards_enum.right;
+          await era.printAndWait([
+            attacker.get_colored_name(),
+            (motion ^ towards) > 0 ? ' 张开双腿' : ' 四肢着地',
+            '摇晃着屁股，示意 ',
+            defender.get_colored_name(),
+            ' 与 ',
+            supporter.get_colored_name(),
+            ' 轮流用肉棒进入自己的深处。',
+          ]);
+        },
+      );
     } else {
-      const defender_penis = get_penis_size(defender.id),
-        supporter_penis = get_penis_size(supporter.id);
-      await era.printAndWait([
-        attacker.get_colored_name(),
-        ' 被夹在 ',
-        defender.get_colored_name(),
-        ' 与 ',
-        supporter.get_colored_name(),
-        ' 中间，',
-        defender_penis === supporter_penis
-          ? `两根 ${penis_desc[defender_penis]} 的`
-          : `${penis_desc[defender_penis]} 与 ${penis_desc[supporter_penis]} `,
-        ' 的肉棒交替被 ',
-        attacker.get_colored_name(),
-        ' 淫荡的小穴吞没',
-      ]);
-      await era.printAndWait([
-        '淫液把三人的下体附近染得一片狼藉，不时传来 ',
-        attacker.get_colored_name(),
-        ' 的一阵娇声……',
-      ]);
+      buffer.push(
+        async () => {
+          const defender_penis = get_penis_size(defender.id),
+            supporter_penis = get_penis_size(supporter.id);
+          await era.printAndWait([
+            attacker.get_colored_name(),
+            ' 被夹在 ',
+            defender.get_colored_name(),
+            ' 与 ',
+            supporter.get_colored_name(),
+            ' 中间，',
+            ...(defender_penis === supporter_penis
+              ? ['两根 ', penis_desc[defender_penis], ' 的']
+              : [
+                  penis_desc[defender_penis],
+                  ' 与 ',
+                  penis_desc[supporter_penis],
+                  ' ',
+                ]),
+            ' 的肉棒交替被 ',
+            attacker.get_colored_name(),
+            ' 淫荡的小穴吞没',
+          ]);
+          await era.printAndWait([
+            '淫液把三人的下体附近染得一片狼藉，不时传来 ',
+            attacker.get_colored_name(),
+            ' 的一阵娇声……',
+          ]);
+        },
+        async () => {
+          await era.printAndWait([
+            defender.get_colored_name(),
+            ' 与 ',
+            supporter.get_colored_name(),
+            ' 不一样的肉棒与各自的插入方式，',
+          ]);
+          await era.printAndWait(['以及自己正在被两个人接连奸淫着的背德感，']);
+          await era.printAndWait([
+            '让 ',
+            attacker.get_colored_name(),
+            ' 每次被插入都享受到了非比寻常的快感。',
+          ]);
+        },
+      );
     }
+    await get_random_entry(buffer)();
   }
 
   /**
@@ -258,11 +307,11 @@ class EroNormalOrgy extends EroOrgy {
         defender.get_colored_name(),
         ' 躺在床上与 ',
         supporter.get_colored_name(),
-        ` 互相舔舐对方的 ${
-          ['小穴', '肉棒和小穴', '小穴和肉棒', '肉棒'][
-            2 * !!get_penis_size(defender.id) + !!get_penis_size(supporter.id)
-          ]
-        }`,
+        ' 互相舔舐对方的 ',
+        ['小穴', '肉棒和小穴', '小穴和肉棒', '肉棒'][
+          2 * !!get_penis_size(defender.id) + !!get_penis_size(supporter.id)
+        ],
+        '，',
       ]);
       await era.printAndWait([
         attacker.get_colored_name(),

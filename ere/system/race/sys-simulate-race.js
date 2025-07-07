@@ -1,4 +1,5 @@
 ﻿const {
+  drawLine,
   get,
   logger,
   printInColRows,
@@ -17,6 +18,7 @@ const {
   progress_width,
   screen_size,
 } = require('#/system/race/snippets');
+const sub_simulate_ero = require('#/system/race/sub-simulate-ero');
 const sub_simulate_report = require('#/system/race/sub-simulate-report');
 const sub_simulate_skill = require('#/system/race/sub-simulate-skill');
 
@@ -26,8 +28,9 @@ const {
   median,
   sort_list,
 } = require('#/utils/list-utils');
-const { get_random_value } = require('#/utils/value-utils');
+const { get_random_value, log_max_wp } = require('#/utils/value-utils');
 
+const { wp_coefficient } = require('#/data/ero/orgasm-const');
 const RaceInfo = require('#/data/race/model/race-info');
 const { ability_type_enum } = require('#/data/race/model/uma-skill');
 const { race_enum } = require('#/data/race/race-const');
@@ -56,19 +59,19 @@ const beginning_report_handlers = [
 
 /**
  * @param {PseudoUma} uma
- * @param {number} i
- * @param {PseudoUma[]} l
+ * @param {number} r_index
+ * @param {PseudoUma[]} l_in_race
  * @param {RaceInfo} race_info
  * @returns {boolean}
  */
-function check_nige_loc_mind_speed_up_mode(uma, i, l, race_info) {
+function check_nige_loc_mind_speed_up_mode(uma, r_index, l_in_race, race_info) {
   let temp;
   return (
-    (i === 0 &&
-      (((temp = l.slice(1).find((e) => e.style === 0)) &&
+    (r_index === 0 &&
+      (((temp = l_in_race.slice(1).find((e) => e.style === 0)) &&
         uma.race.location - temp.race.location <=
           race_info.loc_mind_diff.nige_speed_up_nige) ||
-        ((temp = l.slice(1).find((e) => e.style > 0)) &&
+        ((temp = l_in_race.slice(1).find((e) => e.style > 0)) &&
           uma.race.location - temp.race.location <=
             race_info.loc_mind_diff.nige_speed_up_other))) ||
     uma.race.conditionParams.is_temptation
@@ -77,13 +80,13 @@ function check_nige_loc_mind_speed_up_mode(uma, i, l, race_info) {
 
 /**
  * @param {PseudoUma} uma
- * @param {number} i
+ * @param {number} r_index
  * @param {RaceInfo} race_info
  * @returns {boolean}
  */
-function check_nige_loc_mind_over_take_mode(uma, i, race_info) {
+function check_nige_loc_mind_over_take_mode(uma, r_index, race_info) {
   return (
-    i > 0 &&
+    r_index > 0 &&
     uma.race.conditionParams.distance_diff_top <
       race_info.loc_mind_diff.nige_over_take
   );
@@ -91,16 +94,16 @@ function check_nige_loc_mind_over_take_mode(uma, i, race_info) {
 
 /**
  * @param {PseudoUma} uma
- * @param {number} i
+ * @param {number} r_index
  * @param {PseudoUma[]} l
  * @returns {boolean}
  */
-function check_nige_loc_mind_ex_mode(uma, i, l) {
+function check_nige_loc_mind_ex_mode(uma, r_index, l) {
   const nige_type =
     uma.race.conditionParams.is_used_skill_id.indexOf(202051) + 1;
   return (
     l
-      .slice(0, i)
+      .slice(0, r_index)
       .findIndex(
         (e) =>
           e.style -
@@ -108,6 +111,17 @@ function check_nige_loc_mind_ex_mode(uma, i, l) {
           -nige_type,
       ) !== -1
   );
+}
+
+/**
+ * @param {PseudoUma} uma
+ * @param {number} event
+ */
+function get_loc_mind_event(uma, event) {
+  return {
+    e: uma.style === uma.race.style ? event : race_event_enum.temp_wrong_style,
+    u: uma,
+  };
 }
 
 /** @type {Record<string,function(RaceInfo,PseudoUma):((string|{content:string})[])>} */
@@ -137,52 +151,53 @@ race_message_handlers.default = (info) => [
 
 /**
  * @param {PseudoUma[]} list_chara
- * @param {RaceInfo} race_info
+ * @param {RaceInfo} info
  * @param {number} [race_id]
  * @param {boolean} [shown=true]
  */
-function sys_sim_race(list_chara, race_info, race_id, shown = true) {
+function sys_sim_race(list_chara, info, race_id, shown = true) {
   const beginning_report =
-      race_id === undefined
-        ? ['正在检查马闸……', '正在检查令枪……', '选手入闸……', '开赛！']
-        : get_random_entry(beginning_report_handlers)(race_info),
-    current = new Date().getTime(),
-    count_uma = list_chara.length,
-    top_pop = list_chara.find((e) => e.pop[0] === 1),
-    top_pop_message =
-      race_id === undefined
-        ? '选手检查蹄铁……'
-        : [
-            '第 1 人气，',
-            top_pop.get_colored_name(),
-            ' 今天看上去干劲',
-            top_pop.motivation > 0
-              ? '满满'
-              : top_pop.motivation < 0
-                ? '不是很好'
-                : '似乎一般',
-            '！',
-          ],
-    fron_header = new Array(Math.floor(race_info.span / 200) - 1)
-      .fill(0)
-      .map((_, i) => (race_info.span % 200) + (i + 1) * 200),
-    fron_record_index = list_chara.map(() => 0),
-    fron_records = list_chara.map(() => {
-      return new Array(Math.floor(race_info.span / 200)).fill('');
-    }),
-    has_final_corner = race_info.lanes.find((e) => e.is_curve && e.is_last),
-    message_buffer = [],
-    mod_stamina_cost_mess =
-      race_info.ground === RaceInfo.ground_enum.grass
-        ? mod_stamina_cost_mess_grass[race_info.mess]
-        : mod_stamina_cost_mess_dirt[race_info.mess],
-    race_message = (
-      race_message_handlers[race_id] || race_message_handlers.default
-    )(race_info, top_pop);
+    race_id === undefined
+      ? ['正在检查马闸……', '正在检查令枪……', '选手入闸……', '开赛！']
+      : get_random_entry(beginning_report_handlers)(info);
+  const current = new Date().getTime();
+  const count_uma = list_chara.length;
+  const top_pop = list_chara.find((e) => e.pop[0] === 1);
+  const top_pop_message =
+    race_id === undefined
+      ? '选手检查蹄铁……'
+      : [
+          '第 1 人气，',
+          top_pop.get_colored_name(),
+          ' 今天看上去干劲',
+          top_pop.motivation > 0
+            ? '满满'
+            : top_pop.motivation < 0
+              ? '不是很好'
+              : '似乎一般',
+          '！',
+        ];
+  const fron_header = new Array(Math.floor(info.span / 200) - 1)
+    .fill(0)
+    .map((_, i) => (info.span % 200) + (i + 1) * 200);
+  const fron_record_index = list_chara.map(() => 0);
+  const fron_records = list_chara.map(() => {
+    return new Array(Math.floor(info.span / 200)).fill('');
+  });
+  const has_final_corner = info.lanes.find((e) => e.is_curve && e.is_last);
+  const message_buffer = [];
+  const mod_stamina_cost_mess =
+    info.ground === RaceInfo.ground_enum.grass
+      ? mod_stamina_cost_mess_grass[info.mess]
+      : mod_stamina_cost_mess_dirt[info.mess];
+  const race_message = (
+    race_message_handlers[race_id] || race_message_handlers.default
+  )(info, top_pop);
   let flag_race_phase = 1;
   message_buffer.push(get_event_record(race_message));
   if (shown) {
-    printInColRows([{ type: 'divider' }, ...message_buffer]);
+    drawLine();
+    printInColRows(message_buffer);
   }
   beginning_report.unshift(top_pop_message);
 
@@ -194,8 +209,9 @@ function sys_sim_race(list_chara, race_info, race_id, shown = true) {
       stamina: [{ data: [] }],
     },
     buffer = { report: [], skill: [] };
-  let dynamic_table = [],
-    report_cache = [];
+  let dynamic_table = [];
+  /** @type {*[][]} */
+  let report_cache = [];
   Object.keys(statistics).forEach(
     (k) =>
       (statistics[k] = list_chara.map((uma) => ({
@@ -206,19 +222,26 @@ function sys_sim_race(list_chara, race_info, race_id, shown = true) {
       }))),
   );
 
+  list_chara.forEach(
+    (u) =>
+      (u.ero.cost.sex =
+        -(wp_coefficient * Math.log(u.attrs[attr_enum.toughness])) /
+        log_max_wp),
+  );
+
   dynamic_table.push([
     get_table_header(
       fron_header.slice(0, fron_cols),
       '0.0"',
       0,
-      race_info.span,
+      info.span,
       false,
     ),
   ]);
 
-  const lane = race_info.lanes[0],
-    slope = race_info.slopes[0]?.start === 0 ? race_info.slopes[0].slope : 0,
-    loc_mind_end = (race_info.span * 10) / 24;
+  const lane = info.lanes[0],
+    slope = info.slopes[0]?.start === 0 ? info.slopes[0].slope : 0,
+    loc_mind_end = (info.span * 10) / 24;
   sub_simulate_skill.init(lane, slope);
 
   // 出闸
@@ -305,7 +328,7 @@ function sys_sim_race(list_chara, race_info, race_id, shown = true) {
   function get_report_internal() {
     return Math.max(
       Math.min(
-        (buffer.report.at(-1)?.speak * 3) / 20,
+        (buffer.report.find((e) => e.speak > 0)?.speak * 3) / 20,
         get_random_value(3.5, 4.5, true),
       ),
       get_random_value(1.5, 2.5, true),
@@ -374,9 +397,9 @@ function sys_sim_race(list_chara, race_info, race_id, shown = true) {
         uma.rank.curr = finished_count + i + 1;
         uma.race.conditionParams.bashin_diff_infront =
           (i === 0 ? 50 : l[i - 1].race.location - uma.race.location) / 2.5;
-        uma.race.conditionParams.blocked_front = Number(
+        uma.race.conditionParams.blocked_front = +(
           uma.race.conditionParams.bashin_diff_infront < 0.8 &&
-            uma.race.velocityReal > l[i - 1].race.velocityReal,
+          uma.race.velocityReal > l[i - 1].race.velocityReal
         );
         uma.race.conditionParams.bashin_diff_behind =
           (i === l.length - 1
@@ -413,8 +436,8 @@ function sys_sim_race(list_chara, race_info, race_id, shown = true) {
           uma.race.overtakeAim.to_be_overtaken = true;
         }
         uma.race.overtakeAim = l[j];
-        if (uma.race.location >= race_info.span) {
-          uma.race.location = race_info.span;
+        if (uma.race.location >= info.span) {
+          uma.race.location = info.span;
           list_finished.push(uma);
           uma.race.totalTime = timer_record;
           report_cache.at(-1).push({ e: race_event_enum.finish, u: uma });
@@ -442,7 +465,7 @@ function sys_sim_race(list_chara, race_info, race_id, shown = true) {
         fron_header.slice(fron_start, fron_end),
         timer_record,
         (list_in_race[0] || list_finished[0]).race.location,
-        race_info.span,
+        info.span,
         list_in_race.length === 0,
       ),
     ]);
@@ -475,11 +498,19 @@ function sys_sim_race(list_chara, race_info, race_id, shown = true) {
       continue;
     }
 
+    sub_simulate_ero(
+      list_chara,
+      timer_record,
+      timer,
+      report_cache.at(-1),
+      buffer.report,
+    );
+
     sub_simulate_skill(
       list_chara,
       list_in_race,
       list_finished,
-      race_info,
+      info,
       timer,
       mod_stamina_cost_mess,
       dynamic_table,
@@ -498,196 +529,201 @@ function sys_sim_race(list_chara, race_info, race_id, shown = true) {
         get_event_record(beginning_report[flag_race_phase++ - 1]),
       );
       if (shown) {
-        replaceInColRows([{ type: 'divider' }, ...message_buffer]);
+        replaceInColRows(message_buffer);
       }
     }
 
     list_in_race.forEach((uma, i, l) => {
       // 位置意识
-      if (timer % 2 === 0 && uma.race.location < loc_mind_end) {
-        const prob_check = Math.random() < uma.probs.loc_mind;
-        if (uma.base.loc_mind_style === 0) {
-          if (uma.race.loc_mind < 3 && check_nige_loc_mind_ex_mode(uma, i, l)) {
+      if (uma.race.location < loc_mind_end) {
+        if (timer % 2 === 0) {
+          const prob_check = Math.random() < uma.probs.loc_mind;
+          if (uma.race.style === 0) {
+            if (
+              uma.race.loc_mind < 3 &&
+              check_nige_loc_mind_ex_mode(uma, i, l)
+            ) {
+              uma.race.loc_mind = 3;
+              report_cache
+                .at(-1)
+                .push(
+                  get_loc_mind_event(uma, race_event_enum.loc_mind_nige_ex),
+                );
+            } else {
+              switch (uma.race.loc_mind) {
+                case 0:
+                  if (prob_check) {
+                    if (check_nige_loc_mind_speed_up_mode(uma, i, l, info)) {
+                      uma.race.loc_mind = 1;
+                      report_cache
+                        .at(-1)
+                        .push(
+                          get_loc_mind_event(
+                            uma,
+                            race_event_enum.loc_mind_nige_speed_up,
+                          ),
+                        );
+                    } else if (
+                      check_nige_loc_mind_over_take_mode(uma, i, info)
+                    ) {
+                      uma.race.loc_mind = 2;
+                      report_cache
+                        .at(-1)
+                        .push(
+                          get_loc_mind_event(
+                            uma,
+                            race_event_enum.loc_mind_nige_over_take,
+                          ),
+                        );
+                    }
+                  }
+                  break;
+                case 1:
+                  if (check_nige_loc_mind_over_take_mode(uma, i, info)) {
+                    uma.race.loc_mind = 2;
+                    report_cache
+                      .at(-1)
+                      .push(
+                        get_loc_mind_event(
+                          uma,
+                          race_event_enum.loc_mind_nige_over_take,
+                        ),
+                      );
+                  } else if (
+                    !check_nige_loc_mind_speed_up_mode(uma, i, l, info)
+                  ) {
+                    uma.race.loc_mind = 0;
+                  }
+                  break;
+                case 2:
+                  if (check_nige_loc_mind_speed_up_mode(uma, i, l, info)) {
+                    uma.race.loc_mind = 1;
+                    report_cache
+                      .at(-1)
+                      .push(
+                        get_loc_mind_event(
+                          uma,
+                          race_event_enum.loc_mind_nige_speed_up,
+                        ),
+                      );
+                  } else if (
+                    !check_nige_loc_mind_over_take_mode(uma, i, info)
+                  ) {
+                    uma.race.loc_mind = 0;
+                  }
+                  break;
+                case 3:
+                  if (!check_nige_loc_mind_ex_mode(uma, i, l)) {
+                    uma.race.loc_mind = 0;
+                  }
+              }
+            }
+          } else if (uma.race.loc_mind < 3 && l[0].style > uma.race.style) {
             uma.race.loc_mind = 3;
-            report_cache.at(-1).push({
-              e:
-                uma.style === uma.base.loc_mind_style
-                  ? race_event_enum.loc_mind_nige_ex
-                  : race_event_enum.temp_wrong_style,
-              u: uma,
-            });
+            report_cache
+              .at(-1)
+              .push(get_loc_mind_event(uma, race_event_enum.loc_mind_other_ex));
           } else {
             switch (uma.race.loc_mind) {
               case 0:
                 if (prob_check) {
-                  if (check_nige_loc_mind_speed_up_mode(uma, i, l, race_info)) {
+                  if (
+                    uma.race.conditionParams.distance_diff_top >=
+                    info.loc_mind_diff.other_upper[uma.race.style - 1]
+                  ) {
                     uma.race.loc_mind = 1;
-                    report_cache.at(-1).push({
-                      e:
-                        uma.style === uma.base.loc_mind_style
-                          ? race_event_enum.loc_mind_nige_speed_up
-                          : race_event_enum.temp_wrong_style,
-                      u: uma,
-                    });
+                    report_cache
+                      .at(-1)
+                      .push(
+                        get_loc_mind_event(
+                          uma,
+                          race_event_enum.loc_mind_other_quick,
+                        ),
+                      );
                   } else if (
-                    check_nige_loc_mind_over_take_mode(uma, i, race_info)
+                    uma.race.conditionParams.distance_diff_top <=
+                      info.loc_mind_diff.other_lower[uma.race.style - 1] &&
+                    uma.race.velocityIdealBuff === 0
                   ) {
                     uma.race.loc_mind = 2;
-                    report_cache.at(-1).push({
-                      e:
-                        uma.style === uma.base.loc_mind_style
-                          ? race_event_enum.loc_mind_nige_over_take
-                          : race_event_enum.temp_wrong_style,
-                      u: uma,
-                    });
+                    report_cache
+                      .at(-1)
+                      .push(
+                        get_loc_mind_event(
+                          uma,
+                          race_event_enum.loc_mind_other_relax,
+                        ),
+                      );
                   }
                 }
                 break;
               case 1:
-                if (check_nige_loc_mind_over_take_mode(uma, i, race_info)) {
+                if (
+                  uma.race.conditionParams.distance_diff_top <=
+                    info.loc_mind_diff.other_lower[uma.race.style - 1] &&
+                  uma.race.velocityIdealBuff === 0
+                ) {
                   uma.race.loc_mind = 2;
-                  report_cache.at(-1).push({
-                    e:
-                      uma.style === uma.base.loc_mind_style
-                        ? race_event_enum.loc_mind_nige_over_take
-                        : race_event_enum.temp_wrong_style,
-                    u: uma,
-                  });
+                  report_cache
+                    .at(-1)
+                    .push(
+                      get_loc_mind_event(
+                        uma,
+                        race_event_enum.loc_mind_other_relax,
+                      ),
+                    );
                 } else if (
-                  !check_nige_loc_mind_speed_up_mode(uma, i, l, race_info)
+                  uma.race.conditionParams.distance_diff_top <=
+                  uma.base.loc_mind_other_diff_random[
+                    uma.race.conditionParams.phase
+                  ]
                 ) {
                   uma.race.loc_mind = 0;
                 }
                 break;
               case 2:
-                if (check_nige_loc_mind_speed_up_mode(uma, i, l, race_info)) {
+                if (
+                  uma.race.conditionParams.distance_diff_top >=
+                  info.loc_mind_diff.other_upper[uma.race.style - 1]
+                ) {
                   uma.race.loc_mind = 1;
-                  report_cache.at(-1).push({
-                    e:
-                      uma.style === uma.base.loc_mind_style
-                        ? race_event_enum.loc_mind_nige_speed_up
-                        : race_event_enum.temp_wrong_style,
-                    u: uma,
-                  });
+                  report_cache
+                    .at(-1)
+                    .push(
+                      get_loc_mind_event(
+                        uma,
+                        race_event_enum.loc_mind_other_quick,
+                      ),
+                    );
                 } else if (
-                  !check_nige_loc_mind_over_take_mode(uma, i, race_info)
+                  uma.race.velocityIdealBuff > 0 ||
+                  uma.race.conditionParams.distance_diff_top >=
+                    uma.base.loc_mind_other_diff_random[
+                      uma.race.conditionParams.phase
+                    ]
                 ) {
                   uma.race.loc_mind = 0;
                 }
                 break;
               case 3:
-                if (!check_nige_loc_mind_ex_mode(uma, i, l)) {
+                if (l[0].style <= uma.race.style) {
                   uma.race.loc_mind = 0;
                 }
             }
           }
-        } else if (uma.race.loc_mind < 3 && l[0].style > uma.style) {
-          uma.race.loc_mind = 3;
-          report_cache.at(-1).push({
-            e:
-              uma.style === uma.base.loc_mind_style
-                ? race_event_enum.loc_mind_other_ex
-                : race_event_enum.temp_wrong_style,
-            u: uma,
-          });
-        } else {
-          switch (uma.race.loc_mind) {
-            case 0:
-              if (prob_check) {
-                if (
-                  uma.race.conditionParams.distance_diff_top >=
-                  race_info.loc_mind_diff.other_upper[uma.race.loc_mind - 1]
-                ) {
-                  uma.race.loc_mind = 1;
-                  report_cache.at(-1).push({
-                    e:
-                      uma.style === uma.base.loc_mind_style
-                        ? race_event_enum.loc_mind_other_quick
-                        : race_event_enum.temp_wrong_style,
-                    u: uma,
-                  });
-                } else if (
-                  uma.race.conditionParams.distance_diff_top <=
-                    race_info.loc_mind_diff.other_lower[
-                      uma.race.loc_mind - 1
-                    ] &&
-                  uma.race.velocityIdealBuff === 0
-                ) {
-                  uma.race.loc_mind = 2;
-                  report_cache.at(-1).push({
-                    e:
-                      uma.style === uma.base.loc_mind_style
-                        ? race_event_enum.loc_mind_other_relax
-                        : race_event_enum.temp_wrong_style,
-                    u: uma,
-                  });
-                }
-              }
-              break;
-            case 1:
-              if (
-                uma.race.conditionParams.distance_diff_top <=
-                  race_info.loc_mind_diff.other_lower[uma.race.loc_mind - 1] &&
-                uma.race.velocityIdealBuff === 0
-              ) {
-                uma.race.loc_mind = 2;
-                report_cache.at(-1).push({
-                  e:
-                    uma.style === uma.base.loc_mind_style
-                      ? race_event_enum.loc_mind_other_relax
-                      : race_event_enum.temp_wrong_style,
-                  u: uma,
-                });
-              } else if (
-                uma.race.conditionParams.distance_diff_top <=
-                uma.base.loc_mind_other_diff_random[
-                  uma.race.conditionParams.phase
-                ]
-              ) {
-                uma.race.loc_mind = 0;
-              }
-              break;
-            case 2:
-              if (
-                uma.race.conditionParams.distance_diff_top >=
-                race_info.loc_mind_diff.other_upper[uma.race.loc_mind - 1]
-              ) {
-                uma.race.loc_mind = 1;
-                report_cache.at(-1).push({
-                  e:
-                    uma.style === uma.base.loc_mind_style
-                      ? race_event_enum.loc_mind_other_quick
-                      : race_event_enum.temp_wrong_style,
-                  u: uma,
-                });
-              } else if (
-                uma.race.velocityIdealBuff > 0 ||
-                uma.race.conditionParams.distance_diff_top >=
-                  uma.base.loc_mind_other_diff_random[
-                    uma.race.conditionParams.phase
-                  ]
-              ) {
-                uma.race.loc_mind = 0;
-              }
-              break;
-            case 3:
-              if (l[0].style <= uma.style) {
-                uma.race.loc_mind = 0;
-              }
+          if (uma.race.loc_mind === 2 && uma.race.style > 0) {
+            uma.race.staminaCost *= 0.6;
           }
-        }
-        if (uma.race.loc_mind === 2 && uma.style > 0) {
-          uma.race.staminaCost *= 0.6;
         }
       } else {
         uma.race.loc_mind = 0;
       }
       // 阻挡计算
+      const strength_coff = get_random_value(0.9349, 0.9354, true);
       const block_percent =
         uma.race.location >= 150 &&
         uma.race.conditionParams.blocked_front > 0 &&
-        (uma.race.strength * get_random_value(0.7, 0.8, true)) /
-          l[i - 1].race.strength +
+        (uma.race.strength * strength_coff) / l[i - 1].race.strength +
           uma.race.lane_move_buff;
       if (block_percent > 0 && block_percent < 1) {
         total_blocked++;
@@ -739,7 +775,7 @@ function sys_sim_race(list_chara, race_info, race_id, shown = true) {
           uma.base.velocityMin,
         );
         if (uma.race.velocityReal > uma.race.velocityIdeal) {
-          if (uma.race.loc_mind === 2 && uma.base.loc_mind_style > 0) {
+          if (uma.race.loc_mind === 2 && uma.race.style > 0) {
             uma.race.acceleration = race_de_acc[3];
           } else {
             uma.race.acceleration =
@@ -754,7 +790,7 @@ function sys_sim_race(list_chara, race_info, race_id, shown = true) {
         (temp_report = sub_simulate_report(
           report_cache,
           list_in_race,
-          race_info,
+          info,
           race_id,
         )) !== undefined
       ) {
@@ -770,7 +806,7 @@ function sys_sim_race(list_chara, race_info, race_id, shown = true) {
     (temp_report = sub_simulate_report(
       report_cache,
       list_in_race,
-      race_info,
+      info,
       race_id,
     )) !== undefined
   ) {
@@ -781,13 +817,16 @@ function sys_sim_race(list_chara, race_info, race_id, shown = true) {
     `比赛模拟：${duration} ms / ${Math.ceil(timer * frame_rate)} 帧，平均 ${(duration / (timer * frame_rate)).toFixed(4)} ms/帧`,
   );
   logger.debug(
-    `阻挡&突围：${total_blocked - total_failed}(突围次数)/${total_blocked}(阻挡次数)=${(total_blocked - total_failed) / total_blocked}`,
+    `阻挡&突围：${total_blocked - total_failed}(突围次数)/${total_blocked}(阻挡次数)=${(
+      ((total_blocked - total_failed) * 100) /
+      total_blocked
+    ).toFixed(2)}%`,
   );
   message_buffer.push(get_event_record(beginning_report.at(-1)));
   if (shown) {
-    replaceInColRows([{ type: 'divider' }, ...message_buffer]);
+    replaceInColRows(message_buffer);
   }
-  const speed_min = (22 - race_info.span / 1000) * 0.85;
+  const speed_min = (22 - info.span / 1000) * 0.85;
   statistics.speed = statistics.speed.map((e) => {
     e.data = e.data.map((v) => Math.max(v, speed_min));
     return e;

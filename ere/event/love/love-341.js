@@ -8,13 +8,20 @@ const LoveGod = require('#/event/love/snippets/love-god');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 module.exports = class extends LoveGod {
-  /** @param {number} chara_id */
-  constructor(chara_id) {
-    super(chara_id);
-    this.fuck_her_button = '听从本能';
-    this.fuck_pregnant_button = '服从神意';
-    this.fuck_me_button = '服从神意';
-    this.reject_button = '南无三';
+  get fuck_her_button() {
+    return '听从本能';
+  }
+
+  get fuck_pregnant_button() {
+    return '服从神意';
+  }
+
+  get fuck_me_button() {
+    return '服从神意';
+  }
+
+  get reject_button() {
+    return '南无三';
   }
 
   async 49(god, me) {

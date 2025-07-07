@@ -8,7 +8,8 @@ const HelloLifeMarks = require('#/data/event/life-event-marks/life-event-marks-3
 class MecChild extends CustomizedMec {
   get_race_finish_report(uma, race_id) {
     let func = super.get_race_finish_report;
-    switch (era.get(`cflag:${this.id}:模版角色`)) {
+    const src_chara = era.get(`cflag:${this.id}:模版角色`);
+    switch (src_chara) {
       case 3:
       case 6:
       case 17:
@@ -17,7 +18,7 @@ class MecChild extends CustomizedMec {
       case 33:
       case 34:
       case 52:
-        func = CustomizedMec.get_custom_mec(3).get_race_finish_report;
+        func = CustomizedMec.get_custom_mec(src_chara).get_race_finish_report;
     }
     return func.call(this, uma, race_id);
   }
@@ -34,6 +35,29 @@ class MecChild extends CustomizedMec {
       });
     }
     return ret;
+  }
+
+  init_love() {
+    if (
+      (era.get(`cflag:${this.id}:父方角色`) !== 0 &&
+        era.get(`cflag:${this.id}:母方角色`) !== 0) ||
+      era.get('flag:后代爱慕限制') > 0
+    ) {
+      return super.init_love();
+    }
+    era.set(`love:${this.id}`, 0);
+  }
+
+  set_callname() {
+    let callname;
+    if (!era.get(`cflag:${this.id}:父方角色`)) {
+      callname = '爸爸';
+    } else if (!era.get(`cflag:${this.id}:母方角色`)) {
+      callname = '妈妈';
+    } else {
+      return super.set_callname();
+    }
+    era.set(`callname:${this.id}:0`, callname);
   }
 }
 

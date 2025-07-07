@@ -8,11 +8,18 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
+const { buff_colors } = require('#/data/color-const');
 const { mark_colors } = require('#/data/const.json');
 const CharaInmon = require('#/data/ero/chara-inmon');
 const { slavery_enum } = require('#/data/ero/mark-const');
 const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
-const { penis_desc, skin_desc } = require('#/data/ero/status-const');
+const {
+  penis_desc,
+  skin_desc,
+  unexpected_pregnant_enum,
+  vp_status_enum,
+} = require('#/data/ero/status-const');
+const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const extra_base = require('#/data/extra-base');
 const { get_breast_cup, get_hair_color } = require('#/data/info-generator');
 const { check_chara_ero_image } = require('#/data/other-const');
@@ -203,6 +210,15 @@ async function cum_shop(chara, me) {
                   },
                 });
               }
+              if (era.get(`talent:${target.id}:处女`) === vp_status_enum.no) {
+                buttons.push({
+                  c: '恢复处女（20「恩宠」）',
+                  h() {
+                    money = era.add('item:「恩宠」', -20);
+                    era.set(`talent:${target.id}:处女`, vp_status_enum.reborn);
+                  },
+                });
+              }
             }
             buttons.push(undefined);
             if (
@@ -269,6 +285,7 @@ async function cum_shop(chara, me) {
                         ),
                       );
                       target.sex_code = era.set(`cflag:${target.id}:性别`, 0);
+                      era.set(`talent:${target.id}:凶器`, 0);
                       const inmon = CharaInmon.get(target.id);
                       for (let i = 1; i <= 3; ++i) {
                         if (inmon.on(plugin_enum[`pe_u${i}`])) {
@@ -449,15 +466,15 @@ async function cum_shop(chara, me) {
         },
       },
       {
-        c: '「大药房」',
+        c: '「医院」',
         async h() {
           await say_by_waiter_and_wait(
-            '这里是目白城大药房！头寒脑热、腰酸背痛、手震心疼、腿颤脚麻，我们全都——',
+            '这里是目白城医院！头寒脑热、腰酸背痛、手震心疼、腿颤脚麻，我们全都——',
           );
           await say_by_waiter_and_wait('……不包治哦……');
           await say_by_waiter_and_wait('开个玩笑啦，有什么可以帮您的？');
-          await say_by_waiter_and_wait('所有药膏都是一周后见效～');
           const lines = era.getLineCount();
+          const life_marks = LifeEventMarks.get_marks(0);
           let _flag = true;
           while (_flag) {
             await era.clear(era.getLineCount() - lines);
@@ -488,10 +505,18 @@ async function cum_shop(chara, me) {
               2,
               { disabled: extra_base.time === 1000 },
             );
+            if (
+              life_marks.unexpected_pregnant ===
+                unexpected_pregnant_enum.mother_sleep &&
+              !life_marks.report
+            ) {
+              era.printButton('B超（-10「恩宠」）', 3);
+            }
             era.printButton('离开', 99);
             switch (await era.input()) {
               case 1:
                 await say_by_waiter_and_wait('好的，「大力丸」一份～');
+                await say_by_waiter_and_wait('一周后见效哦～');
                 money = era.add(
                   'item:「恩宠」',
                   -(extra_base.stamina / 10 + 10),
@@ -500,8 +525,27 @@ async function cum_shop(chara, me) {
                 break;
               case 2:
                 await say_by_waiter_and_wait('好的，「醒神膏」一份～');
+                await say_by_waiter_and_wait('一周后见效哦～');
                 money = era.add('item:「恩宠」', -(extra_base.time / 10 + 10));
                 extra_base.time += 50;
+                break;
+              case 3:
+                await say_by_waiter_and_wait(
+                  '恭喜恭喜，我们来看看孩子的成长状态……',
+                );
+                await era.printAndWait(
+                  [
+                    '＜仪器的屏幕上显示出孩子的影像，',
+                    me.get_colored_name(),
+                    ' 莫名从黑白的画面中看到了 ',
+                    get_chara_talk(life_marks.sperm).get_colored_name(),
+                    ' 的脸＞',
+                  ],
+                  { isParagraph: true },
+                );
+                await say_by_waiter_and_wait('真可爱！有没有感觉长得像谁呢？');
+                life_marks.report = -1;
+                money = era.add('item:「恩宠」', 10);
                 break;
               default:
                 _flag = false;
@@ -519,33 +563,66 @@ async function cum_shop(chara, me) {
             '这里提供精油按摩服务！要不要来放松一下呢？',
           );
           const lines = era.getLineCount();
+          let target = chara;
           while (_flag) {
             await era.clear(era.getLineCount() - lines);
             const part_limit = era.get(`talent:${chara.id}:调教度`);
             print_money_divider();
-            era.printButton(
-              `增加 ${chara.name} 可调教为最高级敏感度的部位（${
-                part_limit === max_limt
-                  ? 'MAX'
-                  : `25「恩宠」：${part_limit + 1} 个部位 → ${part_limit + 2} 个部位`
-              }）`,
-              1,
-              {
-                disabled:
-                  era.get(`talent:${chara.id}:调教度`) ===
-                  4 + (era.get(`cflag:${chara.id}:性别`) > 0),
-              },
+            let talent_list = ['荡唇', '神之手', '神之足', '魔尻'];
+            if (target.sex_code !== 1) {
+              talent_list.push('妖乳', '名穴');
+            }
+            if (target.sex_code > 0) {
+              talent_list.push('凶器');
+            }
+            talent_list = talent_list.filter(
+              (e) => era.get(`talent:${target.id}:${e}`) === 0,
             );
+            era.printButton(`切换接受服务的角色，现在是 ${target.name}`, 1);
+            era.printButton(`增强一个部位的性能力（60「恩宠」）`, 2, {
+              disabled: talent_list.length === 0,
+            });
+            if (target.id > 0) {
+              era.printButton(
+                `增加 ${chara.name} 可调教为最高级敏感度的部位（${
+                  part_limit === max_limt
+                    ? 'MAX'
+                    : `25「恩宠」：${part_limit + 1} 个部位 → ${part_limit + 2} 个部位`
+                }）`,
+                3,
+                {
+                  disabled:
+                    era.get(`talent:${chara.id}:调教度`) ===
+                    4 + (era.get(`cflag:${chara.id}:性别`) > 0),
+                },
+              );
+            }
             era.printButton('离开', 99);
-            if ((await era.input()) === 99) {
-              _flag = false;
-            } else {
-              money = era.add('item:「恩宠」', -25);
-              await era.printAndWait([
-                chara.get_colored_name(),
-                ' 做完按摩后，身体变得更润滑了……',
-              ]);
-              era.add(`talent:${chara.id}:调教度`, 1);
+            const p = get_random_entry(talent_list);
+            switch (await era.input()) {
+              case 1:
+                target = target === chara ? me : chara;
+                break;
+              case 2:
+                money = era.add('item:「恩宠」', -60);
+                await era.printAndWait([
+                  target.get_colored_name(),
+                  ' 获得了 ',
+                  { color: buff_colors[2], content: `[${p}]` },
+                  '！',
+                ]);
+                era.set(`talent:${target.id}:${p}`, 1);
+                break;
+              case 3:
+                money = era.add('item:「恩宠」', -25);
+                await era.printAndWait([
+                  chara.get_colored_name(),
+                  ' 做完按摩后，身体变得更润滑了……',
+                ]);
+                era.add(`talent:${chara.id}:调教度`, 1);
+                break;
+              default:
+                _flag = false;
             }
             _flag &&= money > 0;
           }
@@ -658,7 +735,7 @@ async function cum_shop(chara, me) {
               await era.printAndWait([
                 '获得了道具【',
                 era.get(`itemname:${item}`).toUpperCase(),
-                '】',
+                '】！',
               ]);
             }
           }

@@ -30,7 +30,11 @@ const {
 } = require('#/data/const.json');
 const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
-const { get_love_info, get_relation_info } = require('#/data/info-generator');
+const {
+  get_celebration,
+  get_love_info,
+  get_relation_info,
+} = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 
 /**
@@ -54,23 +58,217 @@ async function npc_common(
   func_cb,
   back_cb,
 ) {
-  const relation = get_relation_info(chara.id),
-    celebration_cost = 50 * (era.get('cflag:0:节日事件标记') + 1),
-    love = get_love_info(chara.id),
-    relation_check =
-      era.get(`relation:${chara.id}:0`) <= 225 &&
-      era.get(`love:${chara.id}`) < 50,
-    is_awake = sys_check_awake(chara.id),
-    player_base = {
-      stamina: era.get('base:0:体力'),
-      time: era.get('base:0:精力'),
-    },
-    chara_base = {
-      stamina: era.get(`base:${chara.id}:体力`),
-      time: era.get(`base:${chara.id}:精力`),
-    },
-    is_recruit = era.get(`cflag:${chara.id}:招募状态`) === recruit_flags.yes;
+  const relation = get_relation_info(chara.id);
+  const celebration_cost = 50 * (era.get('cflag:0:节日事件标记') + 1);
+  const love = get_love_info(chara.id);
+  const relation_check =
+    era.get(`relation:${chara.id}:0`) <= 225 &&
+    era.get(`love:${chara.id}`) < 50;
+  const is_awake = sys_check_awake(chara.id);
+  const player_base = {
+    stamina: era.get('base:0:体力'),
+    time: era.get('base:0:精力'),
+  };
+  const chara_base = {
+    stamina: era.get(`base:${chara.id}:体力`),
+    time: era.get(`base:${chara.id}:精力`),
+  };
+  const is_recruit =
+    era.get(`cflag:${chara.id}:招募状态`) === recruit_flags.yes;
+  const image = era.get(`cstr:${chara.id}:头像`);
   era.setVerticalAlign('middle');
+  const buttons = [
+    {
+      b: {
+        config: { disabled: era.get('base:0:精力') < 200 || !is_awake },
+        content: talk_cb.name,
+      },
+      async h() {
+        sys_change_attr_and_print(0, '精力', -200);
+        talk_cb.handle && (await talk_cb.handle());
+        era.println();
+        sys_like_chara(chara.id, 0, get_random_value(5, 20)) &&
+          (await era.waitAnyKey());
+      },
+    },
+    {
+      b: { content: sex_cb.name },
+      async h() {
+        if (sex_cb.handle) {
+          await sex_cb.handle();
+        } else {
+          const temp = era.get('flag:当前位置');
+          switch (
+            await goto_sex(chara.id, sex_cb.loc || era.get('flag:当前位置'))
+          ) {
+            case true:
+              await era.printAndWait([
+                chara.get_colored_name(),
+                ' 与 ',
+                get_chara_talk(0).get_colored_name(),
+                ' 约定晚上在家见面……',
+              ]);
+              break;
+            case 2:
+              sex_cb.fail_cb();
+          }
+          era.set('flag:当前位置', temp);
+        }
+      },
+    },
+    {
+      b: {
+        config: { disabled: era.get('base:0:精力') < 200 || !is_awake },
+        content: '送礼物',
+      },
+      async h() {
+        era.drawLine();
+        era.print([
+          '给 ',
+          get_chara_talk(chara.id).get_colored_name(),
+          ' 送上了一份小礼物……',
+        ]);
+        era.println();
+        await run_custom_daily(chara.id, event_hooks.office_gift);
+      },
+    },
+    {
+      b: {
+        config: {
+          disabled:
+            !is_awake ||
+            sys_check_act_disabled(
+              sys_get_move_cost(location_enum.gate, chara.id),
+              player_base,
+              chara_base,
+            ) > 0 ||
+            relation_check,
+        },
+        content: out_cb.name,
+      },
+      async h() {
+        const temp = era.get('flag:当前互动角色');
+        era.set('flag:当前互动角色', chara.id);
+        if (out_cb.handle) {
+          await out_cb.handle();
+        } else {
+          sys_handle_action(
+            sys_get_move_cost(location_enum.gate, chara.id),
+            chara.id,
+          );
+          era.set('flag:当前位置', location_enum.gate);
+          await out_cb.print_out_page();
+          era.set('flag:当前位置', out_cb.loc);
+        }
+        era.set('flag:当前互动角色', temp);
+      },
+    },
+  ];
+  if (func_cb.handle !== undefined) {
+    buttons.push({
+      b: {
+        config: { disabled: !is_awake || func_cb.disabled },
+        content: func_cb.name,
+      },
+      h: func_cb.handle,
+    });
+  }
+  if (era.get(`cflag:${chara.id}:节日事件标记`) > 0) {
+    buttons.push({
+      b: {
+        config: {
+          buttonType: 'danger',
+          disabled:
+            !is_awake ||
+            chara_base.time < 50 ||
+            player_base.time < celebration_cost ||
+            relation_check,
+        },
+        content: cele_cb.name,
+      },
+      async h() {
+        if (cele_cb.handle) {
+          await cele_cb.handle();
+        }
+        sys_change_attr_and_print(0, '精力', -celebration_cost);
+        sys_change_attr_and_print(chara.id, '精力', -50);
+        era.drawLine();
+        if (
+          !(await sys_get_random_event(event_hooks.celebration, chara.id)())
+        ) {
+          era.drawLine();
+          era.print([
+            '【和 ',
+            chara.get_colored_name(),
+            ' 一起庆祝了 ',
+            get_celebration(),
+            '】',
+          ]);
+          await run_custom_daily(chara.id, event_hooks.celebration, {});
+        }
+      },
+    });
+  }
+  if (era.get(`status:${chara.id}:生日`) === 2) {
+    buttons.push({
+      b: {
+        config: {
+          buttonType: 'danger',
+          disabled:
+            !is_awake ||
+            chara_base.time < 50 ||
+            player_base.time < celebration_cost ||
+            relation_check,
+        },
+        content: '庆祝生日',
+      },
+      async h() {
+        sys_change_attr_and_print(0, '精力', -celebration_cost);
+        sys_change_attr_and_print(chara.id, '精力', -50);
+        era.print(['【向 ', chara.get_colored_name(), ' 祝贺生日快乐】']);
+        await run_custom_daily(chara.id, event_hooks.birthday, {});
+      },
+    });
+  }
+  if (era.get(`cflag:${chara.id}:招募状态`) === recruit_flags.yes) {
+    if (
+      era.get(`cflag:${chara.id}:可再次育成`) > 0 ||
+      !era.get(`cflag:${chara.id}:种族`)
+    ) {
+      buttons.push({
+        b: {
+          config: { disabled: era.get(`relation:${chara.id}:0`) < 76 },
+          content:
+            era.get(`cflag:${chara.id}:照看`) > 0 ? '切换照看角色' : '请求照看',
+        },
+        h: take_care.bind(void 0, chara),
+      });
+    }
+    if (
+      era.get(`exp:${chara.id}:性爱次数`) > era.get(`exp:${chara.id}:睡奸次数`)
+    ) {
+      buttons.push({
+        b: { content: '提升对方性爱能力' },
+        h: print_juel_shop_page.bind(void 0, chara.id),
+      });
+    }
+  }
+  if (
+    era.get(`cflag:${chara.id}:爱慕暂拒`) > 0 &&
+    era.get(`cflag:${chara.id}:爱慕暂拒`) === era.get(`love:${chara.id}`)
+  ) {
+    buttons.push({
+      b: { content: '重新触发爱慕事件' },
+      async h() {
+        era.set(`cflag:${chara.id}:爱慕暂拒`, 0);
+        get_custom_check(chara.id).check_love_events();
+        await era.printAndWait([
+          chara.get_colored_name(),
+          { content: ' 似乎决定重新审视你们之间的关系……' },
+        ]);
+      },
+    });
+  }
   era.printInColRows(
     [
       {
@@ -86,7 +284,7 @@ async function npc_common(
         },
         {
           config: { width: 21 },
-          names: `${era.get(`cstr:${chara.id}:头像`)}_半身`,
+          names: `${image}_私_半身\t${image}_半身`,
           type: 'image.whole',
         },
       ],
@@ -176,90 +374,12 @@ async function npc_common(
     },
     [
       { type: 'divider' },
-      ...[
-        {
-          accelerator: 1,
-          config: { disabled: era.get('base:0:精力') < 200 || !is_awake },
-          content: talk_cb.name,
-          type: 'button',
-        },
-        { accelerator: 2, content: sex_cb.name, type: 'button' },
-        {
-          accelerator: 3,
-          config: { disabled: era.get('base:0:精力') < 200 || !is_awake },
-          content: '送礼物',
-          type: 'button',
-        },
-        {
-          accelerator: 4,
-          config: {
-            disabled:
-              !is_awake ||
-              sys_check_act_disabled(
-                sys_get_move_cost(location_enum.gate, chara.id),
-                player_base,
-                chara_base,
-              ) > 0 ||
-              relation_check,
-          },
-          content: out_cb.name,
-          type: 'button',
-        },
-        func_cb.handle
-          ? {
-              accelerator: 5,
-              config: { disabled: !is_awake || func_cb.disabled },
-              content: func_cb.name,
-              type: 'button',
-            }
-          : undefined,
-        era.get(`cflag:${chara.id}:节日事件标记`)
-          ? {
-              accelerator: 6,
-              config: {
-                buttonType: 'danger',
-                disabled:
-                  !is_awake ||
-                  chara_base.time < 50 ||
-                  player_base.time < celebration_cost ||
-                  relation_check,
-              },
-              content: cele_cb.name,
-              type: 'button',
-            }
-          : undefined,
-        era.get(`cflag:${chara.id}:招募状态`) === recruit_flags.yes &&
-        (era.get(`cflag:${chara.id}:可再次育成`) > 0 ||
-          !era.get(`cflag:${chara.id}:种族`))
-          ? {
-              accelerator: 7,
-              config: { disabled: era.get(`relation:${chara.id}:0`) < 76 },
-              content:
-                era.get(`cflag:${chara.id}:照看`) > 0
-                  ? '切换照看角色'
-                  : '请求照看',
-              type: 'button',
-            }
-          : undefined,
-        era.get(`cflag:${chara.id}:招募状态`) === recruit_flags.yes &&
-        era.get(`exp:${chara.id}:性爱次数`) >
-          era.get(`exp:${chara.id}:睡奸次数`)
-          ? { accelerator: 8, content: '提升对方性爱能力', type: 'button' }
-          : undefined,
-        era.get(`cflag:${chara.id}:爱慕暂拒`) &&
-        era.get(`cflag:${chara.id}:爱慕暂拒`) === era.get(`love:${chara.id}`)
-          ? {
-              accelerator: 9,
-              content: '重新触发爱慕事件',
-              type: 'button',
-            }
-          : undefined,
-      ]
-        .filter((e) => e)
-        .map((e) => {
-          (e.config || (e.config = {})).width = 8;
-          return e;
-        }),
+      ...buttons.map((e, i) => ({
+        ...e.b,
+        config: { ...(e.b.config ?? {}), width: 8 },
+        accelerator: i + 1,
+        type: 'button',
+      })),
       {
         accelerator: 99,
         content: back_cb.name,
@@ -268,98 +388,15 @@ async function npc_common(
     ],
   );
   era.setVerticalAlign('top');
-  let temp = await era.input();
+  const ret = await era.input();
   era.drawLine();
-  switch (temp) {
-    case 1:
-      sys_change_attr_and_print(0, '精力', -200);
-      talk_cb.handle && (await talk_cb.handle());
-      era.println();
-      sys_like_chara(chara.id, 0, get_random_value(5, 20)) &&
-        (await era.waitAnyKey());
-      break;
-    case 2:
-      if (sex_cb.handle) {
-        await sex_cb.handle();
-      } else {
-        temp = era.get('flag:当前位置');
-        switch (
-          await goto_sex(chara.id, sex_cb.loc || era.get('flag:当前位置'))
-        ) {
-          case true:
-            await era.printAndWait([
-              chara.get_colored_name(),
-              ' 与 ',
-              get_chara_talk(0).get_colored_name(),
-              ' 约定晚上在家见面……',
-            ]);
-            break;
-          case 2:
-            sex_cb.fail_cb();
-        }
-        era.set('flag:当前位置', temp);
-      }
-      break;
-    case 3:
-      era.drawLine();
-      era.print([
-        '给 ',
-        get_chara_talk(chara.id).get_colored_name(),
-        ' 送上了一份小礼物……',
-      ]);
-      era.println();
-      await run_custom_daily(chara.id, event_hooks.office_gift);
-      break;
-    case 4:
-      temp = era.get('flag:当前互动角色');
-      era.set('flag:当前互动角色', chara.id);
-      if (out_cb.handle) {
-        await out_cb.handle();
-      } else {
-        sys_handle_action(
-          sys_get_move_cost(location_enum.gate, chara.id),
-          chara.id,
-        );
-        era.set('flag:当前位置', location_enum.gate);
-        await out_cb.print_out_page();
-        era.set('flag:当前位置', out_cb.loc);
-      }
-      era.set('flag:当前互动角色', temp);
-      break;
-    case 5:
-      await func_cb.handle();
-      break;
-    case 6:
-      if (cele_cb.handle) {
-        await cele_cb.handle();
-      }
-      sys_change_attr_and_print(0, '精力', -celebration_cost);
-      sys_change_attr_and_print(chara.id, '精力', -50);
-      era.drawLine();
-      if (!(await sys_get_random_event(event_hooks.celebration, chara.id)())) {
-        era.drawLine();
-        await run_custom_daily(chara.id, event_hooks.celebration, {});
-      }
-      break;
-    case 7:
-      await take_care(chara);
-      break;
-    case 8:
-      await print_juel_shop_page(chara.id);
-      break;
-    case 9:
-      era.set(`cflag:${chara.id}:爱慕暂拒`, 0);
-      get_custom_check(chara.id).check_love_events();
-      await era.printAndWait([
-        chara.get_colored_name(),
-        { content: ' 似乎决定重新审视你们之间的关系……' },
-      ]);
-      break;
-    case 99:
-      if (back_cb.handle) {
-        await back_cb.handle();
-      }
-      return false;
+  if (ret === 99) {
+    if (back_cb.handle) {
+      await back_cb.handle();
+    }
+    return false;
+  } else {
+    await buttons[ret - 1].h();
   }
   if (!era.get(`base:${chara.id}:体力`)) {
     await era.printAndWait([

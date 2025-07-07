@@ -153,11 +153,11 @@ async function check_new_activities(cur_round, in_team_list) {
     }
   });
   for (const entry of Object.values(curr_race_list)) {
-    const race = entry[0],
-      info = race_infos[race],
-      location = track2location[info.track],
-      race_colored_name =
-        track2race[info.track] || info.get_colored_name_with_class();
+    const race = entry[0];
+    const info = race_infos[race];
+    const location = track2location[info.track];
+    const race_colored_name =
+      track2race[info.track] || info.get_colored_name_with_class();
     if (entry[1]) {
       // 远征开始
       let foreign_list = in_team_list.filter((e) => {
@@ -216,7 +216,8 @@ async function check_new_activities(cur_round, in_team_list) {
         race_infos[sys_reg_race(0).curr.race]?.track === race_infos[race].track;
       let temp =
         era.get('flag:当前位置') === location_enum.basement ||
-        era.get('cflag:0:妊娠回合计时') >= 33 ||
+        era.get('cflag:0:妊娠回合计时') >=
+          (CharaInmon.get(0).slave === slavery_enum.pregnant ? 30 : 33) ||
         (!foreign_list.length && !me_in_race);
       if (!temp) {
         era.printMultiColumns([
@@ -249,7 +250,8 @@ async function check_new_activities(cur_round, in_team_list) {
         if (
           foreign_list.indexOf(343) === -1 &&
           era.get('cflag:343:招募状态') === recruit_flags.yes &&
-          era.get('cflag:343:妊娠回合计时') < 33
+          era.get('cflag:343:妊娠回合计时') <
+            (CharaInmon.get(343).slave === slavery_enum.pregnant ? 30 : 33)
         ) {
           foreign_list.push(343);
         }
@@ -507,14 +509,16 @@ async function check_new_activities(cur_round, in_team_list) {
       ),
     );
 
-  if (
-    sys_check_npc_working(345) &&
-    (era.get('cflag:345:招募状态') === recruit_flags.yes ||
-      era.get('love:345') >= 30 ||
-      Math.random() < 0.5)
-  ) {
-    loc_characters.get(location_enum.visitor).push(345);
-  }
+  [345, 349].forEach((cid) => {
+    if (
+      sys_check_npc_working(cid) &&
+      (era.get(`cflag:${cid}:招募状态`) === recruit_flags.yes ||
+        era.get(`love:${cid}`) >= 30 ||
+        Math.random() < 0.5)
+    ) {
+      loc_characters.get(location_enum.visitor).push(cid);
+    }
+  });
   loc_characters.set(
     location_enum.visitor,
     sort_list(loc_characters.get(location_enum.visitor), (e) => e, true),

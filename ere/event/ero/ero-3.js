@@ -33,7 +33,7 @@ module.exports = class extends CustomizedEro {
         extra_flag,
       );
     }
-    if (era.get('status:3:腿伤')) {
+    if (era.get('status:3:腿伤') > 0) {
       await era.printAndWait([
         me.get_colored_name(),
         ' 低头看着手里的报告，接受了里面显示的信息，抬头望向坐在窗前的担当。',

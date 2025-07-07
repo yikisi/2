@@ -33,11 +33,11 @@ const {
  * @param {number[]} act_list
  * @param {number} last_action
  * @param {function(number):boolean} filters
+ * @returns {number}
  */
 function get_random_act(master, act_list, last_action, ...filters) {
-  const change_action = (last_action = ero_hooks.relax
-    ? 1
-    : era.get(`tcvar:${master}:变招`));
+  const change_action =
+    last_action === ero_hooks.relax ? 1 : era.get(`tcvar:${master}:变招`);
   let ret;
   filters.push(undefined);
   let filtered_list;
@@ -59,8 +59,14 @@ function get_random_act(master, act_list, last_action, ...filters) {
   era.logger.debug(
     'source: ' +
       act_list.map((e) => ero_action_names[e]).join(',') +
-      '\n\tfiltered: ' +
-      filtered_list.map((e) => ero_action_names[e]).join(','),
+      '\nfiltered: ' +
+      filtered_list.map((e) => ero_action_names[e]).join(',') +
+      '\nlast action: ' +
+      (ero_action_names[last_action] ?? 'null') +
+      '\nchange ratio: ' +
+      (change_action * 100).toFixed(2) +
+      '%\nselected: ' +
+      ero_action_names[ret],
   );
   return ret;
 }
@@ -376,8 +382,9 @@ async function sys_auto_rape(shown) {
     );
   }
   const second_filter = get_custom_ero(master).filter_in_rape();
-  if (Object.keys(poison_list.master).length) {
-    filters.push((e) => {
+  const temp_filters = [];
+  if (Object.keys(poison_list.master).length > 0) {
+    temp_filters.push((e) => {
       const tags = ero_tagged_hooks[e] || default_tags;
       return (
         tags.attacker_tags.findIndex((t) => poison_list.master[t]) !== -1 &&
@@ -386,26 +393,32 @@ async function sys_auto_rape(shown) {
     });
   }
   if (Object.keys(sensitive_list.master).length) {
-    temp = (e) => {
+    temp_filters.push((e) => {
       const tags = ero_tagged_hooks[e] || default_tags;
       return (
         tags.attacker_tags.findIndex((t) => sensitive_list.master[t]) === -1 ||
         tags.defender_tags.findIndex((t) => sensitive_list.lover[t]) === -1
       );
-    };
-    filters.push((e) => second_filter(e) && temp(e), temp);
+    });
   }
-  if (Object.keys(white_list).length + Object.keys(week_list).length) {
-    temp = (e) => {
+  if (Object.keys(white_list).length > 0 || Object.keys(week_list).length > 0) {
+    temp_filters.push((e) => {
       const tags = ero_tagged_hooks[e] || default_tags;
       return (
         tags.attacker_tags.findIndex((t) => white_list[t]) !== -1 ||
         tags.defender_tags.findIndex((t) => week_list[t]) !== -1
       );
-    };
-    filters.push((e) => second_filter(e) && temp(e), temp);
+    });
   }
-  filters.push(second_filter);
+  if (temp_filters.length > 0) {
+    filters.push(
+      ...temp_filters.map((f) => (a) => second_filter(a) && f(a)),
+      second_filter,
+      ...temp_filters,
+    );
+  } else {
+    filters.push(second_filter);
+  }
   if (Object.keys(black_list).length) {
     filters.push((e) => {
       const tags = ero_tagged_hooks[e] || default_tags;
@@ -425,12 +438,11 @@ async function sys_auto_rape(shown) {
       era.get(`love:${master}`) >= 75 ||
       (e !== ero_hooks.kiss && e !== ero_hooks.french_kiss),
   );
-  const last_action = era.get('tflag:前回行动'),
-    action = get_random_act(master, random_list, last_action, ...filters),
-    change_ratio = 0.16 - 0.08 * era.get(`talent:${master}:工口好奇`);
+  const last_action = era.get('tflag:前回行动');
+  const action = get_random_act(master, random_list, last_action, ...filters);
   (last_action === action ? era.add : era.set)(
     `tcvar:${master}:变招`,
-    change_ratio,
+    0.16 - 0.08 * era.get(`talent:${master}:工口好奇`),
   );
   era.logger.debug(
     `raping done! ${(new Date().getTime() - current).toLocaleString()}ms`,
@@ -567,7 +579,9 @@ async function sys_auto_rape(shown) {
   }
   era.set('tflag:前回行动', action);
   era.set('tflag:前回助手', cur_supporter);
-  shown && era.println();
+  if (shown) {
+    era.println();
+  }
 }
 
 module.exports = sys_auto_rape;

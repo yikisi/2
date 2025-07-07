@@ -16,7 +16,7 @@ module.exports = (handlers) => {
       defender.get_colored_name(),
       ' 身上，奸淫着',
       hook.hook === ero_hooks.missionary ? '小穴' : '屁穴',
-      '……】',
+      '】',
     ]);
 
   handlers[ero_hooks.doggy_style] = handlers[ero_hooks.doggy_style_anal_sex] = (
@@ -31,7 +31,7 @@ module.exports = (handlers) => {
       defender.get_colored_name(),
       ' 身上，奸淫着',
       hook.hook === ero_hooks.doggy_style ? '小穴' : '屁穴',
-      '……】',
+      '】',
     ]);
 
   handlers[ero_hooks.stimulate_g_spot] = (attacker, defender) =>
@@ -40,7 +40,7 @@ module.exports = (handlers) => {
       attacker.get_colored_name(),
       ' 用肉棒刺激着沉睡的 ',
       defender.get_colored_name(),
-      ' 深藏的G点……】',
+      ' 深藏的G点】',
     ]);
 
   handlers[ero_hooks.stimulate_womb] = (attacker, defender) =>
@@ -49,7 +49,7 @@ module.exports = (handlers) => {
       attacker.get_colored_name(),
       ' 用肉棒隔着屁穴刺激着沉睡的 ',
       defender.get_colored_name(),
-      ' 敏感的子宫……】',
+      ' 敏感的子宫】',
     ]);
 
   handlers[ero_hooks.cowgirl] = handlers[ero_hooks.cowgirl_anal_sex] = (
@@ -64,7 +64,7 @@ module.exports = (handlers) => {
       defender.get_colored_name(),
       ' 身上，以',
       hook.hook === ero_hooks.cowgirl ? '小穴' : '屁穴',
-      '套弄着肉棒……】',
+      '套弄着肉棒】',
     ]);
 
   handlers[ero_hooks.stimulate_glans_by_virgin] = handlers[
@@ -77,6 +77,6 @@ module.exports = (handlers) => {
       hook.hook === ero_hooks.stimulate_glans_by_virgin ? '小穴' : '屁穴',
       '套弄着沉睡的 ',
       defender.get_colored_name(),
-      ' 耸立的肉棒……】',
+      ' 耸立的肉棒】',
     ]);
 };

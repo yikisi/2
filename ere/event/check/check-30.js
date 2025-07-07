@@ -160,13 +160,13 @@ module.exports = class extends CustomizedCheck {
     return ['永恒碧蓝'];
   }
 
-  is_aim_race(race, edu_weeks) {
+  is_aim_race(race, edu_weeks, rank) {
     if (
       race === race_enum.tenn_sho &&
       !check_aim_race(RaceHistory.get(30).get(), race_enum.tenn_sho, 1, 1)
     ) {
       return -4;
     }
-    return aim_races[`${edu_weeks}_${race}`] || aim_races[race];
+    return super.is_aim_race(race, edu_weeks, rank);
   }
 };

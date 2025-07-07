@@ -25,24 +25,24 @@ function sys_check_titles_after_race(team_list, race, best_rank, mvp_id) {
       era.get('cflag:0:妊娠回合计时') === 0 &&
       LifeEventMarks.get_marks(0).sperm > 0;
   let hentai_flag = false;
-  team_list.forEach(({ index_chara: id }) => {
-    new_title_dict[id] = [];
-    const pregnant_stage = era.get(`cflag:${id}:妊娠阶段`);
+  team_list.forEach(({ index_chara: cid }) => {
+    new_title_dict[cid] = [];
+    const pregnant_stage = era.get(`cflag:${cid}:妊娠阶段`);
     if (pregnant_stage >> pregnant_stage_enum.late > 0) {
       hentai_flag = true;
     }
     if (pregnant_stage >> pregnant_stage_enum.embryo > 0) {
-      new_title_dict[id].push({ n: '亲子关系紧张', c: buff_colors[2] });
+      new_title_dict[cid].push({ n: '亲子关系紧张', c: buff_colors[2] });
     }
     if (
-      era.get(`cflag:${id}:腹中精液`) > 0 &&
-      era.get(`cflag:${id}:子宫内精液`) > 0 &&
-      era.get(`cflag:${id}:肠道内精液`) > 0
+      era.get(`cflag:${cid}:腹中精液`) > 0 &&
+      era.get(`cflag:${cid}:子宫内精液`) > 0 &&
+      era.get(`cflag:${cid}:肠道内精液`) > 0
     ) {
-      new_title_dict[id].push({ n: '白浊浸染', c: buff_colors[2] });
+      new_title_dict[cid].push({ n: '白浊浸染', c: buff_colors[2] });
     }
-    if (id > 0 && Number(pregnant_check) === id) {
-      new_title_dict[id].push({ n: '父亲力量', c: buff_colors[2] });
+    if (cid > 0 && Number(pregnant_check) === cid) {
+      new_title_dict[cid].push({ n: '父亲力量', c: buff_colors[2] });
     }
   });
   if (best_rank === 1) {

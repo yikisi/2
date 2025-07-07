@@ -1,7 +1,10 @@
 ﻿const era = require('#/era-electron');
 
 const sys_handle_escape_basement = require('#/system/basement/sys-handle-escape-basement');
-const { sys_check_yandere } = require('#/system/chara/sys-calc-cheat');
+const {
+  sys_check_cuckold,
+  sys_check_yandere,
+} = require('#/system/chara/sys-calc-cheat');
 const {
   begin_and_init_ero,
   end_ero_and_show_result,
@@ -66,29 +69,33 @@ let random_event,
 
 async function next_week() {
   era.drawLine();
-  era.print('时间开始流动……', { align: 'center', fontSize: '1.5rem' });
+  era.print('【时间开始流动】', {
+    align: 'center',
+    fontSize: '1.5rem',
+  });
+  era.println();
   await sys_next_week();
   era.drawLine();
-  await era.printAndWait('新的一周开始了……', {
+  await era.printAndWait('【新的一周开始了】', {
     align: 'center',
     fontSize: '1.5rem',
   });
 }
 
 /**
- * @param {number} chara_id
+ * @param {number} cid
  * @param {number} cur_loc
  * @param {number} rest_loc
  */
-async function save_and_next_week(chara_id, cur_loc, rest_loc) {
+async function save_and_next_week(cid, cur_loc, rest_loc) {
   await era.saveData(0, `${get_save_name()} (自动存档)`);
   era.drawLine();
   era.set('flag:当前互动角色', 0);
   era.set('flag:当前位置', rest_loc);
   let lover = Number(sys_check_awake(0) && era.get('flag:床伴'));
   era.set('flag:床伴', lover);
-  if (chara_id && !sys_check_remote(chara_id) && !lover) {
-    await run_custom_daily(chara_id, event_hooks.good_night);
+  if (cid > 0 && !sys_check_remote(cid) && !lover) {
+    await run_custom_daily(cid, event_hooks.good_night);
   }
   let continue_flag = true;
   if (era.get('flag:当前位置') !== location_enum.basement) {
@@ -98,7 +105,7 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
       (random_event = sys_get_random_event(event_hooks.week_end)) !== undefined
     ) {
       era.drawLine();
-      continue_flag = !(await random_event(chara_id));
+      continue_flag = !(await random_event(cid));
     }
     stop_machine_gun(event_hooks.week_end);
   }
@@ -111,8 +118,9 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
       era.set('tflag:主导权', lover);
     }
     const inmon = CharaInmon.get(lover);
-    const orgy = !sys_check_yandere(lover, (y) => y === 2, inmon)
-      ? get_random_entry(
+    const orgy = sys_check_yandere(lover, (y) => y === 2, inmon)
+      ? void 0
+      : get_random_entry(
           sys_filter_chara('cflag', '招募状态', recruit_flags.yes)
             .map((e) => {
               return {
@@ -122,14 +130,14 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
                   e !== lover &&
                   sys_check_awake(e) &&
                   (era.get(`relation:${e}:${lover}`) > 225 ||
-                    era.get(`base:${e}:性欲`) >= lust_border.absent_mind) &&
+                    era.get(`base:${e}:性欲`) >= lust_border.absent_mind ||
+                    sys_check_cuckold(e)) &&
                   get_custom_check(e).is_want_make_love(),
               };
             })
             .filter((e) => e.check),
-        )
-      : undefined;
-    if (orgy !== undefined) {
+        );
+    if (orgy !== void 0) {
       era.drawLine();
       let wait_flag = false;
       if (await get_custom_ero(orgy.id).join_3p(lover)) {
@@ -142,10 +150,7 @@ async function save_and_next_week(chara_id, cur_loc, rest_loc) {
           sys_like_chara(orgy.id, lover, get_random_value(50, 150)) ||
           wait_flag;
         const yandere = era.get(`talent:${lover}:病娇`);
-        if (
-          inmon.on(plugin_enum.ntr) ||
-          (!yandere && era.get(`talent:${lover}:绿帽癖`))
-        ) {
+        if (sys_check_cuckold(lover, inmon)) {
           wait_flag =
             sys_like_chara(lover, 0, get_random_value(10, 25)) || wait_flag;
           wait_flag =
@@ -353,7 +358,7 @@ module.exports = async () => {
               era.get(`relation:${owner}:0`)) /
               200,
           ),
-          0,
+          1,
         );
         my_life_marks.b_now = my_life_marks.b_enhance = Math.max(
           owner_marks.b_s_level + get_random_value(-1, 1),

@@ -8,8 +8,8 @@ const {
 
 const CharaTalk = require('#/utils/chara-talk');
 const get_gradient_color = require('#/utils/gradient-color');
+const { get_abbr_number } = require('#/utils/value-utils');
 
-const sex_color = require('#/data/const.json').mark_colors['淫纹'];
 const { attr_change_colors, palam_colors } = require('#/data/color-const');
 const { mark_colors } = require('#/data/const.json');
 const CharaInmon = require('#/data/ero/chara-inmon');
@@ -24,6 +24,8 @@ const {
 const { get_breast_cup, get_talent, get_xp } = require('#/data/info-generator');
 
 const page_name = '性爱情况';
+
+const sex_color = mark_colors['淫纹'];
 
 /**
  * @param {number} chara_id
@@ -68,7 +70,7 @@ module.exports = {
     } else if (!chara.id || flags.show_exp) {
       const in_train = era.get(`ex:${chara.id}:TotalEX`) !== undefined;
       if (in_train) {
-        const plugin_list = CharaInmon.get(chara.id).to_list;
+        const plugin_list = CharaInmon.get(chara.id).list;
         const inmon_info =
           plugin_list.length > 0
             ? [
@@ -243,17 +245,17 @@ module.exports = {
         '身体耐性',
         '身体掌握',
       ];
-      if (chara.sex_code) {
+      if (chara.sex_code > 0) {
         skill_list.push('插入技巧', '阴茎耐性');
       }
       skill_list.push('阴茎掌握');
-      if (chara.sex_code - 1) {
+      if (chara.sex_code !== 1) {
         skill_list.push('性交技巧');
       }
-      if (!chara.sex_code) {
+      if (chara.sex_code === 0) {
         skill_list.push('外阴耐性');
       }
-      if (chara.sex_code - 1) {
+      if (chara.sex_code !== 1) {
         skill_list.push('阴道耐性');
       }
       skill_list.push(
@@ -308,8 +310,8 @@ module.exports = {
               juel.substring(0, 2),
               '：',
               {
-                color: num ? palam_colors.notifications[1] : '',
-                content: num.toLocaleString(),
+                color: num > 0 ? palam_colors.notifications[1] : '',
+                ...get_abbr_number(num),
               },
               ...(got_juel
                 ? [
@@ -350,18 +352,18 @@ module.exports = {
 
       const sex_level = era.get(`mark:${chara.id}:淫纹`);
 
-      if (sex_level || chara.id) {
+      if (sex_level > 0 || chara.id > 0) {
         sex_info_list.push({
           type: 'divider',
           config: { content: '刻印', position: 'left' },
         });
 
-        if (sex_level) {
+        if (sex_level > 0) {
           sex_info_list.push(get_mark_info(chara.id, '淫纹', sex_level));
-        } else if (chara.id) {
+        } else if (chara.id > 0) {
           sex_info_list.push(get_mark_info(chara.id, '欢愉'));
         }
-        if (chara.id) {
+        if (chara.id > 0) {
           era
             .get('marknames')
             .slice(2)

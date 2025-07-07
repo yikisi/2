@@ -8,7 +8,7 @@ const get_color = require('#/utils/gradient-color');
 const { mark_colors } = require('#/data/const.json');
 const { mark_enum } = require('#/data/ero/mark-const');
 
-const relation_by_mark = [100, 0, 200, -200, -200, -400];
+const relation_by_mark = [40, 0, 60, -200, -200, -400];
 
 /** @type {function(number):CustomizedEro} */
 let get_custom_ero;
@@ -59,7 +59,7 @@ async function update_marks(shown, ...ids) {
     }
     if (
       me_in_sex &&
-      chara_id &&
+      chara_id > 0 &&
       sys_like_chara(chara_id, 0, relation_change, shown)
     ) {
       await era.waitAnyKey();

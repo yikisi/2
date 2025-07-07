@@ -12,7 +12,7 @@ const { get_custom_edu } = require('#/event/edu/edu-factory');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 const print_event_name = require('#/event/snippets/print-event-name');
 
-const CharaTalk = require('#/utils/chara-talk');
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 
 const { buff_colors } = require('#/data/color-const');
@@ -35,7 +35,7 @@ const basement_saying_arr = [
 /** @param {boolean} [again] */
 async function game_over(again) {
   const game_over = era.get('flag:游戏结束');
-  let end_talk = false,
+  let end_talk = 0,
     saying_arr,
     temp;
   if (game_over === 3 && era.get('flag:当前位置') === location_enum.basement) {
@@ -73,7 +73,8 @@ async function game_over(again) {
       (era.get('flag:当前声望') <= 0 ||
         (era.get('flag:彩蛋机制') === 179 && !again))
     ) {
-      if (era.get('flag:声望不足替换')) {
+      if (era.get('flag:声望不足替换') > 0) {
+        const me = get_chara_talk(0);
         punish_level = era.add('flag:惩戒力度', 1);
         let jpy = era.get('flag:当前马币');
         switch (punish_level) {
@@ -112,7 +113,7 @@ async function game_over(again) {
             await era.printAndWait(
               [
                 '？？？「',
-                CharaTalk.me.get_colored_name(),
+                me.get_colored_name(),
                 '……怠惰，傲慢',
                 era.get('flag:变态行为') ? '，色欲' : '',
                 '……今天……你获得了新生。」',
@@ -144,7 +145,7 @@ async function game_over(again) {
               },
             );
             await era.printAndWait(
-              `？？？「${CharaTalk.me.actual_name} 小姐——自由在召唤你。」`,
+              `？？？「${me.actual_name} 小姐——自由在召唤你。」`,
               {
                 offset: 6,
                 width: 12,
@@ -156,10 +157,7 @@ async function game_over(again) {
             });
             era.println();
             if (era.get('cflag:0:种族')) {
-              await era.printAndWait([
-                CharaTalk.me.get_colored_name(),
-                ' 遭受了改造！',
-              ]);
+              await era.printAndWait([me.get_colored_name(), ' 遭受了改造！']);
             } else {
               era.set(
                 'maxbase:0:速度',
@@ -174,16 +172,16 @@ async function game_over(again) {
                 Math.min(2000, era.get('maxbase:0:力量') + 800),
               );
               await era.printAndWait([
-                CharaTalk.me.get_colored_name(),
+                me.get_colored_name(),
                 ' 被转变为了马娘！',
               ]);
               await era.printAndWait([
-                CharaTalk.me.get_colored_name(),
+                me.get_colored_name(),
                 ' 仍然可以招募马娘，训练她们，陪伴她们奔跑，但不再享有特雷森下发的工资。',
               ]);
               await era.printAndWait([
                 '相应的，',
-                CharaTalk.me.get_colored_name(),
+                me.get_colored_name(),
                 ' 可以进行自主训练，参与赛事，并赢取奖金和社会声望。',
               ]);
             }
@@ -221,7 +219,7 @@ async function game_over(again) {
               isParagraph: true,
             });
             await era.printAndWait(
-              `本母马 ${CharaTalk.me.actual_name} 自愿成为马娘大人们的奴隶，`,
+              `本母马 ${me.actual_name} 自愿成为马娘大人们的奴隶，`,
               {
                 offset: 6,
                 width: 12,
@@ -241,22 +239,22 @@ async function game_over(again) {
                 width: 12,
               },
             );
-            era.print(CharaTalk.me.actual_name, {
+            era.print(me.actual_name, {
               align: 'center',
               offset: 14,
               width: 4,
             });
-            era.print(`<${CharaTalk.me.name} 的唇印>`, {
+            era.print(`<${me.name} 的唇印>`, {
               align: 'center',
               offset: 14,
               width: 4,
             });
-            era.print(`<${CharaTalk.me.name} 的乳头印>`, {
+            era.print(`<${me.name} 的乳头印>`, {
               align: 'center',
               offset: 14,
               width: 4,
             });
-            await era.printAndWait(`<${CharaTalk.me.name} 的阴唇印>`, {
+            await era.printAndWait(`<${me.name} 的阴唇印>`, {
               align: 'center',
               offset: 14,
               width: 4,
@@ -273,16 +271,16 @@ async function game_over(again) {
             );
             era.println();
             await era.printAndWait(
-              `被自愿签署这样的宣言后，${CharaTalk.me.name} 被改造成了马娘们的性奴！`,
+              `被自愿签署这样的宣言后，${me.name} 被改造成了马娘们的性奴！`,
             );
             await era.printAndWait(
-              `${CharaTalk.me.name} 仍然可以招募马娘，训练她们，陪伴她们奔跑，自主训练，参与赛事。`,
+              `${me.name} 仍然可以招募马娘，训练她们，陪伴她们奔跑，自主训练，参与赛事。`,
             );
             await era.printAndWait(
-              `但 ${CharaTalk.me.name} 更重要的职责是供她们发泄性欲！`,
+              `但 ${me.name} 更重要的职责是供她们发泄性欲！`,
             );
             await era.printAndWait(
-              `${CharaTalk.me.name} 的身体已经被调整到敏感度绝佳的状态，请继续精进自己的性能力，取悦主人们，以获取声望吧！`,
+              `${me.name} 的身体已经被调整到敏感度绝佳的状态，请继续精进自己的性能力，取悦主人们，以获取声望吧！`,
             );
             await era.printAndWait('声望再次低于零，会遭受更严厉的惩罚！');
             sys_add_titles(0, { c: buff_colors[2], n: '万马骑' });
@@ -340,7 +338,7 @@ async function game_over(again) {
               width: 12,
             });
             await era.printAndWait(
-              `？？？「那么再见了，${CharaTalk.me.actual_name} 小姐。」`,
+              `？？？「那么再见了，${me.actual_name} 小姐。」`,
               {
                 offset: 6,
                 width: 12,
@@ -353,20 +351,18 @@ async function game_over(again) {
               width: 12,
             });
             era.println();
-            await era.printAndWait(
-              `繁殖用马娘，这就是 ${CharaTalk.me.name} 的末路。`,
-            );
+            await era.printAndWait(`繁殖用马娘，这就是 ${me.name} 的末路。`);
             await era.printAndWait(
               '过去的壮志随风飘散，曾经的理想被无情击碎。',
             );
             await era.printAndWait(
-              `从今以后 ${CharaTalk.me.name} 的职责便是用短小肉棒取悦高贵的马娘，用劣等小穴容纳神圣的因子，与她们诞下优秀的后代！`,
+              `从今以后 ${me.name} 的职责便是用短小肉棒取悦高贵的马娘，用劣等小穴容纳神圣的因子，与她们诞下优秀的后代！`,
             );
             await era.printAndWait(
-              `虽然人权已离 ${CharaTalk.me.name} 远去，但还请作为孕袋继续精进。`,
+              `虽然人权已离 ${me.name} 远去，但还请作为孕袋继续精进。`,
             );
             await era.printAndWait(
-              `假如足够幸运的话，也许 ${CharaTalk.me.name} 还能凭子而贵！`,
+              `假如足够幸运的话，也许 ${me.name} 还能凭子而贵！`,
             );
             sys_add_titles(0, { c: buff_colors[2], n: '孕道' });
         }
@@ -378,11 +374,13 @@ async function game_over(again) {
         );
       } else {
         era.drawLine();
+        const me = get_chara_talk(0);
+        const uma = era.get('flag:角色性别') === 1 ? '马郎' : '马娘';
         if (era.get('flag:当前位置') === location_enum.basement) {
           if (
             await select_yes_or_no(
               [
-                CharaTalk.me.get_colored_name(),
+                me.get_colored_name(),
                 ' 在地下室中迎来了结局……',
                 { isBr: true },
                 '要查看地下室结局吗？',
@@ -394,20 +392,46 @@ async function game_over(again) {
             await get_custom_daily(basement_owners.get(0)).basement_end();
           }
           saying_arr = basement_saying_arr;
-        } else if (era.get('flag:变态行为')) {
-          for (const e of [
-            `${CharaTalk.me.name} 忽视了成年人的社会责任，唆使负责马娘进行变态行为的事情败露，哪怕是特雷森也无法为 ${CharaTalk.me.name} 掩盖过去。`,
-            `最终校方勒令 ${CharaTalk.me.name} 与负责马娘解除契约，进行移籍。`,
-            `因社会评价过低而被解雇的 ${CharaTalk.me.name}，迎来了结局……`,
-          ]) {
-            await era.printAndWait(e, {
+        } else if (era.get('flag:变态行为') > 0) {
+          await era.printAndWait(
+            [
+              me.get_colored_name(),
+              ' 忽视了成年人的社会责任，唆使负责马娘进行变态行为的事情败露，哪怕是特雷森也无法为 ',
+              me.get_colored_name(),
+              ' 掩盖过去。',
+            ],
+            {
               offset: 6,
               width: 12,
-            });
-          }
+            },
+          );
+          await era.printAndWait(
+            [
+              '最终校方勒令 ',
+              me.get_colored_name(),
+              ' 与负责',
+              uma,
+              '解除契约，进行移籍。',
+            ],
+            {
+              offset: 6,
+              width: 12,
+            },
+          );
+          await era.printAndWait(
+            [
+              '因社会评价过低而被解雇的 ',
+              me.get_colored_name(),
+              '，迎来了结局……',
+            ],
+            {
+              offset: 6,
+              width: 12,
+            },
+          );
           await print_event_name(
             [{ content: '身败名裂', color: buff_colors[3] }],
-            CharaTalk.me,
+            me,
             undefined,
             6,
           );
@@ -418,22 +442,48 @@ async function game_over(again) {
             '金钱、赛马娘、女人，男生永远搞不懂这三件事。——威尔・罗杰斯',
             '每一个被束缚的奴隶都可以靠着他自己的手脱掉锁链。——莎士比亚',
           ];
+          end_talk = 2;
         } else {
-          for (const e of [
-            `或许是 ${CharaTalk.me.name} 过于懈怠，又或许是负责马娘的天赋不足，胜利与 ${CharaTalk.me.get_couple_title()} 始终遥遥无期。`,
-            `${CharaTalk.me.get_couple_title()} 不管如何努力都无济于事，最终校方勒令 ${
-              CharaTalk.me.name
-            } 与负责马娘解除契约，进行移籍。`,
-            `因社会评价过低而被解雇的 ${CharaTalk.me.name}，迎来了结局……`,
-          ]) {
-            await era.printAndWait(e, {
+          await era.printAndWait(
+            [
+              '或许是 ',
+              me.get_colored_name(),
+              ' 过于懈怠，又或许是负责',
+              uma,
+              '的天赋不足，胜利与你们始终遥遥无期。',
+            ],
+            {
               offset: 6,
               width: 12,
-            });
-          }
+            },
+          );
+          await era.printAndWait(
+            [
+              '你们不管如何努力都无济于事，最终校方勒令 ',
+              me.get_colored_name(),
+              ' 与负责',
+              uma,
+              '解除契约，进行移籍。',
+            ],
+            {
+              offset: 6,
+              width: 12,
+            },
+          );
+          await era.printAndWait(
+            [
+              '因社会评价过低而被解雇的 ',
+              me.get_colored_name(),
+              '，迎来了结局……',
+            ],
+            {
+              offset: 6,
+              width: 12,
+            },
+          );
           await print_event_name(
             [{ content: '扫地出门', color: buff_colors[3] }],
-            CharaTalk.me,
+            me,
             undefined,
             6,
           );
@@ -444,8 +494,8 @@ async function game_over(again) {
             '日蚀当先，万物无光。——丹尼斯・奥凯利',
             '我是自己最大的敌人。——拿破仑',
           ];
+          end_talk = 1;
         }
-        end_talk = true;
       }
     }
   }
@@ -460,14 +510,16 @@ async function game_over(again) {
     await era.printAndWait(get_random_entry(saying_arr), {
       align: 'center',
     });
-    if (end_talk) {
+    if (end_talk > 0) {
       era.println();
-      for (const chara_id of sys_filter_chara(
-        'cflag',
-        '招募状态',
-        recruit_flags.yes,
-      )) {
-        await get_custom_daily(chara_id).end_talk();
+      const team_list = era
+        .getAddedCharacters()
+        .filter(
+          (cid) =>
+            cid > 0 && era.get(`cflag:${cid}:招募状态`) === recruit_flags.yes,
+        );
+      for (const cid of team_list) {
+        await get_custom_daily(cid).end_talk(end_talk > 1);
       }
     }
     return true;

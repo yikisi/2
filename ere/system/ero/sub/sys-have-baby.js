@@ -27,56 +27,98 @@ const { gene_juel_names } = require('#/data/other-const');
 const { gene_type_colors } = require('#/data/race/model/uma-gene');
 const { adaptability_names } = require('#/data/train-const');
 
-async function name_baby(child_id, father_id, mother_id) {
-  let ret, random_param;
-  // chara_id一定是母亲
-  // 虽然不是很情愿，但是还是留一下吧，只有玩家是孩子父亲或者母亲的情况下才拥有命名决定权
-  if (mother_id && father_id) {
-    // 如果和玩家没关系，直接用母亲来命名
-    random_param = mother_id;
-  } else if (era.get('flag:惩戒力度') >= 2) {
-    // 性奴和孕袋没有命名权
-    random_param = mother_id || father_id;
-  } else {
-    if (
-      await select_yes_or_no(
-        '',
-        `让${mother_id ? '母亲' : '父亲'}起名`,
-        '亲自起名',
-      )
-    ) {
-      random_param = mother_id || father_id;
-    } else {
-      era.print('想给孩子起什么名字呢？');
-      ret = await era.input();
+const duplicate_names = {};
+duplicate_names['骏川缰绳'] = 1;
+duplicate_names['丰收时刻'] = 1;
+duplicate_names['傲视一切'] = 1;
+duplicate_names['秋川弥生'] = 1;
+duplicate_names['北方风味'] = 1;
+duplicate_names['佐岳五月'] = 1;
+duplicate_names['狄杜斯'] = 1;
+
+function check_duplicate(name) {
+  return (
+    duplicate_names[name] > 0 ||
+    era
+      .getAddedCharacters()
+      .findIndex((cid) => era.get(`callname:${cid}:-1`) === name) !== -1 ||
+    era
+      .getAllCharacters()
+      .findIndex((cid) => era.get(`static:${cid}:name`) === name) !== -1
+  );
+}
+
+async function rename() {
+  let w_length = false;
+  let w_duplicate = false;
+  let flag = true;
+  let ret = '';
+  while (flag) {
+    if (w_length) {
+      era.print('孩子的名字不能超过 8 个字符！');
+    }
+    if (w_duplicate) {
+      era.print(`已经有名为 ${ret} 的角色！`);
+    }
+    ret = (await era.input()).toString();
+    w_length = ret.length > 8;
+    w_duplicate = check_duplicate(ret);
+    if (!w_length && !w_duplicate) {
+      return ret;
     }
   }
-  if (random_param) {
+}
+
+/**
+ * @param {number} cid child id
+ * @param {number} fid father id
+ * @param {number} mid mother id
+ */
+async function name_baby(cid, fid, mid) {
+  let ret, random_param;
+  // 虽然不是很情愿，但是还是留一下吧，只有玩家是孩子父亲或者母亲的情况下才拥有命名决定权
+  if (mid > 0 && fid > 0) {
+    // 如果和玩家没关系，直接用母亲来命名
+    random_param = mid;
+  } else if (era.get('flag:惩戒力度') >= 2) {
+    // 性奴和孕袋没有命名权
+    random_param = mid || fid;
+  } else {
+    if (
+      await select_yes_or_no('', `让${mid ? '母亲' : '父亲'}起名`, '亲自起名')
+    ) {
+      random_param = mid || fid;
+    } else {
+      era.print('想给孩子起什么名字呢？');
+      ret = await rename();
+    }
+  }
+  if (random_param > 0) {
     ret = get_random_name(random_param);
   }
-  era.set(`callname:${child_id}:-2`, era.set(`callname:${child_id}:-1`, ret));
-  if (
-    (!mother_id || !father_id) &&
-    random_param &&
+  if (check_duplicate(ret)) {
+    era.print(`已经有名为 ${ret} 的角色！请重新输入：`);
+    ret = await rename();
+  } else if (
+    (!mid || !fid) &&
+    random_param > 0 &&
     ret.replace(/\d+$/, '').length !== ret.length &&
     (await select_yes_or_no([
-      get_chara_talk(mother_id).get_colored_name(),
+      get_chara_talk(mid).get_colored_name(),
       ' 的孩子起名为 ',
-      get_chara_talk(child_id).get_colored_name(),
+      get_chara_talk(cid).get_colored_name(),
       '……',
       { isBr: true },
       '要重新取名吗？',
     ]))
   ) {
-    era.set(
-      `callname:${child_id}:-2`,
-      era.set(`callname:${child_id}:-1`, await era.input()),
-    );
+    ret = await rename();
   }
+  era.set(`callname:${cid}:-2`, era.set(`callname:${cid}:-1`, ret));
   await era.printAndWait([
-    get_chara_talk(mother_id).get_colored_name(),
+    get_chara_talk(mid).get_colored_name(),
     ' 的孩子最终起名为 ',
-    get_chara_talk(child_id).get_colored_name(),
+    get_chara_talk(cid).get_colored_name(),
     '！',
   ]);
 }
@@ -305,6 +347,18 @@ async function sys_have_baby(mother_id) {
   era.set(`cflag:${child_id}:出生月份`, cur_month);
   era.set(`cflag:${child_id}:出生日期`, birth_day);
   era.set(`cflag:${child_id}:育成回合计时`, 'x');
+  era.set(`cflag:${child_id}:可再次育成`, 0);
+  era.set(`abl:${child_id}:粤语`, 0);
+  era.set(`abl:${child_id}:英语`, 0);
+  era.set(`abl:${child_id}:法语`, 0);
+  const random_language = get_random_value(5, 7);
+  era.set(
+    `abl:${child_id}:${random_language}`,
+    era.get(`abl:${mother_id}:${random_language}`),
+  );
+  era.set(`jewel:${child_id}:粉`, 0);
+  era.set(`jewel:${child_id}:蓝`, 0);
+  era.set(`jewel:${child_id}:白`, 0);
   // 和玩家相关的新生儿自动进队
   // 无关的会在招募池子里
   era.set(
@@ -376,8 +430,8 @@ async function sys_have_baby(mother_id) {
   await name_baby(child_id, father_id, mother_id);
 
   get_custom_mec(child_id).set_callname();
-  const child = get_chara_talk(child_id),
-    child_callname = child.sex_code === 1 ? '长子' : '长女';
+  const child = get_chara_talk(child_id);
+  const child_callname = child.sex_code === 1 ? '长子' : '长女';
   if (!era.get(`cstr:${father_id}:长子女经历`)) {
     era.set(`cstr:${father_id}:长子女经历`, [
       `${child_callname} `,
@@ -400,6 +454,7 @@ async function sys_have_baby(mother_id) {
   const child_life_marks = LifeEventMarks.get_marks(child_id);
   child_life_marks.unexpected_child = mother_life_marks.unexpected_pregnant;
   mother_life_marks.unexpected_pregnant = 0;
+  mother_life_marks.report = 0;
 
   if (
     !father_id &&
@@ -441,7 +496,6 @@ async function sys_have_baby(mother_id) {
         content: `${gene_juel_names[juel_index]}因子 × ${juel_num}`,
         color: gene_type_colors[juel_index],
       },
-      '。',
     ]);
   }
   new Array(3)

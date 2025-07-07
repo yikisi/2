@@ -105,8 +105,7 @@ async function reset_status(
       era.set(`status:${chara_id}:发胖`, 1);
       era.print([
         chara.get_colored_name(),
-        ' ',
-        { color: buff_colors[0], content: '[发胖]' },
+        { color: buff_colors[0], content: ' [发胖] ' },
         '了……',
       ]);
       sys_change_pressure(chara_id, 1000);
@@ -311,7 +310,7 @@ async function reset_status(
               }
             });
           } else if (
-            edu_weeks % 48 === 9 &&
+            edu_weeks % 48 === 8 &&
             era.get(`cflag:${chara_id}:继承方1`) > 0
           ) {
             const a = era.get(`cflag:${chara_id}:继承方1`),

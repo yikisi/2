@@ -8,8 +8,8 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { part_abbr } = require('#/data/ero/ero-alias.json');
 
-function print_stain_info(chara_id) {
-  const chara = get_chara_talk(chara_id);
+function print_stain_info(cid) {
+  const chara = get_chara_talk(cid);
   const temp = [
     {
       columns: [
@@ -40,7 +40,7 @@ function print_stain_info(chara_id) {
     },
   ];
 
-  [0, chara_id].forEach((c_id) => {
+  [0, cid].forEach((c_id) => {
     const penis_size = get_penis_size(c_id),
       virgin_size = era.get(`cflag:${c_id}:阴道尺寸`);
     ['口腔', '胸部', '手部', '身体', '脚部', '阴茎', '外阴', '阴道', '肛门']

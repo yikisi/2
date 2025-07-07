@@ -10,7 +10,7 @@ const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-p
 const { get_random_value } = require('#/utils/value-utils');
 
 /**
- * @param {number} chara_id
+ * @param {number} cid
  * @param {object} changes
  * @param {number[]} changes.attr=([])
  * @param {number} changes.pt=0
@@ -21,7 +21,7 @@ const { get_random_value } = require('#/utils/value-utils');
  * @param {number} changes.love=0
  */
 function all_reward_in_event(
-  chara_id,
+  cid,
   {
     attr = [],
     pt = 0,
@@ -32,13 +32,13 @@ function all_reward_in_event(
     love = 0,
   },
 ) {
-  let ret = get_attr_and_print_in_event(chara_id, attr, pt, base);
-  ret = get_skills_and_print_in_event(chara_id, skills) || ret;
-  ret = sys_change_motivation(chara_id, motivation) || ret;
+  let ret = get_attr_and_print_in_event(cid, attr, pt, base);
+  ret = get_skills_and_print_in_event(cid, skills) || ret;
+  ret = sys_change_motivation(cid, motivation) || ret;
   if (relation > 0) {
-    ret = sys_like_chara(chara_id, 0, relation, true, love);
+    ret = sys_like_chara(cid, 0, relation, true, love);
   } else if (love > 0) {
-    ret = sys_love_uma(chara_id, love);
+    ret = sys_love_uma(cid, love);
   }
   return ret;
 }

@@ -1,10 +1,28 @@
 # EraUma
 
-EraUma 和 ERE 引擎（EraElectron、ere.app）将保持开源，请各位开发者以internal或private方式fork本项目，不要以public方式fork本项目，以避免不必要的麻烦！
+EraUma 和 ERE 引擎（EraElectron、ere.app）将保持开源，请各位开发者以 internal（所有 gitgud.io 登陆用户可见） 或 private（除项目成员外不可见） 方式 fork 本项目，不要以 public 方式 fork 本项目，以避免不必要的麻烦！
 
 [Release Notes](RELEASE.md)
 
 [Changelogs](CHANGELOG.md)
+
+## LICENSE
+本项目采用GNU通用公共许可证 2.0 版本（GPLv2）许可。
+完整的许可证文本请参见 [LICENSE](LICENSE) 文件。
+
+### 您可以：
+- 自由使用此软件
+- 修改源代码
+- 重新分发副本
+- 基于此软件创建衍生作品
+
+### 但必须遵守：
+- 保留原作者版权声明
+- 提供完整的源代码
+- 使用相同的GPLv2许可证
+- 不添加额外限制
+
+更多详情请查阅 LICENSE 文件。
 
 ## Notifications
 
@@ -135,12 +153,3 @@ EraUma 的版本号是一串小数部分最多三位的正有理数，在前面�
   * +可能的新游戏系统
   * +可能的游戏底层系统或基本运行逻辑改动
   * +可能的适配引擎版本重大更新（导致旧版本引擎无法运行游戏的更新）
-
-> **For developers:**
-> 
-> 1.0 开始的 EraUma 分支将按照以上版本号规则分为三类：
-> * master 分支：唯一的主分支/保护分支，负责发布。
-> * dev 分支：主开发分支，所有新增、改动和修复内容必须先合并到 dev 分支，再由 dev 分支合并到 master 分支进入发布。
-> * 内容分支：由使用 JavaScript 的口上作者提交内容用，随用随开，不用即废。口上作者需要先将新口上或加笔提交到自己的分支（fork 项目作者需要先提 Merge Request 将内容合并到 [主仓库](https://gitgud.io/umaera/erauma) 相应分支），然后通过 dev 分支在最终合并到 master 中。
->   * 例：特别周的 spe 分支，丸善斯基、醒目飞鹰的 lines 分支，待兼福来的 kitaru 分支，调教地文的 train 分支。
->   * 内容分支需要定期 merge 最新版本标签以兼容最新的游戏机制和系统。

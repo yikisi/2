@@ -7,12 +7,13 @@ class RaceEndParams extends RaceEventParams {
   contestants;
 
   /**
+   * @param {PseudoUma} pseudo
    * @param {PseudoUma[]} contestants
    * @param {number} race
    * @param {number} rank
    */
-  constructor(contestants, race, rank) {
-    super(race);
+  constructor(pseudo, contestants, race, rank) {
+    super(pseudo, race);
     this.contestants = contestants;
     this.rank = rank;
   }

@@ -200,7 +200,7 @@ module.exports = class extends CustomizedEdu {
     );
     if (
       all_reward_in_event(this.id, {
-        attr: gacha(Object.values(attr_enum)).reduce((p, c) => {
+        attr: gacha(Object.values(attr_enum), 3).reduce((p, c) => {
           p[c] += 5;
           return p;
         }, new Array(5).fill(3)),
@@ -309,11 +309,11 @@ module.exports = class extends CustomizedEdu {
       case race_enum.toky_yus:
         if (check_aim_race(history, race_enum.sats_sho, 1, 1)) {
           name = '优骏少女之一';
-          if (
-            (
-              await print_name_and_show_kojo(name, tama, kojo, this.#dict)
-            )[0] === 1
-          ) {
+          await print_event_name(
+            '优骏' + tama.get_teen_sex_title() + '之一',
+            tama,
+          );
+          if ((await kojo[name](this.#dict))[0] === 1) {
             extra_flag.love_change = 2;
             extra_flag.motivation_change = 1;
           } else {
@@ -363,12 +363,30 @@ module.exports = class extends CustomizedEdu {
         }
         break;
       case race_enum.sats_sho:
+        if (extra_flag.rank === 1) {
+          name = '闪电之心之二';
+          await print_name_and_show_kojo(name, tama, kojo, this.#dict);
+          if (
+            all_reward_in_event(this.id, {
+              attr: new Array(5).fill(3),
+              pt: 45,
+            })
+          ) {
+            await era.waitAnyKey();
+          }
+        }
+        break;
+      case race_enum.toky_yus:
         if (
           extra_flag.rank === 1 &&
           check_aim_race(history, race_enum.sats_sho, 1, 1)
         ) {
-          name = '闪电之心之二';
-          await print_name_and_show_kojo(name, tama, kojo, this.#dict);
+          name = '优骏少女之二';
+          await print_event_name(
+            '优骏' + tama.get_teen_sex_title() + '之二',
+            tama,
+          );
+          await kojo[name](this.#dict);
           if (
             all_reward_in_event(this.id, {
               attr: new Array(5).fill(3),

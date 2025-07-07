@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const { sys_check_yandere } = require('#/system/chara/sys-calc-cheat');
 const have_baby = require('#/system/ero/sub/sys-have-baby');
 const auto_update_ero_skills = require('#/system/ero/sys-auto-update');
 const {
@@ -85,9 +86,12 @@ async function sys_next_week() {
   const basement_cd =
     era.get('flag:地下室冷却') > 0 && era.add('flag:地下室冷却', -1) > 0;
   const sex_partner = era.get('flag:床伴');
-  const has_furniture = sex_partner > 0 ? sex_partner : 0;
+  const has_furniture =
+    CharaInmon.get(sex_partner).slave === slavery_enum.furniture
+      ? sex_partner
+      : 0;
   // 极端事件判定
-  if (check_pregnant_unprotect(0) && has_furniture > 0) {
+  if (check_pregnant_unprotect(0) && has_furniture === 0) {
     /** @type {{chara_id:number,prison:boolean,[supporter]:number}[]} */
     let act_list = [];
     let prepared_list;
@@ -185,7 +189,7 @@ async function sys_next_week() {
     if (era.get('flag:性技自主学习') && sys_check_awake(id)) {
       auto_update_ero_skills(id);
     }
-    if (era.get(`talent:${id}:病娇`) === 2) {
+    if (sys_check_yandere(id, (e) => e === 2)) {
       const life_event_marks = LifeEventMarks.get_marks(id);
       const inmon = CharaInmon.get(id);
       let heal = inmon.on(plugin_enum.no_yand) || inmon.on(plugin_enum.ntr);
@@ -286,8 +290,8 @@ async function sys_next_week() {
     if (id > 0) {
       const relation_punish =
         (removed_specials[id] || 0) +
-        (era.get(`love:${id}`) >= 60) * era.get(`cflag:${id}:节日事件标记`) +
-        (birthday === 2);
+        (era.get(`love:${id}`) >= 60) *
+          (era.get(`cflag:${id}:节日事件标记`) + (birthday === 2));
       if (relation_punish) {
         era.print([
           '因为 ',
@@ -405,7 +409,6 @@ async function sys_next_week() {
       } else {
         sys_change_pressure(id, get_random_value(100, 200));
         // 37周以后概率生，最晚42周
-        // 现实是40周，这里为了游戏性折叠了
         pregnant_stage = era.set(
           `cflag:${id}:妊娠阶段`,
           1 << pregnant_stage_enum.pre_birth,
@@ -428,24 +431,26 @@ async function sys_next_week() {
           // 出生
           // 头两胎在生产后+2cm
           pregnant_times < 2 && era.add(`cflag:${id}:臀围`, 2);
-          life_marks.waist_buff = 8;
           pregnant_stage = era.set(
             `cflag:${id}:妊娠阶段`,
             1 << pregnant_stage_enum.resume,
           );
-          era.set(
-            `cflag:${id}:妊娠回合计时`,
-            era.get(`cflag:${id}:种族`) ? 4 : 12,
-          );
+          if (era.get(`cflag:${id}:种族`) > 0) {
+            life_marks.waist_buff = 8;
+            era.set(`cflag:${id}:妊娠回合计时`, 4);
+          } else {
+            life_marks.waist_buff = 12;
+            era.set(`cflag:${id}:妊娠回合计时`, 12);
+          }
           // 一年即48周内会泌乳
           // 本回合会马上进行判定，所以+1
-          era.get(`talent:${id}:泌乳`) === 1 &&
+          if (era.get(`talent:${id}:泌乳`) === 1) {
             era.set(`cflag:${id}:泌乳回合计时`, 48 + 1);
+          }
           await have_baby(id);
-          if (id) {
+          if (id > 0) {
             if (
               era.get(`cflag:${id}:招募状态`) === recruit_flags.yes &&
-              growth_stage >= 2 &&
               era.get(`cflag:${id}:育成回合计时`) < 3 * 48
             ) {
               hentai_punish += 100;
@@ -453,7 +458,7 @@ async function sys_next_week() {
             }
           } else if (punish_level === 3) {
             hentai_reward += 100;
-          } else if (race) {
+          } else if (race > 0) {
             hentai_punish += 100;
             hentai_marks[1] = true;
           } else {
@@ -466,8 +471,15 @@ async function sys_next_week() {
     } else if (pregnant_stage === 1 << pregnant_stage_enum.resume) {
       sys_change_lust(id, lust_border.itch / 20);
       const timer = era.add(`cflag:${id}:妊娠回合计时`, -1);
-      life_marks.waist_buff -= 2;
+      if (era.get(`cflag:${id}:种族`) > 0) {
+        life_marks.waist_buff -= 2;
+      } else {
+        life_marks.waist_buff -= 1;
+      }
       if (timer === 0) {
+        if (life_marks.waist_buff < 0) {
+          life_marks.waist_buff = 0;
+        }
         pregnant_stage = era.set(
           `cflag:${id}:妊娠阶段`,
           1 << pregnant_stage_enum.no,
@@ -662,6 +674,7 @@ async function sys_next_week() {
     sys_change_fame(-race_punish);
   }
   if (hentai_reward) {
+    era.drawLine();
     era.print([me.get_colored_name(), ' 履行了职责，作为孕袋的评价上升了……']);
     era.add('flag:当前声望', hentai_reward);
   }

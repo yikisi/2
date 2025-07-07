@@ -18,11 +18,16 @@ const sys_get_random_event = require('#/system/sys-get-random-event');
 const print_page_header = require('#/page/components/page-header');
 
 const { get_custom_check } = require('#/event/check/check-factory');
+const { check_edu_script } = require('#/event/edu/edu-factory');
 const game_guides = require('#/event/others/game-guides');
 const { check_rec_script, run_custom_rec } = require('#/event/rec/rec-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
-const { gacha, get_random_entry, join_list } = require('#/utils/list-utils');
+const {
+  gacha,
+  get_random_entry,
+  join_to_string,
+} = require('#/utils/list-utils');
 
 const CharaAvailableSkills = require('#/data/chara-available-skills');
 const { get_chara_color } = require('#/data/chara-colors');
@@ -150,7 +155,10 @@ async function print_rec_page() {
                 accelerator: chara_id,
                 config: {
                   align: 'center',
-                  buttonType: check_rec_script(chara_id) ? 'danger' : 'warning',
+                  buttonType:
+                    check_rec_script(chara_id) && check_edu_script(chara_id)
+                      ? 'danger'
+                      : 'warning',
                   disabled:
                     flag_limit || (cur_recruit && cur_recruit !== chara_id),
                 },
@@ -231,7 +239,7 @@ async function print_rec_page() {
         sex_code = era.get(`cflag:${selected}:性别`),
         talent_list = [];
       let hair = era.get(`cstr:${selected}:呆毛`);
-      hair = join_list(
+      hair = join_to_string(
         [
           hair ? `${hair}呆毛` : '',
           era.get(`cstr:${selected}:前发`),
@@ -552,7 +560,7 @@ async function print_rec_page() {
   }
   if (!flag_leave) {
     era.drawLine();
-    await era.printAndWait([me.get_colored_name(), ' 离开了训练场……']);
+    await era.printAndWait('【折返了】');
     await sys_get_random_event(event_hooks.recruit_end)();
   }
   await game_guides.recruit_end();

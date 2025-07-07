@@ -20,14 +20,21 @@ const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
 
 class LoveGod extends CustomizedLove {
-  /** @type {string} */
-  fuck_her_button;
-  /** @type {string} */
-  fuck_pregnant_button;
-  /** @type {string} */
-  fuck_me_button;
-  /** @type {string} */
-  reject_button;
+  get fuck_her_button() {
+    return '';
+  }
+
+  get fuck_pregnant_button() {
+    return '';
+  }
+
+  get fuck_me_button() {
+    return '';
+  }
+
+  get reject_button() {
+    return '';
+  }
 
   /**
    * @param {CharaTalk} god

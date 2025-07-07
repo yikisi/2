@@ -1,5 +1,7 @@
 const era = require('#/era-electron');
 
+const { join_to_string } = require('#/utils/list-utils');
+
 const { buff_colors, palam_colors } = require('#/data/color-const');
 const { lust_palam_border } = require('#/data/ero/orgasm-const');
 
@@ -269,6 +271,21 @@ function get_ex_result_in_the_end(chara_id) {
     }
     fill_part_ex(chara_id, buffer, '外阴', '完全肿起的通红豆豆妖艳而痛苦');
     fill_part_ex(chara_id, buffer, '阴道', '翕动的小穴泛起阵阵热气');
+    const squirt = era.get(`ex:${chara_id}:潮吹`),
+      secretion = era.get(`ex:${chara_id}:爱液分泌`);
+    if (secretion > 0) {
+      buffer.push({
+        config: { offset: 1, width: 23 },
+        content: join_to_string(
+          [
+            squirt > 0 ? `潮吹 ${squirt.toLocaleString()} 次` : void 0,
+            secretion > 0 ? `分泌爱液 ${secretion.toLocaleString()}ml` : void 0,
+          ],
+          '，',
+        ),
+        type: 'text',
+      });
+    }
     fill_part_ex(chara_id, buffer, '肛门', '屁穴一张一合地用热气诉说着饥渴');
     fill_spirit_ex(chara_id, buffer, '施虐');
     fill_spirit_ex(chara_id, buffer, '受虐');
@@ -369,34 +386,45 @@ function get_ex_result_in_the_end(chara_id) {
     });
   }
   temp_val = [
-    era.get(`ex:${chara_id}:饮精量`),
     era.get(`ex:${chara_id}:吸奶量`),
+    era.get(`ex:${chara_id}:饮精量`),
+    era.get(`ex:${chara_id}:饮爱液量`),
   ];
-  if (temp_val[0] + temp_val[1]) {
+  if (temp_val.reduce((p, c) => p + c) > 0) {
+    const buffer = [];
+    buffer.push('饮下了 ');
+    if (temp_val[0] > 0) {
+      buffer.push(
+        {
+          color: palam_colors.notifications[1],
+          content: `${temp_val[0].toLocaleString()}ml`,
+        },
+        ' 母乳',
+      );
+    }
+    if (temp_val[1] > 0) {
+      buffer.push(
+        buffer.length > 1 ? '，' : '',
+        {
+          color: palam_colors.notifications[1],
+          content: `${temp_val[1].toLocaleString()}ml`,
+        },
+        ' 精液',
+      );
+    }
+    if (temp_val[2] > 0) {
+      buffer.push(
+        buffer.length > 1 ? '，' : '',
+        {
+          color: palam_colors.notifications[1],
+          content: `${temp_val[2].toLocaleString()}ml`,
+        },
+        ' 爱液',
+      );
+    }
     temp_buffer.push({
       config: { offset: 1, width: 23 },
-      content: [
-        '饮下了 ',
-        ...(temp_val[0]
-          ? [
-              {
-                color: palam_colors.notifications[1],
-                content: `${temp_val[0].toLocaleString()}ml`,
-              },
-              ' 精液',
-            ]
-          : []),
-        temp_val[0] && temp_val[1] ? ' 和 ' : '',
-        ...(temp_val[1]
-          ? [
-              {
-                color: palam_colors.notifications[1],
-                content: `${temp_val[1].toLocaleString()}ml`,
-              },
-              ' 母乳',
-            ]
-          : []),
-      ],
+      content: buffer,
       type: 'text',
     });
   }

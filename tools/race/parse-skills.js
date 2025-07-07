@@ -344,6 +344,14 @@ const icon2skill_color = {
     UmaSkill.skill_name_enum.speed,
     UmaSkill.skill_border_enum.evol,
   ),
+  20311: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.normal,
+  ),
+  20312: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.advanced,
+  ),
   30011: UmaSkill.get_skill_color(
     UmaSkill.skill_name_enum.control,
     UmaSkill.skill_border_enum.normal,
@@ -625,24 +633,29 @@ async function chara_skill() {
   Object.values(dict).forEach((e) => e.forEach((s) => (skill_dict[s] = 1)));
   console.log('角色卡技能', Object.keys(skill_dict).length);
   let buffer =
-      '/** @type {Record<string,number[]>} */\nconst chara_skill_dict={};\n/** @type {Record<string,UmaSkill>} */\nconst skills_dict = {};\n\n',
-    buffer_common_skills = [
-      202051, 200791, 200801, 200811, 200821, 990011, 990021,
-    ];
+    '/** @type {Record<string,number[]>} */\nconst chara_skill_dict={};\n/** @type {Record<string,UmaSkill>} */\nconst skills_dict = {};\n\n';
+  let buffer_common_skills = [
+    202051, 200791, 200801, 200811, 200821, 990011, 990021, 660011, 660012,
+    660021, 660022, 660031, 660032, 660041, 660042, 660051, 660052,
+  ];
   for (const chara_id in dict) {
     buffer += `chara_skill_dict[${Number(chara_id) % 1000}] = [${dict[chara_id].join(',')}];`;
   }
   buffer += '\n\nconst skill_sets = {0:[],\n';
   const skill_sets = [
     ...(await prisma.daily_race_npc.findMany()),
+    ...(await prisma.legend_race_boss_npc.findMany()),
     ...(await prisma.legend_race_npc.findMany()),
     ...(await prisma.single_mode_npc.findMany()),
+    ...(await prisma.heroes_race_default_npc.findMany()),
+    ...(await prisma.challenge_match_boss_npc.findMany()),
   ]
-    .filter((e) => e.chara_id < 9000)
+    .filter((e) => e.chara_id < 9040 || e.chara_id > 9042)
     .map((e) => e.skill_set_id);
-  (await prisma.ultimate_race_npc.findMany()).forEach((e) =>
-    skill_sets.push(e.skill_set_id_1, e.skill_set_id_2),
-  );
+  [
+    ...(await prisma.ultimate_race_npc.findMany()),
+    ...(await prisma.heroes_race_mob_npc.findMany()),
+  ].forEach((e) => skill_sets.push(e.skill_set_id_1, e.skill_set_id_2));
   (
     await prisma.skill_set.findMany({
       where: {
@@ -694,6 +707,16 @@ async function chara_skill() {
     }
   });
   skill_dict[910031] = 1;
+  skill_dict[660011] = 1;
+  skill_dict[660012] = 1;
+  skill_dict[660021] = 1;
+  skill_dict[660022] = 1;
+  skill_dict[660031] = 1;
+  skill_dict[660032] = 1;
+  skill_dict[660041] = 1;
+  skill_dict[660042] = 1;
+  skill_dict[660051] = 1;
+  skill_dict[660052] = 1;
   delete skill_dict[100601];
   delete skill_dict[102602211];
   delete skill_dict[900601];
@@ -730,21 +753,14 @@ async function chara_skill() {
   const c_dict = { is_used_skill_id: 1 };
 
   buffer += '\n\nconst current = new Date().getTime();\n\n';
-  buffer +=
-    'skills_dict[102602211]=require("#/data/race/skill/skill-102602211");' +
-    'skills_dict[100039]=require("#/data/race/skill/skill-100039");' +
-    'skills_dict[900039]=require("#/data/race/skill/skill-900039");' +
-    'skills_dict[100601]=require("#/data/race/skill/skill-100601");' +
-    'skills_dict[900601]=require("#/data/race/skill/skill-900601");' +
-    'skills_dict[101201]=require("#/data/race/skill/skill-101201");' +
-    'skills_dict[102041]=require("#/data/race/skill/skill-102041");' +
-    'skills_dict[902041]=require("#/data/race/skill/skill-902041");' +
-    'skills_dict[102051]=require("#/data/race/skill/skill-102051");' +
-    'skills_dict[902051]=require("#/data/race/skill/skill-902051");' +
-    'skills_dict[102061]=require("#/data/race/skill/skill-102061");' +
-    'skills_dict[902061]=require("#/data/race/skill/skill-902061");' +
-    'skills_dict[990011]=require("#/data/race/skill/skill-990011");' +
-    'skills_dict[990021]=require("#/data/race/skill/skill-990021");';
+  [
+    102602211, 100039, 900039, 100601, 900601, 101201, 102041, 902041, 102051,
+    902051, 102061, 902061, 990011, 990021, 660011, 660012, 660021, 660022,
+    660031, 660032, 660041, 660042, 660051, 660052,
+  ].forEach(
+    (s) =>
+      (buffer += `skills_dict[${s}]=require("#/data/race/skill/skill-${s}");`),
+  );
 
   function get_skill_group_level(skill) {
     if (skill.category >> 3 === 4) {
@@ -857,15 +873,21 @@ async function chara_skill() {
   }
   writeFileSync(
     '../../ere/data/race/skill/skill-const.js',
-    `${buffer}\n\nconsole.log('[skill-const.js] skill list init done!',(new Date().getTime()-current).toLocaleString(),'ms')\n\nconst common_skills = [${buffer_common_skills.sort().join(',')}];\n\nmodule.exports = {chara_skill_dict,common_skills,skills_dict,skill_sets};`,
+    `${buffer}\n\nconsole.log('[skill-const.js] skill list init done!',(new Date().getTime()-current).toLocaleString(),'ms')\n\nconst common_skills = [${buffer_common_skills
+      .sort()
+      .filter((e, i, l) => i === l.indexOf(e))
+      .join(
+        ',',
+      )}];\n\nmodule.exports = {chara_skill_dict,common_skills,skills_dict,skill_sets};`,
   );
   buffer = 'class ConditionParams { ';
+  c_dict['orgasm'] = c_dict['milk'] = c_dict['item'] = 1;
   Object.keys(c_dict)
     .sort()
     .forEach((k) => (buffer += `${k};`));
   writeFileSync(
     '../../ere/data/race/model/condition-params.js',
-    `${buffer}};\n\nmodule.exports = ConditionParams;`,
+    `${buffer};};\n\nmodule.exports = ConditionParams;`,
   );
   console.log('条件参数', Object.keys(c_dict).length, '个');
 

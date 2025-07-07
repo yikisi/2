@@ -16,12 +16,12 @@ const { path7za } = require('7zip-bin');
 const { zip } = require('compressing');
 const { copySync } = require('fs-extra');
 
-const work_dir = resolve('.'),
-  engine_path = join(work_dir, 'engine'),
-  game_all_dir = join(engine_path, process.env.GAME_ALL_DIR),
-  game_all_zip = join(engine_path, process.env.GAME_ALL_ZIP),
-  game_dir = join(game_all_dir, process.env.GAME_DIR),
-  game_zip = join(game_all_dir, process.env.GAME_ZIP);
+const work_dir = resolve('.');
+const engine_path = join(work_dir, 'engine');
+const game_all_dir = join(engine_path, process.env.GAME_ALL_DIR);
+const game_all_zip = join(engine_path, process.env.GAME_ALL_ZIP);
+const game_dir = join(game_all_dir, process.env.GAME_DIR);
+const game_zip = join(game_all_dir, process.env.GAME_ZIP);
 
 execSync('git submodule update --init', { cwd: engine_path });
 execSync('git lfs pull', { cwd: engine_path });
@@ -31,9 +31,15 @@ execSync('npm run win:pack', { cwd: engine_path });
 rmSync(game_all_dir, { force: true, recursive: true });
 renameSync(join(engine_path, 'dist_electron', 'win-unpacked'), game_all_dir);
 mkdirSync(join(game_all_dir, 'game'));
-['ere', 'csv', 'CHANGELOG.md', 'RELEASE.md'].forEach((d) =>
-  copySync(join(work_dir, d), join(game_all_dir, 'game', d)),
-);
+[
+  'ere',
+  'csv',
+  'CHANGELOG.md',
+  'RELEASE.md',
+  'LICENSE',
+  'README.md',
+  'CONTRIBUTING.md',
+].forEach((d) => copySync(join(work_dir, d), join(game_all_dir, 'game', d)));
 
 function clean_json(p) {
   readdirSync(p).forEach((f) => {

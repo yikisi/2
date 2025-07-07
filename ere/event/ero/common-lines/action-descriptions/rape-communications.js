@@ -10,7 +10,7 @@ module.exports = (handlers) => {
       attacker.get_colored_name(),
       ' 强行亲吻着 ',
       defender.get_colored_name(),
-      ' 的嘴唇……】',
+      ' 的嘴唇】',
     ]);
 
   handlers[ero_hooks.french_kiss] = (attacker, defender) =>
@@ -19,7 +19,7 @@ module.exports = (handlers) => {
       attacker.get_colored_name(),
       ' 强行探索着 ',
       defender.get_colored_name(),
-      ' 的口腔深处……】',
+      ' 的口腔深处】',
     ]);
 
   handlers[ero_hooks.relax] = (attacker, defender) =>
@@ -28,7 +28,7 @@ module.exports = (handlers) => {
       attacker.get_colored_name(),
       ' 好整以暇地欣赏着 ',
       defender.get_colored_name(),
-      ' 现在的样子……】',
+      ' 现在的样子】',
     ]);
 
   handlers[ero_hooks.talk] = (attacker, defender) =>
@@ -37,6 +37,6 @@ module.exports = (handlers) => {
       attacker.get_colored_name(),
       ' 对 ',
       defender.get_colored_name(),
-      ' 说道……】',
+      ' 说道】',
     ]);
 };

@@ -22,7 +22,7 @@ module.exports = class extends CustomizedMec {
     if (era.get('flag:当前赛事') === race_enum.tenn_spr) {
       info.weather = weather_enum.rain;
       info.mess = mess_enum.bad;
-      return [new LegendUmaSelector(25, 1.2)];
+      return [new LegendUmaSelector(25, 1.1)];
     }
     return super.get_race_contestants(info);
   }

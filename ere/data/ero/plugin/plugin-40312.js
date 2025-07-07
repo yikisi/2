@@ -5,8 +5,8 @@ module.exports = new InmonPlugin(
   '人之常情',
   403,
   3,
-  32,
+  24,
   '乐于分享。',
   (args) => args.id > 0,
-  1780,
+  1380,
 );

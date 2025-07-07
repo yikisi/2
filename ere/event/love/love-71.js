@@ -20,24 +20,20 @@ const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const { get_chara_color } = require('#/data/chara-colors');
 const ArdanLifeMarks = require('#/data/event/life-event-marks/life-event-marks-71');
 
 module.exports = class extends CustomizedLove {
   get #dict() {
     const o = {};
-    o['代表色'] = get_chara_color(this.id);
-    o['你'] = era.get('callname:0:-2');
+    const ardan = get_chara_talk(this.id),
+      me = get_chara_talk(0);
+    o['代表色'] = ardan.color;
+    o['你'] = me.name;
     o['称呼'] = sys_get_callname(this.id, 0);
-    if (era.get(`cflag:${this.id}:性别`) === 1) {
-      o['她'] = '他';
-      o['小姐'] = '少爷';
-      o['马娘'] = '马郎';
-    } else {
-      o['她'] = '她';
-      o['小姐'] = '小姐';
-      o['马娘'] = '马娘';
-    }
+    o['她'] = ardan.sex;
+    o['马娘'] = ardan.get_uma_sex_title();
+    o['小姐'] = ardan.sex_code === 1 ? '少爷' : '小姐';
+    o['他'] = me.sex;
     return o;
   }
 

@@ -5,7 +5,8 @@ const CustomizedMec = require('#/event/mec/mec-common');
 const { get_chara_color } = require('#/data/chara-colors');
 const TamaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-21');
 const LegendUmaFilter = require('#/data/race/model/legend-uma-filter');
-const { race_enum } = require('#/data/race/race-const');
+const { class_enum } = require('#/data/race/model/race-info');
+const { race_enum, race_infos } = require('#/data/race/race-const');
 
 module.exports = class extends CustomizedMec {
   get_action_debuff() {
@@ -32,7 +33,7 @@ module.exports = class extends CustomizedMec {
           return [
             new LegendUmaFilter(
               '秋津帝王',
-              1.1,
+              1.05,
               (e) =>
                 e.adapt_ground[0] >= 6 &&
                 e.adapt_distance[2] >= 6 &&
@@ -120,8 +121,19 @@ module.exports = class extends CustomizedMec {
     return -20 * (edu_marks.lightning === 1) + 20 * (edu_marks.heal === 1);
   }
 
-  is_race_register_enabled() {
-    return new TamaEduMarks().lightning < 1;
+  is_race_disabled(race) {
+    switch (new TamaEduMarks().lightning) {
+      case 1:
+        return (
+          era.get(`cflag:${this.id}:育成次数`) === 0 &&
+          race_infos[race].race_class < class_enum.OP
+        );
+      case 2:
+        return race_infos[race].race_class < class_enum.OP;
+      case 3:
+        return race_infos[race].race_class < class_enum.G3;
+    }
+    return false;
   }
 
   set_callname() {

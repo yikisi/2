@@ -124,6 +124,7 @@ model audience_impostor {
   pattern_8         Int
   pattern_9         Int
   pattern_10        Int
+  situation_type    Int
 
   @@index([season, weather], map: "audience_impostor_0_season_1_weather")
   @@ignore
@@ -535,41 +536,6 @@ model card_talent_hint_upgrade {
   money_num         Int
 
   @@index([rarity, talent_level], map: "card_talent_hint_upgrade_0_rarity_1_talent_level")
-}
-
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
-model card_talent_upgrade {
-  id              Int
-  talent_group_id Int
-  talent_level    Int
-  item_category_1 Int
-  item_id_1       Int
-  item_num_1      Int
-  item_category_2 Int
-  item_id_2       Int
-  item_num_2      Int
-  item_category_3 Int
-  item_id_3       Int
-  item_num_3      Int
-  item_category_4 Int
-  item_id_4       Int
-  item_num_4      Int
-  item_category_5 Int
-  item_id_5       Int
-  item_num_5      Int
-  item_category_6 Int
-  item_id_6       Int
-  item_num_6      Int
-  item_category_7 Int
-  item_id_7       Int
-  item_num_7      Int
-  item_category_8 Int
-  item_id_8       Int
-  item_num_8      Int
-  start_date      Int
-
-  @@index([talent_group_id, talent_level], map: "card_talent_upgrade_0_talent_group_id_1_talent_level")
-  @@ignore
 }
 
 model challenge_match_boss_npc {
@@ -1748,6 +1714,8 @@ model gacha_data {
   bonus_item_num_2                    Int
   start_date                          Int
   end_date                            Int
+
+  @@index([type], map: "gacha_data_0_type")
 }
 
 model gacha_exchange {
@@ -3114,6 +3082,7 @@ model race_bgm_cutin {
   bgm_group_id                  Int
   fadeout_time                  Int
   exclusive_control             Int
+  is_jingle                     Int
   short_cutin_bgm_cue_name      String
   short_cutin_bgm_cuesheet_name String
   long_cutin_bgm_cue_name       String
@@ -3520,18 +3489,22 @@ model random_ear_tail_motion {
   @@index([parts_type], map: "random_ear_tail_motion_0_parts_type")
 }
 
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model rating_race_condition {
-  id               Int @id @default(autoincrement())
+  id               Int
   race_instance_id Int
   season           Int
   weather          Int
   ground           Int
   bg_id            Int
   bg_sub_id        Int
+
+  @@ignore
 }
 
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model rating_race_data {
-  id                        Int @id @default(autoincrement())
+  id                        Int
   notice_date               Int
   start_date                Int
   end_date                  Int
@@ -3539,20 +3512,24 @@ model rating_race_data {
   weekend_free_play_num     Int
   rating_rank_initial_limit Int
   rating_rank_reset_limit   Int
+
+  @@ignore
 }
 
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model rating_race_finale_reward {
-  id                  Int @id @default(autoincrement())
+  id                  Int
   rating_race_data_id Int
   rating_rank         Int
   finish_order        Int
   reward_group_id     Int
 
-  @@index([rating_race_data_id], map: "rating_race_finale_reward_0_rating_race_data_id")
+  @@ignore
 }
 
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model rating_race_phase_schedule {
-  id                              Int @id @default(autoincrement())
+  id                              Int
   rating_race_data_id             Int
   week                            Int
   phase                           Int
@@ -3564,11 +3541,12 @@ model rating_race_phase_schedule {
   start_date                      Int
   end_date                        Int
 
-  @@index([rating_race_data_id], map: "rating_race_phase_schedule_0_rating_race_data_id")
+  @@ignore
 }
 
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model rating_race_rating_rank {
-  id                  Int @id @default(autoincrement())
+  id                  Int
   rating_race_data_id Int
   rating_rank         Int
   rating_score_min    Int
@@ -3577,28 +3555,29 @@ model rating_race_rating_rank {
   npc_count           Int
   reward_group_id     Int
 
-  @@index([rating_race_data_id], map: "rating_race_rating_rank_0_rating_race_data_id")
+  @@ignore
 }
 
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model rating_race_reward_group {
-  id              Int @id @default(autoincrement())
+  id              Int
   reward_group_id Int
   item_category   Int
   item_id         Int
   item_num        Int
 
-  @@index([reward_group_id], map: "rating_race_reward_group_0_reward_group_id")
+  @@ignore
 }
 
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model rating_race_weekend_reward {
-  id                   Int @id @default(autoincrement())
+  id                   Int
   rating_race_data_id  Int
   rating_rank          Int
   weekend_reward_point Int
   reward_group_id      Int
 
-  @@index([rating_race_data_id], map: "rating_race_weekend_reward_0_rating_race_data_id")
-  @@index([rating_race_data_id, rating_rank], map: "rating_race_weekend_reward_0_rating_race_data_id_1_rating_rank")
+  @@ignore
 }
 
 model season_data {
@@ -4332,7 +4311,7 @@ model single_mode_race_restrict_turn {
   turn     Int
   gain_id  Int
 
-  @@id([chara_id, turn])
+  @@unique([chara_id, turn, gain_id], map: "sqlite_autoindex_single_mode_race_restrict_turn_1")
   @@index([chara_id], map: "single_mode_race_restrict_turn_0_chara_id")
 }
 
@@ -7409,4 +7388,39 @@ model ultimate_race_unlock_condition {
   cutt_dress_id_2              Int
   cutt_chara_id_3              Int
   cutt_dress_id_3              Int
+}
+
+model gacha_stampsheet {
+  id                         Int @id @default(autoincrement())
+  gacha_id                   Int
+  sheet_num                  Int
+  is_loop                    Int
+  stampsheet_reward_group_id Int
+  stampsheet_odds_group_id   Int
+
+  @@index([gacha_id], map: "gacha_stampsheet_0_gacha_id")
+}
+
+model gacha_stampsheet_reward {
+  id            Int @id @default(autoincrement())
+  group_id      Int
+  reward_type   Int
+  reward_order  Int
+  item_id       Int
+  item_category Int
+  item_num      Int
+
+  @@index([group_id], map: "gacha_stampsheet_reward_0_group_id")
+}
+
+model single_mode_audience_overwrite {
+  id               Int @id @default(autoincrement())
+  chara_id         Int
+  race_grade       Int
+  audience_type    Int
+  crowd_sound_type Int
+  live_type        Int
+  start_turn       Int
+  end_turn         Int
+  group_id         Int
 }

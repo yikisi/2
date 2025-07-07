@@ -218,11 +218,14 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
       era.get(`cflag:${chara.id}:种族`) > 0
         ? era.get(`cflag:${chara.id}:气性`)
         : undefined,
+    edu:
+      era.get(`cflag:${chara.id}:种族`) > 0 &&
+      (!chara.id || era.get(`cflag:${chara.id}:育成回合计时`) < 3 * 48),
     id: chara.id,
-    sex: chara.sex_code,
     pregnant:
       inmon.slave === slavery_enum.pregnant ||
       era.get(`cflag:${chara.id}:妊娠阶段`) !== 1 << pregnant_stage_enum.no,
+    sex: chara.sex_code,
   };
   const plugins = Object.values(inmon_plugin_dict)
     .filter((e) => e.level <= sex_level && e.condition(p_filter_param))
@@ -241,11 +244,11 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
     (p[c.p.group] ||= []).push(c);
     return p;
   }, {});
-  const money = price_dict['顺从'];
+  const money = juel_dict['顺从'];
   const slave = inmon.slave;
   if (sex_level > 0 || (pleasure_level > 0 && meek_level > 0)) {
     era.drawLine({
-      content: chara.get_full_name() + ' 的 淫纹',
+      content: chara.full_name + ' 的 淫纹',
     });
     if (sex_level > 0) {
       const limit = inmon_limit[sex_level];
@@ -255,22 +258,23 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
       const sex_mark_col = get_mark_cols(chara.id, '淫纹', sex_level);
       delete sex_mark_col.config.width;
       sex_mark_col.content.unshift({ isBr: true });
-      const p_buffer = inmon.to_list.map((e) => {
-        const p = inmon_plugin_dict[e];
-        group_dict[p.group] = 1;
-        const name = p.colored_name;
-        name.content += ` (${p.size})`;
-        return {
-          accelerator: plugins.find((e) => e.p.id === p.id).a,
-          config: {
-            align: 'center',
-            color: name.color,
-            title: name.title,
-          },
-          content: name.content,
-          type: 'button',
-        };
-      });
+      const p_buffer = plugins
+        .filter((e) => inmon.on(e.p.id))
+        .map((e) => {
+          group_dict[e.p.group] = 1;
+          const name = e.p.colored_name;
+          name.content += ` (${e.p.size})`;
+          return {
+            accelerator: e.a,
+            config: {
+              align: 'center',
+              color: name.color,
+              title: name.title,
+            },
+            content: name.content,
+            type: 'button',
+          };
+        });
       const buffer = [];
       const keys = Object.keys(groups).slice(pointer.sub, pointer.sub + 2);
       buffer.push({
@@ -393,18 +397,13 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
                   },
                 ]
               : [
-                  chara.id > 0
-                    ? {
-                        accelerator: 9,
-                        config: { width: 6 },
-                        content: `当前词条：${slavery_options[slave]}`,
-                        type: 'button',
-                      }
-                    : {
-                        config: { width: 6 },
-                        content: `当前词条：${slavery_options[slave]}`,
-                        type: 'text',
-                      },
+                  {
+                    config: { width: 6 },
+                    content: `当前词条：${slavery_options[slave]}`,
+                    ...(chara.id > 0
+                      ? { accelerator: 9, type: 'button' }
+                      : { type: 'content' }),
+                  },
                   {
                     config: { width: 18 },
                     content: `效果：${slavery_descriptions[slave]}`,
@@ -578,11 +577,11 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
           sex_level = era.set(`mark:${chara.id}:淫纹`, pleasure_level);
           total_delta.pleasure_delta = pleasure_level;
           total_delta.sex_delta = pleasure_level;
-          sys_change_fame(-100 * [1, 3, 6][sex_level - 1]);
+          sys_change_fame(-50 * [1, 3, 6][sex_level - 1]);
         } else {
           sex_level = era.add(`mark:${chara.id}:淫纹`, 1);
           total_delta.sex_delta = (total_delta.sex_delta || 0) + 1;
-          sys_change_fame(-100 * sex_level);
+          sys_change_fame(-50 * sex_level);
         }
         await get_custom_ero(chara.id).get_mark(
           sex_level,
@@ -684,7 +683,7 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
             era.set(
               'flag:账单',
               sys_get_billings().filter(
-                (e) => e.creditor === chara.id && e.timer === -1,
+                (e) => e.creditor !== chara.id || e.timer !== -1,
               ),
             );
             break;
@@ -727,6 +726,9 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
       }
     } else {
       inmon.set(p.id, 1 - inmon.on(p.id));
+      if (p.id === plugin_enum.sex_2) {
+        era.set(`cflag:${chara.id}:自主训练`, 0);
+      }
     }
   } else if (ret === 200) {
     pointer.sub -= 2;

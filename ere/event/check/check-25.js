@@ -180,8 +180,8 @@ module.exports = class extends CustomizedCheck {
   }
 
   get_edu_aims() {
-    const buffer = [],
-      races = RaceHistory.get(25).get();
+    const buffer = [];
+    const races = RaceHistory.get(this.id).get();
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.hoch_sho, 1, 5));
     buffer.push(check_aim_and_get_entry(races, race_enum.stli_kin, 1, 3));
@@ -198,10 +198,10 @@ module.exports = class extends CustomizedCheck {
     return ['漆黑幻影'];
   }
 
-  is_aim_race(race, edu_weeks) {
-    if (new CoffeeEduMarks().toky_yus && race === race_enum.toky_yus) {
+  is_aim_race(race, edu_weeks, rank) {
+    if (new CoffeeEduMarks().toky_yus > 0 && race === race_enum.toky_yus) {
       return 0;
     }
-    return aim_races[`${edu_weeks}_${race}`] || aim_races[race];
+    return super.is_aim_race(race, edu_weeks, rank);
   }
 };

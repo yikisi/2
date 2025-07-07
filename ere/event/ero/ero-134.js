@@ -4,12 +4,13 @@
  */
 const era = require('#/era-electron');
 
+const { set_stain } = require('#/system/ero/sys-calc-stain');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
+
+const CustomizedEro = require('#/event/ero/ero-common');
 
 const { part_enum } = require('#/data/ero/part-const');
 const { stain_enum } = require('#/data/ero/stain-const');
-const CustomizedEro = require('#/event/ero/ero-common');
-const { set_stain } = require('#/system/ero/sys-calc-stain');
 
 module.exports = class extends CustomizedEro {
   async orgasm(bouquetd) {

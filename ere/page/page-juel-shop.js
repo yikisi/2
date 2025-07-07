@@ -22,6 +22,7 @@ const { get_custom_ero } = require('#/event/ero/ero-factory');
 const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { get_abbr_number } = require('#/utils/value-utils');
 
 const {
   attr_change_colors,
@@ -120,7 +121,7 @@ module.exports = async (_id) => {
         j_dict[key] += Math.floor(era.get(`jewel:0:${key}`) / 2);
       }
       buffer.push({
-        config: { align: 'left', width: 2 },
+        config: { align: 'left', width: 3 },
         content: [
           part_abbr[j_name],
           '：',
@@ -137,8 +138,6 @@ module.exports = async (_id) => {
       });
     });
     if (chara_id > 0) {
-      era.printMultiColumns(buffer, { horizontalAlign: 'space-between' });
-      buffer = [];
       new Array(4).fill(0).forEach((_, i) => {
         const j_name = era.get(`palamname:${i + 10}`);
         const j_count =
@@ -146,23 +145,18 @@ module.exports = async (_id) => {
           origin_dict[j_name] =
             era.get(`jewel:${chara_id}:${i + 10}`));
         buffer.push({
-          config: { align: 'left', width: 2 },
+          config: { align: 'left', width: 3 },
           content: [
             j_name.substring(0, 1),
             '：',
             {
               color: j_count > 0 ? palam_colors.notifications[1] : undefined,
-              content:
-                j_count >= 10000
-                  ? `${Math.floor(j_count / 1000).toLocaleString()}K`
-                  : j_count.toLocaleString(),
-              title: j_count >= 10000 ? j_count.toLocaleString() : undefined,
+              ...get_abbr_number(j_count),
             },
           ],
           type: 'text',
         });
       });
-      buffer.push({ config: { width: 13 }, content: [], type: 'text' });
     } else {
       const key = '顺从';
       const j_count =
@@ -170,7 +164,7 @@ module.exports = async (_id) => {
         origin_dict[key] =
           era.get(`jewel:${chara_id}:${key}`));
       buffer.push({
-        config: { align: 'left', width: 2 },
+        config: { align: 'left', width: 3 },
         content: [
           '顺',
           '：',
@@ -186,7 +180,7 @@ module.exports = async (_id) => {
         type: 'text',
       });
     }
-    era.printMultiColumns(buffer, { horizontalAlign: 'space-between' });
+    era.printMultiColumns(buffer);
     if (page_pointer.tab === 0) {
       era.drawLine({
         content: `${chara.get_full_name()} 的 能力`,

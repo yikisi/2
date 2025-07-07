@@ -24,12 +24,13 @@ const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
 const auto_reg = [
-  get_aim_race_index(race_enum.juni_cup, 1),
+  get_aim_race_index(race_enum.fuyo_sta, 1),
   get_aim_race_index(race_enum.waka_sta, 1),
   get_aim_race_index(race_enum.viol_sta, 1),
-  get_aim_race_index(race_enum.arli_cup, 1),
   get_aim_race_index(race_enum.naru_kin, 1),
+  get_aim_race_index(race_enum.koku_kin, 1),
   get_aim_race_index(race_enum.niig_kin, 1),
+  get_aim_race_index(race_enum.fuku_kin, 1),
   get_aim_race_index(race_enum.kobe_hai, 1),
 ];
 

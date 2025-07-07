@@ -6,7 +6,7 @@ const {
   remove_end_line_breaks,
 } = require('#/page/exp/snippets');
 
-const { join_list } = require('#/utils/list-utils');
+const { join_to_string } = require('#/utils/list-utils');
 
 const { growth_info, unknown_info } = require('#/data/exp-const');
 
@@ -42,11 +42,11 @@ module.exports = {
         const in_intestine_semen = era.get(`cflag:${chara.id}:肠道内精液`);
         if (in_intestine_semen) {
           anal_exp_list.push(
-            join_list(
+            join_to_string(
               [
                 '裤子的后面变湿了……',
                 flags.mark_level >= 3
-                  ? `是因为屁穴内还滞留着 ${in_intestine_semen}ml 精液吧……`
+                  ? `是因为屁穴内还滞留着 ${in_intestine_semen.toLocaleString()}ml 精液吧……`
                   : undefined,
               ],
               '',
@@ -77,11 +77,13 @@ module.exports = {
           }
           if (anal_sex_count || cum_in_anal) {
             anal_exp_list.push(
-              join_list(
+              join_to_string(
                 [
-                  anal_sex_count ? `抚慰性器 ${anal_sex_count} 次` : '',
+                  anal_sex_count
+                    ? `抚慰性器 ${anal_sex_count.toLocaleString()} 次`
+                    : '',
                   cum_in_anal
-                    ? `承受过 ${cum_in_anal} 次射精，被射入过 ${anal_semen}ml 精液`
+                    ? `承受过 ${cum_in_anal.toLocaleString()} 次射精，被射入过 ${anal_semen.toLocaleString()}ml 精液`
                     : '',
                 ],
                 '，',
@@ -97,7 +99,9 @@ module.exports = {
         push_link_break(anal_exp_list);
 
         if (anal_orgasm_count) {
-          anal_exp_list.push(`因为快感去了 ${anal_orgasm_count} 次`);
+          anal_exp_list.push(
+            `因为快感去了 ${anal_orgasm_count.toLocaleString()} 次`,
+          );
         }
       } else {
         anal_exp_list.push(unknown_info(chara.id));

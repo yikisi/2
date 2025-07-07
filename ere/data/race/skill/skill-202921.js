@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202921,
   '一心不乱',
-  '比赛中盘消耗少量体力，使速度大幅提升',
+  '比赛中盘消耗少量持久力，使速度大幅提升',
   20292,
   2,
   17,

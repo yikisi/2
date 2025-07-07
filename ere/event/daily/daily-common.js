@@ -2,6 +2,7 @@
  * @file 日常地文
  * @author 雞雞
  * @author KUN
+ * @author 幽白書
  * @author 无名黑奴
  */
 const era = require('#/era-electron');
@@ -45,16 +46,18 @@ const { location_name } = require('#/data/locations');
 const money_list = [0, 1500, 5000, 10000];
 
 class CustomizedDaily {
+  /** @type {number} */
+  id;
+
   constructor(chara_id) {
     this.id = chara_id;
   }
 
-  get dict() {
-    const dict = {};
+  get #dict() {
+    const dict = { id: this.id };
     dict['角色名'] = era.get(`callname:${this.id}:-2`);
     dict['代表色'] = get_chara_color(this.id);
     dict['玩家名'] = era.get('callname:0:-2');
-    dict.id = this.id;
     if (era.get(`cflag:${this.id}:性别`) === 1) {
       dict['马娘'] = '马郎';
       dict['她'] = '他';
@@ -217,11 +220,13 @@ class CustomizedDaily {
     return await common_celebration.call(this);
   }
 
-  async end_talk() {}
+  /** @param {boolean} hentai */
+  // eslint-disable-next-line no-unused-vars
+  async end_talk(hentai) {}
 
   /** @author 雞雞 */
   good_morning() {
-    const dict = this.dict;
+    const dict = this.#dict;
     dict['骏川'] = era.get('callname:301:-2');
     kojo['回合开始'](dict);
   }
@@ -310,7 +315,9 @@ class CustomizedDaily {
   // eslint-disable-next-line no-unused-vars
   async growth(stage) {}
 
-  async load_talk() {}
+  async load_talk() {
+    await kojo['读档对话'](this.#dict);
+  }
 
   /** @author 雞雞 */
   async office_cook() {
@@ -901,8 +908,8 @@ class CustomizedDaily {
   /** @param {HookArg} hook */
   // eslint-disable-next-line no-unused-vars
   async birthday(hook) {
-    const chara = get_chara_talk(this.id),
-      me = get_chara_talk(0);
+    const chara = get_chara_talk(this.id);
+    const me = get_chara_talk(0);
     if (sys_check_remote(this.id)) {
       await era.printAndWait([
         me.get_colored_name(),
@@ -910,15 +917,10 @@ class CustomizedDaily {
         chara.get_colored_name(),
         ' 送上了生日祝福',
       ]);
+      await era.printAndWait([chara.get_colored_name(), ' 显得很高兴。']);
     } else {
-      await era.printAndWait([
-        me.get_colored_name(),
-        ' 向 ',
-        chara.get_colored_name(),
-        ' 当面道了一声生日快乐。',
-      ]);
+      await kojo['生日'](this.#dict);
     }
-    await era.printAndWait([chara.get_colored_name(), ' 显得很高兴。']);
   }
 
   /**

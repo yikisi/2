@@ -1,5 +1,6 @@
 ﻿const era = require('#/era-electron');
 
+const { reset_running_style } = require('#/system/race/snippets');
 const { get_image } = require('#/system/sys-calc-image');
 
 const { get_custom_mec } = require('#/event/mec/mec-factory');
@@ -7,14 +8,18 @@ const { get_custom_mec } = require('#/event/mec/mec-factory');
 const { gacha, get_random_entry, sort_list } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
-const calc_attr_score = require('#/data/calc-attr-score');
+const { calc_attr_score } = require('#/data/calc-attr-score');
 const { get_chara_color } = require('#/data/chara-colors');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_chara_rank } = require('#/data/info-generator');
 const race2legends = require('#/data/race/contestants/legends');
+/** @type {UmaTemplate[]} */
 const legends_list = require('#/data/race/contestants/legends.json');
+/** @type {UmaTemplate[]} */
 const named_list = require('#/data/race/contestants/named.json');
+/** @type {string[]} */
 const passer_by_names = require('#/data/race/contestants/uma-mob.json');
+/** @type {UmaTemplate[]} */
 const passer_by_list = require('#/data/race/contestants/unnamed.json');
 const LegendUmaFilter = require('#/data/race/model/legend-uma-filter');
 const LegendUmaSelector = require('#/data/race/model/legend-uma-selector');
@@ -28,9 +33,64 @@ const { mod_acceleration_adapt_ground } = require('#/data/race/race-sim-const');
 const { skill_sets, skills_dict } = require('#/data/race/skill/skill-const');
 const { attr_enum } = require('#/data/train-const');
 
-const named_level = [named_list[0].level, named_list.at(-1).level],
-  passer_by_level = [passer_by_list[0].level, passer_by_list.at(-1).level];
+const named_level = [named_list[0].level, named_list.at(-1).level];
+const passer_by_level = [passer_by_list[0].level, passer_by_list.at(-1).level];
 
+/**
+ * @typedef UmaTemplate
+ * @property {number} [id]
+ * @property {string} [name]
+ * @property {number} level
+ * @property {[number,number,number,number,number]} attrs
+ * @property {[number,number]} adapt_ground
+ * @property {[number,number,number,number]} adapt_distance
+ * @property {[number,number,number,number]} adapt_style
+ * @property {[number,number]} motivation
+ * @property {number} skills
+ * @property {string} [dress]
+ * @property {string} [image]
+ */
+
+/**
+ * @param {UmaTemplate} t
+ * @param {number} difficulty
+ * @param {number} cid
+ * @param {string} cname
+ * @param {number} set
+ * @param {boolean} random
+ * @returns {PseudoUma}
+ */
+function get_pseudo_from_template(
+  t,
+  difficulty,
+  cid = t.id,
+  cname = t.name,
+  set = t.skills,
+  random = false,
+) {
+  const ret = new PseudoUma(
+    cid,
+    cname,
+    get_chara_color(cid > 0 ? cid : void 0),
+    get_random_value(...t.motivation),
+    t.attrs,
+    random_style(t.adapt_style, random),
+    t.adapt_style,
+    t.adapt_distance,
+    t.adapt_ground,
+    skill_sets[set].map((s) => skills_dict[s]),
+  );
+  if (!random) {
+    ret.set_legend(t.level, difficulty);
+  }
+  return ret;
+}
+
+/**
+ * @param {UmaTemplate[]} legends
+ * @param {number} difficulty
+ * @returns {UmaTemplate}
+ */
 function select_data_from_contestants(legends, difficulty) {
   if (legends.length > 0) {
     let i = 0,
@@ -46,7 +106,7 @@ function select_data_from_contestants(legends, difficulty) {
           legends[m]?.level <= difficulty &&
           legends[m + 1]?.level > difficulty
         ) {
-          i = m;
+          i = m + 1;
           break;
         }
         if (legends[m + 1]?.level <= difficulty) {
@@ -63,22 +123,24 @@ function select_data_from_contestants(legends, difficulty) {
 
 /**
  * @param {number[]} adapts
+ * @param {boolean} random
  * @returns {number}
  */
-function random_style(adapts) {
+function random_style(adapts, random = false) {
+  if (Math.random() < 0.2 && random) {
+    return get_random_value(0, 3);
+  }
   const max_adapt = Math.max(...adapts);
-  return Number(
-    get_random_entry(
-      Object.entries(adapts).filter((e) => e[1] === max_adapt),
-    )[0],
-  );
+  return +get_random_entry(
+    adapts.map((e, i) => [e, i]).filter((e) => e[0] === max_adapt),
+  )[1];
 }
 
 /**
  * @param {PseudoUma[]} team_chara
  * @param {number} race
  * @param {RaceInfo} info
- * @param {PseudoUma[]} [contestants]
+ * @param {(PseudoUma|LegendUmaSelector|LegendUmaFilter)[]} [contestants]
  * @returns {PseudoUma[]}
  */
 function sys_parse_for_race(team_chara, race, info, contestants) {
@@ -86,30 +148,71 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
   let ret = [...team_chara],
     unnamed_index = -1;
   info.has_legend = false;
+  const edu_phase = Math.max(
+    ...team_chara.map((e) =>
+      e.index_chara === 0
+        ? 144
+        : era.get(`cflag:${e.index_chara}:育成回合计时`) + 1,
+    ),
+  );
+  const passer_by_difficulty =
+    passer_by_level[0] +
+    ((passer_by_level[1] - passer_by_level[0]) * (edu_phase - 24)) /
+      (144 - 24) -
+    1;
+  const named_difficulty =
+    named_level[0] +
+    ((named_level[1] - named_level[0]) * (edu_phase - 24)) / (144 - 24) -
+    1;
   if (contestants instanceof Array) {
-    ret.push(...contestants);
+    contestants.forEach((c) => {
+      if (c instanceof PseudoUma) {
+        ret.push(c);
+      } else {
+        const difficulty = named_difficulty * c.buff;
+        if (c instanceof LegendUmaSelector) {
+          const uma = select_data_from_contestants(
+            named_list.filter((e) => e.id === c.id),
+            difficulty,
+          );
+          if (uma) {
+            ret.push(
+              get_pseudo_from_template(
+                uma,
+                difficulty,
+                uma.id,
+                era.get(`static:${uma.id}:name`),
+              ),
+            );
+            if (uma.dress !== undefined) {
+              ret
+                .at(-1)
+                .set_image(
+                  `${era.get(`staticcstr:${uma.id}:头像`)}${uma.dress}_半身`,
+                );
+            }
+          }
+        } else if (c instanceof LegendUmaFilter) {
+          const uma = select_data_from_contestants(
+            passer_by_list.filter(c.filter),
+            difficulty,
+          );
+          if (uma) {
+            ret.push(
+              get_pseudo_from_template(
+                uma,
+                difficulty,
+                unnamed_index--,
+                c.name,
+                c.skills || uma.skills,
+              ).set_image(c.image),
+            );
+          }
+        }
+      }
+    });
   } else {
-    const legends = info.legends,
-      edu_phase = Math.max(
-        ...team_chara.map((e) =>
-          e.index_chara === 0
-            ? 144
-            : era.get(`cflag:${e.index_chara}:育成回合计时`) + 1,
-        ),
-      ),
-      named_difficulty = [
-        named_level[0] +
-          ((named_level[1] - named_level[0]) * (edu_phase - 24)) / (144 - 24) -
-          1,
-        0,
-      ],
-      passer_by_difficulty = [
-        passer_by_level[0] +
-          ((passer_by_level[1] - passer_by_level[0]) * (edu_phase - 24)) /
-            (144 - 24) -
-          1,
-        0,
-      ];
+    const legends = info.legends;
     info.extra_attr = (max_extra_attr * (144 - edu_phase)) / (144 - 24);
     const contestant_dict = {};
     team_chara.forEach((e) => (contestant_dict[e.index_chara] = 1));
@@ -138,11 +241,11 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
         legend_count = 0;
     }
 
-    team_chara.forEach(({ index_chara: id }) =>
-      get_custom_mec(id)
+    team_chara.forEach(({ index_chara: cid }) =>
+      get_custom_mec(cid)
         .get_race_contestants(info)
         .forEach((c) => {
-          const difficulty = named_difficulty[0] * c.buff;
+          const difficulty = named_difficulty * c.buff;
           if (c instanceof LegendUmaSelector) {
             if (
               !contestant_dict[c.id] &&
@@ -155,18 +258,12 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
               if (uma) {
                 contestant_dict[c.id] = 1;
                 ret.push(
-                  new PseudoUma(
+                  get_pseudo_from_template(
+                    uma,
+                    difficulty,
                     uma.id,
                     era.get(`static:${uma.id}:name`),
-                    get_chara_color(uma.id),
-                    get_random_value(...uma.motivation),
-                    uma.attrs,
-                    random_style(uma.adapt_style),
-                    uma.adapt_style,
-                    uma.adapt_distance,
-                    uma.adapt_ground,
-                    skill_sets[uma.skills].map((s) => skills_dict[s]),
-                  ).set_legend(),
+                  ).set_legend(uma.level, difficulty),
                 );
                 if (uma.dress !== undefined) {
                   ret
@@ -185,20 +282,13 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
             );
             if (uma) {
               ret.push(
-                new PseudoUma(
+                get_pseudo_from_template(
+                  uma,
+                  difficulty,
                   unnamed_index--,
                   c.name,
-                  get_chara_color(undefined),
-                  get_random_value(...uma.motivation),
-                  uma.attrs,
-                  random_style(uma.adapt_style),
-                  uma.adapt_style,
-                  uma.adapt_distance,
-                  uma.adapt_ground,
-                  skill_sets[c.skills || uma.skills].map((s) => skills_dict[s]),
-                )
-                  .set_legend()
-                  .set_image(c.image),
+                  c.skills || uma.skills,
+                ).set_image(c.image),
               );
               legend_count--;
             }
@@ -221,22 +311,9 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
       );
       if (legend) {
         legend_count--;
-        ret.push(
-          new PseudoUma(
-            legend.id,
-            legend.name,
-            get_chara_color(legend.id),
-            get_random_value(...legend.motivation),
-            legend.attrs,
-            random_style(legend.adapt_style),
-            legend.adapt_style,
-            legend.adapt_distance,
-            legend.adapt_ground,
-            skill_sets[legend.skills].map((s) => skills_dict[s]),
-          )
-            .set_legend(2)
-            .set_image(legend.image),
-        );
+        const p = get_pseudo_from_template(legend, 0).set_image(legend.image);
+        p.legend = 2;
+        ret.push(p);
       }
     }
 
@@ -253,9 +330,9 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
       gacha(
         list_history,
         Math.min(legend_count, info.gates - ret.length),
-      ).forEach((id) => {
+      ).forEach((cid) => {
         //对应json中存在幻影数据则优先读取
-        let uma = legends_history[id];
+        let uma = legends_history[cid];
         if (uma) {
           ret.push(
             new PseudoUma(
@@ -269,32 +346,23 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
               uma.adapt_distance,
               uma.adapt_ground,
               uma.skills.map((e) => skills_dict[e]),
-            ).set_legend(),
+            ).set_legend(uma.level, named_difficulty),
           );
         } else {
           //对应json中不存在该幻影数据则从default读取
           uma = get_random_entry(
             named_list.filter(
-              (e) =>
-                e.id === id &&
-                e.level >= named_difficulty - 200 &&
-                e.level <= named_difficulty + 400,
+              (e) => e.id === cid && e.level <= named_difficulty + 400,
             ),
           );
           if (uma !== undefined) {
             ret.push(
-              new PseudoUma(
+              get_pseudo_from_template(
+                uma,
+                named_difficulty,
                 uma.id,
                 era.get(`static:${uma.id}:name`),
-                get_chara_color(uma.id),
-                get_random_value(...uma.motivation),
-                uma.attrs,
-                random_style(uma.adapt_style),
-                uma.adapt_style,
-                uma.adapt_distance,
-                uma.adapt_ground,
-                skill_sets[uma.skills].map((s) => skills_dict[s]),
-              ).set_legend(),
+              ),
             );
             if (uma.dress !== undefined) {
               ret
@@ -306,7 +374,7 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
           }
         }
         if (uma) {
-          contestant_dict[id] = 1;
+          contestant_dict[cid] = 1;
           legend_count--;
         }
       });
@@ -314,13 +382,6 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
 
     if (legend_count > 0) {
       // 史实冠军不够数那再从default里随机抽人
-      for (let i = 0; i < named_list.length; ++i) {
-        if (named_list[i].level > named_difficulty[0]) {
-          named_difficulty[1] = named_list[i].level;
-          named_difficulty[0] = named_list[i - 1]?.level || named_difficulty[1];
-          break;
-        }
-      }
       gacha(
         Object.values(
           named_list
@@ -330,8 +391,7 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
                 era.get(`cflag:${e.id}:招募状态`) !== recruit_flags.yes &&
                 e.adapt_ground[info.ground] >= 5 &&
                 e.adapt_distance[info.distance] >= 5 &&
-                e.level >= named_difficulty[0] - 400 &&
-                e.level <= named_difficulty[1] + 200,
+                e.level <= named_difficulty + 200,
             )
             .reduce((p, c) => {
               (p[c.id] || (p[c.id] = [])).push(c);
@@ -343,18 +403,12 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
         const uma = get_random_entry(e);
         contestant_dict[uma.id] = 1;
         ret.push(
-          new PseudoUma(
+          get_pseudo_from_template(
+            uma,
+            named_difficulty,
             uma.id,
             era.get(`static:${uma.id}:name`),
-            get_chara_color(uma.id),
-            get_random_value(...uma.motivation),
-            uma.attrs,
-            random_style(uma.adapt_style),
-            uma.adapt_style,
-            uma.adapt_distance,
-            uma.adapt_ground,
-            skill_sets[uma.skills].map((s) => skills_dict[s]),
-          ).set_legend(),
+          ),
         );
         if (uma.dress !== undefined) {
           ret
@@ -372,54 +426,33 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
         gacha(passer_by_names, info.gates - ret.length),
         Math.random,
       );
-      for (let i = 0; i < passer_by_list.length; ++i) {
-        if (passer_by_list[i].level > passer_by_difficulty[0]) {
-          passer_by_difficulty[1] = passer_by_list[i].level;
-          passer_by_difficulty[0] =
-            passer_by_list[i - 1]?.level || passer_by_difficulty[1];
-          break;
-        }
-      }
       let back_up_list = passer_by_list.filter(
         (e) =>
           e.adapt_ground[info.ground] >= 4 &&
           e.adapt_distance[info.distance] >= 4 &&
-          e.level >= passer_by_difficulty[0] - 400 &&
-          e.level <= passer_by_difficulty[1] + 200,
+          e.level <= passer_by_difficulty,
       );
-      if (back_up_list.length < info.gates - ret.length) {
-        back_up_list = [];
-        for (
-          let i = passer_by_list.length - 1;
-          i >= 0 && back_up_list.length < info.gates - ret.length;
-          --i
-        ) {
-          if (passer_by_list[i].level > passer_by_difficulty[1] + 200) {
-            continue;
-          }
-          back_up_list.push(passer_by_list[i]);
-        }
+      if (back_up_list.length > info.gates - ret.length) {
+        back_up_list = back_up_list.slice(
+          back_up_list.length - (info.gates - ret.length),
+        );
       }
       gacha(back_up_list, info.gates - ret.length).forEach((e, i) =>
         ret.push(
-          new PseudoUma(
+          get_pseudo_from_template(
+            e,
+            passer_by_difficulty,
             unnamed_index--,
             names[i],
-            get_chara_color(undefined),
-            get_random_value(...e.motivation),
-            e.attrs,
-            random_style(e.adapt_style),
-            e.adapt_style,
-            e.adapt_distance,
-            e.adapt_ground,
-            skill_sets[e.skills].map((s) => skills_dict[s]),
+            e.skills,
+            true,
           ),
         ),
       );
     }
   }
 
-  if (ret.findIndex((e) => e.legend) !== -1) {
+  if (ret.findIndex((e) => e.legend > 0) !== -1) {
     info.has_legend = true;
   }
   const from_setting = era.get('flag:比赛难度');
@@ -437,10 +470,12 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
     }
   });
   ret.slice(team_chara.length).forEach((uma) => {
-    uma.index_chara > 0 &&
-      (uma.chara = era.get(`staticcflag:${uma.index_chara}:气性`));
-    from_setting &&
-      (uma.attrs = uma.attrs.map((e) => (e * (100 + from_setting)) / 100));
+    if (uma.index_chara >= 0) {
+      uma.chara = era.get(`staticcflag:${uma.index_chara}:气性`);
+    }
+    if (from_setting !== 0) {
+      uma.attrs = uma.attrs.map((e) => (e * (100 + from_setting)) / 100);
+    }
   });
 
   let season;
@@ -514,19 +549,7 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
     uma.race.conditionParams.motivation = uma.motivation + 3;
     uma.race.conditionParams.random_lot = get_random_value(0, 99);
     uma.race.conditionParams.rotation = info.rotation + 1;
-    uma.race.conditionParams.running_style = uma.style + 1;
-    uma.race.conditionParams.running_style_count_nige_otherself =
-      running_style_counts[0] - (uma.style === 0);
-    uma.race.conditionParams.running_style_count_senko_otherself =
-      running_style_counts[1] - (uma.style === 1);
-    uma.race.conditionParams.running_style_count_sashi_otherself =
-      running_style_counts[2] - (uma.style === 2);
-    uma.race.conditionParams.running_style_count_oikomi_otherself =
-      running_style_counts[3] - (uma.style === 3);
-    uma.race.conditionParams.running_style_count_same =
-      running_style_counts[uma.style];
-    uma.race.conditionParams.running_style_count_same_rate =
-      (uma.race.conditionParams.running_style_count_same * 100) / ret.length;
+    reset_running_style(uma, running_style_counts, ret.length);
     uma.race.conditionParams.straight_front_type = straight_front_type;
     uma.race.conditionParams.season = season;
     uma.race.conditionParams.time = info.daytime;
@@ -595,7 +618,7 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
       )
       .forEach((skill) => {
         for (let i = 0; i < skill.data.pop_types.length; ++i) {
-          if (skill.data.pop_types[i]) {
+          if (skill.data.pop_types[i] > 0) {
             if (skill.data.is_random) {
               uma.tempPop[skill.data.pop_types[i] - 1] +=
                 uma.attrs[attr_enum.intelligence] < 56.25

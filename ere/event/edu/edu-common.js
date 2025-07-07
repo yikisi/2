@@ -44,6 +44,8 @@ const {
 const { attr_enum, fumble_result } = require('#/data/train-const');
 
 class CustomizedEdu extends ICustomizedEdu {
+  /** @type {function} */
+  static load_game;
   static common_event_count = 0;
 
   /**
@@ -284,31 +286,39 @@ class CustomizedEdu extends ICustomizedEdu {
   async crazy_fan_end() {
     const chara = get_chara_talk(this.id),
       me = get_chara_talk(0);
-    await era.printAndWait(
-      era.get(`relation:${this.id}:0`) < 0
-        ? [
-            '不管是参赛还是接受采访，',
-            me.get_colored_name(),
-            ' 和担当的紧张关系有目共睹，质疑这种紧张关系影响了担当发展的声音一直没有停息。校方对 ',
-            me.get_couple_title(),
-            ' 的组合开始失去耐心……但有些人比他们更缺乏耐性。',
-          ]
-        : [
-            '或许是 ',
-            me.get_colored_name(),
-            ' 过于懈怠，又或许是负责',
-            chara.get_uma_sex_title(),
-            '的天赋不足，胜利与 ',
-            me.get_couple_title(),
-            ' 始终遥遥无期。校方对 ',
-            me.get_couple_title(),
-            ' 的组合开始失去耐心……但有些人比他们更缺乏耐性。',
-          ],
-      {
-        offset: 6,
-        width: 12,
-      },
-    );
+    if (era.get(`relation:${this.id}:0`) < 0) {
+      await era.printAndWait(
+        [
+          '不管是参赛还是接受采访，',
+          me.get_colored_name(),
+          ' 和担当的紧张关系有目共睹，质疑这种紧张关系影响了担当发展的声音一直没有停息。校方对 ',
+          me.get_couple_title(),
+          ' 的组合开始失去耐心……但有些人比他们更缺乏耐性。',
+        ],
+        {
+          offset: 6,
+          width: 12,
+        },
+      );
+    } else {
+      await era.printAndWait(
+        [
+          '或许是 ',
+          me.get_colored_name(),
+          ' 过于懈怠，又或许是负责',
+          chara.get_uma_sex_title(),
+          '的天赋不足，胜利与 ',
+          me.get_couple_title(),
+          ' 始终遥遥无期。校方对 ',
+          me.get_couple_title(),
+          ' 的组合开始失去耐心……但有些人比他们更缺乏耐性。',
+        ],
+        {
+          offset: 6,
+          width: 12,
+        },
+      );
+    }
     await era.printAndWait(
       [
         me.get_colored_name(),
@@ -458,24 +468,61 @@ class CustomizedEdu extends ICustomizedEdu {
    */
   // eslint-disable-next-line no-unused-vars
   async race_end(chara, me, callname, hook, extra_flag) {
-    if (extra_flag.rank === 1) {
+    const { pseudo } = extra_flag;
+    if (pseudo.race.conditionParams.item === 1) {
+      if (extra_flag.rank === 1) {
+        await era.printAndWait([
+          me.get_colored_name(),
+          ' 迎接面色潮红的 ',
+          chara.get_colored_name(),
+          ' 走进休息室。',
+        ]);
+        await era.printAndWait([
+          chara.get_colored_name(),
+          ' 一进休息室就发出一声解放似的呻吟，',
+          me.get_colored_name(),
+          ' 连忙关上门并关掉所有性玩具。',
+        ]);
+        await era.printAndWait([
+          '之后，',
+          me.get_colored_name(),
+          ' 向在怀中摩擦着身体的 ',
+          chara.get_colored_name(),
+          ' 承诺一定会好好抚慰',
+          chara.sex,
+          '，这才避免了白日宣淫。',
+        ]);
+      } else {
+        await era.printAndWait([
+          me.get_colored_name(),
+          ' 迎接垂头丧气的 ',
+          chara.get_colored_name(),
+          ' 走进休息室，',
+        ]);
+        await era.printAndWait([chara.get_colored_name(), ' 沮丧地委顿在地。']);
+        await era.printAndWait([
+          me.get_colored_name(),
+          ' 识趣地关上了性玩具，轻声安慰。',
+        ]);
+      }
+    } else if (extra_flag.rank === 1) {
       await print_event_name('竞赛获胜', chara);
-      await get_chara_talk(0).say_and_wait(
+      await me.say_and_wait(
         Math.random() < 0.5 ? '太棒了！' : '往更高的目标迈进吧！',
       );
     } else if (extra_flag.rank <= 5) {
       await print_event_name('竞赛上榜', chara);
-      await get_chara_talk(0).say_and_wait(
+      await me.say_and_wait(
         Math.random() < 0.5 ? '今天的表现也很好！' : '绝对不能输给她们！',
       );
     } else if (extra_flag.rank <= 10) {
       await print_event_name('竞赛败北', chara);
-      await get_chara_talk(0).say_and_wait(
+      await me.say_and_wait(
         Math.random() < 0.5 ? '下次表现一定更好！' : '沮丧也不是办法！',
       );
     } else {
       await print_event_name('下次不会输了！', chara);
-      await get_chara_talk(0).say_and_wait(
+      await me.say_and_wait(
         Math.random() < 0.5 ? '总有一天绝对会赢！' : '你愿意就这样丢脸下去？',
       );
     }
@@ -483,6 +530,7 @@ class CustomizedEdu extends ICustomizedEdu {
 
   /**
    * @author 雞雞
+   * @author 无名黑奴
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {string} callname
@@ -492,9 +540,58 @@ class CustomizedEdu extends ICustomizedEdu {
   // eslint-disable-next-line no-unused-vars
   async race_start(chara, me, callname, hook, extra_flag) {
     await print_event_name('竞赛之前', chara);
-    await get_chara_talk(0).say_and_wait(
-      Math.random() < 0.5 ? '尽全力就好！' : '跑出自己的气势来！',
-    );
+    const { pseudo } = extra_flag;
+    if (pseudo.race.conditionParams.item === 1) {
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 亲手给 ',
+        chara.get_colored_name(),
+        ' 装上了一些「特殊装备」。',
+      ]);
+      if (
+        era.get(`love:${this.id}`) >= 50 &&
+        get_sex_acceptable(this.id) >= 0
+      ) {
+        await era.printAndWait([
+          chara.get_colored_name(),
+          ' 娇俏地白了 ',
+          me.get_colored_name(),
+          ' 一眼，将你们的小秘密隐藏在衣服之下，转身向起跑线走去……',
+        ]);
+      } else {
+        const meek =
+          era.get(`mark:${this.id}:顺从`) - era.get(`mark:${this.id}:反抗`);
+        if (era.get(`mark:${this.id}:淫纹`) >= meek) {
+          await era.printAndWait([
+            chara.get_colored_name(),
+            ' 顺服地穿好衣服，小腹处透衣的粉光辉映着媚眼中的神光……',
+          ]);
+        } else if (
+          era.get(`mark:${this.id}:欢愉`) -
+            Math.max(
+              era.get(`mark:${this.id}:苦痛`),
+              era.get(`mark:${this.id}:羞耻`),
+            ) >=
+          meek
+        ) {
+          await era.printAndWait([
+            chara.get_colored_name(),
+            ' 慢慢穿好衣服，以更好地将玩具固定在自己的身上……',
+          ]);
+        } else {
+          await era.printAndWait([
+            chara.get_colored_name(),
+            ' 偷偷抬眼看了一下 ',
+            me.get_colored_name(),
+            ' 的表情，随后低下头去，默默忍受着刺激……',
+          ]);
+        }
+      }
+    } else {
+      await me.say_and_wait(
+        Math.random() < 0.5 ? '尽全力就好！' : '跑出自己的气势来！',
+      );
+    }
   }
 
   /**
@@ -602,33 +699,107 @@ class CustomizedEdu extends ICustomizedEdu {
   }
 
   /**
+   * @author 雞雞
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {string} callname
    * @param {HookArg} hook
    * @param {TrainSuccessParams} extra_flag
+   */
+  // eslint-disable-next-line no-unused-vars
+  train_success_content(chara, me, callname, hook, extra_flag) {
+    era.print([chara.get_colored_name(), ' 的训练顺利结束了！']);
+  }
+
+  /**
+   * @author 雞雞
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param {TrainSuccessParams} extra_flag
+   * @returns {Promise<boolean>}
+   */
+  // eslint-disable-next-line no-unused-vars
+  async train_success_add(chara, me, callname, hook, extra_flag) {
+    await print_event_name('热血的追加训练！', chara);
+    if (
+      await select_yes_or_no(
+        [chara.get_colored_name(), ' 似乎意犹未尽的样子，是想自主训练吗？'],
+        '许可！',
+        '会超出计划的……',
+      )
+    ) {
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 默许了 ',
+        chara.get_colored_name(),
+        ` 的自主训练，并称赞了${chara.sex}的干劲`,
+      ]);
+      return true;
+    } else {
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 出言禁止了 ',
+        chara.get_colored_name(),
+        ' 的自主训练，并叮嘱要好好休息',
+      ]);
+    }
+    return false;
+  }
+
+  /**
+   * @author 雞雞
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param {TrainSuccessParams} extra_flag
+   * @returns {Promise<boolean>}
+   */
+  // eslint-disable-next-line no-unused-vars
+  async train_success_sex(chara, me, callname, hook, extra_flag) {
+    await print_event_name('训练后的性欲高涨', chara);
+    await era.printAndWait([
+      '一天的训练结束后，',
+      chara.get_colored_name(),
+      ' 的样子好像有点奇怪……',
+    ]);
+    await era.printAndWait(
+      '面色潮红，在双腿间流下的不明液体与汗液混在一起，散发出一股淫靡的味道。',
+    );
+    era.printButton('「这也是训练员的义务……」', 1);
+    era.printButton('「总之先去医务室吧！」', 2);
+    return (await era.input()) === 1;
+  }
+
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param {TrainSuccessParams} extra
    * @returns {Promise<TrainSuccessParams|void>}
    */
-  async train_success(chara, me, callname, hook, extra_flag) {
+  async train_success(chara, me, callname, hook, extra) {
     const cur_location = era.get('flag:当前位置');
-    era.print([chara.get_colored_name(), ' 的训练顺利结束了！']);
+    this.train_success_content(chara, me, callname, hook, extra);
     era.println();
     if (this.id === 0) {
       return;
     }
     if (
       !era.get(`status:${this.id}:摸鱼`) &&
-      Math.random() < 0.2 * extra_flag.stamina_ratio
+      Math.random() < 0.2 * extra.stamina_ratio
     ) {
       if (sys_check_remote(this.id)) {
         hook.arg = true;
       } else {
         await era.waitAnyKey();
-        await this.additional_train(chara, me, callname, hook, extra_flag);
-        era.println();
+        hook.arg = this.train_success_add(chara, me, callname, hook, extra);
       }
     } else if (
-      extra_flag.attr !== attr_enum.intelligence &&
+      extra.attr !== attr_enum.intelligence &&
       !sys_check_remote(this.id)
     ) {
       if (
@@ -637,20 +808,8 @@ class CustomizedEdu extends ICustomizedEdu {
         Math.random() <
           (0.2 * era.get(`base:${this.id}:性欲`)) / lust_border.want_sex
       ) {
-        /** @author 雞雞 */
         await era.waitAnyKey();
-        await print_event_name('训练后的性欲高涨', chara);
-        await era.printAndWait([
-          '一天的训练结束后，',
-          chara.get_colored_name(),
-          ' 的样子好像有点奇怪……',
-        ]);
-        await era.printAndWait(
-          '面色潮红，在双腿间流下的不明液体与汗液混在一起，散发出一股淫靡的味道。',
-        );
-        era.printButton('「这也是训练员的义务……」', 1);
-        era.printButton('「总之先去医务室吧！」', 2);
-        if ((await era.input()) === 1) {
+        if (await this.train_success_sex(chara, me, callname, hook, extra)) {
           era.set('flag:当前位置', location_enum.restroom);
           await quick_into_sex(this.id);
           era.set('flag:当前位置', cur_location);
@@ -676,7 +835,10 @@ class CustomizedEdu extends ICustomizedEdu {
         era.printButton('「哦，要一起洗澡吗？」', 1);
         era.printButton('「不好意思打扰了！」', 2);
         if ((await era.input()) === 1) {
-          if (era.get(`love:${this.id}`) >= 50 && get_sex_acceptable(this.id)) {
+          if (
+            era.get(`love:${this.id}`) >= 50 &&
+            get_sex_acceptable(this.id) >= 0
+          ) {
             await era.printAndWait('对方兴致盎然的答应了。');
             await era.printAndWait([
               me.get_couple_title(),
@@ -692,12 +854,12 @@ class CustomizedEdu extends ICustomizedEdu {
             era.set('flag:当前位置', location_enum.restroom);
             await quick_into_sex(this.id);
             era.set('flag:当前位置', cur_location);
-            extra_flag.relation_change = 5;
+            extra.relation_change = 5;
           } else {
             await chara.say_and_wait('笨蛋，在想什么啊你！');
             await era.printAndWait([me.get_colored_name(), ' 被赶了出去……']);
             sys_change_motivation(this.id, -1) && (await era.waitAnyKey());
-            extra_flag.relation_change = -5;
+            extra.relation_change = -5;
           }
         } else {
           await me.say_and_wait('不好意思打扰了！');
@@ -713,43 +875,6 @@ class CustomizedEdu extends ICustomizedEdu {
           sys_change_lust(this.id, get_random_value(500, 1500));
         }
       }
-    }
-  }
-
-  /**
-   * @author 雞雞
-   * @param {CharaTalk} chara
-   * @param {CharaTalk} me
-   * @param {string} callname
-   * @param {HookArg} hook
-   * @param {TrainSuccessParams} extra_flag
-   * @returns {Promise}
-   */
-  // eslint-disable-next-line no-unused-vars
-  async additional_train(chara, me, callname, hook, extra_flag) {
-    await print_event_name('热血的追加训练！', chara);
-    if (
-      await select_yes_or_no(
-        [chara.get_colored_name(), ' 似乎意犹未尽的样子，是想自主训练吗？'],
-        '许可！',
-        '会超出计划的……',
-      )
-    ) {
-      await era.printAndWait([
-        me.get_colored_name(),
-        ' 默许了 ',
-        chara.get_colored_name(),
-        ` 的自主训练，并称赞了${chara.sex}的干劲`,
-      ]);
-      hook.arg = true;
-    } else {
-      await era.printAndWait([
-        me.get_colored_name(),
-        ' 出言禁止了 ',
-        chara.get_colored_name(),
-        ' 的自主训练，并叮嘱要好好休息',
-      ]);
-      hook.arg = false;
     }
   }
 

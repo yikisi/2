@@ -8,8 +8,8 @@ class CrazyFans {
     return get('flag:极端粉丝') || set('flag:极端粉丝', []);
   }
 
-  push(chara_id) {
-    this.#obj.push(chara_id);
+  push(cid) {
+    this.#obj.push(cid);
   }
 
   get() {

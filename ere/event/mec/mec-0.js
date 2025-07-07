@@ -45,7 +45,7 @@ module.exports = class extends CustomizedMec {
           '现役马娘，但是只能参加资深年比赛；没有工资，参赛时赏金分成+400%。',
       });
     }
-    if (!era.get('flag:强奸抵抗')) {
+    if (era.get('flag:强奸抵抗') === '') {
       ret_list.push({
         color: buff_colors[2],
         content: '恶行易施',

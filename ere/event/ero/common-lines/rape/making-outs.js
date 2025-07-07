@@ -683,7 +683,7 @@ class EroRapeMakingOuts extends EroMakingOuts {
         '下意识缩紧的嘴唇与脸颊内侧的粘膜为肉茎构筑出了一具极窄的肉穴。',
       ]);
       await attacker.print_and_wait([
-        '不过，更叫人喜欢的，还是望向你的，包含鄙夷的亮晶晶眸子。',
+        '不过，更叫人喜欢的，还是望向自己的，包含鄙夷的亮晶晶眸子。',
       ]);
     } else {
       await defender.say_and_wait(['哈……❤️']);
@@ -692,7 +692,7 @@ class EroRapeMakingOuts extends EroMakingOuts {
       ]);
       await attacker.print_and_wait([
         '名叫 ',
-        sys_get_colored_callname(attacker.id, defender.id),
+        defender.get_colored_name(),
         ' 的',
         era.get(`cflag:${defender.id}:种族`)
           ? defender.get_sex_slave_title()

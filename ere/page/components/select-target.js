@@ -56,7 +56,7 @@ function get_edu_stage(chara_id, race, palace, in_train) {
   if (!chara_id || !race) {
     return '-';
   }
-  if (palace > 1) {
+  if (palace >= 1) {
     return out_of_train_type[palace - 1];
   }
   if (in_train) {

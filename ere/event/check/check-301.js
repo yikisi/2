@@ -20,7 +20,7 @@ module.exports = class extends CustomizedCheck {
   check_next_week() {
     const life_marks = new TokinoLifeMarks();
     if (
-      get('flag:回合爱慕惩罚') &&
+      get('flag:回合爱慕惩罚') > 0 &&
       get('love:301') >= 50 &&
       life_marks.who_am_i < 2
     ) {

@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   210101,
   '比赛之精髓・体',
-  '最后冲刺时消耗少量体力，提升少量速度',
+  '最后冲刺时消耗少量持久力，提升少量速度',
   21010,
   1,
   16,

@@ -279,7 +279,7 @@ module.exports = (handlers) => {
     const ret = await select_target_in_storage(
       item_id,
       (id) =>
-        id &&
+        id > 0 &&
         !era.get(`status:${id}:讨厌药`) &&
         LoveLimitStatus.get(id).is_empty(),
     );

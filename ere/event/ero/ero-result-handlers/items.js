@@ -54,15 +54,17 @@ module.exports = (handlers) => {
    * @param {{check:number,item:number,user:number}} extra_flag
    */
   handlers[ero_hooks.use_medicine] = (attacker, __, ___, extra_flag) => {
-    !attacker && era.add(`item:${medicine_names[extra_flag.item]}`, -1);
+    if (!attacker) {
+      era.add(`item:${medicine_names[extra_flag.item]}`, -1);
+    }
     let temp;
     switch (extra_flag.item) {
       case medicine_enum.uma_z:
-        if (!era.get(`tcvar:${extra_flag.user}:发情`)) {
+        if (era.get(`tcvar:${extra_flag.user}:发情`) > 0) {
+          era.add(`base:${extra_flag.user}:药物残留`, get_random_value(20, 30));
+        } else {
           temp = 0.25;
           era.set(`status:${extra_flag.user}:马跳Z`, 1);
-        } else {
-          era.add(`base:${extra_flag.user}:药物残留`, get_random_value(20, 30));
         }
         era.add(
           `nowex:${extra_flag.user}:体力消耗`,
@@ -251,8 +253,7 @@ module.exports = (handlers) => {
             `tcvar:${extra_flag.user}:阴道扩张`,
             1 + !era.get(`tcvar:${extra_flag.user}:阴道扩张`),
           );
-        }
-        if (extra_flag.part === part_enum.anal) {
+        } else if (extra_flag.part === part_enum.anal) {
           era.add(
             `tcvar:${extra_flag.user}:肛门扩张`,
             1 + !era.get(`tcvar:${extra_flag.user}:肛门扩张`),

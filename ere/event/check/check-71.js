@@ -14,6 +14,7 @@ const ArdanEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-71')
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const ArdanLifeMarks = require('#/data/event/life-event-marks/life-event-marks-71');
+const recruit_flags = require('#/data/event/recruit-flags');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
 
@@ -58,34 +59,37 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_next_week() {
-    const life_marks = new ArdanLifeMarks();
-    if (era.get('flag:回合爱慕惩罚') === 0) {
-      const love = era.get(`love:${this.id}`);
-      if (!life_marks.love_1 && love >= 1) {
-        life_marks.love_1 = 1;
-        add_event(
-          event_hooks.week_end,
-          new EventObject(this.id, cb_enum.love).set_arg('bearing'),
-        );
-      } else if (life_marks.love_1 === 2 && !life_marks.love_25 && love >= 25) {
-        life_marks.love_25 = 1;
-        add_event(
-          event_hooks.week_end,
-          new EventObject(this.id, cb_enum.love).set_arg('theater'),
-        );
+    if (era.get(`cflag:${this.id}:招募状态`) === recruit_flags.yes) {
+      const life_marks = new ArdanLifeMarks();
+      if (era.get('flag:回合爱慕惩罚') === 0) {
+        const love = era.get(`love:${this.id}`);
+        if (!life_marks.love_1 && love >= 1) {
+          life_marks.love_1 = 1;
+          add_event(
+            event_hooks.week_end,
+            new EventObject(this.id, cb_enum.love).set_arg('bearing'),
+          );
+        } else if (
+          life_marks.love_1 === 2 &&
+          !life_marks.love_25 &&
+          love >= 25
+        ) {
+          life_marks.love_25 = 1;
+          add_event(
+            event_hooks.week_end,
+            new EventObject(this.id, cb_enum.love).set_arg('theater'),
+          );
+        }
       }
     }
     const edu_weeks = era.get(`cflag:${this.id}:育成回合计时`);
     if (edu_weeks < 3 * 48) {
-      //      const event_marks = new ArdanEduMarks();
-      //      // TODO
-      //      if (event_marks.kiku_sho > 0) {
-      //        aim_races[get_aim_race_index(race_enum.kiku_sho, 1)] = 4;
-      //        aim_races[get_aim_race_index(race_enum.tenn_sho, 1)] = 0;
-      //      } else {
-      //        aim_races[get_aim_race_index(race_enum.kiku_sho, 1)] = 0;
-      //        aim_races[get_aim_race_index(race_enum.tenn_sho, 1)] = 4;
-      //      }
+      if (edu_weeks === 47 + 20) {
+        add_event(
+          event_hooks.week_end,
+          new EventObject(this.id, cb_enum.edu, true).set_arg('separate_way'),
+        );
+      }
       check_and_register_aim_race(this.id, this.get_aim_races(), edu_weeks);
     } else {
       super.check_next_week();
@@ -105,64 +109,69 @@ module.exports = class extends CustomizedCheck {
   }
 
   is_aim_race(race, edu_weeks, rank) {
-    let ret = super.is_aim_race(race, edu_weeks, rank);
     if (rank !== undefined) {
       switch (race) {
         case race_enum.begin_race:
           if (rank !== 1) {
-            ret &= 0b100;
+            return 0;
           }
           break;
         case race_enum.sats_sho:
           if (rank > 5) {
-            ret &= 0b100;
+            return 0;
           }
           break;
         case race_enum.aoba_sho:
           if (rank > 5) {
-            ret &= 0b100;
+            return 0;
           }
           break;
         case race_enum.toky_yus:
           if (rank > 5) {
-            ret &= 0b100;
+            return 0;
           }
           break;
         case race_enum.kiku_sho:
           if (rank > 5) {
-            ret &= 0b100;
+            return 0;
           }
           break;
         case race_enum.tenn_sho:
           if (edu_weeks < 96) {
             if (rank > 3) {
-              ret &= 0b100;
+              return 0;
             }
           } else if (rank > 1) {
-            ret &= 0b100;
+            return 0;
           }
           break;
         case race_enum.sank_hai:
           if (rank > 3) {
-            ret &= 0b100;
+            return 0;
           }
           break;
         case race_enum.takz_kin:
           if (rank > 3) {
-            ret &= 0b100;
+            return 0;
           }
           break;
         case race_enum.main_oka:
           if (rank > 3) {
-            ret &= 0b100;
+            return 0;
           }
-          break;
       }
     }
-    return ret;
+    return super.is_aim_race(race, edu_weeks, rank);
   }
 
   get_aim_races() {
+    if (new ArdanEduMarks().kiku_sho > 0) {
+      aim_races[get_aim_race_index(race_enum.kiku_sho, 1)] = 0b11;
+      aim_races[get_aim_race_index(race_enum.tenn_sho, 1)] = -1;
+    } else {
+      aim_races[get_aim_race_index(race_enum.kiku_sho, 1)] = -1;
+      aim_races[get_aim_race_index(race_enum.tenn_sho, 1)] = 0b11;
+    }
     return aim_races;
   }
 
@@ -176,7 +185,7 @@ module.exports = class extends CustomizedCheck {
     buffer.push(
       check_aim_and_get_entry(
         races,
-        event_marks.kiku_sho ? race_enum.kiku_sho : race_enum.tenn_sho,
+        event_marks.kiku_sho > 0 ? race_enum.kiku_sho : race_enum.tenn_sho,
         1,
         3,
       ),

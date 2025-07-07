@@ -6,6 +6,9 @@ const EroLinesCommon = require('#/event/ero/common-lines/interface/ero-lines-com
 
 const { log_7 } = require('#/utils/value-utils');
 
+const CharaInmon = require('#/data/ero/chara-inmon');
+const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
+
 class EroCommunications extends EroLinesCommon {
   /**
    * @param {number} attacker
@@ -24,6 +27,12 @@ class EroCommunications extends EroLinesCommon {
    * @param {number} defender
    */
   static check_resist_success(attacker, defender) {
+    if (!attacker) {
+      const inmon = CharaInmon.get(defender);
+      if (inmon.on(plugin_enum.tuna) || inmon.on(plugin_enum.meek)) {
+        return true;
+      }
+    }
     const ratio = sys_get_strength_ratio_in_fight(attacker, defender);
     era.logger.debug(`角色 ${attacker} 逆推概率：${(ratio * 100).toFixed(2)}%`);
     return ratio >= 1 || (ratio > 0 && Math.random() < ratio);

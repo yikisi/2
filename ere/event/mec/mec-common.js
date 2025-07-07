@@ -5,6 +5,7 @@ const check_aim_race = require('#/event/snippets/check-aim-race');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 
+const recruit_flags = require('#/data/event/recruit-flags');
 const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
@@ -22,10 +23,9 @@ class CustomizedMec {
   }
 
   init_love() {
-    era.set(
-      `love:${this.id}`,
-      era.get(`cflag:${this.id}:种族`) ? era.get('flag:马娘初始爱慕') : 0,
-    );
+    if (era.get(`cflag:${this.id}:种族`) > 0) {
+      era.set(`love:${this.id}`, era.get('flag:马娘初始爱慕'));
+    }
   }
 
   is_able_to_be_selected() {
@@ -35,7 +35,13 @@ class CustomizedMec {
   /** @param {number[]} partners */
   // eslint-disable-next-line no-unused-vars
   is_anger_for_unfaithful(partners) {
-    return true;
+    return era.get('flag:不忠惩罚') === 1;
+  }
+
+  /** @param {number} race */
+  // eslint-disable-next-line no-unused-vars
+  is_race_disabled(race) {
+    return false;
   }
 
   is_race_register_enabled() {
@@ -64,7 +70,14 @@ class CustomizedMec {
   }
 
   get_love_limit() {
-    return 0;
+    if (era.get(`cflag:${this.id}:招募状态`) === recruit_flags.yes) {
+      return 0;
+    }
+    const love = era.get(`love:${this.id}`);
+    if (love > 50) {
+      return 67;
+    }
+    return 49;
   }
 
   get_maxbase_buff() {
@@ -114,7 +127,7 @@ class CustomizedMec {
         case 28:
         case 30:
         case 31:
-          ret.push(`${base}_泳`, `${base}_夏`);
+          ret.push(`${base}_泳`, `${base}_夏私`);
           break;
         case 29:
           ret.push(`${base}_江户`);
@@ -233,15 +246,10 @@ class CustomizedMec {
 
   set_callname() {
     if (!this.set_callname_from_src()) {
-      let callname;
-      if (!era.get(`cflag:${this.id}:父方角色`)) {
-        callname = '爸爸';
-      } else if (!era.get(`cflag:${this.id}:母方角色`)) {
-        callname = '妈妈';
-      } else {
-        callname = '训练员' + get_chara_talk(0).get_adult_sex_title();
-      }
-      era.set(`callname:${this.id}:0`, callname);
+      era.set(
+        `callname:${this.id}:0`,
+        '训练员' + get_chara_talk(0).get_adult_sex_title(),
+      );
     }
   }
 

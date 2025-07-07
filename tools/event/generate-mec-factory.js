@@ -1,6 +1,7 @@
 const { readdirSync, writeFileSync } = require('fs');
+const { join } = require('path');
 
-const mec_scripts = readdirSync('../../ere/event/mec')
+const mec_scripts = readdirSync(join(__dirname, '../../ere/event/mec'))
   .filter(
     (e) =>
       e.endsWith('.js') &&
@@ -28,16 +29,12 @@ const mec_scripts = readdirSync('../../ere/event/mec')
     }
   });
 
-let output = `const { get } = require('#/era-electron');
-
-const MecChild = require('#/event/mec/mec-child');
+let output = `const MecChild = require('#/event/mec/mec-child');
 const CustomizedMec = require('#/event/mec/mec-common');
-const script_dict = require('#/event/script-dict.json');
 
-const { first_child_id } = require('#/data/other-const');
+const CommonKojoFactory = require('#/event/factory-common');
 
-const cons_dict = {},
-  obj_dict = {};
+const cons_dict = {};
 
 const current = new Date().getTime();
 
@@ -63,31 +60,29 @@ console.log(
   'ms',
 );
 
-/**
- * @param {number} chara_id
- * @returns {CustomizedMec}
- */
-function get_custom_mec(chara_id) {
-  if (!obj_dict[chara_id]) {
-    const { n: script_name, c: cons } =
-      chara_id >= first_child_id
-        ? { n: get(\`callname:$\{chara_id}:-2\`), c: MecChild }
-        : { n: chara_id, c: CustomizedMec };
-    obj_dict[chara_id] = new (cons_dict[
-      script_dict[script_name] || script_name
-    ] || cons)(chara_id);
+class MechanismFactory extends CommonKojoFactory {
+  constructor() {
+    super(cons_dict, CustomizedMec, MecChild);
   }
-  return obj_dict[chara_id].get_this();
+
+  /**
+   * @param {number} id
+   * @returns {CustomizedMec}
+   */
+  get_custom_mec(id) {
+    return this.get(id);
+  }
 }
 
-CustomizedMec.get_custom_mec = get_custom_mec;
+const mec_factory = new MechanismFactory();
 
-module.exports = {
-  get_custom_mec,
-};
+CustomizedMec.get_custom_mec = mec_factory.get_custom_mec =
+  mec_factory.get_custom_mec.bind(mec_factory);
+
+module.exports = mec_factory;
 `;
 
-writeFileSync('../../ere/event/mec/mec-factory.js', output);
+writeFileSync(join(__dirname, '../../ere/event/mec/mec-factory.js'), output);
 
 console.log(
   `[generate-mec-factory.js] registers ${mec_scripts.length} mechanism scripts`,

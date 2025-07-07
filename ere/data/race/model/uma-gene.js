@@ -1,3 +1,5 @@
+const { skills_dict } = require('#/data/race/skill/skill-const');
+
 const gene_type_enum = { adapt: 0, base: 0, skill: 0 };
 Object.keys(gene_type_enum).forEach((e, i) => (gene_type_enum[e] = i));
 
@@ -64,13 +66,21 @@ class UmaGene {
 
   get_colored_name() {
     const border_color = gene_rarity_colors[this.rarity];
+    let title = `【${this.name}】（${gene_types[this.type]} · ${gene_rarities[this.rarity]}）\n${this.desc}`;
+    if (skills_dict[this.id] !== undefined) {
+      const { desc, tags } = skills_dict[this.id];
+      title += `\n${desc}`;
+      if (tags.length > 0) {
+        title += `\n${tags}`;
+      }
+    }
     return [
       { content: '【', color: border_color },
       {
         color: gene_type_colors[this.type],
         content: this.name,
         fontWeight: 'bold',
-        title: `【${this.name}】（${gene_types[this.type]} · ${gene_rarities[this.rarity]}）\n${this.desc}`,
+        title,
       },
       { content: '】', color: border_color },
     ];

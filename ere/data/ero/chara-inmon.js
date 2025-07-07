@@ -58,7 +58,7 @@ class CharaInmon {
     era.set(`equip:${this.id}:淫纹奴役`, v);
   }
 
-  get to_list() {
+  get list() {
     return Object.entries(this.obj)
       .filter((e) => e[1] > 0)
       .map(([p]) => Number(p))

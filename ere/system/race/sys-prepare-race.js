@@ -1,6 +1,9 @@
 ﻿const { logger } = require('#/era-electron');
 
-const { reset_loc_mind_other_diff } = require('#/system/race/snippets');
+const {
+  reset_loc_mind_other_diff,
+  reset_running_style,
+} = require('#/system/race/snippets');
 
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
@@ -161,24 +164,12 @@ function sys_prepare_race(list_chara, team_list, race_info) {
     uma.race.conditionParams.order_rate_out20_continue = 1;
     uma.race.conditionParams.order_rate_out40_continue = 1;
     uma.race.conditionParams.order_rate_out50_continue = 1;
+    uma.race.conditionParams.order_rate_out70_continue = 1;
     uma.race.conditionParams.overtake_target_no_order_up_time = 0;
     uma.race.conditionParams.overtake_target_time = 0;
     uma.race.conditionParams.phase = 0;
     uma.race.conditionParams.phase_firstquarter = 0;
-    uma.race.conditionParams.running_style = uma.style + 1;
-    uma.race.conditionParams.running_style_count_nige_otherself =
-      running_style_counts[0] - (uma.style === 0);
-    uma.race.conditionParams.running_style_count_senko_otherself =
-      running_style_counts[1] - (uma.style === 1);
-    uma.race.conditionParams.running_style_count_sashi_otherself =
-      running_style_counts[2] - (uma.style === 2);
-    uma.race.conditionParams.running_style_count_oikomi_otherself =
-      running_style_counts[3] - (uma.style === 3);
-    uma.race.conditionParams.running_style_count_same =
-      running_style_counts[uma.style];
-    uma.race.conditionParams.running_style_count_same_rate =
-      (uma.race.conditionParams.running_style_count_same * 100) /
-      list_chara.length;
+    reset_running_style(uma, running_style_counts, list_chara.length);
     uma.race.conditionParams.running_style_equal_popularity_one = Number(
       uma.style === pop_1.style,
     );
@@ -509,9 +500,9 @@ function sys_prepare_race(list_chara, team_list, race_info) {
     // 由智力决定最终冲刺计划的选择概率
     uma.probs.planRush = 0.15 + 0.0005 * uma.attrs[attr_enum.intelligence];
 
-    uma.base.loc_mind_style = uma.style;
+    uma.race.style = uma.style;
 
-    if (uma.base.loc_mind_style > 0) {
+    if (uma.race.style > 0) {
       reset_loc_mind_other_diff(uma, race_info);
     }
   }

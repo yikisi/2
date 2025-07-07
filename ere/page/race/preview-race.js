@@ -1,7 +1,11 @@
 const era = require('#/era-electron');
 
+const { get_sex_acceptable } = require('#/system/ero/sys-calc-ero-status');
+
 const date_indicator = require('#/page/components/date-indicator');
 const print_race_track_chart = require('#/page/race/race-track-chart');
+
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const {
   adaptability_colors,
@@ -11,6 +15,8 @@ const {
   motivation_colors,
 } = require('#/data/color-const');
 const { attr_colors } = require('#/data/const.json');
+const { item_enum, item_names } = require('#/data/ero/item-const');
+const { vp_status_enum } = require('#/data/ero/status-const');
 const {
   get_adaptability_rank,
   get_attr_rank,
@@ -28,10 +34,11 @@ const pop_mark = ['➖', '◎', '◯', '▲', '△', '△'];
 /** @param {PseudoUma} chara */
 function generate_attribute_info(chara) {
   const ret = [];
-  chara.attrs.forEach((value, index) => {
-    const attr_buff_list = chara.attr_buffs[index],
-      rank = get_attr_rank(value),
-      rank_color = adaptability_colors[get_rank_level(rank)];
+  chara.attrs.forEach((_val, index) => {
+    const value = Math.floor(_val);
+    const attr_buff_list = chara.attr_buffs[index];
+    const rank = get_attr_rank(value);
+    const rank_color = adaptability_colors[get_rank_level(rank)];
     ret.push(
       {
         config: {
@@ -53,10 +60,10 @@ function generate_attribute_info(chara) {
           {
             content: `${value.toLocaleString()} (${rank})`,
             title: attr_buff_list.length
-              ? `${value.toString()}=${Math.floor(
+              ? `${value.toLocaleString()}=${Math.floor(
                   era.get(`base:${chara.index_chara}:${attr_names[index]}`),
                 )}(基础)${attr_buff_list.join('')}`
-              : undefined,
+              : void 0,
           },
         ],
         type: 'text',
@@ -78,6 +85,7 @@ async function preview_race(
   contestants,
   is_grand_live = false,
 ) {
+  const item_inf = era.get('flag:道具影响');
   await era.clear();
   era.drawLine();
   const race_header = [
@@ -88,9 +96,9 @@ async function preview_race(
     },
     {
       config: { align: 'center' },
-      content: `${info.track ? RaceInfo.track_names[info.track] : '训练场'} ${adaptability_names[
+      content: `${info.track > 0 ? RaceInfo.track_names[info.track] : '训练场'} ${adaptability_names[
         info.ground
-      ].substring(0, 1)} ${info.span}m (${adaptability_names[
+      ].substring(0, 1)} ${info.span.toLocaleString()}m (${adaptability_names[
         info.distance + 2
       ].substring(
         0,
@@ -114,14 +122,42 @@ async function preview_race(
   }
   await era.clear();
   const skill_buffer = [];
-  let flag_prepare_race = true,
-    cur_chara = team_list[0],
-    uma_index = contestants.indexOf(cur_chara),
-    attribute_info = generate_attribute_info(cur_chara),
-    strategy_ability = cur_chara.adapt_style_list.map(get_adaptability_rank),
-    flag_print = true;
+  const item_chara = team_list.filter((e) => {
+    const { index_chara: cid } = e;
+    if (!cid) {
+      return true;
+    }
+    if (
+      cid > 0 &&
+      !e.legend &&
+      era.get(`exp:${cid}:性爱次数`) > era.get(`exp:${cid}:睡奸次数`)
+    ) {
+      if (era.get(`love:${cid}`) >= 50 && get_sex_acceptable(cid) > 0) {
+        return true;
+      }
+      const mark_check = Math.max(
+        era.get(`mark:${cid}:淫纹`) ||
+          era.get(`mark:${cid}:欢愉`) -
+            Math.max(era.get(`mark:${cid}:苦痛`), era.get(`mark:${cid}:羞耻`)),
+        era.get(`mark:${cid}:顺从`) - era.get(`mark:${cid}:反抗`),
+      );
+      if (
+        mark_check === 3 ||
+        (mark_check > 0 && mark_check / 3 > Math.random())
+      ) {
+        return true;
+      }
+    }
+    return false;
+  });
+  let flag_prepare_race = true;
+  let cur_chara = team_list[0];
+  let uma_index = contestants.indexOf(cur_chara);
+  let attribute_info = generate_attribute_info(cur_chara);
+  let strategy_ability = cur_chara.adapt_style_list.map(get_adaptability_rank);
+  let flag_print = true;
   cur_chara.list_skill.forEach((s) =>
-    skill_buffer.push(...s.data.get_colored_name()),
+    skill_buffer.push(...s.data.get_colored_name(cur_chara)),
   );
   while (flag_prepare_race) {
     era.setVerticalAlign('middle');
@@ -203,7 +239,7 @@ async function preview_race(
                           `cflag:${cur_chara.index_chara}:${adaptability_names[info.ground]}适性`,
                         ),
                       )}(基础)${cur_chara.ground_buffs.join('')}`
-                    : undefined,
+                    : void 0,
               },
             ],
             type: 'text',
@@ -223,14 +259,14 @@ async function preview_race(
                           `cflag:${cur_chara.index_chara}:${adaptability_names[2 + info.distance]}适性`,
                         ),
                       )}(基础)${cur_chara.dis_buffs.join('')}`
-                    : undefined,
+                    : void 0,
               },
             ],
             type: 'text',
           },
           { config: { content: '出走策略' }, type: 'divider' },
-          ...new Array(4).fill(0).map((_, i) => {
-            return team_list.indexOf(cur_chara) !== -1
+          ...new Array(4).fill(0).map((_, i) =>
+            team_list.indexOf(cur_chara) !== -1
               ? {
                   accelerator: 21 + i,
                   config: {
@@ -251,8 +287,8 @@ async function preview_race(
                   },
                   content: `${adaptability_names[6 + i].substring(0, 1)} ${strategy_ability[i]}`,
                   type: 'text',
-                };
-          }),
+                },
+          ),
           { config: { content: '习得技能' }, type: 'divider' },
           {
             config: { align: 'center' },
@@ -276,27 +312,25 @@ async function preview_race(
       {
         columns: [
           { type: 'divider' },
-          ...contestants.map((uma, i) => {
-            const id = uma.index_chara;
-            return {
-              accelerator: i + 1,
-              config: {
-                align: 'center',
-                buttonType: uma.legend
-                  ? 'danger'
-                  : team_list.indexOf(uma) !== -1
-                    ? 'success'
-                    : 'warning',
-                disabled: id === cur_chara.index_chara,
-                disableWarning: true,
-                width: 4,
-              },
-              content: `${uma.name} ${adaptability_names[
-                6 + uma.style
-              ].substring(0, 1)}`,
-              type: 'button',
-            };
-          }),
+          ...contestants.map((uma, i) => ({
+            accelerator: i + 1,
+            config: {
+              align: 'center',
+              buttonType: uma.legend
+                ? 'danger'
+                : team_list.indexOf(uma) !== -1
+                  ? 'success'
+                  : 'warning',
+              disabled: uma.index_chara === cur_chara.index_chara,
+              disableWarning: true,
+              width: 4,
+            },
+            content: `${uma.name} ${adaptability_names[6 + uma.style].substring(
+              0,
+              1,
+            )}`,
+            type: 'button',
+          })),
           {
             config: { align: 'center' },
             content: [
@@ -310,20 +344,24 @@ async function preview_race(
           { type: 'divider' },
           {
             accelerator: 100,
-            config: {
-              width: 12,
-              align: 'center',
-            },
+            config: { width: 8, align: 'center' },
             content: '出走！',
             type: 'button',
           },
           {
             accelerator: 110,
-            config: {
-              width: 12,
-              align: 'center',
-            },
+            config: { width: 8, align: 'center' },
             content: '赛场数据',
+            type: 'button',
+          },
+          {
+            accelerator: 120,
+            config: {
+              align: 'center',
+              disabled: item_chara.length === 0,
+              width: 8,
+            },
+            content: '使用玩具',
             type: 'button',
           },
         ],
@@ -336,25 +374,421 @@ async function preview_race(
     if (ret === 100) {
       await era.clear();
       flag_prepare_race = false;
-    } else {
-      if (ret === 110) {
-        await era.clear((await print_race_track_chart(info)) - line_num);
-      } else if (ret >= 21) {
-        cur_chara.style = era.set(
-          `cflag:${cur_chara.index_chara}:跑法`,
-          ret - 21,
-        );
-      } else if (ret <= 20) {
-        cur_chara = contestants[(uma_index = ret - 1)];
-        attribute_info = generate_attribute_info(cur_chara);
-        strategy_ability = cur_chara.adapt_style_list.map(
-          get_adaptability_rank,
-        );
-        skill_buffer.splice(0);
-        cur_chara.list_skill.forEach((s) =>
-          skill_buffer.push(...s.data.get_colored_name()),
-        );
+    } else if (ret === 110) {
+      await era.clear((await print_race_track_chart(info)) - line_num);
+    } else if (ret === 120) {
+      const curr = era.getLineCount();
+      era.drawLine();
+      let flag = true;
+      let index = 0;
+      let chara = get_chara_talk(item_chara[index].index_chara);
+      while (flag) {
+        await era.clear(era.getLineCount() - curr - 1);
+        era.print(['为 ', chara.get_colored_full_name(), ' 装备性玩具：']);
+        const b_item = era.get(`equip:${chara.id}:胸部`);
+        if (chara.sex_code !== 1) {
+          era.printMultiColumns([
+            { config: { width: 2 }, content: '乳头', type: 'text' },
+            {
+              accelerator: 1,
+              config: {
+                disabled: !b_item && era.get('item:跳蛋') < 2,
+                width: 22,
+              },
+              content: b_item > 0 ? item_names[b_item] : '无',
+              type: 'button',
+            },
+          ]);
+        }
+        const p_item = era.get(`equip:${chara.id}:阴茎`);
+        const c_item = era.get(`equip:${chara.id}:阴蒂`);
+        if (
+          chara.sex_code > 0 ||
+          item_chara[index].ero.main.at(-1) === 'penis'
+        ) {
+          era.printMultiColumns([
+            { config: { width: 2 }, content: '肉棒', type: 'text' },
+            {
+              accelerator: 2,
+              config: {
+                disabled: !p_item && era.get('item:飞机杯') < 1,
+                width: 22,
+              },
+              content: p_item > 0 ? item_names[p_item] : '无',
+              type: 'button',
+            },
+          ]);
+        } else {
+          era.printMultiColumns([
+            { config: { width: 2 }, content: '阴核', type: 'text' },
+            {
+              accelerator: 3,
+              config: {
+                disabled:
+                  !c_item &&
+                  era.get('item:跳蛋') < 1 &&
+                  era.get('item:夹子') < 1,
+                width: 22,
+              },
+              content: c_item > 0 ? item_names[c_item] : '无',
+              type: 'button',
+            },
+          ]);
+        }
+        const v_item = era.get(`equip:${chara.id}:阴道`);
+        if (chara.sex_code !== 1) {
+          era.printMultiColumns([
+            { config: { width: 2 }, content: '小穴', type: 'text' },
+            {
+              accelerator: 4,
+              config: {
+                disabled:
+                  !v_item &&
+                  era.get('item:跳蛋') < 1 &&
+                  era.get('item:伪器') < 1,
+                width: 22,
+              },
+              content: v_item > 0 ? item_names[v_item] : '无',
+              type: 'button',
+            },
+          ]);
+        }
+        const a_item = era.get(`equip:${chara.id}:肛门`);
+        era.printMultiColumns([
+          { config: { width: 2 }, content: '屁穴', type: 'text' },
+          {
+            accelerator: 5,
+            config: {
+              disabled:
+                !a_item &&
+                era.get('item:伪器') < 1 &&
+                era.get('item:肛塞') < 1 &&
+                era.get('item:拉珠') < 1,
+              width: 22,
+            },
+            content: a_item > 0 ? item_names[a_item] : '无',
+            type: 'button',
+          },
+        ]);
+        if (item_chara.length > 1) {
+          era.printButton(`上一位 ${item_chara[index - 1]?.name ?? '-'}`, 10, {
+            disabled: index === 0,
+          });
+          era.printButton(`下一位 ${item_chara[index + 1]?.name ?? '-'}`, 11, {
+            disabled: index === item_chara.length - 1,
+          });
+        }
+        era.printButton('结束', 99);
+        let ret = await era.input();
+        switch (ret) {
+          case 1:
+            era.printMultiColumns([
+              {
+                config: {
+                  content: `为 ${chara.get_full_name()} 的 乳头 装备性玩具`,
+                  width: 12,
+                },
+                type: 'divider',
+              },
+              { content: [], type: 'text' },
+              { config: { width: 2 }, content: '跳蛋', type: 'text' },
+              {
+                accelerator: 1,
+                config: { width: 4 },
+                content: b_item === item_enum.love_eggs ? '摘下' : '装上',
+                type: 'button',
+              },
+              {
+                config: { width: 18 },
+                content: [
+                  '还有 ',
+                  era.get('item:跳蛋').toLocaleString(),
+                  ' 件',
+                ],
+                type: 'text',
+              },
+              { accelerator: 9, content: '返回', type: 'button' },
+            ]);
+            if ((await era.input()) !== 9) {
+              if (b_item === item_enum.love_eggs) {
+                era.set(`equip:${chara.id}:胸部`, 0);
+                era.add('item:跳蛋', 2);
+              } else {
+                era.set(`equip:${chara.id}:胸部`, item_enum.love_eggs);
+                era.add('item:跳蛋', -2);
+              }
+            }
+            break;
+          case 2:
+            era.printMultiColumns([
+              {
+                config: {
+                  content: `为 ${chara.get_full_name()} 的 肉棒 装备性玩具`,
+                  width: 12,
+                },
+                type: 'divider',
+              },
+              { content: [], type: 'text' },
+              { config: { width: 2 }, content: '飞机杯', type: 'text' },
+              {
+                accelerator: 1,
+                config: { width: 4 },
+                content:
+                  p_item === item_enum.artificial_virgin ? '摘下' : '装上',
+                type: 'button',
+              },
+              {
+                config: { width: 18 },
+                content: [
+                  '还有 ',
+                  era.get('item:飞机杯').toLocaleString(),
+                  ' 件',
+                ],
+                type: 'text',
+              },
+              { accelerator: 9, content: '返回', type: 'button' },
+            ]);
+            if ((await era.input()) !== 9) {
+              if (p_item === item_enum.artificial_virgin) {
+                era.set(`equip:${chara.id}:阴茎`, 0);
+                era.add('item:飞机杯', 1);
+              } else {
+                era.set(`equip:${chara.id}:阴茎`, item_enum.artificial_virgin);
+                era.add('item:飞机杯', -1);
+              }
+            }
+            break;
+          case 3:
+            era.printMultiColumns([
+              {
+                config: {
+                  content: `为 ${chara.get_full_name()} 的 阴核 装备性玩具`,
+                  width: 12,
+                },
+                type: 'divider',
+              },
+              { content: [], type: 'text' },
+              ...[item_enum.clamps, item_enum.love_eggs].reduce((p, c) => {
+                const count = era.get(`item:${item_names[c]}`);
+                p.push(
+                  {
+                    config: { width: 2 },
+                    content: item_names[c],
+                    type: 'text',
+                  },
+                  {
+                    accelerator: c,
+                    config: {
+                      disabled: c_item !== c && count < 1,
+                      width: 4,
+                    },
+                    content: c_item === c ? '摘下' : '装上',
+                    type: 'button',
+                  },
+                  {
+                    config: { width: 18 },
+                    content: ['还有 ', count.toLocaleString(), ' 件'],
+                    type: 'text',
+                  },
+                );
+                return p;
+              }, []),
+              { accelerator: 9, content: '返回', type: 'button' },
+            ]);
+            ret = await era.input();
+            if (ret !== 9) {
+              if (c_item === ret) {
+                era.set(`equip:${chara.id}:阴蒂`, 0);
+                era.add(`item:${item_names[ret]}`, 1);
+              } else {
+                era.set(`equip:${chara.id}:阴蒂`, ret);
+                era.add(`item:${item_names[ret]}`, -1);
+              }
+            }
+            break;
+          case 4:
+            era.printMultiColumns([
+              {
+                config: {
+                  content: `为 ${chara.get_full_name()} 的 小穴 装备性玩具`,
+                  width: 12,
+                },
+                type: 'divider',
+              },
+              { content: [], type: 'text' },
+              ...[item_enum.love_eggs, item_enum.dildo].reduce((p, c) => {
+                const check =
+                  c === item_enum.dildo &&
+                  era.get(`talent:${chara.id}:处女`) !== vp_status_enum.no;
+                const count = era.get(`item:${item_names[c]}`);
+                p.push(
+                  {
+                    config: { width: 2 },
+                    content: item_names[c],
+                    type: 'text',
+                  },
+                  {
+                    accelerator: c,
+                    config: {
+                      disabled: check || (v_item !== c && count < 1),
+                      title: check ? '还是处女！' : void 0,
+                      width: 4,
+                    },
+                    content: v_item === c ? '摘下' : '装上',
+                    type: 'button',
+                  },
+                  {
+                    config: { width: 18 },
+                    content: ['还有 ', count.toLocaleString(), ' 件'],
+                    type: 'text',
+                  },
+                );
+                return p;
+              }, []),
+              { accelerator: 9, content: '返回', type: 'button' },
+            ]);
+            ret = await era.input();
+            if (ret !== 9) {
+              if (v_item === ret) {
+                era.set(`equip:${chara.id}:阴道`, 0);
+                era.add(`item:${item_names[ret]}`, 1);
+              } else {
+                era.set(`equip:${chara.id}:阴道`, ret);
+                era.add(`item:${item_names[ret]}`, -1);
+              }
+            }
+            break;
+          case 5:
+            era.printMultiColumns([
+              {
+                config: {
+                  content: `为 ${chara.get_full_name()} 的 屁穴 装备性玩具`,
+                  width: 12,
+                },
+                type: 'divider',
+              },
+              { content: [], type: 'text' },
+              ...[
+                item_enum.dildo,
+                item_enum.butt_plug,
+                item_enum.anal_beads,
+              ].reduce((p, c, i) => {
+                const check = era.get(`exp:${chara.id}:肛交次数`) < 10 - i * 5;
+                const count = era.get(`item:${item_names[c]}`);
+                p.push(
+                  {
+                    config: { width: 2 },
+                    content: item_names[c],
+                    type: 'text',
+                  },
+                  {
+                    accelerator: c,
+                    config: {
+                      disabled: check || (a_item !== c && count < 1),
+                      title: check ? '肛交经验不足！' : void 0,
+                      width: 4,
+                    },
+                    content: a_item === c ? '摘下' : '装上',
+                    type: 'button',
+                  },
+                  {
+                    config: { width: 18 },
+                    content: ['还有 ', count.toLocaleString(), ' 件'],
+                    type: 'text',
+                  },
+                );
+                return p;
+              }, []),
+              { accelerator: 9, content: '返回', type: 'button' },
+            ]);
+            ret = await era.input();
+            if (ret !== 9) {
+              if (a_item === ret) {
+                era.set(`equip:${chara.id}:肛门`, 0);
+                era.add(`item:${item_names[ret]}`, 1);
+              } else {
+                era.set(`equip:${chara.id}:肛门`, ret);
+                era.add(`item:${item_names[ret]}`, -1);
+              }
+            }
+            break;
+          case 10:
+            chara = get_chara_talk(item_chara[--index].index_chara);
+            break;
+          case 11:
+            chara = get_chara_talk(item_chara[++index].index_chara);
+            break;
+          case 99:
+            flag = false;
+        }
       }
+      await era.clear(era.getLineCount() - curr);
+      item_chara.forEach((u) => {
+        const { index_chara: cid } = u;
+        const o_has_item = u.race.conditionParams.item;
+        u.ero.item.breast = era.get(`equip:${cid}:胸部`);
+        u.ero.item.penis = era.get(`equip:${cid}:阴茎`);
+        u.ero.item.clitoris = era.get(`equip:${cid}:阴蒂`);
+        u.ero.item.virgin = era.get(`equip:${cid}:阴道`);
+        u.ero.item.anal = era.get(`equip:${cid}:肛门`);
+        u.race.conditionParams.item = +Object.values(u.ero.item).reduce(
+          (p, c) => p || c > 0,
+          false,
+        );
+        if (o_has_item === u.race.conditionParams.item) {
+          return;
+        }
+        const ero_skill_level = u.list_skill.find(
+          (s) => s.data.group_id === 66003,
+        )?.data?.group_level;
+        const buff_length = u.attr_buffs[0].length;
+        if (ero_skill_level === 2) {
+          const has_buff =
+            u.attr_buffs[0].findIndex((b) => b.endsWith('[欢愉赐福]')) !== -1;
+          if (u.race.conditionParams.item === 1 && !has_buff) {
+            u.attr_buffs.forEach((l) => l.push('+10%[欢愉赐福]'));
+          } else if (!u.race.conditionParams.item && has_buff) {
+            u.attr_buffs = u.attr_buffs.map((l) =>
+              l.filter((b) => b !== '+10%[欢愉赐福]'),
+            );
+          }
+        } else if (era.get('flag:道具影响') !== 0 && ero_skill_level !== 1) {
+          const has_debuff =
+            u.attr_buffs[0].findIndex((b) => b.endsWith('[性玩具]')) !== -1;
+          if (u.race.conditionParams.item === 1 && !has_debuff) {
+            u.attr_buffs.forEach((l) => l.push(`${item_inf}%[性玩具]`));
+          } else if (!u.race.conditionParams.item && has_debuff) {
+            u.attr_buffs = u.attr_buffs.map((l) =>
+              l.filter((b) => b !== `${item_inf}%[性玩具]`),
+            );
+          }
+        }
+        if (u === cur_chara && o_has_item !== u.race.conditionParams.item) {
+          skill_buffer.splice(0);
+          cur_chara.list_skill.forEach((s) =>
+            skill_buffer.push(...s.data.get_colored_name(cur_chara)),
+          );
+        }
+        if (buff_length !== u.attr_buffs[0].length) {
+          u.calc_attrs();
+          if (u === cur_chara) {
+            attribute_info = generate_attribute_info(cur_chara);
+          }
+        }
+      });
+    } else if (ret >= 21) {
+      cur_chara.style = era.set(
+        `cflag:${cur_chara.index_chara}:跑法`,
+        ret - 21,
+      );
+    } else if (ret <= 20) {
+      cur_chara = contestants[(uma_index = ret - 1)];
+      attribute_info = generate_attribute_info(cur_chara);
+      strategy_ability = cur_chara.adapt_style_list.map(get_adaptability_rank);
+      skill_buffer.splice(0);
+      cur_chara.list_skill.forEach((s) =>
+        skill_buffer.push(...s.data.get_colored_name(cur_chara)),
+      );
     }
   }
 }

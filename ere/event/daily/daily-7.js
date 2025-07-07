@@ -6,6 +6,7 @@ const era = require('#/era-electron');
 
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
+const lines = require('#/event/daily/daily-7.kojo');
 const CustomizedDaily = require('#/event/daily/daily-common');
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
 const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
@@ -20,9 +21,20 @@ const { escape_enum } = require('#/data/basement-const');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
 module.exports = class extends CustomizedDaily {
+  get #dict() {
+    const o = {};
+    const gold_ship = get_chara_talk(this.id);
+    o['她'] = gold_ship.sex;
+    o['马娘'] = gold_ship.get_uma_sex_title();
+    o['代表色'] = gold_ship.color;
+    o['你'] = era.get('callname:0:-2');
+    o['玩家名'] = era.get('callname:0:-1');
+    return o;
+  }
+
   good_morning() {
-    const gold_ship = get_chara_talk(7),
-      life_marks = LifeEventMarks.get_marks(7);
+    const gold_ship = get_chara_talk(7);
+    const life_marks = LifeEventMarks.get_marks(7);
     if (life_marks.b_escape) {
       switch (life_marks.b_escape) {
         case escape_enum.sneak:
@@ -591,5 +603,13 @@ module.exports = class extends CustomizedDaily {
         },
       ]);
     }
+  }
+
+  async basement_end() {
+    await lines['basement_end'](this.#dict);
+  }
+
+  async slave_end() {
+    await lines['slave_end'](this.#dict);
   }
 };

@@ -1,6 +1,9 @@
 const era = require('#/era-electron');
 
-const { sys_check_yandere } = require('#/system/chara/sys-calc-cheat');
+const {
+  sys_check_cuckold,
+  sys_check_yandere,
+} = require('#/system/chara/sys-calc-cheat');
 const {
   check_pregnant_unprotect,
   check_want_to_escape,
@@ -58,9 +61,12 @@ class CustomizedCheck {
     return this;
   }
 
-  /** @param {number[]} partners */
+  /**
+   * @param {number[]} partners
+   * @param {boolean} is_aware
+   */
   // eslint-disable-next-line no-unused-vars
-  check_after_betrayed(partners) {}
+  check_after_betrayed(partners, is_aware) {}
 
   /** @param {number} level */
   // eslint-disable-next-line no-unused-vars
@@ -223,8 +229,29 @@ class CustomizedCheck {
   }
 
   /** @returns {boolean} */
+  // eslint-disable-next-line no-unused-vars
+  is_aware_unfaithful(partnet_list) {
+    const is_yandere = sys_check_yandere(this.id, (y) => y > 0);
+    if (era.get('flag:不忠惩罚') === 0 && !is_yandere) {
+      return false;
+    }
+    let ratio = 0.75 - 0.25 * era.get(`talent:${this.id}:洁净重视`);
+    if (!sys_check_awake(this.id)) {
+      ratio /= 2;
+    }
+    if (era.get(`cflag:${this.id}:位置`) !== era.get('cflag:0:位置')) {
+      ratio /= 2;
+    }
+    if (is_yandere) {
+      ratio *= 1 + era.get(`talent:${this.id}:病娇`);
+    }
+    return ratio >= 1 || Math.random() < ratio;
+  }
+
+  /** @returns {boolean} */
   is_prison() {
     if (
+      !era.get(`cflag:${this.id}:种族`) ||
       common_no_action_check(this.id) ||
       era.get('flag:当前位置') === location_enum.basement ||
       era.get('cflag:0:位置') !== 0 ||
@@ -283,6 +310,7 @@ class CustomizedCheck {
   is_rape_in_sleeping() {
     const inmon = CharaInmon.get(this.id);
     if (
+      !era.get(`cflag:${this.id}:种族`) ||
       common_no_action_check(this.id) ||
       check_want_to_escape(this.id) ||
       inmon.slave > 0 ||
@@ -352,14 +380,17 @@ class CustomizedCheck {
     ) {
       return 0;
     }
-    let ratio = 0;
-    ratio =
+    let ratio =
       Math.log(Math.max(6 * love - era.get(`relation:${this.id}:0`), 1)) /
         log_600m4 +
       Math.pow(2, era.get(`base:${this.id}:性欲`) / 1250 - 8) *
         (0.7 + 0.1 * era.get(`mark:${this.id}:欢愉`)) +
       0.05 * era.get(`talent:${this.id}:工口意愿`) -
       0.5 * get_action_debuff(this.id);
+    let is_cuckold = 0;
+    if (era.get('flag:床伴') > 0 && sys_check_cuckold(this.id, inmon)) {
+      ratio += is_cuckold = 0.5;
+    }
     ratio *= (3 - era.get(`mark:${this.id}:反抗`)) / 3;
     const dice = Math.random();
     era.logger.debug(
@@ -373,7 +404,7 @@ class CustomizedCheck {
         era.get(`base:${this.id}:性欲`) / 1250 - 8,
       )}(性欲)*(0.7+${0.1 * era.get(`mark:${this.id}:欢愉`)}(欢愉))+${
         0.05 * era.get(`talent:${this.id}:工口意愿`)
-      }(好色)-${0.5 * get_action_debuff(this.id)}(行动debuff)`,
+      }(好色)+${is_cuckold}(绿帽癖)-${0.5 * get_action_debuff(this.id)}(行动debuff)`,
     );
     if (ratio >= 1 || dice < ratio) {
       if (inmon.slave > 0) {

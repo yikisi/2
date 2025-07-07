@@ -6,19 +6,19 @@ const dict = {};
 
 class CharaSkills {
   /**
-   * @param {number} chara_id
+   * @param {number} cid
    * @returns {CharaSkills}
    */
-  static get(chara_id) {
-    return dict[chara_id] || (dict[chara_id] = new CharaSkills(chara_id));
+  static get(cid) {
+    return dict[cid] || (dict[cid] = new CharaSkills(cid));
   }
 
   /** @type {number} */
   #id;
 
-  /** @param {number} chara_id */
-  constructor(chara_id) {
-    this.#id = chara_id;
+  /** @param {number} cid */
+  constructor(cid) {
+    this.#id = cid;
   }
 
   /**

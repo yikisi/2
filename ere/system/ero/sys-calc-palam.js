@@ -24,19 +24,35 @@ const {
 } = require('#/data/ero/part-const');
 const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 
+const temp = [
+  part_enum.mouth,
+  part_enum.breast,
+  part_enum.body,
+  part_enum.anal,
+  part_enum.sadism,
+  part_enum.masochism,
+];
+
+const active_p_l = [
+  undefined,
+  [...temp, part_enum.penis],
+  [...temp, part_enum.clitoris, part_enum.virgin],
+  [...temp, part_enum.penis, part_enum.virgin],
+];
+
 let tmp = {};
 
 /**
- * @param {number} id
+ * @param {number} cid
  * @param {number} part
  * @param {number} _attack hurt value
  */
-function add_palam(id, part, _attack) {
+function add_palam(cid, part, _attack) {
   let attack = _attack;
   if (part === part_enum.breast) {
-    attack /= 1 + 0.2 * era.get(`talent:${id}:乳房尺寸`);
+    attack /= 1 + 0.2 * era.get(`talent:${cid}:乳房尺寸`);
   }
-  attack *= 1 - 0.2 * era.get(`talent:${id}:贞洁看法`);
+  attack *= 1 - 0.2 * era.get(`talent:${cid}:贞洁看法`);
   const key = part_names[part];
   if (!key) {
     return;
@@ -47,51 +63,58 @@ function add_palam(id, part, _attack) {
   // 高潮抑制-10%快感累积
   let coff =
     1 +
-    0.25 * (era.get(`base:${id}:性欲`) >= lust_border.want_sex) +
-    0.25 * era.get(`tcvar:${id}:发情`) +
-    0.2 * (era.get(`tcvar:${id}:余韵`) > 0) -
-    0.1 * (era.get(`tcvar:${id}:高潮抑制`) > 0);
+    0.25 * (era.get(`base:${cid}:性欲`) >= lust_border.want_sex) +
+    0.25 * era.get(`tcvar:${cid}:发情`) +
+    0.2 * (era.get(`tcvar:${cid}:余韵`) > 0) -
+    0.1 * (era.get(`tcvar:${cid}:高潮抑制`) > 0);
   if (part === part_enum.penis) {
     // 不应期内阴茎快感提升-90%
-    if (era.get(`tcvar:${id}:不应期`)) {
+    if (era.get(`tcvar:${cid}:不应期`)) {
       coff -= 0.9;
-    } else if (era.get(`tcvar:${id}:避孕套`)) {
+    } else if (era.get(`tcvar:${cid}:避孕套`)) {
       // 避孕套-10%快感
       coff -= 0.1;
     }
   }
-  const chara_inmon = CharaInmon.get(id);
-  if (chara_inmon.on(plugin_enum.al_u1)) {
+  // 自己拿自己的宝珠
+  // 淫纹不会加成宝珠获取
+  add_juel(cid, `${key}快感`, attack * coff);
+  const inmon = CharaInmon.get(cid);
+  if (inmon.on(plugin_enum.al_u1)) {
     coff += 0.5;
-  } else if (chara_inmon.on(plugin_enum.al_u2)) {
+  } else if (inmon.on(plugin_enum.al_u2)) {
     coff += 1;
-  } else if (chara_inmon.on(plugin_enum.al_u3)) {
+  } else if (inmon.on(plugin_enum.al_u3)) {
     coff += 2;
-  } else if (chara_inmon.on(plugin_enum.al_d1)) {
+  } else if (inmon.on(plugin_enum.al_d1)) {
     coff -= 0.1;
-  } else if (chara_inmon.on(plugin_enum.al_d2)) {
+  } else if (inmon.on(plugin_enum.al_d2)) {
     coff -= 0.3;
-  } else if (chara_inmon.on(plugin_enum.al_d3)) {
+  } else if (inmon.on(plugin_enum.al_d3)) {
     coff -= 0.7;
   }
   const plug_key = part_enum.keys[part].substring(0, 2);
-  if (chara_inmon.on(plugin_enum[`${plug_key}_u1`])) {
+  if (inmon.on(plugin_enum[`${plug_key}_u1`])) {
     coff += 1;
-  } else if (chara_inmon.on(plugin_enum[`${plug_key}_u2`])) {
+  } else if (inmon.on(plugin_enum[`${plug_key}_u2`])) {
     coff += 2;
-  } else if (chara_inmon.on(plugin_enum[`${plug_key}_u3`])) {
+  } else if (inmon.on(plugin_enum[`${plug_key}_u3`])) {
     coff += 4;
-  } else if (chara_inmon.on(plugin_enum[`${plug_key}_d1`])) {
+  } else if (inmon.on(plugin_enum[`${plug_key}_d1`])) {
     coff -= 0.2;
-  } else if (chara_inmon.on(plugin_enum[`${plug_key}_d2`])) {
+  } else if (inmon.on(plugin_enum[`${plug_key}_d2`])) {
     coff -= 0.4;
-  } else if (chara_inmon.on(plugin_enum[`${plug_key}_d3`])) {
+  } else if (inmon.on(plugin_enum[`${plug_key}_d3`])) {
     coff -= 0.8;
   }
   attack *= coff;
-  tmp[id][key] += attack;
-  // 自己拿自己的宝珠
-  add_juel(id, `${key}快感`, attack);
+  if (inmon.on(plugin_enum.avg)) {
+    active_p_l[
+      (get_penis_size(cid) > 0) + (era.get(`cflag:${cid}:性别`) !== 1) * 2
+    ].forEach((p, _, l) => (tmp[cid][part_names[p]] += attack / l.length));
+  } else {
+    tmp[cid][key] += attack;
+  }
 }
 
 /**
@@ -138,11 +161,10 @@ function calc_pleasure(chara_id, part, attack, pass_transfer) {
  */
 function update_palam(chara_id, part, shown) {
   const key = part_names[part];
-  const palam_name = key + '快感';
+  const param_name = key + '快感';
   // 快感加成已在sys-calc-ero.js中计算，因子加成在sys-calc-juel.js中计算，不重复计算
-  let attack = Math.ceil(
-    tmp[chara_id][key] * (1 + 0.1 * (sys_get_chara(chara_id) === -3)),
-  );
+  let attack =
+    tmp[chara_id][key] * (1 + 0.1 * (sys_get_chara(chara_id) === -3));
   switch (part) {
     case part_enum.sadism:
       add_juel(chara_id, '羞耻', attack / 2);
@@ -165,25 +187,30 @@ function update_palam(chara_id, part, shown) {
       add_juel(chara_id, '顺从', attack / 2);
   }
   tmp[chara_id][key] = 0;
-  const new_val = era.add(`palam:${chara_id}:${palam_name}`, attack),
-    limit = era.get(`tcvar:${chara_id}:${palam_name}上限`);
-  shown &&
-    attack &&
+  const old_val = era.get(`param:${chara_id}:${param_name}`);
+  const new_val = era.add(`param:${chara_id}:${param_name}`, attack);
+  const _new = Math.floor(new_val);
+  const _old = Math.floor(old_val);
+  const limit = era.get(`tcvar:${chara_id}:${param_name}上限`);
+  if (shown && _new !== _old) {
     era.print([
       get_chara_talk(chara_id).get_colored_name(),
-      ` 的 ${palam_name} `,
+      ` 的 ${param_name}：`,
+      _old.toLocaleString(),
+      ' + ',
       {
-        content: `+${attack}`,
+        content: (_new - _old).toLocaleString(),
         color: palam_colors.notifications[1],
       },
-      '！现在是 ',
+      ' → ',
       {
-        content: `${new_val}`,
+        content: `${_new.toLocaleString()}`,
         color: get_color(...palam_colors.notifications, new_val / limit),
       },
-      `/${limit}`,
+      `/${limit.toLocaleString()}`,
     ]);
-  return { curr: new_val, max: limit, old: new_val - attack };
+  }
+  return { curr: new_val, max: limit, old: old_val };
 }
 
 module.exports = {
@@ -202,14 +229,14 @@ module.exports = {
    * @param {number} orgasm_times
    */
   update_palam_from_main_orgasm(chara_id, orgasm_times) {
-    const times = orgasm_times <= 6 ? orgasm_times : 6;
+    const times = Math.min(orgasm_times, 6);
     // 次要部位高潮会增加主要部位快感，无任何加减成
     // 只有本人能获得次要部位高潮获取的快感宝珠
-    if (get_penis_size(chara_id)) {
+    if (get_penis_size(chara_id) > 0) {
       // 男性和扶她加牛子快感
       add_palam(chara_id, part_enum.penis, palam_from_orgasm * times);
     }
-    if (era.get(`cflag:${chara_id}:阴道尺寸`)) {
+    if (era.get(`cflag:${chara_id}:阴道尺寸`) > 0) {
       // 女性和扶她加浦西快感
       add_palam(chara_id, part_enum.virgin, palam_from_orgasm * times);
     }

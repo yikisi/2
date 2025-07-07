@@ -91,7 +91,24 @@ const part_names4item = {};
 part_names4item[part_enum.breast] = '乳头';
 part_names4item[part_enum.clitoris] = '阴蒂';
 
+const base_enum = {
+  no: 0,
+  same: 0,
+  b_same: 0,
+  f_same: 0,
+  s_con: 0,
+  b_con: 0,
+  diff: 0,
+  s_tri: 0,
+  b_tri: 0,
+  d_tri: 0,
+  foot: 0,
+  b_foot: 0,
+};
+Object.keys(base_enum).forEach((k, i) => (base_enum[k] = i));
+
 module.exports = {
+  base_enum,
   /** 身体部位的枚举类型 */
   get_skill_list: (sex) => [
     '甜言蜜语',
@@ -112,14 +129,24 @@ module.exports = {
       .filter((e, i, l) => i === l.indexOf(e)),
   ],
   /** 身体部位对应的快感名称 */
+  motion_enum: {
+    // 躺
+    lie: 0,
+    // 坐
+    sit: 1,
+    // 站
+    stand: 2,
+    // 反向躺
+    rev: 3,
+  },
   part_enum,
   part_gifts,
+  /** 身体部位对应的部位名称 */
   part_names,
   part_names4item,
-  /** 身体部位对应的部位名称 */
-  part_skills,
+  part_skills /** 快感条名称数组 */,
   part_talents,
-  part_touch /** 快感条名称数组 */,
+  part_touch,
   pleasure_list: [
     part_enum.mouth,
     part_enum.breast,
@@ -145,4 +172,11 @@ module.exports = {
     part_enum.sadism,
     part_enum.masochism,
   ],
+  towards_enum: {
+    // 顺时针
+    right: 0,
+    // 逆时针
+    left: 1,
+  },
+  up_enum: { down: 0, up: 1 },
 };

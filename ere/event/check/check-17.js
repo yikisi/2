@@ -160,7 +160,7 @@ module.exports = class extends CustomizedCheck {
   }
 
   is_aim_race(race, edu_weeks, rank) {
-    const ret = aim_races[`${edu_weeks}_${race}`] || aim_races[race];
+    const ret = super.is_aim_race(race, edu_weeks, rank);
     if (!ret && era.get('flag:当前赛事') > 0) {
       const event_marks = new LunaEduMarks();
       if (

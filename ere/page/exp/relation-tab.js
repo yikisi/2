@@ -9,7 +9,7 @@ const {
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
-const { join_list } = require('#/utils/list-utils');
+const { join_to_string } = require('#/utils/list-utils');
 
 const { relation_colors } = require('#/data/const.json');
 const { get_relation_mark } = require('#/data/info-generator');
@@ -116,7 +116,7 @@ module.exports = {
       family_info_list.push({
         content: [
           '现在是 ',
-          join_list(
+          join_to_string(
             [
               children_count ? `${children_count} 个孩子的父亲` : '',
               birth_count ? `${birth_count} 个孩子的母亲` : '',

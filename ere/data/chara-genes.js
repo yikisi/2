@@ -12,16 +12,17 @@ class CharaGenes {
   /** @type {number} */
   all_count;
 
-  constructor(chara_id) {
-    this.#id = chara_id;
-    this.obj =
-      get(`skill:${chara_id}:继承因子`) ||
-      set(`skill:${chara_id}:继承因子`, {});
+  constructor(cid) {
+    this.#id = cid;
+    this.obj = get(`skill:${cid}:继承因子`) || set(`skill:${cid}:继承因子`, {});
     this.all_count = Object.values(this.obj).reduce((p, c) => p + c, 0);
   }
 
-  /** @type {number|string} gene */
+  /** @param {number|string} gene */
   add(gene) {
+    if (gene === 300000) {
+      return;
+    }
     this.obj[gene] || (this.obj[gene] = 0);
     this.obj[gene]++;
     this.clean_cache();

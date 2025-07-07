@@ -1,3 +1,20 @@
+/**
+ * EraUma - 愛若駑馬（EraUma）是以某頁遊公司旗下馬耳學生妹作品爲世界觀製作的一款同人文字冒險遊戲。
+ * 該世界觀的核心圍繞娘化的名賽馬和歷史上曾發生過的比賽展開。
+ * 玩家將在遊戲中扮演訓練員——即負責訓練馬娘的角色——與諸多馬娘邂逅並創作獨屬於玩家和其負責馬娘的故事。
+ *
+ * Copyright (C) 2025 UmaERA Team <erauma@tutanota.com>
+ *
+ * 本程序是免费软件；您可以根据自由软件基金会发布的 GNU 通用公共许可证
+ * 的条款重新分发和/或修改它；许可证的版本可以是第2版，也可以是（由您选择）
+ * 任何更高版本。
+ *
+ * 本程序的分发是希望它会有用，但没有任何担保；甚至没有适销性或特定用途
+ * 适用性的暗示担保。请参阅 GNU 通用公共许可证以获取更多详细信息。
+ *
+ * 您应该已经随本程序收到了 GNU 通用公共许可证的副本；如果没有，请联系
+ * UmaERA Team <erauma@tutanota.com>。
+ */
 const era = require('#/era-electron');
 
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
@@ -6,6 +23,7 @@ const new_game = require('#/page/new-game/page-new-game');
 const homepage = require('#/page/page-homepage');
 const load_game = require('#/page/page-load-game');
 
+const { check_edu_script } = require('#/event/edu/edu-factory');
 const { check_rec_script } = require('#/event/rec/rec-factory');
 
 const { say_by_passer_by } = require('#/utils/chara-talk');
@@ -19,14 +37,14 @@ const notes = require('#/data/notes.json');
 const { first_child_id, set_chara_ero_image } = require('#/data/other-const');
 
 /**
- * @param {number} chara_id
+ * @param {number} cid
  * @param {string} [_suffix]
  */
-function get_copyright_entry(chara_id, _suffix) {
+function get_copyright_entry(cid, _suffix) {
   const suffix = _suffix ? `（${_suffix}）` : '';
   return {
-    color: get_chara_color(chara_id),
-    content: `${era.get(`static:${chara_id}:name`)}${suffix}`,
+    color: get_chara_color(cid),
+    content: `${era.get(`static:${cid}:name`)}${suffix}`,
     fontWeight: 'bold',
   };
 }
@@ -91,7 +109,13 @@ module.exports = async () => {
     [[get_copyright_entry(3)], '天马闪光蹄'],
     // [[get_copyright_entry(4), { isDivider: true }, get_copyright_entry(46)], '黑奴一号'],
     [
-      [get_copyright_entry(7), { isDivider: true }, get_copyright_entry(21)],
+      [
+        get_copyright_entry(6),
+        { isDivider: true },
+        get_copyright_entry(7),
+        { isDivider: true },
+        get_copyright_entry(21),
+      ],
       '雞雞',
     ],
     [[get_copyright_entry(13)], '伊兰'],
@@ -214,6 +238,7 @@ module.exports = async () => {
     ],
     ['地下室地文', ['露娜俘虏', { isDivider: true }, '无名黑奴']],
     ['特殊角色（临时）', '无名黑奴'],
+    ['麦吉罗的呼唤', ['イーウィヤ', { isDivider: true }, '无名黑奴']],
   ];
   set_chara_ero_image();
   const gameBase = era.get('gamebase');
@@ -373,7 +398,7 @@ module.exports = async () => {
                     width: 6,
                   },
                   content: `${era.get(`static:${e}:name`)}${
-                    check_rec_script(e) ? '*' : ''
+                    check_rec_script(e) && check_edu_script(e) ? '*' : ''
                   }`,
                   type: 'button',
                 };
@@ -467,14 +492,14 @@ module.exports = async () => {
           say_by_passer_by(...note);
         }
         await era.waitAnyKey();
-        for (const id of Object.keys(notes)
+        for (const cid of Object.keys(notes)
           .filter((k) => k !== 'common')
           .map(Number)
           .sort((a, b) => a - b)) {
-          for (const note of notes[id]) {
+          for (const note of notes[cid]) {
             era.print(
               [{ content: note[0], fontWeight: 'bold' }, '「', note[1], '」'],
-              { color: get_chara_color(Number(id)) },
+              { color: get_chara_color(Number(cid)) },
             );
           }
           await era.waitAnyKey();
@@ -576,8 +601,10 @@ module.exports = async () => {
               '植物牙线',
               { isDivider: true },
               'フィンランド',
-              { isDivider: true },
+              { isBr: true },
               '提交bug',
+              { isDivider: true },
+              '洗发水',
             ],
             type: 'text',
           },

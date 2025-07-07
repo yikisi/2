@@ -137,8 +137,8 @@ class CallOfMejiro extends MejiroCity {
 
   async page(chara_id) {
     this.limit--;
-    const chara = get_chara_talk(chara_id),
-      me = get_chara_talk(0);
+    const chara = get_chara_talk(chara_id);
+    const me = get_chara_talk(0);
     await era.printAndWait([
       me.get_colored_name(),
       ' 和 ',
@@ -148,7 +148,9 @@ class CallOfMejiro extends MejiroCity {
     if (era.get('item:「恩宠」') === 0 || (this.called > 0 && this.san === 0)) {
       await era.printAndWait('……然后迷雾吞没了你们……');
       if (this.called > 0) {
-        EventMarks.get(this.called).sub(event_hooks.out_mejiro);
+        if (EventMarks.get(this.called).get(event_hooks.out_mejiro) > 0) {
+          EventMarks.get(this.called).sub(event_hooks.out_mejiro);
+        }
         this.called = 0;
       }
       await this.misty(chara, me);
@@ -228,7 +230,7 @@ class CallOfMejiro extends MejiroCity {
           '目光所及除了迷雾就是一对对疯狂做爱的情侣，他们的面容依稀有着你们的影子。',
         ]);
         await era.printAndWait(
-          '性爱的声音盖过了其他所有，呼吸的空气中满是淫水和汗水的臭味……',
+          '性爱的声音盖过了其他所有，呼吸的空气中满是淫臭……',
         );
         if (my_lust >= lust_border.want_sex) {
           await era.printAndWait([
@@ -296,7 +298,7 @@ class CallOfMejiro extends MejiroCity {
         update_ero_status(0);
         update_ero_status(chara.id);
         await print_ero_page(chara.id, true);
-        era.add('item:「恩宠」', temp * 5 + 5);
+        era.add('item:「恩宠」', Math.floor(temp * 5) / 2 + 2);
         flag = false;
         temp = false;
       } else {
@@ -308,7 +310,7 @@ class CallOfMejiro extends MejiroCity {
         ]);
         if (lust >= lust_border.absent_mind) {
           era.print(
-            '周围是成双成对疯狂做爱的人群，放肆的呻吟、肉体碰撞的声音和喷溅的水声充斥着整片空间。',
+            '周围是成双成对纵欲狂欢的人群，放肆的呻吟、肉体碰撞的声音和喷溅的水声充斥着整片空间。',
           );
         } else if (lust >= lust_border.itch) {
           era.print(
@@ -416,6 +418,14 @@ class CallOfMejiro extends MejiroCity {
               era.add('base:0:性欲', get_random_value(100, 500));
               sys_change_attr_and_print(0, '体力', get_random_value(25, 75));
               await events.avg_event(progress, lust);
+            },
+          },
+          {
+            a: 301,
+            c: '放弃抵抗（性欲++，体力+）',
+            async h() {
+              era.set('base:0:性欲', lust_border.want_sex);
+              era.set(`base:${chara.id}:性欲`, lust_border.want_sex);
             },
           },
         ];

@@ -71,12 +71,22 @@ plugins[40221] = require('#/data/ero/plugin/plugin-40221');
 plugins[40222] = require('#/data/ero/plugin/plugin-40222');
 plugins[40311] = require('#/data/ero/plugin/plugin-40311');
 plugins[40312] = require('#/data/ero/plugin/plugin-40312');
+plugins[40401] = require('#/data/ero/plugin/plugin-40401');
+plugins[40402] = require('#/data/ero/plugin/plugin-40402');
+plugins[40403] = require('#/data/ero/plugin/plugin-40403');
+plugins[40404] = require('#/data/ero/plugin/plugin-40404');
+plugins[40405] = require('#/data/ero/plugin/plugin-40405');
 plugins[50111] = require('#/data/ero/plugin/plugin-50111');
 plugins[50112] = require('#/data/ero/plugin/plugin-50112');
 plugins[50113] = require('#/data/ero/plugin/plugin-50113');
 plugins[50211] = require('#/data/ero/plugin/plugin-50211');
 plugins[50212] = require('#/data/ero/plugin/plugin-50212');
 plugins[50213] = require('#/data/ero/plugin/plugin-50213');
+plugins[50221] = require('#/data/ero/plugin/plugin-50221');
+plugins[50222] = require('#/data/ero/plugin/plugin-50222');
+plugins[50311] = require('#/data/ero/plugin/plugin-50311');
+plugins[50312] = require('#/data/ero/plugin/plugin-50312');
+plugins[50313] = require('#/data/ero/plugin/plugin-50313');
 plugins[60111] = require('#/data/ero/plugin/plugin-60111');
 plugins[60112] = require('#/data/ero/plugin/plugin-60112');
 plugins[60113] = require('#/data/ero/plugin/plugin-60113');
@@ -84,6 +94,8 @@ plugins[60114] = require('#/data/ero/plugin/plugin-60114');
 plugins[60115] = require('#/data/ero/plugin/plugin-60115');
 plugins[60116] = require('#/data/ero/plugin/plugin-60116');
 plugins[60117] = require('#/data/ero/plugin/plugin-60117');
+plugins[60211] = require('#/data/ero/plugin/plugin-60211');
+plugins[60212] = require('#/data/ero/plugin/plugin-60212');
 plugins[70111] = require('#/data/ero/plugin/plugin-70111');
 plugins[70112] = require('#/data/ero/plugin/plugin-70112');
 plugins[70211] = require('#/data/ero/plugin/plugin-70211');
@@ -231,6 +243,16 @@ module.exports = {
     no_yand: 40311,
     // 人之常情: 乐于分享
     ntr: 40312,
+    // 受虐狂: 将所有痛苦因子转换为受虐快感
+    tran_p: 40401,
+    // 惊悚爱好: 将所有恐惧因子转换为受虐快感
+    tran_f: 40402,
+    // 露出癖: 将所有羞耻因子转换为受虐快感
+    tran_s: 40403,
+    // 狂喜感知: 将所有负面情感因子转换为受虐快感
+    sls: 40404,
+    // 欢愉风暴: 受到的所有快感平均分散给所有感官
+    avg: 40405,
     // 高潮操纵Ⅰ: 每隔一回合允许高潮一回合
     org_c1: 50111,
     // 高潮操纵Ⅱ: 每隔两回合允许高潮一回合
@@ -243,6 +265,16 @@ module.exports = {
     no_tired: 50212,
     // 欢愉之骨: 不会疲惫、伤病或怀孕
     no_preg: 50213,
+    // 无暇思考: 不再有贤者时间
+    pe_up_0: 50221,
+    // 金枪不倒: 永远挺立
+    pe_up_1: 50222,
+    // 多汁: 体液分泌+100%
+    juicy: 50311,
+    // 喷泉: 体液分泌+200%
+    fountain: 50312,
+    // 水做的骨肉: 体液分泌+400%
+    woman: 50313,
     // 唯唯诺诺: 气性转换为「弱气」
     cha_0: 60111,
     // 畏首畏尾: 气性转换为「胆小」
@@ -257,6 +289,10 @@ module.exports = {
     cha_5: 60116,
     // 血气方刚: 气性转换为「热血」
     cha_6: 60117,
+    // 性爱训练: 通过性爱获取的基础属性×6，可以获取技能点数，全训练加成-50%
+    sex_1: 60211,
+    // 禁果变强: 通过性爱获取的基础属性×16，可以获取技能点数，不再自主训练且全训练加成降到最低
+    sex_2: 60212,
     // 金枪鱼: 调教时不再做出反应
     tuna: 70111,
     // 温顺: 不再主动求爱，调教时也不再做出反应
