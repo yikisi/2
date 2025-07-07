@@ -796,7 +796,13 @@ class CustomizedEdu extends ICustomizedEdu {
         hook.arg = true;
       } else {
         await era.waitAnyKey();
-        hook.arg = this.train_success_add(chara, me, callname, hook, extra);
+        hook.arg = await this.train_success_add(
+          chara,
+          me,
+          callname,
+          hook,
+          extra,
+        );
       }
     } else if (
       extra.attr !== attr_enum.intelligence &&

@@ -38,7 +38,7 @@ module.exports = class extends CustomizedEdu {
     await kojo['训练'](this.#dict);
   }
 
-  async additional_train(pama, me, callname, hook) {
+  async train_success_add(pama, me, callname, hook) {
     await print_event_name('热血的追加训练！', pama);
     hook.arg = (await kojo['加练'](this.#dict))[0] === 1;
   }
