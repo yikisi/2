@@ -7,6 +7,6 @@ module.exports = new InmonPlugin(
   3,
   18,
   '爱慕获取-100%。',
-  (args) => args.id > 0,
+  (args) => args.id > 0 && args.love < 100,
   1080,
 );

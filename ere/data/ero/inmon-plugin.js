@@ -50,7 +50,7 @@ class InmonPlugin {
    * @param {number} level
    * @param {number} size
    * @param {string} description
-   * @param {function({chara:number,edu:boolean,id:number,pregnant:boolean,sex:number}):boolean} condition
+   * @param {function({chara:number,edu:boolean,id:number,love:number,pregnant:boolean,sex:number}):boolean} condition
    * @param {number} price
    */
   constructor(id, name, group, level, size, description, condition, price) {

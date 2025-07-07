@@ -222,6 +222,7 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
       era.get(`cflag:${chara.id}:种族`) > 0 &&
       (!chara.id || era.get(`cflag:${chara.id}:育成回合计时`) < 3 * 48),
     id: chara.id,
+    love: chara.id > 0 ? era.get(`love:${chara.id}`) : 0,
     pregnant:
       inmon.slave === slavery_enum.pregnant ||
       era.get(`cflag:${chara.id}:妊娠阶段`) !== 1 << pregnant_stage_enum.no,

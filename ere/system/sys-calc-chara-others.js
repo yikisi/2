@@ -230,7 +230,7 @@ function love_uma(cid, val, shown = true) {
     50 * era.get(`status:${cid}:爱意克制`) +
     get_custom_mec(cid).get_love_buff() +
     100 * inmon.on(plugin_enum.love_up) -
-    50 * inmon.on(plugin_enum.love_d1) -
+    80 * inmon.on(plugin_enum.love_d1) -
     100 * inmon.on(plugin_enum.love_d2);
   val = Math.floor((val * coff) / 100);
   if (val > 6) {
