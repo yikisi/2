@@ -149,6 +149,7 @@ const ability_usage_enum = {
   MultiplyResearchLv: 28,
   MultiplyLove: 30,
   MultiplyIsland: 31,
+  MultiplyCount: 99,
 };
 
 const target_type_enum = {

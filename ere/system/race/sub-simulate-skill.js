@@ -835,7 +835,7 @@ function sub_simulate_skill(
                     );
                 }
               }
-              simulate_ability_usage(skill, i, j, uma);
+              simulate_ability_usage(skill, i, j, uma, list_in_race.length);
               switch (skill.data.ability_types[i][j]) {
                 case ability_type_enum.HpRate:
                   skill.aims[i][j].forEach((e) => {

@@ -33,8 +33,8 @@ const temp = [
   part_enum.masochism,
 ];
 
-const active_p_l = [
-  undefined,
+const a_p_list = [
+  void 0,
   [...temp, part_enum.penis],
   [...temp, part_enum.clitoris, part_enum.virgin],
   [...temp, part_enum.penis, part_enum.virgin],
@@ -108,8 +108,8 @@ function add_palam(cid, part, _attack) {
     coff -= 0.8;
   }
   attack *= coff;
-  if (inmon.on(plugin_enum.avg)) {
-    active_p_l[
+  if (inmon.on(plugin_enum.tzt)) {
+    a_p_list[
       (get_penis_size(cid) > 0) + (era.get(`cflag:${cid}:性别`) !== 1) * 2
     ].forEach((p, _, l) => (tmp[cid][part_names[p]] += attack / l.length));
   } else {
@@ -225,20 +225,45 @@ module.exports = {
     }),
   update_palam,
   /**
-   * @param {number} chara_id
-   * @param {number} orgasm_times
+   * @param {number} cid
+   * @param {number} part
+   * @param {number} orgasm
+   * @param {CharaInmon} inmon
    */
-  update_palam_from_main_orgasm(chara_id, orgasm_times) {
-    const times = Math.min(orgasm_times, 6);
-    // 次要部位高潮会增加主要部位快感，无任何加减成
-    // 只有本人能获得次要部位高潮获取的快感宝珠
-    if (get_penis_size(chara_id) > 0) {
-      // 男性和扶她加牛子快感
-      add_palam(chara_id, part_enum.penis, palam_from_orgasm * times);
-    }
-    if (era.get(`cflag:${chara_id}:阴道尺寸`) > 0) {
-      // 女性和扶她加浦西快感
-      add_palam(chara_id, part_enum.virgin, palam_from_orgasm * times);
+  update_palam_from_main_orgasm(
+    cid,
+    part,
+    orgasm,
+    inmon = CharaInmon.get(cid),
+  ) {
+    let add = Math.min(orgasm, 6) * palam_from_orgasm;
+    const penis = get_penis_size(cid) > 0;
+    const virgin = era.get(`cflag:${cid}:阴道尺寸`) > 0;
+    if (inmon.on(plugin_enum.nrg)) {
+      if (
+        part !== part_enum.penis &&
+        part !== part_enum.virgin &&
+        penis &&
+        virgin
+      ) {
+        add *= 2;
+      }
+      a_p_list[penis + virgin * 2].forEach((p, _, l) => {
+        if (part !== p) {
+          tmp[cid][part_names[p]] += add / (l.length - 1);
+        }
+      });
+    } else if (part !== part_enum.penis && part !== part_enum.virgin) {
+      // 次要部位高潮会增加主要部位快感，无任何加减成
+      // 只有本人能获得次要部位高潮获取的快感宝珠
+      if (penis) {
+        // 男性和扶她加牛子快感
+        add_palam(cid, part_enum.penis, add);
+      }
+      if (virgin) {
+        // 女性和扶她加浦西快感
+        add_palam(cid, part_enum.virgin, add);
+      }
     }
   },
   /**
@@ -258,11 +283,10 @@ module.exports = {
         ),
       );
     }
-  },
-  /**
+  } /**
    * @param {boolean} shown
    * @param {number} ids
-   */
+   */,
   update_palams(shown, ...ids) {
     ids.forEach((chara_id) =>
       orgasm_check_list.forEach((part) => update_palam(chara_id, part, shown)),

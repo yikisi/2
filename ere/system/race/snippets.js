@@ -348,8 +348,9 @@ module.exports = {
    * @param {number} i
    * @param {number} j
    * @param {PseudoUma} uma
+   * @param {number} count
    */
-  simulate_ability_usage(skill, i, j, uma) {
+  simulate_ability_usage(skill, i, j, uma, count) {
     const cid = uma.index_chara;
     let temp;
     switch (skill.data.ability_value_usages[i][j]) {
@@ -548,6 +549,9 @@ module.exports = {
             skill.values[i][j] += 0.025;
           }
         }
+        break;
+      case ability_usage_enum.MultiplyCount:
+        skill.values[i][j] *= 0.98 + 0.01 * count;
         break;
       default:
         skill.values[i][j] = skill.data.ability_values[i][j];

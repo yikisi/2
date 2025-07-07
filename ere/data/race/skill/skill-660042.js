@@ -4,7 +4,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaEroSkill(
   660042,
   '红沙冠军',
-  '高潮时与其他对手分享更多快感',
+  '高潮时与其他对手分享更多快感；场上选手数量越多，效果越强',
   66004,
   2,
   UmaSkill.get_skill_color(
@@ -34,7 +34,7 @@ module.exports = new UmaEroSkill(
   ],
   [
     [
-      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.MultiplyCount,
       UmaSkill.ability_usage_enum.Direct,
       UmaSkill.ability_usage_enum.Direct,
     ],
@@ -45,7 +45,7 @@ module.exports = new UmaEroSkill(
     ],
   ],
   [
-    [6000, 0, 0],
+    [12000, 0, 0],
     [0, 0, 0],
   ],
   [

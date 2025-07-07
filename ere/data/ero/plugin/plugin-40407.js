@@ -1,12 +1,12 @@
 const InmonPlugin = require('#/data/ero/inmon-plugin');
 
 module.exports = new InmonPlugin(
-  40405,
-  '欢愉风暴',
+  40407,
+  '享欲堕落',
   404,
   3,
-  8,
-  '受到的所有快感平均分散给所有感官。',
+  7,
+  '高潮时增加的快感分散给其他感官。',
   () => true,
-  580,
+  530,
 );

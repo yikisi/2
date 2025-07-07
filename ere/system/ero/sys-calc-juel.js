@@ -131,7 +131,9 @@ module.exports = {
       if (cid > 0) {
         const j_pain = get_buffed_jewel(cid, '痛苦');
         let got_j_pain = 0;
-        if (inmon.on(plugin_enum.tran_p) || inmon.on(plugin_enum.sls)) {
+        if (inmon.on(plugin_enum.khn)) {
+          era.add(`param:${cid}:施虐快感`, j_pain / 10);
+        } else if (inmon.on(plugin_enum.tran_p) || inmon.on(plugin_enum.sls)) {
           era.add(`param:${cid}:受虐快感`, j_pain / 10);
         } else {
           print_jewel_change(
@@ -147,7 +149,9 @@ module.exports = {
 
         const j_fear = get_buffed_jewel(cid, '恐惧');
         let got_j_fear;
-        if (inmon.on(plugin_enum.tran_f) || inmon.on(plugin_enum.sls)) {
+        if (inmon.on(plugin_enum.khn)) {
+          era.add(`param:${cid}:施虐快感`, j_fear / 10);
+        } else if (inmon.on(plugin_enum.tran_f) || inmon.on(plugin_enum.sls)) {
           era.add(`param:${cid}:受虐快感`, j_fear / 10);
         } else {
           print_jewel_change(
@@ -163,7 +167,9 @@ module.exports = {
 
         const j_shame = get_buffed_jewel(cid, '羞耻');
         let got_j_shame;
-        if (inmon.on(plugin_enum.tran_s) || inmon.on(plugin_enum.sls)) {
+        if (inmon.on(plugin_enum.khn)) {
+          era.add(`param:${cid}:施虐快感`, j_shame / 10);
+        } else if (inmon.on(plugin_enum.tran_s) || inmon.on(plugin_enum.sls)) {
           era.add(`param:${cid}:受虐快感`, j_shame / 10);
         } else {
           print_jewel_change(
@@ -178,7 +184,9 @@ module.exports = {
 
         const j_hate = get_buffed_jewel(cid, '反感');
         let got_j_hate;
-        if (inmon.on(plugin_enum.sls)) {
+        if (inmon.on(plugin_enum.khn)) {
+          era.add(`param:${cid}:施虐快感`, j_hate / 10);
+        } else if (inmon.on(plugin_enum.sls)) {
           era.add(`param:${cid}:受虐快感`, j_hate / 10);
         } else {
           print_jewel_change(
@@ -207,12 +215,13 @@ module.exports = {
         const pleasure_params = body_jewels + spirit_jewels / 10;
         const total_ex = era.get(`ex:${cid}:TotalEX`);
         const pain_params = j_pain / 10 + j_fear / 10 - spirit_jewels / 25;
-        const shame_params = inmon.on(plugin_enum.sls)
-          ? 0
-          : body_jewels / 50 +
-            j_shame / 2 +
-            spirit_jewels / 25 -
-            meek_juels / 5;
+        const shame_params =
+          inmon.on(plugin_enum.sls) || inmon.on(plugin_enum.khn)
+            ? 0
+            : body_jewels / 50 +
+              j_shame / 2 +
+              spirit_jewels / 25 -
+              meek_juels / 5;
         if (!ero_mark) {
           if ((pleasure_params >= 4500 || total_ex >= 6) && pleasure_mark < 3) {
             era.set(`nowex:${cid}:欢愉获取`, 3 - pleasure_mark);
