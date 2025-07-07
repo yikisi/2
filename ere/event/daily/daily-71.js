@@ -147,7 +147,7 @@ module.exports = class extends CustomizedDaily {
     await kojo['一起打游戏机'](this.#dict);
   }
 
-  async celebration() {
+  async celebration(hook) {
     let name;
     switch (era.get('flag:当前回合数') % 48) {
       case 1:
@@ -169,7 +169,7 @@ module.exports = class extends CustomizedDaily {
         name = '圣诞节';
     }
     if (!name) {
-      return await super.celebration();
+      return await super.celebration(hook);
     }
     await print_event_name(name, get_chara_talk(this.id));
     await kojo[name](this.#dict);

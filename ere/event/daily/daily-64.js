@@ -13,6 +13,7 @@ const {
   end_ero_and_train,
   set_palam_to_max,
 } = require('#/system/ero/sys-prepare-ero');
+const { sys_change_lust } = require('#/system/sys-calc-base-cflag');
 const {
   sys_get_callname,
   sys_love_uma,
@@ -25,15 +26,20 @@ const select_action_around_river = require('#/event/daily/snippets/select-action
 const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
 const select_action_in_shopping_street = require('#/event/daily/snippets/select-action-in-shopping-street');
 const select_action_in_station = require('#/event/daily/snippets/select-action-in-station');
+const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
+const print_event_name = require('#/event/snippets/print-event-name');
 const print_name_and_show_kojo = require('#/event/snippets/print-name-and-show-kojo');
+const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { get_random_value } = require('#/utils/value-utils');
 
 const EroParticipant = require('#/data/ero/ero-participant');
 const { item_enum } = require('#/data/ero/item-const');
 const { part_enum } = require('#/data/ero/part-const');
 const PamaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-64');
 const PamaLifeMarks = require('#/data/event/life-event-marks/life-event-marks-64');
+const { location_enum } = require('#/data/locations');
 
 module.exports = class extends CustomizedDaily {
   get #dict() {
@@ -242,5 +248,82 @@ module.exports = class extends CustomizedDaily {
 
   async load_talk() {
     await kojo['读档对话'](this.#dict);
+  }
+
+  async celebration(hook) {
+    const pama = get_chara_talk(this.id);
+    const dict = this.#dict;
+    let temp;
+    let relation;
+    let love;
+    let base;
+    let pt;
+    switch (era.get('flag:当前回合数') % 48) {
+      case 9:
+        if (era.get(`cflag:${this.id}:殿堂`) > 0) {
+          return await super.celebration(hook);
+        }
+        await print_name_and_show_kojo('殿堂周', pama, kojo, dict);
+        break;
+      case 14:
+        await print_event_name('粉丝感谢祭', pama);
+        if (era.get(`cflag:${this.id}:育成回合计时`) < 3 * 48) {
+          dict['波旁色'] = get_chara_talk(26).color;
+          await kojo['育成中粉丝感谢祭'](dict);
+        } else {
+          dict['自称'] = era.get('callname:64:64');
+          await kojo['已育成粉丝感谢祭'](dict);
+        }
+        break;
+      case 30:
+        if (!(era.get(`cflag:${this.id}:育成回合计时`) < 3 * 48)) {
+          return await super.celebration(hook);
+        }
+        era.set(`cflag:${this.id}:节日事件标记`, 0);
+        dict['自称'] = era.get('callname:64:64');
+        temp = await print_name_and_show_kojo('庙会', pama, kojo, dict);
+        if (temp[0] === 1) {
+          hook.override = true;
+          relation = 10;
+          love = 2;
+          if (temp[1] === 1) {
+            base = { 体力: 100 };
+          } else {
+            pt = 35;
+          }
+          switch (temp[temp.length - 1]) {
+            case 1:
+              relation += 10;
+              break;
+            case 2:
+              love += 2;
+              break;
+            case 3:
+              sys_change_lust(this.id, get_random_value(800, 1200));
+          }
+          if (all_reward_in_event(this.id, { relation, love, base, pt })) {
+            await era.waitAnyKey();
+          }
+        }
+        break;
+      case 40:
+        await print_name_and_show_kojo('万圣节', pama, kojo, dict);
+        break;
+      case 48:
+        dict['内恰色'] = get_chara_talk(60).color;
+        dict['双涡轮色'] = get_chara_talk(66).color;
+        dict['诗歌剧色'] = get_chara_talk(62).color;
+        if (
+          (await print_name_and_show_kojo('圣诞节', pama, kojo, dict))[6] === 1
+        ) {
+          const cache = era.get('flag:当前位置');
+          era.set('flag:当前位置', location_enum.love_hotel);
+          await quick_into_sex(this.id);
+          era.set('flag:当前位置', cache);
+        }
+        break;
+      default:
+        return await super.celebration(hook);
+    }
   }
 };

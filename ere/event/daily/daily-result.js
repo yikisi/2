@@ -387,29 +387,28 @@ handlers[event_hooks.out_station] = async (chara_id, hook) => {
   wait_flag && (await era.waitAnyKey());
 };
 
-handlers[event_hooks.celebration] = async (chara_id) => {
-  era.set(`cflag:${chara_id}:节日事件标记`, 0);
+handlers[event_hooks.celebration] = async (cid) => {
+  era.set(`cflag:${cid}:节日事件标记`, 0);
   era.add('cflag:0:节日事件标记', 1);
   era.println();
   let wait_flag = false;
-  if ((era.get('flag:当前回合数') - 1) % 48 === 5) {
+  if (era.get('flag:当前回合数') % 48 === 6) {
     era.print('获得了【情人节巧克力】！');
     era.add('item:情人节巧克力', 1);
     wait_flag = true;
   }
-  sys_change_pressure(chara_id, -get_random_value(500, 1000));
-  wait_flag =
-    sys_like_chara(chara_id, 0, get_random_value(40, 80)) || wait_flag;
+  sys_change_pressure(cid, -get_random_value(500, 1000));
+  wait_flag = sys_like_chara(cid, 0, get_random_value(40, 80)) || wait_flag;
   if (wait_flag) {
     await era.waitAnyKey();
   }
 };
 
-handlers[event_hooks.birthday] = async (chara_id) => {
-  era.set(`status:${chara_id}:生日`, 1);
+handlers[event_hooks.birthday] = async (cid) => {
+  era.set(`status:${cid}:生日`, 1);
   era.println();
-  sys_change_pressure(chara_id, -get_random_value(750, 1250));
-  if (sys_like_chara(chara_id, 0, get_random_value(50, 100))) {
+  sys_change_pressure(cid, -get_random_value(750, 1250));
+  if (sys_like_chara(cid, 0, get_random_value(50, 100))) {
     await era.waitAnyKey();
   }
 };

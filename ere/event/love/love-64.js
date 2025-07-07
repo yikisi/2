@@ -238,6 +238,7 @@ module.exports = class extends CustomizedLove {
       kojo,
       dict,
     );
+    era.set(`cflag:${this.id}:节日事件标记`, 0);
     const l_cache = era.get('flag:当前位置');
     let loc = -1;
     if (era.get(`love:${this.id}`) >= 75) {

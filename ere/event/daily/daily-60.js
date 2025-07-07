@@ -420,7 +420,7 @@ module.exports = class extends CustomizedDaily {
     }
   }
 
-  async celebration() {
+  async celebration(hook) {
     const nice_nature = get_chara_talk(60),
       weeks = (era.get('flag:当前回合数') - 1) % 48;
     switch (weeks) {
@@ -535,7 +535,7 @@ module.exports = class extends CustomizedDaily {
         );
         break;
       default:
-        return await super.celebration();
+        return await super.celebration(hook);
     }
   }
 

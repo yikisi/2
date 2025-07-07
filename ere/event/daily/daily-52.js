@@ -930,7 +930,7 @@ module.exports = class extends CustomizedDaily {
     }
   }
 
-  async celebration() {
+  async celebration(hook) {
     const edu_weeks = era.get('cflag:52:育成回合计时'),
       weeks = (era.get('flag:当前回合数') - 1) % 48;
     if (
@@ -938,7 +938,7 @@ module.exports = class extends CustomizedDaily {
       edu_weeks !== 47 + 48 ||
       sys_reg_race(52).curr.race !== -1
     ) {
-      return await super.celebration();
+      return await super.celebration(hook);
     }
     await urara_celebration();
   }

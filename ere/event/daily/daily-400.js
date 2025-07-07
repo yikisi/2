@@ -24,13 +24,13 @@ const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 module.exports = class extends CustomizedDaily {
-  async celebration() {
+  async celebration(hook) {
     if (
       (era.get('flag:当前回合数') - 1) % 48 !== 29 ||
       era.get('cflag:400:育成回合计时') < 96 ||
       era.get('love:400') < 75
     ) {
-      return await super.celebration();
+      return await super.celebration(hook);
     }
     await ss_celebration();
   }

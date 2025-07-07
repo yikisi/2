@@ -44,7 +44,6 @@ module.exports = async function () {
         chara.get_uma_sex_title(),
         '们来说最重要的节日之一。',
       ]);
-
       if (era.get(`cflag:${chara.id}:殿堂`) === 2) {
         await era.printAndWait([
           '由于 ',
