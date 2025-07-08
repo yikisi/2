@@ -260,9 +260,9 @@ class CustomizedCheck {
     ) {
       return false;
     }
-    const love = era.get(`love:${this.id}`),
-      prison_limit = era.get('flag:极端行为限制'),
-      relation = era.get(`relation:${this.id}:0`);
+    const love = era.get(`love:${this.id}`);
+    const prison_limit = era.get('flag:极端行为限制');
+    const relation = era.get(`relation:${this.id}:0`);
     let delta = love * prison_limit - relation;
     if (!prison_limit || love < 50 || delta < 0) {
       return false;
@@ -318,13 +318,13 @@ class CustomizedCheck {
     ) {
       return false;
     }
-    const love = era.get(`love:${this.id}`),
-      raping_limit = era.get('flag:极端行为限制') * 2,
-      punish_level = era.get('flag:惩戒力度'),
-      relation = era.get(`relation:${this.id}:0`) || 0,
-      rape_buff =
-        0.5 * era.get('item:透明棉被') +
-        MejiroCity.instance().get_rape_buff(this.id);
+    const love = era.get(`love:${this.id}`);
+    const raping_limit = era.get('flag:极端行为限制') * 2;
+    const punish_level = era.get('flag:惩戒力度');
+    const relation = era.get(`relation:${this.id}:0`) || 0;
+    const rape_buff =
+      0.5 * era.get('item:透明棉被') +
+      MejiroCity.instance().get_rape_buff(this.id);
     let delta = love * raping_limit - relation;
     if (
       punish_level <= 1 &&

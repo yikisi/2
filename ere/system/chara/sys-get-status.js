@@ -287,7 +287,7 @@ function sys_get_status(cid) {
     status_list.push({ color: sex_colors[0], content: '抑制药' });
   }
   if (
-    era.get(`status:${cid}:爱意克制`) &&
+    era.get(`status:${cid}:爱意克制`) > 0 &&
     ((cid !== 32 && era.get('status:0:好感度镜片')) ||
       era.get('status:0:马语者'))
   ) {

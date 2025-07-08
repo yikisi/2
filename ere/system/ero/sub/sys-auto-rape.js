@@ -166,9 +166,9 @@ async function sys_auto_rape(shown) {
     );
   }
   if (
-    era.get(`status:0:沉睡`) &&
+    era.get(`status:0:沉睡`) > 0 &&
     !era.get('status:0:马跳S') &&
-    era.get(`status:${master}:爱意克制`)
+    era.get(`status:${master}:爱意克制`) > 0
   ) {
     await run_custom_ero(master, ero_hooks.use_medicine, {
       item: medicine_enum.uma_s,
