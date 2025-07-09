@@ -8,6 +8,7 @@ const sys_do_sex = require('#/system/ero/sys-calc-ero');
 const {
   clean_all_parts_without_item,
   clean_part,
+  clean_part_without_item,
 } = require('#/system/ero/sys-calc-ero-part');
 const { change_ero_master } = require('#/system/ero/sys-calc-ero-status');
 const { add_juel } = require('#/system/ero/sys-calc-juel');
@@ -22,10 +23,25 @@ const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const add_meek_or_hate = require('#/event/ero/snippets/add-meek-or-hate');
 
 const EroParticipant = require('#/data/ero/ero-participant');
+const EroTouch = require('#/data/ero/ero-touch');
 const { base_emotion_juel } = require('#/data/ero/juel-const');
 const { base_enum, part_enum, part_touch } = require('#/data/ero/part-const');
 const { stain_enum } = require('#/data/ero/stain-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
+
+function clean_s_parts(_old, _new) {
+  const supporter = era.get('tflag:当前助手');
+  if (supporter > 0) {
+    [_old, _new].forEach((c) =>
+      clean_part_without_item(
+        ...Object.values(part_enum)
+          .slice(0, 9)
+          .filter((p) => new EroTouch(c, p).owner === supporter)
+          .map((p) => new EroParticipant(c, p)),
+      ),
+    );
+  }
+}
 
 /** @param {Record<string,function(number,number,HookArg,{check:number})>} handlers */
 module.exports = (handlers) => {
@@ -39,12 +55,11 @@ module.exports = (handlers) => {
       new EroParticipant(defender, part_enum.mouth),
     );
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
-    if (sys_change_motion_by_base(attacker, defender, [base_enum.same])) {
-      sys_clean_oor_parts(attacker, defender, {
-        a: part_enum.mouth,
-        d: part_enum.mouth,
-      });
-    }
+    sys_change_motion_by_base(attacker, defender, [base_enum.same]);
+    sys_clean_oor_parts(attacker, defender, {
+      a: part_enum.mouth,
+      d: part_enum.mouth,
+    });
   };
 
   handlers[ero_hooks.french_kiss] = (attacker, defender, _, extra_flag) => {
@@ -100,6 +115,7 @@ module.exports = (handlers) => {
   };
 
   handlers[ero_hooks.switch] = (a, d) => {
+    clean_s_parts(a, d);
     change_ero_master(d);
     add_juel(d, '顺从', base_emotion_juel);
   };
@@ -113,6 +129,7 @@ module.exports = (handlers) => {
   handlers[ero_hooks.resist] = (a, d, hook, { success: s_flag }) => {
     era.add(`nowex:${a}:体力消耗`, 25);
     if (s_flag) {
+      clean_s_parts(a, d);
       change_ero_master(a);
       add_juel(d, '恐惧', base_emotion_juel);
     } else {
