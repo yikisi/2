@@ -270,11 +270,7 @@ function love_uma(cid, val, shown = true) {
     (new_val === 49 || new_val === 74 || new_val === 89 || new_val === 99) &&
     era.get(`cflag:${cid}:爱慕暂拒`) !== new_val
   ) {
-    if (
-      (sys_check_hide_relation_and_love(cid) & 0b1) === 0 &&
-      era.get(`cflag:${cid}:招募状态`) !== recruit_flags.yes &&
-      shown
-    ) {
+    if ((sys_check_hide_relation_and_love(cid) & 0b1) === 0 && shown) {
       era.print([
         '和 ',
         get_chara_talk(cid).get_colored_name(),
