@@ -65,7 +65,7 @@ async function page_chairman_office() {
             name: '「闲 谈！无聊了来找你玩！」',
             async handle() {
               nothing = false;
-              switch (get_relation_mark(undefined, 302)) {
+              switch (get_relation_mark(302)) {
                 case '失望':
                   await chara.say_and_wait(
                     '冷 漠！有来找我的空闲不如先把自己的工作做好！',

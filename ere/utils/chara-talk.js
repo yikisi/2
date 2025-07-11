@@ -160,7 +160,7 @@ class CharaTalk {
   get_teen_sex_title = () => (this.sex_code - 1 ? '少女' : '少年');
 
   /** UMA角色的称呼 */
-  get_uma_sex_title = () => (this.sex_code - 1 ? '马娘' : '马郎');
+  get_uma_sex_title = () => (this.sex_code === 1 ? '马郎' : '马娘');
 
   get_bigger_sibling_sex_title = () => (this.sex_code - 1 ? '姐姐' : '哥哥');
 

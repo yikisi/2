@@ -169,9 +169,9 @@ function like_chara(target, aim, val, shown = true, extra_love = 0) {
   }
   love = Math.max(love, extra_love);
   let ret = false;
-  if (val !== 0) {
-    const new_relation = era.set(`relation:${target}:${aim}`, relation + val);
-    const mark = get_relation_mark(new_relation, target);
+  if (!val) {
+    const _new = era.set(`relation:${target}:${aim}`, relation + val);
+    const mark = get_relation_mark(target, _new);
     if (shown) {
       ret = true;
       era.print([
@@ -192,7 +192,7 @@ function like_chara(target, aim, val, shown = true, extra_love = 0) {
           content: `了 ${mark === '？' ? '?' : val > 0 ? val : -val}！现在为：`,
         },
         {
-          content: `${mark} (${mark === '？' ? '?' : new_relation})`,
+          content: `${mark} (${mark === '？' ? '?' : _new})`,
           color: relation_colors[mark],
         },
       ]);
