@@ -169,10 +169,10 @@ function like_chara(target, aim, val, shown = true, extra_love = 0) {
   }
   love = Math.max(love, extra_love);
   let ret = false;
-  if (!val) {
+  if (val !== 0) {
     const _new = era.set(`relation:${target}:${aim}`, relation + val);
-    const mark = get_relation_mark(target, _new);
     if (shown) {
+      const mark = get_relation_mark(target, _new);
       ret = true;
       era.print([
         get_chara_talk(target).get_colored_name(),

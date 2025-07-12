@@ -480,12 +480,12 @@ function get_chara_info(cid) {
  * @returns {boolean}
  */
 function print_milking(type, size) {
-  const my_milk = era.get(`tflag:${type}可卖`),
-    milk = era.get(`tflag:${type}产量`) + my_milk;
+  const my_milk = era.get(`tflag:${type}可卖`);
+  const milk = era.get(`tflag:${type}产量`) + my_milk;
   if (milk > 0) {
-    const got = Math.floor(milk / size),
-      got_me = Math.floor(my_milk / size),
-      buffer = [];
+    const got = Math.floor(milk / size);
+    const got_me = Math.floor(my_milk / size);
+    const buffer = [];
     buffer.push(
       '用榨乳器收集到了 ',
       {
