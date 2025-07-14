@@ -203,14 +203,14 @@ class CallOfMejiro extends MejiroCity {
    */
   async misty(chara, me) {
     let flag = true;
-    let temp,
-      difficulty = 1;
+    let temp;
+    let difficulty = 1;
     if ((temp = era.get('item:「亏欠」')) > 0) {
       difficulty += Math.min(Math.floor(Math.log(temp + 1) / Math.log(2)), 6);
       era.set('item:「亏欠」', 0);
     }
     difficulty = Math.max(difficulty * 2 + get_random_value(0, 5), 6);
-    temp = 0;
+    const progress = { c: 0, p: 0 };
     begin_and_init_ero(0, chara.id);
     const events = new MejiroEvents(chara, me);
     while (flag) {
@@ -298,7 +298,7 @@ class CallOfMejiro extends MejiroCity {
         update_ero_status(0);
         update_ero_status(chara.id);
         await print_ero_page(chara.id, true);
-        era.add('item:「恩宠」', Math.floor(temp * 5) / 2 + 2);
+        era.add('item:「恩宠」', Math.floor(progress.c * 5) / 2 + 2);
         flag = false;
         temp = false;
       } else {
@@ -327,14 +327,14 @@ class CallOfMejiro extends MejiroCity {
         } else if (lust >= 2000) {
           era.print('周围是影影绰绰的一对对旅客，偶尔能听见模糊的低语。');
         }
-        const progress = temp / difficulty;
-        if (temp === difficulty - 1) {
+        progress.p = progress.c / difficulty;
+        if (progress.c === difficulty - 1) {
           era.print('前面的迷雾正在消散，能看见明亮、干净的街区。');
-        } else if (progress >= 0.66) {
+        } else if (progress.p >= 0.66) {
           era.print('前面的迷雾变得稀薄了一些，阳光穿过云层星星点点地照着。');
-        } else if (progress >= 0.33) {
+        } else if (progress.p >= 0.33) {
           era.print('来路已经看不见了，似乎只能向前。');
-        } else if (temp === 0) {
+        } else if (progress.c === 0) {
           era.print(
             '一条大道笔直通向前方，但并不清楚延伸向哪里。来路只剩下蒙蒙的灰。',
           );
@@ -349,7 +349,7 @@ class CallOfMejiro extends MejiroCity {
               era.add(`base:${chara.id}:性欲`, get_random_value(600, 1200));
               era.add('base:0:性欲', get_random_value(300, 600));
               sys_change_attr_and_print(0, '体力', -get_random_value(50, 150));
-              temp++;
+              progress.c++;
               await events.good_event(progress, lust);
             },
           },
@@ -361,7 +361,7 @@ class CallOfMejiro extends MejiroCity {
               era.add(`base:${chara.id}:性欲`, get_random_value(300, 900));
               era.add('base:0:性欲', get_random_value(100, 500));
               sys_change_attr_and_print(0, '体力', -get_random_value(50, 150));
-              temp++;
+              progress.c++;
               await events.normal_event(progress, lust);
             },
           },
@@ -373,7 +373,7 @@ class CallOfMejiro extends MejiroCity {
               era.add(`base:${chara.id}:性欲`, get_random_value(0, 600));
               era.add('base:0:性欲', get_random_value(0, 300));
               sys_change_attr_and_print(0, '体力', -get_random_value(50, 150));
-              temp++;
+              progress.c++;
               await events.bad_event(progress, lust);
             },
           },
@@ -440,7 +440,7 @@ class CallOfMejiro extends MejiroCity {
         const ret = await era.input();
         era.drawLine();
         await buttons.find((e) => e.a === ret).h();
-        if (temp === difficulty) {
+        if (progress.c >= difficulty) {
           flag = false;
           temp = true;
         }

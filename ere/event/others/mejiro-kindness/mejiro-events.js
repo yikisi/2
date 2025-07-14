@@ -5,7 +5,10 @@
 const era = require('#/era-electron');
 
 const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
-const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
+const {
+  sys_change_attr_and_print,
+  sys_change_lust,
+} = require('#/system/sys-calc-base-cflag');
 
 const bad_events = require('#/event/others/mejiro-kindness/bad-events.kojo');
 const good_events = require('#/event/others/mejiro-kindness/good-events.kojo');
@@ -19,14 +22,27 @@ const { lust_border } = require('#/data/ero/orgasm-const');
 const { part_enum } = require('#/data/ero/part-const');
 
 /**
- * @param {{f:function(number,number):boolean,h:function():Promise}[]} events
+ * @typedef CityProgress
+ * @property {number} c
+ * @property {number} p
+ */
+/**
+ * @typedef MejiroEvent
+ * @property {function(CityProgress,number):Promise} h
+ * @property {function(CityProgress?,number?):boolean} [f]
+ */
+
+/**
+ * @param {MejiroEvent[]} events
  * @param {MejiroEvents} _this
- * @param {number} progress
+ * @param {CityProgress} progress
  * @param {number} lust
  */
 function get_random_event(events, _this, progress, lust) {
   return (
-    get_random_entry(events.filter((e) => e.f.call(_this, progress, lust))) || {
+    get_random_entry(
+      events.filter(({ f = () => true }) => f.call(_this, progress, lust)),
+    ) || {
       async h() {},
     }
   ).h;
@@ -43,12 +59,10 @@ class MejiroEvents {
   #dict = {};
   /** @type {Record<string,any>} */
   params = {};
+  /** @type {MejiroEvent[]} */
   good_events = [
     {
-      f() {
-        return true;
-      },
-      async h(type) {
+      async h(_, type) {
         const key = '甘泉水';
         const d = { ...this.#dict, first: +!this.params[key] };
         this.params[key] = true;
@@ -67,9 +81,6 @@ class MejiroEvents {
       },
     },
     {
-      f() {
-        return true;
-      },
       async h() {
         const key = '失物招领';
         const reward = get_random_value(1, 3);
@@ -82,23 +93,67 @@ class MejiroEvents {
         era.add('item:「恩宠」', reward);
       },
     },
+    {
+      async h() {
+        const key = '林荫长椅';
+        switch (
+          (
+            await good_events[key]({ ...this.#dict, first: +!this.params[key] })
+          )[0]
+        ) {
+          case 1:
+            sys_change_lust(0, -get_random_value(200, 600));
+            break;
+          case 2:
+            sys_change_lust(this.chara.id, -get_random_value(200, 600));
+            break;
+          case 3:
+            sys_change_lust(0, -get_random_value(100, 300));
+            sys_change_lust(this.chara.id, -get_random_value(100, 300));
+        }
+        this.params[key] = true;
+      },
+    },
+    {
+      async h(p) {
+        const key = '公共交通';
+        await good_events[key]({ ...this.#dict, first: +!this.params[key] });
+        p.c++;
+        this.params[key] = true;
+      },
+    },
   ];
+  /** @type {MejiroEvent[]} */
   normal_events = [
     {
-      f() {
-        return true;
-      },
       async h() {
         const key = '普通穿行';
         await normal_events[key]({ ...this.#dict, first: +!this.params[key] });
         this.params[key] = true;
       },
     },
+    {
+      async h() {
+        const key = '街道漫步';
+        await normal_events[key]({ ...this.#dict, first: +!this.params[key] });
+        this.params[key] = true;
+      },
+    },
+    {
+      async h() {
+        const key = '街头小吃';
+        if ((await normal_events[key](this.#dict))[0]) {
+          era.add('「恩宠」', -1);
+          sys_change_attr_and_print(0, '体力', get_random_value(50, 100));
+        }
+      },
+    },
   ];
+  /** @type {MejiroEvent[]} */
   bad_events = [
     {
-      f() {
-        return era.get(`base:${this.chara.id}:性欲`) < lust_border.absent_mind;
+      f(_, lust) {
+        return lust < lust_border.absent_mind;
       },
       async h() {
         await quick_make_love(
@@ -106,34 +161,34 @@ class MejiroEvents {
           new EroParticipant(0, part_enum.anal),
           false,
         );
-        era.add(`base:${this.chara.id}:性欲`, get_random_value(0, 300));
+        sys_change_lust(this.chara.id, get_random_value(100, 300));
         if ((await bad_events['摸屁股'](this.#dict))[0] === 1) {
-          era.add('base:0:性欲', get_random_value(0, 600));
+          sys_change_lust(0, get_random_value(100, 300));
           await quick_make_love(
             new EroParticipant(0, part_enum.hand),
             new EroParticipant(this.chara.id, part_enum.anal),
             false,
           );
         } else {
-          era.add(`base:${this.chara.id}:性欲`, get_random_value(0, 300));
+          sys_change_lust(this.chara.id, get_random_value(100, 300));
         }
       },
     },
     {
-      f() {
-        return era.get(`base:${this.chara.id}:性欲`) > lust_border.itch;
+      f(_, lust) {
+        return lust >= lust_border.itch && lust < lust_border.absent_mind;
       },
       async h() {
-        era.add(`base:${this.chara.id}:性欲`, get_random_value(150, 450));
+        sys_change_lust(this.chara.id, get_random_value(150, 450));
         if ((await bad_events['咖啡馆'](this.#dict))[0] === 1) {
-          era.add('base:0:性欲', get_random_value(300, 900));
+          sys_change_lust(0, get_random_value(300, 900));
           await quick_make_love(
             new EroParticipant(0, part_enum.mouth),
             new EroParticipant(this.chara.id, part_enum.mouth),
             false,
           );
         } else {
-          era.add(`base:${this.chara.id}:性欲`, get_random_value(150, 450));
+          sys_change_lust(this.chara.id, get_random_value(150, 450));
         }
       },
     },
@@ -153,7 +208,7 @@ class MejiroEvents {
 
   /**
    * @param {number[]} percentages
-   * @param {number} progress
+   * @param {CityProgress} progress
    * @param {number} lust
    */
   #get_event_by_category(percentages, progress, lust) {
@@ -170,46 +225,50 @@ class MejiroEvents {
   }
 
   /**
-   * @param {number} progress
+   * @param {CityProgress} progress
    * @param {number} lust
    */
   good_event(progress, lust) {
     return this.#get_event_by_category([0.3, 0.5], progress, lust).call(
       this,
       action_type_enum.good,
+      progress,
     );
   }
 
   /**
-   * @param {number} progress
+   * @param {CityProgress} progress
    * @param {number} lust
    */
   normal_event(progress, lust) {
     return this.#get_event_by_category([0.2, 0.5], progress, lust).call(
       this,
       action_type_enum.normal,
+      progress,
     );
   }
 
   /**
-   * @param {number} progress
+   * @param {CityProgress} progress
    * @param {number} lust
    */
   bad_event(progress, lust) {
     return this.#get_event_by_category([0.1, 0.3], progress, lust).call(
       this,
       action_type_enum.bad,
+      progress,
     );
   }
 
   /**
-   * @param {number} progress
+   * @param {CityProgress} progress
    * @param {number} lust
    */
   avg_event(progress, lust) {
     return this.#get_event_by_category([1 / 3, 1 / 3], progress, lust).call(
       this,
       action_type_enum.avg,
+      progress,
     );
   }
 }
