@@ -236,9 +236,9 @@ function love_uma(cid, val, shown = true) {
   if (val > 6) {
     val = 6;
   }
-  const force_limit = get_custom_mec(cid).get_love_limit(),
-    border = force_limit || Math.max(get_love_border(cid), 50),
-    love_limit = !era.get('flag:回合爱慕惩罚');
+  const force_limit = get_custom_mec(cid).get_love_limit();
+  const border = force_limit || Math.max(get_love_border(cid), 50);
+  const love_limit = !era.get('flag:回合爱慕惩罚');
   if ((love_limit || force_limit) && love + val >= border) {
     val = border - 1 - love;
   }
