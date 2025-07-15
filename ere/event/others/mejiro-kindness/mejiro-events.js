@@ -143,7 +143,7 @@ class MejiroEvents {
       async h() {
         const key = '街头小吃';
         if ((await normal_events[key](this.#dict))[0]) {
-          era.add('「恩宠」', -1);
+          era.add('item:「恩宠」', -1);
           sys_change_attr_and_print(0, '体力', get_random_value(50, 100));
         }
       },
