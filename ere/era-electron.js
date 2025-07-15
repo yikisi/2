@@ -535,7 +535,7 @@ const era = {
    * @returns {boolean} if debug
    */
   toggleDebug() {},
-  version: { sdk: '4.0.0', engine: undefined },
+  version: { sdk: '4.1.1', engine: undefined },
   /**
    * wait any key from user
    * @returns {Promise<void>} a promise of nothing, please use await
