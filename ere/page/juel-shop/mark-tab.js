@@ -40,6 +40,7 @@ const {
 } = require('#/data/ero/plugin/plugin-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const { get_trainer_title } = require('#/data/info-generator');
+const LoveLimitStatus = require('#/data/love-limit-status');
 
 /**
  * @param {{a:number,m:number,p:InmonPlugin}} plugin_with_acc
@@ -111,57 +112,57 @@ function plugin_to_button(
  */
 module.exports = async (chara, juel_dict, total_delta, pointer) => {
   let buffer = [];
-  let sex_level = era.get(`mark:${chara.id}:淫纹`);
-  const pleasure_level = era.get(`mark:${chara.id}:欢愉`),
-    meek_level = era.get(`mark:${chara.id}:同心`),
-    pain_level = era.get(`mark:${chara.id}:苦痛`),
-    shame_level = era.get(`mark:${chara.id}:羞耻`),
-    hate_level = era.get(`mark:${chara.id}:反抗`);
+  let l_sex = era.get(`mark:${chara.id}:淫纹`);
+  const l_pleasure = era.get(`mark:${chara.id}:欢愉`);
+  const l_meek = era.get(`mark:${chara.id}:同心`);
+  const l_pain = era.get(`mark:${chara.id}:苦痛`);
+  const l_shame = era.get(`mark:${chara.id}:羞耻`);
+  const l_hate = era.get(`mark:${chara.id}:反抗`);
   let sex_mark_price = 0;
   const price_dict = [];
   if (chara.id > 0) {
     era.drawLine({
       content: `${chara.get_full_name()} 的 刻印`,
     });
-    if (!sex_level) {
-      buffer.push(get_mark_cols(chara.id, '欢愉', pleasure_level));
+    if (!l_sex) {
+      buffer.push(get_mark_cols(chara.id, '欢愉', l_pleasure));
     }
-    buffer.push(get_mark_cols(chara.id, '同心', meek_level));
-    buffer.push(get_mark_cols(chara.id, '苦痛', pain_level));
-    buffer.push(get_mark_cols(chara.id, '羞耻', shame_level));
-    buffer.push(get_mark_cols(chara.id, '反抗', hate_level));
+    buffer.push(get_mark_cols(chara.id, '同心', l_meek));
+    buffer.push(get_mark_cols(chara.id, '苦痛', l_pain));
+    buffer.push(get_mark_cols(chara.id, '羞耻', l_shame));
+    buffer.push(get_mark_cols(chara.id, '反抗', l_hate));
     buffer.push({ content: [], type: 'text' });
-    if (hate_level) {
-      price_dict[0] = get_mark_price(chara.id, hate_level, meek_level / 2);
+    if (l_hate) {
+      price_dict[0] = get_mark_price(chara.id, l_hate, l_meek / 2);
       price_dict[1] = price_dict[2] = get_mark_price(
         chara.id,
-        hate_level,
-        pain_level + 0.75,
+        l_hate,
+        l_pain + 0.75,
       );
-      price_dict[3] = get_mark_price(chara.id, hate_level, shame_level + 0.75);
+      price_dict[3] = get_mark_price(chara.id, l_hate, l_shame + 0.75);
       buffer.push(
         ...[
           {
             config: {
-              disabled: juel_dict['顺从'] < price_dict[0] || !meek_level,
+              disabled: juel_dict['顺从'] < price_dict[0] || !l_meek,
             },
             content: '使用顺从因子消除反抗刻印',
           },
           {
             config: {
-              disabled: juel_dict['痛苦'] < price_dict[1] || !pain_level,
+              disabled: juel_dict['痛苦'] < price_dict[1] || !l_pain,
             },
             content: '使用痛苦因子消除反抗刻印',
           },
           {
             config: {
-              disabled: juel_dict['恐惧'] < price_dict[2] || !pain_level,
+              disabled: juel_dict['恐惧'] < price_dict[2] || !l_pain,
             },
             content: '使用恐惧因子消除反抗刻印',
           },
           {
             config: {
-              disabled: juel_dict['羞耻'] < price_dict[3] || !shame_level,
+              disabled: juel_dict['羞耻'] < price_dict[3] || !l_shame,
             },
             content: '使用羞耻因子消除反抗刻印',
           },
@@ -178,8 +179,8 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
         },
       );
     }
-    if (pain_level) {
-      price_dict[4] = get_mark_price(chara.id, pain_level, meek_level);
+    if (l_pain) {
+      price_dict[4] = get_mark_price(chara.id, l_pain, l_meek);
       buffer.push({
         accelerator: 4,
         config: {
@@ -190,8 +191,8 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
         type: 'button',
       });
     }
-    if (shame_level) {
-      price_dict[5] = get_mark_price(chara.id, shame_level, meek_level);
+    if (l_shame) {
+      price_dict[5] = get_mark_price(chara.id, l_shame, l_meek);
       buffer.push({
         accelerator: 5,
         config: {
@@ -202,7 +203,7 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
         type: 'button',
       });
     }
-    if (pain_level + shame_level) {
+    if (l_pain + l_shame) {
       buffer.push({
         content:
           '* 要消除的刻印等级越低，同心刻印的等级越高，消耗的顺从因子越低',
@@ -213,7 +214,7 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
   era.printMultiColumns(buffer, { horizontalAlign: 'space-around' });
 
   const inmon = CharaInmon.get(chara.id);
-  const p_filter_param = {
+  const p_f_params = {
     chara:
       era.get(`cflag:${chara.id}:种族`) > 0
         ? era.get(`cflag:${chara.id}:气性`)
@@ -222,14 +223,27 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
       era.get(`cflag:${chara.id}:种族`) > 0 &&
       (!chara.id || era.get(`cflag:${chara.id}:育成回合计时`) < 3 * 48),
     id: chara.id,
-    love: chara.id > 0 ? era.get(`love:${chara.id}`) : 0,
+    love:
+      chara.id > 0
+        ? LoveLimitStatus.get(chara.id).is_empty()
+          ? era.get(`love:${chara.id}`)
+          : 100
+        : 0,
     pregnant:
       inmon.slave === slavery_enum.pregnant ||
       era.get(`cflag:${chara.id}:妊娠阶段`) !== 1 << pregnant_stage_enum.no,
     sex: chara.sex_code,
   };
   const plugins = Object.values(inmon_plugin_dict)
-    .filter((e) => e.level <= sex_level && e.condition(p_filter_param))
+    .filter((e) => {
+      if (e.level <= l_sex && e.condition(p_f_params)) {
+        return true;
+      }
+      if (inmon.on(e.id)) {
+        inmon.set(e.id, 0);
+      }
+      return false;
+    })
     .map((e, i) => ({
       a: i + 10,
       m: Math.floor(
@@ -247,16 +261,15 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
   }, {});
   const money = juel_dict['顺从'];
   const slave = inmon.slave;
-  if (sex_level > 0 || (pleasure_level > 0 && meek_level > 0)) {
+  if (l_sex > 0 || (l_pleasure > 0 && l_meek > 0)) {
     era.drawLine({
       content: chara.full_name + ' 的 淫纹',
     });
-    if (sex_level > 0) {
-      const limit = inmon_limit[sex_level];
-      const size = inmon.size;
+    if (l_sex > 0) {
+      const limit = inmon_limit[l_sex];
       const group_dict = {};
-      sex_mark_price = get_mark_price(chara.id, sex_level + 1, meek_level);
-      const sex_mark_col = get_mark_cols(chara.id, '淫纹', sex_level);
+      sex_mark_price = get_mark_price(chara.id, l_sex + 1, l_meek);
+      const sex_mark_col = get_mark_cols(chara.id, '淫纹', l_sex);
       delete sex_mark_col.config.width;
       sex_mark_col.content.unshift({ isBr: true });
       const p_buffer = plugins
@@ -276,6 +289,7 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
             type: 'button',
           };
         });
+      const size = inmon.size;
       const buffer = [];
       const keys = Object.keys(groups).slice(pointer.sub, pointer.sub + 2);
       buffer.push({
@@ -378,13 +392,12 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
         },
         {
           columns: [
-            ...(sex_level < 3
+            ...(l_sex < 3
               ? [
                   {
                     accelerator: 7,
                     config: {
-                      disabled:
-                        !meek_level || juel_dict['顺从'] < sex_mark_price,
+                      disabled: !l_meek || juel_dict['顺从'] < sex_mark_price,
                       width: 6,
                     },
                     content: '提升淫纹等级',
@@ -440,7 +453,7 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
         },
       );
     } else {
-      sex_mark_price = get_mark_price(chara.id, pleasure_level, meek_level);
+      sex_mark_price = get_mark_price(chara.id, l_pleasure, l_meek);
       era.printButton('将欢愉刻印转换为淫纹', 6, {
         disabled: juel_dict['顺从'] < sex_mark_price,
       });
@@ -474,14 +487,14 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
       begin_and_init_ero(chara.id);
       if (
         (ret === 1 || ret === 2) &&
-        pain_level < 3 &&
-        Math.random() < 1 - 0.15 * (3 - hate_level) - 0.2 * (pain_level - 1)
+        l_pain < 3 &&
+        Math.random() < 1 - 0.15 * (3 - l_hate) - 0.2 * (l_pain - 1)
       ) {
         era.set(`nowex:${chara.id}:苦痛获取`, 1);
       } else if (
         ret === 3 &&
-        shame_level < 3 &&
-        Math.random() < 1 - 0.15 * (3 - hate_level) - 0.2 * (shame_level - 1)
+        l_shame < 3 &&
+        Math.random() < 1 - 0.15 * (3 - l_hate) - 0.2 * (l_shame - 1)
       ) {
         era.set(`nowex:${chara.id}:羞耻获取`, 1);
       }
@@ -517,20 +530,20 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
         chara.get_colored_name(),
         ' 的 ',
         {
-          content: `欢愉刻印 Lv.${pleasure_level}`,
+          content: `欢愉刻印 Lv.${l_pleasure}`,
           color: get_gradient_color(
             undefined,
             mark_colors['欢愉'],
-            pleasure_level / 3,
+            l_pleasure / 3,
           ),
         },
         ` 转换为 `,
         {
-          content: `淫纹 Lv.${pleasure_level}`,
+          content: `淫纹 Lv.${l_pleasure}`,
           color: get_gradient_color(
             undefined,
             mark_colors['淫纹'],
-            pleasure_level / 3,
+            l_pleasure / 3,
           ),
         },
         ` 吗？花费：`,
@@ -541,20 +554,16 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
         chara.get_colored_name(),
         ' 的 ',
         {
-          content: `淫纹 Lv.${sex_level}`,
-          color: get_gradient_color(
-            undefined,
-            mark_colors['淫纹'],
-            sex_level / 3,
-          ),
+          content: `淫纹 Lv.${l_sex}`,
+          color: get_gradient_color(undefined, mark_colors['淫纹'], l_sex / 3),
         },
         ` 升级为 `,
         {
-          content: `Lv.${sex_level + 1}`,
+          content: `Lv.${l_sex + 1}`,
           color: get_gradient_color(
             undefined,
             mark_colors['淫纹'],
-            (sex_level + 1) / 3,
+            (l_sex + 1) / 3,
           ),
         },
         ` 吗？花费：`,
@@ -575,17 +584,17 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
       ) {
         if (ret === 6) {
           era.set(`mark:${chara.id}:欢愉`, 0);
-          sex_level = era.set(`mark:${chara.id}:淫纹`, pleasure_level);
-          total_delta.pleasure_delta = pleasure_level;
-          total_delta.sex_delta = pleasure_level;
-          sys_change_fame(-50 * [1, 3, 6][sex_level - 1]);
+          l_sex = era.set(`mark:${chara.id}:淫纹`, l_pleasure);
+          total_delta.pleasure_delta = l_pleasure;
+          total_delta.sex_delta = l_pleasure;
+          sys_change_fame(-50 * [1, 3, 6][l_sex - 1]);
         } else {
-          sex_level = era.add(`mark:${chara.id}:淫纹`, 1);
+          l_sex = era.add(`mark:${chara.id}:淫纹`, 1);
           total_delta.sex_delta = (total_delta.sex_delta || 0) + 1;
-          sys_change_fame(-50 * sex_level);
+          sys_change_fame(-50 * l_sex);
         }
         await get_custom_ero(chara.id).get_mark(
-          sex_level,
+          l_sex,
           mark_enum.ero,
           ret === 6,
         );
