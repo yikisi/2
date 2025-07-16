@@ -4,9 +4,9 @@
  */
 const era = require('#/era-electron');
 
-const { handle_debuff } = require('#/event/edu/edu-events-17/snippets');
 const Edu17UntilWeekStart = require('#/event/edu/edu-events-17/week-start');
 const { add_event } = require('#/event/queue');
+const { handle_debuff } = require('#/event/snippets/17');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
 

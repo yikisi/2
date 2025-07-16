@@ -1,6 +1,6 @@
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
-const EroNormalFucking = require('#/event/ero/common-lines/normal/fucking');
+const EroNormalFucking = require('#/event/ero/common/normal/fucking');
 
 const PamaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-64');
 

@@ -1,6 +1,6 @@
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
-const EroSleepFucking = require('#/event/ero/common-lines/sleep/fucking');
+const EroSleepFucking = require('#/event/ero/common/sleep/fucking');
 
 module.exports = class extends EroSleepFucking {
   async stimulate_glans_by_virgin(attacker, defender, hook) {

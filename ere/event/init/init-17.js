@@ -1,7 +1,7 @@
 const era = require('#/era-electron');
 
-const { transform } = require('#/event/edu/edu-events-17/snippets');
 const CustomizedInit = require('#/event/init/customized-init');
+const { transform } = require('#/event/snippets/17');
 
 const LunaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-17');
 

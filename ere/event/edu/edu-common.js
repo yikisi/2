@@ -20,8 +20,8 @@ const { sys_change_fame } = require('#/system/sys-calc-flag');
 
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
-const ICustomizedEdu = require('#/event/edu/snippets/edu-interface');
-const print_fail_info_in_train = require('#/event/edu/snippets/print-fail-info-in-train');
+const ICustomizedEdu = require('#/event/edu/common/edu-interface');
+const print_fail_info_in_train = require('#/event/edu/common/print-fail-info-in-train');
 const print_event_name = require('#/event/snippets/print-event-name');
 const quick_into_sex = require('#/event/snippets/quick-into-sex');
 

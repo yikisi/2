@@ -1,6 +1,6 @@
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
-const EroSleepCommunications = require('#/event/ero/common-lines/sleep/communications');
+const EroSleepCommunications = require('#/event/ero/common/sleep/communications');
 
 module.exports = class extends EroSleepCommunications {
   async kiss(attacker, defender, hook) {
