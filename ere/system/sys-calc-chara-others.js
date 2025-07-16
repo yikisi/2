@@ -170,9 +170,9 @@ function like_chara(target, aim, val, shown = true, extra_love = 0) {
   love = Math.max(love, extra_love);
   let ret = false;
   if (val !== 0) {
-    const new_relation = era.set(`relation:${target}:${aim}`, relation + val);
-    const mark = get_relation_mark(new_relation, target);
+    const _new = era.set(`relation:${target}:${aim}`, relation + val);
     if (shown) {
+      const mark = get_relation_mark(target, _new);
       ret = true;
       era.print([
         get_chara_talk(target).get_colored_name(),
@@ -192,7 +192,7 @@ function like_chara(target, aim, val, shown = true, extra_love = 0) {
           content: `了 ${mark === '？' ? '?' : val > 0 ? val : -val}！现在为：`,
         },
         {
-          content: `${mark} (${mark === '？' ? '?' : new_relation})`,
+          content: `${mark} (${mark === '？' ? '?' : _new})`,
           color: relation_colors[mark],
         },
       ]);
@@ -230,15 +230,15 @@ function love_uma(cid, val, shown = true) {
     50 * era.get(`status:${cid}:爱意克制`) +
     get_custom_mec(cid).get_love_buff() +
     100 * inmon.on(plugin_enum.love_up) -
-    50 * inmon.on(plugin_enum.love_d1) -
+    80 * inmon.on(plugin_enum.love_d1) -
     100 * inmon.on(plugin_enum.love_d2);
   val = Math.floor((val * coff) / 100);
   if (val > 6) {
     val = 6;
   }
-  const force_limit = get_custom_mec(cid).get_love_limit(),
-    border = force_limit || Math.max(get_love_border(cid), 50),
-    love_limit = !era.get('flag:回合爱慕惩罚');
+  const force_limit = get_custom_mec(cid).get_love_limit();
+  const border = force_limit || Math.max(get_love_border(cid), 50);
+  const love_limit = !era.get('flag:回合爱慕惩罚');
   if ((love_limit || force_limit) && love + val >= border) {
     val = border - 1 - love;
   }
@@ -270,11 +270,7 @@ function love_uma(cid, val, shown = true) {
     (new_val === 49 || new_val === 74 || new_val === 89 || new_val === 99) &&
     era.get(`cflag:${cid}:爱慕暂拒`) !== new_val
   ) {
-    if (
-      (sys_check_hide_relation_and_love(cid) & 0b1) === 0 &&
-      era.get(`cflag:${cid}:招募状态`) !== recruit_flags.yes &&
-      shown
-    ) {
+    if ((sys_check_hide_relation_and_love(cid) & 0b1) === 0 && shown) {
       era.print([
         '和 ',
         get_chara_talk(cid).get_colored_name(),

@@ -17,11 +17,11 @@ const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
-const common_pregnant_report_in_love = require('#/event/ero/common-lines/common-pregnant-report-in-love');
-const cum_in_womb = require('#/event/ero/common-lines/cum-in-womb');
-const NormalCommandLines = require('#/event/ero/common-lines/normal/normal-common');
-const RapeCommandLines = require('#/event/ero/common-lines/rape/rape-common');
-const SleepCommandLines = require('#/event/ero/common-lines/sleep/sleep-common');
+const common_pregnant_report_in_love = require('#/event/ero/common/common-pregnant-report-in-love');
+const cum_in_womb = require('#/event/ero/common/cum-in-womb');
+const NormalCommandLines = require('#/event/ero/common/normal/normal-common');
+const RapeCommandLines = require('#/event/ero/common/rape/rape-common');
+const SleepCommandLines = require('#/event/ero/common/sleep/sleep-common');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');

@@ -36,29 +36,30 @@ module.exports = {
    * @returns {{print():*[]}}
    */
   generate(chara) {
-    const relation_info_list = [],
-      family_info_list = [],
-      my_src_chara = era.get('cflag:0:模版角色') || -1;
-
+    const relation_info_list = [];
+    const family_info_list = [];
+    const my_src_chara = era.get('cflag:0:模版角色') || -1;
     if (chara.id > 0) {
-      Object.entries(era.get(`relation:${chara.id}`)).forEach((e) => {
-        const mark = get_relation_mark(e[1], chara.id),
-          target = Number(e[0]);
-        if (target !== my_src_chara && target < 1000) {
-          relation_info_list.push({
-            config: { width: 8 },
-            content: [
-              sys_get_colored_full_callname(chara.id, target),
-              '：',
-              {
-                content: mark,
-                color: relation_colors[mark],
-              },
-            ],
-            type: 'text',
-          });
-        }
-      });
+      Object.entries(era.get(`relation:${chara.id}`)).forEach(
+        ([cid, relation]) => {
+          const mark = get_relation_mark(chara.id, relation);
+          const target = Number(cid);
+          if (target !== my_src_chara && target < 1000) {
+            relation_info_list.push({
+              config: { width: 8 },
+              content: [
+                sys_get_colored_full_callname(chara.id, target),
+                '：',
+                {
+                  content: mark,
+                  color: relation_colors[mark],
+                },
+              ],
+              type: 'text',
+            });
+          }
+        },
+      );
     }
     if (!relation_info_list.length) {
       relation_info_list.push({

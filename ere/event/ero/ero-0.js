@@ -10,7 +10,7 @@ const { get_penis_size } = require('#/system/ero/sys-calc-ero-status');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
-const common_pregnant_report_in_love = require('#/event/ero/common-lines/common-pregnant-report-in-love');
+const common_pregnant_report_in_love = require('#/event/ero/common/common-pregnant-report-in-love');
 const kojo = require('#/event/ero/ero-0.kojo');
 const CustomizedEro = require('#/event/ero/ero-common');
 const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');

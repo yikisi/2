@@ -10,7 +10,7 @@ module.exports = class extends MecNpc {
   get_love_limit() {
     if (era.get(`cflag:${this.id}:招募状态`) !== recruit_flags.yes) {
       if (era.get(`love:${this.id}`) >= 50) {
-        return 67;
+        return 51;
       }
       return 50;
     }

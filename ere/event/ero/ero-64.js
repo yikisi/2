@@ -11,7 +11,7 @@ const {
 } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
-const NormalCommandLines = require('#/event/ero/common-lines/normal/normal-common');
+const NormalCommandLines = require('#/event/ero/common/normal/normal-common');
 const kojo = require('#/event/ero/ero-64.kojo');
 const CustomizedEro = require('#/event/ero/ero-common');
 const PamaNormalCommunications = require('#/event/ero/ero-lines-64/normal-communications');

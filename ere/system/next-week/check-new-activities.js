@@ -90,23 +90,30 @@ async function check_new_activities(cur_round, in_team_list) {
     era.print([
       '【本周有 ',
       { content: celebration, color: celebration_color },
-      '，马娘们也许有什么活动需要你关注哦】',
+      '，队伍成员们也许有什么活动需要你关注哦】',
     ]);
     era.set('cflag:0:节日事件标记', 0);
-    in_team_list.forEach((id) =>
-      era.set(
-        `cflag:${id}:节日事件标记`,
-        !era.get(`cflag:${id}:种族`) ||
-          era.get(`cflag:${id}:育成回合计时`) > 47 ||
-          era.get(`love:${id}`) >= 60,
-      ),
-    );
     if (celebration === '庙会') {
-      in_team_list.forEach((id) =>
+      in_team_list.forEach((cid) =>
         era.set(
-          `cflag:${id}:节日事件标记`,
-          era.get(`cflag:${id}:节日事件标记`) &&
-            era.get(`cflag:${id}:位置`) === location_enum.beach,
+          `cflag:${cid}:节日事件标记`,
+          +(
+            era.get(`cflag:${cid}:位置`) === location_enum.beach &&
+            (!era.get(`cflag:${cid}:种族`) ||
+              era.get(`cflag:${cid}:育成回合计时`) > 47 ||
+              era.get(`love:${cid}`) >= 60)
+          ),
+        ),
+      );
+    } else {
+      in_team_list.forEach((cid) =>
+        era.set(
+          `cflag:${cid}:节日事件标记`,
+          +(
+            !era.get(`cflag:${cid}:种族`) ||
+            era.get(`cflag:${cid}:育成回合计时`) > 47 ||
+            era.get(`love:${cid}`) >= 60
+          ),
         ),
       );
     }

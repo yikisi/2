@@ -139,6 +139,7 @@ cons_dict[345] = require('#/event/check/check-345');
 cons_dict[346] = require('#/event/check/check-346');
 cons_dict[347] = require('#/event/check/check-347');
 cons_dict[348] = require('#/event/check/check-348');
+cons_dict[349] = require('#/event/check/check-349');
 cons_dict[400] = require('#/event/check/check-400');
 cons_dict['emperor'] = require('#/event/check/check-emperor');
 cons_dict[340] =

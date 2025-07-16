@@ -534,7 +534,7 @@ module.exports = {
    * @param {number[]} aim_motions
    */
   sys_cm_and_cop(attacker, defender, main_parts, aim_motions) {
-    if (attacker !== era.get('tflag:主导权')) {
+    if (attacker === era.get('tflag:主导权')) {
       change_motion(attacker, defender, ...aim_motions);
       clean_oor_parts(attacker, defender, main_parts);
     }
@@ -547,7 +547,7 @@ module.exports = {
    * @param {number} is_up
    */
   sys_cm_b_and_cop(attacker, defender, compat_motions, main_parts, is_up = -2) {
-    if (attacker !== era.get('tflag:主导权')) {
+    if (attacker === era.get('tflag:主导权')) {
       change_motion_by_base(attacker, defender, compat_motions, is_up);
       clean_oor_parts(attacker, defender, main_parts);
     }

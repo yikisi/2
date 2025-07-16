@@ -27,11 +27,11 @@ class CharaInmon {
   }
 
   get count() {
-    return Object.keys(this.obj).length;
+    return Object.keys(this.#obj).length;
   }
 
   /** @type {Record<string,0|1>} */
-  get obj() {
+  get #obj() {
     return (
       era.get(`equip:${this.id}:淫纹插件`) ||
       era.set(`equip:${this.id}:淫纹插件`, {})
@@ -39,11 +39,12 @@ class CharaInmon {
   }
 
   get raw() {
-    return this.obj;
+    return this.#obj;
   }
 
   get size() {
-    return Object.entries(this.obj)
+    console.log(this.#obj);
+    return Object.entries(this.#obj)
       .filter((e) => e[1] > 0)
       .reduce((p, c) => p + inmon_plugin_dict[c[0]].size, 0);
   }
@@ -59,7 +60,7 @@ class CharaInmon {
   }
 
   get list() {
-    return Object.entries(this.obj)
+    return Object.entries(this.#obj)
       .filter((e) => e[1] > 0)
       .map(([p]) => Number(p))
       .sort();
@@ -70,7 +71,7 @@ class CharaInmon {
    * @returns {boolean}
    */
   has(plugin_id) {
-    return this.obj[plugin_id] !== undefined;
+    return this.#obj[plugin_id] !== undefined;
   }
 
   /**
@@ -78,7 +79,7 @@ class CharaInmon {
    * @returns {boolean}
    */
   on(plugin_id) {
-    return this.obj[plugin_id] > 0;
+    return this.#obj[plugin_id] > 0;
   }
 
   /**
@@ -86,7 +87,7 @@ class CharaInmon {
    * @param {0|1} v
    */
   set(plugin_id, v) {
-    this.obj[plugin_id] = v;
+    this.#obj[plugin_id] = v;
   }
 }
 

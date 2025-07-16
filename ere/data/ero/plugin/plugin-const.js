@@ -74,8 +74,10 @@ plugins[40312] = require('#/data/ero/plugin/plugin-40312');
 plugins[40401] = require('#/data/ero/plugin/plugin-40401');
 plugins[40402] = require('#/data/ero/plugin/plugin-40402');
 plugins[40403] = require('#/data/ero/plugin/plugin-40403');
-plugins[40404] = require('#/data/ero/plugin/plugin-40404');
-plugins[40405] = require('#/data/ero/plugin/plugin-40405');
+plugins[40406] = require('#/data/ero/plugin/plugin-40406');
+plugins[40407] = require('#/data/ero/plugin/plugin-40407');
+plugins[40408] = require('#/data/ero/plugin/plugin-40408');
+plugins[40409] = require('#/data/ero/plugin/plugin-40409');
 plugins[50111] = require('#/data/ero/plugin/plugin-50111');
 plugins[50112] = require('#/data/ero/plugin/plugin-50112');
 plugins[50113] = require('#/data/ero/plugin/plugin-50113');
@@ -235,7 +237,7 @@ module.exports = {
     rel_lu: 40141,
     // 爱我: 爱慕获取+100%
     love_up: 40211,
-    // 保持距离: 爱慕获取-50%
+    // 保持距离: 爱慕获取-80%
     love_d1: 40221,
     // 只可在此: 爱慕获取-100%
     love_d2: 40222,
@@ -250,9 +252,13 @@ module.exports = {
     // 露出癖: 将所有羞耻因子转换为受虐快感
     tran_s: 40403,
     // 狂喜感知: 将所有负面情感因子转换为受虐快感
-    sls: 40404,
+    sls: 40406,
+    // 享欲堕落: 高潮时增加的快感分散给其他感官
+    nrg: 40407,
+    // 无心绝顶: 将所有负面情感因子转换为施虐快感
+    khn: 40408,
     // 欢愉风暴: 受到的所有快感平均分散给所有感官
-    avg: 40405,
+    tzt: 40409,
     // 高潮操纵Ⅰ: 每隔一回合允许高潮一回合
     org_c1: 50111,
     // 高潮操纵Ⅱ: 每隔两回合允许高潮一回合

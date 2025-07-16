@@ -3,26 +3,26 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaEroSkill(
   660032,
-  '欢愉之主在上',
-  '带玩具上场能够略微提高基础属性的发挥',
+  '红沙之王',
+  '高潮时与其他对手分享更多快感；场上选手数量越多，效果越强',
   66003,
   2,
   UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.buff,
+    UmaSkill.skill_name_enum.control,
     UmaSkill.skill_border_enum.ero_advanced,
   ),
   1,
   [() => true, () => true],
-  [(args) => args.item === 1, () => false],
-  [-0.0001, 0],
-  [0, 0],
+  [(args) => args.orgasm === 1, () => false],
+  [3, 0],
+  [15, 0],
   [
     UmaSkill.ability_time_usage_enum.normal,
     UmaSkill.ability_time_usage_enum.normal,
   ],
   [
     [
-      UmaSkill.ability_type_enum.HasItemBuff,
+      UmaSkill.ability_type_enum.ShareOrgasm,
       UmaSkill.ability_type_enum.no,
       UmaSkill.ability_type_enum.no,
     ],
@@ -34,7 +34,7 @@ module.exports = new UmaEroSkill(
   ],
   [
     [
-      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.MultiplyCount,
       UmaSkill.ability_usage_enum.Direct,
       UmaSkill.ability_usage_enum.Direct,
     ],
@@ -45,12 +45,12 @@ module.exports = new UmaEroSkill(
     ],
   ],
   [
+    [12000, 0, 0],
     [0, 0, 0],
-    [0, 0, 0],
   ],
   [
     [
-      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.All,
       UmaSkill.target_type_enum.no,
       UmaSkill.target_type_enum.no,
     ],
@@ -71,12 +71,5 @@ module.exports = new UmaEroSkill(
   false,
   false,
   [],
-  [
-    UmaSkill.ability_tag_enum.speed,
-    UmaSkill.ability_tag_enum.stamina,
-    UmaSkill.ability_tag_enum.power,
-    UmaSkill.ability_tag_enum.guts,
-    UmaSkill.ability_tag_enum.wiz,
-    UmaSkill.ability_tag_enum.ero,
-  ],
+  [UmaSkill.ability_tag_enum.ero],
 );

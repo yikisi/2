@@ -69,29 +69,33 @@ function page_header(enable_race_info) {
     era.drawLine();
     era.print('当前未加载存档', { align: 'center' });
   } else {
-    const celebration = get_celebration(),
-      cur_coin = era.get('flag:当前马币'),
-      cur_fame = era.get('flag:当前声望'),
-      cur_rounds = era.get('flag:当前回合数'),
-      race_characters = sys_filter_chara('cflag', '招募状态', recruit_flags.yes)
-        .map((e) => {
-          const ret = sys_reg_race(e).curr;
-          return {
-            id: e,
-            race: ret.race,
-            week: ret.week,
-          };
-        })
-        .filter((e) => e.week === cur_rounds),
-      title_level = get_trainer_title(),
-      trainer_title_color = trainer_colors[title_level.substring(0, 2)],
-      trainer_buff = get_trainer_train_buff(),
-      money_buff = era.get('global:金钱加成'),
-      rec_trainers = [304, 306]
-        .filter((e) => era.get(`cflag:${e}:招募状态`) === recruit_flags.yes)
-        .map((e) => `[${get_custom_mec(e).get_talents()[0].content}]`)
-        .join('+');
-    let billings = '月账单：',
+    const celebration = get_celebration();
+    const cur_coin = era.get('flag:当前马币');
+    const cur_fame = era.get('flag:当前声望');
+    const cur_rounds = era.get('flag:当前回合数');
+    const race_characters = sys_filter_chara(
+      'cflag',
+      '招募状态',
+      recruit_flags.yes,
+    )
+      .map((e) => {
+        const ret = sys_reg_race(e).curr;
+        return {
+          id: e,
+          race: ret.race,
+          week: ret.week,
+        };
+      })
+      .filter((e) => e.week === cur_rounds);
+    const title_level = get_trainer_title();
+    const trainer_title_color = trainer_colors[title_level.substring(0, 2)];
+    const trainer_buff = get_trainer_train_buff();
+    const money_buff = era.get('global:金钱加成');
+    const rec_trainers = [304, 306]
+      .filter((e) => era.get(`cflag:${e}:招募状态`) === recruit_flags.yes)
+      .map((e) => `[${get_custom_mec(e).get_talents()[0].content}]`)
+      .join('+');
+    let billings = '账单：',
       money_change = 0;
     sys_get_billings().forEach((e, i) => {
       if (e.repay !== 0 && e.timer !== 0) {
@@ -102,6 +106,9 @@ function page_header(enable_race_info) {
         money_change += delta;
         billings += `\n${delta > 0 ? '+' : ''}${delta}`;
         switch (e.creditor) {
+          case -2:
+            billings += ` (${era.get('callname:349:-2')} 投资收益)`;
+            break;
           case -1:
             billings += ' (月工资+年终奖)';
             break;

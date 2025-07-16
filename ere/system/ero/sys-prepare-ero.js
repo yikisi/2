@@ -412,6 +412,13 @@ function init_ero(...ids) {
         era.set(`status:${cid}:反避孕套`, 1);
       }
     }
+    if (
+      era.get(`status:${cid}:爱意克制`) > 0 &&
+      era.getCharactersInTrain().findIndex((e) => !e) !== -1 &&
+      sys_check_awake(0)
+    ) {
+      era.set(`status:${cid}:爱意克制`, 0);
+    }
   }
 }
 

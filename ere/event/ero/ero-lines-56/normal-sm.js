@@ -1,11 +1,11 @@
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
-const EroNormalSm = require('#/event/ero/common-lines/normal/sm');
+const EroNormalSm = require('#/event/ero/common/normal/sm');
 const {
   after_refusing_by_attacker,
   after_refusing_by_defender,
   ask_action,
-} = require('#/event/ero/common-lines/snippets');
+} = require('#/event/ero/common/snippets');
 
 const { get_random_value } = require('#/utils/value-utils');
 

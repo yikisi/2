@@ -4,12 +4,8 @@ const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
 const CustomizedEdu = require('#/event/edu/edu-common');
 const Edu17UntilRaceStart = require('#/event/edu/edu-events-17/race-start');
-const {
-  handle_debuff,
-  normal_end,
-  transform,
-} = require('#/event/edu/edu-events-17/snippets');
 const { add_event } = require('#/event/queue');
+const { handle_debuff, normal_end, transform } = require('#/event/snippets/17');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');

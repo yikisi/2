@@ -57,23 +57,23 @@ const describers = { c: {}, r: {}, s: {} };
 current = new Date().getTime();
 
 [
-  require('#/event/ero/common-lines/action-descriptions/normal-communications'),
-  require('#/event/ero/common-lines/action-descriptions/normal-making-outs'),
-  require('#/event/ero/common-lines/action-descriptions/normal-fucking'),
-  require('#/event/ero/common-lines/action-descriptions/normal-orgy'),
-  require('#/event/ero/common-lines/action-descriptions/normal-sm'),
-  require('#/event/ero/common-lines/action-descriptions/normal-items'),
+  require('#/event/ero/common/action-descriptions/normal-communications'),
+  require('#/event/ero/common/action-descriptions/normal-making-outs'),
+  require('#/event/ero/common/action-descriptions/normal-fucking'),
+  require('#/event/ero/common/action-descriptions/normal-orgy'),
+  require('#/event/ero/common/action-descriptions/normal-sm'),
+  require('#/event/ero/common/action-descriptions/normal-items'),
 ].forEach((f) => f(describers.c));
 
 [
-  require('#/event/ero/common-lines/action-descriptions/sleep-communications'),
-  require('#/event/ero/common-lines/action-descriptions/sleep-making-outs'),
-  require('#/event/ero/common-lines/action-descriptions/sleep-fucking'),
+  require('#/event/ero/common/action-descriptions/sleep-communications'),
+  require('#/event/ero/common/action-descriptions/sleep-making-outs'),
+  require('#/event/ero/common/action-descriptions/sleep-fucking'),
 ].forEach((f) => f(describers.s));
 
 [
-  require('#/event/ero/common-lines/action-descriptions/rape-communications'),
-  require('#/event/ero/common-lines/action-descriptions/rape-making-outs'),
+  require('#/event/ero/common/action-descriptions/rape-communications'),
+  require('#/event/ero/common/action-descriptions/rape-making-outs'),
 ].forEach((f) => f(describers.r));
 
 console.log(

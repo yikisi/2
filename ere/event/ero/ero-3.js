@@ -4,7 +4,7 @@
  */
 const era = require('#/era-electron');
 
-const NormalCommandLines = require('#/event/ero/common-lines/normal/normal-common');
+const NormalCommandLines = require('#/event/ero/common/normal/normal-common');
 const CustomizedEro = require('#/event/ero/ero-common');
 const TeioNormalCommunications = require('#/event/ero/ero-lines-3/normal-communications');
 const TeioNormalMakingOuts = require('#/event/ero/ero-lines-3/normal-making-outs');

@@ -2,10 +2,10 @@ const era = require('#/era-electron');
 
 const { sys_get_motion } = require('#/system/ero/sys-calc-distance');
 
-const EroNormalCommunications = require('#/event/ero/common-lines/normal/communications');
-const EroNormalMakingOuts = require('#/event/ero/common-lines/normal/making-outs-final');
-const NormalCommandLines = require('#/event/ero/common-lines/normal/normal-common');
-const EroNormalSm = require('#/event/ero/common-lines/normal/sm');
+const EroNormalCommunications = require('#/event/ero/common/normal/communications');
+const EroNormalMakingOuts = require('#/event/ero/common/normal/making-outs-final');
+const NormalCommandLines = require('#/event/ero/common/normal/normal-common');
+const EroNormalSm = require('#/event/ero/common/normal/sm');
 const kojo = require('#/event/ero/ero-13.kojo');
 const CustomizedEro = require('#/event/ero/ero-common');
 

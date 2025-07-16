@@ -89,7 +89,7 @@ async function sys_calc_orgasm(shown, ...ids) {
     const inmon = CharaInmon.get(cid);
     const l_times =
       1 +
-      inmon.on(plugin_enum.juicy) +
+      1 * inmon.on(plugin_enum.juicy) +
       2 * inmon.on(plugin_enum.fountain) +
       4 * inmon.on(plugin_enum.woman);
     const wp_ratio = Math.log(era.get(`base:${cid}:根性`)) / log_max_wp;
@@ -310,12 +310,11 @@ async function sys_calc_orgasm(shown, ...ids) {
             limited_count += times;
           }
           orgasm_count += times;
-          if (i < orgasm_check_list.length - 2) {
-            update_palam_from_main_orgasm(cid, times);
-          } else {
+          if (i >= orgasm_check_list.length - 2) {
             // 主要部位高潮额外获得20%的因子奖励
             add_juel(cid, `${part_name}快感`, (palam_from_orgasm * times) / 5);
           }
+          update_palam_from_main_orgasm(cid, part, times, inmon);
           orgasm_part_count++;
           if (part === part_enum.sadism || part === part_enum.masochism) {
             minus_lust += lust_from_palam * 0.75;
@@ -449,7 +448,12 @@ async function sys_calc_orgasm(shown, ...ids) {
             total_cost.stamina +=
               orgasm_cost.body.stamina * nipple_orgasm_times;
             total_cost.time += orgasm_cost.body.time * nipple_orgasm_times;
-            update_palam_from_main_orgasm(cid, nipple_orgasm_times);
+            update_palam_from_main_orgasm(
+              cid,
+              part,
+              nipple_orgasm_times,
+              inmon,
+            );
           }
           const cup = get_breast_cup(cid, true);
           const loc = era.set(`tcvar:${cid}:喷奶位置`, {

@@ -1,15 +1,20 @@
 const {
+  add,
   clear,
   drawLine,
   get,
+  getLineCount,
   input,
   print,
   printAndWait,
+  printButton,
   printInColRows,
+  printMultiColumns,
   set,
   setHorizontalAlign,
 } = require('#/era-electron');
 
+const { sys_get_billings } = require('#/system/sys-calc-base-cflag');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
@@ -20,16 +25,19 @@ const print_out_page = require('#/page/page-out');
 const { run_custom_rec } = require('#/event/rec/rec-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { get_abbr_number } = require('#/utils/value-utils');
 
 const CharaTitles = require('#/data/chara-titles');
 const event_hooks = require('#/data/event/event-hooks');
 const MayLifeMarks = require('#/data/event/life-event-marks/life-event-marks-343');
+const BryneLifeMarks = require('#/data/event/life-event-marks/life-event-marks-349');
 const loc_characters = require('#/data/event/loc-characters');
 const recruit_flags = require('#/data/event/recruit-flags');
 const yandere_list = require('#/data/event/yandere-list');
 const { get_celebration } = require('#/data/info-generator');
 const { location_enum, location_name } = require('#/data/locations');
 const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
+const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
 /** @type {Record<string,function(CharaTalk,CharaTalk):{[handle]:function:Promise,[name]:string}>} */
 const handlers = {};
@@ -53,7 +61,7 @@ const handlers = {};
       : {};
 });
 
-[207, 308, 345, 349].forEach((cid) => {
+[207, 308, 345].forEach((cid) => {
   handlers[cid] = () =>
     get(`cflag:${cid}:招募状态`) !== recruit_flags.yes &&
     get(`love:${cid}`) >= 40
@@ -117,6 +125,266 @@ handlers[344] = () =>
         },
       }
     : {};
+
+handlers[349] = () =>
+  get('cflag:349:招募状态') === recruit_flags.yes
+    ? {
+        name: '投资理财',
+        async handle() {
+          const bryne = get_chara_talk(349);
+          const life_marks = new BryneLifeMarks();
+          const money = get('flag:当前马币');
+          if (money < 1000 && !life_marks.funds) {
+            await bryne.say_and_wait(
+              `抱歉呐，但是 ${sys_get_callname(349, 0)} 你没有足够的资金吧？我的渠道里没有会接受 1000 马币以下的微型投资的机构诶……`,
+            );
+            return;
+          }
+          if (life_marks.funds > 0) {
+            print([
+              '现在向 ',
+              bryne.get_colored_name(),
+              ' 提供了 ',
+              get_abbr_number(life_marks.funds),
+              ' 马币资金，每周共提供 ',
+              get_abbr_number(life_marks.funds / (500 - 300 * life_marks.buff)),
+              ' 马币收益。',
+            ]);
+          }
+          printButton('投资（以 1000 马币为单位）', 1, {
+            disabled: money < 1000,
+          });
+          printButton('赎回', 2, { disabled: !life_marks.funds });
+          const _old = life_marks.funds;
+          if ((await input()) === 1) {
+            print('要投资多少马币？');
+            let flag = true;
+            let _new = 1;
+            const curr = getLineCount();
+            while (flag) {
+              await clear(getLineCount() - curr);
+              printMultiColumns([
+                {
+                  accelerator: 2,
+                  config: { align: 'center', disabled: _new <= 20, width: 4 },
+                  content: '-10,000',
+                  type: 'button',
+                },
+                {
+                  accelerator: 4,
+                  config: { align: 'center', disabled: _new === 1, width: 4 },
+                  content: '-1000',
+                  type: 'button',
+                },
+                {
+                  config: {
+                    align: 'center',
+                    width: 4,
+                  },
+                  content: [get_abbr_number(_new * 1000), ' 马币'],
+                  type: 'text',
+                },
+                {
+                  accelerator: 6,
+                  config: {
+                    align: 'center',
+                    disabled: money <= _new * 1000,
+                    width: 4,
+                  },
+                  content: '+1000',
+                  type: 'button',
+                },
+                {
+                  accelerator: 8,
+                  config: {
+                    align: 'center',
+                    disabled: money < (_new + 20) * 1000,
+                    width: 8,
+                  },
+                  content: '+10,000',
+                  type: 'button',
+                },
+                { content: [], type: 'text' },
+                {
+                  config: { width: 4 },
+                  accelerator: 98,
+                  content: '确定',
+                  type: 'button',
+                },
+                {
+                  config: { width: 4 },
+                  accelerator: 99,
+                  content: '取消',
+                  type: 'button',
+                },
+              ]);
+              switch (await input()) {
+                case 2:
+                  _new -= 20;
+                  break;
+                case 4:
+                  _new--;
+                  break;
+                case 6:
+                  _new++;
+                  break;
+                case 8:
+                  _new += 20;
+                  break;
+                case 98:
+                  flag = false;
+                  break;
+                case 99:
+                  _new = 0;
+                  flag = false;
+              }
+            }
+            if (_new > 0) {
+              life_marks.funds += _new * 1000;
+              add('flag:当前马币', -_new * 1000);
+              await printAndWait([
+                '向 ',
+                bryne.get_colored_name(),
+                ' 追加了 ',
+                get_abbr_number(_new * 1000),
+                ' 马币资金，每周共提供 ',
+                get_abbr_number(
+                  life_marks.funds / (500 - 300 * life_marks.buff),
+                ),
+                ' 马币收益。',
+              ]);
+            }
+          } else {
+            print([
+              '要赎回多少马币？共投资了 ',
+              get_abbr_number(life_marks.funds),
+              ' 马币：',
+            ]);
+            let flag = true;
+            let got = 1;
+            const curr = getLineCount();
+            while (flag) {
+              await clear(getLineCount() - curr);
+              printMultiColumns([
+                {
+                  accelerator: 2,
+                  config: { align: 'center', disabled: got <= 20, width: 4 },
+                  content: '-10,000',
+                  type: 'button',
+                },
+                {
+                  accelerator: 4,
+                  config: { align: 'center', disabled: got === 1, width: 4 },
+                  content: '-1000',
+                  type: 'button',
+                },
+                {
+                  config: {
+                    align: 'center',
+                    width: 4,
+                  },
+                  content: [get_abbr_number(got * 1000), ' 马币'],
+                  type: 'text',
+                },
+                {
+                  accelerator: 6,
+                  config: {
+                    align: 'center',
+                    disabled: life_marks.funds <= got * 1000,
+                    width: 4,
+                  },
+                  content: '+1000',
+                  type: 'button',
+                },
+                {
+                  accelerator: 8,
+                  config: {
+                    align: 'center',
+                    disabled: money < (got + 20) * 1000,
+                    width: 8,
+                  },
+                  content: '+10,000',
+                  type: 'button',
+                },
+                { content: [], type: 'text' },
+                {
+                  config: { width: 4 },
+                  accelerator: 98,
+                  content: '确定',
+                  type: 'button',
+                },
+                {
+                  config: { width: 4 },
+                  accelerator: 99,
+                  content: '取消',
+                  type: 'button',
+                },
+              ]);
+              switch (await input()) {
+                case 2:
+                  got -= 20;
+                  break;
+                case 4:
+                  got--;
+                  break;
+                case 6:
+                  got++;
+                  break;
+                case 8:
+                  got += 20;
+                  break;
+                case 98:
+                  flag = false;
+                  break;
+                case 99:
+                  got = 0;
+                  flag = false;
+              }
+            }
+            if (got > 0) {
+              life_marks.funds -= got * 1000;
+              add('flag:当前马币', got * 1000);
+              print(['取回了 ', get_abbr_number(got * 1000), ' 马币。']);
+              if (life_marks.funds > 0) {
+                await printAndWait([
+                  '还有 ',
+                  get_abbr_number(life_marks.funds),
+                  ' 马币资金，每周共提供 ',
+                  get_abbr_number(
+                    life_marks.funds / (500 - 300 * life_marks.buff),
+                  ),
+                  ' 马币收益。',
+                ]);
+              }
+            }
+          }
+          if (_old !== life_marks.funds) {
+            const billings = sys_get_billings();
+            let invest = billings.find((e) => e.creditor === -2);
+            if (!invest) {
+              invest = { creditor: -2, timer: -1, repay: 0 };
+              billings.push(invest);
+            }
+            invest.repay = life_marks.funds / (500 - 300 * life_marks.buff);
+          }
+        },
+      }
+    : get('love:349') >= 40
+      ? {
+          name: '「一起努力吧！」（招募）',
+          handle() {
+            set('callname:349:-2', get('callname:349:-1'));
+            set('cflag:349:招募状态', recruit_flags.yes);
+            if (get('talent:349:病娇') > 0) {
+              yandere_list.push(349);
+            }
+            return printAndWait([
+              get_chara_talk(349).get_colored_name(),
+              ' 加入了队伍！',
+            ]);
+          },
+        }
+      : {};
 
 async function page_visitors() {
   let flag_page = true,

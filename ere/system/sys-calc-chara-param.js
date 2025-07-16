@@ -183,15 +183,14 @@ module.exports = {
    * @returns {number} 0b1：普通迷雾，隐藏好感爱慕；0b10：病娇迷雾，隐藏好感
    */
   sys_check_hide_relation_and_love(cid) {
-    const hide_talent = era.get(`talent:${cid}:捉摸不透`) > 0,
-      not_in_basement = era.get('flag:当前位置') !== location_enum.basement,
-      advanced_info = not_in_basement && era.get('status:0:马语者') > 0,
-      glasses = not_in_basement && era.get('status:0:好感度镜片') > 0;
+    const hide_talent = era.get(`talent:${cid}:捉摸不透`) > 0;
+    const not_in_basement = era.get('flag:当前位置') !== location_enum.basement;
+    const advanced_info = not_in_basement && era.get('status:0:马语者') > 0;
+    const glasses = not_in_basement && era.get('status:0:好感度镜片') > 0;
     return (
       !advanced_info &&
       (cid > 0 &&
-        (era.get(`talent:${cid}:捉摸不透`) > 0 ||
-          era.get(`talent:${cid}:坦率程度`) === -1) &&
+        (hide_talent || era.get(`talent:${cid}:坦率程度`) === -1) &&
         (cid === 32 || !glasses) &&
         era.get(`love:${cid}`) < 75) +
         0b10 * (hide_talent && sys_check_yandere(cid, (y) => y === 2))

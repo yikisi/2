@@ -302,10 +302,6 @@ module.exports = class extends CustomizedRecruit {
         { content: '鲁铎象征', color: chara_17.color },
         ' 签约了。',
       ]);
-      era.set('status:17:自毁', 1);
-      era.set('status:17:迷恋', 1);
-      era.set('status:9017:皇帝', 1);
-      era.set('status:9017:心术', 1);
       era.set('cflag:17:招募状态', recruit_flags.yes);
       EventMarks.get(0).sub(event_hooks.recruit_start);
     }

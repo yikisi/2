@@ -34,13 +34,13 @@ const current = new Date().getTime();
 const handlers = {};
 
 [
-  require('#/event/ero/ero-result-handlers/communications'),
-  require('#/event/ero/ero-result-handlers/making-outs-1'),
-  require('#/event/ero/ero-result-handlers/making-outs-2'),
-  require('#/event/ero/ero-result-handlers/fucking'),
-  require('#/event/ero/ero-result-handlers/sm'),
-  require('#/event/ero/ero-result-handlers/orgy'),
-  require('#/event/ero/ero-result-handlers/items'),
+  require('#/event/ero/result-handlers/communications'),
+  require('#/event/ero/result-handlers/making-outs-1'),
+  require('#/event/ero/result-handlers/making-outs-2'),
+  require('#/event/ero/result-handlers/fucking'),
+  require('#/event/ero/result-handlers/sm'),
+  require('#/event/ero/result-handlers/orgy'),
+  require('#/event/ero/result-handlers/items'),
 ].forEach((f) => f(handlers));
 
 console.log(
@@ -65,20 +65,32 @@ handlers[ero_hooks.become_lubrication] = (chara_id, _, extra_flag) => {
   }
 };
 
-handlers[ero_hooks.prison] = (id) => {
-  const life_marks = LifeEventMarks.get_marks(id);
-  if (sys_check_yandere(id, (y) => y === 1)) {
-    era.set(`talent:${id}:病娇`, 2);
+handlers[ero_hooks.prison] = (cid) => {
+  const life_marks = LifeEventMarks.get_marks(cid);
+  let yandere = false;
+  if (era.get(`status:${cid}:爱意克制`) > 0) {
+    era.set(`status:${cid}:爱意克制`, 0);
+    if (
+      !era.get(`talent:${cid}:病娇`) &&
+      Math.random() < 0.4 + 0.2 * era.get('flag:极端行为限制')
+    ) {
+      yandere = true;
+    }
+  }
+  if (sys_check_yandere(cid, (y) => y === 1)) {
+    yandere = true;
+  }
+  if (yandere) {
+    era.set(`talent:${cid}:病娇`, 2);
     life_marks.yandere = get_random_value(
       2,
-      (era.get('flag:极端行为') * 2 * era.get(`love:${id}`) -
-        era.get(`relation:${id}:0`)) /
+      (era.get('flag:极端行为') * 2 * era.get(`love:${cid}`) -
+        era.get(`relation:${cid}:0`)) /
         100,
     );
   }
-  era.set(`status:${id}:爱意克制`, 0);
   era.set('flag:当前位置', location_enum.basement);
-  basement_owners.push(id);
+  basement_owners.push(cid);
 };
 
 /**

@@ -37,7 +37,7 @@ function change_com_tri_motion(cid, oid, cpart, opart, is_ask = false) {
         oid,
         { a: cpart, d: opart },
         { a: motion_enum.lie, d: motion_enum.sit },
-        { a: towards_enum.right, d: motion_enum.right },
+        { a: towards_enum.right, d: towards_enum.left },
         main_parts,
         0,
       )

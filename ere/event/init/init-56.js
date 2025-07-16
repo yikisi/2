@@ -4,7 +4,7 @@ const CustomizedInit = require('#/event/init/customized-init');
 
 module.exports = class extends CustomizedInit {
   init(is_reset) {
-    if (!is_reset) {
+    if (!is_reset && era.get('cflag:0:模版角色') !== this.id) {
       era.set('callname:0:56', '阿福');
     }
     era.set('status:56:运势依赖', 1);

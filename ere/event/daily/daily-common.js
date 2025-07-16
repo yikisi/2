@@ -25,8 +25,8 @@ const { sys_change_money } = require('#/system/sys-calc-flag');
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
 const { get_custom_check } = require('#/event/check/check-factory');
-const common_celebration = require('#/event/daily/common-lines/common-celebration');
-const common_out_shopping = require('#/event/daily/common-lines/out-shopping');
+const common_celebration = require('#/event/daily/common/celebration');
+const common_out_shopping = require('#/event/daily/common/out-shopping');
 const kojo = require('#/event/daily/daily-common.kojo');
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
 const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');

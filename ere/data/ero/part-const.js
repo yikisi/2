@@ -141,11 +141,12 @@ module.exports = {
   },
   part_enum,
   part_gifts,
-  /** 身体部位对应的部位名称 */
+  /** 快感条名称数组 */
   part_names,
   part_names4item,
-  part_skills /** 快感条名称数组 */,
+  part_skills,
   part_talents,
+  /** 身体部位对应的部位名称 */
   part_touch,
   pleasure_list: [
     part_enum.mouth,
