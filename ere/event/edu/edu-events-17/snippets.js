@@ -31,6 +31,7 @@ function transform(event_marks) {
   flip_params('love:17', 'love:9017');
   flip_params('callname:17:-1', 'callname:9017:-1');
   flip_params('callname:17:-2', 'callname:9017:-2');
+  flip_params('callname:0:17', 'callname:0:9017');
   /** @type {Record<string,number>} */
   const relation_entries = era.get('relation:17');
   Object.keys(relation_entries).forEach((chara_id) => {
