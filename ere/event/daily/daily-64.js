@@ -26,6 +26,7 @@ const select_action_around_river = require('#/event/daily/snippets/select-action
 const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
 const select_action_in_shopping_street = require('#/event/daily/snippets/select-action-in-shopping-street');
 const select_action_in_station = require('#/event/daily/snippets/select-action-in-station');
+const { i_pama_yandere } = require('#/event/snippets/64');
 const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
 const print_name_and_show_kojo = require('#/event/snippets/print-name-and-show-kojo');
@@ -56,7 +57,7 @@ module.exports = class extends CustomizedDaily {
     const me = get_chara_talk(0);
     dict['T'] = me.name;
     dict['T称呼善信'] = sys_get_callname(0, this.id);
-    dict.half_life = new PamaEduMarks().half_life;
+    dict.half_life = +i_pama_yandere();
     return dict;
   }
 
@@ -332,7 +333,7 @@ module.exports = class extends CustomizedDaily {
   async basement_end() {
     const pama = get_chara_talk(this.id);
     let name;
-    if (new PamaEduMarks().half_life > 0) {
+    if (i_pama_yandere()) {
       name = '无终的逃亡';
     } else if (era.get(`love:${this.id}`) >= 75) {
       name = '明日再会';
@@ -346,7 +347,7 @@ module.exports = class extends CustomizedDaily {
   async slave_end() {
     const pama = get_chara_talk(this.id);
     let name;
-    if (new PamaEduMarks().half_life > 0) {
+    if (i_pama_yandere()) {
       name = '无终的逃亡';
     } else if (era.get(`love:${this.id}`) >= 75) {
       name = '迷途终点';

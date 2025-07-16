@@ -18,6 +18,7 @@ const PamaNormalCommunications = require('#/event/ero/ero-lines-64/normal-commun
 const PamaNormalFucking = require('#/event/ero/ero-lines-64/normal-fucking');
 const PamaNormalMakingOuts = require('#/event/ero/ero-lines-64/normal-making-outs');
 const PamaNormalSm = require('#/event/ero/ero-lines-64/normal-sm');
+const { i_pama_yandere } = require('#/event/snippets/64');
 const print_event_name = require('#/event/snippets/print-event-name');
 const print_name_and_show_kojo = require('#/event/snippets/print-name-and-show-kojo');
 
@@ -57,7 +58,7 @@ module.exports = class extends CustomizedEro {
     o['善信'] = era.get(`callname:${this.id}:-2`);
     o['称呼'] = sys_get_callname(this.id, 0);
     o.T = era.get(`callname:0:-2`);
-    o.half_life = new PamaEduMarks().half_life;
+    o.half_life = +i_pama_yandere();
     return o;
   }
 

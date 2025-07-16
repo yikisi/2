@@ -47,9 +47,9 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_and_get_titles(aim_check) {
-    const races = RaceHistory.get(this.id),
-      dict = races.get(),
-      ret = [];
+    const races = RaceHistory.get(this.id);
+    const dict = races.get();
+    const ret = [];
     const takz_kin =
       check_aim_race(dict, race_enum.takz_kin, 1, 1, (e) => e.st === 0) ||
       check_aim_race(dict, race_enum.takz_kin, 2, 1, (e) => e.st === 0);

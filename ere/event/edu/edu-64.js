@@ -8,6 +8,7 @@ const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
 const kojo = require('#/event/edu/edu-64.kojo');
 const CustomizedEdu = require('#/event/edu/edu-common');
+const { i_pama_yandere } = require('#/event/snippets/64');
 const print_event_name = require('#/event/snippets/print-event-name');
 const print_name_and_show_kojo = require('#/event/snippets/print-name-and-show-kojo');
 
@@ -15,7 +16,6 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { get_chara_color } = require('#/data/chara-colors');
 const { buff_colors } = require('#/data/color-const');
-const PamaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-64');
 const { attr_enum, fumble_result } = require('#/data/train-const');
 
 module.exports = class extends CustomizedEdu {
@@ -63,7 +63,7 @@ module.exports = class extends CustomizedEdu {
   async crazy_fan_end() {
     const pama = get_chara_talk(this.id);
     let name;
-    if (new PamaEduMarks().half_life > 0) {
+    if (i_pama_yandere()) {
       name = '无终的逃亡';
     } else if (era.get(`love:${this.id}`) >= 75) {
       name = '无力逃亡';

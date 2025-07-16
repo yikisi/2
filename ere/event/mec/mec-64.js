@@ -1,9 +1,9 @@
 const era = require('#/era-electron');
 
 const CustomizedMec = require('#/event/mec/mec-common');
+const { i_pama_yandere } = require('#/event/snippets/64');
 
 const { get_chara_color } = require('#/data/chara-colors');
-const PamaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-64');
 
 module.exports = class extends CustomizedMec {
   set_callname() {
@@ -13,7 +13,7 @@ module.exports = class extends CustomizedMec {
   }
 
   get_status(show_train_buff) {
-    if (new PamaEduMarks().half_life > 0) {
+    if (i_pama_yandere()) {
       return [
         {
           color: get_chara_color(this.id),
