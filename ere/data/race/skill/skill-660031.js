@@ -3,26 +3,26 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaEroSkill(
   660031,
-  '性爱即德比',
-  '性玩具不再影响基础属性发挥',
+  '共感',
+  '高潮时与其他对手分享快感',
   66003,
   1,
   UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.buff,
+    UmaSkill.skill_name_enum.control,
     UmaSkill.skill_border_enum.ero_normal,
   ),
   1,
   [() => true, () => true],
-  [(args) => args.item === 1, () => false],
-  [-0.0001, 0],
-  [0, 0],
+  [(args) => args.orgasm === 1, () => false],
+  [3, 0],
+  [15, 0],
   [
     UmaSkill.ability_time_usage_enum.normal,
     UmaSkill.ability_time_usage_enum.normal,
   ],
   [
     [
-      UmaSkill.ability_type_enum.HasItem,
+      UmaSkill.ability_type_enum.ShareOrgasm,
       UmaSkill.ability_type_enum.no,
       UmaSkill.ability_type_enum.no,
     ],
@@ -45,12 +45,12 @@ module.exports = new UmaEroSkill(
     ],
   ],
   [
+    [6000, 0, 0],
     [0, 0, 0],
-    [0, 0, 0],
   ],
   [
     [
-      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.All,
       UmaSkill.target_type_enum.no,
       UmaSkill.target_type_enum.no,
     ],
