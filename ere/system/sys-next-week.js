@@ -202,8 +202,9 @@ async function sys_next_week() {
         life_event_marks.yandere = 0;
         era.set(`talent:${id}:病娇`, 1);
         era.print([
+          '【',
           get_chara_talk(id).get_colored_name(),
-          ' 重新变得温和起来……',
+          ' 重新变得温和起来】',
         ]);
       }
     }
@@ -229,9 +230,9 @@ async function sys_next_week() {
         if (i > 0 && e.creditor === 0 && money > 0) {
           // 人类训练员有工资拿；马娘训练员？自己跑比赛去！
           era.print([
-            '收到了学园发放的训练员工资 ',
+            '【收到了学园发放的训练员工资 ',
             { color: money_color, content: money.toLocaleString() },
-            ' 马币',
+            ' 马币】',
           ]);
         }
         if (e.timer > 0) {
@@ -300,13 +301,13 @@ async function sys_next_week() {
       }
       if (r_punish > 0) {
         era.print([
-          '因为 ',
+          '【因为 ',
           me.get_colored_name(),
           ' 的忽视，',
           get_chara_talk(cid).get_colored_name(),
           ' ',
           r_punish > 2 ? '无比' : '感到',
-          '失望……',
+          '失望】',
         ]);
         sys_like_chara(cid, 0, -50 * r_punish);
         await era.waitAnyKey();
@@ -664,40 +665,44 @@ async function sys_next_week() {
     });
     buffer.length && buffer.splice(buffer.length - 1, 1);
     era.print([
-      '因为 ',
+      '【因为 ',
       ...buffer,
       ' 的避战行为，社会对 ',
       me.get_colored_name(),
-      ' 的评价降低了！',
+      ' 的评价降低了！】',
     ]);
     sys_change_fame(-race_punish);
   }
   if (hentai_reward) {
     era.drawLine();
-    era.print([me.get_colored_name(), ' 履行了职责，作为孕袋的评价上升了……']);
+    era.print([
+      '【',
+      me.get_colored_name(),
+      ' 履行了职责，作为孕袋的评价上升了】',
+    ]);
     era.add('flag:当前声望', hentai_reward);
   }
   if (hentai_punish) {
     if (punish_level === 3) {
       era.print([
-        '让马娘主人怀孕的 ',
+        '【让马娘主人怀孕的 ',
         me.get_colored_name(),
-        ' 因为孕袋失格，受到了特雷森的处罚！',
+        ' 因为孕袋失格，受到了特雷森的处罚！】',
       ]);
       era.add('flag:当前马币', -hentai_punish);
     } else {
       if (hentai_marks[0]) {
         era.print([
-          '因为现役训练员的私生子丑闻，社会对 ',
+          '【因为现役训练员的私生子丑闻，社会对 ',
           me.get_colored_name(),
-          ' 的评价降低了！',
+          ' 的评价降低了！】',
         ]);
       }
       if (hentai_marks[1]) {
         era.print([
-          '因为现役马娘的私生子丑闻，社会对 ',
+          '【因为现役马娘的私生子丑闻，社会对 ',
           me.get_colored_name(),
-          ' 的评价降低了！',
+          ' 的评价降低了！】',
         ]);
       }
       sys_change_fame(-hentai_punish);

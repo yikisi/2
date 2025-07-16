@@ -46,7 +46,6 @@ function randomly_interact(in_team_list) {
       debuff < 0.5 &&
       sys_check_train_enabled(cid) &&
       era.get(`cflag:${cid}:自主训练`) > 0 &&
-      !era.get(`status:${cid}:摸鱼`) &&
       stamina_ratio >= fail_sta_border.intelligence
     ) {
       const in_beach = era.get(`cflag:${cid}:位置`) === location_enum.beach;
@@ -323,6 +322,8 @@ function randomly_interact(in_team_list) {
     // 育成结束的那周不再自主训练
     if (
       era.get(`cflag:${cid}:育成回合计时`) < 3 * 48 - 1 &&
+      !era.get(`status:${cid}:摸鱼`) &&
+      !era.get(`status:${cid}:偏头痛`) &&
       !CharaInmon.get(cid).on(plugin_enum.sex_2)
     ) {
       era.set(`cflag:${cid}:自主训练`, 1);

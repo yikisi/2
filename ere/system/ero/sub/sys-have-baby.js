@@ -407,10 +407,11 @@ async function sys_have_baby(mother_id) {
     mother = get_chara_talk(mother_id);
   get_custom_check(child_id).check_birth();
   era.print([
+    '【',
     mother.get_colored_name(),
     ' 生下了一个依稀有着 ',
     father.get_colored_name(),
-    ' 外貌的健康的孩子！',
+    ' 外貌的健康的孩子！】',
   ]);
   era.set(
     `maxbase:${mother_id}:体力`,

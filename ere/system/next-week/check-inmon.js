@@ -49,13 +49,14 @@ function check_inmon(in_team_list) {
         });
         buffer[buffer.findLastIndex((e) => e === '，')] = ' 和 ';
         era.print([
+          '【',
           slavery_options[slavery_enum.milk],
           ' ',
           ...buffer,
           buffer.length > 1 ? ' 各' : ' ',
           '贡上了一杯 [',
           era.get(`itemname:${45 + i}`),
-          ']……',
+          ']】',
         ]);
         era.add(`item:${45 + i}`, milk_list[1 - i].length);
       }
@@ -83,6 +84,7 @@ function check_inmon(in_team_list) {
       }
       era.add(`jewel:0:${gene_juel_names[jewel]}`, val);
       era.print([
+        '【',
         slavery_options[slavery_enum.inherit],
         ' ',
         get_chara_talk(id).get_colored_name(),
@@ -91,7 +93,7 @@ function check_inmon(in_team_list) {
           content: `${gene_juel_names[jewel]}因子 × ${val}`,
           color: gene_type_colors[jewel],
         },
-        '。',
+        '】',
       ]);
     }
   }
