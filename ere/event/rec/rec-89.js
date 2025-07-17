@@ -1,6 +1,6 @@
 /**
  * @file 高尚骏逸 - 招募
- * @author 露娜俘虏
+ * @author 無奈
  */
 const era = require('#/era-electron');
 
