@@ -15,7 +15,7 @@ module.exports = class extends CustomizedInit {
       era.set('status:17:迷恋', 1);
       era.set('status:9017:皇帝', 1);
       era.set('status:9017:心术', 1);
-      if (era.get('cflag:0:模版角色') !== this.id) {
+      if (era.get('cflag:0:模版角色') !== 17) {
         era.set('callname:0:17', '露娜');
         era.set('callname:0:9017', '陛下');
       }

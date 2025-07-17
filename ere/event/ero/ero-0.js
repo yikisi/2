@@ -190,7 +190,7 @@ module.exports = class extends CustomizedEro {
           );
           if (
             sys_filter_chara('cflag', '招募状态', recruit_flags.yes).filter(
-              (e) => era.get(`cflag:${e}:育成回合计时`) < 3 * 48,
+              (e) => e > 0 && era.get(`cflag:${e}:育成回合计时`) < 3 * 48,
             ).length > 0
           ) {
             await era.printAndWait(
