@@ -426,25 +426,43 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
         gacha(passer_by_names, info.gates - ret.length),
         Math.random,
       );
+      const last = info.gates - ret.length;
       let back_up_list = passer_by_list.filter(
         (e) =>
           e.adapt_ground[info.ground] >= 4 &&
           e.adapt_distance[info.distance] >= 4 &&
-          e.level <= passer_by_difficulty,
+          e.level <= passer_by_difficulty &&
+          e.level >= passer_by_difficulty - 400,
       );
-      if (back_up_list.length > info.gates - ret.length) {
-        back_up_list = back_up_list.slice(
-          back_up_list.length - (info.gates - ret.length),
+      if (back_up_list.length > last) {
+        back_up_list = gacha(back_up_list, last);
+      } else if (back_up_list.length < last) {
+        back_up_list = passer_by_list.filter(
+          (e) =>
+            e.adapt_ground[info.ground] >= 4 &&
+            e.adapt_distance[info.distance] >= 4 &&
+            e.level <= passer_by_difficulty,
         );
+        if (back_up_list.length > last) {
+          back_up_list = back_up_list.slice(back_up_list.length - last);
+        } else if (back_up_list.length < last) {
+          back_up_list = passer_by_list
+            .filter(
+              (u) =>
+                u.adapt_ground[info.ground] >= 4 &&
+                u.adapt_distance[info.distance] >= 4,
+            )
+            .slice(0, last);
+        }
       }
-      gacha(back_up_list, info.gates - ret.length).forEach((e, i) =>
-        ret.push(
+      ret.push(
+        ...back_up_list.map((u, i) =>
           get_pseudo_from_template(
-            e,
+            u,
             passer_by_difficulty,
             unnamed_index--,
             names[i],
-            e.skills,
+            u.skills,
             true,
           ),
         ),
