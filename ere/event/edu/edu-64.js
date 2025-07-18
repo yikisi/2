@@ -8,14 +8,19 @@ const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
 const kojo = require('#/event/edu/edu-64.kojo');
 const CustomizedEdu = require('#/event/edu/edu-common');
+const { add_event, cb_enum } = require('#/event/queue');
 const { i_pama_yandere } = require('#/event/snippets/64');
 const print_event_name = require('#/event/snippets/print-event-name');
 const print_name_and_show_kojo = require('#/event/snippets/print-name-and-show-kojo');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { get_random_entry } = require('#/utils/list-utils');
 
 const { get_chara_color } = require('#/data/chara-colors');
 const { buff_colors } = require('#/data/color-const');
+const PamaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-64');
+const event_hooks = require('#/data/event/event-hooks');
+const EventObject = require('#/data/event/event-object');
 const { attr_enum, fumble_result } = require('#/data/train-const');
 
 module.exports = class extends CustomizedEdu {
@@ -58,6 +63,23 @@ module.exports = class extends CustomizedEdu {
       await print_event_name('在保健室', pama);
       await kojo['训练失败'](this.#dict);
     }
+  }
+
+  async race_end(pama, me, callname, hook, extra_flag) {
+    const edu_weeks = era.get(`cflag:${this.id}:育成回合计时`);
+    const edu_marks = new PamaEduMarks();
+    if (
+      edu_weeks >= 96 &&
+      i_pama_yandere() &&
+      edu_marks.only_you <= 3 &&
+      extra_flag.rank === 1
+    ) {
+      add_event(
+        get_random_entry([event_hooks.school_atrium, event_hooks.out_station]),
+        new EventObject(this.id, cb_enum.love, true).set_arg('s_feeling'),
+      );
+    }
+    await super.race_end(pama, me, callname, hook, extra_flag);
   }
 
   async crazy_fan_end() {

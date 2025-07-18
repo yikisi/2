@@ -38,6 +38,7 @@ const { get_random_value } = require('#/utils/value-utils');
 const { buff_colors } = require('#/data/color-const');
 const EroParticipant = require('#/data/ero/ero-participant');
 const { item_enum } = require('#/data/ero/item-const');
+const { lust_border } = require('#/data/ero/orgasm-const');
 const { part_enum } = require('#/data/ero/part-const');
 const PamaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-64');
 const PamaLifeMarks = require('#/data/event/life-event-marks/life-event-marks-64');
@@ -47,7 +48,6 @@ module.exports = class extends CustomizedDaily {
   get #dict() {
     const dict = {};
     const pama = get_chara_talk(this.id);
-    dict['善信'] = pama.name;
     dict['称呼'] = sys_get_callname(this.id, 0);
     dict['代表色'] = pama.color;
     dict['小姐'] = pama.adult_sex_title;
@@ -232,7 +232,53 @@ module.exports = class extends CustomizedDaily {
   }
 
   async good_night(hook) {
+    const love = era.get(`love:${this.id}`);
+    const lust = era.get(`base:${this.id}:性欲`);
+    if (i_pama_yandere() && love >= 95 && lust >= lust_border.absent_mind) {
+      new PamaEduMarks().only_you++;
+      const ret = await print_name_and_show_kojo(
+        '负距离的我们',
+        get_chara_talk(this.id),
+        kojo,
+        {
+          ...this.#dict,
+          玩家名: era.get('callname:0:-1'),
+          自称: sys_get_callname(this.id, this.id),
+        },
+      );
+      if (ret[0] === 1) {
+        const item = '弗隆' + (love === 100 ? 'P' : 'K');
+        hook.arg = 1;
+        switch (ret[3]) {
+          case 1:
+            era.set(`status:0:${item}`, 1);
+            break;
+          case 2:
+            era.set(`status:${this.id}:${item}`, 1);
+            hook.arg = 2;
+        }
+      }
+      return;
+    }
     const check = get_custom_check(this.id).is_want_make_love();
+    if (
+      i_pama_yandere() &&
+      era.get('cflag:0:性别') === 1 &&
+      era.get(`cflag:${this.id}:性别`) !== 1 &&
+      lust >= lust_border.itch &&
+      check > 0
+    ) {
+      new PamaEduMarks().only_you++;
+      hook.arg = (
+        await print_name_and_show_kojo(
+          '入夜，我为你而来',
+          get_chara_talk(this.id),
+          kojo,
+          this.#dict,
+        )
+      )[0];
+      return;
+    }
     if (check > 0) {
       const ret = await kojo['晚安求爱'](this.#dict);
       if (ret[0] === 1) {

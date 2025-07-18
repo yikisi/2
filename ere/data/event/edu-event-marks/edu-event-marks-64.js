@@ -3,8 +3,6 @@ const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 class PamaEduMarks extends EduEventMarks {
   // 育成目标检查 - 经典年6月2周前重赏优胜次数
   aim_check;
-  // 依存心
-  half_life;
 
   // 蜗牛
   snails;
@@ -13,6 +11,8 @@ class PamaEduMarks extends EduEventMarks {
 
   // 和你一同逃去天涯海角
   escape;
+  // 依存心事件触发数
+  only_you;
 
   // 全育成第一次调教指令
   kiss;

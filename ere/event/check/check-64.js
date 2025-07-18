@@ -6,6 +6,7 @@ const CustomizedCheck = require('#/event/check/check-common');
 const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-get-entry');
 const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
 const { add_event, cb_enum } = require('#/event/queue');
+const { i_pama_yandere } = require('#/event/snippets/64');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 
 const { get_chara_color } = require('#/data/chara-colors');
@@ -16,6 +17,7 @@ const EventObject = require('#/data/event/event-object');
 const PamaLifeMarks = require('#/data/event/life-event-marks/life-event-marks-64');
 const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
+const RaceInfo = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
 const aim_races = {
@@ -43,6 +45,16 @@ module.exports = class extends CustomizedCheck {
       era.get(`cflag:${this.id}:育成回合计时`) <= 47 + 22
     ) {
       edu_marks.aim_check = 1;
+    }
+    if (
+      i_pama_yandere() &&
+      extra_flag.race === race_enum.tenn_spr &&
+      extra_flag.rank > 1
+    ) {
+      add_event(
+        event_hooks.school_rooftop,
+        new EventObject(this.id, cb_enum.love, !0).set_arg('wait_or'),
+      );
     }
   }
 
@@ -88,6 +100,7 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_next_week() {
+    const edu_weeks = era.get(`cflag:${this.id}:育成回合计时`);
     const edu_marks = new PamaEduMarks();
     const life_marks = new PamaLifeMarks();
     const love = era.get(`love:${this.id}`);
@@ -130,7 +143,34 @@ module.exports = class extends CustomizedCheck {
         edu_marks.movie_job = 1;
       }
     }
-    super.check_next_week();
+    const e_special = new EventObject(this.id, cb_enum.edu, true).set_arg(
+      'special',
+    );
+    if (edu_weeks < 3 * 48) {
+      switch (edu_weeks) {
+        case 96:
+          if (
+            love >= 80 &&
+            RaceHistory.get(this.id)
+              .get_values()
+              .filter(
+                (r) =>
+                  race_infos[r.race].race_class === RaceInfo.class_enum.G1 &&
+                  r.rank > 1,
+              ).length > 3 &&
+            RaceHistory.get(this.id)
+              .get_values()
+              .filter((r) => r.rank === 1).length < 4
+          ) {
+            add_event(
+              event_hooks.week_end,
+              new EventObject(this.id, cb_enum.love).set_arg('trust'),
+            );
+          }
+      }
+    } else if (edu_weeks === 143 + 9) {
+      add_event(event_hooks.week_start, e_special.set_arg('palace'));
+    }
   }
 
   is_aim_race(race, edu_weeks, rank) {
@@ -155,9 +195,9 @@ module.exports = class extends CustomizedCheck {
   }
 
   get_edu_aims() {
-    const races = RaceHistory.get(this.id).get(),
-      ret = [],
-      { aim_check } = new PamaEduMarks();
+    const races = RaceHistory.get(this.id).get();
+    const ret = [];
+    const { aim_check } = new PamaEduMarks();
     ret.push(check_aim_and_get_entry(races, race_enum.begin_race));
     ret.push({
       check: aim_check,
