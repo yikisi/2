@@ -16,7 +16,7 @@ const print_ero_page = require('#/page/page-ero');
 
 const CustomizedLove = require('#/event/love/love-common');
 const { add_event } = require('#/event/queue');
-const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
+const add_jewel_reward = require('#/event/snippets/add-jewel-reward');
 const masturbate = require('#/event/snippets/masturbate');
 const print_event_name = require('#/event/snippets/print-event-name');
 
@@ -207,7 +207,7 @@ module.exports = class extends CustomizedLove {
       `或许今天这样就可以了吧，${me.name} 抱着喘息着的少女将其平放在床上，思索着沾满少女味道的自己该怎么向骏川小姐解释。`,
     );
     era.println();
-    await add_juel_out_of_train(68, '顺从', 100);
+    add_jewel_reward(68, '顺从', 100);
     await era.waitAnyKey();
     return true;
   }
@@ -386,11 +386,7 @@ module.exports = class extends CustomizedLove {
     await era.printAndWait('美味（各种意义上的）地享受了一段时间后');
     await era.printAndWait('就结论而言，的确是一顿美食呢。');
     era.println();
-    await add_juel_out_of_train(
-      68,
-      ['受虐快感', '顺从', '羞耻'],
-      [100, 100, 50],
-    );
+    add_jewel_reward(68, ['受虐快感', '顺从', '羞耻'], [100, 100, 50]);
     await era.waitAnyKey();
     return true;
   }

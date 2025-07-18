@@ -5,7 +5,7 @@ const { sys_change_lust } = require('#/system/sys-calc-base-cflag');
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
 const select_target_in_storage = require('#/page/storage/select-target');
 
-const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
+const add_jewel_reward = require('#/event/snippets/add-jewel-reward');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
@@ -49,7 +49,7 @@ module.exports = (handlers) => {
       era.print([chara.get_colored_name(), ' 小腹上浮现一个花纹繁复的淫纹……']);
       era.set(`status:${ret}:淫纹贴纸`, item - 83);
       if (item === 85) {
-        await add_juel_out_of_train(ret, '顺从', 1666);
+        add_jewel_reward(ret, '顺从', 1666);
       }
       era.logger.info(item);
       era.logger.info(era.get(`itemname:${item}`));

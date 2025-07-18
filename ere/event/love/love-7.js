@@ -10,7 +10,7 @@ const { sys_love_uma_in_event } = require('#/system/sys-calc-chara-others');
 const CustomizedLove = require('#/event/love/love-common');
 const punish_rejecting_love = require('#/event/love/snippets/punish-rejecting-love');
 const { add_event } = require('#/event/queue');
-const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
+const add_jewel_reward = require('#/event/snippets/add-jewel-reward');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
@@ -296,9 +296,9 @@ module.exports = class extends CustomizedLove {
         );
         era.println();
         if (ret === 1) {
-          await add_juel_out_of_train(7, '顺从', 100);
+          add_jewel_reward(7, '顺从', 100);
         } else {
-          await add_juel_out_of_train(7, '施虐快感', 100);
+          add_jewel_reward(7, '施虐快感', 100);
         }
         await sys_love_uma_in_event(7);
         era.set('flag:当前互动角色', 7);

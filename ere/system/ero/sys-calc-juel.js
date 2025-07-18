@@ -18,37 +18,35 @@ const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 let tmp = {};
 
 /**
- * @param {number} chara_id
+ * @param {number} cid
  * @param {string} key
  * @param {number} num
  */
-function add_juel(chara_id, key, num) {
+function add_juel(cid, key, num) {
   const juel_type = key.length === 2 && key !== '痛苦';
   let temp = era.get('tflag:主导权');
   if (
     !juel_type ||
-    ((chara_id || era.getCharactersInTrain().length === 1 || temp) &&
-      sys_check_awake(chara_id))
+    ((cid > 0 || era.getCharactersInTrain().length === 1 || temp > 0) &&
+      sys_check_awake(cid))
   ) {
-    tmp[chara_id][key] +=
+    tmp[cid][key] +=
       num *
       (1 -
-        juel_type *
-          (temp === chara_id || era.get('tflag:当前助手') === chara_id) *
-          0.9);
+        juel_type * (temp === cid || era.get('tflag:当前助手') === cid) * 0.9);
   }
 }
 
 /**
- * @param {number} chara_id
- * @param {string} juel_name
+ * @param {number} cid
+ * @param {string} jewel_name
  * @returns {number}
  */
-function get_buffed_jewel(chara_id, juel_name) {
+function get_buffed_jewel(cid, jewel_name) {
   const ret =
-    tmp[chara_id][juel_name] *
-    (1 + era.get(`tcvar:${chara_id}:${juel_name.substring(0, 2)}因子加成`));
-  tmp[chara_id][juel_name] = 0;
+    tmp[cid][jewel_name] *
+    (1 + era.get(`tcvar:${cid}:${jewel_name.substring(0, 2)}因子加成`));
+  tmp[cid][jewel_name] = 0;
   return ret;
 }
 
@@ -59,7 +57,7 @@ function get_buffed_jewel(chara_id, juel_name) {
  * @param {number} dst
  * @param {boolean} shown
  */
-function print_jewel_change(cid, jewel_name, src, dst, shown) {
+function print_jewel_change(cid, jewel_name, src, dst, shown = true) {
   const jewel = Math.floor(src / palam2juel);
   const new_jewel = Math.floor(dst / palam2juel);
   if (shown && new_jewel !== jewel) {
@@ -77,20 +75,18 @@ function print_jewel_change(cid, jewel_name, src, dst, shown) {
 
 module.exports = {
   add_juel,
-  /**
-   * 只清空临时的juel，不会影响已获得的juel
-   */
+  /** 只清空临时的 jewel，不会影响已获得的 jewel */
   clean_juels: () => (tmp = {}),
   /** @param {number} ids */
   init_juels: (...ids) =>
-    ids.forEach((chara_id) => {
-      tmp[chara_id] = {};
+    ids.forEach((cid) => {
+      tmp[cid] = {};
       new Array(9)
         .fill(0)
-        .forEach((_, i) => (tmp[chara_id][era.get(`palamname:${i}`)] = 0));
+        .forEach((_, i) => (tmp[cid][era.get(`paramname:${i}`)] = 0));
       new Array(6)
         .fill(0)
-        .forEach((_, i) => (tmp[chara_id][era.get(`palamname:${i + 10}`)] = 0));
+        .forEach((_, i) => (tmp[cid][era.get(`paramname:${i + 10}`)] = 0));
     }),
   /**
    * @param {boolean} shown
@@ -99,38 +95,38 @@ module.exports = {
   update_juels(shown, ...ids) {
     for (const cid of ids) {
       const inmon = CharaInmon.get(cid);
-      let body_jewels = 0;
-      let spirit_jewels = 0;
+      let j_body = 0;
+      let j_spirit = 0;
       pleasure_list.forEach((part) => {
         const key = `${part_names[part]}快感`;
-        const palam = get_buffed_jewel(cid, key);
+        const param = get_buffed_jewel(cid, key);
         if (part === part_enum.sadism && part === part_enum.masochism) {
-          spirit_jewels += palam;
+          j_spirit += param;
         } else {
-          body_jewels += palam;
+          j_body += param;
         }
         print_jewel_change(
           cid,
           key,
           era.get(`gotjewel:${cid}:${key}`),
-          era.add(`gotjewel:${cid}:${key}`, palam),
+          era.add(`gotjewel:${cid}:${key}`, param),
           shown,
         );
       });
 
-      const meek_juels = get_buffed_jewel(cid, '顺从');
-      let got_meek_juels;
+      const j_meek = get_buffed_jewel(cid, '顺从');
+      let g_meek;
       print_jewel_change(
         cid,
         '顺从',
         era.get(`gotjewel:${cid}:顺从`),
-        (got_meek_juels = era.add(`gotjewel:${cid}:顺从`, meek_juels)),
+        (g_meek = era.add(`gotjewel:${cid}:顺从`, j_meek)),
         shown,
       );
 
       if (cid > 0) {
         const j_pain = get_buffed_jewel(cid, '痛苦');
-        let got_j_pain = 0;
+        let g_pain = 0;
         if (inmon.on(plugin_enum.khn)) {
           era.add(`param:${cid}:施虐快感`, j_pain / 10);
         } else if (inmon.on(plugin_enum.tran_p) || inmon.on(plugin_enum.sls)) {
@@ -140,7 +136,7 @@ module.exports = {
             cid,
             '痛苦',
             era.get(`gotjewel:${cid}:痛苦`),
-            (got_j_pain = era.add(`gotjewel:${cid}:痛苦`, j_pain)),
+            (g_pain = era.add(`gotjewel:${cid}:痛苦`, j_pain)),
             shown,
           );
           add_juel(cid, '自卫', j_pain / 2);
@@ -148,7 +144,7 @@ module.exports = {
         }
 
         const j_fear = get_buffed_jewel(cid, '恐惧');
-        let got_j_fear;
+        let g_fear;
         if (inmon.on(plugin_enum.khn)) {
           era.add(`param:${cid}:施虐快感`, j_fear / 10);
         } else if (inmon.on(plugin_enum.tran_f) || inmon.on(plugin_enum.sls)) {
@@ -158,15 +154,15 @@ module.exports = {
             cid,
             '恐惧',
             era.get(`gotjewel:${cid}:恐惧`),
-            (got_j_fear = era.add(`gotjewel:${cid}:恐惧`, j_fear)),
+            (g_fear = era.add(`gotjewel:${cid}:恐惧`, j_fear)),
             shown,
           );
           add_juel(cid, '自卫', j_fear / 2);
-          got_j_pain += got_j_fear;
+          g_pain += g_fear;
         }
 
         const j_shame = get_buffed_jewel(cid, '羞耻');
-        let got_j_shame;
+        let g_shame;
         if (inmon.on(plugin_enum.khn)) {
           era.add(`param:${cid}:施虐快感`, j_shame / 10);
         } else if (inmon.on(plugin_enum.tran_s) || inmon.on(plugin_enum.sls)) {
@@ -176,14 +172,14 @@ module.exports = {
             cid,
             '羞耻',
             era.get(`gotjewel:${cid}:羞耻`),
-            (got_j_shame = era.add(`gotjewel:${cid}:羞耻`, j_shame)),
+            (g_shame = era.add(`gotjewel:${cid}:羞耻`, j_shame)),
             shown,
           );
           add_juel(cid, '自卫', j_shame / 2);
         }
 
         const j_hate = get_buffed_jewel(cid, '反感');
-        let got_j_hate;
+        let g_hate;
         if (inmon.on(plugin_enum.khn)) {
           era.add(`param:${cid}:施虐快感`, j_hate / 10);
         } else if (inmon.on(plugin_enum.sls)) {
@@ -193,7 +189,7 @@ module.exports = {
             cid,
             '反感',
             era.get(`gotjewel:${cid}:反感`),
-            (got_j_hate = era.add(`gotjewel:${cid}:反感`, j_hate)),
+            (g_hate = era.add(`gotjewel:${cid}:反感`, j_hate)),
             shown,
           );
           add_juel(cid, '自卫', j_hate / 5);
@@ -206,81 +202,57 @@ module.exports = {
           era.add(`gotjewel:${cid}:自卫`, get_buffed_jewel(cid, '自卫')),
           shown,
         );
-        const pleasure_mark = era.get(`mark:${cid}:欢愉`);
-        const meek_mark = era.get(`mark:${cid}:同心`);
-        const pain_mark = era.get(`mark:${cid}:苦痛`);
-        const shame_mark = era.get(`mark:${cid}:羞耻`);
-        const hate_mark = era.get(`mark:${cid}:反抗`);
-        const ero_mark = era.get(`mark:${cid}:淫纹`);
-        const pleasure_params = body_jewels + spirit_jewels / 10;
+        const l_pleasure = era.get(`mark:${cid}:欢愉`);
+        const l_meek = era.get(`mark:${cid}:同心`);
+        const l_pain = era.get(`mark:${cid}:苦痛`);
+        const l_shame = era.get(`mark:${cid}:羞耻`);
+        const l_hate = era.get(`mark:${cid}:反抗`);
+        const l_inmon = era.get(`mark:${cid}:淫纹`);
+        const p_pleasure = j_body + j_spirit / 10;
         const total_ex = era.get(`ex:${cid}:TotalEX`);
-        const pain_params = j_pain / 10 + j_fear / 10 - spirit_jewels / 25;
-        const shame_params =
+        const p_pain = j_pain / 10 + j_fear / 10 - j_spirit / 25;
+        const p_shame =
           inmon.on(plugin_enum.sls) || inmon.on(plugin_enum.khn)
             ? 0
-            : body_jewels / 50 +
-              j_shame / 2 +
-              spirit_jewels / 25 -
-              meek_juels / 5;
-        if (!ero_mark) {
-          if ((pleasure_params >= 4500 || total_ex >= 6) && pleasure_mark < 3) {
-            era.set(`nowex:${cid}:欢愉获取`, 3 - pleasure_mark);
-          } else if (
-            (pleasure_params >= 3000 || total_ex >= 4) &&
-            pleasure_mark < 2
-          ) {
-            era.set(`nowex:${cid}:欢愉获取`, 2 - pleasure_mark);
-          } else if (
-            (pleasure_params >= 1500 || total_ex >= 2) &&
-            pleasure_mark < 1
-          ) {
+            : j_body / 50 + j_shame / 2 + j_spirit / 25 - j_meek / 5;
+        if (!l_inmon) {
+          if ((p_pleasure >= 4500 || total_ex >= 6) && l_pleasure < 3) {
+            era.set(`nowex:${cid}:欢愉获取`, 3 - l_pleasure);
+          } else if ((p_pleasure >= 3000 || total_ex >= 4) && l_pleasure < 2) {
+            era.set(`nowex:${cid}:欢愉获取`, 2 - l_pleasure);
+          } else if ((p_pleasure >= 1500 || total_ex >= 2) && l_pleasure < 1) {
             era.set(`nowex:${cid}:欢愉获取`, 1);
           }
         }
         if (
-          ((got_meek_juels >= 25000 || meek_juels >= 3000) && meek_mark < 3) ||
-          ((got_meek_juels >= 20000 || meek_juels >= 2250) && meek_mark < 2) ||
-          ((got_meek_juels >= 15000 || meek_juels >= 1500) && meek_mark < 1)
+          ((g_meek >= 25000 || j_meek >= 3000) && l_meek < 3) ||
+          ((g_meek >= 20000 || j_meek >= 2250) && l_meek < 2) ||
+          ((g_meek >= 15000 || j_meek >= 1500) && l_meek < 1)
         ) {
           era.set(`nowex:${cid}:同心获取`, 1);
         }
         if (!inmon.on(plugin_enum.meek)) {
-          if ((got_j_pain >= 15000 || pain_params >= 2750) && pain_mark < 3) {
-            era.set(`nowex:${cid}:苦痛获取`, 3 - pain_mark);
-          } else if (
-            (got_j_pain >= 11250 || pain_params >= 2000) &&
-            pain_mark < 2
-          ) {
-            era.set(`nowex:${cid}:苦痛获取`, 2 - pain_mark);
-          } else if (
-            (got_j_pain >= 7500 || pain_params >= 1250) &&
-            pain_mark < 1
-          ) {
+          if ((g_pain >= 15000 || p_pain >= 2750) && l_pain < 3) {
+            era.set(`nowex:${cid}:苦痛获取`, 3 - l_pain);
+          } else if ((g_pain >= 11250 || p_pain >= 2000) && l_pain < 2) {
+            era.set(`nowex:${cid}:苦痛获取`, 2 - l_pain);
+          } else if ((g_pain >= 7500 || p_pain >= 1250) && l_pain < 1) {
             era.set(`nowex:${cid}:苦痛获取`, 1);
           }
-          if (
-            (got_j_shame >= 10000 || shame_params >= 2750) &&
-            shame_mark < 3
-          ) {
-            era.set(`nowex:${cid}:羞耻获取`, 3 - shame_mark);
-          } else if (
-            (got_j_shame >= 7500 || shame_params >= 2000) &&
-            shame_mark < 2
-          ) {
-            era.set(`nowex:${cid}:羞耻获取`, 2 - shame_mark);
-          } else if (
-            (got_j_shame >= 5000 || shame_params >= 1250) &&
-            shame_mark < 1
-          ) {
+          if ((g_shame >= 10000 || p_shame >= 2750) && l_shame < 3) {
+            era.set(`nowex:${cid}:羞耻获取`, 3 - l_shame);
+          } else if ((g_shame >= 7500 || p_shame >= 2000) && l_shame < 2) {
+            era.set(`nowex:${cid}:羞耻获取`, 2 - l_shame);
+          } else if ((g_shame >= 5000 || p_shame >= 1250) && l_shame < 1) {
             era.set(`nowex:${cid}:羞耻获取`, 1);
           }
         }
         if (!inmon.on(plugin_enum.meek) && !inmon.on(plugin_enum.rel_lock)) {
-          if ((got_j_hate >= 10000 || j_hate >= 3200) && hate_mark < 3) {
-            era.set(`nowex:${cid}:反抗获取`, 3 - hate_mark);
-          } else if ((got_j_hate >= 7500 || j_hate >= 2400) && hate_mark < 2) {
-            era.set(`nowex:${cid}:反抗获取`, 2 - hate_mark);
-          } else if ((got_j_hate >= 5000 || j_hate >= 1600) && hate_mark < 1) {
+          if ((g_hate >= 10000 || j_hate >= 3200) && l_hate < 3) {
+            era.set(`nowex:${cid}:反抗获取`, 3 - l_hate);
+          } else if ((g_hate >= 7500 || j_hate >= 2400) && l_hate < 2) {
+            era.set(`nowex:${cid}:反抗获取`, 2 - l_hate);
+          } else if ((g_hate >= 5000 || j_hate >= 1600) && l_hate < 1) {
             era.set(`nowex:${cid}:反抗获取`, 1);
           }
         }
@@ -292,7 +264,7 @@ module.exports = {
    * @param {string} talent
    */
   update_juels_from_talent(chara_id, talent) {
-    if (era.get(`talent:${chara_id}:${talent}`)) {
+    if (era.get(`talent:${chara_id}:${talent}`) > 0) {
       add_juel(chara_id, '顺从', base_juel_reward);
     }
   },

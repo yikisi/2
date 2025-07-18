@@ -11,7 +11,7 @@ const {
 } = require('#/system/sys-calc-chara-others');
 
 const select_action_in_shopping_street = require('#/event/daily/snippets/select-action-in-shopping-street');
-const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
+const add_jewel_reward = require('#/event/snippets/add-jewel-reward');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -147,7 +147,7 @@ module.exports = async (hook) => {
         era.println();
         get_attr_and_print_in_event(100, [0, 0, 0, 10], 0, undefined, true);
         sys_like_chara(100, 0, 20);
-        await add_juel_out_of_train(100, '受虐快感', 100);
+        add_jewel_reward(100, '受虐快感', 100);
         await era.waitAnyKey();
       } else {
         await era.printAndWait([

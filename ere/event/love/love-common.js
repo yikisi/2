@@ -14,7 +14,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const punish_rejecting_love = require('#/event/love/snippets/punish-rejecting-love');
 const { add_event } = require('#/event/queue');
-const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
+const add_jewel_reward = require('#/event/snippets/add-jewel-reward');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const event_hooks = require('#/data/event/event-hooks');
@@ -310,7 +310,7 @@ class CustomizedLove {
       ]);
       era.set('flag:当前互动角色', this.id);
       era.println();
-      await add_juel_out_of_train(this.id, '顺从', 300);
+      add_jewel_reward(this.id, '顺从', 300);
       await era.waitAnyKey();
     }
   }

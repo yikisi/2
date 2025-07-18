@@ -12,7 +12,7 @@ const select_yes_or_no = require('#/page/components/select-yes-or-no');
 const { get_custom_check } = require('#/event/check/check-factory');
 const { get_custom_ero } = require('#/event/ero/ero-factory');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
-const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
+const add_jewel_reward = require('#/event/snippets/add-jewel-reward');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { gacha } = require('#/utils/list-utils');
@@ -464,9 +464,9 @@ async function sys_have_baby(mother_id) {
   ) {
     if (era.get(`mark:${mother_id}:同心`) >= 2) {
       sys_like_chara(mother_id, 0, 50);
-      await add_juel_out_of_train(mother_id, '顺从', 200);
+      add_jewel_reward(mother_id, '顺从', 200);
     } else {
-      await add_juel_out_of_train(mother_id, '顺从', 50);
+      add_jewel_reward(mother_id, '顺从', 50);
     }
   } else if (!father_id || !mother_id) {
     if (
@@ -475,10 +475,10 @@ async function sys_have_baby(mother_id) {
         unexpected_pregnant_enum.mother_sleep
     ) {
       sys_like_chara(mother_id || father_id, 0, 200);
-      await add_juel_out_of_train(mother_id || father_id, '顺从', 400);
+      add_jewel_reward(mother_id || father_id, '顺从', 400);
     } else {
       sys_like_chara(mother_id || father_id, 0, 100);
-      await add_juel_out_of_train(mother_id || father_id, '顺从', 200);
+      add_jewel_reward(mother_id || father_id, '顺从', 200);
     }
   }
   const juel_index = get_random_value(0, 2);

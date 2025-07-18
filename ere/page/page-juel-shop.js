@@ -19,7 +19,7 @@ const {
 } = require('#/page/juel-shop/snippets');
 
 const { get_custom_ero } = require('#/event/ero/ero-factory');
-const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
+const add_jewel_reward = require('#/event/snippets/add-jewel-reward');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_abbr_number } = require('#/utils/value-utils');
@@ -48,7 +48,7 @@ async function shop_result(chara_id, change, result_type) {
         0,
         -10 * change * (1 + era.get(`mark:${chara_id}:反抗`)),
       );
-      await add_juel_out_of_train(chara_id, '反感', 100 * change);
+      add_jewel_reward(chara_id, '反感', 100 * change);
       break;
     case shop_result_type_enum.pleasure:
       sys_like_chara(
@@ -60,7 +60,7 @@ async function shop_result(chara_id, change, result_type) {
             era.get(`mark:${chara_id}:淫纹`) +
             era.get(`mark:${chara_id}:欢愉`)),
       );
-      await add_juel_out_of_train(chara_id, '顺从', 100 * change);
+      add_jewel_reward(chara_id, '顺从', 100 * change);
       sys_change_lust(chara_id, 100);
       break;
     case shop_result_type_enum.slave:
@@ -69,13 +69,13 @@ async function shop_result(chara_id, change, result_type) {
         0,
         (-10 * change) / (era.get(`mark:${chara_id}:同心`) - 1),
       );
-      await add_juel_out_of_train(chara_id, '羞耻', 100 * change);
+      add_jewel_reward(chara_id, '羞耻', 100 * change);
       sys_change_lust(chara_id, 50);
       sys_like_chara(chara_id, 0, -50);
       break;
     case shop_result_type_enum.lover:
       sys_like_chara(chara_id, 0, -50);
-      await add_juel_out_of_train(
+      add_jewel_reward(
         chara_id,
         ['羞耻', '反感'],
         new Array(2).fill(100 * change),

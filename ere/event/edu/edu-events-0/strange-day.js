@@ -28,7 +28,7 @@ const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
 const MyPrivacyEvents = require('#/event/edu/edu-events-0/privacy');
 const { add_event } = require('#/event/queue');
-const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
+const add_jewel_reward = require('#/event/snippets/add-jewel-reward');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const {
@@ -827,7 +827,7 @@ module.exports = class extends MyPrivacyEvents {
       await tachyon.say_as_unknown_and_wait('嗷(∩∀°╭嗷∀∀嗷∀∀°)嗷嗷');
       drawLine({ content: '（感谢汤姆老师的配音）' });
       sys_like_chara(32, 0, get_random_value(100, 150));
-      await add_juel_out_of_train(32, '顺从', 200);
+      add_jewel_reward(32, '顺从', 200);
     } else {
       await printAndWait([
         tachyon.sex,

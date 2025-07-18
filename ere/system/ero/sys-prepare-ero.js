@@ -182,157 +182,177 @@ function update_temp_base(cid, ratio) {
 
 /**
  * @param {number} cid
- * @param {string} juel_name
+ * @param {string} jewel_name
  * @param {number} val
+ * @param {Record<string,number>} dict
  */
-function set_juel_buff(cid, juel_name, val) {
-  era.set(
-    `tcvar:${cid}:${juel_name}因子加成`,
-    Math.min(Math.max(val, -0.99), 1),
+function set_juel_buff(cid, jewel_name, val, dict) {
+  if (dict !== undefined) {
+    dict[jewel_name] = Math.min(Math.max(val, -0.99), 1);
+  } else {
+    era.set(
+      `tcvar:${cid}:${jewel_name}因子加成`,
+      Math.min(Math.max(val, -0.99), 1),
+    );
+  }
+}
+
+/**
+ * @param {number} cid
+ * @param {Record<string,any>} [dict]
+ */
+function update_c_j_buff(cid, dict) {
+  const l_hate = era.get(`mark:${cid}:反抗`);
+  const in_train = era.getCharactersInTrain().length > 0;
+  const is_raping = in_train && era.get('tflag:强奸') === 0 && cid > 0;
+  const lust = era.get(`base:${cid}:性欲`);
+  const lust_buff =
+    era.get(`talent:${cid}:淫乱`) / 5 +
+    (lust >= lust_border.itch) / 10 +
+    ((lust >= lust_border.absent_mind) * 3) / 20 +
+    (lust >= lust_border.want_sex) / 4;
+  const l_meek = era.get(`mark:${cid}:同心`);
+  const l_pain = era.get(`mark:${cid}:苦痛`);
+  const l_pleasure = era.get(`mark:${cid}:欢愉`);
+  const l_shame = era.get(`mark:${cid}:羞耻`);
+  const l_slave = era.get(`mark:${cid}:淫纹`);
+  let love_buff = 0;
+  if (cid > 0) {
+    love_buff = era.get(`love:${cid}`);
+    if (love_buff === 100) {
+      love_buff = 0.9;
+    } else if (love_buff >= 90) {
+      love_buff = 0.5;
+    } else if (love_buff >= 75) {
+      love_buff = 0.2;
+    } else {
+      love_buff = 0;
+    }
+  }
+  set_juel_buff(
+    cid,
+    '顺从',
+    ((era.get(`talent:${cid}:自信程度`) +
+      era.get(`talent:${cid}:坦率程度`) +
+      era.get(`talent:${cid}:工口好奇`) +
+      era.get(`talent:${cid}:情感活动`)) *
+      3) /
+      10 +
+      (l_slave === 0
+        ? lust_buff / 2 +
+          l_pleasure / 10 +
+          Math.max(l_pain, l_shame) / 20 +
+          l_hate / 20 -
+          is_raping
+        : l_slave / 10 - 0.1) +
+      !cid / 2,
+    dict,
   );
+  set_juel_buff(
+    cid,
+    '痛苦',
+    ((era.get(`talent:${cid}:痛苦感受`) +
+      era.get(`talent:${cid}:未来期望`) +
+      era.get(`talent:${cid}:情感活动`)) *
+      3) /
+      10 +
+      (l_slave * -0.16 ||
+        is_raping / 2 +
+          l_pain / 10 -
+          (l_meek * 3) / 20 -
+          l_hate / 20 -
+          love_buff / 2 -
+          lust_buff / 2),
+    dict,
+  );
+  set_juel_buff(
+    cid,
+    '恐惧',
+    ((era.get(`talent:${cid}:恐惧感受`) +
+      era.get(`talent:${cid}:未来期望`) +
+      era.get(`talent:${cid}:社交态度`) +
+      era.get(`talent:${cid}:情感活动`)) *
+      3) /
+      10 +
+      (l_slave * -0.33 ||
+        is_raping / 2 +
+          (era.get(`tequip:${cid}:眼罩`) === item_enum.blindfold) / 2 +
+          l_pain / 10 -
+          (l_meek * 3) / 20 -
+          l_hate / 20 -
+          love_buff / 2 -
+          lust_buff / 2),
+    dict,
+  );
+  set_juel_buff(
+    cid,
+    '羞耻',
+    ((era.get(`talent:${cid}:羞耻忍耐`) +
+      era.get(`talent:${cid}:贞洁看法`) +
+      era.get(`talent:${cid}:社交态度`) +
+      era.get(`talent:${cid}:情感活动`)) *
+      3) /
+      10 +
+      is_raping / 2 +
+      (l_slave * -0.33 ||
+        (in_train && era.get('tflag:全身镜') > 0) / 2 +
+          l_shame / 10 -
+          (l_meek * 3) / 20 -
+          l_hate / 20 -
+          (love_buff * 4) / 5 -
+          lust_buff / 2),
+    dict,
+  );
+  set_juel_buff(
+    cid,
+    '反感',
+    0.3 *
+      (era.get(`talent:${cid}:反感获取`) +
+        era.get(`talent:${cid}:贞洁看法`) +
+        era.get(`talent:${cid}:坦率程度`) +
+        era.get(`talent:${cid}:工口好奇`) +
+        era.get(`talent:${cid}:情感活动`)) +
+      (l_slave * -0.33 ||
+        is_raping +
+          l_hate / 10 +
+          l_pain / 20 +
+          l_shame / 20 -
+          l_meek / 4 -
+          love_buff -
+          lust_buff / 2),
+    dict,
+  );
+  set_juel_buff(
+    cid,
+    '施虐',
+    lust_buff +
+      (era.get(`talent:${cid}:小恶魔`) + era.get(`talent:${cid}:变态`)) / 2,
+    dict,
+  );
+  set_juel_buff(
+    cid,
+    '受虐',
+    lust_buff +
+      (era.get(`talent:${cid}:圣母`) + era.get(`talent:${cid}:变态`)) / 2,
+    dict,
+  );
+  set_juel_buff(cid, '口腔', lust_buff, dict);
+  set_juel_buff(
+    cid,
+    '胸部',
+    lust_buff + era.get(`talent:${cid}:乳房尺寸`) / 5,
+    dict,
+  );
+  set_juel_buff(cid, '身体', lust_buff, dict);
+  set_juel_buff(cid, '外阴', lust_buff, dict);
+  set_juel_buff(cid, '阴道', lust_buff, dict);
+  set_juel_buff(cid, '肛门', lust_buff, dict);
+  set_juel_buff(cid, '阴茎', lust_buff, dict);
 }
 
 /** @param {number} ids */
 function update_juel_buff(...ids) {
-  for (const cid of ids) {
-    const hate_level = era.get(`mark:${cid}:反抗`);
-    const is_raping = era.get('tflag:强奸') === 0 && cid > 0;
-    const lust = era.get(`base:${cid}:性欲`);
-    const lust_buff =
-      era.get(`talent:${cid}:淫乱`) / 5 +
-      (lust >= lust_border.itch) / 10 +
-      ((lust >= lust_border.absent_mind) * 3) / 20 +
-      (lust >= lust_border.want_sex) / 4;
-    const meek_level = era.get(`mark:${cid}:同心`);
-    const pain_level = era.get(`mark:${cid}:苦痛`);
-    const pleasure_level = era.get(`mark:${cid}:欢愉`);
-    const shame_level = era.get(`mark:${cid}:羞耻`);
-    const slave_level = era.get(`mark:${cid}:淫纹`);
-    let love_buff = 0;
-    if (cid) {
-      love_buff = era.get(`love:${cid}`);
-      if (love_buff === 100) {
-        love_buff = 0.9;
-      } else if (love_buff >= 90) {
-        love_buff = 0.5;
-      } else if (love_buff >= 75) {
-        love_buff = 0.2;
-      } else {
-        love_buff = 0;
-      }
-    }
-    set_juel_buff(
-      cid,
-      '顺从',
-      ((era.get(`talent:${cid}:自信程度`) +
-        era.get(`talent:${cid}:坦率程度`) +
-        era.get(`talent:${cid}:工口好奇`) +
-        era.get(`talent:${cid}:情感活动`)) *
-        3) /
-        10 +
-        (slave_level === 0
-          ? lust_buff / 2 +
-            pleasure_level / 10 +
-            Math.max(pain_level, shame_level) / 20 +
-            hate_level / 20 -
-            is_raping
-          : slave_level / 10 - 0.1) +
-        !cid / 2,
-    );
-    set_juel_buff(
-      cid,
-      '痛苦',
-      ((era.get(`talent:${cid}:痛苦感受`) +
-        era.get(`talent:${cid}:未来期望`) +
-        era.get(`talent:${cid}:情感活动`)) *
-        3) /
-        10 +
-        (slave_level * -0.16 ||
-          is_raping / 2 +
-            pain_level / 10 -
-            (meek_level * 3) / 20 -
-            hate_level / 20 -
-            love_buff / 2 -
-            lust_buff / 2),
-    );
-    set_juel_buff(
-      cid,
-      '恐惧',
-      ((era.get(`talent:${cid}:恐惧感受`) +
-        era.get(`talent:${cid}:未来期望`) +
-        era.get(`talent:${cid}:社交态度`) +
-        era.get(`talent:${cid}:情感活动`)) *
-        3) /
-        10 +
-        (slave_level * -0.33 ||
-          is_raping / 2 +
-            (era.get(`tequip:${cid}:眼罩`) === item_enum.blindfold) / 2 +
-            pain_level / 10 -
-            (meek_level * 3) / 20 -
-            hate_level / 20 -
-            love_buff / 2 -
-            lust_buff / 2),
-    );
-    set_juel_buff(
-      cid,
-      '羞耻',
-      ((era.get(`talent:${cid}:羞耻忍耐`) +
-        era.get(`talent:${cid}:贞洁看法`) +
-        era.get(`talent:${cid}:社交态度`) +
-        era.get(`talent:${cid}:情感活动`)) *
-        3) /
-        10 +
-        is_raping / 2 +
-        (slave_level * -0.33 ||
-          era.get('tflag:全身镜') / 2 +
-            shame_level / 10 -
-            (meek_level * 3) / 20 -
-            hate_level / 20 -
-            (love_buff * 4) / 5 -
-            lust_buff / 2),
-    );
-    set_juel_buff(
-      cid,
-      '反感',
-      0.3 *
-        (era.get(`talent:${cid}:反感获取`) +
-          era.get(`talent:${cid}:贞洁看法`) +
-          era.get(`talent:${cid}:坦率程度`) +
-          era.get(`talent:${cid}:工口好奇`) +
-          era.get(`talent:${cid}:情感活动`)) +
-        (slave_level * -0.33 ||
-          is_raping +
-            hate_level / 10 +
-            pain_level / 20 +
-            shame_level / 20 -
-            meek_level / 4 -
-            love_buff -
-            lust_buff / 2),
-    );
-    set_juel_buff(
-      cid,
-      '施虐',
-      lust_buff +
-        (era.get(`talent:${cid}:小恶魔`) + era.get(`talent:${cid}:变态`)) / 2,
-    );
-    set_juel_buff(
-      cid,
-      '受虐',
-      lust_buff +
-        (era.get(`talent:${cid}:圣母`) + era.get(`talent:${cid}:变态`)) / 2,
-    );
-    set_juel_buff(cid, '口腔', lust_buff);
-    set_juel_buff(
-      cid,
-      '胸部',
-      lust_buff + era.get(`talent:${cid}:乳房尺寸`) / 5,
-    );
-    set_juel_buff(cid, '身体', lust_buff);
-    set_juel_buff(cid, '外阴', lust_buff);
-    set_juel_buff(cid, '阴道', lust_buff);
-    set_juel_buff(cid, '肛门', lust_buff);
-    set_juel_buff(cid, '阴茎', lust_buff);
-  }
+  ids.forEach(update_c_j_buff);
 }
 
 /** @param {number} ids */
@@ -436,12 +456,12 @@ function begin_and_init_ero(...ids) {
 }
 
 /**
- * @param {boolean} skip_juels
- * @param {boolean} log_juels
+ * @param {boolean} skip_jewels
+ * @param {boolean} log_jewels
  * @param {number[]} ids
  * @returns {{attr:Record<string,(PrintedSpan|string)[][]>,[jewel]:Record<string,Record<string,number>>}}
  */
-function end_ero(skip_juels, log_juels, ids) {
+function end_ero(skip_jewels, log_jewels, ids) {
   let ret = { attr: {}, jewel: {} };
   sys_calc_ero_items.remove_all_items(...ids);
   clean_all_parts(...ids);
@@ -479,14 +499,14 @@ function end_ero(skip_juels, log_juels, ids) {
         sys_change_lust(cid, lust_from_palam * times);
       }
     });
-    const got = new Array(13).fill(0),
-      un_got = new Array(13).fill(0);
+    const got = new Array(13).fill(0);
+    const un_got = new Array(13).fill(0);
     ret.jewel[cid] = {};
     for (let i = 12; i >= 0; --i) {
       got[i] = Math.floor(
         era.get(`gotjewel:${cid}:${jewel_names[i]}`) / palam2juel,
       );
-      if (!skip_juels && i < 12) {
+      if (!skip_jewels && i < 12) {
         un_got[i] = got[i + 1] + un_got[i + 1];
       }
     }
@@ -494,14 +514,14 @@ function end_ero(skip_juels, log_juels, ids) {
       era.get(`gotjewel:${cid}:自卫`) / palam2juel,
     );
     let self_protect =
-      skip_juels || !cid
+      skip_jewels || !cid
         ? 0
         : Math.min(
             era.get(`jewel:${cid}:自卫`) + got_self_protect,
             un_got[0] + got[0],
           );
     era.add(`jewel:${cid}:自卫`, got_self_protect - self_protect);
-    if (log_juels) {
+    if (log_jewels) {
       ret.jewel[cid]['自卫'] = got_self_protect;
       ret.jewel[cid]['-自卫'] = self_protect;
     }
@@ -513,13 +533,13 @@ function end_ero(skip_juels, log_juels, ids) {
       got[i] -= lost;
       self_protect -= lost;
       era.add(`jewel:${cid}:${j_name}`, got[i]);
-      if (log_juels) {
+      if (log_jewels) {
         ret.jewel[cid][j_name] = got[i];
         ret.jewel[cid][`-${j_name}`] = lost;
       }
     });
-    const s_orgasm_count = era.get(`ex:${cid}:施虐高潮`),
-      m_orgasm_count = era.get(`ex:${cid}:受虐高潮`);
+    const s_orgasm_count = era.get(`ex:${cid}:施虐高潮`);
+    const m_orgasm_count = era.get(`ex:${cid}:受虐高潮`);
     if (s_orgasm_count) {
       sys_change_pressure(
         cid,
@@ -616,7 +636,7 @@ function end_ero(skip_juels, log_juels, ids) {
   gene_juel_names.forEach((e) =>
     era.add(`jewel:0:${e}`, era.get(`gotjewel:0:${e}`)),
   );
-  if (!log_juels) {
+  if (!log_jewels) {
     ret.jewel = undefined;
   }
   era
@@ -796,6 +816,7 @@ module.exports = {
       }
     });
   },
+  update_c_j_buff,
   update_ero_status,
   update_juel_buff,
   update_temp_base,
