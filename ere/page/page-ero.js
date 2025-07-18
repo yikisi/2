@@ -921,7 +921,7 @@ async function page_ero(lover, skip_start_end = false) {
       }
     }
   }
-  const size = 200 + 300 * !era.get('item:乳汁处理装置');
+  const size = 200 + 300 * !era.get('item:乳汁处理器');
   wait_flag = print_milking('人奶', size) || wait_flag;
   wait_flag = print_milking('马奶', size) || wait_flag;
   if (wait_flag) {

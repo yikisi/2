@@ -25,6 +25,13 @@ class MecNpc extends CustomizedMec {
       get(`cflag:${this.id}:育成回合计时`) < 3 * 48
     );
   }
+
+  set_my_sex() {
+    if (get(`cflag:${this.id}:种族`) > 0) {
+      return super.set_my_sex();
+    }
+    return 0;
+  }
 }
 
 module.exports = MecNpc;
