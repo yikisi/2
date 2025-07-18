@@ -5,6 +5,8 @@ const { sys_change_lust } = require('#/system/sys-calc-base-cflag');
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
 const select_target_in_storage = require('#/page/storage/select-target');
 
+const add_jewel_reward = require('#/event/snippets/add-jewel-reward');
+
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
@@ -22,6 +24,38 @@ module.exports = (handlers) => {
       await era.printAndWait('……但是在丢弃之前从里面翻出了几张纸币……');
       era.set('item:透明棉被', 0);
       era.add('flag:当前马币', get_random_value(10, 50));
+    }
+  };
+
+  handlers[84] = handlers[85] = async (item) => {
+    const ret = await select_target_in_storage(
+      item,
+      (cid) =>
+        cid > 0 &&
+        !era.get(`mark:${cid}:淫纹`) &&
+        !era.get(`status:${cid}:淫纹贴纸`) &&
+        (era.get(`love:${cid}`) >= 25 ||
+          era.get(`relation:${cid}:0`) + era.get(`love:${cid}`) * 6 > 225),
+    );
+    if (ret > 0) {
+      const chara = get_chara_talk(ret);
+      era.print([
+        '给 ',
+        chara.get_colored_name(),
+        ' 以「暖腹」的名义贴上了',
+        era.get(`itemname:${item}`),
+        '……',
+      ]);
+      era.print([chara.get_colored_name(), ' 小腹上浮现一个花纹繁复的淫纹……']);
+      era.set(`status:${ret}:淫纹贴纸`, item - 83);
+      if (item === 85) {
+        add_jewel_reward(ret, '顺从', 1666);
+      }
+      era.logger.info(item);
+      era.logger.info(era.get(`itemname:${item}`));
+      era.add(`item:${item}`, -1);
+      await era.waitAnyKey();
+      return true;
     }
   };
 

@@ -6,7 +6,7 @@ const FlashEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-37')
 
 module.exports = class extends CustomizedInit {
   init(is_reset) {
-    if (!is_reset && era.get('cflag:0:模版角色') !== this.id) {
+    if (!is_reset && era.get('cflag:0:模版角色') !== 37) {
       era.set('callname:0:37', '闪耀同学');
     }
     new FlashEduMarks().train_with_festa = 1;

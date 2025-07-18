@@ -15,7 +15,7 @@ const CustomizedLove = require('#/event/love/love-common');
 const punish_rejecting_love = require('#/event/love/snippets/punish-rejecting-love');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 const { add_event } = require('#/event/queue');
-const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
+const add_jewel_reward = require('#/event/snippets/add-jewel-reward');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -101,7 +101,7 @@ module.exports = class extends CustomizedLove {
       return;
     }
     era.println();
-    await add_juel_out_of_train(this.id, '顺从', 500);
+    add_jewel_reward(this.id, '顺从', 500);
     return true;
   }
 

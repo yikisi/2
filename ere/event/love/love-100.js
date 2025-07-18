@@ -14,7 +14,7 @@ const { date_common } = require('#/event/daily/daily-events-100/snippets');
 const CustomizedLove = require('#/event/love/love-common');
 const punish_rejecting_love = require('#/event/love/snippets/punish-rejecting-love');
 const { add_event } = require('#/event/queue');
-const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
+const add_jewel_reward = require('#/event/snippets/add-jewel-reward');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
@@ -814,7 +814,7 @@ module.exports = class extends CustomizedLove {
       await era.printAndWait('伸出赤舌，侍奉那凶恶的主兽。');
       era.println();
       get_attr_and_print_in_event(100, undefined, 66, true);
-      await add_juel_out_of_train(100, '同心', 200);
+      add_jewel_reward(100, '同心', 200);
       era.set('mark:100:苦痛', 0);
       era.set('mark:100:羞耻', 0);
       era.set('mark:100:反抗', 0);

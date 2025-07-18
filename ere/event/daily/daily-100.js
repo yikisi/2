@@ -18,7 +18,7 @@ const acute_out_shopping = require('#/event/daily/daily-events-100/out-shopping'
 const acute_school_atrium = require('#/event/daily/daily-events-100/school-atrium');
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
 const select_action_in_station = require('#/event/daily/snippets/select-action-in-station');
-const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
+const add_jewel_reward = require('#/event/snippets/add-jewel-reward');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -696,10 +696,10 @@ module.exports = class extends CustomizedDaily {
               true,
             );
             sys_change_motivation(100, 1);
-            await add_juel_out_of_train(100, '受虐快感', 100);
+            add_jewel_reward(100, '受虐快感', 100);
             era.println();
             get_attr_and_print_in_event(0, [0, 0, 10], 0, undefined, true);
-            await add_juel_out_of_train(0, '施虐快感', 100);
+            add_jewel_reward(0, '施虐快感', 100);
             await era.waitAnyKey();
           } else {
             await era.printAndWait('还没说完，自己便已被抱住。');
@@ -725,7 +725,7 @@ module.exports = class extends CustomizedDaily {
             await era.printAndWait('看来今天夜里，注定了是一场殊死的决斗了。');
             era.println();
             get_attr_and_print_in_event(100, [0, 0, 10], 0, undefined, true);
-            await add_juel_out_of_train(100, '施虐快感', 100);
+            add_jewel_reward(100, '施虐快感', 100);
             era.println();
             get_attr_and_print_in_event(
               0,

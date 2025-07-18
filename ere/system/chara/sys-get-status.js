@@ -51,6 +51,13 @@ function sys_get_status(cid) {
     }
     status_list.push(obj);
   }
+  if (era.get(`status:${cid}:淫纹贴纸`) > 0) {
+    status_list.push({
+      color: buff_colors[2],
+      content: '淫纹贴纸',
+      title: status_desc['淫纹贴纸'],
+    });
+  }
   status_list.push(...get_custom_mec(cid).get_status(show_train_buff));
   if (era.get(`status:${cid}:生日`) > 0) {
     status_list.push({

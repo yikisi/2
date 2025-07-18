@@ -461,7 +461,8 @@ module.exports = (handlers) => {
       '羞耻',
       base_emotion_juel / ((era.get(`talent:${defender}:淫核`) === 2) + 1),
     );
-    add_attr_exp(attacker, attr_enum.speed, 1);
+    add_attr_exp(attacker, attr_enum.speed, 0.8);
+    add_attr_exp(attacker, attr_enum.strength, 0.8);
     sys_change_motion_by_base(attacker, defender, [base_enum.foot]);
   };
 
@@ -479,7 +480,8 @@ module.exports = (handlers) => {
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 5);
     add_juel(defender, '羞耻', base_emotion_juel / 2);
     add_juel(attacker, '顺从', base_emotion_juel);
-    add_attr_exp(defender, attr_enum.strength, 1);
+    add_attr_exp(attacker, attr_enum.speed, 0.8);
+    add_attr_exp(defender, attr_enum.strength, 0.8);
     sys_change_motion_by_base(attacker, defender, [base_enum.b_foot]);
   };
 };

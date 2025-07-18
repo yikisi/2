@@ -15,8 +15,8 @@ const recruit_flags = require('#/data/event/recruit-flags');
 
 module.exports = class extends CustomizedRecruit {
   async recruit() {
-    const me = get_chara_talk(0),
-      god = get_chara_talk(341);
+    const me = get_chara_talk(0);
+    const god = get_chara_talk(341);
     await print_event_name('流转变换，化为你所看见的模样', god);
     await printAndWait('新的一天，新的开始。');
     await printAndWait([

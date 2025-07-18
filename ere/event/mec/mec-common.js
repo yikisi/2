@@ -283,14 +283,18 @@ class CustomizedMec {
   /** @returns {number} */
   set_my_sex() {
     const global_sex = era.get('flag:角色性别');
-    return era.set(
-      `cflag:${this.id}:性别`,
-      global_sex === 99
-        ? era.get(`cflag:${this.id}:模版角色`) === -1
-          ? era.get(`staticcflag:${this.id}:性别`)
-          : get_random_entry([0, 10])
-        : global_sex,
-    );
+    if (global_sex === 99) {
+      if (era.get(`cflag:${this.id}:模版角色`) === -1) {
+        return era.set(
+          `cflag:${this.id}:性别`,
+          era.get(`staticcflag:${this.id}:性别`),
+        );
+      } else {
+        return era.set(`cflag:${this.id}:性别`, get_random_entry([0, 10]));
+      }
+    } else {
+      return era.set(`cflag:${this.id}:性别`, global_sex);
+    }
   }
 
   /** @param {PseudoUma} uma */

@@ -106,8 +106,17 @@ module.exports = async () => {
     era.quit();
   }
   const line_copyrights = [
+    [[get_copyright_entry(1, '招募')], 'wwm'],
     [[get_copyright_entry(3)], '天马闪光蹄'],
-    // [[get_copyright_entry(4), { isDivider: true }, get_copyright_entry(46)], '黑奴一号'],
+    [
+      [
+        get_copyright_entry(4),
+        { isDivider: true },
+        get_copyright_entry(46),
+        '（招募）',
+      ],
+      '黑奴一号',
+    ],
     [
       [
         get_copyright_entry(6),
@@ -135,7 +144,10 @@ module.exports = async () => {
     ],
     [[get_copyright_entry(32)], '幽白書'],
     [[get_copyright_entry(35, '部分地下室')], '幽白書'],
+    [[get_copyright_entry(36, '招募')], '幽白書'],
     [[get_copyright_entry(37)], '爱放箭的袁本初'],
+    [[get_copyright_entry(47, '招募')], '某不思议的大嘴鸥'],
+    [[get_copyright_entry(50, '招募')], '卡特曼'],
     [[get_copyright_entry(52)], '99'],
     [[get_copyright_entry(56)], 'ALEX'],
     [[get_copyright_entry(60)], '红红火火恍惚'],
@@ -162,10 +174,10 @@ module.exports = async () => {
     ],
     [[get_copyright_entry(71)], '洛洛'],
     [[get_copyright_entry(86, '部分地下室')], 'イーウィヤ'],
-    [[get_copyright_entry(89, '地下室')], '無奈'],
-    // [[get_copyright_entry(89)], '無奈'],
+    [[get_copyright_entry(89, '招募、地下室')], '無奈'],
     [[get_copyright_entry(100)], '夕阳红艺术团小组长-赤红彗星红桃爵士Q先生'],
-    [[get_copyright_entry(119, '地下室')], '幽白書'],
+    [[get_copyright_entry(116, '招募')], 'AraP'],
+    [[get_copyright_entry(119, '招募、地下室')], '幽白書'],
     [[get_copyright_entry(400)], '黑衣剑士-星爆气流斩准备就绪'],
     [
       [get_copyright_entry(303, '部分')],

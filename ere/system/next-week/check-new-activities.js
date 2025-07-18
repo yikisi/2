@@ -126,7 +126,7 @@ async function check_new_activities(cur_round, in_team_list) {
       sys_get_billings().reduce((p, c) => p + c.repay, 0) <=
       0
   ) {
-    era.print([get_chara_talk(0).get_colored_name(), ' 即将破产！']);
+    era.print(['【', get_chara_talk(0).get_colored_name(), ' 即将破产！】']);
   }
   /** @type {Record<string,{no_hurt:boolean,no_preg:boolean}>} */
   const in_team_status_dict = {};

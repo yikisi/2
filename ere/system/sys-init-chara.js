@@ -83,48 +83,49 @@ function init_chara(cid, src = 0) {
   era.set(`base:${cid}:压力`, 0);
   era.set(`base:${cid}:体重偏差`, 0);
   era.set(`base:${cid}:药物残留`, 0);
-  const auto_talent = cid ? era.get('flag:自带特性') : 0;
-  switch (auto_talent) {
-    case -4:
-      era.set(`talent:${cid}:淫口`, -4);
-      era.set(`talent:${cid}:淫乳`, -4);
-      era.set(`talent:${cid}:淫身`, -4);
-      era.set(`talent:${cid}:淫核`, -4);
-      era.set(`talent:${cid}:淫壶`, -4);
-      era.set(`talent:${cid}:淫臀`, -4);
-      era.set(`talent:${cid}:早泄`, -4);
-      era.set(`talent:${cid}:抖S`, 0);
-      era.set(`talent:${cid}:喜欢责骂`, 0);
-      era.set(`talent:${cid}:喜欢痛苦`, 0);
-      break;
-    case -1:
-      era.set(`talent:${cid}:淫口`, 0);
-      era.set(`talent:${cid}:淫乳`, 0);
-      era.set(`talent:${cid}:淫身`, 0);
-      era.set(`talent:${cid}:淫核`, 0);
-      era.set(`talent:${cid}:淫壶`, 0);
-      era.set(`talent:${cid}:淫臀`, 0);
-      era.set(`talent:${cid}:早泄`, 0);
-      era.set(`talent:${cid}:抖S`, 0);
-      era.set(`talent:${cid}:喜欢责骂`, 0);
-      era.set(`talent:${cid}:喜欢痛苦`, 0);
-      break;
-    case 1:
-      era.set(`talent:${cid}:淫口`, 1);
-      era.set(`talent:${cid}:淫乳`, 1);
-      era.set(`talent:${cid}:淫身`, 1);
-      era.set(`talent:${cid}:淫核`, 1);
-      era.set(`talent:${cid}:淫壶`, 1);
-      era.set(`talent:${cid}:淫臀`, 1);
-      era.set(`talent:${cid}:早泄`, 1);
-      era.set(`talent:${cid}:抖S`, 1);
-      era.set(`talent:${cid}:喜欢责骂`, 1);
-      era.set(`talent:${cid}:喜欢痛苦`, 1);
-  }
-  if (cid && era.get('flag:自带钝感')) {
-    pleasure_list.forEach((part) => {
-      era.set(`talent:${cid}:${part_names[part]}钝感`, 1);
-    });
+  if (cid > 0) {
+    switch (era.get('flag:自带特性')) {
+      case -4:
+        era.set(`talent:${cid}:淫口`, -4);
+        era.set(`talent:${cid}:淫乳`, -4);
+        era.set(`talent:${cid}:淫身`, -4);
+        era.set(`talent:${cid}:淫核`, -4);
+        era.set(`talent:${cid}:淫壶`, -4);
+        era.set(`talent:${cid}:淫臀`, -4);
+        era.set(`talent:${cid}:早泄`, -4);
+        era.set(`talent:${cid}:抖S`, 0);
+        era.set(`talent:${cid}:喜欢责骂`, 0);
+        era.set(`talent:${cid}:喜欢痛苦`, 0);
+        break;
+      case -1:
+        era.set(`talent:${cid}:淫口`, 0);
+        era.set(`talent:${cid}:淫乳`, 0);
+        era.set(`talent:${cid}:淫身`, 0);
+        era.set(`talent:${cid}:淫核`, 0);
+        era.set(`talent:${cid}:淫壶`, 0);
+        era.set(`talent:${cid}:淫臀`, 0);
+        era.set(`talent:${cid}:早泄`, 0);
+        era.set(`talent:${cid}:抖S`, 0);
+        era.set(`talent:${cid}:喜欢责骂`, 0);
+        era.set(`talent:${cid}:喜欢痛苦`, 0);
+        break;
+      case 1:
+        era.set(`talent:${cid}:淫口`, 1);
+        era.set(`talent:${cid}:淫乳`, 1);
+        era.set(`talent:${cid}:淫身`, 1);
+        era.set(`talent:${cid}:淫核`, 1);
+        era.set(`talent:${cid}:淫壶`, 1);
+        era.set(`talent:${cid}:淫臀`, 1);
+        era.set(`talent:${cid}:早泄`, 1);
+        era.set(`talent:${cid}:抖S`, 1);
+        era.set(`talent:${cid}:喜欢责骂`, 1);
+        era.set(`talent:${cid}:喜欢痛苦`, 1);
+    }
+    if (era.get('flag:自带钝感')) {
+      pleasure_list.forEach((part) => {
+        era.set(`talent:${cid}:${part_names[part]}钝感`, 1);
+      });
+    }
   }
   era.set(
     `talent:${cid}:乳房尺寸`,
@@ -153,8 +154,7 @@ function init_chara(cid, src = 0) {
     } else {
       era.add(`relation:${cid}:0`, era.get('flag:马娘初始好感') - 75);
     }
-
-    if (era.get(`cflag:${cid}:种族`)) {
+    if (era.get(`cflag:${cid}:种族`) > 0) {
       switch (era.get('flag:马娘身高')) {
         case 0:
           temp = era.get(`cflag:${cid}:身高`);
@@ -206,7 +206,7 @@ function init_chara(cid, src = 0) {
 
       switch (era.get('flag:彩蛋机制')) {
         case 3:
-          if (auto_talent !== 1) {
+          if (era.get('flag:自带特性') !== 1) {
             era.set(
               `talent:${cid}:神之足`,
               era.set(`talent:${cid}:淫身`, era.set(`talent:${cid}:淫臀`, 1)),
@@ -230,11 +230,11 @@ function init_chara(cid, src = 0) {
       }
     }
     const my_src_chara = era.get('cflag:0:模版角色');
-    if (era.get(`relation:${cid}`)[my_src_chara]) {
-      era.set(`relation:${cid}:0`, era.get(`relation:${cid}:${my_src_chara}`));
+    if ((temp = era.get(`relation:${cid}`)[my_src_chara]) !== undefined) {
+      era.set(`relation:${cid}:0`, temp);
     }
-    if (era.get(`callname:${my_src_chara}`)[cid]) {
-      era.set(`callname:0:${cid}`, era.get(`callname:${my_src_chara}:${cid}`));
+    if ((temp = era.get(`callname:${my_src_chara}`)[cid]) !== undefined) {
+      era.set(`callname:0:${cid}`, temp);
     }
   } else {
     era.set(`talent:${cid}:病娇`, 0);

@@ -13,7 +13,7 @@ const sys_filter_chara = require('#/system/sys-filter-chara');
 const common_pregnant_report_in_love = require('#/event/ero/common/common-pregnant-report-in-love');
 const kojo = require('#/event/ero/ero-0.kojo');
 const CustomizedEro = require('#/event/ero/ero-common');
-const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
+const add_jewel_reward = require('#/event/snippets/add-jewel-reward');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -190,7 +190,7 @@ module.exports = class extends CustomizedEro {
           );
           if (
             sys_filter_chara('cflag', '招募状态', recruit_flags.yes).filter(
-              (e) => era.get(`cflag:${e}:育成回合计时`) < 3 * 48,
+              (e) => e > 0 && era.get(`cflag:${e}:育成回合计时`) < 3 * 48,
             ).length > 0
           ) {
             await era.printAndWait(
@@ -324,7 +324,7 @@ module.exports = class extends CustomizedEro {
         }
         era.println();
         if (ret === 1) {
-          await add_juel_out_of_train(0, '顺从', 1000);
+          add_jewel_reward(0, '顺从', 1000);
           sys_like_chara(
             father.id,
             0,
@@ -332,7 +332,7 @@ module.exports = class extends CustomizedEro {
             unexpected_pregnant !== unexpected_pregnant_enum.mother_sleep,
           );
         } else {
-          await add_juel_out_of_train(0, '受虐快感', 200);
+          add_jewel_reward(0, '受虐快感', 200);
           sys_like_chara(
             father.id,
             0,
