@@ -21,7 +21,7 @@ async function print_shop_page(item_list) {
   const to_buy = {};
   const price = {};
   const limit = {};
-  const cur_location = era.get('flag:当前位置');
+  const cur_loc = era.get('flag:当前位置');
   const price_ratio =
     (100 + era.get('flag:道具价格') + (era.get('flag:当前年') - 2000) * 4) /
     100;
@@ -34,7 +34,9 @@ async function print_shop_page(item_list) {
       limit[id] = e.limit;
     }
     to_buy[id] = 1;
-    price[id] = Math.ceil(era.get(`itemprice:${id}`) * price_ratio);
+    if (id !== 84 && id !== 85) {
+      price[id] = Math.ceil(era.get(`itemprice:${id}`) * price_ratio);
+    }
   });
   let on_sell_list;
   let cur_coin;
@@ -223,7 +225,7 @@ async function print_shop_page(item_list) {
       {
         accelerator: 999,
         config: { align: 'right', width: 6 },
-        content: `离开 ${location_name[cur_location]}`,
+        content: `离开 ${location_name[cur_loc]}`,
         type: 'button',
       },
     );
@@ -253,7 +255,7 @@ async function print_shop_page(item_list) {
           },
           {
             config: { width: 10 },
-            content: `位于 ${location_name[cur_location]}`,
+            content: `位于 ${location_name[cur_loc]}`,
             type: 'text',
           },
         ],

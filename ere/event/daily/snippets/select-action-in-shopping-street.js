@@ -9,7 +9,7 @@ function select_action_in_shopping_street() {
         '抽奖',
         '卡拉OK',
         '看电影',
-        era.get('flag:当前互动角色') ? '' : '粉红色的小店',
+        era.get('flag:当前互动角色') > 0 ? '' : '粉红色的小店',
       ]
         .filter((e) => e)
         .map((e, i, l) => {

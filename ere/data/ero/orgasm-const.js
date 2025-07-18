@@ -1,4 +1,4 @@
-const palam2juel = 10;
+const param2jewel = 10;
 
 module.exports = {
   /** 母马一生能生多少 */
@@ -6,7 +6,7 @@ module.exports = {
   // 无任何加减成时的快感上限
   base_limit: 1000,
   /** 一次高潮奖励的基本宝珠数（*palam2juel） */
-  base_orgasm_juel_reward: 50 * palam2juel,
+  base_orgasm_juel_reward: 50 * param2jewel,
   /** 从36周开始的生产概率 */
   birth_percent: [0.1, 0.2, 0.3, 0.4, 0.5, 0.7, 1],
   /** 多重高潮的额外体力精力消耗系数，从二重高潮开始计算 */
@@ -44,7 +44,7 @@ module.exports = {
     },
   },
   /** 多少累积快感能换一个宝珠 */
-  palam2juel,
+  palam2juel: param2jewel,
   /** 部位产生润滑液的快感阈值 */
   palam_border: {
     anal: 0.6,

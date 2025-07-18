@@ -222,6 +222,13 @@ async function reset_status(
       );
     }
     era.set(`status:${cid}:健康茶`, 0);
+    if (era.get(`status:${cid}:淫纹贴纸`) === 2) {
+      era.set(
+        `jewel:${cid}:顺从`,
+        Math.max(era.get(`jewel:${cid}:顺从`) - 1666),
+      );
+    }
+    era.set(`status:${cid}:淫纹贴纸`, 0);
 
     if (!isNaN(Number(era.get(`cflag:${cid}:育成回合计时`)))) {
       era.add(`cflag:${cid}:育成回合计时`, 1);

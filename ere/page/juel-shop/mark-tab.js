@@ -112,7 +112,10 @@ function plugin_to_button(
  */
 module.exports = async (chara, juel_dict, total_delta, pointer) => {
   let buffer = [];
-  let l_sex = era.get(`mark:${chara.id}:淫纹`);
+  let l_sex =
+    era.get(`status:${chara.id}:淫纹贴纸`) > 0
+      ? 3
+      : era.get(`mark:${chara.id}:淫纹`);
   const l_pleasure = era.get(`mark:${chara.id}:欢愉`);
   const l_meek = era.get(`mark:${chara.id}:同心`);
   const l_pain = era.get(`mark:${chara.id}:苦痛`);
@@ -412,7 +415,12 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
                 ]
               : [
                   {
-                    config: { width: 6 },
+                    config: {
+                      width: 6,
+                      ...(era.get(`status:${chara.id}:淫纹贴纸`) > 0
+                        ? { disabled: true, title: '淫纹贴纸不能设置词条' }
+                        : {}),
+                    },
                     content: `当前词条：${slavery_options[slave]}`,
                     ...(chara.id > 0
                       ? { accelerator: 9, type: 'button' }

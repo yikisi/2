@@ -263,16 +263,27 @@ handlers[event_hooks.out_river] = async (cid, hook, extra_flag) => {
     wait_flag =
       (cid && sys_like_chara(cid, 0, get_random_value(5, 10))) || wait_flag;
   }
-  wait_flag && (await era.waitAnyKey());
+  if (wait_flag) {
+    await era.waitAnyKey();
+  }
 };
 
 handlers[event_hooks.out_shopping] = async (cid, hook) => {
   let wait_flag = false;
   if (hook.arg === 2) {
-    await print_shop_page([
+    const items = [
       ...new Array(11).fill(0).map((_, i) => i + 70),
       ...new Array(3).fill(0).map((_, i) => ({ id: i + 81, limit: true })),
-    ]);
+    ];
+    if (era.get('flag:当前月') === 6 || era.get('flag:当前年') % 100 === 66) {
+      items.push(84, { id: 85, limit: true });
+    } else if (
+      era.get('flag:当前月') + era.get('flag:当前周') === 6 ||
+      era.get('flag:当前年') % 10 === 6
+    ) {
+      items.push(84);
+    }
+    await print_shop_page(items);
     random_cost_in_action(0, [0, 100], [0, 100]);
   } else {
     era.println();
