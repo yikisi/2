@@ -8,11 +8,11 @@ let global_object = {};
 
 const sys_personal_achievement = {
   /**
-   * @param {number} chara_id
+   * @param {number} cid
    * @returns {number}
    */
-  get(chara_id) {
-    return global_object[chara_id] || 0;
+  get(cid) {
+    return global_object[cid] || 0;
   },
   init() {
     return (global_object =
@@ -24,13 +24,13 @@ const sys_personal_achievement = {
       .map((e) => Number(e[0]));
   },
   /**
-   * @param {number} chara_id
+   * @param {number} cid
    * @param {number} _val
    */
-  set(chara_id, _val) {
-    if (!global_object[chara_id] && _val) {
-      const color = get_chara_color(chara_id),
-        title = era.get(`staticcstr:${chara_id}:称号`);
+  set(cid, _val) {
+    if (!global_object[cid] && _val) {
+      const color = get_chara_color(cid),
+        title = era.get(`staticcstr:${cid}:称号`);
       era.notify(
         [
           {
@@ -40,7 +40,7 @@ const sys_personal_achievement = {
           },
           {
             color,
-            content: era.get(`static:${chara_id}:name`),
+            content: era.get(`static:${cid}:name`),
             fontSize: '1rem',
             fontWeight: 'bold',
           },
@@ -53,7 +53,7 @@ const sys_personal_achievement = {
         50000,
       );
     }
-    return (global_object[chara_id] = _val);
+    return (global_object[cid] = _val);
   },
 };
 
