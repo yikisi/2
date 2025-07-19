@@ -26,6 +26,7 @@ const select_action_around_river = require('#/event/daily/snippets/select-action
 const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
 const select_action_in_shopping_street = require('#/event/daily/snippets/select-action-in-shopping-street');
 const select_action_in_station = require('#/event/daily/snippets/select-action-in-station');
+const l_kojo = require('#/event/love/love-64.kojo');
 const { i_pama_yandere } = require('#/event/snippets/64');
 const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
@@ -55,7 +56,7 @@ module.exports = class extends CustomizedDaily {
     dict['姐妹'] = pama.siblings_sex_title;
     dict['马娘'] = pama.uma_sex_title;
     const me = get_chara_talk(0);
-    dict['T'] = me.name;
+    dict.T = me.name;
     dict['T称呼善信'] = sys_get_callname(0, this.id);
     dict.half_life = +i_pama_yandere();
     return dict;
@@ -239,7 +240,7 @@ module.exports = class extends CustomizedDaily {
       const ret = await print_name_and_show_kojo(
         '负距离的我们',
         get_chara_talk(this.id),
-        kojo,
+        l_kojo,
         {
           ...this.#dict,
           玩家名: era.get('callname:0:-1'),
@@ -273,7 +274,7 @@ module.exports = class extends CustomizedDaily {
         await print_name_and_show_kojo(
           '入夜，我为你而来',
           get_chara_talk(this.id),
-          kojo,
+          l_kojo,
           this.#dict,
         )
       )[0];
@@ -381,13 +382,15 @@ module.exports = class extends CustomizedDaily {
     let name;
     if (i_pama_yandere()) {
       name = '无终的逃亡';
+      await l_kojo[name](this.#dict);
+      await print_event_name([{ color: buff_colors[3], content: name }], pama);
     } else if (era.get(`love:${this.id}`) >= 75) {
       name = '明日再会';
+      await kojo[name](this.#dict);
+      await print_event_name([{ color: buff_colors[3], content: name }], pama);
     } else {
       return await super.basement_end();
     }
-    await kojo[name](this.#dict);
-    await print_event_name([{ color: buff_colors[3], content: name }], pama);
   }
 
   async slave_end() {
@@ -395,12 +398,14 @@ module.exports = class extends CustomizedDaily {
     let name;
     if (i_pama_yandere()) {
       name = '无终的逃亡';
+      await l_kojo[name](this.#dict);
+      await print_event_name([{ color: buff_colors[3], content: name }], pama);
     } else if (era.get(`love:${this.id}`) >= 75) {
       name = '迷途终点';
+      await kojo[name](this.#dict);
+      await print_event_name([{ color: buff_colors[3], content: name }], pama);
     } else {
       return await super.slave_end();
     }
-    await kojo[name](this.#dict);
-    await print_event_name([{ color: buff_colors[3], content: name }], pama);
   }
 };

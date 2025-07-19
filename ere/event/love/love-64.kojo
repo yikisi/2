@@ -1013,6 +1013,7 @@
         content: 目白善信
       - 「情人节快乐！」
 
+# 依存心系列事件
 你所信任的我……:
   # 爱慕＞80且不论有无接受爱慕事件，G1比赛败北场次大于3，总胜场小于4，进入资深年后善信进行自主训练，资深年进行比赛后不会触发
   - divider: true
@@ -1220,6 +1221,79 @@
       - fontWeight: bold
         content: 目白善信
       - （总有一天，%玩家本名% 会一直看着我的）
+
+无终的逃亡:
+  #（持有依存心时替换其他BE）
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 最近总感觉提不起精神呢……」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「但是感觉又没有缺少什么啊……真奇怪」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「去和太阳神……嗯，好像不对」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「麦昆和莱恩%她%们……」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「这个时候好像不太适合找其他人吧，在干什么呢，我」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「……」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「果然」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「必须要训练员呢」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「虽然已经失踪三天了啊」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「现在到底在哪里呢，训练员……」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「……」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「碍事的人，不见了呢」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「终于……可以回去了啊」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「好想你啊……我的训练员」
 
 依存心天台事件:
   # 得到依存心后，参加天皇赏春未胜利，天台触发
@@ -1484,3 +1558,370 @@
       - 「这样的，你喜欢吗？」
   - 善信紧紧的抱紧了 %你%，带着黯淡的眼神轻飘飘的笑了起来
   - 灵巧的手指还在对着下半身随意的滑动，如同宣示主权一般
+
+负距离的我们:
+  # 依存心持有，爱慕＞95，状态情动或以上时在回合结束随机触发
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「训练员？现在有时间吗？」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「不是这一会……而是今天一整天」
+  - 在一个没有其他人的时间，善信单独找到了正要下班的 %T%
+  - 背对着窗户，背光的眼神里带着平静的闪光在注视着
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「%自称%，偶尔也是会想做点很厉害的事情的哦」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「训练员你会和我一起的，对吧？」
+  - acc: 1
+    content: 「那是当然」
+    lines:
+      - 听见 %T% 的回答之后，善信闪着光的眼睛才缓缓移开
+      - 动作迅捷的帮 %T% 收好了文件，又自然的拉住了手
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白善信
+          - 「今天是有空的，对吧？」
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白善信
+          - 「那就麻烦训练员，今天稍微辛苦一点了」
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白善信
+          - 「……说不定明天也是呢」
+      - acc: 1
+        content: 「唉？明天？」
+      - acc: 2
+        content: 「看样子会是很疯狂的晚上呢」
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白善信
+          - 「哼哼～和训练员说的一样呢」
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白善信
+          - 「是能够疯狂到明天的……事情呢」
+      - 善信的声音还是一如既往的欢快洒脱
+      - 只是在 %T% 的眼里，在前方的善信似乎出现了看不清的部分
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白善信
+          - 「这里，怎么样？」
+      - 随着一蹦一跳的脚步停下，善信没有回头的站在原地
+      - 在旅馆前，不着痕迹的往后退了几步
+      - 有点冰凉的手指钻进 %T% 的手心，轻轻的抓住
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白善信
+          - 「今天，准备了很多哦」
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白善信
+          - 「是足够惊喜的事情呢……」
+      - 以几乎无法反击的力气，抓着 %T% 走进了大门
+      - 直到粉红色的房间，已经被捏的有点发痛的手才被松开
+      - 门板发出上锁的声音，预示着今夜即将无眠
+      - acc: 1
+        content: 「善信，这……」
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白善信
+          - 「～」
+      - 在疑问或者说教出口之前，嘴唇就被堵上了
+      - 柔软的舌头强硬的钻过唇齿，与对方交汇在一起，夺取着所及之处所有的味道
+      - 直到呼吸已经断开，即将失去意识的时候，新鲜的空气才回到身体里
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白善信
+          - 「哈啊，哈啊」
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白善信
+          - 「属于训练员的味道……」
+      - 淡蓝色的眼眸里，反射出昏暗的微光
+      - 当着 %T% 的面，拿出了药瓶
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白善信
+          - 「我说啊，%玩家名%」
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白善信
+          - 「你来选择怎么样？」
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白善信
+          - 「……是我，还是你？」
+      - 视线模糊的 %T% 在冥冥中猜到了药的大概，惊慌的压下脸上的恐惧
+      - 而现在，选择权就在 %T% 的下一句话
+      # 药物为弗隆K，爱慕100时替换为弗隆P
+      - acc: 1
+        content: 「给我」
+        lines:
+          - 说出来了
+          - 被压在身下的 %T%，自暴自弃般的说出来了
+          - 接过了善信手上的东西，毫不犹豫的吞下
+          - 身体极速发热起来，渐渐感受到身下传来的强大冲劲
+          - color: %代表色%
+            content:
+              - fontWeight: bold
+                content: 目白善信
+              - 「啊……」
+          - color: %代表色%
+            content:
+              - fontWeight: bold
+                content: 目白善信
+              - 「很宏伟呢……」
+          - 善信的手指在最敏感的前端轻轻的摩擦着，轻巧的夹住了裤子的拉链
+          - color: %代表色%
+            content:
+              - fontWeight: bold
+                content: 目白善信
+              - 「训练员……很舒服吧？」
+          - color: %代表色%
+            content:
+              - fontWeight: bold
+                content: 目白善信
+              - 「让我也，舒服起来吧」
+        # 进入马儿跳
+      - acc: 2
+        content: 「交给你了」
+        lines:
+          - if: era.get('cflag:0:性别') === 1
+            lines:
+              - 在 %T% 的面前，善信一口气喝尽了手里的液体
+              - 下半身传来一阵炽热的触感，紧紧的贴在小腹上
+              - 膨胀起来的肉棒，在善信的身下微微颤抖着
+              - color: %代表色%
+                content:
+                  - fontWeight: bold
+                    content: 目白善信
+                  - 「啊……」
+              - 这份刺激对于善信来说，足够新鲜
+              - 充血的前端微微发抖，在 %T% 的面前如同呼吸一般起伏
+              - color: %代表色%
+                content:
+                  - fontWeight: bold
+                    content: 目白善信
+                  - 「训练员……你会接受的吗？」
+              - 虽然话语还在请求 %T% 的同意，但身体足够诚实
+              - 将此刻善信癫狂的表情尽收眼底，但 %T% 却什么都做不到
+              - %马娘%的力量，不是 %T% 能抗衡的……
+            # 进入马儿跳（强奸事件发生）
+          - if: era.get('cflag:0:性别') !== 1
+            lines:
+              - 在 %T% 的面前，善信一口气喝尽了手里的液体
+              - 下半身传来一阵炽热的触感，紧紧的贴在小腹上
+              - 膨胀起来的肉棒，在善信的身下微微颤抖着
+              - color: %代表色%
+                content:
+                  - fontWeight: bold
+                    content: 目白善信
+                  - 「啊……」
+              - color: %代表色%
+                content:
+                  - fontWeight: bold
+                    content: 目白善信
+                  - 「真厉害啊，这个……咕」
+              - 这份刺激对于善信来说，足够新鲜
+              - 充血的前端微微发抖，在 %T% 的面前如同呼吸一般起伏
+              - color: %代表色%
+                content:
+                  - fontWeight: bold
+                    content: 目白善信
+                  - 「训练员……你会接受的吗？」
+              - color: %代表色%
+                content:
+                  - fontWeight: bold
+                    content: 目白善信
+                  - 「我已经，忍不住了」
+              - 虽然话语还在请求 %T% 的同意，但身体足够诚实
+              - 硬起来的肉棒，轻轻的顶在小穴口
+              - 只要稍微用力向前，两个人就会连接在一起
+              - acc: 1
+                content: 「不要……」
+              - acc: 2
+                content: 「请吧……」
+              - %T% 的声音微乎其微，一点都没有传进善信的耳朵里
+              - 将此刻善信癫狂的表情尽收眼底，但 %T% 却什么都做不到
+              - %马娘%的力量，不是 %T% 能抗衡的……
+            # 进入马儿跳（强奸事件发生）
+      - acc: 3
+        content: 「不需要」
+        lines:
+          - 在 %T% 的回应之后，善信的手停了下来
+          - 即将向前扑倒的身体，缓缓的又向后退去
+          - color: %代表色%
+            content:
+              - fontWeight: bold
+                content: 目白善信
+              - 「……不行，吗？」
+          - color: %代表色%
+            content:
+              - fontWeight: bold
+                content: 目白善信
+              - 「我就不行是吗？」
+          - 强势的带着 %T% 来到这里
+          - 强势的压倒 %T%
+          - 强势的想要做到底
+          - 但，在你的一句话下，停止了动作
+          - color: %代表色%
+            content:
+              - fontWeight: bold
+                content: 目白善信
+              - 「果然，我……」
+          - 在善信即将乖巧的起身的时候，%T% 伸出手抓住了%她%
+          - 未被使用的药物落在地上，宣告了善信此刻已经失去主动权
+          - acc: 1
+            content: 「不用这些，我也可以的」
+          - color: %代表色%
+            content:
+              - fontWeight: bold
+                content: 目白善信
+              - 「……」
+          - acc: 1
+            content: 「只要善信想要，我一直都在」
+          - color: %代表色%
+            content:
+              - fontWeight: bold
+                content: 目白善信
+              - 「训练员……」
+          - acc: 1
+            content: 「所以，温柔的来吧」
+          - 原本漆黑的眼神，再一次闪起了明亮的闪光
+          - 善信原本发抖的双手，用力的抱住了 %T% 的脖子
+          - 嘴唇紧紧的亲在一起，不知过去了多久
+          - color: %代表色%
+            content:
+              - fontWeight: bold
+                content: 目白善信
+              - 「哈啊……」
+          - 善信的眼角泛着泪光，轻飘飘的看着 %T%
+          - color: %代表色%
+            content:
+              - fontWeight: bold
+                content: 目白善信
+              - 「请吧，训练员……」
+          - color: %代表色%
+            content:
+              - fontWeight: bold
+                content: 目白善信
+              - 「我的身体，交给你了」
+        # 进入马儿跳
+  - acc: 2
+    content: 「今天不行」
+
+入夜，我为你而来:
+  #依存心持有，状态不安或以上时在回合结束随机触发，马娘男T
+  - 夜晚，早已进入梦中的 %T% 被一阵莫名的吵闹声惊醒
+  - 房间依旧是 %T% 熟悉的房间，而且 %T% 也想不到什么会发出声音的理由
+  - 但在睁开眼的一刻，所有的疑问都有了解答
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「啊……」
+  - 不知为何，全身赤裸的善信，此刻正趴伏在 %T% 的身上
+  - 平日隐藏起来的乳房此刻悬停在空中，乳尖几乎下一刻就能碰到关键部位
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「你醒了啊，训练员」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「抱歉呢，本来是不想打搅你睡觉的……」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「但是不这样子做的话，我……没法安心睡着呢」
+  - 阴暗中，善信缓缓的压下身，用丰满的山峰包裹住了因为气味而雄起的部位
+  - 粉嫩的舌头绕着充血的前端缓缓绕圈，湿润之后毫不犹豫地向下一口吞下
+  - 温柔的触感，柔和的动作，刺激这本就敏感的神经，挑动着理性的开关
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「呜……咕……❤」
+  - 双峰和舌技的循环之下，即使没有那个想法，也无法控制身体的本能
+  - 白灼的液体喷涌而出，涌进了善信的口腔
+  - 舌头贪婪的在表面上滑动，直到不在沾有一点腥臭的液体，这才缓缓松开口，朝上方轻轻的吻下去
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「训练员，真是个好孩子」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「现在也还很精神呢❤」
+  - 温热的手掌抓住了刚刚射出的阴茎，轻缓的上下撸动起来
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「训练员～」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「现在，想做什么呢～」
+  - 缓缓的从床上爬起身，在 %T% 的视线里露出了早就已经湿润的下身
+  - 小小的开口一张一合的，不断流下粘稠的液体
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「今夜……要做什么呢？」
+  - acc: 1
+    content: 起身推倒善信
+  - acc: 2
+    content: 放弃抵抗
+
+入夜马跳结束:
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「真是精神呢，训练员」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「已经做到这样的话……就请你负起责任吧～」
+  - 手指对着 %T% 的胸前，用力的画着圈
+  - 俏脸向前，往 %T% 的脖子上重重的留下痕迹
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「这样……就不会再有其他人了❤」

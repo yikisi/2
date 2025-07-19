@@ -8,6 +8,7 @@ const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
 const kojo = require('#/event/edu/edu-64.kojo');
 const CustomizedEdu = require('#/event/edu/edu-common');
+const l_kojo = require('#/event/love/love-64.kojo');
 const { add_event, cb_enum } = require('#/event/queue');
 const { i_pama_yandere } = require('#/event/snippets/64');
 const print_event_name = require('#/event/snippets/print-event-name');
@@ -29,12 +30,11 @@ module.exports = class extends CustomizedEdu {
     o['代表色'] = get_chara_color(this.id);
     o['善信'] = era.get(`callname:${this.id}:-2`);
     o['称呼'] = sys_get_callname(this.id, 0);
-    o['T'] = era.get('callname:0:-2');
+    o.T = era.get('callname:0:-2');
+    o['自称'] = sys_get_callname(this.id, this.id);
     if (era.get(`cflag:${this.id}:性别`) === 1) {
-      o['小姐'] = '先生';
       o['马娘'] = '马郎';
     } else {
-      o['小姐'] = '小姐';
       o['马娘'] = '马娘';
     }
     return o;
@@ -87,12 +87,14 @@ module.exports = class extends CustomizedEdu {
     let name;
     if (i_pama_yandere()) {
       name = '无终的逃亡';
+      await l_kojo[name](this.#dict);
+      await print_event_name([{ color: buff_colors[3], content: name }], pama);
     } else if (era.get(`love:${this.id}`) >= 75) {
       name = '无力逃亡';
+      await kojo[name](this.#dict);
+      await print_event_name([{ color: buff_colors[3], content: name }], pama);
     } else {
       return await super.slave_end();
     }
-    await kojo[name](this.#dict);
-    await print_event_name([{ color: buff_colors[3], content: name }], pama);
   }
 };
