@@ -17,6 +17,7 @@
  */
 const era = require('#/era-electron');
 
+const { set_chara_ero_image } = require('#/system/ero/sys-calc-ero-image');
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
 
 const new_game = require('#/page/new-game/page-new-game');
@@ -34,7 +35,7 @@ const item_title_color =
 const { get_chara_color } = require('#/data/chara-colors');
 const title_desc = require('#/data/desc/title-desc.json');
 const notes = require('#/data/notes.json');
-const { first_child_id, set_chara_ero_image } = require('#/data/other-const');
+const { first_child_id } = require('#/data/other-const');
 
 /**
  * @param {number} cid

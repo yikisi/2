@@ -52,16 +52,16 @@ async function out_page() {
   let cid = era.get('flag:当前互动角色');
   let vehicle;
   const player_base = {
-      stamina: era.get('base:0:体力'),
-      time: era.get('base:0:精力'),
-    },
-    chara_base =
-      cid > 0
-        ? {
-            stamina: era.get(`base:${cid}:体力`),
-            time: era.get(`base:${cid}:精力`),
-          }
-        : undefined;
+    stamina: era.get('base:0:体力'),
+    time: era.get('base:0:精力'),
+  };
+  const chara_base =
+    cid > 0
+      ? {
+          stamina: era.get(`base:${cid}:体力`),
+          time: era.get(`base:${cid}:精力`),
+        }
+      : undefined;
 
   await era.clear();
   print_page_header();
@@ -70,7 +70,7 @@ async function out_page() {
   era.drawLine();
   if (!(await sys_get_random_event(event_hooks.out_start)())) {
     const event_marks = EventMarks.get(cid);
-    let positions = MejiroCity.instance().get_positions(
+    const positions = MejiroCity.instance().get_positions(
       cid,
       player_base,
       chara_base,

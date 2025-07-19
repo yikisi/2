@@ -4,6 +4,7 @@ const {
   sys_get_full_chara,
 } = require('#/system/chara/sys-calc-characteristic');
 const sys_change_hair = require('#/system/chara/sys-change-hair');
+const { check_chara_ero_image } = require('#/system/ero/sys-calc-ero-image');
 const {
   get_bust_size,
   get_hip_size,
@@ -25,12 +26,7 @@ const {
   get_talent,
   get_xp,
 } = require('#/data/info-generator');
-const {
-  back_hairs,
-  check_chara_ero_image,
-  front_hairs,
-  top_hairs,
-} = require('#/data/other-const');
+const { back_hairs, front_hairs, top_hairs } = require('#/data/other-const');
 
 const page_name = '个人情报';
 

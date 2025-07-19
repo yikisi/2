@@ -1,6 +1,7 @@
 const era = require('#/era-electron');
 
 const sys_filter_ero_act = require('#/system/ero/sub/sys-filter-ero-act');
+const { sys_get_ero_image } = require('#/system/ero/sys-calc-ero-image');
 const {
   check_satisfied,
   get_penis_size,
@@ -33,7 +34,6 @@ const { get_random_value } = require('#/utils/value-utils');
 const { buff_colors, palam_colors } = require('#/data/color-const');
 const {
   attr_background_colors,
-  hair_colors,
   love_colors,
   mark_colors,
   relation_colors,
@@ -46,7 +46,6 @@ const {
   part_names,
   up_enum,
 } = require('#/data/ero/part-const');
-const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const {
   ero_action_names,
   ero_derive_check,
@@ -59,7 +58,6 @@ const {
   get_relation_info,
 } = require('#/data/info-generator');
 const { location_enum, location_name } = require('#/data/locations');
-const { check_chara_ero_image } = require('#/data/other-const');
 
 /**
  * @param {number} cid
@@ -109,243 +107,6 @@ function get_ero_marks(cid) {
     e.display = 'inline-block';
     return e;
   });
-}
-
-/**
- * @param {number} cid
- * @param {number} recent_s
- * @param {number} recent_m
- * @param {number} m_abused
- * @param {number} m_hit
- * @returns {boolean}
- */
-function check_excited(cid, recent_s, recent_m, m_abused, m_hit) {
-  return (
-    era.get(`tcvar:${cid}:发情`) ||
-    era.get(`tcvar:${cid}:接近高潮`) ||
-    era.get(`tcvar:${cid}:余韵`) ||
-    era.get(`mark:${cid}:欢愉`) ||
-    era.get(`mark:${cid}:淫纹`) ||
-    era.get(`base:${cid}:性欲`) >= lust_border.itch ||
-    recent_s ||
-    (recent_m === part_enum.abuse && m_abused) ||
-    (recent_m === part_enum.hit && m_hit)
-  );
-}
-
-/**
- * @param {number} cid
- * @returns {({filter:string,names:string}|string)[]}
- */
-function get_image(cid) {
-  const img_list = [];
-  const recent_s =
-    era.get(`tcvar:${cid}:刚刚施虐`) &&
-    (era.get(`talent:${cid}:抖S`) || era.get(`talent:${cid}:小恶魔`));
-  const recent_m = era.get(`tcvar:${cid}:刚刚受虐`);
-  const m_abused =
-    era.get(`talent:${cid}:喜欢责骂`) || era.get(`talent:${cid}:变态`);
-  const m_hit =
-    era.get(`talent:${cid}:喜欢痛苦`) || era.get(`talent:${cid}:变态`);
-  img_list.push({
-    borderRadius: 20,
-    names: `位置_${location_name[era.get('flag:当前位置')]}`,
-  });
-  if (check_chara_ero_image(cid)) {
-    const img_name = era.get(`cstr:${cid}:头像`);
-    if (era.get(`tcvar:${cid}:刚刚高潮`)) {
-      img_list.push(`${img_name}_裸_V\t${img_name}_裸`);
-    } else {
-      img_list.push(`${img_name}_裸`);
-    }
-    if (era.get(`cflag:${cid}:腋毛`) >= 2) {
-      img_list.push(`${img_name}_裸_腋毛`);
-    }
-    if (era.get(`cflag:${cid}:妊娠阶段`) >> pregnant_stage_enum.late > 0) {
-      img_list.push(`${img_name}_裸_孕`);
-    }
-    if (era.get(`cflag:${cid}:阴毛`) >= 2) {
-      img_list.push(`${img_name}_裸_阴毛`);
-    }
-    if (
-      era.get(`ex:${cid}:寸止`) ||
-      era.get(`tcvar:${cid}:接近高潮`) ||
-      era.get(`tcvar:${cid}:余韵`)
-    ) {
-      img_list.push(`${img_name}_裸_汗`);
-    }
-    img_list.push(`${img_name}_头`);
-    if (check_excited(cid, recent_s, recent_m, m_abused, m_hit)) {
-      img_list.push(`${img_name}_头_腮红`);
-    }
-    if (era.get(`ex:${cid}:寸止`) || era.get(`tcvar:${cid}:接近高潮`)) {
-      img_list.push(`${img_name}_头_汗`);
-    }
-    if (!sys_check_awake(cid) || era.get(`tcvar:${cid}:脱力`)) {
-      img_list.push(`${img_name}_脸_睡`);
-    } else if (
-      era.get(`tcvar:${cid}:刚刚高潮`) ||
-      era.get(`tcvar:${cid}:失神`)
-    ) {
-      img_list.push(`${img_name}_脸_高潮`);
-    } else if (
-      era.get(`mark:${cid}:反抗`) ||
-      (recent_m === part_enum.abuse && !m_abused) ||
-      era.get('tflag:强奸') === 0
-    ) {
-      img_list.push(`${img_name}_脸_嫌恶`);
-    } else if (
-      era.get(`mark:${cid}:苦痛`) ||
-      (recent_m === part_enum.hit && !m_hit && !era.get(`talent:${cid}:圣母`))
-    ) {
-      img_list.push(`${img_name}_脸_痛苦`);
-    } else if (
-      (recent_m && !era.get(`talent:${cid}:圣母`)) ||
-      era.get('tflag:强奸') === cid ||
-      (recent_s && era.get(`talent:${cid}:抖S`))
-    ) {
-      img_list.push(`${img_name}_脸_兴奋`);
-    } else if (era.get(`mark:${cid}:羞耻`) || recent_s) {
-      img_list.push(`${img_name}_脸_害羞`);
-    } else {
-      img_list.push(`${img_name}_脸_一般`);
-    }
-    img_list.push(`${img_name}_头_发`);
-    if (
-      era.get(`tcvar:${cid}:刚刚高潮`) ||
-      era.get(`mark:${cid}:苦痛`) >= 2 ||
-      (recent_m === part_enum.abuse && !m_abused) ||
-      recent_m === part_enum.hit ||
-      era.get(`ex:${cid}:破处`)
-    ) {
-      img_list.push(`${img_name}_头_泪`);
-    }
-    if (era.get(`ex:${cid}:TotalEX`)) {
-      img_list.push(`${img_name}_裸_雾气`);
-    }
-  } else {
-    let body_hair_css_filter =
-      era.get(`cflag:${cid}:种族`) > 0
-        ? hair_colors[era.get(`cstr:${cid}:毛色`)] ||
-          hair_colors[era.get(`cstr:${cid}:发色`)] ||
-          ''
-        : '黑';
-    let hair_css_filter = hair_colors[era.get(`cstr:${cid}:发色`)] || '';
-    let temp;
-    if (body_hair_css_filter) {
-      body_hair_css_filter = `hue-rotate(${body_hair_css_filter[0]}deg) saturate(${body_hair_css_filter[1]}%) brightness(${body_hair_css_filter[2]}%)`;
-    }
-    if (hair_css_filter) {
-      hair_css_filter = `hue-rotate(${hair_css_filter[0]}deg) saturate(${hair_css_filter[1]}%) brightness(${hair_css_filter[2]}%)`;
-    }
-    if (era.get(`cflag:${cid}:种族`) > 0) {
-      img_list.push({
-        filter: body_hair_css_filter,
-        names: '通用_裸_马尾',
-      });
-    }
-    era
-      .get(`cstr:${cid}:后发`)
-      .split('+')
-      .forEach((e) =>
-        img_list.push({
-          filter: hair_css_filter,
-          names: `通用_后发_${e}\t通用_后发_长直发`,
-        }),
-      );
-    img_list.push('通用_裸');
-    if (era.get(`cflag:${cid}:腋毛`) >= 2) {
-      img_list.push({
-        filter: body_hair_css_filter,
-        names: '通用_裸_腋毛',
-      });
-    }
-    let added = '';
-    if (era.get(`talent:${cid}:乳房尺寸`) >= 1) {
-      added += '巨';
-    }
-    if (era.get(`cflag:${cid}:妊娠阶段`) >> pregnant_stage_enum.late > 0) {
-      added += '孕';
-    }
-    if (added) {
-      img_list.push(`通用_裸_${added}`);
-    }
-    if (era.get(`cflag:${cid}:阴毛`) >= 2) {
-      img_list.push({
-        filter: body_hair_css_filter,
-        names: '通用_裸_阴毛',
-      });
-    }
-    if (
-      era.get(`ex:${cid}:寸止`) ||
-      era.get(`tcvar:${cid}:接近高潮`) ||
-      era.get(`tcvar:${cid}:余韵`)
-    ) {
-      img_list.push(`通用_裸_汗`);
-    }
-    if ((temp = era.get(`cstr:${cid}:中发`))) {
-      img_list.push({
-        filter: hair_css_filter,
-        names: `通用_中发_${temp}\t通用_后发_${temp}\t通用_后发_双马尾`,
-      });
-    }
-    img_list.push('通用_头');
-    if (check_excited(cid, recent_s, recent_m, m_abused, m_hit)) {
-      img_list.push('通用_头_腮红');
-    }
-    if (
-      era.get(`mark:${cid}:反抗`) ||
-      era.get('tflag:强奸') >= 0 ||
-      era.get(`mark:${cid}:苦痛`) ||
-      recent_m ||
-      (recent_s && era.get(`talent:${cid}:抖S`))
-    ) {
-      img_list.push('通用_头_阴影');
-    }
-    if (
-      era.get(`ex:${cid}:寸止`) ||
-      era.get(`tcvar:${cid}:接近高潮`) ||
-      era.get(`ex:${cid}:破处`)
-    ) {
-      img_list.push('通用_头_汗');
-    }
-    if (!sys_check_awake(cid) || era.get(`tcvar:${cid}:脱力`)) {
-      img_list.push('通用_脸_微笑');
-    } else if (
-      era.get(`tcvar:${cid}:刚刚高潮`) ||
-      era.get(`tcvar:${cid}:失神`)
-    ) {
-      img_list.push('通用_脸_高潮');
-    } else if (
-      era.get(`mark:${cid}:反抗`) ||
-      (recent_m === part_enum.abuse && !m_abused) ||
-      era.get('tflag:强奸') === 0 ||
-      era.get(`mark:${cid}:苦痛`) ||
-      (recent_m === part_enum.hit && !m_hit && !era.get(`talent:${cid}:圣母`))
-    ) {
-      img_list.push('通用_脸_咬牙');
-    } else if (
-      recent_m ||
-      era.get('tflag:强奸') === cid ||
-      (recent_s && era.get(`talent:${cid}:抖S`))
-    ) {
-      img_list.push('通用_脸_舔嘴');
-    } else {
-      img_list.push('通用_脸_微笑');
-    }
-    const suffix = era.get(`cflag:${cid}:种族`) > 0 ? '_马' : '';
-    img_list.push({
-      filter: hair_css_filter,
-      names: `通用_前发_${era.get(`cstr:${cid}:前发`)}${suffix}\t通用_前发_厚刘海${suffix}`,
-    });
-    if ((temp = era.get(`cstr:${cid}:呆毛`))) {
-      img_list.push({
-        filter: hair_css_filter,
-        names: `通用_呆毛_${temp}\t通用_呆毛_短`,
-      });
-    }
-  }
-  return img_list;
 }
 
 /**
@@ -787,7 +548,7 @@ async function page_ero(lover, skip_start_end = false) {
             ? [
                 {
                   config: { offset: 1, width: 18 },
-                  names: get_image(lover),
+                  names: sys_get_ero_image(lover),
                   type: 'image.whole',
                 },
                 {
@@ -802,7 +563,7 @@ async function page_ero(lover, skip_start_end = false) {
                     offset: 1,
                     width: !master && characters_in_train.length > 2 ? 22 : 19,
                   },
-                  names: get_image(lover),
+                  names: sys_get_ero_image(lover),
                   type: 'image.whole',
                 },
               ],

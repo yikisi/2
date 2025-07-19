@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const { sys_get_ero_image } = require('#/system/ero/sys-calc-ero-image');
 const {
   begin_and_init_ero,
   end_ero_and_show_result,
@@ -108,7 +109,18 @@ class CallOfMejiro extends MejiroCity {
             mejiro_button.t += '\n';
           }
           mejiro_button.t += '麦吉罗在呼唤……';
-          return new Array(5).fill(mejiro_button);
+          /** @type {{[a]:number,s:number,d:boolean,l:number,n:string,[t]:string}[]} */
+          const ret = new Array(5)
+            .fill(undefined)
+            .map(() => ({ ...mejiro_button }));
+          if (Math.random() < 0.05) {
+            ret[0].n = '麦吉罗';
+            ret[1].n = '在';
+            ret[2].n = '呼唤';
+            ret[3].n = '你们';
+            ret[4].n = '……';
+          }
+          return ret;
         }
       } else {
         mejiro_button.d = true;
@@ -301,40 +313,41 @@ class CallOfMejiro extends MejiroCity {
         flag = false;
         temp = false;
       } else {
-        era.print([
+        const buffer = [];
+        buffer.push([
           me.get_colored_name(),
           ' 和 ',
           chara.get_colored_name(),
           ' 身处迷雾笼罩的街道……',
         ]);
         if (lust >= lust_border.absent_mind) {
-          era.print(
+          buffer.push(
             '周围是成双成对纵欲狂欢的人群，放肆的呻吟、肉体碰撞的声音和喷溅的水声充斥着整片空间。',
           );
         } else if (lust >= lust_border.itch) {
-          era.print(
+          buffer.push(
             '周围是面容模糊的爱侣，正在欢爱、摆动，低低的娇吟和水声不绝于耳。',
           );
         } else if (lust >= 4000) {
-          era.print(
+          buffer.push(
             '周围是面容模糊的眷侣，正在相互抚摸、狎戏，偶尔能听见呻吟和绵密的水声。',
           );
         } else if (lust >= 3000) {
-          era.print(
+          buffer.push(
             '周围是成双成对的伴侣，相互拥抱、接吻，偶尔能听见轻悄悄的情话。',
           );
         } else if (lust >= 2000) {
-          era.print('周围是影影绰绰的一对对旅客，偶尔能听见模糊的低语。');
+          buffer.push('周围是影影绰绰的一对对旅客，偶尔能听见模糊的低语。');
         }
         progress.p = progress.c / difficulty;
         if (progress.c === difficulty - 1) {
-          era.print('前面的迷雾正在消散，能看见明亮、干净的街区。');
+          buffer.push('前面的迷雾正在消散，能看见明亮、干净的街区。');
         } else if (progress.p >= 0.66) {
-          era.print('前面的迷雾变得稀薄了一些，阳光穿过云层星星点点地照着。');
+          buffer.push('前面的迷雾变得稀薄了一些，阳光穿过云层星星点点地照着。');
         } else if (progress.p >= 0.33) {
-          era.print('来路已经看不见了，似乎只能向前。');
+          buffer.push('来路已经看不见了，似乎只能向前。');
         } else if (progress.c === 0) {
-          era.print(
+          buffer.push(
             '一条大道笔直通向前方，但并不清楚延伸向哪里。来路只剩下蒙蒙的灰。',
           );
         }
@@ -376,6 +389,7 @@ class CallOfMejiro extends MejiroCity {
               await events.bad_event(progress, lust);
             },
           },
+          undefined,
           {
             a: 200,
             c: '仔细搜索（低风险，性欲++，体力---）',
@@ -409,6 +423,7 @@ class CallOfMejiro extends MejiroCity {
               await events.bad_event(progress, lust);
             },
           },
+          undefined,
           {
             a: 300,
             c: '停下休息（性欲++，体力+）',
@@ -428,17 +443,44 @@ class CallOfMejiro extends MejiroCity {
             },
           },
         ];
-        era.printMultiColumns(
-          buttons.map((e) => ({
-            accelerator: e.a,
-            config: e.d ? { disabled: true, title: '体力不足' } : {},
-            content: e.c,
-            type: 'button',
-          })),
+        era.printInColRows(
+          {
+            columns: [
+              ...buffer.map((e) => ({ content: e, type: 'text' })),
+              ...buttons.map((e) =>
+                e
+                  ? {
+                      accelerator: e.a,
+                      config: {
+                        ...(e.d ? { disabled: true, title: '体力不足' } : {}),
+                        width: 12,
+                      },
+                      content: e.c,
+                      type: 'button',
+                    }
+                  : { content: [], type: 'text' },
+              ),
+            ],
+            config: { width: 20 },
+          },
+          {
+            columns: [
+              {
+                config: { align: 'center' },
+                content: [chara.get_colored_name()],
+                type: 'text',
+              },
+              {
+                names: sys_get_ero_image(chara.id),
+                type: 'image.whole',
+              },
+            ],
+            config: { width: 4 },
+          },
         );
         const ret = await era.input();
         era.drawLine();
-        await buttons.find((e) => e.a === ret).h();
+        await buttons.find((e) => e?.a === ret).h();
         if (progress.c >= difficulty) {
           flag = false;
           temp = true;
