@@ -103,14 +103,13 @@ class CallOfMejiro extends MejiroCity {
     if (this.called > 0) {
       if (this.called === chara_id) {
         if (this.san === 0) {
-          ret.forEach((e) => {
-            if (e !== mejiro_button) {
-              e.d = true;
-              e.t = '麦吉罗在呼唤……';
-            }
-          });
+          mejiro_button.a = 5;
+          if (mejiro_button.t || (mejiro_button.t = '')) {
+            mejiro_button.t += '\n';
+          }
+          mejiro_button.t += '麦吉罗在呼唤……';
+          return new Array(5).fill(mejiro_button);
         }
-        mejiro_button.h = true;
       } else {
         mejiro_button.d = true;
         if (mejiro_button.t || (mejiro_button.t = '')) {
