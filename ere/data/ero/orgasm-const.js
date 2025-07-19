@@ -18,8 +18,11 @@ module.exports = {
   /** 高潮时的宝珠奖励系数，从二重高潮开始计算，部位高潮为指数，整体高潮为加法 */
   juel_reward: 0.2,
   lust_border: {
+    // 不安
     itch: 5000,
+    // 情动
     absent_mind: 7500,
+    // 焦躁
     want_sex: 9000,
     limit: 10001,
     max: 10000,
