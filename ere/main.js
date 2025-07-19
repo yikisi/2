@@ -266,16 +266,12 @@ module.exports = async () => {
     ],
   ];
   set_chara_ero_image();
-  const gameBase = era.get('gamebase');
-  let buffer,
-    version = gameBase.version / 1000;
-  if (version % 1 === 0) {
-    version = version.toFixed(1);
-  }
+  const { versionName, site } = era.get('gamebase');
+  let buffer;
 
-  const date = new Date(),
-    real_month = date.getMonth() + 1,
-    real_date = date.getDate();
+  const date = new Date();
+  const real_month = date.getMonth() + 1;
+  const real_date = date.getDate();
   const birthday = [];
   era.getAllCharacters().forEach((e) => {
     if (
@@ -309,7 +305,7 @@ module.exports = async () => {
           { config: { width: 17 }, names: 'title', type: 'image.whole' },
           {
             content: [
-              `版本号：v${version} (agito)`,
+              `版本号：v${versionName}`,
               { isBr: true },
               '雞雞',
               { isDivider: true },
@@ -366,7 +362,7 @@ module.exports = async () => {
           content: [
             {
               content: 'EraUma游戏发布页',
-              url: gameBase.site,
+              url: site,
             },
             { isBr: true },
             {
