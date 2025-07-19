@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在比赛中盘速度提升；属性越平均，效果越好',
   21030,
   2,
-  UmaSkill.rarity_enum.gold,
   17,
   633,
   [() => true, () => true],

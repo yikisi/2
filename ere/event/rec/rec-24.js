@@ -20,7 +20,7 @@ module.exports = class extends CustomizedRecruit {
       me = get_chara_talk(0);
     const sex = era.get('cflag:24:性别') - 1 ? '她' : '他';
     let maya_1;
-    const event_marks = new EventMarks(0);
+    const event_marks = EventMarks.get(0);
     switch (stage) {
       case event_hooks.recruit:
         if (era.get(`cflag:24:招募状态`) === recruit_flags.no) {

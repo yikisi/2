@@ -11,11 +11,9 @@ const EventMarks = require('#/data/event/event-marks');
 const recruit_flags = require('#/data/event/recruit-flags');
 
 class GameGuides {
-  /** @type {Record<string,1>} */
-  obj;
-
-  constructor() {
-    this.obj = era.get('flag:新手教学') || era.set('flag:新手教学', {});
+  /** @returns {Record<string,1>} */
+  get #obj() {
+    return era.get('flag:新手教学') || era.set('flag:新手教学', {});
   }
 
   /**
@@ -23,15 +21,16 @@ class GameGuides {
    * @returns {boolean}
    */
   check(con) {
-    if (this.obj[con]) {
-      delete this.obj[con];
+    const obj = this.#obj;
+    if (obj[con]) {
+      delete obj[con];
       return true;
     }
     return false;
   }
 
   init() {
-    this.obj[this.game_start.name] = 1;
+    this.#obj[this.game_start.name] = 1;
   }
 
   async game_start() {
@@ -101,8 +100,8 @@ class GameGuides {
       ]);
       await tokino.say_and_wait('正好，特雷森学院里新来了不少有潜力的好苗子。');
       await tokino.say_and_wait('那么，一起去训练场看看吧？');
-      new EventMarks(0).add(event_hooks.recruit);
-      this.obj[this.recruit.name] = 1;
+      EventMarks.get(0).add(event_hooks.recruit);
+      this.#obj[this.recruit.name] = 1;
     }
   }
 
@@ -131,10 +130,10 @@ class GameGuides {
       await tokino.say_and_wait(
         '另外，如果在比赛前发生了突发状况，如伤病或是赛程冲突，避战也不失为一个选择。',
       );
-      new EventMarks(0)
+      EventMarks.get(0)
         .sub(event_hooks.register_race)
         .add(event_hooks.school_trainer_office);
-      this.obj[this.school_trainer_office.name] = 1;
+      this.#obj[this.school_trainer_office.name] = 1;
     }
   }
 
@@ -181,8 +180,8 @@ class GameGuides {
         tokino.get_colored_name(),
         ' 流露出一丝苦涩的意味，但很快恢复了从容，露出一个有些勉强的微笑。',
       ]);
-      new EventMarks(0).sub(event_hooks.train).add(event_hooks.register_race);
-      this.obj[this.office_register.name] = 1;
+      EventMarks.get(0).sub(event_hooks.train).add(event_hooks.register_race);
+      this.#obj[this.office_register.name] = 1;
     }
   }
 
@@ -206,7 +205,7 @@ class GameGuides {
         ' 挥挥手，走向了学校大门边。',
       ]);
       era.drawLine();
-      new EventMarks(0).sub(event_hooks.out_start);
+      EventMarks.get(0).sub(event_hooks.out_start);
     }
   }
 
@@ -264,8 +263,8 @@ class GameGuides {
         me.get_colored_name(),
         ' 向训练场上的学生们走去。',
       ]);
-      new EventMarks(0).sub(event_hooks.recruit);
-      this.obj[this.recruit_end.name] = 1;
+      EventMarks.get(0).sub(event_hooks.recruit);
+      this.#obj[this.recruit_end.name] = 1;
     }
   }
 
@@ -328,8 +327,8 @@ class GameGuides {
         );
         await era.printAndWait([me.get_couple_title(), '离开了训练场。']);
       }
-      new EventMarks(0).add(event_hooks.train);
-      this.obj[this.office_train.name] = 1;
+      EventMarks.get(0).add(event_hooks.train);
+      this.#obj[this.office_train.name] = 1;
     }
   }
 
@@ -358,10 +357,10 @@ class GameGuides {
         me.get_adult_sex_title(),
         '经过附近的时候听见了什么叫声也不要大惊小怪哦。',
       ]);
-      new EventMarks(0)
+      EventMarks.get(0)
         .sub(event_hooks.school_atrium)
         .add(event_hooks.school_rooftop);
-      this.obj[this.school_rooftop.name] = 1;
+      this.#obj[this.school_rooftop.name] = 1;
       return true;
     }
   }
@@ -392,10 +391,10 @@ class GameGuides {
         me.get_colored_name(),
         ' 眨眨眼睛。',
       ]);
-      new EventMarks(0)
+      EventMarks.get(0)
         .sub(event_hooks.school_chairman)
         .add(event_hooks.school_visitors);
-      this.obj[this.school_visitors.name] = 1;
+      this.#obj[this.school_visitors.name] = 1;
       return true;
     }
   }
@@ -416,10 +415,10 @@ class GameGuides {
         sys_get_colored_callname(0, 305),
         ' 是什么问题人物？',
       ]);
-      new EventMarks(0)
+      EventMarks.get(0)
         .sub(event_hooks.school_clinic)
         .add(event_hooks.school_god);
-      this.obj[this.school_god.name] = 1;
+      this.#obj[this.school_god.name] = 1;
       return true;
     }
   }
@@ -452,10 +451,10 @@ class GameGuides {
 
       await tokino.say_and_wait('总之，如果有烦心事，可以来这里祈祷看看。');
       await tokino.say_and_wait('据说每年三月，来这里祈祷还会有特殊的效果。');
-      new EventMarks(0)
+      EventMarks.get(0)
         .sub(event_hooks.school_god)
         .add(event_hooks.school_atrium);
-      this.obj[this.school_atrium.name] = 1;
+      this.#obj[this.school_atrium.name] = 1;
       return true;
     }
   }
@@ -469,10 +468,10 @@ class GameGuides {
       await tokino.say_and_wait(
         '但实际上由于这个『景点』过于受欢迎，根本没办法在特雷森的天台独处呢，呵呵。',
       );
-      new EventMarks(0)
+      EventMarks.get(0)
         .sub(event_hooks.school_rooftop)
         .add(event_hooks.school_chairman);
-      this.obj[this.school_chairman.name] = 1;
+      this.#obj[this.school_chairman.name] = 1;
       return true;
     }
   }
@@ -492,10 +491,10 @@ class GameGuides {
         '这里是您平常处理公务的地方，其他训练员也会经常在这里露脸。',
       );
       await tokino.say_and_wait('请好好跟各位同事打好关系呢。');
-      new EventMarks(0)
+      EventMarks.get(0)
         .sub(event_hooks.school_trainer_office)
         .add(event_hooks.school_clinic);
-      this.obj[this.school_clinic.name] = 1;
+      this.#obj[this.school_clinic.name] = 1;
       return true;
     }
   }
@@ -512,13 +511,15 @@ class GameGuides {
         me.get_adult_sex_title(),
         '的记者吧。',
       ]);
-      new EventMarks(0)
+      EventMarks.get(0)
         .sub(event_hooks.school_visitors)
         .add(event_hooks.out_start);
-      this.obj[this.out.name] = 1;
+      this.#obj[this.out.name] = 1;
       return true;
     }
   }
 }
 
-module.exports = GameGuides;
+const game_guides = new GameGuides();
+
+module.exports = game_guides;

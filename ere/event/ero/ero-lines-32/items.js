@@ -2,7 +2,7 @@ const era = require('#/era-electron');
 
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
-const EroNormalItems = require('#/event/ero/common-lines/normal/items');
+const EroNormalItems = require('#/event/ero/common/normal/items');
 
 const { item_enum } = require('#/data/ero/item-const');
 const { part_enum } = require('#/data/ero/part-const');

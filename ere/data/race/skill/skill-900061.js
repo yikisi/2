@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在最后200米处于前列时，能够开辟道路，略微容易突围',
   90006,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   180,
   [() => true, () => true],

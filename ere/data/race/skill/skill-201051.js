@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛中盘位于前列时，就很容易超过',
   20105,
   2,
-  UmaSkill.rarity_enum.gold,
   17,
   508,
   [() => true, () => true],

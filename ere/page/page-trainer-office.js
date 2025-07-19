@@ -6,7 +6,6 @@ const {
   print,
   printAndWait,
   printInColRows,
-  println,
   set,
   setHorizontalAlign,
 } = require('#/era-electron');
@@ -32,7 +31,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const CharaTitles = require('#/data/chara-titles');
 const MeekEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-201');
 const event_hooks = require('#/data/event/event-hooks');
-const LocCharacters = require('#/data/event/loc-characters');
+const loc_characters = require('#/data/event/loc-characters');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_celebration } = require('#/data/info-generator');
 const { location_enum, location_name } = require('#/data/locations');
@@ -150,12 +149,12 @@ async function page_trainer_office() {
   drawLine();
   const vehicle = get('flag:单人载具');
   print([
+    '【',
     vehicle ? `${vehicle_verbs[vehicle]}着${vehicle_names[vehicle]}` : '',
     '抵达了 ',
     location_name[location_enum.trainer],
-    '……',
+    '】',
   ]);
-  const loc_characters = new LocCharacters();
   let trainer_list = loc_characters.get(location_enum.trainer);
   if (trainer_list.length > 0) {
     const celebration = get_celebration(),
@@ -179,7 +178,7 @@ async function page_trainer_office() {
         '，今后为了中央特雷森的荣光一起努力吧。',
       ]);
       await trainer0.say_and_wait([
-        '啊，贵安，我是 ',
+        '贵安，我是 ',
         trainer0.get_colored_actual_name(),
         '，今后请您多多指教。',
       ]);
@@ -223,7 +222,7 @@ async function page_trainer_office() {
       const chara_id = await input();
       if (chara_id !== 999) {
         const chara = get_chara_talk(chara_id),
-          title = new CharaTitles(chara_id).get_curr_title();
+          title = CharaTitles.get(chara_id).get_curr_title();
         flag_trainer = true;
         while (flag_trainer) {
           const temp_flag = await npc_common(
@@ -270,13 +269,12 @@ async function page_trainer_office() {
       }
     }
     drawLine();
-    await printAndWait('回去了……');
+    await printAndWait('【折返了】');
   } else {
     drawLine();
-    await printAndWait('没有人在的样子……回去了……');
+    await printAndWait('【没有人在的样子……折返了】');
   }
   loc_characters.set(location_enum.trainer, trainer_list);
-  println();
   await sys_get_random_event(event_hooks.back_school)({
     loc: location_enum.trainer,
   });

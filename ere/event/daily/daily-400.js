@@ -137,7 +137,7 @@ module.exports = class extends CustomizedDaily {
       silence.say('这样就可以了哦，真的非常感谢您……');
       era.print([
         silence.get_colored_name(),
-        ' 微微低头，开心的笑着，回到了',
+        ' 微微低头，开心地笑着，回到了',
         silence.sex,
         '的宿舍之中。',
       ]);

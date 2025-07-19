@@ -630,7 +630,7 @@ module.exports = (handlers) => {
   handlers[race_enum.kiku_sho] = async (tachyon, me, callname, extra_flag) => {
     if (extra_flag.rank === 1) {
       await print_event_name('会赢的', tachyon);
-      const race_history = new RaceHistory(32);
+      const race_history = RaceHistory.get(32);
       if (
         check_aim_race(race_history.get(), race_enum.sats_sho, 1, 1) &&
         check_aim_race(race_history.get(), race_enum.toky_yus, 1, 1)

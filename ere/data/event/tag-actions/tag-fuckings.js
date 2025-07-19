@@ -1,5 +1,8 @@
 const era = require('#/era-electron');
 
+const { sys_check_distance } = require('#/system/ero/sys-calc-distance');
+
+const { part_enum } = require('#/data/ero/part-const');
 const { ero_action_tags, ero_actions } = require('#/data/event/ero-actions');
 const EroHookTag = require('#/data/event/ero-hook-tag');
 
@@ -105,10 +108,14 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
     [
       ero_action_tags.awake,
       ero_action_tags.insert,
-      (chara_id, other_id) =>
-        era.get('tflag:主导权') === chara_id ||
-        (era.get(`tcvar:${chara_id}:阴茎接触部位`) === -1 &&
-          era.get(`tcvar:${other_id}:阴道接触部位`) === -1),
+      (cid, oid) =>
+        era.get('tflag:主导权') === cid ||
+        (era.get(`tcvar:${cid}:阴茎接触部位`) === -1 &&
+          era.get(`tcvar:${oid}:阴道接触部位`) === -1 &&
+          sys_check_distance(cid, oid, {
+            a: part_enum.penis,
+            d: part_enum.virgin,
+          })),
     ],
     [ero_action_tags.awake, ero_action_tags.virgin],
     EroHookTag.condition_type.no,
@@ -119,10 +126,14 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
     [
       ero_action_tags.awake,
       ero_action_tags.insert,
-      (chara_id, other_id) =>
-        era.get('tflag:主导权') === chara_id ||
-        (era.get(`tcvar:${chara_id}:阴茎接触部位`) === -1 &&
-          era.get(`tcvar:${other_id}:肛门接触部位`) === -1),
+      (cid, oid) =>
+        era.get('tflag:主导权') === cid ||
+        (era.get(`tcvar:${cid}:阴茎接触部位`) === -1 &&
+          era.get(`tcvar:${oid}:肛门接触部位`) === -1 &&
+          sys_check_distance(cid, oid, {
+            a: part_enum.penis,
+            d: part_enum.anal,
+          })),
     ],
     [ero_action_tags.anal, ero_action_tags.awake],
     EroHookTag.condition_type.no,
@@ -134,10 +145,14 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
       ero_action_tags.awake,
       ero_action_tags.virgin,
       EroHookTag.npc_virgin_sex_check,
-      (chara_id, other_id) =>
-        era.get('tflag:主导权') === chara_id ||
-        (era.get(`tcvar:${chara_id}:阴道接触部位`) === -1 &&
-          era.get(`tcvar:${other_id}:阴茎接触部位`) === -1),
+      (cid, oid) =>
+        era.get('tflag:主导权') === cid ||
+        (era.get(`tcvar:${cid}:阴道接触部位`) === -1 &&
+          era.get(`tcvar:${oid}:阴茎接触部位`) === -1 &&
+          sys_check_distance(cid, oid, {
+            a: part_enum.virgin,
+            d: part_enum.penis,
+          })),
     ],
     [ero_action_tags.awake, ero_action_tags.insert],
     EroHookTag.condition_type.no,
@@ -149,10 +164,14 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
       ero_action_tags.anal,
       ero_action_tags.awake,
       EroHookTag.npc_anal_sex_check,
-      (chara_id, other_id) =>
-        era.get('tflag:主导权') === chara_id ||
-        (era.get(`tcvar:${chara_id}:肛门接触部位`) === -1 &&
-          era.get(`tcvar:${other_id}:阴茎接触部位`) === -1),
+      (cid, oid) =>
+        era.get('tflag:主导权') === cid ||
+        (era.get(`tcvar:${cid}:肛门接触部位`) === -1 &&
+          era.get(`tcvar:${oid}:阴茎接触部位`) === -1 &&
+          sys_check_distance(cid, oid, {
+            a: part_enum.anal,
+            d: part_enum.penis,
+          })),
     ],
     [ero_action_tags.awake, ero_action_tags.insert],
     EroHookTag.condition_type.no,

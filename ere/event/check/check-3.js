@@ -51,7 +51,7 @@ module.exports = class extends CustomizedCheck {
         event_marks.normal_check = 1;
       }
     }
-    if (era.get(`status:${this.id}:腿伤`)) {
+    if (era.get(`status:${this.id}:腿伤`) > 0) {
       if (extra_flag.rank > 1) {
         if (
           extra_flag.race === race_enum.japa_cup ||
@@ -80,42 +80,42 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_and_get_titles(aim_check) {
-    const event_marks = new TeioEduMarks(),
-      races = new RaceHistory(this.id).get(),
-      titles = [];
-    let normal_title_check =
+    const edu_marks = new TeioEduMarks();
+    const races = RaceHistory.get(this.id).get();
+    const titles = [];
+    let c_normal =
       check_aim_race(races, race_enum.sats_sho, 1, 1) &&
       check_aim_race(races, race_enum.toky_yus, 1, 1) &&
       check_aim_race(races, race_enum.arim_kin, 2, 1);
-    const perfect_title_check =
-        normal_title_check &&
-        !event_marks.perfect_check &&
-        check_aim_race(races, race_enum.kiku_sho, 1, 1),
-      unyielding_title_check =
-        normal_title_check &&
-        check_aim_race(races, race_enum.japa_cup, 2, 1) &&
-        era.get(`status:${this.id}:腿伤`);
-    normal_title_check &&= !event_marks.normal_check;
+    const c_perfect =
+      c_normal &&
+      !edu_marks.perfect_check &&
+      check_aim_race(races, race_enum.kiku_sho, 1, 1);
+    const c_unyielding =
+      c_normal &&
+      check_aim_race(races, race_enum.japa_cup, 2, 1) &&
+      era.get(`status:${this.id}:腿伤`) > 0;
+    c_normal &&= !edu_marks.normal_check;
     const c = get_chara_color(3);
-    if (unyielding_title_check) {
+    if (c_unyielding) {
       titles.push({
         c,
         n: this.get_personal_titles()[2],
       });
       aim_check && sys_personal_achievement.set(3, 1);
     }
-    perfect_title_check &&
+    c_perfect &&
       titles.push({
         c,
         n: this.get_personal_titles()[1],
       });
-    normal_title_check &&
+    c_normal &&
       titles.push({
         c,
         n: this.get_personal_titles()[0],
       });
-    event_marks.perfect_check = 0;
-    event_marks.normal_check = 0;
+    edu_marks.perfect_check = 0;
+    edu_marks.normal_check = 0;
     return titles;
   }
 
@@ -174,7 +174,7 @@ module.exports = class extends CustomizedCheck {
           event_obj,
         );
       }
-      era.get(`status:${this.id}:腿伤`) &&
+      if (era.get(`status:${this.id}:腿伤`) > 0) {
         check_and_add_event(
           event_marks,
           edu_weeks,
@@ -182,6 +182,7 @@ module.exports = class extends CustomizedCheck {
           event_hooks.office_prepare,
           event_obj,
         );
+      }
       if (edu_weeks >= 96) {
         check_and_add_event(
           event_marks,
@@ -212,7 +213,7 @@ module.exports = class extends CustomizedCheck {
         case 95 + 19: // 交涉
           if (
             !event_marks.give_up &&
-            new RaceHistory(3)
+            RaceHistory.get(3)
               .get_entries()
               .filter((e) => e.weeks >= 48 && e.weeks < 96 && e.rank === 1)
               .length >= 3
@@ -226,7 +227,7 @@ module.exports = class extends CustomizedCheck {
           break;
         case 95 + 25: // 春之帝王
           if (
-            new RaceHistory(3)
+            RaceHistory.get(3)
               .get_entries()
               .filter(
                 (e) =>
@@ -242,7 +243,7 @@ module.exports = class extends CustomizedCheck {
         case 95 + race_infos[race_enum.tenn_spr].date + 1:
           if (
             !event_marks.give_up &&
-            new RaceHistory(3).get_result(
+            RaceHistory.get(3).get_result(
               95 + race_infos[race_enum.tenn_spr].date,
             )?.race === race_enum.tenn_spr &&
             !era.get(`status:${this.id}:腿伤`)
@@ -264,7 +265,7 @@ module.exports = class extends CustomizedCheck {
           break;
         case 95 + 48:
           if (
-            era.get(`status:${this.id}:腿伤`) &&
+            era.get(`status:${this.id}:腿伤`) > 0 &&
             sys_reg_race(this.id).curr.race === race_enum.arim_kin
           ) {
             get_skills_and_print_in_event(this.id, [110031]);
@@ -291,7 +292,7 @@ module.exports = class extends CustomizedCheck {
       }
       if (!event_marks.famous_in_famous && edu_weeks >= 96) {
         if (
-          new CharaTitles(this.id)
+          CharaTitles.get(this.id)
             .get()
             .findIndex((e) => e.n.endsWith('三冠')) !== -1
         ) {
@@ -312,8 +313,8 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_palace_and_get_aims() {
-    if (era.get(`status:${this.id}:腿伤`)) {
-      const races = new RaceHistory(this.id).get();
+    if (era.get(`status:${this.id}:腿伤`) > 0) {
+      const races = RaceHistory.get(this.id).get();
       if (
         check_aim_race(races, race_enum.japa_cup, 2, 1) &&
         check_aim_race(races, race_enum.arim_kin, 2, 1)
@@ -335,7 +336,7 @@ module.exports = class extends CustomizedCheck {
 
   get_edu_aims() {
     const buffer = [],
-      races = new RaceHistory(this.id).get();
+      races = RaceHistory.get(this.id).get();
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
 
     buffer.push(check_aim_and_get_entry(races, race_enum.waka_sta, 1, 3));

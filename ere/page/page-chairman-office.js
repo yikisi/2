@@ -17,6 +17,7 @@ const npc_common = require('#/page/components/npc-common');
 const print_page_header = require('#/page/components/page-header');
 const print_out_page = require('#/page/page-out');
 
+const { check_edu_script } = require('#/event/edu/edu-factory');
 const { check_rec_script } = require('#/event/rec/rec-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -25,9 +26,9 @@ const { get_chara_color } = require('#/data/chara-colors');
 const CharaTitles = require('#/data/chara-titles');
 const event_hooks = require('#/data/event/event-hooks');
 const TasteLifeMarks = require('#/data/event/life-event-marks/life-event-marks-302');
-const LocCharacters = require('#/data/event/loc-characters');
+const loc_characters = require('#/data/event/loc-characters');
 const recruit_flags = require('#/data/event/recruit-flags');
-const YandereList = require('#/data/event/yandere-list');
+const yandere_list = require('#/data/event/yandere-list');
 const { get_celebration, get_relation_mark } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
@@ -41,13 +42,13 @@ async function page_chairman_office() {
   era.drawLine();
   const vehicle = era.get('flag:单人载具');
   era.print([
+    '【',
     vehicle ? `${vehicle_verbs[vehicle]}着${vehicle_names[vehicle]}` : '',
-    '抵达了理事长办公室……',
+    '抵达了理事长办公室】',
   ]);
-  const loc_characters = new LocCharacters(),
-    celebration = get_celebration(),
+  const celebration = get_celebration(),
     chara = get_chara_talk(loc_characters.get(location_enum.chairman)[0]),
-    title = new CharaTitles(chara.id).get_colored_curr_title(),
+    title = CharaTitles.get(chara.id).get_colored_curr_title(),
     star_premium_draw = sys_get_star_premium_draw();
   let cost = star_premium_draw.cost;
   if (era.get('cflag:302:招募状态') === recruit_flags.yes) {
@@ -64,7 +65,7 @@ async function page_chairman_office() {
             name: '「闲 谈！无聊了来找你玩！」',
             async handle() {
               nothing = false;
-              switch (get_relation_mark(undefined, 302)) {
+              switch (get_relation_mark(302)) {
                 case '失望':
                   await chara.say_and_wait(
                     '冷 漠！有来找我的空闲不如先把自己的工作做好！',
@@ -145,9 +146,9 @@ async function page_chairman_office() {
                   .get('chara')
                   .filter(
                     (chara_id) =>
-                      chara_id &&
+                      chara_id > 0 &&
                       (era.get(`cflag:${chara_id}:随机招募`) ||
-                        era.get(`staticcflag:${chara_id}:随机招募`)) &&
+                        era.get(`staticcflag:${chara_id}:随机招募`)) === 1 &&
                       era.get(`cflag:${chara_id}:招募状态`) !==
                         recruit_flags.yes &&
                       era.get('cflag:0:模版角色') !== chara_id,
@@ -177,7 +178,9 @@ async function page_chairman_office() {
                     temp_list
                       .map((chara_id) => {
                         const color = get_chara_color(chara_id);
-                        const flag_script = check_rec_script(chara_id);
+                        const flag_script =
+                          check_rec_script(chara_id) &&
+                          check_edu_script(chara_id);
                         return {
                           accelerator: chara_id,
                           config: {
@@ -207,7 +210,7 @@ async function page_chairman_office() {
                           temp.push({
                             config: {
                               content: l[0].priority
-                                ? '使用专属口上的角色'
+                                ? '使用口上的角色'
                                 : '使用地文的角色',
                             },
                             type: 'divider',
@@ -238,11 +241,11 @@ async function page_chairman_office() {
                   await get_chara_talk(0).say_and_wait(
                     '将 军！无路可退了，来和我一起吧！',
                   );
-                  chara.name = era.set('callname:302:-2', '秋川弥生');
+                  era.set('callname:302:-2', '秋川弥生');
                   await chara.say_and_wait('啊吧啊吧啊吧啊吧……');
                   era.set('cflag:302:招募状态', recruit_flags.yes);
                   if (era.get('talent:302:病娇')) {
-                    new YandereList().push(302);
+                    yandere_list.push(302);
                   }
                   await era.printAndWait([
                     '恭 喜！',
@@ -335,11 +338,10 @@ async function page_chairman_office() {
     }
   }
   era.drawLine();
-  await era.printAndWait('回去了……');
+  await era.printAndWait('【折返了】');
   if (!sys_check_awake(chara.id)) {
     loc_characters.set(location_enum.chairman, []);
   }
-  era.println();
   await sys_get_random_event(event_hooks.back_school)({
     loc: location_enum.chairman,
   });

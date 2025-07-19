@@ -3,10 +3,9 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202362,
   '压迫感',
-  '比赛后半时，使体力回复的赛马娘稍微畏缩',
+  '比赛后半时，使持久力回复的赛马娘稍微畏缩',
   20236,
   1,
-  UmaSkill.rarity_enum.normal,
   24,
   217,
   [() => true, () => true],

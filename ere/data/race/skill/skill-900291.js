@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '最后300米处在前方且与最前方的马娘距离很近或是领头时速度略微提升',
   90029,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   180,
   [() => true, () => true],

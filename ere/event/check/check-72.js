@@ -25,7 +25,7 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
   () => {},
   (races) =>
     check_aim_race(races, race_enum.sats_sho, 1, 1) &&
-    new RaceHistory(72)
+    RaceHistory.get(72)
       .get_entries()
       .findIndex(
         (e) =>

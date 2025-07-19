@@ -5,11 +5,15 @@ const check_aim_race = require('#/event/snippets/check-aim-race');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 
+const recruit_flags = require('#/data/event/recruit-flags');
 const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
 class CustomizedMec {
+  /** @type {function(number):CustomizedMec} */
+  static get_custom_mec;
+
   constructor(chara_id) {
     this.id = chara_id;
   }
@@ -19,10 +23,9 @@ class CustomizedMec {
   }
 
   init_love() {
-    era.set(
-      `love:${this.id}`,
-      era.get(`cflag:${this.id}:种族`) ? era.get('flag:马娘初始爱慕') : 0,
-    );
+    if (era.get(`cflag:${this.id}:种族`) > 0) {
+      era.set(`love:${this.id}`, era.get('flag:马娘初始爱慕'));
+    }
   }
 
   is_able_to_be_selected() {
@@ -32,7 +35,13 @@ class CustomizedMec {
   /** @param {number[]} partners */
   // eslint-disable-next-line no-unused-vars
   is_anger_for_unfaithful(partners) {
-    return true;
+    return era.get('flag:不忠惩罚') === 1;
+  }
+
+  /** @param {number} race */
+  // eslint-disable-next-line no-unused-vars
+  is_race_disabled(race) {
+    return false;
   }
 
   is_race_register_enabled() {
@@ -61,7 +70,14 @@ class CustomizedMec {
   }
 
   get_love_limit() {
-    return 0;
+    if (era.get(`cflag:${this.id}:招募状态`) === recruit_flags.yes) {
+      return 0;
+    }
+    const love = era.get(`love:${this.id}`);
+    if (love > 50) {
+      return 67;
+    }
+    return 49;
   }
 
   get_maxbase_buff() {
@@ -111,7 +127,7 @@ class CustomizedMec {
         case 28:
         case 30:
         case 31:
-          ret.push(`${base}_泳`, `${base}_夏`);
+          ret.push(`${base}_泳`, `${base}_夏私`);
           break;
         case 29:
           ret.push(`${base}_江户`);
@@ -144,7 +160,7 @@ class CustomizedMec {
    * @returns {string|array}
    */
   get_race_finish_report(uma, race_id) {
-    const races = new RaceHistory(this.id),
+    const races = RaceHistory.get(this.id),
       invincible = races.get_values().findIndex((e) => e.rank !== 1) === -1;
     if (race_id === race_enum.tenn_spr) {
       return '春季的长距离之王诞生！';
@@ -230,15 +246,10 @@ class CustomizedMec {
 
   set_callname() {
     if (!this.set_callname_from_src()) {
-      let callname;
-      if (!era.get(`cflag:${this.id}:父方角色`)) {
-        callname = '爸爸';
-      } else if (!era.get(`cflag:${this.id}:母方角色`)) {
-        callname = '妈妈';
-      } else {
-        callname = '训练员' + get_chara_talk(0).get_adult_sex_title();
-      }
-      era.set(`callname:${this.id}:0`, callname);
+      era.set(
+        `callname:${this.id}:0`,
+        '训练员' + get_chara_talk(0).get_adult_sex_title(),
+      );
     }
   }
 
@@ -272,14 +283,18 @@ class CustomizedMec {
   /** @returns {number} */
   set_my_sex() {
     const global_sex = era.get('flag:角色性别');
-    return era.set(
-      `cflag:${this.id}:性别`,
-      global_sex === 99
-        ? era.get(`cflag:${this.id}:模版角色`) === -1
-          ? era.get(`staticcflag:${this.id}:性别`)
-          : get_random_entry([0, 10])
-        : global_sex,
-    );
+    if (global_sex === 99) {
+      if (era.get(`cflag:${this.id}:模版角色`) === -1) {
+        return era.set(
+          `cflag:${this.id}:性别`,
+          era.get(`staticcflag:${this.id}:性别`),
+        );
+      } else {
+        return era.set(`cflag:${this.id}:性别`, get_random_entry([0, 10]));
+      }
+    } else {
+      return era.set(`cflag:${this.id}:性别`, global_sex);
+    }
   }
 
   /** @param {PseudoUma} uma */

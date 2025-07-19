@@ -6,7 +6,7 @@ const {
 } = require('#/system/ero/sys-calc-ero-status');
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
-const EroNormalMakingOuts = require('#/event/ero/common-lines/normal/making-outs-final');
+const EroNormalMakingOuts = require('#/event/ero/common/normal/making-outs-final');
 
 const { part_enum } = require('#/data/ero/part-const');
 

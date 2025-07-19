@@ -1,4 +1,4 @@
-const palam2juel = 10;
+const param2jewel = 10;
 
 module.exports = {
   /** 母马一生能生多少 */
@@ -6,7 +6,7 @@ module.exports = {
   // 无任何加减成时的快感上限
   base_limit: 1000,
   /** 一次高潮奖励的基本宝珠数（*palam2juel） */
-  base_orgasm_juel_reward: 50 * palam2juel,
+  base_orgasm_juel_reward: 50 * param2jewel,
   /** 从36周开始的生产概率 */
   birth_percent: [0.1, 0.2, 0.3, 0.4, 0.5, 0.7, 1],
   /** 多重高潮的额外体力精力消耗系数，从二重高潮开始计算 */
@@ -44,7 +44,7 @@ module.exports = {
     },
   },
   /** 多少累积快感能换一个宝珠 */
-  palam2juel,
+  palam2juel: param2jewel,
   /** 部位产生润滑液的快感阈值 */
   palam_border: {
     anal: 0.6,
@@ -57,15 +57,17 @@ module.exports = {
   palam_from_semen_on_part: 0.15,
   /** 高潮时液体分泌量，单位ml，第一个值是基础值，第二个值是动态变化量 */
   secretion_amount: {
-    /** 肠液量：5~15ml */
+    /** 肠液量：5-15ml */
     anal: [5, 15],
-    /** 泌乳量：15~25ml */
+    /** 泌乳量：15-25ml */
     breast: [15, 25],
+    // 一般多重高潮时的体液分泌量加成
+    orgasm_times: [1, 1.6, 2, 2.2, 2.4, 2.5],
     /** 射精量：2-6ml */
     penis: [2, 6],
     // 阴茎多重高潮时的射精量加成
     penis_times: [1, 1.4, 1.6, 1.7, 1.8, 1.9],
-    /** 爱液量：10~30ml */
+    /** 爱液量：10-30ml */
     virgin: [10, 30],
   },
   // 爱液分泌量的部位尺寸系数

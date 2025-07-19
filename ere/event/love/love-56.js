@@ -20,7 +20,7 @@ const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
 const punish_rejecting_love = require('#/event/love/snippets/punish-rejecting-love');
 const { add_event } = require('#/event/queue');
-const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
+const add_jewel_reward = require('#/event/snippets/add-jewel-reward');
 const masturbate = require('#/event/snippets/masturbate');
 const print_event_name = require('#/event/snippets/print-event-name');
 const quick_into_sex = require('#/event/snippets/quick-into-sex');
@@ -657,7 +657,7 @@ module.exports = class extends CustomizedLove {
       '，之后也请尽情地使用小福吧。',
     ]);
     era.println();
-    await add_juel_out_of_train(56, ['顺从'], [100]);
+    add_jewel_reward(56, ['顺从'], [100]);
     if (era.get('talent:56:淫身') !== 2) {
       era.set('talent:56:淫身', 2);
       era.print([
@@ -852,7 +852,7 @@ module.exports = class extends CustomizedLove {
       ' 可是我的命定之人啊！',
     ]);
     era.println();
-    await add_juel_out_of_train(56, ['顺从', '羞耻'], [100, 50]);
+    add_jewel_reward(56, ['顺从', '羞耻'], [100, 50]);
     await sys_love_uma_in_event(56);
   }
 };

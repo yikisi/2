@@ -13,7 +13,7 @@ const {
 const { use_item } = require('#/system/ero/sys-calc-ero-item');
 const { change_part, clean_part } = require('#/system/ero/sys-calc-ero-part');
 const {
-  get_bust_size,
+  get_bust_delta,
   get_penis_size,
 } = require('#/system/ero/sys-calc-ero-status');
 const { add_juel } = require('#/system/ero/sys-calc-juel');
@@ -44,17 +44,17 @@ const { penis_desc, vp_status_enum } = require('#/data/ero/status-const');
  */
 function sys_do_sex(attacker, defender, item) {
   let damage = {
-      defender: base_damage.base,
-      attacker: base_damage.self,
-    },
-    attacker_skill_part = part_skills[attacker.part],
-    attack_extra_buff = 0,
-    attack_extra_bonus = 0,
-    defender_part = defender.part,
-    attacker_virgin_status,
-    defender_virgin_status,
-    attacker_cost = action_cost.body,
-    defender_cost = action_cost.body;
+    defender: base_damage.base,
+    attacker: base_damage.self,
+  };
+  let attacker_skill_part = part_skills[attacker.part];
+  let attack_extra_buff = 0;
+  let attack_extra_bonus = 0;
+  let defender_part = defender.part;
+  let attacker_virgin_status;
+  let defender_virgin_status;
+  let attacker_cost = action_cost.body;
+  let defender_cost = action_cost.body;
 
   const date = `${era.get('flag:当前年')} 年 ${era.get(
       'flag:当前月',
@@ -143,12 +143,7 @@ function sys_do_sex(attacker, defender, item) {
       attack_extra_buff += era.get(`talent:${attacker.id}:淫乳`) === 2;
       // B罩杯以下有减成
       // 淫乳+5cm胸围，等效目标部位掌握+1
-      attack_extra_bonus =
-        ((get_bust_size(attacker.id, true) -
-          era.get(`cflag:${attacker.id}:下胸围`)) /
-          2.5 -
-          6) /
-        10;
+      attack_extra_bonus = (get_bust_delta(attacker.id, true) / 2.5 - 6) / 10;
       // 罩杯尺寸对乳交攻击的加成20%封顶，减成60%封顶
       attack_extra_bonus = attack_extra_bonus > 0.2 ? 0.2 : attack_extra_bonus;
       attack_extra_bonus =
@@ -314,7 +309,7 @@ function sys_do_sex(attacker, defender, item) {
           if (attacker_virgin_status > 0) {
             set_stain(attacker.id, part_enum.virgin, stain_enum.virgin);
             handle_lost_virginity(defender.id, attacker.id);
-            era.set(`nowex:${attacker.id}:破处标记`, 1);
+            era.set(`nowex:${attacker.id}:破处`, 1);
           }
           if (
             // 无自觉非处女算破处
@@ -333,7 +328,7 @@ function sys_do_sex(attacker, defender, item) {
           }
           // 没干过人的肉棒算失童贞
           if (defender_virgin_status > 0) {
-            era.set(`nowex:${defender.id}:失贞标记`, 1);
+            era.set(`nowex:${defender.id}:失贞`, 1);
           }
           // 判断是不是睡奸
           if (is_defender_awake) {
@@ -502,7 +497,7 @@ function sys_do_sex(attacker, defender, item) {
           // 童贞没再生的说法
           // 没干过人的肉棒算失童贞
           if (attacker_virgin_status > 0) {
-            era.set(`nowex:${attacker.id}:失贞标记`, 1);
+            era.set(`nowex:${attacker.id}:失贞`, 1);
           }
           if (
             // 无自觉非童贞算失童贞
@@ -520,7 +515,7 @@ function sys_do_sex(attacker, defender, item) {
           if (defender_virgin_status > 0) {
             set_stain(defender.id, part_enum.virgin, stain_enum.virgin);
             handle_lost_virginity(attacker.id, defender.id);
-            era.set(`nowex:${defender.id}:破处标记`, 1);
+            era.set(`nowex:${defender.id}:破处`, 1);
           }
           // 睡奸判定
           if (is_defender_awake) {

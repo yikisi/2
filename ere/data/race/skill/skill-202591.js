@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛终盘初段余力十足的话，向前突进',
   20259,
   2,
-  UmaSkill.rarity_enum.gold,
   17,
   508,
   [() => true, () => true],

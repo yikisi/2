@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '上坡时加速度提升',
   20158,
   2,
-  UmaSkill.rarity_enum.gold,
   17,
   508,
   [() => true, () => true],

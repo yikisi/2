@@ -573,7 +573,7 @@ module.exports = (handlers) => {
       true,
     );
     if (
-      new RaceHistory(52).get_result(47 + 48)?.race === race_enum.arim_kin ||
+      RaceHistory.get(52).get_result(47 + 48)?.race === race_enum.arim_kin ||
       edu_marks.fans >= 25000
     ) {
       await me.say_and_wait(

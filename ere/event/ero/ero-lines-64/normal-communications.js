@@ -2,7 +2,7 @@ const era = require('#/era-electron');
 
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
-const EroNormalCommunications = require('#/event/ero/common-lines/normal/communications');
+const EroNormalCommunications = require('#/event/ero/common/normal/communications');
 
 const PamaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-64');
 

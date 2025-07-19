@@ -1,6 +1,5 @@
 /**
  * @file 丸善斯基 - 招募
- *
  * @author 黑奴一号
  */
 const era = require('#/era-electron');
@@ -10,7 +9,7 @@ const CustomizedRecruit = require('#/event/rec/rec-common');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
+const MaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-4');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
@@ -133,17 +132,16 @@ module.exports = class extends CustomizedRecruit {
           `那么，接下来请多指教了，训练员${me.get_adult_sex_title()}♪`,
         );
         new EventMarks(0).sub(event_hooks.school_rooftop);
-        new EduEventMarks(4).add('after_recruit');
+        new MaEduMarks().after_recruit++;
         // 设置招募状态为成功，同时也是在队伍里的标记
         era.set('cflag:4:招募状态', recruit_flags.yes);
         // 结束招募事件链
-        new EduEventMarks(4).add('beginning');
+        new MaEduMarks().beginning++;
         add_event(event_hooks.week_end, new EventObject(4, cb_enum.edu));
         era.set('flag:物色对象', 0);
         await this.recruit_end();
         // 返回true，表示跳过后面的天台事件流程
         return true;
     }
-    return false;
   }
 };

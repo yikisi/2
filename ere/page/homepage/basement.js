@@ -2,6 +2,7 @@ const era = require('#/era-electron');
 
 const sys_handle_prison_guides = require('#/system/basement/sys-handle-prison-guides');
 const sys_handle_time_in_basement = require('#/system/basement/sys-handle-time-in-basement');
+const sys_get_status = require('#/system/chara/sys-get-status');
 const sys_get_intelligence_ratio_in_fight = require('#/system/ero/fight/sys-get-intelligence-ratio');
 const sys_get_strength_ratio_in_fight = require('#/system/ero/fight/sys-get-strength-ratio');
 const {
@@ -13,7 +14,7 @@ const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const { switch_image } = require('#/system/sys-calc-image');
 
 const print_cur_chara_info = require('#/page/components/cur-chara-info');
-const page_header = require('#/page/components/page-header');
+const { get_progress_bar } = require('#/page/components/page-header');
 const { print_chara_info } = require('#/page/page-exp');
 const print_load_page = require('#/page/page-load-game');
 const print_save_page = require('#/page/page-save-game');
@@ -31,7 +32,7 @@ const {
   escape_enum,
 } = require('#/data/basement-const');
 const BasementAction = require('#/data/event/basement-action');
-const BasementOwners = require('#/data/event/basement-owners');
+const basement_owners = require('#/data/event/basement-owners');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
 const basement_desc = [
@@ -73,6 +74,44 @@ function get_random_value(min, max, is_float) {
   return Math.floor(value);
 }
 
+function page_header() {
+  const status_list = sys_get_status(0);
+  era.printInColRows(
+    [{ type: 'divider' }],
+    {
+      columns: [
+        ...get_progress_bar(),
+        {
+          config: { width: 2 },
+          content: '状态',
+          type: 'text',
+        },
+        {
+          config: { width: 22 },
+          content: status_list.length > 0 ? status_list : '正常',
+          type: 'text',
+        },
+      ],
+      config: { width: 16 },
+    },
+    {
+      columns: [
+        {
+          content: [
+            '位于 ',
+            {
+              content: '地下室',
+              fontWeight: 'bold',
+            },
+          ],
+          type: 'text',
+        },
+      ],
+      config: { width: 8 },
+    },
+  );
+}
+
 sys_handle_time_in_basement.init(get_random_value);
 
 /**
@@ -83,7 +122,6 @@ sys_handle_time_in_basement.init(get_random_value);
 module.exports = async (_, save_and_next_week, flags) => {
   const my_life_marks = LifeEventMarks.get_marks(0),
     basement_info = [],
-    basement_owners = new BasementOwners(),
     me = get_chara_talk(0);
   if (flags.week_start) {
     my_life_marks.b_r_seed = (era.get('flag:随机种子') * 9301 + 49297) % 233280;
@@ -162,14 +200,15 @@ module.exports = async (_, save_and_next_week, flags) => {
       async h() {
         action_time = get_random_value(30, 60);
         my_life_marks.b_time_buff = -1;
+        const chara = get_chara_talk(chara_list[1]);
         await era.printAndWait([
           '【',
           me.get_colored_name(),
           ' 尝试讨好',
           ...(is_awake === 2
-            ? [get_chara_talk(chara_list[1]).sex, '们']
-            : [' ', get_chara_talk(chara_list[1]).get_colored_name()]),
-          '……】',
+            ? [chara.sex, '们']
+            : [' ', chara.get_colored_name()]),
+          '】',
         ]);
         await get_custom_basement(chara_list[1]).flatter(
           is_awake === 2 ? chara_list[2] : undefined,
@@ -314,11 +353,13 @@ module.exports = async (_, save_and_next_week, flags) => {
           ) {
             LifeEventMarks.get_marks(chara_list[1]).b_escape =
               escape_enum.strike;
+            era.print('【偷袭成功】');
             await get_custom_basement(chara_list[1]).strike_success();
             my_life_marks.b_status = 1 << basement_status_enum.escape;
             my_life_marks.b_now = -1;
             action_time = get_random_value(5, 10);
           } else {
+            era.print('【偷袭失败】');
             await get_custom_basement(chara_list[1]).strike_fail();
           }
           if (my_life_marks.b_now >= 0) {
@@ -360,8 +401,10 @@ module.exports = async (_, save_and_next_week, flags) => {
               get_random_value(0, 100) <
                 100 * sys_get_strength_ratio_in_fight(0, chara_id) && win;
             if (win) {
+              era.print('【反抗成功】');
               await get_custom_basement(chara_id).battle_success();
             } else {
+              era.print('【反抗失败】');
               await get_custom_basement(chara_id).battle_fail();
               break;
             }
@@ -379,11 +422,13 @@ module.exports = async (_, save_and_next_week, flags) => {
                 (e) =>
                   (LifeEventMarks.get_marks(e).b_escape = escape_enum.beat),
               );
+              era.print('【解除机关成功】');
               await get_custom_basement(beat_list[0]).battle_escape();
               my_life_marks.b_status = 1 << basement_status_enum.escape;
               my_life_marks.b_now = -1;
               action_time = get_random_value(10, 15);
             } else {
+              era.print('【解除机关失败】');
               await get_custom_basement(beat_list[0]).battle_prison();
             }
             era.drawLine();
@@ -420,6 +465,11 @@ module.exports = async (_, save_and_next_week, flags) => {
       action_list.push({
         async h() {
           action_time = get_random_value(5, 10);
+          era.print([
+            '【',
+            get_chara_talk(0).get_colored_name(),
+            ' 请求释放自己】',
+          ]);
           if (
             era.get(`relation:${chara_list[1]}:0`) >
             (era.get('flag:极端行为限制') || 1) *
@@ -440,6 +490,13 @@ module.exports = async (_, save_and_next_week, flags) => {
     action_list.push({
       async h() {
         action_time = get_random_value(1, 5);
+        era.print([
+          '【',
+          get_chara_talk(0).get_colored_name(),
+          ' 向 ',
+          get_chara_talk(chara_list[1]).get_colored_name(),
+          ' 询问当前的时间】',
+        ]);
         await get_custom_basement(chara_list[1]).ask_time(
           my_life_marks.b_timer / minutes_in_a_day + 1,
           Math.floor((my_life_marks.b_timer % minutes_in_a_day) / 60),
@@ -545,3 +602,5 @@ module.exports = async (_, save_and_next_week, flags) => {
   }
   flags.after_select = true;
 };
+
+module.exports.page_header = page_header;

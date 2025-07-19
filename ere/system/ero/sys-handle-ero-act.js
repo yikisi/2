@@ -12,6 +12,10 @@ const use_lubricating_fluid = require('#/system/ero/ero-act-handler/use-lubricat
 const sys_get_strength_ratio_in_fight = require('#/system/ero/fight/sys-get-strength-ratio');
 const sys_auto_rape = require('#/system/ero/sub/sys-auto-rape');
 const sys_auto_react = require('#/system/ero/sub/sys-auto-react');
+const {
+  sys_check_main_touch,
+  sys_clean_oor_parts,
+} = require('#/system/ero/sys-calc-distance');
 const { clean_part } = require('#/system/ero/sys-calc-ero-part');
 const {
   check_want_to_escape,
@@ -30,12 +34,13 @@ const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const { print_chara_info } = require('#/page/page-exp');
 
-const { run_custom_ero } = require('#/event/ero/ero-factory');
+const { get_custom_ero, run_custom_ero } = require('#/event/ero/ero-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
+const CharaInmon = require('#/data/ero/chara-inmon');
 const EroParticipant = require('#/data/ero/ero-participant');
 const { tequip_parts } = require('#/data/ero/item-const');
 const { base_emotion_juel } = require('#/data/ero/juel-const');
@@ -47,50 +52,52 @@ const {
   part_touch,
   pleasure_list,
 } = require('#/data/ero/part-const');
+const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const { stain_enum } = require('#/data/ero/stain-const');
 const { condition_type, default_tags } = require('#/data/event/ero-hook-tag');
 const { ero_hooks, ero_tagged_hooks } = require('#/data/event/ero-hooks');
 
-let shown = true;
-
-async function next_turn() {
+/** @param {boolean} shown */
+async function next_turn(shown) {
   era.add('tflag:回合', 1);
-  const chara_list_in_train = get_characters_in_train();
-  for (const chara_id of chara_list_in_train) {
-    era.get(`tcvar:${chara_id}:刚刚受虐`) &&
+  const train_list = get_characters_in_train();
+  for (const cid of train_list) {
+    if (era.get(`tcvar:${cid}:刚刚受虐`) > 0) {
       era.set(
-        `tcvar:${chara_id}:刚刚受虐`,
-        Math.max(0, era.get(`tcvar:${chara_id}:刚刚受虐`) - 100),
+        `tcvar:${cid}:刚刚受虐`,
+        Math.max(0, era.get(`tcvar:${cid}:刚刚受虐`) - 100),
       );
-    era.get(`tcvar:${chara_id}:刚刚施虐`) &&
-      era.add(`tcvar:${chara_id}:刚刚施虐`, -1);
-    era.set(`tcvar:${chara_id}:刚刚高潮`, false);
-    if (era.get(`ex:${chara_id}:阴道撕裂`)) {
-      set_stain(chara_id, part_enum.virgin, stain_enum.wound);
-      add_juel(chara_id, '痛苦', base_emotion_juel);
     }
-    if (era.get(`ex:${chara_id}:肛门撕裂`)) {
-      set_stain(chara_id, part_enum.anal, stain_enum.wound);
-      add_juel(chara_id, '痛苦', base_emotion_juel);
+    if (era.get(`tcvar:${cid}:刚刚施虐`) > 0) {
+      era.add(`tcvar:${cid}:刚刚施虐`, -1);
     }
-    if (era.get(`cflag:${chara_id}:阴道尺寸`) && !get_penis_size(chara_id)) {
+    era.set(`tcvar:${cid}:刚刚高潮`, false);
+    if (era.get(`ex:${cid}:阴道撕裂`)) {
+      set_stain(cid, part_enum.virgin, stain_enum.wound);
+      add_juel(cid, '痛苦', base_emotion_juel);
+    }
+    if (era.get(`ex:${cid}:肛门撕裂`)) {
+      set_stain(cid, part_enum.anal, stain_enum.wound);
+      add_juel(cid, '痛苦', base_emotion_juel);
+    }
+    if (era.get(`cflag:${cid}:阴道尺寸`) && !get_penis_size(cid)) {
       era.set(
-        `stain:${chara_id}:外阴`,
-        era.get(`stain:${chara_id}:阴道`) | era.get(`stain:${chara_id}:外阴`),
+        `stain:${cid}:外阴`,
+        era.get(`stain:${cid}:阴道`) | era.get(`stain:${cid}:外阴`),
       );
     }
     for (const e of tequip_parts.slice(0, 6)) {
-      if (era.get(`tequip:${chara_id}:${part_touch[e]}`) !== -1) {
-        const tmp_part = era.get(`tcvar:${chara_id}:${part_touch[e]}接触部位`);
+      if (era.get(`tequip:${cid}:${part_touch[e]}`) !== -1) {
+        const tmp_part = era.get(`tcvar:${cid}:${part_touch[e]}接触部位`);
         if (tmp_part.item === undefined) {
-          clean_part(new EroParticipant(chara_id, e));
+          clean_part(new EroParticipant(cid, e));
         } else {
-          await run_custom_ero(chara_id, ero_hooks.use_item, {
+          await run_custom_ero(cid, ero_hooks.use_item, {
             item: tmp_part.item,
             shown,
             owner: tmp_part.owner,
             part: e,
-            stay: chara_id,
+            stay: cid,
           });
           era.println();
         }
@@ -100,10 +107,9 @@ async function next_turn() {
     // 名器停留效果
     Object.entries(part_gifts).forEach((e) => {
       if (
-        era.get(`talent:${chara_id}:${e[1]}`) &&
-        (body_part = era.get(
-          `tcvar:${chara_id}:${part_touch[e[0]]}接触部位`,
-        )) !== -1 &&
+        era.get(`talent:${cid}:${e[1]}`) &&
+        (body_part = era.get(`tcvar:${cid}:${part_touch[e[0]]}接触部位`)) !==
+          -1 &&
         body_part.part !== part_enum.item
       ) {
         add_palam(body_part.owner, body_part.part, get_random_value(15, 25));
@@ -112,36 +118,50 @@ async function next_turn() {
   }
   await check_orgasm(
     shown,
-    ...chara_list_in_train.map((chara_id) => {
-      era.get(`tcvar:${chara_id}:高潮抑制`) &&
+    ...train_list.map((chara_id) => {
+      const inmon = CharaInmon.get(chara_id);
+      if (era.get(`tcvar:${chara_id}:高潮抑制`) > 0) {
         era.add(`tcvar:${chara_id}:高潮抑制`, -1);
+      } else if (inmon.on(plugin_enum.org_c1)) {
+        era.set(`tcvar:${chara_id}:高潮抑制`, 1);
+      } else if (inmon.on(plugin_enum.org_c2)) {
+        era.set(`tcvar:${chara_id}:高潮抑制`, 2);
+      } else if (inmon.on(plugin_enum.org_c3)) {
+        era.set(`tcvar:${chara_id}:高潮抑制`, 4);
+      }
       return chara_id;
     }),
   );
-  shown && era.println();
-  update_juels(shown, ...chara_list_in_train);
-  shown && (await era.waitAnyKey());
-  (await update_marks(shown, ...chara_list_in_train)) &&
-    update_juel_buff(...chara_list_in_train);
-  chara_list_in_train.forEach((chara_id) => {
+  if (shown) {
+    era.println();
+  }
+  update_juels(shown, ...train_list);
+  if (shown) {
+    await era.waitAnyKey();
+  }
+  if (await update_marks(shown, ...train_list)) {
+    update_juel_buff(...train_list);
+  }
+  for (const cid of train_list) {
     era.set(
-      `tcvar:${chara_id}:接近高潮`,
+      `tcvar:${cid}:接近高潮`,
       pleasure_list
         .map((part) => {
           return {
             k: part,
             v:
-              era.get(`palam:${chara_id}:${part_names[part]}快感`) >
-              era.get(`tcvar:${chara_id}:${part_names[part]}快感上限`) *
+              era.get(`palam:${cid}:${part_names[part]}快感`) >
+              era.get(`tcvar:${cid}:${part_names[part]}快感上限`) *
                 lust_palam_border,
           };
         })
         .filter((e) => e.v)
         .map((e) => e.k),
     );
-    !era.get(`tcvar:${chara_id}:接近高潮`).length &&
-      era.set(`tcvar:${chara_id}:接近高潮`, 0);
-  });
+    if (era.get(`tcvar:${cid}:接近高潮`).length === 0) {
+      era.set(`tcvar:${cid}:接近高潮`, 0);
+    }
+  }
   const master = era.get('tflag:主导权');
   if (
     !sys_check_awake(master) ||
@@ -150,20 +170,29 @@ async function next_turn() {
   ) {
     change_master(-1, shown);
   }
+  for (const cid of train_list) {
+    if (cid !== master) {
+      sys_check_main_touch(cid, cid > 0 ? 0 : master);
+    }
+    if (cid > 0) {
+      await get_custom_ero(cid).next_round();
+    }
+  }
 }
 
 /**
  * @param {number} command
  * @param {boolean[]} filters
- * @param {boolean} [_shown]
+ * @param {boolean} shown
  * @returns {Promise<boolean>}
  */
-async function sys_handle_ero_act(command, filters, _shown) {
-  shown = _shown !== false;
+async function sys_handle_ero_act(command, filters, shown = true) {
   const cur_lover = era.get('tflag:当前对手');
   const chara = get_chara_talk(cur_lover);
   const supporter = era.get('tflag:当前助手');
-  shown && era.drawLine();
+  if (shown) {
+    era.drawLine();
+  }
   if (command < 900) {
     let action_success = true;
     const check = sys_check_ero_enabled(cur_lover, supporter, command);
@@ -232,19 +261,32 @@ async function sys_handle_ero_act(command, filters, _shown) {
       });
     }
     if (action_success) {
-      shown && era.println();
+      if (shown) {
+        era.println();
+      }
       if (!era.get('tflag:主导权')) {
         era.set('tflag:前回行动', command);
         era.set('tflag:前回助手', supporter);
-        await sys_auto_react(shown);
+        const inmon = CharaInmon.get(cur_lover);
+        if (!inmon.on(plugin_enum.tuna) && !inmon.on(plugin_enum.meek)) {
+          await sys_auto_react(shown);
+        }
       } else {
         era.set('tflag:对手行动', command);
         await sys_auto_rape(shown);
       }
       era.set('tflag:前回对手', cur_lover);
-      await next_turn();
+      await next_turn(shown);
     }
   } else if (command === 900) {
+    era.set('tcvar:0:朝向', 1 - era.get('tcvar:0:朝向'));
+    era.set('tflag:前回行动', -1);
+    for (const cid of get_characters_in_train()) {
+      if (cid > 0) {
+        sys_clean_oor_parts(0, cid);
+      }
+    }
+  } else if (command === 901) {
     let option_flag = 1;
     while (option_flag) {
       (option_flag - 1 ? era.replaceInColRows : era.printInColRows)([
@@ -269,15 +311,15 @@ async function sys_handle_ero_act(command, filters, _shown) {
         era.set(`flag:${ret + 70}`, !era.get(`flag:${ret + 70}`));
       }
     }
-  } else if (command === 901) {
+  } else if (command === 902) {
     print_touch_info(cur_lover);
     await era.waitAnyKey();
-  } else if (command === 902) {
+  } else if (command === 903) {
     print_stain_info(cur_lover);
     await era.waitAnyKey();
-  } else if (command === 903) {
-    await print_chara_info(0, undefined, 5);
   } else if (command === 904) {
+    await print_chara_info(0, undefined, 5);
+  } else if (command === 905) {
     await print_chara_info(cur_lover, undefined, 5);
   } else if (command === 999) {
     if (
@@ -293,7 +335,7 @@ async function sys_handle_ero_act(command, filters, _shown) {
       era.println();
       await sys_auto_rape(shown);
       era.set('tflag:前回对手', era.get('tflag:主导权'));
-      await next_turn();
+      await next_turn(shown);
     } else {
       return false;
     }
@@ -310,11 +352,12 @@ async function sys_handle_ero_act(command, filters, _shown) {
   const master = era.get('tflag:主导权');
   if (master) {
     if (check_want_to_escape(master)) {
-      shown &&
-        (await era.printAndWait([
+      if (shown) {
+        await era.printAndWait([
           get_chara_talk(master).get_colored_name(),
           ' 逃离了……',
-        ]));
+        ]);
+      }
       era.set(`tcvar:${master}:逃跑`, 1);
     }
     if (cur_lover !== master) {

@@ -1,8 +1,75 @@
 # Changelog
+
+## [EraUma v1.34 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.34)
+
+_2025/4/4_
+
+适配 [EraElectron v4.0.2 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.0.2)
+与 [ere.app v1.0.9 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.0.9) 及以上版本
+
+### Added
+
+* 新增好感护盾机制
+  * 当好感提升后超出 600 上限时，超出部分会为该角色对玩家的好感增加护盾
+  * 在好感降低时，好感护盾会先于好感被消耗
+  * 好感护盾的数值提升遵循以下规则：
+    * 提升一点好感护盾所需的溢出好感数量随好感护盾值的增加而线性增加
+      * 不足部分仍然会提高一定的好感护盾
+    * 当爱慕值高于 50 时，溢出好感提升好感护盾的数值随爱慕值的增加线性增加
+* 在标题界面根据本地时间新增了角色的诞生日提示
+* 为机伶金花增加了调教相关的特殊机制和相应口上
+* 扩充了强敌列表并新增相关的技能
+
+### Changed
+
+* 现在角色扮演模式下将禁用【黑暗交易】选项
+  * 已被惩戒的角色扮演存档不受影响
+* 现在强敌将套用其立绘设定
+
+## [EraUma v1.33 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.33)
+
+_2025/3/23_
+
+适配 [EraElectron v4.0.1 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.0.1)
+与 [ere.app v1.0.9 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.0.9) 及以上版本
+
+### Added
+
+* 增加对 .kojo 文件的支持
+  * 实装 daily-119.kojo（梦之旅早安口上的 .kojo 文件）作为部分示例
+
+### Changed
+
+* 降低了随机小事件【「」心「」体】的触发概率
+
+### Fixed
+
+* 修复了远程指导参赛也会错误触发事件【「」心「」体】的错误
+* 修复了待兼福来聊天口上的错误
+* 修复了离开地下室时不会清空行动序列的错误
+* 修复了西野花的育成目标错误
+* 修复了创升的育成目标错误
+* 修复了事件【孕袋职责之惩戒】参与者筛选不正确的错误
+* （待确认）尝试修复了训练等级提升到 5 级之上的问题
+
+## [EraUma v1.321 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.321)
+
+_2025/3/14_
+
+### Changed
+
+* 为迪拜世界杯比赛日的泥地比赛补充了赛道坡度信息
+
+### Fixed
+
+* 修复了因向前兼容错误导致的角色扮演模式的玩家被错误重置育成状态的错误
+
 ## [EraUma v1.32 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.32)
+
 _2025/3/13_
 
-适配 [EraElectron v3.6.0 (victory)](https://gitgud.io/umaera/engine/era-electron/-/releases/3.6.0) 与 [ere.app v1.0.8 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.0.8) 及以上版本
+适配 [EraElectron v3.6.0 (victory)](https://gitgud.io/umaera/engine/era-electron/-/releases/3.6.0)
+与 [ere.app v1.0.8 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.0.8) 及以上版本
 
 ### Added
 
@@ -27,9 +94,11 @@ _2025/3/13_
 * 【迪拜金莎轩锦标】的参赛限制修正为经典年以上
 
 ## [EraUma v1.31 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.31)
+
 _2025/3/9_
 
-适配 [EraElectron v3.6.0 (victory)](https://gitgud.io/umaera/engine/era-electron/-/releases/3.6.0) 与 [ere.app v1.0.8 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.0.8) 及以上版本
+适配 [EraElectron v3.6.0 (victory)](https://gitgud.io/umaera/engine/era-electron/-/releases/3.6.0)
+与 [ere.app v1.0.8 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.0.8) 及以上版本
 
 ### Added
 
@@ -77,9 +146,11 @@ _2025/3/9_
 * 修复了通用夏季合宿事件的地点判定错误
 
 ## [EraUma v1.3 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.3)
+
 _2025/2/16_
 
-适配 [EraElectron v3.5.0 (victory)](https://gitgud.io/umaera/engine/era-electron/-/releases/3.5.0) 与 [ere.app v1.0.6 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.0.6) 及以上版本
+适配 [EraElectron v3.5.0 (victory)](https://gitgud.io/umaera/engine/era-electron/-/releases/3.5.0)
+与 [ere.app v1.0.6 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.0.6) 及以上版本
 
 ### Added
 
@@ -138,6 +209,7 @@ _2025/2/16_
 * 修复了名将怒涛育成结束时称号检查的错误
 
 ## [EraUma v1.211 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.211)
+
 _2024/1/26_
 
 适配 [EraElectron v3.4.0 (victory)](https://gitgud.io/umaera/engine/era-electron/-/releases/3.4.0) 及以上版本
@@ -147,6 +219,7 @@ _2024/1/26_
 * 修复了因 cstr 表初始化错误导致的变量问题
 
 # [EraUma v1.21 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.21)
+
 _2024/1/26_
 
 适配 [EraElectron v3.4.0 (victory)](https://gitgud.io/umaera/engine/era-electron/-/releases/3.4.0) 及以上版本
@@ -178,6 +251,7 @@ _2024/1/26_
 * 修复了【露娜】和【皇帝】会同时出现在角色社交关系中的错误
 
 ## [EraUma v1.201 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.201)
+
 _2025/1/11_
 
 适配 [EraElectron v3.3.2 (victory)](https://gitgud.io/umaera/engine/era-electron/-/releases/3.3.2) 及以上版本
@@ -187,6 +261,7 @@ _2025/1/11_
 * 修复了URA颁奖事件开头报错的问题
 
 ## [EraUma v1.2 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.2)
+
 _2025/1/11_
 
 适配 [EraElectron v3.3.2 (victory)](https://gitgud.io/umaera/engine/era-electron/-/releases/3.3.2) 及以上版本
@@ -222,9 +297,11 @@ _2025/1/11_
 * 修复了比赛中名次计算方式的错误
 
 ## [EraUma v1.111 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.111)
+
 _2024/12/30_
 
-适配 PC版引擎[EraElectron v3.2.1 (victory)](https://gitgud.io/umaera/engine/era-electron/-/releases/3.2.1) 与 安卓版引擎[ere.app v1.0.1 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.0.1) 及以上版本
+适配 PC版引擎[EraElectron v3.2.1 (victory)](https://gitgud.io/umaera/engine/era-electron/-/releases/3.2.1) 与
+安卓版引擎[ere.app v1.0.1 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.0.1) 及以上版本
 
 ### Changed
 
@@ -242,6 +319,7 @@ _2024/12/30_
 * 修复了工具类PersonalEventMarks的子类在webpack后工作不正常的问题及其衍生错误
 
 ## [EraUma v1.11 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.11)
+
 _2024/12/28_
 
 适配 [EraElectron v3.2.1 (victory)](https://gitgud.io/umaera/engine/era-electron/-/releases/3.2.1) 及以上版本
@@ -288,6 +366,7 @@ _2024/12/28_
 * 修复了实时速度可以突破30m/s的错误
 
 ## [EraUma v1.101 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.101)
+
 _2024/12/26_
 
 适配 [EraElectron v3.2.1 (victory)](https://gitgud.io/umaera/engine/era-electron/-/releases/3.2.1) 及以上版本
@@ -301,9 +380,11 @@ _2024/12/26_
 * 修复了训练失败的地文脚本错误
 
 ## [EraUma v1.1 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.1)
+
 _2024/12/25_
 
-适配 [EraElectron v3.2.0 (victory)](https://gitgud.io/umaera/engine/era-electron/-/releases/3.2.0) 及以上版本，以套用EraElectron的安全性更新
+适配 [EraElectron v3.2.0 (victory)](https://gitgud.io/umaera/engine/era-electron/-/releases/3.2.0)
+及以上版本，以套用EraElectron的安全性更新
 
 因为引擎API改动，不再支持3.1.1及以下的版本！
 
@@ -382,7 +463,7 @@ _2024/12/25_
 * 修复了休息到下回合时在求爱事件中选择同意或被同意时不会进入求爱的错误
 * 修复了部分本应在京都举办的赛事的场地和赛道错误
 * 修复了黄金城市的专属称号【百年一遇的美少女】的描述错误
-* 修复了所有有专属口上的角色被招募后理事长超得功能报错的问题
+* 修复了所有有口上的角色被招募后理事长超得功能报错的问题
 * 修复了砂糖灯在招募后行为逻辑不正常的错误
 * 修复了出闸解说时最快和最慢出闸的选手可能是同一人的错误
 * （待确认）尝试修复了某些情况下会出现摘不下来的未知性玩具的错误
@@ -403,6 +484,7 @@ _2024/12/25_
 * 修复了部分性玩具相应的使用动作描述不正确的错误
 
 ## [EraUma v1.011 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.011)
+
 _2024/11/13_
 
 适配 [EraElectron v3.0.0 (victory)](https://gitgud.io/umaera/engine/era-electron/-/releases/3.0.0) 版本
@@ -422,6 +504,7 @@ _2024/11/13_
 * 修复了砂糖灯无法招募的bug
 
 ## [EraUma v1.01 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.01)
+
 _2024/11/11_
 
 适配 [EraElectron v3.0.0 (victory)](https://gitgud.io/umaera/engine/era-electron/-/releases/3.0.0) 版本
@@ -456,6 +539,7 @@ _2024/11/11_
 * 修复了比赛【新山纪念】比赛场地和时针类型的错误
 
 ## [EraUma v1.001 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.001)
+
 _2024/10/27_
 
 适配 [EraElectron v3.0.0 (victory)](https://gitgud.io/umaera/engine/era-electron/-/releases/3.0.0) 版本
@@ -499,6 +583,7 @@ _2024/10/27_
 * 修复了杜兰达尔的专属称号【圣剑】无法获取的问题
 
 ## [EraUma v1.0 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.0)
+
 _2024/10/24_
 
 EraUma v1.0，适配 [EraElectron v3.0.0 (victory)](https://gitgud.io/umaera/engine/era-electron/-/releases/3.0.0) 版本
@@ -533,10 +618,10 @@ EraUma v1.0，适配 [EraElectron v3.0.0 (victory)](https://gitgud.io/umaera/eng
   * 鲁铎象征
   * 玉藻十字
   * 成田大进
-* 追加实装强力传奇对手
+* 追加实装传奇强敌
   * 比赛难度选困难的情况下，她们会在资深年12月4周的G1比赛、或玩家参与的所有G1比赛中出场，每场最多1个
-  * 击败强力传奇对手可以获得全继承因子300点（如果由玩家击败则再额外获得全继承因子200点）
-  * **强力传奇对手的评级均在UD以上！请做好万全的准备再进行挑战！**
+  * 击败传奇强敌可以获得全继承因子300点（如果由玩家击败则再额外获得全继承因子200点）
+  * **传奇强敌的评级均在UD以上！请做好万全的准备再进行挑战！**
 * 追加185个可用技能点数购买的通用技能
 * 追加了两个3P专用调教指令
 * 新增命名故事功能，可在存档界面为故事取名，此后在读档或重启游戏前的所有保存行为都将以故事名为存档命名
@@ -643,6 +728,7 @@ EraUma v1.0，适配 [EraElectron v3.0.0 (victory)](https://gitgud.io/umaera/eng
 * 修复了角色的远程状态未被正确计算的问题
 
 ## [EraUma v0.99](https://gitgud.io/umaera/erauma/-/releases/0.99)
+
 _2024/9/24_
 
 EraUma v0.99，适配 [EraElectron v2.2.0 (ginga)](https://gitgud.io/umaera/engine/era-electron/-/releases/2.2.0) 版本
@@ -681,6 +767,7 @@ EraUma v0.99，适配 [EraElectron v2.2.0 (ginga)](https://gitgud.io/umaera/engi
 * 修复了梦之旅目标赛事指示器错误的问题
 
 ## [EraUma v0.9](https://gitgud.io/umaera/erauma/-/releases/0.9)
+
 _2024/9/15_
 
 EraUma v0.9，适配 [EraElectron v2.1.1 (ginga)](https://gitgud.io/umaera/engine/era-electron/-/releases/2.1.1) 版本
@@ -766,7 +853,8 @@ EraUma v0.9，适配 [EraElectron v2.1.1 (ginga)](https://gitgud.io/umaera/engin
         * 普通成功：救援马娘击败地下室主人并将玩家救回地下室
         * 再次绑架：救援马娘击败地下室主人后将玩家绑架到自己的地下室
         * 同流合污：救援马娘加入地下室，一起监禁并强奸玩家
-          * 必须满足以下条件：地下室主人对救援马娘至少具有【亲密】好感，救援马娘对地下室主人至少具有【融洽】好感，二者都不是【病娇】，且玩家满足被救援马娘绑架的条件（`好感度`低于`爱慕值*极端行为倍率`）
+          * 必须满足以下条件：地下室主人对救援马娘至少具有【亲密】好感，救援马娘对地下室主人至少具有【融洽】好感，二者都不是【病娇】，且玩家满足被救援马娘绑架的条件（
+            `好感度`低于`爱慕值*极端行为倍率`）
           * 救援马娘和地下室主人将拥有相同的行动逻辑
       * 偷袭：偷袭发生时，救援必然成功
         * 普通成功：玩家被马娘救回训练室
@@ -855,6 +943,7 @@ EraUma v0.9，适配 [EraElectron v2.1.1 (ginga)](https://gitgud.io/umaera/engin
 * 修复了角色在未清醒的状态下睡奸导致一直选择【什么都不做】而使睡奸死循环的问题
 
 ## [EraUma v0.808](https://gitgud.io/umaera/erauma/-/releases/0.808)
+
 _2024/8/30_
 
 适配 [EraElectron v2.1.0 (ginga)](https://gitgud.io/umaera/engine/era-electron/-/releases/2.1.0) 版本
@@ -872,6 +961,7 @@ _2024/8/30_
 * 修复了部分角色check脚本中的bug
 
 ## [EraUma v0.807](https://gitgud.io/umaera/erauma/-/releases/v0.807)
+
 _2024/8/28_
 
 ### Added
@@ -897,6 +987,7 @@ _2024/8/28_
 * 现在角色扮演模式下玩家生的孩子会使用玩家扮演的角色初始化了
 
 ## [EraUma v0.806](https://gitgud.io/umaera/erauma/-/releases/v0.806)
+
 _2024/8/6_
 
 ### Changed
@@ -913,6 +1004,7 @@ _2024/8/6_
 * 修复了技能「无二无三的唯一通路」不会因为「无二」「无三」的发动而提高效果的问题
 
 ## [EraUma v0.805](https://gitgud.io/umaera/erauma/-/releases/0.805)
+
 _2024/8/4_
 
 ### Fixed
@@ -921,6 +1013,7 @@ _2024/8/4_
 * 修复了部分角色check脚本工作不正常的问题
 
 ## [EraUma v0.804](https://gitgud.io/umaera/erauma/-/releases/0.804)
+
 _2024/8/3_
 
 ### Added
@@ -940,6 +1033,7 @@ _2024/8/3_
 * 修复了模拟赛过程中因解说词缺失导致的bug
 
 ## [EraUma v0.803](https://gitgud.io/umaera/erauma/-/releases/0.803)
+
 _2024/7/30_
 
 EraUma v0.803，适配 [EraElectron v2.0.1 (ginga)](https://gitgud.io/umaera/engine/era-electron/-/releases/2.0.1) 版本
@@ -949,6 +1043,7 @@ EraUma v0.803，适配 [EraElectron v2.0.1 (ginga)](https://gitgud.io/umaera/eng
 * 现在当【爱慕的变化】为【不敢肖想】、且未在队伍中时，三女神的爱慕不会超过54了
 
 ## [EraUma v0.802](https://gitgud.io/umaera/erauma/-/releases/0.802)
+
 _2024/7/29_
 
 ### Added
@@ -967,6 +1062,7 @@ _2024/7/29_
 * 修复了随机小事件【随风飘扬的海报】中奖品是 \[undefined\] 的bug
 
 ## [EraUma v0.801](https://gitgud.io/umaera/erauma/-/releases/v0.801)
+
 _2024/7/28_
 
 ### Added
@@ -1237,52 +1333,52 @@ EraUma v0.6，适配 [EraElectron v1.2.3 (zero)](https://gitgud.io/umaera/engine
 ### Added
 
 * 新增三女神的机制和临时口上
-    * 初始状态下，可以通过特雷森学园的三女神像与三女神互动，花费声望提高声望和马币获取速度、提高属性上限、恢复健康（对剧情状态如腿伤等无效）等
-    * 通过与三女神的互动，可以逐渐拉近和三女神的关系
-    * 在到达一定程度之后，也许可以请她们亲自加入你的队伍……？
-    * 在队伍中的三女神会对全队角色提供强大的加成效果
-    * 三女神不受游戏开局设置中【角色性别】与【马娘初见爱慕】的影响，将总是以【女性】和【平常】（完成个人成就后为【爱欲】）加入游戏
-    * 三女神永不妒忌
+  * 初始状态下，可以通过特雷森学园的三女神像与三女神互动，花费声望提高声望和马币获取速度、提高属性上限、恢复健康（对剧情状态如腿伤等无效）等
+  * 通过与三女神的互动，可以逐渐拉近和三女神的关系
+  * 在到达一定程度之后，也许可以请她们亲自加入你的队伍……？
+  * 在队伍中的三女神会对全队角色提供强大的加成效果
+  * 三女神不受游戏开局设置中【角色性别】与【马娘初见爱慕】的影响，将总是以【女性】和【平常】（完成个人成就后为【爱欲】）加入游戏
+  * 三女神永不妒忌
 * 新增桐生院葵和快乐米可的机制和临时口上
-    * 初始状态下，可以在特雷森学园的训练员办公室找到桐生院葵
-    * 和桐生院葵聊天，可以开启她的专属任务：训练快乐米可并取得成绩
-    * 在取得一定成果后，也许可以吸引桐生院葵加入你的队伍
-    * 在队伍中的桐生院葵会加强训练员头衔带来的训练效果加成
-    * 在桐生院葵加入队伍后，快乐米可也会留在队伍里，否则会在育成结束后离去
-    * 如果使用一些卑鄙的手段，也许可以在未取得成绩的情况下也让米可和葵留在队伍中……？
+  * 初始状态下，可以在特雷森学园的训练员办公室找到桐生院葵
+  * 和桐生院葵聊天，可以开启她的专属任务：训练快乐米可并取得成绩
+  * 在取得一定成果后，也许可以吸引桐生院葵加入你的队伍
+  * 在队伍中的桐生院葵会加强训练员头衔带来的训练效果加成
+  * 在桐生院葵加入队伍后，快乐米可也会留在队伍里，否则会在育成结束后离去
+  * 如果使用一些卑鄙的手段，也许可以在未取得成绩的情况下也让米可和葵留在队伍中……？
 * 新增㭴本理子、苦涩糖衣和小小蚕茧的机制和临时口上
-    * 和桐生院葵与快乐米可的机制类似
-    * 在队伍中的㭴本理子会加强训练员头衔带来的训练效果加成
-    * 也可以使用一些卑鄙的手段……但是可能要做好心理准备
-    * 当理事长因出差或其他原因不在学园的时候，㭴本理子会作为代理理事长出现在理事长室，此时无法和她就训练员的工作展开互动
+  * 和桐生院葵与快乐米可的机制类似
+  * 在队伍中的㭴本理子会加强训练员头衔带来的训练效果加成
+  * 也可以使用一些卑鄙的手段……但是可能要做好心理准备
+  * 当理事长因出差或其他原因不在学园的时候，㭴本理子会作为代理理事长出现在理事长室，此时无法和她就训练员的工作展开互动
 * 新增乙名史记者的机制和临时口上
-    * 乙名史记者会在第一次参赛后在赛场相遇，第二年开始的1月第四周结束时会主持URA颁奖典礼
-    * 在重赏比赛中获取好成绩、赢得赛事相关头衔、赢得URA年度大奖可以拉近与乙名史记者的关系
-    * 达到一定程度后，也许可以邀请她成为你们队伍的专访记者……？
-    * 在队伍中的乙名史记者会提高声望的获取量，降低声望的损失量
-    * 选择较高的【马娘初见爱慕】或完成乙名史记者的个人成就最多能使乙名史记者以【朦胧】爱慕加入游戏
+  * 乙名史记者会在第一次参赛后在赛场相遇，第二年开始的1月第四周结束时会主持URA颁奖典礼
+  * 在重赏比赛中获取好成绩、赢得赛事相关头衔、赢得URA年度大奖可以拉近与乙名史记者的关系
+  * 达到一定程度后，也许可以邀请她成为你们队伍的专访记者……？
+  * 在队伍中的乙名史记者会提高声望的获取量，降低声望的损失量
+  * 选择较高的【马娘初见爱慕】或完成乙名史记者的个人成就最多能使乙名史记者以【朦胧】爱慕加入游戏
 * 新增光辉致意的机制和临时口上
-    * 光辉致意会在第一年的10月底出现，告知URA已批准在每年的部分随机赛事中开设大舞台
-    * 大舞台赛事的有更高的声望奖励，每年轮换，参与大舞台赛事也可以拉近与光辉致意的关系
-    * 随时间推移，会有更多赛事加入到大舞台赛事的轮换中
-    * 与光辉致意的关系达到一定程度后，也许可以邀请她加入队伍……？
-    * 光辉致意及其直接后代能从大舞台赛事中获取更多的声望
-    * 选择较高的【马娘初见爱慕】或完成光辉致意的个人成就最多能使光辉致意以【朦胧】爱慕加入游戏
+  * 光辉致意会在第一年的10月底出现，告知URA已批准在每年的部分随机赛事中开设大舞台
+  * 大舞台赛事的有更高的声望奖励，每年轮换，参与大舞台赛事也可以拉近与光辉致意的关系
+  * 随时间推移，会有更多赛事加入到大舞台赛事的轮换中
+  * 与光辉致意的关系达到一定程度后，也许可以邀请她加入队伍……？
+  * 光辉致意及其直接后代能从大舞台赛事中获取更多的声望
+  * 选择较高的【马娘初见爱慕】或完成光辉致意的个人成就最多能使光辉致意以【朦胧】爱慕加入游戏
 * 新增佐岳五月的机制和临时口上
-    * 佐岳五月会在第一年4月第一周和理事长一同出现，主要负责海外远征的辅助工作
-    * 在海外远征，尤其是凯旋门赏中取得成绩，可以拉近与佐岳五月的关系
-    * 关系到达一定程度后，也许可以得知她的秘密并邀请她加入队伍……？
-    * 在队伍中的佐岳五月会降低海外远征带来的各种负面影响
-    * 选择较高的【马娘初见爱慕】或完成佐岳五月的个人成就最多能使佐岳五月以【暧昧】爱慕加入游戏
+  * 佐岳五月会在第一年4月第一周和理事长一同出现，主要负责海外远征的辅助工作
+  * 在海外远征，尤其是凯旋门赏中取得成绩，可以拉近与佐岳五月的关系
+  * 关系到达一定程度后，也许可以得知她的秘密并邀请她加入队伍……？
+  * 在队伍中的佐岳五月会降低海外远征带来的各种负面影响
+  * 选择较高的【马娘初见爱慕】或完成佐岳五月的个人成就最多能使佐岳五月以【暧昧】爱慕加入游戏
 * 润色以下角色口上并合并：
-    * 爱丽数码
-    * 米浴
-    * 奇锐骏
+  * 爱丽数码
+  * 米浴
+  * 奇锐骏
 * 补充了以下角色的状态描述和小纸条
-    * 爱丽速子
+  * 爱丽速子
 * 增加了以下角色的育成目标和专属称号
-    * 神鹰
-    * 樱花进王
+  * 神鹰
+  * 樱花进王
 * 增加了美国三冠赛事（肯塔基德比、普瑞克尼斯锦标赛、贝蒙锦标）与相应成就（美国梦、无暇美国梦）
 * 增加了赛事头衔（三冠、三宝冠、极限六冠、泥地三冠、美三冠）的声望和好感度奖励（对理事长和秘书）
 * 增加了游戏选项 · 角色对性技的学习：关闭后角色将不会在过回合时自动学习性技能
@@ -1406,21 +1502,25 @@ _2024/3/1_
 v0.51的bug修复版，可以和v0.5的资源包一起使用，兼容v0.5的存档
 
 ### Changed
+
 * 现在所有角色的体力和精力都会在过回合时恢复
 * 增加了一个按钮用于切换互动角色指示器中互动角色的头像和半身像
 
 ### Fixed
+
 * 修正了3p条件，现在与床伴关系好的马娘不会无条件加入了
 * 修复了色色商店中清除刻印时因获得刻印而导致的bug
 * 修复了调教中获得主导权的角色在特定条件下只会休息的bug
 * 修复了远征开始检查中马娘玩家未注册比赛而导致的bug
 
 ## EraUma v0.51
+
 _2024/3/1_
 
 v0.5的bug修复版，可以和v0.5的资源包一起使用，兼容v0.5的存档
 
 ### Fixed
+
 * 修复了一个马娘玩家无法前往香港参加英里以上距离的浪琴国际赛事的bug
 * 修复了商店界面的一个显示bug
 * 修复了一个玩家在请求和秋川弥生上床时却在和自己做爱的bug
@@ -1428,6 +1528,7 @@ v0.5的bug修复版，可以和v0.5的资源包一起使用，兼容v0.5的存�
 * 重命名比赛数据文件，使其与race-const.js中require的文件名相匹配，以支持在linux下的正常游玩
 
 ## [EraUma v0.5](https://gitgud.io/umaera/erauma/-/releases/v0.5)
+
 _2024/2/29_
 
 EraUma v0.5，适配 [EraElectron v1.1.0 (zero)](https://gitgud.io/umaera/engine/era-electron/-/releases/v1.1.1) 版本
@@ -1435,6 +1536,7 @@ EraUma v0.5，适配 [EraElectron v1.1.0 (zero)](https://gitgud.io/umaera/engine
 自v0.5版本起将采用era游戏的内置版本号，低于最低支持版本生成的存档将无法打开并伴随警告
 
 ### Added
+
 * 增加新地点，理事长办公室，允许玩家前往理事长办公室（必然独自）和秋川弥生理事长聊天互动
 * 增加两个特殊角色，秋川弥生会出现在理事长办公室，骏川缰绳会出现在学园大门（暂无互动）
 * 增加超得机制：现在可以前往理事长办公室使用声望值换取固定招募马娘的机会
@@ -1447,6 +1549,7 @@ EraUma v0.5，适配 [EraElectron v1.1.0 (zero)](https://gitgud.io/umaera/engine
 * 在游戏标题界面增加免责声明和制作鸣谢信息
 
 ### Changed
+
 * 更新压力值机制，在部分难度下马娘获得或失去debuff时增减压力
 * 更新伤病机制，在部分难度下马娘会因为训练失败而受伤
 * 现在当玩家选择将角色带回家做爱/同意角色在回合结束时的求爱时，其他也通过求爱检定和好感度检定的角色也会要求加入（同拒绝求爱时若马娘大成功则逆强奸，拒绝加入时如果马娘大成功则会强行加入）
@@ -1455,17 +1558,20 @@ EraUma v0.5，适配 [EraElectron v1.1.0 (zero)](https://gitgud.io/umaera/engine
 * 更新新马娘数据、马娘立绘和调教界面背景
 
 ### Fixed
+
 * 修正了马娘的满足函数，修复了调教中马娘会一直做到体力耗尽为止的bug
 * 其他优化项目和bug修复
 
 因为加了新道具，变量位置变了，所以需要重开档
 
 ## [EraUma v0.4.8](https://gitgud.io/umaera/erauma/-/releases/v0.4.8)
+
 _2024/2/15_
 
 因为某资源网站莫名其妙给安排了个0.4.7版本（莫非是把压缩包后缀名的.7z理解成.7了？），该版本只能叫0.4.8了，适配ere引擎的[v1.0.2-mebius版本](https://gitgud.io/umaera/engine/era-electron/-/releases/v1.0.2-mebius)
 
 ### Added
+
 * 新增远征系统以及与之相关的数个状态和技能
 * 启用压力系统
 * 翻译实现金星公园的口上，现在她将在玩家完成一次黛安娜锦标或者凯旋门的胜利+声望达到中坚（1000）以上后出现在训练场（同时完成其育成目标和称号要求、获得成就后，新存档她将直接出现在训练场）
@@ -1473,10 +1579,12 @@ _2024/2/15_
 * 更新立绘资源
 
 ### Changed
+
 * 修改了强制BE的作用机制，将其与其他BE的触发机制分离
 * 调整道具价格
 
 ### Fixed
+
 * 修复若干问题
 
 因为变量位置变了，旧存档不继承
@@ -1484,11 +1592,13 @@ _2024/2/15_
 顺便，本版本只是为了测试新的打包方式，所以不使用0.5而是0.4.8
 
 ## EraUma v0.4
+
 _2024/2/1_
 
 ~~已散佚~~
 
 ## EraUma v0.3
+
 _2024/1/30_
 
 ~~已散佚~~

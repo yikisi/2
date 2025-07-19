@@ -1,6 +1,6 @@
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
-const EroNormalOrgy = require('#/event/ero/common-lines/normal/orgy');
+const EroNormalOrgy = require('#/event/ero/common/normal/orgy');
 
 const { get_random_entry } = require('#/utils/list-utils');
 

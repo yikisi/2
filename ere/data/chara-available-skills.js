@@ -1,14 +1,21 @@
 const { get, set } = require('#/era-electron');
 
-class CharaAvailableSkills {
-  /** @type {number[]} */
-  obj;
+const dict = {};
 
-  constructor(chara_id) {
-    this.id = chara_id;
-    this.obj =
-      get(`skill:${this.id}:可习得技能`) ||
-      set(`skill:${this.id}:可习得技能`, []);
+class CharaAvailableSkills {
+  /**
+   * @param {number} cid
+   * @returns {CharaAvailableSkills}
+   */
+  static get(cid) {
+    return dict[cid] || (dict[cid] = new CharaAvailableSkills(cid));
+  }
+
+  /** @type {number} */
+  #id;
+
+  constructor(cid) {
+    this.#id = cid;
   }
 
   /**
@@ -16,29 +23,33 @@ class CharaAvailableSkills {
    * @returns {number[]}
    */
   add(...skill_id) {
-    this.obj.push(...skill_id);
+    const list = this.get();
+    list.push(...skill_id);
     set(
-      `skill:${this.id}:可习得技能`,
-      this.obj.filter((v, i, a) => i === a.indexOf(v)),
+      `skill:${this.#id}:可习得技能`,
+      list.filter((v, i, a) => i === a.indexOf(v)),
     );
-    return this.obj;
+    return list;
   }
 
   clear() {
-    this.obj = set(`skill:${this.id}:可习得技能`, []);
+    set(`skill:${this.#id}:可习得技能`, []);
     return this;
-  }
-
-  remove(...skill_id) {
-    this.obj = set(
-      `skill:${this.id}:可习得技能`,
-      this.obj.filter((e) => e && skill_id.indexOf(e) === -1),
-    );
   }
 
   /** @returns {number[]} */
   get() {
-    return this.obj;
+    return (
+      get(`skill:${this.#id}:可习得技能`) ||
+      set(`skill:${this.#id}:可习得技能`, [])
+    );
+  }
+
+  remove(...skill_id) {
+    set(
+      `skill:${this.#id}:可习得技能`,
+      this.get().filter((e) => e && skill_id.indexOf(e) === -1),
+    );
   }
 }
 

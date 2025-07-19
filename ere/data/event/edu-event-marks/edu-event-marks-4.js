@@ -2,6 +2,7 @@ const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 
 class MaEduMarks extends EduEventMarks {
   //丸善斯基初次登场
+  after_recruit;
   beginning;
   // 街头的潮流推手
   current_trend;
@@ -51,7 +52,6 @@ class MaEduMarks extends EduEventMarks {
   constructor() {
     super(4);
     EduEventMarks.register_marks(this);
-    console.log(this.beginning);
   }
 }
 

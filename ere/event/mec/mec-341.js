@@ -10,8 +10,8 @@ const recruit_flags = require('#/data/event/recruit-flags');
 
 module.exports = class extends CustomizedMec {
   init_love() {
-    if (sys_personal_achievement.get(341)) {
-      set('love:341', 50);
+    if (sys_personal_achievement.get(this.id) > 0) {
+      set(`love:${this.id}`, 40);
     }
   }
 
@@ -21,34 +21,41 @@ module.exports = class extends CustomizedMec {
 
   get_ero_check(action) {
     if (new GodolphinLifeMarks().love === 2) {
-      return Math.min(40, 90 - get('love:341'));
+      return Math.min(40, 90 - get(`love:${this.id}`));
     }
     return super.get_ero_check(action);
   }
 
   get_love_limit() {
-    return get(`cflag:${this.id}:招募状态`) !== recruit_flags.yes ? 55 : 0;
+    if (!new GodolphinLifeMarks().love) {
+      return 50;
+    } else if (get(`cflag:${this.id}:招募状态`) !== recruit_flags.yes) {
+      return 55;
+    } else {
+      return 0;
+    }
   }
 
   get_talents() {
-    const title_check = new GodolphinLifeMarks().buff;
+    let { buff } = new GodolphinLifeMarks();
+    buff += 1;
     return [
       {
         color: get_chara_color(this.id),
         content: '爱',
-        fontWeight: title_check ? 'bold' : '',
-        title: `队伍成员智力与技能点数训练效果+${title_check ? 100 : 50}%。`,
+        fontWeight: buff > 1 ? 'bold' : undefined,
+        title: `队伍成员智力训练效果+${50 * buff}%，从训练中获得的技能点数+${25 * buff}%。`,
       },
     ];
   }
 
   set_callname() {
-    set('callname:341:0', get('callname:0:-1') + '君');
+    set(`callname:${this.id}:0`, get('callname:0:-1') + '君');
   }
 
   set_foreign_debuff() {}
 
   set_my_sex() {
-    return get('flag:角色性别') === 99 ? 10 : set('cflag:341:性别', 0);
+    return set(`cflag:${this.id}:性别`, get('flag:角色性别') === 99 ? 10 : 0);
   }
 };

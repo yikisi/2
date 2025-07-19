@@ -25,24 +25,24 @@ function sys_check_titles_after_race(team_list, race, best_rank, mvp_id) {
       era.get('cflag:0:妊娠回合计时') === 0 &&
       LifeEventMarks.get_marks(0).sperm > 0;
   let hentai_flag = false;
-  team_list.forEach(({ index_chara: id }) => {
-    new_title_dict[id] = [];
-    const pregnant_stage = era.get(`cflag:${id}:妊娠阶段`);
+  team_list.forEach(({ index_chara: cid }) => {
+    new_title_dict[cid] = [];
+    const pregnant_stage = era.get(`cflag:${cid}:妊娠阶段`);
     if (pregnant_stage >> pregnant_stage_enum.late > 0) {
       hentai_flag = true;
     }
     if (pregnant_stage >> pregnant_stage_enum.embryo > 0) {
-      new_title_dict[id].push({ n: '亲子关系紧张', c: buff_colors[2] });
+      new_title_dict[cid].push({ n: '亲子关系紧张', c: buff_colors[2] });
     }
     if (
-      era.get(`cflag:${id}:腹中精液`) > 0 &&
-      era.get(`cflag:${id}:子宫内精液`) > 0 &&
-      era.get(`cflag:${id}:肠道内精液`) > 0
+      era.get(`cflag:${cid}:腹中精液`) > 0 &&
+      era.get(`cflag:${cid}:子宫内精液`) > 0 &&
+      era.get(`cflag:${cid}:肠道内精液`) > 0
     ) {
-      new_title_dict[id].push({ n: '白浊浸染', c: buff_colors[2] });
+      new_title_dict[cid].push({ n: '白浊浸染', c: buff_colors[2] });
     }
-    if (id > 0 && Number(pregnant_check) === id) {
-      new_title_dict[id].push({ n: '父亲力量', c: buff_colors[2] });
+    if (cid > 0 && Number(pregnant_check) === cid) {
+      new_title_dict[cid].push({ n: '父亲力量', c: buff_colors[2] });
     }
   });
   if (best_rank === 1) {
@@ -55,36 +55,38 @@ function sys_check_titles_after_race(team_list, race, best_rank, mvp_id) {
             cup_1 = 0,
             cup_2 = 0,
             cup_3 = 0;
-          new RaceHistory(mvp_id).get_entries().forEach((e) => {
-            if (e.rank === 1) {
-              switch (e.race) {
-                case race_enum.sats_sho:
-                  cup_1++;
-                  break;
-                case race_enum.oka_sho:
-                  cup_1 += 2;
-                  break;
-                case race_enum.toky_yus:
-                  cup_2++;
-                  break;
-                case race_enum.yush_him:
-                  cup_2 += 2;
-                  break;
-                case race_enum.kiku_sho:
-                  cup_3++;
-                  break;
-                case race_enum.shuk_sho:
-                  cup_3 += 2;
+          RaceHistory.get(mvp_id)
+            .get_entries()
+            .forEach((e) => {
+              if (e.rank === 1) {
+                switch (e.race) {
+                  case race_enum.sats_sho:
+                    cup_1++;
+                    break;
+                  case race_enum.oka_sho:
+                    cup_1 += 2;
+                    break;
+                  case race_enum.toky_yus:
+                    cup_2++;
+                    break;
+                  case race_enum.yush_him:
+                    cup_2 += 2;
+                    break;
+                  case race_enum.kiku_sho:
+                    cup_3++;
+                    break;
+                  case race_enum.shuk_sho:
+                    cup_3 += 2;
+                }
+              } else {
+                if (e.weeks < edu_weeks_kiku_sho) {
+                  invincible_1 = false;
+                }
+                if (e.weeks < edu_weeks_shuk_sho) {
+                  invincible_2 = false;
+                }
               }
-            } else {
-              if (e.weeks < edu_weeks_kiku_sho) {
-                invincible_1 = false;
-              }
-              if (e.weeks < edu_weeks_shuk_sho) {
-                invincible_2 = false;
-              }
-            }
-          });
+            });
           if (cup_1 & cup_2 & cup_3 & 0b1) {
             new_title_dict[mvp_id].push({
               n: '三冠',
@@ -142,21 +144,23 @@ function sys_check_titles_after_race(team_list, race, best_rank, mvp_id) {
         {
           let invincible_4 = true,
             cup = 0;
-          new RaceHistory(mvp_id).get_entries().forEach((e) => {
-            if (e.rank === 1) {
-              switch (e.race) {
-                case race_enum.hane_hai:
-                  cup++;
-                  break;
-                case race_enum.toky_der:
-                  cup++;
+          RaceHistory.get(mvp_id)
+            .get_entries()
+            .forEach((e) => {
+              if (e.rank === 1) {
+                switch (e.race) {
+                  case race_enum.hane_hai:
+                    cup++;
+                    break;
+                  case race_enum.toky_der:
+                    cup++;
+                }
+              } else {
+                if (e.weeks < edu_weeks_japa_dir) {
+                  invincible_4 = false;
+                }
               }
-            } else {
-              if (e.weeks < edu_weeks_japa_dir) {
-                invincible_4 = false;
-              }
-            }
-          });
+            });
           if (cup === 2) {
             new_title_dict[mvp_id].push({
               n: '泥地三冠',
@@ -173,21 +177,23 @@ function sys_check_titles_after_race(team_list, race, best_rank, mvp_id) {
       case race_enum.belm_sta: {
         let invincible = true,
           cup = 0;
-        new RaceHistory(mvp_id).get_entries().forEach((e) => {
-          if (e.rank === 1) {
-            switch (e.race) {
-              case race_enum.kent_der:
-                cup++;
-                break;
-              case race_enum.prea_sta:
-                cup++;
+        RaceHistory.get(mvp_id)
+          .get_entries()
+          .forEach((e) => {
+            if (e.rank === 1) {
+              switch (e.race) {
+                case race_enum.kent_der:
+                  cup++;
+                  break;
+                case race_enum.prea_sta:
+                  cup++;
+              }
+            } else {
+              if (e.weeks < edu_weeks_belm_sta) {
+                invincible = false;
+              }
             }
-          } else {
-            if (e.weeks < edu_weeks_belm_sta) {
-              invincible = false;
-            }
-          }
-        });
+          });
         if (cup === 2) {
           new_title_dict[mvp_id].push({
             n: '美国梦',

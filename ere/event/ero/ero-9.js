@@ -25,7 +25,7 @@ module.exports = class extends CustomizedEro {
       !era.get('cflag:9:性别') &&
       era.get('love:9') >= 50 &&
       era.get('status:0:发情') &&
-      era.get('exp:9:性爱次数') === 1 &&
+      !era.get('exp:9:性爱次数') &&
       !era.get('status:9:弗隆K') &&
       !era.get('status:9:弗隆P') &&
       (era.get('item:弗隆K') || era.get('item:弗隆P'))
@@ -244,7 +244,11 @@ module.exports = class extends CustomizedEro {
       const default_filter = new Array(5).fill(false);
       let flag_rape = true;
       while (flag_rape) {
-        await handle_ero_act(ero_hooks.relax, default_filter, false);
+        await handle_ero_act(
+          !era.get('tflag:主导权') ? ero_hooks.switch : ero_hooks.relax,
+          default_filter,
+          false,
+        );
         if (era.get('tcvar:9:脱力') || era.get('tcvar:9:逃跑')) {
           flag_rape = false;
         }
@@ -255,7 +259,8 @@ module.exports = class extends CustomizedEro {
   filter_in_rape() {
     if (era.get('tcvar:9:TS大和T') || era.get('flag:惩戒力度') >= 2) {
       return (e) =>
-        e >= ero_hooks.missionary && e <= ero_hooks.stimulate_g_spot;
+        (e >= ero_hooks.missionary && e <= ero_hooks.stimulate_g_spot) ||
+        (e >= ero_hooks.double_fuck && e <= ero_hooks.spit_roast);
     }
     return super.filter_in_rape();
   }

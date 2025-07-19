@@ -1,6 +1,9 @@
 const { readFileSync, writeFileSync } = require('fs');
+const { join } = require('path');
 
-const named_contestants = require('../../ere/data/race/contestants/named.json');
+const named_contestants = require(
+  join(__dirname, '../../ere/data/race/contestants/named.json'),
+);
 
 const cup_dict = {
   AA: 5,
@@ -9,7 +12,10 @@ new Array(26).fill(0).forEach((_, i) => {
   cup_dict[String.fromCharCode(65 + i)] = 10 + Math.ceil(2.5 * i);
 });
 
-const lines = readFileSync('../../common/uma/uma-data.csv', 'utf-8')
+const lines = readFileSync(
+    join(__dirname, '../../common/uma/uma-data.csv'),
+    'utf-8',
+  )
     .replace(/^\uFEFF/, '')
     .split('\n')
     .filter((e) => e)
@@ -174,6 +180,9 @@ lines
           buffer += `${header[i].replace('|', ',')},${col_value}\n`;
         }
       });
-      writeFileSync(`../../csv/Chara/${file_name}`, buffer.replace(/\s+$/, ''));
+      writeFileSync(
+        join(__dirname, `../../csv/Chara/${file_name}`),
+        buffer.replace(/\s+$/, ''),
+      );
     }
   });

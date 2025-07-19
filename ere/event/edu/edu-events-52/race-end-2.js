@@ -154,7 +154,7 @@ module.exports = (handlers) => {
         '稍微重新挂起平常的笑容为止。',
       ]);
     }
-    const race_history = new RaceHistory(52);
+    const race_history = RaceHistory.get(52);
     const g1_reward = Math.min(
       ...race_history
         .get_values()
@@ -718,7 +718,7 @@ module.exports = (handlers) => {
     await era.printAndWait(
       '商店街的人D「其实，我倒是有个想法的，就像我们以前为了复兴商店街做的那样……」',
     );
-    if (new RaceHistory(52).get_result(47 + 48)?.race === race_enum.arim_kin) {
+    if (RaceHistory.get(52).get_result(47 + 48)?.race === race_enum.arim_kin) {
       await era.printAndWait(
         '商店街的人C「所谓人多力量大对吧？不过乌拉拉已经被选入过一次了，还需要那样吗？」',
       );

@@ -432,7 +432,7 @@ module.exports = (handlers) => {
       }。`,
     );
     await era.printAndWait(
-      `奖励还是惩罚……${love < 75 ? `${me.name} 望向角落的扫具柜` : ''}。`,
+      `奖励还是惩罚……${love < 75 ? `${me.name} 望向角落的扫具柜。` : ''}`,
     );
     await era.printAndWait('那么，该如何抉择呢？');
 
@@ -850,7 +850,7 @@ module.exports = (handlers) => {
         `${me.name} 没有回答，只是顺从的跪伏在地，进行今天的第一次服侍。`,
       );
 
-      era.set('palam:32:阴茎快感', era.get('tcvar:32:阴茎快感上限'));
+      set_palam_to_max(32, part_enum.penis);
       await quick_make_love(
         new EroParticipant(32, part_enum.penis),
         new EroParticipant(0, part_enum.virgin),

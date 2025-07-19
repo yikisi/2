@@ -167,7 +167,7 @@ handlers[event_hooks.recruit] = async () => {
     flag: 0,
     special: temp,
   });
-  new EventMarks(0).add(event_hooks.out_start);
+  EventMarks.get(0).add(event_hooks.out_start);
   add_event(event_hooks.out_start, new EventObject(85, cb_enum.recruit));
   return true;
 };
@@ -526,7 +526,7 @@ handlers[event_hooks.out_start] = async (event_object) => {
         `这一晚，${me.name} 感觉内心有什么东西变了。一定是 ${ruby.name} 的话语，让自己产生了变化吧。`,
       );
       await era.printAndWait('（暂时没有因选拔测试而外出的必要了）');
-      new EventMarks(0).sub(event_hooks.out_start);
+      EventMarks.get(0).sub(event_hooks.out_start);
   }
   return true;
 };

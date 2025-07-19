@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '人气第四以下时能力更容易发挥',
   20030,
   2,
-  UmaSkill.rarity_enum.normal,
   0,
   174,
   [() => true, () => true],

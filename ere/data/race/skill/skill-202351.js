@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛序盘自己保持领先时，使跟在后方的赛马娘速度下降',
   20235,
   2,
-  UmaSkill.rarity_enum.gold,
   25,
   461,
   [() => true, () => true],

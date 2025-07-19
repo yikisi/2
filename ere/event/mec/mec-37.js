@@ -53,16 +53,16 @@ module.exports = class extends CustomizedMec {
     switch (era.get('flag:当前赛事')) {
       case race_enum.japa_cup:
         if (era.get('cflag:37:育成回合计时') < 96) {
-          return [1, 47].map((e) => new LegendUmaSelector(e, 1.2));
+          return [1, 47].map((e) => new LegendUmaSelector(e, 1.1));
         }
         break;
       case race_enum.arim_kin:
         if (era.get('cflag:37:育成回合计时') < 96) {
-          return [1, 5, 18, 47].map((e) => new LegendUmaSelector(e, 1.1));
+          return [1, 5, 18, 47].map((e) => new LegendUmaSelector(e, 1.05));
         }
         break;
       case race_enum.tenn_spr:
-        return [new LegendUmaSelector(25, 1.1)];
+        return [new LegendUmaSelector(25, 1.05)];
     }
     return super.get_race_contestants(info);
   }

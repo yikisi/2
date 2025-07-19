@@ -12,7 +12,7 @@ const { race_enum } = require('#/data/race/race-const');
 
 module.exports = class extends CustomizedCheck {
   check_and_get_titles(aim_check) {
-    const races = new RaceHistory(this.id).get(),
+    const races = RaceHistory.get(this.id).get(),
       ret = [];
     if (
       check_aim_race(races, race_enum.asah_sta, 0, 1) &&
@@ -54,7 +54,7 @@ module.exports = class extends CustomizedCheck {
   }
 
   get_edu_aims() {
-    const races = new RaceHistory(this.id).get(),
+    const races = RaceHistory.get(this.id).get(),
       ret = [];
     ret.push(check_aim_and_get_entry(races, race_enum.begin_race));
     ret.push(check_aim_and_get_entry(races, race_enum.asah_sta, 0, 5));

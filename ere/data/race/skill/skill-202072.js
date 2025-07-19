@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '刚进入比赛中盘时若位于队伍中间会略微减慢速度稍微回复持久力',
   20207,
   1,
-  UmaSkill.rarity_enum.normal,
   8,
   217,
   [() => true, () => true],

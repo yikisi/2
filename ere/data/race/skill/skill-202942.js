@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛中盘若位于后方，则令前方赛马娘的速度极小幅下降，自身的速度稍微提升',
   20294,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   217,
   [() => true, () => true],

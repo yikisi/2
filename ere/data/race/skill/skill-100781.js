@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '赛程前半段压低节奏，最终弯道后半段若位于前方则可长时间持续稍微提高加速度若处于第2名则效果增加',
   10078,
   1,
-  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [

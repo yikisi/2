@@ -658,7 +658,7 @@ module.exports = (handlers) => {
     ]);
     await urara.say_and_wait('大家——接下来我也会努力奔跑，继续赢下去哦——！');
     await era.printAndWait('观众们「哦哦哦哦哦——！！」');
-    if (new RaceHistory(52).get_result(47 + 48)?.race === race_enum.arim_kin) {
+    if (RaceHistory.get(52).get_result(47 + 48)?.race === race_enum.arim_kin) {
       await era.printAndWait([
         '如果可以借此继续增加粉丝数，那距离超越有马的梦想也能更近一步，',
         urara.get_colored_name(),

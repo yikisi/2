@@ -40,7 +40,7 @@ function filter_event_object(condition) {
       (queue[stage_id] = (queue[stage_id] || []).filter((e) => {
         const ret = condition(e);
         if (!ret) {
-          new EventMarks(e.chara_id).sub(stage_id);
+          EventMarks.get(e.chara_id).sub(stage_id);
           ret_map[e.chara_id] = (ret_map[e.chara_id] || 0) + 1;
         }
         return ret;
@@ -70,7 +70,7 @@ module.exports = {
       queue[stage] = [];
     }
     (temp_queue[stage] || queue[stage]).push(event_object);
-    new EventMarks(event_object.chara_id).add(stage);
+    EventMarks.get(event_object.chara_id).add(stage);
   },
   cb_enum,
   get() {
@@ -86,7 +86,7 @@ module.exports = {
     if (queue && queue[stage]) {
       const index = queue[stage].findIndex((e) => e.chara_id === chara_id);
       if (index >= 0) {
-        new EventMarks(chara_id).sub(stage);
+        EventMarks.get(chara_id).sub(stage);
         return queue[stage].splice(index, 1)[0];
       }
     }
@@ -104,7 +104,7 @@ module.exports = {
           ? 0
           : get_random_value(0, queue[stage].length - 1);
       const event_object = queue[stage].splice(id, 1)[0];
-      new EventMarks(event_object.chara_id).sub(stage);
+      EventMarks.get(event_object.chara_id).sub(stage);
       return event_object;
     }
   },

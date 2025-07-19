@@ -1,35 +1,37 @@
 const { get, set } = require('#/era-electron');
 
 class YandereList {
-  obj;
-
-  constructor() {
-    this.obj = get('flag:病娇列表') || set('flag:病娇列表', []);
+  /** @returns {number[]} */
+  get #obj() {
+    return get('flag:病娇列表') || set('flag:病娇列表', []);
   }
 
-  /** @param {number} chara_id */
-  push(chara_id) {
-    const yandere = get(`talent:${chara_id}:病娇`);
-    if (!yandere && get(`love:${chara_id}`) >= 50) {
-      set(`status:${chara_id}:爱意克制`, 1);
+  /** @param {number} cid */
+  push(cid) {
+    const yandere = get(`talent:${cid}:病娇`);
+    if (!yandere && get(`love:${cid}`) >= 50) {
+      set(`status:${cid}:爱意克制`, 1);
     }
-    set(`talent:${chara_id}:病娇`, yandere || 1);
-    this.obj.push(chara_id);
-    this.obj = set(
+    set(`talent:${cid}:病娇`, yandere || 1);
+    const obj = this.#obj;
+    obj.push(cid);
+    set(
       'flag:病娇列表',
-      this.obj.filter((e, i, l) => i === l.indexOf(e)),
+      obj.filter((e, i, l) => i === l.indexOf(e)),
     );
   }
 
   /** @returns {number[]} */
   get() {
-    return this.obj;
+    return this.#obj;
   }
 
   /** @param {number[]} arr */
   set(arr) {
-    this.obj = set('flag:病娇列表', arr);
+    set('flag:病娇列表', arr);
   }
 }
 
-module.exports = YandereList;
+const yandere_list = new YandereList();
+
+module.exports = yandere_list;

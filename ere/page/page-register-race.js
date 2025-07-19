@@ -9,13 +9,13 @@ const sys_filter_chara = require('#/system/sys-filter-chara');
 
 const { get_custom_check } = require('#/event/check/check-factory');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
-const GameGuides = require('#/event/others/game-guides');
+const game_guides = require('#/event/others/game-guides');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { get_chara_color } = require('#/data/chara-colors');
 const { adaptability_colors, el_danger_color } = require('#/data/color-const');
-const GrandLives = require('#/data/event/grand-lives');
+const grand_lives = require('#/data/event/grand-lives');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_adaptability_rank } = require('#/data/info-generator');
 const { expedition_weeks } = require('#/data/move-const');
@@ -86,7 +86,7 @@ function generate_race_dict(
   registered_race,
 ) {
   const dict = {};
-  if (chara_id && !new RaceHistory(chara_id).check_begin()) {
+  if (chara_id && !RaceHistory.get(chara_id).check_begin()) {
     if (registered_race.race === race_enum.begin_race) {
       dict[registered_race.week] = [race_enum.begin_race];
     } else if (cur_round + 1 < year_begin + 20) {
@@ -116,7 +116,7 @@ function generate_race_dict(
 }
 
 async function reg_race_page() {
-  await new GameGuides().office_register();
+  await game_guides.office_register();
   const cur_round = era.get('flag:当前回合数') - 1,
     begin_round = cur_round - (cur_round % 4),
     team_list = sys_filter_chara('cflag', '招募状态', recruit_flags.yes).filter(
@@ -149,7 +149,6 @@ async function reg_race_page() {
       registered_race,
     ),
     base_disabled_check = check_register_disabled(chara_id, in_foreign),
-    grand_lives = new GrandLives(),
     status_list = sys_get_status(chara_id);
 
   while (flag_race_reg) {
@@ -192,28 +191,27 @@ async function reg_race_page() {
           : []
         ).forEach((e) => {
           const ground = adaptability_names[race_infos[e].ground].substring(
-              0,
-              1,
-            ),
-            distance = adaptability_names[race_infos[e].distance + 2].substring(
-              0,
-              1,
-            ),
-            ag = adaptability_dict[ground],
-            ad = adaptability_dict[distance],
-            is_aim_race = get_custom_check(chara_id).is_aim_race(
-              e,
-              edu_weeks + round - cur_round,
-            ),
-            is_foreign = race_infos[e].track >= track_enum.longchamp,
-            is_grand_live = grand_lives.check(
-              e,
-              Number(round - year_begin >= 48),
-            );
+            0,
+            1,
+          );
+          const distance = adaptability_names[
+            race_infos[e].distance + 2
+          ].substring(0, 1);
+          const ag = adaptability_dict[ground];
+          const ad = adaptability_dict[distance];
+          const is_aim_race = get_custom_check(chara_id).is_aim_race(
+            e,
+            edu_weeks + round - cur_round,
+          );
+          const is_foreign = race_infos[e].track >= track_enum.longchamp;
+          const is_grand_live = grand_lives.check(
+            e,
+            +(round - year_begin >= 48),
+          );
           if (
             e === race_enum.begin_race ||
             registered_race.race === e ||
-            is_aim_race ||
+            is_aim_race !== 0 ||
             !flag_filter_race ||
             ((ag.content === 'S' || ag.content <= 'C') &&
               (ad.content === 'S' || ad.content <= 'C'))
@@ -223,12 +221,13 @@ async function reg_race_page() {
                 accelerator: e,
                 config: {
                   align: 'center',
-                  buttonType: is_aim_race ? 'danger' : 'warning',
+                  buttonType: is_aim_race !== 0 ? 'danger' : 'warning',
                   disabled:
                     base_disabled_check ||
                     (is_foreign &&
                       race_infos[e].date + year_begin - cur_round <=
-                        expedition_weeks),
+                        expedition_weeks) ||
+                    get_custom_mec(chara_id).is_race_disabled(e),
                 },
                 content:
                   race_infos[e].get_colored_name_with_class().content +
@@ -291,7 +290,7 @@ async function reg_race_page() {
               content: [
                 '* ',
                 chara.get_colored_name(),
-                ...(new RaceHistory(chara.id).check_begin()
+                ...(RaceHistory.get(chara.id).check_begin()
                   ? [
                       ' 很关注显示为',
                       { color: el_danger_color, content: '红色' },

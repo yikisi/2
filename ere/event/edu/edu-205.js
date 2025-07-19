@@ -291,7 +291,7 @@ module.exports = class extends CustomizedEdu {
       await era.printAndWait(`为什么自己是 ${vp.name} 的训练员呢？`);
       await era.printAndWait(`${me.name} 不清楚该怎么走下去。`);
       new TreveEduMarks().tea = 0;
-      new EventMarks(0).sub(event_hooks.out_start);
+      EventMarks.get(0).sub(event_hooks.out_start);
       return true;
     }
   }
@@ -395,7 +395,7 @@ module.exports = class extends CustomizedEdu {
       extra_flag.race === race_enum.prix_lat &&
       edu_weeks >= 96 &&
       extra_flag.rank === 1 &&
-      check_aim_race(new RaceHistory(205).get(), race_enum.prix_lat, 1, 1)
+      check_aim_race(RaceHistory.get(205).get(), race_enum.prix_lat, 1, 1)
     ) {
       await print_event_name('迈向巅峰再制胜', vp);
       const montjeu = get_chara_talk(204);

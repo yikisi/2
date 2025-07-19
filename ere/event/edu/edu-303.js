@@ -232,7 +232,9 @@ module.exports = class extends CustomizedEdu {
       recruit_flags.yes,
     ).map((e) => ({
       id: e,
-      history: new RaceHistory(e).get_values().filter((r) => r.year === year),
+      history: RaceHistory.get(e)
+        .get_values()
+        .filter((r) => r.year === year),
     }));
     const g1_list = team_list
       .map((e) => ({

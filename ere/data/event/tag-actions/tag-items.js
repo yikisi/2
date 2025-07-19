@@ -15,7 +15,8 @@ module.exports = (ero_action_names, ero_tagged_hooks) => {
       (chara_id) =>
         !chara_id &&
         era.get('item:润滑液') &&
-        era.get('flag:当前位置') !== location_enum.basement,
+        era.get('flag:当前位置') !== location_enum.basement &&
+        era.get('flag:当前位置') !== location_enum.mejiro,
     ],
     [],
   );
@@ -24,7 +25,9 @@ module.exports = (ero_action_names, ero_tagged_hooks) => {
   ero_tagged_hooks[ero_actions.use_medicine] = new EroHookTag(
     [
       (chara_id) =>
-        !chara_id && era.get('flag:当前位置') !== location_enum.basement,
+        !chara_id &&
+        era.get('flag:当前位置') !== location_enum.basement &&
+        era.get('flag:当前位置') !== location_enum.mejiro,
     ],
     [],
   );
@@ -38,7 +41,8 @@ module.exports = (ero_action_names, ero_tagged_hooks) => {
         era.get('item:避孕套') &&
         !era.get(`tcvar:${chara_id}:避孕套`) &&
         !era.get(`status:${chara_id}:弗隆K`) &&
-        era.get('flag:当前位置') !== location_enum.basement,
+        era.get('flag:当前位置') !== location_enum.basement &&
+        era.get('flag:当前位置') !== location_enum.mejiro,
     ],
     [],
   );
@@ -49,7 +53,8 @@ module.exports = (ero_action_names, ero_tagged_hooks) => {
       (chara_id) =>
         !chara_id &&
         era.get('item:避孕套') &&
-        era.get('flag:当前位置') !== location_enum.basement,
+        era.get('flag:当前位置') !== location_enum.basement &&
+        era.get('flag:当前位置') !== location_enum.mejiro,
     ],
     [
       ero_action_tags.penis,
@@ -64,7 +69,9 @@ module.exports = (ero_action_names, ero_tagged_hooks) => {
     [
       ero_action_tags.sadism,
       (chara_id) =>
-        chara_id > 0 || era.get('flag:当前位置') !== location_enum.basement,
+        chara_id > 0 ||
+        (era.get('flag:当前位置') !== location_enum.basement &&
+          era.get('flag:当前位置') !== location_enum.mejiro),
     ],
     [],
   );
@@ -77,7 +84,11 @@ module.exports = (ero_action_names, ero_tagged_hooks) => {
 
   ero_action_names[ero_actions.ask_use_item] = '乞求使用玩具';
   ero_tagged_hooks[ero_actions.ask_use_item] = new EroHookTag(
-    [ero_action_tags.awake, (chara_id) => !chara_id],
+    [
+      ero_action_tags.awake,
+      (chara_id) =>
+        !chara_id && era.get('flag:当前位置') !== location_enum.mejiro,
+    ],
     [ero_action_tags.awake],
     EroHookTag.condition_type.no,
   );

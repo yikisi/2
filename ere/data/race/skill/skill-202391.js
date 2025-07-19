@@ -3,10 +3,9 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   202391,
   '输出1000%！',
-  '在比赛中盘一开始的地方消耗大量体力，使速度大幅提升',
+  '在比赛中盘一开始的地方消耗大量持久力，使速度大幅提升',
   20239,
   2,
-  UmaSkill.rarity_enum.gold,
   17,
   508,
   [() => true, () => true],

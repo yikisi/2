@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '临近中盘若位于前方，则稍微提升速度',
   20295,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   217,
   [() => true, () => true],

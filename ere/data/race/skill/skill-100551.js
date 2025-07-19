@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛中场附近位于队伍中间且附近有其他赛马娘时，速度提升如果视野内有4人以上的赛马娘则效果增强',
   10055,
   1,
-  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [() => true, () => true],

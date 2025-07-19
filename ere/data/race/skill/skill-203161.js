@@ -3,10 +3,9 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   203161,
   '豪胆无双',
-  '比赛中盘位于前方时，消耗少量体力，速度大幅提升',
+  '比赛中盘位于前方时，消耗少量持久力，速度大幅提升',
   20316,
   2,
-  UmaSkill.rarity_enum.gold,
   17,
   508,
   [() => true, () => true],

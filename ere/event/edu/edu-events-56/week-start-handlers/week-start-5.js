@@ -476,6 +476,7 @@ module.exports = (handlers) => {
       await typing('这孩子就拜托你了，' + kitaru.sex + '的命中注定之人');
       era.set('status:56:稳定', 1);
       await era.printAndWait([kitaru.get_colored_name(), ' 的身体微微发热。']);
+      kami.name = undefined;
       flags.wait_flag = get_attr_and_print_in_event(56, [3, 3, 3, 3, 3], 0);
     } else {
       await era.printAndWait([

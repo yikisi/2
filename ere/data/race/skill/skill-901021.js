@@ -3,10 +3,9 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   901021,
   '活泼乐章・飞驰',
-  '比赛前半段在队伍中间且前方或后方长时间有赛马娘紧贴，则回复极少量体力之后在比赛中段附近的直线处短时间内速度少量提升',
+  '比赛前半段在队伍中间且前方或后方长时间有赛马娘紧贴，则回复极少量持久力之后在比赛中段附近的直线处短时间内速度少量提升',
   90102,
   1,
-  UmaSkill.rarity_enum.normal,
   8,
   180,
   [() => true, () => true],

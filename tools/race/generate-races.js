@@ -158,11 +158,16 @@ csv.forEach((e) => {
   );
 });
 
-execSync('node generate-race-params.js');
-
-execSync(
-  'npx eslint --fix ./ere/data/race/g1 ./ere/data/race/g2 ./ere/data/race/g3 ./ere/data/race/op ./ere/data/race/race-const.js ./ere/data/race/race-params.js ./ere/data/race/race-attr-bonus.js',
-  {
-    cwd: join(process.cwd(), '../..'),
-  },
-);
+try {
+  process.stdout.write(execSync('node generate-race-params.js'));
+  process.stdout.write(
+    execSync(
+      'npx eslint --fix ./ere/data/race/g1 ./ere/data/race/g2 ./ere/data/race/g3 ./ere/data/race/op ./ere/data/race/race-const.js ./ere/data/race/race-params.js ./ere/data/race/race-attr-bonus.js',
+      {
+        cwd: join(process.cwd(), '../..'),
+      },
+    ),
+  );
+} catch (e) {
+  process.stdout.write(e.stdout);
+}

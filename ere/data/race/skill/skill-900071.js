@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '从比赛中段进行长距离冲刺，速度会一点点加快',
   90007,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   180,
   [() => true, () => true],

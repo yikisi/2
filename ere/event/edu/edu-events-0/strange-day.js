@@ -28,7 +28,7 @@ const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
 const MyPrivacyEvents = require('#/event/edu/edu-events-0/privacy');
 const { add_event } = require('#/event/queue');
-const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
+const add_jewel_reward = require('#/event/snippets/add-jewel-reward');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const {
@@ -58,7 +58,7 @@ module.exports = class extends MyPrivacyEvents {
           : get_chara_talk(
               get_random_entry(
                 sys_filter_chara('cflag', '招募状态', recruit_flags.yes).filter(
-                  (e) => e > 0 && e !== 32,
+                  (e) => e > 0 && e !== 32 && get(`cflag:${e}:成长阶段`) >= 2,
                 ),
               ),
             );
@@ -201,7 +201,7 @@ module.exports = class extends MyPrivacyEvents {
       ...new Array(8).fill(0).map((_, i) => i),
       ...new Array(7).fill(0).map((_, i) => i + 10),
     ]);
-    await printAndWait(['得到了道具：[', get(`itemname:${item}`), ']！']);
+    await printAndWait(['获得了道具【', get(`itemname:${item}`), '】！']);
     add(`item:${item}`, 1);
     if (get('flag:极端行为限制') > 0) {
       add_event(hook.hook, event_object.set_arg('strange_day2'));
@@ -827,7 +827,7 @@ module.exports = class extends MyPrivacyEvents {
       await tachyon.say_as_unknown_and_wait('嗷(∩∀°╭嗷∀∀嗷∀∀°)嗷嗷');
       drawLine({ content: '（感谢汤姆老师的配音）' });
       sys_like_chara(32, 0, get_random_value(100, 150));
-      await add_juel_out_of_train(32, '顺从', 200);
+      add_jewel_reward(32, '顺从', 200);
     } else {
       await printAndWait([
         tachyon.sex,
@@ -863,7 +863,7 @@ module.exports = class extends MyPrivacyEvents {
           i === med_list.length - 1 ? total : get_random_value(0, total);
         if (count > 0) {
           total -= count;
-          print(`- ${get(`itemname:${item_id}`)} × ${count}`);
+          print(`· ${get(`itemname:${item_id}`)} × ${count}`);
           add(`item:${item_id}`, count);
         }
       }

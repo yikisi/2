@@ -114,7 +114,7 @@ function set_from_theme(theme) {
     case 0:
       era.set('flag:训练难度', 25);
       era.set('flag:训练加成', 25);
-      era.set('flag:比赛难度', -25);
+      era.set('flag:比赛难度', -40);
       era.set('flag:可能伤病', 0);
       era.set('flag:马娘初始好感', 150);
       era.set('flag:马娘初始爱慕', 0);
@@ -230,7 +230,7 @@ function set_from_theme(theme) {
     case 4:
       era.set('flag:训练难度', 25);
       era.set('flag:训练加成', 25);
-      era.set('flag:比赛难度', -25);
+      era.set('flag:比赛难度', -40);
       era.set('flag:可能伤病', 0);
       era.set('flag:马娘初始好感', 225);
       era.set('flag:马娘初始爱慕', 50);
@@ -259,7 +259,7 @@ function set_from_theme(theme) {
     case 5:
       era.set('flag:训练难度', 25);
       era.set('flag:训练加成', 25);
-      era.set('flag:比赛难度', -25);
+      era.set('flag:比赛难度', -40);
       era.set('flag:可能伤病', 0);
       era.set('flag:马娘初始好感', 150);
       era.set('flag:马娘初始爱慕', 0);
@@ -288,7 +288,7 @@ function set_from_theme(theme) {
     case 6:
       era.set('flag:训练难度', 25);
       era.set('flag:训练加成', 25);
-      era.set('flag:比赛难度', -25);
+      era.set('flag:比赛难度', -40);
       era.set('flag:可能伤病', 0);
       era.set('flag:马娘初始好感', 225);
       era.set('flag:马娘初始爱慕', 50);
@@ -317,7 +317,7 @@ function set_from_theme(theme) {
     case 7:
       era.set('flag:训练难度', 25);
       era.set('flag:训练加成', 25);
-      era.set('flag:比赛难度', -25);
+      era.set('flag:比赛难度', -40);
       era.set('flag:可能伤病', 0);
       era.set('flag:马娘初始好感', 225);
       era.set('flag:马娘初始爱慕', 50);
@@ -343,6 +343,9 @@ function set_from_theme(theme) {
       era.set('flag:性技自主学习', 1);
       era.set('flag:马娘身高', 1);
   }
+  if (era.get('cflag:0:模版角色') > 0) {
+    era.set('flag:声望不足替换', 0);
+  }
 }
 
 async function page_settings() {
@@ -350,6 +353,7 @@ async function page_settings() {
     flag_setting = false;
   let theme;
   era.set('flag:新手教学', Number(!era.get('global:新手教学')));
+  era.set('flag:目白城风格', 1);
   set_from_theme((theme = 1));
 
   while (flag_default) {
@@ -544,6 +548,7 @@ async function page_settings() {
           ][v],
       },
       {
+        disabled: era.get('cflag:0:模版角色') > 0,
         key: '声望不足替换',
         label: '身败名裂时',
         options: [
@@ -697,6 +702,29 @@ async function page_settings() {
         ],
       },
       {
+        label: '带玩具上场比赛',
+        key: '道具影响',
+        options: [
+          { l: '流水冲锋', v: 0 },
+          { l: '寸步难行', v: -25 },
+        ],
+        tip: (v) =>
+          [
+            '某观众「有时候比赛会变得有点奇怪，比如选手的脸色、衣服的湿度……但是还是很精彩」',
+            '某观众「翻着白眼跑得歪歪斜斜，跑道都湿了——这可是有马纪念，能不能尊重点！」',
+          ][v],
+      },
+      {
+        disabled: true,
+        key: '目白城风格',
+        label: '目白城的风格',
+        options: [
+          { l: '自由', v: 0 },
+          { l: '慈爱', v: 1 },
+        ],
+        tip: (v) => ['随你喜欢❤️', '麦吉罗在呼唤……'][v],
+      },
+      {
         key: '后代爱慕限制',
         label: '不伦之恋',
         options: [
@@ -728,19 +756,6 @@ async function page_settings() {
           { l: '第一次的时候显示一下吧', v: 1 },
         ],
       },
-      // {
-      //   label: '带玩具上场比赛',
-      //   key: '道具影响',
-      //   options: [
-      //     { l: '流水冲锋', v: 0 },
-      //     { l: '寸步难行', v: -25 },
-      //   ],
-      //   tip: (v) =>
-      //     [
-      //       '某观众「我还是第一次见有人能一边性高潮一边还能跑那么快的」',
-      //       '某观众「翻着白眼跑得歪歪斜斜，跑道都湿了——这可是有马纪念，能不能尊重点！」',
-      //     ][v],
-      // },
     ];
     buffer.push(
       [
@@ -767,6 +782,7 @@ async function page_settings() {
           return {
             accelerator: 100 + i * 10 + j,
             config: {
+              disabled: !!e.disabled,
               buttonType: val === o.v ? 'warning' : 'info',
               width: 4,
             },

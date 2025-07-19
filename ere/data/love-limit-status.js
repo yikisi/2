@@ -1,22 +1,36 @@
 const era = require('#/era-electron');
 
+const dict = {};
+
 class LoveLimitStatus {
+  static get(id) {
+    return dict[id] || (dict[id] = new LoveLimitStatus(id));
+  }
+
   /** @type {number} */
-  cache;
-  /** @type {number} */
-  limit;
+  #id;
+
+  /** @returns {{cache:number,limit:number}|{}} */
+  get #status() {
+    return era.get(`status:${this.#id}:抑制药`) || {};
+  }
+
+  /** @returns {number} */
+  get cache() {
+    return this.#status.cache || 0;
+  }
+
+  /** @returns {number} */
+  get limit() {
+    return this.#status.limit || 0;
+  }
 
   constructor(id) {
-    this.id = id;
-    const tmp = era.get(`status:${this.id}:抑制药`);
-    this.cache = tmp?.cache || 0;
-    this.limit = tmp?.limit || 0;
+    this.#id = id;
   }
 
   clear() {
-    era.set(`status:${this.id}:抑制药`, 0);
-    this.cache = 0;
-    this.limit = 0;
+    era.set(`status:${this.#id}:抑制药`, 0);
   }
 
   is_empty() {
@@ -24,12 +38,10 @@ class LoveLimitStatus {
   }
 
   set(cache, limit) {
-    era.set(`status:${this.id}:抑制药`, {
+    era.set(`status:${this.#id}:抑制药`, {
       cache,
       limit,
     });
-    this.cache = cache;
-    this.limit = limit;
   }
 }
 

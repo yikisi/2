@@ -52,7 +52,7 @@ module.exports = class extends CustomizedRecruit {
             life_marks.first = 1;
           }
         }
-        new EventMarks(0).add(event_hooks.recruit_start);
+        EventMarks.get(0).add(event_hooks.recruit_start);
         add_event(
           event_hooks.recruit_start,
           new EventObject(32, cb_enum.recruit),
@@ -165,7 +165,7 @@ module.exports = class extends CustomizedRecruit {
           ' 的三年开始了……',
         ]);
 
-        new EventMarks(0).sub(event_hooks.recruit_start);
+        EventMarks.get(0).sub(event_hooks.recruit_start);
         era.set('cflag:32:招募状态', recruit_flags.yes);
         era.set('callname:32:0', '训练员君');
         add_event(

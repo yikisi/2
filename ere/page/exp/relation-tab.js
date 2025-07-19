@@ -9,7 +9,7 @@ const {
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
-const { join_list } = require('#/utils/list-utils');
+const { join_to_string } = require('#/utils/list-utils');
 
 const { relation_colors } = require('#/data/const.json');
 const { get_relation_mark } = require('#/data/info-generator');
@@ -36,29 +36,30 @@ module.exports = {
    * @returns {{print():*[]}}
    */
   generate(chara) {
-    const relation_info_list = [],
-      family_info_list = [],
-      my_src_chara = era.get('cflag:0:模版角色') || -1;
-
-    if (chara.id) {
-      Object.entries(era.get(`relation:${chara.id}`)).forEach((e) => {
-        const mark = get_relation_mark(e[1], chara.id),
-          target = Number(e[0]);
-        if (target !== my_src_chara && target < 1000) {
-          relation_info_list.push({
-            config: { width: 8 },
-            content: [
-              sys_get_colored_full_callname(chara.id, target),
-              '：',
-              {
-                content: mark,
-                color: relation_colors[mark],
-              },
-            ],
-            type: 'text',
-          });
-        }
-      });
+    const relation_info_list = [];
+    const family_info_list = [];
+    const my_src_chara = era.get('cflag:0:模版角色') || -1;
+    if (chara.id > 0) {
+      Object.entries(era.get(`relation:${chara.id}`)).forEach(
+        ([cid, relation]) => {
+          const mark = get_relation_mark(chara.id, relation);
+          const target = Number(cid);
+          if (target !== my_src_chara && target < 1000) {
+            relation_info_list.push({
+              config: { width: 8 },
+              content: [
+                sys_get_colored_full_callname(chara.id, target),
+                '：',
+                {
+                  content: mark,
+                  color: relation_colors[mark],
+                },
+              ],
+              type: 'text',
+            });
+          }
+        },
+      );
     }
     if (!relation_info_list.length) {
       relation_info_list.push({
@@ -68,7 +69,10 @@ module.exports = {
     }
     const teach_chara = era.get(`cflag:${chara.id}:照看`);
     if (teach_chara > 0) {
-      if (era.get(`cflag:${chara.id}:可再次育成`) > 0) {
+      if (
+        !era.get(`cflag:${chara.id}:种族`) ||
+        era.get(`cflag:${chara.id}:可再次育成`) > 0
+      ) {
         relation_info_list.push({
           content: [
             '照看 ',
@@ -113,7 +117,7 @@ module.exports = {
       family_info_list.push({
         content: [
           '现在是 ',
-          join_list(
+          join_to_string(
             [
               children_count ? `${children_count} 个孩子的父亲` : '',
               birth_count ? `${birth_count} 个孩子的母亲` : '',

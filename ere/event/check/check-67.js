@@ -49,7 +49,7 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_and_get_titles(aim_check) {
-    const races = new RaceHistory(67).get(),
+    const races = RaceHistory.get(67).get(),
       titles = [];
     if (
       (check_aim_race(races, race_enum.prix_lat, 1, 1) ||
@@ -217,7 +217,7 @@ module.exports = class extends CustomizedCheck {
 
   get_edu_aims() {
     const buffer = [],
-      races = new RaceHistory(67).get();
+      races = RaceHistory.get(67).get();
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.sats_sho, 1, 5));
     buffer.push(check_aim_and_get_entry(races, race_enum.toky_yus, 1, 5));

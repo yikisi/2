@@ -20,7 +20,7 @@ const recruit_flags = require('#/data/event/recruit-flags');
 module.exports = class extends CustomizedRecruit {
   async recruit(stage) {
     const coffee = get_chara_talk(25),
-      event_marks = new EventMarks(0),
+      event_marks = EventMarks.get(0),
       me = get_chara_talk(0);
     switch (stage) {
       case event_hooks.recruit:

@@ -1,6 +1,5 @@
 /**
  * @file 醒目飞鹰 - 招募
- *
  * @author 黑奴一号
  */
 const era = require('#/era-electron');
@@ -348,7 +347,6 @@ module.exports = class extends CustomizedRecruit {
         era.printButton(`醒目飞鹰不想站在最闪耀的舞台之上吗。`, 1);
         await era.input();
         await falcon.say_and_wait(`……飞鹰子的……最闪耀的舞台吗？`);
-        await era.input();
         await me.say_and_wait(
           `偶像不就是为了回应粉丝们的期待而将不可能化作可能的明日之星，对吧？`,
         );
@@ -369,6 +367,5 @@ module.exports = class extends CustomizedRecruit {
         era.set('flag:物色对象', 0);
         return true;
     }
-    return false;
   }
 };

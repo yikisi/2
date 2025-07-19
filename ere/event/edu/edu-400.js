@@ -18,7 +18,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const event_hooks = require('#/data/event/event-hooks');
-const YandereList = require('#/data/event/yandere-list');
+const yandere_list = require('#/data/event/yandere-list');
 const { location_enum } = require('#/data/locations');
 
 /** @type {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},cb:function)>} */
@@ -207,7 +207,7 @@ week_end_handlers[47 + 24] = async (ss, me, callname, flags, event_object) => {
     2,
   );
   if ((await era.input()) === 1) {
-    new YandereList().push(400);
+    yandere_list.push(400);
     await ss.say_and_wait('嗯……不要松开我的手，求求你了……');
     await era.printAndWait([
       ss.sex,

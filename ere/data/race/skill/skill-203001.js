@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '若成功在比赛终盘的弯道追赶超越对手，则在短时间内向前冲刺',
   20300,
   2,
-  UmaSkill.rarity_enum.gold,
   17,
   508,
   [() => true, () => true],

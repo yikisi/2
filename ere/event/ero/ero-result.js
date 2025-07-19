@@ -1,5 +1,9 @@
 const era = require('#/era-electron');
 
+const {
+  sys_check_cuckold,
+  sys_check_yandere,
+} = require('#/system/chara/sys-calc-cheat');
 const { add_juel } = require('#/system/ero/sys-calc-juel');
 const { sys_change_pressure } = require('#/system/sys-calc-base-cflag');
 const {
@@ -14,7 +18,7 @@ const { get_random_value } = require('#/utils/value-utils');
 const { base_emotion_juel } = require('#/data/ero/juel-const');
 const { part_names } = require('#/data/ero/part-const');
 const { unexpected_pregnant_enum } = require('#/data/ero/status-const');
-const BasementOwners = require('#/data/event/basement-owners');
+const basement_owners = require('#/data/event/basement-owners');
 const { condition_type, default_tags } = require('#/data/event/ero-hook-tag');
 const {
   ero_action_names,
@@ -30,13 +34,13 @@ const current = new Date().getTime();
 const handlers = {};
 
 [
-  require('#/event/ero/ero-result-handlers/communications'),
-  require('#/event/ero/ero-result-handlers/making-outs-1'),
-  require('#/event/ero/ero-result-handlers/making-outs-2'),
-  require('#/event/ero/ero-result-handlers/fucking'),
-  require('#/event/ero/ero-result-handlers/sm'),
-  require('#/event/ero/ero-result-handlers/orgy'),
-  require('#/event/ero/ero-result-handlers/items'),
+  require('#/event/ero/result-handlers/communications'),
+  require('#/event/ero/result-handlers/making-outs-1'),
+  require('#/event/ero/result-handlers/making-outs-2'),
+  require('#/event/ero/result-handlers/fucking'),
+  require('#/event/ero/result-handlers/sm'),
+  require('#/event/ero/result-handlers/orgy'),
+  require('#/event/ero/result-handlers/items'),
 ].forEach((f) => f(handlers));
 
 console.log(
@@ -61,20 +65,32 @@ handlers[ero_hooks.become_lubrication] = (chara_id, _, extra_flag) => {
   }
 };
 
-handlers[ero_hooks.prison] = (chara_id) => {
-  const life_marks = LifeEventMarks.get_marks(chara_id);
-  if (era.get(`talent:${chara_id}:病娇`) === 1) {
-    era.set(`talent:${chara_id}:病娇`, 2);
+handlers[ero_hooks.prison] = (cid) => {
+  const life_marks = LifeEventMarks.get_marks(cid);
+  let yandere = false;
+  if (era.get(`status:${cid}:爱意克制`) > 0) {
+    era.set(`status:${cid}:爱意克制`, 0);
+    if (
+      !era.get(`talent:${cid}:病娇`) &&
+      Math.random() < 0.4 + 0.2 * era.get('flag:极端行为限制')
+    ) {
+      yandere = true;
+    }
+  }
+  if (sys_check_yandere(cid, (y) => y === 1)) {
+    yandere = true;
+  }
+  if (yandere) {
+    era.set(`talent:${cid}:病娇`, 2);
     life_marks.yandere = get_random_value(
       2,
-      (era.get('flag:极端行为') * 2 * era.get(`love:${chara_id}`) -
-        era.get(`relation:${chara_id}:0`)) /
+      (era.get('flag:极端行为') * 2 * era.get(`love:${cid}`) -
+        era.get(`relation:${cid}:0`)) /
         100,
     );
   }
-  era.set(`status:${chara_id}:爱意克制`, 0);
   era.set('flag:当前位置', location_enum.basement);
-  new BasementOwners().push(chara_id);
+  basement_owners.push(cid);
 };
 
 /**
@@ -153,42 +169,32 @@ handlers[ero_hooks.report_pregnant_between_weeks] = async (
 };
 
 /**
- * @param {number} chara_id
+ * @param {number} id
  * @param _
  * @param {number[]} partners
  * @returns {Promise<boolean>}
  */
-handlers[ero_hooks.after_betrayed] = async (chara_id, _, { partners }) => {
+handlers[ero_hooks.after_betrayed] = async (id, _, { partners }) => {
   const rape = era.get('tflag:强奸');
-  era.add(`exp:${chara_id}:被绿次数`, 1);
-  if (era.get(`talent:${chara_id}:绿帽癖`)) {
-    sys_change_pressure(
-      chara_id,
-      -get_random_value(500, 1000) * (1 + (rape > 0)),
-    );
-    let wait_flag = sys_like_chara(chara_id, 0, get_random_value(10, 20));
+  era.add(`exp:${id}:被绿次数`, 1);
+  if (sys_check_cuckold(id)) {
+    sys_change_pressure(id, -get_random_value(500, 1000) * (1 + (rape > 0)));
+    let wait_flag = sys_like_chara(id, 0, get_random_value(10, 20));
     return partners.reduce(
       (p, c) =>
-        sys_like_chara(
-          chara_id,
-          c,
-          get_random_value(20, 40) * (1 + (rape > 0)),
-        ) || p,
+        sys_like_chara(id, c, get_random_value(20, 40) * (1 + (rape > 0))) || p,
       wait_flag,
     );
   }
-  sys_change_pressure(
-    chara_id,
-    get_random_value(2000, 4000) / (1 + (rape > 0)),
-  );
+  sys_change_pressure(id, get_random_value(2000, 4000) / (1 + (rape > 0)));
   return sys_like_chara(
-    chara_id,
+    id,
     0,
     -get_random_value(
       100,
       (200 +
-        8 * (era.get(`love:${chara_id}`) - 75) +
-        100 * era.get(`talent:${chara_id}:病娇`)) /
+        8 * (era.get(`love:${id}`) - 75) +
+        100 * era.get(`talent:${id}:病娇`)) /
         (1 + (rape > 0)),
     ),
   );

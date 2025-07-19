@@ -91,7 +91,7 @@ module.exports = async (kita, me, hook, event_object) => {
         me.name
       } 的肩膀让 ${me.name} 无法动弹。`,
     );
-    if (new KitaEduMarks().hot_spring) {
+    if (new KitaEduMarks().hot_spring > 0) {
       await kita.say_and_wait([
         '所以 ',
         sys_get_colored_callname(68, 0),

@@ -7,7 +7,7 @@ const {
 } = require('#/event/edu/edu-events-52/snippets');
 const print_event_name = require('#/event/snippets/print-event-name');
 
-const CrazyFans = require('#/data/event/crazy-fans');
+const crazy_fans = require('#/data/event/crazy-fans');
 const { race_enum } = require('#/data/race/race-const');
 
 /**
@@ -616,7 +616,7 @@ module.exports = (handlers) => {
           '您觉得如何呢？那么准备好了吗，与乌拉拉一同的日子？',
         );
       } else {
-        new CrazyFans().push(52);
+        crazy_fans.push(52);
       }
     }
   };

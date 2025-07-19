@@ -16,6 +16,9 @@ module.exports = class extends CustomizedEdu {
       era.get('flag:当前互动角色') !== 67 ||
       era.get('flag:当前位置') !== location_enum.gate
     ) {
+      if (era.get('flag:当前互动角色') === 67) {
+        await era.printAndWait([daiya.get_colored_name(), ' 期待着外出……']);
+      }
       add_event(hook.hook, event_object);
       return;
     }

@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '速度有十二分迅速时稍微提升速度，智力也十二分超群时少量提升速度',
   20270,
   1,
-  UmaSkill.rarity_enum.normal,
   0,
   174,
   [() => true, () => true],

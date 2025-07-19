@@ -5,16 +5,20 @@ const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
 const { get_random_value } = require('#/utils/value-utils');
 
-async function punish_rejecting_love(chara_id) {
+async function punish_rejecting_love(cid) {
   era.println();
-  sys_like_chara(
-    chara_id,
-    0,
-    -get_random_value(100, 200 + 100 * era.get(`talent:${chara_id}:病娇`)),
-  ) && (await era.waitAnyKey());
+  if (
+    sys_like_chara(
+      cid,
+      0,
+      -get_random_value(100, 200 + 100 * era.get(`talent:${cid}:病娇`)),
+    )
+  ) {
+    await era.waitAnyKey();
+  }
   sys_change_pressure(
-    chara_id,
-    get_random_value(1000, 2500 - 1000 * era.get(`talent:${chara_id}:病娇`)),
+    cid,
+    get_random_value(1000, 2500 - 1000 * era.get(`talent:${cid}:病娇`)),
   );
 }
 

@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '到达第4浪时若位于前方，则于短时间内提升速度；如果「无二」「无三」两者发动过，则蛮不讲理地提升速度',
   10120,
   1,
-  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [() => true, () => true],

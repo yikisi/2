@@ -98,7 +98,9 @@ module.exports = class extends CustomizedLove {
   async 74(silence, me, callname) {
     await print_event_name([silence.name, ' 的爱'], silence);
     if (
-      new CharaTitles(400).get().findIndex((e) => e.n.endsWith('美国梦')) !== -1
+      CharaTitles.get(400)
+        .get()
+        .findIndex((e) => e.n.endsWith('美国梦')) !== -1
     ) {
       await silence.say_and_wait([callname, '……我有件事想要和你说。']);
       await era.printAndWait([

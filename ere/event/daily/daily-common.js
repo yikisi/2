@@ -2,6 +2,7 @@
  * @file 日常地文
  * @author 雞雞
  * @author KUN
+ * @author 幽白書
  * @author 无名黑奴
  */
 const era = require('#/era-electron');
@@ -15,14 +16,18 @@ const {
   sys_like_chara,
   sys_love_uma,
 } = require('#/system/sys-calc-chara-others');
-const { sys_check_awake } = require('#/system/sys-calc-chara-param');
+const {
+  sys_check_awake,
+  sys_check_remote,
+} = require('#/system/sys-calc-chara-param');
 const { sys_change_money } = require('#/system/sys-calc-flag');
 
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
 const { get_custom_check } = require('#/event/check/check-factory');
-const common_celebration = require('#/event/daily/common-lines/common-celebration');
-const common_out_shopping = require('#/event/daily/common-lines/out-shopping');
+const common_celebration = require('#/event/daily/common/celebration');
+const common_out_shopping = require('#/event/daily/common/out-shopping');
+const kojo = require('#/event/daily/daily-common.kojo');
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
 const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
 const select_action_in_station = require('#/event/daily/snippets/select-action-in-station');
@@ -33,6 +38,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
+const { get_chara_color } = require('#/data/chara-colors');
 const { buff_colors, money_color } = require('#/data/color-const');
 const event_hooks = require('#/data/event/event-hooks');
 const { location_name } = require('#/data/locations');
@@ -40,8 +46,26 @@ const { location_name } = require('#/data/locations');
 const money_list = [0, 1500, 5000, 10000];
 
 class CustomizedDaily {
+  /** @type {number} */
+  id;
+
   constructor(chara_id) {
     this.id = chara_id;
+  }
+
+  get #dict() {
+    const dict = { id: this.id };
+    dict['角色名'] = era.get(`callname:${this.id}:-2`);
+    dict['代表色'] = get_chara_color(this.id);
+    dict['玩家名'] = era.get('callname:0:-2');
+    if (era.get(`cflag:${this.id}:性别`) === 1) {
+      dict['马娘'] = '马郎';
+      dict['她'] = '他';
+    } else {
+      dict['马娘'] = '马娘';
+      dict['她'] = '她';
+    }
+    return dict;
   }
 
   get_this() {
@@ -194,27 +218,15 @@ class CustomizedDaily {
     return await common_celebration.call(this);
   }
 
-  async end_talk() {}
+  /** @param {boolean} hentai */
+  // eslint-disable-next-line no-unused-vars
+  async end_talk(hentai) {}
 
   /** @author 雞雞 */
   good_morning() {
-    const buffer = [
-      [' 竖起了大拇指。'],
-      [' 正在专心地阅读着什么。'],
-      [' 正在与同学们愉快地聊天。'],
-      [' 看起来吃撑了，肚子变得圆鼓鼓的。'],
-    ];
-    if (!(era.get('cflag:301:育成回合计时') < 3 * 48)) {
-      buffer.push([
-        ' 正在接待处向 ',
-        sys_get_colored_callname(0, 301),
-        ' 查询着什么。',
-      ]);
-    }
-    era.print([
-      get_chara_talk(this.id).get_colored_name(),
-      ...get_random_entry(buffer),
-    ]);
+    const dict = this.#dict;
+    dict['骏川'] = era.get('callname:301:-2');
+    kojo['回合开始'](dict);
   }
 
   /**
@@ -301,7 +313,9 @@ class CustomizedDaily {
   // eslint-disable-next-line no-unused-vars
   async growth(stage) {}
 
-  async load_talk() {}
+  async load_talk() {
+    await kojo['读档对话'](this.#dict);
+  }
 
   /** @author 雞雞 */
   async office_cook() {
@@ -888,6 +902,24 @@ class CustomizedDaily {
    */
   // eslint-disable-next-line no-unused-vars
   async week_start(hook, extra_flag, event_object) {}
+
+  /** @param {HookArg} hook */
+  // eslint-disable-next-line no-unused-vars
+  async birthday(hook) {
+    const chara = get_chara_talk(this.id);
+    const me = get_chara_talk(0);
+    if (sys_check_remote(this.id)) {
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 远程向 ',
+        chara.get_colored_name(),
+        ' 送上了生日祝福',
+      ]);
+      await era.printAndWait([chara.get_colored_name(), ' 显得很高兴。']);
+    } else {
+      await kojo['生日'](this.#dict);
+    }
+  }
 
   /**
    * @param {HookArg} hook

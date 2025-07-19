@@ -20,7 +20,7 @@ function add_event(stage_id, event_object) {
         queue[stage_id] = [];
     }
     (temp_queue[stage_id] || queue[stage_id]).push(event_object);
-    new EventMarks(event_object.chara_id).add(stage_id);
+    EventMarks.get(event_object.chara_id).add(stage_id);
 }
 ```
 增加事件函数用来把一个指定时间加入指定钩子对应的事件池中。

@@ -10,7 +10,7 @@ const {
 } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
-const NormalCommandLines = require('#/event/ero/common-lines/normal/normal-common');
+const NormalCommandLines = require('#/event/ero/common/normal/normal-common');
 const CustomizedEro = require('#/event/ero/ero-common');
 const tachyon_ero_start = require('#/event/ero/ero-lines-32/ero-start');
 

@@ -3,41 +3,49 @@
   "dependencies": {
     "@prisma/client": "^5.22.0"
   },
+  "description": "愛若駑馬（EraUma）是以某頁遊公司旗下馬耳學生妹作品爲世界觀製作的一款同人文字冒險遊戲。該世界觀的核心圍繞娘化的名賽馬和歷史上曾發生過的比賽展開。玩家將在遊戲中扮演訓練員——即負責訓練馬娘的角色——與諸多馬娘邂逅並創作獨屬於玩家和其負責馬娘的故事。",
   "devDependencies": {
-    "@babel/core": "^7.26.8",
-    "@babel/preset-env": "^7.26.8",
+    "@babel/core": "^7.28.0",
+    "@babel/preset-env": "^7.28.0",
     "7zip-bin": "^5.2.0",
     "archiver": "^7.0.1",
     "archiver-zip-encrypted": "^2.0.0",
     "babel-loader": "^9.2.1",
-    "compressing": "^1.10.1",
+    "compressing": "^1.10.3",
+    "ere-webpack-plugin": "git+https://gitgud.io/umaera/engine/ere-webpack-plugin.git",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-prettier": "^5.2.3",
+    "eslint-plugin-prettier": "^5.5.1",
     "eslint-plugin-require-sort": "^1.3.0",
     "eslint-plugin-sort-requires-by-path": "^1.0.2",
     "fs-extra": "^11.3.0",
     "husky": "^9.1.7",
-    "lint-staged": "^15.4.3",
-    "prettier": "^3.5.0",
+    "kojo-loader": "git+https://gitgud.io/umaera/engine/kojo-loader.git",
+    "lint-staged": "^15.5.2",
+    "prettier": "^3.6.2",
     "prisma": "^5.22.0",
-    "webpack": "^5.97.1",
+    "webpack": "^5.100.1",
     "webpack-cli": "^5.1.4"
   },
   "engines": {
     "node": ">=18"
   },
+  "license": "GPL-2.0-only",
   "lint-staged": {
     "ere/**/*.js": [
       "eslint --fix"
     ]
   },
   "name": "erauma",
+  "repository": {
+    "type": "git",
+    "url": "https://gitgud.io/umaera/erauma"
+  },
   "scripts": {
     "db:pull": "prisma db pull",
     "lint": "lint-staged",
     "prepare": "husky",
-    "webpack": "node build/build.js"
+    "webpack": "webpack"
   },
-  "version": "1320"
+  "version": "2000"
 }
