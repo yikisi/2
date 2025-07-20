@@ -3,7 +3,6 @@ const {
   drawLine,
   get,
   input,
-  print,
   printAndWait,
   printInColRows,
   set,
@@ -18,6 +17,7 @@ const { get_image } = require('#/system/sys-calc-image');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
+const arrive_location = require('#/page/components/arrive-location');
 const get_riko_button = require('#/page/components/get-riko-button');
 const npc_common = require('#/page/components/npc-common');
 const print_page_header = require('#/page/components/page-header');
@@ -34,8 +34,7 @@ const event_hooks = require('#/data/event/event-hooks');
 const loc_characters = require('#/data/event/loc-characters');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_celebration } = require('#/data/info-generator');
-const { location_enum, location_name } = require('#/data/locations');
-const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
+const { location_enum } = require('#/data/locations');
 
 /** @type {Record<string,function(CharaTalk,CharaTalk):{handle:function:Promise,name:string}>} */
 const handlers = {};
@@ -141,20 +140,9 @@ handlers[304] = (chara, me) => {
 handlers[306] = get_riko_button;
 
 async function page_trainer_office() {
-  let flag_page = true,
-    flag_trainer = true;
-  set('flag:当前位置', location_enum.trainer);
-  await clear();
-  print_page_header();
-  drawLine();
-  const vehicle = get('flag:单人载具');
-  print([
-    '【',
-    vehicle ? `${vehicle_verbs[vehicle]}着${vehicle_names[vehicle]}` : '',
-    '抵达了 ',
-    location_name[location_enum.trainer],
-    '】',
-  ]);
+  let flag_page = true;
+  let flag_trainer = true;
+  await arrive_location(set('flag:当前位置', location_enum.trainer));
   let trainer_list = loc_characters.get(location_enum.trainer);
   if (trainer_list.length > 0) {
     const celebration = get_celebration(),

@@ -2,6 +2,8 @@ const era = require('#/era-electron');
 
 const CustomizedInit = require('#/event/init/customized-init');
 
+const { vehicle_enum } = require('#/data/move-const');
+
 module.exports = class extends CustomizedInit {
   init(is_reset) {
     if (!is_reset) {
@@ -12,6 +14,10 @@ module.exports = class extends CustomizedInit {
         era.set('callname:64:301', '骏川小姐');
         era.set('callname:64:64', '善信小姐');
       }
+    }
+    era.set('item:善信号', 0);
+    if (era.get('flag:多人载具') === vehicle_enum.pama) {
+      era.set('flag:多人载具', 0);
     }
   }
 };
