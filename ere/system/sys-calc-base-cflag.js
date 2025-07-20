@@ -41,17 +41,17 @@ function sys_change_motivation(cid, val) {
   if (delta < -1) {
     delta -= delta_change;
   }
-  const motivation = era.get(`cflag:${cid}:干劲`),
-    motivation_limit = Math.max(
-      Math.min(
-        2 -
-          Math.floor(era.get(`base:${cid}:压力`) / 2500) +
-          get_custom_mec(cid).get_motivation_limit(),
-        2,
-      ),
-      -2,
+  const motivation = era.get(`cflag:${cid}:干劲`);
+  const motivation_limit = Math.max(
+    Math.min(
+      2 -
+        Math.floor(era.get(`base:${cid}:压力`) / 2500) +
+        get_custom_mec(cid).get_motivation_limit(),
+      2,
     ),
-    new_val = Math.max(Math.min(motivation + delta, motivation_limit), -2);
+    -2,
+  );
+  const new_val = Math.max(Math.min(motivation + delta, motivation_limit), -2);
   if (new_val !== motivation) {
     era.set(`cflag:${cid}:干劲`, new_val);
     era.print([

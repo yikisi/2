@@ -85,7 +85,7 @@ function update_ero_status(...ids) {
       limit = (base_limit * (10 + limit)) / 10;
       const random_range = Math.min(limit / 10, 100);
       limit += get_random_value(-random_range, random_range);
-      limit = Math.max(limit + chara_mec.get_palam_limit_buff(part), 100);
+      limit = Math.max(limit + chara_mec.get_param_limit_buff(part), 100);
       era.set(`tcvar:${cid}:${part_names[part]}快感上限`, limit);
     });
     if (!era.get(`status:${cid}:沉睡`) && !era.get(`base:${cid}:精力`)) {

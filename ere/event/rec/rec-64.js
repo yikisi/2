@@ -19,6 +19,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
+const recruit_flags = require('#/data/event/recruit-flags');
 
 module.exports = class extends CustomizedRecruit {
   async recruit(stage, event_object) {
@@ -77,7 +78,11 @@ module.exports = class extends CustomizedRecruit {
     } else {
       const ret = await kojo['招募3'](dict);
       if (ret[0] === 2) {
-        era.set(`cflag:${this.id}:招募状态`, 1);
+        era.set(`cflag:${this.id}:招募状态`, recruit_flags.yes);
+        add_event(
+          event_hooks.week_start,
+          new EventObject(this.id, cb_enum.edu).set_arg('beginning'),
+        );
         era.println();
         let wait_flag;
         if (ret[1] === 1) {

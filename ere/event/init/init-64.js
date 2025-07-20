@@ -7,6 +7,9 @@ const { vehicle_enum } = require('#/data/move-const');
 module.exports = class extends CustomizedInit {
   init(is_reset) {
     if (!is_reset) {
+      if (era.get('cflag:0:模版角色') !== 64) {
+        era.set('callname:0:64', '善信');
+      }
       if (era.get('flag:角色性别') === 1) {
         era.set('callname:64:301', '骏川先生');
         era.set('callname:64:64', '善信先生');

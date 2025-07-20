@@ -4,9 +4,9 @@
       - color: %代表色%
         content:
           - fontWeight: bold
-            content: %善信%
+            content: 目白善信
           - 「呀，就算是%自称%也有极限的啦……」
-      - %善信% 有点无奈的苦笑，却没有停下准备的动作。
+      - 目白善信 有点无奈的苦笑，却没有停下准备的动作。
   - if: era.get('base:64:体力') >= era.get('maxbase:64:体力') * 0.45
     lines:
       - random: true
@@ -14,7 +14,7 @@
           - color: %代表色%
             content:
               - fontWeight: bold
-                content: %善信%
+                content: 目白善信
               - 「怎么样，训练员？今天的%自称%可是火力全开哦！」
           - 微微俯身在起点，眼睛透出认真的目光。
       - random: true
@@ -22,36 +22,36 @@
           - color: %代表色%
             content:
               - fontWeight: bold
-                content: %善信%
+                content: 目白善信
               - 「我现在超兴奋的……」
           - color: %代表色%
             content:
               - fontWeight: bold
-                content: %善信%
+                content: 目白善信
               - 「如果用高尔夫来比喻的话，就是绝对能打出超高分！」
       - random: true
         lines:
           - color: %代表色%
             content:
               - fontWeight: bold
-                content: %善信%
+                content: 目白善信
               - 「现在的我仿佛可以一直跑下去。」
           - color: %代表色%
             content:
               - fontWeight: bold
-                content: %善信%
+                content: 目白善信
               - 「我要用爆速……不对，是用神速一直领跑下去！」
       - random: true
         lines:
           - color: %代表色%
             content:
               - fontWeight: bold
-                content: %善信%
+                content: 目白善信
               - 「嗯～大家都在努力呢～」
           - color: %代表色%
             content:
               - fontWeight: bold
-                content: %善信%
+                content: 目白善信
               - 「看见这样的情况，连我都嗨起来了……很好！」
       - if: era.get('cflag:64:干劲') > 0
         random: true
@@ -59,12 +59,12 @@
           - color: %代表色%
             content:
               - fontWeight: bold
-                content: %善信%
+                content: 目白善信
               - 「哼哼～精神状态绝佳！」
           - color: %代表色%
             content:
               - fontWeight: bold
-                content: %善信%
+                content: 目白善信
               - 「开始今天的训练吧！」
       - if: era.get('cflag:64:干劲') > 0
         random: true
@@ -72,12 +72,12 @@
           - color: %代表色%
             content:
               - fontWeight: bold
-                content: %善信%
+                content: 目白善信
               - 「哦呀，训练时间了吗？」
           - color: %代表色%
             content:
               - fontWeight: bold
-                content: %善信%
+                content: 目白善信
               - 「那就全力的加油跑吧！」
       - if: era.get('cflag:64:干劲') < 0
         random: true
@@ -85,7 +85,7 @@
           - color: %代表色%
             content:
               - fontWeight: bold
-                content: %善信%
+                content: 目白善信
               - 「偶尔……会想着干脆放空脑袋埋头挖地洞呢～」
           - 有点微妙的发出了轻飘飘的声音，一晃一晃的
       - if: era.get('cflag:64:育成回合计时') > 47 + 24
@@ -94,27 +94,27 @@
           - color: %代表色%
             content:
               - fontWeight: bold
-                content: %善信%
+                content: 目白善信
               - 「感觉嗨的不行了……」
           - color: %代表色%
             content:
               - fontWeight: bold
-                content: %善信%
+                content: 目白善信
               - 「为了更加的嗨起来，拜托你了，%称呼%！」
 
 加练:
   - 训练时间结束，周围却还有其他的%马娘%在准备加练的声音。
-  - %善信% 的耳朵听着周边的动静，饶有兴趣的抖了抖。
-  - 虽然因为训练计划这个时候就应该休息了，但既然 %善信% 那么想去的话……
+  - 目白善信 的耳朵听着周边的动静，饶有兴趣的抖了抖。
+  - 虽然因为训练计划这个时候就应该休息了，但既然 目白善信 那么想去的话……
   - acc: 1
     content: 「想去的话就去吧。」
     lines:
       - color: %代表色%
         content:
           - fontWeight: bold
-            content: %善信%
+            content: 目白善信
           - 「收到！那我就过去啦！」
-      - %善信% 带着笑容跑回了训练场，毫无违和的加入了训练当中。
+      - 目白善信 带着笑容跑回了训练场，毫无违和的加入了训练当中。
       - 这下不得不加班了呢。
   - acc: 2
     content: 「下次我们也这样吧。」
@@ -122,18 +122,18 @@
       - color: %代表色%
         content:
           - fontWeight: bold
-            content: %善信%
+            content: 目白善信
           - 「了解！那今天我就尽情休息咯。」
-      - %善信% 抱着后脑，顺便用手肘稍微敲打了一下身边的搭档。
+      - 目白善信 抱着后脑，顺便用手肘稍微敲打了一下身边的搭档。
 
 训练失败:
   - 训练出了一点点小小的意外……
-  - 紧急送往保健室之后让 %善信% 躺平在床上，这才放下心来。
-  - %善信% 看着身旁正在担心的 %T%，不自觉的轻笑了起来。
+  - 紧急送往保健室之后让 目白善信 躺平在床上，这才放下心来。
+  - 目白善信 看着身旁正在担心的 %T%，不自觉的轻笑了起来。
   - color: %代表色%
     content:
       - fontWeight: bold
-        content: %善信%
+        content: 目白善信
       - 「啊哈哈，不用担心啦，%自称%身体还是很结实的啦。」
   - acc: 1
     content: 「这可不行，你给我好好休息」
@@ -142,12 +142,12 @@
   - color: %代表色%
     content:
       - fontWeight: bold
-        content: %善信%
+        content: 目白善信
       - 「嗯，说的是呢。」
   - color: %代表色%
     content:
       - fontWeight: bold
-        content: %善信%
+        content: 目白善信
       - 「别担心，很快就可以下来的啦。」
   - 抬起手，轻轻的往 %T% 的胸口敲了一下。
 
@@ -194,33 +194,6 @@
       - fontWeight: bold
         content: 目白善信
       - 「真是的，我在做什么啊……」
-赛事开场:
-  # 出道战
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「果然，出道的比赛就是会紧张啊」
-  - 善信看着站在身边的 %T%，紧张的贴在墙边
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「怎么办啊训练员，万一出道赛没有跑好的话……」
-  - acc: 1
-    content: 「没关系的，用善信你自己的方式来就好」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「用我自己的……嗯，我明白了」
-  - 还在颤抖的身子已经逐渐停下，重新调整好了自己的身体状态
-  - 摆正自己的呼吸之后，握紧了双手
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「嗯，用我自己的跑法……我明白了！」
 
 目白善信登场！:
   #招募后休息
@@ -546,6 +519,34 @@
   - 是听见了 %T% 的心声呢，还是听见周围在高呼善信的名字呢
   - 善信站在终点，向着观众席比起了两根手指，自然的笑了起来
 
+赛事开场:
+  # 出道战
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「果然，出道的比赛就是会紧张啊」
+  - 善信看着站在身边的 %T%，紧张的贴在墙边
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「怎么办啊训练员，万一出道赛没有跑好的话……」
+  - acc: 1
+    content: 「没关系的，用善信你自己的方式来就好」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「用我自己的……嗯，我明白了」
+  - 还在颤抖的身子已经逐渐停下，重新调整好了自己的身体状态
+  - 摆正自己的呼吸之后，握紧了双手
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「嗯，用我自己的跑法……我明白了！」
+
 逃亡者的开幕！:
   # 出道战胜利
   - color: %代表色%
@@ -716,7 +717,7 @@
         content: 目白善信
       - 「总之要来做点什么吗？要来一场年菜BBQ，还是给舞狮画睫毛什么的！」
   - acc: 1
-    content: 「年菜BBD！？」
+    content: 「年菜BBQ！？」
   - acc: 2
     content: 「唉，我们这里有舞狮吗？」
   - color: %代表色%
@@ -1148,7 +1149,7 @@
         content: 目白善信
       - 「下次也拜托你了，训练员！」
 
-姐妹亦是对手1:
+姐妹亦是对手:
   #进入经典年5月1日，同队目白莱恩且不在同一年时不会触发
   - color: %代表色%
     content:
@@ -1219,7 +1220,7 @@
         content: 目白善信
       - 「我就去和莱恩，试试看吧」
 
-姐妹亦是对手2:
+姐妹亦是对手一冠:
   #进入经典年5月1日，皋月胜利，同队目白莱恩且不在同一年时不会触发
   - color: %代表色%
     content:
@@ -2291,7 +2292,7 @@
       - 「找到我的道路！」
   - 原本落下的耳朵逐渐立起，眼神里也带上了精气神
 
-迎向菊花赏1:
+迎向菊花赏:
   - color: %代表色%
     content:
       - fontWeight: bold
@@ -2327,7 +2328,7 @@
         content: 目白善信
       - 「嗯！看好属于%自称%的跑法吧！」
 
-迎向菊花赏2:
+迎向菊花赏两冠:
   # 已取两冠
   - color: %代表色%
     content:
@@ -2470,6 +2471,7 @@
       - 「我也想，跑出不负目白家之名的成绩啊」
   - 声音虽然小，但是听的很清楚
   - 不过，现在就让善信这样哭一会，比较好
+
 三冠达成！:
   #获得三冠称号后休息
   - 皋月，德比，菊花
@@ -3179,7 +3181,7 @@
         content:
           - fontWeight: bold
             content: 目白善信
-          - 「那，我就先去胜者舞台了……%玩家名%你要在这里等着哦！」
+          - 「那，我就先去胜者舞台了……%玩家本名%你要在这里等着哦！」
       - 虽然没有直接对上视线，但是能够看见微红的脸上是清澈的笑脸
 
 不是主角也无所谓！:
@@ -3521,6 +3523,402 @@
   - 面对本应充满压力的比赛，善信的脸上却没有一点紧张感
   - 过去的阴霾已经不再围绕在%她%的身边，此时此刻……
   - 只剩下嗨翻天的夏天在等着了！
+
+夏日的小小意外:
+  # 爱慕＞74
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「%称呼%！能帮我提一下防晒油吗？」
+  - 「可以是可以，但为什么不让太阳神%她%们来帮你？」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「太阳神%她%们已经下去了啦，突然叫%她%们回来也不太好」
+  - color: %代表色%
+    content: 善信趴在垫子上，尾巴有些兴奋的左右扫动着
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「再说了，%称呼%也不是第一次这样接触我了吧？你看上次自由赛的时候也是%称呼%你帮我擦汗的啊」
+  - 「但那次可不是泳装啊，怎么能一样」
+  - color: %代表色%
+    content: %称呼%的声音里带着一点恼火，但在善信的耳朵里只是很平常的吐槽罢了
+  - color: %代表色%
+    content: 毕竟善信很清楚自己的搭档为人是什么样的，不会有什么比较特殊的想法
+  - color: %代表色%
+    content: 至少对于自己……大概吧
+  - acc: 1
+    content: 「嗯，背后差不多了，善信」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「好嘞」
+  - color: %代表色%
+    content: 从垫子上起身，刚刚翻过来却看见了%称呼%转移视线的脸
+  - color: %代表色%
+    content: 莫不成……这是害羞了吗？这样的情况倒是少见呢
+  - color: %代表色%
+    content: 善信有点不怀好意的笑了笑，但很快就把心里的奇怪想法压了下去
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「前面我自己来就好了，%称呼%……%称呼%？」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - （这个……难道？）
+  - color: %代表色%
+    content: 看着 %称呼% 一言不发的放下手里的防晒油转过身去，善信脸上浮出一点微红
+  - color: %代表色%
+    content: 夏天的衣服可没有遮挡什么的能力，更何况现在 %称呼% 身上只是一件衬衫呢
+  - color: %代表色%
+    content: 一片红的耳朵只要稍微留意一点就能看见了
+  - color: %代表色%
+    content: 是害羞了吧？这一定是害羞了吧？
+  - color: %代表色%
+    content: 稍微有点想捉弄一下呢……
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「嗯哼？」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「要不训练员……前面的部分也交给你吧？」
+  - color: %代表色%
+    content: 话已出口，后知后觉的发现说了什么不该说的话
+  - color: %代表色%
+    content: 也就是说前面的部分可以让 %称呼% 随便摸了
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - （啊咧，是不是过了点）
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - （%称呼%……会接受吗？）
+  - color: %代表色%
+    content: 心脏跳动的速度还在加快，感觉已经堪比比赛的时候……
+  - color: %代表色%
+    content: 善信的脸从一开始有些玩味的笑脸变成了一片红的尴尬样，只能祈祷 %称呼% 害羞的拒绝
+  - color: %代表色%
+    content: 但一般情况下，祈祷什么就会反过来发生什么
+  - acc: 1
+    content: 「好，好吧……」
+  - color: %代表色%
+    content: %称呼% 的声音有些颤抖，但是防晒油已经准备好了
+  - color: %代表色%
+    content: 转过身来的时候，四目相对
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「果，果然还是我自己来好了！仔细一想我这边很怕痒……」
+  - color: %代表色%
+    content: 善信的双眼转起了小小的螺旋，慌张的想要把 %称呼% 手上的防晒油抢走
+  - color: %代表色%
+    content: 不知道是海滩上的风大呢，还是善信的动作太大
+  - color: %代表色%
+    content: 遮阳伞的下方稍微松动了一下，便朝着两个人的方向砸了下来
+  - 「善信！」
+  - color: %代表色%
+    content: %称呼% 趴在善信的上方，用手肘勉强撑起来一点空间
+  - color: %代表色%
+    content: 善信躺在下方，不知所措的把双手缩在胸前，看着 %称呼% 同样有些红的脸
+  - color: %代表色%
+    content: 遮阳伞很大，留出了一片相当大的空间，自然也没有砸到人
+  - 「抱歉！我立刻起……」
+  - color: %代表色%
+    content: 在 %称呼% 想要起身的时候，善信眼疾手快捉住了他的手
+  - color: %代表色%
+    content: 防晒油的瓶子落在一旁，被善信顺手拿了过来，倒在 %称呼% 的手上
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「%称呼%……前面也可以交给你吗？」
+  - color: %代表色%
+    content: 羞红着脸，说出了自己未曾设想过的话
+  - color: %代表色%
+    content: 现在两个人都被遮阳伞盖在下方，外面的人不注意的话什么都看不见
+  - color: %代表色%
+    content: 抓着 %称呼% 的手，往自己的身上拉了一下
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「麻烦负起责任啊……让我心动的责任……」
+  - color: %代表色%
+    content: 善信自言自语着，仿佛是在说服自己
+  - color: %代表色%
+    content: %称呼%好像什么都没有听见，只是战战兢兢的伸手在善信的身上轻轻的滑过
+  - color: %代表色%
+    content: 清凉的防晒油和手掌的温热合在一起，在善信光滑的小腹上上下滑动
+  - color: %代表色%
+    content: 脸上的绯红已经爬到了脖子根，但以往带动自己逃跑的双腿却没有一点力气
+  - color: %代表色%
+    content: 想要逃跑，但是……
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - （训练员的话，不逃跑也可以吧）
+  - 「善信，已经好了」
+  - color: %代表色%
+    content: 收起手，从善信的眼前移开
+  - color: %代表色%
+    content: 转过身伸手抓着遮阳伞，一点点抬了起来
+  - color: %代表色%
+    content: 看着 %称呼% 的背影，善信沉默着
+  - color: %代表色%
+    content: 现在的话，谁都不会看见我们两个人
+  - color: %代表色%
+    content: 现在的话，做什么都不会被发现的吧
+  - color: %代表色%
+    content: 现在的话……
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「呐，%称呼%」
+  - color: %代表色%
+    content: %称呼%放下手里的遮阳伞，转身看着善信
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「这里……还没有」
+  - color: %代表色%
+    content: 指着自己的胸口，红着脸
+  - color: %代表色%
+    content: 不知道%他%会怎么做呢
+  - color: %代表色%
+    content: 或许……
+  - acc: 1
+    content: 「善信，这里是……」
+  - color: %代表色%
+    content: 沾着防晒油的手在抖
+  - color: %代表色%
+    content: 即使被抓着，被拉倒了善信的身前
+  - if: era.get('cflag:64:性别') !== 1 && era.get('cflag:0:性别') === 1
+    color: %代表色%
+    content: 都说男人是不会对女性的胸有意见的，但是……
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「如果%称呼%不喜欢的话……」
+  - color: %代表色%
+    content: 悬停在半空颤抖的手掌直到善信自己挺起胸膛，才停下了抖动
+  - color: %代表色%
+    content: 善信紧紧闭着双眼，紧张的身体在微微发抖
+  - color: %代表色%
+    content: 温热的液体在胸脯上滑过，流进泳衣
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「%称呼%……」
+  - color: %代表色%
+    content: 善信紧闭的双眼缓缓睁开，看着 %称呼% 有点不知所措的脸
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「喜欢吗？」
+  - color: %代表色%
+    content: 善信伸出纤细的手，轻轻的扶着 %称呼% 的脸，朝自己的脸上拉过来
+  - color: %代表色%
+    content: 嘴唇碰在一起，交换着两个人的温度
+  - color: %代表色%
+    content: 舌头自然的钻过牙齿的屏障，交缠在一起
+  - color: %代表色%
+    content: 直到呼吸已经无法支撑，这才不舍的带着舌尖拉出一丝唾沫的连线
+  - acc: 1
+    content: 「但是，现在还不行」 # 性欲+5%
+    lines:
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白善信
+          - 「唉……」
+      - color: %代表色%
+        content: 仿佛发热的头脑被冷水淋下，冷却下来回归了正常的思考
+      - color: %代表色%
+        content: 善信坐起身，有点慌张的看了一眼遮阳伞外的世界
+      - color: %代表色%
+        content: ……没有人发现这里
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白善信
+          - 「我一直不去的话，大家会起疑心的」
+      - color: %代表色%
+        content: 善信轻轻抓住自己早就压不住激动的尾巴，装作无事发生的从阴影里站起来
+      - color: %代表色%
+        content: 深呼吸一口，把手伸向%称呼%
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白善信
+          - 「回去之后……就和%称呼%你一起……」
+  - acc: 2
+    content: 「我喜欢你，善信」
+    lines:
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白善信
+          - 「我也是，%玩家本名%」
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白善信
+          - 「我喜欢%玩家本名%……」
+      - color: %代表色%
+        content: 放开抓住 %称呼% 的双手，手指轻轻的拉开泳衣的系带
+      - if: era.get('cflag:64:性别') !== 1
+        color: %代表色%
+        content: 小小的樱桃已经挺立，等待着
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白善信
+          - 「请吧……」
+    # 马跳
+
+涂防晒油马跳结束:
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「啊……这下坏了」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「大家一定发现我们不在了吧，不妙」
+  - color: %代表色%
+    content: 轻轻地推开 %称呼% 同样沾满汗水的身体，擦掉身上的痕迹
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「那个，回去我们还能继续对吧」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「不，不是你想的那个意思啦！只是……」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「和%称呼%在一起很开心，什么的」
+  - color: %代表色%
+    content: 善信红着脸，有点报复意味的往 %称呼% 身上又捏了一下
+
+海边的散步时光:
+  # 爱慕＞74，8月第四周开始
+  - 夏日合宿的末尾，没有留下多少训练任务，剩下了相当多的自由时间
+  - 善信独自看着沙滩上的海浪，时不时朝身后的 %T% 偷瞄几眼
+  - 下午的时间很快就过去，沙滩上已经看不见其他的%马娘%还在训练了
+  - acc: 1
+    content: 「好了，我们也该回去了……」
+  - 正要离开的时候，善信轻轻地拉住了 %T% 的手
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「那个啊，训练员，能稍微……」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「……稍微一点就好，陪我在这里走走，可以吗？」
+  - 善信的眼神看着其他方向，却时不时向 %T% 的方向看过来
+  - acc: 1
+    content: 「可以哦」
+  - acc: 2
+    content: 「但时间很晚了……」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「嗯哼……我们好像很久没有这样散步了吧」
+  - 善信的双手背在身后，小腿不安的轻敲着地板
+  - 眼神在自己身上的泳衣和 %T% 的身上来回循环着，却唯独没有看向脸
+  - 收起训练用具的 %T% 没有注意到不太安稳的小动作，动身走到了善信的身旁
+  - 海滩上的夕阳照亮了两个人的侧脸，安静的漫步着
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「平时在这里的时候，都是很多人在一起呢」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「大家一起训练，一起玩什么的……」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「虽然玩的很开心啦，但是总觉得缺少了什么」
+  - 善信缓步贴在 %T% 的身边，肩膀贴着肩膀
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「和训练员你单独在一起的时候，感觉……」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「……感觉明白了，缺少的是什么」
+  - acc: 1
+    content: 「是什么？」
+  - 听见了 %T% 的声音，善信不由自主的笑了起来
+  - 对着身边毫无防备的侧腹，不用力的小小戳了一下
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「是训练员你哦」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「不是训练，不是大家在一起……只是我们两个」
+  - 夕阳的金色余晖照在善信的脸上，遮住了满脸的绯红色
+  - 安静的站在海滩边，感受着海浪冲上岸时没过脚踝的触感
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「我说啊，训练员」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「以后都能一直陪我一起吗？」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「就像是以前你说的那样，一直看着我」
+  - 善信背对着明亮的太阳，对着 %T% 灿烂的笑着
 
 夏季合宿（资深年）结束:
   - 伴随即将结束的夏天，祭典开始了
@@ -4156,48 +4554,50 @@
       - fontWeight: bold
         content: 目白善信
       - 「但是啊，刚才说的话都是认真的哦」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「我还是希望训练员，能一直和我在一起，无论何时」
-  - 依靠在肩膀上的身体有些摇晃，仿佛随意的一碰就会躺倒
-  - 放下来的手掌轻轻的放在 %T% 的大腿上，等待着回应
-  - acc: 1
-    content: 抱住善信
+  - if: era.get('love:64') >= 50
     lines:
       - color: %代表色%
         content:
           - fontWeight: bold
             content: 目白善信
-          - 「会一直在我身边的吧？」
-      - 善信的脸贴在 %T% 的怀里，听着逐渐加速的心跳声
-      - 闭上眼，享受着怀里的气息
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「是的吧……」
-      - %T% 抬起手轻轻的揉了揉善信的头，解开了新衣服的扣子
-      - 雪白的小帽子被%太阳神称呼善信%手摘下，含情脉脉的等待着
+          - 「我还是希望训练员，能一直和我在一起，无论何时」
+      - 依靠在肩膀上的身体有些摇晃，仿佛随意的一碰就会躺倒
+      - 放下来的手掌轻轻的放在 %T% 的大腿上，等待着回应
       - acc: 1
-        content: 「善信，我喜欢你」
-        # 马跳
-  - acc: 2
-    content: 亲吻善信
-    lines:
-      - 像是为了回应一般，坐在%她%身旁的 %T% 主动起身，深深的吻住了善信
-      - 本就有些无力的身体被突然袭击压倒在休息室的椅子上，却完全没有反击的想法
-      - 洁白的小帽子落到地上，但两个人都没有在意的意思，瞳孔之中仅仅能映射出彼此的脸庞
-      - 不知亲吻过了多久，两个人才拉着银色的丝线把嘴唇分开
-      - 此时此刻，两双眼睛上下对视着
-      - 善信缓缓的闭上眼，把手放在 %T% 的脖子上，轻轻的拉到自己的面前
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「请吧，是圣诞节的%自称%哦」
-    # 进入马跳
+        content: 抱住善信
+        lines:
+          - color: %代表色%
+            content:
+              - fontWeight: bold
+                content: 目白善信
+              - 「会一直在我身边的吧？」
+          - 善信的脸贴在 %T% 的怀里，听着逐渐加速的心跳声
+          - 闭上眼，享受着怀里的气息
+          - color: %代表色%
+            content:
+              - fontWeight: bold
+                content: 目白善信
+              - 「是的吧……」
+          - %T% 抬起手轻轻的揉了揉善信的头，解开了新衣服的扣子
+          - 雪白的小帽子被善信亲手摘下，含情脉脉的等待着
+          - acc: 1
+            content: 「善信，我喜欢你」
+          # 马跳
+      - acc: 2
+        content: 亲吻善信
+        lines:
+          - 像是为了回应一般，坐在%她%身旁的 %T% 主动起身，深深的吻住了善信
+          - 本就有些无力的身体被突然袭击压倒在休息室的椅子上，却完全没有反击的想法
+          - 洁白的小帽子落到地上，但两个人都没有在意的意思，瞳孔之中仅仅能映射出彼此的脸庞
+          - 不知亲吻过了多久，两个人才拉着银色的丝线把嘴唇分开
+          - 此时此刻，两双眼睛上下对视着
+          - 善信缓缓的闭上眼，把手放在 %T% 的脖子上，轻轻的拉到自己的面前
+          - color: %代表色%
+            content:
+              - fontWeight: bold
+                content: 目白善信
+              - 「请吧，是圣诞节的%自称%哦」
+          # 进入马跳
 
 圣诞有马拥抱马跳后续:
   - color: %代表色%
@@ -4245,7 +4645,7 @@
     content:
       - fontWeight: bold
         content: 目白善信
-      - 「主动kiss上来什么的，%自称%也很喜欢啦，但还是希望训练员你能说清楚很多事情哦」
+      - 「主动 kiss 上来什么的，%自称%也很喜欢啦，但还是希望训练员你能说清楚很多事情哦」
   - color: %代表色%
     content:
       - fontWeight: bold
@@ -4669,7 +5069,7 @@
 
 震惊！跑车是礼物！:
   #达成称号条件后，进入2月1周
-  - 一个平静的日子，正在办公室的你突然收到了骏川小姐的通知
+  - 一个平静的日子，正在办公室的你突然收到了%骏川缰绳%的通知
   - color: %绿帽色%
     content:
       - fontWeight: bold
@@ -4959,7 +5359,7 @@
       - 给善信的车子取名，而且要符合%她%的功绩，而且是值得珍视的名字……
       - 在 %T% 的思考里，答案已经只有一个了
       - acc: 1
-        content: 「目白善信！」
+        content: 「善信！」
       - color: %代表色%
         content:
           - fontWeight: bold
@@ -5042,7 +5442,6 @@
       - 不断加速的善信号，虽然曾经是不为人知的的，迟到的逃亡者，但是现在
       - %她%，比谁都要跑的快
       - %她%是偏离王道的先驱，描绘出一道目白家里最自由的轨迹
-    # 获得小汽车
   - acc: 2
     content: 「给管家打个电话吧……」
     lines:
@@ -5405,277 +5804,6 @@
             content: 目白善信
           - 「我不想让任何人否定这件事！」
       - 在这之后，善信和 %T% 说了许许多多的，关于%她%的朋友们的故事
-
-宁静的午睡时光:
-  #爱慕＞49，同心刻印lv1，天台出现
-  - 劳累的一个上午之后，身心俱疲的 %T% 带着便当走上了天台
-  - 刚刚推开门，善信就出现在视野的角落里朝着 %T% 用力的挥手
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「这边这边，训练员！」
-  - 挥手之后，善信从自己的包里拿出了有点夸张的便当盒
-  - 等到 %T% 坐下，满满当当的一整盒午饭就放到了面前
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「训练员你试试看？味道应该不错的哦！」
-  - 善信热情的夹起手里的小香肠，放在 %T% 的便当里
-  - 感受到身旁的热情，连带 %T% 身上的劳累感也一扫而空
-  - acc: 1
-    content: 「不愧是目白家，便当也那么好吃」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「好吃吗？嘿嘿……」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「那个，训练员，味道真的很不错对吧？」
-  - 善信脸上带着一点羞涩的微红，眼神在自己的便当和 %T% 的脸之间左右跳动着
-  - acc: 1
-    content: 「很不错哦」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「是吗？嗯嗯……」
-  - 善信脸上原本的不安感一下消失，变得欢快起来
-  - 直到吃完便当之后，两个人才在阴凉的地方躺下，享受起午休安静的时光
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「呼——」
-  - 善信躺在 %T% 的身旁，发出平稳而悠长的呼吸声
-  - 毫无防备的样子，似乎完全不在乎会发生什么一样
-  - 在这个两个人初次见面的天台，%她%就这样安静的睡着了
-  - 安详，不设防，不做任何抵触，就这样安静的躺在这里
-  - 午休的时间很长，长到可以做很多的事情
-  - acc: 1
-    content: 就这样看着善信的睡脸（好感+10）
-    lines:
-      - 微风带着温柔的触感吹过
-      - 看着善信有一点呆呆的睡脸，%T% 自然的笑了起来
-      - 不知不觉间，午休的时间已经快到了
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「嗯……」
-      - 似乎是知道了现在的时间，善信浅浅的扭动了一下肩膀
-      - 原本平静的睡脸上稍微有点小小的不适感，或许很快就会醒过来
-      - 对着这样可爱的睡脸，%T% 没忍住悄悄的伸出了手指
-      - acc: 1
-        content: 「该醒醒啦」
-      - acc: 2
-        content: 安静的戳戳脸
-      - 在睡梦中感受到外界的动静，有点不安的睁开了有些没睡醒的眼睛
-      - 只是在抬起头的时候，脸颊撞上了什么
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「啊……啊咧？」
-      - 从午睡中醒过来的善信把眼神微微向下看去，这才发现了戳在自己脸上的手指
-      - 视线短暂的对上之后，善信才把自己的脸从 %T% 的手旁边移走
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「啊哈哈……睡着的时候不会在意这些呢，那个……」
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「……好啦好啦！要上课了啦！」
-      - 从交谈中逃跑的善信一口气跑到了天台的门口，只是在这里稍微停留了一会
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「……啊！我到底在想什么啊！」
-      - 推开门，只留下 %T% 在天台上
-  - acc: 2
-    content: 稍微恶作剧一下吧（爱慕+2）
-    lines:
-      - 就这样恶作剧一下吧
-      - 善信已经睡着了，只要不做什么过分的事情
-      - 只要不去做很过分的事，稍微恶作剧一下
-      - 思考过后，%T% 在衣服里翻到了一支崭新的中性笔
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「呼……」
-      - 善信睡的很香，直到 %T% 已经画好了自己的大作
-      - 现在的话，还可以趁着善信没有睡醒，把痕迹擦掉也没问题的哦
-      - 只要把中性笔的字迹擦掉，赶在午休结束之前……
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「嗯……」
-      - 只是，留给 %T% 的时间已经结束了
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「训练员，你没睡着吗……啊咧？」
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「为什么拿着笔……」
-      - 这样说着的善信，习惯性的摸了摸自己的脸
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「这个感觉……训练员？」
-      - 善信的眼神里带着不信赖的感觉，看着手上的墨水
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「都那么大的人了，还要做这样的恶作剧」
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「训练员你也长不大呢～」
-      - 对着有点慌乱的 %T%，开玩笑的伸手戳了几下
-      - 只是下午的时候，带着口罩上课的善信无比后悔没有给 %T% 也画上几笔
-  - if: era.get('love:64') >= 75
-    acc: 3
-    content: KISS一下不会被发现吧（爱慕＞74可选）
-    lines:
-      - 平日的天台没有嘈杂的声音，在这里的只有风声和善信平稳的呼吸声
-      - 现在只有两个人在这里，做什么都不会被发现
-      - 善信已经睡着了，稍微……
-      - acc: 1
-        content: 「只是稍微碰那么两下的话……」
-      - 轻轻的靠近了善信的身前，遮住了照在%她%身上的稀疏阳光
-      - 善信的呼吸声依旧平稳，完全没有对身边的 %T% 设防的样子
-      - 带着脸上的绯红色，%T% 有点犹豫的慢慢伏下身
-      - 对着眼前平静的睡颜，以及红润的嘴唇
-      - 张开双手撑起有点颤抖的身体，两张脸逐渐贴近，嘴唇之间即将贴在一起
-      - acc: 1
-        content: 就这样亲下去吧
-      - acc: 2
-        content: 就这样亲下去真的好吗
-      - acc: 3
-        content: 就这样亲下去能收住手吗
-      - 思考着接下来的动作，但 %T% 的身体并没有等待
-      - 嘴唇贴在一起，短暂的止住了呼吸
-      - 大脑的思考暂时断线了，再次连接的时候却已经结束了
-      - %T% 的脸上挂着红润，快速的呼吸着空气冷却着发红的身体
-      - 再次看向身边的善信，稍微咽下一口水
-      - 嘴唇上的气息依旧在勾动思绪，眼神死死的看着刚才亲密接触的位置
-      - 不受控制的再一次贴近善信的面前，尽力的压着呼吸
-      - acc: 1
-        content: 就这样亲下去吧
-      - acc: 2
-        content: 就这样亲下去吧
-      - acc: 3
-        content: 就这样亲下去吧
-      - 嘴唇第二次贴在一起，却没有轻微的鼻息扫在脸上
-      - 察觉到异常的 %T%，正要时起身却被一双手抱着脸，起不来身
-      - 舌头钻进嘴唇，穿过门牙，灵巧的勾动着
-      - 直到呼吸已经无法支撑身体的时候，压着后脑的双手才舍得松开
-      - 张着嘴分开贴在一起的两张脸，咽下嘴里的口水
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「……这样子，根本没法睡觉啦」
-      - 善信的脸上带着羞涩的笑脸，轻轻的抓着 %T% 的肩膀
-      - 两个人的眼神对在一起，，尴尬的笑了起来
-      - 因为突发情况而松开的嘴唇再一次贴在一起，交换着味道
-      - 午休结束的铃声在天台上响了起来，却没有让贴在一起的两个人分开
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「时间，到了呢」
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「虽然有点……嗯，没事」
-      - 善信的眼神不舍的离开了 %T%，站起身整理了一下有点乱的衣服
-      - 走到天台门口，回过头却不敢直视 %T% 的眼睛，有点微妙的刮着脸
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「……训练员，我们走吧？」
-      - acc: 1
-        content: 「嗯，走吧」
-        # 性欲+10%
-      - acc: 2
-        content: 「稍等一下，善信」
-        lines:
-          - 善信刚刚想要开门的手悬停下来，带着期待回过头
-          - 即使不说话，两方也清楚对方心里的事情
-          - color: %代表色%
-            content:
-              - fontWeight: bold
-                content: 目白善信
-              - 「……会迟到的耶」
-          - 半晌，善信才找到一句借口
-          - color: %代表色%
-            content:
-              - fontWeight: bold
-                content: 目白善信
-              - 「那个时候，训练员你能帮我解释吗？」
-          - acc: 1
-            content: 「可以啊」 # 合奸
-          - acc: 2
-            content: 「不行哦」 # 被强奸
-          - color: %代表色%
-            content:
-              - fontWeight: bold
-                content: 目白善信
-              - 「这样啊……」
-          - 背着手悄悄的锁上了身后的门，快步走到了 %T% 的面前
-          - 不带一点犹豫的扑进了 %T% 的胸口，压倒在地上
-          - 善信抬起已经红透的脸，用力的亲在 %T% 的脸上
-          # 马跳
-
-午睡马跳后续:
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「啊……这下要被老师抓去补习了啊」
-  - 善信坐在 %T% 的身边，对着天空念叨
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「突然翘课什么的，家里不知道会不会来问我呢」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「……不过到时候，训练员你会陪我的对吧？」
-  - 没等到回应，善信就站了起来
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「该走啦，训练员」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「……继续在这里会被发现的啦」
-  - 善信依旧带着笑脸，拉着 %T% 的手离开了天台
 
 绕远路的一杆进洞:
   #爱慕＞49，资深年圣诞节 商店街 触发
@@ -6048,115 +6176,8 @@
   - acc: 2
     content: 「到时候再说吧……」
 
-休闲时光:
-  # 爱慕＞49，同心刻印lv1，商店街 卡拉OK触发
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「突然就来唱歌了，发生什么了吗训练员？」
-  - 善信的双手背在身后，有点疑惑的歪头看着身边的 %T%
-  - acc: 1
-    content: 「只是突然间就想来了」
-  - acc: 2
-    content: 「偶尔也想和善信一起唱歌呢」
-  - 似乎是接受了这个解释，善信也没有多问
-  - 两个人推开包间的门，有点不安的坐下
-  - 在单独的包间里只有两个人……这个是不是有点，有点那个的倾向啊？
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「那个，训练员要点什么？我帮你先点上吧！」
-  - 仿佛是为了掩盖自己的坐立不安，善信主动走到了点歌机面前
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「难得是我们俩来唱歌，训练员你也要尽兴哦！」
-  - acc: 1
-    content: 「点善信你喜欢的歌吧」
-    lines:
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「是这样啊，那%自称%可要随便点了哦！」
-      - 不知为何，善信刚才还有点不安的样子消失不见了，取而代之的是热情的歌声
-  - acc: 2
-    content: 「重点是善信你觉得开心就好」
-    lines:
-      - 善信的动作稍微顿了一下，随后平静下来才缓缓的拿起了桌上的麦克风，朝着训练员伸出手
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「既然如此的话，那就和我一起唱！」
-      - 不知为何，善信虽然是笑着的但却有一点生气的样子
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「这样我就会很开心哦」
-  - acc: 3
-    content: 「不只是唱歌哦……」
-    lines:
-      - 听见 %T% 的话，善信的动作停下来了
-      - %她%一直是很聪明的，也一直很擅长听出来别人话里的深层含义
-      - 仅有两个人在一个隔音的包间里，这个意思已经足够明显了
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「训练员……真是色鬼」
-      - KTV 的自动播放已经开始传出音乐，但是并没有人跟着开始歌唱
-      - 坐在包间的沙发上，朝着眼前的搭档伸出了双手
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「%自称%就在这里哦……」
-      - acc: 1
-        content: 抱住善信
-        lines:
-          - color: %代表色%
-            content:
-              - fontWeight: bold
-                content: 目白善信
-              - 「哈啊，训练员的味道……」
-          - 把脸埋在 %T% 的怀里，享受着体温和气味
-          - 从拥抱的缝隙中间，传出了属于善信的声音
-          - 像是虚弱，像是脱力
-          - 分开拥抱的时候，慢慢的伏下身，轻轻拉开的面前的衣服
-          - 抓起眼前气息浓厚的麦克风，轻轻吹出一口气
-          - color: %代表色%
-            content:
-              - fontWeight: bold
-                content: 目白善信
-              - 「训练员的味道……」
-        # 马跳
-      - acc: 2
-        content: 捏善信的脸
-        lines:
-          - 对着张开双手的善信，%T% 无情的捏了一下%她%红润的脸
-          - color: %代表色%
-            content:
-              - fontWeight: bold
-                content: 目白善信
-              - 「呜哇！」
-          - 惊讶的声音从善信的嘴里飘了出来，睁大眼睛看着 %T%
-          - acc: 1
-            content: 「想什么呢，色鬼」
-          - 看着对方的反应，善信鼓起脸，抬起了拳头
-          - color: %代表色%
-            content:
-              - fontWeight: bold
-                content: 目白善信
-              - 「真是的……不要这样子开玩笑啊」
-          - 今天的歌声是用 %T% 被锤打的惨叫声交织的
-
 抽奖活动！:
-  # 爱慕＞49，经典年以后，1月期间 商店街抽奖触发
+  # 爱慕＞49，资深年1月期间 商店街抽奖触发
   - color: %代表色%
     content:
       - fontWeight: bold
@@ -6174,7 +6195,7 @@
             content: 目白善信
           - 「有一根胡萝卜也不错啦，回去做个烤胡萝卜什么的也不错啊」
       - 善信拿着手上的胡萝卜，依旧很开心的样子
-    # 体力+200
+      # 体力+200
   - if: d.dice === 2
     lines:
       - 一等奖：一篮胡萝卜
@@ -6186,7 +6207,7 @@
             content: 目白善信
           - 「哦哦，好多胡萝卜！这下大家都有份了！」
       - 善信一口气抱起整篮胡萝卜，朝着你露出了自然的笑容
-    # 属性+5
+      # 属性+5
   - if: d.dice === 3
     lines:
       - 特等奖：胡萝卜汉堡肉！
@@ -6699,1045 +6720,6 @@
             content: 目白善信
           - 「所以之后……晚点再一起吧」
     # 爱慕+6
-
-电影院怪谈！？:
-  #爱慕≥74，同队目白阿尔丹且爱慕≥74，无依存心，外出选择商店街 电影院
-  - 在商店街上漫步的时候，正好走到了电影院的门前
-  - 同时在门口，也正好撞上了另一个人
-  - color: %阿尔丹色%
-    content:
-      - fontWeight: bold
-        content: 目白阿尔丹
-      - 「啊，这不是善信吗？」
-  - color: %阿尔丹色%
-    content:
-      - fontWeight: bold
-        content: 目白阿尔丹
-      - 「你也来看……训练员也在啊」
-  - color: %阿尔丹色%
-    content:
-      - fontWeight: bold
-        content: 目白阿尔丹
-      - 「那我就不打搅你们俩啦～」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「唉！等等，阿尔丹！不是你想的那样！」
-  - 看着目白阿尔丹自顾自的后退一步，善信急急忙忙的跑上前去拉住了即将离开的脚步
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「我们只是刚刚好路过啦！」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「不过，阿尔丹你是来做什么的？」
-  - 半强行的拉住目白阿尔丹之后，善信才反应过来
-  - color: %阿尔丹色%
-    content:
-      - fontWeight: bold
-        content: 目白阿尔丹
-      - 「呵呵～最近有不少的新电影上线了」
-  - color: %阿尔丹色%
-    content:
-      - fontWeight: bold
-        content: 目白阿尔丹
-      - 「我来提前看一看有没有合适训练员看的」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「新电影吗……」
-  - 稍作思考过后，善信也抬起头看向电影院上方的屏幕
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「嗯，接下来也没什么事」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「阿尔丹有找到什么好看的吗？」
-  - color: %阿尔丹色%
-    content:
-      - fontWeight: bold
-        content: 目白阿尔丹
-      - 「倒是找到了一些啦，不过排片很少呢」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「这样啊……」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「不过，来都来了！训练员你想看吗？」
-  - acc: 1
-    content: 「恐怖电影怎么样？」
-    lines:
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「哦哦，恐怖电影吗！」
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「总感觉会很刺激呢！」
-      - color: %阿尔丹色%
-        content:
-          - fontWeight: bold
-            content: 目白阿尔丹
-          - 「恐怖电影……训练员你也真是坏心眼呢～」
-      - 隔着正在贩票机前有点小激动的善信，目白阿尔丹对着 %T% 做出了一个稍微有点苦恼的表情
-      - 毕竟现在再选择恐怖电影的话，两个人都能明白这是在迫害谁了
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「两位～三张票准备好了哦」
-      - color: %阿尔丹色%
-        content:
-          - fontWeight: bold
-            content: 目白阿尔丹
-          - 「嗯哼，我们走吧，训练员」
-      - color: %阿尔丹色%
-        content:
-          - fontWeight: bold
-            content: 目白阿尔丹
-          - 「这可是善信为你买的票哦～」
-      - 三个人一同走进了放映汀，在逐渐变暗的氛围里坐了下来
-      - 被善信和目白阿尔丹夹在中间的 %T%，不知为何感受到了一阵尴尬
-      - 直到周围完全变黑，幕布上浮现画面的时候
-      - color: %阿尔丹色%
-        content:
-          - fontWeight: bold
-            content: 目白阿尔丹
-          - 「……感觉没有之前的道具精妙呢」
-      - acc: 1
-        content: 「是啊」
-      - acc: 2
-        content: 「感觉还是你的变装更吓人一点」
-      - color: %阿尔丹色%
-        content:
-          - fontWeight: bold
-            content: 目白阿尔丹
-          - 「训练员的话术越来越好了呢，呼呼」
-      - 虽然目白阿尔丹脸上还是一幅平平无奇的模样，但另一边的完全不一样了
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「啊……啊……」
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「呜哇！」
-      - 自从屏幕上的鬼怪开始频繁登场，善信抓着 %T% 的手指就没有松开过
-      - 即使想要说点什么，但是电影院你也不好开口
-      - acc: 1
-        content: （出去再说吧）
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「不妙啊啊！」
-      - divider: true
-        content: 电影结束
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「不妙……真的不妙」
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「呜哇，感觉脚上都没力气了……」
-      - 刚刚出来的善信和大多数人一样，脚软的扶着 %T% 的肩膀，颤颤巍巍的勉强站稳
-      - 跟随着两人的脚步一同出门的目白阿尔丹看着善信的样子，自然的笑了起来
-      - color: %阿尔丹色%
-        content:
-          - fontWeight: bold
-            content: 目白阿尔丹
-          - 「没想到善信也有这个样子的时候呢～」
-      - color: %阿尔丹色%
-        content:
-          - fontWeight: bold
-            content: 目白阿尔丹
-          - 「今天看见了难得一见的画面呢，谢谢～」
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「真是的！阿尔丹！」
-      - 三个人一边走出电影院，一边说笑着
-      - 只是在踏出门口的一瞬间，看着夜空的善信默默的回退了一步
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「夜晚……原来那么吓人吗？」
-      - color: %阿尔丹色%
-        content:
-          - fontWeight: bold
-            content: 目白阿尔丹
-          - 「善信？」
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「那个，训练员？」
-      - 后退两步之后，善信一把抱住了 %T% 的手臂，带着泪水还没消去的眼神
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「能不能……送我回去呢？」
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「只，只要送一程就好了啦，真的……」
-      - color: %阿尔丹色%
-        content:
-          - fontWeight: bold
-            content: 目白阿尔丹
-          - 「阿拉？」
-      - 看着面前水汪汪的眼神，目白阿尔丹和 %T% 只能微妙的交换了一下眼神
-      - color: %阿尔丹色%
-        content:
-          - fontWeight: bold
-            content: 目白阿尔丹
-          - 「不过时间确实也很晚了……」
-      - color: %阿尔丹色%
-        content:
-          - fontWeight: bold
-            content: 目白阿尔丹
-          - 「交给我也没问题的哦？」
-      - acc: 1
-        content: 「我送你们回去吧」
-      - color: %阿尔丹色%
-        content:
-          - fontWeight: bold
-            content: 目白阿尔丹
-          - 「那就麻烦你啦」
-      - color: %阿尔丹色%
-        content:
-          - fontWeight: bold
-            content: 目白阿尔丹
-          - 「……嗯，或者说」
-      - 缓缓绕过抱紧了手臂的善信，用一个一模一样的姿势抱紧了另一边
-      - color: %阿尔丹色%
-        content:
-          - fontWeight: bold
-            content: 目白阿尔丹
-          - 「训练员会喜欢这样吗？」
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「快，快点回去啦……」
-      - 一边，是正在瑟瑟发抖的善信
-      - 一边，是毫无忌惮的把身体贴在 %T% 手臂上的目白阿尔丹
-      - acc: 1
-        content: 「……回去吧」
-      - acc: 2
-        content: 「去旅馆吧」
-        # 3P
-  - acc: 2
-    content: 「恋爱电影怎么样？」
-    lines:
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「恋爱电影？训练员喜欢这样的吗？」
-      - 听到答案的善信稍微歪头，但很快就转过身走到了贩票机前
-      - color: %阿尔丹色%
-        content:
-          - fontWeight: bold
-            content: 目白阿尔丹
-          - 「恋爱啊……有点稀奇呢」
-      - color: %阿尔丹色%
-        content:
-          - fontWeight: bold
-            content: 目白阿尔丹
-          - 「总感觉不太像是训练员会选的呢」
-      - 相比没做太多思考的善信，目白阿尔丹考虑的就不一样了
-      - color: %阿尔丹色%
-        content:
-          - fontWeight: bold
-            content: 目白阿尔丹
-          - （居然是恋爱电影什么的）
-      - color: %阿尔丹色%
-        content:
-          - fontWeight: bold
-            content: 目白阿尔丹
-          - （明明是三个人……）
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「阿尔丹？要开始了哦」
-      - color: %阿尔丹色%
-        content:
-          - fontWeight: bold
-            content: 目白阿尔丹
-          - 「了解～」
-      - 两位%马娘%一左一右坐在 %T% 的两边，莫名认真的看着电影
-      - 电影「你也是一样喜欢他的，没错吧」
-      - 电影「但是我不会输」
-      - acc: 1
-        content: 「很普通的剧情啊……」
-      - 黑暗中 %T% 的小声嘀咕，被两边听的清清楚楚
-      - 电影「我会抢在你之前……得到他的心！」
-      - 听着并不优质的台词，%T% 默默尬笑起来
-      - 只是笑声还没出来，就被人从身旁抓住了手
-      - 也许是因为影片的质量不高，影院里的人不算多
-      - 换言之，现在就只有善信和目白阿尔丹坐在周围
-      - 柔软的触感顺着手一点点往中间摸过去，接触到了有点敏感的部位
-      - acc: 1
-        content: 「！？」
-      - 两边的手在身上上下游走，挑起了一阵异样感
-      - %T% 的注意力已经无法放在电影上，只能咬紧牙忍耐着即将出口的声音
-      - 如此的酷刑不知道持续了多久，终于等到了电影结束的时刻
-      - 在座位上勉强抬起已经红透的脸，喘着粗气看着左右两边
-      - 而作为一切的始作俑者，目白阿尔丹和善信只是各自抢占了一边的手臂，把 %T% 从座位上抬了起来
-      - 在没有人注意到的时候，两个人同时贴到了耳边
-      - color: %阿尔丹色%
-        content:
-          - fontWeight: bold
-            content: 目白阿尔丹
-          - 「训练员，居然喜欢这样的故事呢」
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「看了这些的话……我不就会变的想要了嘛」
-      - 没有等到 %T% 的回答，善信和目白阿尔丹就已经一左一右的夹住 %T% 走出了影院
-      - 看着道路前方闪着霓虹灯的旅馆，%T% 的脸上挂上了哭笑不得的表情
-      - color: %阿尔丹色%
-        content:
-          - fontWeight: bold
-            content: 目白阿尔丹
-          - 「外宿的请求，已经准备好了哦」
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「姆……我也准备好了……」
-      - 坐在床上的两个人对过眼神，齐齐看向坐在床上被扒光衣物的 %T%
-    # 进入3P，阿尔丹上位，善信助手
-
-电影院怪谈马跳结束:
-  - color: %阿尔丹色%
-    content:
-      - fontWeight: bold
-        content: 目白阿尔丹
-      - 「居，居然……」
-  - color: %阿尔丹色%
-    content:
-      - fontWeight: bold
-        content: 目白阿尔丹
-      - 「训练员……真是过分呢」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「唉……」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「真厉害啊……训练员」
-  - 两个人摊到在床上，一起抱着夹在中间的 %T%，甜蜜的贴在胸口上
-  - 汗水沾满的身体带着色情的气味，但一点都没有移开的意思
-
-突然美食时间？:
-  #爱慕＞49时，一起加餐触发
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「啊，训练员，又在偷偷吃零食了！」
-  - 突然走进门的善信大声的打断了 %T% 正在掏薯片的动作，顺手拿走了放在桌子上的包装
-  - 虽然严格来说，休息的时候吃一包薯片并不是什么偷吃
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「真是的……」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「吃薯片的时候也分我一点嘛」
-  - 拿着包装迅速的吃了两口，自然的坐到了 %T% 的身边
-  - acc: 1
-    content: 「那我呢？」
-  - acc: 2
-    content: 「我的薯片……」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「啊」
-  - 反应过来的善信这才发现不对，尴尬的拿起了提过来的袋子
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「啊哈哈，也不是没想到训练员的份啦」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「反正今天下午没有什么事情对吧」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「所以我特意拜托麦昆帮我找了一些茶点～」
-  - 一边说着，一边把袋子里的小盒子都拿了出来
-  - 看着眼前摊开的几盒点心，似乎被抢走薯片的事情没发生过一样
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「来来，茶也准备好了哦～」
-  - 不知为何，原本准备摆烂度过的下午成为了两个人的茶会
-  - ……如果无视掉没过多久就突然变成派对的氛围的话
-# 两人体力+200，体重+10～20（x10）
-
-休息……？:
-  #爱慕＞74，马娘，非处女时，小憩触发
-  - 一个天气不好的日子，%T% 站在办公室里看着窗外感叹着
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「怎么了训练员？」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「不过只是一天的训练取消嘛，没关系啦～」
-  - 身后传来的是善信懒洋洋的声音
-  - 逃离了今天的环境，正开心的躺在办公室里刷着手机
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「果然，训练员的房间特别舒服呢～」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「总感觉今天身体格外的重哎～」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「训练员你也来嘛～」
-  - 在办公室配备的沙发上左右横滚了两圈后，留出了容下一个人的空间
-  - 侧躺的善信睁开原本快要困的快要闭上的眼睛，朝 %T% 招呼着
-  - acc: 1
-    content: 「今天……算了」
-  - acc: 2
-    content: 「这也太……咳咳」
-  - 原本想要说些什么的 %T% 只是吐了口气，顺着善信的意思坐到了沙发上
-  - 并不算大的沙发上，两个人放松的躺了下来
-  - 门外是无法训练的天气，门内是慵懒的气氛
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「啊……偶尔这样，其实也不错嘛」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「这样，两个人待在一起，什么都不想」
-  - 躺在沙发上的善信闭着眼，双手顺着 %T% 的手臂爬上来轻轻的抱了过来
-  - 独属于善信的气息在 %T% 的身边围绕着，挑动着内心的欲望
-  - 平稳的像是睡着了一样的鼻息，缓缓的吹在脖子上，带出一阵酥麻感
-  - acc: 1
-    content: 好想涩涩
-  - acc: 2
-    content: 好想操%她%
-  - acc: 3
-    content: 我要操%她%
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「呼啊……训练员的味道～哎嘿嘿」
-  - 在身旁满是困意的善信迷迷糊糊的说着，脸上浮出了一片潮红
-  - 今天的天气，并不适合出门，更适合室内运动
-  - 身下早已躁动不安的感觉，冲散了理智
-  - acc: 1
-    content: 「都是善信的错……」
-  - acc: 2
-    content: 「已经忍不住了……」
-  - 善信迷迷糊糊的睁开眼，却看见了贴近到面前的脸
-  - 正要发出声音的嘴，被强硬的吻住，夺走了呼吸
-  - 长久的压制后，善信无力的躺倒在沙发上，看着上方轻轻的喘着气
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「唉……」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「训练员……？」
-  - %T% 把善信整个人压在下方，腾出的一只手毫不犹豫地向下伸去
-  - 手指穿过布料，钻进了已经湿润的小穴里不断的搅动
-  - 看着身下善信一点点清醒的面庞，手指的动作也加快了几分
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「咕……呜啊」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「训练员……不要这样」
-  - 用力的捂着脸，胡乱的挣扎着
-  - 这又如何呢，这是善信先勾引的，怎么会就这样停下来
-  - if: era.get('cflag:0:性别') > 0
-    content: 早已充血的小伙伴此刻已经高高扬起，此刻已经紧紧的贴在拉开了布料的湿润小穴边上，只要再微微向前推动一点，快感的浪潮就会轻而易举的破坏掉善信的思考吧（男）
-  - if: era.get('cflag:0:性别') === 0
-    content: 早已同样湿润的身体不等善信的拒绝，两朵花瓣紧紧的贴在一起，不断的摩擦着，只要再用力一点，身下的身体就会因为高潮而无法停止颤抖吧（女）
-  - acc: 1
-    content: 「就这样去吧」
-  - 轻轻的咬一口早就已经因为敏感的身体而发抖的耳朵，轻吹一口气
-  - 小穴在不停的颤抖着，却还在色情的不断开合着
-  - 已经无法再忍耐的 %T% 一口气撞向正在发抖的小穴，享受着身下传来的快感充斥在两个人之间
-  - 被冲击吹飞了思考能力的善信躺在 %T% 的面前，带着不成体统的表情伸出双手
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「训练员……我的训练员……」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「更多的，都可以哦」
-  - 纤细的双手环过 %T% 的脖子，与 %T% 用力的相拥在一起
-  - 对着眼前挑起了欲望的善信，此刻已经不再有任何冷静下去的理由
-  - 剩下的时间，将是美美享用的时间
-# 马跳
-
-短暂旅程:
-  #爱慕＞74，事件「震惊！跑车是礼物！」后，使用小汽车/跑车外出
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「呜呼～！」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「果然坐车出门的感觉超级爽快的啊！」
-  - 两个人坐在车上，强风顺着窗户吹在善信脸上
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「果然，坐车的感觉完全不一样呢」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「这样的感觉，和赛场……和平时跑步都完全不一样啊」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「呜～训练员，还能再快点吗？」
-  - acc: 1
-    content: 「再快点就要失控了啊」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「啊，这样啊……」
-  - 坐在一旁享受着风吹过的感觉，自然的摇晃着上半身
-  - 抬起手撩开在眼前飞舞的头发，看着窗外飞快流动的景色
-  - 车子沿着海边开了一路，慢悠悠的停在一个无人的停车场
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「唉～今天意外的没什么人呢」
-  - 虽然车子已经停了下来，但是善信还坐在车上
-  - 扫视着窗外几乎看不见人的海滩，默默的解开了安全带
-  - acc: 1
-    content: 「不下去吗？」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「嗯……虽然训练员今天带我出来我很高兴啦」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「不过呢，只有我们两个人的话……」
-  - 坐在车里穿着私服的善信，带着一点微红看着 %T%
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「这个算约会，对吧？」
-  - acc: 1
-    content: 「是啊，这是约会呢」
-  - 善信的上半身微微倾斜，向着另一边倒过去
-  - 软软的肩膀倾倒在 %T% 的身上，面带微红的拉开了领口的蝴蝶结
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「……」
-  - 但动作就僵在了这里，原本拉开蝴蝶结的手指，现在正夹着领口避免放开
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「这样是不是稍微，太过了？」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「训练员不喜欢的话我就，不这样了」
-  - 身体缓慢的从 %T% 的怀里移开，双手慌乱的想要重新把衣服整理好
-  - acc: 1
-    content: 「我并不讨厌这样……」
-  - acc: 2
-    content: 「想做就直接做」
-  - 整理领结的手指停在空中，原本已经拉起来的衣服又缓缓向下滑去
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「也就是说……」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「这样做，的话，训练员也？」
-  - 原本还有些犹豫和逃避的眼神，此刻已经明亮起来
-  - 深绿色的上衣落在座椅上，露出了为了今天而准备的新内衣
-  - 双手抱住了 %T% 的脸，轻轻的往自己的方向拉过来
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「就在这里……对吧？」
-  - acc: 1
-    content: 「随你开心吧」
-  - acc: 2
-    content: 「想好了就自己动」
-  - 来自 %T% 的许可，放开了善信内心理性的枷锁
-  - 吵闹的车内，逐渐只剩下了不断重复的喘气声，和水声
-  - 直到日落返程的时候，才开始手忙脚乱的收起车内散落的纸巾和作案工具
-# 马跳
-
-一场小故事的开始:
-  # 爱慕＞85，善信沉睡状态时结束回合
-  - color: %代表色%
-    content: 不知过去了多久，已经失去了赛场的目白善信被带回了本家
-  - color: %代表色%
-    content: 而 %玩家本名% 也失去了目白善信的搭档这一身份
-  - color: %代表色%
-    content: 似乎两个人之间的联系就在此切断，往后就不再有交集
-  - color: %代表色%
-    content: 直到善信和 %玩家本名% 再一次相遇的时候，似乎又联系上了
-  - color: %代表色%
-    content: 没有任何的犹豫，一言不发的扑进了 %玩家本名% 的怀里，却不再像在役时期一样紧紧地抱紧
-  - color: %代表色%
-    content: 仅仅是在胸口贴着，想要感受这份心跳
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「呐，训练员」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「对不起啊……」
-  - color: %代表色%
-    content: 再一次从 %玩家本名% 的怀里起身，颤抖着抬起手
-  - color: %代表色%
-    content: 明亮的戒指在手指上，格外的显眼
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「我，已经结婚了啊……」
-  - color: %代表色%
-    content: 泪水滑过脸庞，却是无力的微笑起来
-  - color: %代表色%
-    content: 长久的拥抱在一起，直到再次睁眼
-  - divider: true
-  - color: %代表色%
-    content: 善信猛的推开盖在身上的被子，重重的为不能呼吸的身体充气
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「梦？」
-  - color: %代表色%
-    content: 在宿舍里呆坐的善信，看着自己仍旧发抖的双手
-  - color: %ACE色%
-    content:
-      - fontWeight: bold
-        content: 葛城王牌
-      - 「怎么了？一脸做噩梦的表情」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「没什么……不过确实是噩梦啦」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「和训练员以外的人结婚什么的……」
-  - color: %ACE色%
-    content:
-      - fontWeight: bold
-        content: 葛城王牌
-      - 「嗯，训练员怎么了吗？」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「没什么事！真的！」
-  - color: %ACE色%
-    content:
-      - fontWeight: bold
-        content: 葛城王牌
-      - 「有什么事情的话，还是早点和搭档说比较好哦」
-  - color: %ACE色%
-    content:
-      - fontWeight: bold
-        content: 葛城王牌
-      - 「直率一点的话，说不定效果更好」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「直率……」
-  - color: %代表色%
-    content: 下垂的手指轻轻的按在胸口，感受着仍然没有冷静的心脏
-  - color: %代表色%
-    content: 再次睁开眼的善信，带着坚定的眼神起身
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「我明白了……直率的呢」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - （直接说结婚的事情，一定会被当成什么玩笑吧）
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - （不过，玩笑的话……）
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「稍微和训练员开个玩笑的话，会不会生气呢……」
-
-并不好笑的玩笑:
-  #「这只是一个玩笑……」触发后结束回合
-  - 工作结束的 %T% 刚刚从椅子上起身，就听见了门口传来的一阵熟悉的脚步声
-  - 出现在门口的是今天原本是在假期中的善信，不知为何出现在了这里
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「训练员……现在，有时间吗」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「现在，稍微有点事情想和你说呢」
-  - 用没有底气声音说完之后，背着手关上了门
-  - 在安静的空间里，善信缓缓的走近到 %T% 的身前
-  - 不由分说的，把全身埋进了 %T% 的胸口，轻声抽泣着
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「呐，训练员」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「对不起啊……」
-  - 从 %T% 的怀里起身，颤抖着抬起手
-  - 明亮的戒指在手指上，反射着纯白的灯光
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「训练员，虽然，很难说出口……」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「我，说不定要结婚了」
-  - acc: 1
-    content: 「结婚！？」
-  - 不知何时，善信已经没有再呆在 %T% 的面前
-  - 重新意识到现状的 %T%，嘴里还在喘着气，手臂上传来了一阵酸痛
-  - 脸上挂满的惊吓的善信，捂着手愣愣的看着
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「训练员……？」
-  - 后退了几步的善信脸上的表情带着一丝喜悦，缓缓的握紧了手
-  - 白色的戒指掉落在地面上，发出塑料的声音
-  - 「塑料？」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「……是的哦」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「只是，塑料」
-  - 握紧的手缓缓放开，依旧是原先洁白的模样，看不见戒指的痕迹
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「训练员，因为我的事情，生气啦？」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「这个只是玩笑啦，只是……从漫画里看到的，啊哈哈」
-  - 对着 %T% 的脸，有些尴尬的挠着后脑
-  - 从带上这个玩具开始，就完全没想到会导致如此暴怒的现状
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「只是玩笑，只是玩笑……」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「那个，训练员？」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「训练员？」
-  - 原本脸上惊恐和喜悦的表情一下消失，慌乱的向前走了几步
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「那个，对不起……」
-  - acc: 1
-    content: 「这个笑话可不好笑」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「噫！」
-  - 原本还有点侥幸心理的善信颤抖了一下，深吸了一口气
-  - 张开口默默的开合几下，又闭上了
-  - 现在的 %T% 很生气，这是一眼就能看出来的
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「那个……」
-  - acc: 1
-    content: 用行动
-    lines:
-      - 房间里除了善信越来越慌的呼吸声，安静的可怕
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「训练员？」
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「我知道我错了，所以就……」
-      - 还在辩解着什么的善信，突然停止了话语
-      - 嘴唇被无情的夺走了自由，被 %T% 全力抓紧在怀里
-      - 心脏猛烈跳动着，却没有把这份力气用在推开 %T% 上
-      - 已经认错的善信默默的抱紧了拥抱自己的人，闭上了眼睛
-      - 再次松口的时候，明亮的蓝色瞳孔已经被水雾盖上
-      - 眼前还在生气的那张脸，现在显得格外可爱
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「如果，如果这样」
-      - 善信开口的时候，轻轻往前贴去
-      - 已经充满潮红的脸微微向前，咬着 %T% 的耳朵
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「这样你能消气的话……我就不会拒绝哦」
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「%自称%，一直是你的哦」
-  - acc: 2
-    content: 用语言
-    lines:
-      - 安静的房间被 %T% 的声音打破了宁静
-      - 善信愣愣的看着 %T%，眼神里带着一丝害怕
-      - acc: 1
-        content: 「……我可不能接受这样的玩笑」
-      - 如此说完的 %T% 恼火的坐回了座位，拿起了自己的包
-      - 自知玩笑过火的善信安静的抓着自己的手，双腿不安的乱动着
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「那个，训练员……」
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「要走了吗？」
-      - 站在一旁的善信声音很小，轻轻的抓住了 %T% 的衣角
-      - 眼里带着泪水，低着头
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「训练员不喜欢这样的话……」
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「我，我不会再这样了……」
-      - 话语里带着一丝哭腔，颤抖着
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「只要训练员消气的话，我做什么都可以！」
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「所以别这样啊……」
-      - 深知玩笑开的严重，善信也体会到了恐惧感
-      - acc: 1
-        content: 「好了，以后这种玩笑禁止」
-      - acc: 2
-        content: 直接离开
-      - 站在原地看着 %T% 离开的背影，善信蹲下身捡起了玩具戒指
-      - 紧握了没过几秒，生气的丢进了一旁的垃圾桶里
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「什么恋爱漫画啊……」
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「这样的玩笑，有什么用啊……」
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「我真是……笨蛋！」
-
-玩笑马跳结束:
-  - 落在 %T% 的身边一动不动的善信，仅仅是微笑着
-  - 轻轻的依靠着 %T% 的身体，依偎在其中
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「果然，强硬的训练员，很帅呢」
-
-玩笑已经结束了:
-  #「并不好笑的玩笑」选择分支2，下回合开始时
-  - 这是一个不好笑的玩笑
-  - 独自一人的善信在脑海里反复品尝着这一句话，看着塑料的玩具戒指
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「这种玩笑，禁止」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「……如果不是玩笑的话，训练员会怎么样呢」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「如果，如果是……」
-  - 有些无神的双眼缓缓的又明亮起来，瞳孔里反射出来的玩具已经不再是一个玩具
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「如果戒指是给训练员的话」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「如果是，如果是……」
-  - 自言自语的声音逐渐加快，连同身体也莫名的兴奋起来
-  - 心脏猛烈的跳动，鼻息也不自然的加快
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「必须」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「准备好我们两人的戒指呢」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「令人期待呢……训练员～」
-  # 爱慕+4
 
 # 随机事件
 错过午休时间:
@@ -8552,404 +7534,8 @@
   - 在与激励自己的挚友道谢之后，善信开始了今天的晨练
   - 直到带着脸上不知道是害羞还是兴奋还是运动导致的红晕，和散步的 %T% 撞到一起为止
 
-夏日的小小意外:
-  # 爱慕＞74，陪同合宿时随机出现
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「%称呼%！能帮我提一下防晒油吗？」
-  - 「可以是可以，但为什么不让太阳神%她%们来帮你？」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「太阳神%她%们已经下去了啦，突然叫%她%们回来也不太好」
-  - color: %代表色%
-    content: 善信趴在垫子上，尾巴有些兴奋的左右扫动着
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「再说了，%称呼%也不是第一次这样接触我了吧？你看上次自由赛的时候也是%称呼%你帮我擦汗的啊」
-  - 「但那次可不是泳装啊，怎么能一样」
-  - color: %代表色%
-    content: %称呼%的声音里带着一点恼火，但在善信的耳朵里只是很平常的吐槽罢了
-  - color: %代表色%
-    content: 毕竟善信很清楚自己的搭档为人是什么样的，不会有什么比较特殊的想法
-  - color: %代表色%
-    content: 至少对于自己……大概吧
-  - acc: 1
-    content: 「嗯，背后差不多了，善信」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「好嘞」
-  - color: %代表色%
-    content: 从垫子上起身，刚刚翻过来却看见了%称呼%转移视线的脸
-  - color: %代表色%
-    content: 莫不成……这是害羞了吗？这样的情况倒是少见呢
-  - color: %代表色%
-    content: 善信有点不怀好意的笑了笑，但很快就把心里的奇怪想法压了下去
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「前面我自己来就好了，%称呼%……%称呼%？」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - （这个……难道？）
-  - color: %代表色%
-    content: 看着 %称呼% 一言不发的放下手里的防晒油转过身去，善信脸上浮出一点微红
-  - color: %代表色%
-    content: 夏天的衣服可没有遮挡什么的能力，更何况现在 %称呼% 身上只是一件衬衫呢
-  - color: %代表色%
-    content: 一片红的耳朵只要稍微留意一点就能看见了
-  - color: %代表色%
-    content: 是害羞了吧？这一定是害羞了吧？
-  - color: %代表色%
-    content: 稍微有点想捉弄一下呢……
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「嗯哼？」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「要不训练员……前面的部分也交给你吧？」
-  - color: %代表色%
-    content: 话已出口，后知后觉的发现说了什么不该说的话
-  - color: %代表色%
-    content: 也就是说前面的部分可以让 %称呼% 随便摸了
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - （啊咧，是不是过了点）
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - （%称呼%……会接受吗？）
-  - color: %代表色%
-    content: 心脏跳动的速度还在加快，感觉已经堪比比赛的时候……
-  - color: %代表色%
-    content: 善信的脸从一开始有些玩味的笑脸变成了一片红的尴尬样，只能祈祷 %称呼% 害羞的拒绝
-  - color: %代表色%
-    content: 但一般情况下，祈祷什么就会反过来发生什么
-  - acc: 1
-    content: 「好，好吧……」
-  - color: %代表色%
-    content: %称呼% 的声音有些颤抖，但是防晒油已经准备好了
-  - color: %代表色%
-    content: 转过身来的时候，四目相对
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「果，果然还是我自己来好了！仔细一想我这边很怕痒……」
-  - color: %代表色%
-    content: 善信的双眼转起了小小的螺旋，慌张的想要把 %称呼% 手上的防晒油抢走
-  - color: %代表色%
-    content: 不知道是海滩上的风大呢，还是善信的动作太大
-  - color: %代表色%
-    content: 遮阳伞的下方稍微松动了一下，便朝着两个人的方向砸了下来
-  - 「善信！」
-  - color: %代表色%
-    content: %称呼% 趴在善信的上方，用手肘勉强撑起来一点空间
-  - color: %代表色%
-    content: 善信躺在下方，不知所措的把双手缩在胸前，看着 %称呼% 同样有些红的脸
-  - color: %代表色%
-    content: 遮阳伞很大，留出了一片相当大的空间，自然也没有砸到人
-  - 「抱歉！我立刻起……」
-  - color: %代表色%
-    content: 在 %称呼% 想要起身的时候，善信眼疾手快捉住了他的手
-  - color: %代表色%
-    content: 防晒油的瓶子落在一旁，被善信顺手拿了过来，倒在 %称呼% 的手上
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「%称呼%……前面也可以交给你吗？」
-  - color: %代表色%
-    content: 羞红着脸，说出了自己未曾设想过的话
-  - color: %代表色%
-    content: 现在两个人都被遮阳伞盖在下方，外面的人不注意的话什么都看不见
-  - color: %代表色%
-    content: 抓着 %称呼% 的手，往自己的身上拉了一下
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「麻烦负起责任啊……让我心动的责任……」
-  - color: %代表色%
-    content: 善信自言自语着，仿佛是在说服自己
-  - color: %代表色%
-    content: %称呼%好像什么都没有听见，只是战战兢兢的伸手在善信的身上轻轻的滑过
-  - color: %代表色%
-    content: 清凉的防晒油和手掌的温热合在一起，在善信光滑的小腹上上下滑动
-  - color: %代表色%
-    content: 脸上的绯红已经爬到了脖子根，但以往带动自己逃跑的双腿却没有一点力气
-  - color: %代表色%
-    content: 想要逃跑，但是……
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - （训练员的话，不逃跑也可以吧）
-  - 「善信，已经好了」
-  - color: %代表色%
-    content: 收起手，从善信的眼前移开
-  - color: %代表色%
-    content: 转过身伸手抓着遮阳伞，一点点抬了起来
-  - color: %代表色%
-    content: 看着 %称呼% 的背影，善信沉默着
-  - color: %代表色%
-    content: 现在的话，谁都不会看见我们两个人
-  - color: %代表色%
-    content: 现在的话，做什么都不会被发现的吧
-  - color: %代表色%
-    content: 现在的话……
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「呐，%称呼%」
-  - color: %代表色%
-    content: %称呼%放下手里的遮阳伞，转身看着善信
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「这里……还没有」
-  - color: %代表色%
-    content: 指着自己的胸口，红着脸
-  - color: %代表色%
-    content: 不知道%他%会怎么做呢
-  - color: %代表色%
-    content: 或许……
-  - acc: 1
-    content: 「善信，这里是……」
-  - color: %代表色%
-    content: 沾着防晒油的手在抖
-  - color: %代表色%
-    content: 即使被抓着，被拉倒了善信的身前
-  - if: era.get('cflag:64:性别') !== 1 && era.get('cflag:0:性别') === 1
-    color: %代表色%
-    content: 都说男人是不会对女性的胸有意见的，但是……
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「如果%称呼%不喜欢的话……」
-  - color: %代表色%
-    content: 悬停在半空颤抖的手掌直到善信自己挺起胸膛，才停下了抖动
-  - color: %代表色%
-    content: 善信紧紧闭着双眼，紧张的身体在微微发抖
-  - color: %代表色%
-    content: 温热的液体在胸脯上滑过，流进泳衣
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「%称呼%……」
-  - color: %代表色%
-    content: 善信紧闭的双眼缓缓睁开，看着 %称呼% 有点不知所措的脸
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「喜欢吗？」
-  - color: %代表色%
-    content: 善信伸出纤细的手，轻轻的扶着 %称呼% 的脸，朝自己的脸上拉过来
-  - color: %代表色%
-    content: 嘴唇碰在一起，交换着两个人的温度
-  - color: %代表色%
-    content: 舌头自然的钻过牙齿的屏障，交缠在一起
-  - color: %代表色%
-    content: 直到呼吸已经无法支撑，这才不舍的带着舌尖拉出一丝唾沫的连线
-  - acc: 1
-    content: 「但是，现在还不行」 # 性欲+5%
-    lines:
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「唉……」
-      - color: %代表色%
-        content: 仿佛发热的头脑被冷水淋下，冷却下来回归了正常的思考
-      - color: %代表色%
-        content: 善信坐起身，有点慌张的看了一眼遮阳伞外的世界
-      - color: %代表色%
-        content: ……没有人发现这里
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「我一直不去的话，大家会起疑心的」
-      - color: %代表色%
-        content: 善信轻轻抓住自己早就压不住激动的尾巴，装作无事发生的从阴影里站起来
-      - color: %代表色%
-        content: 深呼吸一口，把手伸向%称呼%
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「回去之后……就和%称呼%你一起……」
-  - acc: 2
-    content: 「我喜欢你，善信」
-    lines:
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「我也是，%玩家本名%」
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「我喜欢%玩家本名%……」
-      - color: %代表色%
-        content: 放开抓住 %称呼% 的双手，手指轻轻的拉开泳衣的系带
-      - if: era.get('cflag:64:性别') !== 1
-        color: %代表色%
-        content: 小小的樱桃已经挺立，等待着
-      - color: %代表色%
-        content:
-          - fontWeight: bold
-            content: 目白善信
-          - 「请吧……」
-    # 马跳
-
-涂防晒油马跳结束:
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「啊……这下坏了」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「大家一定发现我们不在了吧，不妙」
-  - color: %代表色%
-    content: 轻轻地推开 %称呼% 同样沾满汗水的身体，擦掉身上的痕迹
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「那个，回去我们还能继续对吧」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「不，不是你想的那个意思啦！只是……」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「和%称呼%在一起很开心，什么的」
-  - color: %代表色%
-    content: 善信红着脸，有点报复意味的往 %称呼% 身上又捏了一下
-
-海边的散步时光:
-  #夏日合宿中，跟随夏合宿，触发过庙会且爱慕＞74后随机出现
-  - 夏日合宿的末尾，没有留下多少训练任务，剩下了相当多的自由时间
-  - 善信独自看着沙滩上的海浪，时不时朝身后的 %T% 偷瞄几眼
-  - 下午的时间很快就过去，沙滩上已经看不见其他的%马娘%还在训练了
-  - acc: 1
-    content: 「好了，我们也该回去了……」
-  - 正要离开的时候，善信轻轻地拉住了 %T% 的手
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「那个啊，训练员，能稍微……」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「……稍微一点就好，陪我在这里走走，可以吗？」
-  - 善信的眼神看着其他方向，却时不时向 %T% 的方向看过来
-  - acc: 1
-    content: 「可以哦」
-  - acc: 2
-    content: 「但时间很晚了……」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「嗯哼……我们好像很久没有这样散步了吧」
-  - 善信的双手背在身后，小腿不安的轻敲着地板
-  - 眼神在自己身上的泳衣和 %T% 的身上来回循环着，却唯独没有看向脸
-  - 收起训练用具的 %T% 没有注意到不太安稳的小动作，动身走到了善信的身旁
-  - 海滩上的夕阳照亮了两个人的侧脸，安静的漫步着
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「平时在这里的时候，都是很多人在一起呢」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「大家一起训练，一起玩什么的……」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「虽然玩的很开心啦，但是总觉得缺少了什么」
-  - 善信缓步贴在 %T% 的身边，肩膀贴着肩膀
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「和训练员你单独在一起的时候，感觉……」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「……感觉明白了，缺少的是什么」
-  - acc: 1
-    content: 「是什么？」
-  - 听见了 %T% 的声音，善信不由自主的笑了起来
-  - 对着身边毫无防备的侧腹，不用力的小小戳了一下
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「是训练员你哦」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「不是训练，不是大家在一起……只是我们两个」
-  - 夕阳的金色余晖照在善信的脸上，遮住了满脸的绯红色
-  - 安静的站在海滩边，感受着海浪冲上岸时没过脚踝的触感
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「我说啊，训练员」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「以后都能一直陪我一起吗？」
-  - color: %代表色%
-    content:
-      - fontWeight: bold
-        content: 目白善信
-      - 「就像是以前你说的那样，一直看着我」
-  - 善信背对着明亮的太阳，对着 %T% 灿烂的笑着
-
 向前迈出的一步:
-  #爱慕＞74，任意降低好感事件后
+  #爱慕＞74，满足睡奸条件
   - color: %代表色%
     content:
       - fontWeight: bold
@@ -9073,7 +7659,7 @@
       - 「唉？」
 
 过度关心啦！:
-  # 男/FUTA，马娘，爱慕≥74，同队目白莱恩且爱慕≥74，无依存心，在上回合沉睡后随机出现
+  # 男/FUTA，马娘，爱慕≥74，同队目白莱恩且爱慕≥74，无依存心
   - color: %代表色%
     content:
       - fontWeight: bold
@@ -9156,8 +7742,7 @@
           - fontWeight: bold
             content: 目白善信
           - 「那个，是困了吗？」
-      - acc: 1
-        content: 「也，也许是吧」
+      - 「也，也许是吧」
       - color: %代表色%
         content:
           - fontWeight: bold

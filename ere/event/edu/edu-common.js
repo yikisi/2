@@ -471,6 +471,7 @@ class CustomizedEdu extends ICustomizedEdu {
     const { pseudo } = extra_flag;
     if (pseudo.race.conditionParams.item === 1) {
       if (extra_flag.rank === 1) {
+        await print_event_name('情绪高涨的胜利', chara);
         await era.printAndWait([
           me.get_colored_name(),
           ' 迎接面色潮红的 ',
@@ -493,6 +494,7 @@ class CustomizedEdu extends ICustomizedEdu {
           '，这才避免了白日宣淫。',
         ]);
       } else {
+        await print_event_name('意料之中的败北', chara);
         await era.printAndWait([
           me.get_colored_name(),
           ' 迎接垂头丧气的 ',

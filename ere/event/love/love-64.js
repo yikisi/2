@@ -14,6 +14,7 @@ const {
 const {
   sys_change_lust,
   sys_change_motivation,
+  sys_change_weight,
 } = require('#/system/sys-calc-base-cflag');
 const {
   sys_get_callname,
@@ -29,10 +30,12 @@ const punish_rejecting_love = require('#/event/love/snippets/punish-rejecting-lo
 const { add_event } = require('#/event/queue');
 const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
 const masturbate = require('#/event/snippets/masturbate');
+const print_event_name = require('#/event/snippets/print-event-name');
 const print_name_and_show_kojo = require('#/event/snippets/print-name-and-show-kojo');
 const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { get_random_value } = require('#/utils/value-utils');
 
 const EroParticipant = require('#/data/ero/ero-participant');
 const { part_enum } = require('#/data/ero/part-const');
@@ -40,9 +43,8 @@ const PamaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-64');
 const event_hooks = require('#/data/event/event-hooks');
 const PamaLifeMarks = require('#/data/event/life-event-marks/life-event-marks-64');
 const { location_enum } = require('#/data/locations');
+const { vehicle_enum } = require('#/data/move-const');
 const RaceHistory = require('#/data/race/model/race-history');
-const print_event_name = require('#/event/snippets/print-event-name');
-const { get_random_value } = require('#/utils/value-utils');
 
 module.exports = class extends CustomizedLove {
   get #dict() {
@@ -50,7 +52,7 @@ module.exports = class extends CustomizedLove {
     const pama = get_chara_talk(this.id);
     const me = get_chara_talk(0);
     ret['代表色'] = pama.color;
-    ret['你'] = me.name;
+    ret.T = me.name;
     ret['她'] = pama.sex;
     ret['少女'] = pama.teen_sex_title;
     ret['称呼'] = sys_get_callname(this.id, 0);
@@ -286,7 +288,7 @@ module.exports = class extends CustomizedLove {
     ) {
       return;
     }
-    if (era.get(`cflag:${this.id}:自主训练`) > 0) {
+    if (era.get(`cflag:${this.id}:自主训练`) === 0) {
       add_event(stage, event_object);
       return;
     }
@@ -373,5 +375,288 @@ module.exports = class extends CustomizedLove {
       era.set('flag:当前位置', cache);
     }
     return true;
+  }
+
+  /**
+   * @param {CharaTalk} pama
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param extra
+   * @param {EventObject} event_object
+   */
+  async nap(pama, me, callname, hook, extra, event_object) {
+    if (era.get('flag:当前互动角色') !== this.id) {
+      add_event(hook.hook, event_object);
+      await era.printAndWait(
+        ['【想和 ', pama.get_colored_name(), ' 在天台吃午饭吗】'],
+        {
+          color: pama.color,
+        },
+      );
+      await era.clear(1);
+      return;
+    }
+    const ret = await print_name_and_show_kojo(
+      '宁静的午睡时光',
+      pama,
+      kojo,
+      this.#dict,
+    );
+    let relation = 0;
+    let love;
+    switch (ret[2]) {
+      case 1:
+        relation = 10;
+        break;
+      case 2:
+        love = 2;
+        break;
+      case 3:
+        if (ret[6] === 1) {
+          sys_change_lust(this.id, 1000);
+        } else {
+          await quick_into_sex(this.id, ret[7] === 2);
+          await kojo['午睡马跳后续'](this.#dict);
+        }
+    }
+    if (all_reward_in_event(this.id, { love, relation })) {
+      await era.waitAnyKey();
+    }
+    return true;
+  }
+
+  /**
+   * @param {CharaTalk} pama
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param extra
+   * @param {EventObject} event_object
+   */
+  async leisure(pama, me, callname, hook, extra, event_object) {
+    if (era.get('flag:当前互动角色') !== this.id) {
+      add_event(hook.hook, event_object);
+      await era.printAndWait(
+        ['【和 ', pama.get_colored_name(), ' 去唱卡拉OK吧！】'],
+        {
+          color: pama.color,
+        },
+      );
+      await era.clear(1);
+      return;
+    }
+    const ret = await print_name_and_show_kojo(
+      '休闲时光',
+      pama,
+      kojo,
+      this.#dict,
+    );
+    if (ret[1] === 3 && ret[2] === 1) {
+      await quick_into_sex(this.id);
+    }
+    if (all_reward_in_event(this.id)) {
+      await era.waitAnyKey();
+    }
+    return true;
+  }
+
+  /**
+   * @param {CharaTalk} pama
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param extra
+   * @param {EventObject} event_object
+   */
+  async cinema(pama, me, callname, hook, extra, event_object) {
+    if (
+      era.get('flag:当前互动角色') !== this.id ||
+      era.get('cflag:71:位置') !== era.get(`cflag:${this.id}:位置`)
+    ) {
+      add_event(hook.hook, event_object);
+      await era.printAndWait(
+        [
+          '【在 ',
+          get_chara_talk(71).get_colored_name(),
+          ' 也在的时候，和 ',
+          pama.get_colored_name(),
+          ' 去看电影吧！】',
+        ],
+        {
+          color: pama.color,
+        },
+      );
+      await era.clear(1);
+      return;
+    }
+    const dict = this.#dict;
+    dict['阿尔丹色'] = get_chara_talk(71).color;
+    const ret = await print_name_and_show_kojo(
+      '电影院怪谈！？',
+      pama,
+      kojo,
+      dict,
+    );
+    let sex = 0;
+    const cache = era.get('flag:当前位置');
+    era.set('flag:当前位置', location_enum.love_hotel);
+    if (ret[0] === 1) {
+      if (ret[4] === 2) {
+        sex = this.id;
+        begin_and_init_ero(0, this.id, 71);
+        await print_ero_page(this.id, true);
+      }
+    } else {
+      sex = 71;
+    }
+    if (sex > 0) {
+      begin_and_init_ero(0, this.id, 71);
+      if (sex === 71) {
+        era.set('tflag:主导权', 71);
+      }
+      await print_ero_page(sex, true);
+      await end_ero_and_show_result();
+      await kojo['电影院怪谈马跳结束'](dict);
+    }
+    era.set('flag:当前位置', cache);
+    if (all_reward_in_event(this.id)) {
+      await era.waitAnyKey();
+    }
+    return true;
+  }
+
+  /**
+   * @param {CharaTalk} pama
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param extra
+   * @param {EventObject} event_object
+   */
+  async delicious(pama, me, callname, hook, extra, event_object) {
+    if (era.get('flag:当前互动角色') !== this.id) {
+      add_event(hook.hook, event_object);
+      return;
+    }
+    await print_name_and_show_kojo('突然美食时间？', pama, kojo, this.#dict);
+    let wait = all_reward_in_event(this.id, {
+      base: JSON.parse('{"体力":200}'),
+    });
+    wait =
+      all_reward_in_event(0, {
+        base: JSON.parse('{"体力":200}'),
+      }) || wait;
+    sys_change_weight(this.id, get_random_value(10, 20));
+    sys_change_weight(0, get_random_value(10, 20));
+    if (wait) {
+      await era.waitAnyKey();
+    }
+    return true;
+  }
+
+  /**
+   * @param {CharaTalk} pama
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param extra
+   * @param {EventObject} event_object
+   */
+  async rest(pama, me, callname, hook, extra, event_object) {
+    if (era.get('flag:当前互动角色') !== this.id) {
+      add_event(hook.hook, event_object);
+      return;
+    }
+    await print_name_and_show_kojo('休息……？', pama, kojo, this.#dict);
+    await quick_into_sex(this.id);
+    return true;
+  }
+
+  /**
+   * @param {CharaTalk} pama
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param extra
+   * @param {EventObject} event_object
+   */
+  async travel(pama, me, callname, hook, extra, event_object) {
+    if (
+      era.get('flag:当前互动角色') !== this.id ||
+      era.get('flag:多人载具') !== vehicle_enum.pama
+    ) {
+      add_event(hook.hook, event_object);
+      await era.printAndWait([
+        '【乘坐善信号和 ',
+        pama.get_colored_name(),
+        ' 去兜风吧！】',
+      ]);
+      return;
+    }
+    await print_name_and_show_kojo('短暂旅程', pama, kojo, this.#dict);
+    const cache = era.get('flag:当前位置');
+    era.set('flag:当前位置', location_enum.river);
+    await quick_into_sex(this.id);
+    era.set('flag:当前位置', cache);
+    return true;
+  }
+
+  /**
+   * @param {CharaTalk} pama
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param extra
+   * @param {EventObject} event_object
+   */
+  async joke(pama, me, callname, hook, extra, event_object) {
+    if (
+      era.get(`status:${this.id}:沉睡`) > 0 ||
+      era.get(`status:${this.id}:马跳S`) > 0
+    ) {
+      add_event(hook.hook, event_object);
+      await era.printAndWait([
+        '【在 ',
+        pama.get_colored_name(),
+        ' 睡着的时候……】',
+      ]);
+      return;
+    }
+    await print_name_and_show_kojo('一场小故事的开始', pama, kojo, {
+      ACE色: get_chara_talk(104).color,
+      代表色: get_chara_talk(this.id).color,
+      玩家本名: era.get('callname:0:-1'),
+    });
+    add_event(hook.hook, event_object.set_arg('not_joke'));
+  }
+
+  /**
+   * @param {CharaTalk} pama
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param extra
+   * @param {EventObject} event_object
+   */
+  async not_joke(pama, me, callname, hook, extra, event_object) {
+    const ret = await print_name_and_show_kojo('并不好笑的玩笑', pama, kojo, {
+      ...this.#dict,
+      自称: sys_get_callname(this.id, this.id),
+    });
+    if (ret[2] === 1) {
+      await quick_into_sex(this.id);
+      await kojo['玩笑马跳结束'](this.#dict);
+    } else {
+      add_event(event_hooks.week_start, event_object.set_arg('end_joke'));
+    }
+  }
+
+  /** @param {CharaTalk} pama */
+  async end_joke(pama) {
+    await print_name_and_show_kojo('并不好笑的玩笑', pama, kojo, this.#dict);
+    if (all_reward_in_event(this.id, { relation: 0, love: 4 })) {
+      await era.waitAnyKey();
+    }
   }
 };
