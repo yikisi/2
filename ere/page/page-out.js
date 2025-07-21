@@ -79,7 +79,7 @@ async function out_page() {
     era.drawLine();
     if (vehicle) {
       era.print(
-        `${vehicle_verbs[vehicle]}着${vehicle_names[vehicle]}到达了学园大门……`,
+        `【${vehicle_verbs[vehicle]}着 ${vehicle_names[vehicle]} 到达了 学园大门】`,
       );
     }
     await game_guides.out();
@@ -123,10 +123,11 @@ async function out_page() {
             {
               async handle() {
                 await era.printAndWait([
+                  '【',
                   get_chara_talk(0).get_colored_name(),
                   ' 和 ',
                   temp.chara.get_colored_name(),
-                  ' 聊了会天……',
+                  ' 聊了会天】',
                 ]);
               },
               name: '聊天',
@@ -174,7 +175,7 @@ async function out_page() {
                         temp.chara.get_colored_name(),
                         ' 一起',
                         vehicle
-                          ? `${vehicle_verbs[vehicle]}着${vehicle_names[vehicle]}`
+                          ? `${vehicle_verbs[vehicle]}着 ${vehicle_names[vehicle]} `
                           : '',
                         `前往 ${positions[aim - 1].n}】`,
                       ],
@@ -222,11 +223,11 @@ async function out_page() {
             {
               handle() {
                 return era.printAndWait([
-                  '和 ',
+                  '【和 ',
                   temp.chara.get_colored_name(),
                   ' 道别后，',
                   get_chara_talk(0).get_colored_name(),
-                  ' 离开了……',
+                  ' 离开了】',
                 ]);
               },
               name: '再会',
@@ -256,7 +257,7 @@ async function out_page() {
                 ? ['和 ', get_chara_talk(cid).get_colored_name(), ' 一起']
                 : ['独自']),
               vehicle
-                ? `${vehicle_verbs[vehicle]}着${vehicle_names[vehicle]}`
+                ? `${vehicle_verbs[vehicle]}着 ${vehicle_names[vehicle]} `
                 : '',
               `前往 ${positions[aim - 1].n}】`,
             ],

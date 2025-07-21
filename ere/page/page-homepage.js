@@ -259,7 +259,10 @@ module.exports = async () => {
     const my_life_marks = LifeEventMarks.get_marks(0);
     if (flags.week_start) {
       let count = 0;
-      if (cur_location === location_enum.basement) {
+      if (
+        era.get('flag:游戏结束') < 3 &&
+        cur_location === location_enum.basement
+      ) {
         era.set('flag:当前位置', location_enum.office);
       }
       page_header();

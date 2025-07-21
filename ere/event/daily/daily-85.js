@@ -32,7 +32,7 @@ const celebration_handlers = {};
 require('#/event/daily/daily-events-85/ero-celebration')(celebration_handlers);
 
 module.exports = class extends CustomizedDaily {
-  async celebration() {
+  async celebration(hook) {
     const ruby = get_chara_talk(85),
       me = get_chara_talk(0),
       date = (era.get('flag:当前回合数') - 1) % 48;
@@ -42,7 +42,7 @@ module.exports = class extends CustomizedDaily {
       era.get('love:85') < 75 ||
       !celebration_handlers[date]
     ) {
-      return await super.celebration();
+      return await super.celebration(hook);
     }
     const pregnant_cache = era.get('cflag:85:妊娠阶段');
     await celebration_handlers[date](ruby, me);

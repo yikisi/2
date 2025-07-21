@@ -3,6 +3,7 @@ const era = require('#/era-electron');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
+const arrive_location = require('#/page/components/arrive-location');
 const npc_common = require('#/page/components/npc-common');
 const print_page_header = require('#/page/components/page-header');
 const print_out_page = require('#/page/page-out');
@@ -15,20 +16,10 @@ const loc_characters = require('#/data/event/loc-characters');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
-const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
 
 async function page_clinic() {
   let flag_page = true;
-  era.set('flag:当前位置', location_enum.clinic);
-  await era.clear();
-  print_page_header();
-  era.drawLine();
-  const vehicle = era.get('flag:单人载具');
-  era.print([
-    '【',
-    vehicle ? `${vehicle_verbs[vehicle]}着${vehicle_names[vehicle]}` : '',
-    '抵达了保健室】',
-  ]);
+  await arrive_location(era.set('flag:当前位置', location_enum.clinic));
   const celebration = get_celebration();
   const chara = get_chara_talk(loc_characters.get(location_enum.clinic)[0]);
   const title = CharaTitles.get(chara.id).get_colored_curr_title();

@@ -33,7 +33,7 @@ module.exports = async (location) => {
       ...(chara_id
         ? ['和 ', get_chara_talk(chara_id).get_colored_name(), ' 一起']
         : ['独自']),
-      vehicle ? `${vehicle_verbs[vehicle]}着${vehicle_names[vehicle]}` : '',
+      vehicle ? `${vehicle_verbs[vehicle]}着 ${vehicle_names[vehicle]} ` : '',
       `前往 ${location_name[location]}】`,
     ]);
     await run_custom_daily(chara_id, hook);

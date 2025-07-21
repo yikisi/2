@@ -250,7 +250,8 @@ function sys_get_status(cid) {
   if (pregnant_status === 1 << pregnant_stage_enum.resume) {
     status_list.push({
       color: buff_colors[2],
-      content: '产后恢复',
+      content: `产后恢复(${era.get(`cflag:${cid}:妊娠回合计时`)})`,
+      title: status_desc['产后恢复'],
     });
   } else if (pregnant_status >> pregnant_stage_enum.late > 0) {
     status_list.push({

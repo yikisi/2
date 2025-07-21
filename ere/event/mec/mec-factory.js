@@ -30,6 +30,7 @@ cons_dict[48] = require('#/event/mec/mec-48');
 cons_dict[50] = require('#/event/mec/mec-50');
 cons_dict[52] = require('#/event/mec/mec-52');
 cons_dict[56] = require('#/event/mec/mec-56');
+cons_dict[64] = require('#/event/mec/mec-64');
 cons_dict[65] = require('#/event/mec/mec-65');
 cons_dict[67] = require('#/event/mec/mec-67');
 cons_dict[68] = require('#/event/mec/mec-68');

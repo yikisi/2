@@ -152,11 +152,7 @@ module.exports = async () => {
     [[get_copyright_entry(52)], '99'],
     [[get_copyright_entry(56)], 'ALEX'],
     [[get_copyright_entry(60)], '红红火火恍惚'],
-    [
-      [get_copyright_entry(64, '地下室、调教')],
-      ['KUN', { isDivider: true }, 'Bottle'],
-    ],
-    // [[get_copyright_entry(64)], 'KUN'],
+    [[get_copyright_entry(64)], ['KUN', { isDivider: true }, 'Bottle']],
     [
       [get_copyright_entry(67)],
       [

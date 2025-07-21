@@ -30,7 +30,7 @@ function all_reward_in_event(
     motivation = 0,
     relation = get_random_value(0, 25),
     love = 0,
-  },
+  } = {},
 ) {
   let ret = get_attr_and_print_in_event(cid, attr, pt, base);
   ret = get_skills_and_print_in_event(cid, skills) || ret;

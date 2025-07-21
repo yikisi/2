@@ -134,9 +134,9 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_next_week() {
-    const event_marks = new TeioEduMarks(),
-      edu_weeks = era.get(`cflag:${this.id}:育成回合计时`),
-      event_obj = new EventObject(this.id, cb_enum.edu).set_arg(edu_weeks);
+    const event_marks = new TeioEduMarks();
+    const edu_weeks = era.get(`cflag:${this.id}:育成回合计时`);
+    const event_obj = new EventObject(this.id, cb_enum.edu).set_arg(edu_weeks);
     if (edu_weeks < 3 * 48) {
       const event_obj_special = new EventObject(
         this.id,

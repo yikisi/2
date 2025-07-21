@@ -11,6 +11,7 @@ const {
 const { sys_change_fame } = require('#/system/sys-calc-flag');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
+const arrive_location = require('#/page/components/arrive-location');
 const get_riko_button = require('#/page/components/get-riko-button');
 const goto_sex = require('#/page/components/goto-sex');
 const npc_common = require('#/page/components/npc-common');
@@ -31,25 +32,15 @@ const recruit_flags = require('#/data/event/recruit-flags');
 const yandere_list = require('#/data/event/yandere-list');
 const { get_celebration, get_relation_mark } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
-const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
 
 async function page_chairman_office() {
-  let flag_page = true,
-    nothing = true;
-  era.set('flag:当前位置', location_enum.chairman);
-  await era.clear();
-  print_page_header();
-  era.drawLine();
-  const vehicle = era.get('flag:单人载具');
-  era.print([
-    '【',
-    vehicle ? `${vehicle_verbs[vehicle]}着${vehicle_names[vehicle]}` : '',
-    '抵达了理事长办公室】',
-  ]);
-  const celebration = get_celebration(),
-    chara = get_chara_talk(loc_characters.get(location_enum.chairman)[0]),
-    title = CharaTitles.get(chara.id).get_colored_curr_title(),
-    star_premium_draw = sys_get_star_premium_draw();
+  let flag_page = true;
+  let nothing = true;
+  await arrive_location(era.set('flag:当前位置', location_enum.chairman));
+  const celebration = get_celebration();
+  const chara = get_chara_talk(loc_characters.get(location_enum.chairman)[0]);
+  const title = CharaTitles.get(chara.id).get_colored_curr_title();
+  const star_premium_draw = sys_get_star_premium_draw();
   let cost = star_premium_draw.cost;
   if (era.get('cflag:302:招募状态') === recruit_flags.yes) {
     cost = (cost * 3) / 4;

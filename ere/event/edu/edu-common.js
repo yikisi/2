@@ -471,6 +471,7 @@ class CustomizedEdu extends ICustomizedEdu {
     const { pseudo } = extra_flag;
     if (pseudo.race.conditionParams.item === 1) {
       if (extra_flag.rank === 1) {
+        await print_event_name('情绪高涨的胜利', chara);
         await era.printAndWait([
           me.get_colored_name(),
           ' 迎接面色潮红的 ',
@@ -493,6 +494,7 @@ class CustomizedEdu extends ICustomizedEdu {
           '，这才避免了白日宣淫。',
         ]);
       } else {
+        await print_event_name('意料之中的败北', chara);
         await era.printAndWait([
           me.get_colored_name(),
           ' 迎接垂头丧气的 ',
@@ -666,7 +668,6 @@ class CustomizedEdu extends ICustomizedEdu {
       extra_flag.train,
       extra_flag.fumble,
     );
-    const chara_talk = get_chara_talk(this.id);
     era.println();
     extra_flag.args = extra_flag.fumble
       ? fumble_result.fumble
@@ -674,10 +675,10 @@ class CustomizedEdu extends ICustomizedEdu {
     if (extra_flag.train !== attr_enum.intelligence) {
       await print_event_name(
         extra_flag.fumble ? '在保健室……' : '在训练室……',
-        chara_talk,
+        chara,
       );
 
-      await era.printAndWait([chara_talk.get_colored_name(), ' 训练失败了……']);
+      await era.printAndWait([chara.get_colored_name(), ' 训练失败了……']);
       era.println();
       era.print('该怎么办呢？');
       era.println();
@@ -719,7 +720,7 @@ class CustomizedEdu extends ICustomizedEdu {
    * @param {string} callname
    * @param {HookArg} hook
    * @param {TrainSuccessParams} extra_flag
-   * @returns {Promize<boolean>}
+   * @returns {Promise<boolean>}
    */
   // eslint-disable-next-line no-unused-vars
   async train_success_add(chara, me, callname, hook, extra_flag) {
@@ -804,6 +805,7 @@ class CustomizedEdu extends ICustomizedEdu {
           hook,
           extra,
         );
+        era.println();
       }
     } else if (
       extra.attr !== attr_enum.intelligence &&

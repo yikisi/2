@@ -5,19 +5,31 @@
  */
 const era = require('#/era-electron');
 
+const {
+  sys_get_callname,
+  sys_get_colored_callname,
+} = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const NormalCommandLines = require('#/event/ero/common/normal/normal-common');
+const kojo = require('#/event/ero/ero-64.kojo');
 const CustomizedEro = require('#/event/ero/ero-common');
 const PamaNormalCommunications = require('#/event/ero/ero-lines-64/normal-communications');
 const PamaNormalFucking = require('#/event/ero/ero-lines-64/normal-fucking');
 const PamaNormalMakingOuts = require('#/event/ero/ero-lines-64/normal-making-outs');
 const PamaNormalSm = require('#/event/ero/ero-lines-64/normal-sm');
+const { i_pama_yandere } = require('#/event/snippets/64');
+const print_event_name = require('#/event/snippets/print-event-name');
+const print_name_and_show_kojo = require('#/event/snippets/print-name-and-show-kojo');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const { get_chara_color } = require('#/data/chara-colors');
 const { mark_enum } = require('#/data/ero/mark-const');
+const { unexpected_pregnant_enum } = require('#/data/ero/status-const');
+const PamaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-64');
 const { ero_hooks } = require('#/data/event/ero-hooks');
+const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
 class PamaNormalLines extends NormalCommandLines {
   constructor(root) {
@@ -38,6 +50,68 @@ module.exports = class extends CustomizedEro {
   constructor(chara_id) {
     super(chara_id, { normal: true });
     this.normal = new PamaNormalLines(this);
+  }
+
+  get #dict() {
+    const o = {};
+    o['代表色'] = get_chara_color(this.id);
+    o['善信'] = era.get(`callname:${this.id}:-2`);
+    o['称呼'] = sys_get_callname(this.id, 0);
+    o.T = era.get(`callname:0:-2`);
+    o.half_life = +i_pama_yandere();
+    return o;
+  }
+
+  async ero_start(handle_ero_act) {
+    const edu_marks = new PamaEduMarks();
+    if (edu_marks.movie_job < 2) {
+      edu_marks.movie_job = 0;
+    }
+    const pama = get_chara_talk(this.id);
+    if (
+      !era.get(`exp:${this.id}:性爱次数`) &&
+      sys_check_awake(0) &&
+      sys_check_awake(this.id) &&
+      era.get('tflag:强奸') === -1 &&
+      era.get(`status:${this.id}:超马跳Z`) === 0 &&
+      era.get(`love:${this.id}`) >= 50 &&
+      pama.sex_code !== 1 &&
+      era.get('cflag:0:性别') > 0
+    ) {
+      await print_name_and_show_kojo('无法回头的领放', pama, kojo, this.#dict);
+      return;
+    }
+    if (!sys_check_awake(this.id) || era.get(`status:${this.id}:超马跳Z`) > 0) {
+      return super.ero_start(handle_ero_act);
+    }
+    await kojo['调教开始'](this.#dict);
+  }
+
+  async raping_start(supporter) {
+    if (
+      supporter > 0 ||
+      era.get('cflag:0:性别') === 0 ||
+      era.get(`cflag:${this.id}:性别`) === 1
+    ) {
+      return await super.raping_start(supporter);
+    }
+    await kojo['夜袭'](this.#dict);
+  }
+
+  async join_3p() {
+    return (await kojo['加入房事'](this.#dict))[0] === 1;
+  }
+
+  async join_3p_accept() {
+    await kojo['加入房事接受'](this.#dict);
+  }
+
+  async join_3p_reject() {
+    await kojo['加入房事拒绝'](this.#dict);
+  }
+
+  async join_3p_force() {
+    await kojo['加入房事强上'](this.#dict);
   }
 
   async get_mark(level, type, _new) {
@@ -74,6 +148,82 @@ module.exports = class extends CustomizedEro {
         break;
       default:
         return await super.get_mark(level, type, _new);
+    }
+  }
+
+  async report_pregnant_between_weeks(pama, me, callname, hook, extra_flag) {
+    if (extra_flag.mother_id !== this.id) {
+      return await super.report_pregnant_between_weeks(
+        pama,
+        me,
+        callname,
+        hook,
+        extra_flag,
+      );
+    }
+    await print_event_name('怀孕', pama);
+    if (era.get(`mark:${this.id}:淫纹`) === 3) {
+      await era.printAndWait([
+        pama.get_colored_name(),
+        ' 自然地坐在 ',
+        me.get_colored_name(),
+        ' 的身边，轻轻的把脑袋靠在肩膀上。',
+      ]);
+      await era.printAndWait('手指缓缓拉起宽松的裙角，露出小腹上异样的淫纹。');
+      await pama.say_and_wait([
+        sys_get_colored_callname(this.id, 0),
+        '，很努力了呢……',
+      ]);
+      await pama.say_and_wait('能稍微夸夸这孩子吗……还有，也夸夸我……');
+      await era.printAndWait([
+        pama.get_colored_name(),
+        ' 合上眼，紧贴在 ',
+        me.get_colored_name(),
+        ' 的身上。',
+      ]);
+    } else if (era.get(`love:${this.id}`) >= 90) {
+      await era.printAndWait([
+        '带着手上象征着新生命的验孕棒，',
+        pama.get_colored_name(),
+        ' 害羞的把脸藏在手指后面，只露出眼睛偷看着 ',
+        me.get_colored_name(),
+        ' 的反应。',
+      ]);
+      await era.printAndWait([
+        '虽然还没有显现，但身体已经在自觉的改变习惯，悄悄地靠到了 ',
+        me.get_colored_name(),
+        ' 的身前。',
+      ]);
+      await pama.say_and_wait('哎嘿嘿……好像，有点不得了耶。');
+      await era.printAndWait([
+        pama.get_colored_name(),
+        ' 带着满脸的绯红，笑着蹭了蹭 ',
+        me.get_colored_name(),
+        ' 的肩膀。',
+      ]);
+    } else if (
+      LifeEventMarks.get_marks(extra_flag.mother_id).unexpected_pregnant !==
+      unexpected_pregnant_enum.father_sleep
+    ) {
+      await era.printAndWait([
+        '再次在洗手台呕吐之后，',
+        pama.get_colored_name(),
+        ' 看着手上的验孕棒，才认清了现实。',
+      ]);
+      await era.printAndWait('思来想去，犯人只会有一个人。');
+      await pama.say_and_wait([
+        sys_get_colored_callname(this.id, 0),
+        '……为什么……',
+      ]);
+      await era.printAndWait('阴暗下来的瞳孔，反射出自己不断颤抖的手。');
+    } else {
+      return await super.report_pregnant_between_weeks(
+        pama,
+        me,
+        callname,
+        hook,
+        extra_flag,
+      );
     }
   }
 

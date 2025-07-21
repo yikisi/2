@@ -81,13 +81,13 @@ module.exports = class extends CustomizedDaily {
 
   load_talk = kitaru_load_talk;
 
-  async celebration() {
+  async celebration(hook) {
     const callname = sys_get_callname(56, 0),
       kitaru = get_chara_talk(56),
       me = get_chara_talk(0),
       date = era.get('cflag:56:育成回合计时') % 48;
     if (kitaru.sex_code === 1 || !celebration_handlers[date]) {
-      return await super.celebration();
+      return await super.celebration(hook);
     }
     await celebration_handlers[date](kitaru, me, callname);
   }

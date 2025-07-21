@@ -95,6 +95,26 @@ class CharaTalk {
     return era.get(`cflag:${this.id}:性别`);
   }
 
+  get adult_sex_title() {
+    return this.sex_code === 1 ? '先生' : '小姐';
+  }
+
+  get phy_sex_title() {
+    return this.sex_code === 1 ? '男性' : '女性';
+  }
+
+  get siblings_sex_title() {
+    return this.sex_code === 1 ? '兄弟' : '姐妹';
+  }
+
+  get teen_sex_title() {
+    return this.sex_code === 1 ? '少年' : '少女';
+  }
+
+  get uma_sex_title() {
+    return this.sex_code === 1 ? '马郎' : '马娘';
+  }
+
   /** @returns {PrintedSpan} */
   get_colored_actual_name() {
     return {
@@ -139,7 +159,7 @@ class CharaTalk {
   }
 
   /** 成人角色的称呼 */
-  get_adult_sex_title = () => (this.sex_code - 1 ? '小姐' : '先生');
+  get_adult_sex_title = () => this.adult_sex_title;
 
   /** 婴儿角色的称呼 */
   get_baby_sex_title = () => (this.sex_code - 1 ? '女婴' : '男婴');
@@ -151,22 +171,22 @@ class CharaTalk {
   get_couple_title = () => (this.id === 0 ? '你们' : `${this.sex}们`);
 
   /** 角色生理性别的称呼 */
-  get_phy_sex_title = () => (this.sex_code - 1 ? '女性' : '男性');
+  get_phy_sex_title = () => this.phy_sex_title;
 
   /** 性奴角色的称呼 */
   get_sex_slave_title = () => (this.sex_code - 1 ? '母马' : '公马');
 
   /** 青少年角色的称呼 */
-  get_teen_sex_title = () => (this.sex_code - 1 ? '少女' : '少年');
+  get_teen_sex_title = () => this.teen_sex_title;
 
   /** UMA角色的称呼 */
-  get_uma_sex_title = () => (this.sex_code === 1 ? '马郎' : '马娘');
+  get_uma_sex_title = () => this.uma_sex_title;
 
   get_bigger_sibling_sex_title = () => (this.sex_code - 1 ? '姐姐' : '哥哥');
 
   get_smaller_sibling_sex_title = () => (this.sex_code - 1 ? '妹妹' : '弟弟');
 
-  get_siblings_sex_title = () => (this.sex_code - 1 ? '姐妹' : '兄弟');
+  get_siblings_sex_title = () => this.siblings_sex_title;
 
   /**
    * 事件从该角色视角展开时的旁白

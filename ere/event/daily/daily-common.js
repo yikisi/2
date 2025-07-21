@@ -214,7 +214,9 @@ class CustomizedDaily {
     }
   }
 
-  async celebration() {
+  /** @param {HookArg} hook */
+  // eslint-disable-next-line no-unused-vars
+  async celebration(hook) {
     return await common_celebration.call(this);
   }
 

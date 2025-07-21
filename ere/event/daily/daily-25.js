@@ -870,7 +870,7 @@ module.exports = class extends CustomizedDaily {
     const edu_weeks = era.get('cflag:25:育成回合计时'),
       weeks = (era.get('flag:当前回合数') - 1) % 48;
     if (weeks !== 13 || edu_weeks < 96) {
-      return super.celebration();
+      return super.celebration(hook);
     }
     return coffee_celebration(hook);
   }
