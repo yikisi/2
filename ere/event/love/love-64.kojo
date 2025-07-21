@@ -1228,7 +1228,7 @@
     content:
       - fontWeight: bold
         content: 目白善信
-      - 最近总感觉提不起精神呢……」
+      - 「最近总感觉提不起精神呢……」
   - color: %代表色%
     content:
       - fontWeight: bold

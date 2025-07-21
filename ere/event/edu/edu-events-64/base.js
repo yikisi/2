@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const { sys_change_lust } = require('#/system/sys-calc-base-cflag');
 const {
   sys_get_callname,
   sys_like_chara,
@@ -27,7 +28,6 @@ const { location_enum } = require('#/data/locations');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
 const { attr_enum, fumble_result } = require('#/data/train-const');
-const { sys_change_lust } = require('#/system/sys-calc-base-cflag');
 
 class Edu64Base extends CustomizedEdu {
   /** @returns {Record<string,any>} */
@@ -415,7 +415,7 @@ class Edu64Base extends CustomizedEdu {
       add_event(hook.hook, event_object);
       return;
     }
-    await print_name_and_show_kojo('夏日的小小意外', pama, kojo, this.dict);
+    await print_name_and_show_kojo('海边的散步时光', pama, kojo, this.dict);
     if (all_reward_in_event(this.id)) {
       await era.waitAnyKey();
     }

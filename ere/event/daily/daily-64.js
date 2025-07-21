@@ -198,18 +198,20 @@ module.exports = class extends CustomizedDaily {
   async out_shopping(hook) {
     const temp = await select_action_in_shopping_street();
     hook.arg = temp <= 1;
+    const dict = this.#dict;
     switch (temp) {
       case 0:
-        await kojo['街机厅'](this.#dict);
+        await kojo['街机厅'](dict);
         break;
       case 1:
-        await kojo['抽奖'](this.#dict);
+        await kojo['抽奖'](dict);
         break;
       case 2:
-        await kojo['卡拉OK'](this.#dict);
+        await kojo['卡拉OK'](dict);
         break;
       case 3:
-        await kojo['电影'](this.#dict);
+        dict['善信称呼阿尔丹'] = sys_get_callname(this.id, 71);
+        await kojo['电影'](dict);
     }
   }
 

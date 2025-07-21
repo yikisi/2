@@ -263,10 +263,12 @@ module.exports = class extends CustomizedLove {
     if (loc >= 0) {
       era.set('flag:当前位置', loc);
       await quick_into_sex(this.id);
-      if (loc !== location_enum.office) {
-        await kojo['情人节外出马跳结束'](dict);
-      } else {
-        await kojo['情人节办公室马跳结束'](dict);
+      switch (loc) {
+        case location_enum.office:
+          await kojo['情人节办公室马跳结束'](dict);
+          break;
+        case location_enum.atrium:
+          await kojo['情人节外出马跳结束'](dict);
       }
     }
     era.set('flag:当前位置', l_cache);
@@ -381,13 +383,13 @@ module.exports = class extends CustomizedLove {
    * @param {CharaTalk} pama
    * @param {CharaTalk} me
    * @param {string} callname
-   * @param {HookArg} hook
+   * @param {number} stage
    * @param extra
    * @param {EventObject} event_object
    */
-  async nap(pama, me, callname, hook, extra, event_object) {
+  async nap(pama, me, callname, stage, extra, event_object) {
     if (era.get('flag:当前互动角色') !== this.id) {
-      add_event(hook.hook, event_object);
+      add_event(stage, event_object);
       await era.printAndWait(
         ['【想和 ', pama.get_colored_name(), ' 在天台吃午饭吗】'],
         {
@@ -430,13 +432,13 @@ module.exports = class extends CustomizedLove {
    * @param {CharaTalk} pama
    * @param {CharaTalk} me
    * @param {string} callname
-   * @param {HookArg} hook
+   * @param {number} stage
    * @param extra
    * @param {EventObject} event_object
    */
-  async leisure(pama, me, callname, hook, extra, event_object) {
+  async leisure(pama, me, callname, stage, extra, event_object) {
     if (era.get('flag:当前互动角色') !== this.id) {
-      add_event(hook.hook, event_object);
+      add_event(stage, event_object);
       await era.printAndWait(
         ['【和 ', pama.get_colored_name(), ' 去唱卡拉OK吧！】'],
         {
@@ -446,12 +448,10 @@ module.exports = class extends CustomizedLove {
       await era.clear(1);
       return;
     }
-    const ret = await print_name_and_show_kojo(
-      '休闲时光',
-      pama,
-      kojo,
-      this.#dict,
-    );
+    const ret = await print_name_and_show_kojo('休闲时光', pama, kojo, {
+      ...this.#dict,
+      自称: sys_get_callname(this.id, this.id),
+    });
     if (ret[1] === 3 && ret[2] === 1) {
       await quick_into_sex(this.id);
     }
@@ -465,16 +465,16 @@ module.exports = class extends CustomizedLove {
    * @param {CharaTalk} pama
    * @param {CharaTalk} me
    * @param {string} callname
-   * @param {HookArg} hook
+   * @param {number} stage
    * @param extra
    * @param {EventObject} event_object
    */
-  async cinema(pama, me, callname, hook, extra, event_object) {
+  async cinema(pama, me, callname, stage, extra, event_object) {
     if (
       era.get('flag:当前互动角色') !== this.id ||
       era.get('cflag:71:位置') !== era.get(`cflag:${this.id}:位置`)
     ) {
-      add_event(hook.hook, event_object);
+      add_event(stage, event_object);
       await era.printAndWait(
         [
           '【在 ',
@@ -501,11 +501,10 @@ module.exports = class extends CustomizedLove {
     let sex = 0;
     const cache = era.get('flag:当前位置');
     era.set('flag:当前位置', location_enum.love_hotel);
+    era.logger.info(ret);
     if (ret[0] === 1) {
       if (ret[4] === 2) {
         sex = this.id;
-        begin_and_init_ero(0, this.id, 71);
-        await print_ero_page(this.id, true);
       }
     } else {
       sex = 71;
@@ -514,6 +513,9 @@ module.exports = class extends CustomizedLove {
       begin_and_init_ero(0, this.id, 71);
       if (sex === 71) {
         era.set('tflag:主导权', 71);
+        era.set('tflag:当前助手', this.id);
+      } else {
+        era.set('tflag:当前助手', 71);
       }
       await print_ero_page(sex, true);
       await end_ero_and_show_result();
@@ -530,13 +532,13 @@ module.exports = class extends CustomizedLove {
    * @param {CharaTalk} pama
    * @param {CharaTalk} me
    * @param {string} callname
-   * @param {HookArg} hook
+   * @param {number} stage
    * @param extra
    * @param {EventObject} event_object
    */
-  async delicious(pama, me, callname, hook, extra, event_object) {
+  async delicious(pama, me, callname, stage, extra, event_object) {
     if (era.get('flag:当前互动角色') !== this.id) {
-      add_event(hook.hook, event_object);
+      add_event(stage, event_object);
       return;
     }
     await print_name_and_show_kojo('突然美食时间？', pama, kojo, this.#dict);
@@ -559,13 +561,13 @@ module.exports = class extends CustomizedLove {
    * @param {CharaTalk} pama
    * @param {CharaTalk} me
    * @param {string} callname
-   * @param {HookArg} hook
+   * @param {number} stage
    * @param extra
    * @param {EventObject} event_object
    */
-  async rest(pama, me, callname, hook, extra, event_object) {
+  async rest(pama, me, callname, stage, extra, event_object) {
     if (era.get('flag:当前互动角色') !== this.id) {
-      add_event(hook.hook, event_object);
+      add_event(stage, event_object);
       return;
     }
     await print_name_and_show_kojo('休息……？', pama, kojo, this.#dict);
@@ -577,16 +579,16 @@ module.exports = class extends CustomizedLove {
    * @param {CharaTalk} pama
    * @param {CharaTalk} me
    * @param {string} callname
-   * @param {HookArg} hook
+   * @param {number} stage
    * @param extra
    * @param {EventObject} event_object
    */
-  async travel(pama, me, callname, hook, extra, event_object) {
+  async travel(pama, me, callname, stage, extra, event_object) {
     if (
       era.get('flag:当前互动角色') !== this.id ||
       era.get('flag:多人载具') !== vehicle_enum.pama
     ) {
-      add_event(hook.hook, event_object);
+      add_event(stage, event_object);
       await era.printAndWait([
         '【乘坐善信号和 ',
         pama.get_colored_name(),
@@ -606,16 +608,16 @@ module.exports = class extends CustomizedLove {
    * @param {CharaTalk} pama
    * @param {CharaTalk} me
    * @param {string} callname
-   * @param {HookArg} hook
+   * @param {number} stage
    * @param extra
    * @param {EventObject} event_object
    */
-  async joke(pama, me, callname, hook, extra, event_object) {
+  async joke(pama, me, callname, stage, extra, event_object) {
     if (
       era.get(`status:${this.id}:沉睡`) > 0 ||
       era.get(`status:${this.id}:马跳S`) > 0
     ) {
-      add_event(hook.hook, event_object);
+      add_event(stage, event_object);
       await era.printAndWait([
         '【在 ',
         pama.get_colored_name(),
@@ -628,14 +630,14 @@ module.exports = class extends CustomizedLove {
       代表色: get_chara_talk(this.id).color,
       玩家本名: era.get('callname:0:-1'),
     });
-    add_event(hook.hook, event_object.set_arg('not_joke'));
+    add_event(stage, event_object.set_arg('not_joke'));
   }
 
   /**
    * @param {CharaTalk} pama
    * @param {CharaTalk} me
    * @param {string} callname
-   * @param {HookArg} hook
+   * @param {number} hook
    * @param extra
    * @param {EventObject} event_object
    */
@@ -654,7 +656,7 @@ module.exports = class extends CustomizedLove {
 
   /** @param {CharaTalk} pama */
   async end_joke(pama) {
-    await print_name_and_show_kojo('并不好笑的玩笑', pama, kojo, this.#dict);
+    await print_name_and_show_kojo('玩笑已经结束了', pama, kojo, this.#dict);
     if (all_reward_in_event(this.id, { relation: 0, love: 4 })) {
       await era.waitAnyKey();
     }

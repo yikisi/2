@@ -91,7 +91,7 @@ module.exports = class extends Edu64Base {
           kojo,
           this.dict,
         )
-      )[1] === 1
+      )[2] === 1
     ) {
       attr[attr_enum.speed] = 10;
     } else {
@@ -154,7 +154,7 @@ module.exports = class extends Edu64Base {
       return;
     }
     const dict = this.dict;
-    dict.dice = get_random_value(1, 5);
+    dict.dice = get_random_value(1, 4);
     const ret = await print_name_and_show_kojo('抽奖活动！', pama, kojo, dict);
     let base;
     const attr = new Array(5).fill(0);
@@ -214,6 +214,7 @@ module.exports = class extends Edu64Base {
       await era.clear(1);
       return;
     }
+    new PamaEduMarks().hot_spring++;
     const dict = this.dict;
     dict['他'] = get_chara_talk(0).sex;
     dict['太阳神色'] = get_chara_talk(65).color;
@@ -223,8 +224,10 @@ module.exports = class extends Edu64Base {
       love = 6;
     }
     let wait = all_reward_in_event(this.id, { love });
-    wait = sys_like_chara(this.id, 65, 50) || wait;
-    wait = sys_like_chara(65, this.id, 50) || wait;
+    if (ret[1] === 2) {
+      wait = sys_like_chara(this.id, 65, 50) || wait;
+      wait = sys_like_chara(65, this.id, 50) || wait;
+    }
     if (wait) {
       await era.waitAnyKey();
     }
@@ -343,29 +346,29 @@ module.exports = class extends Edu64Base {
   async concern(pama, me, callname, hook, extra, event_object) {
     if (
       era.get('cflag:0:位置') !== era.get(`cflag:${this.id}:位置`) ||
-      era.get('cflag:0:位置') !== era.get('cflag:26:位置')
+      era.get('cflag:0:位置') !== era.get('cflag:27:位置')
     ) {
       add_event(hook.hook, event_object);
       return;
     }
     const dict = this.dict;
-    dict['莱恩色'] = get_chara_talk(26).color;
-    dict['莱恩称呼T'] = sys_get_callname(26, 0);
-    begin_and_init_ero(0, 26, this.id);
+    dict['莱恩色'] = get_chara_talk(27).color;
+    dict['莱恩称呼T'] = sys_get_callname(27, 0);
+    begin_and_init_ero(0, 27, this.id);
     let lover = this.id;
     switch (
       (await print_name_and_show_kojo('过度关心啦！', pama, kojo, dict))[4]
     ) {
       case 1:
-        lover = 26;
+        lover = 27;
         era.set('tflag:当前助手', this.id);
         break;
       case 2:
-        era.set('tflag:当前助手', 26);
+        era.set('tflag:当前助手', 27);
         break;
       case 3:
         era.set('tflag:主导权', this.id);
-        era.set('tflag:当前助手', 26);
+        era.set('tflag:当前助手', 27);
     }
     await page_ero(lover, true);
     await end_ero_and_show_result();

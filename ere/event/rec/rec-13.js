@@ -39,11 +39,11 @@ module.exports = class extends CustomizedRecruit {
             event_hooks.recruit_start,
             new EventObject(13, cb_enum.recruit).set_arg(2),
           );
-          return true;
         } else {
           era.set(`cflag:${this.id}:随机招募`, 1);
           era.set(`cflag:${this.id}:招募状态`, recruit_flags.no);
           era.set('flag:物色对象', 0);
+          return false;
         }
         break;
       case 2:

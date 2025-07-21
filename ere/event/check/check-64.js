@@ -115,7 +115,7 @@ module.exports = class extends CustomizedCheck {
               e.weeks < 96 &&
               race_infos[e.race].race_class <= class_enum.G3 &&
               e.rank === 1,
-          ).length <= 3
+          ).length <= 5
       ) {
         ret.push({
           c: get_chara_color(this.id),
@@ -198,12 +198,12 @@ module.exports = class extends CustomizedCheck {
         !edu_marks.cinema &&
         !i_pama_yandere() &&
         era.get('cflag:71:招募状态') === recruit_flags.yes &&
-        era.get('love:71') >= 74
+        era.get('love:71') >= 75
       ) {
         edu_marks.cinema = 1;
         add_event(
           event_hooks.out_shopping,
-          new EventObject(this.id, cb_enum.edu).set_arg('cinema'),
+          new EventObject(this.id, cb_enum.love).set_arg('cinema'),
         );
       }
       if (
@@ -261,7 +261,7 @@ module.exports = class extends CustomizedCheck {
           event_obj,
         );
       }
-      if (love < 75 && era.get('love:65') < 50) {
+      if (love >= 50 && love < 75 && era.get('love:65') < 50) {
         check_and_add_event(
           edu_marks,
           edu_weeks,
@@ -290,8 +290,8 @@ module.exports = class extends CustomizedCheck {
         !i_pama_yandere()
       ) {
         if (
-          era.get('cflag:26:招募状态') === recruit_flags.yes &&
-          era.get('love:26') >= 75
+          era.get('cflag:27:招募状态') === recruit_flags.yes &&
+          era.get('love:27') >= 75
         ) {
           check_and_add_event(
             edu_marks,
@@ -342,8 +342,8 @@ module.exports = class extends CustomizedCheck {
           break;
         case 47 + 17: // 姐妹亦是对手
           if (
-            era.get('cflag:26:招募状态') !== recruit_flags.yes ||
-            era.get('cflag:26:育成回合计时') === edu_weeks
+            era.get('cflag:27:招募状态') !== recruit_flags.yes ||
+            era.get('cflag:27:育成回合计时') === edu_weeks
           ) {
             add_event(event_hooks.week_start, e_special.set_arg('sister'));
           }
