@@ -296,7 +296,7 @@ class Edu64Base extends CustomizedEdu {
       add_event(hook.hook, event_object);
       return;
     }
-    const mcqueen = get_chara_talk(65);
+    const mcqueen = get_chara_talk(64);
     await print_name_and_show_kojo('夏季合宿（经典年）结束', pama, kojo, {
       ...this.dict,
       麦昆色: mcqueen.color,

@@ -16,6 +16,9 @@ class GoldShipEduMarks extends EduEventMarks {
   // 拔萝卜之鬼
   carrot;
 
+  // 小金船号
+  hoverboard;
+
   constructor() {
     super(7);
     EduEventMarks.register_marks(this);
