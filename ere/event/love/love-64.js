@@ -90,8 +90,15 @@ module.exports = class extends CustomizedLove {
    * @returns {Promise}
    */
   async happy(pama, me, callname, stage, extra_flag, event_object) {
-    if (sys_check_awake(this.id) === sys_check_awake(0)) {
+    if (sys_check_awake(this.id) && sys_check_awake(0)) {
       add_event(stage, event_object);
+      await era.printAndWait([
+        '【假如有一天，',
+        pama.get_colored_name(),
+        ' 或 ',
+        me.get_colored_name(),
+        ' 睡着了……】',
+      ]);
       return;
     }
     await print_name_and_show_kojo('喜悦', pama, kojo, this.#dict);
@@ -213,9 +220,21 @@ module.exports = class extends CustomizedLove {
     }
   }
 
-  /** @param {CharaTalk} pama */
-  async here(pama) {
+  /**
+   * @param {CharaTalk} pama
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {number} stage
+   * @param extra
+   * @param {EventObject} event_object
+   */
+  async here(pama, me, callname, stage, extra, event_object) {
+    if (era.get('flag:当前互动角色') !== this.id) {
+      add_event(stage, event_object);
+      return;
+    }
     await print_name_and_show_kojo('在这里也可以哦', pama, kojo, this.#dict);
+    new PamaEduMarks().movie_job = 0;
     begin_and_init_ero(0, this.id);
     await quick_make_love(
       new EroParticipant(0, part_enum.hand),
@@ -234,6 +253,7 @@ module.exports = class extends CustomizedLove {
       false,
     );
     end_ero_and_train();
+    return true;
   }
 
   /** @param {CharaTalk} pama */
@@ -660,5 +680,80 @@ module.exports = class extends CustomizedLove {
     if (all_reward_in_event(this.id, { relation: 0, love: 4 })) {
       await era.waitAnyKey();
     }
+  }
+
+  /**
+   * @param {CharaTalk} pama
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {number} stage
+   * @param extra
+   * @param {EventObject} event_object
+   */
+  async concern(pama, me, callname, stage, extra, event_object) {
+    if (
+      era.get('cflag:0:位置') !== era.get(`cflag:${this.id}:位置`) ||
+      era.get('cflag:0:位置') !== era.get('cflag:27:位置')
+    ) {
+      add_event(stage, event_object);
+      return;
+    }
+    const dict = this.#dict;
+    dict['莱恩色'] = get_chara_talk(27).color;
+    dict['莱恩称呼T'] = sys_get_callname(27, 0);
+    dict['自称'] = sys_get_callname(this.id, this.id);
+    begin_and_init_ero(0, 27, this.id);
+    let lover = this.id;
+    switch (
+      (await print_name_and_show_kojo('过度关心啦！', pama, kojo, dict))[4]
+    ) {
+      case 1:
+        lover = 27;
+        era.set('tflag:当前助手', this.id);
+        break;
+      case 2:
+        era.set('tflag:当前助手', 27);
+        break;
+      case 3:
+        era.set('tflag:主导权', this.id);
+        era.set('tflag:当前助手', 27);
+    }
+    await print_ero_page(lover, true);
+    await end_ero_and_show_result();
+    await kojo['过度关心马跳结束'](dict);
+  }
+
+  /**
+   * @param {CharaTalk} pama
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {number} stage
+   * @param extra
+   * @param {EventObject} event_object
+   */
+  async dessert(pama, me, callname, stage, extra, event_object) {
+    if (
+      era.get('cflag:0:位置') !== era.get(`cflag:${this.id}:位置`) ||
+      era.get('cflag:0:位置') !== era.get('cflag:13:位置')
+    ) {
+      add_event(stage, event_object);
+      return;
+    }
+    const dict = this.#dict;
+    dict['麦昆色'] = get_chara_talk(13).color;
+    dict['玩家尊称'] = get_chara_talk(0).adult_sex_title;
+    dict['自称'] = sys_get_callname(this.id, this.id);
+    begin_and_init_ero(0, 13, this.id);
+    if (
+      (
+        await print_name_and_show_kojo('甜品……好像不对？', pama, kojo, dict)
+      )[5] === 2
+    ) {
+      era.set('tflag:主导权', 13);
+    }
+    era.set('tflag:当前助手', this.id);
+    await print_ero_page(13, true);
+    await end_ero_and_show_result();
+    await kojo['甜品事件马跳结束'](dict);
   }
 };

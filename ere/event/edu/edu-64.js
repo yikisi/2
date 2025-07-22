@@ -9,8 +9,6 @@ const {
   sys_like_chara,
 } = require('#/system/sys-calc-chara-others');
 
-const page_ero = require('#/page/page-ero');
-
 const kojo = require('#/event/edu/edu-64.kojo');
 const Edu64Base = require('#/event/edu/edu-events-64/base');
 const { add_event } = require('#/event/queue');
@@ -23,10 +21,6 @@ const { get_random_value } = require('#/utils/value-utils');
 const PamaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-64');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { attr_enum } = require('#/data/train-const');
-const {
-  begin_and_init_ero,
-  end_ero_and_show_result,
-} = require('#/system/ero/sys-prepare-ero');
 
 module.exports = class extends Edu64Base {
   /**
@@ -333,78 +327,5 @@ module.exports = class extends Edu64Base {
     const dict = this.dict;
     dict['阿尔丹色'] = get_chara_talk(71).color;
     await print_name_and_show_kojo('向前迈出的一步', pama, kojo, dict);
-  }
-
-  /**
-   * @param {CharaTalk} pama
-   * @param {CharaTalk} me
-   * @param {string} callname
-   * @param {HookArg} hook
-   * @param extra
-   * @param {EventObject} event_object
-   */
-  async concern(pama, me, callname, hook, extra, event_object) {
-    if (
-      era.get('cflag:0:位置') !== era.get(`cflag:${this.id}:位置`) ||
-      era.get('cflag:0:位置') !== era.get('cflag:27:位置')
-    ) {
-      add_event(hook.hook, event_object);
-      return;
-    }
-    const dict = this.dict;
-    dict['莱恩色'] = get_chara_talk(27).color;
-    dict['莱恩称呼T'] = sys_get_callname(27, 0);
-    begin_and_init_ero(0, 27, this.id);
-    let lover = this.id;
-    switch (
-      (await print_name_and_show_kojo('过度关心啦！', pama, kojo, dict))[4]
-    ) {
-      case 1:
-        lover = 27;
-        era.set('tflag:当前助手', this.id);
-        break;
-      case 2:
-        era.set('tflag:当前助手', 27);
-        break;
-      case 3:
-        era.set('tflag:主导权', this.id);
-        era.set('tflag:当前助手', 27);
-    }
-    await page_ero(lover, true);
-    await end_ero_and_show_result();
-    await kojo['过度关心马跳结束'](dict);
-  }
-
-  /**
-   * @param {CharaTalk} pama
-   * @param {CharaTalk} me
-   * @param {string} callname
-   * @param {HookArg} hook
-   * @param extra
-   * @param {EventObject} event_object
-   */
-  async dessert(pama, me, callname, hook, extra, event_object) {
-    if (
-      era.get('cflag:0:位置') !== era.get(`cflag:${this.id}:位置`) ||
-      era.get('cflag:0:位置') !== era.get('cflag:13:位置')
-    ) {
-      add_event(hook.hook, event_object);
-      return;
-    }
-    const dict = this.dict;
-    dict['麦昆色'] = get_chara_talk(13).color;
-    dict['玩家尊称'] = sys_get_callname(13, 0);
-    begin_and_init_ero(0, 13, this.id);
-    if (
-      (
-        await print_name_and_show_kojo('甜品……好像不对？', pama, kojo, dict)
-      )[5] === 2
-    ) {
-      era.set('tflag:主导权', 13);
-    }
-    era.set('tflag:当前助手', this.id);
-    await page_ero(13, true);
-    await end_ero_and_show_result();
-    await kojo['甜品事件马跳结束'](dict);
   }
 };

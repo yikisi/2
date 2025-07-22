@@ -357,6 +357,7 @@ function update_juel_buff(...ids) {
 
 /** @param {number} ids */
 function init_ero(...ids) {
+  ids = ids.filter((cid) => era.get(`tcvar:${cid}`) === undefined);
   era.addCharacterForTrain(...ids);
   update_ero_status(...ids);
   update_juel_buff(...ids);

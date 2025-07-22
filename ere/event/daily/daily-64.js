@@ -217,7 +217,7 @@ module.exports = class extends CustomizedDaily {
 
   async out_church() {
     const dict = this.#dict;
-    dict.dice = Math.random() < 0.5;
+    dict.dice = +(Math.random() < 0.5);
     await kojo['神社'](dict);
   }
 

@@ -64,7 +64,7 @@ module.exports = class extends CustomizedEro {
 
   async ero_start(handle_ero_act) {
     const edu_marks = new PamaEduMarks();
-    if (edu_marks.movie_job < 2) {
+    if (edu_marks.movie_job < 8) {
       edu_marks.movie_job = 0;
     }
     const pama = get_chara_talk(this.id);

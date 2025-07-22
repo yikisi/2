@@ -301,11 +301,15 @@ async function page_ero(lover, skip_start_end = false) {
   const rape = era.get('tflag:强奸');
   lover ||= era.get('tflag:当前对手') || era.get('flag:当前互动角色');
   let ero_flag = true;
-  let assistant = era.get('flag:助手');
-  assistant =
-    sys_check_awake(assistant) && !sys_check_remote(assistant) && assistant;
+  const assistant = era.get('flag:助手');
   era.set('tflag:当前对手', lover);
-  if (era.getCharactersInTrain().length === 2 && assistant > 0) {
+  if (
+    era.getCharactersInTrain().length === 2 &&
+    assistant > 0 &&
+    sys_check_awake(assistant) &&
+    !sys_check_remote(assistant) &&
+    assistant !== lover
+  ) {
     init_ero(assistant);
     era.set('tflag:当前助手', assistant);
   }

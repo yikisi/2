@@ -157,7 +157,7 @@ module.exports = class extends CustomizedCheck {
       if (!edu_marks.delicious) {
         edu_marks.delicious = 1;
         add_event(
-          event_hooks.out_shopping,
+          event_hooks.office_cook,
           new EventObject(this.id, cb_enum.love).set_arg('delicious'),
         );
       }
@@ -181,30 +181,60 @@ module.exports = class extends CustomizedCheck {
     if (
       era.get(`cflag:${this.id}:性别`) !== 1 &&
       era.get('cflag:0:性别') > 0 &&
-      edu_marks.movie_job < 2 &&
-      ++edu_marks.movie_job === 2
+      era.get(`exp:${this.id}:性爱次数`) > era.get(`exp:${this.id}:睡奸次数`) &&
+      edu_marks.movie_job < 8 &&
+      ++edu_marks.movie_job === 8
     ) {
       if (love >= 75) {
         add_event(
-          event_hooks.week_end,
+          event_hooks.out_shopping,
           new EventObject(this.id, cb_enum.love).set_arg('here'),
         );
       } else {
         edu_marks.movie_job = 1;
       }
     }
-    if (love >= 74) {
-      if (
-        !edu_marks.cinema &&
-        !i_pama_yandere() &&
-        era.get('cflag:71:招募状态') === recruit_flags.yes &&
-        era.get('love:71') >= 75
-      ) {
-        edu_marks.cinema = 1;
-        add_event(
-          event_hooks.out_shopping,
-          new EventObject(this.id, cb_enum.love).set_arg('cinema'),
-        );
+    if (love >= 75) {
+      if (!i_pama_yandere()) {
+        if (
+          !edu_marks.cinema &&
+          era.get('cflag:71:招募状态') === recruit_flags.yes &&
+          era.get('love:71') >= 75
+        ) {
+          edu_marks.cinema = 1;
+          add_event(
+            event_hooks.out_shopping,
+            new EventObject(this.id, cb_enum.love).set_arg('cinema'),
+          );
+        }
+        if (
+          era.get('cflag:0:性别') > 0 &&
+          era.get(`cflag:${this.id}:性别`) !== 1
+        ) {
+          if (
+            !edu_marks.concern &&
+            era.get('cflag:27:招募状态') === recruit_flags.yes &&
+            era.get('love:27') >= 75
+          ) {
+            edu_marks.concern = 1;
+            add_event(
+              event_hooks.week_end,
+              new EventObject(this.id, cb_enum.love).set_arg('concern'),
+            );
+          }
+          if (
+            !edu_marks.dessert &&
+            era.get('cflag:13:招募状态') === recruit_flags.yes &&
+            era.get('love:13') >= 75 &&
+            check_aim_race(RaceHistory.get(13).get(), race_enum.kiku_sho, 1)
+          ) {
+            edu_marks.dessert = 1;
+            add_event(
+              event_hooks.week_end,
+              new EventObject(this.id, cb_enum.love).set_arg('dessert'),
+            );
+          }
+        }
       }
       if (
         !edu_marks.rest &&
@@ -282,38 +312,6 @@ module.exports = class extends CustomizedCheck {
           event_hooks.week_end,
           event_obj,
         );
-      }
-      if (
-        era.get('cflag:0:性别') > 0 &&
-        era.get(`cflag:${this.id}:性别`) !== 1 &&
-        love >= 75 &&
-        !i_pama_yandere()
-      ) {
-        if (
-          era.get('cflag:27:招募状态') === recruit_flags.yes &&
-          era.get('love:27') >= 75
-        ) {
-          check_and_add_event(
-            edu_marks,
-            edu_weeks,
-            'concern',
-            event_hooks.week_end,
-            event_obj,
-          );
-        }
-        if (
-          era.get('cflag:13:招募状态') === recruit_flags.yes &&
-          era.get('love:13') >= 75 &&
-          check_aim_race(RaceHistory.get(13).get(), race_enum.kiku_sho, 1)
-        ) {
-          check_and_add_event(
-            edu_marks,
-            edu_weeks,
-            'dessert',
-            event_hooks.week_end,
-            event_obj,
-          );
-        }
       }
       switch (edu_weeks) {
         case 16: // 小小的流言

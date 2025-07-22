@@ -50,6 +50,10 @@ class PamaEduMarks extends EduEventMarks {
   travel;
   // 一场小故事的开始
   joke;
+  // 过度关心啦！
+  concern;
+  // 甜品……好像不对？
+  dessert;
 
   // 随机事件
   // 错过午休时间
