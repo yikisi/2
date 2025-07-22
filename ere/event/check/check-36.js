@@ -1,4 +1,4 @@
-const { get } = require('#/era-electron');
+const { get, set } = require('#/era-electron');
 
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
 
@@ -45,6 +45,16 @@ module.exports = class extends CustomizedCheck {
       aim_check && sys_personal_achievement.set(this.id, 1);
     }
     return ret;
+  }
+
+  check_next_week() {
+    if (
+      !get(`cflag:${this.id}:随机招募`) &&
+      get(`cflag:${this.id}:招募状态`) === -1
+    ) {
+      set(`cflag:${this.id}:随机招募`, 1);
+    }
+    super.check_next_week();
   }
 
   get_aim_races() {
