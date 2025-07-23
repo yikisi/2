@@ -659,6 +659,11 @@ module.exports = async () => {
             },
             { isBr: true },
             '以负责角色ID最小值排序',
+            { isBr: true },
+            {
+              content: '详细口上鸣谢',
+              url: 'https://gitgud.io/umaera/erauma/-/wikis/COPYRIGHT',
+            },
           ],
           {
             isParagraph: true,
@@ -765,10 +770,12 @@ module.exports = async () => {
           'odakasuya',
           { isDivider: true },
           'hsyzg1626',
-          { isDivider: true },
+          { isBr: true },
           'WindyWhisper',
           { isDivider: true },
           'wtmkks',
+          { isDivider: true },
+          'Что тиба,Я сао нима',
         ]);
         await era.printAndWait('特别鸣谢（笑）', {
           color: item_title_color,
