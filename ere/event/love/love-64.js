@@ -33,6 +33,7 @@ const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
 const masturbate = require('#/event/snippets/masturbate');
 const print_event_name = require('#/event/snippets/print-event-name');
 const print_name_and_show_kojo = require('#/event/snippets/print-name-and-show-kojo');
+const quick_into_3p = require('#/event/snippets/quick-into-3p');
 const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -394,7 +395,7 @@ module.exports = class extends CustomizedLove {
     ) {
       const cache = era.get('flag:当前位置');
       era.set('flag:当前位置', location_enum.love_hotel);
-      await quick_into_sex(this.id, true);
+      await quick_into_sex(this.id, this.id, true);
       await kojo['异样感马跳结束'](this.#dict);
       era.set('flag:当前位置', cache);
     }
@@ -440,7 +441,7 @@ module.exports = class extends CustomizedLove {
         if (ret[6] === 1) {
           sys_change_lust(this.id, 1000);
         } else {
-          await quick_into_sex(this.id, ret[7] === 2);
+          await quick_into_sex(this.id, this.id, ret[7] === 2);
           await kojo['午睡马跳后续'](this.#dict);
         }
     }
@@ -520,27 +521,26 @@ module.exports = class extends CustomizedLove {
       kojo,
       dict,
     );
-    let sex = 0;
+    let lover = 0;
     const cache = era.get('flag:当前位置');
     era.set('flag:当前位置', location_enum.love_hotel);
-    era.logger.info(ret);
     if (ret[0] === 1) {
       if (ret[4] === 2) {
-        sex = this.id;
+        lover = this.id;
       }
     } else {
-      sex = 71;
+      lover = 71;
     }
-    if (sex > 0) {
-      begin_and_init_ero(0, this.id, 71);
-      if (sex === 71) {
-        era.set('tflag:主导权', 71);
-        era.set('tflag:当前助手', this.id);
+    if (lover > 0) {
+      let supporter;
+      let master = 0;
+      if (lover === 71) {
+        supporter = this.id;
+        master = 71;
       } else {
-        era.set('tflag:当前助手', 71);
+        supporter = 71;
       }
-      await print_ero_page(sex, true);
-      await end_ero_and_show_result();
+      await quick_into_3p(lover, supporter, master);
       await kojo['电影院怪谈马跳结束'](dict);
     }
     era.set('flag:当前位置', cache);
@@ -704,24 +704,24 @@ module.exports = class extends CustomizedLove {
     dict['莱恩色'] = get_chara_talk(27).color;
     dict['莱恩称呼T'] = sys_get_callname(27, 0);
     dict['自称'] = sys_get_callname(this.id, this.id);
-    begin_and_init_ero(0, 27, this.id);
     let lover = this.id;
+    let supporter;
+    let master = 0;
     switch (
       (await print_name_and_show_kojo('过度关心啦！', pama, kojo, dict))[4]
     ) {
       case 1:
         lover = 27;
-        era.set('tflag:当前助手', this.id);
+        supporter = this.id;
         break;
       case 2:
-        era.set('tflag:当前助手', 27);
+        supporter = 27;
         break;
       case 3:
-        era.set('tflag:主导权', this.id);
-        era.set('tflag:当前助手', 27);
+        supporter = 27;
+        master = this.id;
     }
-    await print_ero_page(lover, true);
-    await end_ero_and_show_result();
+    await quick_into_3p(lover, supporter, master);
     await kojo['过度关心马跳结束'](dict);
   }
 
@@ -745,17 +745,15 @@ module.exports = class extends CustomizedLove {
     dict['麦昆色'] = get_chara_talk(13).color;
     dict['玩家尊称'] = get_chara_talk(0).adult_sex_title;
     dict['自称'] = sys_get_callname(this.id, this.id);
-    begin_and_init_ero(0, 13, this.id);
+    let master = 0;
     if (
       (
         await print_name_and_show_kojo('甜品……好像不对？', pama, kojo, dict)
       )[5] === 2
     ) {
-      era.set('tflag:主导权', 13);
+      master = 13;
     }
-    era.set('tflag:当前助手', this.id);
-    await print_ero_page(13, true);
-    await end_ero_and_show_result();
+    await quick_into_3p(13, this.id, master);
     await kojo['甜品事件马跳结束'](dict);
   }
 };
