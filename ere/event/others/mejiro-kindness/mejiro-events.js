@@ -514,8 +514,8 @@ class MejiroEvents {
   good_event(progress, lust) {
     return this.#get_event_by_category([0.3, 0.5], progress, lust).call(
       this,
-      action_type_enum.good,
       progress,
+      action_type_enum.good,
     );
   }
 
