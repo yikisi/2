@@ -2,7 +2,7 @@
 
 ## Branches
 
-1.0 开始的 EraUma 分支将按照 [版本号规则](./README#Versions) 分为三类：
+1.0 开始的 EraUma 分支将分为三类：
 * master 分支：唯一的主分支/保护分支，负责发布。
 * dev 分支：主开发分支，所有新增、改动和修复内容必须先合并到 dev 分支，再由 dev 分支合并到 master 分支进入发布。
 * 内容分支：由使用 JavaScript 的口上作者提交内容用，随用随开，不用即废。口上作者需要先将新口上或加笔提交到自己的分支（fork 项目作者需要先提 Merge Request 将内容合并到 [主仓库](https://gitgud.io/umaera/erauma) 相应分支），然后通过 dev 分支在最终合并到 master 中。
