@@ -633,10 +633,10 @@ module.exports = class extends StrangeDayEvents {
         ]);
         println();
         await printAndWait(['真是奇怪，会是谁寄的呢……']);
-        sys_like_chara(max.max[0], 0, 20) && (await waitAnyKey());
+        sys_like_chara(max.max[0], 0, 20, false) && (await waitAnyKey());
       } else {
         await printAndWait([
-          '「本命巧克力迷路第N年，在便利店买了根青汁味百奇自我应援」',
+          '「本命巧克力迷路第 N 年，在便利店买了根青汁味百奇自我应援」',
         ]);
         await printAndWait('随手编辑了一条推文，用小号发出去。');
         println();

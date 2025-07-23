@@ -36,6 +36,8 @@ async function print_shop_page(item_list) {
     to_buy[id] = 1;
     if (id !== 84 && id !== 85) {
       price[id] = Math.ceil(era.get(`itemprice:${id}`) * price_ratio);
+    } else {
+      price[id] = era.get(`itemprice:${id}`);
     }
   });
   let on_sell_list;

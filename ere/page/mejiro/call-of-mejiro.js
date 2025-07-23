@@ -436,7 +436,7 @@ class CallOfMejiro extends MejiroCity {
           },
           {
             a: 301,
-            c: '放弃抵抗（性欲++，体力+）',
+            c: '放弃抵抗（一心同体❤️）',
             async h() {
               era.set('base:0:性欲', lust_border.want_sex);
               era.set(`base:${chara.id}:性欲`, lust_border.want_sex);
@@ -528,6 +528,7 @@ class CallOfMejiro extends MejiroCity {
         era.get('item:「恩宠」') * get_random_value(0.5, 0.7),
       );
     }
+    era.set('item:「恩宠」', Math.floor(era.get('item:「恩宠」')));
   }
 
   async next_week() {
