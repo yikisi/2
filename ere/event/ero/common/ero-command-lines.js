@@ -29,32 +29,32 @@ class EroCommandLines {
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
-   * @param extra_flag
-   * @param [get_this_param]
+   * @param extra
+   * @param [this_param]
    */
-  async run(attacker, defender, hook, extra_flag, get_this_param) {
+  async run(attacker, defender, hook, extra, this_param) {
     const hook_key = ero_hooks.keys[hook.hook];
     let aim, aim_handler;
     if (hook.hook < ero_hooks.pet_ear) {
-      aim = this.communications.get_this(get_this_param);
+      aim = this.communications.get_this(this_param);
       aim_handler = aim[hook_key];
     } else if (hook.hook < ero_hooks.missionary) {
-      aim = this.making_outs.get_this(get_this_param);
+      aim = this.making_outs.get_this(this_param);
       aim_handler = aim[hook_key];
     } else if (hook.hook < ero_hooks.insult) {
-      aim = this.fucking.get_this(get_this_param);
+      aim = this.fucking.get_this(this_param);
       aim_handler = aim[hook_key];
     } else if (hook.hook < ero_hooks.ask_supporter_prepare_virgin) {
-      aim = this.sm.get_this(get_this_param);
+      aim = this.sm.get_this(this_param);
       aim_handler = aim[hook_key];
     } else if (hook.hook < ero_hooks.use_lubricating_fluid) {
-      aim = this.orgy.get_this(get_this_param);
+      aim = this.orgy.get_this(this_param);
       aim_handler = aim.run;
     } else {
-      aim = this.items.get_this(get_this_param);
+      aim = this.items.get_this(this_param);
       aim_handler = aim[hook_key];
     }
-    return await aim_handler.call(aim, attacker, defender, hook, extra_flag);
+    return await aim_handler.call(aim, attacker, defender, hook, extra);
   }
 }
 

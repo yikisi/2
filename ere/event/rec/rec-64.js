@@ -1,6 +1,6 @@
 /**
  * @file 目白善信 - 招募
- * @author KUN
+ * @author Bottle
  */
 const era = require('#/era-electron');
 

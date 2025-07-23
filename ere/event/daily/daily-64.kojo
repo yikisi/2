@@ -676,7 +676,7 @@
                 content: 目白善信
               - 「你，你说话呀，%称呼%！」
           - 目白善信 鼓起红透的脸，小拳头猛砸着 %T% 的肩膀。
-  - if: !d.check
+  - if: '!d.check'
     lines:
       - random: true
         lines:

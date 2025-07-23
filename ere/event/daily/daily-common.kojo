@@ -15,7 +15,7 @@
       random: true
       lines:
         - %角色名% 正在与同学们愉快地聊天。
-    - if: !(era.get('cflag:301:育成回合计时') < 3 * 48)
+    - if: "!(era.get('cflag:301:育成回合计时') < 3 * 48)"
       random: true
       lines:
         - %角色名% 正在接待处向 %骏川% 查询着什么。

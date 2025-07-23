@@ -4,6 +4,10 @@ class McqueenLifeMarks extends LifeEventMarks {
   love_20;
   love_40;
 
+  // 存档首次性爱
+  prepare_virgin;
+  finger_fuck;
+
   constructor() {
     super(13);
     LifeEventMarks.register_marks(this);
