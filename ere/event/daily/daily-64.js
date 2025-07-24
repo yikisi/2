@@ -283,7 +283,7 @@ module.exports = class extends CustomizedDaily {
       return;
     }
     if (check > 0) {
-      const ret = await kojo['晚安求爱'](this.#dict);
+      const ret = await kojo['晚安求爱']({ check, ...this.#dict });
       if (ret[0] === 1) {
         hook.arg = 1;
       } else if (ret[0] === 2) {

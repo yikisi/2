@@ -1,4 +1,4 @@
-const { writeFileSync } = require('fs');
+const { readFileSync, readdirSync, writeFileSync } = require('fs');
 const { join } = require('path');
 
 const text_data = require('../../common/text_data.json')[14];
@@ -35,6 +35,45 @@ for (let i = 1001; i < 2000; ++i) {
     output.clothe_names[i - 1000] = tmp;
   }
 }
+
+const titles = {};
+
+const uma_lines = readFileSync(
+  join(__dirname, '../../common/uma/uma-data.csv'),
+  'utf-8',
+)
+  .replace(/^\ufeff/, '')
+  .split('\n')
+  .filter((l) => l)
+  .map((l) => l.split(','));
+const header = uma_lines.shift();
+const i_fname = header.findIndex((e) => e === '文件名');
+const i_title = header.findIndex((e) => e === '角色Str|称号');
+uma_lines.forEach((l) => {
+  if (l[i_title]) {
+    titles[l[i_fname]] = l[i_title];
+  }
+});
+
+const res_list = [
+  ...readdirSync(join(__dirname, '../../res/others')),
+  ...readdirSync(join(__dirname, '../../res/race')),
+]
+  .filter((n) => n.startsWith('chara_stand_'))
+  .map((n) => Number(n.substring(17, 23)))
+  .filter((n) => n >= 100000 && n < 200000)
+  .map((n) => [Math.floor(n / 100), n % 100]);
+
+res_list.forEach(([id, suffix]) => {
+  if (!titles[id]) {
+    return;
+  }
+  if (!output.clothe_names[id - 1000]) {
+    console.log('[WRAN] missing cloth object:', id);
+  } else if (!output.clothe_names[id - 1000][id2suffix[suffix]]) {
+    console.log('[WRAN] missing cloth name:', id, '- suffix:', suffix);
+  }
+});
 
 output.clothe_names[345] = { '': 'ST2', 2: '从零到零' };
 
