@@ -1,6 +1,7 @@
 const era = require('#/era-electron');
 
 const { sys_change_lust } = require('#/system/sys-calc-base-cflag');
+const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
 const select_target_in_storage = require('#/page/storage/select-target');
@@ -51,10 +52,10 @@ module.exports = (handlers) => {
       if (item === 85) {
         add_jewel_reward(ret, '顺从', 1666);
       }
-      era.logger.info(item);
-      era.logger.info(era.get(`itemname:${item}`));
       era.add(`item:${item}`, -1);
-      await era.waitAnyKey();
+      if (sys_like_chara(ret, 0, -get_random_value(50, 100))) {
+        await era.waitAnyKey();
+      }
       return true;
     }
   };
