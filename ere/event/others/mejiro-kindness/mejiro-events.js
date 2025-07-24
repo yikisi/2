@@ -274,12 +274,7 @@ class MejiroEvents {
           new EroParticipant(0, part_enum.body),
           false,
         );
-        if (
-          await bad_event_common.call(this, '意外相拥', {
-            TEEN: this.chara.get_teen_sex_title(),
-            ...this.#dict,
-          })
-        ) {
+        if (await bad_event_common.call(this, '意外相拥', this.#dict)) {
           await quick_make_love(
             new EroParticipant(0, part_enum.hand),
             new EroParticipant(this.chara.id, part_enum.body),
@@ -487,6 +482,7 @@ class MejiroEvents {
     this.#dict['你'] = me.name;
     this.#dict['担当'] = chara.name;
     this.#dict['她'] = chara.sex;
+    this.#dict['少女'] = chara.teen_sex_title;
   }
 
   /**
