@@ -325,8 +325,10 @@ async function page_ero(lover, skip_start_end = false) {
       get_random_entry([motion_enum.lie, motion_enum.sit, motion_enum.rev]),
     );
     era.set(`tcvar:${cid}:朝向`, get_random_value(0, 1));
+    era.set(`tcvar:${cid}:上下`, up_enum.down);
   });
   era.set(`tcvar:${master}:上下`, up_enum.up);
+  era.set('status:0:沉睡', era.set('status:0:马跳S', 0));
   while (ero_flag) {
     await era.clear();
 
@@ -492,7 +494,7 @@ async function page_ero(lover, skip_start_end = false) {
             last_action: era.get('tflag:前回行动'),
             lover_action: era.get('tflag:对手行动'),
           };
-    let all_action_disabled = lost_mind > 0;
+    let a_disabled = lost_mind > 0;
     const action_bar = [];
     action_bar.push({
       content:
@@ -580,7 +582,7 @@ async function page_ero(lover, skip_start_end = false) {
           era.logger.error(`${ero_hooks.keys[e]} ${check_val}`);
         }
         const action_disabled = base_check && check_val < 0;
-        all_action_disabled &&= action_disabled;
+        a_disabled &&= action_disabled;
         return {
           accelerator: e,
           config: {
@@ -619,7 +621,7 @@ async function page_ero(lover, skip_start_end = false) {
       ).toLocaleString()}ms`,
     );
     let ret;
-    if (all_action_disabled) {
+    if (a_disabled) {
       ret = ero_hooks.relax;
     } else {
       ret = await era.input();
@@ -629,16 +631,20 @@ async function page_ero(lover, skip_start_end = false) {
       get_characters_in_train().length > 1;
     if (era.get('tflag:投降') > 0) {
       era.set('tflag:投降', 0);
-      while (era.get('tflag:主导权') > 0 && ero_flag) {
+      do {
         await sys_handle_ero_act(ero_hooks.relax, filters);
         master = era.get('tflag:主导权');
         ero_flag &&=
-          !era.get(`tcvar:${master}:脱力`) && !era.get(`tcvar:${master}:逃跑`);
-      }
+          sys_check_awake(master) &&
+          !era.get(`tcvar:${master}:脱力`) &&
+          !era.get(`tcvar:${master}:逃跑`);
+      } while (master > 0 && ero_flag);
     } else {
       master = era.get('tflag:主导权');
       ero_flag &&=
-        !era.get(`tcvar:${master}:脱力`) && !era.get(`tcvar:${master}:逃跑`);
+        sys_check_awake(master) &&
+        !era.get(`tcvar:${master}:脱力`) &&
+        !era.get(`tcvar:${master}:逃跑`);
     }
   }
   era.drawLine();

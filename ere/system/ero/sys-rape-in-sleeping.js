@@ -34,16 +34,16 @@ async function sys_rape_in_sleeping(cid, supporter = 0) {
     era.set('tflag:当前助手', supporter);
   }
   era.set('tflag:强奸', cid);
-  let action_count = 0,
-    current = new Date().getTime(),
-    flag_rape = true,
-    wake_up = false,
-    temp;
+  let action_count = 0;
+  let current = new Date().getTime();
+  let flag_rape = true;
+  let wake_up = false;
+  let temp;
   while (flag_rape) {
     await sys_handle_ero_act(ero_hooks.relax, default_my_filter, debug);
     action_count++;
     if (
-      era.get(`tcvar:${cid}:逃跑`) ||
+      era.get(`tcvar:${cid}:逃跑`) > 0 ||
       (check_satisfied(cid) && (!supporter || check_satisfied(supporter))) ||
       (wake_up =
         !era.get('status:0:马跳S') &&
@@ -64,7 +64,6 @@ async function sys_rape_in_sleeping(cid, supporter = 0) {
     ).toFixed(2)} ms/action`,
   );
   if (wake_up) {
-    era.set('status:0:沉睡', 0);
     await era.printAndWait([
       '【强烈的刺激使 ',
       get_chara_talk(0).get_colored_name(),

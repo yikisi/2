@@ -344,7 +344,10 @@ module.exports = {
         key: '焦躁',
       });
     }
-    if (era.get(`status:${cid}:马跳S`) || era.get(`status:${cid}:沉睡`)) {
+    if (
+      era.get(`status:${cid}:马跳S`) > 0 ||
+      era.get(`status:${cid}:沉睡`) > 0
+    ) {
       status_list.push({
         color: buff_colors[2],
         content: '沉睡！',
