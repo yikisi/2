@@ -4,14 +4,21 @@
  */
 const era = require('#/era-electron');
 
+const { sys_get_callname } = require('#/system/sys-calc-chara-others');
+
+const kojo = require('#/event/edu/edu-100.kojo');
 const CustomizedEdu = require('#/event/edu/edu-common');
 const print_event_name = require('#/event/snippets/print-event-name');
 
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
+
+const { buff_colors } = require('#/data/color-const');
+const { get_trainer_title } = require('#/data/info-generator');
 const { race_enum } = require('#/data/race/race-const');
 const { attr_enum } = require('#/data/train-const');
 
 /** @type {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean}):Promise<boolean|void>>} */
-const week_start_handlers = {};
+const w_s_handlers = {};
 
 [
   require('#/event/edu/edu-events-100/week-start-1'),
@@ -19,9 +26,17 @@ const week_start_handlers = {};
   require('#/event/edu/edu-events-100/week-start-3'),
   require('#/event/edu/edu-events-100/week-start-4'),
   require('#/event/edu/edu-events-100/week-start-5'),
-].forEach((f) => f(week_start_handlers));
+].forEach((f) => f(w_s_handlers));
 
 module.exports = class extends CustomizedEdu {
+  get #dict() {
+    const ret = {};
+    ret['代表色'] = get_chara_talk(this.id).color;
+    ret['你'] = get_chara_talk(0).name;
+    ret['称呼'] = sys_get_callname(this.id, 0);
+    return ret;
+  }
+
   async race_end(acute, me, callname, hook, extra_flag) {
     if (
       extra_flag.race !== race_enum.begin_race ||
@@ -309,17 +324,28 @@ module.exports = class extends CustomizedEdu {
   }
 
   async week_start(acute, me, callname, hook, extra_flag, event_object) {
-    if (week_start_handlers[event_object.arg]) {
-      const flags = { wait_flag: false },
-        ret = await week_start_handlers[event_object.arg].call(
-          this,
-          acute,
-          me,
-          callname,
-          flags,
-        );
+    if (w_s_handlers[event_object.arg]) {
+      const flags = { wait_flag: false };
+      const ret = await w_s_handlers[event_object.arg].call(
+        this,
+        acute,
+        me,
+        callname,
+        flags,
+      );
       flags.wait_flag && (await era.waitAnyKey());
       return ret;
     }
+  }
+
+  async crazy_fan_end() {
+    const name = '粉丝袭击';
+    const dict = this.#dict;
+    dict['头衔'] = get_trainer_title();
+    await kojo[name](dict);
+    await print_event_name(
+      [{ color: buff_colors[3], content: name }],
+      get_chara_talk(this.id),
+    );
   }
 };

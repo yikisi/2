@@ -13,6 +13,7 @@ const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
+const kojo = require('#/event/daily/daily-100.kojo');
 const CustomizedDaily = require('#/event/daily/daily-common');
 const acute_out_shopping = require('#/event/daily/daily-events-100/out-shopping');
 const acute_school_atrium = require('#/event/daily/daily-events-100/school-atrium');
@@ -20,15 +21,25 @@ const select_action_around_river = require('#/event/daily/snippets/select-action
 const select_action_in_station = require('#/event/daily/snippets/select-action-in-station');
 const add_jewel_reward = require('#/event/snippets/add-jewel-reward');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
+const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
+const { buff_colors } = require('#/data/color-const');
 const EroParticipant = require('#/data/ero/ero-participant');
 const { part_enum } = require('#/data/ero/part-const');
 
 module.exports = class extends CustomizedDaily {
+  get #dict() {
+    const ret = {};
+    ret['代表色'] = get_chara_talk(this.id).color;
+    ret['你'] = get_chara_talk(0).name;
+    ret['称呼'] = sys_get_callname(this.id, 0);
+    return ret;
+  }
+
   select() {
     if (!sys_check_awake(100)) {
       return super.select();
@@ -847,5 +858,23 @@ module.exports = class extends CustomizedDaily {
             await era.printAndWait('看来今晚注定了是一个漫长的深夜——');
         }
     }
+  }
+
+  async slave_end() {
+    const name = '金钱奴隶';
+    await kojo[name](this.#dict);
+    await print_event_name(
+      [{ color: buff_colors[3], content: name }],
+      get_chara_talk(this.id),
+    );
+  }
+
+  async basement_end() {
+    const name = '情爱囹圄';
+    await kojo[name](this.#dict);
+    await print_event_name(
+      [{ color: buff_colors[3], content: name }],
+      get_chara_talk(this.id),
+    );
   }
 };
