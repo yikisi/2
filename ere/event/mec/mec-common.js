@@ -10,12 +10,20 @@ const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
+/**
+ * 定制化机制脚本，可以用于定制角色的专属机制、立绘等<br>
+ * 和 CustomizedCheck 拆分是因为解决环形依赖
+ */
 class CustomizedMec {
   /** @type {function(number):CustomizedMec} */
   static get_custom_mec;
 
-  constructor(chara_id) {
-    this.id = chara_id;
+  /** @type {number} */
+  id;
+
+  /** @param {number} cid */
+  constructor(cid) {
+    this.id = cid;
   }
 
   /** 用于切换多口上 */
