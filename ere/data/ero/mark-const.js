@@ -36,15 +36,15 @@ slavery_descriptions[slavery_enum.inherit] = '每周提供一定继承因子。'
 slavery_descriptions[slavery_enum.furniture] =
   '作为床伴时阻止所有睡奸和绑架，提高休息的体力恢复。';
 slavery_descriptions[slavery_enum.assistant] =
-  '作为默认助手加入与其他角色的性爱。只能设定一个。';
+  '作为默认助手可呼唤加入与其他角色的性爱。只能设定一个。';
 
 const mark_enum = { pleasure: 0, ero: 1, meek: 2, pain: 3, shame: 4, hate: 5 };
 
 module.exports = {
   inmon_limit: [0, 6, 16, 36],
   mark_enum,
-  slavery_enum,
-  slavery_titles,
-  slavery_options,
   slavery_descriptions,
+  slavery_enum,
+  slavery_options,
+  slavery_titles,
 };

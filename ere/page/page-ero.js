@@ -22,6 +22,8 @@ const {
 } = require('#/system/sys-calc-chara-param');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
+const select_yes_or_no = require('#/page/components/select-yes-or-no');
+
 const { get_custom_check } = require('#/event/check/check-factory');
 const { get_custom_ero, run_custom_ero } = require('#/event/ero/ero-factory');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
@@ -304,11 +306,19 @@ async function page_ero(lover, skip_start_end = false) {
   const assistant = era.get('flag:助手');
   era.set('tflag:当前对手', lover);
   if (
+    assistant !== lover &&
     era.getCharactersInTrain().length === 2 &&
     assistant > 0 &&
     sys_check_awake(assistant) &&
     !sys_check_remote(assistant) &&
-    assistant !== lover
+    rape <= 0 &&
+    (await select_yes_or_no([
+      '要叫 ',
+      { content: '助奴', color: mark_colors['淫纹'] },
+      ' ',
+      get_chara_talk(assistant).get_colored_name(),
+      ' 一起来吗？',
+    ]))
   ) {
     init_ero(assistant);
     era.set('tflag:当前助手', assistant);

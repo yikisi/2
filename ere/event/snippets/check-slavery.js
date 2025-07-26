@@ -15,9 +15,11 @@ function check_slavery(cid) {
     }
     if (love < 50) {
       if (
-        era.get(`mark:${cid}:欢愉`) >
-          Math.max(era.get(`mark:${cid}:苦痛`), era.get(`mark:${cid}:羞耻`)) ||
-        era.get(`mark:${cid}:同心`) > era.get(`mark:${cid}:反抗`)
+        era.get(`mark:${cid}:欢愉`) -
+          Math.max(era.get(`mark:${cid}:苦痛`), era.get(`mark:${cid}:羞耻`)) +
+          era.get(`mark:${cid}:同心`) -
+          era.get(`mark:${cid}:反抗`) >
+        0
       ) {
         return 1;
       } else if (

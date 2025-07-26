@@ -239,7 +239,7 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
   };
   const plugins = Object.values(inmon_plugin_dict)
     .filter((e) => {
-      if (e.level <= l_sex && e.condition(p_f_params)) {
+      if ((!l_sex || e.level <= l_sex) && e.condition(p_f_params)) {
         return true;
       }
       if (inmon.on(e.id)) {
@@ -369,7 +369,7 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
                 ...new Array(size)
                   .fill('[·]')
                   .map((e) => ({ content: e, display: 'inline-block' })),
-                ...new Array(limit - size)
+                ...new Array(Math.max(limit - size, 0))
                   .fill('[ ]')
                   .map((e) => ({ content: e, display: 'inline-block' })),
               ].reduce((p, c, i) => {

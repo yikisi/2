@@ -255,6 +255,7 @@ module.exports = class extends CustomizedLove {
       false,
     );
     end_ero_and_train();
+    sys_change_lust(this.id, get_random_value(500, 1000));
     return true;
   }
 
