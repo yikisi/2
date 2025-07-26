@@ -183,7 +183,7 @@ module.exports = async (cid, next_cb, flags) => {
         },
         content: '指导学习',
         async h() {
-          if (!(await sys_get_random_event(event_hooks.office_study)())) {
+          if (!(await sys_get_random_event(event_hooks.office_study, cid)())) {
             era.drawLine();
             era.print(['【指导了 ', chara.get_colored_name(), ' 的学习】']);
             await run_custom_daily(cid, event_hooks.office_study);
@@ -207,7 +207,9 @@ module.exports = async (cid, next_cb, flags) => {
         },
         content: '赛前准备',
         async h() {
-          if (!(await sys_get_random_event(event_hooks.office_prepare)())) {
+          if (
+            !(await sys_get_random_event(event_hooks.office_prepare, cid)())
+          ) {
             era.drawLine();
             era.print([
               '【帮助 ',
@@ -260,7 +262,7 @@ module.exports = async (cid, next_cb, flags) => {
         },
         content: `${cid > 0 ? '一起' : ''}加餐`,
         async h() {
-          if (!(await sys_get_random_event(event_hooks.office_cook)())) {
+          if (!(await sys_get_random_event(event_hooks.office_cook, cid)())) {
             era.drawLine();
             era.print(
               cid > 0
@@ -284,7 +286,7 @@ module.exports = async (cid, next_cb, flags) => {
         },
         content: `${cid > 0 ? '一起' : ''}小憩`,
         async h() {
-          if (!(await sys_get_random_event(event_hooks.office_rest)())) {
+          if (!(await sys_get_random_event(event_hooks.office_rest, cid)())) {
             era.drawLine();
             era.print(
               cid > 0
@@ -309,7 +311,7 @@ module.exports = async (cid, next_cb, flags) => {
         },
         content: `${cid > 0 ? '一起' : ''}打游戏`,
         async h() {
-          if (!(await sys_get_random_event(event_hooks.office_game)())) {
+          if (!(await sys_get_random_event(event_hooks.office_game, cid)())) {
             era.drawLine();
             era.print(
               cid > 0
@@ -558,7 +560,7 @@ module.exports = async (cid, next_cb, flags) => {
           sys_handle_action(sys_get_move_cost(location_enum.god, cid), cid);
           if (
             !(await game_guides.school_god()) &&
-            !(await sys_get_random_event(event_hooks.school_god)())
+            !(await sys_get_random_event(event_hooks.school_god, cid)())
           ) {
             if (
               era.get('flag:当前月') === 3 &&

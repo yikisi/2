@@ -1,3 +1,411 @@
+选中互动角色:
+  sync: true
+  lines:
+    # 奴役
+    - if: d.rape === 1
+      random: true
+      lines:
+        - color: %代表色%
+          content:
+            - fontSize: bold
+              content: 奇锐骏
+            - 「呼呼呼～今天也要去散步吗？那样的话，要带上其他的孩子吗？」
+        - 赤身全裸的奇锐骏安静地趴伏在地面之上，直到%你%靠近，%她%才一面左右摇晃着耳朵，一面将项圈叼在嘴里递往%你%的手边。
+    # 强奸
+    - if: d.rape === 2
+      random: true
+      lines:
+        - color: %代表色%
+          content:
+            - fontSize: bold
+              content: 奇锐骏
+            - 「唔姆姆……败者就是要服从胜者，这是自然界的必然呢。」
+        - 如此说着，奇锐骏平静地为自己戴上了今日份的项圈。
+    # 被奴役
+    - if: d.rape === 3
+      random: true
+      lines:
+        - color: %代表色%
+          content:
+            - fontSize: bold
+              content: 奇锐骏
+            - 「阿拉拉……要忍耐住哦？%称呼%～」
+        - 按着%你%燥热的小腹并不时往下探索，奇锐骏的脸上是意味深长的笑容。
+    - random: true
+      lines:
+        - color: %代表色%
+          content:
+            - fontWeight: bold
+              content: 奇锐骏
+            - 「哎呀哎呀……%称呼%～不去跟其他年轻可爱的好孩子们聊天了吗？」
+    - random: true
+      lines:
+        - color: %代表色%
+          content:
+            - fontWeight: bold
+              content: 奇锐骏
+            - 「早上好哦，早饭已经吃了吗？不可以不吃早饭的哦。」
+        - color: %代表色%
+          content:
+            - fontWeight: bold
+              content: 奇锐骏
+            - 「如果还没有吃的话，我推荐纳豆拌饭，或者是稀饭配嘎吱嘎吱干哦～对身体可好了。」
+
+回合开始:
+  sync: true
+  lines:
+    # 奴役
+    - if: d.rape === 1
+      random: true
+      lines:
+        - color: %代表色%
+          content:
+            - fontSize: bold
+              content: 奇锐骏
+            - 「室内、天台、车站，还是训练场，不管是哪里都可以的哦？」
+        - color: %代表色%
+          content:
+            - fontSize: bold
+              content: 奇锐骏
+            - 「如果是需要其他孩子的话，我也可以来帮忙的。虽然对其他人来说，第一次可能会有一点点痛，但只要能温柔一些的话，%女孩%子也会因为本能而理解%称呼%的魅力所在呢。」
+    # 强奸
+    - if: d.rape === 2
+      random: true
+      lines:
+        - color: %代表色%
+        - content:
+            - fontSize: bold
+              content: 奇锐骏
+            - 「呼呼～这次可不会这么轻易得被%你%推到在身下了哦？我对自己的拳法可是蛮有自信的呢。」
+    # 被奴役
+    - if: d.rape === 3
+      random: true
+      lines:
+        - color: %代表色%
+        - content:
+            - fontSize: bold
+              content: 奇锐骏
+            - 「今天的嘎吱嘎吱干我已经做好了，放在了冰箱里。要记得按时吃哦？要是又因为营养不良导致脱水而昏过去了可不行呢，%称呼%❤️～」
+    - random: true
+      lines:
+        - color: %代表色%
+          content:
+            - fontWeight: bold
+              content: 奇锐骏
+            - 「哎呀呀……看来是有在认真的工作呢～要吃一点刚腌好的糖拌红西柿吗？补充了足够的糖分，下午的训练也能够打起精神哦。」
+    - random: true
+      lines:
+        - color: %代表色%
+          content:
+            - fontWeight: bold
+              content: 奇锐骏
+            - 「%称呼%穿的衣服很单薄呢……到秋天的话，要多穿一点衣服哦。要是穿的太少了感冒了的话，可是会很难受的哦。」
+    - random: true
+      lines:
+        - color: %代表色%
+          content:
+            - fontWeight: bold
+              content: 奇锐骏
+            - 「等训练结束了之后啊，我想要去腌些嘎吱嘎吱干呢。这样等到了明天，%称呼%就可以拿这些嘎吱嘎吱干分享给其他好孩子，跟他们搞好关系了吧？」
+    - random: true
+      lines:
+        - color: %代表色%
+          content:
+            - fontWeight: bold
+              content: 奇锐骏
+            - 「哎呀呀……看起来很精神呢，%称呼%，是发生了什么好事了吗？呼吼吼……看来要帮你准备红豆饭了呢～」
+    - random: true
+      lines:
+        - color: %代表色%
+          content:
+            - fontWeight: bold
+              content: 奇锐骏
+            - 「哎呀呀……看起来很精神呢，%称呼%，是发生了什么好事了吗？呼吼吼……看来要帮你准备嘎吱嘎吱干了呢～」
+    - random: true
+      lines:
+        - color: %代表色%
+          content:
+            - fontWeight: bold
+              content: 奇锐骏
+            - 「哎呀呀……看起来很精神呢，%称呼%，是发生了什么好事了吗？呼吼吼……看来要帮你准备糖拌红西柿了呢～」
+    - random: true
+      lines:
+        - color: %代表色%
+          content:
+            - fontWeight: bold
+              content: 奇锐骏
+            - 「哎呀呀……看起来很精神呢，%称呼%，是发生了什么好事了吗？呼吼吼……看来要帮你准备红烧鲤鱼了呢～」
+
+聊天:
+  # 奴役
+  - if: d.rape === 1
+    random: true
+    lines:
+      - color: %代表色%
+        content:
+          - fontSize: bold
+            content: 奇锐骏
+          - 「阿拉拉……今天也要在特雷森里散步吗？」
+      - color: %代表色%
+        content:
+          - fontSize: bold
+            content: 奇锐骏
+          - 「赤身裸体的被脖子上项圈与缰绳牵着被带到公共场所里散步什么的，总会感觉到心脏在砰砰直跳呢，果然这就是年轻人经常会说的『浪漫』吧？」
+      - color: %代表色%
+        content:
+          - fontSize: bold
+            content: 奇锐骏
+          - 「不仅能锻炼根性，还能感觉到浪漫和快乐什么的；这样优秀的训练方法得传播出去才行呢。」
+      - color: %代表色%
+        content:
+          - fontSize: bold
+            content: 奇锐骏
+          - 「像是%奇锐骏称呼骏川%，还有理事长%她%们呐，感觉很容易就会沉沦在其中呢。」
+  # 强奸
+  - if: d.rape === 2
+    random: true
+    lines:
+      - color: %代表色%
+        content:
+          - fontSize: bold
+            content: 奇锐骏
+          - 「阿拉……今天的太阳真舒服呢，是吧积攒下来的家务一口气做完的好时机呢。」
+      - color: %代表色%
+        content:
+          - fontSize: bold
+            content: 奇锐骏
+          - 「洗衣服、晒被子、还有做嘎吱嘎吱干……唔噜噜，今天要做的事情意外地多啊。」
+      - color: %代表色%
+        content:
+          - fontSize: bold
+            content: 奇锐骏
+          - 「所以呢，%称呼%；今天可不许你强奸我了哦？」
+      - color: %代表色%
+        content:
+          - fontSize: bold
+            content: 奇锐骏
+          - 「无论是在大家训练的时候被带到中庭的枯树洞里，还是午休的时候被带到天台上，还是下午外出的时候在车站的小巷子里什么的，今天都是不可以的哦？」
+  # 被奴役
+  - if: d.rape === 3
+    random: true
+    lines:
+      - color: %代表色%
+        content:
+          - fontSize: bold
+            content: 奇锐骏
+          - 「今天我感觉自己的状态特别好呢，所以晚上我会去宠幸你。」
+      - color: %代表色%
+        content:
+          - fontSize: bold
+            content: 奇锐骏
+          - 「所以呢，%称呼%，要记得把身上的各个地方都好好地洗干净等着我哦。」
+      - 明明是一如既往的笑容，却有一种不容拒绝的魄力。
+      - 今天晚上，%你%到底会变成什么样子呢……
+  - if: era.get('cflag:100:干劲') === -2
+    random: true
+    lines:
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 奇锐骏
+          - 「…唏唷唷……完全使不上劲呢～」
+  - if: era.get('cflag:100:干劲') === -2
+    random: true
+    lines:
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 奇锐骏
+          - 「唔……话说，接下来要做什么来着呢？今天迷迷糊糊的，不小心给忘了啊。」
+  - if: era.get('cflag:100:干劲') === -2
+    random: true
+    lines:
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 奇锐骏
+          - 「库呼呼……差点睡过去了呢。这样可不行呢，得在鼻子下面稍微抹点清凉膏……」
+  - if: era.get('cflag:100:干劲') === -2
+    random: true
+    lines:
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 奇锐骏
+          - 「扑通……啊，差点踩到青蛙了（摔了一跤）呢～」
+  - if: era.get('cflag:100:干劲') === -2
+    random: true
+    lines:
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 奇锐骏
+          - 「嗯……回去还要腌卡擦咔嚓干呢，不打起精神来可不行呢～」
+  - if: era.get('cflag:100:干劲') === -1
+    random: true
+    lines:
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 奇锐骏
+          - 「呼……坚持就是力量呢～所以不要紧的哦。」
+  - if: era.get('cflag:100:干劲') === -1
+    random: true
+    lines:
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 奇锐骏
+          - 「哎嘿嘿……稍微有点使不上劲了呢。」
+  - if: era.get('cflag:100:干劲') === -1
+    random: true
+    lines:
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 奇锐骏
+          - 「呼呼呼，要像同龄人一样努力才行呢。」
+  - if: era.get('cflag:100:干劲') === -1
+    random: true
+    lines:
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 奇锐骏
+          - 「深呼吸——呼、呼～得继续绷紧神经才行呢。」
+  - if: era.get('cflag:100:干劲') === -1
+    random: true
+    lines:
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 奇锐骏
+          - 「注意力……被眼前呼呼飞的小苍蝇给打乱了呢——」
+  - if: (era.get('cflag:100:育成回合计时') < 3 * 48) && era.get('cflag:100:干劲') === 0
+    random: true
+    lines:
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 奇锐骏
+          - 「争口气～好，靠着墙边拍了一下背，精神了呢。」
+  - if: (era.get('cflag:100:育成回合计时') < 3 * 48) && era.get('cflag:100:干劲') === 0
+    random: true
+    lines:
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 奇锐骏
+          - 「%称呼%，我们开始训练吧～」
+  - if: (era.get('cflag:100:育成回合计时') < 3 * 48) && era.get('cflag:100:干劲') === 0
+    random: true
+    lines:
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 奇锐骏
+          - 「扩胸运动——已经做完了哦～」
+  - if: (era.get('cflag:100:育成回合计时') < 3 * 48) && era.get('cflag:100:干劲') === 0
+    random: true
+    lines:
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 奇锐骏
+          - 「今天也踏踏实实、一步一个脚印的努力吧～」
+  - if: (era.get('cflag:100:育成回合计时') < 3 * 48) && era.get('cflag:100:干劲') === 0
+    random: true
+    lines:
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 奇锐骏
+          - 「该走了哦，%称呼%。」
+  - if: era.get('cflag:100:干劲') === 1
+    random: true
+    lines:
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 奇锐骏
+          - 「嗯～那么，%称呼%，今天的训练是什么呢～？」
+  - if: era.get('cflag:100:干劲') === 1
+    random: true
+    lines:
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 奇锐骏
+          - 「不管是什么训练，我都会认～真～对待的哦。」
+  - if: era.get('cflag:100:干劲') === 1
+    random: true
+    lines:
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 奇锐骏
+          - 「盐分补给也很重要，来吃一点嘎吱嘎吱干吧～」
+  - if: era.get('cflag:100:干劲') === 1
+    random: true
+    lines:
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 奇锐骏
+          - 「哼、哼～拉伸运动准备到位～接下来要认真上了哦。」
+  - if: era.get('cflag:100:干劲') === 1
+    random: true
+    lines:
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 奇锐骏
+          - 「啊～%称呼%，刚刚你说了什么啊？」
+  - if: era.get('cflag:100:干劲') === 2
+    random: true
+    lines:
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 奇锐骏
+          - 「呼呼呼～更加严格的训练也是可以的哦。」
+  - if: era.get('cflag:100:干劲') === 2
+    random: true
+    lines:
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 奇锐骏
+          - 「阿拉啦……已经到训练的时间了啊～」
+  - if: era.get('cflag:100:干劲') === 2
+    random: true
+    lines:
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 奇锐骏
+          - 「今天天气很好呢～看着太阳公公啊，总感觉干劲十足了～」
+  - if: era.get('cflag:100:干劲') === 2
+    random: true
+    lines:
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 奇锐骏
+          - 「哎呀呀……看到了赛道啊，总感觉心里痒呼呼的呢～」
+  - if: era.get('cflag:100:干劲') === 2
+    random: true
+    lines:
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 奇锐骏
+          - 「训练结束了之后啊，我想要把被子拿出来晒呢～%称呼%一会儿能来陪我吗？」
+  - if: "!(era.get('cflag:100:育成回合计时') < 3 * 48)"
+    random: true
+    lines:
+      - 奇锐骏一直保持着轻松的表情。
+
 情爱囹圄:
   - 逃脱的大门被封印了。
   - 并非是靠门锁，而是纯粹的腕力。

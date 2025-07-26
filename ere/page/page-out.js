@@ -68,7 +68,7 @@ async function out_page() {
   const tokino_check = cid !== 301 && sys_check_npc_working(301);
   print_chara_info(cid, chara_info_type.out, tokino_check && 301);
   era.drawLine();
-  if (!(await sys_get_random_event(event_hooks.out_start)())) {
+  if (!(await sys_get_random_event(event_hooks.out_start, cid)())) {
     const event_marks = EventMarks.get(cid);
     const positions = MejiroCity.instance().get_positions(
       cid,
@@ -190,7 +190,7 @@ async function out_page() {
                   if (positions[aim - 1].l === location_enum.mejiro) {
                     await MejiroCity.instance().page(301);
                   } else if (
-                    !(await sys_get_random_event(positions[aim - 1].s)())
+                    !(await sys_get_random_event(positions[aim - 1].s, 301)())
                   ) {
                     await run_custom_daily(301, positions[aim - 1].s);
                   }
@@ -268,14 +268,17 @@ async function out_page() {
         era.set('flag:当前位置', positions[aim - 1].l);
         if (positions[aim - 1].l === location_enum.mejiro) {
           await MejiroCity.instance().page(cid);
-        } else if (!(await sys_get_random_event(positions[aim - 1].s)())) {
+        } else if (!(await sys_get_random_event(positions[aim - 1].s, cid)())) {
           await run_custom_daily(cid, positions[aim - 1].s);
         }
         era.set('flag:当前位置', location_enum.gate);
     }
     era.drawLine();
     await era.printAndWait('【折返了】');
-    await sys_get_random_event(event_hooks.back_school)({
+    await sys_get_random_event(
+      event_hooks.back_school,
+      cid,
+    )({
       loc: positions[aim - 1]?.l,
     });
   }

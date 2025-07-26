@@ -17,29 +17,29 @@ const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
 module.exports = async (location) => {
   await era.clear();
   era.set('flag:当前位置', location);
-  const chara_id = era.get('flag:当前互动角色');
+  const cid = era.get('flag:当前互动角色');
   print_page_header();
-  print_curr_chara(chara_id, chara_info_type.school);
+  print_curr_chara(cid, chara_info_type.school);
   era.drawLine();
   const hook =
     location === location_enum.atrium
       ? event_hooks.school_atrium
       : event_hooks.school_rooftop;
-  if (!(await sys_get_random_event(hook)())) {
+  if (!(await sys_get_random_event(hook, cid)())) {
     era.drawLine();
-    const vehicle = !chara_id && era.get('flag:单人载具');
+    const vehicle = !cid && era.get('flag:单人载具');
     era.print([
       '【',
-      ...(chara_id
-        ? ['和 ', get_chara_talk(chara_id).get_colored_name(), ' 一起']
+      ...(cid
+        ? ['和 ', get_chara_talk(cid).get_colored_name(), ' 一起']
         : ['独自']),
       vehicle ? `${vehicle_verbs[vehicle]}着 ${vehicle_names[vehicle]} ` : '',
       `前往 ${location_name[location]}】`,
     ]);
-    await run_custom_daily(chara_id, hook);
+    await run_custom_daily(cid, hook);
     era.drawLine();
     await era.printAndWait('【折返了】');
-    await sys_get_random_event(event_hooks.back_school)({ loc: location });
+    await sys_get_random_event(event_hooks.back_school, cid)({ loc: location });
   }
   era.set('flag:当前位置', location_enum.office);
 };

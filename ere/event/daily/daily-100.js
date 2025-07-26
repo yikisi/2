@@ -20,11 +20,11 @@ const acute_school_atrium = require('#/event/daily/daily-events-100/school-atriu
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
 const select_action_in_station = require('#/event/daily/snippets/select-action-in-station');
 const add_jewel_reward = require('#/event/snippets/add-jewel-reward');
+const check_slavery = require('#/event/snippets/check-slavery');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
-const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { buff_colors } = require('#/data/color-const');
@@ -34,9 +34,12 @@ const { part_enum } = require('#/data/ero/part-const');
 module.exports = class extends CustomizedDaily {
   get #dict() {
     const ret = {};
-    ret['代表色'] = get_chara_talk(this.id).color;
+    const acute = get_chara_talk(this.id);
+    ret['代表色'] = acute.color;
+    ret['她'] = acute.sex;
     ret['你'] = get_chara_talk(0).name;
     ret['称呼'] = sys_get_callname(this.id, 0);
+    ret.rape = check_slavery(this.id);
     return ret;
   }
 
@@ -44,103 +47,22 @@ module.exports = class extends CustomizedDaily {
     if (!sys_check_awake(100)) {
       return super.select();
     }
-    const acute = get_chara_talk(100);
-    if (Math.random() < 0.5) {
-      acute.say([
-        '哎呀哎呀……',
-        sys_get_callname(100, 0),
-        '～不去跟其他年轻可爱的好孩子们聊天了吗？',
-      ]);
-    } else {
-      acute.say('早上好哦，早饭已经吃了吗？不可以不吃早饭的哦。');
-      acute.say(
-        '如果还没有吃的话，我推荐纳豆拌饭，或者是稀饭配嘎吱嘎吱干哦～对身体可好了。',
-      );
-    }
+    kojo['选中互动角色'](this.#dict);
   }
 
   good_morning() {
-    const callname = sys_get_callname(100, 0);
-    const talk_arr = [
-      () =>
-        '哎呀呀……看来是有在认真的工作呢～要吃一点刚腌好的糖拌红西柿吗？补充了足够的糖分，下午的训练也能够打起精神哦。',
-      () => [
-        callname,
-        ' 穿的衣服很单薄呢……到秋天的话，要多穿一点衣服哦。要是穿的太少了感冒了的话，可是会很难受的哦。',
-      ],
-      () => [
-        '等训练结束了之后啊，我想要去腌些嘎吱嘎吱干呢。这样等到了明天，',
-        callname,
-        ' 就可以拿这些嘎吱嘎吱干分享给其他好孩子，跟他们搞好关系了吧？',
-      ],
-      () => [
-        '哎呀呀……看起来很精神呢，',
-        callname,
-        '，是发生了什么好事了吗？呼吼吼……看来要帮你准备',
-        get_random_entry(['红豆饭', '嘎吱嘎吱干', '糖拌红西柿', '红烧鲤鱼']),
-        '了呢～',
-      ],
-    ];
-    get_chara_talk(100).say(get_random_entry(talk_arr)());
+    const dict = this.#dict;
+    dict['女孩'] = get_chara_talk(this.id).child_sex_title;
+    kojo['回合开始'](dict);
   }
 
   async talk() {
-    if (!sys_check_awake(100) || era.get('cflag:100:育成回合计时') >= 3 * 48) {
+    if (!sys_check_awake(100)) {
       return await super.talk();
     }
-    const callname = sys_get_callname(100, 0);
-    let talk_arr;
-    switch (era.get('cflag:100:干劲')) {
-      case -2:
-        talk_arr = [
-          '…唏唷唷……完全使不上劲呢～。',
-          '唔……话说，接下来要做什么来着呢？今天迷迷糊糊的，不小心给忘了啊。',
-          '库呼呼……差点睡过去了呢。这样可不行呢，得在鼻子下面稍微抹点清凉膏……',
-          '扑通……啊，差点踩到青蛙了（摔了一跤）呢～',
-          '嗯……回去还要腌卡擦咔嚓干呢，不打起精神来可不行呢～——',
-        ];
-        break;
-      case -1:
-        talk_arr = [
-          '呼……坚持就是力量呢～所以不要紧的哦。',
-          '哎嘿嘿……稍微有点使不上劲了呢。',
-          '呼呼呼，要像同龄人一样努力才行呢。',
-          '深呼吸——呼、呼～得继续绷紧神经才行呢。',
-          '注意力……被眼前呼呼飞的小苍蝇给打乱了呢——',
-        ];
-        break;
-      case 0:
-        talk_arr = [
-          '争口气～好，靠着墙边拍了一下背，精神了呢。',
-          [callname, '，我们开始训练吧～'],
-          '阔胸运动——已经做完了哦～。',
-          '今天也踏踏实实、一步一个脚印的努力吧～',
-          ['该走了哦，', callname, '。'],
-        ];
-        break;
-      case 1:
-        talk_arr = [
-          ['嗯～那么，', callname, '，今天的训练是什么呢～？'],
-          '不管是什么训练，我都会认～真～对待的哦。',
-          '盐分补给也很重要，来吃一点嘎吱嘎吱干吧～',
-          '哼、哼～拉伸运动准备到位～接下来要认真上了哦。',
-          ['啊～', callname, '，刚刚你说了什么啊？'],
-        ];
-        break;
-      case 2:
-        talk_arr = [
-          '呼呼呼～更加严格的训练也是可以的哦。',
-          '阿拉啦……已经到训练的时间了啊～',
-          '今天天气很好呢～看着太阳公公啊，总感觉干劲十足了～',
-          '哎呀呀……看到了赛道啊，总感觉心里痒呼呼的呢～',
-          [
-            '训练结束了之后啊，我想要把被子拿出来晒呢～',
-            callname,
-            '一会儿能来陪我吗？',
-          ],
-        ];
-    }
-    await get_chara_talk(100).say_and_wait(get_random_entry(talk_arr));
+    const dict = this.#dict;
+    dict['奇锐骏称呼骏川'] = sys_get_callname(this.id, 301);
+    await kojo['聊天'](dict);
   }
 
   async office_gift() {

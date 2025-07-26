@@ -107,6 +107,10 @@ class CharaTalk {
     return this.sex_code === 1 ? '兄弟' : '姐妹';
   }
 
+  get child_sex_title() {
+    return this.sex_code === 1 ? '男孩' : '女孩';
+  }
+
   get teen_sex_title() {
     return this.sex_code === 1 ? '少年' : '少女';
   }
@@ -165,7 +169,7 @@ class CharaTalk {
   get_baby_sex_title = () => (this.sex_code - 1 ? '女婴' : '男婴');
 
   /** 孩童角色的称呼 */
-  get_child_sex_title = () => (this.sex_code - 1 ? '女孩' : '男孩');
+  get_child_sex_title = () => this.child_sex_title;
 
   // 以角色为首的复数形式人称代词
   get_couple_title = () => (this.id === 0 ? '你们' : `${this.sex}们`);
