@@ -390,6 +390,28 @@ module.exports = (handlers) => {
     set_69(attacker, defender, supporter);
   };
 
+  handlers[ero_hooks.ask_double_cowgirl] = (
+    attacker,
+    defender,
+    _,
+    { supporter },
+  ) => {
+    sys_do_sex(
+      new EroParticipant(defender, part_enum.virgin, -0.5),
+      new EroParticipant(attacker, part_enum.penis, -0.5),
+    );
+    sys_do_sex(
+      new EroParticipant(supporter, part_enum.virgin),
+      new EroParticipant(attacker, part_enum.penis),
+    );
+    // 再执行一次防御者对攻击者的do_sex，重新建立攻击者与防御者的接触判定，让防御者拿宝珠
+    sys_do_sex(
+      new EroParticipant(defender, part_enum.virgin, -0.5),
+      new EroParticipant(attacker, part_enum.penis, -0.5),
+    );
+    set_ask_double_fuck(attacker, defender, supporter);
+  };
+
   handlers[ero_hooks.ask_double_fuck] = (
     attacker,
     defender,
@@ -487,6 +509,24 @@ module.exports = (handlers) => {
     );
     add_juel(defender, '顺从', base_emotion_juel);
     set_double_fuck(attacker, defender, extra_flag.supporter);
+  };
+
+  handlers[ero_hooks.double_cowgirl] = (atk, def, _, extra) => {
+    sys_do_sex(
+      new EroParticipant(atk, part_enum.virgin, -0.5),
+      new EroParticipant(def, part_enum.penis, -0.5),
+    );
+    sys_do_sex(
+      new EroParticipant(extra.supporter, part_enum.virgin),
+      new EroParticipant(def, part_enum.penis),
+    );
+    // 再执行一次攻击者对防御者的do_sex，重新建立攻击者与防御者的接触判定，让攻击者拿宝珠
+    sys_do_sex(
+      new EroParticipant(atk, part_enum.virgin, -0.5),
+      new EroParticipant(def, part_enum.penis, -0.5),
+    );
+    add_juel(def, '顺从', base_emotion_juel);
+    set_double_fuck(atk, def, extra.supporter);
   };
 
   handlers[ero_hooks.double_penetration] = (

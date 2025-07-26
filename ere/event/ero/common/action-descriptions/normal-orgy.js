@@ -177,6 +177,24 @@ module.exports = (handlers) => {
       ' 的肉棒】',
     ]);
 
+  handlers[ero_hooks.ask_double_cowgirl] = (
+    attacker,
+    defender,
+    hook,
+    extra_flag,
+  ) =>
+    era.printAndWait([
+      '【',
+      attacker.get_colored_name(),
+      ' 请求 ',
+      defender.get_colored_name(),
+      ' 与 ',
+      get_chara_talk(extra_flag.supporter).get_colored_name(),
+      ' ',
+      !hook.arg ? '继续' : '',
+      '交替用小穴吞没肉棒】',
+    ]);
+
   handlers[ero_hooks.ask_double_fuck] = (
     attacker,
     defender,
@@ -271,6 +289,17 @@ module.exports = (handlers) => {
       ]);
     }
   };
+
+  handlers[ero_hooks.double_cowgirl] = (atk, def, hook, extra) =>
+    era.printAndWait([
+      '【',
+      atk.get_colored_name(),
+      ' 与 ',
+      get_chara_talk(extra.supporter).get_colored_name(),
+      ' 的小穴交替吞没 ',
+      def.get_colored_name(),
+      ' 的肉棒】',
+    ]);
 
   handlers[ero_hooks.double_fuck] = (attacker, defender, hook, extra_flag) =>
     era.printAndWait([

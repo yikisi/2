@@ -376,7 +376,8 @@ async function sys_auto_rape(shown) {
   }
   if (chara_list_in_train.length > 0) {
     filters.push(
-      (e) => e >= ero_hooks.double_fuck && e <= ero_hooks.spit_roast_anal_sex,
+      (e) =>
+        e >= ero_hooks.double_cowgirl && e <= ero_hooks.spit_roast_anal_sex,
       (e) =>
         e >= ero_hooks.ask_supporter_prepare_virgin && e <= ero_hooks.fuck_69,
     );
