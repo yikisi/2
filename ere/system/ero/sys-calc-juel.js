@@ -39,36 +39,36 @@ function add_juel(cid, key, num) {
 
 /**
  * @param {number} cid
- * @param {string} jewel_name
+ * @param {string} j_name
  * @returns {number}
  */
-function get_buffed_jewel(cid, jewel_name) {
+function get_buffed_jewel(cid, j_name) {
   const ret =
-    tmp[cid][jewel_name] *
-    (1 + era.get(`tcvar:${cid}:${jewel_name.substring(0, 2)}因子加成`));
-  tmp[cid][jewel_name] = 0;
+    tmp[cid][j_name] *
+    (1 + era.get(`tcvar:${cid}:${j_name.substring(0, 2)}因子加成`));
+  tmp[cid][j_name] = 0;
   return ret;
 }
 
 /**
  * @param {number} cid
- * @param {string} jewel_name
+ * @param {string} j_name
  * @param {number} src
  * @param {number} dst
  * @param {boolean} shown
  */
-function print_jewel_change(cid, jewel_name, src, dst, shown = true) {
+function print_jewel_change(cid, j_name, src, dst, shown = true) {
   const jewel = Math.floor(src / palam2juel);
   const new_jewel = Math.floor(dst / palam2juel);
   if (shown && new_jewel !== jewel) {
     era.print([
       get_chara_talk(cid).get_colored_name(),
-      ` 获得了 ${jewel_name.substring(0, 2)}因子：${jewel.toLocaleString()} + `,
+      ` 获得了 ${j_name.substring(0, 2)}因子：${jewel.toLocaleString()} + `,
       {
         content: `${(new_jewel - jewel).toLocaleString()}`,
         color: palam_colors.notifications[1],
       },
-      ` → ${new_jewel.toLocaleString()} (${(new_jewel + era.get(`jewel:${cid}:${jewel_name}`)).toLocaleString()})`,
+      ` → ${new_jewel.toLocaleString()} (${(new_jewel + era.get(`jewel:${cid}:${j_name}`)).toLocaleString()})`,
     ]);
   }
 }
@@ -260,12 +260,12 @@ module.exports = {
     }
   },
   /**
-   * @param {number} chara_id
+   * @param {number} cid
    * @param {string} talent
    */
-  update_juels_from_talent(chara_id, talent) {
-    if (era.get(`talent:${chara_id}:${talent}`) > 0) {
-      add_juel(chara_id, '顺从', base_juel_reward);
+  update_juels_from_talent(cid, talent) {
+    if (era.get(`talent:${cid}:${talent}`) > 0) {
+      add_juel(cid, '顺从', base_juel_reward);
     }
   },
 };

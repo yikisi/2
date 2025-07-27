@@ -187,7 +187,7 @@ function calc_pleasure(chara_id, part, attack, pass_transfer) {
 function update_palam(chara_id, part, shown) {
   const key = part_names[part];
   const param_name = key + '快感';
-  // 快感加成已在sys-calc-ero.js中计算，因子加成在sys-calc-juel.js中计算，不重复计算
+  // 快感加成已在 sys-calc-ero.js 中计算，因子加成在 sys-calc-juel.js 中计算，不重复计算
   let attack =
     tmp[chara_id][key] * (1 + 0.1 * (sys_get_chara(chara_id) === -3));
   switch (part) {
@@ -308,10 +308,11 @@ module.exports = {
         ),
       );
     }
-  } /**
+  },
+  /**
    * @param {boolean} shown
    * @param {number} ids
-   */,
+   */
   update_palams(shown, ...ids) {
     ids.forEach((chara_id) =>
       orgasm_check_list.forEach((part) => update_palam(chara_id, part, shown)),

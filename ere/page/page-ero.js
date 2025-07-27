@@ -157,8 +157,8 @@ function get_chara_info(cid) {
     },
   ];
   ['体力', '精力'].forEach((e) => {
-    const val = era.get(`base:${cid}:${e}`),
-      limit = era.get(`maxbase:${cid}:${e}`);
+    const val = era.get(`base:${cid}:${e}`);
+    const limit = era.get(`maxbase:${cid}:${e}`);
     ret.push(
       { config: { width: 1 }, content: e.substring(0, 1), type: 'text' },
       {
@@ -169,22 +169,20 @@ function get_chara_info(cid) {
       },
     );
   });
-  const penis_size = get_penis_size(cid);
-  const virgin_size = era.get(`cflag:${cid}:阴道尺寸`);
-  const palam_list = [part_enum.mouth, part_enum.breast, part_enum.body];
-  if (penis_size > 0) {
-    palam_list.push(part_enum.penis);
+  const s_penis = get_penis_size(cid);
+  const s_virgin = era.get(`cflag:${cid}:阴道尺寸`);
+  const l_param = [part_enum.mouth, part_enum.breast, part_enum.body];
+  if (s_penis > 0) {
+    l_param.push(part_enum.penis);
   }
-  if (virgin_size > 0) {
-    if (!penis_size) {
-      palam_list.push(part_enum.clitoris);
+  if (s_virgin > 0) {
+    if (!s_penis) {
+      l_param.push(part_enum.clitoris);
     }
-    palam_list.push(part_enum.virgin);
+    l_param.push(part_enum.virgin);
   }
-  palam_list.push(part_enum.anal, part_enum.sadism, part_enum.masochism);
-  palam_list
-    .splice(0, 4)
-    .forEach((e) => ret.push(...get_palam_progress(cid, e)));
+  l_param.push(part_enum.anal, part_enum.sadism, part_enum.masochism);
+  l_param.splice(0, 4).forEach((e) => ret.push(...get_palam_progress(cid, e)));
   ret.push({
     config: { width: 1 },
     content: '欲',
@@ -227,11 +225,11 @@ function get_chara_info(cid) {
       type: 'progress',
     });
   }
-  ret.push(...get_palam_progress(cid, palam_list.shift(), 4));
-  palam_list.forEach((e) => ret.push(...get_palam_progress(cid, e)));
+  ret.push(...get_palam_progress(cid, l_param.shift(), 4));
+  l_param.forEach((e) => ret.push(...get_palam_progress(cid, e)));
   ret.push({
-    config: { width: 9 * (10 - palam_list) },
-    content: '',
+    config: { width: 9 * (10 - l_param) },
+    content: [],
     type: 'text',
   });
   return ret;
@@ -299,29 +297,29 @@ function print_milking(type, size) {
  * @param {boolean} [skip_start_end=false]
  */
 async function page_ero(lover, skip_start_end = false) {
-  const in_basement = era.get('flag:当前位置') === location_enum.basement;
+  const in_base = era.get('flag:当前位置') === location_enum.basement;
   const rape = era.get('tflag:强奸');
   lover ||= era.get('tflag:当前对手') || era.get('flag:当前互动角色');
   let ero_flag = true;
-  const assistant = era.get('flag:助手');
+  const assist = era.get('flag:助手');
   era.set('tflag:当前对手', lover);
   if (
-    assistant !== lover &&
+    assist !== lover &&
     era.getCharactersInTrain().length === 2 &&
-    assistant > 0 &&
-    sys_check_awake(assistant) &&
-    !sys_check_remote(assistant) &&
+    assist > 0 &&
+    sys_check_awake(assist) &&
+    !sys_check_remote(assist) &&
     rape <= 0 &&
     (await select_yes_or_no([
       '要叫 ',
       { content: '助奴', color: mark_colors['淫纹'] },
       ' ',
-      get_chara_talk(assistant).get_colored_name(),
+      get_chara_talk(assist).get_colored_name(),
       ' 一起来吗？',
     ]))
   ) {
-    init_ero(assistant);
-    era.set('tflag:当前助手', assistant);
+    init_ero(assist);
+    era.set('tflag:当前助手', assist);
   }
   if (!skip_start_end) {
     era.drawLine();
@@ -348,13 +346,13 @@ async function page_ero(lover, skip_start_end = false) {
     const filters = new Array(7)
       .fill(0)
       .map((_, i) => era.get(`flag:${70 + i}`));
-    const left_columns = [];
+    const l_cols = [];
     const lost_mind = era.get('tcvar:0:失神');
     const love = get_love_info(lover);
     const marks = get_ero_marks(lover);
     const relation = get_relation_info(lover);
-    if (!in_basement) {
-      left_columns.push({
+    if (!in_base) {
+      l_cols.push({
         config: { width: 8 },
         content: `${era.get('flag:当前年')} 年 ${era.get(
           'flag:当前月',
@@ -362,9 +360,9 @@ async function page_ero(lover, skip_start_end = false) {
         type: 'text',
       });
     }
-    left_columns.push(
+    l_cols.push(
       {
-        config: { align: in_basement ? 'left' : 'right', width: 16 },
+        config: { align: in_base ? 'left' : 'right', width: 16 },
         content: [
           `位于 ${location_name[era.get('flag:当前位置')]} `,
           {
@@ -382,25 +380,25 @@ async function page_ero(lover, skip_start_end = false) {
       },
       ...get_chara_info(lover),
     );
-    left_columns.push({
+    l_cols.push({
       config: { width: 12 },
       content: [`第 ${era.get('tflag:回合')} 回合 `],
       type: 'text',
     });
     if (rape === 0) {
-      left_columns.at(-1).content.push({
+      l_cols.at(-1).content.push({
         color: buff_colors[2],
         content: '强奸事件发生！',
         fontWeight: 'bold',
       });
     } else if (rape > 0) {
-      left_columns.at(-1).content.push({
+      l_cols.at(-1).content.push({
         color: buff_colors[2],
         content: '逆强奸事件发生！',
         fontWeight: 'bold',
       });
     }
-    left_columns.push({
+    l_cols.push({
       config: { align: 'right', width: 12 },
       content: [
         '🤝 ',
@@ -426,7 +424,7 @@ async function page_ero(lover, skip_start_end = false) {
     master = era.get('tflag:主导权');
     if (master === 0) {
       if (characters_in_train.length > 2) {
-        left_columns.push(
+        l_cols.push(
           { type: 'divider' },
           { config: { width: 6 }, content: '对手', type: 'text' },
           ...characters_in_train
@@ -446,13 +444,13 @@ async function page_ero(lover, skip_start_end = false) {
             }),
         );
         if ((characters_in_train.length - 1) % 3) {
-          left_columns.push({
+          l_cols.push({
             config: { width: 18 - ((characters_in_train.length - 1) % 3) * 6 },
             content: '',
             type: 'text',
           });
         }
-        left_columns.push(
+        l_cols.push(
           { config: { width: 6 }, content: '协助者', type: 'text' },
           ...characters_in_train
             .filter((v) => v)
@@ -472,7 +470,7 @@ async function page_ero(lover, skip_start_end = false) {
         );
       }
     } else if (curr_supporter) {
-      left_columns.push(
+      l_cols.push(
         { type: 'divider' },
         {
           content: [
@@ -555,7 +553,7 @@ async function page_ero(lover, skip_start_end = false) {
     era.printInColRows(
       [{ type: 'divider' }],
       {
-        columns: left_columns,
+        columns: l_cols,
         config: { width: 16, gutter: 10 },
       },
       {
@@ -679,7 +677,7 @@ async function page_ero(lover, skip_start_end = false) {
       }
     }
   }
-  if (!in_basement) {
+  if (!in_base) {
     let temp_chara_list = era.getCharactersInTrain();
     const punish_list = sys_filter_chara(
       'cflag',
