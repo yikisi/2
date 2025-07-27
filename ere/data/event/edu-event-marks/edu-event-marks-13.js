@@ -10,6 +10,7 @@ class McqueenEduMarks extends EduEventMarks {
   pet_nipple;
   pet_clitoris;
   cunnilingus;
+  ask_tit_job;
 
   constructor() {
     super(13);

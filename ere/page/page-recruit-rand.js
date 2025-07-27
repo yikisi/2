@@ -490,14 +490,14 @@ async function print_rec_page() {
           ...get_custom_check(selected)
             .get_edu_aims()
             .map((e) => {
-              const g1 = e.content.indexOf('G1') !== -1,
-                champion = e.content.indexOf('1着') !== -1;
+              const g1 = e.content.indexOf('G1') !== -1;
+              const champion = e.content.indexOf('1着') !== -1;
               return {
                 config: {
                   color: champion ? el_danger_color : undefined,
                   fontWeight: g1 || champion ? 'bold' : 'normal',
                 },
-                content: e.content,
+                content: e.content.substring(0, e.content.length - 2),
                 type: 'text',
               };
             }),

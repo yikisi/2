@@ -7,6 +7,10 @@ class EroLinesCommon {
     this.root = root;
   }
 
+  get id() {
+    return this.root.id;
+  }
+
   get_this() {
     return this;
   }

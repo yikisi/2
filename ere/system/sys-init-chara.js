@@ -168,7 +168,10 @@ function init_chara(cid, src = 0) {
             `cflag:${cid}:下胸围`,
             Math.floor((era.get(`cflag:${cid}:下胸围`) * temp[0]) / temp[1]),
           );
-          era.set(`cflag:${cid}:胸围`, era.get(`cflag:${cid}:胸围`) + temp[2]);
+          era.set(
+            `cflag:${cid}:胸围`,
+            era.get(`cflag:${cid}:下胸围`) + temp[2],
+          );
           era.set(
             `cflag:${cid}:腰围`,
             Math.floor((era.get(`cflag:${cid}:腰围`) * temp[0]) / temp[1]),
@@ -186,12 +189,17 @@ function init_chara(cid, src = 0) {
             temp,
           ];
           era.set(
-            `cflag:${cid}:胸围`,
-            Math.floor((era.get(`cflag:${cid}:胸围`) * temp[0]) / temp[1]),
-          );
-          era.set(
             `cflag:${cid}:下胸围`,
             Math.floor((era.get(`cflag:${cid}:下胸围`) * temp[0]) / temp[1]),
+          );
+          era.set(
+            `cflag:${cid}:胸围`,
+            Math.max(
+              Math.floor((era.get(`cflag:${cid}:胸围`) * temp[0]) / temp[1]),
+              era.get(`cflag:${cid}:下胸围`) +
+                1 +
+                (era.get(`talent:${cid}:乳头类型`) === 2),
+            ),
           );
           era.set(
             `cflag:${cid}:腰围`,

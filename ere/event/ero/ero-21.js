@@ -45,8 +45,8 @@ module.exports = class extends CustomizedEro {
   }
 
   async get_mark(level, type, _new) {
-    const callname = sys_get_colored_callname(this.id, 0),
-      tama = get_chara_talk(this.id);
+    const callname = sys_get_colored_callname(this.id, 0);
+    const tama = get_chara_talk(this.id);
     let handler;
     switch (type) {
       case mark_enum.pleasure:

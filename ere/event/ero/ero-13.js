@@ -22,6 +22,7 @@ const { base_enum, part_enum } = require('#/data/ero/part-const');
 const { vp_status_enum } = require('#/data/ero/status-const');
 const McqueenEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-13');
 const McqueenLifeMarks = require('#/data/event/life-event-marks/life-event-marks-13');
+const { get_breast_cup } = require('#/data/info-generator');
 
 function dict() {
   const o = {};
@@ -29,7 +30,7 @@ function dict() {
   o['她'] = mcqueen.sex;
   o['训练员'] = era.get('callname:0:-2');
   o['代表色'] = mcqueen.color;
-  o['称呼'] = sys_get_callname(this.id, 0);
+  o['称呼'] = sys_get_callname(13, 0);
   return o;
 }
 
@@ -148,6 +149,19 @@ class NormalMakingOuts extends EroNormalMakingOuts {
     }
     await kojo['请求深喉'](dict());
   }
+
+  async ask_tit_job(atk, def, hook) {
+    if (atk.id !== 0 || !hook.arg || get_breast_cup(this.id, true) >= 'B') {
+      return await super.ask_tit_job(atk, def, hook);
+    }
+    const edu_marks = new McqueenEduMarks();
+    if (!edu_marks.ask_tit_job) {
+      await kojo['请求乳交——育成首次'](dict());
+      edu_marks.ask_tit_job = 1;
+      return;
+    }
+    await kojo['请求乳交——贫乳'](dict());
+  }
 }
 
 class NormalFucking extends EroNormalFucking {
@@ -174,13 +188,14 @@ class NormalFucking extends EroNormalFucking {
   }
 
   async sitting(attacker, defender, hook) {
-    if (
-      attacker.id !== 0 ||
-      era.get(`talent:${this.id}:处女`) === vp_status_enum.no
-    ) {
+    if (attacker.id !== 0 || !hook.arg) {
       return await super.sitting(attacker, defender, hook);
     }
-    await kojo['插入类体位——失去处女'](dict());
+    if (era.get(`talent:${this.id}:处女`) !== vp_status_enum.no) {
+      await kojo['插入类体位——失去处女'](dict());
+    } else {
+      await kojo['对面坐位'](dict());
+    }
   }
 
   async hug_sitting(attacker, defender, hook) {
@@ -194,13 +209,14 @@ class NormalFucking extends EroNormalFucking {
   }
 
   async standing(attacker, defender, hook) {
-    if (
-      attacker.id !== 0 ||
-      era.get(`talent:${this.id}:处女`) === vp_status_enum.no
-    ) {
+    if (attacker.id !== 0 || !hook.arg) {
       return await super.standing(attacker, defender, hook);
     }
-    await kojo['插入类体位——失去处女'](dict());
+    if (era.get(`talent:${this.id}:处女`) !== vp_status_enum.no) {
+      await kojo['插入类体位——失去处女'](dict());
+    } else {
+      await kojo['对面立位'](dict());
+    }
   }
 
   async hug_standing(attacker, defender, hook) {
