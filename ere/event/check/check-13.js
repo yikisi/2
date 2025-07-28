@@ -80,7 +80,7 @@ module.exports = class extends CustomizedCheck {
       check_and_add_event(
         new McqueenEduMarks(),
         edu_weeks,
-        'sudden_look_back',
+        'dessert',
         event_hooks.out_shopping,
         new EventObject(this.id, cb_enum.edu),
       );

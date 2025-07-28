@@ -15,6 +15,7 @@ const { get_image } = require('#/system/sys-calc-image');
 const filter_chara = require('#/system/sys-filter-chara');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
+const arrive_location = require('#/page/components/arrive-location');
 const print_page_header = require('#/page/components/page-header');
 
 const { get_custom_check } = require('#/event/check/check-factory');
@@ -52,12 +53,10 @@ const {
   get_xp,
 } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
-const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
 const { skills_dict } = require('#/data/race/skill/skill-const');
 const { adaptability_names, attr_names } = require('#/data/train-const');
 
 async function print_rec_page() {
-  era.set('flag:当前位置', location_enum.playground);
   const me = get_chara_talk(0);
   let event_chara_list, flag_recruit, flag_leave;
 
@@ -81,15 +80,7 @@ async function print_rec_page() {
     );
   }
   today_list = today_list.sort((a, b) => a - b);
-  await era.clear();
-  print_page_header();
-  era.drawLine();
-  const vehicle = era.get('flag:单人载具');
-  era.print([
-    '【',
-    vehicle ? `${vehicle_verbs[vehicle]}着${vehicle_names[vehicle]}` : '',
-    '抵达了训练场】',
-  ]);
+  await arrive_location(era.set('flag:当前位置', location_enum.playground));
   await game_guides.recruit();
   flag_leave = await sys_get_random_event(event_hooks.recruit_start)();
   const flag_limit = sys_check_team_limit() >= 0;
@@ -499,14 +490,14 @@ async function print_rec_page() {
           ...get_custom_check(selected)
             .get_edu_aims()
             .map((e) => {
-              const g1 = e.content.indexOf('G1') !== -1,
-                champion = e.content.indexOf('1着') !== -1;
+              const g1 = e.content.indexOf('G1') !== -1;
+              const champion = e.content.indexOf('1着') !== -1;
               return {
                 config: {
                   color: champion ? el_danger_color : undefined,
                   fontWeight: g1 || champion ? 'bold' : 'normal',
                 },
-                content: e.content,
+                content: e.content.substring(0, e.content.length - 2),
                 type: 'text',
               };
             }),

@@ -664,7 +664,7 @@ module.exports = class extends Edu3UntilWeekStart {
         ' 趴在桌面上，失去了学习动力。',
       ]);
       await me.say_and_wait('果然有些事情不会骗人，不会就是不会。', true);
-    } else if (era.get('status:3:腿伤')) {
+    } else if (era.get('status:3:腿伤') > 0) {
       await teio.say_and_wait('啊！唔……');
       await era.printAndWait(
         `平时充满活力带着几分娇气的音色在痛苦的影响下扭曲成尖锐的叫声，直扎 ${me.name} 的耳膜和心房，${me.name} 三步并作两步飞奔过去，小心翼翼地安抚着${teio.sex}，仔细检查身体，同时轻揉患处。`,

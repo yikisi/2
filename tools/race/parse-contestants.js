@@ -1,4 +1,5 @@
-const { writeFileSync } = require('node:fs');
+const { writeFileSync } = require('fs');
+const { join } = require('path');
 
 const { PrismaClient } = require('@prisma/client');
 
@@ -58,9 +59,9 @@ function calc_attr_score(attr) {
 }
 
 async function task() {
-  const contestants = { named: [], unnamed: [] },
-    skill_dict = {},
-    skill_set_dict = {};
+  const contestants = { named: [], unnamed: [] };
+  const skill_dict = {};
+  const skill_set_dict = {};
   [
     ...(await prisma.daily_race_npc.findMany()),
     ...(await prisma.legend_race_boss_npc.findMany()),
@@ -362,7 +363,7 @@ async function task() {
   );
 
   writeFileSync(
-    '../../ere/data/race/contestants/unnamed.json',
+    join(__dirname, '../../ere/data/race/contestants/unnamed.json'),
     JSON.stringify(
       contestants.unnamed
         .sort((a, b) => a.level - b.level)
@@ -372,7 +373,7 @@ async function task() {
     ),
   );
   writeFileSync(
-    '../../ere/data/race/contestants/named.json',
+    join(__dirname, '../../ere/data/race/contestants/named.json'),
     JSON.stringify(
       contestants.named
         .sort((a, b) => a.level - b.level)
@@ -382,7 +383,7 @@ async function task() {
     ),
   );
   writeFileSync(
-    '../../ere/data/race/contestants/legends.json',
+    join(__dirname, '../../ere/data/race/contestants/legends.json'),
     JSON.stringify(legends, undefined, 2),
   );
 }

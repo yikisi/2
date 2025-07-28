@@ -1,10 +1,11 @@
 /**
- * @file 麦吉罗的呼唤 随机事件
+ * @file 麦吉罗的呼唤 - 随机事件
  * @author イーウィヤ
  */
 const era = require('#/era-electron');
 
 const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
+const { get_penis_size } = require('#/system/ero/sys-calc-ero-status');
 const {
   sys_change_attr_and_print,
   sys_change_lust,
@@ -49,6 +50,22 @@ function get_random_event(events, _this, progress, lust) {
 }
 
 const action_type_enum = { good: 0, normal: 1, bad: 2, avg: 3 };
+
+/**
+ * @this MejiroEvents
+ * @param {string} key
+ * @param {Record<string,any>} dict
+ */
+async function bad_event_common(key, dict) {
+  sys_change_lust(this.chara.id, get_random_value(100, 300));
+  if ((await bad_events[key](dict))[0] === 1) {
+    sys_change_lust(0, get_random_value(100, 300));
+    return true;
+  } else {
+    sys_change_lust(this.chara.id, get_random_value(100, 300));
+  }
+  return false;
+}
 
 class MejiroEvents {
   /** @type {CharaTalk} */
@@ -95,6 +112,18 @@ class MejiroEvents {
     },
     {
       async h() {
+        const key = '整理衣装';
+        await good_events[key]({
+          ...this.#dict,
+          first: +!this.params[key],
+        });
+        this.params[key] = true;
+        sys_change_lust(0, -get_random_value(100, 300));
+        sys_change_lust(this.chara.id, -get_random_value(100, 300));
+      },
+    },
+    {
+      async h() {
         const key = '林荫长椅';
         switch (
           (
@@ -122,6 +151,23 @@ class MejiroEvents {
         this.params[key] = true;
       },
     },
+    {
+      async h() {
+        const key = '幸运奖励';
+        const reward = get_random_value(1, 3);
+        const ret = await good_events[key]({
+          ...this.#dict,
+          first: +!this.params[key],
+          reward,
+        });
+        this.params[key] = true;
+        if (ret[0] === 1) {
+          era.add('item:「恩宠」', reward);
+        } else {
+          sys_change_attr_and_print(0, '体力', get_random_value(50, 100));
+        }
+      },
+    },
   ];
   /** @type {MejiroEvent[]} */
   normal_events = [
@@ -140,12 +186,60 @@ class MejiroEvents {
       },
     },
     {
+      async h(p) {
+        const key = '林间捷径';
+        if ((await normal_events[key](this.#dict))[0] === 1) {
+          p.c++;
+          sys_change_attr_and_print(0, '体力', -get_random_value(25, 75));
+        }
+      },
+    },
+    {
       async h() {
         const key = '街头小吃';
         if ((await normal_events[key](this.#dict))[0]) {
           era.add('item:「恩宠」', -1);
           sys_change_attr_and_print(0, '体力', get_random_value(50, 100));
         }
+      },
+    },
+    {
+      async h() {
+        const key = '摇奖游戏';
+        const reward = get_random_value(1, 5);
+        if (
+          (
+            await normal_events[key]({
+              ...this.#dict,
+              reward,
+              first: +!this.params[key],
+            })
+          )[0] === 1
+        ) {
+          era.add('item:「恩宠」', reward);
+          sys_change_attr_and_print(0, '体力', -get_random_value(25, 75));
+        }
+        this.params[key] = true;
+      },
+    },
+    {
+      async h() {
+        const key = '店面宣传';
+        const reward = get_random_value(1, 5);
+        if (
+          (
+            await normal_events[key]({
+              ...this.#dict,
+              reward,
+              first: +!this.params[key],
+            })
+          )[0] === 1
+        ) {
+          era.add('item:「恩宠」', reward);
+          sys_change_lust(0, get_random_value(150, 450));
+          sys_change_lust(this.chara.id, get_random_value(150, 450));
+        }
+        this.params[key] = true;
       },
     },
   ];
@@ -161,16 +255,59 @@ class MejiroEvents {
           new EroParticipant(0, part_enum.anal),
           false,
         );
-        sys_change_lust(this.chara.id, get_random_value(100, 300));
-        if ((await bad_events['摸屁股'](this.#dict))[0] === 1) {
-          sys_change_lust(0, get_random_value(100, 300));
+        if (await bad_event_common.call(this, '摸屁股', this.#dict)) {
           await quick_make_love(
             new EroParticipant(0, part_enum.hand),
             new EroParticipant(this.chara.id, part_enum.anal),
             false,
           );
-        } else {
-          sys_change_lust(this.chara.id, get_random_value(100, 300));
+        }
+      },
+    },
+    {
+      f(_, lust) {
+        return lust < lust_border.absent_mind;
+      },
+      async h() {
+        await quick_make_love(
+          new EroParticipant(this.chara.id, part_enum.hand),
+          new EroParticipant(0, part_enum.body),
+          false,
+        );
+        if (await bad_event_common.call(this, '意外相拥', this.#dict)) {
+          await quick_make_love(
+            new EroParticipant(0, part_enum.hand),
+            new EroParticipant(this.chara.id, part_enum.body),
+            false,
+          );
+        }
+      },
+    },
+    {
+      f(_, lust) {
+        return lust < lust_border.absent_mind;
+      },
+      async h() {
+        if (await bad_event_common.call(this, '抚摸大腿', this.#dict)) {
+          await quick_make_love(
+            new EroParticipant(0, part_enum.hand),
+            new EroParticipant(this.chara.id, part_enum.body),
+            false,
+          );
+        }
+      },
+    },
+    {
+      f(_, lust) {
+        return lust < lust_border.absent_mind;
+      },
+      async h() {
+        if (await bad_event_common.call(this, '街头放映', this.#dict)) {
+          await quick_make_love(
+            new EroParticipant(0, part_enum.mouth),
+            new EroParticipant(this.chara.id, part_enum.mouth),
+            false,
+          );
         }
       },
     },
@@ -179,16 +316,157 @@ class MejiroEvents {
         return lust >= lust_border.itch && lust < lust_border.absent_mind;
       },
       async h() {
-        sys_change_lust(this.chara.id, get_random_value(150, 450));
-        if ((await bad_events['咖啡馆'](this.#dict))[0] === 1) {
-          sys_change_lust(0, get_random_value(300, 900));
+        if (await bad_event_common.call(this, '咖啡馆', this.#dict)) {
           await quick_make_love(
             new EroParticipant(0, part_enum.mouth),
             new EroParticipant(this.chara.id, part_enum.mouth),
             false,
           );
-        } else {
-          sys_change_lust(this.chara.id, get_random_value(150, 450));
+        }
+      },
+    },
+    {
+      f(_, lust) {
+        return lust >= lust_border.itch && lust < lust_border.absent_mind;
+      },
+      async h() {
+        await quick_make_love(
+          new EroParticipant(this.chara.id, part_enum.breast),
+          new EroParticipant(0, part_enum.hand),
+          false,
+        );
+        if (await bad_event_common.call(this, '幸运色狼？', this.#dict)) {
+          await quick_make_love(
+            new EroParticipant(0, part_enum.hand),
+            new EroParticipant(this.chara.id, part_enum.breast),
+            false,
+          );
+        }
+      },
+    },
+    {
+      f(_, lust) {
+        return lust >= lust_border.itch && lust < lust_border.absent_mind;
+      },
+      async h() {
+        await quick_make_love(
+          new EroParticipant(this.chara.id, part_enum.breast),
+          new EroParticipant(0, part_enum.hand),
+          false,
+        );
+        if (await bad_event_common.call(this, '突然降雨', this.#dict)) {
+          await quick_make_love(
+            new EroParticipant(0, part_enum.mouth),
+            new EroParticipant(this.chara.id, part_enum.mouth),
+            false,
+          );
+        }
+      },
+    },
+    {
+      f(_, lust) {
+        return this.chara.sex_code !== 1 && lust < lust_border.absent_mind;
+      },
+      async h() {
+        sys_change_lust(this.chara.id, get_random_value(150, 450));
+        const key = '震动玩具';
+        if (
+          await bad_event_common.call(this, key, {
+            ...this.#dict,
+            first: +!this.params[key],
+          })
+        ) {
+          await quick_make_love(
+            new EroParticipant(0, part_enum.hand),
+            new EroParticipant(this.chara.id, part_enum.breast),
+            false,
+          );
+        }
+        this.params[key] = true;
+      },
+    },
+    {
+      f(_, lust) {
+        return lust >= lust_border.itch;
+      },
+      async h() {
+        await quick_make_love(
+          new EroParticipant(this.chara.id, part_enum.hand),
+          new EroParticipant(
+            0,
+            era.get('cflag:0:性别') > 0 ? part_enum.penis : part_enum.virgin,
+          ),
+          false,
+        );
+        if (await bad_event_common.call(this, '无端挑逗', this.#dict)) {
+          await quick_make_love(
+            new EroParticipant(0, part_enum.hand),
+            new EroParticipant(
+              this.chara.id,
+              this.chara.sex_code !== 1 ? part_enum.virgin : part_enum.penis,
+            ),
+            false,
+          );
+        }
+      },
+    },
+    {
+      f(_, lust) {
+        return lust >= lust_border.itch;
+      },
+      async h() {
+        if (await bad_event_common.call(this, '露天口交', this.#dict)) {
+          await quick_make_love(
+            new EroParticipant(this.chara.id, part_enum.mouth),
+            new EroParticipant(
+              0,
+              get_penis_size(0) > 0 ? part_enum.penis : part_enum.virgin,
+            ),
+            false,
+          );
+        }
+      },
+    },
+    {
+      f(_, lust) {
+        return lust >= lust_border.itch;
+      },
+      async h() {
+        const key = '后穴玩具';
+        if (
+          await bad_event_common.call(this, key, {
+            ...this.#dict,
+            first: +!this.params[key],
+          })
+        ) {
+          await quick_make_love(
+            new EroParticipant(0, part_enum.hand),
+            new EroParticipant(this.chara.id, part_enum.anal),
+            false,
+          );
+        }
+        this.params[key] = true;
+      },
+    },
+    {
+      f(_, lust) {
+        return get_penis_size(0) > 0 && lust >= lust_border.itch;
+      },
+      async h() {
+        await quick_make_love(
+          new EroParticipant(this.chara.id, part_enum.foot),
+          new EroParticipant(0, part_enum.penis),
+          false,
+        );
+        if (await bad_event_common.call(this, '隐秘游戏', this.#dict)) {
+          await quick_make_love(
+            new EroParticipant(this.chara.id, part_enum.hand),
+            new EroParticipant(
+              this.chara.id,
+              this.chara.sex_code !== 1 ? part_enum.virgin : part_enum.penis,
+            ),
+            false,
+          );
         }
       },
     },
@@ -204,6 +482,7 @@ class MejiroEvents {
     this.#dict['你'] = me.name;
     this.#dict['担当'] = chara.name;
     this.#dict['她'] = chara.sex;
+    this.#dict['少女'] = chara.teen_sex_title;
   }
 
   /**
@@ -231,8 +510,8 @@ class MejiroEvents {
   good_event(progress, lust) {
     return this.#get_event_by_category([0.3, 0.5], progress, lust).call(
       this,
-      action_type_enum.good,
       progress,
+      action_type_enum.good,
     );
   }
 
@@ -243,8 +522,8 @@ class MejiroEvents {
   normal_event(progress, lust) {
     return this.#get_event_by_category([0.2, 0.5], progress, lust).call(
       this,
-      action_type_enum.normal,
       progress,
+      action_type_enum.normal,
     );
   }
 
@@ -255,8 +534,8 @@ class MejiroEvents {
   bad_event(progress, lust) {
     return this.#get_event_by_category([0.1, 0.3], progress, lust).call(
       this,
-      action_type_enum.bad,
       progress,
+      action_type_enum.bad,
     );
   }
 
@@ -267,8 +546,8 @@ class MejiroEvents {
   avg_event(progress, lust) {
     return this.#get_event_by_category([1 / 3, 1 / 3], progress, lust).call(
       this,
-      action_type_enum.avg,
       progress,
+      action_type_enum.avg,
     );
   }
 }

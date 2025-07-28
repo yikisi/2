@@ -17,6 +17,10 @@ const vehicle_enum = {
   sports_car: 0,
   // 便携式空间门
   portal: 0,
+  // 小金船号
+  gold_ship: 0,
+  // 善信号
+  pama: 0,
 };
 Object.keys(vehicle_enum).forEach((e, i) => (vehicle_enum[e] = i + 1));
 
@@ -29,6 +33,8 @@ vehicle_names[vehicle_enum.electric_bicycle] = '电动车';
 vehicle_names[vehicle_enum.car] = '小汽车';
 vehicle_names[vehicle_enum.sports_car] = '跑车';
 vehicle_names[vehicle_enum.portal] = '便携式空间门';
+vehicle_names[vehicle_enum.gold_ship] = '小金船号';
+vehicle_names[vehicle_enum.pama] = '善信号';
 
 const vehicle_verbs = {};
 vehicle_verbs[vehicle_enum.skateboard] = '踩';
@@ -39,6 +45,8 @@ vehicle_verbs[vehicle_enum.electric_bicycle] = '骑';
 vehicle_verbs[vehicle_enum.car] = '开';
 vehicle_verbs[vehicle_enum.sports_car] = '开';
 vehicle_verbs[vehicle_enum.portal] = '用';
+vehicle_verbs[vehicle_enum.gold_ship] = '踩';
+vehicle_verbs[vehicle_enum.pama] = '开';
 
 const vehicle_influences = {};
 vehicle_influences[vehicle_enum.skateboard] = { stamina: 0.8, time: 0.5 };
@@ -49,6 +57,8 @@ vehicle_influences[vehicle_enum.electric_bicycle] = { stamina: 0.1, time: 0.3 };
 vehicle_influences[vehicle_enum.car] = { stamina: 0.1, time: 0.15 };
 vehicle_influences[vehicle_enum.sports_car] = { stamina: 0.1, time: 0.1 };
 vehicle_influences[vehicle_enum.portal] = { stamina: 0, time: 0 };
+vehicle_influences[vehicle_enum.gold_ship] = { stamina: 0.15, time: 0.4 };
+vehicle_influences[vehicle_enum.pama] = { stamina: 0.1, time: 0.125 };
 
 const location_move_cost = {};
 location_move_cost[location_enum.playground] = 50;

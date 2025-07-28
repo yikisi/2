@@ -403,7 +403,7 @@ handlers[event_hooks.celebration] = async (cid) => {
   era.add('cflag:0:节日事件标记', 1);
   era.println();
   let wait_flag = false;
-  if ((era.get('flag:当前回合数') - 1) % 48 === 5) {
+  if (era.get('flag:当前回合数') % 48 === 6) {
     era.print('获得了【情人节巧克力】！');
     era.add('item:情人节巧克力', 1);
     wait_flag = true;

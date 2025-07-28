@@ -126,27 +126,34 @@ module.exports = class extends CustomizedRecruit {
     await era.printAndWait(
       `${kita.sex}正认真的盯着脚下的道路，时不时还会用膝盖顶起箱子，让自己抱的更紧一些。`,
     );
-    kita.sex_code - 1 &&
-      (await era.printAndWait(
+    if (kita.sex_code !== 1) {
+      await era.printAndWait(
         `但那被汗浸湿贴在身上的运动服，却不由自主地勾勒出挺翘而柔软的形状。`,
-      ));
-    await era.printAndWait(
-      `鲜红的布料将${kita.get_child_sex_title()}肉感的大腿和臀部紧紧裹住，挺翘的安产宽臀在${kita.get_child_sex_title()}大腿的动作下不断相互挤压摩擦，如同雪白的臀饼般令人浮想联翩。`,
-    );
-    await era.printAndWait(
-      `${kita.get_child_sex_title()}的每一寸肌肤都在挥发着下流的汗香，而那双清澈的眼眸却对自己身体的淫靡浑然不觉。`,
-    );
+      );
+      await era.printAndWait([
+        '鲜红的布料将',
+        kita.child_sex_title,
+        '肉感的大腿和臀部紧紧裹住，挺翘的安产宽臀在',
+        kita.child_sex_title,
+        '大腿的动作下不断相互挤压摩擦，如同雪白的臀饼般令人浮想联翩。',
+      ]);
+    }
+    await era.printAndWait([
+      kita.child_sex_title,
+      '的每一寸肌肤都在挥发着下流的汗香，而那双清澈的眼眸却对自己身体的淫靡浑然不觉。',
+    ]);
     await kita.say_and_wait(
       '训练员你是新入职的对吧？大清早就来搬运训练道具真是辛苦你了呢。',
     );
     await kita.say_and_wait(
       '我在老家的时候，父亲也经常让手下的弟子到处搬东西，所以我很懂这种被指使搬东西的感觉哦。',
     );
-    await era.printAndWait(
-      `${kita.get_child_sex_title()}带着朴实的笑容开口对 ${
-        me.name
-      } 说道，仿佛荡漾着温暖的阳光。`,
-    );
+    await era.printAndWait([
+      kita.child_sex_title,
+      '带着朴实的笑容开口对 ',
+      me.get_colored_name(),
+      ' 说道，仿佛荡漾着温暖的阳光。',
+    ]);
     await era.printAndWait(
       `阳光透过林间的树荫切成细细的小块，照射在这位活泼又温柔的${kita.get_uma_sex_title()}身上。`,
     );
@@ -184,7 +191,7 @@ module.exports = class extends CustomizedRecruit {
     await era.printAndWait(
       `或许 ${me.name} 应该去看一看，${me.name} 如此想着，开始向比赛的选手们分发起了标签名牌。`,
     );
-    era.println();
+    era.drawLine();
     await era.printAndWait(
       `在忙碌了一整个上午之后，终于抽出身的 ${me.name} 现在观众席中，开始了对选拔赛的观测。`,
     );
@@ -206,18 +213,21 @@ module.exports = class extends CustomizedRecruit {
     await era.printAndWait(
       `蕴含力量的双腿在草地上留下深可见泥的脚印，那天生的素质吸引了在场每个训练员的目光。`,
     );
-    await era.printAndWait(
-      `随着 ${
-        kita.name
-      } 的步伐，以大逃为战术的赛${kita.get_uma_sex_title()}冲过终点，迎来了${
-        kita.sex
-      }的胜利。`,
-    );
+    await era.printAndWait([
+      '随着 ',
+      kita.get_colored_name(),
+      ' 的步伐，以大逃为战术的赛',
+      kita.uma_sex_title,
+      '冲过终点，迎来了',
+      kita.sex,
+      '的胜利。',
+    ]);
     await era.printAndWait(`现在的 ${me.name}……？`);
     era.printButton(`（我想要……做${kita.sex}的训练员啊！）`, 1);
+    era.print('（继续招募）', { offset: 1, width: 12 });
     era.printButton(`（或许，我应该让${kita.sex}得到更好的训练员……）`, 2);
-    const ret = await era.input();
-    if (ret === 1) {
+    era.print('（取消招募）', { offset: 1, width: 12 });
+    if ((await era.input()) === 1) {
       await era.printAndWait(
         `像是被吞噬了一样，像是无法逃离了一样，感情在 ${me.name} 心中燃烧，令 ${me.name} 不可缄口不言。`,
       );
@@ -251,6 +261,7 @@ module.exports = class extends CustomizedRecruit {
       await kita.say_and_wait(
         '等等等这是搭讪么！？太快了太快了！这种热烈的羡慕我还不知道该怎么开始啊！',
       );
+      get_chara_talk(67);
       await kita.say_and_wait(
         '怎么办小钻我还没有做好心理准备，而且不要仅凭外表就招募我啊训练员先生！我能力也很强的！',
       );

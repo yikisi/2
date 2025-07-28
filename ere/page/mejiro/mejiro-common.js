@@ -49,11 +49,11 @@ class MejiroCity {
    * @param {number} chara_id
    * @param {{stamina:number,time:number}} player_base
    * @param {{stamina:number,time:number}} chara_base
-   * @returns {{s:number,d:boolean,l:number,n:string,[t]:string}[]}
+   * @returns {{[a]:number,s:number,d:boolean,l:number,n:string,[t]:string}[]}
    */
   get_positions(chara_id, player_base, chara_base) {
-    let m_disabled,
-      m_title = [];
+    let m_disabled;
+    let m_title = [];
     if (chara_base === undefined) {
       m_disabled = true;
       m_title.push('目白城不欢迎独身的旅客……');

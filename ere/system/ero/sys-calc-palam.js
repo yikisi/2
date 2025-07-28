@@ -129,26 +129,51 @@ function calc_pleasure(chara_id, part, attack, pass_transfer) {
   add_palam(chara_id, part, attack);
   if (!pass_transfer) {
     // 有阴茎未攻击，联动增加阴茎快感
-    if (get_penis_size(chara_id) && part !== part_enum.penis) {
+    if (get_penis_size(chara_id) > 0 && part !== part_enum.penis) {
       // 除肛门和阴道快感，其他折半增加
-      add_palam(
-        chara_id,
-        part_enum.penis,
-        (attack * era.get(`tcvar:${chara_id}:阴茎快感上限`)) /
-          ((2 - (part === part_enum.anal || part === part_enum.virgin)) *
-            era.get(`tcvar:${chara_id}:${part_names[part]}快感上限`)),
-      );
+      switch (part) {
+        case part_enum.anal:
+        case part_enum.virgin:
+          add_palam(
+            chara_id,
+            part_enum.penis,
+            (attack * era.get(`tcvar:${chara_id}:阴茎快感上限`) * 0.7) /
+              era.get(`tcvar:${chara_id}:${part_names[part]}快感上限`),
+          );
+          break;
+        default:
+          add_palam(
+            chara_id,
+            part_enum.penis,
+            (attack * era.get(`tcvar:${chara_id}:阴茎快感上限`) * 0.2) /
+              era.get(`tcvar:${chara_id}:${part_names[part]}快感上限`),
+          );
+      }
     }
     // 有阴道未攻击，联动增加阴道快感
-    if (era.get(`cflag:${chara_id}:阴道尺寸`) && part !== part_enum.virgin) {
+    if (
+      era.get(`cflag:${chara_id}:阴道尺寸`) > 0 &&
+      part !== part_enum.virgin
+    ) {
       // 除外阴和牛子快感，其他折半增加
-      add_palam(
-        chara_id,
-        part_enum.virgin,
-        (attack * era.get(`tcvar:${chara_id}:阴道快感上限`)) /
-          ((2 - (part === part_enum.clitoris || part === part_enum.penis)) *
-            era.get(`tcvar:${chara_id}:${part_names[part]}快感上限`)),
-      );
+      switch (part_enum) {
+        case part_enum.clitoris:
+        case part_enum.penis:
+          add_palam(
+            chara_id,
+            part_enum.virgin,
+            (attack * era.get(`tcvar:${chara_id}:阴道快感上限`) * 0.7) /
+              era.get(`tcvar:${chara_id}:${part_names[part]}快感上限`),
+          );
+          break;
+        default:
+          add_palam(
+            chara_id,
+            part_enum.virgin,
+            (attack * era.get(`tcvar:${chara_id}:阴道快感上限`) * 0.2) /
+              era.get(`tcvar:${chara_id}:${part_names[part]}快感上限`),
+          );
+      }
     }
   }
 }
@@ -162,7 +187,7 @@ function calc_pleasure(chara_id, part, attack, pass_transfer) {
 function update_palam(chara_id, part, shown) {
   const key = part_names[part];
   const param_name = key + '快感';
-  // 快感加成已在sys-calc-ero.js中计算，因子加成在sys-calc-juel.js中计算，不重复计算
+  // 快感加成已在 sys-calc-ero.js 中计算，因子加成在 sys-calc-juel.js 中计算，不重复计算
   let attack =
     tmp[chara_id][key] * (1 + 0.1 * (sys_get_chara(chara_id) === -3));
   switch (part) {
@@ -256,11 +281,11 @@ module.exports = {
     } else if (part !== part_enum.penis && part !== part_enum.virgin) {
       // 次要部位高潮会增加主要部位快感，无任何加减成
       // 只有本人能获得次要部位高潮获取的快感宝珠
-      if (penis) {
+      if (penis > 0) {
         // 男性和扶她加牛子快感
         add_palam(cid, part_enum.penis, add);
       }
-      if (virgin) {
+      if (virgin > 0) {
         // 女性和扶她加浦西快感
         add_palam(cid, part_enum.virgin, add);
       }
@@ -283,10 +308,11 @@ module.exports = {
         ),
       );
     }
-  } /**
+  },
+  /**
    * @param {boolean} shown
    * @param {number} ids
-   */,
+   */
   update_palams(shown, ...ids) {
     ids.forEach((chara_id) =>
       orgasm_check_list.forEach((part) => update_palam(chara_id, part, shown)),

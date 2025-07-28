@@ -120,6 +120,17 @@ module.exports = (ero_action_names, ero_tagged_hooks) => {
     [ero_action_tags.penis],
   );
 
+  ero_action_names[ero_actions.ask_double_cowgirl] = '请求轮流女上位';
+  ero_tagged_hooks[ero_actions.ask_double_cowgirl] = new EroHookTag(
+    [ero_action_tags.awake, ero_action_tags.insert, (cid) => !cid],
+    [
+      ero_action_tags.awake,
+      ero_action_tags.virgin,
+      ero_action_tags.supporter_awake,
+      ero_action_tags.supporter_virgin,
+    ],
+  );
+
   ero_action_names[ero_actions.ask_double_fuck] = '请求轮奸';
   ero_tagged_hooks[ero_actions.ask_double_fuck] = new EroHookTag(
     [ero_action_tags.virgin, (chara_id) => !chara_id],
@@ -186,6 +197,18 @@ module.exports = (ero_action_names, ero_tagged_hooks) => {
       ero_action_tags.supporter_mouth,
       ero_action_tags.supporter_sex_check,
     ],
+  );
+
+  ero_action_names[ero_actions.double_cowgirl] = '轮流女上位';
+  ero_tagged_hooks[ero_actions.double_cowgirl] = new EroHookTag(
+    [
+      ero_action_tags.awake,
+      ero_action_tags.virgin,
+      ero_action_tags.supporter_awake,
+      ero_action_tags.supporter_virgin,
+      (cid) => cid > 0,
+    ],
+    [ero_action_tags.insert],
   );
 
   ero_action_names[ero_actions.double_fuck] = '轮奸';

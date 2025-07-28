@@ -27,13 +27,13 @@ class CharaTitles {
   /** @param {{c:string,n:string,[s]:boolean}} t */
   push(...t) {
     const list = this.get();
-    const origin_length = list.length;
+    const o_len = list.length;
     list.push(...t);
     return (
       era.set(
         `cstr:${this.#id}:称号`,
         distinct_list(list, (e) => e.n),
-      ).length > origin_length
+      ).length > o_len
     );
   }
 

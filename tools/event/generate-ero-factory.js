@@ -139,9 +139,9 @@ class EroFactory extends CommonKojoFactory {
         } else {
           hook.arg = true;
         }
-        const attacker = get_chara_talk(_a),
-          defender = get_chara_talk(_d),
-          raper = get('tflag:强奸');
+        const attacker = get_chara_talk(_a);
+        const defender = get_chara_talk(_d);
+        const raper = get('tflag:强奸');
         if (!sys_check_awake(_d)) {
           await (describers.s[action] || describers.c[action])(
             attacker,

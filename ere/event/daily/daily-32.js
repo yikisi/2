@@ -11,6 +11,7 @@ const {
 } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
+const kojo = require('#/event/daily/daily-32.kojo');
 const CustomizedDaily = require('#/event/daily/daily-common');
 const tachyon_out_church = require('#/event/daily/daily-events-32/out-church');
 const tachyon_out_station = require('#/event/daily/daily-events-32/out-station');
@@ -49,6 +50,15 @@ function common_escape(tachyon, life_marks) {
 }
 
 module.exports = class extends CustomizedDaily {
+  get #dict() {
+    const ret = {};
+    const tachyon = get_chara_talk(this.id);
+    ret['代表色'] = tachyon.color;
+    ret['称呼'] = sys_get_callname(this.id, 0);
+    ret['她'] = tachyon.sex;
+    return ret;
+  }
+
   async week_start(_, extra_flag, event_object) {
     if (week_start_handlers[event_object.arg]) {
       return await week_start_handlers[event_object.arg](
@@ -888,5 +898,9 @@ module.exports = class extends CustomizedDaily {
 
   async slave_end() {
     return await tachyon_slave_end();
+  }
+
+  async end_talk() {
+    await kojo['end_talk'](this.#dict);
   }
 };

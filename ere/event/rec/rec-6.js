@@ -16,6 +16,9 @@ const {
 const { add_event, cb_enum } = require('#/event/queue');
 const lines = require('#/event/rec/rec-6.kojo');
 const CustomizedRecruit = require('#/event/rec/rec-common');
+const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
+
+const { get_random_value } = require('#/utils/value-utils');
 
 const CharaAvailableSkills = require('#/data/chara-available-skills');
 const event_hooks = require('#/data/event/event-hooks');
@@ -25,8 +28,6 @@ const { get_trainer_title } = require('#/data/info-generator');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
 const { attr_names } = require('#/data/train-const');
-const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
-const { get_random_value } = require('#/utils/value-utils');
 
 module.exports = class extends CustomizedRecruit {
   async recruit() {

@@ -19,12 +19,13 @@ const {
 
 const print_ero_page = require('#/page/page-ero');
 
-const lines = require('#/event/edu/edu-7.kojo');
+const kojo = require('#/event/edu/edu-7.kojo');
 const Edu7UntilWeekStart = require('#/event/edu/edu-events-7/week-start');
 const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
+const print_name_and_show_kojo = require('#/event/snippets/print-name-and-show-kojo');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
@@ -44,7 +45,18 @@ module.exports = class extends Edu7UntilWeekStart {
   }
 
   async crazy_fan_end() {
-    await lines['crazy_fan_end'](this.#dict);
+    await kojo['crazy_fan_end'](this.#dict);
+  }
+
+  /** @param {CharaTalk} gold_ship */
+  async hoverboard(gold_ship) {
+    await print_name_and_show_kojo(
+      '小金船号，爆诞！',
+      gold_ship,
+      kojo,
+      this.#dict,
+    );
+    era.set('item:小金船号', 1);
   }
 
   async out_church(gold_ship, me, callname, hook, extra_flag, event_object) {

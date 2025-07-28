@@ -47,52 +47,52 @@ const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const { gene_juel_names } = require('#/data/other-const');
 const { attr_enum, attr_names } = require('#/data/train-const');
 
-let jewel_names;
+let j_names;
 
 /** @param {number} ids */
 function update_ero_status(...ids) {
   for (const cid of ids) {
     const iron_will = era.get(`talent:${cid}:钢之意志`);
-    const penis_size = get_penis_size(cid);
-    let base_buff = 5 * iron_will; // 钢之意志全上限+50%
+    const p_size = get_penis_size(cid);
+    let base_buf = 5 * iron_will; // 钢之意志全上限+50%
     if (era.get(`status:${cid}:超马跳Z`)) {
-      base_buff -= 3;
+      base_buf -= 3;
     } else if (
       era.get(`status:${cid}:马跳Z`) ||
       era.get(`status:${cid}:马跳S`)
     ) {
-      base_buff -= 2;
+      base_buf -= 2;
     } else if (
       era.get(`status:${cid}:弗隆K`) ||
       era.get(`status:${cid}:弗隆P`) ||
       era.get(`status:${cid}:经期`)
     ) {
-      base_buff -= 1;
+      base_buf -= 1;
     }
-    const chara_mec = get_custom_mec(cid);
+    const c_mec = get_custom_mec(cid);
     pleasure_list.forEach((part) => {
-      let limit = base_buff;
-      const talent_name = part_talents[part];
+      let limit = base_buf;
+      const t_name = part_talents[part];
       if (
         part === part_enum.penis &&
         !era.get(`cflag:${cid}:性别`) &&
-        penis_size
+        p_size > 0
       ) {
         limit -= Math.max(Math.floor(2.5 * era.get(`talent:${cid}:淫核`)), 1);
-      } else if (talent_name) {
-        limit -= Math.floor(2.5 * era.get(`talent:${cid}:${talent_name}`));
+      } else if (t_name) {
+        limit -= Math.floor(2.5 * era.get(`talent:${cid}:${t_name}`));
       }
       limit = (base_limit * (10 + limit)) / 10;
-      const random_range = Math.min(limit / 10, 100);
-      limit += get_random_value(-random_range, random_range);
-      limit = Math.max(limit + chara_mec.get_palam_limit_buff(part), 100);
+      const rand_range = Math.min(limit / 10, 100);
+      limit += get_random_value(-rand_range, rand_range);
+      limit = Math.max(limit + c_mec.get_param_limit_buff(part), 100);
       era.set(`tcvar:${cid}:${part_names[part]}快感上限`, limit);
     });
     if (!era.get(`status:${cid}:沉睡`) && !era.get(`base:${cid}:精力`)) {
       era.set(`tcvar:${cid}:失神`, get_random_value(1, 5));
       era.set(`tcvar:${cid}:精力不济`, 1);
     }
-    const estrus = era.set(
+    const i_estrus = era.set(
       `tcvar:${cid}:发情`,
       era.get(`tcvar:${cid}:发情`) ||
         !era.get('flag:强奸抵抗') ||
@@ -104,11 +104,11 @@ function update_ero_status(...ids) {
         era.get(`status:${cid}:弗隆K`) ||
         era.get(`status:${cid}:弗隆P`),
     );
-    if (estrus && era.get(`talent:${cid}:淫口`)) {
+    if (i_estrus && era.get(`talent:${cid}:淫口`)) {
       set_stain(cid, part_enum.mouth, stain_enum.saliva);
     }
     if (
-      estrus &&
+      i_estrus &&
       era.get(`talent:${cid}:淫乳`) &&
       era.get(`talent:${cid}:泌乳`)
     ) {
@@ -116,13 +116,13 @@ function update_ero_status(...ids) {
     }
     if (
       era.get(`talent:${cid}:乳头类型`) === 2 &&
-      (estrus || era.get(`talent:${cid}:淫乳`))
+      (i_estrus || era.get(`talent:${cid}:淫乳`))
     ) {
       era.set(`tcvar:${cid}:乳突`, 1);
     }
     if (
-      penis_size &&
-      (estrus ||
+      p_size > 0 &&
+      (i_estrus ||
         era.get(`status:${cid}:弗隆K`) ||
         era.get(`status:${cid}:弗隆P`))
     ) {
@@ -139,13 +139,16 @@ function update_ero_status(...ids) {
     }
     if (
       era.get(`cflag:${cid}:阴道尺寸`) &&
-      (estrus ||
+      (i_estrus ||
         era.get(`talent:${cid}:淫壶`) ||
         era.get(`status:${cid}:反避孕套`))
     ) {
       set_stain(cid, part_enum.virgin, stain_enum.secretion);
     }
-    if (estrus || era.get(`talent:${cid}:淫臀`) === 2) {
+    if (
+      (i_estrus && era.get(`exp:${cid}:肛交次数`) > get_random_value(5, 15)) ||
+      era.get(`talent:${cid}:淫臀`) === 2
+    ) {
       set_stain(cid, part_enum.anal, stain_enum.anal);
     }
     if (era.get(`cflag:${cid}:腋毛`) >= 3) {
@@ -154,7 +157,7 @@ function update_ero_status(...ids) {
     if (era.get(`cflag:${cid}:阴毛`) >= 3) {
       set_stain(
         cid,
-        penis_size ? part_enum.penis : part_enum.clitoris,
+        p_size ? part_enum.penis : part_enum.clitoris,
         stain_enum.dirt,
       );
     }
@@ -204,9 +207,9 @@ function set_juel_buff(cid, jewel_name, val, dict) {
 function update_c_j_buff(cid, dict) {
   const l_hate = era.get(`mark:${cid}:反抗`);
   const in_train = era.getCharactersInTrain().length > 0;
-  const is_raping = in_train && era.get('tflag:强奸') === 0 && cid > 0;
+  const i_rape = in_train && era.get('tflag:强奸') === 0 && cid > 0;
   const lust = era.get(`base:${cid}:性欲`);
-  const lust_buff =
+  const lust_buf =
     era.get(`talent:${cid}:淫乱`) / 5 +
     (lust >= lust_border.itch) / 10 +
     ((lust >= lust_border.absent_mind) * 3) / 20 +
@@ -239,11 +242,11 @@ function update_c_j_buff(cid, dict) {
       3) /
       10 +
       (l_slave === 0
-        ? lust_buff / 2 +
+        ? lust_buf / 2 +
           l_pleasure / 10 +
           Math.max(l_pain, l_shame) / 20 +
           l_hate / 20 -
-          is_raping
+          i_rape
         : l_slave / 10 - 0.1) +
       !cid / 2,
     dict,
@@ -257,12 +260,12 @@ function update_c_j_buff(cid, dict) {
       3) /
       10 +
       (l_slave * -0.16 ||
-        is_raping / 2 +
+        i_rape / 2 +
           l_pain / 10 -
           (l_meek * 3) / 20 -
           l_hate / 20 -
           love_buff / 2 -
-          lust_buff / 2),
+          lust_buf / 2),
     dict,
   );
   set_juel_buff(
@@ -275,13 +278,13 @@ function update_c_j_buff(cid, dict) {
       3) /
       10 +
       (l_slave * -0.33 ||
-        is_raping / 2 +
+        i_rape / 2 +
           (era.get(`tequip:${cid}:眼罩`) === item_enum.blindfold) / 2 +
           l_pain / 10 -
           (l_meek * 3) / 20 -
           l_hate / 20 -
           love_buff / 2 -
-          lust_buff / 2),
+          lust_buf / 2),
     dict,
   );
   set_juel_buff(
@@ -293,14 +296,14 @@ function update_c_j_buff(cid, dict) {
       era.get(`talent:${cid}:情感活动`)) *
       3) /
       10 +
-      is_raping / 2 +
+      i_rape / 2 +
       (l_slave * -0.33 ||
         (in_train && era.get('tflag:全身镜') > 0) / 2 +
           l_shame / 10 -
           (l_meek * 3) / 20 -
           l_hate / 20 -
           (love_buff * 4) / 5 -
-          lust_buff / 2),
+          lust_buf / 2),
     dict,
   );
   set_juel_buff(
@@ -313,41 +316,41 @@ function update_c_j_buff(cid, dict) {
         era.get(`talent:${cid}:工口好奇`) +
         era.get(`talent:${cid}:情感活动`)) +
       (l_slave * -0.33 ||
-        is_raping +
+        i_rape +
           l_hate / 10 +
           l_pain / 20 +
           l_shame / 20 -
           l_meek / 4 -
           love_buff -
-          lust_buff / 2),
+          lust_buf / 2),
     dict,
   );
   set_juel_buff(
     cid,
     '施虐',
-    lust_buff +
+    lust_buf +
       (era.get(`talent:${cid}:小恶魔`) + era.get(`talent:${cid}:变态`)) / 2,
     dict,
   );
   set_juel_buff(
     cid,
     '受虐',
-    lust_buff +
+    lust_buf +
       (era.get(`talent:${cid}:圣母`) + era.get(`talent:${cid}:变态`)) / 2,
     dict,
   );
-  set_juel_buff(cid, '口腔', lust_buff, dict);
+  set_juel_buff(cid, '口腔', lust_buf, dict);
   set_juel_buff(
     cid,
     '胸部',
-    lust_buff + era.get(`talent:${cid}:乳房尺寸`) / 5,
+    lust_buf + era.get(`talent:${cid}:乳房尺寸`) / 5,
     dict,
   );
-  set_juel_buff(cid, '身体', lust_buff, dict);
-  set_juel_buff(cid, '外阴', lust_buff, dict);
-  set_juel_buff(cid, '阴道', lust_buff, dict);
-  set_juel_buff(cid, '肛门', lust_buff, dict);
-  set_juel_buff(cid, '阴茎', lust_buff, dict);
+  set_juel_buff(cid, '身体', lust_buf, dict);
+  set_juel_buff(cid, '外阴', lust_buf, dict);
+  set_juel_buff(cid, '阴道', lust_buf, dict);
+  set_juel_buff(cid, '肛门', lust_buf, dict);
+  set_juel_buff(cid, '阴茎', lust_buf, dict);
 }
 
 /** @param {number} ids */
@@ -357,6 +360,7 @@ function update_juel_buff(...ids) {
 
 /** @param {number} ids */
 function init_ero(...ids) {
+  ids = ids.filter((cid) => era.get(`tcvar:${cid}`) === undefined);
   era.addCharacterForTrain(...ids);
   update_ero_status(...ids);
   update_juel_buff(...ids);
@@ -444,8 +448,8 @@ function init_ero(...ids) {
 
 /** @param {number} ids */
 function begin_and_init_ero(...ids) {
-  if (jewel_names === undefined) {
-    jewel_names = era.get('jewelnames').slice(0, 13);
+  if (j_names === undefined) {
+    j_names = era.get('jewelnames').slice(0, 13);
   }
   era.beginTrain();
   era.set('tflag:回合', 1);
@@ -504,7 +508,7 @@ function end_ero(skip_jewels, log_jewels, ids) {
     ret.jewel[cid] = {};
     for (let i = 12; i >= 0; --i) {
       got[i] = Math.floor(
-        era.get(`gotjewel:${cid}:${jewel_names[i]}`) / palam2juel,
+        era.get(`gotjewel:${cid}:${j_names[i]}`) / palam2juel,
       );
       if (!skip_jewels && i < 12) {
         un_got[i] = got[i + 1] + un_got[i + 1];
@@ -525,7 +529,7 @@ function end_ero(skip_jewels, log_jewels, ids) {
       ret.jewel[cid]['自卫'] = got_self_protect;
       ret.jewel[cid]['-自卫'] = self_protect;
     }
-    jewel_names.forEach((j_name, i) => {
+    j_names.forEach((j_name, i) => {
       const lost = get_random_value(
         Math.max(self_protect - un_got[i], 0),
         Math.min(got[i], self_protect),
@@ -664,7 +668,7 @@ async function end_ero_and_show_result(shown = true) {
       for (const chara_id of chara_list) {
         const buffer = get_jewel_result(
           chara_id,
-          jewel_names,
+          j_names,
           info.jewel[chara_id],
           info.attr[chara_id],
         );
@@ -704,7 +708,7 @@ async function end_ero_and_show_result(shown = true) {
             era.printMultiColumns(
               get_jewel_result(
                 chara_list[chara_index],
-                jewel_names,
+                j_names,
                 info.jewel[chara_list[chara_index]],
                 info.attr[chara_list[chara_index]],
               ),

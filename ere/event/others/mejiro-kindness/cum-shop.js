@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const { check_chara_ero_image } = require('#/system/ero/sys-calc-ero-image');
 const { get_penis_size } = require('#/system/ero/sys-calc-ero-status');
 
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
@@ -22,7 +23,6 @@ const {
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const extra_base = require('#/data/extra-base');
 const { get_breast_cup, get_hair_color } = require('#/data/info-generator');
-const { check_chara_ero_image } = require('#/data/other-const');
 
 const hair_color_names = [
   '白',

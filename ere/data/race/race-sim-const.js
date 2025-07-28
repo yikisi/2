@@ -28,7 +28,7 @@ module.exports = {
   mod_acceleration_adapt_distance: [0.4, 0.5, 0.6, 1, 1, 1, 1, 1],
   mod_acceleration_adapt_ground: [0.1, 0.3, 0.5, 0.7, 0.8, 0.9, 1, 1.05],
   mod_acceleration_style: [
-    [1.17, 0.94, 0.956],
+    [1.17, 0.94, 0.96],
     [1, 1, 0.996],
     [0.985, 1, 0.996],
     [0.938, 1, 1],
@@ -44,7 +44,7 @@ module.exports = {
   mod_stamina_cost_mess_grass: [1, 1, 1, 1.02, 1.02],
   mod_velocity_final_adapt_distance: [0.1, 0.2, 0.4, 0.6, 0.8, 0.9, 1, 1.05],
   mod_velocity_style: [
-    [1.063, 0.9684, 0.9552],
+    [1.063, 0.969, 0.956],
     [1, 0.9828, 0.962],
     [0.978, 0.9906, 0.9749],
     [0.938, 0.9976, 0.994],

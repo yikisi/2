@@ -18,6 +18,7 @@ const { sys_get_billings } = require('#/system/sys-calc-base-cflag');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
+const arrive_location = require('#/page/components/arrive-location');
 const npc_common = require('#/page/components/npc-common');
 const print_page_header = require('#/page/components/page-header');
 const print_out_page = require('#/page/page-out');
@@ -35,8 +36,7 @@ const loc_characters = require('#/data/event/loc-characters');
 const recruit_flags = require('#/data/event/recruit-flags');
 const yandere_list = require('#/data/event/yandere-list');
 const { get_celebration } = require('#/data/info-generator');
-const { location_enum, location_name } = require('#/data/locations');
-const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
+const { location_enum } = require('#/data/locations');
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
 /** @type {Record<string,function(CharaTalk,CharaTalk):{[handle]:function:Promise,[name]:string}>} */
@@ -387,20 +387,9 @@ handlers[349] = () =>
       : {};
 
 async function page_visitors() {
-  let flag_page = true,
-    flag_visitor = true;
-  set('flag:当前位置', location_enum.visitor);
-  await clear();
-  print_page_header();
-  drawLine();
-  const vehicle = get('flag:单人载具');
-  print([
-    '【',
-    vehicle ? `${vehicle_verbs[vehicle]}着${vehicle_names[vehicle]}` : '',
-    '抵达了 ',
-    location_name[location_enum.visitor],
-    '】',
-  ]);
+  let flag_page = true;
+  let flag_visitor = true;
+  await arrive_location(set('flag:当前位置', location_enum.visitor));
   let visitor_list = loc_characters.get(location_enum.visitor);
   if (visitor_list.length > 0) {
     const celebration = get_celebration(),

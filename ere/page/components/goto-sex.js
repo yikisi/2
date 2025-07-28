@@ -263,14 +263,13 @@ async function goto_sex(cid, sex_loc) {
       await print_ero_page(cid);
       await end_ero_and_show_result(true);
     } else {
-      const pleasure_mark =
+      const l_pleasure =
         era.get(`mark:${cid}:淫纹`) ||
         era.get(`mark:${cid}:欢愉`) -
           Math.max(era.get(`mark:${cid}:苦痛`), era.get(`mark:${cid}:羞耻`));
-      const meek_mark =
-        era.get(`mark:${cid}:同心`) - era.get(`mark:${cid}:反抗`);
-      const is_pleasure = pleasure_mark > meek_mark;
-      const accept = Math.max(pleasure_mark, meek_mark) / 3 > Math.random();
+      const l_meek = era.get(`mark:${cid}:同心`) - era.get(`mark:${cid}:反抗`);
+      const is_pleasure = l_pleasure > l_meek;
+      const accept = Math.max(l_pleasure, l_meek) / 3 > Math.random();
       if (accept) {
         era.printMultiColumns([
           {

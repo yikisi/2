@@ -5,7 +5,7 @@
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
-const lines = require('#/event/daily/daily-119.kojo');
+const kojo = require('#/event/daily/daily-119.kojo');
 const CustomizedDaily = require('#/event/daily/daily-common');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -14,14 +14,21 @@ const { get_chara_color } = require('#/data/chara-colors');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
 module.exports = class extends CustomizedDaily {
-  /** @author 幽白書 */
+  get #dict() {
+    const r = {};
+    r['你'] = get_chara_talk(0).name;
+    r['称呼'] = sys_get_callname(this.id, 0);
+    r['代表色'] = get_chara_color(this.id);
+    return r;
+  }
+
   select() {
     const life_marks = LifeEventMarks.get_marks(119);
     if (!sys_check_awake(119) || !sys_check_awake(0) || !life_marks.b_escape) {
       return super.select();
     }
-    const callname = sys_get_callname(119, 0),
-      dj = get_chara_talk(119);
+    const callname = sys_get_callname(119, 0);
+    const dj = get_chara_talk(119);
     dj.say([
       '嗯？',
       callname,
@@ -31,7 +38,6 @@ module.exports = class extends CustomizedDaily {
     life_marks.b_escape = 0;
   }
 
-  /** @author 幽白書 */
   good_morning() {
     const life_marks = LifeEventMarks.get_marks(119);
     const callname = sys_get_callname(119, 0),
@@ -44,11 +50,11 @@ module.exports = class extends CustomizedDaily {
       dj.say('不怕，不怕……只要依偎在我身旁……就没什么好怕的了……');
       life_marks.b_escape = 0;
     } else {
-      const dict = {};
-      dict['你'] = get_chara_talk(0).name;
-      dict['称呼'] = callname;
-      dict['代表色'] = get_chara_color(119);
-      lines['good_morning'](dict);
+      kojo['good_morning'](this.#dict);
     }
+  }
+
+  async end_talk() {
+    await kojo['end_talk'](this.#dict);
   }
 };

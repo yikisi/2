@@ -168,7 +168,10 @@ function init_chara(cid, src = 0) {
             `cflag:${cid}:下胸围`,
             Math.floor((era.get(`cflag:${cid}:下胸围`) * temp[0]) / temp[1]),
           );
-          era.set(`cflag:${cid}:胸围`, era.get(`cflag:${cid}:胸围`) + temp[2]);
+          era.set(
+            `cflag:${cid}:胸围`,
+            era.get(`cflag:${cid}:下胸围`) + temp[2],
+          );
           era.set(
             `cflag:${cid}:腰围`,
             Math.floor((era.get(`cflag:${cid}:腰围`) * temp[0]) / temp[1]),
@@ -186,12 +189,17 @@ function init_chara(cid, src = 0) {
             temp,
           ];
           era.set(
-            `cflag:${cid}:胸围`,
-            Math.floor((era.get(`cflag:${cid}:胸围`) * temp[0]) / temp[1]),
-          );
-          era.set(
             `cflag:${cid}:下胸围`,
             Math.floor((era.get(`cflag:${cid}:下胸围`) * temp[0]) / temp[1]),
+          );
+          era.set(
+            `cflag:${cid}:胸围`,
+            Math.max(
+              Math.floor((era.get(`cflag:${cid}:胸围`) * temp[0]) / temp[1]),
+              era.get(`cflag:${cid}:下胸围`) +
+                1 +
+                (era.get(`talent:${cid}:乳头类型`) === 2),
+            ),
           );
           era.set(
             `cflag:${cid}:腰围`,
@@ -253,92 +261,92 @@ CustomizedInit.init_chara = init_chara;
 /**
  * 重置角色状态
  * 只重置属性和技能点数，不重置性能力和性经历
- * @param {number} chara_id
+ * @param {number} cid
  * @param {boolean} [from_init]
  */
-function reset_chara(chara_id, from_init) {
-  if (era.get(`cflag:${chara_id}:种族`) > 0) {
-    if (era.get(`cflag:${chara_id}:招募状态`) === recruit_flags.yes) {
+function reset_chara(cid, from_init) {
+  if (era.get(`cflag:${cid}:种族`) > 0) {
+    if (era.get(`cflag:${cid}:招募状态`) === recruit_flags.yes) {
       if (
         era.get('flag:当前月') <= 3 &&
-        (era.get(`cflag:${chara_id}:育成回合计时`) === 'x' ||
-          era.get(`cflag:${chara_id}:成长阶段`) < 5)
+        (era.get(`cflag:${cid}:育成回合计时`) === 'x' ||
+          era.get(`cflag:${cid}:成长阶段`) < 5)
       ) {
         era.set(
-          `cflag:${chara_id}:育成回合计时`,
+          `cflag:${cid}:育成回合计时`,
           (era.get('flag:当前回合数') - 1) % 48,
         );
-        era.set(`cflag:${chara_id}:继承方1`, 0);
-        era.set(`cflag:${chara_id}:继承方2`, 0);
-        era.set(`cflag:${chara_id}:可再次育成`, 0);
-        const teach_chara = era.get(`cflag:${chara_id}:照看`);
+        era.set(`cflag:${cid}:继承方1`, 0);
+        era.set(`cflag:${cid}:继承方2`, 0);
+        era.set(`cflag:${cid}:可再次育成`, 0);
+        const teach_chara = era.get(`cflag:${cid}:照看`);
         if (teach_chara > 0) {
           era.set(`cflag:${teach_chara}:照看`, 0);
-          era.set(`cflag:${chara_id}:照看`, 0);
+          era.set(`cflag:${cid}:照看`, 0);
         }
       }
-      era.set(`cflag:${chara_id}:腋毛`, 0);
+      era.set(`cflag:${cid}:腋毛`, 0);
       era.set(
-        `juel:${chara_id}:粉`,
-        era.set(`juel:${chara_id}:蓝`, era.set(`juel:${chara_id}:白`, 0)),
+        `juel:${cid}:粉`,
+        era.set(`juel:${cid}:蓝`, era.set(`juel:${cid}:白`, 0)),
       );
     } else if (!from_init) {
-      era.set(`cflag:${chara_id}:育成回合计时`, 4800);
+      era.set(`cflag:${cid}:育成回合计时`, 4800);
     }
     attr_names.forEach((v) =>
-      era.set(`base:${chara_id}:${v}`, era.get(`cflag:${chara_id}:初始${v}`)),
+      era.set(`base:${cid}:${v}`, era.get(`cflag:${cid}:初始${v}`)),
     );
     attr_names.forEach((v) => {
-      era.set(`abl:${chara_id}:${v}训练等级`, 1);
-      era.set(`exp:${chara_id}:${v}训练经验`, 0);
+      era.set(`abl:${cid}:${v}训练等级`, 1);
+      era.set(`exp:${cid}:${v}训练经验`, 0);
     });
-    const src_chara = era.get(`cflag:${chara_id}:模版角色`),
-      skill_set = chara_skill_dict[src_chara > 0 ? src_chara : chara_id] || [];
-    era.set(`cflag:${chara_id}:殿堂`, 0);
-    CharaSkills.get(chara_id)
+    const src_id = era.get(`cflag:${cid}:模版角色`);
+    const skill_set = chara_skill_dict[src_id > 0 ? src_id : cid] || [];
+    era.set(`cflag:${cid}:殿堂`, 0);
+    CharaSkills.get(cid)
       .clear()
       .add(...skill_set.slice(0, 4));
-    CharaAvailableSkills.get(chara_id)
+    CharaAvailableSkills.get(cid)
       .clear()
       .add(...skill_set.slice(4));
-    era.set(`exp:${chara_id}:技能点数`, 120 + 680 * (skill_set.length === 0));
-    era.set(`cflag:${chara_id}:育成用变量`, {});
-    RaceHistory.get(chara_id).reset();
-    new CharaGenes(chara_id).clear();
-    new CharaAvailableGenes(chara_id).clear();
+    era.set(`exp:${cid}:技能点数`, 120 + 680 * (skill_set.length === 0));
+    era.set(`cflag:${cid}:育成用变量`, {});
+    RaceHistory.get(cid).reset();
+    new CharaGenes(cid).clear();
+    new CharaAvailableGenes(cid).clear();
   } else {
     attr_names.forEach((v) => {
       era.set(
-        `base:${chara_id}:${v}`,
-        era.set(`cflag:${chara_id}:${v}`, get_random_value(25, 75)),
+        `base:${cid}:${v}`,
+        era.set(`cflag:${cid}:${v}`, get_random_value(25, 75)),
       );
-      era.set(`cflag:${chara_id}:${v}加成`, 0);
+      era.set(`cflag:${cid}:${v}加成`, 0);
     });
-    era.set(`skill:${chara_id}:习得技能`, []);
-    era.set(`skill:${chara_id}:可习得技能`, []);
+    era.set(`skill:${cid}:习得技能`, []);
+    era.set(`skill:${cid}:可习得技能`, []);
   }
 
-  sys_fix_chara_base(chara_id);
-  const stamina = era.get(`base:${chara_id}:体力`),
-    max_stamina = era.get(`maxbase:${chara_id}:体力`),
-    time = era.get(`base:${chara_id}:精力`),
-    max_time = era.get(`maxbase:${chara_id}:精力`);
+  sys_fix_chara_base(cid);
+  const stamina = era.get(`base:${cid}:体力`);
+  const max_stamina = era.get(`maxbase:${cid}:体力`);
+  const time = era.get(`base:${cid}:精力`);
+  const max_time = era.get(`maxbase:${cid}:精力`);
   if (stamina > max_stamina) {
-    era.set(`base:${chara_id}:体力`, max_stamina);
+    era.set(`base:${cid}:体力`, max_stamina);
   }
   if (time > max_time) {
-    era.set(`base:${chara_id}:精力`, max_time);
+    era.set(`base:${cid}:精力`, max_time);
   }
 
-  get_custom_init(chara_id)(!from_init);
+  get_custom_init(cid)(!from_init);
 }
 
 module.exports = {
   init_chara,
-  /** @param {number} chara_id */
-  recruit_chara(chara_id) {
-    reset_chara(chara_id);
-    era.set(`cflag:${chara_id}:自主训练`, 1);
+  /** @param {number} cid */
+  recruit_chara(cid) {
+    reset_chara(cid);
+    era.set(`cflag:${cid}:自主训练`, 1);
     const honor = era.get('flag:当前声望');
     // 先结算声望奖励
     let relation = honor > 500 ? Math.floor((honor - 500) / 12) : 0;
@@ -346,14 +354,10 @@ module.exports = {
       relation = 125;
     }
     relation +=
-      era.get(`relation:${chara_id}:0`) +
-      300 * sys_personal_achievement.get(chara_id);
-    era.set(`relation:${chara_id}:0`, Math.min(relation, 600));
-    if (
-      era.get(`cflag:${chara_id}:种族`) > 0 &&
-      era.get(`talent:${chara_id}:病娇`) > 0
-    ) {
-      yandere_list.push(chara_id);
+      era.get(`relation:${cid}:0`) + 300 * sys_personal_achievement.get(cid);
+    era.set(`relation:${cid}:0`, Math.min(relation, 600));
+    if (era.get(`cflag:${cid}:种族`) > 0 && era.get(`talent:${cid}:病娇`) > 0) {
+      yandere_list.push(cid);
     }
   },
   reset_chara,

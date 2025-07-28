@@ -17,6 +17,7 @@
  */
 const era = require('#/era-electron');
 
+const { set_chara_ero_image } = require('#/system/ero/sys-calc-ero-image');
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
 
 const new_game = require('#/page/new-game/page-new-game');
@@ -34,7 +35,8 @@ const item_title_color =
 const { get_chara_color } = require('#/data/chara-colors');
 const title_desc = require('#/data/desc/title-desc.json');
 const notes = require('#/data/notes.json');
-const { first_child_id, set_chara_ero_image } = require('#/data/other-const');
+const { first_child_id } = require('#/data/other-const');
+const { join_list } = require('#/utils/list-utils');
 
 /**
  * @param {number} cid
@@ -70,9 +72,9 @@ module.exports = async () => {
         content: [
           '1. 本游戏仅为开发者自娱自乐及代码练习所用，开发它是因为开发者趣味低下，思想低俗所致，无任何经济收益和利益驱动。',
           { isBr: true },
-          '2. 本游戏含有大量的R18色情内容，内容中可能会出现的有：多P、调教、轻度SM、非合意性行为、近亲相奸等，不会出现的有：强制NTR、重度SM、血腥、R18G等。',
+          '2. 本游戏含有大量的 R18 色情内容，内容中可能会出现的有：多P、调教、轻度 SM、非合意性行为、近亲相奸等，不会出现的有：强制 NTR、重度 SM、血腥、R18G 等。',
           { isBr: true },
-          '3. 本游戏在设计理念和游戏内容上缝合了大量era与其他各类作品，仅适合era系列玩家或文字黄油爱好者进行游玩，不适合普通玩家游玩，特别是严格禁止未成年人游玩。',
+          '3. 本游戏在设计理念和游戏内容上缝合了大量 era 与其他各类作品，仅适合 era 系列玩家或文字黄油爱好者进行游玩，不适合普通玩家游玩，特别是严格禁止未成年人游玩。',
           { isBr: true },
           '4. 本游戏所使用的素材资源包括开发者自制、互联网收集与协力者提供，开发者与协力者来自于不同的世界、种族、国家和民族，彼此之间也不存在经济关系。',
           { isBr: true },
@@ -82,13 +84,13 @@ module.exports = async () => {
           { isBr: true },
           '7. 本声明的解释权归开发者所有，且在版本更新中声明内容可能有所变更，请以最新版本为准。',
           { isBr: true },
-          '8. 基于以上叠了这么多层buff，建议有大胆想法的人请现在关掉窗口并立刻删除游戏，只要不删就默认你已经理解并遵守该声明，在不遵守的情况下出现的任何事故和法律责任都和开发者没有任何关系。',
+          '8. 基于以上叠了这么多层 buff，建议有大胆想法的人请现在关掉窗口并立刻删除游戏，只要不删就默认你已经理解并遵守该声明，在不遵守的情况下出现的任何事故和法律责任都和开发者没有任何关系。',
         ],
         type: 'text',
       },
       {
         accelerator: 1,
-        content: '我读完并理解了以上8条，我对自己负责，我不删，我要玩。',
+        content: '我读完并理解了以上 8 条，我对自己负责，我不删，我要玩。',
         type: 'button',
       },
       {
@@ -146,11 +148,7 @@ module.exports = async () => {
     [[get_copyright_entry(52)], '99'],
     [[get_copyright_entry(56)], 'ALEX'],
     [[get_copyright_entry(60)], '红红火火恍惚'],
-    [
-      [get_copyright_entry(64, '地下室、调教')],
-      ['KUN', { isDivider: true }, 'Bottle'],
-    ],
-    // [[get_copyright_entry(64)], 'KUN'],
+    [[get_copyright_entry(64)], ['KUN', { isDivider: true }, 'Bottle']],
     [
       [get_copyright_entry(67)],
       [
@@ -261,16 +259,12 @@ module.exports = async () => {
     ],
   ];
   set_chara_ero_image();
-  const gameBase = era.get('gamebase');
-  let buffer,
-    version = gameBase.version / 1000;
-  if (version % 1 === 0) {
-    version = version.toFixed(1);
-  }
+  const { versionName, site, author } = era.get('gamebase');
+  let buffer;
 
-  const date = new Date(),
-    real_month = date.getMonth() + 1,
-    real_date = date.getDate();
+  const date = new Date();
+  const real_month = date.getMonth() + 1;
+  const real_date = date.getDate();
   const birthday = [];
   era.getAllCharacters().forEach((e) => {
     if (
@@ -304,13 +298,9 @@ module.exports = async () => {
           { config: { width: 17 }, names: 'title', type: 'image.whole' },
           {
             content: [
-              `版本号：v${version} (agito)`,
+              `版本号：v${versionName}`,
               { isBr: true },
-              '雞雞',
-              { isDivider: true },
-              '无名路人',
-              { isDivider: true },
-              '无名黑奴',
+              ...join_list(author.split('|'), { isDivider: true }),
             ],
             type: 'text',
           },
@@ -361,16 +351,16 @@ module.exports = async () => {
           content: [
             {
               content: 'EraUma游戏发布页',
-              url: gameBase.site,
+              url: site,
             },
             { isBr: true },
             {
-              content: 'EraElectron引擎发布页',
+              content: 'EraElectron 引擎发布页',
               url: 'https://gitgud.io/umaera/engine/era-electron/-/releases/permalink/latest',
             },
             { isBr: true },
             {
-              content: 'ERA特雷森学园（Discord社区）',
+              content: 'ERA特雷森学园（Discord 社区）',
               url: 'https://discord.gg/ake5SP3zUP',
             },
             { isBr: true },
@@ -642,9 +632,9 @@ module.exports = async () => {
               content: "Trainers' Legend G 译文仓库",
               url: 'https://github.com/MinamiChiwa/Trainers-Legend-G-TRANS',
             },
-            '、',
+            { isDivider: true },
             {
-              content: '赛马娘中文Wiki',
+              content: '赛马娘中文 Wiki',
               url: 'https://wiki.biligame.com/umamusume/%E9%A6%96%E9%A1%B5',
             },
           ],
@@ -661,6 +651,11 @@ module.exports = async () => {
             },
             { isBr: true },
             '以负责角色ID最小值排序',
+            { isBr: true },
+            {
+              content: '详细口上鸣谢',
+              url: 'https://gitgud.io/umaera/erauma/-/wikis/COPYRIGHT',
+            },
           ],
           {
             isParagraph: true,
@@ -767,10 +762,12 @@ module.exports = async () => {
           'odakasuya',
           { isDivider: true },
           'hsyzg1626',
-          { isDivider: true },
+          { isBr: true },
           'WindyWhisper',
           { isDivider: true },
           'wtmkks',
+          { isDivider: true },
+          'Что тиба,Я сао нима',
         ]);
         await era.printAndWait('特别鸣谢（笑）', {
           color: item_title_color,

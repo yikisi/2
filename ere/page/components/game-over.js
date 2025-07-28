@@ -35,9 +35,9 @@ const basement_saying_arr = [
 /** @param {boolean} [again] */
 async function game_over(again) {
   const game_over = era.get('flag:游戏结束');
-  let end_talk = 0,
-    saying_arr,
-    temp;
+  let end_talk = 0;
+  let saying_arr;
+  let temp;
   if (game_over === 3 && era.get('flag:当前位置') === location_enum.basement) {
     era.drawLine();
     await get_custom_daily(basement_owners.get(0)).basement_end();

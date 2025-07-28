@@ -215,7 +215,7 @@ module.exports = class extends CustomizedLove {
       await era.printAndWait(
         `只见 ${gold_ship.name} 嘿嘿一个坏笑，便把 ${me.name} 扑倒到沙发上。`,
       );
-      await quick_into_sex(7, true);
+      await quick_into_sex(7, 7, true);
       era.drawLine();
       await era.printAndWait(
         `这场激烈的马儿跳无疑是一场畅快淋漓的体验，原先清新的训练员室如今满布着精液与淫水的腥臭味。${me.name} 气喘吁吁地躺进 ${gold_ship.name} 的怀抱，吸入${gold_ship.sex}时刻散发的荷尔蒙，脑袋里一直在思考刚才到底发生了什么事。`,

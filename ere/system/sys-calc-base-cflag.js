@@ -41,17 +41,17 @@ function sys_change_motivation(cid, val) {
   if (delta < -1) {
     delta -= delta_change;
   }
-  const motivation = era.get(`cflag:${cid}:干劲`),
-    motivation_limit = Math.max(
-      Math.min(
-        2 -
-          Math.floor(era.get(`base:${cid}:压力`) / 2500) +
-          get_custom_mec(cid).get_motivation_limit(),
-        2,
-      ),
-      -2,
+  const motivation = era.get(`cflag:${cid}:干劲`);
+  const motivation_limit = Math.max(
+    Math.min(
+      2 -
+        Math.floor(era.get(`base:${cid}:压力`) / 2500) +
+        get_custom_mec(cid).get_motivation_limit(),
+      2,
     ),
-    new_val = Math.max(Math.min(motivation + delta, motivation_limit), -2);
+    -2,
+  );
+  const new_val = Math.max(Math.min(motivation + delta, motivation_limit), -2);
   if (new_val !== motivation) {
     era.set(`cflag:${cid}:干劲`, new_val);
     era.print([
@@ -237,9 +237,9 @@ module.exports = {
   },
   /** @param {number} cid */
   sys_fix_chara_base(cid) {
-    let _src = era.get(`cflag:${cid}:模版角色`);
-    if (_src === -1) {
-      _src = cid;
+    let src_id = era.get(`cflag:${cid}:模版角色`);
+    if (src_id === -1) {
+      src_id = cid;
     }
     const maxbase_buff =
       get_custom_mec(cid).get_maxbase_buff() -
@@ -251,7 +251,7 @@ module.exports = {
       `maxbase:${cid}:体力`,
       Math.max(
         Math.floor(
-          era.get(`staticbase:${_src}:体力`) +
+          era.get(`staticbase:${src_id}:体力`) +
             era.get(`base:${cid}:耐力`) / 2 +
             maxbase_buff +
             extra_stamina,
@@ -263,7 +263,7 @@ module.exports = {
       `maxbase:${cid}:精力`,
       Math.max(
         Math.floor(
-          era.get(`staticbase:${_src}:精力`) +
+          era.get(`staticbase:${src_id}:精力`) +
             era.get(`base:${cid}:智力`) / 2 +
             maxbase_buff +
             extra_time,

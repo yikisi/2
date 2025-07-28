@@ -1,3 +1,7 @@
+/**
+ * @file 梦之旅 - 招募
+ * @author 幽白書
+ */
 const era = require('#/era-electron');
 
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
