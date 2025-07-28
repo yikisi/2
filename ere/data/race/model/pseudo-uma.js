@@ -136,6 +136,8 @@ class PseudoUma {
     // 比赛地语言等级
     language: 0,
     loc_mind_other_diff_random: [0, 0],
+    // 训练等级和
+    research_lv: 0,
     skill_count: 0,
     stamina: 0,
     temptationSpan: 0,
@@ -143,8 +145,6 @@ class PseudoUma {
     velocityIdeal: 0,
     velocityMaxRush: 0,
     velocityMin: 0,
-    // 训练等级和
-    research_lv: 0,
     // 胜场数
     winCount: 0,
   };
