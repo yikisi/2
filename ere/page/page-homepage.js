@@ -35,6 +35,7 @@ const { get_custom_check } = require('#/event/check/check-factory');
 const { run_custom_daily } = require('#/event/daily/daily-factory');
 const { get_custom_edu } = require('#/event/edu/edu-factory');
 const { get_custom_ero } = require('#/event/ero/ero-factory');
+const anniversary = require('#/event/others/anniversary');
 const game_guides = require('#/event/others/game-guides');
 const { start_machine_gun, stop_machine_gun } = require('#/event/queue');
 
@@ -336,6 +337,7 @@ module.exports = async () => {
       if (await check_game_over(true)) {
         return;
       }
+      await anniversary();
       if (cur_location === location_enum.basement) {
         era.set('flag:当前位置', location_enum.basement);
         await era.clear();
