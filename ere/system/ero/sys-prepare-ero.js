@@ -355,7 +355,7 @@ function update_c_j_buff(cid, dict) {
 
 /** @param {number} ids */
 function update_juel_buff(...ids) {
-  ids.forEach(update_c_j_buff);
+  ids.forEach((cid) => update_c_j_buff(cid));
 }
 
 /** @param {number} ids */
