@@ -47,5 +47,5 @@
     "prepare": "husky",
     "webpack": "webpack"
   },
-  "version": "2000"
+  "version": "2001"
 }
