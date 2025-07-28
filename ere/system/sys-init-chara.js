@@ -133,6 +133,7 @@ function init_chara(cid, src = 0) {
   );
   era.set(`cstr:${cid}:决胜服`, -1);
   if (
+    src === 0 &&
     era.get(`abl:${cid}:粤语`) === 5 &&
     era.get(`abl:${cid}:英语`) === 5 &&
     era.get(`abl:${cid}:法语`) === 5
