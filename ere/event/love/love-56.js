@@ -657,7 +657,7 @@ module.exports = class extends CustomizedLove {
       '，之后也请尽情地使用小福吧。',
     ]);
     era.println();
-    add_jewel_reward(56, ['顺从'], [100]);
+    add_jewel_reward(56, '顺从', 100);
     if (era.get('talent:56:淫身') !== 2) {
       era.set('talent:56:淫身', 2);
       era.print([
