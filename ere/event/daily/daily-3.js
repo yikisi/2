@@ -10,6 +10,7 @@ const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
 const { get_custom_check } = require('#/event/check/check-factory');
+const kojo = require('#/event/daily/daily-3.kojo');
 const CustomizedDaily = require('#/event/daily/daily-common');
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
 const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
@@ -28,6 +29,14 @@ const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
 module.exports = class extends CustomizedDaily {
+  get #dict() {
+    const r = {};
+    const teio = get_chara_talk(this.id);
+    r['代表色'] = teio.color;
+    r['你'] = era.get('callname:0:-2');
+    return r;
+  }
+
   async celebration(hook) {
     const me = get_chara_talk(0);
     const teio = get_chara_talk(3);
@@ -794,5 +803,9 @@ module.exports = class extends CustomizedDaily {
       }
       await era.printAndWait(talk_arr);
     }
+  }
+
+  async end_talk() {
+    await kojo['end_talk'](this.#dict);
   }
 };

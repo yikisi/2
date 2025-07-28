@@ -30,6 +30,7 @@ const { get_custom_check } = require('#/event/check/check-factory');
 const { get_custom_daily } = require('#/event/daily/daily-factory');
 const { run_custom_ero } = require('#/event/ero/ero-factory');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
+const anniversary = require('#/event/others/anniversary');
 const morning_sex = require('#/event/others/morning-sex');
 const punish_pregnant_slave = require('#/event/others/punish-pregnant-slave');
 const { remove_special_events } = require('#/event/queue');
@@ -749,6 +750,7 @@ async function sys_next_week() {
   await morning_sex();
   era.set('flag:床伴', 0);
   era.set('flag:随机种子', (era.get('flag:随机种子') * 9301 + 49297) % 233280);
+  await anniversary();
 }
 
 module.exports = sys_next_week;

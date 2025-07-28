@@ -73,3 +73,19 @@ good_morning:
             - fontWeight: bold
               content: 梦之旅
             - 「笑容……很可爱？……如果 %称呼% 喜欢的话，那么我会尝试多笑一些的。」
+
+end_talk:
+  - if: era.get('flag:变态行为') === 0
+    lines:
+      - if: era.get('love:119') < 75
+        color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 梦之旅
+          - 「%称呼%，您明白了吗？这就是盲信的结果……请好好歇息吧，我会处理好一切等您回来的。」
+      - if: era.get('love:119') >= 75
+        color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 梦之旅
+          - 「%称呼%，您明白了吗？这就是盲信的结果……不过，您必然不会就此放弃的吧？我已经准备好接风宴了，随时欢迎您的归来。」
