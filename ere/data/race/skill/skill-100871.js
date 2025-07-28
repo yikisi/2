@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '剩余400米，位于前方并被后方马娘紧追时，跑法让粉丝心中留下深刻印象，使自身更容易突围',
   10087,
   1,
-  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [() => true, () => true],

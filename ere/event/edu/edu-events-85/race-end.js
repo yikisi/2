@@ -458,7 +458,7 @@ module.exports = (handlers) => {
     extra_flag.attr_change = new Array(5).fill(3);
     extra_flag.pt_change = 45;
     extra_flag.skill_change = [
-      new CharaSkills(85).get().indexOf(200672) === -1 ? 200672 : 200671,
+      CharaSkills.get(85).get().indexOf(200672) === -1 ? 200672 : 200671,
     ];
   };
 
@@ -500,7 +500,7 @@ module.exports = (handlers) => {
     extra_flag.attr_change = new Array(5).fill(3);
     extra_flag.pt_change = 45;
     extra_flag.skill_change = [
-      new CharaSkills(85).get().indexOf(201382) === -1 ? 201382 : 201381,
+      CharaSkills.get(85).get().indexOf(201382) === -1 ? 201382 : 201381,
     ];
   };
 
@@ -633,8 +633,8 @@ module.exports = (handlers) => {
     extra_flag.base_change = JSON.parse('{"体力":-150}');
     extra_flag.pt_change = 120;
     extra_flag.skill_change = [
-      new CharaSkills(85).get().indexOf(200962) === -1 ? 200962 : 200961,
-      new CharaSkills(85).get().indexOf(200972) === -1 ? 200972 : 200971,
+      CharaSkills.get(85).get().indexOf(200962) === -1 ? 200962 : 200961,
+      CharaSkills.get(85).get().indexOf(200972) === -1 ? 200972 : 200971,
     ];
   };
 
@@ -680,9 +680,9 @@ module.exports = (handlers) => {
     extra_flag.attr_change = new Array(5).fill(3);
     extra_flag.pt_change = 45;
     extra_flag.skill_change = [
-      new CharaSkills(85).get().indexOf(200612) === -1 ? 200612 : 200611,
-      new CharaSkills(85).get().indexOf(201032) === -1 ? 201032 : 201031,
-      new CharaSkills(85).get().indexOf(201042) === -1 ? 201042 : 201041,
+      CharaSkills.get(85).get().indexOf(200612) === -1 ? 200612 : 200611,
+      CharaSkills.get(85).get().indexOf(201032) === -1 ? 201032 : 201031,
+      CharaSkills.get(85).get().indexOf(201042) === -1 ? 201042 : 201041,
     ];
   };
 };

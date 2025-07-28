@@ -2,7 +2,7 @@ const era = require('#/era-electron');
 
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
-const EroNormalFucking = require('#/event/ero/common-lines/normal/fucking');
+const EroNormalFucking = require('#/event/ero/common/normal/fucking');
 
 module.exports = class extends EroNormalFucking {
   async missionary(attacker, defender, hook) {

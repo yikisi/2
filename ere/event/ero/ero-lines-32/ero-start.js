@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const { sys_check_cuckold } = require('#/system/chara/sys-calc-cheat');
 const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
 const {
   check_pregnant_unprotect,
@@ -692,7 +693,7 @@ module.exports = async () => {
           era.println();
           await era.printAndWait('虽然不知道发生了什么，但先装作无事发生吧');
       }
-    } else if (era.get('talent:32:绿帽癖')) {
+    } else if (sys_check_cuckold(32)) {
       if (Math.random() < 0.5) {
         await tachyon.say_and_wait(['……对不起，', callname, '，对不起。']);
         era.println();

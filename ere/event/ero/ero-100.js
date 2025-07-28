@@ -2,8 +2,8 @@
  * @file 奇锐骏 - 调教
  * @author 夕阳红艺术团小组长-赤红彗星红桃爵士Q先生
  */
-const NormalCommandLines = require('#/event/ero/common-lines/normal/normal-common');
-const SleepCommandLines = require('#/event/ero/common-lines/sleep/sleep-common');
+const NormalCommandLines = require('#/event/ero/common/normal/normal-common');
+const SleepCommandLines = require('#/event/ero/common/sleep/sleep-common');
 const CustomizedEro = require('#/event/ero/ero-common');
 const AcuteNormalCommunications = require('#/event/ero/ero-lines-100/normal-communications');
 const AcuteNormalFucking = require('#/event/ero/ero-lines-100/normal-fucking');

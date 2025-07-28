@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛中间位于中后方时短时间内向前突进；若是短距离或英里比赛则之后最终冲刺时短时间内大幅向前突进',
   10131,
   1,
-  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [() => true, () => true],

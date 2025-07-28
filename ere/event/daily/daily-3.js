@@ -10,6 +10,7 @@ const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
 const { get_custom_check } = require('#/event/check/check-factory');
+const kojo = require('#/event/daily/daily-3.kojo');
 const CustomizedDaily = require('#/event/daily/daily-common');
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
 const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
@@ -28,10 +29,18 @@ const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
 module.exports = class extends CustomizedDaily {
-  async celebration() {
-    const me = get_chara_talk(0),
-      teio = get_chara_talk(3),
-      weeks = (era.get('flag:当前回合数') - 1) % 48;
+  get #dict() {
+    const r = {};
+    const teio = get_chara_talk(this.id);
+    r['代表色'] = teio.color;
+    r['你'] = era.get('callname:0:-2');
+    return r;
+  }
+
+  async celebration(hook) {
+    const me = get_chara_talk(0);
+    const teio = get_chara_talk(3);
+    const weeks = (era.get('flag:当前回合数') - 1) % 48;
     let ret;
     switch (weeks) {
       case 0:
@@ -110,11 +119,12 @@ module.exports = class extends CustomizedDaily {
           `平时隐藏着的，嫩滑洁白的敏感皮肤此时完全暴露在 ${me.name} 的目光里，如果 ${me.name} 想的话，甚至可以伸出手去亲自试试触感……`,
         );
         await teio.say_and_wait(`唔唔？`);
-        await era.printAndWait(
-          `${
-            me.name
-          } 沉浸在${teio.get_teen_sex_title()}绝美的样子中，一时难以自拔。`,
-        );
+        await era.printAndWait([
+          me.get_colored_name(),
+          ' 沉浸在',
+          teio.get_teen_sex_title(),
+          '绝美的样子中，一时难以自拔。',
+        ]);
         era.printButton('忍不住了！', 1, { disabled: era.get('love:3') < 75 });
         era.printButton('钢之意志！', 2);
         if ((await era.input()) === 1) {
@@ -191,7 +201,7 @@ module.exports = class extends CustomizedDaily {
         );
         break;
       default:
-        return await super.celebration();
+        return await super.celebration(hook);
     }
     era.set('cflag:3:节日事件标记', 0);
   }
@@ -274,7 +284,7 @@ module.exports = class extends CustomizedDaily {
       me = get_chara_talk(0),
       teio = get_chara_talk(3);
     era.print(`繁忙的一天结束，${me.name} 把 ${teio.name} 送到学生宿舍门口。`);
-    if (check) {
+    if (check > 0) {
       era.print(
         '正要像往常一样分别时，不知为何，两边都停止了动作，现场陷入了短暂的沉默……',
       );
@@ -293,7 +303,7 @@ module.exports = class extends CustomizedDaily {
       );
       teio.say('那个，我做好了外宿申请，所以今天……');
       if (
-        (await select_yes_or_no(
+        await select_yes_or_no(
           [
             '声音逐渐微弱下去，血液涌上脸颊，',
             me.get_colored_name(),
@@ -303,56 +313,52 @@ module.exports = class extends CustomizedDaily {
           ],
           '接受',
           '拒绝',
-        )) === false
+        )
       ) {
-        if (check === 2) {
-          if (era.get('status:3:腿伤')) {
-            await teio.say_and_wait('唔……这样啊。');
-            await era.printAndWait([
-              me.get_colored_name(),
-              ' 看着犹自挺胸看着自己，眼神却黯淡下去的',
-              teio.sex,
-              '，不禁于心不忍，伸起一只手抚向',
-              teio.sex,
-              '的头。',
-            ]);
-            await era.printAndWait([
-              '但突然之间，',
-              teio.sex,
-              '抬手，五根细笋般的手指稳稳扣住了 ',
-              me.get_colored_name(),
-              ' 的掌心，',
-              me.get_colored_name(),
-              ' 想发力抽回，却毫无反应——',
-            ]);
-            await teio.say_and_wait([sys_get_colored_callname(3, 0), '……']);
-            await era.printAndWait([teio.sex, '越发靠近你了。']);
-            await teio.say_and_wait(
-              '我……无论在哪些地方，都不想，也不会放手啊。',
-            );
-          } else {
-            await teio.say_and_wait(
-              '是——这样——吗？那我们就走吧！东西和地方已经准备好了！',
-            );
-            await era.printAndWait([
-              me.get_colored_name(),
-              ' 还没来得及发布或强调任何事情，就被发挥体能优势的',
-              teio.get_uma_sex_title(),
-              '带着如一阵风般强行移动了……或许 ',
-              me.get_colored_name(),
-              ' 的意见在此时此地并不重要，',
-              teio.get_colored_name(),
-              ' 只是单纯地通知一下 ',
-              me.get_colored_name(),
-              ' 接下来会发生什么。',
-            ]);
-          }
-          hook.arg = 2;
-        } else {
-          hook.arg = 0;
-        }
-      } else {
         hook.arg = 1;
+      } else if (check === 2) {
+        if (era.get('status:3:腿伤')) {
+          await teio.say_and_wait('唔……这样啊。');
+          await era.printAndWait([
+            me.get_colored_name(),
+            ' 看着犹自挺胸看着自己，眼神却黯淡下去的',
+            teio.sex,
+            '，不禁于心不忍，伸起一只手抚向',
+            teio.sex,
+            '的头。',
+          ]);
+          await era.printAndWait([
+            '但突然之间，',
+            teio.sex,
+            '抬手，五根细笋般的手指稳稳扣住了 ',
+            me.get_colored_name(),
+            ' 的掌心，',
+            me.get_colored_name(),
+            ' 想发力抽回，却毫无反应——',
+          ]);
+          await teio.say_and_wait([sys_get_colored_callname(3, 0), '……']);
+          await era.printAndWait([teio.sex, '越发靠近你了。']);
+          await teio.say_and_wait('我……无论在哪些地方，都不想，也不会放手啊。');
+        } else {
+          await teio.say_and_wait(
+            '是——这样——吗？那我们就走吧！东西和地方已经准备好了！',
+          );
+          await era.printAndWait([
+            me.get_colored_name(),
+            ' 还没来得及发布或强调任何事情，就被发挥体能优势的',
+            teio.get_uma_sex_title(),
+            '带着如一阵风般强行移动了……或许 ',
+            me.get_colored_name(),
+            ' 的意见在此时此地并不重要，',
+            teio.get_colored_name(),
+            ' 只是单纯地通知一下 ',
+            me.get_colored_name(),
+            ' 接下来会发生什么。',
+          ]);
+        }
+        hook.arg = 2;
+      } else {
+        hook.arg = 0;
       }
     } else {
       teio.say('明天再见了！训练员！');
@@ -370,7 +376,7 @@ module.exports = class extends CustomizedDaily {
         !teio_marks.report) ||
       (my_marks.sperm === 3 &&
         era.get('cflag:0:妊娠阶段') !== 1 << pregnant_stage_enum.no &&
-        !my_marks.report) ||
+        my_marks.report !== 1) ||
       era.get('exp:3:生产次数') > 0 ||
       era.get('exp:3:孩子数量') > 0
     ) {
@@ -797,5 +803,9 @@ module.exports = class extends CustomizedDaily {
       }
       await era.printAndWait(talk_arr);
     }
+  }
+
+  async end_talk() {
+    await kojo['end_talk'](this.#dict);
   }
 };

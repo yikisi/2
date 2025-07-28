@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在比赛后半段前方位置发挥成为第一的力量',
   10009,
   1,
-  UmaSkill.rarity_enum.spe_n_3,
   18,
   340,
   [() => true, () => true],

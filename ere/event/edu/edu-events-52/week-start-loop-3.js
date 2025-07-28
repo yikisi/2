@@ -575,24 +575,20 @@ module.exports = async (urara, me, in_urara, callname) => {
 
   await urara.say_and_wait('哦！乌拉拉GO——！');
   const chara = sys_get_chara_pseudo(52);
-  await simulation_game_in_event(
-    chara,
-    [
-      new PseudoUma(
-        -1,
-        '「春乌拉拉」',
-        in_urara.color,
-        chara.motivation,
-        attr_names.map((e) => Math.min(era.get(`base:52:${e}`), 1200)),
-        chara.style,
-        [...chara.adapt_style_list],
-        [...chara.adapt_distance_list],
-        [...chara.adapt_ground_list],
-        chara.list_skill.map((e) => e.data),
-      ).set_legend(),
-    ],
-    race_enum.arim_kin,
+  const p = new PseudoUma(
+    -1,
+    '「春乌拉拉」',
+    in_urara.color,
+    chara.motivation,
+    attr_names.map((e) => Math.min(era.get(`base:52:${e}`), 1200)),
+    chara.style,
+    [...chara.adapt_style_list],
+    [...chara.adapt_distance_list],
+    [...chara.adapt_ground_list],
+    chara.list_skill.map((e) => e.data),
   );
+  p.legend = true;
+  await simulation_game_in_event(chara, [p], race_enum.arim_kin);
   if (chara.rank.curr !== 1) {
     return false;
   }

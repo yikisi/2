@@ -7,37 +7,47 @@ const skill_name_colors = [
   '#ff9e9d',
   '#ce7cff',
 ];
+const skill_name_types = [];
+skill_name_types[skill_name_enum.buff] = '常时';
+skill_name_types[skill_name_enum.heal] = '恢复';
+skill_name_types[skill_name_enum.speed] = '增幅';
+skill_name_types[skill_name_enum.control] = '控制';
+skill_name_types[skill_name_enum.debuff] = '劣势';
 
-const skill_border_enum = { normal: 0, advanced: 0, spe: 0, evol: 0, cheat: 0 };
+const skill_border_enum = {
+  normal: 0,
+  advanced: 0,
+  spe: 0,
+  evol: 0,
+  cheat: 0,
+  ero_normal: 0,
+  ero_advanced: 0,
+};
 Object.keys(skill_border_enum).forEach((k, i) => (skill_border_enum[k] = i));
 const skill_border_colors = [
   '#c6c5c5',
   '#eeb93f',
-  '#ffc0cb',
-  '#ee82ee',
+  '#71c2fe',
+  '#f6aacb',
   '#ff7373',
+  '#ee82ee',
+  '#cf00cf',
 ];
-
-const rarity_enum = {
-  // 普通技能
-  normal: 1,
-  // 金技能
-  gold: 2,
-  // 低星初始固有
-  // spe_n_2: 3,
-  // 低星升星固有
-  spe_n_3: 4,
-  // 高星固有
-  spe_r: 5,
-  // 进化技能
-  evol: 6,
-};
+const skill_border_types = [];
+skill_border_types[skill_border_enum.normal] = '普通';
+skill_border_types[skill_border_enum.advanced] = '传说';
+skill_border_types[skill_border_enum.spe] = '独有';
+skill_border_types[skill_border_enum.evol] = '进化';
+skill_border_types[skill_border_enum.cheat] = 'ＧＭ';
+skill_border_types[skill_border_enum.ero_normal] = '普通 · 调教';
+skill_border_types[skill_border_enum.ero_advanced] = '强化 · 调教';
 
 const ability_time_usage_enum = {
   normal: 1,
   top_distance: 2,
   stamina: 3,
   order_change: 4,
+  blocked_side_continuetime: 5,
 };
 
 const ability_type_enum = {
@@ -87,8 +97,15 @@ const ability_type_enum = {
   // ActivateRandomNormalAndRareSkill: 36,
   ActivateRandomRareSkill: 37,
   Connect: 41,
+  Genesis: 42,
   // 育成继承活动使用
   // ChallengeMatchBonusXXX: 50,
+  // 可以用性玩具
+  HasItem: 90,
+  // 性玩具带来 Buff
+  HasItemBuff: 91,
+  // 高潮时使其他角色获得快感
+  ShareOrgasm: 92,
 };
 
 const ability_usage_enum = {
@@ -130,6 +147,9 @@ const ability_usage_enum = {
   MultiplyUAFWins: 26,
   MultiplyCookingPt: 27,
   MultiplyResearchLv: 28,
+  MultiplyLove: 30,
+  MultiplyIsland: 31,
+  MultiplyCount: 99,
 };
 
 const target_type_enum = {
@@ -149,7 +169,7 @@ const target_type_enum = {
   SelfInfront: 9,
   // 后方所有
   SelfBehind: 10,
-  // TeamMember: 11,
+  TeamMember: 11,
   // Near: 12,
   // SelfAndBlockFront: 13,
   // BlockSide: 14,
@@ -168,6 +188,10 @@ const target_type_enum = {
   CharaId: 22,
   // 体力恢复的角色
   ActivateHealSkill: 23,
+  // 队友
+  Team: 98,
+  // 自身之外
+  Others: 99,
 };
 
 const adapt_tag_names = [
@@ -198,6 +222,7 @@ const ability_tag_enum = {
   hpRate: 5,
   temp: 1,
   laneMove: 1,
+  ero: 0,
 };
 Object.keys(ability_tag_enum).forEach((k, i) => (ability_tag_enum[k] = i));
 
@@ -213,14 +238,14 @@ ability_tag_names[ability_tag_enum.visible] = '视野';
 ability_tag_names[ability_tag_enum.targetSpeed] = '目标速度';
 ability_tag_names[ability_tag_enum.currentSpeed] = '即时速度';
 ability_tag_names[ability_tag_enum.accel] = '加速度';
-ability_tag_names[ability_tag_enum.hpRate] = '体力恢复';
+ability_tag_names[ability_tag_enum.hpRate] = '持久力';
 ability_tag_names[ability_tag_enum.temp] = '焦躁';
 ability_tag_names[ability_tag_enum.laneMove] = '突围';
+ability_tag_names[ability_tag_enum.ero] = '调教';
 
 class UmaSkill {
   static skill_name_enum = skill_name_enum;
   static skill_border_enum = skill_border_enum;
-  static rarity_enum = rarity_enum;
   static ability_time_usage_enum = ability_time_usage_enum;
   static ability_type_enum = ability_type_enum;
   static ability_usage_enum = ability_usage_enum;
@@ -355,7 +380,6 @@ class UmaSkill {
    * @param {string} desc
    * @param {number} group_id
    * @param {number} group_level
-   * @param {number} rarity
    * @param {number} category
    * @param {number} grade_value
    * @param {function[]} preconditions
@@ -383,7 +407,6 @@ class UmaSkill {
     desc,
     group_id,
     group_level,
-    rarity,
     category,
     grade_value,
     preconditions,
@@ -411,7 +434,6 @@ class UmaSkill {
     this.group_id = group_id;
     this.group_level = group_level;
     this.category = category;
-    this.rarity = rarity;
     this.grade_value = grade_value;
     this.preconditions = preconditions;
     this.conditions = conditions;
@@ -433,26 +455,41 @@ class UmaSkill {
     this.ability_tags = ability_tags;
   }
 
-  get_colored_name() {
-    const border_color = skill_border_colors[this.category & 0b111],
-      name_color = skill_name_colors[this.category >> 3];
-    const title_list = [];
-    title_list.push(
-      this.adapt_tags.map((e) => adapt_tag_names[e]).join('＞＜'),
-    );
-    title_list.push(
-      this.ability_tags.map((e) => ability_tag_names[e]).join('＞＜'),
-    );
+  /** @returns {string[]} */
+  get tags() {
+    const ret = [];
+    let adapt = this.adapt_tags.map((e) => adapt_tag_names[e]).join('＞＜');
+    let ability = this.ability_tags
+      .map((e) => ability_tag_names[e])
+      .join('＞＜');
+    if (adapt) {
+      ret.push(`＜${adapt}＞`);
+    }
+    if (ability) {
+      ret.push(`＜${ability}＞`);
+    }
+    return ret;
+  }
+
+  /** @param {PseudoUma} [owner] */
+  // eslint-disable-next-line no-unused-vars
+  get_colored_name(owner) {
+    const tags = this.tags;
+    const border_color = skill_border_colors[this.category & 0b111];
+    const name_color = skill_name_colors[this.category >> 3];
+    let title = `【${this.name}】（${skill_name_types[this.category >> 3]} · ${
+      skill_border_types[this.category & 0b111]
+    }）\n${this.desc}`;
+    if (tags.length > 0) {
+      title += `\n${tags.join('\n')}`;
+    }
     return [
       { content: '【', color: border_color },
       {
         color: name_color,
         content: this.name,
         fontWeight: 'bold',
-        title: `[${this.name}]：${this.desc}\n${title_list
-          .map((e) => (e === '' ? e : `＜${e}＞`))
-          .filter((e) => e)
-          .join('\n')}`,
+        title,
       },
       { content: '】', color: border_color },
     ];

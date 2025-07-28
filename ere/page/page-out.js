@@ -2,18 +2,16 @@ const era = require('#/era-electron');
 
 const sys_check_npc_working = require('#/system/chara/sys-check-npc-working');
 const { sys_handle_action } = require('#/system/sys-calc-base-cflag');
-const {
-  sys_check_act_disabled,
-  sys_get_move_cost,
-} = require('#/system/sys-calc-chara-param');
+const { sys_get_move_cost } = require('#/system/sys-calc-chara-param');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
 const print_chara_info = require('#/page/components/cur-chara-info');
 const npc_common = require('#/page/components/npc-common');
 const print_page_header = require('#/page/components/page-header');
+const MejiroCity = require('#/page/mejiro/mejiro-common');
 
 const { run_custom_daily } = require('#/event/daily/daily-factory');
-const GameGuides = require('#/event/others/game-guides');
+const game_guides = require('#/event/others/game-guides');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
@@ -23,21 +21,25 @@ const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const TokinoLifeMarks = require('#/data/event/life-event-marks/life-event-marks-301');
 const recruit_flags = require('#/data/event/recruit-flags');
-const YandereList = require('#/data/event/yandere-list');
+const yandere_list = require('#/data/event/yandere-list');
 const { location_enum } = require('#/data/locations');
 const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
 
+require('#/page/mejiro/free-mejiro');
+require('#/page/mejiro/call-of-mejiro');
+
 /**
- * @param {{s:number,d:boolean,l:number,n:string}[]} positions
+ * @param {{[a]:number,s:number,d:boolean,l:number,n:string,[t]:string}[]} positions
  * @param {EventMarks} event_marks
  * @returns {{accelerator:number,config:{buttonType:string,disabled:boolean|*,width:number},content:string,type:string}[]}
  */
 function get_position_buttons(positions, event_marks) {
   return positions.map((e, i) => ({
-    accelerator: i + 1,
+    accelerator: e.a ?? i + 1,
     config: {
       buttonType: event_marks.check(e.s) ? 'danger' : 'warning',
       disabled: e.d,
+      disableWarning: true,
       title: e.t,
       width: 4,
     },
@@ -46,111 +48,54 @@ function get_position_buttons(positions, event_marks) {
   }));
 }
 
-/**
- * @param {number} chara_id
- * @param {{stamina:number,time:number}} player_base
- * @param {{stamina:number,time:number}} chara_base
- * @returns {{s:number,d:boolean,l:number,n:string}[]}
- */
-function get_positions(chara_id, player_base, chara_base) {
-  return [
-    {
-      d: sys_check_act_disabled(
-        sys_get_move_cost(location_enum.river, chara_id),
-        player_base,
-        chara_base,
-      ),
-      l: location_enum.river,
-      n: '河堤',
-      s: event_hooks.out_river,
-    },
-    {
-      d:
-        era.get('flag:当前马币') < 10 ||
-        sys_check_act_disabled(
-          sys_get_move_cost(location_enum.shopping, chara_id),
-          player_base,
-          chara_base,
-        ),
-      l: location_enum.shopping,
-      n: '商店街',
-      s: event_hooks.out_shopping,
-    },
-    {
-      d: sys_check_act_disabled(
-        sys_get_move_cost(location_enum.church, chara_id),
-        player_base,
-        chara_base,
-      ),
-      l: location_enum.church,
-      n: '神社',
-      s: event_hooks.out_church,
-    },
-    {
-      d:
-        era.get('flag:当前马币') < 10 ||
-        sys_check_act_disabled(
-          sys_get_move_cost(location_enum.station, chara_id),
-          player_base,
-          chara_base,
-        ),
-      l: location_enum.station,
-      n: '车站',
-      s: event_hooks.out_station,
-    },
-    {
-      d: true,
-      l: location_enum.mejiro,
-      n: '目白城',
-      s: event_hooks.out_mejiro,
-      t: '暂未实装',
-    },
-  ];
-}
-
 async function out_page() {
-  let chara_id = era.get('flag:当前互动角色'),
-    vehicle;
+  let cid = era.get('flag:当前互动角色');
+  let vehicle;
   const player_base = {
-      stamina: era.get('base:0:体力'),
-      time: era.get('base:0:精力'),
-    },
-    chara_base = chara_id
+    stamina: era.get('base:0:体力'),
+    time: era.get('base:0:精力'),
+  };
+  const chara_base =
+    cid > 0
       ? {
-          stamina: era.get(`base:${chara_id}:体力`),
-          time: era.get(`base:${chara_id}:精力`),
+          stamina: era.get(`base:${cid}:体力`),
+          time: era.get(`base:${cid}:精力`),
         }
       : undefined;
 
   await era.clear();
   print_page_header();
-  const tokino_check = chara_id !== 301 && sys_check_npc_working(301);
-  print_chara_info(chara_id, chara_info_type.out, tokino_check && 301);
+  const tokino_check = cid !== 301 && sys_check_npc_working(301);
+  print_chara_info(cid, chara_info_type.out, tokino_check && 301);
   era.drawLine();
-  if (!(await sys_get_random_event(event_hooks.out_start)())) {
-    const event_marks = new EventMarks(chara_id);
-    let positions = get_positions(chara_id, player_base, chara_base);
-    vehicle = !chara_id && era.get('flag:单人载具');
+  if (!(await sys_get_random_event(event_hooks.out_start, cid)())) {
+    const event_marks = EventMarks.get(cid);
+    const positions = MejiroCity.instance().get_positions(
+      cid,
+      player_base,
+      chara_base,
+    );
+    vehicle = !cid && era.get('flag:单人载具');
     era.drawLine();
     if (vehicle) {
       era.print(
-        `${vehicle_verbs[vehicle]}着${vehicle_names[vehicle]}到达了学园大门……`,
+        `【${vehicle_verbs[vehicle]}着 ${vehicle_names[vehicle]} 到达了 学园大门】`,
       );
     }
-    await new GameGuides().out();
+    await game_guides.out();
     era.printMultiColumns([
       {
         content: [
           '要',
-          ...(chara_id
-            ? ['和 ', get_chara_talk(chara_id).get_colored_name(), ' 一起']
+          ...(cid
+            ? ['和 ', get_chara_talk(cid).get_colored_name(), ' 一起']
             : ['独自']),
           '去哪里？',
         ],
         type: 'text',
       },
       ...get_position_buttons(positions, event_marks),
-      ...(!chara_id && tokino_check
+      ...(!cid && tokino_check
         ? [
             {
               accelerator: 10,
@@ -169,7 +114,7 @@ async function out_page() {
         temp = {
           flag: true,
           chara: get_chara_talk(301),
-          title: new CharaTitles(301).get_colored_curr_title(),
+          title: CharaTitles.get(301).get_colored_curr_title(),
         };
         while (temp.flag) {
           const temp_flag = await npc_common(
@@ -178,10 +123,11 @@ async function out_page() {
             {
               async handle() {
                 await era.printAndWait([
+                  '【',
                   get_chara_talk(0).get_colored_name(),
                   ' 和 ',
                   temp.chara.get_colored_name(),
-                  ' 聊了会天……',
+                  ' 聊了会天】',
                 ]);
               },
               name: '聊天',
@@ -195,7 +141,7 @@ async function out_page() {
             },
             {
               async handle() {
-                const positions = get_positions(
+                const positions = MejiroCity.instance().get_positions(
                   301,
                   {
                     stamina: era.get('base:0:体力'),
@@ -215,7 +161,7 @@ async function out_page() {
                     ],
                     type: 'text',
                   },
-                  ...get_position_buttons(positions, new EventMarks(301)),
+                  ...get_position_buttons(positions, EventMarks.get(301)),
                   { accelerator: 999, content: '还是回去吧……', type: 'button' },
                 ]);
                 const aim = await era.input();
@@ -225,24 +171,27 @@ async function out_page() {
                     { type: 'divider' },
                     {
                       content: [
-                        '和 ',
+                        '【和 ',
                         temp.chara.get_colored_name(),
                         ' 一起',
                         vehicle
-                          ? `${vehicle_verbs[vehicle]}着${vehicle_names[vehicle]}`
+                          ? `${vehicle_verbs[vehicle]}着 ${vehicle_names[vehicle]} `
                           : '',
-                        `前往 ${positions[aim - 1].n}……`,
+                        `前往 ${positions[aim - 1].n}】`,
                       ],
                       type: 'text',
                     },
                   ]);
-                  era.println();
                   sys_handle_action(
                     sys_get_move_cost(positions[aim - 1].l, 301),
                     301,
                   );
                   era.set('flag:当前位置', positions[aim - 1].l);
-                  if (!(await sys_get_random_event(positions[aim - 1].s)())) {
+                  if (positions[aim - 1].l === location_enum.mejiro) {
+                    await MejiroCity.instance().page(301);
+                  } else if (
+                    !(await sys_get_random_event(positions[aim - 1].s, 301)())
+                  ) {
                     await run_custom_daily(301, positions[aim - 1].s);
                   }
                   era.set('flag:当前位置', location_enum.gate);
@@ -260,10 +209,10 @@ async function out_page() {
               : {
                   name: '「来帮帮我吧」（招募）',
                   handle() {
-                    temp.chara.name = era.set('callname:301:-2', '骏川缰绳');
+                    era.set('callname:301:-2', '骏川缰绳');
                     era.set('cflag:301:招募状态', recruit_flags.yes);
                     if (era.get('talent:301:病娇')) {
-                      new YandereList().push(301);
+                      yandere_list.push(301);
                     }
                     return era.printAndWait([
                       temp.chara.get_colored_name(),
@@ -274,11 +223,11 @@ async function out_page() {
             {
               handle() {
                 return era.printAndWait([
-                  '和 ',
+                  '【和 ',
                   temp.chara.get_colored_name(),
                   ' 道别后，',
                   get_chara_talk(0).get_colored_name(),
-                  ' 离开了……',
+                  ' 离开了】',
                 ]);
               },
               name: '再会',
@@ -293,41 +242,43 @@ async function out_page() {
       case 999:
         break;
       default:
-        vehicle = chara_id
-          ? era.get('flag:多人载具')
-          : era.get('flag:多人载具') || era.get('flag:单人载具');
+        vehicle =
+          cid > 0
+            ? era.get('flag:多人载具')
+            : era.get('flag:多人载具') || era.get('flag:单人载具');
         era.printMultiColumns([
           {
             type: 'divider',
           },
           {
             content: [
-              ...(chara_id
-                ? ['和 ', get_chara_talk(chara_id).get_colored_name(), ' 一起']
+              '【',
+              ...(cid > 0
+                ? ['和 ', get_chara_talk(cid).get_colored_name(), ' 一起']
                 : ['独自']),
               vehicle
-                ? `${vehicle_verbs[vehicle]}着${vehicle_names[vehicle]}`
+                ? `${vehicle_verbs[vehicle]}着 ${vehicle_names[vehicle]} `
                 : '',
-              `前往 ${positions[aim - 1].n}……`,
+              `前往 ${positions[aim - 1].n}】`,
             ],
             type: 'text',
           },
         ]);
-        era.println();
-        sys_handle_action(
-          sys_get_move_cost(positions[aim - 1].l, chara_id),
-          chara_id,
-        );
+        sys_handle_action(sys_get_move_cost(positions[aim - 1].l, cid), cid);
         era.set('flag:当前位置', positions[aim - 1].l);
-        if (!(await sys_get_random_event(positions[aim - 1].s)())) {
-          await run_custom_daily(chara_id, positions[aim - 1].s);
+        if (positions[aim - 1].l === location_enum.mejiro) {
+          await MejiroCity.instance().page(cid);
+        } else if (!(await sys_get_random_event(positions[aim - 1].s, cid)())) {
+          await run_custom_daily(cid, positions[aim - 1].s);
         }
         era.set('flag:当前位置', location_enum.gate);
     }
     era.drawLine();
-    await era.printAndWait('回去了……');
-    era.println();
-    await sys_get_random_event(event_hooks.back_school)({
+    await era.printAndWait('【折返了】');
+    await sys_get_random_event(
+      event_hooks.back_school,
+      cid,
+    )({
       loc: positions[aim - 1]?.l,
     });
   }

@@ -152,20 +152,21 @@ const chara_colors = {
   346: '#5cb1de',
   347: '#0ca545',
   348: '#c23c94',
+  349: '#c4b076',
   400: '#ffe840',
 };
 
 module.exports = {
   chara_colors,
-  /** @param {number} chara_id */
-  get_chara_color(chara_id) {
-    if (chara_id === undefined) {
+  /** @param {number} [cid] */
+  get_chara_color(cid) {
+    if (cid === undefined) {
       return '#9f9f9f';
     }
-    let ret = chara_colors[chara_id];
+    let ret = chara_colors[cid];
     ret = ret instanceof Array ? ret[0] : ret;
     if (!ret) {
-      const id_color = chara_id.toString(9).padStart(3, '0');
+      const id_color = cid.toString(9).padStart(3, '0');
       ret = `#${[id_color[0], id_color[1], id_color[2]]
         .map((e) => (0xff - Number(e) * 16).toString(16).padStart(2, '0'))
         .join('')}`;

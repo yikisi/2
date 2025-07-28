@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在比赛中段位于队伍中间时提升速度，若是中距离比赛则提升技能效果',
   10094,
   1,
-  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [() => true, () => true],

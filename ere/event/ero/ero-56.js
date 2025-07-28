@@ -11,8 +11,8 @@ const {
 } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
-const NormalCommandLines = require('#/event/ero/common-lines/normal/normal-common');
-const SleepCommandLines = require('#/event/ero/common-lines/sleep/sleep-common');
+const NormalCommandLines = require('#/event/ero/common/normal/normal-common');
+const SleepCommandLines = require('#/event/ero/common/sleep/sleep-common');
 const CustomizedEro = require('#/event/ero/ero-common');
 const KitaruNormalCommunications = require('#/event/ero/ero-lines-56/normal-communications');
 const KitaruNormalFucking = require('#/event/ero/ero-lines-56/normal-fucking');

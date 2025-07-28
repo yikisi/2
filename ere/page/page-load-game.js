@@ -1,4 +1,4 @@
-﻿const era = require('#/era-electron');
+const era = require('#/era-electron');
 
 const sys_add_titles = require('#/system/chara/sys-add-titles');
 const {
@@ -6,20 +6,27 @@ const {
   sys_reg_race,
 } = require('#/system/sys-calc-base-cflag');
 const filter_chara = require('#/system/sys-filter-chara');
+const { init_chara } = require('#/system/sys-init-chara');
 const sys_load_game = require('#/system/sys-load-game');
 
 const print_page_header = require('#/page/components/page-header');
 
+const { clean_actions } = require('#/event/basement-queue');
 const { get_custom_check } = require('#/event/check/check-factory');
 const { get_custom_daily } = require('#/event/daily/daily-factory');
 const { add_event, cb_enum, get: get_queue } = require('#/event/queue');
 
+const select_yes_or_no = require('#/page/components/select-yes-or-no');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
+const { action_type_enum } = require('#/data/basement-const');
 const { get_chara_color } = require('#/data/chara-colors');
 const CharaTitles = require('#/data/chara-titles');
+const { adaptability_colors } = require('#/data/color-const');
 const { trainer_salary } = require('#/data/const.json');
+const CharaInmon = require('#/data/ero/chara-inmon');
+const basement_owners = require('#/data/event/basement-owners');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
@@ -27,8 +34,9 @@ const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_trainer_title } = require('#/data/info-generator');
+const { location_enum } = require('#/data/locations');
 const { first_child_id, max_chara_id } = require('#/data/other-const');
-const { init_chara } = require('#/system/sys-init-chara');
+const { attr_names } = require('#/data/train-const');
 
 function check_titles(...ids) {
   ids
@@ -112,6 +120,7 @@ module.exports = async () => {
               ),
             ).load_talk();
           }
+          CharaInmon.clean();
           if (await era.loadData(ret)) {
             flag_load_game = false;
             sys_load_game();
@@ -254,7 +263,7 @@ module.exports = async () => {
               if (era.get('cflag:56:招募状态') === recruit_flags.yes) {
                 const title_name =
                     get_custom_check(56).get_personal_titles()[0],
-                  personal_title = new CharaTitles(56)
+                  personal_title = CharaTitles.get(56)
                     .get()
                     .find((e) => e.n === title_name);
                 if (personal_title !== undefined) {
@@ -262,7 +271,7 @@ module.exports = async () => {
                 }
               }
               if (era.get('cflag:88:招募状态') === recruit_flags.yes) {
-                const personal_title = new CharaTitles(56)
+                const personal_title = CharaTitles.get(56)
                   .get()
                   .find((e) => e.n === '黑翠千里行');
                 if (personal_title !== undefined) {
@@ -357,6 +366,7 @@ module.exports = async () => {
                   titles.forEach((t) => t.s === false && delete t.s);
                 }
                 if (
+                  e > 0 &&
                   e < 1000 &&
                   era.get(`cflag:${e}:种族`) > 0 &&
                   era.get(`cflag:${e}:招募状态`) === recruit_flags.yes &&
@@ -366,6 +376,94 @@ module.exports = async () => {
                   era.set(`cflag:${e}:育成回合计时`, 'x');
                 }
               });
+            }
+            if (version <= 1320) {
+              era.set('cflag:0:成长阶段', 5);
+              era.set(
+                'cflag:0:育成回合计时',
+                4800 + era.get('flag:当前回合数'),
+              );
+            }
+            if (version <= 1321) {
+              if (era.get('flag:当前位置') === location_enum.basement) {
+                const owners = basement_owners.get();
+                clean_actions(
+                  (a, i, l) =>
+                    (a.chara_id !== 0 &&
+                      owners.findIndex((e) => e === a.chara_id) === -1 &&
+                      a.type !== action_type_enum.rescue) ||
+                    l.findIndex(
+                      (e) => e.chara_id === a.chara_id && e.type === a.type,
+                    ) < i,
+                );
+              } else {
+                clean_actions(() => true);
+              }
+              era.getAddedCharacters().forEach((e) =>
+                attr_names.forEach((a) => {
+                  if (era.get(`abl:${e}:${a}训练等级`) > 5) {
+                    era.set(`abl:${e}:${a}训练等级`, 5);
+                  }
+                }),
+              );
+            }
+            if (version <= 1330) {
+              if (
+                era.get('cflag:0:模版角色') > 0 &&
+                era.get('flag:惩戒力度') === 0
+              ) {
+                era.set('flag:声望不足替换', 0);
+              }
+            }
+            if (version <= 1340) {
+              const chara_list = era.getAddedCharacters();
+              chara_list.forEach((cid) => {
+                era.set(`equip:${cid}:淫纹奴役`, era.get(`equip:${cid}:10`));
+                if (era.get(`exp:${cid}:性爱次数`) > 0) {
+                  era.set(`cstr:${cid}:初次潮吹经历`, []);
+                  era.set(`cstr:${cid}:无自觉初次潮吹经历`, []);
+                  era.set(`cstr:${cid}:初次饮爱液经历`, []);
+                  era.set(`cstr:${cid}:无自觉初次饮爱液经历`, []);
+                }
+                const tokino = CharaTitles.get(cid)
+                  .get()
+                  .find((t) => t.n === '傲视一切');
+                if (tokino !== undefined) {
+                  tokino.c = adaptability_colors.at(-2);
+                }
+              });
+              era.getAllCharacters().forEach((cid) => {
+                if (cid > 200 && chara_list.indexOf(cid) === -1) {
+                  init_chara(cid);
+                }
+              });
+              if (era.get('flag:惩戒力度') >= 2) {
+                era.set('talent:0:调教度', 5);
+              }
+              //              if (
+              //                !(await select_yes_or_no(
+              //                  '请选择目白城风格',
+              //                  '「自由」',
+              //                  '「慈爱」',
+              //                ))
+              //              ) {
+              era.set('flag:目白城风格', 1);
+              era.set('flag:目白城变量', { limit: 1 });
+              //              }
+              if (
+                await select_yes_or_no(
+                  '请选择带玩具参赛的影响',
+                  '无影响',
+                  '有影响',
+                )
+              ) {
+                era.set('flag:道具影响', 0);
+              } else {
+                era.set('flag:道具影响', -25);
+              }
+              if (era.get('flag:比赛难度') < 0) {
+                era.set('flag:比赛难度', -40);
+              }
             }
             return true;
           } else {

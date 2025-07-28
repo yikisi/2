@@ -7,40 +7,38 @@ const { item_enum, item_names } = require('#/data/ero/item-const');
 const { part_enum, part_touch } = require('#/data/ero/part-const');
 
 /**
- * @param {number} chara_id
- * @param {number|string} part_or_item_name
+ * @param {number} cid
+ * @param {number|string} p_or_i
  */
-function remove_item(chara_id, part_or_item_name) {
-  if (typeof part_or_item_name === 'number') {
-    const touched_part = era.get(
-      `tcvar:${chara_id}:${part_touch[part_or_item_name]}接触部位`,
-    );
-    if (touched_part.part === part_enum.item) {
-      clean_part(new EroParticipant(chara_id, part_or_item_name));
-      era.set(`tequip:${chara_id}:${part_touch[part_or_item_name]}`, -1);
-      if (touched_part.owner === 0) {
-        switch (touched_part.item) {
+function remove_item(cid, p_or_i) {
+  if (typeof p_or_i === 'number') {
+    const touch = era.get(`tcvar:${cid}:${part_touch[p_or_i]}接触部位`);
+    if (touch.part === part_enum.item) {
+      clean_part(new EroParticipant(cid, p_or_i));
+      era.set(`tequip:${cid}:${part_touch[p_or_i]}`, -1);
+      if (touch.owner === 0) {
+        switch (touch.item) {
           case item_enum.anal_beads:
           case item_enum.butt_plug:
           case item_enum.dildo:
           case item_enum.gag:
           case item_enum.milk_pump:
           case item_enum.artificial_virgin:
-            era.add(`item:${item_names[touched_part.item]}`, 1);
+            era.add(`item:${item_names[touch.item]}`, 1);
             break;
           case item_enum.clamps:
           case item_enum.love_eggs:
             era.add(
-              `item:${item_names[touched_part.item]}`,
-              1 + (part_or_item_name === part_enum.breast),
+              `item:${item_names[touch.item]}`,
+              1 + (p_or_i === part_enum.breast),
             );
         }
       }
     }
-  } else if (era.get(`tequip:${chara_id}:${part_or_item_name}`) !== -1) {
-    era.set(`tequip:${chara_id}:${part_or_item_name}`, -1);
-    if (chara_id) {
-      era.add(`item:${part_or_item_name}`, 1);
+  } else if (era.get(`tequip:${cid}:${p_or_i}`) !== -1) {
+    era.set(`tequip:${cid}:${p_or_i}`, -1);
+    if (cid) {
+      era.add(`item:${p_or_i}`, 1);
     }
   }
 }
@@ -48,33 +46,33 @@ function remove_item(chara_id, part_or_item_name) {
 module.exports = {
   /** @param {number} ids */
   init_items(...ids) {
-    ids.forEach((chara_id) =>
+    ids.forEach((cid) =>
       new Array(8)
         .fill(0)
-        .forEach((_, item) => era.set(`tequip:${chara_id}:${item}`, -1)),
+        .forEach((_, item) => era.set(`tequip:${cid}:${item}`, -1)),
     );
   },
   /**
-   * @param {number} chara_id
+   * @param {number} cid
    * @param {number|string} part
    * @param {number} item
    */
-  use_item(chara_id, part, item) {
+  use_item(cid, part, item) {
     const chara_part = typeof part === 'string' ? part : part_touch[part];
-    era.set(`tequip:${chara_id}:${chara_part}`, item);
+    era.set(`tequip:${cid}:${chara_part}`, item);
   },
   remove_item,
   /** @param {number} ids */
   remove_all_items(...ids) {
-    ids.forEach((chara_id) => {
-      remove_item(chara_id, part_enum.mouth);
-      remove_item(chara_id, part_enum.breast);
-      remove_item(chara_id, part_enum.penis);
-      remove_item(chara_id, part_enum.clitoris);
-      remove_item(chara_id, part_enum.virgin);
-      remove_item(chara_id, part_enum.anal);
-      remove_item(chara_id, '项圈');
-      remove_item(chara_id, '眼罩');
+    ids.forEach((cid) => {
+      remove_item(cid, part_enum.mouth);
+      remove_item(cid, part_enum.breast);
+      remove_item(cid, part_enum.penis);
+      remove_item(cid, part_enum.clitoris);
+      remove_item(cid, part_enum.virgin);
+      remove_item(cid, part_enum.anal);
+      remove_item(cid, '项圈');
+      remove_item(cid, '眼罩');
     });
   },
 };

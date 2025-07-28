@@ -23,13 +23,13 @@ module.exports = {
     queue.splice(index + 1, 0, action);
   },
   /**
-   * @param {function(BasementAction):boolean} filter_cb
+   * @param {function(BasementAction,Number=,BasementAction[]=):boolean} filter_cb
    * @returns {BasementAction[]}
    */
   clean_actions(filter_cb) {
     const ret = [],
       rest = [];
-    queue.forEach((e) => (filter_cb(e) ? ret : rest).push(e));
+    queue.forEach((e, i, l) => (filter_cb(e, i, l) ? ret : rest).push(e));
     queue = set('flag:地下室行动', rest);
     return ret;
   },

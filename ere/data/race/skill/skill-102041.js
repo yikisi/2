@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '终盘初始段位于前方时，向前突进大幅提高加速力，若是擅长的距离还会进一步提高速度',
   10204,
   1,
-  5,
   UmaSkill.get_skill_color(
     UmaSkill.skill_name_enum.speed,
     UmaSkill.skill_border_enum.spe,

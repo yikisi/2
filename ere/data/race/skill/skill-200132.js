@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '稍微擅长根干距离（400m的倍数）的比赛',
   20013,
   1,
-  UmaSkill.rarity_enum.normal,
   0,
   129,
   [() => true, () => true],

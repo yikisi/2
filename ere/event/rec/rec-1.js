@@ -1,6 +1,5 @@
 /**
  * @file 特别周 - 招募
- *
  * @author wwm
  */
 const era = require('#/era-electron');
@@ -12,8 +11,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const recruit_flags = require('#/data/event/recruit-flags');
 
 module.exports = class extends CustomizedRecruit {
-  // eslint-disable-next-line no-unused-vars
-  async recruit(stage, event_object) {
+  async recruit() {
     const me = get_chara_talk(0),
       spe = get_chara_talk(1);
     let temp;
@@ -63,7 +61,7 @@ module.exports = class extends CustomizedRecruit {
     );
     await era.printAndWait(`（那个方向，应该是校门的反方向吧……）`);
     await era.printAndWait(
-      `然后${me.name}就看到已经跑出一段距离的小马娘又180度冲了回来，一边喊着“不好意思”，一边从人群的另一边挤了出去，很快就跑得不见人影了。`,
+      `然后${me.name}就看到已经跑出一段距离的小马娘又180度冲了回来，一边喊着「不好意思」，一边从人群的另一边挤了出去，很快就跑得不见人影了。`,
     );
     await era.printAndWait(
       `${me.name}环顾四周，其他有潜力的马娘也已经被感兴趣的训练员们搭讪了，结果今天真的一无所获了。`,
@@ -167,6 +165,5 @@ module.exports = class extends CustomizedRecruit {
     await spe.say_and_wait(`谢谢你，训练员！我会努力的！`);
     era.set(`cflag:1:招募状态`, recruit_flags.yes);
     await this.recruit_end();
-    return true;
   }
 };

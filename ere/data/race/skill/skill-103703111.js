@@ -3,10 +3,9 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   103703111,
   'Ritter von Fuchu',
-  '比赛中盘一段时间内少量提升速度，并少量回复体力',
+  '比赛中盘一段时间内少量提升速度，并少量回复持久力',
   10370311,
   1,
-  UmaSkill.rarity_enum.evol,
   3,
   508,
   [() => true, () => true],

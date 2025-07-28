@@ -10,7 +10,7 @@ const { sys_love_uma_in_event } = require('#/system/sys-calc-chara-others');
 const CustomizedLove = require('#/event/love/love-common');
 const punish_rejecting_love = require('#/event/love/snippets/punish-rejecting-love');
 const { add_event } = require('#/event/queue');
-const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
+const add_jewel_reward = require('#/event/snippets/add-jewel-reward');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
@@ -20,7 +20,7 @@ const chara_colors = require('#/data/chara-colors').chara_colors[7];
 const { buff_colors } = require('#/data/color-const');
 const { lust_border } = require('#/data/ero/orgasm-const');
 const event_hooks = require('#/data/event/event-hooks');
-const YandereList = require('#/data/event/yandere-list');
+const yandere_list = require('#/data/event/yandere-list');
 
 module.exports = class extends CustomizedLove {
   async 49(gold_ship, me, callname) {
@@ -64,7 +64,7 @@ module.exports = class extends CustomizedLove {
       );
     }
     era.println();
-    if (era.get('exp:7:性爱次数')) {
+    if (era.get('exp:7:性爱次数') > 0) {
       await gold_ship.print_and_wait(
         `虽然是马后炮，但 ${me.actual_name} 确实能在床上为自己发烫的娇躯带来抚慰。`,
       );
@@ -215,7 +215,7 @@ module.exports = class extends CustomizedLove {
       await era.printAndWait(
         `只见 ${gold_ship.name} 嘿嘿一个坏笑，便把 ${me.name} 扑倒到沙发上。`,
       );
-      await quick_into_sex(7, true);
+      await quick_into_sex(7, 7, true);
       era.drawLine();
       await era.printAndWait(
         `这场激烈的马儿跳无疑是一场畅快淋漓的体验，原先清新的训练员室如今满布着精液与淫水的腥臭味。${me.name} 气喘吁吁地躺进 ${gold_ship.name} 的怀抱，吸入${gold_ship.sex}时刻散发的荷尔蒙，脑袋里一直在思考刚才到底发生了什么事。`,
@@ -296,9 +296,9 @@ module.exports = class extends CustomizedLove {
         );
         era.println();
         if (ret === 1) {
-          await add_juel_out_of_train(7, '顺从', 100);
+          add_jewel_reward(7, '顺从', 100);
         } else {
-          await add_juel_out_of_train(7, '施虐快感', 100);
+          add_jewel_reward(7, '施虐快感', 100);
         }
         await sys_love_uma_in_event(7);
         era.set('flag:当前互动角色', 7);
@@ -552,7 +552,7 @@ module.exports = class extends CustomizedLove {
       ]);
     }
     if (ret[4] !== 3) {
-      new YandereList().push(7);
+      yandere_list.push(7);
     }
     await era.waitAnyKey();
     if (ret[1] === 2) {

@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛中触发了13次技能的话，向前突进',
   20260,
   2,
-  UmaSkill.rarity_enum.gold,
   17,
   508,
   [() => true, () => true],

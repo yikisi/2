@@ -40,7 +40,7 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_and_get_titles(aim_check) {
-    const races = new RaceHistory(30).get(),
+    const races = RaceHistory.get(30).get(),
       titles = [];
     if (
       new RiceEduMarks().g3_count >= 23 &&
@@ -88,7 +88,7 @@ module.exports = class extends CustomizedCheck {
         event_hooks.office_study,
         event_obj,
       );
-      if (new RaceHistory(30).check_begin()) {
+      if (RaceHistory.get(30).check_begin()) {
         check_and_add_event(
           edu_marks,
           edu_weeks,
@@ -114,7 +114,7 @@ module.exports = class extends CustomizedCheck {
           break;
         case 47 + 46: // 劲敌的不幸
           if (
-            check_aim_race(new RaceHistory(30).get(), race_enum.kiku_sho, 1)
+            check_aim_race(RaceHistory.get(30).get(), race_enum.kiku_sho, 1)
           ) {
             add_event(event_hooks.school_atrium, event_obj_special);
           }
@@ -144,7 +144,7 @@ module.exports = class extends CustomizedCheck {
 
   get_edu_aims() {
     const buffer = [],
-      races = new RaceHistory(30).get();
+      races = RaceHistory.get(30).get();
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.sprg_sta, 1, 5));
     buffer.push(check_aim_and_get_entry(races, race_enum.toky_yus, 1, 5));
@@ -160,13 +160,13 @@ module.exports = class extends CustomizedCheck {
     return ['永恒碧蓝'];
   }
 
-  is_aim_race(race, edu_weeks) {
+  is_aim_race(race, edu_weeks, rank) {
     if (
       race === race_enum.tenn_sho &&
-      !check_aim_race(new RaceHistory(30).get(), race_enum.tenn_sho, 1, 1)
+      !check_aim_race(RaceHistory.get(30).get(), race_enum.tenn_sho, 1, 1)
     ) {
       return -4;
     }
-    return aim_races[`${edu_weeks}_${race}`] || aim_races[race];
+    return super.is_aim_race(race, edu_weeks, rank);
   }
 };

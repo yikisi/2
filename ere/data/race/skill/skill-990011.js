@@ -6,12 +6,11 @@ module.exports = new UmaSkill(
   '比赛终盘时极大幅度提高速度并恢复体力',
   99001,
   1,
-  UmaSkill.rarity_enum.spe_r,
   UmaSkill.get_skill_color(
     UmaSkill.skill_name_enum.speed,
     UmaSkill.skill_border_enum.cheat,
   ),
-  0,
+  1,
   [() => true, () => true],
   [(args) => args.phase >= 2, () => false],
   [60, 0],
@@ -24,7 +23,7 @@ module.exports = new UmaSkill(
     [
       UmaSkill.ability_type_enum.CurrentSpeedWithNaturalDeceleration,
       UmaSkill.ability_type_enum.HpRate,
-      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.LaneMoveSpeed,
     ],
     [
       UmaSkill.ability_type_enum.no,
@@ -45,14 +44,14 @@ module.exports = new UmaSkill(
     ],
   ],
   [
-    [10, 1, 0],
+    [30, 1, 1],
     [0, 0, 0],
   ],
   [
     [
       UmaSkill.target_type_enum.Self,
       UmaSkill.target_type_enum.Self,
-      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.Self,
     ],
     [
       UmaSkill.target_type_enum.no,

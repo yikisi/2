@@ -6,16 +6,13 @@ const {
 } = require('#/system/sys-calc-chara-others');
 
 const CustomizedEdu = require('#/event/edu/edu-common');
-const {
-  good_end,
-  handle_debuff,
-  normal_end,
-} = require('#/event/edu/edu-events-17/snippets');
+const { good_end, handle_debuff, normal_end } = require('#/event/snippets/17');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const CharaTalk = require('#/utils/chara-talk');
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 
 const color_17 = require('#/data/chara-colors').chara_colors[17];
@@ -34,8 +31,8 @@ module.exports = class extends CustomizedEdu {
             emperor: 9017,
             luna: 17,
           },
-      luna_talk = new CharaTalk(luna).set_color(color_17[0]),
-      emperor_talk = new CharaTalk(emperor).set_color(color_17[1]),
+      luna_talk = get_chara_talk(luna),
+      emperor_talk = get_chara_talk(emperor),
       chara = luna === 17 ? luna_talk : emperor_talk,
       edu_weeks = era.get('cflag:17:育成回合计时');
     if (extra_flag.rank === 1) {

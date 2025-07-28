@@ -8,43 +8,11 @@ let global_object = {};
 
 const sys_personal_achievement = {
   /**
-   * @param {number} chara_id
+   * @param {number} cid
    * @returns {number}
    */
-  get(chara_id) {
-    return global_object[chara_id] || 0;
-  },
-  /**
-   * @param {number} chara_id
-   * @param {number} _val
-   */
-  set(chara_id, _val) {
-    if (!global_object[chara_id] && _val) {
-      const color = get_chara_color(chara_id),
-        title = era.get(`staticcstr:${chara_id}:称号`);
-      era.notify(
-        [
-          {
-            color,
-            content: era.get(`static:${chara_id}:name`),
-            fontSize: '1rem',
-          },
-          '：',
-          {
-            color,
-            content: title,
-            fontSize: '1rem',
-            fontWeight: 'bold',
-          },
-          { isBr: true },
-          title_desc[title] || '在一次育成周期内赢取了六次以上的G1比赛胜利',
-        ],
-        '获得新成就！',
-        'success',
-        50000,
-      );
-    }
-    return (global_object[chara_id] = _val);
+  get(cid) {
+    return global_object[cid] || 0;
   },
   init() {
     return (global_object =
@@ -54,6 +22,38 @@ const sys_personal_achievement = {
     return Object.entries(global_object)
       .filter((e) => e[1])
       .map((e) => Number(e[0]));
+  },
+  /**
+   * @param {number} cid
+   * @param {number} _val
+   */
+  set(cid, _val) {
+    if (!global_object[cid] && _val) {
+      const color = get_chara_color(cid),
+        title = era.get(`staticcstr:${cid}:称号`);
+      era.notify(
+        [
+          {
+            color,
+            content: `[${title}] `,
+            fontSize: '1rem',
+          },
+          {
+            color,
+            content: era.get(`static:${cid}:name`),
+            fontSize: '1rem',
+            fontWeight: 'bold',
+          },
+          '：',
+          { isBr: true },
+          title_desc[title] || '在一次育成周期内赢取了六次以上的G1比赛胜利',
+        ],
+        '获得新成就！',
+        'success',
+        50000,
+      );
+    }
+    return (global_object[cid] = _val);
   },
 };
 

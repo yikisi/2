@@ -1,23 +1,25 @@
-const { get } = require('#/era-electron');
-
 const MecNpc = require('#/event/mec/mec-npc');
 
 const { get_chara_color } = require('#/data/chara-colors');
+const RikoLifeMarks = require('#/data/event/life-event-marks/life-event-marks-306');
 
 module.exports = class extends MecNpc {
   get_take_care_buff(chara_id) {
+    let base = 50 + 30 * new RikoLifeMarks().buff;
     if (chara_id === 202 || chara_id === 203) {
-      return 70;
+      return base + 20;
     }
     return 50;
   }
 
   get_talents() {
+    const buff = this.get_take_care_buff();
     return [
       {
         color: get_chara_color(this.id),
-        content: get(`staticcstr:${this.id}:称号`),
-        title: '训练员头衔对训练成功率与效果加成上升一级，照看时训练效果+50%。',
+        content: '铁面代理',
+        fontWeight: buff > 50 ? 'bold' : undefined,
+        title: `训练员头衔对训练成功率与效果加成上升一级，照看时训练效果+${buff}%。`,
       },
     ];
   }

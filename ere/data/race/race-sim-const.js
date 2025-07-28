@@ -4,6 +4,7 @@
   lost_stamina: 0,
   final_push: 0,
   compete_fight: 0,
+  orgasm: 0,
   blocked: 0,
   temp_wrong_style: 0,
   loc_mind_nige_ex: 0,
@@ -11,9 +12,9 @@
   temptation: 0,
   loc_mind_nige_over_take: 0,
   loc_mind_nige_speed_up: 0,
-  temp_end: 0,
   loc_mind_other_quick: 0,
   loc_mind_other_relax: 0,
+  temp_end: 0,
   temp_continue: 0,
 };
 Object.keys(race_event_enum).forEach((k, i) => (race_event_enum[k] = i));
@@ -27,7 +28,7 @@ module.exports = {
   mod_acceleration_adapt_distance: [0.4, 0.5, 0.6, 1, 1, 1, 1, 1],
   mod_acceleration_adapt_ground: [0.1, 0.3, 0.5, 0.7, 0.8, 0.9, 1, 1.05],
   mod_acceleration_style: [
-    [1.17, 0.94, 0.956],
+    [1.17, 0.94, 0.96],
     [1, 1, 0.996],
     [0.985, 1, 0.996],
     [0.938, 1, 1],
@@ -43,10 +44,10 @@ module.exports = {
   mod_stamina_cost_mess_grass: [1, 1, 1, 1.02, 1.02],
   mod_velocity_final_adapt_distance: [0.1, 0.2, 0.4, 0.6, 0.8, 0.9, 1, 1.05],
   mod_velocity_style: [
-    [1.063, 0.97, 0.96],
-    [1, 0.984, 0.964],
-    [0.984, 0.99, 0.972],
-    [0.938, 0.996, 0.991],
+    [1.063, 0.969, 0.956],
+    [1, 0.9828, 0.962],
+    [0.978, 0.9906, 0.9749],
+    [0.938, 0.9976, 0.994],
     [0.931, 1, 1],
   ],
   race_de_acc: [-1.2, -0.8, -1, -0.5, -1.2],

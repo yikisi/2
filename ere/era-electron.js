@@ -101,7 +101,7 @@
 /**
  * @typedef WholeImageObject
  * @property {WholeImageConfig} [config]
- * @property {string|string[]} name
+ * @property {string|string[]} names
  * @property {'image.whole'} type
  */
 
@@ -398,12 +398,12 @@ const era = {
   printProgress(percentage, inContent, outContent, config) {},
   /**
    * print the whole image
-   * @param {string|string[]} name REQUIRED
+   * @param {string|string[]} names REQUIRED
    * @param {WholeImageConfig} [config]
    * @returns {number} line number of the printed
    */
   // eslint-disable-next-line no-unused-vars
-  printWholeImage(name, config) {},
+  printWholeImage(names, config) {},
   /**
    * print a line break, if just used to print enter at the end of a line, please use print('*** \n') to replace
    * @returns {number} line number of the printed
@@ -467,10 +467,11 @@ const era = {
    */
   async saveGlobal() {},
   /**
+   * @template T
    * set a variable by name
    * @param {string} varName REQUIRED the name of variable, String, like 'callname:1:2'
-   * @param {any} val REQUIRED the new value of the variable
-   * @returns {any|undefined} the new value of the variable, or undefined if failed
+   * @param {T} val REQUIRED the new value of the variable
+   * @returns {T} the new value of the variable, or undefined if failed
    */
   // eslint-disable-next-line no-unused-vars
   set(varName, val) {},
@@ -534,7 +535,7 @@ const era = {
    * @returns {boolean} if debug
    */
   toggleDebug() {},
-  version: { sdk: '3.6.0', engine: undefined },
+  version: { sdk: '4.1.1', engine: undefined },
   /**
    * wait any key from user
    * @returns {Promise<void>} a promise of nothing, please use await

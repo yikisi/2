@@ -980,10 +980,10 @@ module.exports = class extends CustomizedDaily {
     );
   }
 
-  async celebration() {
+  async celebration(hook) {
     const date = (era.get('flag:当前回合数') - 1) % 48;
     if (!celebration_handlers[date]) {
-      return await super.celebration();
+      return await super.celebration(hook);
     }
     await celebration_handlers[date](
       get_chara_talk(this.id),

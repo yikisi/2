@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '位于先头集团时，在比赛后半的第三弯道处会略微加快速度；或者，在终盘身处看台对面时会更有力地向前迈进',
   90068,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   180,
   [() => true, () => true],

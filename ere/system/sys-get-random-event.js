@@ -19,23 +19,17 @@ cb_dict[cb_enum.love] = run_custom_love;
 /**
  * get a random or character's specified event from stage's queue
  * @param {number} stage
- * @param {boolean|number} [random_or_chara_id]
+ * @param {boolean|number} [random_or_cid]
  * @returns {undefined|function(*?):Promise}
  */
-function sys_get_random_event(stage, random_or_chara_id) {
-  const event_object = (
-    typeof random_or_chara_id === 'number'
-      ? get_chara_event_object
-      : get_random_event_object
-  )(stage, random_or_chara_id);
-  if (event_object && cb_dict[event_object.type]) {
-    return (extra_flag) =>
-      cb_dict[event_object.type](
-        event_object.chara_id,
-        stage,
-        extra_flag,
-        event_object,
-      );
+function sys_get_random_event(stage, random_or_cid) {
+  const event = (
+    random_or_cid === true || !random_or_cid
+      ? get_random_event_object
+      : get_chara_event_object
+  )(stage, random_or_cid);
+  if (event && cb_dict[event.type]) {
+    return (extra) => cb_dict[event.type](event.chara_id, stage, extra, event);
   }
   return stage === event_hooks.week_start || stage === event_hooks.week_end
     ? undefined

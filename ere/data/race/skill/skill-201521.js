@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '更容易占据有利位置',
   20152,
   2,
-  UmaSkill.rarity_enum.normal,
   0,
   217,
   [() => true, () => true],

@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '最终弯道后半处于好位置时会增加动力，持续提升加速度',
   10010,
   1,
-  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [() => true, () => true],

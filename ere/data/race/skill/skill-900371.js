@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '冷静地进行比赛，并在最终直线上位于第三名以后的话，速度稍微提升若是长时间处于中间集团，改为小幅提升',
   90037,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   180,
   [() => true, () => true],

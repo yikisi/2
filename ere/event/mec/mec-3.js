@@ -35,17 +35,17 @@ module.exports = class extends CustomizedMec {
   get_race_contestants(info) {
     switch (era.get('flag:当前赛事')) {
       case race_enum.tenn_spr:
-        return [new LegendUmaSelector(13, 1.2)];
+        return [new LegendUmaSelector(13, 1.1)];
       case race_enum.tenn_sho:
         if (era.get('cflag:3:育成回合计时') > 96) {
-          return [64, 65].map((e) => new LegendUmaSelector(e, 1.1));
+          return [64, 65].map((e) => new LegendUmaSelector(e, 1.05));
         }
         break;
       case race_enum.arim_kin:
         if (era.get('cflag:3:育成回合计时') > 96) {
           return [
-            new LegendUmaSelector(23, 1.2),
-            ...[35, 60, 64].map((e) => new LegendUmaSelector(e, 1.1)),
+            new LegendUmaSelector(23, 1.1),
+            ...[35, 60, 64].map((e) => new LegendUmaSelector(e, 1.05)),
           ];
         }
     }
@@ -53,13 +53,13 @@ module.exports = class extends CustomizedMec {
   }
 
   get_race_finish_report(uma, race_id) {
-    if (race_id === race_enum.arim_kin && era.get('status:3:腿伤')) {
+    if (race_id === race_enum.arim_kin && era.get(`status:${this.id}:腿伤`)) {
       return [
         uma.get_colored_name(),
         { color: uma.color, content: '，奇迹的复活！' },
       ];
     } else if (
-      era.get('cflag:3:育成回合计时') > 96 &&
+      era.get(`cflag:${this.id}:育成回合计时`) > 96 &&
       race_infos[race_id]?.distance === distance_enum.long
     ) {
       return [

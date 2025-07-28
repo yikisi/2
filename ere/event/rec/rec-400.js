@@ -21,7 +21,7 @@ module.exports = class extends CustomizedRecruit {
     const silence = get_chara_talk(400),
       me = get_chara_talk(0);
     await era.printAndWait([
-      '这个一个微凉的清晨，',
+      '这是一个微凉的清晨，',
       me.get_colored_name(),
       ' 起床之后发现时间还早，在稍作洗漱之后就换上了日常工作穿的普通装束准备在学院内走一走。',
     ]);

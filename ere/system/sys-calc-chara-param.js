@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const { sys_check_yandere } = require('#/system/chara/sys-calc-cheat');
 const {
   check_pregnant_unprotect,
 } = require('#/system/ero/sys-calc-ero-status');
@@ -21,45 +22,42 @@ const {
 } = require('#/data/train-const');
 
 /**
- * @param {number} chara_id
+ * @param {number} cid
  * @returns {boolean}
  */
-function sys_check_awake(chara_id) {
+function sys_check_awake(cid) {
+  return !era.get(`status:${cid}:沉睡`) && !era.get(`status:${cid}:马跳S`);
+}
+
+/**
+ * @param {number} cid
+ * @returns {boolean}
+ */
+function sys_check_train_enabled(cid = 0) {
   return (
-    !era.get(`status:${chara_id}:沉睡`) && !era.get(`status:${chara_id}:马跳S`)
+    era.get(`cflag:${cid}:种族`) > 0 &&
+    !era.get(`status:${cid}:伤病`) &&
+    (era.get(`cflag:${cid}:育成回合计时`) < 3 * 48 || !cid) &&
+    (!era.get(`status:${cid}:摸鱼`) ||
+      era.get('cflag:0:位置') === era.get(`cflag:${cid}:位置`)) &&
+    era.get(`base:${cid}:压力`) < pressure_border.depression &&
+    era.get(`base:${cid}:性欲`) < lust_border.want_sex &&
+    get_custom_mec(cid).is_train_enabled()
   );
 }
 
 /**
- * @param {number} chara_id
- * @returns {boolean}
- */
-function sys_check_train_enabled(chara_id) {
-  const tmp = chara_id || 0;
-  return (
-    (tmp || era.get(`cflag:${tmp}:种族`)) &&
-    !era.get(`status:${tmp}:伤病`) &&
-    (era.get(`cflag:${tmp}:育成回合计时`) < 3 * 48 || !chara_id) &&
-    (!era.get(`status:${tmp}:摸鱼`) ||
-      era.get('cflag:0:位置') === era.get(`cflag:${tmp}:位置`)) &&
-    era.get(`base:${tmp}:压力`) < pressure_border.depression &&
-    era.get(`base:${tmp}:性欲`) < lust_border.want_sex &&
-    get_custom_mec(chara_id).is_train_enabled()
-  );
-}
-
-/**
- * @param {number} chara_id
+ * @param {number} cid
  * @returns {number}
  */
-function sys_get_debuff(chara_id) {
-  const pregnant_stage = era.get(`cflag:${chara_id}:妊娠阶段`);
-  const lust = era.get(`base:${chara_id}:性欲`);
+function sys_get_debuff(cid) {
+  const pregnant_stage = era.get(`cflag:${cid}:妊娠阶段`);
+  const lust = era.get(`base:${cid}:性欲`);
   let ret = 0;
   if (
-    era.get(`status:${chara_id}:超马跳Z`) ||
-    era.get(`status:${chara_id}:马跳S`) ||
-    era.get(`status:${chara_id}:沉睡`)
+    era.get(`status:${cid}:超马跳Z`) ||
+    era.get(`status:${cid}:马跳S`) ||
+    era.get(`status:${cid}:沉睡`)
   ) {
     ret = 1000;
   } else if (
@@ -69,19 +67,19 @@ function sys_get_debuff(chara_id) {
   ) {
     ret = 0.5;
   } else if (
-    era.get(`status:${chara_id}:发情`) ||
-    era.get(`status:${chara_id}:马跳Z`) ||
-    era.get(`status:${chara_id}:弗隆K`) ||
-    era.get(`status:${chara_id}:弗隆P`) ||
+    era.get(`status:${cid}:发情`) ||
+    era.get(`status:${cid}:马跳Z`) ||
+    era.get(`status:${cid}:弗隆K`) ||
+    era.get(`status:${cid}:弗隆P`) ||
     lust >= lust_border.want_sex ||
     // 安定期惩罚一般
     (pregnant_stage & 0b1000) > 0
   ) {
     ret = 0.2;
   } else if (
-    era.get(`status:${chara_id}:经期`) ||
-    era.get(`status:${chara_id}:熬夜`) ||
-    era.get(`status:${chara_id}:发胖`) ||
+    era.get(`status:${cid}:经期`) ||
+    era.get(`status:${cid}:熬夜`) ||
+    era.get(`status:${cid}:发胖`) ||
     lust >= lust_border.absent_mind ||
     // 孕早期惩罚较小
     (pregnant_stage & 0b100) > 0
@@ -89,17 +87,17 @@ function sys_get_debuff(chara_id) {
     ret = 0.1;
   }
   ret +=
-    0.1 * era.get(`status:${chara_id}:领域`) +
-    get_custom_mec(chara_id).get_action_debuff();
+    0.1 * era.get(`status:${cid}:领域`) +
+    get_custom_mec(cid).get_action_debuff();
   return ret;
 }
 
 /**
  * @param {number} location
- * @param {number} [chara_id]
+ * @param {number} cid
  * @returns {{stamina:*,time:*}}
  */
-function sys_get_move_cost(location, chara_id) {
+function sys_get_move_cost(location, cid = 0) {
   const move_cost = location_move_cost[location];
   const ret = {
     stamina: move_cost,
@@ -119,10 +117,10 @@ function sys_get_move_cost(location, chara_id) {
     case location_enum.trainer:
     case location_enum.visitor:
     case location_enum.clinic:
-      if (chara_id) {
+      if (cid > 0) {
         is_walk = true;
-        speed = Math.min(speed, era.get(`base:${chara_id}:速度`));
-      } else if ((temp = era.get('flag:单人载具'))) {
+        speed = Math.min(speed, era.get(`base:${cid}:速度`));
+      } else if ((temp = era.get('flag:单人载具')) > 0) {
         ratio = vehicle_influences[temp];
       } else {
         is_walk = true;
@@ -133,15 +131,15 @@ function sys_get_move_cost(location, chara_id) {
     case location_enum.church:
     case location_enum.station:
     case location_enum.mejiro:
-      if (chara_id) {
-        if ((temp = era.get('flag:多人载具'))) {
+      if (cid > 0) {
+        if ((temp = era.get('flag:多人载具')) > 0) {
           ratio = vehicle_influences[temp];
         } else {
           is_walk = true;
-          speed = Math.min(speed, era.get(`base:${chara_id}:速度`));
+          speed = Math.min(speed, era.get(`base:${cid}:速度`));
         }
       } else if (
-        (temp = era.get('flag:多人载具') || era.get('flag:单人载具'))
+        (temp = era.get('flag:多人载具') || era.get('flag:单人载具')) > 0
       ) {
         ratio = vehicle_influences[temp];
       } else {
@@ -161,72 +159,79 @@ module.exports = {
   /**
    * @param {{stamina:number,time:number}} cost
    * @param {{stamina:number,time:number}} player_base
-   * @param {{stamina:number,time:number}} [chara_base]
+   * @param {{stamina:number,time:number}} [chara_base={}]
+   * @return {number}
    */
-  sys_check_act_disabled(cost, player_base, chara_base) {
-    return (
-      player_base.stamina < cost.stamina ||
-      player_base.time < cost.time ||
-      (chara_base &&
-        (chara_base.stamina < cost.stamina || chara_base.time < cost.time))
-    );
+  sys_check_act_disabled(cost, player_base, chara_base = {}) {
+    const checks = [
+      player_base.stamina < cost.stamina,
+      player_base.time < cost.time,
+      chara_base.stamina < cost.stamina,
+      chara_base.time < cost.time,
+    ];
+    let ret = 0;
+    for (let i = 0; i < 4; ++i) {
+      if (checks[i] === true) {
+        ret += 1 << i;
+      }
+    }
+    return ret;
   },
   sys_check_awake,
   /**
-   * @param {number} chara_id
+   * @param {number} cid
    * @returns {number} 0b1：普通迷雾，隐藏好感爱慕；0b10：病娇迷雾，隐藏好感
    */
-  sys_check_hide_relation_and_love(chara_id) {
-    const hide_talent = era.get(`talent:${chara_id}:捉摸不透`),
-      not_in_basement = era.get('flag:当前位置') !== location_enum.basement,
-      advanced_info = not_in_basement && era.get('status:0:马语者') > 0,
-      glasses = not_in_basement && era.get('status:0:好感度镜片') > 0;
+  sys_check_hide_relation_and_love(cid) {
+    const hide_talent = era.get(`talent:${cid}:捉摸不透`) > 0;
+    const not_in_basement = era.get('flag:当前位置') !== location_enum.basement;
+    const advanced_info = not_in_basement && era.get('status:0:马语者') > 0;
+    const glasses = not_in_basement && era.get('status:0:好感度镜片') > 0;
     return (
       !advanced_info &&
-      (chara_id &&
-        (era.get(`talent:${chara_id}:捉摸不透`) ||
-          era.get(`talent:${chara_id}:坦率程度`) === -1) &&
-        (chara_id === 32 || !glasses) &&
-        era.get(`love:${chara_id}`) < 75) +
-        0b10 * (hide_talent && era.get(`talent:${chara_id}:病娇`) === 2)
+      (cid > 0 &&
+        (hide_talent || era.get(`talent:${cid}:坦率程度`) === -1) &&
+        (cid === 32 || !glasses) &&
+        era.get(`love:${cid}`) < 75) +
+        0b10 * (hide_talent && sys_check_yandere(cid, (y) => y === 2))
     );
   },
-  /** @param {number} chara_id */
-  sys_check_limit_relation_and_love(chara_id) {
+  /** @param {number} cid */
+  sys_check_limit_relation_and_love(cid) {
     return (
-      chara_id &&
-      era.get(`status:${chara_id}:爱意克制`) &&
-      era.get(`love:${chara_id}`) &&
+      cid > 0 &&
+      era.get(`status:${cid}:爱意克制`) > 0 &&
+      era.get(`love:${cid}`) > 0 &&
       !era.get('status:0:马语者')
     );
   },
   /**
-   * @param {number} chara_id
-   * @param {boolean} [between_weeks]
+   * @param {number} cid
+   * @param {boolean} [between_weeks=false]
    * @returns {boolean}
    */
-  sys_check_race_ready(chara_id, between_weeks) {
-    let debuff = sys_get_debuff(chara_id);
+  sys_check_race_ready(cid, between_weeks = false) {
+    let debuff = sys_get_debuff(cid);
     if (debuff >= 0.5) {
       debuff = 1000;
     }
     return (
-      sys_check_train_enabled(chara_id) &&
-      (between_weeks === true || sys_check_awake(chara_id)) &&
-      check_pregnant_unprotect(chara_id) &&
-      era.get(`base:${chara_id}:体力`) >= 150 * (1 + debuff) &&
-      era.get(`base:${chara_id}:精力`) >= 150 * (1 + debuff)
+      sys_check_train_enabled(cid) &&
+      (between_weeks || sys_check_awake(cid)) &&
+      check_pregnant_unprotect(cid) &&
+      era.get(`base:${cid}:体力`) >= 150 * (1 + debuff) &&
+      era.get(`base:${cid}:精力`) >= 150 * (1 + debuff)
     );
   },
   /**
-   * @param {number} chara_id
+   * @param {number} cid
    * @returns {boolean}
    */
-  sys_check_remote(chara_id) {
+  sys_check_remote(cid) {
     const cur_race = era.get('flag:当前赛事');
     return (
-      chara_id > 0 &&
-      era.get(`cflag:${chara_id}:位置`) !== era.get('cflag:0:位置') &&
+      cid > 0 &&
+      era.get(`cflag:${cid}:位置`) !== era.get('cflag:0:位置') &&
       (!cur_race ||
         race_infos[cur_race].track >= track_enum.longchamp ||
         era.get('cflag:0:位置') !== 0)

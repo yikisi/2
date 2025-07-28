@@ -19,11 +19,13 @@ module.exports = {
   generate(chara) {
     const in_edu = era.get(`cflag:${chara.id}:育成回合计时`) < 3 * 48,
       in_palace = era.get(`cflag:${chara.id}:殿堂`);
-    const skill_list = new CharaSkills(chara.id).get().map((e) => ({
-      config: { width: 6 },
-      content: skills_dict[e].get_colored_name(),
-      type: 'text',
-    }));
+    const skill_list = CharaSkills.get(chara.id)
+      .get()
+      .map((e) => ({
+        config: { width: 6 },
+        content: skills_dict[e].get_colored_name(),
+        type: 'text',
+      }));
     const aim_list = [
       {
         config: { content: '习得技能', position: 'left' },
@@ -33,7 +35,7 @@ module.exports = {
         ? skill_list
         : [{ content: '未习得', type: 'text' }]),
     ];
-    const available_skills = new CharaAvailableSkills(chara.id).get();
+    const available_skills = CharaAvailableSkills.get(chara.id).get();
     if (available_skills.length > 0) {
       aim_list.push(
         {

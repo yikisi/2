@@ -3,10 +3,9 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   110711,
   '翩翩起舞惜当下',
-  '在比赛终盘的最终直线处于好位置且身后的马娘接近时，消耗少量体力速度上升，并稍微向前突进',
+  '在比赛终盘的最终直线处于好位置且身后的马娘接近时，消耗少量持久力速度上升，并稍微向前突进',
   11071,
   1,
-  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [() => true, () => true],

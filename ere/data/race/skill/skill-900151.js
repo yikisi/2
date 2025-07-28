@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在最终弯道之后身处前列，并且与前后的赛马娘距离较近时，能够稍微提升速度',
   90015,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   180,
   [() => true, () => true],

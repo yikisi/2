@@ -4,7 +4,7 @@ module.exports = new UmaGene(
   900691,
   UmaGene.gene_rarity_enum.sr,
   '「憧憬着跨越樱花！」之回响',
-  '习得「憧憬着跨越樱花！」\n比赛剩余300m处于好位置，且与前方赛马娘距离近时，稍微提升速度',
+  '习得「憧憬着跨越樱花！」',
   UmaGene.gene_type_enum.skill,
   -1,
   100,

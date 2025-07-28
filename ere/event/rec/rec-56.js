@@ -497,7 +497,7 @@ module.exports = class extends CustomizedRecruit {
         '悄悄的离开了现场',
       ]);
     }
-    new EventMarks(0).sub(event_hooks.recruit_start);
+    EventMarks.get(0).sub(event_hooks.recruit_start);
     era.set('flag:物色对象', 0);
   }
 };

@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛中盘消耗少量耐力使速度大幅提升',
   20322,
   2,
-  UmaSkill.rarity_enum.gold,
   17,
   508,
   [() => true, () => true],

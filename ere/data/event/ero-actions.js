@@ -308,6 +308,8 @@ const ero_actions = {
   ask_cunnilingus_with_fucking: 0,
   // 双人69插入
   fuck_69: 0,
+  // 要求双人轮流女上位
+  ask_double_cowgirl: 0,
   // 要求双人轮流插入
   ask_double_fuck: 0,
   // 要求双人双穴插入
@@ -316,6 +318,8 @@ const ero_actions = {
   ask_spit_roast: 0,
   // 要求双人口交及肛交
   ask_spit_roast_anal_sex: 0,
+  // 双人轮流女上位
+  double_cowgirl: 0,
   // 双人轮流插入
   double_fuck: 0,
   // 双人双穴插入

@@ -1,5 +1,11 @@
 const era = require('#/era-electron');
 
+const {
+  part_head,
+  sys_check_distance,
+  sys_check_mh_dis,
+} = require('#/system/ero/sys-calc-distance');
+
 const { part_enum } = require('#/data/ero/part-const');
 const { ero_action_tags, ero_actions } = require('#/data/event/ero-actions');
 const EroHookTag = require('#/data/event/ero-hook-tag');
@@ -16,6 +22,9 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
       ero_action_tags.awake,
       ero_action_tags.pet,
       EroHookTag.hand_touch_check_for_body,
+      (cid, oid) =>
+        era.get('tflag:主导权') === cid ||
+        sys_check_distance(cid, oid, { a: part_enum.hand, d: part_head }),
     ],
     [ero_action_tags.body],
     EroHookTag.condition_type.no,
@@ -90,6 +99,9 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
       ero_action_tags.awake,
       ero_action_tags.pet,
       EroHookTag.hand_touch_check_for_body,
+      (cid, oid) =>
+        era.get('tflag:主导权') === cid ||
+        sys_check_distance(cid, oid, { a: part_enum.hand, d: part_enum.foot }),
     ],
     [ero_action_tags.body],
     EroHookTag.condition_type.no,
@@ -101,6 +113,9 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
       ero_action_tags.awake,
       ero_action_tags.pet,
       EroHookTag.hand_touch_check_for_body,
+      (cid, oid) =>
+        era.get('tflag:主导权') === cid ||
+        sys_check_distance(cid, oid, { a: part_enum.hand, d: part_enum.anal }),
     ],
     [ero_action_tags.body, ero_action_tags.race],
     EroHookTag.condition_type.no,
@@ -112,14 +127,7 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
       ero_action_tags.awake,
       ero_action_tags.mouth,
       ero_action_tags.pet,
-      (chara_id, other_id) => {
-        const touch = era.get(`tcvar:${chara_id}:口腔接触部位`);
-        return (
-          era.get('tflag:主导权') === chara_id ||
-          touch === -1 ||
-          (touch.owner === other_id && touch.part === part_enum.clitoris)
-        );
-      },
+      EroHookTag.generate_touch_check(part_enum.mouth, part_enum.clitoris),
     ],
     [ero_action_tags.clitoris],
     EroHookTag.condition_type.no,
@@ -193,8 +201,14 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
 
   ero_action_names[ero_actions.blow_job] = '口交';
   ero_tagged_hooks[ero_actions.blow_job] = new EroHookTag(
-    [ero_action_tags.pet, ero_action_tags.tongue],
+    [
+      ero_action_tags.awake,
+      ero_action_tags.pet,
+      ero_action_tags.tongue,
+      EroHookTag.generate_touch_check(part_enum.mouth, part_enum.penis),
+    ],
     [ero_action_tags.penis],
+    EroHookTag.condition_type.no,
   );
 
   ero_action_names[ero_actions.ask_hand_job] = '请求手交';
@@ -217,8 +231,14 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
 
   ero_action_names[ero_actions.hand_job] = '手交';
   ero_tagged_hooks[ero_actions.hand_job] = new EroHookTag(
-    [ero_action_tags.hand, ero_action_tags.pet],
+    [
+      ero_action_tags.awake,
+      ero_action_tags.hand,
+      ero_action_tags.pet,
+      EroHookTag.generate_touch_check(part_enum.hand, part_enum.penis),
+    ],
     [ero_action_tags.penis],
+    EroHookTag.condition_type.no,
   );
 
   ero_action_names[ero_actions.ask_tit_job] = '请求乳交';
@@ -241,14 +261,25 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
 
   ero_action_names[ero_actions.tit_job] = '乳交';
   ero_tagged_hooks[ero_actions.tit_job] = new EroHookTag(
-    [ero_action_tags.breast, ero_action_tags.pet],
+    [
+      ero_action_tags.awake,
+      ero_action_tags.breast,
+      ero_action_tags.pet,
+      EroHookTag.generate_touch_check(part_enum.breast, part_enum.penis),
+    ],
     [ero_action_tags.penis],
+    EroHookTag.condition_type.no,
   );
 
   ero_action_names[ero_actions.suck_anal] = '舔肛侍奉';
   ero_tagged_hooks[ero_actions.suck_anal] = new EroHookTag(
-    [ero_action_tags.pet],
-    [ero_action_tags.anal, ero_action_tags.mouth],
+    [
+      ero_action_tags.awake,
+      ero_action_tags.mouth,
+      ero_action_tags.pet,
+      EroHookTag.generate_touch_check(part_enum.mouth, part_enum.anal),
+    ],
+    [ero_action_tags.anal],
   );
 
   ero_action_names[ero_actions.suck_nipple] = '吮吸乳头';
@@ -272,6 +303,7 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
       ero_action_tags.pet,
       EroHookTag.generate_touch_check(part_enum.mouth, part_enum.breast),
       EroHookTag.generate_touch_check(part_enum.penis, part_enum.hand),
+      (cid, oid) => sys_check_mh_dis(oid, cid),
     ],
     [ero_action_tags.awake, ero_action_tags.hand, ero_action_tags.nipple],
     EroHookTag.condition_type.no,
@@ -279,14 +311,23 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
 
   ero_action_names[ero_actions.milk] = '喂奶';
   ero_tagged_hooks[ero_actions.milk] = new EroHookTag(
-    [ero_action_tags.nipple, ero_action_tags.pet],
+    [ero_action_tags.awake, ero_action_tags.nipple, ero_action_tags.pet],
     [ero_action_tags.awake, ero_action_tags.mouth],
   );
 
   ero_action_names[ero_actions.milk_and_hand_job] = '授乳手交';
   ero_tagged_hooks[ero_actions.milk_and_hand_job] = new EroHookTag(
-    [ero_action_tags.hand, ero_action_tags.nipple, ero_action_tags.pet],
+    [
+      ero_action_tags.awake,
+      ero_action_tags.hand,
+      ero_action_tags.nipple,
+      ero_action_tags.pet,
+      EroHookTag.generate_touch_check(part_enum.breast, part_enum.mouth),
+      EroHookTag.generate_touch_check(part_enum.hand, part_enum.penis),
+      (cid, oid) => sys_check_mh_dis(cid, oid),
+    ],
     [ero_action_tags.awake, ero_action_tags.mouth, ero_action_tags.penis],
+    EroHookTag.condition_type.no,
   );
 
   ero_action_names[ero_actions.ask_non_penetrative] = '请求素股';
@@ -295,14 +336,18 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
       ero_action_tags.awake,
       ero_action_tags.penis,
       ero_action_tags.pet,
-      (chara_id, other_id) => {
-        const touch = era.get(`tcvar:${chara_id}:阴茎接触部位`),
-          other_clitoris_touch = era.get(`tcvar:${other_id}:外阴接触部位`);
+      (cid, oid) => {
+        const touch = era.get(`tcvar:${cid}:阴茎接触部位`);
+        const otouch = era.get(`tcvar:${oid}:外阴接触部位`);
         return (
-          era.get('tflag:主导权') === chara_id ||
-          (other_clitoris_touch === -1 &&
-            (touch === -1 ||
-              (touch.owner === other_id && touch.part === part_enum.body)))
+          era.get('tflag:主导权') === cid ||
+          (touch === -1 &&
+            otouch === -1 &&
+            sys_check_distance(cid, oid, {
+              a: part_enum.penis,
+              d: part_enum.clitoris,
+            })) ||
+          (touch.owner === oid && touch.part === part_enum.clitoris)
         );
       },
     ],
@@ -312,13 +357,23 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
 
   ero_action_names[ero_actions.non_penetrative] = '素股';
   ero_tagged_hooks[ero_actions.non_penetrative] = new EroHookTag(
-    [ero_action_tags.body, ero_action_tags.clitoris, ero_action_tags.pet],
+    [
+      ero_action_tags.awake,
+      ero_action_tags.body,
+      ero_action_tags.clitoris,
+      ero_action_tags.pet,
+    ],
     [ero_action_tags.penis],
   );
 
   ero_action_names[ero_actions.sixty_nine] = '六九式';
   ero_tagged_hooks[ero_actions.sixty_nine] = new EroHookTag(
-    [ero_action_tags.mouth, ero_action_tags.pet, ero_action_tags.sex_check],
+    [
+      ero_action_tags.awake,
+      ero_action_tags.mouth,
+      ero_action_tags.pet,
+      ero_action_tags.sex_check,
+    ],
     [ero_action_tags.mouth, ero_action_tags.awake, ero_action_tags.sex_check],
   );
 
@@ -328,37 +383,38 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
       ero_action_tags.awake,
       ero_action_tags.penis,
       ero_action_tags.pet,
-      (chara_id, other_id) => {
-        const touch = era.get(`tcvar:${chara_id}:阴茎接触部位`);
+      (cid, oid) => {
+        const touch = era.get(`tcvar:${cid}:阴茎接触部位`);
         return (
-          touch === -1 ||
-          (touch.owner === other_id && touch.part === part_enum.body)
+          touch === -1 || (touch.owner === oid && touch.part === part_enum.body)
         );
       },
     ],
     [
       ero_action_tags.awake,
       ero_action_tags.body,
-      (chara_id) => era.get(`cflag:${chara_id}:头发长度`) > 0,
+      (cid) => era.get(`cflag:${cid}:头发长度`) > 0,
     ],
-    EroHookTag.condition_type.no,
   );
 
   ero_action_names[ero_actions.force_hair_fuck] = '强制发交';
   ero_tagged_hooks[ero_actions.force_hair_fuck] = new EroHookTag(
-    [ero_action_tags.insert, ero_action_tags.pet, ero_action_tags.sadism],
     [
-      ero_action_tags.body,
-      (chara_id) => era.get(`cflag:${chara_id}:头发长度`) > 0,
+      ero_action_tags.awake,
+      ero_action_tags.insert,
+      ero_action_tags.pet,
+      ero_action_tags.sadism,
     ],
+    [ero_action_tags.body, (cid) => era.get(`cflag:${cid}:头发长度`) > 0],
   );
 
   ero_action_names[ero_actions.hair_fuck] = '发交';
   ero_tagged_hooks[ero_actions.hair_fuck] = new EroHookTag(
     [
+      ero_action_tags.awake,
       ero_action_tags.body,
       ero_action_tags.pet,
-      (chara_id) => era.get(`cflag:${chara_id}:头发长度`) > 0,
+      (cid) => era.get(`cflag:${cid}:头发长度`) > 0,
     ],
     [ero_action_tags.penis],
   );
@@ -369,27 +425,30 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
       ero_action_tags.awake,
       ero_action_tags.penis,
       ero_action_tags.pet,
-      (chara_id, other_id) => {
-        const touch = era.get(`tcvar:${chara_id}:阴茎接触部位`);
+      (cid, oid) => {
+        const touch = era.get(`tcvar:${cid}:阴茎接触部位`);
         return (
-          touch === -1 ||
-          (touch.owner === other_id && touch.part === part_enum.body)
+          touch === -1 || (touch.owner === oid && touch.part === part_enum.body)
         );
       },
     ],
     [ero_action_tags.awake, ero_action_tags.body],
-    EroHookTag.condition_type.no,
   );
 
   ero_action_names[ero_actions.force_armpit_intercourse] = '强制腋交';
   ero_tagged_hooks[ero_actions.force_armpit_intercourse] = new EroHookTag(
-    [ero_action_tags.insert, ero_action_tags.pet, ero_action_tags.sadism],
+    [
+      ero_action_tags.awake,
+      ero_action_tags.insert,
+      ero_action_tags.pet,
+      ero_action_tags.sadism,
+    ],
     [ero_action_tags.body],
   );
 
   ero_action_names[ero_actions.armpit_intercourse] = '腋交';
   ero_tagged_hooks[ero_actions.armpit_intercourse] = new EroHookTag(
-    [ero_action_tags.body, ero_action_tags.pet],
+    [ero_action_tags.awake, ero_action_tags.body, ero_action_tags.pet],
     [ero_action_tags.penis],
   );
 
@@ -402,19 +461,29 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
       EroHookTag.generate_touch_check(part_enum.penis, part_enum.foot),
     ],
     [ero_action_tags.awake, ero_action_tags.foot],
-    EroHookTag.condition_type.no,
   );
 
   ero_action_names[ero_actions.force_foot_job] = '强制足交';
   ero_tagged_hooks[ero_actions.force_foot_job] = new EroHookTag(
-    [ero_action_tags.insert, ero_action_tags.pet, ero_action_tags.sadism],
+    [
+      ero_action_tags.awake,
+      ero_action_tags.insert,
+      ero_action_tags.pet,
+      ero_action_tags.sadism,
+    ],
     [ero_action_tags.foot],
   );
 
   ero_action_names[ero_actions.foot_job] = '足交';
   ero_tagged_hooks[ero_actions.foot_job] = new EroHookTag(
-    [ero_action_tags.foot, ero_action_tags.pet],
+    [
+      ero_action_tags.awake,
+      ero_action_tags.foot,
+      ero_action_tags.pet,
+      EroHookTag.generate_touch_check(part_enum.foot, part_enum.penis),
+    ],
     [ero_action_tags.penis],
+    EroHookTag.condition_type.no,
   );
 
   ero_action_names[ero_actions.ask_tail_job] = '请求尾交';
@@ -423,34 +492,42 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
       ero_action_tags.awake,
       ero_action_tags.penis,
       ero_action_tags.pet,
-      (chara_id, other_id) => {
-        const touch = era.get(`tcvar:${chara_id}:阴茎接触部位`);
+      (cid, oid) => {
+        const touch = era.get(`tcvar:${cid}:阴茎接触部位`);
         return (
-          touch === -1 ||
-          (touch.owner === other_id && touch.part === part_enum.body)
+          touch === -1 || (touch.owner === oid && touch.part === part_enum.body)
         );
       },
     ],
     [ero_action_tags.awake, ero_action_tags.body, ero_action_tags.race],
-    EroHookTag.condition_type.no,
   );
 
   ero_action_names[ero_actions.force_tail_job] = '强制尾交';
   ero_tagged_hooks[ero_actions.force_tail_job] = new EroHookTag(
-    [ero_action_tags.insert, ero_action_tags.pet],
+    [ero_action_tags.awake, ero_action_tags.insert, ero_action_tags.pet],
     [ero_action_tags.body, ero_action_tags.race],
   );
 
   ero_action_names[ero_actions.tail_job] = '尾交';
   ero_tagged_hooks[ero_actions.tail_job] = new EroHookTag(
-    [ero_action_tags.body, ero_action_tags.pet, ero_action_tags.race],
+    [
+      ero_action_tags.awake,
+      ero_action_tags.body,
+      ero_action_tags.pet,
+      ero_action_tags.race,
+    ],
     [ero_action_tags.penis],
   );
 
   ero_action_names[ero_actions.tribbing] = '女阴摩擦';
   ero_tagged_hooks[ero_actions.tribbing] = new EroHookTag(
+    [
+      ero_action_tags.awake,
+      ero_action_tags.clitoris,
+      EroHookTag.generate_touch_check(part_enum.clitoris, part_enum.clitoris),
+    ],
     [ero_action_tags.clitoris],
-    [ero_action_tags.clitoris],
+    EroHookTag.condition_type.no,
   );
 
   ero_action_names[ero_actions.self_pet_nipple] = '胸部自慰';
@@ -521,15 +598,21 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
   // 爱抚派生系
   ero_action_names[ero_actions.pull_ear] = '拉扯耳朵';
   ero_tagged_hooks[ero_actions.pull_ear] = new EroHookTag(
-    [ero_action_tags.pet, ero_action_tags.sadism],
+    [
+      ero_action_tags.pet,
+      ero_action_tags.sadism,
+      (cid, oid) =>
+        era.get('tflag:主导权') === cid ||
+        sys_check_distance(cid, oid, { a: part_enum.hand, d: part_head }),
+    ],
     [
       ero_action_tags.body,
-      (chara_id) => {
+      (cid) => {
         const last_action = era.get('tflag:前回行动');
         return (
           (last_action === ero_actions.pet_ear ||
             last_action === ero_actions.pull_ear) &&
-          era.get(`tflag:前回对手`) === chara_id
+          era.get(`tflag:前回对手`) === cid
         );
       },
     ],
@@ -538,16 +621,22 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
 
   ero_action_names[ero_actions.pull_tail] = '拽尾巴';
   ero_tagged_hooks[ero_actions.pull_tail] = new EroHookTag(
-    [ero_action_tags.pet, ero_action_tags.sadism],
+    [
+      ero_action_tags.pet,
+      ero_action_tags.sadism,
+      (cid, oid) =>
+        era.get('tflag:主导权') === cid ||
+        sys_check_distance(cid, oid, { a: part_enum.hand, d: part_enum.anal }),
+    ],
     [
       ero_action_tags.body,
       ero_action_tags.race,
-      (chara_id) => {
+      (cid) => {
         const last_action = era.get('tflag:前回行动');
         return (
           (last_action === ero_actions.pet_tail ||
             last_action === ero_actions.pull_tail) &&
-          era.get(`tflag:前回对手`) === chara_id
+          era.get(`tflag:前回对手`) === cid
         );
       },
     ],
@@ -559,11 +648,11 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
     [ero_action_tags.awake, ero_action_tags.pet],
     [
       ero_action_tags.virgin,
-      (chara_id, other_id) => {
-        const touch = era.get(`tcvar:${chara_id}:阴道接触部位`);
-        const virgin = era.get(`talent:${chara_id}:处女`);
+      (cid, oid) => {
+        const touch = era.get(`tcvar:${cid}:阴道接触部位`);
+        const virgin = era.get(`talent:${cid}:处女`);
         return (
-          touch.owner === other_id &&
+          touch.owner === oid &&
           touch.part === part_enum.hand &&
           (!virgin || !(virgin + 1))
         );
@@ -588,7 +677,12 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
 
   ero_action_names[ero_actions.force_deep_blow_job] = '强制深喉';
   ero_tagged_hooks[ero_actions.force_deep_blow_job] = new EroHookTag(
-    [ero_action_tags.insert, ero_action_tags.pet, ero_action_tags.sadism],
+    [
+      ero_action_tags.awake,
+      ero_action_tags.insert,
+      ero_action_tags.pet,
+      ero_action_tags.sadism,
+    ],
     [ero_action_tags.tongue, EroHookTag.blow_job_check],
   );
   ero_derive_check[ero_actions.force_deep_blow_job] = true;
@@ -694,7 +788,12 @@ module.exports = (ero_action_names, ero_tagged_hooks, ero_derive_check) => {
 
   ero_action_names[ero_actions.bite_nipple] = '狠咬乳头';
   ero_tagged_hooks[ero_actions.bite_nipple] = new EroHookTag(
-    [ero_action_tags.mouth, ero_action_tags.pet, ero_action_tags.sadism],
+    [
+      ero_action_tags.awake,
+      ero_action_tags.mouth,
+      ero_action_tags.pet,
+      ero_action_tags.sadism,
+    ],
     [ero_action_tags.touched_nipple, EroHookTag.bite_nipple_check],
   );
   ero_derive_check[ero_actions.bite_nipple] = true;

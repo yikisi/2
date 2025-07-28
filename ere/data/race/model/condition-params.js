@@ -60,9 +60,11 @@ class ConditionParams {
   is_surrounded;
   is_temptation;
   is_used_skill_id;
+  item;
   lane_type;
   last_straight_random;
   lastspurt;
+  milk;
   motivation;
   near_count;
   near_infront_count;
@@ -73,6 +75,8 @@ class ConditionParams {
   order_rate_out20_continue;
   order_rate_out40_continue;
   order_rate_out50_continue;
+  order_rate_out70_continue;
+  orgasm;
   overtake_target_no_order_up_time;
   overtake_target_time;
   phase;
@@ -82,6 +86,7 @@ class ConditionParams {
   phase_firstquarter_random;
   phase_laterhalf_random;
   phase_random;
+  phase_straight_random;
   popularity;
   post_number;
   random_lot;

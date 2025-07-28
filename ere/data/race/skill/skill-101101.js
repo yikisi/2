@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛剩余800m处若位于队伍中间，则小幅度先前突进并提高少许加速力；若在根干距离（400的倍数）的比赛且位于后方，则额外提高少许加速力',
   10110,
   1,
-  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [() => true, () => true],

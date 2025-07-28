@@ -12,7 +12,7 @@ const { get_love_info, get_relation_info } = require('#/data/info-generator');
 function exp_chara_info(chara) {
   const relation_info = get_relation_info(chara.id, 0),
     love_info = get_love_info(chara.id),
-    curr_title = new CharaTitles(chara.id).get_colored_curr_title();
+    curr_title = CharaTitles.get(chara.id).get_colored_curr_title();
   return [
     { type: 'divider' },
     {

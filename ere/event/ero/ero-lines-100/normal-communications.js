@@ -3,7 +3,7 @@ const era = require('#/era-electron');
 const sys_get_strength_ratio_in_fight = require('#/system/ero/fight/sys-get-strength-ratio');
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
-const EroNormalCommunications = require('#/event/ero/common-lines/normal/communications');
+const EroNormalCommunications = require('#/event/ero/common/normal/communications');
 
 module.exports = class extends EroNormalCommunications {
   async kiss(attacker, defender, hook) {

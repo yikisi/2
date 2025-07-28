@@ -3,10 +3,8 @@ const {
   drawLine,
   get,
   input,
-  print,
   printAndWait,
   printInColRows,
-  println,
   set,
   setHorizontalAlign,
 } = require('#/era-electron');
@@ -19,6 +17,7 @@ const { get_image } = require('#/system/sys-calc-image');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
+const arrive_location = require('#/page/components/arrive-location');
 const get_riko_button = require('#/page/components/get-riko-button');
 const npc_common = require('#/page/components/npc-common');
 const print_page_header = require('#/page/components/page-header');
@@ -32,11 +31,10 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const CharaTitles = require('#/data/chara-titles');
 const MeekEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-201');
 const event_hooks = require('#/data/event/event-hooks');
-const LocCharacters = require('#/data/event/loc-characters');
+const loc_characters = require('#/data/event/loc-characters');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_celebration } = require('#/data/info-generator');
-const { location_enum, location_name } = require('#/data/locations');
-const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
+const { location_enum } = require('#/data/locations');
 
 /** @type {Record<string,function(CharaTalk,CharaTalk):{handle:function:Promise,name:string}>} */
 const handlers = {};
@@ -142,20 +140,9 @@ handlers[304] = (chara, me) => {
 handlers[306] = get_riko_button;
 
 async function page_trainer_office() {
-  let flag_page = true,
-    flag_trainer = true;
-  set('flag:当前位置', location_enum.trainer);
-  await clear();
-  print_page_header();
-  drawLine();
-  const vehicle = get('flag:单人载具');
-  print([
-    vehicle ? `${vehicle_verbs[vehicle]}着${vehicle_names[vehicle]}` : '',
-    '抵达了 ',
-    location_name[location_enum.trainer],
-    '……',
-  ]);
-  const loc_characters = new LocCharacters();
+  let flag_page = true;
+  let flag_trainer = true;
+  await arrive_location(set('flag:当前位置', location_enum.trainer));
   let trainer_list = loc_characters.get(location_enum.trainer);
   if (trainer_list.length > 0) {
     const celebration = get_celebration(),
@@ -179,7 +166,7 @@ async function page_trainer_office() {
         '，今后为了中央特雷森的荣光一起努力吧。',
       ]);
       await trainer0.say_and_wait([
-        '啊，贵安，我是 ',
+        '贵安，我是 ',
         trainer0.get_colored_actual_name(),
         '，今后请您多多指教。',
       ]);
@@ -223,7 +210,7 @@ async function page_trainer_office() {
       const chara_id = await input();
       if (chara_id !== 999) {
         const chara = get_chara_talk(chara_id),
-          title = new CharaTitles(chara_id).get_curr_title();
+          title = CharaTitles.get(chara_id).get_curr_title();
         flag_trainer = true;
         while (flag_trainer) {
           const temp_flag = await npc_common(
@@ -270,13 +257,12 @@ async function page_trainer_office() {
       }
     }
     drawLine();
-    await printAndWait('回去了……');
+    await printAndWait('【折返了】');
   } else {
     drawLine();
-    await printAndWait('没有人在的样子……回去了……');
+    await printAndWait('【没有人在的样子……折返了】');
   }
   loc_characters.set(location_enum.trainer, trainer_list);
-  println();
   await sys_get_random_event(event_hooks.back_school)({
     loc: location_enum.trainer,
   });

@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '最终弯道之后若处于队伍中部靠近内埒的一侧则会在最终直线上略微提高速度略微容易取得好路线',
   90036,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   180,
   [

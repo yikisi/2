@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛接近中盘时，稍微降低速度；之后在比赛终盘开始时小幅向前突进',
   20317,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   217,
   [() => true, () => true],

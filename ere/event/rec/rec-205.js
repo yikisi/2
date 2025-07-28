@@ -37,12 +37,11 @@ module.exports = class extends CustomizedRecruit {
           `短时间内接连取得国际一级赛优胜的 ${me.name}，已然是各国赛马界都无法忽视的存在。`,
         );
       }
-      await era.printAndWait(
-        `日前巴黎特雷森学园的院长就已经和 ${sys_get_callname(
-          0,
-          302,
-        )} 有过一番洽谈，其结果是`,
-      );
+      await era.printAndWait([
+        '日前巴黎特雷森学园的院长就已经和 ',
+        sys_get_colored_callname(0, 302),
+        ' 有过一番洽谈，其结果是——',
+      ]);
       await era.printAndWait(
         `不久后将会挑选一批优秀的法国幼驹前来中央交流，${me.name} 被选为责任人负责双方的接洽工作。`,
       );
@@ -141,12 +140,10 @@ module.exports = class extends CustomizedRecruit {
       era.printButton('「你好。」', 1);
       await era.input();
       await chairman.say_and_wait('歉 意！有点事想拜托你。');
-      await era.printAndWait(
-        `${sys_get_callname(
-          0,
-          302,
-        )}，虽说是看似普通的学园理事长，但考虑到这样的组织与才能还有眼力，绝对是独一无二的存在。`,
-      );
+      await era.printAndWait([
+        sys_get_colored_callname(0, 302),
+        '，虽说是看似普通的学园理事长，但考虑到这样的组织与才能还有眼力，绝对是独一无二的存在。',
+      ]);
       await era.printAndWait(
         `${me.name} 深深地叹了口气。和刚才安宁的感觉不同，用通俗易懂的力量，发出不愉快的那种。`,
       );
@@ -209,11 +206,12 @@ module.exports = class extends CustomizedRecruit {
       await chairman.say_and_wait(
         `回 忆！嗯，是栗毛的${vp.get_uma_sex_title()}。只是发色比较明亮，玫瑰金之类的感觉。`,
       );
-      await era.printAndWait(
-        `${
-          me.name
-        } 抬起头来，和刚才得到电话许可的${vp.get_uma_sex_title()}对视。`,
-      );
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 抬起头来，和刚才得到电话许可的',
+        vp.get_uma_sex_title(),
+        '对视。',
+      ]);
       await era.printAndWait('栗色，是明亮的发色。');
       era.printButton('「……其他的呢？」', 1);
       await era.input();
@@ -330,7 +328,7 @@ module.exports = class extends CustomizedRecruit {
         '如果说想在法国国内，或者经过英国和德国的比赛掌握实力，达到熟练的领域之后挑战凯旋门赏的话，部分人也不会摇头。',
       );
       await era.printAndWait(`${me.name} 一边想着太直率也是问题，一边继续说。`);
-      era.printButton('「我可以把你介绍给其他训练员……」', 1);
+      era.printButton('「我可以把你介绍给其他训练员……」（停止招募）', 1);
       era.printButton('「你那么想赢凯旋门赏吗？」', 2);
       if ((await era.input()) === 1) {
         return true;
@@ -399,7 +397,7 @@ module.exports = class extends CustomizedRecruit {
       await era.printAndWait(
         `${vp.name} 依旧继续抬头看着 ${me.name}，${me.name}……`,
       );
-      era.printButton('「还是另请高明吧。」', 1);
+      era.printButton('「还是另请高明吧。」（停止招募）', 1);
       era.printButton(`握住那只使劲把 ${me.name} 拉向赛场的手。`, 2);
       if ((await era.input()) === 1) {
         return true;
@@ -446,21 +444,31 @@ module.exports = class extends CustomizedRecruit {
       await era.printAndWait(
         '下一场模拟赛就采取先行对策吧。不过要面对年长的对手……',
       );
-      await vp.say_and_wait('我会赢的，训练员先生。');
+      await vp.say_and_wait([
+        '我会赢的，',
+        sys_get_colored_callname(this.id, 0),
+        '。',
+      ]);
       await era.printAndWait('正因为冷静地理解了自己的实力才有自信。');
+      await era.printAndWait([
+        '既不是过分的自尊也不是谦虚，客观地对待自己的精神状态也提高了 ',
+        vp.get_colored_name(),
+        ' 这个',
+        vp.get_uma_sex_title(),
+        '的完成度。',
+      ]);
       await era.printAndWait(
-        `既不是过分的自尊也不是谦虚，客观地对待自己的精神状态也提高了 ${
-          vp.name
-        } 这个${vp.get_uma_sex_title()}的完成度。`,
+        `如果是蹩脚的训练员，就从这里着手，把${vp.sex}的才能搞砸了吧。`,
       );
-      await era.printAndWait(
-        `如果是蹩脚的训练师，就从这里着手，把${vp.sex}的才能搞砸了吧。`,
-      );
-      await era.printAndWait(
-        `栗毛的${vp.get_uma_sex_title()}靠近想要结束练习的 ${me.name}，告诉 ${
-          me.name
-        } 想再跑一圈。`,
-      );
+      await era.printAndWait([
+        '栗毛的',
+        vp.get_uma_sex_title(),
+        '靠近想要结束练习的 ',
+        me.get_colored_name(),
+        '，告诉 ',
+        me.get_colored_name(),
+        ' 想再跑一圈。',
+      ]);
       era.printButton('「可以，但为什么要做到这种程度？」', 1);
       await era.input();
       await era.printAndWait(
@@ -473,9 +481,12 @@ module.exports = class extends CustomizedRecruit {
         '家人和朋友，还有更多的人支持着我。所以，我想回应大家的期待！',
       );
       await era.printAndWait(`这样说着就跑走了的${vp.sex}的背变远了。`);
-      await era.printAndWait(
-        `${me.name} 一直用眼睛追着那个小小的身影，直到${vp.sex}转过弯道。`,
-      );
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 一直用眼睛追着那个小小的身影，直到 ',
+        vp.get_colored_name(),
+        ' 转过弯道。',
+      ]);
       add_event(event_hooks.week_start, new EventObject(205, cb_enum.recruit));
       era.set('cflag:205:随机招募', recruit_flags.no);
       era.set('flag:物色对象', 205);

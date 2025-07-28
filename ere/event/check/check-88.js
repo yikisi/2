@@ -37,7 +37,9 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
     (check_aim_race(races, race_enum.tenn_sho, 1, 1) ||
       check_aim_race(races, race_enum.tenn_sho, 2, 1)) &&
     (check_aim_race(races, race_enum.hk_vas, 1, 1) ||
-      check_aim_race(races, race_enum.hk_vas, 2, 1)) &&
+      check_aim_race(races, race_enum.hk_vas, 2, 1) ||
+      check_aim_race(races, race_enum.hk_cup, 1, 1) ||
+      check_aim_race(races, race_enum.hk_cup, 2, 1)) &&
     era.get('base:88:力量') >= 1200 &&
     !new CrownEduMarks().title_check,
   aim_races,

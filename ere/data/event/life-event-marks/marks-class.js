@@ -47,21 +47,21 @@ class LifeEventMarks extends PersonalEventMarks {
   b_start;
 
   /**
-   * @param {number} chara_id
+   * @param {number} cid
    * @returns {LifeEventMarks}
    */
-  static get_marks(chara_id) {
-    const ret = new LifeEventMarks(chara_id);
+  static get_marks(cid) {
+    const ret = new LifeEventMarks(cid);
     PersonalEventMarks.register_marks(ret);
     return ret;
   }
 
   /**
    * @protected
-   * @param {number} chara_id
+   * @param {number} cid
    */
-  constructor(chara_id) {
-    super(chara_id, '扩展变量');
+  constructor(cid) {
+    super(cid, '扩展变量');
   }
 }
 

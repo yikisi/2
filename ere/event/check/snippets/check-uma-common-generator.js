@@ -30,7 +30,7 @@ module.exports = (
       if (!title_check_cb) {
         return super.check_and_get_titles(aim_check);
       }
-      const races = new RaceHistory(this.id),
+      const races = RaceHistory.get(this.id),
         titles = [];
       if (
         title_check_cb.call(this, races.get(), races.get_values(), aim_check)
@@ -52,7 +52,7 @@ module.exports = (
 
     get_edu_aims() {
       const buffer = [],
-        races = new RaceHistory(this.id).get();
+        races = RaceHistory.get(this.id).get();
       fill_edu_aims_cb.call(this, buffer, races);
       return buffer;
     }

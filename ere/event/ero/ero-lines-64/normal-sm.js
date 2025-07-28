@@ -1,6 +1,6 @@
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
-const EroNormalSm = require('#/event/ero/common-lines/normal/sm');
+const EroNormalSm = require('#/event/ero/common/normal/sm');
 
 const PamaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-64');
 

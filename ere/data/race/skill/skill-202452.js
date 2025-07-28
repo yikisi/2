@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '最终直线位于第二名往后，并距离领头4马身以内时，速度少量提升',
   20245,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   217,
   [() => true, () => true],

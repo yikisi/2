@@ -546,24 +546,20 @@ module.exports = (handlers) => {
       '已经可以预料到会是一场很尽兴的比赛了，我可不会放水的哦。',
     );
     const pseudo = sys_get_chara_pseudo(37);
-    await simulation_game_in_event(
-      pseudo,
-      [
-        new PseudoUma(
-          57,
-          '千明代表',
-          get_chara_color(57),
-          2,
-          new Array(5).fill(1200),
-          get_random_value(2, 3),
-          [0, 2, 6, 6],
-          [0, 5, 6, 6],
-          [6, 0],
-          skill_sets[1105703].map((e) => skills_dict[e]),
-        ).set_legend(),
-      ],
-      race_enum.toky_yus,
+    const p = new PseudoUma(
+      57,
+      '千明代表',
+      get_chara_color(57),
+      2,
+      new Array(5).fill(1200),
+      get_random_value(2, 3),
+      [0, 2, 6, 6],
+      [0, 5, 6, 6],
+      [6, 0],
+      skill_sets[1105703].map((e) => skills_dict[e]),
     );
+    p.legend = true;
+    await simulation_game_in_event(pseudo, [p], race_enum.toky_yus);
     await era.printAndWait([
       mr_cb.get_colored_name(),
       ' 是赛',
@@ -727,7 +723,7 @@ module.exports = (handlers) => {
     await flash.say_and_wait(`……很抱歉，${callname}，但是我果然还是无法接受。`);
     await flash.say_and_wait('取消菊花赏的出走预定这件事情。');
     era.drawLine();
-    if (check_aim_race(new RaceHistory(37).get(), race_enum.toky_yus, 1, 1)) {
+    if (check_aim_race(RaceHistory.get(37).get(), race_enum.toky_yus, 1, 1)) {
       await era.printAndWait(
         '就在上个星期，荣进闪耀于日本德比的赛场上取得了傲人的战绩。',
       );

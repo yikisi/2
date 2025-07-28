@@ -29,9 +29,9 @@ module.exports = class extends DailyChild {
     }
     get_chara_talk(this.id).say([
       '今天也请多关照啦，',
-      era.get('cflag:0:性别') - 1 ? '姐姐' : '哥哥',
+      era.get('cflag:0:性别') === 1 ? '哥哥' : '姐姐',
       '……啊，应该是这个，',
-      father ? '妈妈' : '爸爸',
+      father > 0 ? '妈妈' : '爸爸',
       '～❤️',
     ]);
   }

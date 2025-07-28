@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在比赛后半段的某个地方少量提升速度，并且无视条件发动两个用得上的金技能',
   11007,
   1,
-  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [() => true, () => true],

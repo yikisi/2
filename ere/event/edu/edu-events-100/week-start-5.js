@@ -637,7 +637,8 @@ module.exports = (handlers) => {
         ]);
         await acute.print_and_wait('第一次，拥有了「勇气」。');
         era.drawLine();
-        acute.name = era.get('callname:100:-2');
+        tokino.name = undefined;
+        acute.name = undefined;
         await acute.print_and_wait('飞行的铁鸟，轰鸣得奏响。');
         await acute.print_and_wait('而在铁穹中的人们，不曾听到它的离音。');
         await acute.print_and_wait([

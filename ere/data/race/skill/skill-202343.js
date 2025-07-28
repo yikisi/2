@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '变得擅长赛场状态为重或不良的比赛，速度稍微上升',
   20234,
   1,
-  UmaSkill.rarity_enum.normal,
   0,
   129,
   [() => true, () => true],

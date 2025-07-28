@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在比赛中段附近往后的直线处位于队伍中间时，提升速度，若此时为下坡则持续提升速度',
   10083,
   1,
-  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [() => true, () => true],

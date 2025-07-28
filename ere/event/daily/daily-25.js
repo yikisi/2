@@ -11,6 +11,7 @@ const {
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const { get_custom_check } = require('#/event/check/check-factory');
+const kojo = require('#/event/daily/daily-25.kojo');
 const CustomizedDaily = require('#/event/daily/daily-common');
 const coffee_celebration = require('#/event/daily/daily-events-25/celebration');
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
@@ -37,6 +38,14 @@ function escape_basement_common(coffee, callname, life_marks) {
 }
 
 module.exports = class extends CustomizedDaily {
+  get #dict() {
+    const ret = {};
+    const tachyon = get_chara_talk(this.id);
+    ret['代表色'] = tachyon.color;
+    ret['她'] = tachyon.sex;
+    return ret;
+  }
+
   select() {
     const callname = sys_get_colored_callname(25, 0),
       coffee = get_chara_talk(25),
@@ -870,8 +879,12 @@ module.exports = class extends CustomizedDaily {
     const edu_weeks = era.get('cflag:25:育成回合计时'),
       weeks = (era.get('flag:当前回合数') - 1) % 48;
     if (weeks !== 13 || edu_weeks < 96) {
-      return super.celebration();
+      return super.celebration(hook);
     }
     return coffee_celebration(hook);
+  }
+
+  async end_talk() {
+    await kojo['end_talk'](this.#dict);
   }
 };

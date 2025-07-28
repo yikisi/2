@@ -22,7 +22,7 @@ module.exports = class extends Edu3UntilRaceEnd {
       event_arg = event_object?.arg,
       event_marks = new TeioEduMarks();
     let wait_flag = false;
-    if (event_arg === 95 + 20 && era.get('status:3:腿伤')) {
+    if (event_arg === 95 + 20 && era.get('status:3:腿伤') > 0) {
       await print_event_name('回归', teio);
       await teio.say_and_wait('哈啊……');
       era.println();

@@ -205,8 +205,9 @@ module.exports = class extends CustomizedEdu {
   }
 
   async race_end(urara, me, callname, hook, extra_flag) {
-    const key = `${extra_flag.race}_${era.get('cflag:52:育成回合计时')}`,
-      handler = race_end_handlers[extra_flag.race] || race_end_handlers[key];
+    const key = `${extra_flag.race}_${era.get('cflag:52:育成回合计时')}`;
+    const handler =
+      race_end_handlers[extra_flag.race] || race_end_handlers[key];
     if (handler) {
       return await handler(
         urara,
@@ -530,14 +531,14 @@ module.exports = class extends CustomizedEdu {
 
   async school_atrium(urara, me, callname, hook, extra_flag, event_object) {
     if (school_atrium_handlers[event_object.arg]) {
-      const flags = { wait_flag: false },
-        ret = await school_atrium_handlers[event_object.arg](
-          urara,
-          me,
-          callname,
-          flags,
-          event_object,
-        );
+      const flags = { wait_flag: false };
+      const ret = await school_atrium_handlers[event_object.arg](
+        urara,
+        me,
+        callname,
+        flags,
+        event_object,
+      );
       flags.wait_flag && (await era.waitAnyKey());
       return !ret;
     }

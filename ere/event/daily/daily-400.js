@@ -24,13 +24,13 @@ const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 module.exports = class extends CustomizedDaily {
-  async celebration() {
+  async celebration(hook) {
     if (
       (era.get('flag:当前回合数') - 1) % 48 !== 29 ||
       era.get('cflag:400:育成回合计时') < 96 ||
       era.get('love:400') < 75
     ) {
-      return await super.celebration();
+      return await super.celebration(hook);
     }
     await ss_celebration();
   }
@@ -137,7 +137,7 @@ module.exports = class extends CustomizedDaily {
       silence.say('这样就可以了哦，真的非常感谢您……');
       era.print([
         silence.get_colored_name(),
-        ' 微微低头，开心的笑着，回到了',
+        ' 微微低头，开心地笑着，回到了',
         silence.sex,
         '的宿舍之中。',
       ]);

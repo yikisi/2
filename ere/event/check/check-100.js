@@ -9,8 +9,7 @@ const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
 const { add_event, cb_enum } = require('#/event/queue');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
-
+const { get_chara_color } = require('#/data/chara-colors');
 const AcuteEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-100');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
@@ -40,7 +39,7 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_and_get_titles(aim_check) {
-    const races = new RaceHistory(100).get(),
+    const races = RaceHistory.get(100).get(),
       titles = [];
     if (
       check_aim_race(races, race_enum.toky_dai, 1, 1) &&
@@ -50,7 +49,7 @@ module.exports = class extends CustomizedCheck {
       era.get('base:100:根性') >= 1200
     ) {
       titles.push({
-        c: get_chara_talk(100).color,
+        c: get_chara_color(this.id),
         n: '坚韧不拔的熏银',
       });
       aim_check && sys_personal_achievement.set(100, 1);
@@ -104,7 +103,7 @@ module.exports = class extends CustomizedCheck {
 
   get_edu_aims() {
     const buffer = [],
-      races = new RaceHistory(100).get();
+      races = RaceHistory.get(100).get();
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.japa_dir, 1, 5));
     buffer.push(check_aim_and_get_entry(races, race_enum.siri_sta, 1, 3));

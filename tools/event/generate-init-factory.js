@@ -1,6 +1,7 @@
 const { readdirSync, writeFileSync } = require('fs');
+const { join } = require('path');
 
-const init_scripts = readdirSync('../../ere/event/init')
+const init_scripts = readdirSync(join(__dirname, '../../ere/event/init'))
   .filter(
     (e) =>
       e.startsWith('init') && e.endsWith('.js') && !e.endsWith('factory.js'),
@@ -56,7 +57,7 @@ module.exports = {
 };
 `;
 
-writeFileSync('../../ere/event/init/init-factory.js', output);
+writeFileSync(join(__dirname, '../../ere/event/init/init-factory.js'), output);
 
 console.log(
   `[generate-init-factory.js] registers ${init_scripts.length} init scripts`,

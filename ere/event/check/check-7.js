@@ -39,10 +39,10 @@ aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 2;
 
 module.exports = class extends CustomizedCheck {
   check_and_get_titles(aim_check) {
-    const races = new RaceHistory(7).get(),
-      c = get_chara_color(7),
-      event_marks = new GoldShipEduMarks(),
-      titles = [];
+    const races = RaceHistory.get(7).get();
+    const c = get_chara_color(7);
+    const edu_marks = new GoldShipEduMarks();
+    const titles = [];
     if (
       check_aim_race(races, race_enum.sats_sho, 1, 1) &&
       check_aim_race(races, race_enum.kiku_sho, 1, 1) &&
@@ -56,8 +56,9 @@ module.exports = class extends CustomizedCheck {
         n: '破天荒',
       });
       aim_check && sys_personal_achievement.set(7, 1);
+      edu_marks.hoverboard = 1;
     }
-    if (event_marks.title_check === 2) {
+    if (edu_marks.title_check === 2) {
       titles.push({
         c,
         n: '粉丝服务',
@@ -73,13 +74,13 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_next_week() {
-    const event_marks = new GoldShipEduMarks(),
-      event_obj = new EventObject(7, cb_enum.edu),
-      edu_weeks = era.get('cflag:7:育成回合计时');
-    if (event_marks.carrot > 0) {
+    const edu_marks = new GoldShipEduMarks();
+    const e_random = new EventObject(7, cb_enum.edu);
+    const edu_weeks = era.get('cflag:7:育成回合计时');
+    if (edu_marks.carrot > 0) {
       if (era.get('cflag:7:招募状态') === recruit_flags.yes) {
-        event_marks.carrot = 0;
-      } else if (--event_marks.carrot === 0) {
+        edu_marks.carrot = 0;
+      } else if (--edu_marks.carrot === 0) {
         add_event(
           event_hooks.week_start,
           new EventObject(7, cb_enum.edu).set_arg('carrot'),
@@ -87,36 +88,36 @@ module.exports = class extends CustomizedCheck {
       }
     }
     if (edu_weeks < 3 * 48) {
-      const event_obj_special = new EventObject(7, cb_enum.edu, true).set_arg(
+      const e_special = new EventObject(7, cb_enum.edu, true).set_arg(
         edu_weeks,
       );
       check_and_add_event(
-        event_marks,
+        edu_marks,
         edu_weeks,
         'heroine_red',
         event_hooks.school_atrium,
-        event_obj,
+        e_random,
       );
       check_and_add_event(
-        event_marks,
+        edu_marks,
         edu_weeks,
         'golden_ship_date',
         event_hooks.out_start,
-        event_obj,
+        e_random,
       );
       check_and_add_event(
-        event_marks,
+        edu_marks,
         edu_weeks,
         'sudden_look_back',
         event_hooks.school_atrium,
-        event_obj,
+        e_random,
       );
       check_and_add_event(
-        event_marks,
+        edu_marks,
         edu_weeks,
         'shoubu',
         event_hooks.school_rooftop,
-        event_obj,
+        e_random,
       );
 
       switch (edu_weeks) {
@@ -125,19 +126,23 @@ module.exports = class extends CustomizedCheck {
         case 47 + 41: // 11月第一周
         case 95 + 3: // 1月第三周
         case 95 + 29: // 8月第一周
-          add_event(event_hooks.week_start, event_obj_special);
+          add_event(event_hooks.week_start, e_special);
           break;
         case 47 + 3: // 1月第三周
         case 95 + 41: // 11月第一周
-          add_event(event_hooks.school_atrium, event_obj_special);
+          add_event(event_hooks.school_atrium, e_special);
           break;
         // 资深年1月第一周
         case 95 + 1:
-          add_event(event_hooks.out_church, event_obj_special);
+          add_event(event_hooks.out_church, e_special);
       }
       check_and_register_aim_race(7, aim_races, edu_weeks);
+    } else if (edu_weeks === 143 + 5) {
+      if (edu_marks.hoverboard === 1) {
+        add_event(event_hooks.week_start, e_random.set_arg('hoverboard'));
+      }
     } else if (edu_weeks === 143 + 9) {
-      add_event(event_hooks.week_start, event_obj.set_arg('palace'));
+      add_event(event_hooks.week_start, e_random.set_arg('palace'));
     }
   }
 
@@ -157,7 +162,7 @@ module.exports = class extends CustomizedCheck {
 
   get_edu_aims() {
     const buffer = [],
-      races = new RaceHistory(7).get();
+      races = RaceHistory.get(7).get();
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.hope_sta, 0, 5));
 

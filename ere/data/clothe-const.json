@@ -110,7 +110,7 @@
     },
     "26": {
       "": "MB-19890425",
-      "_仆": "CODE：淋面"
+      "_仆": "CODE: Glaçage"
     },
     "27": {
       "": "Straight・Line",
@@ -129,6 +129,7 @@
       "_万圣": "Make up Vampire!"
     },
     "31": {
+      "2": "Hello Hello Island",
       "": "全时狂热",
       "_仆": "MELTY GIFT"
     },
@@ -168,6 +169,7 @@
       "_江户": "水干抚子"
     },
     "40": {
+      "2": "Boho Flare",
       "": "真我/1928",
       "_江户": "秋樱舞者"
     },
@@ -193,7 +195,8 @@
     },
     "46": {
       "2": "黄昏Triumph",
-      "": "绝对☆LOVE"
+      "": "绝对☆LOVE",
+      "_应援": "Luminous☆Twirler"
     },
     "47": {
       "": "Heroic Author",
@@ -288,6 +291,7 @@
       "_礼": "Fleur Enneigée"
     },
     "70": {
+      "2": "Louve stellaire",
       "": "Féroce"
     },
     "71": {
@@ -330,14 +334,16 @@
       "_万圣": "Jetblack Automaton"
     },
     "84": {
-      "": "身披雷霆"
+      "": "身披雷霆",
+      "_礼": "With a Twist"
     },
     "85": {
       "": "华丽的红玉",
       "_礼": "Flowing Blue"
     },
     "86": {
-      "": "Onyx・Line"
+      "": "Onyx・Line",
+      "_婚": "Untouchable Eden"
     },
     "87": {
       "": "Flare",
@@ -349,6 +355,9 @@
     "89": {
       "": "Grand itinéraire"
     },
+    "90": {
+      "": "Le beau sommet"
+    },
     "91": {
       "": "Voyage étincelant"
     },
@@ -358,8 +367,12 @@
     "94": {
       "": "王者的呐喊"
     },
+    "96": {
+      "": "红色涂早驱具足"
+    },
     "98": {
-      "": "阴阳八卦☆开运衣"
+      "": "阴阳八卦☆开运衣",
+      "_应援": "光彩陆离☆招福衣"
     },
     "99": {
       "": "Star・Light・Ship",
@@ -383,19 +396,34 @@
       "": "Miracle Make-up!"
     },
     "107": {
-      "": "GLITTER!"
+      "": "GLITTER!",
+      "_礼": "Tap! Tap! Tap!"
     },
     "108": {
       "": "Red in Black"
     },
+    "109": {
+      "2": "Eternal Fairytale",
+      "": "Dream Successor"
+    },
     "110": {
-      "": "Future Weaver"
+      "": "Future Weaver",
+      "_婚": "Twinbell Queen"
+    },
+    "111": {
+      "": "Inherited Hope"
+    },
+    "113": {
+      "": "Assorted Cuteness♡"
     },
     "115": {
       "": "总览"
     },
     "116": {
       "": "Regina dei fiori"
+    },
+    "117": {
+      "": "戏剧性的芭蕾裙"
     },
     "119": {
       "": "梦境的尽头"
@@ -409,8 +437,21 @@
     "124": {
       "": "POPPING!"
     },
+    "127": {
+      "": "义心黑焰"
+    },
     "131": {
       "": "Smile My Way!"
+    },
+    "132": {
+      "": "9927 Wishes"
+    },
+    "133": {
+      "": "光彩陆离的编纂者"
+    },
+    "345": {
+      "2": "从零到零",
+      "": "ST2"
     }
   },
   "race_clothe_list": [

@@ -322,7 +322,7 @@ module.exports = (handlers) => {
       await me.say_and_wait(['最厉害最强的', tachyon.get_uma_sex_title()]);
       await me.say_and_wait([
         '超光速的',
-        tachyon.sex_code - 1 ? '公主' : '王子',
+        tachyon.sex_code === 1 ? '王子' : '公主',
       ]);
       era.println();
       await era.printAndWait([

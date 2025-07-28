@@ -202,7 +202,7 @@ module.exports = (handlers) => {
         coffee.get_colored_name(),
         '！几乎并排冲入最终直线！',
       ]);
-      if (check_aim_race(new RaceHistory(25).get(), race_enum.kiku_sho, 1, 1)) {
+      if (check_aim_race(RaceHistory.get(25).get(), race_enum.kiku_sho, 1, 1)) {
         await say_by_passer_by_and_wait('解说', [
           '『最强的',
           tachyon.get_uma_sex_title(),

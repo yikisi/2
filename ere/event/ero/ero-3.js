@@ -4,7 +4,7 @@
  */
 const era = require('#/era-electron');
 
-const NormalCommandLines = require('#/event/ero/common-lines/normal/normal-common');
+const NormalCommandLines = require('#/event/ero/common/normal/normal-common');
 const CustomizedEro = require('#/event/ero/ero-common');
 const TeioNormalCommunications = require('#/event/ero/ero-lines-3/normal-communications');
 const TeioNormalMakingOuts = require('#/event/ero/ero-lines-3/normal-making-outs');
@@ -33,7 +33,7 @@ module.exports = class extends CustomizedEro {
         extra_flag,
       );
     }
-    if (era.get('status:3:腿伤')) {
+    if (era.get('status:3:腿伤') > 0) {
       await era.printAndWait([
         me.get_colored_name(),
         ' 低头看着手里的报告，接受了里面显示的信息，抬头望向坐在窗前的担当。',

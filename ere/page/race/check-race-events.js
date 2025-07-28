@@ -30,15 +30,21 @@ const {
   sys_get_colored_callname,
   sys_like_chara,
 } = require('#/system/sys-calc-chara-others');
+const { sys_check_remote } = require('#/system/sys-calc-chara-param');
 
 const page_ero = require('#/page/page-ero');
 
+const { check_edu_script } = require('#/event/edu/edu-factory');
+const { check_rec_script } = require('#/event/rec/rec-factory');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { get_random_value } = require('#/utils/value-utils');
 
+const CharaInmon = require('#/data/ero/chara-inmon');
 const EroParticipant = require('#/data/ero/ero-participant');
 const { part_enum } = require('#/data/ero/part-const');
+const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const EtsukoLifeMarks = require('#/data/event/life-event-marks/life-event-marks-303');
@@ -74,13 +80,13 @@ const rec_list = {};
 async function check_race_events(race, info, team_contestants) {
   const may_life_marks = new MayLifeMarks();
   let handler = undefined;
-  const best = Math.min(...team_contestants.map((e) => e.rank.curr)),
-    mvp = team_contestants.find((e) => e.rank.curr === best).index_chara,
-    my_edu_marks = new MyEduMarks();
+  const best = Math.min(...team_contestants.map((e) => e.rank.curr));
+  const mvp = team_contestants.find((e) => e.rank.curr === best).index_chara;
+  const my_edu_marks = new MyEduMarks();
   if (best === 1) {
-    (rec_list[race] || []).forEach((e) => {
-      if (!get(`cflag:${e}:招募状态`) && !get(`cflag:${e}:随机招募`)) {
-        add(`cflag:${e}:随机招募`, -1);
+    (rec_list[race] || []).forEach((cid) => {
+      if (!get(`cflag:${cid}:招募状态`) && get(`cflag:${cid}:随机招募`) <= 0) {
+        add(`cflag:${cid}:随机招募`, -1);
       }
     });
   }
@@ -93,8 +99,8 @@ async function check_race_events(race, info, team_contestants) {
      * @author 无名黑奴
      */
     handler = async () => {
-      const etsuko = get_chara_talk(303),
-        me = get_chara_talk(0);
+      const etsuko = get_chara_talk(303);
+      const me = get_chara_talk(0);
       await print_event_name('开始采访', etsuko);
       await printAndWait([
         '在离开',
@@ -131,6 +137,7 @@ async function check_race_events(race, info, team_contestants) {
         me.get_colored_name(),
         ' 的队伍后续的表现。',
       ]);
+      set('cflag:303:招募状态', -1);
     };
   } else if (
     !new EtsukoLifeMarks().rape &&
@@ -452,7 +459,7 @@ async function check_race_events(race, info, team_contestants) {
       ]);
       println();
       await champion.say_and_wait(
-        '听到训练员就忽然夹的那么紧，你不会还觉得自己是什么优秀的训练员吧？只有在场上的时候你才是训练员，场下的妳不过是性处理用的母猪孕袋罢了，给我好好记清楚自己的身份啊！',
+        '听到训练员就忽然夹的那么紧，你不会还觉得自己是什么优秀的训练员吧？只有在场上的时候你才是训练员，场下的你不过是性处理用的母猪孕袋罢了，给我好好记清楚自己的身份啊！',
       );
       println();
       await printAndWait('随着斥责再度响起的是清脆的拍打声和沉闷的碰撞声。');
@@ -495,15 +502,24 @@ async function check_race_events(race, info, team_contestants) {
     };
   } else if (
     get(`cflag:${mvp}:性别`) !== 1 &&
+    !my_edu_marks.we_are_one &&
+    mvp > 0 &&
+    (!check_rec_script(mvp) || !check_edu_script(mvp)) &&
+    !sys_check_remote(mvp) &&
     best === 1 &&
     get(`love:${mvp}`) >= 75 &&
-    !my_edu_marks.we_are_one
+    Math.random() * 100 < 20 + (get(`base:${mvp}:性欲`) * 16) / 1000 &&
+    !CharaInmon.get(mvp).on(plugin_enum.tuna) &&
+    !CharaInmon.get(mvp).on(plugin_enum.meek)
   ) {
-    /** @author Mr.E. */
+    /**
+     * 「」心「」体
+     * @author Mr.E.
+     */
     handler = async () => {
-      my_edu_marks.we_are_one = 1;
-      const chara = get_chara_talk(mvp),
-        me = get_chara_talk(0);
+      my_edu_marks.we_are_one = get_random_value(4, 8);
+      const chara = get_chara_talk(mvp);
+      const me = get_chara_talk(0);
       await print_event_name(['「」心「」体'], chara);
       await printAndWait([
         '回到训练室，',
@@ -525,7 +541,7 @@ async function check_race_events(race, info, team_contestants) {
         sys_change_motivation(chara.id, -1) && (await waitAnyKey());
         sys_like_chara(chara.id, 0, 50) && (await waitAnyKey());
       } else {
-        await printAndWait(['下意识的反问调笑，却等到了意料之外的回答']);
+        await printAndWait(['下意识的反问调笑，却等到了意料之外的回答。']);
         println();
         await chara.say_and_wait([
           '我想成为 ',
@@ -538,7 +554,7 @@ async function check_race_events(race, info, team_contestants) {
           me.get_colored_name(),
           ' 的手往',
           chara.sex,
-          '的身上放',
+          '的身上放。',
         ]);
         println();
         await chara.say_and_wait([
@@ -550,7 +566,7 @@ async function check_race_events(race, info, team_contestants) {
         await printAndWait([
           '她用尾巴反锁上了门，一把抱住 ',
           me.get_colored_name(),
-          ' 冲向边上的沙发上',
+          ' 冲向边上的沙发上。',
         ]);
         println();
         await chara.say_and_wait(['扯下我的「头纱」，像对待妻子一样对我吧～']);
@@ -558,12 +574,12 @@ async function check_race_events(race, info, team_contestants) {
         await printAndWait([
           '在 ',
           me.get_colored_name(),
-          ' 意识过来的时候，一切都来不及了',
+          ' 意识过来的时候，一切都来不及了。',
         ]);
         println();
         printButton('「冷静一下，我想我们还有别的事情要做……」', 1);
         printButton(
-          '粗暴地扯下被当做头纱的浴巾，是时候让她知道谁才是床上的霸主了',
+          '粗暴地扯下被当做头纱的浴巾，是时候让她知道谁才是床上的霸主了！',
           2,
         );
         begin_and_init_ero(0, chara.id);

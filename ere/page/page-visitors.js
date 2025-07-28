@@ -1,19 +1,24 @@
 const {
+  add,
   clear,
   drawLine,
   get,
+  getLineCount,
   input,
   print,
   printAndWait,
+  printButton,
   printInColRows,
-  println,
+  printMultiColumns,
   set,
   setHorizontalAlign,
 } = require('#/era-electron');
 
+const { sys_get_billings } = require('#/system/sys-calc-base-cflag');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
+const arrive_location = require('#/page/components/arrive-location');
 const npc_common = require('#/page/components/npc-common');
 const print_page_header = require('#/page/components/page-header');
 const print_out_page = require('#/page/page-out');
@@ -21,109 +26,94 @@ const print_out_page = require('#/page/page-out');
 const { run_custom_rec } = require('#/event/rec/rec-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { get_abbr_number } = require('#/utils/value-utils');
 
 const CharaTitles = require('#/data/chara-titles');
 const event_hooks = require('#/data/event/event-hooks');
 const MayLifeMarks = require('#/data/event/life-event-marks/life-event-marks-343');
-const LocCharacters = require('#/data/event/loc-characters');
+const BryneLifeMarks = require('#/data/event/life-event-marks/life-event-marks-349');
+const loc_characters = require('#/data/event/loc-characters');
 const recruit_flags = require('#/data/event/recruit-flags');
-const YandereList = require('#/data/event/yandere-list');
+const yandere_list = require('#/data/event/yandere-list');
 const { get_celebration } = require('#/data/info-generator');
-const { location_enum, location_name } = require('#/data/locations');
-const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
+const { location_enum } = require('#/data/locations');
+const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
 /** @type {Record<string,function(CharaTalk,CharaTalk):{[handle]:function:Promise,[name]:string}>} */
 const handlers = {};
 
-[204, 346, 347, 348].forEach(
-  (e) =>
-    (handlers[e] = () =>
-      get(`cflag:${e}:招募状态`) === recruit_flags.yes
-        ? {}
-        : {
-            name: '「请来帮助我吧！」（招募）',
-            handle() {
-              set(`cflag:${e}:招募状态`, recruit_flags.yes);
-              if (get(`talent:${e}:病娇`)) {
-                new YandereList().push(e);
-              }
-              return printAndWait([
-                get_chara_talk(e).get_colored_name(),
-                ' 加入了队伍！',
-              ]);
-            },
-          }),
-);
+[204, 346, 347, 348].forEach((cid) => {
+  handlers[cid] = () =>
+    get(`cflag:${cid}:招募状态`) !== recruit_flags.yes
+      ? {
+          name: '「请来帮助我吧！」（招募）',
+          handle() {
+            set(`cflag:${cid}:招募状态`, recruit_flags.yes);
+            if (get(`talent:${cid}:病娇`) > 0) {
+              yandere_list.push(cid);
+            }
+            return printAndWait([
+              get_chara_talk(cid).get_colored_name(),
+              ' 加入了队伍！',
+            ]);
+          },
+        }
+      : {};
+});
 
-handlers[207] = () =>
-  get('cflag:207:招募状态') === recruit_flags.yes || get('love:207') < 25
-    ? {}
-    : {
-        name: '「一起努力吧！」（招募）',
-        handle() {
-          set('callname:207:-2', '索侬艾尔菲');
-          set('cflag:207:招募状态', recruit_flags.yes);
-          if (get('talent:207:病娇')) {
-            new YandereList().push(207);
-          }
-          return printAndWait([
-            get_chara_talk(207).get_colored_name(),
-            ' 加入了队伍！',
-          ]);
-        },
-      };
+[207, 308, 345].forEach((cid) => {
+  handlers[cid] = () =>
+    get(`cflag:${cid}:招募状态`) !== recruit_flags.yes &&
+    get(`love:${cid}`) >= 40
+      ? {
+          name: '「一起努力吧！」（招募）',
+          handle() {
+            set(`callname:${cid}:-2`, get(`callname:${cid}:-1`));
+            set(`cflag:${cid}:招募状态`, recruit_flags.yes);
+            if (get(`talent:${cid}:病娇`) > 0) {
+              yandere_list.push(cid);
+            }
+            return printAndWait([
+              get_chara_talk(cid).get_colored_name(),
+              ' 加入了队伍！',
+            ]);
+          },
+        }
+      : {};
+});
 
 handlers[303] = () =>
-  get('cflag:303:招募状态') === recruit_flags.yes
-    ? {}
-    : {
+  get('cflag:303:招募状态') !== recruit_flags.yes
+    ? {
         name: '给予更多许可（招募）',
         handle() {
           return run_custom_rec(303, event_hooks.recruit);
         },
-      };
-
-handlers[308] = () =>
-  get('cflag:308:招募状态') === recruit_flags.yes || get('love:308') < 25
-    ? {}
-    : {
-        name: '「一起努力吧！」（招募）',
-        handle() {
-          set('callname:308:-2', '光辉致意');
-          set('cflag:308:招募状态', recruit_flags.yes);
-          if (get('talent:308:病娇')) {
-            new YandereList().push(308);
-          }
-          return printAndWait([
-            get_chara_talk(308).get_colored_name(),
-            ' 加入了队伍！',
-          ]);
-        },
-      };
+      }
+    : {};
 
 handlers[343] = () =>
-  get('cflag:343:招募状态') === recruit_flags.yes ||
-  new MayLifeMarks().who_am_i !== 3
-    ? {}
-    : {
+  get('cflag:343:招募状态') !== recruit_flags.yes &&
+  new MayLifeMarks().who_am_i === 3
+    ? {
         name: '「一起努力吧！」（招募）',
         handle() {
           set('callname:343:-2', '佐岳五月');
           set('cflag:343:招募状态', recruit_flags.yes);
           if (get('talent:343:病娇')) {
-            new YandereList().push(343);
+            yandere_list.push(343);
           }
           return printAndWait([
             get_chara_talk(343).get_colored_name(),
             ' 加入了队伍！',
           ]);
         },
-      };
+      }
+    : {};
 
 handlers[344] = () =>
-  get('cflag:344:招募状态') === recruit_flags.yes || get('love:344') < 25
-    ? {}
-    : {
+  get('cflag:344:招募状态') !== recruit_flags.yes && get('love:344') >= 25
+    ? {
         name: '「一起努力吧！」（招募）',
         handle() {
           set('callname:344:-2', '都留歧凉花');
@@ -133,42 +123,274 @@ handlers[344] = () =>
             ' 加入了队伍！',
           ]);
         },
-      };
+      }
+    : {};
 
-handlers[345] = () =>
-  get('cflag:345:招募状态') === recruit_flags.yes || get('love:345') < 25
-    ? {}
-    : {
-        name: '「一起努力吧！」（招募）',
-        handle() {
-          set('callname:345:-2', '砂糖灯');
-          set('cflag:345:招募状态', recruit_flags.yes);
-          if (get('talent:345:病娇')) {
-            new YandereList().push(345);
+handlers[349] = () =>
+  get('cflag:349:招募状态') === recruit_flags.yes
+    ? {
+        name: '投资理财',
+        async handle() {
+          const bryne = get_chara_talk(349);
+          const life_marks = new BryneLifeMarks();
+          const money = get('flag:当前马币');
+          if (money < 1000 && !life_marks.funds) {
+            await bryne.say_and_wait(
+              `抱歉呐，但是 ${sys_get_callname(349, 0)} 你没有足够的资金吧？我的渠道里没有会接受 1000 马币以下的微型投资的机构诶……`,
+            );
+            return;
           }
-          return printAndWait([
-            get_chara_talk(345).get_colored_name(),
-            ' 加入了队伍！',
-          ]);
+          if (life_marks.funds > 0) {
+            print([
+              '现在向 ',
+              bryne.get_colored_name(),
+              ' 提供了 ',
+              get_abbr_number(life_marks.funds),
+              ' 马币资金，每周共提供 ',
+              get_abbr_number(life_marks.funds / (500 - 300 * life_marks.buff)),
+              ' 马币收益。',
+            ]);
+          }
+          printButton('投资（以 1000 马币为单位）', 1, {
+            disabled: money < 1000,
+          });
+          printButton('赎回', 2, { disabled: !life_marks.funds });
+          const _old = life_marks.funds;
+          if ((await input()) === 1) {
+            print('要投资多少马币？');
+            let flag = true;
+            let _new = 1;
+            const curr = getLineCount();
+            while (flag) {
+              await clear(getLineCount() - curr);
+              printMultiColumns([
+                {
+                  accelerator: 2,
+                  config: { align: 'center', disabled: _new <= 20, width: 4 },
+                  content: '-10,000',
+                  type: 'button',
+                },
+                {
+                  accelerator: 4,
+                  config: { align: 'center', disabled: _new === 1, width: 4 },
+                  content: '-1000',
+                  type: 'button',
+                },
+                {
+                  config: {
+                    align: 'center',
+                    width: 4,
+                  },
+                  content: [get_abbr_number(_new * 1000), ' 马币'],
+                  type: 'text',
+                },
+                {
+                  accelerator: 6,
+                  config: {
+                    align: 'center',
+                    disabled: money <= _new * 1000,
+                    width: 4,
+                  },
+                  content: '+1000',
+                  type: 'button',
+                },
+                {
+                  accelerator: 8,
+                  config: {
+                    align: 'center',
+                    disabled: money < (_new + 20) * 1000,
+                    width: 8,
+                  },
+                  content: '+10,000',
+                  type: 'button',
+                },
+                { content: [], type: 'text' },
+                {
+                  config: { width: 4 },
+                  accelerator: 98,
+                  content: '确定',
+                  type: 'button',
+                },
+                {
+                  config: { width: 4 },
+                  accelerator: 99,
+                  content: '取消',
+                  type: 'button',
+                },
+              ]);
+              switch (await input()) {
+                case 2:
+                  _new -= 20;
+                  break;
+                case 4:
+                  _new--;
+                  break;
+                case 6:
+                  _new++;
+                  break;
+                case 8:
+                  _new += 20;
+                  break;
+                case 98:
+                  flag = false;
+                  break;
+                case 99:
+                  _new = 0;
+                  flag = false;
+              }
+            }
+            if (_new > 0) {
+              life_marks.funds += _new * 1000;
+              add('flag:当前马币', -_new * 1000);
+              await printAndWait([
+                '向 ',
+                bryne.get_colored_name(),
+                ' 追加了 ',
+                get_abbr_number(_new * 1000),
+                ' 马币资金，每周共提供 ',
+                get_abbr_number(
+                  life_marks.funds / (500 - 300 * life_marks.buff),
+                ),
+                ' 马币收益。',
+              ]);
+            }
+          } else {
+            print([
+              '要赎回多少马币？共投资了 ',
+              get_abbr_number(life_marks.funds),
+              ' 马币：',
+            ]);
+            let flag = true;
+            let got = 1;
+            const curr = getLineCount();
+            while (flag) {
+              await clear(getLineCount() - curr);
+              printMultiColumns([
+                {
+                  accelerator: 2,
+                  config: { align: 'center', disabled: got <= 20, width: 4 },
+                  content: '-10,000',
+                  type: 'button',
+                },
+                {
+                  accelerator: 4,
+                  config: { align: 'center', disabled: got === 1, width: 4 },
+                  content: '-1000',
+                  type: 'button',
+                },
+                {
+                  config: {
+                    align: 'center',
+                    width: 4,
+                  },
+                  content: [get_abbr_number(got * 1000), ' 马币'],
+                  type: 'text',
+                },
+                {
+                  accelerator: 6,
+                  config: {
+                    align: 'center',
+                    disabled: life_marks.funds <= got * 1000,
+                    width: 4,
+                  },
+                  content: '+1000',
+                  type: 'button',
+                },
+                {
+                  accelerator: 8,
+                  config: {
+                    align: 'center',
+                    disabled: money < (got + 20) * 1000,
+                    width: 8,
+                  },
+                  content: '+10,000',
+                  type: 'button',
+                },
+                { content: [], type: 'text' },
+                {
+                  config: { width: 4 },
+                  accelerator: 98,
+                  content: '确定',
+                  type: 'button',
+                },
+                {
+                  config: { width: 4 },
+                  accelerator: 99,
+                  content: '取消',
+                  type: 'button',
+                },
+              ]);
+              switch (await input()) {
+                case 2:
+                  got -= 20;
+                  break;
+                case 4:
+                  got--;
+                  break;
+                case 6:
+                  got++;
+                  break;
+                case 8:
+                  got += 20;
+                  break;
+                case 98:
+                  flag = false;
+                  break;
+                case 99:
+                  got = 0;
+                  flag = false;
+              }
+            }
+            if (got > 0) {
+              life_marks.funds -= got * 1000;
+              add('flag:当前马币', got * 1000);
+              print(['取回了 ', get_abbr_number(got * 1000), ' 马币。']);
+              if (life_marks.funds > 0) {
+                await printAndWait([
+                  '还有 ',
+                  get_abbr_number(life_marks.funds),
+                  ' 马币资金，每周共提供 ',
+                  get_abbr_number(
+                    life_marks.funds / (500 - 300 * life_marks.buff),
+                  ),
+                  ' 马币收益。',
+                ]);
+              }
+            }
+          }
+          if (_old !== life_marks.funds) {
+            const billings = sys_get_billings();
+            let invest = billings.find((e) => e.creditor === -2);
+            if (!invest) {
+              invest = { creditor: -2, timer: -1, repay: 0 };
+              billings.push(invest);
+            }
+            invest.repay = life_marks.funds / (500 - 300 * life_marks.buff);
+          }
         },
-      };
+      }
+    : get('love:349') >= 40
+      ? {
+          name: '「一起努力吧！」（招募）',
+          handle() {
+            set('callname:349:-2', get('callname:349:-1'));
+            set('cflag:349:招募状态', recruit_flags.yes);
+            if (get('talent:349:病娇') > 0) {
+              yandere_list.push(349);
+            }
+            return printAndWait([
+              get_chara_talk(349).get_colored_name(),
+              ' 加入了队伍！',
+            ]);
+          },
+        }
+      : {};
 
 async function page_visitors() {
-  let flag_page = true,
-    flag_visitor = true;
-  set('flag:当前位置', location_enum.visitor);
-  await clear();
-  print_page_header();
-  drawLine();
-  const vehicle = get('flag:单人载具');
-  print([
-    vehicle ? `${vehicle_verbs[vehicle]}着${vehicle_names[vehicle]}` : '',
-    '抵达了 ',
-    location_name[location_enum.visitor],
-    '……',
-  ]);
-  const loc_visitors = new LocCharacters();
-  let visitor_list = loc_visitors.get(location_enum.visitor);
+  let flag_page = true;
+  let flag_visitor = true;
+  await arrive_location(set('flag:当前位置', location_enum.visitor));
+  let visitor_list = loc_characters.get(location_enum.visitor);
   if (visitor_list.length > 0) {
     const celebration = get_celebration(),
       me = get_chara_talk(0);
@@ -176,28 +398,31 @@ async function page_visitors() {
       setHorizontalAlign('space-around');
       printInColRows(
         [{ content: '要和谁交谈？', type: 'text' }],
-        ...visitor_list.map((e) => ({
-          columns: [
-            {
-              names: `${get(`cstr:${e}:头像`)}_半身`,
-              type: 'image.whole',
-            },
-            {
-              accelerator: e,
-              config: { align: 'center' },
-              content: get(`callname:${e}:-2`),
-              type: 'button',
-            },
-          ],
-          config: { width: 4 },
-        })),
+        ...visitor_list.map((e) => {
+          const image = get(`cstr:${e}:头像`);
+          return {
+            columns: [
+              {
+                names: `${image}_私_半身\t${image}_半身`,
+                type: 'image.whole',
+              },
+              {
+                accelerator: e,
+                config: { align: 'center' },
+                content: get(`callname:${e}:-2`),
+                type: 'button',
+              },
+            ],
+            config: { width: 4 },
+          };
+        }),
         [{ accelerator: 999, type: 'button', content: '离开' }],
       );
       setHorizontalAlign('start');
-      const chara_id = await input();
-      if (chara_id !== 999) {
-        const chara = get_chara_talk(chara_id),
-          title = new CharaTitles(chara.id).get_curr_title();
+      const cid = await input();
+      if (cid !== 999) {
+        const chara = get_chara_talk(cid);
+        const title = CharaTitles.get(chara.id).get_curr_title();
         flag_visitor = true;
         while (flag_visitor) {
           const temp_flag = await npc_common(
@@ -222,7 +447,7 @@ async function page_visitors() {
             {
               name: `庆祝 ${celebration}`,
             },
-            handlers[chara_id](chara, me),
+            handlers[cid](chara, me),
             { name: '再见' },
           );
           if ((flag_visitor &&= temp_flag)) {
@@ -242,13 +467,12 @@ async function page_visitors() {
       }
     }
     drawLine();
-    await printAndWait('回去了……');
+    await printAndWait('【折返了】');
   } else {
     drawLine();
-    await printAndWait('没有人在的样子……回去了……');
+    await printAndWait('【没有人在的样子……折返了】');
   }
-  loc_visitors.set(location_enum.visitor, visitor_list);
-  println();
+  loc_characters.set(location_enum.visitor, visitor_list);
   await sys_get_random_event(event_hooks.back_school)({
     loc: location_enum.visitor,
   });

@@ -51,7 +51,7 @@ module.exports = class extends CustomizedEdu {
       return;
     }
     const your_name = me.name;
-    new EventMarks(0).sub(event_hooks.out_shopping);
+    EventMarks.get(0).sub(event_hooks.out_shopping);
     await print_event_name('漆黑珍宝', flash);
     await era.printAndWait(
       `独自在商场准备购买生活用品时，${your_name} 突然在附近看到了满脸闷闷不乐的荣进闪耀。`,

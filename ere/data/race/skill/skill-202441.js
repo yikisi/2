@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛中偶尔会发挥更强的实力速度、力量、根性大幅提升人气较低的情况下更容易触发',
   20244,
   2,
-  UmaSkill.rarity_enum.gold,
   1,
   508,
   [() => true, () => true],

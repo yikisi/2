@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在临近终盘时少量提升速度，并且根据发动的绿色技能数，额外提升速度和加速度',
   10098,
   1,
-  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [() => true, () => true],

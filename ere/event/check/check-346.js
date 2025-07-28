@@ -21,7 +21,7 @@ const aim_races = {
 
 module.exports = class extends CustomizedCheck {
   check_and_get_titles(aim_check) {
-    const races = new RaceHistory(this.id).get(),
+    const races = RaceHistory.get(this.id).get(),
       titles = [];
     if (
       check_aim_race(races, race_enum.sats_sho, 1, 1) &&

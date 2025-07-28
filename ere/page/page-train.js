@@ -1,4 +1,4 @@
-﻿const era = require('#/era-electron');
+const era = require('#/era-electron');
 
 const {
   sys_check_train_enabled,
@@ -13,7 +13,7 @@ const print_page_header = require('#/page/components/page-header');
 const select_target_chara = require('#/page/components/select-target');
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
-const GameGuides = require('#/event/others/game-guides');
+const game_guides = require('#/event/others/game-guides');
 const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -62,17 +62,19 @@ function get_skill_buffer(chara_id, skill_control, pt, discount) {
   let available_skills = {},
     got_skills = {};
   common_skills.forEach((e) => (available_skills[e] = 1));
-  new CharaAvailableSkills(chara_id).get().forEach((e) => {
-    const s = skills_dict[e];
-    if (!unused_group2level[s.group_id]) {
-      unused_group2level[s.group_id] = s.group_level;
-    } else {
-      unused_group2level[s.group_id] = Math.min(
-        unused_group2level[s.group_id],
-        s.group_level,
-      );
-    }
-  });
+  CharaAvailableSkills.get(chara_id)
+    .get()
+    .forEach((e) => {
+      const s = skills_dict[e];
+      if (!unused_group2level[s.group_id]) {
+        unused_group2level[s.group_id] = s.group_level;
+      } else {
+        unused_group2level[s.group_id] = Math.min(
+          unused_group2level[s.group_id],
+          s.group_level,
+        );
+      }
+    });
   available_skills = Object.keys(available_skills)
     .map(Number)
     .reduce((p, c) => {
@@ -153,11 +155,11 @@ module.exports = async () => {
     .filter((chara_id) => sys_check_train_enabled(chara_id));
   let flag_train = true,
     chara_id = era.get('flag:当前互动角色'),
-    skill_control = new CharaSkills(chara_id),
+    skill_control = CharaSkills.get(chara_id),
     index = train_list.indexOf(chara_id),
     discount = get_discount(chara_id);
 
-  await new GameGuides().office_train();
+  await game_guides.office_train();
 
   while (flag_train) {
     await era.clear();
@@ -457,13 +459,13 @@ module.exports = async () => {
             await select_target_chara(chara_info_type.train),
           )),
         );
-        skill_control = new CharaSkills(chara_id);
+        skill_control = CharaSkills.get(chara_id);
         discount = get_discount(chara_id);
         break;
       case 101:
       case 102:
         chara_id = train_list[ret === 101 ? --index : ++index];
-        skill_control = new CharaSkills(chara_id);
+        skill_control = CharaSkills.get(chara_id);
         discount = get_discount(chara_id);
         break;
       case 103:
@@ -512,7 +514,7 @@ module.exports = async () => {
                 ability_filter === -1 ||
                 s.ability_tags.indexOf(ability_filter) !== -1,
             ];
-            skill_page_size = enable_filter ? 66 : 84;
+            skill_page_size = enable_filter ? 63 : 84;
             const filtered_buffer = buffer.filter(
                 (e) =>
                   !enable_filter ||
@@ -576,7 +578,7 @@ module.exports = async () => {
                         content: '技能类型',
                         type: 'text',
                       },
-                      ...['全部', '被动', '恢复', '增幅', '削弱'].map(
+                      ...['全部', '常时', '恢复', '增幅', '控制'].map(
                         (e, i) => ({
                           accelerator: 930 + i,
                           config: {

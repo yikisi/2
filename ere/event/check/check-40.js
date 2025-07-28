@@ -29,7 +29,7 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
   function (races) {
     return (
       check_aim_race(races, race_enum.hans_fil, 0, 1) &&
-      attr_names.findIndex((e) => get(`abl:${this.id}:${e}训练等级`) < 3) ===
+      attr_names.findIndex((e) => get(`abl:${this.id}:${e}训练等级`) <= 3) ===
         -1 &&
       !new CityEduMarks().title_check
     );

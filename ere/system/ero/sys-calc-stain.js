@@ -74,21 +74,24 @@ module.exports = {
    * @param {number} chara_id
    * @param {number} part
    * @param {number} lower_border
-   * @param {number} [_upper_border]
+   * @param {number} upper_border
    * @param {function(number):number} [cb]
    * @returns {number}
    */
-  count_part_stain_in_range(chara_id, part, lower_border, _upper_border, cb) {
-    let ret = 0,
-      stain = era.get(`stain:0:${part_touch[part]}`),
-      upper_border = _upper_border;
+  count_part_stain_in_range(
+    chara_id,
+    part,
+    lower_border,
+    upper_border = 99,
+    cb,
+  ) {
+    let ret = 0;
+    let stain = era.get(`stain:0:${part_touch[part]}`);
     const cleaning_tolerance = era.get(`talent:${chara_id}:洁净重视`);
-    upper_border !== undefined && (upper_border += cleaning_tolerance === 1);
+    upper_border += +(cleaning_tolerance === 1);
     const intolerable =
-      upper_border === undefined || upper_border > stain_names.length
-        ? 0
-        : stain >> upper_border;
-    if (intolerable) {
+      upper_border > stain_names.length ? 0 : stain >> upper_border;
+    if (intolerable > 0) {
       stain -= intolerable << upper_border;
       ret = -2 * count_stain(intolerable);
     }
@@ -107,6 +110,7 @@ module.exports = {
   merge_stain(attacker, defender, item) {
     let use_item = false;
     const stain_keys = [attacker, defender]
+      .filter((e) => e.id !== -1 && e.part !== -1)
       .map((e) => {
         if (e.part === part_enum.item) {
           use_item =
@@ -119,7 +123,7 @@ module.exports = {
           return `stain:${e.id}:${part_touch[e.part]}`;
         }
       })
-      .filter((e) => e);
+      .filter((e) => e !== undefined);
     if (stain_keys.length === 2) {
       const stain = era.get(stain_keys[0]) | era.get(stain_keys[1]);
       era.set(stain_keys[0], stain);
@@ -166,13 +170,13 @@ module.exports = {
     delete cache[chara_id];
   },
   /**
-   * @param {number} chara_id
+   * @param {number} cid
    * @param {number} part
    * @param {number} stain_type
    */
-  set_stain(chara_id, part, ...stain_type) {
-    let result = era.get(`stain:${chara_id}:${part_touch[part]}`);
+  set_stain(cid, part, ...stain_type) {
+    let result = era.get(`stain:${cid}:${part_touch[part]}`);
     stain_type.forEach((type) => (result |= 1 << type));
-    era.set(`stain:${chara_id}:${part_touch[part]}`, result);
+    era.set(`stain:${cid}:${part_touch[part]}`, result);
   },
 };

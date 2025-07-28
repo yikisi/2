@@ -48,7 +48,6 @@ const { adaptability_names } = require('#/data/train-const');
  * @param {number[]} juels
  * @param {number} all_juels
  * @param {number} chara_id
- * @returns {[[{type: string, config: {content: string}},{type: string, config: {width: number}, content: string},{type: string, config: {width: number, align: string}, content: string},{type: string, config: {width: number, align: string}, content: string},{type: string, config: {width: number, align: string}, content: string},null,null,null,null],...{columns: [{type: string, config: {width: number}, content: *},{type: string, config: {width: number, align: string}, content},{type: string, config: {width: number, align: string}, content: *},{type: string, config: {color: *, width: number, align: string}, content: string},{accelerator, type: string, config: {width: number, disabled, align: string}, content: string}], config: {width: number}}[],{columns: [{type: string, config: {width: number}, content: *},{type: string, config: {width: number, align: string}, content: string},{type: string, config: {width: number, align: string}, content: string},{type: string, config: {color: *, width: number, align: string}, content: string},{accelerator: number, type: string, config: {width: number, disabled: boolean, align: string}, content: string}], config: {width: number}}]}
  */
 function generate_gene_buttons(
   genes,
@@ -218,43 +217,43 @@ function generate_gene_buttons(
 }
 
 async function print_inherit_page() {
-  const palace_list = [],
-    edu_list = [],
-    discount = get('flag:因子消耗量');
+  const palace_list = [];
+  const edu_list = [];
+  const discount = get('flag:因子消耗量');
   sys_filter_chara('cflag', '招募状态', recruit_flags.yes).forEach((e) => {
-    if (get(`cflag:${e}:育成回合计时`) < 3 * 48) {
+    if (e > 0 && get(`cflag:${e}:育成回合计时`) < 3 * 48) {
       edu_list.push(e);
     } else if (get(`cflag:${e}:殿堂`) > 0) {
       palace_list.push(e);
     }
   });
-  if (get('cflag:0:种族')) {
+  if (get('cflag:0:种族') > 0) {
     edu_list.unshift(0);
   }
-  let selected_id = get('flag:当前互动角色'),
-    flag_inherit = true,
-    chara_genes,
-    available_genes,
-    chara,
-    juels = [0, 0, 0],
-    used_juels = [0, 0, 0];
-  if (selected_id === 0 && edu_list[0] !== 0) {
-    selected_id = undefined;
+  let selected = get('flag:当前互动角色');
+  let flag_inherit = true;
+  let chara_genes;
+  let available_genes;
+  let chara;
+  let jewels = [0, 0, 0];
+  let used_jewels = [0, 0, 0];
+  if (selected === 0 && edu_list[0] !== 0) {
+    selected = undefined;
   } else {
-    available_genes = new CharaAvailableGenes(selected_id);
-    chara_genes = new CharaGenes(selected_id);
-    chara = get_chara_talk(selected_id);
+    available_genes = new CharaAvailableGenes(selected);
+    chara_genes = new CharaGenes(selected);
+    chara = get_chara_talk(selected);
   }
   while (flag_inherit) {
     await clear();
-    if (selected_id > 0) {
-      const chara = get_chara_talk(selected_id);
-      juels = gene_juel_names.map((e) => get(`juel:${selected_id}:${e}`));
-      used_juels = juels.map(
-        (e, i) => e + get(`juel:0:${gene_juel_names[i]}`) / 2,
+    if (selected > 0) {
+      const chara = get_chara_talk(selected);
+      jewels = gene_juel_names.map((e) => get(`jewel:${selected}:${e}`));
+      used_jewels = jewels.map(
+        (e, i) => e + get(`jewel:0:${gene_juel_names[i]}`) / 2,
       );
-      let gene_a = get(`cflag:${selected_id}:继承方1`),
-        gene_b = get(`cflag:${selected_id}:继承方2`);
+      let gene_a = get(`cflag:${selected}:继承方1`),
+        gene_b = get(`cflag:${selected}:继承方2`);
       drawLine({ content: `为 ${chara.actual_name} 继承因子` });
       if (gene_a) {
         printInColRows(
@@ -262,10 +261,10 @@ async function print_inherit_page() {
             columns: [
               { config: { content: '因子' }, type: 'divider' },
               ...gene_juel_names.map((e, i) => {
-                const my_juel = get(`juel:0:${e}`);
+                const my_juel = get(`jewel:0:${e}`);
                 return {
                   config: { color: gene_type_colors[i], offset: 1, width: 23 },
-                  content: `${e}因子：${get(`juel:${chara.id}:${e}`)}${my_juel ? ` (+${my_juel})` : ''}`,
+                  content: `${e}因子：${get(`jewel:${chara.id}:${e}`)}${my_juel ? ` (+${my_juel})` : ''}`,
                   type: 'text',
                 };
               }),
@@ -275,7 +274,7 @@ async function print_inherit_page() {
           {
             columns: [
               {
-                names: get_image(selected_id)
+                names: get_image(selected)
                   .map((_i) => `${_i}_半身`)
                   .join('\t'),
                 type: 'image.whole',
@@ -334,9 +333,9 @@ async function print_inherit_page() {
             chara_genes,
             available_genes,
             discount,
-            used_juels,
-            juels.reduce((p, c) => p + c),
-            selected_id,
+            used_jewels,
+            jewels.reduce((p, c) => p + c),
+            selected,
           ),
           [
             {
@@ -351,9 +350,9 @@ async function print_inherit_page() {
       } else {
         print('需要有两名以上可以继承的角色……', { align: 'center' });
       }
-    } else if (selected_id === 0) {
-      used_juels = juels = gene_juel_names.map((e) =>
-        get(`juel:${selected_id}:${e}`),
+    } else if (selected === 0) {
+      used_jewels = jewels = gene_juel_names.map((e) =>
+        get(`jewel:${selected}:${e}`),
       );
       printInColRows(
         [
@@ -364,25 +363,32 @@ async function print_inherit_page() {
         ],
         gene_juel_names.map((e, i) => ({
           config: { color: gene_type_colors[i], width: 6 },
-          content: `${e}因子：${get(`juel:${selected_id}:${e}`)}`,
+          content: `${e}因子：${get(`jewel:${selected}:${e}`)}`,
           type: 'text',
         })),
         ...generate_gene_buttons(
           chara_genes,
           available_genes,
           discount,
-          used_juels,
-          juels.reduce((p, c) => p + c),
-          selected_id,
+          used_jewels,
+          jewels.reduce((p, c) => p + c),
+          selected,
         ),
         [
           {
             accelerator: available_genes.get_values().length + 3,
-            config: { disabled: chara_genes.count() !== 15 },
+            config: { disabled: chara_genes.count() < 15 },
             content: '遗忘所有因子能力',
             type: 'button',
           },
-          { content: '* 马娘训练员最多继承15个因子能力', type: 'text' },
+          {
+            content: [
+              '* 马娘训练员最多继承 ',
+              { content: '15', fontWeight: 'bold' },
+              ' 个因子能力',
+            ],
+            type: 'text',
+          },
         ],
       );
     }
@@ -392,8 +398,8 @@ async function print_inherit_page() {
         ? edu_list.map((e) => ({
             accelerator: 1000 + e,
             config: {
-              buttonType: e === selected_id ? 'warning' : 'info',
-              disabled: selected_id === e,
+              buttonType: e === selected ? 'warning' : 'info',
+              disabled: selected === e,
               width: 4,
             },
             content: get(`callname:${e}:-1`),
@@ -475,34 +481,34 @@ async function print_inherit_page() {
             .filter((e) => e[1])
             .forEach((e, i) => {
               gene_owner_list.push(Number(e[0]));
-              set(`cflag:${selected_id}:继承方${i + 1}`, Number(e[0]));
-              set(`cflag:${e[0]}:被继承`, selected_id);
+              set(`cflag:${selected}:继承方${i + 1}`, Number(e[0]));
+              set(`cflag:${e[0]}:被继承`, selected);
             });
-          const juel_list = gene_juel_names.map(
+          const jewel_list = gene_juel_names.map(
             (e) =>
-              get(`juel:${gene_owner_list[0]}:${e}`) +
-              get(`juel:${gene_owner_list[1]}:${e}`),
+              get(`jewel:${gene_owner_list[0]}:${e}`) +
+              get(`jewel:${gene_owner_list[1]}:${e}`),
           );
-          switch (Math.floor(get(`cflag:${selected_id}:育成回合计时`) / 48)) {
+          switch (Math.floor(get(`cflag:${selected}:育成回合计时`) / 48)) {
             case 0:
-              juel_list.forEach((e, i) =>
+              jewel_list.forEach((e, i) =>
                 set(
-                  `juel:${selected_id}:${gene_juel_names[i]}`,
+                  `jewel:${selected}:${gene_juel_names[i]}`,
                   Math.floor(e * 0.3),
                 ),
               );
               break;
             case 1:
-              juel_list.forEach((e, i) =>
+              jewel_list.forEach((e, i) =>
                 set(
-                  `juel:${selected_id}:${gene_juel_names[i]}`,
+                  `jewel:${selected}:${gene_juel_names[i]}`,
                   Math.floor(e * 0.3) + Math.floor(e * 0.4),
                 ),
               );
               break;
             case 2:
-              juel_list.forEach((e, i) =>
-                set(`juel:${selected_id}:${gene_juel_names[i]}`, e),
+              jewel_list.forEach((e, i) =>
+                set(`jewel:${selected}:${gene_juel_names[i]}`, e),
               );
           }
           available_genes.merge(
@@ -516,28 +522,28 @@ async function print_inherit_page() {
             ' 获得了：',
             { isBr: true },
             {
-              content: `粉因子 × ${get(`juel:${selected_id}:粉`)}`,
+              content: `粉因子 × ${get(`jewel:${selected}:粉`)}`,
               color: gene_type_colors[0],
             },
             ' ',
             {
-              content: `蓝因子 × ${get(`juel:${selected_id}:蓝`)}`,
+              content: `蓝因子 × ${get(`jewel:${selected}:蓝`)}`,
               color: gene_type_colors[1],
             },
             ' ',
             {
-              content: `白因子 × ${get(`juel:${selected_id}:白`)}`,
+              content: `白因子 × ${get(`jewel:${selected}:白`)}`,
               color: gene_type_colors[2],
             },
           ]);
           println();
-          let wait_flag = sys_like_chara(selected_id, gene_owner_list[0], 100);
+          let wait_flag = sys_like_chara(selected, gene_owner_list[0], 100);
           wait_flag =
-            sys_like_chara(selected_id, gene_owner_list[1], 100) || wait_flag;
+            sys_like_chara(selected, gene_owner_list[1], 100) || wait_flag;
           wait_flag =
-            sys_like_chara(gene_owner_list[0], selected_id, 50) || wait_flag;
+            sys_like_chara(gene_owner_list[0], selected, 50) || wait_flag;
           wait_flag =
-            sys_like_chara(gene_owner_list[1], selected_id, 50) || wait_flag;
+            sys_like_chara(gene_owner_list[1], selected, 50) || wait_flag;
           wait_flag && (await waitAnyKey());
         } else if (ret1 === 1001) {
           flag_select_inherit = false;
@@ -546,21 +552,27 @@ async function print_inherit_page() {
         }
       }
     } else if (ret >= 1000) {
-      selected_id = ret - 1000;
-      available_genes = new CharaAvailableGenes(selected_id);
-      chara_genes = new CharaGenes(selected_id);
-      chara = get_chara_talk(selected_id);
+      selected = ret - 1000;
+      available_genes = new CharaAvailableGenes(selected);
+      chara_genes = new CharaGenes(selected);
+      chara = get_chara_talk(selected);
     } else if (ret === available_genes.get_values().length + 3) {
       if (
         await select_yes_or_no('遗忘所有因子能力吗？已提高的属性上限不会消失')
       ) {
-        new CharaSkills(0).remove(
+        CharaSkills.get(0).remove(
           ...chara_genes
             .get_values()
             .filter((e) => gene_dict[e.id].type === gene_type_enum.skill)
             .map((e) => gene_dict[e.id].value),
         );
-        adaptability_names.forEach((e) => set(`cflag:0:${e}适性`, 0));
+        let _src = get('cflag:0:模版角色');
+        if (_src <= 0) {
+          _src = 0;
+        }
+        adaptability_names.forEach((e) =>
+          set(`cflag:0:${e}适性`, get(`cflag:${_src}:${e}适性`)),
+        );
         chara_genes.get_values().forEach((e) => {
           if (e.type === gene_type_enum.base) {
             add(`base:0:${gene_dict[e.id].type_value}`, -gene_dict[e.id].value);
@@ -573,10 +585,10 @@ async function print_inherit_page() {
         ]);
       }
     } else if (ret === available_genes.get_values().length + 2) {
-      const pt = 2 * juels.reduce((p, c) => p + c, 0);
+      const pt = 2 * jewels.reduce((p, c) => p + c, 0);
       if (await select_yes_or_no(`将剩余因子转换成 ${pt} 点技能点数吗？`)) {
-        add(`exp:${selected_id}:技能点数`, pt);
-        gene_juel_names.forEach((e) => set(`juel:${selected_id}:${e}`, 0));
+        add(`exp:${selected}:技能点数`, pt);
+        gene_juel_names.forEach((e) => set(`jewel:${selected}:${e}`, 0));
         await printAndWait([
           chara.get_colored_name(),
           ' 获得了 ',
@@ -590,8 +602,8 @@ async function print_inherit_page() {
             ? gene_dict[300000]
             : gene_dict[available_genes.get_values()[ret - 1].id],
         cost =
-          Math.floor((gene.cost * (100 + discount)) / 100) * (1 + !selected_id),
-        delta = cost - juels[gene.type],
+          Math.floor((gene.cost * (100 + discount)) / 100) * (1 + !selected),
+        delta = cost - jewels[gene.type],
         available_count =
           available_genes.get_count(gene.id) - chara_genes.get_count(gene.id);
       if (
@@ -601,21 +613,21 @@ async function print_inherit_page() {
             ? [
                 {
                   color: gene_type_colors[gene.type],
-                  content: `${gene_juel_names[gene.type]}因子 × ${cost}/${juels[gene.type]}`,
+                  content: `${gene_juel_names[gene.type]}因子 × ${cost}/${jewels[gene.type]}`,
                 },
                 ' ',
               ]
             : [
                 {
                   color: gene_type_colors[gene.type],
-                  content: `${gene_juel_names[gene.type]}因子 × ${juels[gene.type]}`,
+                  content: `${gene_juel_names[gene.type]}因子 × ${jewels[gene.type]}`,
                 },
                 '（与 ',
                 get_chara_talk(0).get_colored_name(),
                 ' 的 ',
                 {
                   color: gene_type_colors[gene.type],
-                  content: `${gene_juel_names[gene.type]}因子 × ${delta * 2}/${(used_juels[gene.type] - juels[gene.type]) * 2}`,
+                  content: `${gene_juel_names[gene.type]}因子 × ${delta * 2}/${(used_jewels[gene.type] - jewels[gene.type]) * 2}`,
                 },
                 '）',
               ]),
@@ -630,13 +642,13 @@ async function print_inherit_page() {
         let temp;
         switch (gene.type) {
           case gene_type_enum.adapt:
-            temp = get(`cflag:${selected_id}:${gene.type_value}适性`);
+            temp = get(`cflag:${selected}:${gene.type_value}适性`);
             if (temp < 4) {
-              temp = set(`cflag:${selected_id}:${gene.type_value}适性`, 4);
+              temp = set(`cflag:${selected}:${gene.type_value}适性`, 4);
             } else if (temp < 6) {
-              temp = set(`cflag:${selected_id}:${gene.type_value}适性`, 6);
+              temp = set(`cflag:${selected}:${gene.type_value}适性`, 6);
             } else {
-              temp = set(`cflag:${selected_id}:${gene.type_value}适性`, 7);
+              temp = set(`cflag:${selected}:${gene.type_value}适性`, 7);
             }
             await printAndWait([
               chara.get_colored_name(),
@@ -650,27 +662,27 @@ async function print_inherit_page() {
             break;
           case gene_type_enum.base:
             set(
-              `maxbase:${selected_id}:${gene.type_value}`,
+              `maxbase:${selected}:${gene.type_value}`,
               Math.min(
-                get(`maxbase:${selected_id}:${gene.type_value}`) + gene.value,
+                get(`maxbase:${selected}:${gene.type_value}`) + gene.value,
                 2000,
               ),
             );
-            add(`base:${selected_id}:${gene.type_value}`, gene.value);
+            add(`base:${selected}:${gene.type_value}`, gene.value);
             await printAndWait([
               chara.get_colored_name(),
               ' 的 ',
               { content: gene.type_value, color: attr_colors[gene.type_value] },
               ' 现在是 ',
               {
-                content: `${Math.floor(get(`base:${selected_id}:${gene.type_value}`))}/${get(`maxbase:${selected_id}:${gene.type_value}`)}`,
+                content: `${Math.floor(get(`base:${selected}:${gene.type_value}`))}/${get(`maxbase:${selected}:${gene.type_value}`)}`,
                 color: attr_colors[gene.type_value],
               },
             ]);
             break;
           case gene_type_enum.skill:
             if (gene.value < 100000) {
-              add(`exp:${selected_id}:技能点数`, gene.value);
+              add(`exp:${selected}:技能点数`, gene.value);
               await printAndWait([
                 chara.get_colored_name(),
                 ' 获得了 ',
@@ -678,16 +690,16 @@ async function print_inherit_page() {
                 ' 点技能点数',
               ]);
             } else {
-              get_skills_and_print_in_event(selected_id, [gene.value]) &&
+              get_skills_and_print_in_event(selected, [gene.value]) &&
                 (await waitAnyKey());
             }
         }
         chara_genes.add(gene.id);
         if (delta <= 0) {
-          add(`juel:${selected_id}:${gene_juel_names[gene.type]}`, -cost);
+          add(`jewel:${selected}:${gene_juel_names[gene.type]}`, -cost);
         } else {
-          set(`juel:${selected_id}:${gene_juel_names[gene.type]}`, 0);
-          add(`juel:0:${gene_juel_names[gene.type]}`, delta * -2);
+          set(`jewel:${selected}:${gene_juel_names[gene.type]}`, 0);
+          add(`jewel:0:${gene_juel_names[gene.type]}`, delta * -2);
         }
       }
     }

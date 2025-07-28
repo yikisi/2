@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛终盘最终弯道处于前方时被超越时，速度持续上升',
   11013,
   1,
-  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [() => true, () => true],

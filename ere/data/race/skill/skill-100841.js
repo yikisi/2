@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛终盘位于后方时，在最终直线处解除自我封印向前突进，比赛场地为东京竞马场中距离时，以极快速度向前突进',
   10084,
   1,
-  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [

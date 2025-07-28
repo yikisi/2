@@ -8,7 +8,6 @@ class RubyEduMarks extends EduEventMarks {
   wait_station;
   sugu;
   shopping_together;
-  hot_spring;
 
   constructor() {
     super(85);
