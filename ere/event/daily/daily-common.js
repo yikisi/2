@@ -224,7 +224,6 @@ class CustomizedDaily {
   // eslint-disable-next-line no-unused-vars
   async end_talk(hentai) {}
 
-  /** @author 雞雞 */
   good_morning() {
     const dict = this.#dict;
     dict['骏川'] = era.get('callname:301:-2');

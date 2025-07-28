@@ -135,6 +135,7 @@ gene_dict[901081] = require('#/data/race/gene/gene-901081');
 gene_dict[901091] = require('#/data/race/gene/gene-901091');
 gene_dict[901101] = require('#/data/race/gene/gene-901101');
 gene_dict[901111] = require('#/data/race/gene/gene-901111');
+gene_dict[901131] = require('#/data/race/gene/gene-901131');
 gene_dict[901151] = require('#/data/race/gene/gene-901151');
 gene_dict[901161] = require('#/data/race/gene/gene-901161');
 gene_dict[901171] = require('#/data/race/gene/gene-901171');

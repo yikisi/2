@@ -422,6 +422,7 @@ function change_motion(attacker, defender, ...aim_motions) {
   const aim = get_extremum_entry(aim_motions, (e) => Math.abs(e - curr)).min;
   era.logger.debug(
     `[closet motion] atk=${attacker}, def=${defender},\naim motion list=[${aim_motions
+      .filter((e) => e !== undefined)
       .map((e) => e.toString().padStart(5, '0'))
       .join(',')}]\ncurrent=${curr.toString().padStart(5, '0')}\nselected=${aim
       .toString()
@@ -478,6 +479,7 @@ function change_motion_by_base(attacker, defender, compat_motions, is_up = -1) {
   const aim = get_extremum_entry(motion_list, (e) => Math.abs(e - curr)).min;
   era.logger.debug(
     `[closet motion] atk=${attacker}, def=${defender},\naim motion list=[${motion_list
+      .filter((e) => e !== undefined)
       .map((e) => e.toString().padStart(5, '0'))
       .join(',')}]\ncurrent=${curr.toString().padStart(5, '0')}\nselected=${aim
       .toString()
