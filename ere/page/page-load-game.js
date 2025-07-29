@@ -465,7 +465,7 @@ module.exports = async () => {
                 era.set('flag:比赛难度', -40);
               }
             }
-            if (version <= 2003) {
+            if (version <= 2004) {
               if (
                 !era.get('cflag:349:可再次育成') &&
                 !era.get('cflag:349:殿堂') &&

@@ -16810,6 +16810,7 @@
           "37": 6,
           "38": 5,
           "39": 0,
+          "50": 1,
           "65": 5,
           "67": 0
         },
@@ -16836,6 +16837,11 @@
           "5": 0,
           "6": 0,
           "7": 0
+        },
+        "juel": {
+          "20": 100,
+          "21": 100,
+          "22": 100
         }
       },
       "400": {
@@ -17304,8 +17310,8 @@
       "title": "EraUma",
       "gameCode": 29407,
       "defaultChara": 0,
-      "version": 2004,
-      "versionName": "2.004 (agito)",
+      "version": 2005,
+      "versionName": "2.005 (agito)",
       "allowVersion": 1000,
       "site": "https://gitgud.io/umaera/erauma/-/releases/permalink/latest",
       "versionCheck": "https://umaera.gitgud.site/erauma/RELEASE",

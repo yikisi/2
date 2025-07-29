@@ -256,7 +256,8 @@ module.exports = class extends CustomizedEdu {
   }
 
   async race_end(flash, me, callname, hook, extra_flag) {
-    return await flash_race_end(
+    return await flash_race_end.call(
+      this,
       flash,
       me,
       callname,
@@ -267,7 +268,8 @@ module.exports = class extends CustomizedEdu {
   }
 
   async race_start(flash, me, callname, hook, extra_flag) {
-    return await flash_race_start(
+    return await flash_race_start.call(
+      this,
       flash,
       me,
       callname,
