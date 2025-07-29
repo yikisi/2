@@ -46,23 +46,23 @@ const { motivation_names, out_of_train_type } = require('#/data/train-const');
 const arrows = { '-1': '▼', 0: '', 1: '▲' };
 
 /**
- * @param {number} chara_id
+ * @param {number} cid
  * @param {number} race
  * @param {number} palace
  * @param {boolean} in_train
  * @returns {string}
  */
-function get_edu_stage(chara_id, race, palace, in_train) {
-  if (!chara_id || !race) {
+function get_edu_stage(cid, race, palace, in_train) {
+  if (!cid || !race) {
     return '-';
   }
   if (palace >= 1) {
     return out_of_train_type[palace - 1];
   }
   if (in_train) {
-    return get_train_time(chara_id).substring(0, 3);
+    return get_train_time(cid).substring(0, 3);
   }
-  if (era.get(`cflag:${chara_id}:可再次育成`) > 0) {
+  if (era.get(`cflag:${cid}:可再次育成`) > 0) {
     return '-';
   }
   return '待入学';

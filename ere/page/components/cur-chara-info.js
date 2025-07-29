@@ -100,15 +100,15 @@ function cur_chara_component(chara_id, type, location_npc) {
     }
   } else {
     era.drawLine();
-    const relation = get_relation_info(chara_id),
-      love = get_love_info(chara_id),
-      growth = era.get(`cflag:${chara_id}:成长阶段`),
-      title = CharaTitles.get(chara_id).get_colored_curr_title(true),
-      in_train =
-        growth >= 2 && era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48,
-      motivation = era.get(`cflag:${chara_id}:干劲`),
-      out_of_train = era.get(`cflag:${chara_id}:殿堂`),
-      race = era.get(`cflag:${chara_id}:种族`);
+    const relation = get_relation_info(chara_id);
+    const love = get_love_info(chara_id);
+    const growth = era.get(`cflag:${chara_id}:成长阶段`);
+    const title = CharaTitles.get(chara_id).get_colored_curr_title(true);
+    const in_train =
+      growth >= 2 && era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48;
+    const motivation = era.get(`cflag:${chara_id}:干劲`);
+    const out_of_train = era.get(`cflag:${chara_id}:殿堂`);
+    const race = era.get(`cflag:${chara_id}:种族`);
     /** @type {*[]} */
     const name_columns = ['当前角色：'];
     if (title) {
@@ -130,7 +130,7 @@ function cur_chara_component(chara_id, type, location_npc) {
           ' ',
           get_train_time(chara_id).substring(0, 3),
         );
-      } else if (race && !out_of_train && (growth === 2 || growth === 3)) {
+      } else if (race > 0 && !out_of_train && (growth === 2 || growth === 3)) {
         name_columns.push(' 待入学');
       }
       name_columns.push(...race_indicator(chara_id));

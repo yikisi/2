@@ -465,6 +465,15 @@ module.exports = async () => {
                 era.set('flag:比赛难度', -40);
               }
             }
+            if (version <= 2003) {
+              if (
+                !era.get('cflag:349:可再次育成') &&
+                !era.get('cflag:349:殿堂') &&
+                !(era.get('cflag:349:育成回合计时') < 3 * 48)
+              ) {
+                era.set('cflag:349:可再次育成', 1);
+              }
+            }
             return true;
           } else {
             msg_notification = `未能成功读取 ${ret} 号栏位的存档`;
