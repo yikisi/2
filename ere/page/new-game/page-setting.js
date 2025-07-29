@@ -467,7 +467,7 @@ async function page_settings() {
       {
         key: '比赛难度',
         options: [
-          { l: '低', v: -25 },
+          { l: '低', v: -40 },
           { l: '正常', v: 0 },
           { l: '高', v: 10 },
         ],

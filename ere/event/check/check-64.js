@@ -129,6 +129,9 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_next_week() {
+    if (era.get(`cflag:${this.id}:招募状态`) !== recruit_flags.yes) {
+      return;
+    }
     const edu_weeks = era.get(`cflag:${this.id}:育成回合计时`);
     const edu_marks = new PamaEduMarks();
     const life_marks = new PamaLifeMarks();

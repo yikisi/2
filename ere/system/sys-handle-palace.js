@@ -180,13 +180,10 @@ function sys_handle_palace(cid) {
     era.set(`cflag:${gene_a}:被继承`, 0);
     era.set(`cflag:${era.get(`cflag:${cid}:继承方2`)}:被继承`, 0);
   }
-  const teach_chara = era.get(`cflag:${cid}:照看`);
-  if (teach_chara > 0) {
-    const teach_chara = era.get(`cflag:${cid}:照看`);
-    if (teach_chara > 0) {
-      era.set(`cflag:${teach_chara}:照看`, 0);
-      era.set(`cflag:${cid}:照看`, 0);
-    }
+  const tid = era.get(`cflag:${cid}:照看`);
+  if (tid > 0) {
+    era.set(`cflag:${tid}:照看`, 0);
+    era.set(`cflag:${cid}:照看`, 0);
   }
   if (get_chara_score(cid).charAt(0) >= 'S') {
     era.set(

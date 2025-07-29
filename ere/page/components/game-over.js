@@ -241,23 +241,23 @@ async function game_over(again) {
             );
             era.print(me.actual_name, {
               align: 'center',
-              offset: 14,
-              width: 4,
+              offset: 13,
+              width: 5,
             });
             era.print(`<${me.name} 的唇印>`, {
               align: 'center',
-              offset: 14,
-              width: 4,
+              offset: 13,
+              width: 5,
             });
             era.print(`<${me.name} 的乳头印>`, {
               align: 'center',
-              offset: 14,
-              width: 4,
+              offset: 13,
+              width: 5,
             });
             await era.printAndWait(`<${me.name} 的阴唇印>`, {
               align: 'center',
-              offset: 14,
-              width: 4,
+              offset: 13,
+              width: 5,
             });
             await era.printAndWait(
               `${era.get('flag:当前年')} 年 ${era.get(
@@ -265,8 +265,8 @@ async function game_over(again) {
               )} 月 第 ${era.get('flag:当前周')} 周`,
               {
                 align: 'center',
-                offset: 14,
-                width: 4,
+                offset: 13,
+                width: 5,
               },
             );
             era.println();
