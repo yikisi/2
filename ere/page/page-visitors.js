@@ -167,7 +167,7 @@ handlers[349] = () =>
                 {
                   accelerator: 2,
                   config: { align: 'center', disabled: _new <= 20, width: 4 },
-                  content: '-10,000',
+                  content: '-20,000',
                   type: 'button',
                 },
                 {
@@ -201,7 +201,7 @@ handlers[349] = () =>
                     disabled: money < (_new + 20) * 1000,
                     width: 8,
                   },
-                  content: '+10,000',
+                  content: '+20,000',
                   type: 'button',
                 },
                 { content: [], type: 'text' },
@@ -269,13 +269,13 @@ handlers[349] = () =>
                 {
                   accelerator: 2,
                   config: { align: 'center', disabled: got <= 20, width: 4 },
-                  content: '-10,000',
+                  content: '-20,000',
                   type: 'button',
                 },
                 {
                   accelerator: 4,
                   config: { align: 'center', disabled: got === 1, width: 4 },
-                  content: '-1000',
+                  content: '-1,000',
                   type: 'button',
                 },
                 {
@@ -293,17 +293,17 @@ handlers[349] = () =>
                     disabled: life_marks.funds <= got * 1000,
                     width: 4,
                   },
-                  content: '+1000',
+                  content: '+1,000',
                   type: 'button',
                 },
                 {
                   accelerator: 8,
                   config: {
                     align: 'center',
-                    disabled: money < (got + 20) * 1000,
+                    disabled: life_marks.funds < (got + 20) * 1000,
                     width: 8,
                   },
-                  content: '+10,000',
+                  content: '+20,000',
                   type: 'button',
                 },
                 { content: [], type: 'text' },

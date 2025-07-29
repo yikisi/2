@@ -245,7 +245,7 @@ async function cum_shop(chara, me) {
                           era.get(`talent:${target.id}:淫核`),
                         ),
                       );
-                      target.sex_code = era.set(`cflag:${target.id}:性别`, 10);
+                      era.set(`cflag:${target.id}:性别`, 10);
                       const inmon = CharaInmon.get(target.id);
                       for (let i = 1; i <= 3; ++i) {
                         if (inmon.on(plugin_enum[`cl_u${i}`])) {
@@ -284,7 +284,7 @@ async function cum_shop(chara, me) {
                           era.get(`talent:${target.id}:淫核`),
                         ),
                       );
-                      target.sex_code = era.set(`cflag:${target.id}:性别`, 0);
+                      era.set(`cflag:${target.id}:性别`, 0);
                       era.set(`talent:${target.id}:凶器`, 0);
                       const inmon = CharaInmon.get(target.id);
                       for (let i = 1; i <= 3; ++i) {
