@@ -23,9 +23,7 @@ const scripts = readdirSync(join(__dirname, relative_path))
     }
   });
 
-let output = `const era = require('#/era-electron');
-
-const CharaTalk = require('#/utils/chara-talk');
+let output = `const CharaTalk = require('#/utils/chara-talk');
 
 const cons_dict = {};
 
@@ -69,9 +67,6 @@ module.exports = {
   },
   say_by_passer_by: CharaTalk.say_by_passer_by,
   say_by_passer_by_and_wait: CharaTalk.say_by_passer_by_and_wait,
-  get uma_sex_title() {
-    return era.get('flag:角色性别') === 1 ? '马郎' : '马娘';
-  },
 };
 `;
 

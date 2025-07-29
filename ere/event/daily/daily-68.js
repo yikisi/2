@@ -14,7 +14,7 @@ const select_action_in_shopping_street = require('#/event/daily/snippets/select-
 const select_action_in_station = require('#/event/daily/snippets/select-action-in-station');
 const print_event_name = require('#/event/snippets/print-event-name');
 
-const { get_chara_talk, uma_sex_title } = require('#/utils/chara-talk-factory');
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
@@ -946,7 +946,7 @@ module.exports = class extends CustomizedDaily {
         `明明小北才是那个有被欺负癖好的孩子，哼哼～但是没想到训练员远比我想被欺负呢。`,
       );
       await era.printAndWait(
-        `在训练员耳边轻声细语着说，黑色的${uma_sex_title}露出了注视猎物般的眼神。`,
+        `在训练员耳边轻声细语着说，黑色的${kita.uma_sex_title}露出了注视猎物般的眼神。`,
       );
     }
   }
