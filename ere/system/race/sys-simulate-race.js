@@ -423,7 +423,7 @@ function sys_sim_race(list_chara, info, race_id, shown = true) {
               l[j].race.velocityIdeal < uma.race.velocityIdeal &&
               l[j].race.velocityReal < uma.race.velocityReal &&
               (l[j].race.location - uma.race.location) /
-                (l[j].race.velocityReal < uma.race.velocityReal) <
+                (uma.race.velocityReal - l[j].race.velocityReal) <
                 15
             ) {
               uma.race.overtakeAim = l[j];
