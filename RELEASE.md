@@ -1,10 +1,12 @@
 # [EraUma v2.004 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.004)
 
-_incoming_
+_2025/7/29_
 
 适配 [EraElectron v4.1.1 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.1.1) 与 [ere.app v1.1.2 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.1.2) 及以上版本
 
 ## Added
+
+* 为性玩具增加了道具说明
 
 ## Changed
 
