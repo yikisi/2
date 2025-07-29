@@ -197,27 +197,15 @@ function sub_simulate_ero(list_chara, timer_record, timer, events, reports) {
     uma.race.conditionParams.milk = 0;
     const { index_chara: cid } = uma;
     let orgasm = 0;
-    let stamina_times = 0;
+    let s_times = 0;
     if (uma.race.conditionParams.item === 1) {
-      if (uma.ero.item.breast > 0) {
-        uma.ero.param.breast += param_base * (1 + uma.ero.buff.breast);
-      }
-      if (uma.ero.item.penis > 0) {
-        uma.ero.param.penis += param_base * (1 + uma.ero.buff.penis);
-      }
-      if (uma.ero.item.clitoris > 0) {
-        uma.ero.param.clitoris += param_base * (1 + uma.ero.buff.clitoris);
-      }
-      if (uma.ero.item.virgin > 0) {
-        uma.ero.param.virgin += param_base * (1 + uma.ero.buff.virgin);
-      }
-      if (uma.ero.item.anal > 0) {
-        uma.ero.param.anal += param_base * (1 + uma.ero.buff.anal);
-      }
+      ['breast', 'penis', 'clitoris', 'virgin', 'anal'].forEach(
+        (p) => (uma.ero.param[p] += param_base * (1 + uma.ero.buff[p])),
+      );
       let tmp;
       orgasm += tmp = Math.floor(uma.ero.param.breast / 10000);
       uma.ero.param.breast %= 10000;
-      stamina_times += tmp * (1 + uma.ero.cost.breast);
+      s_times += tmp * (1 + uma.ero.cost.breast);
       if (tmp > 0 && era.get(`talent:${cid}:泌乳`) > 0) {
         uma.race.conditionParams.milk = 1;
         era.add(
@@ -229,12 +217,12 @@ function sub_simulate_ero(list_chara, timer_record, timer, events, reports) {
 
       orgasm += tmp = Math.floor(uma.ero.param.anal / 10000);
       uma.ero.param.anal %= 10000;
-      stamina_times += tmp * (1 + uma.ero.cost.anal);
+      s_times += tmp * (1 + uma.ero.cost.anal);
       era.add(`exp:${cid}:肛门高潮次数`, tmp);
 
       orgasm += tmp = Math.floor(uma.ero.param.clitoris / 10000);
       uma.ero.param.clitoris %= 10000;
-      stamina_times += tmp * (1 + uma.ero.cost.clitoris);
+      s_times += tmp * (1 + uma.ero.cost.clitoris);
       era.add(`exp:${cid}:外阴高潮次数`, tmp);
       era.add(
         `exp:${cid}:爱液分泌量`,
@@ -245,20 +233,20 @@ function sub_simulate_ero(list_chara, timer_record, timer, events, reports) {
 
       orgasm += tmp = Math.floor(uma.ero.param.penis / 10000);
       uma.ero.param.penis %= 10000;
-      stamina_times += tmp * (1 + uma.ero.cost.penis);
+      s_times += tmp * (1 + uma.ero.cost.penis);
       era.add(`exp:${cid}:阴茎高潮次数`, tmp);
       era.add(`exp:${cid}:射精量`, get_random_value(...secretion_amount.penis));
 
       orgasm += tmp = Math.floor(uma.ero.param.virgin / 10000);
       uma.ero.param.virgin %= 10000;
-      stamina_times += tmp * (1 + uma.ero.cost.virgin);
+      s_times += tmp * (1 + uma.ero.cost.virgin);
       era.add(`exp:${cid}:阴道高潮次数`, tmp);
       era.add(
         `exp:${cid}:爱液分泌量`,
         get_random_value(...secretion_amount.virgin),
       );
     } else if (uma.ero.param.sex >= 10000) {
-      stamina_times = orgasm = Math.floor(uma.ero.param.sex / 10000);
+      s_times = orgasm = Math.floor(uma.ero.param.sex / 10000);
       uma.ero.param.sex %= 10000;
     }
     if (orgasm > 0) {
@@ -267,18 +255,14 @@ function sub_simulate_ero(list_chara, timer_record, timer, events, reports) {
       events.push({ e: race_event_enum.orgasm, u: uma });
       uma.race.staminaCost *=
         1 +
-        stamina_times *
-          (1 - damage_buff + damage_buff * orgasm + uma.ero.cost.sex);
+        s_times * (1 - damage_buff + damage_buff * orgasm + uma.ero.cost.sex);
       if (era.get('flag:道具影响') !== 0) {
         uma.race.velocityReal -= 0.025;
       }
     } else {
       uma.race.conditionParams.orgasm = 0;
     }
-    if (
-      uma.race.conditionParams.item === 1 &&
-      (orgasm > 0 || timer % 15 === 0)
-    ) {
+    if (cid >= 0 && !uma.legend && (orgasm > 0 || timer % 15 === 0)) {
       const chara = get_chara_talk(cid);
       reports.unshift({
         config: { align: 'left' },

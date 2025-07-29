@@ -188,13 +188,13 @@ async function race_page(race) {
   const race_start = {};
   const race_end = {};
   team_list.forEach((u) => {
-    const id = u.index_chara;
-    if (id) {
-      race_start[id] = race_end[id] = false;
+    const cid = u.index_chara;
+    if (cid) {
+      race_start[cid] = race_end[cid] = false;
     }
-    aim_race_dict[id] = get_custom_check(id).is_aim_race(
+    aim_race_dict[cid] = get_custom_check(cid).is_aim_race(
       race,
-      era.get(`cflag:${id}:育成回合计时`),
+      era.get(`cflag:${cid}:育成回合计时`),
     );
     u.adapts.style = u.adapt_style_list[u.style];
     if (u.race.conditionParams.item > 0) {

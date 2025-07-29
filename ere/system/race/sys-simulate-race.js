@@ -239,9 +239,9 @@ function sys_sim_race(list_chara, info, race_id, shown = true) {
     ),
   ]);
 
-  const lane = info.lanes[0],
-    slope = info.slopes[0]?.start === 0 ? info.slopes[0].slope : 0,
-    loc_mind_end = (info.span * 10) / 24;
+  const lane = info.lanes[0];
+  const slope = info.slopes[0]?.start === 0 ? info.slopes[0].slope : 0;
+  const loc_mind_end = (info.span * 10) / 24;
   sub_simulate_skill.init(lane, slope);
 
   // 出闸

@@ -73,25 +73,25 @@ async function page_race_result(contestants, info, race_id) {
    */
   async function show_result(interval) {
     era.setAlign('center');
-    let index = 0,
-      timer = 0,
-      last_index = result.dynamic_table.findIndex(
-        (e) => e[0][2].percentage > 1600 / 24,
-      ),
-      curr_line = era.getLineCount();
+    let index = 0;
+    let timer = 0;
+    let l_index = result.dynamic_table.findIndex(
+      (e) => e[0][2].percentage > 1600 / 24,
+    );
+    let c_line = era.getLineCount();
 
     era.playMusic(audio_list);
 
     while (flag_result && index < result.dynamic_table.length) {
       let report_count = max_records_num,
         skill_count = max_records_num;
-      if (--last_index === 0) {
+      if (--l_index === 0) {
         era.playMusic(
           audio_list.map((e) => `${e}_终`),
           { fade: true, fadeInternal: 100 },
         );
       }
-      curr_line = (index > 0 ? era.replaceInColRows : era.printInColRows)(
+      c_line = (index > 0 ? era.replaceInColRows : era.printInColRows)(
         ...result.dynamic_table[index],
         [{ content: [{ isBr: true }], type: 'text' }],
         {
@@ -117,7 +117,7 @@ async function page_race_result(contestants, info, race_id) {
       index++;
       timer = add_timer(timer);
     }
-    await era.clear(era.getLineCount() - curr_line);
+    await era.clear(era.getLineCount() - c_line);
     era.replaceInColRows(
       ...result.dynamic_table.at(-1),
       [{ content: [{ isBr: true }], type: 'text' }],

@@ -551,7 +551,8 @@ module.exports = {
         }
         break;
       case ability_usage_enum.MultiplyCount:
-        skill.values[i][j] *= 0.98 + 0.01 * count;
+        skill.values[i][j] =
+          skill.data.ability_values[i][j] * (0.98 + 0.01 * count);
         break;
       default:
         skill.values[i][j] = skill.data.ability_values[i][j];
