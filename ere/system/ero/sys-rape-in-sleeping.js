@@ -34,34 +34,35 @@ async function sys_rape_in_sleeping(cid, supporter = 0) {
     era.set('tflag:当前助手', supporter);
   }
   era.set('tflag:强奸', cid);
-  let action_count = 0;
+  let a_count = 0;
   let current = new Date().getTime();
-  let flag_rape = true;
+  let r_flag = true;
   let wake_up = false;
   let temp;
-  while (flag_rape) {
+  while (r_flag) {
     await sys_handle_ero_act(ero_hooks.relax, default_my_filter, debug);
-    action_count++;
+    a_count++;
     if (
       era.get(`tcvar:${cid}:逃跑`) > 0 ||
-      (check_satisfied(cid) && (!supporter || check_satisfied(supporter))) ||
+      (check_satisfied(cid) > 0 &&
+        (!supporter || check_satisfied(supporter) > 0)) ||
       (wake_up =
         !era.get('status:0:马跳S') &&
         era.get('base:0:体力') > 0 &&
         (temp = era.get('ex:0:TotalEX')) > 0 &&
         Math.random() < Math.min(temp, 5) * 0.05) ||
-      action_count > 66
+      a_count > 36
     ) {
-      flag_rape = false;
+      r_flag = false;
     }
   }
   current = new Date().getTime() - current;
   era.logger.debug(
     `角色 ${cid}${
       supporter > 0 ? ' & ' + supporter : ''
-    } 睡奸完毕！${action_count} actions, ${current}ms, ${(
-      current / action_count
-    ).toFixed(2)} ms/action`,
+    } 睡奸完毕！${a_count} actions, ${current}ms, ${(current / a_count).toFixed(
+      2,
+    )} ms/action`,
   );
   if (wake_up) {
     await era.printAndWait([

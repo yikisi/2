@@ -208,12 +208,12 @@ module.exports = {
    * @returns {0|1|2} 0 - 完全没爽够，1 - 爽够了但是还想再爽，2 - 不能再爽了
    */
   check_satisfied(cid) {
-    if (era.get(`tcvar:${cid}:脱力`) || era.get(`tcvar:${cid}:失神`)) {
+    if (era.get(`tcvar:${cid}:脱力`) > 0 || era.get(`tcvar:${cid}:失神`) > 0) {
       return 2;
     }
     if (
       !cid ||
-      era.get(`status:${cid}:超马跳Z`) ||
+      era.get(`status:${cid}:超马跳Z`) > 0 ||
       era.get(`mark:${cid}:反抗`) >= 2 ||
       era.get(`mark:${cid}:苦痛`) >= 2 ||
       era.get(`mark:${cid}:羞耻`) >= 2
@@ -230,7 +230,7 @@ module.exports = {
     }
     if (
       Math.random() <
-      (lust + era.get(`tcvar:${cid}:发情`) * 1000) / lust_border.itch
+      (lust + era.get(`tcvar:${cid}:发情`) * 1000) / lust_border.absent_mind
     ) {
       return 1;
     }

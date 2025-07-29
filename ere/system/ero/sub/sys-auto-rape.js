@@ -98,24 +98,26 @@ want_list_entry_getter[part_enum.masochism] = [
 
 /** @param {boolean} shown */
 async function sys_auto_rape(shown) {
-  const current = new Date().getTime(),
-    master = era.get('tflag:主导权');
+  const current = new Date().getTime();
+  const master = era.get('tflag:主导权');
   /** @type {number[]} */
   const chara_list_in_train = get_characters_in_train().filter(
     (e) =>
-      e &&
+      e > 0 &&
       e !== master &&
       sys_check_awake(e) &&
       !era.get(`tcvar:${e}:脱力`) &&
       !era.get(`tcvar:${e}:失神`),
   );
-  if (check_satisfied(master)) {
+  if (check_satisfied(master) > 0) {
     await run_custom_ero(master, ero_hooks.switch, {
       attacker: master,
       defender: 0,
       shown,
     });
-    shown && era.println();
+    if (shown) {
+      era.println();
+    }
     return;
   }
   let temp;
