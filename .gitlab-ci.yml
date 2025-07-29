@@ -51,10 +51,11 @@ release:
   tags:
     - docker
   script:
+    - node ci/release.js
     - echo "Releasing..."
   release:
     name: 'EraUma v$CI_COMMIT_TAG ($CALL_SIGN)'
-    description: './RELEASE.md'
+    description: './temp.md'
     tag_name: $CI_COMMIT_TAG
     ref: '$CI_COMMIT_SHA'
     assets:
