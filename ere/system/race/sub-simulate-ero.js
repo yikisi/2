@@ -262,7 +262,11 @@ function sub_simulate_ero(list_chara, timer_record, timer, events, reports) {
     } else {
       uma.race.conditionParams.orgasm = 0;
     }
-    if (cid >= 0 && !uma.legend && (orgasm > 0 || timer % 15 === 0)) {
+    if (
+      cid >= 0 &&
+      !uma.legend &&
+      (orgasm > 0 || (uma.race.conditionParams.item > 0 && timer % 15 === 0))
+    ) {
       const chara = get_chara_talk(cid);
       reports.unshift({
         config: { align: 'left' },
