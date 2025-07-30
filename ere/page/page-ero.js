@@ -304,6 +304,7 @@ async function page_ero(lover, skip_start_end = false) {
   const assist = era.get('flag:助手');
   era.set('tflag:当前对手', lover);
   if (
+    !in_base &&
     assist !== lover &&
     era.getCharactersInTrain().length === 2 &&
     assist > 0 &&
