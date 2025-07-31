@@ -68,18 +68,24 @@ const res_list = [
 
 let exit = 0;
 
+console.log('[generate-race-clothes.js] missing clothes:');
+
 res_list.forEach(([id, suffix]) => {
   if (!titles[id]) {
     return;
   }
   if (!output.clothe_names[id - 1000]) {
-    console.log('[WRAN] missing cloth object:', id);
+    console.log('\tmissing cloth object:', id);
     exit = 1;
   } else if (!output.clothe_names[id - 1000][id2suffix[suffix]]) {
-    console.log('[WRAN] missing cloth name:', id, '- suffix:', suffix);
+    console.log('\tmissing cloth name:', id, '- suffix:', suffix);
     exit = 1;
   }
 });
+
+if (exit === 0) {
+  console.log('\tnone');
+}
 
 output.clothe_names[345] = { '': 'ST2', 2: '从零到零' };
 

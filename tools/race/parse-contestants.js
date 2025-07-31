@@ -367,7 +367,7 @@ async function task() {
     JSON.stringify(
       contestants.unnamed
         .sort((a, b) => a.level - b.level)
-        .filter((e) => e.level < 20000),
+        .filter((e) => e.level <= 20000),
       undefined,
       2,
     ),

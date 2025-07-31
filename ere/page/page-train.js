@@ -45,7 +45,7 @@ const {
   time_cost,
 } = require('#/data/train-const');
 
-const skill_limit = 15;
+const skill_limit = 27;
 
 function get_discount(chara_id) {
   return Math.min(era.get(`cflag:${chara_id}:育成次数`) * 0.015, 0.1);

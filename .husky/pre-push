@@ -15,7 +15,7 @@ node generate-mec-factory.js
 node generate-rec-factory.js
 cd ../..
 npx eslint --fix ere/utils/chara-talk-factory.js ere/event/*/*-factory.js
-git add ere/utils/chara-talk-factory.js ere/event/*/*-factory.js
+git add ere/utils/chara-talk-factory.js ere/event/*/*-factory.js ere/data/clothe-const.json
 status=$(git status --porcelain --ignore-submodules)
 
 if [ -n "$status" ]; then
