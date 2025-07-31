@@ -1,10 +1,8 @@
 # [EraUma v2.006 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.006)
 
-_incoming_
+_2025/7/31_
 
 适配 [EraElectron v4.1.1 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.1.1) 与 [ere.app v1.1.2 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.1.2) 及以上版本
-
-## Added
 
 ## Changed
 
@@ -20,3 +18,4 @@ _incoming_
 * 修复了在地下室内玩家依然能邀请助奴加入性爱的错误
 * 修复了队伍内没有其他成员时读档对话的错误
 * 修复了 [爱慕的变化] 为 [逐渐吸引] 时骏川缰绳、秋川弥生和三女神等特殊 NPC 的招募事件链无法触发的错误
+* （待确认）尝试修复百炼砥石投资功能不正常的错误

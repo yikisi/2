@@ -154,7 +154,7 @@ handlers[349] = () =>
           printButton('投资（以 1000 马币为单位）', 1, {
             disabled: money < 1000,
           });
-          printButton('赎回', 2, { disabled: !life_marks.funds });
+          printButton('赎回', 2, { disabled: life_marks.funds <= 0 });
           const _old = life_marks.funds;
           if ((await input()) === 1) {
             print('要投资多少马币？');

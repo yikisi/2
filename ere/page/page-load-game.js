@@ -31,6 +31,7 @@ const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks-32');
+const BryneLifeMarks = require('#/data/event/life-event-marks/life-event-marks-349');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_trainer_title } = require('#/data/info-generator');
@@ -473,6 +474,16 @@ module.exports = async () => {
                 !(era.get('cflag:349:育成回合计时') < 3 * 48)
               ) {
                 era.set('cflag:349:可再次育成', 1);
+              }
+            }
+            if (version <= 2005) {
+              const marks = new BryneLifeMarks();
+              if (marks.funds < 0) {
+                era.add('flag:当前马币', marks.funds);
+                const invest = sys_get_billings().find(
+                  (e) => e.creditor === -2,
+                );
+                invest.repay = 0;
               }
             }
             return true;

@@ -25439,6 +25439,26 @@
       "posY": 0,
       "type": 0
     },
+    "乐章_私": {
+      "path": "res/others/chr_icon_1079_901079_01.png",
+      "x": 0,
+      "y": 0,
+      "width": 200,
+      "height": 219,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "乐章_私_半身": {
+      "path": "res/others/chara_stand_1079_901079.png",
+      "x": 0,
+      "y": 0,
+      "width": 512,
+      "height": 512,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
     "创升_私": {
       "path": "res/others/chr_icon_1080_901080_01.png",
       "x": 0,
@@ -25699,6 +25719,26 @@
       "posY": 0,
       "type": 0
     },
+    "皇冠_泳": {
+      "path": "res/others/chr_icon_1088_108830_01.png",
+      "x": 0,
+      "y": 0,
+      "width": 200,
+      "height": 219,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "皇冠_泳_半身": {
+      "path": "res/others/chara_stand_1088_108830.png",
+      "x": 0,
+      "y": 0,
+      "width": 512,
+      "height": 512,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
     "精帽_私": {
       "path": "res/others/chr_icon_1089_901089_01.png",
       "x": 0,
@@ -25711,6 +25751,26 @@
     },
     "精帽_私_半身": {
       "path": "res/others/chara_stand_1089_901089.png",
+      "x": 0,
+      "y": 0,
+      "width": 512,
+      "height": 512,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "精帽_泳": {
+      "path": "res/others/chr_icon_1089_108930_01.png",
+      "x": 0,
+      "y": 0,
+      "width": 200,
+      "height": 219,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "精帽_泳_半身": {
+      "path": "res/others/chara_stand_1089_108930.png",
       "x": 0,
       "y": 0,
       "width": 512,
@@ -25771,6 +25831,26 @@
     },
     "宝穴_私_半身": {
       "path": "res/others/chara_stand_1094_901094.png",
+      "x": 0,
+      "y": 0,
+      "width": 512,
+      "height": 512,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "无因_私": {
+      "path": "res/others/chr_icon_1096_901096_01.png",
+      "x": 0,
+      "y": 0,
+      "width": 200,
+      "height": 219,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "无因_私_半身": {
+      "path": "res/others/chara_stand_1096_901096.png",
       "x": 0,
       "y": 0,
       "width": 512,
