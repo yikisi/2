@@ -20,7 +20,7 @@ module.exports = class extends MecNpc {
       if (get(`love:${this.id}`) >= 50) {
         return 51;
       }
-      return 50;
+      return 50 + get('flag:回合爱慕惩罚');
     }
     return super.get_love_limit();
   }

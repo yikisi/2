@@ -67,7 +67,7 @@ cons_dict['emperor'] = require('#/event/mec/mec-emperor');
 cons_dict[201] =
   cons_dict[202] =
   cons_dict[203] =
-    require('#/event/mec/mec-npc-uma-common');
+    require('#/event/mec/mec-uma-npc');
 cons_dict[346] =
   cons_dict[347] =
   cons_dict[348] =
