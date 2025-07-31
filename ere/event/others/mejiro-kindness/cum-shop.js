@@ -124,7 +124,7 @@ async function cum_shop(chara, me) {
             buttons.push(
               {
                 c: `增高（10「恩宠」，目前是 ${height}cm）`,
-                ...(height === 229 ? { d: true, t: '不能再高了……' } : {}),
+                ...(height >= 229 ? { d: true, t: '不能再高了……' } : {}),
                 h() {
                   money = era.add('item:「恩宠」', -10);
                   change_height(height + 1);
@@ -132,7 +132,7 @@ async function cum_shop(chara, me) {
               },
               {
                 c: `变矮（10「恩宠」，目前是 ${height}cm）`,
-                ...(height === 229 ? { d: true, t: '不能再矮了……' } : {}),
+                ...(height <= 135 ? { d: true, t: '不能再矮了……' } : {}),
                 h() {
                   money = era.add('item:「恩宠」', -10);
                   change_height(height - 1);

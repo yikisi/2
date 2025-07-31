@@ -73,7 +73,10 @@ async function game_over(again) {
       (era.get('flag:当前声望') <= 0 ||
         (era.get('flag:彩蛋机制') === 179 && !again))
     ) {
-      if (era.get('flag:声望不足替换') > 0) {
+      if (
+        era.get('flag:声望不足替换') > 0 &&
+        era.get('cflag:0:模版角色') === -1
+      ) {
         const me = get_chara_talk(0);
         punish_level = era.add('flag:惩戒力度', 1);
         let jpy = era.get('flag:当前马币');

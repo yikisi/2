@@ -112,13 +112,14 @@ module.exports = async () => {
       default:
         if (ret < 100) {
           if (era.get('flag:读档对话')) {
-            await get_custom_daily(
-              get_random_entry(
-                filter_chara('cflag', '招募状态', recruit_flags.yes).filter(
-                  (e) => e,
-                ),
+            const cid = get_random_entry(
+              filter_chara('cflag', '招募状态', recruit_flags.yes).filter(
+                (e) => e,
               ),
-            ).load_talk();
+            );
+            if (cid > 0) {
+              await get_custom_daily(cid).load_talk();
+            }
           }
           CharaInmon.clean();
           if (await era.loadData(ret)) {
