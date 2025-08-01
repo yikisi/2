@@ -575,8 +575,9 @@ async function sys_calc_orgasm(shown, ...ids) {
           }
         } else if (part === part_enum.penis) {
           if (
-            (last_action === ero_hooks.ask_double_fuck && cid > 0) ||
-            (last_action === ero_hooks.double_fuck && last_supporter === cid)
+            (last_action === ero_hooks.ask_double_fuck ||
+              last_action === ero_hooks.double_fuck) &&
+            last_supporter === cid
           ) {
             oid = 0;
             opart = part_enum.virgin;

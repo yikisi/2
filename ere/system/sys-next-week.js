@@ -54,6 +54,7 @@ const basement_owners = require('#/data/event/basement-owners');
 const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 const grand_lives = require('#/data/event/grand-lives');
+const BryneLifeMarks = require('#/data/event/life-event-marks/life-event-marks-349');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
 const {
@@ -226,6 +227,10 @@ async function sys_next_week() {
         e.repay = base_salary / 4;
       }
       if (e.timer !== 0) {
+        if (e.creditor === -2) {
+          const marks = new BryneLifeMarks();
+          e.repay = marks.funds / (500 - 300 * marks.buff);
+        }
         const money = sys_change_money(e.repay, -1);
         if (i > 0 && e.creditor === 0 && money > 0) {
           // 人类训练员有工资拿；马娘训练员？自己跑比赛去！

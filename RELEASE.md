@@ -1,21 +1,14 @@
-# [EraUma v2.006 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.006)
+# [EraUma v2.011 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.011)
 
-_2025/7/31_
+_2025/8/1_
 
 适配 [EraElectron v4.1.1 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.1.1) 与 [ere.app v1.1.2 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.1.2) 及以上版本
 
-## Changed
+## Added
 
-* （待确认）为可能使爱慕值变成 NaN 的情况增加了报错信息
-* 玩家马娘的技能数量限制提升为 27（从 15 上调）
-* 玩家马娘的因子能力数量限制提升为 27（从 15 上调）
+## Changed
 
 ## Fixed
 
-* 修复了在「目白城」进行女性和 FUTA 互相转化时的错误
-* 修复了向百炼砥石投资时的 UI 错误
-* 修复了角色在未装备性玩具的情况下参赛时也会播放喘息的错误
-* 修复了在地下室内玩家依然能邀请助奴加入性爱的错误
-* 修复了队伍内没有其他成员时读档对话的错误
-* 修复了 [爱慕的变化] 为 [逐渐吸引] 时骏川缰绳、秋川弥生和三女神等特殊 NPC 的招募事件链无法触发的错误
-* （待确认）尝试修复百炼砥石投资功能不正常的错误
+* 修复了优秀素质爱慕事件的错误
+* （待确认）每周结算收入时强制重新计算百炼砥石收益以尝试修复投资错误（存疑）
