@@ -168,7 +168,7 @@ async function sys_next_week() {
       final_act_list.push(act);
       tmp = final_act_list.length - 1;
     }
-    if (final_act_list.length > 0 && era.get('item:马跳S家庭装')) {
+    if (final_act_list.length > 0 && era.get('item:马跳S家庭装') > 0) {
       era.set('status:0:马跳S', 1);
     }
     for (const act of final_act_list) {
@@ -178,7 +178,7 @@ async function sys_next_week() {
         await sys_rape_in_sleeping(act.chara_id, act.supporter);
       }
       if (
-        era.get('flag:床伴') ||
+        era.get('flag:床伴') > 0 ||
         era.get('flag:当前位置') === location_enum.basement
       ) {
         break;

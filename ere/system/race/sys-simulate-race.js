@@ -840,10 +840,10 @@ function sys_sim_race(list_chara, info, race_id, shown = true) {
         return e;
       })),
   );
-  const uma_shown_count = list_chara.filter((e) => e.index_chara >= 0).length,
-    team_count = list_chara.filter(
-      (e) => e.index_chara >= 0 && !e.legend,
-    ).length;
+  const uma_shown_count = list_chara.filter((e) => e.index_chara >= 0).length;
+  const team_count = list_chara.filter(
+    (e) => e.index_chara >= 0 && !e.legend,
+  ).length;
   dynamic_table = dynamic_table.map((l) => {
     if (l.length - 1 <= screen_size) {
       return l;
