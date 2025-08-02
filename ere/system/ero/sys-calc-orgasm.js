@@ -93,11 +93,11 @@ async function sys_calc_orgasm(shown, ...ids) {
       2 * inmon.on(plugin_enum.fountain) +
       4 * inmon.on(plugin_enum.woman);
     const wp_ratio = Math.log(era.get(`base:${cid}:根性`)) / log_max_wp;
-    let total_cost = { stamina: 0, time: 0 },
-      orgasm_count = 0,
-      limited_count = 0,
-      orgasm_part_count = 0,
-      minus_lust = 0;
+    let total_cost = { stamina: 0, time: 0 };
+    let orgasm_count = 0;
+    let limited_count = 0;
+    let orgasm_part_count = 0;
+    let minus_lust = 0;
     for (let i = 0; i < orgasm_check_list.length; ++i) {
       const part = orgasm_check_list[i];
       const part_name = part_names[part];
@@ -175,21 +175,19 @@ async function sys_calc_orgasm(shown, ...ids) {
             ) {
               let stop_success = undefined;
               if (cid === 0 && era.get('flag:惩戒力度') < 2) {
-                const stopMarks = era.get(`ex:0:寸止`);
-                // 以等差数列计算成功率
-                // 部位快感每级可以提高5%寸止成功率
-                // 早泄-50%成功率
+                const stop_marks = era.get(`ex:0:寸止`);
+                // 以等差数列计算成功率：部位快感每级可以提高 5% 寸止成功率；早泄 -50% 成功率
                 // 寸止成功判定，小于几率时成功寸止
                 stop_success =
                   Math.random() <
                   1 -
-                    ((1 + stopMarks) * stopMarks * 5) / 200 +
+                    ((1 + stop_marks) * stop_marks * 5) / 200 +
                     0.1 * era.get(`talent:0:钢之意志`) +
                     0.05 * abl -
                     0.5 * era.get(`talent:0:早泄`);
               } else if (
                 cid > 0 &&
-                era.get(`tcvar:${cid}:阴茎接触部位`).owner === 0 &&
+                oid === 0 &&
                 !era.get(`tcvar:${cid}:避孕套`)
               ) {
                 stop_success =
@@ -408,8 +406,8 @@ async function sys_calc_orgasm(shown, ...ids) {
           }
         }
       }
-      const last_action = era.get('tflag:前回行动'),
-        last_supporter = era.get('tflag:前回助手');
+      const last_action = era.get('tflag:前回行动');
+      const last_supporter = era.get('tflag:前回助手');
       // 分泌之后进行接触部位的污渍判定
       // 以及增加对方经历
       amount = Math.floor(amount * l_times);

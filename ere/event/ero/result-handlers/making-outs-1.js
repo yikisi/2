@@ -6,7 +6,10 @@ const {
   sys_cm_b_and_cop,
 } = require('#/system/ero/sys-calc-distance');
 const sys_do_sex = require('#/system/ero/sys-calc-ero');
-const { clean_part_without_item } = require('#/system/ero/sys-calc-ero-part');
+const {
+  clean_part,
+  clean_part_without_item,
+} = require('#/system/ero/sys-calc-ero-part');
 const {
   check_lubrication,
   get_nipple_buff,
@@ -398,137 +401,101 @@ module.exports = (handlers) => {
     );
   };
 
-  handlers[ero_hooks.ask_blow_job] = (attacker, defender, _, extra_flag) => {
-    sys_do_sex(
-      new EroParticipant(defender, part_enum.mouth),
-      new EroParticipant(attacker, part_enum.penis),
-    );
-    clean_part_stain(
-      attacker,
-      part_enum.penis,
-      stain_enum.saliva,
-      stain_enum.semen,
-    );
-    clean_part_stain(
-      defender,
-      part_enum.mouth,
-      stain_enum.saliva,
-      stain_enum.semen,
-    );
-    add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
+  handlers[ero_hooks.ask_blow_job] = (akt, def, _, extra) => {
+    const penis = new EroParticipant(akt, part_enum.penis);
+    clean_part(penis);
+    sys_do_sex(new EroParticipant(def, part_enum.mouth), penis);
+    clean_part_stain(akt, part_enum.penis, stain_enum.saliva, stain_enum.semen);
+    clean_part_stain(def, part_enum.mouth, stain_enum.saliva, stain_enum.semen);
+    add_meek_or_hate(def, extra.check, (c) => c / 10);
     add_juel_from_check(
-      defender,
+      def,
       '羞耻',
-      base_emotion_juel * (1 - extra_flag.check / 10),
+      base_emotion_juel * (1 - extra.check / 10),
     );
-    sys_cm_b_and_cop(attacker, defender, [base_enum.same, base_enum.diff], {
+    sys_cm_b_and_cop(akt, def, [base_enum.same, base_enum.diff], {
       a: part_enum.penis,
       d: part_enum.mouth,
     });
   };
 
-  handlers[ero_hooks.ask_deep_blow_job] = (
-    attacker,
-    defender,
-    _,
-    extra_flag,
-  ) => {
-    sys_do_sex(
-      new EroParticipant(defender, part_enum.mouth, -0.2),
-      new EroParticipant(attacker, part_enum.penis, 0.2),
-    );
-    clean_part_stain(
-      attacker,
-      part_enum.penis,
-      stain_enum.saliva,
-      stain_enum.semen,
-    );
-    clean_part_stain(
-      defender,
-      part_enum.mouth,
-      stain_enum.saliva,
-      stain_enum.semen,
-    );
-    add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
+  handlers[ero_hooks.ask_deep_blow_job] = (akt, def, _, extra) => {
+    const penis = new EroParticipant(akt, part_enum.penis, 0.2);
+    clean_part(penis);
+    sys_do_sex(new EroParticipant(def, part_enum.mouth, -0.2), penis);
+    clean_part_stain(akt, part_enum.penis, stain_enum.saliva, stain_enum.semen);
+    clean_part_stain(def, part_enum.mouth, stain_enum.saliva, stain_enum.semen);
+    add_meek_or_hate(def, extra.check, (c) => c / 10);
     add_juel(
-      defender,
+      def,
       '痛苦',
       base_emotion_juel /
-        ((1 + era.get(`talent:${defender}:喜欢痛苦`)) *
-          Math.max(era.get(`talent:${defender}:淫口`) + 1, 1)),
+        ((1 + era.get(`talent:${def}:喜欢痛苦`)) *
+          Math.max(era.get(`talent:${def}:淫口`) + 1, 1)),
     );
     add_juel_from_check(
-      defender,
+      def,
       '羞耻',
-      base_emotion_juel * (1 - extra_flag.check / 10),
+      base_emotion_juel * (1 - extra.check / 10),
     );
-    sys_cm_b_and_cop(attacker, defender, [base_enum.same, base_enum.diff], {
+    sys_cm_b_and_cop(akt, def, [base_enum.same, base_enum.diff], {
       a: part_enum.penis,
       d: part_enum.mouth,
     });
   };
 
-  handlers[ero_hooks.force_blow_job] = (attacker, defender, _, extra_flag) => {
-    sys_do_sex(
-      new EroParticipant(attacker, part_enum.penis),
-      new EroParticipant(defender, part_enum.mouth),
-    );
-    add_meek_or_hate(defender, extra_flag.check - 10, (c) => c / 10);
+  handlers[ero_hooks.force_blow_job] = (akt, def, _, extra) => {
+    const penis = new EroParticipant(akt, part_enum.penis);
+    clean_part(penis);
+    sys_do_sex(penis, new EroParticipant(def, part_enum.mouth));
+    add_meek_or_hate(def, extra.check - 10, (c) => c / 10);
     add_juel_from_check(
-      defender,
+      def,
       '恐惧',
-      base_emotion_juel * (1 - extra_flag.check / 10),
+      base_emotion_juel * (1 - extra.check / 10),
     );
-    sys_cm_b_and_cop(attacker, defender, [base_enum.same, base_enum.diff], {
+    sys_cm_b_and_cop(akt, def, [base_enum.same, base_enum.diff], {
       a: part_enum.penis,
       d: part_enum.mouth,
     });
   };
 
-  handlers[ero_hooks.force_deep_blow_job] = (
-    attacker,
-    defender,
-    _,
-    extra_flag,
-  ) => {
-    sys_do_sex(
-      new EroParticipant(attacker, part_enum.penis, 0.2),
-      new EroParticipant(defender, part_enum.mouth, -0.2),
-    );
-    add_meek_or_hate(defender, extra_flag.check - 10, (c) => c / 10);
+  handlers[ero_hooks.force_deep_blow_job] = (akt, def, _, extra) => {
+    const penis = new EroParticipant(akt, part_enum.penis, 0.2);
+    clean_part(penis);
+    sys_do_sex(penis, new EroParticipant(def, part_enum.mouth, -0.2));
+    add_meek_or_hate(def, extra.check - 10, (c) => c / 10);
     add_juel(
-      defender,
+      def,
       '痛苦',
       base_emotion_juel /
-        ((1 + era.get(`talent:${defender}:喜欢痛苦`)) *
-          Math.max(era.get(`talent:${defender}:淫口`) + 1, 1)),
+        ((1 + era.get(`talent:${def}:喜欢痛苦`)) *
+          Math.max(era.get(`talent:${def}:淫口`) + 1, 1)),
     );
     add_juel_from_check(
-      defender,
+      def,
       '恐惧',
-      base_emotion_juel * (1 - extra_flag.check / 10),
+      base_emotion_juel * (1 - extra.check / 10),
     );
-    sys_cm_b_and_cop(attacker, defender, [base_enum.same, base_enum.diff], {
+    sys_cm_b_and_cop(akt, def, [base_enum.same, base_enum.diff], {
       a: part_enum.penis,
       d: part_enum.mouth,
     });
   };
 
   handlers[ero_hooks.blow_job] = (attacker, defender, _, extra_flag) => {
-    sys_do_sex(
-      new EroParticipant(attacker, part_enum.mouth),
-      new EroParticipant(defender, part_enum.penis),
-    );
+    const penis = new EroParticipant(defender, part_enum.penis);
+    clean_part(penis);
+    sys_do_sex(new EroParticipant(attacker, part_enum.mouth), penis);
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
     add_juel(attacker, '顺从', base_emotion_juel);
     common_blow_job(attacker, defender);
   };
 
   handlers[ero_hooks.deep_blow_job] = (attacker, defender, _, extra_flag) => {
-    sys_do_sex(
-      new EroParticipant(attacker, part_enum.mouth, -0.2),
-      new EroParticipant(defender, part_enum.penis, 0.2),
-    );
+    const penis = new EroParticipant(defender, part_enum.penis, 0.2);
+    clean_part(penis);
+    sys_do_sex(new EroParticipant(attacker, part_enum.mouth), penis);
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
     add_juel(attacker, '顺从', base_emotion_juel);
     common_blow_job(attacker, defender);
