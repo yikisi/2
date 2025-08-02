@@ -56,7 +56,7 @@ cons_dict[343] = require('#/event/rec/rec-343');
 cons_dict[400] = require('#/event/rec/rec-400');
 
 console.log(
-  '[rec-factory.js] constructor dictionary init done!',
+  'constructor dictionary init done!',
   (new Date().getTime() - current).toLocaleString(),
   'ms',
 );

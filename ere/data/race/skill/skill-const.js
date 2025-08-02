@@ -6093,7 +6093,7 @@ skills_dict[113301111] = require('#/data/race/skill/skill-113301111');
 skills_dict[113301211] = require('#/data/race/skill/skill-113301211');
 
 console.log(
-  '[skill-const.js] skill list init done!',
+  'skill list init done!',
   (new Date().getTime() - current).toLocaleString(),
   'ms',
 );

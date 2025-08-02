@@ -541,7 +541,7 @@ race_infos.forEach((e) => {
 race_infos[race_enum.begin_race] = require('#/data/race/race-begin-race');
 
 console.log(
-  '[race-const.js] race info init done!',
+  'race info init done!',
   (new Date().getTime() - current).toLocaleString(),
   'ms',
 );

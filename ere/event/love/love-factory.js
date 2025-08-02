@@ -38,7 +38,7 @@ cons_dict[343] = require('#/event/love/love-343');
 cons_dict[400] = require('#/event/love/love-400');
 
 console.log(
-  '[love-factory.js] constructor dictionary init done!',
+  'constructor dictionary init done!',
   (new Date().getTime() - current).toLocaleString(),
   'ms',
 );

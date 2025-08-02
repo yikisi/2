@@ -19,7 +19,7 @@ const current = new Date().getTime();
 ].forEach((f) => f(ero_action_names, ero_tagged_hooks, ero_derive_check));
 
 console.log(
-  '[ero-hooks.js] ero hooks init done!',
+  'ero hooks init done!',
   (new Date().getTime() - current).toLocaleString(),
   'ms',
 );

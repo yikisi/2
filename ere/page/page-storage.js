@@ -14,7 +14,7 @@ const current = new Date().getTime();
 ].forEach((f) => f(handlers));
 
 console.log(
-  '[page-storage.js] storage handlers init done!',
+  'storage handlers init done!',
   (new Date().getTime() - current).toLocaleString(),
   'ms',
 );

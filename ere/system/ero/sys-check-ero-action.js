@@ -17,7 +17,7 @@ const handlers = {};
 ].forEach((f) => f(handlers));
 
 console.log(
-  '[sys-check-ero-action.js] ero action checkers init done!',
+  'ero action checkers init done!',
   (new Date().getTime() - current).toLocaleString(),
   'ms',
 );

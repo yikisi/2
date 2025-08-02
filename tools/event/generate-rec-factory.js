@@ -49,7 +49,7 @@ rec_scripts.forEach(
 
 output += `
 console.log(
-  '[rec-factory.js] constructor dictionary init done!',
+  'constructor dictionary init done!',
   (new Date().getTime() - current).toLocaleString(),
   'ms',
 );

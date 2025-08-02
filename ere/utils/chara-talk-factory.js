@@ -11,7 +11,7 @@ cons_dict[17] = require('#/utils/chara-talk-extended/chara-talk-17');
 cons_dict[9017] = require('#/utils/chara-talk-extended/chara-talk-9017');
 
 console.log(
-  '[chara-talk-factory.js] constructor dictionary init done!',
+  'constructor dictionary init done!',
   (new Date().getTime() - current).toLocaleString(),
   'ms',
 );

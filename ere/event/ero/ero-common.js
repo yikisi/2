@@ -322,6 +322,7 @@ class CustomizedEro {
   /**
    * @author 无名黑奴
    * @param {boolean} stop_success 如果寸止的话是否成功
+   * @returns {Promise<0|2|undefined>}
    */
   async orgasm_denial(stop_success) {
     if (era.get('tflag:主导权') > 0 && era.get('flag:惩戒力度') >= 2) {

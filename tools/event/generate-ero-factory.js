@@ -64,7 +64,7 @@ scripts.forEach(
 
 output += `
 console.log(
-  '[ero-factory.js] constructor dictionary init done!',
+  'constructor dictionary init done!',
   (new Date().getTime() - current).toLocaleString(),
   'ms',
 );
@@ -95,7 +95,7 @@ current = new Date().getTime();
 ].forEach((f) => f(describers.r));
 
 console.log(
-  '[ero-factory.js] ero common description handlers init done!',
+  'ero common description handlers init done!',
   (new Date().getTime() - current).toLocaleString(),
   'ms',
 );

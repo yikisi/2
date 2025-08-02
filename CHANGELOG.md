@@ -1,6 +1,7 @@
 # Changelog
 
 ## [EraUma v2.006 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.006)
+~~应为2.01~~
 
 _2025/7/31_
 

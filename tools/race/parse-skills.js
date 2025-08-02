@@ -881,7 +881,7 @@ async function chara_skill() {
   }
   writeFileSync(
     '../../ere/data/race/skill/skill-const.js',
-    `${buffer}\n\nconsole.log('[skill-const.js] skill list init done!',(new Date().getTime()-current).toLocaleString(),'ms')\n\nconst common_skills = [${buffer_common_skills
+    `${buffer}\n\nconsole.log('skill list init done!',(new Date().getTime()-current).toLocaleString(),'ms')\n\nconst common_skills = [${buffer_common_skills
       .sort()
       .filter((e, i, l) => i === l.indexOf(e))
       .join(

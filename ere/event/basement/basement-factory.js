@@ -16,7 +16,7 @@ cons_dict[89] = require('#/event/basement/basement-89');
 cons_dict[119] = require('#/event/basement/basement-119');
 
 console.log(
-  '[basement-factory.js] constructor dictionary init done!',
+  'constructor dictionary init done!',
   (new Date().getTime() - current).toLocaleString(),
   'ms',
 );

@@ -74,7 +74,7 @@ cons_dict[346] =
     require('#/event/mec/mec-npc');
 
 console.log(
-  '[mec-factory.js] constructor dictionary init done!',
+  'constructor dictionary init done!',
   (new Date().getTime() - current).toLocaleString(),
   'ms',
 );

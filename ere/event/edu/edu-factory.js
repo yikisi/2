@@ -46,7 +46,7 @@ cons_dict[343] = require('#/event/edu/edu-343');
 cons_dict[400] = require('#/event/edu/edu-400');
 
 console.log(
-  '[edu-factory.js] constructor dictionary init done!',
+  'constructor dictionary init done!',
   (new Date().getTime() - current).toLocaleString(),
   'ms',
 );

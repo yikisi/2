@@ -44,7 +44,7 @@ cons_dict[340] =
     require('#/event/daily/daily-god');
 
 console.log(
-  '[daily-factory.js] constructor dictionary init done!',
+  'constructor dictionary init done!',
   (new Date().getTime() - current).toLocaleString(),
   'ms',
 );

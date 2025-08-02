@@ -44,24 +44,24 @@ const handlers = {};
 ].forEach((f) => f(handlers));
 
 console.log(
-  '[ero-result.js] ero result handlers init done!',
+  'ero result handlers init done!',
   (new Date().getTime() - current).toLocaleString(),
   'ms',
 );
 
 /**
- * @param {number} chara_id
+ * @param {number} cid
  * @param _
- * @param {{part:number}} extra_flag
+ * @param {{part:number}} extra
  */
-handlers[ero_hooks.become_lubrication] = (chara_id, _, extra_flag) => {
+handlers[ero_hooks.become_lubrication] = (cid, _, extra) => {
   const ratio =
     1 -
-    0.5 * era.get(`talent:${chara_id}:洁净重视`) -
-    0.5 * era.get(`talent:${chara_id}:工口意愿`);
-  add_juel(chara_id, '反感', base_emotion_juel * ratio);
-  if (!era.get(`exp:${chara_id}:${part_names[extra_flag.part]}`)) {
-    add_juel(chara_id, '恐惧', (base_emotion_juel * ratio) / 2);
+    0.5 * era.get(`talent:${cid}:洁净重视`) -
+    0.5 * era.get(`talent:${cid}:工口意愿`);
+  add_juel(cid, '反感', base_emotion_juel * ratio);
+  if (!era.get(`exp:${cid}:${part_names[extra.part]}`)) {
+    add_juel(cid, '恐惧', (base_emotion_juel * ratio) / 2);
   }
 };
 
@@ -96,24 +96,24 @@ handlers[ero_hooks.prison] = (cid) => {
 /**
  * @param _
  * @param __
- * @param {{father_id:number,mother_id:number,shown:boolean}} extra_flag
+ * @param {{father_id:number,mother_id:number,shown:boolean}} extra
  */
-handlers[ero_hooks.cum_in_womb] = async (_, __, extra_flag) => {
-  if (extra_flag.shown) {
+handlers[ero_hooks.cum_in_womb] = async (_, __, extra) => {
+  if (extra.shown) {
     const last_action = era.get('tflag:前回行动'),
       master = era.get('tflag:主导权'),
       lover = era.get('tflag:前回对手');
     if (
-      (master === extra_flag.mother_id &&
+      (master === extra.mother_id &&
         (last_action === ero_hooks.cowgirl ||
           last_action === ero_hooks.stimulate_glans_by_virgin)) ||
-      (lover === extra_flag.mother_id &&
+      (lover === extra.mother_id &&
         (last_action === ero_hooks.ask_cowgirl ||
           last_action === ero_hooks.ask_stimulate_glans_by_virgin ||
           last_action === ero_hooks.sitting ||
           last_action === ero_hooks.suspended_congress))
     ) {
-      print_ero_gif('女上位射精', extra_flag.shown);
+      print_ero_gif('女上位射精', extra.shown);
     }
   }
 };
@@ -121,14 +121,10 @@ handlers[ero_hooks.cum_in_womb] = async (_, __, extra_flag) => {
 /**
  * @param _
  * @param __
- * @param {{father_id:number,mother_id:number}} extra_flag
+ * @param {{father_id:number,mother_id:number}} extra
  */
-handlers[ero_hooks.report_pregnant_between_weeks] = async (
-  _,
-  __,
-  extra_flag,
-) => {
-  const { father_id, mother_id } = extra_flag,
+handlers[ero_hooks.report_pregnant_between_weeks] = async (_, __, extra) => {
+  const { father_id, mother_id } = extra,
     love = era.get(`love:${mother_id || father_id}`),
     unexpected_pregnant =
       LifeEventMarks.get_marks(mother_id).unexpected_pregnant;
@@ -201,24 +197,24 @@ handlers[ero_hooks.after_betrayed] = async (id, _, { partners }) => {
 };
 
 /**
- * @param {number} chara_id
+ * @param {number} cid
  * @param {HookArg} hook
- * @param {any} extra_flag
+ * @param {any} extra
  */
-module.exports = async (chara_id, hook, extra_flag) => {
+module.exports = async (cid, hook, extra) => {
   if (handlers[hook.hook]) {
     if (ero_action_names[hook.hook]) {
-      extra_flag.check = Math.min(100, extra_flag.check || 0);
+      extra.check = Math.min(100, extra.check || 0);
       const { attacker, defender } =
         (ero_tagged_hooks[hook.hook] || default_tags).condition !==
-          condition_type.active || extra_flag.attacker !== undefined
-          ? extra_flag
+          condition_type.active || extra.attacker !== undefined
+          ? extra
           : era.get('tflag:主导权')
-            ? { attacker: chara_id, defender: 0 }
-            : { attacker: 0, defender: chara_id };
-      return await handlers[hook.hook](attacker, defender, hook, extra_flag);
+            ? { attacker: cid, defender: 0 }
+            : { attacker: 0, defender: cid };
+      return await handlers[hook.hook](attacker, defender, hook, extra);
     } else {
-      return await handlers[hook.hook](chara_id, hook, extra_flag);
+      return await handlers[hook.hook](cid, hook, extra);
     }
   }
 };

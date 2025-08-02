@@ -25,6 +25,7 @@ const change_com_tri_motion = require('#/event/ero/snippets/change-com-tri-motio
 const print_ero_gif = require('#/event/ero/snippets/print-ero-gif');
 
 const EroParticipant = require('#/data/ero/ero-participant');
+const EroTouch = require('#/data/ero/ero-touch');
 const { base_emotion_juel } = require('#/data/ero/juel-const');
 const motion_codes = require('#/data/ero/motion-code-const');
 const { base_enum, part_enum } = require('#/data/ero/part-const');
@@ -33,33 +34,40 @@ const { ero_hooks } = require('#/data/event/ero-hooks');
 const { attr_enum } = require('#/data/train-const');
 
 /**
- * @param {number} attacker
- * @param {number} defender
+ * @param {number} p_owner
+ * @param {number} m_owner
  */
-function common_blow_job(attacker, defender) {
-  clean_part_stain(
-    attacker,
-    part_enum.mouth,
-    stain_enum.saliva,
-    stain_enum.semen,
-  );
+function p_touch_m(p_owner, m_owner) {
+  const touch = new EroTouch(p_owner, part_enum.penis);
+  if (touch.owner !== m_owner || touch.part !== part_enum.mouth) {
+    touch.set(m_owner, part_enum.mouth);
+  }
+}
+
+/**
+ * @param {number} atk
+ * @param {number} def
+ */
+function common_blow_job(atk, def) {
+  clean_part_stain(atk, part_enum.mouth, stain_enum.saliva, stain_enum.semen);
   const remove_stains = clean_part_stain(
-    defender,
+    def,
     part_enum.penis,
     stain_enum.saliva,
     stain_enum.semen,
   );
   if (remove_stains > 0) {
     add_juel(
-      defender,
+      def,
       '顺从',
       (base_emotion_juel * (Math.min(remove_stains, 6) + 4)) / 5,
     );
   }
-  sys_cm_b_and_cop(attacker, defender, [base_enum.same, base_enum.diff], {
+  sys_cm_b_and_cop(atk, def, [base_enum.same, base_enum.diff], {
     a: part_enum.mouth,
     d: part_enum.penis,
   });
+  p_touch_m(def, atk);
 }
 
 /**
@@ -401,11 +409,11 @@ module.exports = (handlers) => {
     );
   };
 
-  handlers[ero_hooks.ask_blow_job] = (akt, def, _, extra) => {
-    const penis = new EroParticipant(akt, part_enum.penis);
+  handlers[ero_hooks.ask_blow_job] = (atk, def, _, extra) => {
+    const penis = new EroParticipant(atk, part_enum.penis);
     clean_part(penis);
     sys_do_sex(new EroParticipant(def, part_enum.mouth), penis);
-    clean_part_stain(akt, part_enum.penis, stain_enum.saliva, stain_enum.semen);
+    clean_part_stain(atk, part_enum.penis, stain_enum.saliva, stain_enum.semen);
     clean_part_stain(def, part_enum.mouth, stain_enum.saliva, stain_enum.semen);
     add_meek_or_hate(def, extra.check, (c) => c / 10);
     add_juel_from_check(
@@ -413,17 +421,18 @@ module.exports = (handlers) => {
       '羞耻',
       base_emotion_juel * (1 - extra.check / 10),
     );
-    sys_cm_b_and_cop(akt, def, [base_enum.same, base_enum.diff], {
+    sys_cm_b_and_cop(atk, def, [base_enum.same, base_enum.diff], {
       a: part_enum.penis,
       d: part_enum.mouth,
     });
+    p_touch_m(atk, def);
   };
 
-  handlers[ero_hooks.ask_deep_blow_job] = (akt, def, _, extra) => {
-    const penis = new EroParticipant(akt, part_enum.penis, 0.2);
+  handlers[ero_hooks.ask_deep_blow_job] = (atk, def, _, extra) => {
+    const penis = new EroParticipant(atk, part_enum.penis, 0.2);
     clean_part(penis);
     sys_do_sex(new EroParticipant(def, part_enum.mouth, -0.2), penis);
-    clean_part_stain(akt, part_enum.penis, stain_enum.saliva, stain_enum.semen);
+    clean_part_stain(atk, part_enum.penis, stain_enum.saliva, stain_enum.semen);
     clean_part_stain(def, part_enum.mouth, stain_enum.saliva, stain_enum.semen);
     add_meek_or_hate(def, extra.check, (c) => c / 10);
     add_juel(
@@ -438,14 +447,15 @@ module.exports = (handlers) => {
       '羞耻',
       base_emotion_juel * (1 - extra.check / 10),
     );
-    sys_cm_b_and_cop(akt, def, [base_enum.same, base_enum.diff], {
+    sys_cm_b_and_cop(atk, def, [base_enum.same, base_enum.diff], {
       a: part_enum.penis,
       d: part_enum.mouth,
     });
+    p_touch_m(atk, def);
   };
 
-  handlers[ero_hooks.force_blow_job] = (akt, def, _, extra) => {
-    const penis = new EroParticipant(akt, part_enum.penis);
+  handlers[ero_hooks.force_blow_job] = (atk, def, _, extra) => {
+    const penis = new EroParticipant(atk, part_enum.penis);
     clean_part(penis);
     sys_do_sex(penis, new EroParticipant(def, part_enum.mouth));
     add_meek_or_hate(def, extra.check - 10, (c) => c / 10);
@@ -454,14 +464,15 @@ module.exports = (handlers) => {
       '恐惧',
       base_emotion_juel * (1 - extra.check / 10),
     );
-    sys_cm_b_and_cop(akt, def, [base_enum.same, base_enum.diff], {
+    sys_cm_b_and_cop(atk, def, [base_enum.same, base_enum.diff], {
       a: part_enum.penis,
       d: part_enum.mouth,
     });
+    p_touch_m(atk, def);
   };
 
-  handlers[ero_hooks.force_deep_blow_job] = (akt, def, _, extra) => {
-    const penis = new EroParticipant(akt, part_enum.penis, 0.2);
+  handlers[ero_hooks.force_deep_blow_job] = (atk, def, _, extra) => {
+    const penis = new EroParticipant(atk, part_enum.penis, 0.2);
     clean_part(penis);
     sys_do_sex(penis, new EroParticipant(def, part_enum.mouth, -0.2));
     add_meek_or_hate(def, extra.check - 10, (c) => c / 10);
@@ -477,28 +488,29 @@ module.exports = (handlers) => {
       '恐惧',
       base_emotion_juel * (1 - extra.check / 10),
     );
-    sys_cm_b_and_cop(akt, def, [base_enum.same, base_enum.diff], {
+    sys_cm_b_and_cop(atk, def, [base_enum.same, base_enum.diff], {
       a: part_enum.penis,
       d: part_enum.mouth,
     });
+    p_touch_m(atk, def);
   };
 
-  handlers[ero_hooks.blow_job] = (attacker, defender, _, extra_flag) => {
-    const penis = new EroParticipant(defender, part_enum.penis);
+  handlers[ero_hooks.blow_job] = (atk, def, _, extra) => {
+    const penis = new EroParticipant(def, part_enum.penis);
     clean_part(penis);
-    sys_do_sex(new EroParticipant(attacker, part_enum.mouth), penis);
-    add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
-    add_juel(attacker, '顺从', base_emotion_juel);
-    common_blow_job(attacker, defender);
+    sys_do_sex(new EroParticipant(atk, part_enum.mouth), penis);
+    add_meek_or_hate(def, extra.check, (c) => c / 10);
+    add_juel(atk, '顺从', base_emotion_juel);
+    common_blow_job(atk, def);
   };
 
-  handlers[ero_hooks.deep_blow_job] = (attacker, defender, _, extra_flag) => {
-    const penis = new EroParticipant(defender, part_enum.penis, 0.2);
+  handlers[ero_hooks.deep_blow_job] = (atk, def, _, extra) => {
+    const penis = new EroParticipant(def, part_enum.penis, 0.2);
     clean_part(penis);
-    sys_do_sex(new EroParticipant(attacker, part_enum.mouth), penis);
-    add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
-    add_juel(attacker, '顺从', base_emotion_juel);
-    common_blow_job(attacker, defender);
+    sys_do_sex(new EroParticipant(atk, part_enum.mouth), penis);
+    add_meek_or_hate(def, extra.check, (c) => c / 10);
+    add_juel(atk, '顺从', base_emotion_juel);
+    common_blow_job(atk, def);
   };
 
   handlers[ero_hooks.ask_hand_job] = (attacker, defender, _, extra_flag) => {
@@ -532,6 +544,7 @@ module.exports = (handlers) => {
       new EroParticipant(attacker, part_enum.penis),
     );
     common_ask_and_blow_job(attacker, defender, extra_flag.check);
+    p_touch_m(attacker, defender);
   };
 
   handlers[ero_hooks.force_hand_job] = (attacker, defender, _, extra_flag) => {
@@ -578,6 +591,7 @@ module.exports = (handlers) => {
       a: part_enum.penis,
       d: part_enum.mouth,
     });
+    p_touch_m(attacker, defender);
   };
 
   handlers[ero_hooks.hand_job] = (attacker, defender, _, extra_flag) => {
@@ -601,6 +615,7 @@ module.exports = (handlers) => {
       new EroParticipant(defender, part_enum.penis),
     );
     common_and_blow_job(attacker, defender, extra_flag.check);
+    p_touch_m(defender, attacker);
   };
 
   handlers[ero_hooks.ask_tit_job] = (attacker, defender, _, extra_flag) => {
@@ -629,6 +644,7 @@ module.exports = (handlers) => {
     clean_part_without_item(breast);
     sys_do_sex(breast, new EroParticipant(attacker, part_enum.penis));
     common_ask_and_blow_job(attacker, defender, extra_flag.check);
+    p_touch_m(attacker, defender);
   };
 
   handlers[ero_hooks.fuck_tit] = (attacker, defender, _, extra_flag) => {
@@ -670,6 +686,7 @@ module.exports = (handlers) => {
       a: part_enum.penis,
       d: part_enum.mouth,
     });
+    p_touch_m(attacker, defender);
   };
 
   handlers[ero_hooks.tit_job] = (attacker, defender, _, extra_flag) => {
@@ -695,6 +712,7 @@ module.exports = (handlers) => {
       new EroParticipant(defender, part_enum.penis),
     );
     common_and_blow_job(attacker, defender, extra_flag.check);
+    p_touch_m(defender, attacker);
   };
 
   handlers[ero_hooks.suck_anal] = (attacker, defender, _, extra_flag) => {
