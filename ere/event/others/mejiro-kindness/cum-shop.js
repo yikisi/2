@@ -557,7 +557,7 @@ async function cum_shop(chara, me) {
       {
         c: '「按摩店」',
         async h() {
-          const max_limt = 4 + (era.get(`cflag:${chara.id}:性别`) > 0);
+          const max_limt = 5 + (era.get(`cflag:${chara.id}:性别`) !== 1);
           let _flag = true;
           await say_by_waiter_and_wait(
             '这里提供精油按摩服务！要不要来放松一下呢？',
@@ -710,8 +710,8 @@ async function cum_shop(chara, me) {
                   26,
                   ...new Array(7).fill(0).map((_, i) => 60 + i),
                   ...new Array(4).fill(0).map((_, i) => 70 + i),
-                  ...new Array(6).fill(0).map((_, i) => 76 + i),
-                  82,
+                  ...new Array(7).fill(0).map((_, i) => 76 + i),
+                  85,
                 ].forEach((e) => {
                   if (era.get(`item:${e}`) < 1) {
                     items.push(e);
@@ -728,7 +728,7 @@ async function cum_shop(chara, me) {
                 new Array(11).fill(0).map((_, i) => items.push(i + 10));
                 new Array(3).fill(0).map((_, i) => items.push(i + 27));
                 new Array(11).fill(0).map((_, i) => items.push(i + 31));
-                items.push(25, 43, 101);
+                items.push(25, 43, 84, 101);
               }
               const item = get_random_entry(items);
               era.add(`item:${item}`, 1);
