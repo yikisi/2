@@ -158,7 +158,8 @@ async function sys_calc_orgasm(shown, ...ids) {
                   (1 +
                     0.2 * (era.get(`tcvar:${cid}:余韵`) > 0) +
                     get_bust_delta(cid, true) / 50) *
-                  secretion_amount.orgasm_times[times - 1],
+                  secretion_amount.orgasm_times[times - 1] *
+                  l_times,
               );
             }
           } else if (part === part_enum.penis) {
@@ -238,7 +239,9 @@ async function sys_calc_orgasm(shown, ...ids) {
                 secretion_amount.penis_times[times - 1];
               // 余韵额外射50%
               amount = Math.floor(
-                amount * (1 + 0.5 * (era.get(`tcvar:${cid}:余韵`) > 0)),
+                amount *
+                  (1 + 0.5 * (era.get(`tcvar:${cid}:余韵`) > 0)) *
+                  l_times,
               );
               era.add(`exp:${cid}:射精量`, amount);
               era.set(`nowex:${cid}:射精量`, amount);
@@ -265,31 +268,38 @@ async function sys_calc_orgasm(shown, ...ids) {
               }
             }
           } else {
+            const ex_times =
+              l_times * (era.get(`tcvar:${cid}:余韵`) > 0 ? 1.2 : 1);
             if (part === part_enum.clitoris) {
               set_stain(cid, part_enum.virgin, stain_enum.secretion);
               era.add(
                 `nowex:${cid}:爱液分泌`,
-                (get_random_value(...secretion_amount.virgin) *
-                  secretion_amount.orgasm_times[times - 1]) /
-                  2,
+                Math.floor(
+                  (get_random_value(...secretion_amount.virgin) *
+                    secretion_amount.orgasm_times[times - 1] *
+                    ex_times) /
+                    2,
+                ),
               );
               era.set(`nowex:${cid}:潮吹`, 1);
             } else if (part === part_enum.virgin) {
               set_stain(cid, part_enum.virgin, stain_enum.secretion);
               amount = era.add(
                 `nowex:${cid}:爱液分泌`,
-                get_random_value(...secretion_amount.virgin) *
-                  secretion_amount.orgasm_times[times - 1],
+                Math.floor(
+                  get_random_value(...secretion_amount.virgin) *
+                    secretion_amount.orgasm_times[times - 1] *
+                    ex_times,
+                ),
               );
               era.set(`nowex:${cid}:潮吹`, 1);
             } else if (part === part_enum.anal) {
               set_stain(cid, part_enum.anal, stain_enum.anal);
-              amount =
+              amount = Math.floor(
                 get_random_value(...secretion_amount.anal) *
-                secretion_amount.orgasm_times[times - 1];
-            }
-            if (amount > 0 && era.get(`tcvar:${cid}:余韵`) > 0) {
-              amount *= 1.2;
+                  secretion_amount.orgasm_times[times - 1] *
+                  ex_times,
+              );
             }
           }
         }
@@ -333,37 +343,38 @@ async function sys_calc_orgasm(shown, ...ids) {
         // 淫系列特性使分泌液阈值减半
         let border = era.get(`tcvar:${cid}:发情`) > 0 ? 1.5 : 1;
         if (part === part_enum.breast && era.get(`talent:${cid}:泌乳`) > 0) {
-          if (era.get(`cflag:${cid}:性别`) !== 1) {
-            const talent = era.get(`talent:${cid}:淫乳`);
-            if (talent > 0) {
-              border += 0.5 * talent;
+          const talent = era.get(`talent:${cid}:淫乳`);
+          if (talent > 0) {
+            border += 0.5 * talent;
+          }
+          border = (max * palam_border.breast) / border;
+          if (curr >= border || era.get(`ex:${cid}:喷奶阻碍`) > 0) {
+            if (
+              era.get(`talent:${cid}:乳头类型`) === 2 &&
+              !era.get(`tcvar:${cid}:乳突`)
+            ) {
+              era.set(`tcvar:${cid}:乳突`, 1);
+              era.set(`nowex:${cid}:乳突`, 1);
             }
-            border = (max * palam_border.breast) / border;
-            if (curr >= border || era.get(`ex:${cid}:喷奶阻碍`) > 0) {
-              if (
-                era.get(`talent:${cid}:乳头类型`) === 2 &&
-                !era.get(`tcvar:${cid}:乳突`)
-              ) {
-                era.set(`tcvar:${cid}:乳突`, 1);
-                era.set(`nowex:${cid}:乳突`, 1);
-              }
-              amount = check_nipple_clamps(
-                cid,
-                (get_random_value(...secretion_amount.breast) *
-                  secretion_coefficient.breast[era.get(`talent:${cid}:泌乳`)] *
-                  (curr - border) *
-                  (1 +
-                    0.2 * (era.get(`tcvar:${cid}:余韵`) > 0) +
-                    get_bust_delta(cid, true) / 50)) /
-                  (max - border),
-              );
-            }
+            amount = check_nipple_clamps(
+              cid,
+              (get_random_value(...secretion_amount.breast) *
+                secretion_coefficient.breast[era.get(`talent:${cid}:泌乳`)] *
+                (curr - border) *
+                (1 +
+                  0.2 * (era.get(`tcvar:${cid}:余韵`) > 0) +
+                  get_bust_delta(cid, true) / 50) *
+                l_times) /
+                (max - border),
+            );
           }
         } else if (part === part_enum.penis) {
           if (check_erect(cid) && !check_erect(cid, old)) {
             era.add(`nowex:${cid}:勃起`, 1);
           }
         } else {
+          const ex_times =
+            l_times * (era.get(`tcvar:${cid}:余韵`) > 0 ? 1.2 : 1);
           if (part === part_enum.virgin) {
             const talent = era.get(`talent:${cid}:淫壶`);
             if (talent > 0) {
@@ -371,10 +382,12 @@ async function sys_calc_orgasm(shown, ...ids) {
             }
             border = (max * palam_border.virgin) / border;
             if (curr >= border) {
-              amount =
+              amount = Math.floor(
                 (get_random_value(...secretion_amount.virgin) *
-                  (curr - border)) /
-                (max - border);
+                  (curr - border) *
+                  ex_times) /
+                  (max - border),
+              );
             }
             amount = era.add(`nowex:${cid}:爱液分泌`, amount);
             if (amount > 0) {
@@ -396,13 +409,13 @@ async function sys_calc_orgasm(shown, ...ids) {
                 +!check_lubrication(cid, part_enum.anal),
               );
               set_stain(cid, part_enum.anal, stain_enum.anal);
-              amount =
-                (get_random_value(...secretion_amount.anal) * (curr - border)) /
-                (max - border);
+              amount = Math.floor(
+                (get_random_value(...secretion_amount.anal) *
+                  (curr - border) *
+                  ex_times) /
+                  (max - border),
+              );
             }
-          }
-          if (amount > 0 && era.get(`tcvar:${cid}:余韵`) > 0) {
-            amount *= 1.2;
           }
         }
       }
@@ -410,7 +423,6 @@ async function sys_calc_orgasm(shown, ...ids) {
       const last_supporter = era.get('tflag:前回助手');
       // 分泌之后进行接触部位的污渍判定
       // 以及增加对方经历
-      amount = Math.floor(amount * l_times);
       if (amount > 0) {
         if (part === part_enum.breast) {
           merge_stain(
@@ -490,7 +502,6 @@ async function sys_calc_orgasm(shown, ...ids) {
             new EroParticipant(cid, part_enum.virgin),
             new EroParticipant(oid, opart),
           );
-          era.set(`nowex:${cid}:爱液分泌`, amount);
           const loc = era.set(`tcvar:${cid}:潮吹位置`, {
             c: [oid],
             p: opart,

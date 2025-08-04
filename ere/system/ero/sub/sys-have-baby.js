@@ -266,6 +266,8 @@ async function sys_have_baby(mid) {
     );
   }
 
+  era.set(`talent:${ch_id}:泌乳`, 0);
+  era.set(`talent:${ch_id}:乳头类型`, 0);
   if (c_sex !== 1) {
     if (era.get(`talent:${mid}:泌乳`) > 1) {
       era.set(
