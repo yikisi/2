@@ -529,7 +529,8 @@ async function race_page(race) {
       ]);
     }
   }
-  if (fame_reward > 0) {
+  fame_reward -= race_title_reward * 40;
+  if (fame_reward > 0 || race_title_reward > 0) {
     wait_flag =
       sys_like_chara(302, 0, fame_reward / 5 + race_title_reward * 12) ||
       wait_flag;
