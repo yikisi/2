@@ -502,7 +502,6 @@ async function select_target(
         if (page.curr >= max_page) {
           page.curr = max_page;
         }
-        console.log(show_list, team_list);
         break;
       case 1098:
         ret = 0;

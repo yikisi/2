@@ -26,27 +26,27 @@ const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
 /**
  * @param {number} cid
- * @param {number} virgin_size
+ * @param {number} v_size
  * @returns {boolean}
  */
 function check_pregnant_unprotect(
   cid,
-  virgin_size = era.get(`cflag:${cid}:阴道尺寸`),
+  v_size = era.get(`cflag:${cid}:阴道尺寸`),
 ) {
   // 男人没孕期保护
-  if (virgin_size === 0) {
+  if (v_size === 0) {
     return true;
   }
   const race = era.get(`cflag:${cid}:种族`);
-  const pregnant_stage = era.get(`cflag:${cid}:妊娠阶段`);
+  const p_stage = era.get(`cflag:${cid}:妊娠阶段`);
   if (race > 0) {
     // 马娘只有临产期和恢复期有孕期保护
-    return (pregnant_stage & 0b100001) === 0;
+    return (p_stage & 0b100001) === 0;
   } else {
     // 人类只有未怀孕和安定期没保护
     return (
-      (pregnant_stage & 0b1010) > 0 ||
-      (pregnant_stage !== 1 << pregnant_stage_enum.no &&
+      (p_stage & 0b1010) > 0 ||
+      (p_stage !== 1 << pregnant_stage_enum.no &&
         era.get(`cflag:${cid}:妊娠回合计时`) < 4)
     );
   }

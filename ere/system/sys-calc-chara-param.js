@@ -10,6 +10,7 @@ const { get_custom_mec } = require('#/event/mec/mec-factory');
 const { log_600m2 } = require('#/utils/value-utils');
 
 const { lust_border } = require('#/data/ero/orgasm-const');
+const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const { location_enum } = require('#/data/locations');
 const { location_move_cost, vehicle_influences } = require('#/data/move-const');
 const { track_enum } = require('#/data/race/model/race-info');
@@ -62,7 +63,10 @@ function sys_get_debuff(cid) {
     ret = 1000;
   } else if (
     // 恢复期和孕晚期之后不许训
-    (pregnant_stage & 0b110001) >
+    (pregnant_stage &
+      ((1 << pregnant_stage_enum.resume) +
+        (1 << pregnant_stage_enum.late) +
+        (1 << pregnant_stage_enum.pre_birth))) >
     0
   ) {
     ret = 0.5;
