@@ -2,7 +2,7 @@ const ExtraFlagsParams = require('#/data/event/extra-flag/common');
 
 class TrainSuccessParams extends ExtraFlagsParams {
   /** @type {number} */
-  attr;
+  train;
   /** @type {number} */
   stamina;
   /** @type {number} */

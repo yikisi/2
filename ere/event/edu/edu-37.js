@@ -486,7 +486,7 @@ module.exports = class extends CustomizedEdu {
         return await super.train_success(flash, me, callname, hook, extra_flag);
       }
     } else if (
-      era.get(`status:37:发胖`) &&
+      era.get(`status:37:发胖`) > 0 &&
       Math.random() < 0.1 * extra_flag.stamina_ratio
     ) {
       await flash.say_and_wait('……诶？');

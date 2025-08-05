@@ -673,65 +673,61 @@ module.exports = class extends Edu7UntilWeekStart {
     return true;
   }
 
-  async train_success(gold_ship, me, callname, hook, extra_flag) {
-    era.print([gold_ship.get_colored_name(), ' 的训练顺利结束了！']);
+  async train_success_add(gold_ship, me, callname) {
+    await print_event_name(
+      [{ color: color_7[1], content: '额外的自主训练' }],
+      gold_ship,
+    );
+    await era.printAndWait([
+      '今天，与 ',
+      gold_ship.get_colored_name(),
+      ' 的训练总算结束了。',
+    ]);
     era.println();
-    if (Math.random() < 0.2 * extra_flag.stamina_ratio) {
-      await era.waitAnyKey();
-      await print_event_name(
-        [{ color: color_7[1], content: '额外的自主训练' }],
-        gold_ship,
-      );
 
-      await era.printAndWait([
-        '今天，与 ',
-        gold_ship.get_colored_name(),
-        ' 的训练总算结束了。',
+    await gold_ship.say_and_wait('辛苦了——！拜拜，拜拜！');
+    era.println();
+
+    await era.printAndWait([
+      gold_ship.get_colored_name(),
+      ' 伸了个懒腰便小跑着离开——然后又跑了回来。',
+    ]);
+    era.println();
+
+    await gold_ship.say_and_wait('好嘞，来追加训练！我现在嗨得不行啊！');
+    await gold_ship.say_and_wait([
+      callname,
+      ' 你该不会不知道什么叫追加训练吧？大雄消息真不灵通啊——',
+    ]);
+    await gold_ship.say_and_wait(
+      '追加训练就是追加训练的简称啦——是遍布全宇宙一千万人的阿船圈中特别流行的玩意！',
+    );
+    await gold_ship.say_and_wait(
+      '身为我的训练员，你应该更深入研究一下这个的说。',
+    );
+
+    era.printButton('「那我们可不能跟不上潮流呢。」', 1);
+    era.printButton('「不对，现在的流行是CD（Cool Down）！」', 2);
+    if ((await era.input()) === 1) {
+      await gold_ship.say_and_wait([
+        '好！很有精神！',
+        me.actual_name,
+        ' 队员，随我来——！',
       ]);
       era.println();
-
-      await gold_ship.say_and_wait('辛苦了——！拜拜，拜拜！');
+      await era.printAndWait('你们在夕阳下也一直奔跑着。');
+      return true;
+    } else {
+      await gold_ship.say_and_wait(
+        'CD……？那啥玩意，很火的？在训练员圈里很火……？',
+      );
+      await gold_ship.say_and_wait('CD就是冷却的意思吗……嘿！那不简单吗！');
+      await gold_ship.say_and_wait(
+        '边吃着刨冰边CD就好了！简称『Cool Down CD』！',
+      );
       era.println();
-
-      await era.printAndWait(
-        `${gold_ship.name} 伸了个懒腰便小跑着离开——然后又跑了回来。`,
-      );
-      era.println();
-
-      await gold_ship.say_and_wait('好嘞，来追加训练！我现在嗨得不行啊！');
-      await gold_ship.say_and_wait(
-        `${sys_get_callname(
-          7,
-          0,
-        )}你该不会不知道什么叫追加训练吧？大雄消息真不灵通啊——`,
-      );
-      await gold_ship.say_and_wait(
-        '追加训练就是追加训练的简称啦——是遍布全宇宙一千万人的阿船圈中特别流行的玩意！',
-      );
-      await gold_ship.say_and_wait(
-        '身为我的训练员，你应该更深入研究一下这个的说。',
-      );
-
-      era.printButton('「那我们可不能跟不上潮流呢。」', 1);
-      era.printButton('「不对，现在的流行是CD（Cool Down）！」', 2);
-      hook.arg = (await era.input()) === 1;
-      if (hook.arg) {
-        await gold_ship.say_and_wait(
-          `好！很有精神！${era.get('callname:7:0')} 队员，随我来——！`,
-        );
-        era.println();
-        await era.printAndWait('你们在夕阳下也一直奔跑着。');
-      } else {
-        await gold_ship.say_and_wait(
-          'CD……？那啥玩意，很火的？在训练员圈里很火……？',
-        );
-        await gold_ship.say_and_wait('CD就是冷却的意思吗……嘿！那不简单吗！');
-        await gold_ship.say_and_wait(
-          '边吃着刨冰边CD就好了！简称『Cool Down CD』！',
-        );
-        era.println();
-        await era.printAndWait('于是你们好好地休息了一番。');
-      }
+      await era.printAndWait('于是你们好好地休息了一番。');
     }
+    return false;
   }
 };

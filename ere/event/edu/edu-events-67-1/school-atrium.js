@@ -1,13 +1,13 @@
 const era = require('#/era-electron');
 
-const Edu67UntilRaceStart = require('#/event/edu/edu-events-67/race-start');
+const Edu67UntilRaceStart = require('#/event/edu/edu-events-67-1/race-start');
 const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const DaiyaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-67');
+const DaiyaEduMarks1 = require('#/data/event/edu-event-marks/edu-event-marks-67-1');
 
 module.exports = class extends Edu67UntilRaceStart {
   async school_atrium(daiya, me, callname, hook, extra_flag, event_object) {
@@ -15,7 +15,7 @@ module.exports = class extends Edu67UntilRaceStart {
       add_event(hook.hook, event_object);
       return;
     }
-    const event_marks = new DaiyaEduMarks();
+    const event_marks = new DaiyaEduMarks1();
     let wait_flag = false;
     if (event_marks.sos === 1) {
       event_marks.sos++;

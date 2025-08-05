@@ -26,7 +26,6 @@ const { get_random_entry } = require('#/utils/list-utils');
 const chara_colors = require('#/data/chara-colors').chara_colors[52];
 const UraraEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-52');
 const event_hooks = require('#/data/event/event-hooks');
-const { attr_enum } = require('#/data/train-const');
 
 /** @type {Record<string,function(CharaTalk,CharaTalk,CharaTalk,string,UraraEduMarks,EventObject):Promise<*>>} */
 const week_start_handlers = {};
@@ -559,153 +558,145 @@ module.exports = class extends CustomizedEdu {
     await urara_train_fail(urara, me, callname, hook, extra_flag);
   }
 
-  async train_success(urara, me, callname, hook, extra_flag) {
-    era.print([urara.get_colored_name(), ' 的训练顺利结束了！']);
-    era.println();
-    if (
-      !era.get('status:52:摸鱼') &&
-      Math.random() < 0.2 * extra_flag.stamina_ratio &&
-      extra_flag.train !== attr_enum.intelligence
-    ) {
-      const opera = get_chara_talk(15),
-        call_opera_by_urara = sys_get_colored_callname(52, 15);
-      await era.waitAnyKey();
-      await print_event_name('额外自主训练！', urara);
-      await era.printAndWait([
-        '在今天的训练结束后，',
-        urara.get_colored_name(),
-        ' 与 ',
-        me.get_colored_name(),
-        ' 一同回到训练场的跑道旁边休息。',
-      ]);
+  async train_success_add(urara, me, callname) {
+    const opera = get_chara_talk(15);
+    const u_call_o = sys_get_colored_callname(52, 15);
+    await era.waitAnyKey();
+    await print_event_name('额外自主训练！', urara);
+    await era.printAndWait([
+      '在今天的训练结束后，',
+      urara.get_colored_name(),
+      ' 与 ',
+      me.get_colored_name(),
+      ' 一同回到训练场的跑道旁边休息。',
+    ]);
+    await urara.say_and_wait([
+      '今天也很努力的在练习呢！',
+      callname,
+      '，待会一起去食堂……嗯？那里的人是？',
+    ]);
+    await era.printAndWait([
+      '顺着 ',
+      urara.get_colored_name(),
+      ' 晃动耳朵的方向，',
+      me.get_colored_name(),
+      ' 看到了另外一位正站在训练场中的身影。',
+    ]);
+    await urara.say_and_wait([
+      '啊！是 ',
+      u_call_o,
+      '！',
+      u_call_o,
+      ' 也要去休息了吗？',
+    ]);
+    await era.printAndWait([
+      '小',
+      urara.get_uma_sex_title(),
+      '在对方面前站定，而行事风格戏剧化的霸王也转向了 ',
+      me.get_colored_name(),
+      ' 与 ',
+      urara.get_colored_name(),
+      ' 的方向。',
+    ]);
+    await opera.say_and_wait([
+      '哦！这不是乌拉拉和 ',
+      sys_get_callname(15, 0),
+      ' 吗？我正要去练跑！和黄昏之星一起！',
+    ]);
+    await urara.say_and_wait([
+      '和黄昏之星一起练跑？很有 ',
+      u_call_o,
+      ' 的风格呢，而且听起来好厉害！',
+    ]);
+    if (era.get('cflag:15:殿堂')) {
+      await opera.say_and_wait(
+        '是怎样呢？是为了在繁星下再次擦亮光辉？还是在怠惰后驱散迷惘呢？',
+      );
+      await urara.say_and_wait(
+        '原来如此，乌拉拉也明白的哦！大人也有大人的辛苦呢～',
+      );
+    } else {
+      await opera.say_and_wait(
+        '没错！我要用繁星的光辉磨练我的美貌与这双腿！为了明日的闪耀！',
+      );
       await urara.say_and_wait([
-        '今天也很努力的在练习呢！',
-        callname,
-        '，待会一起去食堂……嗯？那里的人是？',
+        '是这样啊，乌拉拉明白了，这么努力的 ',
+        u_call_o,
+        ' 果然很了不起！',
       ]);
+    }
+    await urara.say_and_wait([
+      '嗯……那样的话，',
+      callname,
+      '，时间还有一些，我们也试试看吗？',
+    ]);
+    era.printButton('「走吧，一起试试看。」', 1);
+    era.printButton('「好好休息也很重要哦？」', 2);
+    if ((await era.input()) === 1) {
       await era.printAndWait([
-        '顺着 ',
-        urara.get_colored_name(),
-        ' 晃动耳朵的方向，',
+        '在听到 ',
         me.get_colored_name(),
-        ' 看到了另外一位正站在训练场中的身影。',
-      ]);
-      await urara.say_and_wait([
-        '啊！是 ',
-        call_opera_by_urara,
-        '！',
-        call_opera_by_urara,
-        ' 也要去休息了吗？',
-      ]);
-      await era.printAndWait([
-        '小',
-        urara.get_uma_sex_title(),
-        '在对方面前站定，而行事风格戏剧化的霸王也转向了 ',
-        me.get_colored_name(),
-        ' 与 ',
+        ' 对 ',
         urara.get_colored_name(),
-        ' 的方向。',
+        ' 的回应后，',
+        opera.get_colored_name(),
+        ' 也立刻领会精神的打出了响指。',
       ]);
       await opera.say_and_wait([
-        '哦！这不是乌拉拉和 ',
+        `欢迎你！不过我可不会把最闪耀的王座${era.get('love:15') >= 90 ? '和最爱的眷属' : ''}让给你哦——尽全力来拿吧！`,
+      ]);
+      await urara.say_and_wait([
+        '嗯！既然 ',
+        u_call_o,
+        ' 这么说了，那乌拉拉也会尽全力赶上去的！',
+      ]);
+      await opera.say_and_wait([
+        '哈──哈哈哈！看来今天的练跑会相当有趣哦！你说是吧，',
         sys_get_callname(15, 0),
-        ' 吗？我正要去练跑！和黄昏之星一起！',
+        '？',
       ]);
-      await urara.say_and_wait([
-        '和黄昏之星一起练跑？很有 ',
-        call_opera_by_urara,
-        ' 的风格呢，而且听起来好厉害！',
+      await era.printAndWait([
+        '于是虽然意料之中的没能跟上 ',
+        opera.get_colored_name(),
+        ' 的步伐，但 ',
+        urara.get_colored_name(),
+        ' 却顽强的坚持到了加训最后。',
       ]);
-      if (era.get('cflag:15:殿堂')) {
-        await opera.say_and_wait(
-          '是怎样呢？是为了在繁星下再次擦亮光辉？还是在怠惰后驱散迷惘呢？',
-        );
-        await urara.say_and_wait(
-          '原来如此，乌拉拉也明白的哦！大人也有大人的辛苦呢～',
-        );
-      } else {
-        await opera.say_and_wait(
-          '没错！我要用繁星的光辉磨练我的美貌与这双腿！为了明日的闪耀！',
-        );
-        await urara.say_and_wait([
-          '是这样啊，乌拉拉明白了，这么努力的 ',
-          call_opera_by_urara,
-          ' 果然很了不起！',
-        ]);
-      }
+      return true;
+    } else {
       await urara.say_and_wait([
-        '嗯……那样的话，',
+        '诶？是这样吗？我还以为 ',
         callname,
-        '，时间还有一些，我们也试试看吗？',
+        ' 一定会同意的来着？',
       ]);
-      era.printButton('「走吧，一起试试看。」', 1);
-      era.printButton('「好好休息也很重要哦？」', 2);
-      if ((await era.input()) === 1) {
-        hook.arg = true;
-        await era.printAndWait([
-          '在听到 ',
-          me.get_colored_name(),
-          ' 对 ',
-          urara.get_colored_name(),
-          ' 的回应后，',
-          opera.get_colored_name(),
-          ' 也立刻领会精神的打出了响指。',
-        ]);
-        await opera.say_and_wait([
-          `欢迎你！不过我可不会把最闪耀的王座${era.get('love:15') >= 90 ? '和最爱的眷属' : ''}让给你哦——尽全力来拿吧！`,
-        ]);
-        await urara.say_and_wait([
-          '嗯！既然 ',
-          call_opera_by_urara,
-          ' 这么说了，那乌拉拉也会尽全力赶上去的！',
-        ]);
-        await opera.say_and_wait([
-          '哈──哈哈哈！看来今天的练跑会相当有趣哦！你说是吧，',
-          sys_get_callname(15, 0),
-          '？',
-        ]);
-        await era.printAndWait([
-          '于是虽然意料之中的没能跟上 ',
-          opera.get_colored_name(),
-          ' 的步伐，但 ',
-          urara.get_colored_name(),
-          ' 却顽强的坚持到了加训最后。',
-        ]);
-      } else {
-        hook.arg = false;
-        await urara.say_and_wait([
-          '诶？是这样吗？我还以为 ',
-          callname,
-          ' 一定会同意的来着？',
-        ]);
-        await era.printAndWait([
-          '而在 ',
-          urara.get_colored_name(),
-          ' 提出疑问后，紧接的便是 ',
-          opera.get_colored_name(),
-          ' 表示理解的劝说。',
-        ]);
-        await opera.say_and_wait(
-          '就是这样！不会休养连光芒也蒙上阴影，我也一样，昨天我悠闲地泡了玫瑰花瓣浴呢！',
-        );
-        await urara.say_and_wait(
-          '哦！我知道了！为了变强我会好好休息的！不过，玫瑰花瓣浴……？',
-        );
-        await era.printAndWait([
-          '最终，在 ',
-          opera.get_colored_name(),
-          ' 承诺稍后会分',
-          urara.sex,
-          '一些玫瑰后，',
-          urara.get_colored_name(),
-          ' 也在和 ',
-          opera.get_colored_name(),
-          ' 挥手告别后拉着 ',
-          me.get_colored_name(),
-          ' 向食堂跑去……',
-        ]);
-      }
+      await era.printAndWait([
+        '而在 ',
+        urara.get_colored_name(),
+        ' 提出疑问后，紧接的便是 ',
+        opera.get_colored_name(),
+        ' 表示理解的劝说。',
+      ]);
+      await opera.say_and_wait(
+        '就是这样！不会休养连光芒也蒙上阴影，我也一样，昨天我悠闲地泡了玫瑰花瓣浴呢！',
+      );
+      await urara.say_and_wait(
+        '哦！我知道了！为了变强我会好好休息的！不过，玫瑰花瓣浴……？',
+      );
+      await era.printAndWait([
+        '最终，在 ',
+        opera.get_colored_name(),
+        ' 承诺稍后会分',
+        urara.sex,
+        '一些玫瑰后，',
+        urara.get_colored_name(),
+        ' 也在和 ',
+        opera.get_colored_name(),
+        ' 挥手告别后拉着 ',
+        me.get_colored_name(),
+        ' 向食堂跑去……',
+      ]);
     }
+    return false;
   }
 
   async week_end(urara, me, callname, hook, extra_flag, event_object) {

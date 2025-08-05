@@ -1,6 +1,6 @@
 const era = require('#/era-electron');
 
-const Edu67BackSchool = require('#/event/edu/edu-events-67/back-school');
+const Edu67BackSchool = require('#/event/edu/edu-events-67-1/back-school');
 const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
@@ -8,7 +8,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const { say_by_passer_by_and_wait } = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const DaiyaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-67');
+const DaiyaEduMarks1 = require('#/data/event/edu-event-marks/edu-event-marks-67-1');
 
 module.exports = class extends Edu67BackSchool {
   async out_start(daiya, me, callname, hook, extra_flag, event_object) {
@@ -16,8 +16,8 @@ module.exports = class extends Edu67BackSchool {
       add_event(hook.hook, event_object);
       return;
     }
-    const edu_marks = new DaiyaEduMarks(),
-      edu_weeks = era.get('cflag:67:育成回合计时');
+    const edu_marks = new DaiyaEduMarks1();
+    const edu_weeks = era.get('cflag:67:育成回合计时');
     let wait_flag = false;
     if (edu_marks.win_g1 === 1) {
       await print_event_name('支持我的大家', daiya);
@@ -538,8 +538,8 @@ module.exports = class extends Edu67BackSchool {
       await daiya.say_and_wait(
         '只要抱着这样的想法去叫卖的话，魔咒一定也立刻就破除掉了♪',
       );
-      era.printButton('「任何时候都保持积极乐观是最好的！」', 1);
-      era.printButton('「任何魔咒都能破除吗？」', 2);
+      era.printButton('「任何时候都保持积极乐观是最好的！」（速度+20）', 1);
+      era.printButton('「任何魔咒都能破除吗？」（耐力+20）', 2);
       const ret = await era.input();
       if (ret === 1) {
         await daiya.say_and_wait('呵呵，没错！');

@@ -7,7 +7,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const DaiyaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-67');
+const DaiyaEduMarks1 = require('#/data/event/edu-event-marks/edu-event-marks-67-1');
 const { location_enum } = require('#/data/locations');
 
 module.exports = class extends CustomizedEdu {
@@ -22,7 +22,7 @@ module.exports = class extends CustomizedEdu {
       add_event(hook.hook, event_object);
       return;
     }
-    const edu_marks = new DaiyaEduMarks();
+    const edu_marks = new DaiyaEduMarks1();
     let wait_flag = false;
     if (edu_marks.street_adv === 1) {
       edu_marks.street_adv++;
@@ -94,8 +94,8 @@ module.exports = class extends CustomizedEdu {
       await jordan.say_and_wait('喂喂喂！暂停暂停！');
       await jordan.say_and_wait('哎呀，真不好意思耶！我们现在立刻就离开～！');
       await daiya.say_and_wait('咦？啊，可是……！');
-      era.printButton('「好了，我们快点回去吧！」', 1);
-      era.printButton('「为突然搭话的事情先道歉吧」', 2);
+      era.printButton('「好了，我们快点回去吧！」（智力+20）', 1);
+      era.printButton('「为突然搭话的事情先道歉吧」（力量+20）', 2);
       const ret = await era.input();
       if (ret === 1) {
         await daiya.say_and_wait('知、知道了？');

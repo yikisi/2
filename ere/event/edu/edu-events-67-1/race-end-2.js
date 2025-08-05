@@ -3,7 +3,7 @@ const era = require('#/era-electron');
 const {
   japa_cup_common,
   takz_kin_common,
-} = require('#/event/edu/edu-events-67/snippets');
+} = require('#/event/edu/edu-events-67-1/snippets');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { say_by_passer_by_and_wait } = require('#/utils/chara-talk');

@@ -808,7 +808,7 @@ class CustomizedEdu extends ICustomizedEdu {
         era.println();
       }
     } else if (
-      extra.attr !== attr_enum.intelligence &&
+      extra.train !== attr_enum.intelligence &&
       !sys_check_remote(this.id)
     ) {
       if (
