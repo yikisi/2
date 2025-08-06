@@ -643,8 +643,9 @@ async function chara_skill() {
   let buffer =
     '/** @type {Record<string,number[]>} */\nconst chara_skill_dict={};\n/** @type {Record<string,UmaSkill>} */\nconst skills_dict = {};\n\n';
   let buffer_common_skills = [
-    202051, 200791, 200801, 200811, 200821, 990011, 990021, 660011, 660012,
-    660021, 660022, 660031, 660032, 660041, 660042, 660051, 660052,
+    202051, 200791, 200801, 200811, 200821, 990011, 990021, 600011, 600012,
+    660011, 660012, 660021, 660022, 660031, 660032, 660041, 660042, 660051,
+    660052,
   ];
   for (const chara_id in dict) {
     buffer += `chara_skill_dict[${Number(chara_id) % 1000}] = [${dict[chara_id].join(',')}];`;
