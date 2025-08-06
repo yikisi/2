@@ -24,10 +24,10 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
     if (era.get(`love:${this.id}`) >= 50 && extra.rank === 1) {
       switch (extra.race) {
         case race_enum.yush_him:
-          new LoveEduMarks().title_check &= 0b1;
+          new LoveEduMarks().title_check |= 0b1;
           break;
         case race_enum.eliz_cup:
-          new LoveEduMarks().title_check &= 0b10;
+          new LoveEduMarks().title_check |= 0b10;
       }
     }
   },

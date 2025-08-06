@@ -34,11 +34,11 @@ class RaceHistory {
   static RaceResult = RaceResult;
 
   /**
-   * @param {number} chara_id
+   * @param {number} cid
    * @returns {RaceHistory}
    */
-  static get(chara_id) {
-    return dict[chara_id] || (dict[chara_id] = new RaceHistory(chara_id));
+  static get(cid) {
+    return dict[cid] || (dict[cid] = new RaceHistory(cid));
   }
 
   /** @type {number} */
