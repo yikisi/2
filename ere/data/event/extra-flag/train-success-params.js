@@ -1,14 +1,31 @@
 const ExtraFlagsParams = require('#/data/event/extra-flag/common');
 
 class TrainSuccessParams extends ExtraFlagsParams {
-  /** @type {number} */
+  /**
+   * 训练属性
+   * @type {number}
+   */
   train;
-  /** @type {number} */
-  stamina;
-  /** @type {number} */
-  relation_change;
-  /** @type {number} */
-  pt_change;
+  /**
+   * 额外属性变化
+   * @type {number}
+   */
+  attr = 0;
+  /**
+   * 体力消耗变化
+   * @type {number}
+   */
+  stamina = 0;
+  /**
+   * 好感度变化
+   * @type {number}
+   */
+  relation_change = 0;
+  /**
+   * 技能点变化
+   * @type {number}
+   */
+  pt_change = 0;
 
   /**
    * @param {number} stamina_ratio

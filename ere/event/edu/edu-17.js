@@ -88,7 +88,7 @@ module.exports = class extends Edu17UntilWeekStart {
     return true;
   }
 
-  async train_success(chara, me, callname, hook, extra_flag) {
+  async train_success(chara, me, callname, hook, extra) {
     const edu_marks = new LunaEduMarks();
     const i_emperor = edu_marks.emperor;
     await era.printAndWait([chara.get_colored_name(), ' 的训练顺利结束了！']);
@@ -219,9 +219,9 @@ module.exports = class extends Edu17UntilWeekStart {
       }
       await handle_debuff(edu_marks, luna);
       hook.override = true;
-      extra_flag.pt_change = 5;
-      return extra_flag;
-    } else if (Math.random() < 0.2 * extra_flag.stamina_ratio) {
+      extra.pt_change = 5;
+      return extra;
+    } else if (Math.random() < 0.2 * extra.stamina_ratio) {
       era.println();
       await print_event_name('额外的自主训练', chara);
 

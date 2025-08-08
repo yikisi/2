@@ -234,6 +234,7 @@ function love_uma(cid, val, shown = true) {
     100 * inmon.on(plugin_enum.love_d2);
   if (isNaN(val)) {
     era.logger.error('invalid added love!');
+    return false;
   }
   val = Math.floor((val * coff) / 100);
   if (val > 6) {

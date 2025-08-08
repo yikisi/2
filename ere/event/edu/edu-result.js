@@ -306,10 +306,6 @@ handlers[event_hooks.train_fail] = async (chara_id, hook, extra_flag) => {
  */
 handlers[event_hooks.train_success] = async (chara_id, hook, extra_flag) => {
   sys_change_pressure(chara_id, -get_random_value(50, 100));
-  extra_flag.attr ||= 0;
-  extra_flag.relation_change ||= 0;
-  extra_flag.stamina ||= 0;
-  extra_flag.pt_change ||= 0;
   if (hook.arg === true) {
     sys_change_pressure(chara_id, -50);
     extra_flag.attr += 5;
