@@ -40,7 +40,9 @@ module.exports = class extends EroNormalCommunications {
         ' 便将舌尖迎入口中，享受着这短暂而炽热的瞬间。',
       ]);
       await attacker.print_and_wait([
-        '片刻后，与我分开的 ',
+        '片刻后，与 ',
+        attacker.get_colored_name(),
+        ' 分开的 ',
         sys_get_colored_callname(attacker.id, defender.id),
         ' 喘着粗气，面容已经被潮红填满。',
       ]);
@@ -86,7 +88,9 @@ module.exports = class extends EroNormalCommunications {
     if (hook.arg || era.get(`tcvar:${defender.id}:发情`)) {
       await attacker.print_and_wait([
         sys_get_colored_callname(attacker.id, defender.id),
-        ' 与我面对面坐着，',
+        ' 与 ',
+        attacker.get_colored_name(),
+        ' 面对面坐着，',
         defender.sex,
         '轻轻咬着下唇，目光闪烁着期待与紧张。',
       ]);
@@ -96,12 +100,16 @@ module.exports = class extends EroNormalCommunications {
       ]);
       await defender.say_and_wait(['……可以哦，哪里都可以。']);
       await attacker.print_and_wait([
-        '似乎是察觉到了我的想法，',
+        '似乎是察觉到了 ',
+        attacker.get_colored_name(),
+        ' 的想法，',
         defender.sex,
         '向前靠近，在能感受到互相体温的距离停下。',
       ]);
       await attacker.print_and_wait([
-        '但还是有些勉强吗，当我的手扫过',
+        '但还是有些勉强吗，当 ',
+        attacker.get_colored_name(),
+        ' 的手扫过',
         defender.sex,
         '的锁骨到达乳间时，',
         sys_get_colored_callname(attacker.id, defender.id),
