@@ -124,7 +124,7 @@ async function cum_shop(chara, me) {
             buttons.push(
               {
                 c: `增高（10「恩宠」，目前是 ${height}cm）`,
-                ...(height >= 229 ? { d: true, t: '不能再高了……' } : {}),
+                ...(height >= 229 ? { d: true, t: '不能再高了' } : {}),
                 h() {
                   money = era.add('item:「恩宠」', -10);
                   change_height(height + 1);
@@ -132,7 +132,7 @@ async function cum_shop(chara, me) {
               },
               {
                 c: `变矮（10「恩宠」，目前是 ${height}cm）`,
-                ...(height <= 135 ? { d: true, t: '不能再矮了……' } : {}),
+                ...(height <= 135 ? { d: true, t: '不能再矮了' } : {}),
                 h() {
                   money = era.add('item:「恩宠」', -10);
                   change_height(height - 1);
@@ -157,7 +157,7 @@ async function cum_shop(chara, me) {
               });
               buttons.push({
                 c: `缩小胸部（5「恩宠」，目前是 ${cup} Cup）`,
-                ...(delta <= 5 ? { d: true, t: '已经是飞机场了……' } : {}),
+                ...(delta <= 5 ? { d: true, t: '已经是飞机场了' } : {}),
                 h() {
                   money = era.add('item:「恩宠」', -5);
                   era.add(`cflag:${target.id}:胸围`, -1);
@@ -231,7 +231,7 @@ async function cum_shop(chara, me) {
                 {
                   c: `${target.sex_code === 0 ? 'FUTA 化（15' : '增大阴茎（10'}「恩宠」，目前是 ${cur_desc || '女性'}）`,
                   ...(penis_size === 5
-                    ? { d: true, t: '已经不能继续增大了……' }
+                    ? { d: true, t: '已经不能继续增大了' }
                     : {}),
                   h() {
                     money = era.add('item:「恩宠」', -10);
@@ -312,7 +312,7 @@ async function cum_shop(chara, me) {
                 ...(clitoris_size === 0
                   ? {
                       d: true,
-                      t: `已经是粉色的${part}……`,
+                      t: `已经是粉色的${part}`,
                     }
                   : {}),
                 h() {
@@ -325,7 +325,7 @@ async function cum_shop(chara, me) {
                 ...(clitoris_size === 2
                   ? {
                       d: true,
-                      t: `已经是黝黑的${part}……`,
+                      t: `已经是黝黑的${part}`,
                     }
                   : {}),
                 h() {
@@ -344,7 +344,7 @@ async function cum_shop(chara, me) {
                   ...(skin_status === -1
                     ? {
                         d: true,
-                        t: '肤色已经不能再白了……',
+                        t: '肤色已经不能再白了',
                       }
                     : {}),
                   h() {
@@ -357,7 +357,7 @@ async function cum_shop(chara, me) {
                   ...(skin_status === 2
                     ? {
                         d: true,
-                        t: '肤色已经不能再深了……',
+                        t: '肤色已经不能再深了',
                       }
                     : {}),
                   h() {

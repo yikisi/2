@@ -92,8 +92,8 @@ function get_part_len(cid, part) {
  * @returns {[number]|[number,number]}
  */
 function get_part_dis(cid, aim, main) {
-  const aim_len = get_part_len(cid, aim),
-    main_len = get_part_len(cid, main);
+  const aim_len = get_part_len(cid, aim);
+  const main_len = get_part_len(cid, main);
   if (aim_len.length === 1 && main_len.length === 1) {
     return [aim_len[0] - main_len[0]];
   } else if (aim_len.length === 2 && main_len.length === 2) {
@@ -101,7 +101,7 @@ function get_part_dis(cid, aim, main) {
   } else if (aim_len.length === 2) {
     return aim_len.map((e) => e - main_len[0]);
   } else {
-    return main_len.map((e) => aim_len[0] - e);
+    return [aim_len[0] - main_len[1], aim_len[0] - main_len[0]];
   }
 }
 
@@ -146,7 +146,13 @@ function common_same(cid, oid, aim_parts, main_parts) {
   const a_loc = get_part_dis(cid, aim_parts.a, main_parts.a);
   const d_loc = get_part_dis(oid, aim_parts.d, main_parts.d);
   era.logger.debug(
-    `主动方部位相对距离=[${a_loc.join(',')}]，被动方部位相对距离=[${d_loc.join(',')}]\n主动方目标部位=${part_touch[aim_parts.a]}，主动方主要接触部位=${
+    `主动方 ${cid} vs 被动方 ${oid}\n主动方部位相对距离=[${a_loc
+      .map((d) => d.toFixed(2))
+      .join(',')}]，被动方部位相对距离=[${d_loc
+      .map((d) => d.toFixed(2))
+      .join(
+        ',',
+      )}]\n主动方目标部位=${part_touch[aim_parts.a]}，主动方主要接触部位=${
       part_touch[main_parts.a]
     }\n被动方目标部位=${part_touch[aim_parts.d]}，被动方主要接触部位=${
       part_touch[main_parts.d]
@@ -241,7 +247,13 @@ function check_distance(
       a_loc = get_part_dis(cid, aim_parts.a, main_parts.a);
       d_loc = get_part_dis(oid, aim_parts.d, main_parts.d);
       era.logger.debug(
-        `主动方部位相对距离=[${a_loc.join(',')}]，被动方部位相对距离=[${d_loc.join(',')}]\n主动方目标部位=${part_touch[aim_parts.a]}，主动方主要接触部位=${
+        `主动方 ${cid} vs 被动方 ${oid}\n主动方部位相对距离=[${a_loc
+          .map((d) => d.toFixed(2))
+          .join(',')}]，被动方部位相对距离=[${d_loc
+          .map((d) => d.toFixed(2))
+          .join(
+            ',',
+          )}]\n主动方目标部位=${part_touch[aim_parts.a]}，主动方主要接触部位=${
           part_touch[main_parts.a]
         }\n被动方目标部位=${part_touch[aim_parts.d]}，被动方主要接触部位=${
           part_touch[main_parts.d]
@@ -421,12 +433,12 @@ function change_motion(attacker, defender, ...aim_motions) {
   }
   const aim = get_extremum_entry(aim_motions, (e) => Math.abs(e - curr)).min;
   era.logger.debug(
-    `主动方 ${attacker} vs 被动方 ${defender}\n目标体位列表=[${aim_motions
+    `主动方 ${attacker} vs 被动方 ${defender}\n目标体位列表：[${aim_motions
       .filter((e) => e !== undefined)
       .map((e) => e.toString().padStart(5, '0'))
       .join(
         ',',
-      )}]\ncurrent=${curr.toString().padStart(5, '0')}\n最终选择体位=${aim
+      )}]\n当前体位：${curr.toString().padStart(5, '0')}\n最终选择体位：${aim
       .toString()
       .padStart(5, '0')}`,
   );
@@ -480,12 +492,12 @@ function change_motion_by_base(attacker, defender, compat_motions, is_up = -1) {
   }
   const aim = get_extremum_entry(motion_list, (e) => Math.abs(e - curr)).min;
   era.logger.debug(
-    `主动方 ${attacker} vs 被动方 ${defender}\n目标体位列表=[${motion_list
+    `主动方 ${attacker} vs 被动方 ${defender}\n目标体位列表：[${motion_list
       .filter((e) => e !== undefined)
       .map((e) => e.toString().padStart(5, '0'))
       .join(
         ',',
-      )}]\ncurrent=${curr.toString().padStart(5, '0')}\n最终选择体位=${aim
+      )}]\n当前体位：${curr.toString().padStart(5, '0')}\n最终选择体位：${aim
       .toString()
       .padStart(5, '0')}`,
   );
