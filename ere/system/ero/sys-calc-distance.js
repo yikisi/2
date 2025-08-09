@@ -142,13 +142,13 @@ function find_main_parts(cid, oid) {
 function common_same(cid, oid, aim_parts, main_parts) {
   // 如果是两个范围，检查两个范围有没有交集
   // 如果是一个值和一个范围，检查值是不是能落到范围里
-  // 如果是两个值，要求正负号相同，攻击者距离更长点
+  // 如果是两个值，要求正负号相同，主动方距离更长点
   const a_loc = get_part_dis(cid, aim_parts.a, main_parts.a);
   const d_loc = get_part_dis(oid, aim_parts.d, main_parts.d);
   era.logger.debug(
-    `a_loc=[${a_loc.join(',')}],d_loc=[${d_loc.join(',')}]\naim_part.a=${part_touch[aim_parts.a]},main_part.a=${
+    `主动方部位相对距离=[${a_loc.join(',')}]，被动方部位相对距离=[${d_loc.join(',')}]\n主动方目标部位=${part_touch[aim_parts.a]}，主动方主要接触部位=${
       part_touch[main_parts.a]
-    }\naim_part.d=${part_touch[aim_parts.d]},main_part.d=${
+    }\n被动方目标部位=${part_touch[aim_parts.d]}，被动方主要接触部位=${
       part_touch[main_parts.d]
     }`,
   );
@@ -241,9 +241,9 @@ function check_distance(
       a_loc = get_part_dis(cid, aim_parts.a, main_parts.a);
       d_loc = get_part_dis(oid, aim_parts.d, main_parts.d);
       era.logger.debug(
-        `a_loc=[${a_loc.join(',')}],d_loc=[${d_loc.join(',')}]\naim_part.a=${part_touch[aim_parts.a]},main_part.a=${
+        `主动方部位相对距离=[${a_loc.join(',')}]，被动方部位相对距离=[${d_loc.join(',')}]\n主动方目标部位=${part_touch[aim_parts.a]}，主动方主要接触部位=${
           part_touch[main_parts.a]
-        }\naim_part.d=${part_touch[aim_parts.d]},main_part.d=${
+        }\n被动方目标部位=${part_touch[aim_parts.d]}，被动方主要接触部位=${
           part_touch[main_parts.d]
         }`,
       );
@@ -421,10 +421,12 @@ function change_motion(attacker, defender, ...aim_motions) {
   }
   const aim = get_extremum_entry(aim_motions, (e) => Math.abs(e - curr)).min;
   era.logger.debug(
-    `[closet motion] atk=${attacker}, def=${defender},\naim motion list=[${aim_motions
+    `主动方 ${attacker} vs 被动方 ${defender}\n目标体位列表=[${aim_motions
       .filter((e) => e !== undefined)
       .map((e) => e.toString().padStart(5, '0'))
-      .join(',')}]\ncurrent=${curr.toString().padStart(5, '0')}\nselected=${aim
+      .join(
+        ',',
+      )}]\ncurrent=${curr.toString().padStart(5, '0')}\n最终选择体位=${aim
       .toString()
       .padStart(5, '0')}`,
   );
@@ -478,10 +480,12 @@ function change_motion_by_base(attacker, defender, compat_motions, is_up = -1) {
   }
   const aim = get_extremum_entry(motion_list, (e) => Math.abs(e - curr)).min;
   era.logger.debug(
-    `[closet motion] atk=${attacker}, def=${defender},\naim motion list=[${motion_list
+    `主动方 ${attacker} vs 被动方 ${defender}\n目标体位列表=[${motion_list
       .filter((e) => e !== undefined)
       .map((e) => e.toString().padStart(5, '0'))
-      .join(',')}]\ncurrent=${curr.toString().padStart(5, '0')}\nselected=${aim
+      .join(
+        ',',
+      )}]\ncurrent=${curr.toString().padStart(5, '0')}\n最终选择体位=${aim
       .toString()
       .padStart(5, '0')}`,
   );

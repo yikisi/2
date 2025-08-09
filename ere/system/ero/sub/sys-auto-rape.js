@@ -57,15 +57,17 @@ function get_random_act(master, act_list, last_action, ...filters) {
     }
   }
   era.logger.debug(
-    'source: ' +
+    '角色 ' +
+      master +
+      ' 思考：\n可用指令：' +
       act_list.map((e) => ero_action_names[e]).join(',') +
-      '\nfiltered: ' +
+      '\n筛选结果：' +
       filtered_list.map((e) => ero_action_names[e]).join(',') +
-      '\nlast action: ' +
-      (ero_action_names[last_action] ?? 'null') +
-      '\nchange ratio: ' +
+      '\n前回行动：' +
+      (ero_action_names[last_action] ?? '无') +
+      '\n变招概率：' +
       (change_action * 100).toFixed(2) +
-      '%\nselected: ' +
+      '%\n最终选择：' +
       ero_action_names[ret],
   );
   return ret;
@@ -192,7 +194,7 @@ async function sys_auto_rape(shown) {
       });
       ret_flag = true;
     }
-    if (cur_supporter && !get_penis_size(cur_supporter)) {
+    if (cur_supporter > 0 && !get_penis_size(cur_supporter)) {
       ret_flag && shown && era.println();
       await run_custom_ero(cur_supporter, ero_hooks.use_medicine, {
         item:
@@ -209,12 +211,12 @@ async function sys_auto_rape(shown) {
       return;
     }
   }
-  const want_list = {},
-    poison_list = { lover: {}, master: {} },
-    sensitive_list = { lover: {}, master: {} },
-    white_list = {},
-    black_list = {},
-    week_list = {};
+  const want_list = {};
+  const poison_list = { lover: {}, master: {} };
+  const sensitive_list = { lover: {}, master: {} };
+  const white_list = {};
+  const black_list = {};
+  const week_list = {};
   get_custom_ero(master).set_preference(white_list, week_list);
   (era.get(`tcvar:${master}:接近高潮`) || []).forEach((p) =>
     want_list_entry_getter[p].forEach((k) => (want_list[k] = true)),
@@ -376,7 +378,7 @@ async function sys_auto_rape(shown) {
   if (!era.get('tflag:强奸') && get_sex_acceptable(master) < 0) {
     filters.push((e) => e === ero_hooks.insult || e === ero_hooks.hit_face);
   }
-  if (chara_list_in_train.length > 0) {
+  if (cur_supporter > 0) {
     filters.push(
       (e) =>
         e >= ero_hooks.double_cowgirl && e <= ero_hooks.spit_roast_anal_sex,
@@ -448,7 +450,7 @@ async function sys_auto_rape(shown) {
     0.16 - 0.08 * era.get(`talent:${master}:工口好奇`),
   );
   era.logger.debug(
-    `raping done! ${(new Date().getTime() - current).toLocaleString()}ms`,
+    `角色 ${master} 思考主动行为结束！${(new Date().getTime() - current).toLocaleString()}ms`,
   );
   if (
     ero_tagged_hooks[action] !== undefined &&

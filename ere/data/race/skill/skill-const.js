@@ -6095,7 +6095,7 @@ skills_dict[113301111] = require('#/data/race/skill/skill-113301111');
 skills_dict[113301211] = require('#/data/race/skill/skill-113301211');
 
 console.log(
-  'skill list init done!',
+  '技能列表注册完毕！',
   (new Date().getTime() - current).toLocaleString(),
   'ms',
 );

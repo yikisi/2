@@ -252,7 +252,7 @@ const era = {
   logger: {
     assert(checkVal, aimVal) {
       if (checkVal !== aimVal && era.version.engine === undefined) {
-        console.log(
+        console.debug(
           '[ASSERT]',
           new Error(`assert failed! aim val: ${aimVal}, got val: ${checkVal}`)
             .stack,
@@ -267,6 +267,7 @@ const era = {
      */
     debug(msg) {
       if (era.version.engine === undefined) {
+        console.debug('[DEBUG]', msg);
         return;
       }
       return era.logger.debug(msg);
@@ -278,13 +279,13 @@ const era = {
      */
     error(msg, stack) {
       if (era.version.engine === undefined) {
-        console.log('[ERROR]', msg, stack);
+        console.error('[ERROR]', msg, stack);
         return;
       }
       return era.logger.error(msg, stack);
     },
     /**
-     * to log something into program logs
+     * to log something into program logs as info level
      * @param {any} msg
      */
     info(msg) {
@@ -293,6 +294,18 @@ const era = {
         return;
       }
       return era.logger.info(msg);
+    },
+    /**
+     * to log something into program logs as warn level
+     * @param {any} msg
+     * @param {any} [stack]
+     */
+    warn(msg, stack) {
+      if (era.version.engine === undefined) {
+        console.warn('[WARN]', msg, stack);
+        return;
+      }
+      return era.logger.warn(msg, stack);
     },
   },
   /**
@@ -535,7 +548,7 @@ const era = {
    * @returns {boolean} if debug
    */
   toggleDebug() {},
-  version: { sdk: '4.1.1', engine: undefined },
+  version: { sdk: '4.2.2', engine: undefined },
   /**
    * wait any key from user
    * @returns {Promise<void>} a promise of nothing, please use await

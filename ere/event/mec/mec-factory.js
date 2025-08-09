@@ -74,7 +74,7 @@ cons_dict[346] =
     require('#/event/mec/mec-npc');
 
 console.log(
-  'constructor dictionary init done!',
+  '角色机制脚本注册完毕！',
   (new Date().getTime() - current).toLocaleString(),
   'ms',
 );

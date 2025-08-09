@@ -11,7 +11,7 @@ cons_dict[17] = require('#/utils/chara-talk-extended/chara-talk-17');
 cons_dict[9017] = require('#/utils/chara-talk-extended/chara-talk-9017');
 
 console.log(
-  'constructor dictionary init done!',
+  '角色发言输出工具注册完毕！',
   (new Date().getTime() - current).toLocaleString(),
   'ms',
 );

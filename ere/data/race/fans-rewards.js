@@ -63,8 +63,6 @@ Object.values(race_enum)
   .filter(
     (e) => race_infos[e].race_class === class_enum.G1 && !race2fans_reward[e],
   )
-  .map((e) =>
-    console.error(`[fans-rewards.js] miss! ${race_infos[e].name_zh}`),
-  );
+  .map((e) => console.error('比赛粉丝奖励缺失！', race_infos[e].name_zh));
 
 module.exports = race2fans_reward;

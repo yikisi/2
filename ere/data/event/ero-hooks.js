@@ -19,7 +19,7 @@ const current = new Date().getTime();
 ].forEach((f) => f(ero_action_names, ero_tagged_hooks, ero_derive_check));
 
 console.log(
-  'ero hooks init done!',
+  '调教指令钩子注册完毕！',
   (new Date().getTime() - current).toLocaleString(),
   'ms',
 );

@@ -34,8 +34,11 @@ class EroCommunications extends EroLinesCommon {
       }
     }
     const ratio = sys_get_strength_ratio_in_fight(attacker, defender);
-    era.logger.debug(`角色 ${attacker} 逆推概率：${(ratio * 100).toFixed(2)}%`);
-    return ratio >= 1 || (ratio > 0 && Math.random() < ratio);
+    const dice = ratio >= 1 ? 1 : ratio <= 0 ? 0 : Math.random();
+    era.logger.debug(
+      `角色 ${attacker} 逆推成功率：${(ratio * 100).toFixed(2)}%；掷骰：${(dice * 100).toFixed()}`,
+    );
+    return dice < ratio;
   }
 
   /**

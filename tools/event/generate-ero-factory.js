@@ -64,7 +64,7 @@ scripts.forEach(
 
 output += `
 console.log(
-  'constructor dictionary init done!',
+  '角色调教口上注册完毕！',
   (new Date().getTime() - current).toLocaleString(),
   'ms',
 );
@@ -95,7 +95,7 @@ current = new Date().getTime();
 ].forEach((f) => f(describers.r));
 
 console.log(
-  'ero common description handlers init done!',
+  '调教指令通用描述注册完毕！',
   (new Date().getTime() - current).toLocaleString(),
   'ms',
 );
