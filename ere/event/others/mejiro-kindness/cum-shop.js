@@ -245,6 +245,7 @@ async function cum_shop(chara, me) {
                           era.get(`talent:${target.id}:淫核`),
                         ),
                       );
+                      era.set(`talent:${target.id}:淫核`, 0);
                       era.set(`cflag:${target.id}:性别`, 10);
                       const inmon = CharaInmon.get(target.id);
                       for (let i = 1; i <= 3; ++i) {
@@ -268,8 +269,8 @@ async function cum_shop(chara, me) {
                         d: true,
                         t:
                           penis_size === 0
-                            ? '本来无一物……'
-                            : '已经不能继续缩小了……',
+                            ? '本来无一物'
+                            : '已经不能继续缩小了',
                       }
                     : {}),
                   h() {
@@ -284,6 +285,7 @@ async function cum_shop(chara, me) {
                           era.get(`talent:${target.id}:淫核`),
                         ),
                       );
+                      era.set(`talent:${target.id}:早泄`, 0);
                       era.set(`cflag:${target.id}:性别`, 0);
                       era.set(`talent:${target.id}:凶器`, 0);
                       const inmon = CharaInmon.get(target.id);
