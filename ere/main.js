@@ -625,7 +625,7 @@ module.exports = async () => {
           },
         ]);
         await era.waitAnyKey();
-        await era.printAndWait('技能翻译参考', {
+        await era.printAndWait('翻译参考', {
           align: 'center',
           color: item_title_color,
           fontSize: '1.25rem',
