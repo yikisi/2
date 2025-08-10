@@ -725,31 +725,37 @@ async function sys_next_week() {
       (get_custom_mec(e).is_able_to_be_selected() ||
         (era.get(`cflag:${e}:妊娠阶段`) & 0b100001) > 0),
   );
-  if (!era.get('flag:当前互动角色') && in_team_list.length) {
-    era.set(
-      'flag:当前互动角色',
-      (era.get(`cflag:${sex_partner}:招募状态`) === recruit_flags.yes &&
-        sex_partner) ||
+  if (!era.get('flag:当前互动角色') && in_team_list.length > 0) {
+    if (
+      era.get(`cflag:${sex_partner}:招募状态`) === recruit_flags.yes &&
+      !sys_check_remote(sex_partner)
+    ) {
+      era.set('flag:当前互动角色', sex_partner);
+    } else {
+      const local_list = in_team_list.filter((cid) => !sys_check_remote(cid));
+      era.set(
+        'flag:当前互动角色',
         get_random_entry(
-          in_team_list.filter((e) => sys_reg_race(e).curr.week === cur_round),
+          local_list.filter((cid) => sys_reg_race(cid).curr.week === cur_round),
         ) ||
-        get_random_entry(
-          in_team_list.filter(
-            (e) =>
-              era.get(`cflag:${e}:育成回合计时`) < 3 * 48 &&
-              (era.get(`cflag:${e}:妊娠阶段`) & 0b100001) === 0,
-          ),
-        ) ||
-        get_random_entry(
-          in_team_list.filter(
-            (e) => era.get(`cflag:${e}:育成回合计时`) < 3 * 48,
-          ),
-        ) ||
-        get_random_entry(
-          in_team_list.filter((e) => era.get(`cflag:${e}:成长阶段`) >= 1),
-        ) ||
-        0,
-    );
+          get_random_entry(
+            local_list.filter(
+              (cid) =>
+                era.get(`cflag:${cid}:育成回合计时`) < 3 * 48 &&
+                (era.get(`cflag:${cid}:妊娠阶段`) & 0b100001) === 0,
+            ),
+          ) ||
+          get_random_entry(
+            local_list.filter(
+              (cid) => era.get(`cflag:${cid}:育成回合计时`) < 3 * 48,
+            ),
+          ) ||
+          get_random_entry(
+            local_list.filter((e) => era.get(`cflag:${e}:成长阶段`) >= 1),
+          ) ||
+          0,
+      );
+    }
   }
   await morning_sex();
   era.set('flag:床伴', 0);
