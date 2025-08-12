@@ -1,7 +1,7 @@
 /**
  * @file 调教地文 - 银趴系
  * @author 雞雞
- * @author 无名黑奴
+ * @author 黑奴队长
  */
 const era = require('#/era-electron');
 
@@ -140,7 +140,7 @@ class EroNormalOrgy extends EroOrgy {
   }
 
   /**
-   * @author 无名黑奴
+   * @author 黑奴队长
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {CharaTalk} supporter

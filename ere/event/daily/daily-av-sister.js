@@ -3,7 +3,7 @@
  * 设定是织姬的第一个产驹是妹妹<br>
  * 示例用的日常事件口上<br>
  * 欢迎创作替代
- * @author 无名黑奴（临时）
+ * @author 黑奴队长（临时）
  */
 const era = require('#/era-electron');
 

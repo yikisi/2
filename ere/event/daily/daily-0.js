@@ -2,7 +2,7 @@
  * @file 玩家 - 日常
  * @author 雞雞
  * @author 幽白書
- * @author 无名黑奴（改编）
+ * @author 黑奴队长（改编）
  */
 const era = require('#/era-electron');
 

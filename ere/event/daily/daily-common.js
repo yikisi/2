@@ -3,7 +3,7 @@
  * @author 雞雞
  * @author KUN
  * @author 幽白書
- * @author 无名黑奴
+ * @author 黑奴队长
  */
 const era = require('#/era-electron');
 
@@ -131,7 +131,7 @@ class CustomizedDaily {
     );
   }
 
-  /** @author 无名黑奴 */
+  /** @author 黑奴队长 */
   async borrow_money() {
     const billing = sys_get_billings()[0];
     era.printInColRows(
@@ -232,7 +232,7 @@ class CustomizedDaily {
 
   /**
    * @author 雞雞
-   * @author 无名黑奴
+   * @author 黑奴队长
    * @param {HookArg} hook
    */
   async good_night(hook) {
@@ -836,7 +836,7 @@ class CustomizedDaily {
 
   /**
    * @author 雞雞
-   * @author 无名黑奴
+   * @author 黑奴队长
    */
   async talk() {
     const chara = get_chara_talk(this.id);

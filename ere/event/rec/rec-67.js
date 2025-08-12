@@ -2,7 +2,7 @@
  * @file 里见光钻 - 招募
  * @author 某知名手游公司编剧
  * @author 黑奴二号（改编）
- * @author 无名黑奴（修订）
+ * @author 黑奴队长（修订）
  */
 const era = require('#/era-electron');
 

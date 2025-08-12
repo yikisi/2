@@ -1,7 +1,7 @@
 /**
  * @file H事件 - 隔日清晨系列
  * @author 雞雞
- * @author 无名黑奴
+ * @author 黑奴队长
  */
 const {
   get,
@@ -123,7 +123,7 @@ async function blowjob(chara, me) {
 }
 
 /**
- * @author 无名黑奴
+ * @author 黑奴队长
  * @param {CharaTalk} chara
  * @param {CharaTalk} me
  */

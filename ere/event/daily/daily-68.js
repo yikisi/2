@@ -1,7 +1,7 @@
 ﻿/**
  * @file 北部玄驹 - 日常
  * @author 小黑（原作）
- * @author 黑奴一号 无名黑奴（改编）
+ * @author 黑奴一号 黑奴队长（改编）
  */
 const era = require('#/era-electron');
 

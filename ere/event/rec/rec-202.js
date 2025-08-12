@@ -1,6 +1,6 @@
 /**
  * @file 苦涩糖衣 - 招募
- * @author 无名黑奴（临时）
+ * @author 黑奴队长（临时）
  */
 const { set } = require('#/era-electron');
 
