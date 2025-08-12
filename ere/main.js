@@ -360,7 +360,7 @@ module.exports = async () => {
             },
             { isBr: true },
             {
-              content: 'EraElectron 引擎（PC版）发布页',
+              content: 'EraElectron 引擎（PC 版）发布页',
               url: 'https://gitgud.io/umaera/engine/era-electron/-/releases/permalink/latest',
             },
             { isBr: true },

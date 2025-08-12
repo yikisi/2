@@ -49,7 +49,7 @@ EraUma 和 ERE 引擎（EraElectron、ere.app）将保持开源，请各位开�
 
 EraUma 发布采取分包制，即游戏本体包+游戏资源包拆分打包方式，使用时需要解压到同一个文件夹，才能通过 [ERE引擎](https://gitgud.io/umaera/engine/era-electron/-/releases/permalink/latest) 启动。
 
-从PC版引擎 EraElectron 顶部下拉菜单中【打开游戏文件夹】启动时，请确认打开的文件夹至少有以下结构：
+从 PC 版引擎 EraElectron 顶部下拉菜单中【打开游戏文件夹】启动时，请确认打开的文件夹至少有以下结构：
 
     erauma文件夹/PC绿色版解压出的game文件夹
     ├── csv文件夹
