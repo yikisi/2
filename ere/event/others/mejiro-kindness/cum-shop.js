@@ -559,7 +559,7 @@ async function cum_shop(chara, me) {
       {
         c: '「按摩店」',
         async h() {
-          const max_limt = 5 + (era.get(`cflag:${chara.id}:性别`) !== 1);
+          const max_limit = 5 + (chara.sex_code !== 1);
           let _flag = true;
           await say_by_waiter_and_wait(
             '这里提供精油按摩服务！要不要来放松一下呢？',
@@ -569,6 +569,7 @@ async function cum_shop(chara, me) {
           while (_flag) {
             await era.clear(era.getLineCount() - lines);
             const part_limit = era.get(`talent:${chara.id}:调教度`);
+            console.log(part_limit, max_limit);
             print_money_divider();
             let talent_list = ['荡唇', '神之手', '神之足', '魔尻'];
             if (target.sex_code !== 1) {
@@ -581,21 +582,26 @@ async function cum_shop(chara, me) {
               (e) => era.get(`talent:${target.id}:${e}`) === 0,
             );
             era.printButton(`切换接受服务的角色，现在是 ${target.name}`, 1);
-            era.printButton(`增强一个部位的性能力（60「恩宠」）`, 2, {
-              disabled: talent_list.length === 0,
-            });
+            era.printButton(
+              `增强一个部位的性能力（60「恩宠」）`,
+              2,
+              talent_list.length === 0
+                ? {
+                    disabled: true,
+                    title: '没有可以提升性能力的部位了',
+                  }
+                : {},
+            );
             if (target.id > 0) {
               era.printButton(
                 `增加 ${chara.name} 可调教为最高级敏感度的部位（${
-                  part_limit === max_limt
+                  part_limit >= max_limit
                     ? 'MAX'
-                    : `25「恩宠」：${part_limit + 1} 个部位 → ${part_limit + 2} 个部位`
+                    : `25「恩宠」：${part_limit} 个部位 → ${part_limit + 1} 个部位`
                 }）`,
                 3,
                 {
-                  disabled:
-                    era.get(`talent:${chara.id}:调教度`) ===
-                    4 + (era.get(`cflag:${chara.id}:性别`) > 0),
+                  disabled: part_limit >= max_limit,
                 },
               );
             }

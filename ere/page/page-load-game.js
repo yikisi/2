@@ -526,6 +526,11 @@ module.exports = async () => {
                 );
               }
             }
+            if (version <= 2100) {
+              era
+                .getAddedCharacters()
+                .forEach((cid) => era.add(`talent:${cid}:调教度`, 1));
+            }
             return true;
           } else {
             msg_notification = `未能成功读取 ${ret} 号栏位的存档`;
