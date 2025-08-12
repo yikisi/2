@@ -727,6 +727,7 @@ async function sys_next_week() {
   );
   if (!era.get('flag:当前互动角色') && in_team_list.length > 0) {
     if (
+      sex_partner > 0 &&
       era.get(`cflag:${sex_partner}:招募状态`) === recruit_flags.yes &&
       !sys_check_remote(sex_partner)
     ) {
