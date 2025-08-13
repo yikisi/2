@@ -78,6 +78,7 @@ function init_chara(cid, src = 0) {
   }
   era.set(`talent:${cid}:童贞`, 1);
   era.set(`talent:${cid}:处女`, 1);
+  era.set(`talent:${cid}:调教度`, 1);
   era.set(`cflag:${cid}:妊娠阶段`, 1 << pregnant_stage_enum.no);
   era.set(`base:${cid}:性欲`, 0);
   era.set(`base:${cid}:压力`, 0);
@@ -96,6 +97,7 @@ function init_chara(cid, src = 0) {
         era.set(`talent:${cid}:抖S`, 0);
         era.set(`talent:${cid}:喜欢责骂`, 0);
         era.set(`talent:${cid}:喜欢痛苦`, 0);
+        era.set(`talent:${cid}:调教度`, 0);
         break;
       case -1:
         era.set(`talent:${cid}:淫口`, 0);
@@ -120,11 +122,12 @@ function init_chara(cid, src = 0) {
         era.set(`talent:${cid}:抖S`, 1);
         era.set(`talent:${cid}:喜欢责骂`, 1);
         era.set(`talent:${cid}:喜欢痛苦`, 1);
+        era.set(`talent:${cid}:调教度`, 3);
     }
     if (era.get('flag:自带钝感')) {
-      pleasure_list.forEach((part) => {
-        era.set(`talent:${cid}:${part_names[part]}钝感`, 1);
-      });
+      pleasure_list.forEach((part) =>
+        era.set(`talent:${cid}:${part_names[part]}钝感`, 1),
+      );
     }
   }
   era.set(

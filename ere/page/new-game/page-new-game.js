@@ -46,6 +46,7 @@ module.exports = async (src_chara) => {
   if (src_chara > 0) {
     chara_colors[0] = get_chara_color(src_chara);
     init_chara(0, src_chara);
+    era.set('talent:0:调教度', 1);
     player_name = era.get('callname:0:-1');
     CharaTitles.get(0).push(
       ...get_custom_check(src_chara)

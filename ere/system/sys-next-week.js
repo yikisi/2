@@ -361,9 +361,18 @@ async function sys_next_week() {
       await get_custom_daily(cid).growth(2);
     }
 
+    const c_sex = era.get(`cflag:${cid}:性别`);
     const is_p_slave = CharaInmon.get(cid).slave === slavery_enum.pregnant;
     const life_marks = LifeEventMarks.get_marks(cid);
     let pregnant_stage = era.get(`cflag:${cid}:妊娠阶段`);
+    if (c_sex === 1) {
+      pregnant_stage = era.set(
+        `cflag:${cid}:妊娠阶段`,
+        1 << pregnant_stage_enum.no,
+      );
+      era.set(`cflag:${cid}:妊娠回合计时`, 0);
+      era.set(`status:${cid}:排卵期`, 0);
+    }
     if (pregnant_stage >> pregnant_stage_enum.embryo > 0) {
       sys_change_lust(cid, lust_border.itch / 40);
       const timer = era.add(`cflag:${cid}:妊娠回合计时`, 1 + is_p_slave);
@@ -500,11 +509,13 @@ async function sys_next_week() {
       }
     }
 
-    if (growth_stage >= 2) {
+    if (growth_stage >= 2 && c_sex !== 1) {
       era.set(
         `talent:${cid}:乳房尺寸`,
         get_talent_bust_size(get_breast_cup(cid, true)),
       );
+    } else {
+      era.set(`talent:${cid}:乳房尺寸`, 0);
     }
 
     let special_month = era.get(`status:${cid}:发情`);
@@ -526,7 +537,7 @@ async function sys_next_week() {
     // 只有性成熟且有浦西才需要算经期和排卵期
     // 注意虽然成长期就性成熟了，但是开发者保护在本格期才会怀孕
     // 一个月四个星期，假设生日在第二周，则四周分别为：排卵期 出生周 经期 无
-    if (growth_stage >= 1 && era.get(`cflag:${cid}:性别`) - 1 && !is_p_slave) {
+    if (growth_stage >= 1 && c_sex !== 1 && !is_p_slave) {
       // 经期为出生周的下一周（简单计算）
       let special_week =
         era.get(`cflag:${cid}:月经周`) ||
@@ -556,7 +567,7 @@ async function sys_next_week() {
         special_body = era.set(`status:${cid}:排卵期`, 0);
       }
     }
-    if (growth_stage >= 1 && era.get(`cflag:${cid}:性别`) - 1) {
+    if (growth_stage >= 1 && c_sex !== 1) {
       // 泌乳的相关判定
       let milk_timer = era.get(`cflag:${cid}:泌乳回合计时`);
       if (milk_timer) {
@@ -585,10 +596,10 @@ async function sys_next_week() {
       }
     }
     if (growth_stage >= 1) {
-      const body_hair_talent = era.get(`talent:${cid}:腋毛成长`),
-        sex_hair_talent = era.get(`talent:${cid}:阴毛成长`);
-      let body_hair = era.get(`cflag:${cid}:腋毛`),
-        sex_hair = era.get(`cflag:${cid}:阴毛`);
+      const body_hair_talent = era.get(`talent:${cid}:腋毛成长`);
+      const sex_hair_talent = era.get(`talent:${cid}:阴毛成长`);
+      let body_hair = era.get(`cflag:${cid}:腋毛`);
+      let sex_hair = era.get(`cflag:${cid}:阴毛`);
       body_hair = era.set(
         `cflag:${cid}:腋毛`,
         Math.min(body_hair + body_hair_talent, 4 + (body_hair_talent === 2)),
@@ -636,7 +647,7 @@ async function sys_next_week() {
         part_enum.body,
         part_enum.anal,
       ];
-      switch (era.get(`cflag:${cid}:性别`)) {
+      switch (c_sex) {
         case 0:
           tmp_parts.push(part_enum.clitoris);
           tmp_parts.push(part_enum.virgin);

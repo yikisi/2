@@ -569,7 +569,6 @@ async function cum_shop(chara, me) {
           while (_flag) {
             await era.clear(era.getLineCount() - lines);
             const part_limit = era.get(`talent:${chara.id}:调教度`);
-            console.log(part_limit, max_limit);
             print_money_divider();
             let talent_list = ['荡唇', '神之手', '神之足', '魔尻'];
             if (target.sex_code !== 1) {

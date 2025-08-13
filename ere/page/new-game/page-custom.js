@@ -190,12 +190,12 @@ function random_chara() {
 
 function random_talent() {
   era.get('talentkeys').forEach((e) => {
-    if (e >= 40 && e < 70) {
+    if (e >= 40 && e <= 66) {
       era.set(`talent:0:${e}`, 0);
     }
   });
   const chara_talents = new Array(18).fill(0).map((_, i) => i);
-  chara_talents.forEach((talent_id) => era.set(`talent:0:${talent_id}`, 0));
+  chara_talents.forEach((tid) => era.set(`talent:0:${tid}`, 0));
   gacha(chara_talents, 5).forEach((e) =>
     era.set(`talent:0:${e}`, 2 * get_random_value(0, 1) - 1),
   );
@@ -220,9 +220,9 @@ function random_talent() {
 }
 
 async function page_custom() {
-  let buffer,
-    flag_custom = true,
-    temp;
+  let buffer;
+  let flag_custom = true;
+  let temp;
 
   if (era.get('callname:0:-1').indexOf('豚鼠子') !== -1) {
     era.set('flag:角色性别', 0);
