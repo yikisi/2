@@ -17329,8 +17329,8 @@
       "title": "EraUma",
       "gameCode": 29407,
       "defaultChara": 0,
-      "version": 2102,
-      "versionName": "2.102 (agito)",
+      "version": 2110,
+      "versionName": "2.11 (agito)",
       "allowVersion": 1000,
       "site": "https://gitgud.io/umaera/erauma/-/releases/permalink/latest",
       "versionCheck": "https://umaera.gitgud.site/erauma/RELEASE",
@@ -25810,6 +25810,26 @@
     },
     "强击_私_半身": {
       "path": "res/others/chara_stand_1091_901091.png",
+      "x": 0,
+      "y": 0,
+      "width": 512,
+      "height": 512,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "强击_泳": {
+      "path": "res/others/chr_icon_1091_109130_01.png",
+      "x": 0,
+      "y": 0,
+      "width": 200,
+      "height": 219,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "强击_泳_半身": {
+      "path": "res/others/chara_stand_1091_109130.png",
       "x": 0,
       "y": 0,
       "width": 512,

@@ -1,4 +1,4 @@
-# [EraUma v2.102 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.102)
+# [EraUma v2.11 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.11)
 
 _incoming_
 
