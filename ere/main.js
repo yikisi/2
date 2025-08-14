@@ -302,14 +302,14 @@ module.exports = async () => {
           { config: { width: 7 }, names: 'logo', type: 'image.whole' },
           { config: { width: 17 }, names: 'title', type: 'image.whole' },
           {
-            content: [
-              `版本号：v${versionName}`,
-              { isBr: true },
-              ...join_list(author.split('|'), { isDivider: true }),
-            ],
+            content: ['版本号：v', versionName],
             type: 'text',
           },
           { content: '适配资源包版本：20250814', type: 'text' },
+          {
+            content: join_list(author.split('|'), { isDivider: true }),
+            type: 'text',
+          },
         ],
         config: { offset: 6, verticalAlign: 'middle', width: 12 },
       },
