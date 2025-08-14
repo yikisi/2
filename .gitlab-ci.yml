@@ -69,5 +69,5 @@ release:
         - name: '[安卓游戏包] $GAME_BUNDLE_ZIP (解压密码：era)'
           url: '${GAME_BUNDLE_URL}'
           link_type: package
-        - name: '[通用资源包] erauma-master-res.zip (解压后将res文件夹放到游戏文件夹下，需要在游戏设置中启用资源)'
+        - name: '[通用资源包] erauma-master-res.zip (版本号，解压后将 res 文件夹放到游戏文件夹下，在游戏设置中启用资源)'
           url: 'https://gitgud.io/umaera/erauma/-/archive/master/erauma-master.zip?path=res'
