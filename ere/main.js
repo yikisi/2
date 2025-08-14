@@ -309,6 +309,7 @@ module.exports = async () => {
             ],
             type: 'text',
           },
+          { content: '适配资源包版本：20250814', type: 'text' },
         ],
         config: { offset: 6, verticalAlign: 'middle', width: 12 },
       },
