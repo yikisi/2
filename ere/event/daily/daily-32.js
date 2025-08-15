@@ -1,7 +1,7 @@
 /**
  * @file 爱丽速子 - 日常
  * @author 幽白書
- * @author 黑奴一号 无名黑奴（修订）
+ * @author 黑奴一号 黑奴队长（修订）
  */
 const era = require('#/era-electron');
 

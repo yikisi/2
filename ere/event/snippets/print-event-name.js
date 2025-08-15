@@ -12,8 +12,12 @@ const CharaTalk = require('#/utils/chara-talk');
  */
 async function print_event_name(name, chara, color = chara.color, offset = 0) {
   if (!(chara instanceof CharaTalk)) {
-    era.logger.debug('chara type error!');
-    console.log('chara type error!', name, chara, color, new Error().stack);
+    console.error('角色对象错误！', name, chara, color);
+    return await era.printAndWait(name, {
+      color,
+      fontSize: '1.75rem',
+      fontWeight: 'bold',
+    });
   }
   era.setVerticalAlign('middle');
   era.printInColRows(
@@ -33,7 +37,7 @@ async function print_event_name(name, chara, color = chara.color, offset = 0) {
       columns: [
         {
           config: {
-            color: color,
+            color,
             fontSize: '1.75rem',
             fontWeight: 'bold',
           },

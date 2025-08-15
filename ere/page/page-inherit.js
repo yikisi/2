@@ -41,6 +41,8 @@ const {
 } = require('#/data/race/model/uma-gene');
 const { adaptability_names } = require('#/data/train-const');
 
+const gene_limit = 27;
+
 /**
  * @param {CharaGenes} genes
  * @param {CharaAvailableGenes} available_genes
@@ -139,7 +141,7 @@ function generate_gene_buttons(
                     get(`maxbase:${chara_id}:${gene.type_value}`) === 2000) ||
                   (gene.type === gene_type_enum.skill &&
                     genes.get_count(e.id) > 0) ||
-                  (!chara_id && genes.count() > 15),
+                  (!chara_id && genes.count() > gene_limit),
                 width: 6,
               },
               content: '学习',
@@ -377,14 +379,14 @@ async function print_inherit_page() {
         [
           {
             accelerator: available_genes.get_values().length + 3,
-            config: { disabled: chara_genes.count() < 15 },
+            config: { disabled: chara_genes.count() < gene_limit },
             content: '遗忘所有因子能力',
             type: 'button',
           },
           {
             content: [
               '* 马娘训练员最多继承 ',
-              { content: '15', fontWeight: 'bold' },
+              { content: gene_limit.toString(), fontWeight: 'bold' },
               ' 个因子能力',
             ],
             type: 'text',

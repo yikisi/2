@@ -352,6 +352,10 @@ const icon2skill_color = {
     UmaSkill.skill_name_enum.speed,
     UmaSkill.skill_border_enum.advanced,
   ),
+  20316: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.evol,
+  ),
   30011: UmaSkill.get_skill_color(
     UmaSkill.skill_name_enum.control,
     UmaSkill.skill_border_enum.normal,
@@ -399,6 +403,10 @@ const icon2skill_color = {
   2010010: UmaSkill.get_skill_color(
     UmaSkill.skill_name_enum.speed,
     UmaSkill.skill_border_enum.advanced,
+  ),
+  2010016: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.evol,
   ),
 };
 
@@ -635,8 +643,9 @@ async function chara_skill() {
   let buffer =
     '/** @type {Record<string,number[]>} */\nconst chara_skill_dict={};\n/** @type {Record<string,UmaSkill>} */\nconst skills_dict = {};\n\n';
   let buffer_common_skills = [
-    202051, 200791, 200801, 200811, 200821, 990011, 990021, 660011, 660012,
-    660021, 660022, 660031, 660032, 660041, 660042, 660051, 660052,
+    202051, 200791, 200801, 200811, 200821, 990011, 990021, 600011, 600012,
+    660011, 660012, 660021, 660022, 660031, 660032, 660041, 660042, 660051,
+    660052,
   ];
   for (const chara_id in dict) {
     buffer += `chara_skill_dict[${Number(chara_id) % 1000}] = [${dict[chara_id].join(',')}];`;
@@ -755,8 +764,9 @@ async function chara_skill() {
   buffer += '\n\nconst current = new Date().getTime();\n\n';
   [
     102602211, 100039, 900039, 100601, 900601, 101201, 102041, 902041, 102051,
-    902051, 102061, 902061, 990011, 990021, 660011, 660012, 660021, 660022,
-    660031, 660032, 660041, 660042, 660051, 660052,
+    902051, 102061, 902061, 990011, 990021, 660011, 660012, 660011, 660012,
+    660011, 660012, 660021, 660022, 660031, 660032, 660041, 660042, 660051,
+    660052,
   ].forEach(
     (s) =>
       (buffer += `skills_dict[${s}]=require("#/data/race/skill/skill-${s}");`),
@@ -873,7 +883,7 @@ async function chara_skill() {
   }
   writeFileSync(
     '../../ere/data/race/skill/skill-const.js',
-    `${buffer}\n\nconsole.log('[skill-const.js] skill list init done!',(new Date().getTime()-current).toLocaleString(),'ms')\n\nconst common_skills = [${buffer_common_skills
+    `${buffer}\n\nconsole.log('技能列表注册完毕！',(new Date().getTime()-current).toLocaleString(),'ms')\n\nconst common_skills = [${buffer_common_skills
       .sort()
       .filter((e, i, l) => i === l.indexOf(e))
       .join(

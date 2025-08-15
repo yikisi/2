@@ -1,6 +1,6 @@
 /**
  * @file 乙名史悦子 - 招募
- * @author 无名黑奴（临时）
+ * @author 黑奴队长（临时）
  */
 const { get, printAndWait, set } = require('#/era-electron');
 

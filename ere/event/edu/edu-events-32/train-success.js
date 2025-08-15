@@ -18,9 +18,9 @@ const { race_enum, race_infos } = require('#/data/race/race-const');
  * @param {number} stamina_ratio
  */
 module.exports = async (tachyon, me, callname, hook, stamina_ratio) => {
-  const buffer = [],
-    love = era.get('love:32'),
-    relation = era.get('relation:32:0');
+  const buffer = [];
+  const love = era.get('love:32');
+  const relation = era.get('relation:32:0');
   era.print([tachyon.get_colored_name(), ' 的训练顺利结束了！']);
   era.println();
   if (

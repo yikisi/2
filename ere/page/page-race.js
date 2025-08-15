@@ -185,22 +185,25 @@ async function race_page(race) {
     { loop: true },
   );
   await preview_race(info, team_list, contestants, is_grand_live);
-  const race_start = {},
-    race_end = {};
-  team_list.forEach((chara) => {
-    const id = chara.index_chara;
-    if (id) {
-      race_start[id] = race_end[id] = false;
+  const race_start = {};
+  const race_end = {};
+  team_list.forEach((u) => {
+    const cid = u.index_chara;
+    if (cid) {
+      race_start[cid] = race_end[cid] = false;
     }
-    aim_race_dict[id] = get_custom_check(id).is_aim_race(
+    aim_race_dict[cid] = get_custom_check(cid).is_aim_race(
       race,
-      era.get(`cflag:${id}:育成回合计时`),
+      era.get(`cflag:${cid}:育成回合计时`),
     );
-    chara.adapts.style = chara.adapt_style_list[chara.style];
+    u.adapts.style = u.adapt_style_list[u.style];
+    if (u.race.conditionParams.item > 0) {
+      era.set('flag:变态行为', 1);
+    }
   });
-  let start_count = team_list.filter((e) => e.index_chara > 0).length,
-    end_count = start_count,
-    time_cost = 0;
+  let start_count = team_list.filter((e) => e.index_chara > 0).length;
+  let end_count = start_count;
+  let time_cost = 0;
   start_count === 0 && (await era.clear());
   while (start_count > 0) {
     await era.clear();
@@ -416,9 +419,9 @@ async function race_page(race) {
       time_cost += 100;
     }
   }
-  const best_rank = Math.min(...team_list.map((e) => e.rank.curr)),
-    mvp_id = team_list.find((e) => e.rank.curr === best_rank).index_chara,
-    is_pregnant_slave = era.get('flag:惩戒力度') === 3;
+  const best_rank = Math.min(...team_list.map((e) => e.rank.curr));
+  const mvp_id = team_list.find((e) => e.rank.curr === best_rank).index_chara;
+  const is_pregnant_slave = era.get('flag:惩戒力度') === 3;
   const { hentai_flag, new_title_dict } = sys_check_titles_after_race(
     team_list,
     race,
@@ -526,7 +529,8 @@ async function race_page(race) {
       ]);
     }
   }
-  if (fame_reward > 0) {
+  fame_reward -= race_title_reward * 40;
+  if (fame_reward > 0 || race_title_reward > 0) {
     wait_flag =
       sys_like_chara(302, 0, fame_reward / 5 + race_title_reward * 12) ||
       wait_flag;

@@ -2,7 +2,7 @@
  * @file 育成地文
  * @author 雞雞
  * @author 幽白書
- * @author 无名黑奴
+ * @author 黑奴队长
  */
 const era = require('#/era-electron');
 
@@ -532,7 +532,7 @@ class CustomizedEdu extends ICustomizedEdu {
 
   /**
    * @author 雞雞
-   * @author 无名黑奴
+   * @author 黑奴队长
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {string} callname
@@ -808,7 +808,7 @@ class CustomizedEdu extends ICustomizedEdu {
         era.println();
       }
     } else if (
-      extra.attr !== attr_enum.intelligence &&
+      extra.train !== attr_enum.intelligence &&
       !sys_check_remote(this.id)
     ) {
       if (

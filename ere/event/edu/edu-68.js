@@ -20,7 +20,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { buff_colors } = require('#/data/color-const');
 const KitaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-68');
 const { location_enum } = require('#/data/locations');
-const { attr_enum, attr_names, fumble_result } = require('#/data/train-const');
+const { attr_enum, fumble_result } = require('#/data/train-const');
 
 module.exports = class extends CustomizedEdu {
   async back_school(kita, me, callname, hook, extra_flag, event_object) {
@@ -337,29 +337,27 @@ module.exports = class extends CustomizedEdu {
     }
   }
 
-  async train_success(kita, me, callname, hook, extra_flag) {
-    era.print(
-      `${kita.name} 的 ${attr_names[extra_flag.train]} 训练顺利成功了……`,
-    );
-    if (Math.random() < 0.2 * extra_flag.stamina_ratio) {
-      era.println();
-      await print_event_name('额外自主训练！', kita);
-      await era.printAndWait(`训练结束后，${kita.name} 似乎仍有些意犹未尽。`);
-      await era.printAndWait(
-        `${kita.sex}远远向天边望去，夕阳正在垂落，最后的光芒洒落大地。`,
-      );
-      await era.printAndWait(`天马上就要黑了，但是还不够，还没有到达极限。`);
-      era.printButton('「继续训练吧！」', 1);
-      era.printButton('「今天就到此为止吧。」', 2);
-      hook.arg = (await era.input()) === 1;
-      if (hook.arg) {
-        await kita.say_and_wait(
-          `明白了！那么训练员${me.get_adult_sex_title()}请看好哦！`,
-        );
-      } else {
-        await kita.say_and_wait(`这样么，好～那么就好好休息明天再锻炼吧！`);
-      }
+  async train_success_add(kita, me, callname) {
+    await print_event_name('额外自主训练！', kita);
+    await era.printAndWait([
+      '训练结束后，',
+      kita.get_colored_name(),
+      ' 似乎仍有些意犹未尽。',
+    ]);
+    await era.printAndWait([
+      kita.sex,
+      '远远向天边望去，夕阳正在垂落，最后的光芒洒落大地。',
+    ]);
+    await era.printAndWait(`天马上就要黑了，但是还不够，还没有到达极限。`);
+    era.printButton('「继续训练吧！」', 1);
+    era.printButton('「今天就到此为止吧。」', 2);
+    if ((await era.input()) === 1) {
+      await kita.say_and_wait(['明白了！那么', callname, '请看好哦！']);
+      return true;
+    } else {
+      await kita.say_and_wait(`这样么，好～那么就好好休息明天再锻炼吧！`);
     }
+    return false;
   }
 
   async week_end(kita, me, callname, hook, extra_flag, event_object) {

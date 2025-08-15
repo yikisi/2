@@ -16,7 +16,7 @@ const add_jewel_reward = require('#/event/snippets/add-jewel-reward');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { gacha } = require('#/utils/list-utils');
-const get_random_name = require('#/utils/naming');
+const get_child_name = require('#/utils/naming');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { buff_colors } = require('#/data/color-const');
@@ -41,10 +41,10 @@ function check_duplicate(name) {
     duplicate_names[name] > 0 ||
     era
       .getAddedCharacters()
-      .findIndex((cid) => era.get(`callname:${cid}:-1`) === name) !== -1 ||
+      .findIndex((cid) => era.get(`callname:${cid}:-1`) === name) >= 0 ||
     era
       .getAllCharacters()
-      .findIndex((cid) => era.get(`static:${cid}:name`) === name) !== -1
+      .findIndex((cid) => era.get(`static:${cid}:name`) === name) >= 0
   );
 }
 
@@ -100,7 +100,7 @@ async function name_baby(cid, fid, mid) {
     }
   }
   if (rand_param > 0) {
-    ret = get_random_name(rand_param);
+    ret = get_child_name(rand_param);
   }
   if (check_duplicate(ret)) {
     era.print(`已经有名为 ${ret} 的角色！请重新输入：`);
@@ -112,7 +112,7 @@ async function name_baby(cid, fid, mid) {
     (await select_yes_or_no([
       get_chara_talk(mid).get_colored_name(),
       ' 的孩子起名为 ',
-      get_chara_talk(cid).get_colored_name(),
+      ret,
       '……',
       { isBr: true },
       '要重新取名吗？',
@@ -266,6 +266,8 @@ async function sys_have_baby(mid) {
     );
   }
 
+  era.set(`talent:${ch_id}:泌乳`, 0);
+  era.set(`talent:${ch_id}:乳头类型`, 0);
   if (c_sex !== 1) {
     if (era.get(`talent:${mid}:泌乳`) > 1) {
       era.set(
@@ -349,7 +351,7 @@ async function sys_have_baby(mid) {
   const rand_lan = get_random_value(5, 7);
   era.set(
     `abl:${ch_id}:${rand_lan}`,
-    Math.min(era.get(`staticabl:${mid}:${rand_lan}`), 3),
+    Math.min(era.get(`abl:${mid}:${rand_lan}`), 3),
   );
   era.set(`jewel:${ch_id}:粉`, 0);
   era.set(`jewel:${ch_id}:蓝`, 0);

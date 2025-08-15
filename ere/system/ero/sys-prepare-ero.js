@@ -95,7 +95,7 @@ function update_ero_status(...ids) {
     const i_estrus = era.set(
       `tcvar:${cid}:发情`,
       era.get(`tcvar:${cid}:发情`) ||
-        !era.get('flag:强奸抵抗') ||
+        (!era.get('flag:强奸抵抗') && cid > 0) ||
         era.get(`base:${cid}:性欲`) >= lust_border.absent_mind ||
         era.get(`status:${cid}:发情`) ||
         era.get(`status:${cid}:马跳Z`) ||
@@ -355,7 +355,7 @@ function update_c_j_buff(cid, dict) {
 
 /** @param {number} ids */
 function update_juel_buff(...ids) {
-  ids.forEach(update_c_j_buff);
+  ids.forEach((cid) => update_c_j_buff(cid));
 }
 
 /** @param {number} ids */

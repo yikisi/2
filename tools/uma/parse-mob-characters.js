@@ -1,6 +1,7 @@
 const { writeFileSync } = require('fs');
 const { join } = require('path');
 
+const cy_mob = Object.values(require('../../common/text_data.json')[59]);
 const mob = require('../../common/uma/uma-mob.json');
 
 const passer_bys = [],
@@ -14,9 +15,11 @@ mob.forEach((e) => {
   }
 });
 
+passer_bys.push(...cy_mob);
+
 writeFileSync(
   join(__dirname, '../../ere/data/race/contestants/uma-mob.json'),
-  JSON.stringify(passer_bys),
+  JSON.stringify(passer_bys.filter((n, i, l) => i === l.indexOf(n))),
 );
 
 console.log('done!');

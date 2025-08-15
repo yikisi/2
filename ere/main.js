@@ -161,7 +161,7 @@ module.exports = async () => {
         { isDivider: true },
         '黑奴二号',
         { isDivider: true },
-        '无名黑奴',
+        '黑奴队长',
       ],
     ],
     [
@@ -171,7 +171,7 @@ module.exports = async () => {
         { isDivider: true },
         '黑奴一号',
         { isDivider: true },
-        '无名黑奴',
+        '黑奴队长',
       ],
     ],
     [[get_copyright_entry(71)], '洛洛'],
@@ -198,7 +198,7 @@ module.exports = async () => {
         { isDivider: true },
         '地下室教学',
       ],
-      ['雞雞', { isDivider: true }, '无名黑奴'],
+      ['雞雞', { isDivider: true }, '黑奴队长'],
     ],
     [
       ['日常地文', { isDivider: true }, '随机事件'],
@@ -219,7 +219,7 @@ module.exports = async () => {
         { isBr: true },
         'Mr.E.',
         { isDivider: true },
-        '无名黑奴',
+        '黑奴队长',
       ],
     ],
     [
@@ -231,7 +231,7 @@ module.exports = async () => {
         { isDivider: true },
         '幽白書',
         { isDivider: true },
-        '无名黑奴',
+        '黑奴队长',
       ],
     ],
     [
@@ -250,8 +250,8 @@ module.exports = async () => {
         'ALEX',
       ],
     ],
-    ['地下室地文', ['露娜俘虏', { isDivider: true }, '无名黑奴']],
-    ['特殊角色（临时）', '无名黑奴'],
+    ['地下室地文', ['露娜俘虏', { isDivider: true }, '黑奴队长']],
+    ['特殊角色（临时）', '黑奴队长'],
     [
       '麦吉罗的呼唤',
       [
@@ -259,7 +259,7 @@ module.exports = async () => {
         { isDivider: true },
         '99',
         { isDivider: true },
-        '无名黑奴',
+        '黑奴队长',
       ],
     ],
   ];
@@ -302,11 +302,21 @@ module.exports = async () => {
           { config: { width: 7 }, names: 'logo', type: 'image.whole' },
           { config: { width: 17 }, names: 'title', type: 'image.whole' },
           {
+            content: ['版本号：v', versionName],
+            type: 'text',
+          },
+          {
             content: [
-              `版本号：v${versionName}`,
-              { isBr: true },
-              ...join_list(author.split('|'), { isDivider: true }),
+              '适配资源包版本：',
+              {
+                content: '20250814',
+                url: 'https://gitgud.io/umaera/erauma/-/archive/master/erauma-master.zip?path=res',
+              },
             ],
+            type: 'text',
+          },
+          {
+            content: join_list(author.split('|'), { isDivider: true }),
             type: 'text',
           },
         ],
@@ -360,8 +370,13 @@ module.exports = async () => {
             },
             { isBr: true },
             {
-              content: 'EraElectron 引擎发布页',
+              content: 'EraElectron 引擎（PC 版）发布页',
               url: 'https://gitgud.io/umaera/engine/era-electron/-/releases/permalink/latest',
+            },
+            { isBr: true },
+            {
+              content: 'ere.app 引擎（安卓版）发布页',
+              url: 'https://gitgud.io/umaera/engine/ere-app/-/releases/permalink/latest',
             },
             { isBr: true },
             {
@@ -567,7 +582,7 @@ module.exports = async () => {
           },
           {
             config: { width: 9 },
-            content: '无名黑奴',
+            content: '黑奴队长',
             type: 'text',
           },
         ]);
@@ -604,7 +619,7 @@ module.exports = async () => {
               { isDivider: true },
               '色色',
               { isDivider: true },
-              '无名黑奴',
+              '黑奴队长',
             ],
             type: 'text',
           },
@@ -625,7 +640,7 @@ module.exports = async () => {
           },
         ]);
         await era.waitAnyKey();
-        await era.printAndWait('技能翻译参考', {
+        await era.printAndWait('翻译参考', {
           align: 'center',
           color: item_title_color,
           fontSize: '1.25rem',
@@ -724,7 +739,7 @@ module.exports = async () => {
           isParagraph: true,
         });
         await era.printAndWait([
-          '无名黑奴',
+          '黑奴队长',
           { isDivider: true },
           '黑奴一号',
           { isDivider: true },

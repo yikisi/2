@@ -2,37 +2,32 @@ const era = require('#/era-electron');
 
 const { merge_stain } = require('#/system/ero/sys-calc-stain');
 
-const EroBodyPart = require('#/data/ero/body-part');
+const EroTouch = require('#/data/ero/ero-touch');
 const { part_enum, part_touch, touch_list } = require('#/data/ero/part-const');
 
 /**
  * @param {number} cid
  * @param {number} cpart
- * @param {number} touched_chara_id
- * @param {number} touched_chara_part
+ * @param {number} t_cid
+ * @param {number} t_cpart
  * @param {number} [ero_item]
  */
-function set_part(cid, cpart, touched_chara_id, touched_chara_part, ero_item) {
-  const part_touch_name = part_touch[cpart];
-  const last_touched = era.get(`tcvar:${cid}:${part_touch_name}接触部位`);
+function set_part(cid, cpart, t_cid, t_cpart, ero_item) {
+  const touch = new EroTouch(cid, cpart);
   if (
-    last_touched !== -1 &&
     cpart !== part_enum.sadism &&
     cpart !== part_enum.masochism &&
     cpart !== part_enum.item
   ) {
-    era.set(
-      `tcvar:${last_touched.owner}:${part_touch[last_touched.part]}接触部位`,
-      -1,
-    );
+    const t_touch = new EroTouch(touch.owner, touch.part);
+    if (t_touch.owner === cid && t_touch.part === cpart) {
+      t_touch.clean();
+    }
   }
-  if (touched_chara_part === -1) {
-    era.set(`tcvar:${cid}:${part_touch_name}接触部位`, -1);
+  if (t_cpart === -1) {
+    touch.clean();
   } else {
-    era.set(
-      `tcvar:${cid}:${part_touch_name}接触部位`,
-      new EroBodyPart(touched_chara_id, touched_chara_part, ero_item),
-    );
+    touch.set(t_cid, t_cpart, ero_item);
   }
 }
 
@@ -66,15 +61,13 @@ module.exports = {
       }),
     );
   },
-  /** @param {EroParticipant} participants */
-  clean_part(...participants) {
-    participants.forEach((participant) =>
-      set_part(participant.id, participant.part, -1, -1),
-    );
+  /** @param {EroParticipant} p_list */
+  clean_part(...p_list) {
+    p_list.forEach((p) => set_part(p.id, p.part, -1, -1));
   },
-  /** @param {EroParticipant} participants */
-  clean_part_without_item: (...participants) =>
-    participants.forEach((p) => {
+  /** @param {EroParticipant} p_list */
+  clean_part_without_item: (...p_list) =>
+    p_list.forEach((p) => {
       if (
         era.get(`tcvar:${p.id}:${part_touch[p.part]}接触部位`).part !==
         part_enum.item

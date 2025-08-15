@@ -13,6 +13,7 @@ const race_indicator = require('#/page/components/race-indicator');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { get_abbr_number } = require('#/utils/value-utils');
 
 const { celebration_color, money_color } = require('#/data/color-const');
 const { attr_background_colors, trainer_colors } = require('#/data/const.json');
@@ -156,8 +157,8 @@ function page_header(enable_race_info) {
             content: [
               {
                 color: trainer_title_color,
-                content: cur_fame.toLocaleString(),
                 fontWeight: 'bold',
+                ...get_abbr_number(cur_fame),
               },
               ' 声望 (',
               {

@@ -15,7 +15,7 @@ aim_races[get_aim_race_index(race_enum.oka_sho, 1)] = 4;
 aim_races[get_aim_race_index(race_enum.yush_him, 1)] = 4;
 aim_races[get_aim_race_index(race_enum.shuk_sho, 1)] = 4;
 
-aim_races[get_aim_race_index(race_enum.hans_fil, 2)] = 4;
+aim_races[get_aim_race_index(race_enum.sank_hai, 2)] = 4;
 aim_races[get_aim_race_index(race_enum.takz_kin, 2)] = 4;
 aim_races[get_aim_race_index(race_enum.tenn_sho, 2)] = 4;
 aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 4;

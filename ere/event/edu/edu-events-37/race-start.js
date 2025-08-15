@@ -8,6 +8,7 @@ const { say_by_passer_by_and_wait } = require('#/utils/chara-talk');
 const { race_enum } = require('#/data/race/race-const');
 
 /**
+ * @this CustomizedEdu
  * @param {CharaTalk} flash
  * @param {CharaTalk} me
  * @param {string} callname
@@ -619,6 +620,13 @@ module.exports = async function (
       `而正如答应好的一样，${your_name} 相信，这种两人之间的守候，在未来的日子里，还会持续许久许久。`,
     );
   } else {
-    return await super_race_start(flash, me, callname, hook, extra_flag);
+    return await super_race_start.call(
+      this,
+      flash,
+      me,
+      callname,
+      hook,
+      extra_flag,
+    );
   }
 };

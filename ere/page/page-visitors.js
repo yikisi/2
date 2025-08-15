@@ -154,7 +154,7 @@ handlers[349] = () =>
           printButton('投资（以 1000 马币为单位）', 1, {
             disabled: money < 1000,
           });
-          printButton('赎回', 2, { disabled: !life_marks.funds });
+          printButton('赎回', 2, { disabled: life_marks.funds <= 0 });
           const _old = life_marks.funds;
           if ((await input()) === 1) {
             print('要投资多少马币？');
@@ -167,7 +167,7 @@ handlers[349] = () =>
                 {
                   accelerator: 2,
                   config: { align: 'center', disabled: _new <= 20, width: 4 },
-                  content: '-10,000',
+                  content: '-20,000',
                   type: 'button',
                 },
                 {
@@ -201,7 +201,7 @@ handlers[349] = () =>
                     disabled: money < (_new + 20) * 1000,
                     width: 8,
                   },
-                  content: '+10,000',
+                  content: '+20,000',
                   type: 'button',
                 },
                 { content: [], type: 'text' },
@@ -269,13 +269,13 @@ handlers[349] = () =>
                 {
                   accelerator: 2,
                   config: { align: 'center', disabled: got <= 20, width: 4 },
-                  content: '-10,000',
+                  content: '-20,000',
                   type: 'button',
                 },
                 {
                   accelerator: 4,
                   config: { align: 'center', disabled: got === 1, width: 4 },
-                  content: '-1000',
+                  content: '-1,000',
                   type: 'button',
                 },
                 {
@@ -293,17 +293,17 @@ handlers[349] = () =>
                     disabled: life_marks.funds <= got * 1000,
                     width: 4,
                   },
-                  content: '+1000',
+                  content: '+1,000',
                   type: 'button',
                 },
                 {
                   accelerator: 8,
                   config: {
                     align: 'center',
-                    disabled: money < (got + 20) * 1000,
+                    disabled: life_marks.funds < (got + 20) * 1000,
                     width: 8,
                   },
-                  content: '+10,000',
+                  content: '+20,000',
                   type: 'button',
                 },
                 { content: [], type: 'text' },

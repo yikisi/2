@@ -24,23 +24,25 @@ const { adaptability_names, attr_names } = require('#/data/train-const');
  */
 function sys_get_chara_pseudo(cid) {
   const adapt_list = adaptability_names.map((adapt) =>
-      era.get(`cflag:${cid}:${adapt}适性`),
-    ),
-    debuff = era.get(`status:${cid}:客场作战`),
-    uma = new PseudoUma(
-      cid,
-      era.get(`callname:${cid}:-1`),
-      get_chara_color(cid),
-      era.get(`cflag:${cid}:干劲`),
-      attr_names.map((attr) => era.get(`base:${cid}:${attr}`)),
-      era.get(`cflag:${cid}:跑法`),
-      adapt_list.slice(6, 10),
-      adapt_list.slice(2, 6).map((adapt) => adapt - debuff),
-      adapt_list.slice(0, 2).map((adapt) => adapt - debuff),
-      CharaSkills.get(cid)
-        .get()
-        .map((e) => skills_dict[e]),
-    );
+    era.get(`cflag:${cid}:${adapt}适性`),
+  );
+  const debuff = era.get(`status:${cid}:客场作战`);
+  const uma = new PseudoUma(
+    cid,
+    era.get(`callname:${cid}:-1`),
+    cid === 0
+      ? get_chara_color(Math.max(era.get(`cflag:0:模版角色`), 0))
+      : get_chara_color(cid),
+    era.get(`cflag:${cid}:干劲`),
+    attr_names.map((attr) => era.get(`base:${cid}:${attr}`)),
+    era.get(`cflag:${cid}:跑法`),
+    adapt_list.slice(6, 10),
+    adapt_list.slice(2, 6).map((adapt) => adapt - debuff),
+    adapt_list.slice(0, 2).map((adapt) => adapt - debuff),
+    CharaSkills.get(cid)
+      .get()
+      .map((e) => skills_dict[e]),
+  );
   uma.chara = sys_get_chara(cid);
   uma.base.winCount = RaceHistory.get(cid)
     .get_values()
@@ -249,7 +251,7 @@ function sys_get_chara_pseudo(cid) {
     uma.ero.cost.penis = -0.1 * era.get(`abl:${cid}:阴茎耐性`);
     uma.ero.main.push('penis');
   } else {
-    uma.ero.buff.clitoris = uma.ero.buff;
+    uma.ero.buff.clitoris = uma.ero.buff.sex;
     const c_talent = era.get(`talent:${cid}:淫核`);
     if (c_talent >= 0) {
       uma.ero.buff.clitoris += c_talent / 2;

@@ -232,6 +232,10 @@ function love_uma(cid, val, shown = true) {
     100 * inmon.on(plugin_enum.love_up) -
     80 * inmon.on(plugin_enum.love_d1) -
     100 * inmon.on(plugin_enum.love_d2);
+  if (isNaN(val)) {
+    era.logger.error(`角色 ${cid} 非有效爱慕值！`);
+    return false;
+  }
   val = Math.floor((val * coff) / 100);
   if (val > 6) {
     val = 6;

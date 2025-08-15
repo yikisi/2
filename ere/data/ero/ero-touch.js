@@ -17,17 +17,26 @@ class EroTouch {
 
   /** @type {number|undefined} */
   get owner() {
-    return this.#obj.owner;
+    if (this.#id >= 0) {
+      return this.#obj.owner;
+    }
+    return undefined;
   }
 
   /** @type {number|undefined} */
   get part() {
-    return this.#obj.part;
+    if (this.#id >= 0) {
+      return this.#obj.part;
+    }
+    return undefined;
   }
 
   /** @type {number|undefined} */
   get item() {
-    return this.#obj.item;
+    if (this.#id >= 0) {
+      return this.#obj.item;
+    }
+    return undefined;
   }
 
   /**
@@ -37,6 +46,10 @@ class EroTouch {
   constructor(id, part) {
     this.#id = id;
     this.#part = part_touch[part];
+  }
+
+  is_empty() {
+    return this.#obj === -1;
   }
 
   /**

@@ -14,7 +14,7 @@ const current = new Date().getTime();
 ].forEach((f) => f(handlers));
 
 console.log(
-  '[page-storage.js] storage handlers init done!',
+  '道具使用函数注册完毕！',
   (new Date().getTime() - current).toLocaleString(),
   'ms',
 );

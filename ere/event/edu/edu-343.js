@@ -1,6 +1,6 @@
 /**
  * @file 佐岳五月 - 育成
- * @author 无名黑奴（临时）
+ * @author 黑奴队长（临时）
  */
 const { get, printAndWait } = require('#/era-electron');
 
@@ -14,7 +14,7 @@ const MayLifeMarks = require('#/data/event/life-event-marks/life-event-marks-343
 
 module.exports = class extends CustomizedEdu {
   /**
-   * @author 无名黑奴
+   * @author 黑奴队长
    * @param {CharaTalk} may
    * @param {CharaTalk} me
    * @param _

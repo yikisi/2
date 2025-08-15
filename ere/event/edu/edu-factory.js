@@ -47,7 +47,7 @@ cons_dict[343] = require('#/event/edu/edu-343');
 cons_dict[400] = require('#/event/edu/edu-400');
 
 console.log(
-  '[edu-factory.js] constructor dictionary init done!',
+  '角色育成口上注册完毕！',
   (new Date().getTime() - current).toLocaleString(),
   'ms',
 );

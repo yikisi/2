@@ -259,15 +259,15 @@ module.exports = class extends CustomizedEdu {
     await era.printAndWait('遥望着巍峨的背影，心中不由得浮现出惭愧之情——');
   }
 
-  async train_success(acute, me, callname, hook, extra_flag) {
-    if (extra_flag.train === attr_enum.intelligence) {
-      return await super.train_success(acute, me, callname, hook, extra_flag);
+  async train_success(acute, me, callname, hook, extra) {
+    if (extra.train === attr_enum.intelligence) {
+      return await super.train_success(acute, me, callname, hook, extra);
     }
     era.print([acute.get_colored_name(), ' 的训练顺利结束了！']);
     era.println();
     if (
       !era.get('status:100:摸鱼') &&
-      Math.random() < extra_flag.stamina_ratio * 0.2
+      Math.random() < extra.stamina_ratio * 0.2
     ) {
       await era.waitAnyKey();
       await print_event_name('热血的追加训练', acute);
@@ -317,9 +317,9 @@ module.exports = class extends CustomizedEdu {
         hook.arg = false;
       }
     }
-    if (era.get('item:斗魂注入鞭（S用）')) {
-      extra_flag.attr = 2;
-      extra_flag.stamina = -2 - (2 - era.get('cflag:100:干劲')) * 2;
+    if (era.get('item:斗魂注入鞭（S用）') > 0) {
+      extra.attr = 2;
+      extra.stamina = -2 - (2 - era.get('cflag:100:干劲')) * 2;
     }
   }
 

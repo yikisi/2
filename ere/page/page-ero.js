@@ -304,6 +304,7 @@ async function page_ero(lover, skip_start_end = false) {
   const assist = era.get('flag:助手');
   era.set('tflag:当前对手', lover);
   if (
+    !in_base &&
     assist !== lover &&
     era.getCharactersInTrain().length === 2 &&
     assist > 0 &&
@@ -584,21 +585,27 @@ async function page_ero(lover, skip_start_end = false) {
         config: { verticalAlign: 'bottom', width: 8 },
       },
       [{ type: 'divider' }],
-      filtered_ero_actions.map((e) => {
-        const check_val = check_ero_enabled(lover, curr_supporter, e);
+      filtered_ero_actions.map((a) => {
+        const check_val = check_ero_enabled(lover, curr_supporter, a);
         if (isNaN(check_val)) {
-          era.logger.error(`${ero_hooks.keys[e]} ${check_val}`);
+          console.error(
+            '对角色',
+            lover,
+            '调教指令实行值计算错误！',
+            ero_hooks.keys[a],
+            check_val,
+          );
         }
         const action_disabled = base_check && check_val < 0;
         a_disabled &&= action_disabled;
         return {
-          accelerator: e,
+          accelerator: a,
           config: {
-            buttonType: ero_derive_check[e] ? 'danger' : 'warning',
+            buttonType: ero_derive_check[a] ? 'danger' : 'warning',
             disabled: action_disabled,
             width: 4,
           },
-          content: ero_action_names[e],
+          content: ero_action_names[a],
           type: 'button',
         };
       }),
@@ -624,7 +631,7 @@ async function page_ero(lover, skip_start_end = false) {
     );
 
     era.logger.debug(
-      `ero actions listed done! ${(
+      `调教指令列表计算完成！${(
         new Date().getTime() - current
       ).toLocaleString()}ms`,
     );

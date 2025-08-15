@@ -16,7 +16,7 @@ cons_dict[89] = require('#/event/basement/basement-89');
 cons_dict[119] = require('#/event/basement/basement-119');
 
 console.log(
-  '[basement-factory.js] constructor dictionary init done!',
+  '角色地下室口上注册完毕！',
   (new Date().getTime() - current).toLocaleString(),
   'ms',
 );

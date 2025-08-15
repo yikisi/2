@@ -84,13 +84,12 @@ async function shop_result(chara_id, change, result_type) {
   result_type > 0 && (await era.waitAnyKey());
 }
 
-module.exports = async (_id) => {
+module.exports = async (cid = era.get('flag:当前互动角色')) => {
   const total_delta = {};
-  const chara_id = _id || era.get('flag:当前互动角色');
-  await get_custom_ero(chara_id).shop_start();
-  const chara_sex = era.get(`cflag:${chara_id}:性别`),
-    chara = get_chara_talk(chara_id),
-    me = get_chara_talk(0);
+  await get_custom_ero(cid).shop_start();
+  const chara_sex = era.get(`cflag:${cid}:性别`);
+  const chara = get_chara_talk(cid);
+  const me = get_chara_talk(0);
   const page_pointer = {
     flag: true,
     sub: 0,
@@ -116,8 +115,8 @@ module.exports = async (_id) => {
       const j_count =
         (j_dict[key] =
         origin_dict[key] =
-          era.get(`jewel:${chara_id}:${key}`));
-      if (chara_id) {
+          era.get(`jewel:${cid}:${key}`));
+      if (cid) {
         j_dict[key] += Math.floor(era.get(`jewel:0:${key}`) / 2);
       }
       buffer.push({
@@ -137,13 +136,13 @@ module.exports = async (_id) => {
         type: 'text',
       });
     });
-    if (chara_id > 0) {
+    if (cid > 0) {
       new Array(4).fill(0).forEach((_, i) => {
         const j_name = era.get(`palamname:${i + 10}`);
         const j_count =
           (j_dict[j_name] =
           origin_dict[j_name] =
-            era.get(`jewel:${chara_id}:${i + 10}`));
+            era.get(`jewel:${cid}:${i + 10}`));
         buffer.push({
           config: { align: 'left', width: 3 },
           content: [
@@ -162,7 +161,7 @@ module.exports = async (_id) => {
       const j_count =
         (j_dict[key] =
         origin_dict[key] =
-          era.get(`jewel:${chara_id}:${key}`));
+          era.get(`jewel:${cid}:${key}`));
       buffer.push({
         config: { align: 'left', width: 3 },
         content: [
@@ -189,82 +188,72 @@ module.exports = async (_id) => {
       const skill_dict = {};
       ['甜言蜜语', '接吻技巧', '口交技巧', '口腔耐性', '口腔掌握'].forEach(
         (e, i) =>
-          buffer.push(...get_skill_buttons(chara_id, i, e, skill_dict, j_dict)),
+          buffer.push(...get_skill_buttons(cid, i, e, skill_dict, j_dict)),
       );
       era.printMultiColumns(buffer);
 
       buffer = [];
       if (chara_sex - 1) {
         buffer.push(
-          ...get_skill_buttons(chara_id, 5, '乳交技巧', skill_dict, j_dict),
+          ...get_skill_buttons(cid, 5, '乳交技巧', skill_dict, j_dict),
         );
       }
       ['胸部耐性', '胸部掌握'].forEach((e, i) =>
-        buffer.push(
-          ...get_skill_buttons(chara_id, i + 6, e, skill_dict, j_dict),
-        ),
+        buffer.push(...get_skill_buttons(cid, i + 6, e, skill_dict, j_dict)),
       );
       era.printMultiColumns(buffer);
 
       buffer = [];
       ['手交技巧', '足交技巧', '身体技巧', '身体耐性', '身体掌握'].forEach(
         (e, i) =>
-          buffer.push(
-            ...get_skill_buttons(chara_id, i + 8, e, skill_dict, j_dict),
-          ),
+          buffer.push(...get_skill_buttons(cid, i + 8, e, skill_dict, j_dict)),
       );
       era.printMultiColumns(buffer);
 
       buffer = [];
       if (chara_sex) {
         buffer.push(
-          ...get_skill_buttons(chara_id, 13, '插入技巧', skill_dict, j_dict),
+          ...get_skill_buttons(cid, 13, '插入技巧', skill_dict, j_dict),
         );
         buffer.push(
-          ...get_skill_buttons(chara_id, 14, '阴茎耐性', skill_dict, j_dict),
+          ...get_skill_buttons(cid, 14, '阴茎耐性', skill_dict, j_dict),
         );
       }
       buffer.push(
-        ...get_skill_buttons(chara_id, 15, '阴茎掌握', skill_dict, j_dict),
+        ...get_skill_buttons(cid, 15, '阴茎掌握', skill_dict, j_dict),
       );
       era.printMultiColumns(buffer);
 
       buffer = [];
       if (chara_sex - 1) {
         buffer.push(
-          ...get_skill_buttons(chara_id, 16, '性交技巧', skill_dict, j_dict),
+          ...get_skill_buttons(cid, 16, '性交技巧', skill_dict, j_dict),
         );
       }
       if (!chara_sex) {
         buffer.push(
-          ...get_skill_buttons(chara_id, 17, '外阴耐性', skill_dict, j_dict),
+          ...get_skill_buttons(cid, 17, '外阴耐性', skill_dict, j_dict),
         );
       }
       if (chara_sex - 1) {
         buffer.push(
-          ...get_skill_buttons(chara_id, 18, '阴道耐性', skill_dict, j_dict),
+          ...get_skill_buttons(cid, 18, '阴道耐性', skill_dict, j_dict),
         );
       }
       ['外阴掌握', '阴道掌握'].forEach((e, i) =>
-        buffer.push(
-          ...get_skill_buttons(chara_id, i + 19, e, skill_dict, j_dict),
-        ),
+        buffer.push(...get_skill_buttons(cid, i + 19, e, skill_dict, j_dict)),
       );
       era.printMultiColumns(buffer);
 
       buffer = [];
       ['肛交技巧', '肛门耐性', '肛门掌握'].forEach((e, i) =>
-        buffer.push(
-          ...get_skill_buttons(chara_id, i + 21, e, skill_dict, j_dict),
-        ),
+        buffer.push(...get_skill_buttons(cid, i + 21, e, skill_dict, j_dict)),
       );
       era.printMultiColumns(buffer);
 
       buffer = [];
       ['施虐技巧', '受虐耐性', '受虐掌握'].forEach((e, i) =>
-        buffer.push(
-          ...get_skill_buttons(chara_id, i + 24, e, skill_dict, j_dict),
-        ),
+        buffer.push(...get_skill_buttons(cid, i + 24, e, skill_dict, j_dict)),
       );
       era.printMultiColumns(buffer);
 
@@ -272,7 +261,7 @@ module.exports = async (_id) => {
         '\n* 点击能力名显示说明，或者点击↑/↓升级或降级能力\n' +
           `** 角色身体部位的调教因子不足所需时，${me.name} 可以以两倍的因子补足差额`,
       );
-      print_footer(chara_id, page_pointer.tab);
+      print_footer(cid, page_pointer.tab);
       const ret = await era.input();
       if (ret < 990) {
         const skill_index = ret % 100;
@@ -302,18 +291,18 @@ module.exports = async (_id) => {
             '吗？花费：',
           ]);
           const price_dict = get_skill_price(
-            chara_id,
+            cid,
             skill_name,
             skill_dict[skill_name] + (action === 100 ? 1 : 0),
           );
           const is_confirmed = await print_price_and_confirm(
-            chara_id,
+            cid,
             price_dict,
             origin_dict,
           );
           if (is_confirmed) {
-            era.add(`abl:${chara_id}:${skill_name}`, action === 100 ? 1 : -1);
-            pay_juels(chara_id, price_dict, origin_dict);
+            era.add(`abl:${cid}:${skill_name}`, action === 100 ? 1 : -1);
+            pay_juels(cid, price_dict, origin_dict);
             total_delta.skill =
               (total_delta.skill || 0) + (action === 100) * 2 - 1;
           }
@@ -329,37 +318,37 @@ module.exports = async (_id) => {
       new Array(7).fill(0).forEach((_, i) => {
         talent_dict.slave_run +=
           (talent_dict[era.get(`talentname:${i + 60}`)] = era.get(
-            `talent:${chara_id}:${i + 60}`,
+            `talent:${cid}:${i + 60}`,
           )) === 2;
       });
 
       buffer = [];
       buffer.push(
         ...get_talent_buttons(
-          chara_id,
+          cid,
           0,
           '淫口',
-          era.get(`exp:${chara_id}:口腔高潮次数`),
+          era.get(`exp:${cid}:口腔高潮次数`),
           talent_dict,
           j_dict,
         ),
       );
       buffer.push(
         ...get_talent_buttons(
-          chara_id,
+          cid,
           1,
           '淫乳',
-          era.get(`exp:${chara_id}:胸部高潮次数`),
+          era.get(`exp:${cid}:胸部高潮次数`),
           talent_dict,
           j_dict,
         ),
       );
       buffer.push(
         ...get_talent_buttons(
-          chara_id,
+          cid,
           2,
           '淫身',
-          era.get(`exp:${chara_id}:身体高潮次数`),
+          era.get(`exp:${cid}:身体高潮次数`),
           talent_dict,
           j_dict,
         ),
@@ -367,10 +356,10 @@ module.exports = async (_id) => {
       if (chara_sex) {
         buffer.push(
           ...get_talent_buttons(
-            chara_id,
+            cid,
             3,
             '早泄',
-            era.get(`exp:${chara_id}:阴茎高潮次数`),
+            era.get(`exp:${cid}:阴茎高潮次数`),
             talent_dict,
             j_dict,
           ),
@@ -379,10 +368,10 @@ module.exports = async (_id) => {
       if (chara_sex === 0) {
         buffer.push(
           ...get_talent_buttons(
-            chara_id,
+            cid,
             4,
             '淫核',
-            era.get(`exp:${chara_id}:外阴高潮次数`),
+            era.get(`exp:${cid}:外阴高潮次数`),
             talent_dict,
             j_dict,
           ),
@@ -391,10 +380,10 @@ module.exports = async (_id) => {
       if (chara_sex - 1) {
         buffer.push(
           ...get_talent_buttons(
-            chara_id,
+            cid,
             5,
             '淫壶',
-            era.get(`exp:${chara_id}:阴道高潮次数`),
+            era.get(`exp:${cid}:阴道高潮次数`),
             talent_dict,
             j_dict,
           ),
@@ -402,10 +391,10 @@ module.exports = async (_id) => {
       }
       buffer.push(
         ...get_talent_buttons(
-          chara_id,
+          cid,
           6,
           '淫臀',
-          era.get(`exp:${chara_id}:肛门高潮次数`),
+          era.get(`exp:${cid}:肛门高潮次数`),
           talent_dict,
           j_dict,
         ),
@@ -415,30 +404,30 @@ module.exports = async (_id) => {
       buffer = [];
       buffer.push(
         ...get_talent_buttons(
-          chara_id,
+          cid,
           7,
           '抖S',
-          era.get(`exp:${chara_id}:施虐高潮次数`),
+          era.get(`exp:${cid}:施虐高潮次数`),
           talent_dict,
           j_dict,
         ),
       );
       buffer.push(
         ...get_talent_buttons(
-          chara_id,
+          cid,
           8,
           '喜欢责骂',
-          era.get(`exp:${chara_id}:受虐高潮次数`),
+          era.get(`exp:${cid}:受虐高潮次数`),
           talent_dict,
           j_dict,
         ),
       );
       buffer.push(
         ...get_talent_buttons(
-          chara_id,
+          cid,
           9,
           '喜欢痛苦',
-          era.get(`exp:${chara_id}:受虐高潮次数`),
+          era.get(`exp:${cid}:受虐高潮次数`),
           talent_dict,
           j_dict,
         ),
@@ -449,10 +438,10 @@ module.exports = async (_id) => {
       ['喉咙敏感', '饮精成瘾'].forEach((e, i) =>
         buffer.push(
           ...get_talent_buttons(
-            chara_id,
+            cid,
             i + 10,
             e,
-            era.get(`exp:${chara_id}:饮精量`),
+            era.get(`exp:${cid}:饮精量`),
             talent_dict,
             j_dict,
           ),
@@ -462,10 +451,10 @@ module.exports = async (_id) => {
         ['子宫敏感', '榨精成瘾'].forEach((e, i) =>
           buffer.push(
             ...get_talent_buttons(
-              chara_id,
+              cid,
               i + 12,
               e,
-              era.get(`exp:${chara_id}:膣内精液量`),
+              era.get(`exp:${cid}:膣内精液量`),
               talent_dict,
               j_dict,
             ),
@@ -475,33 +464,26 @@ module.exports = async (_id) => {
       ['肠道敏感', '精液灌肠'].forEach((e, i) =>
         buffer.push(
           ...get_talent_buttons(
-            chara_id,
+            cid,
             i + 14,
             e,
-            era.get(`exp:${chara_id}:肠内精液量`),
+            era.get(`exp:${cid}:肠内精液量`),
             talent_dict,
             j_dict,
           ),
         ),
       );
       const metric =
-        era.get(`exp:${chara_id}:颜射精液量`) +
-        era.get(`exp:${chara_id}:胸部沾染精液量`) +
-        era.get(`exp:${chara_id}:身体沾染精液量`);
+        era.get(`exp:${cid}:颜射精液量`) +
+        era.get(`exp:${cid}:胸部沾染精液量`) +
+        era.get(`exp:${cid}:身体沾染精液量`);
       ['气味敏感', '浴精成瘾'].forEach((e, i) =>
         buffer.push(
-          ...get_talent_buttons(
-            chara_id,
-            i + 16,
-            e,
-            metric,
-            talent_dict,
-            j_dict,
-          ),
+          ...get_talent_buttons(cid, i + 16, e, metric, talent_dict, j_dict),
         ),
       );
       if (chara_sex - 1) {
-        const milk_talent = era.get(`talent:${chara_id}:泌乳`);
+        const milk_talent = era.get(`talent:${cid}:泌乳`);
         buffer.push(
           ...[
             {
@@ -516,7 +498,7 @@ module.exports = async (_id) => {
                 disabled:
                   milk_talent !== 2 ||
                   Object.entries(
-                    get_talent_price(chara_id, '母乳体质', 2),
+                    get_talent_price(cid, '母乳体质', 2),
                   ).findIndex((e) => e[1] > j_dict[e[0]]) !== -1,
               },
               content: '获取特性',
@@ -528,7 +510,7 @@ module.exports = async (_id) => {
                 disabled:
                   milk_talent !== 3 ||
                   Object.entries(
-                    get_talent_price(chara_id, '母乳体质', 1),
+                    get_talent_price(cid, '母乳体质', 1),
                   ).findIndex((e) => e[1] > j_dict[e[0]]) !== -1,
               },
               content: '消除特性',
@@ -539,7 +521,7 @@ module.exports = async (_id) => {
             return e;
           }),
         );
-        const nipple_size = era.get(`talent:${chara_id}:乳头类型`);
+        const nipple_size = era.get(`talent:${cid}:乳头类型`);
         buffer.push(
           ...[
             {
@@ -554,7 +536,7 @@ module.exports = async (_id) => {
                 disabled:
                   nipple_size === 2 ||
                   Object.entries(
-                    get_talent_price(chara_id, '凹陷乳头', 2),
+                    get_talent_price(cid, '凹陷乳头', 2),
                   ).findIndex((e) => e[1] > j_dict[e[0]]) !== -1,
               },
               content: '获取特性',
@@ -566,7 +548,7 @@ module.exports = async (_id) => {
                 disabled:
                   nipple_size !== 2 ||
                   Object.entries(
-                    get_talent_price(chara_id, '凹陷乳头', 1),
+                    get_talent_price(cid, '凹陷乳头', 1),
                   ).findIndex((e) => e[1] > j_dict[e[0]]) !== -1,
               },
               content: '消除特性',
@@ -586,9 +568,9 @@ module.exports = async (_id) => {
         { isBr: true },
         `** 角色身体部位的调教因子不足所需时，${me.name} 可以以两倍的因子补足差额`,
         { isBr: true },
-        `*** 可获取最高级敏感度的部位数量：${era.get(`talent:${chara_id}:调教度`) + 1}`,
+        `*** 可获取最高级敏感度的部位数量：${era.get(`talent:${cid}:调教度`)}`,
       ]);
-      print_footer(chara_id, page_pointer.tab);
+      print_footer(cid, page_pointer.tab);
       const ret = await era.input();
       if (ret < 990) {
         const talent_index = ret % 100;
@@ -601,7 +583,7 @@ module.exports = async (_id) => {
           await era.printAndWait(talent_desc[talent_index]);
         } else {
           if (talent_index >= 18) {
-            const inmon = CharaInmon.get(chara_id);
+            const inmon = CharaInmon.get(cid);
             era.print([
               '要',
               action === 100
@@ -622,18 +604,18 @@ module.exports = async (_id) => {
               '花费：',
             ]);
             const price_dict = get_talent_price(
-              chara_id,
+              cid,
               talent_name,
               action === 100 ? 2 : 1,
             );
             const is_confirmed = await print_price_and_confirm(
-              chara_id,
+              cid,
               price_dict,
               origin_dict,
             );
             if (is_confirmed) {
               if (talent_index === 18) {
-                era.set(`talent:${chara_id}:泌乳`, action === 100 ? 3 : 0);
+                era.set(`talent:${cid}:泌乳`, action === 100 ? 3 : 0);
                 if (
                   action === 200 &&
                   talent_index === 18 &&
@@ -642,9 +624,9 @@ module.exports = async (_id) => {
                   inmon.slave = 0;
                 }
               } else {
-                era.set(`talent:${chara_id}:乳头类型`, action === 100 ? 2 : 0);
+                era.set(`talent:${cid}:乳头类型`, action === 100 ? 2 : 0);
               }
-              pay_juels(chara_id, price_dict, origin_dict);
+              pay_juels(cid, price_dict, origin_dict);
               total_delta.talent =
                 (total_delta.talent || 0) + (action === 100 ? 1 : -1);
             }
@@ -687,15 +669,15 @@ module.exports = async (_id) => {
               ][action === 100 ? 'up_delta' : 'down_delta'][
                 talent_dict[talent_name]
               ];
-            const price_dict = get_talent_price(chara_id, talent_name, delta);
+            const price_dict = get_talent_price(cid, talent_name, delta);
             const is_confirmed = await print_price_and_confirm(
-              chara_id,
+              cid,
               price_dict,
               origin_dict,
             );
             if (is_confirmed) {
-              era.add(`talent:${chara_id}:${talent_name}`, delta);
-              pay_juels(chara_id, price_dict, origin_dict);
+              era.add(`talent:${cid}:${talent_name}`, delta);
+              pay_juels(cid, price_dict, origin_dict);
               total_delta.talent = (total_delta.talent || 0) + delta;
             }
           }
@@ -742,7 +724,7 @@ module.exports = async (_id) => {
         { content: ' 1 ', color: buff_colors[2] },
         '个顺从因子',
       ]);
-      print_footer(chara_id, page_pointer.tab);
+      print_footer(cid, page_pointer.tab);
       const ret = await era.input();
       if (ret < 990) {
         const src_j_name = Object.keys(j_dict)[ret],
@@ -774,7 +756,7 @@ module.exports = async (_id) => {
             '还是算了',
           )
         ) {
-          era.add(`jewel:${chara_id}:${src_j_name}`, -10000);
+          era.add(`jewel:${cid}:${src_j_name}`, -10000);
           era.add(`jewel:0:${dst_j_name}`, dst_j_count);
         }
       } else {
@@ -782,11 +764,11 @@ module.exports = async (_id) => {
       }
     }
   }
-  if (chara_id > 0) {
+  if (cid > 0) {
     await shop_result(
-      chara_id,
+      cid,
       (total_delta.skill || 0) + (total_delta.talent || 0),
-      await get_custom_ero(chara_id).shop_end(total_delta),
+      await get_custom_ero(cid).shop_end(total_delta),
     );
   }
 };

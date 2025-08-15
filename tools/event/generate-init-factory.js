@@ -38,7 +38,7 @@ init_scripts.forEach(
 
 output += `
 console.log(
-  '[init-factory.js] constructor dictionary init done!',
+  '角色初始化脚本注册完毕！',
   (new Date().getTime() - current).toLocaleString(),
   'ms',
 );

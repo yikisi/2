@@ -7,6 +7,7 @@ const mec_scripts = readdirSync(join(__dirname, '../../ere/event/mec'))
       e.endsWith('.js') &&
       !e.endsWith('common.js') &&
       !e.endsWith('factory.js') &&
+      !e.endsWith('god.js') &&
       !e.endsWith('child.js') &&
       !e.endsWith('npc.js'),
   )
@@ -48,14 +49,14 @@ mec_scripts.forEach(
 output += `cons_dict[201] =
   cons_dict[202] =
   cons_dict[203] =
-    require('#/event/mec/mec-npc-uma-common');
+    require('#/event/mec/mec-uma-npc');
 cons_dict[346] =
   cons_dict[347] =
   cons_dict[348] =
     require('#/event/mec/mec-npc');
 
 console.log(
-  '[mec-factory.js] constructor dictionary init done!',
+  '角色机制脚本注册完毕！',
   (new Date().getTime() - current).toLocaleString(),
   'ms',
 );

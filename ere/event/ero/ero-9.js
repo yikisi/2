@@ -1,6 +1,6 @@
 /**
  * @file 大和赤骥 - 调教
- * @author 无名黑奴
+ * @author 黑奴队长
  */
 const era = require('#/era-electron');
 
@@ -16,7 +16,7 @@ const { medicine_enum, medicine_names } = require('#/data/ero/item-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 
 module.exports = class extends CustomizedEro {
-  /** @author 无名黑奴 */
+  /** @author 黑奴队长 */
   async ero_start() {
     if (
       era.getCharactersInTrain().length === 2 &&
@@ -127,7 +127,7 @@ module.exports = class extends CustomizedEro {
     }
   }
 
-  /** @author 无名黑奴 */
+  /** @author 黑奴队长 */
   async ero_end(handle_ero_act) {
     if (era.get('tcvar:9:TS大和T')) {
       const daiwa = get_chara_talk(9),

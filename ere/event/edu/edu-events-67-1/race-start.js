@@ -1,12 +1,12 @@
 const era = require('#/era-electron');
 
-const Edu67UntilOutStart = require('#/event/edu/edu-events-67/out-start');
+const Edu67UntilOutStart = require('#/event/edu/edu-events-67-1/out-start');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { say_by_passer_by_and_wait } = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const DaiyaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-67');
+const DaiyaEduMarks1 = require('#/data/event/edu-event-marks/edu-event-marks-67-1');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
@@ -136,7 +136,7 @@ async function sats_sho_event(daiya, me) {
 
 module.exports = class extends Edu67UntilOutStart {
   async race_start(daiya, me, callname, hook, extra_flag) {
-    const edu_marks = new DaiyaEduMarks(),
+    const edu_marks = new DaiyaEduMarks1(),
       edu_weeks = era.get('cflag:67:育成回合计时');
     if (extra_flag.race === race_enum.begin_race && edu_weeks < 48) {
       const mcqueen = get_chara_talk(13);

@@ -13,7 +13,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const { attr_enum, attr_names, fumble_result } = require('#/data/train-const');
+const { attr_enum, fumble_result } = require('#/data/train-const');
 
 /** @type {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},function):Promise>} */
 const week_start_handlers = {};
@@ -583,94 +583,81 @@ module.exports = class extends CustomizedEdu {
     }
   }
 
-  async train_success(maya, me, callname, hook, extra_flag) {
-    era.print([
-      maya.get_colored_name(),
-      ' 的',
-      attr_names[extra_flag.train],
-      '训练顺利结束了！',
+  async train_success_add(maya, me, callname) {
+    await print_event_name('额外的自主训练', maya);
+    const teio = get_chara_talk(3);
+    await maya.say_and_wait('那个呀！训练也结束了～要不要和人家去个好地方？');
+    era.printButton('「好地方是指哪里？」', 1);
+    await era.input();
+    await maya.say_and_wait(
+      '跟你说跟你说！有一个景点，可以看见非常闪亮的夜景──',
+    );
+    await teio.say_and_wait([
+      '嘿哟，嘿哟……咦？是 ',
+      sys_get_colored_callname(3, 24),
+      '～！',
     ]);
-    if (Math.random() < 0.2 * extra_flag.stamina_ratio) {
-      era.println();
-      await print_event_name('额外的自主训练', maya);
-      const teio = get_chara_talk(3);
-      await maya.say_and_wait('那个呀！训练也结束了～要不要和人家去个好地方？');
-      era.printButton('「好地方是指哪里？」', 1);
-      await era.input();
+    await maya.say_and_wait([
+      '啊，是 ',
+      sys_get_colored_callname(24, 3),
+      '！嗨！',
+    ]);
+    await teio.say_and_wait('我正好在找你！我想跟你说，我今天可能会晚点回去！');
+    await maya.say_and_wait([
+      '呀☆居然会晚归，看来有进展～！',
+      sys_get_colored_callname(24, 3),
+      ' 是大人了～！',
+    ]);
+    await teio.say_and_wait([
+      '嗯！刚才看了 ',
+      sys_get_colored_callname(3, 17),
+      ' 的比赛后，我就很想去跑一下！',
+    ]);
+    await teio.say_and_wait([
+      '以 ',
+      sys_get_colored_callname(3, 24),
+      ' 的方式来说……可能是很闪闪发亮？',
+    ]);
+    await maya.say_and_wait([
+      '哇……！我懂我懂！',
+      sys_get_colored_callname(24, 17),
+      ' 奔驰的样子真的很帅气！',
+    ]);
+    await maya.say_and_wait('嗯～～我好像开始兴奋起来了……');
+    await maya.say_and_wait([
+      callname,
+      '，还是别看夜景了！人家现在想要闪闪发亮！',
+    ]);
+    era.printButton('「我陪你！」', 1);
+    era.printButton('「休息也是很重要的」', 2);
+    if ((await era.input()) === 1) {
+      await maya.say_and_wait(['嘿嘿，不愧是 ', callname, '！']);
+      await teio.say_and_wait('那我们一起并跑练习吧！这样我也比较能激起斗志！');
+      await maya.say_and_wait('没问题！我要起飞了☆');
+      await era.printAndWait([
+        maya.get_colored_name(),
+        ' 拿出全力进行了额外训练。',
+      ]);
+      return true;
+    } else {
       await maya.say_and_wait(
-        '跟你说跟你说！有一个景点，可以看见非常闪亮的夜景──',
+        '嗯！说得也是！跟肌肤一样，要休息才会变得充满光泽对吧！',
       );
-      await teio.say_and_wait([
-        '嘿哟，嘿哟……咦？是 ',
-        sys_get_colored_callname(3, 24),
-        '～！',
-      ]);
-      await maya.say_and_wait([
-        '啊，是 ',
-        sys_get_colored_callname(24, 3),
-        '！嗨！',
-      ]);
-      await teio.say_and_wait(
-        '我正好在找你！我想跟你说，我今天可能会晚点回去！',
+      await maya.say_and_wait(
+        '我知道了！就用闪闪发亮的夜景，来为人家的耀眼充电吧♪',
       );
-      await maya.say_and_wait([
-        '呀☆居然会晚归，看来有进展～！',
-        sys_get_colored_callname(24, 3),
-        ' 是大人了～！',
+      await teio.say_and_wait('那我先走了！我会在门禁前回来的～～！');
+      await era.printAndWait([
+        '于是 ',
+        me.get_colored_name(),
+        ' 和 ',
+        maya.get_colored_name(),
+        ' 一起欣赏夜景，让',
+        maya.sex,
+        '的身体好好地休息了',
       ]);
-      await teio.say_and_wait([
-        '嗯！刚才看了 ',
-        sys_get_colored_callname(3, 17),
-        ' 的比赛后，我就很想去跑一下！',
-      ]);
-      await teio.say_and_wait([
-        '以 ',
-        sys_get_colored_callname(3, 24),
-        ' 的方式来说……可能是很闪闪发亮？',
-      ]);
-      await maya.say_and_wait([
-        '哇……！我懂我懂！',
-        sys_get_colored_callname(24, 17),
-        ' 奔驰的样子真的很帅气！',
-      ]);
-      await maya.say_and_wait('嗯～～我好像开始兴奋起来了……');
-      await maya.say_and_wait([
-        callname,
-        '，还是别看夜景了！人家现在想要闪闪发亮！',
-      ]);
-      era.printButton('「我陪你！」', 1);
-      era.printButton('「休息也是很重要的」', 2);
-      hook.arg = (await era.input()) === 1;
-      if (hook.arg) {
-        await maya.say_and_wait(['嘿嘿，不愧是 ', callname, '！']);
-        await teio.say_and_wait(
-          '那我们一起并跑练习吧！这样我也比较能激起斗志！',
-        );
-        await maya.say_and_wait('没问题！我要起飞了☆');
-        await era.printAndWait([
-          maya.get_colored_name(),
-          ' 拿出全力进行了额外训练。',
-        ]);
-        era.println();
-      } else {
-        await maya.say_and_wait(
-          '嗯！说得也是！跟肌肤一样，要休息才会变得充满光泽对吧！',
-        );
-        await maya.say_and_wait(
-          '我知道了！就用闪闪发亮的夜景，来为人家的耀眼充电吧♪',
-        );
-        await teio.say_and_wait('那我先走了！我会在门禁前回来的～～！');
-        await era.printAndWait([
-          '于是 ',
-          me.get_colored_name(),
-          ' 和 ',
-          maya.get_colored_name(),
-          ' 一起欣赏夜景，让',
-          maya.sex,
-          '的身体好好地休息了',
-        ]);
-      }
     }
+    return false;
   }
 
   async week_end(maya, me, callname, hook, extra_flag, event_object) {

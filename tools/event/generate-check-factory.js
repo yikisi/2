@@ -50,7 +50,7 @@ output += `cons_dict[340] =
     require('#/event/check/check-god');
 
 console.log(
-  '[check-factory.js] constructor dictionary init done!',
+  '角色检查脚本注册完毕！',
   (new Date().getTime() - current).toLocaleString(),
   'ms',
 );

@@ -17,7 +17,7 @@ const handlers = {};
 ].forEach((f) => f(handlers));
 
 console.log(
-  '[sys-check-ero-action.js] ero action checkers init done!',
+  '调教指令实行值检查函数注册完毕！',
   (new Date().getTime() - current).toLocaleString(),
   'ms',
 );

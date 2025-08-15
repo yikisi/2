@@ -638,9 +638,11 @@ module.exports = class extends EroMakingOuts {
   // eslint-disable-next-line no-unused-vars
   async pet_tail(attacker, defender, hook) {
     await attacker.print_and_wait('相当新鲜的体验。');
-    await attacker.print_and_wait(
-      `毕竟是从${defender.get_uma_sex_title()}的尾椎底伸出，平时在那校服裙后如看得见的风般摇曳着的尾巴呀。`,
-    );
+    if (defender.sex_code !== 1) {
+      await attacker.print_and_wait(
+        `毕竟是从${defender.uma_sex_title}的尾椎底伸出，平时在那校服裙后如看得见的风般摇曳着的尾巴呀。`,
+      );
+    }
     await attacker.print_and_wait(
       '哼着歌轻柔地抚摸着，手指沿着柔顺的尾巴毛逐渐上拨，将自己的双手被来自尾巴根私密气味尽情标记……',
     );

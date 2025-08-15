@@ -1,6 +1,6 @@
 /**
  * @file 机伶金花 - 调教
- * @author 无名黑奴
+ * @author 黑奴队长
  */
 const era = require('#/era-electron');
 

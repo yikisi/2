@@ -2,7 +2,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   901321,
-  'Circulating Love♡',
+  'Loves Only You♡',
   '临近终盘的某个位置时速度略微加快',
   90132,
   1,

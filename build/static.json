@@ -578,6 +578,11 @@
         "k": "cflag67",
         "t": "number"
       },
+      "70": {
+        "n": "多口上",
+        "k": "cflag70",
+        "t": "number"
+      },
       "80": {
         "n": "月经周",
         "k": "cflag80",
@@ -1846,6 +1851,16 @@
       "77": {
         "n": "马跳结果显示简报",
         "k": "flag77",
+        "t": "number"
+      },
+      "80": {
+        "n": "比赛缩略显示",
+        "k": "flag80",
+        "t": "number"
+      },
+      "81": {
+        "n": "特殊事件筛选",
+        "k": "flag81",
         "t": "number"
       },
       "100": {
@@ -3797,6 +3812,7 @@
       "成长阶段": 65,
       "招募状态": 66,
       "随机招募": 67,
+      "多口上": 70,
       "月经周": 80,
       "妊娠阶段": 81,
       "妊娠回合计时": 82,
@@ -3840,7 +3856,8 @@
         },
         "talent": {
           "35": 1,
-          "36": 1
+          "36": 1,
+          "67": 1
         }
       },
       "1": {
@@ -16810,6 +16827,7 @@
           "37": 6,
           "38": 5,
           "39": 0,
+          "50": 1,
           "65": 5,
           "67": 0
         },
@@ -16836,6 +16854,11 @@
           "5": 0,
           "6": 0,
           "7": 0
+        },
+        "juel": {
+          "20": 100,
+          "21": 100,
+          "22": 100
         }
       },
       "400": {
@@ -17266,6 +17289,8 @@
       "筛除请求指令": 75,
       "筛除强制指令": 76,
       "马跳结果显示简报": 77,
+      "比赛缩略显示": 80,
+      "特殊事件筛选": 81,
       "训练难度": 100,
       "训练加成": 101,
       "比赛难度": 102,
@@ -17298,14 +17323,14 @@
       "彩蛋机制": 179
     },
     "gamebase": {
-      "author": "雞雞|无名路人|无名黑奴",
+      "author": "雞雞|无名路人|黑奴队长",
       "info": "是什么让你选择不仅要玩赛马娘还要玩文字版",
       "year": "2023 ～",
       "title": "EraUma",
       "gameCode": 29407,
       "defaultChara": 0,
-      "version": 2000,
-      "versionName": "2.0 (agito)",
+      "version": 2110,
+      "versionName": "2.11 (agito)",
       "allowVersion": 1000,
       "site": "https://gitgud.io/umaera/erauma/-/releases/permalink/latest",
       "versionCheck": "https://umaera.gitgud.site/erauma/RELEASE",
@@ -25433,6 +25458,26 @@
       "posY": 0,
       "type": 0
     },
+    "乐章_私": {
+      "path": "res/others/chr_icon_1079_901079_01.png",
+      "x": 0,
+      "y": 0,
+      "width": 200,
+      "height": 219,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "乐章_私_半身": {
+      "path": "res/others/chara_stand_1079_901079.png",
+      "x": 0,
+      "y": 0,
+      "width": 512,
+      "height": 512,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
     "创升_私": {
       "path": "res/others/chr_icon_1080_901080_01.png",
       "x": 0,
@@ -25693,6 +25738,26 @@
       "posY": 0,
       "type": 0
     },
+    "皇冠_泳": {
+      "path": "res/others/chr_icon_1088_108830_01.png",
+      "x": 0,
+      "y": 0,
+      "width": 200,
+      "height": 219,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "皇冠_泳_半身": {
+      "path": "res/others/chara_stand_1088_108830.png",
+      "x": 0,
+      "y": 0,
+      "width": 512,
+      "height": 512,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
     "精帽_私": {
       "path": "res/others/chr_icon_1089_901089_01.png",
       "x": 0,
@@ -25713,6 +25778,26 @@
       "posY": 0,
       "type": 0
     },
+    "精帽_泳": {
+      "path": "res/others/chr_icon_1089_108930_01.png",
+      "x": 0,
+      "y": 0,
+      "width": 200,
+      "height": 219,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "精帽_泳_半身": {
+      "path": "res/others/chara_stand_1089_108930.png",
+      "x": 0,
+      "y": 0,
+      "width": 512,
+      "height": 512,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
     "强击_私": {
       "path": "res/others/chr_icon_1091_901091_01.png",
       "x": 0,
@@ -25725,6 +25810,26 @@
     },
     "强击_私_半身": {
       "path": "res/others/chara_stand_1091_901091.png",
+      "x": 0,
+      "y": 0,
+      "width": 512,
+      "height": 512,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "强击_泳": {
+      "path": "res/others/chr_icon_1091_109130_01.png",
+      "x": 0,
+      "y": 0,
+      "width": 200,
+      "height": 219,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "强击_泳_半身": {
+      "path": "res/others/chara_stand_1091_109130.png",
       "x": 0,
       "y": 0,
       "width": 512,
@@ -25765,6 +25870,26 @@
     },
     "宝穴_私_半身": {
       "path": "res/others/chara_stand_1094_901094.png",
+      "x": 0,
+      "y": 0,
+      "width": 512,
+      "height": 512,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "无因_私": {
+      "path": "res/others/chr_icon_1096_901096_01.png",
+      "x": 0,
+      "y": 0,
+      "width": 200,
+      "height": 219,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "无因_私_半身": {
+      "path": "res/others/chara_stand_1096_901096.png",
       "x": 0,
       "y": 0,
       "width": 512,

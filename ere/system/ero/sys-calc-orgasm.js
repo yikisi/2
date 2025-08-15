@@ -44,6 +44,7 @@ const { get_random_value, log_max_wp } = require('#/utils/value-utils');
 const { attack_juel_reward } = require('#/data/ero/battle-const');
 const CharaInmon = require('#/data/ero/chara-inmon');
 const EroParticipant = require('#/data/ero/ero-participant');
+const EroTouch = require('#/data/ero/ero-touch');
 const { item_enum } = require('#/data/ero/item-const');
 const {
   base_orgasm_juel_reward,
@@ -93,36 +94,35 @@ async function sys_calc_orgasm(shown, ...ids) {
       2 * inmon.on(plugin_enum.fountain) +
       4 * inmon.on(plugin_enum.woman);
     const wp_ratio = Math.log(era.get(`base:${cid}:根性`)) / log_max_wp;
-    let total_cost = { stamina: 0, time: 0 },
-      orgasm_count = 0,
-      limited_count = 0,
-      orgasm_part_count = 0,
-      minus_lust = 0;
+    let total_cost = { stamina: 0, time: 0 };
+    let orgasm_count = 0;
+    let limited_count = 0;
+    let orgasm_part_count = 0;
+    let minus_lust = 0;
     for (let i = 0; i < orgasm_check_list.length; ++i) {
       const part = orgasm_check_list[i];
-      const part_name = part_names[part];
+      const p_name = part_names[part];
       const { curr, max, old } = update_palam(cid, part, shown);
       if (era.get(`tcvar:${cid}:高潮抑制`) > 0) {
         continue;
       }
       let amount = 0;
-      let cum_flag = false;
-      let touched_part = era.get(`tcvar:${cid}:${part_name}接触部位`);
-      let oid = -1;
-      let opart = -1;
-      if (touched_part !== -1) {
-        oid = touched_part.owner;
-        opart = touched_part.part;
+      let i_cum = false;
+      let touch = new EroTouch(cid, part);
+      let oid = touch.owner ?? -1;
+      let opart = touch.part ?? -1;
+      if (new EroTouch(oid, opart).item === item_enum.gag) {
+        touch.clean();
       }
       if (curr >= max) {
-        cum_flag = true;
+        i_cum = true;
         const times = Math.min(Math.floor(curr / max), 6);
         let tmp_cost = {};
-        era.set(`palam:${cid}:${part_name}快感`, curr % max);
-        let abl = era.get(`abl:${cid}:${part_name}耐性`) || 0;
+        era.set(`palam:${cid}:${p_name}快感`, curr % max);
+        let abl = era.get(`abl:${cid}:${p_name}耐性`) || 0;
         if (part >= part_enum.sadism) {
           // 施虐和受虐属于精神高潮，只能造成普通高潮
-          era.set(`nowex:${cid}:${part_name}高潮`, times);
+          era.set(`nowex:${cid}:${p_name}高潮`, times);
           Object.assign(tmp_cost, orgasm_cost.spirit);
           if (part === part_enum.masochism) {
             abl +=
@@ -132,10 +132,10 @@ async function sys_calc_orgasm(shown, ...ids) {
         } else {
           if (!sys_check_awake(cid)) {
             // 昏睡时计算无自觉高潮
-            era.set(`nowex:${cid}:无自觉${part_name}高潮`, times);
+            era.set(`nowex:${cid}:无自觉${p_name}高潮`, times);
           } else {
             // 清醒时计算普通高潮
-            era.set(`nowex:${cid}:${part_name}高潮`, times);
+            era.set(`nowex:${cid}:${p_name}高潮`, times);
           }
           Object.assign(tmp_cost, orgasm_cost.body);
           // 分泌液计算
@@ -158,7 +158,8 @@ async function sys_calc_orgasm(shown, ...ids) {
                   (1 +
                     0.2 * (era.get(`tcvar:${cid}:余韵`) > 0) +
                     get_bust_delta(cid, true) / 50) *
-                  secretion_amount.orgasm_times[times - 1],
+                  secretion_amount.orgasm_times[times - 1] *
+                  l_times,
               );
             }
           } else if (part === part_enum.penis) {
@@ -173,23 +174,21 @@ async function sys_calc_orgasm(shown, ...ids) {
               !era.get('tcvar:0:脱力') &&
               !era.get('tcvar:0:失神')
             ) {
-              let stop_success = undefined;
+              let stop_success = void 0;
               if (cid === 0 && era.get('flag:惩戒力度') < 2) {
-                const stopMarks = era.get(`ex:0:寸止`);
-                // 以等差数列计算成功率
-                // 部位快感每级可以提高5%寸止成功率
-                // 早泄-50%成功率
+                const stop_turn = era.get(`ex:0:寸止`);
+                // 以等差数列计算成功率：部位快感每级可以提高 5% 寸止成功率；早泄 -50% 成功率
                 // 寸止成功判定，小于几率时成功寸止
                 stop_success =
                   Math.random() <
                   1 -
-                    ((1 + stopMarks) * stopMarks * 5) / 200 +
+                    ((1 + stop_turn) * stop_turn * 5) / 200 +
                     0.1 * era.get(`talent:0:钢之意志`) +
                     0.05 * abl -
                     0.5 * era.get(`talent:0:早泄`);
               } else if (
                 cid > 0 &&
-                era.get(`tcvar:${cid}:阴茎接触部位`).owner === 0 &&
+                oid === 0 &&
                 !era.get(`tcvar:${cid}:避孕套`)
               ) {
                 stop_success =
@@ -203,8 +202,8 @@ async function sys_calc_orgasm(shown, ...ids) {
                 const ret =
                   await get_custom_ero(cid).orgasm_denial(stop_success);
                 // 选择射或者没忍住就直接射了
-                cum_flag = !ret || !stop_success;
-                if (!cum_flag) {
+                i_cum = !ret || !stop_success;
+                if (!i_cum) {
                   if (ret === 2) {
                     // 体外成功，射到身上
                     if (opart === part_enum.mouth) {
@@ -217,7 +216,7 @@ async function sys_calc_orgasm(shown, ...ids) {
                         new EroParticipant(oid, opart),
                       );
                     }
-                    cum_flag = true;
+                    i_cum = true;
                   } else if (ret === 1) {
                     era.set(`nowex:${cid}:寸止`, 1);
                     // 恢复快感条和高潮状态
@@ -228,7 +227,7 @@ async function sys_calc_orgasm(shown, ...ids) {
                 }
               }
             }
-            if (cum_flag) {
+            if (i_cum) {
               const stop_turn = era.get(`ex:${cid}:寸止`);
               if (stop_turn > 0) {
                 // 寸止每多一个回合，体力消耗+10%
@@ -240,7 +239,9 @@ async function sys_calc_orgasm(shown, ...ids) {
                 secretion_amount.penis_times[times - 1];
               // 余韵额外射50%
               amount = Math.floor(
-                amount * (1 + 0.5 * (era.get(`tcvar:${cid}:余韵`) > 0)),
+                amount *
+                  (1 + 0.5 * (era.get(`tcvar:${cid}:余韵`) > 0)) *
+                  l_times,
               );
               era.add(`exp:${cid}:射精量`, amount);
               era.set(`nowex:${cid}:射精量`, amount);
@@ -267,35 +268,42 @@ async function sys_calc_orgasm(shown, ...ids) {
               }
             }
           } else {
+            const ex_times =
+              l_times * (era.get(`tcvar:${cid}:余韵`) > 0 ? 1.2 : 1);
             if (part === part_enum.clitoris) {
               set_stain(cid, part_enum.virgin, stain_enum.secretion);
               era.add(
                 `nowex:${cid}:爱液分泌`,
-                (get_random_value(...secretion_amount.virgin) *
-                  secretion_amount.orgasm_times[times - 1]) /
-                  2,
+                Math.floor(
+                  (get_random_value(...secretion_amount.virgin) *
+                    secretion_amount.orgasm_times[times - 1] *
+                    ex_times) /
+                    2,
+                ),
               );
               era.set(`nowex:${cid}:潮吹`, 1);
             } else if (part === part_enum.virgin) {
               set_stain(cid, part_enum.virgin, stain_enum.secretion);
               amount = era.add(
                 `nowex:${cid}:爱液分泌`,
-                get_random_value(...secretion_amount.virgin) *
-                  secretion_amount.orgasm_times[times - 1],
+                Math.floor(
+                  get_random_value(...secretion_amount.virgin) *
+                    secretion_amount.orgasm_times[times - 1] *
+                    ex_times,
+                ),
               );
               era.set(`nowex:${cid}:潮吹`, 1);
             } else if (part === part_enum.anal) {
               set_stain(cid, part_enum.anal, stain_enum.anal);
-              amount =
+              amount = Math.floor(
                 get_random_value(...secretion_amount.anal) *
-                secretion_amount.orgasm_times[times - 1];
-            }
-            if (amount > 0 && era.get(`tcvar:${cid}:余韵`) > 0) {
-              amount *= 1.2;
+                  secretion_amount.orgasm_times[times - 1] *
+                  ex_times,
+              );
             }
           }
         }
-        if (cum_flag) {
+        if (i_cum) {
           // 每级耐性减少10%高潮时体力精力消耗
           total_cost.stamina += tmp_cost.stamina * (1 - 0.1 * abl) * times;
           total_cost.time += tmp_cost.time * (1 - 0.1 * abl) * times;
@@ -303,16 +311,16 @@ async function sys_calc_orgasm(shown, ...ids) {
           // 寸止时不计算高潮次数
           // 不管肉棒高潮了几次，只射一次精
           if (part === part_enum.penis) {
-            era.add(`exp:${cid}:${part_name}高潮次数`, 1);
+            era.add(`exp:${cid}:${p_name}高潮次数`, 1);
             limited_count += 1;
           } else {
-            era.add(`exp:${cid}:${part_name}高潮次数`, times);
+            era.add(`exp:${cid}:${p_name}高潮次数`, times);
             limited_count += times;
           }
           orgasm_count += times;
           if (i >= orgasm_check_list.length - 2) {
             // 主要部位高潮额外获得20%的因子奖励
-            add_juel(cid, `${part_name}快感`, (palam_from_orgasm * times) / 5);
+            add_juel(cid, `${p_name}快感`, (palam_from_orgasm * times) / 5);
           }
           update_palam_from_main_orgasm(cid, part, times, inmon);
           orgasm_part_count++;
@@ -335,37 +343,38 @@ async function sys_calc_orgasm(shown, ...ids) {
         // 淫系列特性使分泌液阈值减半
         let border = era.get(`tcvar:${cid}:发情`) > 0 ? 1.5 : 1;
         if (part === part_enum.breast && era.get(`talent:${cid}:泌乳`) > 0) {
-          if (era.get(`cflag:${cid}:性别`) !== 1) {
-            const talent = era.get(`talent:${cid}:淫乳`);
-            if (talent > 0) {
-              border += 0.5 * talent;
+          const talent = era.get(`talent:${cid}:淫乳`);
+          if (talent > 0) {
+            border += 0.5 * talent;
+          }
+          border = (max * palam_border.breast) / border;
+          if (curr >= border || era.get(`ex:${cid}:喷奶阻碍`) > 0) {
+            if (
+              era.get(`talent:${cid}:乳头类型`) === 2 &&
+              !era.get(`tcvar:${cid}:乳突`)
+            ) {
+              era.set(`tcvar:${cid}:乳突`, 1);
+              era.set(`nowex:${cid}:乳突`, 1);
             }
-            border = (max * palam_border.breast) / border;
-            if (curr >= border || era.get(`ex:${cid}:喷奶阻碍`) > 0) {
-              if (
-                era.get(`talent:${cid}:乳头类型`) === 2 &&
-                !era.get(`tcvar:${cid}:乳突`)
-              ) {
-                era.set(`tcvar:${cid}:乳突`, 1);
-                era.set(`nowex:${cid}:乳突`, 1);
-              }
-              amount = check_nipple_clamps(
-                cid,
-                (get_random_value(...secretion_amount.breast) *
-                  secretion_coefficient.breast[era.get(`talent:${cid}:泌乳`)] *
-                  (curr - border) *
-                  (1 +
-                    0.2 * (era.get(`tcvar:${cid}:余韵`) > 0) +
-                    get_bust_delta(cid, true) / 50)) /
-                  (max - border),
-              );
-            }
+            amount = check_nipple_clamps(
+              cid,
+              (get_random_value(...secretion_amount.breast) *
+                secretion_coefficient.breast[era.get(`talent:${cid}:泌乳`)] *
+                (curr - border) *
+                (1 +
+                  0.2 * (era.get(`tcvar:${cid}:余韵`) > 0) +
+                  get_bust_delta(cid, true) / 50) *
+                l_times) /
+                (max - border),
+            );
           }
         } else if (part === part_enum.penis) {
           if (check_erect(cid) && !check_erect(cid, old)) {
             era.add(`nowex:${cid}:勃起`, 1);
           }
         } else {
+          const ex_times =
+            l_times * (era.get(`tcvar:${cid}:余韵`) > 0 ? 1.2 : 1);
           if (part === part_enum.virgin) {
             const talent = era.get(`talent:${cid}:淫壶`);
             if (talent > 0) {
@@ -373,10 +382,12 @@ async function sys_calc_orgasm(shown, ...ids) {
             }
             border = (max * palam_border.virgin) / border;
             if (curr >= border) {
-              amount =
+              amount = Math.floor(
                 (get_random_value(...secretion_amount.virgin) *
-                  (curr - border)) /
-                (max - border);
+                  (curr - border) *
+                  ex_times) /
+                  (max - border),
+              );
             }
             amount = era.add(`nowex:${cid}:爱液分泌`, amount);
             if (amount > 0) {
@@ -398,21 +409,20 @@ async function sys_calc_orgasm(shown, ...ids) {
                 +!check_lubrication(cid, part_enum.anal),
               );
               set_stain(cid, part_enum.anal, stain_enum.anal);
-              amount =
-                (get_random_value(...secretion_amount.anal) * (curr - border)) /
-                (max - border);
+              amount = Math.floor(
+                (get_random_value(...secretion_amount.anal) *
+                  (curr - border) *
+                  ex_times) /
+                  (max - border),
+              );
             }
-          }
-          if (amount > 0 && era.get(`tcvar:${cid}:余韵`) > 0) {
-            amount *= 1.2;
           }
         }
       }
-      const last_action = era.get('tflag:前回行动'),
-        last_supporter = era.get('tflag:前回助手');
+      const last_action = era.get('tflag:前回行动');
+      const last_supporter = era.get('tflag:前回助手');
       // 分泌之后进行接触部位的污渍判定
       // 以及增加对方经历
-      amount = Math.floor(amount * l_times);
       if (amount > 0) {
         if (part === part_enum.breast) {
           merge_stain(
@@ -478,8 +488,8 @@ async function sys_calc_orgasm(shown, ...ids) {
               oid,
               supporter,
             );
-          } else if (touched_part.item === item_enum.milk_pump) {
-            loc.i = touched_part.item;
+          } else if (touch.item === item_enum.milk_pump) {
+            loc.i = touch.item;
             era.add(
               `tflag:${era.get(`cflag:${cid}:种族`) > 0 ? '马' : '人'}奶${
                 cid === 0 ? '可卖' : '产量'
@@ -492,7 +502,6 @@ async function sys_calc_orgasm(shown, ...ids) {
             new EroParticipant(cid, part_enum.virgin),
             new EroParticipant(oid, opart),
           );
-          era.set(`nowex:${cid}:爱液分泌`, amount);
           const loc = era.set(`tcvar:${cid}:潮吹位置`, {
             c: [oid],
             p: opart,
@@ -575,8 +584,9 @@ async function sys_calc_orgasm(shown, ...ids) {
           }
         } else if (part === part_enum.penis) {
           if (
-            last_action === ero_hooks.ask_double_fuck ||
-            (last_action === ero_hooks.double_fuck && last_supporter === cid)
+            (last_action === ero_hooks.ask_double_fuck ||
+              last_action === ero_hooks.double_fuck) &&
+            last_supporter === cid
           ) {
             oid = 0;
             opart = part_enum.virgin;

@@ -46,7 +46,7 @@ love_scripts.forEach(
 
 output += `
 console.log(
-  '[love-factory.js] constructor dictionary init done!',
+  '角色爱慕口上注册完毕！',
   (new Date().getTime() - current).toLocaleString(),
   'ms',
 );

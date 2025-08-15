@@ -2,7 +2,7 @@
  * @file 特殊赛后事件口上
  * @author 幽白書
  * @author Mr.E.
- * @author 无名黑奴（临时）
+ * @author 黑奴队长（临时）
  */
 const {
   add,
@@ -96,7 +96,7 @@ async function check_race_events(race, info, team_contestants) {
   if (get('flag:初见URA颁奖') < 2) {
     /**
      * 乙名史悦子 - 初见
-     * @author 无名黑奴
+     * @author 黑奴队长
      */
     handler = async () => {
       const etsuko = get_chara_talk(303);

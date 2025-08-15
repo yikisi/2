@@ -1,0 +1,74 @@
+const UmaSkill = require('#/data/race/model/uma-skill');
+
+module.exports = new UmaSkill(
+  109802211,
+  '奔跑的吉祥物',
+  '速度和力量提升，若是交流重赏则变为大幅提升',
+  10980221,
+  1,
+  3,
+  508,
+  [() => true, () => true],
+  [
+    (args) => args.is_dirtgrade === 1,
+    (args) => args.ground_type === 2 && args.is_dirtgrade !== 1,
+  ],
+  [-0.0001, -0.0001],
+  [0, 0],
+  [
+    UmaSkill.ability_time_usage_enum.normal,
+    UmaSkill.ability_time_usage_enum.normal,
+  ],
+  [
+    [
+      UmaSkill.ability_type_enum.Speed,
+      UmaSkill.ability_type_enum.Power,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.Speed,
+      UmaSkill.ability_type_enum.Power,
+      UmaSkill.ability_type_enum.no,
+    ],
+  ],
+  [
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+  ],
+  [
+    [80, 80, 0],
+    [60, 60, 0],
+  ],
+  [
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+    ],
+  ],
+  [
+    [0, 0, 0],
+    [0, 0, 0],
+  ],
+  [1, 3],
+  [30, 30],
+  0,
+  0,
+  false,
+  false,
+  [1],
+  [UmaSkill.ability_tag_enum.speed, UmaSkill.ability_tag_enum.power],
+);

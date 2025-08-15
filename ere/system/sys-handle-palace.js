@@ -117,12 +117,14 @@ function sys_handle_palace(cid) {
       titles.push({ n: '百战百胜', c: adaptability_colors.at(-1) });
     }
   }
-  if (
-    era.get(`talent:${cid}:童贞`) === vp_status_enum.virgin &&
-    era.get(`talent:${cid}:处女`) === vp_status_enum.virgin
-  ) {
+  const pv = era.get(`talent:${cid}:童贞`);
+  const vv = era.get(`talent:${cid}:处女`);
+  if (pv === vp_status_enum.virgin && vv === vp_status_enum.virgin) {
     titles.push({ n: '纯净之魂', c: sex_colors[1] });
     pop_g1_count >= 2 && titles.push({ n: '完美偶像', c: sex_colors[0] });
+  } else if (pv === vp_status_enum.virgin && vv === vp_status_enum.reborn) {
+    titles.push({ n: '「纯净」之魂', c: sex_colors[1] });
+    pop_g1_count >= 2 && titles.push({ n: '「完美」偶像', c: sex_colors[0] });
   }
   era.printMultiColumns(buffer);
   sys_add_titles(cid, ...titles);
@@ -180,13 +182,10 @@ function sys_handle_palace(cid) {
     era.set(`cflag:${gene_a}:被继承`, 0);
     era.set(`cflag:${era.get(`cflag:${cid}:继承方2`)}:被继承`, 0);
   }
-  const teach_chara = era.get(`cflag:${cid}:照看`);
-  if (teach_chara > 0) {
-    const teach_chara = era.get(`cflag:${cid}:照看`);
-    if (teach_chara > 0) {
-      era.set(`cflag:${teach_chara}:照看`, 0);
-      era.set(`cflag:${cid}:照看`, 0);
-    }
+  const tid = era.get(`cflag:${cid}:照看`);
+  if (tid > 0) {
+    era.set(`cflag:${tid}:照看`, 0);
+    era.set(`cflag:${cid}:照看`, 0);
   }
   if (get_chara_score(cid).charAt(0) >= 'S') {
     era.set(
