@@ -299,6 +299,12 @@ async function cum_shop(chara, me) {
                           inmon.set(plugin_enum[`cl_d${i}`], 1);
                         }
                       }
+                      if (inmon.on(plugin_enum.pe_up_0)) {
+                        inmon.set(plugin_enum.pe_up_0, 0);
+                      }
+                      if (inmon.on(plugin_enum.pe_up_1)) {
+                        inmon.set(plugin_enum.pe_up_1, 0);
+                      }
                     }
                   },
                 },
