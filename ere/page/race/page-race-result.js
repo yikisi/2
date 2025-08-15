@@ -44,18 +44,18 @@ async function page_race_result(contestants, info, race_id) {
       { type: 'divider' },
       {
         accelerator: 1,
-        config: { width: 6, align: 'center' },
+        config: { width: 8, align: 'center' },
         content: '一倍速观看',
         type: 'button',
       },
       {
         accelerator: 2,
-        config: { width: 6, align: 'center' },
+        config: { width: 8, align: 'center' },
         content: '二倍速观看',
         type: 'button',
       },
       {
-        accelerator: 3,
+        accelerator: 8,
         config: { width: 6, align: 'center' },
         content: '四倍速观看',
         type: 'button',
@@ -65,14 +65,14 @@ async function page_race_result(contestants, info, race_id) {
         config: {
           align: 'center',
           buttonType: sum ? 'warning' : 'info',
-          width: 6,
+          width: 8,
         },
         content: '减少参赛选手显示',
         type: 'button',
       },
       {
         accelerator: 0,
-        config: { align: 'center' },
+        config: { align: 'center', width: 8 },
         content: '查看结果',
         type: 'button',
       },
@@ -182,7 +182,9 @@ async function page_race_result(contestants, info, race_id) {
     await era.waitAnyKey();
     era.setMask();
   }
-  await era.waitAnyKey();
+  if (interval > 0) {
+    await era.waitAnyKey();
+  }
   const mvp = Math.min(
     ...contestants
       .filter((e) => e.index_chara >= 0 && !e.legend)
