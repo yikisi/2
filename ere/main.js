@@ -305,7 +305,16 @@ module.exports = async () => {
             content: ['版本号：v', versionName],
             type: 'text',
           },
-          { content: '适配资源包版本：20250814', type: 'text' },
+          {
+            content: [
+              '适配资源包版本：',
+              {
+                content: '20250814',
+                url: 'https://gitgud.io/umaera/erauma/-/archive/master/erauma-master.zip?path=res',
+              },
+            ],
+            type: 'text',
+          },
           {
             content: join_list(author.split('|'), { isDivider: true }),
             type: 'text',
