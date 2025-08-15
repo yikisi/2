@@ -1,7 +1,7 @@
 /**
  * @file 卓芙 - 育成
  * @author 梦露
- * @author 无名黑奴（改编）
+ * @author 黑奴队长（改编）
  */
 const era = require('#/era-electron');
 

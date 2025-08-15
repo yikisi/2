@@ -803,6 +803,7 @@ module.exports = class extends CustomizedEdu {
           callname,
           sys_get_callname(30, 30),
           flags,
+          event_object,
         );
       flags.wait_flag && (await era.waitAnyKey());
       return ret;
@@ -819,6 +820,7 @@ module.exports = class extends CustomizedEdu {
           callname,
           sys_get_callname(30, 30),
           flags,
+          event_object,
         );
       flags.wait_flag && (await era.waitAnyKey());
       return ret;

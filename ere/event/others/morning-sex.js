@@ -1,7 +1,7 @@
 /**
  * @file H事件 - 隔日清晨系列
  * @author 雞雞
- * @author 无名黑奴
+ * @author 黑奴队长
  */
 const {
   get,
@@ -19,6 +19,7 @@ const {
   set_palam_to_max,
 } = require('#/system/ero/sys-prepare-ero');
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
+const { sys_check_remote } = require('#/system/sys-calc-chara-param');
 
 const print_ero_page = require('#/page/page-ero');
 
@@ -122,7 +123,7 @@ async function blowjob(chara, me) {
 }
 
 /**
- * @author 无名黑奴
+ * @author 黑奴队长
  * @param {CharaTalk} chara
  * @param {CharaTalk} me
  */
@@ -244,44 +245,6 @@ async function duty(chara, me) {
   await end_ero_and_show_result();
 }
 
-async function morning_sex() {
-  const cid = get('flag:床伴');
-  if (
-    cid > 0 &&
-    get('flag:当前位置') !== location_enum.basement &&
-    get(`mark:${cid}:反抗`) === 0 &&
-    get(`mark:${cid}:羞耻`) === 0
-  ) {
-    const buffer = [],
-      love = get(`love:${cid}`);
-    if (get('flag:惩戒力度') >= 2) {
-      buffer.push(duty);
-    } else if (love >= 75 || get(`mark:${cid}:欢愉`) >= 1) {
-      if (get_custom_check(cid).is_want_make_love()) {
-        buffer.push(blowjob);
-      }
-      if (Math.random() < 0.5) {
-        buffer.push(naked_apron);
-      }
-    }
-    const handler = get_random_entry(buffer);
-    if (handler) {
-      const my_cache = { s: get('base:0:体力'), t: get('base:0:精力') },
-        chara_cache = {
-          s: get(`base:${cid}:体力`),
-          t: get(`base:${cid}:精力`),
-        };
-      await handler(get_chara_talk(cid), get_chara_talk(0));
-      set(`status:0:沉睡`, 0);
-      set('base:0:体力', my_cache.s);
-      set('base:0:精力', my_cache.t);
-      set(`status:${cid}:沉睡`, 0);
-      set(`base:${cid}:体力`, chara_cache.s);
-      set(`base:${cid}:精力`, chara_cache.t);
-    }
-  }
-}
-
 /**
  * @author 雞雞
  * @param {CharaTalk} chara
@@ -317,6 +280,45 @@ async function naked_apron(chara, me) {
       chara.get_colored_name(),
       ' 打招呼。',
     ]);
+  }
+}
+
+async function morning_sex() {
+  const cid = get('flag:床伴');
+  if (
+    cid > 0 &&
+    !sys_check_remote(cid) &&
+    get('flag:当前位置') !== location_enum.basement &&
+    get(`mark:${cid}:反抗`) === 0 &&
+    get(`mark:${cid}:羞耻`) === 0
+  ) {
+    const buffer = [],
+      love = get(`love:${cid}`);
+    if (get('flag:惩戒力度') >= 2) {
+      buffer.push(duty);
+    } else if (love >= 75 || get(`mark:${cid}:欢愉`) >= 1) {
+      if (get_custom_check(cid).is_want_make_love()) {
+        buffer.push(blowjob);
+      }
+      if (Math.random() < 0.5) {
+        buffer.push(naked_apron);
+      }
+    }
+    const handler = get_random_entry(buffer);
+    if (handler) {
+      const my_cache = { s: get('base:0:体力'), t: get('base:0:精力') },
+        chara_cache = {
+          s: get(`base:${cid}:体力`),
+          t: get(`base:${cid}:精力`),
+        };
+      await handler(get_chara_talk(cid), get_chara_talk(0));
+      set(`status:0:沉睡`, 0);
+      set('base:0:体力', my_cache.s);
+      set('base:0:精力', my_cache.t);
+      set(`status:${cid}:沉睡`, 0);
+      set(`base:${cid}:体力`, chara_cache.s);
+      set(`base:${cid}:精力`, chara_cache.t);
+    }
   }
 }
 

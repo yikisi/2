@@ -29,7 +29,7 @@ cons_dict[343] = require('#/event/init/init-343');
 cons_dict[349] = require('#/event/init/init-349');
 
 console.log(
-  '[init-factory.js] constructor dictionary init done!',
+  '角色初始化脚本注册完毕！',
   (new Date().getTime() - current).toLocaleString(),
   'ms',
 );

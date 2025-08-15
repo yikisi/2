@@ -19,7 +19,7 @@ const current = new Date().getTime();
 ].forEach((f) => f(ero_action_names, ero_tagged_hooks, ero_derive_check));
 
 console.log(
-  '[ero-hooks.js] ero hooks init done!',
+  '调教指令注册完毕！',
   (new Date().getTime() - current).toLocaleString(),
   'ms',
 );
@@ -27,7 +27,7 @@ console.log(
 /**
  * 色色事件用的钩子，表明是哪个调教行为，在调用口上脚本时会作为参数传入<br/>
  * 也包括和色色相关的事件，包括发现怀孕或者孩子出生<br/>
- * 如果搞不明白可以看钩子的注释、ero-common.js这个通用口上和ero-result.js这个通用处理流程
+ * 如果搞不明白可以看钩子的注释、ero-common.js 等通用口上和 ero-result.js 这个通用处理流程
  */
 module.exports = {
   ero_derive_check,

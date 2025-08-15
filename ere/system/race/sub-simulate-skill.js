@@ -56,10 +56,9 @@ function sub_simulate_skill(
   report_cache,
   params,
 ) {
-  const top_location_in_race = list_in_race[0].race.location,
-    contestants_length =
-      top_location_in_race - list_in_race.at(-1).race.location || 1,
-    running_style_temptations = [0, 0, 0, 0];
+  const top_loc_ir = list_in_race[0].race.location;
+  const con_len = top_loc_ir - list_in_race.at(-1).race.location || 1;
+  const rs_temp = [0, 0, 0, 0];
 
   // 模拟技能触发
   list_in_race.forEach((uma, i, l) => {
@@ -98,9 +97,9 @@ function sub_simulate_skill(
             width: progress_width,
           },
           inContent: [
-            uma.race.location === top_location_in_race
+            uma.race.location === top_loc_ir
               ? '头马'
-              : `${(uma.race.location - top_location_in_race).toFixed(1)}m`,
+              : `${(uma.race.location - top_loc_ir).toFixed(1)}m`,
             '(',
             cur_lane.get_abbr(),
             uma.race.slope > 0
@@ -116,9 +115,7 @@ function sub_simulate_skill(
             .join(' '),
           percentage: Math.min(
             Math.max(
-              100 -
-                ((top_location_in_race - uma.race.location) * 100) /
-                  contestants_length,
+              100 - ((top_loc_ir - uma.race.location) * 100) / con_len,
               0,
             ),
             100,
@@ -127,9 +124,7 @@ function sub_simulate_skill(
         },
       ),
     );
-    statistics.loc[uma.index_race].data.push(
-      uma.race.location - top_location_in_race,
-    );
+    statistics.loc[uma.index_race].data.push(uma.race.location - top_loc_ir);
     statistics.speed[uma.index_race].data.push(uma.race.velocityReal);
     statistics.stamina[uma.index_race].data.push(uma.race.stamina);
 
@@ -252,9 +247,8 @@ function sub_simulate_skill(
     }
     uma.race.conditionParams.corner = cur_lane.corner;
     uma.race.conditionParams.distance_diff_rate =
-      ((top_location_in_race - uma.race.location) * 100) / contestants_length;
-    uma.race.conditionParams.distance_diff_top =
-      top_location_in_race - uma.race.location;
+      ((top_loc_ir - uma.race.location) * 100) / con_len;
+    uma.race.conditionParams.distance_diff_top = top_loc_ir - uma.race.location;
     uma.race.conditionParams.distance_diff_top_float =
       uma.race.conditionParams.distance_diff_top * 10;
     uma.race.conditionParams.distance_rate =
@@ -410,23 +404,19 @@ function sub_simulate_skill(
     check_random_loc(uma, 'up_slope', 1);
 
     if (uma.race.temptation > 0) {
-      running_style_temptations[uma.style]++;
+      rs_temp[uma.style]++;
     }
   });
 
   list_in_race.forEach((uma, index, arr) => {
     uma.race.conditionParams.running_style_temptation_opponent_count_nige =
-      running_style_temptations[0] -
-      (uma.style === 0 && uma.race.temptation > 0);
+      rs_temp[0] - (uma.style === 0 && uma.race.temptation > 0);
     uma.race.conditionParams.running_style_temptation_opponent_count_senko =
-      running_style_temptations[1] -
-      (uma.style === 1 && uma.race.temptation > 0);
+      rs_temp[1] - (uma.style === 1 && uma.race.temptation > 0);
     uma.race.conditionParams.running_style_temptation_opponent_count_sashi =
-      running_style_temptations[2] -
-      (uma.style === 2 && uma.race.temptation > 0);
+      rs_temp[2] - (uma.style === 2 && uma.race.temptation > 0);
     uma.race.conditionParams.running_style_temptation_opponent_count_oikomi =
-      running_style_temptations[3] -
-      (uma.style === 3 && uma.race.temptation > 0);
+      rs_temp[3] - (uma.style === 3 && uma.race.temptation > 0);
     // 重置目标速度和加速度为赛段基础值
     uma.race.velocityIdeal =
       uma.base.velocityIdeal *

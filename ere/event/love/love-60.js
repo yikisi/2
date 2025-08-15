@@ -189,7 +189,7 @@ module.exports = class extends CustomizedLove {
 
       era.printButton(`「我……喜欢 ${callname}！」（升级关系）`, 1);
       era.printButton(
-        `「不不不不不，我们只是${nice_nature.get_uma_sex_title()}和担当训练员的关系罢了！人到了晚上果然喜欢多愁善感啊！还是早点睡吧！」（暂停升级）`,
+        `「不不不不不，我们只是${nice_nature.uma_sex_title}和担当训练员的关系罢了！人到了晚上果然喜欢多愁善感啊！还是早点睡吧！」（暂停升级）`,
         2,
       );
       const ret = await era.input();
@@ -198,7 +198,9 @@ module.exports = class extends CustomizedLove {
           '声音虽然很微弱，但却透露出了',
           nice_nature.get_teen_sex_title(),
           '的坚定。',
-          nice_nature,
+        ]);
+        await nice_nature.print_and_wait([
+          nice_nature.get_colored_name(),
           '接受了自己内心的想法，也明白了自己渴望着什么，现在，只剩下最后一个问题……',
         ]);
         add_event(event_hooks.back_school, event_object);

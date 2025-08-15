@@ -29,6 +29,7 @@ const {
   growth_stage,
   human_growth_stage,
   human_sex_title,
+  pregnant_stage_enum,
   sex_title,
 } = require('#/data/ero/status-const');
 const EventMarks = require('#/data/event/event-marks');
@@ -46,49 +47,49 @@ const { motivation_names, out_of_train_type } = require('#/data/train-const');
 const arrows = { '-1': '▼', 0: '', 1: '▲' };
 
 /**
- * @param {number} chara_id
+ * @param {number} cid
  * @param {number} race
  * @param {number} palace
  * @param {boolean} in_train
  * @returns {string}
  */
-function get_edu_stage(chara_id, race, palace, in_train) {
-  if (!chara_id || !race) {
+function get_edu_stage(cid, race, palace, in_train) {
+  if (!cid || !race) {
     return '-';
   }
   if (palace >= 1) {
     return out_of_train_type[palace - 1];
   }
   if (in_train) {
-    return get_train_time(chara_id).substring(0, 3);
+    return get_train_time(cid).substring(0, 3);
   }
-  if (era.get(`cflag:${chara_id}:可再次育成`) > 0) {
+  if (era.get(`cflag:${cid}:可再次育成`) > 0) {
     return '-';
   }
   return '待入学';
 }
 
 /**
- * @param {number} chara_id
+ * @param {number} cid
  * @param {number} type
  */
-function get_suffix(chara_id, type) {
+function get_suffix(cid, type) {
   const ret = [];
   if (type === chara_info_type.train) {
-    const chara_score = get_chara_score(chara_id),
-      motivation = era.get(`cflag:${chara_id}:干劲`),
-      chara_level = get_rank_level(chara_score),
-      races = RaceHistory.get(chara_id).get_values(),
-      wins = races.filter((e) => e.rank === 1).length;
+    const score = get_chara_score(cid);
+    const motivation = era.get(`cflag:${cid}:干劲`);
+    const rank = get_rank_level(score);
+    const races = RaceHistory.get(cid).get_values();
+    const wins = races.filter((e) => e.rank === 1).length;
     ret.push(
       {
         config: {
           align: 'center',
-          color: adaptability_colors[chara_level],
+          color: adaptability_colors[rank],
           width: 2,
           fontWeight: 'bold',
         },
-        content: chara_score,
+        content: score,
         type: 'text',
       },
       {
@@ -115,27 +116,25 @@ function get_suffix(chara_id, type) {
       },
       {
         config: { align: 'center', width: 2 },
-        content: get_train_time(chara_id).substring(0, 3),
+        content: get_train_time(cid).substring(0, 3),
         type: 'text',
       },
       {
         config: { align: 'center', width: 2 },
-        content: chara_id
-          ? `${era.get(`cflag:${chara_id}:育成次数`) + 1}`
-          : '-',
+        content: cid ? `${era.get(`cflag:${cid}:育成次数`) + 1}` : '-',
         type: 'text',
       },
     );
   } else {
-    const relation = get_relation_info(chara_id)[0],
-      love = get_love_info(chara_id)[0],
-      race = era.get(`cflag:${chara_id}:种族`),
-      growth = (race ? growth_stage : human_growth_stage)[
-        Math.min(era.get(`cflag:${chara_id}:成长阶段`), 2)
-      ],
-      sex = era.get(`cflag:${chara_id}:性别`),
-      palace = era.get(`cflag:${chara_id}:殿堂`),
-      in_train = era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48;
+    const relation = get_relation_info(cid)[0];
+    const love = get_love_info(cid)[0];
+    const race = era.get(`cflag:${cid}:种族`);
+    const growth = (race ? growth_stage : human_growth_stage)[
+      Math.min(era.get(`cflag:${cid}:成长阶段`), 2)
+    ];
+    const sex = era.get(`cflag:${cid}:性别`);
+    const palace = era.get(`cflag:${cid}:殿堂`);
+    const in_train = era.get(`cflag:${cid}:育成回合计时`) < 3 * 48;
     ret.push(
       {
         config: { align: 'center', width: 2 },
@@ -159,7 +158,7 @@ function get_suffix(chara_id, type) {
       },
       {
         config: { align: 'center', width: 2 },
-        content: get_edu_stage(chara_id, race, palace, in_train),
+        content: get_edu_stage(cid, race, palace, in_train),
         type: 'text',
       },
     );
@@ -172,12 +171,11 @@ function get_suffix(chara_id, type) {
         width: 3,
         barWidth: 20,
       },
-      inContent: `${Math.floor(era.get(`base:${chara_id}:体力`))}/${era.get(
-        `maxbase:${chara_id}:体力`,
+      inContent: `${Math.floor(era.get(`base:${cid}:体力`))}/${era.get(
+        `maxbase:${cid}:体力`,
       )}`,
       percentage:
-        (era.get(`base:${chara_id}:体力`) * 100) /
-        era.get(`maxbase:${chara_id}:体力`),
+        (era.get(`base:${cid}:体力`) * 100) / era.get(`maxbase:${cid}:体力`),
       type: 'progress',
     },
     {
@@ -187,18 +185,17 @@ function get_suffix(chara_id, type) {
         width: 3,
         barWidth: 20,
       },
-      inContent: `${Math.floor(era.get(`base:${chara_id}:精力`))}/${era.get(
-        `maxbase:${chara_id}:精力`,
+      inContent: `${Math.floor(era.get(`base:${cid}:精力`))}/${era.get(
+        `maxbase:${cid}:精力`,
       )}`,
       percentage:
-        (era.get(`base:${chara_id}:精力`) * 100) /
-        era.get(`maxbase:${chara_id}:精力`),
+        (era.get(`base:${cid}:精力`) * 100) / era.get(`maxbase:${cid}:精力`),
       type: 'progress',
     },
   );
   ret.push({
     config: { offset: 4, width: 20 },
-    content: [...race_indicator(chara_id), ' ', ...get_status(chara_id)],
+    content: [...race_indicator(cid), ' ', ...get_status(cid)],
     type: 'text',
   });
   return ret;
@@ -245,7 +242,10 @@ function sort_team_by_all(team) {
 
 const page_size = 10;
 
-async function select_target(type, page) {
+async function select_target(
+  type = chara_info_type.school,
+  page = { curr: 1 },
+) {
   let sort_func = sort_team_by_id;
   let team_list = filter_chara('cflag', '招募状态', recruit_flags.yes);
 
@@ -257,31 +257,42 @@ async function select_target(type, page) {
     team_list = (sort_func = sort_team_by_all)(
       team_list.filter(
         (cid) =>
-          cid &&
+          cid > 0 &&
           (get_custom_mec(cid).is_able_to_be_selected() ||
-            (era.get(`cflag:${cid}:妊娠阶段`) & 0b100001) > 0),
+            (era.get(`cflag:${cid}:妊娠阶段`) &
+              ((1 << pregnant_stage_enum.resume) +
+                (1 << pregnant_stage_enum.pre_birth))) >
+              0),
       ),
     );
   }
 
+  let e_filter = era.get('flag:特殊事件筛选') > 0;
   let show_list = team_list;
+  if (e_filter) {
+    show_list = show_list.filter((cid) => EventMarks.get(cid).count() > 0);
+  }
 
   let max_page = Math.ceil(show_list.length / page_size) || 1;
   const sorters = new Array(11).fill(0);
 
-  function get_button(accelerator, content, width) {
+  /**
+   * @param {number} acc
+   * @param {string} content
+   * @param {number} width
+   * @returns {ButtonObject}
+   */
+  function get_button(acc, content, width) {
     return {
-      accelerator,
+      accelerator: acc,
       config: { align: 'center', showAcc: false, width },
-      content: `${content}${arrows[sorters[accelerator - 1000]]}`,
+      content: `${content}${arrows[sorters[acc - 1000]]}`,
       type: 'button',
     };
   }
 
   let flag = true;
-  let filter = false;
   let ret;
-  page ||= { curr: 1 };
   while (flag) {
     await era.clear();
     print_page_header();
@@ -418,10 +429,10 @@ async function select_target(type, page) {
             accelerator: 1097,
             config: {
               align: 'right',
-              buttonType: filter ? 'warning' : 'info',
+              buttonType: e_filter ? 'warning' : 'info',
               width: 11,
             },
-            content: '仅显示有特殊事件的角色 [开]',
+            content: `仅显示有特殊事件的角色 [${e_filter ? '开' : '关'}]`,
             type: 'button',
           },
           {
@@ -454,10 +465,10 @@ async function select_target(type, page) {
             accelerator: 1097,
             config: {
               align: 'right',
-              buttonType: filter ? 'warning' : 'info',
+              buttonType: e_filter ? 'warning' : 'info',
               width: 7,
             },
-            content: '仅显示有特殊事件的角色',
+            content: `仅显示有特殊事件的角色 [${e_filter ? '开' : '关'}]`,
             type: 'button',
           },
           {
@@ -483,15 +494,14 @@ async function select_target(type, page) {
         page.curr++;
         break;
       case 1097:
-        filter = !filter;
-        show_list = filter
+        e_filter = era.set('flag:特殊事件筛选', +!e_filter) > 0;
+        show_list = e_filter
           ? team_list.filter((cid) => EventMarks.get(cid).count() > 0)
           : team_list;
         max_page = Math.ceil(show_list.length / page_size) || 1;
         if (page.curr >= max_page) {
           page.curr = max_page;
         }
-        console.log(show_list, team_list);
         break;
       case 1098:
         ret = 0;

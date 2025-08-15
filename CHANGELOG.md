@@ -1,4 +1,197 @@
 # Changelog
+## [EraUma v2.11 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.11)
+
+_20250815_
+
+适配 [EraElectron v4.2.2 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.2.2) 与 [ere.app v1.2.1 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.2.1) 及以上版本
+
+资源包版本：20250814
+
+### Added
+
+* 在标题界面增加了资源包版本提示
+    * 点击标题界面的资源包版本号可直接下载适配版本的资源包
+    * 可在资源包文件夹中的 [资源包注意事项.txt] 检查当前资源包的版本
+* 更新强击立绘
+
+## [EraUma v2.101 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.101)
+
+_2025/8/13_
+
+适配 [EraElectron v4.2.2 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.2.2) 与 [ere.app v1.2.1 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.2.1) 及以上版本
+
+### Changed
+
+* 游戏开局选项 [天生特性] 还会影响初始状态下角色可提升到最大敏感度的部位数
+    * [淫娃荡妇]：3 个部位
+    * [听天由命]、[冰清玉洁]：1 个部位
+    * [与性无缘]：0 个部位
+    * 玩家角色初始状态下可提升到最大敏感度的部位数恒为 1 个部位
+
+### Fixed
+
+* 修复了每回合开始时除床伴外无人可成为当前互动角色的错误
+* 修复了关于可以提升到最高级敏感度的部位数量的错误
+
+## [EraUma v2.1 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.1)
+
+_2025/8/12_
+
+适配 [EraElectron v4.2.2 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.2.2) 与 [ere.app v1.2.1 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.2.1) 及以上版本
+
+### Added
+
+* 新增称号
+    * 「纯净」之魂
+    * 「完美」偶像
+* 新增比赛技能
+    * 【与君同行】在最后冲刺的关键阶段，略微提升速度和加速度；对训练员的爱意越深，效果越强
+    * 【真心为你】在最后冲刺的关键阶段，以不可挡的势头稍微提升速度和加速度；对训练员的爱意越深，效果越强
+    * 以上技能玩家学习时效果恒定为两倍
+
+### Changed
+
+* 现在「目白城」的「抽奖箱」可以抽到「暖腹贴」（普通奖品）和「暖宫贴」（大奖）
+* 为大部分 SM 指令增加了力量经验获取
+* 现在选择角色界面中的【仅显示有特殊事件的角色】按钮会被记忆
+* 完成里见光钻口上脚本的多口上改造
+* 唯独爱你的固有技能以及相应继承技能更名为【Loves Only You♡】
+* 现在桐生院葵和㭴本理子在未加入队伍时的爱慕值上限为 75
+* 优化了部分道具说明
+* 优化目白善信部分调教口上描述
+
+### Fixed
+
+* 修复了「目白城」的「按摩店」无法将角色可提升至最高敏感度的部位数量提高到身体部位数量的错误
+* 修复了【体液分泌】类的淫纹插件未正确作用于乳汁和精液分泌的错误
+* 修复了获得三冠等赛事称号时称号在秋川理事长等特殊角色的好感度奖励中重复计算的错误
+* 修复了米浴夏合宿事件中有关事件队列的错误
+* 修复了角色在产后恢复期仍然可以训练的错误
+* 修复了智力训练仍然能触发性欲高涨地文事件的问题
+* 修复了唯独爱你的专属称号【天下皆知我爱】无法获取的错误
+* 修复了鲁铎象征训练事件【不协调音】导致好感度变成 NaN 的错误
+* 修复了通过「目白城」进行 FUTA 和女性转换导致【淫核】和【早泄】特性在计算最高敏感度身体部位数量时相互干扰的错误
+* 修复了调教体位机制中坐标轴范围计算的错误
+* 修复了米浴目标赛事的计算错误
+* 修复了隔日清晨系列事件会出现事件主角处于远程状态的错误
+
+## [EraUma v2.011 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.011)
+
+_2025/8/2_
+
+适配 [EraElectron v4.1.1 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.1.1) 与 [ere.app v1.1.2 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.1.2) 及以上版本
+
+### Added
+
+* 在显示比赛结果前新增 [减少参赛选手显示] 按钮，启用后播放比赛实况时只显示前四名选手
+
+### Changed
+
+* 现在在满足秋川弥生招募状态的情况下，输入名字进行指名时，可以使用秋川弥生或其本名其中之一
+* 现在开局选项 [角色的强奸抵抗] 为 [一推就倒] 的情况下，在进入调教时只有非玩家角色才会强制发情
+* 现在与戴了口球的口腔口交时精液可以射入口中
+
+### Fixed
+
+* 修复了优秀素质爱慕事件的错误
+* （待确认）每周结算收入时强制重新计算百炼砥石收益以尝试修复投资错误（存疑）
+* 修复了创世驹自动注册参赛的错误
+* 修复了角色在对戴了口球的口腔执行口交类指令后阴茎接触关系仍然保留之前结果的错误
+
+## [EraUma v2.006 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.006)
+~~应为2.01~~
+
+_2025/7/31_
+
+适配 [EraElectron v4.1.1 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.1.1) 与 [ere.app v1.1.2 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.1.2) 及以上版本
+
+### Changed
+
+* （待确认）为可能使爱慕值变成 NaN 的情况增加了报错信息
+* 玩家马娘的技能数量限制提升为 27（从 15 上调）
+* 玩家马娘的因子能力数量限制提升为 27（从 15 上调）
+
+### Fixed
+
+* 修复了在「目白城」进行女性和 FUTA 互相转化时的错误
+* 修复了向百炼砥石投资时的 UI 错误
+* 修复了角色在未装备性玩具的情况下参赛时也会播放喘息的错误
+* 修复了在地下室内玩家依然能邀请助奴加入性爱的错误
+* 修复了队伍内没有其他成员时读档对话的错误
+* 修复了 [爱慕的变化] 为 [逐渐吸引] 时骏川缰绳、秋川弥生和三女神等特殊 NPC 的招募事件链无法触发的错误
+* （待确认）尝试修复百炼砥石投资功能不正常的错误
+
+## [EraUma v2.005 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.005)
+
+_2025/7/29_
+
+适配 [EraElectron v4.1.1 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.1.1) 与 [ere.app v1.1.2 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.1.2) 及以上版本
+
+### Fixed
+
+* 修复了荣进闪耀赛前赛后事件的错误
+* 修复了安卓版无法进入游戏的错误
+
+## [EraUma v2.004 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.004)
+
+_2025/7/29_
+
+适配 [EraElectron v4.1.1 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.1.1) 与 [ere.app v1.1.2 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.1.2) 及以上版本
+
+### Added
+
+* 为性玩具增加了道具说明
+
+### Changed
+
+* 调低了调教中角色在没有即将高潮的部位时是否满足的概率（关系到是否放弃主导权）
+* 现在睡奸（包括地下室睡奸）在玩家没有清醒的情况下的最大回合数为 36（从 66 下调）
+
+### Fixed
+
+* 修复了因快感增长增幅计算错误导致比赛中外阴部位无法高潮的错误
+* 修复了技能【共感】【红沙之王】失效的错误
+* 修复了比赛中可超越目标的计算错误
+* 修复了百炼砥石无法育成的错误
+* 修复了在未招募目白善信的情况下依然能触发相关爱慕事件的错误
+
+## [EraUma v2.003 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.003)
+
+_2025/7/28_
+
+适配 [EraElectron v4.1.1 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.1.1) 与 [ere.app v1.1.2 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.1.2) 及以上版本
+
+### Fixed
+
+* 修复了 FUTA 玩家在【请求轮奸】指令下在射精时自体怀孕的错误
+* 修复了三女神的孩子在出生后即获得【Hello world!】称号的错误
+* 修复了玩家选择火车便当体位时击剑的错误
+
+## [EraUma v2.002 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.002)
+
+_2025/7/28_
+
+适配 [EraElectron v4.1.1 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.1.1) 与 [ere.app v1.1.2 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.1.2) 及以上版本
+
+### Fixed
+
+* 修复了奇锐骏依存爱慕事件中因子奖励的错误
+* 修复了奇锐骏的调教立绘错误
+* 修复了玩家或子代等不具备完整静态数据的角色生下孩子继承语言能力时的错误
+
+## [EraUma v2.001 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.001)
+
+_2025/7/28_
+
+适配 [EraElectron v4.1.1 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.1.1) 与 [ere.app v1.1.2 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.1.2) 及以上版本
+
+### Changed
+
+* 现在使队伍成员携带性玩具参赛也会标记玩家的变态行为（影响到声望不足结局）
+
+### Fixed
+
+* 修复了一个导致安卓版无法与角色上床的错误
 
 ## [EraUma v2.0 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.0)
 
@@ -622,7 +815,7 @@ _2025/1/11_
 
 _2024/12/30_
 
-适配 PC版引擎[EraElectron v3.2.1 (victory)](https://gitgud.io/umaera/engine/era-electron/-/releases/3.2.1) 与
+适配 PC 版引擎[EraElectron v3.2.1 (victory)](https://gitgud.io/umaera/engine/era-electron/-/releases/3.2.1) 与
 安卓版引擎[ere.app v1.0.1 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.0.1) 及以上版本
 
 ### Changed

@@ -46,7 +46,7 @@ cons_dict[340] =
     require('#/event/daily/daily-god');
 
 console.log(
-  '[daily-factory.js] constructor dictionary init done!',
+  '角色日常口上注册完毕！',
   (new Date().getTime() - current).toLocaleString(),
   'ms',
 );

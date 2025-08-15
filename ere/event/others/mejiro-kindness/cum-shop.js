@@ -124,7 +124,7 @@ async function cum_shop(chara, me) {
             buttons.push(
               {
                 c: `增高（10「恩宠」，目前是 ${height}cm）`,
-                ...(height === 229 ? { d: true, t: '不能再高了……' } : {}),
+                ...(height >= 229 ? { d: true, t: '不能再高了' } : {}),
                 h() {
                   money = era.add('item:「恩宠」', -10);
                   change_height(height + 1);
@@ -132,7 +132,7 @@ async function cum_shop(chara, me) {
               },
               {
                 c: `变矮（10「恩宠」，目前是 ${height}cm）`,
-                ...(height === 229 ? { d: true, t: '不能再矮了……' } : {}),
+                ...(height <= 135 ? { d: true, t: '不能再矮了' } : {}),
                 h() {
                   money = era.add('item:「恩宠」', -10);
                   change_height(height - 1);
@@ -157,7 +157,7 @@ async function cum_shop(chara, me) {
               });
               buttons.push({
                 c: `缩小胸部（5「恩宠」，目前是 ${cup} Cup）`,
-                ...(delta <= 5 ? { d: true, t: '已经是飞机场了……' } : {}),
+                ...(delta <= 5 ? { d: true, t: '已经是飞机场了' } : {}),
                 h() {
                   money = era.add('item:「恩宠」', -5);
                   era.add(`cflag:${target.id}:胸围`, -1);
@@ -231,7 +231,7 @@ async function cum_shop(chara, me) {
                 {
                   c: `${target.sex_code === 0 ? 'FUTA 化（15' : '增大阴茎（10'}「恩宠」，目前是 ${cur_desc || '女性'}）`,
                   ...(penis_size === 5
-                    ? { d: true, t: '已经不能继续增大了……' }
+                    ? { d: true, t: '已经不能继续增大了' }
                     : {}),
                   h() {
                     money = era.add('item:「恩宠」', -10);
@@ -245,7 +245,8 @@ async function cum_shop(chara, me) {
                           era.get(`talent:${target.id}:淫核`),
                         ),
                       );
-                      target.sex_code = era.set(`cflag:${target.id}:性别`, 10);
+                      era.set(`talent:${target.id}:淫核`, 0);
+                      era.set(`cflag:${target.id}:性别`, 10);
                       const inmon = CharaInmon.get(target.id);
                       for (let i = 1; i <= 3; ++i) {
                         if (inmon.on(plugin_enum[`cl_u${i}`])) {
@@ -268,8 +269,8 @@ async function cum_shop(chara, me) {
                         d: true,
                         t:
                           penis_size === 0
-                            ? '本来无一物……'
-                            : '已经不能继续缩小了……',
+                            ? '本来无一物'
+                            : '已经不能继续缩小了',
                       }
                     : {}),
                   h() {
@@ -284,7 +285,8 @@ async function cum_shop(chara, me) {
                           era.get(`talent:${target.id}:淫核`),
                         ),
                       );
-                      target.sex_code = era.set(`cflag:${target.id}:性别`, 0);
+                      era.set(`talent:${target.id}:早泄`, 0);
+                      era.set(`cflag:${target.id}:性别`, 0);
                       era.set(`talent:${target.id}:凶器`, 0);
                       const inmon = CharaInmon.get(target.id);
                       for (let i = 1; i <= 3; ++i) {
@@ -310,7 +312,7 @@ async function cum_shop(chara, me) {
                 ...(clitoris_size === 0
                   ? {
                       d: true,
-                      t: `已经是粉色的${part}……`,
+                      t: `已经是粉色的${part}`,
                     }
                   : {}),
                 h() {
@@ -323,7 +325,7 @@ async function cum_shop(chara, me) {
                 ...(clitoris_size === 2
                   ? {
                       d: true,
-                      t: `已经是黝黑的${part}……`,
+                      t: `已经是黝黑的${part}`,
                     }
                   : {}),
                 h() {
@@ -342,7 +344,7 @@ async function cum_shop(chara, me) {
                   ...(skin_status === -1
                     ? {
                         d: true,
-                        t: '肤色已经不能再白了……',
+                        t: '肤色已经不能再白了',
                       }
                     : {}),
                   h() {
@@ -355,7 +357,7 @@ async function cum_shop(chara, me) {
                   ...(skin_status === 2
                     ? {
                         d: true,
-                        t: '肤色已经不能再深了……',
+                        t: '肤色已经不能再深了',
                       }
                     : {}),
                   h() {
@@ -557,7 +559,7 @@ async function cum_shop(chara, me) {
       {
         c: '「按摩店」',
         async h() {
-          const max_limt = 4 + (era.get(`cflag:${chara.id}:性别`) > 0);
+          const max_limit = 5 + (chara.sex_code !== 1);
           let _flag = true;
           await say_by_waiter_and_wait(
             '这里提供精油按摩服务！要不要来放松一下呢？',
@@ -579,21 +581,26 @@ async function cum_shop(chara, me) {
               (e) => era.get(`talent:${target.id}:${e}`) === 0,
             );
             era.printButton(`切换接受服务的角色，现在是 ${target.name}`, 1);
-            era.printButton(`增强一个部位的性能力（60「恩宠」）`, 2, {
-              disabled: talent_list.length === 0,
-            });
+            era.printButton(
+              `增强一个部位的性能力（60「恩宠」）`,
+              2,
+              talent_list.length === 0
+                ? {
+                    disabled: true,
+                    title: '没有可以提升性能力的部位了',
+                  }
+                : {},
+            );
             if (target.id > 0) {
               era.printButton(
                 `增加 ${chara.name} 可调教为最高级敏感度的部位（${
-                  part_limit === max_limt
+                  part_limit >= max_limit
                     ? 'MAX'
-                    : `25「恩宠」：${part_limit + 1} 个部位 → ${part_limit + 2} 个部位`
+                    : `25「恩宠」：${part_limit} 个部位 → ${part_limit + 1} 个部位`
                 }）`,
                 3,
                 {
-                  disabled:
-                    era.get(`talent:${chara.id}:调教度`) ===
-                    4 + (era.get(`cflag:${chara.id}:性别`) > 0),
+                  disabled: part_limit >= max_limit,
                 },
               );
             }
@@ -710,8 +717,8 @@ async function cum_shop(chara, me) {
                   26,
                   ...new Array(7).fill(0).map((_, i) => 60 + i),
                   ...new Array(4).fill(0).map((_, i) => 70 + i),
-                  ...new Array(6).fill(0).map((_, i) => 76 + i),
-                  82,
+                  ...new Array(7).fill(0).map((_, i) => 76 + i),
+                  85,
                 ].forEach((e) => {
                   if (era.get(`item:${e}`) < 1) {
                     items.push(e);
@@ -728,7 +735,7 @@ async function cum_shop(chara, me) {
                 new Array(11).fill(0).map((_, i) => items.push(i + 10));
                 new Array(3).fill(0).map((_, i) => items.push(i + 27));
                 new Array(11).fill(0).map((_, i) => items.push(i + 31));
-                items.push(25, 43, 101);
+                items.push(25, 43, 84, 101);
               }
               const item = get_random_entry(items);
               era.add(`item:${item}`, 1);

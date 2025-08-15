@@ -13,11 +13,13 @@ const { get_random_value } = require('#/utils/value-utils');
 
 /** @param {Record<string,function(number):Promise>} handlers */
 module.exports = (handlers) => {
-  new Array(13)
-    .fill(0)
-    .forEach(
-      (_, i) => (handlers[i + 70] = () => era.printAndWait('仅能在调教中使用')),
-    );
+  new Array(13).fill(0).forEach(
+    (_, i) =>
+      (handlers[i + 70] = async () => {
+        era.println();
+        await era.printAndWait('仅能在调教中使用');
+      }),
+  );
 
   handlers[83] = async () => {
     if (await select_yes_or_no('要丢弃吗？')) {
@@ -61,7 +63,11 @@ module.exports = (handlers) => {
   };
 
   [31, 34, 35, 36, 39, 40, 41].forEach(
-    (e) => (handlers[e] = () => era.printAndWait('仅能在调教中使用')),
+    (e) =>
+      (handlers[e] = async () => {
+        era.println();
+        await era.printAndWait('仅能在调教中使用');
+      }),
   );
 
   handlers[42] = async () => {
@@ -96,7 +102,11 @@ module.exports = (handlers) => {
   };
 
   [32, 33].forEach(
-    (e) => (handlers[e] = () => era.printAndWait('仅能在调教前使用')),
+    (e) =>
+      (handlers[e] = async () => {
+        era.println();
+        await era.printAndWait('仅能在调教前使用');
+      }),
   );
 
   handlers[38] = async () => {

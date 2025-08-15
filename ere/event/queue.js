@@ -74,7 +74,7 @@ module.exports = {
    */
   add_event(stage, event) {
     if (!event || event.chara_id === undefined || event.type === undefined) {
-      era.logger.error('null EventObject!');
+      era.logger.error('无效的事件对象！');
       return;
     }
     if (!queue) {

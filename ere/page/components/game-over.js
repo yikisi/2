@@ -73,7 +73,10 @@ async function game_over(again) {
       (era.get('flag:当前声望') <= 0 ||
         (era.get('flag:彩蛋机制') === 179 && !again))
     ) {
-      if (era.get('flag:声望不足替换') > 0) {
+      if (
+        era.get('flag:声望不足替换') > 0 &&
+        era.get('cflag:0:模版角色') === -1
+      ) {
         const me = get_chara_talk(0);
         punish_level = era.add('flag:惩戒力度', 1);
         let jpy = era.get('flag:当前马币');
@@ -189,7 +192,7 @@ async function game_over(again) {
             era.set('cflag:0:种族', 1);
             break;
           case 2:
-            era.set('talent:0:调教度', 5);
+            era.set('talent:0:调教度', 6);
             new Array(3).fill(0).forEach((_, i) => {
               era.set(`talent:0:${i + 60}`, 2);
               era.set(`talent:0:${i + 64}`, 2);
@@ -241,23 +244,23 @@ async function game_over(again) {
             );
             era.print(me.actual_name, {
               align: 'center',
-              offset: 14,
-              width: 4,
+              offset: 13,
+              width: 5,
             });
             era.print(`<${me.name} 的唇印>`, {
               align: 'center',
-              offset: 14,
-              width: 4,
+              offset: 13,
+              width: 5,
             });
             era.print(`<${me.name} 的乳头印>`, {
               align: 'center',
-              offset: 14,
-              width: 4,
+              offset: 13,
+              width: 5,
             });
             await era.printAndWait(`<${me.name} 的阴唇印>`, {
               align: 'center',
-              offset: 14,
-              width: 4,
+              offset: 13,
+              width: 5,
             });
             await era.printAndWait(
               `${era.get('flag:当前年')} 年 ${era.get(
@@ -265,8 +268,8 @@ async function game_over(again) {
               )} 月 第 ${era.get('flag:当前周')} 周`,
               {
                 align: 'center',
-                offset: 14,
-                width: 4,
+                offset: 13,
+                width: 5,
               },
             );
             era.println();

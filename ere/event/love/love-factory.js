@@ -40,7 +40,7 @@ cons_dict[343] = require('#/event/love/love-343');
 cons_dict[400] = require('#/event/love/love-400');
 
 console.log(
-  '[love-factory.js] constructor dictionary init done!',
+  '角色爱慕口上注册完毕！',
   (new Date().getTime() - current).toLocaleString(),
   'ms',
 );

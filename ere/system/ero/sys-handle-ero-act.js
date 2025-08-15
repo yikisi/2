@@ -330,7 +330,7 @@ async function sys_handle_ero_act(command, filters, shown = true) {
     ) {
       change_master(0, shown);
     }
-    if (era.get('tflag:主导权')) {
+    if (era.get('tflag:主导权') > 0) {
       await era.waitAnyKey();
       era.println();
       await sys_auto_rape(shown);

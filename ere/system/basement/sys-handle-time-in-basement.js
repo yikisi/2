@@ -162,33 +162,34 @@ async function handle_rape(part_list, my_life_marks, is_rape) {
       basement_queue.find_action(
         (e) => e.chara_id === 0 && e.type === action_type_enum.get_up,
       ).timer - my_life_marks.b_timer;
-    let action_count = 0,
-      current = new Date().getTime(),
-      flag_rape = true,
-      temp;
+    let a_count = 0;
+    let current = new Date().getTime();
+    let r_flag = true;
+    let temp;
     wake_up = false;
-    while (flag_rape) {
+    while (r_flag) {
       await sys_handle_ero_act(ero_hooks.relax, default_my_filter, false);
-      action_count++;
+      a_count++;
       if (
-        (check_satisfied(part_list[1]) &&
-          (!part_list[2] || check_satisfied(part_list[2]))) ||
+        (check_satisfied(part_list[1]) > 0 &&
+          (!part_list[2] || check_satisfied(part_list[2]) > 0)) ||
         (wake_up =
           era.get('base:0:精力') > 0 &&
           !era.get('status:0:马跳S') &&
           (3 * era.get('tflag:回合') >= get_up_time ||
             ((temp = era.get('ex:0:TotalEX')) > 0 &&
-              Math.random() < Math.min(temp, 5) * 0.05)))
+              Math.random() < Math.min(temp, 5) * 0.05))) ||
+        a_count > 36
       ) {
-        flag_rape = false;
+        r_flag = false;
       }
     }
     current = new Date().getTime() - current;
     era.logger.debug(
       `角色 ${part_list[1]}${
         part_list[2] ? ' & ' + part_list[2] : ''
-      } 睡奸完毕！${action_count} actions, ${current}ms, ${(
-        current / action_count
+      } 睡奸完毕！${a_count} actions, ${current}ms, ${(
+        current / a_count
       ).toFixed(2)} ms/action`,
     );
     if (wake_up) {
@@ -201,7 +202,7 @@ async function handle_rape(part_list, my_life_marks, is_rape) {
         get_chara_talk(0).get_colored_name(),
         ' 从睡梦中惊醒，发现 ',
         get_chara_talk(part_list[1]).get_colored_name(),
-        ...(part_list[2]
+        ...(part_list[2] > 0
           ? [' 与 ', get_chara_talk(part_list[2]).get_colored_name()]
           : []),
         ' 伏在身上！',

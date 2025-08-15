@@ -5,7 +5,7 @@ const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const {
   japa_cup_common,
   takz_kin_common,
-} = require('#/event/edu/edu-events-67/snippets');
+} = require('#/event/edu/edu-events-67-1/snippets');
 const { add_event } = require('#/event/queue');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 const print_event_name = require('#/event/snippets/print-event-name');

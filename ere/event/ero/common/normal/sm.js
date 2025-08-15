@@ -1,7 +1,7 @@
 /**
  * @file 调教地文 - 性虐系
  * @author 黑衣剑士-星爆气流斩准备就绪
- * @author 无名黑奴
+ * @author 黑奴队长
  */
 const era = require('#/era-electron');
 
@@ -24,7 +24,7 @@ const { part_enum } = require('#/data/ero/part-const');
 
 class EroNormalSm extends EroSm {
   /**
-   * @author 无名黑奴
+   * @author 黑奴队长
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -50,7 +50,7 @@ class EroNormalSm extends EroSm {
   }
 
   /**
-   * @author 无名黑奴
+   * @author 黑奴队长
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -70,7 +70,7 @@ class EroNormalSm extends EroSm {
   }
 
   /**
-   * @author 无名黑奴
+   * @author 黑奴队长
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -88,7 +88,7 @@ class EroNormalSm extends EroSm {
   }
 
   /**
-   * @author 无名黑奴
+   * @author 黑奴队长
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -171,7 +171,7 @@ class EroNormalSm extends EroSm {
   }
 
   /**
-   * @author 无名黑奴
+   * @author 黑奴队长
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -189,7 +189,7 @@ class EroNormalSm extends EroSm {
   }
 
   /**
-   * @author 无名黑奴
+   * @author 黑奴队长
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook

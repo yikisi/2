@@ -10,13 +10,14 @@ const { init_chara } = require('#/system/sys-init-chara');
 const sys_load_game = require('#/system/sys-load-game');
 
 const print_page_header = require('#/page/components/page-header');
+const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
 const { clean_actions } = require('#/event/basement-queue');
 const { get_custom_check } = require('#/event/check/check-factory');
 const { get_custom_daily } = require('#/event/daily/daily-factory');
 const { add_event, cb_enum, get: get_queue } = require('#/event/queue');
+const check_aim_race = require('#/event/snippets/check-aim-race');
 
-const select_yes_or_no = require('#/page/components/select-yes-or-no');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
@@ -28,14 +29,18 @@ const { trainer_salary } = require('#/data/const.json');
 const CharaInmon = require('#/data/ero/chara-inmon');
 const basement_owners = require('#/data/event/basement-owners');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
+const LoveEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-132');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks-32');
+const BryneLifeMarks = require('#/data/event/life-event-marks/life-event-marks-349');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_trainer_title } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const { first_child_id, max_chara_id } = require('#/data/other-const');
+const RaceHistory = require('#/data/race/model/race-history');
+const { race_enum } = require('#/data/race/race-const');
 const { attr_names } = require('#/data/train-const');
 
 function check_titles(...ids) {
@@ -45,10 +50,10 @@ function check_titles(...ids) {
         era.get(`cflag:${id}:招募状态`) === recruit_flags.yes &&
         era.get(`cflag:${id}:育成回合计时`) >= 3 * 48,
     )
-    .forEach((id) => {
-      const check = get_custom_check(id);
+    .forEach((cid) => {
+      const check = get_custom_check(cid);
       sys_add_titles(
-        id,
+        cid,
         ...check.check_and_get_titles(
           check.get_edu_aims().reduce((p, c) => p && c.check === 1, true),
         ),
@@ -112,13 +117,14 @@ module.exports = async () => {
       default:
         if (ret < 100) {
           if (era.get('flag:读档对话')) {
-            await get_custom_daily(
-              get_random_entry(
-                filter_chara('cflag', '招募状态', recruit_flags.yes).filter(
-                  (e) => e,
-                ),
+            const cid = get_random_entry(
+              filter_chara('cflag', '招募状态', recruit_flags.yes).filter(
+                (e) => e,
               ),
-            ).load_talk();
+            );
+            if (cid > 0) {
+              await get_custom_daily(cid).load_talk();
+            }
           }
           CharaInmon.clean();
           if (await era.loadData(ret)) {
@@ -464,6 +470,66 @@ module.exports = async () => {
               if (era.get('flag:比赛难度') < 0) {
                 era.set('flag:比赛难度', -40);
               }
+            }
+            if (version <= 2004) {
+              if (
+                !era.get('cflag:349:可再次育成') &&
+                !era.get('cflag:349:殿堂') &&
+                !(era.get('cflag:349:育成回合计时') < 3 * 48)
+              ) {
+                era.set('cflag:349:可再次育成', 1);
+              }
+            }
+            if (version <= 2005) {
+              const marks = new BryneLifeMarks();
+              if (marks.funds < 0) {
+                era.add('flag:当前马币', marks.funds);
+                const invest = sys_get_billings().find(
+                  (e) => e.creditor === -2,
+                );
+                invest.repay = 0;
+              }
+            }
+            if (version <= 2011) {
+              // 唯独爱你称号bug
+              if (
+                era.get('cflag:132:招募状态') === recruit_flags.yes &&
+                era.get('love:132') >= 50 &&
+                check_aim_race(
+                  RaceHistory.get(132).get(),
+                  race_enum.yush_him,
+                  1,
+                  1,
+                ) &&
+                (check_aim_race(
+                  RaceHistory.get(132).get(),
+                  race_enum.eliz_cup,
+                  1,
+                  1,
+                ) ||
+                  check_aim_race(
+                    RaceHistory.get(132).get(),
+                    race_enum.eliz_cup,
+                    2,
+                    1,
+                  ))
+              ) {
+                new LoveEduMarks().title_check = 0b11;
+                const check = get_custom_check(132);
+                sys_add_titles(
+                  132,
+                  ...check.check_and_get_titles(
+                    check
+                      .get_edu_aims()
+                      .reduce((p, c) => p && c.check === 1, true),
+                  ),
+                );
+              }
+            }
+            if (version <= 2100) {
+              era
+                .getAddedCharacters()
+                .forEach((cid) => era.add(`talent:${cid}:调教度`, 1));
             }
             return true;
           } else {

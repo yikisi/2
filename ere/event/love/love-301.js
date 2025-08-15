@@ -1,6 +1,6 @@
 /**
  * @file 骏川缰绳 - 爱慕
- * @author 无名黑奴（临时）
+ * @author 黑奴队长（临时）
  */
 const era = require('#/era-electron');
 

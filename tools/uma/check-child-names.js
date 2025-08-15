@@ -26,7 +26,7 @@ for (const m in name_data) {
   }
   list.forEach((e) => {
     if (children[e]) {
-      console.log(`\t${e}: ${children[e]} <-> ${m} (duplicate)`)
+      console.log(`\t${e}: ${children[e]} <-> ${m} (duplicate)`);
       flag = false;
     } else {
       children[e] = m;
@@ -44,7 +44,7 @@ for (const m in name_data) {
   }
 }
 if (flag) {
-  console.log('\tnothing');
+  console.log('\tnone');
 } else {
   process.exit(1);
 }

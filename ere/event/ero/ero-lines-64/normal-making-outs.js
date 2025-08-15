@@ -20,11 +20,15 @@ module.exports = class extends EroNormalMakingOuts {
           defender.sex,
           '的身体揽入怀中，感受着',
           defender.sex,
-          '的硕乳在我小臂上的重量。',
+          '的硕乳在 ',
+          attacker.get_colored_name(),
+          ' 小臂上的重量。',
         ]);
         await attacker.print_and_wait([
           defender.get_teen_sex_title(),
-          '在我怀里轻轻喘着气，缓缓扭动摩擦着包覆在',
+          '在 ',
+          attacker.get_colored_name(),
+          ' 怀里轻轻喘着气，缓缓扭动摩擦着包覆在',
           defender.sex,
           '乳下的手臂。',
         ]);
@@ -34,13 +38,17 @@ module.exports = class extends EroNormalMakingOuts {
         ]);
         await attacker.print_and_wait([
           sys_get_colored_callname(attacker.id, defender.id),
-          ' 的身体在我的怀抱中微微颤抖，',
+          ' 的身体在 ',
+          attacker.get_colored_name(),
+          ' 的怀抱中微微颤抖，',
           defender.sex,
           '的肌肤因兴奋而泛起一层薄汗。',
         ]);
       }
       await attacker.print_and_wait([
-        '当我的手掌覆上 ',
+        '当 ',
+        attacker.get_colored_name(),
+        ' 的手掌覆上 ',
         sys_get_colored_callname(attacker.id, defender.id),
         ' 的乳房时，',
         defender.sex,
@@ -59,7 +67,9 @@ module.exports = class extends EroNormalMakingOuts {
         sys_get_colored_callname(attacker.id, defender.id),
         ' 轻声呻吟着，',
         defender.sex,
-        '的身体不自觉地向后贴紧着我。',
+        '的身体不自觉地向后贴紧着 ',
+        attacker.get_colored_name(),
+        '。',
       ]);
       await attacker.print_and_wait([
         '手掌继续在',
@@ -108,7 +118,9 @@ module.exports = class extends EroNormalMakingOuts {
         life_marks.prepare_anal = 1;
         await attacker.print_and_wait([
           sys_get_colored_callname(attacker.id, defender.id),
-          ' 跪趴在床上，臀部高高翘起，等待我的手掌轻轻抚上',
+          ' 跪趴在床上，臀部高高翘起，等待 ',
+          attacker.get_colored_name(),
+          ' 的手掌轻轻抚上',
           defender.sex,
           '的臀瓣，引起一阵颤栗。',
         ]);
@@ -121,14 +133,17 @@ module.exports = class extends EroNormalMakingOuts {
           '缓缓扭动着。',
         ]);
         await attacker.print_and_wait([
-          '当我的指尖轻轻按压那个敏感的入口时，它猛地收缩，随之而来的是 ',
+          '当 ',
+          attacker.get_colored_name(),
+          ' 的指尖轻轻按压那个敏感的入口时，它猛地收缩，随之而来的是 ',
           sys_get_colored_callname(attacker.id, defender.id),
           ' 的惊呼。',
         ]);
         await defender.say_and_wait(['呜！……']);
       }
       await attacker.print_and_wait([
-        '我俯下身，轻轻吻了吻 ',
+        attacker.get_colored_name(),
+        ' 俯下身，轻轻吻了吻 ',
         sys_get_colored_callname(attacker.id, defender.id),
         ' 的后颈，试图安抚',
         defender.sex,
@@ -143,7 +158,8 @@ module.exports = class extends EroNormalMakingOuts {
       ]);
       await defender.say_and_wait(['不……不要……羞死了……']);
       await attacker.print_and_wait([
-        '我缓缓将一根手指推入，',
+        attacker.get_colored_name(),
+        ' 缓缓将一根手指推入，',
         sys_get_colored_callname(attacker.id, defender.id),
         ' 的身体猛地一颤，后穴本能地收缩，紧紧咬住入侵的手指。',
       ]);
@@ -155,7 +171,8 @@ module.exports = class extends EroNormalMakingOuts {
       ]);
     } else {
       await attacker.print_and_wait([
-        '我耐心地扩张着 ',
+        attacker.get_colored_name(),
+        ' 耐心地扩张着 ',
         sys_get_colored_callname(attacker.id, defender.id),
         ' 的菊穴，每一步都小心翼翼，而',
         defender.sex,
@@ -164,11 +181,15 @@ module.exports = class extends EroNormalMakingOuts {
       await defender.say_and_wait(['嗯……']);
       await attacker.print_and_wait([
         sys_get_colored_callname(attacker.id, defender.id),
-        ' 不再遮掩喉咙里漏出的声音，随着我手指的动作慢慢摆动臀部。',
+        ' 不再遮掩喉咙里漏出的声音，随着 ',
+        attacker.get_colored_name(),
+        ' 手指的动作慢慢摆动臀部。',
       ]);
       await attacker.print_and_wait([
         defender.sex,
-        '的后穴随着我手指的摩挲一点点绽开，似乎在期待着更大的侵入……',
+        '的后穴随着 ',
+        attacker.get_colored_name(),
+        ' 手指的摩挲一点点绽开，似乎在期待着更大的侵入……',
       ]);
     }
   }
@@ -184,7 +205,9 @@ module.exports = class extends EroNormalMakingOuts {
       await attacker.print_and_wait([
         '这样说着的 ',
         sys_get_colored_callname(attacker.id, defender.id),
-        ' 却只是捂住双眼，任由我在',
+        ' 却只是捂住双眼，任由 ',
+        attacker.get_colored_name(),
+        ' 在',
         defender.sex,
         '的双腿间端详摸索。',
       ]);
@@ -195,7 +218,9 @@ module.exports = class extends EroNormalMakingOuts {
         '略显深色的阴唇间是已经绽开的、因兴奋而肿胀的肉色花瓣，似乎已经迈出了成熟的第一步呢。',
       ]);
       await attacker.print_and_wait([
-        '是感受到我的气息了吗，花蕊微微抽动着，散发着淡淡的雌性气味。',
+        '是感受到 ',
+        attacker.get_colored_name(),
+        ' 的气息了吗，花蕊微微抽动着，散发着淡淡的雌性气味。',
       ]);
       await attacker.print_and_wait([
         sys_get_colored_callname(attacker.id, defender.id),
@@ -205,16 +230,22 @@ module.exports = class extends EroNormalMakingOuts {
     await attacker.print_and_wait([
       '将',
       defender.get_teen_sex_title(),
-      '的花瓣张开，我用舌面扫过胀红的阴蒂，然后在肉球上用舌尖打着转。',
+      '的花瓣张开，',
+      attacker.get_colored_name(),
+      ' 用舌面扫过胀红的阴蒂，然后在肉球上用舌尖打着转。',
     ]);
     await defender.say_and_wait(['不要……啊……嗯……']);
     await attacker.print_and_wait([
       sys_get_colored_callname(attacker.id, defender.id),
-      ' 按住我的头想要推开，但双腿已经被紧紧锁住，只能捂住面庞呜咽着。',
+      ' 按住 ',
+      attacker.get_colored_name(),
+      ' 的头想要推开，但双腿已经被紧紧锁住，只能捂住面庞呜咽着。',
     ]);
     await attacker.print_and_wait([
       defender.sex,
-      '的腰部上下抽动，不知是想要挣脱还是下意识迎合着我嘴里的动作。',
+      '的腰部上下抽动，不知是想要挣脱还是下意识迎合着 ',
+      attacker.get_colored_name(),
+      ' 嘴里的动作。',
     ]);
   }
 
@@ -230,7 +261,9 @@ module.exports = class extends EroNormalMakingOuts {
         await attacker.print_and_wait([
           '第一次答应口交的 ',
           sys_get_colored_callname(attacker.id, defender.id),
-          ' 跪在我的腿间，用鼻尖轻触着顶端，尝试用气味缓解不适感。',
+          ' 跪在 ',
+          attacker.get_colored_name(),
+          ' 的腿间，用鼻尖轻触着顶端，尝试用气味缓解不适感。',
         ]);
         await attacker.print_and_wait([
           defender.get_teen_sex_title(),
@@ -245,7 +278,8 @@ module.exports = class extends EroNormalMakingOuts {
           '温润的触感从龟头覆到前端，偶尔令牙齿擦过外皮却更添兴奋，快感如电流般扩散全身……',
         ]);
         await attacker.print_and_wait([
-          '我握住 ',
+          attacker.get_colored_name(),
+          ' 握住 ',
           sys_get_colored_callname(attacker.id, defender.id),
           ' 的一只手给予鼓励，另一只手拨开刘海，欣赏着',
           defender.sex,
@@ -254,11 +288,15 @@ module.exports = class extends EroNormalMakingOuts {
         await attacker.print_and_wait([
           '尽管害羞无比，',
           defender.sex,
-          '还是尝试着与我对视，眼中是无法掩饰的欲望与诉求……',
+          '还是尝试着与 ',
+          attacker.get_colored_name(),
+          ' 对视，眼中是无法掩饰的欲望与诉求……',
         ]);
       }
       await attacker.print_and_wait([
-        '依从我的请求，',
+        '依从 ',
+        attacker.get_colored_name(),
+        ' 的请求，',
         sys_get_colored_callname(attacker.id, defender.id),
         ' 用唇舌和龟头相吻，然后将前端迎入口中吮吸着。',
       ]);
@@ -269,7 +307,9 @@ module.exports = class extends EroNormalMakingOuts {
       ]);
       await attacker.print_and_wait(['「呲啾，呲啾。」']);
       await attacker.print_and_wait([
-        '一双碧蓝的眼瞳透过前发观察着我的反应，',
+        '一双碧蓝的眼瞳透过前发观察着 ',
+        attacker.get_colored_name(),
+        ' 的反应，',
         sys_get_colored_callname(attacker.id, defender.id),
         ' 慢慢改变着嘴上的节奏。',
       ]);
@@ -303,12 +343,17 @@ module.exports = class extends EroNormalMakingOuts {
       await defender.say_and_wait(['可以哦，从上面……接下来就交给我吧。']);
       await attacker.print_and_wait([
         sys_get_colored_callname(attacker.id, defender.id),
-        ' 跪坐着仰起头，摊出舌头迎接我的伸入，涎水充盈的口穴清晰可见。',
+        ' 跪坐着仰起头，摊出舌头迎接 ',
+        attacker.get_colored_name(),
+        ' 的伸入，涎水充盈的口穴清晰可见。',
       ]);
       await attacker.print_and_wait([
-        '我弯下腰缓慢探进，直至将 ',
+        attacker.get_colored_name(),
+        ' 弯下腰缓慢探进，直至将 ',
         sys_get_colored_callname(attacker.id, defender.id),
-        ' 的鼻尖埋入丛林，食道的紧致感令我下体酥麻。',
+        ' 的鼻尖埋入丛林，食道的紧致感令 ',
+        attacker.get_colored_name(),
+        ' 下体酥麻。',
       ]);
       await attacker.print_and_wait([
         '是因为刺激到干呕了吗，每一次抽插都能感受到咽管的收缩，却更添一层兴奋。',
@@ -316,12 +361,18 @@ module.exports = class extends EroNormalMakingOuts {
       await attacker.print_and_wait([
         '虽然眼角已现出泪滴，',
         sys_get_colored_callname(attacker.id, defender.id),
-        ' 还是扶住我的腰，顺从地配合着我的动作。',
+        ' 还是扶住 ',
+        attacker.get_colored_name(),
+        ' 的腰，顺从地配合着 ',
+        attacker.get_colored_name(),
+        ' 的动作。',
       ]);
     } else {
       await attacker.print_and_wait([
         sys_get_colored_callname(attacker.id, defender.id),
-        ' 用我的腰部作支撑，将被口穴和食道完全包裹的肉棒上下榨取着。',
+        ' 用 ',
+        attacker.get_colored_name(),
+        ' 的腰部作支撑，将被口穴和食道完全包裹的肉棒上下榨取着。',
       ]);
       await attacker.print_and_wait([
         '溢出的汁液在下唇和蛋蛋间拉着银丝，把 ',
@@ -353,7 +404,8 @@ module.exports = class extends EroNormalMakingOuts {
         '……这个姿势好羞人……',
       ]);
       await attacker.print_and_wait([
-        '我跨坐在平躺的 ',
+        attacker.get_colored_name(),
+        ' 跨坐在平躺的 ',
         sys_get_colored_callname(attacker.id, defender.id),
         ' 头顶，将胀硬的阴茎悬在',
         defender.sex,
@@ -370,14 +422,18 @@ module.exports = class extends EroNormalMakingOuts {
       await attacker.print_and_wait([
         '虽然有些措手不及，',
         sys_get_colored_callname(attacker.id, defender.id),
-        ' 还是将我的龟头含入口中，舌头笨拙地舔舐着柱身。',
+        ' 还是将 ',
+        attacker.get_colored_name(),
+        ' 的龟头含入口中，舌头笨拙地舔舐着柱身。',
       ]);
       await attacker.print_and_wait([
         sys_get_colored_callname(attacker.id, defender.id),
         ' 的呻吟被堵在喉咙里，变成了含糊不清的哼声。',
       ]);
       await attacker.print_and_wait([
-        '而我将舌面在',
+        '而 ',
+        attacker.get_colored_name(),
+        ' 将舌面在',
         defender.sex,
         '的阴唇上来回扫动，然后将舌尖伸入品尝着',
         defender.get_teen_sex_title(),
@@ -388,7 +444,9 @@ module.exports = class extends EroNormalMakingOuts {
         sys_get_colored_callname(attacker.id, defender.id),
         ' 的身体颤抖不已，直至几乎窒息的',
         defender.sex,
-        '将我推开——',
+        '将 ',
+        attacker.get_colored_name(),
+        ' 推开——',
       ]);
       await defender.say_and_wait([
         '哈啊……哈啊……抱歉，',
@@ -398,7 +456,9 @@ module.exports = class extends EroNormalMakingOuts {
     }
     await attacker.print_and_wait([
       sys_get_colored_callname(attacker.id, defender.id),
-      ' 努力集中精神，将悬在面前的阴茎含入口中，配合着我在',
+      ' 努力集中精神，将悬在面前的阴茎含入口中，配合着 ',
+      attacker.get_colored_name(),
+      ' 在',
       defender.sex,
       '下身舔舐的节奏。',
     ]);
@@ -408,12 +468,15 @@ module.exports = class extends EroNormalMakingOuts {
     ]);
     await defender.say_and_wait(['唔……唔……']);
     await attacker.print_and_wait([
-      '被刺激到的我，将舌头游走在',
+      '被刺激到的 ',
+      attacker.get_colored_name(),
+      '，将舌头游走在',
       defender.sex,
       '的阴唇间，时而浅尝辄止，时而深入花径。',
     ]);
     await attacker.print_and_wait([
-      '我们寻找着彼此的节奏，伴着低吟和淫靡的水声，沉溺在快感的酝酿与奉献之中。',
+      attacker.get_colored_name(),
+      ' 们寻找着彼此的节奏，伴着低吟和淫靡的水声，沉溺在快感的酝酿与奉献之中。',
     ]);
   }
 
@@ -432,7 +495,9 @@ module.exports = class extends EroNormalMakingOuts {
         ]);
         await attacker.print_and_wait([
           sys_get_colored_callname(attacker.id, defender.id),
-          ' 将那双裸足伸给我，',
+          ' 将那双裸足伸给 ',
+          attacker.get_colored_name(),
+          '，',
           defender.sex,
           '的脚掌白皙如玉，每一寸肌肤都散发着诱人的光泽。',
         ]);
@@ -447,30 +512,40 @@ module.exports = class extends EroNormalMakingOuts {
         await attacker.print_and_wait([
           '抓住 ',
           sys_get_colored_callname(attacker.id, defender.id),
-          ' 的脚踝，我将鼻尖埋在',
+          ' 的脚踝，',
+          attacker.get_colored_name(),
+          ' 将鼻尖埋在',
           defender.sex,
           '的脚趾间吮吸着，浴液的芬香充满鼻腔。',
         ]);
         await defender.say_and_wait(['再……再闻也闻不出味道的啦，已经……好痒！']);
       }
       await attacker.print_and_wait([
-        '我将鼻子按在 ',
+        attacker.get_colored_name(),
+        ' 将鼻子按在 ',
         sys_get_colored_callname(attacker.id, defender.id),
         ' 精致的脚掌上确认气味，下体便如拨开开关般充血胀硬。',
       ]);
       await attacker.print_and_wait([
         sys_get_colored_callname(attacker.id, defender.id),
-        ' 深吸一口气，缓缓将双脚靠近我挺立的阴茎，直至脚掌触碰到它敏感的外皮。',
+        ' 深吸一口气，缓缓将双脚靠近 ',
+        attacker.get_colored_name(),
+        ' 挺立的阴茎，直至脚掌触碰到它敏感的外皮。',
       ]);
       await defender.say_and_wait(['好烫……要……开始动了。']);
       await attacker.print_and_wait([
         defender.sex,
-        '圆润的脚趾时而轻抚龟头，时而揉搓柱身，脚跟贴在我的囊袋上缓缓按压。',
+        '圆润的脚趾时而轻抚龟头，时而揉搓柱身，脚跟贴在 ',
+        attacker.get_colored_name(),
+        ' 的囊袋上缓缓按压。',
       ]);
       await attacker.print_and_wait([
-        '我扶住',
+        attacker.get_colored_name(),
+        ' 扶住',
         defender.sex,
-        '的脚踝引导着，虽然只是笨拙的摩擦，却如同魔力般让我兴奋不已。',
+        '的脚踝引导着，虽然只是笨拙的摩擦，却如同魔力般让 ',
+        attacker.get_colored_name(),
+        ' 兴奋不已。',
       ]);
     } else {
       await defender.say_and_wait(['哈啊……哈啊……']);
@@ -481,7 +556,9 @@ module.exports = class extends EroNormalMakingOuts {
       ]);
       await attacker.print_and_wait([
         defender.sex,
-        '那对脚掌形成的足穴将我的肉棒裹住上下撸动，先走液在',
+        '那对脚掌形成的足穴将 ',
+        attacker.get_colored_name(),
+        ' 的肉棒裹住上下撸动，先走液在',
         defender.sex,
         '的脚趾间垂流。',
       ]);

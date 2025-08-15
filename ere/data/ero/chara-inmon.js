@@ -43,7 +43,6 @@ class CharaInmon {
   }
 
   get size() {
-    console.log(this.#obj);
     return Object.entries(this.#obj)
       .filter((e) => e[1] > 0)
       .reduce((p, c) => p + inmon_plugin_dict[c[0]].size, 0);

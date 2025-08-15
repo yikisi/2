@@ -50,7 +50,7 @@ base_scripts.forEach(
 
 output += `
 console.log(
-  '[edu-factory.js] constructor dictionary init done!',
+  '角色育成口上注册完毕！',
   (new Date().getTime() - current).toLocaleString(),
   'ms',
 );

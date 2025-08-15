@@ -520,7 +520,12 @@ module.exports = {
         break;
       case ability_usage_enum.MultiplyLove:
         skill.values[i][j] = skill.data.ability_values[i][j];
-        if (get(`cflag:${cid}:招募状态`) === recruit_flags.yes && cid > 0) {
+        if (!cid) {
+          skill.values[i][j] *= 2;
+        } else if (
+          get(`cflag:${cid}:招募状态`) === recruit_flags.yes &&
+          cid > 0
+        ) {
           temp = get(`love:${cid}`);
           if (temp >= 90) {
             skill.values[i][j] *= 4;
@@ -551,7 +556,8 @@ module.exports = {
         }
         break;
       case ability_usage_enum.MultiplyCount:
-        skill.values[i][j] *= 0.98 + 0.01 * count;
+        skill.values[i][j] =
+          skill.data.ability_values[i][j] * (0.98 + 0.01 * count);
         break;
       default:
         skill.values[i][j] = skill.data.ability_values[i][j];

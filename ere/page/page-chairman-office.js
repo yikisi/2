@@ -134,15 +134,14 @@ async function page_chairman_office() {
                   '注 意！即使这样指名了，也还请好好和对方从头相处吧！',
                 );
                 const temp_list = era
-                  .get('chara')
+                  .getAllCharacters()
                   .filter(
-                    (chara_id) =>
-                      chara_id > 0 &&
-                      (era.get(`cflag:${chara_id}:随机招募`) ||
-                        era.get(`staticcflag:${chara_id}:随机招募`)) === 1 &&
-                      era.get(`cflag:${chara_id}:招募状态`) !==
-                        recruit_flags.yes &&
-                      era.get('cflag:0:模版角色') !== chara_id,
+                    (cid) =>
+                      cid > 0 &&
+                      (era.get(`cflag:${cid}:随机招募`) ||
+                        era.get(`staticcflag:${cid}:随机招募`)) === 1 &&
+                      era.get(`cflag:${cid}:招募状态`) !== recruit_flags.yes &&
+                      era.get('cflag:0:模版角色') !== cid,
                   );
                 if (
                   era.get('cflag:302:招募状态') !== recruit_flags.yes &&
@@ -167,13 +166,16 @@ async function page_chairman_office() {
                   case 1:
                     temp = [];
                     temp_list
-                      .map((chara_id) => {
-                        const color = get_chara_color(chara_id);
+                      .map((cid) => {
+                        const color = get_chara_color(cid);
                         const flag_script =
-                          check_rec_script(chara_id) &&
-                          check_edu_script(chara_id);
+                          check_rec_script(cid) && check_edu_script(cid);
+                        let name = era.get(`callname:${cid}:-1`);
+                        if (name === '-') {
+                          name = era.get(`static:${cid}:name`);
+                        }
                         return {
-                          accelerator: chara_id,
+                          accelerator: cid,
                           config: {
                             align: 'center',
                             buttonType: '',
@@ -181,8 +183,8 @@ async function page_chairman_office() {
                             width: 4,
                           },
                           content:
-                            era.get(`static:${chara_id}:name`) +
-                            (star_premium_draw.chara === chara_id
+                            name +
+                            (star_premium_draw.chara === cid
                               ? ' [已指名]'
                               : ''),
                           priority: flag_script,
@@ -216,7 +218,9 @@ async function page_chairman_office() {
                     era.print('请输入想指名的角色名');
                     temp = await era.input();
                     temp = temp_list.filter(
-                      (e) => era.get(`static:${e}:name`) === temp,
+                      (e) =>
+                        era.get(`callname:${e}:-1`) === temp ||
+                        era.get(`static:${e}:name`) === temp,
                     )[0];
                     break;
                   case 3:
@@ -240,7 +244,7 @@ async function page_chairman_office() {
                   }
                   await era.printAndWait([
                     '恭 喜！',
-                    chara.get_colored_name(),
+                    chara.get_colored_actual_name(),
                     ' 加入了队伍！',
                   ]);
                 } else if (temp !== -255) {

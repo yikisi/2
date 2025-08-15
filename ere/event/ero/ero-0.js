@@ -2,7 +2,7 @@
  * @file 玩家 - 调教
  * @author 幽白書
  * @author 雞雞
- * @author 无名黑奴
+ * @author 黑奴队长
  */
 const era = require('#/era-electron');
 
@@ -69,7 +69,7 @@ module.exports = class extends CustomizedEro {
 
   /**
    * 只有醒着的主控才能寸止，所以这里必然是需要输出的
-   * @author 无名黑奴
+   * @author 黑奴队长
    */
   async orgasm_denial(stop_success) {
     const me = get_chara_talk(0),

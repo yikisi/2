@@ -47,8 +47,8 @@ const {
 const { attr_enum } = require('#/data/train-const');
 
 const beginning_report_handlers = [
-  () => ['赛马娘请入闸……', '全部马娘准备妥当……', '准备……', '一开闸！'],
-  () => ['赛马娘准备好……', '随时预备起步……', '预备……', '一起步！'],
+  () => ['赛马娘请入闸……', '全部马娘准备妥当……', '准备……', '——开闸！'],
+  () => ['赛马娘准备好……', '随时预备起步……', '预备……', '——起步！'],
   (info) => [
     '比赛马上开始……',
     `参赛马娘 ${info.gates} 名……`,
@@ -239,9 +239,9 @@ function sys_sim_race(list_chara, info, race_id, shown = true) {
     ),
   ]);
 
-  const lane = info.lanes[0],
-    slope = info.slopes[0]?.start === 0 ? info.slopes[0].slope : 0,
-    loc_mind_end = (info.span * 10) / 24;
+  const lane = info.lanes[0];
+  const slope = info.slopes[0]?.start === 0 ? info.slopes[0].slope : 0;
+  const loc_mind_end = (info.span * 10) / 24;
   sub_simulate_skill.init(lane, slope);
 
   // 出闸
@@ -423,7 +423,7 @@ function sys_sim_race(list_chara, info, race_id, shown = true) {
               l[j].race.velocityIdeal < uma.race.velocityIdeal &&
               l[j].race.velocityReal < uma.race.velocityReal &&
               (l[j].race.location - uma.race.location) /
-                (l[j].race.velocityReal < uma.race.velocityReal) <
+                (uma.race.velocityReal - l[j].race.velocityReal) <
                 15
             ) {
               uma.race.overtakeAim = l[j];
@@ -840,10 +840,10 @@ function sys_sim_race(list_chara, info, race_id, shown = true) {
         return e;
       })),
   );
-  const uma_shown_count = list_chara.filter((e) => e.index_chara >= 0).length,
-    team_count = list_chara.filter(
-      (e) => e.index_chara >= 0 && !e.legend,
-    ).length;
+  const uma_shown_count = list_chara.filter((e) => e.index_chara >= 0).length;
+  const team_count = list_chara.filter(
+    (e) => e.index_chara >= 0 && !e.legend,
+  ).length;
   dynamic_table = dynamic_table.map((l) => {
     if (l.length - 1 <= screen_size) {
       return l;

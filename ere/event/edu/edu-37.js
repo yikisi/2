@@ -256,7 +256,8 @@ module.exports = class extends CustomizedEdu {
   }
 
   async race_end(flash, me, callname, hook, extra_flag) {
-    return await flash_race_end(
+    return await flash_race_end.call(
+      this,
       flash,
       me,
       callname,
@@ -267,7 +268,8 @@ module.exports = class extends CustomizedEdu {
   }
 
   async race_start(flash, me, callname, hook, extra_flag) {
-    return await flash_race_start(
+    return await flash_race_start.call(
+      this,
       flash,
       me,
       callname,
@@ -484,7 +486,7 @@ module.exports = class extends CustomizedEdu {
         return await super.train_success(flash, me, callname, hook, extra_flag);
       }
     } else if (
-      era.get(`status:37:发胖`) &&
+      era.get(`status:37:发胖`) > 0 &&
       Math.random() < 0.1 * extra_flag.stamina_ratio
     ) {
       await flash.say_and_wait('……诶？');

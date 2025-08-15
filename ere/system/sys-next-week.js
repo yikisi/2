@@ -54,6 +54,7 @@ const basement_owners = require('#/data/event/basement-owners');
 const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 const grand_lives = require('#/data/event/grand-lives');
+const BryneLifeMarks = require('#/data/event/life-event-marks/life-event-marks-349');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
 const {
@@ -167,7 +168,7 @@ async function sys_next_week() {
       final_act_list.push(act);
       tmp = final_act_list.length - 1;
     }
-    if (final_act_list.length > 0 && era.get('item:马跳S家庭装')) {
+    if (final_act_list.length > 0 && era.get('item:马跳S家庭装') > 0) {
       era.set('status:0:马跳S', 1);
     }
     for (const act of final_act_list) {
@@ -177,7 +178,7 @@ async function sys_next_week() {
         await sys_rape_in_sleeping(act.chara_id, act.supporter);
       }
       if (
-        era.get('flag:床伴') ||
+        era.get('flag:床伴') > 0 ||
         era.get('flag:当前位置') === location_enum.basement
       ) {
         break;
@@ -226,6 +227,10 @@ async function sys_next_week() {
         e.repay = base_salary / 4;
       }
       if (e.timer !== 0) {
+        if (e.creditor === -2) {
+          const marks = new BryneLifeMarks();
+          e.repay = marks.funds / (500 - 300 * marks.buff);
+        }
         const money = sys_change_money(e.repay, -1);
         if (i > 0 && e.creditor === 0 && money > 0) {
           // 人类训练员有工资拿；马娘训练员？自己跑比赛去！
@@ -356,9 +361,18 @@ async function sys_next_week() {
       await get_custom_daily(cid).growth(2);
     }
 
+    const c_sex = era.get(`cflag:${cid}:性别`);
     const is_p_slave = CharaInmon.get(cid).slave === slavery_enum.pregnant;
     const life_marks = LifeEventMarks.get_marks(cid);
     let pregnant_stage = era.get(`cflag:${cid}:妊娠阶段`);
+    if (c_sex === 1) {
+      pregnant_stage = era.set(
+        `cflag:${cid}:妊娠阶段`,
+        1 << pregnant_stage_enum.no,
+      );
+      era.set(`cflag:${cid}:妊娠回合计时`, 0);
+      era.set(`status:${cid}:排卵期`, 0);
+    }
     if (pregnant_stage >> pregnant_stage_enum.embryo > 0) {
       sys_change_lust(cid, lust_border.itch / 40);
       const timer = era.add(`cflag:${cid}:妊娠回合计时`, 1 + is_p_slave);
@@ -495,11 +509,13 @@ async function sys_next_week() {
       }
     }
 
-    if (growth_stage >= 2) {
+    if (growth_stage >= 2 && c_sex !== 1) {
       era.set(
         `talent:${cid}:乳房尺寸`,
         get_talent_bust_size(get_breast_cup(cid, true)),
       );
+    } else {
+      era.set(`talent:${cid}:乳房尺寸`, 0);
     }
 
     let special_month = era.get(`status:${cid}:发情`);
@@ -521,7 +537,7 @@ async function sys_next_week() {
     // 只有性成熟且有浦西才需要算经期和排卵期
     // 注意虽然成长期就性成熟了，但是开发者保护在本格期才会怀孕
     // 一个月四个星期，假设生日在第二周，则四周分别为：排卵期 出生周 经期 无
-    if (growth_stage >= 1 && era.get(`cflag:${cid}:性别`) - 1 && !is_p_slave) {
+    if (growth_stage >= 1 && c_sex !== 1 && !is_p_slave) {
       // 经期为出生周的下一周（简单计算）
       let special_week =
         era.get(`cflag:${cid}:月经周`) ||
@@ -551,7 +567,7 @@ async function sys_next_week() {
         special_body = era.set(`status:${cid}:排卵期`, 0);
       }
     }
-    if (growth_stage >= 1 && era.get(`cflag:${cid}:性别`) - 1) {
+    if (growth_stage >= 1 && c_sex !== 1) {
       // 泌乳的相关判定
       let milk_timer = era.get(`cflag:${cid}:泌乳回合计时`);
       if (milk_timer) {
@@ -580,10 +596,10 @@ async function sys_next_week() {
       }
     }
     if (growth_stage >= 1) {
-      const body_hair_talent = era.get(`talent:${cid}:腋毛成长`),
-        sex_hair_talent = era.get(`talent:${cid}:阴毛成长`);
-      let body_hair = era.get(`cflag:${cid}:腋毛`),
-        sex_hair = era.get(`cflag:${cid}:阴毛`);
+      const body_hair_talent = era.get(`talent:${cid}:腋毛成长`);
+      const sex_hair_talent = era.get(`talent:${cid}:阴毛成长`);
+      let body_hair = era.get(`cflag:${cid}:腋毛`);
+      let sex_hair = era.get(`cflag:${cid}:阴毛`);
       body_hair = era.set(
         `cflag:${cid}:腋毛`,
         Math.min(body_hair + body_hair_talent, 4 + (body_hair_talent === 2)),
@@ -631,7 +647,7 @@ async function sys_next_week() {
         part_enum.body,
         part_enum.anal,
       ];
-      switch (era.get(`cflag:${cid}:性别`)) {
+      switch (c_sex) {
         case 0:
           tmp_parts.push(part_enum.clitoris);
           tmp_parts.push(part_enum.virgin);
@@ -720,31 +736,38 @@ async function sys_next_week() {
       (get_custom_mec(e).is_able_to_be_selected() ||
         (era.get(`cflag:${e}:妊娠阶段`) & 0b100001) > 0),
   );
-  if (!era.get('flag:当前互动角色') && in_team_list.length) {
-    era.set(
-      'flag:当前互动角色',
-      (era.get(`cflag:${sex_partner}:招募状态`) === recruit_flags.yes &&
-        sex_partner) ||
+  if (!era.get('flag:当前互动角色') && in_team_list.length > 0) {
+    if (
+      sex_partner > 0 &&
+      era.get(`cflag:${sex_partner}:招募状态`) === recruit_flags.yes &&
+      !sys_check_remote(sex_partner)
+    ) {
+      era.set('flag:当前互动角色', sex_partner);
+    } else {
+      const local_list = in_team_list.filter((cid) => !sys_check_remote(cid));
+      era.set(
+        'flag:当前互动角色',
         get_random_entry(
-          in_team_list.filter((e) => sys_reg_race(e).curr.week === cur_round),
+          local_list.filter((cid) => sys_reg_race(cid).curr.week === cur_round),
         ) ||
-        get_random_entry(
-          in_team_list.filter(
-            (e) =>
-              era.get(`cflag:${e}:育成回合计时`) < 3 * 48 &&
-              (era.get(`cflag:${e}:妊娠阶段`) & 0b100001) === 0,
-          ),
-        ) ||
-        get_random_entry(
-          in_team_list.filter(
-            (e) => era.get(`cflag:${e}:育成回合计时`) < 3 * 48,
-          ),
-        ) ||
-        get_random_entry(
-          in_team_list.filter((e) => era.get(`cflag:${e}:成长阶段`) >= 1),
-        ) ||
-        0,
-    );
+          get_random_entry(
+            local_list.filter(
+              (cid) =>
+                era.get(`cflag:${cid}:育成回合计时`) < 3 * 48 &&
+                (era.get(`cflag:${cid}:妊娠阶段`) & 0b100001) === 0,
+            ),
+          ) ||
+          get_random_entry(
+            local_list.filter(
+              (cid) => era.get(`cflag:${cid}:育成回合计时`) < 3 * 48,
+            ),
+          ) ||
+          get_random_entry(
+            local_list.filter((e) => era.get(`cflag:${e}:成长阶段`) >= 1),
+          ) ||
+          0,
+      );
+    }
   }
   await morning_sex();
   era.set('flag:床伴', 0);

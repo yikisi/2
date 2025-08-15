@@ -5,7 +5,7 @@
  * @author 天马闪光蹄
  * @author 黑衣剑士-星爆气流斩准备就绪
  * @author 幽白書
- * @author 无名黑奴
+ * @author 黑奴队长
  */
 const era = require('#/era-electron');
 
@@ -225,7 +225,7 @@ class CustomizedEro {
   async next_round() {}
 
   /**
-   * @author 无名黑奴
+   * @author 黑奴队长
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {string} callname
@@ -256,7 +256,7 @@ class CustomizedEro {
   }
 
   /**
-   * @author 无名黑奴
+   * @author 黑奴队长
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {string} callname
@@ -273,7 +273,7 @@ class CustomizedEro {
   }
 
   /**
-   * @author 无名黑奴
+   * @author 黑奴队长
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {string} callname
@@ -303,7 +303,7 @@ class CustomizedEro {
   }
 
   /**
-   * @author 无名黑奴
+   * @author 黑奴队长
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {string} callname
@@ -320,8 +320,9 @@ class CustomizedEro {
   }
 
   /**
-   * @author 无名黑奴
+   * @author 黑奴队长
    * @param {boolean} stop_success 如果寸止的话是否成功
+   * @returns {Promise<0|2|undefined>}
    */
   async orgasm_denial(stop_success) {
     if (era.get('tflag:主导权') > 0 && era.get('flag:惩戒力度') >= 2) {
@@ -378,7 +379,7 @@ class CustomizedEro {
   async orgasm(chara, me, callname) {}
 
   /**
-   * @author 无名黑奴
+   * @author 黑奴队长
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {string} callname
@@ -389,7 +390,7 @@ class CustomizedEro {
   }
 
   /**
-   * @author 无名黑奴
+   * @author 黑奴队长
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {string} callname
@@ -401,7 +402,7 @@ class CustomizedEro {
 
   /**
    * 获取刻印
-   * @author 无名黑奴
+   * @author 黑奴队长
    * @param {number} level
    * @param {number} type
    * @param {boolean} _new
@@ -462,7 +463,7 @@ class CustomizedEro {
   }
 
   /**
-   * @author 无名黑奴
+   * @author 黑奴队长
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {string} callname
@@ -485,7 +486,7 @@ class CustomizedEro {
 
   /**
    * @author 雞雞
-   * @author 无名黑奴
+   * @author 黑奴队长
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {string} callname
@@ -660,7 +661,7 @@ class CustomizedEro {
 
   /**
    * 进入能力升级
-   * @author 无名黑奴
+   * @author 黑奴队长
    */
   async shop_start() {
     const chara = get_chara_talk(this.id),
@@ -716,7 +717,7 @@ class CustomizedEro {
 
   /**
    * 离开能力升级
-   * @author 无名黑奴
+   * @author 黑奴队长
    * @param {{hate_clear:number,mark_clear:number,pleasure_delta:number,sex_delta:number,skill:number,talent:number}} extra_flag
    */
   async shop_end(extra_flag) {

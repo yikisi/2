@@ -4,7 +4,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaEroSkill(
   660022,
   '巨大喷流',
-  '高潮时降低体力，短时间内大幅提高速度',
+  '高潮时降低体力，短时间内大幅提高速度并突破阻挡',
   66002,
   2,
   UmaSkill.get_skill_color(
@@ -24,7 +24,7 @@ module.exports = new UmaEroSkill(
     [
       UmaSkill.ability_type_enum.hpRate,
       UmaSkill.ability_type_enum.CurrentSpeed,
-      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.LaneMoveSpeed,
     ],
     [
       UmaSkill.ability_type_enum.no,
@@ -45,7 +45,7 @@ module.exports = new UmaEroSkill(
     ],
   ],
   [
-    [-0.02, 0.45, 0],
+    [-0.02, 0.45, 1],
     [0, 0, 0],
   ],
   [

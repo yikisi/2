@@ -814,7 +814,7 @@ module.exports = class extends CustomizedLove {
       await era.printAndWait('伸出赤舌，侍奉那凶恶的主兽。');
       era.println();
       get_attr_and_print_in_event(100, undefined, 66, true);
-      add_jewel_reward(100, '同心', 200);
+      add_jewel_reward(100, '顺从', 200);
       era.set('mark:100:苦痛', 0);
       era.set('mark:100:羞耻', 0);
       era.set('mark:100:反抗', 0);
