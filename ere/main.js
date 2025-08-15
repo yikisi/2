@@ -78,7 +78,9 @@ module.exports = async () => {
           { isBr: true },
           '4. 本游戏所使用的素材资源包括开发者自制、互联网收集与协力者提供，开发者与协力者来自于不同的世界、种族、国家和民族，彼此之间也不存在经济关系。',
           { isBr: true },
-          '5. 本游戏目前没有官方的公开发布地址，且因为游戏本身的性质，禁止在任何未成年人可以接触到的公开场合展示或传播本游戏，更禁止任何人在任何商业活动（贩卖/附送等）和公开活动（直播等）中使用本游戏。',
+          '5. 本游戏的唯一指定官方发布地址即',
+          { content: '托管仓库', url: 'https://gitgud.io/umaera/erauma' },
+          '；因为游戏本身的性质，禁止在任何未成年人可以接触到的公开场合展示或传播本游戏，更禁止任何人在任何商业活动（贩卖/附送等）和公开活动（直播等）中使用本游戏。',
           { isBr: true },
           '6. 在明确注明或保留游戏来源、不涉及任何商业目的和经济受益、并同样遵守本免责声明的情况下，允许他人基于本游戏进行修改或二次开发。该授权将直接赋予本游戏的所有玩家，不需要专门征求开发者的明确同意。',
           { isBr: true },
@@ -360,7 +362,7 @@ module.exports = async () => {
           config: { align: 'left', width: 12 },
           content: [
             {
-              content: 'EraUma游戏发布页',
+              content: 'EraUma 游戏发布页',
               url: site,
             },
             { isBr: true },
@@ -375,7 +377,7 @@ module.exports = async () => {
             },
             { isBr: true },
             {
-              content: 'ERA特雷森学园（Discord 社区）',
+              content: 'ERA 特雷森学园（Discord 社区）',
               url: 'https://discord.gg/ake5SP3zUP',
             },
             { isBr: true },
