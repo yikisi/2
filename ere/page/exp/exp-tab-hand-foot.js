@@ -96,11 +96,13 @@ module.exports = {
           unknown_foot_job_exp = era.get(`cstr:${chara.id}:无自觉初次足交经历`);
 
         if (foot_job_exp) {
-          foot_exp_list.push(foot_job_exp);
+          foot_exp_list.push(get_filled_exp_str(foot_job_exp, chara.id));
         }
         if (flags.show_all_exp || foot_job_exp) {
           if (unknown_foot_job_exp) {
-            foot_exp_list.push(unknown_foot_job_exp);
+            foot_exp_list.push(
+              get_filled_exp_str(unknown_foot_job_exp, chara.id),
+            );
           }
           if (foot_job_count || step_on_virgin_count) {
             foot_exp_list.push(
