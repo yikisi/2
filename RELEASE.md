@@ -1,12 +1,19 @@
-# [EraUma v2.112 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.112)
+# [EraUma v2.12 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.12)
 
 _incoming_
 
 适配 [EraElectron v4.2.2 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.2.2) 与 [ere.app v1.2.1 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.2.1) 及以上版本
 
-资源包版本：20250814
+资源包版本：20250816
 
 ## Added
+
+* 新增小林历奇调教立绘
+* 新增桐生院葵调教立绘马耳差分
+* 新增以下角色的小纸条
+  * 小栗帽
+  * 玉藻十字
+* 新增【麦吉罗的呼唤】的小纸条
 
 ## Changed
 

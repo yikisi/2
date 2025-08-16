@@ -53,7 +53,7 @@ function sys_get_ero_image(cid) {
   if (dict[cid]) {
     const img_name = era.get(`cstr:${cid}:头像`);
     if (era.get(`tcvar:${cid}:刚刚高潮`)) {
-      ret.push(`${img_name}_裸_V\t${img_name}_裸`);
+      ret.push(`${img_name}_裸_高潮\t${img_name}_裸`);
     } else {
       ret.push(`${img_name}_裸`);
     }
@@ -108,6 +108,9 @@ function sys_get_ero_image(cid) {
       ret.push(`${img_name}_脸_害羞`);
     } else {
       ret.push(`${img_name}_脸_一般`);
+    }
+    if (era.get(`cflag:${cid}:种族`) > 0) {
+      ret.push(`${img_name}_头_马耳`);
     }
     ret.push(`${img_name}_头_发`);
     if (
