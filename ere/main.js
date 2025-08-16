@@ -524,10 +524,7 @@ module.exports = async () => {
           say_by_passer_by(...note);
         }
         await era.waitAnyKey();
-        for (const cid of Object.keys(notes)
-          .filter((k) => k !== 'common')
-          .map(Number)
-          .sort((a, b) => a - b)) {
+        for (const cid of Object.keys(notes).filter((k) => !isNaN(Number(k)))) {
           for (const note of notes[cid]) {
             era.print(
               [{ content: note[0], fontWeight: 'bold' }, '「', note[1], '」'],

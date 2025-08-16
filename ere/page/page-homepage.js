@@ -441,6 +441,9 @@ module.exports = async () => {
         await run_custom_daily(chara_id, hook);
       } else {
         const note_list = [...notes.common];
+        if (era.get('flag:目白城风格') === 1) {
+          note_list.push(...notes.call);
+        }
         sys_filter_chara('cflag', '招募状态', recruit_flags.yes).forEach(
           (e) => {
             if (era.get(`cflag:${e}:育成回合计时`) < 3 * 48 && notes[e]) {
