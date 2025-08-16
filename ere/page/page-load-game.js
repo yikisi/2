@@ -30,6 +30,7 @@ const CharaInmon = require('#/data/ero/chara-inmon');
 const basement_owners = require('#/data/event/basement-owners');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const LoveEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-132');
+const LunaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-17');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks-32');
@@ -530,6 +531,13 @@ module.exports = async () => {
               era
                 .getAddedCharacters()
                 .forEach((cid) => era.add(`talent:${cid}:调教度`, 1));
+            }
+            if (version <= 2120) {
+              if (new LunaEduMarks().good_end === 2) {
+                new Array(7)
+                  .fill(0)
+                  .forEach((_, i) => era.set(`status:17:${110 + i}`, 0));
+              }
             }
             return true;
           } else {
