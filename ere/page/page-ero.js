@@ -297,7 +297,8 @@ function print_milking(type, size) {
  * @param {boolean} [skip_start_end=false]
  */
 async function page_ero(lover, skip_start_end = false) {
-  const in_base = era.get('flag:当前位置') === location_enum.basement;
+  const loc = era.get('flag:当前位置');
+  const in_base = loc === location_enum.basement;
   const rape = era.get('tflag:强奸');
   lover ||= era.get('tflag:当前对手') || era.get('flag:当前互动角色');
   let ero_flag = true;
@@ -305,6 +306,7 @@ async function page_ero(lover, skip_start_end = false) {
   era.set('tflag:当前对手', lover);
   if (
     !in_base &&
+    loc !== location_enum.mejiro &&
     assist !== lover &&
     era.getCharactersInTrain().length === 2 &&
     assist > 0 &&
