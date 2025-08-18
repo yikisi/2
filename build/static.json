@@ -17329,8 +17329,8 @@
       "title": "EraUma",
       "gameCode": 29407,
       "defaultChara": 0,
-      "version": 2120,
-      "versionName": "2.12 (agito)",
+      "version": 2121,
+      "versionName": "2.121 (agito)",
       "allowVersion": 1000,
       "site": "https://gitgud.io/umaera/erauma/-/releases/permalink/latest",
       "versionCheck": "https://umaera.gitgud.site/erauma/RELEASE",
@@ -21278,6 +21278,176 @@
       "posY": 0,
       "type": 0
     },
+    "小林_裸": {
+      "path": "res/ero/1098/body/无毛.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "小林_裸_汗": {
+      "path": "res/ero/1098/body/体汗.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "小林_裸_腋毛": {
+      "path": "res/ero/1098/body/腋毛.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "小林_裸_阴毛": {
+      "path": "res/ero/1098/body/阴毛.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "小林_裸_孕": {
+      "path": "res/ero/1098/body/孕肚.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "小林_头_发": {
+      "path": "res/ero/1098/head/头发.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "小林_头_汗": {
+      "path": "res/ero/1098/head/汗.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "小林_头_泪": {
+      "path": "res/ero/1098/head/眼泪.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "小林_头": {
+      "path": "res/ero/1098/head/脸底.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "小林_头_腮红": {
+      "path": "res/ero/1098/head/腮红.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "小林_脸_一般": {
+      "path": "res/ero/1098/head/face/普通.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "小林_脸_害羞": {
+      "path": "res/ero/1098/head/face/羞涩.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "小林_脸_痛苦": {
+      "path": "res/ero/1098/head/face/痛苦.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "小林_脸_高潮": {
+      "path": "res/ero/1098/head/face/高潮.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "小林_脸_嫌恶": {
+      "path": "res/ero/1098/head/face/嫌恶.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "小林_脸_兴奋": {
+      "path": "res/ero/1098/head/face/兴奋.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "小林_脸_睡": {
+      "path": "res/ero/1098/head/face/睡着.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
     "奶奶_头_发": {
       "path": "res/ero/1100/head/头发.png",
       "x": 0,
@@ -21448,7 +21618,7 @@
       "posY": 0,
       "type": 0
     },
-    "葵_裸_v": {
+    "葵_裸_高潮": {
       "path": "res/ero/9004/body/v.png",
       "x": 0,
       "y": 0,
@@ -21550,6 +21720,16 @@
     },
     "葵_头_腮红": {
       "path": "res/ero/9004/head/腮红.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "葵_头_马耳": {
+      "path": "res/ero/9004/head/桐生院马耳.png",
       "x": 0,
       "y": 0,
       "width": 720,
