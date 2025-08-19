@@ -192,7 +192,7 @@ class CustomizedEro {
 
   /**
    * 马娘主动指令筛选器
-   * @returns {function(number): boolean}
+   * @returns {function(number): boolean} 参数是调教指令ID
    */
   filter_in_rape() {
     if (era.get(`tcvar:${this.id}:孕袋卖奶`) > 0) {
