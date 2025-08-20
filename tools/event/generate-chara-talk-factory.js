@@ -41,7 +41,7 @@ scripts.forEach(
 
 output += `
 console.log(
-  '角色发言输出工具注册完毕！',
+  '角色发言输出工具注册完毕!',
   (new Date().getTime() - current).toLocaleString(),
   'ms',
 );

@@ -303,6 +303,11 @@ module.exports = class extends CustomizedCheck {
   get_edu_aims() {
     const buffer = [],
       races = RaceHistory.get(56).get();
+    buffer.push({
+      check: 1,
+      color: undefined,
+      content: `以极佳干劲参与 G2 以上赛事数：${new KitaruEduMarks().best_g2_count}`,
+    });
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.aoba_sho, 1, 20)); // 入着即可
     buffer.push(check_aim_and_get_entry(races, race_enum.toky_yus, 1, 5));

@@ -16,7 +16,7 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
       extra_flag.contestants.find((e) => e.rank.curr === 1).race.conditionParams
         .bashin_diff_behind >= 8
     ) {
-      new OrfevreEduMarks().title_check = 1;
+      new OrfevreEduMarks().title_check++;
     }
   },
   (races) =>
@@ -39,6 +39,13 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
     [get_aim_race_index(race_enum.arim_kin, 2)]: 4,
   },
   (buffer, races) => {
+    if (check_aim_race(races, race_enum.arim_kin, 2)) {
+      buffer.push({
+        check: 1,
+        color: undefined,
+        content: `资深级有马纪念 8 马身以上大胜：${new OrfevreEduMarks().title_check > 0 ? '是' : '否'}`,
+      });
+    }
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.sats_sho, 1, 1));
     buffer.push(check_aim_and_get_entry(races, race_enum.toky_yus, 1, 1));

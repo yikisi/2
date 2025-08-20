@@ -1,5 +1,6 @@
 const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-get-entry');
 const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
+const check_aim_race = require('#/event/snippets/check-aim-race');
 
 const SiriusEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-70');
 const { race_enum } = require('#/data/race/race-const');
@@ -32,6 +33,13 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
   () => new SiriusEduMarks().title_check > 0,
   aim_races,
   (buffer, races) => {
+    if (check_aim_race(races, race_enum.toky_yus, 1)) {
+      buffer.push({
+        check: 1,
+        color: undefined,
+        content: `日本德比 3 马身以上获胜：${new SiriusEduMarks().title_check > 0 ? '是' : '否'}`,
+      });
+    }
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.saud_cup, 0, 5));
     buffer.push(check_aim_and_get_entry(races, race_enum.sats_sho, 1, 5));

@@ -5,6 +5,7 @@ const sys_personal_achievement = require('#/system/global/sys-calc-personal-achi
 const CustomizedCheck = require('#/event/check/check-common');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { get_abbr_number } = require('#/utils/value-utils');
 
 const { get_chara_color } = require('#/data/chara-colors');
 const HaiseikoEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-348');
@@ -58,7 +59,10 @@ module.exports = class extends CustomizedCheck {
       {
         check: 1,
         color: undefined,
-        content: `从 G1 赛事获胜中争得声望：${new HaiseikoEduMarks().fame.toLocaleString()}`,
+        content: [
+          '从 G1 赛事获胜中争得声望：',
+          get_abbr_number(new HaiseikoEduMarks().fame),
+        ],
       },
       ...super.get_edu_aims(),
     ];

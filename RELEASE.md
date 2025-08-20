@@ -8,6 +8,8 @@ _incoming_
 
 ## Added
 
+* 在部分马娘的育成目标中增加了成就相关数据显示
+
 ## Changed
 
 ## Fixed

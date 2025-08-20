@@ -56,7 +56,7 @@ cons_dict[343] = require('#/event/rec/rec-343');
 cons_dict[400] = require('#/event/rec/rec-400');
 
 console.log(
-  '角色招募口上注册完毕！',
+  '角色招募口上注册完毕!',
   (new Date().getTime() - current).toLocaleString(),
   'ms',
 );

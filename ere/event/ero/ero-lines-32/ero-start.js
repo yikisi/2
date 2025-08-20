@@ -20,6 +20,7 @@ const EroParticipant = require('#/data/ero/ero-participant');
 const { part_enum } = require('#/data/ero/part-const');
 const { stain_enum } = require('#/data/ero/stain-const');
 const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks-32');
+const recruit_flags = require('#/data/event/recruit-flags');
 
 module.exports = async () => {
   const callname = sys_get_colored_callname(32, 0),
@@ -694,15 +695,10 @@ module.exports = async () => {
           await era.printAndWait('虽然不知道发生了什么，但先装作无事发生吧');
       }
     } else if (sys_check_cuckold(32)) {
-      if (Math.random() < 0.5) {
-        await tachyon.say_and_wait(['……对不起，', callname, '，对不起。']);
-        era.println();
-        await era.printAndWait([
-          '不知道为什么，上床前 ',
-          tachyon.get_colored_name(),
-          ' 不停的在道歉着。',
-        ]);
-      } else {
+      if (
+        era.get('cflag:25:招募状态') === recruit_flags.yes &&
+        Math.random() < 0.5
+      ) {
         await tachyon.say_and_wait([
           '……',
           callname,
@@ -715,6 +711,14 @@ module.exports = async () => {
         await era.printAndWait([
           tachyon.get_colored_name(),
           ' 不知道为什么，似乎有些失望的样子。',
+        ]);
+      } else {
+        await tachyon.say_and_wait(['……对不起，', callname, '，对不起。']);
+        era.println();
+        await era.printAndWait([
+          '不知道为什么，上床前 ',
+          tachyon.get_colored_name(),
+          ' 不停的在道歉着。',
         ]);
       }
     }

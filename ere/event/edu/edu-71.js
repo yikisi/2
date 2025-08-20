@@ -201,8 +201,7 @@ module.exports = class extends CustomizedEdu {
   }
 
   async train_fail(ardan, me, callname, hook, extra_flag) {
-    const event_marks = new ArdanEduMarks();
-    event_marks.train_fail++;
+    new ArdanEduMarks().train_fail++;
     return await super.train_fail(ardan, me, callname, hook, extra_flag);
   }
 

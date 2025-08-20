@@ -489,6 +489,7 @@ async function print_rec_page() {
           },
           ...get_custom_check(selected)
             .get_edu_aims()
+            .filter(({ content }) => content.endsWith('✘'))
             .map((e) => {
               const g1 = e.content.indexOf('G1') !== -1;
               const champion = e.content.indexOf('1着') !== -1;
