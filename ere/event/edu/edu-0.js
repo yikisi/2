@@ -71,7 +71,10 @@ module.exports = class extends StrangeDayEvents {
       '招募状态',
       recruit_flags.yes,
     ).filter(
-      (e) => get(`cflag:${e}:种族`) > 0 && get(`cflag:${e}:可再次育成`) > 0,
+      (cid) =>
+        cid > 0 &&
+        get(`cflag:${cid}:种族`) > 0 &&
+        get(`cflag:${cid}:可再次育成`) > 0,
     );
     if (second_list.length === 0 || team_limit <= 0) {
       return;
