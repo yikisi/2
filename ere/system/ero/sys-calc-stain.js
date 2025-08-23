@@ -110,20 +110,20 @@ module.exports = {
   merge_stain(attacker, defender, item) {
     let use_item = false;
     const stain_keys = [attacker, defender]
-      .filter((e) => e.id !== -1 && e.part !== -1)
-      .map((e) => {
-        if (e.part === part_enum.item) {
+      .filter((p) => p.id !== -1 && p.part !== -1)
+      .map((p) => {
+        if (p.part === part_enum.item) {
           use_item =
             item === item_enum.anal_beads ||
             item === item_enum.butt_plug ||
             item === item_enum.dildo ||
             item === item_enum.love_eggs ||
             item === item_enum.artificial_virgin;
-        } else if (e.part <= part_enum.penis) {
-          return `stain:${e.id}:${part_touch[e.part]}`;
+        } else if (p.part <= part_enum.penis) {
+          return `stain:${p.id}:${part_touch[p.part]}`;
         }
       })
-      .filter((e) => e !== undefined);
+      .filter((k) => k !== undefined);
     if (stain_keys.length === 2) {
       const stain = era.get(stain_keys[0]) | era.get(stain_keys[1]);
       era.set(stain_keys[0], stain);

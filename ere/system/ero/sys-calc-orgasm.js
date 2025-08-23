@@ -111,7 +111,7 @@ async function sys_calc_orgasm(shown, ...ids) {
       let touch = new EroTouch(cid, part);
       let oid = touch.owner ?? -1;
       let opart = touch.part ?? -1;
-      if (new EroTouch(oid, opart).item === item_enum.gag) {
+      if (new EroTouch(oid, opart).part === part_enum.item) {
         touch.clean();
       }
       if (curr >= max) {

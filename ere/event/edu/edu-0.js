@@ -661,14 +661,11 @@ module.exports = class extends StrangeDayEvents {
 
   /** @author Mr.E. */
   async sakura_regret() {
-    const chara_id = get_random_entry(
-      sys_filter_chara('cflag', '招募状态', recruit_flags.yes).filter(
-        (e) =>
-          e > 0 && get(`cflag:${e}:爱慕暂拒`) === 74 && e !== 25 && e !== 400,
-      ),
-    );
-    if (chara_id !== undefined) {
-      const chara = get_chara_talk(chara_id);
+    const my_marks = new MyEduMarks();
+    const cid = get_random_entry(my_marks.pity || []);
+    my_marks.pity = undefined;
+    if (cid !== undefined) {
+      const chara = get_chara_talk(cid);
       await print_event_name('樱花的遗憾', chara);
       await printAndWait([
         '夜晚，在床上的 ',
