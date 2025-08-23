@@ -663,7 +663,6 @@ module.exports = class extends StrangeDayEvents {
   async sakura_regret() {
     const my_marks = new MyEduMarks();
     const cid = get_random_entry(my_marks.pity || []);
-    my_marks.pity = undefined;
     if (cid !== undefined) {
       const chara = get_chara_talk(cid);
       await print_event_name('樱花的遗憾', chara);
