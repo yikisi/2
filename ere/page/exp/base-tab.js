@@ -16,6 +16,7 @@ const { join_to_string } = require('#/utils/list-utils');
 
 const CharaTitles = require('#/data/chara-titles');
 const { clothe_names, race_clothe_list } = require('#/data/clothe-const.json');
+const title_desc = require('#/data/desc/title-desc.json');
 const { human_sex_title, sex_title } = require('#/data/ero/status-const');
 const { growth_info } = require('#/data/exp-const');
 const {
@@ -144,10 +145,10 @@ module.exports = {
       .map((e) => `${e}_半身`)
       .join('\t');
 
-    const titles = CharaTitles.get(chara.id),
-      title_list = titles.get(),
-      title_info_list = [],
-      cur_title = titles.get_curr_title();
+    const titles = CharaTitles.get(chara.id);
+    const title_list = titles.get();
+    const title_info_list = [];
+    const cur_title = titles.get_curr_title();
     title_info_list.push(
       {
         accelerator: 30,
@@ -181,7 +182,14 @@ module.exports = {
         },
         {
           config: { color: e.c, width: 5 },
-          content: e.n,
+          content: [
+            {
+              content: e.n,
+              title: title_desc[e.n]
+                ? `[${e.n}]：${title_desc[e.n]}`
+                : undefined,
+            },
+          ],
           type: 'text',
         },
       );

@@ -249,6 +249,7 @@ function sub_simulate_ero(list_chara, timer_record, timer, events, reports) {
       s_times = orgasm = Math.floor(uma.ero.param.sex / 10000);
       uma.ero.param.sex %= 10000;
     }
+    uma.ero.orgasm += orgasm;
     if (orgasm > 0) {
       orgasm = Math.min(orgasm, 6);
       uma.race.conditionParams.orgasm = 1;

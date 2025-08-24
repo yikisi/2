@@ -448,7 +448,7 @@ module.exports = class extends StrangeDayEvents {
     ]);
     printButton('「我不是，我没有！」', 1);
     await input();
-    sys_change_fame(-20);
+    sys_change_fame(-10);
   }
 
   /**
@@ -467,8 +467,11 @@ module.exports = class extends StrangeDayEvents {
     println();
     await printAndWait('今天也是喝能量饮料强撑、睡办公室桌下的一天。');
     printButton('「地板好硬……」', 1);
-    get_attr_and_print_in_event(0, undefined, 0, JSON.parse('{"体力":-50}')) &&
-      (await waitAnyKey());
+    if (
+      get_attr_and_print_in_event(0, undefined, 0, JSON.parse('{"体力":-50}'))
+    ) {
+      await waitAnyKey();
+    }
   }
 
   /**
