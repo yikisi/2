@@ -505,7 +505,7 @@ async function page_ero(lover, skip_start_end = false) {
             last_action: era.get('tflag:前回行动'),
             lover_action: era.get('tflag:对手行动'),
           };
-    let a_disabled = lost_mind > 0;
+    let a_disabled = true;
     const action_bar = [];
     action_bar.push({
       content:
@@ -598,7 +598,7 @@ async function page_ero(lover, skip_start_end = false) {
             check_val,
           );
         }
-        const action_disabled = base_check && check_val < 0;
+        const action_disabled = lost_mind > 0 || (base_check && check_val < 0);
         a_disabled &&= action_disabled;
         return {
           accelerator: a,
