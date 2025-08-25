@@ -311,7 +311,7 @@ module.exports = async () => {
             content: [
               '适配资源包版本：',
               {
-                content: '20250816',
+                content: '20250825',
                 url: 'https://gitgud.io/umaera/erauma/-/archive/master/erauma-master.zip?path=res',
               },
             ],

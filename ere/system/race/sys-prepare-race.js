@@ -32,9 +32,9 @@ const { attr_enum } = require('#/data/train-const');
  */
 function sys_prepare_race(list_chara, team_list, race_info) {
   const current = new Date().getTime();
-  const pop_1 = list_chara.find((e) => e.pop[0] === 1),
-    running_style_counts = [0, 0, 0, 0],
-    skill_counts = {};
+  const pop_1 = list_chara.find((e) => e.pop[0] === 1);
+  const running_style_counts = [0, 0, 0, 0];
+  const skill_counts = {};
   list_chara.forEach((uma) => running_style_counts[uma.style]++);
   [201631, 201641].forEach((e) => {
     if (
@@ -57,15 +57,15 @@ function sys_prepare_race(list_chara, team_list, race_info) {
     skill_counts[201631] = 5;
   }
 
-  const corners = [],
-    down_slopes = race_info.slopes.filter((e) => e.slope < 0),
-    up_slopes = race_info.slopes.filter((e) => e.slope > 0),
-    middle_corners = [],
-    straights = [],
-    loc_mind_base_diff = 0.0008 * (race_info.span - 1000) + 1;
-  let flag_final = true,
-    final_corner = undefined,
-    final_straight = undefined;
+  const corners = [];
+  const down_slopes = race_info.slopes.filter((e) => e.slope < 0);
+  const up_slopes = race_info.slopes.filter((e) => e.slope > 0);
+  const middle_corners = [];
+  const straights = [];
+  const loc_mind_base_diff = 0.0008 * (race_info.span - 1000) + 1;
+  let flag_final = true;
+  let final_corner = undefined;
+  let final_straight = undefined;
   // 给弯道分配用于计算的corner
   for (let i = race_info.lanes.length - 1; i >= 0; --i) {
     const lane = race_info.lanes[i];
@@ -394,6 +394,9 @@ function sys_prepare_race(list_chara, team_list, race_info) {
           uma.base.greenCount++;
           uma.race.conditionParams.activate_count_all++;
           uma.race.conditionParams.activate_count_start++;
+          if (skill.data.id === 203781) {
+            uma.race.conditionParams.is_used_skill_id.push(skill.data.id);
+          }
         }
       }
     });
