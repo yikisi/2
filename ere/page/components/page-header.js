@@ -1,4 +1,4 @@
-﻿const era = require('#/era-electron');
+const era = require('#/era-electron');
 
 const sys_get_status = require('#/system/chara/sys-get-status');
 const {
@@ -7,7 +7,6 @@ const {
 } = require('#/system/sys-calc-base-cflag');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
-const date_indicator = require('#/page/components/date-indicator');
 const race_indicator = require('#/page/components/race-indicator');
 
 const { get_custom_mec } = require('#/event/mec/mec-factory');
@@ -17,6 +16,7 @@ const { get_abbr_number } = require('#/utils/value-utils');
 
 const { celebration_color, money_color } = require('#/data/color-const');
 const { attr_background_colors, trainer_colors } = require('#/data/const.json');
+const date_indicator = require('#/data/date-indicator');
 const recruit_flags = require('#/data/event/recruit-flags');
 const {
   get_celebration,

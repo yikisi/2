@@ -40,6 +40,7 @@ const {
   mark_colors,
   relation_colors,
 } = require('#/data/const.json');
+const date_indicator = require('#/data/date-indicator');
 const { mark_abbr, part_abbr } = require('#/data/ero/ero-alias.json');
 const { lust_border, lust_from_palam } = require('#/data/ero/orgasm-const');
 const {
@@ -357,9 +358,7 @@ async function page_ero(lover, skip_start_end = false) {
     if (!in_base) {
       l_cols.push({
         config: { width: 8 },
-        content: `${era.get('flag:当前年')} 年 ${era.get(
-          'flag:当前月',
-        )} 月 第 ${era.get('flag:当前周')} 周`,
+        content: date_indicator(),
         type: 'text',
       });
     }

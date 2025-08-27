@@ -19,7 +19,6 @@ const { sys_change_fame, sys_change_money } = require('#/system/sys-calc-flag');
 const { get_image } = require('#/system/sys-calc-image');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
-const date_indicator = require('#/page/components/date-indicator');
 const check_race_events = require('#/page/race/check-race-events');
 const fill_race_weather_and_mess = require('#/page/race/fill-race-weather-and-mess');
 const page_race_result = require('#/page/race/page-race-result');
@@ -42,6 +41,7 @@ const {
   money_color,
 } = require('#/data/color-const');
 const { attr_background_colors } = require('#/data/const.json');
+const date_indicator = require('#/data/date-indicator');
 const { lust_from_palam } = require('#/data/ero/orgasm-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const event_hooks = require('#/data/event/event-hooks');

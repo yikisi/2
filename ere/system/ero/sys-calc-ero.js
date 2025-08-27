@@ -25,6 +25,7 @@ const { calc_pleasure } = require('#/system/ero/sys-calc-palam');
 const { merge_stain, set_stain } = require('#/system/ero/sys-calc-stain');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
+const { get_date } = require('#/data/date-indicator');
 const {
   action_cost,
   attack_juel_reward,
@@ -43,9 +44,7 @@ const { penis_desc, vp_status_enum } = require('#/data/ero/status-const');
  * @param {number} [item]
  */
 function sys_do_sex(atk, def, item) {
-  const date = `${era.get('flag:当前年')} 年 ${era.get(
-    'flag:当前月',
-  )} 月 第 ${era.get('flag:当前周')} 周`;
+  const date = get_date();
   const i_def_awake = sys_check_awake(def.id);
   let dmg = {
     defender: base_damage.base,
@@ -769,8 +768,7 @@ function sys_do_sex(atk, def, item) {
   const atk_touch = new EroTouch(atk.id, atk.part);
   const def_touch = new EroTouch(def.id, def_part);
   if (atk.part <= part_enum.penis && def.part <= part_enum.penis) {
-    clean_part_without_item(atk);
-    clean_part_without_item(def);
+    clean_part_without_item(atk, def);
   }
   // 如果是打击和电击，只记录施虐关系（打击之后道具不会停留在目标身上）
   if (atk.part === part_enum.hit || item === item_enum.electric_stunner) {

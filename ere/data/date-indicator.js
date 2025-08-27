@@ -11,4 +11,9 @@ function date_indicator() {
   ];
 }
 
+date_indicator.get_date = () =>
+  date_indicator()
+    .map((s) => s.content || s)
+    .join('');
+
 module.exports = date_indicator;

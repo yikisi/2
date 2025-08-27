@@ -29,6 +29,7 @@ const {
   buff_colors,
   palam_colors,
 } = require('#/data/color-const');
+const date_indicator = require('#/data/date-indicator');
 const CharaInmon = require('#/data/ero/chara-inmon');
 const { part_abbr } = require('#/data/ero/ero-alias.json');
 const {
@@ -98,11 +99,7 @@ module.exports = async (cid = era.get('flag:当前互动角色')) => {
   while (page_pointer.flag) {
     await era.clear();
     era.drawLine();
-    era.print(
-      `${era.get('flag:当前年')} 年 ${era.get(
-        'flag:当前月',
-      )} 月 第 ${era.get('flag:当前周')} 周`,
-    );
+    era.print(date_indicator());
     era.drawLine({
       content: `${chara.get_full_name()} 的 因子`,
     });

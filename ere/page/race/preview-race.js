@@ -2,7 +2,6 @@ const era = require('#/era-electron');
 
 const { get_sex_acceptable } = require('#/system/ero/sys-calc-ero-status');
 
-const date_indicator = require('#/page/components/date-indicator');
 const print_race_track_chart = require('#/page/race/race-track-chart');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -15,6 +14,7 @@ const {
   motivation_colors,
 } = require('#/data/color-const');
 const { attr_colors } = require('#/data/const.json');
+const date_indicator = require('#/data/date-indicator');
 const { item_enum, item_names } = require('#/data/ero/item-const');
 const { vp_status_enum } = require('#/data/ero/status-const');
 const {

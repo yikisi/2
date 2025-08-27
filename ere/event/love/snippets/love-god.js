@@ -13,6 +13,7 @@ const print_ero_page = require('#/page/page-ero');
 
 const CustomizedLove = require('#/event/love/love-common');
 
+const { get_date } = require('#/data/date-indicator');
 const EroParticipant = require('#/data/ero/ero-participant');
 const { part_enum } = require('#/data/ero/part-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
@@ -81,10 +82,10 @@ class LoveGod extends CustomizedLove {
    * @param {CharaTalk} me
    */
   async 50(god, me) {
-    const cur_week = (get('flag:当前周') % 4) + 1,
-      cur_month = ((get('flag:当前月') + (cur_week === 1) - 1) % 12) + 1,
-      birth_day = 7 * cur_week + Math.floor(7 * Math.random()) - 6,
-      date = `${get('flag:当前年')} 年 ${cur_month} 月 ${birth_day} 日`;
+    const cur_week = (get('flag:当前周') % 4) + 1;
+    const cur_month = ((get('flag:当前月') + (cur_week === 1) - 1) % 12) + 1;
+    const birth_day = 7 * cur_week + Math.floor(7 * Math.random()) - 6;
+    const date = get_date();
     printMultiColumns(
       [
         { content: `${this.fuck_her_button}（让祂怀上神胎）`, type: 'button' },
