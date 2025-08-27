@@ -49,16 +49,16 @@ const cum_loc_desc = {
 };
 
 /**
- * @param {number} chara_id
+ * @param {number} cid
  * @param {boolean} [is_orgasm=false]
  * @returns {TextContent}
  */
-function get_milk_info(chara_id, is_orgasm = false) {
-  const amount = era.get(`nowex:${chara_id}:喷奶量`);
+function get_milk_info(cid, is_orgasm = false) {
+  const amount = era.get(`nowex:${cid}:喷奶量`);
   if (!amount) {
     return [];
   }
-  const loc = era.get(`tcvar:${chara_id}:喷奶位置`) || {};
+  const loc = era.get(`tcvar:${cid}:喷奶位置`) || {};
   const actions = [];
   const chara = join_list(
     (loc.c || [])
@@ -82,7 +82,7 @@ function get_milk_info(chara_id, is_orgasm = false) {
         );
       }
   }
-  if (era.get(`ex:${chara_id}:喷奶阻碍`) > 0) {
+  if (era.get(`ex:${cid}:喷奶阻碍`) > 0) {
     actions.push('猛然喷出了 ');
   } else if (is_orgasm) {
     actions.push('喷出了 ');
@@ -97,7 +97,7 @@ function get_milk_info(chara_id, is_orgasm = false) {
         actions.push('流出了 ');
     }
   }
-  era.set(`ex:${chara_id}:喷奶阻碍`, 0);
+  era.set(`ex:${cid}:喷奶阻碍`, 0);
   return [
     ...actions,
     {
@@ -109,15 +109,15 @@ function get_milk_info(chara_id, is_orgasm = false) {
 }
 
 /**
- * @param {number} chara_id
+ * @param {number} cid
  * @returns {TextContent}
  */
-function get_squirt_info(chara_id) {
-  const squirt = era.get(`nowex:${chara_id}:爱液分泌`);
+function get_squirt_info(cid) {
+  const squirt = era.get(`nowex:${cid}:爱液分泌`);
   if (!squirt) {
     return [];
   }
-  const loc = era.get(`tcvar:${chara_id}:潮吹位置`) || {};
+  const loc = era.get(`tcvar:${cid}:潮吹位置`) || {};
   const actions = [];
   const chara = join_list(
     (loc.c || [])
@@ -152,7 +152,7 @@ function get_squirt_info(chara_id) {
     case 101:
       actions.push('朝 ', ...chara, ' 的肉棒');
   }
-  if (era.get(`nowex:${chara_id}:潮吹`) > 0) {
+  if (era.get(`nowex:${cid}:潮吹`) > 0) {
     actions.push('喷出了 ');
   } else {
     switch (loc.p) {
@@ -174,18 +174,19 @@ function get_squirt_info(chara_id) {
   ];
 }
 
-function common_orgasm(chara_id) {
-  const chara = get_chara_talk(chara_id);
+/** @param {number} cid */
+function common_orgasm(cid) {
+  const chara = get_chara_talk(cid);
   let multi_orgasm = undefined;
-  if (era.get(`nowex:${chara_id}:二重高潮`)) {
+  if (era.get(`nowex:${cid}:二重高潮`)) {
     multi_orgasm = '二';
-  } else if (era.get(`nowex:${chara_id}:三重高潮`)) {
+  } else if (era.get(`nowex:${cid}:三重高潮`)) {
     multi_orgasm = '三';
-  } else if (era.get(`nowex:${chara_id}:四重高潮`)) {
+  } else if (era.get(`nowex:${cid}:四重高潮`)) {
     multi_orgasm = '四';
-  } else if (era.get(`nowex:${chara_id}:五重高潮`)) {
+  } else if (era.get(`nowex:${cid}:五重高潮`)) {
     multi_orgasm = '五';
-  } else if (era.get(`nowex:${chara_id}:多重高潮`)) {
+  } else if (era.get(`nowex:${cid}:多重高潮`)) {
     multi_orgasm = '多';
   }
   if (multi_orgasm !== undefined) {
@@ -202,12 +203,12 @@ function common_orgasm(chara_id) {
     }
     const part_name = part_names[part];
     const times =
-      era.get(`nowex:${chara_id}:${part_name}高潮`) +
-      (era.get(`nowex:${chara_id}:无自觉${part_name}高潮`) || 0);
+      era.get(`nowex:${cid}:${part_name}高潮`) +
+      (era.get(`nowex:${cid}:无自觉${part_name}高潮`) || 0);
     if (part === part_enum.breast) {
       const nipple_times =
-        era.get(`nowex:${chara_id}:乳头高潮`) +
-        era.get(`nowex:${chara_id}:无自觉乳头高潮`);
+        era.get(`nowex:${cid}:乳头高潮`) +
+        era.get(`nowex:${cid}:无自觉乳头高潮`);
       const buffer = [];
       if (times > 0) {
         buffer.push([
@@ -231,7 +232,7 @@ function common_orgasm(chara_id) {
           },
         ]);
       }
-      const milk = get_milk_info(chara_id, times + nipple_times > 0);
+      const milk = get_milk_info(cid, times + nipple_times > 0);
       if (milk.length > 0) {
         if (buffer.length > 0) {
           buffer[buffer.length - 1].push('，', ...milk);
@@ -249,8 +250,8 @@ function common_orgasm(chara_id) {
       );
     } else if (part === part_enum.virgin) {
       const c_times =
-        era.get(`nowex:${chara_id}:外阴高潮`) +
-        era.get(`nowex:${chara_id}:无自觉外阴高潮`);
+        era.get(`nowex:${cid}:外阴高潮`) +
+        era.get(`nowex:${cid}:无自觉外阴高潮`);
       const buffer = [];
       if (c_times > 0) {
         era.print([
@@ -265,7 +266,7 @@ function common_orgasm(chara_id) {
           '！',
         ]);
       }
-      const tmp = get_squirt_info(chara_id);
+      const tmp = get_squirt_info(cid);
       if (times > 0) {
         buffer.push(
           chara.get_colored_name(),
@@ -313,8 +314,8 @@ function common_orgasm(chara_id) {
           ]);
           break;
         case part_enum.penis:
-          if ((semen = era.get(`nowex:${chara_id}:射精量`)) > 0) {
-            const semen_loc = era.get(`tcvar:${chara_id}:射精位置`) || {};
+          if ((semen = era.get(`nowex:${cid}:射精量`)) > 0) {
+            const semen_loc = era.get(`tcvar:${cid}:射精位置`) || {};
             semen = {
               content: ` ${semen.toLocaleString()}ml `,
               color: buff_colors[2],
@@ -394,27 +395,26 @@ async function update_orgasms(shown, ...ids) {
       .filter((e) => e[1] >= 20 && e[1] < 65)
       .map((e) => e[0]);
   }
-  for (const chara_id of ids) {
-    let lost_mind_timer = era.get(`tcvar:${chara_id}:失神`);
-    const wp_ratio = Math.log(era.get(`base:${chara_id}:根性`)) / log_max_wp,
+  for (const cid of ids) {
+    let lost_mind_timer = era.get(`tcvar:${cid}:失神`);
+    const wp_ratio = Math.log(era.get(`base:${cid}:根性`)) / log_max_wp,
       cost = [
         sys_change_attr_and_print(
-          chara_id,
+          cid,
           '体力',
-          -era.get(`nowex:${chara_id}:体力消耗`) * (lost_mind_timer ? 1.5 : 1),
+          -era.get(`nowex:${cid}:体力消耗`) * (lost_mind_timer ? 1.5 : 1),
         ),
         sys_change_attr_and_print(
-          chara_id,
+          cid,
           '精力',
-          -era.get(`nowex:${chara_id}:精力消耗`) *
-            (1 - wp_coefficient * wp_ratio),
+          -era.get(`nowex:${cid}:精力消耗`) * (1 - wp_coefficient * wp_ratio),
         ),
       ];
     let lost_mind = 0;
     if (shown && (cost[0].length > 0 || cost[1].length > 0)) {
       era.print(
         [
-          get_chara_talk(chara_id).get_colored_name(),
+          get_chara_talk(cid).get_colored_name(),
           ' 的 ',
           ...cost[0],
           cost[0].length > 0 && cost[1].length > 0
@@ -424,39 +424,35 @@ async function update_orgasms(shown, ...ids) {
         ].filter((e) => e),
       );
     }
-    const stamina = era.get(`base:${chara_id}:体力`);
-    if (
-      !stamina &&
-      !era.get(`tcvar:${chara_id}:脱力`) &&
-      sys_check_awake(chara_id)
-    ) {
-      era.set(`tcvar:${chara_id}:脱力`, 1);
-      era.add(`nowex:${chara_id}:脱力`, 1);
+    const stamina = era.get(`base:${cid}:体力`);
+    if (!stamina && !era.get(`tcvar:${cid}:脱力`) && sys_check_awake(cid)) {
+      era.set(`tcvar:${cid}:脱力`, 1);
+      era.add(`nowex:${cid}:脱力`, 1);
       lost_mind_timer = 0;
     } else if (
       stamina &&
-      !era.get(`base:${chara_id}:精力`) &&
-      !era.get(`tcvar:${chara_id}:失神`)
+      !era.get(`base:${cid}:精力`) &&
+      !era.get(`tcvar:${cid}:失神`)
     ) {
-      era.set(`tcvar:${chara_id}:精力不济`, 1);
-      lost_mind = era.add(`nowex:${chara_id}:失神`, 1);
+      era.set(`tcvar:${cid}:精力不济`, 1);
+      lost_mind = era.add(`nowex:${cid}:失神`, 1);
     }
-    if (check_erect(chara_id) && !era.get(`tcvar:${chara_id}:避孕套`)) {
-      set_stain(chara_id, part_enum.penis, stain_enum.semen);
+    if (check_erect(cid) && !era.get(`tcvar:${cid}:避孕套`)) {
+      set_stain(cid, part_enum.penis, stain_enum.semen);
     }
-    await run_custom_ero(chara_id, ero_hooks.orgasm, { shown });
+    await run_custom_ero(cid, ero_hooks.orgasm, { shown });
     era.set(
-      `nowex:${chara_id}:爱液分泌`,
-      Math.floor(era.get(`nowex:${chara_id}:爱液分泌`)),
+      `nowex:${cid}:爱液分泌`,
+      Math.floor(era.get(`nowex:${cid}:爱液分泌`)),
     );
-    if (era.get(`nowex:${chara_id}:TotalEX`) > 0) {
+    if (era.get(`nowex:${cid}:TotalEX`) > 0) {
       if (shown) {
-        common_orgasm(chara_id);
+        common_orgasm(cid);
       }
-      era.set(`tcvar:${chara_id}:刚刚高潮`, true);
+      era.set(`tcvar:${cid}:刚刚高潮`, true);
     } else if (shown) {
-      const chara = get_chara_talk(chara_id);
-      const milk_info = get_milk_info(chara_id);
+      const chara = get_chara_talk(cid);
+      const milk_info = get_milk_info(cid);
       if (milk_info.length > 0) {
         era.print([
           chara.get_colored_name(),
@@ -467,7 +463,7 @@ async function update_orgasms(shown, ...ids) {
           '！',
         ]);
       }
-      const squirt_info = get_squirt_info(chara_id);
+      const squirt_info = get_squirt_info(cid);
       if (squirt_info.length > 0) {
         era.print([
           chara.get_colored_name(),
@@ -479,189 +475,173 @@ async function update_orgasms(shown, ...ids) {
         ]);
       }
     }
-    if (era.get(`nowex:${chara_id}:失贞`) > 0) {
-      await run_custom_ero(chara_id, ero_hooks.lose_virginity, {
+    if (era.get(`nowex:${cid}:失贞`) > 0) {
+      await run_custom_ero(cid, ero_hooks.lose_virginity, {
         shown,
       });
     }
-    if (era.get(`nowex:${chara_id}:破处`) > 0) {
-      await run_custom_ero(chara_id, ero_hooks.lose_virginity, {
+    if (era.get(`nowex:${cid}:破处`) > 0) {
+      await run_custom_ero(cid, ero_hooks.lose_virginity, {
         shown,
         virgin: true,
       });
     }
-    if (era.get(`nowex:${chara_id}:阴道撕裂`) > 0) {
-      await run_custom_ero(chara_id, ero_hooks.wound, {
+    if (era.get(`nowex:${cid}:阴道撕裂`) > 0) {
+      await run_custom_ero(cid, ero_hooks.wound, {
         part: part_enum.virgin,
         shown,
       });
-    } else if (era.get(`ex:${chara_id}:阴道撕裂`) > 0) {
-      await run_custom_ero(chara_id, ero_hooks.wound, {
+    } else if (era.get(`ex:${cid}:阴道撕裂`) > 0) {
+      await run_custom_ero(cid, ero_hooks.wound, {
         continue: true,
         part: part_enum.virgin,
         shown,
       });
     }
-    if (era.get(`nowex:${chara_id}:肛门撕裂`) > 0) {
-      await run_custom_ero(chara_id, ero_hooks.wound, {
+    if (era.get(`nowex:${cid}:肛门撕裂`) > 0) {
+      await run_custom_ero(cid, ero_hooks.wound, {
         part: part_enum.anal,
         shown,
       });
-    } else if (era.get(`ex:${chara_id}:肛门撕裂`) > 0) {
-      await run_custom_ero(chara_id, ero_hooks.wound, {
+    } else if (era.get(`ex:${cid}:肛门撕裂`) > 0) {
+      await run_custom_ero(cid, ero_hooks.wound, {
         continue: true,
         part: part_enum.anal,
         shown,
       });
     }
     add_juel(
-      chara_id,
+      cid,
       '痛苦',
       2 *
         base_emotion_juel *
-        (era.get(`ex:${chara_id}:阴道撕裂`) +
-          era.get(`ex:${chara_id}:肛门撕裂`)),
+        (era.get(`ex:${cid}:阴道撕裂`) + era.get(`ex:${cid}:肛门撕裂`)),
     );
-    if (era.get(`nowex:${chara_id}:勃起`) > 0) {
-      await run_custom_ero(chara_id, ero_hooks.become_erect, {
+    if (era.get(`nowex:${cid}:勃起`) > 0) {
+      await run_custom_ero(cid, ero_hooks.become_erect, {
         shown,
         part: part_enum.penis,
       });
     }
-    if (era.get(`nowex:${chara_id}:乳突`) > 0) {
-      await run_custom_ero(chara_id, ero_hooks.become_erect, {
+    if (era.get(`nowex:${cid}:乳突`) > 0) {
+      await run_custom_ero(cid, ero_hooks.become_erect, {
         shown,
         part: part_enum.breast,
       });
     }
-    if (era.get(`nowex:${chara_id}:阴道润滑`) > 0) {
-      await run_custom_ero(chara_id, ero_hooks.become_lubrication, {
+    if (era.get(`nowex:${cid}:阴道润滑`) > 0) {
+      await run_custom_ero(cid, ero_hooks.become_lubrication, {
         shown,
         part: part_enum.virgin,
       });
     }
-    if (era.get(`nowex:${chara_id}:肛门润滑`) > 0) {
-      await run_custom_ero(chara_id, ero_hooks.become_lubrication, {
+    if (era.get(`nowex:${cid}:肛门润滑`) > 0) {
+      await run_custom_ero(cid, ero_hooks.become_lubrication, {
         shown,
         part: part_enum.anal,
       });
     }
-    if (era.get(`nowex:${chara_id}:潮吹`) > 0) {
-      era.add(`exp:${chara_id}:潮吹次数`, 1);
+    if (era.get(`nowex:${cid}:潮吹`) > 0) {
+      era.add(`exp:${cid}:潮吹次数`, 1);
     }
     let tmp;
-    if ((tmp = era.get(`nowex:${chara_id}:爱液分泌`)) > 0) {
-      era.add(`exp:${chara_id}:爱液分泌量`, tmp);
+    if ((tmp = era.get(`nowex:${cid}:爱液分泌`)) > 0) {
+      era.add(`exp:${cid}:爱液分泌量`, tmp);
     }
-    if ((tmp = era.get(`nowex:${chara_id}:饮爱液量`)) > 0) {
-      era.add(`exp:${chara_id}:饮爱液量`, tmp);
+    if ((tmp = era.get(`nowex:${cid}:饮爱液量`)) > 0) {
+      era.add(`exp:${cid}:饮爱液量`, tmp);
     }
-    if (era.get(`nowex:${chara_id}:脱力`) > 0) {
-      await run_custom_ero(chara_id, ero_hooks.zero_stamina, { shown });
+    if (era.get(`nowex:${cid}:脱力`) > 0) {
+      await run_custom_ero(cid, ero_hooks.zero_stamina, { shown });
     }
     if (lost_mind > 0) {
       // 失神时间与根性相关，最少1回合
       era.set(
-        `tcvar:${chara_id}:失神`,
+        `tcvar:${cid}:失神`,
         Math.ceil((max_absent_mind_time - 1) * (1 - wp_ratio)) + 1,
       );
-      await run_custom_ero(chara_id, ero_hooks.lost_mind, { shown });
+      await run_custom_ero(cid, ero_hooks.lost_mind, { shown });
     } else if (lost_mind_timer) {
       // 失神状态每回合衰减
-      era.add(`tcvar:${chara_id}:失神`, -1);
-      if (!(lost_mind_timer - 1) && !era.get(`tcvar:${chara_id}:脱力`)) {
+      era.add(`tcvar:${cid}:失神`, -1);
+      if (!(lost_mind_timer - 1) && !era.get(`tcvar:${cid}:脱力`)) {
         era.set(
-          `base:${chara_id}:精力`,
+          `base:${cid}:精力`,
           Math.floor(
-            time_resume_ratio *
-              era.get(`maxbase:${chara_id}:精力`) *
-              (1 + wp_ratio),
+            time_resume_ratio * era.get(`maxbase:${cid}:精力`) * (1 + wp_ratio),
           ),
         );
       }
     }
-    if (era.get(`tcvar:${chara_id}:余韵`) > 0) {
-      era.add(`tcvar:${chara_id}:余韵`, -1);
+    if (era.get(`tcvar:${cid}:余韵`) > 0) {
+      era.add(`tcvar:${cid}:余韵`, -1);
     }
-    if (era.get(`tcvar:${chara_id}:不应期`) > 0) {
-      era.add(`tcvar:${chara_id}:不应期`, -1);
+    if (era.get(`tcvar:${cid}:不应期`) > 0) {
+      era.add(`tcvar:${cid}:不应期`, -1);
       // 射精之后如果进入不应期，拔出来
-      const touched_part = era.get(`tcvar:${chara_id}:阴茎接触部位`);
+      const touched_part = era.get(`tcvar:${cid}:阴茎接触部位`);
       if (
-        era.get(`nowex:${chara_id}:阴茎高潮`) > 0 &&
+        era.get(`nowex:${cid}:阴茎高潮`) > 0 &&
         (touched_part.part === part_enum.virgin ||
           touched_part.part === part_enum.anal)
       ) {
-        clean_part_without_item(new EroParticipant(chara_id, part_enum.penis));
+        clean_part_without_item(new EroParticipant(cid, part_enum.penis));
       }
     }
-    if (era.get(`tcvar:${chara_id}:阴道扩张`) > 0) {
-      era.add(`tcvar:${chara_id}:阴道扩张`, -1);
+    if (era.get(`tcvar:${cid}:阴道扩张`) > 0) {
+      era.add(`tcvar:${cid}:阴道扩张`, -1);
     }
-    if (era.get(`tcvar:${chara_id}:肛门扩张`) > 0) {
-      era.add(`tcvar:${chara_id}:肛门扩张`, -1);
+    if (era.get(`tcvar:${cid}:肛门扩张`) > 0) {
+      era.add(`tcvar:${cid}:肛门扩张`, -1);
     }
     if (shown) {
       era.println();
     }
   }
-  for (const chara_id of ids) {
+  for (const cid of ids) {
+    era.add(`nowex:${cid}:胸部高潮`, era.get(`nowex:${cid}:乳头高潮`));
+    era.add(`ex:${cid}:乳头高潮`, era.get(`nowex:${cid}:乳头高潮`));
+    era.set(`nowex:${cid}:乳头高潮`, 0);
+    era.add(`ex:${cid}:胸部高潮`, era.get(`nowex:${cid}:无自觉乳头高潮`));
     era.add(
-      `nowex:${chara_id}:胸部高潮`,
-      era.get(`nowex:${chara_id}:乳头高潮`),
+      `nowex:${cid}:无自觉胸部高潮`,
+      era.get(`nowex:${cid}:无自觉乳头高潮`),
     );
-    era.add(`ex:${chara_id}:乳头高潮`, era.get(`nowex:${chara_id}:乳头高潮`));
-    era.set(`nowex:${chara_id}:乳头高潮`, 0);
+    era.add(`ex:${cid}:无自觉乳头高潮`, era.get(`nowex:${cid}:无自觉乳头高潮`));
+    era.set(`nowex:${cid}:无自觉乳头高潮`, 0);
     era.add(
-      `ex:${chara_id}:胸部高潮`,
-      era.get(`nowex:${chara_id}:无自觉乳头高潮`),
-    );
-    era.add(
-      `nowex:${chara_id}:无自觉胸部高潮`,
-      era.get(`nowex:${chara_id}:无自觉乳头高潮`),
-    );
-    era.add(
-      `ex:${chara_id}:无自觉乳头高潮`,
-      era.get(`nowex:${chara_id}:无自觉乳头高潮`),
-    );
-    era.set(`nowex:${chara_id}:无自觉乳头高潮`, 0);
-    era.add(
-      `tcvar:${chara_id}:高潮满足`,
-      era.get(`nowex:${chara_id}:阴茎高潮`) +
-        era.get(`nowex:${chara_id}:阴道高潮`),
+      `tcvar:${cid}:高潮满足`,
+      era.get(`nowex:${cid}:阴茎高潮`) + era.get(`nowex:${cid}:阴道高潮`),
     );
     pleasure_list.forEach((part) => {
       const part_name = part_names[part];
       era.add(
-        `ex:${chara_id}:${part_name}高潮`,
-        era.get(`nowex:${chara_id}:${part_name}高潮`),
+        `ex:${cid}:${part_name}高潮`,
+        era.get(`nowex:${cid}:${part_name}高潮`),
       );
-      era.set(`nowex:${chara_id}:${part_name}高潮`, 0);
+      era.set(`nowex:${cid}:${part_name}高潮`, 0);
       if (part !== part_enum.sadism && part !== part_enum.masochism) {
         era.add(
-          `ex:${chara_id}:${part_name}高潮`,
-          era.get(`nowex:${chara_id}:无自觉${part_name}高潮`),
+          `ex:${cid}:${part_name}高潮`,
+          era.get(`nowex:${cid}:无自觉${part_name}高潮`),
         );
         era.add(
-          `ex:${chara_id}:无自觉${part_name}高潮`,
-          era.get(`nowex:${chara_id}:无自觉${part_name}高潮`),
+          `ex:${cid}:无自觉${part_name}高潮`,
+          era.get(`nowex:${cid}:无自觉${part_name}高潮`),
         );
-        era.set(`nowex:${chara_id}:无自觉${part_name}高潮`, 0);
+        era.set(`nowex:${cid}:无自觉${part_name}高潮`, 0);
       }
     });
-    era.add(
-      `cflag:${chara_id}:子宫内精液`,
-      era.get(`nowex:${chara_id}:膣内精液`),
-    );
-    era.add(
-      `cflag:${chara_id}:肠道内精液`,
-      era.get(`nowex:${chara_id}:肠内精液`),
-    );
-    era.add(`cflag:${chara_id}:腹中精液`, era.get(`nowex:${chara_id}:饮精量`));
+    era.add(`cflag:${cid}:子宫内精液`, era.get(`nowex:${cid}:膣内精液`));
+    era.add(`cflag:${cid}:肠道内精液`, era.get(`nowex:${cid}:肠内精液`));
+    era.add(`cflag:${cid}:腹中精液`, era.get(`nowex:${cid}:饮精量`));
     ex_list.forEach((key) => {
-      era.add(`ex:${chara_id}:${key}`, era.get(`nowex:${chara_id}:${key}`));
-      era.set(`nowex:${chara_id}:${key}`, 0);
+      era.add(`ex:${cid}:${key}`, era.get(`nowex:${cid}:${key}`));
+      era.set(`nowex:${cid}:${key}`, 0);
     });
+    era.set(`tcvar:${cid}:射精位置`, {});
+    era.set(`tcvar:${cid}:喷奶位置`, {});
+    era.set(`tcvar:${cid}:潮吹位置`, {});
   }
 }
 

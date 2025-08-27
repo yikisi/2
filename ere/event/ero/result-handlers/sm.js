@@ -24,18 +24,18 @@ const { ero_hooks } = require('#/data/event/ero-hooks');
 const { attr_enum } = require('#/data/train-const');
 
 /**
- * @param {number} chara_id
+ * @param {number} cid
  * @param {number} parts
  * @returns {number}
  */
-function get_sm_check(chara_id, ...parts) {
+function get_sm_check(cid, ...parts) {
   return (
-    get_action_base_check(chara_id) +
-    50 * era.get(`talent:${chara_id}:喜欢痛苦`) +
-    25 * era.get(`talent:${chara_id}:圣母`) +
+    get_action_base_check(cid) +
+    50 * era.get(`talent:${cid}:喜欢痛苦`) +
+    25 * era.get(`talent:${cid}:圣母`) +
     (20 *
       parts.reduce(
-        (p, c) => p + (era.get(`talent:${chara_id}:${part_talents[c]}`) === 2),
+        (p, c) => p + (era.get(`talent:${cid}:${part_talents[c]}`) === 2),
         0,
       )) /
       parts.length +
