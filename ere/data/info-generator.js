@@ -579,8 +579,7 @@ module.exports = {
   get_relation_mark,
   get_save_name() {
     const prefix =
-      era.get('flag:存档名') ||
-      `${era.get('callname:0:-1')} - ${get_date()} 周`;
+      era.get('flag:存档名') || `${era.get('callname:0:-1')} - ${get_date()}`;
     return `${prefix} (${new Date().toLocaleString('zh-CN', {
       timeZone: 'Asia/Shanghai',
     })})`;

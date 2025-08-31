@@ -1,6 +1,6 @@
-# [EraUma v2.131 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.131)
+# [EraUma v2.132 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.132)
 
-_2025/8/31_
+_incoming_
 
 适配 [EraElectron v4.2.2 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.2.2) 与 [ere.app v1.2.1 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.2.1) 及以上版本
 
@@ -8,9 +8,8 @@ _2025/8/31_
 
 ## Added
 
-* 新增训练相关淫纹插件
-
 ## Changed
 
-* 现在比赛中高潮被发现的概率随高潮次数指数增长，且最高不超过 50%
-* 现在带玩具比赛会额外提高事件【「」心「」体】20% 的触发概率
+## Fixed
+
+* 修复了存档文本中游戏内时间的错误
