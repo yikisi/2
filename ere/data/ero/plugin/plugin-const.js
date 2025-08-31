@@ -98,6 +98,9 @@ plugins[60116] = require('#/data/ero/plugin/plugin-60116');
 plugins[60117] = require('#/data/ero/plugin/plugin-60117');
 plugins[60211] = require('#/data/ero/plugin/plugin-60211');
 plugins[60212] = require('#/data/ero/plugin/plugin-60212');
+plugins[60221] = require('#/data/ero/plugin/plugin-60221');
+plugins[60222] = require('#/data/ero/plugin/plugin-60222');
+plugins[60223] = require('#/data/ero/plugin/plugin-60223');
 plugins[70111] = require('#/data/ero/plugin/plugin-70111');
 plugins[70112] = require('#/data/ero/plugin/plugin-70112');
 plugins[70211] = require('#/data/ero/plugin/plugin-70211');
@@ -299,6 +302,12 @@ module.exports = {
     sex_1: 60211,
     // 禁果变强: 通过性爱获取的基础属性×16，可以获取技能点数，不再自主训练且全训练加成降到最低
     sex_2: 60212,
+    // 信任彼此: 训练成功率与效果+10%
+    tra_1: 60221,
+    // 爱之奇迹: 训练成功率与效果+20%
+    tra_2: 60222,
+    // 直到极限: 训练成功率与效果+270%，消耗所有体力与精力并获得1层伤病，声望-1
+    tra_3: 60223,
     // 金枪鱼: 调教时不再做出反应
     tuna: 70111,
     // 温顺: 不再主动求爱，调教时也不再做出反应

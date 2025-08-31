@@ -722,7 +722,7 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
         inmon.slave = ret;
       }
     }
-  } else if (ret < 100) {
+  } else if (ret < 200) {
     const { p, m: cost } = plugins[ret - 10];
     if (!inmon.has(p.id)) {
       era.print([
