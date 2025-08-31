@@ -47,7 +47,7 @@ function sys_check_titles_after_race(team_list, race, best_rank, mvp_id) {
       new_title_dict[cid].push({ n: '父亲力量', c: buff_colors[2] });
     }
     if (uma.ero.orgasm > 0) {
-      o_flag += Math.random() < uma.ero.orgasm / 12;
+      o_flag += Math.random() < Math.min(uma.ero.orgasm, 6) ** 2 / (6 ** 2 * 2);
       if (uma.ero.orgasm >= 6) {
         new_title_dict[cid].push({ n: '惊世骇俗', c: buff_colors[2] });
         if (uma.race.conditionParams.item === 0) {

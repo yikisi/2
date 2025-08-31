@@ -17491,8 +17491,8 @@
       "title": "EraUma",
       "gameCode": 29407,
       "defaultChara": 0,
-      "version": 2130,
-      "versionName": "2.13 (agito)",
+      "version": 2131,
+      "versionName": "2.131 (agito)",
       "allowVersion": 1000,
       "site": "https://gitgud.io/umaera/erauma/-/releases/permalink/latest",
       "versionCheck": "https://umaera.gitgud.site/erauma/RELEASE",
@@ -26200,6 +26200,26 @@
       "posY": 0,
       "type": 0
     },
+    "凯斯_夏私": {
+      "path": "res/others/chr_icon_1093_109323_01.png",
+      "x": 0,
+      "y": 0,
+      "width": 200,
+      "height": 219,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "凯斯_夏私_半身": {
+      "path": "res/others/chara_stand_1093_109323.png",
+      "x": 0,
+      "y": 0,
+      "width": 512,
+      "height": 512,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
     "宝穴_私": {
       "path": "res/others/chr_icon_1094_901094_01.png",
       "x": 0,
@@ -26472,6 +26492,26 @@
     },
     "奇宝_私_半身": {
       "path": "res/others/chara_stand_1106_901106.png",
+      "x": 0,
+      "y": 0,
+      "width": 512,
+      "height": 512,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "奇宝_夏私": {
+      "path": "res/others/chr_icon_1106_110623_01.png",
+      "x": 0,
+      "y": 0,
+      "width": 200,
+      "height": 219,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "奇宝_夏私_半身": {
+      "path": "res/others/chara_stand_1106_110623.png",
       "x": 0,
       "y": 0,
       "width": 512,
