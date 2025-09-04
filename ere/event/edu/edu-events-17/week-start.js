@@ -548,61 +548,62 @@ module.exports = class extends Edu17UntilRaceStart {
     if (allow_transform) {
       ret = event_marks.want_emperor;
     }
-
-    await print_event_name('日月交替', ret > 0 ? emperor_talk : luna_talk);
-    if (ret > 0) {
-      const talk_list = [
-        '嗯……为了我们共同的愿望，我会忍受。',
-        '……抱着我……我不想一个人面对……',
-      ];
-      if (era.get('status:17:精神损伤') > 0) {
-        talk_list.push(`${me.actual_name}，非这样做不可吗？`);
+    if (+ret !== +event_marks.emperor) {
+      await print_event_name('日月交替', ret > 0 ? emperor_talk : luna_talk);
+      if (ret > 0) {
+        const talk_list = [
+          '嗯……为了我们共同的愿望，我会忍受。',
+          '……抱着我……我不想一个人面对……',
+        ];
+        if (era.get('status:17:精神损伤') > 0) {
+          talk_list.push(`${me.actual_name}，非这样做不可吗？`);
+        }
+        if (era.get(`status:${luna}:神经衰弱`) > 0) {
+          talk_list.push('…………………………………………我是谁？');
+        }
+        await luna_talk.say_and_wait(get_random_entry(talk_list));
+      } else {
+        const talk_list = ['入梦之时……？', '大器必成，亦须磨砺。'];
+        if (era.get(`status:${luna}:精神损伤`) > 0) {
+          talk_list.push('梦醒时刻。');
+        }
+        if (era.get(`status:${luna}:神经衰弱`) > 0) {
+          talk_list.push('向伊甸进发！');
+        }
+        await emperor_talk.say_and_wait(get_random_entry(talk_list));
       }
-      if (era.get(`status:${luna}:神经衰弱`) > 0) {
-        talk_list.push('…………………………………………我是谁？');
-      }
-      await luna_talk.say_and_wait(get_random_entry(talk_list));
-    } else {
-      const talk_list = ['入梦之时……？', '大器必成，亦须磨砺。'];
-      if (era.get(`status:${luna}:精神损伤`) > 0) {
-        talk_list.push('梦醒时刻。');
-      }
-      if (era.get(`status:${luna}:神经衰弱`) > 0) {
-        talk_list.push('向伊甸进发！');
-      }
-      await emperor_talk.say_and_wait(get_random_entry(talk_list));
     }
-    let race_punish = false;
-    const race_history = RaceHistory.get(17).get();
+    let punish = false;
+    const race_his = RaceHistory.get(17).get();
 
     switch (edu_weeks) {
       case race_infos[race_enum.sats_sho].date + 48: // 五月第一周 皋月赏惩罚
-        race_punish = !check_aim_race(race_history, race_enum.sats_sho, 1, 1);
+        punish = !check_aim_race(race_his, race_enum.sats_sho, 1, 1);
         break;
       case race_infos[race_enum.toky_yus].date + 48: // 六月第一周 日本德比惩罚
-        race_punish = !check_aim_race(race_history, race_enum.toky_yus, 1, 1);
+        punish = !check_aim_race(race_his, race_enum.toky_yus, 1, 1);
         break;
       case race_infos[race_enum.kiku_sho].date + 48: // 冬月第一周 菊花赏惩罚
-        race_punish = !check_aim_race(race_history, race_enum.kiku_sho, 1, 1);
+        punish = !check_aim_race(race_his, race_enum.kiku_sho, 1, 1);
         break;
       case race_infos[race_enum.arim_kin].date + 48: // 新年第一周 有马纪念惩罚
-        race_punish = !check_aim_race(race_history, race_enum.arim_kin, 1, 1);
+        punish = !check_aim_race(race_his, race_enum.arim_kin, 1, 1);
         break;
       case race_infos[race_enum.tenn_spr].date + 96: // 五月第一周 天皇赏春惩罚
-        race_punish = !check_aim_race(race_history, race_enum.tenn_spr, 2, 1);
+        punish = !check_aim_race(race_his, race_enum.tenn_spr, 2, 1);
         break;
       case race_infos[race_enum.japa_cup].date + 96: // 冬月第四周 日本杯惩罚
-        race_punish = !check_aim_race(race_history, race_enum.japa_cup, 2, 1);
+        punish = !check_aim_race(race_his, race_enum.japa_cup, 2, 1);
     }
-    if (race_punish) {
+    if (punish) {
       sys_like_chara(emperor, 0, -50);
     }
     const total_punish =
-      (ret > 0 && ++event_marks.break_down % 7 === 0) + race_punish;
+      (ret > 0 && ++event_marks.break_down % 7 === 0) + punish;
     if (total_punish > 0) {
       await handle_debuff(event_marks, luna, total_punish);
     }
-    if (!ret !== !event_marks.emperor) {
+    if (+ret !== +event_marks.emperor) {
       transform(event_marks);
     }
   }
