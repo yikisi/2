@@ -63,7 +63,7 @@ module.exports = class extends CustomizedMec {
   set_pseudo_uma(uma) {
     if (new TachyonEduMarks().uma_limit) {
       uma.attr_buffs.forEach((l, i) => {
-        const val = 1200 - uma.attrs[i];
+        const val = Math.ceil(1200 - uma.attrs[i]);
         if (val > 0) {
           l.push(`+${val}[马娘的极限]`);
         }
