@@ -654,7 +654,7 @@ module.exports = async () => {
             { isDivider: true },
             {
               content: '赛马娘中文 Wiki',
-              url: 'https://wiki.biligame.com/umamusume/%E9%A6%96%E9%A1%B5',
+              url: 'https://wiki.biligame.com/umamusume/首页',
             },
           ],
           {
@@ -797,6 +797,9 @@ module.exports = async () => {
         await era.printAndWait('午马牧师妹 · 普瑞提达比', {
           fontSize: '1.25rem',
         });
+        era.println();
+        era.printButton('返回标题', 0);
+        await era.input({ hideInput: true });
         era.setAlign('left');
     }
   }
