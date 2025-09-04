@@ -249,7 +249,7 @@ module.exports = class extends CustomizedEro {
           default_filter,
           false,
         );
-        if (era.get('tcvar:9:脱力') || era.get('tcvar:9:逃跑')) {
+        if (era.get('tcvar:9:脱力') > 0 || era.get('tcvar:9:逃跑') > 0) {
           flag_rape = false;
         }
       }

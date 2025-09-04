@@ -37,6 +37,8 @@ class MyEduMarks extends EduEventMarks {
   p_slave_punish;
   // 樱花的遗憾
   pity;
+  // 孕袋父子丼
+  orgy;
 
   constructor() {
     super(0);
