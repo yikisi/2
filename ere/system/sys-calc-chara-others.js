@@ -42,7 +42,12 @@ async function punish_unfaithful(lover, new_love) {
       '招募状态',
       recruit_flags.yes,
     ).filter((cid) => {
-      return cid > 0 && cid !== lover && era.get(`love:${cid}`) >= 75;
+      return (
+        cid > 0 &&
+        cid !== lover &&
+        era.get(`love:${cid}`) >= 75 &&
+        era.get(`cflag:${cid}:成长阶段`) >= 2
+      );
     });
   for (const cid of temp_chara_list) {
     const is_aware =
