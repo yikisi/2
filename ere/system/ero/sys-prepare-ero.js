@@ -104,19 +104,19 @@ function update_ero_status(...ids) {
         era.get(`status:${cid}:弗隆K`) ||
         era.get(`status:${cid}:弗隆P`),
     );
-    if (i_estrus && era.get(`talent:${cid}:淫口`)) {
+    if (i_estrus && era.get(`talent:${cid}:淫口`) > 0) {
       set_stain(cid, part_enum.mouth, stain_enum.saliva);
     }
     if (
       i_estrus &&
-      era.get(`talent:${cid}:淫乳`) &&
-      era.get(`talent:${cid}:泌乳`)
+      era.get(`talent:${cid}:淫乳`) > 0 &&
+      era.get(`talent:${cid}:泌乳`) > 0
     ) {
       set_stain(cid, part_enum.breast, stain_enum.milk);
     }
     if (
       era.get(`talent:${cid}:乳头类型`) === 2 &&
-      (i_estrus || era.get(`talent:${cid}:淫乳`))
+      (i_estrus || era.get(`talent:${cid}:淫乳`) > 0)
     ) {
       era.set(`tcvar:${cid}:乳突`, 1);
     }
@@ -138,10 +138,10 @@ function update_ero_status(...ids) {
       set_stain(cid, part_enum.penis, stain_enum.semen);
     }
     if (
-      era.get(`cflag:${cid}:阴道尺寸`) &&
+      era.get(`cflag:${cid}:阴道尺寸`) > 0 &&
       (i_estrus ||
-        era.get(`talent:${cid}:淫壶`) ||
-        era.get(`status:${cid}:反避孕套`))
+        era.get(`talent:${cid}:淫壶`) > 0 ||
+        era.get(`status:${cid}:反避孕套`) > 0)
     ) {
       set_stain(cid, part_enum.virgin, stain_enum.secretion);
     }
