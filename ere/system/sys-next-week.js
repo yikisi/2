@@ -148,7 +148,7 @@ async function sys_next_week() {
     }
     tmp = true;
     act_list = sort_list(act_list, Math.random).filter(
-      (e) => tmp && (tmp = !e.prison) !== undefined,
+      (act) => tmp && (tmp = !act.prison),
     );
     // 睡奸归并
     const final_act_list = [];

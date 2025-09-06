@@ -10,7 +10,7 @@ const { get_penis_size } = require('#/system/ero/sys-calc-ero-status');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
-const common_pregnant_report_in_love = require('#/event/ero/common/common-pregnant-report-in-love');
+const pregnant_report_in_love = require('#/event/ero/common/pregnant-report-in-love');
 const kojo = require('#/event/ero/ero-0.kojo');
 const CustomizedEro = require('#/event/ero/ero-common');
 const add_jewel_reward = require('#/event/snippets/add-jewel-reward');
@@ -138,7 +138,7 @@ module.exports = class extends CustomizedEro {
       ).unexpected_pregnant;
     era.drawLine();
     if (love >= 90) {
-      await common_pregnant_report_in_love(father, mother, unexpected_pregnant);
+      await pregnant_report_in_love(father, mother, unexpected_pregnant);
     } else {
       const is_p_slave = era.get('flag:惩戒力度');
       await print_event_name(is_p_slave === 3 ? '职责' : '意外', mother);

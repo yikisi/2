@@ -17,9 +17,10 @@ const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
-const common_pregnant_report_in_love = require('#/event/ero/common/common-pregnant-report-in-love');
+const kojo = require('#/event/ero/common/common.kojo');
 const cum_in_womb = require('#/event/ero/common/cum-in-womb');
 const NormalCommandLines = require('#/event/ero/common/normal/normal-common');
+const pregnant_report_in_love = require('#/event/ero/common/pregnant-report-in-love');
 const RapeCommandLines = require('#/event/ero/common/rape/rape-common');
 const SleepCommandLines = require('#/event/ero/common/sleep/sleep-common');
 const print_event_name = require('#/event/snippets/print-event-name');
@@ -118,7 +119,27 @@ class CustomizedEro {
    * @param {number} supporter
    */
   // eslint-disable-next-line no-unused-vars
-  async raping_start(supporter) {}
+  async raping_start(supporter) {
+    let temp;
+    if (
+      era.get('flag:惩戒力度') === 3 &&
+      supporter > 0 &&
+      (temp = [
+        era.get(`cflag:${this.id}:父方角色`) === supporter,
+        era.get(`cflag:${supporter}:父方角色`) === this.id,
+      ]).reduce((p, c) => p || c)
+    ) {
+      const { c: child, f: father } = temp[0]
+        ? { c: this.id, f: supporter }
+        : { c: supporter, f: this.id };
+      const o = {};
+      o['玩家名'] = era.get('callname:0:-2');
+      o['马娘名'] = era.get(`callname:${father}:-2`);
+      o['女儿名'] = era.get(`callname:${child}:-2`);
+      o['称呼'] = sys_get_callname(child, 0);
+      await kojo['孕袋惊醒'](o);
+    }
+  }
 
   /**
    * 调教结束
@@ -513,7 +534,7 @@ class CustomizedEro {
       ).unexpected_pregnant;
     era.drawLine();
     if (love >= 90) {
-      await common_pregnant_report_in_love(father, mother, unexpected_pregnant);
+      await pregnant_report_in_love(father, mother, unexpected_pregnant);
     } else {
       await print_event_name('意外', mother);
       await era.printAndWait([

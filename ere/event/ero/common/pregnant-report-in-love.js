@@ -12,11 +12,7 @@ const { unexpected_pregnant_enum } = require('#/data/ero/status-const');
  * @param {CharaTalk} mother
  * @param {number} unexpected_pregnant
  */
-async function common_pregnant_report_in_love(
-  father,
-  mother,
-  unexpected_pregnant,
-) {
+async function pregnant_report_in_love(father, mother, unexpected_pregnant) {
   await print_event_name('孕育', mother);
   await era.printAndWait([
     mother.get_colored_name(),
@@ -61,4 +57,4 @@ async function common_pregnant_report_in_love(
   }
 }
 
-module.exports = common_pregnant_report_in_love;
+module.exports = pregnant_report_in_love;

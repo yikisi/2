@@ -8,6 +8,8 @@ _incoming_
 
 ## Added
 
+* 增加了部分孕袋玩家用调教口上
+
 ## Changed
 
 ## Fixed
