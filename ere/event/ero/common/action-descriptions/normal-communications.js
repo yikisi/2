@@ -97,7 +97,11 @@ module.exports = (handlers) => {
   };
 
   handlers[ero_hooks.resist] = (attacker) =>
-    era.printAndWait(['【', attacker.get_colored_name(), ' 激烈反抗】']);
+    era.printAndWait([
+      '【',
+      attacker.get_colored_name(),
+      ' 尝试反抗以取得主导权】',
+    ]);
 
   handlers[ero_hooks.gargle] = (attacker, defender) =>
     era.printAndWait([

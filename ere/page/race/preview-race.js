@@ -739,7 +739,7 @@ async function preview_race(
           return;
         }
         const ero_skill_level = u.list_skill.find(
-          (s) => s.data.group_id === 66003,
+          (s) => s.data.group_id === 66005,
         )?.data?.group_level;
         const buff_length = u.attr_buffs[0].length;
         if (ero_skill_level === 2) {
