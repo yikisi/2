@@ -54,8 +54,8 @@ module.exports = (handlers) => {
         era.get(`maxbase:${chara_id}:体力`) >= 500,
     );
     if (aim !== undefined) {
-      const aim_chara = get_chara_talk(aim),
-        val = era.get(`maxbase:${aim}:体力`) / 2;
+      const aim_chara = get_chara_talk(aim);
+      const val = era.get(`maxbase:${aim}:体力`) / 2;
       era.add(`maxbase:${aim}:体力`, -get_random_value(100, 200));
       await era.printAndWait([
         aim_chara.get_colored_name(),
@@ -87,7 +87,7 @@ module.exports = (handlers) => {
           -get_random_value(10, Math.min(20, era.get(`base:${aim}:耐力`) - 1)),
         ),
         '，',
-        ...sys_change_attr_and_print(aim, '体力', 2000),
+        ...sys_change_attr_and_print(aim, '体力', 400),
       ]);
       era.add(`base:${aim}:药物残留`, 8);
       era.add('item:强化青汁', -1);
@@ -104,8 +104,8 @@ module.exports = (handlers) => {
         era.get(`maxbase:${chara_id}:精力`) >= 500,
     );
     if (aim !== undefined) {
-      const aim_chara = get_chara_talk(aim),
-        val = era.get(`maxbase:${aim}:精力`) / 2;
+      const aim_chara = get_chara_talk(aim);
+      const val = era.get(`maxbase:${aim}:精力`) / 2;
       era.add(`maxbase:${aim}:精力`, -get_random_value(100, 200));
       await era.printAndWait([
         aim_chara.get_colored_name(),
@@ -139,7 +139,7 @@ module.exports = (handlers) => {
           -get_random_value(10, Math.min(20, era.get(`base:${aim}:智力`) - 1)),
         ),
         '，',
-        ...sys_change_attr_and_print(aim, '精力', 2000),
+        ...sys_change_attr_and_print(aim, '精力', 400),
       ]);
       if (!era.get(`base:${aim}:体力`) < 1) {
         era.add(`base:${aim}:体力`, 1);

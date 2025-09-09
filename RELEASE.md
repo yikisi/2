@@ -1,6 +1,6 @@
-# [EraUma v2.133 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.133)
+# [EraUma v2.134 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.134)
 
-_2025/9/6_
+_incoming_
 
 适配 [EraElectron v4.2.2 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.2.2) 与 [ere.app v1.2.1 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.2.1) 及以上版本
 
@@ -8,9 +8,8 @@ _2025/9/6_
 
 ## Added
 
-* 增加了部分孕袋玩家用调教口上
+## Changed
 
 ## Fixed
 
-* 修复了调教开始时部位钝感会造成和部位敏感一样的部位状态效果的错误
-* 修复了 [性爱即德比] 与 [欢愉之主在下] 不再抵消带玩具比赛对基础属性的负面影响
+* 修复了道具【强化青汁】和【镇静剂】无法恢复所有体力或精力的错误
