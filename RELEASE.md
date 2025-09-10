@@ -1,4 +1,4 @@
-# [EraUma v2.134 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.134)
+# [EraUma v2.14 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.14)
 
 _incoming_
 
@@ -6,10 +6,7 @@ _incoming_
 
 资源包版本：20250830
 
-## Added
-
-## Changed
-
 ## Fixed
 
 * 修复了道具【强化青汁】和【镇静剂】无法恢复所有体力或精力的错误
+* 修复了因口上脚本错误
