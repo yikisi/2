@@ -82,14 +82,19 @@ module.exports = async () => {
           { content: '托管仓库', url: 'https://gitgud.io/umaera/erauma' },
           '；因为游戏本身的性质，禁止在任何未成年人可以接触到的公开场合展示或传播本游戏，更禁止任何人在任何商业活动（贩卖/附送等）和公开活动（直播等）中使用本游戏。',
           { isBr: true },
-          '6. 在明确注明或保留游戏来源、不涉及任何商业目的和经济受益、并同样遵守本免责声明并尊重',
+          '6. 在明确注明或保留游戏来源、不涉及任何商业目的和经济受益、并同样遵守本免责声明、',
           {
-            content: '口上创作协议赋予口上作者的权利',
+            content: 'GPL 2.0 only 开源协议',
             fontWeight: 'bold',
-            title:
-              '包括但不限于「要求由其他开发者拷贝本游戏源代码开发的新游戏（称为魔改版）删除自己创作的文本内容的权利」',
+            url: 'https://gnu.ac.cn/licenses/old-licenses/gpl-2.0.html',
           },
-          '的情况下，允许他人基于本游戏进行修改或二次开发。该授权将直接赋予本游戏的所有玩家，不需要专门征求开发者的明确同意。',
+          '与',
+          {
+            content: '口上创作协议',
+            fontWeight: 'bold',
+            url: 'https://gitgud.io/umaera/erauma/-/wikis/LICENSE',
+          },
+          '的情况下，允许他人基于本游戏进行修改或二次开发（衍生产物称为魔改版）。该授权将直接赋予本游戏的所有玩家，不需要专门征求开发者的明确同意，但需要在游戏标题和标题界面等处标明是魔改版并与原版做出明显区分。',
           { isBr: true },
           '7. 本声明的解释权归开发者所有，且在版本更新中声明内容可能有所变更，请以最新版本为准。',
           { isBr: true },
@@ -805,7 +810,7 @@ module.exports = async () => {
           fontSize: '1.25rem',
         });
         era.println();
-        era.printButton('返回标题', 0);
+        era.printButton('返回标题', 0, { disableContinue: true });
         await era.input({ hideInput: true });
         era.setAlign('left');
     }
