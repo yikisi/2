@@ -15,6 +15,7 @@ variables:
   GAME_BUNDLE_URL: '${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/bundle/${CI_COMMIT_TAG}/erauma-android-${CI_COMMIT_TAG}.zip'
   CALL_SIGN: 'agito'
   RES_VERSION: '20250915'
+  GIT_SUBMODULE_STRATEGY: recursive
 
 build:
   stage: build
