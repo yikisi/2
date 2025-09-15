@@ -110,6 +110,7 @@ gene_dict[900771] = require('#/data/race/gene/gene-900771');
 gene_dict[900781] = require('#/data/race/gene/gene-900781');
 gene_dict[900791] = require('#/data/race/gene/gene-900791');
 gene_dict[900801] = require('#/data/race/gene/gene-900801');
+gene_dict[900811] = require('#/data/race/gene/gene-900811');
 gene_dict[900821] = require('#/data/race/gene/gene-900821');
 gene_dict[900831] = require('#/data/race/gene/gene-900831');
 gene_dict[900841] = require('#/data/race/gene/gene-900841');

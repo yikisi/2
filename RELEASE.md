@@ -1,10 +1,10 @@
 # [EraUma v2.14 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.14)
 
-_incoming_
+_2025/9/15_
 
-适配 [EraElectron v4.2.2 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.2.2) 与 [ere.app v1.2.1 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.2.1) 及以上版本
+适配 [EraElectron v4.3.0 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.3.0) 与 [ere.app v1.2.3 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.2.3) 及以上版本
 
-资源包版本：20250830
+资源包版本：20250915
 
 ## Changed
 
