@@ -362,7 +362,7 @@ _2025/7/28_
 
 * 修复了一个导致安卓版无法与角色上床的错误
 
-## [EraUma v2.0 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.0)
+## [**EraUma v2.0 (agito)**](https://gitgud.io/umaera/erauma/-/releases/2.0)
 
 _2025/7/28_
 
@@ -1067,8 +1067,7 @@ _2024/12/26_
 
 _2024/12/25_
 
-适配 [EraElectron v3.2.0 (victory)](https://gitgud.io/umaera/engine/era-electron/-/releases/3.2.0)
-及以上版本，以套用EraElectron的安全性更新
+适配 [EraElectron v3.2.0 (victory)](https://gitgud.io/umaera/engine/era-electron/-/releases/3.2.0) 及以上版本，以套用EraElectron的安全性更新
 
 因为引擎API改动，不再支持3.1.1及以下的版本！
 
@@ -1266,7 +1265,7 @@ _2024/10/27_
 * 修复了周日宁静育成事件【深夜的暴风雨】无法正确触发的问题
 * 修复了杜兰达尔的专属称号【圣剑】无法获取的问题
 
-## [EraUma v1.0 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.0)
+## [**EraUma v1.0 (kuuga)**](https://gitgud.io/umaera/erauma/-/releases/1.0)
 
 _2024/10/24_
 
