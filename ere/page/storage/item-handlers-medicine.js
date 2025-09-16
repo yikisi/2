@@ -87,7 +87,11 @@ module.exports = (handlers) => {
           -get_random_value(10, Math.min(20, era.get(`base:${aim}:耐力`) - 1)),
         ),
         '，',
-        ...sys_change_attr_and_print(aim, '体力', 400),
+        ...sys_change_attr_and_print(
+          aim,
+          '体力',
+          era.get(`maxbase:${aim}:体力`),
+        ),
       ]);
       era.add(`base:${aim}:药物残留`, 8);
       era.add('item:强化青汁', -1);
@@ -139,7 +143,11 @@ module.exports = (handlers) => {
           -get_random_value(10, Math.min(20, era.get(`base:${aim}:智力`) - 1)),
         ),
         '，',
-        ...sys_change_attr_and_print(aim, '精力', 400),
+        ...sys_change_attr_and_print(
+          aim,
+          '精力',
+          era.get(`maxbase:${aim}:精力`),
+        ),
       ]);
       if (!era.get(`base:${aim}:体力`) < 1) {
         era.add(`base:${aim}:体力`, 1);
