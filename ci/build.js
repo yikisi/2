@@ -33,7 +33,9 @@ mkdirSync(join(game_all_dir, 'game'));
 [
   'ere',
   'csv',
-  'CHANGELOG.md',
+  'CHANGELOG-test.md',
+  'CHANGELOG-v1-kuuga.md',
+  'CHANGELOG-v2-agito.md',
   'RELEASE.md',
   'LICENSE',
   'README.md',

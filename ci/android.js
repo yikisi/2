@@ -27,7 +27,9 @@ webpack(config, (err, stats) => {
     const game_dir = resolve(process.env.GAME_BUNDLE_DIR);
     const bundle_zip = resolve(process.env.GAME_BUNDLE_ZIP);
     [
-      'CHANGELOG.md',
+      'CHANGELOG-test.md',
+      'CHANGELOG-v1-kuuga.md',
+      'CHANGELOG-v2-agito.md',
       'RELEASE.md',
       'LICENSE',
       'README.md',
