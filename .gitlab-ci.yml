@@ -8,7 +8,6 @@ variables:
   BASE_URL: '${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/base/${CI_COMMIT_TAG}/base.zip'
   GAME_BUNDLE_DIR: 'erauma-android-${CI_COMMIT_TAG}'
   CALL_SIGN: 'agito'
-  RES_VERSION: '20250915'
 
 before_script:
   - export GAME_ALL_ZIP="${GAME_ALL_DIR}-win-x64.7z"
@@ -28,6 +27,9 @@ build:
   script:
     - npm install
     - node ci/build.js
+  artifacts:
+    reports:
+      dotenv: res.env
 
 android:
   stage: build
@@ -56,6 +58,8 @@ release:
     - docker
   script:
     - sed -i '1,4d' ./RELEASE.md
+    - echo "GAME_VERSION=${CI_COMMIT_TAG} ($CALL_SIGN)"
+    - echo "RESOURCE_VERSION=${RES_VERSION} ( < ${OLD_VERSION})"
     - echo "Releasing..."
   release:
     name: 'EraUma v$CI_COMMIT_TAG ($CALL_SIGN)'
@@ -74,4 +78,6 @@ release:
           url: '${GAME_BUNDLE_URL}'
           link_type: package
         - name: '[通用资源包] erauma-master-res.zip (版本号 $RES_VERSION，解压后将 res 文件夹放到游戏文件夹下，在游戏设置中启用资源)'
-          url: 'https://gitgud.io/umaera/erauma/-/archive/master/erauma-master.zip?path=res'
+          url: 'https://gitgud.io/umaera/data/uma-resource/-/archive/${RES_VERSION}/uma-resource-${RES_VERSION}.zip'
+        - name: '[资源差分包] erauma-res-${RES_VERSION}-${OLD_VERSION}.zip'
+          url: 'https://umaera.gitgud.site/data/uma-resource/index.html'

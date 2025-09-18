@@ -4,3 +4,6 @@
 [submodule "common"]
 	path = common
 	url = https://gitgud.io/umaera/data/uma-common.git
+[submodule "res"]
+	path = res
+	url = https://gitgud.io/umaera/data/uma-resource.git

@@ -112,3 +112,19 @@ if (min_version !== game_version) {
     ),
   );
 }
+
+const res_ver = String(
+  execSync('git tag --sort=-creatordate | head -n 2', {
+    cwd: join(work_dir, 'res'),
+  }),
+)
+  .split('\n')
+  .map((e) => e);
+
+writeFileSync(
+  join(work_dir, 'res.env'),
+  `RES_VERSION=${res_ver[0]}\nOLD_VERSION=${res_ver[1]}`,
+  {
+    encoding: 'utf-8',
+  },
+);
