@@ -29,6 +29,7 @@ const { check_rec_script } = require('#/event/rec/rec-factory');
 
 const { say_by_passer_by } = require('#/utils/chara-talk');
 const CharaTalk = require('#/utils/chara-talk');
+const { join_list } = require('#/utils/list-utils');
 
 const item_title_color =
   require('#/data/color-const').adaptability_colors.at(-1);
@@ -36,7 +37,7 @@ const { get_chara_color } = require('#/data/chara-colors');
 const title_desc = require('#/data/desc/title-desc.json');
 const notes = require('#/data/notes.json');
 const { first_child_id } = require('#/data/other-const');
-const { join_list } = require('#/utils/list-utils');
+const { res_version } = require('#/versions');
 
 /**
  * @param {number} cid
@@ -324,8 +325,8 @@ module.exports = async () => {
             content: [
               '适配资源包版本：',
               {
-                content: '20250915',
-                url: 'https://gitgud.io/umaera/erauma/-/archive/master/erauma-master.zip?path=res',
+                content: res_version,
+                url: `https://gitgud.io/umaera/data/uma-resource/-/archive/${res_version}/uma-resource-${res_version}.zip`,
               },
             ],
             type: 'text',
