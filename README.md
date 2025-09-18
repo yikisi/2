@@ -4,7 +4,7 @@ EraUma 和 ERE 引擎（EraElectron、ere.app）将保持开源，请各位开�
 
 [Release Notes](RELEASE.md)
 
-Change Logs: [test](CHANGELOG-test) [v1 kuuga](CHANGELOG-v1-kuuga) [v2 agito](CHANGELOG-v2-agito)
+Change Logs: [v2 (agito)](CHANGELOG-v2-agito) [v1 (kuuga)](CHANGELOG-v1-kuuga) [test](CHANGELOG-test)
 
 ## LICENSE
 本项目采用GNU通用公共许可证 2.0 版本（GPLv2）许可。

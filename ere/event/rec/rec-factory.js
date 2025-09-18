@@ -36,6 +36,7 @@ cons_dict[64] = require('#/event/rec/rec-64');
 cons_dict[67] = require('#/event/rec/rec-67');
 cons_dict[68] = require('#/event/rec/rec-68');
 cons_dict[71] = require('#/event/rec/rec-71');
+cons_dict[74] = require('#/event/rec/rec-74');
 cons_dict[85] = require('#/event/rec/rec-85');
 cons_dict[89] = require('#/event/rec/rec-89');
 cons_dict[100] = require('#/event/rec/rec-100');

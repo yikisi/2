@@ -189,6 +189,7 @@ module.exports = async () => {
       ],
     ],
     [[get_copyright_entry(71)], '洛洛'],
+    [[get_copyright_entry(74, '招募')], 'KUN'],
     [[get_copyright_entry(86, '部分地下室')], 'イーウィヤ'],
     [[get_copyright_entry(89, '招募、地下室')], '無奈'],
     [[get_copyright_entry(100)], '夕阳红艺术团小组长-赤红彗星红桃爵士Q先生'],
