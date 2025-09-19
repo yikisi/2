@@ -11,6 +11,8 @@
 
 ## Commits
 
+[Type](https://www.conventionalcommits.org/zh-hans/v1.0.0/)
+
 Scope:
 * train: 训练相关的界面、机制和地文，包括自主训练、照看训练和协同训练；
 * race: 比赛相关的界面、机制和地文；

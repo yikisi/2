@@ -77,7 +77,7 @@ release:
         - name: '[安卓游戏包] $GAME_BUNDLE_ZIP (解压密码：era)'
           url: '${GAME_BUNDLE_URL}'
           link_type: package
-        - name: '[通用资源包] erauma-master-res.zip (版本号 $RES_VERSION，解压后将 res 文件夹放到游戏文件夹下，在游戏设置中启用资源)'
+        - name: '[通用资源包] erauma-master-res.zip (版本号 $RES_VERSION，解压后文件夹改名为 res 然后放到游戏文件夹下，在游戏设置中启用资源)'
           url: 'https://gitgud.io/umaera/data/uma-resource/-/archive/${RES_VERSION}/uma-resource-${RES_VERSION}.zip'
-        - name: '[资源差分包] erauma-res-${RES_VERSION}-${OLD_VERSION}.zip'
+        - name: '[资源差分包] erauma-res-${RES_VERSION}-${OLD_VERSION}.zip (直接解压到 res 文件夹里，仅用于升级 ${OLD_VERSION} 版本的资源包)'
           url: 'https://umaera.gitgud.site/data/uma-resource/index.html'
