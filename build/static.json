@@ -6,6 +6,7 @@
       "saveCompressedData": true
     },
     "window": {
+      "audio": 0,
       "autoMax": false,
       "height": 916,
       "width": 1000
@@ -17491,8 +17492,8 @@
       "title": "EraUma",
       "gameCode": 29407,
       "defaultChara": 0,
-      "version": 2142,
-      "versionName": "2.142 (agito)",
+      "version": 2150,
+      "versionName": "2.15 (agito)",
       "allowVersion": 1000,
       "site": "https://gitgud.io/umaera/erauma/-/releases/permalink/latest",
       "versionCheck": "https://umaera.gitgud.site/erauma/RELEASE",
@@ -18760,6 +18761,94 @@
     }
   },
   "res": {
+    "音效_亮相圈_g1": {
+      "path": "res/audio/snd_bgm_gm022-1.mp3",
+      "type": 1
+    },
+    "音效_亮相圈_非g1": {
+      "path": "res/audio/snd_bgm_sm012.mp3",
+      "type": 1
+    },
+    "音效_亮相圈_出道战": {
+      "path": "res/audio/snd_bgm_gm002.mp3",
+      "type": 1
+    },
+    "音效_亮相圈_凯旋门赏": {
+      "path": "res/audio/凯旋门-出走表.mp3",
+      "type": 1
+    },
+    "音效_比赛_g1": {
+      "path": "res/audio/snd_bgm_gm059-1.mp3",
+      "type": 1
+    },
+    "音效_比赛_g1_终": {
+      "path": "res/audio/snd_bgm_gm060_race_ls_99.mp3",
+      "type": 1
+    },
+    "音效_比赛_g2": {
+      "path": "res/audio/snd_bgm_gm003-2.mp3",
+      "type": 1
+    },
+    "音效_比赛_g2_终": {
+      "path": "res/audio/snd_bgm_gm040_race_ls_99.mp3",
+      "type": 1
+    },
+    "音效_比赛_g3": {
+      "path": "res/audio/snd_bgm_gm041-1.mp3",
+      "type": 1
+    },
+    "音效_比赛_g3_终": {
+      "path": "res/audio/snd_bgm_gm042_race_ls_99.mp3",
+      "type": 1
+    },
+    "音效_比赛_op": {
+      "path": "res/audio/snd_bgm_gm043-1.mp3",
+      "type": 1
+    },
+    "音效_比赛_op_终": {
+      "path": "res/audio/snd_bgm_gm044_race_ls_99.mp3",
+      "type": 1
+    },
+    "音效_比赛_凯旋门赏": {
+      "path": "res/audio/凯旋门-比赛.mp3",
+      "type": 1
+    },
+    "音效_比赛_凯旋门赏_终": {
+      "path": "res/audio/凯旋门-决战.mp3",
+      "type": 1
+    },
+    "音效_比赛_日本德比": {
+      "path": "res/audio/snd_bgm_dm029-2.mp3",
+      "type": 1
+    },
+    "音效_比赛_日本德比_终": {
+      "path": "res/audio/snd_bgm_dm029b-1.mp3",
+      "type": 1
+    },
+    "音效_比赛_有马纪念": {
+      "path": "res/audio/snd_bgm_dm029-2.mp3",
+      "type": 1
+    },
+    "音效_比赛_有马纪念_终": {
+      "path": "res/audio/snd_bgm_dm029b-1.mp3",
+      "type": 1
+    },
+    "音效_结果_失败": {
+      "path": "res/audio/snd_bgm_gm036-2.mp3",
+      "type": 1
+    },
+    "音效_结果_入着": {
+      "path": "res/audio/snd_bgm_gm037-1.mp3",
+      "type": 1
+    },
+    "音效_结果_1着": {
+      "path": "res/audio/snd_bgm_gm004-3.mp3",
+      "type": 1
+    },
+    "音效_强敌击退": {
+      "path": "res/audio/snd_bgm_gm004-2.mp3",
+      "type": 1
+    },
     "帝王_裸": {
       "path": "res/ero/1003/body/无毛.png",
       "x": 0,

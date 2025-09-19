@@ -169,7 +169,7 @@ async function page_race_result(contestants, info, race_id) {
 
   if (interval > 0) {
     await era.clear();
-    era.input({ show: false }).then(() => (flag_res = false));
+    era.input({ show: false, hideInput: true }).then(() => (flag_res = false));
     await show_result(interval);
   }
   let flag_cha = 1;
@@ -181,6 +181,8 @@ async function page_race_result(contestants, info, race_id) {
     era.playMusic('音效_强敌击退');
     await era.waitAnyKey();
     era.setMask();
+  } else {
+    era.stopMusic();
   }
   if (interval > 0) {
     await era.waitAnyKey();
