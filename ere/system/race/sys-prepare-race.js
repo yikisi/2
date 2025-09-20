@@ -9,7 +9,10 @@ const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const RaceInfo = require('#/data/race/model/race-info');
-const { ability_type_enum } = require('#/data/race/model/uma-skill');
+const {
+  ability_type_enum,
+  skill_name_enum,
+} = require('#/data/race/model/uma-skill');
 const {
   max_attr,
   mod_motivation_coefficients,
@@ -343,7 +346,11 @@ function sys_prepare_race(list_chara, team_list, race_info) {
     // 计算整个比赛生效的被动属性加成技能
     // 筛除结算完毕的常时被动 只留触发技能给比赛模拟
     uma.list_skill = uma.list_skill.filter((skill) => {
-      if (skill.data.ability_times[0] >= 0) {
+      const category = skill.data.category >> 3;
+      if (
+        category !== skill_name_enum.buff &&
+        category !== skill_name_enum.debuff
+      ) {
         return skill.data.is_random === 0 || Math.random() < uma.probs.skill;
       }
       uma.race.conditionParams.same_skill_horse_count =
