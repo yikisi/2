@@ -65,23 +65,34 @@ switch (os.platform()) {
     break;
   case 'win32':
 }
-execSync(`${path7za} a -pera ${game_all_zip} ${game_all_dir}`);
-execSync(
-  `curl --fail-with-body --header "JOB-TOKEN: ${process.env.CI_JOB_TOKEN}" --upload-file ${game_all_zip} "${process.env.GAME_ZIP_URL}"`,
+process.stdout.write(
+  execSync(`${path7za} a -pera ${game_all_zip} ${game_all_dir}`),
+);
+process.stdout.write(
+  execSync(
+    `curl --fail-with-body --header "JOB-TOKEN: ${process.env.CI_JOB_TOKEN}" --upload-file ${game_all_zip} "${process.env.GAME_ZIP_URL}"`,
+  ),
 );
 
 rmSync(game_dir, { force: true, recursive: true });
 copySync(join(game_all_dir, 'game'), game_dir);
 rmSync(game_zip, { force: true });
 
-execSync(`${path7za} a -pera ${process.env.GAME_ZIP} ${process.env.GAME_DIR}`, {
-  cwd: game_all_dir,
-});
-execSync(
-  `curl --fail-with-body --header "JOB-TOKEN: ${process.env.CI_JOB_TOKEN}" --upload-file ${game_zip} "${process.env.GAME_URL}"`,
-  {
-    cwd: game_all_dir,
-  },
+process.stdout.write(
+  execSync(
+    `${path7za} a -pera ${process.env.GAME_ZIP} ${process.env.GAME_DIR}`,
+    {
+      cwd: game_all_dir,
+    },
+  ),
+);
+process.stdout.write(
+  execSync(
+    `curl --fail-with-body --header "JOB-TOKEN: ${process.env.CI_JOB_TOKEN}" --upload-file ${game_zip} "${process.env.GAME_URL}"`,
+    {
+      cwd: game_all_dir,
+    },
+  ),
 );
 
 // 检查是否要生成最小更新用的基础包
@@ -107,15 +118,19 @@ if (min_version !== game_version) {
   zip_stream.pipe(write_stream);
   write_stream.on('finish', () =>
     // 基础包生成后上传
-    execSync(
-      `curl --fail-with-body --header "JOB-TOKEN: ${process.env.CI_JOB_TOKEN}" --upload-file ${base_zip} "${process.env.BASE_URL}"`,
+    process.stdout.write(
+      execSync(
+        `curl --fail-with-body --header "JOB-TOKEN: ${process.env.CI_JOB_TOKEN}" --upload-file ${base_zip} "${process.env.BASE_URL}"`,
+      ),
     ),
   );
 }
 
+const res_path = join(work_dir, 'res');
+process.stdout.write(execSync('git fetch --tags', { cwd: res_path }));
 const res_ver = String(
   execSync('git tag --sort=-creatordate | head -n 2', {
-    cwd: join(work_dir, 'res'),
+    cwd: res_path,
   }),
 )
   .split('\n')
