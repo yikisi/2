@@ -51,13 +51,16 @@ pages:
 
 release:
   stage: deploy
-  image: registry.gitlab.com/gitlab-org/release-cli:v0.23.0
+  image: registry.gitlab.com/gitlab-org/release-cli:v0.24.0
   needs:
     - job: build
   tags:
     - docker
   script:
     - sed -i '1,4d' ./RELEASE.md
+    - echo "GAME_URL=${GAME_URL}"
+    - echo "GAME_BUNDLE_URL=${GAME_BUNDLE_URL}"
+    - echo "RES_URL=https://gitgud.io/umaera/data/uma-resource/-/archive/${RES_VERSION}/uma-resource-${RES_VERSION}.zip"
     - echo "GAME_VERSION=${CI_COMMIT_TAG} ($CALL_SIGN)"
     - echo "RESOURCE_VERSION=${RES_VERSION} ( < ${OLD_VERSION})"
     - echo "Releasing..."
