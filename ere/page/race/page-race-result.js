@@ -82,10 +82,10 @@ async function page_race_result(contestants, info, race_id) {
         flag_res = false;
         break;
       case 1:
-        interval = 1000 / 15;
+        interval = (1000 * 1.25) / 15;
         break;
       case 2:
-        interval = 500 / 15;
+        interval = (500 * 1.2) / 15;
         break;
       case 3:
         interval = 250 / 15;
