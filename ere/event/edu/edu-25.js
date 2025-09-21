@@ -549,7 +549,7 @@ module.exports = class extends CustomizedEdu {
           '耳边仿佛听到了这样的话语，周围的空气像是凝结了一瞬般、感觉温度变低了一些……',
         ]);
         era.println();
-        await coffee.say_and_wait([callname, '……还要朋友……谢谢你们……']);
+        await coffee.say_and_wait([callname, '……还有朋友……谢谢你们……']);
         await coffee.say_and_wait('我不会再输了。');
         era.println();
         await era.printAndWait([

@@ -10,13 +10,19 @@ const { race_infos } = require('#/data/race/race-const');
  * @param {function({race:number,rank:number,st:number,pop:number}):boolean} [additional_check_cb]
  * @returns {boolean}
  */
-function check_aim_race(races, aim_race, year, req_rank, additional_check_cb) {
+function check_aim_race(
+  races,
+  aim_race,
+  year = 0,
+  req_rank = 20,
+  additional_check_cb = () => true,
+) {
   let temp;
   return (
-    (temp = races[race_infos[aim_race].date + year_index[year || 0]]) &&
+    (temp = races[race_infos[aim_race].date + year_index[year]]) &&
     temp.race === aim_race &&
-    temp.rank <= (req_rank || 20) &&
-    (additional_check_cb === undefined || additional_check_cb(temp))
+    temp.rank <= req_rank &&
+    additional_check_cb(temp)
   );
 }
 

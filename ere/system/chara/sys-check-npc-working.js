@@ -7,11 +7,15 @@ const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const maternity_leave =
   (1 << pregnant_stage_enum.resume) + (1 << pregnant_stage_enum.pre_birth);
 
-function sys_check_npc_working(chara_id) {
+/**
+ * @param {number} cid
+ * @returns {boolean}
+ */
+function sys_check_npc_working(cid) {
   return (
-    !(get(`cflag:${chara_id}:育成回合计时`) < 3 * 48) &&
-    sys_check_awake(chara_id) &&
-    (get(`cflag:${chara_id}:妊娠阶段`) & maternity_leave) === 0
+    !(get(`cflag:${cid}:育成回合计时`) < 3 * 48) &&
+    sys_check_awake(cid) &&
+    (get(`cflag:${cid}:妊娠阶段`) & maternity_leave) === 0
   );
 }
 

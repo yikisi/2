@@ -47,6 +47,16 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
   },
   aim_races,
   (buffer, races) => {
+    if (
+      check_aim_race(races, race_enum.arim_kin, 1) ||
+      check_aim_race(races, race_enum.arim_kin, 2)
+    ) {
+      buffer.push({
+        check: 1,
+        color: undefined,
+        content: `有马纪念 6 马身以上获胜：${new GenesisEduMarks().title_check > 0 ? '是' : '否'}`,
+      });
+    }
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.hans_fil, 0, 5));
     buffer.push(check_aim_and_get_entry(races, race_enum.oka_sho, 1, 5));

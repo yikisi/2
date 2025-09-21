@@ -19,14 +19,14 @@ handlers.push(
   require('#/page/exp/race-tab'),
   require('#/page/exp/relation-tab'),
   require('#/page/exp/sex-tab'),
-  require('#/page/exp/exp-tab-1'),
-  require('#/page/exp/exp-tab-2'),
-  require('#/page/exp/exp-tab-3'),
-  require('#/page/exp/exp-tab-4'),
-  require('#/page/exp/exp-tab-5'),
-  require('#/page/exp/exp-tab-6'),
-  require('#/page/exp/exp-tab-7'),
-  require('#/page/exp/exp-tab-8'),
+  require('#/page/exp/exp-tab-mouth'),
+  require('#/page/exp/exp-tab-boobs'),
+  require('#/page/exp/exp-tab-body'),
+  require('#/page/exp/exp-tab-hand-foot'),
+  require('#/page/exp/exp-tab-penis'),
+  require('#/page/exp/exp-tab-virgin'),
+  require('#/page/exp/exp-tab-anal'),
+  require('#/page/exp/exp-tab-sm'),
 );
 
 /**

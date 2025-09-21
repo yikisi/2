@@ -18,7 +18,7 @@ aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 4;
 
 module.exports = require('#/event/check/snippets/check-uma-common-generator')(
   (extra_flag) => {
-    const event_marks = new GrassWonderEduMarks();
+    const edu_marks = new GrassWonderEduMarks();
     if (
       extra_flag.rank === 1 &&
       era.get('cflag:11:干劲') <= 1 &&
@@ -26,12 +26,17 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
         extra_flag.race === race_enum.arim_kin ||
         (extra_flag.race === race_enum.takz_kin && extra_flag.edu_weeks >= 96))
     ) {
-      event_marks.aim_count++;
+      edu_marks.aim_count++;
     }
   },
   () => new GrassWonderEduMarks().aim_count === 4,
   aim_races,
   (buffer, races) => {
+    buffer.push({
+      check: 1,
+      color: undefined,
+      content: `称号相关比赛以较佳及以下干劲完赛次数：${new GrassWonderEduMarks().aim_count}`,
+    });
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.asah_sta, 0, 5));
     buffer.push(check_aim_and_get_entry(races, race_enum.toky_yus, 1, 5));

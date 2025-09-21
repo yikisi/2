@@ -21,7 +21,7 @@ aim_races[get_aim_race_index(race_enum.eliz_cup, 2)] = 4;
 module.exports = require('#/event/check/snippets/check-uma-common-generator')(
   function () {
     if (era.get('cflag:11:干劲') < 2) {
-      new PandoraEduMarks().title_check = 1;
+      new PandoraEduMarks().title_check++;
     }
   },
   (races) =>
@@ -30,6 +30,11 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
     check_aim_race(races, race_enum.eliz_cup, 2, 1),
   aim_races,
   (buffer, races) => {
+    buffer.push({
+      check: 1,
+      color: undefined,
+      content: `以非极佳干劲完赛次数：${new PandoraEduMarks().title_check}`,
+    });
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.hans_fil, 0, 5));
     buffer.push(check_aim_and_get_entry(races, race_enum.oka_sho, 1, 5));

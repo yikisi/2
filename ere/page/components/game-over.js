@@ -16,6 +16,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 
 const { buff_colors } = require('#/data/color-const');
+const date_indicator = require('#/data/date-indicator');
 const CharaInmon = require('#/data/ero/chara-inmon');
 const { slavery_enum } = require('#/data/ero/mark-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
@@ -262,16 +263,11 @@ async function game_over(again) {
               offset: 13,
               width: 5,
             });
-            await era.printAndWait(
-              `${era.get('flag:当前年')} 年 ${era.get(
-                'flag:当前月',
-              )} 月 第 ${era.get('flag:当前周')} 周`,
-              {
-                align: 'center',
-                offset: 13,
-                width: 5,
-              },
-            );
+            await era.printAndWait(date_indicator(), {
+              align: 'center',
+              offset: 13,
+              width: 5,
+            });
             era.println();
             await era.printAndWait(
               `被自愿签署这样的宣言后，${me.name} 被改造成了马娘们的性奴！`,

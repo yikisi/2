@@ -89,7 +89,9 @@ async function next_week() {
  * @param {number} rest_loc
  */
 async function save_and_next_week(cid, cur_loc, rest_loc) {
-  await era.saveData(0, `${get_save_name()} (自动存档)`);
+  if (!era.get('flag:强制BE')) {
+    await era.saveData(0, `${get_save_name()} (自动存档)`);
+  }
   era.drawLine();
   era.set('flag:当前互动角色', 0);
   era.set('flag:当前位置', rest_loc);
@@ -441,6 +443,9 @@ module.exports = async () => {
         await run_custom_daily(chara_id, hook);
       } else {
         const note_list = [...notes.common];
+        if (era.get('flag:目白城风格') === 1) {
+          note_list.push(...notes.call);
+        }
         sys_filter_chara('cflag', '招募状态', recruit_flags.yes).forEach(
           (e) => {
             if (era.get(`cflag:${e}:育成回合计时`) < 3 * 48 && notes[e]) {

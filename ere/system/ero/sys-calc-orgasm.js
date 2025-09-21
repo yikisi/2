@@ -41,6 +41,7 @@ const add_attr_exp = require('#/event/ero/snippets/add-attr-exp');
 
 const { get_random_value, log_max_wp } = require('#/utils/value-utils');
 
+const { get_date } = require('#/data/date-indicator');
 const { attack_juel_reward } = require('#/data/ero/battle-const');
 const CharaInmon = require('#/data/ero/chara-inmon');
 const EroParticipant = require('#/data/ero/ero-participant');
@@ -83,9 +84,7 @@ let run_custom_ero;
  * @param {number} ids
  */
 async function sys_calc_orgasm(shown, ...ids) {
-  const date = `${era.get('flag:当前年')} 年 ${era.get(
-    'flag:当前月',
-  )} 月 第 ${era.get('flag:当前周')} 周`;
+  const date = get_date();
   for (const cid of ids) {
     const inmon = CharaInmon.get(cid);
     const l_times =
@@ -94,11 +93,11 @@ async function sys_calc_orgasm(shown, ...ids) {
       2 * inmon.on(plugin_enum.fountain) +
       4 * inmon.on(plugin_enum.woman);
     const wp_ratio = Math.log(era.get(`base:${cid}:根性`)) / log_max_wp;
-    let total_cost = { stamina: 0, time: 0 };
+    let cost = { stamina: 0, time: 0 };
     let orgasm_count = 0;
     let limited_count = 0;
     let orgasm_part_count = 0;
-    let minus_lust = 0;
+    let lost_lust = 0;
     for (let i = 0; i < orgasm_check_list.length; ++i) {
       const part = orgasm_check_list[i];
       const p_name = part_names[part];
@@ -111,7 +110,7 @@ async function sys_calc_orgasm(shown, ...ids) {
       let touch = new EroTouch(cid, part);
       let oid = touch.owner ?? -1;
       let opart = touch.part ?? -1;
-      if (new EroTouch(oid, opart).item === item_enum.gag) {
+      if (new EroTouch(oid, opart).part === part_enum.item) {
         touch.clean();
       }
       if (curr >= max) {
@@ -305,8 +304,8 @@ async function sys_calc_orgasm(shown, ...ids) {
         }
         if (i_cum) {
           // 每级耐性减少10%高潮时体力精力消耗
-          total_cost.stamina += tmp_cost.stamina * (1 - 0.1 * abl) * times;
-          total_cost.time += tmp_cost.time * (1 - 0.1 * abl) * times;
+          cost.stamina += tmp_cost.stamina * (1 - 0.1 * abl) * times;
+          cost.time += tmp_cost.time * (1 - 0.1 * abl) * times;
           // 专门针对寸止的情况
           // 寸止时不计算高潮次数
           // 不管肉棒高潮了几次，只射一次精
@@ -325,9 +324,9 @@ async function sys_calc_orgasm(shown, ...ids) {
           update_palam_from_main_orgasm(cid, part, times, inmon);
           orgasm_part_count++;
           if (part === part_enum.sadism || part === part_enum.masochism) {
-            minus_lust += lust_from_palam * 0.75;
+            lost_lust += lust_from_palam * 0.75;
           } else {
-            minus_lust +=
+            lost_lust +=
               (lust_from_palam *
                 (1 -
                   Math.max(
@@ -455,9 +454,8 @@ async function sys_calc_orgasm(shown, ...ids) {
             era.add(`exp:${cid}:喷奶量`, tmp);
             // 乳头高潮的体力精力消耗结算
             // 乳头高潮无法豁免
-            total_cost.stamina +=
-              orgasm_cost.body.stamina * nipple_orgasm_times;
-            total_cost.time += orgasm_cost.body.time * nipple_orgasm_times;
+            cost.stamina += orgasm_cost.body.stamina * nipple_orgasm_times;
+            cost.time += orgasm_cost.body.time * nipple_orgasm_times;
             update_palam_from_main_orgasm(
               cid,
               part,
@@ -819,7 +817,7 @@ async function sys_calc_orgasm(shown, ...ids) {
         '羞耻',
         base_orgasm_juel_reward * orgasm_count * multi_part_reward,
       );
-      sys_change_lust(cid, -minus_lust * orgasm_count * multi_part_reward);
+      sys_change_lust(cid, -lost_lust * orgasm_count * multi_part_reward);
       // 每多一重高潮，体力和精力消耗+10%，50%封顶
       // 根性降低体力和精力消耗，降低比率为系数*log根性/log最大根性，目前最大根性暂定为1200
       // 余韵增加10%的体力精力消耗
@@ -829,8 +827,8 @@ async function sys_calc_orgasm(shown, ...ids) {
         damage_buff * orgasm_count -
         wp_ratio * wp_coefficient +
         0.1 * (era.get(`tcvar:${cid}:余韵`) > 0);
-      era.add(`nowex:${cid}:体力消耗`, total_cost.stamina * reduce_cost);
-      era.add(`nowex:${cid}:精力消耗`, total_cost.time * reduce_cost);
+      era.add(`nowex:${cid}:体力消耗`, cost.stamina * reduce_cost);
+      era.add(`nowex:${cid}:精力消耗`, cost.time * reduce_cost);
       // 宝珠结算
       pleasure_list.forEach((part) => {
         const part_name = part_names[part];

@@ -227,11 +227,14 @@ async function punish_pregnant_slave() {
           302,
           ...gacha(
             sys_filter_chara('cflag', '招募状态', recruit_flags.no).filter(
-              (e) =>
-                ((e > 0 && e < 200) || (e >= 301 && e <= 306) || e === 400) &&
-                e !== src_chara &&
-                era.get(`cflag:${e}:成长阶段`) >= 2 &&
-                era.get(`cflag:${e}:种族`) > 0,
+              (cid) =>
+                ((cid > 0 && cid < 200) ||
+                  (cid >= 301 && cid <= 306) ||
+                  cid === 400) &&
+                cid !== src_chara &&
+                era.get(`cflag:${cid}:成长阶段`) >= 2 &&
+                era.get(`cflag:${cid}:种族`) > 0 &&
+                era.get(`cflag:${cid}:位置`) === 0,
             ),
             get_random_value(6, 8),
           ),
@@ -262,21 +265,23 @@ async function punish_pregnant_slave() {
           '招募状态',
           recruit_flags.yes,
         ).filter(
-          (e) =>
-            ((e > 0 && e < 200) || e === 400) &&
-            era.get(`cflag:${e}:成长阶段`) >= 2 &&
-            era.get(`cflag:${e}:种族`) > 0,
+          (cid) =>
+            ((cid > 0 && cid < 200) || cid === 400) &&
+            era.get(`cflag:${cid}:成长阶段`) >= 2 &&
+            era.get(`cflag:${cid}:种族`) > 0 &&
+            era.get(`cflag:${cid}:位置`) === 0,
         );
         const is_teammate = base_list.length > 0;
         if (base_list.length < 8) {
           base_list.push(
             ...gacha(
               sys_filter_chara('cflag', '招募状态', recruit_flags.no).filter(
-                (e) =>
-                  ((e > 0 && e < 200) || e === 400) &&
-                  e !== src_chara &&
-                  era.get(`cflag:${e}:成长阶段`) >= 2 &&
-                  era.get(`cflag:${e}:种族`) > 0,
+                (cid) =>
+                  ((cid > 0 && cid < 200) || cid === 400) &&
+                  cid !== src_chara &&
+                  era.get(`cflag:${cid}:成长阶段`) >= 2 &&
+                  era.get(`cflag:${cid}:种族`) > 0 &&
+                  era.get(`cflag:${cid}:位置`) === 0,
               ),
               8 - base_list.length,
             ),

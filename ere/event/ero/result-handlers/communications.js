@@ -132,8 +132,10 @@ module.exports = (handlers) => {
       clean_s_parts(a, d);
       change_ero_master(a);
       add_juel(d, '恐惧', base_emotion_juel);
+      add_juel(d, '顺从', base_emotion_juel / 2);
     } else {
       add_juel(a, '恐惧', base_emotion_juel / 4);
+      add_juel(a, '顺从', base_emotion_juel / 2);
     }
   };
 

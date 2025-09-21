@@ -68,10 +68,7 @@ module.exports = {
   /** @param {EroParticipant} p_list */
   clean_part_without_item: (...p_list) =>
     p_list.forEach((p) => {
-      if (
-        era.get(`tcvar:${p.id}:${part_touch[p.part]}接触部位`).part !==
-        part_enum.item
-      ) {
+      if (new EroTouch(p.id, p.part).part !== part_enum.item) {
         set_part(p.id, p.part, -1, -1);
       }
     }),

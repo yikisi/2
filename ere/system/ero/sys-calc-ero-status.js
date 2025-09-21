@@ -7,6 +7,7 @@ const {
   height2virgin_size,
 } = require('#/data/ero/battle-const');
 const CharaInmon = require('#/data/ero/chara-inmon');
+const { slavery_enum } = require('#/data/ero/mark-const');
 const {
   baby_limit,
   erect_border,
@@ -368,44 +369,57 @@ module.exports = {
    * @returns {number}
    */
   get_pregnant_ratio(cid, oid = -1) {
+    /** @type {CharaInmon} */
+    let inmon;
     if (
       // 本格化后才能怀孕
       era.get(`cflag:${cid}:成长阶段`) < 2 ||
       // 已怀孕or恢复期、经期不会怀孕
       (era.get(`cflag:${cid}:妊娠阶段`) !== 1 << pregnant_stage_enum.no &&
-        (era.get(`cflag:${cid}:妊娠回合计时`) ||
+        (era.get(`cflag:${cid}:妊娠回合计时`) > 0 ||
           (cid > 0 && era.get(`mark:${cid}:淫纹`) >= 2))) ||
       era.get(`status:${cid}:经期`) > 0 ||
+      // 女性服用弗隆K不会授孕
       (oid >= 0 &&
         !era.get(`cflag:${oid}:性别`) &&
         !era.get(`status:${oid}:弗隆P`)) ||
-      CharaInmon.get(cid).on(plugin_enum.no_preg)
+      (inmon = CharaInmon.get(cid)).on(plugin_enum.no_preg)
     ) {
       return 0;
     }
     let ratio = get_custom_mec(cid).get_pregnant_ratio();
+    // 机制脚本锁定怀孕率
     if (ratio > 0) {
       return ratio;
     }
-    // 生够了锁5%
-    // 怀孕基础概率1%，排卵期+50%，发情期+25%，弗隆P+20%
+    // 基础怀孕率5%
     ratio = 0.05;
+    // 超出生育限制后锁定5%
     if (!cid || era.get(`exp:${cid}:生产次数`) < baby_limit) {
       ratio +=
-        0.5 * era.get(`status:${cid}:排卵期`) +
-        0.25 * era.get(`status:${cid}:发情`) +
-        0.1 * era.get(`status:${cid}:反避孕套`);
-      if (oid >= 0) {
-        ratio += 0.2 * era.get(`status:${oid}:弗隆P`);
+        // 排卵期+15%
+        0.15 * era.get(`status:${cid}:排卵期`) +
+        // 发情期+10%
+        0.1 * era.get(`status:${cid}:发情`) +
+        // 避孕套溶解剂+5%
+        0.05 * era.get(`status:${cid}:反避孕套`);
+      if (
+        oid >= 0 &&
+        era.get(`cflag:${oid}:性别`) > 0 &&
+        era.get(`status:${oid}:弗隆P`) > 0
+      ) {
+        // 射精方为男性或 FUTA 服用弗隆P时+10%
+        ratio += 0.1;
       }
     }
-    if (
-      // 避孕药98%避孕
-      (era.get(`status:${cid}:短效避孕药`) ||
-        era.get(`status:${cid}:长效避孕药`)) &&
-      // 避孕药对孕袋无效
-      (cid || era.get('flag:惩戒力度') !== 3)
+    if (inmon.slave === slavery_enum.pregnant) {
+      // 孕袋无视避孕药，+10%怀孕率
+      ratio += 0.1;
+    } else if (
+      era.get(`status:${cid}:短效避孕药`) > 0 ||
+      era.get(`status:${cid}:长效避孕药`) > 0
     ) {
+      // 避孕药 98% 避孕（乘算）
       ratio *= 0.02;
     }
     return ratio;

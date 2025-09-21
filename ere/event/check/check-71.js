@@ -176,16 +176,26 @@ module.exports = class extends CustomizedCheck {
   }
 
   get_edu_aims() {
-    const buffer = [],
-      races = RaceHistory.get(this.id).get();
-    const event_marks = new ArdanEduMarks();
+    const buffer = [];
+    const races = RaceHistory.get(this.id).get();
+    const edu_marks = new ArdanEduMarks();
+    buffer.push({
+      check: 1,
+      color: undefined,
+      content: `训练失败次数：${edu_marks.train_fail}`,
+    });
+    buffer.push({
+      check: 1,
+      color: undefined,
+      content: `以非极佳干劲完赛次数：${edu_marks.motivation_count}`,
+    });
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.aoba_sho, 1, 5));
     buffer.push(check_aim_and_get_entry(races, race_enum.toky_yus, 1, 5));
     buffer.push(
       check_aim_and_get_entry(
         races,
-        event_marks.kiku_sho > 0 ? race_enum.kiku_sho : race_enum.tenn_sho,
+        edu_marks.kiku_sho > 0 ? race_enum.kiku_sho : race_enum.tenn_sho,
         1,
         3,
       ),

@@ -21,6 +21,7 @@ const { attr_change_colors, palam_colors } = require('#/data/color-const');
 const { love_colors, relation_colors } = require('#/data/const.json');
 const CharaInmon = require('#/data/ero/chara-inmon');
 const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
+const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const recruit_flags = require('#/data/event/recruit-flags');
 const {
   get_love_border,
@@ -41,7 +42,12 @@ async function punish_unfaithful(lover, new_love) {
       '招募状态',
       recruit_flags.yes,
     ).filter((cid) => {
-      return cid > 0 && cid !== lover && era.get(`love:${cid}`) >= 75;
+      return (
+        cid > 0 &&
+        cid !== lover &&
+        era.get(`love:${cid}`) >= 75 &&
+        era.get(`cflag:${cid}:成长阶段`) >= 2
+      );
     });
   for (const cid of temp_chara_list) {
     const is_aware =
@@ -378,7 +384,7 @@ module.exports = {
    * @returns {Promise<boolean>}
    */
   async sys_love_uma_in_event(cid) {
-    if (era.get('flag:回合爱慕惩罚') || cid === 0) {
+    if (era.get('flag:回合爱慕惩罚') > 0 || cid === 0) {
       return false;
     }
     const new_val = era.add(`love:${cid}`, 1);
@@ -407,6 +413,8 @@ module.exports = {
     era.println();
     print_change(cid, new_val - 1, new_val);
     era.set(`cflag:${cid}:爱慕暂拒`, 0);
+    const my_marks = new MyEduMarks();
+    my_marks.pity = (my_marks.pity || []).filter((e) => e !== cid);
     await get_chara_talk(0).say_and_wait('已经不能回头了……', true);
     new_val >= 75 && (await punish_unfaithful(cid, new_val));
     return true;

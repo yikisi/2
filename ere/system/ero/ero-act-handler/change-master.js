@@ -19,22 +19,25 @@ const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
  */
 function change_master(without, shown = true) {
   const master = era.get('tflag:主导权');
-  const candidate = get_characters_in_train().filter((e) => {
-    const inmon = CharaInmon.get(e);
+  const can_list = get_characters_in_train().filter((cid) => {
+    const inmon = CharaInmon.get(cid);
     return (
-      e !== without &&
-      sys_check_awake(e) &&
-      check_satisfied(e) < 2 &&
-      (master === e ||
+      cid !== without &&
+      sys_check_awake(cid) &&
+      check_satisfied(cid) < 2 &&
+      (master === cid ||
+        era.get(`tcvar:${master}:脱力`) > 0 ||
+        era.get(`tcvar:${master}:失神`) > 0 ||
         (inmon.slave === 0 &&
-          (inmon.on(plugin_enum.tuna) || inmon.on(plugin_enum.meek))))
+          !inmon.on(plugin_enum.tuna) &&
+          !inmon.on(plugin_enum.meek)))
     );
   });
   let _new = master;
-  if (!candidate.length) {
+  if (!can_list.length) {
     _new = 0;
-  } else if (candidate.indexOf(master) === -1) {
-    _new = get_random_entry(candidate);
+  } else if (can_list.indexOf(master) === -1) {
+    _new = get_random_entry(can_list);
   }
   if (master !== _new) {
     change_ero_master(_new);

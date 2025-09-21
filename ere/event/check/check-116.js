@@ -63,6 +63,13 @@ module.exports = class extends CustomizedCheck {
   get_edu_aims() {
     const races = RaceHistory.get(this.id).get(),
       ret = [];
+    if (check_aim_race(races, race_enum.yush_him, 1)) {
+      ret.push({
+        check: 1,
+        color: undefined,
+        content: `日本橡树大赛 5 马身以上获胜：${new DonnaEduMarks().title_check > 0 ? '是' : '否'}`,
+      });
+    }
     ret.push(check_aim_and_get_entry(races, race_enum.begin_race));
     ret.push(check_aim_and_get_entry(races, race_enum.shin_kin, 1, 5));
     ret.push(check_aim_and_get_entry(races, race_enum.oka_sho, 1, 5));

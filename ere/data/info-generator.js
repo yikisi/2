@@ -24,6 +24,7 @@ const {
 } = require('#/data/color-const');
 const { hair_colors } = require('#/data/const.json');
 const { mark_colors } = require('#/data/const.json');
+const { get_date } = require('#/data/date-indicator');
 const status_desc = require('#/data/desc/status-desc.json');
 const talent_desc = require('#/data/desc/talent-desc.json');
 const CharaInmon = require('#/data/ero/chara-inmon');
@@ -578,10 +579,7 @@ module.exports = {
   get_relation_mark,
   get_save_name() {
     const prefix =
-      era.get('flag:存档名') ||
-      `${era.get('callname:0:-1')} - ${era.get('flag:当前年')} 年 ${era.get(
-        'flag:当前月',
-      )} 月 第 ${era.get('flag:当前周')} 周`;
+      era.get('flag:存档名') || `${era.get('callname:0:-1')} - ${get_date()}`;
     return `${prefix} (${new Date().toLocaleString('zh-CN', {
       timeZone: 'Asia/Shanghai',
     })})`;

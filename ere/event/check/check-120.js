@@ -38,6 +38,16 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
     ).length >= 9,
   aim_races,
   (buffer, races) => {
+    if (
+      check_aim_race(races, race_enum.sprt_sta, 1) ||
+      check_aim_race(races, race_enum.sprt_sta, 1)
+    ) {
+      buffer.push({
+        check: 1,
+        color: undefined,
+        content: `短途马锦标 4 马身大胜：${new LightEduMarks().title_check > 0 ? '是' : '否'}`,
+      });
+    }
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.asah_sta, 0, 15));
     buffer.push(check_aim_and_get_entry(races, race_enum.aoi_sta, 1, 5));

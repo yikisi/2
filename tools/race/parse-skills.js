@@ -647,8 +647,8 @@ async function chara_skill() {
     660011, 660012, 660021, 660022, 660031, 660032, 660041, 660042, 660051,
     660052,
   ];
-  for (const chara_id in dict) {
-    buffer += `chara_skill_dict[${Number(chara_id) % 1000}] = [${dict[chara_id].join(',')}];`;
+  for (const cid in dict) {
+    buffer += `chara_skill_dict[${Number(cid) % 1000}] = [${dict[cid].join(',')}];`;
   }
   buffer += '\n\nconst skill_sets = {0:[],\n';
   const skill_sets = [
@@ -730,6 +730,8 @@ async function chara_skill() {
   delete skill_dict[102602211];
   delete skill_dict[900601];
   delete skill_dict[101201];
+  delete skill_dict[100971];
+  delete skill_dict[203781];
   console.log('+通用技能', Object.keys(skill_dict).length);
   const skill_data = await find_many_skills({
     id: { in: Object.keys(skill_dict).map(Number) },
@@ -763,9 +765,10 @@ async function chara_skill() {
 
   buffer += '\n\nconst current = new Date().getTime();\n\n';
   [
-    102602211, 100039, 900039, 100601, 900601, 101201, 102041, 902041, 102051,
-    902051, 102061, 902061, 990011, 990021, 600011, 600012, 660011, 660012,
-    660021, 660022, 660031, 660032, 660041, 660042, 660051, 660052,
+    102602211, 100039, 900039, 100601, 900601, 100971, 101201, 102041, 902041,
+    102051, 902051, 102061, 902061, 990011, 990021, 600011, 600012, 660011,
+    660012, 660021, 660022, 660031, 660032, 660041, 660042, 660051, 660052,
+    203781,
   ].forEach(
     (s) =>
       (buffer += `skills_dict[${s}]=require("#/data/race/skill/skill-${s}");`),
@@ -882,7 +885,7 @@ async function chara_skill() {
   }
   writeFileSync(
     '../../ere/data/race/skill/skill-const.js',
-    `${buffer}\n\nconsole.log('技能列表注册完毕！',(new Date().getTime()-current).toLocaleString(),'ms')\n\nconst common_skills = [${buffer_common_skills
+    `${buffer}\n\nconsole.log('技能列表注册完毕!',(new Date().getTime()-current).toLocaleString(),'ms')\n\nconst common_skills = [${buffer_common_skills
       .sort()
       .filter((e, i, l) => i === l.indexOf(e))
       .join(

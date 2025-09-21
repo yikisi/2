@@ -2,9 +2,8 @@ const era = require('#/era-electron');
 
 const { sys_change_money } = require('#/system/sys-calc-flag');
 
-const date_indicator = require('#/page/components/date-indicator');
-
 const { attr_change_colors, money_color } = require('#/data/color-const');
+const date_indicator = require('#/data/date-indicator');
 const shop_desc = require('#/data/desc/shop-desc.json');
 const { location_name } = require('#/data/locations');
 

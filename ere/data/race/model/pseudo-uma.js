@@ -249,11 +249,12 @@ class PseudoUma {
   };
   // 带玩具比赛用的系数
   ero = {
-    item: { anal: 0, breast: 0, clitoris: 0, penis: 0, virgin: 0 },
-    param: { anal: 0, breast: 0, clitoris: 0, penis: 0, virgin: 0, sex: 0 },
     buff: { anal: 0, breast: 0, clitoris: 0, penis: 0, virgin: 0, sex: 0 },
     cost: { anal: 0, breast: 0, clitoris: 0, penis: 0, virgin: 0, sex: 0 },
+    item: { anal: 0, breast: 0, clitoris: 0, penis: 0, virgin: 0 },
     main: ['sex'],
+    orgasm: 0,
+    param: { anal: 0, breast: 0, clitoris: 0, penis: 0, virgin: 0, sex: 0 },
   };
   /**
    * 传奇对手标记

@@ -337,14 +337,14 @@ async function select_target(
         (page.curr - 1) * page_size,
         page.curr * page_size,
       );
-      cur_list.forEach((chara_id) => {
-        const chara = get_chara_talk(chara_id);
-        const titles = CharaTitles.get(chara_id);
+      cur_list.forEach((cid) => {
+        const chara = get_chara_talk(cid);
+        const titles = CharaTitles.get(cid);
         const title = titles.get_colored_curr_title(true);
         const event_counts =
-          type === undefined ? EventMarks.get(chara_id).count() : 0;
+          type === chara_info_type.school ? EventMarks.get(cid).count() : 0;
         buffer.push({
-          accelerator: chara_id,
+          accelerator: cid,
           config: {
             buttonType: event_counts > 0 ? 'danger' : 'warning',
             width: 4,
@@ -374,7 +374,7 @@ async function select_target(
             type: 'text',
           });
         }
-        buffer.push(...get_suffix(chara_id, type));
+        buffer.push(...get_suffix(cid, type));
       });
     } else {
       buffer.push({

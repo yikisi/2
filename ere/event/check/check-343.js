@@ -35,7 +35,7 @@ module.exports = class extends CustomizedCheck {
       );
     }
     if (
-      era.get('flag:回合爱慕惩罚') &&
+      era.get('flag:回合爱慕惩罚') > 0 &&
       era.get('love:343') >= 50 &&
       new MayLifeMarks().who_am_i < 3
     ) {

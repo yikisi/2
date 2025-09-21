@@ -148,7 +148,7 @@ async function sys_next_week() {
     }
     tmp = true;
     act_list = sort_list(act_list, Math.random).filter(
-      (e) => tmp && (tmp = !e.prison) !== undefined,
+      (act) => tmp && (tmp = !act.prison),
     );
     // 睡奸归并
     const final_act_list = [];
@@ -273,7 +273,7 @@ async function sys_next_week() {
   era.set('flag:当前年', cur_year);
   era.set('flag:当前月', cur_month);
   era.set('flag:当前周', cur_week);
-  sys_change_fame(era.get('flag:回合声望惩罚'));
+  era.add('flag:当前声望', era.get('flag:回合声望惩罚'));
   // 新回合开始
   const all_characters = era.getAddedCharacters();
   const out_race_list = [];

@@ -85,6 +85,7 @@ cons_dict[77] = require('#/event/check/check-77');
 cons_dict[78] = require('#/event/check/check-78');
 cons_dict[79] = require('#/event/check/check-79');
 cons_dict[80] = require('#/event/check/check-80');
+cons_dict[81] = require('#/event/check/check-81');
 cons_dict[82] = require('#/event/check/check-82');
 cons_dict[83] = require('#/event/check/check-83');
 cons_dict[84] = require('#/event/check/check-84');
@@ -97,7 +98,9 @@ cons_dict[90] = require('#/event/check/check-90');
 cons_dict[91] = require('#/event/check/check-91');
 cons_dict[93] = require('#/event/check/check-93');
 cons_dict[94] = require('#/event/check/check-94');
+cons_dict[95] = require('#/event/check/check-95');
 cons_dict[96] = require('#/event/check/check-96');
+cons_dict[97] = require('#/event/check/check-97');
 cons_dict[98] = require('#/event/check/check-98');
 cons_dict[99] = require('#/event/check/check-99');
 cons_dict[100] = require('#/event/check/check-100');
@@ -151,7 +154,7 @@ cons_dict[340] =
     require('#/event/check/check-god');
 
 console.log(
-  '角色检查脚本注册完毕！',
+  '角色检查脚本注册完毕!',
   (new Date().getTime() - current).toLocaleString(),
   'ms',
 );

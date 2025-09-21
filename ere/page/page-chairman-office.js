@@ -150,7 +150,7 @@ async function page_chairman_office() {
                   temp_list.push(302);
                 }
                 era.printMultiColumns(
-                  ['从列表里选', '用名字指名', '用ID指名', '再想想'].map(
+                  ['从列表里选', '用名字指名', '用 ID 指名', '再想想'].map(
                     (e, i) => {
                       return {
                         accelerator: i + 1,

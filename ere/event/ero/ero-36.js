@@ -14,6 +14,6 @@ module.exports = class extends CustomizedEro {
       return (e) =>
         e >= ero_hooks.missionary_anal_sex && e <= ero_hooks.stimulate_womb;
     }
-    return super.filter_in_rape;
+    return super.filter_in_rape();
   }
 };
