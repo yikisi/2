@@ -52,10 +52,10 @@ function transform(event_marks) {
 }
 
 module.exports = {
-  /** @param {LunaEduMarks} event_marks */
-  good_end(event_marks) {
-    if (event_marks.emperor) {
-      transform(event_marks);
+  /** @param {LunaEduMarks} edu_marks */
+  good_end(edu_marks) {
+    if (edu_marks.emperor) {
+      transform(edu_marks);
     }
     era.set('callname:17:-1', era.set('callname:17:-2', '鲁铎象征'));
     era.set(
@@ -63,7 +63,7 @@ module.exports = {
       Math.max(era.get('relation:17:0'), era.get('relation:9017:0')),
     );
     era.set('love:17', Math.max(era.get('love:17'), era.get('love:9017')));
-    new Array(7).fill(0).forEach((_, i) => era.set(`status:17:${1700 + i}`, 0));
+    new Array(7).fill(0).forEach((_, i) => era.set(`status:17:${110 + i}`, 0));
     era.set('status:17:工口意愿', 0);
     era.set('status:17:抖S', 1);
     sys_like_chara(17, 0, 800, true, 10);

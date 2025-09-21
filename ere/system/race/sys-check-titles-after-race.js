@@ -6,30 +6,32 @@ const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
-const edu_weeks_kiku_sho = 48 + race_infos[race_enum.kiku_sho].date,
-  edu_weeks_shuk_sho = 48 + race_infos[race_enum.shuk_sho].date,
-  edu_weeks_japa_dir = 48 + race_infos[race_enum.japa_dir].date,
-  edu_weeks_belm_sta = 48 + race_infos[race_enum.belm_sta].date;
+const edu_weeks_kiku_sho = 48 + race_infos[race_enum.kiku_sho].date;
+const edu_weeks_shuk_sho = 48 + race_infos[race_enum.shuk_sho].date;
+const edu_weeks_japa_dir = 48 + race_infos[race_enum.japa_dir].date;
+const edu_weeks_belm_sta = 48 + race_infos[race_enum.belm_sta].date;
 
 /**
  * @param {PseudoUma[]} team_list
  * @param {number} race
  * @param {number} best_rank
  * @param {number} mvp_id
- * @returns {{hentai_flag:boolean,new_title_dict:Record<string,[{c:string,n:string}]>}}
+ * @returns {{hentai_count:number,new_title_dict:Record<string,[{c:string,n:string}]>}}
  */
 function sys_check_titles_after_race(team_list, race, best_rank, mvp_id) {
-  const new_title_dict = {},
-    pregnant_check =
-      era.get('cflag:0:妊娠阶段') === 1 << pregnant_stage_enum.embryo &&
-      era.get('cflag:0:妊娠回合计时') === 0 &&
-      LifeEventMarks.get_marks(0).sperm > 0;
-  let hentai_flag = false;
-  team_list.forEach(({ index_chara: cid }) => {
+  const new_title_dict = {};
+  const pregnant_check =
+    era.get('cflag:0:妊娠阶段') === 1 << pregnant_stage_enum.embryo &&
+    era.get('cflag:0:妊娠回合计时') === 0 &&
+    LifeEventMarks.get_marks(0).sperm > 0;
+  let p_flag = 0;
+  let o_flag = 0;
+  team_list.forEach((uma) => {
+    const cid = uma.index_chara;
     new_title_dict[cid] = [];
     const pregnant_stage = era.get(`cflag:${cid}:妊娠阶段`);
     if (pregnant_stage >> pregnant_stage_enum.late > 0) {
-      hentai_flag = true;
+      p_flag++;
     }
     if (pregnant_stage >> pregnant_stage_enum.embryo > 0) {
       new_title_dict[cid].push({ n: '亲子关系紧张', c: buff_colors[2] });
@@ -44,17 +46,28 @@ function sys_check_titles_after_race(team_list, race, best_rank, mvp_id) {
     if (cid > 0 && Number(pregnant_check) === cid) {
       new_title_dict[cid].push({ n: '父亲力量', c: buff_colors[2] });
     }
+    if (uma.ero.orgasm > 0) {
+      o_flag += Math.random() < Math.min(uma.ero.orgasm, 6) ** 2 / (6 ** 2 * 2);
+      if (uma.ero.orgasm >= 6) {
+        new_title_dict[cid].push({ n: '惊世骇俗', c: buff_colors[2] });
+        if (uma.race.conditionParams.item === 0) {
+          new_title_dict[cid].push({ n: '倒霉蛋', c: buff_colors[2] });
+        }
+      } else if (uma.race.conditionParams.item === 0) {
+        new_title_dict[cid].push({ n: '无妄之灾', c: buff_colors[2] });
+      }
+    }
   });
   if (best_rank === 1) {
     switch (race) {
       case race_enum.kiku_sho:
       case race_enum.shuk_sho:
         {
-          let invincible_1 = true,
-            invincible_2 = true,
-            cup_1 = 0,
-            cup_2 = 0,
-            cup_3 = 0;
+          let invincible_1 = true;
+          let invincible_2 = true;
+          let cup_1 = 0;
+          let cup_2 = 0;
+          let cup_3 = 0;
           RaceHistory.get(mvp_id)
             .get_entries()
             .forEach((e) => {
@@ -142,8 +155,8 @@ function sys_check_titles_after_race(team_list, race, best_rank, mvp_id) {
         break;
       case race_enum.japa_dir:
         {
-          let invincible_4 = true,
-            cup = 0;
+          let invincible_4 = true;
+          let cup = 0;
           RaceHistory.get(mvp_id)
             .get_entries()
             .forEach((e) => {
@@ -208,10 +221,16 @@ function sys_check_titles_after_race(team_list, race, best_rank, mvp_id) {
       }
     }
   }
-  if (hentai_flag) {
+  if (p_flag > 0) {
+    era.print('【选手大着肚子参赛的行为让社会各界议论纷纷】');
+  }
+  if (o_flag > 0) {
+    era.print('【选手在比赛中公然高潮的行为在社会各界引起轩然大波】');
+  }
+  if (p_flag > 0 || o_flag > 0) {
     era.set('flag:变态行为', 1);
   }
-  return { hentai_flag, new_title_dict };
+  return { hentai_count: p_flag + o_flag, new_title_dict };
 }
 
 module.exports = sys_check_titles_after_race;

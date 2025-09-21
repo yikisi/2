@@ -20,6 +20,7 @@ const get_child_name = require('#/utils/naming');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { buff_colors } = require('#/data/color-const');
+const { get_date } = require('#/data/date-indicator');
 const { unexpected_pregnant_enum } = require('#/data/ero/status-const');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { get_filtered_talents } = require('#/data/info-generator');
@@ -320,7 +321,7 @@ async function sys_have_baby(mid) {
   const cur_month = era.get('flag:当前月');
   const cur_week = era.get('flag:当前周');
   const birth_day = 7 * cur_week + Math.floor(7 * Math.random()) - 6;
-  const date = `${era.get('flag:当前年')} 年 ${cur_month} 月 ${birth_day} 日`;
+  const date = get_date();
 
   era
     .getAddedCharacters()

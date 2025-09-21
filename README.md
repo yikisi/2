@@ -4,7 +4,7 @@ EraUma 和 ERE 引擎（EraElectron、ere.app）将保持开源，请各位开�
 
 [Release Notes](RELEASE.md)
 
-[Changelogs](CHANGELOG.md)
+Change Logs: [v2 (agito)](CHANGELOG-v2-agito) [v1 (kuuga)](CHANGELOG-v1-kuuga) [test](CHANGELOG-test)
 
 ## LICENSE
 本项目采用GNU通用公共许可证 2.0 版本（GPLv2）许可。
@@ -51,32 +51,33 @@ EraUma 发布采取分包制，即游戏本体包+游戏资源包拆分打包方
 
 从 PC 版引擎 EraElectron 顶部下拉菜单中【打开游戏文件夹】启动时，请确认打开的文件夹至少有以下结构：
 
-    erauma文件夹/PC绿色版解压出的game文件夹
-    ├── csv文件夹
-    │   ├── Chara文件夹
+    erauma 文件夹 / PC 绿色版解压出的 game 文件夹
+    ├── csv 文件夹
+    │   ├── Chara 文件夹
     │   ├── _config.json
     │   ├── _fixed.json
-    │   └── 其他各种以csv为后缀名的文件
-    ├── ere文件夹
-    │   ├── data文件夹
-    │   ├── event文件夹
-    │   ├── page文件夹
-    │   ├── system文件夹
-    │   ├── utils文件夹
+    │   └── 其他各种以 csv 为后缀名的文件
+    ├── ere 文件夹
+    │   ├── data 文件夹
+    │   ├── event 文件夹
+    │   ├── page 文件夹
+    │   ├── system 文件夹
+    │   ├── utils 文件夹
     │   ├── era-electron.js
     │   └── main.js
-    └── res文件夹（可选）
-        ├── audio文件夹
-        ├── ero文件夹
-        ├── filters文件夹
-        ├── others文件夹
-        ├── race文件夹
-        ├── sportswear文件夹
-        ├── uniform-summer文件夹
-        ├── uniform-winter文件夹
+    └── res 文件夹（可选）
+        ├── audio 文件夹
+        ├── ero 文件夹
+        ├── filters 文件夹
+        ├── others 文件夹
+        ├── race 文件夹
+        ├── sportswear 文件夹
+        ├── uniform-summer 文件夹
+        ├── uniform-winter 文件夹
         ├── game.csv
         ├── logo.png
-        └── title.png
+        ├── title.png
+        └── 资源包注意事项.txt
 
 如果文件夹不是以上结构，则无法顺利在 PC 版引擎 EraElectron 中打开运行。
 
@@ -84,29 +85,30 @@ EraUma 发布采取分包制，即游戏本体包+游戏资源包拆分打包方
 
 在 ere.app 中选取游戏文件夹时，请确认使用的文件夹至少有以下结构：
 
-    erauma文件夹
+    erauma 文件夹
     ├── era.bundle.js
     ├── main.bundle.js
     ├── static.json
-    └── res文件夹（可选）
-        ├── audio文件夹
-        ├── ero文件夹
-        ├── filters文件夹
-        ├── others文件夹
-        ├── race文件夹
-        ├── sportswear文件夹
-        ├── uniform-summer文件夹
-        ├── uniform-winter文件夹
+    └── res 文件夹（可选）
+        ├── audio 文件夹
+        ├── ero 文件夹
+        ├── filters 文件夹
+        ├── others 文件夹
+        ├── race 文件夹
+        ├── sportswear 文件夹
+        ├── uniform-summer 文件夹
+        ├── uniform-winter 文件夹
         ├── logo.png
-        └── title.png
+        ├── title.png
+        └── 资源包注意事项.txt
 
 并且该文件夹必须位于类似结构的位置：
 
     个人文件夹
-    ├── Documents/文档
-    ├── Downloads/下载
+    ├── Documents / 文档
+    ├── Downloads / 下载
     ├── 任意文件夹或任意层子文件夹
-    │   ├── erauma文件夹
+    │   ├── erauma 文件夹
     │   └── 其他文件或文件夹
     └── 其他文件或文件夹
 

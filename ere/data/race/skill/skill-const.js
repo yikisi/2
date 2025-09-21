@@ -249,6 +249,9 @@ chara_skill_dict[79] = [
 chara_skill_dict[80] = [
   100801, 201032, 201601, 202952, 200452, 201602, 200532, 202951,
 ];
+chara_skill_dict[81] = [
+  100811, 203182, 203082, 203972, 203982, 203081, 202252, 203181,
+];
 chara_skill_dict[82] = [
   100821, 200462, 202502, 202672, 201042, 200461, 202532, 202671,
 ];
@@ -285,8 +288,14 @@ chara_skill_dict[93] = [
 chara_skill_dict[94] = [
   100941, 200022, 202622, 202662, 201382, 202621, 202602, 202661,
 ];
+chara_skill_dict[95] = [
+  100951, 202372, 203932, 200022, 201322, 202371, 201902, 203931,
+];
 chara_skill_dict[96] = [
   100961, 202092, 202122, 201702, 203332, 202091, 202082, 202121,
+];
+chara_skill_dict[97] = [
+  100971, 203792, 203781, 203802, 203812, 203791, 203822, 203801,
 ];
 chara_skill_dict[98] = [
   100981, 202262, 201532, 201112, 202332, 202261, 202252, 202331,
@@ -951,6 +960,10 @@ const skill_sets = {
     100461, 200142, 200532, 200541, 201032, 201252, 201601, 201671, 202252,
     202262, 202311, 202502,
   ],
+  1104604: [
+    100461, 200012, 200172, 200532, 200541, 201102, 201252, 201601, 201671,
+    202132, 202252, 202262, 203111, 203402,
+  ],
   1104701: [200192, 200371, 200382, 200492, 201402, 201431],
   1104702: [200032, 200382, 200492, 201382, 201402],
   1104801: [200512, 200612, 200712, 200722, 201331],
@@ -1101,6 +1114,7 @@ const skill_sets = {
     203222, 203442, 203502,
   ],
   1111701: [200492, 200602, 201142, 201182, 201212, 202661],
+  1111801: [200362, 201382, 202081, 202721, 203322, 203682],
   1111901: [101191, 200014, 200492, 202852, 202932, 203001],
   1112001: [101201, 200963, 201242, 202992, 203061, 203071],
   1112101: [200012, 200132, 200641, 202401, 202882, 202962],
@@ -1290,6 +1304,7 @@ const skill_sets = {
   32102123: [110211, 200192, 200461, 200721, 201342, 201611, 201902],
   32102216: [100221, 200152, 200192, 200332, 200492, 200581, 201901],
   32102218: [200332, 200492, 200581],
+  32102245: [110221, 200332, 200721, 201112, 201901, 202532, 202982],
   32102301: [200562, 200732, 200821],
   32102302: [200562, 200821, 201071],
   32102303: [100231, 200221, 200561, 200581, 200741, 200752, 201212],
@@ -1351,6 +1366,7 @@ const skill_sets = {
   32104413: [200642, 201452, 201511],
   32104418: [200642, 201501, 201512],
   32104419: [100441, 200642, 200781, 201481, 201512, 202082, 202491],
+  32104445: [201452, 201651, 202491],
   32104502: [100451, 200352, 200432, 200441, 200881, 201371],
   32104503: [100451, 200152, 200351, 200462, 200742, 200881, 201371],
   32104517: [200332, 200351, 200512],
@@ -1400,6 +1416,7 @@ const skill_sets = {
   32105913: [200064, 200602, 201431],
   32105938: [200601, 201382, 202612],
   32105943: [200721, 201322, 203132],
+  32105945: [201102, 202121, 202612],
   32106001: [100601, 200601, 201182, 201212, 201422, 201441, 201541],
   32106014: [200601, 201422, 201442],
   32106017: [200491, 201422, 201442],
@@ -1444,6 +1461,8 @@ const skill_sets = {
   32108530: [100851, 201452, 201462, 201552, 202021, 202382, 202401],
   32108733: [100871, 200432, 200531, 200652, 200972, 201522, 202041],
   32109031: [200542, 200712, 202531],
+  32109045: [200342, 201292, 202721],
+  32109145: [100911, 200592, 201382, 202121, 202171, 202622, 202802],
   32109240: [201102, 202471, 203052],
   32109241: [200462, 200492, 202791],
   32109440: [201382, 202622, 202661],
@@ -1467,6 +1486,7 @@ const skill_sets = {
   32110736: [200492, 202932, 203001],
   32110743: [101071, 200721, 201102, 201701, 202552, 202792, 202982],
   32111431: [201352, 201702, 201901],
+  32111445: [201102, 202101, 203432],
   32111631: [200461, 200562, 202532],
   32111931: [200014, 202022, 202922],
   32111937: [200492, 202932, 203001],
@@ -1479,6 +1499,7 @@ const skill_sets = {
   32801301: [200012, 200432, 201352],
   32801601: [200332, 201312, 201532],
   32802201: [200042, 200212, 200452],
+  32802233: [200042, 200452, 201542],
   32802501: [200192, 200612],
   32802801: [200362, 200992],
   32803101: [200372, 200612, 201402],
@@ -4976,6 +4997,7 @@ skills_dict[100039] = require('#/data/race/skill/skill-100039');
 skills_dict[900039] = require('#/data/race/skill/skill-900039');
 skills_dict[100601] = require('#/data/race/skill/skill-100601');
 skills_dict[900601] = require('#/data/race/skill/skill-900601');
+skills_dict[100971] = require('#/data/race/skill/skill-100971');
 skills_dict[101201] = require('#/data/race/skill/skill-101201');
 skills_dict[102041] = require('#/data/race/skill/skill-102041');
 skills_dict[902041] = require('#/data/race/skill/skill-902041');
@@ -4997,6 +5019,7 @@ skills_dict[660041] = require('#/data/race/skill/skill-660041');
 skills_dict[660042] = require('#/data/race/skill/skill-660042');
 skills_dict[660051] = require('#/data/race/skill/skill-660051');
 skills_dict[660052] = require('#/data/race/skill/skill-660052');
+skills_dict[203781] = require('#/data/race/skill/skill-203781');
 skills_dict[10071] = require('#/data/race/skill/skill-10071');
 skills_dict[100011] = require('#/data/race/skill/skill-100011');
 skills_dict[100021] = require('#/data/race/skill/skill-100021');
@@ -5076,6 +5099,7 @@ skills_dict[100771] = require('#/data/race/skill/skill-100771');
 skills_dict[100781] = require('#/data/race/skill/skill-100781');
 skills_dict[100791] = require('#/data/race/skill/skill-100791');
 skills_dict[100801] = require('#/data/race/skill/skill-100801');
+skills_dict[100811] = require('#/data/race/skill/skill-100811');
 skills_dict[100821] = require('#/data/race/skill/skill-100821');
 skills_dict[100831] = require('#/data/race/skill/skill-100831');
 skills_dict[100841] = require('#/data/race/skill/skill-100841');
@@ -5088,6 +5112,7 @@ skills_dict[100901] = require('#/data/race/skill/skill-100901');
 skills_dict[100911] = require('#/data/race/skill/skill-100911');
 skills_dict[100931] = require('#/data/race/skill/skill-100931');
 skills_dict[100941] = require('#/data/race/skill/skill-100941');
+skills_dict[100951] = require('#/data/race/skill/skill-100951');
 skills_dict[100961] = require('#/data/race/skill/skill-100961');
 skills_dict[100981] = require('#/data/race/skill/skill-100981');
 skills_dict[100991] = require('#/data/race/skill/skill-100991');
@@ -5126,6 +5151,7 @@ skills_dict[110181] = require('#/data/race/skill/skill-110181');
 skills_dict[110191] = require('#/data/race/skill/skill-110191');
 skills_dict[110201] = require('#/data/race/skill/skill-110201');
 skills_dict[110211] = require('#/data/race/skill/skill-110211');
+skills_dict[110221] = require('#/data/race/skill/skill-110221');
 skills_dict[110241] = require('#/data/race/skill/skill-110241');
 skills_dict[110261] = require('#/data/race/skill/skill-110261');
 skills_dict[110301] = require('#/data/race/skill/skill-110301');
@@ -5811,8 +5837,36 @@ skills_dict[203741] = require('#/data/race/skill/skill-203741');
 skills_dict[203742] = require('#/data/race/skill/skill-203742');
 skills_dict[203751] = require('#/data/race/skill/skill-203751');
 skills_dict[203752] = require('#/data/race/skill/skill-203752');
+skills_dict[203761] = require('#/data/race/skill/skill-203761');
 skills_dict[203762] = require('#/data/race/skill/skill-203762');
 skills_dict[203772] = require('#/data/race/skill/skill-203772');
+skills_dict[203791] = require('#/data/race/skill/skill-203791');
+skills_dict[203792] = require('#/data/race/skill/skill-203792');
+skills_dict[203801] = require('#/data/race/skill/skill-203801');
+skills_dict[203802] = require('#/data/race/skill/skill-203802');
+skills_dict[203812] = require('#/data/race/skill/skill-203812');
+skills_dict[203822] = require('#/data/race/skill/skill-203822');
+skills_dict[203831] = require('#/data/race/skill/skill-203831');
+skills_dict[203832] = require('#/data/race/skill/skill-203832');
+skills_dict[203841] = require('#/data/race/skill/skill-203841');
+skills_dict[203842] = require('#/data/race/skill/skill-203842');
+skills_dict[203851] = require('#/data/race/skill/skill-203851');
+skills_dict[203852] = require('#/data/race/skill/skill-203852');
+skills_dict[203861] = require('#/data/race/skill/skill-203861');
+skills_dict[203862] = require('#/data/race/skill/skill-203862');
+skills_dict[203871] = require('#/data/race/skill/skill-203871');
+skills_dict[203872] = require('#/data/race/skill/skill-203872');
+skills_dict[203881] = require('#/data/race/skill/skill-203881');
+skills_dict[203882] = require('#/data/race/skill/skill-203882');
+skills_dict[203892] = require('#/data/race/skill/skill-203892');
+skills_dict[203902] = require('#/data/race/skill/skill-203902');
+skills_dict[203911] = require('#/data/race/skill/skill-203911');
+skills_dict[203912] = require('#/data/race/skill/skill-203912');
+skills_dict[203922] = require('#/data/race/skill/skill-203922');
+skills_dict[203931] = require('#/data/race/skill/skill-203931');
+skills_dict[203932] = require('#/data/race/skill/skill-203932');
+skills_dict[203972] = require('#/data/race/skill/skill-203972');
+skills_dict[203982] = require('#/data/race/skill/skill-203982');
 skills_dict[210011] = require('#/data/race/skill/skill-210011');
 skills_dict[210012] = require('#/data/race/skill/skill-210012');
 skills_dict[210021] = require('#/data/race/skill/skill-210021');
@@ -5955,6 +6009,7 @@ skills_dict[900771] = require('#/data/race/skill/skill-900771');
 skills_dict[900781] = require('#/data/race/skill/skill-900781');
 skills_dict[900791] = require('#/data/race/skill/skill-900791');
 skills_dict[900801] = require('#/data/race/skill/skill-900801');
+skills_dict[900811] = require('#/data/race/skill/skill-900811');
 skills_dict[900821] = require('#/data/race/skill/skill-900821');
 skills_dict[900831] = require('#/data/race/skill/skill-900831');
 skills_dict[900841] = require('#/data/race/skill/skill-900841');
@@ -5967,7 +6022,9 @@ skills_dict[900901] = require('#/data/race/skill/skill-900901');
 skills_dict[900911] = require('#/data/race/skill/skill-900911');
 skills_dict[900931] = require('#/data/race/skill/skill-900931');
 skills_dict[900941] = require('#/data/race/skill/skill-900941');
+skills_dict[900951] = require('#/data/race/skill/skill-900951');
 skills_dict[900961] = require('#/data/race/skill/skill-900961');
+skills_dict[900971] = require('#/data/race/skill/skill-900971');
 skills_dict[900981] = require('#/data/race/skill/skill-900981');
 skills_dict[900991] = require('#/data/race/skill/skill-900991');
 skills_dict[901001] = require('#/data/race/skill/skill-901001');
@@ -6095,7 +6152,7 @@ skills_dict[113301111] = require('#/data/race/skill/skill-113301111');
 skills_dict[113301211] = require('#/data/race/skill/skill-113301211');
 
 console.log(
-  '技能列表注册完毕！',
+  '技能列表注册完毕!',
   (new Date().getTime() - current).toLocaleString(),
   'ms',
 );
@@ -6172,14 +6229,17 @@ const common_skills = [
   203562, 203571, 203572, 203582, 203591, 203592, 203601, 203602, 203611,
   203612, 203621, 203622, 203631, 203632, 203642, 203651, 203652, 203661,
   203662, 203671, 203672, 203681, 203682, 203702, 203711, 203712, 203721,
-  203731, 203732, 203741, 203742, 203751, 203752, 203762, 203772, 210011,
-  210012, 210021, 210022, 210031, 210032, 210041, 210042, 210051, 210052,
-  210061, 210062, 210071, 210072, 210081, 210082, 210091, 210101, 210111,
-  210121, 210131, 210141, 210261, 210262, 210271, 210272, 210281, 210282,
-  210291, 210292, 210301, 210302, 210311, 210321, 210322, 210331, 210341,
-  210342, 210351, 210352, 210361, 210362, 600011, 600012, 660011, 660012,
-  660021, 660022, 660031, 660032, 660041, 660042, 660051, 660052, 990011,
-  990021,
+  203731, 203732, 203741, 203742, 203751, 203752, 203761, 203762, 203772,
+  203781, 203791, 203792, 203801, 203802, 203812, 203822, 203831, 203832,
+  203841, 203842, 203851, 203852, 203861, 203862, 203871, 203872, 203881,
+  203882, 203892, 203902, 203911, 203912, 203922, 203931, 203932, 203972,
+  203982, 210011, 210012, 210021, 210022, 210031, 210032, 210041, 210042,
+  210051, 210052, 210061, 210062, 210071, 210072, 210081, 210082, 210091,
+  210101, 210111, 210121, 210131, 210141, 210261, 210262, 210271, 210272,
+  210281, 210282, 210291, 210292, 210301, 210302, 210311, 210321, 210322,
+  210331, 210341, 210342, 210351, 210352, 210361, 210362, 600011, 600012,
+  660011, 660012, 660021, 660022, 660031, 660032, 660041, 660042, 660051,
+  660052, 990011, 990021,
 ];
 
 module.exports = { chara_skill_dict, common_skills, skills_dict, skill_sets };

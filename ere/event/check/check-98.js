@@ -21,7 +21,7 @@ aim_races[get_aim_race_index(race_enum.toky_dai, 2)] = 4;
 module.exports = require('#/event/check/snippets/check-uma-common-generator')(
   () => {
     if (get('cflag:98:干劲') !== 2) {
-      new RickyEduMarks().mot_check = 1;
+      new RickyEduMarks().mot_check++;
     }
   },
   (races, race_list, aim_check) =>
@@ -35,6 +35,11 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
     aim_check,
   aim_races,
   (buffer, races) => {
+    buffer.push({
+      check: 1,
+      color: undefined,
+      content: `以非极佳干劲完赛次数：${new RickyEduMarks().mot_check}`,
+    });
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.huku_sta, 1, 3));
     buffer.push(check_aim_and_get_entry(races, race_enum.cham_cup, 1, 3));

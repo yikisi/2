@@ -1,9 +1,11 @@
 ﻿const era = require('#/era-electron');
 
 const { sys_get_chara } = require('#/system/chara/sys-calc-characteristic');
+const sys_hurt_uma = require('#/system/chara/sys-hurt-uma');
 const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const { sys_get_succ_rate } = require('#/system/sys-calc-chara-param');
+const { sys_change_fame } = require('#/system/sys-calc-flag');
 
 const { get_custom_edu, run_custom_edu } = require('#/event/edu/edu-factory');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
@@ -142,7 +144,7 @@ function get_success_base_reward(
  * @param {{teach_chara:number}} [between_weeks]
  */
 function get_train_bonus(cid, attr, between_weeks) {
-  const chara_loc = era.get(`cflag:${cid}:位置`);
+  const c_loc = era.get(`cflag:${cid}:位置`);
   const inmon = CharaInmon.get(cid);
   let train_buff =
     era.get(`cflag:${cid}:${attr_names[attr]}加成`) +
@@ -155,7 +157,7 @@ function get_train_bonus(cid, attr, between_weeks) {
     5 * era.get(`status:${cid}:疲惫`) -
     50 * inmon.on(plugin_enum.sex_1) -
     999 * inmon.on(plugin_enum.sex_2);
-  if (chara_loc > 0 && chara_loc !== location_enum.beach) {
+  if (c_loc > 0 && c_loc !== location_enum.beach) {
     train_buff -= 25;
   }
   switch (attr) {
@@ -175,6 +177,12 @@ function get_train_bonus(cid, attr, between_weeks) {
       if (era.get('cflag:342:招募状态') === recruit_flags.yes) {
         train_buff += 50 * (1 + new ByerleyLifeMarks().buff);
       }
+  }
+  if (!between_weeks) {
+    train_buff +=
+      10 * inmon.on(plugin_enum.tra_1) +
+      20 * inmon.on(plugin_enum.tra_2) +
+      270 * inmon.on(plugin_enum.tra_3);
   }
   if (!between_weeks || between_weeks.teach_chara > 0) {
     train_buff += get_trainer_train_buff(cid);
@@ -208,35 +216,35 @@ module.exports = {
    */
   async train_uma(cid, attr, extra_buff) {
     era.set(`cflag:${cid}:自主训练`, 0);
-    const buffer = [],
-      changes = { attr_change: new Array(5).fill(0), pt_change: 0 },
-      train_level =
-        era.get(`cflag:${cid}:位置`) === location_enum.beach
-          ? 5
-          : era.get(`abl:${cid}:${attr_names[attr]}训练等级`) || 1,
-      train_cost = {
-        stamina: -time_cost[train_level - 1] * get_random_value(0.9, 1.2, true),
-        time: -time_cost[train_level - 1],
-      };
+    const buffer = [];
+    const changes = { attr_change: new Array(5).fill(0), pt_change: 0 };
+    const t_level =
+      era.get(`cflag:${cid}:位置`) === location_enum.beach
+        ? 5
+        : era.get(`abl:${cid}:${attr_names[attr]}训练等级`) || 1;
+    const t_cost = {
+      stamina: -time_cost[t_level - 1] * get_random_value(0.9, 1.2, true),
+      time: -time_cost[t_level - 1],
+    };
     let relation_change = era.get(`status:${cid}:摸鱼`) ? -10 : 0;
 
     const stamina_ratio =
-        era.get(`base:${cid}:体力`) / era.get(`maxbase:${cid}:体力`),
-      success_rate = sys_get_succ_rate(cid, attr, extra_buff);
-    const flag_success = Math.random() * 100 < success_rate;
+      era.get(`base:${cid}:体力`) / era.get(`maxbase:${cid}:体力`);
+    const succ_rate = sys_get_succ_rate(cid, attr, extra_buff);
+    const f_succ = Math.random() * 100 < succ_rate;
 
     if (await get_custom_edu(cid).train(attr)) {
       return;
     }
     era.println();
 
-    if (flag_success) {
+    if (f_succ) {
       // 训练成功时的处理（成功才扣体力）
       get_success_base_reward(
         cid,
         attr,
-        train_level,
-        train_cost,
+        t_level,
+        t_cost,
         changes,
         era.get(`cflag:${cid}:位置`) !== era.get('cflag:0:位置')
           ? { teach_chara: 0 }
@@ -256,7 +264,7 @@ module.exports = {
         changes.attr_change[attr] += ret.attr;
       }
       if (ret.stamina !== 0) {
-        train_cost.stamina += ret.stamina;
+        t_cost.stamina += ret.stamina;
       }
       if (ret.relation_change !== 0) {
         relation_change += ret.relation_change;
@@ -279,7 +287,7 @@ module.exports = {
 
       if (
         exp >= 800 &&
-        exp >= train_level * 800 + get_random_value(0, 800) &&
+        exp >= t_level * 800 + get_random_value(0, 800) &&
         update_train_level(cid, attr_names[attr])
       ) {
         buffer.push({
@@ -291,10 +299,10 @@ module.exports = {
     } else {
       switch (attr) {
         case attr_enum.toughness:
-          train_cost.stamina *= 1.1;
+          t_cost.stamina *= 1.1;
           break;
         case attr_enum.intelligence:
-          train_cost.stamina = -train_cost.stamina / 10;
+          t_cost.stamina = -t_cost.stamina / 10;
       }
       const ret = await run_custom_edu(
         cid,
@@ -308,7 +316,7 @@ module.exports = {
       changes.attr_change = ret.attr_change;
       relation_change += ret.relation_change;
       if (ret.stamina) {
-        train_cost.stamina += ret.stamina;
+        t_cost.stamina += ret.stamina;
       }
     }
 
@@ -320,12 +328,17 @@ module.exports = {
       era.print([
         me.get_colored_name(),
         ' 的 ',
-        ...sys_change_attr_and_print(0, '精力', train_cost.time / 2),
+        ...sys_change_attr_and_print(0, '精力', t_cost.time / 2),
       ]);
     }
+    const i_t3 = CharaInmon.get(cid).on(plugin_enum.tra_3);
+    if (i_t3) {
+      t_cost.stamina = -era.get(`base:${cid}:体力`);
+      t_cost.time = -era.get(`base:${cid}:精力`);
+    }
     let to_print = [
-      sys_change_attr_and_print(cid, '体力', train_cost.stamina),
-      sys_change_attr_and_print(cid, '精力', train_cost.time),
+      sys_change_attr_and_print(cid, '体力', t_cost.stamina),
+      sys_change_attr_and_print(cid, '精力', t_cost.time),
     ];
     era.print(
       [
@@ -366,7 +379,7 @@ module.exports = {
       era.add(`exp:${cid}:技能点数`, changes.pt_change);
     }
     if (
-      flag_success &&
+      f_succ &&
       cid > 0 &&
       (to_print = sys_change_attr_and_print(
         0,
@@ -394,6 +407,10 @@ module.exports = {
         },
         ...buffer,
       ]);
+    }
+    if (i_t3) {
+      sys_hurt_uma(cid, 1);
+      sys_change_fame(-1);
     }
     await era.waitAnyKey();
   },

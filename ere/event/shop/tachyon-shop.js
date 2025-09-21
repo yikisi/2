@@ -63,41 +63,43 @@ module.exports = {
   async shop_end(bought) {
     const life_marks = new TachyonLifeMarks(),
       tachyon = get_chara_talk(32);
-    if (
-      get('relation:32:0') > 75 &&
-      get('love:32') < 100 &&
-      get('love:32') > 75
-    ) {
-      if (bought < 3) {
-        tachyon.say(
-          '欸……这么少够用吗？什么？质疑你的能力？不，我不是那个意思……要好好惩罚我吗？呵呵，那我就好好期待着晚上了♡',
-        );
-      } else if (bought > 10) {
-        tachyon.say(
-          '！？居然买这么多……会不会撑不住呢……呵呵，真是令人期待，而且做完之后可以最直接感受到药物的使用后变化……',
-        );
-        tachyon.say('今天晚上让我好好享受一番吧……');
+    if (bought < 3 || bought > 10) {
+      if (
+        get('relation:32:0') > 75 &&
+        get('love:32') < 100 &&
+        get('love:32') > 75
+      ) {
+        if (bought < 3) {
+          tachyon.say(
+            '欸……这么少够用吗？什么？质疑你的能力？不，我不是那个意思……要好好惩罚我吗？呵呵，那我就好好期待着晚上了♡',
+          );
+        } else {
+          tachyon.say(
+            '！？居然买这么多……会不会撑不住呢……呵呵，真是令人期待，而且做完之后可以最直接感受到药物的使用后变化……',
+          );
+          tachyon.say('今天晚上让我好好享受一番吧……');
+        }
+      } else {
+        const say_cb =
+          life_marks.first === 2
+            ? (content) => tachyon.say_as_unknown(content)
+            : (content) => tachyon.say(content);
+        if (bought < 3) {
+          say_cb('哦呀，买的这么少够用吗？');
+          say_cb(
+            '不，只是好奇而已，毕竟这种东西也有个体差异的嘛，如果可以还是希望有更多实验数……没什么',
+          );
+        } else {
+          say_cb(
+            '哦呀，居然买这么多吗？不，只是好奇而已，毕竟这种东西还是有个体差异的吗？……',
+          );
+          say_cb(
+            '顺带一提，个人来讲期待下次光临的时候能附上使用评价哦，如果能以规范的实验报告格式提交就更好了',
+          );
+        }
       }
-    } else {
-      const say_cb =
-        life_marks.first === 2
-          ? (content) => tachyon.say_as_unknown(content)
-          : (content) => tachyon.say(content);
-      if (bought < 3) {
-        say_cb('哦呀，买的这么少够用吗？');
-        say_cb(
-          '不，只是好奇而已，毕竟这种东西也有个体差异的嘛，如果可以还是希望有更多实验数……没什么',
-        );
-      } else if (bought > 10) {
-        say_cb(
-          '哦呀，居然买这么多吗？不，只是好奇而已，毕竟这种东西还是有个体差异的吗？……',
-        );
-        say_cb(
-          '顺带一提，个人来讲期待下次光临的时候能附上使用评价哦，如果能以规范的实验报告格式提交就更好了',
-        );
-      }
+      await waitAnyKey();
     }
-    await waitAnyKey();
     life_marks.first = 0;
   },
   async shop_start() {

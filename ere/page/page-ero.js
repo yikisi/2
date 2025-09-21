@@ -40,6 +40,7 @@ const {
   mark_colors,
   relation_colors,
 } = require('#/data/const.json');
+const date_indicator = require('#/data/date-indicator');
 const { mark_abbr, part_abbr } = require('#/data/ero/ero-alias.json');
 const { lust_border, lust_from_palam } = require('#/data/ero/orgasm-const');
 const {
@@ -297,7 +298,8 @@ function print_milking(type, size) {
  * @param {boolean} [skip_start_end=false]
  */
 async function page_ero(lover, skip_start_end = false) {
-  const in_base = era.get('flag:当前位置') === location_enum.basement;
+  const loc = era.get('flag:当前位置');
+  const in_base = loc === location_enum.basement;
   const rape = era.get('tflag:强奸');
   lover ||= era.get('tflag:当前对手') || era.get('flag:当前互动角色');
   let ero_flag = true;
@@ -305,6 +307,7 @@ async function page_ero(lover, skip_start_end = false) {
   era.set('tflag:当前对手', lover);
   if (
     !in_base &&
+    loc !== location_enum.mejiro &&
     assist !== lover &&
     era.getCharactersInTrain().length === 2 &&
     assist > 0 &&
@@ -355,9 +358,7 @@ async function page_ero(lover, skip_start_end = false) {
     if (!in_base) {
       l_cols.push({
         config: { width: 8 },
-        content: `${era.get('flag:当前年')} 年 ${era.get(
-          'flag:当前月',
-        )} 月 第 ${era.get('flag:当前周')} 周`,
+        content: date_indicator(),
         type: 'text',
       });
     }
@@ -503,7 +504,7 @@ async function page_ero(lover, skip_start_end = false) {
             last_action: era.get('tflag:前回行动'),
             lover_action: era.get('tflag:对手行动'),
           };
-    let a_disabled = lost_mind > 0;
+    let a_disabled = true;
     const action_bar = [];
     action_bar.push({
       content:
@@ -596,7 +597,7 @@ async function page_ero(lover, skip_start_end = false) {
             check_val,
           );
         }
-        const action_disabled = base_check && check_val < 0;
+        const action_disabled = lost_mind > 0 || (base_check && check_val < 0);
         a_disabled &&= action_disabled;
         return {
           accelerator: a,

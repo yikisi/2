@@ -9,7 +9,9 @@ const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const { log_600m2 } = require('#/utils/value-utils');
 
+const CharaInmon = require('#/data/ero/chara-inmon');
 const { lust_border } = require('#/data/ero/orgasm-const');
+const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const { location_enum } = require('#/data/locations');
 const { location_move_cost, vehicle_influences } = require('#/data/move-const');
@@ -245,17 +247,15 @@ module.exports = {
   sys_get_debuff,
   sys_get_move_cost,
   /**
-   * @param {number} target train target
+   * @param {number} cid train target
    * @param {number} type train type
    * @param {number} extra_buff
    * @returns {number} success rate, 0-100
    */
-  sys_get_succ_rate(target, type, extra_buff) {
-    let stamina_max = era.get(`maxbase:${target}:体力`);
-    let stamina_cur = era.get(`base:${target}:体力`);
-
-    let stamina_ratio = stamina_cur / stamina_max;
-    let success_rate = 100;
+  sys_get_succ_rate(cid, type, extra_buff) {
+    let stamina_ratio =
+      era.get(`base:${cid}:体力`) / era.get(`maxbase:${cid}:体力`);
+    let ret = 100;
 
     // 体力低于阈值时训练有可能失败
     // 智力训练30%，其他50%
@@ -265,37 +265,34 @@ module.exports = {
         : fail_sta_border.other;
     if (stamina_ratio < border_fail) {
       // 线性降至0
-      success_rate = (stamina_ratio * 100) / border_fail;
+      ret = (stamina_ratio * 100) / border_fail;
     }
     // 属性超过400以后，越接近满百越难提升，各+-5%成功率
-    const attr = era.get(`base:${target}:${attr_names[type]}`);
+    const attr = era.get(`base:${cid}:${attr_names[type]}`);
     if (attr > 400) {
-      success_rate += 5 - (10 * (attr % 100)) / 100;
+      ret += 5 - (10 * (attr % 100)) / 100;
     }
     // 训练等级带来的额外成功率，分别为0%、1%、2%、3%、5%
-    success_rate +=
-      1.25 * (era.get(`abl:${target}:${attr_names[type]}训练等级`) - 1);
+    ret += 1.25 * (era.get(`abl:${cid}:${attr_names[type]}训练等级`) - 1);
 
     // 结算状态加成
-    success_rate +=
-      2 * era.get(`status:${target}:练习X手`) +
-      (extra_buff || 0) -
-      10 * era.get(`status:${target}:摸鱼`) -
-      era.get(`base:${target}:压力`) / 500 -
-      10 * era.get(`status:${target}:疲惫`) -
-      10 * era.get(`status:${target}:水土不服`) +
-      get_custom_mec(target).get_success_rate_buff();
+    ret +=
+      2 * era.get(`status:${cid}:练习X手`) +
+      extra_buff -
+      10 * era.get(`status:${cid}:摸鱼`) -
+      era.get(`base:${cid}:压力`) / 500 -
+      10 * era.get(`status:${cid}:疲惫`) -
+      10 * era.get(`status:${cid}:水土不服`) +
+      get_custom_mec(cid).get_success_rate_buff();
+    // 结算淫纹
+    const inmon = CharaInmon.get(cid);
+    ret +=
+      10 * inmon.on(plugin_enum.tra_1) +
+      20 * inmon.on(plugin_enum.tra_2) +
+      270 * inmon.on(plugin_enum.tra_3);
 
-    success_rate *= (100 + era.get('flag:训练难度')) / 100;
+    ret *= (100 + era.get('flag:训练难度')) / 100;
 
-    success_rate = Math.floor(success_rate);
-
-    if (success_rate < 0) {
-      success_rate = 0;
-    } else if (success_rate > 100) {
-      success_rate = 100;
-    }
-
-    return success_rate;
+    return Math.floor(Math.max(Math.min(ret, 100), 0));
   },
 };

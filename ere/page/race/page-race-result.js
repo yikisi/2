@@ -44,18 +44,18 @@ async function page_race_result(contestants, info, race_id) {
       { type: 'divider' },
       {
         accelerator: 1,
-        config: { width: 6, align: 'center' },
+        config: { width: 8, align: 'center' },
         content: '一倍速观看',
         type: 'button',
       },
       {
         accelerator: 2,
-        config: { width: 6, align: 'center' },
+        config: { width: 8, align: 'center' },
         content: '二倍速观看',
         type: 'button',
       },
       {
-        accelerator: 3,
+        accelerator: 8,
         config: { width: 6, align: 'center' },
         content: '四倍速观看',
         type: 'button',
@@ -65,14 +65,14 @@ async function page_race_result(contestants, info, race_id) {
         config: {
           align: 'center',
           buttonType: sum ? 'warning' : 'info',
-          width: 6,
+          width: 8,
         },
         content: '减少参赛选手显示',
         type: 'button',
       },
       {
         accelerator: 0,
-        config: { align: 'center' },
+        config: { align: 'center', width: 8 },
         content: '查看结果',
         type: 'button',
       },
@@ -82,10 +82,10 @@ async function page_race_result(contestants, info, race_id) {
         flag_res = false;
         break;
       case 1:
-        interval = 1000 / 15;
+        interval = (1000 * 1.25) / 15;
         break;
       case 2:
-        interval = 500 / 15;
+        interval = (500 * 1.2) / 15;
         break;
       case 3:
         interval = 250 / 15;
@@ -169,7 +169,7 @@ async function page_race_result(contestants, info, race_id) {
 
   if (interval > 0) {
     await era.clear();
-    era.input({ show: false }).then(() => (flag_res = false));
+    era.input({ show: false, hideInput: true }).then(() => (flag_res = false));
     await show_result(interval);
   }
   let flag_cha = 1;
@@ -181,8 +181,12 @@ async function page_race_result(contestants, info, race_id) {
     era.playMusic('音效_强敌击退');
     await era.waitAnyKey();
     era.setMask();
+  } else {
+    era.stopMusic();
   }
-  await era.waitAnyKey();
+  if (interval > 0) {
+    await era.waitAnyKey();
+  }
   const mvp = Math.min(
     ...contestants
       .filter((e) => e.index_chara >= 0 && !e.legend)

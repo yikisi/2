@@ -45,6 +45,8 @@ module.exports = async (src_chara) => {
   era.resetData();
   if (src_chara > 0) {
     chara_colors[0] = get_chara_color(src_chara);
+    init_chara(src_chara);
+    era.set(`cflag:${src_chara}:随机招募`, 0);
     init_chara(0, src_chara);
     era.set('talent:0:调教度', 1);
     player_name = era.get('callname:0:-1');
@@ -60,6 +62,8 @@ module.exports = async (src_chara) => {
     era.set('callname:0:-2', '你');
     era.set('cflag:0:成长阶段', 5);
     era.set('cstr:0:决胜服', 0);
+  } else {
+    chara_colors[0] = '#ffffff';
   }
   const my_marks = new MyEduMarks();
 
@@ -213,11 +217,7 @@ module.exports = async (src_chara) => {
 
           era.set('talent:0:童贞', 1);
           era.set('talent:0:处女', 1);
-          if (src_chara > 0) {
-            init_chara(src_chara);
-            era.set(`cflag:${src_chara}:随机招募`, 0);
-          } else {
-            chara_colors[0] = '#ffffff';
+          if (src_chara <= 0) {
             if (await page_custom()) {
               return false;
             }

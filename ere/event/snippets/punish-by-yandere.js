@@ -14,7 +14,8 @@ async function punish_by_yandere(cid, hook) {
       if (
         e !== cid &&
         era.get(`love:${e}`) >= 50 &&
-        sys_check_yandere(e, (y) => y > 0)
+        sys_check_yandere(e, (y) => y > 0) &&
+        era.get(`cflag:${e}:成长阶段`) >= 2
       ) {
         const yandere = era.get(`talent:${e}:病娇`);
         return (

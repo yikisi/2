@@ -93,6 +93,13 @@ module.exports = class extends CustomizedCheck {
     const buffer = [],
       races = RaceHistory.get(this.id).get();
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
+    if (check_aim_race(races, race_enum.begin_race)) {
+      buffer.push({
+        check: 1,
+        color: undefined,
+        content: `出道战 8 马身以上获胜：${new FujikiEduMarks().title_check > 0 ? '是' : '否'}`,
+      });
+    }
     buffer.push(check_aim_and_get_entry(races, race_enum.asah_sta, 0, 5));
     buffer.push(check_aim_and_get_entry(races, race_enum.hoch_sho, 1, 5));
     buffer.push(check_aim_and_get_entry(races, race_enum.sats_sho, 1, 5));

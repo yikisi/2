@@ -295,7 +295,7 @@ async function reset_status(
               false,
             );
           }
-          if ((temp = era.get('flag:回合爱慕惩罚'))) {
+          if ((temp = era.get('flag:回合爱慕惩罚')) > 0) {
             sys_love_uma(
               cid,
               (1 - (era.get(`status:${cid}:讨厌药`) > 0)) *

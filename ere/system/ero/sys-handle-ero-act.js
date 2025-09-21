@@ -165,8 +165,8 @@ async function next_turn(shown) {
   const master = era.get('tflag:主导权');
   if (
     !sys_check_awake(master) ||
-    era.get(`tcvar:${master}:脱力`) ||
-    era.get(`tcvar:${master}:失神`)
+    era.get(`tcvar:${master}:脱力`) > 0 ||
+    era.get(`tcvar:${master}:失神`) > 0
   ) {
     change_master(-1, shown);
   }
@@ -187,87 +187,83 @@ async function next_turn(shown) {
  * @returns {Promise<boolean>}
  */
 async function sys_handle_ero_act(command, filters, shown = true) {
-  const cur_lover = era.get('tflag:当前对手');
-  const chara = get_chara_talk(cur_lover);
-  const supporter = era.get('tflag:当前助手');
+  const lover = era.get('tflag:当前对手');
+  const chara = get_chara_talk(lover);
+  const sup = era.get('tflag:当前助手');
   if (shown) {
     era.drawLine();
   }
   if (command < 900) {
-    let action_success = true;
-    const check = sys_check_ero_enabled(cur_lover, supporter, command);
+    let a_suc = true;
+    const check = sys_check_ero_enabled(lover, sup, command);
     if (command === ero_hooks.use_lubricating_fluid) {
       const to_use_lubricating_fluid = await use_lubricating_fluid(chara);
       if (to_use_lubricating_fluid) {
         to_use_lubricating_fluid.check = check;
         await run_custom_ero(
-          cur_lover,
+          lover,
           ero_hooks.use_lubricating_fluid,
           to_use_lubricating_fluid,
         );
       } else {
-        action_success = false;
+        a_suc = false;
       }
     } else if (command === ero_hooks.use_medicine) {
       const to_use_medicine = await use_ero_medicine(chara);
       if (to_use_medicine) {
         to_use_medicine.check = check;
-        await run_custom_ero(
-          cur_lover,
-          ero_hooks.use_medicine,
-          to_use_medicine,
-        );
+        await run_custom_ero(lover, ero_hooks.use_medicine, to_use_medicine);
       } else {
-        action_success = false;
+        a_suc = false;
       }
     } else if (command === ero_hooks.use_item) {
       const to_use_item = await use_ero_item(chara);
       if (to_use_item) {
         to_use_item.check = check;
-        await run_custom_ero(cur_lover, ero_hooks.use_item, to_use_item);
+        await run_custom_ero(lover, ero_hooks.use_item, to_use_item);
       } else {
-        action_success = false;
+        a_suc = false;
       }
     } else if (command === ero_hooks.take_off_item) {
       const used_item = await take_off_ero_item(chara);
       if (used_item) {
-        await run_custom_ero(cur_lover, ero_hooks.take_off_item, used_item);
+        await run_custom_ero(lover, ero_hooks.take_off_item, used_item);
       } else {
-        action_success = false;
+        a_suc = false;
       }
     } else if (command === ero_hooks.ask_use_item) {
       const random_item = use_item_by_character();
-      await run_custom_ero(cur_lover, ero_hooks.ask_use_item, {
+      await run_custom_ero(lover, ero_hooks.ask_use_item, {
         item: get_random_entry(random_item.items),
         part: random_item.part,
         attacker: 0,
-        defender: cur_lover,
+        defender: lover,
       });
     } else if (
       (ero_tagged_hooks[command] || default_tags).condition !==
       condition_type.active
     ) {
-      await run_custom_ero(cur_lover, command, {
+      await run_custom_ero(lover, command, {
         attacker: 0,
         check,
-        defender: cur_lover,
+        defender: lover,
         shown,
       });
     } else {
-      await run_custom_ero(cur_lover, command, {
+      await run_custom_ero(lover, command, {
         check,
         shown,
-        supporter,
+        supporter: sup,
       });
     }
-    if (action_success) {
+    if (a_suc) {
       if (shown) {
         era.println();
       }
       if (!era.get('tflag:主导权')) {
         era.set('tflag:前回行动', command);
-        era.set('tflag:前回助手', supporter);
-        const inmon = CharaInmon.get(cur_lover);
+        era.set('tflag:前回助手', sup);
+        const inmon = CharaInmon.get(lover);
         if (!inmon.on(plugin_enum.tuna) && !inmon.on(plugin_enum.meek)) {
           await sys_auto_react(shown);
         }
@@ -275,7 +271,7 @@ async function sys_handle_ero_act(command, filters, shown = true) {
         era.set('tflag:对手行动', command);
         await sys_auto_rape(shown);
       }
-      era.set('tflag:前回对手', cur_lover);
+      era.set('tflag:前回对手', lover);
       await next_turn(shown);
     }
   } else if (command === 900) {
@@ -312,21 +308,21 @@ async function sys_handle_ero_act(command, filters, shown = true) {
       }
     }
   } else if (command === 902) {
-    print_touch_info(cur_lover);
+    print_touch_info(lover);
     await era.waitAnyKey();
   } else if (command === 903) {
-    print_stain_info(cur_lover);
+    print_stain_info(lover);
     await era.waitAnyKey();
   } else if (command === 904) {
     await print_chara_info(0, undefined, 5);
   } else if (command === 905) {
-    await print_chara_info(cur_lover, undefined, 5);
+    await print_chara_info(lover, undefined, 5);
   } else if (command === 999) {
     if (
-      sys_check_awake(cur_lover) &&
-      !era.get(`tcvar:${cur_lover}:脱力`) &&
-      !era.get(`tcvar:${cur_lover}:失神`) &&
-      sys_get_strength_ratio_in_fight(0, cur_lover) < Math.random()
+      sys_check_awake(lover) &&
+      !era.get(`tcvar:${lover}:脱力`) &&
+      !era.get(`tcvar:${lover}:失神`) &&
+      sys_get_strength_ratio_in_fight(0, lover) < Math.random()
     ) {
       change_master(0, shown);
     }
@@ -341,10 +337,10 @@ async function sys_handle_ero_act(command, filters, shown = true) {
     }
   } else if (command < 2000) {
     era.set('tflag:当前对手', command - 1000);
-    if (supporter === command - 1000) {
+    if (sup === command - 1000) {
       era.set('tflag:当前助手', 0);
     }
-  } else if (supporter === command - 2000) {
+  } else if (sup === command - 2000) {
     era.set('tflag:当前助手', 0);
   } else {
     era.set('tflag:当前助手', command - 2000);
@@ -360,7 +356,7 @@ async function sys_handle_ero_act(command, filters, shown = true) {
       }
       era.set(`tcvar:${master}:逃跑`, 1);
     }
-    if (cur_lover !== master) {
+    if (lover !== master) {
       era.set('tflag:当前对手', master);
     }
   }

@@ -23,7 +23,7 @@ aim_races[get_aim_race_index(race_enum.japa_cup, 2)] = 4;
 module.exports = require('#/event/check/snippets/check-uma-common-generator')(
   function () {
     if (get(`cflag:${this.id}:干劲`) !== 2) {
-      new CityEduMarks().title_check = 1;
+      new CityEduMarks().title_check++;
     }
   },
   function (races) {
@@ -36,6 +36,11 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
   },
   aim_races,
   (buffer, races) => {
+    buffer.push({
+      check: 1,
+      color: undefined,
+      content: `以非极佳干劲完赛次数：${new CityEduMarks().title_check}`,
+    });
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.hans_fil, 0, 5));
     buffer.push(check_aim_and_get_entry(races, race_enum.sats_sho, 1, 5));

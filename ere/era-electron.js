@@ -6,6 +6,7 @@
  * @property {'primary'|'success'|'warning'|'danger'|'info'|''} [buttonType] type of the button in element-plus, 'warning' in default when isButton is false
  * @property {string} [color] color of the button, isButton must be false
  * @property {boolean} [disabled] if the button is disabled, false in default
+ * @property {boolean} [disableContinue] if the button is disabled, false in default
  * @property {boolean} [disableWarning] if disable warning when accelerator has been set, false in default
  * @property {'left'|'center'|'right'} [inTextAlign] align of the text in the button, 'center' in default
  * @property {boolean} [isButton] if the button is a button, otherwise is a link
@@ -83,7 +84,7 @@
  * @property {number} [width] width of the line, 1-24, 24 in default
  */
 /**
- * @typedef {string|(PrintedSpan|{isBlank:boolean}|{isBr:boolean}|{isDivider:boolean}|string)[]} TextContent
+ * @typedef {string|(PrintedSpan|{isBlank:number}|{isBr:boolean}|{isDivider:boolean}|string)[]} TextContent
  */
 /**
  * @typedef TextObject
@@ -548,7 +549,7 @@ const era = {
    * @returns {boolean} if debug
    */
   toggleDebug() {},
-  version: { sdk: '4.2.2', engine: undefined },
+  version: { sdk: '4.3.0', engine: undefined },
   /**
    * wait any key from user
    * @returns {Promise<void>} a promise of nothing, please use await

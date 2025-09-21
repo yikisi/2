@@ -71,7 +71,10 @@ module.exports = class extends StrangeDayEvents {
       '招募状态',
       recruit_flags.yes,
     ).filter(
-      (e) => get(`cflag:${e}:种族`) > 0 && get(`cflag:${e}:可再次育成`) > 0,
+      (cid) =>
+        cid > 0 &&
+        get(`cflag:${cid}:种族`) > 0 &&
+        get(`cflag:${cid}:可再次育成`) > 0,
     );
     if (second_list.length === 0 || team_limit <= 0) {
       return;
@@ -445,7 +448,7 @@ module.exports = class extends StrangeDayEvents {
     ]);
     printButton('「我不是，我没有！」', 1);
     await input();
-    sys_change_fame(-20);
+    sys_change_fame(-10);
   }
 
   /**
@@ -464,8 +467,11 @@ module.exports = class extends StrangeDayEvents {
     println();
     await printAndWait('今天也是喝能量饮料强撑、睡办公室桌下的一天。');
     printButton('「地板好硬……」', 1);
-    get_attr_and_print_in_event(0, undefined, 0, JSON.parse('{"体力":-50}')) &&
-      (await waitAnyKey());
+    if (
+      get_attr_and_print_in_event(0, undefined, 0, JSON.parse('{"体力":-50}'))
+    ) {
+      await waitAnyKey();
+    }
   }
 
   /**
@@ -658,14 +664,10 @@ module.exports = class extends StrangeDayEvents {
 
   /** @author Mr.E. */
   async sakura_regret() {
-    const chara_id = get_random_entry(
-      sys_filter_chara('cflag', '招募状态', recruit_flags.yes).filter(
-        (e) =>
-          e > 0 && get(`cflag:${e}:爱慕暂拒`) === 74 && e !== 25 && e !== 400,
-      ),
-    );
-    if (chara_id !== undefined) {
-      const chara = get_chara_talk(chara_id);
+    const my_marks = new MyEduMarks();
+    const cid = get_random_entry(my_marks.pity || []);
+    if (cid !== undefined) {
+      const chara = get_chara_talk(cid);
       await print_event_name('樱花的遗憾', chara);
       await printAndWait([
         '夜晚，在床上的 ',

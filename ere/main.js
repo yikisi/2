@@ -29,6 +29,7 @@ const { check_rec_script } = require('#/event/rec/rec-factory');
 
 const { say_by_passer_by } = require('#/utils/chara-talk');
 const CharaTalk = require('#/utils/chara-talk');
+const { join_list } = require('#/utils/list-utils');
 
 const item_title_color =
   require('#/data/color-const').adaptability_colors.at(-1);
@@ -36,7 +37,7 @@ const { get_chara_color } = require('#/data/chara-colors');
 const title_desc = require('#/data/desc/title-desc.json');
 const notes = require('#/data/notes.json');
 const { first_child_id } = require('#/data/other-const');
-const { join_list } = require('#/utils/list-utils');
+const { res_version } = require('#/versions');
 
 /**
  * @param {number} cid
@@ -82,7 +83,19 @@ module.exports = async () => {
           { content: '托管仓库', url: 'https://gitgud.io/umaera/erauma' },
           '；因为游戏本身的性质，禁止在任何未成年人可以接触到的公开场合展示或传播本游戏，更禁止任何人在任何商业活动（贩卖/附送等）和公开活动（直播等）中使用本游戏。',
           { isBr: true },
-          '6. 在明确注明或保留游戏来源、不涉及任何商业目的和经济受益、并同样遵守本免责声明的情况下，允许他人基于本游戏进行修改或二次开发。该授权将直接赋予本游戏的所有玩家，不需要专门征求开发者的明确同意。',
+          '6. 在明确注明或保留游戏来源、不涉及任何商业目的和经济受益、并同样遵守本免责声明、',
+          {
+            content: 'GPL 2.0 only 开源协议',
+            fontWeight: 'bold',
+            url: 'https://gnu.ac.cn/licenses/old-licenses/gpl-2.0.html',
+          },
+          '与',
+          {
+            content: '口上创作协议',
+            fontWeight: 'bold',
+            url: 'https://gitgud.io/umaera/erauma/-/wikis/LICENSE',
+          },
+          '的情况下，允许他人基于本游戏进行修改或二次开发（衍生产物称为魔改版）。该授权将直接赋予本游戏的所有玩家，不需要专门征求开发者的明确同意，但需要在游戏标题和标题界面等处标明是魔改版并与原版做出明显区分。',
           { isBr: true },
           '7. 本声明的解释权归开发者所有，且在版本更新中声明内容可能有所变更，请以最新版本为准。',
           { isBr: true },
@@ -177,6 +190,7 @@ module.exports = async () => {
       ],
     ],
     [[get_copyright_entry(71)], '洛洛'],
+    [[get_copyright_entry(74, '招募')], 'KUN'],
     [[get_copyright_entry(86, '部分地下室')], 'イーウィヤ'],
     [[get_copyright_entry(89, '招募、地下室')], '無奈'],
     [[get_copyright_entry(100)], '夕阳红艺术团小组长-赤红彗星红桃爵士Q先生'],
@@ -311,8 +325,8 @@ module.exports = async () => {
             content: [
               '适配资源包版本：',
               {
-                content: '20250814',
-                url: 'https://gitgud.io/umaera/erauma/-/archive/master/erauma-master.zip?path=res',
+                content: res_version,
+                url: `https://gitgud.io/umaera/data/uma-resource/-/archive/${res_version}/uma-resource-${res_version}.zip`,
               },
             ],
             type: 'text',
@@ -524,10 +538,7 @@ module.exports = async () => {
           say_by_passer_by(...note);
         }
         await era.waitAnyKey();
-        for (const cid of Object.keys(notes)
-          .filter((k) => k !== 'common')
-          .map(Number)
-          .sort((a, b) => a - b)) {
+        for (const cid of Object.keys(notes).filter((k) => !isNaN(Number(k)))) {
           for (const note of notes[cid]) {
             era.print(
               [{ content: note[0], fontWeight: 'bold' }, '「', note[1], '」'],
@@ -657,7 +668,7 @@ module.exports = async () => {
             { isDivider: true },
             {
               content: '赛马娘中文 Wiki',
-              url: 'https://wiki.biligame.com/umamusume/%E9%A6%96%E9%A1%B5',
+              url: 'https://wiki.biligame.com/umamusume/首页',
             },
           ],
           {
@@ -800,6 +811,9 @@ module.exports = async () => {
         await era.printAndWait('午马牧师妹 · 普瑞提达比', {
           fontSize: '1.25rem',
         });
+        era.println();
+        era.printButton('返回标题', 0, { disableContinue: true });
+        await era.input({ hideInput: true });
         era.setAlign('left');
     }
   }

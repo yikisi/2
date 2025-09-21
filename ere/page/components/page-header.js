@@ -1,4 +1,4 @@
-﻿const era = require('#/era-electron');
+const era = require('#/era-electron');
 
 const sys_get_status = require('#/system/chara/sys-get-status');
 const {
@@ -7,7 +7,6 @@ const {
 } = require('#/system/sys-calc-base-cflag');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
-const date_indicator = require('#/page/components/date-indicator');
 const race_indicator = require('#/page/components/race-indicator');
 
 const { get_custom_mec } = require('#/event/mec/mec-factory');
@@ -15,8 +14,11 @@ const { get_custom_mec } = require('#/event/mec/mec-factory');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_abbr_number } = require('#/utils/value-utils');
 
+const CharaTitles = require('#/data/chara-titles');
 const { celebration_color, money_color } = require('#/data/color-const');
 const { attr_background_colors, trainer_colors } = require('#/data/const.json');
+const date_indicator = require('#/data/date-indicator');
+const title_desc = require('#/data/desc/title-desc.json');
 const recruit_flags = require('#/data/event/recruit-flags');
 const {
   get_celebration,
@@ -126,6 +128,40 @@ function page_header(enable_race_info) {
       }
     });
     const status_list = sys_get_status(0);
+    const title_info = [
+      {
+        color: trainer_title_color,
+        fontWeight: 'bold',
+        ...get_abbr_number(cur_fame),
+      },
+      ' 声望 ',
+    ];
+    const t_title = CharaTitles.get(0).get_curr_title();
+    if (t_title) {
+      title_info.push({
+        color: t_title.c,
+        content: `[${t_title.n}]`,
+        fontWeight: 'n',
+        title: title_desc[t_title.n]
+          ? `[${t_title.n}]：${title_desc[t_title.n]}\n`
+          : '',
+      });
+    } else {
+      title_info.push({
+        color: trainer_title_color,
+        content: `[${title_level}]`,
+        fontWeight: 'bold',
+        title: '',
+      });
+    }
+    title_info.at(-1).title += `[${title_level}]：${
+      trainer_buff > 0
+        ? `指导训练时成功率与效果加成+${trainer_buff}%${
+            rec_trainers.length > 0 ? ` (↑${rec_trainers})` : ''
+          }，`
+        : ''
+    }担当赏金${4 * get_trainer_level() + 4}%分成。`;
+    title_info.push(...race_indicator(0));
     era.printInColRows(
       [{ type: 'divider' }],
       {
@@ -154,22 +190,7 @@ function page_header(enable_race_info) {
           },
           {
             config: { width: 16 },
-            content: [
-              {
-                color: trainer_title_color,
-                fontWeight: 'bold',
-                ...get_abbr_number(cur_fame),
-              },
-              ' 声望 (',
-              {
-                color: trainer_title_color,
-                content: title_level,
-                fontWeight: 'bold',
-                title: `[${title_level}]：${trainer_buff > 0 ? `指导训练时成功率与效果加成+${trainer_buff}%${rec_trainers.length > 0 ? ` (↑${rec_trainers})` : ''}，` : ''}担当赏金${4 * get_trainer_level() + 4}%分成。`,
-              },
-              ')',
-              ...race_indicator(0),
-            ],
+            content: title_info,
             type: 'text',
           },
           {

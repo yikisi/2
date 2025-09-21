@@ -7,9 +7,8 @@ const CustomizedEdu = require('#/event/edu/edu-common');
 const FestaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-49');
 
 module.exports = class extends CustomizedEdu {
-  async train_fail(festa, me, callname, hook, extra_flag) {
-    const event_marks = new FestaEduMarks();
-    event_marks.train_fail++;
-    return await super.train_fail(festa, me, callname, hook, extra_flag);
+  async train_fail(festa, me, callname, hook, extra) {
+    new FestaEduMarks().train_fail++;
+    return await super.train_fail(festa, me, callname, hook, extra);
   }
 };

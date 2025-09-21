@@ -4,9 +4,15 @@
  */
 const era = require('#/era-electron');
 
-const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
+const {
+  sys_get_callname,
+  sys_get_colored_callname,
+} = require('#/system/sys-calc-chara-others');
 
+const kojo = require('#/event/ero/common/common.kojo');
 const EroCommunications = require('#/event/ero/common/interface/ero-communications');
+
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const resist_race_desc = ['你也不', undefined, '我才', '我也'];
 
@@ -171,69 +177,88 @@ class EroNormalCommunications extends EroCommunications {
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
-   * @param {{[success]:boolean}} extra_flag
+   * @param {{[success]:boolean}} extra
    */
-  async resist(attacker, defender, hook, extra_flag) {
-    if (hook.arg) {
-      await defender.say_and_wait('不要动会比较好哦。');
-      await attacker.print_and_wait([
-        '骑在 ',
-        attacker.get_colored_name(),
-        ' 身上的 ',
-        sys_get_colored_callname(attacker.id, defender.id),
-        '，正舔着唇露出叫人有些陌生的表情。',
-      ]);
-      await attacker.print_and_wait(
-        '但是，一面倒地被压在身下……这种事情可不能简简单单地就这么习惯啊！',
-      );
-      await attacker.print_and_wait('……');
-    }
-    if (
-      (extra_flag.success = EroNormalCommunications.check_resist_success(
-        attacker.id,
-        defender.id,
-      ))
-    ) {
-      await attacker.say_and_wait('不要动会比较好哦。');
-      await attacker.print_and_wait([
-        '将刚才的话原原本本还给了眼前的 ',
-        sys_get_colored_callname(attacker.id, defender.id),
-        '，看着有些失措的表情，现在 ',
-        attacker.get_colored_name(),
-        ' 的脸上，满满是得意的笑容。',
-      ]);
+  async resist(attacker, defender, hook, extra) {
+    extra.success = EroNormalCommunications.check_resist_success(
+      attacker.id,
+      defender.id,
+    );
+    if (era.get('flag:惩戒力度') === 3) {
+      const o = { success: extra.success };
+      o['玩家名'] = era.get('callname:0:-2');
+      if (!attacker.id) {
+        await kojo['孕袋反抗'](o);
+      } else {
+        o['马娘'] =
+          era.get(`cflag:${attacker.id}:种族`) > 0
+            ? era.get('flag:角色性别') === 1
+              ? '马郎'
+              : '马娘'
+            : '';
+        if (!extra.success) {
+          o['代表色'] = get_chara_talk(attacker.id).color;
+          o['称呼'] = sys_get_callname(attacker.id, defender.id);
+        }
+        await kojo['反抗孕袋'](o);
+      }
     } else {
-      const race =
-        (era.get(`cflag:${attacker.id}:种族`) << 1) +
-        era.get(`cflag:${defender.id}:种族`);
-      await attacker.say_and_wait(
-        race === 1
-          ? `果然，人类是敌不过${defender.get_uma_sex_title()}的……`
-          : [
-              '果然，自己是敌不过 ',
-              sys_get_colored_callname(attacker.id, defender.id),
-              ' 的……',
-            ],
-        true,
-      );
-      await attacker.print_and_wait([
-        '轻易地被重新压回了身下，',
-        attacker.get_colored_name(),
-        ' 的脑袋里闪过了这样的一句话。',
-      ]);
-      if (race !== 1) {
+      if (hook.arg) {
+        await defender.say_and_wait('不要动会比较好哦。');
+        await attacker.print_and_wait([
+          '骑在 ',
+          attacker.get_colored_name(),
+          ' 身上的 ',
+          sys_get_colored_callname(attacker.id, defender.id),
+          '，正舔着唇露出叫人有些陌生的表情。',
+        ]);
+        await attacker.print_and_wait(
+          '但是，一面倒地被压在身下……这种事情可不能简简单单地就这么习惯啊！',
+        );
+        await attacker.print_and_wait('……');
+      }
+      if (extra.success) {
+        await attacker.say_and_wait('不要动会比较好哦。');
+        await attacker.print_and_wait([
+          '将刚才的话原原本本还给了眼前的 ',
+          sys_get_colored_callname(attacker.id, defender.id),
+          '，看着有些失措的表情，现在 ',
+          attacker.get_colored_name(),
+          ' 的脸上，满满是得意的笑容。',
+        ]);
+      } else {
+        const race =
+          (era.get(`cflag:${attacker.id}:种族`) << 1) +
+          era.get(`cflag:${defender.id}:种族`);
         await attacker.say_and_wait(
-          [
-            '不对啊，明明',
-            resist_race_desc[race],
-            '是',
-            attacker.get_uma_sex_title(),
-            '啊！',
-          ],
+          race === 1
+            ? `果然，人类是敌不过${defender.get_uma_sex_title()}的……`
+            : [
+                '果然，自己是敌不过 ',
+                sys_get_colored_callname(attacker.id, defender.id),
+                ' 的……',
+              ],
           true,
         );
+        await attacker.print_and_wait([
+          '轻易地被重新压回了身下，',
+          attacker.get_colored_name(),
+          ' 的脑袋里闪过了这样的一句话。',
+        ]);
+        if (race !== 1) {
+          await attacker.say_and_wait(
+            [
+              '不对啊，明明',
+              resist_race_desc[race],
+              '是',
+              attacker.get_uma_sex_title(),
+              '啊！',
+            ],
+            true,
+          );
+        }
+        await attacker.say_and_wait('咕……', true);
       }
-      await attacker.say_and_wait('咕……', true);
     }
   }
 

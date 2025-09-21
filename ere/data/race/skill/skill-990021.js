@@ -7,7 +7,7 @@ module.exports = new UmaSkill(
   99002,
   1,
   UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.debuff,
+    UmaSkill.skill_name_enum.control,
     UmaSkill.skill_border_enum.cheat,
   ),
   1,

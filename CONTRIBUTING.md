@@ -11,6 +11,8 @@
 
 ## Commits
 
+[Type](https://www.conventionalcommits.org/zh-hans/v1.0.0/)
+
 Scope:
 * train: 训练相关的界面、机制和地文，包括自主训练、照看训练和协同训练；
 * race: 比赛相关的界面、机制和地文；
@@ -27,5 +29,6 @@ Scope:
 * data: 其他数据，技能、因子能力、淫纹插件等；
 * res: 其他图像资源、音乐；
 * engine：引擎改动；
+* util: value-utils、date-indicator 等工具模块改动；
 * tools：tools 文件夹下的生成工具改动；
 * b-(分支名): 一般用于 merge，标明这次 merge 的方向。

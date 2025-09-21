@@ -75,14 +75,15 @@ const rec_list = {};
 /**
  * @param {number} race
  * @param {RaceInfo} info
- * @param {PseudoUma[]} team_contestants
+ * @param {PseudoUma[]} team
  */
-async function check_race_events(race, info, team_contestants) {
-  const may_life_marks = new MayLifeMarks();
+async function check_race_events(race, info, team) {
+  const may_marks = new MayLifeMarks();
   let handler = undefined;
-  const best = Math.min(...team_contestants.map((e) => e.rank.curr));
-  const mvp = team_contestants.find((e) => e.rank.curr === best).index_chara;
-  const my_edu_marks = new MyEduMarks();
+  const best = Math.min(...team.map((e) => e.rank.curr));
+  const mvp = team.find((e) => e.rank.curr === best);
+  const mvp_id = mvp.index_chara;
+  const my_marks = new MyEduMarks();
   if (best === 1) {
     (rec_list[race] || []).forEach((cid) => {
       if (!get(`cflag:${cid}:招募状态`) && get(`cflag:${cid}:随机招募`) <= 0) {
@@ -90,8 +91,8 @@ async function check_race_events(race, info, team_contestants) {
       }
     });
   }
-  if (race === race_enum.prix_lat && best === 1 && !may_life_marks.who_am_i) {
-    may_life_marks.who_am_i = 1;
+  if (race === race_enum.prix_lat && best === 1 && !may_marks.who_am_i) {
+    may_marks.who_am_i = 1;
   }
   if (get('flag:初见URA颁奖') < 2) {
     /**
@@ -144,7 +145,7 @@ async function check_race_events(race, info, team_contestants) {
     get('flag:惩戒力度') === 3 &&
     get('cflag:303:招募状态') === recruit_flags.yes &&
     get('cflag:0:妊娠阶段') >> pregnant_stage_enum.fetal > 0 &&
-    team_contestants.findIndex((e) => e.index_chara === 0) === -1 &&
+    team.findIndex((e) => e.index_chara === 0) === -1 &&
     best === 1 &&
     info.race_class <= class_enum.G3
   ) {
@@ -156,7 +157,7 @@ async function check_race_events(race, info, team_contestants) {
     handler = async () => {
       const etsuko = get_chara_talk(303),
         me = get_chara_talk(0),
-        champion = get_chara_talk(mvp);
+        champion = get_chara_talk(mvp_id);
       if (get_penis_size(303) === 0) {
         set(`status:303:弗隆${Math.random() < 0.5 ? 'K' : 'P'}`, 1);
       }
@@ -501,24 +502,27 @@ async function check_race_events(race, info, team_contestants) {
       sys_like_chara(303, 0, 200) && (await waitAnyKey());
     };
   } else if (
-    get(`cflag:${mvp}:性别`) !== 1 &&
-    !my_edu_marks.we_are_one &&
-    mvp > 0 &&
-    (!check_rec_script(mvp) || !check_edu_script(mvp)) &&
-    !sys_check_remote(mvp) &&
+    get(`cflag:${mvp_id}:性别`) !== 1 &&
+    !my_marks.we_are_one &&
+    mvp_id > 0 &&
+    (!check_rec_script(mvp_id) || !check_edu_script(mvp_id)) &&
+    !sys_check_remote(mvp_id) &&
     best === 1 &&
-    get(`love:${mvp}`) >= 75 &&
-    Math.random() * 100 < 20 + (get(`base:${mvp}:性欲`) * 16) / 1000 &&
-    !CharaInmon.get(mvp).on(plugin_enum.tuna) &&
-    !CharaInmon.get(mvp).on(plugin_enum.meek)
+    get(`love:${mvp_id}`) >= 75 &&
+    Math.random() * 100 <
+      20 +
+        20 * (mvp.race.conditionParams.item === 1) +
+        (get(`base:${mvp_id}:性欲`) * 16) / 1000 &&
+    !CharaInmon.get(mvp_id).on(plugin_enum.tuna) &&
+    !CharaInmon.get(mvp_id).on(plugin_enum.meek)
   ) {
     /**
      * 「」心「」体
      * @author Mr.E.
      */
     handler = async () => {
-      my_edu_marks.we_are_one = get_random_value(4, 8);
-      const chara = get_chara_talk(mvp);
+      my_marks.we_are_one = get_random_value(4, 8);
+      const chara = get_chara_talk(mvp_id);
       const me = get_chara_talk(0);
       await print_event_name(['「」心「」体'], chara);
       await printAndWait([

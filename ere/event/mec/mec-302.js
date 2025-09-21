@@ -8,10 +8,10 @@ const recruit_flags = require('#/data/event/recruit-flags');
 module.exports = class extends MecNpc {
   get_love_limit() {
     if (get(`cflag:${this.id}:招募状态`) !== recruit_flags.yes) {
-      if (get(`love:${this.id}`) >= 50) {
+      if (get(`love:${this.id}`) >= 50 || get('flag:回合爱慕惩罚') > 0) {
         return 51;
       }
-      return 50 + get('flag:回合爱慕惩罚');
+      return 50;
     }
     return super.get_love_limit();
   }

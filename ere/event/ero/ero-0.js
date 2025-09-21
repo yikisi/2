@@ -10,7 +10,7 @@ const { get_penis_size } = require('#/system/ero/sys-calc-ero-status');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
-const common_pregnant_report_in_love = require('#/event/ero/common/common-pregnant-report-in-love');
+const pregnant_report_in_love = require('#/event/ero/common/pregnant-report-in-love');
 const kojo = require('#/event/ero/ero-0.kojo');
 const CustomizedEro = require('#/event/ero/ero-common');
 const add_jewel_reward = require('#/event/snippets/add-jewel-reward');
@@ -24,6 +24,7 @@ const {
   penis_desc,
   unexpected_pregnant_enum,
 } = require('#/data/ero/status-const');
+const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
@@ -137,7 +138,7 @@ module.exports = class extends CustomizedEro {
       ).unexpected_pregnant;
     era.drawLine();
     if (love >= 90) {
-      await common_pregnant_report_in_love(father, mother, unexpected_pregnant);
+      await pregnant_report_in_love(father, mother, unexpected_pregnant);
     } else {
       const is_p_slave = era.get('flag:惩戒力度');
       await print_event_name(is_p_slave === 3 ? '职责' : '意外', mother);
@@ -392,7 +393,7 @@ module.exports = class extends CustomizedEro {
    * @author 幽白書
    * @author 雞雞
    */
-  async have_baby(father, mother) {
+  async have_baby(father, mother, ch_id) {
     const is_slave = era.get('flag:惩戒力度') === 3;
     if (
       era.get(`cflag:${father.id}:母方角色`) === 0 &&
@@ -624,7 +625,7 @@ module.exports = class extends CustomizedEro {
               `在被吸住乳头的时候，一定会想起对自己的乳头又咬又舔的那些${father.get_uma_sex_title()}们吧`,
             );
             await era.printAndWait(
-              '在被含住乳房的瞬间，一定会因为回忆起被爱抚挤奶的那些晚上而瞬间高潮吧',
+              '在被含住乳房的瞬间，一定会因为回忆起被揉胸挤奶的那些晚上而瞬间高潮吧',
             );
             await era.printAndWait(
               '甚至，在孩子喝完奶，躺在自己胸间时……会不会想起，那和婴儿体温差不多的肉棒在自己胸前宣示主权，最后在自己口中灌入浓浓白浆的时候呢？',
@@ -685,6 +686,7 @@ module.exports = class extends CustomizedEro {
             await era.printAndWait(
               '甚至，等到孩子长大之后……被孩子与孩子的父亲一起使用，被紧紧夹在中间，沉溺于雄性的肉棒之中……',
             );
+            (new MyEduMarks().orgy ||= []).push(ch_id);
 
             await era.printAndWait([
               { isBr: true },

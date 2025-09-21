@@ -44,7 +44,7 @@ const handlers = {};
 ].forEach((f) => f(handlers));
 
 console.log(
-  '调教指令通用结果函数注册完毕！',
+  '调教指令通用结果函数注册完毕!',
   (new Date().getTime() - current).toLocaleString(),
   'ms',
 );

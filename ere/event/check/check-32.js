@@ -200,7 +200,7 @@ module.exports = class extends CustomizedCheck {
       }
     }
     if (life_marks.drug_notice > 0 && --life_marks.drug_notice === 0) {
-      if (era.get('cflag:0:位置') === 0) {
+      if (era.get('cflag:0:位置') === 0 && era.get('cflag:32:位置') === 0) {
         add_event(
           event_hooks.week_start,
           new EventObject(32, cb_enum.edu).set_arg('drug_notice'),

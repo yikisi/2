@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+/** @returns {Promise<number>} */
 function select_action_in_shopping_street() {
   era.printInColRows(
     { columns: [{ content: '前往商店街做什么呢？', type: 'text' }] },
@@ -12,14 +13,12 @@ function select_action_in_shopping_street() {
         era.get('flag:当前互动角色') > 0 ? '' : '粉红色的小店',
       ]
         .filter((e) => e)
-        .map((e, i, l) => {
-          return {
-            accelerator: i,
-            config: { align: 'center', width: Math.floor(24 / l.length) },
-            content: `去${e}吧`,
-            type: 'button',
-          };
-        }),
+        .map((action, i, l) => ({
+          accelerator: i,
+          config: { align: 'center', width: Math.floor(24 / l.length) },
+          content: `去${action}吧`,
+          type: 'button',
+        })),
       config: { horizontalAlign: 'space-evenly' },
     },
   );
