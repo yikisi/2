@@ -58,7 +58,25 @@ release:
     - docker
   script:
     - sed -i '1,4d' ./RELEASE.md
-    - npm install
-    - node ci/release.js
+    - rm -f release.yml
+    - echo "name: \"EraUma v${CI_COMMIT_TAG} (${CALL_SIGN})\"" > release.yml
+    - echo "description: ./RELEASE.md" >> release.yml
+    - echo "tag_name: ${CI_COMMIT_TAG}" >> release.yml
+    - echo "ref: ${CI_COMMIT_SHA}" >> release.yml
+    - echo "assets:" >> release.yml
+    - echo "  links:" >> release.yml
+    - echo "    - name: \"[Win10绿色版] ${GAME_ALL_ZIP} (解压密码：era)\"" >> release.yml
+    - echo "      url: \"https://umaera.gitgud.site/erauma/index.html\"" >> release.yml
+    - echo "      link_type: package" >> release.yml
+    - echo "    - name: \"[PC游戏包] ${GAME_ZIP} (解压密码：era)\"" >> release.yml
+    - echo "      url: \"${GAME_URL}\"" >> release.yml
+    - echo "      link_type: package" >> release.yml
+    - echo "    - name: \"[安卓游戏包] ${GAME_BUNDLE_ZIP} (解压密码：era)\"" >> release.yml
+    - echo "      url: \"${GAME_BUNDLE_URL}\"" >> release.yml
+    - echo "      link_type: package" >> release.yml
+    - echo "    - name: \"[通用资源包] erauma-master-res.zip (版本号 ${RES_VERSION}，解压后文件夹改名为 res 然后放到游戏文件夹下，在游戏设置中启用资源)\"" >> release.yml
+    - echo "      url: \"https://gitgud.io/umaera/data/uma-resource/-/archive/${RES_VERSION}/uma-resource-${RES_VERSION}.zip\"" >> release.yml
+    - echo "    - name: \"[资源差分包] erauma-res-${RES_VERSION}-${OLD_VERSION}.zip (直接解压到 res 文件夹里，仅用于升级 ${OLD_VERSION} 版本的资源包)\"" >> release.yml
+    - echo "      url: \"https://umaera.gitgud.site/data/uma-resource/index.html\"" >> release.yml
     - cat release.yml
     - release-cli create --config release.yml
