@@ -147,9 +147,11 @@ async function sys_next_week() {
       });
     }
     tmp = true;
-    act_list = sort_list(act_list, Math.random).filter(
-      (act) => tmp && (tmp = !act.prison),
-    );
+    act_list = sort_list(act_list, Math.random);
+    const p_index = act_list.findIndex((a) => a.prison);
+    if (p_index >= 0) {
+      act_list.splice(p_index + 1);
+    }
     // 睡奸归并
     const final_act_list = [];
     tmp = -1;
