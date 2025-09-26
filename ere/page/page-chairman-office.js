@@ -251,7 +251,7 @@ async function page_chairman_office() {
                   if (temp === star_premium_draw.chara) {
                     await chara.say_and_wait([
                       '提 醒！',
-                      get_chara_talk(temp).get_colored_name(),
+                      get_chara_talk(temp).get_colored_actual_name(),
                       ' 同学已经在训练场等着了！',
                     ]);
                   } else if (temp_list.indexOf(temp) === -1) {
@@ -271,7 +271,7 @@ async function page_chairman_office() {
                     if ((await era.input()) === 1) {
                       await chara.say_and_wait([
                         '激 热！',
-                        get_chara_talk(temp).get_colored_name(),
+                        get_chara_talk(temp).get_colored_actual_name(),
                         ' 同学最近将经常去训练场，好好把握！',
                       ]);
                       sys_change_fame(-cost);

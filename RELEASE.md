@@ -4,6 +4,10 @@ _incoming_
 
 适配 [EraElectron v4.3.0 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.3.0) 与 [ere.app v1.2.3 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.2.3) 及以上版本
 
+## Changed
+
+* 调整了招募界面角色育成情报预览中育成目标的显示效果
+
 ## Fixed
 
 * 修复了孕奴不会重置经期、危险期和发情期的错误

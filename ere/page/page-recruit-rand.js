@@ -492,11 +492,14 @@ async function print_rec_page() {
             .filter(({ content }) => content.endsWith('✘'))
             .map((e) => {
               const g1 = e.content.indexOf('G1') !== -1;
-              const champion = e.content.indexOf('1着') !== -1;
+              const champion =
+                e.content.indexOf('1着') !== -1 ||
+                e.content.indexOf('一着') !== -1;
               return {
                 config: {
                   color: champion ? el_danger_color : undefined,
-                  fontWeight: g1 || champion ? 'bold' : 'normal',
+                  fontStyle: g1 ? 'italic' : undefined,
+                  fontWeight: g1 && champion ? 'bold' : undefined,
                 },
                 content: e.content.substring(0, e.content.length - 2),
                 type: 'text',

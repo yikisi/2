@@ -6,16 +6,19 @@ const check_aim_race = require('#/event/snippets/check-aim-race');
 
 const { race_enum } = require('#/data/race/race-const');
 
+const aims = [
+  [race_enum.nhk_cup, 1, 5, 4],
+  [race_enum.cent_sta, 1, 3, 4],
+  [race_enum.sprt_sta, 1, 3, 4],
+  [race_enum.mile_cha, 1, 1, 4],
+  [race_enum.takm_kin, 2, 3, 4],
+  [race_enum.yasu_kin, 2, 3, 4],
+  [race_enum.sprt_sta, 2, 1, 4],
+  [race_enum.mile_cha, 2, 1, 4],
+];
 const aim_races = {};
 aim_races[race_enum.begin_race] = 4;
-aim_races[get_aim_race_index(race_enum.nhk_cup, 1)] = 4;
-aim_races[get_aim_race_index(race_enum.cent_sta, 1)] = 4;
-aim_races[get_aim_race_index(race_enum.sprt_sta, 1)] = 4;
-aim_races[get_aim_race_index(race_enum.mile_cha, 1)] = 4;
-aim_races[get_aim_race_index(race_enum.takm_kin, 2)] = 4;
-aim_races[get_aim_race_index(race_enum.yasu_kin, 2)] = 4;
-aim_races[get_aim_race_index(race_enum.sprt_sta, 2)] = 4;
-aim_races[get_aim_race_index(race_enum.mile_cha, 2)] = 4;
+aims.forEach((a) => (aim_races[get_aim_race_index(a[0], a[1])] = a[4]));
 
 module.exports = require('#/event/check/snippets/check-uma-common-generator')(
   () => {},
@@ -31,13 +34,8 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
   aim_races,
   (buffer, races) => {
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
-    buffer.push(check_aim_and_get_entry(races, race_enum.nhk_cup, 1, 5));
-    buffer.push(check_aim_and_get_entry(races, race_enum.cent_sta, 1, 3));
-    buffer.push(check_aim_and_get_entry(races, race_enum.sprt_sta, 1, 3));
-    buffer.push(check_aim_and_get_entry(races, race_enum.mile_cha, 1, 1));
-    buffer.push(check_aim_and_get_entry(races, race_enum.takm_kin, 2, 3));
-    buffer.push(check_aim_and_get_entry(races, race_enum.yasu_kin, 2, 3));
-    buffer.push(check_aim_and_get_entry(races, race_enum.sprt_sta, 2, 1));
-    buffer.push(check_aim_and_get_entry(races, race_enum.mile_cha, 2, 1));
+    aims.forEach(([race, year, rank]) =>
+      buffer.push(check_aim_and_get_entry(races, race, year, rank)),
+    );
   },
 );
