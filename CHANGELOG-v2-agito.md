@@ -1,30 +1,46 @@
 # Changelog
-# [EraUma v2.151 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.151)
+## [EraUma v2.152 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.152)
+
+_2025/9/27_
+
+适配 [EraElectron v4.3.0 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.3.0) 与 [ere.app v1.2.3 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.2.3) 及以上版本
+
+### Changed
+
+* 调整了招募界面角色育成情报预览中育成目标的显示效果
+
+### Fixed
+
+* 修复了孕奴不会重置经期、危险期和发情期的错误
+* 修复了吹波糖的育成目标错误
+* 修复了不会进入地下室的错误
+
+## [EraUma v2.151 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.151)
 
 _2025/9/21_
 
 适配 [EraElectron v4.3.0 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.3.0) 与 [ere.app v1.2.3 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.2.3) 及以上版本
 
-## Fixed
+### Fixed
 
 * 技能【辛苦的马生在等我】类别更改为「控制」以正常触发
 
-# [EraUma v2.15 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.15)
+## [EraUma v2.15 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.15)
 
 _2025/9/21_
 
 适配 [EraElectron v4.3.0 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.3.0) 与 [ere.app v1.2.3 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.2.3) 及以上版本
 
-## Added
+### Added
 
 * 为支持多口上写作，实装以下角色的第一口上招募
   * 目白光明
 
-## Changed
+### Changed
 
 * 现在玩家佩戴的称号也会在界面顶部显示
 
-## Fixed
+### Fixed
 
 * 游戏文本描述修复
 
@@ -40,7 +56,7 @@ _2025/9/16_
 
 * 修复了【强化青汁】和【提神剂】不能恢复全部体力和精力的错误
 
-# [EraUma v2.14 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.14)
+## [EraUma v2.14 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.14)
 
 _2025/9/15_
 
@@ -48,11 +64,11 @@ _2025/9/15_
 
 资源包版本：20250915
 
-## Changed
+### Changed
 
 * 取消了满足强制BE条件时的自动存档，以允许部分因关键赛事失败而导致的强制BE回档到比赛之前
 
-## Fixed
+### Fixed
 
 * 修复了因口上脚本问题导致无法扮演里见光钻开始游戏的错误
 
