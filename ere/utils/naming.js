@@ -15,7 +15,7 @@ function get_child_name(chara_id) {
     era.add(`cflag:${chara_id}:后代命名索引`, 1);
     return names[chara_name][index];
   }
-  return `${chara_name}${era.get('flag:当前年')}`;
+  return `${chara_name.replace(/[\d\s]+$/, '')}${era.get('flag:当前年')}`;
 }
 
 module.exports = get_child_name;
