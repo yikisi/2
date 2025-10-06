@@ -34,7 +34,6 @@ const { join_list } = require('#/utils/list-utils');
 const item_title_color =
   require('#/data/color-const').adaptability_colors.at(-1);
 const { get_chara_color } = require('#/data/chara-colors');
-const title_desc = require('#/data/desc/title-desc.json');
 const notes = require('#/data/notes.json');
 const { first_child_id } = require('#/data/other-const');
 const { res_version } = require('#/versions');
@@ -54,7 +53,6 @@ function get_copyright_entry(cid, _suffix) {
 
 module.exports = async () => {
   let flagTitle = true;
-  sys_personal_achievement.init();
   CharaTalk.me = new CharaTalk(0);
 
   era.printMultiColumns(
@@ -493,10 +491,7 @@ module.exports = async () => {
             .filter((e) => e && e < first_child_id)
             .map((e) => {
               const title = era.get(`staticcstr:${e}:称号`),
-                desc = `在一次育成周期内完成了所有育成目标；同时，${(
-                  title_desc[title] ||
-                  '在一次育成周期内赢取了六次以上的G1比赛胜利。'
-                ).substring(8)}`;
+                desc = sys_personal_achievement.describe(e, title);
               return {
                 config: {
                   align: 'center',
