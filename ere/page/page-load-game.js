@@ -539,6 +539,18 @@ module.exports = async () => {
                   .forEach((_, i) => era.set(`status:17:${110 + i}`, 0));
               }
             }
+            if (version <= 2152) {
+              era
+                .getAddedCharacters()
+                .forEach((cid) =>
+                  attr_names.forEach((a) =>
+                    era.set(
+                      `exp:${cid}:${a}训练经验`,
+                      Math.max(era.get(`exp:${cid}:${a}训练经验`), 0),
+                    ),
+                  ),
+                );
+            }
             return true;
           } else {
             msg_notification = `未能成功读取 ${ret} 号栏位的存档`;

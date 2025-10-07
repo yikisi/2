@@ -323,7 +323,7 @@ module.exports = async (cid, next_cb, flags) => {
         },
       },
     );
-    if (era.get(`cflag:${cid}:可再次育成`) > 0) {
+    if (cid > 0 && era.get(`cflag:${cid}:可再次育成`) > 0) {
       group.push({
         config: {
           disabled:
