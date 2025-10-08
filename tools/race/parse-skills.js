@@ -84,6 +84,10 @@ const icon2skill_color = {
     UmaSkill.skill_name_enum.buff,
     UmaSkill.skill_border_enum.normal,
   ),
+  10052: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.buff,
+    UmaSkill.skill_border_enum.advanced,
+  ),
   10054: UmaSkill.get_skill_color(
     UmaSkill.skill_name_enum.debuff,
     UmaSkill.skill_border_enum.normal,
