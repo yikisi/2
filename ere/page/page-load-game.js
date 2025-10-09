@@ -37,7 +37,10 @@ const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks
 const BryneLifeMarks = require('#/data/event/life-event-marks/life-event-marks-349');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
-const { get_trainer_title } = require('#/data/info-generator');
+const {
+  get_filtered_talents,
+  get_trainer_title,
+} = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const { first_child_id, max_chara_id } = require('#/data/other-const');
 const RaceHistory = require('#/data/race/model/race-history');
@@ -522,6 +525,46 @@ module.exports = async () => {
                   ),
                 );
               era.set('item:现实透孔仪', 1);
+            }
+            if (version < era.get('gamebase').version) {
+              era.getAddedCharacters().forEach((cid) => {
+                if (cid > 0) {
+                  const t_table = era.get(`chara:${cid}`)?.talent;
+                  if (
+                    t_table instanceof Object &&
+                    Object.entries(t_table)
+                      .filter(([t]) => Number(t) <= 20)
+                      .reduce(
+                        (p, [t, v]) => p && era.get(`talent:${cid}:${t}`) !== v,
+                        true,
+                      )
+                  ) {
+                    const aims = [cid];
+                    if (era.get('cflag:0:模版角色') === cid) {
+                      aims.push(0);
+                    }
+                    Object.entries(t_table)
+                      .filter(([t]) => {
+                        const tid = Number(t);
+                        return tid <= 20 || (tid >= 40 && tid <= 47);
+                      })
+                      .forEach(([t, v]) =>
+                        aims.forEach((a) => era.set(`talent:${a}:${t}`, v)),
+                      );
+                    aims.forEach((a) => {
+                      const sex_code = era.get(`cflag:${a}:性别`);
+                      [
+                        ...get_filtered_talents(sex_code, 50),
+                        ...get_filtered_talents(sex_code, 60),
+                      ].forEach((tid) => {
+                        if (t_table[tid] !== undefined) {
+                          era.set(`talent:${a}:${tid}`, t_table[tid]);
+                        }
+                      });
+                    });
+                  }
+                }
+              });
             }
             return true;
           } else {

@@ -2,13 +2,16 @@
 
 _incoming_
 
-适配 [EraElectron v4.3.0 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.3.0) 与 [ere.app v1.2.3 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.2.3) 及以上版本
+适配 [EraElectron v4.3.2 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.3.2) 与 [ere.app v1.2.4 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.2.4) 及以上版本
 
 ## Added
 
 * 新增道具【现实透孔仪】
   * 当遇到和角色的关系无论如何都完全无法推进到下一阶段的问题时，可以使用该道具尝试修复错误
   * 开始新游戏或加载旧档时，该道具将自动出现在持有道具中
+* 新增角色更新机制
+  * 在角色口上与基础数据更新后，加载存档时会自动将已添加角色的部分特性更新到更新后的版本
+    * 调教相关特性可能会发生回调
 
 ## Changed
 
