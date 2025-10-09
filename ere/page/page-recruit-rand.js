@@ -39,7 +39,7 @@ const {
   el_danger_color,
 } = require('#/data/color-const');
 const { attr_colors } = require('#/data/const.json');
-const title_desc = require('#/data/desc/title-desc.json');
+const title_desc = require('#/data/desc/titles.json');
 const { sex_title } = require('#/data/ero/status-const');
 const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');

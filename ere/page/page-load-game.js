@@ -185,35 +185,6 @@ module.exports = async () => {
                   Math.max(48 - era.get('flag:当前回合数'), 0) +
                   get_random_value(1, 25);
               }
-              if (!era.get('flag:回合爱慕惩罚')) {
-                // 爱慕事件修复
-                const events = get_queue(),
-                  dict = {};
-                Object.values(events).forEach((l) =>
-                  l.forEach((e) => {
-                    if (
-                      e.type === cb_enum.love &&
-                      e.arg instanceof Array &&
-                      (e[0] === 49 || e[0] === 74 || e[0] === 89 || e[0] === 99)
-                    ) {
-                      dict[e.chara_id] = 1;
-                    }
-                  }),
-                );
-                era.getAddedCharacters().forEach((chara_id) => {
-                  const love = era.get(`love:${chara_id}`);
-                  if (
-                    !dict[chara_id] &&
-                    (love === 49 ||
-                      love === 74 ||
-                      love === 89 ||
-                      love === 99) &&
-                    era.get(`cflag:${chara_id}:爱慕暂拒`) !== love
-                  ) {
-                    era.set(`cflag:${chara_id}:爱慕暂拒`, love);
-                  }
-                });
-              }
               era
                 .getAddedCharacters()
                 .filter((e) => e >= first_child_id && e < max_chara_id)
@@ -550,6 +521,7 @@ module.exports = async () => {
                     ),
                   ),
                 );
+              era.set('item:现实透孔仪', 1);
             }
             return true;
           } else {

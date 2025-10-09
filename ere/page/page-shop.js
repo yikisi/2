@@ -4,7 +4,7 @@ const { sys_change_money } = require('#/system/sys-calc-flag');
 
 const { attr_change_colors, money_color } = require('#/data/color-const');
 const date_indicator = require('#/data/date-indicator');
-const shop_desc = require('#/data/desc/shop-desc.json');
+const shop_desc = require('#/data/desc/items.json');
 const { location_name } = require('#/data/locations');
 
 /** @param {({id:number,[limit]:boolean}|number)[]} item_list */

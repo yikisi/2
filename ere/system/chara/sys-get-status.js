@@ -7,7 +7,7 @@ const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const { get_chara_color } = require('#/data/chara-colors');
 const { buff_colors, sex_colors } = require('#/data/color-const');
-const status_desc = require('#/data/desc/status-desc.json');
+const status_desc = require('#/data/desc/status.json');
 const CharaInmon = require('#/data/ero/chara-inmon');
 const {
   slavery_descriptions,

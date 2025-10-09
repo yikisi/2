@@ -1,7 +1,7 @@
 const era = require('#/era-electron');
 
 const { get_chara_color } = require('#/data/chara-colors');
-const title_desc = require('#/data/desc/title-desc.json');
+const title_desc = require('#/data/desc/titles.json');
 
 class SysPersonalAchievement {
   /** @returns {Record<string,number>} */
