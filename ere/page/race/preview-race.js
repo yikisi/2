@@ -602,6 +602,9 @@ async function preview_race(
                 era.add(`item:${item_names[ret]}`, 1);
               } else {
                 era.set(`equip:${chara.id}:阴蒂`, ret);
+                if (c_item > 0) {
+                  era.add(`item:${item_names[c_item]}`, 1);
+                }
                 era.add(`item:${item_names[ret]}`, -1);
               }
             }
@@ -654,6 +657,9 @@ async function preview_race(
                 era.add(`item:${item_names[ret]}`, 1);
               } else {
                 era.set(`equip:${chara.id}:阴道`, ret);
+                if (v_item > 0) {
+                  era.add(`item:${item_names[v_item]}`, 1);
+                }
                 era.add(`item:${item_names[ret]}`, -1);
               }
             }
@@ -708,6 +714,9 @@ async function preview_race(
                 era.add(`item:${item_names[ret]}`, 1);
               } else {
                 era.set(`equip:${chara.id}:肛门`, ret);
+                if (a_item > 0) {
+                  era.add(`item:${item_names[a_item]}`, 1);
+                }
                 era.add(`item:${item_names[ret]}`, -1);
               }
             }
