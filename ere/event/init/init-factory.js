@@ -2,6 +2,7 @@ const cons_dict = {};
 
 const current = new Date().getTime();
 
+// GENERATED START
 cons_dict[7] = require('#/event/init/init-7');
 cons_dict[13] = require('#/event/init/init-13');
 cons_dict[17] = require('#/event/init/init-17');
@@ -31,6 +32,7 @@ cons_dict[302] = require('#/event/init/init-302');
 cons_dict[308] = require('#/event/init/init-308');
 cons_dict[343] = require('#/event/init/init-343');
 cons_dict[349] = require('#/event/init/init-349');
+// GENERATED END
 
 console.log(
   '角色初始化脚本注册完毕!',
@@ -40,12 +42,12 @@ console.log(
 
 module.exports = {
   /**
-   * @param {number} chara_id
+   * @param {number} cid
    * @returns {function(boolean?)}
    */
-  get_custom_init(chara_id) {
-    if (cons_dict[chara_id]) {
-      return new cons_dict[chara_id]().init;
+  get_custom_init(cid) {
+    if (cons_dict[cid]) {
+      return new cons_dict[cid]().init;
     }
     return () => {};
   },

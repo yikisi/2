@@ -11,6 +11,7 @@ const cons_dict = {};
 
 const current = new Date().getTime();
 
+// GENERATED START
 cons_dict[1] = require('#/event/rec/rec-1');
 cons_dict[3] = require('#/event/rec/rec-3');
 cons_dict[4] = require('#/event/rec/rec-4');
@@ -55,6 +56,7 @@ cons_dict[341] = require('#/event/rec/rec-341');
 cons_dict[342] = require('#/event/rec/rec-342');
 cons_dict[343] = require('#/event/rec/rec-343');
 cons_dict[400] = require('#/event/rec/rec-400');
+// GENERATED END
 
 console.log(
   '角色招募口上注册完毕!',
@@ -68,27 +70,27 @@ class RecFactory extends CommonKojoFactory {
   }
 
   /**
-   * @param {number} chara_id
+   * @param {number} cid
    * @returns {boolean}
    */
-  check_rec_script(chara_id) {
-    return this.check(chara_id);
+  check_rec_script(cid) {
+    return this.check(cid);
   }
 
   /**
-   * @param {number} chara_id
+   * @param {number} cid
    * @param {number} stage
    * @param [_]
-   * @param {EventObject} [event_object]
+   * @param {EventObject} [ebj]
    * @returns {Promise<boolean|void>}
    */
-  run_custom_rec(chara_id, stage, _, event_object) {
-    const kojo = this.get(chara_id);
-    return kojo.recruit(stage, event_object).then((r) => {
-      if (get(`cflag:${chara_id}:招募状态`) === recruit_flags.yes) {
+  run_custom_rec(cid, stage, _, ebj) {
+    const kojo = this.get(cid);
+    return kojo.recruit(stage, ebj).then((r) => {
+      if (get(`cflag:${cid}:招募状态`) === recruit_flags.yes) {
         return kojo
           .recruit_result()
-          .then(() => punish_by_yandere(chara_id, stage))
+          .then(() => punish_by_yandere(cid, stage))
           .then(() => r);
       }
       return r;
