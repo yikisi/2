@@ -4306,3 +4306,209 @@
       - fontWeight: bold
         content: 目白麦昆
       - 「甜品……还有吗？」
+
+派对时间:
+  #爱慕≥74，同队大拓太阳神且爱慕≥74，无依存心，商店街触发
+  - 一个平平无奇的假期，%你% 被善信一个电话从家里拉了出来。
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「呀吼！%称呼%！这边这边！」
+  - color: %太阳神色%
+    content:
+      - fontWeight: bold
+        content: 大拓太阳神
+      - 「哦哦，%训练P%也来啦！」
+  - color: %太阳神色%
+    content:
+      - fontWeight: bold
+        content: 大拓太阳神
+      - 「这下该开始派对啦，呀呼！」
+  - 在接到 %你% 之后，大拓太阳神和目白善信一同欢快的跑了起来。
+  - color: %太阳神色%
+    content:
+      - fontWeight: bold
+        content: 大拓太阳神
+      - 「首先是，唱歌的时间啦，我们走！」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「哦哦，首先是音乐！」
+  - 派对的开场，就这样定在了卡拉OK。
+  - 走进熟悉的店家和已经打成一片的老板打过招呼之后，三个人一同走进了包间。
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「%称呼%！要唱点什么吗？」
+  - color: %太阳神色%
+    content:
+      - fontWeight: bold
+        content: 大拓太阳神
+      - 「嗯哼？%训练P%要先来吗！？」
+  - 拿着话筒的大拓太阳神回过头，满眼都是兴奋的小星星。
+  - color: %太阳神色%
+    content:
+      - fontWeight: bold
+        content: 大拓太阳神
+      - 「善信亲～让我先来嘛～」
+  - color: %太阳神色%
+    content:
+      - fontWeight: bold
+        content: 大拓太阳神
+      - 「最近我好不容易才学会的新歌唉，让我来嘛～」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「好好～我就等着啦～」
+  - 从点歌面板上离开的善信，自然的坐到了 %你% 的身边。
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「和太阳神一起的时候确实很开心呢。」
+  - acc: 1
+    content: 「不知不觉间就心情高涨起来了」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「对吧？」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「哦，好像要开始了！」
+  - 善信的耳朵轻轻抖了一下，转而看向大拓太阳神的方向。
+  - 双手自动的拿起了桌面的沙锤，跟着响起的音乐挥舞起来。
+  - 清脆的沙沙声随着大拓太阳神超快节奏的音乐，让三个人的包间发出了比肩十几人的热闹声音。
+  - divider: true
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「啊哈哈～有点太热闹了啊～」
+  - 再次坐下的目白善信把身体直接瘫软在沙发上，即使在空调房里也腾腾冒出热气。
+  - 大拓太阳神倒是还在开心的唱着，但是肉眼可见的气势不足了。
+  - acc: 1
+    content: 「累了吗？」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「嗯，稍微有点累了。」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「这个时候就很羡慕太阳神了啊……超级持久的！」
+  - 摊在沙发上的目白善信看着大拓太阳神闹腾地抓着麦克风，脸色红润的小声笑着。
+  - 绚烂的灯球将七彩的灯光照在三人身上，让气氛稍微变得微妙起来了。
+  - 并不明亮的空间里，目白善信轻拉衬衣散热的动作，大拓太阳神跳动时的声音……
+  - 在 %你% 的眼中，不知为何将注意力集中到了那些私密的位置。
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「%称呼%？脸红了哦？很热吗？」
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「啊，那我点杯饮料吧！」
+  - 一直心系着 %你% 的目白善信。
+  - color: %太阳神色%
+    content:
+      - fontWeight: bold
+        content: 大拓太阳神
+      - 「呜唉？！%训练P%累了嘛！」
+  - color: %太阳神色%
+    content:
+      - fontWeight: bold
+        content: 大拓太阳神
+      - 「那暂时休息！」
+  - 完全没发现异常的大拓太阳神。
+  - 以及此时此刻，在灯光的掩护下把敏感部位遮住的 %你%。
+  - acc: 1
+    content: （这很不妙啊……）
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「%称呼%，你要喝什么？」
+  - 从沙发上坐起来，朝着 %你% 的方向挪动过来的目白善信。
+  - 放下了麦克风，一屁股坐到了 %你% 身边的大拓太阳神。
+  - 即使不是直接接触，体温也随着呼吸从两边飘了过来。
+  - 某个部位，硬起来了。
+  - color: %太阳神色%
+    content:
+      - fontWeight: bold
+        content: 大拓太阳神
+      - 「%训练P%？」
+  - 人倒霉的时候，凉水也塞牙。
+  - 原本应该跟着音乐转动的灯球因为马儿跳传说的前奏，将打光集中到了沙发上。
+  - 一瞬间，两边的马娘都看清楚了。
+  - 衣物上，不自然的小突起。
+  - 目白善信准备点饮料的手机落在沙发上，发出了沉闷的声音。
+  - 本应闹腾的大拓太阳神，这时也红着脸移开了视线。
+  - content:
+      - fontWeight: bold
+        content: 音乐
+      - 「马儿跳～马儿跳～」
+  - 不知是谁先发出了一声明显的吞咽声，打破了沉默。
+  - 无论是谁，都已经红透了脸。
+  - acc: 1
+    content: 「来做吧。」
+    lines:
+      # 玩家主导，太阳神助手
+      - 一锤定音。
+      - 目白善信闭上双眼，轻轻往 %你% 的身前探过去。
+      - 已经被蒸汽湿透的衣服，被甩到了沙发的一角。
+      - 深蓝色的挑染拂过 %你% 的小腹，发烫的小脸贴着下方。
+      - color: %代表色%
+        content:
+          - fontWeight: bold
+            content: 目白善信
+          - 「%称呼%……轻一点哦……」
+      - color: %太阳神色%
+        content:
+          - fontWeight: bold
+            content: 大拓太阳神
+          - 「嗯……%训练P%的味道……」
+  - acc: 2
+    content: 「要做吗。」
+    lines:
+      # 善信主导，太阳神助手
+      - %你% 问出来了，最不该问的事情。
+      - 这个问题也并不需要口述的答案。
+      - 手指顺着 %你% 的肌肉从两个方向游进衣服里，抓住了兴奋的部位。
+      - 在 %你% 即将忍不住叫出声的时刻，小嘴也被堵住了。
+      - 躺下之前，最后在视野里的是白色的月牙挑染。
+
+派对马跳结束:
+  - 抽出纸巾将沙发擦了个大概，去卫生间把身上的痕迹清理一下。
+  - 三个人红着脸都不说话，默默的整理好了身上的衣服。
+  - content:
+      - fontWeight: bold
+        content: 音乐
+      - 「君の爱马が！」
+  - 扎马尾的双手顿了一下，向着屏幕看过去。
+  - 两双眼睛看了半天，不约而同的看向 %你%。
+  - color: %代表色%
+    content:
+      - fontWeight: bold
+        content: 目白善信
+      - 「盯——」
+  - color: %太阳神色%
+    content:
+      - fontWeight: bold
+        content: 大拓太阳神
+      - 「盯——」
+  - acc: 1
+    content: 「好，好啦……」
+  - 在两边的视线下，%你% 深吸了一口气。
+  - 张开双手，用力抱住了两位马娘。
+  - 「你们都是我的爱马！」

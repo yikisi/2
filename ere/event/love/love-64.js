@@ -757,4 +757,37 @@ module.exports = class extends CustomizedLove {
     await quick_into_3p(13, this.id, master);
     await kojo['甜品事件马跳结束'](dict);
   }
+
+  /**
+   * @param {CharaTalk} pama
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {number} stage
+   * @param extra
+   * @param {EventObject} event_object
+   */
+  async party(pama, me, callname, stage, extra, event_object) {
+    if (
+      era.get('flag:当前互动角色') !== this.id ||
+      era.get('cflag:0:位置') !== era.get(`cflag:${this.id}:位置`) ||
+      era.get('cflag:0:位置') !== era.get('cflag:65:位置')
+    ) {
+      add_event(stage, event_object);
+      return;
+    }
+    const dict = this.#dict;
+    dict['你'] = get_chara_talk(0).name;
+    dict['太阳神色'] = get_chara_talk(65).color;
+    dict['称呼'] = sys_get_callname(this.id, 0);
+    dict['训练P'] = sys_get_callname(65, 0);
+    let master = 0;
+    if (
+      (await print_name_and_show_kojo('派对时间', pama, kojo, dict))[3] === 2
+    ) {
+      master = this.id;
+    }
+    await quick_into_3p(this.id, 65, master);
+    await kojo['派对马跳结束'](dict);
+    return true;
+  }
 };
