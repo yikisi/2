@@ -84,14 +84,14 @@ res_list.forEach(([id, suffix]) => {
 });
 
 if (exit === 0) {
-  output.clothe_names[345] = { '': 'ST2', 2: '从零到零' };
-
-  writeFileSync(
-    join(__dirname, '../../ere/data/clothe-const.json'),
-    `${JSON.stringify(output, undefined, 2)}`,
-  );
-
   console.log('\tnone');
 }
+
+output.clothe_names[345] = { '': 'ST2', 2: '从零到零' };
+
+writeFileSync(
+  join(__dirname, '../../ere/data/clothe-const.json'),
+  `${JSON.stringify(output, undefined, 2)}`,
+);
 
 process.exit(exit);
