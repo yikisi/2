@@ -13,6 +13,7 @@ const current = new Date().getTime();
 
 // GENERATED START
 cons_dict[1] = require('#/event/rec/rec-1');
+cons_dict[2] = require('#/event/rec/rec-2');
 cons_dict[3] = require('#/event/rec/rec-3');
 cons_dict[4] = require('#/event/rec/rec-4');
 cons_dict[6] = require('#/event/rec/rec-6');

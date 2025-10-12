@@ -6,6 +6,9 @@ _incoming_
 
 ## Added
 
+* 为支持多口上写作，实装以下角色的第一口上招募
+  * 无声铃鹿
+
 ## Changed
 
 ## Fixed

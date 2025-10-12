@@ -209,17 +209,19 @@ async function print_rec_page() {
     if (ret === 999) {
       // 选择直接离开的时候触发需要选择离开才触发的招募事件
       // 队伍已经满了的情况下是不会触发事件的
-      event_chara_list = filter_chara(
-        'cflag',
-        '招募状态',
-        recruit_flags.success_on_leave,
-      ).filter((chara_id) => today_list.includes(chara_id) && !flag_limit);
-      if (event_chara_list.length) {
-        era.drawLine();
-        flag_leave = await run_custom_rec(
-          get_random_entry(event_chara_list),
-          event_hooks.recruit_end,
-        );
+      if (era.get('flag:物色对象') === 0) {
+        event_chara_list = filter_chara(
+          'cflag',
+          '招募状态',
+          recruit_flags.success_on_leave,
+        ).filter((cid) => today_list.includes(cid) && !flag_limit);
+        if (event_chara_list.length > 0) {
+          era.drawLine();
+          flag_leave = await run_custom_rec(
+            get_random_entry(event_chara_list),
+            event_hooks.recruit_end,
+          );
+        }
       }
       flag_recruit = false;
     } else if (ret > 1000 && ret <= 2000) {
