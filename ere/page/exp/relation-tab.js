@@ -124,8 +124,7 @@ module.exports = {
             ],
             '与 ',
           ),
-          { isBr: true },
-          { isBr: true },
+          { isBr: 2 },
         ],
         type: 'text',
       });

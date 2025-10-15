@@ -7,8 +7,10 @@ const obj_dict = {};
 
 const current = new Date().getTime();
 
+// GENERATED START
 cons_dict[17] = require('#/utils/chara-talk-extended/chara-talk-17');
 cons_dict[9017] = require('#/utils/chara-talk-extended/chara-talk-9017');
+// GENERATED END
 
 console.log(
   '角色发言输出工具注册完毕!',

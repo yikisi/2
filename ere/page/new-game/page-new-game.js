@@ -289,6 +289,7 @@ module.exports = async (src_chara) => {
 
           era.set('flag:随机种子', get_random_value(0, 233280 - 1));
           era.set('flag:存档名', 0);
+          era.set('item:现实透孔仪', 1);
           return true;
         case 97:
           player_name = '';

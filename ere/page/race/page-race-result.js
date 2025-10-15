@@ -245,8 +245,7 @@ async function page_race_result(contestants, info, race_id) {
                         info.get_colored_name_with_class(),
                       ]
                     : [`训练场 ${info.name_zh}`]),
-                  { isBr: true },
-                  { isBr: true },
+                  { isBr: 2 },
                 ],
                 type: 'text',
               },

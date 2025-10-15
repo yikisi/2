@@ -142,7 +142,6 @@ module.exports = class extends CustomizedCheck {
       }
     }
     if (
-      rec_status.round &&
       rec_status.flag === 5 &&
       era.get('flag:当前回合数') - rec_status.round >= 3
     ) {
@@ -150,7 +149,7 @@ module.exports = class extends CustomizedCheck {
         event_hooks.week_end,
         new EventObject(this.id, cb_enum.recruit),
       );
-      rec_status.round = 0;
+      rec_status.round = era.get('flag:当前回合数');
     } else if (edu_weeks < 3 * 48) {
       const edu_event_marks = new RubyEduMarks(),
         edu_event = new EventObject(this.id, cb_enum.edu),

@@ -1,3 +1,4 @@
+// GENERATED START
 const chara_colors = {
   0: '#ffffff',
   1: '#e978d3',
@@ -157,6 +158,7 @@ const chara_colors = {
   349: '#c4b076',
   400: '#ffe840',
 };
+// GENERATED END
 
 module.exports = {
   chara_colors,

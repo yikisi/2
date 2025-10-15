@@ -29,6 +29,7 @@ const {
   relation_colors,
 } = require('#/data/const.json');
 const event_hooks = require('#/data/event/event-hooks');
+const EventMarks = require('#/data/event/event-marks');
 const recruit_flags = require('#/data/event/recruit-flags');
 const {
   get_celebration,
@@ -143,6 +144,16 @@ async function npc_common(
               chara_base,
             ) > 0 ||
             relation_check,
+          buttonType: EventMarks.get(chara.id).check(
+            event_hooks.out_start,
+            event_hooks.out_river,
+            event_hooks.out_shopping,
+            event_hooks.out_church,
+            event_hooks.out_station,
+            event_hooks.back_school,
+          )
+            ? 'danger'
+            : 'warning',
         },
         content: out_cb.name,
       },

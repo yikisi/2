@@ -1,6 +1,6 @@
 const era = require('#/era-electron');
 
-const shop_desc = require('#/data/desc/shop-desc.json');
+const shop_desc = require('#/data/desc/items.json');
 
 const handlers = {};
 
@@ -11,6 +11,7 @@ const current = new Date().getTime();
   require('#/page/storage/item-handlers-mind-reader'),
   require('#/page/storage/item-handlers-ero-items'),
   require('#/page/storage/item-handlers-medicine'),
+  require('#/page/storage/item-handlers-mechanism'),
 ].forEach((f) => f(handlers));
 
 console.log(

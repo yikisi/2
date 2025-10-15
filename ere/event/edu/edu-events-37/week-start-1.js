@@ -16,7 +16,7 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const { get_chara_color } = require('#/data/chara-colors');
 const { buff_colors } = require('#/data/color-const');
-const status_desc = require('#/data/desc/status-desc.json');
+const status_desc = require('#/data/desc/status.json');
 const PseudoUma = require('#/data/race/model/pseudo-uma');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');

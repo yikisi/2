@@ -5,6 +5,7 @@ const cons_dict = {};
 
 const current = new Date().getTime();
 
+// GENERATED START
 cons_dict[0] = require('#/event/check/check-0');
 cons_dict[1] = require('#/event/check/check-1');
 cons_dict[2] = require('#/event/check/check-2');
@@ -150,6 +151,7 @@ cons_dict[340] =
   cons_dict[341] =
   cons_dict[342] =
     require('#/event/check/check-god');
+// GENERATED END
 
 console.log(
   '角色检查脚本注册完毕!',

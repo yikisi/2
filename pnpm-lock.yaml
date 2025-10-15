@@ -29,7 +29,7 @@ importers:
         version: 2.0.0
       babel-loader:
         specifier: ^9.2.1
-        version: 9.2.1(@babel/core@7.28.4)(webpack@5.101.3(webpack-cli@5.1.4))
+        version: 9.2.1(@babel/core@7.28.4)(webpack@5.101.3)
       compressing:
         specifier: ^1.10.3
         version: 1.10.3
@@ -3055,17 +3055,17 @@ snapshots:
       '@webassemblyjs/ast': 1.14.1
       '@xtuc/long': 4.2.2
 
-  '@webpack-cli/configtest@2.1.1(webpack-cli@5.1.4(webpack@5.101.3))(webpack@5.101.3(webpack-cli@5.1.4))':
+  '@webpack-cli/configtest@2.1.1(webpack-cli@5.1.4)(webpack@5.101.3)':
     dependencies:
       webpack: 5.101.3(webpack-cli@5.1.4)
       webpack-cli: 5.1.4(webpack@5.101.3)
 
-  '@webpack-cli/info@2.0.2(webpack-cli@5.1.4(webpack@5.101.3))(webpack@5.101.3(webpack-cli@5.1.4))':
+  '@webpack-cli/info@2.0.2(webpack-cli@5.1.4)(webpack@5.101.3)':
     dependencies:
       webpack: 5.101.3(webpack-cli@5.1.4)
       webpack-cli: 5.1.4(webpack@5.101.3)
 
-  '@webpack-cli/serve@2.0.5(webpack-cli@5.1.4(webpack@5.101.3))(webpack@5.101.3(webpack-cli@5.1.4))':
+  '@webpack-cli/serve@2.0.5(webpack-cli@5.1.4)(webpack@5.101.3)':
     dependencies:
       webpack: 5.101.3(webpack-cli@5.1.4)
       webpack-cli: 5.1.4(webpack@5.101.3)
@@ -3175,7 +3175,7 @@ snapshots:
 
   b4a@1.7.3: {}
 
-  babel-loader@9.2.1(@babel/core@7.28.4)(webpack@5.101.3(webpack-cli@5.1.4)):
+  babel-loader@9.2.1(@babel/core@7.28.4)(webpack@5.101.3):
     dependencies:
       '@babel/core': 7.28.4
       find-cache-dir: 4.0.0
@@ -4291,7 +4291,7 @@ snapshots:
     transitivePeerDependencies:
       - react-native-b4a
 
-  terser-webpack-plugin@5.3.14(webpack@5.101.3(webpack-cli@5.1.4)):
+  terser-webpack-plugin@5.3.14(webpack@5.101.3):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.31
       jest-worker: 27.5.1
@@ -4372,9 +4372,9 @@ snapshots:
   webpack-cli@5.1.4(webpack@5.101.3):
     dependencies:
       '@discoveryjs/json-ext': 0.5.7
-      '@webpack-cli/configtest': 2.1.1(webpack-cli@5.1.4(webpack@5.101.3))(webpack@5.101.3(webpack-cli@5.1.4))
-      '@webpack-cli/info': 2.0.2(webpack-cli@5.1.4(webpack@5.101.3))(webpack@5.101.3(webpack-cli@5.1.4))
-      '@webpack-cli/serve': 2.0.5(webpack-cli@5.1.4(webpack@5.101.3))(webpack@5.101.3(webpack-cli@5.1.4))
+      '@webpack-cli/configtest': 2.1.1(webpack-cli@5.1.4)(webpack@5.101.3)
+      '@webpack-cli/info': 2.0.2(webpack-cli@5.1.4)(webpack@5.101.3)
+      '@webpack-cli/serve': 2.0.5(webpack-cli@5.1.4)(webpack@5.101.3)
       colorette: 2.0.20
       commander: 10.0.1
       cross-spawn: 7.0.6
@@ -4418,7 +4418,7 @@ snapshots:
       neo-async: 2.6.2
       schema-utils: 4.3.2
       tapable: 2.2.3
-      terser-webpack-plugin: 5.3.14(webpack@5.101.3(webpack-cli@5.1.4))
+      terser-webpack-plugin: 5.3.14(webpack@5.101.3)
       watchpack: 2.4.4
       webpack-sources: 3.3.3
     optionalDependencies:

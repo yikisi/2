@@ -282,7 +282,7 @@ module.exports = {
       const exp = add_train_exp(
         cid,
         attr,
-        100 + era.get(`cflag:${cid}:${attr_names[attr]}加成`),
+        Math.max(era.get(`cflag:${cid}:${attr_names[attr]}加成`) + 100, 50),
       );
 
       if (

@@ -2427,6 +2427,11 @@
         "n": "善信号",
         "k": "item113",
         "t": "number"
+      },
+      "114": {
+        "n": "现实透孔仪",
+        "k": "item114",
+        "t": "number"
       }
     },
     "juel": {
@@ -17499,8 +17504,8 @@
       "title": "EraUma",
       "gameCode": 29407,
       "defaultChara": 0,
-      "version": 2160,
-      "versionName": "2.16 (agito)",
+      "version": 2161,
+      "versionName": "2.161 (agito)",
       "allowVersion": 1000,
       "site": "https://gitgud.io/umaera/erauma/-/releases/permalink/latest",
       "versionCheck": "https://umaera.gitgud.site/erauma/RELEASE",
@@ -17592,7 +17597,8 @@
         "「恩宠」": 110,
         "「亏欠」": 111,
         "小金船号": 112,
-        "善信号": 113
+        "善信号": 113,
+        "现实透孔仪": 114
       },
       "price": {
         "0": 150,
@@ -17670,7 +17676,8 @@
         "110": 0,
         "111": 0,
         "112": 0,
-        "113": 0
+        "113": 0,
+        "114": 0
       }
     },
     "juel": {
@@ -24021,6 +24028,26 @@
       "posY": 0,
       "type": 0
     },
+    "力士_万圣": {
+      "path": "res/others/chr_icon_1028_102840_01.png",
+      "x": 0,
+      "y": 0,
+      "width": 200,
+      "height": 219,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "力士_万圣_半身": {
+      "path": "res/others/chara_stand_1028_102840.png",
+      "x": 0,
+      "y": 0,
+      "width": 512,
+      "height": 512,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
     "雪美_私": {
       "path": "res/others/chr_icon_1029_901029_01.png",
       "x": 0,
@@ -25053,6 +25080,26 @@
     },
     "玛贝_私_半身": {
       "path": "res/others/chara_stand_1055_901055.png",
+      "x": 0,
+      "y": 0,
+      "width": 512,
+      "height": 512,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "玛贝_万圣": {
+      "path": "res/others/chr_icon_1055_105540_01.png",
+      "x": 0,
+      "y": 0,
+      "width": 200,
+      "height": 219,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "玛贝_万圣_半身": {
+      "path": "res/others/chara_stand_1055_105540.png",
       "x": 0,
       "y": 0,
       "width": 512,

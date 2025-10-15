@@ -16,7 +16,7 @@ const { join_to_string } = require('#/utils/list-utils');
 
 const CharaTitles = require('#/data/chara-titles');
 const { clothe_names, race_clothe_list } = require('#/data/clothe-const.json');
-const title_desc = require('#/data/desc/title-desc.json');
+const title_desc = require('#/data/desc/titles.json');
 const { human_sex_title, sex_title } = require('#/data/ero/status-const');
 const { growth_info } = require('#/data/exp-const');
 const {

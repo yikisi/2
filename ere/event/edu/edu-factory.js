@@ -10,6 +10,7 @@ const cons_dict = {};
 
 const current = new Date().getTime();
 
+// GENERATED START
 cons_dict[0] = require('#/event/edu/edu-0');
 cons_dict[3] = require('#/event/edu/edu-3');
 cons_dict[6] = require('#/event/edu/edu-6');
@@ -44,6 +45,7 @@ cons_dict[306] = require('#/event/edu/edu-306');
 cons_dict[308] = require('#/event/edu/edu-308');
 cons_dict[343] = require('#/event/edu/edu-343');
 cons_dict[400] = require('#/event/edu/edu-400');
+// GENERATED END
 
 console.log(
   '角色育成口上注册完毕!',
