@@ -99,8 +99,7 @@ async function print_rec_page() {
           content: [
             get_chara_talk(cur_recruit).get_colored_name(),
             ' 似乎不在训练场……',
-            { isBr: true },
-            { isBr: true },
+            { isBr: 2 },
           ],
           type: 'text',
         });
@@ -113,8 +112,7 @@ async function print_rec_page() {
             '不会同意 ',
             me.get_colored_name(),
             ' 的招募了……',
-            { isBr: true },
-            { isBr: true },
+            { isBr: 2 },
           ],
           type: 'text',
         });
@@ -126,8 +124,7 @@ async function print_rec_page() {
             '，是谁吸引了 ',
             me.get_colored_name(),
             ' 的注意力呢？',
-            { isBr: true },
-            { isBr: true },
+            { isBr: 2 },
           ],
           type: 'text',
         });

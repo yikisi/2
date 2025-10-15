@@ -297,7 +297,7 @@ async function sys_handle_ero_act(command, filters, shown = true) {
             type: 'button',
           };
         }),
-        { accelerator: 999, content: '返回', type: 'button' },
+        { accelerator: 999, content: '尝试结束', type: 'button' },
       ]);
       option_flag = 2;
       const ret = await era.input({ hideInput: true });
