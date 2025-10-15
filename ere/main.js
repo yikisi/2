@@ -18,6 +18,7 @@
 const era = require('#/era-electron');
 
 const { set_chara_ero_image } = require('#/system/ero/sys-calc-ero-image');
+const global_achievement = require('#/system/global/sys-calc-achievement');
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
 
 const new_game = require('#/page/new-game/page-new-game');
@@ -214,6 +215,13 @@ module.exports = async () => {
         if (await load_game()) {
           await homepage();
         }
+      },
+    },
+    {
+      c: '游戏成就',
+      async h() {
+        era.drawLine({ content: '游戏成就获取情况' });
+        await global_achievement.show();
       },
     },
     {

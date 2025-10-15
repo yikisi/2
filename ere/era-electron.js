@@ -492,7 +492,7 @@ const era = {
   set(varName, val) {},
   /**
    * set default text-align
-   * @param {string} textAlign REQUIRED the text-align, center, left or right used in usual
+   * @param {'center'|'left'|'right'} textAlign REQUIRED the text-align: center, left or right used in usual
    * @returns {void}
    */
   // eslint-disable-next-line no-unused-vars
