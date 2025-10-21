@@ -4371,6 +4371,7 @@ model single_mode_scenario_group {
   scenario_id Int
 
   @@index([scenario_id], map: "single_mode_scenario_group_0_scenario_id")
+  @@index([group_id], map: "single_mode_scenario_group_0_group_id")
 }
 
 model single_mode_scenario_record {
@@ -7574,4 +7575,173 @@ model succession_factor_addon_effect {
   factor_id         Int
 
   @@index([condition_type], map: "succession_factor_addon_effect_0_condition_type")
+}
+
+model campaign_target_scenario {
+  id                            Int @id @default(autoincrement())
+  target_id                     Int
+  single_mode_scenario_group_id Int
+
+  @@index([target_id], map: "campaign_target_scenario_0_target_id")
+}
+
+model omakase_base_pt_onsen {
+  id               Int @id @default(autoincrement())
+  command_id       Int
+  condition_set_id Int
+  add_value        Int
+
+  @@index([command_id], map: "omakase_base_pt_onsen_0_command_id")
+}
+
+model omakase_condition_set_onsen {
+  id               Int @id @default(autoincrement())
+  condition_type   Int
+  condition_value1 Int
+  condition_value2 Int
+
+  @@index([id, condition_type], map: "omakase_condition_set_onsen_0_id_1_condition_type")
+}
+
+model omakase_outing_base_pt {
+  id               Int @id @default(autoincrement())
+  chara_id         Int
+  scenario_id      Int
+  condition_set_id Int
+  add_value        Int
+
+  @@index([scenario_id, chara_id], map: "omakase_outing_base_pt_0_scenario_id_1_chara_id")
+}
+
+model single_mode_12_assistant_effect {
+  id           Int @id @default(autoincrement())
+  command_type Int
+  target_type  Int
+  effect_value Int
+}
+
+model single_mode_12_check_dug_result {
+  id              Int @id @default(autoincrement())
+  schedule_id     Int
+  ryokan_rank_min Int
+  ryokan_rank_max Int
+  result_type     Int
+
+  @@index([schedule_id, result_type], map: "single_mode_12_check_dug_result_0_schedule_id_1_result_type")
+}
+
+model single_mode_12_dig_bonus {
+  id             Int @id @default(autoincrement())
+  stratum_id     Int
+  dug_value      Int
+  effect_type    Int
+  effect_value_1 Int
+  effect_value_2 Int
+  effect_value_3 Int
+  effect_value_4 Int
+
+  @@index([stratum_id], map: "single_mode_12_dig_bonus_0_stratum_id")
+}
+
+model single_mode_12_dig_item {
+  id           Int @id @default(autoincrement())
+  item_id      Int
+  item_level   Int
+  stratum_type Int
+  dig_value    Int
+
+  @@index([item_id, item_level], map: "single_mode_12_dig_item_0_item_id_1_item_level")
+  @@index([item_id], map: "single_mode_12_dig_item_0_item_id")
+}
+
+model single_mode_12_dig_power {
+  id             Int @id @default(autoincrement())
+  stratum_type   Int
+  param_type     Int
+  param_rank_min Int
+  param_rank_max Int
+  bonus_value    Int
+
+  @@index([stratum_type], map: "single_mode_12_dig_power_0_stratum_type")
+}
+
+model single_mode_12_dig_power_rank {
+  id             Int @id @default(autoincrement())
+  dig_power_rank Int
+  dig_power_min  Int
+  dig_power_max  Int
+}
+
+model single_mode_12_effect_category {
+  effect_id Int @id @default(autoincrement())
+  sort_id   Int
+}
+
+model single_mode_12_factor_bonus {
+  id              Int @id @default(autoincrement())
+  factor_group_id Int
+  stratum_type    Int
+  bonus_value     Int
+
+  @@index([stratum_type], map: "single_mode_12_factor_bonus_0_stratum_type")
+}
+
+model single_mode_12_onsen {
+  id        Int @id @default(autoincrement())
+  open_turn Int
+  group_id  Int
+}
+
+model single_mode_12_onsen_effect {
+  id             Int @id @default(autoincrement())
+  group_id       Int
+  effect_type    Int
+  effect_value_1 Int
+  effect_value_2 Int
+  effect_value_3 Int
+  effect_value_4 Int
+
+  @@index([group_id], map: "single_mode_12_onsen_effect_0_group_id")
+}
+
+model single_mode_12_outing_effect {
+  id         Int @id @default(autoincrement())
+  chara_id   Int
+  rarity     Int
+  story_step Int
+  ticket_num Int
+
+  @@index([chara_id, story_step], map: "single_mode_12_outing_effect_0_chara_id_1_story_step")
+}
+
+model single_mode_12_ryokan_rank {
+  id            Int @id @default(autoincrement())
+  group_id      Int
+  dug_onsen_num Int
+  dug_onsen_id  Int
+}
+
+model single_mode_12_schedule {
+  id       Int @id @default(autoincrement())
+  turn_num Int
+}
+
+model single_mode_12_spa_ticket {
+  id         Int @id @default(autoincrement())
+  type_id    Int
+  chara_id   Int
+  rarity     Int
+  ticket_num Int
+
+  @@index([type_id, chara_id], map: "single_mode_12_spa_ticket_0_type_id_1_chara_id")
+}
+
+model single_mode_12_stratum {
+  id             Int @id @default(autoincrement())
+  onsen_id       Int
+  stratum_order  Int
+  stratum_type   Int
+  stratum_volume Int
+
+  @@index([onsen_id], map: "single_mode_12_stratum_0_onsen_id")
 }
