@@ -22,6 +22,7 @@ writeFileSync(
   check_path,
   generate_content(
     readFileSync(check_path, 'utf-8'),
+    '//',
     ...check_scripts.map(
       (e) =>
         `cons_dict[${isNaN(Number(e)) ? `'${e}'` : e}] = require('#/event/check/check-${e}');`,

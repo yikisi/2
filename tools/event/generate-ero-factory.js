@@ -21,6 +21,7 @@ writeFileSync(
   ero_path,
   generate_content(
     readFileSync(ero_path, 'utf-8'),
+    '//',
     ...scripts.map(
       (e) =>
         `cons_dict[${isNaN(Number(e)) ? `'${e}'` : e}] = require('#/event/ero/ero-${e}');`,

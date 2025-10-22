@@ -19,6 +19,7 @@ writeFileSync(
   love_path,
   generate_content(
     readFileSync(love_path, 'utf-8'),
+    '//',
     ...love_scripts.map(
       (e) =>
         `cons_dict[${isNaN(Number(e)) ? `'${e}'` : e}] = require('#/event/love/love-${e}');`,

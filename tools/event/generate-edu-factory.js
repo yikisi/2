@@ -21,6 +21,7 @@ writeFileSync(
   edu_path,
   generate_content(
     readFileSync(edu_path, 'utf-8'),
+    '//',
     ...base_scripts.map(
       (e) =>
         `cons_dict[${isNaN(Number(e)) ? `'${e}'` : e}] = require('#/event/edu/edu-${e}');`,

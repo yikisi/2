@@ -17,6 +17,7 @@ writeFileSync(
   color_path,
   generate_content(
     readFileSync(color_path, 'utf-8'),
+    '//',
     `const chara_colors = {
 ${Object.entries(uma_colors)
   .map(

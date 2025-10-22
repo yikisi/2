@@ -17,6 +17,7 @@ writeFileSync(
   init_path,
   generate_content(
     readFileSync(init_path, 'utf-8'),
+    '//',
     ...init_scripts.map(
       (e) =>
         `cons_dict[${isNaN(Number(e)) ? `'${e}'` : e}] = require('#/event/init/init-${e}');`,

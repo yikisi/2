@@ -4,6 +4,7 @@ const { join } = require('path');
 const named_contestants = require(
   join(__dirname, '../../ere/data/race/contestants/named.json'),
 );
+const { generate_content } = require('../libs');
 
 const cup_dict = {
   AA: 5,
@@ -13,29 +14,29 @@ new Array(26).fill(0).forEach((_, i) => {
 });
 
 const lines = readFileSync(
-    join(__dirname, '../../common/uma/uma-data.csv'),
-    'utf-8',
-  )
-    .replace(/^\uFEFF/, '')
-    .split('\n')
-    .filter((e) => e)
-    .map((e) => e.replace(/\s+$/, '')),
-  header = lines
-    .shift()
-    .split(',')
-    .map((e) => e.replace(/\s+$/, ''));
-const cup_index = header.findIndex((e) => e === '角色Flag|下胸围'),
-  breast_index = header.findIndex((e) => e === '角色Flag|胸围'),
-  file_name_index = header.findIndex((e) => e === '文件名'),
-  height_index = header.findIndex((e) => e === '角色Flag|身高'),
-  waist_index = header.findIndex((e) => e === '角色Flag|腰围'),
-  name_index = header.findIndex((e) => e === '姓名'),
-  attr_start_index = header.findIndex((e) => e === '角色Flag|初始速度'),
-  buff_start_index = header.findIndex((e) => e === '角色Flag|速度加成'),
-  adapt_start_index = header.findIndex((e) => e === '角色Flag|草地适性'),
-  title_index = header.findIndex((e) => e === '角色Str|称号'),
-  race_index = header.findIndex((e) => e === '角色Flag|种族'),
-  id_index = header.findIndex((e) => e === '角色编号');
+  join(__dirname, '../../common/uma/uma-data.csv'),
+  'utf-8',
+)
+  .replace(/^\uFEFF/, '')
+  .split('\n')
+  .filter((e) => e)
+  .map((e) => e.replace(/\s+$/, ''));
+const header = lines
+  .shift()
+  .split(',')
+  .map((e) => e.replace(/\s+$/, ''));
+const cup_index = header.findIndex((e) => e === '角色Flag|下胸围');
+const breast_index = header.findIndex((e) => e === '角色Flag|胸围');
+const file_name_index = header.findIndex((e) => e === '文件名');
+const height_index = header.findIndex((e) => e === '角色Flag|身高');
+const waist_index = header.findIndex((e) => e === '角色Flag|腰围');
+const name_index = header.findIndex((e) => e === '姓名');
+const attr_start_index = header.findIndex((e) => e === '角色Flag|初始速度');
+const buff_start_index = header.findIndex((e) => e === '角色Flag|速度加成');
+const adapt_start_index = header.findIndex((e) => e === '角色Flag|草地适性');
+const title_index = header.findIndex((e) => e === '角色Str|称号');
+const race_index = header.findIndex((e) => e === '角色Flag|种族');
+const id_index = header.findIndex((e) => e === '角色编号');
 
 function random_int(min, max) {
   return min + Math.floor((max + 1 - min) * Math.random());
@@ -180,9 +181,12 @@ lines
           buffer += `${header[i].replace('|', ',')},${col_value}\n`;
         }
       });
-      writeFileSync(
-        join(__dirname, `../../csv/Chara/${file_name}`),
+      const file_path = join(__dirname, `../../csv/Chara/${file_name}`);
+      let output = generate_content(
+        readFileSync(file_path, 'utf-8'),
+        ';',
         buffer.replace(/\s+$/, ''),
       );
+      writeFileSync(file_path, output);
     }
   });
