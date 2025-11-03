@@ -219,10 +219,7 @@ module.exports = async () => {
     },
     {
       c: '游戏成就',
-      async h() {
-        era.drawLine({ content: '游戏成就获取情况' });
-        await global_achievement.show();
-      },
+      h: global_achievement.show.bind(global_achievement),
     },
     {
       c: '角色成就',
