@@ -163,7 +163,7 @@ lines
           breast_down / chara_line[waist_index]
         }`,
       );
-      let buffer = '\ufeff';
+      let buffer = '';
       chara_line.forEach((e, i) => {
         if (i) {
           let col_value = chara_line[i];
