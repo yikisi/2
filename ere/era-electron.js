@@ -427,6 +427,13 @@ const era = {
   /** DANGER exit the application and close the window */
   quit() {},
   /**
+   * DANGER remove the character
+   * @param {number} charaId REQUIRED id of the character
+   * @returns {void}
+   */
+  // eslint-disable-next-line no-unused-vars
+  removeCharacter(...charaId) {},
+  /**
    * DANGER replace the line just printed with a new in-col-row line
    * @param {...ColumnObject|GridObject[]} columnObjects
    * @returns {number} line number of the printed
@@ -492,7 +499,7 @@ const era = {
   set(varName, val) {},
   /**
    * set default text-align
-   * @param {string} textAlign REQUIRED the text-align, center, left or right used in usual
+   * @param {'center'|'left'|'right'} textAlign REQUIRED the text-align: center, left or right used in usual
    * @returns {void}
    */
   // eslint-disable-next-line no-unused-vars
@@ -550,7 +557,7 @@ const era = {
    * @returns {boolean} if debug
    */
   toggleDebug() {},
-  version: { sdk: '4.3.3', engine: undefined },
+  version: { sdk: '4.4.0', engine: undefined },
   /**
    * wait any key from user
    * @returns {Promise<void>} a promise of nothing, please use await
