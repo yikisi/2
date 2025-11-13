@@ -1,3 +1,4 @@
+// GENERATED START
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
@@ -10,10 +11,11 @@ module.exports = new RaceInfo(
   RaceInfo.distance_enum.medium,
   RaceInfo.rotation_enum.right,
   18,
-  [9, 22, 44, 59, 113, 130],
+  [9, 22, 44, 59, 113, 118, 130],
   RaceInfo.limit_enum.post3,
   42,
   0,
   2437,
   10808,
 );
+// GENERATED END

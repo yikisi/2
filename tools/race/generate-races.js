@@ -1,8 +1,10 @@
 const { execSync } = require('child_process');
 const { readFileSync, writeFileSync } = require('fs');
-const { join } = require('path');
+const { join, resolve } = require('path');
 
-let csv = readFileSync('../../common/race/races.csv', 'utf-8');
+const { generate_content } = require('../libs');
+
+let csv = readFileSync(join(__dirname, '../../common/race/races.csv'), 'utf-8');
 csv = csv
   .replace(/^\ufeff/, '')
   .split('\n')
@@ -53,9 +55,14 @@ output +=
   '  e.lanes = lane_params[param_id];\n' +
   '  e.slopes = slope_params[param_id];\n' +
   '  e.phases = [Math.ceil(e.span*4/24),Math.ceil(e.span*16/24),Math.ceil(e.span*20/24)]\n' +
-  "});\n\nrace_infos[race_enum.begin_race] = require('#/data/race/race-begin-race')\n\nconsole.log('race info init done!',(new Date().getTime()-current).toLocaleString(),'ms')\n\nmodule.exports = {\nrace_enum,\nrace_infos,\nrace_rewards};";
+  "});\n\nrace_infos[race_enum.begin_race] = require('#/data/race/race-begin-race')\n\nconsole.log('比赛信息注册完毕!',(new Date().getTime()-current).toLocaleString(),'ms')\n\nmodule.exports = {\nrace_enum,\nrace_infos,\nrace_rewards};";
 
-writeFileSync('../../ere/data/race/race-const.js', output);
+const file_path = join(__dirname, '../../ere/data/race/race-const.js');
+
+writeFileSync(
+  file_path,
+  generate_content(readFileSync(file_path, 'utf-8'), '//', output),
+);
 
 const distance_dict = {};
 distance_dict['短'] = 'short';
@@ -152,19 +159,27 @@ csv.forEach((e) => {
   // 参数号
   output += `${e[0]},\n`;
   output += ');';
-  writeFileSync(
+  const file_path = join(
+    __dirname,
     `../../ere/data/race/${e[8].toLowerCase()}/race-${e[6]}.js`,
-    output,
+  );
+  writeFileSync(
+    file_path,
+    generate_content(readFileSync(file_path, 'utf-8'), '//', output),
   );
 });
 
 try {
-  process.stdout.write(execSync('node generate-race-params.js'));
+  process.stdout.write(
+    execSync('node generate-race-params.js', {
+      cwd: resolve(__dirname),
+    }),
+  );
   process.stdout.write(
     execSync(
       'npx eslint --fix ./ere/data/race/g1 ./ere/data/race/g2 ./ere/data/race/g3 ./ere/data/race/op ./ere/data/race/race-const.js ./ere/data/race/race-params.js ./ere/data/race/race-attr-bonus.js',
       {
-        cwd: join(process.cwd(), '../..'),
+        cwd: join(__dirname, '../..'),
       },
     ),
   );
