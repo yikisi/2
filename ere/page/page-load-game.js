@@ -526,6 +526,9 @@ module.exports = async () => {
                 );
               era.set('item:现实透孔仪', 1);
             }
+            if (version <= 2170) {
+              new MyEduMarks().big_sale = 1;
+            }
             if (version < era.get('gamebase').version) {
               era.getAddedCharacters().forEach((cid) => {
                 if (cid > 0) {
