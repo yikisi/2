@@ -1,4 +1,26 @@
 # Changelog
+## [EraUma v2.17 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.17)
+
+_2025/11/18_
+
+适配 [EraElectron v4.4.0 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.4.0) 与 [ere.app v1.2.6 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.2.6) 及以上版本
+
+### Added
+
+* 为支持多口上写作，实装以下角色的第一口上招募
+  * 无声铃鹿
+* 追加实装了以下随机小事件
+  * 【商店街大甩卖】
+
+### Changed
+
+* 优化了制作鸣谢的演出效果
+
+### Fixed
+
+* 修复了初次颜射经历、初次饮爱液经历和初次潮吹经历的无自觉经历版本的计算错误
+* 修复了鲁铎象征育成目标未正确在赛事注册界面显示以及自动注册的错误
+
 ## [EraUma v2.16 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.16)
 
 _2025/10/10_

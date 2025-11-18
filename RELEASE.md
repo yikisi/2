@@ -1,6 +1,6 @@
 # [EraUma v2.17 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.17)
 
-_incoming_
+_2025/11/18_
 
 适配 [EraElectron v4.4.0 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.4.0) 与 [ere.app v1.2.6 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.2.6) 及以上版本
 
