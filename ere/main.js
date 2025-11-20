@@ -142,14 +142,12 @@ module.exports = async () => {
         const achievements = sys_personal_achievement
           .list()
           .filter((e) => e < 200);
-        let ret;
+        let ret = 0;
         if (achievements.length > 0) {
           era.drawLine();
           era.printButton('做我自己', 1);
           era.printButton('扮演角色', 2);
-          if ((await era.input()) === 1) {
-            ret = 0;
-          } else {
+          if ((await era.input()) === 2) {
             era.printMultiColumns([
               { config: { content: '选择要扮演的角色' }, type: 'divider' },
               {

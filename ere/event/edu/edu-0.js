@@ -865,7 +865,7 @@ module.exports = class extends StrangeDayEvents {
         await waitAnyKey();
       }
     }
-    new MyEduMarks().big_sale = get_random_value(30, 40);
+    new MyEduMarks().big_sale = get_random_value(10, 15);
     return true;
   }
 };
