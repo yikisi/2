@@ -530,22 +530,25 @@ module.exports = async () => {
             if (version <= 2160) {
               new MyEduMarks().big_sale = 1;
             }
-            if (version <= 2170) {
-              let count = 0;
-              get_queue()[event_hooks.out_shopping] = get_queue()[
-                event_hooks.out_shopping
-              ].filter((e) => {
-                if (
-                  e.chara_id !== 0 ||
-                  e.type !== cb_enum.edu ||
-                  e.arg !== 'big_sale'
-                ) {
-                  return true;
+            if (version <= 2171) {
+              const eq = get_queue();
+              if (eq[event_hooks.out_shopping]) {
+                let count = 0;
+                eq[event_hooks.out_shopping] = eq[
+                  event_hooks.out_shopping
+                ].filter((e) => {
+                  if (
+                    e.chara_id !== 0 ||
+                    e.type !== cb_enum.edu ||
+                    e.arg !== 'big_sale'
+                  ) {
+                    return true;
+                  }
+                  return count++ === 0;
+                });
+                for (let i = 0; i < count - 1; ++i) {
+                  EventMarks.get(0).sub(event_hooks.out_shopping);
                 }
-                return count++ === 0;
-              });
-              for (let i = 0; i < count - 1; ++i) {
-                EventMarks.get(0).sub(event_hooks.out_shopping);
               }
             }
             if (version < era.get('gamebase').version) {
