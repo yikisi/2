@@ -5,6 +5,7 @@ const cons_dict = {};
 
 const current = new Date().getTime();
 
+// GENERATED START
 cons_dict[0] = require('#/event/check/check-0');
 cons_dict[1] = require('#/event/check/check-1');
 cons_dict[2] = require('#/event/check/check-2');
@@ -94,6 +95,7 @@ cons_dict[88] = require('#/event/check/check-88');
 cons_dict[89] = require('#/event/check/check-89');
 cons_dict[90] = require('#/event/check/check-90');
 cons_dict[91] = require('#/event/check/check-91');
+cons_dict[92] = require('#/event/check/check-92');
 cons_dict[93] = require('#/event/check/check-93');
 cons_dict[94] = require('#/event/check/check-94');
 cons_dict[95] = require('#/event/check/check-95');
@@ -150,6 +152,7 @@ cons_dict[340] =
   cons_dict[341] =
   cons_dict[342] =
     require('#/event/check/check-god');
+// GENERATED END
 
 console.log(
   '角色检查脚本注册完毕!',

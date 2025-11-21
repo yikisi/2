@@ -1,60 +1,72 @@
 const era = require('#/era-electron');
 
 const { get_chara_color } = require('#/data/chara-colors');
-const title_desc = require('#/data/desc/title-desc.json');
+const title_desc = require('#/data/desc/titles.json');
 
-/** @type {Record<string,number>} */
-let global_object = {};
+class SysPersonalAchievement {
+  /** @returns {Record<string,number>} */
+  get #obj() {
+    return era.get('global:角色成就') || era.set('global:角色成就', {});
+  }
 
-const sys_personal_achievement = {
   /**
    * @param {number} cid
    * @returns {number}
    */
   get(cid) {
-    return global_object[cid] || 0;
-  },
-  init() {
-    return (global_object =
-      era.get('global:角色成就') || era.set('global:角色成就', {}));
-  },
+    return this.#obj[cid] || 0;
+  }
+
   list() {
-    return Object.entries(global_object)
+    return Object.entries(this.#obj)
       .filter((e) => e[1])
       .map((e) => Number(e[0]));
-  },
+  }
+
+  /**
+   * @param {number} cid
+   * @param {string} [title]
+   * @returns {string}
+   */
+  describe(cid, title = era.get(`staticcstr:${cid}:称号`)) {
+    return `在一次育成周期内完成了所有育成目标；同时，${(
+      title_desc[title] || '在一次育成周期内赢取了六次以上的G1比赛胜利。'
+    ).substring(8)}`;
+  }
+
   /**
    * @param {number} cid
    * @param {number} _val
    */
   set(cid, _val) {
-    if (!global_object[cid] && _val) {
-      const color = get_chara_color(cid),
-        title = era.get(`staticcstr:${cid}:称号`);
+    if (!this.#obj[cid] && _val) {
+      const color = get_chara_color(cid);
+      const title = era.get(`staticcstr:${cid}:称号`);
       era.notify(
         [
           {
             color,
             content: `[${title}] `,
-            fontSize: '1rem',
+            fontSize: '1.25rem',
           },
           {
             color,
             content: era.get(`static:${cid}:name`),
-            fontSize: '1rem',
+            fontSize: '1.25rem',
             fontWeight: 'bold',
           },
-          '：',
           { isBr: true },
-          title_desc[title] || '在一次育成周期内赢取了六次以上的G1比赛胜利',
+          this.describe(cid, title),
         ],
         '获得新成就！',
         'success',
         50000,
       );
     }
-    return (global_object[cid] = _val);
-  },
-};
+    return (this.#obj[cid] = _val);
+  }
+}
+
+const sys_personal_achievement = new SysPersonalAchievement();
 
 module.exports = sys_personal_achievement;

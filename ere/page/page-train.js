@@ -18,6 +18,7 @@ const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-p
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { sort_list } = require('#/utils/list-utils');
+const { get_abbr_number } = require('#/utils/value-utils');
 
 const CharaAvailableSkills = require('#/data/chara-available-skills');
 const chara_info_type = require('#/data/chara-info-type');
@@ -208,7 +209,7 @@ module.exports = async () => {
             width: 4,
             fontWeight: 'bold',
           },
-          content: pt.toLocaleString(),
+          content: [get_abbr_number(pt)],
           type: 'text',
         },
       );

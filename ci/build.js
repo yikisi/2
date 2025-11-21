@@ -24,8 +24,8 @@ const game_dir = join(game_all_dir, process.env.GAME_DIR);
 const game_zip = join(game_all_dir, process.env.GAME_ZIP);
 
 execSync('git lfs pull', { cwd: engine_path });
-execSync('npm install', { cwd: engine_path });
-execSync('npm run win:pack', { cwd: engine_path });
+execSync('pnpm install', { cwd: engine_path });
+execSync('pnpm run win:pack', { cwd: engine_path });
 
 rmSync(game_all_dir, { force: true, recursive: true });
 renameSync(join(engine_path, 'dist_electron', 'win-unpacked'), game_all_dir);

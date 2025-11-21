@@ -281,6 +281,7 @@ module.exports = async (src_chara) => {
           my_marks.trainer_race = get_random_value(13, 36);
           my_marks.work_over = my_marks.sick = 24;
           my_marks.kamen_rider = 1;
+          my_marks.big_sale = get_random_value(5, 10);
           new MeekEduMarks().all_round = get_random_value(5, 12);
           if (src_chara !== 10) {
             new TokinoLifeMarks().shadow = get_random_value(5, 12);
@@ -289,6 +290,7 @@ module.exports = async (src_chara) => {
 
           era.set('flag:随机种子', get_random_value(0, 233280 - 1));
           era.set('flag:存档名', 0);
+          era.set('item:现实透孔仪', 1);
           return true;
         case 97:
           player_name = '';

@@ -31,30 +31,14 @@ const { say_by_passer_by } = require('#/utils/chara-talk');
 const CharaTalk = require('#/utils/chara-talk');
 const { join_list } = require('#/utils/list-utils');
 
-const item_title_color =
-  require('#/data/color-const').adaptability_colors.at(-1);
+const { generate_copyrights, get_copyright_entry } = require('#/copyright');
 const { get_chara_color } = require('#/data/chara-colors');
-const title_desc = require('#/data/desc/title-desc.json');
 const notes = require('#/data/notes.json');
 const { first_child_id } = require('#/data/other-const');
 const { res_version } = require('#/versions');
 
-/**
- * @param {number} cid
- * @param {string} [_suffix]
- */
-function get_copyright_entry(cid, _suffix) {
-  const suffix = _suffix ? `（${_suffix}）` : '';
-  return {
-    color: get_chara_color(cid),
-    content: `${era.get(`static:${cid}:name`)}${suffix}`,
-    fontWeight: 'bold',
-  };
-}
-
 module.exports = async () => {
   let flagTitle = true;
-  sys_personal_achievement.init();
   CharaTalk.me = new CharaTalk(0);
 
   era.printMultiColumns(
@@ -122,166 +106,8 @@ module.exports = async () => {
   if ((await era.input()) === 2) {
     era.quit();
   }
-  const line_copyrights = [
-    [[get_copyright_entry(1)], 'wwm'],
-    [[get_copyright_entry(3)], '天马闪光蹄'],
-    [
-      [
-        get_copyright_entry(4),
-        { isDivider: true },
-        get_copyright_entry(46),
-        '（招募）',
-      ],
-      '黑奴一号',
-    ],
-    [
-      [
-        get_copyright_entry(6),
-        { isDivider: true },
-        get_copyright_entry(7),
-        { isDivider: true },
-        get_copyright_entry(21),
-      ],
-      '雞雞',
-    ],
-    [[get_copyright_entry(13)], '伊兰'],
-    [[get_copyright_entry(17)], '露娜俘虏'],
-    [[get_copyright_entry(19)], '片手虾好评发售中！'],
-    [[get_copyright_entry(24)], '黑奴二号'],
-    [[get_copyright_entry(25)], ['Necroz', { isDivider: true }, 'Mr.E.']],
-    [
-      [
-        get_copyright_entry(30),
-        { isDivider: true },
-        get_copyright_entry(85),
-        { isDivider: true },
-        get_copyright_entry(205),
-      ],
-      '梦露',
-    ],
-    [[get_copyright_entry(32)], '幽白書'],
-    [[get_copyright_entry(35, '部分地下室')], '幽白書'],
-    [[get_copyright_entry(36, '招募')], '幽白書'],
-    [[get_copyright_entry(37)], '爱放箭的袁本初'],
-    [[get_copyright_entry(47, '招募')], '某不思议的大嘴鸥'],
-    [[get_copyright_entry(50, '招募')], '卡特曼'],
-    [[get_copyright_entry(52)], '99'],
-    [[get_copyright_entry(56)], 'ALEX'],
-    [[get_copyright_entry(60)], '红红火火恍惚'],
-    [[get_copyright_entry(64)], ['KUN', { isDivider: true }, 'Bottle']],
-    [
-      [get_copyright_entry(67)],
-      [
-        '某知名手游公司编剧',
-        { isDivider: true },
-        '黑奴二号',
-        { isDivider: true },
-        '黑奴队长',
-      ],
-    ],
-    [
-      [get_copyright_entry(68)],
-      [
-        '小黑',
-        { isDivider: true },
-        '黑奴一号',
-        { isDivider: true },
-        '黑奴队长',
-      ],
-    ],
-    [[get_copyright_entry(71)], '洛洛'],
-    [[get_copyright_entry(74, '招募')], 'KUN'],
-    [[get_copyright_entry(86, '部分地下室')], 'イーウィヤ'],
-    [[get_copyright_entry(89, '招募、地下室')], '無奈'],
-    [[get_copyright_entry(100)], '夕阳红艺术团小组长-赤红彗星红桃爵士Q先生'],
-    [[get_copyright_entry(116, '招募')], 'AraP'],
-    [[get_copyright_entry(119, '招募、地下室')], '幽白書'],
-    [[get_copyright_entry(400)], '黑衣剑士-星爆气流斩准备就绪'],
-    [
-      [get_copyright_entry(303, '部分')],
-      ['雞雞', { isDivider: true }, '幽白書'],
-    ],
-    [[get_copyright_entry(340, '招募')], 'O口口口口口'],
-    [[get_copyright_entry(341, '招募')], 'フィンランド'],
-    [[get_copyright_entry(342, '招募')], '黑衣剑士-星爆气流斩准备就绪'],
-    [
-      [
-        '招募地文',
-        { isDivider: true },
-        '爱慕地文',
-        { isBr: true },
-        '新手教学',
-        { isDivider: true },
-        '地下室教学',
-      ],
-      ['雞雞', { isDivider: true }, '黑奴队长'],
-    ],
-    [
-      ['日常地文', { isDivider: true }, '随机事件'],
-      [
-        '雞雞',
-        { isDivider: true },
-        '天马闪光蹄',
-        { isDivider: true },
-        'イーウィヤ',
-        { isDivider: true },
-        '幽白書',
-        { isBr: true },
-        'KUN',
-        { isDivider: true },
-        '阿格尼斯数码公司',
-        { isDivider: true },
-        '念来过倒要你',
-        { isBr: true },
-        'Mr.E.',
-        { isDivider: true },
-        '黑奴队长',
-      ],
-    ],
-    [
-      '育成地文',
-      [
-        '雞雞',
-        { isDivider: true },
-        '天马闪光蹄',
-        { isDivider: true },
-        '幽白書',
-        { isDivider: true },
-        '黑奴队长',
-      ],
-    ],
-    [
-      '调教地文',
-      [
-        'O口口口口口',
-        { isDivider: true },
-        '雞雞',
-        { isDivider: true },
-        '天马闪光蹄',
-        { isBr: true },
-        '黑衣剑士-星爆气流斩准备就绪',
-        { isDivider: true },
-        '幽白書',
-        { isBr: true },
-        'ALEX',
-      ],
-    ],
-    ['地下室地文', ['露娜俘虏', { isDivider: true }, '黑奴队长']],
-    ['特殊角色（临时）', '黑奴队长'],
-    [
-      '麦吉罗的呼唤',
-      [
-        'イーウィヤ',
-        { isDivider: true },
-        '99',
-        { isDivider: true },
-        '黑奴队长',
-      ],
-    ],
-  ];
   set_chara_ero_image();
   const { versionName, site, author } = era.get('gamebase');
-  let buffer;
 
   const date = new Date();
   const real_month = date.getMonth() + 1;
@@ -308,121 +134,20 @@ module.exports = async () => {
   const b_index = birthday.findLastIndex((e) => e === '，');
   birthday[b_index] = ' 和 ';
 
-  while (flagTitle) {
-    await era.clear();
-    era.setAlign('center');
-    era.printInColRows(
-      [{ type: 'divider' }],
-      {
-        columns: [
-          { config: { width: 7 }, names: 'logo', type: 'image.whole' },
-          { config: { width: 17 }, names: 'title', type: 'image.whole' },
-          {
-            content: ['版本号：v', versionName],
-            type: 'text',
-          },
-          {
-            content: [
-              '适配资源包版本：',
-              {
-                content: res_version,
-                url: `https://gitgud.io/umaera/data/uma-resource/-/archive/${res_version}/uma-resource-${res_version}.zip`,
-              },
-            ],
-            type: 'text',
-          },
-          {
-            content: join_list(author.split('|'), { isDivider: true }),
-            type: 'text',
-          },
-        ],
-        config: { offset: 6, verticalAlign: 'middle', width: 12 },
-      },
-      birthday.length > 0
-        ? [
-            { type: 'divider' },
-            { type: 'text', content: ['今天是 ', ...birthday, ' 的诞生日'] },
-          ]
-        : [],
-      [
-        { type: 'divider' },
-        {
-          accelerator: 1,
-          content: '开始新游戏',
-          type: 'button',
-        },
-        {
-          accelerator: 2,
-          content: '加载存档',
-          type: 'button',
-        },
-        {
-          accelerator: 3,
-          content: '角色成就',
-          type: 'button',
-        },
-        {
-          accelerator: 4,
-          content: '帮助说明',
-          type: 'button',
-        },
-        {
-          accelerator: 5,
-          content: '制作鸣谢',
-          type: 'button',
-        },
-        { type: 'divider' },
-        {
-          config: { offset: 6, width: 4 },
-          content: '相关链接：',
-          type: 'text',
-        },
-        {
-          config: { align: 'left', width: 12 },
-          content: [
-            {
-              content: 'EraUma 游戏发布页',
-              url: site,
-            },
-            { isBr: true },
-            {
-              content: 'EraElectron 引擎（PC 版）发布页',
-              url: 'https://gitgud.io/umaera/engine/era-electron/-/releases/permalink/latest',
-            },
-            { isBr: true },
-            {
-              content: 'ere.app 引擎（安卓版）发布页',
-              url: 'https://gitgud.io/umaera/engine/ere-app/-/releases/permalink/latest',
-            },
-            { isBr: true },
-            {
-              content: 'ERA 特雷森学园（Discord 社区）',
-              url: 'https://discord.gg/ake5SP3zUP',
-            },
-            { isBr: true },
-            {
-              content: 'Wiki（使用说明/游戏设定/口上写作指引……）',
-              url: 'https://gitgud.io/umaera/erauma/-/wikis',
-            },
-          ],
-          type: 'text',
-        },
-      ],
-    );
-    era.setAlign('left');
-
-    const achievements = sys_personal_achievement.list().filter((e) => e < 200);
-    let ret = await era.input();
-    switch (ret) {
-      case 1:
-        ret = 0;
+  const copyrights = generate_copyrights();
+  const buttons = [
+    {
+      c: '开始新游戏',
+      async h() {
+        const achievements = sys_personal_achievement
+          .list()
+          .filter((e) => e < 200);
+        let ret = 0;
         if (achievements.length > 0) {
           era.drawLine();
           era.printButton('做我自己', 1);
           era.printButton('扮演角色', 2);
-          if ((await era.input()) === 1) {
-            ret = 0;
-          } else {
+          if ((await era.input()) === 2) {
             era.printMultiColumns([
               { config: { content: '选择要扮演的角色' }, type: 'divider' },
               {
@@ -479,13 +204,19 @@ module.exports = async () => {
           era.set('global:新手教学', 1);
           await homepage();
         }
-        break;
-      case 2:
+      },
+    },
+    {
+      c: '加载存档',
+      async h() {
         if (await load_game()) {
           await homepage();
         }
-        break;
-      case 3:
+      },
+    },
+    {
+      c: '角色成就',
+      async h() {
         era.printMultiColumns([
           { config: { content: '角色成就获取情况' }, type: 'divider' },
           ...era
@@ -493,10 +224,7 @@ module.exports = async () => {
             .filter((e) => e && e < first_child_id)
             .map((e) => {
               const title = era.get(`staticcstr:${e}:称号`),
-                desc = `在一次育成周期内完成了所有育成目标；同时，${(
-                  title_desc[title] ||
-                  '在一次育成周期内赢取了六次以上的G1比赛胜利。'
-                ).substring(8)}`;
+                desc = sys_personal_achievement.describe(e, title);
               return {
                 config: {
                   align: 'center',
@@ -528,293 +256,157 @@ module.exports = async () => {
             type: 'text',
           },
         ]);
-        await era.waitAnyKey();
-        break;
-      case 4:
+        era.printButton('返回', 0, { align: 'center', hideInput: true });
+        await era.input();
+      },
+    },
+    {
+      c: '帮助说明',
+      async h() {
         era.drawLine();
         for (const note of notes.common
           .filter(() => true)
           .sort((a, b) => (a[0] > b[0] ? 1 : -1))) {
           say_by_passer_by(...note);
         }
-        await era.waitAnyKey();
         for (const cid of Object.keys(notes).filter((k) => !isNaN(Number(k)))) {
+          await era.waitAnyKey();
           for (const note of notes[cid]) {
             era.print(
               [{ content: note[0], fontWeight: 'bold' }, '「', note[1], '」'],
               { color: get_chara_color(Number(cid)) },
             );
           }
-          await era.waitAnyKey();
         }
-        break;
-      case 5:
+        era.printButton('返回', 0, { align: 'center', hideInput: true });
+        await era.input();
+      },
+    },
+    {
+      c: '制作鸣谢',
+      async h() {
         era.drawLine();
+        let c_flag = true;
         era.setAlign('center');
-        await era.printAndWait('鸣谢', {
-          color: item_title_color,
-          fontSize: '1.5rem',
-          fontWeight: 'bold',
-          isParagraph: true,
-        });
-        await era.printAndWait('主催', {
-          color: item_title_color,
-          fontSize: '1.25rem',
-          isParagraph: true,
-        });
-        await era.printAndWait('雞雞');
-        era.printMultiColumns([
-          {
-            config: {
-              color: item_title_color,
-              fontSize: '1.25rem',
-              isParagraph: true,
-              offset: 3,
-              width: 9,
-            },
-            content: '架构',
-            type: 'text',
-          },
-          {
-            config: {
-              color: item_title_color,
-              fontSize: '1.25rem',
-              isParagraph: true,
-              width: 9,
-            },
-            content: '引擎',
-            type: 'text',
-          },
-        ]);
-        await era.waitAnyKey();
-        era.printMultiColumns([
-          {
-            config: { offset: 3, width: 9 },
-            content: '无名路人',
-            type: 'text',
-          },
-          {
-            config: { width: 9 },
-            content: '黑奴队长',
-            type: 'text',
-          },
-        ]);
-        await era.waitAnyKey();
-        era.printMultiColumns([
-          {
-            config: {
-              color: item_title_color,
-              fontSize: '1.25rem',
-              isParagraph: true,
-              offset: 3,
-              width: 9,
-            },
-            content: '开发',
-            type: 'text',
-          },
-          {
-            config: {
-              color: item_title_color,
-              fontSize: '1.25rem',
-              isParagraph: true,
-              width: 9,
-            },
-            content: '美术',
-            type: 'text',
-          },
-        ]);
-        await era.waitAnyKey();
-        era.printMultiColumns([
-          {
-            config: { offset: 3, width: 9 },
-            content: [
-              '无名路人',
-              { isDivider: true },
-              '色色',
-              { isDivider: true },
-              '黑奴队长',
-            ],
-            type: 'text',
-          },
-          {
-            config: { width: 9 },
-            content: [
-              'kxmodel',
-              { isDivider: true },
-              '植物牙线',
-              { isDivider: true },
-              'フィンランド',
-              { isBr: true },
-              '提交bug',
-              { isDivider: true },
-              '洗发水',
-            ],
-            type: 'text',
-          },
-        ]);
-        await era.waitAnyKey();
-        await era.printAndWait('翻译参考', {
-          align: 'center',
-          color: item_title_color,
-          fontSize: '1.25rem',
-          isParagraph: true,
-        });
-        await era.printAndWait(
-          [
+        era.setHorizontalAlign('space-evenly');
+        era.printMultiColumns(copyrights[0], { flush: true });
+        era.input({ hideInput: true }).then(() => (c_flag = false));
+        for (let i = 2; i < copyrights.length && c_flag; ++i) {
+          await era.delay(800);
+          era.replaceInColRows(...copyrights.slice(0, i), [
+            { content: '\n', type: 'text' },
             {
-              content: "Trainers' Legend G 译文仓库",
-              url: 'https://github.com/MinamiChiwa/Trainers-Legend-G-TRANS',
+              accelerator: 0,
+              config: { align: 'center', disableWarning: true },
+              content: '跳过',
+              type: 'button',
             },
-            { isDivider: true },
-            {
-              content: '赛马娘中文 Wiki',
-              url: 'https://wiki.biligame.com/umamusume/首页',
-            },
-          ],
-          {
-            align: 'center',
-          },
-        );
-        await era.printAndWait(
-          [
-            {
-              color: item_title_color,
-              content: '口上',
-              fontSize: '1.25rem',
-            },
-            { isBr: true },
-            '以负责角色ID最小值排序',
-            { isBr: true },
-            {
-              content: '详细口上鸣谢',
-              url: 'https://gitgud.io/umaera/erauma/-/wikis/COPYRIGHT',
-            },
-          ],
-          {
-            isParagraph: true,
-          },
-        );
-        await era.waitAnyKey();
-
-        buffer = [];
-        for (const a of line_copyrights) {
-          buffer.push([
-            ...(a[0] instanceof Array
-              ? a[0].map((e) => {
-                  if (e instanceof Object) {
-                    e.color ||= item_title_color;
-                    e.fontSize = '1.125rem';
-                    return e;
-                  }
-                  return {
-                    color: item_title_color,
-                    fontSize: '1.125rem',
-                    content: e,
-                  };
-                })
-              : [
-                  {
-                    color: item_title_color,
-                    content: a[0],
-                    fontSize: '1.125rem',
-                  },
-                ]),
-            { isBr: true },
-            ...(a[1] instanceof Array ? a[1] : [a[1]]),
           ]);
-          if (buffer.length === 3) {
-            era.printMultiColumns([
-              ...buffer.map((e) => ({
-                config: { width: 8 },
-                content: e,
-                type: 'text',
-              })),
-              { content: '\n', type: 'text' },
-            ]);
-            await era.waitAnyKey();
-            buffer = [];
-          }
         }
-        if (buffer.length) {
-          era.printMultiColumns(
-            buffer.map((e) => ({
-              config: { width: 8 },
-              content: e,
-              type: 'text',
-            })),
-            { horizontalAlign: 'center' },
-          );
-          await era.waitAnyKey();
+        if (c_flag) {
+          await era.delay(800);
         }
-        await era.printAndWait('口上翻译', {
-          color: item_title_color,
-          fontSize: '1.25rem',
-          isParagraph: true,
-        });
-        await era.printAndWait([
-          '黑奴队长',
-          { isDivider: true },
-          '黑奴一号',
-          { isDivider: true },
-          '黑奴二号',
+        era.replaceInColRows(...copyrights, [
+          { content: '\n', type: 'text' },
+          {
+            accelerator: 0,
+            config: {
+              align: 'center',
+              disableContinue: true,
+              disableWarning: true,
+            },
+            content: '返回标题',
+            type: 'button',
+          },
         ]);
-        await era.printAndWait('测试反馈', {
-          color: item_title_color,
-          fontSize: '1.25rem',
-          isParagraph: true,
-        });
-        await era.printAndWait([
-          'Advocator',
-          { isDivider: true },
-          '清音林檎',
-          { isDivider: true },
-          '提交bug',
-          { isDivider: true },
-          '科比 · 布莱恩特',
-        ]);
-        await era.printAndWait('社区管理', {
-          color: item_title_color,
-          fontSize: '1.25rem',
-          isParagraph: true,
-        });
-        await era.printAndWait(['Advocator', { isDivider: true }, '雞雞']);
-        await era.printAndWait('社区贡献', {
-          color: item_title_color,
-          fontSize: '1.25rem',
-          isParagraph: true,
-        });
-        await era.printAndWait([
-          '功德林今天的饭',
-          { isDivider: true },
-          'Manifold Paradox',
-          { isDivider: true },
-          'morrowind',
-          { isDivider: true },
-          'Great Sakiko',
-          { isDivider: true },
-          'odakasuya',
-          { isDivider: true },
-          'hsyzg1626',
-          { isBr: true },
-          'WindyWhisper',
-          { isDivider: true },
-          'wtmkks',
-          { isDivider: true },
-          'Что тиба,Я сао нима',
-        ]);
-        await era.printAndWait('特别鸣谢（笑）', {
-          color: item_title_color,
-          fontSize: '1.5rem',
-          fontWeight: 'bold',
-          isParagraph: true,
-        });
-        await era.printAndWait('午马牧师妹 · 普瑞提达比', {
-          fontSize: '1.25rem',
-        });
-        era.println();
-        era.printButton('返回标题', 0, { disableContinue: true });
         await era.input({ hideInput: true });
+        era.setHorizontalAlign('start');
         era.setAlign('left');
-    }
+      },
+    },
+  ];
+  while (flagTitle) {
+    await era.clear();
+    era.setAlign('center');
+    era.printInColRows(
+      [{ type: 'divider' }],
+      {
+        columns: [
+          { config: { width: 7 }, names: 'logo', type: 'image.whole' },
+          { config: { width: 17 }, names: 'title', type: 'image.whole' },
+          {
+            content: ['版本号：v', versionName],
+            type: 'text',
+          },
+          {
+            content: [
+              '适配资源包版本：',
+              {
+                content: res_version,
+                url: `https://gitgud.io/umaera/data/uma-resource/-/archive/${res_version}/uma-resource-${res_version}.zip`,
+              },
+            ],
+            type: 'text',
+          },
+          {
+            content: join_list(author.split('|'), { isDivider: true }),
+            type: 'text',
+          },
+        ],
+        config: { offset: 6, verticalAlign: 'middle', width: 12 },
+      },
+      birthday.length > 0
+        ? [
+            { type: 'divider' },
+            { type: 'text', content: ['今天是 ', ...birthday, ' 的诞生日'] },
+          ]
+        : [],
+      [
+        { type: 'divider' },
+        ...buttons.map(({ c }, i) => ({
+          accelerator: i + 1,
+          content: c,
+          type: 'button',
+        })),
+        { type: 'divider' },
+        {
+          config: { offset: 6, width: 4 },
+          content: '相关链接：',
+          type: 'text',
+        },
+        {
+          config: { align: 'left', width: 12 },
+          content: [
+            {
+              content: 'EraUma 游戏发布页',
+              url: site,
+            },
+            { isBr: true },
+            {
+              content: 'EraElectron 引擎（PC 版）发布页',
+              url: 'https://gitgud.io/umaera/engine/era-electron/-/releases/permalink/latest',
+            },
+            { isBr: true },
+            {
+              content: 'ere.app 引擎（安卓版）发布页',
+              url: 'https://gitgud.io/umaera/engine/ere-app/-/releases/permalink/latest',
+            },
+            { isBr: true },
+            {
+              content: 'ERA 特雷森学园（Discord 社区）',
+              url: 'https://discord.gg/ake5SP3zUP',
+            },
+            { isBr: true },
+            {
+              content: 'Wiki（使用说明/游戏设定/口上写作指引……）',
+              url: 'https://gitgud.io/umaera/erauma/-/wikis',
+            },
+          ],
+          type: 'text',
+        },
+      ],
+    );
+    era.setAlign('left');
+    await buttons[(await era.input()) - 1].h();
   }
 };

@@ -27,7 +27,6 @@ Scope:
 * chara: 角色数据、图像、调教立绘；
 * item：与出行等相关的普通道具；
 * data: 其他数据，技能、因子能力、淫纹插件等；
-* res: 其他图像资源、音乐；
 * engine：引擎改动；
 * util: value-utils、date-indicator 等工具模块改动；
 * tools：tools 文件夹下的生成工具改动；

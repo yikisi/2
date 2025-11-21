@@ -147,9 +147,11 @@ async function sys_next_week() {
       });
     }
     tmp = true;
-    act_list = sort_list(act_list, Math.random).filter(
-      (act) => tmp && (tmp = !act.prison),
-    );
+    act_list = sort_list(act_list, Math.random);
+    const p_index = act_list.findIndex((a) => a.prison);
+    if (p_index >= 0) {
+      act_list.splice(p_index + 1);
+    }
     // 睡奸归并
     const final_act_list = [];
     tmp = -1;
@@ -520,7 +522,7 @@ async function sys_next_week() {
 
     let special_month = era.get(`status:${cid}:发情`);
     let special_body = era.get(`status:${cid}:排卵期`);
-    if (growth_stage >= 4 && race && !is_p_slave) {
+    if (growth_stage >= 4 && race > 0 && !is_p_slave) {
       // 发情期为出生月的下一个月
       const _special_month = (birth_month % 12) + 1;
       // 第二年开始计算发情期，限定本格期，发情期内无经期
@@ -537,61 +539,73 @@ async function sys_next_week() {
     // 只有性成熟且有浦西才需要算经期和排卵期
     // 注意虽然成长期就性成熟了，但是开发者保护在本格期才会怀孕
     // 一个月四个星期，假设生日在第二周，则四周分别为：排卵期 出生周 经期 无
-    if (growth_stage >= 1 && c_sex !== 1 && !is_p_slave) {
-      // 经期为出生周的下一周（简单计算）
-      let special_week =
-        era.get(`cflag:${cid}:月经周`) ||
-        era.set(`cflag:${cid}:月经周`, (birth_week % 4) + 1);
-      // 成长期以上计算经期和排卵期
-      // 非发情期且未怀孕时计算经期
-      if (
-        cur_week === special_week &&
-        pregnant_stage === 1 << pregnant_stage_enum.no &&
-        !era.get(`status:${cid}:发情`)
-      ) {
-        era.set(`status:${cid}:经期`, 1);
-      } else {
-        era.set(`status:${cid}:经期`, 0);
+    if (c_sex !== 1) {
+      if (is_p_slave) {
+        if (!era.get(`status:${cid}:发情`) && race > 0) {
+          era.set(`status:${cid}:发情`, 1);
+        }
+        if (era.get(`status:${cid}:经期`) > 0) {
+          era.set(`status:${cid}:发情`, 0);
+        }
+        if (!era.get(`status:${cid}:排卵期`)) {
+          era.set(`status:${cid}:排卵期`, 1);
+        }
+      } else if (growth_stage >= 1) {
+        // 经期为出生周的下一周（简单计算）
+        let special_week =
+          era.get(`cflag:${cid}:月经周`) ||
+          era.set(`cflag:${cid}:月经周`, (birth_week % 4) + 1);
+        // 成长期以上计算经期和排卵期
+        // 非发情期且未怀孕时计算经期
+        if (
+          cur_week === special_week &&
+          pregnant_stage === 1 << pregnant_stage_enum.no &&
+          !era.get(`status:${cid}:发情`)
+        ) {
+          era.set(`status:${cid}:经期`, 1);
+        } else {
+          era.set(`status:${cid}:经期`, 0);
+        }
+        // 经期再下一周（出生周上一周）排卵期
+        special_week = ((special_week + 1) % 4) + 1;
+        // 排卵期只和怀孕有冲突
+        if (
+          cur_week === special_week &&
+          pregnant_stage === 1 << pregnant_stage_enum.no &&
+          // 生育次数检查
+          era.get(`exp:${cid}:生产次数`) < baby_limit
+        ) {
+          special_body = era.set(`status:${cid}:排卵期`, 1);
+        } else {
+          special_body = era.set(`status:${cid}:排卵期`, 0);
+        }
       }
-      // 经期再下一周（出生周上一周）排卵期
-      special_week = ((special_week + 1) % 4) + 1;
-      // 排卵期只和怀孕有冲突
-      if (
-        cur_week === special_week &&
-        pregnant_stage === 1 << pregnant_stage_enum.no &&
-        // 生育次数检查
-        era.get(`exp:${cid}:生产次数`) < baby_limit
-      ) {
-        special_body = era.set(`status:${cid}:排卵期`, 1);
-      } else {
-        special_body = era.set(`status:${cid}:排卵期`, 0);
-      }
-    }
-    if (growth_stage >= 1 && c_sex !== 1) {
-      // 泌乳的相关判定
-      let milk_timer = era.get(`cflag:${cid}:泌乳回合计时`);
-      if (milk_timer) {
-        const milk_status = era.get(`talent:${cid}:泌乳`);
-        if (milk_status === 1) {
-          milk_timer = era.add(`cflag:${cid}:泌乳回合计时`, -1);
-          // 20周、25周、30周、35周减一次胸围
-          if (
-            28 === milk_timer ||
-            23 === milk_timer ||
-            18 === milk_timer ||
-            13 === milk_timer
-          ) {
-            life_marks.breast_buff--;
-          }
-          // 40周后概率停奶，泌乳时间越长概率越高；孕育泌乳在孕育结束后消除胸围奖励
-          if (milk_timer < 8 && Math.random() < Math.pow(2, -milk_timer)) {
-            life_marks.breast_buff = 0;
+      if (growth_stage >= 1) {
+        // 泌乳的相关判定
+        let milk_timer = era.get(`cflag:${cid}:泌乳回合计时`);
+        if (milk_timer) {
+          const milk_status = era.get(`talent:${cid}:泌乳`);
+          if (milk_status === 1) {
+            milk_timer = era.add(`cflag:${cid}:泌乳回合计时`, -1);
+            // 20周、25周、30周、35周减一次胸围
+            if (
+              28 === milk_timer ||
+              23 === milk_timer ||
+              18 === milk_timer ||
+              13 === milk_timer
+            ) {
+              life_marks.breast_buff--;
+            }
+            // 40周后概率停奶，泌乳时间越长概率越高；孕育泌乳在孕育结束后消除胸围奖励
+            if (milk_timer < 8 && Math.random() < Math.pow(2, -milk_timer)) {
+              life_marks.breast_buff = 0;
+              era.set(`cflag:${cid}:泌乳回合计时`, 0);
+              era.set(`talent:${cid}:泌乳`, 0);
+            }
+          } else if (milk_status === 3) {
+            // 母乳体质直接停止计时
             era.set(`cflag:${cid}:泌乳回合计时`, 0);
-            era.set(`talent:${cid}:泌乳`, 0);
           }
-        } else if (milk_status === 3) {
-          // 母乳体质直接停止计时
-          era.set(`cflag:${cid}:泌乳回合计时`, 0);
         }
       }
     }

@@ -24,6 +24,7 @@ const cons_dict = {};
 
 let current = new Date().getTime();
 
+// GENERATED START
 cons_dict[0] = require('#/event/ero/ero-0');
 cons_dict[3] = require('#/event/ero/ero-3');
 cons_dict[7] = require('#/event/ero/ero-7');
@@ -44,6 +45,7 @@ cons_dict[205] = require('#/event/ero/ero-205');
 cons_dict[340] = require('#/event/ero/ero-340');
 cons_dict[341] = require('#/event/ero/ero-341');
 cons_dict[342] = require('#/event/ero/ero-342');
+// GENERATED END
 
 console.log(
   '角色调教口上注册完毕!',

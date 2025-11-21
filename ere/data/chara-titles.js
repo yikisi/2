@@ -2,7 +2,7 @@ const era = require('#/era-electron');
 
 const { distinct_list } = require('#/utils/list-utils');
 
-const title_desc = require('#/data/desc/title-desc.json');
+const title_desc = require('#/data/desc/titles.json');
 
 const dict = {};
 

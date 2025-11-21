@@ -36,11 +36,11 @@ function init() {
 function filter_event_object(cb) {
   const ret_map = {};
   Object.keys(queue).forEach(
-    (stage_id) =>
-      (queue[stage_id] = (queue[stage_id] || []).filter((e) => {
+    (stage) =>
+      (queue[stage] = (queue[stage] || []).filter((e) => {
         const ret = cb(e);
         if (!ret) {
-          EventMarks.get(e.chara_id).sub(stage_id);
+          EventMarks.get(e.chara_id).sub(stage);
           ret_map[e.chara_id] = (ret_map[e.chara_id] || 0) + 1;
         }
         return ret;
@@ -116,6 +116,21 @@ module.exports = {
     filter_event_object((e) => e.type !== cb_enum.edu || e.chara_id !== cid),
   /** 删除所有节日事件 */
   remove_special_events: () => filter_event_object((e) => !e.special),
+  /**
+   * @param {function(EventObject):boolean} cb
+   * @returns {Record<string,number>}
+   */
+  count_events(cb) {
+    const ret = {};
+    Object.values(queue).forEach((q) =>
+      (q || []).forEach((e) => {
+        if (cb[e]) {
+          ret[e.chara_id] = (ret[e.chara_id] ?? 0) + 1;
+        }
+      }),
+    );
+    return ret;
+  },
   /** @param {number} hook */
   start_machine_gun(hook) {
     temp_queue[hook] = [];

@@ -5,6 +5,7 @@ const cons_dict = {};
 
 const current = new Date().getTime();
 
+// GENERATED START
 cons_dict[3] = require('#/event/basement/basement-3');
 cons_dict[7] = require('#/event/basement/basement-7');
 cons_dict[13] = require('#/event/basement/basement-13');
@@ -14,6 +15,7 @@ cons_dict[52] = require('#/event/basement/basement-52');
 cons_dict[64] = require('#/event/basement/basement-64');
 cons_dict[89] = require('#/event/basement/basement-89');
 cons_dict[119] = require('#/event/basement/basement-119');
+// GENERATED END
 
 console.log(
   '角色地下室口上注册完毕!',

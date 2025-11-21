@@ -19,6 +19,7 @@ const { get_random_entry } = require('#/utils/list-utils');
 const chara_colors = require('#/data/chara-colors').chara_colors[7];
 const { escape_enum } = require('#/data/basement-const');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
+const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
 module.exports = class extends CustomizedDaily {
   get #dict() {
@@ -259,13 +260,12 @@ module.exports = class extends CustomizedDaily {
   select() {
     const life_marks = LifeEventMarks.get_marks(7);
     if (sys_check_awake(7)) {
-      const gold_ship = get_chara_talk(7),
-        me = get_chara_talk(0);
+      const gold_ship = get_chara_talk(7);
       if (sys_check_awake(0) && life_marks.b_escape) {
         switch (life_marks.b_escape) {
           case escape_enum.sneak:
             gold_ship.say([
-              me.get_colored_name(),
+              sys_get_colored_callname(this.id, 0),
               ' 是那种会自己溜出去玩，然后自觉回家的宠物吗？',
             ]);
             gold_ship.say([

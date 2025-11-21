@@ -1,3 +1,4 @@
+// GENERATED START
 const { bonus_params, id2bonus } = require('#/data/race/race-attr-bonus');
 const { lane_params, slope_params } = require('#/data/race/race-params');
 const race_rewards = require('#/data/race/race-rewards');
@@ -551,3 +552,4 @@ module.exports = {
   race_infos,
   race_rewards,
 };
+// GENERATED END

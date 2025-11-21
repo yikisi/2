@@ -1,3 +1,4 @@
+// GENERATED START
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
@@ -17,3 +18,4 @@ module.exports = new RaceInfo(
   8925,
   55500,
 );
+// GENERATED END

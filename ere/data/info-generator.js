@@ -25,8 +25,8 @@ const {
 const { hair_colors } = require('#/data/const.json');
 const { mark_colors } = require('#/data/const.json');
 const { get_date } = require('#/data/date-indicator');
-const status_desc = require('#/data/desc/status-desc.json');
-const talent_desc = require('#/data/desc/talent-desc.json');
+const status_desc = require('#/data/desc/status.json');
+const talent_desc = require('#/data/desc/talents.json');
 const CharaInmon = require('#/data/ero/chara-inmon');
 const {
   slavery_descriptions,

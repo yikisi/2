@@ -32,12 +32,16 @@ const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const LoveEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-132');
 const LunaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-17');
 const event_hooks = require('#/data/event/event-hooks');
+const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
 const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks-32');
 const BryneLifeMarks = require('#/data/event/life-event-marks/life-event-marks-349');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
-const { get_trainer_title } = require('#/data/info-generator');
+const {
+  get_filtered_talents,
+  get_trainer_title,
+} = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const { first_child_id, max_chara_id } = require('#/data/other-const');
 const RaceHistory = require('#/data/race/model/race-history');
@@ -184,35 +188,6 @@ module.exports = async () => {
                 new TachyonLifeMarks().drug_notice =
                   Math.max(48 - era.get('flag:当前回合数'), 0) +
                   get_random_value(1, 25);
-              }
-              if (!era.get('flag:回合爱慕惩罚')) {
-                // 爱慕事件修复
-                const events = get_queue(),
-                  dict = {};
-                Object.values(events).forEach((l) =>
-                  l.forEach((e) => {
-                    if (
-                      e.type === cb_enum.love &&
-                      e.arg instanceof Array &&
-                      (e[0] === 49 || e[0] === 74 || e[0] === 89 || e[0] === 99)
-                    ) {
-                      dict[e.chara_id] = 1;
-                    }
-                  }),
-                );
-                era.getAddedCharacters().forEach((chara_id) => {
-                  const love = era.get(`love:${chara_id}`);
-                  if (
-                    !dict[chara_id] &&
-                    (love === 49 ||
-                      love === 74 ||
-                      love === 89 ||
-                      love === 99) &&
-                    era.get(`cflag:${chara_id}:爱慕暂拒`) !== love
-                  ) {
-                    era.set(`cflag:${chara_id}:爱慕暂拒`, love);
-                  }
-                });
               }
               era
                 .getAddedCharacters()
@@ -538,6 +513,83 @@ module.exports = async () => {
                   .fill(0)
                   .forEach((_, i) => era.set(`status:17:${110 + i}`, 0));
               }
+            }
+            if (version <= 2152) {
+              era
+                .getAddedCharacters()
+                .forEach((cid) =>
+                  attr_names.forEach((a) =>
+                    era.set(
+                      `exp:${cid}:${a}训练经验`,
+                      Math.max(era.get(`exp:${cid}:${a}训练经验`), 0),
+                    ),
+                  ),
+                );
+              era.set('item:现实透孔仪', 1);
+            }
+            if (version <= 2160) {
+              new MyEduMarks().big_sale = 1;
+            }
+            if (version <= 2171) {
+              const eq = get_queue();
+              if (eq[event_hooks.out_shopping]) {
+                let count = 0;
+                eq[event_hooks.out_shopping] = eq[
+                  event_hooks.out_shopping
+                ].filter((e) => {
+                  if (
+                    e.chara_id !== 0 ||
+                    e.type !== cb_enum.edu ||
+                    e.arg !== 'big_sale'
+                  ) {
+                    return true;
+                  }
+                  return count++ === 0;
+                });
+                for (let i = 0; i < count - 1; ++i) {
+                  EventMarks.get(0).sub(event_hooks.out_shopping);
+                }
+              }
+            }
+            if (version < era.get('gamebase').version) {
+              era.getAddedCharacters().forEach((cid) => {
+                if (cid > 0) {
+                  const t_table = era.get(`chara:${cid}`)?.talent;
+                  if (
+                    t_table instanceof Object &&
+                    Object.entries(t_table)
+                      .filter(([t]) => Number(t) <= 20)
+                      .reduce(
+                        (p, [t, v]) => p && era.get(`talent:${cid}:${t}`) !== v,
+                        true,
+                      )
+                  ) {
+                    const aims = [cid];
+                    if (era.get('cflag:0:模版角色') === cid) {
+                      aims.push(0);
+                    }
+                    Object.entries(t_table)
+                      .filter(([t]) => {
+                        const tid = Number(t);
+                        return tid <= 20 || (tid >= 40 && tid <= 47);
+                      })
+                      .forEach(([t, v]) =>
+                        aims.forEach((a) => era.set(`talent:${a}:${t}`, v)),
+                      );
+                    aims.forEach((a) => {
+                      const sex_code = era.get(`cflag:${a}:性别`);
+                      [
+                        ...get_filtered_talents(sex_code, 50),
+                        ...get_filtered_talents(sex_code, 60),
+                      ].forEach((tid) => {
+                        if (t_table[tid] !== undefined) {
+                          era.set(`talent:${a}:${tid}`, t_table[tid]);
+                        }
+                      });
+                    });
+                  }
+                }
+              });
             }
             return true;
           } else {

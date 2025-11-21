@@ -1,20 +1,7 @@
-const {
-  add,
-  clear,
-  drawLine,
-  get,
-  getLineCount,
-  input,
-  print,
-  printAndWait,
-  printButton,
-  printInColRows,
-  printMultiColumns,
-  set,
-  setHorizontalAlign,
-} = require('#/era-electron');
+const era = require('#/era-electron');
 
 const { sys_get_billings } = require('#/system/sys-calc-base-cflag');
+const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
@@ -37,22 +24,21 @@ const recruit_flags = require('#/data/event/recruit-flags');
 const yandere_list = require('#/data/event/yandere-list');
 const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
-const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
 /** @type {Record<string,function(CharaTalk,CharaTalk):{[handle]:function:Promise,[name]:string}>} */
 const handlers = {};
 
 [204, 346, 347, 348].forEach((cid) => {
   handlers[cid] = () =>
-    get(`cflag:${cid}:招募状态`) !== recruit_flags.yes
+    era.get(`cflag:${cid}:招募状态`) !== recruit_flags.yes
       ? {
           name: '「请来帮助我吧！」（招募）',
           handle() {
-            set(`cflag:${cid}:招募状态`, recruit_flags.yes);
-            if (get(`talent:${cid}:病娇`) > 0) {
+            era.set(`cflag:${cid}:招募状态`, recruit_flags.yes);
+            if (era.get(`talent:${cid}:病娇`) > 0) {
               yandere_list.push(cid);
             }
-            return printAndWait([
+            return era.printAndWait([
               get_chara_talk(cid).get_colored_name(),
               ' 加入了队伍！',
             ]);
@@ -63,17 +49,17 @@ const handlers = {};
 
 [207, 308, 345].forEach((cid) => {
   handlers[cid] = () =>
-    get(`cflag:${cid}:招募状态`) !== recruit_flags.yes &&
-    get(`love:${cid}`) >= 40
+    era.get(`cflag:${cid}:招募状态`) !== recruit_flags.yes &&
+    era.get(`love:${cid}`) >= 40
       ? {
           name: '「一起努力吧！」（招募）',
           handle() {
-            set(`callname:${cid}:-2`, get(`callname:${cid}:-1`));
-            set(`cflag:${cid}:招募状态`, recruit_flags.yes);
-            if (get(`talent:${cid}:病娇`) > 0) {
+            era.set(`callname:${cid}:-2`, era.get(`callname:${cid}:-1`));
+            era.set(`cflag:${cid}:招募状态`, recruit_flags.yes);
+            if (era.get(`talent:${cid}:病娇`) > 0) {
               yandere_list.push(cid);
             }
-            return printAndWait([
+            return era.printAndWait([
               get_chara_talk(cid).get_colored_name(),
               ' 加入了队伍！',
             ]);
@@ -83,7 +69,7 @@ const handlers = {};
 });
 
 handlers[303] = () =>
-  get('cflag:303:招募状态') !== recruit_flags.yes
+  era.get('cflag:303:招募状态') !== recruit_flags.yes
     ? {
         name: '给予更多许可（招募）',
         handle() {
@@ -93,17 +79,17 @@ handlers[303] = () =>
     : {};
 
 handlers[343] = () =>
-  get('cflag:343:招募状态') !== recruit_flags.yes &&
+  era.get('cflag:343:招募状态') !== recruit_flags.yes &&
   new MayLifeMarks().who_am_i === 3
     ? {
         name: '「一起努力吧！」（招募）',
         handle() {
-          set('callname:343:-2', '佐岳五月');
-          set('cflag:343:招募状态', recruit_flags.yes);
-          if (get('talent:343:病娇')) {
+          era.set('callname:343:-2', '佐岳五月');
+          era.set('cflag:343:招募状态', recruit_flags.yes);
+          if (era.get('talent:343:病娇')) {
             yandere_list.push(343);
           }
-          return printAndWait([
+          return era.printAndWait([
             get_chara_talk(343).get_colored_name(),
             ' 加入了队伍！',
           ]);
@@ -112,13 +98,14 @@ handlers[343] = () =>
     : {};
 
 handlers[344] = () =>
-  get('cflag:344:招募状态') !== recruit_flags.yes && get('love:344') >= 25
+  era.get('cflag:344:招募状态') !== recruit_flags.yes &&
+  era.get('love:344') >= 25
     ? {
         name: '「一起努力吧！」（招募）',
         handle() {
-          set('callname:344:-2', '都留歧凉花');
-          set('cflag:344:招募状态', recruit_flags.yes);
-          return printAndWait([
+          era.set('callname:344:-2', '都留歧凉花');
+          era.set('cflag:344:招募状态', recruit_flags.yes);
+          return era.printAndWait([
             get_chara_talk(344).get_colored_name(),
             ' 加入了队伍！',
           ]);
@@ -127,21 +114,21 @@ handlers[344] = () =>
     : {};
 
 handlers[349] = () =>
-  get('cflag:349:招募状态') === recruit_flags.yes
+  era.get('cflag:349:招募状态') === recruit_flags.yes
     ? {
         name: '投资理财',
         async handle() {
           const bryne = get_chara_talk(349);
           const life_marks = new BryneLifeMarks();
-          const money = get('flag:当前马币');
+          const money = era.get('flag:当前马币');
           if (money < 1000 && !life_marks.funds) {
             await bryne.say_and_wait(
-              `抱歉呐，但是 ${sys_get_callname(349, 0)} 你没有足够的资金吧？我的渠道里没有会接受 1000 马币以下的微型投资的机构诶……`,
+              `抱歉呐，但是 ${sys_get_callname(349, 0)} 你没有足够的资金吧？我的渠道里没有会接受 1,000 马币以下的微型投资的机构诶……`,
             );
             return;
           }
           if (life_marks.funds > 0) {
-            print([
+            era.print([
               '现在向 ',
               bryne.get_colored_name(),
               ' 提供了 ',
@@ -151,19 +138,19 @@ handlers[349] = () =>
               ' 马币收益。',
             ]);
           }
-          printButton('投资（以 1000 马币为单位）', 1, {
+          era.printButton('投资（以 1000 马币为单位）', 1, {
             disabled: money < 1000,
           });
-          printButton('赎回', 2, { disabled: life_marks.funds <= 0 });
+          era.printButton('赎回', 2, { disabled: life_marks.funds <= 0 });
           const _old = life_marks.funds;
-          if ((await input()) === 1) {
-            print('要投资多少马币？');
+          if ((await era.input()) === 1) {
+            era.print('要投资多少马币？');
             let flag = true;
             let _new = 1;
-            const curr = getLineCount();
+            const curr = era.getLineCount();
             while (flag) {
-              await clear(getLineCount() - curr);
-              printMultiColumns([
+              await era.clear(era.getLineCount() - curr);
+              era.printMultiColumns([
                 {
                   accelerator: 2,
                   config: { align: 'center', disabled: _new <= 20, width: 4 },
@@ -218,7 +205,7 @@ handlers[349] = () =>
                   type: 'button',
                 },
               ]);
-              switch (await input()) {
+              switch (await era.input()) {
                 case 2:
                   _new -= 20;
                   break;
@@ -241,8 +228,8 @@ handlers[349] = () =>
             }
             if (_new > 0) {
               life_marks.funds += _new * 1000;
-              add('flag:当前马币', -_new * 1000);
-              await printAndWait([
+              era.add('flag:当前马币', -_new * 1000);
+              await era.printAndWait([
                 '向 ',
                 bryne.get_colored_name(),
                 ' 追加了 ',
@@ -255,17 +242,17 @@ handlers[349] = () =>
               ]);
             }
           } else {
-            print([
+            era.print([
               '要赎回多少马币？共投资了 ',
               get_abbr_number(life_marks.funds),
               ' 马币：',
             ]);
             let flag = true;
             let got = 1;
-            const curr = getLineCount();
+            const curr = era.getLineCount();
             while (flag) {
-              await clear(getLineCount() - curr);
-              printMultiColumns([
+              await era.clear(era.getLineCount() - curr);
+              era.printMultiColumns([
                 {
                   accelerator: 2,
                   config: { align: 'center', disabled: got <= 20, width: 4 },
@@ -320,7 +307,7 @@ handlers[349] = () =>
                   type: 'button',
                 },
               ]);
-              switch (await input()) {
+              switch (await era.input()) {
                 case 2:
                   got -= 20;
                   break;
@@ -343,10 +330,10 @@ handlers[349] = () =>
             }
             if (got > 0) {
               life_marks.funds -= got * 1000;
-              add('flag:当前马币', got * 1000);
-              print(['取回了 ', get_abbr_number(got * 1000), ' 马币。']);
+              era.add('flag:当前马币', got * 1000);
+              era.print(['取回了 ', get_abbr_number(got * 1000), ' 马币。']);
               if (life_marks.funds > 0) {
-                await printAndWait([
+                await era.printAndWait([
                   '还有 ',
                   get_abbr_number(life_marks.funds),
                   ' 马币资金，每周共提供 ',
@@ -369,16 +356,16 @@ handlers[349] = () =>
           }
         },
       }
-    : get('love:349') >= 40
+    : era.get('love:349') >= 40
       ? {
           name: '「一起努力吧！」（招募）',
           handle() {
-            set('callname:349:-2', get('callname:349:-1'));
-            set('cflag:349:招募状态', recruit_flags.yes);
-            if (get('talent:349:病娇') > 0) {
+            era.set('callname:349:-2', era.get('callname:349:-1'));
+            era.set('cflag:349:招募状态', recruit_flags.yes);
+            if (era.get('talent:349:病娇') > 0) {
               yandere_list.push(349);
             }
-            return printAndWait([
+            return era.printAndWait([
               get_chara_talk(349).get_colored_name(),
               ' 加入了队伍！',
             ]);
@@ -389,17 +376,17 @@ handlers[349] = () =>
 async function page_visitors() {
   let flag_page = true;
   let flag_visitor = true;
-  await arrive_location(set('flag:当前位置', location_enum.visitor));
+  await arrive_location(era.set('flag:当前位置', location_enum.visitor));
   let visitor_list = loc_characters.get(location_enum.visitor);
   if (visitor_list.length > 0) {
     const celebration = get_celebration(),
       me = get_chara_talk(0);
     while (flag_page) {
-      setHorizontalAlign('space-around');
-      printInColRows(
+      era.setHorizontalAlign('space-around');
+      era.printInColRows(
         [{ content: '要和谁交谈？', type: 'text' }],
         ...visitor_list.map((e) => {
-          const image = get(`cstr:${e}:头像`);
+          const image = era.get(`cstr:${e}:头像`);
           return {
             columns: [
               {
@@ -409,7 +396,7 @@ async function page_visitors() {
               {
                 accelerator: e,
                 config: { align: 'center' },
-                content: get(`callname:${e}:-2`),
+                content: era.get(`callname:${e}:-2`),
                 type: 'button',
               },
             ],
@@ -418,8 +405,8 @@ async function page_visitors() {
         }),
         [{ accelerator: 999, type: 'button', content: '离开' }],
       );
-      setHorizontalAlign('start');
-      const cid = await input();
+      era.setHorizontalAlign('start');
+      const cid = await era.input();
       if (cid !== 999) {
         const chara = get_chara_talk(cid);
         const title = CharaTitles.get(chara.id).get_curr_title();
@@ -451,7 +438,7 @@ async function page_visitors() {
             { name: '再见' },
           );
           if ((flag_visitor &&= temp_flag)) {
-            await clear();
+            await era.clear();
             print_page_header();
           }
         }
@@ -461,22 +448,22 @@ async function page_visitors() {
         flag_page = false;
       }
       if (flag_page) {
-        await clear();
+        await era.clear();
         print_page_header();
-        drawLine();
+        era.drawLine();
       }
     }
-    drawLine();
-    await printAndWait('【折返了】');
+    era.drawLine();
+    await era.printAndWait('【折返了】');
   } else {
-    drawLine();
-    await printAndWait('【没有人在的样子……折返了】');
+    era.drawLine();
+    await era.printAndWait('【没有人在的样子……折返了】');
   }
   loc_characters.set(location_enum.visitor, visitor_list);
   await sys_get_random_event(event_hooks.back_school)({
     loc: location_enum.visitor,
   });
-  set('flag:当前位置', location_enum.office);
+  era.set('flag:当前位置', location_enum.office);
 }
 
 module.exports = page_visitors;

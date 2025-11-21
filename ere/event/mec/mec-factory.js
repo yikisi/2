@@ -7,6 +7,7 @@ const cons_dict = {};
 
 const current = new Date().getTime();
 
+// GENERATED START
 cons_dict[0] = require('#/event/mec/mec-0');
 cons_dict[3] = require('#/event/mec/mec-3');
 cons_dict[6] = require('#/event/mec/mec-6');
@@ -72,6 +73,7 @@ cons_dict[346] =
   cons_dict[347] =
   cons_dict[348] =
     require('#/event/mec/mec-npc');
+// GENERATED END
 
 console.log(
   '角色机制脚本注册完毕!',
@@ -85,11 +87,11 @@ class MechanismFactory extends CommonKojoFactory {
   }
 
   /**
-   * @param {number} id
+   * @param {number} cid
    * @returns {CustomizedMec}
    */
-  get_custom_mec(id) {
-    return this.get(id);
+  get_custom_mec(cid) {
+    return this.get(cid);
   }
 }
 
