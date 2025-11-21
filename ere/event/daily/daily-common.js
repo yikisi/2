@@ -9,6 +9,7 @@ const era = require('#/era-electron');
 
 const {
   sys_change_lust,
+  sys_change_motivation,
   sys_get_billings,
 } = require('#/system/sys-calc-base-cflag');
 const {
@@ -371,17 +372,8 @@ class CustomizedDaily {
     ]);
   }
 
-  /** @author 雞雞 */
   async office_study() {
-    const chara = get_chara_talk(this.id);
-    await era.printAndWait([
-      get_chara_talk(0).get_colored_name(),
-      ' 在训练员室里指导 ',
-      chara.get_colored_name(),
-      ' 学习，成功指导',
-      chara.sex,
-      '解开了不会的题目。',
-    ]);
+    await kojo['指导学习'](this.#dict);
   }
 
   /** @author 雞雞 */
@@ -635,30 +627,11 @@ class CustomizedDaily {
    * @param {HookArg} hook
    */
   async school_atrium(hook) {
-    const me = get_chara_talk(0),
-      chara = get_chara_talk(this.id);
-    hook.arg = (await select_action_in_atrium()) === 0;
-    await era.printAndWait(
-      hook.arg
-        ? [
-            me.get_colored_name(),
-            ' 与 ',
-            chara.get_colored_name(),
-            ` 一起来到中庭枯树洞，看着${chara.sex}朝枯树洞里咆哮的样子，`,
-            me.get_colored_name(),
-            ' 也坚定了要帮助 ',
-            chara.get_colored_name(),
-            ' 成为最强的决心。',
-          ]
-        : [
-            me.get_colored_name(),
-            ' 与 ',
-            chara.get_colored_name(),
-            ' 一起来到中庭约会，',
-            me.get_couple_title(),
-            ' 的组合让周围的学生忍不住议论纷纷。',
-          ],
-    );
+    if ((hook.arg = (await select_action_in_atrium()) === 0)) {
+      await kojo['中庭枯树洞'](this.#dict);
+    } else {
+      await kojo['中庭约会'](this.#dict);
+    }
   }
 
   /** @param {HookArg} hook */
@@ -746,15 +719,21 @@ class CustomizedDaily {
       }
       return;
     }
-    /** @author 雞雞 */
-    await era.printAndWait([
-      me.get_colored_name(),
-      ' 与 ',
-      chara.get_colored_name(),
-      ' 一起来到天台吃便当，',
-      me.get_couple_title(),
-      ' 互相交换了便当盒里的美食。',
-    ]);
+    const is_sex = era.get('flag:惩戒力度') >= 2 && Math.random() < 0.5;
+    await kojo['天台']({ sex: is_sex, ...this.#dict });
+    if (is_sex) {
+      hook.override = true;
+      era.println();
+      let wait_flag = false;
+      if (Math.random() < 0.5) {
+        wait_flag = sys_change_motivation(this.id, 1);
+      }
+      wait_flag =
+        sys_like_chara(this.id, 0, get_random_value(15, 25)) || wait_flag;
+      if (wait_flag) {
+        await era.waitAnyKey();
+      }
+    }
   }
 
   /** @author 雞雞 */

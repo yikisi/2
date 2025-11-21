@@ -566,7 +566,7 @@ class CustomizedEdu extends ICustomizedEdu {
         if (era.get(`mark:${this.id}:淫纹`) >= meek) {
           await era.printAndWait([
             chara.get_colored_name(),
-            ' 顺服地穿好衣服，小腹处透衣的粉光辉映着媚眼中的神光……',
+            ' 顺服地穿好衣服，小腹处透衣的粉光与媚眼交相辉映……',
           ]);
         } else if (
           era.get(`mark:${this.id}:欢愉`) -
