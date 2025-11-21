@@ -30,7 +30,7 @@ const slavery_descriptions = [];
 slavery_descriptions[0] = '-';
 slavery_descriptions[slavery_enum.milk] = '每周提供一杯乳汁。';
 slavery_descriptions[slavery_enum.pregnant] =
-  '未怀孕时总是处于危险期，怀孕率+100%，怀孕速度+100%。';
+  '未怀孕时总是处于危险期，怀孕率+10%，怀孕速度+100%。';
 slavery_descriptions[slavery_enum.worker] = '每周提供一定马币。';
 slavery_descriptions[slavery_enum.inherit] = '每周提供一定继承因子。';
 slavery_descriptions[slavery_enum.furniture] =

@@ -544,39 +544,41 @@ async function sys_calc_orgasm(shown, ...ids) {
             }
           }
           if (era.get(`nowex:${cid}:潮吹`) > 0) {
-            if (!sys_check_awake(cid)) {
-              if (!era.get(`cstr:${cid}:无自觉初次潮吹经历`)) {
+            if (!era.get(`cstr:${cid}:初次潮吹经历`)) {
+              if (sys_check_awake(cid)) {
                 if (oid === -1) {
-                  era.set(`cstr:${cid}:无自觉初次潮吹经历`, [
-                    '实际上，在 ',
+                  era.set(`cstr:${cid}:初次潮吹经历`, [
                     date,
-                    ' 就不知不觉间分泌了第一缕蜜液',
+                    '，第一次感受到了从身体深处喷发的欲望之水',
                   ]);
                 } else {
-                  era.set(`cstr:${cid}:无自觉初次潮吹经历`, [
-                    '实际上，在 ',
+                  era.set(`cstr:${cid}:初次潮吹经历`, [
                     date,
-                    ' 就被 ',
+                    '，在 ',
                     { c: oid },
                     ...(supporter > 0 ? [' 与 ', { c: supporter }] : []),
-                    ' 采摘了花蜜',
+                    ' 面前第一次喷出了淫乱的蜜液',
                   ]);
                 }
-              }
-            } else if (!era.get(`cstr:${cid}:初次潮吹经历`)) {
-              if (oid === -1) {
-                era.set(`cstr:${cid}:初次潮吹经历`, [
-                  date,
-                  '，第一次感受到了从身体深处喷发的欲望之水',
-                ]);
               } else {
-                era.set(`cstr:${cid}:初次潮吹经历`, [
-                  date,
-                  '，在 ',
-                  { c: oid },
-                  ...(supporter > 0 ? [' 与 ', { c: supporter }] : []),
-                  ' 面前第一次喷出了淫乱的蜜液',
-                ]);
+                if (!era.get(`cstr:${cid}:无自觉初次潮吹经历`)) {
+                  if (oid === -1) {
+                    era.set(`cstr:${cid}:无自觉初次潮吹经历`, [
+                      '实际上，在 ',
+                      date,
+                      ' 就不知不觉间分泌了第一缕蜜液',
+                    ]);
+                  } else {
+                    era.set(`cstr:${cid}:无自觉初次潮吹经历`, [
+                      '实际上，在 ',
+                      date,
+                      ' 就被 ',
+                      { c: oid },
+                      ...(supporter > 0 ? [' 与 ', { c: supporter }] : []),
+                      ' 采摘了花蜜',
+                    ]);
+                  }
+                }
               }
             }
           }

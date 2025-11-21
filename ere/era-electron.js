@@ -84,7 +84,7 @@
  * @property {number} [width] width of the line, 1-24, 24 in default
  */
 /**
- * @typedef {string|(PrintedSpan|{isBlank:number}|{isBr:boolean}|{isDivider:boolean}|string)[]} TextContent
+ * @typedef {string|(PrintedSpan|{isBlank:number}|{isBr:number}|{isDivider:boolean}|string)[]} TextContent
  */
 /**
  * @typedef TextObject
@@ -117,6 +117,7 @@
  * @property {number} [offset]
  * @property {'top'|'middle'|'bottom'} [verticalAlign]
  * @property {number} [width]
+ * @property {boolean} [flush]
  * @see https://element-plus.org/zh-CN/component/layout.html
  */
 /**
@@ -315,7 +316,7 @@ const era = {
   nextTurnInTrain() {},
   /**
    * show a notification
-   * @param {string|({[color]:string,content:string,[fontSize]:string,[fontWeight]:string}|{isBr:true}|string)[]} content content of the notification
+   * @param {string|({[color]:string,content:string,[fontSize]:string,[fontWeight]:string}|{isBlank:number}|{isBr:number}|string)[]} content content of the notification
    * @param {string} [title] title of the notification
    * @param {'success'|'info'|'warning'|'error'|''} [type] type of the notification, see the enum
    * @param {number} [duration] duration of the notification, microsecond
@@ -426,6 +427,13 @@ const era = {
   /** DANGER exit the application and close the window */
   quit() {},
   /**
+   * DANGER remove the character
+   * @param {number} charaId REQUIRED id of the character
+   * @returns {void}
+   */
+  // eslint-disable-next-line no-unused-vars
+  removeCharacter(...charaId) {},
+  /**
    * DANGER replace the line just printed with a new in-col-row line
    * @param {...ColumnObject|GridObject[]} columnObjects
    * @returns {number} line number of the printed
@@ -491,14 +499,14 @@ const era = {
   set(varName, val) {},
   /**
    * set default text-align
-   * @param {string} textAlign REQUIRED the text-align, center, left or right used in usual
+   * @param {'center'|'left'|'right'} textAlign REQUIRED the text-align: center, left or right used in usual
    * @returns {void}
    */
   // eslint-disable-next-line no-unused-vars
   setAlign(textAlign) {},
   /**
    * set default horizontal align of inColRows
-   * @param {string} align REQUIRED the vertical align, start, end, center, space-around, space-between or space-evenly
+   * @param {'start'|'end'|'center'|'space-around'|'space-between'|'space-evenly'} align REQUIRED the vertical align: start (default), end, center, space-around, space-between or space-evenly
    * @returns {void}
    */
   // eslint-disable-next-line no-unused-vars
@@ -530,7 +538,7 @@ const era = {
   setToBottom() {},
   /**
    * set default vertical align of inColRows
-   * @param {string} align REQUIRED the vertical align, top, middle or bottom used in usual
+   * @param {'top'|'middle'|'bottom'} align REQUIRED the vertical align: top (default), middle or bottom
    * @returns {void}
    */
   // eslint-disable-next-line no-unused-vars
@@ -549,7 +557,7 @@ const era = {
    * @returns {boolean} if debug
    */
   toggleDebug() {},
-  version: { sdk: '4.3.0', engine: undefined },
+  version: { sdk: '4.4.0', engine: undefined },
   /**
    * wait any key from user
    * @returns {Promise<void>} a promise of nothing, please use await

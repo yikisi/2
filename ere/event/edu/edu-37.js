@@ -22,7 +22,7 @@ const { say_by_passer_by_and_wait } = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { buff_colors } = require('#/data/color-const');
-const status_desc = require('#/data/desc/status-desc.json');
+const status_desc = require('#/data/desc/status.json');
 const FlashEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-37');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');

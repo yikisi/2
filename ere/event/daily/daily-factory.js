@@ -11,6 +11,7 @@ const cons_dict = {};
 
 const current = new Date().getTime();
 
+// GENERATED START
 cons_dict[0] = require('#/event/daily/daily-0');
 cons_dict[3] = require('#/event/daily/daily-3');
 cons_dict[4] = require('#/event/daily/daily-4');
@@ -44,6 +45,7 @@ cons_dict[340] =
   cons_dict[341] =
   cons_dict[342] =
     require('#/event/daily/daily-god');
+// GENERATED END
 
 console.log(
   '角色日常口上注册完毕!',

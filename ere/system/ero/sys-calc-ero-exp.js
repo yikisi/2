@@ -95,20 +95,20 @@ module.exports = {
       .forEach((c_id, i) => {
         era.add(`exp:${c_id}:颜射次数`, 1);
         era.add(`exp:${c_id}:颜射精液量`, semen_list[i]);
-        if (!sys_check_awake(c_id)) {
-          if (!era.get(`cstr:${c_id}:无自觉初次颜射经历`)) {
+        if (!era.get(`cstr:${c_id}:初次颜射经历`)) {
+          if (sys_check_awake(c_id)) {
+            era.set(`cstr:${c_id}:初次颜射经历`, [
+              `在 ${date} 初次被 `,
+              { c: cid },
+              ' 以精液覆面',
+            ]);
+          } else if (!era.get(`cstr:${c_id}:无自觉初次颜射经历`)) {
             era.set(`cstr:${c_id}:无自觉初次颜射经历`, [
               `实际上，在 ${date} 就盖上了 `,
               { c: cid },
               ' 的精液',
             ]);
           }
-        } else if (!era.get(`cstr:${c_id}:初次颜射经历`)) {
-          era.set(`cstr:${c_id}:初次颜射经历`, [
-            `在 ${date} 初次被 `,
-            { c: cid },
-            ' 以精液覆面',
-          ]);
         }
         set_stain(c_id, part_enum.mouth, stain_enum.semen);
         set_stain(c_id, part_enum.body, stain_enum.semen);
@@ -215,8 +215,15 @@ module.exports = {
         } else if (!cid) {
           era.add(`tcvar:${id}:获得因子`, amount_list[i] / 15);
         }
-        if (!sys_check_awake(id)) {
-          if (!era.get(`cstr:${id}:无自觉初次饮爱液经历`)) {
+        if (!era.get(`cstr:${id}:初次饮爱液经历`)) {
+          if (sys_check_awake(id)) {
+            era.set(`cstr:${id}:初次饮爱液经历`, [
+              date,
+              '，从 ',
+              { c: cid },
+              ' 的樱穴中第一次采饮了欢愉的蜜液',
+            ]);
+          } else if (!era.get(`cstr:${id}:无自觉初次饮爱液经历`)) {
             era.set(`cstr:${id}:无自觉初次饮爱液经历`, [
               '实际上，在 ',
               date,
@@ -225,13 +232,6 @@ module.exports = {
               ' 的淫液',
             ]);
           }
-        } else if (!era.get(`cstr:${id}:初次饮爱液经历`)) {
-          era.set(`cstr:${id}:初次饮爱液经历`, [
-            date,
-            '，从 ',
-            { c: cid },
-            ' 的樱穴中第一次采饮了欢愉的蜜液',
-          ]);
         }
       });
   },

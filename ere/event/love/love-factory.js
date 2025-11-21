@@ -8,6 +8,7 @@ const cons_dict = {};
 
 const current = new Date().getTime();
 
+// GENERATED START
 cons_dict[3] = require('#/event/love/love-3');
 cons_dict[4] = require('#/event/love/love-4');
 cons_dict[6] = require('#/event/love/love-6');
@@ -38,6 +39,7 @@ cons_dict[341] = require('#/event/love/love-341');
 cons_dict[342] = require('#/event/love/love-342');
 cons_dict[343] = require('#/event/love/love-343');
 cons_dict[400] = require('#/event/love/love-400');
+// GENERATED END
 
 console.log(
   '角色爱慕口上注册完毕!',
@@ -51,14 +53,14 @@ class LoveFactory extends CommonKojoFactory {
   }
 
   /**
-   * @param {number} chara_id
+   * @param {number} cid
    * @param {number} stage
-   * @param {*} extra_flag
-   * @param {EventObject} event_object
+   * @param {*} extra
+   * @param {EventObject} ebj
    */
-  async run_custom_love(chara_id, stage, extra_flag, event_object) {
-    const ret = await this.get(chara_id).run(stage, extra_flag, event_object);
-    await punish_by_yandere(chara_id, stage);
+  async run_custom_love(cid, stage, extra, ebj) {
+    const ret = await this.get(cid).run(stage, extra, ebj);
+    await punish_by_yandere(cid, stage);
     return ret;
   }
 }

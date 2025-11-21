@@ -18,7 +18,7 @@ const CharaTitles = require('#/data/chara-titles');
 const { celebration_color, money_color } = require('#/data/color-const');
 const { attr_background_colors, trainer_colors } = require('#/data/const.json');
 const date_indicator = require('#/data/date-indicator');
-const title_desc = require('#/data/desc/title-desc.json');
+const title_desc = require('#/data/desc/titles.json');
 const recruit_flags = require('#/data/event/recruit-flags');
 const {
   get_celebration,

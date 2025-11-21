@@ -1,30 +1,119 @@
 # Changelog
-# [EraUma v2.151 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.151)
+## [EraUma v2.172 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.172)
+
+_2025/11/20_
+
+适配 [EraElectron v4.4.0 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.4.0) 与 [ere.app v1.2.6 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.2.6) 及以上版本
+
+### Fixed
+
+* 修复了加载存档时因向前兼容导致的错误
+
+## [EraUma v2.171 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.171)
+
+_2025/11/20_
+
+适配 [EraElectron v4.4.0 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.4.0) 与 [ere.app v1.2.6 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.2.6) 及以上版本
+
+### Fixed
+
+* 修复了无声铃鹿招募事件链中的错误
+* 修复了卓芙育成时间【仅此、唯一】会导致爱慕值降低的错误
+* 修复了随机小事件【商店街大甩卖】反复触发的错误
+* 修复了未满足任何角色扮演条件开始游戏时无法自定义角色的错误
+
+## [EraUma v2.17 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.17)
+
+_2025/11/18_
+
+适配 [EraElectron v4.4.0 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.4.0) 与 [ere.app v1.2.6 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.2.6) 及以上版本
+
+### Added
+
+* 为支持多口上写作，实装以下角色的第一口上招募
+  * 无声铃鹿
+* 追加实装了以下随机小事件
+  * 【商店街大甩卖】
+
+### Changed
+
+* 优化了制作鸣谢的演出效果
+
+### Fixed
+
+* 修复了初次颜射经历、初次饮爱液经历和初次潮吹经历的无自觉经历版本的计算错误
+* 修复了鲁铎象征育成目标未正确在赛事注册界面显示以及自动注册的错误
+
+## [EraUma v2.16 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.16)
+
+_2025/10/10_
+
+适配 [EraElectron v4.3.2 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.3.2) 与 [ere.app v1.2.4 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.2.4) 及以上版本
+
+### Added
+
+* 新增道具【现实透孔仪】
+  * 当遇到和角色的关系无论如何都完全无法推进到下一阶段的问题时，可以使用该道具尝试修复错误
+  * 开始新游戏或加载旧档时，该道具将自动出现在持有道具中
+* 新增角色更新机制
+  * 在角色口上与基础数据更新后，加载存档时会自动将已添加角色的部分特性更新到更新后的版本
+    * 调教相关特性可能会发生回调
+
+### Changed
+
+* 母亲名+年份命名的孩子在使用自己的名字+年份给孩子命名时将去除自己姓名中的空白字符或数字后缀
+* 现在当训练员办公室、理事长办公室、保健室、访客接待室的人员有特殊事件时，这些地点的进入按钮、人员的外出约会按钮也会显示为红色
+* 优化部分剧情演出表现
+
+### Fixed
+
+* 修复了玩家自身也可以照看育成对象的错误（已照看状态不受影响）
+* 现在一次训练至少增加 50 点训练项目经验（即使训练加成为负数）
+* 修复了第一红宝石招募事件错过后无法继续招募的错误
+* 修复了带玩具比赛替换玩具时旧玩具消失的错误
+
+## [EraUma v2.152 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.152)
+
+_2025/9/27_
+
+适配 [EraElectron v4.3.0 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.3.0) 与 [ere.app v1.2.3 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.2.3) 及以上版本
+
+### Changed
+
+* 调整了招募界面角色育成情报预览中育成目标的显示效果
+
+### Fixed
+
+* 修复了孕奴不会重置经期、危险期和发情期的错误
+* 修复了吹波糖的育成目标错误
+* 修复了不会进入地下室的错误
+
+## [EraUma v2.151 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.151)
 
 _2025/9/21_
 
 适配 [EraElectron v4.3.0 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.3.0) 与 [ere.app v1.2.3 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.2.3) 及以上版本
 
-## Fixed
+### Fixed
 
 * 技能【辛苦的马生在等我】类别更改为「控制」以正常触发
 
-# [EraUma v2.15 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.15)
+## [EraUma v2.15 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.15)
 
 _2025/9/21_
 
 适配 [EraElectron v4.3.0 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.3.0) 与 [ere.app v1.2.3 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.2.3) 及以上版本
 
-## Added
+### Added
 
 * 为支持多口上写作，实装以下角色的第一口上招募
   * 目白光明
 
-## Changed
+### Changed
 
 * 现在玩家佩戴的称号也会在界面顶部显示
 
-## Fixed
+### Fixed
 
 * 游戏文本描述修复
 
@@ -40,7 +129,7 @@ _2025/9/16_
 
 * 修复了【强化青汁】和【提神剂】不能恢复全部体力和精力的错误
 
-# [EraUma v2.14 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.14)
+## [EraUma v2.14 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.14)
 
 _2025/9/15_
 
@@ -48,11 +137,11 @@ _2025/9/15_
 
 资源包版本：20250915
 
-## Changed
+### Changed
 
 * 取消了满足强制BE条件时的自动存档，以允许部分因关键赛事失败而导致的强制BE回档到比赛之前
 
-## Fixed
+### Fixed
 
 * 修复了因口上脚本问题导致无法扮演里见光钻开始游戏的错误
 

@@ -136,6 +136,7 @@ module.exports = class extends Love52UntilGirlFriend {
       me.get_colored_name(),
       '。',
     ]);
+    era.drawLine();
     await urara.print_and_wait([
       '而在熟悉的芳香中缓缓醒来的 ',
       me.get_colored_name(),
@@ -146,7 +147,7 @@ module.exports = class extends Love52UntilGirlFriend {
     await era.input();
 
     await urara.say_and_wait('诶嘿嘿～还是让训练员看到了啊，对不起哦训练员！');
-    await urara.print_and_wait([
+    await era.printAndWait([
       '被 ',
       me.get_colored_name(),
       ' 发现的乌拉拉，就像恶作剧的孩子般露出了被揭穿的羞涩笑意，此刻爬上',
@@ -156,7 +157,7 @@ module.exports = class extends Love52UntilGirlFriend {
     await urara.say_and_wait(
       '虽然没办法好好描述，果然这样最适合现在我对训练员的心情哦！',
     );
-    await urara.print_and_wait([
+    await era.printAndWait([
       '面对面坐在 ',
       me.get_colored_name(),
       ' 的大腿上，还有些笨拙的小恋人向 ',
@@ -167,12 +168,12 @@ module.exports = class extends Love52UntilGirlFriend {
       '想对训练员亲口说的事……虽然现在没办法好好表达，但我以后一定可以做到的！',
     );
     await urara.say_and_wait('所以训练员，再等等我、再等等乌拉拉吧！');
-    await urara.print_and_wait([
+    await era.printAndWait([
       '努力的向 ',
       me.get_colored_name(),
       ' 倾诉着有感而发的话语，尚未完全长大的女孩倾诉着还无法完整形容的爱意。',
     ]);
-    await urara.print_and_wait([
+    await era.printAndWait([
       '但就算没能将一切都好好表达，乌拉拉想要传递出的感情，此刻的 ',
       me.get_colored_name(),
       ' 也早已了然于心。',
@@ -181,14 +182,14 @@ module.exports = class extends Love52UntilGirlFriend {
     era.printButton('「我明白的，正因如此我也期待着乌拉拉。」', 1);
     await era.input();
 
-    await urara.print_and_wait([
+    await era.printAndWait([
       '主动牵起',
       urara.get_teen_sex_title(),
       '的手，直视着那对湿润的樱瞳，',
       me.get_colored_name(),
       ' 也不假思索的对乌拉拉给予了「大人的承诺」。',
     ]);
-    await urara.print_and_wait([
+    await era.printAndWait([
       '今天彼此，以及从今往后的彼此，或许现在才刚刚开始。',
     ]);
 
@@ -200,19 +201,19 @@ module.exports = class extends Love52UntilGirlFriend {
           era.get('love:61')) >= 75;
     if (love_30 || love_61) {
       era.println();
-      await urara.print_and_wait([
+      await era.printAndWait([
         '只是，在训练员',
         me.get_adult_sex_title(),
         '移开视线的瞬间，小',
         urara.get_uma_sex_title(),
         '纯洁的笑容中闪过了一丝难以察觉的暗色。',
       ]);
-      await urara.print_and_wait([
+      await era.printAndWait([
         '凝视着最喜欢的人的侧脸，',
         urara.get_teen_sex_title(),
         '的脑海中却在最不合时宜的时刻浮现出了最不合时宜的景象。',
       ]);
-      await urara.print_and_wait([
+      await era.printAndWait([
         '那是小小的',
         urara.sex,
         '最不愿记起，但在每次被揭开时就会被揪紧胸口、缠住双腿，只得目送他人远去时的记忆。',

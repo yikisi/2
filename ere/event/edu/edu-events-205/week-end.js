@@ -403,8 +403,8 @@ module.exports = async (vp, me, event_object) => {
         `此时此地，${me.get_couple_title()} 之间终于仅有一个愿望。`,
       );
       era.println();
-      sys_love_uma(205, 5) && (await era.waitAnyKey());
       era.set('cflag:205:招募状态', recruit_flags.yes);
+      sys_love_uma(205, 5) && (await era.waitAnyKey());
       if (sys_check_race_ready(205)) {
         sys_reg_race(205).curr = {
           race: race_enum.prix_lat,

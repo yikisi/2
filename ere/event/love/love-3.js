@@ -16,7 +16,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const { get_random_entry } = require('#/utils/list-utils');
 
 const { buff_colors } = require('#/data/color-const');
-const talent_desc = require('#/data/desc/talent-desc.json');
+const talent_desc = require('#/data/desc/talents.json');
 const {
   get_skill_list,
   part_enum,

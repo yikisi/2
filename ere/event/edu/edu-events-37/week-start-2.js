@@ -11,7 +11,7 @@ const { say_by_passer_by_and_wait } = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { buff_colors } = require('#/data/color-const');
-const status_desc = require('#/data/desc/status-desc.json');
+const status_desc = require('#/data/desc/status.json');
 const { location_enum } = require('#/data/locations');
 const { race_enum } = require('#/data/race/race-const');
 

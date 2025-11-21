@@ -35,6 +35,7 @@ class EventMarks {
     return this.get(...hook) > 0;
   }
 
+  /*** @returns {number} */
   count() {
     return (
       Object.entries(this.#obj)

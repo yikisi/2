@@ -1,3 +1,4 @@
+// GENERATED START
 const { RaceLane, RaceSlope } = require('#/data/race/model/race-info');
 
 module.exports = {
@@ -1478,3 +1479,4 @@ module.exports = {
     97105: [],
   },
 };
+// GENERATED END

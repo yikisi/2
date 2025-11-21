@@ -39,7 +39,7 @@ const {
   el_danger_color,
 } = require('#/data/color-const');
 const { attr_colors } = require('#/data/const.json');
-const title_desc = require('#/data/desc/title-desc.json');
+const title_desc = require('#/data/desc/titles.json');
 const { sex_title } = require('#/data/ero/status-const');
 const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
@@ -99,8 +99,7 @@ async function print_rec_page() {
           content: [
             get_chara_talk(cur_recruit).get_colored_name(),
             ' 似乎不在训练场……',
-            { isBr: true },
-            { isBr: true },
+            { isBr: 2 },
           ],
           type: 'text',
         });
@@ -113,8 +112,7 @@ async function print_rec_page() {
             '不会同意 ',
             me.get_colored_name(),
             ' 的招募了……',
-            { isBr: true },
-            { isBr: true },
+            { isBr: 2 },
           ],
           type: 'text',
         });
@@ -126,8 +124,7 @@ async function print_rec_page() {
             '，是谁吸引了 ',
             me.get_colored_name(),
             ' 的注意力呢？',
-            { isBr: true },
-            { isBr: true },
+            { isBr: 2 },
           ],
           type: 'text',
         });
@@ -209,17 +206,19 @@ async function print_rec_page() {
     if (ret === 999) {
       // 选择直接离开的时候触发需要选择离开才触发的招募事件
       // 队伍已经满了的情况下是不会触发事件的
-      event_chara_list = filter_chara(
-        'cflag',
-        '招募状态',
-        recruit_flags.success_on_leave,
-      ).filter((chara_id) => today_list.includes(chara_id) && !flag_limit);
-      if (event_chara_list.length) {
-        era.drawLine();
-        flag_leave = await run_custom_rec(
-          get_random_entry(event_chara_list),
-          event_hooks.recruit_end,
-        );
+      if (era.get('flag:物色对象') === 0) {
+        event_chara_list = filter_chara(
+          'cflag',
+          '招募状态',
+          recruit_flags.success_on_leave,
+        ).filter((cid) => today_list.includes(cid) && !flag_limit);
+        if (event_chara_list.length > 0) {
+          era.drawLine();
+          flag_leave = await run_custom_rec(
+            get_random_entry(event_chara_list),
+            event_hooks.recruit_end,
+          );
+        }
       }
       flag_recruit = false;
     } else if (ret > 1000 && ret <= 2000) {
@@ -492,11 +491,14 @@ async function print_rec_page() {
             .filter(({ content }) => content.endsWith('✘'))
             .map((e) => {
               const g1 = e.content.indexOf('G1') !== -1;
-              const champion = e.content.indexOf('1着') !== -1;
+              const champion =
+                e.content.indexOf('1着') !== -1 ||
+                e.content.indexOf('一着') !== -1;
               return {
                 config: {
                   color: champion ? el_danger_color : undefined,
-                  fontWeight: g1 || champion ? 'bold' : 'normal',
+                  fontStyle: g1 ? 'italic' : undefined,
+                  fontWeight: g1 && champion ? 'bold' : undefined,
                 },
                 content: e.content.substring(0, e.content.length - 2),
                 type: 'text',

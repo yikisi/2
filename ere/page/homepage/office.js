@@ -323,7 +323,7 @@ module.exports = async (cid, next_cb, flags) => {
         },
       },
     );
-    if (era.get(`cflag:${cid}:可再次育成`) > 0) {
+    if (cid > 0 && era.get(`cflag:${cid}:可再次育成`) > 0) {
       group.push({
         config: {
           disabled:
@@ -488,7 +488,10 @@ module.exports = async (cid, next_cb, flags) => {
         config: {
           buttonType:
             event_marks.check(event_hooks.back_school) ||
-            my_event_marks.check(event_hooks.school_trainer_office)
+            my_event_marks.check(event_hooks.school_trainer_office) ||
+            loc_characters
+              .get(location_enum.trainer)
+              .findIndex((nid) => EventMarks.get(nid).count() > 0) !== -1
               ? 'danger'
               : 'warning',
           disabled:
@@ -513,7 +516,11 @@ module.exports = async (cid, next_cb, flags) => {
             event_marks.check(
               event_hooks.school_clinic,
               event_hooks.back_school,
-            ) || my_event_marks.check(event_hooks.school_clinic)
+            ) ||
+            my_event_marks.check(event_hooks.school_clinic) ||
+            loc_characters
+              .get(location_enum.clinic)
+              .findIndex((nid) => EventMarks.get(nid).count() > 0) !== -1
               ? 'danger'
               : 'warning',
           disabled:
@@ -637,7 +644,10 @@ module.exports = async (cid, next_cb, flags) => {
         config: {
           buttonType:
             event_marks.check(event_hooks.back_school) ||
-            my_event_marks.check(event_hooks.school_chairman)
+            my_event_marks.check(event_hooks.school_chairman) ||
+            loc_characters
+              .get(location_enum.chairman)
+              .findIndex((nid) => EventMarks.get(nid).count() > 0) !== -1
               ? 'danger'
               : 'warning',
           disabled:
@@ -663,7 +673,10 @@ module.exports = async (cid, next_cb, flags) => {
         config: {
           buttonType:
             event_marks.check(event_hooks.back_school) ||
-            my_event_marks.check(event_hooks.school_visitors)
+            my_event_marks.check(event_hooks.school_visitors) ||
+            loc_characters
+              .get(location_enum.visitor)
+              .findIndex((nid) => EventMarks.get(nid).count() > 0) !== -1
               ? 'danger'
               : 'warning',
           disabled:
