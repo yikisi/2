@@ -32,6 +32,7 @@ const kojo = require('#/event/daily/daily-common.kojo');
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
 const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
 const select_action_in_station = require('#/event/daily/snippets/select-action-in-station');
+const generate_dictionary = require('#/event/snippets/generate-dictionary');
 const print_event_name = require('#/event/snippets/print-event-name');
 const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
@@ -39,7 +40,6 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
-const { get_chara_color } = require('#/data/chara-colors');
 const { buff_colors, money_color } = require('#/data/color-const');
 const event_hooks = require('#/data/event/event-hooks');
 const { location_name } = require('#/data/locations');
@@ -55,18 +55,7 @@ class CustomizedDaily {
   }
 
   get #dict() {
-    const dict = { id: this.id };
-    dict['角色名'] = era.get(`callname:${this.id}:-2`);
-    dict['代表色'] = get_chara_color(this.id);
-    dict['玩家名'] = era.get('callname:0:-2');
-    if (era.get(`cflag:${this.id}:性别`) === 1) {
-      dict['马娘'] = '马郎';
-      dict['她'] = '他';
-    } else {
-      dict['马娘'] = '马娘';
-      dict['她'] = '她';
-    }
-    return dict;
+    return generate_dictionary(this.id);
   }
 
   get_this() {
