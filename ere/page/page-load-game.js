@@ -550,6 +550,7 @@ module.exports = async () => {
                   EventMarks.get(0).sub(event_hooks.out_shopping);
                 }
               }
+              era.set('cstr:21:头像T', '玉藻');
             }
             if (version < era.get('gamebase').version) {
               era.getAddedCharacters().forEach((cid) => {

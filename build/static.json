@@ -681,6 +681,11 @@
         "k": "cstr12",
         "t": "string"
       },
+      "13": {
+        "n": "头像t",
+        "k": "cstr13",
+        "t": "string"
+      },
       "15": {
         "n": "出生经历",
         "k": "cstr15",
@@ -17305,6 +17310,7 @@
       "头像": 10,
       "称号": 11,
       "决胜服": 12,
+      "头像t": 13,
       "出生经历": 15,
       "初吻经历": 20,
       "无自觉初吻经历": 21,
@@ -20136,6 +20142,176 @@
     },
     "玉藻_裸_孕": {
       "path": "res/ero/1021/body/孕肚.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "玉藻2_头_发": {
+      "path": "res/ero/1021-2/head/头发.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "玉藻2_头_汗": {
+      "path": "res/ero/1021-2/head/脸汗.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "玉藻2_头_泪": {
+      "path": "res/ero/1021-2/head/眼泪.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "玉藻2_头": {
+      "path": "res/ero/1021-2/head/脸底.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "玉藻2_头_腮红": {
+      "path": "res/ero/1021-2/head/腮红.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "玉藻2_脸_一般": {
+      "path": "res/ero/1021-2/head/face/一般表情.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "玉藻2_脸_兴奋": {
+      "path": "res/ero/1021-2/head/face/兴奋.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "玉藻2_脸_嫌恶": {
+      "path": "res/ero/1021-2/head/face/嫌恶.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "玉藻2_脸_害羞": {
+      "path": "res/ero/1021-2/head/face/害羞.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "玉藻2_脸_痛苦": {
+      "path": "res/ero/1021-2/head/face/痛苦.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "玉藻2_脸_睡": {
+      "path": "res/ero/1021-2/head/face/睡颜.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "玉藻2_脸_高潮": {
+      "path": "res/ero/1021-2/head/face/高潮.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "玉藻2_裸": {
+      "path": "res/ero/1021-2/body/无毛裸体.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "玉藻2_裸_汗": {
+      "path": "res/ero/1021-2/body/汗液层.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "玉藻2_裸_腋毛": {
+      "path": "res/ero/1021-2/body/腋毛.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "玉藻2_裸_阴毛": {
+      "path": "res/ero/1021-2/body/阴毛.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "玉藻2_裸_孕": {
+      "path": "res/ero/1021-2/body/孕肚差分.png",
       "x": 0,
       "y": 0,
       "width": 720,

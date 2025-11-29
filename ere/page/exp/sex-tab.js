@@ -22,6 +22,7 @@ const {
   unknown_info,
 } = require('#/data/exp-const');
 const { get_breast_cup, get_talent, get_xp } = require('#/data/info-generator');
+const { sys_get_ero_image } = require('#/system/ero/sys-calc-ero-image');
 
 const page_name = '性爱情况';
 
@@ -376,7 +377,61 @@ module.exports = {
         { content: unknown_info(chara.id), type: 'text' },
       );
     }
+    const img_name = era.get(`cstr:${chara.id}:头像`);
+    const img_t = era.get(`cstr:${chara.id}:头像T`);
+    if (
+      !!img_t &&
+      era.get(`exp:${chara.id}:性爱次数`) > era.get(`exp:${chara.id}:睡奸次数`)
+    ) {
+      sex_info_list.push(
+        { content: [{ isBr: true }], type: 'text' },
+        {
+          accelerator: 100,
+          content: `更改调教立绘（当前：第 ${img_t.substring(img_name.length) || '1'} 套）`,
+          type: 'button',
+        },
+      );
+    }
     return {
+      /** @param {number} cmd */
+      async handle(cmd) {
+        if (cmd === 100) {
+          let option = 2;
+          const get_name = (i) => `${img_name}${i > 1 ? i : ''}`;
+          while (era.checkImage(`${get_name(option + 1)}_头`)) {
+            option++;
+          }
+          era.setHorizontalAlign('space-evenly');
+          era.setAlign('center');
+          era.printInColRows(
+            ...new Array(option).fill(void 0).map((_, i) => {
+              const names = sys_get_ero_image(chara.id, get_name(i + 1), false);
+              console.log(i, names);
+              return {
+                columns: [
+                  {
+                    names,
+                    type: 'image.whole',
+                  },
+                  {
+                    accelerator: 100 + i,
+                    content: `第 ${i + 1} 套`,
+                    type: 'button',
+                  },
+                ],
+                config: { width: 4 },
+              };
+            }),
+          );
+          era.setAlign('left');
+          era.setHorizontalAlign('start');
+          const ret = (await era.input()) - 100;
+          era.set(
+            `cstr:${chara.id}:头像T`,
+            `${img_name}${ret > 0 ? ret + 1 : ''}`,
+          );
+        }
+      },
       print() {
         return sex_info_list;
       },
