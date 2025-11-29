@@ -41,6 +41,8 @@ class MyEduMarks extends EduEventMarks {
   orgy;
   // 商店街大甩卖
   big_sale;
+  // 路见不平
+  justice;
 
   constructor() {
     super(0);

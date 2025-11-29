@@ -31,6 +31,7 @@ const {
   sys_reg_race,
 } = require('#/system/sys-calc-base-cflag');
 const {
+  sys_get_callname,
   sys_get_colored_callname,
   sys_like_chara,
   sys_love_uma,
@@ -67,7 +68,9 @@ module.exports = class extends StrangeDayEvents {
   get dict() {
     return {
       YOU: get('callname:0:-1'),
-      UMA: get('flag:角色性别') === 1 ? '马郎' : '马娘',
+      ...(get('flag:角色性别') === 1
+        ? { UMA: '马郎', SHE: '他' }
+        : { UMA: '马娘', SHE: '她' }),
     };
   }
 
@@ -867,5 +870,35 @@ module.exports = class extends StrangeDayEvents {
     }
     new MyEduMarks().big_sale = get_random_value(10, 15);
     return true;
+  }
+
+  /** @param {CharaTalk} me */
+  async justice(me) {
+    const dict = this.dict;
+    dict.T_SEX = get('cflag:301:性别') === 1 ? '秘书' : '小姐';
+    dict.TOKINO = sys_get_callname(0, 301);
+    dict.Y_A_TITLE = me.adult_sex_title;
+    await print_event_name('路见不平', me);
+    switch ((await kojo['JUSTICE'](dict))[0]) {
+      case 1:
+        println();
+        add('flag:当前马币', 100);
+        await printAndWait('获得了 100 马币！');
+        break;
+      case 2:
+        println();
+        add('item:马跳Z', 1);
+        await printAndWait('获得了【马跳Z】！');
+        break;
+      case 3:
+        add('maxbase:0:精力', 100);
+        if (
+          all_reward_in_event(0, {
+            base: JSON.parse('{"精力":200}'),
+          })
+        ) {
+          await waitAnyKey();
+        }
+    }
   }
 };

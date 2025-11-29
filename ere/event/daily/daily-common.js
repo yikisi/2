@@ -55,7 +55,7 @@ class CustomizedDaily {
   }
 
   get #dict() {
-    return generate_dictionary(this.id);
+    return generate_dictionary(this.id, { uma: true });
   }
 
   get_this() {
