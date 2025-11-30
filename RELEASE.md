@@ -15,4 +15,6 @@ _incoming_
 
 ## Changed
 
+* 现在角色有特殊事件时的红名指示更加精确了
+
 ## Fixed
