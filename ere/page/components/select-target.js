@@ -21,13 +21,11 @@ const {
 } = require('#/data/color-const');
 const {
   attr_background_colors,
-  growth_colors,
   love_colors,
   relation_colors,
 } = require('#/data/const.json');
 const {
-  growth_stage,
-  human_growth_stage,
+  get_growth,
   human_sex_title,
   pregnant_stage_enum,
   sex_title,
@@ -41,6 +39,7 @@ const {
   get_relation_info,
   get_train_time,
 } = require('#/data/info-generator');
+const { get_growth_color } = require('#/data/other-const');
 const RaceHistory = require('#/data/race/model/race-history');
 const { motivation_names, out_of_train_type } = require('#/data/train-const');
 
@@ -129,9 +128,8 @@ function get_suffix(cid, type) {
     const relation = get_relation_info(cid)[0];
     const love = get_love_info(cid)[0];
     const race = era.get(`cflag:${cid}:种族`);
-    const growth = (race ? growth_stage : human_growth_stage)[
-      Math.min(era.get(`cflag:${cid}:成长阶段`), 2)
-    ];
+    const g_level = era.get(`cflag:${cid}:成长阶段`);
+    const growth = get_growth(g_level, race);
     const sex = era.get(`cflag:${cid}:性别`);
     const palace = era.get(`cflag:${cid}:殿堂`);
     const in_train = era.get(`cflag:${cid}:育成回合计时`) < 3 * 48;
@@ -142,7 +140,7 @@ function get_suffix(cid, type) {
         type: 'text',
       },
       {
-        config: { align: 'center', color: growth_colors[growth], width: 2 },
+        config: { align: 'center', color: get_growth_color(g_level), width: 2 },
         content: growth,
         type: 'text',
       },

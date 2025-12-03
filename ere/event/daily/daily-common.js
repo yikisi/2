@@ -215,9 +215,7 @@ class CustomizedDaily {
   async end_talk(hentai) {}
 
   good_morning() {
-    const dict = this.#dict;
-    dict['骏川'] = era.get('callname:301:-2');
-    kojo['回合开始'](dict);
+    kojo['回合开始']({ ...this.#dict, TOKINO: era.get('callname:301:-2') });
   }
 
   /**
@@ -444,8 +442,8 @@ class CustomizedDaily {
    * @returns {Promise}
    */
   async out_river(hook, extra_flag) {
-    const chara = get_chara_talk(this.id),
-      me = get_chara_talk(0);
+    const chara = get_chara_talk(this.id);
+    const me = get_chara_talk(0);
     hook.arg = (await select_action_around_river()) > 0;
     if (hook.arg) {
       if (

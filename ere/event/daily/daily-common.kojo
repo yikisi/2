@@ -18,7 +18,7 @@
     - if: "!(era.get('cflag:301:育成回合计时') < 3 * 48)"
       random: true
       lines:
-        - %CHARA% 正在接待处向 %骏川% 查询着什么。
+        - %CHARA% 正在接待处向 %TOKINO% 查询着什么。
     # @author 幽白書
     - if: era.get(`talent:${d.id}:情感活动`) === 1
       random: true

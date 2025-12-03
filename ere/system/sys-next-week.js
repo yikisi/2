@@ -39,7 +39,6 @@ const { get_random_entry, sort_list } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { money_color } = require('#/data/color-const');
-const { trainer_salary } = require('#/data/const.json');
 const CharaInmon = require('#/data/ero/chara-inmon');
 const { slavery_enum } = require('#/data/ero/mark-const');
 const {
@@ -60,10 +59,10 @@ const recruit_flags = require('#/data/event/recruit-flags');
 const {
   get_breast_cup,
   get_talent_bust_size,
-  get_trainer_title,
+  get_trainer_level,
 } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
-const { max_chara_id } = require('#/data/other-const');
+const { get_trainer_salary, max_chara_id } = require('#/data/other-const');
 const { pressure_border } = require('#/data/train-const');
 
 async function sys_next_week() {
@@ -221,7 +220,7 @@ async function sys_next_week() {
   let cur_week = era.get('flag:当前周');
   cur_week++;
   const cur_round = era.add('flag:当前回合数', 1);
-  const base_salary = trainer_salary[get_trainer_title().substring(0, 2)];
+  const base_salary = get_trainer_salary(get_trainer_level());
   const salary = !your_race * base_salary * (1 + (cur_month === 12));
   const billings = sys_get_billings()
     .map((e, i) => {

@@ -3,7 +3,7 @@ const era = require('#/era-electron');
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
 const { get_chara_color } = require('#/data/chara-colors');
-const { get_trainer_title } = require('#/data/info-generator');
+const { get_trainer_prefix } = require('#/data/info-generator');
 
 /**
  * @param {number} cid
@@ -36,7 +36,7 @@ function generate_dictionary(
     ret.TEEN = sex ? '少年' : '少女';
   }
   if (options.title) {
-    ret.TITLE = get_trainer_title().substring(0, 2);
+    ret.TITLE = get_trainer_prefix();
   }
   if (options.uma) {
     ret.UMA = sex ? '马郎' : '马娘';

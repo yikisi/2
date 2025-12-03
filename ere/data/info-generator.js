@@ -242,6 +242,11 @@ function get_trainer_level() {
   return level;
 }
 
+function get_trainer_prefix() {
+  const level = get_trainer_level();
+  return level < 0 ? '失格' : level_and_desc.honour.mark[level];
+}
+
 module.exports = {
   /** @param {number} adaptability */
   get_adaptability_rank(adaptability) {
@@ -654,10 +659,9 @@ module.exports = {
     } 月 第 ${(time % 4) + 1} 周`;
   },
   get_trainer_level,
+  get_trainer_prefix,
   get_trainer_title() {
-    const level = get_trainer_level();
-    let title_level = level < 0 ? '失格' : level_and_desc.honour.mark[level];
-    return `${title_level}${title_desc[era.get('flag:惩戒力度')]}`;
+    return `${get_trainer_prefix()}${title_desc[era.get('flag:惩戒力度')]}`;
   },
   get_trainer_train_buff(cid) {
     const relation = cid > 0 ? era.get(`relation:${cid}:0`) : 225;

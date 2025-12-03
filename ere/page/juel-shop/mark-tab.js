@@ -23,7 +23,6 @@ const get_gradient_color = require('#/utils/gradient-color');
 
 const { attr_change_colors, buff_colors } = require('#/data/color-const');
 const { mark_colors } = require('#/data/const.json');
-const { trainer_salary } = require('#/data/const.json');
 const CharaInmon = require('#/data/ero/chara-inmon');
 const InmonPlugin = require('#/data/ero/inmon-plugin');
 const {
@@ -39,8 +38,9 @@ const {
   plugin_enum,
 } = require('#/data/ero/plugin/plugin-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
-const { get_trainer_title } = require('#/data/info-generator');
+const { get_trainer_level } = require('#/data/info-generator');
 const LoveLimitStatus = require('#/data/love-limit-status');
+const { get_trainer_salary } = require('#/data/other-const');
 
 /**
  * @param {{a:number,m:number,p:InmonPlugin}} plugin_with_acc
@@ -712,7 +712,7 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
           case slavery_enum.worker:
             sys_get_billings().push({
               creditor: chara.id,
-              repay: trainer_salary[get_trainer_title().substring(0, 2)] / 4,
+              repay: get_trainer_salary(get_trainer_level()) / 4,
               timer: -1,
             });
             break;

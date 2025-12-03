@@ -18,7 +18,7 @@ const {
   love_colors,
   relation_colors,
 } = require('#/data/const.json');
-const { growth_stage } = require('#/data/ero/status-const');
+const { get_growth } = require('#/data/ero/status-const');
 const {
   get_love_info,
   get_relation_info,
@@ -118,7 +118,7 @@ function cur_chara_component(chara_id, type, location_npc) {
     if (out_of_train) {
       name_columns.push(` [${out_of_train_type[out_of_train - 1]}]`);
     }
-    name_columns.push(` (${growth_stage[Math.min(growth, 2)]})`);
+    name_columns.push(` (${get_growth(growth, 1)})`);
     if (era.get('flag:当前位置') !== location_enum.basement) {
       if (in_train) {
         name_columns.push(

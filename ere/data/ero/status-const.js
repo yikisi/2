@@ -108,6 +108,9 @@ const trained_talent_names = {};
   },
 ].forEach((e) => (trained_talent_names[e[2]] = e));
 
+const u_g_stage = ['幼年期', '成长期', '本格期'];
+const h_g_stage = ['幼年', '少年', '青年'];
+
 module.exports = {
   breast_size: {
     AA: '可爱',
@@ -130,6 +133,18 @@ module.exports = {
     '面对强敌时比赛能力会上升，但是没有强敌的比赛能力会稍微下降',
   ],
   child_title: { 0: '女儿', 1: '儿子', 10: '女儿？' },
+  /**
+   * @param {number} growth
+   * @param {number} race
+   * @returns {string}
+   */
+  get_growth(growth, race) {
+    const arr = race > 0 ? u_g_stage : h_g_stage;
+    if (growth > 2) {
+      return arr[2];
+    }
+    return arr[growth];
+  },
   growth_stage: ['幼年期', '成长期', '本格期'],
   hair_desc: [
     '稀疏的绒毛',
@@ -138,7 +153,6 @@ module.exports = {
     '杂乱的曲毛',
     '刚硬的毛发',
   ],
-  human_growth_stage: ['幼年', '少年', '青年'],
   human_sex_title: {
     0: '女性',
     1: '男性',

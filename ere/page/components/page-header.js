@@ -16,7 +16,7 @@ const { get_abbr_number } = require('#/utils/value-utils');
 
 const CharaTitles = require('#/data/chara-titles');
 const { celebration_color, money_color } = require('#/data/color-const');
-const { attr_background_colors, trainer_colors } = require('#/data/const.json');
+const { attr_background_colors } = require('#/data/const.json');
 const date_indicator = require('#/data/date-indicator');
 const title_desc = require('#/data/desc/titles.json');
 const recruit_flags = require('#/data/event/recruit-flags');
@@ -27,6 +27,7 @@ const {
   get_trainer_train_buff,
 } = require('#/data/info-generator');
 const { location_name } = require('#/data/locations');
+const { get_trainer_color } = require('#/data/other-const');
 const { race_infos } = require('#/data/race/race-const');
 
 function get_progress_bar() {
@@ -91,7 +92,7 @@ function page_header(enable_race_info) {
       })
       .filter((e) => e.week === cur_rounds);
     const title_level = get_trainer_title();
-    const trainer_title_color = trainer_colors[title_level.substring(0, 2)];
+    const trainer_title_color = get_trainer_color(get_trainer_level());
     const trainer_buff = get_trainer_train_buff();
     const money_buff = era.get('global:金钱加成');
     const rec_trainers = [304, 306]

@@ -25,7 +25,6 @@ const { action_type_enum } = require('#/data/basement-const');
 const { get_chara_color } = require('#/data/chara-colors');
 const CharaTitles = require('#/data/chara-titles');
 const { adaptability_colors } = require('#/data/color-const');
-const { trainer_salary } = require('#/data/const.json');
 const CharaInmon = require('#/data/ero/chara-inmon');
 const basement_owners = require('#/data/event/basement-owners');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
@@ -40,10 +39,14 @@ const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
 const {
   get_filtered_talents,
-  get_trainer_title,
+  get_trainer_level,
 } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
-const { first_child_id, max_chara_id } = require('#/data/other-const');
+const {
+  first_child_id,
+  get_trainer_salary,
+  max_chara_id,
+} = require('#/data/other-const');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
 const { attr_names } = require('#/data/train-const');
@@ -270,7 +273,7 @@ module.exports = async () => {
                 const billings = sys_get_billings(),
                   cur_month = era.get('flag:当前月'),
                   salary =
-                    trainer_salary[get_trainer_title().substring(0, 2)] *
+                    get_trainer_salary(get_trainer_level()) *
                     (1 + (cur_month === 12));
                 era.set('flag:18', 0);
                 billings.push({
