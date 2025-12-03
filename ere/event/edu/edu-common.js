@@ -22,6 +22,9 @@ const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
 const ICustomizedEdu = require('#/event/edu/common/edu-interface');
 const print_fail_info_in_train = require('#/event/edu/common/print-fail-info-in-train');
+const kojo = require('#/event/edu/edu-common.kojo');
+const { check_sub_slavery } = require('#/event/snippets/check-slavery');
+const generate_dictionary = require('#/event/snippets/generate-dictionary');
 const print_event_name = require('#/event/snippets/print-event-name');
 const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
@@ -47,6 +50,10 @@ class CustomizedEdu extends ICustomizedEdu {
   /** @type {function} */
   static load_game;
   static common_event_count = 0;
+
+  get #dict() {
+    return generate_dictionary(this.id, { uma: true });
+  }
 
   /**
    * @author 雞雞
@@ -542,58 +549,16 @@ class CustomizedEdu extends ICustomizedEdu {
   // eslint-disable-next-line no-unused-vars
   async race_start(chara, me, callname, hook, extra_flag) {
     await print_event_name('竞赛之前', chara);
-    const { pseudo } = extra_flag;
-    if (pseudo.race.conditionParams.item === 1) {
-      await era.printAndWait([
-        me.get_colored_name(),
-        ' 亲手给 ',
-        chara.get_colored_name(),
-        ' 装上了一些「特殊装备」。',
-      ]);
-      if (
-        era.get(`love:${this.id}`) >= 50 &&
-        get_sex_acceptable(this.id) >= 0
-      ) {
-        await era.printAndWait([
-          chara.get_colored_name(),
-          ' 娇俏地白了 ',
-          me.get_colored_name(),
-          ' 一眼，将你们的小秘密隐藏在衣服之下，转身向起跑线走去……',
-        ]);
-      } else {
-        const meek =
-          era.get(`mark:${this.id}:顺从`) - era.get(`mark:${this.id}:反抗`);
-        if (era.get(`mark:${this.id}:淫纹`) >= meek) {
-          await era.printAndWait([
-            chara.get_colored_name(),
-            ' 顺服地穿好衣服，小腹处透衣的粉光辉映着媚眼中的神光……',
-          ]);
-        } else if (
-          era.get(`mark:${this.id}:欢愉`) -
-            Math.max(
-              era.get(`mark:${this.id}:苦痛`),
-              era.get(`mark:${this.id}:羞耻`),
-            ) >=
-          meek
-        ) {
-          await era.printAndWait([
-            chara.get_colored_name(),
-            ' 慢慢穿好衣服，以更好地将玩具固定在自己的身上……',
-          ]);
-        } else {
-          await era.printAndWait([
-            chara.get_colored_name(),
-            ' 偷偷抬眼看了一下 ',
-            me.get_colored_name(),
-            ' 的表情，随后低下头去，默默忍受着刺激……',
-          ]);
-        }
-      }
-    } else {
-      await me.say_and_wait(
-        Math.random() < 0.5 ? '尽全力就好！' : '跑出自己的气势来！',
-      );
+    const dict = this.#dict;
+    if (extra_flag.pseudo.race.conditionParams.item === 1) {
+      dict.item = check_sub_slavery(this.id, get_sex_acceptable(this.id));
+    } else if (
+      era.get('flag:惩戒力度') >= 2 &&
+      (dict.do_sex = Math.random() < 0.5)
+    ) {
+      extra_flag.motivation_change = 1;
     }
+    await kojo['赛前'](dict);
   }
 
   /**

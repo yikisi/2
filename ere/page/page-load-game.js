@@ -32,6 +32,7 @@ const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const LoveEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-132');
 const LunaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-17');
 const event_hooks = require('#/data/event/event-hooks');
+const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
 const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks-32');
 const BryneLifeMarks = require('#/data/event/life-event-marks/life-event-marks-349');
@@ -525,6 +526,31 @@ module.exports = async () => {
                   ),
                 );
               era.set('item:现实透孔仪', 1);
+            }
+            if (version <= 2160) {
+              new MyEduMarks().big_sale = 1;
+            }
+            if (version <= 2171) {
+              const eq = get_queue();
+              if (eq[event_hooks.out_shopping]) {
+                let count = 0;
+                eq[event_hooks.out_shopping] = eq[
+                  event_hooks.out_shopping
+                ].filter((e) => {
+                  if (
+                    e.chara_id !== 0 ||
+                    e.type !== cb_enum.edu ||
+                    e.arg !== 'big_sale'
+                  ) {
+                    return true;
+                  }
+                  return count++ === 0;
+                });
+                for (let i = 0; i < count - 1; ++i) {
+                  EventMarks.get(0).sub(event_hooks.out_shopping);
+                }
+              }
+              era.set('cstr:21:头像T', '玉藻');
             }
             if (version < era.get('gamebase').version) {
               era.getAddedCharacters().forEach((cid) => {

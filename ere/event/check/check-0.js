@@ -13,25 +13,29 @@ const { location_enum } = require('#/data/locations');
 
 module.exports = class extends CustomizedCheck {
   check_next_week() {
-    const my_edu_marks = new MyEduMarks(),
-      in_team_list = sys_filter_chara('cflag', '招募状态', recruit_flags.yes);
-    if (my_edu_marks.god > 0) {
-      if (--my_edu_marks.god === 0) {
+    const my_marks = new MyEduMarks();
+    const in_team_list = sys_filter_chara(
+      'cflag',
+      '招募状态',
+      recruit_flags.yes,
+    );
+    if (my_marks.god > 0) {
+      if (--my_marks.god === 0) {
         add_event(
           event_hooks.school_god,
           new EventObject(0, cb_enum.edu).set_arg('god_coin'),
         );
       }
     }
-    if (my_edu_marks.experiment > 0) {
+    if (my_marks.experiment > 0) {
       if (
         get('cflag:25:招募状态') === recruit_flags.yes ||
         get('cflag:32:招募状态') === recruit_flags.yes
       ) {
-        my_edu_marks.experiment = 0;
-      } else if (--my_edu_marks.experiment === 0) {
+        my_marks.experiment = 0;
+      } else if (--my_marks.experiment === 0) {
         if (get('cflag:0:位置') > 0) {
-          my_edu_marks.experiment = 1;
+          my_marks.experiment = 1;
         } else {
           add_event(
             event_hooks.week_end,
@@ -40,23 +44,23 @@ module.exports = class extends CustomizedCheck {
         }
       }
     }
-    if (my_edu_marks.custom > 0) {
-      if (--my_edu_marks.custom === 0) {
+    if (my_marks.custom > 0) {
+      if (--my_marks.custom === 0) {
         add_event(
           event_hooks.week_end,
           new EventObject(0, cb_enum.edu).set_arg('custom'),
         );
       }
     }
-    if (my_edu_marks.trainer_race > 0) {
+    if (my_marks.trainer_race > 0) {
       if (
         get('cflag:304:招募状态') === recruit_flags.yes ||
         get('cflag:305:招募状态') === recruit_flags.yes
       ) {
-        my_edu_marks.trainer_race = 0;
-      } else if (--my_edu_marks.trainer_race === 0) {
+        my_marks.trainer_race = 0;
+      } else if (--my_marks.trainer_race === 0) {
         if (get('cflag:0:位置') > 0) {
-          my_edu_marks.trainer_race = 1;
+          my_marks.trainer_race = 1;
         } else {
           add_event(
             event_hooks.week_start,
@@ -66,20 +70,20 @@ module.exports = class extends CustomizedCheck {
       }
     }
     if (get('flag:当前马币') <= 0) {
-      if (!my_edu_marks.bankruptcy) {
-        my_edu_marks.bankruptcy = 1;
+      if (!my_marks.bankruptcy) {
+        my_marks.bankruptcy = 1;
         add_event(
           event_hooks.week_start,
           new EventObject(0, cb_enum.edu).set_arg('bankruptcy'),
         );
       }
     } else {
-      my_edu_marks.bankruptcy = 0;
+      my_marks.bankruptcy = 0;
     }
-    if (my_edu_marks.reject === 3) {
-      my_edu_marks.reject++;
+    if (my_marks.reject === 3) {
+      my_marks.reject++;
       if (get('cflag:0:位置') > 0) {
-        my_edu_marks.reject = 3;
+        my_marks.reject = 3;
       } else {
         add_event(
           event_hooks.week_start,
@@ -87,40 +91,40 @@ module.exports = class extends CustomizedCheck {
         );
       }
     }
-    if (my_edu_marks.work_over > 0 && --my_edu_marks.work_over === 0) {
+    if (my_marks.work_over > 0 && --my_marks.work_over === 0) {
       if (Math.random() < 0.01 && get('cflag:0:位置') > 0) {
         add_event(
           event_hooks.week_start,
           new EventObject(0, cb_enum.edu).set_arg('work_over'),
         );
       } else {
-        my_edu_marks.work_over = 1;
+        my_marks.work_over = 1;
       }
     }
-    if (my_edu_marks.sick > 0 && --my_edu_marks.sick === 0) {
+    if (my_marks.sick > 0 && --my_marks.sick === 0) {
       if (Math.random() < 0.01 && get('cflag:0:位置') > 0) {
         add_event(
           event_hooks.week_start,
           new EventObject(0, cb_enum.edu).set_arg('sick'),
         );
       } else {
-        my_edu_marks.sick = 1;
+        my_marks.sick = 1;
       }
     }
-    if (my_edu_marks.strange_day > 0 && --my_edu_marks.strange_day === 0) {
+    if (my_marks.strange_day > 0 && --my_marks.strange_day === 0) {
       if (
         get('cflag:0:位置') === 0 &&
         get('flag:当前位置') !== location_enum.basement &&
-        sys_filter_chara('cflag', '招募状态', recruit_flags.yes).filter(
-          (e) => get(`cflag:${e}:成长阶段`) >= 2 && e !== 32,
-        ).length > 1
+        in_team_list.filter(
+          (e) => e > 0 && get(`cflag:${e}:成长阶段`) >= 2 && e !== 32,
+        ).length > 0
       ) {
         add_event(
           event_hooks.week_start,
           new EventObject(0, cb_enum.edu).set_arg('strange_day'),
         );
       } else {
-        my_edu_marks.strange_day = 1;
+        my_marks.strange_day = 1;
       }
     }
     if (get('flag:当前回合数') % 48 === 9 && get('flag:初见重复育成') > 0) {
@@ -150,11 +154,35 @@ module.exports = class extends CustomizedCheck {
         new EventObject(0, cb_enum.edu).set_arg('sakura_regret'),
       );
     }
-    if (my_edu_marks.nice_weekend > 1 && --my_edu_marks.nice_weekend === 1) {
+    if (my_marks.nice_weekend > 1 && --my_marks.nice_weekend === 1) {
       add_event(
         event_hooks.week_end,
         new EventObject(0, cb_enum.edu).set_arg('nice_weekend'),
       );
+    }
+    if (my_marks.big_sale > 0 && --my_marks.big_sale === 0) {
+      add_event(
+        event_hooks.out_shopping,
+        new EventObject(0, cb_enum.edu).set_arg('big_sale'),
+      );
+    }
+    if (
+      !my_marks.justice &&
+      in_team_list.filter(
+        (cid) =>
+          cid > 0 &&
+          cid < 1000 &&
+          get(`cflag:${cid}:成长阶段`) >= 2 &&
+          get(`cflag:${cid}:种族`) > 0 &&
+          get(`relation:${cid}:0`) <=
+            get(`love:${cid}`) * (get('flag:极端行为限制') || 1),
+      ).length > 0
+    ) {
+      add_event(
+        event_hooks.week_start,
+        new EventObject(0, cb_enum.edu).set_arg('justice'),
+      );
+      my_marks.justice = 1;
     }
   }
 };

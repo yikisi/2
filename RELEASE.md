@@ -1,18 +1,20 @@
-# [EraUma v2.161 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.161)
+# [EraUma v2.18 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.18)
 
 _incoming_
 
-适配 [EraElectron v4.3.2 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.3.2) 与 [ere.app v1.2.5 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.2.5) 及以上版本
+适配 [EraElectron v4.4.0 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.4.0) 与 [ere.app v1.2.6 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.2.6) 及以上版本
 
 ## Added
 
-* 为支持多口上写作，实装以下角色的第一口上招募
-  * 无声铃鹿
+* 为部分日常活动地文增加了性奴/孕袋差分
+* 追加实装以下角色的口上事件
+  * 目白善信：【派对时间】
+* 追加实装了以下随机小事件
+  * 【路见不平】
+* 新增调教立绘切换机制
 
 ## Changed
 
-* 优化了制作鸣谢的演出效果
+* 现在角色有特殊事件时的红名指示更加精确了
 
 ## Fixed
-
-* 修复了初次颜射经历、初次饮爱液经历和初次潮吹经历的无自觉经历版本的计算错误

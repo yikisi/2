@@ -23,14 +23,23 @@ module.exports = {
   },
   /**
    * @param {string} content
+   * @param {string} comment_start
    * @param {string} entry
    * @returns {string}
    */
-  generate_content(content, ...entry) {
+  generate_content(content, comment_start, ...entry) {
     const arr = content.split('\n').map((e) => e.replace(/\s+$/, ''));
-    const start = arr.findIndex((s) => s.startsWith('// GENERATED START'));
-    const end = arr.findIndex((s) => s.startsWith('// GENERATED END'));
-    arr.splice(start + 1, end - start - 1, ...entry);
+    const start = arr.findIndex((s) =>
+      s.startsWith(comment_start + ' GENERATED START'),
+    );
+    const end = arr.findIndex((s) =>
+      s.startsWith(comment_start + ' GENERATED END'),
+    );
+    if (start !== -1 && end !== -1) {
+      arr.splice(start + 1, end - start - 1, ...entry);
+    } else {
+      return `${comment_start} GENERATED START\n${entry.join('\n')}\n${comment_start} GENERATED END`;
+    }
     return arr.join('\n');
   },
 };

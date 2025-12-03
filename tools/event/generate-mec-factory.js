@@ -22,6 +22,7 @@ writeFileSync(
   mec_path,
   generate_content(
     readFileSync(mec_path, 'utf-8'),
+    '//',
     ...mec_scripts.map(
       (e) =>
         `cons_dict[${isNaN(Number(e)) ? `'${e}'` : e}] = require('#/event/mec/mec-${e}');`,

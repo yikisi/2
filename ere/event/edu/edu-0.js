@@ -31,6 +31,7 @@ const {
   sys_reg_race,
 } = require('#/system/sys-calc-base-cflag');
 const {
+  sys_get_callname,
   sys_get_colored_callname,
   sys_like_chara,
   sys_love_uma,
@@ -44,10 +45,13 @@ const sys_filter_chara = require('#/system/sys-filter-chara');
 const { reset_chara } = require('#/system/sys-init-chara');
 
 const { get_custom_check } = require('#/event/check/check-factory');
+const kojo = require('#/event/edu/edu-0.kojo');
 const StrangeDayEvents = require('#/event/edu/edu-events-0/strange-day');
 const { add_event } = require('#/event/queue');
+const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
+const print_name_and_show_kojo = require('#/event/snippets/print-name-and-show-kojo');
 const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -58,8 +62,18 @@ const { get_chara_color } = require('#/data/chara-colors');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
+const { max_chara_id } = require('#/data/other-const');
 
 module.exports = class extends StrangeDayEvents {
+  get dict() {
+    return {
+      YOU: get('callname:0:-1'),
+      ...(get('flag:角色性别') === 1
+        ? { UMA: '马郎', SHE: '他' }
+        : { UMA: '马娘', SHE: '她' }),
+    };
+  }
+
   /**
    * @author 天马闪光蹄
    * @param {CharaTalk} me
@@ -829,6 +843,62 @@ module.exports = class extends StrangeDayEvents {
           }
         }
       }
+    }
+  }
+
+  /** @param {CharaTalk} me */
+  async big_sale(me) {
+    let ret = (
+      await print_name_and_show_kojo('商店街大甩卖', me, kojo, this.dict)
+    )[0];
+    if (ret !== 6) {
+      const attr = new Array(5).fill(0);
+      attr[ret - 1] = 20;
+      sys_change_money(-10);
+      if (
+        getAddedCharacters()
+          .filter(
+            (cid) =>
+              cid > 0 &&
+              cid < max_chara_id &&
+              get(`cflag:${cid}:育成回合计时`) < 3 * 48,
+          )
+          .reduce((p, cid) => all_reward_in_event(cid, { attr }) || p, false)
+      ) {
+        await waitAnyKey();
+      }
+    }
+    new MyEduMarks().big_sale = get_random_value(10, 15);
+    return true;
+  }
+
+  /** @param {CharaTalk} me */
+  async justice(me) {
+    const dict = this.dict;
+    dict.T_SEX = get('cflag:301:性别') === 1 ? '秘书' : '小姐';
+    dict.TOKINO = sys_get_callname(0, 301);
+    dict.Y_A_TITLE = me.adult_sex_title;
+    await print_event_name('路见不平', me);
+    switch ((await kojo['JUSTICE'](dict))[0]) {
+      case 1:
+        println();
+        add('flag:当前马币', 100);
+        await printAndWait('获得了 100 马币！');
+        break;
+      case 2:
+        println();
+        add('item:马跳Z', 1);
+        await printAndWait('获得了【马跳Z】！');
+        break;
+      case 3:
+        add('maxbase:0:精力', 100);
+        if (
+          all_reward_in_event(0, {
+            base: JSON.parse('{"精力":200}'),
+          })
+        ) {
+          await waitAnyKey();
+        }
     }
   }
 };

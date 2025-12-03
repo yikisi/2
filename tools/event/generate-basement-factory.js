@@ -22,6 +22,7 @@ writeFileSync(
   base_path,
   generate_content(
     readFileSync(base_path, 'utf-8'),
+    '//',
     ...base_scripts.map(
       (e) =>
         `cons_dict[${isNaN(Number(e)) ? `'${e}'` : e}] = require('#/event/basement/basement-${e}');`,

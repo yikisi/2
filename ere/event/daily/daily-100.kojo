@@ -208,7 +208,7 @@
         content:
           - fontWeight: bold
             content: 奇锐骏
-          - 「…唏唷唷……完全使不上劲呢～」
+          - 「……唏唷唷……完全使不上劲呢～」
   - if: era.get('cflag:100:干劲') === -2
     random: true
     lines:

@@ -19,6 +19,7 @@ writeFileSync(
   rec_path,
   generate_content(
     readFileSync(rec_path, 'utf-8'),
+    '//',
     ...rec_scripts.map(
       (e) =>
         `cons_dict[${isNaN(Number(e)) ? `'${e}'` : e}] = require('#/event/rec/rec-${e}');`,

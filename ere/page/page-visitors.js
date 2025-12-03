@@ -17,6 +17,7 @@ const { get_abbr_number } = require('#/utils/value-utils');
 
 const CharaTitles = require('#/data/chara-titles');
 const event_hooks = require('#/data/event/event-hooks');
+const EventMarks = require('#/data/event/event-marks');
 const MayLifeMarks = require('#/data/event/life-event-marks/life-event-marks-343');
 const BryneLifeMarks = require('#/data/event/life-event-marks/life-event-marks-349');
 const loc_characters = require('#/data/event/loc-characters');
@@ -385,8 +386,8 @@ async function page_visitors() {
       era.setHorizontalAlign('space-around');
       era.printInColRows(
         [{ content: '要和谁交谈？', type: 'text' }],
-        ...visitor_list.map((e) => {
-          const image = era.get(`cstr:${e}:头像`);
+        ...visitor_list.map((cid) => {
+          const image = era.get(`cstr:${cid}:头像`);
           return {
             columns: [
               {
@@ -394,9 +395,13 @@ async function page_visitors() {
                 type: 'image.whole',
               },
               {
-                accelerator: e,
-                config: { align: 'center' },
-                content: era.get(`callname:${e}:-2`),
+                accelerator: cid,
+                config: {
+                  align: 'center',
+                  buttonType:
+                    EventMarks.get(cid).count() > 0 ? 'danger' : 'warning',
+                },
+                content: era.get(`callname:${cid}:-2`),
                 type: 'button',
               },
             ],

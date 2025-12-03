@@ -31,6 +31,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const CharaTitles = require('#/data/chara-titles');
 const MeekEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-201');
 const event_hooks = require('#/data/event/event-hooks');
+const EventMarks = require('#/data/event/event-marks');
 const loc_characters = require('#/data/event/loc-characters');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_celebration } = require('#/data/info-generator');
@@ -187,18 +188,22 @@ async function page_trainer_office() {
       setHorizontalAlign('space-around');
       printInColRows(
         [{ content: '要和谁交谈？', type: 'text' }],
-        ...trainer_list.map((e) => ({
+        ...trainer_list.map((cid) => ({
           columns: [
             {
-              names: get_image(e)
+              names: get_image(cid)
                 .map((e) => `${e}_半身`)
                 .join('\t'),
               type: 'image.whole',
             },
             {
-              accelerator: e,
-              config: { align: 'center' },
-              content: get(`callname:${e}:-2`),
+              accelerator: cid,
+              config: {
+                align: 'center',
+                buttonType:
+                  EventMarks.get(cid).count() > 0 ? 'danger' : 'warning',
+              },
+              content: get(`callname:${cid}:-2`),
               type: 'button',
             },
           ],
@@ -207,10 +212,10 @@ async function page_trainer_office() {
         [{ accelerator: 999, type: 'button', content: '离开' }],
       );
       setHorizontalAlign('start');
-      const chara_id = await input();
-      if (chara_id !== 999) {
-        const chara = get_chara_talk(chara_id),
-          title = CharaTitles.get(chara_id).get_curr_title();
+      const ret = await input();
+      if (ret !== 999) {
+        const chara = get_chara_talk(ret);
+        const title = CharaTitles.get(ret).get_curr_title();
         flag_trainer = true;
         while (flag_trainer) {
           const temp_flag = await npc_common(
@@ -235,7 +240,7 @@ async function page_trainer_office() {
             {
               name: `庆祝 ${celebration}`,
             },
-            handlers[chara_id](chara, me),
+            handlers[ret](chara, me),
             {
               name: '再见',
             },

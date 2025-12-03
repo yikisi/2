@@ -53,9 +53,18 @@ module.exports = class extends CustomizedRecruit {
           era.set('flag:物色对象', 0);
         } else {
           await print_name_and_show_kojo('选拔赛翌日', suzuka, kojo, dict);
-          add_event(event_hooks.out_river, ebj.set_arg('river'));
-          EventMarks.get(0).add(event_hooks.out_river);
+          add_event(
+            event_hooks.recruit_start,
+            ebj.set_arg('tomorrow_after_tomorrow'),
+          );
+          EventMarks.get(0).add(event_hooks.recruit_start);
         }
+        break;
+      case 'tomorrow_after_tomorrow':
+        EventMarks.get(0).sub(event_hooks.recruit_start);
+        await print_name_and_show_kojo('选拔赛又翌日', suzuka, kojo, dict);
+        add_event(event_hooks.out_river, ebj.set_arg('river'));
+        EventMarks.get(0).add(event_hooks.out_river);
         break;
       case 'river':
         EventMarks.get(0).sub(event_hooks.out_river);
@@ -69,7 +78,6 @@ module.exports = class extends CustomizedRecruit {
         era.set(`cflag:${this.id}:招募状态`, recruit_flags.yes);
         era.set('flag:物色对象', 0);
     }
-    console.log(1);
     return true;
   }
 };

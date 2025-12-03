@@ -15,6 +15,7 @@ writeFileSync(
   talk_path,
   generate_content(
     readFileSync(talk_path, 'utf-8'),
+    '//',
     ...scripts.map(
       (e) =>
         `cons_dict[${isNaN(Number(e)) ? `'${e}'` : e}] = require('#/utils/chara-talk-extended/chara-talk-${e}');`,

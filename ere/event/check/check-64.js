@@ -237,6 +237,17 @@ module.exports = class extends CustomizedCheck {
               new EventObject(this.id, cb_enum.love).set_arg('dessert'),
             );
           }
+          if (
+            !edu_marks.party &&
+            era.get('cflag:65:招募状态') === recruit_flags.yes &&
+            era.get('love:65') >= 75
+          ) {
+            edu_marks.party = 1;
+            add_event(
+              event_hooks.out_shopping,
+              new EventObject(this.id, cb_enum.love).set_arg('party'),
+            );
+          }
         }
       }
       if (

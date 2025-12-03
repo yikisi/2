@@ -149,6 +149,7 @@ const ability_usage_enum = {
   MultiplyResearchLv: 28,
   MultiplyLove: 30,
   MultiplyIsland: 31,
+  MultiplyHotSpring: 32,
   MultiplyCount: 99,
 };
 
