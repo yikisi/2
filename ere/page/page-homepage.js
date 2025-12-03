@@ -6,6 +6,9 @@ const {
   sys_check_yandere,
 } = require('#/system/chara/sys-calc-cheat');
 const {
+  check_pregnant_unprotect,
+} = require('#/system/ero/sys-calc-ero-status');
+const {
   begin_and_init_ero,
   end_ero_and_show_result,
   init_ero,
@@ -36,6 +39,7 @@ const { run_custom_daily } = require('#/event/daily/daily-factory');
 const { get_custom_edu } = require('#/event/edu/edu-factory');
 const { get_custom_ero } = require('#/event/ero/ero-factory');
 const anniversary = require('#/event/others/anniversary');
+const aps_kojo = require('#/event/others/as-pregnant-slave.kojo');
 const game_guides = require('#/event/others/game-guides');
 const { start_machine_gun, stop_machine_gun } = require('#/event/queue');
 
@@ -65,8 +69,8 @@ const notes = require('#/data/notes.json');
 const { first_child_id } = require('#/data/other-const');
 const { pressure_border } = require('#/data/train-const');
 
-let random_event,
-  notes_index = 0;
+let notes_index = 0;
+let random_event;
 
 async function next_week() {
   era.drawLine();
@@ -95,9 +99,22 @@ async function save_and_next_week(cid, cur_loc, rest_loc) {
   era.drawLine();
   era.set('flag:当前互动角色', 0);
   era.set('flag:当前位置', rest_loc);
-  let lover = Number(sys_check_awake(0) && era.get('flag:床伴'));
+  let lover = +(sys_check_awake(0) && era.get('flag:床伴'));
   era.set('flag:床伴', lover);
+  const punish = era.get('flag:惩戒力度') >= 2 && check_pregnant_unprotect(0);
+  if (punish) {
+    await aps_kojo['工作']({
+      SLAVE: era.get('flag:惩戒力度') === 2 ? '性奴' : '孕袋',
+      YOU: era.get('callname:0:-2'),
+      ...(era.get('flag:角色性别') === 1
+        ? { SHE: '他', UMA: '马郎' }
+        : { SHE: '她', UMA: '马娘' }),
+    });
+  }
   if (cid > 0 && !sys_check_remote(cid) && !lover) {
+    if (punish) {
+      era.drawLine();
+    }
     await run_custom_daily(cid, event_hooks.good_night);
   }
   let continue_flag = true;
