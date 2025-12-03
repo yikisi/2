@@ -278,7 +278,11 @@ module.exports = async () => {
             );
           }
         }
-        era.printButton('返回', 0, { align: 'center', hideInput: true });
+        era.printButton('返回', 0, {
+          align: 'center',
+          disableContinue: true,
+          hideInput: true,
+        });
         await era.input();
       },
     },
