@@ -1,6 +1,7 @@
 const get_gradient_color = require('#/utils/gradient-color');
 
-const base_color = require('#/data/const.json').mark_colors['淫纹'];
+const { mark_colors, mark_enum } = require('#/data/ero/mark-const');
+const base_color = mark_colors[mark_enum.ero];
 
 const level_colors = new Array(3)
   .fill(0)

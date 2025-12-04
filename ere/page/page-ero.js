@@ -37,11 +37,11 @@ const { buff_colors, palam_colors } = require('#/data/color-const');
 const {
   attr_background_colors,
   love_colors,
-  mark_colors,
   relation_colors,
 } = require('#/data/const.json');
 const date_indicator = require('#/data/date-indicator');
 const { mark_abbr, part_abbr } = require('#/data/ero/ero-alias.json');
+const { mark_colors, mark_enum } = require('#/data/ero/mark-const');
 const { lust_border, lust_from_palam } = require('#/data/ero/orgasm-const');
 const {
   motion_enum,
@@ -98,13 +98,13 @@ function get_ero_marks(cid) {
     const mark = era.get(`mark:${cid}:${i}`);
     if (mark) {
       status_list.push({
-        color: get_color(undefined, mark_colors[mark_name], mark / 3),
+        color: get_color(undefined, mark_colors[i], mark / 3),
         content: `[${mark_abbr[mark_name]}${mark}]`,
       });
     }
   });
   if (era.get(`talent:${cid}:钢之意志`) > 0) {
-    status_list.push({ color: mark_colors['钢'], content: '[钢]' });
+    status_list.push({ color: mark_colors.iron, content: '[钢]' });
   }
   return status_list.map((e) => {
     e.display = 'inline-block';
@@ -316,7 +316,7 @@ async function page_ero(lover, skip_start_end = false) {
     rape <= 0 &&
     (await select_yes_or_no([
       '要叫 ',
-      { content: '助奴', color: mark_colors['淫纹'] },
+      { content: '助奴', color: mark_colors[mark_enum.ero] },
       ' ',
       get_chara_talk(assist).get_colored_name(),
       ' 一起来吗？',

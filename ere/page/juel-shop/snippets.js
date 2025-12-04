@@ -12,8 +12,8 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const get_color = require('#/utils/gradient-color');
 
 const { buff_colors } = require('#/data/color-const');
-const { mark_colors } = require('#/data/const.json');
 const { talent_button_names_and_check_dict } = require('#/data/ero/juel-const');
+const { mark_colors } = require('#/data/ero/mark-const');
 const { trained_talent_names } = require('#/data/ero/status-const');
 
 module.exports = {
@@ -29,24 +29,24 @@ module.exports = {
     }
   },
   /**
-   * @param {number} chara_id
-   * @param {string} mark_name
+   * @param {number} cid
+   * @param {string} mid
    * @param {number} _level
    * @returns {TextObject}
    */
-  get_mark_cols(chara_id, mark_name, _level) {
-    const level = Number(_level) || era.get(`mark:${chara_id}:${mark_name}`);
+  get_mark_cols(cid, mid, _level) {
+    const level = Number(_level) || era.get(`mark:${cid}:${mid}`);
     return {
       config: {
         align: 'center',
-        color: mark_colors[mark_name],
+        color: mark_colors[mid],
         width: 4,
       },
       content: [
-        `${mark_name} Lv.${level} `,
+        `${era.get(`markname:${mid}`)} Lv.${level} `,
         {
           content: new Array(level).fill('★').join(''),
-          color: get_color(undefined, mark_colors[mark_name], level / 3),
+          color: get_color(undefined, mark_colors[mid], level / 3),
         },
         {
           content: new Array(3 - level).fill('☆').join(''),
@@ -176,11 +176,11 @@ module.exports = {
     });
   },
   /**
-   * @param {number} chara_id
+   * @param {number} cid
    * @param {number} tab_pointer
    */
-  print_footer(chara_id, tab_pointer) {
-    const mark = era.get(`mark:${chara_id}:淫纹`);
+  print_footer(cid, tab_pointer) {
+    const mark = era.get(`mark:${cid}:淫纹`);
     era.drawLine();
     era.printMultiColumns(
       [
@@ -197,21 +197,21 @@ module.exports = {
           },
           {
             accelerator: 992,
-            config: { disabled: !chara_id && !mark },
+            config: { disabled: !cid && !mark },
             content: mark ? '刻印定制' : '刻印消除',
             type: 'button',
           },
           {
             accelerator: 993,
-            config: { disabled: !chara_id },
-            content: chara_id ? '因子采补' : '',
-            type: chara_id ? 'button' : 'text',
+            config: { disabled: !cid },
+            content: cid ? '因子采补' : '',
+            type: cid ? 'button' : 'text',
           },
-        ].map((e) => {
-          e.config = e.config || {};
-          e.config.buttonType =
-            e.accelerator - 990 === tab_pointer ? 'warning' : 'info';
-          return e;
+        ].map((b) => {
+          b.config ||= {};
+          b.config.buttonType =
+            b.accelerator - 990 === tab_pointer ? 'warning' : 'info';
+          return b;
         }),
         {
           accelerator: 999,
@@ -219,9 +219,9 @@ module.exports = {
           content: '结束升级',
           type: 'button',
         },
-      ].map((e) => {
-        e.config.width = 4;
-        return e;
+      ].map((b) => {
+        b.config.width = 4;
+        return b;
       }),
     );
   },

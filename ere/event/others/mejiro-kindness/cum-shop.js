@@ -10,9 +10,8 @@ const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { buff_colors } = require('#/data/color-const');
-const { mark_colors } = require('#/data/const.json');
 const CharaInmon = require('#/data/ero/chara-inmon');
-const { slavery_enum } = require('#/data/ero/mark-const');
+const { mark_colors, slavery_enum } = require('#/data/ero/mark-const');
 const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const {
   penis_desc,
@@ -694,7 +693,7 @@ async function cum_shop(chara, me) {
               await era.printAndWait([
                 target.get_colored_name(),
                 im_status ? ' 遗忘了 ' : ' 习得了 ',
-                { content: '[钢之意志]', color: mark_colors['钢'] },
+                { content: '[钢之意志]', color: mark_colors.iron },
                 '！',
               ]);
             }

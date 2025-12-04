@@ -22,11 +22,11 @@ const { get_custom_ero } = require('#/event/ero/ero-factory');
 const get_gradient_color = require('#/utils/gradient-color');
 
 const { attr_change_colors, buff_colors } = require('#/data/color-const');
-const { mark_colors } = require('#/data/const.json');
 const CharaInmon = require('#/data/ero/chara-inmon');
 const InmonPlugin = require('#/data/ero/inmon-plugin');
 const {
   inmon_limit,
+  mark_colors,
   mark_enum,
   slavery_descriptions,
   slavery_enum,
@@ -128,12 +128,12 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
       content: `${chara.get_full_name()} 的 刻印`,
     });
     if (!l_sex) {
-      buffer.push(get_mark_cols(chara.id, '欢愉', l_pleasure));
+      buffer.push(get_mark_cols(chara.id, mark_enum.pleasure, l_pleasure));
     }
-    buffer.push(get_mark_cols(chara.id, '同心', l_meek));
-    buffer.push(get_mark_cols(chara.id, '苦痛', l_pain));
-    buffer.push(get_mark_cols(chara.id, '羞耻', l_shame));
-    buffer.push(get_mark_cols(chara.id, '反抗', l_hate));
+    buffer.push(get_mark_cols(chara.id, mark_enum.meek, l_meek));
+    buffer.push(get_mark_cols(chara.id, mark_enum.pain, l_pain));
+    buffer.push(get_mark_cols(chara.id, mark_enum.shame, l_shame));
+    buffer.push(get_mark_cols(chara.id, mark_enum.hate, l_hate));
     buffer.push({ content: [], type: 'text' });
     if (l_hate) {
       price_dict[0] = get_mark_price(chara.id, l_hate, l_meek / 2);
@@ -272,7 +272,7 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
       const limit = inmon_limit[l_sex];
       const group_dict = {};
       sex_mark_price = get_mark_price(chara.id, l_sex + 1, l_meek);
-      const sex_mark_col = get_mark_cols(chara.id, '淫纹', l_sex);
+      const sex_mark_col = get_mark_cols(chara.id, mark_enum.ero, l_sex);
       delete sex_mark_col.config.width;
       sex_mark_col.content.unshift({ isBr: true });
       const p_buffer = plugins
@@ -363,7 +363,7 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
             {
               config: {
                 align: 'center',
-                color: mark_colors['淫纹'],
+                color: mark_colors[mark_enum.ero],
               },
               content: [
                 ...new Array(size)
@@ -385,7 +385,7 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
             {
               config: {
                 align: 'center',
-                color: mark_colors['淫纹'],
+                color: mark_colors[mark_enum.ero],
               },
               content: `插槽：${size}/${limit}`,
               type: 'text',
@@ -479,7 +479,7 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
       ` 的 ${palam_name}因子 消除一级`,
       {
         content: ' 反抗刻印 ',
-        color: mark_colors['反抗'],
+        color: mark_colors[mark_enum.hate],
       },
       '吗？花费：',
     ]);
@@ -517,7 +517,7 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
       ` 的 顺从因子 消除一级`,
       {
         content: ` ${mark_name}刻印 `,
-        color: mark_colors[mark_name],
+        color: mark_colors[ret - 1],
       },
       '吗？花费：',
     ]);
@@ -541,7 +541,7 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
           content: `欢愉刻印 Lv.${l_pleasure}`,
           color: get_gradient_color(
             undefined,
-            mark_colors['欢愉'],
+            mark_colors[mark_enum.pleasure],
             l_pleasure / 3,
           ),
         },
@@ -550,7 +550,7 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
           content: `淫纹 Lv.${l_pleasure}`,
           color: get_gradient_color(
             undefined,
-            mark_colors['淫纹'],
+            mark_colors[mark_enum.ero],
             l_pleasure / 3,
           ),
         },
@@ -563,14 +563,18 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
         ' 的 ',
         {
           content: `淫纹 Lv.${l_sex}`,
-          color: get_gradient_color(undefined, mark_colors['淫纹'], l_sex / 3),
+          color: get_gradient_color(
+            undefined,
+            mark_colors[mark_enum.ero],
+            l_sex / 3,
+          ),
         },
         ` 升级为 `,
         {
           content: `Lv.${l_sex + 1}`,
           color: get_gradient_color(
             undefined,
-            mark_colors['淫纹'],
+            mark_colors[mark_enum.ero],
             (l_sex + 1) / 3,
           ),
         },

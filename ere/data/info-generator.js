@@ -23,12 +23,12 @@ const {
   skin_colors,
 } = require('#/data/color-const');
 const { hair_colors } = require('#/data/const.json');
-const { mark_colors } = require('#/data/const.json');
 const { get_date } = require('#/data/date-indicator');
 const status_desc = require('#/data/desc/status.json');
 const talent_desc = require('#/data/desc/talents.json');
 const CharaInmon = require('#/data/ero/chara-inmon');
 const {
+  mark_colors,
   slavery_descriptions,
   slavery_titles,
 } = require('#/data/ero/mark-const');
@@ -744,7 +744,7 @@ module.exports = {
     }
     if (era.get(`talent:${cid}:钢之意志`)) {
       talent_list.push({
-        color: mark_colors['钢'],
+        color: mark_colors.iron,
         content: '[钢之意志]',
         title: `[钢之意志]：${talent_desc['钢之意志']}`,
       });

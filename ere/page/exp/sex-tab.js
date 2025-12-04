@@ -11,8 +11,8 @@ const get_gradient_color = require('#/utils/gradient-color');
 const { get_abbr_number } = require('#/utils/value-utils');
 
 const { attr_change_colors, palam_colors } = require('#/data/color-const');
-const { mark_colors } = require('#/data/const.json');
 const CharaInmon = require('#/data/ero/chara-inmon');
+const { mark_colors, mark_enum } = require('#/data/ero/mark-const');
 const { palam2juel } = require('#/data/ero/orgasm-const');
 const { inmon_plugin_dict } = require('#/data/ero/plugin/plugin-const');
 const {
@@ -26,26 +26,25 @@ const { sys_get_ero_image } = require('#/system/ero/sys-calc-ero-image');
 
 const page_name = '性爱情况';
 
-const sex_color = mark_colors['淫纹'];
+const sex_color = mark_colors[mark_enum.ero];
 
 /**
- * @param {number} chara_id
- * @param {string} mark_name
- * @param {number} [mark_level]
+ * @param {number} cid
+ * @param {number} mid
+ * @param {number} [level]
  */
-function get_mark_info(chara_id, mark_name, mark_level) {
-  const level =
-    mark_level === undefined
-      ? era.get(`mark:${chara_id}:${mark_name}`)
-      : mark_level;
+function get_mark_info(cid, mid, level = era.get(`mark:${cid}:${mid}`)) {
   return {
     config: { width: 4 },
     content: [
-      { color: mark_colors[mark_name], content: `${mark_name} Lv.${level}` },
+      {
+        color: mark_colors[mid],
+        content: `${era.get(`markname:${mid}`)} Lv.${level}`,
+      },
       { isBr: true },
       {
         content: new Array(level).fill('★').join(''),
-        color: get_gradient_color(undefined, mark_colors[mark_name], level / 3),
+        color: get_gradient_color(undefined, mark_colors[mid], level / 3),
       },
       {
         content: new Array(3 - level).fill('☆').join(''),
@@ -360,15 +359,14 @@ module.exports = {
         });
 
         if (sex_level > 0) {
-          sex_info_list.push(get_mark_info(chara.id, '淫纹', sex_level));
+          sex_info_list.push(get_mark_info(chara.id, mark_enum.ero, sex_level));
         } else if (chara.id > 0) {
-          sex_info_list.push(get_mark_info(chara.id, '欢愉'));
+          sex_info_list.push(get_mark_info(chara.id, mark_enum.pleasure));
         }
         if (chara.id > 0) {
-          era
-            .get('marknames')
+          Object.values(mark_enum)
             .slice(2)
-            .forEach((e) => sex_info_list.push(get_mark_info(chara.id, e)));
+            .forEach((mid) => sex_info_list.push(get_mark_info(chara.id, mid)));
         }
       }
     } else {

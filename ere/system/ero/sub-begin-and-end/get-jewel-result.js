@@ -4,7 +4,7 @@ const get_gradient_color = require('#/utils/gradient-color');
 const { get_abbr_number } = require('#/utils/value-utils');
 
 const { palam_colors } = require('#/data/color-const');
-const { mark_colors } = require('#/data/const.json');
+const { mark_colors, mark_enum } = require('#/data/ero/mark-const');
 const { gene_juel_names } = require('#/data/other-const');
 
 /**
@@ -188,20 +188,20 @@ function get_jewel_result(cid, j_names, j_info, a_info) {
   if (cid > 0) {
     buffer2.push({
       config: {
-        content: `${era.get(`callname:${cid}:-2`)} 的刻印`,
+        content: era.get(`callname:${cid}:-2`) + ' 的刻印',
         position: 'left',
       },
       type: 'divider',
     });
-    era.get('marknames').forEach((m_name) => {
-      const change = era.get(`ex:${cid}:${m_name}获取`),
-        now = era.get(`mark:${cid}:${m_name}`),
-        color = mark_colors[m_name];
+    Object.values(mark_enum).forEach((mid) => {
+      const change = era.get(`ex:${cid}:${65 + mid}`);
+      const now = era.get(`mark:${cid}:${mid}`);
+      const color = mark_colors[mid];
       if (change > 0) {
         buffer2.push({
           config: { width: 8 },
           content: [
-            { color, content: `${m_name}刻印` },
+            { color, content: era.get(`markname:${mid}`) + '刻印' },
             '：',
             {
               color: get_gradient_color(undefined, color, (now - change) / 3),

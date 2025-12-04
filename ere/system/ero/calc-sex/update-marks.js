@@ -5,8 +5,7 @@ const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const get_color = require('#/utils/gradient-color');
 
-const { mark_colors } = require('#/data/const.json');
-const { mark_enum } = require('#/data/ero/mark-const');
+const { mark_colors, mark_enum } = require('#/data/ero/mark-const');
 
 const relation_by_mark = [40, 0, 60, -200, -200, -400];
 
@@ -22,33 +21,33 @@ async function update_marks(shown, ...ids) {
   const me_in_sex = ids.indexOf(0) !== -1;
   for (const cid of ids) {
     let relation_change = 0;
-    for (const i of Object.values(mark_enum)) {
-      const m_name = era.get(`markname:${i}`);
-      const m_level = era.get(`mark:${cid}:${i}`);
+    for (const mid of Object.values(mark_enum)) {
+      const m_name = era.get(`markname:${mid}`);
+      const m_level = era.get(`mark:${cid}:${mid}`);
       const n_level = Math.min(
-        era.get(`nowex:${cid}:${m_name}获取`) + m_level,
+        era.get(`nowex:${cid}:${mid + 65}`) + m_level,
         3,
       );
       if (n_level > m_level) {
         count++;
-        relation_change += relation_by_mark[i] * (n_level - m_level);
-        era.set(`mark:${cid}:${i}`, n_level);
+        relation_change += relation_by_mark[mid] * (n_level - m_level);
+        era.set(`mark:${cid}:${mid}`, n_level);
         if (shown) {
           era.println();
-          await get_custom_ero(cid).get_mark(n_level, i, false);
+          await get_custom_ero(cid).get_mark(n_level, mid, false);
           await era.printAndWait([
             get_chara_talk(cid).get_colored_name(),
             ' 获得了 ',
             {
               content: `${m_name}刻印 Lv.${n_level}`,
-              color: get_color(undefined, mark_colors[m_name], n_level / 3),
+              color: get_color(undefined, mark_colors[mid], n_level / 3),
             },
             '！',
           ]);
         }
       }
-      era.add(`ex:${cid}:${m_name}获取`, era.get(`nowex:${cid}:${m_name}获取`));
-      era.set(`nowex:${cid}:${m_name}获取`, 0);
+      era.add(`ex:${cid}:${mid + 65}`, era.get(`nowex:${cid}:${m_name}获取`));
+      era.set(`nowex:${cid}:${mid + 65}`, 0);
     }
     if (
       me_in_sex &&
