@@ -16,14 +16,11 @@ const chara_info_type = require('#/data/chara-info-type');
 const CharaTitles = require('#/data/chara-titles');
 const {
   adaptability_colors,
+  attr_bg_colors,
   el_danger_color,
   motivation_colors,
 } = require('#/data/color-const');
-const {
-  attr_background_colors,
-  love_colors,
-  relation_colors,
-} = require('#/data/const.json');
+const { love_colors, relation_colors } = require('#/data/const.json');
 const {
   get_growth,
   human_sex_title,
@@ -162,40 +159,27 @@ function get_suffix(cid, type) {
     );
   }
   ret.push(
+    ...['hp', 'tp'].map((a, i) => {
+      const val = era.get(`base:${cid}:${i}`);
+      const limit = era.get(`maxbase:${cid}:${i}`);
+      return {
+        config: {
+          color: attr_bg_colors[a],
+          height: 22,
+          width: 3,
+          barWidth: 20,
+        },
+        inContent: `${Math.floor(val)}/${Math.floor(limit)}`,
+        percentage: (val * 100) / limit,
+        type: 'progress',
+      };
+    }),
     {
-      config: {
-        color: attr_background_colors['体力'],
-        height: 22,
-        width: 3,
-        barWidth: 20,
-      },
-      inContent: `${Math.floor(era.get(`base:${cid}:体力`))}/${era.get(
-        `maxbase:${cid}:体力`,
-      )}`,
-      percentage:
-        (era.get(`base:${cid}:体力`) * 100) / era.get(`maxbase:${cid}:体力`),
-      type: 'progress',
-    },
-    {
-      config: {
-        color: attr_background_colors['精力'],
-        height: 22,
-        width: 3,
-        barWidth: 20,
-      },
-      inContent: `${Math.floor(era.get(`base:${cid}:精力`))}/${era.get(
-        `maxbase:${cid}:精力`,
-      )}`,
-      percentage:
-        (era.get(`base:${cid}:精力`) * 100) / era.get(`maxbase:${cid}:精力`),
-      type: 'progress',
+      config: { offset: 4, width: 20 },
+      content: [...race_indicator(cid), ' ', ...get_status(cid)],
+      type: 'text',
     },
   );
-  ret.push({
-    config: { offset: 4, width: 20 },
-    content: [...race_indicator(cid), ' ', ...get_status(cid)],
-    type: 'text',
-  });
   return ret;
 }
 

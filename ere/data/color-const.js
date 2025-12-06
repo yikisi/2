@@ -10,6 +10,7 @@ module.exports = {
     '#eeb93f',
     '#f8c7ff',
   ],
+  attr_bg_colors: { hp: '#006800', tp: '#0000ff' },
   attr_change_colors: { down: '#ff7744', up: '#98fb98' },
   buff_colors: ['#34a5ff', '#f9a048', '#ff69b4', '#ff7373'],
   celebration_color: '#ff8686',

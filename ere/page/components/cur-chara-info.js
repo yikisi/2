@@ -12,12 +12,8 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const chara_info_type = require('#/data/chara-info-type');
 const CharaTitles = require('#/data/chara-titles');
-const { motivation_colors } = require('#/data/color-const');
-const {
-  attr_background_colors,
-  love_colors,
-  relation_colors,
-} = require('#/data/const.json');
+const { attr_bg_colors, motivation_colors } = require('#/data/color-const');
+const { love_colors, relation_colors } = require('#/data/const.json');
 const { get_growth } = require('#/data/ero/status-const');
 const {
   get_love_info,
@@ -26,6 +22,8 @@ const {
 } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const { motivation_names, out_of_train_type } = require('#/data/train-const');
+
+const { __ } = require('#/i18n/selector');
 
 /**
  * @param {number} chara_id
@@ -194,46 +192,21 @@ function cur_chara_component(chara_id, type, location_npc) {
                 type: 'button',
               }
             : { content: '\n', type: 'text' },
-          {
-            config: { width: 2 },
-            content: '体力',
-            type: 'text',
-          },
-          {
-            config: {
-              color: attr_background_colors['体力'],
-              height: 22,
-              width: 12,
-            },
-            inContent: `${Math.floor(era.get(`base:${chara_id}:体力`))}/${era.get(
-              `maxbase:${chara_id}:体力`,
-            )}`,
-            percentage:
-              (era.get(`base:${chara_id}:体力`) * 100) /
-              era.get(`maxbase:${chara_id}:体力`),
-            type: 'progress',
-          },
-          { content: '', type: 'text' },
-          {
-            config: { width: 2 },
-            content: '精力',
-            type: 'text',
-          },
-          {
-            config: {
-              color: attr_background_colors['精力'],
-              height: 22,
-              width: 12,
-            },
-            inContent: `${Math.floor(era.get(`base:${chara_id}:精力`))}/${era.get(
-              `maxbase:${chara_id}:精力`,
-            )}`,
-            percentage:
-              (era.get(`base:${chara_id}:精力`) * 100) /
-              era.get(`maxbase:${chara_id}:精力`),
-            type: 'progress',
-          },
-          { content: '', type: 'text' },
+          ...['hp', 'tp'].reduce((p, c, i) => {
+            const val = era.get(`base:${chara_id}:${i}`);
+            const limit = era.get(`maxbase:${chara_id}:${i}`);
+            p.push(
+              { config: { width: 2 }, content: __(c), type: 'text' },
+              {
+                config: { color: attr_bg_colors[c], height: 22, width: 12 },
+                inContent: `${Math.floor(val)}/${Math.floor(limit)}`,
+                percentage: (val * 100) / limit,
+                type: 'progress',
+              },
+              { content: [], type: 'text' },
+            );
+            return p;
+          }, []),
           ...(race && growth >= 1
             ? [
                 {

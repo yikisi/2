@@ -3,7 +3,7 @@ const era = require('#/era-electron');
 const get_status = require('#/system/chara/sys-get-status');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
-const { attr_background_colors } = require('#/data/const.json');
+const { attr_bg_colors } = require('#/data/color-const');
 const recruit_flags = require('#/data/event/recruit-flags');
 
 /**
@@ -39,7 +39,7 @@ async function select_target_in_storage(item, filter_cb = () => true) {
         {
           config: {
             barWidth: 20,
-            color: attr_background_colors['体力'],
+            color: attr_bg_colors.hp,
             height: 22,
             width: 4,
           },
@@ -50,7 +50,7 @@ async function select_target_in_storage(item, filter_cb = () => true) {
         {
           config: {
             barWidth: 20,
-            color: attr_background_colors['精力'],
+            color: attr_bg_colors.tp,
             height: 22,
             width: 4,
           },

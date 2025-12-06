@@ -1,12 +1,12 @@
 const era = require('#/era-electron');
 
 const CharaTitles = require('#/data/chara-titles');
-const {
-  attr_background_colors,
-  love_colors,
-  relation_colors,
-} = require('#/data/const.json');
+const { love_colors, relation_colors } = require('#/data/const.json');
 const { get_love_info, get_relation_info } = require('#/data/info-generator');
+
+const { attr_bg_colors } = require('#/data/color-const');
+
+const { __ } = require('#/i18n/selector');
 
 /** @param {CharaTalk} chara */
 function exp_chara_info(chara) {
@@ -42,36 +42,20 @@ function exp_chara_info(chara) {
       ],
       type: 'text',
     },
-    { config: { width: 2 }, content: '体力', type: 'text' },
-    {
-      config: {
-        color: attr_background_colors['体力'],
-        height: 22,
-        width: 9,
-      },
-      inContent: `${Math.floor(era.get(`base:${chara.id}:体力`))}/${era.get(
-        `maxbase:${chara.id}:体力`,
-      )}`,
-      percentage:
-        (era.get(`base:${chara.id}:体力`) * 100) /
-        era.get(`maxbase:${chara.id}:体力`),
-      type: 'progress',
-    },
-    { config: { width: 2, offset: 1 }, content: '精力', type: 'text' },
-    {
-      config: {
-        color: attr_background_colors['精力'],
-        height: 22,
-        width: 9,
-      },
-      inContent: `${Math.floor(era.get(`base:${chara.id}:精力`))}/${era.get(
-        `maxbase:${chara.id}:精力`,
-      )}`,
-      percentage:
-        (era.get(`base:${chara.id}:精力`) * 100) /
-        era.get(`maxbase:${chara.id}:精力`),
-      type: 'progress',
-    },
+    ...['hp', 'tp'].reduce((p, c, i) => {
+      const val = era.get(`base:${chara.id}:${i}`);
+      const limit = era.get(`maxbase:${chara.id}:${i}`);
+      p.push(
+        { config: { offset: i, width: 2 }, content: __(c), type: 'text' },
+        {
+          config: { color: attr_bg_colors[c], height: 22, width: 9 },
+          inContent: `${Math.floor(val)}/${Math.floor(limit)}`,
+          percentage: (val * 100) / limit,
+          type: 'progress',
+        },
+      );
+      return p;
+    }, []),
   ];
 }
 

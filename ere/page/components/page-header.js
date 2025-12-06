@@ -15,8 +15,11 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_abbr_number } = require('#/utils/value-utils');
 
 const CharaTitles = require('#/data/chara-titles');
-const { celebration_color, money_color } = require('#/data/color-const');
-const { attr_background_colors } = require('#/data/const.json');
+const {
+  attr_bg_colors,
+  celebration_color,
+  money_color,
+} = require('#/data/color-const');
 const date_indicator = require('#/data/date-indicator');
 const title_desc = require('#/data/desc/titles.json');
 const recruit_flags = require('#/data/event/recruit-flags');
@@ -30,39 +33,23 @@ const { location_name } = require('#/data/locations');
 const { get_trainer_color } = require('#/data/other-const');
 const { race_infos } = require('#/data/race/race-const');
 
+const { __ } = require('#/i18n/selector');
+
 function get_progress_bar() {
-  return [
-    {
-      config: { width: 2 },
-      content: '体力',
-      type: 'text',
-    },
-    {
-      config: {
-        color: attr_background_colors['体力'],
-        height: 22,
-        width: 9,
+  return ['hp', 'tp'].reduce((p, c, i) => {
+    const val = era.get(`base:0:${i}`);
+    const limit = era.get(`maxbase:0:${i}`);
+    p.push(
+      { config: { offset: i, width: 2 }, content: __(c), type: 'text' },
+      {
+        config: { color: attr_bg_colors[c], height: 22, width: 9 },
+        inContent: `${Math.floor(val)}/${Math.floor(limit)}`,
+        percentage: (val * 100) / limit,
+        type: 'progress',
       },
-      inContent: `${Math.floor(era.get(`base:0:体力`))}/${era.get(`maxbase:0:体力`)}`,
-      percentage: (era.get(`base:0:体力`) * 100) / era.get(`maxbase:0:体力`),
-      type: 'progress',
-    },
-    {
-      config: { offset: 1, width: 2 },
-      content: '精力',
-      type: 'text',
-    },
-    {
-      config: {
-        color: attr_background_colors['精力'],
-        height: 22,
-        width: 9,
-      },
-      inContent: `${Math.floor(era.get(`base:0:精力`))}/${era.get(`maxbase:0:精力`)}`,
-      percentage: (era.get(`base:0:精力`) * 100) / era.get(`maxbase:0:精力`),
-      type: 'progress',
-    },
-  ];
+    );
+    return p;
+  }, []);
 }
 
 /** @param {boolean} [enable_race_info] */

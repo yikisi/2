@@ -37,10 +37,10 @@ const { get_random_value } = require('#/utils/value-utils');
 const CharaTitles = require('#/data/chara-titles');
 const {
   adaptability_colors,
+  attr_bg_colors,
   el_danger_color,
   money_color,
 } = require('#/data/color-const');
-const { attr_background_colors } = require('#/data/const.json');
 const date_indicator = require('#/data/date-indicator');
 const { lust_from_palam } = require('#/data/ero/orgasm-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
@@ -65,6 +65,8 @@ const {
  * @param {boolean} is_grand_live
  */
 function page_race_header(_info, is_grand_live) {
+  const tp = era.get('base:0:精力');
+  const maxtp = era.get('maxbase:0:精力');
   era.printInColRows(
     {
       columns: [
@@ -111,13 +113,12 @@ function page_race_header(_info, is_grand_live) {
         },
         {
           config: {
-            color: attr_background_colors['精力'],
+            color: attr_bg_colors.tp,
             height: 22,
             width: 8,
           },
-          inContent: `${Math.floor(era.get('base:0:精力'))}/${era.get('maxbase:0:精力')}`,
-          percentage:
-            (era.get('base:0:精力') * 100) / era.get('maxbase:0:精力'),
+          inContent: `${Math.floor(tp)}/${maxtp}`,
+          percentage: (tp * 100) / maxtp,
           type: 'progress',
         },
         {

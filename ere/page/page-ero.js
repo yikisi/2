@@ -33,12 +33,12 @@ const get_color = require('#/utils/gradient-color');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
-const { buff_colors, palam_colors } = require('#/data/color-const');
 const {
-  attr_background_colors,
-  love_colors,
-  relation_colors,
-} = require('#/data/const.json');
+  attr_bg_colors,
+  buff_colors,
+  palam_colors,
+} = require('#/data/color-const');
+const { love_colors, relation_colors } = require('#/data/const.json');
 const date_indicator = require('#/data/date-indicator');
 const { mark_abbr, part_abbr } = require('#/data/ero/ero-alias.json');
 const { mark_colors, mark_enum } = require('#/data/ero/mark-const');
@@ -61,6 +61,8 @@ const {
   get_relation_info,
 } = require('#/data/info-generator');
 const { location_enum, location_name } = require('#/data/locations');
+
+const { __ } = require('#/i18n/selector');
 
 /**
  * @param {number} cid
@@ -157,13 +159,13 @@ function get_chara_info(cid) {
       type: 'text',
     },
   ];
-  ['体力', '精力'].forEach((e) => {
-    const val = era.get(`base:${cid}:${e}`);
-    const limit = era.get(`maxbase:${cid}:${e}`);
+  ['hp', 'tp'].forEach((a, i) => {
+    const val = era.get(`base:${cid}:${i}`);
+    const limit = era.get(`maxbase:${cid}:${i}`);
     ret.push(
-      { config: { width: 1 }, content: e.substring(0, 1), type: 'text' },
+      { config: { width: 1 }, content: __(`abbr_${a}`), type: 'text' },
       {
-        config: { color: attr_background_colors[e], height: 22, width: 3 },
+        config: { color: attr_bg_colors[a], height: 22, width: 3 },
         inContent: `${Math.floor(val)}/${Math.floor(limit)}`,
         percentage: (val * 100) / limit,
         type: 'progress',
