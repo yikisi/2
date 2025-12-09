@@ -240,7 +240,7 @@ module.exports = class extends CustomizedEdu {
           era.add('item:情人节巧克力', 1);
           wait = true;
         } else {
-          sys_change_attr_and_print(0, '体力', 200);
+          sys_change_attr_and_print(0, attr_enum.hp, 200);
         }
         break;
       case 47 + 40:

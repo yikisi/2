@@ -1,15 +1,24 @@
 const { readFileSync, readdirSync, writeFileSync } = require('node:fs');
-const { join, resolve } = require('node:path');
+const { join } = require('node:path');
 
-const {
-  adaptability_names,
-  attr_names,
-} = require('../../ere/data/train-const');
-
-const skill_path = resolve('../../ere/data/race/skill');
-const gene_path = resolve('../../ere/data/race/gene');
+const skill_path = join(__dirname, '../../ere/data/race/skill');
+const gene_path = join(__dirname, '../../ere/data/race/gene');
 
 const skill_list = readdirSync(skill_path);
+
+const adaptability_names = [
+  '草地',
+  '泥地',
+  '短距离',
+  '英里赛',
+  '中距离',
+  '长距离',
+  '逃马',
+  '先马',
+  '差马',
+  '追马',
+];
+const attr_names = ['速度', '耐力', '力量', '根性', '智力'];
 
 let output = 'const gene_dict = {};\n\n';
 
@@ -24,8 +33,8 @@ adaptability_names.forEach((e, i) => {
   output += `gene_dict[${gene_id}] = require('#/data/race/gene/gene-${gene_id}');\n`;
 });
 
-const attr_gene_names = ['新星', '高手', '名宿', '大师'],
-  attr_gene_cost = [25, 49, 72, 95];
+const attr_gene_names = ['新星', '高手', '名宿', '大师'];
+const attr_gene_cost = [25, 49, 72, 95];
 
 attr_names.forEach((e, i) => {
   attr_gene_names.forEach((ne, j) => {
@@ -34,7 +43,7 @@ attr_names.forEach((e, i) => {
       join(gene_path, `gene-${gene_id}.js`),
       `const UmaGene = require('#/data/race/model/uma-gene');\n\nmodule.exports = new UmaGene(${
         gene_id
-      },${j},'${e}${ne}的追忆','${e}属性及上限+${j * 25 + 25}',UmaGene.gene_type_enum.base,'${e}',${attr_gene_cost[j]},${j * 25 + 25})`,
+      },${j},'${e}${ne}的追忆','${e}属性及上限+${j * 25 + 25}',UmaGene.gene_type_enum.base,${i},${attr_gene_cost[j]},${j * 25 + 25})`,
     );
     output += `gene_dict[${gene_id}] = require('#/data/race/gene/gene-${gene_id}');\n`;
   });

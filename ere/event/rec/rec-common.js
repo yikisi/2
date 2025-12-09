@@ -13,7 +13,8 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { get_chara_color } = require('#/data/chara-colors');
 const recruit_flags = require('#/data/event/recruit-flags');
-const notes = require('#/data/notes.json');
+
+const { i18n } = require('#/i18n/selector');
 
 class CustomizedRecruit {
   /** @param {number} chara_id */
@@ -97,7 +98,7 @@ class CustomizedRecruit {
       temp.chara = 0;
       temp.cost += 20;
     }
-    if (notes[this.id]) {
+    if (i18n().notes[this.id]) {
       era.drawLine();
       if (
         await select_yes_or_no(
@@ -106,7 +107,7 @@ class CustomizedRecruit {
           '之后去首页确认',
         )
       ) {
-        notes[this.id].forEach((e) =>
+        i18n().notes[this.id].forEach((e) =>
           era.print([{ content: e[0], fontWeight: 'bold' }, '「', e[1], '」'], {
             color: get_chara_color(this.id),
           }),

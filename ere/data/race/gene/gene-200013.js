@@ -6,7 +6,7 @@ module.exports = new UmaGene(
   '耐力大师的追忆',
   '耐力属性及上限+100',
   UmaGene.gene_type_enum.base,
-  '耐力',
+  1,
   95,
   100,
 );

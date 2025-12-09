@@ -25,17 +25,18 @@ const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const event_hooks = require('#/data/event/event-hooks');
+const { attr_enum } = require('#/data/train-const');
 
 /**
- * @param {number} chara_id
- * @param {string|number} attr_name
+ * @param {number} cid
+ * @param {number} attr
  * @param {number} val
  * @returns {boolean}
  */
-function print_attr_change(chara_id, attr_name, val) {
-  const buffer = sys_change_attr_and_print(chara_id, attr_name, val);
+function print_attr_change(cid, attr, val) {
+  const buffer = sys_change_attr_and_print(cid, attr, val);
   if (buffer.length > 0) {
-    era.print([get_chara_talk(chara_id).get_colored_name(), ' 的 ', ...buffer]);
+    era.print([get_chara_talk(cid).get_colored_name(), ' 的 ', ...buffer]);
     return true;
   }
 }
@@ -632,7 +633,7 @@ module.exports = class extends CustomizedDaily {
             }
             era.println();
             wait_flag =
-              print_attr_change(24, '体力', get_random_value(0, 50)) ||
+              print_attr_change(24, attr_enum.hp, get_random_value(0, 50)) ||
               wait_flag; //角色体力加0-50
             wait_flag =
               sys_like_chara(24, 0, get_random_value(0, 10)) || wait_flag; //好感上升随机0-10
@@ -724,9 +725,13 @@ module.exports = class extends CustomizedDaily {
                 ' 猜到了结果，但似乎也有好好的享受到乐趣？',
               ]);
             }
-            wait_flag = print_attr_change(24, '体力', get_random_value(0, 50));
+            wait_flag = print_attr_change(
+              24,
+              attr_enum.hp,
+              get_random_value(0, 50),
+            );
             wait_flag =
-              print_attr_change(0, '体力', get_random_value(0, 50)) ||
+              print_attr_change(0, attr_enum.hp, get_random_value(0, 50)) ||
               wait_flag; //玩家体力随机回复0-30
             wait_flag =
               sys_like_chara(24, 0, get_random_value(0, 10)) || wait_flag; //好感上升随机0-10

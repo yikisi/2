@@ -8,8 +8,11 @@ const { get_custom_mec } = require('#/event/mec/mec-factory');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
-const { attr_change_colors, motivation_colors } = require('#/data/color-const');
-const { attr_colors } = require('#/data/const.json');
+const {
+  attr_change_colors,
+  attr_colors,
+  motivation_colors,
+} = require('#/data/color-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const RyokaLifeMarks = require('#/data/event/life-event-marks/life-event-marks-344');
 const recruit_flags = require('#/data/event/recruit-flags');
@@ -18,6 +21,7 @@ const { location_enum } = require('#/data/locations');
 const {
   attr_enum,
   attr_names,
+  base_names,
   motivation_names,
 } = require('#/data/train-const');
 
@@ -112,33 +116,31 @@ function sys_change_pressure(cid, _val) {
 module.exports = {
   /**
    * @param {number} cid
-   * @param {string|number} attr_id_or_name
+   * @param {number} attr
    * @param {number} change
    * @returns {(PrintedSpan|string)[]}
    */
-  sys_change_attr_and_print(cid, attr_id_or_name, change) {
+  sys_change_attr_and_print(cid, attr, change) {
     if (!change) {
       return [];
     }
-    let attr_name = attr_id_or_name;
-    if (typeof attr_id_or_name === 'number') {
-      attr_name = attr_names[attr_id_or_name];
-    }
-    const val = era.get(`base:${cid}:${attr_name}`),
-      max = era.get(`maxbase:${cid}:${attr_name}`),
-      ret = [];
-    if (typeof attr_id_or_name === 'string') {
+    // 转换为 base 表中的变量序号
+    const bid = attr > attr_enum.intelligence ? attr - attr_enum.hp : attr + 5;
+    const val = era.get(`base:${cid}:${bid}`);
+    const max = era.get(`maxbase:${cid}:${bid}`);
+    const ret = [];
+    if (attr > attr_enum.intelligence) {
       if (change < 0) {
         const in_train = era.get(`tcvar:${cid}:脱力`) !== undefined;
         let debuff =
           sys_get_debuff(cid) +
           (era.get('flag:当前位置') === location_enum.beach &&
-            attr_id_or_name === '体力') *
+            attr === attr_enum.hp) *
             0.2;
         if (debuff <= 10) {
           change = Math.floor(change * (debuff + 1));
         }
-        if (attr_id_or_name === '体力') {
+        if (attr === attr_enum.hp) {
           let lose_weight =
             1 -
             0.4 * era.get(`status:${cid}:发胖`) +
@@ -182,10 +184,7 @@ module.exports = {
       }
     } else if (cid && !(era.get(`cflag:${cid}:育成回合计时`) < 3 * 48)) {
       return [];
-    } else if (
-      attr_id_or_name === attr_enum.speed &&
-      era.get(`status:${cid}:发胖`)
-    ) {
+    } else if (attr === attr_enum.speed && era.get(`status:${cid}:发胖`)) {
       return [];
     }
     if (change > max - val) {
@@ -195,12 +194,17 @@ module.exports = {
       change = 0 - val;
     }
     if (change) {
-      era.add(`base:${cid}:${attr_name}`, change);
-      const stat = Math.floor(Math.abs(change));
+      const o = Math.floor(era.get(`base:${cid}:${bid}`));
+      const stat = Math.abs(
+        Math.floor(era.add(`base:${cid}:${bid}`, change)) - o,
+      );
       ret.push(
         {
-          color: attr_colors[attr_name],
-          content: attr_name,
+          color: attr_colors[attr],
+          content:
+            attr > attr_enum.intelligence
+              ? base_names[attr - attr_enum.hp]
+              : attr_names[attr],
         },
         change > 0
           ? {
@@ -214,7 +218,7 @@ module.exports = {
         ' 了',
         stat >= 1
           ? {
-              color: attr_colors[attr_name],
+              color: attr_colors[attr],
               content: ` ${stat.toLocaleString()}`,
             }
           : '',

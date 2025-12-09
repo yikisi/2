@@ -328,7 +328,7 @@ module.exports = {
       era.print([
         me.get_colored_name(),
         ' 的 ',
-        ...sys_change_attr_and_print(0, '精力', t_cost.time / 2),
+        ...sys_change_attr_and_print(0, attr_enum.tp, t_cost.time / 2),
       ]);
     }
     const i_t3 = CharaInmon.get(cid).on(plugin_enum.tra_3);
@@ -337,8 +337,8 @@ module.exports = {
       t_cost.time = -era.get(`base:${cid}:精力`);
     }
     let to_print = [
-      sys_change_attr_and_print(cid, '体力', t_cost.stamina),
-      sys_change_attr_and_print(cid, '精力', t_cost.time),
+      sys_change_attr_and_print(cid, attr_enum.hp, t_cost.stamina),
+      sys_change_attr_and_print(cid, attr_enum.tp, t_cost.time),
     ];
     era.print(
       [

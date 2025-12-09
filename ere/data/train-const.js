@@ -6,6 +6,8 @@ const attr_enum = {
   strength: 0,
   toughness: 0,
   intelligence: 0,
+  hp: 0,
+  tp: 0,
 };
 Object.keys(attr_enum).forEach((k, i) => (attr_enum[k] = i));
 
@@ -32,6 +34,7 @@ module.exports = {
   ],
   attr_enum,
   attr_names,
+  base_names: [i18n().hp, i18n().tp],
   fail_sta_border: {
     intelligence: 0.3, // 30%
     other: 0.5, // 50%

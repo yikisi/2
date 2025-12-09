@@ -5,7 +5,7 @@ const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 /**
- * @param {number} chara_id
+ * @param {number} cid
  * @param {number[]} attr_change
  * @param {number} pt_change
  * @param {Record<string,number>} [base_change={}]
@@ -13,7 +13,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
  * @returns {boolean}
  */
 function get_attr_and_print_in_event(
-  chara_id,
+  cid,
   attr_change,
   pt_change,
   base_change = {},
@@ -23,22 +23,22 @@ function get_attr_and_print_in_event(
     era.println();
   }
   let buffer = (attr_change || new Array(5))
-    .map((e, i) => sys_change_attr_and_print(chara_id, i, e))
+    .map((e, i) => sys_change_attr_and_print(cid, i, e))
     .filter((e) => e.length);
   let ret;
   if ((pt_change ||= 0) > 0) {
     buffer.push([{ content: `获得了 ${pt_change} 点技能点数！` }]);
-    era.add(`exp:${chara_id}:技能点数`, pt_change);
+    era.add(`exp:${cid}:技能点数`, pt_change);
   }
   const base_buffer = Object.entries(base_change)
-    .map((e) => sys_change_attr_and_print(chara_id, e[0], e[1]))
+    .map((e) => sys_change_attr_and_print(cid, e[0], e[1]))
     .filter((e) => e.length);
   buffer = [...base_buffer, ...buffer];
   if ((ret = buffer.length > 0)) {
     era.printMultiColumns([
       {
         content: [
-          get_chara_talk(chara_id).get_colored_name(),
+          get_chara_talk(cid).get_colored_name(),
           ' 的属性有了如下变化：',
         ],
         type: 'text',

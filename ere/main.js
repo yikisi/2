@@ -33,9 +33,9 @@ const { join_list } = require('#/utils/list-utils');
 
 const { generate_copyrights, get_copyright_entry } = require('#/copyright');
 const { get_chara_color } = require('#/data/chara-colors');
-const notes = require('#/data/notes.json');
 const { first_child_id } = require('#/data/other-const');
 
+const { i18n } = require('#/i18n/selector');
 const { res_version } = require('#/versions');
 
 module.exports = async () => {
@@ -265,14 +265,16 @@ module.exports = async () => {
       c: '帮助说明',
       async h() {
         era.drawLine();
-        for (const note of notes.common
-          .filter(() => true)
+        for (const note of i18n()
+          .notes.common.filter(() => true)
           .sort((a, b) => (a[0] > b[0] ? 1 : -1))) {
           say_by_passer_by(...note);
         }
-        for (const cid of Object.keys(notes).filter((k) => !isNaN(Number(k)))) {
+        for (const cid of Object.keys(i18n().notes).filter(
+          (k) => !isNaN(Number(k)),
+        )) {
           await era.waitAnyKey();
-          for (const note of notes[cid]) {
+          for (const note of i18n().notes[cid]) {
             era.print(
               [{ content: note[0], fontWeight: 'bold' }, '「', note[1], '」'],
               { color: get_chara_color(Number(cid)) },

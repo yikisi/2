@@ -456,6 +456,7 @@ async function print_rec_page() {
             .map((e, i) => ({
               i,
               n: e,
+              // 属性训练加成：25-29
               v: era.get(`staticcflag:${selected}:${25 + i}`),
             }))
             .filter((e) => e.v > 0)

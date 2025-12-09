@@ -28,6 +28,7 @@ const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const TasteLifeMarks = require('#/data/event/life-event-marks/life-event-marks-302');
 const recruit_flags = require('#/data/event/recruit-flags');
+const { attr_enum } = require('#/data/train-const');
 
 module.exports = class extends CustomizedEdu {
   /**
@@ -96,7 +97,7 @@ module.exports = class extends CustomizedEdu {
         ' 十分高兴，特雷森也重回正轨了！',
       ]);
       println();
-      sys_change_attr_and_print(0, '精力', -50);
+      sys_change_attr_and_print(0, attr_enum.tp, -50);
       sys_like_chara(302, 0, get_random_value(40, 60)) && (await waitAnyKey());
     } else {
       await printAndWait('似乎没什么特别的……所以理事长平常都在干什么？');

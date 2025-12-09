@@ -37,6 +37,7 @@ const {
   get_relation_info,
 } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
+const { attr_enum } = require('#/data/train-const');
 
 const { __ } = require('#/i18n/selector');
 
@@ -87,7 +88,7 @@ async function npc_common(
         content: talk_cb.name,
       },
       async h() {
-        sys_change_attr_and_print(0, '精力', -200);
+        sys_change_attr_and_print(0, attr_enum.tp, -200);
         talk_cb.handle && (await talk_cb.handle());
         era.println();
         sys_like_chara(chara.id, 0, get_random_value(5, 20)) &&
@@ -203,8 +204,8 @@ async function npc_common(
         if (cele_cb.handle) {
           await cele_cb.handle();
         }
-        sys_change_attr_and_print(0, '精力', -celebration_cost);
-        sys_change_attr_and_print(chara.id, '精力', -50);
+        sys_change_attr_and_print(0, attr_enum.tp, -celebration_cost);
+        sys_change_attr_and_print(chara.id, attr_enum.tp, -50);
         era.drawLine();
         if (
           !(await sys_get_random_event(event_hooks.celebration, chara.id)())
@@ -236,8 +237,8 @@ async function npc_common(
         content: '庆祝生日',
       },
       async h() {
-        sys_change_attr_and_print(0, '精力', -celebration_cost);
-        sys_change_attr_and_print(chara.id, '精力', -50);
+        sys_change_attr_and_print(0, attr_enum.tp, -celebration_cost);
+        sys_change_attr_and_print(chara.id, attr_enum.tp, -50);
         era.print(['【向 ', chara.get_colored_name(), ' 祝贺生日快乐】']);
         await run_custom_daily(chara.id, event_hooks.birthday, {});
       },

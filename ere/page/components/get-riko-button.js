@@ -18,6 +18,7 @@ const { get_random_entry } = require('#/utils/list-utils');
 const GlasseEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-202');
 const CoconEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-203');
 const recruit_flags = require('#/data/event/recruit-flags');
+const { attr_enum } = require('#/data/train-const');
 
 /**
  * @param {CharaTalk} chara
@@ -206,8 +207,8 @@ function get_riko_button(chara, me) {
             (Math.random() < get('love:306') / 100),
           0,
         );
-        sys_change_attr_and_print(0, '精力', -200);
-        sys_change_attr_and_print(306, '精力', -200);
+        sys_change_attr_and_print(0, attr_enum.tp, -200);
+        sys_change_attr_and_print(306, attr_enum.tp, -200);
       },
       name: '谈起担当的训练',
     };

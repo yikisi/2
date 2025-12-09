@@ -43,6 +43,7 @@ const {
   foreign_race_list,
   track2location,
 } = require('#/data/race/race-location');
+const { attr_enum } = require('#/data/train-const');
 
 const track2race = {
   [track_enum.meydan]: {
@@ -58,25 +59,25 @@ const track2race = {
 };
 
 /**
- * @param {number} chara_id
+ * @param {number} cid
  * @param {string} language
  * @param {number} loc
  * @param {boolean} before_race
  */
-function handle_foreign_debuff(chara_id, language, loc, before_race) {
-  sys_change_attr_and_print(chara_id, '体力', -200);
-  sys_change_attr_and_print(chara_id, '精力', -500);
-  sys_change_tired(chara_id, 2);
+function handle_foreign_debuff(cid, language, loc, before_race) {
+  sys_change_attr_and_print(cid, attr_enum.hp, -200);
+  sys_change_attr_and_print(cid, attr_enum.tp, -500);
+  sys_change_tired(cid, 2);
   era.set(
-    `status:${chara_id}:语言不通`,
+    `status:${cid}:语言不通`,
     Math.max(
       5 -
-        era.get(`abl:${chara_id}:${language}语`) +
-        era.get(`talent:${chara_id}:社交态度`),
+        era.get(`abl:${cid}:${language}语`) +
+        era.get(`talent:${cid}:社交态度`),
       0,
     ),
   );
-  get_custom_mec(chara_id).set_foreign_debuff(before_race, loc);
+  get_custom_mec(cid).set_foreign_debuff(before_race, loc);
 }
 
 /**
@@ -306,8 +307,8 @@ async function check_new_activities(cur_round, in_team_list) {
       ]);
       in_team_list.forEach((id) => {
         if (era.get(`cflag:${id}:位置`) === location.loc) {
-          sys_change_attr_and_print(id, '体力', -100);
-          sys_change_attr_and_print(id, '精力', -600);
+          sys_change_attr_and_print(id, attr_enum.hp, -100);
+          sys_change_attr_and_print(id, attr_enum.tp, -600);
           era.set(`status:${id}:语言不通`, 0);
           era.set(`status:${id}:水土不服`, 0);
           era.set(`status:${id}:客场作战`, 0);
@@ -317,8 +318,8 @@ async function check_new_activities(cur_round, in_team_list) {
       });
       if (era.get('cflag:0:位置') === location.loc) {
         era.set('flag:当前位置', location_enum.office);
-        sys_change_attr_and_print(0, '体力', -100);
-        sys_change_attr_and_print(0, '精力', -600);
+        sys_change_attr_and_print(0, attr_enum.hp, -100);
+        sys_change_attr_and_print(0, attr_enum.tp, -600);
         era.set('status:0:语言不通', 0);
         era.set('status:0:水土不服', 0);
         era.set('status:0:客场作战', 0);
@@ -354,13 +355,12 @@ async function check_new_activities(cur_round, in_team_list) {
           ],
           type: 'text',
         },
-        ...beach_group.map((chara_id) => {
-          const chara = get_chara_talk(chara_id);
-          sys_change_attr_and_print(chara_id, '体力', -10);
-          sys_change_attr_and_print(chara_id, '精力', -400);
+        ...beach_group.map((cid) => {
+          sys_change_attr_and_print(cid, attr_enum.hp, -10);
+          sys_change_attr_and_print(cid, attr_enum.tp, -400);
           return {
             config: { align: 'center', width: 3 },
-            content: [chara.get_colored_name()],
+            content: [get_chara_talk(cid).get_colored_name()],
             type: 'text',
           };
         }),
@@ -421,8 +421,8 @@ async function check_new_activities(cur_round, in_team_list) {
         { content: '今年以下人员会跟随参加夏合宿：', type: 'text' },
         ...follow_group.map((id) => {
           const chara = get_chara_talk(id);
-          sys_change_attr_and_print(id, '体力', -10);
-          sys_change_attr_and_print(id, '精力', -400);
+          sys_change_attr_and_print(id, attr_enum.hp, -10);
+          sys_change_attr_and_print(id, attr_enum.tp, -400);
           return {
             config: { align: 'center', width: 3 },
             content: [chara.get_colored_name()],
@@ -440,15 +440,15 @@ async function check_new_activities(cur_round, in_team_list) {
     ]);
     in_team_list.forEach((id) => {
       if (era.get(`cflag:${id}:位置`)) {
-        sys_change_attr_and_print(id, '体力', -10);
-        sys_change_attr_and_print(id, '精力', -400);
+        sys_change_attr_and_print(id, attr_enum.hp, -10);
+        sys_change_attr_and_print(id, attr_enum.tp, -400);
         era.set(`cflag:${id}:位置`, 0);
       }
     });
     if (era.get('cflag:0:位置')) {
       era.set('flag:当前位置', location_enum.office);
-      sys_change_attr_and_print(0, '体力', -10);
-      sys_change_attr_and_print(0, '精力', -400);
+      sys_change_attr_and_print(0, attr_enum.hp, -10);
+      sys_change_attr_and_print(0, attr_enum.tp, -400);
       era.set('cflag:0:位置', 0);
     }
   }

@@ -34,6 +34,7 @@ const {
 const BasementAction = require('#/data/event/basement-action');
 const basement_owners = require('#/data/event/basement-owners');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
+const { attr_enum } = require('#/data/train-const');
 
 const basement_desc = [
   '但完全没有防备',
@@ -341,8 +342,16 @@ module.exports = async (_, save_and_next_week, flags) => {
     if (strike && chara_list.length === 2) {
       action_list.push({
         async h() {
-          sys_change_attr_and_print(0, '体力', -get_random_value(75, 125));
-          sys_change_attr_and_print(0, '精力', -get_random_value(75, 125));
+          sys_change_attr_and_print(
+            0,
+            attr_enum.hp,
+            -get_random_value(75, 125),
+          );
+          sys_change_attr_and_print(
+            0,
+            attr_enum.tp,
+            -get_random_value(75, 125),
+          );
           sys_like_chara(chara_list[1], 0, -get_random_value(75, 125), false);
           sys_change_pressure(chara_list[1], get_random_value(1000, 2000));
           if (
@@ -390,8 +399,16 @@ module.exports = async (_, save_and_next_week, flags) => {
     } else {
       action_list.push({
         async h() {
-          sys_change_attr_and_print(0, '体力', -get_random_value(125, 175));
-          sys_change_attr_and_print(0, '精力', -get_random_value(100, 150));
+          sys_change_attr_and_print(
+            0,
+            attr_enum.hp,
+            -get_random_value(125, 175),
+          );
+          sys_change_attr_and_print(
+            0,
+            attr_enum.tp,
+            -get_random_value(100, 150),
+          );
           const beat_list = chara_list.slice(1).filter(sys_check_awake);
           let win = true;
           for (const chara_id of beat_list) {

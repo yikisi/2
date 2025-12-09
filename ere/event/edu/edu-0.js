@@ -63,6 +63,7 @@ const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
 const { max_chara_id } = require('#/data/other-const');
+const { attr_enum } = require('#/data/train-const');
 
 module.exports = class extends StrangeDayEvents {
   get dict() {
@@ -371,7 +372,11 @@ module.exports = class extends StrangeDayEvents {
       sys_filter_chara('cflag', '招募状态', recruit_flags.yes)
         .filter((e) => get(`cflag:${e}:育成回合计时`) < 3 * 48)
         .forEach((e) =>
-          sys_change_attr_and_print(e, '体力', get(`maxbase:${e}:体力`) * 0.15),
+          sys_change_attr_and_print(
+            e,
+            attr_enum.hp,
+            get(`maxbase:${e}:体力`) * 0.15,
+          ),
         );
     } else {
       await printAndWait([me.get_colored_name(), ' 按住了把手机摔烂的冲动……']);
@@ -405,8 +410,8 @@ module.exports = class extends StrangeDayEvents {
         '但顺利得让人背脊发凉啊……就像是自己被当成什么实验品一样……',
       );
       println();
-      sys_change_attr_and_print(0, '体力', -get('maxbase:0:体力') * 0.25);
-      sys_change_attr_and_print(0, '精力', -get('maxbase:0:精力') * 0.25);
+      sys_change_attr_and_print(0, attr_enum.hp, -get('maxbase:0:体力') * 0.25);
+      sys_change_attr_and_print(0, attr_enum.tp, -get('maxbase:0:精力') * 0.25);
       const item = get_random_entry([
         ...new Array(8).fill(0).map((_, i) => i),
         ...new Array(7).fill(0).map((_, i) => i + 10),

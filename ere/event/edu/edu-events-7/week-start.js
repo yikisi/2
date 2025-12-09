@@ -666,7 +666,7 @@ module.exports = class extends Edu7UntilRaceEnd {
         await era.printAndWait(
           '得到了普通的萝卜……等下长在海边真的算普通吗！？总之先拿回去给午饭加餐了。',
         );
-        sys_change_attr_and_print(0, '体力', 100);
+        sys_change_attr_and_print(0, attr_enum.hp, 100);
       }
     } else {
       return await super.week_start(

@@ -32,6 +32,7 @@ const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
+const { attr_enum } = require('#/data/train-const');
 
 /**
  * @param {number} cid
@@ -210,8 +211,8 @@ module.exports = async function (cid, save_and_next_week, flags) {
       break;
     case 202:
       era.set('flag:当前位置', location_enum.beach_market);
-      sys_change_attr_and_print(0, '精力', -celebration_cost);
-      sys_change_attr_and_print(cid, '精力', -50);
+      sys_change_attr_and_print(0, attr_enum.tp, -celebration_cost);
+      sys_change_attr_and_print(cid, attr_enum.tp, -50);
       era.drawLine();
       if (!(await sys_get_random_event(event_hooks.celebration, cid)())) {
         era.drawLine();
@@ -228,8 +229,8 @@ module.exports = async function (cid, save_and_next_week, flags) {
       break;
     case 203:
       era.drawLine();
-      sys_change_attr_and_print(0, '精力', -celebration_cost);
-      sys_change_attr_and_print(cid, '精力', -50);
+      sys_change_attr_and_print(0, attr_enum.tp, -celebration_cost);
+      sys_change_attr_and_print(cid, attr_enum.tp, -50);
       era.print([
         '【向 ',
         get_chara_talk(cid).get_colored_name(),

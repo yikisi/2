@@ -29,8 +29,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const CharaAvailableGenes = require('#/data/chara-available-genes');
 const CharaGenes = require('#/data/chara-genes');
 const CharaSkills = require('#/data/chara-skills');
-const { adaptability_colors } = require('#/data/color-const');
-const { attr_colors } = require('#/data/const.json');
+const { adaptability_colors, attr_colors } = require('#/data/color-const');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_adaptability_rank } = require('#/data/info-generator');
 const { gene_juel_names } = require('#/data/other-const');
@@ -39,7 +38,7 @@ const {
   gene_type_colors,
   gene_type_enum,
 } = require('#/data/race/model/uma-gene');
-const { adaptability_names } = require('#/data/train-const');
+const { adaptability_names, attr_names } = require('#/data/train-const');
 
 const gene_limit = 27;
 
@@ -664,20 +663,23 @@ async function print_inherit_page() {
             break;
           case gene_type_enum.base:
             set(
-              `maxbase:${selected}:${gene.type_value}`,
+              `maxbase:${selected}:${5 + gene.type_value}`,
               Math.min(
-                get(`maxbase:${selected}:${gene.type_value}`) + gene.value,
+                get(`maxbase:${selected}:${5 + gene.type_value}`) + gene.value,
                 2000,
               ),
             );
-            add(`base:${selected}:${gene.type_value}`, gene.value);
+            add(`base:${selected}:${5 + gene.type_value}`, gene.value);
             await printAndWait([
               chara.get_colored_name(),
               ' 的 ',
-              { content: gene.type_value, color: attr_colors[gene.type_value] },
+              {
+                content: attr_names[gene.type_value],
+                color: attr_colors[gene.type_value],
+              },
               ' 现在是 ',
               {
-                content: `${Math.floor(get(`base:${selected}:${gene.type_value}`))}/${get(`maxbase:${selected}:${gene.type_value}`)}`,
+                content: `${Math.floor(get(`base:${selected}:${5 + gene.type_value}`))}/${get(`maxbase:${selected}:${gene.type_value}`)}`,
                 color: attr_colors[gene.type_value],
               },
             ]);

@@ -6,7 +6,7 @@ module.exports = new UmaGene(
   '速度大师的追忆',
   '速度属性及上限+100',
   UmaGene.gene_type_enum.base,
-  '速度',
+  0,
   95,
   100,
 );

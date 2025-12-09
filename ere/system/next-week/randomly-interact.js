@@ -102,8 +102,8 @@ function randomly_interact(in_team_list) {
       time: -base_time_cost,
     };
     const cost_result = [
-      sys_change_attr_and_print(e.chara.id, '体力', train_cost.stamina),
-      sys_change_attr_and_print(e.chara.id, '精力', train_cost.time),
+      sys_change_attr_and_print(e.chara.id, attr_enum.hp, train_cost.stamina),
+      sys_change_attr_and_print(e.chara.id, attr_enum.tp, train_cost.time),
     ];
     add_train_exp(
       e.chara.id,
@@ -241,8 +241,12 @@ function randomly_interact(in_team_list) {
           time: -base_time_cost,
         };
         const result = [
-          sys_change_attr_and_print(c.chara.id, '体力', train_cost.stamina),
-          sys_change_attr_and_print(c.chara.id, '精力', train_cost.time),
+          sys_change_attr_and_print(
+            c.chara.id,
+            attr_enum.hp,
+            train_cost.stamina,
+          ),
+          sys_change_attr_and_print(c.chara.id, attr_enum.tp, train_cost.time),
         ];
         era.add(
           `exp:${c.chara.id}:${attr_names[c.chara.id]}训练经验`,

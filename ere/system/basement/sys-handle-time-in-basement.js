@@ -1,6 +1,7 @@
 const era = require('#/era-electron');
 
 const sys_handle_escape_basement = require('#/system/basement/sys-handle-escape-basement');
+const { sys_check_yandere } = require('#/system/chara/sys-calc-cheat');
 const sys_hurt_uma = require('#/system/chara/sys-hurt-uma');
 const sys_get_strength_ratio_in_fight = require('#/system/ero/fight/sys-get-strength-ratio');
 const { check_satisfied } = require('#/system/ero/sys-calc-ero-status');
@@ -38,7 +39,7 @@ const basement_owners = require('#/data/event/basement-owners');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { location_enum } = require('#/data/locations');
-const { sys_check_yandere } = require('#/system/chara/sys-calc-cheat');
+const { attr_enum } = require('#/data/train-const');
 
 const basement_just_status =
     (1 << basement_status_enum.just_back) +
@@ -141,7 +142,11 @@ async function handle_rape(part_list, my_life_marks, is_rape) {
     )
     .filter((a) => a.type === action_type_enum.digestive_end)
     .forEach((a) => {
-      sys_change_attr_and_print(a.chara_id, '体力', get_random_value(100, 200));
+      sys_change_attr_and_print(
+        a.chara_id,
+        attr_enum.hp,
+        get_random_value(100, 200),
+      );
       LifeEventMarks.get_marks(a.chara_id).b_food_buff = 0;
     });
   begin_and_init_ero(...part_list);
@@ -286,8 +291,8 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
         }
         my_life_marks.b_now++;
         life_marks.b_status = 1 << basement_status_enum.idle;
-        sys_change_attr_and_print(action.chara_id, '体力', -50);
-        sys_change_attr_and_print(action.chara_id, '精力', -50);
+        sys_change_attr_and_print(action.chara_id, attr_enum.hp, -50);
+        sys_change_attr_and_print(action.chara_id, attr_enum.tp, -50);
         break;
       case action_type_enum.digestive_end:
         life_marks.b_food_buff = 0;
@@ -540,14 +545,14 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
         }
         sys_change_attr_and_print(
           e,
-          '体力',
+          attr_enum.hp,
           (stamina_delta + life_marks.b_stamina_buff + life_marks.b_food_buff) *
             delta *
             get_random_value(0.8, 1.2, true),
         );
         sys_change_attr_and_print(
           e,
-          '精力',
+          attr_enum.tp,
           (time_delta + life_marks.b_time_buff) *
             delta *
             get_random_value(0.8, 1.2, true),
@@ -814,7 +819,11 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
               a.chara_id === e && a.type === action_type_enum.digestive_end,
           ).length
         ) {
-          sys_change_attr_and_print(e, '体力', get_random_value(100, 200));
+          sys_change_attr_and_print(
+            e,
+            attr_enum.hp,
+            get_random_value(100, 200),
+          );
           life_marks.b_food_buff = 0;
         }
       });

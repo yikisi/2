@@ -34,7 +34,7 @@ module.exports = (handlers) => {
         await era.printAndWait([
           me.get_colored_name(),
           ' 的 ',
-          ...sys_change_attr_and_print(0, '体力', 200),
+          ...sys_change_attr_and_print(0, attr_enum.hp, 200),
         ]);
         sys_change_weight(0, get_random_value(20, 40, true));
         era.add('item:情人节巧克力', -1);
@@ -60,7 +60,7 @@ module.exports = (handlers) => {
       await era.printAndWait([
         aim_chara.get_colored_name(),
         ' 的 ',
-        ...sys_change_attr_and_print(aim, '体力', val),
+        ...sys_change_attr_and_print(aim, attr_enum.hp, val),
       ]);
       sys_change_motivation(aim, -1) && (await era.waitAnyKey());
       era.add('item:蔬菜汁', -1);
@@ -89,7 +89,7 @@ module.exports = (handlers) => {
         '，',
         ...sys_change_attr_and_print(
           aim,
-          '体力',
+          attr_enum.hp,
           era.get(`maxbase:${aim}:体力`),
         ),
       ]);
@@ -114,7 +114,7 @@ module.exports = (handlers) => {
       await era.printAndWait([
         aim_chara.get_colored_name(),
         ' 的 ',
-        ...sys_change_attr_and_print(aim, '精力', val),
+        ...sys_change_attr_and_print(aim, attr_enum.tp, val),
       ]);
       sys_change_motivation(aim, -1) && (await era.waitAnyKey());
       era.add(`base:${aim}:药物残留`, 8);
@@ -145,7 +145,7 @@ module.exports = (handlers) => {
         '，',
         ...sys_change_attr_and_print(
           aim,
-          '精力',
+          attr_enum.tp,
           era.get(`maxbase:${aim}:精力`),
         ),
       ]);
@@ -401,7 +401,11 @@ module.exports = (handlers) => {
         { isBr: true },
         chara.get_colored_name(),
         ' 的 ',
-        ...sys_change_attr_and_print(aim, '体力', item_id === 45 ? 400 : 150),
+        ...sys_change_attr_and_print(
+          aim,
+          attr_enum.hp,
+          item_id === 45 ? 400 : 150,
+        ),
       ]);
       era.add(`exp:${aim}:吸奶量`, 200);
       sys_change_lust(aim, item_id === 45 ? 800 : 300);

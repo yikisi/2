@@ -57,7 +57,7 @@ const EventMarks = require('#/data/event/event-marks');
 const loc_characters = require('#/data/event/loc-characters');
 const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
-const { pressure_border } = require('#/data/train-const');
+const { attr_enum, pressure_border } = require('#/data/train-const');
 
 /**
  * @param {number} cid
@@ -374,8 +374,8 @@ module.exports = async (cid, next_cb, flags) => {
         },
         content: `一起庆祝 ${celebration}`,
         async h() {
-          sys_change_attr_and_print(0, '精力', -celebration_cost);
-          sys_change_attr_and_print(cid, '精力', -50);
+          sys_change_attr_and_print(0, attr_enum.tp, -celebration_cost);
+          sys_change_attr_and_print(cid, attr_enum.tp, -50);
           if (!(await sys_get_random_event(event_hooks.celebration, cid)())) {
             era.drawLine();
             era.print([
@@ -402,8 +402,8 @@ module.exports = async (cid, next_cb, flags) => {
         },
         content: '庆祝生日',
         async h() {
-          sys_change_attr_and_print(0, '精力', -celebration_cost);
-          sys_change_attr_and_print(cid, '精力', -50);
+          sys_change_attr_and_print(0, attr_enum.tp, -celebration_cost);
+          sys_change_attr_and_print(cid, attr_enum.tp, -50);
           era.print(['【向 ', chara.get_colored_name(), ' 祝贺生日快乐】']);
           await run_custom_daily(cid, event_hooks.birthday, {});
         },

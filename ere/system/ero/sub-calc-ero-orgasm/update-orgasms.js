@@ -30,6 +30,7 @@ const {
 } = require('#/data/ero/part-const');
 const { stain_enum } = require('#/data/ero/stain-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
+const { attr_enum } = require('#/data/train-const');
 
 /** @type {function(number,number,*?):Promise} */
 let run_custom_ero;
@@ -401,12 +402,12 @@ async function update_orgasms(shown, ...ids) {
       cost = [
         sys_change_attr_and_print(
           cid,
-          '体力',
+          attr_enum.hp,
           -era.get(`nowex:${cid}:体力消耗`) * (lost_mind_timer ? 1.5 : 1),
         ),
         sys_change_attr_and_print(
           cid,
-          '精力',
+          attr_enum.tp,
           -era.get(`nowex:${cid}:精力消耗`) * (1 - wp_coefficient * wp_ratio),
         ),
       ];

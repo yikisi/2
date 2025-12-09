@@ -39,6 +39,8 @@ function check_inmon(in_team_list) {
   ) {
     era.drawLine();
     for (let i = 0; i < 2; ++i) {
+      // 人奶 45，马奶 46
+      const milk_item = 45 + i;
       if (milk_list[1 - i].length > 0) {
         const buffer = [];
         milk_list[1 - i].forEach((id) => {
@@ -55,10 +57,10 @@ function check_inmon(in_team_list) {
           ...buffer,
           buffer.length > 1 ? ' 各' : ' ',
           '贡上了一杯 [',
-          era.get(`itemname:${45 + i}`),
+          era.get(`itemname:${milk_item}`),
           ']】',
         ]);
-        era.add(`item:${45 + i}`, milk_list[1 - i].length);
+        era.add(`item:${milk_item}`, milk_list[1 - i].length);
       }
     }
     for (const id of jewel_list) {

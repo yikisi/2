@@ -21,6 +21,7 @@ const { get_random_value } = require('#/utils/value-utils');
 const EroParticipant = require('#/data/ero/ero-participant');
 const { lust_border } = require('#/data/ero/orgasm-const');
 const { part_enum } = require('#/data/ero/part-const');
+const { attr_enum } = require('#/data/train-const');
 
 /**
  * @typedef CityProgress
@@ -94,7 +95,7 @@ class MejiroEvents {
             d['行动'] = '快步走来';
         }
         await good_events[key](d);
-        sys_change_attr_and_print(0, '体力', get_random_value(50, 100));
+        sys_change_attr_and_print(0, attr_enum.hp, get_random_value(50, 100));
       },
     },
     {
@@ -164,7 +165,7 @@ class MejiroEvents {
         if (ret[0] === 1) {
           era.add('item:「恩宠」', reward);
         } else {
-          sys_change_attr_and_print(0, '体力', get_random_value(50, 100));
+          sys_change_attr_and_print(0, attr_enum.hp, get_random_value(50, 100));
         }
       },
     },
@@ -190,7 +191,7 @@ class MejiroEvents {
         const key = '林间捷径';
         if ((await normal_events[key](this.#dict))[0] === 1) {
           p.c++;
-          sys_change_attr_and_print(0, '体力', -get_random_value(25, 75));
+          sys_change_attr_and_print(0, attr_enum.hp, -get_random_value(25, 75));
         }
       },
     },
@@ -199,7 +200,7 @@ class MejiroEvents {
         const key = '街头小吃';
         if ((await normal_events[key](this.#dict))[0]) {
           era.add('item:「恩宠」', -1);
-          sys_change_attr_and_print(0, '体力', get_random_value(50, 100));
+          sys_change_attr_and_print(0, attr_enum.hp, get_random_value(50, 100));
         }
       },
     },
@@ -217,7 +218,7 @@ class MejiroEvents {
           )[0] === 1
         ) {
           era.add('item:「恩宠」', reward);
-          sys_change_attr_and_print(0, '体力', -get_random_value(25, 75));
+          sys_change_attr_and_print(0, attr_enum.hp, -get_random_value(25, 75));
         }
         this.params[key] = true;
       },

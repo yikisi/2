@@ -65,9 +65,9 @@ const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_save_name } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
-const notes = require('#/data/notes.json');
 const { first_child_id } = require('#/data/other-const');
 const { pressure_border } = require('#/data/train-const');
+const { i18n } = require('#/i18n/selector');
 
 let notes_index = 0;
 let random_event;
@@ -434,39 +434,42 @@ module.exports = async () => {
       continue;
     }
 
-    const chara_id = era.get('flag:当前互动角色');
+    const cid = era.get('flag:当前互动角色');
 
     if (cur_location !== location_enum.basement) {
       sys_change_status_by_base(0);
-      if (chara_id > 0) {
-        sys_change_status_by_base(chara_id);
+      if (cid > 0) {
+        sys_change_status_by_base(cid);
       }
       await era.clear();
       page_header(true);
-      print_curr_chara(chara_id);
+      print_curr_chara(cid);
       era.drawLine();
       let hook = -1;
       if (flags.week_start) {
-        if (chara_id) {
+        if (cid) {
           hook = event_hooks.good_morning;
         }
       } else if (flags.after_select) {
-        if (chara_id) {
+        if (cid) {
           hook = event_hooks.select;
         }
       }
       flags.week_start = flags.after_select = false;
       if (hook > 0) {
-        await run_custom_daily(chara_id, hook);
+        await run_custom_daily(cid, hook);
       } else {
-        const note_list = [...notes.common];
+        const note_list = [...i18n().notes.common];
         if (era.get('flag:目白城风格') === 1) {
-          note_list.push(...notes.call);
+          note_list.push(...i18n().notes.call);
         }
         sys_filter_chara('cflag', '招募状态', recruit_flags.yes).forEach(
           (e) => {
-            if (era.get(`cflag:${e}:育成回合计时`) < 3 * 48 && notes[e]) {
-              note_list.push(...notes[e]);
+            if (
+              era.get(`cflag:${e}:育成回合计时`) < 3 * 48 &&
+              i18n().notes[e]
+            ) {
+              note_list.push(...i18n().notes[e]);
             }
           },
         );
@@ -476,7 +479,7 @@ module.exports = async () => {
     }
 
     await handlers[cur_location](
-      chara_id,
+      cid,
       basement_handlers[cur_location] || save_and_next_week,
       flags,
     );

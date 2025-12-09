@@ -62,6 +62,7 @@ module.exports = {
           chara_level = get_rank_level(chara_score),
           adapt_info = [];
         adaptability_names.forEach((e, i) => {
+          // 适性ID：30-40
           const adapt = era.get(`cflag:${chara.id}:${30 + i}`);
           adapt_info.push(
             { config: { width: 3 }, content: [e, '：'], type: 'text' },

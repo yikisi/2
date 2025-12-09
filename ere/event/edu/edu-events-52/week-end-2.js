@@ -9,6 +9,7 @@ const {
   sys_like_chara,
 } = require('#/system/sys-calc-chara-others');
 
+const { attr_enum } = require('#/data/train-const');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
 
@@ -681,7 +682,7 @@ module.exports = (handlers) => {
         true,
       ) || wait_flag;
     sys_change_weight(52, 20);
-    sys_change_attr_and_print(0, '体力', 400);
+    sys_change_attr_and_print(0, attr_enum.hp, 400);
     sys_change_weight(0, 20);
     wait_flag =
       sys_like_chara(52, 0, 20 * (ret === 1), true, 10 * (ret === 2)) ||

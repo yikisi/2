@@ -27,7 +27,7 @@ const recruit_flags = require('#/data/event/recruit-flags');
 const { get_trainer_title } = require('#/data/info-generator');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
-const { attr_names } = require('#/data/train-const');
+const { attr_enum, attr_names } = require('#/data/train-const');
 
 module.exports = class extends CustomizedRecruit {
   async recruit() {
@@ -58,7 +58,11 @@ module.exports = class extends CustomizedRecruit {
     if (ret[2] === 1) {
       motivation_change++;
     } else {
-      sys_change_attr_and_print(0, '体力', -era.get('maxbase:0:体力') * 0.1);
+      sys_change_attr_and_print(
+        0,
+        attr_enum.hp,
+        -era.get('maxbase:0:体力') * 0.1,
+      );
     }
     wait_flag = sys_change_motivation(6, motivation_change) || wait_flag;
     if (wait_flag) {

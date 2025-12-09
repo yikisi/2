@@ -3,6 +3,7 @@ let lan = 'zh-CN';
 /** @type {Record<string,I18nEntry>} */
 const dict = {};
 dict['zh-CN'] = new (require('./zh-CN/entry'))();
+dict['en-US'] = new (require('./en-US/entry'))();
 
 /**
  * @param {string} key
@@ -35,7 +36,6 @@ module.exports = {
   lans() {
     return Object.keys(dict);
   },
-  res: { __ },
   /** @param {string} _l */
   set_lan(_l) {
     if (dict[_l]) {

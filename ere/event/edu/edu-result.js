@@ -21,7 +21,7 @@ const { attr_enum, fumble_result } = require('#/data/train-const');
 
 /** @param {number} cid */
 function handle_rest_cost(cid) {
-  change_attr_and_print(cid, '精力', -get_random_value(50, 200));
+  change_attr_and_print(cid, attr_enum.tp, -get_random_value(50, 200));
   let debuff = era.get(`status:${cid}:水土不服`);
   era.set(
     `status:${cid}:水土不服`,
@@ -39,9 +39,13 @@ function handle_travel_cost(cid) {
   era.print([
     get_chara_talk(cid).get_colored_name(),
     ' 的 ',
-    ...sys_change_attr_and_print(cid, '体力', -get_random_value(50, 200)),
+    ...sys_change_attr_and_print(cid, attr_enum.hp, -get_random_value(50, 200)),
     '，',
-    ...sys_change_attr_and_print(cid, '精力', -get_random_value(200, 400)),
+    ...sys_change_attr_and_print(
+      cid,
+      attr_enum.tp,
+      -get_random_value(200, 400),
+    ),
     '！',
   ]);
   sys_change_pressure(cid, -get_random_value(-500, 1000));
@@ -100,7 +104,7 @@ function learn_language(cid, lan_name) {
 
 /**
  * @param {number} cid
- * @param {string|number} attr
+ * @param {number} attr
  * @param {number} val
  */
 function change_attr_and_print(cid, attr, val) {
@@ -136,9 +140,9 @@ handlers[event_hooks.foreign_rest] = async (cid) => {
  * @param {{lan:string}} extra_flag
  */
 handlers[event_hooks.foreign_study] = async (cid, hook, extra_flag) => {
-  change_attr_and_print(0, '精力', -get_random_value(200, 400));
+  change_attr_and_print(0, attr_enum.tp, -get_random_value(200, 400));
   if (cid > 0) {
-    change_attr_and_print(cid, '精力', -get_random_value(200, 400));
+    change_attr_and_print(cid, attr_enum.tp, -get_random_value(200, 400));
   }
   if (hook.arg) {
     era.println();
@@ -153,14 +157,18 @@ handlers[event_hooks.foreign_train] = async (cid) => {
   era.print([
     get_chara_talk(cid).get_colored_name(),
     ' 的 ',
-    ...sys_change_attr_and_print(cid, '体力', -get_random_value(100, 200)),
+    ...sys_change_attr_and_print(
+      cid,
+      attr_enum.hp,
+      -get_random_value(100, 200),
+    ),
     '，',
-    ...sys_change_attr_and_print(cid, '精力', -get_random_value(50, 100)),
+    ...sys_change_attr_and_print(cid, attr_enum.tp, -get_random_value(50, 100)),
     '！',
   ]);
   change_attr_and_print(cid, get_random_value(0, 3), get_random_value(5, 10));
   if (cid > 0) {
-    change_attr_and_print(0, '精力', -get_random_value(50, 100));
+    change_attr_and_print(0, attr_enum.tp, -get_random_value(50, 100));
   }
   const debuff = era.get(`status:${cid}:客场作战`);
   era.set(

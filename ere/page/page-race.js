@@ -59,6 +59,7 @@ const {
   race_infos,
   race_rewards,
 } = require('#/data/race/race-const');
+const { attr_enum } = require('#/data/train-const');
 
 /**
  * @param {RaceInfo} _info
@@ -269,7 +270,7 @@ async function race_page(race) {
       uma.race.conditionParams.motivation = uma.motivation + 3;
       rs_count--;
       rs_dict[ret] = true;
-      sys_change_attr_and_print(0, '精力', -t_cost);
+      sys_change_attr_and_print(0, attr_enum.tp, -t_cost);
       t_cost += 100;
     }
   }
@@ -413,7 +414,7 @@ async function race_page(race) {
       );
       re_count--;
       re_dict[ret] = true;
-      sys_change_attr_and_print(0, '精力', -t_cost);
+      sys_change_attr_and_print(0, attr_enum.tp, -t_cost);
       t_cost += 100;
     }
   }

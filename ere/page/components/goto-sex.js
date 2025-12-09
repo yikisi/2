@@ -24,6 +24,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { location_enum } = require('#/data/locations');
+const { attr_enum } = require('#/data/train-const');
 
 async function select_medicine() {
   const item_list = ['超马跳Z', '马跳S']
@@ -89,7 +90,7 @@ async function fail(chara, me) {
     me.get_colored_name(),
     ' 推倒在地，迅速离开了……',
   ]);
-  sys_change_attr_and_print(0, '体力', -100);
+  sys_change_attr_and_print(0, attr_enum.hp, -100);
   sys_like_chara(chara.id, 0, -400) && (await era.waitAnyKey());
   await era.printAndWait([
     '虽然 ',
@@ -361,12 +362,12 @@ async function goto_sex(cid, sex_loc) {
         } else if (ret === 0) {
           sys_change_attr_and_print(
             0,
-            '体力',
+            attr_enum.hp,
             -get_random_value(0, Math.min(era.get('base:0:体力'), 200)),
           );
           sys_change_attr_and_print(
             cid,
-            '体力',
+            attr_enum.hp,
             -get_random_value(0, Math.min(era.get(`base:${cid}:体力`), 200)),
           );
           if (
@@ -404,7 +405,7 @@ async function goto_sex(cid, sex_loc) {
           }
           sys_change_attr_and_print(
             0,
-            '精力',
+            attr_enum.tp,
             -get_random_value(0, Math.min(era.get('base:0:精力'), 200)),
           );
           era.add(`item:${ret}`, -1);

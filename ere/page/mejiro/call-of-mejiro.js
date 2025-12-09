@@ -25,6 +25,7 @@ const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const { location_enum } = require('#/data/locations');
 const { vehicle_names } = require('#/data/move-const');
+const { attr_enum } = require('#/data/train-const');
 
 class CallOfMejiro extends MejiroCity {
   /**
@@ -360,7 +361,11 @@ class CallOfMejiro extends MejiroCity {
             async h() {
               era.add(`base:${chara.id}:性欲`, get_random_value(600, 1200));
               era.add('base:0:性欲', get_random_value(300, 600));
-              sys_change_attr_and_print(0, '体力', -get_random_value(50, 150));
+              sys_change_attr_and_print(
+                0,
+                attr_enum.hp,
+                -get_random_value(50, 150),
+              );
               progress.c++;
               await events.good_event(progress, lust);
             },
@@ -372,7 +377,11 @@ class CallOfMejiro extends MejiroCity {
             async h() {
               era.add(`base:${chara.id}:性欲`, get_random_value(300, 900));
               era.add('base:0:性欲', get_random_value(100, 500));
-              sys_change_attr_and_print(0, '体力', -get_random_value(50, 150));
+              sys_change_attr_and_print(
+                0,
+                attr_enum.hp,
+                -get_random_value(50, 150),
+              );
               progress.c++;
               await events.normal_event(progress, lust);
             },
@@ -384,7 +393,11 @@ class CallOfMejiro extends MejiroCity {
             async h() {
               era.add(`base:${chara.id}:性欲`, get_random_value(0, 600));
               era.add('base:0:性欲', get_random_value(0, 300));
-              sys_change_attr_and_print(0, '体力', -get_random_value(50, 150));
+              sys_change_attr_and_print(
+                0,
+                attr_enum.hp,
+                -get_random_value(50, 150),
+              );
               progress.c++;
               await events.bad_event(progress, lust);
             },
@@ -397,7 +410,11 @@ class CallOfMejiro extends MejiroCity {
             async h() {
               era.add(`base:${chara.id}:性欲`, get_random_value(300, 900));
               era.add('base:0:性欲', get_random_value(100, 500));
-              sys_change_attr_and_print(0, '体力', -get_random_value(125, 175));
+              sys_change_attr_and_print(
+                0,
+                attr_enum.hp,
+                -get_random_value(125, 175),
+              );
               await events.good_event(progress, lust);
             },
           },
@@ -408,7 +425,11 @@ class CallOfMejiro extends MejiroCity {
             async h() {
               era.add(`base:${chara.id}:性欲`, get_random_value(300, 900));
               era.add('base:0:性欲', get_random_value(100, 500));
-              sys_change_attr_and_print(0, '体力', -get_random_value(50, 150));
+              sys_change_attr_and_print(
+                0,
+                attr_enum.hp,
+                -get_random_value(50, 150),
+              );
               await events.normal_event(progress, lust);
             },
           },
@@ -419,7 +440,11 @@ class CallOfMejiro extends MejiroCity {
             async h() {
               era.add(`base:${chara.id}:性欲`, get_random_value(300, 900));
               era.add('base:0:性欲', get_random_value(100, 500));
-              sys_change_attr_and_print(0, '体力', -get_random_value(25, 75));
+              sys_change_attr_and_print(
+                0,
+                attr_enum.hp,
+                -get_random_value(25, 75),
+              );
               await events.bad_event(progress, lust);
             },
           },
@@ -430,7 +455,11 @@ class CallOfMejiro extends MejiroCity {
             async h() {
               era.add(`base:${chara.id}:性欲`, get_random_value(300, 900));
               era.add('base:0:性欲', get_random_value(100, 500));
-              sys_change_attr_and_print(0, '体力', get_random_value(25, 75));
+              sys_change_attr_and_print(
+                0,
+                attr_enum.hp,
+                get_random_value(25, 75),
+              );
               await events.avg_event(progress, lust);
             },
           },

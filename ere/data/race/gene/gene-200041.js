@@ -6,7 +6,7 @@ module.exports = new UmaGene(
   '智力高手的追忆',
   '智力属性及上限+50',
   UmaGene.gene_type_enum.base,
-  '智力',
+  4,
   49,
   50,
 );

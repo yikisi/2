@@ -1,11 +1,11 @@
 class I18nEntry {
-  hp = '体力';
-  tp = '精力';
   speed = '速度';
   endurance = '耐力';
   strength = '力量';
   toughness = '根性';
   intelligence = '智力';
+  hp = '体力';
+  tp = '精力';
 
   abbr_hp = '体';
   abbr_tp = '精';
@@ -67,6 +67,9 @@ class I18nEntry {
   relation_7 = '不渝';
 
   not_found = '未知';
+
+  skills = new (require('#/i18n/zh-CN/skills'))();
+  notes = new (require('#/i18n/zh-CN/notes'))();
 }
 
 module.exports = I18nEntry;

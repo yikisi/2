@@ -6,7 +6,7 @@ module.exports = new UmaGene(
   '根性大师的追忆',
   '根性属性及上限+100',
   UmaGene.gene_type_enum.base,
-  '根性',
+  3,
   95,
   100,
 );

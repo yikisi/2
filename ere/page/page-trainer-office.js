@@ -36,6 +36,7 @@ const loc_characters = require('#/data/event/loc-characters');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
+const { attr_enum } = require('#/data/train-const');
 
 /** @type {Record<string,function(CharaTalk,CharaTalk):{handle:function:Promise,name:string}>} */
 const handlers = {};
@@ -104,8 +105,8 @@ handlers[304] = (chara, me) => {
               (Math.random() < get('love:304') / 100),
             0,
           );
-          sys_change_attr_and_print(0, '精力', -200);
-          sys_change_attr_and_print(304, '精力', -200);
+          sys_change_attr_and_print(0, attr_enum.tp, -200);
+          sys_change_attr_and_print(304, attr_enum.tp, -200);
         } else {
           await printAndWait([
             chara.get_colored_name(),

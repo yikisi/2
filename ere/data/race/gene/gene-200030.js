@@ -6,7 +6,7 @@ module.exports = new UmaGene(
   '根性新星的追忆',
   '根性属性及上限+25',
   UmaGene.gene_type_enum.base,
-  '根性',
+  3,
   25,
   25,
 );

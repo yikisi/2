@@ -44,11 +44,11 @@ function print_attr_change(cid, to_print) {
  * @param {number[]} time
  */
 function random_cost_in_action(cid, stamina, time) {
-  sys_change_attr_and_print(0, '体力', -get_random_value(...stamina));
-  sys_change_attr_and_print(0, '精力', -get_random_value(...time));
+  sys_change_attr_and_print(0, attr_enum.hp, -get_random_value(...stamina));
+  sys_change_attr_and_print(0, attr_enum.tp, -get_random_value(...time));
   if (cid > 0) {
-    sys_change_attr_and_print(cid, '体力', -get_random_value(...stamina));
-    sys_change_attr_and_print(cid, '精力', -get_random_value(...time));
+    sys_change_attr_and_print(cid, attr_enum.hp, -get_random_value(...stamina));
+    sys_change_attr_and_print(cid, attr_enum.tp, -get_random_value(...time));
   }
 }
 
@@ -58,7 +58,7 @@ const handlers = {};
 handlers[event_hooks.office_gift] = async (cid) => {
   era.println();
   sys_change_money(-10);
-  sys_change_attr_and_print(0, '精力', -get_random_value(100, 200));
+  sys_change_attr_and_print(0, attr_enum.tp, -get_random_value(100, 200));
   if (sys_like_chara(cid, 0, get_random_value(20, 40))) {
     await era.waitAnyKey();
   }
@@ -70,24 +70,28 @@ handlers[event_hooks.office_cook] = async (cid) => {
   wait_flag =
     print_attr_change(
       0,
-      sys_change_attr_and_print(0, '体力', -get_random_value(50, 100)),
+      sys_change_attr_and_print(0, attr_enum.hp, -get_random_value(50, 100)),
     ) || wait_flag;
   wait_flag =
     print_attr_change(
       0,
-      sys_change_attr_and_print(0, '精力', get_random_value(0, 20)),
+      sys_change_attr_and_print(0, attr_enum.tp, get_random_value(0, 20)),
     ) || wait_flag;
   sys_change_weight(0, get_random_value(20, 40, true));
   if (cid > 0) {
     wait_flag =
       print_attr_change(
         cid,
-        sys_change_attr_and_print(cid, '体力', get_random_value(100, 200)),
+        sys_change_attr_and_print(
+          cid,
+          attr_enum.hp,
+          get_random_value(100, 200),
+        ),
       ) || wait_flag;
     wait_flag =
       print_attr_change(
         cid,
-        sys_change_attr_and_print(cid, '精力', get_random_value(0, 50)),
+        sys_change_attr_and_print(cid, attr_enum.tp, get_random_value(0, 50)),
       ) || wait_flag;
     wait_flag = sys_like_chara(cid, 0, get_random_value(5, 10)) || wait_flag;
     sys_change_weight(cid, get_random_value(20, 40, true));
@@ -120,23 +124,27 @@ handlers[event_hooks.office_rest] = async (cid) => {
   wait_flag =
     print_attr_change(
       0,
-      sys_change_attr_and_print(0, '精力', -get_random_value(50, 100)),
+      sys_change_attr_and_print(0, attr_enum.tp, -get_random_value(50, 100)),
     ) || wait_flag;
   wait_flag =
     print_attr_change(
       0,
-      sys_change_attr_and_print(0, '体力', get_random_value(0, 20)),
+      sys_change_attr_and_print(0, attr_enum.hp, get_random_value(0, 20)),
     ) || wait_flag;
   if (cid > 0) {
     wait_flag =
       print_attr_change(
         cid,
-        sys_change_attr_and_print(cid, '精力', get_random_value(100, 200)),
+        sys_change_attr_and_print(
+          cid,
+          attr_enum.tp,
+          get_random_value(100, 200),
+        ),
       ) || wait_flag;
     wait_flag =
       print_attr_change(
         cid,
-        sys_change_attr_and_print(cid, '体力', get_random_value(0, 50)),
+        sys_change_attr_and_print(cid, attr_enum.hp, get_random_value(0, 50)),
       ) || wait_flag;
     wait_flag = sys_like_chara(cid, 0, get_random_value(5, 10)) || wait_flag;
   }
@@ -218,13 +226,17 @@ handlers[event_hooks.school_atrium] = async (cid, hook) => {
 handlers[event_hooks.school_rooftop] = async (cid) => {
   era.println();
   let wait_flag = false;
-  let to_print = sys_change_attr_and_print(0, '体力', get_random_value(0, 100));
+  let to_print = sys_change_attr_and_print(
+    0,
+    attr_enum.hp,
+    get_random_value(0, 100),
+  );
   wait_flag = print_attr_change(0, to_print) || wait_flag;
   sys_change_weight(0, get_random_value(20, 40, true));
   if (cid > 0) {
     to_print = sys_change_attr_and_print(
       cid,
-      '体力',
+      attr_enum.hp,
       get_random_value(50, 150),
     );
     print_attr_change(cid, to_print);
@@ -366,7 +378,7 @@ handlers[event_hooks.out_station] = async (cid, hook) => {
           sys_like_chara(cid, 0, get_random_value(10, 15)) || wait_flag;
         temp = sys_change_attr_and_print(
           cid,
-          '体力',
+          attr_enum.hp,
           get_random_value(100, 200),
         );
         wait_flag ||= temp.length > 0;
