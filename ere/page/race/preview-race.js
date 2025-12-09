@@ -8,12 +8,12 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const {
   adaptability_colors,
+  attr_colors,
   el_danger_color,
   el_success_color,
   el_warning_color,
   motivation_colors,
 } = require('#/data/color-const');
-const { attr_colors } = require('#/data/const.json');
 const date_indicator = require('#/data/date-indicator');
 const { item_enum, item_names } = require('#/data/ero/item-const');
 const { vp_status_enum } = require('#/data/ero/status-const');
@@ -44,7 +44,7 @@ function generate_attribute_info(chara) {
         config: {
           align: 'center',
           width: 4,
-          color: attr_colors[attr_names[index]],
+          color: attr_colors[index],
           fontWeight: 'bold',
         },
         content: attr_names[index],

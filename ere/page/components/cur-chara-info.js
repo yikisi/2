@@ -23,7 +23,7 @@ const {
 const { location_enum } = require('#/data/locations');
 const { motivation_names, out_of_train_type } = require('#/data/train-const');
 
-const { __ } = require('#/i18n/selector');
+const { __, i18n } = require('#/i18n/selector');
 
 /**
  * @param {number} chara_id
@@ -117,7 +117,8 @@ function cur_chara_component(chara_id, type, location_npc) {
     if (era.get('flag:当前位置') !== location_enum.basement) {
       if (in_train) {
         name_columns.push(
-          ' 干劲',
+          ' ',
+          i18n().ui_moti,
           {
             color: motivation_colors[motivation + 2],
             content: motivation_names[motivation + 2],

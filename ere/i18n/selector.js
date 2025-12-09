@@ -4,6 +4,10 @@ let lan = 'zh-CN';
 const dict = {};
 dict['zh-CN'] = new (require('./zh-CN/entry'))();
 
+/**
+ * @param {string} key
+ * @returns {string}
+ */
 function __(key) {
   const arr = (key ?? '').split('.');
   let o = dict[lan];
@@ -13,7 +17,7 @@ function __(key) {
     }
     o = o[arr[i]];
   }
-  return o;
+  return o.toString();
 }
 
 module.exports = {

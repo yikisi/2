@@ -1,3 +1,5 @@
+const { __, i18n } = require('#/i18n/selector');
+
 const attr_enum = {
   speed: 0,
   endurance: 0,
@@ -9,24 +11,24 @@ Object.keys(attr_enum).forEach((k, i) => (attr_enum[k] = i));
 
 /** @type {string[]} */
 const attr_names = [];
-attr_names[attr_enum.speed] = '速度';
-attr_names[attr_enum.endurance] = '耐力';
-attr_names[attr_enum.strength] = '力量';
-attr_names[attr_enum.toughness] = '根性';
-attr_names[attr_enum.intelligence] = '智力';
+attr_names[attr_enum.speed] = i18n().speed;
+attr_names[attr_enum.endurance] = i18n().endurance;
+attr_names[attr_enum.strength] = i18n().strength;
+attr_names[attr_enum.toughness] = i18n().toughness;
+attr_names[attr_enum.intelligence] = i18n().intelligence;
 
 module.exports = {
   adaptability_names: [
-    '草地',
-    '泥地',
-    '短距离',
-    '英里赛',
-    '中距离',
-    '长距离',
-    '逃马',
-    '先马',
-    '差马',
-    '追马',
+    i18n().a_g_grass,
+    i18n().a_g_dirt,
+    i18n().a_d_short,
+    i18n().a_d_mile,
+    i18n().a_d_medium,
+    i18n().a_d_long,
+    i18n().a_s_nige,
+    i18n().a_s_senko,
+    i18n().a_s_sashi,
+    i18n().a_s_okimi,
   ],
   attr_enum,
   attr_names,
@@ -67,8 +69,8 @@ module.exports = {
       },
     },
   },
-  motivation_names: ['极差', '较差', '一般', '较佳', '极佳'],
-  out_of_train_type: ['已育成', '殿堂'],
+  motivation_names: new Array(5).fill(void 0).map((_, i) => __(`moti_${i}`)),
+  out_of_train_type: [i18n().oot_0, i18n().oot_1],
   pressure_border: {
     apprehension: 5000,
     depression: 7500,
@@ -76,5 +78,10 @@ module.exports = {
     unhappy: 2500,
   },
   time_cost: [320, 352, 368, 400, 416],
-  train_buff_info: ['疏于训练', '', '精于训练', '极擅训练'],
+  train_buff_info: [
+    i18n().train_debuff,
+    '',
+    i18n().train_buff_1,
+    i18n().train_buff_2,
+  ],
 };

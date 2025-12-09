@@ -45,14 +45,16 @@ const {
 const recruit_flags = require('#/data/event/recruit-flags');
 const { attr_names } = require('#/data/train-const');
 
+const { __ } = require('#/i18n/selector');
+
 const level_and_desc = {
   love: {
     border: [1, 25, 50, 75, 90, 100],
-    mark: ['平常', '朦胧', '暧昧', '爱欲', '热恋', '佳偶', '依存'],
+    mark: new Array(7).fill(void 0).map((_, i) => __(`love_${i}`)),
   },
   honour: {
     border: [500, 1000, 2000, 5000],
-    mark: ['新手', '老练', '中坚', '精英', '传奇'],
+    mark: new Array(5).fill(void 0).map((_, i) => __(`honour_${i}`)),
     buff: [0, 1, 2, 3, 5, 10, 15],
   },
   attr_score: [
@@ -99,7 +101,7 @@ const level_and_desc = {
   chara_score,
   relation: {
     border: [-100, 0, 75, 150, 225, 375, 525],
-    mark: ['失望', '怀疑', '冷淡', '融洽', '热忱', '喜爱', '亲密', '不渝'],
+    mark: new Array(8).fill(void 0).map((_, i) => __(`relation_${i}`)),
   },
 };
 
@@ -126,7 +128,7 @@ const talent_names = [
 
 const breast_talent_names = ['贫乳', '', '巨乳', '爆乳'];
 
-const title_desc = ['训练员', '马娘', '性奴', '孕袋'];
+const title_desc = new Array(4).fill(void 0).map((_, i) => __(`title_${i}`));
 
 /**
  * @param {number} cid

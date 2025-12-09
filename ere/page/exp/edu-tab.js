@@ -2,8 +2,7 @@ const era = require('#/era-electron');
 
 const { get_custom_check } = require('#/event/check/check-factory');
 
-const { adaptability_colors } = require('#/data/color-const');
-const { attr_colors } = require('#/data/const.json');
+const { adaptability_colors, attr_colors } = require('#/data/color-const');
 const { growth_info, no_info } = require('#/data/exp-const');
 const {
   get_adaptability_rank,
@@ -36,8 +35,8 @@ module.exports = {
         },
         ...(flags.in_growth
           ? [{ content: growth_info, type: 'text' }]
-          : attr_names.map((e) => ({
-              config: { width: 4, color: attr_colors[e] },
+          : attr_names.map((e, i) => ({
+              config: { width: 4, color: attr_colors[i] },
               content: [
                 e,
                 '：',
@@ -62,8 +61,8 @@ module.exports = {
           chara_score = get_chara_score(chara.id),
           chara_level = get_rank_level(chara_score),
           adapt_info = [];
-        adaptability_names.forEach((e) => {
-          const adapt = era.get(`cflag:${chara.id}:${e}适性`);
+        adaptability_names.forEach((e, i) => {
+          const adapt = era.get(`cflag:${chara.id}:${30 + i}`);
           adapt_info.push(
             { config: { width: 3 }, content: [e, '：'], type: 'text' },
             {

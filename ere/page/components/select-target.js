@@ -40,6 +40,7 @@ const {
 const { get_growth_color } = require('#/data/other-const');
 const RaceHistory = require('#/data/race/model/race-history');
 const { motivation_names, out_of_train_type } = require('#/data/train-const');
+const { i18n } = require('#/i18n/selector');
 
 const arrows = { '-1': '▼', 0: '', 1: '▲' };
 
@@ -305,7 +306,7 @@ async function select_target(
       if (type === chara_info_type.train) {
         buffer.push(
           get_button(1007, '评价', 2),
-          get_button(1008, '干劲', 2),
+          get_button(1008, i18n().ui_moti, 2),
           get_button(1009, '战绩', 2),
           get_button(1004, '育成', 2),
           get_button(1010, '周目', 2),

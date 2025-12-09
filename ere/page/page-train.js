@@ -23,8 +23,7 @@ const { get_abbr_number } = require('#/utils/value-utils');
 const CharaAvailableSkills = require('#/data/chara-available-skills');
 const chara_info_type = require('#/data/chara-info-type');
 const CharaSkills = require('#/data/chara-skills');
-const { adaptability_colors } = require('#/data/color-const');
-const { attr_colors } = require('#/data/const.json');
+const { adaptability_colors, attr_colors } = require('#/data/color-const');
 const {
   get_adaptability_rank,
   get_attr_rank,
@@ -226,7 +225,7 @@ module.exports = async () => {
           },
           {
             config: {
-              color: attr_colors[k],
+              color: attr_colors[index],
               height: 22,
               width: 20,
             },
@@ -567,7 +566,7 @@ module.exports = async () => {
                       type: 'button',
                     },
                   ],
-              [{ content: [{ isBr: true }], type: 'text' }],
+              [{ content: [{ isBr: 1 }], type: 'text' }],
               ...(enable_filter
                 ? [
                     [

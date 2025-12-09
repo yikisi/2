@@ -19,7 +19,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
-const { attr_colors } = require('#/data/const.json');
+const { attr_colors } = require('#/data/color-const');
 const CharaInmon = require('#/data/ero/chara-inmon');
 const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const { location_enum } = require('#/data/locations');
@@ -140,7 +140,7 @@ function randomly_interact(in_team_list) {
           ' 进行了 ',
           {
             content: attr_names[e.train],
-            color: attr_colors[attr_names[e.train]],
+            color: attr_colors[e.train],
           },
           ' 训练……',
         ],
@@ -208,7 +208,7 @@ function randomly_interact(in_team_list) {
           ' 一起进行了 ',
           {
             content: attr_names[train],
-            color: attr_colors[attr_names[train]],
+            color: attr_colors[train],
           },
           ' 方面的自主训练……',
         );
@@ -223,7 +223,7 @@ function randomly_interact(in_team_list) {
             ' 进行了 ',
             {
               content: attr_names[train],
-              color: attr_colors[attr_names[train]],
+              color: attr_colors[train],
             },
             ' 方面的自主训练……',
           ],

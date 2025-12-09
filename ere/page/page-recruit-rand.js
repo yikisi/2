@@ -36,9 +36,9 @@ const CharaSkills = require('#/data/chara-skills');
 const {
   adaptability_colors,
   attr_change_colors,
+  attr_colors,
   el_danger_color,
 } = require('#/data/color-const');
-const { attr_colors } = require('#/data/const.json');
 const title_desc = require('#/data/desc/titles.json');
 const { sex_title } = require('#/data/ero/status-const');
 const event_hooks = require('#/data/event/event-hooks');
@@ -453,13 +453,14 @@ async function print_rec_page() {
             type: 'divider',
           },
           ...attr_names
-            .map((e) => ({
+            .map((e, i) => ({
+              i,
               n: e,
-              v: era.get(`staticcflag:${selected}:${e}加成`),
+              v: era.get(`staticcflag:${selected}:${25 + i}`),
             }))
             .filter((e) => e.v > 0)
             .map((e) => ({
-              config: { width: 4, color: attr_colors[e.n] },
+              config: { width: 4, color: attr_colors[e.i] },
               content: [e.n, '：+', e.v.toString(), '%'],
               type: 'text',
             })),
