@@ -23,8 +23,11 @@ const { run_custom_daily } = require('#/event/daily/daily-factory');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
-const { attr_bg_colors } = require('#/data/color-const');
-const { love_colors, relation_colors } = require('#/data/const.json');
+const {
+  attr_bg_colors,
+  love_colors,
+  relation_colors,
+} = require('#/data/color-const');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const recruit_flags = require('#/data/event/recruit-flags');
@@ -339,19 +342,19 @@ async function npc_common(
         },
         {
           config: {
-            color: relation_colors[relation[0]],
+            color: relation_colors[relation.level],
             width: is_recruit ? 4 : 22,
           },
-          content: relation.join(' '),
+          content: relation.full(),
           type: 'text',
         },
         { config: { width: 2 }, content: '爱慕', type: 'text' },
         {
           config: {
-            color: love_colors[love[0]],
+            color: love_colors[love.level],
             width: is_recruit ? 4 : 22,
           },
-          content: love.join(' '),
+          content: love.full(),
           type: 'text',
         },
       ],

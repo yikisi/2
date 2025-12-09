@@ -79,7 +79,7 @@ module.exports = class extends CustomizedRecruit {
         EventMarks.get(0).sub(event_hooks.out_start);
         break;
       case event_hooks.school_atrium:
-        dict['训练员头衔'] = get_trainer_title();
+        dict['训练员头衔'] = get_trainer_title().prefix();
         dict['先生'] = me.adult_sex_title;
         if (era.get(`cflag:${this.id}:招募状态`) === recruit_flags.no) {
           r_flag =

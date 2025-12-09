@@ -36,9 +36,10 @@ const { get_random_value } = require('#/utils/value-utils');
 const {
   attr_bg_colors,
   buff_colors,
+  love_colors,
   palam_colors,
+  relation_colors,
 } = require('#/data/color-const');
-const { love_colors, relation_colors } = require('#/data/const.json');
 const date_indicator = require('#/data/date-indicator');
 const { mark_abbr, part_abbr } = require('#/data/ero/ero-alias.json');
 const { mark_colors, mark_enum } = require('#/data/ero/mark-const');
@@ -407,15 +408,15 @@ async function page_ero(lover, skip_start_end = false) {
       content: [
         '🤝 ',
         {
-          color: relation_colors[relation[0]],
-          content: relation[0],
-          title: `好感：${relation.join(' ')}`,
+          color: relation_colors[relation.level],
+          content: relation.mark(),
+          title: `好感：${relation.full()}`,
         },
         ' · ❤️ ',
         {
-          color: love_colors[love[0]],
-          content: love[0],
-          title: `爱慕：${love.join(' ')}`,
+          color: love_colors[love.level],
+          content: love.mark(),
+          title: `爱慕：${love.full()}`,
         },
         ' ',
         ...marks,

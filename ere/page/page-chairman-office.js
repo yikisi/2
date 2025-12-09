@@ -30,7 +30,7 @@ const TasteLifeMarks = require('#/data/event/life-event-marks/life-event-marks-3
 const loc_characters = require('#/data/event/loc-characters');
 const recruit_flags = require('#/data/event/recruit-flags');
 const yandere_list = require('#/data/event/yandere-list');
-const { get_celebration, get_relation_mark } = require('#/data/info-generator');
+const { get_celebration, get_relation_info } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 
 async function page_chairman_office() {
@@ -56,33 +56,33 @@ async function page_chairman_office() {
             name: '「闲 谈！无聊了来找你玩！」',
             async handle() {
               nothing = false;
-              switch (get_relation_mark(302)) {
-                case '失望':
+              switch (get_relation_info(302).level) {
+                case 0:
                   await chara.say_and_wait(
                     '冷 漠！有来找我的空闲不如先把自己的工作做好！',
                   );
                   break;
-                case '怀疑':
+                case 1:
                   await chara.say_and_wait('不 悦！不太想见到你！');
                   break;
-                case '冷淡':
+                case 2:
                   await chara.say_and_wait(
                     '奇 怪！训练员有什么事要来找我一谈？',
                   );
                   break;
-                case '融洽':
+                case 3:
                   await chara.say_and_wait('寒 暄！今天还顺利吗？');
                   break;
-                case '热忱':
+                case 4:
                   await chara.say_and_wait('赞 许！你也会跻身传奇之列！');
                   break;
-                case '喜爱':
+                case 5:
                   await chara.say_and_wait('欢 迎！有麻烦就来找我吧！');
                   break;
-                case '亲密':
+                case 6:
                   await chara.say_and_wait('喜 悦！有空就来聊聊！');
                   break;
-                case '不渝':
+                case 7:
                   await chara.say_and_wait('如果是你……幻 听！你什么都没听到！');
               }
             },

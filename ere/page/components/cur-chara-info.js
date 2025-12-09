@@ -13,7 +13,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const chara_info_type = require('#/data/chara-info-type');
 const CharaTitles = require('#/data/chara-titles');
 const { attr_bg_colors, motivation_colors } = require('#/data/color-const');
-const { love_colors, relation_colors } = require('#/data/const.json');
+const { love_colors, relation_colors } = require('#/data/color-const');
 const { get_growth } = require('#/data/ero/status-const');
 const {
   get_love_info,
@@ -34,9 +34,9 @@ function cur_chara_component(chara_id, type, location_npc) {
   let temp;
   if (chara_id === 0) {
     if (location_npc) {
-      const relation = get_relation_info(location_npc),
-        love = get_love_info(location_npc),
-        title = CharaTitles.get(location_npc).get_colored_curr_title();
+      const relation = get_relation_info(location_npc);
+      const love = get_love_info(location_npc);
+      const title = CharaTitles.get(location_npc).get_colored_curr_title();
       era.printInColRows(
         [{ type: 'divider' }],
         {
@@ -66,17 +66,14 @@ function cur_chara_component(chara_id, type, location_npc) {
               type: 'text',
             },
             {
-              config: { color: relation_colors[relation[0]], width: 22 },
-              content: relation.join(' '),
+              config: { color: relation_colors[relation.level], width: 22 },
+              content: relation.full(),
               type: 'text',
             },
             { config: { width: 2 }, content: '爱慕', type: 'text' },
             {
-              config: {
-                color: love_colors[love[0]],
-                width: 22,
-              },
-              content: love.join(' '),
+              config: { color: love_colors[love.level], width: 22 },
+              content: love.full(),
               type: 'text',
             },
           ],
@@ -237,17 +234,14 @@ function cur_chara_component(chara_id, type, location_npc) {
             type: 'text',
           },
           {
-            config: { color: relation_colors[relation[0]], width: 4 },
-            content: relation.join(' '),
+            config: { color: relation_colors[relation.level], width: 4 },
+            content: relation.full(),
             type: 'text',
           },
           { config: { width: 2 }, content: '爱慕', type: 'text' },
           {
-            config: {
-              color: love_colors[love[0]],
-              width: 4,
-            },
-            content: love.join(' '),
+            config: { color: love_colors[love.level], width: 4 },
+            content: love.full(),
             type: 'text',
           },
         ],
@@ -278,10 +272,10 @@ function cur_chara_component(chara_id, type, location_npc) {
                   {
                     color:
                       relation_colors[
-                        (temp = get_relation_info(location_npc))[0]
+                        (temp = get_relation_info(location_npc)).level
                       ],
-                    content: temp[0],
-                    title: `好感：${temp.join(' ')}`,
+                    content: temp.mark(),
+                    title: `好感：${temp.full()}`,
                   },
                 ],
                 type: 'text',
@@ -290,9 +284,10 @@ function cur_chara_component(chara_id, type, location_npc) {
                 content: [
                   ' ❤️',
                   {
-                    color: love_colors[(temp = get_love_info(location_npc))[0]],
-                    content: temp[0],
-                    title: `爱慕：${temp.join(' ')}`,
+                    color:
+                      love_colors[(temp = get_love_info(location_npc)).level],
+                    content: temp.mark(),
+                    title: `爱慕：${temp.full()}`,
                   },
                 ],
                 type: 'text',

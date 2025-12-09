@@ -1,7 +1,7 @@
 const era = require('#/era-electron');
 
 const CharaTitles = require('#/data/chara-titles');
-const { love_colors, relation_colors } = require('#/data/const.json');
+const { love_colors, relation_colors } = require('#/data/color-const');
 const { get_love_info, get_relation_info } = require('#/data/info-generator');
 
 const { attr_bg_colors } = require('#/data/color-const');
@@ -10,9 +10,9 @@ const { __ } = require('#/i18n/selector');
 
 /** @param {CharaTalk} chara */
 function exp_chara_info(chara) {
-  const relation_info = get_relation_info(chara.id, 0),
-    love_info = get_love_info(chara.id),
-    curr_title = CharaTitles.get(chara.id).get_colored_curr_title();
+  const relation = get_relation_info(chara.id, 0);
+  const love = get_love_info(chara.id);
+  const curr_title = CharaTitles.get(chara.id).get_colored_curr_title();
   return [
     { type: 'divider' },
     {
@@ -28,8 +28,8 @@ function exp_chara_info(chara) {
       content: [
         ' 好感：',
         {
-          content: relation_info.join(' '),
-          color: relation_colors[relation_info[0]],
+          content: relation.full(),
+          color: relation_colors[relation.level],
         },
       ],
       type: 'text',
@@ -38,7 +38,7 @@ function exp_chara_info(chara) {
       config: { width: 6 },
       content: [
         ' 爱慕：',
-        { content: love_info.join(' '), color: love_colors[love_info[0]] },
+        { content: love.full(), color: love_colors[love.level] },
       ],
       type: 'text',
     },

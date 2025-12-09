@@ -195,56 +195,17 @@ function get_filtered_talents(sex, begin_talent_id) {
   }
 }
 
-/**
- * @param {number} love
- * @param {number} cid
- * @returns {string}
- */
-function get_love_mark(love, cid) {
-  if ((sys_check_hide_relation_and_love(cid) & 0b1) > 0) {
-    return '？';
-  }
-  let level = 0;
-  while (love >= level_and_desc.love.border[level]) {
-    level++;
-  }
-  if (sys_check_limit_relation_and_love(cid)) {
-    level = Math.min(level, 1);
-  }
-  return level_and_desc.love.mark[level];
-}
-
-/**
- * @param {number} relation
- * @param {number} cid
- * @returns {string}
- */
-function get_relation_mark(cid, relation = era.get(`relation:${cid}:0`)) {
-  if (sys_check_hide_relation_and_love(cid) > 0) {
-    return '？';
-  }
-  let level = 0;
-  while (relation > level_and_desc.relation.border[level]) {
-    level++;
-  }
-  return level_and_desc.relation.mark[level];
-}
-
 function get_trainer_level() {
+  let level = 0;
   const honour = era.get('flag:当前声望');
   if (honour <= 0) {
-    return -1;
-  }
-  let level = 0;
-  while (honour >= level_and_desc.honour.border[level]) {
-    level++;
+    level = -1;
+  } else {
+    while (honour >= level_and_desc.honour.border[level]) {
+      level++;
+    }
   }
   return level;
-}
-
-function get_trainer_prefix() {
-  const level = get_trainer_level();
-  return level < 0 ? '失格' : level_and_desc.honour.mark[level];
 }
 
 module.exports = {
@@ -538,23 +499,37 @@ module.exports = {
   },
   /**
    * @param {number} cid
-   * @returns {string[]}
+   * @param {number} [love]
+   * @returns {{full:()=>string,level:number,mark:()=>string,[val]:()=>string}}
    */
-  get_love_info(cid) {
+  get_love_info(cid, love = era.get(`love:${cid}`)) {
     if (!cid) {
-      return ['-'];
+      return { full: () => '-', level: -1, mark: () => '-' };
     }
     if ((sys_check_hide_relation_and_love(cid) & 0b1) > 0) {
-      return ['？', '(?)'];
+      return {
+        full: () => '？ (?)',
+        level: -1,
+        mark: () => '？',
+        val: () => '?',
+      };
     }
     if (sys_check_limit_relation_and_love(cid)) {
-      const love = Math.min(era.get(`love:${cid}`), 24);
-      return [get_love_mark(love, cid), `(${love})`];
+      love = Math.min(era.get(`love:${cid}`), 24);
     }
-    const love = era.get(`love:${cid}`);
-    return [get_love_mark(love, cid), `(${love})`];
+    let level = 0;
+    while (love >= level_and_desc.love.border[level]) {
+      level++;
+    }
+    const mark = () => level_and_desc.love.mark[level];
+    const val = () => love.toString();
+    return {
+      full: () => `${mark()} (${val()})`,
+      level,
+      mark,
+      val,
+    };
   },
-  get_love_mark,
   /** @param {string} rank */
   get_rank_level(rank) {
     switch (rank.charAt(0)) {
@@ -569,19 +544,33 @@ module.exports = {
   /**
    * @param {number} cid
    * @param {number} [target]
-   * @returns {string[]}
+   * @param {number} [relation]
+   * @returns {{full:()=>string,level:number,mark:()=>string,[val]:()=>string}}
    */
-  get_relation_info(cid, target = 0) {
+  get_relation_info(
+    cid,
+    target = 0,
+    relation = era.get(`relation:${cid}:${target}`),
+  ) {
     if (!cid) {
-      return ['-'];
+      return { full: () => '-', level: -1, mark: () => '-' };
     }
     if (sys_check_hide_relation_and_love(cid) > 0) {
-      return ['？', '(?)'];
+      return {
+        full: () => '？ (?)',
+        level: -1,
+        mark: () => '？',
+        val: () => '?',
+      };
     }
-    const relation = era.get(`relation:${cid}:${target}`);
-    return [get_relation_mark(cid, relation), `(${relation})`];
+    let level = 0;
+    while (relation > level_and_desc.relation.border[level]) {
+      level++;
+    }
+    const mark = () => level_and_desc.relation.mark[level];
+    const val = () => relation.toString();
+    return { full: () => `${mark()} (${val()})`, level, mark, val };
   },
-  get_relation_mark,
   get_save_name() {
     const prefix =
       era.get('flag:存档名') || `${era.get('callname:0:-1')} - ${get_date()}`;
@@ -659,11 +648,20 @@ module.exports = {
     } 月 第 ${(time % 4) + 1} 周`;
   },
   get_trainer_level,
-  get_trainer_prefix,
+  /** @returns {{full:()=>string,level:number,prefix:()=>string,title:()=>string}} */
   get_trainer_title() {
-    return `${get_trainer_prefix()}${title_desc[era.get('flag:惩戒力度')]}`;
+    let level = get_trainer_level();
+    const prefix = () =>
+      level < 0 ? '失格' : level_and_desc.honour.mark[level];
+    const title = () => title_desc[era.get('flag:惩戒力度')];
+    return {
+      full: () => prefix() + title(),
+      level,
+      prefix,
+      title,
+    };
   },
-  get_trainer_train_buff(cid) {
+  get_trainer_train_buff(cid, level = get_trainer_level()) {
     const relation = cid > 0 ? era.get(`relation:${cid}:0`) : 225;
     if (cid > 0) {
       if (relation <= -100) {
@@ -672,8 +670,7 @@ module.exports = {
         return -2.5;
       }
     }
-    let level = get_trainer_level(),
-      ret = 0;
+    let ret = 0;
     ret +=
       level_and_desc.honour.buff[
         level +

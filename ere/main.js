@@ -35,6 +35,7 @@ const { generate_copyrights, get_copyright_entry } = require('#/copyright');
 const { get_chara_color } = require('#/data/chara-colors');
 const notes = require('#/data/notes.json');
 const { first_child_id } = require('#/data/other-const');
+
 const { res_version } = require('#/versions');
 
 module.exports = async () => {

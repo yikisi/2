@@ -195,7 +195,7 @@ async function duty(chara, me) {
       false,
     );
     await printAndWait([
-      get_trainer_title(),
+      get_trainer_title().full(),
       ' ',
       me.get_colored_actual_name(),
       '，今天也牢记着自己的职责……',
@@ -234,7 +234,7 @@ async function duty(chara, me) {
       ' 的配合，就开始自行取用这顿自助的早餐。',
     ]);
     await printAndWait([
-      get_trainer_title(),
+      get_trainer_title().full(),
       ' ',
       me.get_colored_actual_name(),
       '，今天也被灌输着、自己的职责……',

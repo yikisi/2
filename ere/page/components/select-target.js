@@ -18,9 +18,10 @@ const {
   adaptability_colors,
   attr_bg_colors,
   el_danger_color,
+  love_colors,
   motivation_colors,
+  relation_colors,
 } = require('#/data/color-const');
-const { love_colors, relation_colors } = require('#/data/const.json');
 const {
   get_growth,
   human_sex_title,
@@ -122,8 +123,8 @@ function get_suffix(cid, type) {
       },
     );
   } else {
-    const relation = get_relation_info(cid)[0];
-    const love = get_love_info(cid)[0];
+    const relation = get_relation_info(cid);
+    const love = get_love_info(cid);
     const race = era.get(`cflag:${cid}:种族`);
     const g_level = era.get(`cflag:${cid}:成长阶段`);
     const growth = get_growth(g_level, race);
@@ -142,13 +143,17 @@ function get_suffix(cid, type) {
         type: 'text',
       },
       {
-        config: { align: 'center', color: relation_colors[relation], width: 2 },
-        content: relation,
+        config: {
+          align: 'center',
+          color: relation_colors[relation.level],
+          width: 2,
+        },
+        content: relation.mark(),
         type: 'text',
       },
       {
-        config: { align: 'center', color: love_colors[love], width: 2 },
-        content: love,
+        config: { align: 'center', color: love_colors[love.level], width: 2 },
+        content: love.mark(),
         type: 'text',
       },
       {
@@ -533,8 +538,7 @@ async function select_target(
                 show_list = sort_list(
                   show_list,
                   (id) => {
-                    let relation = get_relation_info(id)[1];
-                    relation = relation.substring(1, relation.length - 1);
+                    let relation = get_relation_info(id).val();
                     if (relation === '?') {
                       relation = new_sort * 601;
                     } else {
@@ -549,8 +553,7 @@ async function select_target(
                 show_list = sort_list(
                   show_list,
                   (id) => {
-                    let love = get_love_info(id)[1];
-                    love = love.substring(1, love.length - 1);
+                    let love = get_love_info(id).val();
                     if (love === '?') {
                       love = new_sort * 101;
                     } else {

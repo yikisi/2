@@ -24,7 +24,7 @@ const CharaAvailableSkills = require('#/data/chara-available-skills');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
-const { get_trainer_prefix } = require('#/data/info-generator');
+const { get_trainer_title } = require('#/data/info-generator');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
 const { attr_names } = require('#/data/train-const');
@@ -41,7 +41,7 @@ module.exports = class extends CustomizedRecruit {
     dict['骏川缰绳'] = era.get('callname:301:-2');
     dict['玩家敬称'] = era.get('cflag:0:性别') === 1 ? '先生' : '小姐';
     dict['玩家名'] = era.get('callname:0:-1');
-    dict['训练员头衔'] = get_trainer_prefix();
+    dict['训练员头衔'] = get_trainer_title().prefix();
     era.set(`cflag:${this.id}:招募状态`, recruit_flags.yes);
     const ret = await lines['recruit'](dict);
     await this.recruit_end();

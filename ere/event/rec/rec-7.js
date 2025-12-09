@@ -20,7 +20,7 @@ module.exports = class extends CustomizedRecruit {
         `这个早晨朗日清天，${your_name} 穿着一身凛然的训练员装束来到了训练场。`,
       );
       await era.printAndWait(
-        `身为${get_trainer_title()}，${your_name} 的职责就是指导年青有为的赛马娘们更上一层楼`,
+        `身为${get_trainer_title().full()}，${your_name} 的职责就是指导年青有为的赛马娘们更上一层楼`,
       );
       await era.printAndWait(
         `突然，${your_name} 注意到了一位穿着运动服，身材高挑的银发赛马娘。她的脸上宛如裹上冰霜般毫无表情，也就是所谓的扑克脸。这个赛马娘还戴着一顶……类似耳机与帽子混合体一样的东西，但 ${your_name} 通过经验知道这是一种赛马娘的传统饰物。${your_name} 眯起眼睛细细观察，她似乎正在为接下来的选拔赛作准备热身的样子。她的身姿很柔软，轻而易举地做到了下腰、屈伸等拉筋动作。`,

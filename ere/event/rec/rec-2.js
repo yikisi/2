@@ -15,7 +15,7 @@ const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
-const { get_trainer_prefix } = require('#/data/info-generator');
+const { get_trainer_title } = require('#/data/info-generator');
 
 module.exports = class extends CustomizedRecruit {
   async recruit(stage, ebj) {
@@ -25,7 +25,7 @@ module.exports = class extends CustomizedRecruit {
     dict['你'] = me.name;
     dict['玩家名'] = me.actual_name;
     dict['先生'] = me.adult_sex_title;
-    dict['头衔'] = get_trainer_prefix();
+    dict['头衔'] = get_trainer_title().prefix();
     dict['她'] = suzuka.sex;
     dict['马娘'] = suzuka.uma_sex_title;
     dict['代表色'] = suzuka.color;

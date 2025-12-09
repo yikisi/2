@@ -78,16 +78,16 @@ function page_header(enable_race_info) {
         };
       })
       .filter((e) => e.week === cur_rounds);
-    const title_level = get_trainer_title();
-    const trainer_title_color = get_trainer_color(get_trainer_level());
-    const trainer_buff = get_trainer_train_buff();
+    const trainer_title = get_trainer_title();
+    const trainer_title_color = get_trainer_color(trainer_title.level);
+    const trainer_buff = get_trainer_train_buff(0, trainer_title.level);
     const money_buff = era.get('global:金钱加成');
     const rec_trainers = [304, 306]
       .filter((e) => era.get(`cflag:${e}:招募状态`) === recruit_flags.yes)
       .map((e) => `[${get_custom_mec(e).get_talents()[0].content}]`)
       .join('+');
-    let billings = '账单：',
-      money_change = 0;
+    let billings = '账单：';
+    let money_change = 0;
     sys_get_billings().forEach((e, i) => {
       if (e.repay !== 0 && e.timer !== 0) {
         let delta = e.repay;
@@ -129,7 +129,7 @@ function page_header(enable_race_info) {
       title_info.push({
         color: t_title.c,
         content: `[${t_title.n}]`,
-        fontWeight: 'n',
+        fontWeight: 'bold',
         title: title_desc[t_title.n]
           ? `[${t_title.n}]：${title_desc[t_title.n]}\n`
           : '',
@@ -137,18 +137,18 @@ function page_header(enable_race_info) {
     } else {
       title_info.push({
         color: trainer_title_color,
-        content: `[${title_level}]`,
+        content: `[${trainer_title.full()}]`,
         fontWeight: 'bold',
         title: '',
       });
     }
-    title_info.at(-1).title += `[${title_level}]：${
+    title_info.at(-1).title += `[${trainer_title.full()}]：${
       trainer_buff > 0
-        ? `指导训练时成功率与效果加成+${trainer_buff}%${
+        ? `指导训练时成功率与效果加成 +${trainer_buff}%${
             rec_trainers.length > 0 ? ` (↑${rec_trainers})` : ''
           }，`
         : ''
-    }担当赏金${4 * get_trainer_level() + 4}%分成。`;
+    }担当赏金 ${4 * get_trainer_level() + 4}% 分成。`;
     title_info.push(...race_indicator(0));
     era.printInColRows(
       [{ type: 'divider' }],

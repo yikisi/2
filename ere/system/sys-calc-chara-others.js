@@ -18,15 +18,15 @@ const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { attr_change_colors, palam_colors } = require('#/data/color-const');
-const { love_colors, relation_colors } = require('#/data/const.json');
+const { love_colors, relation_colors } = require('#/data/color-const');
 const CharaInmon = require('#/data/ero/chara-inmon');
 const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const recruit_flags = require('#/data/event/recruit-flags');
 const {
   get_love_border,
-  get_love_mark,
-  get_relation_mark,
+  get_love_info,
+  get_relation_info,
 } = require('#/data/info-generator');
 const LoveLimitStatus = require('#/data/love-limit-status');
 
@@ -178,7 +178,7 @@ function like_chara(target, aim, val, shown = true, extra_love = 0) {
   if (val !== 0) {
     const _new = era.set(`relation:${target}:${aim}`, relation + val);
     if (shown) {
-      const mark = get_relation_mark(target, _new);
+      const r_info = get_relation_info(target, aim, _new);
       ret = true;
       era.print([
         get_chara_talk(target).get_colored_name(),
@@ -194,12 +194,10 @@ function like_chara(target, aim, val, shown = true, extra_love = 0) {
               color: attr_change_colors.down,
               content: ' 降低 ',
             },
+        `了 ${r_info.level === -1 ? '?' : val > 0 ? val : -val}！现在为：`,
         {
-          content: `了 ${mark === '？' ? '?' : val > 0 ? val : -val}！现在为：`,
-        },
-        {
-          content: `${mark} (${mark === '？' ? '?' : _new})`,
-          color: relation_colors[mark],
+          content: r_info.full(),
+          color: relation_colors[r_info.level],
         },
       ]);
     }
@@ -317,22 +315,22 @@ function get_callname(_from, _to) {
  */
 function print_change(cid, old_val, new_val, shown = true) {
   if (shown && old_val !== new_val) {
-    const mark = [get_love_mark(old_val, cid), get_love_mark(new_val, cid)];
+    const love = [get_love_info(cid, old_val), get_love_info(cid, new_val)];
     era.print([
       get_chara_talk(cid).get_colored_name(),
       ' 对 ',
       get_chara_talk(0).get_colored_name(),
       ' 的爱慕',
-      { content: ' 提高 ', color: love_colors[mark[0]] },
+      { content: ' 提高 ', color: love_colors[love[0].level] },
       '了 ',
       {
-        content: mark[1] === '？' ? '?' : new_val - old_val,
+        content: love[1].level === -1 ? '?' : new_val - old_val,
         color: palam_colors.notifications[1],
       },
       '！现在为：',
       {
-        content: `${mark[1]} (${mark[1] === '？' ? '?' : new_val})`,
-        color: love_colors[mark[1]],
+        content: love[1].full(),
+        color: love_colors[love[1].level],
       },
     ]);
     return true;

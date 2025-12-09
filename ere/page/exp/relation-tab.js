@@ -11,8 +11,8 @@ const { get_custom_mec } = require('#/event/mec/mec-factory');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { join_to_string } = require('#/utils/list-utils');
 
-const { relation_colors } = require('#/data/const.json');
-const { get_relation_mark } = require('#/data/info-generator');
+const { relation_colors } = require('#/data/color-const');
+const { get_relation_info } = require('#/data/info-generator');
 
 const chinese_numbers = [
   '长',
@@ -42,7 +42,7 @@ module.exports = {
     if (chara.id > 0) {
       Object.entries(era.get(`relation:${chara.id}`)).forEach(
         ([cid, relation]) => {
-          const mark = get_relation_mark(chara.id, relation);
+          const r_info = get_relation_info(chara.id, relation);
           const target = Number(cid);
           if (target !== my_src_chara && target < 1000) {
             relation_info_list.push({
@@ -51,8 +51,8 @@ module.exports = {
                 sys_get_colored_full_callname(chara.id, target),
                 '：',
                 {
-                  content: mark,
-                  color: relation_colors[mark],
+                  content: r_info.mark(),
+                  color: relation_colors[r_info.level],
                 },
               ],
               type: 'text',

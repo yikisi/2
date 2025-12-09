@@ -49,7 +49,7 @@ module.exports = class extends CustomizedRecruit {
             era.set(`cflag:${this.id}:随机招募`, 0);
           }
         } else {
-          dict['训练员头衔'] = get_trainer_title();
+          dict['训练员头衔'] = get_trainer_title().prefix();
           await print_event_name('高尚骏逸登场！：「开端」', grand);
           if ((await kojo['开端'](dict)).at(-1) <= 2) {
             await kojo['开端结束'](dict);

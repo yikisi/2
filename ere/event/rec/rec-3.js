@@ -31,7 +31,7 @@ module.exports = class extends CustomizedRecruit {
     era.println();
     await era.printAndWait([
       '身为',
-      get_trainer_title(),
+      get_trainer_title().full(),
       '，',
       me.get_colored_name(),
       ' 今天依然奔走在去往特雷森学园，帮助',
