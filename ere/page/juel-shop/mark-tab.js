@@ -6,8 +6,10 @@ const {
   begin_and_init_ero,
   end_ero_and_train,
 } = require('#/system/ero/sys-prepare-ero');
+const global_achievement = require('#/system/global/sys-calc-achievement');
 const { sys_get_billings } = require('#/system/sys-calc-base-cflag');
 const { sys_change_fame } = require('#/system/sys-calc-flag');
+const sys_filter_chara = require('#/system/sys-filter-chara');
 
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
 const {
@@ -41,6 +43,7 @@ const {
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const { get_trainer_title } = require('#/data/info-generator');
 const LoveLimitStatus = require('#/data/love-limit-status');
+const { max_chara_id } = require('#/data/other-const');
 
 /**
  * @param {{a:number,m:number,p:InmonPlugin}} plugin_with_acc
@@ -607,6 +610,18 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
           ret === 6,
         );
         era.add(`juel:${chara.id}:顺从`, -sex_mark_price);
+        const inmon_count = sys_filter_chara('mark', mark_enum.ero, 3).filter(
+          (cid) => cid > 0 && cid < max_chara_id,
+        ).length;
+        if (inmon_count >= 1) {
+          global_achievement.inmn_one = 1;
+        }
+        if (inmon_count >= 3) {
+          global_achievement.inmn_thr = 1;
+        }
+        if (inmon_count >= 6) {
+          global_achievement.inmn_six = 1;
+        }
       }
     }
   } else if (ret === 9) {

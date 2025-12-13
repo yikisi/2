@@ -1,6 +1,7 @@
 const era = require('#/era-electron');
 
 const sys_add_titles = require('#/system/chara/sys-add-titles');
+const global_achievement = require('#/system/global/sys-calc-achievement');
 const {
   sys_like_chara,
   sys_punish_unfaithful,
@@ -379,14 +380,27 @@ async function sys_have_baby(mid) {
   const f_check = era.add(`exp:${fid}:孩子数量`, 1);
   const m_check = era.add(`exp:${mid}:生产次数`, 1);
   m_life_marks.sperm = 0;
-  if (f_check >= 8 && sys_add_titles(fid, { c: buff_colors[2], n: '大种马' })) {
-    await era.waitAnyKey();
+  if (f_check >= 8) {
+    if (!fid) {
+      global_achievement.father = 1;
+      if (global_achievement.mother > 0) {
+        global_achievement.famother = 1;
+      }
+    }
+    if (sys_add_titles(fid, { c: buff_colors[2], n: '大种马' })) {
+      await era.waitAnyKey();
+    }
   }
-  if (
-    m_check >= 8 &&
-    sys_add_titles(mid, { c: buff_colors[2], n: '英雄母亲' })
-  ) {
-    await era.waitAnyKey();
+  if (m_check >= 8) {
+    if (!mid) {
+      global_achievement.mother = 1;
+      if (global_achievement.father > 0) {
+        global_achievement.famother = 1;
+      }
+    }
+    if (sys_add_titles(mid, { c: buff_colors[2], n: '英雄母亲' })) {
+      await era.waitAnyKey();
+    }
   }
 
   const father = get_chara_talk(fid);
@@ -409,6 +423,26 @@ async function sys_have_baby(mid) {
     Math.max(era.get(`maxbase:${mid}:精力`) - 400, 200),
   );
   era.add(`base:${mid}:精力`, 0);
+  if (!fid && era.get(`cflag:${mid}:父方角色`) === 0) {
+    global_achievement.ck_m = 1;
+  }
+  if (!mid && era.get(`cflag:${fid}:母方角色`) === 0) {
+    global_achievement.ck_f = 1;
+  }
+  if (
+    (!fid && era.get(`cflag:${mid}:母方角色`) === 0) ||
+    (!mid && era.get(`cflag:${fid}:父方角色`) === 0)
+  ) {
+    global_achievement.ck_d = 1;
+  }
+  if (
+    global_achievement.ck_m +
+      global_achievement.ck_f +
+      global_achievement.ck_d >=
+    2
+  ) {
+    global_achievement.ck = 1;
+  }
   await get_custom_ero(mid || fid).have_baby(father, mother, ch_id);
   await name_baby(ch_id, fid, mid);
 

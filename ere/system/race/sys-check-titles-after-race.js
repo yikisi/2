@@ -1,5 +1,7 @@
 const era = require('#/era-electron');
 
+const global_achievement = require('#/system/global/sys-calc-achievement');
+
 const { adaptability_colors, buff_colors } = require('#/data/color-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
@@ -52,6 +54,9 @@ function sys_check_titles_after_race(team_list, race, best_rank, mvp_id) {
         new_title_dict[cid].push({ n: '惊世骇俗', c: buff_colors[2] });
         if (uma.race.conditionParams.item === 0) {
           new_title_dict[cid].push({ n: '倒霉蛋', c: buff_colors[2] });
+          if (uma.rank.curr === 1) {
+            global_achievement.wins_hnt = 1;
+          }
         }
       } else if (uma.race.conditionParams.item === 0) {
         new_title_dict[cid].push({ n: '无妄之灾', c: buff_colors[2] });
