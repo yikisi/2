@@ -10,6 +10,7 @@ const { adaptability_names, attr_names } = require('#/data/train-const');
  * @param {number[]} [attr_arr]
  * @param {number[]} [adapt_arr]
  * @param {number} [_aim_ratio]
+ * @returns {{blue:number,pink:number,white:number}}
  */
 function sys_count_juels(chara_id, edu_ratio, attr_arr, adapt_arr, _aim_ratio) {
   const attrs = attr_arr || attr_names.map((e) => get(`base:${chara_id}:${e}`)),

@@ -2,6 +2,7 @@ const era = require('#/era-electron');
 
 const { join_list, sort_list } = require('#/utils/list-utils');
 
+const { get_chara_color } = require('#/data/chara-colors');
 const { adaptability_colors } = require('#/data/color-const');
 
 const dict = {};
@@ -50,7 +51,8 @@ platinum_tags[platinum_type.all] = '';
 
 class GlobalAchievement {
   get #bean() {
-    return era.get('global:全局成就') || era.set('global:全局成就', {});
+    // GLOBALNAME:2 = 全局成就
+    return era.get('global:2') || era.set('global:2', {});
   }
 
   get #fields() {
@@ -58,8 +60,8 @@ class GlobalAchievement {
   }
 
   edu_one = ['教书育人', 4, '完成一次育成。', types.edu, platinum_type.all];
-  edu_fiv = ['训练员楷模', 5, '完成五次育成。', types.edu, platinum_type.all];
-  edu_ten = ['桃李满园', 6, '完成十次育成。', types.edu, platinum_type.all];
+  edu_thr = ['训练员楷模', 5, '完成三次育成。', types.edu, platinum_type.all];
+  edu_nrg = ['桃李满园', 6, '完成七次育成。', types.edu, platinum_type.all];
   edu_1_ex = [
     '二人三足',
     5,
@@ -73,7 +75,7 @@ class GlobalAchievement {
     '完成一次育成，且担当达成以下条件之一：\n' +
       '● 达成 [佳偶] 以上关系；\n' +
       '● 获得三级同心刻印，且没有任何负面刻印；\n' +
-      '● 获得三级淫纹。\n',
+      '● 获得三级淫纹。',
     types.edu,
     platinum_type.all,
   ];
@@ -94,19 +96,18 @@ class GlobalAchievement {
     types.edu,
     platinum_type.all,
   ];
-  chan_thd = [
+  chan_thr = [
     '倒带',
     6,
-    '进行五次以上的重复育成。',
+    '进行三次以上的重复育成。',
     types.edu,
     platinum_type.all,
   ];
   chan_mor = [
     '命运石之门',
     7,
-    '对一个角色完成八次育成，以获得最高的技能点数费用减免。',
-    types.edu,
-    platinum_type.all,
+    '对一个角色开始第八次育成，以获得最高的技能点数费用减免。',
+    types.hidden,
   ];
 
   wins_one = [
@@ -116,19 +117,18 @@ class GlobalAchievement {
     types.race,
     platinum_type.all,
   ];
-  wins_fiv = [
-    '马色军团',
-    7,
-    '培养六名担当获得称号 [百战百胜]。',
-    types.race,
-    platinum_type.all,
-  ];
-  wins_ten = [
+  wins_six = ['马色军团', 7, '培养六名担当获得称号 [百战百胜]。', types.hidden];
+  wins_thr = [
     '永不停止的远征',
     7,
     '培养十三名担当获得称号 [百战百胜]。',
-    types.race,
-    platinum_type.all,
+    types.hidden,
+  ];
+  wins_hnt = [
+    '惊人的……「变态」',
+    7,
+    '在获得 [倒霉蛋] 称号的情况下赢取比赛胜利。',
+    types.hidden,
   ];
 
   blnc_cel = [
@@ -149,8 +149,7 @@ class GlobalAchievement {
     '刺玫瑰养育者',
     7,
     '使一名角色通过技能 [爱意克制] 获得特性 [病娇]。',
-    types.love,
-    platinum_type.all,
+    types.hidden,
   ];
 
   inmn_one = [
@@ -160,7 +159,7 @@ class GlobalAchievement {
     types.sex,
     platinum_type.all,
   ];
-  inmn_thd = [
+  inmn_thr = [
     '马儿控制',
     6,
     '为三个角色打上三级淫纹。',
@@ -177,35 +176,35 @@ class GlobalAchievement {
   slav_mil = [
     '挤奶大师',
     6,
-    '通过榨乳用母马一次性获得六份以上的乳汁（[马奶] 或 [人奶]）。',
+    '通过榨乳用母马一次性获得六份以上的乳汁。',
     types.sex,
     platinum_type.all,
   ];
   slav_prg = [
-    '育种大师',
+    '助产大师',
     6,
-    '通过繁殖用母马累计减少怀孕时间 40 周。',
+    '通过繁殖用母马累计减少怀孕时间 36 周以上。',
     types.sex,
     platinum_type.all,
   ];
   slav_mon = [
-    '分工大师',
+    '监工大师',
     6,
     '通过献金用母马累计获取金钱 100,000 马币。',
     types.sex,
     platinum_type.all,
   ];
   slav_inh = [
-    '基因大师',
+    '育种大师',
     6,
-    '通过继承用母马累计获取各类因子 10,000 个。',
+    '通过继承用母马一次性获得各类因子 100 个以上。',
     types.sex,
     platinum_type.all,
   ];
   slav_frn = [
     '守夜大师',
     6,
-    '通过抱枕用母马累计阻止 100 次睡奸。',
+    '通过抱枕用母马累计阻止 100 次睡奸或监禁。',
     types.sex,
     platinum_type.all,
   ];
@@ -222,11 +221,11 @@ class GlobalAchievement {
     '获得以下成就：\n' +
       '● [马王]\n' +
       '● [挤奶大师]\n' +
+      '● [助产大师]\n' +
+      '● [监工大师]\n' +
       '● [育种大师]\n' +
-      '● [分工大师]\n' +
-      '● [基因大师]\n' +
       '● [守夜大师]\n' +
-      '● [召唤大师]\n',
+      '● [召唤大师]',
     types.sex,
     platinum_type.all,
   ];
@@ -252,15 +251,7 @@ class GlobalAchievement {
     platinum_type.all,
   ];
 
-  st_joseph = ['圣约瑟', 5, '得到意外的孩子。', types.birth, platinum_type.all];
   st_maria = ['圣玛丽亚', 5, '意外得到孩子。', types.birth, platinum_type.all];
-  st_truth = [
-    '圣真相',
-    6,
-    '发现角色的秘密行径。',
-    types.birth,
-    platinum_type.all,
-  ];
   father = ['大种马', 5, '获得称号 [大种马]。', types.birth, platinum_type.all];
   mother = [
     '英雄母亲',
@@ -350,7 +341,7 @@ class GlobalAchievement {
       '● 完成成就 [Loser] 或 [「体面」的绅士]；\n' +
       '● 完成成就 [遗憾的旅程]；\n' +
       '● 完成成就 [铜臭终幕]；\n' +
-      '● 完成成就 [Merry Bad End]。\n',
+      '● 完成成就 [Merry Bad End]。',
     types.end,
     platinum_type.all,
   ];
@@ -372,29 +363,41 @@ class GlobalAchievement {
   time_thr = [
     '三十年的老友',
     6,
-    '在 EraUma 中度过 28 (30) 年……\n并成为生命之织缕（并不）。',
+    '在 EraUma 中度过 21 (30) 年……\n并成为生命之织缕（并不）。',
     types.all,
     platinum_type.all,
   ];
   time_for = [
     '四十年的传奇',
     7,
-    '在 EraUma 中度过 36 (40) 年……\n并成为渴求之器具（并不）。',
+    '在 EraUma 中度过 24 (40) 年……\n并成为渴求之器具（并不）。',
     types.all,
     platinum_type.all,
   ];
   time_fif = [
     '人生五十年，如梦亦如幻',
     7,
-    '在 EraUma 中度过 50 年……\n并成为轮回之终末（并不）。',
+    '在 EraUma 中度过 25 (50) 年……\n并成为轮回之终末（并不）。',
     types.all,
     platinum_type.all,
   ];
-  all = ['学园主宰', 8, '完成所有成就。', types.all];
+  all = ['学园主宰', 8, '完成所有非事迹成就。', types.hidden];
+
+  c_luna1 = [
+    '伊甸见我',
+    7,
+    '【鲁铎象征】请见证，这前无古人的伟业——我们的太阳，我的月亮。',
+    types.hidden,
+    void 0,
+    get_chara_color(17),
+  ];
 
   constructor() {
     this.#fields.forEach((m) => {
       dict[m] = this[m];
+      if (dict[m][3] !== types.hidden && platinum_tags[dict[m][4]]) {
+        dict[m][2] += `\n\n（${platinum_tags[dict[m][4]]}）`;
+      }
       Object.defineProperty(this, m, {
         get() {
           return this.#bean[m] || 0;
@@ -404,7 +407,7 @@ class GlobalAchievement {
             era.notify(
               [
                 {
-                  color: adaptability_colors[dict[m][1]],
+                  color: this.get_color(m),
                   content: `[${rarity[dict[m][1]]}] ${dict[m][0]}`,
                   fontSize: '1rem',
                   fontWeight: 'bold',
@@ -418,12 +421,12 @@ class GlobalAchievement {
             );
             const p_type = dict[m][4];
             const type_key = platinum_type.keys[p_type];
-            if (!this[type_key]) {
+            if (platinum_tags[p_type] && !this.#bean[type_key]) {
               const index = this.#fields.findIndex(
                 (m) => !this[m] && dict[m][4] === p_type,
               );
               if (index === -1) {
-                this.all = 1;
+                this[type_key] = 1;
               }
             }
           }
@@ -433,10 +436,19 @@ class GlobalAchievement {
     });
   }
 
+  /**
+   * @param {string} m
+   * @returns {string}
+   */
+  get_color(m) {
+    return dict[m][5] || adaptability_colors[dict[m][1]];
+  }
+
   async show() {
     const curr = era.getLineCount();
     let flag = true;
     let page = 0;
+    let show_hidden = false;
 
     era.setAlign('right');
     while (flag) {
@@ -452,7 +464,7 @@ class GlobalAchievement {
           columns: [
             ...type_names.map((t, i) => ({
               accelerator: i + 1,
-              config: { disabled: i === page },
+              config: { disabled: i === page && page !== types.hidden },
               content: t,
               type: 'button',
             })),
@@ -462,40 +474,55 @@ class GlobalAchievement {
         },
         {
           columns: sort_list(
-            this.#fields.filter((m) => dict[m][3] === page),
-            (m) => (this[m] > 0 ? this[m] : 100 - this.#fields.indexOf(m)),
-          ).map((m) => ({
-            config: { align: 'center', offset: 1, width: 7 },
-            content: [
-              {
-                fontSize: '1.25rem',
-                color: adaptability_colors[dict[m][1]],
-                opacity: this[m] > 0 ? 1 : 0.5,
-                content: dict[m][0],
-              },
-              { isBr: 1 },
-              {
-                color: adaptability_colors[dict[m][1]],
-                content: `[${rarity[dict[m][1]]}]`,
-              },
-              { isBr: 1 },
-              ...(this[m] > 0
-                ? join_list(dict[m][2].split('\n'), { isBr: true })
-                : [{ content: '？？？', title: dict[m][2] }]),
-              { isBr: 2 },
-            ],
-            type: 'text',
-          })),
-          config: {
-            horizontalAlign: 'space-evenly',
-            width: 21,
-          },
+            this.#fields.filter(
+              (m) =>
+                dict[m][3] === page &&
+                (dict[m][3] !== types.hidden ||
+                  show_hidden ||
+                  this.#bean[m] > 0),
+            ),
+            (m) =>
+              this.#bean[m] > 0 ? this.#bean[m] : 100 - this.#fields.indexOf(m),
+          ).map((m) => {
+            let desc;
+            if (this.#bean[m] > 0) {
+              desc = dict[m][2].split('\n');
+              if (desc.length > 1) {
+                desc = [{ content: desc[0] + '……', title: dict[m][2] }];
+              } else {
+                desc = join_list(desc, { isBr: true });
+              }
+            } else {
+              desc = [{ content: '？？？', title: dict[m][2] }];
+            }
+            return {
+              config: { align: 'center', offset: 1, width: 7 },
+              content: [
+                {
+                  fontSize: '1.25rem',
+                  color: this.get_color(m),
+                  opacity: this[m] > 0 ? 1 : 0.5,
+                  content: dict[m][0],
+                  title:
+                    this[m] > 0
+                      ? `[${rarity[dict[m][1]]}] 获取时间：${new Date(this[m]).toLocaleString(/** TODO */ 'zh-CN')}`
+                      : `稀有度：[${rarity[dict[m][1]]}]`,
+                },
+                { isBr: true },
+                ...desc,
+                { isBr: 2 },
+              ],
+              type: 'text',
+            };
+          }),
+          config: { width: 21 },
         },
       );
       const ret = await era.input({ hideInput: true });
       if (ret === 99) {
         flag = false;
       } else {
+        show_hidden = page === types.hidden && ret - 1 === types.hidden;
         page = ret - 1;
       }
     }

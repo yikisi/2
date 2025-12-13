@@ -84,7 +84,7 @@
  * @property {number} [width] width of the line, 1-24, 24 in default
  */
 /**
- * @typedef {string|(PrintedSpan|{isBlank:number}|{isBr:number}|{isDivider:boolean}|string)[]} TextContent
+ * @typedef {string|(PrintedSpan|{isBlank:number|true}|{isBr:number|true}|{isDivider:boolean}|string)[]} TextContent
  */
 /**
  * @typedef TextObject

@@ -28,8 +28,10 @@ const { adaptability_names, attr_names } = require('#/data/train-const');
 
 /** @param {number} cid */
 function sys_handle_palace(cid) {
-  era.set(`cflag:${cid}:殿堂`, 1);
-  era.add(`cflag:${cid}:育成次数`, 1);
+  // CFLAGNAME:47 = 殿堂
+  era.set(`cflag:${cid}:47`, 1);
+  // CFLAGNAME:49 = 育成次数
+  era.add(`cflag:${cid}:49`, 1);
   const chara = get_chara_talk(cid);
   const miss_count = remove_edu_events(cid)[cid] || 0;
   /** @type {*[]} */
@@ -114,7 +116,7 @@ function sys_handle_palace(cid) {
   if (races.length >= 101) {
     titles.push({ n: '苛己执着', c: adaptability_colors.at(-2) });
     if (races.findIndex((e) => e.rank !== 1) === -1) {
-      titles.push({ n: '百战百胜', c: adaptability_colors.at(-1) });
+      titles.push({ c: adaptability_colors.at(-1), n: '百战百胜', wins: 1 });
     }
   }
   const pv = era.get(`talent:${cid}:童贞`);
@@ -132,8 +134,8 @@ function sys_handle_palace(cid) {
   sys_like_chara(cid, 0, -(miss_count + aim_punish_count) * 100);
   sys_like_chara(302, 0, -aim_punish_count * 20);
   era.println();
-  const attr_list = attr_names.map((e) => era.get(`base:${cid}:${e}`)),
-    adapt_list = adaptability_names.map((e) =>
+  const attr_list = attr_names.map((e) => era.get(`base:${cid}:${e}`));
+  const adapt_list = adaptability_names.map((e) =>
       era.get(`cflag:${cid}:${e}适性`),
     ),
     { blue, pink, white } = sys_count_juels(

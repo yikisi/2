@@ -1,6 +1,7 @@
 const era = require('#/era-electron');
 
 const sys_get_random_uma_god = require('#/system/chara/sys-get-random-uma-god');
+const global_achievement = require('#/system/global/sys-calc-achievement');
 const {
   sys_change_attr_and_print,
   sys_change_lust,
@@ -399,8 +400,11 @@ handlers[event_hooks.out_station] = async (cid, hook) => {
 };
 
 handlers[event_hooks.celebration] = async (cid) => {
-  era.set(`cflag:${cid}:节日事件标记`, 0);
-  era.add('cflag:0:节日事件标记', 1);
+  // CFLAGNAME:56 = 节日事件标记
+  era.set(`cflag:${cid}:56`, 0);
+  if (era.add('cflag:0:56', 1) >= 6) {
+    global_achievement.blnc_cel = 1;
+  }
   era.println();
   let wait_flag = false;
   if (era.get('flag:当前回合数') % 48 === 6) {

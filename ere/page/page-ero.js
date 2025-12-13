@@ -12,6 +12,7 @@ const {
   get_characters_in_train,
   init_ero,
 } = require('#/system/ero/sys-prepare-ero');
+const global_achievement = require('#/system/global/sys-calc-achievement');
 const { sys_change_lust } = require('#/system/sys-calc-base-cflag');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const {
@@ -49,6 +50,7 @@ const {
   part_names,
   up_enum,
 } = require('#/data/ero/part-const');
+const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const {
   ero_action_names,
   ero_derive_check,
@@ -239,9 +241,10 @@ function get_chara_info(cid) {
 /**
  * @param {string} type
  * @param {number} size
+ * @param {{count:number}} counter
  * @returns {boolean}
  */
-function print_milking(type, size) {
+function print_milking(type, size, counter) {
   const my_milk = era.get(`tflag:${type}可卖`);
   const milk = era.get(`tflag:${type}产量`) + my_milk;
   if (milk > 0) {
@@ -283,6 +286,7 @@ function print_milking(type, size) {
         get_chara_talk(0).get_colored_name(),
         '）',
       );
+      counter.count += got_me;
     }
     buffer.push('！');
     era.println();
@@ -324,6 +328,10 @@ async function page_ero(lover, skip_start_end = false) {
   ) {
     init_ero(assist);
     era.set('tflag:当前助手', assist);
+    const my_marks = new MyEduMarks();
+    if (!global_achievement.slav_ass && ++my_marks.a_s_ass >= 100) {
+      global_achievement.slav_ass = 1;
+    }
   }
   if (!skip_start_end) {
     era.drawLine();
@@ -709,8 +717,15 @@ async function page_ero(lover, skip_start_end = false) {
     }
   }
   const size = 200 + 300 * !era.get('item:乳汁处理器');
-  wait_flag = print_milking('人奶', size) || wait_flag;
-  wait_flag = print_milking('马奶', size) || wait_flag;
+  const achieve = { count: 0 };
+  wait_flag = print_milking('人奶', size, achieve) || wait_flag;
+  wait_flag = print_milking('马奶', size, achieve) || wait_flag;
+  if (achieve.count >= 1) {
+    global_achievement.play_mil1 = 1;
+  }
+  if (achieve.count >= 4) {
+    global_achievement.play_mil3 = 1;
+  }
   if (wait_flag) {
     await era.waitAnyKey();
   }
