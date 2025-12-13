@@ -30,4 +30,5 @@ Scope:
 * engine：引擎改动；
 * util: value-utils、date-indicator 等工具模块改动；
 * tools：tools 文件夹下的生成工具改动；
-* b-(分支名): 一般用于 merge，标明这次 merge 的方向。
+* b-(分支名): 一般用于 merge，标明这次 merge 的方向；
+* i18n：面向多语言翻译的改动。

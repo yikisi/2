@@ -5,6 +5,8 @@ const { join_list, sort_list } = require('#/utils/list-utils');
 const { get_chara_color } = require('#/data/chara-colors');
 const { adaptability_colors } = require('#/data/color-const');
 
+const { lan } = require('#/i18n/selector');
+
 const dict = {};
 
 const types = {
@@ -505,7 +507,7 @@ class GlobalAchievement {
                   content: dict[m][0],
                   title:
                     this[m] > 0
-                      ? `[${rarity[dict[m][1]]}] 获取时间：${new Date(this[m]).toLocaleString(/** TODO */ 'zh-CN')}`
+                      ? `[${rarity[dict[m][1]]}] 获取时间：${new Date(this[m]).toLocaleString(lan())}`
                       : `稀有度：[${rarity[dict[m][1]]}]`,
                 },
                 { isBr: true },
