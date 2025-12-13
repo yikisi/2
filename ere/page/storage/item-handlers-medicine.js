@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const global_achievement = require('#/system/global/sys-calc-achievement');
 const {
   sys_change_attr_and_print,
   sys_change_lust,
@@ -509,6 +510,7 @@ module.exports = (handlers) => {
       ]))
     ) {
       const money = to_sell * era.get(`itemprice:${item_id}`);
+      global_achievement.play_mil2 = 1;
       await era.printAndWait([
         '售出了 ',
         {

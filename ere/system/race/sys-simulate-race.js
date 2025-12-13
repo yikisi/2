@@ -222,12 +222,13 @@ function sys_sim_race(list_chara, info, race_id, shown = true) {
       }))),
   );
 
-  list_chara.forEach(
-    (u) =>
-      (u.ero.cost.sex =
-        -(wp_coefficient * Math.log(u.attrs[attr_enum.toughness])) /
-        log_max_wp),
-  );
+  list_chara.forEach((u) => {
+    if (!u.race.conditionParams.item) {
+      u.ero.main = ['sex'];
+    }
+    u.ero.cost.sex =
+      -(wp_coefficient * Math.log(u.attrs[attr_enum.toughness])) / log_max_wp;
+  });
 
   dynamic_table.push([
     get_table_header(

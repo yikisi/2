@@ -24,6 +24,7 @@ const {
 const check_team_limit = require('#/system/chara/sys-check-team-limit');
 const sys_get_random_uma_god = require('#/system/chara/sys-get-random-uma-god');
 const sys_rape_in_sleeping = require('#/system/ero/sys-rape-in-sleeping');
+const global_achievement = require('#/system/global/sys-calc-achievement');
 const {
   sys_change_attr_and_print,
   sys_change_lust,
@@ -219,13 +220,19 @@ module.exports = class extends StrangeDayEvents {
         await printAndWait('一切如常……或有不同？');
         await printAndWait('自己……做了什么来着？');
       }
-      second_list.forEach((e) => {
-        set(`cflag:${e}:育成回合计时`, 'x');
-        reset_chara(e);
-        get_custom_check(e).check_second_chance();
+      second_list.forEach((cid) => {
+        // CFLAGNAME:48 = 育成回合计时
+        set(`cflag:${cid}:48`, 'x');
+        // CFLAGNAME:49 = 育成次数
+        if (get(`cflag:${cid}:49`) === 7) {
+          global_achievement.chan_mor = 1;
+        }
+        reset_chara(cid);
+        get_custom_check(cid).check_second_chance();
       });
     }
-    set('flag:初见重复育成', 2);
+    // FLAGNAME:32 = 初见重复育成
+    set('flag:32', 2);
   }
 
   /**

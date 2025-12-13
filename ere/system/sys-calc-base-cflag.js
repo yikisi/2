@@ -278,9 +278,10 @@ module.exports = {
   },
   /** @returns {{creditor:number,repay:number,timer:number}[]} */
   sys_get_billings() {
+    // FLAGNAME:17 = 账单
     return (
-      era.get('flag:账单') ||
-      era.set('flag:账单', [{ creditor: 0, repay: 0, timer: 0 }])
+      era.get('flag:17') ||
+      era.set('flag:17', [{ creditor: 0, repay: 0, timer: 0 }])
     );
   },
   /**

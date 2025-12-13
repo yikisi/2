@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const global_achievement = require('#/system/global/sys-calc-achievement');
 const {
   sys_change_lust,
   sys_change_motivation,
@@ -21,7 +22,9 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const CharaAvailableSkills = require('#/data/chara-available-skills');
 const CharaSkills = require('#/data/chara-skills');
+const CharaTitles = require('#/data/chara-titles');
 const { buff_colors } = require('#/data/color-const');
+const { mark_enum } = require('#/data/ero/mark-const');
 const { lust_border } = require('#/data/ero/orgasm-const');
 const SasamiLifeMarks = require('#/data/event/life-event-marks/life-event-marks-305');
 const recruit_flags = require('#/data/event/recruit-flags');
@@ -52,6 +55,7 @@ async function reset_status(
     (new SasamiLifeMarks().buff + 1);
   let ret = 0;
   let temp;
+  let p_flag = false;
   for (const cid of characters) {
     const chara = get_chara_talk(cid);
     sys_fix_chara_base(cid);
@@ -309,6 +313,40 @@ async function reset_status(
         const edu_weeks = era.get(`cflag:${cid}:育成回合计时`);
         if (edu_weeks === 3 * 48) {
           sys_handle_palace(cid);
+          p_flag = true;
+          const love = era.get(`love:${cid}`);
+          if (love >= 75) {
+            global_achievement.edu_1_ex = 1;
+          }
+          if (
+            love >= 90 ||
+            (era.get(`mark:${cid}:${mark_enum.meek}`) === 3 &&
+              !era.get(`mark:${cid}:${mark_enum.pain}`) &&
+              !era.get(`mark:${cid}:${mark_enum.shame}`) &&
+              !era.get(`mark:${cid}:${mark_enum.hate}`)) ||
+            era.get(`mark:${cid}:${mark_enum.ero}`) === 3
+          ) {
+            global_achievement.edu_sex = 1;
+          }
+          if (
+            // CFLAGNAME:15 = 父方角色
+            era.get(`cflag:${cid}:15`) !== 0 &&
+            // CFLAGNAME:16 = 母方角色
+            era.get(`cflag:${cid}:16`) !== 0 &&
+            love < 25 &&
+            // EXPNAME:25 = 性爱次数
+            !era.get(`exp:${cid}:25`)
+          ) {
+            global_achievement.edu_tch = 1;
+          }
+          // CFLAGNAME:49 = 育成次数
+          const edu_count = era.get(`cflag:${cid}:49`);
+          if (edu_count >= 2) {
+            global_achievement.chan_sec = 1;
+          }
+          if (edu_count >= 3) {
+            global_achievement.chan_thr = 1;
+          }
           await era.waitAnyKey();
         } else if (edu_weeks < 3 * 48) {
           if (edu_weeks > 0 && edu_weeks % 48 === 0) {
@@ -371,6 +409,40 @@ async function reset_status(
         }
       }
       sys_change_motivation(cid, motivation_change);
+    }
+  }
+  if (p_flag) {
+    const p_count = characters.reduce(
+      // CFLAGNAME:49 = 育成次数
+      (p, c) => p + era.get(`cflag:${c}:49`),
+      0,
+    );
+    if (p_count >= 1) {
+      global_achievement.edu_one = 1;
+    }
+    if (p_count >= 3) {
+      global_achievement.edu_thr = 1;
+    }
+    if (p_count >= 7) {
+      global_achievement.edu_nrg = 1;
+    }
+    const wins = characters.reduce(
+      (p, c) =>
+        p +
+        (new CharaTitles(c)
+          .get()
+          .findIndex((t) => t['wins'] || t.n === '百战百胜') !==
+          -1),
+      0,
+    );
+    if (wins >= 1) {
+      global_achievement.wins_one = 1;
+    }
+    if (wins >= 6) {
+      global_achievement.wins_six = 1;
+    }
+    if (wins >= 13) {
+      global_achievement.wins_thr = 1;
     }
   }
   return ret;

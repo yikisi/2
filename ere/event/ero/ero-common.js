@@ -12,6 +12,7 @@ const era = require('#/era-electron');
 const { sys_get_chara } = require('#/system/chara/sys-calc-characteristic');
 const { sys_check_cuckold } = require('#/system/chara/sys-calc-cheat');
 const { get_penis_size } = require('#/system/ero/sys-calc-ero-status');
+const global_achievement = require('#/system/global/sys-calc-achievement');
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
@@ -526,12 +527,12 @@ class CustomizedEro {
         extra_flag,
       );
     }
-    const father = get_chara_talk(extra_flag.father_id),
-      mother = get_chara_talk(extra_flag.mother_id),
-      love = era.get(`love:${mother.id || father.id}`),
-      unexpected_pregnant = LifeEventMarks.get_marks(
-        mother.id,
-      ).unexpected_pregnant;
+    const father = get_chara_talk(extra_flag.father_id);
+    const mother = get_chara_talk(extra_flag.mother_id);
+    const love = era.get(`love:${mother.id || father.id}`);
+    const unexpected_pregnant = LifeEventMarks.get_marks(
+      mother.id,
+    ).unexpected_pregnant;
     era.drawLine();
     if (love >= 90) {
       await pregnant_report_in_love(father, mother, unexpected_pregnant);
@@ -558,9 +559,9 @@ class CustomizedEro {
           mother.get_colored_name(),
           ' 对自己如何怀孕完全没有印象，虽然难以相信犯人会是 ',
           father.get_colored_name(),
-          '，但想来只有 ',
-          father.get_colored_name(),
-          ' 有这个可能……',
+          '，但想来只有',
+          father.sex,
+          '有这个可能……',
         ]);
       }
       if (unexpected_pregnant === unexpected_pregnant_enum.father_sleep) {
@@ -630,6 +631,13 @@ class CustomizedEro {
           ' 负起父亲的责任……',
         ]);
       }
+    }
+    if (
+      !global_achievement.st_maria &&
+      !father.id &&
+      unexpected_pregnant === unexpected_pregnant_enum.father_sleep
+    ) {
+      global_achievement.st_maria = 1;
     }
   }
 

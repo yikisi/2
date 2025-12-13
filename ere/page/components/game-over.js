@@ -1,6 +1,7 @@
 const era = require('#/era-electron');
 
 const sys_add_titles = require('#/system/chara/sys-add-titles');
+const global_achievement = require('#/system/global/sys-calc-achievement');
 const { sys_get_billings } = require('#/system/sys-calc-base-cflag');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
@@ -41,6 +42,7 @@ async function game_over(again) {
   let temp;
   if (game_over === 3 && era.get('flag:当前位置') === location_enum.basement) {
     era.drawLine();
+    global_achievement.end_lov = 1;
     await get_custom_daily(basement_owners.get(0)).basement_end();
     saying_arr = basement_saying_arr;
   } else if (
@@ -49,6 +51,7 @@ async function game_over(again) {
     (temp = sys_get_billings()[0]).creditor
   ) {
     era.drawLine();
+    global_achievement.end_mon = 1;
     await get_custom_daily(temp.creditor).slave_end();
     saying_arr = [
       '九尺二间陋室里，红唇依竹共恩情。——高杉晋作',
@@ -59,6 +62,7 @@ async function game_over(again) {
     ];
   } else if ((temp = crazy_fans.get()) && game_over) {
     era.drawLine();
+    global_achievement.end_fan = 1;
     await get_custom_edu(temp).crazy_fan_end();
     saying_arr = [
       '日蚀当先，万物无光。——丹尼斯・奥凯利',
@@ -390,6 +394,7 @@ async function game_over(again) {
           ) {
             await get_custom_daily(basement_owners.get(0)).basement_end();
           }
+          global_achievement.end_lov = 1;
           saying_arr = basement_saying_arr;
         } else if (era.get('flag:变态行为') > 0) {
           await era.printAndWait(
@@ -442,6 +447,7 @@ async function game_over(again) {
             '每一个被束缚的奴隶都可以靠着他自己的手脱掉锁链。——莎士比亚',
           ];
           end_talk = 2;
+          global_achievement.end_hnt = 1;
         } else {
           await era.printAndWait(
             [
@@ -494,6 +500,7 @@ async function game_over(again) {
             '我是自己最大的敌人。——拿破仑',
           ];
           end_talk = 1;
+          global_achievement.end_los = 1;
         }
       }
     }
@@ -520,6 +527,14 @@ async function game_over(again) {
       for (const cid of team_list) {
         await get_custom_daily(cid).end_talk(end_talk > 1);
       }
+    }
+    if (
+      (global_achievement.end_los > 0 || global_achievement.end_hnt > 0) &&
+      global_achievement.end_fan > 0 &&
+      global_achievement.end_mon > 0 &&
+      global_achievement.end_lov > 0
+    ) {
+      global_achievement.ending = 1;
     }
     return true;
   }

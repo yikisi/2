@@ -7,6 +7,7 @@ const {
   check_pregnant_unprotect,
 } = require('#/system/ero/sys-calc-ero-status');
 const sys_rape_in_sleeping = require('#/system/ero/sys-rape-in-sleeping');
+const global_achievement = require('#/system/global/sys-calc-achievement');
 const check_inmon = require('#/system/next-week/check-inmon');
 const check_new_activities = require('#/system/next-week/check-new-activities');
 const randomly_interact = require('#/system/next-week/randomly-interact');
@@ -50,6 +51,7 @@ const { part_enum, part_talents } = require('#/data/ero/part-const');
 const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const basement_owners = require('#/data/event/basement-owners');
+const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 const grand_lives = require('#/data/event/grand-lives');
@@ -66,10 +68,11 @@ const { get_trainer_salary, max_chara_id } = require('#/data/other-const');
 const { pressure_border } = require('#/data/train-const');
 
 async function sys_next_week() {
-  const me = get_chara_talk(0),
-    punish_level = era.get('flag:惩戒力度'),
-    team_dict = { 0: 1 },
-    your_race = era.get('cflag:0:种族');
+  const me = get_chara_talk(0);
+  const my_marks = new MyEduMarks();
+  const punish_level = era.get('flag:惩戒力度');
+  const team_dict = { 0: 1 };
+  const your_race = era.get('cflag:0:种族');
   let in_team_list = filter_chara(
     'cflag',
     '招募状态',
@@ -91,7 +94,7 @@ async function sys_next_week() {
       ? sex_partner
       : 0;
   // 极端事件判定
-  if (check_pregnant_unprotect(0) && has_furniture === 0) {
+  if (check_pregnant_unprotect(0)) {
     /** @type {{chara_id:number,prison:boolean,[supporter]:number}[]} */
     let act_list = [];
     let prepared_list;
@@ -145,44 +148,54 @@ async function sys_next_week() {
         prison: false,
       });
     }
-    tmp = true;
-    act_list = sort_list(act_list, Math.random);
-    const p_index = act_list.findIndex((a) => a.prison);
-    if (p_index >= 0) {
-      act_list.splice(p_index + 1);
-    }
-    // 睡奸归并
-    const final_act_list = [];
-    tmp = -1;
-    for (const act of act_list) {
+    if (has_furniture > 0) {
       if (
-        final_act_list[tmp] &&
-        final_act_list[tmp].prison === act.prison &&
-        era.get(`relation:${final_act_list[tmp].chara_id}:${act.chara_id}`) >
-          375 &&
-        era.get(`relation:${act.chara_id}:${final_act_list[tmp].chara_id}`) > 75
+        !global_achievement.slav_frn &&
+        (my_marks.a_s_frn += act_list.length) >= 100
       ) {
-        final_act_list[tmp].supporter = act.chara_id;
-        tmp = final_act_list.length;
-        continue;
+        global_achievement.slav_frn = 1;
       }
-      final_act_list.push(act);
-      tmp = final_act_list.length - 1;
-    }
-    if (final_act_list.length > 0 && era.get('item:马跳S家庭装') > 0) {
-      era.set('status:0:马跳S', 1);
-    }
-    for (const act of final_act_list) {
-      if (act.prison) {
-        await run_custom_ero(act.chara_id, ero_hooks.prison);
-      } else {
-        await sys_rape_in_sleeping(act.chara_id, act.supporter);
+    } else {
+      tmp = true;
+      act_list = sort_list(act_list, Math.random);
+      const p_index = act_list.findIndex((a) => a.prison);
+      if (p_index >= 0) {
+        act_list.splice(p_index + 1);
       }
-      if (
-        era.get('flag:床伴') > 0 ||
-        era.get('flag:当前位置') === location_enum.basement
-      ) {
-        break;
+      // 睡奸归并
+      const final_act_list = [];
+      tmp = -1;
+      for (const act of act_list) {
+        if (
+          final_act_list[tmp] &&
+          final_act_list[tmp].prison === act.prison &&
+          era.get(`relation:${final_act_list[tmp].chara_id}:${act.chara_id}`) >
+            375 &&
+          era.get(`relation:${act.chara_id}:${final_act_list[tmp].chara_id}`) >
+            75
+        ) {
+          final_act_list[tmp].supporter = act.chara_id;
+          tmp = final_act_list.length;
+          continue;
+        }
+        final_act_list.push(act);
+        tmp = final_act_list.length - 1;
+      }
+      if (final_act_list.length > 0 && era.get('item:马跳S家庭装') > 0) {
+        era.set('status:0:马跳S', 1);
+      }
+      for (const act of final_act_list) {
+        if (act.prison) {
+          await run_custom_ero(act.chara_id, ero_hooks.prison);
+        } else {
+          await sys_rape_in_sleeping(act.chara_id, act.supporter);
+        }
+        if (
+          era.get('flag:床伴') > 0 ||
+          era.get('flag:当前位置') === location_enum.basement
+        ) {
+          break;
+        }
       }
     }
   }
@@ -243,6 +256,12 @@ async function sys_next_week() {
         }
         if (e.timer > 0) {
           e.timer--;
+        } else if (
+          e.creditor > 0 &&
+          !global_achievement.slav_mon &&
+          (my_marks.a_s_mon += money) >= 100000
+        ) {
+          global_achievement.slav_mon = 1;
         }
       }
       return e;
@@ -377,6 +396,14 @@ async function sys_next_week() {
     if (pregnant_stage >> pregnant_stage_enum.embryo > 0) {
       sys_change_lust(cid, lust_border.itch / 40);
       const timer = era.add(`cflag:${cid}:妊娠回合计时`, 1 + is_p_slave);
+      if (
+        !global_achievement.slav_prg &&
+        cid > 0 &&
+        is_p_slave &&
+        ++my_marks.a_s_prg >= 36
+      ) {
+        global_achievement.slav_prg = 1;
+      }
       const pregnant_times = era.get(`exp:${cid}:生产次数`);
       era.add(
         `base:${cid}:体重偏差`,
@@ -740,6 +767,17 @@ async function sys_next_week() {
   }
   await check_new_activities(cur_round, in_team_list);
   check_inmon(in_team_list);
+  if (
+    !global_achievement.slav_mas &&
+    global_achievement.inmn_six > 0 &&
+    global_achievement.slav_mil > 0 &&
+    global_achievement.slav_prg > 0 &&
+    global_achievement.slav_mon > 0 &&
+    global_achievement.slav_inh > 0 &&
+    global_achievement.slav_frn > 0
+  ) {
+    global_achievement.slav_mas = 1;
+  }
 
   // 床伴
   in_team_list = in_team_list.filter(
