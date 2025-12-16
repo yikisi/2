@@ -98,7 +98,7 @@ class CustomizedRecruit {
       temp.chara = 0;
       temp.cost += 20;
     }
-    if (i18n().notes[this.id]) {
+    if (i18n().note[this.id]) {
       era.drawLine();
       if (
         await select_yes_or_no(
@@ -107,7 +107,7 @@ class CustomizedRecruit {
           '之后去首页确认',
         )
       ) {
-        i18n().notes[this.id].forEach((e) =>
+        i18n().note[this.id].forEach((e) =>
           era.print([{ content: e[0], fontWeight: 'bold' }, '「', e[1], '」'], {
             color: get_chara_color(this.id),
           }),

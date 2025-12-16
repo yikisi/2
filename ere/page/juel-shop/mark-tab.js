@@ -25,7 +25,6 @@ const get_gradient_color = require('#/utils/gradient-color');
 
 const { attr_change_colors, buff_colors } = require('#/data/color-const');
 const CharaInmon = require('#/data/ero/chara-inmon');
-const InmonPlugin = require('#/data/ero/inmon-plugin');
 const {
   inmon_limit,
   mark_colors,
@@ -44,6 +43,8 @@ const { get_trainer_level } = require('#/data/info-generator');
 const LoveLimitStatus = require('#/data/love-limit-status');
 const { max_chara_id } = require('#/data/other-const');
 const { get_trainer_salary } = require('#/data/other-const');
+
+const { i18n } = require('#/i18n/selector');
 
 /**
  * @param {{a:number,m:number,p:InmonPlugin}} plugin_with_acc
@@ -300,7 +301,7 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
       const keys = Object.keys(groups).slice(pointer.sub, pointer.sub + 2);
       buffer.push({
         config: {
-          content: InmonPlugin.group_names[keys[0]],
+          content: i18n().inmon[keys[0]],
           position: 'left',
           width: 11,
         },
@@ -309,7 +310,7 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
       if (keys[1] !== undefined) {
         buffer.push({
           config: {
-            content: InmonPlugin.group_names[keys[1]],
+            content: i18n().inmon[keys[1]],
             offset: 1,
             position: 'left',
             width: 11,

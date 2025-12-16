@@ -229,7 +229,7 @@ module.exports = {
       image_list = race_clothes
         .filter((c) => era.checkImage(`${image_prefix}${c[1]}`))
         .map(([n, s]) => ({
-          n: __(`clothes.${src_id}${n}`, __(`clothes.${n}`)),
+          n: __(`clothe.${src_id}${n}`, __(`clothe.${n}`)),
           s,
         }));
       if (image_list.length > 1) {
@@ -242,7 +242,7 @@ module.exports = {
         });
       } else if (
         image_list.length > 0 &&
-        image_list[0].n !== i18n().clothes['01']
+        image_list[0].n !== i18n().clothe['01']
       ) {
         action_buffer.push({
           config: { width: 8 },
@@ -421,7 +421,7 @@ module.exports = {
                     chara.get_colored_name(),
                     ' 在参赛时',
                     suffix === 0
-                      ? `按照节庆决定决胜服，在URA颁奖典礼与结束育成后的殿堂周将身着决胜服 [${__(`clothes.${src_id}01`)}]`
+                      ? `按照节庆决定决胜服，在URA颁奖典礼与结束育成后的殿堂周将身着决胜服 [${__(`clothe.${src_id}01`)}]`
                       : `穿着决胜服 [${curr.n}]`,
                     '。',
                     { isBr: true },
@@ -490,7 +490,7 @@ module.exports = {
                 '现在 ',
                 chara.get_colored_name(),
                 ' 在参赛时会按照场合和节庆决定着装，在URA颁奖典礼与结束育成后的殿堂周将身着决胜服 [',
-                __(`clothes.${src_id}01`),
+                __(`clothe.${src_id}01`),
                 ']。',
               ]);
               era.set(`cstr:${chara.id}:决胜服`, 0);

@@ -1,4 +1,4 @@
-﻿const era = require('#/era-electron');
+const era = require('#/era-electron');
 
 const sys_handle_escape_basement = require('#/system/basement/sys-handle-escape-basement');
 const {
@@ -459,17 +459,14 @@ module.exports = async () => {
       if (hook > 0) {
         await run_custom_daily(cid, hook);
       } else {
-        const note_list = [...i18n().notes.common];
+        const note_list = [...i18n().note.common];
         if (era.get('flag:目白城风格') === 1) {
-          note_list.push(...i18n().notes.call);
+          note_list.push(...i18n().note.call);
         }
         sys_filter_chara('cflag', '招募状态', recruit_flags.yes).forEach(
           (e) => {
-            if (
-              era.get(`cflag:${e}:育成回合计时`) < 3 * 48 &&
-              i18n().notes[e]
-            ) {
-              note_list.push(...i18n().notes[e]);
+            if (era.get(`cflag:${e}:育成回合计时`) < 3 * 48 && i18n().note[e]) {
+              note_list.push(...i18n().note[e]);
             }
           },
         );

@@ -28,7 +28,7 @@ module.exports = class extends I18nEntry {
   a_s_sashi = '差し';
   a_s_okimi = '追込';
 
-  notes = new (require('#/i18n/ja-JP/notes'))();
-  clothes = new (require('#/i18n/ja-JP/clothes'))();
-  skills = new (require('#/i18n/ja-JP/skills'))();
+  clothe = new (require('#/i18n/ja-JP/clothes'))();
+  skill = new (require('#/i18n/ja-JP/skill-names'))();
+  skill_desc = new (require('#/i18n/ja-JP/skill-desc'))();
 };

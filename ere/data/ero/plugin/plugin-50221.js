@@ -1,12 +1,3 @@
 const InmonPlugin = require('#/data/ero/inmon-plugin');
 
-module.exports = new InmonPlugin(
-  50221,
-  '无暇思考',
-  502,
-  1,
-  2,
-  '不再有贤者时间。',
-  (args) => args.sex > 0,
-  160,
-);
+module.exports = new InmonPlugin(50221, 502, 1, 2, (args) => args.sex > 0, 160);

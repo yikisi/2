@@ -271,15 +271,15 @@ module.exports = async () => {
       async h() {
         era.drawLine();
         for (const note of i18n()
-          .notes.common.filter(() => true)
+          .note.common.filter(() => true)
           .sort((a, b) => (a[0] > b[0] ? 1 : -1))) {
           say_by_passer_by(...note);
         }
-        for (const cid of Object.keys(i18n().notes).filter(
+        for (const cid of Object.keys(i18n().note).filter(
           (k) => !isNaN(Number(k)),
         )) {
           await era.waitAnyKey();
-          for (const note of i18n().notes[cid]) {
+          for (const note of i18n().note[cid]) {
             era.print(
               [{ content: note[0], fontWeight: 'bold' }, '「', note[1], '」'],
               { color: get_chara_color(Number(cid)) },

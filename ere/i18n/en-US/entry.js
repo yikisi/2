@@ -11,7 +11,4 @@ module.exports = class extends I18nEntry {
   abbr_tp = 'TP';
 
   ui_moti = 'Motivation';
-
-  notes = new (require('#/i18n/en-US/notes'))();
-  skills = new (require('#/i18n/en-US/skills'))();
 };

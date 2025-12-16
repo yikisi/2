@@ -68,9 +68,12 @@ class I18nEntry {
 
   not_found = '未知';
 
-  skills = new (require('#/i18n/zh-CN/skills'))();
-  clothes = new (require('#/i18n/zh-CN/clothes'))();
-  notes = new (require('#/i18n/zh-CN/notes'))();
+  clothe = new (require('#/i18n/zh-CN/clothes'))();
+  skill = new (require('#/i18n/zh-CN/skill-names'))();
+  skill_desc = new (require('#/i18n/zh-CN/skill-desc'))();
+  note = new (require('#/i18n/zh-CN/notes'))();
+  inmon = new (require('#/i18n/zh-CN/inmon'))();
+  inmon_desc = new (require('#/i18n/zh-CN/inmon-desc'))();
 }
 
 module.exports = I18nEntry;

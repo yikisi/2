@@ -1,12 +1,3 @@
 const InmonPlugin = require('#/data/ero/inmon-plugin');
 
-module.exports = new InmonPlugin(
-  10212,
-  '胸感觉Ⅱ',
-  102,
-  2,
-  6,
-  '胸部快感获取+200%。',
-  () => true,
-  420,
-);
+module.exports = new InmonPlugin(10212, 102, 2, 6, () => true, 420);
