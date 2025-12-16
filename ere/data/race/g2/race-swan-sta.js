@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Swan Stakes',
-  '天鹅锦标',
+  130,
   RaceInfo.class_enum.G2,
   RaceInfo.track_enum.kyoto,
   RaceInfo.ground_enum.grass,

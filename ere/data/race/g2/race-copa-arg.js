@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Copa Republica Argentina',
-  '阿根廷共和国杯',
+  136,
   RaceInfo.class_enum.G2,
   RaceInfo.track_enum.tokyo,
   RaceInfo.ground_enum.grass,

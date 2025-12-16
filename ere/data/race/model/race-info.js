@@ -1,5 +1,7 @@
 const { adaptability_colors } = require('#/data/color-const');
 
+const { i18n } = require('#/i18n/selector');
+
 const class_enum = { G1: 0, G2: 1, G3: 2, OP: 3, 'Pre-OP': 4, Spe: 5 };
 Object.keys(class_enum).forEach((e, i) => (class_enum[e] = i));
 
@@ -175,16 +177,6 @@ module.exports = class RaceInfo {
   static relation_rewards = [50, 100, 200, 400];
 
   /**
-   * 英文比赛名
-   * @type {string}
-   */
-  name_en;
-  /**
-   * 中文比赛名
-   * @type {string}
-   */
-  name_zh;
-  /**
    * 赛事等级
    * @type {number}
    */
@@ -283,9 +275,20 @@ module.exports = class RaceInfo {
     other_upper: [0, 0, 0],
   };
 
+  _name = void 0;
+
+  /** @returns {string} */
+  get name() {
+    return this._name || i18n().race[this.id];
+  }
+
+  /** @param {string} _name */
+  set name(_name) {
+    this._name = _name;
+  }
+
   /**
-   * @param {string} name_en
-   * @param {string} name_zh
+   * @param {number} id
    * @param {number} race_class
    * @param {number} track
    * @param {number} ground
@@ -301,8 +304,7 @@ module.exports = class RaceInfo {
    * @param {number} param_id
    */
   constructor(
-    name_en,
-    name_zh,
+    id,
     race_class,
     track,
     ground,
@@ -317,8 +319,7 @@ module.exports = class RaceInfo {
     prize,
     param_id,
   ) {
-    this.name_en = name_en;
-    this.name_zh = name_zh;
+    this.id = id;
     this.race_class = race_class;
     this.track = track;
     this.ground = ground;
@@ -338,7 +339,7 @@ module.exports = class RaceInfo {
   get_colored_name() {
     return {
       color: adaptability_colors.at(-2 - this.race_class),
-      content: this.name_zh,
+      content: this.name,
       fontWeight: 'bold',
     };
   }

@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Sirius Stakes',
-  '天狼星锦标',
+  119,
   RaceInfo.class_enum.G3,
   RaceInfo.track_enum.hanshin,
   RaceInfo.ground_enum.mud,

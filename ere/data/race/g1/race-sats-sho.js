@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Satsuki Sho',
-  '皋月赏',
+  54,
   RaceInfo.class_enum.G1,
   RaceInfo.track_enum.nakayama,
   RaceInfo.ground_enum.grass,

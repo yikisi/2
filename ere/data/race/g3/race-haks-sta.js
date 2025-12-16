@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Hakodate Sprint Stakes',
-  '函馆短程锦标',
+  81,
   RaceInfo.class_enum.G3,
   RaceInfo.track_enum.hakodate,
   RaceInfo.ground_enum.grass,

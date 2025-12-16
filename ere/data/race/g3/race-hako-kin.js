@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Hakodate Kinen',
-  '函馆纪念',
+  95,
   RaceInfo.class_enum.G3,
   RaceInfo.track_enum.hakodate,
   RaceInfo.ground_enum.grass,

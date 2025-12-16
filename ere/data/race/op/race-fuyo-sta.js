@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Fuyou Stakes',
-  '芙蓉锦标',
+  171,
   RaceInfo.class_enum.OP,
   RaceInfo.track_enum.nakayama,
   RaceInfo.ground_enum.grass,

@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Meguro Kinen',
-  '目黑纪念',
+  76,
   RaceInfo.class_enum.G2,
   RaceInfo.track_enum.tokyo,
   RaceInfo.ground_enum.grass,

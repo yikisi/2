@@ -29,6 +29,7 @@ module.exports = class extends I18nEntry {
   a_s_okimi = '追込';
 
   clothe = new (require('#/i18n/ja-JP/clothes'))();
+  race = new (require('#/i18n/ja-JP/races'))();
   skill = new (require('#/i18n/ja-JP/skill-names'))();
   skill_desc = new (require('#/i18n/ja-JP/skill-desc'))();
 };

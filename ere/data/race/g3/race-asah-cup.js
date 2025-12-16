@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Asahi Challenge Cup',
-  '挑战杯',
+  150,
   RaceInfo.class_enum.G3,
   RaceInfo.track_enum.hanshin,
   RaceInfo.ground_enum.grass,

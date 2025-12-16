@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Violet Stakes',
-  '堇锦标',
+  27,
   RaceInfo.class_enum.OP,
   RaceInfo.track_enum.hanshin,
   RaceInfo.ground_enum.grass,

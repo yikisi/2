@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Niigata Nisai Stakes',
-  '新潟少年锦标',
+  104,
   RaceInfo.class_enum.G3,
   RaceInfo.track_enum.niigata,
   RaceInfo.ground_enum.grass,

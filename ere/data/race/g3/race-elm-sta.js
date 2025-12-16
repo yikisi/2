@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Elm Stakes',
-  '榆树锦标赛',
+  100,
   RaceInfo.class_enum.G3,
   RaceInfo.track_enum.sapporo,
   RaceInfo.ground_enum.mud,

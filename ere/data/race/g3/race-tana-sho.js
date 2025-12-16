@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Tanabata Sho',
-  '七夕赏',
+  93,
   RaceInfo.class_enum.G3,
   RaceInfo.track_enum.fukushima,
   RaceInfo.ground_enum.grass,

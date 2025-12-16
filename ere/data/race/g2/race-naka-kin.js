@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Nakayama Kinen',
-  '中山纪念',
+  28,
   RaceInfo.class_enum.G2,
   RaceInfo.track_enum.nakayama,
   RaceInfo.ground_enum.grass,

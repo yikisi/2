@@ -16,16 +16,16 @@ const RaceHistory = require('#/data/race/model/race-history');
 const { race_infos } = require('#/data/race/race-const');
 const { track2location } = require('#/data/race/race-location');
 const { skills_dict } = require('#/data/race/skill/skill-const');
-const { adaptability_names, attr_names } = require('#/data/train-const');
 
 /**
  * @param {number} cid
  * @returns {PseudoUma}
  */
 function sys_get_chara_pseudo(cid) {
-  const adapt_list = adaptability_names.map((adapt) =>
-    era.get(`cflag:${cid}:${adapt}适性`),
-  );
+  // CFLAGNAME:30-39 = 草地适性 - 追马适性
+  const adapt_list = new Array(10)
+    .fill(0)
+    .map((_, i) => era.get(`cflag:${cid}:${i + 30}`));
   const debuff = era.get(`status:${cid}:客场作战`);
   const uma = new PseudoUma(
     cid,
@@ -34,7 +34,8 @@ function sys_get_chara_pseudo(cid) {
       ? get_chara_color(Math.max(era.get(`cflag:0:模版角色`), 0))
       : get_chara_color(cid),
     era.get(`cflag:${cid}:干劲`),
-    attr_names.map((attr) => era.get(`base:${cid}:${attr}`)),
+    // BASENAME:5-9 = 速度 - 智力
+    new Array(5).fill(0).map((_, i) => era.get(`base:${cid}:${i + 5}`)),
     era.get(`cflag:${cid}:跑法`),
     adapt_list.slice(6, 10),
     adapt_list.slice(2, 6).map((adapt) => adapt - debuff),
@@ -118,10 +119,10 @@ function sys_get_chara_pseudo(cid) {
   }
   temp = uma.attrs.reduce((p, c) => p + c, 0) / 5;
   uma.base.attr_err = uma.attrs.reduce((p, c) => p + (c - temp) ** 2, 0) / 5;
-  uma.base.research_lv = attr_names.reduce(
-    (p, c) => p + era.get(`abl:${cid}:${c}训练等级`),
-    0,
-  );
+  uma.base.research_lv = new Array(5)
+    .fill(0)
+    // ABLNAME:0-4 = 速度训练等级 - 智力训练等级
+    .reduce((p, _, i) => p + era.get(`abl:${cid}:${i}`), 0);
 
   // 带玩具比赛
   uma.ero.main = [];

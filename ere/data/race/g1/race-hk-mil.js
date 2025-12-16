@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Hong Kong Mile',
-  '香港英里锦标',
+  154,
   RaceInfo.class_enum.G1,
   RaceInfo.track_enum.shatin,
   RaceInfo.ground_enum.grass,

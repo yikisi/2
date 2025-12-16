@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'American Oaks',
-  '美国橡树大赛',
+  164,
   RaceInfo.class_enum.G1,
   RaceInfo.track_enum.santa_anita,
   RaceInfo.ground_enum.grass,

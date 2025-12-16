@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Kentucky Derby',
-  '肯塔基德比',
+  63,
   RaceInfo.class_enum.G1,
   RaceInfo.track_enum.kentucky,
   RaceInfo.ground_enum.mud,

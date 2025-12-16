@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Tulip Sho',
-  '郁金香赏',
+  30,
   RaceInfo.class_enum.G2,
   RaceInfo.track_enum.hanshin,
   RaceInfo.ground_enum.grass,

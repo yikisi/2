@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Flora Stakes',
-  '芙罗拉锦标',
+  57,
   RaceInfo.class_enum.G2,
   RaceInfo.track_enum.tokyo,
   RaceInfo.ground_enum.grass,

@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Daily Hai Nisai Stakes',
-  '每日杯少年锦标',
+  139,
   RaceInfo.class_enum.G2,
   RaceInfo.track_enum.kyoto,
   RaceInfo.ground_enum.grass,

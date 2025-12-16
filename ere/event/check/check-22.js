@@ -6,7 +6,9 @@ const check_aim_race = require('#/event/snippets/check-aim-race');
 
 const { attr_change_colors } = require('#/data/color-const');
 const FineEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-22');
-const { race_enum, race_infos } = require('#/data/race/race-const');
+const { race_enum } = require('#/data/race/race-const');
+
+const { i18n } = require('#/i18n/selector');
 
 const aim_races = {};
 aim_races[race_enum.begin_race] = 4;
@@ -67,7 +69,7 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
       race_enum.arim_kin,
     ].map((e) => ({ c: check_aim_race(races, e, 2, 1), r: e }));
     const win_race =
-      final_check.reduce((p, c) => p || (c.c && race_infos[c.r].name_zh), '') ||
+      final_check.reduce((p, c) => p || (c.c && i18n().race[c.r]), '') ||
       '未胜利';
     final_check = Number(final_check.reduce((p, c) => p || c.c, false));
     buffer.push({

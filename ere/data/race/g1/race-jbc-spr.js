@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  "Japan Breeding Farms' Cup Sprint",
-  '日本育马场杯短途赛',
+  133,
   RaceInfo.class_enum.G1,
   RaceInfo.track_enum.ohi,
   RaceInfo.ground_enum.mud,

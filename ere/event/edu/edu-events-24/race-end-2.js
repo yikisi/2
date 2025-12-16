@@ -92,7 +92,7 @@ module.exports = (handlers) => {
       ]);
       await maya.say_and_wait(['……', callname, '。']);
       era.printButton(
-        `「嗯，我们参加『${race_infos[race_enum.tenn_spr].name_zh}』吧」`,
+        `「嗯，我们参加『${race_infos[race_enum.tenn_spr].name}』吧」`,
         1,
       );
       await era.input();
@@ -190,7 +190,7 @@ module.exports = (handlers) => {
       ]);
       await maya.say_and_wait(['……我知道了。那么，', callname, '。']);
       era.printButton(
-        `「嗯，我们参加『${race_infos[race_enum.tenn_spr].name_zh}』吧」`,
+        `「嗯，我们参加『${race_infos[race_enum.tenn_spr].name}』吧」`,
         1,
       );
       await era.input();
@@ -375,7 +375,7 @@ module.exports = (handlers) => {
       '呵呵。我可受不了像那种，会被其他人的气流影响的平庸驾驶技术啦♪',
     );
     await maya.say_and_wait('那么！已经锁定下个目标了！目标是──');
-    era.printButton(`「『${race_infos[race_enum.tenn_sho].name_zh}』！」`, 1);
+    era.printButton(`「『${race_infos[race_enum.tenn_sho].name}』！」`, 1);
     await era.input();
     await maya.say_and_wait('收到☆');
     await maya.say_and_wait('好，下次也要全速前进♪');

@@ -29,6 +29,8 @@ const {
   motivation_names,
 } = require('#/data/train-const');
 
+const { i18n } = require('#/i18n/selector');
+
 const pop_mark = ['➖', '◎', '◯', '▲', '△', '△'];
 
 /** @param {PseudoUma} chara */
@@ -42,10 +44,10 @@ function generate_attribute_info(chara) {
     ret.push(
       {
         config: {
-          align: 'center',
-          width: 4,
           color: attr_colors[index],
           fontWeight: 'bold',
+          offset: 1,
+          width: 5,
         },
         content: attr_names[index],
         type: 'text',
@@ -54,7 +56,7 @@ function generate_attribute_info(chara) {
         config: {
           color: rank_color,
           fontWeight: 'bold',
-          width: 8,
+          width: 6,
         },
         content: [
           {
@@ -205,7 +207,8 @@ async function preview_race(
                 fontWeight: 'bold',
               },
               { isDivider: true },
-              '干劲：',
+              i18n().ui_moti,
+              '：',
               {
                 color: motivation_colors[cur_chara.motivation + 2],
                 content: motivation_names[cur_chara.motivation + 2],
@@ -227,7 +230,7 @@ async function preview_race(
           {
             config: { align: 'center', width: 12 },
             content: [
-              `${adaptability_names[info.ground]}适性：`,
+              `${adaptability_names[info.ground]}：`,
               {
                 color: adaptability_colors[cur_chara.adapts.ground],
                 content: get_adaptability_rank(cur_chara.adapts.ground),
@@ -247,7 +250,7 @@ async function preview_race(
           {
             config: { align: 'center', width: 12 },
             content: [
-              `${adaptability_names[info.distance + 2]}适性：`,
+              `${adaptability_names[info.distance + 2]}：`,
               {
                 color: adaptability_colors[cur_chara.adapts.distance],
                 content: get_adaptability_rank(cur_chara.adapts.distance),

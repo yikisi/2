@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Marine Cup',
-  '海洋杯',
+  52,
   RaceInfo.class_enum.G3,
   RaceInfo.track_enum.funabashi,
   RaceInfo.ground_enum.mud,

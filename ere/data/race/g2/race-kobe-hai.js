@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Kobe Shimbun Hai',
-  '神户新闻杯',
+  115,
   RaceInfo.class_enum.G2,
   RaceInfo.track_enum.hanshin,
   RaceInfo.ground_enum.grass,

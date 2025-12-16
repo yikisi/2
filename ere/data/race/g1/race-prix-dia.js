@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Prix de Diane',
-  '戴安娜锦标',
+  83,
   RaceInfo.class_enum.G1,
   RaceInfo.track_enum.chantilly,
   RaceInfo.ground_enum.grass,

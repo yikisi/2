@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  "Hochi Hai Fillies' Revue",
-  '报知杯皇冠赛',
+  33,
   RaceInfo.class_enum.G2,
   RaceInfo.track_enum.hanshin,
   RaceInfo.ground_enum.grass,

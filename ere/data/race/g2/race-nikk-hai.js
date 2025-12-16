@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Nikkei Shinshun Hai',
-  '日经新春杯',
+  9,
   RaceInfo.class_enum.G2,
   RaceInfo.track_enum.kyoto,
   RaceInfo.ground_enum.grass,

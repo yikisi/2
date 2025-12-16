@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Takamatsunomiya Kinen',
-  '高松宫纪念',
+  45,
   RaceInfo.class_enum.G1,
   RaceInfo.track_enum.chukyo,
   RaceInfo.ground_enum.grass,

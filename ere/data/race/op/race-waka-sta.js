@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Wakagoma Stakes',
-  '青年骏马锦标',
+  10,
   RaceInfo.class_enum.OP,
   RaceInfo.track_enum.kyoto,
   RaceInfo.ground_enum.grass,

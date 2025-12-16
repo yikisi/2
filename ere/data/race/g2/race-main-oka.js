@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Mainichi Okan',
-  '每日王冠',
+  123,
   RaceInfo.class_enum.G2,
   RaceInfo.track_enum.tokyo,
   RaceInfo.ground_enum.grass,

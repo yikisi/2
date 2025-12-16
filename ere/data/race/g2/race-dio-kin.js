@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Diolite Kinen',
-  '大尾光纪念赛',
+  41,
   RaceInfo.class_enum.G2,
   RaceInfo.track_enum.funabashi,
   RaceInfo.ground_enum.mud,

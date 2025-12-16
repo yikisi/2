@@ -344,7 +344,7 @@ module.exports = async (nature, me, hook, event_object) => {
     await nature.say_and_wait(
       `${temp
         .slice(0, 4)
-        .map((e) => `『${race_infos[e].name_zh}』`)
+        .map((e) => `『${race_infos[e].name}』`)
         .join('、')}……除此之外还有好多……`,
     );
     await era.printAndWait('……你为我做了这么多啊……');

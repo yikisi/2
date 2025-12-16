@@ -17,8 +17,8 @@ let d_out = '';
 for (const plug of arr) {
   const level = Number(plug[3]);
   const price = Number(plug[4]);
-  n_out += `${plug[0]} = ${JSON.stringify(plug[2])};\n`;
-  d_out += `${plug[0]} = ${JSON.stringify(plug[5] + '。')};\n`;
+  n_out += `${plug[0]} = ${JSON.stringify(plug[2])};`;
+  d_out += `${plug[0]} = ${JSON.stringify(plug[5] + '。')};`;
   const content = `const InmonPlugin = require('#/data/ero/inmon-plugin');
 
 module.exports = new InmonPlugin(
@@ -67,9 +67,10 @@ writeFileSync(
 
 try {
   process.stdout.write(
-    execSync('npx eslint --fix ./ere/data/ero/plugin', {
-      cwd: join(__dirname, '../..'),
-    }),
+    execSync(
+      'npx eslint --fix ./ere/data/ero/plugin ./ere/i18n/zh-CN/inmon*.js',
+      { cwd: join(__dirname, '../..') },
+    ),
   );
 } catch (e) {
   process.stderr.write(e.stdout);

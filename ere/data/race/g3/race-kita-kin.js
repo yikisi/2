@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Kitakyushu Kinen',
-  '北九州纪念',
+  102,
   RaceInfo.class_enum.G3,
   RaceInfo.track_enum.kokura,
   RaceInfo.ground_enum.grass,

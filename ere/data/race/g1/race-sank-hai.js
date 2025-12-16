@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Sankei Osaka Hai',
-  '大阪杯',
+  48,
   RaceInfo.class_enum.G1,
   RaceInfo.track_enum.hanshin,
   RaceInfo.ground_enum.grass,

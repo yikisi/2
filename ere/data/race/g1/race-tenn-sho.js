@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Tenno Sho',
-  '秋季天皇赏',
+  129,
   RaceInfo.class_enum.G1,
   RaceInfo.track_enum.tokyo,
   RaceInfo.ground_enum.grass,

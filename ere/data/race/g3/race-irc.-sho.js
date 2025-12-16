@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Laurel R.C. Sho Nakayama Himba Stakes',
-  '中山赛皇冠锦标',
+  35,
   RaceInfo.class_enum.G3,
   RaceInfo.track_enum.nakayama,
   RaceInfo.ground_enum.grass,

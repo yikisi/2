@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Dubai Golden Shaheen',
-  '迪拜金莎轩锦标',
+  167,
   RaceInfo.class_enum.G1,
   RaceInfo.track_enum.meydan,
   RaceInfo.ground_enum.mud,

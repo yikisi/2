@@ -62,6 +62,8 @@ const {
 } = require('#/data/race/race-const');
 const { attr_enum } = require('#/data/train-const');
 
+const { i18n } = require('#/i18n/selector');
+
 /**
  * @param {RaceInfo} _info
  * @param {boolean} is_grand_live
@@ -178,7 +180,7 @@ async function race_page(race) {
   }
   era.playMusic(
     [
-      `音效_亮相圈_${info.name_zh}`,
+      `音效_亮相圈_${i18n('zh-CN').race[info.id]}`,
       `音效_亮相圈_${
         info.race_class === RaceInfo.class_enum.G1
           ? 'g1'

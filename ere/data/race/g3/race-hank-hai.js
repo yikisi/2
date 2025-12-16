@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Hankyu Hai',
-  '阪急杯',
+  29,
   RaceInfo.class_enum.G3,
   RaceInfo.track_enum.hanshin,
   RaceInfo.ground_enum.grass,

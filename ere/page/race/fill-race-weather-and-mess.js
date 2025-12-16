@@ -41,11 +41,11 @@ function fill_race_weather_and_mess(race, chara, _info) {
             es === max_span && tmp.push(adaptability2race[(ig << 2) + is]);
           }),
       );
-      const race_id = get_random_entry(tmp),
-        aim_info = race_infos[race_id];
+      const race_id = get_random_entry(tmp);
+      const aim_info = race_infos[race_id];
+      const name = info.name;
       info = new RaceInfo(
-        info.name_en,
-        info.name_zh,
+        info.id,
         info.race_class,
         aim_info.track,
         aim_info.ground,
@@ -60,6 +60,7 @@ function fill_race_weather_and_mess(race, chara, _info) {
         info.prize,
         aim_info.param_id,
       );
+      info.name = name;
       info.attr_bonus = aim_info.attr_bonus;
       info.lanes = aim_info.lanes;
       info.slopes = aim_info.slopes;

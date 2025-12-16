@@ -66,9 +66,8 @@ class I18nEntry {
   relation_6 = '亲密';
   relation_7 = '不渝';
 
-  not_found = '未知';
-
   clothe = new (require('#/i18n/zh-CN/clothes'))();
+  race = new (require('#/i18n/zh-CN/races'))();
   skill = new (require('#/i18n/zh-CN/skill-names'))();
   skill_desc = new (require('#/i18n/zh-CN/skill-desc'))();
   note = new (require('#/i18n/zh-CN/notes'))();

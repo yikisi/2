@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Zennippon Zyuniayushun',
-  '全日本少年优骏',
+  151,
   RaceInfo.class_enum.G1,
   RaceInfo.track_enum.kawasaki,
   RaceInfo.ground_enum.mud,

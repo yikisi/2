@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Mile Championship Nambu Hai',
-  '英里冠军赛南部杯',
+  120,
   RaceInfo.class_enum.G1,
   RaceInfo.track_enum.morioka,
   RaceInfo.ground_enum.mud,

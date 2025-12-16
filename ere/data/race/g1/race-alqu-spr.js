@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Al Quoz Sprint',
-  '阿乔斯短途锦标',
+  170,
   RaceInfo.class_enum.G1,
   RaceInfo.track_enum.meydan,
   RaceInfo.ground_enum.grass,

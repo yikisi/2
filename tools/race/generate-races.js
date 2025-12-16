@@ -114,13 +114,19 @@ function getValueInDict(dict, key, l) {
   return dict[key];
 }
 
-csv.forEach((e) => {
+let c_out = '';
+let e_out = '';
+let j_out = '';
+
+csv.forEach((e, i) => {
+  const id = i + 1;
   output =
     "const RaceInfo = require('#/data/race/model/race-info');\n\nmodule.exports = new RaceInfo(\n";
-  // 英文名
-  output += `"${e[7]}",\n`;
-  // 中文名
-  output += `'${e[5]}',\n`;
+  // ID
+  output += `${id},\n`;
+  c_out += `${id} = ${JSON.stringify(e[5])};`;
+  e_out += `${id} = ${JSON.stringify(e[7])};`;
+  j_out += `${id} = ${JSON.stringify(e[4])};`;
   // 比赛类型
   output += `RaceInfo.class_enum.${e[8]},\n`;
   // 场地
@@ -169,6 +175,23 @@ csv.forEach((e) => {
   );
 });
 
+const i18n_c = join(__dirname, '../../ere/i18n/zh-CN/races.js');
+const i18n_e = join(__dirname, '../../ere/i18n/en-US/races.js');
+const i18n_j = join(__dirname, '../../ere/i18n/ja-JP/races.js');
+
+writeFileSync(
+  i18n_c,
+  generate_content(readFileSync(i18n_c, 'utf-8'), '//', c_out),
+);
+writeFileSync(
+  i18n_e,
+  generate_content(readFileSync(i18n_e, 'utf-8'), '//', e_out),
+);
+writeFileSync(
+  i18n_j,
+  generate_content(readFileSync(i18n_j, 'utf-8'), '//', j_out),
+);
+
 try {
   process.stdout.write(
     execSync('node generate-race-params.js', {
@@ -177,10 +200,8 @@ try {
   );
   process.stdout.write(
     execSync(
-      'npx eslint --fix ./ere/data/race/g1 ./ere/data/race/g2 ./ere/data/race/g3 ./ere/data/race/op ./ere/data/race/race-const.js ./ere/data/race/race-params.js ./ere/data/race/race-attr-bonus.js',
-      {
-        cwd: join(__dirname, '../..'),
-      },
+      'npx eslint --fix ./ere/data/race/g1 ./ere/data/race/g2 ./ere/data/race/g3 ./ere/data/race/op ./ere/data/race/race-const.js ./ere/data/race/race-params.js ./ere/data/race/race-attr-bonus.js ./ere/i18n/*/races.js',
+      { cwd: join(__dirname, '../..') },
     ),
   );
 } catch (e) {

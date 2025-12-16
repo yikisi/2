@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Aoi Stakes',
-  '葵锦标',
+  75,
   RaceInfo.class_enum.G3,
   RaceInfo.track_enum.kyoto,
   RaceInfo.ground_enum.grass,

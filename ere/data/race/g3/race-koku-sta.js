@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Kokura Nisai Stakes',
-  '小仓少年锦标',
+  107,
   RaceInfo.class_enum.G3,
   RaceInfo.track_enum.kokura,
   RaceInfo.ground_enum.grass,

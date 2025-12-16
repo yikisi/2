@@ -1,8 +1,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Begin Race',
-  '出道战',
+  0,
   RaceInfo.class_enum.Spe,
   0,
   0,

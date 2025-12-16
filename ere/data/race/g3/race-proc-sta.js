@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Procyon Stakes',
-  '南河三锦标',
+  92,
   RaceInfo.class_enum.G3,
   RaceInfo.track_enum.chukyo,
   RaceInfo.ground_enum.mud,

@@ -39,7 +39,7 @@ function check_aim_and_get_entry(races, aim_race, year, req_rank) {
     return {
       check: Number(temp),
       color: temp ? attr_change_colors.up : attr_change_colors.down,
-      content: `${year_desc[year]}年 ${info.name_zh} (${
+      content: `${year_desc[year]}年 ${info.name} (${
         Object.keys(RaceInfo.class_enum)[info.race_class]
       }) ${temp_rank ? `${temp_rank}着` : '未出走'}/${
         req_desc[Math.min(req_rank - 1, 5)]

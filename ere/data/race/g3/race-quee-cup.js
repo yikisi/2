@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Queen Cup',
-  '女王杯',
+  18,
   RaceInfo.class_enum.G3,
   RaceInfo.track_enum.tokyo,
   RaceInfo.ground_enum.grass,

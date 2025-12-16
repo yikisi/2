@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Keihin Hai',
-  '京浜杯',
+  36,
   RaceInfo.class_enum.G2,
   RaceInfo.track_enum.ohi,
   RaceInfo.ground_enum.mud,

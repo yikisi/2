@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Hopeful Stakes',
-  '希望锦标',
+  161,
   RaceInfo.class_enum.G1,
   RaceInfo.track_enum.nakayama,
   RaceInfo.ground_enum.grass,

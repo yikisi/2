@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Tokyo Yushun',
-  '日本德比',
+  74,
   RaceInfo.class_enum.G1,
   RaceInfo.track_enum.tokyo,
   RaceInfo.ground_enum.grass,

@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Mile Championship',
-  '英里冠军赛',
+  144,
   RaceInfo.class_enum.G1,
   RaceInfo.track_enum.kyoto,
   RaceInfo.ground_enum.grass,

@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Hanshin Himba Stakes',
-  '阪神皇冠锦标',
+  53,
   RaceInfo.class_enum.G2,
   RaceInfo.track_enum.hanshin,
   RaceInfo.ground_enum.grass,

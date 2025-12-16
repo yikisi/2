@@ -304,7 +304,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
       '稍微缓一缓。',
     ]);
     era.printButton(
-      `「挑战秋季的 ${race_infos[race_enum.stli_kin].name_zh} 吧。」`,
+      `「挑战秋季的 ${race_infos[race_enum.stli_kin].name} 吧。」`,
       1,
     );
     await era.input();

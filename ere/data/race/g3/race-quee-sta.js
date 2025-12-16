@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Queen Stakes',
-  '女皇锦标',
+  98,
   RaceInfo.class_enum.G3,
   RaceInfo.track_enum.sapporo,
   RaceInfo.ground_enum.grass,

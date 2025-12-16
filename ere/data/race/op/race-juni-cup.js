@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Junior Cup',
-  '少年杯',
+  1,
   RaceInfo.class_enum.OP,
   RaceInfo.track_enum.nakayama,
   RaceInfo.ground_enum.grass,

@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Capella Stakes',
-  '五车二锦标',
+  157,
   RaceInfo.class_enum.G3,
   RaceInfo.track_enum.nakayama,
   RaceInfo.ground_enum.mud,

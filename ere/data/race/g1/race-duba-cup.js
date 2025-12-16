@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Dubai World Cup',
-  '迪拜世界杯',
+  166,
   RaceInfo.class_enum.G1,
   RaceInfo.track_enum.meydan,
   RaceInfo.ground_enum.mud,

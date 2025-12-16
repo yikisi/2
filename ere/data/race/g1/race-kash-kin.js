@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Kashiwa Kinen',
-  '柏市纪念赛',
+  65,
   RaceInfo.class_enum.G1,
   RaceInfo.track_enum.funabashi,
   RaceInfo.ground_enum.mud,

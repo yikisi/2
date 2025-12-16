@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Bluebird Cup',
-  '蓝鸟杯',
+  7,
   RaceInfo.class_enum.G3,
   RaceInfo.track_enum.ohi,
   RaceInfo.ground_enum.mud,

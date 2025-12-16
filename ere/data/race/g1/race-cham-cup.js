@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Champions Cup Japan Cup Dirt',
-  '冠军杯',
+  148,
   RaceInfo.class_enum.G1,
   RaceInfo.track_enum.chukyo,
   RaceInfo.ground_enum.mud,

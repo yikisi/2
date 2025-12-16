@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Spring Stakes',
-  '春季锦标',
+  37,
   RaceInfo.class_enum.G2,
   RaceInfo.track_enum.nakayama,
   RaceInfo.ground_enum.grass,

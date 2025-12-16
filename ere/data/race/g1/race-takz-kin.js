@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Takarazuka Kinen',
-  '宝冢纪念',
+  86,
   RaceInfo.class_enum.G1,
   RaceInfo.track_enum.hanshin,
   RaceInfo.ground_enum.grass,

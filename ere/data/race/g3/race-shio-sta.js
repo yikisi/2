@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Shion Stakes',
-  '紫苑锦标',
+  110,
   RaceInfo.class_enum.G3,
   RaceInfo.track_enum.nakayama,
   RaceInfo.ground_enum.grass,

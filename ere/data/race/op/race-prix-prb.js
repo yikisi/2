@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Prix Perruche Bleue',
-  '蓝鹦鹉赏',
+  68,
   RaceInfo.class_enum.OP,
   RaceInfo.track_enum.st_cloud,
   RaceInfo.ground_enum.grass,

@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Japan Dirt Derby',
-  '日本泥地德比',
+  91,
   RaceInfo.class_enum.G1,
   RaceInfo.track_enum.ohi,
   RaceInfo.ground_enum.mud,

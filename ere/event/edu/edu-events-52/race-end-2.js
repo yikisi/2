@@ -64,7 +64,7 @@ module.exports = (handlers) => {
       ]);
 
       era.printButton(
-        `「那样的话，虽然选项也不少，但是……我暂时推荐 ${race_infos[race_enum.febr_sta].name_zh}，怎样？」`,
+        `「那样的话，虽然选项也不少，但是……我暂时推荐 ${race_infos[race_enum.febr_sta].name}，怎样？」`,
         1,
       );
       await era.input();
@@ -130,7 +130,7 @@ module.exports = (handlers) => {
       ]);
 
       era.printButton(
-        `「乌拉拉，下次要挑战更高等级的比赛看看吗？顺便一提我推荐 ${race_infos[race_enum.febr_sta].name_zh} 哦？」`,
+        `「乌拉拉，下次要挑战更高等级的比赛看看吗？顺便一提我推荐 ${race_infos[race_enum.febr_sta].name} 哦？」`,
         1,
       );
       await era.input();
@@ -416,7 +416,7 @@ module.exports = (handlers) => {
     ]);
 
     era.printButton(
-      `「这样的话……下次参加『${race_infos[race_enum.elm_sta].name_zh}』怎么样？」`,
+      `「这样的话……下次参加『${race_infos[race_enum.elm_sta].name}』怎么样？」`,
       1,
     );
     await era.input();
@@ -431,7 +431,7 @@ module.exports = (handlers) => {
     ]);
 
     era.printButton(
-      `「顺便一提如果真要跑这场的话，大家赶来的难度比较高，因为 ${race_infos[race_enum.elm_sta].name_zh} 在北海道。」`,
+      `「顺便一提如果真要跑这场的话，大家赶来的难度比较高，因为 ${race_infos[race_enum.elm_sta].name} 在北海道。」`,
       1,
     );
     await era.input();

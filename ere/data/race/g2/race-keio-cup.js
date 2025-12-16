@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Keio Hai Spring Cup',
-  '京王杯春季杯',
+  69,
   RaceInfo.class_enum.G2,
   RaceInfo.track_enum.tokyo,
   RaceInfo.ground_enum.grass,

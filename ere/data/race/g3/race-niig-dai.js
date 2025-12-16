@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Niigata Daishoten',
-  '新潟大賞典',
+  66,
   RaceInfo.class_enum.G3,
   RaceInfo.track_enum.niigata,
   RaceInfo.ground_enum.grass,

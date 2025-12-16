@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Kawasaki Kinen',
-  '川崎纪念赛',
+  16,
   RaceInfo.class_enum.G1,
   RaceInfo.track_enum.kawasaki,
   RaceInfo.ground_enum.mud,

@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Mermaid Stakes',
-  '人鱼锦标',
+  85,
   RaceInfo.class_enum.G3,
   RaceInfo.track_enum.hanshin,
   RaceInfo.ground_enum.grass,

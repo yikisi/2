@@ -508,7 +508,7 @@ module.exports = (handlers) => {
     await daiya.say_and_wait('……我会先把跑法给调整回来的。');
     await daiya.say_and_wait('毕竟，我可不能用这种状态去迎战跟麦昆的比赛……！');
     era.printButton(
-      `「是啊，要赶在 ${race_infos[race_enum.tenn_spr].name_zh} 之前调整好！」`,
+      `「是啊，要赶在 ${race_infos[race_enum.tenn_spr].name} 之前调整好！」`,
       1,
     );
     await era.input();

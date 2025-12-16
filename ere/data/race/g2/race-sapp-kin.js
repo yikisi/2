@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Sapporo Kinen',
-  '札幌纪念',
+  105,
   RaceInfo.class_enum.G2,
   RaceInfo.track_enum.sapporo,
   RaceInfo.ground_enum.grass,

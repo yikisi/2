@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Preakness Stakes',
-  '普瑞克尼斯锦标赛',
+  77,
   RaceInfo.class_enum.G1,
   RaceInfo.track_enum.baltimore,
   RaceInfo.ground_enum.mud,

@@ -11,4 +11,6 @@ module.exports = class extends I18nEntry {
   abbr_tp = 'TP';
 
   ui_moti = 'Motivation';
+
+  race = new (require('#/i18n/en-US/races'))();
 };

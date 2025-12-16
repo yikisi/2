@@ -15,6 +15,8 @@ const { buff_colors } = require('#/data/color-const');
 const { item_names } = require('#/data/ero/item-const');
 const { class_enum, track_names } = require('#/data/race/model/race-info');
 
+const { i18n } = require('#/i18n/selector');
+
 const ranks = ['Ⅰ', 'Ⅱ', 'Ⅲ', 'Ⅳ', 'Ⅴ'];
 const default_options = {
   fill: false,
@@ -99,7 +101,7 @@ async function page_race_result(contestants, info, race_id) {
   }
 
   const audio_list = [
-    `音效_比赛_${info.name_zh}`,
+    `音效_比赛_${i18n('zh-CN').race[info.id]}`,
     `音效_比赛_${Object.keys(class_enum)[Math.min(info.race_class, 3)]}`,
   ];
 
@@ -244,7 +246,7 @@ async function page_race_result(contestants, info, race_id) {
                         '竞马场 ',
                         info.get_colored_name_with_class(),
                       ]
-                    : [`训练场 ${info.name_zh}`]),
+                    : [`训练场 ${info.name}`]),
                   { isBr: 2 },
                 ],
                 type: 'text',

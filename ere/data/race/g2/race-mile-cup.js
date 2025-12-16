@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Milers Cup',
-  '英里赛马杯',
+  60,
   RaceInfo.class_enum.G2,
   RaceInfo.track_enum.kyoto,
   RaceInfo.ground_enum.grass,

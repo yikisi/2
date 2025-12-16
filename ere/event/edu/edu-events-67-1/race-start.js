@@ -291,7 +291,7 @@ module.exports = class extends Edu67UntilOutStart {
       );
       await daiya.say_and_wait('──明天似乎会是好天气呢。');
       era.drawLine({
-        content: `${race_infos[race_enum.toky_yus].name_zh} 当天`,
+        content: `${race_infos[race_enum.toky_yus].name} 当天`,
       });
       await daiya.say_and_wait('时间差不多了。呵呵，今天一切都很顺利呢♪');
       await era.printAndWait(

@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Haneda Hai',
-  '羽田杯',
+  67,
   RaceInfo.class_enum.G1,
   RaceInfo.track_enum.ohi,
   RaceInfo.ground_enum.mud,

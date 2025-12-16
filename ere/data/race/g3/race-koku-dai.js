@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Kokura Daishoten',
-  '小仓大赏典',
+  25,
   RaceInfo.class_enum.G3,
   RaceInfo.track_enum.kokura,
   RaceInfo.ground_enum.grass,

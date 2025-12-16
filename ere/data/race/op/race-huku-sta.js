@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Hukuryu Stakes',
-  '卧龙锦标',
+  40,
   RaceInfo.class_enum.OP,
   RaceInfo.track_enum.nakayama,
   RaceInfo.ground_enum.mud,

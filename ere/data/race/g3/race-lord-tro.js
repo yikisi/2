@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Lord Derby Challenge Trophy',
-  '德比伯爵挑战杯',
+  49,
   RaceInfo.class_enum.G3,
   RaceInfo.track_enum.nakayama,
   RaceInfo.ground_enum.grass,

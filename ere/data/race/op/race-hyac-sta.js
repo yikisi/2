@@ -2,8 +2,7 @@
 const RaceInfo = require('#/data/race/model/race-info');
 
 module.exports = new RaceInfo(
-  'Hyacinth Stakes',
-  '风信子锦标',
+  22,
   RaceInfo.class_enum.OP,
   RaceInfo.track_enum.tokyo,
   RaceInfo.ground_enum.mud,
