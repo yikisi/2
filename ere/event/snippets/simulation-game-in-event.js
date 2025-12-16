@@ -20,28 +20,28 @@ async function simulation_game_in_event(
   reference_race,
   race_name = '模拟赛',
 ) {
-  const reference = race_infos[reference_race],
-    info = fill_race_weather_and_mess(
+  const reference = race_infos[reference_race];
+  const info = fill_race_weather_and_mess(
+    0,
+    chara,
+    new RaceInfo(
       0,
-      chara,
-      new RaceInfo(
-        'Sim',
-        race_name,
-        RaceInfo.class_enum.Spe,
-        undefined,
-        reference.ground,
-        reference.span,
-        reference.distance,
-        reference.rotation,
-        2,
-        [],
-        reference.limit,
-        0,
-        0,
-        0,
-        reference.param_id,
-      ),
-    );
+      RaceInfo.class_enum.Spe,
+      undefined,
+      reference.ground,
+      reference.span,
+      reference.distance,
+      reference.rotation,
+      2,
+      [],
+      reference.limit,
+      0,
+      0,
+      0,
+      reference.param_id,
+    ),
+  );
+  info.name = race_name;
   info.lanes = reference.lanes;
   info.slopes = reference.slopes;
   info.phases = reference.phases;
