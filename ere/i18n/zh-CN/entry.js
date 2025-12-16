@@ -69,6 +69,7 @@ class I18nEntry {
   not_found = '未知';
 
   skills = new (require('#/i18n/zh-CN/skills'))();
+  clothes = new (require('#/i18n/zh-CN/clothes'))();
   notes = new (require('#/i18n/zh-CN/notes'))();
 }
 

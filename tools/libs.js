@@ -30,10 +30,10 @@ module.exports = {
   generate_content(content, comment_start, ...entry) {
     const arr = content.split('\n').map((e) => e.replace(/\s+$/, ''));
     const start = arr.findIndex((s) =>
-      s.startsWith(comment_start + ' GENERATED START'),
+      s.replace(/^\s+/, '').startsWith(comment_start + ' GENERATED START'),
     );
     const end = arr.findIndex((s) =>
-      s.startsWith(comment_start + ' GENERATED END'),
+      s.replace(/^\s+/, '').startsWith(comment_start + ' GENERATED END'),
     );
     if (start !== -1 && end !== -1) {
       arr.splice(start + 1, end - start - 1, ...entry);

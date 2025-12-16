@@ -1,5 +1,6 @@
-// GENERATED STARTED
-class I18nSkills {}
-// GENERATED END
+class I18nSkills {
+  // GENERATED START
+  // GENERATED END
+}
 
 module.exports = I18nSkills;

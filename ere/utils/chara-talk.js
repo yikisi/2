@@ -119,6 +119,12 @@ class CharaTalk {
     return this.sex_code === 1 ? '马郎' : '马娘';
   }
 
+  /** @returns {number} */
+  get race() {
+    // CFLAGNAME:1 = 种族
+    return era.get(`cflag:${this.id}:1`);
+  }
+
   /** @returns {PrintedSpan} */
   get_colored_actual_name() {
     return {

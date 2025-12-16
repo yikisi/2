@@ -791,7 +791,7 @@ module.exports = (handlers) => {
       await era.printAndWait([
         '在 ',
         me.get_colored_name(),
-        ' 120%全力的发光照射下，连太阳都显得黯然失色',
+        ' 120% 全力的发光照射下，连太阳都显得黯然失色',
       ]);
       await era.printAndWait([
         '趁着记者们揉着双眼的时候，',

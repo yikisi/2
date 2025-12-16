@@ -3,18 +3,20 @@ let lan = 'zh-CN';
 /** @type {Record<string,I18nEntry>} */
 const dict = {};
 dict['zh-CN'] = new (require('./zh-CN/entry'))();
+dict['ja-JP'] = new (require('./ja-JP/entry'))();
 dict['en-US'] = new (require('./en-US/entry'))();
 
 /**
  * @param {string} key
+ * @param {string} [_default]
  * @returns {string}
  */
-function __(key) {
+function __(key, _default = key) {
   const arr = (key ?? '').split('.');
   let o = dict[lan];
   for (let i = 0; i < arr.length; ++i) {
     if (!o[arr[i]]) {
-      return dict[lan].not_found;
+      return _default;
     }
     o = o[arr[i]];
   }

@@ -3,36 +3,22 @@ const { join } = require('path');
 
 const text_data = require('../../common/text_data.json')[14];
 const id2suffix = require('../../common/clothe-id2suffix');
+const { generate_content } = require('../libs');
 
-const output = {
-  clothe_names: {},
-  race_clothe_list: [
-    { n: '决胜服', s: '' },
-    { n: '第二套决胜服', s: 2 },
-    { n: '新年装', s: '_春' },
-    { n: '侍从礼服', s: '_仆' },
-    { n: '游戏角色Cosplay', s: '_游' },
-    { n: '礼服', s: '_礼' },
-    { n: '夏装', s: '_夏私' },
-    { n: '婚纱', s: '_婚' },
-    { n: '泳装', s: '_泳' },
-    { n: '万圣节整蛊装', s: '_万圣' },
-    { n: '祭典装', s: '_江户' },
-    { n: '圣诞礼服', s: '_圣诞' },
-    { n: '应援服', s: '_应援' },
-  ],
-};
+const clothe_names = {};
+const i18n = {};
 
 for (let i = 1001; i < 2000; ++i) {
   const tmp = {};
   for (let j = 1; j < 99; ++j) {
     const k = `${i}${j.toString().padStart(2, '0')}`;
     if (text_data[k]) {
-      tmp[id2suffix[j]] = text_data[k];
+      tmp[id2suffix[j]] = k;
+      i18n[k] = text_data[k];
     }
   }
   if (Object.keys(tmp).length > 0) {
-    output.clothe_names[i - 1000] = tmp;
+    clothe_names[i - 1000] = tmp;
   }
 }
 
@@ -74,10 +60,10 @@ res_list.forEach(([id, suffix]) => {
   if (!titles[id]) {
     return;
   }
-  if (!output.clothe_names[id - 1000]) {
+  if (!clothe_names[id - 1000]) {
     console.log('\tmissing cloth object:', id);
     exit = 1;
-  } else if (!output.clothe_names[id - 1000][id2suffix[suffix]]) {
+  } else if (!clothe_names[id - 1000][id2suffix[suffix]]) {
     console.log('\tmissing cloth name:', id, '- suffix:', suffix);
     exit = 1;
   }
@@ -87,11 +73,26 @@ if (exit === 0) {
   console.log('\tnone');
 }
 
-output.clothe_names[345] = { '': 'ST2', 2: '从零到零' };
-
 writeFileSync(
   join(__dirname, '../../ere/data/clothe-const.json'),
-  `${JSON.stringify(output, undefined, 2)}`,
+  JSON.stringify(
+    Object.entries(id2suffix).map((a) => [a[0].padStart(2, '0'), a[1]]),
+    void 0,
+    2,
+  ),
+);
+
+const i18n_path = join(__dirname, '../../ere/i18n/zh-CN/clothes.js');
+
+writeFileSync(
+  i18n_path,
+  generate_content(
+    readFileSync(i18n_path, 'utf-8'),
+    '//',
+    ...Object.entries(i18n).map(
+      ([key, name]) => `  ${key} = ${JSON.stringify(name)};`,
+    ),
+  ),
 );
 
 process.exit(exit);

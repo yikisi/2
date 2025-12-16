@@ -27,9 +27,9 @@ module.exports = class extends CustomizedEro {
       era.getCharactersInTrain().indexOf(32) !== -1 &&
       sys_check_cuckold(32)
     ) {
-      const coffee = get_chara_talk(25),
-        c_call_m = sys_get_colored_callname(25, 0),
-        c_call_t = sys_get_colored_callname(25, 32);
+      const coffee = get_chara_talk(25);
+      const c_call_m = sys_get_colored_callname(25, 0);
+      const c_call_t = sys_get_colored_callname(25, 32);
       await coffee.say_and_wait([c_call_t, '，可以请你趴在这里吗？']);
       await coffee.say_and_wait('嗯，就是这样，土下座的姿势，屁股转过来。');
       await coffee.say_and_wait([

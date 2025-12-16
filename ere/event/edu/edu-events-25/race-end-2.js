@@ -272,7 +272,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
         ' 走入了选手通道，坦然地承认了自己的失败。',
       ]);
       await tachyon.say_and_wait('你身上所存在的可能性，比我想象的还要庞大。');
-      await tachyon.say_and_wait('到现在为止……Plan B也算是有成果了吧。');
+      await tachyon.say_and_wait('到现在为止……Plan B 也算是有成果了吧。');
       await coffee.say_and_wait([
         sys_get_colored_callname(25, 32),
         '……谢谢你……',

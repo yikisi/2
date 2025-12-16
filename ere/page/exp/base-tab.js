@@ -15,7 +15,7 @@ const { get_image } = require('#/system/sys-calc-image');
 const { join_to_string } = require('#/utils/list-utils');
 
 const CharaTitles = require('#/data/chara-titles');
-const { clothe_names, race_clothe_list } = require('#/data/clothe-const.json');
+const race_clothes = require('#/data/clothe-const.json');
 const title_desc = require('#/data/desc/titles.json');
 const { human_sex_title, sex_title } = require('#/data/ero/status-const');
 const { growth_info } = require('#/data/exp-const');
@@ -29,20 +29,19 @@ const {
 } = require('#/data/info-generator');
 const { back_hairs, front_hairs, top_hairs } = require('#/data/other-const');
 
+const { __, i18n } = require('#/i18n/selector');
+
 const page_name = '个人情报';
 
 /**
- * @param {number} chara_id
+ * @param {number} cid
  * @returns {{front:number,back:number,top:number}}
  */
-function generate_hair_index(chara_id) {
+function generate_hair_index(cid) {
   const ret = {};
-  ret.front = Math.max(
-    front_hairs.indexOf(era.get(`cstr:${chara_id}:前发`)),
-    0,
-  );
-  ret.back = Math.max(back_hairs.indexOf(era.get(`cstr:${chara_id}:后发`)), 0);
-  ret.top = Math.max(top_hairs.indexOf(era.get(`cstr:${chara_id}:呆毛`)), 0);
+  ret.front = Math.max(front_hairs.indexOf(era.get(`cstr:${cid}:前发`)), 0);
+  ret.back = Math.max(back_hairs.indexOf(era.get(`cstr:${cid}:后发`)), 0);
+  ret.top = Math.max(top_hairs.indexOf(era.get(`cstr:${cid}:呆毛`)), 0);
   return ret;
 }
 
@@ -54,10 +53,10 @@ module.exports = {
    */
   generate(chara, flags) {
     const right_intro_list = [];
-    const body_hair_color = era.get(`cstr:${chara.id}:毛色`),
-      hair_color = era.get(`cstr:${chara.id}:发色`),
-      growth = era.get(`cflag:${chara.id}:成长阶段`),
-      race = era.get(`cflag:${chara.id}:种族`);
+    const body_hair_color = era.get(`cstr:${chara.id}:毛色`);
+    const hair_color = era.get(`cstr:${chara.id}:发色`);
+    const growth = era.get(`cflag:${chara.id}:成长阶段`);
+    const race = era.get(`cflag:${chara.id}:种族`);
     let hair = era.get(`cstr:${chara.id}:呆毛`);
     hair = join_to_string(
       [
@@ -210,19 +209,28 @@ module.exports = {
         type: 'button',
       });
     }
-    const image_prefix = era.get(`cstr:${chara.id}:头像`),
-      suffix = era.get(`cstr:${chara.id}:决胜服`);
-    let image_list,
-      src_chara = era.get(`cflag:${chara.id}:模版角色`);
-    if (src_chara < 0) {
-      src_chara = chara.id;
+    const image_prefix = era.get(`cstr:${chara.id}:头像`);
+    const suffix = era.get(`cstr:${chara.id}:决胜服`);
+    let image_list;
+    let src_id = era.get(`cflag:${chara.id}:模版角色`);
+    if (src_id < 0) {
+      src_id = chara.id;
     }
-    if (era.get(`cflag:${chara.id}:种族`) && src_chara > 0 && suffix !== -1) {
-      image_list = race_clothe_list
-        .filter((e) => era.checkImage(`${image_prefix}${e.s}`))
-        .map((e) => ({
-          n: (clothe_names[src_chara] || {})[e.s] || e.n,
-          s: e.s,
+    if (src_id >= 400) {
+      src_id += 3600;
+    } else if (src_id >= 300) {
+      src_id += 8700;
+    } else if (src_id >= 200) {
+      src_id += 1800;
+    } else {
+      src_id += 1000;
+    }
+    if (chara.race > 0 && src_id > 0 && suffix !== -1) {
+      image_list = race_clothes
+        .filter((c) => era.checkImage(`${image_prefix}${c[1]}`))
+        .map(([n, s]) => ({
+          n: __(`clothes.${src_id}${n}`, __(`clothes.${n}`)),
+          s,
         }));
       if (image_list.length > 1) {
         const curr = image_list.find((e) => e.s === suffix);
@@ -232,7 +240,10 @@ module.exports = {
           content: curr ? `决胜服 (${curr.n})` : '决胜服',
           type: 'button',
         });
-      } else if (image_list.length > 0 && image_list[0].n !== '决胜服') {
+      } else if (
+        image_list.length > 0 &&
+        image_list[0].n !== i18n().clothes['01']
+      ) {
         action_buffer.push({
           config: { width: 8 },
           content: `决胜服：${image_list[0].n}`,
@@ -392,12 +403,12 @@ module.exports = {
             title_list[selected].s = true;
           }
         } else {
-          const curr = image_list.find((e) => e.s === suffix),
-            cur_line = era.getLineCount();
-          let flag = true,
-            gif = era.checkImage(`${image_prefix}${image_list[0].s}_gif`)
-              ? 0
-              : 2;
+          const curr = image_list.find((e) => e.s === suffix);
+          const cur_line = era.getLineCount();
+          let flag = true;
+          let gif = era.checkImage(`${image_prefix}${image_list[0].s}_gif`)
+            ? 0
+            : 2;
           while (flag) {
             await era.clear(era.getLineCount() - cur_line);
             era.setHorizontalAlign('space-evenly');
@@ -410,7 +421,7 @@ module.exports = {
                     chara.get_colored_name(),
                     ' 在参赛时',
                     suffix === 0
-                      ? `按照节庆决定决胜服，在URA颁奖典礼与结束育成后的殿堂周将身着决胜服 [${clothe_names[src_chara]['']}]`
+                      ? `按照节庆决定决胜服，在URA颁奖典礼与结束育成后的殿堂周将身着决胜服 [${__(`clothes.${src_id}01`)}]`
                       : `穿着决胜服 [${curr.n}]`,
                     '。',
                     { isBr: true },
@@ -479,7 +490,7 @@ module.exports = {
                 '现在 ',
                 chara.get_colored_name(),
                 ' 在参赛时会按照场合和节庆决定着装，在URA颁奖典礼与结束育成后的殿堂周将身着决胜服 [',
-                clothe_names[src_chara][''],
+                __(`clothes.${src_id}01`),
                 ']。',
               ]);
               era.set(`cstr:${chara.id}:决胜服`, 0);
