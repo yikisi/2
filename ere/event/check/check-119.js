@@ -8,6 +8,8 @@ const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 
 const { get_chara_color } = require('#/data/chara-colors');
+const event_hooks = require('#/data/event/event-hooks');
+const EventMarks = require('#/data/event/event-marks');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
 
@@ -27,13 +29,14 @@ aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 4;
 
 module.exports = class extends CustomizedCheck {
   check_and_get_titles(aim_check) {
-    const races = RaceHistory.get(this.id).get(),
-      titles = [];
+    const races = RaceHistory.get(this.id).get();
+    const titles = [];
     if (
       check_aim_race(races, race_enum.kiku_sho, 1, 1) &&
       check_aim_race(races, race_enum.takz_kin, 2, 1) &&
       check_aim_race(races, race_enum.arim_kin, 2, 1) &&
-      get(`base:${this.id}:智力`) >= 1200
+      // BASENAME:9 = 智力
+      get(`base:${this.id}:9`) >= 1200
     ) {
       titles.push({
         c: get_chara_color(this.id),
@@ -47,8 +50,11 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_next_week() {
-    if (get(`cflag:${this.id}:招募状态`) === -1) {
-      set(`cflag:${this.id}:随机招募`, 1);
+    // CFLAGNAME:66 = 招募状态
+    if (get(`cflag:${this.id}:66`) === -1) {
+      EventMarks.get(0).add(event_hooks.recruit);
+      // CFLAGNAME:67 = 随机招募
+      set(`cflag:${this.id}:67`, 1);
     }
     return super.check_next_week();
   }
@@ -58,8 +64,8 @@ module.exports = class extends CustomizedCheck {
   }
 
   get_edu_aims() {
-    const buffer = [],
-      races = RaceHistory.get(this.id).get();
+    const buffer = [];
+    const races = RaceHistory.get(this.id).get();
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.asah_sta, 0, 5));
     buffer.push(check_aim_and_get_entry(races, race_enum.sats_sho, 1, 5));
