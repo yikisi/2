@@ -59,6 +59,20 @@ const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const { pressure_border } = require('#/data/train-const');
 
+function generate_button_title(...tlist) {
+  return tlist.filter((x) => x).join('\n') || void 0;
+}
+
+/**
+ * @param {Record<string,number>} dict
+ * @param {string} k
+ * @param {number[]} l
+ */
+function fill_npc_dict(dict, k, l) {
+  dict[k] = l.length;
+  dict[k + 'e'] = l.filter((nid) => EventMarks.get(nid).count() > 0).length;
+}
+
 /**
  * @param {number} cid
  * @param {function(number,number,number):Promise} next_cb
@@ -93,6 +107,12 @@ module.exports = async (cid, next_cb, flags) => {
       : void 0;
   const train_enabled = sys_check_train_enabled(cid);
   const chara = get_chara_talk(cid);
+  /** @type {Record<string,number>} */
+  const npc = {};
+  fill_npc_dict(npc, 'c', loc_characters.get(location_enum.clinic));
+  fill_npc_dict(npc, 'l', loc_characters.get(location_enum.chairman));
+  fill_npc_dict(npc, 't', loc_characters.get(location_enum.trainer));
+  fill_npc_dict(npc, 'v', loc_characters.get(location_enum.visitor));
   /** @type {{[acc],[config]:Record<string,any>,content:string,h:function():Promise}[][]} */
   const buttons = [];
   buttons.push([
@@ -489,9 +509,7 @@ module.exports = async (cid, next_cb, flags) => {
           buttonType:
             event_marks.check(event_hooks.back_school) ||
             my_event_marks.check(event_hooks.school_trainer_office) ||
-            loc_characters
-              .get(location_enum.trainer)
-              .findIndex((nid) => EventMarks.get(nid).count() > 0) !== -1
+            npc.te > 0
               ? 'danger'
               : 'warning',
           disabled:
@@ -500,7 +518,17 @@ module.exports = async (cid, next_cb, flags) => {
               sys_get_move_cost(location_enum.trainer),
               player_base,
             ) > 0 ||
-            loc_characters.get(location_enum.trainer).length === 0,
+            npc.t === 0,
+          title: generate_button_title(
+            npc.t > 0 ? `该地点有 ${npc.t} 人` : void 0,
+            event_marks.check(event_hooks.back_school)
+              ? '存在折返触发事件'
+              : void 0,
+            my_event_marks.check(event_hooks.school_trainer_office)
+              ? '该地点存在触发事件'
+              : void 0,
+            npc.te > 0 ? `该地点 ${npc.te} 人有节庆事件` : void 0,
+          ),
         },
         content: '前往训练员办公室',
         async h() {
@@ -518,9 +546,7 @@ module.exports = async (cid, next_cb, flags) => {
               event_hooks.back_school,
             ) ||
             my_event_marks.check(event_hooks.school_clinic) ||
-            loc_characters
-              .get(location_enum.clinic)
-              .findIndex((nid) => EventMarks.get(nid).count() > 0) !== -1
+            npc.ce > 0
               ? 'danger'
               : 'warning',
           disabled:
@@ -529,7 +555,18 @@ module.exports = async (cid, next_cb, flags) => {
               sys_get_move_cost(location_enum.clinic),
               player_base,
             ) > 0 ||
-            loc_characters.get(location_enum.clinic).length === 0,
+            npc.c === 0,
+          title: generate_button_title(
+            npc.c > 0 ? `该地点有 ${npc.c} 人` : void 0,
+            event_marks.check(event_hooks.back_school)
+              ? '存在折返触发事件'
+              : void 0,
+            event_marks.check(event_hooks.school_clinic) ||
+              my_event_marks.check(event_hooks.school_chairman)
+              ? '该地点存在触发事件'
+              : void 0,
+            npc.ce > 0 ? `该地点 ${npc.ce} 人有节庆事件` : void 0,
+          ),
         },
         content: '前往保健室',
         async h() {
@@ -645,9 +682,7 @@ module.exports = async (cid, next_cb, flags) => {
           buttonType:
             event_marks.check(event_hooks.back_school) ||
             my_event_marks.check(event_hooks.school_chairman) ||
-            loc_characters
-              .get(location_enum.chairman)
-              .findIndex((nid) => EventMarks.get(nid).count() > 0) !== -1
+            npc.le > 0
               ? 'danger'
               : 'warning',
           disabled:
@@ -656,7 +691,17 @@ module.exports = async (cid, next_cb, flags) => {
               sys_get_move_cost(location_enum.chairman),
               player_base,
             ) > 0 ||
-            loc_characters.get(location_enum.chairman).length === 0,
+            npc.l === 0,
+          title: generate_button_title(
+            npc.l > 0 ? `该地点有 ${npc.l} 人` : void 0,
+            event_marks.check(event_hooks.back_school)
+              ? '存在折返触发事件'
+              : void 0,
+            my_event_marks.check(event_hooks.school_chairman)
+              ? '该地点存在触发事件'
+              : void 0,
+            npc.le > 0 ? `该地点 ${npc.le} 人有节庆事件` : void 0,
+          ),
         },
         content: '前往理事长办公室',
         async h() {
@@ -674,9 +719,7 @@ module.exports = async (cid, next_cb, flags) => {
           buttonType:
             event_marks.check(event_hooks.back_school) ||
             my_event_marks.check(event_hooks.school_visitors) ||
-            loc_characters
-              .get(location_enum.visitor)
-              .findIndex((nid) => EventMarks.get(nid).count() > 0) !== -1
+            npc.ve > 0
               ? 'danger'
               : 'warning',
           disabled:
@@ -685,8 +728,17 @@ module.exports = async (cid, next_cb, flags) => {
               sys_get_move_cost(location_enum.visitor),
               player_base,
             ) > 0 ||
-            (loc_characters.get(location_enum.visitor).length === 0 &&
-              !my_event_marks.check(event_hooks.school_visitors)),
+            (npc.v === 0 && !my_event_marks.check(event_hooks.school_visitors)),
+          title: generate_button_title(
+            npc.v > 0 ? `该地点有 ${npc.v} 人` : void 0,
+            event_marks.check(event_hooks.back_school)
+              ? '存在折返触发事件'
+              : void 0,
+            my_event_marks.check(event_hooks.school_visitors)
+              ? '该地点存在触发事件'
+              : void 0,
+            npc.ve > 0 ? `该地点 ${npc.ve} 人有节庆事件` : void 0,
+          ),
         },
         content: '前往访客接待室',
         async h() {
