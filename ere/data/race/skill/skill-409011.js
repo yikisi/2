@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   409011,
-  '机械怪物',
-  '临近终盘位于领头或是距离领头4马身以内时在终盘提升加速度，之后在最终直线稍微提升速度',
   40901,
   1,
   19,

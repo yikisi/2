@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203831,
-  '天纵之才',
-  '在比赛终盘初期的更早时间内若处于中后方，则加速度提升',
   20383,
   2,
   17,

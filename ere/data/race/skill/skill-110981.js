@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110981,
-  '五行之兽彩光合奏',
-  '比赛终盘位于前方时若距离终点尚远则向前突进',
   11098,
   1,
   18,

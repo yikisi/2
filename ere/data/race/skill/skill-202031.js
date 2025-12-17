@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202031,
-  '赌徒',
-  '比赛后半速度大幅上升但有时会很累',
   20203,
   2,
   17,

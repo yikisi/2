@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   210291,
-  '巅峰的梦想',
-  '在最终直线处提升速度；当地语言的等级越高，效果越好',
   21029,
   2,
   17,

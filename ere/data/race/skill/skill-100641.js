@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100641,
-  '冠绝之路',
-  '从起跑到比赛后半程一直保持在前列的话心情将变得超嗨回复持久力且速度逐渐上升',
   10064,
   1,
   10,

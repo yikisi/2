@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   410011,
-  '传奇降临',
-  '比赛中盘一段时间内向前突进',
   41001,
   1,
   19,

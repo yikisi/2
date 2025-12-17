@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200161,
-  '路况不佳◎',
-  '擅长「稍重」「重」「不良」的马场状态',
   20016,
   2,
   0,

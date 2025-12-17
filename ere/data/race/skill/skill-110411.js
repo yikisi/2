@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110411,
-  'CHERRY☆飞天流',
-  '比赛剩余400m处位于前三名，则短时间内略微提升加速度，在中盘竞争持续时间越长，则技能效果越好，技能持续时间越长',
   11041,
   1,
   18,

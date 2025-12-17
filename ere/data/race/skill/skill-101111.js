@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   101111,
-  '追溯血脉，萌发未来',
-  '比赛中段位于队伍中间时少量提高速度，若处于上坡则提高效果',
   10111,
   1,
   18,

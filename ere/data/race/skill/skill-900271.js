@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900271,
-  '成长吧我的肌肉！',
-  '在比赛终盘的弯道中想要冲向前列时，略微提升加速度',
   90027,
   1,
   16,

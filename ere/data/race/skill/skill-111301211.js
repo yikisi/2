@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   111301211,
-  '绝不让给你♡',
-  '比赛终盘初期位于前方时加速度大幅提升；若是2200m的比赛，则消耗少量耐力，使加速度在终盘初期更早时间内大幅提升',
   11130121,
   1,
   19,

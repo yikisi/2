@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100921,
-  '斗志的火光照耀前方',
-  '在比赛中段附近位于好位置时速度提升，若是中距离比赛则技能效果提升',
   10092,
   1,
   18,

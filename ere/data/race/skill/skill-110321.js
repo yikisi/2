@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110321,
-  '夏空光晕',
-  '在比赛后半的弯道位于好位置时，短时间内速度大幅提升，若是中山竞马场则根据自身速度同时提升加速度',
   11032,
   1,
   18,

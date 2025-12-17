@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201131,
-  '闪光步伐',
-  '在比赛中盘，一段时间内不容易被包围',
   20113,
   2,
   17,

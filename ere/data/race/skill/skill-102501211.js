@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   102501211,
-  '不 要 丢 下 我',
-  '比赛中盘时若身处后方，则稍微剥夺前方赛马娘的持久力，并稍微提升自己的速度',
   10250121,
   1,
   27,

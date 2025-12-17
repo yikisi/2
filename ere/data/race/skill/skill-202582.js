@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202582,
-  '目不斜视',
-  '在比赛中盘少量回复持久力，并略微提升速度',
   20258,
   1,
   8,

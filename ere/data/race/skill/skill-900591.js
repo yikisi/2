@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900591,
-  '超越彼方……',
-  '保持冷静进入中盘并准备发力时或是在终盘胜负关键的弯道位于中部梯队时，加速能力会略微提高',
   90059,
   1,
   16,

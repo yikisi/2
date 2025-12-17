@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201302,
-  '重启',
-  '在比赛序盘没取得领先时，让前面的马娘稍微变迟缓',
   20130,
   1,
   24,

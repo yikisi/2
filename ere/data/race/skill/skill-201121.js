@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201121,
-  '千里眼',
-  '比赛初盘观察力提高，视野更加开阔',
   20112,
   2,
   17,

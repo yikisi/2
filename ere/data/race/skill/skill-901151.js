@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   901151,
-  '唯吾霸道，横扫六合',
-  '剩余1000m的位置向前持续极小幅突进',
   90115,
   1,
   16,

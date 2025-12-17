@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100071,
-  '不沉之舰，拔锚起航！',
-  '从比赛中段进行长距离冲刺，速度略微加快',
   10007,
   1,
   18,

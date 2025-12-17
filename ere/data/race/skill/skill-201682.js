@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201682,
-  '前行',
-  '在赛程终盘略微冲刺调整姿态',
   20168,
   1,
   16,

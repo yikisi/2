@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202402,
-  '越级',
-  '比赛终盘在后方准备超越时，稍微提升加速度',
   20240,
   1,
   16,

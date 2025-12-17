@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203461,
-  '杰出',
-  '比赛后半段被逼近时提升速度',
   20346,
   2,
   17,

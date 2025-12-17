@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900771,
-  'Road to Glory',
-  '临近终盘若位于好位置，则在剩余400m的地方少量提升速度',
   90077,
   1,
   16,

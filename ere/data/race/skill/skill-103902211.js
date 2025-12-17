@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   103902211,
-  '爆走猛姬☆急转直下！！',
-  '下坡时速度提升，并稍微提升加速度',
   10390221,
   1,
   19,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201471,
-  '视野良好！没有异常！',
-  '左右移动的时候能更好的把握状况，视野更加开阔',
   20147,
   2,
   17,

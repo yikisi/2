@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110091,
-  "Queen's Lumination",
-  '在比赛后半段的直线位于前方时速度少量持续上升，位于领头位置并与后方马娘距离较近时，技能效果提升',
   11009,
   1,
   18,

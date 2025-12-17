@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   1400011,
-  '大师驱动',
-  '在最后冲刺的关键时刻，速度大幅加快',
   140001,
   1,
   18,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202254,
-  '交流重赏之鬼',
-  '擅长交流重赏比赛，速度和力量上升',
   20225,
   3,
   1,

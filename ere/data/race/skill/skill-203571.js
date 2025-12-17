@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203571,
-  '突破口',
-  '临近终盘时若位于中后方则速度提升',
   20357,
   2,
   17,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200482,
-  '混战冷静',
-  '比赛中盘被包围时，持久力略微回复',
   20048,
   1,
   8,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   109902211,
-  '北海雄起',
-  '比赛终盘初段位于前方时加速度提升，若是1800m以上的比赛，则在初段更早时间内提升加速度',
   10990221,
   1,
   19,

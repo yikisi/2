@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201382,
-  '差马直线○',
-  '在直线的速度略微上升',
   20138,
   1,
   16,

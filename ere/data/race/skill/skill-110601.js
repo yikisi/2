@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110601,
-  'Go☆Go☆for it!',
-  '最终弯道之后超过对手并在最终直线处于中间集团时加快速度若人气处于后列则能振奋起来持续提高速度',
   11060,
   1,
   18,

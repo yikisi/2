@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201271,
-  '领跑者',
-  '在比赛序盘或中盘，擅于超越和竞争',
   20127,
   2,
   17,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900611,
-  'Pride of KING',
-  '能够冷静地进行比赛的规划时，就能够在最后200米发挥实力，少量加速',
   90061,
   1,
   16,

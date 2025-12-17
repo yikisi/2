@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900261,
-  'G00 1st.F∞;',
-  '在没有起步晚的情况下，最终直线上位于前方时速度稍微提升；若是一直保持在靠前位置的话改为速度小幅提升',
   90026,
   1,
   16,

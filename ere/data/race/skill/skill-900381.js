@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900381,
-  '#LookatCurren',
-  '在比赛中段左右并处于好位置完成赶超时，稍微提升速度与加速度',
   90038,
   1,
   16,

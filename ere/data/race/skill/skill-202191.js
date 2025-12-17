@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202191,
-  '专心致志',
-  '没有起跑晚的话就会在中盘一开始时回复大量持久力',
   20219,
   2,
   9,

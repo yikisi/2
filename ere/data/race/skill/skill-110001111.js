@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110001111,
-  '斗魂注入',
-  '进行超越时，一段时间内速度持续提升',
   11000111,
   1,
   19,

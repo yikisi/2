@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   101211,
-  'Lame de vent',
-  '最终弯道超越别人时，最后冲刺时的速度提高；若是在短距离或英里比赛中发动技能，则位于中团时大幅提高速度',
   10121,
   1,
   18,

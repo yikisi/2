@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100711,
-  '一生之梦，刹那飞翔',
-  '最终直线上与后方赛马娘距离近的话在这瞬间消耗些许持久力快速提高速度',
   10071,
   1,
   18,

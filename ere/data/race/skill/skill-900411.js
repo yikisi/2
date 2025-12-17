@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900411,
-  '优等生×爆进=大胜利',
-  '比赛后半段处于前列进行名次争夺时，速度略微加快',
   90041,
   1,
   16,

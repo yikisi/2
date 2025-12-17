@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203951,
-  '麒麟儿',
-  '智力十二分高超时，智力和速度提升',
   20395,
   2,
   1,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202482,
-  '施展本领',
-  '临近终盘位于领头或是距离领头4马身以内时，在终盘稍微提升加速度',
   20248,
   1,
   16,

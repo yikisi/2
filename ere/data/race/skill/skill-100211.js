@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100211,
-  '见识一下白色闪电吧！',
-  '比赛后半的直线处在好位置或者从集团中部瞄准前方的话就会如闪电一般冲刺',
   10021,
   1,
   18,

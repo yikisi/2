@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   103202211,
-  '幻耀光子',
-  '比赛中盘速度提升，并根据自身速度提升技能效果',
   10320221,
   1,
   19,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900551,
-  '万彩☆美丽★世界',
-  '比赛中场附近位于队伍中间且附近有其他赛马娘时，速度稍微提升如果视野内有4人以上的赛马娘则效果增强',
   90055,
   1,
   16,

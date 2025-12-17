@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202962,
-  '冲动',
-  '临近比赛终盘时，若位于中后方则速度稍微提升',
   20296,
   1,
   16,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203991,
-  '开花',
-  '在比赛中盘速度提升，若技能发动时位于前方则效果改变为向前突进',
   20399,
   2,
   17,

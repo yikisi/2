@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202091,
-  '气势汹汹',
-  '比赛中盘，在中间集团竞争时，小幅恢复持久力，并提升速度',
   20209,
   2,
   17,

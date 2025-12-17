@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   901081,
-  '赤翼罗刹越九天',
-  '比赛中段位于后方时速度稍微提升，之后在终盘的最终弯道处准备超越时，短时间内极小幅向前突进',
   90108,
   1,
   16,

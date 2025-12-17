@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   111901211,
-  '如梦似幻',
-  '在比赛终盘的弯道准备超越时一段时间内向前突进，如果是中山竞马场且智力有十二分高超则技能效果提升',
   11190121,
   1,
   19,

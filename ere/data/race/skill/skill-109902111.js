@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   109902111,
-  '感恩的家乡联唱',
-  '比赛中盘发动技能时速度大幅提升，之后在比赛终盘发动技能时，加速度稍微提升',
   10990211,
   1,
   19,

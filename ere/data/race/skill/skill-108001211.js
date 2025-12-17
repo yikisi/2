@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   108001211,
-  '追寻『未知』',
-  '临近中盘若位于前方，则大幅提升速度',
   10800121,
   1,
   19,

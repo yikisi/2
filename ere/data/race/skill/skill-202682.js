@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202682,
-  '暖场',
-  '在比赛中盘稍微提升速度，并略微回复持久力',
   20268,
   1,
   16,

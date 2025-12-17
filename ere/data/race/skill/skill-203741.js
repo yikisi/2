@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203741,
-  '刹那胜机',
-  '在比赛后半段的弯道中完成超越时，冲到前方',
   20374,
   2,
   17,

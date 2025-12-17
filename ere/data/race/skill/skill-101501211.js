@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   101501211,
-  '歌剧王的行军',
-  '比赛中盘时若身处前方，则速度大幅提升',
   10150121,
   1,
   19,

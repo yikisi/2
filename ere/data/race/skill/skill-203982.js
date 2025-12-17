@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203982,
-  '活力',
-  '在最终弯道前的第3弯道位于前方时稍微向前突进',
   20398,
   1,
   16,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203791,
-  '竞争本能',
-  '在最终弯道之前的第3弯道若位于中后方则向前突进',
   20379,
   2,
   17,

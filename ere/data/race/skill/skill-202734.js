@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202734,
-  '隆尚的天才',
-  '擅长隆尚竞马场的比赛提升耐力、智力与速度',
   20273,
   3,
   1,

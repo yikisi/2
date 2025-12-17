@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200452,
-  '距离感',
-  '比赛初期略微容易取得好路线',
   20045,
   1,
   16,

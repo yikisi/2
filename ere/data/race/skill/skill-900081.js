@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900081,
-  '切割×驱动!',
-  '在最后200米处于前列进行名次争夺时，竞争力变强，速度也会略微加快',
   90008,
   1,
   16,

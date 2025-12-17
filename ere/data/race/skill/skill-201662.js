@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201662,
-  '先走一步！',
-  '身后有马娘长时间紧追的话将会提高速度',
   20166,
   2,
   17,

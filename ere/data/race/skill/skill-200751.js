@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200751,
-  '内在体验',
-  '在最终弯道处于内侧的话速度会上升',
   20075,
   2,
   17,

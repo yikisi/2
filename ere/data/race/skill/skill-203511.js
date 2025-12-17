@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203511,
-  '睥睨',
-  '比赛中盘初期若位于中后方则速度提升，并稍微回复耐力',
   20351,
   2,
   17,

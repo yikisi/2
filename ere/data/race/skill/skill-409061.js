@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   409061,
-  '弧线最大标量',
-  '在弯道上速度大幅提升',
   40906,
   1,
   19,

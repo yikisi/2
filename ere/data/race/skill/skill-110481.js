@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110481,
-  '我们辣妹，永远的姐妹♪',
-  '在比赛中段前后位于队伍中间时速度少量持续上升，如果心情极佳则效果提升',
   11048,
   1,
   18,

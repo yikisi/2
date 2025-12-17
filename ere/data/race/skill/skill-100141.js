@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100141,
-  '胜利者☆飞扑',
-  '在最终直线上仍保有余力且处于前列时，更容易保持优势',
   10014,
   1,
   18,

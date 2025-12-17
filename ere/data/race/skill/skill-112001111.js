@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   112001111,
-  '闪光一驰！',
-  '起跑时加速度略微提升，之后在直线上向前突进',
   11200111,
   1,
   19,

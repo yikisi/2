@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203052,
-  '信念坚定',
-  '临近比赛终盘位于前方时速度稍微提升',
   20305,
   1,
   16,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200601,
-  '善于换乘',
-  '比赛终盘开始时位于中团以后时，加速度提升',
   20060,
   2,
   17,

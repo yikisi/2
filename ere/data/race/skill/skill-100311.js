@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100311,
-  '充能完毕！全速前进！',
-  '剩余300m左右处于前方的话提高速度，若刚好上完坡则速度大幅提高',
   10031,
   1,
   18,

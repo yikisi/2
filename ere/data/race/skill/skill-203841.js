@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203841,
-  '才貌双全',
-  '比赛中盘位于中后方时一段时间内速度少量提升',
   20384,
   2,
   17,

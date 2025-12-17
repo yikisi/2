@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200672,
-  '紧追不舍',
-  '比赛终盘位于后方时，略微容易冲刺',
   20067,
   1,
   16,

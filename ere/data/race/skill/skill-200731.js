@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200731,
-  '对胜利的执念',
-  '在最终弯道及往后被紧追不舍时，提高速度并略微提高加速度',
   20073,
   2,
   17,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203621,
-  '直线之心',
-  '在比赛中盘的直线时若处在中团以后一段时间内小幅提升速度',
   20362,
   2,
   17,

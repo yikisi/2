@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   204001,
-  '气贯长虹',
-  '在比赛序盘或者中盘被对手超越或者进行过竞争则向前突进',
   20400,
   2,
   17,

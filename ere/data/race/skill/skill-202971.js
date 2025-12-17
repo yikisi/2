@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202971,
-  '千载难逢',
-  '在终盘初段位于中后方时，更早时间内提升加速度',
   20297,
   2,
   17,

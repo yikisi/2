@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100341,
-  '疾走乎，疾走乎！',
-  '比赛前半，一直位于队伍中后方等待时机的话，在名次争夺时，将展现出江户之子的潜力，速度大幅上升',
   10034,
   1,
   18,

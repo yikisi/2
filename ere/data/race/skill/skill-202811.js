@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202811,
-  '画龙点睛',
-  '在比赛终盘初段若余力十足，则向前突进',
   20281,
   2,
   17,

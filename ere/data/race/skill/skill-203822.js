@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203822,
-  '心中的野兽',
-  '在终盘的最终直线稍微向前突进；如果在进入终盘前持续待在队伍中后方，则变为小幅向前突进',
   20382,
   1,
   16,

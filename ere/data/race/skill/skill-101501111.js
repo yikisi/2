@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   101501111,
-  '降临！世纪末的霸王！',
-  '最终弯道时若身处前方则一段时间内速度持续提升',
   10150111,
   1,
   19,

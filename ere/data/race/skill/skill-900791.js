@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900791,
-  '『船桥最强！』',
-  '比赛中盘若在前方竞争，则比赛后半段短时间内速度稍微提升；若是大井、川崎或者船桥赛场，则变为速度持续稍微提升',
   90079,
   1,
   16,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900121,
-  '单挑！白热化！',
-  '最终弯道之后从后方绕到外道并且完成赶超时，在最终直线上加快速度',
   90012,
   1,
   16,

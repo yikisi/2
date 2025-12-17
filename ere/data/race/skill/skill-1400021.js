@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   1400021,
-  '传奇加速器',
-  '最终冲刺时加速度提升',
   140002,
   1,
   18,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   108501111,
-  '纷华靡丽',
-  '在最终弯道位于中间往后位置时，令前后各3名赛马娘的速度稍微下降，并大幅提高自己的速度',
   10850111,
   1,
   19,

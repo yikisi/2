@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   901051,
-  '终达群星',
-  '在比赛中段左右处在中间集团，速度稍微提升，若是中距离比赛，且至此为止发动过7次技能，则速度会稍稍提高',
   90105,
   1,
   16,

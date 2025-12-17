@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110151,
-  '惠福船歌',
-  '距终点400米的位置身处前方时速度提升；若是比赛中合计使用过7次技能，变为大幅提升',
   11015,
   1,
   18,

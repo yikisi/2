@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203382,
-  '加速逃马架势',
-  '终盘最终弯道处位于前三名则稍微提升加速度',
   20338,
   1,
   16,

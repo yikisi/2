@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100541,
-  '疾风爆走天马冲刺！',
-  '比赛后半段若从后方进行了超越，剩余150m后自身位于前方时，在短时间内速度大幅提升',
   10054,
   1,
   18,

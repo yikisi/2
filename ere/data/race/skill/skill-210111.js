@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   210111,
-  '比赛之精髓・力',
-  '最后冲刺要超越对手时，短时间内提升少量速度',
   21011,
   1,
   16,

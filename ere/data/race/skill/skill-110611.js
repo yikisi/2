@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110611,
-  '威震八方！特雷森应援团！！',
-  '赛程前半，没有焦躁并处于最后方附近等待机会时，在最终直线会气势爆发，提高加速度',
   11061,
   1,
   18,

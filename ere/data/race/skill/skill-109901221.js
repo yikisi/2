@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   109901221,
-  '全力奔跑！苫小牧之星',
-  '比赛中盘竞争时速度提升，之后最终冲刺时若余力充足则稍微提升加速度',
   10990122,
   1,
   19,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100441,
-  '我赢定啦☆Strelitzia！',
-  '进入最终弯道前能一直保持冷静在后方等待机会的话，会在距离终点剩余300m处发动加速魔法，速度持续上升',
   10044,
   1,
   18,

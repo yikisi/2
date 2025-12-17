@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201092,
-  '布局',
-  '比赛初期位于后方时，使前方前方马娘的动作略微变得迟钝',
   20109,
   1,
   24,

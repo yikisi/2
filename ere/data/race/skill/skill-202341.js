@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202341,
-  '泥泞专家',
-  '变得擅长赛场状态为重或不良的比赛，速度和力量上升',
   20234,
   3,
   1,

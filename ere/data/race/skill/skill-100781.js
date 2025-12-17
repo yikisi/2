@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100781,
-  '春风和煦',
-  '赛程前半段压低节奏，最终弯道后半段若位于前方则可长时间持续稍微提高加速度若处于第2名则效果增加',
   10078,
   1,
   18,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201291,
-  '再次燃烧',
-  '在比赛终盘小幅消耗持久力，提升加速度',
   20129,
   2,
   17,

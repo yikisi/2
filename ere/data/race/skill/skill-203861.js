@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203861,
-  '自由奔放',
-  '在比赛序盘或者中盘被对手超越或者进行过竞争则向前突进',
   20386,
   2,
   17,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   210081,
-  '超越极限',
-  '最后冲刺时速度提升，并根据最高基础能力值提升效果',
   21008,
   2,
   17,

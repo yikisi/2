@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   103202111,
-  '拉普拉斯的恶魔',
-  '速度有十二分迅速时大幅提升速度，智力也十二分超群时极大提升速度',
   10320211,
   1,
   3,

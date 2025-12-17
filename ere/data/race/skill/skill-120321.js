@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   120321,
-  '超光速微粒子之可能性',
-  '在终盘的最终弯道以及往后位于前方时短时间内速度大幅提升，如果是中距离比赛则改变效果，短时间内向前大幅突进',
   12032,
   1,
   18,

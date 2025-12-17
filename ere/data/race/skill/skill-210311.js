@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   210311,
-  '运动员精神',
-  '在比赛后半段稍微向前突进，若有十二分的毅力则变为小幅向前突进',
   21031,
   1,
   16,

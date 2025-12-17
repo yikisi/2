@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202831,
-  '打call&互动',
-  '比赛中盘发动技能时速度少量提升，之后在比赛终盘发动技能时，小幅向前突进',
   20283,
   2,
   17,

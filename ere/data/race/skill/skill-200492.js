@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200492,
-  '回避力竭马',
-  '最后冲刺阶段前方拥挤时，会略微擅长回避',
   20049,
   1,
   16,

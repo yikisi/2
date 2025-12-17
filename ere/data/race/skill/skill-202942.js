@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202942,
-  '恐惧的逼近',
-  '比赛中盘若位于后方，则令前方赛马娘的速度极小幅下降，自身的速度稍微提升',
   20294,
   1,
   16,

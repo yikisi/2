@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201511,
-  '炙热视线',
-  '比赛的最终区域使自己紧盯的马娘紧张感上升',
   20151,
   2,
   25,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200064,
-  '淀之神子',
-  '擅长京都竞马场的比赛，耐力、智力和速度上升',
   20006,
   3,
   1,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900171,
-  '汝等，瞻仰皇帝之神威吧',
-  '在比赛终盘赶超3次后，最终直线上会少量加速',
   90017,
   1,
   16,

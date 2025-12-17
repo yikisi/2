@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900621,
-  '咚、啪、呣',
-  '赛程中段前后若处在中间梯队，重新恢复精神使持久力略微恢复，并且略微提升速度',
   90062,
   1,
   8,

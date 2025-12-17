@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201902,
-  '正面决斗',
-  '比赛终盘开始时若位于前方，稍微提升加速度',
   20190,
   1,
   16,

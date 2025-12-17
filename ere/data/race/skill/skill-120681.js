@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   120681,
-  '众星捧月，一马当先！',
-  '序盘以及中盘在前方被超越或进行竞争时短时间内提升速度，若是长距离比赛，则在比赛后半段位于前二名时，速度少量持续提升',
   12068,
   1,
   18,

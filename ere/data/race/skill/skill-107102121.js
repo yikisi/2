@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   107102121,
-  '幽玄的灯火',
-  '在比赛中盘初期，回复少量持久力，并少量提升速度',
   10710212,
   1,
   11,

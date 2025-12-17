@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   107801221,
-  '天风',
-  '比赛后半段位于第三名开外时，一段时间内速度提升',
   10780122,
   1,
   19,

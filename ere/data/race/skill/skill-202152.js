@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202152,
-  '油门全开',
-  '在比赛中盘小幅消耗耐力小幅提升速度',
   20215,
   1,
   16,

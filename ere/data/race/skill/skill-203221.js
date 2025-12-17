@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203221,
-  '破影而出',
-  '比赛中盘消耗少量耐力使速度大幅提升',
   20322,
   2,
   17,

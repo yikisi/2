@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   108801111,
-  '卡牌魔术：雄心壮志',
-  '比赛中盘位于队伍中后方时，速度大幅提升',
   10880111,
   1,
   19,

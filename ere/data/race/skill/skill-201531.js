@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201531,
-  '先马诀窍◎',
-  '容易占据有利位置',
   20153,
   2,
   0,

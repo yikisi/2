@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202701,
-  '奇点',
-  '速度有十二分迅速时提升速度，智力也十二分超群时大幅提升速度',
   20270,
   2,
   1,

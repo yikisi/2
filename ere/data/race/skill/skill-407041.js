@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   407041,
-  '独一无二的热情',
-  '临近终盘时若自身位于队伍中间往前，则速度大幅提升',
   40704,
   1,
   19,

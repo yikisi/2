@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202082,
-  '机不可失',
-  '比赛进入终盘时若位于中团后方，加速度稍微提升',
   20208,
   1,
   16,

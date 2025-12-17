@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203411,
-  '努力的回报',
-  '比赛中盘时位于队伍前列则提升速度',
   20341,
   2,
   17,

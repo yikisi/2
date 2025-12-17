@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   109802211,
-  '奔跑的吉祥物',
-  '速度和力量提升，若是交流重赏则变为大幅提升',
   10980221,
   1,
   3,

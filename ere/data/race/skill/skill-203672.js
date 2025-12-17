@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203672,
-  '宁静的热情',
-  '在比赛中盘速度稍微提升；技能发动时，若处于中后方则效果变为稍微向前突进',
   20367,
   1,
   16,

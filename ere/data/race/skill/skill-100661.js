@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100661,
-  '引擎全开！大喷射！',
-  '中盘中段处于领头位置时，超长时间内速度持续稍微上升，但终盘末段时会微幅逆喷射',
   10066,
   1,
   18,

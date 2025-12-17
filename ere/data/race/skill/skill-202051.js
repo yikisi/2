@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202051,
-  '大逃',
-  '比通常的逃马策略更大幅度地拉开与后方的距离，并且一直到最后都甩开对手',
   20205,
   1,
   1,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200921,
-  '追马牵制',
-  '比赛初盘对出走策略是追马的赛马娘进行牵制，使其略微容易疲劳',
   20092,
   1,
   24,

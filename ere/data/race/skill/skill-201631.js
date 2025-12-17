@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201631,
-  '同理心',
-  '比赛中有很多持有同理心属性的马娘则自己能力少许上升',
   20163,
   1,
   0,

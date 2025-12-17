@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   411021,
-  '前往未知的试炼',
-  '在比赛中盘一段时间内速度提升',
   41102,
   1,
   19,

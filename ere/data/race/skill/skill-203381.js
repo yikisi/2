@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203381,
-  '在这里决一胜负！',
-  '终盘最终弯道处位于前三名则提升加速度',
   20338,
   2,
   17,

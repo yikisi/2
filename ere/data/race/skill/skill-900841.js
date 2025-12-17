@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900841,
-  '霹雳中的奥伏赫变',
-  '比赛终盘位于后方时，在最终直线处稍微向前突进',
   90084,
   1,
   16,

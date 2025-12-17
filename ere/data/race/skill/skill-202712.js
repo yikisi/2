@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202712,
-  '会心一步',
-  '在终盘的最终弯道位于队伍中间往前时，若距离终点尚远则稍微提升加速度',
   20271,
   1,
   16,

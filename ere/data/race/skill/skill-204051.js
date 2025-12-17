@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   204051,
-  '灵魂烈焰',
-  '比赛终盘初期向前突进',
   20405,
   2,
   17,

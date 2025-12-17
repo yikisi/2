@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202431,
-  '乘胜追击',
-  '临近终盘时处于领头或距离领头4马身以内，则速度和加速度少量提升',
   20243,
   2,
   17,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   101191,
-  '『敬请，一路顺风』',
-  '进入终盘时，若在后方且距离终点较远，则在短时间内向前冲刺，若是中山、阪神赛道的中、长距离比赛，更会在之后的直线上短暂猛烈冲刺',
   10119,
   1,
   18,

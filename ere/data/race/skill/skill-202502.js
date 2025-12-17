@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202502,
-  '冒失',
-  '临近比赛终盘位于前方时，速度稍微提升',
   20250,
   1,
   16,

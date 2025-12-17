@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900401,
-  'KEEP IT REAL.',
-  '比赛后半程从队伍中团开始加速追赶前方时，速度会持续微量提升',
   90040,
   1,
   16,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203171,
-  '一张一弛',
-  '比赛接近中盘时，稍微降低速度；之后在比赛终盘开始时迅速向前突进',
   20317,
   2,
   17,

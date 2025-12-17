@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100421,
-  "『I'm possible』",
-  '比赛剩余200m处自身不在领头位置，距离领头4马身以内时速度提升，距离2马身以内时速度极大提升',
   10042,
   1,
   18,

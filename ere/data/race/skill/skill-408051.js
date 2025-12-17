@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   408051,
-  '种田！短跑开垦',
-  '在比赛终盘加速度提升；之后比赛进入最后200m时速度稍微提升',
   40805,
   1,
   19,

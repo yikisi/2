@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202981,
-  '流星光底',
-  '临近终盘时若位于前方则速度提升',
   20298,
   2,
   17,

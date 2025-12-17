@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201422,
-  '小休息',
-  '比赛中盘位于中团以后时，稍微恢复持久力',
   20142,
   1,
   8,

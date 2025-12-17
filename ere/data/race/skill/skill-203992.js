@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203992,
-  '觉醒之刻',
-  '在比赛中盘速度稍微提升，若技能发动时位于前方则效果改变为稍微向前突进',
   20399,
   1,
   16,

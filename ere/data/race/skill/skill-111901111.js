@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   111901111,
-  '前往尽头的右满舵',
-  '擅长顺时针场地，速度和力量大幅提升',
   11190111,
   1,
   3,

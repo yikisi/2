@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   104602211,
-  '绝对的C位',
-  '比赛终盘时若身处前方，则加速度大幅提升',
   10460221,
   1,
   19,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900951,
-  '因信而念',
-  '在比赛终盘处于前方时，略微向前突进；若是短距离比赛，则一直保持略微突进直至冲线',
   90095,
   1,
   16,

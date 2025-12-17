@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   104602111,
-  '朝着梦想急上升！',
-  '比赛中盘进行名次争夺时速度提升，并且稍微回复持久力',
   10460211,
   1,
   19,

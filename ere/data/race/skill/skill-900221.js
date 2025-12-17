@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900221,
-  'Fairy tale',
-  '在赛程后半若处于好位置并进行名次争夺时稍微提升速度',
   90022,
   1,
   16,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202702,
-  '探求心',
-  '速度有十二分迅速时稍微提升速度，智力也十二分超群时少量提升速度',
   20270,
   1,
   0,

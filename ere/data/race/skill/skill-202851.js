@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202851,
-  '一网打尽',
-  '在终盘初段余力十足的话，向前突进',
   20285,
   2,
   17,

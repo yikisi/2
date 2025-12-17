@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202901,
-  '飞翔脚',
-  '临近终盘时若位于中后方，则速度提升',
   20290,
   2,
   17,

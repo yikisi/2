@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203232,
-  '急促的步伐',
-  '临近比赛中盘时速度稍微提升',
   20323,
   1,
   16,

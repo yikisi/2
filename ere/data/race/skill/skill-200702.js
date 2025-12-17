@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200702,
-  '上升气流',
-  '比赛终盘位于后方时，赶超别人的能力会略微提升',
   20070,
   1,
   16,

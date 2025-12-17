@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110991,
-  '飞吧☆泡泡贝壳',
-  '在比赛半程少量提升速度且在泥地比赛发动技能时，若不在第3弯道，则额外稍微提升速度',
   11099,
   1,
   18,

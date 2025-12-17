@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201081,
-  '速度贪食者',
-  '比赛中盘在前方时，少量夺取后方马娘的速度',
   20108,
   2,
   25,

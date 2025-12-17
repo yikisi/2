@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   120601,
-  '天天晴晴，年年甜甜蜜蜜',
-  '在终盘的最终弯道及往后，自身位于中后方时，一段时间内速度大幅提升若是中距离比赛则改变效果，一段时间内迅速向前突进',
   12060,
   1,
   18,

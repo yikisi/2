@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   210131,
-  '比赛之精髓・智',
-  '比赛后半段发动两次技能时，少量提升速度',
   21013,
   1,
   16,

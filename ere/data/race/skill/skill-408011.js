@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   408011,
-  '敬爱！狂热爱马仕',
-  '附近有很多马娘时速度大幅提升',
   40801,
   1,
   19,

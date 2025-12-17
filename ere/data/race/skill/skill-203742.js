@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203742,
-  '抓住空隙',
-  '在比赛后半段的弯道中完成超越时，稍微冲到前方',
   20374,
   1,
   16,

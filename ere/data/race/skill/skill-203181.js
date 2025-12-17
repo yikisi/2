@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203181,
-  '清浊并包',
-  '比赛中盘速度提升，并少量回复耐力',
   20318,
   2,
   17,

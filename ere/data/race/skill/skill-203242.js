@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203242,
-  '开端',
-  '进入中盘直线后稍微回复持久力并稍微向前推进',
   20324,
   1,
   8,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110381,
-  'One True Color',
-  '比赛剩余350m处于前方，与后方马娘距离接近时以绝不退让的意志更容易突围',
   11038,
   1,
   18,

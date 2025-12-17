@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203601,
-  '绝妙踢沙',
-  '长时间有紧跟在自己身后的马娘则速度提升',
   20360,
   2,
   17,

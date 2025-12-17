@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900131,
-  '显贵的使命仍需完成',
-  '最终弯道前身处前方时，速度稍微提升；如果身处长距离比赛且持久力充沛，则速度提升',
   90013,
   1,
   16,

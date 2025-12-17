@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   105102221,
-  '永恒陪伴的花朵',
-  '下坡时速度大幅提升，并使除自己外的队伍成员速度稍微提升',
   10510222,
   1,
   19,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   107102211,
-  '淡薄虚幻的余晖',
-  '在终盘的最终直线上，稍微消耗持久力，使速度极大提升',
   10710221,
   1,
   19,

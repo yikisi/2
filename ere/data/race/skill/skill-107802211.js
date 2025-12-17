@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   107802211,
-  '风之意志·希尔芙',
-  '即将进入终盘的位置以及往后，若位于第一或者距离第一名4马身以内时一段时间内速度少量提升',
   10780221,
   1,
   19,

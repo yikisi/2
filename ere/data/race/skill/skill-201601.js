@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201601,
-  '打好基础',
-  '在比赛初期发动多个技能时，加速度略微提高',
   20160,
   1,
   16,

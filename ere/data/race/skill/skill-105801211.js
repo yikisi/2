@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   105801211,
-  '我、我不会放弃的～',
-  '比赛中盘完成超越时回复持久力，并稍微提升速度',
   10580121,
   1,
   11,

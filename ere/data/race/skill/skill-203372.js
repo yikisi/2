@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203372,
-  '反击',
-  '比赛终盘最终弯道及之后位置若对手发动加速技能，一小段时间内略微向前突进',
   20337,
   1,
   16,

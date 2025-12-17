@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110211,
-  '火神鸣',
-  '比赛中盘发动两次技能时，速度少量持续上升，若在效果持续中继续发动技能，会提升效果速度量，最大两次',
   11021,
   1,
   18,

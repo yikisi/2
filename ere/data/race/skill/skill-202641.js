@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202641,
-  '以至千里',
-  '在比赛中盘位于队伍中间时，一段时间内速度少量提升',
   20264,
   2,
   17,

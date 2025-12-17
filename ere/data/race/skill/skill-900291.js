@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900291,
-  '雪夜追光',
-  '最后300米处在前方且与最前方的马娘距离很近或是领头时速度略微提升',
   90029,
   1,
   16,

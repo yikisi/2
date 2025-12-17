@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110561,
-  '禾乃登',
-  '赛程后半于后方被紧追时得幸运以护体速度提升',
   11056,
   1,
   18,

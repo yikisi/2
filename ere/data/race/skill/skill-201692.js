@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201692,
-  '安静的呼吸',
-  '比赛临近中盘时，若位于中团以后的位置，稍微恢复持久力',
   20169,
   1,
   8,

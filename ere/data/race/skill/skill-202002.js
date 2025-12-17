@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202002,
-  '习惯沙尘',
-  '比赛中盘若处于后方，略微回复持久力',
   20200,
   1,
   8,

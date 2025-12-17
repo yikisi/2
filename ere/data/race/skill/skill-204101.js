@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   204101,
-  '震天动地',
-  '最终冲刺时进行了超越或者竞争则向前突进',
   20410,
   2,
   17,

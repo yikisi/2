@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110301,
-  'Drain for rose',
-  '在比赛中盘身处好位置时，会吸取前方赛马娘的持久力，并且小幅提升速度',
   11030,
   1,
   10,

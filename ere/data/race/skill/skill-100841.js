@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100841,
-  '霹雳中的奥伏赫变',
-  '比赛终盘位于后方时，在最终直线处解除自我封印向前突进，比赛场地为东京竞马场中距离时，以极快速度向前突进',
   10084,
   1,
   18,

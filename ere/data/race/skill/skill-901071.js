@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   901071,
-  'Billions of stars',
-  '在终盘的最终直线位于领头时速度略微提升',
   90107,
   1,
   16,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201091,
-  '布阵',
-  '比赛初期位于后方时，使前方前方马娘的动作变得迟钝',
   20109,
   2,
   25,

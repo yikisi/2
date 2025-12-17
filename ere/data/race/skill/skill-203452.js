@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203452,
-  '转折点',
-  '比赛终盘初期若位于中后方则稍微提升加速度',
   20345,
   1,
   16,

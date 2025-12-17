@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200013,
-  '顺时针×',
-  '稍微不擅长顺时针赛道',
   20001,
   -1,
   32,

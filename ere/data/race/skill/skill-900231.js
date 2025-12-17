@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900231,
-  '∴win Q.E.D.',
-  '在终盘的最终弯道前位于前方时，速度稍微提升；如果比赛全程保持冷静则变为速度小幅提升',
   90023,
   1,
   16,

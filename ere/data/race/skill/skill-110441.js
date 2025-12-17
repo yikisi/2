@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110441,
-  'Oh!bento-magic☆',
-  '比赛中盘后下坡时处于后方，消耗少许持久力在短暂内向前推进；之后若是干劲在较佳或极佳，则于终盘的最后直线短暂加速',
   11044,
   1,
   18,

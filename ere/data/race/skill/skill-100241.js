@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100241,
-  '闪光☆着陆',
-  '最终弯道之后处于前列进行名次争夺时，在直线上更容易突围',
   10024,
   1,
   18,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203352,
-  '小步快跑',
-  '比赛中盘时位于队伍中后方则消耗少许耐力小幅提升速度',
   20335,
   1,
   16,

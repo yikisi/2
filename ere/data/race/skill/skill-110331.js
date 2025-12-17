@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110331,
-  'Crystal Mist',
-  '最终弯道以后处在队伍中后方时提升加速度，若是2400m的比赛则大幅提升加速度',
   11033,
   1,
   18,

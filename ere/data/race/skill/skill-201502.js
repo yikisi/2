@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201502,
-  '策士',
-  '比赛终盘位于后方时，视野略微开阔',
   20150,
   1,
   16,

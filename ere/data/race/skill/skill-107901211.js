@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   107901211,
-  '勇船直捣',
-  '若进行了冲刺比拼，比赛进入最后200m时大幅向前突进',
   10790121,
   1,
   19,

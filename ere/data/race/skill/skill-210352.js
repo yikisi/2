@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   210352,
-  '时代变革者',
-  '最后冲刺阶段的中段速度稍微提升',
   21035,
   1,
   16,

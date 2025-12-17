@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201231,
-  '奇术师',
-  '在比赛终盘，使前方马娘的视野变得狭窄',
   20123,
   2,
   25,

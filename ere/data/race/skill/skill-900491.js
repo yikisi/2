@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900491,
-  '会当凌绝顶，听我楚狂笑',
-  '最终弯道之后准备超越前方马娘时将在剩余400m以后的好位置处稍微提高速度人气较低的时候速度提升稍多',
   90049,
   1,
   16,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100251,
-  '逐君之形',
-  '赛程后半，从中间梯队追逐『友人』而逐渐提升速度使前方的马娘畏首畏尾',
   10025,
   1,
   18,

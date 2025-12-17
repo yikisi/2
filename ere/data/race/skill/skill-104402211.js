@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   104402211,
-  '紧急魔力增幅',
-  '	比赛中盘消耗少量体力，使速度大幅提升之后在终盘的最终直线处速度稍微提升',
   10440221,
   1,
   19,

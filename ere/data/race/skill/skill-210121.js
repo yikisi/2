@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   210121,
-  '比赛之精髓・根',
-  '冲刺比拼状态时，稍微提升加速度',
   21012,
   1,
   16,

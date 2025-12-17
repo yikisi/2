@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200164,
-  '坏马场之鬼',
-  '擅长「稍重」「重」「不良」的马场状态，速度与力量上升',
   20016,
   4,
   1,

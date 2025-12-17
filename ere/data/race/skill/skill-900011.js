@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900011,
-  '流星',
-  '在比赛终盘身处前方并完成超越时，能稍微向前突进，并且极少量提升加速度',
   90001,
   1,
   16,

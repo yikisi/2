@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200184,
-  '青岚',
-  '擅长夏季的比赛，速度和力量上升',
   20018,
   3,
   1,

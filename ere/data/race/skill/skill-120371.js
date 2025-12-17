@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   120371,
-  '海风之Geschenk',
-  '若在中距离比赛的最终弯道位于队伍中间，则向前突进；如果是东京竞马场的比赛，则大幅向前突进',
   12037,
   1,
   18,

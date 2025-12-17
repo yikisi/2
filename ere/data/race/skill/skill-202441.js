@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202441,
-  '胜负师',
-  '比赛中偶尔会发挥更强的实力速度、力量、根性大幅提升人气较低的情况下更容易触发',
   20244,
   2,
   1,

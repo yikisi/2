@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   111101211,
-  '步步为营的秘策',
-  '比赛中盘的初期位于队伍中后方时速度提升，之后进入比赛后半段的下坡时稍微提升速度',
   11110121,
   1,
   19,

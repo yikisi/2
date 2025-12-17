@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201612,
-  '爬山虎',
-  '在比赛中盘发动多个技能时，速度提高',
   20161,
   2,
   17,

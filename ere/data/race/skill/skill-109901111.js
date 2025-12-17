@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   109901111,
-  '苫小牧美食家亦咂嘴称道',
-  '临近比赛中盘时若身处前方，则回复持久力，并稍微提升速度',
   10990111,
   1,
   11,

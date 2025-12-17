@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   106003211,
-  '擅长大扫除',
-  '比赛终盘初段位于队伍中后方时，一段时间内加速度提升',
   10600321,
   1,
   19,

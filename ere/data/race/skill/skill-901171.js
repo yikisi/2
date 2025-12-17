@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   901171,
-  '勇往直前快步疾舞',
-  '若在比赛中盘以后成功超越，在进入最终直线后短时间略微提高速度；若在选择追马策略的情况下在中盘以后超越三次以上，则在进入最终直线后短时间内提高速度',
   90117,
   1,
   16,

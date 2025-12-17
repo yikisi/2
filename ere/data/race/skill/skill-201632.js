@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201632,
-  '同调',
-  '若比赛里有马娘持有「同理心」技能则提升速度，并使全员持有的「同理心」无视条件直接发动',
   20163,
   2,
   1,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900201,
-  'Angling×Scheming',
-  '在比赛终盘的弯道上处于第一位时，稍微提升加速度',
   90020,
   1,
   16,

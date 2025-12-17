@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   106803111,
-  '惊叹！卧龙出山',
-  '在比赛终盘初段若余力十足则向前突进，并之后在最终直线处稍微再向前突进',
   10680311,
   1,
   19,

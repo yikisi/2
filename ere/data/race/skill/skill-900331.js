@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900331,
-  '狄俄斯库里的流星',
-  '最终直线上若与先头集团拉开了距离，则会稍微提升速度；若身处最后方，提升更多速度',
   90033,
   1,
   16,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201232,
-  '障眼法',
-  '在比赛终盘，使前方马娘的视野稍微变得狭窄',
   20123,
   1,
   24,

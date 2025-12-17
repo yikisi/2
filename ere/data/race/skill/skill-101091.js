@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   101091,
-  '心心相印×梦想未来',
-  '在比赛前半段的弯道若位于队伍中间则少量提升速度，若是短距离或英里比赛则变为少量持续提升速度',
   10109,
   1,
   18,

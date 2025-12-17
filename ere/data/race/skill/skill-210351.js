@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   210351,
-  '新传说缔造者',
-  '最后冲刺阶段的中段速度提升；训练员的声望越高，效果越好',
   21035,
   2,
   17,

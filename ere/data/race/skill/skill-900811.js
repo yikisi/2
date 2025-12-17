@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900811,
-  'Punkish Bite',
-  '在比赛终盘的弯道短时间内略微向前突进',
   90081,
   1,
   16,

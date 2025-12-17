@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900501,
-  'Nemesis',
-  '最终弯道之后从中间梯队向前突进时，稍微加快速度',
   90050,
   1,
   16,

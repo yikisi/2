@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   111701211,
-  '凌空的矫健弧线',
-  '在比赛中盘的弯道一段时间内向前小幅突进，之后在最终直线稍微向前突进',
   11170121,
   1,
   19,

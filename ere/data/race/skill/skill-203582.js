@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203582,
-  '捕捉',
-  '比赛中盘速度稍微提升；若距离头马8马身以上，则速度少量提升',
   20358,
   1,
   16,

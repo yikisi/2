@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   105401111,
-  '急行！英雄参上！',
-  '比赛中盘时位于队伍中后方往后，则速度大幅加快',
   10540111,
   1,
   19,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   104402111,
-  '风灵魔法',
-  '比赛终盘初段提升加速度，若是2200m比赛则消耗少量体力使加速度在终盘初段更早时间内大幅提升',
   10440211,
   1,
   19,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203702,
-  '全力以赴',
-  '在比赛后半段刚开始时，如果余力充足，稍微向前冲',
   20370,
   1,
   16,

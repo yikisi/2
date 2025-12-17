@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   210372,
-  '精心休养，再次出发',
-  '在最后冲刺的关键时刻，速度稍微加快',
   21037,
   1,
   16,

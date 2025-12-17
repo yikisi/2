@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110101,
-  'Joyful Voyage!',
-  '剩余200m处位于队伍前方时提高速度，若此时前方较近处有赛马娘时会以强有力的奔跑向前冲刺',
   11010,
   1,
   18,

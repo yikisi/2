@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200321,
-  '胆小鬼',
-  '对成为人气第一感到棘手',
   20032,
   -1,
   32,

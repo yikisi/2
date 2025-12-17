@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   409041,
-  '限制器解除',
-  '在最后冲刺的关键阶段速度大幅提升',
   40904,
   1,
   19,

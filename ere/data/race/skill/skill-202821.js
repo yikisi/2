@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202821,
-  '万里一空',
-  '在最后冲刺阶段的直线若位于前方，则提升加速度',
   20282,
   2,
   17,

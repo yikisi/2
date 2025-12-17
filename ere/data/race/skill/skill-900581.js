@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900581,
-  'I Never Goof Up!',
-  '比赛终盘完成超越时，会稍微向前突进',
   90058,
   1,
   16,

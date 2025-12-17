@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202661,
-  '斗志昂扬',
-  '比赛终盘初段位于队伍中间时，向前突进',
   20266,
   2,
   17,

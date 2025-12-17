@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200691,
-  '慧眼',
-  '临近比赛中盘并位于后方时，不容易疲劳并使前方马娘速度少量下降',
   20069,
   2,
   9,

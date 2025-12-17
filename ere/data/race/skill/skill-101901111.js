@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   101901111,
-  '极限马娘狂热迷',
-  '若是身边存在大量赛马娘的话，速度提升，并且稍微回复持久力',
   10190111,
   1,
   19,

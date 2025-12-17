@@ -6238,6 +6238,7 @@ model ultimate_race_npc {
   proper_ground_dirt          Int
   skill_set_id_1              Int
   skill_set_id_2              Int
+  skill_set_id_3              Int
 
   @@index([npc_group_id], map: "ultimate_race_npc_0_npc_group_id")
 }

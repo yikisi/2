@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   103302211,
-  '冰星融解',
-  '比赛终盘初期大幅向前突进，若是2400m的比赛则一段时间内大幅向前突进',
   10330221,
   1,
   19,

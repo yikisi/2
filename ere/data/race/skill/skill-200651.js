@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200651,
-  '短距涡轮',
-  '比赛终盘时，加速度提升',
   20065,
   2,
   17,

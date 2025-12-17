@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200311,
-  'GⅠ苦手',
-  '稍微不擅长GⅠ等大舞台的比赛',
   20031,
   -1,
   32,

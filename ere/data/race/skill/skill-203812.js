@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203812,
-  '精神力',
-  '速度十二分迅捷时，稍微提升速度；若同时力量有十二分强劲则少量提升速度',
   20381,
   1,
   0,

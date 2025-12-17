@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202311,
-  '目标是C位！',
-  '比赛终盘位于前方时，加速度提升',
   20231,
   2,
   17,

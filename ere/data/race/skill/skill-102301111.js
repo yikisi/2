@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   102301111,
-  '正如预料，绰绰有余',
-  '临近比赛中盘时若身处前方，则大幅回复持久力',
   10230111,
   1,
   11,

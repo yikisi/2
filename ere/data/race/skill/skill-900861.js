@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900861,
-  '消融在爱中吧',
-  '剩余1000m时若位于前方，则稍微加快速度',
   90086,
   1,
   16,

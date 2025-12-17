@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   111091,
-  '永远闪耀下去',
-  '若是三宝冠的赛道则在终盘的弯道短时间内小幅向前突进；如果此时为下坡，则额外稍微提升加速度',
   11109,
   1,
   18,

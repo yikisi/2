@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202602,
-  '点火',
-  '比赛中触发了13次技能的话，稍微向前突进',
   20260,
   1,
   16,

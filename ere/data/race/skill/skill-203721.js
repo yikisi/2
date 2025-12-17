@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203721,
-  '亲手把握未来',
-  '心中怀抱继承下来的强烈心愿在比赛后半段向前突进，并稍微回复耐力',
   20372,
   1,
   17,

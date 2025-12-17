@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   910031,
-  '非我莫属',
-  '最终弯道之后，位于前列穷追不舍时，会在最终直线稍微提升速度',
   91003,
   1,
   16,

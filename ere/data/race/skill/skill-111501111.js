@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   111501111,
-  '吾意即为天理',
-  '若是2000m以上的比赛则在最终冲刺时提升加速度',
   11150111,
   1,
   19,

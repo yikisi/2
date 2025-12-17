@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202652,
-  '自信者',
-  '速度和力量都十分强劲时，稍微提升速度和力量',
   20265,
   1,
   0,

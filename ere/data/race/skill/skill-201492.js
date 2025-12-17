@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201492,
-  '冷静',
-  '紧跟前方赛马娘时，使自己冷静下来，稍微恢复持久力',
   20149,
   1,
   8,

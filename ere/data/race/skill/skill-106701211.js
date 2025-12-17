@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   106701211,
-  '顺时针的圆舞曲',
-  '非常擅长顺时针的赛道，速度与力量大幅提升',
   10670121,
   1,
   3,

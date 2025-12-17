@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   901131,
-  '活力蹦跳・锁定胜利♡',
-  '比赛前半段的弯道若位于好位置则速度稍微提升，若是2200m的比赛则速度持续稍微提升，若处于上坡则提高效果',
   90113,
   1,
   16,

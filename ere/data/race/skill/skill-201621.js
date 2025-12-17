@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201621,
-  '竭尽全力',
-  '在比赛终盘发动多个技能时，耐力略微回复',
   20162,
   1,
   8,

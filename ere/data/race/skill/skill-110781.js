@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110781,
-  'Breezy Treat',
-  '比赛剩余350m的位置位于前方时短时间内向前突进，若是英里比赛则额外稍微增加速度',
   11078,
   1,
   18,

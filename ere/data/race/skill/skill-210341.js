@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   210341,
-  '只想再看一眼，美妙景色',
-  '最终直线时提高速度；训练设施等级总和越高，效果越好',
   21034,
   2,
   17,

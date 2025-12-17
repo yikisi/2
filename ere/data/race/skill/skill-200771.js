@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200771,
-  '诡计（前）',
-  '比赛中盘位于前方时，使后方焦躁的马娘变得略微疲劳',
   20077,
   1,
   24,

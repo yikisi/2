@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110191,
-  '萌到让我活过来了！',
-  '在中盘的弯道位于中间集团往后的位置，且附近有3名及以上的马娘酱时，因萌之力量而提升速度',
   11019,
   1,
   18,

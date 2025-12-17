@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900731,
-  '熊熊燃烧的绝对意志',
-  '比赛终盘进行超越时，在最终直线上速度稍微提升',
   90073,
   1,
   16,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   101151,
-  '唯吾霸道，横扫六合',
-  '剩余1000m的位置稍微向前持续突进；若在中长距离比赛中，所有基础能力都十足强劲，则变为向前持续突进',
   10115,
   1,
   18,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   107701111,
-  '草地的主角',
-  '力量和速度少量提升，若马场状态为「良」则大幅提升力量和速度',
   10770111,
   1,
   3,

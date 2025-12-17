@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202461,
-  '绝影',
-  '最终直线在领头位置且后方1马身内有马娘时，速度极大提升',
   20246,
   2,
   17,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200821,
-  '对追马策略',
-  '出走策略是追马的赛马娘陷入焦躁状态时恢复冷静需要耗费时间',
   20082,
   1,
   24,

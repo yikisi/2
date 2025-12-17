@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201141,
-  '神赐步伐',
-  '左右移动不容易产生疲劳',
   20114,
   2,
   9,

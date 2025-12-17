@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   113301111,
-  '永世无穷',
-  '临近终盘时向前突进',
   11330111,
   1,
   19,

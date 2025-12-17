@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203631,
-  '独一无二',
-  '在比赛后半的随机位置向前突进',
   20363,
   2,
   17,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   101271,
-  '捕捉目标！正义执行！',
-  '比赛后半段的直线处位于中间位置时速度提升，若是长距离比赛则提升效果量',
   10127,
   1,
   18,

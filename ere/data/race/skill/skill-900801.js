@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900801,
-  'Info: Acquired',
-  '比赛前半段一直保持前方位置时，若后半段检测到对手发动了加速技能，则向前极小幅突进',
   90080,
   1,
   16,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900211,
-  '见识一下白色闪电吧！',
-  '在赛程后半段直线若处在好位置或由中间梯队向前冲击时，稍微提升速度与加速度',
   90021,
   1,
   16,

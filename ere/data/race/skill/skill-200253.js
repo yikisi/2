@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200253,
-  '不擅长内枠',
-  '稍微不擅长1~3号枠号的比赛',
   20025,
   -1,
   32,

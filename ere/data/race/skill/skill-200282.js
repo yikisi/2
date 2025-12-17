@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200282,
-  '对抗意识○',
-  '很多马娘与自身同一出走策略时能力稍微容易发挥',
   20028,
   1,
   0,

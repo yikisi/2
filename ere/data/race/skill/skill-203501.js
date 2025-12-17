@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203501,
-  '英豪俊杰',
-  '比赛中盘向前突进',
   20350,
   2,
   17,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203251,
-  '如火',
-  '比赛终盘开始时在中段马群以下则向前推进',
   20325,
   2,
   17,

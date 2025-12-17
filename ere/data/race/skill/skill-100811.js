@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100811,
-  'Punkish Bite',
-  '在比赛终盘的弯道短时间内小幅向前突进，若是泥地比赛则技能效果提升并额外略微提升加速度',
   10081,
   1,
   18,

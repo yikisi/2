@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100371,
-  'Schwarzes Schwert',
-  '若是冷静地进行比赛，并在最终直线上位于第三名以后的话，速度提升；若是持续身处中团的话，变为大幅提升',
   10037,
   1,
   18,

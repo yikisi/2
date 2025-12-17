@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   111501221,
-  '――敬畏，然后臣服于我',
-  '比赛中盘初期若位于中后方则速度大幅提升，并少量回复耐力',
   11150122,
   1,
   19,

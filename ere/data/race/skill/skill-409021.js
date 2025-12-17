@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   409021,
-  '复原序列',
-  '进入中盘直线时回复耐力并小幅向前突进',
   40902,
   1,
   11,

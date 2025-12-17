@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203892,
-  '白热化',
-  '比赛终盘初期位于中后方时加速度稍微提升',
   20389,
   1,
   16,

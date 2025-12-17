@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203772,
-  '无畏之心',
-  '在比赛中盘时，速度稍微提升',
   20377,
   1,
   16,

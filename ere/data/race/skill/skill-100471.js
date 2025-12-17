@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100471,
-  '此身为剑所天成，拔剑！',
-  '比赛终盘阶段剩余400m处位于前方时速度提升，且在GⅠ比赛等大舞台上取得高人气时，速度极大提升',
   10047,
   1,
   18,

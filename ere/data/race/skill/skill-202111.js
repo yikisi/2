@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202111,
-  '势如破竹',
-  '在最终弯道处于后方位置的话则会提高速度',
   20211,
   2,
   17,

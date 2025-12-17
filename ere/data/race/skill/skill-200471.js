@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200471,
-  '不屈之心',
-  '比赛中盘被超过时，持久力回复',
   20047,
   2,
   9,

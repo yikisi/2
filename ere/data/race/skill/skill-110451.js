@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110451,
-  '转圈圈妈咪恶作剧♡',
-  '在最终直线处于好位置且和前方马娘距离很近的话更容易完成超越',
   11045,
   1,
   18,

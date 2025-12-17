@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   210321,
-  '我们奔跑的道路',
-  '最终冲刺时向前突进；体重越轻，效果越好',
   21032,
   2,
   17,

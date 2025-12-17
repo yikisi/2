@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200024,
-  '逆时针之鬼',
-  '擅长逆时针赛道，速度和力量上升',
   20002,
   3,
   1,

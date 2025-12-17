@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900511,
-  '花苞绽放之时',
-  '中盘经过弯道竞争，且终盘的最终弯道过半后自身占据好位置时，稍微提升加速度',
   90051,
   1,
   16,

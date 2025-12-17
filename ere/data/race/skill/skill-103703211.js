@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   103703211,
-  '闪光奔流',
-  '比赛中盘消耗耐力使速度一段时间内大幅提升，若是东京竞马场则不消耗耐力并稍微回复耐力',
   10370321,
   1,
   19,

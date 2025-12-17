@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   210071,
-  '想要与你一决胜负',
-  '赛程后半若位于前方则速度提高，加速度稍微提高；训练员的声望越高，效果越好',
   21007,
   2,
   17,

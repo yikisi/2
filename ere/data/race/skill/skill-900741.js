@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900741,
-  '优雅清风待花开',
-  '赛程后半段身处中团时会根据剩余持久力进行相应的长距离冲刺，速度逐渐极小幅度提升',
   90074,
   1,
   16,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202841,
-  '沙尘妙手',
-  '比赛中盘位于前方时，回复耐力并提升速度',
   20284,
   2,
   9,

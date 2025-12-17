@@ -1,12 +1,14 @@
 const { execSync } = require('child_process');
-const { writeFileSync } = require('fs');
+const { readFileSync, writeFileSync } = require('fs');
 const { join } = require('path');
 
 const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 
+const translate_dict = require('../../common/text_data.json');
 const UmaSkill = require('../../ere/data/race/model/uma-skill');
+const { generate_content } = require('../libs');
 const legend_skill_sets = require('./custom-skill-sets');
 
 const ability_time_usage_names = {},
@@ -748,9 +750,7 @@ async function chara_skill() {
   const skill_data = await find_many_skills({
     id: { in: Object.keys(skill_dict).map(Number) },
   });
-  const translate_dict = require('../../common/text_data.json');
-  const enable_translate = true;
-  const skill_text = (
+  const jp_text = (
     await prisma.text_data.findMany({
       where: {
         index: {
@@ -760,19 +760,20 @@ async function chara_skill() {
       },
     })
   ).reduce((p, c) => {
-    (p[c.index] || (p[c.index] = {}))[c.category] = c.text;
+    (p[c.index] ||= {})[c.category] = c.text;
     return p;
   }, {});
-  if (enable_translate) {
-    Object.entries(skill_text).forEach((e) => {
-      if (translate_dict[47][e[0]] && translate_dict[48][e[0]]) {
-        e[1][47] = translate_dict[47][e[0]];
-        e[1][48] = translate_dict[48][e[0]];
-      } else {
-        console.log('翻译缺失！', e[0], e[1][47]);
-      }
-    });
-  }
+  const skill_text = {};
+  Object.keys(jp_text).forEach((sid) => {
+    if (translate_dict[47][sid] && translate_dict[48][sid]) {
+      skill_text[sid] = {
+        47: translate_dict[47][sid],
+        48: translate_dict[48][sid],
+      };
+    } else {
+      console.log('翻译缺失！', sid, jp_text[sid]);
+    }
+  });
   const c_dict = { is_used_skill_id: 1 };
 
   buffer += '\n\nconst current = new Date().getTime();\n\n';
@@ -819,6 +820,10 @@ async function chara_skill() {
   });
 
   let hasError = false;
+  let c_n_out = '';
+  let c_d_out = '';
+  let j_n_out = '';
+  let j_d_out = '';
   for (const e of skill_data) {
     try {
       const id = e.id;
@@ -838,10 +843,12 @@ async function chara_skill() {
           ).text,
         );
       }
+      c_n_out += `${id} = "${e.name}";`;
+      c_d_out += `${id} = "${skill_text[id][48]}";`;
+      j_n_out += `${id} = "${jp_text[id][47]}";`;
+      j_d_out += `${id} = "${jp_text[id][48]}";`;
       // console.log(e.id);
       sbuffer += `${id},`;
-      sbuffer += `"${e.name}",`;
-      sbuffer += `"${skill_text[id][48]}",`;
       sbuffer += `${e.group_id},`;
       sbuffer += `${e.group_level},`;
       sbuffer += `${e.category},`;
@@ -915,6 +922,10 @@ async function chara_skill() {
   );
   console.log('条件参数', Object.keys(c_dict).length, '个');
 
+  if (hasError) {
+    process.exit(1);
+  }
+
   try {
     process.stdout.write(
       execSync(
@@ -925,14 +936,32 @@ async function chara_skill() {
       ),
     );
 
-    if (hasError) {
-      process.exit(1);
-    }
+    const i18n_c_n = join(__dirname, '../../ere/i18n/zh-CN/skill-names.js');
+    const i18n_c_d = join(__dirname, '../../ere/i18n/zh-CN/skill-desc.js');
+    const i18n_j_n = join(__dirname, '../../ere/i18n/ja-JP/skill-names.js');
+    const i18n_j_d = join(__dirname, '../../ere/i18n/ja-JP/skill-desc.js');
+
+    writeFileSync(
+      i18n_c_n,
+      generate_content(readFileSync(i18n_c_n, 'utf-8'), '//', c_n_out),
+    );
+    writeFileSync(
+      i18n_c_d,
+      generate_content(readFileSync(i18n_c_d, 'utf-8'), '//', c_d_out),
+    );
+    writeFileSync(
+      i18n_j_n,
+      generate_content(readFileSync(i18n_j_n, 'utf-8'), '//', j_n_out),
+    );
+    writeFileSync(
+      i18n_j_d,
+      generate_content(readFileSync(i18n_j_d, 'utf-8'), '//', j_d_out),
+    );
 
     process.stdout.write(execSync('node parse-genes.js'));
     process.stdout.write(execSync('node parse-contestants.js'));
     process.stdout.write(
-      execSync('npx eslint --fix ./ere/data/race/gene', {
+      execSync('npx eslint --fix ./ere/data/race/gene ./ere/i18n', {
         cwd: join(process.cwd(), '../..'),
       }),
     );

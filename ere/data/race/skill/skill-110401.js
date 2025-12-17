@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110401,
-  'GET DOWN',
-  '在最后弯道若是位于中间梯队并进行名次争夺则比较容易超越并摆脱纠缠',
   11040,
   1,
   18,

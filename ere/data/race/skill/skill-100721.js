@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100721,
-  '烈火缭乱，无敌之舞',
-  '最终弯道后完成超车，且在最后300米位于前方集团时，会燃起烈焰般的斗争心，提升速度',
   10072,
   1,
   18,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   101001,
-  'Never Say Never',
-  '剩余300m时位于前方，则速度少量提升若在泥地比赛中与领头赛马娘距离较近时再稍微向前突进',
   10100,
   1,
   18,

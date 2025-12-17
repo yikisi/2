@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900981,
-  '理运开天龙飞翔',
-  '在临近终盘的某处，微量提升速度',
   90098,
   1,
   16,

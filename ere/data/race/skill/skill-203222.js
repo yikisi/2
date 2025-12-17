@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203222,
-  '以攻为守',
-  '比赛中盘消耗少量耐力使速度少量提升',
   20322,
   1,
   16,

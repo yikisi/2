@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201151,
-  '独占力',
-  '在比赛最后阶段，如果在后面，就会降低前面的速度',
   20115,
   2,
   25,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   104102211,
-  '爆进！爆进！爆进——！',
-  '在直线一段时间内向前突进',
   10410221,
   1,
   19,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202552,
-  '快速',
-  '在比赛后半的随机位置稍微向前突进，并极少量回复持久力',
   20255,
   1,
   16,

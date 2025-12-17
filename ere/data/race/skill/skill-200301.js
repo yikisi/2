@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200301,
-  '伏兵◎',
-  '人气第四以下时能力更容易发挥',
   20030,
   2,
   0,

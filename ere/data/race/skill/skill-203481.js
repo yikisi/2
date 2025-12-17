@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203481,
-  '主动权',
-  '比赛终盘初期若位于前方则提升加速度',
   20348,
   2,
   17,

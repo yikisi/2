@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202881,
-  '完全燃烧',
-  '最终直线处在第二名开外且与领头距离4马身以内时，速度提升',
   20288,
   2,
   17,

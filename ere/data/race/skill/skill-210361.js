@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   210361,
-  '通往本能的桥梁',
-  '在最终直线上速度提升；训练员持有的马币越多，效果越好',
   21036,
   2,
   17,

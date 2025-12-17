@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   101331,
-  'Weaving History',
-  '在比赛中段附近短时间内少量提升速度；若是中长距离比赛，则持续时间变为2倍',
   10133,
   1,
   18,

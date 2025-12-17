@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202501,
-  '横冲直撞',
-  '临近比赛终盘位于前方时，速度提升',
   20250,
   2,
   17,

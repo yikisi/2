@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110171,
-  '击退，喧鸣之箭',
-  '比赛终盘身处前方并有被反超的危险时，会在最终弯道前燃烧斗魂，使速度持续上升',
   11017,
   1,
   18,

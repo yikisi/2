@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900831,
-  'Mission: Triumph',
-  '在比赛中段附近往后的直线处位于队伍中间时，稍微提升速度，若此时为下坡则稍微持续提升速度',
   90083,
   1,
   16,

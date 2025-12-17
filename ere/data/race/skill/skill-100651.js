@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100651,
-  '燃起来燃起来气氛炒起来！',
-  '在临近终盘的某处位于前方时速度少量提升，若是短距离或英里比赛，则速度少量持续提升',
   10065,
   1,
   18,

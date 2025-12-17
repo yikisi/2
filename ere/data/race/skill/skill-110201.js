@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110201,
-  'Do Ya Breakin!',
-  '比赛终盘的直线身处前方时，会得意洋洋地提升速度；若这恰巧也是看台对面跑道时，还会一并稍微提升加速度',
   11020,
   1,
   18,

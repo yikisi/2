@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203671,
-  '阳焰',
-  '在比赛中盘速度提升；技能发动时，若处于中后方则效果变为向前突进',
   20367,
   2,
   17,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110902111,
-  '希望终将无数次轮回',
-  '心中怀抱继承下来的强烈心愿，在比赛后半段大幅向前突进并小幅回复耐力',
   11090211,
   1,
   19,

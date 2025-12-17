@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201372,
-  '干扰',
-  '比赛终盘位于前列时，使后面马娘的视野略微变窄',
   20137,
   1,
   24,

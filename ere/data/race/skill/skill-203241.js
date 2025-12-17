@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203241,
-  '连锁反应',
-  '进入中盘直线后回复持久力并向前推进',
   20324,
   2,
   9,

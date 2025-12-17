@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110061,
-  '圣夜的奇迹奔跑！',
-  '使用技能恢复3次以上的持久力后会在比赛后半部分调整呼吸奋力向胜利迈进',
   11006,
   1,
   18,

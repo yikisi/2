@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203151,
-  '本能解放',
-  '若进行了冲刺比拼，比赛进入最后200m时向前突进',
   20315,
   2,
   17,

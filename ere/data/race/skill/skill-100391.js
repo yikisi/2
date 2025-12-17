@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100391,
-  '以姬之名，手握胜利',
-  '在最终直线进行名次争夺时，可爱地飞奔提升速度',
   10039,
   1,
   18,

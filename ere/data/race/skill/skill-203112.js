@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203112,
-  '正面突破',
-  '比赛终盘初段位于前方时加速度稍微提升',
   20311,
   1,
   16,

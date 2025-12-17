@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202131,
-  '狂乱旋风',
-  '比赛中盘位于前方时，稍微降低后方马娘的速度，自身速度提升',
   20213,
   2,
   17,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   910681,
-  '惊叹的饕餮盛宴！',
-  '在终盘的弯道处位于前方，且距离终点尚远时，短时间内稍微向前突进并提升略微加速度',
   91068,
   1,
   16,

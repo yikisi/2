@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   210281,
-  '大地的睿智',
-  '在比赛终盘中段时，速度提升；习得的技能越多则效果越强',
   21028,
   2,
   17,

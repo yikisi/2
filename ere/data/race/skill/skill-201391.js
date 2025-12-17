@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201391,
-  '差马弯道◎',
-  '在弯道的速度少量上升',
   20139,
   2,
   16,

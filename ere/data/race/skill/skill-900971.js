@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900971,
-  '情不自禁的绯色百合',
-  '剩余300m的位置处在中游位置时，速度少量提升',
   90097,
   1,
   16,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900191,
-  '尊☆最终冲—(ﾟ∀ﾟ)—刺!',
-  '在比赛终盘2次赶超的话，能够加快速度，且路线选择变得更明智',
   90019,
   1,
   16,

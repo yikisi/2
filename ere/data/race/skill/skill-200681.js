@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200681,
-  '英里支配者',
-  '比赛临近中盘时若身处前方，更容易拉开差距',
   20068,
   2,
   17,

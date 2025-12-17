@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201651,
-  '尾流',
-  '跑位贴紧前方马娘时，略微减少自身所承受的阻力',
   20165,
   1,
   16,

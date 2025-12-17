@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100111,
-  '精神一到、何事不成',
-  '在最终直线上从后方赶超时，会使用末脚少量加快速度',
   10011,
   1,
   18,

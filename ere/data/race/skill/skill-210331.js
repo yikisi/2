@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   210331,
-  '食之真谛',
-  '比赛中盘稍微向前突进，如果力量有十二分强劲则变为小幅向前突进',
   21033,
   1,
   16,

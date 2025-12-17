@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202351,
-  '沙上的舞姬',
-  '比赛序盘自己保持领先时，使跟在后方的赛马娘速度下降',
   20235,
   2,
   25,

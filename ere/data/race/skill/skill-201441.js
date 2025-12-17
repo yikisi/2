@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201441,
-  '睥睨八方',
-  '在比赛终盘使其他的马娘产生动摇',
   20144,
   2,
   25,

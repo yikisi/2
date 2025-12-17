@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100621,
-  '咚、啪、呣',
-  '比赛中期左右处于队伍中团时重新振作，回复持久力并且稍微提高速度',
   10062,
   1,
   10,

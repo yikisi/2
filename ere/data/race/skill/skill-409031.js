@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   409031,
-  '系统一切正常',
-  '比赛中盘一段时间内速度提升并回复少量耐力',
   40903,
   1,
   19,

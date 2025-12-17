@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202892,
-  '不可动摇',
-  '临近比赛中盘时，若位于后方则回复少量持久力',
   20289,
   1,
   8,

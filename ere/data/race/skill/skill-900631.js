@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900631,
-  '百炼成钢',
-  '如果能冷静地进行比赛，在最终冲刺的关键时刻会持续略微提升速度',
   90063,
   1,
   16,

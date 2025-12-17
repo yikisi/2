@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200662,
-  '观望',
-  '比赛中盘在后方时稍微不容易疲劳并提高一点加速度',
   20066,
   1,
   8,

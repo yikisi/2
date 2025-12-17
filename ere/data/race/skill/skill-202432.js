@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202432,
-  '稳健的步伐',
-  '临近终盘时处于领头或距离领头4马身以内，则速度和加速度略微提升',
   20243,
   1,
   16,

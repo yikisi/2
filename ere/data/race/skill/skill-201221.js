@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201221,
-  '耐力食取',
-  '比赛中盘处于后方的话会略微夺走前方的持久力',
   20122,
   2,
   25,

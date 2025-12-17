@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   210272,
-  '海之加护',
-  '在比赛序盘开始时，加速度稍微提升；习得的技能越多则效果越强',
   21027,
   1,
   16,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   109401211,
-  '东京咆哮魔',
-  '若是东京竞马场比赛，则在比赛终盘初段一段时间内向前突进，并略微提升加速度',
   10940121,
   1,
   19,

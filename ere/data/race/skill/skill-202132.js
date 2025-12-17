@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202132,
-  '气吞牛斗',
-  '比赛中盘位于前方时，略微降低后方马娘的速度，自身速度稍微提升',
   20213,
   1,
   16,

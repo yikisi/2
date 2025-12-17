@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100681,
-  '胜利呐喊Wasshoi！',
-  '位于前方，比赛后半的第3弯道中速度稍微提高，或者在终盘的看台对面直线赛道上向前强力冲刺',
   10068,
   1,
   18,

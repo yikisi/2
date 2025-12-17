@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201602,
-  '坚如磐石',
-  '在比赛初期发动多个技能时，加速度提高',
   20160,
   2,
   17,

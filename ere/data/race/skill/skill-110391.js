@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110391,
-  '快意刚劲',
-  '在比赛中盘之后的上坡处位于队伍中间时，上完坡后优雅地展现怪力，提升速度',
   11039,
   1,
   18,

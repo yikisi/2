@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100401,
-  'KEEP IT REAL.',
-  '比赛后半段处于中间集团并开始发力时，充分发挥实力，速度逐渐少量提高',
   10040,
   1,
   18,

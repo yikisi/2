@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100021,
-  '最前端的风景……不会让给任何人！',
-  '在比赛中后半段位于第一并拉开差距时，稍微加快速度',
   10002,
   1,
   18,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   10071,
-  '小心波澜炮！',
-  '从比赛中段进行长距离冲刺，速度略微加快',
   1007,
   1,
   18,

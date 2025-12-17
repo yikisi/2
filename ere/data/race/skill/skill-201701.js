@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201701,
-  '决死之心',
-  '在终盘的最终直线若处于好位置，则提升速度',
   20170,
   2,
   17,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100351,
-  '为你奉上，胜利奖券！',
-  '最终弯道之后进行名次争夺，在最终直线位于前方时，涌现出不服输的强烈求胜心，速度加快',
   10035,
   1,
   18,

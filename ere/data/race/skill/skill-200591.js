@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200591,
-  '迅速果断',
-  '比赛中盘位于中团以后时，速度提升',
   20059,
   2,
   17,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202161,
-  '自制力',
-  '智力上升，稍微不容易变得焦躁',
   20216,
   1,
   0,

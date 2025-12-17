@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100901,
-  "Queen's Rebirth",
-  '比赛前半段的弯道位于前方时，短时间内速度提升；若是英里或中距离比赛则在之后终盘的最终直线被后方逼近时较短时间内小幅向前突进',
   10090,
   1,
   18,

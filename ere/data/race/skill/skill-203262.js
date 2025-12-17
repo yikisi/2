@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203262,
-  '决下觉悟',
-  '比赛终盘开始时在前方则稍微提高加速度',
   20326,
   1,
   16,

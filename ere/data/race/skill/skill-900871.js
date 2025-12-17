@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900871,
-  'Silent letter',
-  '剩余400米，位于前方并被后方马娘紧追时，略微容易突围',
   90087,
   1,
   16,

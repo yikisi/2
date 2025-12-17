@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   201012,
-  '钉死后方',
-  '比赛序盘处于前方时令后方的赛马娘稍微萎缩',
   20101,
   1,
   24,

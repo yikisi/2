@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203952,
-  '天才',
-  '智力十二分高超时，智力少量提升',
   20395,
   1,
   0,

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   103902111,
-  '公主立于顶端！',
-  '最终直线位于第二名往后并距离领头4马身以内时，速度极大提升',
   10390211,
   1,
   19,

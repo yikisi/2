@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200881,
-  '先马彷徨',
-  '比赛终盘令出走策略是先马的赛马娘彷徨，使其速度略微下降',
   20088,
   1,
   24,

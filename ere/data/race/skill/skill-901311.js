@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   901311,
-  '¡Qué alegría!',
-  '比赛中间位于中后方时短时间内稍微向前突进；若是短距离或英里比赛则之后最终冲刺时短时间内小幅向前突进',
   90131,
   1,
   16,

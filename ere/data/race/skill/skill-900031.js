@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900031,
-  '究极帝王舞步',
-  '若是在比赛终盘缩短与前方对手的差距，则在最终直线上小幅提升速度',
   90003,
   1,
   16,

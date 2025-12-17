@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   102602111,
-  '完美的ERROR对策术',
-  '比赛中盘时若身处前方，则提升速度，并且稍微回复持久力',
   10260211,
   1,
   19,

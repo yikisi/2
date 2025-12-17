@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203131,
-  '闭幕者',
-  '最终直线时若处于头马或于头马1马身之内，则大幅提高速度',
   20313,
   2,
   17,

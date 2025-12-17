@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200411,
-  '容易放弃',
-  '最终直线位于末尾时更容易放弃',
   20041,
   -1,
   32,

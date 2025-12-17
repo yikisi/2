@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100161,
-  'Shadow Break',
-  '在最终弯道之后在外道完成赶超时，以怪物般的力量加快速度；如果还在中盘争夺过名次，变为大幅加快速度',
   10016,
   1,
   18,

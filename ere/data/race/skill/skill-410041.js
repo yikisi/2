@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   410041,
-  '梦想先驱者',
-  '起跑时加速度提升；之后在最终冲刺的关键时刻稍微向前突进',
   41004,
   1,
   19,

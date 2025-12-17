@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   202912,
-  '瓦解',
-  '最终弯道处若位于后方，则令前后各3人的速度极小幅下降，并稍微提升自己的速度',
   20291,
   1,
   16,

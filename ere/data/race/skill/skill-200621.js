@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   200621,
-  '沉睡的狮子',
-  '在比赛中盘积攒脚力，不容易疲劳',
   20062,
   2,
   9,

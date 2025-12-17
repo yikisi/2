@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   113301211,
-  '创世一页',
-  '在2000m～2500m的比赛，若终盘初期更早时间内进行追赶，则加速度提升，未满足条件依然在终盘初期更早时间内提升加速度',
   11330121,
   1,
   19,

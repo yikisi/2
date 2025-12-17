@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203152,
-  '干柴烈火',
-  '若进行了冲刺比拼，比赛进入最后200m时稍微向前突进',
   20315,
   1,
   16,

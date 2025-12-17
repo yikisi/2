@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110021,
-  '向海平线的彼端',
-  '进入终盘处于领头位置时稍微向前突进，若此时为第三弯道并且中盘拉开巨大差距领先时，迅速向前突进',
   11002,
   1,
   18,

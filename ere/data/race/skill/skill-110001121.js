@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   110001121,
-  '银灰斗志',
-  '准备超越时速度大幅提升，并稍微回复耐力',
   11000112,
   1,
   19,

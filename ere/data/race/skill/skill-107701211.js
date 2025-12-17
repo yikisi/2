@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   107701211,
-  '正道',
-  '比赛临近终盘时若在队伍前方则提升速度，并在之后最终冲刺时稍微提升加速度',
   10770121,
   1,
   19,

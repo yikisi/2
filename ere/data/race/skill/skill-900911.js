@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900911,
-  '豪华☆喷泉',
-  '进入终盘最终直线时若位于队伍中间，则剩余300m之后速度略微提升，如果能冷静地进行比赛则速度少量提升',
   90091,
   1,
   16,

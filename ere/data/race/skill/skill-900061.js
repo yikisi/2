@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   900061,
-  '胜利的鼓动',
-  '在最后200米处于前列时，能够开辟道路，略微容易突围',
   90006,
   1,
   16,
