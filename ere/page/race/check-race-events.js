@@ -51,8 +51,10 @@ const EtsukoLifeMarks = require('#/data/event/life-event-marks/life-event-marks-
 const MayLifeMarks = require('#/data/event/life-event-marks/life-event-marks-343');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
-const { class_enum, track_names } = require('#/data/race/model/race-info');
+const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum } = require('#/data/race/race-const');
+
+const { i18n } = require('#/i18n/selector');
 
 const rec_list = {};
 [race_enum.prix_lat].forEach((e) => (rec_list[e] ||= []).push(204));
@@ -105,8 +107,8 @@ async function check_race_events(race, info, team) {
       await print_event_name('开始采访', etsuko);
       await printAndWait([
         '在离开',
-        track_names[info.track],
-        '竞马场时，',
+        i18n().race.get_track_name(info.track),
+        '时，',
         me.get_colored_name(),
         ' 与一位记者打扮的',
         etsuko.get_phy_sex_title(),

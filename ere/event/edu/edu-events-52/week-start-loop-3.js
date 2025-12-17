@@ -1,18 +1,18 @@
 const era = require('#/era-electron');
 
 const sys_get_chara_pseudo = require('#/system/chara/sys-get-chara-pseudo');
+const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
 
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
 const simulation_game_in_event = require('#/event/snippets/simulation-game-in-event');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { get_random_entry } = require('#/utils/list-utils');
 
 const PseudoUma = require('#/data/race/model/pseudo-uma');
 const { race_enum } = require('#/data/race/race-const');
-const { attr_enum, attr_names } = require('#/data/train-const');
-const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
-const { get_random_entry } = require('#/utils/list-utils');
+const { attr_enum } = require('#/data/train-const');
 
 /**
  * @param {CharaTalk} urara
@@ -580,7 +580,9 @@ module.exports = async (urara, me, in_urara, callname) => {
     '「春乌拉拉」',
     in_urara.color,
     chara.motivation,
-    attr_names.map((e) => Math.min(era.get(`base:52:${e}`), 1200)),
+    new Array(5)
+      .fill(0)
+      .map((_, i) => Math.min(era.get(`base:52:${5 + i}`), 1200)),
     chara.style,
     [...chara.adapt_style_list],
     [...chara.adapt_distance_list],

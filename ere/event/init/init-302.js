@@ -5,7 +5,6 @@ const sys_personal_achievement = require('#/system/global/sys-calc-personal-achi
 const CustomizedInit = require('#/event/init/customized-init');
 
 const TasteLifeMarks = require('#/data/event/life-event-marks/life-event-marks-302');
-const { attr_names } = require('#/data/train-const');
 
 module.exports = class extends CustomizedInit {
   init(is_reset) {
@@ -15,7 +14,9 @@ module.exports = class extends CustomizedInit {
         era.set('callname:302:-1', '北方风味');
         era.set('callname:302:-2', '秋川弥生');
       }
-      attr_names.forEach((e) => era.set(`base:302:${e}`, 1200));
+      new Array(5)
+        .fill(0)
+        .forEach((_, i) => era.set(`base:302:${5 + i}`, 1200));
     }
   }
 };

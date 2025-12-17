@@ -1,7 +1,6 @@
 const era = require('#/era-electron');
 
-const RaceInfo = require('#/data/race/model/race-info');
-const { attr_names } = require('#/data/train-const');
+const { i18n } = require('#/i18n/selector');
 
 /**
  * @param {RaceInfo} info
@@ -10,20 +9,19 @@ const { attr_names } = require('#/data/train-const');
 async function print_race_track_chart(info) {
   era.print(
     [
-      ...(info.track
-        ? [RaceInfo.track_names[info.track], '竞马场 ']
-        : ['训练场 ']),
-      info.ground ? '泥' : '草',
-      '地 ',
+      i18n().race.get_track_name(info.track),
+      ' ',
+      i18n().n_adapt[info.ground],
+      ' ',
       info.span.toLocaleString(),
       '米跑道 ',
-      info.rotation ? (info.rotation > 0 ? '顺时针' : '逆时针') : '直线',
+      i18n().race.n_rotation[info.rotation],
     ],
     { align: 'center' },
   );
   if (info.attr_bonus.length > 0) {
     era.print(
-      ['加成属性：', info.attr_bonus.map((e) => attr_names[e]).join('、')],
+      ['加成属性：', info.attr_bonus.map((e) => i18n().n_attr[e]).join('、')],
       { align: 'center' },
     );
   }

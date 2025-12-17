@@ -454,9 +454,9 @@ module.exports = class extends Edu17UntilWeekStart {
       await era.printAndWait('露娜也清楚，日本不能在这个时候失去鲁铎象征。');
 
       get_attr_and_print_in_event(17, undefined, 0, [
-        // MAXBASENAME:0 = 体力
+        // BASENAME:0 = 体力
         -era.get('maxbase:17:0') / 2,
-        // MAXBASENAME:1 = 精力
+        // BASENAME:1 = 精力
         -era.get('maxbase:17:1') / 2,
       ]);
     } else if (event_arg === 95 + 10) {

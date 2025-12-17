@@ -761,7 +761,7 @@ module.exports = async (cid, next_cb, flags) => {
             25,
             { id: 26, limit: true },
             ...new Array(3).fill(0).map((_, i) => i + 27),
-            ...new Array(12).fill(0).map((_, i) => i + 30),
+            ...new Array(12).fill(0).map((_, i) => 30 + i),
             { id: 42, limit: true },
             43,
           ];

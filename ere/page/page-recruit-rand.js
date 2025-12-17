@@ -54,7 +54,8 @@ const {
 } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const { skills_dict } = require('#/data/race/skill/skill-const');
-const { adaptability_names, attr_names } = require('#/data/train-const');
+
+const { i18n } = require('#/i18n/selector');
 
 async function print_rec_page() {
   const me = get_chara_talk(0);
@@ -428,10 +429,14 @@ async function print_rec_page() {
         );
       }
       const adapt_info = [];
-      adaptability_names.forEach((e) => {
-        const adapt = era.get(`cflag:${selected}:${e}适性`);
+      new Array(10).fill(0).forEach((_, i) => {
+        const adapt = era.get(`cflag:${selected}:${30 + i}`);
         adapt_info.push(
-          { config: { width: 2 }, content: [e, '：'], type: 'text' },
+          {
+            config: { width: 2 },
+            content: [i18n().n_adapt[i], '：'],
+            type: 'text',
+          },
           {
             config: {
               color: adaptability_colors[adapt],
@@ -452,10 +457,11 @@ async function print_rec_page() {
             },
             type: 'divider',
           },
-          ...attr_names
-            .map((e, i) => ({
+          ...new Array(5)
+            .fill(0)
+            .map((_, i) => ({
               i,
-              n: e,
+              n: i18n().n_attr[i],
               // 属性训练加成：25-29
               v: era.get(`staticcflag:${selected}:${25 + i}`),
             }))

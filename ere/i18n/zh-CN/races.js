@@ -1,6 +1,6 @@
 class I18nRaces {
-  // GENERATED START
   0 = '出道战';
+  // GENERATED START
   1 = '少年杯';
   2 = '京都金杯';
   3 = '中山金杯';
@@ -173,6 +173,121 @@ class I18nRaces {
   170 = '阿乔斯短途锦标';
   171 = '芙蓉锦标';
   // GENERATED END
+
+  // 跑道类型简称
+  g_a_grass = '草';
+  g_a_dirt = '泥';
+  get a_ground() {
+    return [this.g_a_grass, this.g_a_dirt];
+  }
+
+  // 跑道距离简称
+  d_a_short = '短';
+  d_a_mile = '英';
+  d_a_medium = '中';
+  d_a_long = '长';
+  get a_distance() {
+    return [this.d_a_short, this.d_a_mile, this.d_a_medium, this.d_a_long];
+  }
+
+  // 跑法
+  s_a_nige = '逃';
+  s_a_senko = '先';
+  s_a_sashi = '差';
+  s_a_okimi = '追';
+  get a_style() {
+    return [this.s_a_nige, this.s_a_senko, this.s_a_sashi, this.s_a_okimi];
+  }
+
+  // 方向
+  r_left = '逆时针';
+  r_right = '顺时针';
+  r_straight = '直线';
+  get n_rotation() {
+    return [this.r_left, this.r_right, this.r_straight];
+  }
+
+  // 天气
+  w_sunny = '晴';
+  w_cloudy = '阴';
+  w_rain = '雨';
+  w_snow = '雪';
+  get n_weather() {
+    return [this.w_sunny, this.w_cloudy, this.w_rain, this.w_snow];
+  }
+
+  // 马场情况
+  m_well = '良';
+  m_semi = '稍重';
+  m_heavy = '重';
+  m_bad = '不良';
+  get n_mess() {
+    return [this.m_well, this.m_semi, this.m_heavy, this.m_bad];
+  }
+
+  // 竞马场
+  t_playground = '训练场';
+  t_sapporo = '札幌';
+  t_hakodate = '函馆';
+  t_niigata = '新泻';
+  t_fukushima = '福岛';
+  t_nakayama = '中山';
+  t_tokyo = '东京';
+  t_chukyo = '中京';
+  t_kyoto = '京都';
+  t_hanshin = '阪神';
+  t_kokura = '小仓';
+  t_ohi = '大井';
+  t_kawasaki = '川崎';
+  t_funabashi = '船桥';
+  t_morioka = '盛冈';
+  t_longchamp = '隆尚';
+  t_santa_anita = '圣安妮塔公园';
+  t_st_cloud = '圣克劳德';
+  t_chantilly = '尚蒂伊';
+  t_bashang = '从化';
+  t_shatin = '沙田';
+  t_kentucky = '丘吉尔园';
+  t_baltimore = '宾利高';
+  t_new_york = '贝蒙园';
+  t_meydan = '迈丹';
+  /** @returns {string[]} */
+  get n_track() {
+    return [
+      this.t_sapporo,
+      this.t_hakodate,
+      this.t_niigata,
+      this.t_fukushima,
+      this.t_nakayama,
+      this.t_tokyo,
+      this.t_chukyo,
+      this.t_kyoto,
+      this.t_hanshin,
+      this.t_kokura,
+      this.t_ohi,
+      this.t_kawasaki,
+      this.t_funabashi,
+      this.t_morioka,
+      this.t_longchamp,
+      this.t_santa_anita,
+      this.t_st_cloud,
+      this.t_chantilly,
+      this.t_bashang,
+      this.t_shatin,
+      this.t_kentucky,
+      this.t_baltimore,
+      this.t_new_york,
+      this.t_meydan,
+    ];
+  }
+
+  track_name_template = '%NAME%竞马场';
+  get_track_name(track) {
+    if (track >= 0) {
+      return this.track_name_template.replace('%NAME%', this.n_track[track]);
+    }
+    return this.t_playground;
+  }
 }
 
 module.exports = I18nRaces;

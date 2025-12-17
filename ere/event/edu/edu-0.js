@@ -771,9 +771,9 @@ module.exports = class extends StrangeDayEvents {
               ' 还是感觉干劲不足……',
             ]);
             get_attr_and_print_in_event(0, undefined, 0, [
-              // MAXBASENAME:0 = 体力
+              // BASENAME:0 = 体力
               -get('maxbase:0:0') * 0.2,
-              // MAXBASENAME:1 = 精力
+              // BASENAME:1 = 精力
               -get('maxbase:0:1') * 0.2,
             ]) && (await waitAnyKey());
             set('status:0:马跳S', 1);

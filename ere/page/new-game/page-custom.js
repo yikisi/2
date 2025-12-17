@@ -1,6 +1,11 @@
 const era = require('#/era-electron');
 
 const sys_change_hair = require('#/system/chara/sys-change-hair');
+const {
+  get_bust_size,
+  get_hip_size,
+  get_waist_size,
+} = require('#/system/ero/sys-calc-ero-status');
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
 
 const CharaTalk = require('#/utils/chara-talk');
@@ -29,12 +34,8 @@ const {
   get_xp,
 } = require('#/data/info-generator');
 const { back_hairs, front_hairs, top_hairs } = require('#/data/other-const');
-const { attr_names } = require('#/data/train-const');
-const {
-  get_bust_size,
-  get_hip_size,
-  get_waist_size,
-} = require('#/system/ero/sys-calc-ero-status');
+
+const { i18n } = require('#/i18n/selector');
 
 const body_hair_type = ['天生光滑', '普通类型', '生长快而硬'];
 const characteristic_type = [
@@ -184,8 +185,11 @@ function random_chara() {
   }
   era.set('cflag:0:气性', get_random_value(-3, 3));
   era.set('cstr:0:毛色', get_random_entry(uma_hairs));
-  attr_names.forEach((v) => era.set(`base:0:${v}`, 25));
-  era.add(`base:0:${get_random_entry(attr_names)}`, 100);
+  for (let i = 0; i < 5; ++i) {
+    // BASENAME:5 - 9 = 速度 - 智力
+    era.set(`base:0:${5 + i}`, 25);
+  }
+  era.add(`base:0:${get_random_value(5, 9)}`, 100);
 }
 
 function random_talent() {
@@ -253,7 +257,10 @@ async function page_custom() {
     CharaTitles.get(0).push({ c: buff_colors[2], n: '运动系爱好者', s: true });
   }
   while (flag_custom) {
-    attr_names.forEach((v) => era.set(`base:0:${v}`, 25));
+    for (let i = 0; i < 5; ++i) {
+      // BASENAME:5 - 9 = 速度 - 智力
+      era.set(`base:0:${5 + i}`, 25);
+    }
     await era.clear();
     era.printMultiColumns([
       { type: 'divider' },
@@ -288,7 +295,10 @@ async function page_custom() {
       }
       era.set('cflag:0:气性', 0);
       era.set('cstr:0:毛色', uma_hairs[0]);
-      attr_names.forEach((v) => era.add(`base:0:${v}`, 20));
+      for (let i = 0; i < 5; ++i) {
+        // BASENAME:5 - 9 = 速度 - 智力
+        era.add(`base:0:${5 + i}`, 20);
+      }
       if (era.get('flag:彩蛋机制') === 179) {
         era.set('callname:0:-2', '豚鼠子');
       } else {
@@ -793,8 +803,11 @@ async function page_custom() {
             ...get_xp(0),
             { isBr: true },
             '开发者的馈赠：',
-            attr_names.filter((e) => era.get(`base:0:${e}`) >= 100)[0] ||
-              '默认',
+            i18n().n_attr[
+              new Array(5)
+                .fill(0)
+                .findIndex((_, i) => era.get(`base:0:${5 + i}`) >= 100)
+            ] || '默认',
           ],
           type: 'text',
         },

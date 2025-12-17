@@ -38,7 +38,8 @@ const {
   gene_type_colors,
   gene_type_enum,
 } = require('#/data/race/model/uma-gene');
-const { attr_names } = require('#/data/train-const');
+
+const { i18n } = require('#/i18n/selector');
 
 const gene_limit = 27;
 
@@ -573,7 +574,7 @@ async function print_inherit_page() {
         }
         new Array(10).fill(0).forEach((_, i) =>
           // CFLAGNAME:30-39 = 草地适性 - 追马适性
-          set(`cflag:0:${i + 30}`, get(`cflag:${_src}:${i + 30}`)),
+          set(`cflag:0:${30 + i}`, get(`cflag:${_src}:${30 + i}`)),
         );
         chara_genes.get_values().forEach((e) => {
           if (e.type === gene_type_enum.base) {
@@ -675,7 +676,7 @@ async function print_inherit_page() {
               chara.get_colored_name(),
               ' 的 ',
               {
-                content: attr_names[gene.type_value],
+                content: i18n().n_attr[gene.type_value],
                 color: attr_colors[gene.type_value],
               },
               ' 现在是 ',

@@ -24,7 +24,6 @@ const { get_chara_score } = require('#/data/info-generator');
 const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_infos } = require('#/data/race/race-const');
-const { adaptability_names, attr_names } = require('#/data/train-const');
 
 /** @param {number} cid */
 function sys_handle_palace(cid) {
@@ -134,21 +133,25 @@ function sys_handle_palace(cid) {
   sys_like_chara(cid, 0, -(miss_count + aim_punish_count) * 100);
   sys_like_chara(302, 0, -aim_punish_count * 20);
   era.println();
-  const attr_list = attr_names.map((e) => era.get(`base:${cid}:${e}`));
-  const adapt_list = adaptability_names.map((e) =>
-      era.get(`cflag:${cid}:${e}适性`),
-    ),
-    { blue, pink, white } = sys_count_juels(
-      cid,
-      1,
-      attr_list,
-      adapt_list,
-      aim_count / aim_check.length,
-    ),
-    score_times = Math.max(
-      2 ** ((get_chara_score(cid, true) - 20000) / 20000),
-      1,
-    );
+  // BASENAME:5 - 9 = 速度 - 智力
+  const attr_list = new Array(5)
+    .fill(0)
+    .map((_, i) => era.get(`base:${cid}:${5 + i}`));
+  const adapt_list = new Array(10)
+    .fill(0)
+    // CFLAGNAME:30 - 39 = 草地适性 - 追马适性
+    .map((_, i) => era.get(`cflag:${cid}:${30 + i}`));
+  const { blue, pink, white } = sys_count_juels(
+    cid,
+    1,
+    attr_list,
+    adapt_list,
+    aim_count / aim_check.length,
+  );
+  const score_times = Math.max(
+    2 ** ((get_chara_score(cid, true) - 20000) / 20000),
+    1,
+  );
   era.set(`juel:${cid}:粉`, Math.floor(Math.min(pink * score_times, 200)));
   era.set(`juel:${cid}:蓝`, Math.floor(Math.min(blue * score_times, 268)));
   era.set(`juel:${cid}:白`, Math.floor(Math.min(white * score_times, 256)));

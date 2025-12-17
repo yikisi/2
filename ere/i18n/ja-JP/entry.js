@@ -28,6 +28,10 @@ module.exports = class extends I18nEntry {
   a_s_sashi = '差し';
   a_s_okimi = '追込';
 
+  edu_0 = 'ジュニア級';
+  edu_1 = 'クラシック級';
+  edu_2 = 'シニア級';
+
   clothe = new (require('#/i18n/ja-JP/clothes'))();
   race = new (require('#/i18n/ja-JP/races'))();
   skill = new (require('#/i18n/ja-JP/skill-names'))();

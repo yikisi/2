@@ -1,8 +1,8 @@
 const I18nRaces = require('#/i18n/zh-CN/races');
 
 module.exports = class extends I18nRaces {
-  // GENERATED START
   0 = 'Begin Race';
+  // GENERATED START
   1 = 'Junior Cup';
   2 = 'Kyoto Kim Pai';
   3 = 'Nakayama Kim Pai';

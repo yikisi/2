@@ -25,7 +25,7 @@ function sys_get_chara_pseudo(cid) {
   // CFLAGNAME:30-39 = 草地适性 - 追马适性
   const adapt_list = new Array(10)
     .fill(0)
-    .map((_, i) => era.get(`cflag:${cid}:${i + 30}`));
+    .map((_, i) => era.get(`cflag:${cid}:${30 + i}`));
   const debuff = era.get(`status:${cid}:客场作战`);
   const uma = new PseudoUma(
     cid,
@@ -34,8 +34,8 @@ function sys_get_chara_pseudo(cid) {
       ? get_chara_color(Math.max(era.get(`cflag:0:模版角色`), 0))
       : get_chara_color(cid),
     era.get(`cflag:${cid}:干劲`),
-    // BASENAME:5-9 = 速度 - 智力
-    new Array(5).fill(0).map((_, i) => era.get(`base:${cid}:${i + 5}`)),
+    // BASENAME:5 - 9 = 速度 - 智力
+    new Array(5).fill(0).map((_, i) => era.get(`base:${cid}:${5 + i}`)),
     era.get(`cflag:${cid}:跑法`),
     adapt_list.slice(6, 10),
     adapt_list.slice(2, 6).map((adapt) => adapt - debuff),

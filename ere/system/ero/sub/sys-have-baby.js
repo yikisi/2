@@ -27,7 +27,6 @@ const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { get_filtered_talents } = require('#/data/info-generator');
 const { gene_juel_names } = require('#/data/other-const');
 const { gene_type_colors } = require('#/data/race/model/uma-gene');
-const { adaptability_names } = require('#/data/train-const');
 
 const duplicate_names = {};
 duplicate_names['骏川缰绳'] = 1;
@@ -147,9 +146,7 @@ async function sys_have_baby(mid) {
   }
 
   init_chara(ch_id, src_id);
-  inherited_talents.forEach((talent_id) =>
-    era.set(`talent:${ch_id}:${talent_id}`, 0),
-  );
+  inherited_talents.forEach((tid) => era.set(`talent:${ch_id}:${tid}`, 0));
   let m_count = get_random_value(0, 1);
   let f_count = get_random_value(0, 1);
   /** @type {{id:number,val:number}[]} */
@@ -284,8 +281,9 @@ async function sys_have_baby(mid) {
   }
 
   let random_val;
-  adaptability_names.forEach((e) => {
-    let val = era.get(`cflag:${ch_id}:${e}适性`);
+  new Array(10).fill(0).forEach((_, i) => {
+    const cfid = 30 + i;
+    let val = era.get(`cflag:${ch_id}:${cfid}`);
     random_val = Math.random();
     if (random_val < 0.1) {
       val += random_val < 0.05 ? 1 : -1;
@@ -294,7 +292,7 @@ async function sys_have_baby(mid) {
       } else if (val < 0) {
         val = 0;
       }
-      era.set(`cflag:${ch_id}:${e}适性`, val);
+      era.set(`cflag:${ch_id}:${cfid}`, val);
     }
   });
 

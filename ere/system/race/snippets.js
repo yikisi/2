@@ -7,7 +7,9 @@ const { get_trainer_level } = require('#/data/info-generator');
 const { ability_usage_enum } = require('#/data/race/model/uma-skill');
 const { frame_rate } = require('#/data/race/race-sim-const');
 const { skills_dict } = require('#/data/race/skill/skill-const');
-const { adaptability_names, attr_enum } = require('#/data/train-const');
+const { attr_enum } = require('#/data/train-const');
+
+const { i18n } = require('#/i18n/selector');
 
 const fron_cols = 4,
   progress_width = 24 - 10 - 2 * fron_cols - 1,
@@ -258,7 +260,7 @@ module.exports = {
         },
         {
           config: { align: 'center', width: 1 },
-          content: adaptability_names[6 + uma.style].charAt(0),
+          content: i18n().race.a_style[uma.style],
           type: 'text',
         },
         {

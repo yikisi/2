@@ -26,7 +26,8 @@ const {
   foreign_race_list,
   track2location,
 } = require('#/data/race/race-location');
-const { adaptability_names } = require('#/data/train-const');
+
+const { i18n } = require('#/i18n/selector');
 
 /**
  * @param {number} chara_id
@@ -52,22 +53,18 @@ function check_register_disabled(chara_id, in_foreign) {
 }
 
 /**
- * @param {number} chara_id
- * @returns {Record<string,{color:string,content:string,fontWeight:string}>}
+ * @param {number} cid
+ * @returns {{color:string,content:string,fontWeight:string}[]}
  */
-function generate_adaptability_dict(chara_id) {
-  const dict = {};
-  adaptability_names.forEach((e, i) => {
-    if (i < 6) {
-      const a = era.get(`cflag:${chara_id}:${e}适性`);
-      dict[e.substring(0, 1)] = {
-        color: adaptability_colors[a],
-        content: get_adaptability_rank(a),
-        fontWeight: 'bold',
-      };
-    }
+function generate_adaptability_dict(cid) {
+  return new Array(6).fill(0).map((_, i) => {
+    const a = era.get(`cflag:${cid}:${30 + i}`);
+    return {
+      color: adaptability_colors[a],
+      content: get_adaptability_rank(a),
+      fontWeight: 'bold',
+    };
   });
-  return dict;
 }
 
 /**
@@ -117,39 +114,43 @@ function generate_race_dict(
 
 async function reg_race_page() {
   await game_guides.office_register();
-  const cur_round = era.get('flag:当前回合数') - 1,
-    begin_round = cur_round - (cur_round % 4),
-    team_list = sys_filter_chara('cflag', '招募状态', recruit_flags.yes).filter(
-      (chara_id) =>
-        get_custom_mec(chara_id).is_race_register_enabled() &&
-        era.get(`cflag:${chara_id}:种族`) &&
-        (!chara_id || era.get(`cflag:${chara_id}:育成回合计时`) + 1 < 3 * 48) &&
-        sys_reg_race(chara_id).curr.week !== cur_round + 1,
-    ),
-    year_begin = Math.floor(cur_round / 48) * 48;
-  let chara_id = era.get('flag:当前互动角色'),
-    chara = get_chara_talk(chara_id),
-    registered_race = sys_reg_race(chara_id).curr,
-    dict = generate_race_dict(
-      chara_id,
-      cur_round,
-      begin_round,
-      year_begin,
-      registered_race,
-    ),
-    adaptability_dict = generate_adaptability_dict(chara_id),
-    edu_weeks = era.get(`cflag:${chara_id}:育成回合计时`),
-    flag_race_reg = true,
-    flag_filter_race = true,
-    flag_hide_adaptability = true,
-    in_foreign = check_in_foreign(
-      chara_id,
-      year_begin,
-      cur_round,
-      registered_race,
-    ),
-    base_disabled_check = check_register_disabled(chara_id, in_foreign),
-    status_list = sys_get_status(chara_id);
+  const cur_round = era.get('flag:当前回合数') - 1;
+  const begin_round = cur_round - (cur_round % 4);
+  const team_list = sys_filter_chara(
+    'cflag',
+    '招募状态',
+    recruit_flags.yes,
+  ).filter(
+    (cid) =>
+      get_custom_mec(cid).is_race_register_enabled() &&
+      era.get(`cflag:${cid}:种族`) &&
+      (!cid || era.get(`cflag:${cid}:育成回合计时`) + 1 < 3 * 48) &&
+      sys_reg_race(cid).curr.week !== cur_round + 1,
+  );
+  const year_begin = Math.floor(cur_round / 48) * 48;
+  let curr = era.get('flag:当前互动角色');
+  let chara = get_chara_talk(curr);
+  let registered_race = sys_reg_race(curr).curr;
+  let dict = generate_race_dict(
+    curr,
+    cur_round,
+    begin_round,
+    year_begin,
+    registered_race,
+  );
+  let adaptability_dict = generate_adaptability_dict(curr);
+  let edu_weeks = era.get(`cflag:${curr}:育成回合计时`);
+  let flag_race_reg = true;
+  let flag_filter_race = true;
+  let flag_hide_adaptability = true;
+  let in_foreign = check_in_foreign(
+    curr,
+    year_begin,
+    cur_round,
+    registered_race,
+  );
+  let base_disabled_check = check_register_disabled(curr, in_foreign);
+  let status_list = sys_get_status(curr);
 
   while (flag_race_reg) {
     await era.clear();
@@ -169,12 +170,12 @@ async function reg_race_page() {
         },
       ],
       ...new Array(12).fill(0).map((_, i) => {
-        const round = begin_round + i,
-          year = Math.floor(round / 48),
-          month = Math.floor((round - year * 48) / 4),
-          week = round - year * 48 - month * 4,
-          date_str = `${2000 + year} 年 ${month + 1} 月 第 ${week + 1} 周`,
-          columns = [];
+        const round = begin_round + i;
+        const year = Math.floor(round / 48);
+        const month = Math.floor((round - year * 48) / 4);
+        const week = round - year * 48 - month * 4;
+        const date_str = `${2000 + year} 年 ${month + 1} 月 第 ${week + 1} 周`;
+        const columns = [];
         columns.push(
           { config: { offset: 1, width: 22 }, type: 'divider' },
           {
@@ -186,20 +187,15 @@ async function reg_race_page() {
             type: 'text',
           },
         );
-        (!chara_id || edu_weeks + round - cur_round < 48 * 3
+        (!curr || edu_weeks + round - cur_round < 48 * 3
           ? dict[round + 1] || []
           : []
         ).forEach((e) => {
-          const ground = adaptability_names[race_infos[e].ground].substring(
-            0,
-            1,
-          );
-          const distance = adaptability_names[
-            race_infos[e].distance + 2
-          ].substring(0, 1);
+          const ground = race_infos[e].ground;
+          const distance = race_infos[e].distance;
           const ag = adaptability_dict[ground];
-          const ad = adaptability_dict[distance];
-          const is_aim_race = get_custom_check(chara_id).is_aim_race(
+          const ad = adaptability_dict[2 + distance];
+          const is_aim_race = get_custom_check(curr).is_aim_race(
             e,
             edu_weeks + round - cur_round,
           );
@@ -227,7 +223,7 @@ async function reg_race_page() {
                     (is_foreign &&
                       race_infos[e].date + year_begin - cur_round <=
                         expedition_weeks) ||
-                    get_custom_mec(chara_id).is_race_disabled(e),
+                    get_custom_mec(curr).is_race_disabled(e),
                 },
                 content:
                   race_infos[e].get_colored_name_with_class().content +
@@ -244,16 +240,16 @@ async function reg_race_page() {
                   ...(flag_hide_adaptability || e === race_enum.begin_race
                     ? []
                     : [
-                        ground,
+                        i18n().race.a_ground[ground],
                         '(',
-                        adaptability_dict[ground],
+                        ag,
                         ')',
                         ' ',
-                        race_infos[e].span,
+                        race_infos[e].span.toLocaleString(),
                         ' ',
-                        distance,
+                        i18n().race.a_distance[distance],
                         '(',
-                        adaptability_dict[distance],
+                        ad,
                         ') ',
                         ...team_list
                           .filter((en) => sys_reg_race(en).curr.race === e)
@@ -283,7 +279,7 @@ async function reg_race_page() {
           config: { verticalAlign: 'middle', width: 6 },
         };
       }),
-      chara_id
+      curr
         ? [
             { type: 'divider' },
             {
@@ -319,8 +315,8 @@ async function reg_race_page() {
             return {
               accelerator: 1000 + e,
               config: {
-                buttonType: e === chara_id ? 'warning' : 'info',
-                disabled: e === chara_id,
+                buttonType: e === curr ? 'warning' : 'info',
+                disabled: e === curr,
                 width: 4,
               },
               content: era.get(`callname:${e}:-1`),
@@ -363,26 +359,26 @@ async function reg_race_page() {
     } else if (ret === 999) {
       flag_race_reg = false;
     } else if (ret >= 1000) {
-      chara_id = ret - 1000;
-      chara = get_chara_talk(chara_id);
-      registered_race = sys_reg_race(chara_id).curr;
+      curr = ret - 1000;
+      chara = get_chara_talk(curr);
+      registered_race = sys_reg_race(curr).curr;
       dict = generate_race_dict(
-        chara_id,
+        curr,
         cur_round,
         begin_round,
         year_begin,
         registered_race,
       );
-      adaptability_dict = generate_adaptability_dict(chara_id);
-      edu_weeks = era.get(`cflag:${chara_id}:育成回合计时`);
+      adaptability_dict = generate_adaptability_dict(curr);
+      edu_weeks = era.get(`cflag:${curr}:育成回合计时`);
       in_foreign = check_in_foreign(
-        chara_id,
+        curr,
         year_begin,
         cur_round,
         registered_race,
       );
-      base_disabled_check = check_register_disabled(chara_id, in_foreign);
-      status_list = sys_get_status(chara_id);
+      base_disabled_check = check_register_disabled(curr, in_foreign);
+      status_list = sys_get_status(curr);
     } else {
       if (registered_race.race === ret) {
         registered_race.race = registered_race.week = -1;

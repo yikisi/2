@@ -30,7 +30,8 @@ const EventObject = require('#/data/event/event-object');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
-const { attr_names } = require('#/data/train-const');
+
+const { i18n } = require('#/i18n/selector');
 
 const button_contents = [
   '「啊，请帮帮我吧女神大人——」',
@@ -178,8 +179,10 @@ module.exports = async () => {
             config: {
               disabled:
                 cur_id ||
-                attr_names.findIndex(
-                  (e) => era.get(`base:0:${e}`) < era.get(`maxbase:0:${e}`),
+                new Array(5).fill(0).findIndex(
+                  (_, i) =>
+                    // BASENAME:5 - 9 = 速度 - 智力
+                    era.get(`base:0:${5 + i}`) < era.get(`maxbase:0:${5 + i}`),
                 ) === -1,
             },
             content: '祈祷变得更强（200 声望）',
@@ -189,14 +192,16 @@ module.exports = async () => {
           {
             config: {
               disabled:
-                attr_names.filter(
-                  (e) =>
-                    era.get(`maxbase:${cur_id}:${e}`) -
-                      era.get(`base:${cur_id}:${e}`) <
+                new Array(5).fill(0).filter(
+                  (_, i) =>
+                    // BASENAME:5 - 9 = 速度 - 智力
+                    era.get(`maxbase:${cur_id}:${5 + i}`) -
+                      era.get(`base:${cur_id}:${5 + i}`) <
                     50,
                 ).length < 3 ||
-                attr_names.findIndex(
-                  (e) => era.get(`maxbase:${cur_id}:${e}`) < 2000,
+                new Array(5).fill(0).findIndex(
+                  // BASENAME:5 - 9 = 速度 - 智力
+                  (_, i) => era.get(`maxbase:${cur_id}:${5 + i}`) < 2000,
                 ) === -1,
             },
             content: `祈祷${cur_id ? ` ${aim.name} ` : ''}突破极限（50-500 声望）`,
@@ -455,12 +460,14 @@ module.exports = async () => {
                 ],
                 type: 'text',
               },
-              ...attr_names.map((e, i) => ({
+              ...new Array(5).fill(0).map((_, i) => ({
                 accelerator: i,
-                content: `${e}吧（+80）`,
+                content: `${i18n().n_attr[i]}（+80）`,
                 config: {
                   disabled:
-                    era.get(`base:0:${e}`) === era.get(`maxbase:0:${e}`),
+                    // BASENAME:5 - 9 = 速度 - 智力
+                    era.get(`base:0:${5 + i}`) ===
+                    era.get(`maxbase:0:${5 + i}`),
                   width: 6,
                 },
                 type: 'button',
@@ -551,9 +558,10 @@ module.exports = async () => {
                         .fill(0)
                         .map((_, i) => i)
                         .filter(
-                          (e) =>
-                            era.get(`base:0:${attr_names[e]}`) <
-                            era.get(`maxbase:0:${attr_names[e]}`),
+                          (i) =>
+                            // BASENAME:5 - 9 = 速度 - 智力
+                            era.get(`base:0:${5 + i}`) <
+                            era.get(`maxbase:0:${5 + i}`),
                         ),
                     ) + 10;
                   await era.printAndWait([
@@ -587,14 +595,15 @@ module.exports = async () => {
             break;
           case 5:
             temp = [
-              attr_names.filter(
-                (e) =>
-                  era.get(`base:${cur_id}:${e}`) ===
-                  era.get(`maxbase:${cur_id}:${e}`),
+              new Array(5).fill(0).filter(
+                (_, i) =>
+                  // BASENAME:5 - 9 = 速度 - 智力
+                  era.get(`base:${cur_id}:${5 + i}`) ===
+                  era.get(`maxbase:${cur_id}:${5 + i}`),
               ).length,
             ];
             temp.push(
-              temp >= 3 ? 50 : (3 - temp) * 100 + 200 * (temp[0] === 0),
+              temp[0] >= 3 ? 50 : (3 - temp[0]) * 100 + 200 * (temp[0] === 0),
             );
             if (
               await select_yes_or_no(
@@ -611,12 +620,14 @@ module.exports = async () => {
                 '或许可以暂缓脚步',
               )
             ) {
-              attr_names.forEach((e) => {
+              new Array(5).fill(0).forEach((_, i) => {
+                // BASENAME:5 - 9 = 速度 - 智力
                 era.set(
-                  `maxbase:${cur_id}:${e}`,
-                  Math.min(2000, era.get(`maxbase:${cur_id}:${e}`) + 100),
+                  `maxbase:${cur_id}:${5 + i}`,
+                  Math.min(2000, era.get(`maxbase:${cur_id}:${5 + i}`) + 100),
                 );
-                era.add(`cflag:${cur_id}:${e}加成`, -10);
+                // CFLAGNAME:25 - 29 = 速度加成 - 智力加成
+                era.add(`cflag:${cur_id}:${25 + i}`, -10);
               });
               if (cur_id === 0) {
                 await era.printAndWait(

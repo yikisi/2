@@ -5,7 +5,6 @@ const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks-32');
-const { attr_names } = require('#/data/train-const');
 
 /**
  * @param {CharaTalk} tachyon
@@ -242,7 +241,11 @@ module.exports = async (tachyon, me, callname, relation, love) => {
   era.println();
   await era.printAndWait('比赛的事情简单的就过去了，接下来，才是今天的重头戏');
   era.println();
-  if (attr_names.findIndex((e) => era.get(`base:32:${e}`) < 1200) === -1) {
+  if (
+    new Array(5)
+      .fill(0)
+      .findIndex((_, i) => era.get(`base:32:${5 + i}`) < 1200) === -1
+  ) {
     await tachyon.say_and_wait([
       '极限……在我们的努力之下，我可以大胆说出现在的自己已经到达了极限……',
       tachyon.get_uma_sex_title(),

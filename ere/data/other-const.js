@@ -55,4 +55,5 @@ module.exports = {
   },
   max_chara_id: 1000,
   top_hairs: ['无', '短', '中', '长', '白'],
+  year_index: [-1, 47, 95],
 };

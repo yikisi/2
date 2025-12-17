@@ -27,7 +27,6 @@ const {
 } = require('#/data/info-generator');
 const RaceHistory = require('#/data/race/model/race-history');
 const { chara_skill_dict } = require('#/data/race/skill/skill-const');
-const { attr_names } = require('#/data/train-const');
 
 /**
  * @param {number} cid
@@ -36,7 +35,7 @@ const { attr_names } = require('#/data/train-const');
 function init_chara(cid, src = 0) {
   const current = new Date().getTime();
   if (
-    (era.get(`base:${cid}:速度`) !== undefined && cid > 0) ||
+    (era.get(`base:${cid}:5`) !== undefined && cid > 0) ||
     !era.addCharacter(src > 0 ? [cid, src] : cid)
   ) {
     return;
@@ -150,8 +149,8 @@ function init_chara(cid, src = 0) {
   get_custom_mec(cid).set_callname();
   get_custom_mec(cid).set_my_name();
   get_custom_mec(cid).init_love();
-  era.set(`base:${cid}:体力`, era.get(`maxbase:${cid}:体力`));
-  era.set(`base:${cid}:精力`, era.get(`maxbase:${cid}:精力`));
+  era.set(`base:${cid}:0`, era.get(`maxbase:${cid}:0`));
+  era.set(`base:${cid}:1`, era.get(`maxbase:${cid}:1`));
   if (cid > 0) {
     if (era.get(`relation:${cid}:0`) === undefined) {
       era.set(`relation:${cid}:0`, era.get('flag:马娘初始好感'));
@@ -297,12 +296,14 @@ function reset_chara(cid, from_init) {
     } else if (!from_init) {
       era.set(`cflag:${cid}:育成回合计时`, 4800);
     }
-    attr_names.forEach((v) =>
-      era.set(`base:${cid}:${v}`, era.get(`cflag:${cid}:初始${v}`)),
-    );
-    attr_names.forEach((v) => {
-      era.set(`abl:${cid}:${v}训练等级`, 1);
-      era.set(`exp:${cid}:${v}训练经验`, 0);
+    new Array(5).fill(0).forEach((_, i) => {
+      // BASENAME:5 - 9 = 速度 - 智力
+      // CFLAGNAME:20-24 = 初始速度 - 初始智力
+      era.set(`base:${cid}:${5 + i}`, era.get(`cflag:${cid}:${20 + i}`));
+      // ABLNAME:0 - 4 = 速度训练等级 - 智力训练等级
+      era.set(`abl:${cid}:${i}`, 1);
+      // EXPNAME:5 - 9 = 速度训练经验 - 智力训练经验
+      era.set(`exp:${cid}:${5 + i}`, 0);
     });
     const src_id = era.get(`cflag:${cid}:模版角色`);
     const skill_set = chara_skill_dict[src_id > 0 ? src_id : cid] || [];
@@ -319,15 +320,15 @@ function reset_chara(cid, from_init) {
     new CharaGenes(cid).clear();
     new CharaAvailableGenes(cid).clear();
   } else {
-    attr_names.forEach((v) => {
+    new Array(5).fill(0).forEach((_, i) => {
       era.set(
-        `base:${cid}:${v}`,
-        era.set(`cflag:${cid}:${v}`, get_random_value(25, 75)),
+        `base:${cid}:${5 + i}`,
+        era.set(`cflag:${cid}:${20 + i}`, get_random_value(25, 75)),
       );
-      era.set(`cflag:${cid}:${v}加成`, 0);
+      era.set(`cflag:${cid}:${25 + i}`, 0);
     });
-    era.set(`skill:${cid}:习得技能`, []);
-    era.set(`skill:${cid}:可习得技能`, []);
+    era.set(`skill:${cid}:0`, []);
+    era.set(`skill:${cid}:1`, []);
   }
 
   sys_fix_chara_base(cid);

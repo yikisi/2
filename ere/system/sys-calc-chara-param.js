@@ -19,7 +19,6 @@ const { track_enum } = require('#/data/race/model/race-info');
 const { race_infos } = require('#/data/race/race-const');
 const {
   attr_enum,
-  attr_names,
   fail_sta_border,
   pressure_border,
 } = require('#/data/train-const');
@@ -268,12 +267,14 @@ module.exports = {
       ret = (stamina_ratio * 100) / border_fail;
     }
     // 属性超过400以后，越接近满百越难提升，各+-5%成功率
-    const attr = era.get(`base:${cid}:${attr_names[type]}`);
+    // BASENAME:5 - 9 = 速度 - 智力
+    const attr = era.get(`base:${cid}:${5 + type}`);
     if (attr > 400) {
       ret += 5 - (10 * (attr % 100)) / 100;
     }
     // 训练等级带来的额外成功率，分别为0%、1%、2%、3%、5%
-    ret += 1.25 * (era.get(`abl:${cid}:${attr_names[type]}训练等级`) - 1);
+    // ABL:0 - 4 = 速度训练等级 - 智力训练等级
+    ret += 1.25 * (era.get(`abl:${cid}:${type}`) - 1);
 
     // 结算状态加成
     ret +=

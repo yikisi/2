@@ -44,7 +44,7 @@ const {
 } = require('#/data/ero/status-const');
 const recruit_flags = require('#/data/event/recruit-flags');
 
-const { __, i18n } = require('#/i18n/selector');
+const { i18n } = require('#/i18n/selector');
 
 const levels = {
   attr_score: [
@@ -120,8 +120,6 @@ const talent_names = [
 
 const breast_talent_names = ['贫乳', '', '巨乳', '爆乳'];
 
-const title_desc = new Array(4).fill(void 0).map((_, i) => __(`title_${i}`));
-
 /**
  * @param {number} cid
  * @param {boolean} [show_true_bust=false]
@@ -158,21 +156,21 @@ function get_chara_rank(score) {
 
 /**
  * @param {number} sex
- * @param {number} begin_talent_id
+ * @param {number} start_tid
  * @returns {number[]}
  */
-function get_filtered_talents(sex, begin_talent_id) {
-  switch (begin_talent_id) {
+function get_filtered_talents(sex, start_tid) {
+  switch (start_tid) {
     case 50:
       // 名器系
       return new Array(7)
         .fill(0)
-        .map((_, i) => i + 50)
+        .map((_, i) => 50 + i)
         .filter(
-          (talent_id) =>
-            (talent_id !== 51 || sex !== 1) &&
-            (talent_id !== 54 || sex > 0) &&
-            (talent_id !== 55 || sex !== 1),
+          (tid) =>
+            (tid !== 51 || sex !== 1) &&
+            (tid !== 54 || sex > 0) &&
+            (tid !== 55 || sex !== 1),
         );
     case 60:
       // 调教完成系
@@ -180,11 +178,11 @@ function get_filtered_talents(sex, begin_talent_id) {
         .fill(0)
         .map((_, i) => 60 + i)
         .filter(
-          (talent_id) =>
-            (talent_id !== 61 || sex !== 1) &&
-            (talent_id !== 63 || sex === 0) &&
-            (talent_id !== 64 || sex !== 1) &&
-            (talent_id !== 66 || sex > 0),
+          (tid) =>
+            (tid !== 61 || sex !== 1) &&
+            (tid !== 63 || sex === 0) &&
+            (tid !== 64 || sex !== 1) &&
+            (tid !== 66 || sex > 0),
         );
   }
 }
@@ -246,8 +244,8 @@ module.exports = {
   get_chara_score(cid, is_number) {
     let score = era.get(`exp:${cid}:技能评价分`);
     score += new Array(5).fill(0).reduce(
-      // BASENAME:5-9 = 速度 - 智力
-      (s, _, i) => s + calc_attr_score(era.get(`base:${cid}:${i + 5}`)),
+      // BASENAME:5 - 9 = 速度 - 智力
+      (s, _, i) => s + calc_attr_score(era.get(`base:${cid}:${5 + i}`)),
       0,
     );
     if (is_number) {
@@ -638,7 +636,7 @@ module.exports = {
       return '-';
     }
     const time = era.get(`cflag:${cid}:育成回合计时`);
-    return `${['新秀', '经典', '资深'][Math.floor(time / 48)]}年 ${
+    return `${i18n().n_edu[Math.floor(time / 48)]} ${
       (Math.floor(time / 4) % 12) + 1
     } 月 第 ${(time % 4) + 1} 周`;
   },
@@ -647,7 +645,7 @@ module.exports = {
   get_trainer_title() {
     let level = get_trainer_level();
     const prefix = () => (level < 0 ? i18n().honour_m : i18n().m_honour[level]);
-    const title = () => title_desc[era.get('flag:惩戒力度')];
+    const title = () => i18n().n_title[era.get('flag:惩戒力度')];
     return {
       full: () => prefix() + title(),
       level,

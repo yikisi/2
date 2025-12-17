@@ -13,7 +13,6 @@ const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const UraraEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-52');
-const { attr_enum, attr_names } = require('#/data/train-const');
 
 /**
  * @param {HookArg} hook
@@ -279,11 +278,12 @@ module.exports = async (hook, extra_flag) => {
       ]);
       const attr_change = new Array(5).fill(0);
       const temp = get_random_entry(
-        Object.values(attr_enum).filter(
-          (e) =>
-            era.get(`base:52:${attr_names[e]}`) <
-            era.get(`maxbase:52:${attr_names[e]}`),
-        ),
+        new Array(5)
+          .fill(0)
+          .map((_, i) => i)
+          .filter(
+            (i) => era.get(`base:52:${5 + i}`) < era.get(`maxbase:52:${5 + i}`),
+          ),
       );
       if (temp !== undefined) {
         attr_change[temp] = 5;

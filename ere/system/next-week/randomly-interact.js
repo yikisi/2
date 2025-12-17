@@ -23,12 +23,9 @@ const { attr_colors } = require('#/data/color-const');
 const CharaInmon = require('#/data/ero/chara-inmon');
 const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const { location_enum } = require('#/data/locations');
-const {
-  attr_enum,
-  attr_names,
-  fail_sta_border,
-  time_cost,
-} = require('#/data/train-const');
+const { attr_enum, fail_sta_border, time_cost } = require('#/data/train-const');
+
+const { i18n } = require('#/i18n/selector');
 
 /** @param {number[]} in_team_list */
 function randomly_interact(in_team_list) {
@@ -49,17 +46,20 @@ function randomly_interact(in_team_list) {
       stamina_ratio >= fail_sta_border.intelligence
     ) {
       const in_beach = era.get(`cflag:${cid}:位置`) === location_enum.beach;
-      const train_need_attrs = Object.values(attr_enum).filter(
-        (attr) =>
-          era.get(`base:${cid}:${attr_names[attr]}`) <=
-            era.get(`maxbase:${cid}:${attr_names[attr]}`) &&
-          time >=
-            time_cost[
-              (in_beach
-                ? 5
-                : era.get(`abl:${cid}:${attr_names[attr]}训练等级`) || 1) - 1
-            ],
-      );
+      const train_need_attrs = new Array(5)
+        .fill(0)
+        .map((_, i) => i)
+        .filter(
+          (attr) =>
+            // BASENAME:5 - 9 = 速度 - 智力
+            era.get(`base:${cid}:${5 + attr}`) <
+              era.get(`maxbase:${cid}:${5 + attr}`) &&
+            // ABLNAME:0 - 4 = 速度训练等级 - 智力训练等级
+            time >=
+              time_cost[
+                (in_beach ? 5 : era.get(`abl:${cid}:${attr}`) || 1) - 1
+              ],
+        );
       if (train_need_attrs.length > 0) {
         const teach_chara = era.get(`cflag:${cid}:照看`);
         const train =
@@ -70,9 +70,8 @@ function randomly_interact(in_team_list) {
                 ),
               )
             : attr_enum.intelligence;
-        const level = in_beach
-          ? 5
-          : era.get(`abl:${cid}:${attr_names[train]}训练等级 `) || 1;
+        // ABLNAME:0 - 4 = 速度训练等级 - 智力训练等级
+        const level = in_beach ? 5 : era.get(`abl:${cid}:${train} `) || 1;
         if (teach_chara > 0) {
           take_care_list.push({
             chara: get_chara_talk(cid),
@@ -108,23 +107,22 @@ function randomly_interact(in_team_list) {
     add_train_exp(
       e.chara.id,
       e.train,
-      100 + era.get(`cflag:${e.chara.id}:${attr_names[e.train]}加成`),
+      // CFLAGNAME:25 - 29 = 速度加成 - 智力加成
+      100 + era.get(`cflag:${e.chara.id}:${25 + e.train}`),
     );
     if (e.teach_chara > 0 && e.level < 5) {
       let exp = add_train_exp(
         e.chara.id,
         e.train,
-        Math.max(
-          era.get(`cflag:${e.teach_chara}:${attr_names[e.train]}加成`) / 2,
-          0,
-        ),
+        // CFLAGNAME:25 - 29 = 速度加成 - 智力加成
+        Math.max(era.get(`cflag:${e.teach_chara}:${25 + e.train}`) / 2, 0),
       );
       if (
         exp >= 800 &&
         exp >= e.level * 800 + get_random_value(0, 800) &&
-        update_train_level(e.chara.id, attr_names[e.train])
+        update_train_level(e.chara.id, e.train)
       ) {
-        cost_result.unshift([`${attr_names[e.train]}训练 变得更擅长了！`]);
+        cost_result.unshift([`${i18n().n_attr[e.train]}训练 变得更擅长了！`]);
       }
     }
     get_success_base_reward(e.chara.id, e.train, e.level, train_cost, changes, {
@@ -139,7 +137,7 @@ function randomly_interact(in_team_list) {
           e.chara.get_colored_name(),
           ' 进行了 ',
           {
-            content: attr_names[e.train],
+            content: i18n().n_attr[e.train],
             color: attr_colors[e.train],
           },
           ' 训练……',
@@ -172,7 +170,7 @@ function randomly_interact(in_team_list) {
     era.println();
     era.add(`exp:${e.chara.id}:技能点数`, changes.pt_change);
   }
-  for (const train of Object.values(attr_enum)) {
+  for (let train = 0; train < 5; ++train) {
     if (!self_list[train] || self_list[train].length === 0) {
       continue;
     }
@@ -207,8 +205,8 @@ function randomly_interact(in_team_list) {
         tmp.push(
           ' 一起进行了 ',
           {
-            content: attr_names[train],
             color: attr_colors[train],
+            content: i18n().n_attr[train],
           },
           ' 方面的自主训练……',
         );
@@ -222,8 +220,8 @@ function randomly_interact(in_team_list) {
             l[0].chara.get_colored_name(),
             ' 进行了 ',
             {
-              content: attr_names[train],
               color: attr_colors[train],
+              content: i18n().n_attr[train],
             },
             ' 方面的自主训练……',
           ],
@@ -249,8 +247,10 @@ function randomly_interact(in_team_list) {
           sys_change_attr_and_print(c.chara.id, attr_enum.tp, train_cost.time),
         ];
         era.add(
-          `exp:${c.chara.id}:${attr_names[c.chara.id]}训练经验`,
-          100 + era.get(`cflag:${c.chara.id}:${attr_names[train]}加成`),
+          // EXPNAME:5 - 9 = 速度训练经验 - 智力训练经验
+          `exp:${c.chara.id}:${5 + train}`,
+          // CFLAGNAME:25 - 29 = 速度加成 - 智力加成
+          100 + era.get(`cflag:${c.chara.id}:${25 + train}`),
         );
         get_success_base_reward(
           c.chara.id,

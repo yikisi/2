@@ -25,12 +25,9 @@ const LightLifeMarks = require('#/data/event/life-event-marks/life-event-marks-3
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_trainer_train_buff } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
-const {
-  attr_enum,
-  attr_names,
-  fumble_border,
-  time_cost,
-} = require('#/data/train-const');
+const { attr_enum, fumble_border, time_cost } = require('#/data/train-const');
+
+const { i18n } = require('#/i18n/selector');
 
 /**
  * @param {number} cid
@@ -38,15 +35,16 @@ const {
  * @param {number} exp
  */
 function add_train_exp(cid, attr, exp) {
-  const train = attr_names[attr];
   if (exp <= 0) {
-    return era.get(`exp:${cid}:${train}训练经验`);
+    // EXPNAME:5 - 9 = 速度训练经验 - 智力训练经验
+    return era.get(`exp:${cid}:${5 + attr}`);
   }
-  if (era.get('cflag:345:招募状态') === recruit_flags.yes) {
+  // CFLAGNAME:66 = 招募状态
+  if (era.get('cflag:345:66') === recruit_flags.yes) {
     exp *= 1 + 0.25 * (1 + new LightLifeMarks().buff);
   }
   exp = Math.floor(exp);
-  return era.add(`exp:${cid}:${train}训练经验`, exp);
+  return era.add(`exp:${cid}:${5 + attr}`, exp);
 }
 
 /**
@@ -75,9 +73,8 @@ function get_success_base_reward(
     if (between_weeks.teach_chara > 0) {
       train_buff +=
         Math.max(
-          era.get(
-            `cflag:${between_weeks.teach_chara}:${attr_names[attr]}加成`,
-          ) || 0,
+          // CFLAGNAME:25 - 29 = 速度加成 - 智力加成
+          era.get(`cflag:${between_weeks.teach_chara}:${25 + attr}`) || 0,
           0,
         ) +
         get_custom_mec(between_weeks.teach_chara).get_take_care_buff(
@@ -147,7 +144,8 @@ function get_train_bonus(cid, attr, between_weeks) {
   const c_loc = era.get(`cflag:${cid}:位置`);
   const inmon = CharaInmon.get(cid);
   let train_buff =
-    era.get(`cflag:${cid}:${attr_names[attr]}加成`) +
+    // CFLAGNAME:25 - 29 = 速度加成 - 智力加成
+    era.get(`cflag:${cid}:${25 + attr}`) +
     era.get('flag:训练加成') +
     (5 + (sys_get_chara(cid) === 2)) *
       (era.get(`status:${cid}:摸鱼`) ? -4 : era.get(`cflag:${cid}:干劲`)) +
@@ -191,14 +189,16 @@ function get_train_bonus(cid, attr, between_weeks) {
 }
 
 /**
+ * ABLNAME:0 - 4 = 速度训练等级 - 智力训练等级
+ * EXPNAME:5 - 9 = 速度训练经验 - 智力训练经验
  * @param {number} cid
- * @param {string} train
+ * @param {number} train
  * @returns {boolean}
  */
 function update_train_level(cid, train) {
-  if (era.get(`abl:${cid}:${train}训练等级`) < 5) {
-    era.add(`abl:${cid}:${train}训练等级`, 1);
-    era.set(`exp:${cid}:${train}训练经验`, 0);
+  if (era.get(`abl:${cid}:${train}`) < 5) {
+    era.add(`abl:${cid}:${train}`, 1);
+    era.set(`exp:${cid}:${5 + train}`, 0);
     return true;
   }
   return false;
@@ -221,7 +221,8 @@ module.exports = {
     const t_level =
       era.get(`cflag:${cid}:位置`) === location_enum.beach
         ? 5
-        : era.get(`abl:${cid}:${attr_names[attr]}训练等级`) || 1;
+        : // ABLNAME:0 - 4 = 速度训练等级 - 智力训练等级
+          era.get(`abl:${cid}:${attr}`) || 1;
     const t_cost = {
       stamina: -time_cost[t_level - 1] * get_random_value(0.9, 1.2, true),
       time: -time_cost[t_level - 1],
@@ -282,17 +283,18 @@ module.exports = {
       const exp = add_train_exp(
         cid,
         attr,
-        Math.max(era.get(`cflag:${cid}:${attr_names[attr]}加成`) + 100, 50),
+        // CFLAGNAME:25 - 29 = 速度加成 - 智力加成
+        Math.max(era.get(`cflag:${cid}:${25 + attr}`) + 100, 50),
       );
 
       if (
         exp >= 800 &&
         exp >= t_level * 800 + get_random_value(0, 800) &&
-        update_train_level(cid, attr_names[attr])
+        update_train_level(cid, attr)
       ) {
         buffer.push({
           config: { offset: 1, width: 23 },
-          content: `${attr_names[attr]}训练 变得更擅长了！`,
+          content: `${i18n().n_attr[attr]}训练 变得更擅长了！`,
           type: 'text',
         });
       }

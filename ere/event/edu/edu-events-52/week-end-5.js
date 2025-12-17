@@ -14,7 +14,6 @@ const event_hooks = require('#/data/event/event-hooks');
 const { location_enum } = require('#/data/locations');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum, race_infos } = require('#/data/race/race-const');
-const { attr_names } = require('#/data/train-const');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,CharaTalk,string,UraraEduMarks,EventObject):Promise<*>>} handlers */
 module.exports = (handlers) => {
@@ -602,13 +601,16 @@ module.exports = (handlers) => {
     event_object,
   ) => {
     if (edu_marks.loop > 0) {
-      const attr_cache = attr_names.map((e) => era.get(`base:52:${e}`)),
-        motivation_cache = era.get('cflag:52:干劲');
+      const attr_cache = new Array(5)
+        .fill(0)
+        .map((_, i) => era.get(`base:52:${5 + i}`));
+      // CFLAGNAME:40 = 干劲
+      const motivation_cache = era.get('cflag:52:40');
       if (await era.loadData(52)) {
         CustomizedEdu.load_game();
       }
-      attr_cache.forEach((e, i) => era.set(`base:52:${attr_names[i]}`, e));
-      era.set('cflag:52:干劲', motivation_cache);
+      attr_cache.forEach((e, i) => era.set(`base:52:${5 + i}`, e));
+      era.set('cflag:52:40', motivation_cache);
       new UraraEduMarks().loop--;
       add_event(event_hooks.week_start, event_object);
       return true;

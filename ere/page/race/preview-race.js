@@ -22,8 +22,6 @@ const {
   get_attr_rank,
   get_rank_level,
 } = require('#/data/info-generator');
-const RaceInfo = require('#/data/race/model/race-info');
-const { adaptability_names, attr_names } = require('#/data/train-const');
 
 const { i18n } = require('#/i18n/selector');
 
@@ -45,7 +43,7 @@ function generate_attribute_info(chara) {
           offset: 1,
           width: 5,
         },
-        content: attr_names[index],
+        content: i18n().n_attr[index],
         type: 'text',
       },
       {
@@ -59,7 +57,7 @@ function generate_attribute_info(chara) {
             content: `${value.toLocaleString()} (${rank})`,
             title: attr_buff_list.length
               ? `${value.toLocaleString()}=${Math.floor(
-                  era.get(`base:${chara.index_chara}:${attr_names[index]}`),
+                  era.get(`base:${chara.index_chara}:${5 + index}`),
                 )}(基础)${attr_buff_list.join('')}`
               : void 0,
           },
@@ -94,15 +92,12 @@ async function preview_race(
     },
     {
       config: { align: 'center' },
-      content: `${info.track > 0 ? RaceInfo.track_names[info.track] : '训练场'} ${adaptability_names[
-        info.ground
-      ].substring(0, 1)} ${info.span.toLocaleString()}m (${adaptability_names[
-        info.distance + 2
-      ].substring(
-        0,
-        1,
-      )}) ${RaceInfo.rotation_names[info.rotation]} · ${RaceInfo.weather_names[info.weather]} ${
-        RaceInfo.mess_names[info.mess]
+      content: `${info.track >= 0 ? i18n().race.n_track[info.track] : i18n().race.t_playground} ${
+        i18n().race.a_ground[info.ground]
+      } ${info.span.toLocaleString()}m (${
+        i18n().race.a_distance[info.distance]
+      }) ${i18n().race.n_rotation[info.rotation]} · ${i18n().race.n_weather[info.weather]} ${
+        i18n().race.n_mess[info.mess]
       }`,
       type: 'text',
     },
@@ -226,7 +221,7 @@ async function preview_race(
           {
             config: { align: 'center', width: 12 },
             content: [
-              `${adaptability_names[info.ground]}：`,
+              `${i18n().n_adapt[info.ground]} `,
               {
                 color: adaptability_colors[cur_chara.adapts.ground],
                 content: get_adaptability_rank(cur_chara.adapts.ground),
@@ -235,7 +230,8 @@ async function preview_race(
                   cur_chara.ground_buffs.length > 0
                     ? `${get_adaptability_rank(cur_chara.adapts.ground)}=${get_adaptability_rank(
                         era.get(
-                          `cflag:${cur_chara.index_chara}:${adaptability_names[info.ground]}适性`,
+                          // CFLAGNAME:30 - 31 = 草地适性 - 泥地适性
+                          `cflag:${cur_chara.index_chara}:${30 + info.ground}`,
                         ),
                       )}(基础)${cur_chara.ground_buffs.join('')}`
                     : void 0,
@@ -246,7 +242,7 @@ async function preview_race(
           {
             config: { align: 'center', width: 12 },
             content: [
-              `${adaptability_names[info.distance + 2]}：`,
+              `${i18n().n_adapt[info.distance + 2]} `,
               {
                 color: adaptability_colors[cur_chara.adapts.distance],
                 content: get_adaptability_rank(cur_chara.adapts.distance),
@@ -255,7 +251,8 @@ async function preview_race(
                   cur_chara.dis_buffs.length > 0
                     ? `${get_adaptability_rank(cur_chara.adapts.distance)}=${get_adaptability_rank(
                         era.get(
-                          `cflag:${cur_chara.index_chara}:${adaptability_names[2 + info.distance]}适性`,
+                          // CFLAGNAME:32 - 25 = 短距离适性 - 长距离适性
+                          `cflag:${cur_chara.index_chara}:${22 + info.distance}`,
                         ),
                       )}(基础)${cur_chara.dis_buffs.join('')}`
                     : void 0,
@@ -273,7 +270,7 @@ async function preview_race(
                     buttonType: cur_chara.style === i ? 'warning' : 'info',
                     width: 6,
                   },
-                  content: `${adaptability_names[6 + i].substring(0, 1)} ${strategy_ability[i]}`,
+                  content: `${i18n().race.a_style[i]} ${strategy_ability[i]}`,
                   type: 'button',
                 }
               : {
@@ -284,7 +281,7 @@ async function preview_race(
                       ? { color: el_warning_color, fontWeight: 'bold' }
                       : {}),
                   },
-                  content: `${adaptability_names[6 + i].substring(0, 1)} ${strategy_ability[i]}`,
+                  content: `${i18n().race.a_style[i]} ${strategy_ability[i]}`,
                   type: 'text',
                 },
           ),
@@ -324,10 +321,7 @@ async function preview_race(
               disableWarning: true,
               width: 4,
             },
-            content: `${uma.name} ${adaptability_names[6 + uma.style].substring(
-              0,
-              1,
-            )}`,
+            content: `${uma.name} ${i18n().race.a_style[uma.style]}`,
             type: 'button',
           })),
           {

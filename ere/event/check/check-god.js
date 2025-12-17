@@ -18,7 +18,8 @@ const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
-const { attr_names } = require('#/data/train-const');
+
+const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends CustomizedCheck {
   check_and_get_titles(aim_check) {
@@ -77,8 +78,10 @@ module.exports = class extends CustomizedCheck {
             {
               c: 200,
               d:
-                attr_names.findIndex(
-                  (e) => era.get(`base:0:${e}`) < era.get(`maxbase:0:${e}`),
+                new Array(5).fill(0).findIndex(
+                  (_, i) =>
+                    // BASENAME:5 - 9 = 速度 - 智力
+                    era.get(`base:0:${5 + i}`) < era.get(`maxbase:0:${5 + i}`),
                 ) === -1,
               n: '变得更强（200 声望）',
             },
@@ -123,12 +126,13 @@ module.exports = class extends CustomizedCheck {
           case 3:
             era.print('想获得什么属性呢？');
             era.printMultiColumns([
-              ...attr_names.map((e, i) => ({
+              ...new Array(5).fill(0).map((_, i) => ({
                 accelerator: i,
-                content: `${e}（+80）`,
+                content: `${i18n().n_attr[i]}（+80）`,
                 config: {
                   disabled:
-                    era.get(`base:0:${e}`) === era.get(`maxbase:0:${e}`),
+                    era.get(`base:0:${5 + i}`) ===
+                    era.get(`maxbase:0:${5 + i}`),
                   width: 6,
                 },
                 type: 'button',
@@ -148,12 +152,13 @@ module.exports = class extends CustomizedCheck {
                 ret = sys_change_attr_and_print(
                   0,
                   get_random_entry(
-                    attr_names
-                      .map((e, i) => [e, i])
+                    new Array(5)
+                      .fill(0)
+                      .map((_, i) => i)
                       .filter(
-                        (e) =>
-                          era.get(`base:0:${e[0]}`) <
-                          era.get(`maxbase:0:${e[0]}`),
+                        (i) =>
+                          era.get(`base:0:${5 + i}`) <
+                          era.get(`maxbase:0:${5 + i}`),
                       )
                       .map((e) => e[1]),
                   ),
@@ -173,15 +178,19 @@ module.exports = class extends CustomizedCheck {
               recruit_flags.yes,
             ).filter((cur_id) =>
               ret === 4
-                ? attr_names.filter(
-                    (e) =>
-                      era.get(`maxbase:${cur_id}:${e}`) -
-                        era.get(`base:${cur_id}:${e}`) <
-                      50,
-                  ).length >= 3 &&
-                  attr_names.findIndex(
-                    (e) => era.get(`maxbase:${cur_id}:${e}`) < 2000,
-                  ) !== -1
+                ? new Array(5)
+                    .fill(0)
+                    .filter(
+                      (_, i) =>
+                        era.get(`maxbase:${cur_id}:${5 + i}`) -
+                          era.get(`base:${cur_id}:${5 + i}`) <
+                        50,
+                    ).length >= 3 &&
+                  new Array(5)
+                    .fill(0)
+                    .findIndex(
+                      (_, i) => era.get(`maxbase:${cur_id}:${5 + i}`) < 2000,
+                    ) !== -1
                 : era.get(`status:${cur_id}:熬夜`) ||
                   era.get(`status:${cur_id}:发胖`) ||
                   era.get(`status:${cur_id}:偏头痛`) ||
@@ -194,11 +203,13 @@ module.exports = class extends CustomizedCheck {
                 ...temp_list.map((cur_id) => {
                   let cost;
                   if (ret === 4) {
-                    cost = attr_names.filter(
-                      (e) =>
-                        era.get(`base:${cur_id}:${e}`) ===
-                        era.get(`maxbase:${cur_id}:${e}`),
-                    ).length;
+                    cost = new Array(5)
+                      .fill(0)
+                      .filter(
+                        (_, i) =>
+                          era.get(`base:${cur_id}:${5 + i}`) ===
+                          era.get(`maxbase:${cur_id}:${5 + i}`),
+                      ).length;
                     cost =
                       cost >= 3 ? 50 : (3 - cost) * 100 + 200 * (cost === 0);
                   } else {
@@ -220,15 +231,19 @@ module.exports = class extends CustomizedCheck {
               if (ret[1] !== 9999) {
                 if (ret[0] === 4) {
                   let limited_count = 0;
-                  attr_names.forEach((e) => {
+                  new Array(5).fill(0).forEach((_, i) => {
                     limited_count +=
-                      era.get(`base:${ret[1]}:${e}`) ===
-                      era.get(`maxbase:${ret[1]}:${e}`);
+                      era.get(`base:${ret[1]}:${5 + i}`) ===
+                      era.get(`maxbase:${ret[1]}:${5 + i}`);
                     era.set(
-                      `maxbase:${ret[1]}:${e}`,
-                      Math.min(2000, era.get(`maxbase:${ret[1]}:${e}`) + 100),
+                      `maxbase:${ret[1]}:${5 + i}`,
+                      Math.min(
+                        2000,
+                        era.get(`maxbase:${ret[1]}:${5 + i}`) + 100,
+                      ),
                     );
-                    era.add(`cflag:${ret[1]}:${e}加成`, -10);
+                    // CFLAGNAME:25 - 29 = 速度加成 - 智力加成
+                    era.add(`cflag:${ret[1]}:${i + 25}`, -10);
                   });
                   era.print([
                     get_chara_talk(ret[1]).get_colored_name(),

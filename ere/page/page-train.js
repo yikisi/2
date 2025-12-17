@@ -38,12 +38,9 @@ const {
   common_skills,
   skills_dict,
 } = require('#/data/race/skill/skill-const');
-const {
-  adaptability_names,
-  attr_enum,
-  attr_names,
-  time_cost,
-} = require('#/data/train-const');
+const { attr_enum, time_cost } = require('#/data/train-const');
+
+const { i18n } = require('#/i18n/selector');
 
 const skill_limit = 27;
 
@@ -179,10 +176,11 @@ module.exports = async () => {
         : 0;
 
     if (race) {
-      const columns = [],
-        adaptivity = adaptability_names.map((e) =>
-          era.get(`cflag:${cid}:${e}适性`),
-        );
+      const columns = [];
+      const adaptivity = new Array(10)
+        .fill(0)
+        // CFLAGNAME:30-39 = 草地适性 - 追马适性
+        .map((_, i) => era.get(`cflag:${cid}:${30 + i}`));
       const chara_score = get_chara_score(cid);
       let chara_level = get_rank_level(chara_score);
       columns.push(
@@ -212,35 +210,34 @@ module.exports = async () => {
           type: 'text',
         },
       );
-      attr_names.forEach((k, index) => {
-        let buff = get_train_bonus(cid, index);
-        if (index === attr_enum.speed && era.get(`status:${cid}:发胖`)) {
+      for (let i = 0; i < 5; ++i) {
+        let buff = get_train_bonus(cid, i);
+        if (i === attr_enum.speed && era.get(`status:${cid}:发胖`)) {
           buff = -100;
         }
+        // BASENAME:5 - 9 = 速度 - 智力
+        const val = era.get(`base:${cid}:${5 + i}`);
+        const limit = era.get(`maxbase:${cid}:${5 + i}`);
         columns.push(
           {
-            config: { width: 4 },
-            content: k,
+            config: { width: 8 },
+            content: i18n().n_attr[i],
             type: 'text',
           },
           {
             config: {
-              color: attr_colors[index],
+              color: attr_colors[i],
               height: 22,
-              width: 20,
+              width: 16,
             },
-            inContent: `${Math.floor(era.get(`base:${cid}:${k}`))}/${era.get(
-              `maxbase:${cid}:${k}`,
-            )} ${
+            inContent: `${Math.floor(val)}/${limit} ${
               buff < 0 ? buff.toFixed(0) : `+${buff.toFixed(0)}`
-            }% ${get_attr_rank(era.get(`base:${cid}:${k}`))}`,
-            percentage:
-              (era.get(`base:${cid}:${k}`) * 100) /
-              era.get(`maxbase:${cid}:${k}`),
+            }% ${get_attr_rank(val)}`,
+            percentage: (val * 100) / limit,
             type: 'progress',
           },
         );
-      });
+      }
       era.printInColRows(
         {
           columns,
@@ -259,15 +256,16 @@ module.exports = async () => {
               type: 'text',
             },
             {
-              config: { width: 3 },
+              config: { width: 4 },
               content: [
-                '草',
+                i18n().race.g_a_grass,
                 {
                   color: adaptability_colors[adaptivity[0]],
                   content: get_adaptability_rank(adaptivity[0]),
                   fontWeight: 'bold',
                 },
-                '·泥',
+                '·',
+                i18n().race.g_a_dirt,
                 {
                   color: adaptability_colors[adaptivity[1]],
                   content: get_adaptability_rank(adaptivity[1]),
@@ -284,25 +282,28 @@ module.exports = async () => {
             {
               config: { width: 6 },
               content: [
-                '短',
+                i18n().race.d_a_short,
                 {
                   color: adaptability_colors[adaptivity[2]],
                   content: get_adaptability_rank(adaptivity[2]),
                   fontWeight: 'bold',
                 },
-                '·英',
+                '·',
+                i18n().race.d_a_mile,
                 {
                   color: adaptability_colors[adaptivity[3]],
                   content: get_adaptability_rank(adaptivity[3]),
                   fontWeight: 'bold',
                 },
-                '·中',
+                '·',
+                i18n().race.d_a_medium,
                 {
                   color: adaptability_colors[adaptivity[4]],
                   content: get_adaptability_rank(adaptivity[4]),
                   fontWeight: 'bold',
                 },
-                '·长',
+                '·',
+                i18n().race.d_a_long,
                 {
                   color: adaptability_colors[adaptivity[5]],
                   content: get_adaptability_rank(adaptivity[5]),
@@ -317,27 +318,33 @@ module.exports = async () => {
               type: 'text',
             },
             {
-              config: { width: 6 },
+              config: { width: 5 },
               content: [
-                '逃',
+                i18n().race.s_a_nige,
                 {
                   color: adaptability_colors[adaptivity[6]],
                   content: get_adaptability_rank(adaptivity[6]),
                   fontWeight: 'bold',
                 },
-                '·先',
+                '·',
+                i18n().race.s_a_senko,
+
                 {
                   color: adaptability_colors[adaptivity[7]],
                   content: get_adaptability_rank(adaptivity[7]),
                   fontWeight: 'bold',
                 },
-                '·差',
+                '·',
+                i18n().race.s_a_sashi,
+
                 {
                   color: adaptability_colors[adaptivity[8]],
                   content: get_adaptability_rank(adaptivity[8]),
                   fontWeight: 'bold',
                 },
-                '·追',
+                '·',
+                i18n().race.s_a_okimi,
+
                 {
                   color: adaptability_colors[adaptivity[9]],
                   content: get_adaptability_rank(adaptivity[9]),
@@ -423,8 +430,9 @@ module.exports = async () => {
       (era.get(`cflag:${cid}:位置`) === location_enum.beach) * 5;
     const train_enabled = sys_check_train_enabled(cid);
     era.printMultiColumns(
-      attr_names.map((e, i) => {
-        const train_level = beach_level || era.get(`abl:${cid}:${e}训练等级`);
+      new Array(5).fill(0).map((_, i) => {
+        // ABLNAME:0 - 4 = 速度训练等级 - 智力训练等级
+        const train_level = beach_level || era.get(`abl:${cid}:${i}`);
         const train_cost = time_cost[train_level - 1] * (1 + debuff[1]);
         return {
           accelerator: 200 + i,
@@ -437,7 +445,7 @@ module.exports = async () => {
               chara_stamina === 0 ||
               !train_enabled,
           },
-          content: `${e}训练 Lv.${train_level}\n成功率：${
+          content: `${i18n().n_attr[i]}训练 Lv.${train_level}\n成功率：${
             train_level ? sys_get_succ_rate(cid, i, extra_buff) : 0
           }%`,
           type: 'button',
@@ -485,15 +493,15 @@ module.exports = async () => {
             skill_control.add(...generated_skills);
           }
         } else {
-          let buffer = get_skill_buffer(cid, skill_control, pt, discount),
-            skill_filter = -1,
-            ground_filter = -1,
-            dis_filter = -1,
-            style_filter = -1,
-            ability_filter = -1,
-            enable_filter = false,
-            page = 1,
-            skill_page_size;
+          let buffer = get_skill_buffer(cid, skill_control, pt, discount);
+          let skill_filter = -1;
+          let ground_filter = -1;
+          let dis_filter = -1;
+          let style_filter = -1;
+          let ability_filter = -1;
+          let enable_filter = false;
+          let page = 1;
+          let skill_page_size;
           while (flag_skill) {
             /** @type {(function(UmaSkill):boolean)[]} */
             const filters = [
@@ -594,7 +602,7 @@ module.exports = async () => {
                         content: '场地类型',
                         type: 'text',
                       },
-                      ...['全部', ...adaptability_names.slice(0, 2)].map(
+                      ...['全部', ...i18n().n_adapt.slice(0, 2)].map(
                         (e, i) => ({
                           accelerator: 940 + i,
                           config: {
@@ -613,7 +621,7 @@ module.exports = async () => {
                         content: '距离类型',
                         type: 'text',
                       },
-                      ...['全部', ...adaptability_names.slice(2, 6)].map(
+                      ...['全部', ...i18n().n_adapt.slice(2, 6)].map(
                         (e, i) => ({
                           accelerator: 950 + i,
                           config: {
@@ -632,18 +640,16 @@ module.exports = async () => {
                         content: '策略类型',
                         type: 'text',
                       },
-                      ...['全部', ...adaptability_names.slice(6)].map(
-                        (e, i) => ({
-                          accelerator: 960 + i,
-                          config: {
-                            buttonType:
-                              i === style_filter + 1 ? 'warning' : 'info',
-                            width: 3,
-                          },
-                          content: e,
-                          type: 'button',
-                        }),
-                      ),
+                      ...['全部', ...i18n().n_adapt.slice(6)].map((e, i) => ({
+                        accelerator: 960 + i,
+                        config: {
+                          buttonType:
+                            i === style_filter + 1 ? 'warning' : 'info',
+                          width: 3,
+                        },
+                        content: e,
+                        type: 'button',
+                      })),
                     ],
                     [
                       {

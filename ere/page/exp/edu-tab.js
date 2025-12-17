@@ -10,7 +10,6 @@ const {
   get_rank_level,
   get_train_time,
 } = require('#/data/info-generator');
-const { adaptability_names, attr_names } = require('#/data/train-const');
 
 const { i18n } = require('#/i18n/selector');
 
@@ -33,14 +32,14 @@ module.exports = {
         },
         ...(flags.in_growth
           ? [{ content: growth_info, type: 'text' }]
-          : attr_names.map((e, i) => ({
+          : new Array(5).fill(0).map((_, i) => ({
               config: { width: 4, color: attr_colors[i] },
               content: [
-                e,
+                i18n().n_attr[i],
                 '：',
                 {
                   content: Math.floor(
-                    era.get(`base:${chara.id}:${e}`),
+                    era.get(`base:${chara.id}:${5 + i}`),
                   ).toLocaleString(),
                   fontWeight: 'bold',
                 },
@@ -51,19 +50,25 @@ module.exports = {
     if (era.get(`cflag:${chara.id}:种族`)) {
       if (
         !chara.id ||
-        era.get(`cflag:${chara.id}:育成回合计时`) < 3 * 48 ||
-        era.get(`cflag:${chara.id}:殿堂`)
+        // CFLAGNAME:48 = 育成回合计时
+        era.get(`cflag:${chara.id}:48`) < 3 * 48 ||
+        // CFLAGNAME:47 = 殿堂
+        era.get(`cflag:${chara.id}:47`)
       ) {
-        const out_of_train = era.get(`cflag:${chara.id}:殿堂`),
-          train_time = get_train_time(chara.id),
-          chara_score = get_chara_score(chara.id),
-          chara_level = get_rank_level(chara_score),
-          adapt_info = [];
-        adaptability_names.forEach((e, i) => {
+        const out_of_train = era.get(`cflag:${chara.id}:47`);
+        const train_time = get_train_time(chara.id);
+        const chara_score = get_chara_score(chara.id);
+        const chara_level = get_rank_level(chara_score);
+        const adapt_info = [];
+        new Array(10).fill(0).forEach((_, i) => {
           // 适性ID：30-40
           const adapt = era.get(`cflag:${chara.id}:${30 + i}`);
           adapt_info.push(
-            { config: { width: 3 }, content: [e, '：'], type: 'text' },
+            {
+              config: { width: 3 },
+              content: [i18n().n_adapt[i], '：'],
+              type: 'text',
+            },
             {
               config: {
                 color: adaptability_colors[adapt],
@@ -101,7 +106,8 @@ module.exports = {
                     },
                     ' ｜ ',
                     train_time.length > 1
-                      ? `${train_time}${era.get(`cflag:${chara.id}:育成次数`) ? ` (第 ${era.get(`cflag:${chara.id}:育成次数`) + 1} 轮)` : ''} ｜ `
+                      ? // CFLAGNAME:49 = 育成次数
+                        `${train_time}${era.get(`cflag:${chara.id}:49`) ? ` (第 ${era.get(`cflag:${chara.id}:49`) + 1} 轮)` : ''} ｜ `
                       : '',
                     '拥有 ',
                     {

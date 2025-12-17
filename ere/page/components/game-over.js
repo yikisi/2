@@ -199,17 +199,17 @@ async function game_over(again) {
           case 2:
             era.set('talent:0:调教度', 6);
             new Array(3).fill(0).forEach((_, i) => {
-              era.set(`talent:0:${i + 60}`, 2);
-              era.set(`talent:0:${i + 64}`, 2);
+              era.set(`talent:0:${60 + i}`, 2);
+              era.set(`talent:0:${64 + i}`, 2);
             });
             new Array(4)
               .fill(0)
-              .forEach((_, i) => era.set(`talent:0:${i + 50}`, 1));
+              .forEach((_, i) => era.set(`talent:0:${50 + i}`, 1));
             era.set('talent:0:名穴', 1);
             era.set('talent:0:魔尻', 1);
             new Array(4)
               .fill(0)
-              .forEach((_, i) => era.set(`talent:0:${i + 74}`, 1));
+              .forEach((_, i) => era.set(`talent:0:${74 + i}`, 1));
             era.set('talent:0:抖S', 0);
             era.set('talent:0:喜欢责骂', 1);
             era.set('talent:0:喜欢痛苦', 1);

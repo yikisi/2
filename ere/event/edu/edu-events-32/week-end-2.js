@@ -22,7 +22,6 @@ const event_hooks = require('#/data/event/event-hooks');
 const { location_enum } = require('#/data/locations');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum, race_infos } = require('#/data/race/race-const');
-const { attr_names } = require('#/data/train-const');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},TachyonEduMarks,number,number,EventObject):Promise>} handlers */
 module.exports = (handlers) => {
@@ -242,7 +241,11 @@ module.exports = (handlers) => {
       ' 都必须经过一番苦战',
     ]);
     await era.printAndWait('除此之外……');
-    if (attr_names.findIndex((e) => era.get(`base:32:${e}`) < 1200) === -1) {
+    if (
+      new Array(5)
+        .fill(0)
+        .findIndex((_, i) => era.get(`base:32:${5 + i}`) < 1200) === -1
+    ) {
       await era.printAndWait([
         '虽然能力上足够，但在比赛经验上，以及几个月没踏上赛场的 ',
         tachyon.get_colored_name(),

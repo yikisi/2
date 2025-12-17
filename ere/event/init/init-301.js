@@ -5,7 +5,6 @@ const sys_personal_achievement = require('#/system/global/sys-calc-personal-achi
 const CustomizedInit = require('#/event/init/customized-init');
 
 const TokinoLifeMarks = require('#/data/event/life-event-marks/life-event-marks-301');
-const { attr_names } = require('#/data/train-const');
 
 module.exports = class extends CustomizedInit {
   init(is_reset) {
@@ -24,7 +23,9 @@ module.exports = class extends CustomizedInit {
         'callname:301:305',
         `安心泽${era.get('cflag:301:性别') === 1 ? '先生' : '小姐'}`,
       );
-      attr_names.forEach((e) => era.set(`base:301:${e}`, 1200));
+      new Array(5)
+        .fill(0)
+        .forEach((_, i) => era.set(`base:301:${5 + i}`, 1200));
     }
   }
 };

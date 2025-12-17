@@ -31,7 +31,8 @@ const recruit_flags = require('#/data/event/recruit-flags');
 const LoveLimitStatus = require('#/data/love-limit-status');
 const { gene_juel_names } = require('#/data/other-const');
 const RaceHistory = require('#/data/race/model/race-history');
-const { attr_names } = require('#/data/train-const');
+
+const { i18n } = require('#/i18n/selector');
 
 /**
  * @param {number[]} characters
@@ -359,17 +360,17 @@ async function reset_status(
               available_control.remove(...to_get);
               get_skills_and_print_in_event(cid, to_get, skill_control);
             }
-            attr_names.forEach((t) => {
+            for (let t = 0; t < 5; ++t) {
               if (update_train_level(cid, t)) {
                 era.print([
                   '【',
                   get_chara_talk(cid).get_colored_name(),
                   ' 的 ',
-                  t,
+                  i18n().n_attr[t],
                   '训练 变得更擅长了！】',
                 ]);
               }
-            });
+            }
           } else if (
             edu_weeks % 48 === 8 &&
             era.get(`cflag:${cid}:继承方1`) > 0

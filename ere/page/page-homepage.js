@@ -314,7 +314,7 @@ module.exports = async () => {
             .getAllCharacters()
             .filter((x) => !added_list.includes(x) && x < first_child_id),
           get_random_value(2, 5),
-        ).forEach((chara_id) => init_chara(chara_id));
+        ).forEach((cid) => init_chara(cid));
       }
       start_machine_gun(event_hooks.week_start);
       while (

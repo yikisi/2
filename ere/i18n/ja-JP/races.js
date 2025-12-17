@@ -1,6 +1,7 @@
 const I18nRaces = require('#/i18n/zh-CN/races');
 
 module.exports = class extends I18nRaces {
+  0 = 'メイクデビューに';
   // GENERATED START
   1 = 'ジュニアカップ';
   2 = '京都金杯';
@@ -60,7 +61,7 @@ module.exports = class extends I18nRaces {
   56 = 'アンタレスステークス';
   57 = 'フローラステークス';
   58 = '青葉賞';
-  59 = '天皇賞(春)';
+  59 = '天皇賞 (春)';
   60 = 'マイラーズカップ';
   61 = '福島牝馬ステークス';
   62 = 'NHKマイルカップ';
@@ -69,7 +70,7 @@ module.exports = class extends I18nRaces {
   65 = 'かしわ記念';
   66 = '新潟大賞典';
   67 = '羽田盃';
-  68 = '-';
+  68 = 'ペリューシュブルー賞';
   69 = '京王杯スプリングカップ';
   70 = 'オークス';
   71 = '鳳雛ステークス';
@@ -130,7 +131,7 @@ module.exports = class extends I18nRaces {
   126 = '富士ステークス';
   127 = 'アルテミスステークス';
   128 = '菊花賞';
-  129 = '天皇賞(秋)';
+  129 = '天皇賞 (秋)';
   130 = 'スワンステークス';
   131 = '京王杯2歳ステークス';
   132 = 'ファンタジーステークス';
@@ -139,7 +140,7 @@ module.exports = class extends I18nRaces {
   135 = 'JBCクラシック';
   136 = 'アルゼンチン共和国杯';
   137 = 'みやこステークス';
-  138 = '-';
+  138 = '和諧ステークス';
   139 = 'デイリー杯2歳ステークス';
   140 = 'エリザベス女王杯';
   141 = '武蔵野ステークス';
@@ -174,4 +175,31 @@ module.exports = class extends I18nRaces {
   170 = 'アルクオーツ スプリント';
   171 = '芙蓉ステークス';
   // GENERATED END
+
+  g_a_grass = '芝';
+  g_a_dirt = 'ダート';
+
+  d_a_short = '短';
+  d_a_mile = 'マイル';
+  d_a_medium = '中';
+  d_a_long = '長';
+
+  r_left = '左';
+  r_right = '右';
+
+  t_sapporo = '札幌';
+  t_hakodate = '函館';
+  t_niigata = '新潟';
+  t_fukushima = '福島';
+  t_nakayama = '中山';
+  t_tokyo = '東京';
+  t_chukyo = '中京';
+  t_kyoto = '京都';
+  t_hanshin = '阪神';
+  t_kokura = '小倉';
+  t_ohi = '大井';
+  t_kawasaki = '川崎';
+  t_funabashi = '船橋';
+  t_morioka = '盛岡';
+  t_longchamp = '隆尚';
 };

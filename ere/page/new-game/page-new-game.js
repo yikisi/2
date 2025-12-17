@@ -31,7 +31,6 @@ const { yes } = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
 const { first_child_id } = require('#/data/other-const');
 const { chara_skill_dict } = require('#/data/race/skill/skill-const');
-const { attr_names } = require('#/data/train-const');
 
 /**
  * start a new game, set data
@@ -224,9 +223,10 @@ module.exports = async (src_chara) => {
           }
 
           // 0号角色初始化
-          attr_names.forEach((v) =>
-            era.add(`base:0:${v}`, get_random_value(0, 50)),
-          );
+          for (let i = 0; i < 5; ++i) {
+            // BASENAME:5 - 9 = 速度 - 智力
+            era.add(`base:0:${5 + i}`, get_random_value(0, 50));
+          }
           sys_fix_chara_base(0);
 
           era.set('flag:当前回合数', 0);

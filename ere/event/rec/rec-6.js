@@ -27,7 +27,7 @@ const recruit_flags = require('#/data/event/recruit-flags');
 const { get_trainer_title } = require('#/data/info-generator');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
-const { attr_enum, attr_names } = require('#/data/train-const');
+const { attr_enum } = require('#/data/train-const');
 
 module.exports = class extends CustomizedRecruit {
   async recruit() {
@@ -87,9 +87,11 @@ module.exports = class extends CustomizedRecruit {
       ),
     );
     era.add(`cflag:${this.id}:育成回合计时`, 48);
-    attr_names.forEach((e) => {
-      era.add(`abl:${this.id}:${e}训练等级`, 2);
-      era.add(`base:${this.id}:${e}`, get_random_value(400, 500));
+    new Array(5).fill(0).forEach((_, i) => {
+      // ABLNAME:0 - 4 = 速度训练等级 - 智力训练等级
+      era.add(`abl:${this.id}:${i}`, 2);
+      // BASENAME:5 - 9 = 速度 - 智力
+      era.add(`base:${this.id}:${5 + i}`, get_random_value(400, 500));
     });
     era.add(`exp:${this.id}:技能点数`, 600);
     const available_skills = CharaAvailableSkills.get(this.id);

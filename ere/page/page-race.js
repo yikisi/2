@@ -69,8 +69,8 @@ const { i18n } = require('#/i18n/selector');
  * @param {boolean} is_grand_live
  */
 function page_race_header(_info, is_grand_live) {
-  const tp = era.get('base:0:精力');
-  const maxtp = era.get('maxbase:0:精力');
+  const tp = era.get('base:0:1');
+  const maxtp = era.get('maxbase:0:1');
   era.printInColRows(
     {
       columns: [
@@ -102,7 +102,7 @@ function page_race_header(_info, is_grand_live) {
             fontWeight: 'bold',
             width: 8,
           },
-          content: `${RaceInfo.track_names[_info.track]}竞马场`,
+          content: i18n().race.get_track_name(_info.track),
           type: 'text',
         },
       ],

@@ -1,5 +1,3 @@
-const { i18n } = require('#/i18n/selector');
-
 const attr_enum = {
   speed: 0,
   endurance: 0,
@@ -11,29 +9,8 @@ const attr_enum = {
 };
 Object.keys(attr_enum).forEach((k, i) => (attr_enum[k] = i));
 
-/** @type {string[]} */
-const attr_names = [];
-attr_names[attr_enum.speed] = i18n().speed;
-attr_names[attr_enum.endurance] = i18n().endurance;
-attr_names[attr_enum.strength] = i18n().strength;
-attr_names[attr_enum.toughness] = i18n().toughness;
-attr_names[attr_enum.intelligence] = i18n().intelligence;
-
 module.exports = {
-  adaptability_names: [
-    i18n().a_g_grass,
-    i18n().a_g_dirt,
-    i18n().a_d_short,
-    i18n().a_d_mile,
-    i18n().a_d_medium,
-    i18n().a_d_long,
-    i18n().a_s_nige,
-    i18n().a_s_senko,
-    i18n().a_s_sashi,
-    i18n().a_s_okimi,
-  ],
   attr_enum,
-  attr_names,
   fail_sta_border: {
     intelligence: 0.3, // 30%
     other: 0.5, // 50%

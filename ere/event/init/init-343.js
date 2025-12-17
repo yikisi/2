@@ -5,7 +5,6 @@ const sys_personal_achievement = require('#/system/global/sys-calc-personal-achi
 const CustomizedInit = require('#/event/init/customized-init');
 
 const MayLifeMarks = require('#/data/event/life-event-marks/life-event-marks-343');
-const { attr_names } = require('#/data/train-const');
 
 module.exports = class extends CustomizedInit {
   init(is_reset) {
@@ -19,7 +18,7 @@ module.exports = class extends CustomizedInit {
           `佐岳${era.get('cflag:343:性别') === 1 ? '先生' : '小姐'}`,
         );
       }
-      attr_names.forEach((e) => era.set(`base:343:${e}`, 800));
+      new Array(5).fill(0).forEach((_, i) => era.set(`base:343:${5 + i}`, 800));
     }
   }
 };

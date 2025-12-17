@@ -5,6 +5,8 @@ const { sort_list } = require('#/utils/list-utils');
 const { gene_type_colors } = require('#/data/race/model/uma-gene');
 
 class CharaAvailableGenes {
+  // SKILLNAME:3 = 可继承因子
+
   /** @param {CharaAvailableGenes} c */
   static merge_into_player(c) {
     const player_genes = new CharaAvailableGenes(0);
@@ -34,8 +36,7 @@ class CharaAvailableGenes {
 
   constructor(cid) {
     this.#id = cid;
-    this.obj =
-      get(`skill:${cid}:可继承因子`) || set(`skill:${cid}:可继承因子`, {});
+    this.obj = get(`skill:${cid}:3`) || set(`skill:${cid}:3`, {});
   }
 
   /**
@@ -57,7 +58,7 @@ class CharaAvailableGenes {
   }
 
   clear() {
-    this.obj = set(`skill:${this.#id}:可继承因子`, {});
+    this.obj = set(`skill:${this.#id}:3`, {});
     this.clean_cache();
   }
 
@@ -107,7 +108,7 @@ class CharaAvailableGenes {
    * @param {CharaAvailableGenes} b
    */
   merge(a, b) {
-    this.obj = set(`skill:${this.#id}:可继承因子`, { ...a.get() });
+    this.obj = set(`skill:${this.#id}:3`, { ...a.get() });
     Object.entries(b.get()).forEach((e) => {
       this.obj[e[0]] || (this.obj[e[0]] = 0);
       this.obj[e[0]] += e[1];

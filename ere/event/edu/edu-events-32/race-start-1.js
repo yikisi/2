@@ -6,7 +6,6 @@ const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { race_enum, race_infos } = require('#/data/race/race-const');
-const { attr_names } = require('#/data/train-const');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,TachyonEduMarks,number,number):Promise<boolean|void>>} handlers */
 module.exports = (handlers) => {
@@ -638,7 +637,11 @@ module.exports = (handlers) => {
         tachyon.sex,
         '有帮助吗？',
       ]);
-      if (attr_names.findIndex((e) => era.get(`base:32:${e}`) < 1200) !== -1) {
+      if (
+        new Array(5)
+          .fill(0)
+          .findIndex((_, i) => era.get(`base:32:${5 + i}`) < 1200) !== -1
+      ) {
         await era.printAndWait([
           '说到底，现在的',
           tachyon.sex,

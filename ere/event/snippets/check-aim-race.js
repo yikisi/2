@@ -1,5 +1,4 @@
-const { year_index } = require('#/event/check/snippets/edu-year-const');
-
+const { year_index } = require('#/data/other-const');
 const { race_infos } = require('#/data/race/race-const');
 
 /**

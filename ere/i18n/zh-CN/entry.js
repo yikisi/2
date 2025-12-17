@@ -4,8 +4,6 @@ class I18nEntry {
   strength = '力量';
   toughness = '根性';
   intelligence = '智力';
-  hp = '体力';
-  tp = '精力';
   get n_attr() {
     return [
       this.speed,
@@ -15,6 +13,8 @@ class I18nEntry {
       this.intelligence,
     ];
   }
+  hp = '体力';
+  tp = '精力';
   get n_base() {
     return [this.hp, this.tp];
   }
@@ -42,6 +42,30 @@ class I18nEntry {
   a_s_senko = '先马';
   a_s_sashi = '差马';
   a_s_okimi = '追马';
+  get n_adapt() {
+    return [
+      this.a_g_grass,
+      this.a_g_dirt,
+      this.a_d_short,
+      this.a_d_mile,
+      this.a_d_medium,
+      this.a_d_long,
+      this.a_s_nige,
+      this.a_s_senko,
+      this.a_s_sashi,
+      this.a_s_okimi,
+    ];
+  }
+  get n_style() {
+    return [this.a_s_nige, this.a_s_senko, this.a_s_sashi, this.a_s_okimi];
+  }
+
+  edu_0 = '新秀年';
+  edu_1 = '经典年';
+  edu_2 = '资深年';
+  get n_edu() {
+    return [this.edu_0, this.edu_1, this.edu_2];
+  }
 
   oot_0 = '已育成';
   oot_1 = '殿堂';
@@ -76,6 +100,9 @@ class I18nEntry {
   title_1 = '马娘';
   title_2 = '性奴';
   title_3 = '孕袋';
+  get n_title() {
+    return [this.title_0, this.title_1, this.title_2, this.title_3];
+  }
 
   love_u = '？';
   love_0 = '平常';

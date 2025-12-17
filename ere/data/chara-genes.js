@@ -3,6 +3,8 @@ const { get, set } = require('#/era-electron');
 const { sort_list } = require('#/utils/list-utils');
 
 class CharaGenes {
+  // SKILLNAME:2 = 继承因子
+
   /** @type {number} */
   #id;
   /** @type {Record<string,number>} */
@@ -14,7 +16,7 @@ class CharaGenes {
 
   constructor(cid) {
     this.#id = cid;
-    this.obj = get(`skill:${cid}:继承因子`) || set(`skill:${cid}:继承因子`, {});
+    this.obj = get(`skill:${cid}:2`) || set(`skill:${cid}:2`, {});
     this.all_count = Object.values(this.obj).reduce((p, c) => p + c, 0);
   }
 
@@ -34,7 +36,7 @@ class CharaGenes {
   }
 
   clear() {
-    this.obj = set(`skill:${this.#id}:继承因子`, {});
+    this.obj = set(`skill:${this.#id}:2`, {});
     this.all_count = 0;
     this.clean_cache();
   }

@@ -45,7 +45,6 @@ const {
 const { stain_enum } = require('#/data/ero/stain-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const { gene_juel_names } = require('#/data/other-const');
-const { attr_enum, attr_names } = require('#/data/train-const');
 
 let j_names;
 
@@ -601,11 +600,12 @@ function end_ero(skip_jewels, log_jewels, ids) {
             100,
       );
     }
-    ret.attr[cid] = Object.values(attr_enum).map((e) =>
+    ret.attr[cid] = new Array(5).fill(0).map((_, i) =>
       sys_change_attr_and_print(
         cid,
-        e,
-        era.get(`ex:${cid}:${attr_names[e]}获取`) / get_random_value(4, 6),
+        i,
+        // EXNAME:27 - 31 = 速度获取 - 智力获取
+        era.get(`ex:${cid}:${27 + i}`) / get_random_value(4, 6),
       ),
     );
     let pt = era.get(`ex:${cid}:技能点获取`);

@@ -14,7 +14,8 @@ const title_desc = require('#/data/desc/titles.json');
 const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
-const { adaptability_names } = require('#/data/train-const');
+
+const { i18n } = require('#/i18n/selector');
 
 const page_name = '出走成绩';
 
@@ -81,7 +82,7 @@ module.exports = {
                     e.rank <= class_enum.Spe
                       ? adaptability_colors.at(-1 - e.rank)
                       : adaptability_colors[0],
-                  title: `第 ${e.pop} 人气 · ${adaptability_names[6 + e.st]}`,
+                  title: `第 ${e.pop} 人气 · ${i18n().n_style[e.st]}`,
                 },
               ],
               type: 'text',

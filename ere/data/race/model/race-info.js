@@ -18,10 +18,6 @@ const rotation_enum = {
   right: 1,
   straight: 0,
 };
-const rotation_names = {};
-rotation_names[rotation_enum.left] = '逆时针';
-rotation_names[rotation_enum.right] = '顺时针';
-rotation_names[rotation_enum.straight] = '直线';
 
 //年龄限制：两岁/三岁/三岁以上/四岁以上
 const limit_enum = {
@@ -36,7 +32,6 @@ const limit_enum = {
 };
 
 const weather_enum = { sunny: 0, cloudy: 1, rain: 2, snow: 3 };
-const weather_names = ['晴', '阴', '雨', '雪'];
 
 const mess_enum = { well: 0, semi: 1, heavy: 2, bad: 3 };
 
@@ -92,32 +87,6 @@ const track_enum = {
 };
 Object.keys(track_enum).forEach((e, i) => (track_enum[e] = i));
 
-const track_names = {};
-track_names[track_enum.sapporo] = '札幌';
-track_names[track_enum.hakodate] = '函馆';
-track_names[track_enum.niigata] = '新泻';
-track_names[track_enum.fukushima] = '福岛';
-track_names[track_enum.nakayama] = '中山';
-track_names[track_enum.tokyo] = '东京';
-track_names[track_enum.chukyo] = '中京';
-track_names[track_enum.kyoto] = '京都';
-track_names[track_enum.hanshin] = '阪神';
-track_names[track_enum.kokura] = '小仓';
-track_names[track_enum.ohi] = '大井';
-track_names[track_enum.kawasaki] = '川崎';
-track_names[track_enum.funabashi] = '船桥';
-track_names[track_enum.morioka] = '盛冈';
-track_names[track_enum.longchamp] = '隆尚';
-track_names[track_enum.santa_anita] = '圣安妮塔公园';
-track_names[track_enum.st_cloud] = '圣克劳德';
-track_names[track_enum.chantilly] = '尚蒂伊';
-track_names[track_enum.bashang] = '从化';
-track_names[track_enum.shatin] = '沙田';
-track_names[track_enum.kentucky] = '丘吉尔园';
-track_names[track_enum.baltimore] = '宾利高';
-track_names[track_enum.new_york] = '贝蒙园';
-track_names[track_enum.meydan] = '迈丹';
-
 class RaceSlope {
   /**
    * @param {number} start
@@ -165,13 +134,9 @@ module.exports = class RaceInfo {
   static distance_enum = distance_enum;
   static ground_enum = ground_enum;
   static rotation_enum = rotation_enum;
-  static rotation_names = rotation_names;
   static track_enum = track_enum;
-  static track_names = track_names;
   static weather_enum = weather_enum;
-  static weather_names = weather_names;
   static mess_enum = mess_enum;
-  static mess_names = ['良', '稍重', '重', '不良'];
   static limit_enum = limit_enum;
   static prize_ratios = [1, 0.5, 0.3, 0.2, 0.1];
   static relation_rewards = [50, 100, 200, 400];

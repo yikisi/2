@@ -49,7 +49,6 @@ const {
 } = require('#/data/other-const');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
-const { attr_names } = require('#/data/train-const');
 
 function check_titles(...ids) {
   ids
@@ -384,10 +383,10 @@ module.exports = async () => {
               } else {
                 clean_actions(() => true);
               }
-              era.getAddedCharacters().forEach((e) =>
-                attr_names.forEach((a) => {
-                  if (era.get(`abl:${e}:${a}训练等级`) > 5) {
-                    era.set(`abl:${e}:${a}训练等级`, 5);
+              era.getAddedCharacters().forEach((cid) =>
+                new Array(5).fill(0).forEach((_, i) => {
+                  if (era.get(`abl:${cid}:${i}`) > 5) {
+                    era.set(`abl:${cid}:${i}`, 5);
                   }
                 }),
               );
@@ -521,14 +520,17 @@ module.exports = async () => {
               era
                 .getAddedCharacters()
                 .forEach((cid) =>
-                  attr_names.forEach((a) =>
-                    era.set(
-                      `exp:${cid}:${a}训练经验`,
-                      Math.max(era.get(`exp:${cid}:${a}训练经验`), 0),
+                  new Array(5)
+                    .fill(0)
+                    .forEach((_, i) =>
+                      era.set(
+                        `exp:${cid}:${5 + i}`,
+                        Math.max(era.get(`exp:${cid}:${5 + i}`), 0),
+                      ),
                     ),
-                  ),
                 );
-              era.set('item:现实透孔仪', 1);
+              // ITEMNAME:114 = 现实透孔仪
+              era.set('item:114', 1);
             }
             if (version <= 2160) {
               new MyEduMarks().big_sale = 1;
