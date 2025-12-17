@@ -64,8 +64,8 @@ class RaceHistory {
   /** @returns {Record<string,RaceResult>} */
   get() {
     return (
-      era.get(`cflag:${this.#id}:育成成绩`) ||
-      era.set(`cflag:${this.#id}:育成成绩`, {})
+      // CFLAGNAME:53 = 育成成绩
+      era.get(`cflag:${this.#id}:53`) || era.set(`cflag:${this.#id}:53`, {})
     );
   }
 

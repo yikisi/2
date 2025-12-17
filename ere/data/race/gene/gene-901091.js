@@ -1,10 +1,9 @@
 const UmaGene = require('#/data/race/model/uma-gene');
+const UmaSkillGene = require('#/data/race/model/uma-skill-gene');
 
-module.exports = new UmaGene(
+module.exports = new UmaSkillGene(
   901091,
   UmaGene.gene_rarity_enum.sr,
-  '「心心相印×梦想未来」之回响',
-  '习得「心心相印×梦想未来」',
   UmaGene.gene_type_enum.skill,
   -1,
   100,

@@ -156,7 +156,7 @@ module.exports = class extends Edu64Base {
     let love;
     switch (dict.dice) {
       case 1:
-        base = JSON.parse('{"体力":200}');
+        base = [200];
         break;
       case 2:
         attr.fill(5);
@@ -233,7 +233,7 @@ module.exports = class extends Edu64Base {
     await print_name_and_show_kojo('错过午休时间', pama, kojo, this.dict);
     if (
       all_reward_in_event(this.id, {
-        base: JSON.parse('{"体力":-50}'),
+        base: [-50],
         motivation: -1,
         relation: 0,
       })

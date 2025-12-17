@@ -22,8 +22,7 @@ const { get_random_value } = require('#/utils/value-utils');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
 
-const base_base_reward = {};
-base_base_reward['体力'] = 300;
+const base_base_reward = [300];
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},FukukitaruEduMarks,EventObject):Promise>} handlers */
 module.exports = (handlers) => {

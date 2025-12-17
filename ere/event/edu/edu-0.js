@@ -329,12 +329,7 @@ module.exports = class extends StrangeDayEvents {
         );
       } else {
         await printAndWait('好辣——');
-        wait_flag = get_attr_and_print_in_event(
-          0,
-          undefined,
-          0,
-          JSON.parse('{"体力":50}'),
-        );
+        wait_flag = get_attr_and_print_in_event(0, undefined, 0, [50]);
       }
       wait_flag = sys_like_chara(32, 0, get_random_value(5, 15)) || wait_flag;
     } else {
@@ -493,9 +488,7 @@ module.exports = class extends StrangeDayEvents {
     println();
     await printAndWait('今天也是喝能量饮料强撑、睡办公室桌下的一天。');
     printButton('「地板好硬……」', 1);
-    if (
-      get_attr_and_print_in_event(0, undefined, 0, JSON.parse('{"体力":-50}'))
-    ) {
+    if (get_attr_and_print_in_event(0, undefined, 0, [-50])) {
       await waitAnyKey();
     }
   }
@@ -514,12 +507,8 @@ module.exports = class extends StrangeDayEvents {
     printButton('「丢哪妈，顶硬上！」', 1);
     printButton('「打电话请假，然后去看医生吧……」', 2);
     if ((await input()) === 1) {
-      get_attr_and_print_in_event(
-        0,
-        undefined,
-        0,
-        JSON.parse('{"体力":-50}'),
-      ) && (await waitAnyKey());
+      get_attr_and_print_in_event(0, undefined, 0, [-50]) &&
+        (await waitAnyKey());
       sys_change_money(get_random_value(10, 20));
     } else {
       sys_like_chara(305, 0, get_random_value(0, 10)) && (await waitAnyKey());
@@ -628,12 +617,8 @@ module.exports = class extends StrangeDayEvents {
     );
     printButton('「闲着也是闲着，不如发个推凑个热闹」', 2);
     if ((await input()) === 1) {
-      get_attr_and_print_in_event(
-        0,
-        undefined,
-        0,
-        JSON.parse('{"体力":50,"精力":50}'),
-      ) && (await waitAnyKey());
+      get_attr_and_print_in_event(0, undefined, 0, [50, 50]) &&
+        (await waitAnyKey());
     } else {
       const p_love =
           get('cflag:36:招募状态') === recruit_flags.yes ? get('love:36') : -1,
@@ -785,14 +770,12 @@ module.exports = class extends StrangeDayEvents {
               me.get_colored_name(),
               ' 还是感觉干劲不足……',
             ]);
-            get_attr_and_print_in_event(
-              0,
-              undefined,
-              0,
-              JSON.parse(
-                `{"体力":-${get('maxbase:0:体力') * 0.2},"精力":-${get('maxbase:0:精力') * 0.2}}`,
-              ),
-            ) && (await waitAnyKey());
+            get_attr_and_print_in_event(0, undefined, 0, [
+              // MAXBASENAME:0 = 体力
+              -get('maxbase:0:0') * 0.2,
+              // MAXBASENAME:1 = 精力
+              -get('maxbase:0:1') * 0.2,
+            ]) && (await waitAnyKey());
             set('status:0:马跳S', 1);
             await sys_rape_in_sleeping(chara.id);
             set('status:0:马跳S', 0);
@@ -904,11 +887,7 @@ module.exports = class extends StrangeDayEvents {
         break;
       case 3:
         add('maxbase:0:精力', 100);
-        if (
-          all_reward_in_event(0, {
-            base: JSON.parse('{"精力":200}'),
-          })
-        ) {
+        if (all_reward_in_event(0, { base: [0, 200] })) {
           await waitAnyKey();
         }
     }

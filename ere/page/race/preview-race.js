@@ -23,11 +23,7 @@ const {
   get_rank_level,
 } = require('#/data/info-generator');
 const RaceInfo = require('#/data/race/model/race-info');
-const {
-  adaptability_names,
-  attr_names,
-  motivation_names,
-} = require('#/data/train-const');
+const { adaptability_names, attr_names } = require('#/data/train-const');
 
 const { i18n } = require('#/i18n/selector');
 
@@ -211,7 +207,7 @@ async function preview_race(
               '：',
               {
                 color: motivation_colors[cur_chara.motivation + 2],
-                content: motivation_names[cur_chara.motivation + 2],
+                content: i18n().n_moti[cur_chara.motivation + 2],
               },
               { isDivider: true },
               '第 ',

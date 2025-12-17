@@ -5,7 +5,6 @@ const {
   get_attr_by_score,
 } = require('#/data/calc-attr-score');
 const ConditionParams = require('#/data/race/model/condition-params');
-const { attr_names } = require('#/data/train-const');
 
 class RaceSkill {
   /** @type {UmaSkill} */
@@ -302,7 +301,7 @@ class PseudoUma {
     this.adapt_distance_list = adapt_distance_list;
     this.adapt_ground_list = adapt_ground_list;
     this.list_skill = skills.map((item) => new RaceSkill(item));
-    this.attr_buffs = attr_names.map(() => []);
+    this.attr_buffs = new Array(5).fill(0).map(() => []);
     this.ground_buffs = [];
     this.dis_buffs = [];
     this.pop = new Array(4);

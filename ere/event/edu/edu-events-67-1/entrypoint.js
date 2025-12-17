@@ -350,12 +350,9 @@ module.exports = class extends Edu67UntilSchoolAtrium {
       );
       era.println();
       wait_flag = sys_change_motivation(67, 2) || wait_flag;
-      wait_flag = get_attr_and_print_in_event(
-        67,
-        new Array(5).fill(10),
-        0,
-        JSON.parse('{"体力":300}'),
-      );
+      wait_flag = get_attr_and_print_in_event(67, new Array(5).fill(10), 0, [
+        300,
+      ]);
     } else if (gacha === 9) {
       await era.printAndWait(
         '商店街人员「很可惜，没抽中！参加奖是『卫生纸』喔～」',
@@ -387,12 +384,7 @@ module.exports = class extends Edu67UntilSchoolAtrium {
       );
       era.println();
       wait_flag = sys_change_motivation(67, -1) || wait_flag;
-      wait_flag = get_attr_and_print_in_event(
-        67,
-        undefined,
-        0,
-        JSON.parse('{"体力":300}'),
-      );
+      wait_flag = get_attr_and_print_in_event(67, undefined, 0, [300]);
     } else if (gacha === 1) {
       await era.printAndWait(
         '商店街人员「恭喜抽到一等奖～！奖品是『特等胡萝卜汉堡排』！」',
@@ -431,12 +423,9 @@ module.exports = class extends Edu67UntilSchoolAtrium {
       );
       era.println();
       wait_flag = sys_change_motivation(67, 2) || wait_flag;
-      wait_flag = get_attr_and_print_in_event(
-        67,
-        new Array(5).fill(10),
-        0,
-        JSON.parse('{"体力":300}'),
-      );
+      wait_flag = get_attr_and_print_in_event(67, new Array(5).fill(10), 0, [
+        300,
+      ]);
     } else if (gacha < 5) {
       await era.printAndWait(
         '商店街人员「二等奖～！！奖品是『一整堆胡萝卜』！」',
@@ -478,12 +467,7 @@ module.exports = class extends Edu67UntilSchoolAtrium {
       era.println();
       wait_flag = sys_change_motivation(67, 1);
       wait_flag =
-        get_attr_and_print_in_event(
-          67,
-          undefined,
-          0,
-          JSON.parse('{"体力":200}'),
-        ) || wait_flag;
+        get_attr_and_print_in_event(67, undefined, 0, [200]) || wait_flag;
     } else {
       await era.printAndWait('商店街人员「三等奖～！奖品是『一根胡萝卜』！」');
       await era.printAndWait('获得了「一根胡萝卜」。');
@@ -507,12 +491,7 @@ module.exports = class extends Edu67UntilSchoolAtrium {
       );
       era.println();
       wait_flag =
-        get_attr_and_print_in_event(
-          67,
-          undefined,
-          0,
-          JSON.parse('{"体力":200}'),
-        ) || wait_flag;
+        get_attr_and_print_in_event(67, undefined, 0, [200]) || wait_flag;
     }
     wait_flag && (await era.waitAnyKey());
     return true;

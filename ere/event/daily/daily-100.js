@@ -625,7 +625,7 @@ module.exports = class extends CustomizedDaily {
               100,
               [0, 0, 0, 10, 0],
               0,
-              JSON.parse('{"体力":-100,"精力":100}'),
+              [-100, 100],
               true,
             );
             sys_change_motivation(100, 1);
@@ -660,12 +660,7 @@ module.exports = class extends CustomizedDaily {
             get_attr_and_print_in_event(100, [0, 0, 10], 0, undefined, true);
             add_jewel_reward(100, '施虐快感', 100);
             era.println();
-            get_attr_and_print_in_event(
-              0,
-              [0, 10],
-              0,
-              JSON.parse('{"体力":-100}'),
-            );
+            get_attr_and_print_in_event(0, [0, 10], 0, [-100]);
             await era.waitAnyKey();
           }
         } else {

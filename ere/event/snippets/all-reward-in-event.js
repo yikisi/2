@@ -14,7 +14,7 @@ const { get_random_value } = require('#/utils/value-utils');
  * @param {object} changes
  * @param {number[]} changes.attr=([])
  * @param {number} changes.pt=0
- * @param {Record<string,number>} changes.base=({})
+ * @param {number[]} changes.base=([])
  * @param {number[]} changes.skills=([])
  * @param {number} changes.motivation=0
  * @param {number} changes.relation=0
@@ -25,7 +25,7 @@ function all_reward_in_event(
   {
     attr = [],
     pt = 0,
-    base = {},
+    base = [],
     skills = [],
     motivation = 0,
     relation = get_random_value(0, 25),

@@ -277,14 +277,14 @@ module.exports = async (hook, extra_flag) => {
         urara.get_uma_sex_title(),
         '炖个鱼汤吧。',
       ]);
-      const attr_change = new Array(5).fill(0),
-        temp = get_random_entry(
-          Object.values(attr_enum).filter(
-            (e) =>
-              era.get(`base:52:${attr_names[e]}`) <
-              era.get(`maxbase:52:${attr_names[e]}`),
-          ),
-        );
+      const attr_change = new Array(5).fill(0);
+      const temp = get_random_entry(
+        Object.values(attr_enum).filter(
+          (e) =>
+            era.get(`base:52:${attr_names[e]}`) <
+            era.get(`maxbase:52:${attr_names[e]}`),
+        ),
+      );
       if (temp !== undefined) {
         attr_change[temp] = 5;
         get_attr_and_print_in_event(52, attr_change, 0);

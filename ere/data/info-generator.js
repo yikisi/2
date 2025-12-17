@@ -43,20 +43,10 @@ const {
   virgin_state,
 } = require('#/data/ero/status-const');
 const recruit_flags = require('#/data/event/recruit-flags');
-const { attr_names } = require('#/data/train-const');
 
-const { __ } = require('#/i18n/selector');
+const { __, i18n } = require('#/i18n/selector');
 
-const level_and_desc = {
-  love: {
-    border: [1, 25, 50, 75, 90, 100],
-    mark: new Array(7).fill(void 0).map((_, i) => __(`love_${i}`)),
-  },
-  honour: {
-    border: [500, 1000, 2000, 5000],
-    mark: new Array(5).fill(void 0).map((_, i) => __(`honour_${i}`)),
-    buff: [0, 1, 2, 3, 5, 10, 15],
-  },
+const levels = {
   attr_score: [
     'G',
     'G+', // 100
@@ -99,10 +89,12 @@ const level_and_desc = {
     'UA',
   ],
   chara_score,
-  relation: {
-    border: [-100, 0, 75, 150, 225, 375, 525],
-    mark: new Array(8).fill(void 0).map((_, i) => __(`relation_${i}`)),
+  honour: {
+    border: [500, 1000, 2000, 5000],
+    buff: [0, 1, 2, 3, 5, 10, 15],
   },
+  love: [1, 25, 50, 75, 90, 100],
+  relation: [-100, 0, 75, 150, 225, 375, 525],
 };
 
 const talent_names = [
@@ -158,10 +150,10 @@ function get_talent_bust_size(cup) {
  */
 function get_chara_rank(score) {
   let score_level = 0;
-  while (score >= level_and_desc.chara_score.border[score_level]) {
+  while (score >= levels.chara_score.border[score_level]) {
     score_level++;
   }
-  return level_and_desc.chara_score.mark[score_level];
+  return levels.chara_score.mark[score_level];
 }
 
 /**
@@ -203,7 +195,7 @@ function get_trainer_level() {
   if (honour <= 0) {
     level = -1;
   } else {
-    while (honour >= level_and_desc.honour.border[level]) {
+    while (honour >= levels.honour.border[level]) {
       level++;
     }
   }
@@ -220,7 +212,7 @@ module.exports = {
   },
   /** @param {number} attr */
   get_attr_rank(attr) {
-    return level_and_desc.attr_score[Math.floor(attr / 50)] || 'US';
+    return levels.attr_score[Math.floor(attr / 50)] || 'US';
   },
   get_breast_cup,
   /** @param {number} [_weeks] */
@@ -253,8 +245,9 @@ module.exports = {
    */
   get_chara_score(cid, is_number) {
     let score = era.get(`exp:${cid}:技能评价分`);
-    score += attr_names.reduce(
-      (s, c) => s + calc_attr_score(era.get(`base:${cid}:${c}`)),
+    score += new Array(5).fill(0).reduce(
+      // BASENAME:5-9 = 速度 - 智力
+      (s, _, i) => s + calc_attr_score(era.get(`base:${cid}:${i + 5}`)),
       0,
     );
     if (is_number) {
@@ -494,10 +487,10 @@ module.exports = {
   get_love_border(cid) {
     const love = era.get(`love:${cid}`) || 0;
     let level = 0;
-    while (love >= level_and_desc.love.border[level]) {
+    while (love >= levels.love[level]) {
       level++;
     }
-    return level_and_desc.love.border[level];
+    return levels.love[level];
   },
   /**
    * @param {number} cid
@@ -520,10 +513,10 @@ module.exports = {
       love = Math.min(era.get(`love:${cid}`), 24);
     }
     let level = 0;
-    while (love >= level_and_desc.love.border[level]) {
+    while (love >= levels.love[level]) {
       level++;
     }
-    const mark = () => level_and_desc.love.mark[level];
+    const mark = () => i18n().m_love[level];
     const val = () => love.toString();
     return {
       full: () => `${mark()} (${val()})`,
@@ -566,10 +559,10 @@ module.exports = {
       };
     }
     let level = 0;
-    while (relation > level_and_desc.relation.border[level]) {
+    while (relation > levels.relation[level]) {
       level++;
     }
-    const mark = () => level_and_desc.relation.mark[level];
+    const mark = () => i18n().m_relation[level];
     const val = () => relation.toString();
     return { full: () => `${mark()} (${val()})`, level, mark, val };
   },
@@ -653,8 +646,7 @@ module.exports = {
   /** @returns {{full:()=>string,level:number,prefix:()=>string,title:()=>string}} */
   get_trainer_title() {
     let level = get_trainer_level();
-    const prefix = () =>
-      level < 0 ? '失格' : level_and_desc.honour.mark[level];
+    const prefix = () => (level < 0 ? i18n().honour_m : i18n().m_honour[level]);
     const title = () => title_desc[era.get('flag:惩戒力度')];
     return {
       full: () => prefix() + title(),
@@ -674,7 +666,7 @@ module.exports = {
     }
     let ret = 0;
     ret +=
-      level_and_desc.honour.buff[
+      levels.honour.buff[
         level +
           (era.get('cflag:304:招募状态') === recruit_flags.yes) +
           (era.get('cflag:306:招募状态') === recruit_flags.yes)

@@ -154,12 +154,8 @@ module.exports = class extends Edu3UntilRaceEnd {
 
       wait_flag = sys_like_chara(3, 0, 10, true, 1) || wait_flag;
       wait_flag =
-        get_attr_and_print_in_event(
-          3,
-          [0, 0, 0, 20, 15],
-          0,
-          JSON.parse('{"体力":150}'),
-        ) || wait_flag;
+        get_attr_and_print_in_event(3, [0, 0, 0, 20, 15], 0, [150]) ||
+        wait_flag;
       wait_flag && (await era.waitAnyKey());
       return false;
     } else if (event_arg === 95 + 25 && event_marks.spring_teio === 1) {
@@ -223,12 +219,8 @@ module.exports = class extends Edu3UntilRaceEnd {
       await era.printAndWait(`${me.get_couple_title()} 一同，向目标位置走去——`);
       wait_flag = sys_like_chara(3, 0, 10, true, 1) || wait_flag;
       wait_flag =
-        get_attr_and_print_in_event(
-          3,
-          [35, 0, 35, 0, 0],
-          0,
-          JSON.parse('{"体力":350}'),
-        ) || wait_flag;
+        get_attr_and_print_in_event(3, [35, 0, 35, 0, 0], 0, [350]) ||
+        wait_flag;
     } else if (event_arg === 47 + 5) {
       await print_event_name('所以，衣服是怎样啦！', teio);
       await era.printAndWait(
@@ -293,12 +285,7 @@ module.exports = class extends Edu3UntilRaceEnd {
         await era.printAndWait(` ${me.name} 与${teio.sex}默默地走了一段时间。`);
         era.println();
         wait_flag =
-          get_attr_and_print_in_event(
-            3,
-            undefined,
-            0,
-            JSON.parse('{"体力":150}'),
-          ) || wait_flag;
+          get_attr_and_print_in_event(3, undefined, 0, [150]) || wait_flag;
       } else if (ret === 2) {
         await teio.say_and_wait('欸！');
         era.println();

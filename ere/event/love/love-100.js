@@ -215,13 +215,7 @@ module.exports = class extends CustomizedLove {
       await acute.say_and_wait('……嗯——');
       await era.printAndWait('互相间也不知达成了什么默契的，默契地点了点头——');
       era.println();
-      get_attr_and_print_in_event(
-        100,
-        undefined,
-        0,
-        JSON.parse('{"体力":100,"精力":100}'),
-        true,
-      );
+      get_attr_and_print_in_event(100, undefined, 0, [100, 100], true);
       sys_change_motivation(100, 1);
       await sys_love_uma_in_event(100);
       return true;

@@ -50,12 +50,8 @@ module.exports = async (kita, me, hook, event_object) => {
       `${me.name} 揉了揉担当的脑袋，在嘻嘻哈哈的轻巧吵闹声中开始享受起了新的一年。`,
     );
     era.println();
-    get_attr_and_print_in_event(
-      68,
-      [5, 5, 5, 5, 5],
-      35,
-      JSON.parse('{"体力":300}'),
-    ) && (await era.waitAnyKey());
+    get_attr_and_print_in_event(68, [5, 5, 5, 5, 5], 35, [300]) &&
+      (await era.waitAnyKey());
   } else if (event_arg === 'hot_spring_event') {
     await print_event_name('温泉旅行', kita);
     await era.printAndWait(`${me.name} 在训练员室里整理着文件……`);

@@ -140,7 +140,7 @@ class Edu64Base extends CustomizedEdu {
         attr = [20];
         break;
       case 2:
-        base = JSON.parse('{"体力":100}');
+        base = [100];
         break;
       case 3:
         pt = 20;
@@ -328,7 +328,7 @@ class Edu64Base extends CustomizedEdu {
     let pt;
     switch (ret[3]) {
       case 1:
-        base = JSON.parse('{"体力":200}');
+        base = [200];
         break;
       case 2:
         attr = new Array(5).fill(8);

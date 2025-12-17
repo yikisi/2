@@ -4,8 +4,6 @@ const CustomizedInit = require('#/event/init/customized-init');
 
 const { get_random_value } = require('#/utils/value-utils');
 
-const { adaptability_names } = require('#/data/train-const');
-
 module.exports = class extends CustomizedInit {
   init(is_reset) {
     if (!is_reset) {
@@ -14,8 +12,9 @@ module.exports = class extends CustomizedInit {
         `光辉${era.get('cflag:308:性别') === 1 ? '先生' : '小姐'}`,
       );
 
-      adaptability_names.forEach((e) =>
-        era.set(`cflag:308:${e}适性`, get_random_value(0, 5)),
+      new Array(10).fill(0).forEach((_, i) =>
+        // CFLAGNAME:30-39 = 草地适性 - 追马适性
+        era.set(`cflag:308:${i + 30}`, get_random_value(0, 5)),
       );
     }
   }

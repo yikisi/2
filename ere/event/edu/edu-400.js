@@ -464,12 +464,9 @@ out_church_handlers[47 + 1] = async (ss, me, callname, flags) => {
     me.get_colored_name(),
     ' 吃。',
   ]);
-  flags.wait_flag = get_attr_and_print_in_event(
-    400,
-    [0, 0, 0, 15, 0],
-    0,
-    JSON.parse('{"体力":300}'),
-  );
+  flags.wait_flag = get_attr_and_print_in_event(400, [0, 0, 0, 15, 0], 0, [
+    300,
+  ]);
   flags.wait_flag = sys_like_chara(400, 0, 40) || flags.wait_flag;
 };
 
@@ -553,12 +550,7 @@ out_church_handlers[95 + 1] = async (ss, me, callname, flags) => {
     ss.sex,
     '就在脸颊的脸颊上留下一个吻，然后像是逃跑一样离开了神社。',
   ]);
-  flags.wait_flag = get_attr_and_print_in_event(
-    400,
-    [5, 5, 5, 5, 5],
-    0,
-    JSON.parse('{"体力":300}'),
-  );
+  flags.wait_flag = get_attr_and_print_in_event(400, [5, 5, 5, 5, 5], 0, [300]);
   flags.wait_flag = sys_like_chara(400, 0, 20) || flags.wait_flag;
 };
 
@@ -606,11 +598,8 @@ module.exports = class extends CustomizedEdu {
       ss.get_colored_name(),
       ' 垄断了休息室里面的饮料供应。',
     ]);
-    get_attr_and_print_in_event(
-      400,
-      ret === 1 ? [0, 20] : [0, 0, 0, 0, 20],
-      0,
-    ) && (await era.waitAnyKey());
+    get_attr_and_print_in_event(400, ret === 1 ? [0, 20] : [0, 0, 0, 0, 20]) &&
+      (await era.waitAnyKey());
     return true;
   }
 
@@ -801,7 +790,6 @@ module.exports = class extends CustomizedEdu {
     get_attr_and_print_in_event(
       400,
       ret === 1 ? [0, 0, 0, 10, 10] : [0, 10, 10],
-      0,
     ) && (await era.waitAnyKey());
     return true;
   }

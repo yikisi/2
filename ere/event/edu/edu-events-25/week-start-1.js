@@ -460,12 +460,7 @@ module.exports = (handlers) => {
           coffee.sex,
           '一点一点地将咖啡含在口中再吞下，尽情享受了咖啡的美味。',
         ]);
-        flags.wait_flag = get_attr_and_print_in_event(
-          25,
-          undefined,
-          0,
-          JSON.parse('{"体力":400}'),
-        );
+        flags.wait_flag = get_attr_and_print_in_event(25, undefined, 0, [400]);
         break;
       case 3:
         await coffee.say_and_wait(

@@ -387,12 +387,7 @@ module.exports = class extends CustomizedEdu {
           coffee.get_colored_name(),
           ' 的脸上又再次散发着活力了。',
         ]);
-        wait_flag = get_attr_and_print_in_event(
-          25,
-          undefined,
-          0,
-          JSON.parse('{"体力":500}'),
-        );
+        wait_flag = get_attr_and_print_in_event(25, undefined, 0, [500]);
         break;
       case 2:
         await coffee.say_and_wait(

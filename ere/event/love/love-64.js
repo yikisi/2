@@ -566,11 +566,11 @@ module.exports = class extends CustomizedLove {
     }
     await print_name_and_show_kojo('突然美食时间？', pama, kojo, this.#dict);
     let wait = all_reward_in_event(this.id, {
-      base: JSON.parse('{"体力":200}'),
+      base: [200],
     });
     wait =
       all_reward_in_event(0, {
-        base: JSON.parse('{"体力":200}'),
+        base: [200],
       }) || wait;
     sys_change_weight(this.id, get_random_value(10, 20));
     sys_change_weight(0, get_random_value(10, 20));

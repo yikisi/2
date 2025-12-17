@@ -10,11 +10,9 @@ const {
   get_rank_level,
   get_train_time,
 } = require('#/data/info-generator');
-const {
-  adaptability_names,
-  attr_names,
-  out_of_train_type,
-} = require('#/data/train-const');
+const { adaptability_names, attr_names } = require('#/data/train-const');
+
+const { i18n } = require('#/i18n/selector');
 
 const page_name = '育成情况';
 
@@ -83,34 +81,35 @@ module.exports = {
             type: 'divider',
           },
           {
-            content: out_of_train
-              ? [
-                  out_of_train_type[out_of_train - 1],
-                  ' ｜ 评价：',
-                  {
-                    content: chara_score,
-                    color: adaptability_colors[chara_level],
-                    fontWeight: 'bold',
-                  },
-                ]
-              : [
-                  '评价：',
-                  {
-                    content: chara_score,
-                    color: adaptability_colors[chara_level],
-                    fontWeight: 'bold',
-                  },
-                  ' ｜ ',
-                  train_time.length > 1
-                    ? `${train_time}${era.get(`cflag:${chara.id}:育成次数`) ? ` (第 ${era.get(`cflag:${chara.id}:育成次数`) + 1} 轮)` : ''} ｜ `
-                    : '',
-                  '拥有 ',
-                  {
-                    content: era.get(`exp:${chara.id}:技能点数`),
-                    fontWeight: 'bold',
-                  },
-                  ' 点技能点数',
-                ],
+            content:
+              out_of_train >= 1
+                ? [
+                    i18n().n_oot[out_of_train - 1],
+                    ' ｜ 评价：',
+                    {
+                      content: chara_score,
+                      color: adaptability_colors[chara_level],
+                      fontWeight: 'bold',
+                    },
+                  ]
+                : [
+                    '评价：',
+                    {
+                      content: chara_score,
+                      color: adaptability_colors[chara_level],
+                      fontWeight: 'bold',
+                    },
+                    ' ｜ ',
+                    train_time.length > 1
+                      ? `${train_time}${era.get(`cflag:${chara.id}:育成次数`) ? ` (第 ${era.get(`cflag:${chara.id}:育成次数`) + 1} 轮)` : ''} ｜ `
+                      : '',
+                    '拥有 ',
+                    {
+                      content: era.get(`exp:${chara.id}:技能点数`),
+                      fontWeight: 'bold',
+                    },
+                    ' 点技能点数',
+                  ],
             type: 'text',
           },
           ...attr_list,

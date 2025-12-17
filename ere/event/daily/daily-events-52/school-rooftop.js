@@ -219,13 +219,8 @@ module.exports = async (hook) => {
     await in_urara.say_as_unknown_and_wait('唉，真好啊……不，才没有羡慕……');
     hook.override = true;
     era.println();
-    get_attr_and_print_in_event(
-      52,
-      undefined,
-      0,
-      JSON.parse('{"体力":300}'),
-      true,
-    ) && (await era.waitAnyKey());
+    get_attr_and_print_in_event(52, undefined, 0, [300], true) &&
+      (await era.waitAnyKey());
     sys_like_chara(52, 0, 10, true, 5) && (await era.waitAnyKey());
   } else {
     let random_range = 2;

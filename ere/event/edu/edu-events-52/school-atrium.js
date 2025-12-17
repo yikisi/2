@@ -313,7 +313,7 @@ module.exports = (handlers) => {
         52,
         [0, 0, 0, 20, 0],
         0,
-        JSON.parse('{"体力":-100}'),
+        [-100],
         true,
       );
     } else {
@@ -368,7 +368,7 @@ module.exports = (handlers) => {
         52,
         [0, 10, 0, 0, 0],
         0,
-        JSON.parse('{"体力":-100}'),
+        [-100],
         true,
       );
     }

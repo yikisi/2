@@ -71,12 +71,7 @@ module.exports = class extends CustomizedEdu {
           get_attr_and_print_in_event(3, [0, 0, 20, 20, 0], 15) || wait_flag;
       } else if (ret === 2) {
         wait_flag =
-          get_attr_and_print_in_event(
-            3,
-            [30],
-            15,
-            JSON.parse('{"体力":200}'),
-          ) || wait_flag;
+          get_attr_and_print_in_event(3, [30], 15, [200]) || wait_flag;
       } else {
         wait_flag =
           get_attr_and_print_in_event(3, [15, 20, 0, 0, 30], 30) || wait_flag;

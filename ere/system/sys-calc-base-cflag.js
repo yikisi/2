@@ -18,12 +18,8 @@ const RyokaLifeMarks = require('#/data/event/life-event-marks/life-event-marks-3
 const recruit_flags = require('#/data/event/recruit-flags');
 const extra_base = require('#/data/extra-base');
 const { location_enum } = require('#/data/locations');
-const {
-  attr_enum,
-  attr_names,
-  base_names,
-  motivation_names,
-} = require('#/data/train-const');
+const { attr_enum } = require('#/data/train-const');
+const { i18n } = require('#/i18n/selector');
 
 /**
  * @param {number} cid
@@ -62,7 +58,7 @@ function sys_change_motivation(cid, val) {
       get_chara_talk(cid).get_colored_name(),
       ' 的干劲现在是 ',
       {
-        content: `${motivation_names[new_val + 2]}`,
+        content: i18n().n_moti[new_val + 2],
         color: motivation_colors[new_val + 2],
       },
     ]);
@@ -203,8 +199,8 @@ module.exports = {
           color: attr_colors[attr],
           content:
             attr > attr_enum.intelligence
-              ? base_names[attr - attr_enum.hp]
-              : attr_names[attr],
+              ? i18n().n_base[attr - attr_enum.hp]
+              : i18n().n_attr[attr],
         },
         change > 0
           ? {

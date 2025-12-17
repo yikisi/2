@@ -53,7 +53,7 @@ ${arr.map((e) => `    // ${e[2]}: ${e[5]}\n    ${e[7]}: ${e[0]},`).join('\n')}
 `,
 );
 
-const i18n_n = join(__dirname, '../../ere/i18n/zh-CN/inmon.js');
+const i18n_n = join(__dirname, '../../ere/i18n/zh-CN/inmon-names.js');
 const i18n_d = join(__dirname, '../../ere/i18n/zh-CN/inmon-desc.js');
 
 writeFileSync(

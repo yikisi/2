@@ -375,12 +375,7 @@ module.exports = (handlers) => {
           maya.get_colored_name(),
           ' 享受了一场年菜约会。',
         ]);
-        flags.wait_flag = get_attr_and_print_in_event(
-          24,
-          undefined,
-          0,
-          JSON.parse('{"体力":400}'),
-        );
+        flags.wait_flag = get_attr_and_print_in_event(24, undefined, 0, [400]);
         break;
       case 3:
         await maya.say_and_wait([

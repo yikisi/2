@@ -21,7 +21,6 @@ const {
   get_train_time,
 } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
-const { motivation_names, out_of_train_type } = require('#/data/train-const');
 
 const { __, i18n } = require('#/i18n/selector');
 
@@ -110,8 +109,8 @@ function cur_chara_component(chara_id, type, location_npc) {
       name_columns.push(title, ' ');
     }
     name_columns.push(get_chara_talk(chara_id).get_colored_name());
-    if (out_of_train) {
-      name_columns.push(` [${out_of_train_type[out_of_train - 1]}]`);
+    if (out_of_train >= 1) {
+      name_columns.push(` [${i18n().n_oot[out_of_train - 1]}]`);
     }
     name_columns.push(` (${get_growth(growth, 1)})`);
     if (era.get('flag:当前位置') !== location_enum.basement) {
@@ -121,7 +120,7 @@ function cur_chara_component(chara_id, type, location_npc) {
           i18n().ui_moti,
           {
             color: motivation_colors[motivation + 2],
-            content: motivation_names[motivation + 2],
+            content: i18n().n_moti[motivation + 2],
           },
           ' ',
           get_train_time(chara_id).substring(0, 3),

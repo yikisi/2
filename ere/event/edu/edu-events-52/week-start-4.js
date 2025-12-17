@@ -427,19 +427,9 @@ module.exports = (handlers) => {
     await in_urara.say_as_unknown_and_wait('我、我没关系哦……？唉……');
     era.add('item:情人节巧克力', 1);
     era.println();
-    let wait_flag = get_attr_and_print_in_event(
-      52,
-      undefined,
-      0,
-      JSON.parse('{"体力":2000}'),
-    );
+    let wait_flag = get_attr_and_print_in_event(52, undefined, 0, [2000]);
     wait_flag =
-      get_attr_and_print_in_event(
-        0,
-        undefined,
-        0,
-        JSON.parse('{"体力":2000}'),
-      ) || wait_flag;
+      get_attr_and_print_in_event(0, undefined, 0, [2000]) || wait_flag;
     wait_flag =
       sys_like_chara(52, 0, 20 * (ret === 2), true, 10 * (ret === 1)) ||
       wait_flag;

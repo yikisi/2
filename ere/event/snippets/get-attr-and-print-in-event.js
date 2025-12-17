@@ -4,34 +4,42 @@ const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const { attr_enum } = require('#/data/train-const');
+
 /**
  * @param {number} cid
- * @param {number[]} attr_change
- * @param {number} pt_change
- * @param {Record<string,number>} [base_change={}]
- * @param {boolean} [skip_line_break=false]
+ * @param {number[]} [attr_change]
+ * @param {number} [pt_change]
+ * @param {number[]} [base_change]
+ * @param {boolean} [skip_line_break]
  * @returns {boolean}
  */
 function get_attr_and_print_in_event(
   cid,
-  attr_change,
-  pt_change,
-  base_change = {},
+  attr_change = [],
+  pt_change = 0,
+  base_change = [],
   skip_line_break = false,
 ) {
   if (!skip_line_break) {
     era.println();
   }
-  let buffer = (attr_change || new Array(5))
+  if (attr_change.length > 5) {
+    attr_change = attr_change.slice(0, 5);
+  }
+  let buffer = attr_change
     .map((e, i) => sys_change_attr_and_print(cid, i, e))
-    .filter((e) => e.length);
+    .filter((e) => e.length > 0);
   let ret;
   if ((pt_change ||= 0) > 0) {
     buffer.push([{ content: `获得了 ${pt_change} 点技能点数！` }]);
     era.add(`exp:${cid}:技能点数`, pt_change);
   }
-  const base_buffer = Object.entries(base_change)
-    .map((e) => sys_change_attr_and_print(cid, e[0], e[1]))
+  if (base_change.length > 2) {
+    base_change = base_change.slice(0, 2);
+  }
+  const base_buffer = base_change
+    .map((e, i) => sys_change_attr_and_print(cid, attr_enum.hp + i, e))
     .filter((e) => e.length);
   buffer = [...base_buffer, ...buffer];
   if ((ret = buffer.length > 0)) {

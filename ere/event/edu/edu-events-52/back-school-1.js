@@ -293,7 +293,7 @@ module.exports = (handlers) => {
       52,
       [0, 0, 0, 0, 20],
       0,
-      JSON.parse('{"体力":-100}'),
+      [-100],
       true,
     );
     flags.wait_flag = sys_change_motivation(52, -1) || flags.wait_flag;
@@ -668,12 +668,7 @@ module.exports = (handlers) => {
       await era.printAndWait(
         '不过「在赛场上成为传奇」吗？这个听上去真不错啊……',
       );
-      flags.wait_flag = get_attr_and_print_in_event(
-        52,
-        undefined,
-        5,
-        JSON.parse('{"体力":100}'),
-      );
+      flags.wait_flag = get_attr_and_print_in_event(52, undefined, 5, [100]);
     } else {
       await era.printAndWait([
         '虽然大概率赢不了，但是如果能够让 ',
@@ -733,12 +728,7 @@ module.exports = (handlers) => {
       ]);
       sys_change_weight(0, 100);
       sys_change_weight(52, 100);
-      flags.wait_flag = get_attr_and_print_in_event(
-        52,
-        undefined,
-        10,
-        JSON.parse('{"体力":300}'),
-      );
+      flags.wait_flag = get_attr_and_print_in_event(52, undefined, 10, [300]);
       flags.wait_flag = sys_like_chara(11, 52, 100) || flags.wait_flag;
       flags.wait_flag = sys_like_chara(52, 11, 50) || flags.wait_flag;
     }

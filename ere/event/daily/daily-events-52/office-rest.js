@@ -191,13 +191,8 @@ module.exports = async (hook) => {
     );
     hook.override = true;
     era.println();
-    get_attr_and_print_in_event(
-      52,
-      undefined,
-      undefined,
-      JSON.parse('{"精力":300}'),
-      true,
-    ) && (await era.waitAnyKey());
+    get_attr_and_print_in_event(52, undefined, undefined, [0, 300], true) &&
+      (await era.waitAnyKey());
     sys_like_chara(52, 0, 10, true, 5) && (await era.waitAnyKey());
   } else {
     const talk_arr = [

@@ -1,10 +1,9 @@
 const UmaGene = require('#/data/race/model/uma-gene');
+const UmaSkillGene = require('#/data/race/model/uma-skill-gene');
 
-module.exports = new UmaGene(
+module.exports = new UmaSkillGene(
   900481,
   UmaGene.gene_rarity_enum.sr,
-  '「YEAH☆VIVID TIME!」之回响',
-  '习得「YEAH☆VIVID TIME!」',
   UmaGene.gene_type_enum.skill,
   -1,
   100,

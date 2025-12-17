@@ -669,12 +669,8 @@ module.exports = class extends Edu60RaceEnd {
           callname,
           ' 也是我也是，都要健健康康地度过这新的一年啊！',
         ]);
-        get_attr_and_print_in_event(
-          60,
-          undefined,
-          0,
-          JSON.parse('{"体力":300}'),
-        ) && (await era.waitAnyKey());
+        get_attr_and_print_in_event(60, undefined, 0, [300]) &&
+          (await era.waitAnyKey());
       } else if (ret === 2) {
         await nice_nature.say_and_wait([
           '变强啊～',

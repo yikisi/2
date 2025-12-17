@@ -168,12 +168,7 @@ module.exports = class extends CustomizedEdu {
           me.get_couple_title(),
           ' 进行了一场路边摊约会后就回去了。',
         ]);
-        wait_flag = get_attr_and_print_in_event(
-          24,
-          [],
-          0,
-          JSON.parse('{"体力":300}'),
-        );
+        wait_flag = get_attr_and_print_in_event(24, [], 0, [300]);
         break;
       case 2:
         await maya.say_and_wait('哈哈，你又摆出那种表情。');

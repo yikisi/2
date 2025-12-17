@@ -41,7 +41,7 @@ module.exports = class extends CustomizedEdu {
       0,
       [0, 0, 0, 0, 3],
       get_random_value(0, 10),
-      undefined,
+      void 0,
       true,
     );
     wait_flag = sys_like_chara(201, 0, get_random_value(5, 15)) || wait_flag;

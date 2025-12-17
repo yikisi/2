@@ -13,7 +13,7 @@ class RaceEventParams extends ExtraFlagsParams {
   relation_change;
   /** @type {number} */
   love_change;
-  /** @type {Record<string,number>} */
+  /** @type {number[]} */
   base_change;
   /** @type {PseudoUma} */
   pseudo;

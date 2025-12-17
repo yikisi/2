@@ -475,12 +475,10 @@ module.exports = (handlers, check_tachyon_plan_b) => {
       ]);
       era.println();
       await coffee.say_and_wait(['以后不用害怕这种事了，我会一直陪在您身边的']);
-      get_attr_and_print_in_event(
+      get_attr_and_print_in_event(0, undefined, 0, [
         0,
-        undefined,
-        0,
-        JSON.parse(`{"精力":${era.get('maxbase:0:精力') * 0.3}}`),
-      ) && (await era.waitAnyKey());
+        era.get('maxbase:0:精力') * 0.3,
+      ]) && (await era.waitAnyKey());
       sys_love_uma(25, get_random_value(1, 5)) && (await era.waitAnyKey());
     } else {
       await era.printAndWait([

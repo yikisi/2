@@ -19,6 +19,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { buff_colors } = require('#/data/color-const');
+const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 const { attr_enum, fumble_result } = require('#/data/train-const');
 
@@ -72,21 +73,14 @@ module.exports = class extends Edu3UntilWeekStart {
     );
     era.println();
     sys_like_chara(3, 0, 10, true, 1);
-    get_attr_and_print_in_event(
-      3,
-      new Array(3).fill(-50),
-      0,
-      JSON.parse(
-        `{"体力":${
-          100 *
-            (era.get('cflag:3:育成成绩')[
-              race_infos[race_enum.tenn_spr].date + 95
-            ].rank ===
-              1) -
-          200
-        },"精力":-200}`,
-      ),
-    );
+    get_attr_and_print_in_event(3, new Array(3).fill(-50), 0, [
+      100 *
+        (RaceHistory.get(3).get_result(race_infos[race_enum.tenn_spr].date + 95)
+          ?.rank ===
+          1) -
+        200,
+      -200,
+    ]);
     era.set('talent:3:自信程度', 1);
     era.set('talent:3:淫乱', 1);
     era.set('talent:3:身体素质', 0);
@@ -194,20 +188,14 @@ module.exports = class extends Edu3UntilWeekStart {
         '的腿部进行护理',
       ]);
       wait_flag =
-        get_attr_and_print_in_event(
-          3,
-          [0, 15, 0, 15, 15],
+        get_attr_and_print_in_event(3, [0, 15, 0, 15, 15], 0, [
           0,
-          JSON.parse(`{"精力":${time_change}}`),
-        ) || wait_flag;
+          time_change,
+        ]) || wait_flag;
     } else {
       wait_flag =
-        get_attr_and_print_in_event(
-          3,
-          [15, 0, 15],
-          0,
-          JSON.parse(`{"精力":${time_change}}`),
-        ) || wait_flag;
+        get_attr_and_print_in_event(3, [15, 0, 15], 0, [0, time_change]) ||
+        wait_flag;
       wait_flag = sys_change_motivation(3, 1) || wait_flag;
       wait_flag = sys_like_chara(3, 0, 5) || wait_flag;
     }
@@ -267,23 +255,17 @@ module.exports = class extends Edu3UntilWeekStart {
         `${me.name} 五指并作掌，用刚好的力度从头到尾顺了一遍毛，掌间传来一阵松软，让 ${me.name} 的心情也愉快了起来。`,
       );
       wait_flag =
-        get_attr_and_print_in_event(
-          3,
-          undefined,
-          30,
-          JSON.parse(
-            `{"体力":${get_random_value(50, 100)},"精力":${time_change}}`,
-          ),
-        ) || wait_flag;
+        get_attr_and_print_in_event(3, undefined, 30, [
+          get_random_value(50, 100),
+          time_change,
+        ]) || wait_flag;
       wait_flag = sys_like_chara(3, 0, 5) || wait_flag;
     } else if (ret === 2) {
       wait_flag =
-        get_attr_and_print_in_event(
-          3,
-          [0, 20, 0, 20, 0],
-          30,
-          JSON.parse(`{"精力":${time_change}}`),
-        ) || wait_flag;
+        get_attr_and_print_in_event(3, [0, 20, 0, 20, 0], 30, [
+          0,
+          time_change,
+        ]) || wait_flag;
     } else {
       await era.printAndWait([
         me.get_colored_name(),
@@ -298,12 +280,10 @@ module.exports = class extends Edu3UntilWeekStart {
         '的全身……',
       ]);
       wait_flag =
-        get_attr_and_print_in_event(
-          3,
-          [20, 0, 20, 0, 20],
+        get_attr_and_print_in_event(3, [20, 0, 20, 0, 20], 0, [
           0,
-          JSON.parse(`{"精力":${time_change}}`),
-        ) || wait_flag;
+          time_change,
+        ]) || wait_flag;
       wait_flag = sys_love_uma(3, 1) || wait_flag;
     }
     wait_flag && (await era.waitAnyKey());
@@ -407,12 +387,8 @@ module.exports = class extends Edu3UntilWeekStart {
           `继续行走之前，${me.name} 注意到${teio.sex}似乎刻意规避 ${me.name} 的视线，小心地又用吸管喝了几口饮料……`,
         );
         wait_flag =
-          get_attr_and_print_in_event(
-            3,
-            [15, 0, 15, 0, 0],
-            0,
-            JSON.parse('{"体力":150}'),
-          ) || wait_flag;
+          get_attr_and_print_in_event(3, [15, 0, 15, 0, 0], 0, [150]) ||
+          wait_flag;
         wait_flag = sys_love_uma(3, 1) || wait_flag;
       }
     } else if (event_object?.arg === 'uma_shopping') {
@@ -444,12 +420,8 @@ module.exports = class extends Edu3UntilWeekStart {
       );
       if ((await era.input()) === 1) {
         wait_flag =
-          get_attr_and_print_in_event(
-            3,
-            [20, 0, 20, 20, 0],
-            0,
-            JSON.parse('{"体力":200}'),
-          ) || wait_flag;
+          get_attr_and_print_in_event(3, [20, 0, 20, 20, 0], 0, [200]) ||
+          wait_flag;
         wait_flag = sys_like_chara(3, 0, 10) || wait_flag;
       } else {
         wait_flag =
@@ -636,12 +608,8 @@ module.exports = class extends Edu3UntilWeekStart {
         `${teio.get_teen_sex_title()}躬身，冲 ${me.name} 灿烂一笑。`,
       );
       wait_flag =
-        get_attr_and_print_in_event(
-          3,
-          [20, 20, 0, 0, 20],
-          0,
-          JSON.parse('{"体力":200}'),
-        ) || wait_flag;
+        get_attr_and_print_in_event(3, [20, 20, 0, 0, 20], 0, [200]) ||
+        wait_flag;
       wait_flag = sys_love_uma(3, 1) || wait_flag;
     } else {
       await teio.say_and_wait('又是一个约定，记好了哦～');

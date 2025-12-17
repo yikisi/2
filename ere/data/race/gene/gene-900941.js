@@ -1,10 +1,9 @@
 const UmaGene = require('#/data/race/model/uma-gene');
+const UmaSkillGene = require('#/data/race/model/uma-skill-gene');
 
-module.exports = new UmaGene(
+module.exports = new UmaSkillGene(
   900941,
   UmaGene.gene_rarity_enum.sr,
-  '「Faith in the Feral」之回响',
-  '习得「Faith in the Feral」',
   UmaGene.gene_type_enum.skill,
   -1,
   100,

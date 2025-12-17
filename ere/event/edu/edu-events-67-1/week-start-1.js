@@ -359,12 +359,7 @@ module.exports = (handlers) => {
       );
       era.println();
       flags.wait =
-        get_attr_and_print_in_event(
-          67,
-          undefined,
-          0,
-          JSON.parse('{"体力":200}'),
-        ) || flags.wait;
+        get_attr_and_print_in_event(67, undefined, 0, [200]) || flags.wait;
     } else {
       await daiya.say_and_wait(
         '放风『蒸』！听起来好像很好吃呢！所以是要比谁吃的多吗？',

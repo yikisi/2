@@ -162,20 +162,12 @@ module.exports = (handlers) => {
     );
     if (temp === 1) {
       era.println();
-      flags.wait ||= get_attr_and_print_in_event(
-        37,
-        new Array(5).fill(10),
-        0,
-        JSON.parse('{"体力":400}'),
-      );
+      flags.wait ||= get_attr_and_print_in_event(37, new Array(5).fill(10), 0, [
+        400,
+      ]);
     } else {
       era.println();
-      flags.wait ||= get_attr_and_print_in_event(
-        37,
-        undefined,
-        70,
-        JSON.parse('{"体力":400}'),
-      );
+      flags.wait ||= get_attr_and_print_in_event(37, undefined, 70, [400]);
     }
     era.set('cflag:37:节日事件标记', 0);
   };

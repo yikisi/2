@@ -1,4 +1,4 @@
-const { __, i18n } = require('#/i18n/selector');
+const { i18n } = require('#/i18n/selector');
 
 const attr_enum = {
   speed: 0,
@@ -34,7 +34,6 @@ module.exports = {
   ],
   attr_enum,
   attr_names,
-  base_names: [i18n().hp, i18n().tp],
   fail_sta_border: {
     intelligence: 0.3, // 30%
     other: 0.5, // 50%
@@ -72,8 +71,6 @@ module.exports = {
       },
     },
   },
-  motivation_names: new Array(5).fill(void 0).map((_, i) => __(`moti_${i}`)),
-  out_of_train_type: [i18n().oot_0, i18n().oot_1],
   pressure_border: {
     apprehension: 5000,
     depression: 7500,
@@ -81,10 +78,4 @@ module.exports = {
     unhappy: 2500,
   },
   time_cost: [320, 352, 368, 400, 416],
-  train_buff_info: [
-    i18n().train_debuff,
-    '',
-    i18n().train_buff_1,
-    i18n().train_buff_2,
-  ],
 };

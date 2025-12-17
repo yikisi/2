@@ -387,7 +387,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
     ]);
     extra_flag.attr_change = new Array(5).fill(0);
     extra_flag.attr_change[get_random_value(0, 4)] = 20;
-    extra_flag.base_change = JSON.parse('{"体力":-250}');
+    extra_flag.base_change = [-250];
     extra_flag.pt_change = 45;
     extra_flag.relation_change = 25;
     extra_flag.love_change = 3;

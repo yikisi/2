@@ -1,3 +1,4 @@
+const { generate_content } = require('../libs');
 const { readFileSync, readdirSync, writeFileSync } = require('node:fs');
 const { join } = require('node:path');
 
@@ -22,13 +23,18 @@ const attr_names = ['速度', '耐力', '力量', '根性', '智力'];
 
 let output = 'const gene_dict = {};\n\n';
 
+let n_out = '';
+let d_out = '';
+
 adaptability_names.forEach((e, i) => {
   const gene_id = 100000 + i;
+  n_out += `${gene_id} = '秘传 · ${e}诀窍';`;
+  d_out += `${gene_id} = '${e}适性提高';`;
   writeFileSync(
     join(gene_path, `gene-${gene_id}.js`),
     `const UmaGene = require('#/data/race/model/uma-gene');\n\nmodule.exports = new UmaGene(${
       gene_id
-    },UmaGene.gene_rarity_enum.r,'秘传 · ${e}诀窍','${e}适性提高',UmaGene.gene_type_enum.adapt,'${e}',100,-1)`,
+    },UmaGene.gene_rarity_enum.r,UmaGene.gene_type_enum.adapt,'${e}',100,-1)`,
   );
   output += `gene_dict[${gene_id}] = require('#/data/race/gene/gene-${gene_id}');\n`;
 });
@@ -39,11 +45,13 @@ const attr_gene_cost = [25, 49, 72, 95];
 attr_names.forEach((e, i) => {
   attr_gene_names.forEach((ne, j) => {
     const gene_id = 200000 + i * 10 + j;
+    n_out += `${gene_id} = '${e}${ne}的追忆';`;
+    d_out += `${gene_id} = '${e}属性及上限+${j * 25 + 25}';`;
     writeFileSync(
       join(gene_path, `gene-${gene_id}.js`),
       `const UmaGene = require('#/data/race/model/uma-gene');\n\nmodule.exports = new UmaGene(${
         gene_id
-      },${j},'${e}${ne}的追忆','${e}属性及上限+${j * 25 + 25}',UmaGene.gene_type_enum.base,${i},${attr_gene_cost[j]},${j * 25 + 25})`,
+      },${j},UmaGene.gene_type_enum.base,${i},${attr_gene_cost[j]},${j * 25 + 25})`,
     );
     output += `gene_dict[${gene_id}] = require('#/data/race/gene/gene-${gene_id}');\n`;
   });
@@ -52,28 +60,35 @@ attr_names.forEach((e, i) => {
 skill_list
   .filter((e) => e.startsWith('skill-90') || e.startsWith('skill-910031'))
   .forEach((e) => {
-    const f = readFileSync(join(skill_path, e)).toString();
     const skill_id = e.substring(6, 12);
-    const info_arr = f.split('\n');
-    const skill_name = info_arr[4].substring(3).replace(/['"],\s*$/, '');
     writeFileSync(
       join(gene_path, `gene-${skill_id}.js`),
-      `const UmaGene = require('#/data/race/model/uma-gene');\n\nmodule.exports = new UmaGene(${
+      `const UmaGene = require('#/data/race/model/uma-gene');const UmaSkillGene = require('#/data/race/model/uma-skill-gene');\n\nmodule.exports = new UmaSkillGene(${
         skill_id
-      },UmaGene.gene_rarity_enum.sr,"「${skill_name}」之回响","习得「${
-        skill_name
-      }」",UmaGene.gene_type_enum.skill,-1,100,${skill_id});`,
+      },UmaGene.gene_rarity_enum.sr,UmaGene.gene_type_enum.skill,-1,100,${skill_id});`,
     );
     output += `gene_dict[${skill_id}] = require('#/data/race/gene/gene-${skill_id}');\n`;
   });
 
 writeFileSync(
   join(gene_path, 'gene-300000.js'),
-  "const UmaGene = require('#/data/race/model/uma-gene');\n\nmodule.exports = new UmaGene(300000,UmaGene.gene_rarity_enum.n,'殿堂马娘的灵魂','技能点数+600',UmaGene.gene_type_enum.skill,-1,100,600)",
+  "const UmaGene = require('#/data/race/model/uma-gene');\n\nmodule.exports = new UmaGene(300000,UmaGene.gene_rarity_enum.n,UmaGene.gene_type_enum.skill,-1,100,600)",
 );
 output += 'gene_dict[300000] = require("#/data/race/gene/gene-300000")';
 
 writeFileSync(
   join(gene_path, 'gene-const.js'),
   `${output}\nmodule.exports = {gene_dict};`,
+);
+
+const i18n_n = join(__dirname, '../../ere/i18n/zh-CN/gene-names.js');
+const i18n_d = join(__dirname, '../../ere/i18n/zh-CN/gene-desc.js');
+
+writeFileSync(
+  i18n_n,
+  generate_content(readFileSync(i18n_n, 'utf-8'), '//', n_out),
+);
+writeFileSync(
+  i18n_d,
+  generate_content(readFileSync(i18n_d, 'utf-8'), '//', d_out),
 );

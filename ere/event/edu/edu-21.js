@@ -124,9 +124,7 @@ module.exports = class extends CustomizedEdu {
         break;
       case 2:
         wait_flag = all_reward_in_event(this.id, {
-          base: JSON.parse(
-            `{"体力":${era.get(`maxbase:${this.id}:体力`) * 0.1}}`,
-          ),
+          base: [era.get(`maxbase:${this.id}:0`) * 0.1],
         });
         break;
       case 3:
@@ -318,10 +316,10 @@ module.exports = class extends CustomizedEdu {
             extra_flag.motivation_change = 1;
           } else {
             extra_flag.relation_change = 10;
-            const base = {};
-            base['体力'] = era.get(`maxbase:${this.id}:体力`) * 0.2;
-            base['精力'] = era.get(`maxbase:${this.id}:精力`) * 0.2;
-            extra_flag.base_change = base;
+            extra_flag.base_change = [
+              era.get(`maxbase:${this.id}:0`) * 0.2,
+              era.get(`maxbase:${this.id}:1`) * 0.2,
+            ];
           }
         }
         break;

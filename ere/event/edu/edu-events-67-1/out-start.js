@@ -435,12 +435,7 @@ module.exports = class extends Edu67BackSchool {
           '后来，里见光钻点了目白麦昆推荐的甜点……这是考量了热量问题后的选择。',
         );
         era.println();
-        wait_flag = get_attr_and_print_in_event(
-          67,
-          undefined,
-          0,
-          JSON.parse('{"体力":100}'),
-        );
+        wait_flag = get_attr_and_print_in_event(67, undefined, 0, [100]);
       } else {
         await daiya.say_and_wait('是！我一定会追上麦昆的！');
         await daiya.say_and_wait(
@@ -461,12 +456,7 @@ module.exports = class extends Edu67BackSchool {
         );
         era.add(`base:67:体重偏差`, 500);
         era.println();
-        wait_flag = get_attr_and_print_in_event(
-          67,
-          undefined,
-          0,
-          JSON.parse('{"体力":300}'),
-        );
+        wait_flag = get_attr_and_print_in_event(67, undefined, 0, [300]);
       }
     } else if (edu_marks.fresh === 1) {
       edu_marks.fresh++;
@@ -834,12 +824,7 @@ module.exports = class extends Edu67BackSchool {
           `于是──${me.get_couple_title()} 一起享用了用新干线外送过来的美味鳗鱼饭。`,
         );
         era.println();
-        wait_flag = get_attr_and_print_in_event(
-          67,
-          undefined,
-          0,
-          JSON.parse('{"体力":300}'),
-        );
+        wait_flag = get_attr_and_print_in_event(67, undefined, 0, [300]);
       } else if (ret === 2) {
         await daiya.say_and_wait(
           '福袋！那个真的会让人充满期待呢！我也想要买！',

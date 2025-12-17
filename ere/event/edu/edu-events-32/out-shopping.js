@@ -326,12 +326,9 @@ module.exports = async (tachyon, me, callname, hook, event_object) => {
           ' 才后知后觉的发现',
         ]);
       }
-      wait_flag = get_attr_and_print_in_event(
-        32,
-        undefined,
-        0,
-        JSON.parse(`{"体力":${era.get('maxbase:32:体力') * 0.2}}`),
-      );
+      wait_flag = get_attr_and_print_in_event(32, undefined, 0, [
+        era.get('maxbase:32:0') * 0.2,
+      ]);
       break;
     case 2:
       await say_by_passer_by_and_wait('店主', '二等奖，山一样高的胡萝卜堆！');
@@ -494,12 +491,9 @@ module.exports = async (tachyon, me, callname, hook, event_object) => {
           ' 满意的菜肴来',
         ]);
       }
-      wait_flag = get_attr_and_print_in_event(
-        32,
-        new Array(5).fill(5),
-        0,
-        JSON.parse(`{"体力":${era.get('maxbase:32:体力') * 0.2}}`),
-      );
+      wait_flag = get_attr_and_print_in_event(32, new Array(5).fill(5), 0, [
+        era.get('maxbase:32:0') * 0.2,
+      ]);
       wait_flag = sys_change_motivation(32, 1) || wait_flag;
       break;
     case 3:
@@ -739,22 +733,16 @@ module.exports = async (tachyon, me, callname, hook, event_object) => {
           '…………不得不承认，知名主厨做的确实比自己要强上许多',
         );
       }
-      wait_flag = get_attr_and_print_in_event(
-        32,
-        new Array(5).fill(10),
-        0,
-        JSON.parse(`{"体力":${era.get('maxbase:32:体力') * 0.3}}`),
-      );
+      wait_flag = get_attr_and_print_in_event(32, new Array(5).fill(10), 0, [
+        era.get('maxbase:32:0') * 0.3,
+      ]);
       wait_flag = sys_change_motivation(32, 1) || wait_flag;
       break;
     case 4:
       await hot_spring_ticket(tachyon, me, callname, relation, love);
-      wait_flag = get_attr_and_print_in_event(
-        32,
-        new Array(5).fill(10),
-        0,
-        JSON.parse(`{"体力":${era.get('maxbase:32:体力') * 0.3}}`),
-      );
+      wait_flag = get_attr_and_print_in_event(32, new Array(5).fill(10), 0, [
+        era.get('maxbase:32:0') * 0.3,
+      ]);
       wait_flag = sys_change_motivation(32, 1) || wait_flag;
   }
   wait_flag && (await era.waitAnyKey());

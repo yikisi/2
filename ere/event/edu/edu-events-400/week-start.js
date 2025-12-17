@@ -359,12 +359,7 @@ module.exports = (handlers) => {
       ss.sex,
       '点的东西里面，韭菜之类的东西似乎格外的多。',
     ]);
-    flags.wait_flag = get_attr_and_print_in_event(
-      400,
-      [0, 10],
-      0,
-      JSON.parse('{"体力":200}'),
-    );
+    flags.wait_flag = get_attr_and_print_in_event(400, [0, 10], 0, [200]);
   };
 
   handlers[95 + 13] = async (ss, me, callname) => {

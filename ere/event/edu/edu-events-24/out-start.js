@@ -99,7 +99,7 @@ module.exports = (handlers) => {
           24,
           new Array(5).fill(10),
           0,
-          JSON.parse('{"体力":300}'),
+          [300],
         );
         flags.wait_flag = sys_change_motivation(24, 2) || flags.wait_flag;
         break;
@@ -152,7 +152,7 @@ module.exports = (handlers) => {
           24,
           new Array(5).fill(10),
           0,
-          JSON.parse('{"体力":300}'),
+          [300],
         );
         flags.wait_flag = sys_change_motivation(24, 2) || flags.wait_flag;
         break;
@@ -203,12 +203,7 @@ module.exports = (handlers) => {
           me.get_colored_name(),
           ' 房间的次数增加了……',
         ]);
-        flags.wait_flag = get_attr_and_print_in_event(
-          24,
-          [],
-          0,
-          JSON.parse('{"体力":300}'),
-        );
+        flags.wait_flag = get_attr_and_print_in_event(24, [], 0, [300]);
         flags.wait_flag = sys_change_motivation(24, 1) || flags.wait_flag;
         break;
       case 5:
@@ -241,12 +236,7 @@ module.exports = (handlers) => {
           maya.get_colored_name(),
           ' 的脸上露出了灿烂的笑容。',
         ]);
-        flags.wait_flag = get_attr_and_print_in_event(
-          24,
-          [],
-          0,
-          JSON.parse('{"体力":200}'),
-        );
+        flags.wait_flag = get_attr_and_print_in_event(24, [], 0, [200]);
         break;
       case 9:
         await say_by_passer_by_and_wait(
@@ -268,12 +258,7 @@ module.exports = (handlers) => {
           maya.get_colored_name(),
           '，回到了学园……',
         ]);
-        flags.wait_flag = get_attr_and_print_in_event(
-          24,
-          [],
-          0,
-          JSON.parse('{"体力":300}'),
-        );
+        flags.wait_flag = get_attr_and_print_in_event(24, [], 0, [300]);
         flags.wait_flag = sys_change_motivation(24, -1) || flags.wait_flag;
     }
   };

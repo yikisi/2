@@ -630,7 +630,7 @@ module.exports = (handlers) => {
       ' 露出了会心的微笑。',
     ]);
     extra_flag.attr_change = new Array(5).fill(20);
-    extra_flag.base_change = JSON.parse('{"体力":-150}');
+    extra_flag.base_change = [-150];
     extra_flag.pt_change = 120;
     extra_flag.skill_change = [
       CharaSkills.get(85).get().indexOf(200962) === -1 ? 200962 : 200961,

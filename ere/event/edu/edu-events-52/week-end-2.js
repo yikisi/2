@@ -674,13 +674,7 @@ module.exports = (handlers) => {
     era.println();
     let wait_flag = false;
     wait_flag =
-      get_attr_and_print_in_event(
-        52,
-        undefined,
-        0,
-        JSON.parse('{"体力":400}'),
-        true,
-      ) || wait_flag;
+      get_attr_and_print_in_event(52, undefined, 0, [400], true) || wait_flag;
     sys_change_weight(52, 20);
     sys_change_attr_and_print(0, attr_enum.hp, 400);
     sys_change_weight(0, 20);

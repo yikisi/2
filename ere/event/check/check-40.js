@@ -6,7 +6,6 @@ const check_aim_race = require('#/event/snippets/check-aim-race');
 
 const CityEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-40');
 const { race_enum } = require('#/data/race/race-const');
-const { attr_names } = require('#/data/train-const');
 
 const aim_races = {};
 aim_races[race_enum.begin_race] = 4;
@@ -29,7 +28,8 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
   function (races) {
     return (
       check_aim_race(races, race_enum.hans_fil, 0, 1) &&
-      attr_names.findIndex((e) => get(`abl:${this.id}:${e}训练等级`) <= 3) ===
+      // ABLNAME:0 - 4 = 速度训练等级 - 智力训练等级
+      new Array(5).fill(0).findIndex((i) => get(`abl:${this.id}:${i}`) <= 3) ===
         -1 &&
       !new CityEduMarks().title_check
     );

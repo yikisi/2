@@ -301,16 +301,12 @@ module.exports = (handlers) => {
             me.get_colored_name(),
             ' 完成了今天的训练',
           ]);
-          flags.wait_flag = get_attr_and_print_in_event(
-            32,
-            [0, 0, 10, 10, 0],
-            0,
-          );
+          flags.wait_flag = get_attr_and_print_in_event(32, [0, 0, 10, 10, 0]);
           flags.wait_flag = get_attr_and_print_in_event(
             0,
             [0, 0, 10, 10, 0],
             0,
-            JSON.parse('{"体力":-200}'),
+            [-200],
           );
           break;
         case 2:
@@ -385,16 +381,12 @@ module.exports = (handlers) => {
           ]);
           era.println();
           await me.say_and_wait('……这个问题不是该问你吗？');
-          flags.wait_flag = get_attr_and_print_in_event(
-            32,
-            [0, 10, 10, 0, 0],
-            0,
-          );
+          flags.wait_flag = get_attr_and_print_in_event(32, [0, 10, 10, 0, 0]);
           flags.wait_flag = get_attr_and_print_in_event(
             0,
             [0, 10, 10, 0, 0],
             0,
-            JSON.parse('{"体力":-200}'),
+            [-200],
           );
           break;
         case 3:
@@ -444,16 +436,12 @@ module.exports = (handlers) => {
             tachyon.get_colored_name(),
             ' 追了又放四次，总共灌了十六管的药水',
           ]);
-          flags.wait_flag = get_attr_and_print_in_event(
-            32,
-            [10, 0, 0, 0, 10],
-            0,
-          );
+          flags.wait_flag = get_attr_and_print_in_event(32, [10, 0, 0, 0, 10]);
           flags.wait_flag = get_attr_and_print_in_event(
             0,
             [10, 0, 0, 0, 10],
             0,
-            JSON.parse('{"体力":-400}'),
+            [-400],
           );
       }
     }

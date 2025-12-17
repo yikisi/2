@@ -541,12 +541,9 @@ module.exports = (handlers) => {
     }
     switch (ret) {
       case 1:
-        flags.wait_flag = get_attr_and_print_in_event(
-          32,
-          undefined,
-          0,
-          JSON.parse(`{"体力":${era.get('maxbase:32:体力') * 0.2}}`),
-        );
+        flags.wait_flag = get_attr_and_print_in_event(32, undefined, 0, [
+          era.get('maxbase:32:0') * 0.2,
+        ]);
         break;
       case 2:
         {

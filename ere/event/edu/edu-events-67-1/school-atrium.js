@@ -438,12 +438,7 @@ module.exports = class extends Edu67UntilRaceStart {
           '两人一起经过苦思后做出选择，一起品尝了美味的甜点！',
         );
         era.println();
-        wait_flag = get_attr_and_print_in_event(
-          67,
-          [0, 0, 0, 0, 10],
-          0,
-          JSON.parse('{"体力":100}'),
-        );
+        wait_flag = get_attr_and_print_in_event(67, [0, 0, 0, 0, 10], 0, [100]);
       } else {
         await daiya.say_and_wait('是秘密特训的必做项目呢。我们去看看吧……！');
         await mcqueen.say_and_wait('请问……你在赛道的正中间做什么呢？');

@@ -219,12 +219,7 @@ module.exports = class extends Edu3UntilWeekEnd {
         );
         era.println();
         wait_flag = sys_like_chara(3, 0, 10, true, 1) || wait_flag;
-        wait_flag = get_attr_and_print_in_event(
-          3,
-          undefined,
-          0,
-          JSON.parse('{"体力":-150,"精力":-50}'),
-        );
+        wait_flag = get_attr_and_print_in_event(3, undefined, 0, [-150, -50]);
       }
     } else if (event_arg === 95 + 14) {
       await print_event_name('粉丝感谢祭', teio);

@@ -312,16 +312,13 @@ async function race_page(race) {
     } else if (uma.rank.curr <= 10) {
       rewards = race_rewards[info.race_class].r10;
     }
-    const base_change = {};
-    base_change['体力'] = -get_random_value(150, 250, true);
-    base_change['精力'] = -get_random_value(150, 250, true);
     if (rewards) {
       attr_change[get_random_value(0, 4)] += get_random_value(...rewards.attr);
       get_attr_and_print_in_event(
         id,
         attr_change,
         get_random_value(...rewards.pt),
-        base_change,
+        [-get_random_value(150, 250, true), -get_random_value(150, 250, true)],
       );
     } else {
       get_attr_and_print_in_event(id, undefined, 10);

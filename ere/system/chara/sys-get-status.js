@@ -23,7 +23,9 @@ const LightLifeMarks = require('#/data/event/life-event-marks/life-event-marks-3
 const recruit_flags = require('#/data/event/recruit-flags');
 const { foreign_locations } = require('#/data/locations');
 const LoveLimitStatus = require('#/data/love-limit-status');
-const { pressure_border, train_buff_info } = require('#/data/train-const');
+const { pressure_border } = require('#/data/train-const');
+
+const { i18n } = require('#/i18n/selector');
 
 /**
  * @param {number} cid
@@ -161,11 +163,12 @@ function sys_get_status(cid) {
         title: `训练经验获取量+${check}%。`,
       });
     }
-    const train_buff = era.get(`status:${cid}:练习X手`);
+    // STATUSNAME:0 = 练习X手
+    const train_buff = era.get(`status:${cid}:0`);
     if (train_buff) {
       status_list.push({
         color: buff_colors[Number(train_buff > 0)],
-        content: train_buff_info[train_buff + 1],
+        content: i18n().train_buff_desc[train_buff + 1],
       });
     }
   }

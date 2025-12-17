@@ -339,7 +339,7 @@ module.exports = class extends CustomizedDaily {
           relation = 10;
           love = 2;
           if (temp[1] === 1) {
-            base = { 体力: 100 };
+            base = [100];
           } else {
             pt = 35;
           }

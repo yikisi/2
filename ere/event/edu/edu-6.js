@@ -63,9 +63,7 @@ module.exports = class extends CustomizedEdu {
         break;
       case 2:
         wait = all_reward_in_event(this.id, {
-          base: JSON.parse(
-            `{"体力":${era.get(`maxbase:${this.id}:体力`) * 0.1}}`,
-          ),
+          base: [era.get(`maxbase:${this.id}:0`) * 0.1],
         });
         break;
       case 3:

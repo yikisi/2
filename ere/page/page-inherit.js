@@ -38,7 +38,7 @@ const {
   gene_type_colors,
   gene_type_enum,
 } = require('#/data/race/model/uma-gene');
-const { adaptability_names, attr_names } = require('#/data/train-const');
+const { attr_names } = require('#/data/train-const');
 
 const gene_limit = 27;
 
@@ -571,8 +571,9 @@ async function print_inherit_page() {
         if (_src <= 0) {
           _src = 0;
         }
-        adaptability_names.forEach((e) =>
-          set(`cflag:0:${e}适性`, get(`cflag:${_src}:${e}适性`)),
+        new Array(10).fill(0).forEach((_, i) =>
+          // CFLAGNAME:30-39 = 草地适性 - 追马适性
+          set(`cflag:0:${i + 30}`, get(`cflag:${_src}:${i + 30}`)),
         );
         chara_genes.get_values().forEach((e) => {
           if (e.type === gene_type_enum.base) {

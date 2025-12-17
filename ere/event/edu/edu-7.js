@@ -639,12 +639,8 @@ module.exports = class extends Edu7UntilWeekStart {
         await era.printAndWait('但午休还是在不知不觉间过去了！');
         era.println();
 
-        get_attr_and_print_in_event(
-          7,
-          undefined,
-          0,
-          JSON.parse('{"体力":100}'),
-        ) && (await era.waitAnyKey());
+        get_attr_and_print_in_event(7, undefined, 0, [100]) &&
+          (await era.waitAnyKey());
       } else {
         if (Math.random() < 0.5) {
           await era.printAndWait(

@@ -834,12 +834,9 @@ module.exports = (handlers) => {
       }
     } else {
       await plana(tachyon, me, callname, relation, love);
-      flags.wait_flag = get_attr_and_print_in_event(
-        32,
-        undefined,
-        0,
-        JSON.parse(`{"体力":${era.get('maxbase:32:体力') * 0.4}}`),
-      );
+      flags.wait_flag = get_attr_and_print_in_event(32, undefined, 0, [
+        era.get('maxbase:32:0') * 0.4,
+      ]);
       flags.wait_flag = sys_like_chara(32, 0, 100);
     }
   };
