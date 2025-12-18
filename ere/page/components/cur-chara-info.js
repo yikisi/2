@@ -18,20 +18,20 @@ const { get_growth } = require('#/data/ero/status-const');
 const {
   get_love_info,
   get_relation_info,
-  get_train_time,
+  get_train_year,
 } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 
 const { __, i18n } = require('#/i18n/selector');
 
 /**
- * @param {number} chara_id
+ * @param {number} cid
  * @param {number} [type]
  * @param {number} [location_npc]
  */
-function cur_chara_component(chara_id, type, location_npc) {
+function cur_chara_component(cid, type, location_npc) {
   let temp;
-  if (chara_id === 0) {
+  if (cid === 0) {
     if (location_npc) {
       const relation = get_relation_info(location_npc);
       const love = get_love_info(location_npc);
@@ -94,21 +94,21 @@ function cur_chara_component(chara_id, type, location_npc) {
     }
   } else {
     era.drawLine();
-    const relation = get_relation_info(chara_id);
-    const love = get_love_info(chara_id);
-    const growth = era.get(`cflag:${chara_id}:成长阶段`);
-    const title = CharaTitles.get(chara_id).get_colored_curr_title(true);
+    const relation = get_relation_info(cid);
+    const love = get_love_info(cid);
+    const growth = era.get(`cflag:${cid}:成长阶段`);
+    const title = CharaTitles.get(cid).get_colored_curr_title(true);
     const in_train =
-      growth >= 2 && era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48;
-    const motivation = era.get(`cflag:${chara_id}:干劲`);
-    const out_of_train = era.get(`cflag:${chara_id}:殿堂`);
-    const race = era.get(`cflag:${chara_id}:种族`);
+      growth >= 2 && era.get(`cflag:${cid}:育成回合计时`) < 3 * 48;
+    const motivation = era.get(`cflag:${cid}:干劲`);
+    const out_of_train = era.get(`cflag:${cid}:殿堂`);
+    const race = era.get(`cflag:${cid}:种族`);
     /** @type {*[]} */
     const name_columns = ['当前角色：'];
     if (title) {
       name_columns.push(title, ' ');
     }
-    name_columns.push(get_chara_talk(chara_id).get_colored_name());
+    name_columns.push(get_chara_talk(cid).get_colored_name());
     if (out_of_train >= 1) {
       name_columns.push(` [${i18n().n_oot[out_of_train - 1]}]`);
     }
@@ -123,18 +123,18 @@ function cur_chara_component(chara_id, type, location_npc) {
             content: i18n().n_moti[motivation + 2],
           },
           ' ',
-          get_train_time(chara_id).substring(0, 3),
+          get_train_year(cid),
         );
       } else if (race > 0 && !out_of_train && (growth === 2 || growth === 3)) {
         name_columns.push(' 待入学');
       }
-      name_columns.push(...race_indicator(chara_id));
+      name_columns.push(...race_indicator(cid));
     }
     location_npc &&
       (temp = CharaTitles.get(location_npc).get_colored_curr_title());
     era.setVerticalAlign('middle');
     const image_switch = era.get('flag:立绘类型'),
-      status_list = get_status(chara_id);
+      status_list = get_status(cid);
     era.printInColRows(
       {
         columns: [{ content: name_columns, type: 'text' }],
@@ -160,7 +160,7 @@ function cur_chara_component(chara_id, type, location_npc) {
         columns: [
           {
             config: { width: 21 },
-            names: get_image(chara_id)
+            names: get_image(cid)
               .map((e) => {
                 switch (image_switch) {
                   case 0:
@@ -190,8 +190,8 @@ function cur_chara_component(chara_id, type, location_npc) {
               }
             : { content: '\n', type: 'text' },
           ...['hp', 'tp'].reduce((p, c, i) => {
-            const val = era.get(`base:${chara_id}:${i}`);
-            const limit = era.get(`maxbase:${chara_id}:${i}`);
+            const val = era.get(`base:${cid}:${i}`);
+            const limit = era.get(`maxbase:${cid}:${i}`);
             p.push(
               { config: { width: 2 }, content: __(c), type: 'text' },
               {
@@ -213,7 +213,7 @@ function cur_chara_component(chara_id, type, location_npc) {
                 },
                 {
                   config: { width: 4 },
-                  content: [sys_get_full_chara(chara_id)],
+                  content: [sys_get_full_chara(cid)],
                   type: 'text',
                 },
               ]

@@ -3,8 +3,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaEroSkill(
   660042,
-  '母狼在上',
-  '喷奶时为队友恢复持久力，自身少量恢复持久力并提高少量速度',
   66004,
   2,
   UmaSkill.get_skill_color(

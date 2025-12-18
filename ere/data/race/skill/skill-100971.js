@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100971,
-  '情不自禁的绯色百合',
-  '剩余300m的位置处在中游位置时，速度大幅提升；在中距离比赛发动「冲动」技能的情况下技能效果变为在比赛终盘的弯道，无视名次提升加速度',
   10097,
   1,
   18,

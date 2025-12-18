@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   102041,
-  '牢不可破的城堡',
-  '终盘初始段位于前方时，向前突进大幅提高加速力，若是擅长的距离还会进一步提高速度',
   10204,
   1,
   UmaSkill.get_skill_color(

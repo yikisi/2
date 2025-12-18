@@ -32,7 +32,6 @@ const {
   get_trainer_train_buff,
 } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
-const { ability_tag_names } = require('#/data/race/model/uma-skill');
 const {
   chara_skill_dict,
   common_skills,
@@ -583,7 +582,7 @@ module.exports = async () => {
                         content: '技能类型',
                         type: 'text',
                       },
-                      ...['全部', '常时', '恢复', '增幅', '控制'].map(
+                      ...['全部', ...i18n().skill.n_type.slice(0, 4)].map(
                         (e, i) => ({
                           accelerator: 930 + i,
                           config: {
@@ -657,7 +656,7 @@ module.exports = async () => {
                         content: '效果类型',
                         type: 'text',
                       },
-                      ...['全部', ...ability_tag_names].map((e, i) => ({
+                      ...['全部', ...i18n().skill.n_tag].map((e, i) => ({
                         accelerator: 970 + i,
                         config: {
                           buttonType:

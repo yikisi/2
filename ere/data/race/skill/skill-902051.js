@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   902051,
-  'Déesse réincarnée',
-  '在临近终点的弯道时，速度微量提升，同时恢复少量体力',
   90205,
   1,
   UmaSkill.get_skill_color(

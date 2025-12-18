@@ -1,5 +1,16 @@
-const skill_name_enum = { buff: 0, heal: 0, speed: 0, control: 0, debuff: 0 };
-Object.keys(skill_name_enum).forEach((k, i) => (skill_name_enum[k] = i));
+const {
+  ability_tag_enum,
+  ability_time_usage_enum,
+  ability_type_enum,
+  ability_usage_enum,
+  get_skill_color,
+  skill_border_enum,
+  skill_name_enum,
+  target_type_enum,
+} = require('#/data/race/model/skill-enum');
+
+const { i18n } = require('#/i18n/selector');
+
 const skill_name_colors = [
   '#a7fe9e',
   '#98ccfa',
@@ -7,23 +18,7 @@ const skill_name_colors = [
   '#ff9e9d',
   '#ce7cff',
 ];
-const skill_name_types = [];
-skill_name_types[skill_name_enum.buff] = '常时';
-skill_name_types[skill_name_enum.heal] = '恢复';
-skill_name_types[skill_name_enum.speed] = '增幅';
-skill_name_types[skill_name_enum.control] = '控制';
-skill_name_types[skill_name_enum.debuff] = '劣势';
 
-const skill_border_enum = {
-  normal: 0,
-  advanced: 0,
-  spe: 0,
-  evol: 0,
-  cheat: 0,
-  ero_normal: 0,
-  ero_advanced: 0,
-};
-Object.keys(skill_border_enum).forEach((k, i) => (skill_border_enum[k] = i));
 const skill_border_colors = [
   '#c6c5c5',
   '#eeb93f',
@@ -33,216 +28,6 @@ const skill_border_colors = [
   '#ee82ee',
   '#cf00cf',
 ];
-const skill_border_types = [];
-skill_border_types[skill_border_enum.normal] = '普通';
-skill_border_types[skill_border_enum.advanced] = '传说';
-skill_border_types[skill_border_enum.spe] = '独有';
-skill_border_types[skill_border_enum.evol] = '进化';
-skill_border_types[skill_border_enum.cheat] = 'ＧＭ';
-skill_border_types[skill_border_enum.ero_normal] = '普通 · 调教';
-skill_border_types[skill_border_enum.ero_advanced] = '强化 · 调教';
-
-const ability_time_usage_enum = {
-  normal: 1,
-  top_distance: 2,
-  stamina: 3,
-  order_change: 4,
-  blocked_side_continuetime: 5,
-};
-
-const ability_type_enum = {
-  no: 0,
-  // 速度
-  Speed: 1,
-  // 耐力
-  Stamina: 2,
-  // 力量
-  Power: 3,
-  // 根性
-  Guts: 4,
-  // 智力
-  Wiz: 5,
-  // 大逃
-  RunningStyleExOonige: 6,
-  // 体力下降
-  // HpDecRate: 7,
-  // 视野
-  VisibleDistance: 8,
-  // 体力恢复
-  HpRate: 9,
-  // 出闸
-  StartDash: 10,
-  // ForceOvertakeIn: 11,
-  // ForceOvertakeOut: 12,
-  // 延长焦躁
-  TemptationEndTime: 13,
-  // 当前速度
-  CurrentSpeed: 21,
-  // 自然衰减加速
-  CurrentSpeedWithNaturalDeceleration: 22,
-  // 目标速度
-  TargetSpeed: 27,
-  // 变道速度
-  LaneMoveSpeed: 28,
-  // 焦躁概率
-  TemptationPer: 29,
-  // PushPer: 30,
-  // 加速度
-  Accel: 31,
-  // 全属性增加
-  AllAttrIncrease: 32,
-  // 目标道路
-  TargetLane: 35,
-  // 随机触发技能
-  // ActivateRandomNormalAndRareSkill: 36,
-  ActivateRandomRareSkill: 37,
-  Connect: 41,
-  Genesis: 42,
-  // 育成继承活动使用
-  // ChallengeMatchBonusXXX: 50,
-  // 可以用性玩具
-  HasItem: 90,
-  // 性玩具带来 Buff
-  HasItemBuff: 91,
-  // 高潮时使其他角色获得快感
-  ShareOrgasm: 92,
-};
-
-const ability_usage_enum = {
-  no: 0,
-  // 直接使用
-  Direct: 1,
-  // 每个技能提升1%，最大20%
-  MultiplySkillNum: 2,
-  MultiplyTeamTotalSpeed: 3,
-  MultiplyTeamTotalStamina: 4,
-  MultiplyTeamTotalPower: 5,
-  MultiplyTeamTotalGuts: 6,
-  MultiplyTeamTotalWiz: 7,
-  MultiplyRandom1: 8,
-  // MultiplyRandom2: 9,
-  // 胜场决定倍率：6、14、18、25，分别为0.8、0.9、1.0、1.1、1.2
-  MultiplySingleModeWinCount: 10,
-  // 终弯超过人数
-  MultiplyOvertakeCount: 11,
-  MultiplyFanCount: 12,
-  MultiplyFanCount2: 25,
-  MultiplyMaximumRawStatus: 13,
-  // 发动绿技能数量决定倍率：3、5、6，分别+1，最高3
-  MultiplyActivateSpecificTagSkillCount: 14,
-  // MultiplyActivateHealSkillCount: 15,
-  // MultiplyFinalCornerEndOrder: 16,
-  // MultiplyInvTeamMemberCount: 17,
-  // MultiplyBaseWiz: 18,
-  // 和头马的距离影响（CB固有中长距离）：CB固有的说法是大于8马身+0.1m/s,可以先作为参考
-  AddDistanceDiffTop: 19,
-  // 中盘竞争时间计算倍率，2、4、6倍率分别+1，最高4
-  MultiplyBlockedSideMaxContinueTimePhaseMiddleRun1: 20,
-  // MultiplyBlockedSideMaxContinueTimePhaseMiddleRun2: 21,
-  // 根据速度决定加成 - 加速度
-  MultiplyBaseSpeedForAcc: 22,
-  // 根据速度决定加成 - 速度
-  MultiplyBaseSpeed: 23,
-  MultiplyForeignAdaptability: 24,
-  MultiplyUAFWins: 26,
-  MultiplyCookingPt: 27,
-  MultiplyResearchLv: 28,
-  MultiplyLove: 30,
-  MultiplyIsland: 31,
-  MultiplyHotSpring: 32,
-  MultiplyCount: 99,
-};
-
-const target_type_enum = {
-  no: 0,
-  // 自身
-  Self: 1,
-  All: 2,
-  // AllOtherSelf: 3,
-  // 视野范围内
-  Visible: 4,
-  // RandomOtherSelf: 5,
-  // Order: 6,
-  // 头马开始目标数（小于）
-  OrderInfront: 7,
-  // OrderBehind: 8,
-  // 前方所有
-  SelfInfront: 9,
-  // 后方所有
-  SelfBehind: 10,
-  TeamMember: 11,
-  // Near: 12,
-  // SelfAndBlockFront: 13,
-  // BlockSide: 14,
-  // NearInfront: 15,
-  // NearBehind: 16,
-  // RunningStyle: 17,
-  // 跑法目标
-  RunningStyleOtherSelf: 18,
-  // 前方焦躁
-  SelfInfrontTemptation: 19,
-  // 后方焦躁
-  SelfBehindTemptation: 20,
-  // 对应跑法的焦躁马娘
-  RunningStyleTemptationOtherSelf: 21,
-  // 对应角色存在
-  CharaId: 22,
-  // 体力恢复的角色
-  ActivateHealSkill: 23,
-  // 队友
-  Team: 98,
-  // 自身之外
-  Others: 99,
-};
-
-const adapt_tag_names = [
-  '草地',
-  '泥地',
-  '短距离',
-  '英里赛',
-  '中距离',
-  '长距离',
-  '逃马',
-  '先马',
-  '差马',
-  '追马',
-];
-
-const ability_tag_enum = {
-  speed: 0,
-  stamina: 1,
-  power: 2,
-  guts: 3,
-  wiz: 4,
-  startDash: 5,
-  tempPer: 6,
-  visible: 6,
-  targetSpeed: 7,
-  currentSpeed: 7,
-  accel: 8,
-  hpRate: 5,
-  temp: 1,
-  laneMove: 1,
-  ero: 0,
-};
-Object.keys(ability_tag_enum).forEach((k, i) => (ability_tag_enum[k] = i));
-
-const ability_tag_names = [];
-ability_tag_names[ability_tag_enum.speed] = '速度';
-ability_tag_names[ability_tag_enum.stamina] = '耐力';
-ability_tag_names[ability_tag_enum.power] = '力量';
-ability_tag_names[ability_tag_enum.guts] = '根性';
-ability_tag_names[ability_tag_enum.wiz] = '智力';
-ability_tag_names[ability_tag_enum.startDash] = '出闸';
-ability_tag_names[ability_tag_enum.tempPer] = '焦躁概率';
-ability_tag_names[ability_tag_enum.visible] = '视野';
-ability_tag_names[ability_tag_enum.targetSpeed] = '目标速度';
-ability_tag_names[ability_tag_enum.currentSpeed] = '即时速度';
-ability_tag_names[ability_tag_enum.accel] = '加速度';
-ability_tag_names[ability_tag_enum.hpRate] = '持久力';
-ability_tag_names[ability_tag_enum.temp] = '焦躁';
-ability_tag_names[ability_tag_enum.laneMove] = '突围';
-ability_tag_names[ability_tag_enum.ero] = '调教';
 
 class UmaSkill {
   static skill_name_enum = skill_name_enum;
@@ -252,23 +37,11 @@ class UmaSkill {
   static ability_usage_enum = ability_usage_enum;
   static target_type_enum = target_type_enum;
   static ability_tag_enum = ability_tag_enum;
-  static ability_tag_names = ability_tag_names;
 
-  /**
-   * @param {number} name
-   * @param {number} border
-   * @returns {number}
-   */
-  static get_skill_color(name, border) {
-    return border + (name << 3);
-  }
+  static get_skill_color = get_skill_color;
 
   /** @type {number} */
   id;
-  /** @type {string} */
-  name;
-  /** @type {string} */
-  desc;
   /**
    * 技能分组（同组技能最高者生效）
    * @type {number}
@@ -375,10 +148,17 @@ class UmaSkill {
    */
   ability_tags;
 
+  /** @returns {string} */
+  get name() {
+    return i18n().skill[this.id];
+  }
+  /** @returns {string} */
+  get desc() {
+    return i18n().skill_desc[this.id];
+  }
+
   /**
    * @param {number} id
-   * @param {string} name
-   * @param {string} desc
    * @param {number} group_id
    * @param {number} group_level
    * @param {number} category
@@ -404,8 +184,6 @@ class UmaSkill {
    */
   constructor(
     id,
-    name,
-    desc,
     group_id,
     group_level,
     category,
@@ -430,8 +208,6 @@ class UmaSkill {
     ability_tags,
   ) {
     this.id = id;
-    this.name = name;
-    this.desc = desc;
     this.group_id = group_id;
     this.group_level = group_level;
     this.category = category;
@@ -458,18 +234,18 @@ class UmaSkill {
 
   /** @returns {string[]} */
   get tags() {
-    const ret = [];
-    let adapt = this.adapt_tags.map((e) => adapt_tag_names[e]).join('＞＜');
-    let ability = this.ability_tags
-      .map((e) => ability_tag_names[e])
-      .join('＞＜');
-    if (adapt) {
-      ret.push(`＜${adapt}＞`);
-    }
-    if (ability) {
-      ret.push(`＜${ability}＞`);
-    }
-    return ret;
+    return [
+      this.adapt_tags
+        .map((t) =>
+          i18n().skill.tag_template.replace('%TAG%', i18n().n_adapt[t]),
+        )
+        .join(''),
+      this.ability_tags
+        .map((t) =>
+          i18n().skill.tag_template.replace('%TAG%', i18n().skill.n_tag[t]),
+        )
+        .join(''),
+    ].filter((t) => t !== '');
   }
 
   /** @param {PseudoUma} [owner] */
@@ -478,9 +254,12 @@ class UmaSkill {
     const tags = this.tags;
     const border_color = skill_border_colors[this.category & 0b111];
     const name_color = skill_name_colors[this.category >> 3];
-    let title = `【${this.name}】（${skill_name_types[this.category >> 3]} · ${
-      skill_border_types[this.category & 0b111]
-    }）\n${this.desc}`;
+    let title =
+      i18n()
+        .skill.title_template.replace('%NAME%', this.name)
+        .replace('%TYPE%', i18n().skill.n_type[this.category >> 3])
+        .replace('%RARITY%', i18n().skill.n_rarity[this.category & 0b111]) +
+      `\n${this.desc}`;
     if (tags.length > 0) {
       title += `\n${tags.join('\n')}`;
     }

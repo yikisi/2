@@ -8,7 +8,6 @@ const {
   get_adaptability_rank,
   get_chara_score,
   get_rank_level,
-  get_train_time,
 } = require('#/data/info-generator');
 
 const { i18n } = require('#/i18n/selector');
@@ -48,15 +47,18 @@ module.exports = {
             }))),
       ];
     if (era.get(`cflag:${chara.id}:种族`)) {
+      const edu_weeks = era.get(`cflag:${chara.id}:48`);
       if (
         !chara.id ||
         // CFLAGNAME:48 = 育成回合计时
-        era.get(`cflag:${chara.id}:48`) < 3 * 48 ||
+        edu_weeks < 3 * 48 ||
         // CFLAGNAME:47 = 殿堂
         era.get(`cflag:${chara.id}:47`)
       ) {
         const out_of_train = era.get(`cflag:${chara.id}:47`);
-        const train_time = get_train_time(chara.id);
+        const train_time = `${i18n().n_edu[Math.floor(edu_weeks / 48)]} ${
+          (Math.floor(edu_weeks / 4) % 12) + 1
+        } 月 第 ${(edu_weeks % 4) + 1} 周`;
         const chara_score = get_chara_score(chara.id);
         const chara_level = get_rank_level(chara_score);
         const adapt_info = [];
@@ -107,7 +109,7 @@ module.exports = {
                     ' ｜ ',
                     train_time.length > 1
                       ? // CFLAGNAME:49 = 育成次数
-                        `${train_time}${era.get(`cflag:${chara.id}:49`) ? ` (第 ${era.get(`cflag:${chara.id}:49`) + 1} 轮)` : ''} ｜ `
+                        `${train_time}${era.get(`cflag:${chara.id}:49`) > 0 ? ` (第 ${era.get(`cflag:${chara.id}:49`) + 1} 轮)` : ''} ｜ `
                       : '',
                     '拥有 ',
                     {

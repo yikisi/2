@@ -7,421 +7,162 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 const translate_dict = require('../../common/text_data.json');
+const {
+  ability_time_usage_enum,
+  ability_type_enum,
+  ability_usage_enum,
+  get_skill_color,
+  skill_border_enum,
+  skill_name_enum,
+  target_type_enum,
+} = require('../../ere/data/race/model/skill-enum');
 const UmaSkill = require('../../ere/data/race/model/uma-skill');
 const { generate_content } = require('../libs');
 const legend_skill_sets = require('./custom-skill-sets');
 
-const ability_time_usage_names = {},
-  ability_type_names = {},
-  ability_type_usage_names = {},
-  target_type_names = {};
+const ability_time_usage_names = {};
+const ability_type_names = {};
+const ability_type_usage_names = {};
+const target_type_names = {};
 
-Object.entries(UmaSkill.ability_time_usage_enum).map(
+Object.entries(ability_time_usage_enum).map(
   ([k, v]) => (ability_time_usage_names[v] = k),
 );
-Object.entries(UmaSkill.ability_type_enum).map(
-  ([k, v]) => (ability_type_names[v] = k),
-);
-Object.entries(UmaSkill.ability_usage_enum).map(
+Object.entries(ability_type_enum).map(([k, v]) => (ability_type_names[v] = k));
+Object.entries(ability_usage_enum).map(
   ([k, v]) => (ability_type_usage_names[v] = k),
 );
-Object.entries(UmaSkill.target_type_enum).map(
-  ([k, v]) => (target_type_names[v] = k),
-);
+Object.entries(target_type_enum).map(([k, v]) => (target_type_names[v] = k));
 
 const icon2skill_color = {
-  10011: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.buff,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  10012: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.buff,
-    UmaSkill.skill_border_enum.advanced,
-  ),
-  10014: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.debuff,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  10016: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.buff,
-    UmaSkill.skill_border_enum.evol,
-  ),
-  10021: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.buff,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  10022: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.buff,
-    UmaSkill.skill_border_enum.advanced,
-  ),
-  10024: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.debuff,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  10026: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.buff,
-    UmaSkill.skill_border_enum.evol,
-  ),
-  10031: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.buff,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  10032: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.buff,
-    UmaSkill.skill_border_enum.advanced,
-  ),
-  10034: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.debuff,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  10036: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.buff,
-    UmaSkill.skill_border_enum.evol,
-  ),
-  10041: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.buff,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  10051: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.buff,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  10052: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.buff,
-    UmaSkill.skill_border_enum.advanced,
-  ),
-  10054: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.debuff,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  10061: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.buff,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  10062: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.buff,
-    UmaSkill.skill_border_enum.advanced,
-  ),
-  20011: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  20012: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.advanced,
-  ),
-  20013: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.spe,
-  ),
-  20014: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.debuff,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  20016: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.evol,
-  ),
-  20021: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.heal,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  20022: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.heal,
-    UmaSkill.skill_border_enum.advanced,
-  ),
-  20023: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.heal,
-    UmaSkill.skill_border_enum.spe,
-  ),
-  20024: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.debuff,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  20026: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.heal,
-    UmaSkill.skill_border_enum.evol,
-  ),
-  20041: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  20042: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.advanced,
-  ),
-  20043: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.spe,
-  ),
-  20046: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.evol,
-  ),
-  20051: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  20052: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.advanced,
-  ),
-  20061: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  20062: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.advanced,
-  ),
-  20064: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.debuff,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  20066: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.evol,
-  ),
-  20091: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  20092: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.advanced,
-  ),
-  20101: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  20102: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.advanced,
-  ),
-  20111: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.heal,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  20112: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.heal,
-    UmaSkill.skill_border_enum.advanced,
-  ),
-  20121: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  20122: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.advanced,
-  ),
-  20131: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  20132: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.advanced,
-  ),
-  20141: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  20142: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.advanced,
-  ),
-  20151: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  20152: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.advanced,
-  ),
-  20161: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  20162: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.advanced,
-  ),
-  20171: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  20181: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.buff,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  20191: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  20192: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.advanced,
-  ),
-  20201: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  20202: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.advanced,
-  ),
-  20211: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  20212: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.advanced,
-  ),
-  20221: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  20222: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.advanced,
-  ),
-  20226: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.evol,
-  ),
-  20231: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  20241: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  20242: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.advanced,
-  ),
-  20246: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.evol,
-  ),
-  20251: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  20256: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.evol,
-  ),
-  20261: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  20262: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.advanced,
-  ),
-  20266: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.evol,
-  ),
-  20276: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.evol,
-  ),
-  20286: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.heal,
-    UmaSkill.skill_border_enum.evol,
-  ),
-  20291: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  20292: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.advanced,
-  ),
-  20296: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.evol,
-  ),
-  20306: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.evol,
-  ),
-  20311: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  20312: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.advanced,
-  ),
-  20316: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.evol,
-  ),
-  20321: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  20322: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.advanced,
-  ),
-  30011: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.control,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  30012: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.control,
-    UmaSkill.skill_border_enum.advanced,
-  ),
-  30021: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.control,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  30022: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.control,
-    UmaSkill.skill_border_enum.advanced,
-  ),
-  30041: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.control,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  30051: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.control,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  30052: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.control,
-    UmaSkill.skill_border_enum.advanced,
-  ),
-  30056: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.control,
-    UmaSkill.skill_border_enum.evol,
-  ),
-  30071: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.control,
-    UmaSkill.skill_border_enum.normal,
-  ),
-  30072: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.control,
-    UmaSkill.skill_border_enum.advanced,
-  ),
-  40012: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.buff,
-    UmaSkill.skill_border_enum.advanced,
-  ),
-  2010010: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.advanced,
-  ),
-  2010016: UmaSkill.get_skill_color(
-    UmaSkill.skill_name_enum.speed,
-    UmaSkill.skill_border_enum.evol,
-  ),
+  10011: get_skill_color(skill_name_enum.buff, skill_border_enum.normal),
+  10012: get_skill_color(skill_name_enum.buff, skill_border_enum.advanced),
+  10014: get_skill_color(skill_name_enum.debuff, skill_border_enum.normal),
+  10016: get_skill_color(skill_name_enum.buff, skill_border_enum.evol),
+  10021: get_skill_color(skill_name_enum.buff, skill_border_enum.normal),
+  10022: get_skill_color(skill_name_enum.buff, skill_border_enum.advanced),
+  10024: get_skill_color(skill_name_enum.debuff, skill_border_enum.normal),
+  10026: get_skill_color(skill_name_enum.buff, skill_border_enum.evol),
+  10031: get_skill_color(skill_name_enum.buff, skill_border_enum.normal),
+  10032: get_skill_color(skill_name_enum.buff, skill_border_enum.advanced),
+  10034: get_skill_color(skill_name_enum.debuff, skill_border_enum.normal),
+  10036: get_skill_color(skill_name_enum.buff, skill_border_enum.evol),
+  10041: get_skill_color(skill_name_enum.buff, skill_border_enum.normal),
+  10051: get_skill_color(skill_name_enum.buff, skill_border_enum.normal),
+  10052: get_skill_color(skill_name_enum.buff, skill_border_enum.advanced),
+  10054: get_skill_color(skill_name_enum.debuff, skill_border_enum.normal),
+  10061: get_skill_color(skill_name_enum.buff, skill_border_enum.normal),
+  10062: get_skill_color(skill_name_enum.buff, skill_border_enum.advanced),
+  20011: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
+  20012: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
+  20013: get_skill_color(skill_name_enum.speed, skill_border_enum.spe),
+  20014: get_skill_color(skill_name_enum.debuff, skill_border_enum.normal),
+  20016: get_skill_color(skill_name_enum.speed, skill_border_enum.evol),
+  20021: get_skill_color(skill_name_enum.heal, skill_border_enum.normal),
+  20022: get_skill_color(skill_name_enum.heal, skill_border_enum.advanced),
+  20023: get_skill_color(skill_name_enum.heal, skill_border_enum.spe),
+  20024: get_skill_color(skill_name_enum.debuff, skill_border_enum.normal),
+  20026: get_skill_color(skill_name_enum.heal, skill_border_enum.evol),
+  20041: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
+  20042: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
+  20043: get_skill_color(skill_name_enum.speed, skill_border_enum.spe),
+  20046: get_skill_color(skill_name_enum.speed, skill_border_enum.evol),
+  20051: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
+  20052: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
+  20061: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
+  20062: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
+  20064: get_skill_color(skill_name_enum.debuff, skill_border_enum.normal),
+  20066: get_skill_color(skill_name_enum.speed, skill_border_enum.evol),
+  20091: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
+  20092: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
+  20101: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
+  20102: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
+  20111: get_skill_color(skill_name_enum.heal, skill_border_enum.normal),
+  20112: get_skill_color(skill_name_enum.heal, skill_border_enum.advanced),
+  20121: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
+  20122: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
+  20131: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
+  20132: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
+  20141: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
+  20142: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
+  20151: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
+  20152: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
+  20161: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
+  20162: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
+  20171: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
+  20181: get_skill_color(skill_name_enum.buff, skill_border_enum.normal),
+  20191: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
+  20192: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
+  20201: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
+  20202: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
+  20211: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
+  20212: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
+  20221: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
+  20222: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
+  20226: get_skill_color(skill_name_enum.speed, skill_border_enum.evol),
+  20231: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
+  20241: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
+  20242: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
+  20246: get_skill_color(skill_name_enum.speed, skill_border_enum.evol),
+  20251: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
+  20256: get_skill_color(skill_name_enum.speed, skill_border_enum.evol),
+  20261: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
+  20262: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
+  20266: get_skill_color(skill_name_enum.speed, skill_border_enum.evol),
+  20276: get_skill_color(skill_name_enum.speed, skill_border_enum.evol),
+  20286: get_skill_color(skill_name_enum.heal, skill_border_enum.evol),
+  20291: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
+  20292: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
+  20296: get_skill_color(skill_name_enum.speed, skill_border_enum.evol),
+  20306: get_skill_color(skill_name_enum.speed, skill_border_enum.evol),
+  20311: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
+  20312: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
+  20316: get_skill_color(skill_name_enum.speed, skill_border_enum.evol),
+  20321: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
+  20322: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
+  30011: get_skill_color(skill_name_enum.control, skill_border_enum.normal),
+  30012: get_skill_color(skill_name_enum.control, skill_border_enum.advanced),
+  30021: get_skill_color(skill_name_enum.control, skill_border_enum.normal),
+  30022: get_skill_color(skill_name_enum.control, skill_border_enum.advanced),
+  30041: get_skill_color(skill_name_enum.control, skill_border_enum.normal),
+  30051: get_skill_color(skill_name_enum.control, skill_border_enum.normal),
+  30052: get_skill_color(skill_name_enum.control, skill_border_enum.advanced),
+  30056: get_skill_color(skill_name_enum.control, skill_border_enum.evol),
+  30071: get_skill_color(skill_name_enum.control, skill_border_enum.normal),
+  30072: get_skill_color(skill_name_enum.control, skill_border_enum.advanced),
+  40012: get_skill_color(skill_name_enum.buff, skill_border_enum.advanced),
+  2010010: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
+  2010016: get_skill_color(skill_name_enum.speed, skill_border_enum.evol),
+};
+
+// 新增通用可学习技能，数据库里没有，所以需要在最后单独生成注册条目
+const added_common_skills = [
+  600011, 600012, 660011, 660012, 660021, 660022, 660031, 660032, 660041,
+  660042, 660051, 660052, 990011, 990021,
+];
+// 不在任何角色卡技能组（所有角色都用于原皮的技能组）和选手技能组，但是游戏过程中可习得，所以需要强制生成固有技能
+const force_gen_skills = [110031, 910031];
+// 新增的角色固有技能，数据库里没有，所以需要在最后单独生成注册条目
+const added_chara_skills = [
+  100039, 100601, 101321, 102041, 102051, 102061, 900039, 900601, 902041,
+  902051, 902061,
+];
+// 这些技能的效果都根据游戏修改过，所以在从数据库中获取描述时需要跳过
+const skip_translate_skills = [
+  210071, 210072, 210291, 210301, 210321, 210341, 210351, 210361, 210371,
+];
+
+const used_skill_condition_dict = {
+  100971:
+    'args.distance_type===3&&args.is_used_skill_id.indexOf(203781)!==-1&&args.phase>=2&&args.corner!==0',
+  101201:
+    'args.furlong===3&&args.order_rate<=50&&args.is_used_skill_id.indexOf(203061)!==-1&&args.is_used_skill_id.indexOf(203071)!==-1',
+};
+const ability_tag_dict = {
+  203781:
+    'UmaSkill.ability_tag_enum.speed,UmaSkill.ability_tag_enum.stamina,UmaSkill.ability_tag_enum.power,UmaSkill.ability_tag_enum.guts,UmaSkill.ability_tag_enum.wiz',
+  102602211:
+    'UmaSkill.ability_tag_enum.speed,UmaSkill.ability_tag_enum.stamina,UmaSkill.ability_tag_enum.power,UmaSkill.ability_tag_enum.guts,UmaSkill.ability_tag_enum.wiz,UmaSkill.ability_tag_enum.startDash',
 };
 
 function find_many_skills(where) {
@@ -631,38 +372,51 @@ function get_target_type(v) {
   return `UmaSkill.target_type_enum.${target_type_names[v]}`;
 }
 
+function get_skill_group_level(skill) {
+  if (skill.category >> 3 === 4) {
+    return skill.rarity * 10 - 1;
+  }
+  return skill.rarity * 10 + (skill.id % 10);
+}
+
 async function chara_skill() {
-  const dict = {};
-  const l = (await prisma.card_data.findMany())
+  const c_s_dict = {};
+  const chara_list = (await prisma.card_data.findMany())
     .map((e) => e.chara_id)
     .filter((v, i, a) => i === a.indexOf(v));
   const skill_dict = {};
-  for (const chara_id of l) {
-    dict[chara_id] = [
-      100000 + (chara_id - 1000) * 10 + 1,
-      ...(
-        await prisma.available_skill_set.findMany({
-          where: { available_skill_set_id: chara_id * 100 + 1 },
-        })
-      ).map((e) => e.skill_id),
-    ];
-    skill_dict[dict[chara_id][0] + 800000] = 1;
+  (
+    await prisma.available_skill_set.findMany({
+      where: {
+        available_skill_set_id: { in: chara_list.map((cid) => cid * 100 + 1) },
+      },
+    })
+  ).forEach((set) => {
+    const cid = (set.available_skill_set_id - 1) / 100;
+    (c_s_dict[cid] ||= [100000 + (cid - 1000) * 10 + 1]).push(set.skill_id);
+  });
+  for (const cid of chara_list) {
+    skill_dict[900000 + (cid - 1000) * 10 + 1] = 1;
   }
-  dict[1060] = [100601, 200122, 200492, 202152, 200911, 200491, 201422, 202151];
-  dict[204] = [102041, 201702, 200722, 201611, 201701, 200721, 201612, 200491];
-  dict[205] = [102051, 202092, 202152, 202662, 202091, 202151, 202661, 201411];
-  dict[206] = [102061, 203002, 202872, 202022, 203001, 202871, 202021, 200511];
-  Object.values(dict).forEach((e) => e.forEach((s) => (skill_dict[s] = 1)));
+  c_s_dict[60 + 1000] = [
+    100601, 200122, 200492, 202152, 200911, 200491, 201422, 202151,
+  ];
+  c_s_dict[204] = [
+    102041, 201702, 200722, 201611, 201701, 200721, 201612, 200491,
+  ];
+  c_s_dict[205] = [
+    102051, 202092, 202152, 202662, 202091, 202151, 202661, 201411,
+  ];
+  c_s_dict[206] = [
+    102061, 203002, 202872, 202022, 203001, 202871, 202021, 200511,
+  ];
+  Object.values(c_s_dict).forEach((l) => l.forEach((s) => (skill_dict[s] = 1)));
   console.log('角色卡技能', Object.keys(skill_dict).length);
   let buffer =
     '/** @type {Record<string,number[]>} */\nconst chara_skill_dict={};\n/** @type {Record<string,UmaSkill>} */\nconst skills_dict = {};\n\n';
-  let buffer_common_skills = [
-    202051, 200791, 200801, 200811, 200821, 990011, 990021, 600011, 600012,
-    660011, 660012, 660021, 660022, 660031, 660032, 660041, 660042, 660051,
-    660052,
-  ];
-  for (const cid in dict) {
-    buffer += `chara_skill_dict[${Number(cid) % 1000}] = [${dict[cid].join(',')}];`;
+  let buffer_common_skills = [...added_common_skills];
+  for (const cid in c_s_dict) {
+    buffer += `chara_skill_dict[${Number(cid) % 1000}] = [${c_s_dict[cid].join(',')}];`;
   }
   buffer += '\n\nconst skill_sets = {0:[],\n';
   const skill_sets = [
@@ -729,23 +483,12 @@ async function chara_skill() {
       skill_dict[e.id] = 1;
     }
   });
-  skill_dict[910031] = 1;
-  skill_dict[660011] = 1;
-  skill_dict[660012] = 1;
-  skill_dict[660021] = 1;
-  skill_dict[660022] = 1;
-  skill_dict[660031] = 1;
-  skill_dict[660032] = 1;
-  skill_dict[660041] = 1;
-  skill_dict[660042] = 1;
-  skill_dict[660051] = 1;
-  skill_dict[660052] = 1;
-  delete skill_dict[100601];
-  delete skill_dict[102602211];
-  delete skill_dict[900601];
-  delete skill_dict[101201];
-  delete skill_dict[100971];
-  delete skill_dict[203781];
+  for (const s of force_gen_skills) {
+    skill_dict[s] = 1;
+  }
+  for (const s of added_chara_skills) {
+    delete skill_dict[s];
+  }
   console.log('+通用技能', Object.keys(skill_dict).length);
   const skill_data = await find_many_skills({
     id: { in: Object.keys(skill_dict).map(Number) },
@@ -771,28 +514,18 @@ async function chara_skill() {
         48: translate_dict[48][sid],
       };
     } else {
-      console.log('翻译缺失！', sid, jp_text[sid]);
+      hasError = true;
+      console.error('翻译缺失！', sid, jp_text[sid]);
     }
   });
+
+  if (hasError) {
+    process.exit(1);
+  }
+
   const c_dict = { is_used_skill_id: 1 };
 
   buffer += '\n\nconst current = new Date().getTime();\n\n';
-  [
-    102602211, 100039, 900039, 100601, 900601, 100971, 101201, 102041, 902041,
-    102051, 902051, 102061, 902061, 990011, 990021, 600011, 600012, 660011,
-    660012, 660021, 660022, 660031, 660032, 660041, 660042, 660051, 660052,
-    203781,
-  ].forEach(
-    (s) =>
-      (buffer += `skills_dict[${s}]=require("#/data/race/skill/skill-${s}");`),
-  );
-
-  function get_skill_group_level(skill) {
-    if (skill.category >> 3 === 4) {
-      return skill.rarity * 10 - 1;
-    }
-    return skill.rarity * 10 + (skill.id % 10);
-  }
 
   Object.values(
     skill_data.reduce((p, c) => {
@@ -836,17 +569,15 @@ async function chara_skill() {
           e.icon_id,
           'from skill',
           e.id,
-          (
-            await prisma.text_data.findFirst({
-              where: { index: e.id, category: 47 },
-            })
-          ).text,
+          jp_text[id][47],
         );
       }
-      c_n_out += `${id} = "${e.name}";`;
-      c_d_out += `${id} = "${skill_text[id][48]}";`;
-      j_n_out += `${id} = "${jp_text[id][47]}";`;
-      j_d_out += `${id} = "${jp_text[id][48]}";`;
+      if (skip_translate_skills.indexOf(id) !== -1) {
+        c_n_out += `${id} = "${e.name}";`;
+        c_d_out += `${id} = "${skill_text[id][48]}";`;
+        j_n_out += `${id} = "${jp_text[id][47]}";`;
+        j_d_out += `${id} = "${jp_text[id][48]}";`;
+      }
       // console.log(e.id);
       sbuffer += `${id},`;
       sbuffer += `${e.group_id},`;
@@ -854,7 +585,7 @@ async function chara_skill() {
       sbuffer += `${e.category},`;
       sbuffer += `${e.grade_value},`;
       sbuffer += `[${parse_condition(e.precondition_1, true)},${parse_condition(e.precondition_2, true)}],`;
-      sbuffer += `[${parse_condition(e.condition_1)},${parse_condition(e.condition_2)}],`;
+      sbuffer += `[${used_skill_condition_dict[id] || parse_condition(e.condition_1)},${parse_condition(e.condition_2)}],`;
       sbuffer += `[${e.float_ability_time_1 / 10000},${e.float_ability_time_2 / 10000}],`;
       sbuffer += `[${e.float_cooldown_time_1 / 10000},${e.float_cooldown_time_2 / 10000}],`;
       sbuffer += `[${get_ability_time_usage(e.ability_time_usage_1)},${get_ability_time_usage(e.ability_time_usage_2)}],`;
@@ -875,24 +606,31 @@ async function chara_skill() {
       )
         .filter((e, i, l) => i === l.indexOf(e))
         .join(',')}],`;
-      sbuffer += `[${[
-        e.ability_type_1_1,
-        e.ability_type_1_2,
-        e.ability_type_1_3,
-        e.ability_type_2_1,
-        e.ability_type_2_2,
-        e.ability_type_2_3,
-      ]
-        .map((e) => [e, ability_tag_enum_names[e]])
-        .filter((e) => e[1] !== undefined)
-        .filter((e, i, l) => i === l.findIndex((entry) => entry[1] === e[1]))
-        .sort((a, b) => a[0] - b[0])
-        .map(
-          (e) =>
-            `UmaSkill.ability_tag_enum.${Object.keys(UmaSkill.ability_tag_enum)[e[1]]}`,
-        )
-        .join(',')}]`;
-      writeFileSync(`../../ere/data/race/skill/skill-${id}.js`, `${sbuffer});`);
+      sbuffer += `[${
+        ability_tag_dict[id] ||
+        [
+          e.ability_type_1_1,
+          e.ability_type_1_2,
+          e.ability_type_1_3,
+          e.ability_type_2_1,
+          e.ability_type_2_2,
+          e.ability_type_2_3,
+        ]
+          .map((e) => [e, ability_tag_enum_names[e]])
+          .filter((e) => e[1] !== undefined)
+          .filter((e, i, l) => i === l.findIndex((entry) => entry[1] === e[1]))
+          .sort((a, b) => a[0] - b[0])
+          .map(
+            (e) =>
+              `UmaSkill.ability_tag_enum.${Object.keys(UmaSkill.ability_tag_enum)[e[1]]}`,
+          )
+          .join(',')
+      }]`;
+      const p = join(__dirname, `../../ere/data/race/skill/skill-${id}.js`);
+      writeFileSync(
+        p,
+        generate_content(readFileSync(p, 'utf-8'), '//', `${sbuffer});`),
+      );
       fill_dict(e.precondition_1, c_dict, e);
       fill_dict(e.precondition_2, c_dict, e);
       fill_dict(e.condition_1, c_dict, e);
@@ -902,29 +640,48 @@ async function chara_skill() {
       hasError = true;
     }
   }
+
+  if (hasError) {
+    process.exit(1);
+  }
+
+  [...added_chara_skills, ...added_common_skills].forEach(
+    (s) =>
+      (buffer += `skills_dict[${s}]=require("#/data/race/skill/skill-${s}");`),
+  );
+
+  const s_c_p = join(__dirname, '../../ere/data/race/skill/skill-const.js');
   writeFileSync(
-    '../../ere/data/race/skill/skill-const.js',
-    `${buffer}\n\nconsole.log('技能列表注册完毕!',(new Date().getTime()-current).toLocaleString(),'ms')\n\nconst common_skills = [${buffer_common_skills
-      .sort()
-      .filter((e, i, l) => i === l.indexOf(e))
-      .join(
-        ',',
-      )}];\n\nmodule.exports = {chara_skill_dict,common_skills,skills_dict,skill_sets};`,
+    s_c_p,
+    generate_content(
+      readFileSync(s_c_p, 'utf-8'),
+      '//',
+      `${buffer}\n\nconsole.log('技能列表注册完毕!',(new Date().getTime()-current).toLocaleString(),'ms')\n\nconst common_skills = [${buffer_common_skills
+        .sort()
+        .filter((e, i, l) => i === l.indexOf(e))
+        .join(
+          ',',
+        )}];\n\nmodule.exports = {chara_skill_dict,common_skills,skills_dict,skill_sets};`,
+    ),
   );
   buffer = 'class ConditionParams { ';
   c_dict['orgasm'] = c_dict['milk'] = c_dict['item'] = 1;
   Object.keys(c_dict)
     .sort()
     .forEach((k) => (buffer += `${k};`));
-  writeFileSync(
+  const c_p_p = join(
+    __dirname,
     '../../ere/data/race/model/condition-params.js',
-    `${buffer};};\n\nmodule.exports = ConditionParams;`,
+  );
+  writeFileSync(
+    c_p_p,
+    generate_content(
+      readFileSync(c_p_p, 'utf-8'),
+      '//',
+      `${buffer};};\n\nmodule.exports = ConditionParams;`,
+    ),
   );
   console.log('条件参数', Object.keys(c_dict).length, '个');
-
-  if (hasError) {
-    process.exit(1);
-  }
 
   try {
     process.stdout.write(

@@ -1,12 +1,14 @@
 const { readFileSync, readdirSync, writeFileSync } = require('fs');
 const { join } = require('path');
 
+const jp_text = require('../../common/i18n/ja-JP/text_data.json')[14];
 const text_data = require('../../common/text_data.json')[14];
 const id2suffix = require('../../common/clothe-id2suffix');
 const { generate_content } = require('../libs');
 
 const clothe_names = {};
-const i18n = {};
+let i18n_c = '';
+let i18n_j = '';
 
 for (let i = 1001; i < 2000; ++i) {
   const tmp = {};
@@ -14,7 +16,8 @@ for (let i = 1001; i < 2000; ++i) {
     const k = `${i}${j.toString().padStart(2, '0')}`;
     if (text_data[k]) {
       tmp[id2suffix[j]] = k;
-      i18n[k] = text_data[k];
+      i18n_c += `${k} = ${JSON.stringify(text_data[k])};`;
+      i18n_j += `${k} = ${JSON.stringify(jp_text[k])};`;
     }
   }
   if (Object.keys(tmp).length > 0) {
@@ -82,17 +85,16 @@ writeFileSync(
   ),
 );
 
-const i18n_path = join(__dirname, '../../ere/i18n/zh-CN/clothes.js');
+const i18n_path_c = join(__dirname, '../../ere/i18n/zh-CN/clothes.js');
+const i18n_path_j = join(__dirname, '../../ere/i18n/ja-JP/clothes.js');
 
 writeFileSync(
-  i18n_path,
-  generate_content(
-    readFileSync(i18n_path, 'utf-8'),
-    '//',
-    ...Object.entries(i18n).map(
-      ([key, name]) => `  ${key} = ${JSON.stringify(name)};`,
-    ),
-  ),
+  i18n_path_c,
+  generate_content(readFileSync(i18n_path_c, 'utf-8'), '//', i18n_c),
+);
+writeFileSync(
+  i18n_path_j,
+  generate_content(readFileSync(i18n_path_j, 'utf-8'), '//', i18n_j),
 );
 
 process.exit(exit);

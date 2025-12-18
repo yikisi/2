@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   600012,
-  '真心为你',
-  '在最后冲刺的关键阶段，以不可挡的势头稍微提升速度和加速度；对训练员的爱意越深，效果越强',
   60001,
   2,
   UmaSkill.get_skill_color(

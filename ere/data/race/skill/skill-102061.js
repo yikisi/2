@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   102061,
-  '其光环、遮天蔽日',
-  '冲进终盘时献出最伟大的舞蹈！距离终点尚远时还会进行耐力调节',
   10206,
   1,
   UmaSkill.get_skill_color(

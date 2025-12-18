@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   990021,
-  '辛苦的马生在等我',
-  '比赛终盘时直接失速，并且想象着凌辱一般的嫌恶眼神快要去了；如果之前高潮过，则使所有选手一起失速',
   99002,
   1,
   UmaSkill.get_skill_color(

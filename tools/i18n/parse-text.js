@@ -16,7 +16,10 @@ async function task() {
     },
   });
   for (const t of data) {
-    (text_data[t.category] ||= {})[t.index] = t.text;
+    (text_data[t.category] ||= {})[t.index] = t.text.replace(
+      /(\\n)?＜.*＞$/,
+      '',
+    );
   }
 
   writeFileSync(

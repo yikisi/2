@@ -3,8 +3,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaEroSkill(
   660051,
-  '性爱即德比',
-  '性玩具不再影响基础属性发挥',
   66005,
   1,
   UmaSkill.get_skill_color(

@@ -3,8 +3,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaEroSkill(
   660022,
-  '巨大喷流',
-  '高潮时降低体力，短时间内大幅提高速度并突破阻挡',
   66002,
   2,
   UmaSkill.get_skill_color(

@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   101201,
-  '无二无三的唯一通路',
-  '到达第4浪时若位于前方，则于短时间内提升速度；如果「无二」「无三」两者发动过，则蛮不讲理地提升速度',
   10120,
   1,
   18,

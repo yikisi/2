@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   102602211,
-  'Perfect boot',
-  '起跑晚的时间小幅减少，并且所有基础能力稍微提升',
   10260221,
   1,
   19,

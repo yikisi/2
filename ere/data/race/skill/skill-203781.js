@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   203781,
-  '冲动',
-  '稍微提升所有的基础能力',
   20378,
   1,
   0,

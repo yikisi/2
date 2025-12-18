@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   990011,
-  '队长，我不想努力了',
-  '比赛终盘时极大幅度提高速度并恢复体力',
   99001,
   1,
   UmaSkill.get_skill_color(

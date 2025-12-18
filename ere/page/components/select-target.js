@@ -35,7 +35,7 @@ const {
   get_love_info,
   get_rank_level,
   get_relation_info,
-  get_train_time,
+  get_train_year,
 } = require('#/data/info-generator');
 const { get_growth_color } = require('#/data/other-const');
 const RaceHistory = require('#/data/race/model/race-history');
@@ -59,7 +59,7 @@ function get_edu_stage(cid, race, palace, in_train) {
     return i18n().n_oot[palace - 1];
   }
   if (in_train) {
-    return get_train_time(cid).substring(0, 3);
+    return get_train_year(cid);
   }
   if (era.get(`cflag:${cid}:可再次育成`) > 0) {
     return '-';
@@ -114,7 +114,7 @@ function get_suffix(cid, type) {
       },
       {
         config: { align: 'center', width: 2 },
-        content: get_train_time(cid).substring(0, 3),
+        content: get_train_year(cid),
         type: 'text',
       },
       {

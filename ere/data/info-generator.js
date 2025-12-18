@@ -44,7 +44,7 @@ const {
 } = require('#/data/ero/status-const');
 const recruit_flags = require('#/data/event/recruit-flags');
 
-const { i18n } = require('#/i18n/selector');
+const { i18n, lan } = require('#/i18n/selector');
 
 const levels = {
   attr_score: [
@@ -565,11 +565,10 @@ module.exports = {
     return { full: () => `${mark()} (${val()})`, level, mark, val };
   },
   get_save_name() {
+    // FLAGNAME:65 = 存档名
     const prefix =
-      era.get('flag:存档名') || `${era.get('callname:0:-1')} - ${get_date()}`;
-    return `${prefix} (${new Date().toLocaleString('zh-CN', {
-      timeZone: 'Asia/Shanghai',
-    })})`;
+      era.get('flag:65') || `${era.get('callname:0:-1')} - ${get_date()}`;
+    return `${prefix} (${new Date().toLocaleString(lan())})`;
   },
   /** @param {number} cid */
   get_skin(cid) {
@@ -631,14 +630,12 @@ module.exports = {
   },
   get_talent_bust_size,
   /** @param {number} cid */
-  get_train_time(cid) {
+  get_train_year(cid) {
     if (!cid) {
       return '-';
     }
-    const time = era.get(`cflag:${cid}:育成回合计时`);
-    return `${i18n().n_edu[Math.floor(time / 48)]} ${
-      (Math.floor(time / 4) % 12) + 1
-    } 月 第 ${(time % 4) + 1} 周`;
+    // CFLAGNAME:48 = 育成回合计时
+    return i18n().n_edu[Math.floor(era.get(`cflag:${cid}:48`) / 48)];
   },
   get_trainer_level,
   /** @returns {{full:()=>string,level:number,prefix:()=>string,title:()=>string}} */

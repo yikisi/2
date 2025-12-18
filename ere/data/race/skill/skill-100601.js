@@ -2,8 +2,6 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
   100601,
-  '一定就在前方……！',
-  '在比赛终盘处于第三名快要输掉的时候激发潜藏的昂扬斗志，速度加快',
   10060,
   1,
   UmaSkill.get_skill_color(
