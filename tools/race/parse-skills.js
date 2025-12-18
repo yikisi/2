@@ -8,6 +8,7 @@ const prisma = new PrismaClient();
 
 const translate_dict = require('../../common/text_data.json');
 const {
+  ability_tag_enum,
   ability_time_usage_enum,
   ability_type_enum,
   ability_usage_enum,
@@ -16,7 +17,6 @@ const {
   skill_name_enum,
   target_type_enum,
 } = require('../../ere/data/race/model/skill-enum');
-const UmaSkill = require('../../ere/data/race/model/uma-skill');
 const { generate_content } = require('../libs');
 const legend_skill_sets = require('./custom-skill-sets');
 
@@ -144,19 +144,20 @@ const added_common_skills = [
 const force_gen_skills = [110031, 910031];
 // 新增的角色固有技能，数据库里没有，所以需要在最后单独生成注册条目
 const added_chara_skills = [
-  100039, 100601, 101321, 102041, 102051, 102061, 900039, 900601, 902041,
-  902051, 902061,
+  100039, 100601, 102041, 102051, 102061, 900039, 900601, 902041, 902051,
+  902061,
 ];
 // 这些技能的效果都根据游戏修改过，所以在从数据库中获取描述时需要跳过
 const skip_translate_skills = [
-  210071, 210072, 210291, 210301, 210321, 210341, 210351, 210361, 210371,
+  101321, 210071, 210072, 210291, 210301, 210321, 210341, 210351, 210361,
+  210371,
 ];
 
 const used_skill_condition_dict = {
   100971:
-    'args.distance_type===3&&args.is_used_skill_id.indexOf(203781)!==-1&&args.phase>=2&&args.corner!==0',
+    '(args)=>args.distance_type===3&&args.is_used_skill_id.indexOf(203781)!==-1&&args.phase>=2&&args.corner!==0',
   101201:
-    'args.furlong===3&&args.order_rate<=50&&args.is_used_skill_id.indexOf(203061)!==-1&&args.is_used_skill_id.indexOf(203071)!==-1',
+    '(args)=>args.furlong===3&&args.order_rate<=50&&args.is_used_skill_id.indexOf(203061)!==-1&&args.is_used_skill_id.indexOf(203071)!==-1',
 };
 const ability_tag_dict = {
   203781:
@@ -313,36 +314,28 @@ function fill_adapt_tags(tags_list, condition) {
 }
 
 const ability_tag_enum_names = [];
-ability_tag_enum_names[UmaSkill.ability_type_enum.Speed] =
-  UmaSkill.ability_tag_enum.speed;
-ability_tag_enum_names[UmaSkill.ability_type_enum.Stamina] =
-  UmaSkill.ability_tag_enum.stamina;
-ability_tag_enum_names[UmaSkill.ability_type_enum.Power] =
-  UmaSkill.ability_tag_enum.power;
-ability_tag_enum_names[UmaSkill.ability_type_enum.Guts] =
-  UmaSkill.ability_tag_enum.guts;
-ability_tag_enum_names[UmaSkill.ability_type_enum.Wiz] =
-  UmaSkill.ability_tag_enum.wiz;
-ability_tag_enum_names[UmaSkill.ability_type_enum.StartDash] =
-  UmaSkill.ability_tag_enum.startDash;
-ability_tag_enum_names[UmaSkill.ability_type_enum.TemptationPer] =
-  UmaSkill.ability_tag_enum.tempPer;
-ability_tag_enum_names[UmaSkill.ability_type_enum.VisibleDistance] =
-  UmaSkill.ability_tag_enum.visible;
-ability_tag_enum_names[UmaSkill.ability_type_enum.CurrentSpeed] =
-  ability_tag_enum_names[
-    UmaSkill.ability_type_enum.CurrentSpeedWithNaturalDeceleration
-  ] = UmaSkill.ability_tag_enum.currentSpeed;
-ability_tag_enum_names[UmaSkill.ability_type_enum.TargetSpeed] =
-  UmaSkill.ability_tag_enum.targetSpeed;
-ability_tag_enum_names[UmaSkill.ability_type_enum.Accel] =
-  UmaSkill.ability_tag_enum.accel;
-ability_tag_enum_names[UmaSkill.ability_type_enum.HpRate] =
-  UmaSkill.ability_tag_enum.hpRate;
-ability_tag_enum_names[UmaSkill.ability_type_enum.TemptationEndTime] =
-  UmaSkill.ability_tag_enum.temp;
-ability_tag_enum_names[UmaSkill.ability_type_enum.LaneMoveSpeed] =
-  UmaSkill.ability_tag_enum.laneMove;
+ability_tag_enum_names[ability_type_enum.Speed] = ability_tag_enum.speed;
+ability_tag_enum_names[ability_type_enum.Stamina] = ability_tag_enum.stamina;
+ability_tag_enum_names[ability_type_enum.Power] = ability_tag_enum.power;
+ability_tag_enum_names[ability_type_enum.Guts] = ability_tag_enum.guts;
+ability_tag_enum_names[ability_type_enum.Wiz] = ability_tag_enum.wiz;
+ability_tag_enum_names[ability_type_enum.StartDash] =
+  ability_tag_enum.startDash;
+ability_tag_enum_names[ability_type_enum.TemptationPer] =
+  ability_tag_enum.tempPer;
+ability_tag_enum_names[ability_type_enum.VisibleDistance] =
+  ability_tag_enum.visible;
+ability_tag_enum_names[ability_type_enum.CurrentSpeed] = ability_tag_enum_names[
+  ability_type_enum.CurrentSpeedWithNaturalDeceleration
+] = ability_tag_enum.currentSpeed;
+ability_tag_enum_names[ability_type_enum.TargetSpeed] =
+  ability_tag_enum.targetSpeed;
+ability_tag_enum_names[ability_type_enum.Accel] = ability_tag_enum.accel;
+ability_tag_enum_names[ability_type_enum.HpRate] = ability_tag_enum.hpRate;
+ability_tag_enum_names[ability_type_enum.TemptationEndTime] =
+  ability_tag_enum.temp;
+ability_tag_enum_names[ability_type_enum.LaneMoveSpeed] =
+  ability_tag_enum.laneMove;
 
 function get_ability_time_usage(v) {
   if (!ability_time_usage_names[v]) {
@@ -507,6 +500,7 @@ async function chara_skill() {
     return p;
   }, {});
   const skill_text = {};
+  let hasError = false;
   Object.keys(jp_text).forEach((sid) => {
     if (translate_dict[47][sid] && translate_dict[48][sid]) {
       skill_text[sid] = {
@@ -552,7 +546,6 @@ async function chara_skill() {
       });
   });
 
-  let hasError = false;
   let c_n_out = '';
   let c_d_out = '';
   let j_n_out = '';
@@ -572,7 +565,7 @@ async function chara_skill() {
           jp_text[id][47],
         );
       }
-      if (skip_translate_skills.indexOf(id) !== -1) {
+      if (skip_translate_skills.indexOf(id) === -1) {
         c_n_out += `${id} = "${e.name}";`;
         c_d_out += `${id} = "${skill_text[id][48]}";`;
         j_n_out += `${id} = "${jp_text[id][47]}";`;
@@ -622,7 +615,7 @@ async function chara_skill() {
           .sort((a, b) => a[0] - b[0])
           .map(
             (e) =>
-              `UmaSkill.ability_tag_enum.${Object.keys(UmaSkill.ability_tag_enum)[e[1]]}`,
+              `UmaSkill.ability_tag_enum.${Object.keys(ability_tag_enum)[e[1]]}`,
           )
           .join(',')
       }]`;

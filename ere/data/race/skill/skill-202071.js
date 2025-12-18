@@ -1,3 +1,4 @@
+// GENERATED START
 const UmaSkill = require('#/data/race/model/uma-skill');
 
 module.exports = new UmaSkill(
@@ -74,3 +75,4 @@ module.exports = new UmaSkill(
   [5],
   [UmaSkill.ability_tag_enum.hpRate, UmaSkill.ability_tag_enum.currentSpeed],
 );
+// GENERATED END

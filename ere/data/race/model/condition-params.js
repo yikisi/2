@@ -1,3 +1,4 @@
+// GENERATED START
 class ConditionParams {
   accumulatetime;
   activate_count_all;
@@ -120,3 +121,4 @@ class ConditionParams {
 }
 
 module.exports = ConditionParams;
+// GENERATED END

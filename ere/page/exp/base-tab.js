@@ -210,7 +210,10 @@ module.exports = {
       });
     }
     const image_prefix = era.get(`cstr:${chara.id}:头像`);
-    const suffix = era.get(`cstr:${chara.id}:决胜服`).toString();
+    let suffix = era.get(`cstr:${chara.id}:决胜服`);
+    if (suffix !== -1 && suffix !== 0) {
+      suffix = suffix.toString();
+    }
     let image_list;
     let src_id = era.get(`cflag:${chara.id}:模版角色`);
     if (src_id < 0) {
