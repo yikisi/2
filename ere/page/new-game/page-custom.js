@@ -22,9 +22,6 @@ const {
   chara_desc,
   chara_full_desc,
   human_sex_title,
-  penis_colors,
-  penis_desc,
-  skin_desc,
 } = require('#/data/ero/status-const');
 const {
   get_breast_cup,
@@ -89,12 +86,12 @@ const hair_content_cb = [
   (p) => back_hairs[p],
   (p) => ({
     color: skin_colors[p + 1],
-    content: skin_desc[p + 1],
+    content: i18n().n_skin[p + 1],
   }),
   (p) => body_hair_type[p],
   (p) => body_hair_type[p],
   (p) => {
-    return { color: sex_colors[p], content: penis_colors[p] };
+    return { color: sex_colors[p], content: i18n().n_c_penis[p] };
   },
 ];
 const hair_length_arr = [
@@ -102,10 +99,10 @@ const hair_length_arr = [
   top_hairs.length,
   front_hairs.length,
   back_hairs.length,
-  skin_desc.length,
+  i18n().n_skin.length,
   body_hair_type.length,
   body_hair_type.length,
-  penis_colors.length,
+  i18n().n_c_penis.length,
 ];
 
 function set_bust_size(size) {
@@ -769,18 +766,20 @@ async function page_custom() {
             { isBr: true },
             '肤色：',
             {
-              color: skin_colors[era.get('cflag:0:肤色深度') + 1],
-              content: skin_desc[era.get('cflag:0:肤色深度') + 1],
+              // CFLAGNAME:10 = 肤色深度
+              color: skin_colors[era.get('cflag:0:10') + 1],
+              content: i18n().n_skin[era.get('cflag:0:10') + 1],
             },
             ` | 腋毛：${body_hair_type[era.get('talent:0:腋毛成长')]} | 阴毛：${
               body_hair_type[era.get('talent:0:阴毛成长')]
             } | 性器颜色：`,
             {
-              color: sex_colors[era.get('talent:0:茎核类型')],
-              content: penis_colors[era.get('talent:0:茎核类型')],
+              // TALENTNAME:34 = 茎核类型
+              color: sex_colors[era.get('talent:0:34')],
+              content: i18n().n_c_penis[era.get('talent:0:34')],
             },
             era.get('cflag:0:性别')
-              ? ` | 阴茎长度：${penis_desc[era.get('cflag:0:阴茎尺寸')]}`
+              ? ` | 阴茎长度：${i18n().n_penis[era.get('cflag:0:阴茎尺寸')]}`
               : '',
             { isBr: true },
             '如果马娘化，认为自己将是 ',

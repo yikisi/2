@@ -29,6 +29,7 @@ const talent_desc = require('#/data/desc/talents.json');
 const CharaInmon = require('#/data/ero/chara-inmon');
 const {
   mark_colors,
+  mark_enum,
   slavery_descriptions,
   slavery_titles,
 } = require('#/data/ero/mark-const');
@@ -38,7 +39,6 @@ const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const {
   penis_state,
   pregnant_stage_enum,
-  skin_desc,
   trained_talent_names,
   virgin_state,
 } = require('#/data/ero/status-const');
@@ -189,7 +189,8 @@ function get_filtered_talents(sex, start_tid) {
 
 function get_trainer_level() {
   let level = 0;
-  const honour = era.get('flag:当前声望');
+  // FLAGNAME:15 = 当前声望
+  const honour = era.get('flag:15');
   if (honour <= 0) {
     level = -1;
   } else {
@@ -213,9 +214,12 @@ module.exports = {
     return levels.attr_score[Math.floor(attr / 50)] || 'US';
   },
   get_breast_cup,
-  /** @param {number} [_weeks] */
-  get_celebration(_weeks) {
-    const weeks = ((_weeks || era.get('flag:当前回合数')) - 1) % 48;
+  /**
+   * FLAGNAME:0 = 当前回合数
+   * @param {number} [_weeks]
+   */
+  get_celebration(_weeks = era.get('flag:0')) {
+    const weeks = (_weeks - 1) % 48;
     switch (weeks) {
       case 0: // 一月第一周
         return '新年';
@@ -242,7 +246,8 @@ module.exports = {
    * @returns {number|string}
    */
   get_chara_score(cid, is_number) {
-    let score = era.get(`exp:${cid}:技能评价分`);
+    // EXPNAME:0 = 技能评价分
+    let score = era.get(`exp:${cid}:0`);
     score += new Array(5).fill(0).reduce(
       // BASENAME:5 - 9 = 速度 - 智力
       (s, _, i) => s + calc_attr_score(era.get(`base:${cid}:${5 + i}`)),
@@ -263,7 +268,7 @@ module.exports = {
       cid > 0
         ? [penis_state.chara, virgin_state.chara]
         : [penis_state.player, virgin_state.player];
-    if (era.get(`mark:${cid}:淫纹`) === 3) {
+    if (era.get(`mark:${cid}:${mark_enum.ero}`) === 3) {
       const { slave } = CharaInmon.get(cid),
         obj = {
           color: buff_colors[2],
@@ -275,59 +280,68 @@ module.exports = {
       }
       status_list.push(obj);
     }
-    if (era.get('tflag:主导权') === cid) {
+    // TFLAGNAME:7 = 主导权
+    if (era.get('tflag:7') === cid) {
       status_list.push({ color: buff_colors[1], content: '主导' });
     }
-    if (get_penis_size(cid) && era.get(`talent:${cid}:童贞`)) {
+    // TALENTNAME:30 = 童贞
+    if (get_penis_size(cid) && era.get(`talent:${cid}:30`) !== 0) {
       status_list.push({
         color: buff_colors[2],
-        content: sex_state[0][era.get(`talent:${cid}:童贞`)],
+        content: sex_state[0][era.get(`talent:${cid}:30`)](),
       });
     }
-    if (era.get(`cflag:${cid}:阴道尺寸`) && era.get(`talent:${cid}:处女`)) {
+    // CFLAGNAME:5 = 阴道尺寸
+    // TALENTNAME:31 = 处女
+    if (era.get(`cflag:${cid}:5`) && era.get(`talent:${cid}:31`) !== 0) {
       status_list.push({
         color: buff_colors[2],
-        content: sex_state[1][era.get(`talent:${cid}:处女`)],
+        content: sex_state[1][era.get(`talent:${cid}:31`)](),
       });
     }
-    if (era.get(`tcvar:${cid}:发情`)) {
+    // TCVARNAME:44 = 发情
+    if (era.get(`tcvar:${cid}:44`)) {
       status_list.push({
         color: buff_colors[2],
         content: '发情！',
         key: '发情',
       });
     }
-    if (era.get(`base:${cid}:性欲`) >= lust_border.want_sex) {
+    // BASENAME:10 = 性欲
+    if (era.get(`base:${cid}:10`) >= lust_border.want_sex) {
       status_list.push({
         color: buff_colors[2],
         content: '焦躁！',
         key: '焦躁',
       });
     }
-    if (
-      era.get(`status:${cid}:马跳S`) > 0 ||
-      era.get(`status:${cid}:沉睡`) > 0
-    ) {
+    // STATUSNAME:10 = 沉睡
+    // STATUSNAME:39 = 马跳S
+    if (era.get(`status:${cid}:10`) > 0 || era.get(`status:${cid}:39`) > 0) {
       status_list.push({
         color: buff_colors[2],
         content: '沉睡！',
         key: '沉睡',
       });
-    } else if (era.get(`tcvar:${cid}:脱力`)) {
+      // TCVAR:40 = 脱力
+    } else if (era.get(`tcvar:${cid}:40`) > 0) {
       status_list.push({
         color: buff_colors[2],
         content: '脱力！',
         key: '脱力',
       });
     }
-    if (era.get(`cflag:${cid}:阴道尺寸`) && era.get(`ex:${cid}:阴道撕裂`)) {
+    // CFLAGNAME:5 = 阴道尺寸
+    // EXNAME:45 = 阴道撕裂
+    if (era.get(`cflag:${cid}:5`) > 0 && era.get(`ex:${cid}:45`) > 0) {
       status_list.push({
         color: buff_colors[3],
         content: '膣撕裂！',
         key: '膣撕裂',
       });
     }
-    if (era.get(`ex:${cid}:肛门撕裂`)) {
+    // EXNAME:46 = 肛门撕裂
+    if (era.get(`ex:${cid}:46`) > 0) {
       status_list.push({
         color: buff_colors[3],
         content: '肛撕裂！',
@@ -344,8 +358,9 @@ module.exports = {
     if (check_lubrication(cid, part_enum.breast)) {
       status_list.push({ color: buff_colors[2], content: '胸润滑' });
     }
+    // CFLAGNAME:5 = 阴道尺寸
     if (
-      era.get(`cflag:${cid}:阴道尺寸`) &&
+      era.get(`cflag:${cid}:5`) > 0 &&
       check_lubrication(cid, part_enum.virgin)
     ) {
       status_list.push({ color: buff_colors[2], content: '膣润滑' });
@@ -353,15 +368,17 @@ module.exports = {
     if (check_lubrication(cid, part_enum.anal)) {
       status_list.push({ color: buff_colors[2], content: '肛润滑' });
     }
-    if (era.get(`tcvar:${cid}:乳突`) > 0) {
+    // TCVARNAME:50 = 乳突
+    if (era.get(`tcvar:${cid}:50`) > 0) {
       status_list.push({
         color: buff_colors[2],
         content: '乳突！',
         key: '乳突',
       });
     }
-    const mark_level = cid ? era.get(`mark:${cid}:淫纹`) : 3;
-    if (mark_level >= 2 && era.get(`status:${cid}:排卵期`)) {
+    const mark_level = cid > 0 ? era.get(`mark:${cid}:${mark_enum.ero}`) : 3;
+    // STATUSNAME:31 = 排卵期
+    if (mark_level >= 2 && era.get(`status:${cid}:31`) > 0) {
       status_list.push({ color: buff_colors[2], content: '危险期' });
     }
     sys_get_item_status(cid, status_list);
@@ -572,13 +589,15 @@ module.exports = {
   },
   /** @param {number} cid */
   get_skin(cid) {
-    return skin_desc[era.get(`cflag:${cid}:肤色深度`) + 1];
+    // CFLAGNAME:10 = 肤色深度
+    return i18n().n_skin[era.get(`cflag:${cid}:10`) + 1];
   },
   /** @param {number} cid */
   get_skin_color(cid) {
-    return skin_colors[era.get(`cflag:${cid}:肤色深度`) + 1];
+    // CFLAGNAME:10 = 肤色深度
+    return skin_colors[era.get(`cflag:${cid}:10`) + 1];
   },
-  get_talent: (cid) => {
+  get_talent(cid) {
     const yandere = era.get(`talent:${cid}:病娇`),
       ret = get_custom_mec(cid).get_talents();
     if (yandere === 2 || (yandere > 0 && era.get('status:0:马语者') > 0)) {

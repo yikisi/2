@@ -28,7 +28,9 @@ const {
  * @returns {boolean}
  */
 function sys_check_awake(cid) {
-  return !era.get(`status:${cid}:沉睡`) && !era.get(`status:${cid}:马跳S`);
+  // STATUSNAME:10 = 沉睡
+  // STATUSNAME:39 = 马跳S
+  return !era.get(`status:${cid}:10`) && !era.get(`status:${cid}:39`);
 }
 
 /**

@@ -12,8 +12,9 @@ const EroOrgy = require('#/event/ero/common/interface/ero-orgy');
 const { get_random_entry } = require('#/utils/list-utils');
 
 const { motion_enum, towards_enum } = require('#/data/ero/part-const');
-const { penis_desc } = require('#/data/ero/status-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
+
+const { i18n } = require('#/i18n/selector');
 
 /**
  * @param {CharaTalk} attacker
@@ -117,7 +118,7 @@ class EroNormalOrgy extends EroOrgy {
       await era.printAndWait([
         attacker.get_colored_name(),
         ' 叉开腿，',
-        penis_desc[get_penis_size(attacker.id)],
+        i18n().n_penis[get_penis_size(attacker.id)],
         ' 的肉棒昂然挺立，',
         defender.get_colored_name(),
         ' 和 ',
@@ -199,11 +200,11 @@ class EroNormalOrgy extends EroOrgy {
             supporter.get_colored_name(),
             ' 中间，',
             ...(defender_penis === supporter_penis
-              ? ['两根 ', penis_desc[defender_penis], ' 的']
+              ? ['两根 ', i18n().n_penis[defender_penis], ' 的']
               : [
-                  penis_desc[defender_penis],
+                  i18n().n_penis[defender_penis],
                   ' 与 ',
-                  penis_desc[supporter_penis],
+                  i18n().n_penis[supporter_penis],
                   ' ',
                 ]),
             ' 的肉棒交替被 ',

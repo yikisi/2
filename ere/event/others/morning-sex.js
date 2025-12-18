@@ -31,9 +31,10 @@ const { get_random_entry } = require('#/utils/list-utils');
 
 const EroParticipant = require('#/data/ero/ero-participant');
 const { part_enum } = require('#/data/ero/part-const');
-const { penis_desc } = require('#/data/ero/status-const');
 const { get_trainer_title } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
+
+const { i18n } = require('#/i18n/selector');
 
 /**
  * @author 雞雞
@@ -140,7 +141,7 @@ async function duty(chara, me) {
       ' 又一次饮用了药物，屈尊用',
       chara.sex,
       '那高贵而',
-      penis_desc[get_penis_size(chara.id)],
+      i18n().n_penis[get_penis_size(chara.id)],
       '的肉棒作为闹钟。',
     ]);
   } else {
@@ -152,7 +153,7 @@ async function duty(chara, me) {
       ' 又一次屈尊用',
       chara.sex,
       '那高贵',
-      penis_desc[get_penis_size(chara.id)],
+      i18n().n_penis[get_penis_size(chara.id)],
       '的肉棒作为闹钟。',
     ]);
   }

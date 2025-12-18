@@ -1,3 +1,5 @@
+const { i18n } = require('#/i18n/selector');
+
 const vp_status_enum = {
   // 俺寻思（训练员视角）
   i_think: -2,
@@ -12,6 +14,7 @@ const vp_status_enum = {
 };
 Object.keys(vp_status_enum).forEach((k, i) => (vp_status_enum[k] = i - 2));
 
+/** @type {{chara:Record<string,()=>string>,player:Record<string,()=>string>}} */
 const penis_state = {
   /** 训练员视角角色的童贞情况 */
   chara: {},
@@ -22,9 +25,10 @@ penis_state.chara[vp_status_enum.i_think] =
   penis_state.chara[vp_status_enum.virgin] =
   penis_state.player[vp_status_enum.dont_know] =
   penis_state.player[vp_status_enum.virgin] =
-    '童贞';
-penis_state.chara[vp_status_enum.dont_know] = '无自觉非童贞';
+    () => i18n().v_penis_v;
+penis_state.chara[vp_status_enum.dont_know] = () => i18n().v_penis_d;
 
+/** @type {{chara:Record<string,()=>string>,player:Record<string,()=>string>}} */
 const virgin_state = {
   /** 训练员视角角色的处女情况 */
   chara: {},
@@ -35,11 +39,11 @@ virgin_state.chara[vp_status_enum.i_think] =
   virgin_state.chara[vp_status_enum.virgin] =
   virgin_state.player[vp_status_enum.dont_know] =
   virgin_state.player[vp_status_enum.virgin] =
-    '处女';
-virgin_state.chara[vp_status_enum.dont_know] = '无自觉非处女';
+    () => i18n().v_vagina_v;
+virgin_state.chara[vp_status_enum.dont_know] = () => i18n().v_vagina_d;
 virgin_state.chara[vp_status_enum.reborn] = virgin_state.player[
   vp_status_enum.reborn
-] = '再生处女';
+] = () => i18n().v_vagina_r;
 
 const pregnant_stage_enum = {
   resume: 0,
@@ -158,8 +162,6 @@ module.exports = {
     1: '男性',
     10: '女性？',
   },
-  penis_colors: ['粉嫩', '泛紫', '黝黑'],
-  penis_desc: ['', '可怜', '寒酸', '健壮', '凶恶', '骇人'],
   penis_state,
   player_sex_title: {
     0: '女士',
@@ -171,7 +173,6 @@ module.exports = {
   // SM时的称呼
   sex_slave_title: { 0: '母马', 1: '公马', 10: '扶她母马' },
   sex_title: { 0: '马娘', 1: '马郎', 10: '马娘？' },
-  skin_desc: ['雪白', '健康', '红润', '麦黄'],
   trained_talent_names,
   unexpected_pregnant_enum: {
     father_sleep: -1,

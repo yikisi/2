@@ -34,7 +34,6 @@ const { mark_enum } = require('#/data/ero/mark-const');
 const { part_enum, part_names } = require('#/data/ero/part-const');
 const {
   breast_size,
-  penis_desc,
   pregnant_stage_enum,
   unexpected_pregnant_enum,
 } = require('#/data/ero/status-const');
@@ -46,6 +45,8 @@ const {
 } = require('#/data/event/ero-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { get_breast_cup } = require('#/data/info-generator');
+
+const { i18n } = require('#/i18n/selector');
 
 const optimized_part_names = {};
 optimized_part_names[part_enum.mouth] = '口穴';
@@ -259,7 +260,7 @@ class CustomizedEro {
       era.print([
         chara.get_colored_name(),
         ' ',
-        penis_desc[get_penis_size(this.id)],
+        i18n().n_penis[get_penis_size(this.id)],
         ' 的肉棒勃起了！',
       ]);
     } else if (extra_flag.part === part_enum.breast) {

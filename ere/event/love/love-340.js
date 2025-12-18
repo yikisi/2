@@ -8,8 +8,9 @@ const LoveGod = require('#/event/love/snippets/love-god');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { skin_colors } = require('#/data/color-const');
-const { skin_desc } = require('#/data/ero/status-const');
 const { get_skin, get_skin_color } = require('#/data/info-generator');
+
+const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends LoveGod {
   get fuck_her_button() {
@@ -63,7 +64,7 @@ module.exports = class extends LoveGod {
       '这也是梦的一环吗…以一个出奇淡漠的视角，',
       me.get_colored_name(),
       ' 看着自己的房间里多出了一只红色头发、肤色',
-      { color: skin_colors.at(-1), content: skin_desc.at(-1) },
+      { color: skin_colors.at(-1), content: i18n().skin_3 },
       '的马娘，看着',
       god.get_colored_sex(),
       '像雌豹一样将床上的 ',
@@ -96,7 +97,7 @@ module.exports = class extends LoveGod {
     } else {
       await printAndWait([
         '紧接着，激烈抵抗着的身体与身体，',
-        { color: skin_colors.at(-1), content: skin_desc.at(-1) },
+        { color: skin_colors.at(-1), content: i18n().skin_3 },
         '被',
         { color: get_skin_color(0), content: get_skin(0) },
         '压倒',

@@ -19,14 +19,13 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { part_enum } = require('#/data/ero/part-const');
-const {
-  penis_desc,
-  unexpected_pregnant_enum,
-} = require('#/data/ero/status-const');
+const { unexpected_pregnant_enum } = require('#/data/ero/status-const');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
+
+const { i18n } = require('#/i18n/selector');
 
 const stop_ex_options = {};
 stop_ex_options[part_enum.virgin] = (chara_id) =>
@@ -59,7 +58,7 @@ module.exports = class extends CustomizedEro {
           get_chara_talk(era.get('tflag:前回助手')).get_colored_name(),
           ' 的侍奉下，',
           get_chara_talk(0).get_colored_name(),
-          ` ${penis_desc[get_penis_size(0)]} 的肉棒很快就一柱擎天了。`,
+          ` ${i18n().n_penis[get_penis_size(0)]} 的肉棒很快就一柱擎天了。`,
         ]);
         return;
       }

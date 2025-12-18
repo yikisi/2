@@ -12,12 +12,10 @@ const CharaTalk = require('#/utils/chara-talk');
 const { join_to_string } = require('#/utils/list-utils');
 
 const { sex_colors } = require('#/data/color-const');
-const {
-  hair_desc,
-  penis_colors,
-  penis_desc,
-} = require('#/data/ero/status-const');
+const { hair_desc } = require('#/data/ero/status-const');
 const { growth_info, unknown_info } = require('#/data/exp-const');
+
+const { i18n } = require('#/i18n/selector');
 
 const page_name = '肉体情报【茎】';
 
@@ -52,10 +50,10 @@ module.exports = {
           penis_exp_list.push([
             '下方是',
             !chara.sex_code ? '借助药物获得的 ' : ' ',
-            penis_desc[penis_size],
+            i18n().n_penis[penis_size],
             ' 而 ',
             {
-              content: penis_colors[p_type_code],
+              content: i18n().n_c_penis[p_type_code],
               color: sex_colors[p_type_code],
             },
             ' 的肉棒',

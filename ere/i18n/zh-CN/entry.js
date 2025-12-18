@@ -146,6 +146,44 @@ class I18nEntry {
     ];
   }
 
+  skin_0 = '雪白';
+  skin_1 = '健康';
+  skin_2 = '红润';
+  skin_3 = '麦黄';
+  get n_skin() {
+    return [this.skin_0, this.skin_1, this.skin_2, this.skin_3];
+  }
+
+  penis_1 = '可怜';
+  penis_2 = '寒酸';
+  penis_3 = '健壮';
+  penis_4 = '凶恶';
+  penis_5 = '骇人';
+  get n_penis() {
+    return [
+      '',
+      this.penis_1,
+      this.penis_2,
+      this.penis_3,
+      this.penis_4,
+      this.penis_5,
+    ];
+  }
+
+  p_color_0 = '粉嫩';
+  p_color_1 = '泛紫';
+  p_color_2 = '黝黑';
+  get n_c_penis() {
+    return [this.p_color_0, this.p_color_1, this.p_color_2];
+  }
+
+  v_penis_v = '童贞';
+  v_penis_d = '无自觉非童贞';
+
+  v_vagina_v = '处女';
+  v_vagina_d = '无自觉非处女';
+  v_vagina_r = '再生处女';
+
   clothe = new (require('#/i18n/zh-CN/clothes'))();
   race = new (require('#/i18n/zh-CN/races'))();
   skill = new (require('#/i18n/zh-CN/skill-names'))();

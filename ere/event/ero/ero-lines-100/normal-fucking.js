@@ -4,7 +4,9 @@ const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
 const EroNormalFucking = require('#/event/ero/common/normal/fucking');
 
-const { penis_colors, vp_status_enum } = require('#/data/ero/status-const');
+const { vp_status_enum } = require('#/data/ero/status-const');
+
+const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends EroNormalFucking {
   async missionary(attacker, defender, hook) {
@@ -690,8 +692,9 @@ module.exports = class extends EroNormalFucking {
         sys_get_colored_callname(attacker.id, defender.id),
         '，不知是兴奋还是恐惧地颤抖着。',
       ]);
+      // TALENTNAME:34 = 茎核类型
       await attacker.print_and_wait([
-        penis_colors[era.get('cflag:0:茎核类型')],
+        i18n().n_c_penis[era.get('talent:0:34')],
         '的肉棒，就在这一刻深入了小穴之中——',
       ]);
       if (era.get('talent:100:处女') > vp_status_enum.no) {
