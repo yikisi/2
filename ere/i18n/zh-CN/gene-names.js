@@ -1,4 +1,12 @@
 class I18nGenes {
+  gn_types = ['适性', '属性', '技巧'];
+  gn_rarities = ['普通', '稀有', '史诗', '传奇'];
+  gn_title_template = '【%NAME%】（%TYPE% · %RARITY%）\n%DESC%';
+
+  sg_name_template = '「%NAME%」之回响';
+  sg_desc_template = '习得「%NAME%」';
+
+  300000 = '殿堂马娘的灵魂';
   // GENERATED START
   100000 = '秘传 · 草地诀窍';
   100001 = '秘传 · 泥地诀窍';
@@ -31,14 +39,6 @@ class I18nGenes {
   200042 = '智力名宿的追忆';
   200043 = '智力大师的追忆';
   // GENERATED END
-  300000 = '殿堂马娘的灵魂';
-
-  gn_types = ['适性', '属性', '技巧'];
-  gn_rarities = ['普通', '稀有', '史诗', '传奇'];
-  gn_title_template = '【%NAME%】（%TYPE% · %RARITY%）\n%DESC%';
-
-  sg_name_template = '「%NAME%」之回响';
-  sg_desc_template = '习得「%NAME%」';
 }
 
 module.exports = I18nGenes;

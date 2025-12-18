@@ -1,4 +1,5 @@
 class I18nDesc {
+  300000 = '技能点数+600';
   // GENERATED START
   100000 = '草地适性提高';
   100001 = '泥地适性提高';
@@ -31,7 +32,6 @@ class I18nDesc {
   200042 = '智力属性及上限+75';
   200043 = '智力属性及上限+100';
   // GENERATED END
-  300000 = '技能点数+600';
 }
 
 module.exports = I18nDesc;

@@ -1,6 +1,33 @@
 const I18nRaces = require('#/i18n/zh-CN/races');
 
 module.exports = class extends I18nRaces {
+  g_a_grass = '芝';
+  g_a_dirt = 'ダート';
+
+  d_a_short = '短';
+  d_a_mile = 'マイル';
+  d_a_medium = '中';
+  d_a_long = '長';
+
+  r_left = '左';
+  r_right = '右';
+
+  t_sapporo = '札幌';
+  t_hakodate = '函館';
+  t_niigata = '新潟';
+  t_fukushima = '福島';
+  t_nakayama = '中山';
+  t_tokyo = '東京';
+  t_chukyo = '中京';
+  t_kyoto = '京都';
+  t_hanshin = '阪神';
+  t_kokura = '小倉';
+  t_ohi = '大井';
+  t_kawasaki = '川崎';
+  t_funabashi = '船橋';
+  t_morioka = '盛岡';
+  t_longchamp = '隆尚';
+
   0 = 'メイクデビューに';
   // GENERATED START
   1 = 'ジュニアカップ';
@@ -175,31 +202,4 @@ module.exports = class extends I18nRaces {
   170 = 'アルクオーツ スプリント';
   171 = '芙蓉ステークス';
   // GENERATED END
-
-  g_a_grass = '芝';
-  g_a_dirt = 'ダート';
-
-  d_a_short = '短';
-  d_a_mile = 'マイル';
-  d_a_medium = '中';
-  d_a_long = '長';
-
-  r_left = '左';
-  r_right = '右';
-
-  t_sapporo = '札幌';
-  t_hakodate = '函館';
-  t_niigata = '新潟';
-  t_fukushima = '福島';
-  t_nakayama = '中山';
-  t_tokyo = '東京';
-  t_chukyo = '中京';
-  t_kyoto = '京都';
-  t_hanshin = '阪神';
-  t_kokura = '小倉';
-  t_ohi = '大井';
-  t_kawasaki = '川崎';
-  t_funabashi = '船橋';
-  t_morioka = '盛岡';
-  t_longchamp = '隆尚';
 };
