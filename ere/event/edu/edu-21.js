@@ -432,15 +432,15 @@ module.exports = class extends CustomizedEdu {
       case race_enum.tenn_spr:
         if (extra_flag.rank === 1) {
           name = '春三冠的鬼门关';
-          await print_name_and_show_kojo(name, tama, kojo, {
-            ...this.#dict,
-            sank_hai: +check_aim_race(
-              RaceHistory.get(this.id).get(),
-              race_enum.sank_hai,
-              2,
-              1,
-            ),
-          });
+          const dict = this.#dict;
+          dict.sank_hai = +check_aim_race(
+            RaceHistory.get(this.id).get(),
+            race_enum.sank_hai,
+            2,
+            1,
+          );
+          dict['女儿'] = tama.sex_code === 1 ? '儿子' : '女儿';
+          await print_name_and_show_kojo(name, tama, kojo, dict);
         }
         break;
       case race_enum.takz_kin:
