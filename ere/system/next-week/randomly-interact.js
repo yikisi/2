@@ -71,7 +71,7 @@ function randomly_interact(in_team_list) {
               )
             : attr_enum.intelligence;
         // ABLNAME:0 - 4 = 速度训练等级 - 智力训练等级
-        const level = in_beach ? 5 : era.get(`abl:${cid}:${train} `) || 1;
+        const level = in_beach ? 5 : era.get(`abl:${cid}:${train}`) || 1;
         if (teach_chara > 0) {
           take_care_list.push({
             chara: get_chara_talk(cid),

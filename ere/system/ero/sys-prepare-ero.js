@@ -44,7 +44,6 @@ const {
 } = require('#/data/ero/part-const');
 const { stain_enum } = require('#/data/ero/stain-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
-const { gene_juel_names } = require('#/data/other-const');
 
 let j_names;
 
@@ -408,18 +407,23 @@ function init_ero(...ids) {
     if (era.get(`status:${cid}:超马跳Z`)) {
       update_temp_base(cid, 0.4);
     }
-    if (cid > 0 && era.get(`cflag:${cid}:种族`) > 0) {
-      let edu_phase = era.get(`cflag:${cid}:育成回合计时`);
+    // CFLAGNAME:1 = 种族
+    if (cid > 0 && era.get(`cflag:${cid}:1`) > 0) {
+      // CFLAGNAME:48 = 育成回合计时
+      let edu_phase = era.get(`cflag:${cid}:48`);
       if (edu_phase < 3 * 48) {
         edu_phase = Math.floor(edu_phase / 48) / 3;
         const juels = sys_count_juels(cid);
-        era.set(`tcvar:${cid}:粉因子`, Math.floor(juels.pink * edu_phase));
-        era.set(`tcvar:${cid}:蓝因子`, Math.floor(juels.blue * edu_phase));
-        era.set(`tcvar:${cid}:白因子`, Math.floor(juels.white * edu_phase));
+        // TCVARNAME:70 - 72 = 粉因子 - 白因子
+        era.set(`tcvar:${cid}:70`, Math.floor(juels.pink * edu_phase));
+        era.set(`tcvar:${cid}:71`, Math.floor(juels.blue * edu_phase));
+        era.set(`tcvar:${cid}:72`, Math.floor(juels.white * edu_phase));
       } else {
-        gene_juel_names.forEach((e) =>
-          era.set(`tcvar:${cid}:${e}因子`, era.get(`jewel:${cid}:${e}`)),
-        );
+        for (let i = 0; i < 3; ++i) {
+          // TCVARNAME:70 - 72 = 粉因子 - 白因子
+          // JEWELNAME:20 - 22 = 粉 - 白
+          era.set(`tcvar:${cid}:${70 + i}`, era.get(`jewel:${cid}:${20 + i}`));
+        }
       }
     }
     if (
@@ -616,9 +620,14 @@ function end_ero(skip_jewels, log_jewels, ids) {
     }
   }
   for (const cid of ids) {
-    if (cid > 0 && era.get(`cflag:${cid}:种族`) > 0) {
-      let got = Math.floor(era.get(`tcvar:${cid}:获得因子`) / palam2juel),
-        juels = gene_juel_names.map((e) => era.get(`tcvar:${cid}:${e}因子`));
+    // CFLAGNAME:1 = 种族
+    if (cid > 0 && era.get(`cflag:${cid}:1`) > 0) {
+      // TCVARNAME:73 = 获得因子
+      let got = Math.floor(era.get(`tcvar:${cid}:73`) / palam2juel);
+      // TCVARNAME:70 - 72 = 粉因子 - 白因子
+      let juels = new Array(3)
+        .fill(0)
+        .map((_, i) => era.get(`tcvar:${cid}:${70 + i}`));
       if (got > 0) {
         if (got < juels.reduce((p, c) => p + c, 0)) {
           juels = juels.map((e, i, l) => {
@@ -630,22 +639,26 @@ function end_ero(skip_jewels, log_jewels, ids) {
             return val;
           });
         }
-        juels.forEach((e, i) => era.add(`gotjewel:0:${gene_juel_names[i]}`, e));
+        // JEWELNAME:20 - 22 = 粉 - 白
+        juels.forEach((e, i) => era.add(`gotjewel:0:${20 + i}`, e));
         if (era.get(`cflag:${cid}:殿堂`) > 0) {
           CharaAvailableGenes.merge_into_player(new CharaAvailableGenes(cid));
         }
       }
     }
   }
-  gene_juel_names.forEach((e) =>
-    era.add(`jewel:0:${e}`, era.get(`gotjewel:0:${e}`)),
-  );
+  for (let i = 0; i < 3; ++i) {
+    // JEWELNAME:20 - 22 = 粉 - 白
+    era.add(`jewel:0:${20 + i}`, era.get(`gotjewel:0:${20 + i}`));
+  }
   if (!log_jewels) {
     ret.jewel = undefined;
   }
   era
-    .get('paramkeys')
-    .forEach((v) => ids.forEach((cid) => era.set(`gotjewel:${cid}:${v}`, 0)));
+    .get('jewelkeys')
+    .forEach((jid) =>
+      ids.forEach((cid) => era.set(`gotjewel:${cid}:${jid}`, 0)),
+    );
   return ret;
 }
 

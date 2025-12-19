@@ -24,8 +24,9 @@ async function update_marks(shown, ...ids) {
     for (const mid of Object.values(mark_enum)) {
       const m_name = era.get(`markname:${mid}`);
       const m_level = era.get(`mark:${cid}:${mid}`);
+      // EXNAME:65 - 70 = 欢愉获取 - 反抗获取
       const n_level = Math.min(
-        era.get(`nowex:${cid}:${mid + 65}`) + m_level,
+        era.get(`nowex:${cid}:${65 + mid}`) + m_level,
         3,
       );
       if (n_level > m_level) {
@@ -46,8 +47,9 @@ async function update_marks(shown, ...ids) {
           ]);
         }
       }
-      era.add(`ex:${cid}:${mid + 65}`, era.get(`nowex:${cid}:${m_name}获取`));
-      era.set(`nowex:${cid}:${mid + 65}`, 0);
+      // EXNAME:65 - 70 = 欢愉获取 - 反抗获取
+      era.add(`ex:${cid}:${65 + mid}`, era.get(`nowex:${cid}:${65 + mid}`));
+      era.set(`nowex:${cid}:${65 + mid}`, 0);
     }
     if (
       me_in_sex &&
