@@ -1,3 +1,4 @@
+// GENERATED START
 const {
   base_enum,
   motion_enum,
@@ -1146,3 +1147,4 @@ register_motion(
 Object.values(base2motion).forEach((l) => l.sort((a, b) => a - b));
 
 module.exports = { base_dict, base2motion, get_motion_code };
+// GENERATED END

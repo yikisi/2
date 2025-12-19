@@ -1,5 +1,5 @@
 const { execSync } = require('child_process');
-const { readFileSync, writeFileSync } = require('fs');
+const { readFileSync } = require('fs');
 const { join } = require('path');
 
 const {
@@ -7,6 +7,7 @@ const {
   towards_enum,
   up_enum,
 } = require('../../ere/data/ero/part-const');
+const { read_and_write_generated } = require('../libs');
 
 const motion_names = Object.keys(motion_enum);
 const towards_names = Object.keys(towards_enum);
@@ -193,10 +194,13 @@ generate(f.slice(15, 19), up_enum.down);
 
 output += `Object.values(base2motion).forEach((l) => l.sort((a, b) => a - b));
 
-module.exports = { base_dict, base2motion, get_motion_code };
-`;
+module.exports = { base_dict, base2motion, get_motion_code };`;
 
-writeFileSync(join(__dirname, '../../ere/data/ero/motion-const.js'), output);
+read_and_write_generated(
+  join(__dirname, '../../ere/data/ero/motion-const.js'),
+  '//',
+  output,
+);
 
 try {
   process.stdout.write(
@@ -205,5 +209,5 @@ try {
     }),
   );
 } catch (e) {
-  process.stdout.write(e.stdout);
+  process.stderr.write(e.stdout);
 }
