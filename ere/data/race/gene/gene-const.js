@@ -1,3 +1,4 @@
+// GENERATED START
 const gene_dict = {};
 
 gene_dict[100000] = require('#/data/race/gene/gene-100000');
@@ -157,3 +158,4 @@ gene_dict[902061] = require('#/data/race/gene/gene-902061');
 gene_dict[910031] = require('#/data/race/gene/gene-910031');
 gene_dict[300000] = require('#/data/race/gene/gene-300000');
 module.exports = { gene_dict };
+// GENERATED END

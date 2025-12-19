@@ -1,8 +1,8 @@
 const { execSync } = require('child_process');
-const { readFileSync, writeFileSync } = require('fs');
+const { readFileSync } = require('fs');
 const { join } = require('path');
 
-const { generate_content } = require('../libs');
+const { read_and_write_generated } = require('../libs');
 
 const arr = readFileSync(join(__dirname, './inmon-plugins.csv'), 'utf-8')
   .replace(/^\ufeff/, '')
@@ -28,15 +28,17 @@ module.exports = new InmonPlugin(
   ${plug[4]},
   ${plug[6] ? `(args)=>${plug[6]}` : '() => true'},
   ${price * 50 + level * 60},
-);\n`;
-  writeFileSync(
+);`;
+  read_and_write_generated(
     join(__dirname, `../../ere/data/ero/plugin/plugin-${plug[0]}.js`),
+    '//',
     content,
   );
 }
 
-writeFileSync(
+read_and_write_generated(
   join(__dirname, '../../ere/data/ero/plugin/plugin-const.js'),
+  '//',
   `/** @type {Record<string,InmonPlugin>} */
 const plugins = {};
 
@@ -49,20 +51,18 @@ module.exports = {
   plugin_enum: {
 ${arr.map((e) => `    // ${e[2]}: ${e[5]}\n    ${e[7]}: ${e[0]},`).join('\n')}
   },
-};
-`,
+};`,
 );
 
-const i18n_n = join(__dirname, '../../ere/i18n/zh-CN/inmon-names.js');
-const i18n_d = join(__dirname, '../../ere/i18n/zh-CN/inmon-desc.js');
-
-writeFileSync(
-  i18n_n,
-  generate_content(readFileSync(i18n_n, 'utf-8'), '//', n_out),
+read_and_write_generated(
+  join(__dirname, '../../ere/i18n/zh-CN/inmon-names.js'),
+  '//',
+  n_out,
 );
-writeFileSync(
-  i18n_d,
-  generate_content(readFileSync(i18n_d, 'utf-8'), '//', d_out),
+read_and_write_generated(
+  join(__dirname, '../../ere/i18n/zh-CN/inmon-desc.js'),
+  '//',
+  d_out,
 );
 
 try {

@@ -1,3 +1,4 @@
+// GENERATED START
 const InmonPlugin = require('#/data/ero/inmon-plugin');
 
 module.exports = new InmonPlugin(
@@ -8,3 +9,4 @@ module.exports = new InmonPlugin(
   (args) => args.sex === 0,
   420,
 );
+// GENERATED END

@@ -1,3 +1,4 @@
+// GENERATED START
 const UmaGene = require('#/data/race/model/uma-gene');
 
 module.exports = new UmaGene(
@@ -8,3 +9,4 @@ module.exports = new UmaGene(
   95,
   100,
 );
+// GENERATED END

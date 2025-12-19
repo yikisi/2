@@ -59,6 +59,7 @@ class I18nEntry {
   get n_style() {
     return [this.a_s_nige, this.a_s_senko, this.a_s_sashi, this.a_s_okimi];
   }
+  adapt_template = '%ADAPT适性';
 
   edu_0 = '新秀年';
   edu_1 = '经典年';

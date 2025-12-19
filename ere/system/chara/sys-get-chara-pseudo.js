@@ -22,7 +22,7 @@ const { skills_dict } = require('#/data/race/skill/skill-const');
  * @returns {PseudoUma}
  */
 function sys_get_chara_pseudo(cid) {
-  // CFLAGNAME:30-39 = 草地适性 - 追马适性
+  // CFLAGNAME:30 - 39 = 草地适性 - 追马适性
   const adapt_list = new Array(10)
     .fill(0)
     .map((_, i) => era.get(`cflag:${cid}:${30 + i}`));

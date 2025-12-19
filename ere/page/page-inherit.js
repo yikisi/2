@@ -49,7 +49,7 @@ const gene_limit = 27;
  * @param {number} discount
  * @param {number[]} juels
  * @param {number} all_juels
- * @param {number} chara_id
+ * @param {number} cid
  */
 function generate_gene_buttons(
   genes,
@@ -57,7 +57,7 @@ function generate_gene_buttons(
   discount,
   juels,
   all_juels,
-  chara_id,
+  cid,
 ) {
   return [
     [
@@ -101,7 +101,7 @@ function generate_gene_buttons(
       .map((e, i) => {
         const gene = gene_dict[e.id];
         const price =
-          Math.floor((gene.cost * (100 + discount)) / 100) * (1 + !chara_id);
+          Math.floor((gene.cost * (100 + discount)) / 100) * (1 + !cid);
         return {
           columns: [
             {
@@ -136,12 +136,14 @@ function generate_gene_buttons(
                   e.count === genes.get_count(e.id) ||
                   price > juels[gene.type] ||
                   (gene.type === gene_type_enum.adapt &&
-                    get(`cflag:${chara_id}:${gene.type_value}适性`) === 7) ||
+                    // CFLAGNAME:30 - 39 = 草地适性 - 追马适性
+                    get(`cflag:${cid}:${30 + gene.type_value}`) === 7) ||
                   (gene.type === gene_type_enum.base &&
-                    get(`maxbase:${chara_id}:${gene.type_value}`) === 2000) ||
+                    // BASENAME:5 - 9 = 速度 - 智力
+                    get(`maxbase:${cid}:${5 + gene.type_value}`) >= 2000) ||
                   (gene.type === gene_type_enum.skill &&
                     genes.get_count(e.id) > 0) ||
-                  (!chara_id && genes.count() > gene_limit),
+                  (!cid && genes.count() > gene_limit),
                 width: 6,
               },
               content: '学习',
@@ -191,7 +193,7 @@ function generate_gene_buttons(
             align: 'center',
             disabled:
               Math.floor((gene_dict[300000].cost * (100 + discount)) / 100) *
-                (1 + !chara_id) >
+                (1 + !cid) >
               juels[2],
             width: 6,
           },
@@ -573,12 +575,16 @@ async function print_inherit_page() {
           _src = 0;
         }
         new Array(10).fill(0).forEach((_, i) =>
-          // CFLAGNAME:30-39 = 草地适性 - 追马适性
+          // CFLAGNAME:30 - 39 = 草地适性 - 追马适性
           set(`cflag:0:${30 + i}`, get(`cflag:${_src}:${30 + i}`)),
         );
         chara_genes.get_values().forEach((e) => {
           if (e.type === gene_type_enum.base) {
-            add(`base:0:${gene_dict[e.id].type_value}`, -gene_dict[e.id].value);
+            add(
+              // BASENAME:5 - 9 = 速度 - 智力
+              `base:0:${5 + gene_dict[e.id].type_value}`,
+              -gene_dict[e.id].value,
+            );
           }
         });
         chara_genes.clear();
@@ -645,17 +651,23 @@ async function print_inherit_page() {
         let temp;
         switch (gene.type) {
           case gene_type_enum.adapt:
-            temp = get(`cflag:${selected}:${gene.type_value}适性`);
+            // CFLAGNAME:30 - 39 = 草地适性 - 追马适性
+            temp = get(`cflag:${selected}:${30 + gene.type_value}`);
             if (temp < 4) {
-              temp = set(`cflag:${selected}:${gene.type_value}适性`, 4);
+              temp = set(`cflag:${selected}:${30 + gene.type_value}`, 4);
             } else if (temp < 6) {
-              temp = set(`cflag:${selected}:${gene.type_value}适性`, 6);
+              temp = set(`cflag:${selected}:${30 + gene.type_value}`, 6);
             } else {
-              temp = set(`cflag:${selected}:${gene.type_value}适性`, 7);
+              temp = set(`cflag:${selected}:${30 + gene.type_value}`, 7);
             }
             await printAndWait([
               chara.get_colored_name(),
-              ` 的 ${gene.type_value}适性 现在是 `,
+              ' 的 ',
+              i18n().adapt_template.replace(
+                '%ADAPT%',
+                i18n().n_adapt[gene.type_value],
+              ),
+              ' 现在是 ',
               {
                 color: adaptability_colors[temp],
                 content: get_adaptability_rank(temp),
@@ -681,7 +693,7 @@ async function print_inherit_page() {
               },
               ' 现在是 ',
               {
-                content: `${Math.floor(get(`base:${selected}:${5 + gene.type_value}`))}/${get(`maxbase:${selected}:${gene.type_value}`)}`,
+                content: `${Math.floor(get(`base:${selected}:${5 + gene.type_value}`))}/${get(`maxbase:${selected}:${5 + gene.type_value}`)}`,
                 color: attr_colors[gene.type_value],
               },
             ]);

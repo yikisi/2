@@ -1,3 +1,4 @@
+// GENERATED START
 const UmaGene = require('#/data/race/model/uma-gene');
 const UmaSkillGene = require('#/data/race/model/uma-skill-gene');
 
@@ -9,3 +10,4 @@ module.exports = new UmaSkillGene(
   100,
   900171,
 );
+// GENERATED END

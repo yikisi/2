@@ -13,7 +13,7 @@ module.exports = class extends CustomizedInit {
       );
 
       new Array(10).fill(0).forEach((_, i) =>
-        // CFLAGNAME:30-39 = 草地适性 - 追马适性
+        // CFLAGNAME:30 - 39 = 草地适性 - 追马适性
         era.set(`cflag:308:${30 + i}`, get_random_value(0, 5)),
       );
     }

@@ -178,7 +178,7 @@ module.exports = async () => {
       const columns = [];
       const adaptivity = new Array(10)
         .fill(0)
-        // CFLAGNAME:30-39 = 草地适性 - 追马适性
+        // CFLAGNAME:30 - 39 = 草地适性 - 追马适性
         .map((_, i) => era.get(`cflag:${cid}:${30 + i}`));
       const chara_score = get_chara_score(cid);
       let chara_level = get_rank_level(chara_score);

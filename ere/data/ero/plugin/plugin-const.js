@@ -1,3 +1,4 @@
+// GENERATED START
 /** @type {Record<string,InmonPlugin>} */
 const plugins = {};
 
@@ -316,3 +317,4 @@ module.exports = {
     slave: 70211,
   },
 };
+// GENERATED END
