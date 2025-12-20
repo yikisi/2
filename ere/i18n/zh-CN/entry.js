@@ -59,7 +59,7 @@ class I18nEntry {
   get n_style() {
     return [this.a_s_nige, this.a_s_senko, this.a_s_sashi, this.a_s_okimi];
   }
-  adapt_template = '%ADAPT适性';
+  adapt_template = '%ADAPT%适性';
 
   edu_0 = '新秀年';
   edu_1 = '经典年';
@@ -185,15 +185,26 @@ class I18nEntry {
   v_vagina_d = '无自觉非处女';
   v_vagina_r = '再生处女';
 
-  clothe = new (require('#/i18n/zh-CN/clothes'))();
-  race = new (require('#/i18n/zh-CN/races'))();
-  skill = new (require('#/i18n/zh-CN/skill-names'))();
-  skill_desc = new (require('#/i18n/zh-CN/skill-desc'))();
-  gene = new (require('#/i18n/zh-CN/gene-names'))();
-  gene_desc = new (require('#/i18n/zh-CN/gene-desc'))();
+  ui_back = '返回';
+  ui_achieve_title = '获得新成就！';
+
+  achievement = new (require('#/i18n/zh-CN/achieve'))();
+  achieve_desc = new (require('#/i18n/zh-CN/achieve-desc'))();
   note = new (require('#/i18n/zh-CN/notes'))();
-  inmon = new (require('#/i18n/zh-CN/inmon-names'))();
-  inmon_desc = new (require('#/i18n/zh-CN/inmon-desc'))();
+
+  t_abl = new (require('#/i18n/zh-CN/table/abl'))();
+  t_mark = new (require('#/i18n/zh-CN/table/mark'))();
+
+  train_action = new (require('#/i18n/zh-CN/sex/actions'))();
+  inmon = new (require('#/i18n/zh-CN/sex/inmons'))();
+  inmon_desc = new (require('#/i18n/zh-CN/sex/inmon-desc'))();
+
+  clothe = new (require('#/i18n/zh-CN/race/clothes'))();
+  race = new (require('#/i18n/zh-CN/race/races'))();
+  skill = new (require('#/i18n/zh-CN/race/skills'))();
+  skill_desc = new (require('#/i18n/zh-CN/race/skill-desc'))();
+  gene = new (require('#/i18n/zh-CN/race/genes'))();
+  gene_desc = new (require('#/i18n/zh-CN/race/gene-desc'))();
 }
 
 module.exports = I18nEntry;

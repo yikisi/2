@@ -32,8 +32,10 @@ module.exports = class extends I18nEntry {
   edu_1 = 'クラシック級';
   edu_2 = 'シニア級';
 
-  clothe = new (require('#/i18n/ja-JP/clothes'))();
-  race = new (require('#/i18n/ja-JP/races'))();
-  skill = new (require('#/i18n/ja-JP/skill-names'))();
-  skill_desc = new (require('#/i18n/ja-JP/skill-desc'))();
+  t_abl = new (require('#/i18n/ja-JP/table/abl'))();
+
+  clothe = new (require('#/i18n/ja-JP/race/clothes'))();
+  race = new (require('#/i18n/ja-JP/race/races'))();
+  skill = new (require('#/i18n/ja-JP/race/skills'))();
+  skill_desc = new (require('#/i18n/ja-JP/race/skill-desc'))();
 };

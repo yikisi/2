@@ -1,4 +1,4 @@
-const I18nClothes = require('#/i18n/zh-CN/clothes');
+const I18nClothes = require('#/i18n/zh-CN/race/clothes');
 
 module.exports = class extends I18nClothes {
   // GENERATED START

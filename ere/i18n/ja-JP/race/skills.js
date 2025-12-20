@@ -1,4 +1,4 @@
-const I18nSkills = require('#/i18n/zh-CN/skill-names');
+const I18nSkills = require('#/i18n/zh-CN/race/skills');
 
 module.exports = class extends I18nSkills {
   101321 = 'Circulating Love♡';

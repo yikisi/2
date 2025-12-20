@@ -3,10 +3,13 @@ const era = require('#/era-electron');
 const { get_chara_color } = require('#/data/chara-colors');
 const title_desc = require('#/data/desc/titles.json');
 
+const { i18n } = require('#/i18n/selector');
+
 class SysPersonalAchievement {
   /** @returns {Record<string,number>} */
   get #obj() {
-    return era.get('global:角色成就') || era.set('global:角色成就', {});
+    // GLOBALNAME:0 = 角色成就
+    return era.get('global:0') || era.set('global:0', {});
   }
 
   /**
@@ -58,7 +61,7 @@ class SysPersonalAchievement {
           { isBr: true },
           this.describe(cid, title),
         ],
-        '获得新成就！',
+        i18n().ui_achieve_title,
         'success',
         50000,
       );

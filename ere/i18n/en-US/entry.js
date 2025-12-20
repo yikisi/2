@@ -12,5 +12,7 @@ module.exports = class extends I18nEntry {
 
   ui_moti = 'Motivation';
 
-  race = new (require('#/i18n/en-US/races'))();
+  t_abl = new (require('#/i18n/en-US/table/abl'))();
+
+  race = new (require('#/i18n/en-US/race/races'))();
 };

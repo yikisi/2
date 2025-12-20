@@ -22,11 +22,12 @@ const { part_enum, part_names } = require('#/data/ero/part-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const { condition_type, default_tags } = require('#/data/event/ero-hook-tag');
 const {
-  ero_action_names,
   ero_hook_tags,
   ero_hooks,
   ero_tagged_hooks,
 } = require('#/data/event/ero-hooks');
+
+const { i18n } = require('#/i18n/selector');
 
 /**
  * @param {number} master
@@ -60,15 +61,17 @@ function get_random_act(master, act_list, last_action, ...filters) {
     '角色 ' +
       master +
       ' 思考：\n可用指令：' +
-      act_list.map((e) => ero_action_names[e]).join(',') +
+      act_list.map((e) => i18n().train_action[ero_hooks.keys[e]]).join(',') +
       '\n筛选结果：' +
-      filtered_list.map((e) => ero_action_names[e]).join(',') +
+      filtered_list
+        .map((e) => i18n().train_action[ero_hooks.keys[e]])
+        .join(',') +
       '\n前回行动：' +
-      (ero_action_names[last_action] ?? '无') +
+      (i18n().train_action[ero_hooks.keys[last_action]] ?? '无') +
       '\n变招概率：' +
       (change_action * 100).toFixed(2) +
       '%\n最终选择：' +
-      ero_action_names[ret],
+      i18n().train_action[ero_hooks.keys[ret]],
   );
   return ret;
 }

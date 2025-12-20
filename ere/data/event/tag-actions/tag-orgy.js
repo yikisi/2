@@ -1,261 +1,235 @@
-const { ero_action_tags, ero_actions } = require('#/data/event/ero-actions');
+const { action_tags, actions } = require('#/data/event/ero-actions');
 const EroHookTag = require('#/data/event/ero-hook-tag');
 
-/**
- * @param {string[]} ero_action_names
- * @param {EroHookTag[]} ero_tagged_hooks
- */
-module.exports = (ero_action_names, ero_tagged_hooks) => {
-  ero_action_names[ero_actions.ask_supporter_prepare_virgin] = '请求张开小穴';
-  ero_tagged_hooks[ero_actions.ask_supporter_prepare_virgin] = new EroHookTag(
-    [(chara_id) => !chara_id],
-    [ero_action_tags.virgin, ero_action_tags.supporter_awake],
+/** @param {EroHookTag[]} ero_tagged_hooks */
+module.exports = (ero_tagged_hooks) => {
+  ero_tagged_hooks[actions.ask_supporter_prepare_virgin] = new EroHookTag(
+    [(cid) => !cid],
+    [action_tags.virgin, action_tags.supporter_awake],
   );
 
-  ero_action_names[ero_actions.ask_double_suck_nipple] = '请求双人吮乳';
-  ero_tagged_hooks[ero_actions.ask_double_suck_nipple] = new EroHookTag(
-    [ero_action_tags.nipple],
+  ero_tagged_hooks[actions.ask_double_suck_nipple] = new EroHookTag(
+    [action_tags.nipple],
     [
-      ero_action_tags.awake,
-      ero_action_tags.mouth,
-      ero_action_tags.supporter_awake,
-      ero_action_tags.supporter_mouth,
+      action_tags.awake,
+      action_tags.mouth,
+      action_tags.supporter_awake,
+      action_tags.supporter_mouth,
     ],
   );
 
-  ero_action_names[ero_actions.double_suck_nipple] = '双人吮乳';
-  ero_tagged_hooks[ero_actions.double_suck_nipple] = new EroHookTag(
+  ero_tagged_hooks[actions.double_suck_nipple] = new EroHookTag(
     [
-      ero_action_tags.mouth,
-      ero_action_tags.supporter_awake,
-      ero_action_tags.supporter_mouth,
+      action_tags.mouth,
+      action_tags.supporter_awake,
+      action_tags.supporter_mouth,
     ],
-    [ero_action_tags.nipple],
+    [action_tags.nipple],
   );
 
-  ero_action_names[ero_actions.ask_double_blow_job] = '请求双人口交';
-  ero_tagged_hooks[ero_actions.ask_double_blow_job] = new EroHookTag(
-    [ero_action_tags.penis, (chara_id) => !chara_id],
+  ero_tagged_hooks[actions.ask_double_blow_job] = new EroHookTag(
+    [action_tags.penis, (cid) => !cid],
     [
-      ero_action_tags.awake,
-      ero_action_tags.mouth,
-      ero_action_tags.supporter_awake,
-      ero_action_tags.supporter_mouth,
+      action_tags.awake,
+      action_tags.mouth,
+      action_tags.supporter_awake,
+      action_tags.supporter_mouth,
     ],
   );
 
-  ero_action_names[ero_actions.double_blow_job] = '双人口交';
-  ero_tagged_hooks[ero_actions.double_blow_job] = new EroHookTag(
+  ero_tagged_hooks[actions.double_blow_job] = new EroHookTag(
     [
-      ero_action_tags.mouth,
-      ero_action_tags.supporter_awake,
-      ero_action_tags.supporter_mouth,
-      (chara_id) => chara_id,
+      action_tags.mouth,
+      action_tags.supporter_awake,
+      action_tags.supporter_mouth,
+      (cid) => cid,
     ],
-    [ero_action_tags.penis],
+    [action_tags.penis],
   );
 
-  ero_action_names[ero_actions.ask_double_cunnilingus] = '请求双人舐阴';
-  ero_tagged_hooks[ero_actions.ask_double_cunnilingus] = new EroHookTag(
-    [ero_action_tags.clitoris, (chara_id) => !chara_id],
+  ero_tagged_hooks[actions.ask_double_cunnilingus] = new EroHookTag(
+    [action_tags.clitoris, (cid) => !cid],
     [
-      ero_action_tags.awake,
-      ero_action_tags.mouth,
-      ero_action_tags.supporter_awake,
-      ero_action_tags.supporter_mouth,
+      action_tags.awake,
+      action_tags.mouth,
+      action_tags.supporter_awake,
+      action_tags.supporter_mouth,
     ],
   );
 
-  ero_action_names[ero_actions.double_cunnilingus] = '双人舐阴';
-  ero_tagged_hooks[ero_actions.double_cunnilingus] = new EroHookTag(
+  ero_tagged_hooks[actions.double_cunnilingus] = new EroHookTag(
     [
-      (chara_id) => chara_id,
-      ero_action_tags.mouth,
-      ero_action_tags.supporter_awake,
-      ero_action_tags.supporter_mouth,
+      (cid) => cid,
+      action_tags.mouth,
+      action_tags.supporter_awake,
+      action_tags.supporter_mouth,
     ],
-    [ero_action_tags.clitoris],
+    [action_tags.clitoris],
   );
 
-  ero_action_names[ero_actions.ask_double_suck_virgin] = '请求双人舌交';
-  ero_tagged_hooks[ero_actions.ask_double_suck_virgin] = new EroHookTag(
-    [ero_action_tags.virgin, (chara_id) => !chara_id],
+  ero_tagged_hooks[actions.ask_double_suck_virgin] = new EroHookTag(
+    [action_tags.virgin, (cid) => !cid],
     [
-      ero_action_tags.awake,
-      ero_action_tags.mouth,
-      ero_action_tags.supporter_awake,
-      ero_action_tags.supporter_mouth,
+      action_tags.awake,
+      action_tags.mouth,
+      action_tags.supporter_awake,
+      action_tags.supporter_mouth,
     ],
   );
 
-  ero_action_names[ero_actions.double_suck_virgin] = '双人舌交';
-  ero_tagged_hooks[ero_actions.double_suck_virgin] = new EroHookTag(
+  ero_tagged_hooks[actions.double_suck_virgin] = new EroHookTag(
     [
-      ero_action_tags.mouth,
-      ero_action_tags.supporter_awake,
-      ero_action_tags.supporter_mouth,
+      action_tags.mouth,
+      action_tags.supporter_awake,
+      action_tags.supporter_mouth,
     ],
-    [ero_action_tags.virgin],
+    [action_tags.virgin],
   );
 
-  ero_action_names[ero_actions.ask_double_tit_job] = '请求双人乳交';
-  ero_tagged_hooks[ero_actions.ask_double_tit_job] = new EroHookTag(
-    [ero_action_tags.penis, (chara_id) => !chara_id],
+  ero_tagged_hooks[actions.ask_double_tit_job] = new EroHookTag(
+    [action_tags.penis, (cid) => !cid],
     [
-      ero_action_tags.awake,
-      ero_action_tags.breast,
-      ero_action_tags.supporter_awake,
-      ero_action_tags.supporter_breast,
+      action_tags.awake,
+      action_tags.breast,
+      action_tags.supporter_awake,
+      action_tags.supporter_breast,
     ],
   );
 
-  ero_action_names[ero_actions.double_tit_job] = '双人乳交';
-  ero_tagged_hooks[ero_actions.double_tit_job] = new EroHookTag(
+  ero_tagged_hooks[actions.double_tit_job] = new EroHookTag(
     [
-      ero_action_tags.breast,
-      ero_action_tags.supporter_awake,
-      ero_action_tags.supporter_breast,
-      (chara_id) => chara_id,
+      action_tags.breast,
+      action_tags.supporter_awake,
+      action_tags.supporter_breast,
+      (cid) => cid,
     ],
-    [ero_action_tags.penis],
+    [action_tags.penis],
   );
 
-  ero_action_names[ero_actions.ask_double_cowgirl] = '请求轮流女上位';
-  ero_tagged_hooks[ero_actions.ask_double_cowgirl] = new EroHookTag(
-    [ero_action_tags.awake, ero_action_tags.insert, (cid) => !cid],
+  ero_tagged_hooks[actions.ask_double_cowgirl] = new EroHookTag(
+    [action_tags.awake, action_tags.insert, (cid) => !cid],
     [
-      ero_action_tags.awake,
-      ero_action_tags.virgin,
-      ero_action_tags.supporter_awake,
-      ero_action_tags.supporter_virgin,
+      action_tags.awake,
+      action_tags.virgin,
+      action_tags.supporter_awake,
+      action_tags.supporter_virgin,
     ],
   );
 
-  ero_action_names[ero_actions.ask_double_fuck] = '请求轮奸';
-  ero_tagged_hooks[ero_actions.ask_double_fuck] = new EroHookTag(
-    [ero_action_tags.virgin, (chara_id) => !chara_id],
+  ero_tagged_hooks[actions.ask_double_fuck] = new EroHookTag(
+    [action_tags.virgin, (cid) => !cid],
     [
-      ero_action_tags.awake,
-      ero_action_tags.insert,
-      ero_action_tags.supporter_awake,
-      ero_action_tags.supporter_insert,
+      action_tags.awake,
+      action_tags.insert,
+      action_tags.supporter_awake,
+      action_tags.supporter_insert,
     ],
   );
 
-  ero_action_names[ero_actions.ask_double_penetration] = '请求前后轮奸';
-  ero_tagged_hooks[ero_actions.ask_double_penetration] = new EroHookTag(
-    [ero_action_tags.anal, ero_action_tags.virgin, (chara_id) => !chara_id],
+  ero_tagged_hooks[actions.ask_double_penetration] = new EroHookTag(
+    [action_tags.anal, action_tags.virgin, (cid) => !cid],
     [
-      ero_action_tags.awake,
-      ero_action_tags.insert,
-      ero_action_tags.supporter_awake,
-      ero_action_tags.supporter_insert,
+      action_tags.awake,
+      action_tags.insert,
+      action_tags.supporter_awake,
+      action_tags.supporter_insert,
     ],
   );
 
-  ero_action_names[ero_actions.ask_spit_roast] = '请求上下轮奸';
-  ero_tagged_hooks[ero_actions.ask_spit_roast] = new EroHookTag(
-    [ero_action_tags.virgin, (chara_id) => !chara_id],
+  ero_tagged_hooks[actions.ask_spit_roast] = new EroHookTag(
+    [action_tags.virgin, (cid) => !cid],
     [
-      ero_action_tags.awake,
-      ero_action_tags.insert,
-      ero_action_tags.supporter_awake,
-      ero_action_tags.supporter_insert,
+      action_tags.awake,
+      action_tags.insert,
+      action_tags.supporter_awake,
+      action_tags.supporter_insert,
     ],
   );
 
-  ero_action_names[ero_actions.ask_spit_roast_anal_sex] = '请求口菊轮奸';
-  ero_tagged_hooks[ero_actions.ask_spit_roast_anal_sex] = new EroHookTag(
-    [ero_action_tags.anal, (chara_id) => !chara_id],
+  ero_tagged_hooks[actions.ask_spit_roast_anal_sex] = new EroHookTag(
+    [action_tags.anal, (cid) => !cid],
     [
-      ero_action_tags.awake,
-      ero_action_tags.insert,
-      ero_action_tags.supporter_awake,
-      ero_action_tags.supporter_insert,
+      action_tags.awake,
+      action_tags.insert,
+      action_tags.supporter_awake,
+      action_tags.supporter_insert,
     ],
   );
 
-  ero_action_names[ero_actions.ask_cunnilingus_with_fucking] = '请求插入时舐阴';
-  ero_tagged_hooks[ero_actions.ask_cunnilingus_with_fucking] = new EroHookTag(
-    [ero_action_tags.insert],
+  ero_tagged_hooks[actions.ask_cunnilingus_with_fucking] = new EroHookTag(
+    [action_tags.insert],
     [
-      ero_action_tags.clitoris,
-      ero_action_tags.virgin,
-      ero_action_tags.supporter_awake,
-      ero_action_tags.supporter_mouth,
+      action_tags.clitoris,
+      action_tags.virgin,
+      action_tags.supporter_awake,
+      action_tags.supporter_mouth,
     ],
   );
 
-  ero_action_names[ero_actions.fuck_69] = '双人六九插入';
-  ero_tagged_hooks[ero_actions.fuck_69] = new EroHookTag(
-    [ero_action_tags.insert],
+  ero_tagged_hooks[actions.fuck_69] = new EroHookTag(
+    [action_tags.insert],
     [
-      ero_action_tags.awake,
-      ero_action_tags.mouth,
-      ero_action_tags.sex_check,
-      ero_action_tags.supporter_awake,
-      ero_action_tags.supporter_mouth,
-      ero_action_tags.supporter_sex_check,
+      action_tags.awake,
+      action_tags.mouth,
+      action_tags.sex_check,
+      action_tags.supporter_awake,
+      action_tags.supporter_mouth,
+      action_tags.supporter_sex_check,
     ],
   );
 
-  ero_action_names[ero_actions.double_cowgirl] = '轮流女上位';
-  ero_tagged_hooks[ero_actions.double_cowgirl] = new EroHookTag(
+  ero_tagged_hooks[actions.double_cowgirl] = new EroHookTag(
     [
-      ero_action_tags.awake,
-      ero_action_tags.virgin,
-      ero_action_tags.supporter_awake,
-      ero_action_tags.supporter_virgin,
+      action_tags.awake,
+      action_tags.virgin,
+      action_tags.supporter_awake,
+      action_tags.supporter_virgin,
       (cid) => cid > 0,
     ],
-    [ero_action_tags.insert],
+    [action_tags.insert],
   );
 
-  ero_action_names[ero_actions.double_fuck] = '轮奸';
-  ero_tagged_hooks[ero_actions.double_fuck] = new EroHookTag(
+  ero_tagged_hooks[actions.double_fuck] = new EroHookTag(
     [
-      ero_action_tags.awake,
-      ero_action_tags.insert,
-      ero_action_tags.supporter_awake,
-      ero_action_tags.supporter_insert,
-      (chara_id) => chara_id,
+      action_tags.awake,
+      action_tags.insert,
+      action_tags.supporter_awake,
+      action_tags.supporter_insert,
+      (cid) => cid,
     ],
-    [ero_action_tags.virgin],
+    [action_tags.virgin],
   );
 
-  ero_action_names[ero_actions.double_penetration] = '前后轮奸';
-  ero_tagged_hooks[ero_actions.double_penetration] = new EroHookTag(
+  ero_tagged_hooks[actions.double_penetration] = new EroHookTag(
     [
-      ero_action_tags.awake,
-      ero_action_tags.insert,
-      ero_action_tags.supporter_awake,
-      ero_action_tags.supporter_insert,
-      (chara_id) => chara_id,
+      action_tags.awake,
+      action_tags.insert,
+      action_tags.supporter_awake,
+      action_tags.supporter_insert,
+      (cid) => cid,
     ],
-    [ero_action_tags.anal, ero_action_tags.virgin],
+    [action_tags.anal, action_tags.virgin],
   );
 
-  ero_action_names[ero_actions.spit_roast] = '上下轮奸';
-  ero_tagged_hooks[ero_actions.spit_roast] = new EroHookTag(
+  ero_tagged_hooks[actions.spit_roast] = new EroHookTag(
     [
-      ero_action_tags.awake,
-      ero_action_tags.insert,
-      ero_action_tags.supporter_awake,
-      ero_action_tags.supporter_insert,
-      (chara_id) => chara_id,
+      action_tags.awake,
+      action_tags.insert,
+      action_tags.supporter_awake,
+      action_tags.supporter_insert,
+      (cid) => cid,
     ],
-    [ero_action_tags.virgin],
+    [action_tags.virgin],
   );
 
-  ero_action_names[ero_actions.spit_roast_anal_sex] = '口菊轮奸';
-  ero_tagged_hooks[ero_actions.spit_roast_anal_sex] = new EroHookTag(
+  ero_tagged_hooks[actions.spit_roast_anal_sex] = new EroHookTag(
     [
-      ero_action_tags.awake,
-      ero_action_tags.insert,
-      ero_action_tags.supporter_awake,
-      ero_action_tags.supporter_insert,
-      (chara_id) => chara_id,
+      action_tags.awake,
+      action_tags.insert,
+      action_tags.supporter_awake,
+      action_tags.supporter_insert,
+      (cid) => cid,
     ],
-    [ero_action_tags.mouth],
+    [action_tags.mouth],
   );
 };

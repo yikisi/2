@@ -13,10 +13,7 @@ const CommonKojoFactory = require('#/event/factory-common');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { condition_type, default_tags } = require('#/data/event/ero-hook-tag');
-const {
-  ero_action_names,
-  ero_tagged_hooks,
-} = require('#/data/event/ero-hooks');
+const { ero_hooks, ero_tagged_hooks } = require('#/data/event/ero-hooks');
 const HookArg = require('#/data/event/hook-arg');
 
 /** @type {Record<string,CustomizedEro>} */
@@ -107,25 +104,30 @@ class EroFactory extends CommonKojoFactory {
     const hook = new HookArg(action);
     let ret;
     if (extra_flag.shown !== false) {
-      if (ero_action_names[action] !== undefined) {
-        const master = get('tflag:主导权'),
-          { attacker: _a, defender: _d } =
-            (ero_tagged_hooks[action] || default_tags).condition ===
-            condition_type.active
-              ? master > 0
-                ? { attacker: cid, defender: 0 }
-                : { attacker: 0, defender: cid }
-              : extra_flag;
+      if (action > ero_hooks.ACTION_START && action < ero_hooks.ACTION_END) {
+        // TFLAGNAME:7 = 主导权
+        const master = get('tflag:7');
+        const { attacker: _a, defender: _d } =
+          (ero_tagged_hooks[action] || default_tags).condition ===
+          condition_type.active
+            ? master > 0
+              ? { attacker: cid, defender: 0 }
+              : { attacker: 0, defender: cid }
+            : extra_flag;
         if (_a === master) {
-          hook.arg = get('tflag:前回行动') !== hook.hook;
-        } else if (_a === get('tflag:前回对手')) {
-          hook.arg = get('tflag:对手行动') !== hook.hook;
+          // TFLAGNAME:1 = 前回行动
+          hook.arg = get('tflag:1') !== hook.hook;
+          // TFLAGNAME:3 = 前回对手
+        } else if (_a === get('tflag:3')) {
+          // TFLAGNAME:2 = 对手行动
+          hook.arg = get('tflag:2') !== hook.hook;
         } else {
           hook.arg = true;
         }
         const attacker = get_chara_talk(_a);
         const defender = get_chara_talk(_d);
-        const raper = get('tflag:强奸');
+        // TFLAGNAME:9 = 强奸
+        const raper = get('tflag:');
         if (!sys_check_awake(_d)) {
           await (describers.s[action] || describers.c[action])(
             attacker,

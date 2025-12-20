@@ -85,8 +85,8 @@ writeFileSync(
   ),
 );
 
-const i18n_path_c = join(__dirname, '../../ere/i18n/zh-CN/clothes.js');
-const i18n_path_j = join(__dirname, '../../ere/i18n/ja-JP/clothes.js');
+const i18n_path_c = join(__dirname, '../../ere/i18n/zh-CN/race/clothes.js');
+const i18n_path_j = join(__dirname, '../../ere/i18n/ja-JP/race/clothes.js');
 
 writeFileSync(
   i18n_path_c,

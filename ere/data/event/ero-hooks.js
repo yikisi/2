@@ -1,7 +1,5 @@
-const { ero_action_tags, ero_actions } = require('#/data/event/ero-actions');
+const { action_tags, actions } = require('#/data/event/ero-actions');
 
-/** @type {string[]} */
-const ero_action_names = [];
 /** @type {EroHookTag[]} */
 const ero_tagged_hooks = [];
 /** @type {Record<string,boolean>} */
@@ -16,7 +14,7 @@ const current = new Date().getTime();
   require('#/data/event/tag-actions/tag-sm'),
   require('#/data/event/tag-actions/tag-orgy'),
   require('#/data/event/tag-actions/tag-items'),
-].forEach((f) => f(ero_action_names, ero_tagged_hooks, ero_derive_check));
+].forEach((f) => f(ero_tagged_hooks, ero_derive_check));
 
 console.log(
   '调教指令注册完毕!',
@@ -31,9 +29,7 @@ console.log(
  */
 module.exports = {
   ero_derive_check,
-  ero_action_names,
-  ero_hook_tags: ero_action_tags,
-  ero_hooks: ero_actions,
+  ero_hook_tags: action_tags,
+  ero_hooks: actions,
   ero_tagged_hooks,
-  ero_actions: Object.keys(ero_action_names).map((e) => Number(e)),
 };

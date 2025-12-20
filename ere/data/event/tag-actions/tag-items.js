@@ -1,19 +1,15 @@
 const era = require('#/era-electron');
 
-const { ero_action_tags, ero_actions } = require('#/data/event/ero-actions');
+const { action_tags, actions } = require('#/data/event/ero-actions');
 const EroHookTag = require('#/data/event/ero-hook-tag');
 const { location_enum } = require('#/data/locations');
 
-/**
- * @param {string[]} ero_action_names
- * @param {EroHookTag[]} ero_tagged_hooks
- */
-module.exports = (ero_action_names, ero_tagged_hooks) => {
-  ero_action_names[ero_actions.use_lubricating_fluid] = '使用润滑液';
-  ero_tagged_hooks[ero_actions.use_lubricating_fluid] = new EroHookTag(
+/** @param {EroHookTag[]} ero_tagged_hooks */
+module.exports = (ero_tagged_hooks) => {
+  ero_tagged_hooks[actions.use_lubricating_fluid] = new EroHookTag(
     [
-      (chara_id) =>
-        !chara_id &&
+      (cid) =>
+        !cid &&
         era.get('item:润滑液') &&
         era.get('flag:当前位置') !== location_enum.basement &&
         era.get('flag:当前位置') !== location_enum.mejiro,
@@ -21,75 +17,64 @@ module.exports = (ero_action_names, ero_tagged_hooks) => {
     [],
   );
 
-  ero_action_names[ero_actions.use_medicine] = '喂食药物';
-  ero_tagged_hooks[ero_actions.use_medicine] = new EroHookTag(
+  ero_tagged_hooks[actions.use_medicine] = new EroHookTag(
     [
-      (chara_id) =>
-        !chara_id &&
+      (cid) =>
+        !cid &&
         era.get('flag:当前位置') !== location_enum.basement &&
         era.get('flag:当前位置') !== location_enum.mejiro,
     ],
     [],
   );
 
-  ero_action_names[ero_actions.condom] = '戴上避孕套';
-  ero_tagged_hooks[ero_actions.condom] = new EroHookTag(
+  ero_tagged_hooks[actions.condom] = new EroHookTag(
     [
-      ero_action_tags.penis,
-      (chara_id) =>
-        !chara_id &&
+      action_tags.penis,
+      (cid) =>
+        !cid &&
         era.get('item:避孕套') &&
-        !era.get(`tcvar:${chara_id}:避孕套`) &&
-        !era.get(`status:${chara_id}:弗隆K`) &&
+        !era.get(`tcvar:${cid}:避孕套`) &&
+        !era.get(`status:${cid}:弗隆K`) &&
         era.get('flag:当前位置') !== location_enum.basement &&
         era.get('flag:当前位置') !== location_enum.mejiro,
     ],
     [],
   );
 
-  ero_action_names[ero_actions.other_condom] = '给对方戴避孕套';
-  ero_tagged_hooks[ero_actions.other_condom] = new EroHookTag(
+  ero_tagged_hooks[actions.other_condom] = new EroHookTag(
     [
-      (chara_id) =>
-        !chara_id &&
+      (cid) =>
+        !cid &&
         era.get('item:避孕套') &&
         era.get('flag:当前位置') !== location_enum.basement &&
         era.get('flag:当前位置') !== location_enum.mejiro,
     ],
     [
-      ero_action_tags.penis,
-      (chara_id) =>
-        !era.get(`tcvar:${chara_id}:避孕套`) &&
-        !era.get(`status:${chara_id}:弗隆K`),
+      action_tags.penis,
+      (cid) =>
+        !era.get(`tcvar:${cid}:避孕套`) && !era.get(`status:${cid}:弗隆K`),
     ],
   );
 
-  ero_action_names[ero_actions.use_item] = '使用性玩具';
-  ero_tagged_hooks[ero_actions.use_item] = new EroHookTag(
+  ero_tagged_hooks[actions.use_item] = new EroHookTag(
     [
-      ero_action_tags.sadism,
-      (chara_id) =>
-        chara_id > 0 ||
+      action_tags.sadism,
+      (cid) =>
+        cid > 0 ||
         (era.get('flag:当前位置') !== location_enum.basement &&
           era.get('flag:当前位置') !== location_enum.mejiro),
     ],
     [],
   );
 
-  ero_action_names[ero_actions.take_off_item] = '撤除性玩具';
-  ero_tagged_hooks[ero_actions.take_off_item] = new EroHookTag(
-    [(chara_id) => !chara_id],
-    [],
-  );
+  ero_tagged_hooks[actions.take_off_item] = new EroHookTag([(cid) => !cid], []);
 
-  ero_action_names[ero_actions.ask_use_item] = '乞求使用玩具';
-  ero_tagged_hooks[ero_actions.ask_use_item] = new EroHookTag(
+  ero_tagged_hooks[actions.ask_use_item] = new EroHookTag(
     [
-      ero_action_tags.awake,
-      (chara_id) =>
-        !chara_id && era.get('flag:当前位置') !== location_enum.mejiro,
+      action_tags.awake,
+      (cid) => !cid && era.get('flag:当前位置') !== location_enum.mejiro,
     ],
-    [ero_action_tags.awake],
+    [action_tags.awake],
     EroHookTag.condition_type.no,
   );
 };

@@ -12,7 +12,6 @@ const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const { part_enum } = require('#/data/ero/part-const');
 const { condition_type, default_tags } = require('#/data/event/ero-hook-tag');
 const {
-  ero_actions,
   ero_hook_tags,
   ero_hooks,
   ero_tagged_hooks,
@@ -152,10 +151,11 @@ function sys_filter_ero_act(
     (!attacker || check_lubrication(supporter, part_enum.virgin));
 
   const is_master = attacker === era.get('tflag:主导权');
-  return ero_actions.filter((e) => {
-    const tags = ero_tagged_hooks[e] || default_tags;
-    const hook_name = ero_hooks.keys[e];
-    return (
+  const ret = [];
+  for (let a = ero_hooks.ACTION_START + 1; a < ero_hooks.ACTION_END; ++a) {
+    const tags = ero_tagged_hooks[a] || default_tags;
+    const hook_name = ero_hooks.keys[a];
+    if (
       (tags.condition === condition_type.no ||
         (is_master && tags.condition === condition_type.active) ||
         (!is_master && tags.condition === condition_type.in_active)) &&
@@ -175,8 +175,11 @@ function sys_filter_ero_act(
         tag_checks[defender],
         supporter_tag_checks,
       )
-    );
-  });
+    ) {
+      ret.push(a);
+    }
+  }
+  return ret;
 }
 
 module.exports = sys_filter_ero_act;

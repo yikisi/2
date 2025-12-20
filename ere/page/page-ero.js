@@ -42,7 +42,7 @@ const {
   relation_colors,
 } = require('#/data/color-const');
 const date_indicator = require('#/data/date-indicator');
-const { mark_abbr, part_abbr } = require('#/data/ero/ero-alias.json');
+const { part_abbr } = require('#/data/ero/ero-alias.json');
 const { mark_colors, mark_enum } = require('#/data/ero/mark-const');
 const { lust_border, lust_from_palam } = require('#/data/ero/orgasm-const');
 const {
@@ -52,11 +52,7 @@ const {
   up_enum,
 } = require('#/data/ero/part-const');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
-const {
-  ero_action_names,
-  ero_derive_check,
-  ero_hooks,
-} = require('#/data/event/ero-hooks');
+const { ero_derive_check, ero_hooks } = require('#/data/event/ero-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
 const {
   get_ero_status,
@@ -65,7 +61,7 @@ const {
 } = require('#/data/info-generator');
 const { location_enum, location_name } = require('#/data/locations');
 
-const { __ } = require('#/i18n/selector');
+const { __, i18n } = require('#/i18n/selector');
 
 /**
  * @param {number} cid
@@ -98,22 +94,29 @@ function get_chr(cid) {
  */
 function get_ero_marks(cid) {
   const status_list = [];
-  new Array(6).fill(0).forEach((_, i) => {
-    const mark_name = era.get(`markname:${i}`);
-    const mark = era.get(`mark:${cid}:${i}`);
-    if (mark) {
+  for (let i = 0; i < 6; ++i) {
+    const lv = era.get(`mark:${cid}:${i}`);
+    if (lv > 0) {
       status_list.push({
-        color: get_color(undefined, mark_colors[i], mark / 3),
-        content: `[${mark_abbr[mark_name]}${mark}]`,
+        color: get_color(undefined, mark_colors[i], lv / 3),
+        content: i18n()
+          .t_mark.abbr_template.replace('%NAME%', i18n().t_mark.abbr[i])
+          .replace('%LEVEL%', lv.toString()),
       });
     }
-  });
-  if (era.get(`talent:${cid}:钢之意志`) > 0) {
-    status_list.push({ color: mark_colors.iron, content: '[钢]' });
   }
-  return status_list.map((e) => {
-    e.display = 'inline-block';
-    return e;
+  // TALENTNAME:57 = 钢之意志
+  if (era.get(`talent:${cid}:57`) > 0) {
+    status_list.push({
+      color: mark_colors.iron,
+      content: i18n()
+        .t_mark.abbr_template.replace('%NAME%', i18n().t_mark.a_iron)
+        .replace('%LEVEL%', ''),
+    });
+  }
+  return status_list.map((s) => {
+    s.display = 'inline-block';
+    return s;
   });
 }
 
@@ -523,7 +526,7 @@ async function page_ero(lover, skip_start_end = false) {
           ? [
               get_chara_talk(0).get_colored_name(),
               ' 的行动：',
-              ero_action_names[last_action],
+              i18n().train_action[ero_hooks.keys[last_action]],
             ]
           : [],
       type: 'text',
@@ -538,7 +541,7 @@ async function page_ero(lover, skip_start_end = false) {
               check_ero_enabled(lover, curr_supporter, last_action) < 0),
           disableWarning: true,
         },
-        content: `再次 ${ero_action_names[last_action]}`,
+        content: `再次 ${i18n().train_action[ero_hooks.keys[last_action]]}`,
         type: 'button',
       });
     }
@@ -548,7 +551,7 @@ async function page_ero(lover, skip_start_end = false) {
           ? [
               get_chara_talk(lover).get_colored_name(),
               ' 的行动：',
-              ero_action_names[lover_action],
+              i18n().train_action[ero_hooks.keys[lover_action]],
             ]
           : '',
       type: 'text',
@@ -617,7 +620,7 @@ async function page_ero(lover, skip_start_end = false) {
             disabled: action_disabled,
             width: 4,
           },
-          content: ero_action_names[a],
+          content: i18n().train_action[ero_hooks.keys[a]],
           type: 'button',
         };
       }),

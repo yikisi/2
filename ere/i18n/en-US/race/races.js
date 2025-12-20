@@ -1,4 +1,4 @@
-const I18nRaces = require('#/i18n/zh-CN/races');
+const I18nRaces = require('#/i18n/zh-CN/race/races');
 
 module.exports = class extends I18nRaces {
   0 = 'Begin Race';

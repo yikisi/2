@@ -21,11 +21,7 @@ const { part_names } = require('#/data/ero/part-const');
 const { unexpected_pregnant_enum } = require('#/data/ero/status-const');
 const basement_owners = require('#/data/event/basement-owners');
 const { condition_type, default_tags } = require('#/data/event/ero-hook-tag');
-const {
-  ero_action_names,
-  ero_hooks,
-  ero_tagged_hooks,
-} = require('#/data/event/ero-hooks');
+const { ero_hooks, ero_tagged_hooks } = require('#/data/event/ero-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { location_enum } = require('#/data/locations');
 
@@ -205,7 +201,10 @@ handlers[ero_hooks.after_betrayed] = async (id, _, { partners }) => {
  */
 module.exports = async (cid, hook, extra) => {
   if (handlers[hook.hook]) {
-    if (ero_action_names[hook.hook]) {
+    if (
+      hook.hook > ero_hooks.ACTION_START &&
+      hook.hook < ero_hooks.ACTION_END
+    ) {
       extra.check = Math.min(100, extra.check || 0);
       const { attacker, defender } =
         (ero_tagged_hooks[hook.hook] || default_tags).condition !==

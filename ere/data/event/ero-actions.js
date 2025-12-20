@@ -1,4 +1,4 @@
-const ero_action_tags = {
+const action_tags = {
   anal: 0,
   awake: 0,
   body: 0,
@@ -29,9 +29,12 @@ const ero_action_tags = {
   touched_nipple: 0,
   virgin: 0,
 };
-Object.keys(ero_action_tags).forEach((e, i) => (ero_action_tags[e] = i));
+Object.keys(action_tags).forEach((e, i) => (action_tags[e] = i));
 
-const ero_actions = {
+const actions = {
+  // 调教指令开始
+  ACTION_START: 0,
+
   // 放弃挣扎
   go_on: 0,
   // 接吻
@@ -344,6 +347,9 @@ const ero_actions = {
   // 要求使用道具
   ask_use_item: 0,
 
+  // 调教指令结束
+  ACTION_END: 0,
+
   // 勃起
   become_erect: 0,
   // 湿润
@@ -369,11 +375,11 @@ const ero_actions = {
   // 被绿之后
   after_betrayed: 0,
 };
-Object.keys(ero_actions).forEach((k, i) => (ero_actions[k] = i));
+Object.keys(actions).forEach((k, i) => (actions[k] = i));
 
-ero_actions.keys = Object.keys(ero_actions);
+actions.keys = Object.keys(actions);
 
 module.exports = {
-  ero_action_tags,
-  ero_actions,
+  action_tags,
+  actions,
 };
