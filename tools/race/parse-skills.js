@@ -8,6 +8,7 @@ const prisma = new PrismaClient();
 
 const UmaSkill = require('../../ere/data/race/model/uma-skill');
 const legend_skill_sets = require('./custom-skill-sets');
+const filtered = require('./filtered');
 
 const ability_time_usage_names = {},
   ability_type_names = {},
@@ -368,6 +369,10 @@ const icon2skill_color = {
     UmaSkill.skill_name_enum.speed,
     UmaSkill.skill_border_enum.advanced,
   ),
+  20326: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.evol,
+  ),
   30011: UmaSkill.get_skill_color(
     UmaSkill.skill_name_enum.control,
     UmaSkill.skill_border_enum.normal,
@@ -663,7 +668,7 @@ async function chara_skill() {
     buffer += `chara_skill_dict[${Number(cid) % 1000}] = [${dict[cid].join(',')}];`;
   }
   buffer += '\n\nconst skill_sets = {0:[],\n';
-  const skill_sets = [
+  let skill_sets = [
     ...(await prisma.daily_race_npc.findMany()),
     ...(await prisma.legend_race_boss_npc.findMany()),
     ...(await prisma.legend_race_npc.findMany()),
@@ -677,6 +682,7 @@ async function chara_skill() {
     ...(await prisma.ultimate_race_npc.findMany()),
     ...(await prisma.heroes_race_mob_npc.findMany()),
   ].forEach((e) => skill_sets.push(e.skill_set_id_1, e.skill_set_id_2));
+  skill_sets = skill_sets.filter((s) => !filtered.sets[s]);
   (
     await prisma.skill_set.findMany({
       where: {
