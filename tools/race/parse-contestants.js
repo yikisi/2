@@ -5,6 +5,7 @@ const { PrismaClient } = require('@prisma/client');
 
 const id2suffix = require('../../common/clothe-id2suffix');
 const legend_skill_sets = require('./custom-skill-sets');
+const filtered = require('./filtered');
 
 const prisma = new PrismaClient();
 
@@ -116,6 +117,9 @@ async function task() {
     ...(await prisma.ultimate_race_npc.findMany()),
     ...(await prisma.heroes_race_mob_npc.findMany()),
   ].forEach((e) => {
+    if (filtered.sets[e.skill_set_id_1] || filtered.sets[e.skill_set_id_2]) {
+      return;
+    }
     const tmp = {
       adapt_distance: [
         e.proper_distance_short,

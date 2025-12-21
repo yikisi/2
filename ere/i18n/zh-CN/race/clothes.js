@@ -30,6 +30,7 @@ class I18nClothes {
   100501 = '流星歌舞剧';
   100520 = '闪耀之星';
   100601 = '星光鼓动';
+  100602 = '芦毛灰姑娘';
   100646 = '奇迹的白星';
   100701 = '赤色纷争者';
   100702 = 'La mode 564';
@@ -129,6 +130,7 @@ class I18nClothes {
   104823 = 'Aurore☆Vacances';
   104840 = 'Highkey☆Hallowed';
   104901 = '死中求活';
+  104946 = '祝祭游戏';
   105001 = 'Nevertheless';
   105002 = '迷光超控';
   105016 = 'Difference・Engineer';
@@ -236,10 +238,12 @@ class I18nClothes {
   111026 = 'Twinbell Queen';
   111101 = 'Inherited Hope';
   111301 = 'Assorted Cuteness♡';
+  111401 = 'Heroína Inocente';
   111501 = '总览';
   111601 = 'Regina dei fiori';
   111701 = '戏剧性的芭蕾裙';
   111901 = '梦境的尽头';
+  111946 = '雪白之梦路';
   112001 = '一心向前';
   112101 = 'Chevalier fidèle';
   112401 = 'POPPING!';

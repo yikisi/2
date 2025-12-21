@@ -1,5 +1,4 @@
 const { execSync } = require('child_process');
-const { readFileSync, writeFileSync } = require('fs');
 const { join } = require('path');
 
 const { PrismaClient } = require('@prisma/client');
@@ -17,8 +16,9 @@ const {
   skill_name_enum,
   target_type_enum,
 } = require('../../ere/data/race/model/skill-enum');
-const { generate_content } = require('../libs');
+const { read_and_write_generated } = require('../libs');
 const legend_skill_sets = require('./custom-skill-sets');
+const filtered = require('./filtered');
 
 const ability_time_usage_names = {};
 const ability_type_names = {};
@@ -120,6 +120,7 @@ const icon2skill_color = {
   20316: get_skill_color(skill_name_enum.speed, skill_border_enum.evol),
   20321: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
   20322: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
+  20326: get_skill_color(skill_name_enum.speed, skill_border_enum.evol),
   30011: get_skill_color(skill_name_enum.control, skill_border_enum.normal),
   30012: get_skill_color(skill_name_enum.control, skill_border_enum.advanced),
   30021: get_skill_color(skill_name_enum.control, skill_border_enum.normal),
@@ -412,7 +413,7 @@ async function chara_skill() {
     buffer += `chara_skill_dict[${Number(cid) % 1000}] = [${c_s_dict[cid].join(',')}];`;
   }
   buffer += '\n\nconst skill_sets = {0:[],\n';
-  const skill_sets = [
+  let skill_sets = [
     ...(await prisma.daily_race_npc.findMany()),
     ...(await prisma.legend_race_boss_npc.findMany()),
     ...(await prisma.legend_race_npc.findMany()),
@@ -426,6 +427,7 @@ async function chara_skill() {
     ...(await prisma.ultimate_race_npc.findMany()),
     ...(await prisma.heroes_race_mob_npc.findMany()),
   ].forEach((e) => skill_sets.push(e.skill_set_id_1, e.skill_set_id_2));
+  skill_sets = skill_sets.filter((s) => !filtered.sets[s]);
   (
     await prisma.skill_set.findMany({
       where: {
@@ -619,10 +621,10 @@ async function chara_skill() {
           )
           .join(',')
       }]`;
-      const p = join(__dirname, `../../ere/data/race/skill/skill-${id}.js`);
-      writeFileSync(
-        p,
-        generate_content(readFileSync(p, 'utf-8'), '//', `${sbuffer});`),
+      read_and_write_generated(
+        join(__dirname, `../../ere/data/race/skill/skill-${id}.js`),
+        '//',
+        `${sbuffer});`,
       );
       fill_dict(e.precondition_1, c_dict, e);
       fill_dict(e.precondition_2, c_dict, e);
@@ -643,36 +645,25 @@ async function chara_skill() {
       (buffer += `skills_dict[${s}]=require("#/data/race/skill/skill-${s}");`),
   );
 
-  const s_c_p = join(__dirname, '../../ere/data/race/skill/skill-const.js');
-  writeFileSync(
-    s_c_p,
-    generate_content(
-      readFileSync(s_c_p, 'utf-8'),
-      '//',
-      `${buffer}\n\nconsole.log('技能列表注册完毕!',(new Date().getTime()-current).toLocaleString(),'ms')\n\nconst common_skills = [${buffer_common_skills
-        .sort()
-        .filter((e, i, l) => i === l.indexOf(e))
-        .join(
-          ',',
-        )}];\n\nmodule.exports = {chara_skill_dict,common_skills,skills_dict,skill_sets};`,
-    ),
+  read_and_write_generated(
+    join(__dirname, '../../ere/data/race/skill/skill-const.js'),
+    '//',
+    `${buffer}\n\nconsole.log('技能列表注册完毕!',(new Date().getTime()-current).toLocaleString(),'ms')\n\nconst common_skills = [${buffer_common_skills
+      .sort()
+      .filter((e, i, l) => i === l.indexOf(e))
+      .join(
+        ',',
+      )}];\n\nmodule.exports = {chara_skill_dict,common_skills,skills_dict,skill_sets};`,
   );
   buffer = 'class ConditionParams { ';
   c_dict['orgasm'] = c_dict['milk'] = c_dict['item'] = 1;
   Object.keys(c_dict)
     .sort()
     .forEach((k) => (buffer += `${k};`));
-  const c_p_p = join(
-    __dirname,
-    '../../ere/data/race/model/condition-params.js',
-  );
-  writeFileSync(
-    c_p_p,
-    generate_content(
-      readFileSync(c_p_p, 'utf-8'),
-      '//',
-      `${buffer};};\n\nmodule.exports = ConditionParams;`,
-    ),
+  read_and_write_generated(
+    join(__dirname, '../../ere/data/race/model/condition-params.js'),
+    '//',
+    `${buffer};};\n\nmodule.exports = ConditionParams;`,
   );
   console.log('条件参数', Object.keys(c_dict).length, '个');
 
@@ -680,32 +671,29 @@ async function chara_skill() {
     process.stdout.write(
       execSync(
         'npx eslint --fix ./ere/data/race/model/condition-params.js ./ere/data/race/skill',
-        {
-          cwd: join(process.cwd(), '../..'),
-        },
+        { cwd: join(process.cwd(), '../..') },
       ),
     );
 
-    const i18n_c_n = join(__dirname, '../../ere/i18n/zh-CN/skill-names.js');
-    const i18n_c_d = join(__dirname, '../../ere/i18n/zh-CN/skill-desc.js');
-    const i18n_j_n = join(__dirname, '../../ere/i18n/ja-JP/skill-names.js');
-    const i18n_j_d = join(__dirname, '../../ere/i18n/ja-JP/skill-desc.js');
-
-    writeFileSync(
-      i18n_c_n,
-      generate_content(readFileSync(i18n_c_n, 'utf-8'), '//', c_n_out),
+    read_and_write_generated(
+      join(__dirname, '../../ere/i18n/zh-CN/race/skills.js'),
+      '//',
+      c_n_out,
     );
-    writeFileSync(
-      i18n_c_d,
-      generate_content(readFileSync(i18n_c_d, 'utf-8'), '//', c_d_out),
+    read_and_write_generated(
+      join(__dirname, '../../ere/i18n/zh-CN/race/skill-desc.js'),
+      '//',
+      c_d_out,
     );
-    writeFileSync(
-      i18n_j_n,
-      generate_content(readFileSync(i18n_j_n, 'utf-8'), '//', j_n_out),
+    read_and_write_generated(
+      join(__dirname, '../../ere/i18n/ja-JP/race/skills.js'),
+      '//',
+      j_n_out,
     );
-    writeFileSync(
-      i18n_j_d,
-      generate_content(readFileSync(i18n_j_d, 'utf-8'), '//', j_d_out),
+    read_and_write_generated(
+      join(__dirname, '../../ere/i18n/ja-JP/race/skill-desc.js'),
+      '//',
+      j_d_out,
     );
 
     process.stdout.write(execSync('node parse-genes.js'));
@@ -716,7 +704,11 @@ async function chara_skill() {
       }),
     );
   } catch (e) {
-    process.stdout.write(e.stdout);
+    if (e.stdout) {
+      process.stderr.write(e.stdout);
+    } else {
+      console.error(e.stack);
+    }
   }
 }
 

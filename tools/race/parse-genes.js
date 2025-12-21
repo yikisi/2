@@ -82,12 +82,12 @@ read_and_write_generated(
 );
 
 read_and_write_generated(
-  join(__dirname, '../../ere/i18n/zh-CN/gene-names.js'),
+  join(__dirname, '../../ere/i18n/zh-CN/race/genes.js'),
   '//',
   n_out,
 );
 read_and_write_generated(
-  join(__dirname, '../../ere/i18n/zh-CN/gene-desc.js'),
+  join(__dirname, '../../ere/i18n/zh-CN/race/gene-desc.js'),
   '//',
   d_out,
 );
