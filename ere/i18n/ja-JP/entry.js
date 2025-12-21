@@ -1,6 +1,8 @@
 const I18nEntry = require('#/i18n/zh-CN/entry');
 
 module.exports = class extends I18nEntry {
+  language = '日本語';
+
   speed = 'スピード';
   endurance = 'スタミナ';
   strength = 'パワー';
@@ -32,7 +34,15 @@ module.exports = class extends I18nEntry {
   edu_1 = 'クラシック級';
   edu_2 = 'シニア級';
 
-  t_abl = new (require('#/i18n/ja-JP/table/abl'))();
+  tt_new_game = 'ニューゲーム';
+  tt_load_game = 'ロード';
+  tt_help = 'チュートリアル';
+  tt_copyrights = 'クレジット';
+
+  ui_yes = 'はい';
+  ui_no = 'いいえ';
+
+  tb_abl = new (require('#/i18n/ja-JP/table/abl'))();
 
   clothe = new (require('#/i18n/ja-JP/race/clothes'))();
   race = new (require('#/i18n/ja-JP/race/races'))();

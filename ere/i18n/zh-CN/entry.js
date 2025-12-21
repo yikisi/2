@@ -1,4 +1,6 @@
 class I18nEntry {
+  language = '简体中文';
+
   speed = '速度';
   endurance = '耐力';
   strength = '力量';
@@ -185,15 +187,22 @@ class I18nEntry {
   v_vagina_d = '无自觉非处女';
   v_vagina_r = '再生处女';
 
+  tt_new_game = '开始新游戏';
+  tt_load_game = '加载存档';
+  tt_help = '帮助说明';
+  tt_copyrights = '制作鸣谢';
+
   ui_back = '返回';
   ui_achieve_title = '获得新成就！';
+  ui_yes = '确定';
+  ui_no = '取消';
 
   achievement = new (require('#/i18n/zh-CN/achieve'))();
   achieve_desc = new (require('#/i18n/zh-CN/achieve-desc'))();
   note = new (require('#/i18n/zh-CN/notes'))();
 
-  t_abl = new (require('#/i18n/zh-CN/table/abl'))();
-  t_mark = new (require('#/i18n/zh-CN/table/mark'))();
+  tb_abl = new (require('#/i18n/zh-CN/table/abl'))();
+  tb_mark = new (require('#/i18n/zh-CN/table/mark'))();
 
   train_action = new (require('#/i18n/zh-CN/sex/actions'))();
   inmon = new (require('#/i18n/zh-CN/sex/inmons'))();

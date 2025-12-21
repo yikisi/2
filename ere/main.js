@@ -36,11 +36,14 @@ const { generate_copyrights, get_copyright_entry } = require('#/copyright');
 const { get_chara_color } = require('#/data/chara-colors');
 const { first_child_id } = require('#/data/other-const');
 
-const { i18n } = require('#/i18n/selector');
+const { i18n, lans, set_lan } = require('#/i18n/selector');
+
 const { res_version } = require('#/versions');
 
 module.exports = async () => {
-  let flagTitle = true;
+  // GLOBALNAME:3 = 语言
+  set_lan(era.get('global:3') || era.set('global:3', 'zh-CN'));
+  let flag_title = true;
   CharaTalk.me = new CharaTalk(0);
 
   era.printMultiColumns(
@@ -139,7 +142,7 @@ module.exports = async () => {
   const copyrights = generate_copyrights();
   const buttons = [
     {
-      c: '开始新游戏',
+      c: () => i18n().tt_new_game,
       async h() {
         const achievements = sys_personal_achievement
           .list()
@@ -209,7 +212,7 @@ module.exports = async () => {
       },
     },
     {
-      c: '加载存档',
+      c: () => i18n().tt_load_game,
       async h() {
         if (await load_game()) {
           await homepage();
@@ -217,11 +220,11 @@ module.exports = async () => {
       },
     },
     {
-      c: '游戏成就',
+      c: () => '游戏成就',
       h: global_achievement.show.bind(global_achievement),
     },
     {
-      c: '角色成就',
+      c: () => '角色成就',
       async h() {
         era.printMultiColumns([
           { config: { content: '角色成就获取情况' }, type: 'divider' },
@@ -267,7 +270,7 @@ module.exports = async () => {
       },
     },
     {
-      c: '帮助说明',
+      c: () => i18n().tt_help,
       async h() {
         era.drawLine();
         for (const note of i18n()
@@ -295,7 +298,7 @@ module.exports = async () => {
       },
     },
     {
-      c: '制作鸣谢',
+      c: () => i18n().tt_copyrights,
       async h() {
         era.drawLine();
         let c_flag = true;
@@ -337,7 +340,20 @@ module.exports = async () => {
       },
     },
   ];
-  while (flagTitle) {
+  const lan_list = lans();
+  if (lan_list.length > 1) {
+    buttons.push({
+      c: () => '语言/Language',
+      async h() {
+        era.drawLine();
+        for (let i = 0; i < lan_list.length; ++i) {
+          era.printButton(i18n(lan_list[i]).language, i + 1);
+        }
+        set_lan(era.set('global:3', lan_list[(await era.input()) - 1]));
+      },
+    });
+  }
+  while (flag_title) {
     await era.clear();
     era.setAlign('center');
     era.printInColRows(
@@ -377,7 +393,7 @@ module.exports = async () => {
         { type: 'divider' },
         ...buttons.map(({ c }, i) => ({
           accelerator: i + 1,
-          content: c,
+          content: c(),
           type: 'button',
         })),
         { type: 'divider' },

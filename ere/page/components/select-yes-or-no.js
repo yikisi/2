@@ -1,5 +1,7 @@
 const era = require('#/era-electron');
 
+const { i18n } = require('#/i18n/selector');
+
 /**
  * @param {string|array} content
  * @param {string} [yes_button]
@@ -14,13 +16,13 @@ async function select_yes_or_no(content, yes_button, no_button) {
     {
       accelerator: 0,
       config: { align: 'center', width: 12 },
-      content: yes_button || '确定',
+      content: yes_button || i18n().ui_yes,
       type: 'button',
     },
     {
       accelerator: 100,
       config: { align: 'center', width: 12 },
-      content: no_button || '取消',
+      content: no_button || i18n().ui_no,
       type: 'button',
     },
   ]);

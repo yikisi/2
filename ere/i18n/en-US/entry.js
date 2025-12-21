@@ -1,6 +1,8 @@
 const I18nEntry = require('#/i18n/zh-CN/entry');
 
 module.exports = class extends I18nEntry {
+  language = 'English';
+
   speed = 'Speed';
   endurance = 'Stamina';
   strength = 'Power';
@@ -12,7 +14,10 @@ module.exports = class extends I18nEntry {
 
   ui_moti = 'Motivation';
 
-  t_abl = new (require('#/i18n/en-US/table/abl'))();
+  ui_yes = 'YES';
+  ui_no = 'NO';
+
+  tb_abl = new (require('#/i18n/en-US/table/abl'))();
 
   race = new (require('#/i18n/en-US/race/races'))();
 };
