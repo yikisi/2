@@ -1,5 +1,7 @@
 const era = require('#/era-electron');
 
+const get_display_name = require('#/utils/get-display-name');
+
 const item_title_color =
   require('#/data/color-const').adaptability_colors.at(-1);
 const { get_chara_color } = require('#/data/chara-colors');
@@ -12,7 +14,8 @@ function get_copyright_entry(cid, _suffix) {
   const suffix = _suffix ? `（${_suffix}）` : '';
   return {
     color: get_chara_color(cid),
-    content: `${era.get(`static:${cid}:name`)}${suffix}`,
+    content: `${get_display_name(era.get(`static:${cid}:name`))}${suffix}`,
+    display: 'inline-block',
     fontWeight: 'bold',
   };
 }

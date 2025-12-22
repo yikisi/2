@@ -1,9 +1,7 @@
 const { readFileSync, writeFileSync } = require('fs');
 const { join } = require('path');
 
-const named_contestants = require(
-  join(__dirname, '../../ere/data/race/contestants/named.json'),
-);
+const named_contestants = require('../../ere/data/race/contestants/named.json');
 const { generate_content } = require('../libs');
 
 const cup_dict = {
@@ -31,6 +29,7 @@ const file_name_index = header.findIndex((e) => e === '文件名');
 const height_index = header.findIndex((e) => e === '角色Flag|身高');
 const waist_index = header.findIndex((e) => e === '角色Flag|腰围');
 const name_index = header.findIndex((e) => e === '姓名');
+const callname_index = header.findIndex((e) => e === '默认称呼');
 const attr_start_index = header.findIndex((e) => e === '角色Flag|初始速度');
 const buff_start_index = header.findIndex((e) => e === '角色Flag|速度加成');
 const adapt_start_index = header.findIndex((e) => e === '角色Flag|草地适性');
@@ -165,10 +164,10 @@ lines
       );
       let buffer = '';
       chara_line.forEach((e, i) => {
-        if (i) {
+        if (i > 0) {
           let col_value = chara_line[i];
           if (i === name_index) {
-            col_value = `${col_value}\n基础属性,性欲,10001\n基础属性,压力,10000\n基础属性,体重偏差,10000\n基础属性,药物残留,1000\n角色Flag,父方角色,-1\n角色Flag,母方角色,-1\n基础属性,体力,1000\n基础属性,精力,1000\n基础属性,根性,1200\n基础属性,智力,1200`;
+            col_value = `${chara_line[file_name_index]}01\n基础属性,性欲,10001\n基础属性,压力,10000\n基础属性,体重偏差,10000\n基础属性,药物残留,1000\n角色Flag,父方角色,-1\n角色Flag,母方角色,-1\n基础属性,体力,1000\n基础属性,精力,1000\n基础属性,根性,1200\n基础属性,智力,1200`;
           } else if (i === race_index) {
             col_value = `${col_value}\n${['速度', '耐力', '力量']
               .map((e) => `基础属性,${e},${col_value === '1' ? 1200 : 400}`)
@@ -177,6 +176,8 @@ lines
             col_value = breast_down;
           } else if (i >= adapt_start_index && i <= adapt_start_index + 9) {
             col_value = 'G'.charCodeAt(0) - col_value.charCodeAt(0);
+          } else if (i === callname_index) {
+            col_value = `${chara_line[file_name_index]}01`;
           }
           buffer += `${header[i].replace('|', ',')},${col_value}\n`;
         }

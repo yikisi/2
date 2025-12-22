@@ -42,6 +42,8 @@ module.exports = class extends I18nEntry {
   ui_yes = 'はい';
   ui_no = 'いいえ';
 
+  name = new (require('#/i18n/ja-JP/names'))();
+
   tb_abl = new (require('#/i18n/ja-JP/table/abl'))();
 
   clothe = new (require('#/i18n/ja-JP/race/clothes'))();

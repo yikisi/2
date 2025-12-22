@@ -11,8 +11,8 @@ module.exports = class extends CustomizedInit {
     if (!is_reset) {
       if (sys_personal_achievement.get(302)) {
         new TasteLifeMarks().who_am_i = 1;
-        era.set('callname:302:-1', '北方风味');
-        era.set('callname:302:-2', '秋川弥生');
+        era.set('callname:302:-1', '900202');
+        era.set('callname:302:-2', '900201');
       }
       new Array(5)
         .fill(0)

@@ -2,6 +2,8 @@ const era = require('#/era-electron');
 
 const { get_chara_color } = require('#/data/chara-colors');
 
+const { __ } = require('#/i18n/selector');
+
 class CharaTalk {
   /** @type {CharaTalk} */
   static me;
@@ -56,7 +58,8 @@ class CharaTalk {
 
   /** @returns {string} */
   get actual_name() {
-    return era.get(`callname:${this.id}:-1`);
+    const n = era.get(`callname:${this.id}:-1`);
+    return __(`name.${n}`, n);
   }
 
   /** @returns {string} */
@@ -74,7 +77,8 @@ class CharaTalk {
 
   /** @returns {string} */
   get name() {
-    return this._name || era.get(`callname:${this.id}:-2`);
+    const n = this._name || era.get(`callname:${this.id}:-2`);
+    return __(`name.${n}`, n);
   }
 
   /** @param {string} v */

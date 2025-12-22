@@ -1,4 +1,4 @@
-const { readFileSync, writeFileSync } = require('fs');
+const { existsSync, readFileSync, writeFileSync } = require('fs');
 
 /**
  * @param {string} content
@@ -54,7 +54,11 @@ module.exports = {
   read_and_write_generated(path, comment_start, ...entry) {
     writeFileSync(
       path,
-      generate_content(readFileSync(path, 'utf-8'), comment_start, ...entry),
+      generate_content(
+        existsSync(path) ? readFileSync(path, 'utf-8') : '',
+        comment_start,
+        ...entry,
+      ),
     );
   },
 };

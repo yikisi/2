@@ -11,8 +11,8 @@ module.exports = class extends CustomizedInit {
     if (!is_reset) {
       if (sys_personal_achievement.get(301)) {
         new TokinoLifeMarks().who_am_i = 1;
-        era.set('callname:301:-1', '丰收时刻');
-        era.set('callname:301:-2', '骏川缰绳');
+        era.set('callname:301:-1', '900102');
+        era.set('callname:301:-2', '900101');
       } else {
         era.set(
           'callname:301:-2',

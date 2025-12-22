@@ -11,7 +11,8 @@ module.exports = class extends CustomizedInit {
     if (!is_reset) {
       if (sys_personal_achievement.get(343)) {
         new MayLifeMarks().who_am_i = 2;
-        era.set('callname:343:-2', era.get('callname:343:-1'));
+        era.set('callname:343:-1', '904302');
+        era.set('callname:343:-2', '904301');
       } else {
         era.set(
           'callname:343:-2',

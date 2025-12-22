@@ -21,7 +21,7 @@ module.exports = class extends CustomizedLove {
         me.get_colored_name(),
         ' 坦白了自己的真实身份。',
       ]);
-      era.set('callname:301:-1', '丰收时刻');
+      era.set('callname:301:-1', '900102');
       await era.printAndWait([
         tokino.get_uma_sex_title(),
         ' ',

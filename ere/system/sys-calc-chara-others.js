@@ -30,6 +30,8 @@ const {
 } = require('#/data/info-generator');
 const LoveLimitStatus = require('#/data/love-limit-status');
 
+const { __ } = require('#/i18n/selector');
+
 /**
  * @param {number} lover
  * @param {number} new_love
@@ -303,7 +305,7 @@ function get_callname(_from, _to) {
   if (callname === '-') {
     return era.get(`static:${_to}:callname`);
   }
-  return callname;
+  return __(`name.${callname}`, callname);
 }
 
 /**

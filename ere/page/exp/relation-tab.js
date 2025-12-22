@@ -13,6 +13,7 @@ const { join_to_string } = require('#/utils/list-utils');
 
 const { relation_colors } = require('#/data/color-const');
 const { get_relation_info } = require('#/data/info-generator');
+const { max_chara_id } = require('#/data/other-const');
 
 const chinese_numbers = [
   '长',
@@ -42,9 +43,9 @@ module.exports = {
     if (chara.id > 0) {
       Object.entries(era.get(`relation:${chara.id}`)).forEach(
         ([cid, relation]) => {
-          const r_info = get_relation_info(chara.id, relation);
           const target = Number(cid);
-          if (target !== my_src_chara && target < 1000) {
+          const r_info = get_relation_info(chara.id, target, relation);
+          if (target !== my_src_chara && target < max_chara_id) {
             relation_info_list.push({
               config: { width: 8 },
               content: [

@@ -14,6 +14,7 @@ module.exports = class extends CustomizedLove {
     const life_marks = new TasteLifeMarks();
     await print_event_name('发 情！', taste);
     if (life_marks.who_am_i === 0) {
+      era.set('callname:302:-1', '900202');
       await era.printAndWait([
         '一个偶然的机会，',
         me.get_colored_name(),
@@ -22,10 +23,9 @@ module.exports = class extends CustomizedLove {
         ' 的真实身份——',
         taste.get_uma_sex_title(),
         ' ',
-        { color: taste.color, content: '北方风味', fontWeight: 'bold' },
+        taste.get_colored_actual_name(),
         '。',
       ]);
-      era.set('callname:302:-1', '北方风味');
       await era.printAndWait([
         taste.get_colored_name(),
         ' 一脸挫败的表情，拜托 ',

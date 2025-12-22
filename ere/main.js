@@ -30,6 +30,7 @@ const { check_rec_script } = require('#/event/rec/rec-factory');
 
 const { say_by_passer_by } = require('#/utils/chara-talk');
 const CharaTalk = require('#/utils/chara-talk');
+const get_display_name = require('#/utils/get-display-name');
 const { join_list } = require('#/utils/list-utils');
 
 const { generate_copyrights, get_copyright_entry } = require('#/copyright');
@@ -55,51 +56,21 @@ module.exports = async () => {
           fontWeight: 'bold',
           isParagraph: true,
         },
-        content: '免责声明',
+        content: i18n().tt_disclaimer,
         type: 'text',
       },
       {
-        content: [
-          '1. 本游戏仅为开发者自娱自乐及代码练习所用，开发它是因为开发者趣味低下，思想低俗所致，无任何经济收益和利益驱动。',
-          { isBr: true },
-          '2. 本游戏含有大量的 R18 色情内容，内容中可能会出现的有：多P、调教、轻度 SM、非合意性行为、近亲相奸等，不会出现的有：强制 NTR、重度 SM、血腥、R18G 等。',
-          { isBr: true },
-          '3. 本游戏在设计理念和游戏内容上缝合了大量 era 与其他各类作品，仅适合 era 系列玩家或文字黄油爱好者进行游玩，不适合普通玩家游玩，特别是严格禁止未成年人游玩。',
-          { isBr: true },
-          '4. 本游戏所使用的素材资源包括开发者自制、互联网收集与协力者提供，开发者与协力者来自于不同的世界、种族、国家和民族，彼此之间也不存在经济关系。',
-          { isBr: true },
-          '5. 本游戏的唯一指定官方发布地址即',
-          { content: '托管仓库', url: 'https://gitgud.io/umaera/erauma' },
-          '；因为游戏本身的性质，禁止在任何未成年人可以接触到的公开场合展示或传播本游戏，更禁止任何人在任何商业活动（贩卖/附送等）和公开活动（直播等）中使用本游戏。',
-          { isBr: true },
-          '6. 在明确注明或保留游戏来源、不涉及任何商业目的和经济受益、并同样遵守本免责声明、',
-          {
-            content: 'GPL 2.0 only 开源协议',
-            fontWeight: 'bold',
-            url: 'https://gnu.ac.cn/licenses/old-licenses/gpl-2.0.html',
-          },
-          '与',
-          {
-            content: '口上创作协议',
-            fontWeight: 'bold',
-            url: 'https://gitgud.io/umaera/erauma/-/wikis/LICENSE',
-          },
-          '的情况下，允许他人基于本游戏进行修改或二次开发（衍生产物称为魔改版）。该授权将直接赋予本游戏的所有玩家，不需要专门征求开发者的明确同意，但需要在游戏标题和标题界面等处标明是魔改版并与原版做出明显区分。',
-          { isBr: true },
-          '7. 本声明的解释权归开发者所有，且在版本更新中声明内容可能有所变更，请以最新版本为准。',
-          { isBr: true },
-          '8. 基于以上叠了这么多层 buff，建议有大胆想法的人请现在关掉窗口并立刻删除游戏，只要不删就默认你已经理解并遵守该声明，在不遵守的情况下出现的任何事故和法律责任都和开发者没有任何关系。',
-        ],
+        content: i18n().tt_disclaimer_content,
         type: 'text',
       },
       {
         accelerator: 1,
-        content: '我读完并理解了以上 8 条，我对自己负责，我不删，我要玩。',
+        content: i18n().tt_disclaimer_accept,
         type: 'button',
       },
       {
         accelerator: 2,
-        content: '分男女搭配！不玩了！',
+        content: i18n().tt_disclaimer_reject,
         type: 'button',
       },
     ],
@@ -118,26 +89,29 @@ module.exports = async () => {
   const real_month = date.getMonth() + 1;
   const real_date = date.getDate();
   const birthday = [];
-  era.getAllCharacters().forEach((e) => {
+  era.getAllCharacters().forEach((cid) => {
     if (
-      e > 0 &&
-      e < 1000 &&
-      era.get(`staticcflag:${e}:种族`) > 0 &&
-      era.get(`staticcflag:${e}:出生月份`) === real_month &&
-      era.get(`staticcflag:${e}:出生日期`) === real_date
+      cid > 0 &&
+      cid < 1000 &&
+      // CFLAGNAME:1 = 种族
+      // CFLAGNAME:17 = 出生月份
+      // CFLAGNAME:18 = 出生日期
+      era.get(`staticcflag:${cid}:1`) > 0 &&
+      era.get(`staticcflag:${cid}:17`) === real_month &&
+      era.get(`staticcflag:${cid}:18`) === real_date
     ) {
       if (birthday.length > 0) {
-        birthday.push('，');
+        birthday.push(i18n().tt_birthday_comma);
       }
       birthday.push({
-        color: get_chara_color(e),
-        content: era.get(`static:${e}:name`),
+        color: get_chara_color(cid),
+        content: get_display_name(era.get(`static:${cid}:name`)),
         fontWeight: 'bold',
       });
     }
   });
-  const b_index = birthday.findLastIndex((e) => e === '，');
-  birthday[b_index] = ' 和 ';
+  const b_index = birthday.findLastIndex((e) => e === i18n().tt_birthday_comma);
+  birthday[b_index] = i18n().tt_birthday_conjunction;
 
   const copyrights = generate_copyrights();
   const buttons = [
@@ -220,11 +194,11 @@ module.exports = async () => {
       },
     },
     {
-      c: () => '游戏成就',
+      c: () => i18n().tt_achieve,
       h: global_achievement.show.bind(global_achievement),
     },
     {
-      c: () => '角色成就',
+      c: () => i18n().tt_chara_achieve,
       async h() {
         era.printMultiColumns([
           { config: { content: '角色成就获取情况' }, type: 'divider' },
@@ -265,7 +239,10 @@ module.exports = async () => {
             type: 'text',
           },
         ]);
-        era.printButton('返回', 0, { align: 'center', hideInput: true });
+        era.printButton(i18n().ui_back, 0, {
+          align: 'center',
+          hideInput: true,
+        });
         await era.input();
       },
     },
@@ -289,7 +266,7 @@ module.exports = async () => {
             );
           }
         }
-        era.printButton('返回', 0, {
+        era.printButton(i18n().ui_back, 0, {
           align: 'center',
           disableContinue: true,
           hideInput: true,
@@ -330,7 +307,7 @@ module.exports = async () => {
               disableContinue: true,
               disableWarning: true,
             },
-            content: '返回标题',
+            content: i18n().ui_back,
             type: 'button',
           },
         ]);
