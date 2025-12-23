@@ -13,8 +13,25 @@ const get_color = require('#/utils/gradient-color');
 
 const { buff_colors } = require('#/data/color-const');
 const { mark_colors } = require('#/data/const.json');
-const { talent_button_names_and_check_dict } = require('#/data/ero/juel-const');
+const {
+  base_skill_limit,
+  talent_button_names_and_check_dict,
+} = require('#/data/ero/juel-const');
 const { trained_talent_names } = require('#/data/ero/status-const');
+const extra_base = require('#/data/extra-base');
+
+/**
+ * @param {Record<string,number>} p_dict
+ * @returns {string}
+ */
+function get_price_title(p_dict) {
+  return (
+    '需要：' +
+    Object.entries(p_dict)
+      .map(([k, n]) => `${k}×${n.toLocaleString()}`)
+      .join('＋')
+  );
+}
 
 module.exports = {
   /**
@@ -56,44 +73,47 @@ module.exports = {
     };
   },
   /**
-   * @param {number} chara_id
-   * @param {number} accelerator
+   * @param {number} cid
+   * @param {number} acc
    * @param {string} skill_name
    * @param {Record<string,number>} skill_dict
    * @param {Record<string,number>} juel_dict
    */
-  get_skill_buttons(chara_id, accelerator, skill_name, skill_dict, juel_dict) {
-    const level = era.get(`abl:${chara_id}:${skill_name}`);
+  get_skill_buttons(cid, acc, skill_name, skill_dict, juel_dict) {
+    let limit = base_skill_limit * (1 + (!cid && extra_base.skill));
+    const level = era.get(`abl:${cid}:${skill_name}`);
     skill_dict[skill_name] = level;
+    const u_price = get_skill_price(cid, skill_name, level + 1);
+    const d_price = get_skill_price(cid, skill_name, level);
     return [
       {
-        accelerator,
+        accelerator: acc,
         config: { width: 4 },
         content: `${skill_name} Lv.${level}`,
         type: 'button',
       },
       {
-        accelerator: accelerator + 100,
+        accelerator: acc + 100,
         config: {
           disabled:
-            level >= 5 ||
-            Object.entries(
-              get_skill_price(chara_id, skill_name, level + 1),
-            ).findIndex((e) => e[1] > juel_dict[e[0]]) !== -1,
+            level >= limit ||
+            Object.entries(u_price).findIndex(([j, n]) => n > juel_dict[j]) !==
+              -1,
           width: 2,
+          title: level >= limit ? void 0 : get_price_title(u_price),
         },
         content: '↑',
         type: 'button',
       },
       {
-        accelerator: accelerator + 200,
+        accelerator: acc + 200,
         config: {
           disabled:
             level <= 0 ||
-            Object.entries(get_skill_price(chara_id, skill_name, level)).filter(
-              (e) => e[1] > juel_dict[e[0]],
-            ).length > 0,
+            Object.entries(d_price).findIndex(([j, n]) => n > juel_dict[j]) !==
+              -1,
           width: 2,
+          title: level <= 0 ? void 0 : get_price_title(d_price),
         },
         content: '↓',
         type: 'button',

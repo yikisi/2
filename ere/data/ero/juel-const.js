@@ -8,7 +8,8 @@ Object.keys(shop_result_type_enum).forEach(
 module.exports = {
   base_emotion_juel: 80 * palam2juel,
   base_juel_reward: 100 * palam2juel,
-  base_skill_price: 500,
+  base_skill_limit: 5,
+  base_skill_price: 660,
   mark_prices: [0, 1000, 2000, 3500],
   shop_list: [
     '口腔快感',

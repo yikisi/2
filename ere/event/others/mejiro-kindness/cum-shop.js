@@ -653,8 +653,9 @@ async function cum_shop(chara, me) {
           while (_flag) {
             await era.clear(era.getLineCount() - lines);
             print_money_divider();
-            const iron_mind = era.get('talent:0:钢之意志') > 0,
-              chara_im = era.get(`talent:${chara.id}:钢之意志`);
+            // TALENTNAME:57 = 钢之意志
+            const iron_mind = era.get('talent:0:57') > 0;
+            const chara_im = era.get(`talent:${chara.id}:57`);
             era.printButton(
               `《桐生院秘传驯马术》（10「恩宠」→ ${me.name} 习得 [钢之意志]）`,
               1,
@@ -675,21 +676,30 @@ async function cum_shop(chara, me) {
               4,
               { disabled: !chara_im },
             );
+            if (!extra_base.skill && money >= 54) {
+              era.printButton(
+                '《性技提升入门读物——色欲之环出版社出版》（66「恩宠」）',
+                5,
+              );
+            }
             era.printButton('离开', 99);
             const ret = await era.input();
             if (ret === 99) {
               _flag = false;
+            } else if (ret === 5) {
+              await era.printAndWait('……读了什么？');
+              // ITEMNAME:110 = 「恩宠」
+              money = era.add('item:110', -66);
+              extra_base.skill = 1;
             } else {
-              money = era.add(
-                'item:「恩宠」',
-                -5 - (ret === 1 || ret === 4) * 5,
-              );
+              // ITEMNAME:110 = 「恩宠」
+              money = era.add('item:110', -5 - (ret === 1 || ret === 4) * 5);
               const { t: target, s: im_status } =
                 ret <= 2 ? { t: me, s: iron_mind } : { t: chara, s: chara_im };
               if (im_status) {
-                era.set(`talent:${target.id}:钢之意志`, 0);
+                era.set(`talent:${target.id}:57`, 0);
               } else {
-                era.set(`talent:${target.id}:钢之意志`, 1);
+                era.set(`talent:${target.id}:57`, 1);
               }
               await era.printAndWait([
                 target.get_colored_name(),
