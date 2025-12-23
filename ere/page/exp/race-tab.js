@@ -10,12 +10,11 @@ const {
   attr_change_colors,
   money_color,
 } = require('#/data/color-const');
-const title_desc = require('#/data/desc/titles.json');
 const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
-const { i18n } = require('#/i18n/selector');
+const { __, i18n } = require('#/i18n/selector');
 
 const page_name = '出走成绩';
 
@@ -99,22 +98,27 @@ module.exports = {
         config: { content: '专属称号', position: 'left' },
         type: 'divider',
       });
-      const titles = CharaTitles.get(chara.id).get(),
-        personal_titles = get_custom_check(chara.id).get_personal_titles();
-      if (personal_titles.length) {
-        personal_titles.map((e) => {
-          const check = titles.findIndex((t) => t.n === e) !== -1;
+      const titles = CharaTitles.get(chara.id).get();
+      const personal_titles = get_custom_check(chara.id).get_personal_titles();
+      if (personal_titles.length > 0) {
+        personal_titles.map((tid) => {
+          const name = __(`title.${tid}`, tid || i18n().title.undef);
+          const check =
+            titles.findIndex((t) => t.n === tid || t.n === name) !== -1;
           race_info_list.push(
             {
               config: { color: chara.color, width: 5 },
-              content: e,
+              content: name,
               type: 'text',
             },
             {
               config: { width: 19, color: check ? attr_change_colors.up : '' },
               content: check
-                ? '已获得 ✔'
-                : title_desc[e] || '在一次育成周期内赢取了六次以上的G1比赛胜利',
+                ? i18n().title_desc.got
+                : i18n().title_desc.template.replace(
+                    '%DESC%',
+                    __(`title_desc.${tid}`, i18n().title_desc.undef),
+                  ),
               type: 'text',
             },
           );

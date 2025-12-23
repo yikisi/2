@@ -1,8 +1,8 @@
-const { readFileSync, writeFileSync } = require('fs');
+const { readFileSync } = require('fs');
 const { join } = require('path');
 
 const named_contestants = require('../../ere/data/race/contestants/named.json');
-const { generate_content } = require('../libs');
+const { read_and_write_generated } = require('../libs');
 
 const cup_dict = {
   AA: 5,
@@ -29,6 +29,7 @@ const file_name_index = header.findIndex((e) => e === '文件名');
 const height_index = header.findIndex((e) => e === '角色Flag|身高');
 const waist_index = header.findIndex((e) => e === '角色Flag|腰围');
 const name_index = header.findIndex((e) => e === '姓名');
+const call_index = header.findIndex((e) => e === '默认称呼');
 const attr_start_index = header.findIndex((e) => e === '角色Flag|初始速度');
 const buff_start_index = header.findIndex((e) => e === '角色Flag|速度加成');
 const adapt_start_index = header.findIndex((e) => e === '角色Flag|草地适性');
@@ -151,6 +152,7 @@ lines
       if (!chara_line[attr_start_index]) {
         random_attr(chara_line);
       }
+      const file_id = chara_line[file_name_index];
       const file_name = `Chara${chara_line[file_name_index]}.csv`;
       const breast_down =
         chara_line[breast_index] - cup_dict[chara_line[cup_index]];
@@ -162,11 +164,13 @@ lines
         }`,
       );
       let buffer = '';
+      let name;
       chara_line.forEach((e, i) => {
         if (i > 0) {
           let col_value = chara_line[i];
           if (i === name_index) {
-            col_value = `${col_value}\n基础属性,性欲,10001\n基础属性,压力,10000\n基础属性,体重偏差,10000\n基础属性,药物残留,1000\n角色Flag,父方角色,-1\n角色Flag,母方角色,-1\n基础属性,体力,1000\n基础属性,精力,1000\n基础属性,根性,1200\n基础属性,智力,1200`;
+            name = col_value;
+            col_value = `${file_id}01\n基础属性,性欲,10001\n基础属性,压力,10000\n基础属性,体重偏差,10000\n基础属性,药物残留,1000\n角色Flag,父方角色,-1\n角色Flag,母方角色,-1\n基础属性,体力,1000\n基础属性,精力,1000\n基础属性,根性,1200\n基础属性,智力,1200`;
           } else if (i === race_index) {
             col_value = `${col_value}\n${['速度', '耐力', '力量']
               .map((e) => `基础属性,${e},${col_value === '1' ? 1200 : 400}`)
@@ -175,16 +179,22 @@ lines
             col_value = breast_down;
           } else if (i >= adapt_start_index && i <= adapt_start_index + 9) {
             col_value = 'G'.charCodeAt(0) - col_value.charCodeAt(0);
+          } else if (i === call_index) {
+            if (col_value === name) {
+              col_value = `${file_id}01`;
+            } else {
+              col_value = `${file_id}05`;
+            }
+          } else if (i === title_index) {
+            col_value = `${file_id}01`;
           }
           buffer += `${header[i].replace('|', ',')},${col_value}\n`;
         }
       });
-      const file_path = join(__dirname, `../../csv/Chara/${file_name}`);
-      let output = generate_content(
-        readFileSync(file_path, 'utf-8'),
+      read_and_write_generated(
+        join(__dirname, `../../csv/Chara/${file_name}`),
         ';',
         buffer.replace(/\s+$/, ''),
       );
-      writeFileSync(file_path, output);
     }
   });

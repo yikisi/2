@@ -8,7 +8,7 @@ dict['en-US'] = new (require('./en-US/entry'))();
 
 /**
  * @param {string} key
- * @param {string} [_default]
+ * @param {string|(()=>string)} [_default]
  * @returns {string}
  */
 function __(key, _default = key) {
@@ -16,7 +16,7 @@ function __(key, _default = key) {
   let o = dict[lan];
   for (let i = 0; i < arr.length; ++i) {
     if (!o[arr[i]]) {
-      return _default;
+      return _default instanceof Function ? _default() : _default;
     }
     o = o[arr[i]];
   }

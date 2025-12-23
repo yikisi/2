@@ -356,7 +356,12 @@ module.exports = class extends CustomizedCheck {
     return aim_races;
   }
 
+  // 不屈帝王
+  get_personal_achieve() {
+    return '100303';
+  }
+
   get_personal_titles() {
-    return ['帝王', '无瑕帝王', '不屈帝王'];
+    return ['100301', '100302', '100303'];
   }
 };

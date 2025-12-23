@@ -193,10 +193,6 @@ module.exports = class extends CustomizedCheck {
     return buffer;
   }
 
-  get_personal_titles() {
-    return ['我推的马娘'];
-  }
-
   is_aim_race(race, edu_weeks, rank) {
     switch (race) {
       case race_enum.mile_cha:

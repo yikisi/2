@@ -1,9 +1,8 @@
 const era = require('#/era-electron');
 
 const { get_chara_color } = require('#/data/chara-colors');
-const title_desc = require('#/data/desc/titles.json');
 
-const { i18n } = require('#/i18n/selector');
+const { __, i18n } = require('#/i18n/selector');
 
 class SysPersonalAchievement {
   /** @returns {Record<string,number>} */
@@ -22,19 +21,20 @@ class SysPersonalAchievement {
 
   list() {
     return Object.entries(this.#obj)
-      .filter((e) => e[1])
+      .filter((e) => e[1] > 0)
       .map((e) => Number(e[0]));
   }
 
   /**
    * @param {number} cid
-   * @param {string} [title]
+   * @param {string} [tid]
    * @returns {string}
    */
-  describe(cid, title = era.get(`staticcstr:${cid}:称号`)) {
-    return `在一次育成周期内完成了所有育成目标；同时，${(
-      title_desc[title] || '在一次育成周期内赢取了六次以上的G1比赛胜利。'
-    ).substring(8)}`;
+  describe(cid, tid = era.get(`staticcstr:${cid}:11`)) {
+    return i18n().title_desc.achieve_template.replace(
+      '%DESC%',
+      __(`title_desc.${tid}`, i18n().title_desc.undef),
+    );
   }
 
   /**
@@ -43,18 +43,20 @@ class SysPersonalAchievement {
    */
   set(cid, _val) {
     if (!this.#obj[cid] && _val) {
+      const name = era.get(`static:${cid}:name`);
       const color = get_chara_color(cid);
-      const title = era.get(`staticcstr:${cid}:称号`);
+      // CSTRNAME:11 = 称号
+      const title = era.get(`staticcstr:${cid}:11`);
       era.notify(
         [
           {
             color,
-            content: `[${title}] `,
+            content: `[${__(`title.${title}`, title)}] `,
             fontSize: '1.25rem',
           },
           {
             color,
-            content: era.get(`static:${cid}:name`),
+            content: __(`name.${name}`, name),
             fontSize: '1.25rem',
             fontWeight: 'bold',
           },
@@ -66,7 +68,7 @@ class SysPersonalAchievement {
         50000,
       );
     }
-    return (this.#obj[cid] = _val);
+    return (this.#obj[cid] = new Date().getTime());
   }
 }
 

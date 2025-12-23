@@ -26,7 +26,8 @@ aim_races[get_aim_race_index(race_enum.sprt_sta, 2)] = 4;
 module.exports = class extends CustomizedCheck {
   check_after_race(extra) {
     if (
-      era.get(`cflag:${this.id}:育成回合计时`) < 96 &&
+      // CFLAGNAME:48 = 育成回合计时
+      era.get(`cflag:${this.id}:48`) < 96 &&
       extra.race === race_enum.cent_sta &&
       extra.rank === 1 &&
       extra.contestants.find((e) => e.rank.curr === 1).race.conditionParams
@@ -85,6 +86,6 @@ module.exports = class extends CustomizedCheck {
   }
 
   get_personal_titles() {
-    return ['坚忍的速匠', '精粹（精液）'];
+    return ['109501', '109502'];
   }
 };

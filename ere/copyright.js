@@ -1,6 +1,6 @@
 const era = require('#/era-electron');
 
-const get_display_name = require('#/utils/get-display-name');
+const get_display_name = require('#/utils/calc-display-name');
 
 const item_title_color =
   require('#/data/color-const').adaptability_colors.at(-1);

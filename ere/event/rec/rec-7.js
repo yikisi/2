@@ -11,10 +11,13 @@ const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_trainer_title } = require('#/data/info-generator');
 
+const { __ } = require('#/i18n/selector');
+
 module.exports = class extends CustomizedRecruit {
   async recruit(stage) {
-    const chara_name = era.get('callname:7:-2'),
-      your_name = era.get('callname:0:-2');
+    let chara_name = era.get('callname:7:-2');
+    chara_name = __(`name.${chara_name}`, chara_name);
+    const your_name = era.get('callname:0:-2');
     if (stage === event_hooks.recruit) {
       await era.printAndWait(
         `这个早晨朗日清天，${your_name} 穿着一身凛然的训练员装束来到了训练场。`,

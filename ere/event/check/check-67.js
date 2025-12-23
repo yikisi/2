@@ -13,6 +13,7 @@ module.exports = class extends CustomizedCheck {
   }
 
   get_this() {
-    return this.instances[get(`cflag:${this.id}:多口上`)];
+    // CFLAGNAME:70 = 多口上
+    return this.instances[get(`cflag:${this.id}:70`) || 0];
   }
 };

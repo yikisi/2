@@ -178,6 +178,6 @@ module.exports = class extends CustomizedCheck {
   }
 
   get_personal_titles() {
-    return ['破天荒', '粉丝服务'];
+    return ['100701', '100702'];
   }
 };

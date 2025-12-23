@@ -160,10 +160,6 @@ module.exports = class extends CustomizedCheck {
     return buffer;
   }
 
-  get_personal_titles() {
-    return ['永恒碧蓝'];
-  }
-
   is_aim_race(race, edu_weeks, rank) {
     if (
       race === race_enum.tenn_sho &&

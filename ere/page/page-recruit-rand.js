@@ -39,7 +39,6 @@ const {
   attr_colors,
   el_danger_color,
 } = require('#/data/color-const');
-const title_desc = require('#/data/desc/titles.json');
 const { sex_title } = require('#/data/ero/status-const');
 const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
@@ -55,7 +54,7 @@ const {
 const { location_enum } = require('#/data/locations');
 const { skills_dict } = require('#/data/race/skill/skill-const');
 
-const { i18n } = require('#/i18n/selector');
+const { __, i18n } = require('#/i18n/selector');
 
 async function print_rec_page() {
   const me = get_chara_talk(0);
@@ -131,37 +130,37 @@ async function print_rec_page() {
         });
       }
       buffer.push(
-        ...today_list.map((chara_id) => {
+        ...today_list.map((cid) => {
+          const name = era.get(`static:${cid}:name`);
           return {
             columns: [
               {
-                names: get_image(chara_id)
+                names: get_image(cid)
                   .map((e) => `${e}_半身`)
                   .join('\t'),
                 type: 'image.whole',
               },
               {
-                accelerator: chara_id,
+                accelerator: cid,
                 config: {
                   align: 'center',
                   buttonType:
-                    check_rec_script(chara_id) && check_edu_script(chara_id)
+                    check_rec_script(cid) && check_edu_script(cid)
                       ? 'danger'
                       : 'warning',
-                  disabled:
-                    flag_limit || (cur_recruit && cur_recruit !== chara_id),
+                  disabled: flag_limit || (cur_recruit && cur_recruit !== cid),
                 },
-                content: era.get(`static:${chara_id}:name`),
+                content: __(`name.${name}`, name),
                 type: 'button',
               },
               {
-                accelerator: chara_id + 1000,
+                accelerator: cid + 1000,
                 config: { align: 'center' },
                 content: '个人情报预览',
                 type: 'button',
               },
               {
-                accelerator: chara_id + 2000,
+                accelerator: cid + 2000,
                 config: { align: 'center' },
                 content: '育成情报预览',
                 type: 'button',
@@ -356,7 +355,6 @@ async function print_rec_page() {
       await era.waitAnyKey();
     } else if (ret > 2000) {
       const selected = ret - 2000,
-        name = era.get(`static:${selected}:name`),
         skill_list = CharaSkills.get(selected)
           .get()
           .map((e) => ({
@@ -372,6 +370,8 @@ async function print_rec_page() {
             type: 'text',
           })),
         skill_buffer = [];
+      let name = era.get(`static:${selected}:name`);
+      name = __(`name.${name}`, name);
       skill_buffer.push({
         config: { width: 3 },
         content: '初始：',
@@ -448,6 +448,8 @@ async function print_rec_page() {
           },
         );
       });
+      const c_script = get_custom_check(selected);
+      const personal_achieve = c_script.get_personal_achieve();
       era.printMultiColumns(
         [
           {
@@ -494,7 +496,7 @@ async function print_rec_page() {
             },
             type: 'divider',
           },
-          ...get_custom_check(selected)
+          ...c_script
             .get_edu_aims()
             .filter(({ content }) => content.endsWith('✘'))
             .map((e) => {
@@ -519,29 +521,40 @@ async function print_rec_page() {
             },
             type: 'divider',
           },
-          ...get_custom_check(selected)
-            .get_personal_titles()
-            .map((e) => ({
-              content: [
-                { content: e, color: get_chara_color(selected) },
-                '：',
-                title_desc[e] || '在一次育成周期内赢取了六次以上的G1比赛胜利',
-              ],
+          ...c_script.get_personal_titles().map((tid) => {
+            const name = __(`title.${tid}`, tid || i18n().title.undef);
+            return {
+              content: i18n().title.template_in_rec.map((span) => {
+                switch (span.t) {
+                  case 'name':
+                    return { content: name, color: get_chara_color(selected) };
+                  case 'title':
+                    return i18n().title_desc.template.replace(
+                      '%DESC%',
+                      __(`title_desc.${tid}`, i18n().title_desc.undef),
+                    );
+                }
+                return span;
+              }),
               type: 'text',
-            })),
+            };
+          }),
           {
-            content: [
-              '专属成就：',
-              {
-                color: get_chara_color(selected),
-                fontWeight: 'bold',
-                content: era.get(`staticcstr:${selected}:称号`),
-              },
-              ' ',
-              sys_personal_achievement.get(selected) > 0
-                ? { color: attr_change_colors.up, content: '✔' }
-                : { color: attr_change_colors.down, content: '✘' },
-            ],
+            content: i18n().title.achieve_template_in_rec.map((span) => {
+              switch (span.t) {
+                case 'title':
+                  return {
+                    color: get_chara_color(selected),
+                    content: __(`title.${personal_achieve}`, personal_achieve),
+                    fontWeight: 'bold',
+                  };
+                case 'check':
+                  return sys_personal_achievement.get(selected) > 0
+                    ? { color: attr_change_colors.up, content: '✔' }
+                    : { color: attr_change_colors.down, content: '✘' };
+              }
+              return span;
+            }),
             type: 'text',
           },
         ],

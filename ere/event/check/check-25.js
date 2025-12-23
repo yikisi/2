@@ -194,10 +194,6 @@ module.exports = class extends CustomizedCheck {
     return buffer;
   }
 
-  get_personal_titles() {
-    return ['漆黑幻影'];
-  }
-
   is_aim_race(race, edu_weeks, rank) {
     if (new CoffeeEduMarks().toky_yus > 0 && race === race_enum.toky_yus) {
       return 0;

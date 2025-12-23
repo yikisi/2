@@ -25,19 +25,20 @@ const new_game = require('#/page/new-game/page-new-game');
 const homepage = require('#/page/page-homepage');
 const load_game = require('#/page/page-load-game');
 
+const { get_custom_check } = require('#/event/check/check-factory');
 const { check_edu_script } = require('#/event/edu/edu-factory');
 const { check_rec_script } = require('#/event/rec/rec-factory');
 
+const get_display_name = require('#/utils/calc-display-name');
 const { say_by_passer_by } = require('#/utils/chara-talk');
 const CharaTalk = require('#/utils/chara-talk');
-const get_display_name = require('#/utils/get-display-name');
 const { join_list } = require('#/utils/list-utils');
 
 const { generate_copyrights, get_copyright_entry } = require('#/copyright');
 const { get_chara_color } = require('#/data/chara-colors');
 const { first_child_id } = require('#/data/other-const');
 
-const { i18n, lans, set_lan } = require('#/i18n/selector');
+const { __, i18n, lan, lans, set_lan } = require('#/i18n/selector');
 
 const { res_version } = require('#/versions');
 
@@ -147,7 +148,7 @@ module.exports = async () => {
                     color: get_chara_color(e),
                     width: 6,
                   },
-                  content: `${era.get(`static:${e}:name`)}${
+                  content: `${get_display_name(era.get(`static:${e}:name`))}${
                     check_rec_script(e) && check_edu_script(e) ? '*' : ''
                   }`,
                   type: 'button',
@@ -201,43 +202,72 @@ module.exports = async () => {
       c: () => i18n().tt_chara_achieve,
       async h() {
         era.printMultiColumns([
-          { config: { content: '角色成就获取情况' }, type: 'divider' },
+          {
+            config: { content: i18n().title.ui_chara_achieve },
+            type: 'divider',
+          },
           ...era
             .get('chara')
-            .filter((e) => e && e < first_child_id)
-            .map((e) => {
-              const title = era.get(`staticcstr:${e}:称号`),
-                desc = sys_personal_achievement.describe(e, title);
+            .filter((cid) => cid > 0 && cid < first_child_id)
+            .map((cid) => {
+              let name = era.get(`static:${cid}:name`);
+              name = __(`name.${name}`, name);
+              let title = get_custom_check(cid)
+                .get_this()
+                .get_personal_achieve();
+              const desc = sys_personal_achievement.describe(cid, title);
+              title = __(`title.${title}`, i18n().title.undef);
+              let t = sys_personal_achievement.get(cid);
+              if (t === 1) {
+                t = sys_personal_achievement.set(cid, 1);
+              }
               return {
                 config: {
                   align: 'center',
-                  color: get_chara_color(e),
+                  color: get_chara_color(cid),
                   width: 6,
                 },
-                content: sys_personal_achievement.get(e)
-                  ? [
-                      era.get(`static:${e}:name`),
-                      '：',
-                      {
-                        content: title,
-                        fontWeight: 'bold',
-                        title: `${title}：${desc}`,
-                      },
-                    ]
-                  : [
-                      {
-                        content: '？？？',
-                        title: `${era.get(`static:${e}:name`)}：${era.get(`staticcstr:${e}:称号`)}\n${desc}`,
-                      },
-                    ],
+                content:
+                  t > 0
+                    ? i18n().title.template_got_tt.map((span) => {
+                        switch (span.t) {
+                          case 'name':
+                            return name;
+                          case 'title':
+                            return {
+                              content: title,
+                              fontWeight: 'bold',
+                              title: i18n()
+                                .title.title_template_got_tt.replace(
+                                  '%TITLE%',
+                                  title,
+                                )
+                                .replace('%NAME%', name)
+                                .replace('%DESC%', desc)
+                                .replace(
+                                  '%TIME%',
+                                  new Date(t).toLocaleString(lan()),
+                                ),
+                            };
+                        }
+                        return span;
+                      })
+                    : [
+                        {
+                          content: i18n().title.ungot,
+                          title: i18n()
+                            .title.title_template_ungot_tt.replace(
+                              '%NAME%',
+                              name,
+                            )
+                            .replace('%TITLE%', title)
+                            .replace('%DESC%', desc),
+                        },
+                      ],
                 type: 'text',
               };
             }),
-          {
-            content:
-              '* 同时完成角色育成目标与最高称号条件即可获得该角色的成就\n** 获得成就后，所有存档招募该角色时初始好感+300，欧洲马娘在一开始就可以招募',
-            type: 'text',
-          },
+          { content: i18n().title.ui_tips, type: 'text' },
         ]);
         era.printButton(i18n().ui_back, 0, {
           align: 'center',

@@ -510,7 +510,12 @@ module.exports = class extends CustomizedCheck {
     return ret;
   }
 
+  // 大器晚成的逃亡者
+  get_personal_achieve() {
+    return '106402';
+  }
+
   get_personal_titles() {
-    return ['变化不定的逃马娘', '大器晚成的逃亡者'];
+    return ['106401', '106402'];
   }
 };

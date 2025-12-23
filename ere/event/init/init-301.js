@@ -16,13 +16,10 @@ module.exports = class extends CustomizedInit {
       } else {
         era.set(
           'callname:301:-2',
-          `骏川${era.get('cflag:301:性别') === 1 ? '先生' : '小姐'}`,
+          // CFLAGNAME:0 = 性别
+          `${900105 + (era.get('cflag:301:0') !== 1)}`,
         );
       }
-      era.set(
-        'callname:301:305',
-        `安心泽${era.get('cflag:301:性别') === 1 ? '先生' : '小姐'}`,
-      );
       new Array(5)
         .fill(0)
         .forEach((_, i) => era.set(`base:301:${5 + i}`, 1200));

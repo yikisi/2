@@ -99,7 +99,8 @@ class CustomizedCheck {
   check_and_get_titles(aim_check) {
     const ret = [];
     if (
-      era.get(`cflag:${this.id}:模版角色`) === -1 &&
+      // CFLAGNAME:90 = 模版角色
+      era.get(`cflag:${this.id}:90`) === -1 &&
       RaceHistory.get(this.id)
         .get_values()
         .filter(
@@ -247,6 +248,15 @@ class CustomizedCheck {
   }
 
   /**
+   * 获取角色成就名
+   * 在 i18n 下应该是一个成就ID
+   * @returns {string} 角色成就名或角色成就ID
+   */
+  get_personal_achieve() {
+    return this.get_personal_titles()[0];
+  }
+
+  /**
    * 获取角色专属动作，例如露娜的日月交替、三女神的随身祈祷
    * @returns {{name:string,handle:function():Promise}|{}}
    */
@@ -259,7 +269,8 @@ class CustomizedCheck {
    * @returns {string[]} 角色专属称号列表
    */
   get_personal_titles() {
-    return [era.get(`staticcstr:${this.id}:称号`)].filter((e) => e);
+    // CSTRNAME:11 = 称号
+    return [era.get(`staticcstr:${this.id}:11`)].filter((tid) => tid);
   }
 
   /**

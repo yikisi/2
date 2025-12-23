@@ -5,6 +5,8 @@ const MecNpc = require('#/event/mec/mec-npc');
 const { get_chara_color } = require('#/data/chara-colors');
 const ElfieLifeMarks = require('#/data/event/life-event-marks/life-event-marks-207');
 
+const { __, i18n } = require('#/i18n/selector');
+
 module.exports = class extends MecNpc {
   get_talents() {
     const { buff } = new ElfieLifeMarks();
@@ -16,7 +18,10 @@ module.exports = class extends MecNpc {
     return [
       {
         color: get_chara_color(this.id),
-        content: get(`staticcstr:${this.id}:称号`),
+        content: __(
+          `title.${get(`staticcstr:${this.id}:11`)}`,
+          i18n().title.undef,
+        ),
         fontWeight: buff > 0 ? 'bold' : undefined,
         title,
       },

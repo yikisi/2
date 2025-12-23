@@ -437,7 +437,12 @@ module.exports = class extends CustomizedCheck {
     return buffer;
   }
 
+  // 中山之樱
+  get_personal_achieve() {
+    return '105202';
+  }
+
   get_personal_titles() {
-    return ['乌拉拉加油', '中山之樱', '跨越世界'];
+    return ['105201', '105202', '105203'];
   }
 };

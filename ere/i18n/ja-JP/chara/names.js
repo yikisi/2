@@ -1,6 +1,9 @@
-const I18nNames = require('#/i18n/zh-CN/names');
+const I18nNames = require('#/i18n/zh-CN/chara/names');
 
 module.exports = class extends I18nNames {
+  900102 = 'トキノミノル';
+  900202 = 'ノーザンテースト';
+  904302 = 'ディクタス';
   // GENERATED START
   100101 = 'スペシャルウィーク';
   100201 = 'サイレンススズカ';
@@ -163,7 +166,4 @@ module.exports = class extends I18nNames {
   905001 = '保科健子';
   905101 = 'ユノハナブルーム';
   // GENERATED END
-  900102 = 'トキノミノル';
-  900202 = 'ノーザンテースト';
-  904302 = 'ディクタス';
 };

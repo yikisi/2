@@ -1,5 +1,6 @@
 class I18nEntry {
   language = '简体中文';
+  you = '你';
 
   speed = '速度';
   endurance = '耐力';
@@ -236,7 +237,9 @@ class I18nEntry {
   ui_yes = '确定';
   ui_no = '取消';
 
-  name = new (require('#/i18n/zh-CN/names'))();
+  name = new (require('#/i18n/zh-CN/chara/names'))();
+  title = new (require('#/i18n/zh-CN/chara/titles'))();
+  title_desc = new (require('#/i18n/zh-CN/chara/title-desc'))();
 
   achievement = new (require('#/i18n/zh-CN/achieve'))();
   achieve_desc = new (require('#/i18n/zh-CN/achieve-desc'))();

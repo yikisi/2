@@ -36,5 +36,4 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
     buffer.push(check_aim_and_get_entry(races, race_enum.swan_sta, 2, 2));
     buffer.push(check_aim_and_get_entry(races, race_enum.mile_cha, 2, 1));
   },
-  ['英里女王'],
 );
