@@ -16,7 +16,7 @@ const { mark_colors, mark_enum } = require('#/data/ero/mark-const');
 const { palam2juel } = require('#/data/ero/orgasm-const');
 const { inmon_plugin_dict } = require('#/data/ero/plugin/plugin-const');
 const {
-  abl_desc,
+  get_abl_title,
   growth_info,
   no_info,
   unknown_info,
@@ -282,7 +282,7 @@ module.exports = {
                 palam_colors.notifications[1],
                 level / 5,
               ),
-              title: (abl_desc[e] || abl_desc[e.substring(2)])[level],
+              title: get_abl_title(e, level),
             },
           ],
           type: 'text',

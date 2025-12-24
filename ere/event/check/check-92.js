@@ -18,7 +18,7 @@ const aims = [
 ];
 const aim_races = {};
 aim_races[race_enum.begin_race] = 4;
-aims.forEach((a) => (aim_races[get_aim_race_index(a[0], a[1])] = a[4]));
+aims.forEach((a) => (aim_races[get_aim_race_index(a[0], a[1])] = a[3]));
 
 module.exports = require('#/event/check/snippets/check-uma-common-generator')(
   () => {},

@@ -237,5 +237,6 @@ module.exports = class extends I18nClothes {
   113101 = 'すまいる・まい・うぇい！';
   113201 = '9927 Wishes';
   113301 = '陸離の編纂者';
+  113501 = 'Sunlit Outsider';
   // GENERATED END
 };

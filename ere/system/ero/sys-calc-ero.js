@@ -715,11 +715,11 @@ function sys_do_sex(atk, def, item) {
     return val;
   });
   const atk_cost_down =
-    (1 - 0.1 * end[0]) *
+    Math.max(1 - 0.1 * end[0], 0.01) *
     (1 + 0.5 * (era.get(`tcvar:${atk.id}:余韵`) > 0)) *
     atk.times;
   const def_cost_down =
-    (1 - 0.1 * end[1]) *
+    Math.max(1 - 0.1 * end[1], 0.01) *
     (1 + 0.5 * (era.get(`tcvar:${def.id}:余韵`) > 0)) *
     def.times *
     (0.75 -
@@ -727,10 +727,30 @@ function sys_do_sex(atk, def, item) {
         (era.get(`tcvar:${def.id}:脱力`) ||
           era.get(`status:${def.id}:马跳S`) ||
           era.get(`status:${def.id}:沉睡`)));
-  era.add(`nowex:${atk.id}:体力消耗`, atk_cost.stamina * atk_cost_down);
-  era.add(`nowex:${atk.id}:精力消耗`, atk_cost.time * atk_cost_down);
-  era.add(`nowex:${def.id}:体力消耗`, def_cost.stamina * def_cost_down);
-  era.add(`nowex:${def.id}:精力消耗`, def_cost.time * def_cost_down);
+  if (atk_cost.stamina > 0) {
+    era.add(
+      `nowex:${atk.id}:体力消耗`,
+      Math.max(atk_cost.stamina * atk_cost_down, 1),
+    );
+  }
+  if (atk_cost.time > 0) {
+    era.add(
+      `nowex:${atk.id}:精力消耗`,
+      Math.max(atk_cost.time * atk_cost_down, 1),
+    );
+  }
+  if (def_cost.stamina > 0) {
+    era.add(
+      `nowex:${def.id}:体力消耗`,
+      Math.max(def_cost.stamina * def_cost_down, 1),
+    );
+  }
+  if (def_cost.time > 0) {
+    era.add(
+      `nowex:${def.id}:精力消耗`,
+      Math.max(def_cost.time * def_cost_down, 1),
+    );
+  }
   calc_pleasure(def.id, def_part, dmg.defender);
   // 攻击者只能拿防御者对应部位的宝珠
   // 对面牛子是不应期，获得宝珠-90%（和快感计算同）

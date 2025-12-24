@@ -251,6 +251,7 @@ class I18nClothes {
   113101 = 'Smile My Way!';
   113201 = '9927 Wishes';
   113301 = '光彩陆离的编纂者';
+  113501 = 'Sunlit Outsider';
   // GENERATED END
 }
 

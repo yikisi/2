@@ -41,46 +41,36 @@ const { part_names, pleasure_list } = require('#/data/ero/part-const');
 const { skill_desc, talent_desc } = require('#/data/ero/shop-desc.json');
 const { trained_talent_names } = require('#/data/ero/status-const');
 
-async function shop_result(chara_id, change, result_type) {
+async function shop_result(cid, change, result_type) {
   switch (result_type) {
     case shop_result_type_enum.hate:
-      sys_like_chara(
-        chara_id,
-        0,
-        -10 * change * (1 + era.get(`mark:${chara_id}:反抗`)),
-      );
-      add_jewel_reward(chara_id, '反感', 100 * change);
+      sys_like_chara(cid, 0, -10 * change * (1 + era.get(`mark:${cid}:反抗`)));
+      add_jewel_reward(cid, '反感', 100 * change);
       break;
     case shop_result_type_enum.pleasure:
       sys_like_chara(
-        chara_id,
+        cid,
         0,
         10 *
           change *
-          (1 +
-            era.get(`mark:${chara_id}:淫纹`) +
-            era.get(`mark:${chara_id}:欢愉`)),
+          (1 + era.get(`mark:${cid}:淫纹`) + era.get(`mark:${cid}:欢愉`)),
       );
-      add_jewel_reward(chara_id, '顺从', 100 * change);
-      sys_change_lust(chara_id, 100);
+      add_jewel_reward(cid, '顺从', 100 * change);
+      sys_change_lust(cid, 100);
       break;
     case shop_result_type_enum.slave:
       sys_like_chara(
-        chara_id,
+        cid,
         0,
-        (-10 * change) / (era.get(`mark:${chara_id}:同心`) - 1),
+        (-10 * change) / (era.get(`mark:${cid}:同心`) - 1),
       );
-      add_jewel_reward(chara_id, '羞耻', 100 * change);
-      sys_change_lust(chara_id, 50);
-      sys_like_chara(chara_id, 0, -50);
+      add_jewel_reward(cid, '羞耻', 100 * change);
+      sys_change_lust(cid, 50);
+      sys_like_chara(cid, 0, -50);
       break;
     case shop_result_type_enum.lover:
-      sys_like_chara(chara_id, 0, -50);
-      add_jewel_reward(
-        chara_id,
-        ['羞耻', '反感'],
-        new Array(2).fill(100 * change),
-      );
+      sys_like_chara(cid, 0, -50);
+      add_jewel_reward(cid, ['羞耻', '反感'], new Array(2).fill(100 * change));
   }
   result_type > 0 && (await era.waitAnyKey());
 }

@@ -88,22 +88,22 @@ class CallOfMejiro extends MejiroCity {
     }
   }
 
-  get_want_sex_buff(chara_id) {
-    return this.called === chara_id;
+  get_want_sex_buff(cid) {
+    return this.called === cid;
   }
 
-  get_rape_buff(chara_id) {
-    if (chara_id === this.called) {
+  get_rape_buff(cid) {
+    if (cid === this.called) {
       return 0.5;
     }
     return 0;
   }
 
-  get_positions(chara_id, player_base, chara_base) {
-    const ret = super.get_positions(chara_id, player_base, chara_base);
+  get_positions(cid, p_base, c_base) {
+    const ret = super.get_positions(cid, p_base, c_base);
     const mejiro_button = ret.find((e) => e.l === location_enum.mejiro);
     if (this.called > 0) {
-      if (this.called === chara_id) {
+      if (this.called === cid) {
         if (this.san === 0) {
           mejiro_button.a = 5;
           if (mejiro_button.t || (mejiro_button.t = '')) {
@@ -115,11 +115,11 @@ class CallOfMejiro extends MejiroCity {
             .fill(undefined)
             .map(() => ({ ...mejiro_button }));
           if (Math.random() < 0.05) {
-            ret[0].n = '麦吉罗';
-            ret[1].n = '在';
-            ret[2].n = '呼唤';
-            ret[3].n = '你们';
-            ret[4].n = '……';
+            ret[0].n = '麦';
+            ret[1].n = '吉';
+            ret[2].n = '罗';
+            ret[3].n = '在';
+            ret[4].n = '呼唤';
           }
           return ret;
         }
@@ -130,7 +130,7 @@ class CallOfMejiro extends MejiroCity {
         }
         mejiro_button.t += '麦吉罗并未呼唤此人……';
       }
-    } else if (chara_id >= 340 && chara_id <= 342) {
+    } else if (cid >= 340 && cid <= 342) {
       mejiro_button.d = true;
       if ((mejiro_button.t ||= '')) {
         mejiro_button.t += '\n';
@@ -147,9 +147,9 @@ class CallOfMejiro extends MejiroCity {
     return ret;
   }
 
-  async page(chara_id) {
+  async page(cid) {
     this.limit--;
-    const chara = get_chara_talk(chara_id);
+    const chara = get_chara_talk(cid);
     const me = get_chara_talk(0);
     await era.printAndWait([
       me.get_colored_name(),

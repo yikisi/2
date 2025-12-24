@@ -1,21 +1,9 @@
 const abl_desc = {};
 
-abl_desc['技巧'] = abl_desc['甜言蜜语'] = [
-  '纯洁如纸',
-  '略显生疏',
-  '初见小成',
-  '不过不失',
-  '长于此道',
-  '登峰造极',
-];
-abl_desc['口腔技巧'] = [
-  '纯洁如纸',
-  '略显生疏',
-  '初见小成',
-  '不过不失',
-  '长于此道',
-  '登峰造极',
-];
+abl_desc['技巧'] =
+  abl_desc['甜言蜜语'] =
+  abl_desc['口腔技巧'] =
+    ['纯洁如纸', '略显生疏', '初见小成', '不过不失', '长于此道', '登峰造极'];
 abl_desc['施虐技巧'] = [
   '暂时还一无所知',
   '生疏羞涩的施虐',
@@ -80,9 +68,20 @@ abl_desc['受虐掌握'] = [
   '能够谈得头头是道',
   '对SM的手段了如指掌',
 ];
+const unlimited_desc = '臻至非人之境';
 
 module.exports = {
   abl_desc,
+  get_abl_title(name, level) {
+    const desc = abl_desc[name] || abl_desc[name.substring(2)];
+    if (desc) {
+      if (desc[level]) {
+        return desc[level];
+      }
+      return unlimited_desc;
+    }
+    return undefined;
+  },
   growth_info: '还在成长中哦',
   no_info: '还没有相关经历……',
   unknown_info: (cid) => (cid > 0 ? '还没有足够了解……' : '还没有相关经历……'),

@@ -1,9 +1,10 @@
 const era = require('#/era-electron');
 
 class ExtraBase {
-  /** @returns {[number,number]} */
+  /** @returns {[number,number,number]} */
   get #obj() {
-    return era.get('flag:额外资源') || era.set('flag:额外资源', [0, 0]);
+    // FLAGNAME:额外资源
+    return era.get('flag:9') || era.set('flag:9', [0, 0, 0]);
   }
 
   /** @returns {number} */
@@ -24,6 +25,16 @@ class ExtraBase {
   /** @param {number} v */
   set time(v) {
     this.#obj[1] = v;
+  }
+
+  /** @returns {number} */
+  get skill() {
+    return this.#obj[2] || 0;
+  }
+
+  /** @param {number} v */
+  set skill(v) {
+    this.#obj[2] = v;
   }
 }
 
