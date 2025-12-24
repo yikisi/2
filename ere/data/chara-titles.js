@@ -4,12 +4,26 @@ const { distinct_list } = require('#/utils/list-utils');
 
 const title_desc = require('#/data/desc/titles.json');
 
+const { __, i18n } = require('#/i18n/selector');
+
 const dict = {};
 
 class CharaTitles {
   /** @returns {CharaTitles} */
   static get(cid) {
     return dict[cid] || (dict[cid] = new CharaTitles(cid));
+  }
+
+  /**
+   * @param {string} n
+   * @returns {string}
+   */
+  static get_desc(n) {
+    const desc = __(`title_desc.${n}`, () => title_desc[n] || void 0);
+    if (desc && (n === 'undef' || +n > 1000)) {
+      return i18n().title_desc.personal_template.replace('%DESC%', desc);
+    }
+    return desc;
   }
 
   /** @type {number} */
@@ -31,7 +45,8 @@ class CharaTitles {
     list.push(...t);
     return (
       era.set(
-        `cstr:${this.#id}:称号`,
+        // CSTRNAME:11 = 称号
+        `cstr:${this.#id}:11`,
         distinct_list(list, (e) => e.n),
       ).length > o_len
     );
@@ -39,9 +54,9 @@ class CharaTitles {
 
   /** @returns {{c:string,n:string,[s]:boolean}[]} */
   get() {
-    let ret = era.get(`cstr:${this.#id}:称号`);
+    let ret = era.get(`cstr:${this.#id}:11`);
     if (!(ret instanceof Array)) {
-      ret = era.set(`cstr:${this.#id}:称号`, []);
+      ret = era.set(`cstr:${this.#id}:11`, []);
     }
     return ret;
   }
@@ -57,16 +72,22 @@ class CharaTitles {
    */
   get_colored_curr_title(has_desc = false) {
     const curr = this.get_curr_title();
-    return curr
-      ? {
-          color: curr.c,
-          content: `[${curr.n}]`,
-          title:
-            has_desc && title_desc[curr.n]
-              ? `[${curr.n}]：${title_desc[curr.n]}`
-              : undefined,
-        }
-      : '';
+    if (curr) {
+      const name = __(`title.${curr.n}`, curr.n);
+      const desc = CharaTitles.get_desc(curr.n);
+      return {
+        color: curr.c,
+        content: i18n().title.template_in_game.replace('%NAME%', name),
+        title:
+          has_desc && desc
+            ? i18n()
+                .title_desc.tip_template.replace('%NAME%', name)
+                .replace('%DESC%', desc)
+            : void 0,
+      };
+    } else {
+      return '';
+    }
   }
 }
 

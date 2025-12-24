@@ -17,6 +17,10 @@ module.exports = class extends I18nEntry {
   edu_1 = 'Classic';
   edu_2 = 'Senior';
 
+  a_edu_0 = this.edu_0;
+  a_edu_1 = this.edu_1;
+  a_edu_2 = this.edu_2;
+
   ui_moti = 'Motivation';
 
   ui_yes = 'YES';

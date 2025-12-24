@@ -432,7 +432,12 @@ async function reset_status(
         p +
         (new CharaTitles(c)
           .get()
-          .findIndex((t) => t['wins'] || t.n === '百战百胜') !==
+          .findIndex(
+            (t) =>
+              t['wins'] ||
+              t.n === 'e_100w' ||
+              t.n === i18n('zh-CN').title.e_100w,
+          ) !==
           -1),
       0,
     );

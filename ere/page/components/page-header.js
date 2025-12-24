@@ -21,7 +21,6 @@ const {
   money_color,
 } = require('#/data/color-const');
 const date_indicator = require('#/data/date-indicator');
-const title_desc = require('#/data/desc/titles.json');
 const recruit_flags = require('#/data/event/recruit-flags');
 const {
   get_celebration,
@@ -33,7 +32,7 @@ const { location_name } = require('#/data/locations');
 const { get_trainer_color } = require('#/data/other-const');
 const { race_infos } = require('#/data/race/race-const');
 
-const { __ } = require('#/i18n/selector');
+const { __, i18n } = require('#/i18n/selector');
 
 function get_progress_bar() {
   return ['hp', 'tp'].reduce((p, c, i) => {
@@ -126,29 +125,41 @@ function page_header(enable_race_info) {
     ];
     const t_title = CharaTitles.get(0).get_curr_title();
     if (t_title) {
+      const tname = __(`title.${t_title.n}`, t_title.n);
+      const tdesc = CharaTitles.get_desc(t_title.n);
       title_info.push({
         color: t_title.c,
-        content: `[${t_title.n}]`,
+        content: i18n().title.template_in_game.replace('%NAME%', tname),
         fontWeight: 'bold',
-        title: title_desc[t_title.n]
-          ? `[${t_title.n}]：${title_desc[t_title.n]}\n`
+        title: tdesc
+          ? i18n()
+              .title_desc.tip_template.replace('%NAME%', tname)
+              .replace('%DESC%', tdesc) + '\n'
           : '',
       });
     } else {
       title_info.push({
         color: trainer_title_color,
-        content: `[${trainer_title.full()}]`,
+        content: i18n().title.template_in_game.replace(
+          '%NAME%',
+          trainer_title.full(),
+        ),
         fontWeight: 'bold',
         title: '',
       });
     }
-    title_info.at(-1).title += `[${trainer_title.full()}]：${
-      trainer_buff > 0
-        ? `指导训练时成功率与效果加成 +${trainer_buff}%${
-            rec_trainers.length > 0 ? ` (↑${rec_trainers})` : ''
-          }，`
-        : ''
-    }担当赏金 ${4 * get_trainer_level() + 4}% 分成。`;
+    title_info.at(-1).title += i18n()
+      .title_desc.tip_template.replace('%NAME%', trainer_title.full())
+      .replace(
+        '%DESC%',
+        `${
+          trainer_buff > 0
+            ? `指导训练时成功率与效果加成 +${trainer_buff}%${
+                rec_trainers.length > 0 ? ` (↑${rec_trainers})` : ''
+              }，`
+            : ''
+        }担当赏金 ${4 * get_trainer_level() + 4}% 分成。`,
+      );
     title_info.push(...race_indicator(0));
     era.printInColRows(
       [{ type: 'divider' }],

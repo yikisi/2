@@ -36,30 +36,30 @@ function sys_check_titles_after_race(team_list, race, best_rank, mvp_id) {
       p_flag++;
     }
     if (pregnant_stage >> pregnant_stage_enum.embryo > 0) {
-      new_title_dict[cid].push({ n: '亲子关系紧张', c: buff_colors[2] });
+      new_title_dict[cid].push({ n: 's_with_baby', c: buff_colors[2] });
     }
     if (
       era.get(`cflag:${cid}:腹中精液`) > 0 &&
       era.get(`cflag:${cid}:子宫内精液`) > 0 &&
       era.get(`cflag:${cid}:肠道内精液`) > 0
     ) {
-      new_title_dict[cid].push({ n: '白浊浸染', c: buff_colors[2] });
+      new_title_dict[cid].push({ n: 's_dirty', c: buff_colors[2] });
     }
     if (cid > 0 && Number(pregnant_check) === cid) {
-      new_title_dict[cid].push({ n: '父亲力量', c: buff_colors[2] });
+      new_title_dict[cid].push({ n: 's_be_father', c: buff_colors[2] });
     }
     if (uma.ero.orgasm > 0) {
       o_flag += Math.random() < Math.min(uma.ero.orgasm, 6) ** 2 / (6 ** 2 * 2);
       if (uma.ero.orgasm >= 6) {
-        new_title_dict[cid].push({ n: '惊世骇俗', c: buff_colors[2] });
+        new_title_dict[cid].push({ n: 's_hentai', c: buff_colors[2] });
         if (uma.race.conditionParams.item === 0) {
-          new_title_dict[cid].push({ n: '倒霉蛋', c: buff_colors[2] });
+          new_title_dict[cid].push({ n: 's_unlucky_2', c: buff_colors[2] });
           if (uma.rank.curr === 1) {
             global_achievement.wins_hnt = 1;
           }
         }
       } else if (uma.race.conditionParams.item === 0) {
-        new_title_dict[cid].push({ n: '无妄之灾', c: buff_colors[2] });
+        new_title_dict[cid].push({ n: 's_unlucky_1', c: buff_colors[2] });
       }
     }
   });
@@ -107,23 +107,23 @@ function sys_check_titles_after_race(team_list, race, best_rank, mvp_id) {
             });
           if (cup_1 & cup_2 & cup_3 & 0b1) {
             new_title_dict[mvp_id].push({
-              n: '三冠',
+              n: 'r_3crown_c',
               c: adaptability_colors.at(-3),
             });
             invincible_1 &&
               new_title_dict[mvp_id].push({
-                n: '无败三冠',
+                n: 'r_3crown_ci',
                 c: adaptability_colors.at(-2),
               });
           }
           if (cup_1 & cup_2 & cup_3 & 0b10) {
             new_title_dict[mvp_id].push({
-              n: '三宝冠',
+              n: 'r_3crown_f',
               c: adaptability_colors.at(-3),
             });
             invincible_2 &&
               new_title_dict[mvp_id].push({
-                n: '无败三宝冠',
+                n: 'r_3crown_fi',
                 c: adaptability_colors.at(-2),
               });
           }
@@ -134,24 +134,24 @@ function sys_check_titles_after_race(team_list, race, best_rank, mvp_id) {
             (cup_1 & cup_2 & cup_3) === 0
           ) {
             new_title_dict[mvp_id].push({
-              n: '变则三冠',
+              n: 'r_3crown_m',
               c: adaptability_colors.at(-3),
             });
             if ((cup_3 & 1 && invincible_1) || (cup_3 & 2 && invincible_2)) {
               new_title_dict[mvp_id].push({
-                n: '无败变则三冠',
+                n: 'r_3crown_mi',
                 c: adaptability_colors.at(-2),
               });
             }
           }
           if ((cup_1 & cup_2 & cup_3) === 0b11) {
             new_title_dict[mvp_id].push({
-              n: '极限六冠',
+              n: 'r_6crown',
               c: adaptability_colors.at(-2),
             });
             if (invincible_1 && invincible_2) {
               new_title_dict[mvp_id].push({
-                n: '无败六冠',
+                n: 'r_6crown_i',
                 c: adaptability_colors.at(-1),
               });
             }
@@ -181,12 +181,12 @@ function sys_check_titles_after_race(team_list, race, best_rank, mvp_id) {
             });
           if (cup === 2) {
             new_title_dict[mvp_id].push({
-              n: '泥地三冠',
+              n: 'r_3crown_d',
               c: adaptability_colors.at(-3),
             });
             invincible_4 &&
               new_title_dict[mvp_id].push({
-                n: '无败泥地三冠',
+                n: 'r_3crown_di',
                 c: adaptability_colors.at(-2),
               });
           }
@@ -214,12 +214,12 @@ function sys_check_titles_after_race(team_list, race, best_rank, mvp_id) {
           });
         if (cup === 2) {
           new_title_dict[mvp_id].push({
-            n: '美国梦',
+            n: 'r_3crown_a',
             c: adaptability_colors.at(-3),
           });
           invincible &&
             new_title_dict[mvp_id].push({
-              n: '无暇美国梦',
+              n: 'r_3crown_ai',
               c: adaptability_colors.at(-2),
             });
         }

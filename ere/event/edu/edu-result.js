@@ -96,7 +96,7 @@ function learn_language(cid, lan_name) {
     era.get(`abl:${cid}:法语`) === 5
   ) {
     CharaTitles.get(cid).push({
-      n: 'Hello world!',
+      n: 'l_hello_world',
       c: buff_colors[1],
     });
   }

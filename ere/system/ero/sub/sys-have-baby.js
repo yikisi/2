@@ -385,7 +385,7 @@ async function sys_have_baby(mid) {
         global_achievement.famother = 1;
       }
     }
-    if (sys_add_titles(fid, { c: buff_colors[2], n: '大种马' })) {
+    if (sys_add_titles(fid, { c: buff_colors[2], n: 's_father' })) {
       await era.waitAnyKey();
     }
   }
@@ -396,7 +396,7 @@ async function sys_have_baby(mid) {
         global_achievement.famother = 1;
       }
     }
-    if (sys_add_titles(mid, { c: buff_colors[2], n: '英雄母亲' })) {
+    if (sys_add_titles(mid, { c: buff_colors[2], n: 's_mother' })) {
       await era.waitAnyKey();
     }
   }

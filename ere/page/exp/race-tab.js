@@ -115,7 +115,7 @@ module.exports = {
               config: { width: 19, color: check ? attr_change_colors.up : '' },
               content: check
                 ? i18n().title_desc.got
-                : i18n().title_desc.template.replace(
+                : i18n().title_desc.personal_template.replace(
                     '%DESC%',
                     __(`title_desc.${tid}`, i18n().title_desc.undef),
                   ),

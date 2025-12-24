@@ -141,7 +141,7 @@ function init_chara(cid, src = 0) {
     era.get(`abl:${cid}:法语`) === 5
   ) {
     CharaTitles.get(cid).push({
-      n: 'Hello world!',
+      n: 'l_hello_world',
       c: buff_colors[1],
     });
   }

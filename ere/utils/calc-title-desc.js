@@ -12,7 +12,7 @@ module.exports = {
     if (title_desc[tname]) {
       return title_desc[tname];
     }
-    return i18n().title_desc.template.replace(
+    return i18n().title_desc.personal_template.replace(
       '%DESC%',
       __(`title_desc.${tid}`, i18n().title_desc.undef),
     );

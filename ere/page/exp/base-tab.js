@@ -16,7 +16,6 @@ const { join_to_string } = require('#/utils/list-utils');
 
 const CharaTitles = require('#/data/chara-titles');
 const race_clothes = require('#/data/clothe-const.json');
-const title_desc = require('#/data/desc/titles.json');
 const { human_sex_title, sex_title } = require('#/data/ero/status-const');
 const { growth_info } = require('#/data/exp-const');
 const {
@@ -166,13 +165,15 @@ module.exports = {
         type: 'text',
       },
     );
-    title_list.forEach((e, i) => {
+    title_list.forEach((t, i) => {
+      const name = __(`title.${t.n}`, t.n);
+      const desc = CharaTitles.get_desc(t.n);
       title_info_list.push(
         {
           accelerator: i + 31,
           config: {
-            buttonType: e.s ? 'warning' : 'info',
-            disabled: e.s,
+            buttonType: t.s ? 'warning' : 'info',
+            disabled: t.s,
             showAcc: false,
             width: 1,
           },
@@ -180,13 +181,15 @@ module.exports = {
           type: 'button',
         },
         {
-          config: { color: e.c, width: 5 },
+          config: { color: t.c, width: 5 },
           content: [
             {
-              content: e.n,
-              title: title_desc[e.n]
-                ? `[${e.n}]：${title_desc[e.n]}`
-                : undefined,
+              content: name,
+              title: desc
+                ? i18n()
+                    .title_desc.tip_template.replace('%NAME%', name)
+                    .replace('%DESC%', desc)
+                : void 0,
             },
           ],
           type: 'text',

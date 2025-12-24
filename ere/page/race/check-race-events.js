@@ -88,15 +88,18 @@ async function check_race_events(race, info, team) {
   const my_marks = new MyEduMarks();
   if (best === 1) {
     (rec_list[race] || []).forEach((cid) => {
-      if (!get(`cflag:${cid}:招募状态`) && get(`cflag:${cid}:随机招募`) <= 0) {
-        add(`cflag:${cid}:随机招募`, -1);
+      // CFLAGNAME:66 = 招募状态
+      if (!get(`cflag:${cid}:66`) && get(`cflag:${cid}:66`) <= 0) {
+        // CFLAGNAME:67 = 随机招募
+        add(`cflag:${cid}:67`, -1);
       }
     });
   }
   if (race === race_enum.prix_lat && best === 1 && !may_marks.who_am_i) {
     may_marks.who_am_i = 1;
   }
-  if (get('flag:初见URA颁奖') < 2) {
+  // FLAGNAME:31 = 初见URA颁奖
+  if (get('flag:31') < 2) {
     /**
      * 乙名史悦子 - 初见
      * @author 黑奴队长

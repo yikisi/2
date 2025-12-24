@@ -103,29 +103,29 @@ function sys_handle_palace(cid) {
     }
   });
   if (races.length >= 30) {
-    titles.push({ n: '铁马娘子', c: buff_colors[1] });
-    g1_count && titles.push({ n: '黄金旅程', c: buff_colors[1] });
+    titles.push({ n: 'e_30', c: buff_colors[1] });
+    g1_count && titles.push({ n: 'e_30g', c: buff_colors[1] });
   }
   if (
     g1_count >= 10 &&
     races.findIndex((e) => e.pop !== 1 || e.rank !== 1) === -1
   ) {
-    titles.push({ n: '傲视一切', c: adaptability_colors.at(-2) });
+    titles.push({ n: 'e_above_all', c: adaptability_colors.at(-2) });
   }
   if (races.length >= 101) {
-    titles.push({ n: '苛己执着', c: adaptability_colors.at(-2) });
+    titles.push({ n: 'e_100', c: adaptability_colors.at(-2) });
     if (races.findIndex((e) => e.rank !== 1) === -1) {
-      titles.push({ c: adaptability_colors.at(-1), n: '百战百胜', wins: 1 });
+      titles.push({ c: adaptability_colors.at(-1), n: 'e_100w', wins: 1 });
     }
   }
   const pv = era.get(`talent:${cid}:童贞`);
   const vv = era.get(`talent:${cid}:处女`);
   if (pv === vp_status_enum.virgin && vv === vp_status_enum.virgin) {
-    titles.push({ n: '纯净之魂', c: sex_colors[1] });
-    pop_g1_count >= 2 && titles.push({ n: '完美偶像', c: sex_colors[0] });
+    titles.push({ n: 'e_virgin_1', c: sex_colors[1] });
+    pop_g1_count >= 2 && titles.push({ n: 'e_virgin_2', c: sex_colors[0] });
   } else if (pv === vp_status_enum.virgin && vv === vp_status_enum.reborn) {
-    titles.push({ n: '「纯净」之魂', c: sex_colors[1] });
-    pop_g1_count >= 2 && titles.push({ n: '「完美」偶像', c: sex_colors[0] });
+    titles.push({ n: 'e_virgin_r1', c: sex_colors[1] });
+    pop_g1_count >= 2 && titles.push({ n: 'e_virgin_r2', c: sex_colors[0] });
   }
   era.printMultiColumns(buffer);
   sys_add_titles(cid, ...titles);

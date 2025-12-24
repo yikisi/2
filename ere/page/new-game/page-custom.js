@@ -234,7 +234,7 @@ async function page_custom() {
     era.set('flag:马娘初始好感', 300);
     era.set('flag:马娘初始爱慕', 50);
     era.set('flag:不忠惩罚', 0);
-    CharaTitles.get(0).push({ c: buff_colors[2], n: '萝莉控', s: true });
+    CharaTitles.get(0).push({ c: buff_colors[2], n: 'es_egg_179', s: true });
   } else if (era.get('callname:0:-1').indexOf('渡鸦') !== -1) {
     era.set('flag:角色性别', 99);
     era.set('flag:游戏结束', 0);
@@ -244,14 +244,14 @@ async function page_custom() {
     era.set('flag:马娘初始好感', 300);
     era.set('flag:马娘初始爱慕', 50);
     era.set('flag:不忠惩罚', 0);
-    CharaTitles.get(0).push({ c: buff_colors[2], n: '无法战胜', s: true });
+    CharaTitles.get(0).push({ c: buff_colors[2], n: 'es_egg_621', s: true });
   } else if (
     era.get('callname:0:-1').indexOf('天马闪光蹄') !== -1 &&
     sys_personal_achievement.get(3)
   ) {
     era.set('flag:角色性别', 0);
     era.set('flag:彩蛋机制', 3);
-    CharaTitles.get(0).push({ c: buff_colors[2], n: '运动系爱好者', s: true });
+    CharaTitles.get(0).push({ c: buff_colors[2], n: 'es_egg_3', s: true });
   }
   while (flag_custom) {
     for (let i = 0; i < 5; ++i) {

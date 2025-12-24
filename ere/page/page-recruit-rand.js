@@ -529,7 +529,7 @@ async function print_rec_page() {
                   case 'name':
                     return { content: name, color: get_chara_color(selected) };
                   case 'title':
-                    return i18n().title_desc.template.replace(
+                    return i18n().title_desc.personal_template.replace(
                       '%DESC%',
                       __(`title_desc.${tid}`, i18n().title_desc.undef),
                     );

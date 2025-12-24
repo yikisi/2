@@ -19,6 +19,8 @@ const CharaTitles = require('#/data/chara-titles');
 const EroParticipant = require('#/data/ero/ero-participant');
 const { part_enum } = require('#/data/ero/part-const');
 
+const { i18n } = require('#/i18n/selector');
+
 module.exports = class extends CustomizedLove {
   async 49(silence, me, callname) {
     await print_event_name('爱欲', silence);
@@ -100,7 +102,9 @@ module.exports = class extends CustomizedLove {
     if (
       CharaTitles.get(400)
         .get()
-        .findIndex((e) => e.n.endsWith('美国梦')) !== -1
+        .findIndex(
+          (t) => t.n === 'r_3crown_a' || t.n === i18n('zh-CN').title.r_3crown_a,
+        ) !== -1
     ) {
       await silence.say_and_wait([callname, '……我有件事想要和你说。']);
       await era.printAndWait([

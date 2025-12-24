@@ -50,6 +50,8 @@ const {
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
 
+const { i18n } = require('#/i18n/selector');
+
 function check_titles(...ids) {
   ids
     .filter(
@@ -244,18 +246,16 @@ module.exports = async () => {
                   new EventObject(0, cb_enum.edu).set_arg('strange_day2'),
                 );
               }
-              if (era.get('cflag:56:招募状态') === recruit_flags.yes) {
-                const title_name =
-                    get_custom_check(56).get_personal_titles()[0],
-                  personal_title = CharaTitles.get(56)
-                    .get()
-                    .find((e) => e.n === title_name);
+              if (era.get('cflag:56:66') === recruit_flags.yes) {
+                const personal_title = CharaTitles.get(56)
+                  .get()
+                  .find((e) => e.n === i18n('zh-CN').title[105601]);
                 if (personal_title !== undefined) {
                   personal_title.c = get_chara_color(56);
                 }
               }
-              if (era.get('cflag:88:招募状态') === recruit_flags.yes) {
-                const personal_title = CharaTitles.get(56)
+              if (era.get('cflag:88:66') === recruit_flags.yes) {
+                const personal_title = CharaTitles.get(88)
                   .get()
                   .find((e) => e.n === '黑翠千里行');
                 if (personal_title !== undefined) {
@@ -411,7 +411,7 @@ module.exports = async () => {
                 }
                 const tokino = CharaTitles.get(cid)
                   .get()
-                  .find((t) => t.n === '傲视一切');
+                  .find((t) => t.n === i18n('zh-CN').title.e_above_all);
                 if (tokino !== undefined) {
                   tokino.c = adaptability_colors.at(-2);
                 }

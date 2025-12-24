@@ -71,6 +71,10 @@ class I18nEntry {
     return [this.edu_0, this.edu_1, this.edu_2];
   }
 
+  a_edu_0 = '新秀';
+  a_edu_1 = '经典';
+  a_edu_2 = '资深';
+
   oot_0 = '已育成';
   oot_1 = '殿堂';
   get n_oot() {

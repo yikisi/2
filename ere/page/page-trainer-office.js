@@ -216,7 +216,7 @@ async function page_trainer_office() {
       const ret = await input();
       if (ret !== 999) {
         const chara = get_chara_talk(ret);
-        const title = CharaTitles.get(ret).get_curr_title();
+        const title = CharaTitles.get(ret).get_colored_curr_title();
         flag_trainer = true;
         while (flag_trainer) {
           const temp_flag = await npc_common(

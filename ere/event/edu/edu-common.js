@@ -46,6 +46,8 @@ const {
 } = require('#/data/race/race-const');
 const { attr_enum, fumble_result } = require('#/data/train-const');
 
+const { i18n } = require('#/i18n/selector');
+
 class CustomizedEdu extends ICustomizedEdu {
   /** @type {function} */
   static load_game;
@@ -61,22 +63,42 @@ class CustomizedEdu extends ICustomizedEdu {
    * @param {CharaTalk} me
    */
   static async common_palace(chara, me) {
-    const { check, count, buffer } = CustomizedEdu.get_palace_info(chara),
-      titles = CharaTitles.get(chara.id).get();
+    const { check, count, buffer } = CustomizedEdu.get_palace_info(chara);
+    const titles = CharaTitles.get(chara.id).get();
     if (
       check >= 6 ||
       (check >= 4 &&
-        titles.findIndex(
-          (e) =>
-            e.n.endsWith('三冠') || e.n.endsWith('三宝冠') || e.n === '美国梦',
-        ) !== -1) ||
+        titles.findIndex((t) => {
+          return (
+            t.n === 'r_3crown_c' ||
+            t.n === 'r_3crown_f' ||
+            t.n === 'r_3crown_m' ||
+            t.n === 'r_3crown_d' ||
+            t.n === 'r_3crown_a' ||
+            t.n === i18n('zh-CN').title.r_3crown_c ||
+            t.n === i18n('zh-CN').title.r_3crown_f ||
+            t.n === i18n('zh-CN').title.r_3crown_m ||
+            t.n === i18n('zh-CN').title.r_3crown_d ||
+            t.n === i18n('zh-CN').title.r_3crown_a
+          );
+        }) !== -1) ||
       (check >= 3 &&
-        titles.findIndex(
-          (e) =>
-            e.n.startsWith('无败三') ||
-            e.n.startsWith('无败泥') ||
-            e.n === '无暇美国梦',
-        ) !== -1)
+        titles.findIndex((t) => {
+          return (
+            t.n === 'r_3crown_ci' ||
+            t.n === 'r_3crown_fi' ||
+            t.n === 'r_3crown_mi' ||
+            t.n === 'r_3crown_di' ||
+            t.n === 'r_3crown_ai' ||
+            t.n === 'r_6crown' ||
+            t.n === i18n('zh-CN').title.r_3crown_ci ||
+            t.n === i18n('zh-CN').title.r_3crown_fi ||
+            t.n === i18n('zh-CN').title.r_3crown_mi ||
+            t.n === i18n('zh-CN').title.r_3crown_di ||
+            t.n === i18n('zh-CN').title.r_3crown_ai ||
+            t.n === i18n('zh-CN').title.r_6crown
+          );
+        }) !== -1)
     ) {
       await print_event_name('登上殿堂宝座', chara);
       await era.printAndWait(
@@ -111,11 +133,11 @@ class CustomizedEdu extends ICustomizedEdu {
       await era.printAndWait(seg);
     }
     era.println();
-    const title = CharaTitles.get(chara.id).get_colored_curr_title(),
-      fame_reward =
-        (count.g1 * race_rewards[class_enum.G1].r01.fame) / 2 +
-        (count.g2 * race_rewards[class_enum.G2].r01.fame) / 2 +
-        (count.g3 * race_rewards[class_enum.G3].r05.fame) / 2;
+    const title = CharaTitles.get(chara.id).get_colored_curr_title();
+    const fame_reward =
+      (count.g1 * race_rewards[class_enum.G1].r01.fame) / 2 +
+      (count.g2 * race_rewards[class_enum.G2].r01.fame) / 2 +
+      (count.g3 * race_rewards[class_enum.G3].r05.fame) / 2;
     if (check >= 6) {
       await era.printAndWait([
         `随着以${chara.sex}为蓝本的铜像揭幕，`,

@@ -12,6 +12,52 @@ class I18nTitles {
   template_in_rec = [{ t: 'name' }, '：', { t: 'title' }];
   achieve_template_in_rec = ['专属成就：', { t: 'title' }, ' ', { t: 'check' }];
 
+  template_in_game = '[%NAME%]';
+
+  reward_t_title_template = '%YEAR%年度最佳训练员';
+  reward_u_title_template = '%YEAR%年度代表%UMA%';
+  best_title_template = '最佳%CLASS%%UMA%';
+
+  l_hello_world = 'Hello world!';
+
+  r_3crown_c = '三冠';
+  r_3crown_ci = '无败三冠';
+  r_3crown_f = '三宝冠';
+  r_3crown_fi = '无败三宝冠';
+  r_3crown_m = '变则三冠';
+  r_3crown_mi = '无败变则三冠';
+  r_3crown_d = '泥地三冠';
+  r_3crown_di = '无败泥地三冠';
+  r_3crown_a = '美国梦';
+  r_3crown_ai = '无暇美国梦';
+  r_6crown = '极限六冠';
+  r_6crown_i = '无败六冠';
+
+  e_above_all = '傲视一切';
+  e_30 = '铁马娘子';
+  e_30g = '黄金旅程';
+  e_100 = '苛己执着';
+  e_100w = '百战百胜';
+  e_virgin_1 = '纯净之魂';
+  e_virgin_2 = '完美偶像';
+  e_virgin_r1 = '「纯净」之魂';
+  e_virgin_r2 = '「完美」偶像';
+
+  s_be_father = '父亲力量';
+  s_dirty = '白浊浸染';
+  s_with_baby = '亲子关系紧张';
+  s_hentai = '惊世骇俗';
+  s_unlucky_1 = '无妄之灾';
+  s_unlucky_2 = '倒霉蛋';
+  s_father = '大种马';
+  s_mother = '英雄母亲';
+  s_p_slave = '万马骑';
+  s_p_preg = '孕道';
+
+  es_egg_3 = '运动系爱好者';
+  es_egg_179 = '萝莉控';
+  es_egg_621 = '无法战胜';
+
   undef = '幻觉马娘';
 
   100101 = '日本总大将';

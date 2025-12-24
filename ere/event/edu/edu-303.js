@@ -45,6 +45,8 @@ const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum, prize_ratios } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
+const { i18n } = require('#/i18n/selector');
+
 const random_trainers = [
   undefined,
   '雞雞',
@@ -191,24 +193,25 @@ module.exports = class extends CustomizedEdu {
     const loc = get('flag:当前位置');
     set('flag:当前位置', location_enum.race);
     const etsuko_check =
-        get('cflag:303:育成回合计时') < 3 * 48 ||
-        !check_pregnant_unprotect(303),
-      report = etsuko_check
-        ? (args) => say_by_passer_by('主持人', args)
-        : etsuko.say_and_wait.bind(etsuko),
-      year = get('flag:当前年') - 1;
+      get('cflag:303:育成回合计时') < 3 * 48 || !check_pregnant_unprotect(303);
+    const report = etsuko_check
+      ? (args) => say_by_passer_by('主持人', args)
+      : etsuko.say_and_wait.bind(etsuko);
+    const year = get('flag:当前年') - 1;
+    // FLAGNAME:116 = 角色性别
+    const uma = get('flag:116') === 1 ? '马郎' : '马娘';
     let fame_reward = 0;
     await print_event_name('URA颁奖典礼', etsuko);
     await report([
       '各位赛',
-      etsuko.get_uma_sex_title(),
+      uma,
       '粉丝们，晚上好！各位热切期盼的年度盛事，URA颁奖典礼就要开始了！',
     ]);
     await report([
       '与往常一样，大会方设立了多个奖项，向拼尽全力以最高的竞技水平带来精彩表演的各位赛',
-      etsuko.get_uma_sex_title(),
+      uma,
       '，以及在背后默默支持',
-      etsuko.get_uma_sex_title(),
+      uma,
       '们的各位训练员们献上敬意！',
     ]);
     if (etsuko_check) {
@@ -223,7 +226,7 @@ module.exports = class extends CustomizedEdu {
       '在正式开始颁奖前，让我们来重温一下',
       year,
       '年的G1比赛都有哪些赛',
-      etsuko.get_uma_sex_title(),
+      uma,
       '脱颖而出！',
     ]);
     const team_list = sys_filter_chara(
@@ -471,14 +474,10 @@ module.exports = class extends CustomizedEdu {
     println();
     await report([
       '最后！便是决定本年度最快、最高、最强的历史一刻！能在诸多名马之列中留下自己独一无二的印记的赛',
-      etsuko.get_uma_sex_title(),
+      uma,
       '……到底是谁？！',
     ]);
-    await report([
-      '《年度代表',
-      etsuko.get_uma_sex_title(),
-      '》，这个最终的荣耀归属于——',
-    ]);
+    await report(['《年度代表', uma, '》，这个最终的荣耀归属于——']);
     println();
     const uoty = sort_list(
       g1_list.filter(
@@ -511,7 +510,10 @@ module.exports = class extends CustomizedEdu {
     if (is_best_trainer) {
       (titles_dict[0] || (titles_dict[0] = [])).push({
         c: adaptability_colors.at(-1),
-        n: `${year}年度最佳训练员`,
+        n: i18n().title.reward_t_title_template.replace(
+          '%YEAR%',
+          year.toString(),
+        ),
       });
     }
     if (junior) {
@@ -524,7 +526,9 @@ module.exports = class extends CustomizedEdu {
       );
       (titles_dict[junior.id] || (titles_dict[junior.id] = [])).push({
         c: adaptability_colors.at(-5),
-        n: `最佳新秀${etsuko.get_uma_sex_title()}`,
+        n: i18n()
+          .title.best_title_template.replace('%CLASS%', i18n().a_edu_0)
+          .replace('%UMA%', uma),
       });
     }
     if (classic) {
@@ -537,19 +541,25 @@ module.exports = class extends CustomizedEdu {
       );
       (titles_dict[classic.id] || (titles_dict[classic.id] = [])).push({
         c: adaptability_colors.at(-3),
-        n: `最佳经典${etsuko.get_uma_sex_title()}`,
+        n: i18n()
+          .title.best_title_template.replace('%CLASS%', i18n().a_edu_1)
+          .replace('%UMA%', uma),
       });
     }
     if (senior) {
       (titles_dict[senior.id] || (titles_dict[senior.id] = [])).push({
         c: adaptability_colors.at(-2),
-        n: `最佳资深${etsuko.get_uma_sex_title()}`,
+        n: i18n()
+          .title.best_title_template.replace('%CLASS%', i18n().a_edu_2)
+          .replace('%UMA%', uma),
       });
     }
     if (uoty) {
       (titles_dict[uoty.id] || (titles_dict[uoty.id] = [])).push({
         c: adaptability_colors.at(-1),
-        n: `${year}年度代表${etsuko.get_uma_sex_title()}`,
+        n: i18n()
+          .title.reward_u_title_template.replace('%YEAR%', year.toString())
+          .replace('%UMA%', uma),
       });
     }
     Object.entries(titles_dict).forEach((e) =>

@@ -286,7 +286,7 @@ async function game_over(again) {
               `${me.name} 的身体已经被调整到敏感度绝佳的状态，请继续精进自己的性能力，取悦主人们，以获取声望吧！`,
             );
             await era.printAndWait('声望再次低于零，会遭受更严厉的惩罚！');
-            sys_add_titles(0, { c: buff_colors[2], n: '万马骑' });
+            sys_add_titles(0, { c: buff_colors[2], n: 's_p_slave' });
             break;
           case 3:
             CharaInmon.get(0).slave = slavery_enum.pregnant;
@@ -367,7 +367,7 @@ async function game_over(again) {
             await era.printAndWait(
               `假如足够幸运的话，也许 ${me.name} 还能凭子而贵！`,
             );
-            sys_add_titles(0, { c: buff_colors[2], n: '孕道' });
+            sys_add_titles(0, { c: buff_colors[2], n: 's_p_preg' });
         }
         sys_filter_chara('cflag', '招募状态', recruit_flags.yes).forEach(
           (e) => {
@@ -518,12 +518,10 @@ async function game_over(again) {
     });
     if (end_talk > 0) {
       era.println();
-      const team_list = era
-        .getAddedCharacters()
-        .filter(
-          (cid) =>
-            cid > 0 && era.get(`cflag:${cid}:招募状态`) === recruit_flags.yes,
-        );
+      const team_list = era.getAddedCharacters().filter(
+        // CFLAGNAME:66 = 招募状态
+        (cid) => cid > 0 && era.get(`cflag:${cid}:66`) === recruit_flags.yes,
+      );
       for (const cid of team_list) {
         await get_custom_daily(cid).end_talk(end_talk > 1);
       }

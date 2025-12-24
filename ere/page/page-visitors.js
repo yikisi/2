@@ -414,7 +414,7 @@ async function page_visitors() {
       const cid = await era.input();
       if (cid !== 999) {
         const chara = get_chara_talk(cid);
-        const title = CharaTitles.get(chara.id).get_curr_title();
+        const title = CharaTitles.get(chara.id).get_colored_curr_title();
         flag_visitor = true;
         while (flag_visitor) {
           const temp_flag = await npc_common(

@@ -34,6 +34,10 @@ module.exports = class extends I18nEntry {
   edu_1 = 'クラシック級';
   edu_2 = 'シニア級';
 
+  a_edu_0 = this.edu_0;
+  a_edu_1 = this.edu_1;
+  a_edu_2 = this.edu_2;
+
   tt_new_game = 'ニューゲーム';
   tt_load_game = 'ロード';
   tt_help = 'チュートリアル';

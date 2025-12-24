@@ -13,6 +13,8 @@ const BelieveEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-94
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
 
+const { i18n } = require('#/i18n/selector');
+
 const aim_races = {};
 aim_races[race_enum.begin_race] = 4;
 aim_races[get_aim_race_index(race_enum.falc_sta, 1)] = 4;
@@ -57,7 +59,9 @@ module.exports = class extends CustomizedCheck {
     if (
       CharaTitles.get(this.id)
         .get()
-        .findIndex((t) => t.n === '白浊浸染') >= 0
+        .findIndex(
+          (t) => t.n === 's_dirty' || t.n === i18n('zh-CN').title.s_dirty,
+        ) >= 0
     ) {
       titles.push({
         c: get_chara_color(this.id),
