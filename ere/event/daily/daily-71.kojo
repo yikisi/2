@@ -1,11 +1,14 @@
 选中互动对象:
   sync: true
   lines:
-    - if: era.get('status:71:沉睡') === 0 && era.get('status:71:马跳S') === 0
+    # STATUSNAME:10 = 沉睡
+    # STATUSNAME:39 = 马跳S
+    - if: era.get('status:71:10') === 0 && era.get('status:71:39') === 0
       lines:
         - if: era.get('love:71') < 75
           lines:
-            - if: era.get('cflag:71:育成回合计时') < 3 * 48
+            # CFLAGNAME:48 = 育成回合计时
+            - if: era.get('cflag:71:48') < 3 * 48
               lines:
                 - random: true
                   lines:
@@ -28,7 +31,7 @@
                         - fontSize: bold
                           content: 目白阿尔丹
                         - 「前几天找到了我和姐姐小时候的照片，真是令人怀念呢。」
-            - if: era.get('cflag:71:育成回合计时') >= 3 * 48
+            - if: era.get('cflag:71:48') >= 3 * 48
               lines:
                 - random: true
                   lines:
@@ -53,7 +56,7 @@
                         - 「%称呼%，好久不见，真的非常感谢您那时候对我的支持和帮助。」
         - if: era.get('love:71') >= 75
           lines:
-            - if: era.get('cflag:71:育成回合计时') < 3 * 48
+            - if: era.get('cflag:71:48') < 3 * 48
               lines:
                 - random: true
                   lines:
@@ -76,7 +79,7 @@
                         - fontSize: bold
                           content: 目白阿尔丹
                         - 「%称呼%，看起来很疲劳呢，让我来为你按摩下，好好放松下身体吧。」
-            - if: era.get('cflag:71:育成回合计时') >= 3 * 48
+            - if: era.get('cflag:71:48') >= 3 * 48
               lines:
                 - random: true
                   lines:
@@ -106,22 +109,22 @@
                         - fontSize: bold
                           content: 目白阿尔丹
                         - 「亲爱的这样逞强可不行哦，嘿🎵看我专属的劝阻亲爱的熬夜法。」
-    - if: era.get('status:71:沉睡') > 0 || era.get('status:71:马跳S') > 0
+    - if: era.get('status:71:10') > 0 || era.get('status:71:39') > 0
       lines:
         - if: era.get('love:71') < 75
           lines:
-            - if: era.get('cflag:71:育成回合计时') < 3 * 48
+            - if: era.get('cflag:71:48') < 3 * 48
               lines:
                 - 坐在沙发上睡着的阿尔丹，就像是一副瑰丽又静谧的画，让%你%的动作都轻柔了起来。
-            - if: era.get('cflag:71:育成回合计时') >= 3 * 48
+            - if: era.get('cflag:71:48') >= 3 * 48
               lines:
                 - 疲惫的目白阿尔丹打了一个小哈欠。
         - if: era.get('love:71') >= 75
           lines:
-            - if: era.get('cflag:71:育成回合计时') < 3 * 48
+            - if: era.get('cflag:71:48') < 3 * 48
               lines:
                 - 过于疲惫而依靠在%你%身上睡着的阿尔丹，就像是找到了归宿地的小鸟一样。
-            - if: era.get('cflag:71:育成回合计时') >= 3 * 48
+            - if: era.get('cflag:71:48') >= 3 * 48
               lines:
                 - 阿尔丹在休息室里的床上安心地睡着。
 
@@ -170,7 +173,8 @@
                 - fontSize: bold
                   content: 目白阿尔丹
                 - 「呵呵，%称呼%，看到你就让我很是安心呢。」
-        - if: era.get('status:71:熬夜') > 0
+        # STATUSNAME:1 = 熬夜
+        - if: era.get('status:71:1') > 0
           random: true
           lines:
             - color: %代表色%
@@ -178,7 +182,7 @@
                 - fontSize: bold
                   content: 目白阿尔丹
                 - 「竟然因为熬夜而差点迟到了，让%称呼%担心了，对不起。」
-        - if: era.get('status:71:熬夜') > 0
+        - if: era.get('status:71:1') > 0
           random: true
           lines:
             - color: %代表色%
@@ -186,7 +190,7 @@
                 - fontSize: bold
                   content: 目白阿尔丹
                 - 「对不起，%称呼%，昨晚因为看历史书过于沉迷，不小心睡的有点晚了。」
-        - if: era.get('status:71:熬夜') > 0
+        - if: era.get('status:71:1') > 0
           random: true
           lines:
             - color: %代表色%
@@ -217,7 +221,7 @@
                 - fontSize: bold
                   content: 目白阿尔丹
                 - 「亲爱的早上做的浓汤，非常的温暖，喝完后感觉身体的每一个细胞都在欢呼呢。」
-        - if: era.get('status:71:熬夜') > 0
+        - if: era.get('status:71:1') > 0
           random: true
           lines:
             - color: %代表色%
@@ -225,7 +229,7 @@
                 - fontSize: bold
                   content: 目白阿尔丹
                 - 「竟然因为熬夜而迟到了，亲爱的，对不起。」
-        - if: era.get('status:71:熬夜') > 0
+        - if: era.get('status:71:1') > 0
           random: true
           lines:
             - color: %代表色%
@@ -233,7 +237,7 @@
                 - fontSize: bold
                   content: 目白阿尔丹
                 - 「亲爱的对不起，昨晚看历史书又沉迷进去了，不小心睡的有点晚了。」
-        - if: era.get('status:71:熬夜') > 0
+        - if: era.get('status:71:1') > 0
           random: true
           lines:
             - color: %代表色%
@@ -245,7 +249,7 @@
 回合结束:
   sync: true
   lines:
-    - if: era.get('status:71:沉睡') === 0 && era.get('status:71:马跳S') === 0
+    - if: era.get('status:71:10') === 0 && era.get('status:71:39') === 0
       lines:
         - if: era.get('love:71') < 75
           lines:
@@ -270,11 +274,11 @@
                 - fontSize: bold
                   content: 目白阿尔丹
                 - 「那就拜托你咯，亲爱的🎵」
-    - if: era.get('status:71:沉睡') > 0 || era.get('status:71:马跳S') > 0
+    - if: era.get('status:71:10') > 0 || era.get('status:71:39') > 0
       lines:
         - if: era.get('love:71') < 75
           lines:
-            - if: era.get('status:71:马跳S') === 0
+            - if: era.get('status:71:39') === 0
               content: 「看来今天让%她%有点努力过头了呢。」
             - %你%轻轻拍了拍%她%的肩膀。
             - color: %代表色%
@@ -291,7 +295,7 @@
             - %你%陪着偶尔打着哈欠的 目白阿尔丹 回到了%她%的宿舍楼，看到 樱花千代王 接手后才放心回去。
         - if: era.get('love:71') >= 75
           lines:
-            - if: era.get('status:71:马跳S') === 0
+            - if: era.get('status:71:39') === 0
               content: 「今天也辛苦你了呢，阿尔丹」
             - 望着在%你%身旁安心熟睡的目白阿尔丹，%你%小声说道。
             - 「愿你有一个好梦，晚安」
@@ -303,7 +307,8 @@
                 - 「晚安，女神们送给我的珍宝。」
 
 闲聊:
-  - if: era.get('cflag:71:干劲') === 2
+  # CFLAGNAME:40 = 干劲
+  - if: era.get('cflag:71:40') === 2
     random: true
     lines:
       - color: %代表色%
@@ -311,7 +316,7 @@
           - fontSize: bold
             content: 目白阿尔丹
           - 「不知为何，觉得现在可以跑去任何地方……不，我想要奔跑。试着超越自己的极限……！」
-  - if: era.get('cflag:71:干劲') === 2
+  - if: era.get('cflag:71:40') === 2
     random: true
     lines:
       - color: %代表色%
@@ -319,7 +324,7 @@
           - fontSize: bold
             content: 目白阿尔丹
           - 「一分、一秒、一瞬间……觉得自己能在细微的时间集中精神。这样的话，一定就……」
-  - if: era.get('cflag:71:干劲') === 1
+  - if: era.get('cflag:71:40') === 1
     random: true
     lines:
       - color: %代表色%
@@ -327,7 +332,7 @@
           - fontSize: bold
             content: 目白阿尔丹
           - 「一、二、三……呼。体温、心跳、肌肉狀況都很好。那么，今天要做些什么呢？」
-  - if: era.get('cflag:71:干劲') === 1
+  - if: era.get('cflag:71:40') === 1
     random: true
     lines:
       - color: %代表色%
@@ -335,7 +340,7 @@
           - fontSize: bold
             content: 目白阿尔丹
           - 「腿部的狀況绝佳。可以全力以赴进行训练……光是这样就让人感到很痛快呢。」
-  - if: era.get('cflag:71:干劲') === 0
+  - if: era.get('cflag:71:40') === 0
     random: true
     lines:
       - color: %代表色%
@@ -343,7 +348,7 @@
           - fontSize: bold
             content: 目白阿尔丹
           - 「平凡无奇的一天对我来说是最棒的一天……不过『现在』要往更高的境界迈进才行呢。」
-  - if: era.get('cflag:71:干劲') === 0
+  - if: era.get('cflag:71:40') === 0
     random: true
     lines:
       - color: %代表色%
@@ -351,7 +356,7 @@
           - fontSize: bold
             content: 目白阿尔丹
           - 「珍惜眼前的每一刻……仔细且用心地进行训练吧。」
-  - if: era.get('cflag:71:干劲') === -1
+  - if: era.get('cflag:71:40') === -1
     random: true
     lines:
       - color: %代表色%
@@ -359,7 +364,7 @@
           - fontSize: bold
             content: 目白阿尔丹
           - 「脚步很沉重……但不能因為这样就心灰意冷。要相信自己……累计下来的修炼。」
-  - if: era.get('cflag:71:干劲') === -1
+  - if: era.get('cflag:71:40') === -1
     random: true
     lines:
       - color: %代表色%
@@ -367,7 +372,7 @@
           - fontSize: bold
             content: 目白阿尔丹
           - 「呼……也是会有这种时候呢。先不要着急……要不要喝杯茶放松一下？」
-  - if: era.get('cflag:71:干劲') === -2
+  - if: era.get('cflag:71:40') === -2
     random: true
     lines:
       - color: %代表色%
@@ -375,7 +380,7 @@
           - fontSize: bold
             content: 目白阿尔丹
           - 「%称呼%……考率到今天的整体性……可能需要调整一下……训练项目……」
-  - if: era.get('cflag:71:干劲') === -2
+  - if: era.get('cflag:71:40') === -2
     random: true
     lines:
       - color: %代表色%
@@ -404,7 +409,8 @@
           - fontSize: bold
             content: 目白阿尔丹
           - 「胸口的胸针是参考父亲送给我的项链设计的……只要摸着它就会感到安心。」
-  - if: era.get('cflag:69:招募状态') === 1
+  # CFLAGNAME:66 = 招募状态
+  - if: era.get('cflag:69:66') === 1
     random: true
     lines:
       - color: %代表色%
@@ -412,7 +418,7 @@
           - fontSize: bold
             content: 目白阿尔丹
           - 「每天早上叫醒%阿尔丹称呼千代王%这样平凡的日常生活……对我来说也是幸福的时刻。」
-  - if: era.get('cflag:64:招募状态') === 1
+  - if: era.get('cflag:64:66') === 1
     random: true
     lines:
       - color: %代表色%
@@ -420,7 +426,7 @@
           - fontSize: bold
             content: 目白阿尔丹
           - 「刚才遇见抱着向日葵花束的🎵%阿尔丹称呼善信%……%她%的笑容就像向日葵一样🎵」
-  - if: era.get('cflag:86:招募状态') === 1
+  - if: era.get('cflag:86:66') === 1
     random: true
     lines:
       - color: %代表色%
@@ -428,7 +434,7 @@
           - fontSize: bold
             content: 目白阿尔丹
           - 「前几天找到%阿尔丹称呼高峰%小時候的照片。小小年纪就这么出色美丽……实在是非常耀眼。」
-  - if: era.get('cflag:21:招募状态') === 1
+  - if: era.get('cflag:21:66') === 1
     random: true
     lines:
       - color: %代表色%
@@ -436,7 +442,7 @@
           - fontSize: bold
             content: 目白阿尔丹
           - 「你知道吗？%阿尔丹称呼玉藻十字%交涉的方式……能从中窥见人情世故。简直就像在看落语一样。」
-  - if: era.get('cflag:69:招募状态') === 1
+  - if: era.get('cflag:69:66') === 1
     random: true
     lines:
       - color: %代表色%
@@ -444,7 +450,7 @@
           - fontSize: bold
             content: 目白阿尔丹
           - 「每天早上叫醒%阿尔丹称呼千代王%这样平凡的日常生活……对我来说也是幸福的时刻。」
-  - if: era.get('cflag:72:招募状态') === 1
+  - if: era.get('cflag:72:66') === 1
     random: true
     lines:
       - color: %代表色%
@@ -452,7 +458,7 @@
           - fontSize: bold
             content: 目白阿尔丹
           - 「%阿尔丹称呼八重无敌%很美呢，话是这么说……呵呵，有两位同学的脸颊已经染上了樱花般的红晕呢。」
-  - if: era.get('cflag:6:招募状态') === 1
+  - if: era.get('cflag:6:66') === 1
     random: true
     lines:
       - color: %代表色%
@@ -460,7 +466,7 @@
           - fontSize: bold
             content: 目白阿尔丹
           - 「%阿尔丹称呼小栗帽%吃东西的样子总是让我忍不住看入迷。我也因为这样有多吃一点。」
-  - if: era.get('cflag:32:招募状态') === 1
+  - if: era.get('cflag:32:66') === 1
     random: true
     lines:
       - color: %代表色%

@@ -36,7 +36,10 @@
       - %YOU% 去工作的路上被一个小学部%UMA%堵住了。
       - 来不及拒绝，尚且稚嫩的%UMA%就露出了与年龄毫不相配的巨大肉棒。
       - 屈服于被改造的身体本能，%YOU% 半推半就地被小学生按在地上，享受着淫穴被巨物进进出出的感觉……
-  - if: era.get('talent:0:泌乳') > 0 && era.get('cflag:0:胸围') - era.get('cflag:0:下胸围') >= 20
+  # TALENTNAME:32 = 泌乳
+  # CFLAGNAME:7 = 胸围
+  # CFLAGNAME:3 = 下胸围
+  - if: era.get('talent:0:32') > 0 && era.get('cflag:0:7') - era.get('cflag:0:3') >= 20
     random: true
     lines:
       - %YOU% 被%UMA%们绑在架子上，身子前倾，开洞的木板卡住头、手和巨大的乳房。

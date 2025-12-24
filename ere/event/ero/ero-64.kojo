@@ -1,5 +1,6 @@
 调教开始:
-  - if: era.get('tflag:强奸') === 0
+  # TFLAGNAME:9 = 强奸
+  - if: era.get('tflag:9') === 0
     lines:
       - if: era.get('love:64') < 50
         lines:
@@ -35,7 +36,7 @@
               - fontWeight: bold
                 content: %善信%
               - 「不要过来……%称呼%❤」
-  - if: era.get('tflag:强奸') === -1
+  - if: era.get('tflag:9') === -1
     lines:
       - if: era.get('love:64') < 50
         lines:

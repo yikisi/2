@@ -116,7 +116,8 @@
       - 「为什么……会这么舒服啊。」
 
 爱抚乳头:
-  - if: era.get('tcvar:13:发情') === 0
+  # TCVARNAME:44 = 发情
+  - if: era.get('tcvar:13:44') === 0
     lines:
       - random: true
         lines:
@@ -145,7 +146,7 @@
               - fontWeight: bold
                 content: 目白麦昆
               - 「那里……已经硬了吧？呜……不要说这种话出来呀……」
-  - if: era.get('tcvar:13:发情') > 0
+  - if: era.get('tcvar:13:44') > 0
     lines:
       - random: true
         lines:
@@ -204,7 +205,7 @@
   - %她%突然渴求起来%训练员%的拥抱，整个人埋进%训练员%的怀里，颤抖着喘息。
 
 爱抚阴核:
-  - if: era.get('tcvar:13:发情') === 0
+  - if: era.get('tcvar:13:44') === 0
     lines:
       - random: true
         lines:
@@ -239,7 +240,7 @@
               - fontWeight: bold
                 content: 目白麦昆
               - 「呜……明明是……这么小的地方……却觉得整个人都、都麻掉了……」
-  - if: era.get('tcvar:13:发情') > 0
+  - if: era.get('tcvar:13:44') > 0
     lines:
       - random: true
         lines:
@@ -370,7 +371,7 @@
       - 「不要太用力啦……我还是第一次……真的会哭的哟……」
 
 手指插入:
-  - if: era.get('tcvar:13:发情') === 0
+  - if: era.get('tcvar:13:44') === 0
     lines:
       - random: true
         lines:
@@ -406,7 +407,7 @@
               - fontWeight: bold
                 content: 目白麦昆
               - 「我……我才不会这么轻易就……不……不要动作突然变快啦……我错了呜……」
-  - if: era.get('tcvar:13:发情') > 0
+  - if: era.get('tcvar:13:44') > 0
     lines:
       - random: true
         lines:
@@ -536,7 +537,7 @@
       - 「啊……呜呜……我已经……被你舔到……变得奇怪了啦……♥」
 
 舐阴:
-  - if: era.get('tcvar:13:发情') === 0
+  - if: era.get('tcvar:13:44') === 0
     lines:
       - random: true
         lines:
@@ -568,7 +569,7 @@
               - fontWeight: bold
                 content: 目白麦昆
               - 「明明只是简简单单地舔而已，为什么会舒服到这种地步呜……」
-  - if: era.get('tcvar:13:发情') > 0
+  - if: era.get('tcvar:13:44') > 0
     lines:
       - random: true
         lines:
@@ -745,7 +746,7 @@
 
 #正常位
 正常位——未插入时首次点击:
-  - if: era.get('tcvar:13:发情') === 0
+  - if: era.get('tcvar:13:44') === 0
     lines:
       - random: true
         lines:
@@ -814,7 +815,7 @@
               - fontWeight: bold
                 content: 目白麦昆
               - 「嗯嗯……我已经……不再害怕了……你尽管来……」
-  - if: era.get('tcvar:13:发情') > 0
+  - if: era.get('tcvar:13:44') > 0
     lines:
       - random: true
         lines:
@@ -892,7 +893,7 @@
 
 #后背位
 后背位——未插入时首次点击:
-  - if: era.get('tcvar:13:发情') === 0
+  - if: era.get('tcvar:13:44') === 0
     lines:
       - random: true
         lines:
@@ -933,7 +934,7 @@
                 content: 目白麦昆
               - 「啊……从这种角度进去，好像比刚才……更敏感……」
           - %她%的手紧紧抓着床单，腿部不自觉地分开了一点，迎接%训练员%缓慢的嵌入。
-  - if: era.get('tcvar:13:发情') > 0
+  - if: era.get('tcvar:13:44') > 0
     lines:
       - random: true
         lines:
@@ -978,7 +979,7 @@
               - 「好棒……从后面被你插进去的感觉……已经离不开了……♥」
 
 对面坐位:
-  - if: era.get('tcvar:13:发情') === 0
+  - if: era.get('tcvar:13:44') === 0
     lines:
       - random: true
         lines:
@@ -1020,7 +1021,7 @@
           - 肉壁因主人的呼吸而一松一紧地绞着肉茎，带来的细碎快感令 %训练员% 不禁深呼吸着。
           - 插入到了最深处之后，麦昆用颤颤巍巍的大腿支撑着将抽出来。
           - 随着麦昆的娇叫声，小穴随着重力又一次被 %训练员% 的肉棒贯穿。
-  - if: era.get('tcvar:13:发情') > 0
+  - if: era.get('tcvar:13:44') > 0
     lines:
       - random: true
         lines:
@@ -1055,7 +1056,7 @@
           - 交合处的抽插带着两人身体上的摩擦，刺激着麦昆的乳头挺立不断。
 
 对面立位:
-  - if: era.get('tcvar:13:发情') === 0
+  - if: era.get('tcvar:13:44') === 0
     lines:
       - random: ture
         lines:
@@ -1085,7 +1086,7 @@
               - 「啊啊啊……你……进去得、太深了啦……啊呃……」
           - %她%的下体一阵阵地收紧，几乎像是本能地渴求着将我完全吸入体内。
           - 被情欲感染的 %训练员% 一只手臂架着麦昆的一条腿，企图将整根肉棒塞入进去
-  - if: era.get('tcvar:13:发情') > 0
+  - if: era.get('tcvar:13:44') > 0
     lines:
       - random: true
         lines:

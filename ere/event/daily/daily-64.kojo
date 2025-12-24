@@ -161,7 +161,9 @@
           - 「嘶哈嘶哈……训练员的味道……啊！什么都没有！」
 
 聊天:
-  - if: era.get('status:64:沉睡') > 0 || era.get('status:64:马跳S') > 0
+  # STATUSNAME:10 = 沉睡
+  # STATUSNAME:39 = 马跳S
+  - if: era.get('status:64:10') > 0 || era.get('status:64:39') > 0
     lines:
       - if: d.half_life === 1
         lines:
@@ -192,7 +194,7 @@
                   - fontWeight: bold
                     content: 目白善信
                   - 「呼啊……%称呼% 的味道……嘿嘿……」
-  - if: era.get('status:64:沉睡') === 0 && era.get('status:64:马跳S') === 0
+  - if: era.get('status:64:10') === 0 && era.get('status:64:39') === 0
     lines:
       - random: true
         lines:
@@ -208,7 +210,9 @@
               - fontWeight: bold
                 content: 目白善信
               - 「要试试看打高尔夫吗？善信%小姐%可以教你哦！」
-      - if: era.get('cflag:64:育成回合计时') < 3 * 48 && era.get('base:64:体力') < era.get('maxbase:64:体力') * 0.45
+      # CFLAGNAME:48 = 育成回合计时
+      # BASENAME:0 = 体力
+      - if: era.get('cflag:64:48') < 3 * 48 && era.get('base:64:0') < era.get('maxbase:64:0') * 0.45
         random: true
         lines:
           - color: %代表色%
@@ -216,7 +220,8 @@
               - fontWeight: bold
                 content: 目白善信
               - 「呃……疲劳的感觉没法逃掉啊……甚至想请假了啊……」
-      - if: era.get('cflag:64:育成回合计时') < 3 * 48 && era.get('cflag:64:干劲') < 0
+      # CFLAGNAME:40 = 干劲
+      - if: era.get('cflag:64:48') < 3 * 48 && era.get('cflag:64:40') < 0
         random: true
         lines:
           - color: %代表色%
@@ -224,7 +229,7 @@
               - fontWeight: bold
                 content: 目白善信
               - 「好奇怪啊……脚好重……」
-      - if: era.get('cflag:64:育成回合计时') < 3 * 48 && era.get('cflag:64:干劲') > 0
+      - if: era.get('cflag:64:48') < 3 * 48 && era.get('cflag:64:40') > 0
         random: true
         lines:
           - color: %代表色%
@@ -232,7 +237,8 @@
               - fontWeight: bold
                 content: 目白善信
               - 「准备完全！无论什么样的训练我都可以做好哦，所以就放开来吧，%称呼%！」
-      - if: era.get('cflag:64:育成回合计时') < 3 * 48 && era.get('status:64:发胖') > 0
+      # STATUSNAME:3 = 发胖
+      - if: era.get('cflag:64:48') < 3 * 48 && era.get('status:64:3') > 0
         random: true
         lines:
           - color: %代表色%
@@ -240,7 +246,8 @@
               - fontWeight: bold
                 content: 目白善信
               - 「不妙，好像吃的有点多了耶……」
-      - if: era.get('cflag:64:育成回合计时') < 3 * 48 && era.get('cflag:64:照看') === 71
+      # CFLAGNAME:58 = 照看
+      - if: era.get('cflag:64:48') < 3 * 48 && era.get('cflag:64:58') === 71
         random: true
         lines:
           - color: %代表色%
@@ -248,7 +255,7 @@
               - fontWeight: bold
                 content: 目白善信
               - 「%善信称呼阿尔丹%的方法感觉还是轻了点呢～要不要下次请%她%更严格点？」
-      - if: era.get('cflag:64:育成回合计时') < 3 * 48 && era.get('cflag:64:照看') === 71 && era.get('love:71') >= 50
+      - if: era.get('cflag:64:48') < 3 * 48 && era.get('cflag:64:58') === 71 && era.get('love:71') >= 50
         random: true
         lines:
           - color: %代表色%
@@ -256,7 +263,7 @@
               - fontWeight: bold
                 content: 目白善信
               - 「总感觉%善信称呼阿尔丹%不是很认真的样子，错觉吗？」
-      - if: era.get('cflag:64:育成回合计时') < 3 * 48 && era.get('cflag:64:照看') === 71 && era.get('love:64') >= 50
+      - if: era.get('cflag:64:48') < 3 * 48 && era.get('cflag:64:58') === 71 && era.get('love:64') >= 50
         random: true
         lines:
           - color: %代表色%
@@ -269,7 +276,7 @@
               - fontWeight: bold
                 content: 目白善信
               - 「那个，%称呼%，能不能由你全部接下来呢？」
-      - if: era.get('cflag:64:育成回合计时') < 3 * 48 && era.get('cflag:64:照看') === 71 && era.get('love:64') >= 50 && era.get('love:71') >= 50 && era.get('relation:64:71') > 225
+      - if: era.get('cflag:64:48') < 3 * 48 && era.get('cflag:64:58') === 71 && era.get('love:64') >= 50 && era.get('love:71') >= 50 && era.get('relation:64:71') > 225
         random: true
         lines:
           - color: %代表色%
@@ -282,7 +289,7 @@
               - fontWeight: bold
                 content: 目白善信
               - 「等到训练结束完之后，就一起回去什么的……」
-      - if: era.get('cflag:64:育成回合计时') < 3 * 48 && era.get('cflag:64:照看') === 86
+      - if: era.get('cflag:64:48') < 3 * 48 && era.get('cflag:64:58') === 86
         random: true
         lines:
           - color: %代表色%
@@ -290,7 +297,7 @@
               - fontWeight: bold
                 content: 目白善信
               - 「不妙，%善信称呼高峰%的训练超级严格……！」
-      - if: era.get('cflag:64:育成回合计时') >= 3 * 48 && era.get('love:64') >= 75
+      - if: era.get('cflag:64:48') >= 3 * 48 && era.get('love:64') >= 75
         random: true
         lines:
           - color: %代表色%
@@ -303,7 +310,8 @@
               - fontWeight: bold
                 content: 目白善信
               - 「%称呼%～带我一起去学园嘛～」
-      - if: era.get('cflag:64:育成回合计时') >= 3 * 48 && era.get('cflag:64:照看') === 59 && era.get('cflag:0:性别') === 1 && era.get('cflag:59:性别') !== 1
+      # CFLAGNAME:0 = 性别
+      - if: era.get('cflag:64:48') >= 3 * 48 && era.get('cflag:64:58') === 59 && era.get('cflag:0:0') === 1 && era.get('cflag:59:0') !== 1
         random: true
         lines:
           - color: %代表色%
@@ -316,7 +324,7 @@
               - fontWeight: bold
                 content: 目白善信
               - 「但是安心吧，必要的训练就交给我！」
-      - if: era.get('cflag:64:育成回合计时') >= 3 * 48 && era.get('cflag:64:照看') === 65
+      - if: era.get('cflag:64:48') >= 3 * 48 && era.get('cflag:64:58') === 65
         random: true
         lines:
           - color: %代表色%
@@ -324,7 +332,7 @@
               - fontWeight: bold
                 content: 目白善信
               - 「%善信称呼太阳神%给人的感觉果然超——热情！感觉都不像我在照顾%她%了呢。」
-      - if: era.get('cflag:64:育成回合计时') >= 3 * 48 && era.get('cflag:64:照看') === 65 && era.get('love:64') >= 50
+      - if: era.get('cflag:64:48') >= 3 * 48 && era.get('cflag:64:58') === 65 && era.get('love:64') >= 50
         random: true
         lines:
           - color: %代表色%
@@ -337,7 +345,7 @@
               - fontWeight: bold
                 content: 目白善信
               - 「嗯？难道说……%称呼%你吃醋了？」
-      - if: era.get('cflag:64:育成回合计时') >= 3 * 48 && era.get('cflag:64:照看') === 74
+      - if: era.get('cflag:64:48') >= 3 * 48 && era.get('cflag:64:58') === 74
         random: true
         lines:
           - color: %代表色%
@@ -350,7 +358,7 @@
               - fontWeight: bold
                 content: 目白善信
               - 「和平时慢悠悠的样子，完全不一样呢」
-      - if: era.get('cflag:64:育成回合计时') >= 3 * 48 && era.get('cflag:64:照看') === 74
+      - if: era.get('cflag:64:48') >= 3 * 48 && era.get('cflag:64:58') === 74
         random: true
         lines:
           - color: %代表色%
@@ -395,7 +403,8 @@
               - fontWeight: bold
                 content: 目白善信
               - 「%称呼%会一直是我的『训练员』的，对吧？」
-      - if: (era.get('cflag:64:妊娠阶段') >> 2) > 0
+      # CFLAGNAME:81 = 妊娠阶段
+      - if: (era.get('cflag:64:81') >> 2) > 0
         random: true
         lines:
           - color: %代表色%
@@ -403,7 +412,8 @@
               - fontWeight: bold
                 content: 目白善信
               - 「最近食欲不是很好呢……啊，肚子肯定没关系的！」
-      - if: d.half_life === 0 && era.get('cflag:59:招募状态') === 1 && era.get('cflag:0:性别') === 1 && era.get('cflag:59:性别') !== 1
+      # CFLAGNAME:66 = 招募状态
+      - if: d.half_life === 0 && era.get('cflag:59:66') === 1 && era.get('cflag:0:0') === 1 && era.get('cflag:59:0') !== 1
         random: true
         lines:
           - color: %代表色%
@@ -411,7 +421,7 @@
               - fontWeight: bold
                 content: 目白善信
               - 「%善信称呼多伯%对男性一直都应付不了，给你添麻烦了……」
-      - if: d.half_life === 0 && era.get('cflag:65:招募状态') === 1
+      - if: d.half_life === 0 && era.get('cflag:65:66') === 1
         random: true
         lines:
           - color: %代表色%
@@ -419,7 +429,7 @@
               - fontWeight: bold
                 content: 目白善信
               - 「%善信称呼太阳神%又在说我听不懂的话了……不过我会全部搞懂的！」
-      - if: d.half_life === 0 && era.get('cflag:74:招募状态') === 1
+      - if: d.half_life === 0 && era.get('cflag:74:66') === 1
         random: true
         lines:
           - color: %代表色%
@@ -524,7 +534,7 @@
 主界面:
   sync: true
   lines:
-    - if: era.get('status:64:沉睡') === 0 && era.get('status:64:马跳S') === 0
+    - if: era.get('status:64:10') === 0 && era.get('status:64:39') === 0
       lines:
         - random: true
           lines:
@@ -586,7 +596,7 @@
                 - fontWeight: bold
                   content: 目白善信
                 - 「%称呼%你会一直陪我的……对吧？」
-    - if: era.get('status:64:沉睡') > 0 || era.get('status:64:马跳S') > 0
+    - if: era.get('status:64:10') > 0 || era.get('status:64:39') > 0
       lines:
         - random: true
           lines:
@@ -793,7 +803,7 @@
       - 目白善信 似乎是很开心的样子，随着音乐跳动着。
 
 电影:
-  - if: era.get('cflag:71:招募状态') !== 1
+  - if: era.get('cflag:71:66') !== 1
     random: true
     lines:
       - color: %代表色%
@@ -801,7 +811,7 @@
           - fontWeight: bold
             content: 目白善信
           - 「啊，那是%善信称呼阿尔丹%推荐过的电影唉！」
-  - if: era.get('cflag:71:招募状态') === 1
+  - if: era.get('cflag:71:66') === 1
     random: true
     lines:
       - color: %代表色%
@@ -979,7 +989,7 @@
                 content: 目白善信
               - 「和%称呼%在一起的时候，不会感觉到害羞什么的呢……」
           - 目白善信贴在 %T% 的身边，稍微朝着身旁歪头靠着 %T% 的肩膀。
-      - if: era.get('cflag:64:性别') !== 1
+      - if: era.get('cflag:64:0') !== 1
         lines:
           - color: %代表色%
             content:
@@ -1051,7 +1061,8 @@
 晚安:
   sync: true
   lines:
-    - if: era.get('status:0:沉睡') === 0 && era.get('status:64:沉睡') === 0 && era.get('status:64:马跳S') === 0
+    # STATUSNAME:10 = 沉睡
+    - if: era.get('status:0:10') === 0 && era.get('status:64:10') === 0 && era.get('status:64:39') === 0
       lines:
         - random: true
           lines:
@@ -1069,11 +1080,11 @@
                 - fontWeight: bold
                   content: 目白善信
                 - 「嗯……好像稍微努力过度了点啊，嘿嘿～」
-    - if: era.get('status:0:沉睡') === 0 && (era.get('status:64:沉睡') > 0 || era.get('status:64:马跳S') > 0)
+    - if: era.get('status:0:10') === 0 && (era.get('status:64:10') > 0 || era.get('status:64:39') > 0)
       lines:
         - 看着正在沉睡的目白善信，完全做不到主动去叫醒%她%，只能辛苦一下把%她%送回宿舍了。
         - 这个时候耍坏的话，%她%会不会醒过来呢？
-    - if: era.get('status:0:沉睡') > 0
+    - if: era.get('status:0:10') > 0
       lines:
         - 陷入沉睡中的 %T% 在朦胧中似乎看见了目白善信想要动手却又犹豫不决的样子，最后留下的只有一声亲切又温柔的道别声。
 
@@ -1118,7 +1129,10 @@
           - 转过身乖巧的走进了宿舍，却在门口又偷偷看了一眼 %T% 的身影，这才低着头消失在拐角里。
 
 读档对话:
-  - if: (era.get('cflag:64:妊娠阶段') !== 2 && !era.get('cflag:64:扩展变量').report) || era.get('exp:64:生产次数') > 0
+  # CFLAGNAME:81 = 妊娠阶段
+  # CFLAGNAME:57 = 扩展变量
+  # EXPNAME:117 = 生产次数
+  - if: (era.get('cflag:64:81') !== 2 && !era.get('cflag:64:57').report) || era.get('exp:64:117') > 0
     lines:
       - color: %代表色%
         content:
@@ -1175,7 +1189,7 @@
       - 善信的腰臀不自觉地扭动着，随着速度加快，%T%能听到%她%那难以隐藏的粗重鼻息和轻喘
       -
       - 「嗯……嗯……」
-  - if: era.get('cflag:64:性别') !== 1
+  - if: era.get('cflag:64:0') !== 1
     acc: 2
     content: 抚摸股间
     lines:
@@ -1385,7 +1399,7 @@
       - fontWeight: bold
         content: 目白善信
       - 「说起来，还有邀请我上去跑一场的哦」
-  - if: (era.get('cflag:64:妊娠阶段') >> 4) === 0
+  - if: (era.get('cflag:64:81') >> 4) === 0
     acc: 1
     content: 「既然来了，那就去试试看怎么样？」
     lines:

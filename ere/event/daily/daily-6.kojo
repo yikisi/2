@@ -56,7 +56,8 @@
           - 「比赛的时候总有一种训练员在跟我一起跑的感觉。……实在是让我心头为之一振。」
 
 闲聊:
-  - if: era.get('base:6:体力') <= era.get('maxbase:6:体力') * .45
+  # BASENAME:0 = 体力
+  - if: era.get('base:6:0') <= era.get('maxbase:6:0') * .45
     random: true
     lines:
       - color: %代表色%
@@ -64,7 +65,7 @@
           - fontSize: bold
             content: 小栗帽
           - 「呣……看来我有点累了。」
-  - if: era.get('base:6:体力') <= era.get('maxbase:6:体力') * .45
+  - if: era.get('base:6:0') <= era.get('maxbase:6:0') * .45
     random: true
     lines:
       - color: %代表色%
@@ -72,7 +73,8 @@
           - fontSize: bold
             content: 小栗帽
           - 「不好意思，让我稍微休息一下。」
-  - if: era.get('base:6:体力') <= era.get('maxbase:6:体力') * .45 && era.get('cflag:21:招募状态') === 1
+  # CFLAGNAME:66 = 招募状态
+  - if: era.get('base:6:0') <= era.get('maxbase:6:0') * .45 && era.get('cflag:21:66') === 1
     random: true
     lines:
       - color: %代表色%
@@ -80,7 +82,7 @@
           - fontSize: bold
             content: 小栗帽
           - 「刚才跟小玉吵架了……但你听我说啊，说到乌贼烧的话就会想到原只乌贼烧，很正常吧……？」
-  - if: era.get('base:6:体力') <= era.get('maxbase:6:体力') * .45 && era.get('cflag:45:招募状态') === 1
+  - if: era.get('base:6:0') <= era.get('maxbase:6:0') * .45 && era.get('cflag:45:66') === 1
     random: true
     lines:
       - color: %代表色%
@@ -88,7 +90,7 @@
           - fontSize: bold
             content: 小栗帽
           - 「嗯……刚才在走廊被小海湾摸头了……我发型睡坏了吗……？」
-  - if: era.get('base:6:体力') <= era.get('maxbase:6:体力') * .45 && era.get('cflag:34:招募状态') === 1
+  - if: era.get('base:6:0') <= era.get('maxbase:6:0') * .45 && era.get('cflag:34:66') === 1
     random: true
     lines:
       - color: %代表色%
@@ -96,7 +98,8 @@
           - fontSize: bold
             content: 小栗帽
           - 「刚才跟稻荷去吃午饭了，她吃饭的速度是真的快啊。我感觉那样对身体实在不好吧……」
-  - if: era.get('cflag:6:干劲') === 2
+  # CFLAGNAME:40 = 干劲
+  - if: era.get('cflag:6:40') === 2
     random: true
     lines:
       - color: %代表色%
@@ -104,7 +107,7 @@
           - fontSize: bold
             content: 小栗帽
           - 「嗬！嗬！呜噫呼！你说这个？我状态很好的时候就会这样。所以你就尽情期待吧！」
-  - if: era.get('cflag:6:干劲') === 2
+  - if: era.get('cflag:6:40') === 2
     random: true
     lines:
       - color: %代表色%
@@ -112,7 +115,7 @@
           - fontSize: bold
             content: 小栗帽
           - 「这个感觉……嗯。真是期待训练啊！」
-  - if: era.get('cflag:6:干劲') === 1
+  - if: era.get('cflag:6:40') === 1
     random: true
     lines:
       - color: %代表色%
@@ -120,7 +123,7 @@
           - fontSize: bold
             content: 小栗帽
           - 「吃了好多，今天的状态也很好！」
-  - if: era.get('cflag:6:干劲') === 1
+  - if: era.get('cflag:6:40') === 1
     random: true
     lines:
       - color: %代表色%
@@ -128,7 +131,7 @@
           - fontSize: bold
             content: 小栗帽
           - 「嗯呣……今天心情不错。来进行大量训练吧！」
-  - if: era.get('cflag:6:干劲') === 0
+  - if: era.get('cflag:6:40') === 0
     random: true
     lines:
       - color: %代表色%
@@ -136,7 +139,7 @@
           - fontSize: bold
             content: 小栗帽
           - 「好了，今天要怎么训练？」
-  - if: era.get('cflag:6:干劲') === 0
+  - if: era.get('cflag:6:40') === 0
     random: true
     lines:
       - color: %代表色%
@@ -144,7 +147,7 @@
           - fontSize: bold
             content: 小栗帽
           - 「好，今天也要加油。」
-  - if: era.get('cflag:6:干劲') === -1
+  - if: era.get('cflag:6:40') === -1
     random: true
     lines:
       - color: %代表色%
@@ -152,7 +155,7 @@
           - fontSize: bold
             content: 小栗帽
           - 「无论如何状态都还是很差。是不是因为睡不够呢……」
-  - if: era.get('cflag:6:干劲') === -1
+  - if: era.get('cflag:6:40') === -1
     random: true
     lines:
       - color: %代表色%
@@ -160,7 +163,7 @@
           - fontSize: bold
             content: 小栗帽
           - 「呜……使不出力气。是不是该多吃点的……」
-  - if: era.get('cflag:6:干劲') === -2
+  - if: era.get('cflag:6:40') === -2
     random: true
     lines:
       - color: %代表色%
@@ -168,7 +171,7 @@
           - fontSize: bold
             content: 小栗帽
           - 「呣呣……啊，抱歉。我不管怎么样都提不起劲……」
-  - if: era.get('cflag:6:干劲') === -2
+  - if: era.get('cflag:6:40') === -2
     random: true
     lines:
       - color: %代表色%
@@ -288,7 +291,7 @@
           - fontSize: bold
             content: 小栗帽
           - 「为什么爪子的力道那么弱啊……！」
-  - if: era.get('cflag:21:招募状态') === 1 && era.get('cflag:45:招募状态') === 1
+  - if: era.get('cflag:21:66') === 1 && era.get('cflag:45:66') === 1
     random: true
     lines:
       - color: %代表色%
@@ -328,7 +331,7 @@
           - fontSize: bold
             content: 小栗帽
           - 「唱歌和比赛一样都让人热血沸腾啊。」
-  - if: era.get('cflag:21:招募状态') === 1 && era.get('cflag:45:招募状态') === 1
+  - if: era.get('cflag:21:66') === 1 && era.get('cflag:45:66') === 1
     random: true
     lines:
       - color: %代表色%
@@ -459,7 +462,7 @@
           - fontSize: bold
             content: 小栗帽
           - 「训练员做的饭真是好吃啊，你将来一定会成为一个好妻子的。」
-  - if: era.get('cflag:21:招募状态') === 1
+  - if: era.get('cflag:21:66') === 1
     random: true
     lines:
       - color: %代表色%

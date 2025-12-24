@@ -1,7 +1,9 @@
 选中互动对象:
   sync: true
   lines:
-    - if: era.get('status:13:沉睡') === 0 && era.get('status:13:马跳S') === 0
+    # STATUSNAME:10 = 沉睡
+    # STATUSNAME:39 = 马跳S
+    - if: era.get('status:13:10') === 0 && era.get('status:13:39') === 0
       random: true
       lines:
         - color: %代表色%
@@ -9,7 +11,7 @@
             - fontSize: bold
               content: 目白麦昆
             - 「今天的我，也为了延续目白家的荣光而在努力着。」
-    - if: era.get('status:13:沉睡') === 0 && era.get('status:13:马跳S') === 0
+    - if: era.get('status:13:10') === 0 && era.get('status:13:39') === 0
       random: true
       lines:
         - color: %代表色%
@@ -17,7 +19,7 @@
             - fontSize: bold
               content: 目白麦昆
             - 「今天的训练也请你多多关照，%称呼%。」
-    - if: era.get('status:13:沉睡') === 0 && era.get('status:13:马跳S') === 0
+    - if: era.get('status:13:10') === 0 && era.get('status:13:39') === 0
       random: true
       lines:
         - color: %代表色%
@@ -25,7 +27,7 @@
             - fontSize: bold
               content: 目白麦昆
             - 「你在找我吗，%称呼%？」
-    - if: era.get('status:13:沉睡') > 0 || era.get('status:13:马跳S') > 0
+    - if: era.get('status:13:10') > 0 || era.get('status:13:39') > 0
       random: true
       lines:
         - 「睡着了……」
@@ -76,7 +78,8 @@
             - fontSize: bold
               content: 目白麦昆
             - 「早上好，为了度过美好的一天，就让我们打起精神来吧。」
-    - if: era.get('status:13:熬夜') > 0
+    # STATUSNAME:1 = 熬夜
+    - if: era.get('status:13:1') > 0
       random: true
       lines:
         - color: %代表色%
@@ -84,7 +87,7 @@
             - fontSize: bold
               content: 目白麦昆
             - 「作为目白家的%马娘%，竟然熬夜而差点迟到了，真是羞愧啊。」
-    - if: era.get('status:13:熬夜') > 0
+    - if: era.get('status:13:1') > 0
       random: true
       lines:
         - color: %代表色%
@@ -92,7 +95,7 @@
             - fontSize: bold
               content: 目白麦昆
             - 「哈欠～说来昨天那个棒球比赛可真是精彩啊……我什么都没有说哦！真的没有！」
-    - if: era.get('status:13:熬夜') > 0
+    - if: era.get('status:13:1') > 0
       random: true
       lines:
         - color: %代表色%
@@ -104,15 +107,15 @@
 回合结束互动对话:
   sync: true
   lines:
-    - if: era.get('status:13:沉睡') > 0 || era.get('status:13:马跳S') > 0
+    - if: era.get('status:13:10') > 0 || era.get('status:13:39') > 0
       lines:
-        - if: era.get('status:13:马跳S') === 0
+        - if: era.get('status:13:39') === 0
           content: 「真是喜欢勉强自己……」
         - %训练员%稍有些辛苦地把精力耗光的麦昆以公主抱的形式抱到了宿舍楼下。
         - 「总之就拜托你送%她%回去了。」
         - 宿舍长点了点头，小心地将麦昆接过去。
         - 放下担子的%训练员%深吸了一口气，看了看灯火通明的学生宿舍，便转头回到自己的宿舍。
-    - if: era.get('status:13:沉睡') === 0 && era.get('status:13:马跳S') === 0
+    - if: era.get('status:13:10') === 0 && era.get('status:13:39') === 0
       lines:
         - color: %代表色%
           content:
@@ -125,7 +128,8 @@
 
 
 闲聊:
-  - if: era.get('cflag:13:干劲') === 2
+  # CFLAGNAME:40 = 干劲
+  - if: era.get('cflag:13:40') === 2
     random: true
     lines:
       - color: %代表色%
@@ -133,7 +137,7 @@
           - fontSize: bold
             content: 目白麦昆
           - 「现在状态极佳，这才是目白家的%马娘%的我该有的姿态！」
-  - if: era.get('cflag:13:干劲') === 2
+  - if: era.get('cflag:13:40') === 2
     random: true
     lines:
       - color: %代表色%
@@ -141,7 +145,7 @@
           - fontSize: bold
             content: 目白麦昆
           - 「今天感觉活力满满，来吧，%称呼%，无论多大的训练强度我都会接受的！」
-  - if: era.get('cflag:13:干劲') === 1
+  - if: era.get('cflag:13:40') === 1
     random: true
     lines:
       - color: %代表色%
@@ -149,7 +153,7 @@
           - fontSize: bold
             content: 目白麦昆
           - 「%称呼%，今天有什么训练吗？看我用比平常更快的速度来完成。」
-  - if: era.get('cflag:13:干劲') === 1
+  - if: era.get('cflag:13:40') === 1
     random: true
     lines:
       - color: %代表色%
@@ -157,7 +161,7 @@
           - fontSize: bold
             content: 目白麦昆
           - 「感觉状态要比平常好哦。」
-  - if: era.get('cflag:13:干劲') === 0
+  - if: era.get('cflag:13:40') === 0
     random: true
     lines:
       - color: %代表色%
@@ -165,7 +169,7 @@
           - fontSize: bold
             content: 目白麦昆
           - 「来吧，%称呼%，要从什么开始做起呢？」
-  - if: era.get('cflag:13:干劲') === 0
+  - if: era.get('cflag:13:40') === 0
     random: true
     lines:
       - color: %代表色%
@@ -173,7 +177,7 @@
           - fontSize: bold
             content: 目白麦昆
           - 「今天我也会努力进行训练哦，%称呼%。」
-  - if: era.get('cflag:13:干劲') === -1
+  - if: era.get('cflag:13:40') === -1
     random: true
     lines:
       - color: %代表色%
@@ -181,7 +185,7 @@
           - fontSize: bold
             content: 目白麦昆
           - 「不好意思，%称呼%，今天注意力不太集中……」
-  - if: era.get('cflag:13:干劲') === -1
+  - if: era.get('cflag:13:40') === -1
     random: true
     lines:
       - color: %代表色%
@@ -189,7 +193,7 @@
           - fontSize: bold
             content: 目白麦昆
           - 「呜呜，感觉今天好像提不起劲头来……」
-  - if: era.get('cflag:13:干劲') === -2
+  - if: era.get('cflag:13:40') === -2
     random: true
     lines:
       - color: %代表色%
@@ -197,7 +201,7 @@
           - fontSize: bold
             content: 目白麦昆
           - 「虽然知道要积极一点，但是身体好像不允许……」
-  - if: era.get('cflag:13:干劲') === -2
+  - if: era.get('cflag:13:40') === -2
     random: true
     lines:
       - color: %代表色%
@@ -212,7 +216,8 @@
           - fontSize: bold
             content: 目白麦昆
           - 「因为目白家很大，我小时候认路需要玩偶来标记呢。」
-  - if: era.get('cflag:7:招募状态') === 1
+  # CFLAGNAME:66 = 招募状态
+  - if: era.get('cflag:7:66') === 1
     random: true
     lines:
       - color: %代表色%
@@ -220,7 +225,7 @@
           - fontSize: bold
             content: 目白麦昆
           - 「%麦昆称呼船%……不知道为什么自从偶然的认识之后就一直缠着我。」
-  - if: era.get('cflag:63:招募状态') === 1
+  - if: era.get('cflag:63:66') === 1
     random: true
     lines:
       - color: %代表色%
@@ -389,7 +394,8 @@
       - 因为要做胜者舞台的练习，于是%训练员%与麦昆来到了卡拉OK。
       - 「果然麦昆的嗓音就是那天籁之音啊。」
       - %训练员%听完了麦昆的歌唱之后，不自觉地露出老%父亲%一般的笑容。
-  - if: era.get('cflag:13:扩展变量')?.love_40 === 2
+  # CFLAGNAME:57 = 扩展变量
+  - if: era.get('cflag:13:57')?.love_40 === 2
     random: true
     lines:
       - color: %代表色%

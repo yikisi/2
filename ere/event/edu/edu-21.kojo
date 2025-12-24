@@ -103,12 +103,13 @@
         content: 玉藻十字
       - 「爹，这是咱训练员……」
   - 中年男人的头发已经花白了些许，眉宇之间挤满了深深的纹路。
-  - if: era.get('cflag:21:性别') === 1
+  # CFLAGNAME:0 = 性别
+  - if: era.get('cflag:21:0') === 1
     content:
       - fontWeight: bold
         content: 玉藻父
       - 「您好，犬子平常受您照顾了。」
-  - if: era.get('cflag:21:性别') !== 1
+  - if: era.get('cflag:21:0') !== 1
     content:
       - fontWeight: bold
         content: 玉藻父
@@ -232,7 +233,8 @@
           - fontWeight: bold
             content: 玉藻十字
           - 「疼疼疼……抱歉哪，训练员……」
-  - if: era.get('flag:当前声望') >= 1000
+  # FLAGNAME:15 = 当前声望
+  - if: era.get('flag:15') >= 1000
     acc: 2
     content: 「跳起来——！！」（获得一层疲惫）
     lines:
@@ -604,7 +606,8 @@
   - 在赛%马娘%圈子中广泛流传着一种说法：「最快的%马娘%赢皋月赏，最幸运的%马娘%赢得德比，最强的%马娘%赢菊花赏。」
   - 而被称为《德比魔咒》的传说更是让人莫名地感到不安——德比%马娘%里有为数不少无以为继，泯然众人。
   - 而若采百家之言，则「因为挑战三冠导致消耗过度」的说法最为可信。
-  - if: era.get('cflag:301:扩展变量').who_am_i > 0
+  # CFLAGNAME:57 = 扩展变量
+  - if: era.get('cflag:301:57').who_am_i > 0
     lines:
       - 比方说……丰收时刻——
       - 在东京优骏后患上伤病而被迫退役的传说赛%马娘%……
@@ -1034,9 +1037,9 @@
   - 在当天训练结束之后，二人便一起前往电信公司的线下店。
   - if: era.get('love:21') >= 75
     content: 穿着休闲的玉藻十字甚至被不明就里的职员当成了%你%的爱人，为这个小插曲谱上了一段欢快的和音。
-  - if: era.get('love:21') < 75 && era.get('cflag:21:性别') === 1
+  - if: era.get('love:21') < 75 && era.get('cflag:21:0') === 1
     content: 穿着休闲的玉藻十字甚至被不明就里的职员当成了%你%的弟弟，为这个小插曲谱上了一段欢快的和音。
-  - if: era.get('love:21') < 75 && era.get('cflag:21:性别') !== 1
+  - if: era.get('love:21') < 75 && era.get('cflag:21:0') !== 1
     content: 穿着休闲的玉藻十字甚至被不明就里的职员当成了%你%的妹妹，为这个小插曲谱上了一段欢快的和音。
 
 春三冠的鬼门关:
@@ -1468,13 +1471,13 @@
       - fontWeight: bold
         content: 玉藻十字
       - 「咱可是被叫小童了，小童，知道吗？！」
-  - if: era.get('cflag:21:性别') === 1
+  - if: era.get('cflag:21:0') === 1
     color: %玉藻色%
     content:
       - fontWeight: bold
         content: 玉藻十字
       - 「行吧，反正老子就是长得矮了……」
-  - if: era.get('cflag:21:性别') !== 1
+  - if: era.get('cflag:21:0') !== 1
     color: %玉藻色%
     content:
       - fontWeight: bold
@@ -1518,7 +1521,7 @@
           - fontWeight: bold
             content: 玉藻十字
           - 「这不是跟我平常一模一样吗！！！」
-  - if: era.get('cflag:21:性别') !== 1
+  - if: era.get('cflag:21:0') !== 1
     acc: 3
     content: 「性感？」（爱慕+5）
     lines:

@@ -201,7 +201,8 @@
           - 「所以呢，%称呼%，要记得把身上的各个地方都好好地洗干净等着我哦。」
       - 明明是一如既往的笑容，却有一种不容拒绝的魄力。
       - 今天晚上，%你%到底会变成什么样子呢……
-  - if: era.get('cflag:100:干劲') === -2
+  # CFLAGNAME:40 = 干劲
+  - if: era.get('cflag:100:40') === -2
     random: true
     lines:
       - color: %代表色%
@@ -209,7 +210,7 @@
           - fontWeight: bold
             content: 奇锐骏
           - 「……唏唷唷……完全使不上劲呢～」
-  - if: era.get('cflag:100:干劲') === -2
+  - if: era.get('cflag:100:40') === -2
     random: true
     lines:
       - color: %代表色%
@@ -217,7 +218,7 @@
           - fontWeight: bold
             content: 奇锐骏
           - 「唔……话说，接下来要做什么来着呢？今天迷迷糊糊的，不小心给忘了啊。」
-  - if: era.get('cflag:100:干劲') === -2
+  - if: era.get('cflag:100:40') === -2
     random: true
     lines:
       - color: %代表色%
@@ -225,7 +226,7 @@
           - fontWeight: bold
             content: 奇锐骏
           - 「库呼呼……差点睡过去了呢。这样可不行呢，得在鼻子下面稍微抹点清凉膏……」
-  - if: era.get('cflag:100:干劲') === -2
+  - if: era.get('cflag:100:40') === -2
     random: true
     lines:
       - color: %代表色%
@@ -233,7 +234,7 @@
           - fontWeight: bold
             content: 奇锐骏
           - 「扑通……啊，差点踩到青蛙了（摔了一跤）呢～」
-  - if: era.get('cflag:100:干劲') === -2
+  - if: era.get('cflag:100:40') === -2
     random: true
     lines:
       - color: %代表色%
@@ -241,7 +242,7 @@
           - fontWeight: bold
             content: 奇锐骏
           - 「嗯……回去还要腌卡擦咔嚓干呢，不打起精神来可不行呢～」
-  - if: era.get('cflag:100:干劲') === -1
+  - if: era.get('cflag:100:40') === -1
     random: true
     lines:
       - color: %代表色%
@@ -249,7 +250,7 @@
           - fontWeight: bold
             content: 奇锐骏
           - 「呼……坚持就是力量呢～所以不要紧的哦。」
-  - if: era.get('cflag:100:干劲') === -1
+  - if: era.get('cflag:100:40') === -1
     random: true
     lines:
       - color: %代表色%
@@ -257,7 +258,7 @@
           - fontWeight: bold
             content: 奇锐骏
           - 「哎嘿嘿……稍微有点使不上劲了呢。」
-  - if: era.get('cflag:100:干劲') === -1
+  - if: era.get('cflag:100:40') === -1
     random: true
     lines:
       - color: %代表色%
@@ -265,7 +266,7 @@
           - fontWeight: bold
             content: 奇锐骏
           - 「呼呼呼，要像同龄人一样努力才行呢。」
-  - if: era.get('cflag:100:干劲') === -1
+  - if: era.get('cflag:100:40') === -1
     random: true
     lines:
       - color: %代表色%
@@ -273,7 +274,7 @@
           - fontWeight: bold
             content: 奇锐骏
           - 「深呼吸——呼、呼～得继续绷紧神经才行呢。」
-  - if: era.get('cflag:100:干劲') === -1
+  - if: era.get('cflag:100:40') === -1
     random: true
     lines:
       - color: %代表色%
@@ -281,7 +282,8 @@
           - fontWeight: bold
             content: 奇锐骏
           - 「注意力……被眼前呼呼飞的小苍蝇给打乱了呢——」
-  - if: (era.get('cflag:100:育成回合计时') < 3 * 48) && era.get('cflag:100:干劲') === 0
+  # CFLAGNAME:48 = 育成回合计时
+  - if: (era.get('cflag:100:48') < 3 * 48) && era.get('cflag:100:40') === 0
     random: true
     lines:
       - color: %代表色%
@@ -289,7 +291,7 @@
           - fontWeight: bold
             content: 奇锐骏
           - 「争口气～好，靠着墙边拍了一下背，精神了呢。」
-  - if: (era.get('cflag:100:育成回合计时') < 3 * 48) && era.get('cflag:100:干劲') === 0
+  - if: (era.get('cflag:100:48') < 3 * 48) && era.get('cflag:100:40') === 0
     random: true
     lines:
       - color: %代表色%
@@ -297,7 +299,7 @@
           - fontWeight: bold
             content: 奇锐骏
           - 「%称呼%，我们开始训练吧～」
-  - if: (era.get('cflag:100:育成回合计时') < 3 * 48) && era.get('cflag:100:干劲') === 0
+  - if: (era.get('cflag:100:48') < 3 * 48) && era.get('cflag:100:40') === 0
     random: true
     lines:
       - color: %代表色%
@@ -305,7 +307,7 @@
           - fontWeight: bold
             content: 奇锐骏
           - 「扩胸运动——已经做完了哦～」
-  - if: (era.get('cflag:100:育成回合计时') < 3 * 48) && era.get('cflag:100:干劲') === 0
+  - if: (era.get('cflag:100:48') < 3 * 48) && era.get('cflag:100:40') === 0
     random: true
     lines:
       - color: %代表色%
@@ -313,7 +315,7 @@
           - fontWeight: bold
             content: 奇锐骏
           - 「今天也踏踏实实、一步一个脚印的努力吧～」
-  - if: (era.get('cflag:100:育成回合计时') < 3 * 48) && era.get('cflag:100:干劲') === 0
+  - if: (era.get('cflag:100:48') < 3 * 48) && era.get('cflag:100:40') === 0
     random: true
     lines:
       - color: %代表色%
@@ -321,7 +323,7 @@
           - fontWeight: bold
             content: 奇锐骏
           - 「该走了哦，%称呼%。」
-  - if: era.get('cflag:100:干劲') === 1
+  - if: era.get('cflag:100:40') === 1
     random: true
     lines:
       - color: %代表色%
@@ -329,7 +331,7 @@
           - fontWeight: bold
             content: 奇锐骏
           - 「嗯～那么，%称呼%，今天的训练是什么呢～？」
-  - if: era.get('cflag:100:干劲') === 1
+  - if: era.get('cflag:100:40') === 1
     random: true
     lines:
       - color: %代表色%
@@ -337,7 +339,7 @@
           - fontWeight: bold
             content: 奇锐骏
           - 「不管是什么训练，我都会认～真～对待的哦。」
-  - if: era.get('cflag:100:干劲') === 1
+  - if: era.get('cflag:100:40') === 1
     random: true
     lines:
       - color: %代表色%
@@ -345,7 +347,7 @@
           - fontWeight: bold
             content: 奇锐骏
           - 「盐分补给也很重要，来吃一点嘎吱嘎吱干吧～」
-  - if: era.get('cflag:100:干劲') === 1
+  - if: era.get('cflag:100:40') === 1
     random: true
     lines:
       - color: %代表色%
@@ -353,7 +355,7 @@
           - fontWeight: bold
             content: 奇锐骏
           - 「哼、哼～拉伸运动准备到位～接下来要认真上了哦。」
-  - if: era.get('cflag:100:干劲') === 1
+  - if: era.get('cflag:100:40') === 1
     random: true
     lines:
       - color: %代表色%
@@ -361,7 +363,7 @@
           - fontWeight: bold
             content: 奇锐骏
           - 「啊～%称呼%，刚刚你说了什么啊？」
-  - if: era.get('cflag:100:干劲') === 2
+  - if: era.get('cflag:100:40') === 2
     random: true
     lines:
       - color: %代表色%
@@ -369,7 +371,7 @@
           - fontWeight: bold
             content: 奇锐骏
           - 「呼呼呼～更加严格的训练也是可以的哦。」
-  - if: era.get('cflag:100:干劲') === 2
+  - if: era.get('cflag:100:40') === 2
     random: true
     lines:
       - color: %代表色%
@@ -377,7 +379,7 @@
           - fontWeight: bold
             content: 奇锐骏
           - 「阿拉啦……已经到训练的时间了啊～」
-  - if: era.get('cflag:100:干劲') === 2
+  - if: era.get('cflag:100:40') === 2
     random: true
     lines:
       - color: %代表色%
@@ -385,7 +387,7 @@
           - fontWeight: bold
             content: 奇锐骏
           - 「今天天气很好呢～看着太阳公公啊，总感觉干劲十足了～」
-  - if: era.get('cflag:100:干劲') === 2
+  - if: era.get('cflag:100:40') === 2
     random: true
     lines:
       - color: %代表色%
@@ -393,7 +395,7 @@
           - fontWeight: bold
             content: 奇锐骏
           - 「哎呀呀……看到了赛道啊，总感觉心里痒呼呼的呢～」
-  - if: era.get('cflag:100:干劲') === 2
+  - if: era.get('cflag:100:40') === 2
     random: true
     lines:
       - color: %代表色%
@@ -401,7 +403,7 @@
           - fontWeight: bold
             content: 奇锐骏
           - 「训练结束了之后啊，我想要把被子拿出来晒呢～%称呼%一会儿能来陪我吗？」
-  - if: "!(era.get('cflag:100:育成回合计时') < 3 * 48)"
+  - if: "!(era.get('cflag:100:48') < 3 * 48)"
     random: true
     lines:
       - 奇锐骏一直保持着轻松的表情。
@@ -514,7 +516,8 @@
   - 而根据奇锐骏制定的家务工资表，%你%每完成一项工作，奇锐骏就会免除%你%一部分的债务。
   - 比如做饭、洗碗、一起锻炼、牵着手散步。
   - 还有讲故事、摸摸头、背部按摩、咬舌头……当然是奇锐骏自发去给%你%去做。
-  - if: era.get('cflag:100:性别') * era.get('cflag:0:性别') !== 1
+  # CFLAGNAME:0 = 性别
+  - if: era.get('cflag:100:0') * era.get('cflag:0:0') !== 1
     content: 以及接吻、爱抚、生育、育儿、二胎、三胎之类的额外津贴……虽然这些现在还没有明着写在家务工资表上，但要不了多久就会写上的吧。
   - 按照这个家务工资表，如果%你%能每天十次，那只要再过三十年，%你%就能还清所有债务吧。
   - 在那之前%你%也得修习拳法，这样在退役后奇锐骏带%你%回到老家时才能得到父亲的认可呢。

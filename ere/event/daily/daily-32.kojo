@@ -1,7 +1,9 @@
 end_talk:
-  - if: era.get('flag:变态行为') === 0
+  # FLAGNAME:36 = 变态行为
+  - if: era.get('flag:36') === 0
     lines:
-      - if: era.get('cflag:32:育成用变量')?.plan_b === undefined && era.get('love:32') < 75 && era.get('cflag:32:育成次数') === 0
+      # CFLAGNAME:52 = 育成用变量
+      - if: era.get('cflag:32:52')?.plan_b === undefined && era.get('love:32') < 75 && era.get('cflag:32:育成次数') === 0
         random: true
         lines:
           - color: %代表色%
@@ -9,7 +11,7 @@ end_talk:
               - fontWeight: bold
                 content: 爱丽速子
               - 「无趣的豚鼠……不过下次如果还打算做出点什么的话，就来找我吧，看在那双眼睛的份上。」
-      - if: era.get('cflag:32:育成用变量')?.plan_b === 0
+      - if: era.get('cflag:32:52')?.plan_b === 0
         random: true
         lines:
           - color: %代表色%
@@ -17,7 +19,7 @@ end_talk:
               - fontWeight: bold
                 content: 爱丽速子
               - 「诱惑我踏上这条路后，却独自离去吗？极限的彼方终究是独行之路啊。」
-      - if: era.get('cflag:32:育成用变量')?.plan_b === 1
+      - if: era.get('cflag:32:52')?.plan_b === 1
         random: true
         lines:
           - color: %代表色%
@@ -41,9 +43,9 @@ end_talk:
               - fontWeight: bold
                 content: 爱丽速子
               - 「哦呀哦呀，看来这次玩脱了啊，%称呼%……下次，记得小心点哦。」
-  - if: era.get('flag:变态行为') > 0
+  - if: era.get('flag:36') > 0
     lines:
-      - if: era.get('cflag:32:育成用变量')?.plan_b === undefined && era.get('love:32') < 75 && era.get('cflag:32:育成次数') === 0
+      - if: era.get('cflag:32:52')?.plan_b === undefined && era.get('love:32') < 75 && era.get('cflag:32:育成次数') === 0
         random: true
         lines:
           - color: %代表色%
@@ -51,7 +53,7 @@ end_talk:
               - fontWeight: bold
                 content: 爱丽速子
               - 「拘泥于下半身吗？可笑的原因……不过下次如果还打算做出点什么的话，就来找我吧，看在那双眼睛的份上。」
-      - if: era.get('cflag:32:育成用变量')?.plan_b === 0
+      - if: era.get('cflag:32:52')?.plan_b === 0
         random: true
         lines:
           - color: %代表色%
@@ -59,7 +61,7 @@ end_talk:
               - fontWeight: bold
                 content: 爱丽速子
               - 「连通往可能性彼方的梦想都无法彻底占满你的视野吗？如果不是蠢人，那么大概就是前所未有的野心家了吧。」
-      - if: era.get('cflag:32:育成用变量')?.plan_b === 1
+      - if: era.get('cflag:32:52')?.plan_b === 1
         random: true
         lines:
           - color: %代表色%

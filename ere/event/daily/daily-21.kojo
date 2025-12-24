@@ -19,7 +19,8 @@
 回合开始互动对话:
   sync: true
   lines:
-    - if: era.get('cflag:45:招募状态') === 1
+    # CFLAGNAME:66 = 招募状态
+    - if: era.get('cflag:45:66') === 1
       random: true
       lines:
         - color: %代表色%
@@ -58,7 +59,8 @@
             - 「『白色闪电』参上！就是这样……嘿嘿，我很帅气吧？」
 
 闲聊:
-  - if: era.get('base:21:体力') < era.get('maxbase:21:体力') * 0.45
+  # BASENAME:0 = 体力
+  - if: era.get('base:21:0') < era.get('maxbase:21:0') * 0.45
     random: true
     lines:
       - random: true
@@ -75,10 +77,11 @@
               - fontWeight: bold
                 content: 玉藻十字
               - 「虽然我知道现在是该顶硬上的时候……」
-  - if: era.get('base:21:体力') >= era.get('maxbase:21:体力') * 0.45
+  - if: era.get('base:21:0') >= era.get('maxbase:21:0') * 0.45
     random: true
     lines:
-      - if: era.get('cflag:21:干劲') === 2
+      # CFLAGNAME:40 = 干劲
+      - if: era.get('cflag:21:40') === 2
         random: true
         lines:
           - random: true
@@ -95,7 +98,7 @@
                   - fontWeight: bold
                     content: 玉藻十字
                   - 「元气霹雳啪啦的！！因为我正是闪电！！」
-      - if: era.get('cflag:21:干劲') === 1
+      - if: era.get('cflag:21:40') === 1
         random: true
         lines:
           - random: true
@@ -112,7 +115,7 @@
                   - fontWeight: bold
                     content: 玉藻十字
                   - 「今天感觉良好，稍微严厉点也可以呀！」
-      - if: era.get('cflag:21:干劲') === 0
+      - if: era.get('cflag:21:40') === 0
         random: true
         lines:
           - random: true
@@ -129,7 +132,7 @@
                   - fontWeight: bold
                     content: 玉藻十字
                   - 「要俐落地上了！跟咱走！」
-      - if: era.get('cflag:21:干劲') === -1
+      - if: era.get('cflag:21:40') === -1
         random: true
         lines:
           - random: true
@@ -146,7 +149,7 @@
                   - fontWeight: bold
                     content: 玉藻十字
                   - 「感觉要是能像这样嗨起来的话就好了……」
-      - if: era.get('cflag:21:干劲') === -2
+      - if: era.get('cflag:21:40') === -2
         random: true
         lines:
           - random: true
@@ -179,7 +182,8 @@
           - fontWeight: bold
             content: 玉藻十字
           - 「要是能钓到什么给小不点加餐就好了呢～🎵」
-  - if: era.get('cflag:20:招募状态') === 1
+  # CFLAGNAME:66 = 招募状态
+  - if: era.get('cflag:20:66') === 1
     random: true
     lines:
       - color: %代表色%
@@ -187,7 +191,9 @@
           - fontWeight: bold
             content: 玉藻十字
           - 「那边躺着的是猫吗？不是！怎么看都是 %小玉称呼Sky% 吧？」
-  - if: era.get('love:21') >= 75 && era.get('exp:21:性爱次数') > era.get('exp:21:睡奸次数')
+  # EXPNAME:25 = 性爱次数
+  # EXPNAME:26 = 睡奸次数
+  - if: era.get('love:21') >= 75 && era.get('exp:21:25') > era.get('exp:21:26')
     random: true
     lines:
       - color: %代表色%
@@ -213,7 +219,7 @@
           - 「吃过东西之后散步消食也很重要呢～」
 
 街机厅:
-  - if: era.get('cflag:6:招募状态') === 1
+  - if: era.get('cflag:6:66') === 1
     random: true
     lines:
       - color: %代表色%

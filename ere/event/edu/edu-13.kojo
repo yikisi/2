@@ -331,9 +331,10 @@
   - 目白阿尔丹双手合十，热情地回应着，从中带有一丝恬静的温柔感。
   - 目白善信对着%训练员%wink了一下，展现带有着不符优雅印象的随性感。
   - 目白光明慵懒地用甜美声音拉着长调回应着，真是可爱。
-  - if: era.get('cflag:0:性别') === 1
+  # CFLAGNAME:0 = 性别
+  - if: era.get('cflag:0:0') === 1
     content: 目白多伯眼神躲闪着%训练员%的身影，也只是淡淡地回应起来，细若蚊声，看起来很难相处。
-  - if: era.get('cflag:0:性别') !== 1
+  - if: era.get('cflag:0:0') !== 1
     content: 而目白多伯也同样以微笑来回应训练员的招呼。
   - acc: 1
     content: 「感觉你们每个真是有个性呢。」
@@ -1375,17 +1376,18 @@
       - fontWeight: bold
         content: 目白家主
       - 「初次见面，麦昆的%称呼%。」
-  - if: era.get('flag:当前声望') < 500
+  # FLAGNAME:15 = 当前声望
+  - if: era.get('flag:15') < 500
     content:
       - fontWeight: bold
         content: 目白家主
       - 「看您的样子，感觉以前没有见过呢，是刚刚才进入%训练员%生涯的吗？」
-  - if: era.get('flag:当前声望') >= 500 && era.get('flag:当前声望') < 2000
+  - if: era.get('flag:15') >= 500 && era.get('flag:15') < 2000
     content:
       - fontWeight: bold
         content: 目白家主
       - 「我认得您，从报纸和电视上看到关于你的事情，训练出来的赛%马娘%都有不错的成绩。」
-  - if: era.get('flag:当前声望') >= 2000
+  - if: era.get('flag:15') >= 2000
     content:
       - fontWeight: bold
         content: 目白家主
@@ -1415,17 +1417,17 @@
         content: 目白家主
       - 「麦昆这次证明了自己的优秀，%她%也是目白家的骄傲了。」
   - 目白家家主看向了你，%她%的脸上尽是苍老。
-  - if: era.get('flag:当前声望') < 500
+  - if: era.get('flag:15') < 500
     content:
       - fontWeight: bold
         content: 目白家主
       - 「当然，赢下春季天皇赏也证明了您的天赋异禀。」
-  - if: era.get('flag:当前声望') >= 500 && era.get('flag:当前声望') < 2000
+  - if: era.get('flag:15') >= 500 && era.get('flag:15') < 2000
     content:
       - fontWeight: bold
         content: 目白家主
       - 「当然，赢下春季天皇赏也证明了您不愧是一位优秀的训练员。」
-  - if: era.get('flag:当前声望') >= 2000
+  - if: era.get('flag:15') >= 2000
     content:
       - fontWeight: bold
         content: 目白家主

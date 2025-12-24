@@ -78,7 +78,7 @@
   - if: d.unexpect === 1
     lines:
       - %YOU% 对自己如何怀孕完全没有印象，一想到谁都有可能是犯人就让 %YOU% 为之胆寒……
-      - if: era.get('cflag:0:性别') >= 1
+      - if: era.get('cflag:0:0') >= 1
         content: ……而且明明 %YOU% 可以成为父亲的……
   - if: d.unexpect < 1
     lines:
@@ -162,9 +162,10 @@
       - 更没发现自己在无意识中舔干净了亲生孩子尿在自己身上的尿液
       - %YOU% 抱着孩子，哪怕被强迫着吮吸护士裙下粗壮的巨物，眼中的光芒也未曾消失
       -
-      - if: era.get('cflag:0:生产次数') > 0
+      # EXPNAME:117 = 生产次数
+      - if: era.get('exp:0:117') > 0
         content: 再一次怀抱着空虚的梦想，%YOU% 下定决心这次一定要好好的养育这个孩子
-      - if: "!era.get('cflag:0:生产次数')"
+      - if: "!era.get('exp:0:117')"
         content: 怀抱着空虚的梦想，%YOU% 下定决心这次一定要好好的养育这个孩子
 
 孕袋强奸生子:

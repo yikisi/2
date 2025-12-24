@@ -1,5 +1,6 @@
 训练:
-  - if: era.get('base:64:体力') < era.get('maxbase:64:体力') * 0.45
+  # BASENAME:0 = 体力
+  - if: era.get('base:64:0') < era.get('maxbase:64:0') * 0.45
     lines:
       - color: %代表色%
         content:
@@ -7,7 +8,7 @@
             content: 目白善信
           - 「呀，就算是%自称%也有极限的啦……」
       - 目白善信 有点无奈的苦笑，却没有停下准备的动作。
-  - if: era.get('base:64:体力') >= era.get('maxbase:64:体力') * 0.45
+  - if: era.get('base:64:0') >= era.get('maxbase:64:0') * 0.45
     lines:
       - random: true
         lines:
@@ -53,7 +54,8 @@
               - fontWeight: bold
                 content: 目白善信
               - 「看见这样的情况，连我都嗨起来了……很好！」
-      - if: era.get('cflag:64:干劲') > 0
+      # CFLAGNAME:40 = 干劲
+      - if: era.get('cflag:64:40') > 0
         random: true
         lines:
           - color: %代表色%
@@ -66,7 +68,7 @@
               - fontWeight: bold
                 content: 目白善信
               - 「开始今天的训练吧！」
-      - if: era.get('cflag:64:干劲') > 0
+      - if: era.get('cflag:64:40') > 0
         random: true
         lines:
           - color: %代表色%
@@ -79,7 +81,7 @@
               - fontWeight: bold
                 content: 目白善信
               - 「那就全力的加油跑吧！」
-      - if: era.get('cflag:64:干劲') < 0
+      - if: era.get('cflag:64:40') < 0
         random: true
         lines:
           - color: %代表色%
@@ -88,7 +90,8 @@
                 content: 目白善信
               - 「偶尔……会想着干脆放空脑袋埋头挖地洞呢～」
           - 有点微妙的发出了轻飘飘的声音，一晃一晃的
-      - if: era.get('cflag:64:育成回合计时') > 47 + 24
+      # CFLAGNAME:48 = 育成回合计时
+      - if: era.get('cflag:64:48') > 47 + 24
         random: true
         lines:
           - color: %代表色%
@@ -2794,11 +2797,12 @@
           - fontWeight: bold
             content: 目白善信
           - 「好像是，大日如来？来着？总之我们先去参拜一下吧」
-      - if: era.get('cflag:85:招募状态') === 0
+      # CFLAGNAME:66 = 招募状态
+      - if: era.get('cflag:85:66') === 0
         content: 大日如来……这个名字完全就像是神明一样的感觉，会是什么样子呢
-      - if: era.get('cflag:85:招募状态') === 1
+      - if: era.get('cflag:85:66') === 1
         content: 大日如来……这个名字完全就像是神明一样的……
-      - if: era.get('cflag:85:招募状态') === 1
+      - if: era.get('cflag:85:66') === 1
         content: 这个发音，有点熟悉的感觉？
       - divider: true
         content: 商场
@@ -2812,14 +2816,14 @@
           - fontWeight: bold
             content: 目白善信
           - 「呜哇，什么嘛，一点都不像是如来嘛！超可爱！像个洋娃娃一样！」
-      - if: era.get('cflag:85:招募状态') === 0
+      - if: era.get('cflag:85:66') === 0
         lines:
           - color: %代表色%
             content:
               - fontWeight: bold
                 content: 目白善信
               - 「去跟%她%说说话……不，还是算了」
-      - if: era.get('cflag:85:招募状态') === 1
+      - if: era.get('cflag:85:66') === 1
         lines:
           - acc: 1
             content: 「其实……我认识%她%来着」
@@ -2843,7 +2847,7 @@
           - fontWeight: bold
             content: 目白善信
           - 「呜哇～那孩子真可爱」
-      - if: era.get('cflag:85:招募状态') === 1
+      - if: era.get('cflag:85:66') === 1
         acc: 1
         content: 「可爱的话，确实」
       - color: %代表色%
@@ -2851,9 +2855,9 @@
           - fontWeight: bold
             content: 目白善信
           - 「感觉光是看着%她%，心里就受到治愈了～」
-      - if: era.get('cflag:85:招募状态') === 0
+      - if: era.get('cflag:85:66') === 0
         content: 善信和 %T% 远远的站在一旁看着，感觉被那份可爱治愈了内心
-      - if: era.get('cflag:85:招募状态') === 1
+      - if: era.get('cflag:85:66') === 1
         content: 善信和 %T% 远远的站在一旁看着，只是 %T% 的心里浮上了一点说不出来的微妙感
   - acc: 2
     content: 「派对之神的始祖！」（全属性+8）
@@ -3711,7 +3715,8 @@
     content: 沾着防晒油的手在抖
   - color: %代表色%
     content: 即使被抓着，被拉倒了善信的身前
-  - if: era.get('cflag:64:性别') !== 1 && era.get('cflag:0:性别') === 1
+  # CFLAGNAME:0 = 性别
+  - if: era.get('cflag:64:0') !== 1 && era.get('cflag:0:0') === 1
     color: %代表色%
     content: 都说男人是不会对女性的胸有意见的，但是……
   - color: %代表色%
@@ -3788,7 +3793,7 @@
           - 「我喜欢%玩家本名%……」
       - color: %代表色%
         content: 放开抓住 %称呼% 的双手，手指轻轻的拉开泳衣的系带
-      - if: era.get('cflag:64:性别') !== 1
+      - if: era.get('cflag:64:0') !== 1
         color: %代表色%
         content: 小小的樱桃已经挺立，等待着
       - color: %代表色%
@@ -6298,7 +6303,8 @@
       - fontWeight: bold
         content: 目白善信
       - （啊，可是，要是%他%说没心情去该怎么办呢……）
-  - if: era.get('cflag:64:育成用变量')?.hot_spring !== 1
+  # CFLAGNAME:52 = 育成用变量
+  - if: era.get('cflag:64:52')?.hot_spring !== 1
     color: %代表色%
     content:
       - fontWeight: bold
@@ -6567,7 +6573,7 @@
             content: 目白善信
           - 「不妙，好像玩的有点太过了啊，哈哈……」
       - 善信脸上的笑容有点勉强，直到躺回房间里也没什么力气的样子
-  - if: era.get('cflag:65:招募状态') === 1 && era.get('relation:65:0') >= 0
+  - if: era.get('cflag:65:66') === 1 && era.get('relation:65:0') >= 0
     acc: 2
     content: 「也叫上太阳神怎么样？」
     lines:
@@ -7131,7 +7137,7 @@
             content: 目白善信
           - 「有件关于光明的事情想请你帮忙！」
       - 在电话另一头的阿尔丹答应之后，善信和 %T% 一起火速前往了目白多伯所在的电视台
-      - if: era.get('cflag:59:招募状态') !== 1
+      - if: era.get('cflag:59:66') !== 1
         lines:
           - 然而——
           - color: %代表色%
@@ -7171,7 +7177,7 @@
                 content: 目白善信
               - 「谢谢你陪我！」
           - 善信毫不犹豫的走上%马娘%专用的道路，朝着 %T% 摆出不好意思的手势之后，朝电视台的方向跑去
-      - if: era.get('cflag:59:招募状态') === 1
+      - if: era.get('cflag:59:66') === 1
         lines:
           - color: %代表色%
             content:
@@ -7269,7 +7275,7 @@
             content: 目白善信
           - 「嗯，莱恩的电话是……」
       - 解决了目白多伯这边的问题之后，善信和 %T% 一起火速前往了目白光明所在的车站！
-      - if: era.get('cflag:74:招募状态') !== 1
+      - if: era.get('cflag:74:66') !== 1
         lines:
           - 然而——
           - color: %代表色%
@@ -7308,7 +7314,7 @@
               - fontWeight: bold
                 content: 目白善信
               - 「训练员，谢谢你陪我到这里！」
-      - if: era.get('cflag:74:招募状态') === 1
+      - if: era.get('cflag:74:66') === 1
         lines:
           - color: %光明色%
             content:

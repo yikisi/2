@@ -2,8 +2,9 @@ good_morning:
   sync: true
   lines:
     # 体力值低
+    # BASENAME:0 = 体力
     - random: true
-      if: era.get('base:0:体力') < era.get('maxbase:0:体力') * 0.45
+      if: era.get('base:0:0') < era.get('maxbase:0:0') * 0.45
       lines:
         - color: %代表色%
           content:
@@ -16,7 +17,7 @@ good_morning:
               content: 梦之旅
             - 「请别忘了，我们的『旅途』还有很漫长的时光。」
     - random: true
-      if: era.get('base:0:体力') < era.get('maxbase:0:体力') * 0.45
+      if: era.get('base:0:0') < era.get('maxbase:0:0') * 0.45
       lines:
         - color: %代表色%
           content:
@@ -29,7 +30,7 @@ good_morning:
               content: 梦之旅
             - 「……那么，至少让我为您泡杯咖啡吧？」
     - random: true
-      if: era.get('base:0:体力') < era.get('maxbase:0:体力') * 0.45
+      if: era.get('base:0:0') < era.get('maxbase:0:0') * 0.45
       lines:
         - color: %代表色%
           content:
@@ -48,7 +49,7 @@ good_morning:
             - 「您的辛苦，虽然我无法完全分担……但请至少，给我治愈您的机会。」
     # 体力值高
     - random: true
-      if: era.get('base:0:体力') >= era.get('maxbase:0:体力') * 0.45
+      if: era.get('base:0:0') >= era.get('maxbase:0:0') * 0.45
       lines:
         - color: %代表色%
           content:
@@ -61,7 +62,7 @@ good_morning:
               content: 梦之旅
             - 「今天的『旅途』，想必也是无风无雨。」
     - random: true
-      if: era.get('base:0:体力') >= era.get('maxbase:0:体力') * 0.45
+      if: era.get('base:0:0') >= era.get('maxbase:0:0') * 0.45
       lines:
         - color: %代表色%
           content:
@@ -75,7 +76,8 @@ good_morning:
             - 「笑容……很可爱？……如果 %称呼% 喜欢的话，那么我会尝试多笑一些的。」
 
 end_talk:
-  - if: era.get('flag:变态行为') === 0
+  # FLAGNAME:36 = 变态行为
+  - if: era.get('flag:36') === 0
     lines:
       - if: era.get('love:119') < 75
         color: %代表色%
