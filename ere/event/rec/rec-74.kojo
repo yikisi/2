@@ -1,28 +1,30 @@
-招募:
+rec0:
   - 目白光明似乎不在训练场……或许可以一个人去外面看看？
 
-慢悠悠的公园之旅:
+# 慢悠悠的公园之旅
+rec1:
   #任意外出
   - 特雷森的招募季，独自一人出门散步的%T%漫无目的走在公园里散步着。
   - 公园里的风景如同往常一样，平静，祥和。
   - 周围的路人行走在路上，一切都慢悠悠的进行着。
   - 无所事事的%T%找到了一旁的长凳，为行走了一路的，疲劳的双腿稍微留下了一点休息的空间。
-  - if: era.get('flag:当前月') === 1
+  # FLAGNAME:2 = 当前月
+  - if: era.get('flag:2') === 1
     content: 初雪还未融化，几片枯黄的树叶缓缓的落下。
   - if: d.mejiro
-    color: %代表色%
+    color: %COLOR%
     content:
       - fontWeight: bold
         content: 目白光明
       - 「呼哇～」
   - if: "!d.mejiro"
-    color: %代表色%
+    color: %COLOR%
     content:
       - fontWeight: bold
         content: ？？？
       - 「呼哇～」
-  - 身旁的另一张长椅上，坐着一位年纪不大的%马娘%。
-  - 蓬松的长发下是一张有点呆呆的小脸，身形稍微往后倾斜，如果没有看见%她%半睁的眼睛，大概会以为是睡着了吧。
+  - 身旁的另一张长椅上，坐着一位年纪不大的%UMA%。
+  - 蓬松的长发下是一张有点呆呆的小脸，身形稍微往后倾斜，如果没有看见%SEX%半睁的眼睛，大概会以为是睡着了吧。
   - if: d.mejiro
     lines:
       - acc: 0
@@ -39,13 +41,13 @@
   - 时间不知不觉间，在两个人之间流动着。
   - 直到云层遮住了阳光，日光浴的时间结束了，%T%才慵懒的从长椅上直起身。
   - if: d.mejiro
-    color: %代表色%
+    color: %COLOR%
     content:
       - fontWeight: bold
         content: 目白光明
       - 「呼哇～」
   - if: "!d.mejiro"
-    color: %代表色%
+    color: %COLOR%
     content:
       - fontWeight: bold
         content: ？？？
@@ -53,39 +55,39 @@
   - acc: 0
     content: 「嗯？」
   - if: d.mejiro
-    color: %代表色%
+    color: %COLOR%
     content:
       - fontWeight: bold
         content: 目白光明
       - 「啊拉？」
   - if: "!d.mejiro"
-    color: %代表色%
+    color: %COLOR%
     content:
       - fontWeight: bold
         content: ？？？
       - 「啊拉？」
   - if: d.mejiro
-    color: %代表色%
+    color: %COLOR%
     content:
       - fontWeight: bold
         content: 目白光明
       - 「啊，早上好～」
   - if: "!d.mejiro"
-    color: %代表色%
+    color: %COLOR%
     content:
       - fontWeight: bold
         content: ？？？
       - 「啊，你好～」
-  - 身旁的%马娘%似乎这才注意到了%T%的存在，慢悠悠的看过来。
+  - 身旁的%UMA%似乎这才注意到了%T%的存在，慢悠悠的看过来。
   - 灵巧的耳朵弹跳了几下，脸上也露出了软软的笑脸。
   - if: d.mejiro
-    color: %代表色%
+    color: %COLOR%
     content:
       - fontWeight: bold
         content: 目白光明
       - 「那个，您是在看上面吗？」
   - if: "!d.mejiro"
-    color: %代表色%
+    color: %COLOR%
     content:
       - fontWeight: bold
         content: ？？？
@@ -95,42 +97,42 @@
   - acc: 0
     content: 「你是在看那片树叶吗？」
   - if: d.mejiro
-    color: %代表色%
+    color: %COLOR%
     content:
       - fontWeight: bold
         content: 目白光明
       - 「嗯～」
   - if: "!d.mejiro"
-    color: %代表色%
+    color: %COLOR%
     content:
       - fontWeight: bold
         content: ？？？
       - 「是的～」
   - if: d.mejiro
-    color: %代表色%
+    color: %COLOR%
     content:
       - fontWeight: bold
         content: 目白光明
       - 「那边的最顶端，是一片孤零零的枯叶对吧？」
   - if: "!d.mejiro"
-    color: %代表色%
+    color: %COLOR%
     content:
       - fontWeight: bold
         content: ？？？
       - 「那边的最顶端，是一片孤零零的枯叶对吧？」
   - if: d.mejiro
-    color: %代表色%
+    color: %COLOR%
     content:
       - fontWeight: bold
         content: 目白光明
       - 「虽然看上去很快就会被吹下来的样子，不过它完全没有掉下来哦。」
   - if: "!d.mejiro"
-    color: %代表色%
+    color: %COLOR%
     content:
       - fontWeight: bold
         content: ？？？
       - 「虽然看上去很快就会被吹下来的样子，不过它完全没有掉下来哦。」
-  - 随意的开口之后，眼前的%马娘%再一次的抬起脸看向上方。
+  - 随意的开口之后，眼前的%UMA%再一次的抬起脸看向上方。
   - 在%T%的眼里出现的那一片枯叶，莫名的令人在意起来。
   - acc: 0
     content: （留下来一起看看）（继续招募）
@@ -139,15 +141,15 @@
       - 眼神一点点的移向那棵枯树的顶端，盯着那片叶子。
       - 时间，再一次的从两个人的身旁流过……
       -
-      - 不知道过去了多长的时间，那位%马娘%突然间开口了。
+      - 不知道过去了多长的时间，那位%UMA%突然间开口了。
       - if: d.mejiro
-        color: %代表色%
+        color: %COLOR%
         content:
           - fontWeight: bold
             content: 目白光明
           - 「真是坚强的孩子呢～」
       - if: "!d.mejiro"
-        color: %代表色%
+        color: %COLOR%
         content:
           - fontWeight: bold
             content: ？？？
@@ -155,25 +157,25 @@
       - acc: 0
         content: 「是啊」
       - if: d.mejiro
-        color: %代表色%
+        color: %COLOR%
         content:
           - fontWeight: bold
             content: 目白光明
           - 「唉？有回应……」
       - if: "!d.mejiro"
-        color: %代表色%
+        color: %COLOR%
         content:
           - fontWeight: bold
             content: ？？？
           - 「啊咧？有回应……」
       - if: d.mejiro
-        color: %代表色%
+        color: %COLOR%
         content:
           - fontWeight: bold
             content: 目白光明
           - 「哇啊，您还在这里啊～」
       - if: "!d.mejiro"
-        color: %代表色%
+        color: %COLOR%
         content:
           - fontWeight: bold
             content: ？？？
@@ -181,47 +183,47 @@
       - acc: 0
         content: 「有点在意那片叶子，所以就……」
       - if: d.mejiro
-        color: %代表色%
+        color: %COLOR%
         content:
           - fontWeight: bold
             content: 目白光明
           - 「所以就，一直……？」
       - if: "!d.mejiro"
-        color: %代表色%
+        color: %COLOR%
         content:
           - fontWeight: bold
             content: ？？？
           - 「所以就，一直……？」
       - if: d.mejiro
-        color: %代表色%
+        color: %COLOR%
         content:
           - fontWeight: bold
             content: 目白光明
           - 「呵呵～不愧是您呢～」
       - if: "!d.mejiro"
-        color: %代表色%
+        color: %COLOR%
         content:
           - fontWeight: bold
             content: ？？？
           - 「呵呵～您说不定和我很像呢～」
-      - 眼前的%马娘%，轻飘飘的笑了起来。
+      - 眼前的%UMA%，轻飘飘的笑了起来。
       - 正在笑声持续的时候，不远处就传来了另一个声音。
       -
       - if: d.mejiro
-        color: %多伯色%
+        color: %COLOR59%
         content:
           - fontWeight: bold
             content: 目白多伯
           - 「光明！终于找到你了！」
       - if: "!d.mejiro"
-        color: %多伯色%
+        color: %COLOR59%
         content:
           - fontWeight: bold
             content: ？？？
           - 「光明！终于找到你了！」
       - if: d.mejiro
         lines:
-          - color: %多伯色%
+          - color: %COLOR59%
             content:
               - fontWeight: bold
                 content: 目白多伯
@@ -230,36 +232,36 @@
           - 但很快，又有些埋怨地看向身旁站在的%T%。
       - if: "!d.mejiro"
         lines:
-          - color: %多伯色%
+          - color: %COLOR59%
             content:
               - fontWeight: bold
                 content: ？？？
               - 「唉，这位是？」
-          - color: %多伯色%
+          - color: %COLOR59%
             content:
               - fontWeight: bold
                 content: ？？？
               - 「难道，是什么奇怪的人……」
-          - 小跑过来的%马娘%轻轻的拉住了目白光明的手，如释重负一般的吐了口气。
+          - 小跑过来的%UMA%轻轻的拉住了目白光明的手，如释重负一般的吐了口气。
           - 但很快，又警觉的看向身旁站在的%T%。
-      - color: %代表色%
+      - color: %COLOR%
         content:
           - fontWeight: bold
             content: 目白光明
           - 「没事哦，多伯～」
       - if: d.mejiro
-        color: %代表色%
+        color: %COLOR%
         content:
           - fontWeight: bold
             content: 目白光明
           - 「就是因为有人陪我在这里，我才一直待在这里哦。」
       - if: "!d.mejiro"
-        color: %代表色%
+        color: %COLOR%
         content:
           - fontWeight: bold
             content: 目白光明
-          - 「这位%先生%一直陪我待在这里，是个好人哦。」
-      - color: %多伯色%
+          - 「这位%SIR%一直陪我待在这里，是个好人哦。」
+      - color: %COLOR59%
         content:
           - fontWeight: bold
             content: 目白多伯
@@ -268,12 +270,12 @@
         lines:
           - acc: 0
             content: 「那个，我就先走了哦？」
-          - color: %多伯色%
+          - color: %COLOR59%
             content:
               - fontWeight: bold
                 content: 目白多伯
               - 「唉？嗯……随你啦。」
-          - color: %多伯色%
+          - color: %COLOR59%
             content:
               - fontWeight: bold
                 content: 目白多伯
@@ -282,33 +284,33 @@
         lines:
           - acc: 0
             content: 「那个，我是特雷森的训练员，徽章我都戴着呢。」
-          - color: %多伯色%
+          - color: %COLOR59%
             content:
               - fontWeight: bold
                 content: 目白多伯
               - 「唉？真的，有训练员徽章……」
-          - color: %多伯色%
+          - color: %COLOR59%
             content:
               - fontWeight: bold
                 content: 目白多伯
               - 「吓我一跳……还以为是什么奇怪的人呢。」
       - 看着已经有了同伴的目白光明，深知自己的出场时间结束的%T%自然的转过身离开了。
       - divider: true
-      - color: %代表色%
+      - color: %COLOR%
         content: 远远地看着%T%离开的背影，目白光明稍稍的歪了歪头。
-      - color: %代表色%
+      - color: %COLOR%
         content:
           - fontWeight: bold
             content: 目白光明
           - 「训练员……」
       - if: d.mejiro
-        color: %代表色%
+        color: %COLOR%
         content:
           - fontWeight: bold
             content: 目白光明
           - 「嗯哼～」
       - if: "!d.mejiro"
-        color: %代表色%
+        color: %COLOR%
         content:
           - fontWeight: bold
             content: 目白光明
@@ -319,29 +321,30 @@
       - 只是一片枯叶的话……也没什么大不了的。
       - 这样想着的%T%站起身，离开了公园。
 
-慢悠悠的登场～:
+# 慢悠悠的登场～
+rec2:
   # 天台或中庭触发
-  - 在公园度过了悠哉悠哉的时光后没过多久，那个风格独特的%马娘%在%T%的面前再一次出现了。
+  - 在公园度过了悠哉悠哉的时光后没过多久，那个风格独特的%UMA%在%T%的面前再一次出现了。
   - 正好站在窗边的目白光明发现了%T%后，不紧不慢的走了过来。
-  - color: %代表色%
+  - color: %COLOR%
     content:
       - fontWeight: bold
         content: 目白光明
       - 「贵安，训练员。」
-  - color: %代表色%
+  - color: %COLOR%
     content:
       - fontWeight: bold
         content: 目白光明
       - 「一段时间没见了呢～」
   - acc: 0
     content: 「……唉？是在说我吗？」
-  - 比起%T%发愣的样子，%她%的表情则是阳光的笑脸。
-  - color: %代表色%
+  - 比起%T%发愣的样子，%SEX%的表情则是阳光的笑脸。
+  - color: %COLOR%
     content:
       - fontWeight: bold
         content: 目白光明
       - 「是的哦～」
-  - color: %代表色%
+  - color: %COLOR%
     content:
       - fontWeight: bold
         content: 目白光明
@@ -353,7 +356,7 @@
   - acc: 1
     content: 「不，我也有好好的享受那段时间……」（继续招募）
     lines:
-      - color: %代表色%
+      - color: %COLOR%
         content:
           - fontWeight: bold
             content: 目白光明
@@ -362,29 +365,29 @@
       - 长长的呆毛在空中跳了跳，随着窗户吹进来的风摆动。
       - acc: 0
         content: 「我也很享受这样静下来的感觉。」
-      - color: %代表色%
+      - color: %COLOR%
         content:
           - fontWeight: bold
             content: 目白光明
           - 「哦～是这样啊～」
-      - color: %代表色%
+      - color: %COLOR%
         content:
           - fontWeight: bold
             content: 目白光明
           - 「训练员和我很合得来呢～」
       - 下垂的双手轻轻抬起，遮住了目白光明翘起来的嘴角。
       - 一阵轻笑声过后，如同回想到了什么一样，呆呆的表情里突然间又闪出了正经的样子。
-      - color: %代表色%
+      - color: %COLOR%
         content:
           - fontWeight: bold
             content: 目白光明
           - 「啊，对了！」
-      - color: %代表色%
+      - color: %COLOR%
         content:
           - fontWeight: bold
             content: 目白光明
           - 「虽然现在说不太合适……」
-      - color: %代表色%
+      - color: %COLOR%
         content:
           - fontWeight: bold
             content: 目白光明
@@ -392,17 +395,17 @@
       - 虽然是有些尴尬的转移了话题，声音却依旧平稳。
       - acc: 0
         content: 「测试？」
-      - color: %代表色%
+      - color: %COLOR%
         content:
           - fontWeight: bold
             content: 目白光明
           - 「是的～」
-      - color: %代表色%
+      - color: %COLOR%
         content:
           - fontWeight: bold
             content: 目白光明
           - 「我报名了下一场的校内比赛呢，所以希望您能用专业的视角帮我看一看。」
-      - color: %代表色%
+      - color: %COLOR%
         content:
           - fontWeight: bold
             content: 目白光明
@@ -415,25 +418,25 @@
       - 转移到训练场之后，看着换上运动服的目白光明。
       - 站在跑道旁的%T%，不自觉的抓紧了手上了秒表。
       - 这位可是那个目白家的目白光明，不知道会跑出什么样的表现……
-      - color: %代表色%
+      - color: %COLOR%
         content:
           - fontWeight: bold
             content: 路人训练员A
-          - 「目白光明啊，令人期待%她%的表现呢！」
-      - color: %代表色%
+          - 「目白光明啊，令人期待%SEX%的表现呢！」
+      - color: %COLOR%
         content:
           - fontWeight: bold
             content: 路人训练员B
-          - 「听说%她%还没有专属训练员吧？说不定这是个机会……」
+          - 「听说%SEX%还没有专属训练员吧？说不定这是个机会……」
       - 在周围的窃窃私语中，目白光明迈出了脚步——
       -
       - 出乎意料的是，并没有和所有人想象的一样，充满魄力的加速，仅仅只是维持一个不算快的速度而已。
-      - color: %代表色%
+      - color: %COLOR%
         content:
           - fontWeight: bold
             content: 路人训练员A
           - 「完全，不加速吗？真的假的？」
-      - color: %代表色%
+      - color: %COLOR%
         content:
           - fontWeight: bold
             content: 路人训练员B
@@ -443,12 +446,12 @@
       - 与周围唱衰速度的人不同，%T%看着目白光明的脚步慢慢的有了想法。
       -
       - 在目白光明结束测试的时候，周围的人已经散的差不多了。
-      - color: %代表色%
+      - color: %COLOR%
         content:
           - fontWeight: bold
             content: 目白光明
           - 「训练员」
-      - color: %代表色%
+      - color: %COLOR%
         content:
           - fontWeight: bold
             content: 目白光明
@@ -457,8 +460,8 @@
       - acc: 0
         content: 「嗯，已经结束了哦。」
       - 看着眼前纯真的笑脸，%T%默默的收起了手上的秒表。
-      - 已经见识到了这样充满可能性的一幕，作为%训练员头衔%的%T%已经有了足够的兴趣了。
-      - color: %代表色%
+      - 已经见识到了这样充满可能性的一幕，作为%TITLE%训练员的%T%已经有了足够的兴趣了。
+      - color: %COLOR%
         content:
           - fontWeight: bold
             content: 目白光明
@@ -466,7 +469,7 @@
       - acc: 0
         content: 「嗯，完全够了。」
       -
-      - color: %代表色%
+      - color: %COLOR%
         content:
           - fontWeight: bold
             content: 目白光明
@@ -474,21 +477,21 @@
       - acc: 0
         content: 「总感觉，不能就这样放着你这样跑啊。」
       -
-      - color: %代表色%
+      - color: %COLOR%
         content:
           - fontWeight: bold
             content: 目白光明
           - 「放着这样跑……？」
-      - color: %代表色%
+      - color: %COLOR%
         content:
           - fontWeight: bold
             content: 目白光明
           - 「请问是什么意思呢？」
-      - 站在%T%面前的目白光明完全没有新人%马娘%那样子因为体力不足而喘气的模样，依旧是像开始测试之前一样平静。
+      - 站在%T%面前的目白光明完全没有新人%UMA%那样子因为体力不足而喘气的模样，依旧是像开始测试之前一样平静。
       - 表情上也没有什么疲劳感，还能看见轻飘飘的笑容。
       - acc: 0
         content: 「首先就是，稍微改变一点慢悠悠的样子吧……」
-      - color: %代表色%
+      - color: %COLOR%
         content:
           - fontWeight: bold
             content: 目白光明
@@ -496,12 +499,12 @@
       - 看着目白光明有点呆的眼神，%T%也坚定了想法。
       - acc: 0
         content: 「虽然时候不太对……不过，我想和你搭档。」
-      - color: %代表色%
+      - color: %COLOR%
         content:
           - fontWeight: bold
             content: 目白光明
           - 「搭档……啊，是指专任训练员的事情吗？」
-      - color: %代表色%
+      - color: %COLOR%
         content:
           - fontWeight: bold
             content: 目白光明
@@ -510,12 +513,12 @@
       - 但对现在的%T%来说，这已经是确定事件了。
       - acc: 1
         content: 「是啊，我确定了！」
-      - color: %代表色%
+      - color: %COLOR%
         content:
           - fontWeight: bold
             content: 目白光明
           - 「啊……呵呵～」
-      - color: %代表色%
+      - color: %COLOR%
         content:
           - fontWeight: bold
             content: 目白光明
@@ -523,43 +526,44 @@
       - 稍微愣了一下的目白光明，很快又恢复了像刚才一样稍微没睡醒的眼神。
       - 并不急于一时的%T%轻轻点头，和目白光明挥手暂时分开了。
       - divider: true
-      - color: %代表色%
+      - color: %COLOR%
         content:
           - fontWeight: bold
             content: 目白光明
           - 「呵呵……果然，拜托您是正确的呢～」
-      - color: %代表色%
+      - color: %COLOR%
         content:
           - fontWeight: bold
             content: 目白光明
-          - 「啊，现在应该改口叫做%称呼%了呢。」
-      - color: %代表色%
+          - 「啊，现在应该改口叫做%CALLNAME%了呢。」
+      - color: %COLOR%
         content: 在确定%T%不会听见最后的一句话之后，目白光明又按捺不住地轻笑了起来。
 
-好久不见～:
+# 好久不见～
+rec3:
   - 又一次经过中庭时，一阵不知何处来的清风吹过%T%的眼前，把视线转向一旁。
   - 一根长长的呆毛……
-  - 一位鹿毛长发的%马娘%，呆呆的坐在中庭的长凳上。
-  - %T%记得这个%马娘%的名字，出于个人兴趣和训练员的身份还去看过%她%的几次模拟赛。
-  - 正好这次准备去训练场也是为了招募%马娘%加入队伍，那么眼前这位，不就正好吗？
-  - color: %代表色%
+  - 一位鹿毛长发的%UMA%，呆呆的坐在中庭的长凳上。
+  - %T%记得这个%UMA%的名字，出于个人兴趣和训练员的身份还去看过%SEX%的几次模拟赛。
+  - 正好这次准备去训练场也是为了招募%UMA%加入队伍，那么眼前这位，不就正好吗？
+  - color: %COLOR%
     content:
       - fontWeight: bold
         content: 目白光明
       - 「啊啦？是哪位呢？」
   - 似乎察觉到了身后的视线，目白光明缓缓回头看过来，在看见%T%的时候立刻展现了一个灿烂的笑容。
-  - color: %代表色%
+  - color: %COLOR%
     content:
       - fontWeight: bold
         content: 目白光明
       - 「很久不见～」
-  - color: %代表色%
+  - color: %COLOR%
     content:
       - fontWeight: bold
         content: 目白光明
       - 「请问今天是来做什么呢？」
   - 可爱的呆毛在问的时候弹跳了一下，也稍稍在%T%的心里敲了一下。
-  - %T%的内心在反复告诫自己冷静下来，将想要揉揉%她%脸蛋的想法压回去。
+  - %T%的内心在反复告诫自己冷静下来，将想要揉揉%SEX%脸蛋的想法压回去。
   - 为什么之前没有发现那么软乎乎的呢？
   - 重新取回理智，轻咳了一声将思维拉回正轨。
   - acc: 0
@@ -567,19 +571,19 @@
     lines:
       - （太过直球了！）
       - %T%的心里狠狠吐槽了一下自己，但考虑到确实是这个想法又放弃了吐槽。
-      - color: %代表色%
+      - color: %COLOR%
         content:
           - fontWeight: bold
             content: 目白光明
           - 「唉……？」
-      - color: %代表色%
+      - color: %COLOR%
         content:
           - fontWeight: bold
             content: 目白光明
           - 「啊，是的！」
       - 慢了半拍的目白光明这才站起身来，正经的看着%T%。
       - %T%和目白光明两个人对视了一小会，反而是%T%先没忍住笑了出来。
-      - color: %代表色%
+      - color: %COLOR%
         content:
           - fontWeight: bold
             content: 目白光明
@@ -589,7 +593,7 @@
       - 之前的目白光明参与过的几次比赛，%T%在现场看过。
       - 虽然是模拟赛，但目白光明的跑法是没有问题的，只是需要稍加指点而已。
       - 「目白光明同学，你的比赛我是看过的。」
-      - color: %代表色%
+      - color: %COLOR%
         content:
           - fontWeight: bold
             content: 目白光明
@@ -597,7 +601,7 @@
       - 目白光明带着脸上呆呆的表情，稍稍倾斜了一些。
       - 既然是招募的话，先展现一下自己的技术吧。
       - 「虽然有点怪怪的，但应该不介意我稍微指点两句吧。」
-      - color: %代表色%
+      - color: %COLOR%
         content:
           - fontWeight: bold
             content: 目白光明
@@ -605,32 +609,32 @@
       - 看着目白光明的脸，%T%提起了那些在心底压了很久的建议。
       - 不够精准的加速时机，缓慢的节奏，以及步伐上的小问题。
       - 听完了%T%的话，目白光明只是乖巧的点了点头。
-      - color: %代表色%
+      - color: %COLOR%
         content:
           - fontWeight: bold
             content: 目白光明
           - 「哦哦……」
-      - color: %代表色%
+      - color: %COLOR%
         content:
           - fontWeight: bold
             content: 目白光明
           - 「感觉，想去试试看了～」
       - 面对这幅打起精神来的样子，%T%的嘴角自然的往上翘了起来。
       - 只要能证实提议的可行性，目白光明就会考虑签约了吧。
-      - color: %代表色%
+      - color: %COLOR%
         content:
           - fontWeight: bold
             content: 目白光明
-          - 「那，%称呼%，今天要陪我训练吗？」
+          - 「那，%CALLNAME%，今天要陪我训练吗？」
       - 当然可以，%T%是想这样回答的。
       - 但回想到这个称呼的时候，%T%也愣了。
       - 「唉？刚才的称呼是？」
-      - color: %代表色%
+      - color: %COLOR%
         content:
           - fontWeight: bold
             content: 目白光明
-          - 「是的～%称呼%～」
-      - color: %代表色%
+          - 「是的～%CALLNAME%～」
+      - color: %COLOR%
         content:
           - fontWeight: bold
             content: 目白光明
