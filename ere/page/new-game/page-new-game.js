@@ -33,6 +33,8 @@ const { location_enum } = require('#/data/locations');
 const { first_child_id } = require('#/data/other-const');
 const { chara_skill_dict } = require('#/data/race/skill/skill-const');
 
+const { i18n } = require('#/i18n/selector');
+
 /**
  * start a new game, set data
  * @param {number} src_chara
@@ -62,7 +64,7 @@ module.exports = async (src_chara) => {
       get_skills_and_print_in_event(0, [s], undefined, false),
     );
     CharaAvailableSkills.get(0).clear();
-    era.set('callname:0:-2', '你');
+    era.set('callname:0:-2', i18n().name.you);
     era.set('cflag:0:成长阶段', 5);
     era.set('cstr:0:决胜服', 0);
   } else {

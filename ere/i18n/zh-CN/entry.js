@@ -1,6 +1,5 @@
 class I18nEntry {
   language = '简体中文';
-  you = '你';
 
   speed = '速度';
   endurance = '耐力';

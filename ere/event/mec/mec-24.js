@@ -8,7 +8,7 @@ const { race_enum } = require('#/data/race/race-const');
 module.exports = class extends CustomizedMec {
   set_callname() {
     if (!this.set_callname_from_src()) {
-      era.set('callname:24:0', '训练员酱');
+      era.set('callname:24:0', 'trainer24');
     }
   }
 

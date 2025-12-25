@@ -2,7 +2,6 @@ const I18nEntry = require('#/i18n/zh-CN/entry');
 
 module.exports = class extends I18nEntry {
   language = 'English';
-  you = 'You';
 
   speed = 'Speed';
   endurance = 'Stamina';

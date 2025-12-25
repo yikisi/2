@@ -41,7 +41,7 @@ async function page_clinic() {
         ? {
             name: '「一起努力吧！」（招募）',
             handle() {
-              era.set('callname:305:-2', '安心泽刺刺美');
+              era.set('callname:305:-2', '900501');
               era.set('cflag:305:招募状态', recruit_flags.yes);
               return era.printAndWait([
                 get_chara_talk(305).get_colored_name(),

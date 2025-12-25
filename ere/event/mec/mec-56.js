@@ -2,8 +2,6 @@ const era = require('#/era-electron');
 
 const CustomizedMec = require('#/event/mec/mec-common');
 
-const CharaTalk = require('#/utils/chara-talk');
-
 const { get_chara_color } = require('#/data/chara-colors');
 const { buff_colors, motivation_colors } = require('#/data/color-const');
 
@@ -14,8 +12,8 @@ module.exports = class extends CustomizedMec {
         return super.set_callname();
       }
       era.set('callname:56:0', [
-        '命定之人',
-        `训练员${CharaTalk.me.get_adult_sex_title()}`,
+        'trainer56',
+        era.get('cflag:0:0') === 1 ? 'trainer_m' : 'trainer_f',
       ]);
     }
   }

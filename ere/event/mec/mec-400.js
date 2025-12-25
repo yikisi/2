@@ -48,7 +48,7 @@ module.exports = class extends CustomizedMec {
 
   set_callname() {
     if (!this.set_callname_from_src()) {
-      era.set('callname:400:0', '托雷纳君');
+      era.set('callname:400:0', 'trainer400');
     }
   }
 

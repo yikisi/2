@@ -85,7 +85,7 @@ handlers[343] = () =>
     ? {
         name: '「一起努力吧！」（招募）',
         handle() {
-          era.set('callname:343:-2', '佐岳五月');
+          era.set('callname:343:-2', '904301');
           era.set('cflag:343:招募状态', recruit_flags.yes);
           if (era.get('talent:343:病娇')) {
             yandere_list.push(343);
@@ -104,7 +104,7 @@ handlers[344] = () =>
     ? {
         name: '「一起努力吧！」（招募）',
         handle() {
-          era.set('callname:344:-2', '都留歧凉花');
+          era.set('callname:344:-2', '904401');
           era.set('cflag:344:招募状态', recruit_flags.yes);
           return era.printAndWait([
             get_chara_talk(344).get_colored_name(),

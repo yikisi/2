@@ -8,7 +8,7 @@ module.exports = class extends CustomizedInit {
       era.set(
         'callname:207:-2',
         // CFLAGNAME:0 = 性别
-        `${200705 + (era.get('cflag:207:0') !== 1)}`,
+        `${200711 + (era.get('cflag:207:0') === 1)}`,
       );
     }
   }

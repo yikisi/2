@@ -5,6 +5,7 @@ const sys_filter_chara = require('#/system/sys-filter-chara');
 const print_select_tar_page = require('#/page/components/select-target');
 const exp_chara_info = require('#/page/exp/exp-chara-info');
 
+const get_display_name = require('#/utils/calc-display-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const chara_into_type = require('#/data/chara-info-type');
@@ -129,13 +130,13 @@ async function print_chara_info(_id, chara_list, _page) {
                 {
                   accelerator: 4,
                   config: { width: 7 },
-                  content: `前一位 — ${era.get(`callname:${prev}:-2`)}`,
+                  content: `前一位 — ${get_display_name(era.get(`callname:${prev}:-2`))}`,
                   type: 'button',
                 },
                 {
                   accelerator: 6,
                   config: { width: 7 },
-                  content: `后一位 — ${era.get(`callname:${next}:-2`)}`,
+                  content: `后一位 — ${get_display_name(era.get(`callname:${next}:-2`))}`,
                   type: 'button',
                 },
               ]

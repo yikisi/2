@@ -210,12 +210,12 @@ module.exports = async () => {
                   };
                   if (!(father_id > 0)) {
                     father_id = era.set(`cflag:${e}:父方角色`, 0);
-                    era.set(`callname:${e}:0`, '爸爸');
+                    era.set(`callname:${e}:0`, 'dad');
                     clean_errors();
                   }
                   if (!(mother_id > 0)) {
                     mother_id = era.set(`cflag:${e}:母方角色`, 0);
-                    era.set(`callname:${e}:0`, '妈妈');
+                    era.set(`callname:${e}:0`, 'mom');
                     clean_errors();
                   }
                   if (era.get(`cflag:${e}:招募状态`) !== recruit_flags.yes) {
@@ -228,8 +228,8 @@ module.exports = async () => {
                 });
             }
             if (version < 1200) {
-              era.set('callname:304:306', '㭴本代理');
-              era.set('callname:304:305', '安心泽老师');
+              era.set('callname:304:305', '900513');
+              era.set('callname:304:306', '900611');
               const my_reg = sys_reg_race(0);
               my_reg.last.race = my_reg.curr.race;
               my_reg.last.week = my_reg.curr.week;

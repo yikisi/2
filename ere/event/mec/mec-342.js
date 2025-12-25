@@ -19,6 +19,6 @@ module.exports = class extends MecGod {
   }
 
   set_callname() {
-    set(`callname:${this.id}:0`, '训练员');
+    set(`callname:${this.id}:0`, 'trainer');
   }
 };

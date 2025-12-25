@@ -10,7 +10,7 @@ module.exports = class extends CustomizedInit {
       era.set(
         'callname:308:-2',
         // CFLAGNAME:0 = 性别
-        `${900805 + (era.get('cflag:308:0') !== 1)}`,
+        `${900811 + (era.get('cflag:308:0') === 1)}`,
       );
       new Array(10).fill(0).forEach((_, i) =>
         // CFLAGNAME:30 - 39 = 草地适性 - 追马适性

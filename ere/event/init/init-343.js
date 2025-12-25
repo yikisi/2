@@ -17,7 +17,7 @@ module.exports = class extends CustomizedInit {
         era.set(
           'callname:343:-2',
           // CFLAGNAME:0 = 性别
-          `${904305 + (era.get('cflag:343:0') !== 1)}`,
+          `${904311 + (era.get('cflag:343:0') === 1)}`,
         );
       }
       new Array(5).fill(0).forEach((_, i) => era.set(`base:343:${5 + i}`, 800));

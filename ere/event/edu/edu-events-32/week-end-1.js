@@ -171,9 +171,9 @@ module.exports = (handlers) => {
       ' 张口想说些什么，但又闭上了嘴，算了，称呼这种事爱怎么称呼就怎么称呼吧',
     ]);
     await era.printAndWait('看在那双使人发狂的双眸的份上');
-    era.set('callname:32:0', '豚鼠君');
-    if (era.get('cflag:25:招募状态') !== recruit_flags.yes) {
-      era.set('callname:25:0', `豚鼠${me.get_adult_sex_title()}`);
+    era.set('callname:32:0', 'trainer32');
+    if (era.get('cflag:25:66') !== recruit_flags.yes) {
+      era.set('callname:25:0', `trainer25t${+(era.get('cflag:0:0') !== 1)}`);
     }
   };
 

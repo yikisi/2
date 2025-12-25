@@ -2,8 +2,6 @@ const era = require('#/era-electron');
 
 const CustomizedMec = require('#/event/mec/mec-common');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
-
 const recruit_flags = require('#/data/event/recruit-flags');
 const LegendUmaSelector = require('#/data/race/model/legend-uma-selector');
 const { race_enum } = require('#/data/race/race-const');
@@ -27,7 +25,7 @@ module.exports = class extends CustomizedMec {
     if (!this.set_callname_from_src()) {
       era.set(
         'callname:30:0',
-        get_chara_talk(0).sex_code - 1 ? '姐姐大人' : '哥哥大人',
+        era.get('cflag:0:0') === 1 ? 'big_brother' : 'big_sister',
       );
     }
   }

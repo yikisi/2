@@ -12,7 +12,7 @@ module.exports = class extends CustomizedInit {
       CustomizedInit.init_chara(71);
       CustomizedInit.init_chara(74);
       CustomizedInit.init_chara(17);
-      set('callname:86:17', ['鲁铎', '露娜']);
+      set('callname:86:17', ['101712', '101702']);
     }
   }
 };

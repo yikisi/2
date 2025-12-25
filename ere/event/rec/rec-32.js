@@ -15,6 +15,8 @@ const EventObject = require('#/data/event/event-object');
 const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks-32');
 const recruit_flags = require('#/data/event/recruit-flags');
 
+const { i18n } = require('#/i18n/selector');
+
 module.exports = class extends CustomizedRecruit {
   async recruit(stage) {
     const me = get_chara_talk(0),
@@ -167,7 +169,10 @@ module.exports = class extends CustomizedRecruit {
 
         EventMarks.get(0).sub(event_hooks.recruit_start);
         era.set('cflag:32:招募状态', recruit_flags.yes);
-        era.set('callname:32:0', '训练员君');
+        era.set(
+          'callname:32:0',
+          i18n().name.kun_template.replace('%NAME%', i18n().name.trainer),
+        );
         add_event(
           event_hooks.week_end,
           new EventObject(32, cb_enum.edu).set_arg('beginning'),

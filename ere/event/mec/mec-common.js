@@ -2,7 +2,6 @@ const era = require('#/era-electron');
 
 const check_aim_race = require('#/event/snippets/check-aim-race');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 
 const recruit_flags = require('#/data/event/recruit-flags');
@@ -308,7 +307,7 @@ class CustomizedMec {
     if (!this.set_callname_from_src()) {
       era.set(
         `callname:${this.id}:0`,
-        '训练员' + get_chara_talk(0).get_adult_sex_title(),
+        era.get('cflag:0:0') === 1 ? 'trainer_m' : 'trainer_f',
       );
     }
   }
@@ -338,7 +337,7 @@ class CustomizedMec {
       era.get(`callname:${this.id}:${this.id}`) ===
       era.get(`callname:${this.id}:-2`)
     ) {
-      era.set(`callname:${this.id}:${this.id}`, '我');
+      era.set(`callname:${this.id}:${this.id}`, 'me');
     }
   }
 

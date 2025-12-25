@@ -236,7 +236,7 @@ async function page_chairman_office() {
                   await get_chara_talk(0).say_and_wait(
                     '将 军！无路可退了，来和我一起吧！',
                   );
-                  era.set('callname:302:-2', '秋川弥生');
+                  era.set('callname:302:-2', '900201');
                   await chara.say_and_wait('啊吧啊吧啊吧啊吧……');
                   era.set('cflag:302:招募状态', recruit_flags.yes);
                   if (era.get('talent:302:病娇')) {

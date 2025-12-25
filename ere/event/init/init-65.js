@@ -6,9 +6,9 @@ module.exports = class extends CustomizedInit {
   init(is_reset) {
     if (!is_reset) {
       if (era.get('flag:角色性别') === 1) {
-        era.set('callname:65:85', '小少爷');
+        era.set('callname:65:85', 'mr');
       } else {
-        era.set('callname:65:85', '大小姐');
+        era.set('callname:65:85', 'miss');
       }
     }
   }

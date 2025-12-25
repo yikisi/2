@@ -52,7 +52,7 @@ module.exports = class extends CustomizedRecruit {
         )[0] === 1
       ) {
         era.set(`cflag:${this.id}:招募状态`, recruit_flags.yes);
-        era.set('callname:0:50', '大进');
+        era.set('callname:0:50', '105011');
       }
     }
   }

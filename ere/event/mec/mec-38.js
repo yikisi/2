@@ -7,7 +7,7 @@ module.exports = class extends CustomizedMec {
     if (!this.set_callname_from_src()) {
       era.set(
         `callname:${this.id}:0`,
-        era.get('cflag:0:性别') === 1 ? '欧尼酱' : '欧捏酱',
+        era.get('cflag:0:0') === 1 ? '哥哥' : '姐姐',
       );
     }
   }

@@ -21,7 +21,7 @@ module.exports = class extends CustomizedRecruit {
       if (await this.check_before_rec()) {
         return false;
       }
-      era.set('callname:17:-1', era.set('callname:17:-2', '露娜'));
+      era.set('callname:17:-1', era.set('callname:17:-2', '101702'));
       const luna = get_chara_talk(17);
       await era.printAndWait(
         `${CharaTalk.me.name} 挠了挠头，看着浴室里的积水好一会，随后摊了摊手。`,

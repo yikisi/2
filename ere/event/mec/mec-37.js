@@ -74,13 +74,13 @@ module.exports = class extends CustomizedMec {
   set_callname() {
     if (era.get('love:37') >= 75) {
       era.set('callname:37:0', [
-        `训练员${get_chara_talk(0).get_adult_sex_title()}`,
-        get_chara_talk(0).sex_code - 1 ? 'Mein Lieben' : 'Mein Lieber',
+        era.get('cflag:0:0') === 1 ? 'trainer_m' : 'trainer_f',
+        get_chara_talk(0).sex_code === 1 ? 'Mein Lieber' : 'Mein Lieben',
       ]);
     } else if (!this.set_callname_from_src()) {
       era.set(
         'callname:37:0',
-        `训练员${get_chara_talk(0).get_adult_sex_title()}`,
+        era.get('cflag:0:0') === 1 ? 'trainer_m' : 'trainer_f',
       );
     }
   }

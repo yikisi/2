@@ -7,7 +7,8 @@ module.exports = class extends CustomizedInit {
     if (!is_reset) {
       era.set(
         'callname:100:301',
-        era.get('flag:角色性别') === 1 ? '骏川先生' : '骏川小姐',
+        // FLAGNAME:116 = 角色性别
+        `${900111 + (era.get('flag:116') === 1)}`,
       );
     }
     era.set('item:斗魂注入鞭（S用）', 0);

@@ -1,6 +1,8 @@
 const I18nNames = require('#/i18n/zh-CN/chara/names');
 
 module.exports = class extends I18nNames {
+  danna = '旦那';
+
   900102 = 'トキノミノル';
   900202 = 'ノーザンテースト';
   904302 = 'ディクタス';

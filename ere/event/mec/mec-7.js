@@ -31,7 +31,7 @@ module.exports = class extends CustomizedMec {
 
   set_callname() {
     if (!this.set_callname_from_src()) {
-      era.set('callname:7:0', '阿训');
+      era.set('callname:7:0', '100013');
     }
   }
 

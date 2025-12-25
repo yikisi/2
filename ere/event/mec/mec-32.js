@@ -22,13 +22,13 @@ module.exports = class extends CustomizedMec {
     }
     if (!this.set_callname_from_src()) {
       if (get('flag:惩戒力度') === 3) {
-        set('callname:32:0', ['豚鼠君', '孕袋君']);
+        set('callname:32:0', ['trainer32', 'slave_p']);
       } else if (get('flag:惩戒力度') === 2) {
-        set('callname:32:0', ['豚鼠君', '性奴君']);
+        set('callname:32:0', ['trainer32', 'slave_s']);
       } else if (get('mark:32:同心') === 3) {
-        set('callname:32:0', ['豚鼠君', '主人大人']);
+        set('callname:32:0', ['trainer32', 'big_master']);
       } else {
-        set('callname:32:0', '豚鼠君');
+        set('callname:32:0', 'trainer32');
       }
     }
   }

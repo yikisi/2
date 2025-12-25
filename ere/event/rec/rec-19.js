@@ -300,7 +300,7 @@ module.exports = class extends CustomizedRecruit {
       era.set('cflag:19:招募状态', recruit_flags.yes);
       era.set('flag:物色对象', 0);
       EventMarks.get(0).sub(event_hooks.recruit_start);
-      era.set('callname:0:19', '数码');
+      era.set('callname:0:19', '101912');
       await this.recruit_end();
       return true;
     }

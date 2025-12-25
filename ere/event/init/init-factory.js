@@ -32,6 +32,7 @@ cons_dict[301] = require('#/event/init/init-301');
 cons_dict[302] = require('#/event/init/init-302');
 cons_dict[308] = require('#/event/init/init-308');
 cons_dict[343] = require('#/event/init/init-343');
+cons_dict[345] = require('#/event/init/init-345');
 cons_dict[349] = require('#/event/init/init-349');
 cons_dict[351] = require('#/event/init/init-351');
 // GENERATED END

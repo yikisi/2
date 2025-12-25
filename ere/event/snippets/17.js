@@ -59,7 +59,7 @@ module.exports = {
     if (edu_marks.emperor > 0) {
       transform(edu_marks);
     }
-    era.set('callname:17:-1', era.set('callname:17:-2', '鲁铎象征'));
+    era.set('callname:17:-1', era.set('callname:17:-2', '101701'));
     era.set(
       'relation:17:0',
       Math.max(era.get('relation:17:0'), era.get('relation:9017:0')),
@@ -107,7 +107,7 @@ module.exports = {
     if (event_marks.emperor === Number(luna_end)) {
       transform(event_marks);
     }
-    era.set('callname:17:-1', era.set('callname:17:-2', '鲁铎象征'));
+    era.set('callname:17:-1', era.set('callname:17:-2', '101701'));
     era.set('status:17:领域', 0);
   },
   transform,

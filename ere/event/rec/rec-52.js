@@ -31,7 +31,7 @@ module.exports = class extends CustomizedRecruit {
       me_callname = sys_get_callname(52, 0),
       urara = get_chara_talk(52),
       in_urara = get_chara_talk(52, chara_colors[52][1]);
-    era.set('callname:0:52', '乌拉拉');
+    era.set('callname:0:52', '105202');
     if (era.get('cflag:52:育成次数')) {
       await in_urara.say_as_unknown_and_wait('……');
       await in_urara.say_as_unknown_and_wait(
@@ -551,8 +551,8 @@ module.exports = class extends CustomizedRecruit {
     era.println();
 
     era.set('cflag:52:招募状态', recruit_flags.yes);
-    era.set('callname:52:0', '训练员');
-    era.set('callname:0:52', '乌拉拉');
+    era.set('callname:52:0', 'trainer');
+    era.set('callname:0:52', '105202');
     era.set('flag:当前互动角色', 52);
     await era.printAndWait([
       '成为 ',

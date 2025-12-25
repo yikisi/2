@@ -3,6 +3,8 @@ const era = require('#/era-electron');
 const be_common = require('#/event/love/love-events-32/girl-friend-be-common');
 const print_event_name = require('#/event/snippets/print-event-name');
 
+const { i18n } = require('#/i18n/selector');
+
 /**
  * @param {CharaTalk} tachyon
  * @param {CharaTalk} me
@@ -463,7 +465,10 @@ module.exports = async (tachyon, me, callname, life_marks) => {
   era.set('relation:32:0', 0);
   era.set('love:32', 0);
   life_marks.reset();
-  era.set('callname:32:0', '训练员君');
+  era.set(
+    'callname:32:0',
+    i18n().name.kun_template.replace('%NAME%', i18n().name.trainer),
+  );
   if (era.get('flag:声望不足替换')) {
     era.set('flag:当前声望', 0);
   } else {

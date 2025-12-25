@@ -18,21 +18,14 @@ module.exports = class extends CustomizedInit {
       era.set('talent:74:圣母', 1);
       era.set('talent:74:喜欢痛苦', 1);
       era.set('talent:74:淫身', -4);
-      if (era.get('flag:角色性别') === 1) {
-        era.set('callname:74:2', '铃鹿先生');
-        era.set('callname:74:13', '麦昆哥哥');
-        era.set('callname:74:27', '莱恩哥哥');
-        era.set('callname:74:64', '善信哥哥');
-        era.set('callname:74:71', '阿尔丹哥哥');
-        era.set('callname:74:86', '高峰哥哥');
-      } else {
-        era.set('callname:74:2', '铃鹿小姐');
-        era.set('callname:74:13', '麦昆姐姐');
-        era.set('callname:74:27', '莱恩姐姐');
-        era.set('callname:74:64', '善信姐姐');
-        era.set('callname:74:71', '阿尔丹姐姐');
-        era.set('callname:74:86', '高峰姐姐');
-      }
+      // FLAGNAME:116 = 角色性别
+      const is_man = era.get('flag:116') === 1;
+      era.set('callname:74:2', `${100217 + is_man}`);
+      era.set('callname:74:13', `${101317 + is_man}`);
+      era.set('callname:74:27', `${102712 + is_man}`);
+      era.set('callname:74:64', `${106413 + is_man}`);
+      era.set('callname:74:71', `${107112 + is_man}`);
+      era.set('callname:74:86', `${108614 + is_man}`);
     }
   }
 };

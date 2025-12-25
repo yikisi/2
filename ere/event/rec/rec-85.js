@@ -658,7 +658,7 @@ handlers[event_hooks.week_start] = async () => {
   era.println();
 
   await era.printAndWait([ruby.get_colored_name(), ' 轻笑着跑开了。']);
-  era.set('callname:0:85', '露比');
+  era.set('callname:0:85', '108511');
 
   new RubyLifeMarks().after_recruit = 1;
   era.set('cflag:85:招募状态', yes);

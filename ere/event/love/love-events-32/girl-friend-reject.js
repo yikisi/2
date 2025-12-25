@@ -623,7 +623,7 @@ module.exports = async (tachyon, me, _callname, life_marks) => {
 
   era.drawLine();
 
-  callname = era.set('callname:32:0', '豚鼠君');
+  callname = era.set('callname:32:0', 'trainer32');
   await print_event_name('停滞的时钟', tachyon);
   await tachyon.say_and_wait([
     '那么……首先就先来实验搭档上的磨合吧，',

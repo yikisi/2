@@ -209,7 +209,7 @@ async function out_page() {
               : {
                   name: '「来帮帮我吧」（招募）',
                   handle() {
-                    era.set('callname:301:-2', '骏川缰绳');
+                    era.set('callname:301:-2', '900101');
                     era.set('cflag:301:招募状态', recruit_flags.yes);
                     if (era.get('talent:301:病娇')) {
                       yandere_list.push(301);

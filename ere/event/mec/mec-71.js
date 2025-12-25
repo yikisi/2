@@ -2,8 +2,6 @@ const era = require('#/era-electron');
 
 const CustomizedMec = require('#/event/mec/mec-common');
 
-const CharaTalk = require('#/utils/chara-talk');
-
 const { buff_colors } = require('#/data/color-const');
 const ArdanEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-71');
 const LegendUmaSelector = require('#/data/race/model/legend-uma-selector');
@@ -47,11 +45,11 @@ module.exports = class extends CustomizedMec {
   set_callname() {
     if (!this.set_callname_from_src()) {
       if (era.get(`love:${this.id}`) >= 75) {
-        era.set(`callname:${this.id}:0`, '亲爱的');
+        era.set(`callname:${this.id}:0`, 'dear');
       } else {
         era.set(
           `callname:${this.id}:0`,
-          '训练员' + CharaTalk.me.get_adult_sex_title(),
+          era.get('cflag:0:0') === 1 ? 'trainer_m' : 'trainer_f',
         );
       }
     }

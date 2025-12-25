@@ -12,7 +12,7 @@ module.exports = class extends CustomizedInit {
       CustomizedInit.init_chara(74);
       CustomizedInit.init_chara(86);
       if (era.get('flag:角色性别') === 1) {
-        era.set('callname:13:71', '哥哥');
+        era.set('callname:13:71', 'elder_brother');
       }
     }
   }

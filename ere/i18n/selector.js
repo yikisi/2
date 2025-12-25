@@ -15,7 +15,7 @@ function __(key, _default = key) {
   const arr = (key ?? '').split('.');
   let o = dict[lan];
   for (let i = 0; i < arr.length; ++i) {
-    if (!o[arr[i]]) {
+    if (o[arr[i]] === undefined) {
       return _default instanceof Function ? _default() : _default;
     }
     o = o[arr[i]];

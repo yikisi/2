@@ -1,6 +1,8 @@
 const I18nNames = require('#/i18n/zh-CN/chara/names');
 
 module.exports = class extends I18nNames {
+  you = 'You';
+
   900102 = 'Tokino Minoru';
   900202 = 'Northern Taste';
   904302 = 'Dictus';

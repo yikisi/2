@@ -7,7 +7,7 @@ module.exports = class extends CustomizedInit {
     if (!is_reset) {
       if (era.get('flag:角色性别') === 1) {
         CustomizedInit.init_chara(90);
-        era.set('callname:0:90', '哥哥');
+        era.set('callname:0:90', 'elder_brother');
       }
     }
   }

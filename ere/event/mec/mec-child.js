@@ -51,9 +51,9 @@ class MecChild extends CustomizedMec {
   set_callname() {
     let callname;
     if (!era.get(`cflag:${this.id}:父方角色`)) {
-      callname = '爸爸';
+      callname = 'dad';
     } else if (!era.get(`cflag:${this.id}:母方角色`)) {
-      callname = '妈妈';
+      callname = 'mom';
     } else {
       return super.set_callname();
     }

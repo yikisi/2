@@ -335,9 +335,12 @@ async function sys_have_baby(mid) {
       era.set(`relation:${cid}:${ch_id}`, 300);
       era.set(
         `callname:${ch_id}:${cid}`,
-        era.get(`cflag:${cid}:性别`) === 1 ? '哥哥' : '姐姐',
+        era.get(`cflag:${cid}:0`) === 1 ? 'elder_brother' : 'elder_sister',
       );
-      era.set(`callname:${cid}:${ch_id}`, c_sex === 1 ? '弟弟' : '妹妹');
+      era.set(
+        `callname:${cid}:${ch_id}`,
+        c_sex === 1 ? 'younger_brother' : 'younger_sister',
+      );
     });
   era.set(`cflag:${ch_id}:父方角色`, fid);
   era.set(`cflag:${ch_id}:母方角色`, mid);
@@ -364,11 +367,11 @@ async function sys_have_baby(mid) {
   );
   era.set(`relation:${ch_id}:${mid}`, era.set(`relation:${ch_id}:${fid}`, 400));
   era.set(`relation:${mid}:${ch_id}`, era.set(`relation:${fid}:${ch_id}`, 400));
-  era.set(`callname:${ch_id}:${fid}`, '爸爸');
-  era.set(`callname:${ch_id}:${mid}`, '妈妈');
+  era.set(`callname:${ch_id}:${fid}`, 'dad');
+  era.set(`callname:${ch_id}:${mid}`, 'mom');
   era.set(
     `callname:${fid}:${ch_id}`,
-    era.set(`callname:${mid}:${ch_id}`, c_sex === 1 ? '儿子' : '女儿'),
+    era.set(`callname:${mid}:${ch_id}`, c_sex === 1 ? 'son' : 'daughter'),
   );
   era.set(
     `love:${ch_id}`,
