@@ -24,7 +24,8 @@ function generate_dictionary(
   ret.CHARA = era.get(`callname:${cid}:-2`);
   ret.COLOR = get_chara_color(cid);
   ret.YOU = era.get('callname:0:-2');
-  const sex = era.get(`cflag:${cid}:性别`) === 1;
+  // CFLAGNAME:0 = 性别
+  const sex = era.get(`cflag:${cid}:0`) === 1;
   ret.SEX = sex ? '他' : '她';
   if (options.call) {
     ret.CALLNAME = sys_get_callname(cid, 0);
