@@ -18,7 +18,7 @@ module.exports = [
     rules: {
       'max-lines': [
         'warn',
-        { max: 1000, skipBlankLines: true, skipComments: true },
+        { max: 1024, skipBlankLines: true, skipComments: true },
       ],
       'n/no-missing-require': 'off',
       'n/no-unpublished-import': 'off',

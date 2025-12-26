@@ -46,5 +46,6 @@ for (const m in name_data) {
 if (flag) {
   console.log('\tnone');
 } else {
+  // eslint-disable-next-line n/no-process-exit
   process.exit(1);
 }
