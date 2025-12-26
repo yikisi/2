@@ -281,8 +281,8 @@ module.exports = (handlers) => {
       new EroParticipant(
         attacker,
         era.get(`talent:${attacker}:阴道尺寸`) > 0 &&
-        !era.get(`status:${attacker}:弗隆K`) &&
-        !era.get(`status:${attacker}:弗隆P`)
+          !era.get(`status:${attacker}:弗隆K`) &&
+          !era.get(`status:${attacker}:弗隆P`)
           ? part_enum.clitoris
           : part_enum.virgin,
       ),
@@ -370,8 +370,8 @@ module.exports = (handlers) => {
       new EroParticipant(
         supporter,
         era.get(`cflag:${supporter}:阴茎尺寸`) > 0 ||
-        era.get(`status:${supporter}:弗隆K`) > 0 ||
-        era.get(`status:${supporter}:弗隆P`) > 0
+          era.get(`status:${supporter}:弗隆K`) > 0 ||
+          era.get(`status:${supporter}:弗隆P`) > 0
           ? part_enum.penis
           : part_enum.clitoris,
       ),

@@ -317,12 +317,8 @@ module.exports = async () => {
       buffer.push(async () => {
         await tachyon.say_and_wait([callname, '～～今天的训练可不能马虎哦']);
         await tachyon.say_and_wait('为什么？真是……连最基础的生物常识都不懂吗');
-        await tachyon.say_and_wait(
-          '母体的锻炼不足，可是会影响到后代的健康的❤',
-        );
-        await tachyon.say_and_wait(
-          '为了备孕，可千万不能手下留情哦，孩子他爸❤',
-        );
+        await tachyon.say_and_wait('母体的锻炼不足，可是会影响到后代的健康的❤');
+        await tachyon.say_and_wait('为了备孕，可千万不能手下留情哦，孩子他爸❤');
       });
     }
   } else if (

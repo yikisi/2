@@ -36,9 +36,9 @@ class CommonKojoFactory {
         cid >= first_child_id
           ? { c: this.#child, n: get(`callname:${cid}:-2`) }
           : { c: this.#common, n: cid };
-      this.#dict[cid] = new (this.#cons[
-        script_dict[script_name] || script_name
-      ] || con)(cid);
+      this.#dict[cid] = new (
+        this.#cons[script_dict[script_name] || script_name] || con
+      )(cid);
     }
     return this.#dict[cid].get_this();
   }

@@ -119,7 +119,6 @@ class CustomizedEro {
    * 睡奸惊醒
    * @param {number} supporter
    */
-  // eslint-disable-next-line no-unused-vars
   async raping_start(supporter) {
     let temp;
     if (
