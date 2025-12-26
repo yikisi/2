@@ -204,7 +204,7 @@ module.exports = class extends CustomizedDaily {
     }
     if (!temp) {
       temp = get_random_entry(talk_arr);
-      if (temp instanceof Array) {
+      if (Array.isArray(temp)) {
         life_marks.gacha_talk = 1;
       }
     }

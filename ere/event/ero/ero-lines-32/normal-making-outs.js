@@ -364,7 +364,7 @@ module.exports = class extends EroNormalMakingOuts {
         '那百叶窗一般的狂气双眼，如今散发着魅惑的色气。',
       );
     } else if (
-      era.get('tcvar:0:接近高潮') instanceof Array &&
+      Array.isArray(era.get('tcvar:0:接近高潮')) &&
       era.get('tcvar:0:接近高潮').indexOf(part_enum.penis) !== -1
     ) {
       await defender.print_and_wait(

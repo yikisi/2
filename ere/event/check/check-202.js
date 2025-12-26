@@ -8,7 +8,7 @@ const { race_infos } = require('#/data/race/race-const');
 module.exports = class extends CustomizedCheck {
   check_after_race(extra_flag) {
     if (
-      get('cflag:306:招募状态') instanceof Array &&
+      Array.isArray(get('cflag:306:招募状态')) &&
       extra_flag.rank === 1 &&
       race_infos[extra_flag.race].race_class <= class_enum.G3
     ) {

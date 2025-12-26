@@ -344,7 +344,7 @@ module.exports = async () => {
             if (version <= 1311) {
               era.getAddedCharacters().forEach((e) => {
                 const titles = era.get(`cstr:${e}:称号`);
-                if (titles instanceof Array) {
+                if (Array.isArray(titles)) {
                   titles.forEach((t) => t.s === false && delete t.s);
                 }
                 if (
@@ -557,7 +557,7 @@ module.exports = async () => {
                 if (cid > 0) {
                   const t_table = era.get(`chara:${cid}`)?.talent;
                   if (
-                    t_table instanceof Object &&
+                    typeof t_table === 'object' &&
                     Object.entries(t_table)
                       .filter(([t]) => Number(t) <= 20)
                       .reduce(

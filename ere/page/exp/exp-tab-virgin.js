@@ -135,12 +135,12 @@ module.exports = {
           `cstr:${chara.id}:无自觉初次被内射经历`,
         );
         let squirt_exp = era.get(`cstr:${chara.id}:初次潮吹经历`);
-        if (squirt_exp instanceof Array && squirt_exp.length === 0) {
+        if (Array.isArray(squirt_exp) && squirt_exp.length === 0) {
           squirt_exp = undefined;
         }
         let unknown_squirt_exp = era.get(`cstr:${chara.id}:无自觉初次潮吹经历`);
         if (
-          unknown_squirt_exp instanceof Array &&
+          Array.isArray(unknown_squirt_exp) &&
           unknown_squirt_exp.length === 0
         ) {
           unknown_squirt_exp = undefined;

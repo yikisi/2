@@ -30,7 +30,7 @@ const { get_breast_cup } = require('#/data/info-generator');
 function check_tags(tags, cid, oid, chara_check, common_check) {
   const fail = tags.findIndex((tag) => {
     let ret;
-    if (tag instanceof Function) {
+    if (typeof tag === 'function') {
       ret = !tag(cid, oid);
     } else {
       ret = chara_check[tag] === false || common_check[tag] === false;
