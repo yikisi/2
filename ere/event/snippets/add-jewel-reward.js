@@ -13,8 +13,8 @@ const { palam_colors } = require('#/data/color-const');
  */
 function add_jewel_reward(cid, keys, nums) {
   const chara = get_chara_talk(cid);
-  const key_list = keys instanceof Array ? keys : [keys];
-  const num_list = nums instanceof Array ? nums : [nums];
+  const key_list = Array.isArray(keys) ? keys : [keys];
+  const num_list = Array.isArray(nums) ? nums : [nums];
   const buffs = {};
   update_c_j_buff(cid, buffs);
   for (let i = 0; i < Math.min(key_list.length, num_list.length); ++i) {

@@ -21,7 +21,7 @@ const fron_cols = 4,
  * @param {number} [timer]
  */
 function get_event_record(message, timer_record, timer) {
-  const _content = message instanceof Array ? message : [message];
+  const _content = Array.isArray(message) ? message : [message];
   let count = 0;
   _content.forEach((c) => (count += (c['content'] || c).length));
   return {

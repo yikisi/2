@@ -88,7 +88,8 @@ class RecFactory extends CommonKojoFactory {
   run_custom_rec(cid, stage, _, ebj) {
     const kojo = this.get(cid);
     return kojo.recruit(stage, ebj).then((r) => {
-      if (get(`cflag:${cid}:招募状态`) === recruit_flags.yes) {
+      // CFLAGNAME:66 = 招募状态
+      if (get(`cflag:${cid}:66`) === recruit_flags.yes) {
         return kojo
           .recruit_result()
           .then(() => punish_by_yandere(cid, stage))

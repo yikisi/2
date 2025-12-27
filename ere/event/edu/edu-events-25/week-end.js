@@ -427,7 +427,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
       ]);
       era.println();
       const random_colors = Object.values(chara_colors).map((e) =>
-        e instanceof Array ? e[0] : e,
+        Array.isArray(e) ? e[0] : e,
       );
       const buffer = [];
       buffer.push({ content: '？？？', fontWeight: 'bold' });

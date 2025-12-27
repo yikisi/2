@@ -170,7 +170,7 @@ module.exports = {
       return '#9f9f9f';
     }
     let ret = chara_colors[cid];
-    ret = ret instanceof Array ? ret[0] : ret;
+    ret = Array.isArray(ret) ? ret[0] : ret;
     if (!ret) {
       const id_color = cid.toString(9).padStart(3, '0');
       ret = `#${[id_color[0], id_color[1], id_color[2]]

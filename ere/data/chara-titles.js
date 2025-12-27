@@ -55,7 +55,7 @@ class CharaTitles {
   /** @returns {{c:string,n:string,[s]:boolean}[]} */
   get() {
     let ret = era.get(`cstr:${this.#id}:11`);
-    if (!(ret instanceof Array)) {
+    if (!Array.isArray(ret)) {
       ret = era.set(`cstr:${this.#id}:11`, []);
     }
     return ret;

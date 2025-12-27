@@ -160,6 +160,7 @@ class I18nClothes {
   106201 = '邦邦邦Tiltott';
   106250 = '蓝色・湍流';
   106301 = 'Mantle of Steel';
+  106310 = '信步于井然之通途';
   106401 = 'Line Breakthrough';
   106446 = '赤心的驯鹿小姐';
   106501 = 'Fun☆Fun☆派对之夜';
@@ -183,6 +184,7 @@ class I18nClothes {
   107401 = 'Brunissage・Line';
   107446 = '星辰般澄澈的Snow Lolita';
   107601 = 'Saisir le rêve';
+  107610 = 'Nouvelle pousse';
   107701 = 'The Proud Road';
   107746 = 'Celestial Road';
   107801 = 'Fluttertail Spirit';

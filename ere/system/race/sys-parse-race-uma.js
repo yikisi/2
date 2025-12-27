@@ -164,7 +164,7 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
     named_level[0] +
     ((named_level[1] - named_level[0]) * (edu_phase - 24)) / (144 - 24) -
     1;
-  if (contestants instanceof Array) {
+  if (Array.isArray(contestants)) {
     contestants.forEach((c) => {
       if (c instanceof PseudoUma) {
         ret.push(c);

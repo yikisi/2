@@ -27,7 +27,7 @@ class CharaTalk {
       },
       mental ? '（' : '「',
     ];
-    if (_content instanceof Array) {
+    if (Array.isArray(_content)) {
       content.push(..._content);
     } else {
       content.push(_content);
@@ -229,7 +229,7 @@ class CharaTalk {
       this.id ? this.get_colored_name() : '',
       `${mental ? '（' : '「'}`,
     ];
-    if (_content instanceof Array) {
+    if (Array.isArray(_content)) {
       content.push(..._content);
     } else {
       content.push(_content);
@@ -261,7 +261,7 @@ class CharaTalk {
       },
       '「',
     ];
-    if (_content instanceof Array) {
+    if (Array.isArray(_content)) {
       content.push(..._content);
     } else {
       content.push(_content);
@@ -294,7 +294,7 @@ class CharaTalk {
       });
     }
     content.push('「');
-    if (_content instanceof Array) {
+    if (Array.isArray(_content)) {
       content.push(..._content);
     } else {
       content.push(_content);

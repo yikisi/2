@@ -80,7 +80,7 @@ module.exports = {
         const drunk_milk_exp = era.get(`cstr:${chara.id}:初次吸奶经历`);
         let drunk_secretion_exp = era.get(`cstr:${chara.id}:初次饮爱液经历`);
         if (
-          drunk_secretion_exp instanceof Array &&
+          Array.isArray(drunk_secretion_exp) &&
           drunk_secretion_exp.length === 0
         ) {
           drunk_secretion_exp = undefined;
@@ -89,7 +89,7 @@ module.exports = {
           `cstr:${chara.id}:无自觉初次饮爱液经历`,
         );
         if (
-          unknown_drunk_secretion_exp instanceof Array &&
+          Array.isArray(unknown_drunk_secretion_exp) &&
           unknown_drunk_secretion_exp.length === 0
         ) {
           unknown_drunk_secretion_exp = undefined;

@@ -299,7 +299,7 @@ function love_uma(cid, val, shown = true) {
  */
 function get_callname(_from, _to) {
   const callname = era.get(`callname:${_from}:${_to}`);
-  if (callname instanceof Array) {
+  if (Array.isArray(callname)) {
     return get_random_entry(callname);
   }
   if (callname === '-') {

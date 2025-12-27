@@ -19,7 +19,7 @@ function get_skills_and_print_in_event(
   shown = true,
 ) {
   let ret_flag = false;
-  if (skills instanceof Array) {
+  if (Array.isArray(skills)) {
     const to_remove = [],
       current_skills = skill_control.get(),
       new_skills = skills.filter((e) => {

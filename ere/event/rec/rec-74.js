@@ -59,7 +59,7 @@ module.exports = class extends CustomizedRecruit {
         dict.COLOR59 = get_chara_talk(59).color;
         dict.SIR = me.adult_sex_title;
         await print_event_name('慢悠悠的公园之旅', bright);
-        if ((await kojo['rec1'](dict))[3] === 0) {
+        if ((await kojo['rec1'](dict))[3] === 1) {
           add_event(event_hooks.school_atrium, ebj);
           EventMarks.get(0).add(event_hooks.school_atrium);
         } else {
@@ -73,10 +73,10 @@ module.exports = class extends CustomizedRecruit {
         dict.SIR = me.adult_sex_title;
         if (era.get(`cflag:${this.id}:66`) === recruit_flags.no) {
           await print_event_name('慢悠悠的登场～', bright);
-          r_flag = (await kojo['rec2'](dict))[1] === 1;
+          r_flag = (await kojo['rec2'](dict))[1] === 2;
         } else {
           await print_event_name('好久不见～', bright);
-          r_flag = (await kojo['rec3'](dict))[0] === 0;
+          r_flag = (await kojo['rec3'](dict))[0] === 1;
         }
         if (r_flag) {
           era.set(`cflag:${this.id}:66`, recruit_flags.yes);
@@ -86,6 +86,9 @@ module.exports = class extends CustomizedRecruit {
         era.set(`cflag:${this.id}:67`, 1);
         era.set('flag:33', 0);
         EventMarks.get(0).sub(event_hooks.school_atrium);
+    }
+    if (era.get(`cflag:${this.id}:66`) === recruit_flags.yes) {
+      await this.recruit_end();
     }
     return true;
   }

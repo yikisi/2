@@ -566,7 +566,7 @@ const era = {
 };
 
 Object.keys(era).forEach((key) => {
-  if (era[key] instanceof Function && key !== 'delay') {
+  if (typeof era[key] === 'function' && key !== 'delay') {
     era[key] = (...args) => {
       if (era.version.engine === undefined) {
         return console.log(

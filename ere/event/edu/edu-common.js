@@ -493,13 +493,12 @@ class CustomizedEdu extends ICustomizedEdu {
    * @param {CharaTalk} me
    * @param {string} callname
    * @param {HookArg} hook
-   * @param {RaceEndParams} extra_flag
+   * @param {RaceEndParams} extra
    */
-  // eslint-disable-next-line no-unused-vars
-  async race_end(chara, me, callname, hook, extra_flag) {
-    const { pseudo } = extra_flag;
+  async race_end(chara, me, callname, hook, extra) {
+    const { pseudo } = extra;
     if (pseudo.race.conditionParams.item === 1) {
-      if (extra_flag.rank === 1) {
+      if (extra.rank === 1) {
         await print_event_name('情绪高涨的胜利', chara);
         await era.printAndWait([
           me.get_colored_name(),
@@ -536,17 +535,17 @@ class CustomizedEdu extends ICustomizedEdu {
           ' 识趣地关上了性玩具，轻声安慰。',
         ]);
       }
-    } else if (extra_flag.rank === 1) {
+    } else if (extra.rank === 1) {
       await print_event_name('竞赛获胜', chara);
       await me.say_and_wait(
         Math.random() < 0.5 ? '太棒了！' : '往更高的目标迈进吧！',
       );
-    } else if (extra_flag.rank <= 5) {
+    } else if (extra.rank <= 5) {
       await print_event_name('竞赛上榜', chara);
       await me.say_and_wait(
         Math.random() < 0.5 ? '今天的表现也很好！' : '绝对不能输给她们！',
       );
-    } else if (extra_flag.rank <= 10) {
+    } else if (extra.rank <= 10) {
       await print_event_name('竞赛败北', chara);
       await me.say_and_wait(
         Math.random() < 0.5 ? '下次表现一定更好！' : '沮丧也不是办法！',
@@ -566,19 +565,18 @@ class CustomizedEdu extends ICustomizedEdu {
    * @param {CharaTalk} me
    * @param {string} callname
    * @param {HookArg} hook
-   * @param {RaceStartParams} extra_flag
+   * @param {RaceStartParams} extra
    */
-  // eslint-disable-next-line no-unused-vars
-  async race_start(chara, me, callname, hook, extra_flag) {
+  async race_start(chara, me, callname, hook, extra) {
     await print_event_name('竞赛之前', chara);
     const dict = this.#dict;
-    if (extra_flag.pseudo.race.conditionParams.item === 1) {
+    if (extra.pseudo.race.conditionParams.item === 1) {
       dict.item = check_sub_slavery(this.id, get_sex_acceptable(this.id));
     } else if (
       era.get('flag:惩戒力度') >= 2 &&
       (dict.do_sex = Math.random() < 0.5)
     ) {
-      extra_flag.motivation_change = 1;
+      extra.motivation_change = 1;
     }
     await kojo['赛前'](dict);
   }

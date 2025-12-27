@@ -15,27 +15,15 @@ const {
 
 const print_ero_page = require('#/page/page-ero');
 
+const say_by_mother = require('#/event/edu/edu-events-85/say-by-mother');
 const Love85UtilFuckBuddy = require('#/event/love/love-events-85/until-fuck-buddy');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { say_by_passer_by_and_wait } = require('#/utils/chara-talk-factory');
 
-const { get_chara_color } = require('#/data/chara-colors');
 const { buff_colors } = require('#/data/color-const');
 const EroParticipant = require('#/data/ero/ero-participant');
 const { part_enum } = require('#/data/ero/part-const');
-
-const ruby_color = get_chara_color(85);
-
-async function say_by_mother(_content) {
-  const content = _content instanceof Array ? _content : [_content];
-  return era.printAndWait(
-    [{ content: '荻野贵女', fontWeight: 'bold' }, '「', ...content, '」'],
-    {
-      color: ruby_color,
-    },
-  );
-}
 
 module.exports = class extends Love85UtilFuckBuddy {
   async 74(ruby, me, callname, stage, extra_flag, event_object) {

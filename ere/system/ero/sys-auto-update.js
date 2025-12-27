@@ -162,7 +162,7 @@ function sys_auto_update(cid) {
     }
     cand_list = cand_list.filter(
       (skill) =>
-        s_p_dict[skill] instanceof Object &&
+        typeof s_p_dict[skill] === 'object' &&
         Object.entries(s_p_dict[skill]).filter(([j, p]) => p > j_dict[j])
           .length === 0,
     );

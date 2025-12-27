@@ -11,7 +11,7 @@ module.exports = (handlers) => {
         const { type, arg } = e;
         return (
           type === cb_enum.love &&
-          arg instanceof Array &&
+          Array.isArray(arg) &&
           (arg[0] === 49 || arg[0] === 74 || arg[0] === 89 || arg[0] === 99)
         );
       });

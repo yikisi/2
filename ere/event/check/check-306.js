@@ -20,7 +20,7 @@ module.exports = class extends CustomizedCheck {
 
   check_next_week() {
     const temp = get('cflag:306:招募状态');
-    if (temp instanceof Array) {
+    if (Array.isArray(temp)) {
       if (temp.findIndex((e) => e < 3) === -1) {
         add_event(
           event_hooks.week_start,

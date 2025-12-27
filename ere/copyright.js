@@ -329,11 +329,10 @@ function generate_copyrights() {
   buffer.push([]);
   let tmp = buffer.at(-1);
   for (const a of line_copyrights) {
-    const title =
-      a[0] instanceof Array
-        ? a[0].map((e) => (e instanceof Object ? e : { content: e }))
-        : [{ content: a[0] }];
-    const names = a[1] instanceof Array ? a[1] : [a[1]];
+    const title = Array.isArray(a[0])
+      ? a[0].map((e) => (typeof e === 'object' ? e : { content: e }))
+      : [{ content: a[0] }];
+    const names = Array.isArray(a[1]) ? a[1] : [a[1]];
     tmp.push({
       config: { width: 8 },
       content: [

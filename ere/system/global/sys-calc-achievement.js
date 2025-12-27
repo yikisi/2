@@ -35,7 +35,7 @@ class GlobalAchievement {
   }
 
   get #fields() {
-    return Object.keys(this).filter((m) => !(this[m] instanceof Function));
+    return Object.keys(this).filter((m) => typeof this[m] !== 'function');
   }
 
   edu_one = [4, types.edu, platinum_type.all];
