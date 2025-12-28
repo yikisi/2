@@ -49,6 +49,8 @@ module.exports = class extends I18nEntry {
   name = new (require('#/i18n/ja-JP/chara/names'))();
   title = new (require('#/i18n/ja-JP/chara/titles'))();
 
+  item = new (require('#/i18n/ja-JP/items'))();
+
   tb_abl = new (require('#/i18n/ja-JP/table/abl'))();
 
   clothe = new (require('#/i18n/ja-JP/race/clothes'))();

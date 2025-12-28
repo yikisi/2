@@ -25,6 +25,8 @@ const EventObject = require('#/data/event/event-object');
 const LoveLimitStatus = require('#/data/love-limit-status');
 const { attr_enum, pressure_border } = require('#/data/train-const');
 
+const { i18n } = require('#/i18n/selector');
+
 /** @param {Record<string,function(number):Promise>} handlers */
 module.exports = (handlers) => {
   handlers[100] = async () => {
@@ -383,41 +385,34 @@ module.exports = (handlers) => {
     }
   };
 
-  handlers[45] = handlers[46] = async (item_id) => {
-    const item_name = era.get(`itemname:${item_id}`),
-      aim = await select_target_in_storage(
-        item_id,
-        (chara_id) =>
-          era.get(`base:${chara_id}:体力`) !==
-          era.get(`maxbase:${chara_id}:体力`),
-      );
+  handlers[45] = handlers[46] = async (iid) => {
+    const aim = await select_target_in_storage(
+      iid,
+      (cid) => era.get(`base:${cid}:0`) < era.get(`maxbase:${cid}:0`),
+    );
     if (aim !== undefined) {
       const chara = get_chara_talk(aim);
       await era.printAndWait([
         chara.id ? '给 ' : '',
         chara.get_colored_name(),
-        ' 服用了【',
-        item_name,
-        '】……',
+        ' 服用了',
+        i18n().item.get_name(iid),
+        '……',
         { isBr: true },
         chara.get_colored_name(),
         ' 的 ',
-        ...sys_change_attr_and_print(
-          aim,
-          attr_enum.hp,
-          item_id === 45 ? 400 : 150,
-        ),
+        ...sys_change_attr_and_print(aim, attr_enum.hp, iid === 45 ? 400 : 150),
       ]);
       era.add(`exp:${aim}:吸奶量`, 200);
-      sys_change_lust(aim, item_id === 45 ? 800 : 300);
-      era.add(`item:${item_name}`, -1);
+      sys_change_lust(aim, iid === 45 ? 800 : 300);
+      era.add(`item:${iid}`, -1);
       return true;
     }
   };
 
-  handlers[47] = handlers[48] = async (item_id) => {
-    const item_name = era.get(`itemname:${item_id}`),
-      total = era.get(`item:${item_id}`);
+  handlers[47] = handlers[48] = async (iid) => {
+    const item_name = i18n().item.get_name(iid);
+    const total = era.get(`item:${iid}`);
     let to_sell = 1,
       flag_sell = true,
       flag_print = true;
@@ -427,7 +422,7 @@ module.exports = (handlers) => {
         [
           {
             config: { align: 'left' },
-            content: `请选择要售出的【${item_name}】数量`,
+            content: `请选择要售出的${item_name}数量`,
             type: 'text',
           },
         ],
@@ -504,12 +499,12 @@ module.exports = (handlers) => {
           content: to_sell.toString(),
           fontWeight: 'bold',
         },
-        ' 瓶【',
+        ' 瓶',
         item_name,
-        '】吗？',
+        '吗？',
       ]))
     ) {
-      const money = to_sell * era.get(`itemprice:${item_id}`);
+      const money = to_sell * era.get(`itemprice:${iid}`);
       global_achievement.play_mil2 = 1;
       await era.printAndWait([
         '售出了 ',
@@ -518,9 +513,9 @@ module.exports = (handlers) => {
           content: to_sell.toString(),
           fontWeight: 'bold',
         },
-        ' 瓶【',
+        ' 瓶',
         item_name,
-        '】，获得了 ',
+        '，获得了 ',
         {
           color: money_color,
           content: money.toLocaleString(),
@@ -536,7 +531,7 @@ module.exports = (handlers) => {
           new EventObject(0, cb_enum.edu).set_arg('breakfast'),
         );
       }
-      era.add(`item:${item_id}`, -to_sell);
+      era.add(`item:${iid}`, -to_sell);
       era.add('flag:当前马币', money);
       return true;
     }

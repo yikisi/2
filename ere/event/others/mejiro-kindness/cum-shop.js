@@ -756,11 +756,7 @@ async function cum_shop(chara, me) {
               }
               const item = get_random_entry(items);
               era.add(`item:${item}`, 1);
-              await era.printAndWait([
-                '获得了道具【',
-                era.get(`itemname:${item}`).toUpperCase(),
-                '】！',
-              ]);
+              await era.printAndWait(i18n().item.notify(item));
             }
           }
         },

@@ -41,6 +41,8 @@ const { get_random_value } = require('#/utils/value-utils');
 const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks-32');
 const recruit_flags = require('#/data/event/recruit-flags');
 
+const { __, i18n } = require('#/i18n/selector');
+
 module.exports = class extends MyPrivacyEvents {
   /**
    * @param {CharaTalk} me
@@ -201,7 +203,7 @@ module.exports = class extends MyPrivacyEvents {
       ...new Array(8).fill(0).map((_, i) => i),
       ...new Array(7).fill(0).map((_, i) => i + 10),
     ]);
-    await printAndWait(['获得了道具【', get(`itemname:${item}`), '】！']);
+    await printAndWait(['获得了道具', i18n().item.get_name(item), '！']);
     add(`item:${item}`, 1);
     if (get('flag:极端行为限制') > 0) {
       add_event(hook.hook, event_object.set_arg('strange_day2'));
@@ -855,13 +857,13 @@ module.exports = class extends MyPrivacyEvents {
       print('\n获得了几瓶比较贵的药水：');
       let total = 5;
       for (let i = 0; i < med_list.length; ++i) {
-        const item_id = med_list[i];
+        const iid = med_list[i];
         const count =
           i === med_list.length - 1 ? total : get_random_value(0, total);
         if (count > 0) {
           total -= count;
-          print(`· ${get(`itemname:${item_id}`)} × ${count}`);
-          add(`item:${item_id}`, count);
+          print(`· ${__(`item.${iid}`)} × ${count}`);
+          add(`item:${iid}`, count);
         }
       }
       await waitAnyKey();

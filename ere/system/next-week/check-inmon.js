@@ -13,6 +13,8 @@ const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const { gene_juel_names } = require('#/data/other-const');
 const { gene_type_colors } = require('#/data/race/model/uma-gene');
 
+const { __ } = require('#/i18n/selector');
+
 /** @param {number[]} in_team_list */
 function check_inmon(in_team_list) {
   const milk_list = [[], []];
@@ -58,7 +60,7 @@ function check_inmon(in_team_list) {
           ...buffer,
           buffer.length > 1 ? ' 各' : ' ',
           '贡上了一杯 ',
-          era.get(`itemname:${milk_item}`),
+          __(`item.${milk_item}`),
           '】',
         ]);
         era.add(`item:${milk_item}`, milk_list[1 - i].length);

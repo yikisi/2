@@ -66,6 +66,8 @@ const { location_enum } = require('#/data/locations');
 const { max_chara_id } = require('#/data/other-const');
 const { attr_enum } = require('#/data/train-const');
 
+const { i18n } = require('#/i18n/selector');
+
 module.exports = class extends StrangeDayEvents {
   get dict() {
     return {
@@ -418,7 +420,7 @@ module.exports = class extends StrangeDayEvents {
         ...new Array(8).fill(0).map((_, i) => i),
         ...new Array(7).fill(0).map((_, i) => i + 10),
       ]);
-      print(['获得了奖品【', get(`itemname:${item}`).toUpperCase(), '】！']);
+      print(i18n().item.notify(item));
       add(`item:${item}`, 1);
       sys_like_chara(305, 0, get_random_value(0, 10));
       await waitAnyKey();
@@ -882,8 +884,9 @@ module.exports = class extends StrangeDayEvents {
         break;
       case 2:
         println();
-        add('item:马跳Z', 1);
-        await printAndWait('获得了【马跳Z】！');
+        // ITEMNAME:31 = 马跳Z
+        print(i18n().item.notify(31));
+        add('item:31', 1);
         break;
       case 3:
         add('maxbase:0:精力', 100);

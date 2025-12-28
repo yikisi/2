@@ -246,6 +246,8 @@ class I18nEntry {
 
   achievement = new (require('#/i18n/zh-CN/achieve'))();
   achieve_desc = new (require('#/i18n/zh-CN/achieve-desc'))();
+  item = new (require('#/i18n/zh-CN/items'))();
+  item_desc = new (require('#/i18n/zh-CN/item-desc'))();
   note = new (require('#/i18n/zh-CN/notes'))();
 
   tb_abl = new (require('#/i18n/zh-CN/table/abl'))();

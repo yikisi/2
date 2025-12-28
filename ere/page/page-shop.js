@@ -4,13 +4,15 @@ const { sys_change_money } = require('#/system/sys-calc-flag');
 
 const { attr_change_colors, money_color } = require('#/data/color-const');
 const date_indicator = require('#/data/date-indicator');
-const shop_desc = require('#/data/desc/items.json');
 const { location_name } = require('#/data/locations');
+
+const { __ } = require('#/i18n/selector');
 
 /** @param {({id:number,[limit]:boolean}|number)[]} item_list */
 async function print_shop_page(item_list) {
   const item_keys = era.get('itemkeys');
-  const off_index = era.get('flag:随机种子');
+  // FLAGNAME:19 = 随机种子
+  const off_index = era.get('flag:19');
   const off = item_keys[off_index % item_keys.length];
   const price_cache = era.get(`itemprice:${off}`);
   era.set(
@@ -20,10 +22,12 @@ async function print_shop_page(item_list) {
   const to_buy = {};
   const price = {};
   const limit = {};
-  const cur_loc = era.get('flag:当前位置');
+  // FLAGNAME:4 = 当前位置
+  const cur_loc = era.get('flag:4');
+  // FLAGNAME:119 = 道具价格
+  // FLAGNAME:1 = 当前年
   const price_ratio =
-    (100 + era.get('flag:道具价格') + (era.get('flag:当前年') - 2000) * 4) /
-    100;
+    (100 + era.get('flag:119') + (era.get('flag:1') - 2000) * 4) / 100;
   let flag_shop = true;
   let bought = 0;
   item_list.forEach((e) => {
@@ -43,9 +47,11 @@ async function print_shop_page(item_list) {
   let cur_coin;
   let cur_page = 1;
   let max_page;
-  let flag_hide_acc = era.get('flag:隐藏快捷键');
+  // FLAGNAME:62 = 隐藏快捷键
+  let flag_hide_acc = era.get('flag:62');
   while (flag_shop) {
-    cur_coin = era.get('flag:当前马币');
+    // FLAGNAME:16 = 当前马币
+    cur_coin = era.get('flag:16');
     on_sell_list = item_list
       .map((e) => e.id || e)
       .filter((e) => !limit[e] || !era.get(`item:${e}`));
@@ -56,17 +62,17 @@ async function print_shop_page(item_list) {
     const cur_list = on_sell_list.slice(cur_page * 10 - 10, cur_page * 10);
     /** @type {*[]} */
     const buffer = [{ type: 'divider' }];
-    cur_list.forEach((id) => {
-      const name = era.get(`itemname:${id}`).toUpperCase();
-      const max_count = Math.floor(cur_coin / price[id]);
+    cur_list.forEach((iid) => {
+      const name = __(`item.${iid}`);
+      const max_count = Math.floor(cur_coin / price[iid]);
       buffer.push(
         {
-          accelerator: id,
+          accelerator: iid,
           config: {
-            buttonType: id === off ? 'danger' : 'warning',
+            buttonType: iid === off ? 'danger' : 'warning',
             width: 4,
           },
-          content: `${name}${limit[id] ? '(限)' : ''}`,
+          content: `${name}${limit[iid] ? '(限)' : ''}`,
           type: 'button',
         },
         {
@@ -80,16 +86,15 @@ async function print_shop_page(item_list) {
         {
           type: 'text',
           config: { width: 1 },
-          content:
-            name === '避孕套（5只装）'
-              ? era.get('item:避孕套')
-              : era.get(`item:${id}`),
+          // ITEMNAME:30 = 避孕套（5只装）
+          // ITEMNAME:101 = 避孕套
+          content: iid === 30 ? era.get('item:101') : era.get(`item:${iid}`),
         },
         {
-          accelerator: id + 1000,
+          accelerator: iid + 1000,
           config: {
             align: 'center',
-            disabled: to_buy[id] === 1 || limit[id],
+            disabled: to_buy[iid] === 1 || limit[iid],
             showAcc: !flag_hide_acc,
             width: 2,
           },
@@ -97,10 +102,10 @@ async function print_shop_page(item_list) {
           type: 'button',
         },
         {
-          accelerator: id + 2000,
+          accelerator: iid + 2000,
           config: {
             align: 'center',
-            disabled: to_buy[id] === 1 || limit[id],
+            disabled: to_buy[iid] === 1 || limit[iid],
             showAcc: !flag_hide_acc,
             width: 2,
           },
@@ -110,13 +115,14 @@ async function print_shop_page(item_list) {
         {
           type: 'text',
           config: { align: 'center', width: 2 },
-          content: `× ${to_buy[id]}`,
+          content: `× ${to_buy[iid]}`,
         },
         {
-          accelerator: id + 3000,
+          accelerator: iid + 3000,
           config: {
             align: 'center',
-            disabled: to_buy[id] === 99 || to_buy[id] >= max_count || limit[id],
+            disabled:
+              to_buy[iid] === 99 || to_buy[iid] >= max_count || limit[iid],
             showAcc: !flag_hide_acc,
             width: 2,
           },
@@ -124,10 +130,11 @@ async function print_shop_page(item_list) {
           type: 'button',
         },
         {
-          accelerator: id + 4000,
+          accelerator: iid + 4000,
           config: {
             align: 'center',
-            disabled: to_buy[id] === 99 || to_buy[id] >= max_count || limit[id],
+            disabled:
+              to_buy[iid] === 99 || to_buy[iid] >= max_count || limit[iid],
             showAcc: !flag_hide_acc,
             width: 2,
           },
@@ -135,14 +142,14 @@ async function print_shop_page(item_list) {
           type: 'button',
         },
         {
-          accelerator: id + 5000,
+          accelerator: iid + 5000,
           config: {
             align: 'center',
             disabled:
-              to_buy[id] === 99 ||
+              to_buy[iid] === 99 ||
               max_count === 0 ||
-              to_buy[id] === max_count ||
-              limit[id],
+              to_buy[iid] === max_count ||
+              limit[iid],
             showAcc: !flag_hide_acc,
             width: 3,
           },
@@ -150,14 +157,14 @@ async function print_shop_page(item_list) {
           type: 'button',
         },
         {
-          accelerator: id + 6000,
+          accelerator: iid + 6000,
           config: {
             align: 'right',
-            disabled: price[id] * to_buy[id] > cur_coin,
+            disabled: price[iid] * to_buy[iid] > cur_coin,
             showAcc: !flag_hide_acc,
             width: 5,
           },
-          content: `购买 (${price[id] * to_buy[id]} 马币)`,
+          content: `购买 (${price[iid] * to_buy[iid]} 马币)`,
           type: 'button',
         },
       );
@@ -172,7 +179,7 @@ async function print_shop_page(item_list) {
         content: [
           '*** 本周特惠！',
           {
-            content: era.get(`itemname:${off}`).toUpperCase(),
+            content: __(`item.${off}`),
             color: money_color,
             fontWeight: 'bold',
           },
@@ -275,60 +282,54 @@ async function print_shop_page(item_list) {
     } else if (ret === 997) {
       cur_page++;
     } else if (ret === 998) {
-      flag_hide_acc = era.set('flag:隐藏快捷键', !flag_hide_acc);
+      // FLAGNAME:62 = 隐藏快捷键
+      flag_hide_acc = era.set('flag:62', !flag_hide_acc);
     } else if (ret === 999) {
       flag_shop = false;
     } else {
-      const selected_item = ret % 1000;
-      const sub_code = (ret - selected_item) / 1000;
-      let name;
+      const selected = ret % 1000;
+      const sub_code = (ret - selected) / 1000;
       switch (sub_code) {
         case 0:
-          name = era.get(`itemname:${selected_item}`).toUpperCase();
-          era.print(name);
-          name = shop_desc[shop_desc[name]] || shop_desc[name];
-          if (name) {
-            await era.printAndWait(`\n${name}`);
+          era.print(__(`item.${selected}`));
+          era.println();
+          if (selected !== 30) {
+            await era.printAndWait(__(`item_desc.${selected}`));
           } else {
-            await era.waitAnyKey();
+            await era.printAndWait(__('item_desc.101'));
           }
           break;
         case 1:
-          to_buy[selected_item] = Math.max(to_buy[selected_item] - 10, 1);
+          to_buy[selected] = Math.max(to_buy[selected] - 10, 1);
           break;
         case 2:
-          to_buy[selected_item]--;
+          to_buy[selected]--;
           break;
         case 3:
-          to_buy[selected_item]++;
+          to_buy[selected]++;
           break;
         case 4:
-          to_buy[selected_item] = Math.min(to_buy[selected_item] + 10, 99);
+          to_buy[selected] = Math.min(to_buy[selected] + 10, 99);
           break;
         case 5:
-          to_buy[selected_item] = Math.max(
-            Math.min(Math.floor(cur_coin / price[selected_item]), 99),
+          to_buy[selected] = Math.max(
+            Math.min(Math.floor(cur_coin / price[selected]), 99),
             1,
           );
           break;
         case 6:
-          sys_change_money(-price[selected_item] * to_buy[selected_item]);
-          era.add(`item:${selected_item}`, to_buy[selected_item]);
+          sys_change_money(-price[selected] * to_buy[selected]);
+          era.add(`item:${selected}`, to_buy[selected]);
           await era.printAndWait(
-            `购买了 ${to_buy[selected_item]} 个 ${era
-              .get(`itemname:${selected_item}`)
-              .toUpperCase()} `,
+            `购买了 ${to_buy[selected]} 个 ${__(`item.${selected}`)} `,
           );
-          bought += to_buy[selected_item];
-          to_buy[selected_item] = Math.max(
-            Math.min(
-              Math.floor(cur_coin / price[selected_item]),
-              to_buy[selected_item],
-            ),
+          bought += to_buy[selected];
+          to_buy[selected] = Math.max(
+            Math.min(Math.floor(cur_coin / price[selected]), to_buy[selected]),
             1,
           );
-          era.add('item:避孕套', 5 * era.get('item:避孕套（5只装）'));
-          era.set('item:避孕套（5只装）', 0);
+          era.add('item:101', 5 * era.get('item:30'));
+          era.set('item:30', 0);
       }
     }
   }

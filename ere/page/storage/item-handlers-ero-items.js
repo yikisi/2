@@ -11,6 +11,8 @@ const add_jewel_reward = require('#/event/snippets/add-jewel-reward');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
+const { __ } = require('#/i18n/selector');
+
 /** @param {Record<string,function(number):Promise>} handlers */
 module.exports = (handlers) => {
   new Array(13).fill(0).forEach(
@@ -46,7 +48,7 @@ module.exports = (handlers) => {
         '给 ',
         chara.get_colored_name(),
         ' 以「暖腹」的名义贴上了',
-        era.get(`itemname:${item}`),
+        __(`item.${item}`),
         '……',
       ]);
       era.print([chara.get_colored_name(), ' 小腹上浮现一个花纹繁复的淫纹……']);

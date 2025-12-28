@@ -16,9 +16,10 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { buff_colors } = require('#/data/color-const');
-const item_desc = require('#/data/desc/items.json');
 const EroParticipant = require('#/data/ero/ero-participant');
 const { part_enum } = require('#/data/ero/part-const');
+
+const { __, i18n } = require('#/i18n/selector');
 
 /** @param {TachyonLifeMarks} tachyon_marks */
 async function tachyon_betrayed_2(tachyon_marks) {
@@ -200,7 +201,8 @@ async function tachyon_betrayed_2(tachyon_marks) {
   await tachyon.print_and_wait(['自己有着这种预感。']);
   era.println();
 
-  era.add('item:「嫁衣」', 1);
+  // ITEMNAME:103 = 「嫁衣」
+  era.add('item:103', 1);
   init_ero(32);
 
   await tachyon.print_and_wait(['所以……']);
@@ -366,11 +368,11 @@ async function tachyon_betrayed_2(tachyon_marks) {
     );
     era.drawLine();
     await era.printAndWait([
-      '获得了道具 ',
+      '获得了道具',
       {
-        content: '[「嫁衣」]',
         color: buff_colors[2],
-        title: item_desc['「嫁衣」'],
+        content: i18n().item.get_name(103),
+        title: __('item_desc.103'),
       },
       '……',
     ]);

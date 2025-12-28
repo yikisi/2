@@ -1,34 +1,46 @@
 const era = require('#/era-electron');
 
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
+
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-async function use_glasses(item) {
-  const item_name = era.get(`itemname:${item}`);
-  if (!era.get('item:万能镜框')) {
-    await era.printAndWait(`没有地方安装【${item_name}】！`);
+const { i18n } = require('#/i18n/selector');
+
+async function use_glasses(iid) {
+  const item_name = i18n().item.get_name(iid);
+  const sid = 24 + iid - 27;
+  // ITEMNAME:26 = 万能镜框
+  if (!era.get('item:26')) {
+    await era.printAndWait(`没有地方安装${item_name}！`);
     return;
   }
-  if (era.get(`status:0:${item_name}`)) {
-    await era.printAndWait(`已经给【万能镜框】装上【${item_name}】了……`);
+  if (era.get(`status:0:${sid}`)) {
+    await era.printAndWait(
+      `已经给${i18n().item.get_name(26)}装上${item_name}了……`,
+    );
   } else {
     const ret = await select_yes_or_no(
-      `要给【万能镜框】装上【${item_name}】吗？这会导致原有镜片损坏！`,
+      `要给${i18n().item.get_name(26)}装上${item_name}吗？这会导致原有镜片损坏！`,
     );
     if (ret) {
-      await era.printAndWait(`给【万能镜框】装上了【${item_name}】……`);
-      if (era.get('status:0:好感度镜片')) {
-        await era.printAndWait('原有的【好感度镜片】损毁了！');
-        era.set('status:0:好感度镜片', 0);
-      } else if (era.get('status:0:马跳次数镜片')) {
-        await era.printAndWait('原有的【马跳次数镜片】损毁了！');
-        era.set('status:0:马跳次数镜片', 0);
-      } else if (era.get('status:0:透视镜片')) {
-        await era.printAndWait('原有的【透视镜片】损毁了！');
-        era.set('status:0:透视镜片', 0);
+      await era.printAndWait(
+        `给${i18n().item.get_name(26)}装上了${item_name}……`,
+      );
+      // STATUSNAME:24 = 好感度镜片
+      // STATUSNAME:25 = 好感度镜片
+      // STATUSNAME:26 = 透视镜片
+      for (let tmp_iid = 27; tmp_iid <= 29; ++tmp_iid) {
+        const tmp_sid = 24 + tmp_iid - 27;
+        if (era.get(`status:0:${tmp_sid}`) > 0) {
+          await era.printAndWait(
+            `原有的${i18n().item.get_name(tmp_iid)}损毁了！`,
+          );
+          era.set(`status:0:${tmp_sid}`, 0);
+          break;
+        }
       }
-      era.set(`status:0:${item_name}`, 1);
-      era.add(`item:${item_name}`, -1);
+      era.set(`status:0:${sid}`, 1);
+      era.add(`item:${iid}`, -1);
       return true;
     }
   }
@@ -38,10 +50,10 @@ async function use_glasses(item) {
 module.exports = (handlers) => {
   handlers[25] = async () => {
     const cur_line = era.getLineCount();
-    let to_use = 1,
-      flag_use = true,
-      flag_print = true,
-      timer = era.get('status:0:马语者');
+    let to_use = 1;
+    let flag_use = true;
+    let flag_print = true;
+    let timer = era.get('status:0:马语者');
     if (timer >= 99) {
       to_use = 0;
     } else {
@@ -141,7 +153,7 @@ module.exports = (handlers) => {
     }
   };
 
-  new Array(3)
-    .fill(0)
-    .forEach((_, i) => (handlers[i + 27] = (item_id) => use_glasses(item_id)));
+  for (let iid = 27; iid <= 29; ++iid) {
+    handlers[iid] = (arg) => use_glasses(arg);
+  }
 };

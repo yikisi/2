@@ -13,9 +13,10 @@ const {
   sys_like_chara,
 } = require('#/system/sys-calc-chara-others');
 
-const lines = require('#/event/edu/edu-13.kojo');
+const kojo = require('#/event/edu/edu-13.kojo');
 const CustomizedEdu = require('#/event/edu/edu-common');
 const { add_event, cb_enum } = require('#/event/queue');
+const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
 const print_name_and_show_kojo = require('#/event/snippets/print-name-and-show-kojo');
 
@@ -27,7 +28,8 @@ const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const { race_enum } = require('#/data/race/race-const');
 const { attr_enum, fumble_result } = require('#/data/train-const');
-const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
+
+const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends CustomizedEdu {
   get #dict() {
@@ -54,7 +56,7 @@ module.exports = class extends CustomizedEdu {
 
   async train(attr) {
     await super.train(attr);
-    await lines['训练'](this.#dict);
+    await kojo['训练'](this.#dict);
   }
 
   async train_fail(mcqueen, me, callname, hook, extra_flag) {
@@ -71,7 +73,7 @@ module.exports = class extends CustomizedEdu {
       const [select] = await print_name_and_show_kojo(
         '训练失败',
         mcqueen,
-        lines,
+        kojo,
         this.#dict,
       );
       if (select === 1) {
@@ -85,19 +87,19 @@ module.exports = class extends CustomizedEdu {
   }
 
   train_success_content() {
-    lines['训练成功'](this.#dict);
+    kojo['训练成功'](this.#dict);
   }
 
   async train_success_add(mcqueen) {
     return (
       (
-        await print_name_and_show_kojo('不想落后', mcqueen, lines, this.#dict)
+        await print_name_and_show_kojo('不想落后', mcqueen, kojo, this.#dict)
       )[1] === 1
     );
   }
 
   async train_success_sex() {
-    return (await lines['训练后求爱'](this.#dict))[1] === 1;
+    return (await kojo['训练后求爱'](this.#dict))[1] === 1;
   }
 
   async race_start(mcqueen, me, callname, hook, extra_flag) {
@@ -127,10 +129,10 @@ module.exports = class extends CustomizedEdu {
     }
     if (name !== undefined) {
       await print_event_name(name, mcqueen);
-      await lines[name](this.#dict);
+      await kojo[name](this.#dict);
     } else {
       await print_event_name('竞赛之前', mcqueen);
-      await lines['通用赛前'](this.#dict);
+      await kojo['通用赛前'](this.#dict);
     }
   }
 
@@ -145,7 +147,7 @@ module.exports = class extends CustomizedEdu {
   async mejiro_family(mcqueen, me, callname, hook, extra_flag, event_object) {
     const name = '来自目白家的邀请';
     await print_event_name(name, mcqueen);
-    await lines[name](this.#dict);
+    await kojo[name](this.#dict);
     add_event(event_hooks.out_start, event_object.set_arg('mejiro_party'));
   }
 
@@ -165,7 +167,7 @@ module.exports = class extends CustomizedEdu {
     }
     const name = '目白家的宴会';
     await print_event_name(name, mcqueen);
-    await lines[name](this.#dict);
+    await kojo[name](this.#dict);
     new McqueenEduMarks().love_89 = 1;
     return true;
   }
@@ -201,7 +203,7 @@ module.exports = class extends CustomizedEdu {
     }
     if (name !== undefined) {
       await print_event_name(name, mcqueen);
-      await lines[name](this.#dict);
+      await kojo[name](this.#dict);
     } else {
       if (extra.rank === 1) {
         name = '竞赛获胜';
@@ -210,7 +212,7 @@ module.exports = class extends CustomizedEdu {
       } else {
         name = '竞赛败北';
       }
-      await print_name_and_show_kojo(name, mcqueen, lines, this.#dict);
+      await print_name_and_show_kojo(name, mcqueen, kojo, this.#dict);
     }
   }
 
@@ -226,26 +228,26 @@ module.exports = class extends CustomizedEdu {
           '初识目白家' + mcqueen.get_siblings_sex_title(),
           mcqueen,
         );
-        await lines['初识目白家姐妹'](this.#dict);
+        await kojo['初识目白家姐妹'](this.#dict);
         break;
       case 47 + 1:
         await print_event_name('新年', mcqueen);
-        await lines['新年'](this.#dict);
+        await kojo['新年'](this.#dict);
         break;
       case 47 + 6:
         await print_event_name('情人节', mcqueen);
-        if ((await lines['情人节'](this.#dict))[1] === 1) {
+        if ((await kojo['情人节'](this.#dict))[1] === 1) {
           era.println();
-          era.print('获得了【情人节巧克力】！');
-          era.add('item:情人节巧克力', 1);
-          wait = true;
+          // ITEMNAME:100 = 情人节巧克力
+          era.print(i18n().item.notify(100));
+          era.add('item:100', 1);
         } else {
           sys_change_attr_and_print(0, attr_enum.hp, 200);
         }
         break;
       case 47 + 40:
         await print_event_name('万圣节', mcqueen);
-        await lines['万圣节'](this.#dict);
+        await kojo['万圣节'](this.#dict);
         break;
       case 'palace':
         return await super.week_start(
@@ -273,7 +275,7 @@ module.exports = class extends CustomizedEdu {
     let wait;
     if (
       (
-        await print_name_and_show_kojo('想吃甜品', mcqueen, lines, this.#dict)
+        await print_name_and_show_kojo('想吃甜品', mcqueen, kojo, this.#dict)
       )[0] === 1
     ) {
       wait = all_reward_in_event(this.id, { motivation: 1, relation: 10 });

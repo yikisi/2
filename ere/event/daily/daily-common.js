@@ -44,6 +44,8 @@ const { buff_colors, money_color } = require('#/data/color-const');
 const event_hooks = require('#/data/event/event-hooks');
 const { location_name } = require('#/data/locations');
 
+const { i18n } = require('#/i18n/selector');
+
 const money_list = [0, 1500, 5000, 10000];
 
 class CustomizedDaily {
@@ -396,11 +398,7 @@ class CustomizedDaily {
         ]);
         const item = get_random_entry([0, 1, 2, 3, 12]);
         era.add(`item:${item}`, 1);
-        await era.printAndWait([
-          '获得了 [',
-          era.get(`itemname:${item}`),
-          ']！',
-        ]);
+        await era.printAndWait(i18n().item.notify(item));
       } else if (dice < 0.02) {
         await era.printAndWait([
           '一阵风吹过，被吹倒在 ',

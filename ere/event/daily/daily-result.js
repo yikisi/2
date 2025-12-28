@@ -22,6 +22,7 @@ const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const event_hooks = require('#/data/event/event-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { attr_enum } = require('#/data/train-const');
+const { i18n } = require('#/i18n/selector');
 
 /**
  * @param {number} cid
@@ -420,8 +421,9 @@ handlers[event_hooks.celebration] = async (cid) => {
   era.println();
   let wait_flag = false;
   if (era.get('flag:当前回合数') % 48 === 6) {
-    era.print('获得了【情人节巧克力】！');
-    era.add('item:情人节巧克力', 1);
+    // ITEMNAME:100 = 情人节巧克力
+    era.print(i18n().item.notify(100));
+    era.add('item:100', 1);
     wait_flag = true;
   }
   sys_change_pressure(cid, -get_random_value(500, 1000));

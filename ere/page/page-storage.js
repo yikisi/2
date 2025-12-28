@@ -1,6 +1,6 @@
 const era = require('#/era-electron');
 
-const shop_desc = require('#/data/desc/items.json');
+const { __ } = require('#/i18n/selector');
 
 const handlers = {};
 
@@ -33,7 +33,7 @@ function get_item_list() {
         {
           accelerator: item.id,
           config: { offset: i % 4 > 0, width: 3 },
-          content: era.get(`itemname:${item.id}`).toUpperCase(),
+          content: __(`item.${item.id}`),
           type: 'button',
         },
         {
@@ -66,21 +66,15 @@ module.exports = async () => {
         type: 'button',
       },
     ]);
-    const ret = await era.input();
-    if (ret === 999) {
+    const selected = await era.input();
+    if (selected === 999) {
       s_flag = false;
     } else {
-      const name = era.get(`itemname:${ret}`).toUpperCase();
-      era.print(name);
-      const desc = shop_desc[shop_desc[name]] || shop_desc[name];
-      if (desc) {
-        era.println();
-        era.print(desc);
-      } else {
-        era.println();
-      }
-      if (handlers[ret]) {
-        if (await handlers[ret](ret)) {
+      era.print(__(`item.${selected}`));
+      era.println();
+      era.print(__(`item_desc.${selected}`));
+      if (handlers[selected]) {
+        if (await handlers[selected](selected)) {
           buffer = get_item_list();
         }
       } else {

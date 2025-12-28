@@ -33,6 +33,8 @@ const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
 const { attr_enum } = require('#/data/train-const');
 
+const { i18n } = require('#/i18n/selector');
+
 module.exports = class extends CustomizedEdu {
   get #dict() {
     const o = {};
@@ -101,8 +103,9 @@ module.exports = class extends CustomizedEdu {
     era.set(`cflag:${this.id}:节日事件标记`, 0);
     await print_name_and_show_kojo('情人节', oguri, kojo, this.#dict);
     era.println();
-    era.print('获得了【情人节巧克力】！');
-    era.add('item:情人节巧克力', 1);
+    // ITEMNAME:100 = 情人节巧克力
+    era.print(i18n().item.notify(100));
+    era.add('item:100', 1);
     await era.waitAnyKey();
   }
 
