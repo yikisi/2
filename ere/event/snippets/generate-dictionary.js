@@ -15,9 +15,11 @@ function generate_dictionary(
   options = {
     call: false,
     child: false,
+    sir: false,
     teen: false,
     title: false,
     uma: false,
+    your_name: false,
   },
 ) {
   const ret = { id: cid };
@@ -41,6 +43,12 @@ function generate_dictionary(
   }
   if (options.uma) {
     ret.UMA = sex ? '马郎' : '马娘';
+  }
+  if (options.your_name) {
+    ret.YOURNAME = era.get('callname:0:-1');
+  }
+  if (options.sir) {
+    ret.SIR = era.get('cflag:0:0') === 1 ? '先生' : '小姐';
   }
   return ret;
 }

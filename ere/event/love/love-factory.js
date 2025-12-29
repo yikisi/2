@@ -9,6 +9,7 @@ const cons_dict = {};
 const current = new Date().getTime();
 
 // GENERATED START
+cons_dict[2] = require('#/event/love/love-2');
 cons_dict[3] = require('#/event/love/love-3');
 cons_dict[6] = require('#/event/love/love-6');
 cons_dict[7] = require('#/event/love/love-7');
