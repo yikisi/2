@@ -14,7 +14,7 @@ node generate-mec-factory.js
 node generate-rec-factory.js
 cd ../..
 git add ere/utils/chara-talk-factory.js ere/event/*/*-factory.js ere/i18n/* ere/data/clothe-const.json
-pnpm run lint || echo "empty"
+pnpm run lint --allow-empty
 status=$(git status --porcelain --ignore-submodules)
 
 if [ -n "$status" ]; then
