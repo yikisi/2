@@ -1,22 +1,29 @@
 const era = require('#/era-electron');
 
-const diamond_lord = {
-  content: '钻石君主',
-  color: '#cdaa7d',
-  fontWeight: 'bold',
-};
+const { i18n } = require('#/i18n/selector');
+
+const dia_color = '#cdaa7d';
+
+function get_dia_name() {
+  return {
+    content: i18n().name.digital_npc,
+    color: dia_color,
+    fontWeight: 'bold',
+  };
+}
 
 module.exports = {
-  diamond_lord,
+  dia_color,
+  get_dia_name,
   say_by_diamond_lord(content) {
     return era.printAndWait(
       [
-        diamond_lord,
+        get_dia_name(),
         '「',
         ...(Array.isArray(content) ? content : [content]),
         '」',
       ],
-      { color: diamond_lord.color },
+      { color: dia_color },
     );
   },
 };

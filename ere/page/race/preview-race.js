@@ -96,7 +96,7 @@ async function preview_race(
         i18n().race.a_ground[info.ground]
       } ${info.span.toLocaleString()}m (${
         i18n().race.a_distance[info.distance]
-      }) ${i18n().race.n_rotation[info.rotation]} · ${i18n().race.n_weather[info.weather]} ${
+      }) ${i18n().race.n_rotation[info.rotation + 1]} · ${i18n().race.n_weather[info.weather]} ${
         i18n().race.n_mess[info.mess]
       }`,
       type: 'text',

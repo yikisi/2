@@ -61,4 +61,18 @@ module.exports = {
       ),
     );
   },
+  stringify(str) {
+    if (str === undefined) {
+      return 'undefined';
+    }
+    if (typeof str === 'string') {
+      if (str.indexOf("'") !== -1) {
+        return `"${str}"`;
+      } else {
+        return `'${str}'`;
+      }
+    } else {
+      return JSON.stringify(str);
+    }
+  },
 };

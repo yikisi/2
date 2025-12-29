@@ -3,7 +3,8 @@ const era = require('#/era-electron');
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
 const {
-  diamond_lord,
+  dia_color,
+  get_dia_name,
   say_by_diamond_lord,
 } = require('#/event/edu/edu-events-19/snippets');
 const print_event_name = require('#/event/snippets/print-event-name');
@@ -184,7 +185,7 @@ module.exports = (handlers) => {
       ' 正准备避开，然后……',
     ]);
     await era.printAndWait([digital.get_uma_sex_title(), 'A「呜呜呜……」'], {
-      color: diamond_lord.color,
+      color: dia_color,
     });
     await say_by_passer_by_and_wait(
       `${digital.get_uma_sex_title()}B`,
@@ -195,9 +196,7 @@ module.exports = (handlers) => {
         digital.get_uma_sex_title(),
         'A「明明，明明，是与前辈你的对决的……一直以来都想着，能与你比胜负，然后，超越你……」',
       ],
-      {
-        color: diamond_lord.color,
-      },
+      { color: dia_color },
     );
     await say_by_passer_by_and_wait(
       `${digital.get_uma_sex_title()}B`,
@@ -210,12 +209,10 @@ module.exports = (handlers) => {
         digital.sex,
         '真的，很强……伸出手都无法……」',
       ],
-      {
-        color: diamond_lord.color,
-      },
+      { color: dia_color },
     );
     await say_by_passer_by_and_wait(`${digital.get_uma_sex_title()}B`, [
-      diamond_lord,
+      get_dia_name(),
       '！你努力了吧！全力以赴了吧！',
     ]);
     await say_by_diamond_lord('但是……');

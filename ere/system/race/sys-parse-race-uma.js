@@ -17,8 +17,6 @@ const race2legends = require('#/data/race/contestants/legends');
 const legends_list = require('#/data/race/contestants/legends.json');
 /** @type {UmaTemplate[]} */
 const named_list = require('#/data/race/contestants/named.json');
-/** @type {string[]} */
-const passer_by_names = require('#/data/race/contestants/uma-mob.json');
 /** @type {UmaTemplate[]} */
 const passer_by_list = require('#/data/race/contestants/unnamed.json');
 const LegendUmaFilter = require('#/data/race/model/legend-uma-filter');
@@ -32,6 +30,8 @@ const {
 const { mod_acceleration_adapt_ground } = require('#/data/race/race-sim-const');
 const { skill_sets, skills_dict } = require('#/data/race/skill/skill-const');
 const { attr_enum } = require('#/data/train-const');
+
+const { __, i18n } = require('#/i18n/selector');
 
 const named_level = [named_list[0].level, named_list.at(-1).level];
 const passer_by_level = [passer_by_list[0].level, passer_by_list.at(-1).level];
@@ -311,7 +311,12 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
       );
       if (legend) {
         legend_count--;
-        const p = get_pseudo_from_template(legend, 0).set_image(legend.image);
+        const p = get_pseudo_from_template(
+          legend,
+          0,
+          legend.id,
+          __(`name.${legend.name}`, legend.name),
+        ).set_image(legend.image);
         p.legend = 2;
         ret.push(p);
       }
@@ -423,7 +428,7 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
     if (ret.length < info.gates) {
       // 最后填路人幻影
       const names = sort_list(
-        gacha(passer_by_names, info.gates - ret.length),
+        gacha(i18n().mob, info.gates - ret.length),
         Math.random,
       );
       const last = info.gates - ret.length;

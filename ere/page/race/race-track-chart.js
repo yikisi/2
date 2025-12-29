@@ -15,7 +15,7 @@ async function print_race_track_chart(info) {
       ' ',
       info.span.toLocaleString(),
       '米跑道 ',
-      i18n().race.n_rotation[info.rotation],
+      i18n().race.n_rotation[info.rotation + 1],
     ],
     { align: 'center' },
   );

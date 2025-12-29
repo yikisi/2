@@ -3,7 +3,8 @@ const era = require('#/era-electron');
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
 const {
-  diamond_lord,
+  dia_color,
+  get_dia_name,
   say_by_diamond_lord,
 } = require('#/event/edu/edu-events-19/snippets');
 const { add_event } = require('#/event/queue');
@@ -402,9 +403,7 @@ module.exports = (handlers) => {
     await era.printAndWait('前头继续涌出人群，接着赶到现场的是……');
     await era.printAndWait(
       ['？？？「诶诶！', sys_get_colored_callname(59, 19), '！我来了！」'],
-      {
-        color: diamond_lord.color,
-      },
+      { color: dia_color },
     );
     await era.printAndWait([
       '远处从人群窜出来一个栗毛',
@@ -497,9 +496,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait(
       ['？？？「那个……', sys_get_colored_callname(59, 19), '？」'],
-      {
-        color: diamond_lord.color,
-      },
+      { color: dia_color },
     );
     await era.printAndWait([
       '是最开始赶到摊位的栗毛',
@@ -508,14 +505,14 @@ module.exports = (handlers) => {
       digital.sex,
       '也拿着一大包战利品，看起来也是来问候一下的。',
     ]);
-    await digital.say_and_wait(['抱歉让你见丑了，', diamond_lord, '。我……']);
+    await digital.say_and_wait(['抱歉让你见丑了，', get_dia_name(), '。我……']);
     await digital.say_and_wait([
       '我想问一下，作为粉丝，想要看到更多老师的作品，不是……正常的吗？',
     ]);
     await say_by_diamond_lord('是的……不过……');
     await era.printAndWait([
       '名为 ',
-      diamond_lord,
+      get_dia_name(),
       ' 的',
       digital.get_uma_sex_title(),
       ' ',
@@ -547,7 +544,7 @@ module.exports = (handlers) => {
       '我另一个想说的事情是，我是在那场与你的比赛成为你的粉丝的……之后，你的每一次比赛我都有去看。',
     );
     await era.printAndWait([
-      diamond_lord,
+      get_dia_name(),
       ' 再次把那本同人志视若珍宝地再次用厚封皮包裹起来放进背包，接着',
       digital.sex,
       '背起背包，走了。',

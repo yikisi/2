@@ -1,12 +1,12 @@
 const { readFileSync } = require('fs');
 const { join } = require('path');
 
-const translation = require('../../common/uma/name-dict.json');
-const { read_and_write_generated } = require('../libs');
+const translation = require('../../common/i18n/name-dict.json');
+const { read_and_write_generated, stringify } = require('../libs');
 
-let c_out = '';
-let j_out = '';
-let e_out = '';
+let c_out = [];
+let j_out = [];
+let e_out = [];
 
 const uma_data = readFileSync(
   join(__dirname, '../../common/uma/uma-data.csv'),
@@ -23,24 +23,24 @@ for (const line of uma_data) {
   console.log(cid);
   const obj = trans_arr.find((n) => n[1][0] === name);
   if (obj) {
-    c_out += `${id}01=${JSON.stringify(name)};`;
-    j_out += `${id}01=${JSON.stringify(obj[0])};`;
-    e_out += `${id}01=${JSON.stringify(obj[1][1])};`;
+    c_out.push(`  ${id}01 = ${stringify(name)};`);
+    j_out.push(`  ${id}01 = ${stringify(obj[0])};`);
+    e_out.push(`  ${id}01 = ${stringify(obj[1][1])};`);
   }
 }
 
 read_and_write_generated(
-  join(__dirname, '../../ere/i18n/zh-CN/names.js'),
+  join(__dirname, '../../ere/i18n/zh-CN/chara/names.js'),
   '//',
-  c_out,
+  ...c_out,
 );
 read_and_write_generated(
-  join(__dirname, '../../ere/i18n/ja-JP/names.js'),
+  join(__dirname, '../../ere/i18n/ja-JP/chara/names.js'),
   '//',
-  j_out,
+  ...j_out,
 );
 read_and_write_generated(
-  join(__dirname, '../../ere/i18n/en-US/names.js'),
+  join(__dirname, '../../ere/i18n/en-US/chara/names.js'),
   '//',
-  e_out,
+  ...e_out,
 );

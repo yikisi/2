@@ -263,6 +263,7 @@ class I18nEntry {
   skill_desc = new (require('#/i18n/zh-CN/race/skill-desc'))();
   gene = new (require('#/i18n/zh-CN/race/genes'))();
   gene_desc = new (require('#/i18n/zh-CN/race/gene-desc'))();
+  mob = require('#/i18n/zh-CN/race/uma-mob.json');
 }
 
 module.exports = I18nEntry;

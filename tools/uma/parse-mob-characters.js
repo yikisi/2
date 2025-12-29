@@ -18,8 +18,22 @@ mob.forEach((e) => {
 passer_bys.push(...cy_mob);
 
 writeFileSync(
-  join(__dirname, '../../ere/data/race/contestants/uma-mob.json'),
+  join(__dirname, '../../ere/i18n/zh-CN/race/uma-mob.json'),
   JSON.stringify(passer_bys.filter((n, i, l) => i === l.indexOf(n))),
+);
+
+const jp_text = require('../../common/i18n/ja-JP/text_data.json');
+writeFileSync(
+  join(__dirname, '../../ere/i18n/ja-JP/race/uma-mob.json'),
+  JSON.stringify(
+    Object.values(jp_text[59]).filter(
+      (n) =>
+        !n.startsWith('UM_') &&
+        !n.startsWith('中編用架空ウマ娘') &&
+        !n.startsWith('ウマ娘_') &&
+        !n.endsWith('ウマ娘'),
+    ),
+  ),
 );
 
 console.log('done!');

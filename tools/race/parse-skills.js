@@ -516,6 +516,7 @@ async function chara_skill() {
   });
 
   if (hasError) {
+    // eslint-disable-next-line n/no-process-exit
     process.exit(1);
   }
 
@@ -571,7 +572,7 @@ async function chara_skill() {
         c_n_out += `${id} = "${e.name}";`;
         c_d_out += `${id} = "${skill_text[id][48]}";`;
         j_n_out += `${id} = "${jp_text[id][47]}";`;
-        j_d_out += `${id} = "${jp_text[id][48]}";`;
+        j_d_out += `${id} = "${jp_text[id][48].replace(/(\\n)?＜[^＞]+＞$/, '')}";`;
       }
       // console.log(e.id);
       sbuffer += `${id},`;
@@ -637,6 +638,7 @@ async function chara_skill() {
   }
 
   if (hasError) {
+    // eslint-disable-next-line n/no-process-exit
     process.exit(1);
   }
 

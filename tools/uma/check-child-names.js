@@ -1,8 +1,8 @@
 const { readFileSync } = require('fs');
 const { join } = require('path');
 
-const name_data = require('../../ere/data/child-names.json');
-const mob_names = require('../../ere/data/race/contestants/uma-mob.json');
+const name_data = require('../../common/uma/child-names.json');
+const mob_names = require('../../ere/i18n/zh-CN/race/uma-mob.json');
 
 const lines = readFileSync(
   join(__dirname, '../../common/uma/uma-data.csv'),

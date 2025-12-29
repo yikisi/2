@@ -3,6 +3,10 @@ const I18nNames = require('#/i18n/zh-CN/chara/names');
 module.exports = class extends I18nNames {
   you = 'You';
 
+  // Special
+  ruby_mother = 'Hagino Top Lady';
+  digital_npc = 'Dia Monarch';
+
   900102 = 'Tokino Minoru';
   900202 = 'Northern Taste';
   904302 = 'Dictus';
@@ -168,4 +172,55 @@ module.exports = class extends I18nNames {
   905001 = 'Hoshina Kiyoko';
   905101 = 'Yunohana Bloom';
   // GENERATED END
+
+  // CHILDREN GENERATED START
+  10010100 = 'Reach the Crown';
+  10010101 = 'Toho Jackal';
+  10030100 = 'Tokai Point';
+  10030101 = 'Kisekino Teio';
+  10080100 = 'Tanino Frankel';
+  10190100 = 'Eifer Ladiga';
+  10190101 = 'Actress City';
+  10190102 = 'Agnes Infini';
+  10190103 = 'Agnes Icarus';
+  10190104 = 'Agnes Shine';
+  10190105 = 'Agnes Focus';
+  10190106 = 'Agnes Mizuho';
+  10190107 = 'Asahi Digital';
+  10250100 = 'Jo Cappuccino';
+  10250101 = "Hiruno d'Amour";
+  10250102 = 'Grape Brandy';
+  10250103 = 'Queens Ring';
+  10250104 = 'Sciacchetra';
+  10250105 = 'Rouge Buck';
+  10250106 = 'Platinum Bullet';
+  10250107 = 'Rito Phantom';
+  10360104 = 'Air Git';
+  10360105 = 'Air Push';
+  10360106 = 'Air Rebase';
+  10360107 = 'Air Merge';
+  10440100 = 'Jewel Tosho';
+  10440101 = 'Bijou Tosho';
+  10440102 = 'Regatta';
+  10440103 = 'Tosho Victor';
+  10440104 = 'Seize Dreams';
+  10440105 = 'Sweep Celeritas';
+  10440106 = 'Clean Sweep';
+  10440107 = 'Piedra de Luna';
+  10680100 = 'Equinox';
+  10680104 = 'Sol Oriens';
+  10850100 = 'Daiichi Sapphire';
+  10850101 = 'Daiichi Cigar';
+  10850102 = 'Daiichi Sunday';
+  10850103 = 'Iron Beauty';
+  10850104 = 'Daiichi Silence';
+  10850105 = 'Captain Ruby';
+  20050100 = 'Paris';
+  20050101 = 'Qous';
+  20050102 = 'Kaltham';
+  20050103 = 'Doha';
+  20050104 = 'Venus Paques';
+  20060100 = 'Rigantona';
+  4000011600 = 'Satono Reinas';
+  // CHILDREN GENERATED END
 };

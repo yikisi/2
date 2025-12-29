@@ -57,4 +57,5 @@ module.exports = class extends I18nEntry {
   race = new (require('#/i18n/ja-JP/race/races'))();
   skill = new (require('#/i18n/ja-JP/race/skills'))();
   skill_desc = new (require('#/i18n/ja-JP/race/skill-desc'))();
+  mob = require('#/i18n/ja-JP/race/uma-mob.json');
 };

@@ -232,7 +232,7 @@ async function task() {
       skills: 9116011,
       id: 116,
       image: '贵妇_半身',
-      name: '传奇贵妇人',
+      name: 'l11601',
     },
     {
       adapt_ground: [6, 0],
@@ -243,7 +243,7 @@ async function task() {
       skills: 9026131,
       id: 26,
       image: '波旁_仆_半身',
-      name: '传奇波旁',
+      name: 'l02601',
     },
     {
       adapt_ground: [6, 0],
@@ -254,7 +254,7 @@ async function task() {
       skills: 9032301,
       id: 32,
       image: '速子_泳_半身',
-      name: '传奇速子',
+      name: 'l03201',
     },
     {
       attrs: [1734, 1084, 1690, 1319, 1137],
@@ -265,7 +265,7 @@ async function task() {
       skills: 9037301,
       id: 37,
       image: '闪耀_泳_半身',
-      name: '传奇闪耀',
+      name: 'l03701',
     },
     {
       attrs: [1750, 1021, 1538, 1239, 1263],
@@ -276,7 +276,7 @@ async function task() {
       skills: 9060101,
       id: 60,
       image: '内恰_春_半身',
-      name: '传奇素质',
+      name: 'l06001',
     },
     {
       attrs: [1760, 1105, 1598, 1316, 1215],
@@ -287,7 +287,7 @@ async function task() {
       skills: 9065011,
       id: 65,
       image: '太阳神_半身',
-      name: '传奇太阳神',
+      name: 'l06501',
     },
     {
       attrs: [1775, 906, 1499, 1376, 1304],
@@ -298,7 +298,7 @@ async function task() {
       skills: 9018261,
       id: 18,
       image: '气槽_婚_半身',
-      name: '传奇气槽',
+      name: 'l01801',
     },
     {
       attrs: [1756, 1010, 1527, 1473, 1238],
@@ -309,7 +309,7 @@ async function task() {
       skills: 9116012,
       id: 116,
       image: '贵妇_半身',
-      name: '传奇贵妇人',
+      name: 'l11601',
     },
     {
       attrs: [1790, 945, 1533, 1191, 1314],
@@ -320,7 +320,7 @@ async function task() {
       skills: 9098011,
       id: 98,
       image: '小林_半身',
-      name: '传奇小林',
+      name: 'l09801',
     },
     {
       attrs: [1719, 713, 1348, 1222, 1228],
@@ -331,7 +331,7 @@ async function task() {
       skills: 9116013,
       id: 116,
       image: '贵妇_半身',
-      name: '传奇贵妇人',
+      name: 'l11601',
     },
     {
       attrs: [1814, 969, 1350, 1411, 1282],
@@ -342,7 +342,7 @@ async function task() {
       skills: 9086011,
       id: 86,
       image: '高峰_半身',
-      name: '传奇高峰',
+      name: 'l08601',
     },
     {
       attrs: [1818, 1001, 1384, 1353, 1231],
@@ -353,7 +353,7 @@ async function task() {
       skills: 9071201,
       id: 71,
       image: '阿尔丹_礼_半身',
-      name: '传奇阿尔丹',
+      name: 'l07101',
     },
   ].map((e) => {
     for (let i = 0; i < e.attrs.length; ++i) {
