@@ -19,15 +19,19 @@ class EventMarks {
 
   /** @returns {Record<string,number>} */
   get #obj() {
+    // CFLAGNAME:51 = 特殊事件标识
     return (
-      era.get(`cflag:${this.#id}:特殊事件标识`) ||
-      era.set(`cflag:${this.#id}:特殊事件标识`, {})
+      era.get(`cflag:${this.#id}:51`) || era.set(`cflag:${this.#id}:51`, {})
     );
   }
 
   /** @param {number} chara_id */
   constructor(chara_id) {
     this.#id = chara_id;
+  }
+
+  raw() {
+    return this.#obj;
   }
 
   /** @param {number|string} hook */
@@ -42,8 +46,10 @@ class EventMarks {
         .filter(([k]) => Number(k) !== event_hooks.week_start)
         .map((e) => e[1])
         .reduce((p, c) => p + c, 0) +
-      era.get(`cflag:${this.#id}:节日事件标记`) +
-      (era.get(`status:${this.#id}:生日`) === 2)
+      // CFLAGNAME:56 = 节日事件标记
+      era.get(`cflag:${this.#id}:56`) +
+      // STATUSNAME:17 = 生日
+      (era.get(`status:${this.#id}:17`) === 2)
     );
   }
 
@@ -68,6 +74,19 @@ class EventMarks {
       delete obj[hook];
     }
     return this;
+  }
+
+  /**
+   * @param {number|string} hook
+   * @param {number} val
+   */
+  set(hook, val) {
+    const obj = this.#obj;
+    if (!val) {
+      delete obj[hook];
+    } else {
+      obj[hook] = val;
+    }
   }
 }
 

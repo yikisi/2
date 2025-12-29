@@ -59,7 +59,7 @@ module.exports = class extends CustomizedRecruit {
         dict.COLOR59 = get_chara_talk(59).color;
         dict.SIR = me.adult_sex_title;
         await print_event_name('慢悠悠的公园之旅', bright);
-        if ((await kojo['rec1'](dict))[3] === 1) {
+        if ((await kojo['rec1'](dict))['rec'] === 1) {
           add_event(event_hooks.school_atrium, ebj);
           EventMarks.get(0).add(event_hooks.school_atrium);
         } else {
@@ -73,10 +73,10 @@ module.exports = class extends CustomizedRecruit {
         dict.SIR = me.adult_sex_title;
         if (era.get(`cflag:${this.id}:66`) === recruit_flags.no) {
           await print_event_name('慢悠悠的登场～', bright);
-          r_flag = (await kojo['rec2'](dict))[1] === 2;
+          r_flag = (await kojo['rec2'](dict))['rec'] === 2;
         } else {
           await print_event_name('好久不见～', bright);
-          r_flag = (await kojo['rec3'](dict))[0] === 1;
+          r_flag = (await kojo['rec3'](dict))['rec'] === 1;
         }
         if (r_flag) {
           era.set(`cflag:${this.id}:66`, recruit_flags.yes);

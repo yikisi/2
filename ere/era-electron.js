@@ -126,6 +126,9 @@
  * @property {GridObject[]} columns
  * @property {ColumnConfig} [config]
  */
+/**
+ * @typedef {'topleft'|'topcenter'|'top'|'topright'|'centerleft'|'left'|'center'|'centerright'|'right'|'bottomleft'|'bottomcenter'|'bottom'|'bottomright'|1|2|3|4|5|6|7|8|9} OBPosition
+ */
 
 const era = {
   /**
@@ -505,6 +508,15 @@ const era = {
   // eslint-disable-next-line no-unused-vars
   setAlign(textAlign) {},
   /**
+   * @param {string} [name] set undefined to clear background
+   * @param {Object} [config]
+   * @param {number} config.[opacity]
+   * @param {OBPosition} config.[position]
+   * @param {'contain'|'cover'} config.[fit]
+   */
+  // eslint-disable-next-line no-unused-vars
+  setBack(name, config) {},
+  /**
    * set default horizontal align of inColRows
    * @param {'start'|'end'|'center'|'space-around'|'space-between'|'space-evenly'} align REQUIRED the vertical align: start (default), end, center, space-around, space-between or space-evenly
    * @returns {void}
@@ -512,6 +524,7 @@ const era = {
   // eslint-disable-next-line no-unused-vars
   setHorizontalAlign(align) {},
   /**
+   * @deprecated replaced with setOpacity
    * @param {string} [maskName]
    * @param {number} [opacity]
    */
@@ -524,6 +537,15 @@ const era = {
    */
   // eslint-disable-next-line no-unused-vars
   setOffset(offset) {},
+  /**
+   * @param {string} [name] set undefined to clear overlay
+   * @param {Object} [config]
+   * @param {number} config.[opacity]
+   * @param {OBPosition} config.[position]
+   * @param {'contain'|'cover'} config.[fit]
+   */
+  // eslint-disable-next-line no-unused-vars
+  setOverlay(name, config) {},
   /**
    * set the title of the window
    * @param {string} title REQUIRED
@@ -557,7 +579,7 @@ const era = {
    * @returns {boolean} if debug
    */
   toggleDebug() {},
-  version: { sdk: '4.4.0', engine: undefined },
+  version: { sdk: '4.6.0', engine: undefined },
   /**
    * wait any key from user
    * @returns {Promise<void>} a promise of nothing, please use await

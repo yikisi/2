@@ -2,7 +2,7 @@ const era = require('#/era-electron');
 
 const { get_chara_color } = require('#/data/chara-colors');
 
-const { __ } = require('#/i18n/selector');
+const { __, i18n } = require('#/i18n/selector');
 
 class CharaTalk {
   /** @type {CharaTalk} */
@@ -91,20 +91,21 @@ class CharaTalk {
    * @returns {string}
    */
   get sex() {
-    return this.sex_code === 1 ? '他' : '她';
+    return this.sex_code === 1 ? i18n().name.he : i18n().name.she;
   }
 
   /** @returns {number} */
   get sex_code() {
-    return era.get(`cflag:${this.id}:性别`);
+    // CFLAGNAME:0 = 性别
+    return era.get(`cflag:${this.id}:0`);
   }
 
   get adult_sex_title() {
-    return this.sex_code === 1 ? '先生' : '小姐';
+    return this.sex_code === 1 ? i18n().name.mr : i18n().name.miss;
   }
 
   get phy_sex_title() {
-    return this.sex_code === 1 ? '男性' : '女性';
+    return this.sex_code === 1 ? i18n().name.male : i18n().name.female;
   }
 
   get siblings_sex_title() {
@@ -112,15 +113,15 @@ class CharaTalk {
   }
 
   get child_sex_title() {
-    return this.sex_code === 1 ? '男孩' : '女孩';
+    return this.sex_code === 1 ? i18n().name.boy : i18n().name.girl;
   }
 
   get teen_sex_title() {
-    return this.sex_code === 1 ? '少年' : '少女';
+    return this.sex_code === 1 ? i18n().name.teenager : i18n().name.frail;
   }
 
   get uma_sex_title() {
-    return this.sex_code === 1 ? '马郎' : '马娘';
+    return this.sex_code === 1 ? i18n().name.uma_boy : i18n().name.uma_girl;
   }
 
   /** @returns {number} */
@@ -196,9 +197,13 @@ class CharaTalk {
   /** UMA角色的称呼 */
   get_uma_sex_title = () => this.uma_sex_title;
 
-  get_bigger_sibling_sex_title = () => (this.sex_code - 1 ? '姐姐' : '哥哥');
+  get_bigger_sibling_sex_title = () =>
+    this.sex_code === 1 ? i18n().name.elder_brother : i18n().name.elder_sister;
 
-  get_smaller_sibling_sex_title = () => (this.sex_code - 1 ? '妹妹' : '弟弟');
+  get_smaller_sibling_sex_title = () =>
+    this.sex_code === 1
+      ? i18n().name.younger_brother
+      : i18n().name.younger_sister;
 
   get_siblings_sex_title = () => this.siblings_sex_title;
 
