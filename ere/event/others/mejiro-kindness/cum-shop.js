@@ -677,7 +677,7 @@ async function cum_shop(chara, me) {
               4,
               { disabled: !chara_im },
             );
-            if (!extra_base.skill && money >= 54) {
+            if (!extra_base.skill && money >= 36) {
               era.printButton(
                 '《性技提升入门读物——色欲之环出版社出版》（66「恩宠」）',
                 5,

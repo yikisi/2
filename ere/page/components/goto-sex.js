@@ -436,12 +436,12 @@ async function goto_sex(cid, sex_loc) {
           }
         }
       }
-      if (era.get(`status:${cid}:超马跳Z`)) {
+      if (era.get(`status:${cid}:超马跳Z`) > 0) {
         era.set('tflag:主导权', cid);
       }
       await print_ero_page(cid);
       if (check < 0) {
-        if (era.get(`status:${cid}:超马跳Z`)) {
+        if (era.get(`status:${cid}:超马跳Z`) > 0) {
           await era.printAndWait([
             '虽然一时情动，但当 ',
             chara.get_colored_name(),

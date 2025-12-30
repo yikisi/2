@@ -8,7 +8,7 @@ const { add_event, cb_enum } = require('#/event/queue');
 const kojo = require('#/event/rec/rec-74.kojo');
 const CustomizedRecruit = require('#/event/rec/rec-common');
 const generate_dictionary = require('#/event/snippets/generate-dictionary');
-const print_event_name = require('#/event/snippets/print-event-name');
+const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
@@ -58,8 +58,9 @@ module.exports = class extends CustomizedRecruit {
           era.get('cflag:86:66') === recruit_flags.yes;
         dict.COLOR59 = get_chara_talk(59).color;
         dict.SIR = me.adult_sex_title;
-        await print_event_name('慢悠悠的公园之旅', bright);
-        if ((await kojo['rec1'](dict))['rec'] === 1) {
+        if (
+          (await print_title_with_kojo(kojo, 'rec1', bright, dict))['rec'] === 1
+        ) {
           add_event(event_hooks.school_atrium, ebj);
           EventMarks.get(0).add(event_hooks.school_atrium);
         } else {
@@ -72,11 +73,13 @@ module.exports = class extends CustomizedRecruit {
       case event_hooks.school_atrium:
         dict.SIR = me.adult_sex_title;
         if (era.get(`cflag:${this.id}:66`) === recruit_flags.no) {
-          await print_event_name('慢悠悠的登场～', bright);
-          r_flag = (await kojo['rec2'](dict))['rec'] === 2;
+          r_flag =
+            (await print_title_with_kojo(kojo, 'rec2', bright, dict))['rec'] ===
+            2;
         } else {
-          await print_event_name('好久不见～', bright);
-          r_flag = (await kojo['rec3'](dict))['rec'] === 1;
+          r_flag =
+            (await print_title_with_kojo(kojo, 'rec3', bright, dict))['rec'] ===
+            1;
         }
         if (r_flag) {
           era.set(`cflag:${this.id}:66`, recruit_flags.yes);

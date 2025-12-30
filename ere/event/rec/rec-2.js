@@ -8,7 +8,7 @@ const { add_event, cb_enum } = require('#/event/queue');
 const kojo = require('#/event/rec/rec-2.kojo');
 const CustomizedRecruit = require('#/event/rec/rec-common');
 const generate_dictionary = require('#/event/snippets/generate-dictionary');
-const print_event_name = require('#/event/snippets/print-event-name');
+const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
@@ -29,8 +29,9 @@ module.exports = class extends CustomizedRecruit {
     });
     switch (ebj?.arg) {
       default:
-        await print_event_name('初识', suzuka);
-        if ((await kojo['start'](dict))['rec'] < 3) {
+        if (
+          (await print_title_with_kojo(kojo, 'start', suzuka, dict))['rec'] < 3
+        ) {
           // FLAGNAME:33 = 物色对象
           era.set('flag:33', this.id);
           add_event(
@@ -46,14 +47,12 @@ module.exports = class extends CustomizedRecruit {
         EventMarks.get(0).sub(event_hooks.recruit_start);
         // FLAGNAME:15 = 当前声望
         if (era.get('flag:15') < 1000) {
-          await print_event_name('选拔赛后', suzuka);
-          await kojo['after'](dict);
+          await print_title_with_kojo(kojo, 'after', suzuka, dict);
           // CFLAGNAME:66 = 招募状态
           era.set(`cflag:${this.id}:66`, recruit_flags.yes);
           era.set('flag:33', 0);
         } else {
-          await print_event_name('选拔赛翌日', suzuka);
-          await kojo['tomorrow'](dict);
+          await print_title_with_kojo(kojo, 'tomorrow', suzuka, dict);
           add_event(
             event_hooks.recruit_start,
             ebj.set_arg('tomorrow_after_tomorrow'),
@@ -63,22 +62,24 @@ module.exports = class extends CustomizedRecruit {
         break;
       case 'tomorrow_after_tomorrow':
         EventMarks.get(0).sub(event_hooks.recruit_start);
-        await print_event_name('选拔赛又翌日', suzuka);
-        await kojo['tomorrow_after_tomorrow'](dict);
+        await print_title_with_kojo(
+          kojo,
+          'tomorrow_after_tomorrow',
+          suzuka,
+          dict,
+        );
         add_event(event_hooks.out_river, ebj.set_arg('river'));
         EventMarks.get(0).add(event_hooks.out_river);
         break;
       case 'river':
         EventMarks.get(0).sub(event_hooks.out_river);
-        await print_event_name('河堤', suzuka);
-        await kojo['river'](dict);
+        await print_title_with_kojo(kojo, 'river', suzuka, dict);
         add_event(event_hooks.recruit_start, ebj.set_arg('beginning'));
         EventMarks.get(0).add(event_hooks.recruit_start);
         break;
       case 'beginning':
         EventMarks.get(0).sub(event_hooks.recruit_start);
-        await print_event_name('新的开始', suzuka);
-        await kojo['beginning'](dict);
+        await print_title_with_kojo(kojo, 'beginning', suzuka, dict);
         era.set(`cflag:${this.id}:66`, recruit_flags.yes);
         era.set('flag:33', 0);
     }
