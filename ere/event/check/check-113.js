@@ -20,7 +20,8 @@ aim_races[get_aim_race_index(race_enum.eliz_cup, 2)] = 4;
 
 module.exports = require('#/event/check/snippets/check-uma-common-generator')(
   function () {
-    if (era.get('cflag:11:干劲') < 2) {
+    // CFLAGNAME:40 = 干劲
+    if (era.get(`cflag:${this.id}:40`) < 2) {
       new PandoraEduMarks().title_check++;
     }
   },
