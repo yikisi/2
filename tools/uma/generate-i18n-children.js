@@ -1,10 +1,15 @@
-const { writeFileSync } = require('fs');
+const { readFileSync, writeFileSync } = require('fs');
 const { join } = require('path');
 
+const { parse: parseYaml } = require('yamljs');
+
 const names = new (require('../../ere/i18n/zh-CN/chara/names'))();
-const translation = require('../../common/i18n/name-dict.json');
 const children = require('../../common/uma/child-names.json');
 const { read_and_write_generated, stringify } = require('../libs');
+
+const translation = parseYaml(
+  readFileSync(join(__dirname, '../../common/i18n/name-dict.yaml'), 'utf-8'),
+);
 
 const dict = {};
 const output = {};

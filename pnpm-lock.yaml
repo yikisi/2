@@ -81,6 +81,9 @@ importers:
       webpack-cli:
         specifier: ^5.1.4
         version: 5.1.4(webpack@5.104.1)
+      yamljs:
+        specifier: ^0.3.0
+        version: 0.3.0
 
 packages:
 

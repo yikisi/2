@@ -1,8 +1,13 @@
 const { readFileSync } = require('fs');
 const { join } = require('path');
 
-const translation = require('../../common/i18n/name-dict.json');
+const { parse: parseYaml } = require('yamljs');
+
 const { read_and_write_generated, stringify } = require('../libs');
+
+const translation = parseYaml(
+  readFileSync(join(__dirname, '../../common/i18n/name-dict.yaml'), 'utf-8'),
+);
 
 let c_out = [];
 let j_out = [];
