@@ -524,37 +524,27 @@ async function print_rec_page() {
           ...c_script.get_personal_titles().map((tid) => {
             const name = __(`title.${tid}`, tid || i18n().title.undef);
             return {
-              content: i18n().title.template_in_rec.map((span) => {
-                switch (span.t) {
-                  case 'name':
-                    return { content: name, color: get_chara_color(selected) };
-                  case 'title':
-                    return i18n().title_desc.personal_template.replace(
-                      '%DESC%',
-                      __(`title_desc.${tid}`, i18n().title_desc.undef),
-                    );
-                }
-                return span;
-              }),
+              content: i18n().title.template_in_rec(
+                { content: name, color: get_chara_color(selected) },
+                i18n().title_desc.personal_template.replace(
+                  '%DESC%',
+                  __(`title_desc.${tid}`, i18n().title_desc.undef),
+                ),
+              ),
               type: 'text',
             };
           }),
           {
-            content: i18n().title.achieve_template_in_rec.map((span) => {
-              switch (span.t) {
-                case 'title':
-                  return {
-                    color: get_chara_color(selected),
-                    content: __(`title.${personal_achieve}`, personal_achieve),
-                    fontWeight: 'bold',
-                  };
-                case 'check':
-                  return sys_personal_achievement.get(selected) > 0
-                    ? { color: attr_change_colors.up, content: '✔' }
-                    : { color: attr_change_colors.down, content: '✘' };
-              }
-              return span;
-            }),
+            content: i18n().title.achieve_template_in_rec(
+              {
+                color: get_chara_color(selected),
+                content: __(`title.${personal_achieve}`, personal_achieve),
+                fontWeight: 'bold',
+              },
+              sys_personal_achievement.get(selected) > 0
+                ? { color: attr_change_colors.up, content: '✔' }
+                : { color: attr_change_colors.down, content: '✘' },
+            ),
             type: 'text',
           },
         ],

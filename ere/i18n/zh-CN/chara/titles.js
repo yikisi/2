@@ -3,14 +3,14 @@ class I18nTitles {
   ui_tips =
     '* 同时完成角色育成目标与最高称号条件即可获得该角色的成就\n** 获得成就后，所有存档招募该角色时初始好感+300，欧洲马娘在一开始就可以招募';
 
-  template_got_tt = [{ t: 'name' }, '：', { t: 'title' }];
+  template_got_tt = (name, title) => [name, '：', title];
   title_template_got_tt = '[%TITLE%] %NAME%\n%DESC%\n（获取时间：%TIME%）';
 
   ungot = '？？？';
   title_template_ungot_tt = '%NAME%：%TITLE%\n%DESC%';
 
-  template_in_rec = [{ t: 'name' }, '：', { t: 'title' }];
-  achieve_template_in_rec = ['专属成就：', { t: 'title' }, ' ', { t: 'check' }];
+  template_in_rec = (name, desc) => [name, '：', desc];
+  achieve_template_in_rec = (title, check) => ['专属成就：', title, ' ', check];
 
   template_in_game = '[%NAME%]';
 

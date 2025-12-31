@@ -229,28 +229,14 @@ module.exports = async () => {
                 },
                 content:
                   t > 0
-                    ? i18n().title.template_got_tt.map((span) => {
-                        switch (span.t) {
-                          case 'name':
-                            return name;
-                          case 'title':
-                            return {
-                              content: title,
-                              fontWeight: 'bold',
-                              title: i18n()
-                                .title.title_template_got_tt.replace(
-                                  '%TITLE%',
-                                  title,
-                                )
-                                .replace('%NAME%', name)
-                                .replace('%DESC%', desc)
-                                .replace(
-                                  '%TIME%',
-                                  new Date(t).toLocaleString(lan()),
-                                ),
-                            };
-                        }
-                        return span;
+                    ? i18n().title.template_got_tt(name, {
+                        content: title,
+                        fontWeight: 'bold',
+                        title: i18n()
+                          .title.title_template_got_tt.replace('%TITLE%', title)
+                          .replace('%NAME%', name)
+                          .replace('%DESC%', desc)
+                          .replace('%TIME%', new Date(t).toLocaleString(lan())),
                       })
                     : [
                         {

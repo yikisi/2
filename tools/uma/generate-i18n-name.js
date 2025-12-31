@@ -25,6 +25,9 @@ const trans_arr = Object.entries(translation);
 
 for (const line of uma_data) {
   const [id, cid, name] = line.split(',');
+  if (!cid) {
+    continue;
+  }
   console.log(cid);
   const obj = trans_arr.find((n) => n[1][0] === name);
   if (obj) {
