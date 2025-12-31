@@ -401,11 +401,10 @@ module.exports = class extends CustomizedEro {
         unexpected_pregnant_enum.mother_sleep &&
       !is_slave
     ) {
-      await kojo['have_baby_with_baby']({
-        CHARA: father.name,
-        YOU: mother.name,
-        id: father.id,
-      });
+      const dict = { id: father.id };
+      dict['玩家名'] = mother.name;
+      dict['角色名'] = father.name;
+      await kojo['乱伦生子'](dict);
     } else if (era.get(`love:${father.id}`) < 90) {
       era.drawLine();
       await print_event_name('新生命', mother);

@@ -184,21 +184,23 @@ class EroNormalCommunications extends EroCommunications {
       attacker.id,
       defender.id,
     );
-    // FLAGNAME:35 = 惩戒力度
-    if (era.get('flag:35') === 3) {
+    if (era.get('flag:惩戒力度') === 3) {
       const o = { success: extra.success };
-      o.YOU = get_chara_talk(0).name;
+      o['玩家名'] = era.get('callname:0:-2');
       if (!attacker.id) {
-        await kojo['preg_slave_resist'](o);
+        await kojo['孕袋反抗'](o);
       } else {
-        // CFLAGNAME:1 = 种族
-        o.UMA =
-          era.get(`cflag:${attacker.id}:1`) > 0 ? attacker.uma_sex_title : '';
+        o['马娘'] =
+          era.get(`cflag:${attacker.id}:种族`) > 0
+            ? era.get('flag:角色性别') === 1
+              ? '马郎'
+              : '马娘'
+            : '';
         if (!extra.success) {
-          o.COLOR = attacker.color;
-          o.CALLNAME = sys_get_callname(attacker.id, defender.id);
+          o['代表色'] = get_chara_talk(attacker.id).color;
+          o['称呼'] = sys_get_callname(attacker.id, defender.id);
         }
-        await kojo['resist_preg_slave'](o);
+        await kojo['反抗孕袋'](o);
       }
     } else {
       if (hook.arg) {

@@ -122,24 +122,22 @@ class CustomizedEro {
   async raping_start(supporter) {
     let temp;
     if (
-      // FLAGNAME:35 = 惩戒力度
-      era.get('flag:35') === 3 &&
+      era.get('flag:惩戒力度') === 3 &&
       supporter > 0 &&
       (temp = [
-        // CFLAGNAME:15 = 父方角色
-        era.get(`cflag:${this.id}:15`) === supporter,
-        era.get(`cflag:${supporter}:15`) === this.id,
+        era.get(`cflag:${this.id}:父方角色`) === supporter,
+        era.get(`cflag:${supporter}:父方角色`) === this.id,
       ]).reduce((p, c) => p || c)
     ) {
       const { c: child, f: father } = temp[0]
         ? { c: this.id, f: supporter }
         : { c: supporter, f: this.id };
-      await kojo['child_raping_start']({
-        CALLNAME: sys_get_callname(child, 0),
-        CHILD: get_chara_talk(child).name,
-        FATHER: get_chara_talk(father).name,
-        YOU: get_chara_talk(0).name,
-      });
+      const o = {};
+      o['玩家名'] = era.get('callname:0:-2');
+      o['马娘名'] = era.get(`callname:${father}:-2`);
+      o['女儿名'] = era.get(`callname:${child}:-2`);
+      o['称呼'] = sys_get_callname(child, 0);
+      await kojo['孕袋惊醒'](o);
     }
   }
 
@@ -157,11 +155,11 @@ class CustomizedEro {
    */
   // eslint-disable-next-line no-unused-vars
   async join_3p(lover) {
-    return (
-      (await kojo['join_3p']({ CHARA: get_chara_talk(this.id).name }))[
-        'accept'
-      ] === 1
-    );
+    const chara = get_chara_talk(this.id);
+    era.print([chara.get_colored_name(), ' 面色绯红地想要加入……接受吗？']);
+    era.printButton('「你来的正是时候」', 1);
+    era.printButton('还是别了……', 2);
+    return (await era.input()) === 1;
   }
 
   /**
@@ -170,10 +168,12 @@ class CustomizedEro {
    */
   // eslint-disable-next-line no-unused-vars
   async join_3p_accept(lover) {
-    await kojo['join_3p_accept']({
-      CHARA: get_chara_talk(this.id).name,
-      YOU: get_chara_talk(0).name,
-    });
+    await era.printAndWait([
+      get_chara_talk(this.id).get_colored_name(),
+      ' 扑入 ',
+      get_chara_talk(0).get_colored_name(),
+      ' 怀中……',
+    ]);
   }
 
   /**
@@ -181,11 +181,14 @@ class CustomizedEro {
    * @param {number} lover 主要床伴
    */
   async join_3p_force(lover) {
-    await kojo['join_3p_force']({
-      CHARA: get_chara_talk(this.id).name,
-      LOVER: get_chara_talk(lover).name,
-      YOU: get_chara_talk(0).name,
-    });
+    await era.printAndWait([
+      get_chara_talk(this.id).get_colored_name(),
+      ' 征得 ',
+      get_chara_talk(lover).get_colored_name(),
+      ' 的同意后，华丽地无视了 ',
+      get_chara_talk(0).get_colored_name(),
+      ' 的抗议……',
+    ]);
   }
 
   /**
@@ -194,7 +197,10 @@ class CustomizedEro {
    */
   // eslint-disable-next-line no-unused-vars
   async join_3p_reject(lover) {
-    await kojo['join_3p_reject']({ CHARA: get_chara_talk(this.id).name });
+    await era.printAndWait([
+      get_chara_talk(this.id).get_colored_name(),
+      ' 掩面而去……',
+    ]);
   }
 
   /**
@@ -220,12 +226,10 @@ class CustomizedEro {
             t === ero_hook_tags.insert,
         ) !== -1;
     }
-    // FLAGNAME:35 = 惩戒力度
-    if (era.get('flag:35') >= 2) {
+    if (era.get('flag:惩戒力度') >= 2) {
       if (
-        era.get('flag:35') === 3 &&
-        // CFLAGNAME:81 = 妊娠阶段
-        era.get('cflag:0:81') === 1 << pregnant_stage_enum.no
+        era.get('flag:惩戒力度') === 3 &&
+        era.get('cflag:0:妊娠阶段') === 1 << pregnant_stage_enum.no
       ) {
         return (e) =>
           e >= ero_hooks.missionary && e <= ero_hooks.stimulate_g_spot;
