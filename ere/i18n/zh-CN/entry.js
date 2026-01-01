@@ -244,6 +244,8 @@ class I18nEntry {
   title = new (require('#/i18n/zh-CN/chara/titles'))();
   title_desc = new (require('#/i18n/zh-CN/chara/title-desc'))();
 
+  kojo = new (require('#/i18n/zh-CN/kojo/entry'))();
+
   achievement = new (require('#/i18n/zh-CN/achieve'))();
   achieve_desc = new (require('#/i18n/zh-CN/achieve-desc'))();
   item = new (require('#/i18n/zh-CN/items'))();

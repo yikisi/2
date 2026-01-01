@@ -661,7 +661,8 @@ module.exports = {
   get_trainer_title() {
     let level = get_trainer_level();
     const prefix = () => (level < 0 ? i18n().honour_m : i18n().m_honour[level]);
-    const title = () => i18n().n_title[era.get('flag:惩戒力度')];
+    // FLAGNAME:35 = 惩戒力度
+    const title = () => i18n().n_title[era.get('flag:35')];
     return {
       full: () => prefix() + title(),
       level,
