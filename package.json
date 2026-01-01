@@ -27,7 +27,8 @@
     "prettier": "^3.7.4",
     "prisma": "^5.22.0",
     "webpack": "^5.104.1",
-    "webpack-cli": "^5.1.4"
+    "webpack-cli": "^5.1.4",
+    "yamljs": "^0.3.0"
   },
   "engines": {
     "node": ">=18"

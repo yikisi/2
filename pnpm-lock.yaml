@@ -65,7 +65,7 @@ importers:
         version: 9.1.7
       kojo-loader:
         specifier: git+https://gitgud.io/umaera/engine/kojo-loader.git
-        version: git+https://gitgud.io/umaera/engine/kojo-loader.git#e580134cfc187b6702f3708dcb904ff50717af0b
+        version: git+https://gitgud.io/umaera/engine/kojo-loader.git#e4a0af0fe25fdfb16d183155af0bcb9390bd7df4
       lint-staged:
         specifier: ^15.5.2
         version: 15.5.2
@@ -81,6 +81,9 @@ importers:
       webpack-cli:
         specifier: ^5.1.4
         version: 5.1.4(webpack@5.104.1)
+      yamljs:
+        specifier: ^0.3.0
+        version: 0.3.0
 
 packages:
 
@@ -585,8 +588,8 @@ packages:
   '@eggjs/yauzl@2.11.0':
     resolution: {integrity: sha512-Jq+k2fCZJ3i3HShb0nxLUiAgq5pwo8JTT1TrH22JoehZQ0Nm2dvByGIja1NYfNyuE4Tx5/Dns5nVsBN/mlC8yg==}
 
-  '@eslint-community/eslint-utils@4.9.0':
-    resolution: {integrity: sha512-ayVFHdtZ+hsq1t2Dy24wCmGXGe4q9Gu3smhLYALJrr473ZH27MsnSL+LKUlimp4BWJqMDMLmPpx/Q9R3OAlL4g==}
+  '@eslint-community/eslint-utils@4.9.1':
+    resolution: {integrity: sha512-phrYmNiYppR7znFEdqgfWHXR6NCkZEK7hwWDHZUjit/2/U0r6XvkDl0SYnoM51Hq7FhCGdLDT6zxCCOY1hexsQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
       eslint: ^6.0.0 || ^7.0.0 || >=8.0.0
@@ -976,8 +979,8 @@ packages:
     resolution: {integrity: sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==}
     engines: {node: '>=6'}
 
-  caniuse-lite@1.0.30001761:
-    resolution: {integrity: sha512-JF9ptu1vP2coz98+5051jZ4PwQgd2ni8A+gYSN7EA7dPKIMf0pDlSUxhdmVOaV3/fYK5uWBkgSXJaRLr4+3A6g==}
+  caniuse-lite@1.0.30001762:
+    resolution: {integrity: sha512-PxZwGNvH7Ak8WX5iXzoK1KPZttBXNPuaOvI2ZYU7NrlM+d9Ov+TUvlLOBNGzVXAntMSMMlJPd+jY6ovrVjSmUw==}
 
   chalk@4.1.2:
     resolution: {integrity: sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==}
@@ -1212,8 +1215,8 @@ packages:
     resolution: {integrity: sha512-j6PAQ2uUr79PZhBjP5C5fhl8e39FmRnOjsD5lGnWrFU8i2G776tBK7+nP8KuQUTTyAZUwfQqXAgrVH5MbH9CYQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  esquery@1.6.0:
-    resolution: {integrity: sha512-ca9pw9fomFcKPvFLXhBKUK90ZvGibiGOvRJNbjljY7s7uq/5YO4BOzcYtJqExdx99rF6aAcnRxHmcUHcz6sQsg==}
+  esquery@1.7.0:
+    resolution: {integrity: sha512-Ap6G0WQwcU/LHsvLwON1fAQX9Zp0A2Y6Y/cJBl9r/JbW90Zyg4/zbG6zzKa2OTALELarYHmKu0GhpM5EO+7T0g==}
     engines: {node: '>=0.10'}
 
   esrecurse@4.3.0:
@@ -1571,8 +1574,8 @@ packages:
     resolution: {integrity: sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==}
     engines: {node: '>=0.10.0'}
 
-  kojo-loader@git+https://gitgud.io/umaera/engine/kojo-loader.git#e580134cfc187b6702f3708dcb904ff50717af0b:
-    resolution: {commit: e580134cfc187b6702f3708dcb904ff50717af0b, repo: https://gitgud.io/umaera/engine/kojo-loader.git, type: git}
+  kojo-loader@git+https://gitgud.io/umaera/engine/kojo-loader.git#e4a0af0fe25fdfb16d183155af0bcb9390bd7df4:
+    resolution: {commit: e4a0af0fe25fdfb16d183155af0bcb9390bd7df4, repo: https://gitgud.io/umaera/engine/kojo-loader.git, type: git}
     version: 1.0.0
 
   lazystream@1.0.1:
@@ -1812,8 +1815,8 @@ packages:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
 
-  prettier-linter-helpers@1.0.0:
-    resolution: {integrity: sha512-GbK2cP9nraSSUF9N2XwUwqfzlAFlMNYYl+ShE/V+H8a9uNl/oUqB1w2EL54Jh0OlyRSd8RfWYJ3coVS4TROP2w==}
+  prettier-linter-helpers@1.0.1:
+    resolution: {integrity: sha512-SxToR7P8Y2lWmv/kTzVLC1t/GDI2WGjMwNhLLE9qtH8Q13C+aEmuRlzDst4Up4s0Wc8sF2M+J57iB3cMLqftfg==}
     engines: {node: '>=6.0.0'}
 
   prettier@3.7.4:
@@ -2890,7 +2893,7 @@ snapshots:
       buffer-crc32: 0.2.13
       fd-slicer2: 1.2.0
 
-  '@eslint-community/eslint-utils@4.9.0(eslint@9.39.2)':
+  '@eslint-community/eslint-utils@4.9.1(eslint@9.39.2)':
     dependencies:
       eslint: 9.39.2
       eslint-visitor-keys: 3.4.3
@@ -3286,7 +3289,7 @@ snapshots:
   browserslist@4.28.1:
     dependencies:
       baseline-browser-mapping: 2.9.11
-      caniuse-lite: 1.0.30001761
+      caniuse-lite: 1.0.30001762
       electron-to-chromium: 1.5.267
       node-releases: 2.0.27
       update-browserslist-db: 1.2.3(browserslist@4.28.1)
@@ -3330,7 +3333,7 @@ snapshots:
 
   callsites@3.1.0: {}
 
-  caniuse-lite@1.0.30001761: {}
+  caniuse-lite@1.0.30001762: {}
 
   chalk@4.1.2:
     dependencies:
@@ -3483,14 +3486,14 @@ snapshots:
 
   eslint-plugin-es-x@7.8.0(eslint@9.39.2):
     dependencies:
-      '@eslint-community/eslint-utils': 4.9.0(eslint@9.39.2)
+      '@eslint-community/eslint-utils': 4.9.1(eslint@9.39.2)
       '@eslint-community/regexpp': 4.12.2
       eslint: 9.39.2
       eslint-compat-utils: 0.5.1(eslint@9.39.2)
 
   eslint-plugin-n@17.23.1(eslint@9.39.2)(typescript@5.9.3):
     dependencies:
-      '@eslint-community/eslint-utils': 4.9.0(eslint@9.39.2)
+      '@eslint-community/eslint-utils': 4.9.1(eslint@9.39.2)
       enhanced-resolve: 5.18.4
       eslint: 9.39.2
       eslint-plugin-es-x: 7.8.0(eslint@9.39.2)
@@ -3507,7 +3510,7 @@ snapshots:
     dependencies:
       eslint: 9.39.2
       prettier: 3.7.4
-      prettier-linter-helpers: 1.0.0
+      prettier-linter-helpers: 1.0.1
       synckit: 0.11.11
     optionalDependencies:
       '@types/eslint': 9.6.1
@@ -3533,7 +3536,7 @@ snapshots:
 
   eslint@9.39.2:
     dependencies:
-      '@eslint-community/eslint-utils': 4.9.0(eslint@9.39.2)
+      '@eslint-community/eslint-utils': 4.9.1(eslint@9.39.2)
       '@eslint-community/regexpp': 4.12.2
       '@eslint/config-array': 0.21.1
       '@eslint/config-helpers': 0.4.2
@@ -3553,7 +3556,7 @@ snapshots:
       eslint-scope: 8.4.0
       eslint-visitor-keys: 4.2.1
       espree: 10.4.0
-      esquery: 1.6.0
+      esquery: 1.7.0
       esutils: 2.0.3
       fast-deep-equal: 3.1.3
       file-entry-cache: 8.0.0
@@ -3576,7 +3579,7 @@ snapshots:
       acorn-jsx: 5.3.2(acorn@8.15.0)
       eslint-visitor-keys: 4.2.1
 
-  esquery@1.6.0:
+  esquery@1.7.0:
     dependencies:
       estraverse: 5.3.0
 
@@ -3894,7 +3897,7 @@ snapshots:
 
   kind-of@6.0.3: {}
 
-  kojo-loader@git+https://gitgud.io/umaera/engine/kojo-loader.git#e580134cfc187b6702f3708dcb904ff50717af0b:
+  kojo-loader@git+https://gitgud.io/umaera/engine/kojo-loader.git#e4a0af0fe25fdfb16d183155af0bcb9390bd7df4:
     dependencies:
       yamljs: 0.3.0
 
@@ -4112,7 +4115,7 @@ snapshots:
 
   prelude-ls@1.2.1: {}
 
-  prettier-linter-helpers@1.0.0:
+  prettier-linter-helpers@1.0.1:
     dependencies:
       fast-diff: 1.3.0
 
