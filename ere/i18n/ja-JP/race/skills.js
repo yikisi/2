@@ -1,6 +1,16 @@
 const I18nSkills = require('#/i18n/zh-CN/race/skills');
 
 module.exports = class extends I18nSkills {
+  t_speed = 'スピード';
+  t_stamina = 'スタミナ';
+  t_power = 'パワー';
+  t_guts = '根性';
+  t_wiz = '賢さ';
+  t_startDash = 'ゲート';
+  t_visible = '視野';
+  t_accel = '加速力';
+
+  100601 = 'きっとその先へ…！';
   101321 = 'Circulating Love♡';
   102051 = 'Déesse réincarnée';
   210071 = 'キミと勝ちたい';
@@ -12,6 +22,7 @@ module.exports = class extends I18nSkills {
   210351 = '新たな伝説を築く者';
   210361 = '本能の懸け橋';
   210371 = '保養が導く奇跡';
+  900601 = 'きっとその先へ…！';
   902051 = 'Déesse réincarnée';
   // GENERATED START
   10071 = '波乱注意砲！';

@@ -18,8 +18,8 @@ const { i18n } = require('#/i18n/selector');
 module.exports = class extends CustomizedRecruit {
   async recruit(stage) {
     if (stage === event_hooks.recruit) {
-      await i18n().kojo.recruit[7].rec(
-        get_chara_talk(7),
+      await i18n().kojo.recruit[this.id].rec(
+        get_chara_talk(this.id),
         get_chara_talk(0),
         get_trainer_title().title(),
         chara_color[1],

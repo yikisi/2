@@ -1,6 +1,19 @@
 class I18nGenes {
-  gn_types = ['适性', '属性', '技巧'];
-  gn_rarities = ['普通', '稀有', '史诗', '传奇'];
+  t_adapt = '适性';
+  t_base = '属性';
+  t_skill = '技巧';
+  get gn_types() {
+    return [this.t_adapt, this.t_base, this.t_skill];
+  }
+
+  r_n = '普通';
+  r_r = '稀有';
+  r_sr = '史诗';
+  r_ssr = '传奇';
+  get gn_rarities() {
+    return [this.r_n, this.r_r, this.r_sr, this.r_ssr];
+  }
+
   gn_title_template = '【%NAME%】（%TYPE% · %RARITY%）\n%DESC%';
 
   sg_name_template = '「%NAME%」之回响';

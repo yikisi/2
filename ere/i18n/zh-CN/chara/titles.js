@@ -3,7 +3,7 @@ class I18nTitles {
   ui_tips =
     '* 同时完成角色育成目标与最高称号条件即可获得该角色的成就\n** 获得成就后，所有存档招募该角色时初始好感+300，欧洲马娘在一开始就可以招募';
 
-  template_got_tt = (name, title) => [name, '：', title];
+  template_got_tt = (name, desc) => [name, '：', desc];
   title_template_got_tt = '[%TITLE%] %NAME%\n%DESC%\n（获取时间：%TIME%）';
 
   ungot = '？？？';

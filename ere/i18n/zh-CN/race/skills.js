@@ -4,13 +4,15 @@ class I18nSkills {
   n_t_speed = '增幅';
   n_t_control = '控制';
   n_t_debuff = '劣势';
-  n_type = [
-    this.n_t_buff,
-    this.n_t_heal,
-    this.n_t_speed,
-    this.n_t_control,
-    this.n_t_debuff,
-  ];
+  get n_type() {
+    return [
+      this.n_t_buff,
+      this.n_t_heal,
+      this.n_t_speed,
+      this.n_t_control,
+      this.n_t_debuff,
+    ];
+  }
 
   r_normal = '普通';
   r_advanced = '传说';
@@ -19,15 +21,17 @@ class I18nSkills {
   r_cheat = 'ＧＭ';
   r_ero_normal = '普通 · 调教';
   r_ero_advanced = '强化 · 调教';
-  n_rarity = [
-    this.r_normal,
-    this.r_advanced,
-    this.r_spe,
-    this.r_evol,
-    this.r_cheat,
-    this.r_ero_normal,
-    this.r_ero_advanced,
-  ];
+  get n_rarity() {
+    return [
+      this.r_normal,
+      this.r_advanced,
+      this.r_spe,
+      this.r_evol,
+      this.r_cheat,
+      this.r_ero_normal,
+      this.r_ero_advanced,
+    ];
+  }
 
   t_speed = '速度';
   t_stamina = '耐力';
@@ -44,23 +48,25 @@ class I18nSkills {
   t_temp = '焦躁';
   t_laneMove = '突围';
   t_ero = '调教';
-  n_tag = [
-    this.t_speed,
-    this.t_stamina,
-    this.t_power,
-    this.t_guts,
-    this.t_wiz,
-    this.t_startDash,
-    this.t_tempPer,
-    this.t_visible,
-    this.t_targetSpeed,
-    this.t_currentSpeed,
-    this.t_accel,
-    this.t_hpRate,
-    this.t_temp,
-    this.t_laneMove,
-    this.t_ero,
-  ];
+  get n_tag() {
+    return [
+      this.t_speed,
+      this.t_stamina,
+      this.t_power,
+      this.t_guts,
+      this.t_wiz,
+      this.t_startDash,
+      this.t_tempPer,
+      this.t_visible,
+      this.t_targetSpeed,
+      this.t_currentSpeed,
+      this.t_accel,
+      this.t_hpRate,
+      this.t_temp,
+      this.t_laneMove,
+      this.t_ero,
+    ];
+  }
 
   tag_template = '＜%TAG%＞';
   title_template = '【%NAME%】（%TYPE% · %RARITY%）';
