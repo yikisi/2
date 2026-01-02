@@ -1,3 +1,7 @@
+/**
+ * @file 目白光明 - 调教
+ * @author KUN
+ */
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
 const kojo = require('#/event/ero/ero-74.kojo');
