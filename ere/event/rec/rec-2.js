@@ -5,7 +5,6 @@
 const era = require('#/era-electron');
 
 const { add_event, cb_enum } = require('#/event/queue');
-const kojo = require('#/event/rec/rec-2.kojo');
 const CustomizedRecruit = require('#/event/rec/rec-common');
 const generate_dictionary = require('#/event/snippets/generate-dictionary');
 const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
@@ -17,6 +16,8 @@ const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
 
+const { i18n } = require('#/i18n/selector');
+
 module.exports = class extends CustomizedRecruit {
   async recruit(stage, ebj) {
     const suzuka = get_chara_talk(this.id);
@@ -27,6 +28,7 @@ module.exports = class extends CustomizedRecruit {
       sir: !0,
       title: !0,
     });
+    const kojo = i18n().kojo.recruit[2];
     switch (ebj?.arg) {
       default:
         if (

@@ -5,7 +5,6 @@
 const era = require('#/era-electron');
 
 const { add_event, cb_enum } = require('#/event/queue');
-const kojo = require('#/event/rec/rec-74.kojo');
 const CustomizedRecruit = require('#/event/rec/rec-common');
 const generate_dictionary = require('#/event/snippets/generate-dictionary');
 const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
@@ -17,6 +16,8 @@ const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
 
+const { i18n } = require('#/i18n/selector');
+
 module.exports = class extends CustomizedRecruit {
   async recruit(stage, ebj) {
     const bright = get_chara_talk(this.id);
@@ -25,6 +26,7 @@ module.exports = class extends CustomizedRecruit {
       T: me.name,
       ...generate_dictionary(this.id, { call: true, uma: true, title: true }),
     };
+    const kojo = i18n().kojo.recruit[74];
     let r_flag;
     switch (stage) {
       case event_hooks.recruit:

@@ -130,6 +130,15 @@
  * @typedef {'topleft'|'topcenter'|'top'|'topright'|'centerleft'|'left'|'center'|'centerright'|'right'|'bottomleft'|'bottomcenter'|'bottom'|'bottomright'|1|2|3|4|5|6|7|8|9} OBPosition
  */
 
+/**
+ * @typedef KojoFunction
+ * @type {function(Record<string,any>=):(number[]|Promise<number[]>)}
+ */
+/**
+ * @typedef KojoFile
+ * @type {Record<string,KojoFunction>}
+ */
+
 const era = {
   /**
    * DANGER add a variable by name

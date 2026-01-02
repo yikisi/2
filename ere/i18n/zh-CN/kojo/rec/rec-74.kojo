@@ -1,5 +1,5 @@
 rec0:
-  - 目白光明似乎不在训练场……或许可以一个人去外面看看？
+  - %CHARA%似乎不在训练场……或许可以一个人去外面看看？
 
 rec1:
   title: 慢悠悠的公园之旅
@@ -16,7 +16,7 @@ rec1:
       color: %COLOR%
       content:
         - fontWeight: bold
-          content: 目白光明
+          content: %CHARA%
         - 「呼哇～」
     - if: "!d.mejiro"
       color: %COLOR%
@@ -45,7 +45,7 @@ rec1:
       color: %COLOR%
       content:
         - fontWeight: bold
-          content: 目白光明
+          content: %CHARA%
         - 「呼哇～」
     - if: "!d.mejiro"
       color: %COLOR%
@@ -59,7 +59,7 @@ rec1:
       color: %COLOR%
       content:
         - fontWeight: bold
-          content: 目白光明
+          content: %CHARA%
         - 「啊拉？」
     - if: "!d.mejiro"
       color: %COLOR%
@@ -71,7 +71,7 @@ rec1:
       color: %COLOR%
       content:
         - fontWeight: bold
-          content: 目白光明
+          content: %CHARA%
         - 「啊，早上好～」
     - if: "!d.mejiro"
       color: %COLOR%
@@ -85,7 +85,7 @@ rec1:
       color: %COLOR%
       content:
         - fontWeight: bold
-          content: 目白光明
+          content: %CHARA%
         - 「那个，您是在看上面吗？」
     - if: "!d.mejiro"
       color: %COLOR%
@@ -101,7 +101,7 @@ rec1:
       color: %COLOR%
       content:
         - fontWeight: bold
-          content: 目白光明
+          content: %CHARA%
         - 「嗯～」
     - if: "!d.mejiro"
       color: %COLOR%
@@ -113,7 +113,7 @@ rec1:
       color: %COLOR%
       content:
         - fontWeight: bold
-          content: 目白光明
+          content: %CHARA%
         - 「那边的最顶端，是一片孤零零的枯叶对吧？」
     - if: "!d.mejiro"
       color: %COLOR%
@@ -125,7 +125,7 @@ rec1:
       color: %COLOR%
       content:
         - fontWeight: bold
-          content: 目白光明
+          content: %CHARA%
         - 「虽然看上去很快就会被吹下来的样子，不过它完全没有掉下来哦。」
     - if: "!d.mejiro"
       color: %COLOR%
@@ -148,7 +148,7 @@ rec1:
           color: %COLOR%
           content:
             - fontWeight: bold
-              content: 目白光明
+              content: %CHARA%
             - 「真是坚强的孩子呢～」
         - if: "!d.mejiro"
           color: %COLOR%
@@ -162,7 +162,7 @@ rec1:
           color: %COLOR%
           content:
             - fontWeight: bold
-              content: 目白光明
+              content: %CHARA%
             - 「唉？有回应……」
         - if: "!d.mejiro"
           color: %COLOR%
@@ -174,7 +174,7 @@ rec1:
           color: %COLOR%
           content:
             - fontWeight: bold
-              content: 目白光明
+              content: %CHARA%
             - 「哇啊，您还在这里啊～」
         - if: "!d.mejiro"
           color: %COLOR%
@@ -188,7 +188,7 @@ rec1:
           color: %COLOR%
           content:
             - fontWeight: bold
-              content: 目白光明
+              content: %CHARA%
             - 「所以就，一直……？」
         - if: "!d.mejiro"
           color: %COLOR%
@@ -200,7 +200,7 @@ rec1:
           color: %COLOR%
           content:
             - fontWeight: bold
-              content: 目白光明
+              content: %CHARA%
             - 「呵呵～不愧是您呢～」
         - if: "!d.mejiro"
           color: %COLOR%
@@ -230,7 +230,7 @@ rec1:
                 - fontWeight: bold
                   content: 目白多伯
                 - 「唉，你也在啊？」
-            - 目白多伯慌张地小跑过来，轻轻的拉住了目白光明的手，如释重负一般的吐了口气。
+            - 目白多伯慌张地小跑过来，轻轻的拉住了%CHARA%的手，如释重负一般的吐了口气。
             - 但很快，又有些埋怨地看向身旁站在的%T%。
         - if: "!d.mejiro"
           lines:
@@ -244,24 +244,24 @@ rec1:
                 - fontWeight: bold
                   content: ？？？
                 - 「难道，是什么奇怪的人……」
-            - 小跑过来的%UMA%轻轻的拉住了目白光明的手，如释重负一般的吐了口气。
+            - 小跑过来的%UMA%轻轻的拉住了%CHARA%的手，如释重负一般的吐了口气。
             - 但很快，又警觉的看向身旁站在的%T%。
         - color: %COLOR%
           content:
             - fontWeight: bold
-              content: 目白光明
+              content: %CHARA%
             - 「没事哦，多伯～」
         - if: d.mejiro
           color: %COLOR%
           content:
             - fontWeight: bold
-              content: 目白光明
+              content: %CHARA%
             - 「就是因为有人陪我在这里，我才一直待在这里哦。」
         - if: "!d.mejiro"
           color: %COLOR%
           content:
             - fontWeight: bold
-              content: 目白光明
+              content: %CHARA%
             - 「这位%SIR%一直陪我待在这里，是个好人哦。」
         - color: %COLOR59%
           content:
@@ -296,26 +296,26 @@ rec1:
                 - fontWeight: bold
                   content: 目白多伯
                 - 「吓我一跳……还以为是什么奇怪的人呢。」
-        - 看着已经有了同伴的目白光明，深知自己的出场时间结束的%T%自然的转过身离开了。
+        - 看着已经有了同伴的%CHARA%，深知自己的出场时间结束的%T%自然的转过身离开了。
         - divider: true
         - color: %COLOR%
-          content: 远远地看着%T%离开的背影，目白光明稍稍的歪了歪头。
+          content: 远远地看着%T%离开的背影，%CHARA%稍稍的歪了歪头。
         - color: %COLOR%
           content:
             - fontWeight: bold
-              content: 目白光明
+              content: %CHARA%
             - 「训练员……」
         - if: d.mejiro
           color: %COLOR%
           content:
             - fontWeight: bold
-              content: 目白光明
+              content: %CHARA%
             - 「嗯哼～」
         - if: "!d.mejiro"
           color: %COLOR%
           content:
             - fontWeight: bold
-              content: 目白光明
+              content: %CHARA%
             - 「嗯……？」
     - acc: 2
       content: （不过是一片枯叶）（停止招募）
@@ -328,16 +328,16 @@ rec2:
   lines:
     # 中庭触发
     - 在公园度过了悠哉悠哉的时光后没过多久，那个风格独特的%UMA%在%T%的面前再一次出现了。
-    - 正好站在窗边的目白光明发现了%T%后，不紧不慢的走了过来。
+    - 正好站在窗边的%CHARA%发现了%T%后，不紧不慢的走了过来。
     - color: %COLOR%
       content:
         - fontWeight: bold
-          content: 目白光明
+          content: %CHARA%
         - 「贵安，训练员。」
     - color: %COLOR%
       content:
         - fontWeight: bold
-          content: 目白光明
+          content: %CHARA%
         - 「一段时间没见了呢～」
     - acc: 1
       content: 「……唉？是在说我吗？」
@@ -345,14 +345,14 @@ rec2:
     - color: %COLOR%
       content:
         - fontWeight: bold
-          content: 目白光明
+          content: %CHARA%
         - 「是的哦～」
     - color: %COLOR%
       content:
         - fontWeight: bold
-          content: 目白光明
+          content: %CHARA%
         - 「之前在公园的时候，多有麻烦你了呢。」
-    - 如此说着的目白光明，朝%T%轻轻的鞠躬致谢。
+    - 如此说着的%CHARA%，朝%T%轻轻的鞠躬致谢。
     - 再次抬起脸的时候，依旧带着似乎有些没睡醒的表情，轻飘飘的和%T%对视着。
     - acc: 1 # 结束招募
       content: 「……那只是我作为训练员的义务而已。」（停止招募）
@@ -363,7 +363,7 @@ rec2:
         - color: %COLOR%
           content:
             - fontWeight: bold
-              content: 目白光明
+              content: %CHARA%
             - 「好好享受？」
         - 有些呆呆的歪了歪头，迷惑的看着%T%。
         - 长长的呆毛在空中跳了跳，随着窗户吹进来的风摆动。
@@ -372,29 +372,29 @@ rec2:
         - color: %COLOR%
           content:
             - fontWeight: bold
-              content: 目白光明
+              content: %CHARA%
             - 「哦～是这样啊～」
         - color: %COLOR%
           content:
             - fontWeight: bold
-              content: 目白光明
+              content: %CHARA%
             - 「训练员和我很合得来呢～」
-        - 下垂的双手轻轻抬起，遮住了目白光明翘起来的嘴角。
+        - 下垂的双手轻轻抬起，遮住了%CHARA%翘起来的嘴角。
         - 一阵轻笑声过后，如同回想到了什么一样，呆呆的表情里突然间又闪出了正经的样子。
         - color: %COLOR%
           content:
             - fontWeight: bold
-              content: 目白光明
+              content: %CHARA%
             - 「啊，对了！」
         - color: %COLOR%
           content:
             - fontWeight: bold
-              content: 目白光明
+              content: %CHARA%
             - 「虽然现在说不太合适……」
         - color: %COLOR%
           content:
             - fontWeight: bold
-              content: 目白光明
+              content: %CHARA%
             - 「能麻烦训练员帮我测试吗？」
         - 虽然是有些尴尬的转移了话题，声音却依旧平稳。
         - acc: 1
@@ -402,37 +402,37 @@ rec2:
         - color: %COLOR%
           content:
             - fontWeight: bold
-              content: 目白光明
+              content: %CHARA%
             - 「是的～」
         - color: %COLOR%
           content:
             - fontWeight: bold
-              content: 目白光明
+              content: %CHARA%
             - 「我报名了下一场的校内比赛呢，所以希望您能用专业的视角帮我看一看。」
         - color: %COLOR%
           content:
             - fontWeight: bold
-              content: 目白光明
+              content: %CHARA%
             - 「当然，您不愿意的话我也没关系的呢。」
         - 原本还有点睡眼惺忪的脸在自己提及比赛的时候，一下就明亮了。
         - 表情认真的看着面的%T%，露出的是符合「目白」这个名字的眼神。
         - acc: 1
           content: 「可以啊。」
         - divider: true
-        - 转移到训练场之后，看着换上运动服的目白光明。
+        - 转移到训练场之后，看着换上运动服的%CHARA%。
         - 站在跑道旁的%T%，不自觉的抓紧了手上了秒表。
-        - 这位可是那个目白家的目白光明，不知道会跑出什么样的表现……
+        - 这位可是那个目白家的%CHARA%，不知道会跑出什么样的表现……
         - color: %COLOR%
           content:
             - fontWeight: bold
               content: 路人训练员A
-            - 「目白光明啊，令人期待%SEX%的表现呢！」
+            - 「%CHARA%啊，令人期待%SEX%的表现呢！」
         - color: %COLOR%
           content:
             - fontWeight: bold
               content: 路人训练员B
             - 「听说%SEX%还没有专属训练员吧？说不定这是个机会……」
-        - 在周围的窃窃私语中，目白光明迈出了脚步——
+        - 在周围的窃窃私语中，%CHARA%迈出了脚步——
         -
         - 出乎意料的是，并没有和所有人想象的一样，充满魄力的加速，仅仅只是维持一个不算快的速度而已。
         - color: %COLOR%
@@ -447,18 +447,18 @@ rec2:
             - 「看样子并没有想象的那么厉害……」
         - acc: 1
           content: 「……但是完全没有降速的感觉啊。」
-        - 与周围唱衰速度的人不同，%T%看着目白光明的脚步慢慢的有了想法。
+        - 与周围唱衰速度的人不同，%T%看着%CHARA%的脚步慢慢的有了想法。
         -
-        - 在目白光明结束测试的时候，周围的人已经散的差不多了。
+        - 在%CHARA%结束测试的时候，周围的人已经散的差不多了。
         - color: %COLOR%
           content:
             - fontWeight: bold
-              content: 目白光明
+              content: %CHARA%
             - 「训练员」
         - color: %COLOR%
           content:
             - fontWeight: bold
-              content: 目白光明
+              content: %CHARA%
             - 「啊咧，原来我已经跑过终点了吗？」
         - 全程维持不变的速度跑完之后，维持着有节奏的呼吸声走到了%T%的面前。
         - acc: 1
@@ -468,7 +468,7 @@ rec2:
         - color: %COLOR%
           content:
             - fontWeight: bold
-              content: 目白光明
+              content: %CHARA%
             - 「唉，已经够了吗？」
         - acc: 1
           content: 「嗯，完全够了。」
@@ -476,7 +476,7 @@ rec2:
         - color: %COLOR%
           content:
             - fontWeight: bold
-              content: 目白光明
+              content: %CHARA%
             - 「那，训练员对我的成绩怎么看呢？」
         - acc: 1
           content: 「总感觉，不能就这样放着你这样跑啊。」
@@ -484,64 +484,64 @@ rec2:
         - color: %COLOR%
           content:
             - fontWeight: bold
-              content: 目白光明
+              content: %CHARA%
             - 「放着这样跑……？」
         - color: %COLOR%
           content:
             - fontWeight: bold
-              content: 目白光明
+              content: %CHARA%
             - 「请问是什么意思呢？」
-        - 站在%T%面前的目白光明完全没有新人%UMA%那样子因为体力不足而喘气的模样，依旧是像开始测试之前一样平静。
+        - 站在%T%面前的%CHARA%完全没有新人%UMA%那样子因为体力不足而喘气的模样，依旧是像开始测试之前一样平静。
         - 表情上也没有什么疲劳感，还能看见轻飘飘的笑容。
         - acc: 1
           content: 「首先就是，稍微改变一点慢悠悠的样子吧……」
         - color: %COLOR%
           content:
             - fontWeight: bold
-              content: 目白光明
+              content: %CHARA%
             - 「首先是，慢悠悠的样子？」
-        - 看着目白光明有点呆的眼神，%T%也坚定了想法。
+        - 看着%CHARA%有点呆的眼神，%T%也坚定了想法。
         - acc: 1
           content: 「虽然时候不太对……不过，我想和你搭档。」
         - color: %COLOR%
           content:
             - fontWeight: bold
-              content: 目白光明
+              content: %CHARA%
             - 「搭档……啊，是指专任训练员的事情吗？」
         - color: %COLOR%
           content:
             - fontWeight: bold
-              content: 目白光明
+              content: %CHARA%
             - 「……但是我还没有参加过校内的比赛呢，训练员要就这样下定结论吗？」
-        - 明明还没看过自己的比赛就这样提议，令目白光明也变成了一幅不解的神情。
+        - 明明还没看过自己的比赛就这样提议，令%CHARA%也变成了一幅不解的神情。
         - 但对现在的%T%来说，这已经是确定事件了。
         - acc: 1
           content: 「是啊，我确定了！」
         - color: %COLOR%
           content:
             - fontWeight: bold
-              content: 目白光明
+              content: %CHARA%
             - 「啊……呵呵～」
         - color: %COLOR%
           content:
             - fontWeight: bold
-              content: 目白光明
+              content: %CHARA%
             - 「那，稍微让我再考虑一下，可以吗？」
-        - 稍微愣了一下的目白光明，很快又恢复了像刚才一样稍微没睡醒的眼神。
-        - 并不急于一时的%T%轻轻点头，和目白光明挥手暂时分开了。
+        - 稍微愣了一下的%CHARA%，很快又恢复了像刚才一样稍微没睡醒的眼神。
+        - 并不急于一时的%T%轻轻点头，和%CHARA%挥手暂时分开了。
         - divider: true
         - color: %COLOR%
           content:
             - fontWeight: bold
-              content: 目白光明
+              content: %CHARA%
             - 「呵呵……果然，拜托您是正确的呢～」
         - color: %COLOR%
           content:
             - fontWeight: bold
-              content: 目白光明
+              content: %CHARA%
             - 「啊，现在应该改口叫做%CALLNAME%了呢。」
         - color: %COLOR%
-          content: 在确定%T%不会听见最后的一句话之后，目白光明又按捺不住地轻笑了起来。
+          content: 在确定%T%不会听见最后的一句话之后，%CHARA%又按捺不住地轻笑了起来。
 
 rec3:
   title: 好久不见～
@@ -554,18 +554,18 @@ rec3:
     - color: %COLOR%
       content:
         - fontWeight: bold
-          content: 目白光明
+          content: %CHARA%
         - 「啊啦？是哪位呢？」
-    - 似乎察觉到了身后的视线，目白光明缓缓回头看过来，在看见%T%的时候立刻展现了一个灿烂的笑容。
+    - 似乎察觉到了身后的视线，%CHARA%缓缓回头看过来，在看见%T%的时候立刻展现了一个灿烂的笑容。
     - color: %COLOR%
       content:
         - fontWeight: bold
-          content: 目白光明
+          content: %CHARA%
         - 「很久不见～」
     - color: %COLOR%
       content:
         - fontWeight: bold
-          content: 目白光明
+          content: %CHARA%
         - 「请问今天是来做什么呢？」
     - 可爱的呆毛在问的时候弹跳了一下，也稍稍在%T%的心里敲了一下。
     - %T%的内心在反复告诫自己冷静下来，将想要揉揉%SEX%脸蛋的想法压回去。
@@ -580,57 +580,57 @@ rec3:
         - color: %COLOR%
           content:
             - fontWeight: bold
-              content: 目白光明
+              content: %CHARA%
             - 「唉……？」
         - color: %COLOR%
           content:
             - fontWeight: bold
-              content: 目白光明
+              content: %CHARA%
             - 「啊，是的！」
-        - 慢了半拍的目白光明这才站起身来，正经的看着%T%。
-        - %T%和目白光明两个人对视了一小会，反而是%T%先没忍住笑了出来。
+        - 慢了半拍的%CHARA%这才站起身来，正经的看着%T%。
+        - %T%和%CHARA%两个人对视了一小会，反而是%T%先没忍住笑了出来。
         - color: %COLOR%
           content:
             - fontWeight: bold
-              content: 目白光明
+              content: %CHARA%
             - 「那个，训练员先生？」
         - 「没事，不用在意。」
         - 收起脸上的笑容，%T%向前踏出了一步。
-        - 之前的目白光明参与过的几次比赛，%T%在现场看过。
-        - 虽然是模拟赛，但目白光明的跑法是没有问题的，只是需要稍加指点而已。
-        - 「目白光明同学，你的比赛我是看过的。」
+        - 之前的%CHARA%参与过的几次比赛，%T%在现场看过。
+        - 虽然是模拟赛，但%CHARA%的跑法是没有问题的，只是需要稍加指点而已。
+        - 「%CHARA%同学，你的比赛我是看过的。」
         - color: %COLOR%
           content:
             - fontWeight: bold
-              content: 目白光明
+              content: %CHARA%
             - 「是？」
-        - 目白光明带着脸上呆呆的表情，稍稍倾斜了一些。
+        - %CHARA%带着脸上呆呆的表情，稍稍倾斜了一些。
         - 既然是招募的话，先展现一下自己的技术吧。
         - 「虽然有点怪怪的，但应该不介意我稍微指点两句吧。」
         - color: %COLOR%
           content:
             - fontWeight: bold
-              content: 目白光明
+              content: %CHARA%
             - 「啊，当然没问题，请说～」
-        - 看着目白光明的脸，%T%提起了那些在心底压了很久的建议。
+        - 看着%CHARA%的脸，%T%提起了那些在心底压了很久的建议。
         - 不够精准的加速时机，缓慢的节奏，以及步伐上的小问题。
-        - 听完了%T%的话，目白光明只是乖巧的点了点头。
+        - 听完了%T%的话，%CHARA%只是乖巧的点了点头。
         - color: %COLOR%
           content:
             - fontWeight: bold
-              content: 目白光明
+              content: %CHARA%
             - 「哦哦……」
         - color: %COLOR%
           content:
             - fontWeight: bold
-              content: 目白光明
+              content: %CHARA%
             - 「感觉，想去试试看了～」
         - 面对这幅打起精神来的样子，%T%的嘴角自然的往上翘了起来。
-        - 只要能证实提议的可行性，目白光明就会考虑签约了吧。
+        - 只要能证实提议的可行性，%CHARA%就会考虑签约了吧。
         - color: %COLOR%
           content:
             - fontWeight: bold
-              content: 目白光明
+              content: %CHARA%
             - 「那，%CALLNAME%，今天要陪我训练吗？」
         - 当然可以，%T%是想这样回答的。
         - 但回想到这个称呼的时候，%T%也愣了。
@@ -638,12 +638,12 @@ rec3:
         - color: %COLOR%
           content:
             - fontWeight: bold
-              content: 目白光明
+              content: %CHARA%
             - 「是的～%CALLNAME%～」
         - color: %COLOR%
           content:
             - fontWeight: bold
-              content: 目白光明
+              content: %CHARA%
             - 「因为～我已经决定了哦～」
     - acc: 2
       content: 「我……我就是路过。」（停止招募）
