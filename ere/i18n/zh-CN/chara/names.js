@@ -36,6 +36,7 @@ class I18nNames {
   trainer56 = '命定之人';
   trainer65 = '训练P！';
   trainer74 = '训练员大人';
+  trainer74_2 = '夫君大人';
   trainer80 = '训练酱';
   trainer91 = '训练亲';
   trainer121 = '训练员殿下';
