@@ -65,7 +65,7 @@ importers:
         version: 9.1.7
       kojo-loader:
         specifier: git+https://gitgud.io/umaera/engine/kojo-loader.git
-        version: git+https://gitgud.io/umaera/engine/kojo-loader.git#e4a0af0fe25fdfb16d183155af0bcb9390bd7df4
+        version: git+https://gitgud.io/umaera/engine/kojo-loader.git#d95b6b21634f8cbd6b616f3fb1bbdbe2298730f5
       lint-staged:
         specifier: ^15.5.2
         version: 15.5.2
@@ -1574,8 +1574,8 @@ packages:
     resolution: {integrity: sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==}
     engines: {node: '>=0.10.0'}
 
-  kojo-loader@git+https://gitgud.io/umaera/engine/kojo-loader.git#e4a0af0fe25fdfb16d183155af0bcb9390bd7df4:
-    resolution: {commit: e4a0af0fe25fdfb16d183155af0bcb9390bd7df4, repo: https://gitgud.io/umaera/engine/kojo-loader.git, type: git}
+  kojo-loader@git+https://gitgud.io/umaera/engine/kojo-loader.git#d95b6b21634f8cbd6b616f3fb1bbdbe2298730f5:
+    resolution: {commit: d95b6b21634f8cbd6b616f3fb1bbdbe2298730f5, repo: https://gitgud.io/umaera/engine/kojo-loader.git, type: git}
     version: 1.0.0
 
   lazystream@1.0.1:
@@ -3897,7 +3897,7 @@ snapshots:
 
   kind-of@6.0.3: {}
 
-  kojo-loader@git+https://gitgud.io/umaera/engine/kojo-loader.git#e4a0af0fe25fdfb16d183155af0bcb9390bd7df4:
+  kojo-loader@git+https://gitgud.io/umaera/engine/kojo-loader.git#d95b6b21634f8cbd6b616f3fb1bbdbe2298730f5:
     dependencies:
       yamljs: 0.3.0
 

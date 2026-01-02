@@ -1,9 +1,7 @@
 const { readFileSync, writeFileSync } = require('fs');
 const { join } = require('path');
 
-const named_contestants = require(
-  join(__dirname, '../../ere/data/race/contestants/named.json'),
-);
+const named_contestants = require('../../ere/data/race/contestants/named.json');
 const { generate_content } = require('../libs');
 
 const cup_dict = {
