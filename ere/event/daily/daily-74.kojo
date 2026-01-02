@@ -375,7 +375,7 @@ o_s_arcade:
         content:
           - fontWeight: bold
             content: %CHARA%
-          - 「街…机？我不是很擅长这个呢～」
+          - 「街……机？我不是很擅长这个呢～」
   - random: true
     lines:
       - color: %COLOR%

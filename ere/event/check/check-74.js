@@ -1,11 +1,16 @@
+const era = require('#/era-electron');
+
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
 
 const CustomizedCheck = require('#/event/check/check-common');
 const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-get-entry');
 const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
+const { add_event, cb_enum } = require('#/event/queue');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 
 const { get_chara_color } = require('#/data/chara-colors');
+const event_hooks = require('#/data/event/event-hooks');
+const EventObject = require('#/data/event/event-object');
 const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
@@ -48,6 +53,18 @@ module.exports = class extends CustomizedCheck {
       }
     }
     return titles;
+  }
+
+  check_love_events() {
+    const love = era.get(`love:${this.id}`);
+    if (love === 74) {
+      add_event(
+        event_hooks.week_start,
+        new EventObject(this.id, cb_enum.love).set_arg([74]),
+      );
+    } else {
+      super.check_love_events();
+    }
   }
 
   get_aim_races() {
