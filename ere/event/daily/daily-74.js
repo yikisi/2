@@ -5,6 +5,7 @@
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const { get_custom_check } = require('#/event/check/check-factory');
+/** @type {KojoFile} */
 const kojo = require('#/event/daily/daily-74.kojo');
 const CustomizedDaily = require('#/event/daily/daily-common');
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
@@ -12,6 +13,7 @@ const select_action_in_atrium = require('#/event/daily/snippets/select-action-in
 const select_action_in_shopping_street = require('#/event/daily/snippets/select-action-in-shopping-street');
 const select_action_in_station = require('#/event/daily/snippets/select-action-in-station');
 const generate_dictionary = require('#/event/snippets/generate-dictionary');
+
 const { get_random_value } = require('#/utils/value-utils');
 
 module.exports = class extends CustomizedDaily {
@@ -25,7 +27,7 @@ module.exports = class extends CustomizedDaily {
 
   select() {
     if (sys_check_awake(this.id)) {
-      kojo['select'](this.#dict);
+      kojo.select(this.#dict);
     } else {
       super.select();
     }
@@ -122,7 +124,7 @@ module.exports = class extends CustomizedDaily {
   async good_night(hook) {
     const check = get_custom_check(this.id).is_want_make_love();
     if (!check) {
-      kojo['good_night'](this.#dict);
+      kojo.good_night(this.#dict);
     } else {
       const ret = (await kojo['good_night_sex']({ ...this.#dict, check }))[
         'select'
