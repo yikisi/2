@@ -3,8 +3,6 @@ const RaceEventParams = require('#/data/event/extra-flag/race-event-params');
 class RaceEndParams extends RaceEventParams {
   /** @type {number} */
   rank;
-  /** @type {PseudoUma[]} */
-  contestants;
 
   /**
    * @param {PseudoUma} pseudo
@@ -13,8 +11,7 @@ class RaceEndParams extends RaceEventParams {
    * @param {number} rank
    */
   constructor(pseudo, contestants, race, rank) {
-    super(pseudo, race);
-    this.contestants = contestants;
+    super(pseudo, contestants, race);
     this.rank = rank;
   }
 }
