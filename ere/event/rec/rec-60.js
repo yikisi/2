@@ -1,7 +1,3 @@
-/**
- * @file 优秀素质 - 招募
- * @author 红红火火恍惚
- */
 const era = require('#/era-electron');
 
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');

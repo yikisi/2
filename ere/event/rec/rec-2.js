@@ -1,7 +1,3 @@
-/**
- * @file 无声铃鹿 - 招募
- * @author 牛蛙煲
- */
 const era = require('#/era-electron');
 
 const { add_event, cb_enum } = require('#/event/queue');

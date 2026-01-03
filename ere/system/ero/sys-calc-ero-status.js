@@ -229,10 +229,13 @@ module.exports = {
     ) {
       return 0;
     }
-    if (
-      Math.random() <
-      (lust + era.get(`tcvar:${cid}:发情`) * 1000) / lust_border.absent_mind
-    ) {
+    const dice = Math.random();
+    const border =
+      (lust + era.get(`tcvar:${cid}:发情`) * 1000) / lust_border.absent_mind;
+    era.logger.debug(
+      `${cid} 未满足 掷骰：${(dice * 100).toFixed(2)} / 概率：${(border * 100).toFixed(2)}`,
+    );
+    if (dice < border) {
       return 1;
     }
     return 2;

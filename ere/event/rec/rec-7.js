@@ -1,7 +1,3 @@
-/**
- * @file 黄金船 - 招募
- * @author 雞雞
- */
 const era = require('#/era-electron');
 
 const CustomizedRecruit = require('#/event/rec/rec-common');

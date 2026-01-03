@@ -1,7 +1,3 @@
-/**
- * @file 目白光明 - 招募
- * @author KUN
- */
 const era = require('#/era-electron');
 
 const { add_event, cb_enum } = require('#/event/queue');

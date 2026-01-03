@@ -228,6 +228,7 @@ class I18nEntry {
   tt_disclaimer_reject = '分男女搭配！不玩了！';
   tt_birthday_comma = '，';
   tt_birthday_conjunction = ' 和 ';
+  tt_birthday_notify = (birth_list) => ['今天是 ', ...birth_list, ' 的诞生日'];
   tt_new_game = '开始新游戏';
   tt_load_game = '加载存档';
   tt_achieve = '游戏成就';
@@ -239,6 +240,7 @@ class I18nEntry {
   ui_achieve_title = '获得新成就！';
   ui_yes = '确定';
   ui_no = '取消';
+  ui_skip = '跳过';
 
   name = new (require('#/i18n/zh-CN/chara/names'))();
   title = new (require('#/i18n/zh-CN/chara/titles'))();

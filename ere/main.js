@@ -89,7 +89,7 @@ module.exports = async () => {
   const date = new Date();
   const real_month = date.getMonth() + 1;
   const real_date = date.getDate();
-  const birthday = [];
+  const birth_list = [];
   era.getAllCharacters().forEach((cid) => {
     if (
       cid > 0 &&
@@ -101,18 +101,20 @@ module.exports = async () => {
       era.get(`staticcflag:${cid}:17`) === real_month &&
       era.get(`staticcflag:${cid}:18`) === real_date
     ) {
-      if (birthday.length > 0) {
-        birthday.push(i18n().tt_birthday_comma);
+      if (birth_list.length > 0) {
+        birth_list.push(i18n().tt_birthday_comma);
       }
-      birthday.push({
+      birth_list.push({
         color: get_chara_color(cid),
         content: get_display_name(era.get(`static:${cid}:name`)),
         fontWeight: 'bold',
       });
     }
   });
-  const b_index = birthday.findLastIndex((e) => e === i18n().tt_birthday_comma);
-  birthday[b_index] = i18n().tt_birthday_conjunction;
+  const b_index = birth_list.findLastIndex(
+    (e) => e === i18n().tt_birthday_comma,
+  );
+  birth_list[b_index] = i18n().tt_birthday_conjunction;
 
   const copyrights = generate_copyrights();
   const buttons = [
@@ -306,7 +308,7 @@ module.exports = async () => {
             {
               accelerator: 0,
               config: { align: 'center', disableWarning: true },
-              content: '跳过',
+              content: i18n().ui_skip,
               type: 'button',
             },
           ]);
@@ -376,10 +378,10 @@ module.exports = async () => {
         ],
         config: { offset: 6, verticalAlign: 'middle', width: 12 },
       },
-      birthday.length > 0
+      birth_list.length > 0
         ? [
             { type: 'divider' },
-            { type: 'text', content: ['今天是 ', ...birthday, ' 的诞生日'] },
+            { type: 'text', content: i18n().tt_birthday_notify(birth_list) },
           ]
         : [],
       [
