@@ -136,9 +136,9 @@ module.exports = async () => {
             flag_load_game = false;
             sys_load_game();
             // 向前兼容
-            // 大拓太阳神育成目标错误、贵妇人称号bug
             const version = era.get('version');
             if (version < 1011) {
+              // 大拓太阳神育成目标错误、贵妇人称号错误
               check_titles(65, 116);
             }
             if (version < 1100) {
@@ -551,6 +551,9 @@ module.exports = async () => {
                 }
               }
               era.set('cstr:21:头像T', '玉藻');
+            }
+            if (version <= 2172) {
+              check_titles(33, 113);
             }
             if (version < era.get('gamebase').version) {
               era.getAddedCharacters().forEach((cid) => {

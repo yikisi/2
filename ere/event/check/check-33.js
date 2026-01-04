@@ -35,7 +35,7 @@ module.exports = class extends CustomizedCheck {
       check_aim_race(races, race_enum.sats_sho, 1, 1, (e) => e.pop === 1) &&
       check_aim_race(races, race_enum.toky_yus, 1, 1, (e) => e.pop === 1) &&
       (check_aim_race(races, race_enum.takz_kin, 1, 1, (e) => e.pop === 1) ||
-        check_aim_race(races, race_enum.takz_kin, 1, 1, (e) => e.pop === 1))
+        check_aim_race(races, race_enum.takz_kin, 2, 1, (e) => e.pop === 1))
     ) {
       titles.push({
         c: get_chara_color(this.id),
