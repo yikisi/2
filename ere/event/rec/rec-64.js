@@ -45,6 +45,10 @@ module.exports = class extends CustomizedRecruit {
           );
           return true;
         case event_hooks.school_rooftop:
+          if (era.get('flag:5') > 0) {
+            add_event(stage, event_object);
+            return;
+          }
           EventMarks.get(0).sub(event_hooks.school_rooftop);
           EventMarks.get(0).add(event_hooks.school_atrium);
           ret = await kojo['招募1'](dict);
@@ -63,6 +67,10 @@ module.exports = class extends CustomizedRecruit {
           add_event(event_hooks.school_atrium, event_object);
           return true;
         case event_hooks.school_atrium:
+          if (era.get('flag:5') > 0) {
+            add_event(stage, event_object);
+            return;
+          }
           EventMarks.get(0).sub(event_hooks.school_atrium);
           if ((await kojo['招募2'](dict))[0] === 3) {
             era.println();

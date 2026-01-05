@@ -49,6 +49,10 @@ module.exports = class extends CustomizedRecruit {
         }
         break;
       case event_hooks.out_start:
+        if (era.get('flag:5') > 0) {
+          add_event(stage, ebj);
+          return;
+        }
         dict.mejiro =
           era.get('cflag:13:66') === recruit_flags.yes ||
           era.get('cflag:27:66') === recruit_flags.yes ||
@@ -71,6 +75,10 @@ module.exports = class extends CustomizedRecruit {
         EventMarks.get(0).sub(event_hooks.out_start);
         break;
       case event_hooks.school_atrium:
+        if (era.get('flag:5') > 0) {
+          add_event(stage, ebj);
+          return;
+        }
         dict.SIR = me.adult_sex_title;
         if (era.get(`cflag:${this.id}:66`) === recruit_flags.no) {
           r_flag =
