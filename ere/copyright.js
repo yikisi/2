@@ -20,7 +20,7 @@ function get_copyright_entry(cid, _suffix) {
 function generate_copyrights() {
   const line_copyrights = [
     [[get_copyright_entry(1, '招募')], 'wwm'],
-    [[get_copyright_entry(2, '招募')], '牛蛙煲'],
+    [[get_copyright_entry(2)], '牛蛙煲'],
     [[get_copyright_entry(3)], '天马闪光蹄'],
     [
       [
