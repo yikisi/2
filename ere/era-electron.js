@@ -130,6 +130,15 @@
  * @typedef {'topleft'|'topcenter'|'top'|'topright'|'centerleft'|'left'|'center'|'centerright'|'right'|'bottomleft'|'bottomcenter'|'bottom'|'bottomright'|1|2|3|4|5|6|7|8|9} OBPosition
  */
 
+/**
+ * @typedef KojoFunction
+ * @type {function(Record<string,any>=):(number[]|Promise<number[]>)}
+ */
+/**
+ * @typedef KojoFile
+ * @type {Record<string,KojoFunction>}
+ */
+
 const era = {
   /**
    * DANGER add a variable by name
@@ -178,9 +187,13 @@ const era = {
    * @param delay time to delay, ms
    * @return {Promise<unknown>}
    */
-  delay(delay) {
-    return new Promise((resolve) => setTimeout(() => resolve(), delay));
-  },
+  delay: (function () {
+    function f(delay) {
+      return new Promise((resolve) => setTimeout(() => resolve(), delay));
+    }
+    f._s = true;
+    return f;
+  })(),
   /**
    * draw a divider to separate lines. the divider is also a line
    * @param {DividerConfig} [config] config of the line
@@ -256,7 +269,7 @@ const era = {
   async loadGlobal() {},
   logger: {
     assert(checkVal, aimVal) {
-      if (checkVal !== aimVal && era.version.engine === undefined) {
+      if (checkVal !== aimVal && era.version.engine === void 0) {
         console.debug(
           '[ASSERT]',
           new Error(`assert failed! aim val: ${aimVal}, got val: ${checkVal}`)
@@ -271,7 +284,7 @@ const era = {
      * @param {any} msg
      */
     debug(msg) {
-      if (era.version.engine === undefined) {
+      if (era.version.engine === void 0) {
         console.debug('[DEBUG]', msg);
         return;
       }
@@ -283,7 +296,7 @@ const era = {
      * @param {any} [stack]
      */
     error(msg, stack) {
-      if (era.version.engine === undefined) {
+      if (era.version.engine === void 0) {
         console.error('[ERROR]', msg, stack);
         return;
       }
@@ -294,7 +307,7 @@ const era = {
      * @param {any} msg
      */
     info(msg) {
-      if (era.version.engine === undefined) {
+      if (era.version.engine === void 0) {
         console.log('[INFO]', msg);
         return;
       }
@@ -306,7 +319,7 @@ const era = {
      * @param {any} [stack]
      */
     warn(msg, stack) {
-      if (era.version.engine === undefined) {
+      if (era.version.engine === void 0) {
         console.warn('[WARN]', msg, stack);
         return;
       }
@@ -427,6 +440,43 @@ const era = {
    * @returns {number} line number of the printed
    */
   println() {},
+  /**
+   * @param kojo
+   * @return {KojoFile}
+   */
+  proxyKojo: (function () {
+    function f(kojo) {
+      return new Proxy(kojo, {
+        get(t, p) {
+          if (t[p] !== void 0) {
+            const r = (d = {}) =>
+              t[p](
+                typeof d === 'object'
+                  ? Object.entries(d)
+                      .filter((e) => typeof e[1] === 'string')
+                      .map(([k, v]) => [
+                        new RegExp(`%${k}%`, 'g'),
+                        (v ?? 'void 0').toString(),
+                      ])
+                  : [],
+                d,
+              );
+            Object.entries(t[p]).forEach(([k, v]) => (r[k] = v));
+            return r;
+          }
+          return async () => era.logger.error('invalid key! ' + p);
+        },
+        set() {
+          era.logger.warn('cannot set properties in .kojo!');
+        },
+        deleteProperty() {
+          era.logger.warn('cannot delete properties in .kojo!');
+        },
+      });
+    }
+    f._s = true;
+    return f;
+  })(),
   /** DANGER exit the application and close the window */
   quit() {},
   /**
@@ -579,7 +629,7 @@ const era = {
    * @returns {boolean} if debug
    */
   toggleDebug() {},
-  version: { sdk: '4.6.0', engine: undefined },
+  version: { sdk: '4.6.1', engine: void 0 },
   /**
    * wait any key from user
    * @returns {Promise<void>} a promise of nothing, please use await
@@ -588,9 +638,9 @@ const era = {
 };
 
 Object.keys(era).forEach((key) => {
-  if (typeof era[key] === 'function' && key !== 'delay') {
+  if (typeof era[key] === 'function' && !era[key]._s) {
     era[key] = (...args) => {
-      if (era.version.engine === undefined) {
+      if (era.version.engine === void 0) {
         return console.log(
           '[ERROR] apis has not been injected!',
           new Error().stack.split('\n').slice(2).join('\n'),
