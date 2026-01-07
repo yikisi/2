@@ -1,7 +1,4 @@
-/**
- * @file 无声铃鹿 - 育成
- * @author 牛蛙煲
- */
+/** @type {KojoFile} */
 const kojo = require('#/event/edu/edu-2.kojo');
 const CustomizedEdu = require('#/event/edu/edu-common');
 const generate_dictionary = require('#/event/snippets/generate-dictionary');

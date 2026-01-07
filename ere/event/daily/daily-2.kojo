@@ -1,3 +1,5 @@
+# @file 无声铃鹿 - 日常
+# @author 牛蛙煲
 select:
   sync: true
   lines:

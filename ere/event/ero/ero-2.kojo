@@ -1,3 +1,5 @@
+# @file 无声铃鹿 - 调教
+# @author 牛蛙煲
 ero_start:
   - if: era.get('tflag:9') === 0
     lines:

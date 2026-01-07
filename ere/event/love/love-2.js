@@ -1,3 +1,91 @@
-const CustomizedLove = require('#/event/love/love-common');
+const era = require('#/era-electron');
 
-module.exports = class extends CustomizedLove {};
+const { update_kiss_exp } = require('#/system/ero/sys-calc-ero-exp');
+const {
+  begin_and_init_ero,
+  end_ero_and_show_result,
+} = require('#/system/ero/sys-prepare-ero');
+const {
+  sys_get_callname,
+  sys_love_uma_in_event,
+} = require('#/system/sys-calc-chara-others');
+
+const print_ero_page = require('#/page/page-ero');
+
+/** @type {KojoFile} */
+const kojo = require('#/event/love/love-2.kojo');
+const CustomizedLove = require('#/event/love/love-common');
+const punish_rejecting_love = require('#/event/love/snippets/punish-rejecting-love');
+const generate_dictionary = require('#/event/snippets/generate-dictionary');
+const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
+
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
+
+const { get_date } = require('#/data/date-indicator');
+
+module.exports = class extends CustomizedLove {
+  get #dict() {
+    return generate_dictionary(this.id, { call: !0, uma: !0 });
+  }
+
+  async 49(suzuka) {
+    const spe = get_chara_talk(1);
+    await print_title_with_kojo(kojo, '49', suzuka, {
+      ...this.#dict,
+      '1_CALL': sys_get_callname(1, this.id),
+      CALL_1: sys_get_callname(this.id, 1),
+      S_COLOR: spe.color,
+      S_NAME: spe.name,
+    });
+    await sys_love_uma_in_event(this.id);
+  }
+
+  async 74(suzuka, me) {
+    if (
+      (
+        await print_title_with_kojo(kojo, '74', suzuka, {
+          ...this.#dict,
+          YOUR_SEX: me.sex,
+        })
+      )['update'] === 1
+    ) {
+      await sys_love_uma_in_event(this.id);
+      update_kiss_exp(get_date(), this.id, 0);
+    } else {
+      await punish_rejecting_love(this.id);
+      // CFLAGNAME:46 = 爱慕暂拒
+      era.set(`cflag:${this.id}:46`, 74);
+    }
+  }
+
+  async 89(suzuka) {
+    await print_title_with_kojo(kojo, '89', suzuka, {
+      ...this.#dict,
+      CHARA_FULL: suzuka.name + suzuka.adult_sex_title,
+    });
+    await sys_love_uma_in_event(this.id);
+  }
+
+  async 99(suzuka) {
+    const spe = get_chara_talk(1);
+    const ret = await print_title_with_kojo(kojo, '99', suzuka, {
+      ...this.#dict,
+      '1_CALL': sys_get_callname(1, this.id),
+      CALL_1: sys_get_callname(this.id, 1),
+      S_COLOR: spe.color,
+      S_NAME: spe.name,
+    });
+    if (ret['update'] === 1) {
+      if (ret['sex'] === 1) {
+        begin_and_init_ero(0, this.id);
+        await print_ero_page(this.id, true);
+        await end_ero_and_show_result(true);
+      }
+      await sys_love_uma_in_event(this.id);
+    } else {
+      await punish_rejecting_love(this.id);
+      // CFLAGNAME:46 = 爱慕暂拒
+      era.set(`cflag:${this.id}:46`, 99);
+    }
+  }
+};

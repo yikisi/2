@@ -1,3 +1,5 @@
+# @file 无声铃鹿 - 育成
+# @author 牛蛙煲
 train:
   - color: %COLOR%
     content:

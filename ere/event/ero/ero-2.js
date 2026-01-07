@@ -1,7 +1,4 @@
-/**
- * @file 无声铃鹿 - 调教
- * @author 牛蛙煲
- */
+/** @type {KojoFile} */
 const kojo = require('#/event/ero/ero-2.kojo');
 const CustomizedEro = require('#/event/ero/ero-common');
 const generate_dictionary = require('#/event/snippets/generate-dictionary');
