@@ -1,7 +1,3 @@
-/**
- * @file 目白光明 - 日常
- * @author KUN
- */
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const { get_custom_check } = require('#/event/check/check-factory');

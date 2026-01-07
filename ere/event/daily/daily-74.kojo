@@ -1,3 +1,5 @@
+# @file 目白光明 - 日常
+# @author KUN
 select:
   sync: true
   lines:
@@ -344,13 +346,11 @@ school_rooftop:
           - 「有些可以慢悠悠的做好的料理，我还是能做到的哦～」
 
 o_r_walk:
-  - random: true
-    lines:
-      - color: %COLOR%
-        content:
-          - fontWeight: bold
-            content: %CHARA%
-          - 「一起在这里慢悠悠的散步～呼呼～」
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「一起在这里慢悠悠的散步～呼呼～」
 
 o_r_fishing:
   - random: true

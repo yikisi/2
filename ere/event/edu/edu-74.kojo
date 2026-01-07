@@ -1,3 +1,5 @@
+# @file 目白光明 - 育成
+# @author KUN
 train:
   - random: true
     lines:

@@ -1,3 +1,5 @@
+# @file 目白光明 - 调教
+# @author KUN
 join_3p:
   - color: %COLOR%
     content:

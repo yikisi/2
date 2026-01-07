@@ -1,7 +1,3 @@
-/**
- * @file 目白光明 - 育成
- * @author KUN
- */
 const era = require('#/era-electron');
 
 const {
