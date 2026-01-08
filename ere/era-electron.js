@@ -440,43 +440,6 @@ const era = {
    * @returns {number} line number of the printed
    */
   println() {},
-  /**
-   * @param kojo
-   * @return {KojoFile}
-   */
-  proxyKojo: (function () {
-    function f(kojo) {
-      return new Proxy(kojo, {
-        get(t, p) {
-          if (t[p] !== void 0) {
-            const r = (d = {}) =>
-              t[p](
-                typeof d === 'object'
-                  ? Object.entries(d)
-                      .filter((e) => typeof e[1] === 'string')
-                      .map(([k, v]) => [
-                        new RegExp(`%${k}%`, 'g'),
-                        (v ?? 'void 0').toString(),
-                      ])
-                  : [],
-                d,
-              );
-            Object.entries(t[p]).forEach(([k, v]) => (r[k] = v));
-            return r;
-          }
-          return async () => era.logger.error('invalid key! ' + p);
-        },
-        set() {
-          era.logger.warn('cannot set properties in .kojo!');
-        },
-        deleteProperty() {
-          era.logger.warn('cannot delete properties in .kojo!');
-        },
-      });
-    }
-    f._s = true;
-    return f;
-  })(),
   /** DANGER exit the application and close the window */
   quit() {},
   /**
@@ -629,7 +592,7 @@ const era = {
    * @returns {boolean} if debug
    */
   toggleDebug() {},
-  version: { sdk: '4.6.1', engine: void 0 },
+  version: { sdk: '4.7.0', engine: void 0 },
   /**
    * wait any key from user
    * @returns {Promise<void>} a promise of nothing, please use await
