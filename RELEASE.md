@@ -1,8 +1,8 @@
-# [EraUma v2.18 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.18)
+# [EraUma v2.2 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.2)
 
 _incoming_
 
-适配 [EraElectron v4.4.0 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.4.0) 与 [ere.app v1.2.6 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.2.6) 及以上版本
+适配 [EraElectron v4.7.0 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.4.0) 与 [ere.app v1.2.8 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.2.8) 及以上版本
 
 ## Added
 
@@ -28,6 +28,8 @@ _incoming_
   * 各种因素作用下，当发生行动和高潮消耗时最少降低 1 点体力或精力
 * 现在未受到淫纹插件【无暇思考】、插件【金枪不倒】、弗隆系列道具、马跳系列道具影响时，阴茎最少拥有 1 回合的不应期
 * 现在角色羞耻刻印获得判定中由快感转化转化而来的部分被限制在一级羞耻刻印的临界值之下
+* 去除了角色情报界面内存在多套调教立绘时切换调教立绘按钮的存在非睡奸性经历的限制
+* 将黄金船和曼城茶座的调教立绘差分以第二套调教立绘形式实装
 
 ## Fixed
 

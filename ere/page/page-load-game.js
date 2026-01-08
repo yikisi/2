@@ -66,6 +66,14 @@ function check_titles(...ids) {
     });
 }
 
+function set_image_t(cid) {
+  if (era.getAddedCharacters().indexOf(cid) !== -1) {
+    // CSTRNAME:13 = 头像T
+    // CSTRNAME:10 = 头像
+    era.set(`cstr:${cid}:13`, era.get(`staticcstr:${cid}:10`));
+  }
+}
+
 /**
  * load game
  * @return {Promise<boolean>} if true, tell main.js to call homepage
@@ -550,10 +558,12 @@ module.exports = async () => {
                   EventMarks.get(0).sub(event_hooks.out_shopping);
                 }
               }
-              era.set('cstr:21:头像T', '玉藻');
+              set_image_t(21);
             }
             if (version <= 2172) {
               check_titles(33, 113);
+              set_image_t(7);
+              set_image_t(25);
             }
             if (version < era.get('gamebase').version) {
               era.getAddedCharacters().forEach((cid) => {

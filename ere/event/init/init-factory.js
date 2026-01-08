@@ -6,7 +6,6 @@ const current = new Date().getTime();
 cons_dict[7] = require('#/event/init/init-7');
 cons_dict[13] = require('#/event/init/init-13');
 cons_dict[17] = require('#/event/init/init-17');
-cons_dict[21] = require('#/event/init/init-21');
 cons_dict[25] = require('#/event/init/init-25');
 cons_dict[27] = require('#/event/init/init-27');
 cons_dict[32] = require('#/event/init/init-32');
