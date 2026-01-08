@@ -17,6 +17,10 @@ module.exports = class extends CustomizedInit {
       adaptability_names.forEach((e) =>
         era.set(`cflag:308:${e}适性`, get_random_value(0, 5)),
       );
+      // BASENAME:5 - 7 = 速度 - 力量
+      era.set('maxbase:308:5', 800);
+      era.set('maxbase:308:6', 800);
+      era.set('maxbase:308:7', 800);
     }
   }
 };
