@@ -236,6 +236,14 @@ class I18nEntry {
   tt_help = '帮助说明';
   tt_copyrights = '制作鸣谢';
 
+  tk_speak_border = ['「', '」'];
+  tk_think_border = ['（', '）'];
+  tk_past_border = this.tk_think_border;
+  tk_unknown = '？？？';
+
+  nt_ask = '是否查看相关的小纸条？';
+  nt_no = '之后去标题界面确认';
+
   ui_back = '返回';
   ui_achieve_title = '获得新成就！';
   ui_yes = '确定';
@@ -247,6 +255,7 @@ class I18nEntry {
   title_desc = new (require('#/i18n/zh-CN/chara/title-desc'))();
 
   kojo = new (require('#/i18n/zh-CN/kojo/entry'))();
+  timon = new (require('#/i18n/zh-CN/timon/entry'))();
 
   achievement = new (require('#/i18n/zh-CN/achieve'))();
   achieve_desc = new (require('#/i18n/zh-CN/achieve-desc'))();

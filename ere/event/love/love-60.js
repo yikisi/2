@@ -25,7 +25,7 @@ module.exports = class extends CustomizedLove {
   async 49(nature, me, callname) {
     if (
       (
-        await i18n().kojo.love[60][49](
+        await i18n().kojo[this.id].love[49](
           nature,
           me,
           callname,
@@ -63,8 +63,9 @@ module.exports = class extends CustomizedLove {
   async 74(nature, me, callname, stage, extra_flag, event_object) {
     if (stage === event_hooks.week_end) {
       if (
-        (await i18n().kojo.love[60]['74-1'](nature, me, callname))['update'] ===
-        1
+        (await i18n().kojo[this.id].love['74-1'](nature, me, callname))[
+          'update'
+        ] === 1
       ) {
         add_event(event_hooks.back_school, event_object);
       } else {
@@ -78,7 +79,7 @@ module.exports = class extends CustomizedLove {
       }
       if (
         (
-          await i18n().kojo.love[60]['74-2'](
+          await i18n().kojo[this.id].love['74-2'](
             nature,
             me,
             callname,
@@ -96,7 +97,7 @@ module.exports = class extends CustomizedLove {
   }
 
   async 89(nature, me) {
-    await i18n().kojo.love[60][89](nature, me);
+    await i18n().kojo[this.id].love[89](nature, me);
     await sys_love_uma_in_event(60);
   }
 };

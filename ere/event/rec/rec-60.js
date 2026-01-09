@@ -12,7 +12,7 @@ const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends CustomizedRecruit {
   async recruit() {
-    await i18n().kojo.recruit[this.id].rec(
+    await i18n().kojo[this.id].recruit.rec(
       get_chara_talk(this.id),
       get_chara_talk(0),
       sys_get_callname(this.id, this.id),

@@ -18,15 +18,16 @@ module.exports = class extends CustomizedRecruit {
   async recruit(stage, ebj) {
     const bright = get_chara_talk(this.id);
     const me = get_chara_talk(0);
-    const dict = {
-      T: me.name,
-      ...generate_dictionary(this.id, { call: true, uma: true, title: true }),
-    };
-    const kojo = i18n().kojo.recruit[74];
+    const dict = generate_dictionary(this.id, {
+      call: true,
+      uma: true,
+      title: true,
+    });
+    const kojo = i18n().kojo[this.id].recruit;
     let r_flag;
     switch (stage) {
       case event_hooks.recruit:
-        await kojo['rec0']();
+        await kojo['rec0'](dict);
         // CFLAGNAME:67 = 随机招募
         era.set(`cflag:${this.id}:67`, 0);
         // FLAGNAME:33 = 物色对象

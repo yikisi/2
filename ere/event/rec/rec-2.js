@@ -24,7 +24,7 @@ module.exports = class extends CustomizedRecruit {
       sir: !0,
       title: !0,
     });
-    const kojo = i18n().kojo.recruit[2];
+    const kojo = i18n().kojo[this.id].recruit;
     switch (ebj?.arg) {
       default:
         if (

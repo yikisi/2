@@ -1,10 +1,9 @@
 class I18nKojo {
-  recruit = new (require('#/i18n/zh-CN/kojo/rec/entry'))();
-  daily = new (require('#/i18n/zh-CN/kojo/daily/entry'))();
-  edu = new (require('#/i18n/zh-CN/kojo/edu/entry'))();
-  love = new (require('#/i18n/zh-CN/kojo/love/entry'))();
-  ero = new (require('#/i18n/zh-CN/kojo/ero/entry'))();
-  basement = new (require('#/i18n/zh-CN/kojo/basement/entry'))();
+  2 = new (require('#/i18n/zh-CN/kojo/1002/entry'))();
+  3 = new (require('#/i18n/zh-CN/kojo/1003/entry'))();
+  7 = new (require('#/i18n/zh-CN/kojo/1007/entry'))();
+  60 = new (require('#/i18n/zh-CN/kojo/1060/entry'))();
+  74 = new (require('#/i18n/zh-CN/kojo/1074/entry'))();
 }
 
 module.exports = I18nKojo;

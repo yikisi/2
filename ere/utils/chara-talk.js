@@ -25,14 +25,16 @@ class CharaTalk {
         content: name,
         fontWeight: 'bold',
       },
-      mental ? '（' : '「',
+      mental ? i18n().tk_think_border[0] : i18n().tk_speak_border[0],
     ];
     if (Array.isArray(_content)) {
       content.push(..._content);
     } else {
       content.push(_content);
     }
-    content.push(mental ? '）' : '」');
+    content.push(
+      mental ? i18n().tk_think_border[1] : i18n().tk_speak_border[1],
+    );
     era.print(content);
   }
 
@@ -232,14 +234,16 @@ class CharaTalk {
   say(_content, mental = false) {
     const content = [
       this.id ? this.get_colored_name() : '',
-      `${mental ? '（' : '「'}`,
+      mental ? i18n().tk_think_border[0] : i18n().tk_speak_border[0],
     ];
     if (Array.isArray(_content)) {
       content.push(..._content);
     } else {
       content.push(_content);
     }
-    content.push(mental ? '）' : '」');
+    content.push(
+      mental ? i18n().tk_think_border[1] : i18n().tk_speak_border[1],
+    );
     era.print(content, { color: this.color });
   }
 
@@ -261,17 +265,17 @@ class CharaTalk {
     const content = [
       {
         color: this.color,
-        content: '？？？',
+        content: i18n().tk_unknown,
         fontWeight: 'bold',
       },
-      '「',
+      i18n().tk_speak_border[0],
     ];
     if (Array.isArray(_content)) {
       content.push(..._content);
     } else {
       content.push(_content);
     }
-    content.push('」');
+    content.push(i18n().tk_speak_border[1]);
     era.print(content, { color: this.color });
   }
 
@@ -291,20 +295,21 @@ class CharaTalk {
    */
   used_to_say(_content, is_unknown = false) {
     const content = [];
-    content.push('（');
+    content.push(i18n().tk_past_border[0]);
     if (this.id) {
       content.push({
-        content: is_unknown ? '？？？' : this.name,
+        content: is_unknown ? i18n().tk_unknown : this.name,
         fontWeight: 'bold',
       });
     }
-    content.push('「');
+    content.push(i18n().tk_speak_border[0]);
     if (Array.isArray(_content)) {
       content.push(..._content);
     } else {
       content.push(_content);
     }
-    content.push('」）');
+    content.push(i18n().tk_speak_border[1]);
+    content.push(i18n().tk_past_border[1]);
     era.print(content, { color: this.color });
   }
 

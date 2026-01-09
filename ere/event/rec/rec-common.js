@@ -1,7 +1,3 @@
-/**
- * @file 招募地文
- * @author 雞雞
- */
 const era = require('#/era-electron');
 
 const sys_get_star_premium_draw = require('#/system/flag/sys-get-star-premium-draw');
@@ -17,9 +13,9 @@ const recruit_flags = require('#/data/event/recruit-flags');
 const { i18n } = require('#/i18n/selector');
 
 class CustomizedRecruit {
-  /** @param {number} chara_id */
-  constructor(chara_id) {
-    this.id = chara_id;
+  /** @param {number} cid */
+  constructor(cid) {
+    this.id = cid;
   }
 
   /**
@@ -28,24 +24,13 @@ class CustomizedRecruit {
    */
   async check_before_rec() {
     const chara = get_chara_talk(this.id);
-    if (
-      !(await select_yes_or_no(
-        [
-          '训练员与',
-          chara.get_uma_sex_title(),
-          '的契约足以影响双方一生，确定要招募 ',
-          chara.get_colored_name(),
-          ' 吗？',
-        ],
-        '确定',
-        '还是算了',
-      ))
-    ) {
-      era.print([
-        '虽然想要招募 ',
-        chara.get_colored_name(),
-        '，但还是打消了念头……',
-      ]);
+    const ret = await select_yes_or_no(
+      i18n().timon.recruit.get_check_message(chara),
+      i18n().ui_yes,
+      i18n().timon.recruit.check_no,
+    );
+    if (!ret) {
+      era.print(i18n().timon.recruit.get_check_no_msg(chara));
       return true;
     }
   }
@@ -64,33 +49,23 @@ class CustomizedRecruit {
     if (await this.check_before_rec()) {
       return;
     }
-    const chara = get_chara_talk(this.id);
-    await era.printAndWait([
-      get_chara_talk(0).get_colored_name(),
-      ' 积极地把 ',
-      chara.get_colored_name(),
-      ' 招揽进自己的队伍……',
-    ]);
-    await era.printAndWait([
-      chara.get_colored_name(),
-      ' 在仔细思考后，点头答应了！',
-    ]);
-    era.set(`cflag:${this.id}:招募状态`, recruit_flags.yes);
+    await i18n().timon.recruit.rec(get_chara_talk(this.id), get_chara_talk(0));
+    // CFLAGNAME:66 = 招募状态
+    era.set(`cflag:${this.id}:66`, recruit_flags.yes);
     await this.recruit_end();
   }
 
   /** @protected */
   async recruit_end() {
     era.println();
-    await era.printAndWait([
-      get_chara_talk(this.id).get_colored_name(),
-      ' 加入了队伍！',
-    ]);
+    await i18n().timon.recruit.rec_end(get_chara_talk(this.id));
   }
 
   async recruit_result() {
-    if (era.get('flag:当前月') > 3) {
-      era.set(`cflag:${this.id}:育成回合计时`, 'x');
+    // FLAGNAME:2 = 当前月
+    if (era.get('flag:2') > 3) {
+      // CFLAGNAME:48 = 育成回合计时
+      era.set(`cflag:${this.id}:48`, 'x');
     }
     recruit_chara(this.id);
     const temp = sys_get_star_premium_draw();
@@ -100,17 +75,17 @@ class CustomizedRecruit {
     }
     if (i18n().note[this.id]) {
       era.drawLine();
-      if (
-        await select_yes_or_no(
-          '是否查看相关的小纸条？',
-          '查看',
-          '之后去首页确认',
-        )
-      ) {
+      if (await select_yes_or_no(i18n().nt_ask, i18n().ui_yes, i18n().nt_no)) {
         i18n().note[this.id].forEach((e) =>
-          era.print([{ content: e[0], fontWeight: 'bold' }, '「', e[1], '」'], {
-            color: get_chara_color(this.id),
-          }),
+          era.print(
+            [
+              { content: e[0], fontWeight: 'bold' },
+              i18n().tk_speak_border[0],
+              e[1],
+              i18n().tk_speak_border[1],
+            ],
+            { color: get_chara_color(this.id) },
+          ),
         );
         await era.waitAnyKey();
       }

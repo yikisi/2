@@ -7,25 +7,29 @@ const LegendUmaSelector = require('#/data/race/model/legend-uma-selector');
 const { distance_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
+const { i18n } = require('#/i18n/selector');
+
 module.exports = class extends CustomizedMec {
   get_action_debuff() {
-    return 0.1 * era.get('status:3:腿伤');
+    return 0.1 * era.get('status:3:100');
   }
 
   get_maxbase_buff() {
-    return -200 * era.get('status:3:腿伤');
+    return -200 * era.get('status:3:100');
   }
 
   get_pressure_buff() {
-    return 0.1 * era.get('status:3:腿伤');
+    return 0.1 * era.get('status:3:100');
   }
 
   get_race_cloth() {
     if (
-      !era.get('status:3:腿伤') ||
-      era.get('cflag:3:育成回合计时') !==
-        race_infos[race_enum.arim_kin].date + 95 ||
-      era.get('flag:当前赛事') !== race_enum.arim_kin
+      // STATUSNAME:100 = 腿伤
+      !era.get('status:3:100') ||
+      // CFLAGNAME:48 = 育成回合计时
+      era.get('cflag:3:48') !== race_infos[race_enum.arim_kin].date + 95 ||
+      // FLAGNAME:7 = 当前赛事
+      era.get('flag:7') !== race_enum.arim_kin
     ) {
       return super.get_race_cloth();
     }
@@ -33,16 +37,16 @@ module.exports = class extends CustomizedMec {
   }
 
   get_race_contestants(info) {
-    switch (era.get('flag:当前赛事')) {
+    switch (era.get('flag:7')) {
       case race_enum.tenn_spr:
         return [new LegendUmaSelector(13, 1.1)];
       case race_enum.tenn_sho:
-        if (era.get('cflag:3:育成回合计时') > 96) {
+        if (era.get('cflag:3:48') > 96) {
           return [64, 65].map((e) => new LegendUmaSelector(e, 1.05));
         }
         break;
       case race_enum.arim_kin:
-        if (era.get('cflag:3:育成回合计时') > 96) {
+        if (era.get('cflag:3:48') > 96) {
           return [
             new LegendUmaSelector(23, 1.1),
             ...[35, 60, 64].map((e) => new LegendUmaSelector(e, 1.05)),
@@ -54,38 +58,24 @@ module.exports = class extends CustomizedMec {
 
   get_race_finish_report(uma, race_id) {
     if (race_id === race_enum.arim_kin && era.get(`status:${this.id}:腿伤`)) {
-      return [
-        uma.get_colored_name(),
-        { color: uma.color, content: '，奇迹的复活！' },
-      ];
+      return i18n().kojo[this.id].report_arim_kin(uma.get_colored_name());
     } else if (
-      era.get(`cflag:${this.id}:育成回合计时`) > 96 &&
+      era.get('cflag:3:48') > 96 &&
       race_infos[race_id]?.distance === distance_enum.long
     ) {
-      return [
-        {
-          color: uma.color,
-          content: '超越极限，奔向世界的尽头——',
-        },
-        uma.get_colored_name(),
-        {
-          color: uma.color,
-          content: ' 再夺一胜！',
-        },
-      ];
+      return i18n().kojo[this.id].report_long_dis(uma.get_colored_name());
     }
     return super.get_race_finish_report(uma, race_id);
   }
 
   get_status() {
-    if (era.get('status:3:腿伤')) {
+    if (era.get('status:3:100')) {
       return [
         {
           color: buff_colors[3],
-          content: '腿伤！',
+          content: i18n().kojo[this.id].hurt,
           fontWeight: 'bold',
-          title:
-            '严重腿伤，无法根治，即使是三女神；训练效果-20%，体力精力上限-200，消耗+10%，压力获取+10%，目标赛事一着以外-5声望，未入着+25%压力、-10声望',
+          title: i18n().kojo[this.id].hurt_desc,
         },
       ];
     }
@@ -93,7 +83,7 @@ module.exports = class extends CustomizedMec {
   }
 
   get_train_buff() {
-    return -20 * era.get('status:3:腿伤');
+    return -20 * era.get('status:3:100');
   }
 
   set_callname() {
