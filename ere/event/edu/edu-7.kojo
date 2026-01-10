@@ -21,7 +21,7 @@ crazy_fan_end:
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 黄金船
       - 「最高速度25公里每小时，输出功率250瓦！这就是小金船号啊！」
   -
@@ -33,7 +33,7 @@ crazy_fan_end:
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 黄金船
       - 「正是小金船号是也！」
   -
@@ -47,7 +47,7 @@ crazy_fan_end:
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 黄金船
       - 「价钱。」
   -
@@ -65,13 +65,13 @@ crazy_fan_end:
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 黄金船
       - 「由小金船亲手改装的小金船号可是无价之宝，当然很贵！」
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 黄金船
       - 「毕竟可是我花了很大的功夫从里到外都修整了一遍的爱车啊！」
   -
@@ -82,7 +82,7 @@ crazy_fan_end:
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 黄金船
       - 「放心吧！小金船号的一个特点就是身强体壮！怎么撞都不会坏！」
   -

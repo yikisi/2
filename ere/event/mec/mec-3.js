@@ -11,15 +11,15 @@ const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends CustomizedMec {
   get_action_debuff() {
-    return 0.1 * era.get('status:3:100');
+    return era.get('status:3:100') > 0 ? 0.1 : 0;
   }
 
   get_maxbase_buff() {
-    return -200 * era.get('status:3:100');
+    return era.get('status:3:100') > 0 ? 200 : 0;
   }
 
   get_pressure_buff() {
-    return 0.1 * era.get('status:3:100');
+    return era.get('status:3:100') > 0 ? 0.1 : 0;
   }
 
   get_race_cloth() {
@@ -57,7 +57,10 @@ module.exports = class extends CustomizedMec {
   }
 
   get_race_finish_report(uma, race_id) {
-    if (race_id === race_enum.arim_kin && era.get(`status:${this.id}:腿伤`)) {
+    if (
+      race_id === race_enum.arim_kin &&
+      era.get(`status:${this.id}:100`) > 0
+    ) {
       return i18n().kojo[this.id].report_arim_kin(uma.get_colored_name());
     } else if (
       era.get('cflag:3:48') > 96 &&
@@ -69,7 +72,7 @@ module.exports = class extends CustomizedMec {
   }
 
   get_status() {
-    if (era.get('status:3:100')) {
+    if (era.get('status:3:100') > 0) {
       return [
         {
           color: buff_colors[3],
@@ -83,7 +86,7 @@ module.exports = class extends CustomizedMec {
   }
 
   get_train_buff() {
-    return -20 * era.get('status:3:100');
+    return era.get('status:3:100') > 0 ? -20 : 0;
   }
 
   set_callname() {

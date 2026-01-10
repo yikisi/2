@@ -7,6 +7,8 @@ module.exports = class extends I18nNames {
   ruby_mother = 'Hagino Top Lady';
   digital_npc = 'Dia Monarch';
 
+  c01701 = 'Miho Shinzan';
+  c01702 = 'Gallop Dyna';
   900102 = 'Tokino Minoru';
   900202 = 'Northern Taste';
   904302 = 'Dictus';

@@ -7,7 +7,7 @@
       lines:
         - color: %代表色%
           content:
-            - fontSize: bold
+            - fontWeight: bold
               content: 奇锐骏
             - 「呼呼呼～今天也要去散步吗？那样的话，要带上其他的孩子吗？」
         - 赤身全裸的奇锐骏安静地趴伏在地面之上，直到%你%靠近，%她%才一面左右摇晃着耳朵，一面将项圈叼在嘴里递往%你%的手边。
@@ -17,7 +17,7 @@
       lines:
         - color: %代表色%
           content:
-            - fontSize: bold
+            - fontWeight: bold
               content: 奇锐骏
             - 「唔姆姆……败者就是要服从胜者，这是自然界的必然呢。」
         - 如此说着，奇锐骏平静地为自己戴上了今日份的项圈。
@@ -27,7 +27,7 @@
       lines:
         - color: %代表色%
           content:
-            - fontSize: bold
+            - fontWeight: bold
               content: 奇锐骏
             - 「阿拉拉……要忍耐住哦？%称呼%～」
         - 按着%你%燥热的小腹并不时往下探索，奇锐骏的脸上是意味深长的笑容。
@@ -60,12 +60,12 @@
       lines:
         - color: %代表色%
           content:
-            - fontSize: bold
+            - fontWeight: bold
               content: 奇锐骏
             - 「室内、天台、车站，还是训练场，不管是哪里都可以的哦？」
         - color: %代表色%
           content:
-            - fontSize: bold
+            - fontWeight: bold
               content: 奇锐骏
             - 「如果是需要其他孩子的话，我也可以来帮忙的。虽然对其他人来说，第一次可能会有一点点痛，但只要能温柔一些的话，%女孩%子也会因为本能而理解%称呼%的魅力所在呢。」
     # 强奸
@@ -74,7 +74,7 @@
       lines:
         - color: %代表色%
         - content:
-            - fontSize: bold
+            - fontWeight: bold
               content: 奇锐骏
             - 「呼呼～这次可不会这么轻易得被%你%推到在身下了哦？我对自己的拳法可是蛮有自信的呢。」
     # 被奴役
@@ -83,7 +83,7 @@
       lines:
         - color: %代表色%
         - content:
-            - fontSize: bold
+            - fontWeight: bold
               content: 奇锐骏
             - 「今天的嘎吱嘎吱干我已经做好了，放在了冰箱里。要记得按时吃哦？要是又因为营养不良导致脱水而昏过去了可不行呢，%称呼%❤️～」
     - random: true
@@ -143,22 +143,22 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 奇锐骏
           - 「阿拉拉……今天也要在特雷森里散步吗？」
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 奇锐骏
           - 「赤身裸体的被脖子上项圈与缰绳牵着被带到公共场所里散步什么的，总会感觉到心脏在砰砰直跳呢，果然这就是年轻人经常会说的『浪漫』吧？」
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 奇锐骏
           - 「不仅能锻炼根性，还能感觉到浪漫和快乐什么的；这样优秀的训练方法得传播出去才行呢。」
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 奇锐骏
           - 「像是%奇锐骏称呼骏川%，还有理事长%她%们呐，感觉很容易就会沉沦在其中呢。」
   # 强奸
@@ -167,22 +167,22 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 奇锐骏
           - 「阿拉……今天的太阳真舒服呢，是吧积攒下来的家务一口气做完的好时机呢。」
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 奇锐骏
           - 「洗衣服、晒被子、还有做嘎吱嘎吱干……唔噜噜，今天要做的事情意外地多啊。」
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 奇锐骏
           - 「所以呢，%称呼%；今天可不许你强奸我了哦？」
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 奇锐骏
           - 「无论是在大家训练的时候被带到中庭的枯树洞里，还是午休的时候被带到天台上，还是下午外出的时候在车站的小巷子里什么的，今天都是不可以的哦？」
   # 被奴役
@@ -191,12 +191,12 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 奇锐骏
           - 「今天我感觉自己的状态特别好呢，所以晚上我会去宠幸你。」
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 奇锐骏
           - 「所以呢，%称呼%，要记得把身上的各个地方都好好地洗干净等着我哦。」
       - 明明是一如既往的笑容，却有一种不容拒绝的魄力。

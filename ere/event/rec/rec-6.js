@@ -14,39 +14,46 @@ const {
 } = require('#/system/sys-calc-chara-others');
 
 const { add_event, cb_enum } = require('#/event/queue');
-const lines = require('#/event/rec/rec-6.kojo');
 const CustomizedRecruit = require('#/event/rec/rec-common');
+const generate_dictionary = require('#/event/snippets/generate-dictionary');
 const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
 
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
 const CharaAvailableSkills = require('#/data/chara-available-skills');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
-const { get_trainer_title } = require('#/data/info-generator');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
 const { attr_enum } = require('#/data/train-const');
+
+const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends CustomizedRecruit {
   async recruit() {
     if (await this.check_before_rec()) {
       return;
     }
-    const dict = {};
-    dict['你'] = era.get('callname:0:-2');
-    dict['马娘'] = era.get('flag:角色性别') === 1 ? '马郎' : '马娘';
-    dict['她'] = era.get('flag:角色性别') === 1 ? '他' : '她';
-    dict['骏川缰绳'] = era.get('callname:301:-2');
-    dict['玩家敬称'] = era.get('cflag:0:性别') === 1 ? '先生' : '小姐';
-    dict['玩家名'] = era.get('callname:0:-1');
-    dict['训练员头衔'] = get_trainer_title().prefix();
-    era.set(`cflag:${this.id}:招募状态`, recruit_flags.yes);
-    const ret = await lines['recruit'](dict);
+    const tokino = get_chara_talk(301);
+    const dict = {
+      ...generate_dictionary(this.id, {
+        sir: !0,
+        title: !0,
+        uma: !0,
+        your_name: !0,
+      }),
+      T_COLOR: tokino.color,
+      T_NAME: tokino.name,
+    };
+    // CFLAGNAME:66 = 招募状态
+    era.set(`cflag:${this.id}:66`, recruit_flags.yes);
+    const ret = await i18n().kojo[this.id].recruit['rec'](dict);
     await this.recruit_end();
     era.println();
-    era.set('cflag:6:育成回合计时', 0);
+    // CFLAGNAME:48 = 育成回合计时
+    era.set('cflag:6:48', 0);
     let wait_flag = false,
       motivation_change = 0;
     if (ret[1] === 1) {
@@ -83,17 +90,19 @@ module.exports = class extends CustomizedRecruit {
         race_enum.begin_race,
         1,
         1,
-        era.get('flag:当前年') - 1,
+        // FLAGNAME:1 = 当前年
+        era.get('flag:1') - 1,
       ),
     );
-    era.add(`cflag:${this.id}:育成回合计时`, 48);
-    new Array(5).fill(0).forEach((_, i) => {
+    era.add(`cflag:${this.id}:48`, 48);
+    for (let i = 0; i < 5; ++i) {
       // ABLNAME:0 - 4 = 速度训练等级 - 智力训练等级
       era.add(`abl:${this.id}:${i}`, 2);
       // BASENAME:5 - 9 = 速度 - 智力
       era.add(`base:${this.id}:${5 + i}`, get_random_value(400, 500));
-    });
-    era.add(`exp:${this.id}:技能点数`, 600);
+    }
+    // EXPNAME:1 = 技能点数
+    era.add(`exp:${this.id}:1`, 600);
     const available_skills = CharaAvailableSkills.get(this.id);
     const got_skills = available_skills.get().splice(0, 2);
     get_skills_and_print_in_event(this.id, got_skills);

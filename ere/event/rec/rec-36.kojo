@@ -45,7 +45,7 @@
   - 最终，%YOU%坠入了黑暗之中。
   -
   - content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: %UMA%A
       - 「训练员%SIR%！醒醒！」
   -
@@ -57,7 +57,7 @@
   - %YOU%进来前才和%SHE%打过招呼的
   -
   - content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 戴着眼镜的%UMA%
       - 「不好意思，虽然知道选拔赛这几天训练员们都很累……但图书馆的关门时间已经到了。」
   -
@@ -65,7 +65,7 @@
   - 窗外的天空，夕阳都几乎已经下山，甚至天边渐渐出现了点点星光
   - %YOU%连忙向那名%UMA%道歉，说到底在图书馆看书看到睡着，这本来就是相当失礼的行为
   - content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 戴着眼镜的%UMA%
       - 「那，我帮您把书放回去吧。」
   -
@@ -125,25 +125,25 @@
   - 到底是怎么回事……？
   -
   - content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: ？？？
       - 「……啧，这都是这周里第四次了，有完没完！」
   - content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 警察
       - 「……这话是我该说的才对，每次打扮成这样跑来这种地方，你以为我就不烦吗？」
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: ？？？
       - 「大晚上？这不是才七点而已吗？还有，『这种地方』？我可以把这当成是警方对网吧的态度吗？对行业的歧视？啊？」
   - content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 警察
       - 「你……！明明是特雷森学园的%UMA%，居然这种态度……！」
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: ？？？
       - 「特雷森又怎样？特雷森的%UMA%就一定是乖学生好宝宝？」
   -
@@ -156,17 +156,17 @@
   - 「我是这孩子的老师，是跟%SHE%约好了在这边碰面的。」
   -
   - content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 警察
       - 「啊，是特雷森的老师吗？那好吧。」
   -
   - content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 警察
       - 「不过也麻烦以后别再让未成年的孩子在这种地方等人了。」
   -
   - content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 警察
       - 「还有你，下次在等人就直接说啊，真是……」
   -
@@ -179,13 +179,13 @@
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: ？？？
       - 「……只有这样？你刚刚应该听到那个警察说的了吧？我是连续几天都死卡着门禁线回学园在外面鬼混哦？」
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: ？？？
       - 「指教，还是批评？我都习惯了，想说什么随你。」
   -
@@ -203,7 +203,7 @@
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: ？？？
       - 「……啊？这算什么……」
   -
@@ -220,7 +220,7 @@
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: ？？？
       - 「…………」
   -
@@ -229,7 +229,7 @@
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: ？？？
       - 「就算这样，也只能『否定』了游戏这样的可能性，若是真的那么烂的话，我去这间网吧的『动机』又是什么。」
   -
@@ -264,7 +264,7 @@
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: ？？？
       - 「…………」
   -
@@ -282,13 +282,13 @@
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: ？？？
       - 「……空中神宫。」
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 空中神宫
       - 「……我的名字是空中神宫。」
   -
@@ -311,13 +311,13 @@
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 空中神宫
       - 「理由呢？」
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 空中神宫
       - 「选择我的理由是什么？」
   -
@@ -331,7 +331,7 @@
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 空中神宫
       - 「…………感觉？」
   -
@@ -343,7 +343,7 @@
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 空中神宫
       - 「……等」
   -
@@ -352,7 +352,7 @@
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 空中神宫
       - 「——————够了。」
   -
@@ -360,7 +360,7 @@
 
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 空中神宫
       - 「说到底……你和刚刚那个警察，根本没有任何区别，不是吗？」
   -
@@ -371,19 +371,19 @@
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 空中神宫
       - 「一厢情愿，只凭着自己看见的东西就判定对方是个怎么样的人，充满了主观和刻板印象的评价。」
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 空中神宫
       - 「……这次算我欠你的，」
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 空中神宫
       - 「但别以为这样就能要胁我了。」
   -
@@ -422,31 +422,31 @@
       - divider: true
       - color: %COLOR%
         content:
-          - fontSize: bold
+          - fontWeight: bold
           - content: 空中神宫
           - 「…………」
       -
       - color: %COLOR%
         content:
-          - fontSize: bold
+          - fontWeight: bold
           - content: 空中神宫
           - （那么，加上今天的数据……）
       -
       - color: %COLOR%
         content:
-          - fontSize: bold
+          - fontWeight: bold
           - content: 空中神宫
           - （怎么样？这样的话！）
       -
       - color: red
         content:
-          - fontSize: bold
+          - fontWeight: bold
           - content: Parcae
           - 「0」
       -
       - color: %COLOR%
         content:
-          - fontSize: bold
+          - fontWeight: bold
           - content: 空中神宫
           - 「…………」
       -
@@ -455,7 +455,7 @@
       -
       - color: %COLOR%
         content:
-          - fontSize: bold
+          - fontWeight: bold
           - content: 空中神宫
           - 「…………」
       -
@@ -501,7 +501,7 @@
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 空中神宫
       - 「呼……哈……」
 
@@ -520,7 +520,7 @@
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 空中神宫
       - 「……哈啊。」
   -
@@ -551,7 +551,7 @@
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 空中神宫
       - 「呵呵……哈哈哈哈哈！」
   -
@@ -575,56 +575,56 @@
   - 脸上的笑容又再度消失，恢复成了平常的臭脸，%YOU%正想上去搭话，却看见另一名训练员径直朝%SHE%走去。
   -
   - content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 训练员A
       - 「空中神宫……我不是说过了，好好用正常的跑法来跑吗？」
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 空中神宫
       - 「哈？我刚刚那就是正常的跑法啊？咋了？」
   - content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 训练员A
       - 「我说的是先行或者差行这种！这样我才能去判断你常时的速度和习惯……」
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 空中神宫
       - 「所以我都说了，那就是我正常情况下的跑法啊？」
   -
   - content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 训练员A
       - 「你……！你以为你每次都会运气那么好，刚好堵住前路的%UMA%会给你让出道路来吗！」
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 空中神宫
       - 「…………哈？运气？」
   -
   - content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 训练员A
       - 「难道不是吗？要不是刚好你选的那条道路没有%UMA%挡住，以你开始冲刺的那个时机，百分之百会被堵在后面，别说第一了，连前五都进不去。」
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 空中神宫
       - 「……没法谈啊。」
   -
   - 神宫说完后没有管接下来那名训练员要说什么，径直离开了场上。
   -
   - content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 训练员A
       - 「等，空中神宫！你要做什么！」
   -
   - content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 训练员A
       - 「……啧，这种%UMA%，谁爱负责谁负责去！」
   -
@@ -641,7 +641,7 @@
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 空中神宫
       - 「…………这个也不是。」
   -
@@ -655,7 +655,7 @@
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 空中神宫
       - 「啊？…………是你啊。」
   -
@@ -681,7 +681,7 @@
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 空中神宫
       - 「……你也是吗？觉得刚刚那不过是运气而已。」
   -
@@ -727,7 +727,7 @@
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 空中神宫
       - 「这就是Parcae。」
   -
@@ -737,19 +737,19 @@
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 空中神宫
       - 「能够理解，将输入数据完美分析，并推导出正确答案的，也就只有它了。」
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 空中神宫
       - 「只要输入的值正确，答案就是绝对，无法被推翻，拒绝一切推测的Well- defined。」
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 空中神宫
       - 「是我制造出的，唯一可靠，绝对可信的搭档。」
   -
@@ -764,13 +764,13 @@
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 空中神宫
       - 「当然，根据数据分析，给出最适合『我』的训练计画及饮食安排更不在话下，」
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 空中神宫
       - 「我这样说你能明白吗？其实，我根本就不需要……」
   -
@@ -779,7 +779,7 @@
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 空中神宫
       - 「……」
   -
@@ -800,7 +800,7 @@
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 空中神宫
       - （……再度计算，空中神宫获得三冠的概率。）
   -
@@ -815,7 +815,7 @@
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 空中神宫
       - 「……嗯？」
   -
@@ -830,7 +830,7 @@
   -
   - color: red
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: Parcae
       - 「0」
   -
@@ -841,7 +841,7 @@
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 空中神宫
       - （刚刚……停顿了。）
   -
@@ -873,7 +873,7 @@
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 空中神宫
       - 「……不一样的变量吗……？」
   -
@@ -895,7 +895,7 @@
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 空中神宫
       - 「……理由？」
   -
@@ -907,7 +907,7 @@
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 空中神宫
       - 「你……！」
   -
@@ -918,7 +918,7 @@
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 空中神宫
       - 「…………」
   - acc: 1
@@ -930,19 +930,19 @@
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 空中神宫
       - 「…………」
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 空中神宫
       - 「你觉得，我一定能赢下三冠？」
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 空中神宫
       - 「哪怕……数据的结果并非如此，也一样相信？」
   -
@@ -952,31 +952,31 @@
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 空中神宫
       - 「……无聊的答案。」
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 空中神宫
       - 「仅凭这种理由就选择要负责三年的%UMA%，你一定会后悔。」
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 空中神宫
       - 「绝对。」
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 空中神宫
       - 「……但是，如果说，你是个连这种事都不在乎的蠢货的话，」
   -
   - color: %COLOR%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 空中神宫
       - 「请多指教，训练员。」
   -

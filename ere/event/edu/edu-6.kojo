@@ -16,7 +16,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「训练员？发生什么了吗？」
   -
@@ -34,7 +34,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「这样吗……？」
   -
@@ -46,12 +46,12 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「训练员，新年快乐。」
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「你看起来很精神的样子呢。正是因为有你在，我才能这么安心。」
   -
@@ -71,12 +71,12 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 小栗帽
           - 「呣……新年一开始就去健身吗？」
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 小栗帽
           - 「既然如此，那健身完后的饭也少不了呢。因为饭是力量的来源啊！」
       -
@@ -86,7 +86,7 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 小栗帽
           - 「……！这样真的可以吗？」
       -
@@ -94,7 +94,7 @@
       -
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 小栗帽
           - 「谢谢你……我本以为你不会同意的。既然如此，我就要吃满整个新年了！」
       -
@@ -104,7 +104,7 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 小栗帽
           - 「但我很笨手笨脚的……」
       -
@@ -112,7 +112,7 @@
       -
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 小栗帽
           - 「……确实如此，一年才刚刚开始呢！训练员！」
       -
@@ -149,7 +149,7 @@
   - 不如说就是松鼠。
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「嗯嗯啊啊哼哼哦哦……（但是……饭菜会凉掉……）」
   -
@@ -160,7 +160,7 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 小栗帽
           - 「知道了……」
   - acc: 2
@@ -168,7 +168,7 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 小栗帽
           - 「知道了……」
   -
@@ -181,12 +181,12 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「你来了吗，等你很久了。」
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「我有想要送给你的东西……收下吧。」
   -
@@ -194,7 +194,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「今天是情人节，所以我试着做了手工巧克力。」
   -
@@ -202,12 +202,12 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「那我们走吧……你问我要去哪里？」
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「当然是宿舍的食材库，我把剩下的巧克力都放在那了。」
   -
@@ -216,7 +216,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「是我在不断尝试的过程中剩下的巧克力，应该还有20公斤吧？」
   -
@@ -227,12 +227,12 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「毕竟还是太多了，所以运不到学校这边来。但你放心，我有好好冷藏。」
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「我也会一起来吃的，你就一起好好享受这顿巧克力盛宴吧！」
   -
@@ -251,12 +251,12 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「呼——哈——」
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「训练员，成绩是？」
   -
@@ -269,7 +269,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「这个速度，算快吗？」
   -
@@ -297,7 +297,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「知道了，训练员。」
   -
@@ -314,7 +314,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「所以说，我们什么时候也德个比看看？」
   -
@@ -333,7 +333,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「……原来是这样。」
   -
@@ -343,7 +343,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「那我们去找人帮个忙吧。」
   -
@@ -352,12 +352,12 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「规则是人定的，那么只要找到相关人士说个情不就好了吗？」
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「乡下的阿叔阿姨在遇到不方便的事情时都这样。」
   -
@@ -379,7 +379,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「……假如是那个皇帝的话，说不定……」
   -
@@ -392,17 +392,17 @@
       - 得知你们的来意后，学生会长饶有兴致地打量着你们。
       - color: %皇帝色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 皇帝
           - 「捡回来的猎犬嗷嗷待哺，甚至已经学会露出獠牙咬向主人……吾该高兴吗？」
       - color: %皇帝色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 皇帝
           - 「但假如你足够聪明的话，就该认清自己的位置。」
       - color: %皇帝色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 皇帝
           - 「不要对中央无礼！」
   - if: era.get('cflag:17:66') === 1 && !era.get('cflag:17:48')?.emperor
@@ -410,17 +410,17 @@
       - 得知你们的来意后，学生会长不可置信地盯着你们。
       - color: %露娜色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 露娜
           - 「你们竟然想要我厚此薄彼？」
       - color: %露娜色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 露娜
           - 「要我用三言两语，去谋杀某位孩子的梦想？」
       - color: %露娜色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 露娜
           - 「不要对中央无礼！」
   - if: era.get('cflag:17:48')?.good_end === 2
@@ -428,17 +428,17 @@
       - 得知你们的来意后，学生会长不可置信地盯着你们。
       - color: %皇帝色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 鲁铎象征
           - 「捡回来的猎犬嗷嗷待哺，甚至已经学会露出獠牙咬向主人……吾该高兴吗？」
       - color: %露娜色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 鲁铎象征
           - 「要我用三言两语，去谋杀某位孩子的梦想？」
       - color: %露娜色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 鲁铎象征
           - 「不要对中央无礼
           - color: '#ff755e'
@@ -450,7 +450,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「失败了呢……」
   -
@@ -468,7 +468,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「既然如此也没办法……只能放弃德比了啊。」
   -
@@ -496,7 +496,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「嗯……嗯嗯……我好像懂了！」
   -
@@ -517,7 +517,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「训练员，我的表现还好吗？」
   -
@@ -545,7 +545,7 @@
   -
   - color: %小玉色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 玉藻十字
       - 「哎呀，这不训练员吗！」
   -
@@ -554,7 +554,7 @@
   -
   - color: %小玉色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 玉藻十字
       - 「小栗还在外面跑着呢，是你的指示？」
   -
@@ -562,7 +562,7 @@
   -
   - color: %小玉色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 玉藻十字
       - 「看你的反应，小栗多半是在自作主张啦。」
   -
@@ -575,7 +575,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「训练员……」
   -
@@ -583,7 +583,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「今天白天，我们和小海湾在沙滩进行了并跑。」
   -
@@ -593,17 +593,17 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「我们的训练距离是2000米，这个距离的话我不可能输。」
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「然而结果却是平手……」
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「这样的话，在2500米长的有马纪念中，我就会被小海湾抛开距离。」
   -
@@ -616,7 +616,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「抱歉，是我心急了……应该先跟你商量的。」
   -
@@ -638,7 +638,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「明白了！我会努力的！」
   -
@@ -661,7 +661,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「总之，再确认一次——这次需要在进入第三个弯道之后就开始加速……」
   -
@@ -672,7 +672,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「越是高水平的赛事，对手能留有的余力就越多。这几周你提过好多次了。」
   -
@@ -700,7 +700,7 @@
       -
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 小栗帽
           - 「青竹回忆，真是不可小觑的对手……」
       -
@@ -709,7 +709,7 @@
       -
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 小栗帽
           - 「小栗帽加害者俱乐部，噗滋，进行曲应该也想加入呢。」
       -
@@ -721,7 +721,7 @@
       -
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 小栗帽
           - 「青竹回忆，真是不可小觑的对手……」
       -
@@ -730,7 +730,7 @@
       -
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 小栗帽
           - 「小栗帽加害者俱乐部，噗滋，进行曲应该也想加入呢。」
       -
@@ -744,7 +744,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「啊啊，是有点想念笠松和当地的人们了。」
   -
@@ -759,7 +759,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「训练员？」
   -
@@ -783,7 +783,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「笠松，好久不见了啊……」
   -
@@ -799,7 +799,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「不过我之前在观众席上就看到妈妈了，所以大概没问题的。」
   -
@@ -809,7 +809,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗妈妈
       - 「你这孩子，还跟小时候一样冒冒失失。」
   -
@@ -818,7 +818,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗妈妈
       - 「您好，%玩家本名%训练员。」
   -
@@ -831,7 +831,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗妈妈
       - 「帽子，你跟%玩家本名%训练员进行到什么阶段了？」
   -
@@ -840,7 +840,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「我们吗？该干的事都干过了。」
   -
@@ -883,7 +883,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「训练员！我们该走了。」
   -
@@ -896,7 +896,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「大家，我还会再回来的！」
   -
@@ -924,7 +924,7 @@
   -
   - color: %小玉色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: ？？？
       - 「咋的了，脸绷得跟个石墩子似的，在担心小栗？」
   -
@@ -941,7 +941,7 @@
   -
   - color: %小玉色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 玉藻十字
       - 「不得不说有点怀疑就是你把帽子带成这样的，整天冷着脸。」
   -
@@ -959,7 +959,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「%玩家本名%、小玉。」
   -
@@ -970,7 +970,7 @@
   -
   - color: %小玉色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 玉藻十字
       - 「小栗，待会可不要手下留情哈。」
   -
@@ -978,7 +978,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「小玉可是很强的，我怎么可能手下留情？」
   -
@@ -987,7 +987,7 @@
   -
   - color: %小玉色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 玉藻十字
       - 「不，咱的意思是：要好好跟咱做个告别。」
   -
@@ -997,19 +997,19 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「小玉，你竟然不让我放水吗？」
   -
   - color: %小玉色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 玉藻十字
       - 「别闹了，要是你故意放水让我赢，那奖杯我拿着都不自在。」
   -
   - color: %小玉色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 玉藻十字
       - 「咱要的是使出浑身解数的小栗帽，至于将你击溃后拿到的冠军……就当作附赠品吧。」
   -
@@ -1095,7 +1095,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「训练员，笑得有点瘮人了。」
   -
@@ -1108,7 +1108,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「反正现在还不到门禁的时候，无所谓。」
   -
@@ -1126,7 +1126,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 二人
       - （好想放假啊——）
 
@@ -1144,7 +1144,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「骨膜炎……真是讨厌的东西。」
   -
@@ -1156,7 +1156,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「放着不治疗的话就是疲劳性骨折。」
   -
@@ -1199,7 +1199,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「我还没见过你如此大动肝火呢，%玩家本名%。」
   -
@@ -1213,7 +1213,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「白、白米饭吗？」
   -
@@ -1241,7 +1241,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「本场秋季天皇赏毫无疑问归功于%玩家本名%训练员的规划。」
   -
@@ -1250,7 +1250,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「请下一位。」
   -
@@ -1258,12 +1258,12 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 恶德记者
       - 「您好，敝人是《号角日报》的城那・冴梦尊（Jonah Jameson）……」
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 恶德记者
       - 「你赢得这场比赛，有没有感觉对手发挥不好才给了你机会？」
   -
@@ -1281,7 +1281,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「哦，其实我今天早上吃了一份猪排饭，那顿早餐特别重要，给了我很多能量。」
   -
@@ -1289,7 +1289,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「以及今天的天气中规中矩，配搭上咖喱饭的风味，刚刚好。」
   -
@@ -1311,19 +1311,19 @@
   - 尽管这种对其完全一知半解的言论让人啼笑皆非，但事实就是%她%的知名度已经达到了这种境界。
   -
   - content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 信件
       - 「犯下贪欲之罪的训练员」
   - content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 信件
       - 「强迫小栗帽带病比赛的罪行我等已然知晓」
   - content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 信件
       - 「若不悔改则面对炸弹的怒火吧」
   - content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 信件
       - 「马之怪盗团敬上」
   -
@@ -1334,7 +1334,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「怎么一个二个都没有打算问我的意见呢……」
   -
@@ -1353,7 +1353,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「我的话肯定是希望继续跑下去的，只是身体实在不允许了……」
   -
@@ -1363,7 +1363,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「但我还是要用实力让那些人闭嘴。」
   -
@@ -1371,12 +1371,12 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「那些媒体不是一直在说你在强迫我跑吗？」
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「那么我就要用战绩来让他们知道……根本没有这一回事！」
   -
@@ -1385,7 +1385,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「就用那场比赛来为我的生涯画上一个圆满的句号吧。」
   -
@@ -1404,7 +1404,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「这是最后一次了。」
   -
@@ -1427,12 +1427,12 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「不用担心，这也不是我第一次离开赛场了。」
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「赛道上的终点只是另一段旅程的开端——这是大家教会我的事。」
   -
@@ -1445,13 +1445,13 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「我没有后悔过，也没有什么好后悔的。」
   -
   - color: %藤正色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: ？？？
       - 「那可真是让人心酸哪，小栗帽。」
   -
@@ -1461,19 +1461,19 @@
   -
   - color: %藤正色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 藤正进行曲
       - 「真亏我当时还那么伤心，没想到当上大明星之后就翻脸不认人了。」
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「进行曲！」
   -
   - color: %藤正色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 藤正进行曲
       - 「令堂和诺伦她们也来了哦，不过现在还在酒店里睡大觉呢。」
   -
@@ -1482,7 +1482,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「谢谢你们……不过进行曲为什么会在这里？」
   -
@@ -1491,7 +1491,7 @@
   -
   - color: %藤正色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 藤正进行曲
       - 「我只是猜你可能会跟以前一样一大早就来晨操而已，没什么特别的。」
   -
@@ -1503,13 +1503,13 @@
   -
   - color: %藤正色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 藤正进行曲
       - 「那么，我就先回酒店睡了。晚点再见啦。」
   -
   - color: %藤正色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 藤正进行曲
       - 「……可别输了哦。」
   -
@@ -1518,7 +1518,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「我会赢！进行曲，我会赢的！」
   -
@@ -1593,7 +1593,7 @@
   -
   - color: %千明色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 千明代表
       - 「呀——小栗帽同学。」
   -
@@ -1601,7 +1601,7 @@
   -
   - color: %露娜色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 鲁铎象征
       - 「抱歉，打扰你训练了吗？」
   -
@@ -1611,7 +1611,7 @@
   -
   - color: %天狼星色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 天狼星象征
       - 「退役生活怎么样？我来帮你习惯习惯如何！」
   -
@@ -1621,7 +1621,7 @@
   -
   - color: %千代王色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 樱花千代王
       - 「我、我是被会长拉过来的——！」
   -
@@ -1629,7 +1629,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「你们到底……」
   -
@@ -1641,22 +1641,22 @@
   - 喧闹声如潮水般此起彼伏，空气中弥漫着紧张又兴奋的气息。
   -
   - content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 学生A
       - 「%她%们在干什么……难道是要比赛吗……？！」
   - content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 学生B
       - 「练习赛？现在？在这里？！」
   - content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 学生C
       - 「这么豪华的阵容，真的是我们能看的吗？！」
   -
   - 一抹黄金色的长发从人群中冒出，推着一台轮椅挤到了前排。
   -
   - content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 学生A
       - 「黄金城前辈、星王前辈！您们也是来参赛的吗！」
   -
@@ -1666,13 +1666,13 @@
   -
   - color: %星王色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 樱花星王
       - 「我就算了，距离能再次跑起来还有一段时日呢。阿城，你怎么看？」
   -
   - color: %黄金城色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 黄金城
       - 「我晚点还有拍摄的通告，恕我拒绝。」
   -
@@ -1684,7 +1684,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「小玉……」
   -
@@ -1695,13 +1695,13 @@
   -
   - color: %露娜色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 鲁铎象征
       - 「我想要……向小栗帽发起挑战。」
   -
   - color: %千明色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 千明代表
       - 「德比，草地，2400米。」
   -
@@ -1710,7 +1710,7 @@
   - 观看的人群登时一阵震动。
   -
   - content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 学生B
       - 「德比？我没听错吧，%她%们想要举办德比！」
   -
@@ -1744,7 +1744,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「啊啊……这就是我的……德比。」
   -
@@ -1762,18 +1762,18 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「谢谢，大家。」
   -
   - color: %露娜色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 鲁铎象征
       - 「当时是我拒绝了为你陈情……」
   - color: %露娜色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 鲁铎象征
       - 「实在是对不起。」
   -
@@ -1782,12 +1782,12 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「不，我觉得……」
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「哪怕是真正的德比也不会像今天这场比赛一样，为我带来这样的感觉。」
   -
@@ -1795,17 +1795,17 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「这种……心跳加速、肺部扩张到极限，仿佛只要稍微放慢下来就会被你们吞食殆尽的感觉。」
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「甚至不能简单地归类为刺激感、恐惧感。」
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「谢谢你们，为我带来了一场没有遗憾的『德比』。」
   -
@@ -1878,7 +1878,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「发生什么了？！」
   -
@@ -1910,7 +1910,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「你不属于这里……」
   -
@@ -1921,7 +1921,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「是梦……」
   -
@@ -1946,7 +1946,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「其实……我之前做了个关于皋月赏的梦。」
   -
@@ -1958,7 +1958,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「是因为无法出赛才导致日有所思，夜有所梦吗……」
   -
@@ -1969,7 +1969,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「咦？就是关于我转学的时机导致报不了名的事……」
   -
@@ -2013,7 +2013,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「我……我不记得……」
   -
@@ -2030,7 +2030,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「又是……梦？」
   -
@@ -2096,7 +2096,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「%玩家本名%……不，你到底是谁？」
   -
@@ -2113,13 +2113,13 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「快回答我！」
   -
   - color: '#e94b4e'
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: ？？？
       - 「答案就在特雷森，中庭的喷泉之中……我让人怜爱的孩子哦……」
   -
@@ -2130,13 +2130,13 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「喷泉……那不是三女神像所在的地方吗？」
   -
   - color: '#e94b4e'
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: ？？？
       - 「带上%玩家本名%前往喷泉寻求真相吧……小栗帽……」
 
@@ -2167,7 +2167,7 @@
   -
   - color: '#e94b4e'
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: ？？？
       - 「原谅我等吧，小羊羔……我等的存在并非汝可直接得见。」
   -
@@ -2177,13 +2177,13 @@
   -
   - color: '#e94b4e'
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: ？？？
       - 「小栗帽……%玩家本名%……欢迎来到「我」的「领域」……」
   -
   - color: '#e94b4e'
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: ？？？
       - 「我一直观察着汝，纵横时间与空间，穿越世界与宇宙……着实迷人。」
   -
@@ -2228,19 +2228,19 @@
   -
   - color: '#e94b4e'
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 达利阿拉伯
       - 「汝的疑惑，我等已经明了。」
   -
   - color: '#8d9ad9'
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 高多芬柏布
       - 「很久很久以前，在时间尚未成形，空间尚未有边界的时候，宇宙只是一片无尽的黑暗与沉寂。那时，没有光，没有声音，甚至没有希望。」
   -
   - color: '#d6c230'
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 拜耶尔土耳其
       - 「于是，我等开始编织一个世界，将这个世界化为一个巨大的竞技场，每一寸土地、每一道赛道，都是我等亲手编织的命运之线。」
   -
@@ -2249,19 +2249,19 @@
   -
   - color: '#e94b4e'
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 达利阿拉伯
       - 「汝所在的这片天地，实则为一个平行宇宙的复制品——从『现实』中抽取核心然后重新编织的模拟筐体。」
   -
   - color: '#e94b4e'
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 达利阿拉伯
       - 「与此同时，我等决定创造一种特殊的生命。那生命既拥有人类的智慧，也拥有着马匹的速度与力量。」
   -
   - color: '#e94b4e'
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 达利阿拉伯
       - 「这些生命的灵魂来自另一个宇宙，与人类的肉体结合后诞生的便是——赛%马娘%。」
   -
@@ -2294,7 +2294,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「%玩家本名%！」
   -
@@ -2304,19 +2304,19 @@
   -
   - color: '#8d9ad9'
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 高多芬柏布
       - 「汝在梦中所经历的痛苦、恐惧，甚至那微小的幸福，都是我等对汝情感的测试。」
   -
   - color: '#d6c230'
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 拜耶尔土耳其
       - 「我等为汝打破了现实的界限，将汝投放至真实的赛场上，让汝与那些本不应该与汝对上的%马娘%交锋——」
   -
   - color: '#e94b4e'
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 达利阿拉伯
       - 「小栗帽无法参与的经典三冠，既是试炼，也是我们对%她%的祝福。」
   -
@@ -2325,13 +2325,13 @@
   -
   - color: '#e94b4e'
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 达利阿拉伯
       - 「时间差不多了，汝就先行退去吧，%玩家本名%。我等还会在帷幕之后观察着汝……」
   -
   - color: '#e94b4e'
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 达利阿拉伯
       - 「跑吧，小栗帽。汝的故事尚未结束。」
   -
@@ -2363,7 +2363,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「但、但是那只是个梦吧？」
   -
@@ -2374,7 +2374,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「但……我们要怎么备战一个发生在梦中的比赛？」
   -
@@ -2409,7 +2409,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「演都不演了。」
   -
@@ -2417,7 +2417,7 @@
   -
   - color: %达利阿拉伯色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 达利阿拉伯
       - 「因为已经没有必要掩饰了嘛，小羊羔。」
   -
@@ -2429,7 +2429,7 @@
   -
   - color: %达利阿拉伯色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 达利阿拉伯
       - 「今天的菊花赏，由我们来当你的对手应该——不算丢份吧？」
   -
@@ -2438,7 +2438,7 @@
   -
   - color: %高多芬柏布色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 高多芬柏布
       - 「早上好，小栗同学。」
   -
@@ -2446,7 +2446,7 @@
   -
   - color: %拜耶尔土耳其色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 拜耶尔土耳其
       - 「三千米长的菊花赏可不容易，你和训练员有好好准备吧？」
   -
@@ -2475,7 +2475,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「%玩家本名%……」
   -
@@ -2490,7 +2490,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「她们在笑。」
   -
@@ -2503,7 +2503,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「我跟那三位一起比赛了，很开心。」
   -
@@ -2517,7 +2517,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 小栗帽
       - 「谢谢，训练员。」
   -

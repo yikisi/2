@@ -17,7 +17,7 @@ module.exports = class extends CustomizedInit {
         era.set(
           'callname:301:-2',
           // CFLAGNAME:0 = 性别
-          `${900111 + (era.get('cflag:301:0') !== 1)}`,
+          `${900111 + (era.get('cflag:301:0') === 1)}`,
         );
       }
       new Array(5)

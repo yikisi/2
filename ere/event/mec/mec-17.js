@@ -9,13 +9,17 @@ const LegendUmaFilter = require('#/data/race/model/legend-uma-filter');
 const LegendUmaSelector = require('#/data/race/model/legend-uma-selector');
 const { race_enum } = require('#/data/race/race-const');
 
+const { i18n } = require('#/i18n/selector');
+
 module.exports = class extends CustomizedMec {
   init_love() {
     era.set('love:17', 40 + era.get('flag:马娘初始爱慕'));
   }
 
   get_race_contestants(info) {
-    switch (era.get('flag:当前赛事')) {
+    // FLAGNAME:7 = 当前赛事
+    // CFLAGNAME:48 = 48
+    switch (era.get('flag:7')) {
       case race_enum.hoch_sho:
       case race_enum.sats_sho:
         return [new LegendUmaSelector(65, 1.05)];
@@ -25,7 +29,7 @@ module.exports = class extends CustomizedMec {
           new LegendUmaSelector(104, 1.05),
         ];
       case race_enum.arim_kin:
-        if (era.get(`cflag:${this.id}:育成回合计时`) < 96) {
+        if (era.get(`cflag:${this.id}:48`) < 96) {
           return [
             new LegendUmaSelector(57, 1.05),
             new LegendUmaSelector(104, 1.05),
@@ -33,7 +37,7 @@ module.exports = class extends CustomizedMec {
         }
         return [
           new LegendUmaFilter(
-            '美浦神赞',
+            i18n().name.c01701,
             1.05,
             (e) =>
               e.adapt_ground[0] >= 6 &&
@@ -44,15 +48,15 @@ module.exports = class extends CustomizedMec {
       case race_enum.tenn_spr:
         return [new LegendUmaSelector(57, 1.05)];
       case race_enum.takz_kin:
-        if (era.get('cflag:17:育成回合计时') >= 96) {
+        if (era.get('cflag:17:48') >= 96) {
           return [new LegendUmaSelector(70, 1.05)];
         }
         break;
       case race_enum.tenn_sho:
-        if (era.get('cflag:17:育成回合计时') >= 96) {
+        if (era.get('cflag:17:48') >= 96) {
           return [
             new LegendUmaFilter(
-              '疾驰戴拿',
+              i18n().name.c01702,
               1.05,
               (e) =>
                 e.adapt_ground[0] >= 6 &&
@@ -64,10 +68,10 @@ module.exports = class extends CustomizedMec {
         }
         break;
       case race_enum.japa_cup:
-        if (era.get('cflag:17:育成回合计时') >= 96) {
+        if (era.get('cflag:17:48') >= 96) {
           return [
             new LegendUmaFilter(
-              '疾驰戴拿',
+              i18n().name.c01702,
               1.05,
               (e) =>
                 e.adapt_ground[0] >= 6 &&
@@ -172,19 +176,21 @@ module.exports = class extends CustomizedMec {
   }
 
   set_pseudo_uma(uma) {
-    const emperor = era.get('status:17:皇帝'),
-      self_destruct = era.get('status:17:自毁'),
-      debuff = era.get('status:17:神经衰弱') * !new LunaEduMarks().emperor;
-    if (emperor) {
+    // STATUSNAME:112 = 皇帝
+    if (era.get('status:17:112') > 0) {
       uma.attr_buffs.forEach((l) => l.push('+2%[皇帝]'));
     }
-    if (self_destruct) {
+    // STATUSNAME:110 = 自毁
+    if (era.get('status:17:自毁') > 0) {
       uma.attr_buffs.forEach((l) => l.push('-5%[自毁]'));
     }
-    if (debuff) {
-      uma.attr_buffs.forEach((l) =>
-        l.push(`-${8 * debuff}%[神经衰弱(${debuff})]`),
-      );
+    if (!new LunaEduMarks().emperor) {
+      const debuff = era.get('status:17:115');
+      if (debuff > 0) {
+        uma.attr_buffs.forEach((l) =>
+          l.push(`-${8 * debuff}%[神经衰弱(${debuff})]`),
+        );
+      }
     }
   }
 };

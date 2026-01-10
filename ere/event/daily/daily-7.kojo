@@ -9,7 +9,7 @@ basement_end:
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: ？？？
       - 「你好，%玩家名%。我想跟你玩一个游戏——」
   -
@@ -17,13 +17,13 @@ basement_end:
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 黄金船
       - 「长久以来，你一直忽视与自己签下契约的%马娘%，导致%她%的恋心无处安放。」
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 黄金船
       - 「
       - color: '#ffff00'
@@ -44,13 +44,13 @@ slave_end:
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 黄金船
       - 「客人啊，你这么点马币连这个月的利息都填不完哪。」
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 黄金船
       - 「哪怕你想要下跪哭诉，说自己会努力还钱，敝公司还是蒙受了损失。」
   -
@@ -60,7 +60,7 @@ slave_end:
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 黄金船
       - 「唉，你得明白小金船银行不是做慈善活计的。」
   -
@@ -68,7 +68,7 @@ slave_end:
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 黄金船
       - 「但你有没有兴趣参与一个……
       - color: '#ffff00'

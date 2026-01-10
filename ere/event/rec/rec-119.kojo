@@ -6,7 +6,7 @@
   - 对训练员而言，这也是十分重要的，挑选负责%马娘%的季节
   -
   - content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: %马娘%A
       - 「……如，如果可以的话，能麻烦%称呼%明天来看看我训练的样子吗？」
   -
@@ -41,7 +41,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: ？？？
       - 「呼……」
   -
@@ -70,7 +70,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: ？？？
       - 「………嗯？」
   -
@@ -84,7 +84,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: ？？？
       - 「！？」
   -
@@ -128,7 +128,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: ？？？
       - 「……训练员先生？」
   -
@@ -138,13 +138,13 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 梦之旅
       - 「那么……请让我再一次对您进行感谢。」
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 梦之旅
       - 「真的非常谢谢您……愿意对我的跑法做出修正。」
   -
@@ -157,12 +157,12 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 梦之旅
       - 「不，%称呼%，您不知道您的建议有多么重要。」
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 梦之旅
       - 「至今为止……其他训练员都没有给过我那样的建议，哪怕，只是在您看来随意的一句话也是。」
   -
@@ -170,12 +170,12 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 梦之旅
       - 「………您大概也看出来了，以我的体型，要与其他%马娘%竞争，是相当困难的事。」
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 梦之旅
       - 「先天上的劣势实在太大了……这是就算改变跑法，改变跑步的姿势，也无法弥补上的差距。训练员们都是这么和我说的。」
   -
@@ -183,7 +183,7 @@
   - %她%喝了口咖啡，仿佛要将那些苦楚一并咽下一般
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 梦之旅
       - 「十分感谢您今日的指导……只可惜，我没有什么能够答谢的，除了咖啡，还有………这里。」
   -
@@ -196,12 +196,12 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 梦之旅
       - 「远征支援委员会……这是以支援那些出外，在外地，甚至外国比赛的那些%马娘%而建立的组织。」
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 梦之旅
       - 「旅行上的交通安排、到了当地后的旅社安排，以及其他各式各样在远征时可能出现的问题都是我们的处理范围。」
   -
@@ -210,32 +210,32 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 梦之旅
       - 「您的表情似乎在问为什么呢。」
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 梦之旅
       - 「……那是，在我很小的时候的事。」
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 梦之旅
       - 「那个时候，有一名很出名的%马娘%。」
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 梦之旅
       - 「%她%是非常厉害的%马娘%，但距离顶点总是差那么临门一脚，与G1比赛总是无缘。屡战屡败，但也屡败屡战。」
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 梦之旅
       - 「最后，在%她%生涯中最后的一场比赛————那是香港的G1比赛，香港瓶。」
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 梦之旅
       - 「%她%以世界的豪强为对手，最终，夺下了比赛，生涯中最初，也是最后的G1胜利。」
   -
@@ -246,12 +246,12 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 梦之旅
       - 「那名%马娘%……%她%深深地打动了我的心……努力不懈的%马娘%，在经历了种种血汗和努力后，让世界看见了自己的身影。」
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 梦之旅
       - 「因此，我也下定了决心，想要为那些远征的%马娘%们做些什么。」
   -
@@ -261,12 +261,12 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 梦之旅
       - 「至于这个办公室……虽然说是委员会，但其实也就只有我以及%舍妹%……平常基本上是没有人在使用的。」
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 梦之旅
       - 「如果%称呼%不介意的话，也可以使用，当作一个稍稍歇息的地方也不错。」
   -
@@ -299,7 +299,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 梦之旅
       - 「呼……」
   -
@@ -316,7 +316,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 梦之旅
       - 「好的，%称呼%。」
   -
@@ -326,7 +326,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 梦之旅
       - 「哈啊……哈啊……哈啊……。」
   -
@@ -336,7 +336,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 梦之旅
       - 「……呼……%称呼%，结束了。」
   -
@@ -348,7 +348,7 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 梦之旅
       - 「%称呼%……这是今天的咖啡。」
   -
@@ -368,12 +368,12 @@
   - divider: true
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 梦之旅
       - 「……%称呼%，今天的训练，也非常的感谢您。」
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 梦之旅
       - 「那个，所以您说有事找我，具体是……？」
   -
@@ -412,12 +412,12 @@
   -
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 梦之旅
       - 「————！」
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
       - content: 梦之旅
       - 「…………我很荣幸，%称呼%。」
   -

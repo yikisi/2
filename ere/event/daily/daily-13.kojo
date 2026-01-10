@@ -8,7 +8,7 @@
       lines:
         - color: %代表色%
           content:
-            - fontSize: bold
+            - fontWeight: bold
               content: 目白麦昆
             - 「今天的我，也为了延续目白家的荣光而在努力着。」
     - if: era.get('status:13:10') === 0 && era.get('status:13:39') === 0
@@ -16,7 +16,7 @@
       lines:
         - color: %代表色%
           content:
-            - fontSize: bold
+            - fontWeight: bold
               content: 目白麦昆
             - 「今天的训练也请你多多关照，%称呼%。」
     - if: era.get('status:13:10') === 0 && era.get('status:13:39') === 0
@@ -24,7 +24,7 @@
       lines:
         - color: %代表色%
           content:
-            - fontSize: bold
+            - fontWeight: bold
               content: 目白麦昆
             - 「你在找我吗，%称呼%？」
     - if: era.get('status:13:10') > 0 || era.get('status:13:39') > 0
@@ -40,42 +40,42 @@
       lines:
         - color: %代表色%
           content:
-            - fontSize: bold
+            - fontWeight: bold
               content: 目白麦昆
             - 「早安，%称呼%，我们一起去食堂吃份早餐，再一起训练吧。」
     - random: true
       lines:
         - color: %代表色%
           content:
-            - fontSize: bold
+            - fontWeight: bold
               content: 目白麦昆
             - 「贵安！今天也要保持着我们之间的契约刚开始的热情哦。」
     - random: true
       lines:
         - color: %代表色%
           content:
-            - fontSize: bold
+            - fontWeight: bold
               content: 目白麦昆
             - 「贵安，今天也要度过一个优雅的一天哦。」
     - random: true
       lines:
         - color: %代表色%
           content:
-            - fontSize: bold
+            - fontWeight: bold
               content: 目白麦昆
             - 「为了目白家的夙愿，无论需要做什么我都在所不辞。」
     - random: true
       lines:
         - color: %代表色%
           content:
-            - fontSize: bold
+            - fontWeight: bold
               content: 目白麦昆
             - 「仪容是一天的基本，为了不将睡相留到白天，我每天早上都会用心整理仪容。」
     - random: true
       lines:
         - color: %代表色%
           content:
-            - fontSize: bold
+            - fontWeight: bold
               content: 目白麦昆
             - 「早上好，为了度过美好的一天，就让我们打起精神来吧。」
     # STATUSNAME:1 = 熬夜
@@ -84,7 +84,7 @@
       lines:
         - color: %代表色%
           content:
-            - fontSize: bold
+            - fontWeight: bold
               content: 目白麦昆
             - 「作为目白家的%马娘%，竟然熬夜而差点迟到了，真是羞愧啊。」
     - if: era.get('status:13:1') > 0
@@ -92,7 +92,7 @@
       lines:
         - color: %代表色%
           content:
-            - fontSize: bold
+            - fontWeight: bold
               content: 目白麦昆
             - 「哈欠～说来昨天那个棒球比赛可真是精彩啊……我什么都没有说哦！真的没有！」
     - if: era.get('status:13:1') > 0
@@ -100,7 +100,7 @@
       lines:
         - color: %代表色%
           content:
-            - fontSize: bold
+            - fontWeight: bold
               content: 目白麦昆
             - 「非常抱歉，虽然昨天是准时睡觉了，但是梦到了有关于黄金船的噩梦……只要仔细想想就会感到恶寒……」
 
@@ -119,7 +119,7 @@
       lines:
         - color: %代表色%
           content:
-            - fontSize: bold
+            - fontWeight: bold
               content: 目白麦昆
             - 「辛苦你了，%称呼%，明天见！」
         - 终于结束的一天%训练员%站在宿舍楼门口外面，目送着麦昆回到宿舍。
@@ -134,7 +134,7 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「现在状态极佳，这才是目白家的%马娘%的我该有的姿态！」
   - if: era.get('cflag:13:40') === 2
@@ -142,7 +142,7 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「今天感觉活力满满，来吧，%称呼%，无论多大的训练强度我都会接受的！」
   - if: era.get('cflag:13:40') === 1
@@ -150,7 +150,7 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「%称呼%，今天有什么训练吗？看我用比平常更快的速度来完成。」
   - if: era.get('cflag:13:40') === 1
@@ -158,7 +158,7 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「感觉状态要比平常好哦。」
   - if: era.get('cflag:13:40') === 0
@@ -166,7 +166,7 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「来吧，%称呼%，要从什么开始做起呢？」
   - if: era.get('cflag:13:40') === 0
@@ -174,7 +174,7 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「今天我也会努力进行训练哦，%称呼%。」
   - if: era.get('cflag:13:40') === -1
@@ -182,7 +182,7 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「不好意思，%称呼%，今天注意力不太集中……」
   - if: era.get('cflag:13:40') === -1
@@ -190,7 +190,7 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「呜呜，感觉今天好像提不起劲头来……」
   - if: era.get('cflag:13:40') === -2
@@ -198,7 +198,7 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「虽然知道要积极一点，但是身体好像不允许……」
   - if: era.get('cflag:13:40') === -2
@@ -206,14 +206,14 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「目白家的%马娘%，岂会因此而倒下……」
   - random: true
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「因为目白家很大，我小时候认路需要玩偶来标记呢。」
   # CFLAGNAME:66 = 招募状态
@@ -222,7 +222,7 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「%麦昆称呼船%……不知道为什么自从偶然的认识之后就一直缠着我。」
   - if: era.get('cflag:63:66') === 1
@@ -230,14 +230,14 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「别看 %麦昆称呼狄杜斯% 表面那样子严肃，其实是个很温柔的人。」
   - random: true
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「下次偶尔过来喝一杯下午茶怎么样，我会用目白家的做法来款待你的。」
   - if: d.check === 1
@@ -245,7 +245,7 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「下次要不要一起去看棒球比赛呢，如果你能包容我那失态行为的话……」
   - if: d.check === 1
@@ -253,7 +253,7 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「因为我们目白家的%马娘%私底下都有不同的爱好，所以没什么大不了的。」
 
@@ -262,14 +262,14 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「这是送给我的礼物？真是非常感谢，必须要做些彰显目白家的大方的回礼才行……」
   - random: true
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「%称呼%送给我的礼物，我会好好珍惜的。」
 
@@ -278,14 +278,14 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「为了能实现愿望，让我们一同把整个流程都做完吧。」
   - random: true
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「一想到特雷森的历史有许多马娘因为伤病退役，还是会感到害怕。」
 
@@ -294,14 +294,14 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「看着池塘那边的浮标，要时时刻刻为得到鱼而全神贯注来锻炼自己，也许是钓鱼的精髓所在呢。」
   - random: true
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「好大的一条鱼呢，要不要拿着鱼一起拍照呢。」
 
@@ -310,14 +310,14 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「只要在晚上的凉爽天气下的河边散步的话，心情就会舒畅很多呢，把那些烦恼都暂时地忘记掉了」
   - random: true
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「河边的风真是舒服啊，下次来这里要不要一起跑个步呢？」
 
@@ -326,14 +326,14 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「要是抽不出来的话，我们买下来怎么样。」
   - random: true
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「啊啦，帝王同学很喜欢玩这个跳舞机呢。」
   - if: era.get('love:13') >= 75
@@ -341,14 +341,14 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「想要抽到我的玩偶吗？真是的，明明本人就已经在身边了。」
 
 抽奖:
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 目白麦昆
       - 「如果只要想象到自己有强运在身的话，应该也会抽到很好的东西吧。」
   - 从%训练员%手中接过了抽奖券，麦昆满怀期待地转了起来。
@@ -360,7 +360,7 @@
       - 两眼放光的麦昆，走到了%训练员%面前。
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「%称呼%，我抽到了温泉旅行券了哦！」
       -
@@ -369,12 +369,12 @@
       -
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「虽然目白家名下也有优质的温泉店在那边，不过是%称呼%在的话，还是倾向于过普通人的生活吧。」
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「所以，我们什么时候用掉这张券？看起来这张券是不限期的样子？」
       -
@@ -383,7 +383,7 @@
       -
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「说来也是，所以%称呼%要好好保存好这张券呢。」
       - 说完，麦昆递过来温泉旅行券，而%训练员%摩挲了几下后，便仔细地放在了钱包里。
@@ -400,7 +400,7 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「轰出去——YATAKA！！」
       - %训练员%在背后看着忍耐了很久的麦昆，仿佛用尽了全力去唱她喜欢的棒球队加油曲。
@@ -416,12 +416,12 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「Waiting for Tomorrow~♫」
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「少しずつ進めばいいよ~♫」
       - 轻快的伴奏与麦昆那温柔的声音融合在一起。
@@ -432,7 +432,7 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「身……身为目白家的%大小姐%，怎能被这个东西吓到……！」
       - %训练员%看着流出着冷汗的麦昆的双腿颤抖着，无奈只好牵着%她%的手让%她%得以保持站立。
@@ -440,14 +440,14 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「恋爱电影嘛……看起来%称呼%意外地挺少女心的呢，说来很想知道%称呼%对于恋爱的看法是怎么样的。」
   - random: true
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「要我说喜欢的电影的话，大概就是悬疑片了吧，好的电影里面，尘埃落定之后出现的大反转绝对是最让人意外且惊喜的！」
 
@@ -456,21 +456,21 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「%称呼%，待会吃完饭可以稍微点一份饭后甜点吗，绝对不会多吃的！」
   - random: true
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「这家火锅店的肉真是优等，下次要不要常来这里呢？」
   - random: true
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「因为之前做了体重管理所以可以让我吃一份？那么我就开动了哦！」
 
@@ -479,21 +479,21 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「不好意思～因为要化了点妆，所以让你久等了，我们今天要去哪里呢？」
   - random: true
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「作为对%称呼%一直以来教育的报答，今天就由我来买单吧。」
   - random: true
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「过马路的时候还是一起牵着手才安心呢～」
   - if: era.get('love:13') >= 51
@@ -501,7 +501,7 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「要不要我们做做看这样子……对，牵着手，总感觉有点紧张呢，如果被粉丝认出来的话。」
   - if: era.get('love:13') >= 75
@@ -509,7 +509,7 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「%称呼%走累了吗？那要不要找个人少的地方享受一下膝枕呢？」
       - 于是在树荫下的长椅，%训练员%在麦昆那轻微抚摸下闭着眼睛，逐渐地放松起来。
@@ -519,7 +519,7 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「衣服，怎么样呢？」
       - 麦昆打开更衣室的门，在%训练员%的面前转了一圈。
@@ -527,7 +527,7 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「有的商场的一楼通常专门为高档品牌入驻，而卖的商品也通常会昂贵得多，我带你见识一下吧，%称呼%？」
 
@@ -536,14 +536,14 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「家族的前辈们，也一定在看着担当重任的我吧。」
   - random: true
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「有时候，被寄予厚望的我有时候也会感受到被束缚着的窒息感。」
 
@@ -552,14 +552,14 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「竟然在校园里面牵着手？万一被同学们发现了怎么办啊……」
   - random: true
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「感觉有好多人看着着我们啊，要冷静，冷静……」
 
@@ -577,7 +577,7 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「%称呼%，啊——」
       - 自从跨越那道关系之后,不知不觉连吃饭的时间都慢了下来。
@@ -589,14 +589,14 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「唔，人家想吃芭菲嘛。」
   - random: true
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「因为常年独居所以会嫌做饭麻烦？只要有我在的话，%称呼%还会那样想吗？」
   - if: era.get('love:13') >= 75
@@ -604,19 +604,19 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「因为先前向佣人请教了一些烹饪的技巧，所以今天带来了我自己做的便当，要不要试试？」
 
 指导学习:
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 目白麦昆
       - 「即使是目白家的%马娘%，也不是什么都懂哦。」
   - color: %代表色%
     content:
-      - fontSize: bold
+      - fontWeight: bold
         content: 目白麦昆
       - 「所以%称呼%，还请指导我。」
 
@@ -636,7 +636,7 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「我带来了棒球比赛的录像带，要不要看一下棒球比赛呢？」
   - if: era.get('love:13') >= 75
@@ -644,7 +644,7 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「喜欢我的膝枕吗？只要%称呼%喜欢的话，我都愿意这样子做哦。」
   - if: era.get('love:13') >= 75
@@ -659,7 +659,7 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「居然把怪物的招式都摸透了，像是将它把玩弄在手掌心一样，真是太厉害了。」
       - %训练员%娴熟的操作技巧将身旁的麦昆震撼到捂嘴。
@@ -667,7 +667,7 @@
     lines:
       - color: %代表色%
         content:
-          - fontSize: bold
+          - fontWeight: bold
             content: 目白麦昆
           - 「这种考验着我们一心同体的游戏，我一定要通关它。」
       - 不熟练的麦昆努力适应着手柄，与%训练员%玩着面前的双人游戏。

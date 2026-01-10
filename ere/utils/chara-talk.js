@@ -49,6 +49,10 @@ class CharaTalk {
     await era.waitAnyKey();
   }
 
+  say_as_passer_by = CharaTalk.say_by_passer_by;
+
+  say_as_passer_by_and_wait = CharaTalk.say_by_passer_by_and_wait;
+
   /**
    * @param {number} id
    * @param {string} [color]
