@@ -132,6 +132,8 @@ function generate_copyrights() {
         { isBr: true },
         'Mr.E.',
         { isDivider: true },
+        '牛蛙煲',
+        { isDivider: true },
         '黑奴队长',
       ],
     ],
