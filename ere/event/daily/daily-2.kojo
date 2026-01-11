@@ -121,6 +121,46 @@ good_night:
         - %YOU%也向着铃鹿挥手致意。
         - %YOU%目送铃鹿消失在宿舍楼的深处，才转身离开。
 
+good_night_sex:
+  - 训练结束后，%YOU%像往常一样准备把铃鹿送到宿舍楼下。
+  - 不曾想，铃鹿并没有直接跟着%YOU%离开，而是张开双臂紧紧抱住了%YOU%。
+  - color: %COLOR%
+    content:
+      - fontSize: bold
+        content: 无声铃鹿
+      - 「%CALLNAME%，我还有很多话想跟您说呢，不想这么早就再见……」
+  - 铃鹿把脸颊整个地埋进了%YOU%的怀里，一向安分文静的尾巴也悄悄缠住了%YOU%的小腿。
+  - %YOU%摸了摸铃鹿的背脊，想了一会。
+  - acc: 1
+    key: sex
+    content: 「好吧，那就多陪陪你。」
+    lines:
+      - %YOU%轻轻挑起铃鹿的下巴，在铃鹿略微动情的眼眸中吻住了%她%。
+      - 不知道过了多久之后，%YOU%与铃鹿的唇才依依不舍地分开。
+      - 「铃鹿，我们换个地方吧，这里不太合适。」
+      - 铃鹿依旧紧紧地抱着%YOU%，轻轻地点了点头。
+  - acc: 2
+    content: 「时间不早了哦，为了明天的训练，铃鹿要注意休息。」
+    lines:
+      - if: #TODO: 拒绝成功
+        lines:
+          - 听到%YOU%拒绝的话语，铃鹿马上松开了%YOU%，并且轻轻地捶了%YOU%的胸口一拳。
+          - color: %COLOR%
+            content:
+              - fontSize: bold
+                content: 无声铃鹿
+              - 「%CALLNAME%真是不解风情……」
+          - 说完后，铃鹿轻哼一声，转身离开了。
+          - %YOU%挠了挠后脑勺，赶紧追了上去。
+      - if: d.check === 2
+        lines:
+          - 听到%YOU%拒绝的话语，铃鹿反而抱得更紧了。
+          - color: %COLOR%
+            content:
+              - fontSize: bold
+                content: 无声铃鹿
+              - 「今天可没那么容易让%CALLNAME%逃走呢……」
+
 talk:
   # CFLAGNAME:40 = 干劲
   - if: era.get('cflag:2:40') === 2
@@ -369,6 +409,32 @@ o_s_arcade:
             content: %CHARA%
           - 「%CALLNAME%，我想要那个玩偶，帮我夹一下好不好嘛～」
 
+o_s_drawing:
+  - 商店街在举办抽奖活动，%YOU%看到铃鹿似乎有些感兴趣的样子，便将之前得到的一张抽奖券递给%SEX%。
+  - 铃鹿小声谢过%YOU%，之后便有些兴奋地凑上前去。
+  - random: true
+    lines:
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: 无声铃鹿
+          - 「呵呵，奖品是好多胡萝卜呢。」
+      - 铃鹿笑眯眯地把手中的签展开给%YOU%看。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: 无声铃鹿
+          - 「给%CALLNAME%一点，给小特一点……」
+      - 铃鹿的心情似乎很好的样子。
+  - random: true
+    lines:
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: 无声铃鹿
+          - 「……呜，抽到了安慰奖，是一包纸巾……」
+      - 铃鹿略显失落地收好了奖品。
+
 o_s_ktv:
   - %YOU%带着 %CHARA% 来到了卡拉OK。
   - 在随便唱了几句后，%YOU%颇有些不好意思地把麦克风递给一旁微笑等待的铃鹿 。
@@ -557,6 +623,29 @@ office_study:
             content: %CHARA%
           - 「那么接下来就拜托%CALLNAME%了。」
 
+office_prepare:
+  - random: true
+    lines:
+      - color: %COLOR%
+        content:
+          - fontSize: bold
+            content: 无声铃鹿
+          - 「嗯，这次也会顺利拿下胜利的。」
+  - random: true
+    lines:
+      - color: %COLOR%
+        content:
+          - fontSize: bold
+            content: 无声铃鹿
+          - 「请放心吧，我会把胜利带回来给%CALLNAME%的。」
+  - random: true
+    lines:
+      - color: %COLOR%
+        content:
+          - fontSize: bold
+            content: 无声铃鹿
+          - 「最前面的景色……不会让给任何人。」
+
 office_rest:
   - random: true
     lines:
@@ -629,3 +718,147 @@ office_game:
             content: %CHARA%
           - 「通关啦，%CALLNAME%真是太厉害了。」
       - 面对铃鹿真诚的夸奖，%YOU%反而有些不好意思。
+
+valentine:
+  - 一日，%YOU%正在自己的办公桌前写着什么，突然听到训练员室的门被敲响了。
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「%CALLNAME%，您在吗？」
+  - 是铃鹿的声音。
+  - %YOU%站起身来，为铃鹿打开了门。
+  - acc: 1
+    content: 「铃鹿，有什么事吗？」
+  - 铃鹿双手背在身后，看到%YOU%迷惑不解的样子，嘴角微微上抬。
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「%CALLNAME%，情人节快乐哦～」
+  - 紧接着，铃鹿从身后拿出来了一个便当盒。
+  - 铃鹿慢慢地打开包装，两个制作精美的草莓大福就出现在了%YOU% 的眼前。
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「因为不知道%CALLNAME%喜欢什么样子的甜品，于是最后做了我最喜欢的草莓大福，希望%CALLNAME%喜欢！」
+  - %YOU%过了好一会才意识到今天乃是情人节。
+  - 铃鹿看到%YOU%愣神的样子，笑得更开心了。%SEX%强行把草莓大福塞到了%YOU%的手里。
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「%CALLNAME%请就在这里享用吧，我也想听听您对我手艺的评价呢。」
+  - 说完，铃鹿便自顾自地搬了把椅子过来坐下，歪着头看着%YOU%。
+  - acc: 1
+    content: 「那么，谢谢铃鹿啦。」
+  - 被自己的担当%UMA%盯着，似乎感觉不是很妙，因此%YOU%决定顺从地吃掉铃鹿带来的甜品。
+  - 结果，在连自己都没注意到的情况下，迅速解决了其中一个草莓大福。
+  - %YOU%下意识想要伸手去拿第二个的时候才意识到。
+  - 没想到自家担当擅长奔跑，在甜品制作方面也有相当不错的实力。
+  - %YOU%看了看旁边撑着下巴看着%YOU%出神的铃鹿，又看了看眼前的另外一个草莓大福，决定——
+  - acc: 1
+    content: 「铃鹿也来尝一下自己的手艺吧？」
+    lines:
+      - 果然甜品还是分享着吃好一点。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「诶？不用担心我的啦，我做出来就是送给%CALLNAME%的啦。」
+      - 铃鹿有些急切地推辞着。
+      - acc: 1
+        content: 「来，铃鹿，张嘴～」
+      - %YOU%没有多说什么，而是拿起草莓大福，慢慢向着铃鹿靠了过去。
+      - 铃鹿见躲不开，只得微微张嘴，在%YOU%递过去的草莓大福上咬了一口。
+      - acc: 1
+        content: 「怎么样，铃鹿？自己的手艺果然棒极了吧。」
+      - 铃鹿把头扭到一边去故意不理%YOU%。
+      - 见状，%YOU%拿着草莓大福绕了个弯，仍旧递到了铃鹿身前。
+      - 就这样，%YOU%与铃鹿嬉闹许久，最终还是让%SEX%吃掉了一整个草莓大福。
+  - acc: 2
+    content: 太好吃了，再吃一口。
+    lines:
+      - 铃鹿的甜品让%YOU%有些欲罢不能，因此%YOU%决定将铃鹿送给%YOU%的第二个草莓大福也吃掉。
+      - 果然，第一口便让%YOU%感觉棒极了。
+      - 于是，第二个草莓大福也没有存活太久，干净利落地进了%YOU%的肚子。
+      - 哪怕是连续吃掉了两个草莓大福，%YOU%仍旧有些没吃够，便随意地将目光投向一旁的铃鹿。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「呵呵，%CALLNAME%的吃相也是很可爱呢。」
+      - 铃鹿察觉到了%YOU%的目光，于是微笑着说道。
+      - %YOU%有些不好意思地笑着，明明自己平时不会露出这种吃相来的。
+  - %YOU%收拾好便当盒，把它还给铃鹿。
+  - acc: 1
+    content: 「铃鹿的手艺真是太棒了，之前还不知道呢。」
+  - %YOU%意犹未尽地看着铃鹿。
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「%CALLNAME%不要用那种饥饿的眼神盯着我啦，我可不是草莓大福！」
+  - 铃鹿佯装生气，鼓了鼓腮帮。
+  - 「我的意思是说，铃鹿这么好的手艺，如果谁能有幸跟铃鹿生活在一起，肯定会很幸福吧。」
+  - %YOU%与铃鹿开着玩笑，却发现铃鹿的脸越来越红。
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「%CALLNAME%不许开这种玩笑！再这样我可真的要生气了！」
+  - 又一次见到了铃鹿娇羞的样子，不过代价是%YOU%哄了铃鹿好久才哄好了%SEX%。
+
+halloween:
+  - 今天是万圣节，妖魔鬼怪的节日。
+  - 在来训练员室的路上，%YOU%见到了许多奇形怪状的生物，其中有些还差点吓了%YOU%一跳。
+  - 不过最终%YOU%还是平安来到了训练员室，开始制定下一步的训练计划。
+  - 说是制定计划，其实%YOU%早就开始心不在焉了。
+  - 在%YOU%的抽屉中，有一袋特意为某位%UMA%准备的精装糖果。现在只需要等%SEX%送货上门……
+  - 突然，训练员室的门被敲响了。%YOU%吓了一跳，差点把笔掉到地上。
+  - %YOU%调整了一下呼吸，颇为期待地走上前去，大力拉开了训练员室的门——
+  - acc: 1
+    content: 「请进，铃……」
+  - 但门外不是铃鹿。
+  - content:
+      - fontWeight: bold
+        content: %UMA%A
+      - 「不给糖，就捣蛋！」
+  - 是一位可爱的扮成某种怪物的%UMA%。
+  - %YOU%愣了一下，随后如梦初醒地换上了一副微笑，从自己的抽屉中取了一些早就准备好的散装糖果。
+  - %YOU%把为数不少的糖果装进%UMA%的篮子里，看着%SEX%非常惊喜地向%YOU%鞠躬然后跑去敲另一位训练员的门。
+  - %YOU%长长地吐了一口气，回到了自己的座位上去。
+  - 很快，敲门声再次响起。
+  - content:
+      - fontWeight: bold
+        content: %UMA%B
+      - 「不给糖，就捣蛋！」
+  - 依旧不是铃鹿，%YOU%在将糖果送给%UMA%的时候颇有些失望地想着。
+  - 慢慢地，万圣节之夜就要过去了，%YOU%的办公室早被数拨%UMA%造访过了，但%YOU%最期待的那位却还没有出现。
+  - %YOU%看着墙上的表时针逐渐接近12，叹了口气，准备收拾一下离开训练员室。
+  - 而就在这个时候，训练员室的门再次被敲响了。
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「%CALLNAME%，您在……呜，不应该直接喊的……」
+  - %YOU%心中一喜，赶紧去打开了门。
+  - 门外赫然便是扮成魔法师的铃鹿。
+  - 看到铃鹿的脸色有些红润，呼吸有些粗重，%YOU%无奈地摇了摇头。
+  - acc: 1
+    content: 「让我猜猜，铃鹿你又去跑步了吧？」
+  - 铃鹿愣了一下，脸色更红了。
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「%CALLNAME%对不起，我本来是想直接跑过来的，但是不知不觉就跑过头了……」
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「啊对了，那个，不给糖就捣蛋……？」
+  - %CHARA% 这才想起了主要目的。
+  - %YOU%有些哭笑不得地打开抽屉，把那一袋精装糖果拿了出来，递给铃鹿。
+  - 今年的万圣节也在一种奇异的氛围内度过了。

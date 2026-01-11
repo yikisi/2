@@ -68,7 +68,7 @@ const { max_chara_id } = require('#/data/other-const');
 module.exports = class extends StrangeDayEvents {
   get dict() {
     return {
-      YOU: get('callname:0:-1'),
+      YOU: get('callname:0:-2'),
       ...(get('flag:角色性别') === 1
         ? { UMA: '马郎', SHE: '他' }
         : { UMA: '马娘', SHE: '她' }),

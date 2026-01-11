@@ -137,8 +137,10 @@ class CustomizedCheck {
    * 回合开始时进行检查
    */
   check_next_week() {
-    if (this.id > 0 && era.get(`cflag:${this.id}:种族`) > 0) {
-      const edu_weeks = era.get(`cflag:${this.id}:育成回合计时`);
+    // CFLAGNAME:1 = 种族
+    if (this.id > 0 && era.get(`cflag:${this.id}:1`) > 0) {
+      // CFLAGNAME:48 = 育成回合计时
+      const edu_weeks = era.get(`cflag:${this.id}:48`);
       if (edu_weeks < 3 * 48) {
         if (edu_weeks === 47 + 29 || edu_weeks === 95 + 29) {
           add_event(

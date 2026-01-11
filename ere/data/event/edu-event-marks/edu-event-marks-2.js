@@ -5,6 +5,11 @@ class SuzukaEduMarks extends EduEventMarks {
   max_wins;
   // 逃马连胜
   wins;
+  // 2-失意，1-难过，4-严重腿伤，3-陈旧腿伤
+  debuff;
+
+  race_wear;
+  choice;
 
   constructor() {
     super(2);
