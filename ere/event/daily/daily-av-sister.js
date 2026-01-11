@@ -1,10 +1,3 @@
-/**
- * @file 爱慕织姬产驹，爱慕彦星的日常口上（临时）
- * 设定是织姬的第一个产驹是妹妹<br>
- * 示例用的日常事件口上<br>
- * 欢迎创作替代
- * @author 黑奴队长（临时）
- */
 const era = require('#/era-electron');
 
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
@@ -13,26 +6,25 @@ const DailyChild = require('#/event/daily/daily-child');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const { i18n } = require('#/i18n/selector');
+
 module.exports = class extends DailyChild {
   select() {
     if (
       !sys_check_awake(0) ||
       !sys_check_awake(this.id) ||
-      era.get(`cflag:${this.id}:成长阶段`) < 1
+      // CFLAGNAME:65 = 成长阶段
+      era.get(`cflag:${this.id}:65`) < 1
     ) {
       return super.select();
     }
-    const father = era.get(`cflag:${this.id}:父方角色`),
-      mother = era.get(`cflag:${this.id}:母方角色`);
-    if (father && mother) {
+    // CFLAGNAME:15 = 父方角色
+    // CFLAGNAME:16 = 母方角色
+    const father = era.get(`cflag:${this.id}:15`);
+    const mother = era.get(`cflag:${this.id}:16`);
+    if (father > 0 && mother > 0) {
       return super.select();
     }
-    get_chara_talk(this.id).say([
-      '今天也请多关照啦，',
-      era.get('cflag:0:性别') === 1 ? '哥哥' : '姐姐',
-      '……啊，应该是这个，',
-      father > 0 ? '妈妈' : '爸爸',
-      '～❤️',
-    ]);
+    i18n().kojo.av_sister.daily.select(get_chara_talk(this.id), !father);
   }
 };

@@ -7,6 +7,7 @@ class I18nKojo {
   50 = new (require('#/i18n/zh-CN/kojo/1050/entry'))();
   60 = new (require('#/i18n/zh-CN/kojo/1060/entry'))();
   74 = new (require('#/i18n/zh-CN/kojo/1074/entry'))();
+  av_sister = new (require('#/i18n/zh-CN/kojo/av-sister/entry'))();
 }
 
 module.exports = I18nKojo;
