@@ -99,6 +99,10 @@ module.exports = class extends CustomizedRecruit {
         EventMarks.get(0).sub(event_hooks.school_atrium);
     }
     if (era.get(`cflag:${this.id}:66`) === recruit_flags.yes) {
+      add_event(
+        event_hooks.school_atrium,
+        new EventObject(this.id, cb_enum.edu).set_arg('at_my_side'),
+      );
       await this.recruit_end();
     }
     return true;

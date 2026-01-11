@@ -454,7 +454,7 @@ rec2:
           content:
             - fontWeight: bold
               content: 目白光明
-            - 「训练员」
+            - 「训练员～」
         - color: %COLOR%
           content:
             - fontWeight: bold
