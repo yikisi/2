@@ -464,7 +464,6 @@ out_church:
             content: %CHARA%
           - 「今天的运势很不错呢，%CALLNAME%！」
   - if: "!d.dice"
-    random: true
     lines:
       - 翻开纸张却看见了不吉的字句，%CHARA%立刻停下了继续翻开的动作。
       - 在 %YOU% 没看见的角度里，轻轻折起了纸，收进口袋里。

@@ -82,13 +82,17 @@ module.exports = class extends CustomizedLove {
       await print_title_with_kojo(kojo, '99_1', bright, this.#dict);
       add_event(event_hooks.week_start, event_object);
     } else if (
-      (await print_title_with_kojo(kojo, '99_2', bright, this.#dict))['sex'] ===
-      2
+      (
+        await print_title_with_kojo(kojo, '99_2', bright, {
+          ...this.#dict,
+          CHARA_FULL: bright.name + bright.adult_sex_title,
+        })
+      )['sex'] === 2
     ) {
       begin_and_init_ero(0, this.id);
       await print_ero_page(this.id, true);
       await end_ero_and_show_result(true);
-      await kojo['99_sex']({ ...this.#dict, MADAM: bright.adult_sex_title });
+      await kojo['99_sex'](this.#dict);
       get_custom_mec(this.id).set_callname();
       await sys_love_uma_in_event(this.id);
     }

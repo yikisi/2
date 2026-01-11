@@ -540,9 +540,9 @@
         - fontWeight: bold
           content: %CHARA%
         - 「哼～哼～」
-    - 拥抱着%YOU%的%CHARA%，轻轻的哼起了小曲。
+    - 拥抱着%YOU%的%CHARA%，轻轻地哼起了小曲。
     - acc: 1
-      content: 「那个，%CHARA%%MADAM%？」
+      content: 「那个，%CHARA_FULL%？」
     - 被拥抱的开始出汗的%YOU%，有点无奈的提起了她的名字。
     - color: %COLOR%
       content:
@@ -1041,7 +1041,7 @@ all_along:
     - acc: 1
       content: 「真是的，那有什么味道……」
     - acc: 2
-      content: 「房间里努力有味道……」
+      content: 「房间里哪里有味道……」
     - 因为突如其来的打断，疲劳感爬上了 %YOU% 的肩膀。
     - 既然已经累了，那就休息一下好了。
     - 这样想着的 %YOU% 站起身，走到沙发旁坐下，摊在沙发上。
