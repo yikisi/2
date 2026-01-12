@@ -138,6 +138,22 @@ module.exports = {
       ]);
     }
   },
+  update_kiss_exp(date, aid, did, i_def_awake = true) {
+    if (!era.get(`cstr:${aid}:初吻经历`)) {
+      era.set(`cstr:${aid}:初吻经历`, [`初吻在 ${date} 献给了 `, { c: did }]);
+    }
+    if (!era.get(`cstr:${did}:初吻经历`)) {
+      if (i_def_awake) {
+        era.set(`cstr:${did}:初吻经历`, [`初吻在 ${date} 献给了 `, { c: aid }]);
+      } else if (!era.get(`cstr:${did}:无自觉初吻经历`)) {
+        era.set(`cstr:${did}:无自觉初吻经历`, [
+          `实际上，初吻在 ${date} 就已被 `,
+          { c: aid },
+          ' 夺走',
+        ]);
+      }
+    }
+  },
   /**
    * @param {string} date
    * @param {number} cid

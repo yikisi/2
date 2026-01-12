@@ -26,6 +26,7 @@ let current = new Date().getTime();
 
 // GENERATED START
 cons_dict[0] = require('#/event/ero/ero-0');
+cons_dict[2] = require('#/event/ero/ero-2');
 cons_dict[3] = require('#/event/ero/ero-3');
 cons_dict[7] = require('#/event/ero/ero-7');
 cons_dict[9] = require('#/event/ero/ero-9');

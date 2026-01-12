@@ -33,6 +33,7 @@ const select_action_around_river = require('#/event/daily/snippets/select-action
 const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
 const select_action_in_station = require('#/event/daily/snippets/select-action-in-station');
 const generate_dictionary = require('#/event/snippets/generate-dictionary');
+const print_ending_name = require('#/event/snippets/print-ending-name');
 const print_event_name = require('#/event/snippets/print-event-name');
 const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
@@ -64,61 +65,37 @@ class CustomizedDaily {
 
   /** @author 雞雞 */
   async basement_end() {
-    const chara = get_chara_talk(this.id),
-      me = get_chara_talk(0);
-    await era.printAndWait('在特雷森，一个任何探测器都检测不到的地下室中……', {
-      offset: 6,
-      width: 12,
-    });
-    await era.printAndWait(
-      [
-        me.get_colored_name(),
-        ' 拼命地想要挣脱绑住手脚的绳子，却只勒得自己生疼。',
-      ],
-      {
-        offset: 6,
-        width: 12,
-      },
-    );
-    await era.printAndWait(
-      [
-        chara.get_colored_name(),
-        ' 坐到床边对 ',
-        me.get_colored_name(),
-        ' 露出嫣然一笑，并且温柔地呵护着 ',
-        me.get_colored_name(),
-      ],
-      {
-        offset: 6,
-        width: 12,
-      },
-    );
-    await era.printAndWait(
-      ['但 ', me.get_colored_name(), ' 的心中唯有对未知未来的深邃恐惧……'],
-      {
-        offset: 6,
-        width: 12,
-      },
-    );
-    await era.printAndWait(
-      [
-        '被 ',
-        chara.get_colored_name(),
-        ' 的爱意所囚禁，',
-        me.get_colored_name(),
-        ' 迎来了结局……',
-      ],
-      {
-        offset: 6,
-        width: 12,
-      },
-    );
-    await print_event_name(
-      [{ content: '情爱囹圄', color: buff_colors[3] }],
-      chara,
-      undefined,
-      6,
-    );
+    const chara = get_chara_talk(this.id);
+    const me = get_chara_talk(0);
+    era.setOffset(6);
+    era.setWidth(12);
+    await era.printAndWait('在特雷森，一个任何探测器都检测不到的地下室中……');
+    await era.printAndWait([
+      me.get_colored_name(),
+      ' 拼命地想要挣脱绑住手脚的绳子，却只勒得自己生疼。',
+    ]);
+    await era.printAndWait([
+      chara.get_colored_name(),
+      ' 坐到床边对 ',
+      me.get_colored_name(),
+      ' 露出嫣然一笑，并且温柔地呵护着 ',
+      me.get_colored_name(),
+    ]);
+    await era.printAndWait([
+      '但 ',
+      me.get_colored_name(),
+      ' 的心中唯有对未知未来的深邃恐惧……',
+    ]);
+    await era.printAndWait([
+      '被 ',
+      chara.get_colored_name(),
+      ' 的爱意所囚禁，',
+      me.get_colored_name(),
+      ' 迎来了结局……',
+    ]);
+    era.setWidth(24);
+    era.setOffset(0);
+    await print_ending_name('情爱囹圄', chara);
   }
 
   /** @author 黑奴队长 */
@@ -231,7 +208,7 @@ class CustomizedDaily {
       awake = 2 * sys_check_awake(this.id) + sys_check_awake(0);
     if (awake === 3) {
       const check = get_custom_check(this.id).is_want_make_love();
-      if (check) {
+      if (check > 0) {
         if (
           await select_yes_or_no(
             [
@@ -753,53 +730,33 @@ class CustomizedDaily {
   /** @author 雞雞 */
   async slave_end() {
     const me = get_chara_talk(0);
-    await era.printAndWait(
-      [
-        '被金钱腐朽的 ',
-        me.get_colored_name(),
-        ' 踏上了不能选择的道路——抛弃自尊与自己的学生借钱……',
-      ],
-      {
-        offset: 6,
-        width: 12,
-      },
-    );
-    await era.printAndWait('然而所有命运的馈赠，都在背地里标好了价码。', {
-      offset: 6,
-      width: 12,
-    });
-    await era.printAndWait(
-      [
-        me.get_colored_name(),
-        ' 的借款，在如雪球一般的利滚利下终于超越了 ',
-        me.get_colored_name(),
-        ' 所能承受之重。',
-      ],
-      {
-        offset: 6,
-        width: 12,
-      },
-    );
-    await era.printAndWait(
-      ['接下来便是 ', me.get_colored_name(), ' 偿还代价的时候了……'],
-      {
-        offset: 6,
-        width: 12,
-      },
-    );
-    await era.printAndWait(
-      ['因被金钱关系所囚，', me.get_colored_name(), ' 迎来了结局……'],
-      {
-        offset: 6,
-        width: 12,
-      },
-    );
-    await print_event_name(
-      [{ content: '金钱奴隶', color: buff_colors[3] }],
-      get_chara_talk(this.id),
-      undefined,
-      6,
-    );
+    era.setOffset(6);
+    era.setWidth(12);
+    await era.printAndWait([
+      '被金钱腐朽的 ',
+      me.get_colored_name(),
+      ' 踏上了不能选择的道路——抛弃自尊与自己的学生借钱……',
+    ]);
+    await era.printAndWait('然而所有命运的馈赠，都在背地里标好了价码。');
+    await era.printAndWait([
+      me.get_colored_name(),
+      ' 的借款，在如雪球一般的利滚利下终于超越了 ',
+      me.get_colored_name(),
+      ' 所能承受之重。',
+    ]);
+    await era.printAndWait([
+      '接下来便是 ',
+      me.get_colored_name(),
+      ' 偿还代价的时候了……',
+    ]);
+    await era.printAndWait([
+      '因被金钱关系所囚，',
+      me.get_colored_name(),
+      ' 迎来了结局……',
+    ]);
+    era.setWidth(24);
+    era.setOffset(0);
+    await print_ending_name('金钱奴隶', get_chara_talk(this.id));
   }
 
   /**

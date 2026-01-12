@@ -114,10 +114,8 @@ async function page_chairman_office() {
             name: '「约 会！一起出去走走吧！」',
           },
           {
+            handle: async () => (nothing = false),
             name: `「庆 贺！${celebration} 快乐！」`,
-            async handle() {
-              nothing = false;
-            },
           },
           {
             async handle() {
@@ -308,6 +306,7 @@ async function page_chairman_office() {
             },
             name: '「再 会！走了走了！」',
           },
+          () => (nothing = false),
         );
         break;
       case 306:

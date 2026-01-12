@@ -25,6 +25,7 @@ const print_fail_info_in_train = require('#/event/edu/common/print-fail-info-in-
 const kojo = require('#/event/edu/edu-common.kojo');
 const { check_sub_slavery } = require('#/event/snippets/check-slavery');
 const generate_dictionary = require('#/event/snippets/generate-dictionary');
+const print_ending_name = require('#/event/snippets/print-ending-name');
 const print_event_name = require('#/event/snippets/print-event-name');
 const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
@@ -291,82 +292,50 @@ class CustomizedEdu extends ICustomizedEdu {
 
   /** @author 雞雞 */
   async crazy_fan_end() {
-    const chara = get_chara_talk(this.id),
-      me = get_chara_talk(0);
+    const chara = get_chara_talk(this.id);
+    const me = get_chara_talk(0);
+    era.setOffset(6);
+    era.setWidth(12);
     if (era.get(`relation:${this.id}:0`) < 0) {
-      await era.printAndWait(
-        [
-          '不管是参赛还是接受采访，',
-          me.get_colored_name(),
-          ' 和担当的紧张关系有目共睹，质疑这种紧张关系影响了担当发展的声音一直没有停息。校方对 ',
-          me.get_couple_title(),
-          ' 的组合开始失去耐心……但有些人比他们更缺乏耐性。',
-        ],
-        {
-          offset: 6,
-          width: 12,
-        },
-      );
+      await era.printAndWait([
+        '不管是参赛还是接受采访，',
+        me.get_colored_name(),
+        ' 和担当的紧张关系有目共睹，质疑这种紧张关系影响了担当发展的声音一直没有停息。校方对 ',
+        me.get_couple_title(),
+        ' 的组合开始失去耐心……但有些人比他们更缺乏耐性。',
+      ]);
     } else {
-      await era.printAndWait(
-        [
-          '或许是 ',
-          me.get_colored_name(),
-          ' 过于懈怠，又或许是负责',
-          chara.get_uma_sex_title(),
-          '的天赋不足，胜利与 ',
-          me.get_couple_title(),
-          ' 始终遥遥无期。校方对 ',
-          me.get_couple_title(),
-          ' 的组合开始失去耐心……但有些人比他们更缺乏耐性。',
-        ],
-        {
-          offset: 6,
-          width: 12,
-        },
-      );
+      await era.printAndWait([
+        '或许是 ',
+        me.get_colored_name(),
+        ' 过于懈怠，又或许是负责',
+        chara.get_uma_sex_title(),
+        '的天赋不足，胜利与 ',
+        me.get_couple_title(),
+        ' 始终遥遥无期。校方对 ',
+        me.get_couple_title(),
+        ' 的组合开始失去耐心……但有些人比他们更缺乏耐性。',
+      ]);
     }
-    await era.printAndWait(
-      [
-        me.get_colored_name(),
-        ' 手上提着要送给 ',
-        chara.get_colored_name(),
-        ' 的蜂蜜蛋糕独自走在大雨的路上，只听身后传来一阵急促的脚步声，然后便是后腰钻心的痛楚。',
-      ],
-      {
-        offset: 6,
-        width: 12,
-      },
-    );
-    await era.printAndWait(
-      [
-        me.get_colored_name(),
-        ' 被推倒在地，身后来人不断刺向你的背部，直到 ',
-        me.get_colored_name(),
-        ' 一动也不动。',
-      ],
-      {
-        offset: 6,
-        width: 12,
-      },
-    );
+    await era.printAndWait([
+      me.get_colored_name(),
+      ' 手上提着要送给 ',
+      chara.get_colored_name(),
+      ' 的蜂蜜蛋糕独自走在大雨的路上，只听身后传来一阵急促的脚步声，然后便是后腰钻心的痛楚。',
+    ]);
+    await era.printAndWait([
+      me.get_colored_name(),
+      ' 被推倒在地，身后来人不断刺向你的背部，直到 ',
+      me.get_colored_name(),
+      ' 一动也不动。',
+    ]);
     await era.printAndWait(
       '包裹着蛋糕盒的塑料袋被雨点猛烈地敲打着、敲打着、敲打着……',
-      {
-        offset: 6,
-        width: 12,
-      },
     );
-    await era.printAndWait('被愤怒的粉丝报复，迎来了结局……', {
-      offset: 6,
-      width: 12,
-    });
-    await print_event_name(
-      [{ content: '粉丝袭击', color: buff_colors[3] }],
-      chara,
-      undefined,
-      6,
-    );
+    await era.printAndWait('被愤怒的粉丝报复，迎来了结局……');
+    era.setWidth(24);
+    era.setOffset(0);
+    await print_ending_name('粉丝袭击', chara);
   }
 
   /**
