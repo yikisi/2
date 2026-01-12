@@ -142,7 +142,7 @@ good_night_sex:
   - acc: 2
     content: 「时间不早了哦，为了明天的训练，铃鹿要注意休息。」
     lines:
-      - if: #TODO: 拒绝成功
+      - if: d.check !== 2
         lines:
           - 听到%YOU%拒绝的话语，铃鹿马上松开了%YOU%，并且轻轻地捶了%YOU%的胸口一拳。
           - color: %COLOR%

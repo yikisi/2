@@ -1885,9 +1885,8 @@ choice:
         - acc: 1
           content: 「铃鹿，请务必……」
         - %YOU%呆呆地看着铃鹿远去的背影，喃喃道。
-    - if: era.get('love:2') < 90
-      acc: 2
-      content: 「不，铃鹿。」 # 好感度-100
+    - acc: 2
+      content: 「不，铃鹿。」（动之以理） # 好感度-100
       lines:
         - 思虑许久之后，%YOU%还是决定拒绝铃鹿的请求。
         - color: %COLOR%
@@ -1915,8 +1914,8 @@ choice:
         - %YOU%明白，自己强硬的作为已经伤透了%SEX%的心。
         - 但至少这样，%SEX%不会有任何危险……
     - if: era.get('love:2') >= 90
-      acc: 2
-      content: 抱住%SEX%。 # 好感度-50
+      acc: 3
+      content: 抱住%SEX%。（晓之以情） # 好感度-50
       lines:
         - %YOU%什么也没说，而是上前一步，将眼前的铃鹿拥入怀中。
         - color: %COLOR%

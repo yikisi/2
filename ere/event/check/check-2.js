@@ -206,7 +206,7 @@ module.exports = class extends CustomizedCheck {
       .forEach(([race, year, rank, check]) => {
         if (
           check > 0 &&
-          (race !== race_enum.tenn_sho || edu_marks.choice === 1)
+          (race !== race_enum.tenn_sho || edu_marks.choice <= 1)
         ) {
           buffer.push(check_aim_and_get_entry(races, race, year, rank));
         }

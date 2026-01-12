@@ -272,9 +272,9 @@ module.exports = class extends CustomizedEdu {
     edu_marks.choice = (
       await print_title_with_kojo(kojo, 'choice', suzuka, dict)
     )['choice'];
-    if (edu_marks.choice === 2) {
+    if (edu_marks.choice >= 2) {
       let relation = -100;
-      if (era.get('love:2') >= 90) {
+      if (edu_marks.choice === 3) {
         relation = -50;
       }
       if (all_reward_in_event(this.id, { relation })) {

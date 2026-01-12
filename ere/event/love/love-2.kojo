@@ -42,7 +42,8 @@
     - 反正今天的训练计划已经圆满完成了，剩下的时间就归铃鹿自由支配了……
     - %YOU%这么想着，有些无奈地转身离去。
     - divider: true
-      content: 晚上，%UMA%宿舍。
+      content: 晚上，宿舍
+      position: left
     - color: %COLOR%
       content:
         - fontWeight: bold
