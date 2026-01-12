@@ -4,6 +4,7 @@ const {
   begin_and_init_ero,
   end_ero_and_show_result,
 } = require('#/system/ero/sys-prepare-ero');
+const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
 const print_ero_page = require('#/page/page-ero');
 
@@ -24,7 +25,6 @@ const { location_enum } = require('#/data/locations');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
 const { attr_enum, fumble_result } = require('#/data/train-const');
-const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
 module.exports = class extends CustomizedEdu {
   get #dict() {
@@ -55,6 +55,9 @@ module.exports = class extends CustomizedEdu {
   /** @param {CharaTalk} suzuka */
   async begin_race_miss(suzuka) {
     await print_title_with_kojo(kojo, 'begin_race_miss', suzuka, this.#dict);
+    if (all_reward_in_event(this.id, { relation: -20 })) {
+      await era.waitAnyKey();
+    }
   }
 
   /** @param {CharaTalk} suzuka */
@@ -65,6 +68,9 @@ module.exports = class extends CustomizedEdu {
       suzuka,
       generate_dictionary(this.id, { call: !0, uma: !0 }),
     );
+    if (all_reward_in_event(this.id, { relation: 10 })) {
+      await era.waitAnyKey();
+    }
     // CFLAGNAME:56 = 节日事件标记
     era.set(`cflag:${this.id}:56`, 0);
   }
@@ -81,7 +87,7 @@ module.exports = class extends CustomizedEdu {
     } else {
       attr[attr_enum.toughness] = 20;
     }
-    if (all_reward_in_event(this.id, { attr })) {
+    if (all_reward_in_event(this.id, { attr, relation: 10 })) {
       await era.waitAnyKey();
     }
   }
@@ -94,7 +100,7 @@ module.exports = class extends CustomizedEdu {
       suzuka,
       generate_dictionary(this.id, { call: !0, uma: !0 }),
     );
-    if (all_reward_in_event(this.id, { motivation: 1 })) {
+    if (all_reward_in_event(this.id, { motivation: 1, relation: 10 })) {
       await era.waitAnyKey();
     }
   }
@@ -138,7 +144,7 @@ module.exports = class extends CustomizedEdu {
       // CFLAGNAME:56 = 节日事件标记
       era.set(`cflag:${this.id}:56`, 0);
     }
-    if (all_reward_in_event(this.id, { motivation })) {
+    if (all_reward_in_event(this.id, { motivation, relation: -5 })) {
       await era.waitAnyKey();
     }
     return ret;
@@ -177,7 +183,7 @@ module.exports = class extends CustomizedEdu {
         hoch_sho,
       });
     }
-    if (all_reward_in_event(this.id, { motivation })) {
+    if (all_reward_in_event(this.id, { motivation, relation: 10 })) {
       await era.waitAnyKey();
     }
   }
@@ -185,6 +191,9 @@ module.exports = class extends CustomizedEdu {
   /** @param {CharaTalk} suzuka */
   async kobe_hai_lose(suzuka) {
     await print_title_with_kojo(kojo, 'kobe_hai_lose', suzuka, this.#dict);
+    if (all_reward_in_event(this.id, { relation: -20 })) {
+      await era.waitAnyKey();
+    }
   }
 
   /** @param {CharaTalk} suzuka */
@@ -195,6 +204,9 @@ module.exports = class extends CustomizedEdu {
       suzuka,
       generate_dictionary(this.id, { call: !0, uma: !0 }),
     );
+    if (all_reward_in_event(this.id, { relation: 10 })) {
+      await era.waitAnyKey();
+    }
   }
 
   /** @param {CharaTalk} suzuka */
@@ -208,6 +220,9 @@ module.exports = class extends CustomizedEdu {
     // CFLAGNAME:56 = 节日事件标记
     era.set(`cflag:${this.id}:56`, 0);
     new SuzukaEduMarks().debuff = 0;
+    if (all_reward_in_event(this.id, { relation: 10 })) {
+      await era.waitAnyKey();
+    }
   }
 
   /** @param {CharaTalk} suzuka */
@@ -216,6 +231,9 @@ module.exports = class extends CustomizedEdu {
       ...this.#dict,
       T_NAME: get_chara_talk(301).name,
     });
+    if (all_reward_in_event(this.id, { relation: -20 })) {
+      await era.waitAnyKey();
+    }
   }
 
   /** @param {CharaTalk} suzuka */
@@ -226,6 +244,9 @@ module.exports = class extends CustomizedEdu {
       suzuka,
       generate_dictionary(this.id, { call: !0, uma: !0 }),
     );
+    if (all_reward_in_event(this.id, { relation: 10 })) {
+      await era.waitAnyKey();
+    }
   }
 
   /**
@@ -251,6 +272,9 @@ module.exports = class extends CustomizedEdu {
       suzuka,
       generate_dictionary(this.id, { call: !0, uma: !0 }),
     );
+    if (all_reward_in_event(this.id, { relation: 10 })) {
+      await era.waitAnyKey();
+    }
   }
 
   /** @param {CharaTalk} suzuka */
@@ -312,22 +336,38 @@ module.exports = class extends CustomizedEdu {
       era.set('tflag:7', this.id);
       await print_ero_page(this.id, true);
       await end_ero_and_show_result(true);
+      if (all_reward_in_event(this.id, { relation: 5 })) {
+        await era.waitAnyKey();
+      }
+    } else {
+      if (all_reward_in_event(this.id, { relation: -20 })) {
+        await era.waitAnyKey();
+      }
     }
   }
 
   /** @param {CharaTalk} suzuka */
   async third_step_win(suzuka) {
     await print_title_with_kojo(kojo, 'third_step_win', suzuka, this.#dict);
+    if (all_reward_in_event(this.id, { relation: 10 })) {
+      await era.waitAnyKey();
+    }
   }
 
   /** @param {CharaTalk} suzuka */
   async third_step_lose(suzuka) {
     await print_title_with_kojo(kojo, 'third_step_lose', suzuka, this.#dict);
+    if (all_reward_in_event(this.id, { relation: -5 })) {
+      await era.waitAnyKey();
+    }
   }
 
   /** @param {CharaTalk} suzuka */
   async third_step_miss(suzuka) {
     await print_title_with_kojo(kojo, 'third_step_miss', suzuka, this.#dict);
+    if (all_reward_in_event(this.id, { relation: 5 })) {
+      await era.waitAnyKey();
+    }
   }
 
   /** @param {CharaTalk} suzuka */
@@ -345,6 +385,9 @@ module.exports = class extends CustomizedEdu {
     await print_title_with_kojo(kojo, 'christmas', suzuka, this.#dict);
     // CFLAGNAME:56 = 节日事件标记
     era.set(`cflag:${this.id}:56`, 0);
+    if (all_reward_in_event(this.id, { relation: 10 })) {
+      await era.waitAnyKey();
+    }
   }
 
   /** @param {CharaTalk} suzuka */
@@ -352,6 +395,9 @@ module.exports = class extends CustomizedEdu {
     await print_title_with_kojo(kojo, 'hope', suzuka, this.#dict);
     // CFLAGNAME:56 = 节日事件标记
     era.set(`cflag:${this.id}:56`, 0);
+    if (all_reward_in_event(this.id, { relation: 10 })) {
+      await era.waitAnyKey();
+    }
   }
 
   /** @param {CharaTalk} suzuka */
@@ -380,6 +426,9 @@ module.exports = class extends CustomizedEdu {
       edu_marks.debuff = 3;
     }
     await print_title_with_kojo(kojo, key, suzuka, dict);
+    if (all_reward_in_event(this.id, { relation: 10 })) {
+      await era.waitAnyKey();
+    }
   }
 
   async race_start(suzuka, me, callname, hook, extra) {
@@ -387,14 +436,15 @@ module.exports = class extends CustomizedEdu {
     const dict = generate_dictionary(this.id, { call: !0, uma: !0 });
     if (era.get(`cflag:${this.id}:48`) > 96) {
       if (extra.race === race_enum.takz_kin) {
-        // TODO
         const grass = get_chara_talk(11);
-        const groove = get_chara_talk(18);
         dict.G_COLOR = grass.color;
+        if (extra.contestants.findIndex((u) => u.index_chara === 11) !== -1) {
+          dict.G_NAME =
+            era.get('cflag:11:66') !== 1 ? grass.name : dict.UMA + 'G';
+        }
+        const groove = get_chara_talk(18);
         dict.A_COLOR = groove.color;
-        dict.G_NAME =
-          era.get('cflag:11:66') !== 1 ? grass.name : dict.UMA + 'G';
-        if (era.get('cflag:18:66') !== 1) {
+        if (extra.contestants.findIndex((u) => u.index_chara === 18) !== -1) {
           dict.A_NAME = groove.name;
           dict.CALL_18 = sys_get_callname(this.id, 18);
         } else {
@@ -452,9 +502,13 @@ module.exports = class extends CustomizedEdu {
             dict.G_COLOR = grass.color;
             dict.A_COLOR = groove.color;
             dict.G_NAME =
-              era.get('cflag:11:66') !== 1 ? grass.name : dict.UMA + 'G';
+              extra.contestants.findIndex((u) => u.index_chara === 11) !== -1
+                ? grass.name
+                : dict.UMA + 'G';
             dict.A_NAME =
-              era.get('cflag:18:66') !== 1 ? groove.name : dict.UMA + 'A';
+              extra.contestants.findIndex((u) => u.index_chara === 18) !== -1
+                ? groove.name
+                : dict.UMA + 'A';
             dict['11_CALL'] = sys_get_callname(11, this.id);
             key = extra.rank === 1 ? 'takz_kin_win' : 'takz_kin_3';
           } else {
@@ -483,8 +537,8 @@ module.exports = class extends CustomizedEdu {
   async crazy_fan_end() {
     const history = RaceHistory.get(this.id).get();
     if (
-      !check_aim_race(history, race_enum.takz_kin, 2) &&
-      !check_aim_race(history, race_enum.kink_sho, 2) &&
+      (!check_aim_race(history, race_enum.takz_kin, 2) ||
+        !check_aim_race(history, race_enum.kink_sho, 2)) &&
       new SuzukaEduMarks().debuff >= 3
     ) {
       await kojo['crazy_fan'](this.#dict);
