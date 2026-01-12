@@ -35,7 +35,7 @@ aim_races[get_aim_race_index(race_enum.mile_cha, 2)] = 2;
 
 module.exports = class extends CustomizedCheck {
   check_and_get_titles(aim_check) {
-    const races = new RaceHistory(this.id).get(),
+    const races = RaceHistory.get(this.id).get(),
       titles = [];
     if (
       check_aim_race(races, race_enum.oka_sho, 1, 1) &&
@@ -142,7 +142,6 @@ module.exports = class extends CustomizedCheck {
       }
     }
     if (
-      rec_status.round &&
       rec_status.flag === 5 &&
       era.get('flag:当前回合数') - rec_status.round >= 3
     ) {
@@ -150,7 +149,7 @@ module.exports = class extends CustomizedCheck {
         event_hooks.week_end,
         new EventObject(this.id, cb_enum.recruit),
       );
-      rec_status.round = 0;
+      rec_status.round = era.get('flag:当前回合数');
     } else if (edu_weeks < 3 * 48) {
       const edu_event_marks = new RubyEduMarks(),
         edu_event = new EventObject(this.id, cb_enum.edu),
@@ -251,7 +250,7 @@ module.exports = class extends CustomizedCheck {
     if (race === race_enum.eliz_cup) {
       if (edu_weeks < 96) {
         return -4;
-      } else if (!check_aim_race(new RaceHistory(85).get(), race, 1, 1)) {
+      } else if (!check_aim_race(RaceHistory.get(85).get(), race, 1, 1)) {
         return -4;
       }
     }
@@ -264,7 +263,7 @@ module.exports = class extends CustomizedCheck {
 
   get_edu_aims() {
     const buffer = [],
-      races = new RaceHistory(this.id).get();
+      races = RaceHistory.get(this.id).get();
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.hoch_rev, 1, 5));
     buffer.push(check_aim_and_get_entry(races, race_enum.oka_sho, 1, 5));

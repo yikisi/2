@@ -14,7 +14,7 @@ const temp_queue = {};
 const cb_enum = { daily: 0, edu: 0, recruit: 0, love: 0 };
 Object.keys(cb_enum).forEach((k, i) => (cb_enum[k] = i));
 
-/** 事件队列的初始化函数，必须在new game或者load game的时候调用 */
+/** 事件队列的初始化函数，必须在 new game 或者 load game 的时候调用 */
 function init() {
   queue = era.get('flag:事件队列');
   if (!queue) {
@@ -30,17 +30,17 @@ function init() {
 }
 
 /**
- * @param {function(EventObject):boolean} condition
+ * @param {function(EventObject):boolean} cb
  * @returns {Record<string,number>}
  */
-function filter_event_object(condition) {
+function filter_event_object(cb) {
   const ret_map = {};
   Object.keys(queue).forEach(
-    (stage_id) =>
-      (queue[stage_id] = (queue[stage_id] || []).filter((e) => {
-        const ret = condition(e);
+    (stage) =>
+      (queue[stage] = (queue[stage] || []).filter((e) => {
+        const ret = cb(e);
         if (!ret) {
-          new EventMarks(e.chara_id).sub(stage_id);
+          EventMarks.get(e.chara_id).sub(stage);
           ret_map[e.chara_id] = (ret_map[e.chara_id] || 0) + 1;
         }
         return ret;
@@ -49,18 +49,32 @@ function filter_event_object(condition) {
   return ret_map;
 }
 
+/**
+ * get a random event from stage's queue
+ * @param {number} stage
+ * @param {boolean} [random]
+ * @returns {EventObject}
+ */
+function get_random_event_object(stage, random = false) {
+  if (queue && queue[stage] && queue[stage].length) {
+    const index =
+      queue[stage].length === 1 || !random
+        ? 0
+        : get_random_value(0, queue[stage].length - 1);
+    const event_object = queue[stage].splice(index, 1)[0];
+    EventMarks.get(event_object.chara_id).sub(stage);
+    return event_object;
+  }
+}
+
 module.exports = {
   /**
    * @param {number} stage
-   * @param {EventObject} event_object
+   * @param {EventObject} event
    */
-  add_event(stage, event_object) {
-    if (
-      !event_object ||
-      event_object.chara_id === undefined ||
-      event_object.type === undefined
-    ) {
-      era.logger.error('null EventObject!');
+  add_event(stage, event) {
+    if (!event || event.chara_id === undefined || event.type === undefined) {
+      era.logger.error('无效的事件对象！');
       return;
     }
     if (!queue) {
@@ -69,8 +83,8 @@ module.exports = {
     if (!queue[stage]) {
       queue[stage] = [];
     }
-    (temp_queue[stage] || queue[stage]).push(event_object);
-    new EventMarks(event_object.chara_id).add(stage);
+    (temp_queue[stage] || queue[stage]).push(event);
+    EventMarks.get(event.chara_id).add(stage);
   },
   cb_enum,
   get() {
@@ -79,46 +93,44 @@ module.exports = {
   /**
    * get a random event from stage's queue
    * @param {number} stage
-   * @param {number} [chara_id]
+   * @param {number} [cid]
    * @returns {EventObject}
    */
-  get_chara_event_object(stage, chara_id) {
+  get_chara_event_object(stage, cid) {
     if (queue && queue[stage]) {
-      const index = queue[stage].findIndex((e) => e.chara_id === chara_id);
+      const index = queue[stage].findIndex((e) => e.chara_id === cid);
       if (index >= 0) {
-        new EventMarks(chara_id).sub(stage);
+        EventMarks.get(cid).sub(stage);
         return queue[stage].splice(index, 1)[0];
       }
     }
+    return get_random_event_object(stage);
   },
-  /**
-   * get a random event from stage's queue
-   * @param {number} stage
-   * @param {boolean} [random]
-   * @returns {EventObject}
-   */
-  get_random_event_object(stage, random) {
-    if (queue && queue[stage] && queue[stage].length) {
-      const id =
-        queue[stage].length === 1 || random
-          ? 0
-          : get_random_value(0, queue[stage].length - 1);
-      const event_object = queue[stage].splice(id, 1)[0];
-      new EventMarks(event_object.chara_id).sub(stage);
-      return event_object;
-    }
-  },
+  get_random_event_object,
   init,
   /**
    * 删除某角色的所有育成事件
-   * @param {number} chara_id
+   * @param {number} cid
    */
-  remove_edu_events: (chara_id) =>
-    filter_event_object(
-      (e) => e.type !== cb_enum.edu || e.chara_id !== chara_id,
-    ),
+  remove_edu_events: (cid) =>
+    filter_event_object((e) => e.type !== cb_enum.edu || e.chara_id !== cid),
   /** 删除所有节日事件 */
   remove_special_events: () => filter_event_object((e) => !e.special),
+  /**
+   * @param {function(EventObject):boolean} cb
+   * @returns {Record<string,number>}
+   */
+  count_events(cb) {
+    const ret = {};
+    Object.values(queue).forEach((q) =>
+      (q || []).forEach((e) => {
+        if (cb[e]) {
+          ret[e.chara_id] = (ret[e.chara_id] ?? 0) + 1;
+        }
+      }),
+    );
+    return ret;
+  },
   /** @param {number} hook */
   start_machine_gun(hook) {
     temp_queue[hook] = [];

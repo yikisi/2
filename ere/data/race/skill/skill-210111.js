@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '最后冲刺要超越对手时，短时间内提升少量速度',
   21011,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   174,
   [() => true, () => true],

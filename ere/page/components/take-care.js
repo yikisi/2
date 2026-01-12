@@ -1,10 +1,13 @@
 const era = require('#/era-electron');
 
+const { sys_check_cuckold } = require('#/system/chara/sys-calc-cheat');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
+const CharaInmon = require('#/data/ero/chara-inmon');
+const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const recruit_flags = require('#/data/event/recruit-flags');
 
 /** @param {CharaTalk} chara */
@@ -33,7 +36,7 @@ async function take_care(chara) {
         const teach = curr === e ? chara.id : era.get(`cflag:${e}:照看`);
         return {
           accelerator: e,
-          config: { align: 'center', disabled: curr === e, width: 6 },
+          config: { align: 'center', disabled: curr === e, width: 8 },
           content:
             era.get(`callname:${e}:-2`) +
             (curr === e
@@ -73,11 +76,21 @@ async function take_care(chara) {
       get_chara_talk(ret).get_colored_name(),
       '……',
     ]);
-    sys_like_chara(
-      chara.id,
-      0,
-      -get_random_value(25, 50 + era.get(`talent:${ret}:病娇`) * 2),
-    ) && (await era.waitAnyKey());
+    const inmon = CharaInmon.get(chara.id);
+    if (sys_check_cuckold(chara.id, inmon)) {
+      if (sys_like_chara(chara.id, 0, get_random_value(10, 25))) {
+        await era.waitAnyKey();
+      }
+    } else if (
+      !inmon.on(plugin_enum.no_yand) &&
+      sys_like_chara(
+        chara.id,
+        0,
+        -get_random_value(25, 50 + era.get(`talent:${chara.id}:病娇`) * 2),
+      )
+    ) {
+      await era.waitAnyKey();
+    }
     if (curr > 0) {
       era.set(`cflag:${curr}:照看`, 0);
     }

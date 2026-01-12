@@ -1,6 +1,6 @@
 /**
  * @file 桐生院葵 - 招募
- * @author 无名黑奴（临时）
+ * @author 黑奴队长（临时）
  */
 const {
   get,
@@ -30,7 +30,7 @@ module.exports = class extends CustomizedRecruit {
       me = get_chara_talk(0),
       meek = get_chara_talk(201);
     if (
-      new RaceHistory(201)
+      RaceHistory.get(201)
         .get_values()
         .findIndex(
           (e) =>

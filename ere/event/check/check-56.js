@@ -41,28 +41,33 @@ module.exports = class extends CustomizedCheck {
     );
   }
 
-  check_after_race(extra_flag) {
-    const edu_marks = new KitaruEduMarks(),
-      edu_weeks = era.get('cflag:56:育成回合计时');
+  check_after_race(extra) {
+    const edu_marks = new KitaruEduMarks();
+    const edu_weeks = era.get('cflag:56:育成回合计时');
     if (
-      extra_flag.contestants.find((e) => e.index_chara === 56).motivation ===
-        2 &&
-      race_infos[extra_flag.race].race_class <= class_enum.G2
+      extra.contestants.find((e) => e.index_chara === 56).motivation === 2 &&
+      race_infos[extra.race].race_class <= class_enum.G2
     ) {
       edu_marks.best_g2_count++;
     }
-    switch (extra_flag.race) {
+    switch (extra.race) {
       case race_enum.kiku_sho:
-        era.set('flag:强制BE', 56 * (extra_flag.rank !== 1));
+        if (extra.rank !== 1) {
+          era.set('flag:强制BE', this.id);
+        }
         break;
       case race_enum.takz_kin:
-        era.set('flag:强制BE', 56 * (edu_weeks > 96 && extra_flag.rank !== 1));
+        if (edu_weeks > 96 && extra.rank !== 1) {
+          era.set('flag:强制BE', this.id);
+        }
         break;
       case race_enum.arim_kin:
-        era.set('flag:强制BE', 56 * (edu_weeks > 96 && extra_flag.rank !== 1));
+        if (edu_weeks > 96 && extra.rank !== 1) {
+          era.set('flag:强制BE', this.id);
+        }
     }
-    if (extra_flag.rank === 1) {
-      switch (extra_flag.race) {
+    if (extra.rank === 1) {
+      switch (extra.race) {
         case race_enum.begin_race:
           edu_marks.begin_race_end = 1;
           break;
@@ -90,14 +95,13 @@ module.exports = class extends CustomizedCheck {
           if (edu_weeks > 96) {
             edu_marks.begin_race_end = 10;
           }
-          break;
       }
     }
   }
 
   check_and_get_titles(aim_check) {
     const ret = [],
-      race_list = new RaceHistory(56).get_values(),
+      race_list = RaceHistory.get(56).get_values(),
       kiku_sho_index = race_list.findIndex(
         (e) => e.race === race_enum.kiku_sho,
       );
@@ -229,7 +233,7 @@ module.exports = class extends CustomizedCheck {
         // 菊花赏前后剧情
         case 47 + 41: // 神化
           if (
-            check_aim_race(new RaceHistory(56).get(), race_enum.kiku_sho, 1, 1)
+            check_aim_race(RaceHistory.get(56).get(), race_enum.kiku_sho, 1, 1)
           ) {
             add_event(event_hooks.week_start, event_obj_special);
           }
@@ -252,7 +256,7 @@ module.exports = class extends CustomizedCheck {
         case 95 + 31: // 林中参拜
         case 95 + 37: // 每个人的天命
           if (
-            check_aim_race(new RaceHistory(56).get(), race_enum.kiku_sho, 1, 1)
+            check_aim_race(RaceHistory.get(56).get(), race_enum.kiku_sho, 1, 1)
           ) {
             add_event(event_hooks.week_start, event_obj_special);
           }
@@ -283,7 +287,7 @@ module.exports = class extends CustomizedCheck {
 
   check_palace_and_get_aims() {
     const edu_marks = new KitaruEduMarks(),
-      races = new RaceHistory(this.id).get();
+      races = RaceHistory.get(this.id).get();
     if (
       check_aim_race(races, race_enum.takz_kin, 2, 1) &&
       check_aim_race(races, race_enum.arim_kin, 2, 1) &&
@@ -302,7 +306,12 @@ module.exports = class extends CustomizedCheck {
 
   get_edu_aims() {
     const buffer = [],
-      races = new RaceHistory(56).get();
+      races = RaceHistory.get(56).get();
+    buffer.push({
+      check: 1,
+      color: undefined,
+      content: `以极佳干劲参与 G2 以上赛事数：${new KitaruEduMarks().best_g2_count}`,
+    });
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.aoba_sho, 1, 20)); // 入着即可
     buffer.push(check_aim_and_get_entry(races, race_enum.toky_yus, 1, 5));

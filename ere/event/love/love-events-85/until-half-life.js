@@ -110,7 +110,7 @@ module.exports = class extends Love85UntilWife {
         me.get_couple_title(),
         ' 最幸福的形式吧。',
       ]);
-      await quick_into_sex(85, true);
+      await quick_into_sex(85, 85, true);
     } else {
       await era.printAndWait([
         me.get_colored_name(),

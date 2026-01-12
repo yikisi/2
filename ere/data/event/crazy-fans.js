@@ -3,22 +3,22 @@ const { get, set } = require('#/era-electron');
 const { get_random_entry } = require('#/utils/list-utils');
 
 class CrazyFans {
-  /** @type {number[]} */
-  obj;
-
-  constructor() {
-    this.obj = get('flag:极端粉丝') || set('flag:极端粉丝', []);
+  /** @returns {number[]} */
+  get #obj() {
+    return get('flag:极端粉丝') || set('flag:极端粉丝', []);
   }
 
-  push(chara_id) {
-    this.obj.push(chara_id);
+  push(cid) {
+    this.#obj.push(cid);
   }
 
   get() {
-    const val = get_random_entry(this.obj);
-    this.obj = set('flag:极端粉丝', []);
+    const val = get_random_entry(this.#obj);
+    set('flag:极端粉丝', []);
     return val;
   }
 }
 
-module.exports = CrazyFans;
+const crazy_fans = new CrazyFans();
+
+module.exports = crazy_fans;

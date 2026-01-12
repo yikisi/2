@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛后半段处于中间集团并开始发力时，充分发挥实力，速度逐渐少量提高',
   10040,
   1,
-  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [() => true, () => true],

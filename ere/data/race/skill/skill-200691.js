@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '临近比赛中盘并位于后方时，不容易疲劳并使前方马娘速度少量下降',
   20069,
   2,
-  UmaSkill.rarity_enum.gold,
   9,
   508,
   [() => true, () => true],

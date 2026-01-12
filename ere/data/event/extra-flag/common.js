@@ -1,5 +1,8 @@
 class ExtraFlagCommon {
-  /** @type {number} */
+  /**
+   * 角色ID
+   * @type {number}
+   */
   chara_id;
 }
 

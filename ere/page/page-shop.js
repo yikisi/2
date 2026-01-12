@@ -2,31 +2,30 @@ const era = require('#/era-electron');
 
 const { sys_change_money } = require('#/system/sys-calc-flag');
 
-const date_indicator = require('#/page/components/date-indicator');
-
 const { attr_change_colors, money_color } = require('#/data/color-const');
-const shop_desc = require('#/data/desc/shop-desc.json');
+const date_indicator = require('#/data/date-indicator');
+const shop_desc = require('#/data/desc/items.json');
 const { location_name } = require('#/data/locations');
 
 /** @param {({id:number,[limit]:boolean}|number)[]} item_list */
 async function print_shop_page(item_list) {
-  const item_keys = era.get('itemkeys'),
-    off_index = era.get('flag:随机种子'),
-    off = item_keys[off_index % item_keys.length],
-    price_cache = era.get(`itemprice:${off}`);
+  const item_keys = era.get('itemkeys');
+  const off_index = era.get('flag:随机种子');
+  const off = item_keys[off_index % item_keys.length];
+  const price_cache = era.get(`itemprice:${off}`);
   era.set(
     `itemprice:${off}`,
     Math.max(Math.ceil(price_cache * (off_index >> 7 > 0 ? 0.5 : 0.7)), 1),
   );
-  let flag_shop = true,
-    bought = 0;
-  const to_buy = {},
-    price = {},
-    limit = {},
-    cur_location = era.get('flag:当前位置');
+  const to_buy = {};
+  const price = {};
+  const limit = {};
+  const cur_loc = era.get('flag:当前位置');
   const price_ratio =
     (100 + era.get('flag:道具价格') + (era.get('flag:当前年') - 2000) * 4) /
     100;
+  let flag_shop = true;
+  let bought = 0;
   item_list.forEach((e) => {
     let id = e;
     if (typeof e !== 'number') {
@@ -34,13 +33,17 @@ async function print_shop_page(item_list) {
       limit[id] = e.limit;
     }
     to_buy[id] = 1;
-    price[id] = Math.ceil(era.get(`itemprice:${id}`) * price_ratio);
+    if (id !== 84 && id !== 85) {
+      price[id] = Math.ceil(era.get(`itemprice:${id}`) * price_ratio);
+    } else {
+      price[id] = era.get(`itemprice:${id}`);
+    }
   });
-  let on_sell_list,
-    cur_coin,
-    cur_page = 1,
-    max_page,
-    flag_hide_acc = era.get('flag:隐藏快捷键');
+  let on_sell_list;
+  let cur_coin;
+  let cur_page = 1;
+  let max_page;
+  let flag_hide_acc = era.get('flag:隐藏快捷键');
   while (flag_shop) {
     cur_coin = era.get('flag:当前马币');
     on_sell_list = item_list
@@ -223,7 +226,7 @@ async function print_shop_page(item_list) {
       {
         accelerator: 999,
         config: { align: 'right', width: 6 },
-        content: `离开 ${location_name[cur_location]}`,
+        content: `离开 ${location_name[cur_loc]}`,
         type: 'button',
       },
     );
@@ -253,7 +256,7 @@ async function print_shop_page(item_list) {
           },
           {
             config: { width: 10 },
-            content: `位于 ${location_name[cur_location]}`,
+            content: `位于 ${location_name[cur_loc]}`,
             type: 'text',
           },
         ],

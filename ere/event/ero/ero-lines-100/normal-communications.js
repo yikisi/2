@@ -1,9 +1,8 @@
 const era = require('#/era-electron');
 
-const sys_get_strength_ratio_in_fight = require('#/system/ero/fight/sys-get-strength-ratio');
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
-const EroNormalCommunications = require('#/event/ero/common-lines/normal/communications');
+const EroNormalCommunications = require('#/event/ero/common/normal/communications');
 
 module.exports = class extends EroNormalCommunications {
   async kiss(attacker, defender, hook) {
@@ -270,11 +269,12 @@ module.exports = class extends EroNormalCommunications {
       defender.sex,
       '的唇舌向脖颈伸来……',
     ]);
-    const ratio = sys_get_strength_ratio_in_fight(attacker.id, defender.id);
-    era.logger.debug(`角色 100 逆推概率：${(ratio * 100).toFixed(2)}%`);
     era.println();
     if (
-      (extra_flag.success = ratio >= 1 || (ratio > 0 && Math.random() < ratio))
+      (extra_flag.success = EroNormalCommunications.check_resist_success(
+        0,
+        100,
+      ))
     ) {
       await attacker.print_and_wait('受伤？那种事怎样都好。');
       await attacker.print_and_wait([

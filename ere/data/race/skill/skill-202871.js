@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在终盘的最终弯道处若位于中后方，提升加速度',
   20287,
   2,
-  UmaSkill.rarity_enum.gold,
   17,
   508,
   [() => true, () => true],

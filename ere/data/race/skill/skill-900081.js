@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在最后200米处于前列进行名次争夺时，竞争力变强，速度也会略微加快',
   90008,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   180,
   [() => true, () => true],

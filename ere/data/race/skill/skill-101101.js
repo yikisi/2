@@ -3,10 +3,9 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   101101,
   'Guiding Sea',
-  '比赛剩余800m处若位于队伍中间，则小幅度先前突进并提高少许加速力；若在根干距离（400的倍数）的比赛且位于后方，则额外提高少许加速力',
+  '比赛剩余800m处若位于队伍中间，则小幅度先前突进并提高少许加速度；若在根干距离（400的倍数）的比赛且位于后方，则额外提高少许加速度',
   10110,
   1,
-  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [() => true, () => true],

@@ -8,6 +8,9 @@ class ArdanEduMarks extends EduEventMarks {
   // 路线分歧 - 第二年天秋or菊花赏
   kiku_sho;
 
+  // 生病
+  sick;
+
   constructor() {
     super(71);
     EduEventMarks.register_marks(this);

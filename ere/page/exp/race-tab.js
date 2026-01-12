@@ -10,7 +10,7 @@ const {
   attr_change_colors,
   money_color,
 } = require('#/data/color-const');
-const title_desc = require('#/data/desc/title-desc.json');
+const title_desc = require('#/data/desc/titles.json');
 const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
@@ -26,7 +26,7 @@ module.exports = {
   generate(chara) {
     const race_info_list = [];
     if (era.get(`cflag:${chara.id}:种族`)) {
-      const races = new RaceHistory(chara.id).get_entries();
+      const races = RaceHistory.get(chara.id).get_entries();
       const race_len = races.length,
         race_list = sort_list(
           races.filter((e) => e.race !== race_enum.begin_race),
@@ -98,7 +98,7 @@ module.exports = {
         config: { content: '专属称号', position: 'left' },
         type: 'divider',
       });
-      const titles = new CharaTitles(chara.id).get(),
+      const titles = CharaTitles.get(chara.id).get(),
         personal_titles = get_custom_check(chara.id).get_personal_titles();
       if (personal_titles.length) {
         personal_titles.map((e) => {

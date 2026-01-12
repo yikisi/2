@@ -4,13 +4,12 @@
  */
 const era = require('#/era-electron');
 
-const { handle_debuff } = require('#/event/edu/edu-events-17/snippets');
 const Edu17UntilWeekStart = require('#/event/edu/edu-events-17/week-start');
 const { add_event } = require('#/event/queue');
+const { handle_debuff } = require('#/event/snippets/17');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
 
-const CharaTalk = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const color_17 = require('#/data/chara-colors').chara_colors[17];
@@ -21,55 +20,52 @@ const { attr_enum } = require('#/data/train-const');
 
 module.exports = class extends Edu17UntilWeekStart {
   async out_church(chara, me, callname, hook, extra_flag, event_object) {
-    if (era.get('flag:当前互动角色') !== 17) {
+    if (era.get('flag:当前互动角色') !== this.id) {
       add_event(event_hooks.out_church, event_object);
       return;
     }
-    const chara_talk = get_chara_talk(17);
-    await print_event_name('新年参拜', chara_talk);
+    await print_event_name('新年参拜', chara);
     await era.printAndWait('正因为是新年，才忙碌。');
+    await era.printAndWait(`在寒冬中，${me.name} 呼出一口气，转瞬就变成白雾。`);
     await era.printAndWait(
-      `在寒冬中，${CharaTalk.me.name} 呼出一口气，转瞬就变成白雾。`,
-    );
-    await era.printAndWait(
-      `又是一年新春，${CharaTalk.me.name} 站在露娜身后，辅佐着她的工作，鞠躬、收礼、答谢。`,
+      `又是一年新春，${me.name} 站在露娜身后，辅佐着她的工作，鞠躬、收礼、答谢。`,
     );
     await era.printAndWait(
       '给认识的人拜年，举办新年动员会，了结去年留下来的工作……',
     );
     await era.printAndWait(
-      `仅仅只是分担了部分露娜的工作，${CharaTalk.me.name} 就几乎晕头转向了。`,
+      `仅仅只是分担了部分露娜的工作，${me.name} 就几乎晕头转向了。`,
     );
     await era.printAndWait(
-      `到这时 ${CharaTalk.me.name} 才明白，一年前，露娜为什么说想要皇帝代劳。`,
+      `到这时 ${me.name} 才明白，一年前，露娜为什么说想要皇帝代劳。`,
     );
-    await chara_talk.say_and_wait('感觉你似乎，在想什么失礼的事情。');
+    await chara.say_and_wait('感觉你似乎，在想什么失礼的事情。');
     await era.printAndWait(
-      `解决了阶段性的任务后，${CharaTalk.me.get_couple_title()} 终于有时间去参拜。路上，露娜不知怎的突然嘟囔。`,
-    );
-    await era.printAndWait(
-      `${CharaTalk.me.name} 连忙否认。露娜不置可否，${chara_talk.sex}看着神社的钟鼓，闭上了双眼。`,
+      `解决了阶段性的任务后，${me.get_couple_title()} 终于有时间去参拜。路上，露娜不知怎的突然嘟囔。`,
     );
     await era.printAndWait(
-      `新一年，露娜的愿望会是什么呢？${CharaTalk.me.name} 没有问，据说，把愿望说出来就不会灵验了。`,
+      `${me.name} 连忙否认。露娜不置可否，${chara.sex}看着神社的钟鼓，闭上了双眼。`,
     );
     await era.printAndWait(
-      `似乎完成了仪式。露娜睁开眼、仰着头，学着 ${CharaTalk.me.name} 的样子吐出一口气。`,
+      `新一年，露娜的愿望会是什么呢？${me.name} 没有问，据说，把愿望说出来就不会灵验了。`,
     );
     await era.printAndWait(
-      `一股白雾飘散，${chara_talk.sex}愣愣地看着虚空，尔后侧过头，双手合十，向 ${CharaTalk.me.name} 露出了疲惫的微笑。`,
+      `似乎完成了仪式。露娜睁开眼、仰着头，学着 ${me.name} 的样子吐出一口气。`,
     );
-    await chara_talk.say_and_wait('或许，我也在想着失礼的事情。');
     await era.printAndWait(
-      `霎时，${CharaTalk.me.name} 的脸全红了。回想起这段时间波澜壮阔的故事，不禁感慨万千。`,
+      `一股白雾飘散，${chara.sex}愣愣地看着虚空，尔后侧过头，双手合十，向 ${me.name} 露出了疲惫的微笑。`,
     );
-    await era.printAndWait(`${CharaTalk.me.name} 郑重地向露娜说：`);
+    await chara.say_and_wait('或许，我也在想着失礼的事情。');
+    await era.printAndWait(
+      `霎时，${me.name} 的脸全红了。回想起这段时间波澜壮阔的故事，不禁感慨万千。`,
+    );
+    await era.printAndWait(`${me.name} 郑重地向露娜说：`);
     era.printButton('「医食同源，希望你能在饮食中注重健康。」', 1);
     era.printButton('「全知全能，希望你能真正成为真正的皇帝。」', 2);
     era.printButton('「风流韵事，别多想，做自己喜欢做的事情就好。」', 3);
     const ret = await era.input();
     await era.printAndWait(
-      `听罢 ${CharaTalk.me.name} 的祝福，露娜没有回应，只是轻轻倚靠在你的臂膀上，疲倦地闭上了双眼。`,
+      `听罢 ${me.name} 的祝福，露娜没有回应，只是轻轻倚靠在你的臂膀上，疲倦地闭上了双眼。`,
     );
     await era.printAndWait('短暂的休憩，在此时也弥足珍贵。');
     era.println();
@@ -82,35 +78,29 @@ module.exports = class extends Edu17UntilWeekStart {
     } else {
       pt_change = 35;
     }
-    if (era.get('status:17:神经衰弱')) {
+    if (era.get('status:17:神经衰弱') > 0) {
       attr_change[attr_enum.endurance] += 10;
     }
-    get_attr_and_print_in_event(17, attr_change, pt_change) &&
-      (await era.waitAnyKey());
+    if (get_attr_and_print_in_event(17, attr_change, pt_change)) {
+      await era.waitAnyKey();
+    }
     era.set('cflag:17:节日事件标记', 0);
     return true;
   }
 
-  async train_success(chara, me, callname, hook, extra_flag) {
-    const event_marks = new LunaEduMarks();
-    const is_emperor = event_marks.emperor;
-    const chara_talk = get_chara_talk(17);
-    await era.printAndWait([
-      chara_talk.get_colored_name(),
-      ' 的训练顺利结束了！',
-    ]);
+  async train_success(chara, me, callname, hook, extra) {
+    const edu_marks = new LunaEduMarks();
+    const i_emperor = edu_marks.emperor;
+    await era.printAndWait([chara.get_colored_name(), ' 的训练顺利结束了！']);
     // 经典年五月第一周
-    if (
-      era.get('cflag:17:育成回合计时') === 47 + 17 &&
-      !event_marks.dissonance
-    ) {
-      event_marks.dissonance++;
+    if (era.get('cflag:17:育成回合计时') === 47 + 17 && !edu_marks.dissonance) {
+      edu_marks.dissonance++;
       era.println();
       await print_event_name(
         [{ color: color_17[1], content: '不协调音' }],
-        chara_talk,
+        chara,
       );
-      const luna = is_emperor ? 9017 : 17;
+      const luna = i_emperor ? 9017 : 17;
       await era.printAndWait([
         '作为目标的 ',
         race_infos[race_enum.toky_yus].get_colored_name(),
@@ -118,148 +108,142 @@ module.exports = class extends Edu17UntilWeekStart {
       ]);
       await era.printAndWait([
         '在 ',
-        chara_talk.get_colored_name(),
+        chara.get_colored_name(),
         ' 于训练场上疾驰时，围观的赛',
-        chara_talk.get_uma_sex_title(),
+        chara.get_uma_sex_title(),
         '和训练员们纷纷发出赞叹。',
       ]);
       await era.printAndWait(
-        `一圈又一圈，${CharaTalk.me.name} 发现 ${chara_talk.name} 状态极好，在奔跑时甚至露出了笑容。`,
+        `一圈又一圈，${me.name} 发现 ${chara.name} 状态极好，在奔跑时甚至露出了笑容。`,
       );
-      await era.printAndWait(
-        `尽管如此，${CharaTalk.me.name} 心里仍有极大的担忧。`,
-      );
+      await era.printAndWait(`尽管如此，${me.name} 心里仍有极大的担忧。`);
       await era.printAndWait([
         '在 ',
         race_infos[race_enum.sats_sho].get_colored_name(),
         ' 之后，压在露娜肩上，本就沉重如山的负担，越发不可收拾。',
       ]);
-      await era.printAndWait(`或许，${chara_talk.name} 不像表面上那样平静。`);
+      await era.printAndWait(`或许，${chara.name} 不像表面上那样平静。`);
       era.printButton(
-        is_emperor
+        i_emperor
           ? '「吾皇，看您似乎已经尽兴，请您保重贵体。」'
           : '「今日的训练就到此为止吧。」',
         1,
       );
       await era.input();
-      await era.printAndWait(`在一圈结束时，${CharaTalk.me.name} 高声呼喊。`);
+      await era.printAndWait(`在一圈结束时，${me.name} 高声呼喊。`);
       await era.printAndWait(
-        `听到 ${CharaTalk.me.name} 的话，${chara_talk.name} 停下了脚步。`,
+        `听到 ${me.name} 的话，${chara.name} 停下了脚步。`,
       );
-      if (is_emperor) {
+      if (i_emperor) {
         await era.printAndWait(
-          `片刻后，气喘吁吁的皇帝向 ${CharaTalk.me.name} 走来。不知为何，原本她畅快的表情变得愤怒。`,
+          `片刻后，气喘吁吁的皇帝向 ${me.name} 走来。不知为何，原本她畅快的表情变得愤怒。`,
         );
-        await chara_talk.say_and_wait('弄臣，给吾一个打搅吾状态的理由。');
+        await chara.say_and_wait('弄臣，给吾一个打搅吾状态的理由。');
         era.printButton('「吾皇，您似乎太兴奋了。」', 1);
         era.printButton('「越是临近狩猎，您越是应该冷静……」', 2);
         await era.input();
         await era.printAndWait(
-          `从始至终，${CharaTalk.me.name} 都不认为皇帝会扛不住训练的强度。`,
+          `从始至终，${me.name} 都不认为皇帝会扛不住训练的强度。`,
         );
         await era.printAndWait(
-          `${CharaTalk.me.name} 成为${chara_talk.sex}的训练员也好，教唆${chara_talk.sex}成为皇帝也罢。`,
+          `${me.name} 成为${chara.sex}的训练员也好，教唆${chara.sex}成为皇帝也罢。`,
         );
         await era.printAndWait(
-          `从始至终，${CharaTalk.me.name} 都只是在担心，露娜被自己心中的野兽击垮。`,
+          `从始至终，${me.name} 都只是在担心，露娜被自己心中的野兽击垮。`,
         );
         await era.printAndWait(
-          `${CharaTalk.me.name} 看着对自己露出玩味表情的皇帝，低下了头。后者身上如同山岳般的压力让 ${CharaTalk.me.name} 冷汗直流。`,
+          `${me.name} 看着对自己露出玩味表情的皇帝，低下了头。后者身上如同山岳般的压力让 ${me.name} 冷汗直流。`,
         );
         await era.printAndWait(
-          `跨越了皋月赏，即将进军德比……此时此刻，比起训练的状态，${CharaTalk.me.name} 更想呵护好属于露娜的身体。`,
+          `跨越了皋月赏，即将进军德比……此时此刻，比起训练的状态，${me.name} 更想呵护好属于露娜的身体。`,
         );
         await era.printAndWait(
-          `看着 ${CharaTalk.me.name}，皇帝冷哼了一声，径直离开了赛场。`,
+          `看着 ${me.name}，皇帝冷哼了一声，径直离开了赛场。`,
         );
         await era.printAndWait(
-          `${CharaTalk.me.name} 本能地向${chara_talk.sex}伸出手，但${chara_talk.sex}走得太快了，${CharaTalk.me.name} 没能拦住${chara_talk.sex}。`,
+          `${me.name} 本能地向${chara.sex}伸出手，但${chara.sex}走得太快了，${me.name} 没能拦住${chara.sex}。`,
         );
         era.printButton('「抱歉。」', 1);
         era.printButton('「好好休息吧。」', 2);
         await era.input();
-        await era.printAndWait(
-          `${CharaTalk.me.name} 叹了口气，小跑着追了上去。。`,
-        );
+        await era.printAndWait(`${me.name} 叹了口气，小跑着追了上去。。`);
       } else {
         await era.printAndWait(
-          `片刻后，气喘吁吁的露娜向 ${CharaTalk.me.name} 走来。不知为何，原本${chara_talk.sex}畅快的表情变得暗淡。`,
+          `片刻后，气喘吁吁的露娜向 ${me.name} 走来。不知为何，原本${chara.sex}畅快的表情变得暗淡。`,
         );
-        await chara_talk.say_and_wait(
-          `${CharaTalk.me.actual_name}，我的状态很好。日本德比很近了，我必须再加强一些！`,
+        await chara.say_and_wait(
+          `${me.actual_name}，我的状态很好。日本德比很近了，我必须再加强一些！`,
         );
         era.printButton('「我明白，但越是这个时候，就越要冷静。」', 1);
         era.printButton('「我很担心你的状态……」', 2);
         await era.input();
         await era.printAndWait(
-          `从始至终，${CharaTalk.me.name} 都不认为露娜会扛不住训练的强度。`,
+          `从始至终，${me.name} 都不认为露娜会扛不住训练的强度。`,
         );
         await era.printAndWait(
-          `${CharaTalk.me.name} 成为${chara_talk.sex}的训练员也好，教唆${chara_talk.sex}成为皇帝也罢。`,
+          `${me.name} 成为${chara.sex}的训练员也好，教唆${chara.sex}成为皇帝也罢。`,
         );
         await era.printAndWait(
-          `从始至终，${CharaTalk.me.name} 都只是在担心，露娜被自己心中的野兽击垮。`,
+          `从始至终，${me.name} 都只是在担心，露娜被自己心中的野兽击垮。`,
         );
         await era.printAndWait(
-          `可从初次见面的宣泄以来，露娜已经很久都没有向 ${CharaTalk.me.name} 表达心声了。`,
+          `可从初次见面的宣泄以来，露娜已经很久都没有向 ${me.name} 表达心声了。`,
         );
         await era.printAndWait(
-          `跨越了皋月赏，即将进军德比。此时此刻，比起训练的状态，${CharaTalk.me.name} 更想知道露娜的想法。`,
+          `跨越了皋月赏，即将进军德比。此时此刻，比起训练的状态，${me.name} 更想知道露娜的想法。`,
         );
         await era.printAndWait([
           '看着 ',
-          CharaTalk.me.get_colored_name(),
+          me.get_colored_name(),
           '，露娜思考了一会。',
-          chara_talk.sex,
+          chara.sex,
           '向 ',
-          CharaTalk.me.get_colored_name(),
+          me.get_colored_name(),
           ' 露出了微笑。',
         ]);
-        await chara_talk.say_and_wait(
+        await chara.say_and_wait(
           '如果这种程度都做不到的话，我们的理想根本无法实现。',
         );
-        await era.printAndWait(`${CharaTalk.me.name} 暗中咬牙，还想说什么。`);
+        await era.printAndWait(`${me.name} 暗中咬牙，还想说什么。`);
         await era.printAndWait(
-          `露娜蹬了两下脚，本想向跑道走去。但看着 ${CharaTalk.me.name} 担心的眼神，最终还是停下了脚步。`,
+          `露娜蹬了两下脚，本想向跑道走去。但看着 ${me.name} 担心的眼神，最终还是停下了脚步。`,
         );
         era.printButton('「抱歉。」', 1);
         era.printButton('「好好休息吧。」', 2);
         await era.input();
         await era.printAndWait([
           '接过 ',
-          CharaTalk.me.get_colored_name(),
+          me.get_colored_name(),
           ' 递来的毛巾和水，露娜小声地答应了。',
         ]);
       }
-      await handle_debuff(event_marks, luna);
+      await handle_debuff(edu_marks, luna);
       hook.override = true;
-      extra_flag.pt_change = 5;
-      return extra_flag;
-    } else if (Math.random() < 0.2 * extra_flag.stamina_ratio) {
+      extra.pt_change = 5;
+      return extra;
+    } else if (Math.random() < 0.2 * extra.stamina_ratio) {
       era.println();
-      await print_event_name('额外的自主训练', chara_talk);
+      await print_event_name('额外的自主训练', chara);
 
-      await era.printAndWait(`训练结束后，${chara_talk.name}似乎仍意犹未尽。`);
+      await era.printAndWait(`训练结束后，${chara.name}似乎仍意犹未尽。`);
       await era.printAndWait(
-        `${chara_talk.sex}远远向天边望去，夕阳正在垂落，最后的光芒洒落大地。`,
+        `${chara.sex}远远向天边望去，夕阳正在垂落，最后的光芒洒落大地。`,
       );
       await era.printAndWait('天马上就要黑了，但是还不够，还没有到达极限——');
-      await era.printAndWait(
-        `${CharaTalk.me.name} 知晓了${chara_talk.sex}的心意。`,
-      );
+      await era.printAndWait(`${me.name} 知晓了${chara.sex}的心意。`);
 
       era.printButton('「继续奔跑吧！抓住那感觉。」', 1);
       era.printButton('「今日就到此为止吧，接下来还有更重要的事。」', 2);
       hook.arg = (await era.input()) === 1;
       if (hook.arg) {
-        await chara_talk.say_and_wait(
-          is_emperor
+        await chara.say_and_wait(
+          i_emperor
             ? '——征途的尽头？有趣。'
             : '好……总感觉，我越来越能抓到诀窍了。',
         );
       } else {
-        await chara_talk.say_and_wait(
-          is_emperor ? '沉睡……吗？' : '确实如此，感谢你的提醒。',
+        await chara.say_and_wait(
+          i_emperor ? '沉睡……吗？' : '确实如此，感谢你的提醒。',
         );
       }
       era.println();
@@ -267,10 +251,8 @@ module.exports = class extends Edu17UntilWeekStart {
   }
 
   async week_end(_chara, me, callname, hook, extra_flag, event_object) {
-    const event_marks = new LunaEduMarks(),
-      luna = new CharaTalk(event_marks.emperor ? 9017 : 17).set_color(
-        color_17[0],
-      ),
+    const edu_marks = new LunaEduMarks(),
+      luna = get_chara_talk(edu_marks.emperor ? 9017 : 17),
       event_arg = event_object?.arg;
     if (event_arg === 'wax_and_wane') {
       await print_event_name('阴晴圆缺', luna);
@@ -357,7 +339,7 @@ module.exports = class extends Edu17UntilWeekStart {
         '一定、一定会有机会的，一定会有人能让自己不再空虚和恐惧的。',
       );
       await luna.print_and_wait('到那时……我……露娜……一定会——');
-      await luna.say_and_wait(`${CharaTalk.me.actual_name}？`);
+      await luna.say_and_wait(`${me.actual_name}？`);
       await luna.print_and_wait('露娜从梦中惊醒，发现自己独自躺在床上。');
       await luna.print_and_wait(
         '为什么会做这样的梦呢？露娜捂着头。看向窗外皎洁的明月，她感到头晕目眩。',
@@ -370,7 +352,7 @@ module.exports = class extends Edu17UntilWeekStart {
         '明明已经擅长了忍耐，坚信只要忍耐下去，事情就会有所转机。',
       );
       await luna.print_and_wait(
-        `但自从和 ${CharaTalk.me.actual_name} 重逢后，自己一直以来仰仗的忍耐就失去了作用。`,
+        `但自从和 ${me.actual_name} 重逢后，自己一直以来仰仗的忍耐就失去了作用。`,
       );
       await luna.say_and_wait('好想见你……');
       await luna.say_and_wait('好想见你……');
@@ -381,14 +363,14 @@ module.exports = class extends Edu17UntilWeekStart {
         luna,
       );
       await era.printAndWait(
-        `皎洁的明月下，${CharaTalk.me.name} 焦急地在门外的走廊上徘徊。`,
+        `皎洁的明月下，${me.name} 焦急地在门外的走廊上徘徊。`,
       );
-      await era.printAndWait(`许久后，${CharaTalk.me.name} 听到了护士的呼唤。`);
+      await era.printAndWait(`许久后，${me.name} 听到了护士的呼唤。`);
       await era.printAndWait(
-        `焦急地冲进病房，${CharaTalk.me.name} 发现露娜躺在床上，已经睡着了。`,
+        `焦急地冲进病房，${me.name} 发现露娜躺在床上，已经睡着了。`,
       );
       await era.printAndWait(
-        `看着${luna.sex}虽然苍白，但呼吸均匀的模样，${CharaTalk.me.name} 松了口气。`,
+        `看着${luna.sex}虽然苍白，但呼吸均匀的模样，${me.name} 松了口气。`,
       );
       await era.printAndWait('菊花赏后，露娜被紧急地送往了象征家的私人医院。');
       await era.printAndWait('经过检查，医生给出了诊断结果——露娜过劳了。');
@@ -398,23 +380,21 @@ module.exports = class extends Edu17UntilWeekStart {
       era.printButton('「日本杯啊——」', 1);
       await era.input();
       await era.printAndWait(
-        `因为露娜需要静养，${CharaTalk.me.name} 确认了${luna.sex}的状态后，便蹑手蹑脚地走到了门外。`,
+        `因为露娜需要静养，${me.name} 确认了${luna.sex}的状态后，便蹑手蹑脚地走到了门外。`,
       );
-      await era.printAndWait(
-        `看着窗外的夜色，${CharaTalk.me.name} 感到头疼不已。`,
-      );
+      await era.printAndWait(`看着窗外的夜色，${me.name} 感到头疼不已。`);
       await era.printAndWait(
         '日本杯，所有日本赛马娘的夙愿……明明是在主场最宏大的比赛，却屡屡被海外的豪强夺走胜利。',
       );
       await era.printAndWait(
-        `为了完成露娜和 ${CharaTalk.me.name} 的梦想，达到所有赛马娘都能幸福的世界。`,
+        `为了完成露娜和 ${me.name} 的梦想，达到所有赛马娘都能幸福的世界。`,
       );
       await era.printAndWait('日本杯是露娜必须跨越过的试炼。');
       await era.printAndWait(
-        `${CharaTalk.me.name} 回过头，望着门。露娜就在门后的床上休息。`,
+        `${me.name} 回过头，望着门。露娜就在门后的床上休息。`,
       );
       await era.printAndWait(
-        `${CharaTalk.me.name} 叹了口气，一想到${luna.sex}苍白的脸，${CharaTalk.me.name} 原本坚定的心就发生了动摇。`,
+        `${me.name} 叹了口气，一想到${luna.sex}苍白的脸，${me.name} 原本坚定的心就发生了动摇。`,
       );
       await era.printAndWait(
         '赛马娘奔跑的模样是何等的瑰丽，但其中蕴含的危机不亚于真刀真枪的战场。',
@@ -426,50 +406,50 @@ module.exports = class extends Edu17UntilWeekStart {
         `露娜还年轻，${luna.sex}一定还有机会……不一定非要这一次。`,
       );
       await era.printAndWait(
-        `${CharaTalk.me.name} 尝试说服自己。但 ${CharaTalk.me.name} 明白，全日本对露娜——对鲁铎象征的期待，不允许${luna.sex}「临阵脱逃」。`,
+        `${me.name} 尝试说服自己。但 ${me.name} 明白，全日本对露娜——对鲁铎象征的期待，不允许${luna.sex}「临阵脱逃」。`,
       );
       await era.printAndWait('露娜也一定不愿意就此放弃。');
       await era.printAndWait(
-        `${CharaTalk.me.name} 焦躁地揉着自己的头发，殚精竭虑间，睡意笼罩了 ${CharaTalk.me.name}。`,
+        `${me.name} 焦躁地揉着自己的头发，殚精竭虑间，睡意笼罩了 ${me.name}。`,
       );
       era.printButton('「明天再和露娜谈谈吧……」', 1);
       await era.input();
-      await era.printAndWait(`${CharaTalk.me.name} 也累坏了。`);
+      await era.printAndWait(`${me.name} 也累坏了。`);
       await era.printAndWait(
-        `可第二天，再睁开眼时，${CharaTalk.me.name} 却发现自己身上披着一条被子。`,
+        `可第二天，再睁开眼时，${me.name} 却发现自己身上披着一条被子。`,
       );
       await era.printAndWait(
-        `${CharaTalk.me.name} 猛地看向身旁的门，它虚掩着，房间里本应该好好休息的露娜也不见踪影。`,
+        `${me.name} 猛地看向身旁的门，它虚掩着，房间里本应该好好休息的露娜也不见踪影。`,
       );
       era.printButton('「不会吧？！」', 1);
       await era.input();
       await era.printAndWait(
-        `${CharaTalk.me.name} 意识到，露娜似乎用行动向 ${CharaTalk.me.name} 证明了${luna.sex}的决心。`,
+        `${me.name} 意识到，露娜似乎用行动向 ${me.name} 证明了${luna.sex}的决心。`,
       );
       era.drawLine();
       await era.printAndWait(
-        `${CharaTalk.me.name} 推开了学生会的门，却发现里面人满为患——庶务们，正拿着各种文件，向露娜汇报近些日的工作。`,
+        `${me.name} 推开了学生会的门，却发现里面人满为患——庶务们，正拿着各种文件，向露娜汇报近些日的工作。`,
       );
-      await era.printAndWait(`露娜看着 ${CharaTalk.me.name}，嘴角微微抿起。`);
+      await era.printAndWait(`露娜看着 ${me.name}，嘴角微微抿起。`);
       await luna.say_and_wait('训练员，发生什么事了吗？');
       await era.printAndWait(
-        `${CharaTalk.me.name} 气喘吁吁，看着众人正眼巴巴地望着自己，${CharaTalk.me.name} 只好讪笑。`,
+        `${me.name} 气喘吁吁，看着众人正眼巴巴地望着自己，${me.name} 只好讪笑。`,
       );
       era.printButton('「您忘了东西……」', 1);
       era.printButton('「你应该好好……」', 2);
       await era.input();
       await era.printAndWait(
-        `话还没到一半，${CharaTalk.me.name} 突然发现，露娜注视着自己的紫色眸子里，带着哀求。`,
+        `话还没到一半，${me.name} 突然发现，露娜注视着自己的紫色眸子里，带着哀求。`,
       );
       await luna.say_and_wait('我没事的。', true);
       await era.printAndWait(
-        `${CharaTalk.me.name} 读懂了${luna.sex}的唇语。${CharaTalk.me.name} 没办法忤逆${luna.sex}的意思，从小到大都是……`,
+        `${me.name} 读懂了${luna.sex}的唇语。${me.name} 没办法忤逆${luna.sex}的意思，从小到大都是……`,
       );
       era.printButton('「不，不是什么大事。」', 1);
       era.printButton('「抱歉……」', 2);
       await era.input();
       await era.printAndWait(
-        `${CharaTalk.me.name} 失魂落魄地离开了学生会。${CharaTalk.me.name} 清楚，学园离不开露娜。`,
+        `${me.name} 失魂落魄地离开了学生会。${me.name} 清楚，学园离不开露娜。`,
       );
       await era.printAndWait('露娜也清楚，日本不能在这个时候失去鲁铎象征。');
 
@@ -502,40 +482,40 @@ module.exports = class extends Edu17UntilWeekStart {
         '升上高年级后，露娜学生会的工作压力不仅没有降低，更是要经常安排时间指导后辈，并参加各种访谈。',
       );
       await era.printAndWait(
-        `尽管 ${CharaTalk.me.name} 有些忧虑，但露娜始终认为，这是承担相应名望所要背负的责任。`,
+        `尽管 ${me.name} 有些忧虑，但露娜始终认为，这是承担相应名望所要背负的责任。`,
       );
       await era.printAndWait(
-        `似乎发现了 ${CharaTalk.me.name} 的想法，在结束一天的忙碌后，露娜叫住了 ${CharaTalk.me.name}。`,
+        `似乎发现了 ${me.name} 的想法，在结束一天的忙碌后，露娜叫住了 ${me.name}。`,
       );
       await luna.say_and_wait('你在生气吗？');
       era.printButton('「我只是担心你。」', 1);
       era.printButton('「希望你能多依靠我一点。」', 2);
       await era.input();
-      await era.printAndWait(`听到${CharaTalk.me.name}的话，露娜轻呼一口气。`);
+      await era.printAndWait(`听到${me.name}的话，露娜轻呼一口气。`);
       await luna.say_and_wait('你也要多相信我一点。');
       await era.printAndWait(
-        `露娜看着${CharaTalk.me.name}，伸出手，抚摸着${CharaTalk.me.name}的脸颊。`,
+        `露娜看着${me.name}，伸出手，抚摸着${me.name}的脸颊。`,
       );
       await luna.say_and_wait(
         '我必须这样做，不然，会有很多人陷入迷茫和困境中的。',
       );
       await luna.say_and_wait('我们还未能实现梦想。');
-      await era.printAndWait(`${CharaTalk.me.name} 握住了露娜的手。`);
+      await era.printAndWait(`${me.name} 握住了露娜的手。`);
       await era.printAndWait(
-        `明明是在说远大的理想，${CharaTalk.me.name} 却发现露娜的眉头上始终有散不开的忧愁。`,
+        `明明是在说远大的理想，${me.name} 却发现露娜的眉头上始终有散不开的忧愁。`,
       );
       await era.printAndWait(
-        `就好像 ${CharaTalk.me.name} 们再次相遇时那样，喘不过气来的样子。`,
+        `就好像 ${me.name} 们再次相遇时那样，喘不过气来的样子。`,
       );
-      await era.printAndWait(`${CharaTalk.me.name} 叹了口气，点了点头。`);
+      await era.printAndWait(`${me.name} 叹了口气，点了点头。`);
       await era.printAndWait(
-        `——究竟能为露娜再做些什么？未来的好些天里，${CharaTalk.me.name} 一直在思考这个问题。`,
+        `——究竟能为露娜再做些什么？未来的好些天里，${me.name} 一直在思考这个问题。`,
       );
       era.println();
       const attr_change = new Array(5).fill(0);
       attr_change[attr_enum.intelligence] = 5;
       get_attr_and_print_in_event(17, attr_change, 0);
-      await handle_debuff(event_marks, luna.id);
+      await handle_debuff(edu_marks, luna.id);
     }
   }
 };

@@ -9,6 +9,14 @@ const MayLifeMarks = require('#/data/event/life-event-marks/life-event-marks-343
 const recruit_flags = require('#/data/event/recruit-flags');
 
 module.exports = class extends CustomizedCheck {
+  check_and_get_titles(aim_check) {
+    const ret = super.check_and_get_titles(aim_check);
+    if (aim_check && ret.length > 0) {
+      new MayLifeMarks().buff = 1;
+    }
+    return ret;
+  }
+
   check_next_week() {
     if (era.get('flag:当前回合数') === 13) {
       add_event(
@@ -27,7 +35,7 @@ module.exports = class extends CustomizedCheck {
       );
     }
     if (
-      era.get('flag:回合爱慕惩罚') &&
+      era.get('flag:回合爱慕惩罚') > 0 &&
       era.get('love:343') >= 50 &&
       new MayLifeMarks().who_am_i < 3
     ) {

@@ -9,13 +9,19 @@ const {
   sys_check_train_enabled,
   sys_get_debuff,
 } = require('#/system/sys-calc-chara-param');
-const { get_success_base_reward } = require('#/system/sys-train-uma');
+const {
+  add_train_exp,
+  get_success_base_reward,
+  update_train_level,
+} = require('#/system/sys-train-uma');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { attr_colors } = require('#/data/const.json');
+const CharaInmon = require('#/data/ero/chara-inmon');
+const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const { location_enum } = require('#/data/locations');
 const {
   attr_enum,
@@ -26,52 +32,50 @@ const {
 
 /** @param {number[]} in_team_list */
 function randomly_interact(in_team_list) {
-  const take_care_list = [],
-    self_list = {};
+  /** @type {Array<{chara:CharaTalk,level:number,stamina_ratio:number,teach_chara:number,train:number}>} */
+  const take_care_list = [];
+  /** @type {Record<string,Array<{chara:CharaTalk,level:number,train:number}>>} */
+  const self_list = {};
   // 回合结束结算
-  for (const chara_id of in_team_list) {
+  for (const cid of in_team_list) {
     const stamina_ratio =
-        era.get(`base:${chara_id}:体力`) / era.get(`maxbase:${chara_id}:体力`),
-      debuff = sys_get_debuff(chara_id),
-      time = era.get(`base:${chara_id}:精力`);
+      era.get(`base:${cid}:体力`) / era.get(`maxbase:${cid}:体力`);
+    const debuff = sys_get_debuff(cid);
+    const time = era.get(`base:${cid}:精力`);
     if (
       debuff < 0.5 &&
-      sys_check_train_enabled(chara_id) &&
-      era.get(`cflag:${chara_id}:自主训练`) > 0 &&
-      !era.get(`status:${chara_id}:摸鱼`) &&
+      sys_check_train_enabled(cid) &&
+      era.get(`cflag:${cid}:自主训练`) > 0 &&
       stamina_ratio >= fail_sta_border.intelligence
     ) {
-      const in_beach =
-          era.get(`cflag:${chara_id}:位置`) === location_enum.beach,
-        train_need_attrs = Object.values(attr_enum).filter(
-          (attr) =>
-            era.get(`base:${chara_id}:${attr_names[attr]}`) <=
-              era.get(`maxbase:${chara_id}:${attr_names[attr]}`) &&
-            time >=
-              time_cost[
-                (in_beach
-                  ? 5
-                  : era.get(`abl:${chara_id}:${attr_names[attr]}训练等级`) ||
-                    1) - 1
-              ],
-        );
+      const in_beach = era.get(`cflag:${cid}:位置`) === location_enum.beach;
+      const train_need_attrs = Object.values(attr_enum).filter(
+        (attr) =>
+          era.get(`base:${cid}:${attr_names[attr]}`) <=
+            era.get(`maxbase:${cid}:${attr_names[attr]}`) &&
+          time >=
+            time_cost[
+              (in_beach
+                ? 5
+                : era.get(`abl:${cid}:${attr_names[attr]}训练等级`) || 1) - 1
+            ],
+      );
       if (train_need_attrs.length > 0) {
-        const teach_chara = era.get(`cflag:${chara_id}:照看`),
-          train =
-            stamina_ratio >= fail_sta_border.other
-              ? get_random_entry(
-                  train_need_attrs.filter(
-                    (attr) => attr !== attr_enum.intelligence,
-                  ),
-                )
-              : attr_enum.intelligence,
-          level =
-            in_beach && train !== attr_enum.intelligence
-              ? 5
-              : era.get(`abl:${chara_id}:${attr_names[train]}训练等级 `) || 1;
+        const teach_chara = era.get(`cflag:${cid}:照看`);
+        const train =
+          stamina_ratio >= fail_sta_border.other
+            ? get_random_entry(
+                train_need_attrs.filter(
+                  (attr) => attr !== attr_enum.intelligence,
+                ),
+              )
+            : attr_enum.intelligence;
+        const level = in_beach
+          ? 5
+          : era.get(`abl:${cid}:${attr_names[train]}训练等级 `) || 1;
         if (teach_chara > 0) {
           take_care_list.push({
-            chara: get_chara_talk(chara_id),
+            chara: get_chara_talk(cid),
             level,
             stamina_ratio,
             teach_chara,
@@ -79,7 +83,7 @@ function randomly_interact(in_team_list) {
           });
         } else {
           (self_list[train] ||= []).push({
-            chara: get_chara_talk(chara_id),
+            chara: get_chara_talk(cid),
             level,
             stamina_ratio,
           });
@@ -89,33 +93,37 @@ function randomly_interact(in_team_list) {
   }
   for (const e of take_care_list) {
     const changes = {
-        attr_change: new Array(5).fill(0),
-        pt_change: 0,
-      },
-      base_time_cost = time_cost[e.level - 1],
-      train_cost = {
-        stamina: -base_time_cost * get_random_value(0.9, 1.2, true),
-        time: -base_time_cost,
-      },
-      cost_result = [
-        sys_change_attr_and_print(e.chara.id, '体力', train_cost.stamina),
-        sys_change_attr_and_print(e.chara.id, '精力', train_cost.time),
-      ];
-    era.add(
-      `exp:${e.chara.id}:${attr_names[e.chara.id]}训练经验`,
+      attr_change: new Array(5).fill(0),
+      pt_change: 0,
+    };
+    const base_time_cost = time_cost[e.level - 1];
+    const train_cost = {
+      stamina: -base_time_cost * get_random_value(0.9, 1.2, true),
+      time: -base_time_cost,
+    };
+    const cost_result = [
+      sys_change_attr_and_print(e.chara.id, '体力', train_cost.stamina),
+      sys_change_attr_and_print(e.chara.id, '精力', train_cost.time),
+    ];
+    add_train_exp(
+      e.chara.id,
+      e.train,
       100 + era.get(`cflag:${e.chara.id}:${attr_names[e.train]}加成`),
     );
     if (e.teach_chara > 0 && e.level < 5) {
-      let exp = era.add(
-        `exp:${e.chara.id}:${attr_names[e.train]}训练经验`,
+      let exp = add_train_exp(
+        e.chara.id,
+        e.train,
         Math.max(
           era.get(`cflag:${e.teach_chara}:${attr_names[e.train]}加成`) / 2,
           0,
         ),
       );
-      if (exp >= 800 && exp >= e.level * 800 + get_random_value(0, 800)) {
-        era.add(`abl:${e.chara.id}:${attr_names[e.train]}训练等级`, 1);
-        era.set(`exp:${e.chara.id}:${attr_names[e.train]}训练经验`, 0);
+      if (
+        exp >= 800 &&
+        exp >= e.level * 800 + get_random_value(0, 800) &&
+        update_train_level(e.chara.id, attr_names[e.train])
+      ) {
         cost_result.unshift([`${attr_names[e.train]}训练 变得更擅长了！`]);
       }
     }
@@ -171,7 +179,11 @@ function randomly_interact(in_team_list) {
     const list = self_list[train].reduce(
       (p, c) => {
         if (p.at(-1).length > 0) {
-          if (p.at(-1).length === 5) {
+          if (
+            p.at(-1).length === 5 ||
+            era.get(`cflag:${p.at(-1).at(-1).chara.id}:位置`) !==
+              era.get(`cflag:${c.chara.id}:位置`)
+          ) {
             p.push([]);
           }
         }
@@ -220,18 +232,18 @@ function randomly_interact(in_team_list) {
       }
       for (const c of l) {
         const changes = {
-            attr_change: new Array(5).fill(0),
-            pt_change: 0,
-          },
-          base_time_cost = time_cost[c.level - 1],
-          train_cost = {
-            stamina: -base_time_cost * get_random_value(0.9, 1.2, true),
-            time: -base_time_cost,
-          },
-          result = [
-            sys_change_attr_and_print(c.chara.id, '体力', train_cost.stamina),
-            sys_change_attr_and_print(c.chara.id, '精力', train_cost.time),
-          ];
+          attr_change: new Array(5).fill(0),
+          pt_change: 0,
+        };
+        const base_time_cost = time_cost[c.level - 1];
+        const train_cost = {
+          stamina: -base_time_cost * get_random_value(0.9, 1.2, true),
+          time: -base_time_cost,
+        };
+        const result = [
+          sys_change_attr_and_print(c.chara.id, '体力', train_cost.stamina),
+          sys_change_attr_and_print(c.chara.id, '精力', train_cost.time),
+        ];
         era.add(
           `exp:${c.chara.id}:${attr_names[c.chara.id]}训练经验`,
           100 + era.get(`cflag:${c.chara.id}:${attr_names[train]}加成`),
@@ -287,29 +299,34 @@ function randomly_interact(in_team_list) {
       era.println();
     }
   }
-  for (const chara_id of in_team_list) {
+  for (const cid of in_team_list) {
     if (
-      era.get(`cflag:${chara_id}:种族`) &&
-      era.get(`cflag:${chara_id}:成长阶段`) >= 2
+      era.get(`cflag:${cid}:种族`) > 0 &&
+      era.get(`cflag:${cid}:成长阶段`) >= 2
     ) {
       era.set(
-        `status:${chara_id}:熬夜`,
-        Math.random() < 0.05 + 0.025 * era.get(`talent:${chara_id}:时间观念`),
+        `status:${cid}:熬夜`,
+        Math.random() < 0.05 + 0.025 * era.get(`talent:${cid}:时间观念`),
       );
-      if (chara_id && era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48) {
+      if (cid > 0 && era.get(`cflag:${cid}:育成回合计时`) < 3 * 48) {
         era.set(
-          `status:${chara_id}:摸鱼`,
-          Math.random() < 0.02 + 0.01 * era.get(`talent:${chara_id}:偷懒克制`),
+          `status:${cid}:摸鱼`,
+          Math.random() < 0.02 + 0.01 * era.get(`talent:${cid}:偷懒克制`),
         );
-        sys_change_pressure(chara_id, -500);
+        sys_change_pressure(cid, -500);
       }
     } else {
-      era.set(`status:${chara_id}:熬夜`, 0);
-      era.set(`status:${chara_id}:摸鱼`, 0);
+      era.set(`status:${cid}:熬夜`, 0);
+      era.set(`status:${cid}:摸鱼`, 0);
     }
     // 育成结束的那周不再自主训练
-    if (era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48 - 1) {
-      era.set(`cflag:${chara_id}:自主训练`, 1);
+    if (
+      era.get(`cflag:${cid}:育成回合计时`) < 3 * 48 - 1 &&
+      !era.get(`status:${cid}:摸鱼`) &&
+      !era.get(`status:${cid}:偏头痛`) &&
+      !CharaInmon.get(cid).on(plugin_enum.sex_2)
+    ) {
+      era.set(`cflag:${cid}:自主训练`, 1);
     }
   }
 }

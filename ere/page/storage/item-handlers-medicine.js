@@ -21,7 +21,7 @@ const { lust_border } = require('#/data/ero/orgasm-const');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
-const LimitLoveStatus = require('#/data/love-limit-status');
+const LoveLimitStatus = require('#/data/love-limit-status');
 const { attr_enum, pressure_border } = require('#/data/train-const');
 
 /** @param {Record<string,function(number):Promise>} handlers */
@@ -54,8 +54,8 @@ module.exports = (handlers) => {
         era.get(`maxbase:${chara_id}:体力`) >= 500,
     );
     if (aim !== undefined) {
-      const aim_chara = get_chara_talk(aim),
-        val = era.get(`maxbase:${aim}:体力`) / 2;
+      const aim_chara = get_chara_talk(aim);
+      const val = era.get(`maxbase:${aim}:体力`) / 2;
       era.add(`maxbase:${aim}:体力`, -get_random_value(100, 200));
       await era.printAndWait([
         aim_chara.get_colored_name(),
@@ -87,9 +87,13 @@ module.exports = (handlers) => {
           -get_random_value(10, Math.min(20, era.get(`base:${aim}:耐力`) - 1)),
         ),
         '，',
-        ...sys_change_attr_and_print(aim, '体力', 2000),
+        ...sys_change_attr_and_print(
+          aim,
+          '体力',
+          era.get(`maxbase:${aim}:体力`),
+        ),
       ]);
-      era.add(`base:${aim}:药物残留`, 5);
+      era.add(`base:${aim}:药物残留`, 8);
       era.add('item:强化青汁', -1);
       return true;
     }
@@ -104,8 +108,8 @@ module.exports = (handlers) => {
         era.get(`maxbase:${chara_id}:精力`) >= 500,
     );
     if (aim !== undefined) {
-      const aim_chara = get_chara_talk(aim),
-        val = era.get(`maxbase:${aim}:精力`) / 2;
+      const aim_chara = get_chara_talk(aim);
+      const val = era.get(`maxbase:${aim}:精力`) / 2;
       era.add(`maxbase:${aim}:精力`, -get_random_value(100, 200));
       await era.printAndWait([
         aim_chara.get_colored_name(),
@@ -113,7 +117,7 @@ module.exports = (handlers) => {
         ...sys_change_attr_and_print(aim, '精力', val),
       ]);
       sys_change_motivation(aim, -1) && (await era.waitAnyKey());
-      era.add(`base:${aim}:药物残留`, 5);
+      era.add(`base:${aim}:药物残留`, 8);
       era.add('item:浓缩咖啡', -1);
       return true;
     }
@@ -139,14 +143,18 @@ module.exports = (handlers) => {
           -get_random_value(10, Math.min(20, era.get(`base:${aim}:智力`) - 1)),
         ),
         '，',
-        ...sys_change_attr_and_print(aim, '精力', 2000),
+        ...sys_change_attr_and_print(
+          aim,
+          '精力',
+          era.get(`maxbase:${aim}:精力`),
+        ),
       ]);
       if (!era.get(`base:${aim}:体力`) < 1) {
         era.add(`base:${aim}:体力`, 1);
       }
       era.set(`status:${aim}:沉睡`, 0);
       era.set(`status:${aim}:马跳S`, 0);
-      era.add(`base:${aim}:药物残留`, 10);
+      era.add(`base:${aim}:药物残留`, 16);
       era.add('item:提神剂', -1);
       return true;
     }
@@ -162,7 +170,7 @@ module.exports = (handlers) => {
       await era.printAndWait([aim_chara.get_colored_name(), ' 的压力降低了……']);
       sys_change_motivation(aim, -1) && (await era.waitAnyKey());
       era.add(`base:${aim}:压力`, -2500);
-      era.add(`base:${aim}:药物残留`, 40);
+      era.add(`base:${aim}:药物残留`, 50);
       era.add('item:抗抑郁药', -1);
       return true;
     }
@@ -178,7 +186,7 @@ module.exports = (handlers) => {
       await era.printAndWait([aim_chara.get_colored_name(), ' 的性欲降低了……']);
       sys_change_motivation(aim, -1) && (await era.waitAnyKey());
       era.add(`base:${aim}:性欲`, -1500);
-      era.add(`base:${aim}:药物残留`, 40);
+      era.add(`base:${aim}:药物残留`, 50);
       era.add('item:镇静剂', -1);
       return true;
     }
@@ -228,7 +236,7 @@ module.exports = (handlers) => {
       ]);
       era.set(`status:${ret}:发胖`, 0);
       era.set(`base:${ret}:体重偏差`, 3200);
-      era.add(`base:${ret}:药物残留`, 50);
+      era.add(`base:${ret}:药物残留`, 60);
       era.add('item:速效减肥药', -1);
       return true;
     }
@@ -253,7 +261,7 @@ module.exports = (handlers) => {
             0.8,
         ),
       );
-      era.add(`base:${ret}:体重偏差`, 2000);
+      era.add(`base:${ret}:体重偏差`, 2400);
       era.add('item:头痛飞飞', -1);
       return true;
     }
@@ -279,9 +287,9 @@ module.exports = (handlers) => {
     const ret = await select_target_in_storage(
       item_id,
       (id) =>
-        id &&
+        id > 0 &&
         !era.get(`status:${id}:讨厌药`) &&
-        new LimitLoveStatus(id).is_empty(),
+        LoveLimitStatus.get(id).is_empty(),
     );
     if (ret !== undefined) {
       const chara = get_chara_talk(ret);
@@ -296,7 +304,7 @@ module.exports = (handlers) => {
         ' 的好感开始消散……',
       ]);
       era.set(`status:${ret}:讨厌药`, 4);
-      era.add(`base:${ret}:药物残留`, 40);
+      era.add(`base:${ret}:药物残留`, 50);
       era.add('item:讨厌药', -1);
       return true;
     }
@@ -318,7 +326,7 @@ module.exports = (handlers) => {
           reject === 99) &&
         !era.get(`status:${id}:讨厌药`) &&
         !era.get(`status:${id}:爱意克制`) &&
-        new LimitLoveStatus(id).is_empty()
+        LoveLimitStatus.get(id).is_empty()
       );
     });
     if (aim !== undefined) {
@@ -333,12 +341,12 @@ module.exports = (handlers) => {
         get_chara_talk(0).get_colored_name(),
         ' 的恋心被抑制了……',
       ]);
-      new LimitLoveStatus(aim).set(
+      LoveLimitStatus.get(aim).set(
         era.get(`love:${aim}`),
         era.get('flag:当前回合数') + 4,
       );
       era.set(`love:${aim}`, 40);
-      era.add(`base:${aim}:药物残留`, 40);
+      era.add(`base:${aim}:药物残留`, 50);
       era.add('item:抑制药', -1);
       return true;
     }

@@ -1,6 +1,6 @@
 /**
  * @file 骏川缰绳 - 爱慕
- * @author 无名黑奴（临时）
+ * @author 黑奴队长（临时）
  */
 const era = require('#/era-electron');
 
@@ -21,7 +21,7 @@ module.exports = class extends CustomizedLove {
         me.get_colored_name(),
         ' 坦白了自己的真实身份。',
       ]);
-      tokino.actual_name = era.set('callname:301:-1', '丰收时刻');
+      era.set('callname:301:-1', '丰收时刻');
       await era.printAndWait([
         tokino.get_uma_sex_title(),
         ' ',

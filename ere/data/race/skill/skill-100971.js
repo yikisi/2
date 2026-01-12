@@ -1,0 +1,82 @@
+const UmaSkill = require('#/data/race/model/uma-skill');
+
+module.exports = new UmaSkill(
+  100971,
+  '情不自禁的绯色百合',
+  '剩余300m的位置处在中游位置时，速度大幅提升；在中距离比赛发动「冲动」技能的情况下技能效果变为在比赛终盘的弯道，无视名次提升加速度',
+  10097,
+  1,
+  18,
+  340,
+  [() => true, () => true],
+  [
+    (args) =>
+      args.distance_type === 3 &&
+      args.is_used_skill_id.indexOf(203781) !== -1 &&
+      args.phase >= 2 &&
+      args.corner !== 0,
+    (args) =>
+      args.order_rate >= 20 &&
+      args.order_rate <= 70 &&
+      args.remain_distance >= 299 &&
+      args.remain_distance <= 301,
+  ],
+  [4, 5],
+  [500, 500],
+  [
+    UmaSkill.ability_time_usage_enum.normal,
+    UmaSkill.ability_time_usage_enum.normal,
+  ],
+  [
+    [
+      UmaSkill.ability_type_enum.Accel,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.TargetSpeed,
+      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.no,
+    ],
+  ],
+  [
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+    [
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+      UmaSkill.ability_usage_enum.Direct,
+    ],
+  ],
+  [
+    [0.4, 0, 0],
+    [0.45, 0, 0],
+  ],
+  [
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
+    [
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.no,
+    ],
+  ],
+  [
+    [0, 0, 0],
+    [0, 0, 0],
+  ],
+  [1, 3],
+  [30, 30],
+  0,
+  0,
+  false,
+  false,
+  [4],
+  [UmaSkill.ability_tag_enum.targetSpeed, UmaSkill.ability_tag_enum.accel],
+);

@@ -9,17 +9,15 @@ const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
 const { add_event, cb_enum } = require('#/event/queue');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 
-const CharaTalk = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const { get_chara_color } = require('#/data/chara-colors');
 const LunaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-17');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
-
-const color_17 = require('#/data/chara-colors').chara_colors[17];
 
 const aim_races = {};
 aim_races[race_enum.begin_race] = 2;
@@ -53,7 +51,7 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_and_get_titles(aim_check) {
-    const races = new RaceHistory(17).get(),
+    const races = RaceHistory.get(17).get(),
       is_invisible =
         check_aim_race(races, race_enum.sats_sho, 1, 1) &&
         check_aim_race(races, race_enum.toky_yus, 1, 1) &&
@@ -66,7 +64,7 @@ module.exports = class extends CustomizedCheck {
       titles = [];
     if (is_invisible && !new LunaEduMarks().title_check) {
       titles.push({
-        c: get_chara_talk(17).color,
+        c: get_chara_color(this.id),
         n: this.get_personal_titles()[0],
       });
       aim_check && sys_personal_achievement.set(17, 1);
@@ -84,7 +82,7 @@ module.exports = class extends CustomizedCheck {
       add_event(event_hooks.week_start, edu_object);
       if (
         edu_weeks === 47 + 41 &&
-        check_aim_race(new RaceHistory(17).get(), race_enum.kiku_sho, 1, 1)
+        check_aim_race(RaceHistory.get(17).get(), race_enum.kiku_sho, 1, 1)
       ) {
         add_event(event_hooks.week_end, edu_object_spe);
       } else if (edu_weeks === 95 + 1) {
@@ -101,9 +99,13 @@ module.exports = class extends CustomizedCheck {
     }
   }
 
+  get_aim_races() {
+    return aim_races;
+  }
+
   get_edu_aims() {
     const buffer = [],
-      races = new RaceHistory(17).get();
+      races = RaceHistory.get(17).get();
 
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.saud_cup, 0, 5));
@@ -134,9 +136,9 @@ module.exports = class extends CustomizedCheck {
           const { luna, emperor } = event_marks.emperor
               ? { luna: 9017, emperor: 17 }
               : { luna: 17, emperor: 9017 },
-            aim_talk = new CharaTalk(
+            aim_talk = get_chara_talk(
               event_marks.want_emperor ? emperor : luna,
-            ).set_color(color_17[event_marks.want_emperor]),
+            ),
             chara = get_chara_talk(17);
           era.print(
             event_marks.want_emperor === event_marks.emperor
@@ -162,7 +164,7 @@ module.exports = class extends CustomizedCheck {
   }
 
   is_aim_race(race, edu_weeks, rank) {
-    const ret = aim_races[`${edu_weeks}_${race}`] || aim_races[race];
+    const ret = super.is_aim_race(race, edu_weeks, rank);
     if (!ret && era.get('flag:当前赛事') > 0) {
       const event_marks = new LunaEduMarks();
       if (

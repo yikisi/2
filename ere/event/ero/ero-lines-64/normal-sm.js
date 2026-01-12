@@ -1,6 +1,6 @@
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
-const EroNormalSm = require('#/event/ero/common-lines/normal/sm');
+const EroNormalSm = require('#/event/ero/common/normal/sm');
 
 const PamaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-64');
 
@@ -24,7 +24,9 @@ module.exports = class extends EroNormalSm {
           '的臀瓣饱满圆润，在昏暗的灯光下泛着色情的光泽。',
         ]);
         await attacker.print_and_wait([
-          '每一次呼吸都让那两瓣柔软的肉随之轻微起伏，诱惑着我的手掌。',
+          '每一次呼吸都让那两瓣柔软的肉随之轻微起伏，诱惑着 ',
+          attacker.get_colored_name(),
+          ' 的手掌。',
         ]);
         await attacker.print_and_wait(['「啪！」']);
         await attacker.print_and_wait([
@@ -40,9 +42,13 @@ module.exports = class extends EroNormalSm {
         ]);
       }
       await attacker.print_and_wait([
-        '趴在我腿上的 ',
+        '趴在 ',
+        attacker.get_colored_name(),
+        ' 腿上的 ',
         sys_get_colored_callname(attacker.id, defender.id),
-        ' 不适地扭动着，不知是因为期待还是恐惧，我抬起右手——',
+        ' 不适地扭动着，不知是因为期待还是恐惧，',
+        attacker.get_colored_name(),
+        ' 抬起右手——',
       ]);
       await attacker.print_and_wait(['「啪！啪！」']);
       await attacker.print_and_wait([
@@ -82,7 +88,9 @@ module.exports = class extends EroNormalSm {
       ]);
       await attacker.print_and_wait([
         sys_get_colored_callname(attacker.id, defender.id),
-        ' 股间溢出的蜜液滴在我腿上，看来已经在痛苦中寻得了快感呢。',
+        ' 股间溢出的蜜液滴在 ',
+        attacker.get_colored_name(),
+        ' 腿上，看来已经在痛苦中寻得了快感呢。',
       ]);
     }
   }

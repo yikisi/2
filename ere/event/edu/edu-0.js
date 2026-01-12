@@ -44,10 +44,13 @@ const sys_filter_chara = require('#/system/sys-filter-chara');
 const { reset_chara } = require('#/system/sys-init-chara');
 
 const { get_custom_check } = require('#/event/check/check-factory');
+const kojo = require('#/event/edu/edu-0.kojo');
 const StrangeDayEvents = require('#/event/edu/edu-events-0/strange-day');
 const { add_event } = require('#/event/queue');
+const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
+const print_name_and_show_kojo = require('#/event/snippets/print-name-and-show-kojo');
 const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -58,8 +61,16 @@ const { get_chara_color } = require('#/data/chara-colors');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
+const { max_chara_id } = require('#/data/other-const');
 
 module.exports = class extends StrangeDayEvents {
+  get dict() {
+    return {
+      YOU: get('callname:0:-1'),
+      UMA: get('flag:角色性别') === 1 ? '马郎' : '马娘',
+    };
+  }
+
   /**
    * @author 天马闪光蹄
    * @param {CharaTalk} me
@@ -71,7 +82,10 @@ module.exports = class extends StrangeDayEvents {
       '招募状态',
       recruit_flags.yes,
     ).filter(
-      (e) => get(`cflag:${e}:种族`) > 0 && get(`cflag:${e}:可再次育成`) > 0,
+      (cid) =>
+        cid > 0 &&
+        get(`cflag:${cid}:种族`) > 0 &&
+        get(`cflag:${cid}:可再次育成`) > 0,
     );
     if (second_list.length === 0 || team_limit <= 0) {
       return;
@@ -218,9 +232,7 @@ module.exports = class extends StrangeDayEvents {
     const cur_weeks = get('flag:当前回合数'),
       next_year = Math.floor((cur_weeks + 47) / 48) * 48;
     new MyEduMarks().god = next_year + get_random_value(13, 40) - cur_weeks;
-    if (cur_weeks % 48 >= 13 && cur_weeks % 48 <= 40) {
-      await print_event_name('三女神雕像下的许愿池', me);
-    }
+    await print_event_name('三女神雕像下的许愿池', me);
     await printAndWait('投个硬币许个愿吧……');
     const dice = Math.random(),
       god = sys_get_random_uma_god();
@@ -267,6 +279,7 @@ module.exports = class extends StrangeDayEvents {
       await printAndWait('捡起来的时候变成了两枚！');
       sys_change_money(50);
     }
+    return true;
   }
 
   /**
@@ -376,7 +389,7 @@ module.exports = class extends StrangeDayEvents {
     ]);
     await printAndWait([
       '把海报摘下来一看，似乎是只面向训练员的',
-      get_random_entry(['短跑', '游泳', '登山）']),
+      get_random_entry(['短跑', '游泳', '登山']),
       '比赛，上面写着哪怕对体质没自信现场也会有官方支援的样子，要参加吗？',
     ]);
     printButton('（试试也不会少块肉？）（体力&精力-25%，可能获得奖品）', 1);
@@ -395,7 +408,7 @@ module.exports = class extends StrangeDayEvents {
         ...new Array(8).fill(0).map((_, i) => i),
         ...new Array(7).fill(0).map((_, i) => i + 10),
       ]);
-      print([`获得了奖品：[${get(`itemname:${item}`)}]！`]);
+      print(['获得了奖品【', get(`itemname:${item}`).toUpperCase(), '】！']);
       add(`item:${item}`, 1);
       sys_like_chara(305, 0, get_random_value(0, 10));
       await waitAnyKey();
@@ -446,7 +459,7 @@ module.exports = class extends StrangeDayEvents {
     ]);
     printButton('「我不是，我没有！」', 1);
     await input();
-    sys_change_fame(-20);
+    sys_change_fame(-10);
   }
 
   /**
@@ -465,8 +478,11 @@ module.exports = class extends StrangeDayEvents {
     println();
     await printAndWait('今天也是喝能量饮料强撑、睡办公室桌下的一天。');
     printButton('「地板好硬……」', 1);
-    get_attr_and_print_in_event(0, undefined, 0, JSON.parse('{"体力":-50}')) &&
-      (await waitAnyKey());
+    if (
+      get_attr_and_print_in_event(0, undefined, 0, JSON.parse('{"体力":-50}'))
+    ) {
+      await waitAnyKey();
+    }
   }
 
   /**
@@ -537,7 +553,9 @@ module.exports = class extends StrangeDayEvents {
     sys_change_lust(chara_id, (get('cflag:0:种族') ? 800 : 300) * 2);
     set('flag:当前互动角色', chara_id);
     println();
-    sys_love_uma(chara_id, 1) && (await waitAnyKey());
+    if (sys_love_uma(chara_id, 1)) {
+      await waitAnyKey();
+    }
     add_event(hook.hook, event_object.set_arg('privacy_1'));
   }
 
@@ -569,7 +587,9 @@ module.exports = class extends StrangeDayEvents {
     if ((await input()) === 1) {
       for (const c of in_team_list) {
         if (get(`cflag:${c}:种族`) > 0) {
-          sys_change_motivation(c, 1) && (await waitAnyKey());
+          if (sys_change_motivation(c, 1)) {
+            await waitAnyKey();
+          }
         }
       }
     } else {
@@ -630,10 +650,10 @@ module.exports = class extends StrangeDayEvents {
         ]);
         println();
         await printAndWait(['真是奇怪，会是谁寄的呢……']);
-        sys_like_chara(max.max[0], 0, 20) && (await waitAnyKey());
+        sys_like_chara(max.max[0], 0, 20, false) && (await waitAnyKey());
       } else {
         await printAndWait([
-          '「本命巧克力迷路第N年，在便利店买了根青汁味百奇自我应援」',
+          '「本命巧克力迷路第 N 年，在便利店买了根青汁味百奇自我应援」',
         ]);
         await printAndWait('随手编辑了一条推文，用小号发出去。');
         println();
@@ -655,14 +675,10 @@ module.exports = class extends StrangeDayEvents {
 
   /** @author Mr.E. */
   async sakura_regret() {
-    const chara_id = get_random_entry(
-      sys_filter_chara('cflag', '招募状态', recruit_flags.yes).filter(
-        (e) =>
-          e > 0 && get(`cflag:${e}:爱慕暂拒`) === 74 && e !== 25 && e !== 400,
-      ),
-    );
-    if (chara_id !== undefined) {
-      const chara = get_chara_talk(chara_id);
+    const my_marks = new MyEduMarks();
+    const cid = get_random_entry(my_marks.pity || []);
+    if (cid !== undefined) {
+      const chara = get_chara_talk(cid);
       await print_event_name('樱花的遗憾', chara);
       await printAndWait([
         '夜晚，在床上的 ',
@@ -825,5 +841,31 @@ module.exports = class extends StrangeDayEvents {
         }
       }
     }
+  }
+
+  /** @param {CharaTalk} me */
+  async big_sale(me) {
+    let ret = (
+      await print_name_and_show_kojo('商店街大甩卖', me, kojo, this.dict)
+    )[0];
+    if (ret !== 6) {
+      const attr = new Array(5).fill(0);
+      attr[ret - 1] = 20;
+      sys_change_money(-10);
+      if (
+        getAddedCharacters()
+          .filter(
+            (cid) =>
+              cid > 0 &&
+              cid < max_chara_id &&
+              get(`cflag:${cid}:育成回合计时`) < 3 * 48,
+          )
+          .reduce((p, cid) => all_reward_in_event(cid, { attr }) || p, false)
+      ) {
+        await waitAnyKey();
+      }
+    }
+    new MyEduMarks().big_sale = get_random_value(10, 15);
+    return true;
   }
 };

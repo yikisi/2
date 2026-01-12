@@ -12,12 +12,20 @@ const { skin_desc } = require('#/data/ero/status-const');
 const { get_skin, get_skin_color } = require('#/data/info-generator');
 
 module.exports = class extends LoveGod {
-  /** @param {number} chara_id */
-  constructor(chara_id) {
-    super(chara_id);
-    this.fuck_her_button = '亵渎';
-    this.fuck_pregnant_button = this.fuck_me_button = '献身';
-    this.reject_button = '南无三';
+  get fuck_her_button() {
+    return '亵渎';
+  }
+
+  get fuck_pregnant_button() {
+    return '献身';
+  }
+
+  get fuck_me_button() {
+    return '献身';
+  }
+
+  get reject_button() {
+    return '南无三';
   }
 
   async 49(god, me) {
@@ -35,7 +43,7 @@ module.exports = class extends LoveGod {
       '柔软……又温暖……但是有着能让肌肤发痒的柔韧倒刺，而且不知道什么时候就已经被缠上潜到了身后的感觉也很相似。',
     );
     await printAndWait('要不要向女神大人祈祷一下呢……');
-    super[49]();
+    await super[49]();
   }
 
   /**
@@ -81,17 +89,19 @@ module.exports = class extends LoveGod {
       me.get_colored_name(),
       ' 的身体合在了一起，睁开浑浊的眼睛反擒住了那双手。',
     ]);
-    await printAndWait([
-      '紧接着，激烈抵抗着的身体与身体，',
-      ...(get('cflag:0:肤色深度') === get('cflag:340:肤色深度')
-        ? ['褐肤的女神屈从在了那与自己有着相同的肤色的孩子之下。']
-        : [
-            { color: skin_colors.at(-1), content: skin_desc.at(-1) },
-            '被',
-            { color: get_skin_color(0), content: get_skin(0) },
-            '压倒',
-          ]),
-    ]);
+    if (get('cflag:0:肤色深度') === get('cflag:340:肤色深度')) {
+      await printAndWait(
+        '紧接着，激烈抵抗着的身体与身体，褐肤的女神屈从在了那与自己有着相同的肤色的孩子之下。',
+      );
+    } else {
+      await printAndWait([
+        '紧接着，激烈抵抗着的身体与身体，',
+        { color: skin_colors.at(-1), content: skin_desc.at(-1) },
+        '被',
+        { color: get_skin_color(0), content: get_skin(0) },
+        '压倒',
+      ]);
+    }
   }
 
   async fuck_me(god, me) {

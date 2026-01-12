@@ -1,7 +1,7 @@
 /**
  * @file 乙名史悦子 - 育成
  * @author 雞雞
- * @author 无名黑奴
+ * @author 黑奴队长
  */
 const {
   get,
@@ -49,7 +49,7 @@ const random_trainers = [
   undefined,
   '雞雞',
   '无名路人',
-  '无名黑奴',
+  '黑奴队长',
   '天马闪光蹄',
   '黑奴一号',
   '露娜俘虏',
@@ -180,7 +180,7 @@ function print_character_statistics({ id, history }) {
 module.exports = class extends CustomizedEdu {
   /**
    * @author 雞雞
-   * @author 无名黑奴
+   * @author 黑奴队长
    * @param {CharaTalk} etsuko
    * @param {CharaTalk} me
    */
@@ -232,7 +232,9 @@ module.exports = class extends CustomizedEdu {
       recruit_flags.yes,
     ).map((e) => ({
       id: e,
-      history: new RaceHistory(e).get_values().filter((r) => r.year === year),
+      history: RaceHistory.get(e)
+        .get_values()
+        .filter((r) => r.year === year),
     }));
     const g1_list = team_list
       .map((e) => ({

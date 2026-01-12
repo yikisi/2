@@ -4,7 +4,7 @@ module.exports = new UmaGene(
   900351,
   UmaGene.gene_rarity_enum.sr,
   '「为你奉上，胜利奖券！」之回响',
-  '习得「为你奉上，胜利奖券！」\n最终弯道之后进行名次争夺，在最终直线位于前方时，稍微提升速度',
+  '习得「为你奉上，胜利奖券！」',
   UmaGene.gene_type_enum.skill,
   -1,
   100,

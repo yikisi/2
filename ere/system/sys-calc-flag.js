@@ -1,15 +1,17 @@
 const era = require('#/era-electron');
 
+const EtsukoLifeMarks = require('#/data/event/life-event-marks/life-event-marks-303');
 const recruit_flags = require('#/data/event/recruit-flags');
 
 module.exports = {
-  /** @param {number} _val */
-  sys_change_fame(_val) {
-    let delta = _val;
-    if (!_val) {
+  /** @param {number} delta */
+  sys_change_fame(delta) {
+    if (!delta) {
       return 0;
     }
-    const has_etsuko = era.get('cflag:303:招募状态') === recruit_flags.yes;
+    const has_etsuko =
+      (era.get('cflag:303:招募状态') === recruit_flags.yes) *
+      (1 + new EtsukoLifeMarks().buff);
     if (delta < 0) {
       if (era.get('flag:惩戒力度') === 3) {
         return 0;

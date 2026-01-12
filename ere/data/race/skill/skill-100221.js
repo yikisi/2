@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在赛程后半若处于好位置并进行名次争夺会因奔跑而身心雀跃速度获得提升',
   10022,
   1,
-  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [() => true, () => true],

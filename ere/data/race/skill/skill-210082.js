@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '最后冲刺时速度稍微提升，并根据最高基础能力值提升效果',
   21008,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   263,
   [() => true, () => true],

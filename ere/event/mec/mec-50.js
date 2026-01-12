@@ -11,11 +11,11 @@ module.exports = class extends CustomizedMec {
       case race_enum.sats_sho:
       case race_enum.toky_yus:
       case race_enum.kiku_sho:
-        return [35, 23].map((e) => new LegendUmaSelector(e, 1.2));
+        return [35, 23].map((e) => new LegendUmaSelector(e, 1.1));
       case race_enum.tenn_spr:
       case race_enum.arim_kin:
         if (era.get('cflag:50:育成回合计时') > 96) {
-          return [new LegendUmaSelector(23, 1.2)];
+          return [new LegendUmaSelector(23, 1.1)];
         }
     }
     return super.get_race_contestants(info);

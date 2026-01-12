@@ -9,15 +9,11 @@ const prisma = new PrismaClient();
 const UmaSkill = require('../../ere/data/race/model/uma-skill');
 const legend_skill_sets = require('./custom-skill-sets');
 
-const rarity_names = {},
-  ability_time_usage_names = {},
+const ability_time_usage_names = {},
   ability_type_names = {},
   ability_type_usage_names = {},
   target_type_names = {};
 
-Object.entries(UmaSkill.rarity_enum).map(
-  ([key, value]) => (rarity_names[value] = key),
-);
 Object.entries(UmaSkill.ability_time_usage_enum).map(
   ([k, v]) => (ability_time_usage_names[v] = k),
 );
@@ -76,6 +72,10 @@ const icon2skill_color = {
     UmaSkill.skill_name_enum.debuff,
     UmaSkill.skill_border_enum.normal,
   ),
+  10036: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.buff,
+    UmaSkill.skill_border_enum.evol,
+  ),
   10041: UmaSkill.get_skill_color(
     UmaSkill.skill_name_enum.buff,
     UmaSkill.skill_border_enum.normal,
@@ -83,6 +83,10 @@ const icon2skill_color = {
   10051: UmaSkill.get_skill_color(
     UmaSkill.skill_name_enum.buff,
     UmaSkill.skill_border_enum.normal,
+  ),
+  10052: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.buff,
+    UmaSkill.skill_border_enum.advanced,
   ),
   10054: UmaSkill.get_skill_color(
     UmaSkill.skill_name_enum.debuff,
@@ -304,6 +308,10 @@ const icon2skill_color = {
     UmaSkill.skill_name_enum.speed,
     UmaSkill.skill_border_enum.normal,
   ),
+  20256: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.evol,
+  ),
   20261: UmaSkill.get_skill_color(
     UmaSkill.skill_name_enum.speed,
     UmaSkill.skill_border_enum.normal,
@@ -312,11 +320,51 @@ const icon2skill_color = {
     UmaSkill.skill_name_enum.speed,
     UmaSkill.skill_border_enum.advanced,
   ),
+  20266: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.evol,
+  ),
+  20276: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.evol,
+  ),
+  20286: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.heal,
+    UmaSkill.skill_border_enum.evol,
+  ),
   20291: UmaSkill.get_skill_color(
     UmaSkill.skill_name_enum.speed,
     UmaSkill.skill_border_enum.normal,
   ),
   20292: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.advanced,
+  ),
+  20296: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.evol,
+  ),
+  20306: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.evol,
+  ),
+  20311: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.normal,
+  ),
+  20312: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.advanced,
+  ),
+  20316: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.evol,
+  ),
+  20321: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.normal,
+  ),
+  20322: UmaSkill.get_skill_color(
     UmaSkill.skill_name_enum.speed,
     UmaSkill.skill_border_enum.advanced,
   ),
@@ -348,6 +396,10 @@ const icon2skill_color = {
     UmaSkill.skill_name_enum.control,
     UmaSkill.skill_border_enum.advanced,
   ),
+  30056: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.control,
+    UmaSkill.skill_border_enum.evol,
+  ),
   30071: UmaSkill.get_skill_color(
     UmaSkill.skill_name_enum.control,
     UmaSkill.skill_border_enum.normal,
@@ -363,6 +415,10 @@ const icon2skill_color = {
   2010010: UmaSkill.get_skill_color(
     UmaSkill.skill_name_enum.speed,
     UmaSkill.skill_border_enum.advanced,
+  ),
+  2010016: UmaSkill.get_skill_color(
+    UmaSkill.skill_name_enum.speed,
+    UmaSkill.skill_border_enum.evol,
   ),
 };
 
@@ -545,37 +601,30 @@ ability_tag_enum_names[UmaSkill.ability_type_enum.TemptationEndTime] =
 ability_tag_enum_names[UmaSkill.ability_type_enum.LaneMoveSpeed] =
   UmaSkill.ability_tag_enum.laneMove;
 
-function get_rarity(v) {
-  if (!rarity_names[v]) {
-    throw new Error(v);
-  }
-  return `UmaSkill.rarity_enum.${rarity_names[v]}`;
-}
-
 function get_ability_time_usage(v) {
   if (!ability_time_usage_names[v]) {
-    throw new Error(v);
+    throw new Error(`undefined ability_time_usage: ${v}`);
   }
   return `UmaSkill.ability_time_usage_enum.${ability_time_usage_names[v]}`;
 }
 
 function get_ability_type(v) {
   if (!ability_type_names[v]) {
-    throw new Error(v);
+    throw new Error(`undefined ability_type: ${v}`);
   }
   return `UmaSkill.ability_type_enum.${ability_type_names[v]}`;
 }
 
 function get_ability_usage(v) {
   if (!ability_type_usage_names[v]) {
-    throw new Error(v);
+    throw new Error(`undefined ability_usage: ${v}`);
   }
   return `UmaSkill.ability_usage_enum.${ability_type_usage_names[v]}`;
 }
 
 function get_target_type(v) {
   if (!target_type_names[v]) {
-    throw new Error(v);
+    throw new Error(`undefined target_type: ${v}`);
   }
   return `UmaSkill.target_type_enum.${target_type_names[v]}`;
 }
@@ -604,25 +653,35 @@ async function chara_skill() {
   Object.values(dict).forEach((e) => e.forEach((s) => (skill_dict[s] = 1)));
   console.log('角色卡技能', Object.keys(skill_dict).length);
   let buffer =
-      '/** @type {Record<string,number[]>} */\nconst chara_skill_dict={};\n/** @type {Record<string,UmaSkill>} */\nconst skills_dict = {};\n\n',
-    buffer_common_skills = [
-      202051, 200791, 200801, 200811, 200821, 990011, 990021,
-    ];
-  for (const chara_id in dict) {
-    buffer += `chara_skill_dict[${Number(chara_id) % 1000}] = [${dict[chara_id].join(',')}];`;
+    '/** @type {Record<string,number[]>} */\nconst chara_skill_dict={};\n/** @type {Record<string,UmaSkill>} */\nconst skills_dict = {};\n\n';
+  let buffer_common_skills = [
+    202051, 200791, 200801, 200811, 200821, 990011, 990021, 600011, 600012,
+    660011, 660012, 660021, 660022, 660031, 660032, 660041, 660042, 660051,
+    660052,
+  ];
+  for (const cid in dict) {
+    buffer += `chara_skill_dict[${Number(cid) % 1000}] = [${dict[cid].join(',')}];`;
   }
   buffer += '\n\nconst skill_sets = {0:[],\n';
+  const skill_sets = [
+    ...(await prisma.daily_race_npc.findMany()),
+    ...(await prisma.legend_race_boss_npc.findMany()),
+    ...(await prisma.legend_race_npc.findMany()),
+    ...(await prisma.single_mode_npc.findMany()),
+    ...(await prisma.heroes_race_default_npc.findMany()),
+    ...(await prisma.challenge_match_boss_npc.findMany()),
+  ]
+    .filter((e) => e.chara_id < 9040 || e.chara_id > 9042)
+    .map((e) => e.skill_set_id);
+  [
+    ...(await prisma.ultimate_race_npc.findMany()),
+    ...(await prisma.heroes_race_mob_npc.findMany()),
+  ].forEach((e) => skill_sets.push(e.skill_set_id_1, e.skill_set_id_2));
   (
     await prisma.skill_set.findMany({
       where: {
         id: {
-          in: [
-            ...(await prisma.daily_race_npc.findMany()),
-            ...(await prisma.legend_race_npc.findMany()),
-            ...(await prisma.single_mode_npc.findMany()),
-          ]
-            .filter((e) => e.chara_id < 9000)
-            .map((e) => e.skill_set_id),
+          in: skill_sets,
         },
       },
     })
@@ -669,10 +728,22 @@ async function chara_skill() {
     }
   });
   skill_dict[910031] = 1;
+  skill_dict[660011] = 1;
+  skill_dict[660012] = 1;
+  skill_dict[660021] = 1;
+  skill_dict[660022] = 1;
+  skill_dict[660031] = 1;
+  skill_dict[660032] = 1;
+  skill_dict[660041] = 1;
+  skill_dict[660042] = 1;
+  skill_dict[660051] = 1;
+  skill_dict[660052] = 1;
   delete skill_dict[100601];
   delete skill_dict[102602211];
   delete skill_dict[900601];
   delete skill_dict[101201];
+  delete skill_dict[100971];
+  delete skill_dict[203781];
   console.log('+通用技能', Object.keys(skill_dict).length);
   const skill_data = await find_many_skills({
     id: { in: Object.keys(skill_dict).map(Number) },
@@ -705,21 +776,15 @@ async function chara_skill() {
   const c_dict = { is_used_skill_id: 1 };
 
   buffer += '\n\nconst current = new Date().getTime();\n\n';
-  buffer +=
-    'skills_dict[102602211]=require("#/data/race/skill/skill-102602211");' +
-    'skills_dict[100039]=require("#/data/race/skill/skill-100039");' +
-    'skills_dict[900039]=require("#/data/race/skill/skill-900039");' +
-    'skills_dict[100601]=require("#/data/race/skill/skill-100601");' +
-    'skills_dict[900601]=require("#/data/race/skill/skill-900601");' +
-    'skills_dict[101201]=require("#/data/race/skill/skill-101201");' +
-    'skills_dict[102041]=require("#/data/race/skill/skill-102041");' +
-    'skills_dict[902041]=require("#/data/race/skill/skill-902041");' +
-    'skills_dict[102051]=require("#/data/race/skill/skill-102051");' +
-    'skills_dict[902051]=require("#/data/race/skill/skill-902051");' +
-    'skills_dict[102061]=require("#/data/race/skill/skill-102061");' +
-    'skills_dict[902061]=require("#/data/race/skill/skill-902061");' +
-    'skills_dict[990011]=require("#/data/race/skill/skill-990011");' +
-    'skills_dict[990021]=require("#/data/race/skill/skill-990021");';
+  [
+    102602211, 100039, 900039, 100601, 900601, 100971, 101201, 102041, 902041,
+    102051, 902051, 102061, 902061, 990011, 990021, 600011, 600012, 660011,
+    660012, 660021, 660022, 660031, 660032, 660041, 660042, 660051, 660052,
+    203781,
+  ].forEach(
+    (s) =>
+      (buffer += `skills_dict[${s}]=require("#/data/race/skill/skill-${s}");`),
+  );
 
   function get_skill_group_level(skill) {
     if (skill.category >> 3 === 4) {
@@ -753,14 +818,25 @@ async function chara_skill() {
       });
   });
 
-  skill_data.forEach((e) => {
+  let hasError = false;
+  for (const e of skill_data) {
     try {
       const id = e.id;
       buffer += `skills_dict[${id}]=require('#/data/race/skill/skill-${id}');`;
       let sbuffer =
         "const UmaSkill = require('#/data/race/model/uma-skill');\n\nmodule.exports = new UmaSkill(";
       if (e.category === undefined) {
-        console.log('\tmissed! ', e.icon_id, ' from skill ', e.id);
+        console.log(
+          '\ticon missed!',
+          e.icon_id,
+          'from skill',
+          e.id,
+          (
+            await prisma.text_data.findFirst({
+              where: { index: e.id, category: 47 },
+            })
+          ).text,
+        );
       }
       // console.log(e.id);
       sbuffer += `${id},`;
@@ -768,7 +844,6 @@ async function chara_skill() {
       sbuffer += `"${skill_text[id][48]}",`;
       sbuffer += `${e.group_id},`;
       sbuffer += `${e.group_level},`;
-      sbuffer += `${get_rarity(e.rarity)},`;
       sbuffer += `${e.category},`;
       sbuffer += `${e.grade_value},`;
       sbuffer += `[${parse_condition(e.precondition_1, true)},${parse_condition(e.precondition_2, true)}],`;
@@ -816,38 +891,54 @@ async function chara_skill() {
       fill_dict(e.condition_1, c_dict, e);
       fill_dict(e.condition_2, c_dict, e);
     } catch (err) {
-      console.error(e.id, e.name, err.message, err.stack);
-      process.exit(1);
+      console.error(e.id, e.name, err.message);
+      hasError = true;
     }
-  });
+  }
   writeFileSync(
     '../../ere/data/race/skill/skill-const.js',
-    `${buffer}\n\nconsole.log('[skill-const.js] skill list init done!',(new Date().getTime()-current).toLocaleString(),'ms')\n\nconst common_skills = [${buffer_common_skills.sort().join(',')}];\n\nmodule.exports = {chara_skill_dict,common_skills,skills_dict,skill_sets};`,
+    `${buffer}\n\nconsole.log('技能列表注册完毕!',(new Date().getTime()-current).toLocaleString(),'ms')\n\nconst common_skills = [${buffer_common_skills
+      .sort()
+      .filter((e, i, l) => i === l.indexOf(e))
+      .join(
+        ',',
+      )}];\n\nmodule.exports = {chara_skill_dict,common_skills,skills_dict,skill_sets};`,
   );
   buffer = 'class ConditionParams { ';
+  c_dict['orgasm'] = c_dict['milk'] = c_dict['item'] = 1;
   Object.keys(c_dict)
     .sort()
     .forEach((k) => (buffer += `${k};`));
   writeFileSync(
     '../../ere/data/race/model/condition-params.js',
-    `${buffer}};\n\nmodule.exports = ConditionParams;`,
+    `${buffer};};\n\nmodule.exports = ConditionParams;`,
   );
   console.log('条件参数', Object.keys(c_dict).length, '个');
 
-  execSync('npx eslint --fix ./ere/data/race/skill', {
-    cwd: join(process.cwd(), '../..'),
-  });
+  try {
+    process.stdout.write(
+      execSync(
+        'npx eslint --fix ./ere/data/race/model/condition-params.js ./ere/data/race/skill',
+        {
+          cwd: join(process.cwd(), '../..'),
+        },
+      ),
+    );
 
-  execSync('node parse-genes.js');
+    if (hasError) {
+      process.exit(1);
+    }
 
-  execSync('node parse-contestants.js');
-
-  execSync(
-    'npx eslint --fix ./ere/data/race/model/condition-params.js ./ere/data/race/gene',
-    {
-      cwd: join(process.cwd(), '../..'),
-    },
-  );
+    process.stdout.write(execSync('node parse-genes.js'));
+    process.stdout.write(execSync('node parse-contestants.js'));
+    process.stdout.write(
+      execSync('npx eslint --fix ./ere/data/race/gene', {
+        cwd: join(process.cwd(), '../..'),
+      }),
+    );
+  } catch (e) {
+    process.stdout.write(e.stdout);
+  }
 }
 
 chara_skill().then();

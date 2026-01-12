@@ -1,6 +1,6 @@
 /**
  * @file 秋川弥生 - 爱慕
- * @author 无名黑奴（临时）
+ * @author 黑奴队长（临时）
  */
 const era = require('#/era-electron');
 
@@ -25,7 +25,7 @@ module.exports = class extends CustomizedLove {
         { color: taste.color, content: '北方风味', fontWeight: 'bold' },
         '。',
       ]);
-      taste.actual_name = era.set('callname:302:-1', '北方风味');
+      era.set('callname:302:-1', '北方风味');
       await era.printAndWait([
         taste.get_colored_name(),
         ' 一脸挫败的表情，拜托 ',

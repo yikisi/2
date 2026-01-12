@@ -1,21 +1,20 @@
-const era = require('#/era-electron');
+const MecChild = require('#/event/mec/mec-child');
+const CustomizedMec = require('#/event/mec/mec-common');
 
-const common_cons = require('#/event/mec/mec-common');
-const script_dict = require('#/event/script-dict.json');
+const CommonKojoFactory = require('#/event/factory-common');
 
-const { first_child_id } = require('#/data/other-const');
-
-const cons_dict = {},
-  obj_dict = {};
+const cons_dict = {};
 
 const current = new Date().getTime();
 
+// GENERATED START
 cons_dict[0] = require('#/event/mec/mec-0');
 cons_dict[3] = require('#/event/mec/mec-3');
 cons_dict[4] = require('#/event/mec/mec-4');
 cons_dict[6] = require('#/event/mec/mec-6');
 cons_dict[7] = require('#/event/mec/mec-7');
 cons_dict[12] = require('#/event/mec/mec-12');
+cons_dict[13] = require('#/event/mec/mec-13');
 cons_dict[17] = require('#/event/mec/mec-17');
 cons_dict[19] = require('#/event/mec/mec-19');
 cons_dict[21] = require('#/event/mec/mec-21');
@@ -28,23 +27,28 @@ cons_dict[34] = require('#/event/mec/mec-34');
 cons_dict[37] = require('#/event/mec/mec-37');
 cons_dict[38] = require('#/event/mec/mec-38');
 cons_dict[40] = require('#/event/mec/mec-40');
+cons_dict[44] = require('#/event/mec/mec-44');
 cons_dict[48] = require('#/event/mec/mec-48');
 cons_dict[50] = require('#/event/mec/mec-50');
 cons_dict[52] = require('#/event/mec/mec-52');
 cons_dict[56] = require('#/event/mec/mec-56');
+cons_dict[64] = require('#/event/mec/mec-64');
 cons_dict[65] = require('#/event/mec/mec-65');
 cons_dict[67] = require('#/event/mec/mec-67');
 cons_dict[68] = require('#/event/mec/mec-68');
+cons_dict[71] = require('#/event/mec/mec-71');
 cons_dict[74] = require('#/event/mec/mec-74');
 cons_dict[80] = require('#/event/mec/mec-80');
 cons_dict[85] = require('#/event/mec/mec-85');
 cons_dict[86] = require('#/event/mec/mec-86');
+cons_dict[90] = require('#/event/mec/mec-90');
 cons_dict[91] = require('#/event/mec/mec-91');
 cons_dict[100] = require('#/event/mec/mec-100');
 cons_dict[121] = require('#/event/mec/mec-121');
 cons_dict[204] = require('#/event/mec/mec-204');
 cons_dict[205] = require('#/event/mec/mec-205');
 cons_dict[206] = require('#/event/mec/mec-206');
+cons_dict[207] = require('#/event/mec/mec-207');
 cons_dict[301] = require('#/event/mec/mec-301');
 cons_dict[302] = require('#/event/mec/mec-302');
 cons_dict[303] = require('#/event/mec/mec-303');
@@ -57,35 +61,44 @@ cons_dict[341] = require('#/event/mec/mec-341');
 cons_dict[342] = require('#/event/mec/mec-342');
 cons_dict[343] = require('#/event/mec/mec-343');
 cons_dict[344] = require('#/event/mec/mec-344');
+cons_dict[345] = require('#/event/mec/mec-345');
+cons_dict[349] = require('#/event/mec/mec-349');
 cons_dict[400] = require('#/event/mec/mec-400');
 cons_dict['av-sister'] = require('#/event/mec/mec-av-sister');
+cons_dict['emperor'] = require('#/event/mec/mec-emperor');
 cons_dict[201] =
   cons_dict[202] =
   cons_dict[203] =
-    require('#/event/mec/mec-npc-uma-common');
-cons_dict[207] = cons_dict[345] = require('#/event/mec/mec-npc');
+    require('#/event/mec/mec-uma-npc');
+cons_dict[346] =
+  cons_dict[347] =
+  cons_dict[348] =
+    require('#/event/mec/mec-npc');
+// GENERATED END
 
 console.log(
-  '[mec-factory.js] constructor dictionary init done!',
+  '角色机制脚本注册完毕!',
   (new Date().getTime() - current).toLocaleString(),
   'ms',
 );
 
-module.exports = {
+class MechanismFactory extends CommonKojoFactory {
+  constructor() {
+    super(cons_dict, CustomizedMec, MecChild);
+  }
+
   /**
-   * @param {number} chara_id
+   * @param {number} cid
    * @returns {CustomizedMec}
    */
-  get_custom_mec(chara_id) {
-    if (obj_dict[chara_id]) {
-      return obj_dict[chara_id];
-    }
-    const script_name =
-        chara_id >= first_child_id
-          ? era.get(`callname:${chara_id}:-2`)
-          : chara_id,
-      class_const =
-        cons_dict[script_dict[script_name] || script_name] || common_cons;
-    return (obj_dict[chara_id] = new class_const(chara_id)).get_this();
-  },
-};
+  get_custom_mec(cid) {
+    return this.get(cid);
+  }
+}
+
+const mec_factory = new MechanismFactory();
+
+CustomizedMec.get_custom_mec = mec_factory.get_custom_mec =
+  mec_factory.get_custom_mec.bind(mec_factory);
+
+module.exports = mec_factory;

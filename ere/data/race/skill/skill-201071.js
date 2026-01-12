@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '更容易赶超成功',
   20107,
   2,
-  UmaSkill.rarity_enum.gold,
   17,
   334,
   [() => true, () => true],

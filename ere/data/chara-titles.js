@@ -2,16 +2,22 @@ const era = require('#/era-electron');
 
 const { distinct_list } = require('#/utils/list-utils');
 
-const title_desc = require('#/data/desc/title-desc.json');
+const title_desc = require('#/data/desc/titles.json');
+
+const dict = {};
 
 class CharaTitles {
-  /** @param {number} chara_id */
-  constructor(chara_id) {
-    this.chara_id = chara_id;
-    this.obj = era.get(`cstr:${chara_id}:称号`);
-    if (!(this.obj instanceof Array)) {
-      this.obj = era.set(`cstr:${chara_id}:称号`, []);
-    }
+  /** @returns {CharaTitles} */
+  static get(cid) {
+    return dict[cid] || (dict[cid] = new CharaTitles(cid));
+  }
+
+  /** @type {number} */
+  #id;
+
+  /** @param {number} cid */
+  constructor(cid) {
+    this.#id = cid;
   }
 
   count() {
@@ -20,19 +26,24 @@ class CharaTitles {
 
   /** @param {{c:string,n:string,[s]:boolean}} t */
   push(...t) {
-    const origin_length = this.obj.length;
-    this.obj.push(...t);
+    const list = this.get();
+    const o_len = list.length;
+    list.push(...t);
     return (
-      (this.obj = era.set(
-        `cstr:${this.chara_id}:称号`,
-        distinct_list(this.obj, (e) => e.n),
-      )).length > origin_length
+      era.set(
+        `cstr:${this.#id}:称号`,
+        distinct_list(list, (e) => e.n),
+      ).length > o_len
     );
   }
 
   /** @returns {{c:string,n:string,[s]:boolean}[]} */
   get() {
-    return this.obj;
+    let ret = era.get(`cstr:${this.#id}:称号`);
+    if (!(ret instanceof Array)) {
+      ret = era.set(`cstr:${this.#id}:称号`, []);
+    }
+    return ret;
   }
 
   /** @returns {{c:string,n:string}|undefined} */
@@ -41,10 +52,10 @@ class CharaTitles {
   }
 
   /**
-   * @param {boolean} [has_desc]
+   * @param {boolean} [has_desc=false]
    * @returns {{color:string,[title]:string,content:string}|string}
    */
-  get_colored_curr_title(has_desc) {
+  get_colored_curr_title(has_desc = false) {
     const curr = this.get_curr_title();
     return curr
       ? {

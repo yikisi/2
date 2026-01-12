@@ -1,19 +1,24 @@
-﻿const era = require('#/era-electron');
+const era = require('#/era-electron');
 
-const get_status = require('#/system/chara/sys-get-status');
+const sys_get_status = require('#/system/chara/sys-get-status');
 const {
   sys_get_billings,
   sys_reg_race,
 } = require('#/system/sys-calc-base-cflag');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
-const date_indicator = require('#/page/components/date-indicator');
 const race_indicator = require('#/page/components/race-indicator');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { get_custom_mec } = require('#/event/mec/mec-factory');
 
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { get_abbr_number } = require('#/utils/value-utils');
+
+const CharaTitles = require('#/data/chara-titles');
 const { celebration_color, money_color } = require('#/data/color-const');
 const { attr_background_colors, trainer_colors } = require('#/data/const.json');
+const date_indicator = require('#/data/date-indicator');
+const title_desc = require('#/data/desc/titles.json');
 const recruit_flags = require('#/data/event/recruit-flags');
 const {
   get_celebration,
@@ -21,11 +26,10 @@ const {
   get_trainer_title,
   get_trainer_train_buff,
 } = require('#/data/info-generator');
-const { location_enum, location_name } = require('#/data/locations');
+const { location_name } = require('#/data/locations');
 const { race_infos } = require('#/data/race/race-const');
 
 function get_progress_bar() {
-  const status_list = get_status(0);
   return [
     {
       config: { width: 2 },
@@ -57,16 +61,6 @@ function get_progress_bar() {
       percentage: (era.get(`base:0:精力`) * 100) / era.get(`maxbase:0:精力`),
       type: 'progress',
     },
-    {
-      config: { width: 2 },
-      content: '状态',
-      type: 'text',
-    },
-    {
-      config: { width: 22 },
-      content: status_list.length > 0 ? status_list : '正常',
-      type: 'text',
-    },
   ];
 }
 
@@ -77,56 +71,37 @@ function page_header(enable_race_info) {
   if (!cur_year) {
     era.drawLine();
     era.print('当前未加载存档', { align: 'center' });
-  } else if (era.get('flag:当前位置') === location_enum.basement) {
-    era.printInColRows(
-      [{ type: 'divider' }],
-      {
-        columns: get_progress_bar(),
-        config: { width: 16 },
-      },
-      {
-        columns: [
-          {
-            content: [
-              '位于 ',
-              {
-                content: '地下室',
-                fontWeight: 'bold',
-              },
-            ],
-            type: 'text',
-          },
-        ],
-        config: { width: 8 },
-      },
-    );
   } else {
-    const celebration = get_celebration(),
-      cur_coin = era.get('flag:当前马币'),
-      cur_fame = era.get('flag:当前声望'),
-      cur_rounds = era.get('flag:当前回合数'),
-      race_characters = sys_filter_chara('cflag', '招募状态', recruit_flags.yes)
-        .map((e) => {
-          const ret = sys_reg_race(e).curr;
-          return {
-            id: e,
-            race: ret.race,
-            week: ret.week,
-          };
-        })
-        .filter((e) => e.week === cur_rounds),
-      title_level = get_trainer_title(),
-      trainer_title_color = trainer_colors[title_level.substring(0, 2)],
-      trainer_buff = get_trainer_train_buff(),
-      money_buff = era.get('global:金钱加成'),
-      rec_trainers = [304, 306]
-        .filter((e) => era.get(`cflag:${e}:招募状态`) === recruit_flags.yes)
-        .map((e) => `[${era.get(`staticcstr:${e}:称号`)}]`)
-        .join('+');
-    let billings = '月账单：',
+    const celebration = get_celebration();
+    const cur_coin = era.get('flag:当前马币');
+    const cur_fame = era.get('flag:当前声望');
+    const cur_rounds = era.get('flag:当前回合数');
+    const race_characters = sys_filter_chara(
+      'cflag',
+      '招募状态',
+      recruit_flags.yes,
+    )
+      .map((e) => {
+        const ret = sys_reg_race(e).curr;
+        return {
+          id: e,
+          race: ret.race,
+          week: ret.week,
+        };
+      })
+      .filter((e) => e.week === cur_rounds);
+    const title_level = get_trainer_title();
+    const trainer_title_color = trainer_colors[title_level.substring(0, 2)];
+    const trainer_buff = get_trainer_train_buff();
+    const money_buff = era.get('global:金钱加成');
+    const rec_trainers = [304, 306]
+      .filter((e) => era.get(`cflag:${e}:招募状态`) === recruit_flags.yes)
+      .map((e) => `[${get_custom_mec(e).get_talents()[0].content}]`)
+      .join('+');
+    let billings = '账单：',
       money_change = 0;
     sys_get_billings().forEach((e, i) => {
-      if (e.repay !== 0 && e.timer > 0) {
+      if (e.repay !== 0 && e.timer !== 0) {
         let delta = e.repay;
         if (delta > 0) {
           delta = Math.floor((e.repay * (100 + money_buff)) / 100);
@@ -134,6 +109,9 @@ function page_header(enable_race_info) {
         money_change += delta;
         billings += `\n${delta > 0 ? '+' : ''}${delta}`;
         switch (e.creditor) {
+          case -2:
+            billings += ` (${era.get('callname:349:-2')} 投资收益)`;
+            break;
           case -1:
             billings += ' (月工资+年终奖)';
             break;
@@ -141,10 +119,49 @@ function page_header(enable_race_info) {
             billings += ' (月工资)';
             break;
           default:
-            billings += ` (${era.get(`callname:${e.creditor}:-2`)}${i === 0 ? ' · 主要' : ''}${e.timer > 0 ? ` 余${e.timer}周` : ''})`;
+            if (e.timer > 0) {
+              billings += ` (${era.get(`callname:${e.creditor}:-2`)}${i === 0 ? ' · 主要' : ''} 余${e.timer}周)`;
+            } else {
+              billings += ` (${era.get(`callname:${e.creditor}:-2`)} 献金)`;
+            }
         }
       }
     });
+    const status_list = sys_get_status(0);
+    const title_info = [
+      {
+        color: trainer_title_color,
+        fontWeight: 'bold',
+        ...get_abbr_number(cur_fame),
+      },
+      ' 声望 ',
+    ];
+    const t_title = CharaTitles.get(0).get_curr_title();
+    if (t_title) {
+      title_info.push({
+        color: t_title.c,
+        content: `[${t_title.n}]`,
+        fontWeight: 'n',
+        title: title_desc[t_title.n]
+          ? `[${t_title.n}]：${title_desc[t_title.n]}\n`
+          : '',
+      });
+    } else {
+      title_info.push({
+        color: trainer_title_color,
+        content: `[${title_level}]`,
+        fontWeight: 'bold',
+        title: '',
+      });
+    }
+    title_info.at(-1).title += `[${title_level}]：${
+      trainer_buff > 0
+        ? `指导训练时成功率与效果加成+${trainer_buff}%${
+            rec_trainers.length > 0 ? ` (↑${rec_trainers})` : ''
+          }，`
+        : ''
+    }担当赏金${4 * get_trainer_level() + 4}%分成。`;
+    title_info.push(...race_indicator(0));
     era.printInColRows(
       [{ type: 'divider' }],
       {
@@ -173,22 +190,7 @@ function page_header(enable_race_info) {
           },
           {
             config: { width: 16 },
-            content: [
-              {
-                color: trainer_title_color,
-                content: cur_fame.toLocaleString(),
-                fontWeight: 'bold',
-              },
-              ' 声望 (',
-              {
-                color: trainer_title_color,
-                content: title_level,
-                fontWeight: 'bold',
-                title: `[${title_level}]：${trainer_buff > 0 ? `指导训练时成功率与效果加成+${trainer_buff}%${rec_trainers.length > 0 ? ` (↑${rec_trainers})` : ''}，` : ''}担当赏金${4 * get_trainer_level() + 4}%分成。`,
-              },
-              ')',
-              ...race_indicator(0),
-            ],
+            content: title_info,
             type: 'text',
           },
           {
@@ -215,6 +217,16 @@ function page_header(enable_race_info) {
             type: 'text',
           },
           ...get_progress_bar(),
+          {
+            config: { width: 2 },
+            content: '状态',
+            type: 'text',
+          },
+          {
+            config: { width: 22 },
+            content: status_list.length > 0 ? status_list : '正常',
+            type: 'text',
+          },
         ],
         config: { width: 16 },
       },
@@ -263,3 +275,4 @@ function page_header(enable_race_info) {
 }
 
 module.exports = page_header;
+module.exports.get_progress_bar = get_progress_bar;

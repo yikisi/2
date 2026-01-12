@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '擅长秋季的比赛',
   20019,
   2,
-  UmaSkill.rarity_enum.normal,
   0,
   174,
   [() => true, () => true],

@@ -1,15 +1,11 @@
-const { get } = require('#/era-electron');
+const CustomizedBase = require('#/event/basement/basement-common');
+const CommonKojoFactory = require('#/event/factory-common');
 
-const common_basement = require('#/event/basement/basement-common');
-const script_dict = require('#/event/script-dict.json');
-
-const { first_child_id } = require('#/data/other-const');
-
-const cons_dict = {},
-  obj_dict = {};
+const cons_dict = {};
 
 const current = new Date().getTime();
 
+// GENERATED START
 cons_dict[3] = require('#/event/basement/basement-3');
 cons_dict[7] = require('#/event/basement/basement-7');
 cons_dict[13] = require('#/event/basement/basement-13');
@@ -19,26 +15,30 @@ cons_dict[52] = require('#/event/basement/basement-52');
 cons_dict[64] = require('#/event/basement/basement-64');
 cons_dict[89] = require('#/event/basement/basement-89');
 cons_dict[119] = require('#/event/basement/basement-119');
+// GENERATED END
 
 console.log(
-  '[basement-factory.js] constructor dictionary init done!',
+  '角色地下室口上注册完毕!',
   (new Date().getTime() - current).toLocaleString(),
   'ms',
 );
 
-module.exports = {
+class BasementFactory extends CommonKojoFactory {
+  constructor() {
+    super(cons_dict, CustomizedBase);
+  }
+
   /**
-   * @param {number} chara_id
+   * @param {number} id
    * @returns {CustomizedBase}
    */
-  get_custom_basement(chara_id) {
-    if (obj_dict[chara_id]) {
-      return obj_dict[chara_id];
-    }
-    const script_name =
-        chara_id >= first_child_id ? get(`callname:${chara_id}:-2`) : chara_id,
-      class_cons =
-        cons_dict[script_dict[script_name] || script_name] || common_basement;
-    return (obj_dict[chara_id] = new class_cons(chara_id)).get_this();
-  },
-};
+  get_custom_basement(id) {
+    return this.get(id);
+  }
+}
+
+const basement_factory = new BasementFactory();
+basement_factory.get_custom_basement =
+  basement_factory.get_custom_basement.bind(basement_factory);
+
+module.exports = basement_factory;

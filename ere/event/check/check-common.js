@@ -1,11 +1,17 @@
 const era = require('#/era-electron');
 
 const {
+  sys_check_cuckold,
+  sys_check_yandere,
+} = require('#/system/chara/sys-calc-cheat');
+const {
   check_pregnant_unprotect,
   check_want_to_escape,
 } = require('#/system/ero/sys-calc-ero-status');
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
+
+const MejiroCity = require('#/page/mejiro/mejiro-common');
 
 const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-get-entry');
 const check_and_register_aim_race = require('#/event/check/snippets/check-and-register-aim-race');
@@ -16,8 +22,10 @@ const { log_600m4 } = require('#/utils/value-utils');
 
 const { get_chara_color } = require('#/data/chara-colors');
 const { attr_change_colors } = require('#/data/color-const');
+const CharaInmon = require('#/data/ero/chara-inmon');
 const { lust_border } = require('#/data/ero/orgasm-const');
-const CrazyFans = require('#/data/event/crazy-fans');
+const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
+const crazy_fans = require('#/data/event/crazy-fans');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const { location_enum } = require('#/data/locations');
@@ -29,51 +37,70 @@ const { pressure_border } = require('#/data/train-const');
 
 const aim_races = { [race_enum.begin_race]: 4 };
 
-function common_no_action_check(chara_id) {
+function common_no_action_check(cid) {
   return (
-    era.get(`cflag:${chara_id}:成长阶段`) < 2 ||
-    !era.get(`base:${chara_id}:精力`) ||
-    !sys_check_awake(chara_id) ||
-    !check_pregnant_unprotect(chara_id) ||
+    era.get(`cflag:${cid}:成长阶段`) < 2 ||
+    !era.get(`base:${cid}:精力`) ||
+    !sys_check_awake(cid) ||
+    !check_pregnant_unprotect(cid) ||
     !check_pregnant_unprotect(0) ||
-    era.get(`cflag:${chara_id}:位置`) !== era.get('cflag:0:位置')
+    era.get(`cflag:${cid}:位置`) !== era.get('cflag:0:位置')
   );
 }
 
+/**
+ * 定制化检查脚本，一般用于生成判定值、在各个判定节点进行事件判定（将事件对象 EventObject 添加到事件队列）
+ */
 class CustomizedCheck {
   static like_chara;
   static love_uma;
   static common_no_action_check = common_no_action_check;
 
-  constructor(chara_id) {
-    this.id = chara_id;
+  /** @type {number} */
+  id;
+
+  /** @param {number} cid */
+  constructor(cid) {
+    this.id = cid;
   }
 
+  /** 用于切换多口上 */
   get_this() {
     return this;
   }
 
-  /** @param {number[]} partners */
+  /**
+   * 玩家出轨后进行检查
+   * @param {number[]} partners 玩家的出轨对象列表
+   * @param {boolean} is_aware 是否发现玩家出轨
+   */
   // eslint-disable-next-line no-unused-vars
-  check_after_betrayed(partners) {}
+  check_after_betrayed(partners, is_aware) {}
 
-  /** @param {number} level */
+  /**
+   * 玩家被惩戒（黑暗交易）后进行检查
+   * @param {number} level 惩戒等级，1-比赛用母马，2-泄欲用母马，3-繁殖用母马
+   */
   // eslint-disable-next-line no-unused-vars
   check_after_punish(level) {}
 
-  /** @param {AfterRaceParams} extra_flag */
+  /**
+   * 角色参赛后进行检查
+   * @param {AfterRaceParams} extra_flag 赛后检查参数
+   */
   // eslint-disable-next-line no-unused-vars
   check_after_race(extra_flag) {}
 
   /**
-   * @param {boolean} aim_check
-   * @returns {{c:string,n:string}[]}
+   * 角色育成结束后进行检查，主要用于检查称号条件完成情况
+   * @param {boolean} aim_check 角色是否完成所有育成目标，一般用于成就检查
+   * @returns {{c:string,n:string}[]} 角色获得的称号列表
    */
   check_and_get_titles(aim_check) {
     const ret = [];
     if (
       era.get(`cflag:${this.id}:模版角色`) === -1 &&
-      new RaceHistory(this.id)
+      RaceHistory.get(this.id)
         .get_values()
         .filter(
           (e) =>
@@ -89,8 +116,14 @@ class CustomizedCheck {
     return ret;
   }
 
+  /**
+   * 角色出生后进行检查
+   */
   check_birth() {}
 
+  /**
+   * 角色爱慕达到升级门槛（49、74、89、99）时进行检查
+   */
   check_love_events() {
     add_event(
       event_hooks.week_end,
@@ -100,8 +133,11 @@ class CustomizedCheck {
     );
   }
 
+  /**
+   * 回合开始时进行检查
+   */
   check_next_week() {
-    if (this.id && era.get(`cflag:${this.id}:种族`)) {
+    if (this.id > 0 && era.get(`cflag:${this.id}:种族`) > 0) {
       const edu_weeks = era.get(`cflag:${this.id}:育成回合计时`);
       if (edu_weeks < 3 * 48) {
         if (edu_weeks === 47 + 29 || edu_weeks === 95 + 29) {
@@ -120,46 +156,66 @@ class CustomizedCheck {
     }
   }
 
-  /** @returns {{check:number,color:string,content:string}[]} */
+  /**
+   * 角色结束育成时进行检查，主要用于检查粉丝袭击结局的触发<br>
+   * 返回角色的育成目标完成情况
+   * @returns {{check:number,color:string,content:string}[]} 角色的育成目标完成情况数组
+   */
   check_palace_and_get_aims() {
     if (era.get(`relation:${this.id}:0`) <= 0) {
-      new CrazyFans().push(this.id);
+      crazy_fans.push(this.id);
     } else {
-      let g1_count = 0,
-        g2_count = 0,
-        other_count = 0;
-      new RaceHistory(this.id).get_values().forEach((e) => {
-        const info = race_infos[e.race];
-        if (info.race_class === RaceInfo.class_enum.G1) {
-          g1_count += e.rank <= 5;
-        } else if (info.race_class === RaceInfo.class_enum.G2) {
-          g2_count += e.rank <= 3;
-        } else if (e.race !== race_enum.begin_race) {
-          other_count += e.rank === 1;
-        }
-      });
+      let g1_count = 0;
+      let g2_count = 0;
+      let other_count = 0;
+      RaceHistory.get(this.id)
+        .get_values()
+        .forEach((e) => {
+          const info = race_infos[e.race];
+          if (info.race_class === RaceInfo.class_enum.G1) {
+            g1_count += e.rank <= 5;
+          } else if (info.race_class === RaceInfo.class_enum.G2) {
+            g2_count += e.rank <= 3;
+          } else if (e.race !== race_enum.begin_race) {
+            other_count += e.rank === 1;
+          }
+        });
       if (!g1_count && g2_count < 3 && other_count < 5) {
-        new CrazyFans().push(this.id);
+        crazy_fans.push(this.id);
       }
     }
     return this.get_edu_aims();
   }
 
+  /**
+   * 重复育成时进行检查
+   */
   check_second_chance() {}
 
-  /** @returns {Record<string,number>} */
+  /**
+   * 获取目标赛事字典<br>
+   * 字典 key 是带有育成回合计时的赛事 ID（用 get_aim_race_index 生成）<br>
+   * 字典值是一个二进制数
+   * 二进制数的最低位表示是否有赛前事件，第二位表示是否有赛后事件
+   * 该二进制数大于 0 时会自动注册
+   * @returns {Record<string,number>} 目标赛事字典
+   */
   get_aim_races() {
     return aim_races;
   }
 
-  /** @returns {{check:number,color:string,content:string}[]} */
+  /**
+   * 获取育成目标完成情况
+   * @returns {{check:number,color:string,content:string}[]} 角色的育成目标完成情况数组<br>
+   * check 等于 1 时表示该项目标已完成，小于 1 时表示未完成，用与 1 的差值表示未完成的程度（用于育成结束时的好感惩罚）
+   */
   get_edu_aims() {
     const buffer = [];
-    const races = new RaceHistory(this.id);
+    const races = RaceHistory.get(this.id);
     buffer.push(check_aim_and_get_entry(races.get(), race_enum.begin_race));
-    let g1_count = 0,
-      g2_count = 0,
-      other_count = 0;
+    let g1_count = 0;
+    let g2_count = 0;
+    let other_count = 0;
     races.get_values().forEach((e) => {
       const info = race_infos[e.race];
       if (info.race_class === class_enum.G1) {
@@ -190,42 +246,80 @@ class CustomizedCheck {
     return buffer;
   }
 
-  /** @returns {{name:string,handle:function():Promise}|{}} */
+  /**
+   * 获取角色专属动作，例如露娜的日月交替、三女神的随身祈祷
+   * @returns {{name:string,handle:function():Promise}|{}}
+   */
   get_personal_action() {
     return {};
   }
 
-  /** @returns {string[]} */
+  /**
+   * 获取角色专属称号列表
+   * @returns {string[]} 角色专属称号列表
+   */
   get_personal_titles() {
     return [era.get(`staticcstr:${this.id}:称号`)].filter((e) => e);
   }
 
   /**
-   * @param {number} race
-   * @param {number} edu_weeks
-   * @param {number} [rank]
+   * 检查该赛事是否为目标赛事
+   * @param {number} race 比赛 ID
+   * @param {number} edu_weeks 参与该赛事的育成回合计时
+   * @param {number} [rank] 在该赛事中的名次，仅在赛后事件检查可用
    * @returns {number}
    */
   // eslint-disable-next-line no-unused-vars
   is_aim_race(race, edu_weeks, rank) {
     return (
-      this.get_aim_races()[`${edu_weeks}_${race}`] || this.get_aim_races()[race]
+      this.get_aim_races()[`${edu_weeks}_${race}`] ||
+      this.get_aim_races()[race] ||
+      0
     );
   }
 
-  /** @returns {boolean} */
+  /**
+   * 检查是否发现玩家的出轨行为
+   * @param {number[]} partners 玩家的出轨对象列表
+   * @returns {boolean}
+   */
+  // eslint-disable-next-line no-unused-vars
+  is_aware_unfaithful(partners) {
+    const is_yandere = sys_check_yandere(this.id, (y) => y > 0);
+    if (era.get('flag:不忠惩罚') === 0 && !is_yandere) {
+      return false;
+    }
+    let ratio = 0.75 - 0.25 * era.get(`talent:${this.id}:洁净重视`);
+    if (!sys_check_awake(this.id)) {
+      ratio /= 2;
+    }
+    if (era.get(`cflag:${this.id}:位置`) !== era.get('cflag:0:位置')) {
+      ratio /= 2;
+    }
+    if (is_yandere) {
+      ratio *= 1 + era.get(`talent:${this.id}:病娇`);
+    }
+    return ratio >= 1 || Math.random() < ratio;
+  }
+
+  /**
+   * 检查是否进行绑架与监禁（地下室）行为
+   * @returns {boolean}
+   */
   is_prison() {
     if (
+      !era.get(`cflag:${this.id}:种族`) ||
       common_no_action_check(this.id) ||
       era.get('flag:当前位置') === location_enum.basement ||
       era.get('cflag:0:位置') !== 0 ||
-      !era.get(`cflag:${this.id}:种族`)
+      !era.get(`cflag:${this.id}:种族`) ||
+      era.get(`mark:${this.id}:淫纹`) === 3
     ) {
       return false;
     }
-    const love = era.get(`love:${this.id}`),
-      prison_limit = era.get('flag:极端行为限制'),
-      relation = era.get(`relation:${this.id}:0`);
+    const love = era.get(`love:${this.id}`);
+    const prison_limit = era.get('flag:极端行为限制');
+    const relation = era.get(`relation:${this.id}:0`);
     let delta = love * prison_limit - relation;
     if (!prison_limit || love < 50 || delta < 0) {
       return false;
@@ -269,23 +363,35 @@ class CustomizedCheck {
     return percentage >= 1 || dice < percentage;
   }
 
-  /** @returns {boolean} */
+  /**
+   * 检查是否进行睡奸行为
+   * @returns {boolean}
+   */
   is_rape_in_sleeping() {
-    if (common_no_action_check(this.id) || check_want_to_escape(this.id)) {
+    const inmon = CharaInmon.get(this.id);
+    if (
+      !era.get(`cflag:${this.id}:种族`) ||
+      common_no_action_check(this.id) ||
+      check_want_to_escape(this.id) ||
+      inmon.slave > 0 ||
+      inmon.on(plugin_enum.meek)
+    ) {
       return false;
     }
-    const love = era.get(`love:${this.id}`),
-      raping_limit = era.get('flag:极端行为限制') * 2,
-      punish_level = era.get('flag:惩戒力度'),
-      relation = era.get(`relation:${this.id}:0`) || 0;
+    const love = era.get(`love:${this.id}`);
+    const raping_limit = era.get('flag:极端行为限制') * 2;
+    const punish_level = era.get('flag:惩戒力度');
+    const relation = era.get(`relation:${this.id}:0`) || 0;
+    const rape_buff =
+      0.5 * era.get('item:透明棉被') +
+      MejiroCity.instance().get_rape_buff(this.id);
     let delta = love * raping_limit - relation;
     if (
       punish_level <= 1 &&
       !era.get(`status:${this.id}:爱意克制`) &&
       (era.get('flag:当前位置') === location_enum.basement ||
-        !raping_limit ||
         love < 50 ||
-        delta < 0)
+        (!rape_buff && (!raping_limit || delta < 0)))
     ) {
       return false;
     }
@@ -297,7 +403,7 @@ class CustomizedCheck {
       Math.pow(2, era.get(`base:${this.id}:性欲`) / 2000 - 5) *
         (0.7 + 0.1 * era.get(`mark:${this.id}:欢愉`)) +
       0.05 * era.get(`talent:${this.id}:工口意愿`) +
-      0.5 * era.get('item:透明棉被') +
+      rape_buff +
       0.2 * era.get(`status:${this.id}:爱意克制`) -
       0.5 * get_action_debuff(this.id);
     if (punish_level >= 2) {
@@ -313,30 +419,42 @@ class CustomizedCheck {
       era.get(`base:${this.id}:性欲`) / 2000 - 5,
     )}(性欲)*(0.7+${0.1 * era.get(`mark:${this.id}:欢愉`)}(欢愉))+${
       0.05 * era.get(`talent:${this.id}:工口意愿`)
-    }(好色)+${0.5 * era.get('item:透明棉被')}(透明棉被)+${
-      0.2 * era.get(`status:${this.id}:爱意克制`)
-    }(爱意克制)-${0.5 * get_action_debuff(this.id)}(行动debuff)`,
+    }(好色)+${0.5 * era.get('item:透明棉被')}(透明棉被)+${MejiroCity.instance().get_rape_buff(
+      this.id,
+    )}(目白城)+${0.2 * era.get(`status:${this.id}:爱意克制`)}(爱意克制)-${
+      0.5 * get_action_debuff(this.id)
+    }(行动debuff)`,
     );
     return ratio >= 1 || dice < ratio;
   }
 
-  /** @returns {0|1|2} */
+  /**
+   * 检查是否求爱
+   * @returns {0|1|2} 0-不进行，1-进行，2-大成功（在玩家拒绝时会强奸玩家）
+   */
   is_want_make_love() {
-    if (common_no_action_check(this.id) || check_want_to_escape(this.id)) {
+    const inmon = CharaInmon.get(this.id);
+    const love = era.get(`love:${this.id}`);
+    if (
+      common_no_action_check(this.id) ||
+      check_want_to_escape(this.id) ||
+      inmon.on(plugin_enum.meek) ||
+      love < 50
+    ) {
       return 0;
     }
-    const love = era.get(`love:${this.id}`);
-    let ratio = 0;
-    if (love >= 50) {
-      ratio =
-        Math.log(Math.max(6 * love - era.get(`relation:${this.id}:0`), 1)) /
-          log_600m4 +
-        Math.pow(2, era.get(`base:${this.id}:性欲`) / 1250 - 8) *
-          (0.7 + 0.1 * era.get(`mark:${this.id}:欢愉`)) +
-        0.05 * era.get(`talent:${this.id}:工口意愿`) -
-        0.5 * get_action_debuff(this.id);
-      ratio *= (3 - era.get(`mark:${this.id}:反抗`)) / 3;
+    let ratio =
+      Math.log(Math.max(6 * love - era.get(`relation:${this.id}:0`), 1)) /
+        log_600m4 +
+      Math.pow(2, era.get(`base:${this.id}:性欲`) / 1250 - 8) *
+        (0.7 + 0.1 * era.get(`mark:${this.id}:欢愉`)) +
+      0.05 * era.get(`talent:${this.id}:工口意愿`) -
+      0.5 * get_action_debuff(this.id);
+    let is_cuckold = 0;
+    if (era.get('flag:床伴') > 0 && sys_check_cuckold(this.id, inmon)) {
+      ratio += is_cuckold = 0.5;
     }
+    ratio *= (3 - era.get(`mark:${this.id}:反抗`)) / 3;
     const dice = Math.random();
     era.logger.debug(
       `角色 ${this.id} 求爱：${(ratio * 100).toFixed(2)}%；掷骰：${dice} 计算：${
@@ -349,17 +467,21 @@ class CustomizedCheck {
         era.get(`base:${this.id}:性欲`) / 1250 - 8,
       )}(性欲)*(0.7+${0.1 * era.get(`mark:${this.id}:欢愉`)}(欢愉))+${
         0.05 * era.get(`talent:${this.id}:工口意愿`)
-      }(好色)-${0.5 * get_action_debuff(this.id)}(行动debuff)`,
+      }(好色)+${is_cuckold}(绿帽癖)-${0.5 * get_action_debuff(this.id)}(行动debuff)`,
     );
     if (ratio >= 1 || dice < ratio) {
+      if (inmon.slave > 0) {
+        return 1;
+      }
       const great_success =
-        era.get(`talent:${this.id}:反抗意愿`) >= 0 &&
-        (dice < 0.05 ||
-          era.get('flag:惩戒力度') >= 2 ||
-          era.get(`base:${this.id}:性欲`) >= lust_border.want_sex ||
-          era.get(`base:${this.id}:压力`) >= pressure_border.apprehension ||
-          era.get(`talent:${this.id}:病娇`) === 2);
-      if (era.get(`status:${this.id}:爱意克制`)) {
+        MejiroCity.instance().get_want_sex_buff(this.id) ||
+        (era.get(`talent:${this.id}:反抗意愿`) >= 0 &&
+          (dice < 0.05 ||
+            era.get('flag:惩戒力度') >= 2 ||
+            era.get(`base:${this.id}:性欲`) >= lust_border.want_sex ||
+            era.get(`base:${this.id}:压力`) >= pressure_border.apprehension ||
+            sys_check_yandere(this.id, (e) => e === 2, inmon)));
+      if (era.get(`status:${this.id}:爱意克制`) > 0) {
         if (!great_success) {
           return 0;
         }

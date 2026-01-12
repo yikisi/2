@@ -23,7 +23,7 @@ Object.entries(chara_colors).forEach((e) => {
 });
 
 if (flag) {
-  console.log('\tnothing');
+  console.log('\tnone');
 } else {
   process.exit(1);
 }

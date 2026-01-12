@@ -3,10 +3,9 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   100591,
   '超越彼方……',
-  '保持冷静进入中盘并准备发力时或是在终盘胜负关键的弯道位于中部梯队时，会振作精神提升加速力',
+  '保持冷静进入中盘并准备发力时或是在终盘胜负关键的弯道位于中部梯队时，会振作精神提升加速度',
   10059,
   1,
-  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [() => true, () => true],

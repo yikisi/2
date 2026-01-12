@@ -1,6 +1,6 @@
 /**
  * @file 乙名史悦子 - 招募
- * @author 无名黑奴（临时）
+ * @author 黑奴队长（临时）
  */
 const { get, printAndWait, set } = require('#/era-electron');
 
@@ -98,7 +98,7 @@ module.exports = class extends CustomizedRecruit {
         }
       }
       set('cflag:303:招募状态', recruit_flags.yes);
-      etsuko.name = set('callname:303:-2', '乙名史悦子');
+      set('callname:303:-2', '乙名史悦子');
       await this.recruit_end();
     }
   }

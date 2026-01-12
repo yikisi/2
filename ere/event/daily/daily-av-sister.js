@@ -3,7 +3,7 @@
  * 设定是织姬的第一个产驹是妹妹<br>
  * 示例用的日常事件口上<br>
  * 欢迎创作替代
- * @author 无名黑奴（临时）
+ * @author 黑奴队长（临时）
  */
 const era = require('#/era-electron');
 
@@ -29,9 +29,9 @@ module.exports = class extends DailyChild {
     }
     get_chara_talk(this.id).say([
       '今天也请多关照啦，',
-      era.get('cflag:0:性别') - 1 ? '姐姐' : '哥哥',
+      era.get('cflag:0:性别') === 1 ? '哥哥' : '姐姐',
       '……啊，应该是这个，',
-      father ? '妈妈' : '爸爸',
+      father > 0 ? '妈妈' : '爸爸',
       '～❤️',
     ]);
   }

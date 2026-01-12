@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '距终点400米的位置身处前方时速度稍微升；若是比赛中合计使用过7次技能，变为小幅提升',
   91015,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   180,
   [() => true, () => true],

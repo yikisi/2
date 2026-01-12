@@ -33,7 +33,7 @@ module.exports = (handlers) => {
       add_event(event_hooks.back_school, event_object);
       return true;
     }
-    new EventMarks(52).sub(event_hooks.out_shopping);
+    EventMarks.get(52).sub(event_hooks.out_shopping);
     await print_event_name('天台上的「游乐园」', urara);
     await urara.say_and_wait([
       callname,

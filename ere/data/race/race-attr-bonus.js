@@ -1,3 +1,4 @@
+// GENERATED START
 const { attr_enum } = require('#/data/train-const');
 
 module.exports = {
@@ -147,3 +148,4 @@ module.exports = {
     [attr_enum.toughness, attr_enum.intelligence],
   ],
 };
+// GENERATED END

@@ -2,12 +2,12 @@ const era = require('#/era-electron');
 
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
-const EroNormalFucking = require('#/event/ero/common-lines/normal/fucking');
+const EroNormalFucking = require('#/event/ero/common/normal/fucking');
 const {
   after_refusing_by_attacker,
   after_refusing_by_defender,
   ask_action,
-} = require('#/event/ero/common-lines/snippets');
+} = require('#/event/ero/common/snippets');
 
 const { part_enum } = require('#/data/ero/part-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');

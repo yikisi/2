@@ -1,0 +1,12 @@
+const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
+
+class LightLifeMarks extends LifeEventMarks {
+  buff;
+
+  constructor() {
+    super(345);
+    LifeEventMarks.register_marks(this);
+  }
+}
+
+module.exports = LightLifeMarks;

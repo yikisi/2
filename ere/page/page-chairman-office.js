@@ -11,12 +11,14 @@ const {
 const { sys_change_fame } = require('#/system/sys-calc-flag');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
+const arrive_location = require('#/page/components/arrive-location');
 const get_riko_button = require('#/page/components/get-riko-button');
 const goto_sex = require('#/page/components/goto-sex');
 const npc_common = require('#/page/components/npc-common');
 const print_page_header = require('#/page/components/page-header');
 const print_out_page = require('#/page/page-out');
 
+const { check_edu_script } = require('#/event/edu/edu-factory');
 const { check_rec_script } = require('#/event/rec/rec-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -25,30 +27,20 @@ const { get_chara_color } = require('#/data/chara-colors');
 const CharaTitles = require('#/data/chara-titles');
 const event_hooks = require('#/data/event/event-hooks');
 const TasteLifeMarks = require('#/data/event/life-event-marks/life-event-marks-302');
-const LocCharacters = require('#/data/event/loc-characters');
+const loc_characters = require('#/data/event/loc-characters');
 const recruit_flags = require('#/data/event/recruit-flags');
-const YandereList = require('#/data/event/yandere-list');
+const yandere_list = require('#/data/event/yandere-list');
 const { get_celebration, get_relation_mark } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
-const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
 
 async function page_chairman_office() {
-  let flag_page = true,
-    nothing = true;
-  era.set('flag:当前位置', location_enum.chairman);
-  await era.clear();
-  print_page_header();
-  era.drawLine();
-  const vehicle = era.get('flag:单人载具');
-  era.print([
-    vehicle ? `${vehicle_verbs[vehicle]}着${vehicle_names[vehicle]}` : '',
-    '抵达了理事长办公室……',
-  ]);
-  const loc_characters = new LocCharacters(),
-    celebration = get_celebration(),
-    chara = get_chara_talk(loc_characters.get(location_enum.chairman)[0]),
-    title = new CharaTitles(chara.id).get_colored_curr_title(),
-    star_premium_draw = sys_get_star_premium_draw();
+  let flag_page = true;
+  let nothing = true;
+  await arrive_location(era.set('flag:当前位置', location_enum.chairman));
+  const celebration = get_celebration();
+  const chara = get_chara_talk(loc_characters.get(location_enum.chairman)[0]);
+  const title = CharaTitles.get(chara.id).get_colored_curr_title();
+  const star_premium_draw = sys_get_star_premium_draw();
   let cost = star_premium_draw.cost;
   if (era.get('cflag:302:招募状态') === recruit_flags.yes) {
     cost = (cost * 3) / 4;
@@ -64,7 +56,7 @@ async function page_chairman_office() {
             name: '「闲 谈！无聊了来找你玩！」',
             async handle() {
               nothing = false;
-              switch (get_relation_mark(undefined, 302)) {
+              switch (get_relation_mark(302)) {
                 case '失望':
                   await chara.say_and_wait(
                     '冷 漠！有来找我的空闲不如先把自己的工作做好！',
@@ -142,15 +134,14 @@ async function page_chairman_office() {
                   '注 意！即使这样指名了，也还请好好和对方从头相处吧！',
                 );
                 const temp_list = era
-                  .get('chara')
+                  .getAllCharacters()
                   .filter(
-                    (chara_id) =>
-                      chara_id &&
-                      (era.get(`cflag:${chara_id}:随机招募`) ||
-                        era.get(`staticcflag:${chara_id}:随机招募`)) &&
-                      era.get(`cflag:${chara_id}:招募状态`) !==
-                        recruit_flags.yes &&
-                      era.get('cflag:0:模版角色') !== chara_id,
+                    (cid) =>
+                      cid > 0 &&
+                      (era.get(`cflag:${cid}:随机招募`) ||
+                        era.get(`staticcflag:${cid}:随机招募`)) === 1 &&
+                      era.get(`cflag:${cid}:招募状态`) !== recruit_flags.yes &&
+                      era.get('cflag:0:模版角色') !== cid,
                   );
                 if (
                   era.get('cflag:302:招募状态') !== recruit_flags.yes &&
@@ -159,7 +150,7 @@ async function page_chairman_office() {
                   temp_list.push(302);
                 }
                 era.printMultiColumns(
-                  ['从列表里选', '用名字指名', '用ID指名', '再想想'].map(
+                  ['从列表里选', '用名字指名', '用 ID 指名', '再想想'].map(
                     (e, i) => {
                       return {
                         accelerator: i + 1,
@@ -175,11 +166,16 @@ async function page_chairman_office() {
                   case 1:
                     temp = [];
                     temp_list
-                      .map((chara_id) => {
-                        const color = get_chara_color(chara_id);
-                        const flag_script = check_rec_script(chara_id);
+                      .map((cid) => {
+                        const color = get_chara_color(cid);
+                        const flag_script =
+                          check_rec_script(cid) && check_edu_script(cid);
+                        let name = era.get(`callname:${cid}:-1`);
+                        if (name === '-') {
+                          name = era.get(`static:${cid}:name`);
+                        }
                         return {
-                          accelerator: chara_id,
+                          accelerator: cid,
                           config: {
                             align: 'center',
                             buttonType: '',
@@ -187,8 +183,8 @@ async function page_chairman_office() {
                             width: 4,
                           },
                           content:
-                            era.get(`static:${chara_id}:name`) +
-                            (star_premium_draw.chara === chara_id
+                            name +
+                            (star_premium_draw.chara === cid
                               ? ' [已指名]'
                               : ''),
                           priority: flag_script,
@@ -207,7 +203,7 @@ async function page_chairman_office() {
                           temp.push({
                             config: {
                               content: l[0].priority
-                                ? '使用专属口上的角色'
+                                ? '使用口上的角色'
                                 : '使用地文的角色',
                             },
                             type: 'divider',
@@ -222,7 +218,9 @@ async function page_chairman_office() {
                     era.print('请输入想指名的角色名');
                     temp = await era.input();
                     temp = temp_list.filter(
-                      (e) => era.get(`static:${e}:name`) === temp,
+                      (e) =>
+                        era.get(`callname:${e}:-1`) === temp ||
+                        era.get(`static:${e}:name`) === temp,
                     )[0];
                     break;
                   case 3:
@@ -238,22 +236,22 @@ async function page_chairman_office() {
                   await get_chara_talk(0).say_and_wait(
                     '将 军！无路可退了，来和我一起吧！',
                   );
-                  chara.name = era.set('callname:302:-2', '秋川弥生');
+                  era.set('callname:302:-2', '秋川弥生');
                   await chara.say_and_wait('啊吧啊吧啊吧啊吧……');
                   era.set('cflag:302:招募状态', recruit_flags.yes);
                   if (era.get('talent:302:病娇')) {
-                    new YandereList().push(302);
+                    yandere_list.push(302);
                   }
                   await era.printAndWait([
                     '恭 喜！',
-                    chara.get_colored_name(),
+                    chara.get_colored_actual_name(),
                     ' 加入了队伍！',
                   ]);
                 } else if (temp !== -255) {
                   if (temp === star_premium_draw.chara) {
                     await chara.say_and_wait([
                       '提 醒！',
-                      get_chara_talk(temp).get_colored_name(),
+                      get_chara_talk(temp).get_colored_actual_name(),
                       ' 同学已经在训练场等着了！',
                     ]);
                   } else if (temp_list.indexOf(temp) === -1) {
@@ -273,7 +271,7 @@ async function page_chairman_office() {
                     if ((await era.input()) === 1) {
                       await chara.say_and_wait([
                         '激 热！',
-                        get_chara_talk(temp).get_colored_name(),
+                        get_chara_talk(temp).get_colored_actual_name(),
                         ' 同学最近将经常去训练场，好好把握！',
                       ]);
                       sys_change_fame(-cost);
@@ -335,11 +333,10 @@ async function page_chairman_office() {
     }
   }
   era.drawLine();
-  await era.printAndWait('回去了……');
+  await era.printAndWait('【折返了】');
   if (!sys_check_awake(chara.id)) {
     loc_characters.set(location_enum.chairman, []);
   }
-  era.println();
   await sys_get_random_event(event_hooks.back_school)({
     loc: location_enum.chairman,
   });

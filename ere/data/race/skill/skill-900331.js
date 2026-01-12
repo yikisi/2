@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '最终直线上若与先头集团拉开了距离，则会稍微提升速度；若身处最后方，提升更多速度',
   90033,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   180,
   [() => true, () => true],

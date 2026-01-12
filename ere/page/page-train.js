@@ -1,4 +1,4 @@
-﻿const era = require('#/era-electron');
+const era = require('#/era-electron');
 
 const {
   sys_check_train_enabled,
@@ -13,11 +13,12 @@ const print_page_header = require('#/page/components/page-header');
 const select_target_chara = require('#/page/components/select-target');
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
-const GameGuides = require('#/event/others/game-guides');
+const game_guides = require('#/event/others/game-guides');
 const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { sort_list } = require('#/utils/list-utils');
+const { get_abbr_number } = require('#/utils/value-utils');
 
 const CharaAvailableSkills = require('#/data/chara-available-skills');
 const chara_info_type = require('#/data/chara-info-type');
@@ -45,7 +46,7 @@ const {
   time_cost,
 } = require('#/data/train-const');
 
-const skill_limit = 15;
+const skill_limit = 27;
 
 function get_discount(chara_id) {
   return Math.min(era.get(`cflag:${chara_id}:育成次数`) * 0.015, 0.1);
@@ -62,17 +63,19 @@ function get_skill_buffer(chara_id, skill_control, pt, discount) {
   let available_skills = {},
     got_skills = {};
   common_skills.forEach((e) => (available_skills[e] = 1));
-  new CharaAvailableSkills(chara_id).get().forEach((e) => {
-    const s = skills_dict[e];
-    if (!unused_group2level[s.group_id]) {
-      unused_group2level[s.group_id] = s.group_level;
-    } else {
-      unused_group2level[s.group_id] = Math.min(
-        unused_group2level[s.group_id],
-        s.group_level,
-      );
-    }
-  });
+  CharaAvailableSkills.get(chara_id)
+    .get()
+    .forEach((e) => {
+      const s = skills_dict[e];
+      if (!unused_group2level[s.group_id]) {
+        unused_group2level[s.group_id] = s.group_level;
+      } else {
+        unused_group2level[s.group_id] = Math.min(
+          unused_group2level[s.group_id],
+          s.group_level,
+        );
+      }
+    });
   available_skills = Object.keys(available_skills)
     .map(Number)
     .reduce((p, c) => {
@@ -151,37 +154,37 @@ module.exports = async () => {
   const train_list = era
     .getAddedCharacters()
     .filter((chara_id) => sys_check_train_enabled(chara_id));
-  let flag_train = true,
-    chara_id = era.get('flag:当前互动角色'),
-    skill_control = new CharaSkills(chara_id),
-    index = train_list.indexOf(chara_id),
-    discount = get_discount(chara_id);
+  let flag_train = true;
+  let cid = era.get('flag:当前互动角色');
+  let skill_control = CharaSkills.get(cid);
+  let index = train_list.indexOf(cid);
+  let discount = get_discount(cid);
 
-  await new GameGuides().office_train();
+  await game_guides.office_train();
 
   while (flag_train) {
     await era.clear();
 
     print_page_header();
 
-    const race = era.get(`cflag:${chara_id}:种族`),
-      trainer_buff = get_trainer_train_buff(chara_id);
-    let pt = era.get(`exp:${chara_id}:技能点数`);
-    if (chara_id || !race) {
-      print_curr_chara_info(chara_id, chara_info_type.train);
+    const race = era.get(`cflag:${cid}:种族`),
+      trainer_buff = get_trainer_train_buff(cid);
+    let pt = era.get(`exp:${cid}:技能点数`);
+    if (cid || !race) {
+      print_curr_chara_info(cid, chara_info_type.train);
     }
 
     let extra_buff =
-      era.get(`cflag:${chara_id}:位置`) === era.get('cflag:0:位置')
+      era.get(`cflag:${cid}:位置`) === era.get('cflag:0:位置')
         ? trainer_buff
         : 0;
 
     if (race) {
       const columns = [],
         adaptivity = adaptability_names.map((e) =>
-          era.get(`cflag:${chara_id}:${e}适性`),
+          era.get(`cflag:${cid}:${e}适性`),
         );
-      const chara_score = get_chara_score(chara_id);
+      const chara_score = get_chara_score(cid);
       let chara_level = get_rank_level(chara_score);
       columns.push(
         { config: { content: '基础能力' }, type: 'divider' },
@@ -206,13 +209,13 @@ module.exports = async () => {
             width: 4,
             fontWeight: 'bold',
           },
-          content: pt.toLocaleString(),
+          content: [get_abbr_number(pt)],
           type: 'text',
         },
       );
       attr_names.forEach((k, index) => {
-        let buff = get_train_bonus(chara_id, index);
-        if (index === attr_enum.speed && era.get(`status:${chara_id}:发胖`)) {
+        let buff = get_train_bonus(cid, index);
+        if (index === attr_enum.speed && era.get(`status:${cid}:发胖`)) {
           buff = -100;
         }
         columns.push(
@@ -227,14 +230,14 @@ module.exports = async () => {
               height: 22,
               width: 20,
             },
-            inContent: `${Math.floor(era.get(`base:${chara_id}:${k}`))}/${era.get(
-              `maxbase:${chara_id}:${k}`,
+            inContent: `${Math.floor(era.get(`base:${cid}:${k}`))}/${era.get(
+              `maxbase:${cid}:${k}`,
             )} ${
               buff < 0 ? buff.toFixed(0) : `+${buff.toFixed(0)}`
-            }% ${get_attr_rank(era.get(`base:${chara_id}:${k}`))}`,
+            }% ${get_attr_rank(era.get(`base:${cid}:${k}`))}`,
             percentage:
-              (era.get(`base:${chara_id}:${k}`) * 100) /
-              era.get(`maxbase:${chara_id}:${k}`),
+              (era.get(`base:${cid}:${k}`) * 100) /
+              era.get(`maxbase:${cid}:${k}`),
             type: 'progress',
           },
         );
@@ -383,14 +386,13 @@ module.exports = async () => {
             },
           ]
         : []),
-      ...(race &&
-      (chara_id === 0 || era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48)
+      ...(race && (cid === 0 || era.get(`cflag:${cid}:育成回合计时`) < 3 * 48)
         ? [
             {
               accelerator: 103,
               config: {
                 disabled:
-                  chara_id === 0 &&
+                  cid === 0 &&
                   skill_control
                     .get()
                     .filter((e) => !skills_dict[e].is_generated).length >=
@@ -399,7 +401,7 @@ module.exports = async () => {
                 width: 4,
               },
               content:
-                chara_id === 0 &&
+                cid === 0 &&
                 skill_control.get().filter((e) => !skills_dict[e].is_generated)
                   .length >= skill_limit
                   ? '重置技能'
@@ -410,23 +412,21 @@ module.exports = async () => {
         : []),
     ]);
 
-    const player_time = era.get('base:0:精力'),
-      chara_time = era.get(`base:${chara_id}:精力`) || 0,
-      chara_stamina = era.get(`base:${chara_id}:体力`) || 0,
-      /** @type {number[]} */
-      debuff = [0, chara_id].map(sys_get_debuff);
+    const player_time = era.get('base:0:精力');
+    const chara_time = era.get(`base:${cid}:精力`) || 0;
+    const chara_stamina = era.get(`base:${cid}:体力`) || 0;
+    /** @type {number[]} */
+    const debuff = [0, cid].map(sys_get_debuff);
     if (debuff[1] >= 0.5) {
       debuff[1] = 1000;
     }
     const beach_level =
-      (era.get(`cflag:${chara_id}:位置`) === location_enum.beach) * 5;
-
-    const train_enabled = sys_check_train_enabled(chara_id);
+      (era.get(`cflag:${cid}:位置`) === location_enum.beach) * 5;
+    const train_enabled = sys_check_train_enabled(cid);
     era.printMultiColumns(
       attr_names.map((e, i) => {
-        const train_level =
-            beach_level || era.get(`abl:${chara_id}:${e}训练等级`),
-          train_cost = time_cost[train_level - 1] * (1 + debuff[0]);
+        const train_level = beach_level || era.get(`abl:${cid}:${e}训练等级`);
+        const train_cost = time_cost[train_level - 1] * (1 + debuff[1]);
         return {
           accelerator: 200 + i,
           config: {
@@ -439,7 +439,7 @@ module.exports = async () => {
               !train_enabled,
           },
           content: `${e}训练 Lv.${train_level}\n成功率：${
-            train_level ? sys_get_succ_rate(chara_id, i, extra_buff) : 0
+            train_level ? sys_get_succ_rate(cid, i, extra_buff) : 0
           }%`,
           type: 'button',
         };
@@ -452,23 +452,23 @@ module.exports = async () => {
     switch (ret) {
       case 100:
         index = train_list.indexOf(
-          (chara_id = era.set(
+          (cid = era.set(
             'flag:当前互动角色',
             await select_target_chara(chara_info_type.train),
           )),
         );
-        skill_control = new CharaSkills(chara_id);
-        discount = get_discount(chara_id);
+        skill_control = CharaSkills.get(cid);
+        discount = get_discount(cid);
         break;
       case 101:
       case 102:
-        chara_id = train_list[ret === 101 ? --index : ++index];
-        skill_control = new CharaSkills(chara_id);
-        discount = get_discount(chara_id);
+        cid = train_list[ret === 101 ? --index : ++index];
+        skill_control = CharaSkills.get(cid);
+        discount = get_discount(cid);
         break;
       case 103:
         if (
-          chara_id === 0 &&
+          cid === 0 &&
           skill_control.get().filter((e) => !skills_dict[e].is_generated)
             .length >= skill_limit
         ) {
@@ -486,7 +486,7 @@ module.exports = async () => {
             skill_control.add(...generated_skills);
           }
         } else {
-          let buffer = get_skill_buffer(chara_id, skill_control, pt, discount),
+          let buffer = get_skill_buffer(cid, skill_control, pt, discount),
             skill_filter = -1,
             ground_filter = -1,
             dis_filter = -1,
@@ -512,7 +512,7 @@ module.exports = async () => {
                 ability_filter === -1 ||
                 s.ability_tags.indexOf(ability_filter) !== -1,
             ];
-            skill_page_size = enable_filter ? 66 : 84;
+            skill_page_size = enable_filter ? 63 : 84;
             const filtered_buffer = buffer.filter(
                 (e) =>
                   !enable_filter ||
@@ -529,7 +529,7 @@ module.exports = async () => {
               [
                 {
                   config: {
-                    content: `为 ${get_chara_talk(chara_id).get_full_name()} 选择技能`,
+                    content: `为 ${get_chara_talk(cid).get_full_name()} 选择技能`,
                   },
                   type: 'divider',
                 },
@@ -576,7 +576,7 @@ module.exports = async () => {
                         content: '技能类型',
                         type: 'text',
                       },
-                      ...['全部', '被动', '恢复', '增幅', '削弱'].map(
+                      ...['全部', '常时', '恢复', '增幅', '控制'].map(
                         (e, i) => ({
                           accelerator: 930 + i,
                           config: {
@@ -725,8 +725,8 @@ module.exports = async () => {
             } else if (ret === 900) {
               page--;
             } else if (ret === 'irwinner') {
-              pt = era.add(`exp:${chara_id}:技能点数`, 9999);
-              buffer = get_skill_buffer(chara_id, skill_control, pt, discount);
+              pt = era.add(`exp:${cid}:技能点数`, 9999);
+              buffer = get_skill_buffer(cid, skill_control, pt, discount);
             } else if (typeof ret === 'number' && buffer[ret - 1]) {
               const skill = skills_dict[buffer[ret - 1].id],
                 to_remove =
@@ -750,25 +750,17 @@ module.exports = async () => {
                 ])
               ) {
                 pt = era.add(
-                  `exp:${chara_id}:技能点数`,
+                  `exp:${cid}:技能点数`,
                   -Math.floor(skill.price * (1 - discount)),
                 );
-                get_skills_and_print_in_event(
-                  chara_id,
-                  [skill.id],
-                  skill_control,
-                ) && (await era.waitAnyKey());
-                buffer = get_skill_buffer(
-                  chara_id,
-                  skill_control,
-                  pt,
-                  discount,
-                );
+                get_skills_and_print_in_event(cid, [skill.id], skill_control) &&
+                  (await era.waitAnyKey());
+                buffer = get_skill_buffer(cid, skill_control, pt, discount);
               }
             }
             await era.clear();
             flag_skill &&=
-              chara_id > 0 ||
+              cid > 0 ||
               skill_control.get().filter((e) => !skills_dict[e].is_generated)
                 .length < skill_limit;
           }
@@ -782,7 +774,7 @@ module.exports = async () => {
         break;
       default:
         era.drawLine();
-        await train_uma(chara_id, ret - 200, extra_buff);
+        await train_uma(cid, ret - 200, extra_buff);
     }
   }
 };

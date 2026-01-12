@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '位于前方，比赛后半的第3弯道中速度稍微提高，或者在终盘的看台对面直线赛道上向前强力冲刺',
   10068,
   1,
-  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [() => true, () => true],

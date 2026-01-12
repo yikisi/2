@@ -905,7 +905,7 @@ module.exports = (handlers) => {
       '的约定！我一定会实现的！',
     ]);
     await kitaru.say_and_wait(['我用拉勾仪式向', kitaru.sex, '保证过的！']);
-    if (check_aim_race(new RaceHistory(56).get(), race_enum.toky_yus, 1, 20)) {
+    if (check_aim_race(RaceHistory.get(56).get(), race_enum.toky_yus, 1, 20)) {
       await era.printAndWait([
         kitaru.get_colored_name(),
         ' 在日本德比终盘的冲刺令 ',

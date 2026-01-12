@@ -1,26 +1,13 @@
 const { execSync } = require('child_process');
-const {
-  createWriteStream,
-  existsSync,
-  readFileSync,
-  renameSync,
-  rmSync,
-  writeFileSync,
-} = require('fs');
-const { resolve } = require('path');
+const { createWriteStream, renameSync, rmSync } = require('fs');
+const { join, resolve } = require('path');
 
 const archiver = require('archiver');
+const { copySync } = require('fs-extra');
 const webpack = require('webpack');
 archiver.registerFormat('zip-encrypted', require('archiver-zip-encrypted'));
 
 const config = require('../webpack.config');
-
-if (!existsSync('./build/static.json')) {
-  console.error('Build failed: no static.json!');
-  process.exit(1);
-}
-
-const staticData = require('../build/static.json');
 
 rmSync('./dist', { force: true });
 
@@ -35,16 +22,19 @@ webpack(config, (err, stats) => {
         colors: true,
       }),
     );
-    const mainPath = resolve('./dist/main.bundle.js');
-    writeFileSync(
-      mainPath,
-      readFileSync(mainPath, 'utf-8').replace(/\w\("La5K"\)/g, '_era'),
-    );
-    writeFileSync(resolve('./dist/static.json'), JSON.stringify(staticData));
     // 将打包后的脚本压缩成 zip 文件然后上传
     // zip 格式基本上被大部分手机支持
-    const game_dir = resolve(process.env.GAME_BUNDLE_DIR),
-      bundle_zip = resolve(process.env.GAME_BUNDLE_ZIP);
+    const game_dir = resolve(process.env.GAME_BUNDLE_DIR);
+    const bundle_zip = resolve(process.env.GAME_BUNDLE_ZIP);
+    [
+      'CHANGELOG-test.md',
+      'CHANGELOG-v1-kuuga.md',
+      'CHANGELOG-v2-agito.md',
+      'RELEASE.md',
+      'LICENSE',
+      'README.md',
+      'CONTRIBUTING.md',
+    ].forEach((d) => copySync(join('./', d), join('./dist', d)));
     rmSync(game_dir, { force: true, recursive: true });
     renameSync('./dist', game_dir);
     rmSync(bundle_zip, { force: true });

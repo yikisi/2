@@ -8,6 +8,7 @@ const {
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
 const CharaTalk = require('#/utils/chara-talk');
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const get_color = require('#/utils/gradient-color');
 
 const { buff_colors } = require('#/data/color-const');
@@ -31,35 +32,28 @@ module.exports = {
    * @param {number} chara_id
    * @param {string} mark_name
    * @param {number} _level
-   * @param {boolean} [first]
+   * @returns {TextObject}
    */
-  get_mark_cols(chara_id, mark_name, _level, first) {
+  get_mark_cols(chara_id, mark_name, _level) {
     const level = Number(_level) || era.get(`mark:${chara_id}:${mark_name}`);
-    return [
-      {
-        config: {
-          align: 'center',
-          color: mark_colors[mark_name],
-          width: 2,
-          offset: Number(!first),
+    return {
+      config: {
+        align: 'center',
+        color: mark_colors[mark_name],
+        width: 4,
+      },
+      content: [
+        `${mark_name} Lv.${level} `,
+        {
+          content: new Array(level).fill('★').join(''),
+          color: get_color(undefined, mark_colors[mark_name], level / 3),
         },
-        content: `${mark_name} Lv.${level}`,
-        type: 'text',
-      },
-      {
-        config: { align: 'center', width: 2 },
-        content: [
-          {
-            content: new Array(level).fill('★').join(''),
-            color: get_color(undefined, mark_colors[mark_name], level / 3),
-          },
-          {
-            content: new Array(3 - level).fill('☆').join(''),
-          },
-        ],
-        type: 'text',
-      },
-    ];
+        {
+          content: new Array(3 - level).fill('☆').join(''),
+        },
+      ],
+      type: 'text',
+    };
   },
   /**
    * @param {number} chara_id
@@ -107,73 +101,58 @@ module.exports = {
     ];
   },
   /**
-   * @param {number} chara_id
-   * @param {number} accelerator
-   * @param {string} talent_name
-   * @param {number} check_metric
-   * @param {Record<string,number>} talent_dict
-   * @param {Record<string,number>} juel_dict
+   * @param {number} cid
+   * @param {number} acc
+   * @param {string} t_name
+   * @param {number} cond
+   * @param {Record<string,number>} t_dict
+   * @param {Record<string,number>} j_dict
    */
-  get_talent_buttons(
-    chara_id,
-    accelerator,
-    talent_name,
-    check_metric,
-    talent_dict,
-    juel_dict,
-  ) {
-    let level = talent_dict[talent_name];
+  get_talent_buttons(cid, acc, t_name, cond, t_dict, j_dict) {
+    let level = t_dict[t_name];
     if (level === undefined) {
-      level = talent_dict[talent_name] = era.get(
-        `talent:${chara_id}:${talent_name}`,
-      );
+      level = t_dict[t_name] = era.get(`talent:${cid}:${t_name}`);
     }
     const talent_bnc =
-      accelerator < 7
+      acc < 7
         ? talent_button_names_and_check_dict.trained
-        : accelerator < 10
+        : acc < 10
           ? talent_button_names_and_check_dict.sm
           : talent_button_names_and_check_dict.poisoned;
     return [
       {
-        accelerator,
+        accelerator: acc,
         config: { width: 4 },
-        content: trained_talent_names[talent_name]
-          ? trained_talent_names[talent_name][level]
-          : `${talent_name} [${level ? '是' : '否'}]`,
+        content: trained_talent_names[t_name]
+          ? trained_talent_names[t_name][level]
+          : `${t_name} [${level ? '是' : '否'}]`,
         type: 'button',
       },
       {
-        accelerator: accelerator + 100,
+        accelerator: acc + 100,
         config: {
           disabled:
             level === talent_bnc.max ||
             Object.entries(
-              get_talent_price(
-                chara_id,
-                talent_name,
-                talent_bnc.up_delta[level],
-              ),
-            ).findIndex((e) => e[1] > juel_dict[e[0]]) !== -1 ||
-            check_metric < (talent_bnc.metrics[level] || 0) ||
-            (accelerator < 7 && level === 1 && talent_dict.slave_run > 0),
+              get_talent_price(cid, t_name, talent_bnc.up_delta[level]),
+            ).findIndex((e) => e[1] > j_dict[e[0]]) !== -1 ||
+            cond < (talent_bnc.metrics[level] || 0) ||
+            (acc < 7 &&
+              level === 1 &&
+              t_dict.slave_run >= era.get(`talent:${cid}:调教度`)),
           width: 4,
         },
         content: talent_bnc.up,
         type: 'button',
       },
       {
-        accelerator: accelerator + 200,
+        accelerator: acc + 200,
         config: {
           disabled:
             level === talent_bnc.min ||
             Object.entries(
-              get_talent_price(
-                chara_id,
-                talent_name,
-                talent_bnc.down_delta[level],
-              ),
-            ).findIndex((e) => e[1] > juel_dict[e[0]]) !== -1,
+              get_talent_price(cid, t_name, talent_bnc.down_delta[level]),
+            ).findIndex((e) => e[1] > j_dict[e[0]]) !== -1,
           width: 4,
         },
         content: talent_bnc.down,
@@ -247,13 +226,13 @@ module.exports = {
     );
   },
   /**
-   * @param {number} chara_id
+   * @param {number} cid
    * @param {Record<string,number>} price_dict
    * @param {Record<string,number>} origin_dict
    * @returns {Promise<boolean>}
    */
-  async print_price_and_confirm(chara_id, price_dict, origin_dict) {
-    const chara_talk = new CharaTalk(chara_id);
+  async print_price_and_confirm(cid, price_dict, origin_dict) {
+    const chara_talk = get_chara_talk(cid);
     Object.keys(price_dict).forEach((juel_name) => {
       const buffer = [
         `${juel_name.substring(0, 2)}因子：`,

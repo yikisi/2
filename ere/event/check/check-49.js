@@ -25,6 +25,11 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
     !new FestaEduMarks().train_fail,
   aim_races,
   (buffer, races) => {
+    buffer.push({
+      check: 1,
+      color: undefined,
+      content: `训练失败次数：${new FestaEduMarks().train_fail}`,
+    });
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.keis_hai, 1, 5));
     buffer.push(check_aim_and_get_entry(races, race_enum.sats_sho, 1, 5));

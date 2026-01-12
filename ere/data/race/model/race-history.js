@@ -28,15 +28,25 @@ class RaceResult {
   }
 }
 
+const dict = {};
+
 class RaceHistory {
   static RaceResult = RaceResult;
 
+  /**
+   * @param {number} cid
+   * @returns {RaceHistory}
+   */
+  static get(cid) {
+    return dict[cid] || (dict[cid] = new RaceHistory(cid));
+  }
+
+  /** @type {number} */
+  #id;
+
   /** @param {number} chara_id */
   constructor(chara_id) {
-    this.id = chara_id;
-    this.obj =
-      era.get(`cflag:${chara_id}:育成成绩`) ||
-      era.set(`cflag:${chara_id}:育成成绩`, {});
+    this.#id = chara_id;
   }
 
   /**
@@ -44,7 +54,7 @@ class RaceHistory {
    * @param {RaceResult} result
    */
   add_result(edu_weeks, result) {
-    this.obj[edu_weeks] = result;
+    this.get()[edu_weeks] = result;
   }
 
   check_begin() {
@@ -53,12 +63,15 @@ class RaceHistory {
 
   /** @returns {Record<string,RaceResult>} */
   get() {
-    return this.obj;
+    return (
+      era.get(`cflag:${this.#id}:育成成绩`) ||
+      era.set(`cflag:${this.#id}:育成成绩`, {})
+    );
   }
 
   /** @returns {{pop:number,race:number,rank:number,st:number,weeks:number,year:number}[]} */
   get_entries() {
-    return Object.entries(this.obj).map((e) =>
+    return Object.entries(this.get()).map((e) =>
       Object.assign(
         { pop: 0, race: 0, rank: 0, st: 0, weeks: Number(e[0]), year: 0 },
         e[1],
@@ -71,20 +84,20 @@ class RaceHistory {
    * @returns {RaceResult|undefined}
    */
   get_result(edu_weeks) {
-    return this.obj[edu_weeks];
+    return this.get()[edu_weeks];
   }
 
   /** @returns {RaceResult[]} */
   get_values() {
-    return Object.values(this.obj);
+    return Object.values(this.get());
   }
 
   length() {
-    return Object.keys(this.obj).length;
+    return Object.keys(this.get()).length;
   }
 
   reset() {
-    this.obj = era.set(`cflag:${this.id}:育成成绩`, {});
+    era.set(`cflag:${this.#id}:育成成绩`, {});
   }
 }
 

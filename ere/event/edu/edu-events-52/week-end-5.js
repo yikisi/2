@@ -2,8 +2,8 @@ const era = require('#/era-electron');
 
 const { get_sex_acceptable } = require('#/system/ero/sys-calc-ero-status');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
-const sys_load_game = require('#/system/sys-load-game');
 
+const CustomizedEdu = require('#/event/edu/edu-common');
 const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
@@ -605,7 +605,7 @@ module.exports = (handlers) => {
       const attr_cache = attr_names.map((e) => era.get(`base:52:${e}`)),
         motivation_cache = era.get('cflag:52:干劲');
       if (await era.loadData(52)) {
-        sys_load_game();
+        CustomizedEdu.load_game();
       }
       attr_cache.forEach((e, i) => era.set(`base:52:${attr_names[i]}`, e));
       era.set('cflag:52:干劲', motivation_cache);
@@ -711,7 +711,7 @@ module.exports = (handlers) => {
     await urara.say_and_wait(
       '好！不准再想了！真是的，不可以再消沉下来了哦？明明好不容易才到圣诞节的！',
     );
-    if (new RaceHistory(52).get_result(47 + 48)?.race === race_enum.arim_kin) {
+    if (RaceHistory.get(52).get_result(47 + 48)?.race === race_enum.arim_kin) {
       await urara.say_and_wait(
         '哼哼～关于圣诞节礼物呢！虽然已经送过一次了，但乌拉拉觉得没问题！',
       );

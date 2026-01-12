@@ -1,20 +1,25 @@
 const era = require('#/era-electron');
 
 const { sys_change_lust } = require('#/system/sys-calc-base-cflag');
+const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
 const select_target_in_storage = require('#/page/storage/select-target');
+
+const add_jewel_reward = require('#/event/snippets/add-jewel-reward');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
 /** @param {Record<string,function(number):Promise>} handlers */
 module.exports = (handlers) => {
-  new Array(13)
-    .fill(0)
-    .forEach(
-      (_, i) => (handlers[i + 70] = () => era.printAndWait('仅能在调教中使用')),
-    );
+  new Array(13).fill(0).forEach(
+    (_, i) =>
+      (handlers[i + 70] = async () => {
+        era.println();
+        await era.printAndWait('仅能在调教中使用');
+      }),
+  );
 
   handlers[83] = async () => {
     if (await select_yes_or_no('要丢弃吗？')) {
@@ -25,8 +30,44 @@ module.exports = (handlers) => {
     }
   };
 
+  handlers[84] = handlers[85] = async (item) => {
+    const ret = await select_target_in_storage(
+      item,
+      (cid) =>
+        cid > 0 &&
+        !era.get(`mark:${cid}:淫纹`) &&
+        !era.get(`status:${cid}:淫纹贴纸`) &&
+        (era.get(`love:${cid}`) >= 25 ||
+          era.get(`relation:${cid}:0`) + era.get(`love:${cid}`) * 6 > 225),
+    );
+    if (ret > 0) {
+      const chara = get_chara_talk(ret);
+      era.print([
+        '给 ',
+        chara.get_colored_name(),
+        ' 以「暖腹」的名义贴上了',
+        era.get(`itemname:${item}`),
+        '……',
+      ]);
+      era.print([chara.get_colored_name(), ' 小腹上浮现一个花纹繁复的淫纹……']);
+      era.set(`status:${ret}:淫纹贴纸`, item - 83);
+      if (item === 85) {
+        add_jewel_reward(ret, '顺从', 1666);
+      }
+      era.add(`item:${item}`, -1);
+      if (sys_like_chara(ret, 0, -get_random_value(50, 100))) {
+        await era.waitAnyKey();
+      }
+      return true;
+    }
+  };
+
   [31, 34, 35, 36, 39, 40, 41].forEach(
-    (e) => (handlers[e] = () => era.printAndWait('仅能在调教中使用')),
+    (e) =>
+      (handlers[e] = async () => {
+        era.println();
+        await era.printAndWait('仅能在调教中使用');
+      }),
   );
 
   handlers[42] = async () => {
@@ -61,7 +102,11 @@ module.exports = (handlers) => {
   };
 
   [32, 33].forEach(
-    (e) => (handlers[e] = () => era.printAndWait('仅能在调教前使用')),
+    (e) =>
+      (handlers[e] = async () => {
+        era.println();
+        await era.printAndWait('仅能在调教前使用');
+      }),
   );
 
   handlers[38] = async () => {

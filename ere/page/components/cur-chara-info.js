@@ -1,5 +1,8 @@
 const era = require('#/era-electron');
 
+const {
+  sys_get_full_chara,
+} = require('#/system/chara/sys-calc-characteristic');
 const get_status = require('#/system/chara/sys-get-status');
 const { get_image } = require('#/system/sys-calc-image');
 
@@ -15,11 +18,7 @@ const {
   love_colors,
   relation_colors,
 } = require('#/data/const.json');
-const {
-  chara_desc,
-  chara_full_desc,
-  growth_stage,
-} = require('#/data/ero/status-const');
+const { growth_stage } = require('#/data/ero/status-const');
 const {
   get_love_info,
   get_relation_info,
@@ -39,7 +38,7 @@ function cur_chara_component(chara_id, type, location_npc) {
     if (location_npc) {
       const relation = get_relation_info(location_npc),
         love = get_love_info(location_npc),
-        title = new CharaTitles(location_npc).get_colored_curr_title();
+        title = CharaTitles.get(location_npc).get_colored_curr_title();
       era.printInColRows(
         [{ type: 'divider' }],
         {
@@ -101,16 +100,15 @@ function cur_chara_component(chara_id, type, location_npc) {
     }
   } else {
     era.drawLine();
-    const relation = get_relation_info(chara_id),
-      love = get_love_info(chara_id),
-      growth = era.get(`cflag:${chara_id}:成长阶段`),
-      title = new CharaTitles(chara_id).get_colored_curr_title(true),
-      in_train =
-        growth >= 2 && era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48,
-      motivation = era.get(`cflag:${chara_id}:干劲`),
-      out_of_train = era.get(`cflag:${chara_id}:殿堂`),
-      race = era.get(`cflag:${chara_id}:种族`),
-      characteristic = era.get(`cflag:${chara_id}:气性`);
+    const relation = get_relation_info(chara_id);
+    const love = get_love_info(chara_id);
+    const growth = era.get(`cflag:${chara_id}:成长阶段`);
+    const title = CharaTitles.get(chara_id).get_colored_curr_title(true);
+    const in_train =
+      growth >= 2 && era.get(`cflag:${chara_id}:育成回合计时`) < 3 * 48;
+    const motivation = era.get(`cflag:${chara_id}:干劲`);
+    const out_of_train = era.get(`cflag:${chara_id}:殿堂`);
+    const race = era.get(`cflag:${chara_id}:种族`);
     /** @type {*[]} */
     const name_columns = ['当前角色：'];
     if (title) {
@@ -132,13 +130,13 @@ function cur_chara_component(chara_id, type, location_npc) {
           ' ',
           get_train_time(chara_id).substring(0, 3),
         );
-      } else if (race && !out_of_train && (growth === 2 || growth === 3)) {
+      } else if (race > 0 && !out_of_train && (growth === 2 || growth === 3)) {
         name_columns.push(' 待入学');
       }
       name_columns.push(...race_indicator(chara_id));
     }
     location_npc &&
-      (temp = new CharaTitles(location_npc).get_colored_curr_title());
+      (temp = CharaTitles.get(location_npc).get_colored_curr_title());
     era.setVerticalAlign('middle');
     const image_switch = era.get('flag:立绘类型'),
       status_list = get_status(chara_id);
@@ -245,12 +243,7 @@ function cur_chara_component(chara_id, type, location_npc) {
                 },
                 {
                   config: { width: 4 },
-                  content: [
-                    {
-                      content: chara_desc[characteristic + 3],
-                      title: `[${chara_desc[characteristic + 3]}]：${chara_full_desc[characteristic + 3]}。`,
-                    },
-                  ],
+                  content: [sys_get_full_chara(chara_id)],
                   type: 'text',
                 },
               ]

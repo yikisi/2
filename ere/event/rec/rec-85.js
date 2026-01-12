@@ -7,7 +7,10 @@ const era = require('#/era-electron');
 const { add_event, cb_enum } = require('#/event/queue');
 const CustomizedRecruit = require('#/event/rec/rec-common');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const {
+  get_chara_talk,
+  say_by_passer_by_and_wait,
+} = require('#/utils/chara-talk-factory');
 
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
@@ -167,7 +170,7 @@ handlers[event_hooks.recruit] = async () => {
     flag: 0,
     special: temp,
   });
-  new EventMarks(0).add(event_hooks.out_start);
+  EventMarks.get(0).add(event_hooks.out_start);
   add_event(event_hooks.out_start, new EventObject(85, cb_enum.recruit));
   return true;
 };
@@ -526,14 +529,14 @@ handlers[event_hooks.out_start] = async (event_object) => {
         `这一晚，${me.name} 感觉内心有什么东西变了。一定是 ${ruby.name} 的话语，让自己产生了变化吧。`,
       );
       await era.printAndWait('（暂时没有因选拔测试而外出的必要了）');
-      new EventMarks(0).sub(event_hooks.out_start);
+      EventMarks.get(0).sub(event_hooks.out_start);
   }
   return true;
 };
 
 handlers[event_hooks.week_end] = async (event_object) => {
-  const me = get_chara_talk(0),
-    ruby = get_chara_talk(85);
+  const me = get_chara_talk(0);
+  const ruby = get_chara_talk(85);
   era.print(
     `经过豪华游轮事件，在测试结束后陪 ${ruby.name} 训练，已经成为了 ${me.name} 每日的习惯。${me.name} 甚至愿意把假日拿出来陪 ${ruby.name}。`,
   );
@@ -587,10 +590,11 @@ handlers[event_hooks.week_end] = async (event_object) => {
 };
 
 handlers[event_hooks.week_start] = async () => {
-  const me = get_chara_talk(0),
-    ruby = get_chara_talk(85);
-  await era.printAndWait(
-    '信件【诚挚感谢您参加训练员选拔测试，考核结果如下——】',
+  const me = get_chara_talk(0);
+  const ruby = get_chara_talk(85);
+  await say_by_passer_by_and_wait(
+    '信件',
+    '诚挚感谢您参加训练员选拔测试，考核结果如下——',
   );
   era.printButton('「……咦？」', 1);
   await era.input();

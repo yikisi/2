@@ -11,9 +11,9 @@ module.exports = class extends CustomizedMec {
     switch (era.get('flag:当前赛事')) {
       case race_enum.toky_yus:
       case race_enum.kiku_sho:
-        return [new LegendUmaSelector(26, 1.1)];
+        return [new LegendUmaSelector(26, 1.05)];
       case race_enum.tenn_spr:
-        return [new LegendUmaSelector(13, 1.1)];
+        return [new LegendUmaSelector(13, 1.05)];
     }
     return super.get_race_contestants(info);
   }

@@ -1,3 +1,4 @@
+// GENERATED START
 const { bonus_params, id2bonus } = require('#/data/race/race-attr-bonus');
 const { lane_params, slope_params } = require('#/data/race/race-params');
 const race_rewards = require('#/data/race/race-rewards');
@@ -345,6 +346,8 @@ const race_enum = {
   duba_tur: 0,
   // 阿乔斯短途锦标
   alqu_spr: 0,
+  // 芙蓉锦标
+  fuyo_sta: 0,
 };
 Object.keys(race_enum).forEach((e, i) => (race_enum[e] = i));
 
@@ -522,6 +525,7 @@ race_infos[race_enum.duba_sha] = require('#/data/race/g1/race-duba-sha');
 race_infos[race_enum.duba_cls] = require('#/data/race/g1/race-duba-cls');
 race_infos[race_enum.duba_tur] = require('#/data/race/g1/race-duba-tur');
 race_infos[race_enum.alqu_spr] = require('#/data/race/g1/race-alqu-spr');
+race_infos[race_enum.fuyo_sta] = require('#/data/race/op/race-fuyo-sta');
 
 race_infos.forEach((e) => {
   const param_id = e.param_id;
@@ -538,7 +542,7 @@ race_infos.forEach((e) => {
 race_infos[race_enum.begin_race] = require('#/data/race/race-begin-race');
 
 console.log(
-  '[race-const.js] race info init done!',
+  '比赛信息注册完毕!',
   (new Date().getTime() - current).toLocaleString(),
   'ms',
 );
@@ -548,3 +552,4 @@ module.exports = {
   race_infos,
   race_rewards,
 };
+// GENERATED END

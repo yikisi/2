@@ -1,1 +1,21 @@
-const RaceInfo = require('#/data/race/model/race-info');module.exports = new RaceInfo(  'Nikkei Sho',  '日经赏',  RaceInfo.class_enum.G2,  RaceInfo.track_enum.nakayama,  RaceInfo.ground_enum.grass,  2500,  RaceInfo.distance_enum.long,  RaceInfo.rotation_enum.right,  16,  [17, 20, 30, 27, 58, 127],  RaceInfo.limit_enum.post4,  12,  0,  2093,  10506,);
+// GENERATED START
+const RaceInfo = require('#/data/race/model/race-info');
+
+module.exports = new RaceInfo(
+  'Nikkei Sho',
+  '日经赏',
+  RaceInfo.class_enum.G2,
+  RaceInfo.track_enum.nakayama,
+  RaceInfo.ground_enum.grass,
+  2500,
+  RaceInfo.distance_enum.long,
+  RaceInfo.rotation_enum.right,
+  16,
+  [17, 20, 30, 27, 58, 127],
+  RaceInfo.limit_enum.post4,
+  12,
+  0,
+  2093,
+  10506,
+);
+// GENERATED END

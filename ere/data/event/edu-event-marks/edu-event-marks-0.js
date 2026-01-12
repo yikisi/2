@@ -35,6 +35,12 @@ class MyEduMarks extends EduEventMarks {
   not_pregnant;
   // 孕袋惩戒次数
   p_slave_punish;
+  // 樱花的遗憾
+  pity;
+  // 孕袋父子丼
+  orgy;
+  // 商店街大甩卖
+  big_sale;
 
   constructor() {
     super(0);

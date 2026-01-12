@@ -1,20 +1,20 @@
 const era = require('#/era-electron');
 
 /**
- * @param {number} chara_id
+ * @param {number} cid
  * @param {boolean} [is_masochism]
  * @returns {number}
  */
-function get_sm_buff(chara_id, is_masochism) {
+function get_sm_buff(cid, is_masochism = false) {
   if (
-    !era.get(`status:${chara_id}:沉睡`) &&
-    !era.get(`status:${chara_id}:马跳S`) &&
-    !era.get(`tcvar:${chara_id}:脱力`)
+    !era.get(`status:${cid}:沉睡`) &&
+    !era.get(`status:${cid}:马跳S`) &&
+    !era.get(`tcvar:${cid}:脱力`)
   ) {
-    if (is_masochism && era.get(`tequip:${chara_id}:项圈`) !== -1) {
+    if (is_masochism && era.get(`tequip:${cid}:项圈`) !== -1) {
       return 0.2;
     }
-    if (era.get('tflag:全身镜') && era.get(`tequip:${chara_id}:眼罩`) === -1) {
+    if (era.get('tflag:全身镜') && era.get(`tequip:${cid}:眼罩`) === -1) {
       return 0.2;
     }
   }

@@ -5,91 +5,148 @@ const check_aim_race = require('#/event/snippets/check-aim-race');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 
+const recruit_flags = require('#/data/event/recruit-flags');
 const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
+/**
+ * 定制化机制脚本，可以用于定制角色的专属机制、立绘等<br>
+ * 和 CustomizedCheck 拆分是因为解决环形依赖
+ */
 class CustomizedMec {
-  constructor(chara_id) {
-    this.id = chara_id;
+  /** @type {function(number):CustomizedMec} */
+  static get_custom_mec;
+
+  /** @type {number} */
+  id;
+
+  /** @param {number} cid */
+  constructor(cid) {
+    this.id = cid;
   }
 
+  /** 用于切换多口上 */
   get_this() {
     return this;
   }
 
+  /** 初始化爱慕 */
   init_love() {
-    era.set(
-      `love:${this.id}`,
-      era.get(`cflag:${this.id}:种族`) ? era.get('flag:马娘初始爱慕') : 0,
-    );
+    if (era.get(`cflag:${this.id}:种族`) > 0) {
+      era.set(`love:${this.id}`, era.get('flag:马娘初始爱慕'));
+    }
   }
 
+  /** 是否可在选择互动角色界面选择 */
   is_able_to_be_selected() {
     return true;
   }
 
-  /** @param {number[]} partners */
+  /**
+   * 是否因玩家不忠而愤怒
+   * @param {number[]} partners 玩家的出轨对象列表
+   */
   // eslint-disable-next-line no-unused-vars
   is_anger_for_unfaithful(partners) {
-    return true;
+    return era.get('flag:不忠惩罚') === 1;
   }
 
+  /**
+   * 是否不可参加对应比赛
+   * @param {number} race 对应比赛的ID
+   */
+  // eslint-disable-next-line no-unused-vars
+  is_race_disabled(race) {
+    return false;
+  }
+
+  /** 是否允许自由报名比赛 */
   is_race_register_enabled() {
     return true;
   }
 
+  /** 是否允许训练 */
   is_train_enabled() {
     return true;
   }
 
+  /**
+   * 获取行动体力精力消耗DEBUFF
+   * @returns {number} DEBUFF的数值%，大于0时增加消耗
+   */
   get_action_debuff() {
     return 0;
   }
 
   /**
-   * @param {number} action
-   * @returns {number}
+   * 获取调教指令的额外判定值<br>
+   * 调教指令判定值会影响是否能执行指令与执行指令后获取顺从还是反感因子
+   * @param {number} action 调教指令ID
+   * @returns {number} 调教指令判定值，会加到最终判定值中
    */
   // eslint-disable-next-line no-unused-vars
   get_ero_check(action) {
     return 0;
   }
 
+  /** 获取爱慕获取BUFF% */
   get_love_buff() {
     return 0;
   }
 
+  /**
+   * 获取爱慕值上限
+   * @returns {number} 0-100之间的整数，返回0时表示不限制
+   */
   get_love_limit() {
-    return 0;
+    if (era.get(`cflag:${this.id}:招募状态`) === recruit_flags.yes) {
+      return 0;
+    }
+    const love = era.get(`love:${this.id}`);
+    if (love > 50) {
+      return 67;
+    }
+    return 49;
   }
 
+  /** 获取最大体力精力BUFF */
   get_maxbase_buff() {
     return 0;
   }
 
+  /**
+   * 获取干劲上限BUFF，反用
+   * @returns {number} -4-0之间的整数，-4时干劲上限为极差，以此类推
+   */
   get_motivation_limit() {
     return 0;
   }
 
   /**
-   * @param {number} part
-   * @returns {number}
+   * 获取部位快感上限BUFF
+   * @param {number} part 部位ID
+   * @returns {number} 部位上限BUFF数值
    */
   // eslint-disable-next-line no-unused-vars
-  get_palam_limit_buff(part) {
+  get_param_limit_buff(part) {
     return 0;
   }
 
+  /** 获取怀孕率BUFF */
   get_pregnant_ratio() {
     return 0;
   }
 
+  /** 获取压力获取BUFF */
   get_pressure_buff() {
     return 0;
   }
 
-  /** @returns {string[]} */
+  /**
+   * 获取决胜服立绘名
+   * @returns {string[]} 图片名数组，从前到后选择第一个可以显示的图片
+   */
   get_race_cloth() {
     const base = era.get(`cstr:${this.id}:头像`),
       ret = [];
@@ -111,7 +168,7 @@ class CustomizedMec {
         case 28:
         case 30:
         case 31:
-          ret.push(`${base}_泳`, `${base}_夏`);
+          ret.push(`${base}_泳`, `${base}_夏私`);
           break;
         case 29:
           ret.push(`${base}_江户`);
@@ -130,8 +187,10 @@ class CustomizedMec {
   }
 
   /**
-   * @param {RaceInfo} info
-   * @returns {(LegendUmaSelector|LegendUmaFilter)[]}
+   * 获取专属强敌列表
+   * @param {RaceInfo} info 比赛信息
+   * @returns {(LegendUmaSelector|LegendUmaFilter)[]} 可用于解析为强敌的数据对象<br>
+   * LegendUmaSelector 从已有同ID强敌的数据中选择，LegendUmaFilter 从所有已有对手的数据中筛选然后设置名字
    */
   // eslint-disable-next-line no-unused-vars
   get_race_contestants(info) {
@@ -139,13 +198,14 @@ class CustomizedMec {
   }
 
   /**
+   * 获取一着冲线时解说的特殊台词
    * @param {PseudoUma} uma
    * @param {number} race_id
    * @returns {string|array}
    */
   get_race_finish_report(uma, race_id) {
-    const races = new RaceHistory(this.id),
-      invincible = races.get_values().findIndex((e) => e.rank !== 1) === -1;
+    const races = RaceHistory.get(this.id);
+    const invincible = races.get_values().findIndex((e) => e.rank !== 1) === -1;
     if (race_id === race_enum.tenn_spr) {
       return '春季的长距离之王诞生！';
     } else if (race_id === race_enum.tenn_sho && uma.pop[0] === 1) {
@@ -173,16 +233,19 @@ class CustomizedMec {
     }
   }
 
+  /** 获取好感度获取BUFF% */
   get_relation_buff() {
     return 0;
   }
 
+  /** 获取允许上床的判定BUFF */
   get_sex_acceptable() {
     return 0;
   }
 
   /**
-   * @param {boolean} show_train_buff - if shows the train buff
+   * 获取专属状态列表
+   * @param {boolean} show_train_buff 是否显示训练期间的专属状态
    * @returns {({[color]:string,content:string,[fontWeight]:string,[title]:string})[]}
    */
   // eslint-disable-next-line no-unused-vars
@@ -190,6 +253,7 @@ class CustomizedMec {
     return [];
   }
 
+  /** 获取训练成功率BUFF% */
   get_success_rate_buff() {
     return 0;
   }
@@ -205,18 +269,29 @@ class CustomizedMec {
     return 0;
   }
 
-  /** @returns {({[color]:string,content:string,[fontWeight]:string,[title]:string})[]} */
+  /**
+   * 获取专属特性列表
+   * @returns {({[color]:string,content:string,[fontWeight]:string,[title]:string})[]}
+   */
   get_talents() {
     return [];
   }
 
+  /** 获取训练加成BUFF% */
   get_train_buff() {
     return 0;
   }
 
-  /** @returns {string} */
+  /**
+   * 获取性癖相关的描述
+   * @returns {string}
+   */
   get_xp_desc() {}
 
+  /**
+   * 角色扮演模式下，设置玩家扮演角色对该角色的称呼
+   * @returns {boolean} 是否从模版角色数据中获取了对该角色的称呼
+   */
   set_callname_from_src() {
     const my_src_chara = era.get('cflag:0:模版角色');
     if (my_src_chara > 0 && era.get(`callname:${this.id}`)[my_src_chara]) {
@@ -228,23 +303,20 @@ class CustomizedMec {
     }
   }
 
+  /** 设置对玩家的默认称呼 */
   set_callname() {
     if (!this.set_callname_from_src()) {
-      let callname;
-      if (!era.get(`cflag:${this.id}:父方角色`)) {
-        callname = '爸爸';
-      } else if (!era.get(`cflag:${this.id}:母方角色`)) {
-        callname = '妈妈';
-      } else {
-        callname = '训练员' + get_chara_talk(0).get_adult_sex_title();
-      }
-      era.set(`callname:${this.id}:0`, callname);
+      era.set(
+        `callname:${this.id}:0`,
+        '训练员' + get_chara_talk(0).get_adult_sex_title(),
+      );
     }
   }
 
   /**
-   * @param {boolean} before_race
-   * @param {number} loc
+   * 设置海外远征时的DEBUFF
+   * @param {boolean} before_race 是否为参赛选手
+   * @param {number} loc 要到达地点的ID
    */
   // eslint-disable-next-line no-unused-vars
   set_foreign_debuff(before_race, loc) {
@@ -260,6 +332,7 @@ class CustomizedMec {
     }
   }
 
+  /** 设置自称 */
   set_my_name() {
     if (
       era.get(`callname:${this.id}:${this.id}`) ===
@@ -269,20 +342,30 @@ class CustomizedMec {
     }
   }
 
-  /** @returns {number} */
+  /**
+   * 设置性别
+   * @returns {number}
+   */
   set_my_sex() {
     const global_sex = era.get('flag:角色性别');
-    return era.set(
-      `cflag:${this.id}:性别`,
-      global_sex === 99
-        ? era.get(`cflag:${this.id}:模版角色`) === -1
-          ? era.get(`staticcflag:${this.id}:性别`)
-          : get_random_entry([0, 10])
-        : global_sex,
-    );
+    if (global_sex === 99) {
+      if (era.get(`cflag:${this.id}:模版角色`) === -1) {
+        return era.set(
+          `cflag:${this.id}:性别`,
+          era.get(`staticcflag:${this.id}:性别`),
+        );
+      } else {
+        return era.set(`cflag:${this.id}:性别`, get_random_entry([0, 10]));
+      }
+    } else {
+      return era.set(`cflag:${this.id}:性别`, global_sex);
+    }
   }
 
-  /** @param {PseudoUma} uma */
+  /**
+   * 设置选手数据，一般用于在参赛时给角色上专属BUFF
+   * @param {PseudoUma} uma 参赛时该角色对应的选手对象
+   */
   // eslint-disable-next-line no-unused-vars
   set_pseudo_uma(uma) {}
 }

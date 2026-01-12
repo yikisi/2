@@ -22,7 +22,7 @@ const { say_by_passer_by_and_wait } = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { buff_colors } = require('#/data/color-const');
-const status_desc = require('#/data/desc/status-desc.json');
+const status_desc = require('#/data/desc/status.json');
 const FlashEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-37');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
@@ -51,7 +51,7 @@ module.exports = class extends CustomizedEdu {
       return;
     }
     const your_name = me.name;
-    new EventMarks(0).sub(event_hooks.out_shopping);
+    EventMarks.get(0).sub(event_hooks.out_shopping);
     await print_event_name('漆黑珍宝', flash);
     await era.printAndWait(
       `独自在商场准备购买生活用品时，${your_name} 突然在附近看到了满脸闷闷不乐的荣进闪耀。`,
@@ -256,7 +256,8 @@ module.exports = class extends CustomizedEdu {
   }
 
   async race_end(flash, me, callname, hook, extra_flag) {
-    return await flash_race_end(
+    return await flash_race_end.call(
+      this,
       flash,
       me,
       callname,
@@ -267,7 +268,8 @@ module.exports = class extends CustomizedEdu {
   }
 
   async race_start(flash, me, callname, hook, extra_flag) {
-    return await flash_race_start(
+    return await flash_race_start.call(
+      this,
       flash,
       me,
       callname,
@@ -484,7 +486,7 @@ module.exports = class extends CustomizedEdu {
         return await super.train_success(flash, me, callname, hook, extra_flag);
       }
     } else if (
-      era.get(`status:37:发胖`) &&
+      era.get(`status:37:发胖`) > 0 &&
       Math.random() < 0.1 * extra_flag.stamina_ratio
     ) {
       await flash.say_and_wait('……诶？');

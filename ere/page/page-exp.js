@@ -19,14 +19,14 @@ handlers.push(
   require('#/page/exp/race-tab'),
   require('#/page/exp/relation-tab'),
   require('#/page/exp/sex-tab'),
-  require('#/page/exp/exp-tab-1'),
-  require('#/page/exp/exp-tab-2'),
-  require('#/page/exp/exp-tab-3'),
-  require('#/page/exp/exp-tab-4'),
-  require('#/page/exp/exp-tab-5'),
-  require('#/page/exp/exp-tab-6'),
-  require('#/page/exp/exp-tab-7'),
-  require('#/page/exp/exp-tab-8'),
+  require('#/page/exp/exp-tab-mouth'),
+  require('#/page/exp/exp-tab-boobs'),
+  require('#/page/exp/exp-tab-body'),
+  require('#/page/exp/exp-tab-hand-foot'),
+  require('#/page/exp/exp-tab-penis'),
+  require('#/page/exp/exp-tab-virgin'),
+  require('#/page/exp/exp-tab-anal'),
+  require('#/page/exp/exp-tab-sm'),
 );
 
 /**
@@ -46,7 +46,9 @@ function check_page_disabled(chara, page) {
  */
 function get_flags(chara_id) {
   const no_fog =
-      era.get(`exp:${chara_id}:性爱次数`) > era.get(`exp:${chara_id}:睡奸次数`),
+      era.get(`exp:${chara_id}:性爱次数`) >
+        era.get(`exp:${chara_id}:睡奸次数`) ||
+      era.get(`tcvar:${chara_id}:乳突`) !== undefined,
     body_item = era.get('status:0:马语者') || era.get('status:0:透视镜片') > 0,
     show_all_body = !chara_id || body_item,
     show_all_exp =
@@ -75,7 +77,7 @@ async function print_chara_info(_id, chara_list, _page) {
   while (flag_exp) {
     await era.clear();
     era.setToBottom();
-    let page = _page === undefined ? era.get('flag:情报翻页') : _page;
+    let page = _page ?? era.get('flag:情报翻页');
     while (check_page_disabled(chara, handlers[page])) {
       page--;
     }

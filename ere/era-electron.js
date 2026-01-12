@@ -6,6 +6,7 @@
  * @property {'primary'|'success'|'warning'|'danger'|'info'|''} [buttonType] type of the button in element-plus, 'warning' in default when isButton is false
  * @property {string} [color] color of the button, isButton must be false
  * @property {boolean} [disabled] if the button is disabled, false in default
+ * @property {boolean} [disableContinue] if the button is disabled, false in default
  * @property {boolean} [disableWarning] if disable warning when accelerator has been set, false in default
  * @property {'left'|'center'|'right'} [inTextAlign] align of the text in the button, 'center' in default
  * @property {boolean} [isButton] if the button is a button, otherwise is a link
@@ -83,7 +84,7 @@
  * @property {number} [width] width of the line, 1-24, 24 in default
  */
 /**
- * @typedef {string|(PrintedSpan|{isBlank:boolean}|{isBr:boolean}|{isDivider:boolean}|string)[]} TextContent
+ * @typedef {string|(PrintedSpan|{isBlank:number}|{isBr:number}|{isDivider:boolean}|string)[]} TextContent
  */
 /**
  * @typedef TextObject
@@ -101,7 +102,7 @@
 /**
  * @typedef WholeImageObject
  * @property {WholeImageConfig} [config]
- * @property {string|string[]} name
+ * @property {string|string[]} names
  * @property {'image.whole'} type
  */
 
@@ -116,6 +117,7 @@
  * @property {number} [offset]
  * @property {'top'|'middle'|'bottom'} [verticalAlign]
  * @property {number} [width]
+ * @property {boolean} [flush]
  * @see https://element-plus.org/zh-CN/component/layout.html
  */
 /**
@@ -252,7 +254,7 @@ const era = {
   logger: {
     assert(checkVal, aimVal) {
       if (checkVal !== aimVal && era.version.engine === undefined) {
-        console.log(
+        console.debug(
           '[ASSERT]',
           new Error(`assert failed! aim val: ${aimVal}, got val: ${checkVal}`)
             .stack,
@@ -267,6 +269,7 @@ const era = {
      */
     debug(msg) {
       if (era.version.engine === undefined) {
+        console.debug('[DEBUG]', msg);
         return;
       }
       return era.logger.debug(msg);
@@ -278,13 +281,13 @@ const era = {
      */
     error(msg, stack) {
       if (era.version.engine === undefined) {
-        console.log('[ERROR]', msg, stack);
+        console.error('[ERROR]', msg, stack);
         return;
       }
       return era.logger.error(msg, stack);
     },
     /**
-     * to log something into program logs
+     * to log something into program logs as info level
      * @param {any} msg
      */
     info(msg) {
@@ -294,6 +297,18 @@ const era = {
       }
       return era.logger.info(msg);
     },
+    /**
+     * to log something into program logs as warn level
+     * @param {any} msg
+     * @param {any} [stack]
+     */
+    warn(msg, stack) {
+      if (era.version.engine === undefined) {
+        console.warn('[WARN]', msg, stack);
+        return;
+      }
+      return era.logger.warn(msg, stack);
+    },
   },
   /**
    * add delta table into param table, nowex table into ex table, and clean source, delta and nowex table
@@ -301,7 +316,7 @@ const era = {
   nextTurnInTrain() {},
   /**
    * show a notification
-   * @param {string|({[color]:string,content:string,[fontSize]:string,[fontWeight]:string}|{isBr:true}|string)[]} content content of the notification
+   * @param {string|({[color]:string,content:string,[fontSize]:string,[fontWeight]:string}|{isBlank:number}|{isBr:number}|string)[]} content content of the notification
    * @param {string} [title] title of the notification
    * @param {'success'|'info'|'warning'|'error'|''} [type] type of the notification, see the enum
    * @param {number} [duration] duration of the notification, microsecond
@@ -398,12 +413,12 @@ const era = {
   printProgress(percentage, inContent, outContent, config) {},
   /**
    * print the whole image
-   * @param {string|string[]} name REQUIRED
+   * @param {string|string[]} names REQUIRED
    * @param {WholeImageConfig} [config]
    * @returns {number} line number of the printed
    */
   // eslint-disable-next-line no-unused-vars
-  printWholeImage(name, config) {},
+  printWholeImage(names, config) {},
   /**
    * print a line break, if just used to print enter at the end of a line, please use print('*** \n') to replace
    * @returns {number} line number of the printed
@@ -411,6 +426,13 @@ const era = {
   println() {},
   /** DANGER exit the application and close the window */
   quit() {},
+  /**
+   * DANGER remove the character
+   * @param {number} charaId REQUIRED id of the character
+   * @returns {void}
+   */
+  // eslint-disable-next-line no-unused-vars
+  removeCharacter(...charaId) {},
   /**
    * DANGER replace the line just printed with a new in-col-row line
    * @param {...ColumnObject|GridObject[]} columnObjects
@@ -467,23 +489,24 @@ const era = {
    */
   async saveGlobal() {},
   /**
+   * @template T
    * set a variable by name
    * @param {string} varName REQUIRED the name of variable, String, like 'callname:1:2'
-   * @param {any} val REQUIRED the new value of the variable
-   * @returns {any|undefined} the new value of the variable, or undefined if failed
+   * @param {T} val REQUIRED the new value of the variable
+   * @returns {T} the new value of the variable, or undefined if failed
    */
   // eslint-disable-next-line no-unused-vars
   set(varName, val) {},
   /**
    * set default text-align
-   * @param {string} textAlign REQUIRED the text-align, center, left or right used in usual
+   * @param {'center'|'left'|'right'} textAlign REQUIRED the text-align: center, left or right used in usual
    * @returns {void}
    */
   // eslint-disable-next-line no-unused-vars
   setAlign(textAlign) {},
   /**
    * set default horizontal align of inColRows
-   * @param {string} align REQUIRED the vertical align, start, end, center, space-around, space-between or space-evenly
+   * @param {'start'|'end'|'center'|'space-around'|'space-between'|'space-evenly'} align REQUIRED the vertical align: start (default), end, center, space-around, space-between or space-evenly
    * @returns {void}
    */
   // eslint-disable-next-line no-unused-vars
@@ -515,7 +538,7 @@ const era = {
   setToBottom() {},
   /**
    * set default vertical align of inColRows
-   * @param {string} align REQUIRED the vertical align, top, middle or bottom used in usual
+   * @param {'top'|'middle'|'bottom'} align REQUIRED the vertical align: top (default), middle or bottom
    * @returns {void}
    */
   // eslint-disable-next-line no-unused-vars
@@ -534,7 +557,7 @@ const era = {
    * @returns {boolean} if debug
    */
   toggleDebug() {},
-  version: { sdk: '3.6.0', engine: undefined },
+  version: { sdk: '4.4.0', engine: undefined },
   /**
    * wait any key from user
    * @returns {Promise<void>} a promise of nothing, please use await

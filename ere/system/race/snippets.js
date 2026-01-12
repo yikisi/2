@@ -1,7 +1,9 @@
-const { logger } = require('#/era-electron');
+const { get, logger } = require('#/era-electron');
 
 const { get_random_value } = require('#/utils/value-utils');
 
+const recruit_flags = require('#/data/event/recruit-flags');
+const { get_trainer_level } = require('#/data/info-generator');
 const { ability_usage_enum } = require('#/data/race/model/uma-skill');
 const { frame_rate } = require('#/data/race/race-sim-const');
 const { skills_dict } = require('#/data/race/skill/skill-const');
@@ -42,12 +44,12 @@ function get_event_record(message, timer_record, timer) {
 function reset_loc_mind_other_diff(uma, race_info) {
   uma.base.loc_mind_other_diff_random = [
     get_random_value(
-      race_info.loc_mind_diff.other_lower[uma.base.loc_mind_style - 1],
-      race_info.loc_mind_diff.other_upper[uma.base.loc_mind_style - 1],
+      race_info.loc_mind_diff.other_lower[uma.race.style - 1],
+      race_info.loc_mind_diff.other_upper[uma.race.style - 1],
       true,
     ),
-    (race_info.loc_mind_diff.other_lower[uma.base.loc_mind_style - 1] +
-      race_info.loc_mind_diff.other_upper[uma.base.loc_mind_style - 1]) /
+    (race_info.loc_mind_diff.other_lower[uma.race.style - 1] +
+      race_info.loc_mind_diff.other_upper[uma.race.style - 1]) /
       2,
   ];
 }
@@ -300,33 +302,56 @@ module.exports = {
     let dice;
     switch (uma.style) {
       case 1:
-        uma.base.loc_mind_style = 0;
+        uma.race.style = 0;
         break;
       case 2:
-        uma.base.loc_mind_style = Number(Math.random() > 0.75);
+        uma.race.style = Number(Math.random() > 0.75);
         break;
       case 3:
         dice = Math.random();
         if (dice < 0.7) {
-          uma.base.loc_mind_style = 0;
+          uma.race.style = 0;
+        } else if (dice < 0.9) {
+          uma.race.style = 1;
         } else {
-          uma.base.loc_mind_style = 1 + Number(dice > 0.9);
+          uma.race.style = 2;
         }
     }
-    if (uma.base.loc_mind_style > 0) {
+    if (uma.race.style > 0) {
       reset_loc_mind_other_diff(uma, race_info);
     }
   },
   progress_width,
   reset_loc_mind_other_diff,
+  /**
+   * @param {PseudoUma} uma
+   * @param {[number,number,number,number]} rs_counts
+   * @param {number} all
+   */
+  reset_running_style(uma, rs_counts, all) {
+    uma.race.conditionParams.running_style = uma.style + 1;
+    uma.race.conditionParams.running_style_count_nige_otherself =
+      rs_counts[0] - (uma.style === 0);
+    uma.race.conditionParams.running_style_count_senko_otherself =
+      rs_counts[1] - (uma.style === 1);
+    uma.race.conditionParams.running_style_count_sashi_otherself =
+      rs_counts[2] - (uma.style === 2);
+    uma.race.conditionParams.running_style_count_oikomi_otherself =
+      rs_counts[3] - (uma.style === 3);
+    uma.race.conditionParams.running_style_count_same = rs_counts[uma.style];
+    uma.race.conditionParams.running_style_count_same_rate =
+      (uma.race.conditionParams.running_style_count_same * 100) / all;
+  },
   screen_size: 8,
   /**
    * @param {RaceSkill} skill
    * @param {number} i
    * @param {number} j
    * @param {PseudoUma} uma
+   * @param {number} count
    */
-  simulate_ability_usage(skill, i, j, uma) {
+  simulate_ability_usage(skill, i, j, uma, count) {
+    const cid = uma.index_chara;
     let temp;
     switch (skill.data.ability_value_usages[i][j]) {
       case ability_usage_enum.MultiplySkillNum:
@@ -384,7 +409,7 @@ module.exports = {
       case ability_usage_enum.MultiplyBlockedSideMaxContinueTimePhaseMiddleRun1:
         skill.values[i][j] =
           skill.data.ability_values[i][j] *
-          Math.min(uma.race.conditionParams.activate_count_all * 0.01, 0.15);
+          (Math.min(Math.floor(uma.race.middleBlockedContinueTime / 2), 3) + 1);
         break;
       case ability_usage_enum.MultiplyBaseSpeedForAcc:
         skill.values[i][j] = skill.data.ability_values[i][j];
@@ -436,14 +461,16 @@ module.exports = {
         break;
       case ability_usage_enum.MultiplyFanCount:
       case ability_usage_enum.MultiplyFanCount2:
-        skill.values[i][j] =
-          (1 +
-            uma.base.fame *
+        skill.values[i][j] = skill.data.ability_values[i][j];
+        if (get(`cflag:${cid}:招募状态`) === recruit_flags.yes) {
+          skill.values[i][j] *=
+            1 +
+            get_trainer_level() *
               (0.05 +
                 0.01 *
                   (skill.data.ability_value_usages[i][j] -
-                    ability_usage_enum.MultiplyFanCount))) *
-          skill.data.ability_values[i][j];
+                    ability_usage_enum.MultiplyFanCount));
+        }
         break;
       case ability_usage_enum.MultiplyMaximumRawStatus:
         temp = Math.max(...uma.attrs);
@@ -476,8 +503,11 @@ module.exports = {
         break;
       case ability_usage_enum.MultiplyCookingPt:
         skill.values[i][j] = skill.data.ability_values[i][j];
-        if (uma.base.weight < 4000) {
-          skill.values[i][j] *= 1 + ((4000 - uma.base.weight) * 0.2) / 4000;
+        if (get(`cflag:${cid}:招募状态`) === recruit_flags.yes) {
+          const weight = get(`base:${cid}:体重偏差`);
+          if (weight < 4000) {
+            skill.values[i][j] *= 1 + ((4000 - weight) * 0.2) / 4000;
+          }
         }
         break;
       case ability_usage_enum.MultiplyResearchLv:
@@ -487,6 +517,47 @@ module.exports = {
         } else if (uma.base.research_lv >= 15) {
           skill.values[i][j] *= 1.1;
         }
+        break;
+      case ability_usage_enum.MultiplyLove:
+        skill.values[i][j] = skill.data.ability_values[i][j];
+        if (!cid) {
+          skill.values[i][j] *= 2;
+        } else if (
+          get(`cflag:${cid}:招募状态`) === recruit_flags.yes &&
+          cid > 0
+        ) {
+          temp = get(`love:${cid}`);
+          if (temp >= 90) {
+            skill.values[i][j] *= 4;
+          } else if (temp >= 75) {
+            skill.values[i][j] *= 3;
+          } else if (temp >= 50) {
+            skill.values[i][j] *= 2;
+          }
+        }
+        break;
+      case ability_usage_enum.MultiplyIsland:
+        skill.values[i][j] = skill.data.ability_values[i][j];
+        if (get(`cflag:${cid}:招募状态`) === recruit_flags.yes) {
+          const money = get('flag:当前马币');
+          if (money >= 100000) {
+            skill.values[i][j] += 0.15;
+          } else if (money >= 10000) {
+            skill.values[i][j] += 0.125;
+          } else if (money >= 5000) {
+            skill.values[i][j] += 0.1;
+          } else if (money >= 2000) {
+            skill.values[i][j] += 0.075;
+          } else if (money >= 1000) {
+            skill.values[i][j] += 0.05;
+          } else if (money >= 500) {
+            skill.values[i][j] += 0.025;
+          }
+        }
+        break;
+      case ability_usage_enum.MultiplyCount:
+        skill.values[i][j] =
+          skill.data.ability_values[i][j] * (0.98 + 0.01 * count);
         break;
       default:
         skill.values[i][j] = skill.data.ability_values[i][j];

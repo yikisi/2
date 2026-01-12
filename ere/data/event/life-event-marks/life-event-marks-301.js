@@ -1,6 +1,7 @@
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
 class TokinoLifeMarks extends LifeEventMarks {
+  buff;
   who_am_i;
   shadow;
 

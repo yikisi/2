@@ -1,24 +1,9 @@
-# [EraUma v1.32 (kuuga)](https://gitgud.io/umaera/erauma/-/releases/1.32)
-_2025/3/13_
+# [EraUma v2.172 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.172)
 
-## Added
+_2025/11/20_
 
-* 追加实装了以下地文事件
-  * 【孕袋职责之惩戒】
-* 新增比赛【阿乔斯短途锦标】
-  * 每年四月第一周在迪拜迈丹竞马场举行
-  * 经典年以上马娘可参赛
-
-## Changed
-
-* 现在玩家生下通过睡奸孕育的孩子时会获得更多的好感度和顺从因子奖励
-* 现在育成中马娘的训练设施将在新秀年和经典年年底自动提升一级
-  * 【只想再看一眼，美妙景色】技能提升效果重做：全训练设施等级和不低于15时，效果上升10%；不低于20时，效果上升20%
-* 优化了称号的保存方式
-* 优化了招募脚本的处理逻辑
-* 为香港浪琴国际赛事补充了赛道坡度信息
-* 为迪拜世界杯比赛日的泥地比赛补充了赛道坡度信息
+适配 [EraElectron v4.4.0 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.4.0) 与 [ere.app v1.2.6 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.2.6) 及以上版本
 
 ## Fixed
 
-* 【迪拜金莎轩锦标】的参赛限制修正为经典年以上
+* 修复了加载存档时因向前兼容导致的错误

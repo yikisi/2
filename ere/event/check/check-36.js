@@ -1,4 +1,4 @@
-const { get } = require('#/era-electron');
+const { get, set } = require('#/era-electron');
 
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
 
@@ -27,7 +27,7 @@ aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 4;
 
 module.exports = class extends CustomizedCheck {
   check_and_get_titles(aim_check) {
-    const races = new RaceHistory(this.id).get(),
+    const races = RaceHistory.get(this.id).get(),
       ret = [];
     if (
       check_aim_race(races, race_enum.sats_sho, 1, 1) &&
@@ -47,13 +47,23 @@ module.exports = class extends CustomizedCheck {
     return ret;
   }
 
+  check_next_week() {
+    if (
+      !get(`cflag:${this.id}:随机招募`) &&
+      get(`cflag:${this.id}:招募状态`) === -1
+    ) {
+      set(`cflag:${this.id}:随机招募`, 1);
+    }
+    super.check_next_week();
+  }
+
   get_aim_races() {
     return aim_races;
   }
 
   get_edu_aims() {
     const buffer = [],
-      races = new RaceHistory(this.id).get();
+      races = RaceHistory.get(this.id).get();
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.hope_sta, 0, 5));
     buffer.push(check_aim_and_get_entry(races, race_enum.sats_sho, 1, 5));

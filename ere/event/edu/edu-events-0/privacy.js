@@ -13,6 +13,9 @@ const {
 } = require('#/era-electron');
 
 const {
+  check_pregnant_unprotect,
+} = require('#/system/ero/sys-calc-ero-status');
+const {
   begin_and_init_ero,
   end_ero_and_show_result,
 } = require('#/system/ero/sys-prepare-ero');
@@ -264,7 +267,9 @@ module.exports = class extends CustomizedEdu {
       get('flag:当前位置') === location_enum.basement ||
       !sys_check_awake(0) ||
       !sys_check_awake(chara_id) ||
-      get('flag:床伴') > 0
+      get('flag:床伴') > 0 ||
+      !check_pregnant_unprotect(0) ||
+      !check_pregnant_unprotect(chara_id)
     ) {
       add_event(hook.hook, event_object);
       return;
@@ -327,7 +332,7 @@ module.exports = class extends CustomizedEdu {
         await chara.say_and_wait([
           '明明已经是',
           chara.get_uma_sex_title(),
-          '得所有物了。',
+          '的所有物了。',
         ]);
         await chara.say_and_wait('居然还以为自己对这副身体有处置权吗？');
         await chara.say_and_wait('看来有必要对你明确一下你的地位了。');

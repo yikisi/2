@@ -9,11 +9,10 @@ const print_set_page = require('#/page/new-game/page-setting');
 
 const basement_queue = require('#/event/basement-queue');
 const { get_custom_check } = require('#/event/check/check-factory');
-const GameGuides = require('#/event/others/game-guides');
+const game_guides = require('#/event/others/game-guides');
 const event_queue = require('#/event/queue');
 const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
 
-const CharaTalk = require('#/utils/chara-talk');
 const { get_random_value } = require('#/utils/value-utils');
 
 const CharaAvailableSkills = require('#/data/chara-available-skills');
@@ -46,9 +45,12 @@ module.exports = async (src_chara) => {
   era.resetData();
   if (src_chara > 0) {
     chara_colors[0] = get_chara_color(src_chara);
+    init_chara(src_chara);
+    era.set(`cflag:${src_chara}:随机招募`, 0);
     init_chara(0, src_chara);
+    era.set('talent:0:调教度', 1);
     player_name = era.get('callname:0:-1');
-    new CharaTitles(0).push(
+    CharaTitles.get(0).push(
       ...get_custom_check(src_chara)
         .get_personal_titles()
         .map((e) => ({ c: chara_colors[0], n: e })),
@@ -56,9 +58,12 @@ module.exports = async (src_chara) => {
     (chara_skill_dict[src_chara] || []).forEach((s) =>
       get_skills_and_print_in_event(0, [s], undefined, false),
     );
-    new CharaAvailableSkills(0).clear();
+    CharaAvailableSkills.get(0).clear();
     era.set('callname:0:-2', '你');
+    era.set('cflag:0:成长阶段', 5);
     era.set('cstr:0:决胜服', 0);
+  } else {
+    chara_colors[0] = '#ffffff';
   }
   const my_marks = new MyEduMarks();
 
@@ -185,7 +190,7 @@ module.exports = async (src_chara) => {
 
           if (era.get('flag:新手教学')) {
             era.set('flag:新手教学', {});
-            new GameGuides().init();
+            game_guides.init();
           }
 
           era.set('abl:0:速度训练等级', 1);
@@ -212,12 +217,7 @@ module.exports = async (src_chara) => {
 
           era.set('talent:0:童贞', 1);
           era.set('talent:0:处女', 1);
-          if (src_chara > 0) {
-            CharaTalk.me = new CharaTalk(0);
-            init_chara(src_chara);
-            era.set(`cflag:${src_chara}:随机招募`, 0);
-          } else {
-            chara_colors[0] = '#ffffff';
+          if (src_chara <= 0) {
             if (await page_custom()) {
               return false;
             }
@@ -244,7 +244,7 @@ module.exports = async (src_chara) => {
 
           [
             201, 202, 203, 204, 205, 206, 207, 301, 302, 303, 304, 305, 306,
-            308, 340, 341, 342, 343, 344, 345, 346, 347, 348,
+            308, 340, 341, 342, 343, 344, 345, 346, 347, 348, 349,
           ].forEach((e) => init_chara(e));
           switch (era.get('flag:彩蛋机制')) {
             case 179:
@@ -281,6 +281,7 @@ module.exports = async (src_chara) => {
           my_marks.trainer_race = get_random_value(13, 36);
           my_marks.work_over = my_marks.sick = 24;
           my_marks.kamen_rider = 1;
+          my_marks.big_sale = get_random_value(5, 10);
           new MeekEduMarks().all_round = get_random_value(5, 12);
           if (src_chara !== 10) {
             new TokinoLifeMarks().shadow = get_random_value(5, 12);
@@ -289,6 +290,7 @@ module.exports = async (src_chara) => {
 
           era.set('flag:随机种子', get_random_value(0, 233280 - 1));
           era.set('flag:存档名', 0);
+          era.set('item:现实透孔仪', 1);
           return true;
         case 97:
           player_name = '';

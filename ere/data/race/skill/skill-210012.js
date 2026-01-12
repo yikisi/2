@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '在比赛中盘燃烧青春之魂略微加快速度，参赛队友的速度属性总和越高越能提升速度',
   21001,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   263,
   [() => true, () => true],

@@ -97,7 +97,7 @@ async function why_choose_me(me, flash, me_is_new) {
 
 module.exports = class extends CustomizedRecruit {
   async recruit(stage, event_object) {
-    const event_marks = new EventMarks(0),
+    const event_marks = EventMarks.get(0),
       flash = get_chara_talk(37),
       me = get_chara_talk(0);
     let ret;

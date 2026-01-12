@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '最终弯道处若位于后方，则令前后各3人的速度极小幅下降，并稍微提升自己的速度',
   20291,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   217,
   [() => true, () => true],

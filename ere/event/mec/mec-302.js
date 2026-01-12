@@ -1,20 +1,19 @@
 const { get, set } = require('#/era-electron');
 
-const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
-
 const MecNpc = require('#/event/mec/mec-npc');
 
 const { get_chara_color } = require('#/data/chara-colors');
+const recruit_flags = require('#/data/event/recruit-flags');
 
 module.exports = class extends MecNpc {
-  init_love() {
-    set(
-      'love:302',
-      Math.min(
-        get('flag:马娘初始爱慕') + 30 * sys_personal_achievement.get(343) * 30,
-        30,
-      ),
-    );
+  get_love_limit() {
+    if (get(`cflag:${this.id}:招募状态`) !== recruit_flags.yes) {
+      if (get(`love:${this.id}`) >= 50 || get('flag:回合爱慕惩罚') > 0) {
+        return 51;
+      }
+      return 50;
+    }
+    return super.get_love_limit();
   }
 
   get_talents() {

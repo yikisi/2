@@ -1,7 +1,7 @@
 ﻿/**
  * @file 北部玄驹 - 日常
  * @author 小黑（原作）
- * @author 黑奴一号 无名黑奴（改编）
+ * @author 黑奴一号 黑奴队长（改编）
  */
 const era = require('#/era-electron');
 
@@ -929,19 +929,24 @@ module.exports = class extends CustomizedDaily {
     await print_event_name('惩戒之后', kita);
     if (punish_level === 1) {
       await kita.say_and_wait(`呜哇啊～训练员变成了马娘了！好可爱～`);
-      kita.sex_code - 1 &&
-        (await kita.say_and_wait(
-          `诶嘿嘿～同样是马娘总感觉没有以前那么害羞了呢～`,
-        ));
-      await era.printAndWait(
-        `抱住 ${me.name} 亲昵的蹦来蹦去，偷偷露出兴奋表情的 ${kita.name} 笑了起来。`,
-      );
+      if (kita.sex_code !== 1) {
+        await kita.say_and_wait(
+          '诶嘿嘿～同样是马娘总感觉没有以前那么害羞了呢～',
+        );
+      }
+      await era.printAndWait([
+        '抱住 ',
+        me.get_colored_name(),
+        ' 亲昵的蹦来蹦去，偷偷露出兴奋表情的 ',
+        kita.get_colored_name(),
+        ' 笑了起来。',
+      ]);
     } else if (punish_level === 3) {
       await kita.say_and_wait(
         `明明小北才是那个有被欺负癖好的孩子，哼哼～但是没想到训练员远比我想被欺负呢。`,
       );
       await era.printAndWait(
-        `在训练员耳边轻声细语着说，黑色的${kita.get_uma_sex_title()}露出了注视猎物般的眼神。`,
+        `在训练员耳边轻声细语着说，黑色的${kita.uma_sex_title}露出了注视猎物般的眼神。`,
       );
     }
   }
@@ -980,10 +985,10 @@ module.exports = class extends CustomizedDaily {
     );
   }
 
-  async celebration() {
+  async celebration(hook) {
     const date = (era.get('flag:当前回合数') - 1) % 48;
     if (!celebration_handlers[date]) {
-      return await super.celebration();
+      return await super.celebration(hook);
     }
     await celebration_handlers[date](
       get_chara_talk(this.id),

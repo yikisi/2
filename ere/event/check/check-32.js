@@ -79,7 +79,7 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_and_get_titles(aim_check) {
-    const races = new RaceHistory(32).get(),
+    const races = RaceHistory.get(32).get(),
       titles = [];
     if (
       !new TachyonEduMarks().title_check &&
@@ -112,7 +112,7 @@ module.exports = class extends CustomizedCheck {
     ) {
       edu_marks.title_check = 1;
     }
-    const race_history = new RaceHistory(32).get();
+    const race_history = RaceHistory.get(32).get();
     if (
       check_aim_race(race_history, race_enum.sats_sho, 1, 1) &&
       check_aim_race(race_history, race_enum.toky_yus, 1, 1) &&
@@ -200,7 +200,7 @@ module.exports = class extends CustomizedCheck {
       }
     }
     if (life_marks.drug_notice > 0 && --life_marks.drug_notice === 0) {
-      if (era.get('cflag:0:位置') === 0) {
+      if (era.get('cflag:0:位置') === 0 && era.get('cflag:32:位置') === 0) {
         add_event(
           event_hooks.week_start,
           new EventObject(32, cb_enum.edu).set_arg('drug_notice'),
@@ -370,7 +370,7 @@ module.exports = class extends CustomizedCheck {
         case 95 + 40: // 完全燃起的胜负心
           if (
             edu_marks.plan_b &&
-            check_aim_race(new RaceHistory(25).get(), race_enum.japa_cup, 2, 1)
+            check_aim_race(RaceHistory.get(25).get(), race_enum.japa_cup, 2, 1)
           ) {
             add_event(event_hooks.week_end, event_obj_special);
           }
@@ -378,7 +378,7 @@ module.exports = class extends CustomizedCheck {
         case 95 + 47: // 被超越的极限
           if (
             edu_marks.plan_b &&
-            check_aim_race(new RaceHistory(25).get(), race_enum.japa_cup, 2, 3)
+            check_aim_race(RaceHistory.get(25).get(), race_enum.japa_cup, 2, 3)
           ) {
             add_event(event_hooks.week_start, event_obj_special);
           }
@@ -387,13 +387,13 @@ module.exports = class extends CustomizedCheck {
           if (
             !edu_marks.plan_b ||
             (check_aim_race(
-              new RaceHistory(25).get(),
+              RaceHistory.get(25).get(),
               race_enum.japa_cup,
               2,
               3,
             ) &&
               sys_reg_race(25).curr.race === race_enum.arim_kin &&
-              check_aim_race(new RaceHistory(32).get(), race_enum.prix_lat, 2))
+              check_aim_race(RaceHistory.get(32).get(), race_enum.prix_lat, 2))
           ) {
             add_event(event_hooks.week_start, event_obj_special);
           }
@@ -431,10 +431,10 @@ module.exports = class extends CustomizedCheck {
   get_edu_aims() {
     const buffer = [],
       { plan_b } = new TachyonEduMarks(),
-      races = new RaceHistory(32).get();
+      races = RaceHistory.get(32).get();
     if (plan_b) {
       const coffee = get_chara_talk(25).get_colored_name(),
-        coffee_races = new RaceHistory(25).get();
+        coffee_races = RaceHistory.get(25).get();
       buffer.push(
         get_coffee_aim_entry(
           coffee,
@@ -501,8 +501,7 @@ module.exports = class extends CustomizedCheck {
     return buffer;
   }
 
-  is_aim_race(race, edu_weeks) {
-    const { plan_b } = new TachyonEduMarks();
-    return aim_races[plan_b][`${edu_weeks}_${race}`] || aim_races[plan_b][race];
+  get_aim_races() {
+    return aim_races[new TachyonEduMarks().plan_b];
   }
 };

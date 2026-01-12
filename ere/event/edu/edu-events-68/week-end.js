@@ -11,7 +11,7 @@ const {
 } = require('#/system/sys-calc-chara-others');
 
 const { add_event } = require('#/event/queue');
-const add_juel_out_of_train = require('#/event/snippets/add-juel-out-of-train');
+const add_jewel_reward = require('#/event/snippets/add-jewel-reward');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
 
@@ -180,11 +180,7 @@ module.exports = async (kita, me, hook, event_object) => {
     end_ero_and_train(false);
     era.println();
     sys_like_chara(68, 0, 5, true, 5);
-    await add_juel_out_of_train(
-      68,
-      ['受虐快感', '顺从', '羞耻'],
-      [100, 100, 50],
-    );
+    add_jewel_reward(68, ['受虐快感', '顺从', '羞耻'], [100, 100, 50]);
     wait_flag = true;
   } else if (event_arg === 95 + 48) {
     await print_event_name(`与 ${kita.name} 的酒吧生活`, kita);

@@ -91,14 +91,14 @@ module.exports = (handlers) => {
       ]);
       era.println();
       await era.printAndWait([
-        '刚获得的胜利、即将开始的Winning Live，一切的一切都不在 ',
+        '刚获得的胜利、即将开始的 Winning Live，一切的一切都不在 ',
         me.get_couple_title(),
         ' 眼中，彷佛刚才并非跑了场比赛，而只是一场普通的研究一般',
       ]);
       era.println();
       await era.printAndWait([
         me.get_couple_title(),
-        ' 不停观看着纪录下来的数据，提出一个又一个的猜想，直到winning live开始，外面传来了急促的敲门声才回过神来',
+        ' 不停观看着纪录下来的数据，提出一个又一个的猜想，直到 Winning Live 开始，外面传来了急促的敲门声才回过神来',
       ]);
       gacha(Object.values(attr_enum), 3).forEach(
         (e) => (extra_flag.attr_change[e] = 3),
@@ -119,7 +119,7 @@ module.exports = (handlers) => {
         ' 潜入了赛场……',
       ]);
       await era.printAndWait([
-        '不用说，自然被URA的人发现了，再三道歉后，',
+        '不用说，自然被 URA 的人发现了，再三道歉后，',
         tachyon.get_colored_name(),
         ' 总算成功回收了器械。一切都十分顺利',
       ]);
@@ -128,8 +128,9 @@ module.exports = (handlers) => {
         me.get_couple_title(),
         ' 的眼光有些刺痛而已',
       ]);
-      sys_change_fame(-10);
-      await era.printAndWait('\n声望下降了！');
+      era.println();
+      sys_change_fame(-5);
+      await era.printAndWait('声望下降了！');
       gacha(Object.values(attr_enum), 3).forEach(
         (e) => (extra_flag.attr_change[e] = 6),
       );
@@ -630,7 +631,7 @@ module.exports = (handlers) => {
   handlers[race_enum.kiku_sho] = async (tachyon, me, callname, extra_flag) => {
     if (extra_flag.rank === 1) {
       await print_event_name('会赢的', tachyon);
-      const race_history = new RaceHistory(32);
+      const race_history = RaceHistory.get(32);
       if (
         check_aim_race(race_history.get(), race_enum.sats_sho, 1, 1) &&
         check_aim_race(race_history.get(), race_enum.toky_yus, 1, 1)

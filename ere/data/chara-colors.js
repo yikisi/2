@@ -1,3 +1,4 @@
+// GENERATED START
 const chara_colors = {
   0: '#ffffff',
   1: '#e978d3',
@@ -117,10 +118,12 @@ const chara_colors = {
   115: '#d77242',
   116: '#e04747',
   117: '#eb383e',
+  118: '#8caed8',
   119: '#e7d8d2',
   120: '#eddf62',
   121: '#f3be50',
   124: '#ff7561',
+  126: '#fa77c6',
   127: '#574974',
   128: '#d09169',
   129: '#aac8c8',
@@ -129,6 +132,7 @@ const chara_colors = {
   132: '#e66c8e',
   133: '#b1b1b3',
   134: '#8e8180',
+  135: '#bfb33d',
   201: '#eaddd0',
   202: '#c49665',
   203: '#ffdbb4',
@@ -152,20 +156,22 @@ const chara_colors = {
   346: '#5cb1de',
   347: '#0ca545',
   348: '#c23c94',
+  349: '#c4b076',
   400: '#ffe840',
 };
+// GENERATED END
 
 module.exports = {
   chara_colors,
-  /** @param {number} chara_id */
-  get_chara_color(chara_id) {
-    if (chara_id === undefined) {
+  /** @param {number} [cid] */
+  get_chara_color(cid) {
+    if (cid === undefined) {
       return '#9f9f9f';
     }
-    let ret = chara_colors[chara_id];
+    let ret = chara_colors[cid];
     ret = ret instanceof Array ? ret[0] : ret;
     if (!ret) {
-      const id_color = chara_id.toString(9).padStart(3, '0');
+      const id_color = cid.toString(9).padStart(3, '0');
       ret = `#${[id_color[0], id_color[1], id_color[2]]
         .map((e) => (0xff - Number(e) * 16).toString(16).padStart(2, '0'))
         .join('')}`;

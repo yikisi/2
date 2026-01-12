@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '中盘中段处于领头位置时，超长时间内速度持续略微上升，但终盘末段时会微幅减速',
   90066,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   180,
   [() => true, () => true],

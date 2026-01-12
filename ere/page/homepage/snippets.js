@@ -33,7 +33,7 @@ module.exports = {
     return {
       accelerator: 102,
       config: {
-        buttonType: new EventMarks(0).check(event_hooks.register_race)
+        buttonType: EventMarks.get(0).check(event_hooks.register_race)
           ? 'danger'
           : 'warning',
         disabled:

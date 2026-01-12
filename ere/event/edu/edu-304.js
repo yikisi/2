@@ -1,6 +1,6 @@
 /**
  * @file 桐生院葵 - 育成
- * @author 无名黑奴（临时）
+ * @author 黑奴队长（临时）
  */
 const { get, printAndWait, println, waitAnyKey } = require('#/era-electron');
 
@@ -13,7 +13,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 module.exports = class extends CustomizedEdu {
   /**
-   * @author 无名黑奴
+   * @author 黑奴队长
    * @param {CharaTalk} aoi
    * @param {CharaTalk} me
    */

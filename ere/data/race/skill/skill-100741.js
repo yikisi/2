@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '赛程后半段，在中团位置根据剩余持久力进行相应的长距离冲刺，速度逐渐小幅度提升',
   10074,
   1,
-  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [() => true, () => true],

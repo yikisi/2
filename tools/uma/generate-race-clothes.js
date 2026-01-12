@@ -1,4 +1,5 @@
-const { writeFileSync } = require('fs');
+const { readFileSync, readdirSync, writeFileSync } = require('fs');
+const { join } = require('path');
 
 const text_data = require('../../common/text_data.json')[14];
 const id2suffix = require('../../common/clothe-id2suffix');
@@ -35,7 +36,62 @@ for (let i = 1001; i < 2000; ++i) {
   }
 }
 
+const titles = {};
+
+const uma_lines = readFileSync(
+  join(__dirname, '../../common/uma/uma-data.csv'),
+  'utf-8',
+)
+  .replace(/^\ufeff/, '')
+  .split('\n')
+  .filter((l) => l)
+  .map((l) => l.split(','));
+const header = uma_lines.shift();
+const i_fname = header.findIndex((e) => e === '文件名');
+const i_title = header.findIndex((e) => e === '角色Str|称号');
+uma_lines.forEach((l) => {
+  if (l[i_title]) {
+    titles[l[i_fname]] = l[i_title];
+  }
+});
+
+delete titles[1075];
+
+const res_list = [
+  ...readdirSync(join(__dirname, '../../res/others')),
+  ...readdirSync(join(__dirname, '../../res/race')),
+]
+  .filter((n) => n.startsWith('chara_stand_'))
+  .map((n) => Number(n.substring(17, 23)))
+  .filter((n) => n >= 100000 && n < 200000)
+  .map((n) => [Math.floor(n / 100), n % 100]);
+
+let exit = 0;
+
+console.log('[generate-race-clothes.js] missing clothes:');
+
+res_list.forEach(([id, suffix]) => {
+  if (!titles[id]) {
+    return;
+  }
+  if (!output.clothe_names[id - 1000]) {
+    console.log('\tmissing cloth object:', id);
+    exit = 1;
+  } else if (!output.clothe_names[id - 1000][id2suffix[suffix]]) {
+    console.log('\tmissing cloth name:', id, '- suffix:', suffix);
+    exit = 1;
+  }
+});
+
+if (exit === 0) {
+  console.log('\tnone');
+}
+
+output.clothe_names[345] = { '': 'ST2', 2: '从零到零' };
+
 writeFileSync(
-  '../../ere/data/clothe-const.json',
+  join(__dirname, '../../ere/data/clothe-const.json'),
   `${JSON.stringify(output, undefined, 2)}`,
 );
+
+process.exit(exit);

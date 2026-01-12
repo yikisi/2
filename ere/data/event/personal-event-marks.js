@@ -3,13 +3,13 @@ const era = require('#/era-electron');
 /** 用于专属事件标记的工具类 */
 class PersonalEventMarks {
   /**
-   * @param {number} chara_id
-   * @param {string} param_name
+   * @param {number} cid
+   * @param {string} pname parameter name
    */
-  constructor(chara_id, param_name) {
+  constructor(cid, pname) {
     this.obj =
-      era.get(`cflag:${chara_id}:${param_name}`) ||
-      era.set(`cflag:${chara_id}:${param_name}`, {}) ||
+      era.get(`cflag:${cid}:${pname}`) ||
+      era.set(`cflag:${cid}:${pname}`, {}) ||
       {};
   }
 

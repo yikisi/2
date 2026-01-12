@@ -4,7 +4,7 @@ module.exports = new UmaGene(
   900931,
   UmaGene.gene_rarity_enum.sr,
   '「幸福的湛蓝光芒」之回响',
-  '习得「幸福的湛蓝光芒」\n终盘初段的某处位于前方时，略微向前突进，若是短距离或英里比赛，则提升技能效果',
+  '习得「幸福的湛蓝光芒」',
   UmaGene.gene_type_enum.skill,
   -1,
   100,

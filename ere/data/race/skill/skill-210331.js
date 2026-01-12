@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛中盘稍微向前突进，如果力量有十二分强劲则变为小幅向前突进',
   21033,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   217,
   [() => true, () => true],

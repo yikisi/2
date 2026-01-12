@@ -8,13 +8,16 @@ const CharaTalk = require('#/utils/chara-talk');
  * @param {string|array} name
  * @param {CharaTalk} chara
  * @param {string} [color]
- * @param {number} [_offset]
+ * @param {number} [offset]
  */
-async function print_event_name(name, chara, color, _offset) {
-  const offset = _offset || 0;
+async function print_event_name(name, chara, color = chara.color, offset = 0) {
   if (!(chara instanceof CharaTalk)) {
-    era.logger.debug('chara type error!');
-    console.log('chara type error!', name, chara, color, new Error().stack);
+    console.error('角色对象错误！', name, chara, color);
+    return await era.printAndWait(name, {
+      color,
+      fontSize: '1.75rem',
+      fontWeight: 'bold',
+    });
   }
   era.setVerticalAlign('middle');
   era.printInColRows(
@@ -23,7 +26,7 @@ async function print_event_name(name, chara, color, _offset) {
         {
           config: { width: 20 },
           names: get_image(chara.id)
-            .map((e) => `${e}${era.get('flag:立绘类型') ? '_半身' : ''}`)
+            .map((e) => (era.get('flag:立绘类型') > 0 ? `${e}_半身` : e))
             .join('\t'),
           type: 'image.whole',
         },
@@ -34,7 +37,7 @@ async function print_event_name(name, chara, color, _offset) {
       columns: [
         {
           config: {
-            color: color || chara.color,
+            color,
             fontSize: '1.75rem',
             fontWeight: 'bold',
           },
@@ -42,8 +45,8 @@ async function print_event_name(name, chara, color, _offset) {
           type: 'text',
         },
         {
-          config: { color: chara.color || chara.color, fontSize: '0.75rem' },
-          content: chara.name,
+          config: { color: chara.color, fontSize: '0.75rem' },
+          content: chara.full_name,
           type: 'text',
         },
       ],

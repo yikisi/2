@@ -1,6 +1,10 @@
 const era = require('#/era-electron');
 
+const {
+  sys_get_full_chara,
+} = require('#/system/chara/sys-calc-characteristic');
 const sys_change_hair = require('#/system/chara/sys-change-hair');
+const { check_chara_ero_image } = require('#/system/ero/sys-calc-ero-image');
 const {
   get_bust_size,
   get_hip_size,
@@ -8,16 +12,12 @@ const {
 } = require('#/system/ero/sys-calc-ero-status');
 const { get_image } = require('#/system/sys-calc-image');
 
-const { join_list } = require('#/utils/list-utils');
+const { join_to_string } = require('#/utils/list-utils');
 
 const CharaTitles = require('#/data/chara-titles');
 const { clothe_names, race_clothe_list } = require('#/data/clothe-const.json');
-const {
-  chara_desc,
-  chara_full_desc,
-  human_sex_title,
-  sex_title,
-} = require('#/data/ero/status-const');
+const title_desc = require('#/data/desc/titles.json');
+const { human_sex_title, sex_title } = require('#/data/ero/status-const');
 const { growth_info } = require('#/data/exp-const');
 const {
   get_breast_cup,
@@ -27,12 +27,7 @@ const {
   get_talent,
   get_xp,
 } = require('#/data/info-generator');
-const {
-  back_hairs,
-  check_chara_ero_image,
-  front_hairs,
-  top_hairs,
-} = require('#/data/other-const');
+const { back_hairs, front_hairs, top_hairs } = require('#/data/other-const');
 
 const page_name = '个人情报';
 
@@ -64,7 +59,7 @@ module.exports = {
       growth = era.get(`cflag:${chara.id}:成长阶段`),
       race = era.get(`cflag:${chara.id}:种族`);
     let hair = era.get(`cstr:${chara.id}:呆毛`);
-    hair = join_list(
+    hair = join_to_string(
       [
         hair ? `${hair}呆毛` : '',
         era.get(`cstr:${chara.id}:前发`),
@@ -92,14 +87,8 @@ module.exports = {
       ' ',
     );
     if (race) {
-      const characteristic = era.get(`cflag:${chara.id}:气性`);
       right_intro_list.push(
-        !growth
-          ? '幼年'
-          : {
-              content: chara_desc[characteristic + 3],
-              title: `[${chara_desc[characteristic + 3]}]：${chara_full_desc[characteristic + 3]}。`,
-            },
+        !growth ? '幼年' : sys_get_full_chara(chara.id),
         ' ',
         sex_title[chara.sex_code],
       );
@@ -156,10 +145,10 @@ module.exports = {
       .map((e) => `${e}_半身`)
       .join('\t');
 
-    const titles = new CharaTitles(chara.id),
-      title_list = titles.get(),
-      title_info_list = [],
-      cur_title = titles.get_curr_title();
+    const titles = CharaTitles.get(chara.id);
+    const title_list = titles.get();
+    const title_info_list = [];
+    const cur_title = titles.get_curr_title();
     title_info_list.push(
       {
         accelerator: 30,
@@ -193,7 +182,14 @@ module.exports = {
         },
         {
           config: { color: e.c, width: 5 },
-          content: e.n,
+          content: [
+            {
+              content: e.n,
+              title: title_desc[e.n]
+                ? `[${e.n}]：${title_desc[e.n]}`
+                : undefined,
+            },
+          ],
           type: 'text',
         },
       );

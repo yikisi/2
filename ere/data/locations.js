@@ -100,7 +100,16 @@ location_name[location_enum.visitor] = '访客接待室';
 location_name[location_enum.clinic] = '保健室';
 location_name[location_enum.dubai] = '迪拜';
 
+const foreign_locations = {
+  [location_name[location_enum.dubai]]: 1,
+  [location_name[location_enum.guangzhou]]: 1,
+  [location_name[location_enum.hongkong]]: 1,
+  [location_name[location_enum.new_york]]: 1,
+  [location_name[location_enum.paris]]: 1,
+};
+
 module.exports = {
+  foreign_locations,
   location_enum,
   location_name,
 };

@@ -1,7 +1,7 @@
 /**
  * @file 地下室地文
  * @author 露娜俘虏
- * @author 无名黑奴
+ * @author 黑奴队长
  */
 const era = require('#/era-electron');
 
@@ -76,7 +76,7 @@ class CustomizedBase {
 
   /**
    * 初入地下室的欢迎 - 无人版本
-   * @author 无名黑奴
+   * @author 黑奴队长
    */
   first_time() {
     era.print([
@@ -89,7 +89,7 @@ class CustomizedBase {
 
   /**
    * 初入地下室的欢迎
-   * @author 无名黑奴
+   * @author 黑奴队长
    */
   welcome() {
     const me = get_chara_talk(0),
@@ -126,7 +126,7 @@ class CustomizedBase {
   /**
    * 地下室的基础情报，显示在当前互动角色情报下面，说明角色当前的警戒度和独占力情况
    * @author 露娜俘虏
-   * @author 无名黑奴
+   * @author 黑奴队长
    * @param {boolean} [can_strike]
    */
   get_basement_info(can_strike) {
@@ -178,7 +178,7 @@ class CustomizedBase {
 
   /**
    * 讨好角色后的反应
-   * @author 无名黑奴
+   * @author 黑奴队长
    * @param {number} [supporter]
    */
   // eslint-disable-next-line no-unused-vars
@@ -186,7 +186,7 @@ class CustomizedBase {
 
   /**
    * 趁角色刚回到地下室偷袭成功
-   * @author 无名黑奴
+   * @author 黑奴队长
    */
   async strike_success() {
     await era.printAndWait([
@@ -197,7 +197,7 @@ class CustomizedBase {
 
   /**
    * 趁角色刚回到地下室偷袭失败，被打晕了
-   * @author 无名黑奴
+   * @author 黑奴队长
    */
   async strike_fail() {
     await era.printAndWait([
@@ -208,7 +208,7 @@ class CustomizedBase {
 
   /**
    * 正面击败角色，但还不知道能不能解除机关
-   * @author 无名黑奴
+   * @author 黑奴队长
    */
   async battle_success() {
     await era.printAndWait([
@@ -221,7 +221,7 @@ class CustomizedBase {
 
   /**
    * 没能正面击败角色，直接就被打晕了
-   * @author 无名黑奴
+   * @author 黑奴队长
    */
   async battle_fail() {
     await era.printAndWait([
@@ -234,7 +234,7 @@ class CustomizedBase {
 
   /**
    * 正面击败角色后当面成功解除机关
-   * @author 无名黑奴
+   * @author 黑奴队长
    */
   async battle_escape() {
     await era.printAndWait([
@@ -245,7 +245,7 @@ class CustomizedBase {
 
   /**
    * 正面击败角色后解除机关失败，没跑出去又被打晕了
-   * @author 无名黑奴
+   * @author 黑奴队长
    */
   async battle_prison() {
     const me = get_chara_talk(0);
@@ -261,7 +261,7 @@ class CustomizedBase {
 
   /**
    * 角色回到地下室/醒来发现玩家在逃离地下室
-   * @author 无名黑奴
+   * @author 黑奴队长
    * @param {boolean} out_of_prison
    * @param {boolean} s_level_up
    * @param {boolean} [is_back]
@@ -300,7 +300,7 @@ class CustomizedBase {
 
   /**
    * 加固地下室
-   * @author 无名黑奴
+   * @author 黑奴队长
    */
   fix_prison() {
     era.print([get_chara_talk(this.id).get_colored_name(), ' 加固了地下室……']);
@@ -308,7 +308,7 @@ class CustomizedBase {
 
   /**
    * 从沉睡中清醒
-   * @author 无名黑奴
+   * @author 黑奴队长
    */
   get_up() {
     const chara = get_chara_talk(this.id),
@@ -329,7 +329,7 @@ class CustomizedBase {
 
   /**
    * 回到地下室
-   * @author 无名黑奴
+   * @author 黑奴队长
    */
   back_basement() {
     const chara = get_chara_talk(this.id),
@@ -349,56 +349,34 @@ class CustomizedBase {
 
   /**
    * 因精力不足而昏睡
-   * @author 无名黑奴
+   * @author 黑奴队长
    */
-  deep_sleep() {
-    era.print([
-      get_chara_talk(this.id).get_colored_name(),
-      ' 因精力不济昏睡了过去！',
-    ]);
-  }
+  deep_sleep() {}
 
   /**
    * 进食
-   * @author 无名黑奴
+   * @author 黑奴队长
    */
-  eat_something() {
-    era.print([
-      get_chara_talk(this.id).get_colored_name(),
-      ' 肚子饿了，吃了点东西……',
-    ]);
-  }
+  eat_something() {}
 
   /**
    * 因精力不足而主动选择睡眠
-   * @author 无名黑奴
+   * @author 黑奴队长
    */
-  sleep() {
-    era.print([
-      get_chara_talk(this.id).get_colored_name(),
-      ' 有点累了，躺在床上睡着了……',
-    ]);
-  }
+  sleep() {}
 
   /**
    * 角色主动调情
-   * @author 无名黑奴
+   * @author 黑奴队长
    */
-  lure() {
-    era.print([
-      get_chara_talk(this.id).get_colored_name(),
-      ' 挑逗着 ',
-      get_chara_talk(0).get_colored_name(),
-      '……',
-    ]);
-  }
+  lure() {}
 
   /**
    * 选择雷普玩家
-   * @author 无名黑奴
+   * @author 黑奴队长
    */
   async rape(supporter) {
-    if (supporter) {
+    if (supporter > 0) {
       await era.printAndWait([
         '在 ',
         get_chara_talk(this.id).get_colored_name(),
@@ -420,26 +398,19 @@ class CustomizedBase {
 
   /**
    * 开始加固地下室
-   * @author 无名黑奴
+   * @author 黑奴队长
    */
-  start_fixing() {
-    era.print([
-      get_chara_talk(this.id).get_colored_name(),
-      ' 开始加固地下室了……',
-    ]);
-  }
+  start_fixing() {}
 
   /**
    * 刚刚离开
-   * @author 无名黑奴
+   * @author 黑奴队长
    */
-  out() {
-    era.print([get_chara_talk(this.id).get_colored_name(), ' 要出去一趟……']);
-  }
+  out() {}
 
   /**
    * 请求对方释放，对方同意
-   * @author 无名黑奴
+   * @author 黑奴队长
    */
   async ask_release_agree() {
     const chara = get_chara_talk(this.id),
@@ -460,7 +431,7 @@ class CustomizedBase {
 
   /**
    * 请求对方释放，对方拒绝
-   * @author 无名黑奴
+   * @author 黑奴队长
    */
   async ask_release_reject() {
     const chara = get_chara_talk(this.id),
@@ -475,7 +446,7 @@ class CustomizedBase {
 
   /**
    * 询问时间
-   * @author 无名黑奴
+   * @author 黑奴队长
    */
   // eslint-disable-next-line no-unused-vars
   async ask_time(date, hours, minutes) {
@@ -492,7 +463,7 @@ class CustomizedBase {
 
   /**
    * 救援事件 - 失败
-   * @author 无名黑奴
+   * @author 黑奴队长
    * @param {number} owner_id
    */
   async rescue_fail(owner_id) {
@@ -532,7 +503,7 @@ class CustomizedBase {
 
   /**
    * 救援事件 - 趁主人不在时救援成功
-   * @author 无名黑奴
+   * @author 黑奴队长
    * @param {number} owner_id
    */
   async rescue_sneak_success(owner_id) {
@@ -565,7 +536,7 @@ class CustomizedBase {
 
   /**
    * 救援事件 - 趁主人不在时救援成功，但是将玩家关到自己的地下室
-   * @author 无名黑奴
+   * @author 黑奴队长
    * @param {number} owner_id
    */
   async rescue_sneak_prison(owner_id) {
@@ -608,7 +579,7 @@ class CustomizedBase {
 
   /**
    * 救援事件 - 和玩家关系不睦，因此同流合污
-   * @author 无名黑奴
+   * @author 黑奴队长
    * @param {number} owner_id
    */
   async rescue_join(owner_id) {
@@ -651,7 +622,7 @@ class CustomizedBase {
 
   /**
    * 救援事件 - 正面击败主人，救援成功
-   * @author 无名黑奴
+   * @author 黑奴队长
    * @param {number} owner_id
    */
   async rescue_battle_success(owner_id) {
@@ -692,7 +663,7 @@ class CustomizedBase {
 
   /**
    * 救援事件 - 正面击败主人，但是把玩家关到自己的地下室
-   * @author 无名黑奴
+   * @author 黑奴队长
    * @param {number} owner_id
    */
   async rescue_battle_prison(owner_id) {

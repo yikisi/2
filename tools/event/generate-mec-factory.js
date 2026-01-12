@@ -1,84 +1,42 @@
-const { readdirSync, writeFileSync } = require('fs');
+const { readFileSync, readdirSync, writeFileSync } = require('fs');
+const { join } = require('path');
 
-const mec_scripts = readdirSync('../../ere/event/mec')
+const { compare_chara_id, generate_content } = require('../libs');
+
+const mec_scripts = readdirSync(join(__dirname, '../../ere/event/mec'))
   .filter(
     (e) =>
       e.endsWith('.js') &&
       !e.endsWith('common.js') &&
       !e.endsWith('factory.js') &&
+      !e.endsWith('god.js') &&
+      !e.endsWith('child.js') &&
       !e.endsWith('npc.js'),
   )
   .map((e) => e.substring(4).replace(/\.js$/, ''))
-  .sort((a, b) => {
-    const num_a = Number(a),
-      num_b = Number(b),
-      nan_a = isNaN(num_a),
-      nan_b = isNaN(num_b);
-    if (nan_a || nan_b) {
-      if (nan_a && nan_b) {
-        return a > b ? 1 : -1;
-      } else if (nan_a) {
-        return 1;
-      } else {
-        return -1;
-      }
-    } else {
-      return num_a - num_b;
-    }
-  });
+  .sort(compare_chara_id);
 
-let output = `const era = require('#/era-electron');
+const mec_path = join(__dirname, '../../ere/event/mec/mec-factory.js');
 
-const common_cons = require('#/event/mec/mec-common');
-const script_dict = require('#/event/script-dict.json');
-
-const { first_child_id } = require('#/data/other-const');
-
-const cons_dict = {},
-  obj_dict = {};
-
-const current = new Date().getTime();
-
-`;
-
-mec_scripts.forEach(
-  (e) =>
-    (output += `cons_dict[${isNaN(Number(e)) ? `'${e}'` : e}] = require('#/event/mec/mec-${e}');\n`),
-);
-
-output += `cons_dict[201] =
+writeFileSync(
+  mec_path,
+  generate_content(
+    readFileSync(mec_path, 'utf-8'),
+    '//',
+    ...mec_scripts.map(
+      (e) =>
+        `cons_dict[${isNaN(Number(e)) ? `'${e}'` : e}] = require('#/event/mec/mec-${e}');`,
+    ),
+    `cons_dict[201] =
   cons_dict[202] =
   cons_dict[203] =
-    require('#/event/mec/mec-npc-uma-common');
-cons_dict[207] = cons_dict[345] = require('#/event/mec/mec-npc');
-
-console.log(
-  '[mec-factory.js] constructor dictionary init done!',
-  (new Date().getTime() - current).toLocaleString(),
-  'ms',
+    require('#/event/mec/mec-uma-npc');`,
+    `cons_dict[346] =
+  cons_dict[347] =
+  cons_dict[348] =
+    require('#/event/mec/mec-npc');`,
+  ),
 );
-
-module.exports = {
-  /**
-   * @param {number} chara_id
-   * @returns {CustomizedMec}
-   */
-  get_custom_mec(chara_id) {
-    if (obj_dict[chara_id]) {
-      return obj_dict[chara_id];
-    }
-    const script_name =
-        chara_id >= first_child_id
-          ? era.get(\`callname:$\{chara_id}:-2\`)
-          : chara_id,
-      class_const =
-        cons_dict[script_dict[script_name] || script_name] || common_cons;
-    return (obj_dict[chara_id] = new class_const(chara_id)).get_this();
-  },
-};
-`;
-
-writeFileSync('../../ere/event/mec/mec-factory.js', output);
 
 console.log(
   `[generate-mec-factory.js] registers ${mec_scripts.length} mechanism scripts`,

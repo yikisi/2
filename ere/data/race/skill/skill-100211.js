@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '比赛后半的直线处在好位置或者从集团中部瞄准前方的话就会如闪电一般冲刺',
   10021,
   1,
-  UmaSkill.rarity_enum.spe_r,
   18,
   340,
   [() => true, () => true],

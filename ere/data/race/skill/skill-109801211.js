@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '力量十分强劲时，速度大幅提升；若是力量十二分强劲，速度则超大幅提升',
   10980121,
   1,
-  UmaSkill.rarity_enum.evol,
   3,
   508,
   [() => true, () => true],

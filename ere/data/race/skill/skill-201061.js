@@ -3,10 +3,9 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   201061,
   '马力全开！',
-  '在比赛后半完成超越时，加速力提升',
+  '在比赛后半完成超越时，加速度提升',
   20106,
   2,
-  UmaSkill.rarity_enum.gold,
   17,
   508,
   [() => true, () => true],

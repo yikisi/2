@@ -20,72 +20,10 @@ const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
 const UraraLifeMarks = require('#/data/event/life-event-marks/life-event-marks-52');
 const recruit_flags = require('#/data/event/recruit-flags');
+const race2fans_reward = require('#/data/race/fans-rewards');
 const RaceHistory = require('#/data/race/model/race-history');
 const RaceInfo = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
-
-const race2fans_reward = [];
-race2fans_reward[race_enum.oka_sho] = 10500;
-race2fans_reward[race_enum.sats_sho] = 11000;
-race2fans_reward[race_enum.toky_yus] = 20000;
-race2fans_reward[race_enum.yush_him] = 11000;
-race2fans_reward[race_enum.nhk_cup] = 10500;
-race2fans_reward[race_enum.takz_kin] = 15000;
-race2fans_reward[race_enum.yasu_kin] = 13000;
-race2fans_reward[race_enum.japa_dir] = 6500;
-race2fans_reward[race_enum.sprt_sta] = 13000;
-race2fans_reward[race_enum.shuk_sho] = 10000;
-race2fans_reward[race_enum.kiku_sho] = 12000;
-race2fans_reward[race_enum.tenn_sho] = 15000;
-race2fans_reward[race_enum.mile_cha] = 11000;
-race2fans_reward[race_enum.japa_cup] = 30000;
-race2fans_reward[race_enum.eliz_cup] = 10500;
-race2fans_reward[race_enum.jbc_cls] = 8000;
-race2fans_reward[race_enum.jbc_spr] = 7000;
-race2fans_reward[race_enum.arim_kin] = 30000;
-race2fans_reward[race_enum.toky_dai] = 8000;
-race2fans_reward[race_enum.cham_cup] = 10000;
-race2fans_reward[race_enum.febr_sta] = 10000;
-race2fans_reward[race_enum.kawa_kin] = 7000;
-race2fans_reward[race_enum.takm_kin] = 13000;
-race2fans_reward[race_enum.sank_hai] = 13500;
-race2fans_reward[race_enum.tenn_spr] = 15000;
-race2fans_reward[race_enum.vict_mile] = 10500;
-race2fans_reward[race_enum.kash_kin] = 8000;
-race2fans_reward[race_enum.teio_sho] = 7000;
-race2fans_reward[race_enum.hope_sta] = 7000;
-race2fans_reward[race_enum.hans_fil] = 6500;
-race2fans_reward[race_enum.asah_sta] = 7000;
-race2fans_reward[race_enum.toky_der] = 7000;
-race2fans_reward[race_enum.hane_hai] = 7000;
-race2fans_reward[race_enum.jbc_lad] = 6100;
-race2fans_reward[race_enum.zeni_you] = 6200;
-race2fans_reward[race_enum.mile_nbh] = 6000;
-
-race2fans_reward[race_enum.prix_dia] = 28000;
-race2fans_reward[race_enum.prix_lat] = 32000;
-race2fans_reward[race_enum.chn_frt] = 30000;
-race2fans_reward[race_enum.hk_spr] = 20000;
-race2fans_reward[race_enum.hk_mil] = 25000;
-race2fans_reward[race_enum.hk_cup] = 30000;
-race2fans_reward[race_enum.hk_vas] = 25000;
-race2fans_reward[race_enum.kent_der] = 31000;
-race2fans_reward[race_enum.prea_sta] = 31000;
-race2fans_reward[race_enum.belm_sta] = 31000;
-race2fans_reward[race_enum.usa_oks] = 20000;
-
-race2fans_reward[race_enum.duba_cup] = 27000;
-race2fans_reward[race_enum.duba_sha] = 27000;
-race2fans_reward[race_enum.duba_cls] = 27000;
-race2fans_reward[race_enum.duba_tur] = 27000;
-
-Object.values(race_enum)
-  .filter(
-    (e) =>
-      race_infos[e].race_class === RaceInfo.class_enum.G1 &&
-      !race2fans_reward[e],
-  )
-  .map((e) => console.log(`[check-52.js] miss! ${race_infos[e].name_zh}`));
 
 /**
  * @param {number} reward
@@ -171,7 +109,7 @@ module.exports = class extends CustomizedCheck {
   check_and_get_titles(aim_check) {
     const c = get_chara_color(52),
       titles = [];
-    const races = new RaceHistory(52).get();
+    const races = RaceHistory.get(52).get();
     if (new UraraEduMarks().fans >= 250000) {
       titles.push({
         c,
@@ -223,7 +161,7 @@ module.exports = class extends CustomizedCheck {
         'teach',
         event_hooks.back_school,
         event_obj,
-        () => new EventMarks(52).add(event_hooks.out_shopping),
+        () => EventMarks.get(52).add(event_hooks.out_shopping),
       );
       check_and_add_event(
         edu_marks,
@@ -231,7 +169,7 @@ module.exports = class extends CustomizedCheck {
         'dance',
         event_hooks.back_school,
         event_obj,
-        () => new EventMarks(0).add(event_hooks.back_school),
+        () => EventMarks.get(0).add(event_hooks.back_school),
       );
       check_and_add_event(
         edu_marks,
@@ -246,7 +184,7 @@ module.exports = class extends CustomizedCheck {
         'all_like',
         event_hooks.out_start,
         event_obj,
-        () => new EventMarks(0).add(event_hooks.out_start),
+        () => EventMarks.get(0).add(event_hooks.out_start),
       );
       check_and_add_event(
         edu_marks,
@@ -261,7 +199,7 @@ module.exports = class extends CustomizedCheck {
         'stair',
         event_hooks.back_school,
         event_obj,
-        () => new EventMarks(0).add(event_hooks.school_chairman),
+        () => EventMarks.get(0).add(event_hooks.school_chairman),
       );
       check_and_add_event(
         edu_marks,
@@ -269,7 +207,7 @@ module.exports = class extends CustomizedCheck {
         'mother',
         event_hooks.back_school,
         event_obj,
-        () => new EventMarks(0).add(event_hooks.school_chairman),
+        () => EventMarks.get(0).add(event_hooks.school_chairman),
       );
       check_and_add_event(
         edu_marks,
@@ -277,7 +215,7 @@ module.exports = class extends CustomizedCheck {
         'vs',
         event_hooks.school_atrium,
         event_obj,
-        () => new EventMarks(0).add(event_hooks.school_atrium),
+        () => EventMarks.get(0).add(event_hooks.school_atrium),
       );
       check_and_add_event(
         edu_marks,
@@ -308,7 +246,7 @@ module.exports = class extends CustomizedCheck {
         'challenge',
         event_hooks.back_school,
         event_obj,
-        () => new EventMarks(0).add(event_hooks.back_school),
+        () => EventMarks.get(0).add(event_hooks.back_school),
       );
       check_and_add_event(
         edu_marks,
@@ -323,7 +261,7 @@ module.exports = class extends CustomizedCheck {
         'park',
         event_hooks.back_school,
         event_obj,
-        () => new EventMarks(52).add(event_hooks.out_shopping),
+        () => EventMarks.get(52).add(event_hooks.out_shopping),
       );
       check_and_add_event(
         edu_marks,
@@ -385,7 +323,7 @@ module.exports = class extends CustomizedCheck {
       check_and_register_aim_race(52, aim_races);
     } else if (edu_weeks === 143 + 1) {
       if (
-        new RaceHistory(52).get_result(95 + 48)?.race === race_enum.arim_kin
+        RaceHistory.get(52).get_result(95 + 48)?.race === race_enum.arim_kin
       ) {
         add_event(
           event_hooks.week_start,
@@ -453,7 +391,7 @@ module.exports = class extends CustomizedCheck {
   get_edu_aims() {
     const buffer = [],
       edu_weeks = era.get('cflag:52:育成回合计时'),
-      races = new RaceHistory(52).get();
+      races = RaceHistory.get(52).get();
     let { fans, fans1, fans2, fans3 } = new UraraEduMarks();
     if (edu_weeks < 47 + 27) {
       fans1 = fans;

@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const { sys_check_yandere } = require('#/system/chara/sys-calc-cheat');
 const use_item_by_character = require('#/system/ero/ero-act-handler/use-item-by-chara');
 const sys_filter_ero_act = require('#/system/ero/sub/sys-filter-ero-act');
 const {
@@ -32,11 +33,11 @@ const {
  * @param {number[]} act_list
  * @param {number} last_action
  * @param {function(number):boolean} filters
+ * @returns {number}
  */
 function get_random_act(master, act_list, last_action, ...filters) {
-  const change_action = (last_action = ero_hooks.relax
-    ? 1
-    : era.get(`tcvar:${master}:变招`));
+  const change_action =
+    last_action === ero_hooks.relax ? 1 : era.get(`tcvar:${master}:变招`);
   let ret;
   filters.push(undefined);
   let filtered_list;
@@ -56,10 +57,18 @@ function get_random_act(master, act_list, last_action, ...filters) {
     }
   }
   era.logger.debug(
-    'source: ' +
+    '角色 ' +
+      master +
+      ' 思考：\n可用指令：' +
       act_list.map((e) => ero_action_names[e]).join(',') +
-      '\n\tfiltered: ' +
-      filtered_list.map((e) => ero_action_names[e]).join(','),
+      '\n筛选结果：' +
+      filtered_list.map((e) => ero_action_names[e]).join(',') +
+      '\n前回行动：' +
+      (ero_action_names[last_action] ?? '无') +
+      '\n变招概率：' +
+      (change_action * 100).toFixed(2) +
+      '%\n最终选择：' +
+      ero_action_names[ret],
   );
   return ret;
 }
@@ -91,24 +100,26 @@ want_list_entry_getter[part_enum.masochism] = [
 
 /** @param {boolean} shown */
 async function sys_auto_rape(shown) {
-  const current = new Date().getTime(),
-    master = era.get('tflag:主导权');
+  const current = new Date().getTime();
+  const master = era.get('tflag:主导权');
   /** @type {number[]} */
   const chara_list_in_train = get_characters_in_train().filter(
     (e) =>
-      e &&
+      e > 0 &&
       e !== master &&
       sys_check_awake(e) &&
       !era.get(`tcvar:${e}:脱力`) &&
       !era.get(`tcvar:${e}:失神`),
   );
-  if (check_satisfied(master)) {
+  if (check_satisfied(master) > 0) {
     await run_custom_ero(master, ero_hooks.switch, {
       attacker: master,
       defender: 0,
       shown,
     });
-    shown && era.println();
+    if (shown) {
+      era.println();
+    }
     return;
   }
   let temp;
@@ -159,9 +170,9 @@ async function sys_auto_rape(shown) {
     );
   }
   if (
-    era.get(`status:0:沉睡`) &&
+    era.get(`status:0:沉睡`) > 0 &&
     !era.get('status:0:马跳S') &&
-    era.get(`status:${master}:爱意克制`)
+    era.get(`status:${master}:爱意克制`) > 0
   ) {
     await run_custom_ero(master, ero_hooks.use_medicine, {
       item: medicine_enum.uma_s,
@@ -183,7 +194,7 @@ async function sys_auto_rape(shown) {
       });
       ret_flag = true;
     }
-    if (cur_supporter && !get_penis_size(cur_supporter)) {
+    if (cur_supporter > 0 && !get_penis_size(cur_supporter)) {
       ret_flag && shown && era.println();
       await run_custom_ero(cur_supporter, ero_hooks.use_medicine, {
         item:
@@ -200,12 +211,12 @@ async function sys_auto_rape(shown) {
       return;
     }
   }
-  const want_list = {},
-    poison_list = { lover: {}, master: {} },
-    sensitive_list = { lover: {}, master: {} },
-    white_list = {},
-    black_list = {},
-    week_list = {};
+  const want_list = {};
+  const poison_list = { lover: {}, master: {} };
+  const sensitive_list = { lover: {}, master: {} };
+  const white_list = {};
+  const black_list = {};
+  const week_list = {};
   get_custom_ero(master).set_preference(white_list, week_list);
   (era.get(`tcvar:${master}:接近高潮`) || []).forEach((p) =>
     want_list_entry_getter[p].forEach((k) => (want_list[k] = true)),
@@ -367,16 +378,18 @@ async function sys_auto_rape(shown) {
   if (!era.get('tflag:强奸') && get_sex_acceptable(master) < 0) {
     filters.push((e) => e === ero_hooks.insult || e === ero_hooks.hit_face);
   }
-  if (chara_list_in_train.length > 0) {
+  if (cur_supporter > 0) {
     filters.push(
-      (e) => e >= ero_hooks.double_fuck && e <= ero_hooks.spit_roast_anal_sex,
+      (e) =>
+        e >= ero_hooks.double_cowgirl && e <= ero_hooks.spit_roast_anal_sex,
       (e) =>
         e >= ero_hooks.ask_supporter_prepare_virgin && e <= ero_hooks.fuck_69,
     );
   }
   const second_filter = get_custom_ero(master).filter_in_rape();
-  if (Object.keys(poison_list.master).length) {
-    filters.push((e) => {
+  const temp_filters = [];
+  if (Object.keys(poison_list.master).length > 0) {
+    temp_filters.push((e) => {
       const tags = ero_tagged_hooks[e] || default_tags;
       return (
         tags.attacker_tags.findIndex((t) => poison_list.master[t]) !== -1 &&
@@ -385,26 +398,32 @@ async function sys_auto_rape(shown) {
     });
   }
   if (Object.keys(sensitive_list.master).length) {
-    temp = (e) => {
+    temp_filters.push((e) => {
       const tags = ero_tagged_hooks[e] || default_tags;
       return (
         tags.attacker_tags.findIndex((t) => sensitive_list.master[t]) === -1 ||
         tags.defender_tags.findIndex((t) => sensitive_list.lover[t]) === -1
       );
-    };
-    filters.push((e) => second_filter(e) && temp(e), temp);
+    });
   }
-  if (Object.keys(white_list).length + Object.keys(week_list).length) {
-    temp = (e) => {
+  if (Object.keys(white_list).length > 0 || Object.keys(week_list).length > 0) {
+    temp_filters.push((e) => {
       const tags = ero_tagged_hooks[e] || default_tags;
       return (
         tags.attacker_tags.findIndex((t) => white_list[t]) !== -1 ||
         tags.defender_tags.findIndex((t) => week_list[t]) !== -1
       );
-    };
-    filters.push((e) => second_filter(e) && temp(e), temp);
+    });
   }
-  filters.push(second_filter);
+  if (temp_filters.length > 0) {
+    filters.push(
+      ...temp_filters.map((f) => (a) => second_filter(a) && f(a)),
+      second_filter,
+      ...temp_filters,
+    );
+  } else {
+    filters.push(second_filter);
+  }
   if (Object.keys(black_list).length) {
     filters.push((e) => {
       const tags = ero_tagged_hooks[e] || default_tags;
@@ -424,19 +443,19 @@ async function sys_auto_rape(shown) {
       era.get(`love:${master}`) >= 75 ||
       (e !== ero_hooks.kiss && e !== ero_hooks.french_kiss),
   );
-  const last_action = era.get('tflag:前回行动'),
-    action = get_random_act(master, random_list, last_action, ...filters),
-    change_ratio = 0.16 - 0.08 * era.get(`talent:${master}:工口好奇`);
+  const last_action = era.get('tflag:前回行动');
+  const action = get_random_act(master, random_list, last_action, ...filters);
   (last_action === action ? era.add : era.set)(
     `tcvar:${master}:变招`,
-    change_ratio,
+    0.16 - 0.08 * era.get(`talent:${master}:工口好奇`),
   );
   era.logger.debug(
-    `raping done! ${(new Date().getTime() - current).toLocaleString()}ms`,
+    `角色 ${master} 思考主动行为结束！${(new Date().getTime() - current).toLocaleString()}ms`,
   );
   if (
-    ero_tagged_hooks[action] &&
-    !era.get(`talent:${master}:病娇`) &&
+    ero_tagged_hooks[action] !== undefined &&
+    !sys_check_yandere(master, (y) => y > 0) &&
+    !era.get(`status:${master}:超马跳Z`) &&
     (master < 340 || master > 342)
   ) {
     const ero = era.get(`talent:${master}:工口意愿`),
@@ -565,7 +584,9 @@ async function sys_auto_rape(shown) {
   }
   era.set('tflag:前回行动', action);
   era.set('tflag:前回助手', cur_supporter);
-  shown && era.println();
+  if (shown) {
+    era.println();
+  }
 }
 
 module.exports = sys_auto_rape;

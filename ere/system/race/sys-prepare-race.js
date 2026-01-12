@@ -1,12 +1,18 @@
 ﻿const { logger } = require('#/era-electron');
 
-const { reset_loc_mind_other_diff } = require('#/system/race/snippets');
+const {
+  reset_loc_mind_other_diff,
+  reset_running_style,
+} = require('#/system/race/snippets');
 
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const RaceInfo = require('#/data/race/model/race-info');
-const { ability_type_enum } = require('#/data/race/model/uma-skill');
+const {
+  ability_type_enum,
+  skill_name_enum,
+} = require('#/data/race/model/uma-skill');
 const {
   max_attr,
   mod_motivation_coefficients,
@@ -19,7 +25,7 @@ const {
   mod_attr_stamina_style,
   mod_velocity_final_adapt_distance,
   mod_velocity_style,
-} = require('#/data/race/race-sim-const.js');
+} = require('#/data/race/race-sim-const');
 const { attr_enum } = require('#/data/train-const');
 
 /**
@@ -29,9 +35,9 @@ const { attr_enum } = require('#/data/train-const');
  */
 function sys_prepare_race(list_chara, team_list, race_info) {
   const current = new Date().getTime();
-  const pop_1 = list_chara.find((e) => e.pop[0] === 1),
-    running_style_counts = [0, 0, 0, 0],
-    skill_counts = {};
+  const pop_1 = list_chara.find((e) => e.pop[0] === 1);
+  const running_style_counts = [0, 0, 0, 0];
+  const skill_counts = {};
   list_chara.forEach((uma) => running_style_counts[uma.style]++);
   [201631, 201641].forEach((e) => {
     if (
@@ -54,15 +60,15 @@ function sys_prepare_race(list_chara, team_list, race_info) {
     skill_counts[201631] = 5;
   }
 
-  const corners = [],
-    down_slopes = race_info.slopes.filter((e) => e.slope < 0),
-    up_slopes = race_info.slopes.filter((e) => e.slope > 0),
-    middle_corners = [],
-    straights = [],
-    loc_mind_base_diff = 0.0008 * (race_info.span - 1000) + 1;
-  let flag_final = true,
-    final_corner = undefined,
-    final_straight = undefined;
+  const corners = [];
+  const down_slopes = race_info.slopes.filter((e) => e.slope < 0);
+  const up_slopes = race_info.slopes.filter((e) => e.slope > 0);
+  const middle_corners = [];
+  const straights = [];
+  const loc_mind_base_diff = 0.0008 * (race_info.span - 1000) + 1;
+  let flag_final = true;
+  let final_corner = undefined;
+  let final_straight = undefined;
   // 给弯道分配用于计算的corner
   for (let i = race_info.lanes.length - 1; i >= 0; --i) {
     const lane = race_info.lanes[i];
@@ -161,24 +167,12 @@ function sys_prepare_race(list_chara, team_list, race_info) {
     uma.race.conditionParams.order_rate_out20_continue = 1;
     uma.race.conditionParams.order_rate_out40_continue = 1;
     uma.race.conditionParams.order_rate_out50_continue = 1;
+    uma.race.conditionParams.order_rate_out70_continue = 1;
     uma.race.conditionParams.overtake_target_no_order_up_time = 0;
     uma.race.conditionParams.overtake_target_time = 0;
     uma.race.conditionParams.phase = 0;
     uma.race.conditionParams.phase_firstquarter = 0;
-    uma.race.conditionParams.running_style = uma.style + 1;
-    uma.race.conditionParams.running_style_count_nige_otherself =
-      running_style_counts[0] - (uma.style === 0);
-    uma.race.conditionParams.running_style_count_senko_otherself =
-      running_style_counts[1] - (uma.style === 1);
-    uma.race.conditionParams.running_style_count_sashi_otherself =
-      running_style_counts[2] - (uma.style === 2);
-    uma.race.conditionParams.running_style_count_oikomi_otherself =
-      running_style_counts[3] - (uma.style === 3);
-    uma.race.conditionParams.running_style_count_same =
-      running_style_counts[uma.style];
-    uma.race.conditionParams.running_style_count_same_rate =
-      (uma.race.conditionParams.running_style_count_same * 100) /
-      list_chara.length;
+    reset_running_style(uma, running_style_counts, list_chara.length);
     uma.race.conditionParams.running_style_equal_popularity_one = Number(
       uma.style === pop_1.style,
     );
@@ -352,7 +346,11 @@ function sys_prepare_race(list_chara, team_list, race_info) {
     // 计算整个比赛生效的被动属性加成技能
     // 筛除结算完毕的常时被动 只留触发技能给比赛模拟
     uma.list_skill = uma.list_skill.filter((skill) => {
-      if (skill.data.ability_times[0] >= 0) {
+      const category = skill.data.category >> 3;
+      if (
+        category !== skill_name_enum.buff &&
+        category !== skill_name_enum.debuff
+      ) {
         return skill.data.is_random === 0 || Math.random() < uma.probs.skill;
       }
       uma.race.conditionParams.same_skill_horse_count =
@@ -403,6 +401,9 @@ function sys_prepare_race(list_chara, team_list, race_info) {
           uma.base.greenCount++;
           uma.race.conditionParams.activate_count_all++;
           uma.race.conditionParams.activate_count_start++;
+          if (skill.data.id === 203781) {
+            uma.race.conditionParams.is_used_skill_id.push(skill.data.id);
+          }
         }
       }
     });
@@ -509,9 +510,9 @@ function sys_prepare_race(list_chara, team_list, race_info) {
     // 由智力决定最终冲刺计划的选择概率
     uma.probs.planRush = 0.15 + 0.0005 * uma.attrs[attr_enum.intelligence];
 
-    uma.base.loc_mind_style = uma.style;
+    uma.race.style = uma.style;
 
-    if (uma.base.loc_mind_style > 0) {
+    if (uma.race.style > 0) {
       reset_loc_mind_other_diff(uma, race_info);
     }
   }

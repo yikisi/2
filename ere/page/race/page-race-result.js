@@ -6,22 +6,25 @@ const {
   get_timer_record,
 } = require('#/system/race/snippets');
 const sys_sim_race = require('#/system/race/sys-simulate-race');
+const { sys_change_lust } = require('#/system/sys-calc-base-cflag');
 
 const { sort_list } = require('#/utils/list-utils');
+const { get_random_value } = require('#/utils/value-utils');
 
 const { buff_colors } = require('#/data/color-const');
+const { item_names } = require('#/data/ero/item-const');
 const { class_enum, track_names } = require('#/data/race/model/race-info');
 
-const ranks = ['Ⅰ', 'Ⅱ', 'Ⅲ', 'Ⅳ', 'Ⅴ'],
-  default_options = {
-    fill: false,
-    interaction: { intersect: false },
-    radius: 0,
-    responsive: true,
-  },
-  skill_record_time_window = 5,
-  report_record_time_window = 15,
-  max_records_num = 5;
+const ranks = ['Ⅰ', 'Ⅱ', 'Ⅲ', 'Ⅳ', 'Ⅴ'];
+const default_options = {
+  fill: false,
+  interaction: { intersect: false },
+  radius: 0,
+  responsive: true,
+};
+const skill_record_time_window = 5;
+const report_record_time_window = 15;
+const max_records_num = 5;
 
 /**
  * @param {PseudoUma[]} contestants
@@ -30,35 +33,70 @@ const ranks = ['Ⅰ', 'Ⅱ', 'Ⅲ', 'Ⅳ', 'Ⅴ'],
  */
 async function page_race_result(contestants, info, race_id) {
   const result = sys_sim_race(contestants, info, race_id);
-  era.printMultiColumns([
-    { type: 'divider' },
-    {
-      accelerator: 0,
-      config: { width: 6, align: 'center' },
-      content: '查看结果',
-      type: 'button',
-    },
-    {
-      accelerator: 1,
-      config: { width: 6, align: 'center' },
-      content: '一倍速观看',
-      type: 'button',
-    },
-    {
-      accelerator: 2,
-      config: { width: 6, align: 'center' },
-      content: '二倍速观看',
-      type: 'button',
-    },
-    {
-      accelerator: 3,
-      config: { width: 6, align: 'center' },
-      content: '四倍速观看',
-      type: 'button',
-    },
-  ]);
-
-  let flag_result = true;
+  let sum = era.get('flag:比赛缩略显示') > 0;
+  let flag_s = true;
+  let flag_res = true;
+  const curr = era.getLineCount();
+  let interval = 0;
+  while (flag_s) {
+    await era.clear(era.getLineCount() - curr);
+    era.printMultiColumns([
+      { type: 'divider' },
+      {
+        accelerator: 1,
+        config: { width: 8, align: 'center' },
+        content: '一倍速观看',
+        type: 'button',
+      },
+      {
+        accelerator: 2,
+        config: { width: 8, align: 'center' },
+        content: '二倍速观看',
+        type: 'button',
+      },
+      {
+        accelerator: 8,
+        config: { width: 6, align: 'center' },
+        content: '四倍速观看',
+        type: 'button',
+      },
+      {
+        accelerator: 4,
+        config: {
+          align: 'center',
+          buttonType: sum ? 'warning' : 'info',
+          width: 8,
+        },
+        content: '减少参赛选手显示',
+        type: 'button',
+      },
+      {
+        accelerator: 0,
+        config: { align: 'center', width: 8 },
+        content: '查看结果',
+        type: 'button',
+      },
+    ]);
+    switch ((interval = await era.input())) {
+      case 0:
+        flag_res = false;
+        break;
+      case 1:
+        interval = (1000 * 1.25) / 15;
+        break;
+      case 2:
+        interval = (500 * 1.2) / 15;
+        break;
+      case 3:
+        interval = 250 / 15;
+        break;
+      case 4:
+        era.set('flag:比赛缩略显示', +(sum = !sum));
+    }
+    if (interval !== 4) {
+      flag_s = false;
+    }
+  }
 
   const audio_list = [
     `音效_比赛_${info.name_zh}`,
@@ -66,30 +104,34 @@ async function page_race_result(contestants, info, race_id) {
   ];
 
   /**
-   * @param {number} interval
+   * @param {number} inter
    */
-  async function show_result(interval) {
+  async function show_result(inter) {
     era.setAlign('center');
-    let index = 0,
-      timer = 0,
-      last_index = result.dynamic_table.findIndex(
-        (e) => e[0][2].percentage > 1600 / 24,
-      ),
-      curr_line = era.getLineCount();
+    let index = 0;
+    let timer = 0;
+    let l_index = result.dynamic_table.findIndex(
+      (e) => e[0][2].percentage > 1600 / 24,
+    );
+    let c_line = era.getLineCount();
 
     era.playMusic(audio_list);
 
-    while (flag_result && index < result.dynamic_table.length) {
-      let report_count = max_records_num,
-        skill_count = max_records_num;
-      if (--last_index === 0) {
+    while (flag_res && index < result.dynamic_table.length) {
+      let table = result.dynamic_table[index];
+      if (sum) {
+        table = table.slice(0, 5);
+      }
+      let report_count = max_records_num;
+      let skill_count = max_records_num;
+      if (--l_index === 0) {
         era.playMusic(
           audio_list.map((e) => `${e}_终`),
           { fade: true, fadeInternal: 100 },
         );
       }
-      curr_line = (index ? era.replaceInColRows : era.printInColRows)(
-        ...result.dynamic_table[index],
+      c_line = (index > 0 ? era.replaceInColRows : era.printInColRows)(
+        ...table,
         [{ content: [{ isBr: true }], type: 'text' }],
         {
           columns: result.buffer.report.filter(
@@ -110,11 +152,11 @@ async function page_race_result(contestants, info, race_id) {
           config: { width: 8 },
         },
       );
-      await era.delay(interval);
+      await era.delay(inter);
       index++;
       timer = add_timer(timer);
     }
-    await era.clear(era.getLineCount() - curr_line);
+    await era.clear(era.getLineCount() - c_line);
     era.replaceInColRows(
       ...result.dynamic_table.at(-1),
       [{ content: [{ isBr: true }], type: 'text' }],
@@ -124,26 +166,13 @@ async function page_race_result(contestants, info, race_id) {
       },
     );
   }
-  let interval = 0;
-  switch (await era.input()) {
-    case 0:
-      flag_result = false;
-      break;
-    case 1:
-      interval = 1000 / 15;
-      break;
-    case 2:
-      interval = 500 / 15;
-      break;
-    case 3:
-      interval = 250 / 15;
-  }
+
   if (interval > 0) {
     await era.clear();
-    era.input({ show: false }).then(() => (flag_result = false));
+    era.input({ show: false, hideInput: true }).then(() => (flag_res = false));
     await show_result(interval);
   }
-  let flag_charts = 1;
+  let flag_cha = 1;
   if (
     contestants.findIndex((e) => e.legend === 2) !== -1 &&
     contestants.find((e) => !e.legend && e.rank.curr === 1)?.index_chara >= 0
@@ -152,8 +181,12 @@ async function page_race_result(contestants, info, race_id) {
     era.playMusic('音效_强敌击退');
     await era.waitAnyKey();
     era.setMask();
+  } else {
+    era.stopMusic();
   }
-  await era.waitAnyKey();
+  if (interval > 0) {
+    await era.waitAnyKey();
+  }
   const mvp = Math.min(
     ...contestants
       .filter((e) => e.index_chara >= 0 && !e.legend)
@@ -161,17 +194,17 @@ async function page_race_result(contestants, info, race_id) {
   );
   era.playMusic(`音效_结果_${mvp === 1 ? '1着' : mvp <= 5 ? '入着' : '失败'}`);
   const labels = new Array(result.statistics.loc[0].data.length)
-      .fill(0)
-      .map((_, i) => get_timer_record(i)),
-    speed_min = (22 - info.span / 1000) * 0.85,
-    on_board_list = sort_list(contestants, (e) => e.rank.curr, true).slice(
-      0,
-      5,
-    );
-  while (flag_charts > 0) {
+    .fill(0)
+    .map((_, i) => get_timer_record(i));
+  const speed_min = (22 - info.span / 1000) * 0.85;
+  const on_board_list = sort_list(contestants, (e) => e.rank.curr, true).slice(
+    0,
+    5,
+  );
+  while (flag_cha > 0) {
     await era.clear();
     era.setAlign('center');
-    flag_charts !== 99 &&
+    if (flag_cha !== 99) {
       era.printMultiColumns(
         [
           { type: 'divider' },
@@ -179,7 +212,7 @@ async function page_race_result(contestants, info, race_id) {
             '揭示板',
             '相对位置统计',
             '速度统计',
-            '体力统计',
+            '持久力统计',
             '发动技能统计',
             '比赛日志',
           ].map((e, i) => ({
@@ -192,8 +225,9 @@ async function page_race_result(contestants, info, race_id) {
         ],
         { horizontalAlign: 'space-evenly' },
       );
+    }
     era.setAlign('left');
-    switch (flag_charts) {
+    switch (flag_cha) {
       case 1:
       case 99:
         era.setAlign('left');
@@ -210,9 +244,8 @@ async function page_race_result(contestants, info, race_id) {
                         '竞马场 ',
                         info.get_colored_name_with_class(),
                       ]
-                    : ['训练场 模拟赛']),
-                  { isBr: true },
-                  { isBr: true },
+                    : [`训练场 ${info.name_zh}`]),
+                  { isBr: 2 },
                 ],
                 type: 'text',
               },
@@ -330,7 +363,7 @@ async function page_race_result(contestants, info, race_id) {
               align: 'center',
               fontSize: '1.5rem',
             },
-            content: '体力统计图',
+            content: '持久力统计图',
             type: 'text',
           },
         ]);
@@ -379,9 +412,24 @@ async function page_race_result(contestants, info, race_id) {
           { columns: result.buffer.skill, config: { width: 8 } },
         );
     }
-    flag_charts = flag_charts !== 99 && (await era.input());
+    flag_cha = flag_cha !== 99 && (await era.input());
   }
   era.stopMusic();
+  for (const uma of contestants) {
+    const { index_chara: cid } = uma;
+    if (uma.race.conditionParams.item === 1) {
+      const count = new Array(5).fill(void 0).reduce((p, _, i) => {
+        const tmp = era.get(`equip:${cid}:${i + 5}`);
+        if (tmp > 0) {
+          era.set(`equip:${cid}:${i + 5}`, 0);
+          era.add(`item:${item_names[tmp]}`, 1 + (i === 0));
+          return p + 1;
+        }
+        return p;
+      }, 0);
+      sys_change_lust(cid, get_random_value(400, 600) * count);
+    }
+  }
 }
 
 module.exports = page_race_result;

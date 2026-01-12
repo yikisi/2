@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '最终弯道之后，位于前列穷追不舍时，会在最终直线稍微提升速度',
   91003,
   1,
-  UmaSkill.rarity_enum.normal,
   16,
   180,
   [

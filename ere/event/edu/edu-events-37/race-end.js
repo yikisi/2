@@ -9,6 +9,7 @@ const FlashEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-37')
 const { race_enum } = require('#/data/race/race-const');
 
 /**
+ * @this CustomizedEdu
  * @param {CharaTalk} flash
  * @param {CharaTalk} me
  * @param {string} callname
@@ -619,6 +620,13 @@ module.exports = async function (
     await flash.say_and_wait('如您所愿，我的训练员。');
     new FlashEduMarks().finish = 1;
   } else {
-    return await super_race_end(flash, me, callname, hook, extra_flag);
+    return await super_race_end.call(
+      this,
+      flash,
+      me,
+      callname,
+      hook,
+      extra_flag,
+    );
   }
 };

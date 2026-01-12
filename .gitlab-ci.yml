@@ -4,16 +4,19 @@ workflow:
 
 variables:
   GAME_ALL_DIR: 'erauma-with-engine-${CI_COMMIT_TAG}'
-  GAME_ALL_ZIP: 'erauma-with-engine-${CI_COMMIT_TAG}-win-x64.7z'
-  GAME_ZIP_URL: '${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/erauma/${CI_COMMIT_TAG}/erauma-with-engine-${CI_COMMIT_TAG}-win-x64.7z'
   GAME_DIR: 'erauma-${CI_COMMIT_TAG}'
-  GAME_ZIP: 'erauma-${CI_COMMIT_TAG}.7z'
-  GAME_URL: '${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/erauma/${CI_COMMIT_TAG}/erauma-${CI_COMMIT_TAG}.7z'
   BASE_URL: '${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/base/${CI_COMMIT_TAG}/base.zip'
   GAME_BUNDLE_DIR: 'erauma-android-${CI_COMMIT_TAG}'
-  GAME_BUNDLE_ZIP: 'erauma-android-${CI_COMMIT_TAG}.zip'
-  GAME_BUNDLE_URL: '${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/bundle/${CI_COMMIT_TAG}/erauma-android-${CI_COMMIT_TAG}.zip'
-  CALL_SIGN: 'kuuga'
+  CALL_SIGN: 'agito'
+  GIT_LFS_SKIP_SMUDGE: "1"
+
+before_script:
+  - export GAME_ALL_ZIP="${GAME_ALL_DIR}-win-x64.7z"
+  - export GAME_ZIP_URL="${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/erauma/${CI_COMMIT_TAG}/${GAME_ALL_ZIP}"
+  - export GAME_ZIP="${GAME_DIR}.7z"
+  - export GAME_URL="${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/erauma/${CI_COMMIT_TAG}/${GAME_ZIP}"
+  - export GAME_BUNDLE_ZIP="${GAME_BUNDLE_DIR}.zip"
+  - export GAME_BUNDLE_URL="${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/bundle/${CI_COMMIT_TAG}/${GAME_BUNDLE_ZIP}"
 
 build:
   stage: build
@@ -21,16 +24,20 @@ build:
     - shell
   variables:
     NODE_OPTIONS: "--openssl-legacy-provider"
+    GIT_SUBMODULE_STRATEGY: recursive
   script:
-    - npm install
+    - pnpm install
     - node ci/build.js
+  artifacts:
+    reports:
+      dotenv: res.env
 
 android:
   stage: build
   tags:
     - shell
   script:
-    - npm install
+    - pnpm install
     - node ci/android.js
 
 pages:
@@ -45,28 +52,25 @@ pages:
 
 release:
   stage: deploy
-  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  image: registry.gitlab.com/gitlab-org/release-cli:v0.24.0
   needs:
     - job: build
+      artifacts: true
+  rules:
+    - if: $CI_COMMIT_TAG
+      when: on_success
   tags:
     - docker
   script:
-    - echo "Releasing..."
-  release:
-    name: 'EraUma v$CI_COMMIT_TAG ($CALL_SIGN)'
-    description: './RELEASE.md'
-    tag_name: $CI_COMMIT_TAG
-    ref: '$CI_COMMIT_SHA'
-    assets:
-      links:
-        - name: '[Win10绿色版] $GAME_ALL_ZIP (解压密码：era)'
-          url: 'https://umaera.gitgud.site/erauma/index.html'
-          link_type: package
-        - name: '[PC游戏包] $GAME_ZIP (解压密码：era)'
-          url: '${GAME_URL}'
-          link_type: package
-        - name: '[安卓游戏包] $GAME_BUNDLE_ZIP (解压密码：era)'
-          url: '${GAME_BUNDLE_URL}'
-          link_type: package
-        - name: '[通用资源包] erauma-master-res.zip (解压后将res文件夹放到游戏文件夹下，需要在游戏设置中启用资源)'
-          url: 'https://gitgud.io/umaera/erauma/-/archive/master/erauma-master.zip?path=res'
+    - sed -i '1,4d' ./RELEASE.md
+    - >
+      release-cli create
+      --name "EraUma v${CI_COMMIT_TAG} (${CALL_SIGN})"
+      --tag-name "${CI_COMMIT_TAG}"
+      --ref "${CI_COMMIT_SHA}"
+      --description "$(cat ./RELEASE.md)"
+      --assets-link "{\"name\":\"[Win10 绿色版] ${GAME_ALL_ZIP} (解压密码：era)\",\"url\":\"https://umaera.gitgud.site/erauma/index.html\",\"link_type\":\"package\"}"
+      --assets-link "{\"name\":\"[PC 游戏包] ${GAME_ZIP} (解压密码：era)\",\"url\":\"${GAME_URL}\",\"link_type\":\"package\"}"
+      --assets-link "{\"name\":\"[安卓游戏包] ${GAME_BUNDLE_ZIP} (解压密码：era)\",\"url\":\"${GAME_BUNDLE_URL}\",\"link_type\":\"package\"}"
+      --assets-link "{\"name\":\"[通用资源包] uma-resource-${RES_VERSION}.zip (版本号 ${RES_VERSION}，解压后文件夹改名为 res 然后放到游戏文件夹下，在游戏设置中启用资源)\",\"url\":\"https://gitgud.io/umaera/data/uma-resource/-/archive/${RES_VERSION}/uma-resource-${RES_VERSION}.zip\"}"
+      --assets-link "{\"name\":\"[资源差分包] erauma-res-${RES_VERSION}-${OLD_VERSION}.zip (直接解压到 res 文件夹里，仅用于升级 ${OLD_VERSION} 版本的资源包)\",\"url\":\"https://umaera.gitgud.site/data/uma-resource/index.html\"}"

@@ -6,7 +6,6 @@ module.exports = new UmaSkill(
   '最终直线时提高速度；训练设施等级总和越高，效果越好',
   21034,
   2,
-  UmaSkill.rarity_enum.gold,
   17,
   633,
   [() => true, () => true],

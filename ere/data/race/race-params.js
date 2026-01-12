@@ -1,3 +1,4 @@
+// GENERATED START
 const { RaceLane, RaceSlope } = require('#/data/race/model/race-info');
 
 module.exports = {
@@ -1461,10 +1462,21 @@ module.exports = {
     55501: [],
     55502: [],
     55503: [],
-    97101: [new RaceSlope(1200, 1300, 3)],
-    97102: [new RaceSlope(400, 500, 3)],
+    97101: [
+      new RaceSlope(1095, 1195, -1),
+      new RaceSlope(1200, 1300, 3),
+      new RaceSlope(1305, 1405, -1),
+      new RaceSlope(1600, 1700, -1),
+    ],
+    97102: [
+      new RaceSlope(295, 395, -1),
+      new RaceSlope(400, 500, 3),
+      new RaceSlope(505, 605, -1),
+      new RaceSlope(800, 900, -1),
+    ],
     97103: [],
     97104: [],
     97105: [],
   },
 };
+// GENERATED END
