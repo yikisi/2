@@ -22,13 +22,13 @@ const { part_enum } = require('#/data/ero/part-const');
 
 /** @param {TachyonLifeMarks} tachyon_marks */
 async function tachyon_betrayed_2(tachyon_marks) {
-  const tachyon = get_chara_talk(32),
-    coffee = get_chara_talk(25),
-    me = get_chara_talk(0),
-    c_call_m = sys_get_colored_callname(25, 0),
-    c_call_t = sys_get_colored_callname(25, 32),
-    t_call_c = sys_get_colored_callname(32, 25),
-    t_call_m = sys_get_colored_callname(32, 0);
+  const tachyon = get_chara_talk(32);
+  const coffee = get_chara_talk(25);
+  const me = get_chara_talk(0);
+  const c_call_m = sys_get_colored_callname(25, 0);
+  const c_call_t = sys_get_colored_callname(25, 32);
+  const t_call_c = sys_get_colored_callname(32, 25);
+  const t_call_m = sys_get_colored_callname(32, 0);
 
   tachyon_marks.ntr_mark = 4;
   await print_event_name(

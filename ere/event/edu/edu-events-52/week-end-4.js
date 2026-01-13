@@ -27,7 +27,7 @@ function urara_say_in_lines(urara, content) {
   return era.printAndWait(
     [
       '「',
-      ...(content instanceof Array ? content : [content]),
+      ...(Array.isArray(content) ? content : [content]),
       '」',
       urara.get_colored_name(),
     ],

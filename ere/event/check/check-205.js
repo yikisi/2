@@ -140,6 +140,7 @@ module.exports = class extends CustomizedCheck {
   get_edu_aims() {
     const buffer = [],
       races = RaceHistory.get(205);
+    buffer.push(check_aim_and_get_entry(races.get(), race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races.get(), race_enum.prix_prb, 1, 1));
     buffer.push(check_aim_and_get_entry(races.get(), race_enum.prix_dia, 1, 1));
     buffer.push(check_aim_and_get_entry(races.get(), race_enum.prix_lat, 1, 1));

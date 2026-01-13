@@ -9,6 +9,7 @@ const era = require('#/era-electron');
 
 const {
   sys_change_lust,
+  sys_change_motivation,
   sys_get_billings,
 } = require('#/system/sys-calc-base-cflag');
 const {
@@ -31,6 +32,8 @@ const kojo = require('#/event/daily/daily-common.kojo');
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
 const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
 const select_action_in_station = require('#/event/daily/snippets/select-action-in-station');
+const generate_dictionary = require('#/event/snippets/generate-dictionary');
+const print_ending_name = require('#/event/snippets/print-ending-name');
 const print_event_name = require('#/event/snippets/print-event-name');
 const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
@@ -38,7 +41,6 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
-const { get_chara_color } = require('#/data/chara-colors');
 const { buff_colors, money_color } = require('#/data/color-const');
 const event_hooks = require('#/data/event/event-hooks');
 const { location_name } = require('#/data/locations');
@@ -54,18 +56,7 @@ class CustomizedDaily {
   }
 
   get #dict() {
-    const dict = { id: this.id };
-    dict['角色名'] = era.get(`callname:${this.id}:-2`);
-    dict['代表色'] = get_chara_color(this.id);
-    dict['玩家名'] = era.get('callname:0:-2');
-    if (era.get(`cflag:${this.id}:性别`) === 1) {
-      dict['马娘'] = '马郎';
-      dict['她'] = '他';
-    } else {
-      dict['马娘'] = '马娘';
-      dict['她'] = '她';
-    }
-    return dict;
+    return generate_dictionary(this.id, { uma: true });
   }
 
   get_this() {
@@ -74,61 +65,37 @@ class CustomizedDaily {
 
   /** @author 雞雞 */
   async basement_end() {
-    const chara = get_chara_talk(this.id),
-      me = get_chara_talk(0);
-    await era.printAndWait('在特雷森，一个任何探测器都检测不到的地下室中……', {
-      offset: 6,
-      width: 12,
-    });
-    await era.printAndWait(
-      [
-        me.get_colored_name(),
-        ' 拼命地想要挣脱绑住手脚的绳子，却只勒得自己生疼。',
-      ],
-      {
-        offset: 6,
-        width: 12,
-      },
-    );
-    await era.printAndWait(
-      [
-        chara.get_colored_name(),
-        ' 坐到床边对 ',
-        me.get_colored_name(),
-        ' 露出嫣然一笑，并且温柔地呵护着 ',
-        me.get_colored_name(),
-      ],
-      {
-        offset: 6,
-        width: 12,
-      },
-    );
-    await era.printAndWait(
-      ['但 ', me.get_colored_name(), ' 的心中唯有对未知未来的深邃恐惧……'],
-      {
-        offset: 6,
-        width: 12,
-      },
-    );
-    await era.printAndWait(
-      [
-        '被 ',
-        chara.get_colored_name(),
-        ' 的爱意所囚禁，',
-        me.get_colored_name(),
-        ' 迎来了结局……',
-      ],
-      {
-        offset: 6,
-        width: 12,
-      },
-    );
-    await print_event_name(
-      [{ content: '情爱囹圄', color: buff_colors[3] }],
-      chara,
-      undefined,
-      6,
-    );
+    const chara = get_chara_talk(this.id);
+    const me = get_chara_talk(0);
+    era.setOffset(6);
+    era.setWidth(12);
+    await era.printAndWait('在特雷森，一个任何探测器都检测不到的地下室中……');
+    await era.printAndWait([
+      me.get_colored_name(),
+      ' 拼命地想要挣脱绑住手脚的绳子，却只勒得自己生疼。',
+    ]);
+    await era.printAndWait([
+      chara.get_colored_name(),
+      ' 坐到床边对 ',
+      me.get_colored_name(),
+      ' 露出嫣然一笑，并且温柔地呵护着 ',
+      me.get_colored_name(),
+    ]);
+    await era.printAndWait([
+      '但 ',
+      me.get_colored_name(),
+      ' 的心中唯有对未知未来的深邃恐惧……',
+    ]);
+    await era.printAndWait([
+      '被 ',
+      chara.get_colored_name(),
+      ' 的爱意所囚禁，',
+      me.get_colored_name(),
+      ' 迎来了结局……',
+    ]);
+    era.setWidth(24);
+    era.setOffset(0);
+    await print_ending_name('情爱囹圄', chara);
   }
 
   /** @author 黑奴队长 */
@@ -241,7 +208,7 @@ class CustomizedDaily {
       awake = 2 * sys_check_awake(this.id) + sys_check_awake(0);
     if (awake === 3) {
       const check = get_custom_check(this.id).is_want_make_love();
-      if (check) {
+      if (check > 0) {
         if (
           await select_yes_or_no(
             [
@@ -371,17 +338,8 @@ class CustomizedDaily {
     ]);
   }
 
-  /** @author 雞雞 */
   async office_study() {
-    const chara = get_chara_talk(this.id);
-    await era.printAndWait([
-      get_chara_talk(0).get_colored_name(),
-      ' 在训练员室里指导 ',
-      chara.get_colored_name(),
-      ' 学习，成功指导',
-      chara.sex,
-      '解开了不会的题目。',
-    ]);
+    await kojo['指导学习'](this.#dict);
   }
 
   /** @author 雞雞 */
@@ -635,30 +593,11 @@ class CustomizedDaily {
    * @param {HookArg} hook
    */
   async school_atrium(hook) {
-    const me = get_chara_talk(0),
-      chara = get_chara_talk(this.id);
-    hook.arg = (await select_action_in_atrium()) === 0;
-    await era.printAndWait(
-      hook.arg
-        ? [
-            me.get_colored_name(),
-            ' 与 ',
-            chara.get_colored_name(),
-            ` 一起来到中庭枯树洞，看着${chara.sex}朝枯树洞里咆哮的样子，`,
-            me.get_colored_name(),
-            ' 也坚定了要帮助 ',
-            chara.get_colored_name(),
-            ' 成为最强的决心。',
-          ]
-        : [
-            me.get_colored_name(),
-            ' 与 ',
-            chara.get_colored_name(),
-            ' 一起来到中庭约会，',
-            me.get_couple_title(),
-            ' 的组合让周围的学生忍不住议论纷纷。',
-          ],
-    );
+    if ((hook.arg = (await select_action_in_atrium()) === 0)) {
+      await kojo['中庭枯树洞'](this.#dict);
+    } else {
+      await kojo['中庭约会'](this.#dict);
+    }
   }
 
   /** @param {HookArg} hook */
@@ -746,15 +685,21 @@ class CustomizedDaily {
       }
       return;
     }
-    /** @author 雞雞 */
-    await era.printAndWait([
-      me.get_colored_name(),
-      ' 与 ',
-      chara.get_colored_name(),
-      ' 一起来到天台吃便当，',
-      me.get_couple_title(),
-      ' 互相交换了便当盒里的美食。',
-    ]);
+    const is_sex = era.get('flag:惩戒力度') >= 2 && Math.random() < 0.5;
+    await kojo['天台']({ sex: is_sex, ...this.#dict });
+    if (is_sex) {
+      hook.override = true;
+      era.println();
+      let wait_flag = false;
+      if (Math.random() < 0.5) {
+        wait_flag = sys_change_motivation(this.id, 1);
+      }
+      wait_flag =
+        sys_like_chara(this.id, 0, get_random_value(15, 25)) || wait_flag;
+      if (wait_flag) {
+        await era.waitAnyKey();
+      }
+    }
   }
 
   /** @author 雞雞 */
@@ -785,53 +730,33 @@ class CustomizedDaily {
   /** @author 雞雞 */
   async slave_end() {
     const me = get_chara_talk(0);
-    await era.printAndWait(
-      [
-        '被金钱腐朽的 ',
-        me.get_colored_name(),
-        ' 踏上了不能选择的道路——抛弃自尊与自己的学生借钱……',
-      ],
-      {
-        offset: 6,
-        width: 12,
-      },
-    );
-    await era.printAndWait('然而所有命运的馈赠，都在背地里标好了价码。', {
-      offset: 6,
-      width: 12,
-    });
-    await era.printAndWait(
-      [
-        me.get_colored_name(),
-        ' 的借款，在如雪球一般的利滚利下终于超越了 ',
-        me.get_colored_name(),
-        ' 所能承受之重。',
-      ],
-      {
-        offset: 6,
-        width: 12,
-      },
-    );
-    await era.printAndWait(
-      ['接下来便是 ', me.get_colored_name(), ' 偿还代价的时候了……'],
-      {
-        offset: 6,
-        width: 12,
-      },
-    );
-    await era.printAndWait(
-      ['因被金钱关系所囚，', me.get_colored_name(), ' 迎来了结局……'],
-      {
-        offset: 6,
-        width: 12,
-      },
-    );
-    await print_event_name(
-      [{ content: '金钱奴隶', color: buff_colors[3] }],
-      get_chara_talk(this.id),
-      undefined,
-      6,
-    );
+    era.setOffset(6);
+    era.setWidth(12);
+    await era.printAndWait([
+      '被金钱腐朽的 ',
+      me.get_colored_name(),
+      ' 踏上了不能选择的道路——抛弃自尊与自己的学生借钱……',
+    ]);
+    await era.printAndWait('然而所有命运的馈赠，都在背地里标好了价码。');
+    await era.printAndWait([
+      me.get_colored_name(),
+      ' 的借款，在如雪球一般的利滚利下终于超越了 ',
+      me.get_colored_name(),
+      ' 所能承受之重。',
+    ]);
+    await era.printAndWait([
+      '接下来便是 ',
+      me.get_colored_name(),
+      ' 偿还代价的时候了……',
+    ]);
+    await era.printAndWait([
+      '因被金钱关系所囚，',
+      me.get_colored_name(),
+      ' 迎来了结局……',
+    ]);
+    era.setWidth(24);
+    era.setOffset(0);
+    await print_ending_name('金钱奴隶', get_chara_talk(this.id));
   }
 
   /**

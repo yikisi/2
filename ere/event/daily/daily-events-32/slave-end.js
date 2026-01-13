@@ -241,7 +241,7 @@ module.exports = async function () {
   await era.printAndWait('布局？阴谋？算计？');
   await era.printAndWait('那些东西已经不重要了');
   era.println();
-  await me.say_and_wait('速子……可以用这些钱……请妳陪我共度一晚吗？');
+  await me.say_and_wait('速子……可以用这些钱……请你陪我共度一晚吗？');
   era.println();
   await era.printAndWait('说出口的瞬间，紧绷到极限的弹簧终于松开');
   await era.printAndWait('啊啊……');

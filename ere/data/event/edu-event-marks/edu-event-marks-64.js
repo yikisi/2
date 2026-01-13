@@ -54,6 +54,8 @@ class PamaEduMarks extends EduEventMarks {
   concern;
   // 甜品……好像不对？
   dessert;
+  // 派对时间
+  party;
 
   // 随机事件
   // 错过午休时间

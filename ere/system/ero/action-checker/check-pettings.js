@@ -46,10 +46,11 @@ module.exports = (handlers) => {
    */
   function checker_generator(talent_names, counter_params, ex_name) {
     /** @type {string[]} */
-    const names = talent_names instanceof Array ? talent_names : [talent_names];
+    const names = Array.isArray(talent_names) ? talent_names : [talent_names];
     /** @type {[number,number,number|undefined,function(number):number][]} */
-    const params =
-      counter_params[0] instanceof Array ? counter_params : [counter_params];
+    const params = Array.isArray(counter_params[0])
+      ? counter_params
+      : [counter_params];
     return (chara_id) =>
       10 * (era.get(`talent:${chara_id}:工口意愿`) === 1) +
       names.reduce(

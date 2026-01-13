@@ -914,7 +914,7 @@ module.exports = async (kitaru, me, callname, extra_flag) => {
             .say_and_wait('唔……非常，非常期待比赛之后的奖励呢！')
             .then(() =>
               era.printAndWait([
-                '因为比赛而禁欲了一段时间 ',
+                '因为比赛而禁欲了一段时间的 ',
                 kitaru.get_colored_name(),
                 '，只是想到这里身体就微微开始发抖。',
               ]),

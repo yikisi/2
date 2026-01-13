@@ -8,6 +8,7 @@ const {
   update_attacking_mouth_exp,
   update_blow_job_exp,
   update_hand_job_exp,
+  update_kiss_exp,
   update_sm_exp,
 } = require('#/system/ero/sys-calc-ero-exp');
 const { use_item } = require('#/system/ero/sys-calc-ero-item');
@@ -69,26 +70,7 @@ function sys_do_sex(atk, def, item) {
           if (!atk.id || !def.id) {
             era.add(`tcvar:${atk.id || def.id}:获得因子`, 1);
           }
-          if (!era.get(`cstr:${atk.id}:初吻经历`)) {
-            era.set(`cstr:${atk.id}:初吻经历`, [
-              `初吻在 ${date} 献给了 `,
-              { c: def.id },
-            ]);
-          }
-          if (!era.get(`cstr:${def.id}:初吻经历`)) {
-            if (i_def_awake) {
-              era.set(`cstr:${def.id}:初吻经历`, [
-                `初吻在 ${date} 献给了 `,
-                { c: atk.id },
-              ]);
-            } else if (!era.get(`cstr:${def.id}:无自觉初吻经历`)) {
-              era.set(`cstr:${def.id}:无自觉初吻经历`, [
-                `实际上，初吻在 ${date} 就已被 `,
-                { c: atk.id },
-                ' 夺走',
-              ]);
-            }
-          }
+          update_kiss_exp(date, atk.id, def.id, i_def_awake);
           break;
         case part_enum.breast:
           era.add(`exp:${atk.id}:舔吸次数`, 1);
@@ -713,11 +695,11 @@ function sys_do_sex(atk, def, item) {
     return val;
   });
   const atk_cost_down =
-    (1 - 0.1 * end[0]) *
+    Math.max(1 - 0.1 * end[0], 0.01) *
     (1 + 0.5 * (era.get(`tcvar:${atk.id}:余韵`) > 0)) *
     atk.times;
   const def_cost_down =
-    (1 - 0.1 * end[1]) *
+    Math.max(1 - 0.1 * end[1], 0.01) *
     (1 + 0.5 * (era.get(`tcvar:${def.id}:余韵`) > 0)) *
     def.times *
     (0.75 -
@@ -725,10 +707,30 @@ function sys_do_sex(atk, def, item) {
         (era.get(`tcvar:${def.id}:脱力`) ||
           era.get(`status:${def.id}:马跳S`) ||
           era.get(`status:${def.id}:沉睡`)));
-  era.add(`nowex:${atk.id}:体力消耗`, atk_cost.stamina * atk_cost_down);
-  era.add(`nowex:${atk.id}:精力消耗`, atk_cost.time * atk_cost_down);
-  era.add(`nowex:${def.id}:体力消耗`, def_cost.stamina * def_cost_down);
-  era.add(`nowex:${def.id}:精力消耗`, def_cost.time * def_cost_down);
+  if (atk_cost.stamina > 0) {
+    era.add(
+      `nowex:${atk.id}:体力消耗`,
+      Math.max(atk_cost.stamina * atk_cost_down, 1),
+    );
+  }
+  if (atk_cost.time > 0) {
+    era.add(
+      `nowex:${atk.id}:精力消耗`,
+      Math.max(atk_cost.time * atk_cost_down, 1),
+    );
+  }
+  if (def_cost.stamina > 0) {
+    era.add(
+      `nowex:${def.id}:体力消耗`,
+      Math.max(def_cost.stamina * def_cost_down, 1),
+    );
+  }
+  if (def_cost.time > 0) {
+    era.add(
+      `nowex:${def.id}:精力消耗`,
+      Math.max(def_cost.time * def_cost_down, 1),
+    );
+  }
   calc_pleasure(def.id, def_part, dmg.defender);
   // 攻击者只能拿防御者对应部位的宝珠
   // 对面牛子是不应期，获得宝珠-90%（和快感计算同）

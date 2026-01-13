@@ -1,6 +1,7 @@
 const era = require('#/era-electron');
 
 const sys_count_juels = require('#/system/chara/sys-count-juels');
+const global_achievement = require('#/system/global/sys-calc-achievement');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
@@ -54,15 +55,20 @@ function check_inmon(in_team_list) {
           ' ',
           ...buffer,
           buffer.length > 1 ? ' 各' : ' ',
-          '贡上了一杯 [',
+          '贡上了一杯 ',
           era.get(`itemname:${45 + i}`),
-          ']】',
+          '】',
         ]);
         era.add(`item:${45 + i}`, milk_list[1 - i].length);
       }
     }
+    if (milk_list[0].length + milk_list[1].length >= 6) {
+      global_achievement.slav_mil = 1;
+    }
+    let j_count = 0;
     for (const id of jewel_list) {
-      const edu_phase = era.get(`cflag:${id}:育成回合计时`);
+      // CFLAGNAME:48 = 育成回合计时
+      const edu_phase = era.get(`cflag:${id}:48`);
       let jewel;
       let val;
       if (edu_phase < 3 * 48) {
@@ -83,6 +89,7 @@ function check_inmon(in_team_list) {
         );
       }
       era.add(`jewel:0:${gene_juel_names[jewel]}`, val);
+      j_count += val;
       era.print([
         '【',
         slavery_options[slavery_enum.inherit],
@@ -95,6 +102,9 @@ function check_inmon(in_team_list) {
         },
         '】',
       ]);
+    }
+    if (j_count >= 100) {
+      global_achievement.slav_inh = 1;
     }
   }
 }

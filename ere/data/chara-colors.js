@@ -133,6 +133,7 @@ const chara_colors = {
   133: '#b1b1b3',
   134: '#8e8180',
   135: '#bfb33d',
+  136: '#e4414b',
   201: '#eaddd0',
   202: '#c49665',
   203: '#ffdbb4',
@@ -169,7 +170,7 @@ module.exports = {
       return '#9f9f9f';
     }
     let ret = chara_colors[cid];
-    ret = ret instanceof Array ? ret[0] : ret;
+    ret = Array.isArray(ret) ? ret[0] : ret;
     if (!ret) {
       const id_color = cid.toString(9).padStart(3, '0');
       ret = `#${[id_color[0], id_color[1], id_color[2]]

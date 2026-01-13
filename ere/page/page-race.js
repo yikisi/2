@@ -4,6 +4,7 @@ const sys_add_titles = require('#/system/chara/sys-add-titles');
 const sys_change_tired = require('#/system/chara/sys-change-tired');
 const sys_get_chara_pseudo = require('#/system/chara/sys-get-chara-pseudo');
 const get_status = require('#/system/chara/sys-get-status');
+const global_achievement = require('#/system/global/sys-calc-achievement');
 const sys_check_titles_after_race = require('#/system/race/sys-check-titles-after-race');
 const sys_parse_for_race = require('#/system/race/sys-parse-race-uma');
 const sys_prepare_race = require('#/system/race/sys-prepare-race');
@@ -262,7 +263,7 @@ async function race_page(race) {
       await run_custom_edu(
         ret,
         event_hooks.race_start,
-        new RaceStartParams(uma, race),
+        new RaceStartParams(uma, contestants, race),
       );
       uma.motivation = era.get(`cflag:${ret}:干劲`);
       uma.race.conditionParams.motivation = uma.motivation + 3;
@@ -593,6 +594,7 @@ async function race_page(race) {
       ' 马币',
     ]);
   }
+  let b_flag = true;
   for (const uma of team_list) {
     const cid = uma.index_chara;
     const tmp = sys_reg_race(cid);
@@ -628,6 +630,7 @@ async function race_page(race) {
       }
     }
     if (r_punish > 0) {
+      b_flag = false;
       era.print([
         '因为 ',
         get_chara_talk(0).get_colored_name(),
@@ -640,6 +643,9 @@ async function race_page(race) {
       sys_like_chara(cid, 0, -r_punish);
       w_flag = true;
     }
+  }
+  if (team_list.filter((u) => u.index_chara > 0).length >= 6 && b_flag) {
+    global_achievement.blnc_rac = 1;
   }
   if (w_flag) {
     await era.waitAnyKey();

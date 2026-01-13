@@ -24,7 +24,8 @@ let tmp = {};
  */
 function add_juel(cid, key, num) {
   const juel_type = key.length === 2 && key !== '痛苦';
-  let temp = era.get('tflag:主导权');
+  // TFLAGNAME:7 = 主导权
+  let temp = era.get('tflag:7');
   if (
     !juel_type ||
     ((cid > 0 || era.getCharactersInTrain().length === 1 || temp > 0) &&
@@ -32,8 +33,8 @@ function add_juel(cid, key, num) {
   ) {
     tmp[cid][key] +=
       num *
-      (1 -
-        juel_type * (temp === cid || era.get('tflag:当前助手') === cid) * 0.9);
+      // TFLAGNAME:6 = 当前助手
+      (1 - juel_type * (temp === cid || era.get('tflag:6') === cid) * 0.9);
   }
 }
 
@@ -214,14 +215,18 @@ module.exports = {
         const p_shame =
           inmon.on(plugin_enum.sls) || inmon.on(plugin_enum.khn)
             ? 0
-            : j_body / 50 + j_shame / 2 + j_spirit / 25 - j_meek / 5;
+            : // 限制因为快感获得的羞耻刻印
+              Math.min(j_body / 50 + j_spirit / 25, 1200) +
+              j_shame / 2 -
+              j_meek / 5;
         if (!l_inmon) {
           if ((p_pleasure >= 4500 || total_ex >= 6) && l_pleasure < 3) {
-            era.set(`nowex:${cid}:欢愉获取`, 3 - l_pleasure);
+            // EXNAME:65 = 欢愉获取
+            era.set(`nowex:${cid}:65`, 3 - l_pleasure);
           } else if ((p_pleasure >= 3000 || total_ex >= 4) && l_pleasure < 2) {
-            era.set(`nowex:${cid}:欢愉获取`, 2 - l_pleasure);
+            era.set(`nowex:${cid}:65`, 2 - l_pleasure);
           } else if ((p_pleasure >= 1500 || total_ex >= 2) && l_pleasure < 1) {
-            era.set(`nowex:${cid}:欢愉获取`, 1);
+            era.set(`nowex:${cid}:65`, 1);
           }
         }
         if (
@@ -229,31 +234,35 @@ module.exports = {
           ((g_meek >= 20000 || j_meek >= 2250) && l_meek < 2) ||
           ((g_meek >= 15000 || j_meek >= 1500) && l_meek < 1)
         ) {
-          era.set(`nowex:${cid}:同心获取`, 1);
+          // EXNAME:67 = 同心获取
+          era.set(`nowex:${cid}:67`, 1);
         }
         if (!inmon.on(plugin_enum.meek)) {
           if ((g_pain >= 15000 || p_pain >= 2750) && l_pain < 3) {
-            era.set(`nowex:${cid}:苦痛获取`, 3 - l_pain);
+            // EXNAME:68 = 苦痛获取
+            era.set(`nowex:${cid}:68`, 3 - l_pain);
           } else if ((g_pain >= 11250 || p_pain >= 2000) && l_pain < 2) {
-            era.set(`nowex:${cid}:苦痛获取`, 2 - l_pain);
+            era.set(`nowex:${cid}:68`, 2 - l_pain);
           } else if ((g_pain >= 7500 || p_pain >= 1250) && l_pain < 1) {
-            era.set(`nowex:${cid}:苦痛获取`, 1);
+            era.set(`nowex:${cid}:68`, 1);
           }
           if ((g_shame >= 10000 || p_shame >= 2750) && l_shame < 3) {
-            era.set(`nowex:${cid}:羞耻获取`, 3 - l_shame);
+            // EXNAME:69 = 羞耻获取
+            era.set(`nowex:${cid}:69`, 3 - l_shame);
           } else if ((g_shame >= 7500 || p_shame >= 2000) && l_shame < 2) {
-            era.set(`nowex:${cid}:羞耻获取`, 2 - l_shame);
+            era.set(`nowex:${cid}:69`, 2 - l_shame);
           } else if ((g_shame >= 5000 || p_shame >= 1250) && l_shame < 1) {
-            era.set(`nowex:${cid}:羞耻获取`, 1);
+            era.set(`nowex:${cid}:69`, 1);
           }
         }
         if (!inmon.on(plugin_enum.meek) && !inmon.on(plugin_enum.rel_lock)) {
           if ((g_hate >= 10000 || j_hate >= 3200) && l_hate < 3) {
-            era.set(`nowex:${cid}:反抗获取`, 3 - l_hate);
+            // EXNAME:70 = 反抗获取
+            era.set(`nowex:${cid}:70`, 3 - l_hate);
           } else if ((g_hate >= 7500 || j_hate >= 2400) && l_hate < 2) {
-            era.set(`nowex:${cid}:反抗获取`, 2 - l_hate);
+            era.set(`nowex:${cid}:70`, 2 - l_hate);
           } else if ((g_hate >= 5000 || j_hate >= 1600) && l_hate < 1) {
-            era.set(`nowex:${cid}:反抗获取`, 1);
+            era.set(`nowex:${cid}:70`, 1);
           }
         }
       }

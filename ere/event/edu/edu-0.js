@@ -24,6 +24,7 @@ const {
 const check_team_limit = require('#/system/chara/sys-check-team-limit');
 const sys_get_random_uma_god = require('#/system/chara/sys-get-random-uma-god');
 const sys_rape_in_sleeping = require('#/system/ero/sys-rape-in-sleeping');
+const global_achievement = require('#/system/global/sys-calc-achievement');
 const {
   sys_change_attr_and_print,
   sys_change_lust,
@@ -31,6 +32,7 @@ const {
   sys_reg_race,
 } = require('#/system/sys-calc-base-cflag');
 const {
+  sys_get_callname,
   sys_get_colored_callname,
   sys_like_chara,
   sys_love_uma,
@@ -66,8 +68,10 @@ const { max_chara_id } = require('#/data/other-const');
 module.exports = class extends StrangeDayEvents {
   get dict() {
     return {
-      YOU: get('callname:0:-1'),
-      UMA: get('flag:角色性别') === 1 ? '马郎' : '马娘',
+      YOU: get('callname:0:-2'),
+      ...(get('flag:角色性别') === 1
+        ? { UMA: '马郎', SHE: '他' }
+        : { UMA: '马娘', SHE: '她' }),
     };
   }
 
@@ -215,13 +219,19 @@ module.exports = class extends StrangeDayEvents {
         await printAndWait('一切如常……或有不同？');
         await printAndWait('自己……做了什么来着？');
       }
-      second_list.forEach((e) => {
-        set(`cflag:${e}:育成回合计时`, 'x');
-        reset_chara(e);
-        get_custom_check(e).check_second_chance();
+      second_list.forEach((cid) => {
+        // CFLAGNAME:48 = 育成回合计时
+        set(`cflag:${cid}:48`, 'x');
+        // CFLAGNAME:49 = 育成次数
+        if (get(`cflag:${cid}:49`) === 7) {
+          global_achievement.chan_mor = 1;
+        }
+        reset_chara(cid);
+        get_custom_check(cid).check_second_chance();
       });
     }
-    set('flag:初见重复育成', 2);
+    // FLAGNAME:32 = 初见重复育成
+    set('flag:32', 2);
   }
 
   /**
@@ -867,5 +877,35 @@ module.exports = class extends StrangeDayEvents {
     }
     new MyEduMarks().big_sale = get_random_value(10, 15);
     return true;
+  }
+
+  /** @param {CharaTalk} me */
+  async justice(me) {
+    const dict = this.dict;
+    dict.T_SEX = get('cflag:301:性别') === 1 ? '秘书' : '小姐';
+    dict.TOKINO = sys_get_callname(0, 301);
+    dict.Y_A_TITLE = me.adult_sex_title;
+    await print_event_name('路见不平', me);
+    switch ((await kojo['JUSTICE'](dict))[0]) {
+      case 1:
+        println();
+        add('flag:当前马币', 100);
+        await printAndWait('获得了 100 马币！');
+        break;
+      case 2:
+        println();
+        add('item:马跳Z', 1);
+        await printAndWait('获得了【马跳Z】！');
+        break;
+      case 3:
+        add('maxbase:0:精力', 100);
+        if (
+          all_reward_in_event(0, {
+            base: JSON.parse('{"精力":200}'),
+          })
+        ) {
+          await waitAnyKey();
+        }
+    }
   }
 };

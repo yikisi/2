@@ -13,7 +13,7 @@ module.exports = {
       [
         diamond_lord,
         '「',
-        ...(content instanceof Array ? content : [content]),
+        ...(Array.isArray(content) ? content : [content]),
         '」',
       ],
       { color: diamond_lord.color },

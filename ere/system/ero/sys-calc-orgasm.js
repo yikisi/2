@@ -258,11 +258,14 @@ async function sys_calc_orgasm(shown, ...ids) {
                     era.get(`status:${cid}:马跳Z`) > 0 ||
                     era.get(`status:${cid}:马跳S`) > 0
                     ? 1 + 1
-                    : 8 +
-                        Math.ceil(times / 2) -
-                        Math.floor(3 * wp_ratio) -
-                        Math.floor((era.get(`abl:${cid}:阴茎耐性`) + 1) / 2) -
-                        (era.get(`talent:${cid}:早泄`) > 0),
+                    : Math.max(
+                        8 +
+                          Math.ceil(times / 2) -
+                          Math.floor(3 * wp_ratio) -
+                          Math.floor((era.get(`abl:${cid}:阴茎耐性`) + 1) / 2) -
+                          (era.get(`talent:${cid}:早泄`) > 0),
+                        1 + 1,
+                      ),
                 );
               }
             }
@@ -304,8 +307,9 @@ async function sys_calc_orgasm(shown, ...ids) {
         }
         if (i_cum) {
           // 每级耐性减少10%高潮时体力精力消耗
-          cost.stamina += tmp_cost.stamina * (1 - 0.1 * abl) * times;
-          cost.time += tmp_cost.time * (1 - 0.1 * abl) * times;
+          cost.stamina +=
+            tmp_cost.stamina * Math.max(1 - 0.1 * abl, 0.01) * times;
+          cost.time += tmp_cost.time * Math.max(1 - 0.1 * abl, 0.01) * times;
           // 专门针对寸止的情况
           // 寸止时不计算高潮次数
           // 不管肉棒高潮了几次，只射一次精
@@ -829,8 +833,15 @@ async function sys_calc_orgasm(shown, ...ids) {
         damage_buff * orgasm_count -
         wp_ratio * wp_coefficient +
         0.1 * (era.get(`tcvar:${cid}:余韵`) > 0);
-      era.add(`nowex:${cid}:体力消耗`, cost.stamina * reduce_cost);
-      era.add(`nowex:${cid}:精力消耗`, cost.time * reduce_cost);
+      if (cost.stamina > 0) {
+        era.add(
+          `nowex:${cid}:体力消耗`,
+          Math.max(cost.stamina * reduce_cost, 1),
+        );
+      }
+      if (cost.time > 0) {
+        era.add(`nowex:${cid}:精力消耗`, Math.max(cost.time * reduce_cost, 1));
+      }
       // 宝珠结算
       pleasure_list.forEach((part) => {
         const part_name = part_names[part];

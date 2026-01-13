@@ -5,10 +5,7 @@
  */
 const era = require('#/era-electron');
 
-const {
-  sys_get_callname,
-  sys_get_colored_callname,
-} = require('#/system/sys-calc-chara-others');
+const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const NormalCommandLines = require('#/event/ero/common/normal/normal-common');
@@ -19,12 +16,12 @@ const PamaNormalFucking = require('#/event/ero/ero-lines-64/normal-fucking');
 const PamaNormalMakingOuts = require('#/event/ero/ero-lines-64/normal-making-outs');
 const PamaNormalSm = require('#/event/ero/ero-lines-64/normal-sm');
 const { i_pama_yandere } = require('#/event/snippets/64');
+const generate_dictionary = require('#/event/snippets/generate-dictionary');
 const print_event_name = require('#/event/snippets/print-event-name');
 const print_name_and_show_kojo = require('#/event/snippets/print-name-and-show-kojo');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const { get_chara_color } = require('#/data/chara-colors');
 const { mark_enum } = require('#/data/ero/mark-const');
 const { unexpected_pregnant_enum } = require('#/data/ero/status-const');
 const PamaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-64');
@@ -47,17 +44,13 @@ class PamaNormalLines extends NormalCommandLines {
 }
 
 module.exports = class extends CustomizedEro {
-  constructor(chara_id) {
-    super(chara_id, { normal: true });
+  constructor(cid) {
+    super(cid, { normal: true });
     this.normal = new PamaNormalLines(this);
   }
 
   get #dict() {
-    const o = {};
-    o['代表色'] = get_chara_color(this.id);
-    o['善信'] = era.get(`callname:${this.id}:-2`);
-    o['称呼'] = sys_get_callname(this.id, 0);
-    o.T = era.get(`callname:0:-2`);
+    const o = generate_dictionary(this.id, { call: true });
     o.half_life = +i_pama_yandere();
     return o;
   }

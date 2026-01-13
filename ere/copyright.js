@@ -20,7 +20,7 @@ function get_copyright_entry(cid, _suffix) {
 function generate_copyrights() {
   const line_copyrights = [
     [[get_copyright_entry(1, '招募')], 'wwm'],
-    [[get_copyright_entry(2, '招募')], '牛蛙煲'],
+    [[get_copyright_entry(2)], '牛蛙煲'],
     [[get_copyright_entry(3)], '天马闪光蹄'],
     [
       [get_copyright_entry(4), { isDivider: true }, get_copyright_entry(46)],
@@ -62,7 +62,7 @@ function generate_copyrights() {
     [[get_copyright_entry(60)], '红红火火恍惚'],
     [[get_copyright_entry(64)], ['KUN', { isDivider: true }, 'Bottle']],
     [
-      [get_copyright_entry(67)],
+      [get_copyright_entry(67, '临时')],
       [
         '某知名手游公司编剧',
         { isDivider: true },
@@ -82,7 +82,7 @@ function generate_copyrights() {
       ],
     ],
     [[get_copyright_entry(71)], '洛洛'],
-    [[get_copyright_entry(74, '招募')], 'KUN'],
+    [[get_copyright_entry(74)], 'KUN'],
     [[get_copyright_entry(86, '部分地下室')], 'イーウィヤ'],
     [[get_copyright_entry(89, '招募、地下室')], '無奈'],
     [[get_copyright_entry(100)], '夕阳红艺术团小组长-赤红彗星红桃爵士Q先生'],
@@ -126,6 +126,8 @@ function generate_copyrights() {
         '念来过倒要你',
         { isBr: true },
         'Mr.E.',
+        { isDivider: true },
+        '牛蛙煲',
         { isDivider: true },
         '黑奴队长',
       ],
@@ -321,11 +323,10 @@ function generate_copyrights() {
   buffer.push([]);
   let tmp = buffer.at(-1);
   for (const a of line_copyrights) {
-    const title =
-      a[0] instanceof Array
-        ? a[0].map((e) => (e instanceof Object ? e : { content: e }))
-        : [{ content: a[0] }];
-    const names = a[1] instanceof Array ? a[1] : [a[1]];
+    const title = Array.isArray(a[0])
+      ? a[0].map((e) => (typeof e === 'object' ? e : { content: e }))
+      : [{ content: a[0] }];
+    const names = Array.isArray(a[1]) ? a[1] : [a[1]];
     tmp.push({
       config: { width: 8 },
       content: [

@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const global_achievement = require('#/system/global/sys-calc-achievement');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
 const { add_event, cb_enum } = require('#/event/queue');
@@ -54,7 +55,8 @@ function transform(event_marks) {
 module.exports = {
   /** @param {LunaEduMarks} edu_marks */
   good_end(edu_marks) {
-    if (edu_marks.emperor) {
+    global_achievement.c_luna1 = 1;
+    if (edu_marks.emperor > 0) {
       transform(edu_marks);
     }
     era.set('callname:17:-1', era.set('callname:17:-2', '鲁铎象征'));

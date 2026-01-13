@@ -5,6 +5,7 @@ const {
   sys_check_yandere,
 } = require('#/system/chara/sys-calc-cheat');
 const { add_juel } = require('#/system/ero/sys-calc-juel');
+const global_achievement = require('#/system/global/sys-calc-achievement');
 const { sys_change_pressure } = require('#/system/sys-calc-base-cflag');
 const {
   sys_like_chara,
@@ -74,6 +75,7 @@ handlers[ero_hooks.prison] = (cid) => {
       !era.get(`talent:${cid}:病娇`) &&
       Math.random() < 0.4 + 0.2 * era.get('flag:极端行为限制')
     ) {
+      global_achievement.yandere = 1;
       yandere = true;
     }
   }

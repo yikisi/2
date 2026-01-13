@@ -778,7 +778,7 @@ module.exports = {
       .filter((e) => e)
       .map((e) => {
         const print_obj =
-          e instanceof Object
+          typeof e === 'object'
             ? e
             : {
                 color: buff_colors[2],

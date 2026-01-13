@@ -12,6 +12,8 @@ const print_name_and_show_kojo = require('#/event/snippets/print-name-and-show-k
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const event_hooks = require('#/data/event/event-hooks');
+const EventMarks = require('#/data/event/event-marks');
 const recruit_flags = require('#/data/event/recruit-flags');
 
 module.exports = class extends CustomizedRecruit {
@@ -33,6 +35,7 @@ module.exports = class extends CustomizedRecruit {
       return true;
     } else {
       await print_name_and_show_kojo('命定的安排？', dj, kojo, dict);
+      EventMarks.get(0).sub(event_hooks.recruit);
       era.set('flag:物色对象', 0);
       era.set(`cflag:${this.id}:招募状态`, recruit_flags.yes);
     }

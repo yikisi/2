@@ -30,7 +30,7 @@ module.exports = class extends CustomizedRecruit {
       glasse = get_chara_talk(202),
       cocon = get_chara_talk(203),
       temp = get('cflag:306:招募状态');
-    if (temp instanceof Array && temp[0] >= 3 && temp[1] >= 3) {
+    if (Array.isArray(temp) && temp[0] >= 3 && temp[1] >= 3) {
       await print_event_name('成果', riko);
       await printAndWait([
         glasse.get_colored_name(),

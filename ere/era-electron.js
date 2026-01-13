@@ -84,7 +84,7 @@
  * @property {number} [width] width of the line, 1-24, 24 in default
  */
 /**
- * @typedef {string|(PrintedSpan|{isBlank:number}|{isBr:number}|{isDivider:boolean}|string)[]} TextContent
+ * @typedef {string|(PrintedSpan|{isBlank:number|true}|{isBr:number|true}|{isDivider:boolean}|string)[]} TextContent
  */
 /**
  * @typedef TextObject
@@ -125,6 +125,18 @@
  * @type {Object}
  * @property {GridObject[]} columns
  * @property {ColumnConfig} [config]
+ */
+/**
+ * @typedef {'topleft'|'topcenter'|'top'|'topright'|'centerleft'|'left'|'center'|'centerright'|'right'|'bottomleft'|'bottomcenter'|'bottom'|'bottomright'|1|2|3|4|5|6|7|8|9} OBPosition
+ */
+
+/**
+ * @typedef KojoFunction
+ * @type {function(Record<string,any>=):(number[]|Promise<number[]>)}
+ */
+/**
+ * @typedef KojoFile
+ * @type {Record<string,KojoFunction>}
  */
 
 const era = {
@@ -175,9 +187,13 @@ const era = {
    * @param delay time to delay, ms
    * @return {Promise<unknown>}
    */
-  delay(delay) {
-    return new Promise((resolve) => setTimeout(() => resolve(), delay));
-  },
+  delay: (function () {
+    function f(delay) {
+      return new Promise((resolve) => setTimeout(() => resolve(), delay));
+    }
+    f._s = true;
+    return f;
+  })(),
   /**
    * draw a divider to separate lines. the divider is also a line
    * @param {DividerConfig} [config] config of the line
@@ -253,7 +269,7 @@ const era = {
   async loadGlobal() {},
   logger: {
     assert(checkVal, aimVal) {
-      if (checkVal !== aimVal && era.version.engine === undefined) {
+      if (checkVal !== aimVal && era.version.engine === void 0) {
         console.debug(
           '[ASSERT]',
           new Error(`assert failed! aim val: ${aimVal}, got val: ${checkVal}`)
@@ -268,7 +284,7 @@ const era = {
      * @param {any} msg
      */
     debug(msg) {
-      if (era.version.engine === undefined) {
+      if (era.version.engine === void 0) {
         console.debug('[DEBUG]', msg);
         return;
       }
@@ -280,7 +296,7 @@ const era = {
      * @param {any} [stack]
      */
     error(msg, stack) {
-      if (era.version.engine === undefined) {
+      if (era.version.engine === void 0) {
         console.error('[ERROR]', msg, stack);
         return;
       }
@@ -291,7 +307,7 @@ const era = {
      * @param {any} msg
      */
     info(msg) {
-      if (era.version.engine === undefined) {
+      if (era.version.engine === void 0) {
         console.log('[INFO]', msg);
         return;
       }
@@ -303,7 +319,7 @@ const era = {
      * @param {any} [stack]
      */
     warn(msg, stack) {
-      if (era.version.engine === undefined) {
+      if (era.version.engine === void 0) {
         console.warn('[WARN]', msg, stack);
         return;
       }
@@ -505,6 +521,15 @@ const era = {
   // eslint-disable-next-line no-unused-vars
   setAlign(textAlign) {},
   /**
+   * @param {string} [name] set undefined to clear background
+   * @param {Object} [config]
+   * @param {number} config.[opacity]
+   * @param {OBPosition} config.[position]
+   * @param {'contain'|'cover'} config.[fit]
+   */
+  // eslint-disable-next-line no-unused-vars
+  setBack(name, config) {},
+  /**
    * set default horizontal align of inColRows
    * @param {'start'|'end'|'center'|'space-around'|'space-between'|'space-evenly'} align REQUIRED the vertical align: start (default), end, center, space-around, space-between or space-evenly
    * @returns {void}
@@ -512,6 +537,7 @@ const era = {
   // eslint-disable-next-line no-unused-vars
   setHorizontalAlign(align) {},
   /**
+   * @deprecated replaced with setOpacity
    * @param {string} [maskName]
    * @param {number} [opacity]
    */
@@ -524,6 +550,15 @@ const era = {
    */
   // eslint-disable-next-line no-unused-vars
   setOffset(offset) {},
+  /**
+   * @param {string} [name] set undefined to clear overlay
+   * @param {Object} [config]
+   * @param {number} config.[opacity]
+   * @param {OBPosition} config.[position]
+   * @param {'contain'|'cover'} config.[fit]
+   */
+  // eslint-disable-next-line no-unused-vars
+  setOverlay(name, config) {},
   /**
    * set the title of the window
    * @param {string} title REQUIRED
@@ -557,7 +592,7 @@ const era = {
    * @returns {boolean} if debug
    */
   toggleDebug() {},
-  version: { sdk: '4.4.0', engine: undefined },
+  version: { sdk: '4.7.0', engine: void 0 },
   /**
    * wait any key from user
    * @returns {Promise<void>} a promise of nothing, please use await
@@ -566,9 +601,9 @@ const era = {
 };
 
 Object.keys(era).forEach((key) => {
-  if (era[key] instanceof Function && key !== 'delay') {
+  if (typeof era[key] === 'function' && !era[key]._s) {
     era[key] = (...args) => {
-      if (era.version.engine === undefined) {
+      if (era.version.engine === void 0) {
         return console.log(
           '[ERROR] apis has not been injected!',
           new Error().stack.split('\n').slice(2).join('\n'),

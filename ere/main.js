@@ -18,6 +18,7 @@
 const era = require('#/era-electron');
 
 const { set_chara_ero_image } = require('#/system/ero/sys-calc-ero-image');
+const global_achievement = require('#/system/global/sys-calc-achievement');
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
 
 const new_game = require('#/page/new-game/page-new-game');
@@ -35,6 +36,7 @@ const { generate_copyrights, get_copyright_entry } = require('#/copyright');
 const { get_chara_color } = require('#/data/chara-colors');
 const notes = require('#/data/notes.json');
 const { first_child_id } = require('#/data/other-const');
+
 const { res_version } = require('#/versions');
 
 module.exports = async () => {
@@ -215,6 +217,10 @@ module.exports = async () => {
       },
     },
     {
+      c: '游戏成就',
+      h: global_achievement.show.bind(global_achievement),
+    },
+    {
       c: '角色成就',
       async h() {
         era.printMultiColumns([
@@ -278,7 +284,11 @@ module.exports = async () => {
             );
           }
         }
-        era.printButton('返回', 0, { align: 'center', hideInput: true });
+        era.printButton('返回', 0, {
+          align: 'center',
+          disableContinue: true,
+          hideInput: true,
+        });
         await era.input();
       },
     },
@@ -289,19 +299,22 @@ module.exports = async () => {
         let c_flag = true;
         era.setAlign('center');
         era.setHorizontalAlign('space-evenly');
-        era.printMultiColumns(copyrights[0], { flush: true });
+        const bottom_columns = [
+          { content: '\n', type: 'text' },
+          {
+            accelerator: 0,
+            config: { align: 'center', disableWarning: true },
+            content: '跳过',
+            type: 'button',
+          },
+        ];
+        era.printMultiColumns([...copyrights[0], ...bottom_columns], {
+          flush: true,
+        });
         era.input({ hideInput: true }).then(() => (c_flag = false));
         for (let i = 2; i < copyrights.length && c_flag; ++i) {
           await era.delay(800);
-          era.replaceInColRows(...copyrights.slice(0, i), [
-            { content: '\n', type: 'text' },
-            {
-              accelerator: 0,
-              config: { align: 'center', disableWarning: true },
-              content: '跳过',
-              type: 'button',
-            },
-          ]);
+          era.replaceInColRows(...copyrights.slice(0, i), bottom_columns);
         }
         if (c_flag) {
           await era.delay(800);

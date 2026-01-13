@@ -115,9 +115,9 @@ module.exports = class extends CustomizedCheck {
       if (
         get('cflag:0:位置') === 0 &&
         get('flag:当前位置') !== location_enum.basement &&
-        sys_filter_chara('cflag', '招募状态', recruit_flags.yes).filter(
-          (e) => get(`cflag:${e}:成长阶段`) >= 2 && e !== 32,
-        ).length > 1
+        in_team_list.filter(
+          (e) => e > 0 && get(`cflag:${e}:成长阶段`) >= 2 && e !== 32,
+        ).length > 0
       ) {
         add_event(
           event_hooks.week_start,
@@ -165,6 +165,24 @@ module.exports = class extends CustomizedCheck {
         event_hooks.out_shopping,
         new EventObject(0, cb_enum.edu).set_arg('big_sale'),
       );
+    }
+    if (
+      !my_marks.justice &&
+      in_team_list.filter(
+        (cid) =>
+          cid > 0 &&
+          cid < 1000 &&
+          get(`cflag:${cid}:成长阶段`) >= 2 &&
+          get(`cflag:${cid}:种族`) > 0 &&
+          get(`relation:${cid}:0`) <=
+            get(`love:${cid}`) * (get('flag:极端行为限制') || 1),
+      ).length > 0
+    ) {
+      add_event(
+        event_hooks.week_start,
+        new EventObject(0, cb_enum.edu).set_arg('justice'),
+      );
+      my_marks.justice = 1;
     }
   }
 };

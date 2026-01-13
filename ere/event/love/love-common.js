@@ -340,9 +340,7 @@ class CustomizedLove {
   async run(stage, extra_flag, event_object) {
     let handler =
       this[
-        event_object.arg instanceof Array
-          ? event_object.arg[0]
-          : event_object.arg
+        Array.isArray(event_object.arg) ? event_object.arg[0] : event_object.arg
       ];
     if (handler !== undefined) {
       return await handler.call(

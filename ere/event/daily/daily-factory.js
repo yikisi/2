@@ -13,6 +13,7 @@ const current = new Date().getTime();
 
 // GENERATED START
 cons_dict[0] = require('#/event/daily/daily-0');
+cons_dict[2] = require('#/event/daily/daily-2');
 cons_dict[3] = require('#/event/daily/daily-3');
 cons_dict[4] = require('#/event/daily/daily-4');
 cons_dict[6] = require('#/event/daily/daily-6');
@@ -34,6 +35,7 @@ cons_dict[60] = require('#/event/daily/daily-60');
 cons_dict[64] = require('#/event/daily/daily-64');
 cons_dict[68] = require('#/event/daily/daily-68');
 cons_dict[71] = require('#/event/daily/daily-71');
+cons_dict[74] = require('#/event/daily/daily-74');
 cons_dict[85] = require('#/event/daily/daily-85');
 cons_dict[86] = require('#/event/daily/daily-86');
 cons_dict[100] = require('#/event/daily/daily-100');

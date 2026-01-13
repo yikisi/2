@@ -20,7 +20,7 @@ const acute_school_atrium = require('#/event/daily/daily-events-100/school-atriu
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
 const select_action_in_station = require('#/event/daily/snippets/select-action-in-station');
 const add_jewel_reward = require('#/event/snippets/add-jewel-reward');
-const check_slavery = require('#/event/snippets/check-slavery');
+const { check_slavery } = require('#/event/snippets/check-slavery');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
 

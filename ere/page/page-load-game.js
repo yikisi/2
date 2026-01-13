@@ -66,6 +66,14 @@ function check_titles(...ids) {
     });
 }
 
+function set_image_t(cid) {
+  if (era.getAddedCharacters().indexOf(cid) !== -1) {
+    // CSTRNAME:13 = 头像T
+    // CSTRNAME:10 = 头像
+    era.set(`cstr:${cid}:13`, era.get(`staticcstr:${cid}:10`));
+  }
+}
+
 /**
  * load game
  * @return {Promise<boolean>} if true, tell main.js to call homepage
@@ -136,9 +144,9 @@ module.exports = async () => {
             flag_load_game = false;
             sys_load_game();
             // 向前兼容
-            // 大拓太阳神育成目标错误、贵妇人称号bug
             const version = era.get('version');
             if (version < 1011) {
+              // 大拓太阳神育成目标错误、贵妇人称号错误
               check_titles(65, 116);
             }
             if (version < 1100) {
@@ -344,7 +352,7 @@ module.exports = async () => {
             if (version <= 1311) {
               era.getAddedCharacters().forEach((e) => {
                 const titles = era.get(`cstr:${e}:称号`);
-                if (titles instanceof Array) {
+                if (Array.isArray(titles)) {
                   titles.forEach((t) => t.s === false && delete t.s);
                 }
                 if (
@@ -550,13 +558,19 @@ module.exports = async () => {
                   EventMarks.get(0).sub(event_hooks.out_shopping);
                 }
               }
+              set_image_t(21);
+            }
+            if (version <= 2172) {
+              check_titles(33, 113);
+              set_image_t(7);
+              set_image_t(25);
             }
             if (version < era.get('gamebase').version) {
               era.getAddedCharacters().forEach((cid) => {
                 if (cid > 0) {
                   const t_table = era.get(`chara:${cid}`)?.talent;
                   if (
-                    t_table instanceof Object &&
+                    typeof t_table === 'object' &&
                     Object.entries(t_table)
                       .filter(([t]) => Number(t) <= 20)
                       .reduce(

@@ -41,6 +41,13 @@ class MyEduMarks extends EduEventMarks {
   orgy;
   // 商店街大甩卖
   big_sale;
+  // 路见不平
+  justice;
+  // 成就：调教大师系列
+  a_s_prg;
+  a_s_mon;
+  a_s_frn;
+  a_s_ass;
 
   constructor() {
     super(0);
