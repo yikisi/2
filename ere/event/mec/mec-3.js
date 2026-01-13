@@ -75,10 +75,9 @@ module.exports = class extends CustomizedMec {
     if (era.get('status:3:100') > 0) {
       return [
         {
+          ...i18n().kojo.get_titled_content(this.id, 'hurt'),
           color: buff_colors[3],
-          content: i18n().kojo[this.id].hurt,
           fontWeight: 'bold',
-          title: i18n().kojo[this.id].hurt_desc,
         },
       ];
     }

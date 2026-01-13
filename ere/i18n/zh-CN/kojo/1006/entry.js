@@ -11,7 +11,7 @@ class I18nKojo1006 {
     return `转学生 (${timer})`;
   }
   transfer_desc(timer) {
-    return `${timer}回合内训练效果+100%`;
+    return `${timer} 回合内训练效果+100%`;
   }
 
   report_arim_kin(oguri) {

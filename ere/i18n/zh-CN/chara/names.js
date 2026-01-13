@@ -2,20 +2,25 @@ class I18nNames {
   // Callname
   me = '我';
   you = '你';
+  you_mul = '你们';
   he = '他';
+  he_mul = '他们';
   she = '她';
+  she_mul = '她们';
   mr = '先生';
   miss = '小姐';
   dad = '爸爸';
   mom = '妈妈';
   boy = '男孩';
+  girl = '女孩';
   son = '儿子';
   daughter = '女儿';
-  girl = '女孩';
   teenager = '少年';
   frail = '少女';
   male = '男性';
   female = '女性';
+  brothers = '兄弟';
+  sisters = '姐妹';
   elder_brother = '哥哥';
   elder_sister = '姐姐';
   younger_brother = '弟弟';
@@ -389,6 +394,7 @@ class I18nNames {
   l11601 = '传奇贵妇人';
   c01701 = '美浦神赞';
   c01702 = '疾驰戴拿';
+  c02101 = '秋津帝王';
   900102 = '丰收时刻';
   900103 = '傲视一切';
   900202 = '北方风味';

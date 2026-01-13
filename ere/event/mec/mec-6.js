@@ -44,25 +44,22 @@ module.exports = class extends CustomizedMec {
       const color = get_chara_color(this.id);
       const ret = [
         {
+          ...i18n().kojo.get_titled_content(this.id, 'cinderella'),
           color,
-          content: i18n().kojo[this.id].cinderella,
-          title: i18n().kojo[this.id].cinderella_desc,
         },
       ];
       // CFLAGNAME:49 = 育成次数
       if (era.get(`cflag:${this.id}:49`) === 0) {
         ret.push({
+          ...i18n().kojo.get_titled_content(this.id, 'latecomer'),
           color,
-          content: i18n().kojo[this.id].latecomer,
-          title: i18n().kojo[this.id].latecomer_desc,
         });
       }
       const { train_buff } = new OguriEduMarks();
       if (train_buff > 0) {
         ret.push({
+          ...i18n().kojo.get_titled_content(this.id, 'transfer', train_buff),
           color,
-          content: i18n().kojo[this.id].transfer(train_buff),
-          title: i18n().kojo[this.id].transfer_desc(train_buff),
         });
       }
       return ret;

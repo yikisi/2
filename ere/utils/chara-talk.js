@@ -68,11 +68,12 @@ class CharaTalk {
     return __(`name.${n}`, n);
   }
 
-  /** @returns {string} */
+  /** @return {string} */
   get color() {
     return this._color || get_chara_color(this.id);
   }
 
+  /** @return {string} */
   get full_name() {
     if (this.actual_name === this.name) {
       return this.name;
@@ -110,12 +111,26 @@ class CharaTalk {
     return this.sex_code === 1 ? i18n().name.mr : i18n().name.miss;
   }
 
+  get couple_title() {
+    if (!this.id) {
+      return i18n().name.you_mul;
+    }
+    if (this.sex_code !== 1) {
+      return i18n().name.she_mul;
+    }
+    return i18n().name.he_mul;
+  }
+
   get elder_sibling_sex_title() {
-    return this.sex_code === 1 ? '哥哥' : '姐姐';
+    return this.sex_code === 1
+      ? i18n().name.elder_brother
+      : i18n().name.elder_sister;
   }
 
   get younger_sibling_sex_title() {
-    return this.sex_code === 1 ? '弟弟' : '妹妹';
+    return this.sex_code === 1
+      ? i18n().name.younger_brother
+      : i18n().name.younger_sister;
   }
 
   get phy_sex_title() {
@@ -123,7 +138,7 @@ class CharaTalk {
   }
 
   get siblings_sex_title() {
-    return this.sex_code === 1 ? '兄弟' : '姐妹';
+    return this.sex_code === 1 ? i18n().name.brothers : i18n().name.sisters;
   }
 
   get child_sex_title() {
@@ -157,7 +172,7 @@ class CharaTalk {
   get_colored_full_name() {
     return {
       color: this.color,
-      content: this.get_full_name(),
+      content: this.full_name,
       fontWeight: 'bold',
     };
   }
@@ -190,14 +205,11 @@ class CharaTalk {
   /** 成人角色的称呼 */
   get_adult_sex_title = () => this.adult_sex_title;
 
-  /** 婴儿角色的称呼 */
-  get_baby_sex_title = () => (this.sex_code - 1 ? '女婴' : '男婴');
-
   /** 孩童角色的称呼 */
   get_child_sex_title = () => this.child_sex_title;
 
   // 以角色为首的复数形式人称代词
-  get_couple_title = () => (this.id === 0 ? '你们' : `${this.sex}们`);
+  get_couple_title = () => this.couple_title;
 
   /** 角色生理性别的称呼 */
   get_phy_sex_title = () => this.phy_sex_title;

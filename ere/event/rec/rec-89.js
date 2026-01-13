@@ -26,10 +26,10 @@ module.exports = class extends CustomizedRecruit {
     const grand = get_chara_talk(this.id);
     const me = get_chara_talk(0);
     dict['你'] = era.get('callname:0:-2');
-    dict['马娘'] = grand.get_uma_sex_title();
-    dict['少女'] = grand.get_teen_sex_title();
+    dict['马娘'] = grand.uma_sex_title;
+    dict['少女'] = grand.teen_sex_title;
     dict['她'] = grand.sex;
-    dict['女孩'] = grand.get_baby_sex_title();
+    dict['女孩'] = grand.child_sex_title;
     dict['代表色'] = grand.color;
     switch (stage) {
       case event_hooks.recruit:

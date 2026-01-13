@@ -9,6 +9,7 @@ module.exports = class extends I18nNames {
 
   c01701 = 'Miho Shinzan';
   c01702 = 'Gallop Dyna';
+  c02101 = 'Akitsu Teio';
   900102 = 'Tokino Minoru';
   900202 = 'Northern Taste';
   904302 = 'Dictus';

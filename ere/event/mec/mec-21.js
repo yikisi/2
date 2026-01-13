@@ -8,6 +8,8 @@ const LegendUmaFilter = require('#/data/race/model/legend-uma-filter');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
+const { i18n } = require('#/i18n/selector');
+
 module.exports = class extends CustomizedMec {
   get_action_debuff() {
     const edu_marks = new TamaEduMarks();
@@ -19,20 +21,28 @@ module.exports = class extends CustomizedMec {
   }
 
   get_maxbase_buff() {
-    return -200 * (new TamaEduMarks().lightning === 1);
+    if (new TamaEduMarks().lightning === 1) {
+      return -200;
+    }
+    return 0;
   }
 
   get_pressure_buff() {
-    return 0.1 * (new TamaEduMarks().lightning === 1);
+    if (new TamaEduMarks().lightning === 1) {
+      return 0.1;
+    }
+    return 0;
   }
 
   get_race_contestants(info) {
-    switch (era.get('flag:当前赛事')) {
+    // FLAGNAME:7 = 当前赛事
+    switch (era.get('flag:7')) {
       case race_enum.takz_kin:
-        if (era.get('cflag:21:育成回合计时') > 96) {
+        // CFLAGNAME:48 = 育成回合计时
+        if (era.get('cflag:21:48') > 96) {
           return [
             new LegendUmaFilter(
-              '秋津帝王',
+              i18n().name.c02101,
               1.05,
               (e) =>
                 e.adapt_ground[0] >= 6 &&
@@ -47,17 +57,7 @@ module.exports = class extends CustomizedMec {
 
   get_race_finish_report(uma, race_id) {
     if (race_id === race_enum.tenn_spr) {
-      return [
-        {
-          color: uma.color,
-          content: '名副其实的白色闪电照亮全场，谁还敢瞧不起我！',
-        },
-        uma.get_colored_name(),
-        {
-          color: uma.color,
-          content: '！',
-        },
-      ];
+      return i18n().kojo[this.id].report_tenn_spr(uma.get_colored_name());
     }
     return super.get_race_finish_report(uma, race_id);
   }
@@ -69,47 +69,40 @@ module.exports = class extends CustomizedMec {
       switch (lightning) {
         default:
           ret.push({
+            ...i18n().kojo.get_titled_content(this.id, 'flash'),
             color: get_chara_color(this.id),
-            content: '闪光',
-            title: '白色闪电，开放参与所有比赛',
           });
           break;
         case 1:
           ret.push({
+            ...i18n().kojo.get_titled_content(this.id, 'lightning'),
             color: get_chara_color(this.id),
-            content: '雷殛',
             fontWeight: 'bold',
-            title:
-              '电流衰弱；训练效果-20%，体力精力上限-200，消耗+10%，压力获取+10%',
           });
           break;
         case 2:
           ret.push({
+            ...i18n().kojo.get_titled_content(this.id, 'thundercloud'),
             color: get_chara_color(this.id),
-            content: '雷云',
             fontWeight: 'bold',
-            title: '山雨欲来，目前只能参与OP级比赛',
           });
           break;
         case 3:
           ret.push({
+            ...i18n().kojo.get_titled_content(this.id, 'pilot'),
             color: get_chara_color(this.id),
-            content: '先导',
             fontWeight: 'bold',
-            title: '雷光初成，目前只能参与OP-G3级比赛',
           });
       }
       if (heal === 1) {
         ret.push({
+          ...i18n().kojo.get_titled_content(this.id, 'spartan'),
           color: get_chara_color(this.id),
-          content: '斯巴达式',
-          title: '训练效果+20%，体力精力消耗+5%',
         });
       } else if (heal === -1) {
         ret.push({
+          ...i18n().kojo.get_titled_content(this.id, 'uma_first'),
           color: get_chara_color(this.id),
-          content: '马娘优先',
-          title: '每回合自动提高干劲，体力精力消耗-10%',
         });
       }
     }
@@ -125,7 +118,8 @@ module.exports = class extends CustomizedMec {
     switch (new TamaEduMarks().lightning) {
       case 1:
         return (
-          era.get(`cflag:${this.id}:育成次数`) === 0 &&
+          // CFLAGNAME:49 = 育成次数
+          era.get(`cflag:${this.id}:49`) === 0 &&
           race_infos[race].race_class < class_enum.OP
         );
       case 2:
