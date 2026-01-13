@@ -44,8 +44,9 @@ module.exports = class extends CustomizedCheck {
         new EventObject(this.id, cb_enum.edu).set_arg('nightmare'),
       );
     } else if (
-      get(`cflag:${this.id}:育成回合计时`) >= 96 &&
-      get(`cflag:${this.id}:育成回合计时`) <= 95 + 24 &&
+      // CFLAGNAME:48 = 育成回合计时
+      get(`cflag:${this.id}:48`) >= 96 &&
+      get(`cflag:${this.id}:48`) <= 95 + 24 &&
       race_infos[extra_flag.race].race_class === class_enum.G1 &&
       extra_flag.rank <= 3 &&
       edu_marks.aim_check < 2
@@ -55,10 +56,10 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_and_get_titles(aim_check) {
-    const race_history = RaceHistory.get(this.id),
-      races = race_history.get(),
-      race_list = race_history.get_values(),
-      titles = [];
+    const race_history = RaceHistory.get(this.id);
+    const races = race_history.get();
+    const race_list = race_history.get_values();
+    const titles = [];
     if (
       race_list.filter(
         (e) => race_infos[e.race].race_class === class_enum.G1 && e.pop === 1,
@@ -79,19 +80,22 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_next_week() {
-    const edu_weeks = get(`cflag:${this.id}:育成回合计时`);
+    const edu_weeks = get(`cflag:${this.id}:48`);
     if (edu_weeks < 3 * 48) {
       const edu_marks = new OguriEduMarks();
       const event_special = new EventObject(this.id, cb_enum.edu, true);
-      const first_edu = get(`cflag:${this.id}:育成次数`) === 0;
+      // CFLAGNAME:49 = 育成次数
+      const first_edu = get(`cflag:${this.id}:49`) === 0;
       if (edu_marks.train_buff > 0) {
         edu_marks.train_buff--;
       }
+      // BASENAME:11 = 压力
       set(
-        `base:${this}:压力`,
-        Math.min(get(`base:${this}:压力`), pressure_border.depression),
+        `base:${this}:11`,
+        Math.min(get(`base:${this}:11`), pressure_border.depression),
       );
-      set(`cflag:${this.id}:干劲`, Math.max(get(`cflag:${this.id}:干劲`), -1));
+      // CFLAGNAME:40 = 干劲
+      set(`cflag:${this.id}:40`, Math.max(get(`cflag:${this.id}:40`), -1));
       switch (edu_weeks) {
         case 47 + 1:
         case 95 + 1:

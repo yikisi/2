@@ -1,143 +1,113 @@
-/**
- * @file 小栗帽 - 日常
- * @author 雞雞
- */
-const era = require('#/era-electron');
-
-const lines = require('#/event/daily/daily-6.kojo');
 const CustomizedDaily = require('#/event/daily/daily-common');
 const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
 const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
 const select_action_in_shopping_street = require('#/event/daily/snippets/select-action-in-shopping-street');
 const select_action_in_station = require('#/event/daily/snippets/select-action-in-station');
+const generate_dictionary = require('#/event/snippets/generate-dictionary');
 
-const { get_chara_color } = require('#/data/chara-colors');
+const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends CustomizedDaily {
+  get #kojo() {
+    return i18n().kojo[this.id].daily;
+  }
+
   good_morning() {
-    const dict = {};
-    dict['代表色'] = get_chara_color(this.id);
-    lines['回合开始互动对话'](dict);
+    this.#kojo['good_morning'](generate_dictionary(this.id));
+  }
+
+  select() {
+    this.#kojo['select'](generate_dictionary(this.id));
+  }
+
+  async talk() {
+    await this.#kojo['talk'](generate_dictionary(this.id));
   }
 
   async office_cook() {
-    const dict = {};
-    dict['代表色'] = get_chara_color(this.id);
-    await lines['一起做饭'](dict);
+    await this.#kojo['office_cook'](generate_dictionary(this.id));
   }
 
   async office_game() {
-    const dict = {};
-    dict['代表色'] = get_chara_color(this.id);
-    await lines['一起打游戏机'](dict);
+    await this.#kojo['office_game'](generate_dictionary(this.id));
   }
 
   async office_gift() {
-    const dict = {};
-    dict['代表色'] = get_chara_color(this.id);
-    await lines['送礼'](dict);
+    await this.#kojo['office_gift'](generate_dictionary(this.id));
   }
 
   async office_prepare() {
-    const dict = {};
-    dict['代表色'] = get_chara_color(this.id);
-    await lines['赛前准备'](dict);
+    await this.#kojo['office_prepare'](generate_dictionary(this.id));
   }
 
   async office_rest() {
-    const dict = {};
-    dict['代表色'] = get_chara_color(this.id);
-    await lines['一起休息'](dict);
+    await this.#kojo['office_prepare'](generate_dictionary(this.id));
   }
 
   async office_study() {
-    const dict = {};
-    dict['代表色'] = get_chara_color(this.id);
-    await lines['指导学习'](dict);
+    await this.#kojo['office_study'](generate_dictionary(this.id));
   }
 
   async out_church(hook) {
     hook.arg = Math.random() < 0.5;
-    const dict = { dice: hook.arg };
-    dict['代表色'] = get_chara_color(this.id);
-    dict['你'] = era.get('callname:0:-2');
-    dict['玩家名'] = era.get('callname:0:-1');
-    dict['她'] = era.get(`cflag:${this.id}:性别`) === 1 ? '他' : '她';
-    await lines['外出神社祈福'](dict);
+    await this.#kojo['out_church']({
+      ...generate_dictionary(this.id, { your_name: !0 }),
+      dice: hook.arg,
+    });
   }
 
   async out_river(hook) {
-    const dict = {};
-    dict['代表色'] = get_chara_color(this.id);
+    const dict = generate_dictionary(this.id);
     if ((hook.arg = (await select_action_around_river()) > 0)) {
-      await lines['散步'](dict);
+      await this.#kojo['o_r_walking'](dict);
     } else {
-      await lines['河边钓鱼'](dict);
+      await this.#kojo['o_r_fishing'](dict);
     }
   }
 
   async out_shopping(hook) {
-    const dict = {};
+    const dict = generate_dictionary(this.id);
     const temp = await select_action_in_shopping_street();
-    dict['代表色'] = get_chara_color(this.id);
     hook.arg = temp <= 1;
     switch (temp) {
       case 0:
-        await lines['街机厅'](dict);
+        await this.#kojo['o_s_arcade'](dict);
         break;
       case 1:
-        await lines['抽奖'](dict);
+        await this.#kojo['o_s_drawing'](dict);
         break;
       case 2:
-        await lines['卡拉OK'](dict);
+        await this.#kojo['o_s_ktv'](dict);
         break;
       case 3:
-        await lines['看电影'](dict);
+        await this.#kojo['o_s_movie'](dict);
     }
   }
 
   async out_station(hook) {
-    const dict = {};
-    dict['代表色'] = get_chara_color(this.id);
+    const dict = generate_dictionary(this.id);
     switch ((hook.arg = await select_action_in_station(this.id))) {
       case 0:
-        await lines['吃饭'](dict);
+        await this.#kojo['o_s_restaurant'](dict);
         break;
       case 1:
-        await lines['约会'](dict);
+        await this.#kojo['o_s_dating'](dict);
         break;
       case 2:
-        await lines['逛商场'](dict);
+        await this.#kojo['o_s_shopping'](dict);
     }
   }
 
   async school_atrium(hook) {
-    const dict = {};
-    dict['代表色'] = get_chara_color(this.id);
-    dict['她'] = era.get(`cflag:${this.id}:性别`) === 1 ? '他' : '她';
+    const dict = generate_dictionary(this.id);
     if ((hook.arg = !(await select_action_in_atrium()))) {
-      dict['你'] = era.get('callname:0:-2');
-      await lines['枯树洞'](dict);
+      await this.#kojo['s_a_tree_hollow'](dict);
     } else {
-      await lines['中庭约会'](dict);
+      await this.#kojo['s_a_dating'](dict);
     }
   }
 
   async school_rooftop() {
-    const dict = {};
-    dict['代表色'] = get_chara_color(this.id);
-    await lines['吃便当'](dict);
-  }
-
-  select() {
-    const dict = {};
-    dict['代表色'] = get_chara_color(this.id);
-    lines['选中互动对象'](dict);
-  }
-
-  async talk() {
-    const dict = {};
-    dict['代表色'] = get_chara_color(this.id);
-    await lines['闲聊'](dict);
+    await this.#kojo['school_rooftop'](generate_dictionary(this.id));
   }
 };
