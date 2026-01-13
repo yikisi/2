@@ -50,6 +50,7 @@ const { __ } = require('#/i18n/selector');
  * @param {{name:string,[handle]:function():Promise}} cele_cb
  * @param {{name:string,handle:function():Promise,[disabled]:boolean}|{}} func_cb
  * @param {{name:string,[handle]:function():Promise}} back_cb
+ * @param {function()} [birth_cb]
  * @returns {Promise<boolean|void>}
  */
 async function npc_common(
@@ -61,6 +62,7 @@ async function npc_common(
   cele_cb,
   func_cb,
   back_cb,
+  birth_cb,
 ) {
   const relation = get_relation_info(chara.id);
   const celebration_cost = 50 * (era.get('cflag:0:节日事件标记') + 1);
@@ -237,6 +239,7 @@ async function npc_common(
         content: '庆祝生日',
       },
       async h() {
+        birth_cb && (await birth_cb());
         sys_change_attr_and_print(0, attr_enum.tp, -celebration_cost);
         sys_change_attr_and_print(chara.id, attr_enum.tp, -50);
         era.print(['【向 ', chara.get_colored_name(), ' 祝贺生日快乐】']);

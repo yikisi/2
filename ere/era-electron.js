@@ -187,9 +187,13 @@ const era = {
    * @param delay time to delay, ms
    * @return {Promise<unknown>}
    */
-  delay(delay) {
-    return new Promise((resolve) => setTimeout(() => resolve(), delay));
-  },
+  delay: (function () {
+    function f(delay) {
+      return new Promise((resolve) => setTimeout(() => resolve(), delay));
+    }
+    f._s = true;
+    return f;
+  })(),
   /**
    * draw a divider to separate lines. the divider is also a line
    * @param {DividerConfig} [config] config of the line
@@ -265,7 +269,7 @@ const era = {
   async loadGlobal() {},
   logger: {
     assert(checkVal, aimVal) {
-      if (checkVal !== aimVal && era.version.engine === undefined) {
+      if (checkVal !== aimVal && era.version.engine === void 0) {
         console.debug(
           '[ASSERT]',
           new Error(`assert failed! aim val: ${aimVal}, got val: ${checkVal}`)
@@ -280,7 +284,7 @@ const era = {
      * @param {any} msg
      */
     debug(msg) {
-      if (era.version.engine === undefined) {
+      if (era.version.engine === void 0) {
         console.debug('[DEBUG]', msg);
         return;
       }
@@ -292,7 +296,7 @@ const era = {
      * @param {any} [stack]
      */
     error(msg, stack) {
-      if (era.version.engine === undefined) {
+      if (era.version.engine === void 0) {
         console.error('[ERROR]', msg, stack);
         return;
       }
@@ -303,7 +307,7 @@ const era = {
      * @param {any} msg
      */
     info(msg) {
-      if (era.version.engine === undefined) {
+      if (era.version.engine === void 0) {
         console.log('[INFO]', msg);
         return;
       }
@@ -315,7 +319,7 @@ const era = {
      * @param {any} [stack]
      */
     warn(msg, stack) {
-      if (era.version.engine === undefined) {
+      if (era.version.engine === void 0) {
         console.warn('[WARN]', msg, stack);
         return;
       }
@@ -588,7 +592,7 @@ const era = {
    * @returns {boolean} if debug
    */
   toggleDebug() {},
-  version: { sdk: '4.6.0', engine: undefined },
+  version: { sdk: '4.7.0', engine: void 0 },
   /**
    * wait any key from user
    * @returns {Promise<void>} a promise of nothing, please use await
@@ -597,9 +601,9 @@ const era = {
 };
 
 Object.keys(era).forEach((key) => {
-  if (typeof era[key] === 'function' && key !== 'delay') {
+  if (typeof era[key] === 'function' && !era[key]._s) {
     era[key] = (...args) => {
-      if (era.version.engine === undefined) {
+      if (era.version.engine === void 0) {
         return console.log(
           '[ERROR] apis has not been injected!',
           new Error().stack.split('\n').slice(2).join('\n'),

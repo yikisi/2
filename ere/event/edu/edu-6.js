@@ -469,7 +469,7 @@ module.exports = class extends CustomizedEdu {
     }
     if (name !== undefined) {
       const dict = this.#dict;
-      dict['名次'] = extra_flag.rank;
+      dict['名次'] = extra_flag.rank.toString();
       await print_name_and_show_kojo(name, oguri, kojo, dict);
     } else {
       await super.race_end(oguri, me, callname, hook, extra_flag);

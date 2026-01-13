@@ -836,7 +836,7 @@ module.exports = (handlers) => {
         kitaru.get_colored_name(),
         ' 急促的喘息着，双腿夹紧 ',
         me.get_colored_name(),
-        ' 的手臂，如触电般的颤抖着。',
+        ' 的手臂，如触电般颤抖着。',
       ]);
       await kitaru.say_and_wait(['呀呜，', callname, '！']);
       era.printButton('「这么舒服吗？」', 1);

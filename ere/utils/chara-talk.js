@@ -110,6 +110,14 @@ class CharaTalk {
     return this.sex_code === 1 ? i18n().name.mr : i18n().name.miss;
   }
 
+  get elder_sibling_sex_title() {
+    return this.sex_code === 1 ? '哥哥' : '姐姐';
+  }
+
+  get younger_sibling_sex_title() {
+    return this.sex_code === 1 ? '弟弟' : '妹妹';
+  }
+
   get phy_sex_title() {
     return this.sex_code === 1 ? i18n().name.male : i18n().name.female;
   }

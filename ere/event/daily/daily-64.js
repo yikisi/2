@@ -187,11 +187,12 @@ module.exports = class extends CustomizedDaily {
     }
   }
 
-  async out_river(hook) {
+  async out_river(hook, extra) {
     if ((hook.arg = await select_action_around_river()) > 0) {
       await kojo['散步'](this.#dict);
     } else {
       await kojo['钓鱼'](this.#dict);
+      extra.jpy = get_random_value(0, 5);
     }
   }
 

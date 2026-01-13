@@ -377,10 +377,7 @@ module.exports = {
     }
     const img_name = era.get(`cstr:${chara.id}:头像`);
     const img_t = era.get(`cstr:${chara.id}:头像T`);
-    if (
-      !!img_t &&
-      era.get(`exp:${chara.id}:性爱次数`) > era.get(`exp:${chara.id}:睡奸次数`)
-    ) {
+    if (img_t) {
       sex_info_list.push(
         { content: [{ isBr: true }], type: 'text' },
         {
@@ -404,7 +401,6 @@ module.exports = {
           era.printInColRows(
             ...new Array(option).fill(void 0).map((_, i) => {
               const names = sys_get_ero_image(chara.id, get_name(i + 1), false);
-              console.log(i, names);
               return {
                 columns: [
                   {

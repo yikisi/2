@@ -267,7 +267,7 @@ async function race_page(race) {
       await run_custom_edu(
         ret,
         event_hooks.race_start,
-        new RaceStartParams(uma, race),
+        new RaceStartParams(uma, contestants, race),
       );
       uma.motivation = era.get(`cflag:${ret}:干劲`);
       uma.race.conditionParams.motivation = uma.motivation + 3;

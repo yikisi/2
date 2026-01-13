@@ -299,19 +299,22 @@ module.exports = async () => {
         let c_flag = true;
         era.setAlign('center');
         era.setHorizontalAlign('space-evenly');
-        era.printMultiColumns(copyrights[0], { flush: true });
+        const bottom_columns = [
+          { content: '\n', type: 'text' },
+          {
+            accelerator: 0,
+            config: { align: 'center', disableWarning: true },
+            content: i18n().ui_skip,
+            type: 'button',
+          },
+        ];
+        era.printMultiColumns([...copyrights[0], ...bottom_columns], {
+          flush: true,
+        });
         era.input({ hideInput: true }).then(() => (c_flag = false));
         for (let i = 2; i < copyrights.length && c_flag; ++i) {
           await era.delay(800);
-          era.replaceInColRows(...copyrights.slice(0, i), [
-            { content: '\n', type: 'text' },
-            {
-              accelerator: 0,
-              config: { align: 'center', disableWarning: true },
-              content: i18n().ui_skip,
-              type: 'button',
-            },
-          ]);
+          era.replaceInColRows(...copyrights.slice(0, i), bottom_columns);
         }
         if (c_flag) {
           await era.delay(800);

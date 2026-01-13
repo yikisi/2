@@ -8,6 +8,7 @@ const {
   update_attacking_mouth_exp,
   update_blow_job_exp,
   update_hand_job_exp,
+  update_kiss_exp,
   update_sm_exp,
 } = require('#/system/ero/sys-calc-ero-exp');
 const { use_item } = require('#/system/ero/sys-calc-ero-item');
@@ -71,26 +72,7 @@ function sys_do_sex(atk, def, item) {
           if (!atk.id || !def.id) {
             era.add(`tcvar:${atk.id || def.id}:获得因子`, 1);
           }
-          if (!era.get(`cstr:${atk.id}:初吻经历`)) {
-            era.set(`cstr:${atk.id}:初吻经历`, [
-              `初吻在 ${date} 献给了 `,
-              { c: def.id },
-            ]);
-          }
-          if (!era.get(`cstr:${def.id}:初吻经历`)) {
-            if (i_def_awake) {
-              era.set(`cstr:${def.id}:初吻经历`, [
-                `初吻在 ${date} 献给了 `,
-                { c: atk.id },
-              ]);
-            } else if (!era.get(`cstr:${def.id}:无自觉初吻经历`)) {
-              era.set(`cstr:${def.id}:无自觉初吻经历`, [
-                `实际上，初吻在 ${date} 就已被 `,
-                { c: atk.id },
-                ' 夺走',
-              ]);
-            }
-          }
+          update_kiss_exp(date, atk.id, def.id, i_def_awake);
           break;
         case part_enum.breast:
           era.add(`exp:${atk.id}:舔吸次数`, 1);

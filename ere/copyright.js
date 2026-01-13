@@ -23,7 +23,7 @@ function get_copyright_entry(cid, _suffix) {
 function generate_copyrights() {
   const line_copyrights = [
     [[get_copyright_entry(1, '招募')], 'wwm'],
-    [[get_copyright_entry(2, '招募')], '牛蛙煲'],
+    [[get_copyright_entry(2)], '牛蛙煲'],
     [[get_copyright_entry(3)], '天马闪光蹄'],
     [
       [
@@ -70,7 +70,7 @@ function generate_copyrights() {
     [[get_copyright_entry(60)], '红红火火恍惚'],
     [[get_copyright_entry(64)], ['KUN', { isDivider: true }, 'Bottle']],
     [
-      [get_copyright_entry(67)],
+      [get_copyright_entry(67, '临时')],
       [
         '某知名手游公司编剧',
         { isDivider: true },
@@ -90,7 +90,7 @@ function generate_copyrights() {
       ],
     ],
     [[get_copyright_entry(71)], '洛洛'],
-    [[get_copyright_entry(74, '招募')], 'KUN'],
+    [[get_copyright_entry(74)], 'KUN'],
     [[get_copyright_entry(86, '部分地下室')], 'イーウィヤ'],
     [[get_copyright_entry(89, '招募、地下室')], '無奈'],
     [[get_copyright_entry(100)], '夕阳红艺术团小组长-赤红彗星红桃爵士Q先生'],
@@ -134,6 +134,8 @@ function generate_copyrights() {
         '念来过倒要你',
         { isBr: true },
         'Mr.E.',
+        { isDivider: true },
+        '牛蛙煲',
         { isDivider: true },
         '黑奴队长',
       ],

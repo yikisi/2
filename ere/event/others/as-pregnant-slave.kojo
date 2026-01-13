@@ -1,5 +1,5 @@
 工作:
-  - 今天 %YOU% 也被要求进行%SLAVE%的工作……
+  - 【今天 %YOU% 也被要求进行%SLAVE%的工作】
   # @author 黑奴队长
   - random: true
     lines:

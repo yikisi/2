@@ -456,7 +456,7 @@ rec2:
           content:
             - fontWeight: bold
               content: %CHARA%
-            - 「训练员」
+            - 「训练员～」
         - color: %COLOR%
           content:
             - fontWeight: bold

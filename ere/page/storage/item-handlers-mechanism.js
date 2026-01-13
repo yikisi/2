@@ -26,11 +26,22 @@ module.exports = (handlers) => {
     for (const cid of chara_list) {
       const marks = EventMarks.get(cid);
       const raw = marks.raw();
-      for (const hook in raw) {
-        if (!ev_dict[cid] || !ev_dict[cid][hook]) {
+      if (ev_dict[cid] === void 0) {
+        for (const hook in raw) {
           marks.set(hook, 0);
-        } else if (raw[hook] !== ev_dict[cid][hook]) {
-          marks.set(hook, ev_dict[cid][hook]);
+        }
+      } else {
+        for (const hook in raw) {
+          if (!ev_dict[cid][hook]) {
+            marks.set(hook, 0);
+          } else if (raw[hook] !== ev_dict[cid][hook]) {
+            marks.set(hook, ev_dict[cid][hook]);
+          }
+        }
+        for (const hook in ev_dict[cid]) {
+          if (ev_dict[cid][hook] > 0 && !raw[hook]) {
+            marks.set(hook, ev_dict[cid][hook]);
+          }
         }
       }
     }
