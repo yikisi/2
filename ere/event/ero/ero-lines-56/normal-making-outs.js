@@ -218,10 +218,10 @@ module.exports = class extends EroNormalMakingOuts {
         '自己担当的声音逐渐变得高昂起来, 脸上也露出了因为快感过载的痴态',
       ]);
       await attacker.print_and_wait(['那么再拉扯一下呢？']);
-      await defender.say_and_wait([
+      await attacker.print_and_wait([
         '结果 ',
         sys_get_colored_callname(attacker.id, defender.id),
-        ' 触电般的仰起头来，支支吾吾地靠在了自己的身上',
+        ' 触电般地仰起头来，支支吾吾地靠在了自己的身上',
       ]);
     } else {
       await defender.say_and_wait(['……呀啊～❤️']);
