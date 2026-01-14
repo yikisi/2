@@ -46,7 +46,6 @@ class CustomizedMec {
    * 是否因玩家不忠而愤怒
    * @param {number[]} partners 玩家的出轨对象列表
    */
-  // eslint-disable-next-line no-unused-vars
   is_anger_for_unfaithful(partners) {
     return era.get('flag:不忠惩罚') === 1;
   }
@@ -55,7 +54,6 @@ class CustomizedMec {
    * 是否不可参加对应比赛
    * @param {number} race 对应比赛的ID
    */
-  // eslint-disable-next-line no-unused-vars
   is_race_disabled(race) {
     return false;
   }
@@ -84,7 +82,6 @@ class CustomizedMec {
    * @param {number} action 调教指令ID
    * @returns {number} 调教指令判定值，会加到最终判定值中
    */
-  // eslint-disable-next-line no-unused-vars
   get_ero_check(action) {
     return 0;
   }
@@ -127,7 +124,6 @@ class CustomizedMec {
    * @param {number} part 部位ID
    * @returns {number} 部位上限BUFF数值
    */
-  // eslint-disable-next-line no-unused-vars
   get_param_limit_buff(part) {
     return 0;
   }
@@ -191,7 +187,6 @@ class CustomizedMec {
    * @returns {(LegendUmaSelector|LegendUmaFilter)[]} 可用于解析为强敌的数据对象<br>
    * LegendUmaSelector 从已有同ID强敌的数据中选择，LegendUmaFilter 从所有已有对手的数据中筛选然后设置名字
    */
-  // eslint-disable-next-line no-unused-vars
   get_race_contestants(info) {
     return [];
   }
@@ -247,7 +242,6 @@ class CustomizedMec {
    * @param {boolean} show_train_buff 是否显示训练期间的专属状态
    * @returns {({[color]:string,content:string,[fontWeight]:string,[title]:string})[]}
    */
-  // eslint-disable-next-line no-unused-vars
   get_status(show_train_buff) {
     return [];
   }
@@ -263,7 +257,6 @@ class CustomizedMec {
    * @param {number} attr 训练项目
    * @returns {number}
    */
-  // eslint-disable-next-line no-unused-vars
   get_take_care_buff(chara_id, attr) {
     return 0;
   }
@@ -317,7 +310,6 @@ class CustomizedMec {
    * @param {boolean} before_race 是否为参赛选手
    * @param {number} loc 要到达地点的ID
    */
-  // eslint-disable-next-line no-unused-vars
   set_foreign_debuff(before_race, loc) {
     era.set(
       `status:${this.id}:水土不服`,
@@ -365,7 +357,6 @@ class CustomizedMec {
    * 设置选手数据，一般用于在参赛时给角色上专属BUFF
    * @param {PseudoUma} uma 参赛时该角色对应的选手对象
    */
-  // eslint-disable-next-line no-unused-vars
   set_pseudo_uma(uma) {}
 }
 

@@ -30,7 +30,6 @@ class MejiroCity {
    * @param {number} cid
    * @returns {boolean}
    */
-  // eslint-disable-next-line no-unused-vars
   get_want_sex_buff(cid) {
     return false;
   }
@@ -39,7 +38,6 @@ class MejiroCity {
    * @param {number} cid
    * @returns {number}
    */
-  // eslint-disable-next-line no-unused-vars
   get_rape_buff(cid) {
     return 0;
   }
@@ -139,7 +137,6 @@ class MejiroCity {
    * 目白城本体
    * @param {number} cid 同行者
    */
-  // eslint-disable-next-line no-unused-vars
   async page(cid) {}
 
   /** 过回合的处理内容 */

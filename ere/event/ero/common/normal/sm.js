@@ -29,7 +29,6 @@ class EroNormalSm extends EroSm {
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
-  // eslint-disable-next-line no-unused-vars
   async insult(attacker, defender, hook) {
     const talk_arr = [];
     if (era.get('tflag:强奸') === defender.id) {
@@ -111,7 +110,6 @@ class EroNormalSm extends EroSm {
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
-  // eslint-disable-next-line no-unused-vars
   async hit_face_by_penis(attacker, defender, hook) {
     if (attacker.id > 0) {
       await defender.print_and_wait([

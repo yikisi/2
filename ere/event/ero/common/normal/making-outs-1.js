@@ -310,7 +310,6 @@ module.exports = class extends EroMakingOuts {
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
-  // eslint-disable-next-line no-unused-vars
   async pull_ear(attacker, defender, hook) {
     if (!era.get(`cflag:${defender.id}:种族`)) {
       return;
@@ -475,7 +474,6 @@ module.exports = class extends EroMakingOuts {
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
-  // eslint-disable-next-line no-unused-vars
   async finger_fuck(attacker, defender, hook) {
     await defender.say_and_wait('唔……');
     await attacker.print_and_wait(
@@ -494,7 +492,6 @@ module.exports = class extends EroMakingOuts {
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
-  // eslint-disable-next-line no-unused-vars
   async prepare_virgin(attacker, defender, hook) {
     if (!era.get(`cflag:${defender.id}:种族`)) {
       return;
@@ -590,7 +587,6 @@ module.exports = class extends EroMakingOuts {
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
-  // eslint-disable-next-line no-unused-vars
   async prepare_anal(attacker, defender, hook) {
     await attacker.print_and_wait(
       `用手掌感受着自面前翕动的穴中吐出的撩人热气，四根手指如桩般将极力想让叫人害羞的肉穴合拢，以逃开 ${attacker.get_phy_sex_title()} 视线的臀肉固定住。`,
@@ -635,7 +631,6 @@ module.exports = class extends EroMakingOuts {
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
-  // eslint-disable-next-line no-unused-vars
   async pet_tail(attacker, defender, hook) {
     await attacker.print_and_wait('相当新鲜的体验。');
     if (defender.sex_code !== 1) {

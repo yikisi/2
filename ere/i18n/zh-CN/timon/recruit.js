@@ -7,15 +7,13 @@ const era = require('#/era-electron');
 module.exports = {
   check_no: '还是算了',
   /** @param {CharaTalk} chara */
-  get_check_message(chara) {
-    return [
-      '训练员与',
-      chara.get_uma_sex_title(),
-      '的契约足以影响双方一生，确定要招募 ',
-      chara.get_colored_name(),
-      ' 吗？',
-    ];
-  },
+  get_check_message: (chara) => [
+    '训练员与',
+    chara.get_uma_sex_title(),
+    '的契约足以影响双方一生，确定要招募 ',
+    chara.get_colored_name(),
+    ' 吗？',
+  ],
   /** @param {CharaTalk} chara */
   get_check_no_msg(chara) {
     return ['虽然想要招募 ', chara.get_colored_name(), '，但还是打消了念头……'];

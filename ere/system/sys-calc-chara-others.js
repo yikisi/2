@@ -352,6 +352,7 @@ module.exports = {
   /**
    * @param {number} _from
    * @param {number} _to
+   * @return {{color:string,content:string,fontWeight:'bold'}}
    */
   sys_get_colored_callname(_from, _to) {
     return {

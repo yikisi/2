@@ -48,7 +48,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
-  // eslint-disable-next-line no-unused-vars
   async pull_ear(attacker, defender, hook) {
     const is_trainer =
       attacker.id === 0 &&
@@ -204,7 +203,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
-  // eslint-disable-next-line no-unused-vars
   async finger_fuck(attacker, defender, hook) {
     await attacker.print_and_wait('原来是……这样啊……');
     await attacker.print_and_wait(
@@ -225,7 +223,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
-  // eslint-disable-next-line no-unused-vars
   async prepare_virgin(attacker, defender, hook) {
     await attacker.print_and_wait([
       '不需要掩掩藏藏或是顾及绝对会羞红脸颊的 ',
@@ -310,7 +307,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
-  // eslint-disable-next-line no-unused-vars
   async prepare_anal(attacker, defender, hook) {
     await attacker.print_and_wait([
       '用手掌感受着自面前翕动的穴中吐出的撩人热气，',
@@ -356,7 +352,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
-  // eslint-disable-next-line no-unused-vars
   async pet_tail(attacker, defender, hook) {
     await attacker.print_and_wait('真是……不妙啊……');
     await attacker.print_and_wait([
@@ -379,7 +374,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
-  // eslint-disable-next-line no-unused-vars
   async pull_tail(attacker, defender, hook) {
     await pet_tail(attacker, defender);
     await attacker.print_and_wait('但同时却也微妙的有些失落感。');
@@ -479,7 +473,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
-  // eslint-disable-next-line no-unused-vars
   async deep_blow_job(attacker, defender, hook) {
     await attacker.say_and_wait('还想要，更深一点……');
     await attacker.print_and_wait([
@@ -511,7 +504,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
-  // eslint-disable-next-line no-unused-vars
   async force_deep_blow_job(attacker, defender, hook) {
     await attacker.print_and_wait('眼前的样子，可真是叫人罪恶感油然而生啊……');
     if (defender.sex_code === 0 && era.get(`cflag:${defender.id}:种族`)) {
@@ -535,7 +527,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
-  // eslint-disable-next-line no-unused-vars
   async hand_job(attacker, defender, hook) {
     await attacker.print_and_wait([
       '尽管睡着的 ',
@@ -579,7 +570,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
-  // eslint-disable-next-line no-unused-vars
   async fuck_tit(attacker, defender, hook) {
     if (defender.sex_code === 1) {
       return;
@@ -606,7 +596,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
-  // eslint-disable-next-line no-unused-vars
   async tit_job(attacker, defender, hook) {
     if (attacker.sex_code === 1) {
       return;
@@ -638,7 +627,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
-  // eslint-disable-next-line no-unused-vars
   async tit_and_blow_job(attacker, defender, hook) {
     if (attacker.sex_code === 1) {
       return;
@@ -666,7 +654,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
-  // eslint-disable-next-line no-unused-vars
   async suck_nipple(attacker, defender, hook) {
     if (defender.sex_code === 1) {
       return;
@@ -694,7 +681,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
-  // eslint-disable-next-line no-unused-vars
   async bite_nipple(attacker, defender, hook) {
     if (defender.sex_code === 1) {
       return;
@@ -730,7 +716,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
-  // eslint-disable-next-line no-unused-vars
   async force_armpit_intercourse(attacker, defender, hook) {
     await attacker.print_and_wait([
       '睡着的 ',
@@ -765,7 +750,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
-  // eslint-disable-next-line no-unused-vars
   async force_foot_job(attacker, defender, hook) {
     await attacker.print_and_wait('呼……已经完全就是所谓的变态了吧。');
     await attacker.print_and_wait([
@@ -805,7 +789,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
-  // eslint-disable-next-line no-unused-vars
   async foot_job(attacker, defender, hook) {
     await attacker.print_and_wait(
       '因为在床上站起身的缘故，所以连在视线里变小的肉棒也变得可爱了许多。',
@@ -825,7 +808,6 @@ class EroSleepMakingOuts extends EroMakingOuts {
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
-  // eslint-disable-next-line no-unused-vars
   async tail_job(attacker, defender, hook) {
     await attacker.print_and_wait('灵活……');
     await attacker.print_and_wait([

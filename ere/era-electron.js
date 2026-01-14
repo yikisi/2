@@ -146,7 +146,6 @@ const era = {
    * @param {any} val REQUIRED the value to be added
    * @returns {any|undefined} the new value of the variable, or undefined if failed
    */
-  // eslint-disable-next-line no-unused-vars
   add(varName, val) {},
   /**
    * add some characters
@@ -154,33 +153,28 @@ const era = {
    *     <br>if it is an array, is means add the character charaId[0] with the data of the character charaId[1]
    * @returns {boolean | boolean[]}
    */
-  // eslint-disable-next-line no-unused-vars
   addCharacter(...charaId) {},
   /**
    * initialize data of some characters for training
    * @param {...number} charaId REQUIRED ids of the characters defined in chara*.csv
    * @returns {void} */
-  // eslint-disable-next-line no-unused-vars
   addCharacterForTrain(...charaId) {},
   /**
    * initialize training and character data
    * @param {...number} charaId REQUIRED ids of the characters defined in chara*.csv
    */
-  // eslint-disable-next-line no-unused-vars
   beginTrain(...charaId) {},
   /**
    * check if a or some images are loaded
    * @param name the name of the image
    * @returns {boolean|boolean[]}
    */
-  // eslint-disable-next-line no-unused-vars
   checkImage(...name) {},
   /**
    * clear printed lines
    * @param {number} [lineCount] how many lines to be cleared, leave undefined to clear all
    * @returns {Promise<number>} new line count
    */
-  // eslint-disable-next-line no-unused-vars
   async clear(lineCount) {},
   /**
    * make the current function to wait for some time
@@ -199,7 +193,6 @@ const era = {
    * @param {DividerConfig} [config] config of the line
    * @returns {number} line number of the printed
    */
-  // eslint-disable-next-line no-unused-vars
   drawLine(config) {},
   /**
    * end training, add gotjewel table into jewel table, and destroy temporary data
@@ -210,7 +203,6 @@ const era = {
    * @param {string} varName REQUIRED the name of variable, String, like 'callname:1:2'
    * @returns {any|undefined} the variable, or undefined if failed
    */
-  // eslint-disable-next-line no-unused-vars
   get(varName) {},
   /**
    * get all added characters
@@ -242,7 +234,6 @@ const era = {
    * @param {boolean} config.[show] (for Android) if show the input element when using buttons
    * @returns {Promise<any>} a promise of the user input, please use await
    */
-  // eslint-disable-next-line no-unused-vars
   async input(config) {},
   /**
    * check if is debug mode
@@ -260,7 +251,6 @@ const era = {
    * @param {number} savIndex REQUIRED the index of the save file
    * @returns {Promise<boolean>} if the loading succeeds
    */
-  // eslint-disable-next-line no-unused-vars
   async loadData(savIndex) {},
   /**
    * load global variables from save file
@@ -337,7 +327,6 @@ const era = {
    * @param {'success'|'info'|'warning'|'error'|''} [type] type of the notification, see the enum
    * @param {number} [duration] duration of the notification, microsecond
    */
-  // eslint-disable-next-line no-unused-vars
   notify(content, title, type, duration) {},
   /**
    * play the music that must be declared in csv files in directory res
@@ -348,7 +337,6 @@ const era = {
    * @param {number} config.[fadeInternal] the internal of fade-in and fade-out, microsecond, default 200ms
    * @returns {boolean} if the playing succeeds
    */
-  // eslint-disable-next-line no-unused-vars
   playMusic(names, config) {},
   /**
    * print some text
@@ -356,7 +344,6 @@ const era = {
    * @param {TextConfig} [config] config of the printed line
    * @returns {number} line number of the printed line
    */
-  // eslint-disable-next-line no-unused-vars
   print(content, config) {},
   /**
    * print some text and wait any key from user
@@ -364,7 +351,6 @@ const era = {
    * @param {TextConfig} [config] config of the printed line
    * @returns {Promise<number>} line number of the printed line
    */
-  // eslint-disable-next-line no-unused-vars
   async printAndWait(content, config) {},
   /**
    * print a button
@@ -373,14 +359,12 @@ const era = {
    * @param {ButtonConfig} [config] config of the printed button
    * @returns {number} line number of the printed
    */
-  // eslint-disable-next-line no-unused-vars
   printButton(content, accelerator, config) {},
   /**
    * print images that must be declared in csv files in directory res
    * @param {string} names REQUIRED image names
    * @returns {number} line number of the printed
    */
-  // eslint-disable-next-line no-unused-vars
   printImage(...names) {},
   /**
    * @param {...ColumnObject|GridObject[]} columnObjects
@@ -392,7 +376,6 @@ const era = {
    * @see printProgress
    * @see printWholeImage
    */
-  // eslint-disable-next-line no-unused-vars
   printInColRows(...columnObjects) {},
   /**
    * print a line chart by chart.js
@@ -401,7 +384,6 @@ const era = {
    * @param {*} config
    * @returns {number} line number of the printed
    */
-  // eslint-disable-next-line no-unused-vars
   printLineChart(config) {},
   /**
    * print multiple columns into a row, excluding inputs
@@ -415,7 +397,6 @@ const era = {
    * @see printProgress
    * @see printWholeImage
    */
-  // eslint-disable-next-line no-unused-vars
   printMultiColumns(columnObjects, config) {},
   /**
    * print a progress bar
@@ -425,7 +406,6 @@ const era = {
    * @param {ProgressConfig} [config] config of the printed progress
    * @returns {number} line number of the printed
    */
-  // eslint-disable-next-line no-unused-vars
   printProgress(percentage, inContent, outContent, config) {},
   /**
    * print the whole image
@@ -433,7 +413,6 @@ const era = {
    * @param {WholeImageConfig} [config]
    * @returns {number} line number of the printed
    */
-  // eslint-disable-next-line no-unused-vars
   printWholeImage(names, config) {},
   /**
    * print a line break, if just used to print enter at the end of a line, please use print('*** \n') to replace
@@ -447,14 +426,12 @@ const era = {
    * @param {number} charaId REQUIRED id of the character
    * @returns {void}
    */
-  // eslint-disable-next-line no-unused-vars
   removeCharacter(...charaId) {},
   /**
    * DANGER replace the line just printed with a new in-col-row line
    * @param {...ColumnObject|GridObject[]} columnObjects
    * @returns {number} line number of the printed
    */
-  // eslint-disable-next-line no-unused-vars
   replaceInColRows(...columnObjects) {},
   /**
    * DANGER replace the line just printed with a new text line
@@ -462,7 +439,6 @@ const era = {
    * @param {TextConfig} [config] config of the printed line
    * @returns {number} line number of the printed
    */
-  // eslint-disable-next-line no-unused-vars
   replaceText(content, config) {},
   /**
    * reset the data of a character
@@ -470,7 +446,6 @@ const era = {
    *     <br>if it is an array, is means reset the character charaId[0] with the data of the character charaId[1]
    * @returns {void}
    */
-  // eslint-disable-next-line no-unused-vars
   resetCharacter(...charaId) {},
   /**
    * reset all data of the save
@@ -489,7 +464,6 @@ const era = {
    * @param {number} savIndex REQUIRED the index of the save file
    * @returns {Promise<boolean>} if the removing succeeds
    */
-  // eslint-disable-next-line no-unused-vars
   async rmData(savIndex) {},
   /**
    * save data into a save file
@@ -497,7 +471,6 @@ const era = {
    * @param {string} [comment] the comment of the save
    * @returns {Promise<boolean>} if the saving succeeds
    */
-  // eslint-disable-next-line no-unused-vars
   async saveData(savIndex, comment) {},
   /**
    * save global variables into save file
@@ -511,14 +484,12 @@ const era = {
    * @param {T} val REQUIRED the new value of the variable
    * @returns {T} the new value of the variable, or undefined if failed
    */
-  // eslint-disable-next-line no-unused-vars
   set(varName, val) {},
   /**
    * set default text-align
    * @param {'center'|'left'|'right'} textAlign REQUIRED the text-align: center, left or right used in usual
    * @returns {void}
    */
-  // eslint-disable-next-line no-unused-vars
   setAlign(textAlign) {},
   /**
    * @param {string} [name] set undefined to clear background
@@ -527,28 +498,24 @@ const era = {
    * @param {OBPosition} config.[position]
    * @param {'contain'|'cover'} config.[fit]
    */
-  // eslint-disable-next-line no-unused-vars
   setBack(name, config) {},
   /**
    * set default horizontal align of inColRows
    * @param {'start'|'end'|'center'|'space-around'|'space-between'|'space-evenly'} align REQUIRED the vertical align: start (default), end, center, space-around, space-between or space-evenly
    * @returns {void}
    */
-  // eslint-disable-next-line no-unused-vars
   setHorizontalAlign(align) {},
   /**
    * @deprecated replaced with setOpacity
    * @param {string} [maskName]
    * @param {number} [opacity]
    */
-  // eslint-disable-next-line no-unused-vars
   setMask(maskName, opacity) {},
   /**
    * set default offset
    * @param {number} offset REQUIRED an integer between 0 and 23
    * @returns {void}
    */
-  // eslint-disable-next-line no-unused-vars
   setOffset(offset) {},
   /**
    * @param {string} [name] set undefined to clear overlay
@@ -557,14 +524,12 @@ const era = {
    * @param {OBPosition} config.[position]
    * @param {'contain'|'cover'} config.[fit]
    */
-  // eslint-disable-next-line no-unused-vars
   setOverlay(name, config) {},
   /**
    * set the title of the window
    * @param {string} title REQUIRED
    * @returns {void}
    */
-  // eslint-disable-next-line no-unused-vars
   setTitle(title) {},
   /**
    * print an empty block and make the following lines shown in the bottom
@@ -576,14 +541,12 @@ const era = {
    * @param {'top'|'middle'|'bottom'} align REQUIRED the vertical align: top (default), middle or bottom
    * @returns {void}
    */
-  // eslint-disable-next-line no-unused-vars
   setVerticalAlign(align) {},
   /**
    * set default width
    * @param {number} width REQUIRED an integer between 1 and 24
    * @returns {void}
    */
-  // eslint-disable-next-line no-unused-vars
   setWidth(width) {},
   /** pause the music in the playing */
   stopMusic() {},

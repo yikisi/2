@@ -45,7 +45,6 @@ class EroCommunications extends EroLinesCommon {
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    */
-  // eslint-disable-next-line no-unused-vars
   async go_on(attacker, defender) {}
 
   /**
@@ -53,7 +52,6 @@ class EroCommunications extends EroLinesCommon {
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
-  // eslint-disable-next-line no-unused-vars
   async kiss(attacker, defender, hook) {}
 
   /**
@@ -61,7 +59,6 @@ class EroCommunications extends EroLinesCommon {
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
-  // eslint-disable-next-line no-unused-vars
   async french_kiss(attacker, defender, hook) {}
 
   /**
@@ -69,7 +66,6 @@ class EroCommunications extends EroLinesCommon {
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
-  // eslint-disable-next-line no-unused-vars
   async relax(attacker, defender, hook) {}
 
   /**
@@ -77,7 +73,6 @@ class EroCommunications extends EroLinesCommon {
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
-  // eslint-disable-next-line no-unused-vars
   async lure(attacker, defender, hook) {}
 
   /**
@@ -85,14 +80,12 @@ class EroCommunications extends EroLinesCommon {
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
-  // eslint-disable-next-line no-unused-vars
   async talk(attacker, defender, hook) {}
 
   /**
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    */
-  // eslint-disable-next-line no-unused-vars
   async switch(attacker, defender) {}
 
   /**
@@ -101,7 +94,6 @@ class EroCommunications extends EroLinesCommon {
    * @param {HookArg} hook
    * @param {{[success]:boolean}} extra_flag
    */
-  // eslint-disable-next-line no-unused-vars
   async resist(attacker, defender, hook, extra_flag) {}
 
   /**
@@ -109,7 +101,6 @@ class EroCommunications extends EroLinesCommon {
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
-  // eslint-disable-next-line no-unused-vars
   async gargle(attacker, defender, hook) {}
 
   /**
@@ -117,7 +108,6 @@ class EroCommunications extends EroLinesCommon {
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
-  // eslint-disable-next-line no-unused-vars
   async wipe_body(attacker, defender, hook) {}
 }
 

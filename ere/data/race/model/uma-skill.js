@@ -249,7 +249,6 @@ class UmaSkill {
   }
 
   /** @param {PseudoUma} [owner] */
-  // eslint-disable-next-line no-unused-vars
   get_colored_name(owner) {
     const tags = this.tags;
     const border_color = skill_border_colors[this.category & 0b111];

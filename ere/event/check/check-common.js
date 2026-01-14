@@ -74,21 +74,18 @@ class CustomizedCheck {
    * @param {number[]} partners 玩家的出轨对象列表
    * @param {boolean} is_aware 是否发现玩家出轨
    */
-  // eslint-disable-next-line no-unused-vars
   check_after_betrayed(partners, is_aware) {}
 
   /**
    * 玩家被惩戒（黑暗交易）后进行检查
    * @param {number} level 惩戒等级，1-比赛用母马，2-泄欲用母马，3-繁殖用母马
    */
-  // eslint-disable-next-line no-unused-vars
   check_after_punish(level) {}
 
   /**
    * 角色参赛后进行检查
    * @param {AfterRaceParams} extra_flag 赛后检查参数
    */
-  // eslint-disable-next-line no-unused-vars
   check_after_race(extra_flag) {}
 
   /**
@@ -282,7 +279,6 @@ class CustomizedCheck {
    * @param {number} [rank] 在该赛事中的名次，仅在赛后事件检查可用
    * @returns {number}
    */
-  // eslint-disable-next-line no-unused-vars
   is_aim_race(race, edu_weeks, rank) {
     return (
       this.get_aim_races()[`${edu_weeks}_${race}`] ||
@@ -296,7 +292,6 @@ class CustomizedCheck {
    * @param {number[]} partners 玩家的出轨对象列表
    * @returns {boolean}
    */
-  // eslint-disable-next-line no-unused-vars
   is_aware_unfaithful(partners) {
     const is_yandere = sys_check_yandere(this.id, (y) => y > 0);
     if (era.get('flag:不忠惩罚') === 0 && !is_yandere) {

@@ -113,7 +113,6 @@ class CustomizedEro {
    * 调教开始
    * @param {function(number,boolean[],boolean=):Promise<boolean>} handle_ero_act
    */
-  // eslint-disable-next-line no-unused-vars
   async ero_start(handle_ero_act) {}
 
   /**
@@ -146,7 +145,6 @@ class CustomizedEro {
    * 调教结束
    * @param {function(number,boolean[],boolean=):Promise<boolean>} handle_ero_act
    */
-  // eslint-disable-next-line no-unused-vars
   async ero_end(handle_ero_act) {}
 
   /**
@@ -154,7 +152,6 @@ class CustomizedEro {
    * @param {number} lover 主要床伴
    * @returns {Promise<boolean>} 是否同意
    */
-  // eslint-disable-next-line no-unused-vars
   async join_3p(lover) {
     const chara = get_chara_talk(this.id);
     era.print([chara.get_colored_name(), ' 面色绯红地想要加入……接受吗？']);
@@ -167,7 +164,6 @@ class CustomizedEro {
    * 加入3P同意
    * @param {number} lover 主要床伴
    */
-  // eslint-disable-next-line no-unused-vars
   async join_3p_accept(lover) {
     await era.printAndWait([
       get_chara_talk(this.id).get_colored_name(),
@@ -196,7 +192,6 @@ class CustomizedEro {
    * 加入3P拒绝
    * @param {number} lover 主要床伴
    */
-  // eslint-disable-next-line no-unused-vars
   async join_3p_reject(lover) {
     await era.printAndWait([
       get_chara_talk(this.id).get_colored_name(),
@@ -209,7 +204,6 @@ class CustomizedEro {
    * @param {Record<string,1>} attacker_parts
    * @param {Record<string,1>} defender_parts
    */
-  // eslint-disable-next-line no-unused-vars
   set_preference(attacker_parts, defender_parts) {}
 
   /**
@@ -397,7 +391,6 @@ class CustomizedEro {
    * @param {CharaTalk} me
    * @param {string} callname
    */
-  // eslint-disable-next-line no-unused-vars
   async orgasm(chara, me, callname) {}
 
   /**
@@ -406,7 +399,6 @@ class CustomizedEro {
    * @param {CharaTalk} me
    * @param {string} callname
    */
-  // eslint-disable-next-line no-unused-vars
   async zero_stamina(chara, me, callname) {
     era.print([chara.get_colored_name(), ' 因体力过分消耗陷入了昏迷……']);
   }
@@ -417,7 +409,6 @@ class CustomizedEro {
    * @param {CharaTalk} me
    * @param {string} callname
    */
-  // eslint-disable-next-line no-unused-vars
   async lost_mind(chara, me, callname) {
     era.print([chara.get_colored_name(), ' 因精力过分消耗陷入了失神……']);
   }
@@ -469,7 +460,6 @@ class CustomizedEro {
    * @param {string} callname
    * @param {HookArg} hook
    */
-  // eslint-disable-next-line no-unused-vars
   async prison(chara, me, callname, hook) {}
 
   /**
@@ -810,7 +800,6 @@ class CustomizedEro {
    * @param {HookArg} hook
    * @param {{partners:number[]}} extra_flag
    */
-  // eslint-disable-next-line no-unused-vars
   async after_betrayed(chara, me, callname, hook, extra_flag) {
     const race = era.get(`cflag:${this.id}:种族`);
     const cuckold = sys_check_cuckold(this.id);

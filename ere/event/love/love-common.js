@@ -38,7 +38,6 @@ class CustomizedLove {
    * @param {EventObject} event_object
    * @returns {Promise}
    */
-  // eslint-disable-next-line no-unused-vars
   async 49(chara, me, callname, stage, extra_flag, event_object) {
     await print_event_name('爱欲', chara);
     await chara.print_and_wait([

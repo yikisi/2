@@ -659,7 +659,6 @@ module.exports = class extends EroNormalMakingOuts1 {
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
-  // eslint-disable-next-line no-unused-vars
   async suck_nipple(attacker, defender, hook) {
     if (defender.sex_code === 1) {
       return;
@@ -673,7 +672,6 @@ module.exports = class extends EroNormalMakingOuts1 {
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
-  // eslint-disable-next-line no-unused-vars
   async bite_nipple(attacker, defender, hook) {
     if (defender.sex_code === 1) {
       return;
@@ -712,7 +710,6 @@ module.exports = class extends EroNormalMakingOuts1 {
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
-  // eslint-disable-next-line no-unused-vars
   async milk(attacker, defender, hook) {
     if (attacker.sex_code === 1) {
       return;

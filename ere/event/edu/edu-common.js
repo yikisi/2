@@ -366,7 +366,6 @@ class CustomizedEdu extends ICustomizedEdu {
    * @param {CharaTalk} me
    * @param {string} callname
    */
-  // eslint-disable-next-line no-unused-vars
   async foreign_rest(chara, me, callname) {
     const chara_name = CustomizedEdu.get_chara_name(chara);
     await era.printAndWait([
@@ -417,7 +416,6 @@ class CustomizedEdu extends ICustomizedEdu {
    * @param {CharaTalk} me
    * @param {string} callname
    */
-  // eslint-disable-next-line no-unused-vars
   async foreign_train(chara, me, callname) {
     const chara_name = CustomizedEdu.get_chara_name(chara);
     await era.printAndWait([
@@ -443,7 +441,6 @@ class CustomizedEdu extends ICustomizedEdu {
    * @param {EventObject} event_object
    * @returns {Promise}
    */
-  // eslint-disable-next-line no-unused-vars
   async foreign_travel(chara, me, callname, hook, extra_flag, event_object) {
     await era.printAndWait([
       '为了放松心情，',
@@ -662,7 +659,6 @@ class CustomizedEdu extends ICustomizedEdu {
    * @param {HookArg} hook
    * @param {TrainSuccessParams} extra_flag
    */
-  // eslint-disable-next-line no-unused-vars
   train_success_content(chara, me, callname, hook, extra_flag) {
     era.print([chara.get_colored_name(), ' 的训练顺利结束了！']);
   }
@@ -676,7 +672,6 @@ class CustomizedEdu extends ICustomizedEdu {
    * @param {TrainSuccessParams} extra_flag
    * @returns {Promise<boolean>}
    */
-  // eslint-disable-next-line no-unused-vars
   async train_success_add(chara, me, callname, hook, extra_flag) {
     await print_event_name('热血的追加训练！', chara);
     if (
@@ -713,7 +708,6 @@ class CustomizedEdu extends ICustomizedEdu {
    * @param {TrainSuccessParams} extra_flag
    * @returns {Promise<boolean>}
    */
-  // eslint-disable-next-line no-unused-vars
   async train_success_sex(chara, me, callname, hook, extra_flag) {
     await print_event_name('训练后的性欲高涨', chara);
     await era.printAndWait([
@@ -849,7 +843,6 @@ class CustomizedEdu extends ICustomizedEdu {
    * @param extra_flag
    * @param {EventObject} event_object
    */
-  // eslint-disable-next-line no-unused-vars
   async week_end(chara, me, callname, hook, extra_flag, event_object) {}
 
   /**

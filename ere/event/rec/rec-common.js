@@ -44,7 +44,6 @@ class CustomizedRecruit {
    * @param {EventObject} event_object
    * @returns {Promise<boolean|void>}
    */
-  // eslint-disable-next-line no-unused-vars
   async recruit(stage, event_object) {
     if (await this.check_before_rec()) {
       return;

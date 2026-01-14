@@ -181,7 +181,6 @@ class CustomizedBase {
    * @author 黑奴队长
    * @param {number} [supporter]
    */
-  // eslint-disable-next-line no-unused-vars
   async flatter(supporter) {}
 
   /**
@@ -448,7 +447,6 @@ class CustomizedBase {
    * 询问时间
    * @author 黑奴队长
    */
-  // eslint-disable-next-line no-unused-vars
   async ask_time(date, hours, minutes) {
     const chara = get_chara_talk(this.id),
       me = get_chara_talk(0);

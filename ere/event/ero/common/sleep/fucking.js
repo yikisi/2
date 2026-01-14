@@ -155,7 +155,6 @@ class EroSleepFucking extends EroFucking {
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
-  // eslint-disable-next-line no-unused-vars
   async doggy_style(attacker, defender, hook) {
     await common_doggy_style(attacker, defender);
   }
@@ -166,7 +165,6 @@ class EroSleepFucking extends EroFucking {
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
-  // eslint-disable-next-line no-unused-vars
   async doggy_style_anal_sex(attacker, defender, hook) {
     await common_doggy_style(attacker, defender);
   }
@@ -177,7 +175,6 @@ class EroSleepFucking extends EroFucking {
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
-  // eslint-disable-next-line no-unused-vars
   async stimulate_g_spot(attacker, defender, hook) {
     await attacker.print_and_wait('更深一些。');
     await attacker.print_and_wait([
@@ -214,7 +211,6 @@ class EroSleepFucking extends EroFucking {
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
-  // eslint-disable-next-line no-unused-vars
   async ask_stimulate_womb(attacker, defender, hook) {
     await attacker.print_and_wait('不用肉棒就能让小穴变舒服的魔法。');
     await attacker.print_and_wait([

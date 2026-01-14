@@ -23,6 +23,7 @@ module.exports = [
       'n/no-missing-require': 'off',
       'n/no-unpublished-import': 'off',
       'n/no-unpublished-require': 'off',
+      'no-unused-vars': 'off',
       'prettier/prettier': [
         'warn',
         {

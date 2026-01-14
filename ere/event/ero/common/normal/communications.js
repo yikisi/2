@@ -116,7 +116,6 @@ class EroNormalCommunications extends EroCommunications {
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
-  // eslint-disable-next-line no-unused-vars
   async talk(attacker, defender, hook) {
     if (
       !era.get(`cflag:${attacker.id}:种族`) &&
@@ -268,7 +267,6 @@ class EroNormalCommunications extends EroCommunications {
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
-  // eslint-disable-next-line no-unused-vars
   async gargle(attacker, defender, hook) {
     await era.printAndWait([
       attacker.get_colored_name(),
@@ -304,7 +302,6 @@ class EroNormalCommunications extends EroCommunications {
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
-  // eslint-disable-next-line no-unused-vars
   async wipe_body(attacker, defender, hook) {
     await defender.say_and_wait('还要……继续吗……❤️');
     await attacker.print_and_wait(

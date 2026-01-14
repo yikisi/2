@@ -249,6 +249,11 @@ class I18nEntry {
   ui_yes = '确定';
   ui_no = '取消';
   ui_skip = '跳过';
+  ui_money_template = '%MONEY% 马币';
+  get_money_content = (money) =>
+    this.ui_money_template.replace('%MONEY%', money);
+  ui_month_template = '%MONTH% 个月';
+  get_multi_month = (month) => this.ui_month_template.replace('%MONTH%', month);
 
   name = new (require('#/i18n/zh-CN/chara/names'))();
   title = new (require('#/i18n/zh-CN/chara/titles'))();

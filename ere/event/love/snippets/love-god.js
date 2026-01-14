@@ -41,35 +41,30 @@ class LoveGod extends CustomizedLove {
    * @param {CharaTalk} god
    * @param {CharaTalk} me
    */
-  // eslint-disable-next-line no-unused-vars
   async fuck_her(god, me) {}
 
   /**
    * @param {CharaTalk} god
    * @param {CharaTalk} me
    */
-  // eslint-disable-next-line no-unused-vars
   async fuck_me(god, me) {}
 
   /**
    * @param {CharaTalk} god
    * @param {CharaTalk} me
    */
-  // eslint-disable-next-line no-unused-vars
   async reject(god, me) {}
 
   /**
    * @param {CharaTalk} god
    * @param {CharaTalk} me
    */
-  // eslint-disable-next-line no-unused-vars
   async after_fuck(god, me) {}
 
   /**
    * @param {CharaTalk} god
    * @param {CharaTalk} me
    */
-  // eslint-disable-next-line no-unused-vars
   async 49(god, me) {
     LifeEventMarks.get_marks(this.id).set('love', 1);
     if (get(`love:${this.id}`) === 49) {
