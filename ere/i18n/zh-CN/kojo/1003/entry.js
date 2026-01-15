@@ -1,6 +1,8 @@
+const proxy_kojo_js = require('#/i18n/proxy');
+
 class I18nKojo1003 {
-  recruit = require('#/i18n/zh-CN/kojo/1003/rec-3');
-  love = require('#/i18n/zh-CN/kojo/1003/love-3');
+  recruit = proxy_kojo_js(require('#/i18n/zh-CN/kojo/1003/rec-3'));
+  love = proxy_kojo_js(require('#/i18n/zh-CN/kojo/1003/love-3'));
 
   hurt = '腿伤！';
   hurt_desc =

@@ -5,10 +5,13 @@ const CustomizedMec = require('#/event/mec/mec-common');
 const { get_chara_color } = require('#/data/chara-colors');
 const HelloLifeMarks = require('#/data/event/life-event-marks/life-event-marks-308');
 
+const { i18n } = require('#/i18n/selector');
+
 class MecChild extends CustomizedMec {
   get_race_finish_report(uma, race_id) {
     let func = super.get_race_finish_report;
-    const src_chara = era.get(`cflag:${this.id}:模版角色`);
+    // CFLAGNAME:90 = 模版角色
+    const src_chara = era.get(`cflag:${this.id}:90`);
     switch (src_chara) {
       case 3:
       case 6:
@@ -25,13 +28,16 @@ class MecChild extends CustomizedMec {
 
   get_talents() {
     const ret = [];
-    if (era.get(`cflag:${this.id}:模版角色`) === 308) {
+    if (era.get(`cflag:${this.id}:90`) === 308) {
       const { buff } = new HelloLifeMarks();
       ret.push({
+        ...i18n().kojo.get_titled_content(
+          308,
+          'dreamer_junior',
+          100 * (buff + 1),
+        ),
         color: get_chara_color(308),
-        content: '梦之继承者',
         fontWeight: buff > 0 ? 'bold' : undefined,
-        title: `参加大舞台赛事时声望奖励+${100 * (buff + 1)}%。`,
       });
     }
     return ret;
@@ -39,9 +45,12 @@ class MecChild extends CustomizedMec {
 
   init_love() {
     if (
-      (era.get(`cflag:${this.id}:父方角色`) !== 0 &&
-        era.get(`cflag:${this.id}:母方角色`) !== 0) ||
-      era.get('flag:后代爱慕限制') > 0
+      // CFLAGNAME:15 = 父方角色
+      (era.get(`cflag:${this.id}:15`) !== 0 &&
+        // CFLAGNAME:16 = 母方角色
+        era.get(`cflag:${this.id}:16`) !== 0) ||
+      // CFLAGNAME:115 = 后代爱慕限制
+      era.get('flag:115') > 0
     ) {
       return super.init_love();
     }
@@ -50,9 +59,9 @@ class MecChild extends CustomizedMec {
 
   set_callname() {
     let callname;
-    if (!era.get(`cflag:${this.id}:父方角色`)) {
+    if (!era.get(`cflag:${this.id}:15`)) {
       callname = 'dad';
-    } else if (!era.get(`cflag:${this.id}:母方角色`)) {
+    } else if (!era.get(`cflag:${this.id}:16`)) {
       callname = 'mom';
     } else {
       return super.set_callname();

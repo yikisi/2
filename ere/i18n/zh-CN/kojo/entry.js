@@ -8,6 +8,7 @@ class I18nKojo {
   50 = new (require('#/i18n/zh-CN/kojo/1050/entry'))();
   60 = new (require('#/i18n/zh-CN/kojo/1060/entry'))();
   74 = new (require('#/i18n/zh-CN/kojo/1074/entry'))();
+  308 = new (require('#/i18n/zh-CN/kojo/9008/entry'))();
   av_sister = new (require('#/i18n/zh-CN/kojo/av-sister/entry'))();
 
   get_titled_content(ckey, key, ...args) {
