@@ -258,10 +258,10 @@ module.exports = class extends CustomizedDaily {
       } else {
         buffer.push([
           [
-            '全力奔跑的时候会有一种若有若无的感觉,这就是所谓的领域吗?',
+            '全力奔跑的时候总有一种奇怪的感觉?轻飘飘的就像是漂浮在草地之上。',
             `……啊,${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}早上好`,
           ],
-          `在草地上奔跑的${zensky.name}似乎触及到领域的边界了`,
+          `在草地上奔跑的${zensky.name}若有所思`,
         ]);
       }
       const entry = get_random_entry(buffer);

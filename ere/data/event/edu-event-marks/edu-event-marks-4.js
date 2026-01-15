@@ -26,8 +26,6 @@ class MaEduMarks extends EduEventMarks {
   dream;
   //木
   wind;
-  // 舒适的一天！
-  windy;
   // BAD END 1 木旺土溃
   Self_contempt;
   // BAD END 2 丸善斯基的信

@@ -754,7 +754,7 @@ module.exports = async (hook, extra_flag) => {
     await era.printAndWait(`门口留下了一张纸条。`);
     await say_by_passer_by(
       ` ${chara_talk.get_uma_sex_title()} `,
-      `丸善前辈，我有些疑问想要问你，如果可以的话，明天晚上可以到空教室里见面吗？`,
+      `丸善前辈，我有些疑问想要问你，如果可以的话，二周后可以到空教室里见面吗？`,
     );
     await era.printAndWait(`你决定`);
     era.printButton(`「告诉 ${chara_talk.name} 」`, 1); //NE
@@ -887,7 +887,7 @@ module.exports = async (hook, extra_flag) => {
     await era.printAndWait(`等候室\n`);
     await me.say_and_wait(`感觉怎么样？`);
     await chara_talk.say_and_wait(
-      `一起奔跑的赛 ${chara_talk.get_uma_sex_title()} 都是以最强赛 ${chara_talk.get_uma_sex_title()} 为目标的 ${chara_talk.get_uma_sex_title()} ，能与这些她们奔跑也很开心呢。`,
+      `一起奔跑的赛 ${chara_talk.get_uma_sex_title()} 都是以最强赛 ${chara_talk.get_uma_sex_title()} 为目标的 ${chara_talk.get_uma_sex_title()} ，能与这些${chara_talk.sex_code - 1 ? '她' : '他'}们奔跑也很开心呢。`,
     );
     await me.say_and_wait(`满足了吗？`);
     await chara_talk.say_and_wait(

@@ -136,12 +136,12 @@ module.exports = class extends CustomizedRecruit {
         // 设置招募状态为成功，同时也是在队伍里的标记
         era.set('cflag:4:招募状态', recruit_flags.yes);
         // 结束招募事件链
-        new MaEduMarks().beginning++;
         add_event(event_hooks.week_end, new EventObject(4, cb_enum.edu));
         era.set('flag:物色对象', 0);
         await this.recruit_end();
         // 返回true，表示跳过后面的天台事件流程
         return true;
     }
+    new MaEduMarks().beginning++;
   }
 };

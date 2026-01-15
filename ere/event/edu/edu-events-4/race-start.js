@@ -21,10 +21,10 @@ module.exports = async (hook, extra_flag) => {
     await maru.say_and_wait(
       `虽然还是有些紧张，不过现在的话倒是完全放松下来了。`,
     );
-    era.printButton(`「就这样让后辈们看到丸善斯基帅气的一面吧！」`, 1);
+    era.printButton(`「就这样让后辈们看到${maru.name}帅气的一面吧！」`, 1);
     await era.input();
     await maru.say_and_wait(
-      `嗯嗯, ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'} 也要好好看着丸善斯基帅气的样子哦。`,
+      `嗯嗯, ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'} 也要好好看着${maru.name}帅气的样子哦。`,
     );
     await maru.say_and_wait(
       `而且，不仅有在背后一直支持着我的后辈们，还能感受到疾驰过程中的突破极限的风！`,
@@ -42,8 +42,8 @@ module.exports = async (hook, extra_flag) => {
     await print_event_name('朝日杯前・五挡加速', maru);
     await era.printAndWait(`准备室内`);
     await maru.say_and_wait(`哼哼哼~`);
-    await era.printAndWait(`丸善斯基心情不错的在准备室里检查着决胜服。`);
-    await me.say_and_wait(`丸善斯基，准备的怎么样了？`);
+    await era.printAndWait(`${maru.name}心情不错的在准备室里检查着决胜服。`);
+    await me.say_and_wait(`${maru.name}，准备的怎么样了？`);
     await maru.say_and_wait(
       `哎呀，是 ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'} 啊。`,
     );
@@ -51,16 +51,16 @@ module.exports = async (hook, extra_flag) => {
     era.printButton(`「接下来也要好好享受比赛哦！」`, 1);
     await era.input();
     await me.say_and_wait(
-      `毕竟，我一直都想看到朝着未来奔跑的丸善斯基帅气的样子。`,
+      `毕竟，我一直都想看到朝着未来奔跑的${maru.name}帅气的样子。`,
     );
     await maru.say_and_wait(
       `嗯，${
         era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
       }就好好看着吧。`,
     );
-    await maru.say_and_wait(`在赛场上奔跑的丸善斯基的模样。`);
+    await maru.say_and_wait(`在赛场上奔跑的${maru.name}的模样。`);
     await maru.say_and_wait(`那么，我出发了。`);
-    era.printButton(`「丸善斯基加油！」`, 1);
+    era.printButton(`「${maru.name}加油！」`, 1);
     await era.input();
     await era.printAndWait(`做好准备的${maru.name}走向了赛场。`);
     await me.say_and_wait(
@@ -76,29 +76,29 @@ module.exports = async (hook, extra_flag) => {
     await era.printAndWait(`然而此时。`);
     await say_by_passer_by(
       `工作人员`,
-      `已经确认过三遍了，包括丸善斯基在内，一共只有五名赛${maru.get_uma_sex_title()}。`,
+      `已经确认过三遍了，包括${maru.name}在内，一共只有五名赛${maru.get_uma_sex_title()}。`,
     );
     await me.say_and_wait(`啊……谢谢。`);
     await era.printAndWait(
-      `对于丸善斯基来说，在赛场上能享受到了快乐程度是与赛事等级以及参赛的${maru.get_uma_sex_title()}成正比。`,
+      `对于${maru.name}来说，在赛场上能享受到了快乐程度是与赛事等级以及参赛的${maru.get_uma_sex_title()}成正比。`,
     );
     await era.printAndWait(
-      `换句话说，赛事等级越高，能参战的${maru.get_uma_sex_title()}人数以及质量也随之变高，丸善斯基也就愈加享受。`,
+      `换句话说，赛事等级越高，能参战的${maru.get_uma_sex_title()}人数以及质量也随之变高，${maru.name}也就愈加享受。`,
     );
     await era.printAndWait(`如果仅仅是这点还好。`);
     await say_by_passer_by(
       `${maru.get_uma_sex_title()}A`,
-      `啊，我知道的，这场比赛一定是丸善斯基的胜利。`,
+      `啊，我知道的，这场比赛一定是${maru.name}的胜利。`,
     );
     await say_by_passer_by(
       `${maru.get_uma_sex_title()}B`,
-      `还有考虑的必要吗？如果不是丸善斯基获胜，我根本想不到其他人怎么战胜${
+      `还有考虑的必要吗？如果不是${maru.name}获胜，我根本想不到其他人怎么战胜${
         maru.sex_code - 1 ? '她' : '他'
       }。`,
     );
     await say_by_passer_by(
       `参赛的赛${maru.get_uma_sex_title()}A`,
-      `已经无所谓了，反正接下来一定是丸善斯基的胜利，我还是节省体力准备之后的赛事吧。`,
+      `已经无所谓了，反正接下来一定是${maru.name}的胜利，我还是节省体力准备之后的赛事吧。`,
     );
     await say_by_passer_by(
       `参赛的赛${maru.get_uma_sex_title()}A`,
@@ -114,14 +114,14 @@ module.exports = async (hook, extra_flag) => {
     );
     await maru.say_and_wait(`如果参加比赛的大家更积极一点就好了。`);
     await era.printAndWait(
-      `看上去丸善斯基的心情似乎不太好，耳朵也随之低垂了下来。`,
+      `看上去${maru.name}的心情似乎不太好，耳朵也随之低垂了下来。`,
     );
     era.printButton(
-      `丸善斯基，将我们之前的训练成果好好展示给在场的观众们看吧`,
+      `${maru.name}，将我们之前的训练成果好好展示给在场的观众们看吧`,
       1,
     );
     era.printButton(
-      `如果能看到丸善斯基的奔跑，我相信${
+      `如果能看到${maru.name}的奔跑，我相信${
         maru.sex_code - 1 ? '她' : '他'
       }们一定会改变主意的`,
       2,
@@ -137,11 +137,11 @@ module.exports = async (hook, extra_flag) => {
     } else {
       await maru.say_and_wait(`……`);
       await me.say_and_wait(
-        `通过丸善斯基的背影，让那些有些泄气的大家们重新散发希望吧`,
+        `通过${maru.name}的背影，让那些有些泄气的大家们重新散发希望吧`,
       );
       await me.say_and_wait(`就像我们平时训练的那样。`);
       await maru.say_and_wait(`没错！`);
-      await era.printAndWait(`丸善斯基垂下的耳朵又笔直地竖了起来。`);
+      await era.printAndWait(`${maru.name}垂下的耳朵又笔直地竖了起来。`);
     }
     await era.printAndWait(
       `虽然还想继续说下去，但工作人员们调试麦克风的声音传到了准备室之中。`,
@@ -160,7 +160,7 @@ module.exports = async (hook, extra_flag) => {
     await era.printAndWait(`比赛开始前·发布会上`);
     await say_by_passer_by(
       `记者A`,
-      `非常荣幸能采访到丸善斯基${maru.sex_code === 1 ? '先生' : '小姐'}。`,
+      `非常荣幸能采访到${maru.name}${maru.sex_code === 1 ? '先生' : '小姐'}。`,
     );
     await say_by_passer_by(`记者A`, `请问您这次的目标也是取得皋月赏的胜利吗？`);
     await maru.say_and_wait(`是的，这是和负责的训练员商量之后的结果。`);
@@ -170,7 +170,7 @@ module.exports = async (hook, extra_flag) => {
     );
     await say_by_passer_by(
       `记者B`,
-      `是否可以认为赛${maru.get_uma_sex_title()}们认为自己赢不了丸善斯基所以纷纷避战了呢？`,
+      `是否可以认为赛${maru.get_uma_sex_title()}们认为自己赢不了${maru.name}所以纷纷避战了呢？`,
     );
     await maru.say_and_wait(
       `关于春季锦标相关问题请咨询负责训练员，这里不做表态。`,
@@ -184,7 +184,7 @@ module.exports = async (hook, extra_flag) => {
     await maru.say_and_wait(`太客气了。`);
     era.drawLine({ content: '发布会结束后' });
     await era.printAndWait(`准备室\n`);
-    await me.say_and_wait(`丸善斯基准备好了吗，接下来轮到你出场了。`);
+    await me.say_and_wait(`${maru.name}准备好了吗，接下来轮到你出场了。`);
     await maru.say_and_wait(`已经准备好了哦。`);
     await me.say_and_wait(`就和往常一样，按照你的想法自由的奔跑吧。`);
     await maru.say_and_wait(
@@ -367,7 +367,7 @@ module.exports = async (hook, extra_flag) => {
     //todo 强敌：鲁铎象征(差) 速1700 力1200 耐1150 根1500 智1200 汝、皇帝の神威を見よ/汝等，瞻仰皇帝之神威吧 鎧袖一触/易如反掌 皇帝の眼差し/皇帝的视线 王手 优位形成 神速 光芒一閃
     await era.printAndWait(`与皇帝的第二次对决即将开始。`);
     await era.printAndWait(
-      `作为丸善斯基与皇帝之间的第二次对决，对于观众们来说是空前盛大的盛况。`,
+      `作为${maru.name}与皇帝之间的第二次对决，对于观众们来说是空前盛大的盛况。`,
     );
     era.drawLine({ content: '准备室中' });
     era.printButton(`「让我看到最棒的背影吧」`, 1);
@@ -381,7 +381,7 @@ module.exports = async (hook, extra_flag) => {
       }们交流，对抗，决定胜负。`,
     );
     await me.say_and_wait(`有成功的把握吗？`);
-    await era.printAndWait(`丸善斯基沉默了一会后，给出了答案。`);
+    await era.printAndWait(`${maru.name}沉默了一会后，给出了答案。`);
     await maru.say_and_wait(
       `${
         era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
@@ -433,7 +433,7 @@ module.exports = async (hook, extra_flag) => {
     );
     await era.printAndWait(`宣布着比赛即将开始的广播响起。`);
     await maru.say_and_wait(`抱歉，一不小心就说的有点多了呢。`);
-    await era.printAndWait(`稍微有点不好意思的丸善斯基脸红了。`);
+    await era.printAndWait(`稍微有点不好意思的${maru.name}脸红了。`);
     await era.printAndWait(`从招募${maru.name}开始经历了这么多的事件。`);
     await era.printAndWait(
       `哭泣也好，欢笑也好，哀怮也好，欢喜也好，信任也好，背叛也好。`,
@@ -445,13 +445,13 @@ module.exports = async (hook, extra_flag) => {
     era.printButton(`「让我们写下属于我们自己的故事吧。」`, 1);
     await era.input();
     await maru.say_and_wait(`……呵呵♪`);
-    await era.printAndWait(`丸善斯基露出了笑容。`);
+    await era.printAndWait(`${maru.name}露出了笑容。`);
     await maru.say_and_wait(`无论接下来发生什么。你都要一直在我身边哦？`);
     await maru.say_and_wait(`欢笑也好，哭泣也好。都要一起面对哦？`);
     await era.printAndWait(`恐怕是你记忆之中最美丽的笑容。`);
-    await era.printAndWait(`丸善斯基走向了赛场。`);
+    await era.printAndWait(`${maru.name}走向了赛场。`);
     await era.printAndWait(`不远处，皇帝正等待着挑战者的到来。`);
-    await era.printAndWait(`你祈祷着丸善斯基的胜利。`);
+    await era.printAndWait(`你祈祷着${maru.name}的胜利。`);
     await era.printAndWait(`时间，在此流转。`);
   } else {
     await print_event_name('比赛开始', maru);

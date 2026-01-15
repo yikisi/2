@@ -56,7 +56,9 @@ module.exports = class extends CustomizedLove {
       `你轻轻地将信封拿了过来,手感很不错,没有封死,折叠部分故意留了一个小缝.`,
     );
     await era.printAndWait(`拆开信封,里面只有一行文字`);
-    await era.printAndWait(`请在午时在天台见面.`);
+    await era.printAndWait(
+      `${era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'}我在天台等你哦~`,
+    );
     await era.printAndWait(
       `午时也就是十一点到一点之间吗?不管怎样,先把这封信收起来吧.`,
     );
@@ -587,7 +589,6 @@ module.exports = class extends CustomizedLove {
     );
     await zensky.say_and_wait(`${callname},我能遇见你真是太好了,谢谢你。`);
     await era.printAndWait(`在寂静的深夜公路上又刮起了一阵潮湿的自然风.`);
-
     await sys_love_uma_in_event(4);
   }
 };

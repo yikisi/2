@@ -8,7 +8,6 @@ const { say_by_passer_by } = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const MaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-4');
-const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const event_hooks = require('#/data/event/event-hooks');
 const { location_enum } = require('#/data/locations');
 
@@ -26,7 +25,7 @@ module.exports = async function (hook, event_object) {
   let wait_flag = false;
   if (event_marks.beginning === 1) {
     event_marks.beginning++;
-    // 从丸善斯基登场开始 风数值为1 最终结局与风数值 例：TE=20 GE = 17-19 其余均为NE
+    // 从  ${zensky.name}登场开始 风数值为1 最终结局与风数值 例：TE=20 GE = 17-19 其余均为NE
     // 尽管竞争将造成极大的损耗，但你不想去看看那里的风景吗？
     await print_event_name(`序章·${zensky.name}登场`, zensky);
     await era.printAndWait(`草场上`);
@@ -217,7 +216,6 @@ module.exports = async function (hook, event_object) {
       `作为你与${zensky.name}签约后的第一次正式见面，就这样结束了。`,
     );
     //风属性为1
-    new EduEventMarks(4).add('wind');
     wait_flag = get_attr_and_print_in_event(4, undefined, 120) || wait_flag;
   } else if (event_marks.dream === 1) {
     await print_event_name(`焦鹿梦`, zensky);
@@ -396,11 +394,6 @@ module.exports = async function (hook, event_object) {
     wait_flag =
       get_attr_and_print_in_event(4, [10, 10, 10, 10, 10], undefined) ||
       wait_flag;
-  } else if (event_marks.windy === 1) {
-    // todo 丸善斯基与训练员交流
-    await print_event_name('如宝石般闪耀的一天', zensky);
-    await era.printAndWait(`训练室\n`);
-    await era.printAndWait(`。`);
   } else if (edu_weeks === 39) {
     await print_event_name('万圣夜', zensky);
     await era.printAndWait(
@@ -812,6 +805,7 @@ module.exports = async function (hook, event_object) {
       `谈笑之间你们走向了小塔。随后，惨叫声响彻了特雷森。`,
     );
     event_marks.wind--;
+
     wait_flag =
       get_attr_and_print_in_event(4, [10, 10, 10, 10, 10], undefined) ||
       wait_flag;
@@ -984,6 +978,7 @@ module.exports = async function (hook, event_object) {
       );
       event_marks.wind--;
     }
+
     wait_flag =
       get_attr_and_print_in_event(4, [10, 10, 10, 10, 10], undefined) ||
       wait_flag;
@@ -1055,7 +1050,7 @@ module.exports = async function (hook, event_object) {
     await me.say_and_wait(`我认为`);
     era.printButton(`「从可靠，值得信赖的角度说」`, 1);
     era.printButton(`「从温柔，值得托付的角度说」`, 2);
-    era.printButton(`「从前辈，后辈之间的关系说`, 3);
+    era.printButton(`「从前辈，后辈之间的关系说」`, 3);
     const ret1 = await era.input();
     if (ret1 === 1) {
       await me.say_and_wait(`我认为丸善前辈是一个可靠的——`);
@@ -1198,7 +1193,7 @@ module.exports = async function (hook, event_object) {
     await era.printAndWait(
       `像是遥远的地方传来，又像是回荡在这空虚的教室之中。`,
     );
-    await era.printAndWait(`让你无法挥去胸中这股暧昧无形的不安。`);
+    await era.printAndWait(`让你无法挥去胸中这股不安。`);
     wait_flag =
       get_attr_and_print_in_event(4, [0, 0, 0, 0, 0], 120) || wait_flag;
   } else if (edu_weeks === 47 + 32) {
@@ -1245,6 +1240,7 @@ module.exports = async function (hook, event_object) {
       `不久之后，坐在副驾驶的你开始对开车产生心理阴影了。`,
     );
     event_marks.wind++;
+
     wait_flag =
       get_attr_and_print_in_event(4, [0, 0, 10, 0, 0], 120) || wait_flag;
   } else if (edu_weeks === 47 + 33) {
@@ -1390,6 +1386,7 @@ module.exports = async function (hook, event_object) {
     await era.printAndWait(
       `那笑容宛如春日里初绽的花朵，${zensky.name}期待着那一刻的到来。`,
     );
+
     wait_flag =
       get_attr_and_print_in_event(4, [10, 10, 10, 10, 10], undefined) ||
       wait_flag;
@@ -1566,7 +1563,9 @@ module.exports = async function (hook, event_object) {
     );
     await digital.say_and_wait(`精彩的论述，你比我想象中还要优秀。`);
     await era.printAndWait(`皇帝鼓起了掌。`);
-    await digital.say_and_wait(`那么，你对真正的丸善斯基了解又有多少？`);
+    await digital.say_and_wait(
+      `那么，你对真正的  ${zensky.name}了解又有多少？`,
+    );
     await digital.say_and_wait(
       `你怎么知道自己不是代入到了牛仔的……所谓观众呢？`,
     );
@@ -1575,6 +1574,7 @@ module.exports = async function (hook, event_object) {
     await era.printAndWait(
       `草场上努力训练的${zensky.get_uma_sex_title()}们传出着喊声响彻了特雷森。`,
     );
+
     wait_flag =
       get_attr_and_print_in_event(4, [10, 10, 10, 10, 10], undefined) ||
       wait_flag;
@@ -1699,6 +1699,7 @@ module.exports = async function (hook, event_object) {
       await era.printAndWait(`你松了口气，期待这下周的到来。`);
       event_marks.wind--;
     }
+
     wait_flag =
       get_attr_and_print_in_event(4, [0, 0, 20, 0, 0], undefined) || wait_flag;
   } else if (edu_weeks === 47 + 38) {
@@ -1966,6 +1967,7 @@ module.exports = async function (hook, event_object) {
       get_attr_and_print_in_event(4, [10, 10, 10, 10, 10], undefined) ||
       wait_flag;
     event_marks.mygo--;
+
     //todo 领域
   } else if (edu_weeks === 95 + 9) {
     // 皇帝与${chara_talk.name}见面，想让${chara_talk.name}看到不同的风景

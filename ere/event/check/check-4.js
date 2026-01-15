@@ -134,26 +134,26 @@ module.exports = class extends CustomizedCheck {
           event_obj,
         );
       switch (edu_weeks) {
-        // 丸善斯基登场 wind = 1
-        case 5: //来自姐姐的礼物 (已完成) wind = 2
+        //  暂时先删除丸善斯基登场处的wind标记 从礼物开始为1
+        case 5: //来自姐姐的礼物 (已完成) wind = 1
           add_event(event_hooks.week_start, event_obj_special);
           break;
-        case 24: //训练结束的普通一天 (已完成) wind = 3
+        case 24: //训练结束的普通一天 (已完成) wind = 2
           add_event(event_hooks.week_start, event_obj_special);
           break;
-        case 30: //三女神的孩子们(已完成) wind =4
+        case 30: //三女神的孩子们(已完成) wind = 3
           add_event(event_hooks.week_start, event_obj_special);
           break;
-        case 34: //礼物 (已完成)  wind = 5
+        case 34: //礼物 (已完成)  wind = 4
           add_event(event_hooks.week_start, event_obj_special);
           break;
         case 39: //万圣节 (已完成)
           add_event(event_hooks.week_end, event_obj_special);
           break;
-        case 41: //训练员与担当马娘 (已完成) wind = 6
+        case 41: //训练员与担当马娘 (已完成) wind = 5
           add_event(event_hooks.week_end, event_obj_special);
           break;
-        case 47: //圣诞节 (已完成)
+        case 47: //圣诞节与心跳的回忆 (已完成)
           add_event(event_hooks.week_start, event_obj_special);
           break;
         // 经典年1月第一周 新年 (已完成)
@@ -161,7 +161,7 @@ module.exports = class extends CustomizedCheck {
         case 47 + 1:
           add_event(event_hooks.week_start, event_obj_special);
           break;
-        // 2月1日 春冬之交 (已完成) wind = 7
+        // 2月1日 春冬之交 (已完成) wind = 6
         case 47 + 5:
           add_event(event_hooks.week_start, event_obj_special);
           break;
@@ -169,7 +169,7 @@ module.exports = class extends CustomizedCheck {
         case 47 + 6:
           add_event(event_hooks.week_start, event_obj_special);
           break;
-        // 1月第三周 偶像 (已完成) wind +- 8
+        // 1月第三周 偶像 (已完成) wind +- 7
         case 47 + 7:
           add_event(event_hooks.week_start, event_obj_special);
           break;
@@ -177,27 +177,27 @@ module.exports = class extends CustomizedCheck {
         case 47 + 9:
           add_event(event_hooks.week_start, event_obj_special);
           break;
-        // 5月第二周 晚上好，是丸善斯基哦(已完成) wind +- 8
+        // 5月第二周 晚上好，是丸善斯基哦(已完成) wind +- 7
         case 47 + 16:
           add_event(event_hooks.week_end, event_obj_special);
           break;
-        // 5月第三周 憧憬 (已完成) wind +- 9
+        // 5月第三周 憧憬 (已完成) wind +- 7
         case 47 + 17:
           add_event(event_hooks.week_start, event_obj_special);
           break;
-        // 8月第一周 夏季合宿开始 (已完成) wind = 9
+        // 8月第一周 夏季合宿开始 (已完成) wind = 8
         case 47 + 29:
           add_event(event_hooks.week_start, event_obj_special);
           break;
-        // 8月第二周 庙会 (已完成) wind = 10
+        // 8月第二周 庙会 (已完成) wind = 9
         case 47 + 30:
           add_event(event_hooks.week_start, event_obj_special);
           break;
-        //8月第三周 抉择 (已完成) wind = 11
+        //8月第三周 抉择 (已完成) wind = 10
         case 47 + 31:
           add_event(event_hooks.week_start, event_obj_special);
           break;
-        //8月第四周 夏季合宿结束 (已完成) wind = 12
+        //8月第四周 夏季合宿结束 (已完成) wind = 11
         case 47 + 32:
           add_event(event_hooks.week_end, event_obj_special);
           break;
@@ -209,15 +209,15 @@ module.exports = class extends CustomizedCheck {
         case 47 + 34:
           add_event(event_hooks.week_end, event_obj_special);
           break;
-        //10月第一周 思绪 (已完成) wind = 13
+        //10月第一周 思绪 (已完成) wind = 12
         case 47 + 37:
           add_event(event_hooks.week_end, event_obj_special);
           break;
-        //10月第一周 无风 (已完成) wind = 14
+        //10月第一周 无风 (已完成) wind = 13
         case 47 + 38:
           add_event(event_hooks.week_end, event_obj_special);
           break;
-        //10月第四周 万圣节 (已完成)
+        //10月第四周 万圣节 (已完成) wind = 14
         case 47 + 40:
           add_event(event_hooks.week_start, event_obj_special);
           break;
@@ -233,7 +233,7 @@ module.exports = class extends CustomizedCheck {
         case 95 + 6:
           add_event(event_hooks.week_start, event_obj_special);
           break;
-        //2月第四周 焱炎 (已完成) wind =16
+        //2月第四周 焱炎 (已完成) wind =15
         case 95 + 9:
           add_event(event_hooks.week_end, event_obj_special);
           break;
@@ -241,23 +241,23 @@ module.exports = class extends CustomizedCheck {
         case 95 + 14:
           add_event(event_hooks.week_start, event_obj_special);
           break;
-        // 8月第一周 夏季合宿开始(已完成) wind = 17
+        // 8月第一周 夏季合宿开始(已完成) wind = 16
         case 95 + 29:
           add_event(event_hooks.week_start, event_obj_special);
           break;
-        // 8月第二周 庙会 (已完成) wind = 18
+        // 8月第二周 庙会 (已完成) wind = 17
         case 95 + 30:
           add_event(event_hooks.week_start, event_obj_special);
           break;
-        // 8月第四周 夏季合宿结束 (已完成) wind = 19
+        // 8月第四周 夏季合宿结束 (已完成) wind = 18
         case 95 + 32:
           add_event(event_hooks.week_end, event_obj_special);
           break;
         //10月第四周 不给糖就捣蛋！ (已完成)
         case 95 + 40:
-          add_event(event_hooks.week_end, event_obj_special);
+          add_event(event_hooks.week_start, event_obj_special);
           break;
-        //10月第三周 温柔的风 (已完成) wind = 20
+        //10月第三周 温柔的风 (已完成) wind = 19
         case 95 + 43:
           add_event(event_hooks.week_end, event_obj_special);
           break;
@@ -265,7 +265,7 @@ module.exports = class extends CustomizedCheck {
         case 95 + 48:
           add_event(event_hooks.week_start, event_obj_special);
           break;
-        // 3月第四周 姐姐的烦恼 wind =7
+        // 3月第四周 粉丝感谢祭&姐姐的烦恼 wind =6
         case 47 + 12:
           if (
             edu_weeks === 47 + 12 &&
@@ -324,11 +324,12 @@ module.exports = class extends CustomizedCheck {
   check_palace_and_get_aims() {
     const races = new RaceHistory(4).get();
     const event_marks = new MaEduMarks(4);
+    //todo ge条件,于第三年天秋击败皇帝
     if (
       check_aim_race(races, race_enum.toky_yus, 1, 1) &&
       check_aim_race(races, race_enum.sank_hai, 2, 1) &&
       check_aim_race(races, race_enum.tenn_sho, 2, 1) &&
-      event_marks.wind === 20
+      event_marks.wind === 19
     ) {
       new MaEduMarks().fall_heaven++;
     } else if (
@@ -336,7 +337,7 @@ module.exports = class extends CustomizedCheck {
       check_aim_race(races, race_enum.sank_hai, 2, 1) &&
       check_aim_race(races, race_enum.tenn_sho, 2, 1) &&
       event_marks.wind >= 14 &&
-      event_marks.wind <= 19
+      event_marks.wind <= 18
     ) {
       new MaEduMarks().gentle_wind++;
     } else {
