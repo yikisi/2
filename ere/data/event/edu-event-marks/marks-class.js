@@ -22,7 +22,8 @@ class EduEventMarks extends PersonalEventMarks {
    * @param {number} cid
    */
   constructor(cid) {
-    super(cid, '育成用变量');
+    // CFLAGNAME:52 = 育成用变量
+    super(cid, 52);
   }
 }
 

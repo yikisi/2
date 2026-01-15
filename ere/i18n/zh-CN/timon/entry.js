@@ -3,10 +3,10 @@ const proxy_kojo_js = require('#/i18n/proxy');
 class I18nTimon {
   recruit = proxy_kojo_js(require('#/i18n/zh-CN/timon/recruit'));
   daily = proxy_kojo_js(require('#/i18n/zh-CN/timon/daily'));
-  edu;
+  edu = proxy_kojo_js(require('#/i18n/zh-CN/timon/edu'));
   love = proxy_kojo_js(require('#/i18n/zh-CN/timon/love'));
-  ero;
-  basement;
+  ero = proxy_kojo_js(require('#/i18n/zh-CN/timon/ero'));
+  basement = proxy_kojo_js(require('#/i18n/zh-CN/timon/base'));
 
   ending = proxy_kojo_js(require('#/i18n/zh-CN/timon/ending'));
 

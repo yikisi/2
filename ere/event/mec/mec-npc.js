@@ -10,12 +10,13 @@ class MecNpc extends CustomizedMec {
       set(
         `love:${this.id}`,
         Math.min(
-          get('flag:马娘初始爱慕') + sys_personal_achievement.get(this.id) * 20,
+          get('flag:马娘初始爱慕') +
+            (sys_personal_achievement.get(this.id) > 0) * 20,
           30,
         ),
       );
     } else {
-      set(`love:${this.id}`, sys_personal_achievement.get(this.id) * 20);
+      set(`love:${this.id}`, (sys_personal_achievement.get(this.id) > 0) * 20);
     }
   }
 

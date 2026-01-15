@@ -1,60 +1,15 @@
-/**
- * @file 地下室地文
- * @author 露娜俘虏
- * @author 黑奴队长
- */
 const era = require('#/era-electron');
 
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
-const print_event_name = require('#/event/snippets/print-event-name');
+const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { basement_status_enum } = require('#/data/basement-const');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
-const desc_replace_type = { chara_sex: 0, my_name: 1 };
-
-const love_desc = [
-    [{ t: desc_replace_type.chara_sex }, '还有其它的事要做，很快就会离开'],
-    [
-      { t: desc_replace_type.chara_sex },
-      '紧紧地盯着 ',
-      { t: desc_replace_type.my_name },
-      '，看来',
-      { t: desc_replace_type.chara_sex },
-      '不会轻易离开',
-    ],
-    [
-      { t: desc_replace_type.chara_sex },
-      '死死地盯着 ',
-      { t: desc_replace_type.my_name },
-      '，看来',
-      { t: desc_replace_type.chara_sex },
-      '不会轻易离开',
-    ],
-    [
-      { t: desc_replace_type.chara_sex },
-      '向 ',
-      { t: desc_replace_type.my_name },
-      ' 露出微笑，似乎并不打算离开 ',
-      { t: desc_replace_type.my_name },
-    ],
-    [
-      { t: desc_replace_type.chara_sex },
-      '的面容因心碎而扭曲，丝毫没有离开 ',
-      { t: desc_replace_type.my_name },
-      ' 的打算',
-    ],
-  ],
-  security_desc = [
-    '正处于一时冲动下的后悔',
-    '看起来十分紧张，难以冷静',
-    '的执念已经生根发芽',
-    '的决心显然不可低估',
-    '的心防俨然万无一失',
-  ];
+const { i18n } = require('#/i18n/selector');
 
 class CustomizedBase {
   /**
@@ -74,631 +29,271 @@ class CustomizedBase {
     return this;
   }
 
-  /**
-   * 初入地下室的欢迎 - 无人版本
-   * @author 黑奴队长
-   */
+  /** 初入地下室的欢迎 - 无人版本 */
   first_time() {
-    era.print([
-      '不知过了多久，',
-      get_chara_talk(0).get_colored_name(),
-      ' 在一张简单的小床上悠悠醒转……',
-    ]);
-    era.print('眼前是陌生的天花板……');
+    i18n().timon.basement.first_time(get_chara_talk(0));
   }
 
-  /**
-   * 初入地下室的欢迎
-   * @author 黑奴队长
-   */
+  /** 初入地下室的欢迎 */
   welcome() {
-    const me = get_chara_talk(0),
-      chara = get_chara_talk(this.id);
-    if (LifeEventMarks.get_marks(0).b_start) {
-      era.print([
-        '不知过了多久，',
-        me.get_colored_name(),
-        ' 在一张简单的小床上悠悠醒转……',
-      ]);
-      era.print([
-        '眼前是陌生的天花板……与微笑的 ',
-        chara.get_colored_name(),
-        '。',
-      ]);
-      era.print([
-        '现在，',
-        me.get_colored_name(),
-        ' 成为了这座爱意牢笼中的囚徒……而 ',
-        chara.get_colored_name(),
-        ' 是唯一的狱卒……',
-      ]);
-    } else {
-      era.print(['不知过了多久，', me.get_colored_name(), ' 悠悠醒转……']);
-      era.print([
-        '眼前是依然陌生的天花板……与微笑的 ',
-        chara.get_colored_name(),
-        '。',
-      ]);
-      era.print(['囚徒和', me.sex, '唯一的狱卒，终于在这爱意的囚笼中相会了……']);
-    }
+    i18n().timon.basement.welcome(get_chara_talk(this.id), get_chara_talk(0));
   }
 
   /**
    * 地下室的基础情报，显示在当前互动角色情报下面，说明角色当前的警戒度和独占力情况
-   * @author 露娜俘虏
-   * @author 黑奴队长
    * @param {boolean} [can_strike]
    */
   get_basement_info(can_strike) {
-    const chara = get_chara_talk(this.id),
-      my_name = get_chara_talk(0).get_colored_name();
+    const chara = get_chara_talk(this.id);
     if (can_strike) {
-      return [
-        chara.get_colored_name(),
-        ' 刚刚回到这里，也许是一个偷袭的好机会……',
-      ];
+      return i18n().timon.basement.get_info_strike(chara);
     } else if (sys_check_awake(this.id)) {
-      const life_marks = LifeEventMarks.get_marks(this.id),
-        relation = era.get(`relation:${this.id}:0`),
-        love = era.get(`love:${this.id}`);
+      const { b_s_level } = LifeEventMarks.get_marks(this.id);
+      const relation = era.get(`relation:${this.id}:0`);
+      const love = era.get(`love:${this.id}`);
       let love_level =
         (love >= 85) * 2 +
-        (relation < (era.get('flag:极端行为限制') || 1) * love);
+        // FLAGNAME:110 = 极端行为限制
+        (relation < (era.get('flag:110') || 1) * love);
       if (love_level === 3 && relation < 0) {
         love_level = 4;
       }
-      return [
-        chara.get_colored_name(),
-        ' ',
-        security_desc[life_marks.b_s_level - 1],
-        '……',
-        ...love_desc[love_level].map((e) => {
-          switch (e.t) {
-            case desc_replace_type.chara_sex:
-              return chara.sex;
-            case desc_replace_type.my_name:
-              return my_name;
-          }
-          return e;
-        }),
-        '……',
-        LifeEventMarks.get_marks(this.id).b_status ===
-        1 << basement_status_enum.fix
-          ? '正在加固地下室……'
-          : '',
-      ];
+      return i18n().timon.basement.get_info_awake(
+        chara,
+        get_chara_talk(0),
+        b_s_level,
+        love_level,
+        (LifeEventMarks.get_marks(this.id).b_status &
+          (1 << basement_status_enum.fix)) >
+          0,
+      );
     } else {
-      return [
-        chara.get_colored_name(),
-        era.get('status:0:马跳S') ? ' 沉沉' : ' 静静',
-        '地睡着……',
-      ];
+      return i18n().timon.basement.get_info_sleep(chara);
     }
   }
 
   /**
    * 讨好角色后的反应
-   * @author 黑奴队长
    * @param {number} [supporter]
    */
   async flatter(supporter) {}
 
-  /**
-   * 趁角色刚回到地下室偷袭成功
-   * @author 黑奴队长
-   */
+  /** 趁角色刚回到地下室偷袭成功 */
   async strike_success() {
-    await era.printAndWait([
-      get_chara_talk(0).get_colored_name(),
-      ' 的偷袭奏效了！成功逃离了地下室！',
-    ]);
+    await i18n().timon.basement.strike_success(get_chara_talk(0));
   }
 
-  /**
-   * 趁角色刚回到地下室偷袭失败，被打晕了
-   * @author 黑奴队长
-   */
+  /** 趁角色刚回到地下室偷袭失败，被打晕了 */
   async strike_fail() {
-    await era.printAndWait([
-      get_chara_talk(0).get_colored_name(),
-      ' 的偷袭失败了！被打晕了过去！',
-    ]);
+    await i18n().timon.basement.strike_fail(get_chara_talk(0));
   }
 
-  /**
-   * 正面击败角色，但还不知道能不能解除机关
-   * @author 黑奴队长
-   */
+  /** 正面击败角色，但还不知道能不能解除机关 */
   async battle_success() {
-    await era.printAndWait([
-      get_chara_talk(0).get_colored_name(),
-      ' 对 ',
-      get_chara_talk(this.id).get_colored_name(),
-      ' 的反抗成功了！',
-    ]);
+    await i18n().timon.basement.battle_success(
+      get_chara_talk(this.id),
+      get_chara_talk(0),
+    );
   }
 
-  /**
-   * 没能正面击败角色，直接就被打晕了
-   * @author 黑奴队长
-   */
+  /** 没能正面击败角色，直接就被打晕了 */
   async battle_fail() {
-    await era.printAndWait([
-      get_chara_talk(0).get_colored_name(),
-      ' 的反抗失败了！被 ',
-      get_chara_talk(this.id).get_colored_name(),
-      ' 打晕了过去！',
-    ]);
+    await i18n().timon.basement.battle_fail(
+      get_chara_talk(this.id),
+      get_chara_talk(0),
+    );
   }
 
-  /**
-   * 正面击败角色后当面成功解除机关
-   * @author 黑奴队长
-   */
+  /** 正面击败角色后当面成功解除机关 */
   async battle_escape() {
-    await era.printAndWait([
-      get_chara_talk(0).get_colored_name(),
-      ' 成功解除了机关，逃离了地下室！',
-    ]);
+    await i18n().timon.basement.battle_escape(get_chara_talk(0));
   }
 
-  /**
-   * 正面击败角色后解除机关失败，没跑出去又被打晕了
-   * @author 黑奴队长
-   */
+  /** 正面击败角色后解除机关失败，没跑出去又被打晕了 */
   async battle_prison() {
-    const me = get_chara_talk(0);
-    await era.printAndWait([
-      '但 ',
-      me.get_colored_name(),
-      ' 败给了机关……',
-      { isBr: true },
-      me.get_colored_name(),
-      ' 被打晕后带回了地下室……',
-    ]);
+    await i18n().timon.basement.battle_prison(get_chara_talk(0));
   }
 
   /**
    * 角色回到地下室/醒来发现玩家在逃离地下室
-   * @author 黑奴队长
    * @param {boolean} out_of_prison
    * @param {boolean} s_level_up
    * @param {boolean} [is_back]
    */
   find_escape(out_of_prison, s_level_up, is_back) {
-    const chara = get_chara_talk(this.id),
-      me = get_chara_talk(0);
-    if (out_of_prison) {
-      era.print([
-        me.get_colored_name(),
-        ' 被刚',
-        is_back ? '回来' : '醒来',
-        '的 ',
-        chara.get_colored_name(),
-        ' 撞个正着！',
-      ]);
-    } else {
-      era.print([me.get_colored_name(), ' 尝试逃离地下室的行为被当场撞破！']);
-    }
-    era.print([
-      '愠怒的 ',
-      chara.get_colored_name(),
-      ' 将 ',
-      me.get_colored_name(),
-      ' 拖了回去！',
-    ]);
-    if (s_level_up) {
-      era.print([
-        chara.get_colored_name(),
-        ' 对 ',
-        me.get_colored_name(),
-        ' 更加警惕了……',
-      ]);
-    }
+    i18n().timon.basement.find_escape(
+      get_chara_talk(this.id),
+      get_chara_talk(0),
+      out_of_prison,
+      s_level_up,
+      is_back,
+    );
   }
 
-  /**
-   * 加固地下室
-   * @author 黑奴队长
-   */
+  /** 加固地下室 */
   fix_prison() {
-    era.print([get_chara_talk(this.id).get_colored_name(), ' 加固了地下室……']);
+    i18n().timon.basement.fix_prison(get_chara_talk(this.id));
   }
 
-  /**
-   * 从沉睡中清醒
-   * @author 黑奴队长
-   */
+  /** 从沉睡中清醒 */
   get_up() {
-    const chara = get_chara_talk(this.id),
-      life_marks = LifeEventMarks.get_marks(this.id);
-    if (life_marks.b_start) {
-      era.print([
-        '在酣眠过后，这间地下室的主人——',
-        chara.get_colored_name(),
-        ' 终于醒来，开始享受与 ',
-        get_chara_talk(0).get_colored_name(),
-        ' 共度的时光……',
-      ]);
-      life_marks.b_start = 0;
-    } else {
-      era.print([chara.get_colored_name(), ' 悠悠醒转……']);
-    }
+    i18n().timon.basement.get_up(get_chara_talk(this.id), get_chara_talk(0));
+    LifeEventMarks.get_marks(this.id).b_start = 0;
   }
 
-  /**
-   * 回到地下室
-   * @author 黑奴队长
-   */
+  /** 回到地下室 */
   back_basement() {
-    const chara = get_chara_talk(this.id),
-      life_marks = LifeEventMarks.get_marks(this.id);
-    if (life_marks.b_start) {
-      era.print([
-        '在漫长的等待后，这间地下室的主人——',
-        chara.get_colored_name(),
-        ' 终于现身，开始享受与 ',
-        get_chara_talk(0).get_colored_name(),
-        ' 共度的时光……',
-      ]);
-    } else {
-      era.print([chara.get_colored_name(), ' 回到地下室了……']);
-    }
+    i18n().timon.basement.back_basement(
+      get_chara_talk(this.id),
+      get_chara_talk(0),
+    );
+    LifeEventMarks.get_marks(this.id).b_start = 0;
   }
 
-  /**
-   * 因精力不足而昏睡
-   * @author 黑奴队长
-   */
+  /** 因精力不足而昏睡 */
   deep_sleep() {}
 
-  /**
-   * 进食
-   * @author 黑奴队长
-   */
+  /** 进食 */
   eat_something() {}
 
-  /**
-   * 因精力不足而主动选择睡眠
-   * @author 黑奴队长
-   */
+  /** 因精力不足而主动选择睡眠 */
   sleep() {}
 
-  /**
-   * 角色主动调情
-   * @author 黑奴队长
-   */
+  /** 角色主动调情 */
   lure() {}
 
-  /**
-   * 选择雷普玩家
-   * @author 黑奴队长
-   */
+  /** 选择雷普玩家 */
   async rape(supporter) {
-    if (supporter > 0) {
-      await era.printAndWait([
-        '在 ',
-        get_chara_talk(this.id).get_colored_name(),
-        ' 的带领下，',
-        get_chara_talk(supporter).get_colored_name(),
-        ' 一起向 ',
-        get_chara_talk(0).get_colored_name(),
-        ' 缓缓逼近……',
-      ]);
-    } else {
-      await era.printAndWait([
-        get_chara_talk(this.id).get_colored_name(),
-        ' 向 ',
-        get_chara_talk(0).get_colored_name(),
-        ' 缓缓逼近……',
-      ]);
-    }
+    await i18n().timon.basement.rape(
+      get_chara_talk(this.id),
+      get_chara_talk(0),
+      supporter > 0 ? get_chara_talk(supporter) : void 0,
+    );
   }
 
-  /**
-   * 开始加固地下室
-   * @author 黑奴队长
-   */
+  /** 开始加固地下室 */
   start_fixing() {}
 
-  /**
-   * 刚刚离开
-   * @author 黑奴队长
-   */
+  /** 刚刚离开 */
   out() {}
 
-  /**
-   * 请求对方释放，对方同意
-   * @author 黑奴队长
-   */
+  /** 请求对方释放，对方同意 */
   async ask_release_agree() {
-    const chara = get_chara_talk(this.id),
-      me = get_chara_talk(0);
-    await era.printAndWait([
-      chara.get_colored_name(),
-      ' 面带愧疚地同意了 ',
-      me.get_colored_name(),
-      '。',
-    ]);
-    await era.printAndWait([
-      me.get_colored_name(),
-      ' 摸了摸 ',
-      chara.get_colored_name(),
-      ' 的头，表示自己并未在意。',
-    ]);
+    await i18n().timon.ask_release_agree(
+      get_chara_talk(this.id),
+      get_chara_talk(0),
+    );
   }
 
-  /**
-   * 请求对方释放，对方拒绝
-   * @author 黑奴队长
-   */
+  /** 请求对方释放，对方拒绝 */
   async ask_release_reject() {
-    const chara = get_chara_talk(this.id),
-      me = get_chara_talk(0);
-    await era.printAndWait([
-      chara.get_colored_name(),
-      ' 浅笑着拒绝了 ',
-      me.get_colored_name(),
-      ' 的请求。',
-    ]);
+    await i18n().timon.ask_release_reject(
+      get_chara_talk(this.id),
+      get_chara_talk(0),
+    );
   }
 
-  /**
-   * 询问时间
-   * @author 黑奴队长
-   */
+  /** 询问时间 */
   async ask_time(date, hours, minutes) {
-    const chara = get_chara_talk(this.id),
-      me = get_chara_talk(0);
-    await chara.say_and_wait('几点了呢？');
-    await era.printAndWait([
-      chara.get_colored_name(),
-      ' 只是笑眯眯地看着 ',
-      me.get_colored_name(),
-      '。',
-    ]);
+    await i18n().timon.ask_time(get_chara_talk(this.id), get_chara_talk(0));
   }
 
   /**
    * 救援事件 - 失败
-   * @author 黑奴队长
    * @param {number} owner_id
    */
   async rescue_fail(owner_id) {
-    const chara = get_chara_talk(this.id),
-      owner = get_chara_talk(owner_id),
-      me = get_chara_talk(0);
     if (sys_check_awake(0)) {
-      await print_event_name('功败垂成', chara);
-      await era.printAndWait([
-        chara.get_colored_name(),
-        ' 闯进了 ',
-        owner.get_colored_name(),
-        ' 精心设计的地下室，但是未能救出心爱的 ',
-        me.get_colored_name(),
-        '……',
-      ]);
-      await era.printAndWait([
-        '在 ',
-        me.get_colored_name(),
-        ' 绝望的目光中，',
-        chara.get_colored_name(),
-        ' 被 ',
-        owner.get_colored_name(),
-        ' 赶出了地下室……',
-      ]);
+      await print_title_with_kojo(
+        i18n().timon.basement,
+        'rescue_fail_awake',
+        get_chara_talk(this.id),
+        get_chara_talk(0),
+        get_chara_talk(owner_id),
+      );
     } else {
-      await era.printAndWait([me.get_colored_name(), ' 被一阵打斗声吵醒。']);
-      await era.printAndWait([
-        '地下室一片狼藉，但全须全尾的 ',
-        owner.get_colored_name(),
-        ' 仍然朝 ',
-        me.get_colored_name(),
-        ' 微笑着……',
-      ]);
+      await i18n().timon.basement.rescue_fail_sleep(
+        get_chara_talk(owner_id),
+        get_chara_talk(0),
+      );
     }
   }
 
   /**
    * 救援事件 - 趁主人不在时救援成功
-   * @author 黑奴队长
    * @param {number} owner_id
    */
   async rescue_sneak_success(owner_id) {
-    const chara = get_chara_talk(this.id),
-      owner = get_chara_talk(owner_id),
-      me = get_chara_talk(0);
-    await print_event_name('英雄救美', chara);
-    if (sys_check_awake(0)) {
-      await era.printAndWait([
-        '趁 ',
-        owner.get_colored_name(),
-        sys_check_awake(owner_id) ? ' 不在，' : ' 正在酣眠，',
-        chara.get_colored_name(),
-        ' 潜入了地下室，扶着 ',
-        me.get_colored_name(),
-        ' 扬长而去……',
-      ]);
-    } else {
-      await era.printAndWait([
-        me.get_colored_name(),
-        ' 在朦胧中感到正在被搬运。',
-      ]);
-      await era.printAndWait([
-        '醒来之后，却已经身在训练室，面前则是微笑着的 ',
-        chara.get_colored_name(),
-        '。',
-      ]);
-    }
+    await print_title_with_kojo(
+      i18n().timon.basement,
+      'rescue_sneak_success',
+      get_chara_talk(this.id),
+      get_chara_talk(0),
+      get_chara_talk(owner_id),
+      sys_check_awake(0),
+      sys_check_awake(owner_id),
+    );
   }
 
   /**
    * 救援事件 - 趁主人不在时救援成功，但是将玩家关到自己的地下室
-   * @author 黑奴队长
    * @param {number} owner_id
    */
   async rescue_sneak_prison(owner_id) {
-    const chara = get_chara_talk(this.id),
-      owner = get_chara_talk(owner_id),
-      me = get_chara_talk(0);
-    await print_event_name('刚出虎口……', chara);
-    if (sys_check_awake(0)) {
-      await era.printAndWait([
-        '趁 ',
-        owner.get_colored_name(),
-        sys_check_awake(owner_id) ? ' 不在，' : ' 正在酣眠，',
-        chara.get_colored_name(),
-        ' 潜入了地下室，扶着 ',
-        me.get_colored_name(),
-        ' 扬长而去……',
-      ]);
-      await era.printAndWait([
-        '在 ',
-        me.get_colored_name(),
-        ' 以为可以回归日常时，',
-        chara.get_colored_name(),
-        ' 却扶着 ',
-        me.get_colored_name(),
-        ' 来到另一个地方，然后传来了一声轻响……',
-      ]);
-    } else {
-      await era.printAndWait([
-        me.get_colored_name(),
-        ' 在朦胧中感到正在被搬运。',
-      ]);
-      await era.printAndWait([
-        '醒来之后，却仍然身处地下室，布局与之前的有所不同，而面前站着微笑的 ',
-        chara.get_colored_name(),
-        '。',
-      ]);
-    }
-    await era.printAndWait('「咔哒」', { fontSize: '1.5rem' });
+    await print_title_with_kojo(
+      i18n().timon.basement,
+      'rescue_sneak_prison',
+      get_chara_talk(this.id),
+      get_chara_talk(0),
+      get_chara_talk(owner_id),
+      sys_check_awake(0),
+      sys_check_awake(owner_id),
+    );
   }
 
   /**
    * 救援事件 - 和玩家关系不睦，因此同流合污
-   * @author 黑奴队长
    * @param {number} owner_id
    */
   async rescue_join(owner_id) {
-    const chara = get_chara_talk(this.id),
-      owner = get_chara_talk(owner_id),
-      me = get_chara_talk(0);
-    await print_event_name('天有二日', chara);
-    if (sys_check_awake(0)) {
-      await era.printAndWait([
-        chara.get_colored_name(),
-        ' 闯入了 ',
-        owner.get_colored_name(),
-        ' 精心设计的地下室，与 ',
-        owner.get_colored_name(),
-        ' 对峙。',
-      ]);
-      await era.printAndWait([
-        '在 ',
-        me.get_colored_name(),
-        ' 以为会大打出手时，',
-        chara.get_couple_title(),
-        '竟然握手言和了……',
-      ]);
-    } else {
-      await era.printAndWait([
-        me.get_colored_name(),
-        ' 从朦胧中清醒，意外地发现地下室内除了自己和 ',
-        owner.get_colored_name(),
-        ' 之外，还有第三个人——',
-        chara.get_colored_name(),
-        '。',
-      ]);
-    }
-    await era.printAndWait([
-      '现在，这间狭小的地下室，和其中的 ',
-      me.get_colored_name(),
-      ' 有了两个主人……',
-    ]);
+    await print_title_with_kojo(
+      i18n().timon.basement,
+      'rescue_join',
+      get_chara_talk(this.id),
+      get_chara_talk(0),
+      get_chara_talk(owner_id),
+      sys_check_awake(0),
+    );
   }
 
   /**
    * 救援事件 - 正面击败主人，救援成功
-   * @author 黑奴队长
    * @param {number} owner_id
    */
   async rescue_battle_success(owner_id) {
-    const chara = get_chara_talk(this.id),
-      owner = get_chara_talk(owner_id),
-      me = get_chara_talk(0);
-    await print_event_name('英雄救美', chara);
-    if (sys_check_awake(0)) {
-      await era.printAndWait([
-        chara.get_colored_name(),
-        ' 闯进了 ',
-        owner.get_colored_name(),
-        ' 精心设计的地下室，将 ',
-        owner.get_colored_name(),
-        ' 击倒在地……',
-      ]);
-      await era.printAndWait([
-        '在 ',
-        owner.get_colored_name(),
-        ' 的注视中，',
-        chara.get_colored_name(),
-        ' 扶着 ',
-        me.get_colored_name(),
-        ' 扬长而去……',
-      ]);
-    } else {
-      await era.printAndWait([
-        me.get_colored_name(),
-        ' 在朦胧中感到正在被搬运。',
-      ]);
-      await era.printAndWait([
-        '醒来之后，却已经身在训练室，面前则是衣着有些褶皱，但仍然微笑着的 ',
-        chara.get_colored_name(),
-        '。',
-      ]);
-    }
+    await print_title_with_kojo(
+      i18n().timon.basement,
+      'rescue_battle_success',
+      get_chara_talk(this.id),
+      get_chara_talk(0),
+      get_chara_talk(owner_id),
+      sys_check_awake(0),
+    );
   }
 
   /**
    * 救援事件 - 正面击败主人，但是把玩家关到自己的地下室
-   * @author 黑奴队长
    * @param {number} owner_id
    */
   async rescue_battle_prison(owner_id) {
-    const chara = get_chara_talk(this.id),
-      owner = get_chara_talk(owner_id),
-      me = get_chara_talk(0);
-    await print_event_name('刚出虎口……', chara);
-    if (sys_check_awake(0)) {
-      await era.printAndWait([
-        chara.get_colored_name(),
-        ' 闯进了 ',
-        owner.get_colored_name(),
-        ' 精心设计的地下室，将 ',
-        owner.get_colored_name(),
-        ' 击倒在地……',
-      ]);
-      await era.printAndWait([
-        '在 ',
-        me.get_colored_name(),
-        ' 以为可以回归日常时，',
-        chara.get_colored_name(),
-        ' 却扶着 ',
-        me.get_colored_name(),
-        ' 来到另一个地方，然后传来了一声轻响……',
-      ]);
-    } else {
-      await era.printAndWait([
-        me.get_colored_name(),
-        ' 在朦胧中感到正在被搬运。',
-      ]);
-      await era.printAndWait([
-        '醒来之后，却仍然身处地下室，布局与之前的有所不同，而面前站着衣着有些褶皱、但仍在微笑的 ',
-        chara.get_colored_name(),
-        '……',
-      ]);
-    }
-    await era.printAndWait('「咔哒」', { fontSize: '1.5rem' });
+    await print_title_with_kojo(
+      i18n().timon.basement,
+      'rescue_battle_prison',
+      get_chara_talk(this.id),
+      get_chara_talk(0),
+      get_chara_talk(owner_id),
+      sys_check_awake(0),
+    );
   }
 
   handle_escape() {}

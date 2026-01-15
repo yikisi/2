@@ -359,7 +359,8 @@ module.exports = {
       relation = 125;
     }
     relation +=
-      era.get(`relation:${cid}:0`) + 300 * sys_personal_achievement.get(cid);
+      era.get(`relation:${cid}:0`) +
+      (sys_personal_achievement.get(cid) > 0) * 300;
     era.set(`relation:${cid}:0`, Math.min(relation, 600));
     if (era.get(`cflag:${cid}:种族`) > 0 && era.get(`talent:${cid}:病娇`) > 0) {
       yandere_list.push(cid);

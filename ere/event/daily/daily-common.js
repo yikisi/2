@@ -510,11 +510,13 @@ class CustomizedDaily {
     await i18n().timon.daily.o_s_movie(chara, me);
   }
 
-  async out_church() {
+  /** @param {HookArg} hook */
+  async out_church(hook) {
     const chara = get_chara_talk(this.id);
     const me = get_chara_talk(0);
     const dice = Math.random();
     await this.o_c_pray(chara, me, dice);
+    hook.arg = dice < 0.5;
     if (dice < 0.05) {
       await i18n().timon.daily.oc_great_luck(chara, dice);
       // FLAGNAME:122 = 强奸抵抗

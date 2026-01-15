@@ -1,7 +1,3 @@
-/**
- * @file 小栗帽 - 育成
- * @author 雞雞
- */
 const era = require('#/era-electron');
 
 const sys_get_chara_pseudo = require('#/system/chara/sys-get-chara-pseudo');

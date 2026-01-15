@@ -114,6 +114,8 @@ class I18nRaces {
     return this.t_playground;
   }
 
+  sim = '模拟赛';
+
   0 = '出道战';
   // GENERATED START
   1 = '少年杯';

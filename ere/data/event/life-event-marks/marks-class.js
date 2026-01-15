@@ -61,7 +61,8 @@ class LifeEventMarks extends PersonalEventMarks {
    * @param {number} cid
    */
   constructor(cid) {
-    super(cid, '扩展变量');
+    // CFLAGNAME:57 = 扩展变量
+    super(cid, 57);
   }
 }
 

@@ -247,7 +247,7 @@ async function page_custom() {
     CharaTitles.get(0).push({ c: buff_colors[2], n: 'es_egg_621', s: true });
   } else if (
     era.get('callname:0:-1').indexOf('天马闪光蹄') !== -1 &&
-    sys_personal_achievement.get(3)
+    sys_personal_achievement.get(3) > 0
   ) {
     era.set('flag:角色性别', 0);
     era.set('flag:彩蛋机制', 3);

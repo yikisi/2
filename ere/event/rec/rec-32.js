@@ -63,7 +63,7 @@ module.exports = class extends CustomizedRecruit {
       case event_hooks.recruit_start:
         era.print(`${me.name} 依旧忘不了几天前在这里看见的那副跑姿`);
         era.print(
-          `${me.name} 找遍了一般未出道马娘会出没的地方，训练场、模拟赛场、健身房、食堂`,
+          `${me.name} 找遍了一般未出道${tachyon.uma_sex_title}会出没的地方，训练场、模拟赛场、健身房、食堂`,
         );
         await era.printAndWait(
           `这几天，${me.name} 再没见过那名${tachyon.get_uma_sex_title()}的身影，仿佛凭空消失了一般`,

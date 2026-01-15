@@ -1,9 +1,3 @@
-/**
- * @file 育成地文
- * @author 雞雞
- * @author 幽白書
- * @author 黑奴队长
- */
 const era = require('#/era-electron');
 
 const { get_sex_acceptable } = require('#/system/ero/sys-calc-ero-status');
@@ -18,19 +12,12 @@ const {
 const { sys_check_remote } = require('#/system/sys-calc-chara-param');
 const { sys_change_fame } = require('#/system/sys-calc-flag');
 
-const select_yes_or_no = require('#/page/components/select-yes-or-no');
-
-const ICustomizedEdu = require('#/event/edu/common/edu-interface');
-const print_fail_info_in_train = require('#/event/edu/common/print-fail-info-in-train');
-const kojo = require('#/event/edu/edu-common.kojo');
 const { check_sub_slavery } = require('#/event/snippets/check-slavery');
-const generate_dictionary = require('#/event/snippets/generate-dictionary');
-const print_event_name = require('#/event/snippets/print-event-name');
 const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
-const { get_random_value } = require('#/utils/value-utils');
+const { get_abbr_number, get_random_value } = require('#/utils/value-utils');
 
 const CharaTitles = require('#/data/chara-titles');
 const { buff_colors, money_color } = require('#/data/color-const');
@@ -49,24 +36,19 @@ const { attr_enum, fumble_result } = require('#/data/train-const');
 
 const { i18n } = require('#/i18n/selector');
 
-class CustomizedEdu extends ICustomizedEdu {
+class CustomizedEdu {
   /** @type {function} */
   static load_game;
   static common_event_count = 0;
 
-  get #dict() {
-    return generate_dictionary(this.id, { uma: true });
-  }
-
   /**
-   * @author 雞雞
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    */
   static async common_palace(chara, me) {
     const { check, count, buffer } = CustomizedEdu.get_palace_info(chara);
     const titles = CharaTitles.get(chara.id).get();
-    if (
+    const in_palace =
       check >= 6 ||
       (check >= 4 &&
         titles.findIndex((t) => {
@@ -99,134 +81,57 @@ class CustomizedEdu extends ICustomizedEdu {
             t.n === i18n('zh-CN').title.r_3crown_ai ||
             t.n === i18n('zh-CN').title.r_6crown
           );
-        }) !== -1)
-    ) {
-      await print_event_name('登上殿堂宝座', chara);
-      await era.printAndWait(
-        `每年一月，URA赛${chara.get_uma_sex_title()}殿堂就会开始针对退役马娘进行票选。`,
-      );
-      era.println();
-      await era.printAndWait(
-        `而到了三月，生涯功成名就，且在严格票选中脱颖而出的赛${chara.get_uma_sex_title()}将会登上殿堂，并获得《显彰赛${chara.get_uma_sex_title()}》此一至高无上的荣誉。`,
-      );
-      era.println();
-      await era.printAndWait([
-        '而 ',
-        me.get_colored_name(),
-        ' 的爱马 ',
-        chara.get_colored_name(),
-        '——',
-      ]);
-      era.add(`cflag:${chara.id}:殿堂`, 1);
-    } else {
-      await print_event_name('殿堂宝座之下', chara);
-
-      await era.printAndWait('很遗憾未能入选殿堂。');
-      era.println();
-      await era.printAndWait([
-        '但 ',
-        me.get_couple_title(),
-        ' 也仍然为竭尽全力达到的成果感到骄傲，并且相信后来者能站在自己的肩上爬向更高的顶点。',
-      ]);
-    }
-    era.println();
-    for (const seg of buffer) {
-      await era.printAndWait(seg);
-    }
-    era.println();
-    const title = CharaTitles.get(chara.id).get_colored_curr_title();
+        }) !== -1);
+    let title = CharaTitles.get(chara.id).get_colored_curr_title();
+    title = title ? [title, ' '] : [];
     const fame_reward =
       (count.g1 * race_rewards[class_enum.G1].r01.fame) / 2 +
       (count.g2 * race_rewards[class_enum.G2].r01.fame) / 2 +
       (count.g3 * race_rewards[class_enum.G3].r05.fame) / 2;
-    if (check >= 6) {
-      await era.printAndWait([
-        `随着以${chara.sex}为蓝本的铜像揭幕，`,
-        ...(title ? [title, ' '] : []),
-        chara.get_colored_name(),
-        ` 的传奇故事将会永远留在殿堂之中……`,
-      ]);
+    await print_title_with_kojo(
+      i18n().timon.edu,
+      in_palace ? 'on_palace' : 'under_palace',
+      chara,
+      me,
+      buffer,
+      title,
+    );
+    if (in_palace) {
+      // CFLAGNAME:47 = 殿堂
+      era.add(`cflag:${chara.id}:47`, 1);
       era.println();
       sys_like_chara(302, 0, fame_reward / 5 + 20) && (await era.waitAnyKey());
       sys_like_chara(301, 0, 100) && (await era.waitAnyKey());
     } else {
-      await era.printAndWait([
-        ...(title ? [title, ' '] : []),
-        chara.get_colored_name(),
-        ` 的传奇故事将会永远被世人所传颂……`,
-      ]);
       era.println();
       sys_like_chara(302, 0, fame_reward / 5) && (await era.waitAnyKey());
     }
     sys_change_fame(fame_reward);
-    era.set(`cflag:${chara.id}:可再次育成`, 1);
+    // CFLAGNAME:50 = 可再次育成
+    era.set(`cflag:${chara.id}:50`, 1);
   }
 
   /**
-   * @author 雞雞
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    */
   static async common_palace_relation(chara, me) {
-    const love = era.get(`love:${chara.id}`);
-    if (love >= 50 || era.get(`relation:${chara.id}:0`) > 0) {
+    if (
+      era.get(`love:${chara.id}`) >= 50 ||
+      era.get(`relation:${chara.id}:0`) > 0
+    ) {
       era.drawLine();
-      era.set('flag:当前位置', location_enum.gate);
-      await print_event_name('之后，面向未来', chara);
-      era.set('flag:当前位置', location_enum.office);
-      await era.printAndWait([
-        '时光如白驹过隙，与 ',
-        chara.get_colored_name(),
-        ' 相伴已逾数载，再过一段日子，',
-        me.get_couple_title(),
-        ' 马上就要展开新的篇章',
-      ]);
-      era.println();
-      if (love >= 75) {
-        await era.printAndWait([
-          me.get_couple_title(),
-          ' 在熟悉的训练员室里恩爱地亲热起来。',
-        ]);
-        await era.printAndWait(
-          '两位小情人沉浸在幸福的二人世界，仿佛能把俗世的琐事都抛进虚空之中。',
-        );
-        era.println();
-        await era.printAndWait('我是世界之王！——杰克 · 道森', {
-          align: 'center',
-        });
-      } else if (love >= 50) {
-        await era.printAndWait([
-          me.get_couple_title(),
-          ' 在熟悉的训练员室里热烈地拥吻。',
-        ]);
-        await era.printAndWait(
-          '情欲的气息充斥整个房间，只有娇声与肉体碰撞的声音不住回荡。',
-        );
-        era.println();
-        await era.printAndWait('食色，性也。——孟子', { align: 'center' });
-      } else {
-        await era.printAndWait([
-          me.get_couple_title(),
-          ' 在熟悉的训练员室里相谈甚欢，又不禁为无可避免的别离伤感。',
-        ]);
-        await era.printAndWait(
-          '人生难得相逢，正是因为可能失去才会让珍惜眼前人如此重要。',
-        );
-        era.println();
-        await era.printAndWait('一期一会之心，唯见茶之相中。——千利休', {
-          align: 'center',
-        });
-      }
+      // FLAGNAME:4 = 当前位置
+      era.set('flag:4', location_enum.gate);
+      await print_title_with_kojo(
+        i18n().timon.edu,
+        'pl_future',
+        chara,
+        me,
+        get_sex_acceptable(chara.id) >= 0,
+      );
+      era.set('flag:4', location_enum.office);
     }
-  }
-
-  /** @param {CharaTalk} chara */
-  static get_chara_name(chara) {
-    const name = chara.get_colored_name();
-    if (chara.id === 0) {
-      name.content = '自己';
-    }
-    return name;
   }
 
   /**
@@ -234,15 +139,14 @@ class CustomizedEdu extends ICustomizedEdu {
    * @returns {{count:{g1:number,g2:number,g3:number},check:number,buffer:*[]}}
    */
   static get_palace_info(chara) {
-    const races = RaceHistory.get(chara.id).get_entries(),
-      main_races = [],
-      ret_buffer = [];
-    let total_prize = 0,
-      champions = 0,
-      check = 0,
-      g1_count = 0,
-      g2_count = 0,
-      g3_count = 0;
+    const races = RaceHistory.get(chara.id).get_entries();
+    const main_races = [];
+    let total_prize = 0;
+    let champions = 0;
+    let check = 0;
+    let g1_count = 0;
+    let g2_count = 0;
+    let g3_count = 0;
     races
       .sort(
         (a, b) =>
@@ -263,37 +167,27 @@ class CustomizedEdu extends ICustomizedEdu {
           total_prize += info.prize * RaceInfo.prize_ratios[e.rank - 1];
         }
       });
-    ret_buffer.push([
-      chara.get_colored_name(),
-      '，生涯 ',
-      {
-        content: races.length.toLocaleString(),
-        color: buff_colors[1],
-        fontWeight: 'bold',
-      },
-      ' 战 ',
-      {
-        content: champions,
-        color: champions ? buff_colors[1] : '',
-        fontWeight: 'bold',
-      },
-      ' 胜，总赏金达到 ',
-      { color: money_color, content: Math.floor(total_prize).toLocaleString() },
-      ' 马币',
-    ]);
-    if (main_races.length) {
-      ret_buffer.push([
-        '主胜鞍：',
-        ...main_races.slice(0, 5).map((e, i) => {
-          const ret = race_infos[e].get_colored_name_with_class();
-          i > 0 && (ret.content = ' ' + ret.content);
-          return ret;
-        }),
-        main_races.length > 5 ? '……' : '',
-      ]);
-    }
     return {
-      buffer: ret_buffer,
+      buffer: i18n().timon.edu.get_result_list(
+        chara,
+        {
+          content: races.length.toLocaleString(),
+          color: buff_colors[1],
+          fontWeight: 'bold',
+        },
+        {
+          content: champions.toString(),
+          color: champions ? buff_colors[1] : '',
+          fontWeight: 'bold',
+        },
+        {
+          ...get_abbr_number(Math.floor(total_prize)),
+          color: money_color,
+        },
+        main_races
+          .slice(0, 6)
+          .map((r) => race_infos[r].get_colored_name_with_class()),
+      ),
       check,
       count: {
         g1: g1_count,
@@ -309,370 +203,25 @@ class CustomizedEdu extends ICustomizedEdu {
    * @param {boolean} is_fumble
    */
   static async print_fail_info_in_train(chara, attr, is_fumble) {
-    await print_fail_info_in_train(chara, attr, is_fumble);
+    await i18n().timon.edu.tf_info(chara, attr, is_fumble);
   }
 
-  /**
-   * @author 雞雞
-   * @param {CharaTalk} chara
-   * @param {CharaTalk} me
-   * @param {string} callname
-   */
-  async foreign_rest(chara, me, callname) {
-    const chara_name = CustomizedEdu.get_chara_name(chara);
-    await era.printAndWait([
-      '为了恢复状态，',
-      me.get_colored_name(),
-      ' 订购了当地理疗服务，安排 ',
-      chara_name,
-      ' 在酒店调理修养……',
-    ]);
-    await era.printAndWait([
-      chara.get_colored_name(),
-      ' 的身体素质似乎逐渐恢复了！',
-    ]);
+  /** @param {number} cid */
+  constructor(cid) {
+    this.id = cid;
   }
 
-  /**
-   * @author 雞雞
-   * @param {CharaTalk} chara
-   * @param {CharaTalk} me
-   * @param {string} callname
-   * @param {HookArg} hook
-   * @param {{lan:string}} extra_flag
-   */
-  async foreign_study(chara, me, callname, hook, extra_flag) {
-    const chara_name = CustomizedEdu.get_chara_name(chara);
-    await era.printAndWait([
-      '为了能进行基本的外语交流，',
-      me.get_colored_name(),
-      ' 安排 ',
-      chara_name,
-      ' 在酒店房间学习……',
-    ]);
-    const abl = era.get(`abl:${this.id}:${extra_flag.lan}语`);
-    hook.arg =
-      abl === 5 ||
-      Math.random() <
-        (5 - abl) / 5 + (era.get(`abl:0:${extra_flag.lan}语`) > abl) / 2;
-    if (hook.arg) {
-      await era.printAndWait('临急抱佛脚，起效了！');
-    } else {
-      await era.printAndWait(['不好！', chara.get_colored_name(), ' 看睡了！']);
-    }
+  get_this() {
+    return this;
   }
 
-  /**
-   * @author 雞雞
-   * @param {CharaTalk} chara
-   * @param {CharaTalk} me
-   * @param {string} callname
-   */
-  async foreign_train(chara, me, callname) {
-    const chara_name = CustomizedEdu.get_chara_name(chara);
-    await era.printAndWait([
-      '为了习惯当地赛场，',
-      me.get_colored_name(),
-      ' 安排 ',
-      chara_name,
-      ' 在训练场进行适应训练……',
-    ]);
-    await era.printAndWait([
-      chara.get_colored_name(),
-      ' 似乎渐渐习惯当地赛道的质感了！',
-    ]);
-  }
-
-  /**
-   * @author 雞雞
-   * @param {CharaTalk} chara
-   * @param {CharaTalk} me
-   * @param {string} callname
-   * @param {HookArg} hook
-   * @param extra_flag
-   * @param {EventObject} event_object
-   * @returns {Promise}
-   */
-  async foreign_travel(chara, me, callname, hook, extra_flag, event_object) {
-    await era.printAndWait([
-      '为了放松心情，',
-      me.get_colored_name(),
-      ...(chara.id > 0 ? [' 和 ', chara.get_colored_name()] : [' 独自']),
-      ' 在',
-      location_name[era.get('flag:当前位置')],
-      '观光……',
-    ]);
-    await era.printAndWait('虽然花了不少钱，但还是值得的！');
-  }
-
-  /**
-   * @author 雞雞
-   * @param {CharaTalk} chara
-   * @param {CharaTalk} me
-   * @param {string} callname
-   * @param {HookArg} hook
-   * @param {RaceEndParams} extra
-   */
-  async race_end(chara, me, callname, hook, extra) {
-    const { pseudo } = extra;
-    if (pseudo.race.conditionParams.item === 1) {
-      if (extra.rank === 1) {
-        await print_event_name('情绪高涨的胜利', chara);
-        await era.printAndWait([
-          me.get_colored_name(),
-          ' 迎接面色潮红的 ',
-          chara.get_colored_name(),
-          ' 走进休息室。',
-        ]);
-        await era.printAndWait([
-          chara.get_colored_name(),
-          ' 一进休息室就发出一声解放似的呻吟，',
-          me.get_colored_name(),
-          ' 连忙关上门并关掉所有性玩具。',
-        ]);
-        await era.printAndWait([
-          '之后，',
-          me.get_colored_name(),
-          ' 向在怀中摩擦着身体的 ',
-          chara.get_colored_name(),
-          ' 承诺一定会好好抚慰',
-          chara.sex,
-          '，这才避免了白日宣淫。',
-        ]);
-      } else {
-        await print_event_name('意料之中的败北', chara);
-        await era.printAndWait([
-          me.get_colored_name(),
-          ' 迎接垂头丧气的 ',
-          chara.get_colored_name(),
-          ' 走进休息室，',
-        ]);
-        await era.printAndWait([chara.get_colored_name(), ' 沮丧地委顿在地。']);
-        await era.printAndWait([
-          me.get_colored_name(),
-          ' 识趣地关上了性玩具，轻声安慰。',
-        ]);
-      }
-    } else if (extra.rank === 1) {
-      await print_event_name('竞赛获胜', chara);
-      await me.say_and_wait(
-        Math.random() < 0.5 ? '太棒了！' : '往更高的目标迈进吧！',
-      );
-    } else if (extra.rank <= 5) {
-      await print_event_name('竞赛上榜', chara);
-      await me.say_and_wait(
-        Math.random() < 0.5 ? '今天的表现也很好！' : '绝对不能输给她们！',
-      );
-    } else if (extra.rank <= 10) {
-      await print_event_name('竞赛败北', chara);
-      await me.say_and_wait(
-        Math.random() < 0.5 ? '下次表现一定更好！' : '沮丧也不是办法！',
-      );
-    } else {
-      await print_event_name('下次不会输了！', chara);
-      await me.say_and_wait(
-        Math.random() < 0.5 ? '总有一天绝对会赢！' : '你愿意就这样丢脸下去？',
-      );
-    }
-  }
-
-  /**
-   * @author 雞雞
-   * @author 黑奴队长
-   * @param {CharaTalk} chara
-   * @param {CharaTalk} me
-   * @param {string} callname
-   * @param {HookArg} hook
-   * @param {RaceStartParams} extra
-   */
-  async race_start(chara, me, callname, hook, extra) {
-    await print_event_name('竞赛之前', chara);
-    const dict = this.#dict;
-    if (extra.pseudo.race.conditionParams.item === 1) {
-      dict.item = check_sub_slavery(this.id, get_sex_acceptable(this.id));
-    } else if (
-      era.get('flag:惩戒力度') >= 2 &&
-      (dict.do_sex = Math.random() < 0.5)
-    ) {
-      extra.motivation_change = 1;
-    }
-    await kojo['赛前'](dict);
-  }
-
-  /**
-   * @author 雞雞
-   * @param {number} attr
-   * @returns {Promise}
-   */
+  /** @param {number} attr */
   async train(attr) {
-    const chara = get_chara_talk(this.id).get_colored_name();
-    if (this.id === 0) {
-      chara.content = '自己';
-    }
-    switch (attr) {
-      case attr_enum.speed:
-        await era.printAndWait([
-          '为了提高速度，',
-          get_chara_talk(0).get_colored_name(),
-          ' 安排 ',
-          chara,
-          ' 进行跑步训练……',
-        ]);
-        break;
-      case attr_enum.endurance:
-        await era.printAndWait([
-          '为了提高耐力，',
-          get_chara_talk(0).get_colored_name(),
-          ' 安排 ',
-          chara,
-          ' 进行游泳训练……',
-        ]);
-        break;
-      case attr_enum.strength:
-        await era.printAndWait([
-          '为了提高力量，',
-          get_chara_talk(0).get_colored_name(),
-          ' 安排 ',
-          chara,
-          ' 进行重量训练……',
-        ]);
-        break;
-      case attr_enum.toughness:
-        await era.printAndWait([
-          '为了锻炼根性，',
-          get_chara_talk(0).get_colored_name(),
-          ' 安排 ',
-          chara,
-          ' 进行上坡训练……',
-        ]);
-        break;
-      case attr_enum.intelligence:
-        await era.printAndWait([
-          '为了提高比赛触觉，',
-          get_chara_talk(0).get_colored_name(),
-          ' 安排 ',
-          chara,
-          ' 研究比赛录像……',
-        ]);
-    }
-  }
-
-  /**
-   * @author 雞雞
-   * @param {CharaTalk} chara
-   * @param {CharaTalk} me
-   * @param {string} callname
-   * @param {HookArg} hook
-   * @param {TrainFailParams} extra_flag
-   */
-  async train_fail(chara, me, callname, hook, extra_flag) {
-    await CustomizedEdu.print_fail_info_in_train(
-      chara,
-      extra_flag.train,
-      extra_flag.fumble,
+    await i18n().timon.edu.train(
+      get_chara_talk(this.id),
+      get_chara_talk(0),
+      attr,
     );
-    era.println();
-    extra_flag.args = extra_flag.fumble
-      ? fumble_result.fumble
-      : fumble_result.fail;
-    if (extra_flag.train !== attr_enum.intelligence) {
-      await print_event_name(
-        extra_flag.fumble ? '在保健室……' : '在训练室……',
-        chara,
-      );
-
-      await era.printAndWait([chara.get_colored_name(), ' 训练失败了……']);
-      era.println();
-      era.print('该怎么办呢？');
-      era.println();
-
-      if (extra_flag.fumble) {
-        era.printButton('「要好好休息！」', 1);
-        era.printButton('「用毅力克服！」', 2);
-      } else {
-        era.printButton('「先在这休养一阵子吧。」', 1);
-        era.printButton('「来检讨一下吧！」', 2);
-      }
-      if ((await era.input()) === 1) {
-        hook.arg = 0;
-      } else if (Math.random() < extra_flag['args'].ratio.fail_again) {
-        hook.arg = -1;
-      } else {
-        hook.arg = 1;
-      }
-    }
-  }
-
-  /**
-   * @author 雞雞
-   * @param {CharaTalk} chara
-   * @param {CharaTalk} me
-   * @param {string} callname
-   * @param {HookArg} hook
-   * @param {TrainSuccessParams} extra_flag
-   */
-  train_success_content(chara, me, callname, hook, extra_flag) {
-    era.print([chara.get_colored_name(), ' 的训练顺利结束了！']);
-  }
-
-  /**
-   * @author 雞雞
-   * @param {CharaTalk} chara
-   * @param {CharaTalk} me
-   * @param {string} callname
-   * @param {HookArg} hook
-   * @param {TrainSuccessParams} extra_flag
-   * @returns {Promise<boolean>}
-   */
-  async train_success_add(chara, me, callname, hook, extra_flag) {
-    await print_event_name('热血的追加训练！', chara);
-    if (
-      await select_yes_or_no(
-        [chara.get_colored_name(), ' 似乎意犹未尽的样子，是想自主训练吗？'],
-        '许可！',
-        '会超出计划的……',
-      )
-    ) {
-      await era.printAndWait([
-        me.get_colored_name(),
-        ' 默许了 ',
-        chara.get_colored_name(),
-        ` 的自主训练，并称赞了${chara.sex}的干劲`,
-      ]);
-      return true;
-    } else {
-      await era.printAndWait([
-        me.get_colored_name(),
-        ' 出言禁止了 ',
-        chara.get_colored_name(),
-        ' 的自主训练，并叮嘱要好好休息',
-      ]);
-    }
-    return false;
-  }
-
-  /**
-   * @author 雞雞
-   * @param {CharaTalk} chara
-   * @param {CharaTalk} me
-   * @param {string} callname
-   * @param {HookArg} hook
-   * @param {TrainSuccessParams} extra_flag
-   * @returns {Promise<boolean>}
-   */
-  async train_success_sex(chara, me, callname, hook, extra_flag) {
-    await print_event_name('训练后的性欲高涨', chara);
-    await era.printAndWait([
-      '一天的训练结束后，',
-      chara.get_colored_name(),
-      ' 的样子好像有点奇怪……',
-    ]);
-    await era.printAndWait(
-      '面色潮红，在双腿间流下的不明液体与汗液混在一起，散发出一股淫靡的味道。',
-    );
-    era.printButton('「这也是训练员的义务……」', 1);
-    era.printButton('「总之先去医务室吧！」', 2);
-    return (await era.input()) === 1;
   }
 
   /**
@@ -684,14 +233,16 @@ class CustomizedEdu extends ICustomizedEdu {
    * @returns {Promise<TrainSuccessParams|void>}
    */
   async train_success(chara, me, callname, hook, extra) {
-    const cur_location = era.get('flag:当前位置');
+    // FLAGNAME:4 = 当前位置
+    const cur_location = era.get('flag:4');
     this.train_success_content(chara, me, callname, hook, extra);
     era.println();
     if (this.id === 0) {
       return;
     }
     if (
-      !era.get(`status:${this.id}:摸鱼`) &&
+      // STATUSNAME:2 = 摸鱼
+      !era.get(`status:${this.id}:2`) &&
       Math.random() < 0.2 * extra.stamina_ratio
     ) {
       if (sys_check_remote(this.id)) {
@@ -713,77 +264,378 @@ class CustomizedEdu extends ICustomizedEdu {
     ) {
       if (
         era.get(`love:${this.id}`) >= 50 &&
-        era.get(`base:${this.id}:性欲`) >= lust_border.itch &&
+        // BASENAME:10 = 性欲
+        era.get(`base:${this.id}:10`) >= lust_border.itch &&
         Math.random() <
-          (0.2 * era.get(`base:${this.id}:性欲`)) / lust_border.want_sex
+          (0.2 * era.get(`base:${this.id}:10`)) / lust_border.want_sex
       ) {
         await era.waitAnyKey();
         if (await this.train_success_sex(chara, me, callname, hook, extra)) {
-          era.set('flag:当前位置', location_enum.restroom);
+          era.set('flag:4', location_enum.restroom);
           await quick_into_sex(this.id);
-          era.set('flag:当前位置', cur_location);
+          era.set('flag:4', cur_location);
         } else {
           sys_change_lust(this.id, get_random_value(500, 1500));
         }
       } else if (Math.random() < 0.02) {
-        /** @author 幽白書 */
         await era.waitAnyKey();
-        await print_event_name('淋浴间内', chara);
-        await era.printAndWait([
-          '嗯？',
-          chara.get_colored_name(),
-          ' 还没来吗？',
-        ]);
-        await era.printAndWait('正好，趁现在先沖个澡吧！');
-        era.println();
-        await era.printAndWait([
-          '打开门，映入眼帘的是身无寸缕的 ',
-          chara.get_colored_name(),
-          '……',
-        ]);
-        era.printButton('「哦，要一起洗澡吗？」', 1);
-        era.printButton('「不好意思打扰了！」', 2);
-        if ((await era.input()) === 1) {
-          if (
-            era.get(`love:${this.id}`) >= 50 &&
-            get_sex_acceptable(this.id) >= 0
-          ) {
-            await era.printAndWait('对方兴致盎然的答应了。');
-            await era.printAndWait([
-              me.get_couple_title(),
-              ' 互相给对方擦了背。',
-            ]);
-            await era.printAndWait([
-              '结束洗浴后，',
-              chara.sex,
-              '带着不甚满足的眼光看向 ',
-              me.get_colored_name(),
-              '……',
-            ]);
-            era.set('flag:当前位置', location_enum.restroom);
+        const want_sex =
+          era.get(`love:${this.id}`) >= 50 && get_sex_acceptable(this.id) >= 0;
+        if (
+          (
+            await print_title_with_kojo(
+              i18n().timon.edu,
+              'ts_shower',
+              chara,
+              me,
+              want_sex,
+            )
+          )[0] === 1
+        ) {
+          if (want_sex) {
+            era.set('flag:4', location_enum.restroom);
             await quick_into_sex(this.id);
-            era.set('flag:当前位置', cur_location);
+            era.set('flag:4', cur_location);
             extra.relation_change = 5;
           } else {
-            await chara.say_and_wait('笨蛋，在想什么啊你！');
-            await era.printAndWait([me.get_colored_name(), ' 被赶了出去……']);
             sys_change_motivation(this.id, -1) && (await era.waitAnyKey());
             extra.relation_change = -5;
           }
         } else {
-          await me.say_and_wait('不好意思打扰了！');
-          await era.printAndWait([
-            me.get_colored_name(),
-            ' 大喊一声跑了出去。',
-          ]);
-          await era.printAndWait([
-            '没过多久，冲好澡的 ',
-            chara.get_colored_name(),
-            ' 红着脸走了出来。',
-          ]);
           sys_change_lust(this.id, get_random_value(500, 1500));
         }
       }
+    }
+  }
+
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param {TrainSuccessParams} extra
+   */
+  train_success_content(chara, me, callname, hook, extra) {
+    i18n().timon.edu.ts_info(chara);
+  }
+
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param {TrainSuccessParams} extra
+   * @returns {Promise<boolean>}
+   */
+  async train_success_add(chara, me, callname, hook, extra) {
+    return (
+      (
+        await print_title_with_kojo(i18n().timon.edu, 'ts_add', chara, me)
+      )[0] === 1
+    );
+  }
+
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param {TrainSuccessParams} extra
+   * @returns {Promise<boolean>}
+   */
+  async train_success_sex(chara, me, callname, hook, extra) {
+    return (
+      (await print_title_with_kojo(i18n().timon.edu, 'ts_sex', chara))[0] === 1
+    );
+  }
+
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param {TrainFailParams} extra
+   */
+  async train_fail(chara, me, callname, hook, extra) {
+    await CustomizedEdu.print_fail_info_in_train(
+      chara,
+      extra.train,
+      extra.fumble,
+    );
+    era.println();
+    extra.args = extra.fumble ? fumble_result.fumble : fumble_result.fail;
+    if (extra.train !== attr_enum.intelligence) {
+      const key = extra.fumble ? 'train_fumble' : 'train_fail';
+      if (
+        (await print_title_with_kojo(i18n().timon.edu, key, chara, me))[0] === 1
+      ) {
+        hook.arg = 0;
+      } else if (Math.random() < extra.args.ratio.fail_again) {
+        hook.arg = -1;
+      } else {
+        hook.arg = 1;
+      }
+    }
+  }
+
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param {{lan:string}} extra_flag
+   */
+  async foreign_study(chara, me, callname, hook, extra_flag) {
+    const abl = era.get(`abl:${this.id}:${extra_flag.lan}语`);
+    hook.arg =
+      abl === 5 ||
+      Math.random() <
+        (5 - abl) / 5 + (era.get(`abl:0:${extra_flag.lan}语`) > abl) / 2;
+    await i18n().timon.edu.foreign_study(chara, me, hook.arg);
+  }
+
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} me
+   * @param {string} callname
+   */
+  async foreign_rest(chara, me, callname) {
+    await i18n().timon.edu.foreign_rest(chara, me);
+  }
+
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} me
+   * @param {string} callname
+   */
+  async foreign_train(chara, me, callname) {
+    await i18n().timon.edu.foreign_train(chara, me);
+  }
+
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param extra
+   * @param {EventObject} event_object
+   */
+  async foreign_travel(chara, me, callname, hook, extra, event_object) {
+    await i18n().timon.edu.foreign_travel(
+      chara,
+      me,
+      location_name[era.get('flag:4')],
+    );
+  }
+
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param extra_flag
+   * @param {EventObject} event_object
+   */
+  async office_study(chara, me, callname, hook, extra_flag, event_object) {}
+
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param extra_flag
+   * @param {EventObject} event_object
+   */
+  async office_prepare(chara, me, callname, hook, extra_flag, event_object) {}
+
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param extra_flag
+   * @param {EventObject} event_object
+   */
+  async office_cook(chara, me, callname, hook, extra_flag, event_object) {}
+
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param extra_flag
+   * @param {EventObject} event_object
+   */
+  async office_rest(chara, me, callname, hook, extra_flag, event_object) {}
+
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param extra_flag
+   * @param {EventObject} event_object
+   */
+  async office_game(chara, me, callname, hook, extra_flag, event_object) {}
+
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param extra_flag
+   * @param {EventObject} event_object
+   */
+  async school_clinic(chara, me, callname, hook, extra_flag, event_object) {}
+
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param extra_flag
+   * @param {EventObject} event_object
+   * @returns {Promise}
+   */
+  async school_god(chara, me, callname, hook, extra_flag, event_object) {}
+
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param extra_flag
+   * @param {EventObject} event_object
+   */
+  async school_atrium(chara, me, callname, hook, extra_flag, event_object) {}
+
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param extra_flag
+   * @param {EventObject} event_object
+   */
+  async school_rooftop(chara, me, callname, hook, extra_flag, event_object) {}
+
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param extra_flag
+   * @param {EventObject} event_object
+   */
+  async school_chairman(chara, me, callname, hook, extra_flag, event_object) {}
+
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param extra_flag
+   * @param {EventObject} event_object
+   */
+  async out_start(chara, me, callname, hook, extra_flag, event_object) {}
+
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param extra_flag
+   * @param {EventObject} event_object
+   */
+  async out_river(chara, me, callname, hook, extra_flag, event_object) {}
+
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param extra_flag
+   * @param {EventObject} event_object
+   */
+  async out_shopping(chara, me, callname, hook, extra_flag, event_object) {}
+
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param extra_flag
+   * @param {EventObject} event_object
+   */
+  async out_church(chara, me, callname, hook, extra_flag, event_object) {}
+
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param extra_flag
+   * @param {EventObject} event_object
+   */
+  async out_station(chara, me, callname, hook, extra_flag, event_object) {}
+
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param extra_flag
+   * @param {EventObject} event_object
+   */
+  async out_mejiro(chara, me, callname, hook, extra_flag, event_object) {}
+
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param extra_flag
+   * @param {EventObject} event_object
+   */
+  async back_school(chara, me, callname, hook, extra_flag, event_object) {}
+
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param extra_flag
+   * @param {EventObject} event_object
+   */
+  async celebration(chara, me, callname, hook, extra_flag, event_object) {}
+
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param extra_flag
+   * @param {EventObject} event_object
+   */
+  async week_start(chara, me, callname, hook, extra_flag, event_object) {
+    switch (event_object?.arg) {
+      case 47 + 29:
+      case 95 + 29:
+        if (CustomizedEdu.common_event_count === 0) {
+          return;
+        }
+        CustomizedEdu.common_event_count--;
+        await print_title_with_kojo(
+          i18n().timon.edu,
+          'summer_start',
+          chara,
+          me,
+        );
+        break;
+      case 143 + 9:
+      case 'palace':
+        await CustomizedEdu.common_palace(chara, me);
+        await CustomizedEdu.common_palace_relation(chara, me);
     }
   }
 
@@ -798,40 +650,53 @@ class CustomizedEdu extends ICustomizedEdu {
   async week_end(chara, me, callname, hook, extra_flag, event_object) {}
 
   /**
-   * @author 雞雞
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {string} callname
    * @param {HookArg} hook
-   * @param extra_flag
-   * @param {EventObject} event_object
-   * @returns {Promise}
+   * @param {RaceStartParams} extra
    */
-  async week_start(chara, me, callname, hook, extra_flag, event_object) {
-    switch (event_object?.arg) {
-      case 47 + 29:
-      case 95 + 29:
-        if (CustomizedEdu.common_event_count === 0) {
-          return;
-        }
-        CustomizedEdu.common_event_count--;
-        await print_event_name('夏季合宿', chara);
-        await era.printAndWait([
-          '说到夏天就是泳装与海滩，当然，',
-          chara.get_colored_name(),
-          ' 与 ',
-          me.get_colored_name(),
-          ' 来到海边休假的同时也没有落下训练。',
-        ]);
-        break;
-      case 143 + 9:
-      case 'palace':
-        await CustomizedEdu.common_palace(chara, me);
-        await CustomizedEdu.common_palace_relation(chara, me);
+  async race_start(chara, me, callname, hook, extra) {
+    let item = 0;
+    let do_sex = false;
+    if (extra.pseudo.race.conditionParams.item === 1) {
+      item = check_sub_slavery(this.id, get_sex_acceptable(this.id));
+      // FLAGNAME:35 = 惩戒力度
+    } else if (era.get('flag:35') >= 2 && (do_sex = Math.random() < 0.5)) {
+      extra.motivation_change = 1;
     }
+    await print_title_with_kojo(
+      i18n().timon.edu,
+      'race_start',
+      chara,
+      me,
+      item,
+      do_sex,
+    );
   }
 
-  /** @author 雞雞 */
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} me
+   * @param {string} callname
+   * @param {HookArg} hook
+   * @param {RaceEndParams} extra
+   */
+  async race_end(chara, me, callname, hook, extra) {
+    let key;
+    if (extra.pseudo.race.conditionParams.item === 1) {
+      key = extra.rank === 1 ? 'race_end_item_win' : 'race_end_item_lose';
+    } else if (extra.rank === 1) {
+      key = 'race_end_win';
+    } else if (extra.rank <= 5) {
+      key = 'race_end_5';
+    } else if (extra.rank <= 10) {
+      key = 'race_end_10';
+    } else {
+      key = 'race_end_lose';
+    }
+    await print_title_with_kojo(i18n().timon.edu, key, chara, me);
+  }
   async crazy_fan_end() {
     await print_title_with_kojo.ending(
       i18n().timon.ending,

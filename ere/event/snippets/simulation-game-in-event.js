@@ -8,6 +8,8 @@ const preview_race = require('#/page/race/preview-race');
 const RaceInfo = require('#/data/race/model/race-info');
 const { race_infos } = require('#/data/race/race-const');
 
+const { i18n } = require('#/i18n/selector');
+
 /**
  * @param {PseudoUma} chara
  * @param {(PseudoUma|LegendUmaSelector|LegendUmaFilter)[]} _contestants
@@ -18,7 +20,7 @@ async function simulation_game_in_event(
   chara,
   _contestants,
   reference_race,
-  race_name = '模拟赛',
+  race_name = i18n().race.sim,
 ) {
   const reference = race_infos[reference_race];
   const info = fill_race_weather_and_mess(

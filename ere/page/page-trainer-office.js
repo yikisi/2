@@ -37,6 +37,8 @@ const recruit_flags = require('#/data/event/recruit-flags');
 const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const { attr_enum } = require('#/data/train-const');
+const era = require('#/era-electron');
+const get_display_name = require('#/utils/calc-display-name');
 
 /** @type {Record<string,function(CharaTalk,CharaTalk):{handle:function:Promise,name:string}>} */
 const handlers = {};
@@ -204,7 +206,7 @@ async function page_trainer_office() {
                 buttonType:
                   EventMarks.get(cid).count() > 0 ? 'danger' : 'warning',
               },
-              content: get(`callname:${cid}:-2`),
+              content: get_display_name(era.get(`callname:${cid}:-2`)),
               type: 'button',
             },
           ],

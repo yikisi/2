@@ -1,8 +1,4 @@
 const CustomizedDaily = require('#/event/daily/daily-common');
-const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
-const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
-const select_action_in_shopping_street = require('#/event/daily/snippets/select-action-in-shopping-street');
-const select_action_in_station = require('#/event/daily/snippets/select-action-in-station');
 const generate_dictionary = require('#/event/snippets/generate-dictionary');
 
 const { i18n } = require('#/i18n/selector');
@@ -48,63 +44,55 @@ module.exports = class extends CustomizedDaily {
     await this.#kojo['office_study'](generate_dictionary(this.id));
   }
 
-  async out_church(hook) {
-    hook.arg = Math.random() < 0.5;
+  async o_r_fishing() {
+    await this.#kojo['o_r_fishing'](generate_dictionary(this.id));
+  }
+
+  async o_r_walking() {
+    await this.#kojo['o_r_walking'](generate_dictionary(this.id));
+  }
+
+  async o_c_pray(oguri, me, dice) {
     await this.#kojo['out_church']({
       ...generate_dictionary(this.id, { your_name: !0 }),
-      dice: hook.arg,
+      dice: dice < 0.5,
     });
   }
 
-  async out_river(hook) {
-    const dict = generate_dictionary(this.id);
-    if ((hook.arg = (await select_action_around_river()) > 0)) {
-      await this.#kojo['o_r_walking'](dict);
-    } else {
-      await this.#kojo['o_r_fishing'](dict);
-    }
+  async o_s_arcade() {
+    await this.#kojo['o_s_arcade'](generate_dictionary(this.id));
   }
 
-  async out_shopping(hook) {
-    const dict = generate_dictionary(this.id);
-    const temp = await select_action_in_shopping_street();
-    hook.arg = temp <= 1;
-    switch (temp) {
-      case 0:
-        await this.#kojo['o_s_arcade'](dict);
-        break;
-      case 1:
-        await this.#kojo['o_s_drawing'](dict);
-        break;
-      case 2:
-        await this.#kojo['o_s_ktv'](dict);
-        break;
-      case 3:
-        await this.#kojo['o_s_movie'](dict);
-    }
+  async o_s_drawing() {
+    await this.#kojo['o_s_drawing'](generate_dictionary(this.id));
   }
 
-  async out_station(hook) {
-    const dict = generate_dictionary(this.id);
-    switch ((hook.arg = await select_action_in_station(this.id))) {
-      case 0:
-        await this.#kojo['o_s_restaurant'](dict);
-        break;
-      case 1:
-        await this.#kojo['o_s_dating'](dict);
-        break;
-      case 2:
-        await this.#kojo['o_s_shopping'](dict);
-    }
+  async o_s_ktv() {
+    await this.#kojo['o_s_ktv'](generate_dictionary(this.id));
   }
 
-  async school_atrium(hook) {
-    const dict = generate_dictionary(this.id);
-    if ((hook.arg = !(await select_action_in_atrium()))) {
-      await this.#kojo['s_a_tree_hollow'](dict);
-    } else {
-      await this.#kojo['s_a_dating'](dict);
-    }
+  async o_s_movie() {
+    await this.#kojo['o_s_movie'](generate_dictionary(this.id));
+  }
+
+  async o_s_restaurant() {
+    await this.#kojo['o_s_restaurant'](generate_dictionary(this.id));
+  }
+
+  async o_s_dating() {
+    await this.#kojo['o_s_dating'](generate_dictionary(this.id));
+  }
+
+  async o_s_shopping() {
+    await this.#kojo['o_s_shopping'](generate_dictionary(this.id));
+  }
+
+  async s_a_tree_hollow() {
+    await this.#kojo['s_a_tree_hollow'](generate_dictionary(this.id));
+  }
+
+  async s_a_dating() {
+    await this.#kojo['s_a_dating'](generate_dictionary(this.id));
   }
 
   async school_rooftop() {

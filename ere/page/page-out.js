@@ -13,6 +13,7 @@ const MejiroCity = require('#/page/mejiro/mejiro-common');
 const { run_custom_daily } = require('#/event/daily/daily-factory');
 const game_guides = require('#/event/others/game-guides');
 
+const get_display_name = require('#/utils/calc-display-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const chara_info_type = require('#/data/chara-info-type');
@@ -99,7 +100,7 @@ async function out_page() {
         ? [
             {
               accelerator: 10,
-              content: `和 ${era.get('callname:301:-2')} 攀谈`,
+              content: `和 ${get_display_name(era.get('callname:301:-2'))} 攀谈`,
               type: 'button',
             },
           ]

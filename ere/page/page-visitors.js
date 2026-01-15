@@ -12,6 +12,7 @@ const print_out_page = require('#/page/page-out');
 
 const { run_custom_rec } = require('#/event/rec/rec-factory');
 
+const get_display_name = require('#/utils/calc-display-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_abbr_number } = require('#/utils/value-utils');
 
@@ -401,7 +402,7 @@ async function page_visitors() {
                   buttonType:
                     EventMarks.get(cid).count() > 0 ? 'danger' : 'warning',
                 },
-                content: era.get(`callname:${cid}:-2`),
+                content: get_display_name(era.get(`callname:${cid}:-2`)),
                 type: 'button',
               },
             ],

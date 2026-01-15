@@ -214,9 +214,9 @@ module.exports = class extends CustomizedRecruit {
           if (era.get(`cflag:24:招募状态`) === -3) {
             await chara.say_and_wait('呀吼——♪最近经常遇到你啊。');
             await chara.say_and_wait(
-              '现在啊，我正在看下面赛场上的模拟赛。毕竟Maya又参不了赛——。',
+              '现在啊，我正在看下面赛场上的模拟赛。毕竟 Maya 又参不了赛——。',
             );
-            await chara.say_and_wait('真好啊～，Maya也想参加比赛啊。但是――');
+            await chara.say_and_wait('真好啊～，Maya 也想参加比赛啊。但是――');
             era.printButton('「无论如何都不想做训练吗？」', 1);
             await era.input();
             await chara.say_and_wait('……不想。');

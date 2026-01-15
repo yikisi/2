@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const { sys_get_ero_image } = require('#/system/ero/sys-calc-ero-image');
 const {
   get_bust_size,
   get_hip_size,
@@ -22,7 +23,6 @@ const {
   unknown_info,
 } = require('#/data/exp-const');
 const { get_breast_cup, get_talent, get_xp } = require('#/data/info-generator');
-const { sys_get_ero_image } = require('#/system/ero/sys-calc-ero-image');
 
 const page_name = '性爱情况';
 

@@ -4,12 +4,12 @@ const era = require('#/era-electron');
 class PersonalEventMarks {
   /**
    * @param {number} cid
-   * @param {string} pname parameter name
+   * @param {number} pid parameter id
    */
-  constructor(cid, pname) {
+  constructor(cid, pid) {
     this.obj =
-      era.get(`cflag:${cid}:${pname}`) ||
-      era.set(`cflag:${cid}:${pname}`, {}) ||
+      era.get(`cflag:${cid}:${pid}`) ||
+      era.set(`cflag:${cid}:${pid}`, {}) ||
       {};
   }
 
