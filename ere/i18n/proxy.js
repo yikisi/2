@@ -1,6 +1,11 @@
 const era = require('#/era-electron');
 
-function require_and_proxy_kojo_js(kojo) {
+/**
+ * @Template T
+ * @param {T} kojo
+ * @return {T}
+ */
+function proxy_kojo_js(kojo) {
   const path = (new Error().stack || '')
     .split('\n')
     .filter((l) => l.trim())[2]
@@ -21,4 +26,4 @@ function require_and_proxy_kojo_js(kojo) {
   });
 }
 
-module.exports = require_and_proxy_kojo_js;
+module.exports = proxy_kojo_js;

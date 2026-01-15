@@ -26,7 +26,7 @@ function generate_dictionary(
     your_name: false,
   },
 ) {
-  const ret = { id: cid };
+  const ret = { id: cid, _g: true };
   ret.CHARA = get_display_name(era.get(`callname:${cid}:-2`));
   ret.COLOR = get_chara_color(cid);
   ret.YOU = era.get('callname:0:-2');

@@ -379,7 +379,7 @@ module.exports = class extends CustomizedDaily {
         ' 的家里面出品的游戏啊，看起来不得不尝试一下了呢。',
       ]);
       await era.printAndWait(
-        `${silence.name}饶有兴味的看向屏幕里面出现的LOGO，拿起了手柄。`,
+        `${silence.name}饶有兴味的看向屏幕里面出现的 LOGO，拿起了手柄。`,
       );
     }
   }

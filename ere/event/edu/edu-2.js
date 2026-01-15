@@ -15,7 +15,6 @@ const { add_event } = require('#/event/queue');
 const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 const generate_dictionary = require('#/event/snippets/generate-dictionary');
-const print_ending_name = require('#/event/snippets/print-ending-name');
 const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -541,8 +540,12 @@ module.exports = class extends CustomizedEdu {
         !check_aim_race(history, race_enum.kink_sho, 2)) &&
       new SuzukaEduMarks().debuff >= 3
     ) {
-      await kojo['crazy_fan'](this.#dict);
-      await print_ending_name(kojo['crazy_fan'].title, get_chara_talk(2));
+      await print_title_with_kojo.ending(
+        kojo,
+        'crazy_fan',
+        get_chara_talk(2),
+        this.#dict,
+      );
     } else {
       await super.crazy_fan_end();
     }

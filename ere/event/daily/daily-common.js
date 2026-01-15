@@ -22,8 +22,7 @@ const select_action_in_atrium = require('#/event/daily/snippets/select-action-in
 const select_action_in_shopping_street = require('#/event/daily/snippets/select-action-in-shopping-street');
 const select_action_in_station = require('#/event/daily/snippets/select-action-in-station');
 const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
-const print_ending_name = require('#/event/snippets/print-ending-name');
-const print_event_name = require('#/event/snippets/print-event-name');
+const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -288,13 +287,14 @@ class CustomizedDaily {
       Math.random() < 0.05 + era.get(`base:${this.id}:10`) / 20000
     ) {
       hook.override = true;
-      await print_event_name(i18n().timon.daily.sr_strange_lunch.title, chara);
       // STATUSNAME:35 = 马跳Z
       era.set('status:0:35', 1);
       era.set(`status:${this.id}:35`, 1);
       if (
         (
-          await i18n().timon.daily.sr_strange_lunch(
+          await print_title_with_kojo(
+            i18n().timon.daily,
+            'sr_strange_lunch',
             chara,
             me,
             sys_get_colored_callname(this.id, 0),
@@ -360,13 +360,18 @@ class CustomizedDaily {
         Math.random() < era.get(`love:${this.id}`) / 2000
       ) {
         hook.override = true;
-        await print_event_name(
-          i18n().timon.daily.or_riverside_walk.title,
-          chara,
-        );
         let relation = 0;
         let love = 0;
-        if ((await i18n().timon.daily.or_riverside_walk(chara, me))[0] === 1) {
+        if (
+          (
+            await print_title_with_kojo(
+              i18n().timon.daily,
+              'or_riverside_walk',
+              chara,
+              me,
+            )
+          )[0] === 1
+        ) {
           relation = 10;
         } else {
           love = 1;
@@ -434,16 +439,14 @@ class CustomizedDaily {
           Math.random() < era.get(`love:${this.id}`) / 2000
         ) {
           hook.override = true;
-          await print_event_name(
-            i18n().timon.daily.os_is_movie_right.title,
-            chara,
-          );
           let motivation = 0;
           let relation = 0;
           let love = 0;
           if (
             (
-              await i18n().timon.daily.os_is_movie_right(
+              await print_title_with_kojo(
+                i18n().timon.daily,
+                'os_is_movie_right',
                 chara,
                 me,
                 sys_get_colored_callname(this.id, 0),
@@ -625,8 +628,7 @@ class CustomizedDaily {
    * @param {CharaTalk} me
    */
   async cl_new_year(chara, me) {
-    await print_event_name(i18n().timon.daily.cl_new_year.title, chara);
-    await i18n().timon.daily.cl_new_year(chara, me);
+    await print_title_with_kojo(i18n().timon.daily, 'cl_new_year', chara, me);
   }
 
   /**
@@ -635,8 +637,7 @@ class CustomizedDaily {
    * @param {CharaTalk} me
    */
   async cl_valentine(chara, me) {
-    await print_event_name(i18n().timon.daily.cl_valentine.title, chara);
-    await i18n().timon.daily.cl_valentine(chara, me);
+    await print_title_with_kojo(i18n().timon.daily, 'cl_valentine', chara, me);
   }
 
   /**
@@ -645,8 +646,7 @@ class CustomizedDaily {
    * @param {CharaTalk} me
    */
   async cl_palace(chara, me) {
-    await print_event_name(i18n().timon.daily.cl_palace.title, chara);
-    await i18n().timon.daily.cl_palace(chara, me);
+    await print_title_with_kojo(i18n().timon.daily, 'cl_palace', chara, me);
   }
 
   /**
@@ -655,8 +655,7 @@ class CustomizedDaily {
    * @param {CharaTalk} me
    */
   async cl_fans(chara, me) {
-    await print_event_name(i18n().timon.daily.cl_fans.title, chara);
-    await i18n().timon.daily.cl_fans(chara, me);
+    await print_title_with_kojo(i18n().timon.daily, 'cl_fans', chara, me);
   }
 
   /**
@@ -665,8 +664,12 @@ class CustomizedDaily {
    * @param {CharaTalk} me
    */
   async cl_temple_fair(chara, me) {
-    await print_event_name(i18n().timon.daily.cl_temple_fair.title, chara);
-    await i18n().timon.daily.cl_temple_fair(chara, me);
+    await print_title_with_kojo(
+      i18n().timon.daily,
+      'cl_temple_fair',
+      chara,
+      me,
+    );
   }
 
   /**
@@ -675,8 +678,7 @@ class CustomizedDaily {
    * @param {CharaTalk} me
    */
   async cl_halloween(chara, me) {
-    await print_event_name(i18n().timon.daily.cl_halloween.title, chara);
-    await i18n().timon.daily.cl_halloween(chara, me);
+    await print_title_with_kojo(i18n().timon.daily, 'cl_halloween', chara, me);
   }
 
   /**
@@ -685,8 +687,7 @@ class CustomizedDaily {
    * @param {CharaTalk} me
    */
   async cl_christmas(chara, me) {
-    await print_event_name(i18n().timon.daily.cl_christmas.title, chara);
-    await i18n().timon.daily.cl_christmas(chara, me);
+    await print_title_with_kojo(i18n().timon.daily, 'cl_christmas', chara, me);
   }
 
   /** @param {HookArg} hook */
@@ -729,15 +730,21 @@ class CustomizedDaily {
   async end_talk(hentai) {}
 
   async slave_end() {
-    const chara = get_chara_talk(this.id);
-    await i18n().timon.daily.slave_end(chara, get_chara_talk(0));
-    await print_ending_name(i18n().timon.daily.slave_end.title, chara);
+    await print_title_with_kojo.ending(
+      i18n().timon.ending,
+      'slave_end',
+      get_chara_talk(this.id),
+      get_chara_talk(0),
+    );
   }
 
   async basement_end() {
-    const chara = get_chara_talk(this.id);
-    await i18n().timon.daily.basement_end(chara, get_chara_talk(0));
-    await print_ending_name(i18n().timon.daily.basement_end.title, chara);
+    await print_title_with_kojo.ending(
+      i18n().timon.ending,
+      'basement_end',
+      get_chara_talk(this.id),
+      get_chara_talk(0),
+    );
   }
 
   /**

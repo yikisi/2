@@ -11,7 +11,7 @@ const { get_custom_check } = require('#/event/check/check-factory');
 const { get_custom_daily } = require('#/event/daily/daily-factory');
 const { get_custom_edu } = require('#/event/edu/edu-factory');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
-const print_ending_name = require('#/event/snippets/print-ending-name');
+const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
@@ -25,6 +25,7 @@ const basement_owners = require('#/data/event/basement-owners');
 const crazy_fans = require('#/data/event/crazy-fans');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
+const { i18n } = require('#/i18n/selector');
 
 const basement_saying_arr = [
   '九尺二间陋室里，红唇依竹共恩情。——高杉晋作',
@@ -53,24 +54,12 @@ async function game_over(again) {
     era.drawLine();
     global_achievement.end_mon = 1;
     await get_custom_daily(temp.creditor).slave_end();
-    saying_arr = [
-      '九尺二间陋室里，红唇依竹共恩情。——高杉晋作',
-      '金钱、赛马娘、女人，男生永远搞不懂这三件事。——威尔・罗杰斯',
-      '一文钱难倒英雄汉。——李绿园',
-      '每一个被束缚的奴隶都可以靠着他自己的手脱掉锁链。——莎士比亚',
-      '我已不再孤单，如今我生命中的挚爱与我如此靠近。——悲惨世界',
-    ];
+    saying_arr = i18n().timon.eds_slave;
   } else if ((temp = crazy_fans.get()) && game_over) {
     era.drawLine();
     global_achievement.end_fan = 1;
     await get_custom_edu(temp).crazy_fan_end();
-    saying_arr = [
-      '日蚀当先，万物无光。——丹尼斯・奥凯利',
-      '杜鹃不鸣则杀之。——织田信长',
-      '探案过程中，我是最后的、最高的上诉法庭。——福尔摩斯',
-      '世以成败论人物，故操得在英雄之列。——苏轼',
-      '拥有一位伟大的赛马娘，就拥有了最伟大的宝座。——丘吉尔',
-    ];
+    saying_arr = i18n().timon.eds_crazy_fan;
   } else {
     let punish_level = era.get('flag:惩戒力度');
     if (
@@ -322,71 +311,15 @@ async function game_over(again) {
           }
           global_achievement.end_lov = 1;
           saying_arr = basement_saying_arr;
-        } else if (era.get('flag:变态行为') > 0) {
-          era.setOffset(6);
-          era.setWidth(12);
-          await era.printAndWait([
-            me.get_colored_name(),
-            ' 忽视了成年人的社会责任，唆使负责马娘进行变态行为的事情败露，哪怕是特雷森也无法为 ',
-            me.get_colored_name(),
-            ' 掩盖过去。',
-          ]);
-          await era.printAndWait([
-            '最终校方勒令 ',
-            me.get_colored_name(),
-            ' 与负责',
-            uma,
-            '解除契约，进行移籍。',
-          ]);
-          await era.printAndWait([
-            '因社会评价过低而被解雇的 ',
-            me.get_colored_name(),
-            '，迎来了结局……',
-          ]);
-          era.setWidth(24);
-          era.setOffset(0);
-          await print_ending_name('身败名裂', me);
-          saying_arr = [
-            '人变得真正低劣时，除了高兴别人的不幸外，已无其他乐趣可言。——歌德',
-            '自由不是随心所欲，而是不必身不由己。——康德',
-            '我是自己最大的敌人。——拿破仑',
-            '金钱、赛马娘、女人，男生永远搞不懂这三件事。——威尔・罗杰斯',
-            '每一个被束缚的奴隶都可以靠着他自己的手脱掉锁链。——莎士比亚',
-          ];
+          // FLAGNAME:36 = 变态行为
+        } else if (era.get('flag:36') > 0) {
+          await print_title_with_kojo.ending(i18n().timon.ending, 'hentai', me);
+          saying_arr = i18n().timon.eds_hentai;
           end_talk = 2;
           global_achievement.end_hnt = 1;
         } else {
-          era.setOffset(6);
-          era.setWidth(12);
-          await era.printAndWait([
-            '或许是 ',
-            me.get_colored_name(),
-            ' 过于懈怠，又或许是负责',
-            uma,
-            '的天赋不足，胜利与你们始终遥遥无期。',
-          ]);
-          await era.printAndWait([
-            '你们不管如何努力都无济于事，最终校方勒令 ',
-            me.get_colored_name(),
-            ' 与负责',
-            uma,
-            '解除契约，进行移籍。',
-          ]);
-          await era.printAndWait([
-            '因社会评价过低而被解雇的 ',
-            me.get_colored_name(),
-            '，迎来了结局……',
-          ]);
-          era.setWidth(24);
-          era.setOffset(0);
-          await print_ending_name('扫地出门', me);
-          saying_arr = [
-            '金钱、赛马娘、女人，男生永远搞不懂这三件事。——威尔・罗杰斯',
-            '拥有一位伟大的赛马娘，就拥有了最伟大的宝座。——丘吉尔',
-            '世以成败论人物，故操得在英雄之列。——苏轼',
-            '日蚀当先，万物无光。——丹尼斯・奥凯利',
-            '我是自己最大的敌人。——拿破仑',
-          ];
+          await print_title_with_kojo.ending(i18n().timon.ending, 'loser', me);
+          saying_arr = i18n().timon.eds_loser;
           end_talk = 1;
           global_achievement.end_los = 1;
         }
