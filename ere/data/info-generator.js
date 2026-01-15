@@ -37,10 +37,9 @@ const { lust_border } = require('#/data/ero/orgasm-const');
 const { part_enum } = require('#/data/ero/part-const');
 const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const {
-  penis_state,
   pregnant_stage_enum,
   trained_talent_names,
-  virgin_state,
+  vp_status_enum,
 } = require('#/data/ero/status-const');
 const recruit_flags = require('#/data/event/recruit-flags');
 
@@ -119,6 +118,37 @@ const talent_names = [
 ];
 
 const breast_talent_names = ['贫乳', '', '巨乳', '爆乳'];
+
+/** @type {{chara:Record<string,()=>string>,player:Record<string,()=>string>}} */
+const penis_state = {
+  /** 训练员视角角色的童贞情况 */
+  chara: {},
+  /** 训练员视角自己的童贞情况 */
+  player: {},
+};
+penis_state.chara[vp_status_enum.i_think] =
+  penis_state.chara[vp_status_enum.virgin] =
+  penis_state.player[vp_status_enum.dont_know] =
+  penis_state.player[vp_status_enum.virgin] =
+    () => i18n().v_penis_v;
+penis_state.chara[vp_status_enum.dont_know] = () => i18n().v_penis_d;
+
+/** @type {{chara:Record<string,()=>string>,player:Record<string,()=>string>}} */
+const virgin_state = {
+  /** 训练员视角角色的处女情况 */
+  chara: {},
+  /** 训练员视角自己的处女情况 */
+  player: {},
+};
+virgin_state.chara[vp_status_enum.i_think] =
+  virgin_state.chara[vp_status_enum.virgin] =
+  virgin_state.player[vp_status_enum.dont_know] =
+  virgin_state.player[vp_status_enum.virgin] =
+    () => i18n().v_vagina_v;
+virgin_state.chara[vp_status_enum.dont_know] = () => i18n().v_vagina_d;
+virgin_state.chara[vp_status_enum.reborn] = virgin_state.player[
+  vp_status_enum.reborn
+] = () => i18n().v_vagina_r;
 
 /**
  * @param {number} cid

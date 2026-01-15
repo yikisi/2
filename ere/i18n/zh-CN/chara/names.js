@@ -11,6 +11,8 @@ class I18nNames {
   miss = '小姐';
   dad = '爸爸';
   mom = '妈妈';
+  dad_baby = '叭叭';
+  mon_baby = '麻麻';
   boy = '男孩';
   girl = '女孩';
   son = '儿子';
