@@ -23,6 +23,7 @@ module.exports = async function (hook, event_object) {
     event_marks = new MaEduMarks(),
     edu_weeks = era.get('cflag:4:育成回合计时');
   let wait_flag = false;
+  // todo 报错
   if (event_marks.beginning === 1) {
     event_marks.beginning++;
     // 从  ${zensky.name}登场开始 风数值为1 最终结局与风数值 例：TE=20 GE = 17-19 其余均为NE

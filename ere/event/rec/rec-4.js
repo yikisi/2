@@ -142,6 +142,7 @@ module.exports = class extends CustomizedRecruit {
         // 返回true，表示跳过后面的天台事件流程
         return true;
     }
+    // todo 报错
     new MaEduMarks().beginning++;
   }
 };
