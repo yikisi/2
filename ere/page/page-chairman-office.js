@@ -21,6 +21,7 @@ const print_out_page = require('#/page/page-out');
 const { check_edu_script } = require('#/event/edu/edu-factory');
 const { check_rec_script } = require('#/event/rec/rec-factory');
 
+const get_display_name = require('#/utils/calc-display-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { get_chara_color } = require('#/data/chara-colors');
@@ -168,10 +169,9 @@ async function page_chairman_office() {
                         const color = get_chara_color(cid);
                         const flag_script =
                           check_rec_script(cid) && check_edu_script(cid);
-                        let name = era.get(`callname:${cid}:-1`);
-                        if (name === '-') {
-                          name = era.get(`static:${cid}:name`);
-                        }
+                        const name = get_display_name(
+                          era.get(`static:${cid}:name`),
+                        );
                         return {
                           accelerator: cid,
                           config: {
@@ -217,8 +217,7 @@ async function page_chairman_office() {
                     temp = await era.input();
                     temp = temp_list.filter(
                       (e) =>
-                        era.get(`callname:${e}:-1`) === temp ||
-                        era.get(`static:${e}:name`) === temp,
+                        get_display_name(era.get(`static:${e}:name`)) === temp,
                     )[0];
                     break;
                   case 3:
@@ -258,7 +257,9 @@ async function page_chairman_office() {
                     chara.say([
                       '抉 择！要让学园帮你接触 ',
                       {
-                        content: era.get(`static:${temp}:name`),
+                        content: get_display_name(
+                          era.get(`static:${temp}:name`),
+                        ),
                         color: get_chara_color(temp),
                         fontWeight: 'bold',
                       },
