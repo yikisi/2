@@ -19,7 +19,7 @@ const EventObject = require('#/data/event/event-object');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
 
-const { i18n } = require('#/i18n/selector');
+const di18n = require('#/i18n/extended-def');
 
 module.exports = class extends CustomizedCheck {
   check_and_get_titles(aim_check) {
@@ -128,7 +128,7 @@ module.exports = class extends CustomizedCheck {
             era.printMultiColumns([
               ...new Array(5).fill(0).map((_, i) => ({
                 accelerator: i,
-                content: `${i18n().n_attr[i]}（+80）`,
+                content: `${di18n.n_attr[i]}（+80）`,
                 config: {
                   disabled:
                     era.get(`base:0:${5 + i}`) ===

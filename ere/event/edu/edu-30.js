@@ -25,7 +25,7 @@ const RiceEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-30');
 const event_hooks = require('#/data/event/event-hooks');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
-const { i18n } = require('#/i18n/selector');
+const di18n = require('#/i18n/extended-def');
 
 /** @type {Record<string,function(CharaTalk,CharaTalk,string,string,{wait_flag:boolean},EventObject):Promise<boolean|void>>} */
 const week_start_handlers = {};
@@ -700,7 +700,7 @@ module.exports = class extends CustomizedEdu {
     era.print([
       rice.get_colored_name(),
       ' 的 ',
-      i18n().n_attr[extra_flag.train],
+      di18n.n_attr[extra_flag.train],
       ' 训练顺利成功了……',
     ]);
     if (Math.random() < 0.2 * extra_flag.stamina_ratio) {

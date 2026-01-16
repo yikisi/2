@@ -23,6 +23,7 @@ const {
   get_rank_level,
 } = require('#/data/info-generator');
 
+const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 const pop_mark = ['➖', '◎', '◯', '▲', '△', '△'];
@@ -43,7 +44,7 @@ function generate_attribute_info(chara) {
           offset: 1,
           width: 5,
         },
-        content: i18n().n_attr[index],
+        content: di18n.n_attr[index],
         type: 'text',
       },
       {
@@ -92,12 +93,12 @@ async function preview_race(
     },
     {
       config: { align: 'center' },
-      content: `${info.track >= 0 ? i18n().race.n_track[info.track] : i18n().race.t_playground} ${
-        i18n().race.a_ground[info.ground]
+      content: `${info.track >= 0 ? di18n.race.n_track[info.track] : i18n().race.t_playground} ${
+        di18n.race.a_ground[info.ground]
       } ${info.span.toLocaleString()}m (${
-        i18n().race.a_distance[info.distance]
-      }) ${i18n().race.n_rotation[info.rotation + 1]} · ${i18n().race.n_weather[info.weather]} ${
-        i18n().race.n_mess[info.mess]
+        di18n.race.a_distance[info.distance]
+      }) ${di18n.race.n_rotation[info.rotation + 1]} · ${di18n.race.n_weather[info.weather]} ${
+        di18n.race.n_mess[info.mess]
       }`,
       type: 'text',
     },
@@ -202,7 +203,7 @@ async function preview_race(
               '：',
               {
                 color: motivation_colors[cur_chara.motivation + 2],
-                content: i18n().n_moti[cur_chara.motivation + 2],
+                content: di18n.n_moti[cur_chara.motivation + 2],
               },
               { isDivider: true },
               '第 ',
@@ -221,7 +222,7 @@ async function preview_race(
           {
             config: { align: 'center', width: 12 },
             content: [
-              `${i18n().n_adapt[info.ground]} `,
+              `${di18n.n_adapt[info.ground]} `,
               {
                 color: adaptability_colors[cur_chara.adapts.ground],
                 content: get_adaptability_rank(cur_chara.adapts.ground),
@@ -242,7 +243,7 @@ async function preview_race(
           {
             config: { align: 'center', width: 12 },
             content: [
-              `${i18n().n_adapt[info.distance + 2]} `,
+              `${di18n.n_adapt[info.distance + 2]} `,
               {
                 color: adaptability_colors[cur_chara.adapts.distance],
                 content: get_adaptability_rank(cur_chara.adapts.distance),
@@ -270,7 +271,7 @@ async function preview_race(
                     buttonType: cur_chara.style === i ? 'warning' : 'info',
                     width: 6,
                   },
-                  content: `${i18n().race.a_style[i]} ${strategy_ability[i]}`,
+                  content: `${di18n.race.a_style[i]} ${strategy_ability[i]}`,
                   type: 'button',
                 }
               : {
@@ -281,7 +282,7 @@ async function preview_race(
                       ? { color: el_warning_color, fontWeight: 'bold' }
                       : {}),
                   },
-                  content: `${i18n().race.a_style[i]} ${strategy_ability[i]}`,
+                  content: `${di18n.race.a_style[i]} ${strategy_ability[i]}`,
                   type: 'text',
                 },
           ),
@@ -321,7 +322,7 @@ async function preview_race(
               disableWarning: true,
               width: 4,
             },
-            content: `${uma.name} ${i18n().race.a_style[uma.style]}`,
+            content: `${uma.name} ${di18n.race.a_style[uma.style]}`,
             type: 'button',
           })),
           {

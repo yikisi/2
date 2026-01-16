@@ -32,6 +32,7 @@ const {
 } = require('#/data/info-generator');
 const { back_hairs, front_hairs, top_hairs } = require('#/data/other-const');
 
+const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 const body_hair_type = ['天生光滑', '普通类型', '生长快而硬'];
@@ -86,12 +87,12 @@ const hair_content_cb = [
   (p) => back_hairs[p],
   (p) => ({
     color: skin_colors[p + 1],
-    content: i18n().n_skin[p + 1],
+    content: di18n.n_skin[p + 1],
   }),
   (p) => body_hair_type[p],
   (p) => body_hair_type[p],
   (p) => {
-    return { color: sex_colors[p], content: i18n().n_c_penis[p] };
+    return { color: sex_colors[p], content: di18n.n_c_penis[p] };
   },
 ];
 const hair_length_arr = [
@@ -99,10 +100,10 @@ const hair_length_arr = [
   top_hairs.length,
   front_hairs.length,
   back_hairs.length,
-  i18n().n_skin.length,
+  di18n.n_skin.length,
   body_hair_type.length,
   body_hair_type.length,
-  i18n().n_c_penis.length,
+  di18n.n_c_penis.length,
 ];
 
 function set_bust_size(size) {
@@ -768,7 +769,7 @@ async function page_custom() {
             {
               // CFLAGNAME:10 = 肤色深度
               color: skin_colors[era.get('cflag:0:10') + 1],
-              content: i18n().n_skin[era.get('cflag:0:10') + 1],
+              content: di18n.n_skin[era.get('cflag:0:10') + 1],
             },
             ` | 腋毛：${body_hair_type[era.get('talent:0:腋毛成长')]} | 阴毛：${
               body_hair_type[era.get('talent:0:阴毛成长')]
@@ -776,10 +777,10 @@ async function page_custom() {
             {
               // TALENTNAME:34 = 茎核类型
               color: sex_colors[era.get('talent:0:34')],
-              content: i18n().n_c_penis[era.get('talent:0:34')],
+              content: di18n.n_c_penis[era.get('talent:0:34')],
             },
             era.get('cflag:0:性别')
-              ? ` | 阴茎长度：${i18n().n_penis[era.get('cflag:0:阴茎尺寸')]}`
+              ? ` | 阴茎长度：${di18n.n_penis[era.get('cflag:0:阴茎尺寸')]}`
               : '',
             { isBr: true },
             '如果马娘化，认为自己将是 ',
@@ -802,7 +803,7 @@ async function page_custom() {
             ...get_xp(0),
             { isBr: true },
             '开发者的馈赠：',
-            i18n().n_attr[
+            di18n.n_attr[
               new Array(5)
                 .fill(0)
                 .findIndex((_, i) => era.get(`base:0:${5 + i}`) >= 100)

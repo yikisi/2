@@ -15,6 +15,7 @@ const { buff_colors } = require('#/data/color-const');
 const { item_names } = require('#/data/ero/item-const');
 const { class_enum } = require('#/data/race/model/race-info');
 
+const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 const ranks = ['Ⅰ', 'Ⅱ', 'Ⅲ', 'Ⅳ', 'Ⅴ'];
@@ -242,7 +243,7 @@ async function page_race_result(contestants, info, race_id) {
                 content: [
                   ...(info.track !== undefined
                     ? [
-                        i18n().race.get_track_name(info.track),
+                        di18n.race.get_track_name(info.track),
                         ' ',
                         info.get_colored_name_with_class(),
                       ]

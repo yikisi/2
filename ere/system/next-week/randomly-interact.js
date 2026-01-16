@@ -25,7 +25,7 @@ const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const { location_enum } = require('#/data/locations');
 const { attr_enum, fail_sta_border, time_cost } = require('#/data/train-const');
 
-const { i18n } = require('#/i18n/selector');
+const di18n = require('#/i18n/extended-def');
 
 /** @param {number[]} in_team_list */
 function randomly_interact(in_team_list) {
@@ -122,7 +122,7 @@ function randomly_interact(in_team_list) {
         exp >= e.level * 800 + get_random_value(0, 800) &&
         update_train_level(e.chara.id, e.train)
       ) {
-        cost_result.unshift([`${i18n().n_attr[e.train]}训练 变得更擅长了！`]);
+        cost_result.unshift([`${di18n.n_attr[e.train]}训练 变得更擅长了！`]);
       }
     }
     get_success_base_reward(e.chara.id, e.train, e.level, train_cost, changes, {
@@ -137,7 +137,7 @@ function randomly_interact(in_team_list) {
           e.chara.get_colored_name(),
           ' 进行了 ',
           {
-            content: i18n().n_attr[e.train],
+            content: di18n.n_attr[e.train],
             color: attr_colors[e.train],
           },
           ' 训练……',
@@ -206,7 +206,7 @@ function randomly_interact(in_team_list) {
           ' 一起进行了 ',
           {
             color: attr_colors[train],
-            content: i18n().n_attr[train],
+            content: di18n.n_attr[train],
           },
           ' 方面的自主训练……',
         );
@@ -221,7 +221,7 @@ function randomly_interact(in_team_list) {
             ' 进行了 ',
             {
               color: attr_colors[train],
-              content: i18n().n_attr[train],
+              content: di18n.n_attr[train],
             },
             ' 方面的自主训练……',
           ],

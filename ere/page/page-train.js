@@ -39,6 +39,7 @@ const {
 } = require('#/data/race/skill/skill-const');
 const { attr_enum, time_cost } = require('#/data/train-const');
 
+const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 const skill_limit = 27;
@@ -220,7 +221,7 @@ module.exports = async () => {
         columns.push(
           {
             config: { width: 8 },
-            content: i18n().n_attr[i],
+            content: di18n.n_attr[i],
             type: 'text',
           },
           {
@@ -444,7 +445,7 @@ module.exports = async () => {
               chara_stamina === 0 ||
               !train_enabled,
           },
-          content: `${i18n().n_attr[i]}训练 Lv.${train_level}\n成功率：${
+          content: `${di18n.n_attr[i]}训练 Lv.${train_level}\n成功率：${
             train_level ? sys_get_succ_rate(cid, i, extra_buff) : 0
           }%`,
           type: 'button',
@@ -582,7 +583,7 @@ module.exports = async () => {
                         content: '技能类型',
                         type: 'text',
                       },
-                      ...['全部', ...i18n().skill.n_type.slice(0, 4)].map(
+                      ...['全部', ...di18n.skill.n_type.slice(0, 4)].map(
                         (e, i) => ({
                           accelerator: 930 + i,
                           config: {
@@ -601,18 +602,16 @@ module.exports = async () => {
                         content: '场地类型',
                         type: 'text',
                       },
-                      ...['全部', ...i18n().n_adapt.slice(0, 2)].map(
-                        (e, i) => ({
-                          accelerator: 940 + i,
-                          config: {
-                            buttonType:
-                              i === ground_filter + 1 ? 'warning' : 'info',
-                            width: 3,
-                          },
-                          content: e,
-                          type: 'button',
-                        }),
-                      ),
+                      ...['全部', ...di18n.n_adapt.slice(0, 2)].map((e, i) => ({
+                        accelerator: 940 + i,
+                        config: {
+                          buttonType:
+                            i === ground_filter + 1 ? 'warning' : 'info',
+                          width: 3,
+                        },
+                        content: e,
+                        type: 'button',
+                      })),
                     ],
                     [
                       {
@@ -620,18 +619,15 @@ module.exports = async () => {
                         content: '距离类型',
                         type: 'text',
                       },
-                      ...['全部', ...i18n().n_adapt.slice(2, 6)].map(
-                        (e, i) => ({
-                          accelerator: 950 + i,
-                          config: {
-                            buttonType:
-                              i === dis_filter + 1 ? 'warning' : 'info',
-                            width: 3,
-                          },
-                          content: e,
-                          type: 'button',
-                        }),
-                      ),
+                      ...['全部', ...di18n.n_adapt.slice(2, 6)].map((e, i) => ({
+                        accelerator: 950 + i,
+                        config: {
+                          buttonType: i === dis_filter + 1 ? 'warning' : 'info',
+                          width: 3,
+                        },
+                        content: e,
+                        type: 'button',
+                      })),
                     ],
                     [
                       {
@@ -639,7 +635,7 @@ module.exports = async () => {
                         content: '策略类型',
                         type: 'text',
                       },
-                      ...['全部', ...i18n().n_adapt.slice(6)].map((e, i) => ({
+                      ...['全部', ...di18n.n_adapt.slice(6)].map((e, i) => ({
                         accelerator: 960 + i,
                         config: {
                           buttonType:
@@ -656,7 +652,7 @@ module.exports = async () => {
                         content: '效果类型',
                         type: 'text',
                       },
-                      ...['全部', ...i18n().skill.n_tag].map((e, i) => ({
+                      ...['全部', ...di18n.skill.n_tag].map((e, i) => ({
                         accelerator: 970 + i,
                         config: {
                           buttonType:

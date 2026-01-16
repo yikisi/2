@@ -25,7 +25,7 @@ const EventObject = require('#/data/event/event-object');
 const LoveLimitStatus = require('#/data/love-limit-status');
 const { attr_enum, pressure_border } = require('#/data/train-const');
 
-const { i18n } = require('#/i18n/selector');
+const di18n = require('#/i18n/extended-def');
 
 /** @param {Record<string,function(number):Promise>} handlers */
 module.exports = (handlers) => {
@@ -396,7 +396,7 @@ module.exports = (handlers) => {
         chara.id ? '给 ' : '',
         chara.get_colored_name(),
         ' 服用了',
-        i18n().item.get_name(iid),
+        di18n.item.get_name(iid),
         '……',
         { isBr: true },
         chara.get_colored_name(),
@@ -411,7 +411,7 @@ module.exports = (handlers) => {
   };
 
   handlers[47] = handlers[48] = async (iid) => {
-    const item_name = i18n().item.get_name(iid);
+    const item_name = di18n.item.get_name(iid);
     const total = era.get(`item:${iid}`);
     let to_sell = 1,
       flag_sell = true,

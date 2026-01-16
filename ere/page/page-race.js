@@ -62,6 +62,7 @@ const {
 } = require('#/data/race/race-const');
 const { attr_enum } = require('#/data/train-const');
 
+const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 /**
@@ -102,7 +103,7 @@ function page_race_header(_info, is_grand_live) {
             fontWeight: 'bold',
             width: 8,
           },
-          content: i18n().race.get_track_name(_info.track),
+          content: di18n.race.get_track_name(_info.track),
           type: 'text',
         },
       ],

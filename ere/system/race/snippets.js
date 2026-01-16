@@ -9,11 +9,11 @@ const { frame_rate } = require('#/data/race/race-sim-const');
 const { skills_dict } = require('#/data/race/skill/skill-const');
 const { attr_enum } = require('#/data/train-const');
 
-const { i18n } = require('#/i18n/selector');
+const di18n = require('#/i18n/extended-def');
 
-const fron_cols = 4,
-  progress_width = 24 - 10 - 2 * fron_cols - 1,
-  timer_unit = Math.floor(1000 / frame_rate) / 1000;
+const fron_cols = 4;
+const progress_width = 24 - 10 - 2 * fron_cols - 1;
+const timer_unit = Math.floor(1000 / frame_rate) / 1000;
 
 /**
  * @param {string|array} message
@@ -260,7 +260,7 @@ module.exports = {
         },
         {
           config: { align: 'center', width: 1 },
-          content: i18n().race.a_style[uma.style],
+          content: di18n.race.a_style[uma.style],
           type: 'text',
         },
         {

@@ -25,6 +25,8 @@ const basement_owners = require('#/data/event/basement-owners');
 const crazy_fans = require('#/data/event/crazy-fans');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
+
+const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 const basement_saying_arr = [
@@ -54,12 +56,12 @@ async function game_over(again) {
     era.drawLine();
     global_achievement.end_mon = 1;
     await get_custom_daily(temp.creditor).slave_end();
-    saying_arr = i18n().timon.eds_slave;
+    saying_arr = di18n.timon.eds_slave;
   } else if ((temp = crazy_fans.get()) && game_over) {
     era.drawLine();
     global_achievement.end_fan = 1;
     await get_custom_edu(temp).crazy_fan_end();
-    saying_arr = i18n().timon.eds_crazy_fan;
+    saying_arr = di18n.timon.eds_crazy_fan;
   } else {
     let punish_level = era.get('flag:惩戒力度');
     if (
@@ -314,12 +316,12 @@ async function game_over(again) {
           // FLAGNAME:36 = 变态行为
         } else if (era.get('flag:36') > 0) {
           await print_title_with_kojo.ending(i18n().timon.ending, 'hentai', me);
-          saying_arr = i18n().timon.eds_hentai;
+          saying_arr = di18n.timon.eds_hentai;
           end_talk = 2;
           global_achievement.end_hnt = 1;
         } else {
           await print_title_with_kojo.ending(i18n().timon.ending, 'loser', me);
-          saying_arr = i18n().timon.eds_loser;
+          saying_arr = di18n.timon.eds_loser;
           end_talk = 1;
           global_achievement.end_los = 1;
         }

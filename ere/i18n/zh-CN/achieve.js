@@ -7,18 +7,6 @@ class I18nAchievements {
   type_end = '结局';
   type_all = '综合';
   type_hidden = '事迹';
-  get n_type() {
-    return [
-      this.type_edu,
-      this.type_race,
-      this.type_love,
-      this.type_sex,
-      this.type_birth,
-      this.type_end,
-      this.type_all,
-      this.type_hidden,
-    ];
-  }
 
   rarity_3 = '普通';
   rarity_4 = '优秀';
@@ -26,18 +14,8 @@ class I18nAchievements {
   rarity_6 = '史诗';
   rarity_7 = '传说';
   rarity_8 = 'UMA';
-  /**
-   * @param {number} r
-   * @returns {string}
-   */
-  get_rarity_name(r) {
-    return this[`rarity_${r}`];
-  }
 
   platinum_all = '';
-  get n_platinum() {
-    return [this.platinum_all];
-  }
 
   name_template = '[%RARITY%] %NAME%';
   platinum_template = '%DESC%\n\n（%PLATINUM%）';

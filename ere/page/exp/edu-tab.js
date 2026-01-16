@@ -10,11 +10,10 @@ const {
   get_rank_level,
 } = require('#/data/info-generator');
 
+const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 const page_name = '育成情况';
-
-const skill_names = ['粤语', '英语', '法语'];
 
 module.exports = {
   /**
@@ -34,7 +33,7 @@ module.exports = {
           : new Array(5).fill(0).map((_, i) => ({
               config: { width: 4, color: attr_colors[i] },
               content: [
-                i18n().n_attr[i],
+                di18n.n_attr[i],
                 '：',
                 {
                   content: Math.floor(
@@ -56,7 +55,7 @@ module.exports = {
         era.get(`cflag:${chara.id}:47`)
       ) {
         const out_of_train = era.get(`cflag:${chara.id}:47`);
-        const train_time = `${i18n().n_edu[Math.floor(edu_weeks / 48)]} ${
+        const train_time = `${di18n.n_edu[Math.floor(edu_weeks / 48)]} ${
           (Math.floor(edu_weeks / 4) % 12) + 1
         } 月 第 ${(edu_weeks % 4) + 1} 周`;
         const chara_score = get_chara_score(chara.id);
@@ -68,7 +67,7 @@ module.exports = {
           adapt_info.push(
             {
               config: { width: 3 },
-              content: [i18n().n_adapt[i], '：'],
+              content: [di18n.n_adapt[i], '：'],
               type: 'text',
             },
             {
@@ -91,7 +90,7 @@ module.exports = {
             content:
               out_of_train >= 1
                 ? [
-                    i18n().n_oot[out_of_train - 1],
+                    di18n.n_oot[out_of_train - 1],
                     ' ｜ 评价：',
                     {
                       content: chara_score,
@@ -181,9 +180,11 @@ module.exports = {
         config: { content: '语言技能', position: 'left' },
         type: 'divider',
       },
-      ...skill_names.map((e) => ({
+      ...[5, 6, 7].map((aid) => ({
         config: { width: 6 },
-        content: `[${e}] Lv.${era.get(`abl:${chara.id}:${e}`)}`,
+        content: i18n()
+          .tb_abl.template.replace('%ABL%', i18n().tb_abl[aid])
+          .replace('%LEVEL%', era.get(`abl:${chara.id}:${aid}`)),
         type: 'text',
       })),
     );

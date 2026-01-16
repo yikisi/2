@@ -39,7 +39,7 @@ const { part_enum, part_names, part_skills } = require('#/data/ero/part-const');
 const { stain_enum } = require('#/data/ero/stain-const');
 const { vp_status_enum } = require('#/data/ero/status-const');
 
-const { i18n } = require('#/i18n/selector');
+const di18n = require('#/i18n/extended-def');
 
 /**
  * @param {EroParticipant} atk
@@ -302,7 +302,7 @@ function sys_do_sex(atk, def, item) {
               `在 ${date} ${i_def_awake ? '' : '偷偷'}将处女献给了 `,
               { c: def.id },
               ' ',
-              i18n().n_penis[get_penis_size(def.id)],
+              di18n.n_penis[get_penis_size(def.id)],
               '的肉棒',
             ]);
             era.set(`talent:${atk.id}:处女`, vp_status_enum.no);
@@ -498,7 +498,7 @@ function sys_do_sex(atk, def, item) {
                 `处女在 ${date} 被 `,
                 { c: atk.id },
                 ' ',
-                i18n().n_penis[get_penis_size(atk.id)],
+                di18n.n_penis[get_penis_size(atk.id)],
                 '的肉棒夺走了',
               ]);
             }

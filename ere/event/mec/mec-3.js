@@ -7,6 +7,7 @@ const LegendUmaSelector = require('#/data/race/model/legend-uma-selector');
 const { distance_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
+const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends CustomizedMec {
@@ -75,7 +76,7 @@ module.exports = class extends CustomizedMec {
     if (era.get('status:3:100') > 0) {
       return [
         {
-          ...i18n().kojo.get_titled_content(this.id, 'hurt'),
+          ...di18n.kojo.get_titled_content(this.id, 'hurt'),
           color: buff_colors[3],
           fontWeight: 'bold',
         },

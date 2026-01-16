@@ -32,6 +32,7 @@ const { get_random_value } = require('#/utils/value-utils');
 const event_hooks = require('#/data/event/event-hooks');
 const { location_enum } = require('#/data/locations');
 
+const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 class CustomizedDaily {
@@ -525,7 +526,7 @@ class CustomizedDaily {
       } else if (dice < 0.01) {
         const item = get_random_entry([0, 1, 2, 3, 12]);
         era.add(`item:${item}`, 1);
-        await era.printAndWait(i18n().item.notify(item));
+        await era.printAndWait(di18n.item.notify(item));
       } else if (dice < 0.02) {
         sys_like_chara(this.id, 0, 20) && (await era.waitAnyKey());
       } else if (dice < 0.03 && chara.sex_code !== 1) {

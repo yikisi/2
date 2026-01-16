@@ -5,6 +5,7 @@ const { join_list, sort_list } = require('#/utils/list-utils');
 const { get_chara_color } = require('#/data/chara-colors');
 const { adaptability_colors } = require('#/data/color-const');
 
+const di18n = require('#/i18n/extended-def');
 const { i18n, lan } = require('#/i18n/selector');
 
 const dict = {};
@@ -114,7 +115,7 @@ class GlobalAchievement {
                   content: i18n()
                     .achievement.name_template.replace(
                       '%RARITY%',
-                      i18n().achievement.get_rarity_name(rarity),
+                      di18n.achievement.get_rarity_name(rarity),
                     )
                     .replace('%NAME%', i18n().achievement[m]),
                   fontSize: '1rem',
@@ -128,7 +129,7 @@ class GlobalAchievement {
               50000,
             );
             const p_key = platinum_type.keys[p_type];
-            if (i18n().achievement.n_platinum[p_type] && !this.#bean[p_key]) {
+            if (di18n.achievement.n_platinum[p_type] && !this.#bean[p_key]) {
               const index = this.#fields.findIndex(
                 (m) => !this[m] && dict[m][2] === p_type,
               );
@@ -158,10 +159,10 @@ class GlobalAchievement {
   get_desc(m) {
     const type = dict[m][1];
     const p_type = dict[m][2];
-    if (type !== types.hidden && i18n().achievement.n_platinum[p_type]) {
+    if (type !== types.hidden && di18n.achievement.n_platinum[p_type]) {
       return i18n()
         .achievement.platinum_template.replace('%DESC%', i18n().achieve_desc[m])
-        .replace('%PLATINUM%', i18n().achievement.n_platinum[p_type]);
+        .replace('%PLATINUM%', di18n.achievement.n_platinum[p_type]);
     }
     return i18n().achieve_desc[m];
   }
@@ -181,7 +182,7 @@ class GlobalAchievement {
             config: {
               content: i18n().achievement.ui_type_template.replace(
                 '%TYPE%',
-                i18n().achievement.n_type[page],
+                di18n.achievement.n_type[page],
               ),
             },
             type: 'divider',
@@ -192,7 +193,7 @@ class GlobalAchievement {
             ...Object.keys(types).map((_, i) => ({
               accelerator: i + 1,
               config: { disabled: i === page && page !== types.hidden },
-              content: i18n().achievement.n_type[i],
+              content: di18n.achievement.n_type[i],
               type: 'button',
             })),
             { accelerator: 99, content: i18n().ui_back, type: 'button' },
@@ -244,7 +245,7 @@ class GlobalAchievement {
                       ? i18n()
                           .achievement.got_template.replace(
                             '%RARITY%',
-                            i18n().achievement.get_rarity_name(rarity),
+                            di18n.achievement.get_rarity_name(rarity),
                           )
                           .replace(
                             '%TIME%',
@@ -252,7 +253,7 @@ class GlobalAchievement {
                           )
                       : i18n().achievement.ungot_template.replace(
                           '%RARITY%',
-                          i18n().achievement.get_rarity_name(rarity),
+                          di18n.achievement.get_rarity_name(rarity),
                         ),
                 },
                 { isBr: true },

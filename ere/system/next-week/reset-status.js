@@ -32,6 +32,7 @@ const LoveLimitStatus = require('#/data/love-limit-status');
 const { gene_juel_names } = require('#/data/other-const');
 const RaceHistory = require('#/data/race/model/race-history');
 
+const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 /**
@@ -366,7 +367,7 @@ async function reset_status(
                   '【',
                   get_chara_talk(cid).get_colored_name(),
                   ' 的 ',
-                  i18n().n_attr[t],
+                  di18n.n_attr[t],
                   '训练 变得更擅长了！】',
                 ]);
               }

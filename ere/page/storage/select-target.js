@@ -6,6 +6,7 @@ const sys_filter_chara = require('#/system/sys-filter-chara');
 const { attr_bg_colors } = require('#/data/color-const');
 const recruit_flags = require('#/data/event/recruit-flags');
 
+const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 /**
@@ -15,7 +16,7 @@ const { i18n } = require('#/i18n/selector');
  */
 async function select_target_in_storage(iid, filter_cb = () => true) {
   const buffer = [];
-  const item_name = i18n().item.get_name(iid);
+  const item_name = di18n.item.get_name(iid);
   // CFLAGNAME:66 = 招募状态
   let team_list = sys_filter_chara('cflag', '66', recruit_flags.yes).filter(
     filter_cb,

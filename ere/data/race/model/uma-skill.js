@@ -9,6 +9,7 @@ const {
   target_type_enum,
 } = require('#/data/race/model/skill-enum');
 
+const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 const skill_name_colors = [
@@ -237,12 +238,12 @@ class UmaSkill {
     return [
       this.adapt_tags
         .map((t) =>
-          i18n().skill.tag_template.replace('%TAG%', i18n().n_adapt[t]),
+          i18n().skill.tag_template.replace('%TAG%', di18n.n_adapt[t]),
         )
         .join(''),
       this.ability_tags
         .map((t) =>
-          i18n().skill.tag_template.replace('%TAG%', i18n().skill.n_tag[t]),
+          i18n().skill.tag_template.replace('%TAG%', di18n.skill.n_tag[t]),
         )
         .join(''),
     ].filter((t) => t !== '');
@@ -256,8 +257,8 @@ class UmaSkill {
     let title =
       i18n()
         .skill.title_template.replace('%NAME%', this.name)
-        .replace('%TYPE%', i18n().skill.n_type[this.category >> 3])
-        .replace('%RARITY%', i18n().skill.n_rarity[this.category & 0b111]) +
+        .replace('%TYPE%', di18n.skill.n_type[this.category >> 3])
+        .replace('%RARITY%', di18n.skill.n_rarity[this.category & 0b111]) +
       `\n${this.desc}`;
     if (tags.length > 0) {
       title += `\n${tags.join('\n')}`;

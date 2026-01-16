@@ -28,6 +28,7 @@ const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
 const { attr_enum } = require('#/data/train-const');
 
+const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends CustomizedEdu {
@@ -95,7 +96,7 @@ module.exports = class extends CustomizedEdu {
     await print_title_with_kojo(this.#kojo, 'valentine', oguri, this.#dict);
     era.println();
     // ITEMNAME:100 = 情人节巧克力
-    era.print(i18n().item.notify(100));
+    era.print(di18n.item.notify(100));
     era.add('item:100', 1);
     await era.waitAnyKey();
   }

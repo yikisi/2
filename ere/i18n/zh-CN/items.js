@@ -85,14 +85,6 @@ class I18nItems {
   112 = '小金船号';
   113 = '善信号';
   114 = '现实透孔仪';
-
-  get_name(iid) {
-    return this.template.replace('%NAME%', this[iid] || `item.${iid}`);
-  }
-
-  notify(iid) {
-    return this.got_template.replace('%INAME%', this.get_name(iid));
-  }
 }
 
 module.exports = I18nItems;

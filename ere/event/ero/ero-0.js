@@ -25,7 +25,7 @@ const { ero_hooks } = require('#/data/event/ero-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
 
-const { i18n } = require('#/i18n/selector');
+const di18n = require('#/i18n/extended-def');
 
 const stop_ex_options = {};
 stop_ex_options[part_enum.virgin] = (chara_id) =>
@@ -58,7 +58,7 @@ module.exports = class extends CustomizedEro {
           get_chara_talk(era.get('tflag:前回助手')).get_colored_name(),
           ' 的侍奉下，',
           get_chara_talk(0).get_colored_name(),
-          ` ${i18n().n_penis[get_penis_size(0)]} 的肉棒很快就一柱擎天了。`,
+          ` ${di18n.n_penis[get_penis_size(0)]} 的肉棒很快就一柱擎天了。`,
         ]);
         return;
       }

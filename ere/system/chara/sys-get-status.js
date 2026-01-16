@@ -25,6 +25,7 @@ const { foreign_locations } = require('#/data/locations');
 const LoveLimitStatus = require('#/data/love-limit-status');
 const { pressure_border } = require('#/data/train-const');
 
+const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 /**
@@ -168,7 +169,7 @@ function sys_get_status(cid) {
     if (train_buff) {
       status_list.push({
         color: buff_colors[Number(train_buff > 0)],
-        content: i18n().train_buff_desc[train_buff + 1],
+        content: di18n.train_buff_desc[train_buff + 1],
       });
     }
   }

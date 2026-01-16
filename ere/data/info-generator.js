@@ -43,6 +43,7 @@ const {
 } = require('#/data/ero/status-const');
 const recruit_flags = require('#/data/event/recruit-flags');
 
+const di18n = require('#/i18n/extended-def');
 const { i18n, lan } = require('#/i18n/selector');
 
 const levels = {
@@ -561,7 +562,7 @@ module.exports = {
     while (love >= levels.love[level]) {
       level++;
     }
-    const mark = () => i18n().m_love[level];
+    const mark = () => di18n.m_love[level];
     const val = () => love.toString();
     return {
       full: () => `${mark()} (${val()})`,
@@ -607,7 +608,7 @@ module.exports = {
     while (relation > levels.relation[level]) {
       level++;
     }
-    const mark = () => i18n().m_relation[level];
+    const mark = () => di18n.m_relation[level];
     const val = () => relation.toString();
     return { full: () => `${mark()} (${val()})`, level, mark, val };
   },
@@ -620,7 +621,7 @@ module.exports = {
   /** @param {number} cid */
   get_skin(cid) {
     // CFLAGNAME:10 = 肤色深度
-    return i18n().n_skin[era.get(`cflag:${cid}:10`) + 1];
+    return di18n.n_skin[era.get(`cflag:${cid}:10`) + 1];
   },
   /** @param {number} cid */
   get_skin_color(cid) {
@@ -684,15 +685,15 @@ module.exports = {
       return '-';
     }
     // CFLAGNAME:48 = 育成回合计时
-    return i18n().n_edu[Math.floor(era.get(`cflag:${cid}:48`) / 48)];
+    return di18n.n_edu[Math.floor(era.get(`cflag:${cid}:48`) / 48)];
   },
   get_trainer_level,
   /** @returns {{full:()=>string,level:number,prefix:()=>string,title:()=>string}} */
   get_trainer_title() {
     let level = get_trainer_level();
-    const prefix = () => (level < 0 ? i18n().honour_m : i18n().m_honour[level]);
+    const prefix = () => (level < 0 ? i18n().honour_m : di18n.m_honour[level]);
     // FLAGNAME:35 = 惩戒力度
-    const title = () => i18n().n_title[era.get('flag:35')];
+    const title = () => di18n.n_title[era.get('flag:35')];
     return {
       full: () => prefix() + title(),
       level,

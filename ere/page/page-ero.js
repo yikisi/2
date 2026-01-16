@@ -61,6 +61,7 @@ const {
 } = require('#/data/info-generator');
 const { location_enum, location_name } = require('#/data/locations');
 
+const di18n = require('#/i18n/extended-def');
 const { __, i18n } = require('#/i18n/selector');
 
 /**
@@ -100,7 +101,7 @@ function get_ero_marks(cid) {
       status_list.push({
         color: get_color(undefined, mark_colors[i], lv / 3),
         content: i18n()
-          .tb_mark.abbr_template.replace('%NAME%', i18n().tb_mark.abbr[i])
+          .tb_mark.abbr_template.replace('%NAME%', di18n.tb_mark.abbr[i])
           .replace('%LEVEL%', lv.toString()),
       });
     }

@@ -7,6 +7,7 @@ const OguriEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-6');
 const LegendUmaSelector = require('#/data/race/model/legend-uma-selector');
 const { race_enum } = require('#/data/race/race-const');
 
+const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends CustomizedMec {
@@ -44,21 +45,21 @@ module.exports = class extends CustomizedMec {
       const color = get_chara_color(this.id);
       const ret = [
         {
-          ...i18n().kojo.get_titled_content(this.id, 'cinderella'),
+          ...di18n.kojo.get_titled_content(this.id, 'cinderella'),
           color,
         },
       ];
       // CFLAGNAME:49 = 育成次数
       if (era.get(`cflag:${this.id}:49`) === 0) {
         ret.push({
-          ...i18n().kojo.get_titled_content(this.id, 'latecomer'),
+          ...di18n.kojo.get_titled_content(this.id, 'latecomer'),
           color,
         });
       }
       const { train_buff } = new OguriEduMarks();
       if (train_buff > 0) {
         ret.push({
-          ...i18n().kojo.get_titled_content(this.id, 'transfer', train_buff),
+          ...di18n.kojo.get_titled_content(this.id, 'transfer', train_buff),
           color,
         });
       }

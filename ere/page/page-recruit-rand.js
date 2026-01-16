@@ -54,6 +54,7 @@ const {
 const { location_enum } = require('#/data/locations');
 const { skills_dict } = require('#/data/race/skill/skill-const');
 
+const di18n = require('#/i18n/extended-def');
 const { __, i18n } = require('#/i18n/selector');
 
 async function print_rec_page() {
@@ -434,7 +435,7 @@ async function print_rec_page() {
         adapt_info.push(
           {
             config: { width: 2 },
-            content: [i18n().n_adapt[i], '：'],
+            content: [di18n.n_adapt[i], '：'],
             type: 'text',
           },
           {
@@ -463,7 +464,7 @@ async function print_rec_page() {
             .fill(0)
             .map((_, i) => ({
               i,
-              n: i18n().n_attr[i],
+              n: di18n.n_attr[i],
               // 属性训练加成：25-29
               v: era.get(`staticcflag:${selected}:${25 + i}`),
             }))

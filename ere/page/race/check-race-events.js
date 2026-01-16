@@ -54,7 +54,7 @@ const { location_enum } = require('#/data/locations');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum } = require('#/data/race/race-const');
 
-const { i18n } = require('#/i18n/selector');
+const di18n = require('#/i18n/extended-def');
 
 const rec_list = {};
 [race_enum.prix_lat].forEach((e) => (rec_list[e] ||= []).push(204));
@@ -110,7 +110,7 @@ async function check_race_events(race, info, team) {
       await print_event_name('开始采访', etsuko);
       await printAndWait([
         '在离开',
-        i18n().race.get_track_name(info.track),
+        di18n.race.get_track_name(info.track),
         '时，',
         me.get_colored_name(),
         ' 与一位记者打扮的',

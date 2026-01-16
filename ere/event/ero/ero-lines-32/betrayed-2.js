@@ -19,7 +19,8 @@ const { buff_colors } = require('#/data/color-const');
 const EroParticipant = require('#/data/ero/ero-participant');
 const { part_enum } = require('#/data/ero/part-const');
 
-const { __, i18n } = require('#/i18n/selector');
+const di18n = require('#/i18n/extended-def');
+const { __ } = require('#/i18n/selector');
 
 /** @param {TachyonLifeMarks} tachyon_marks */
 async function tachyon_betrayed_2(tachyon_marks) {
@@ -371,7 +372,7 @@ async function tachyon_betrayed_2(tachyon_marks) {
       '获得了道具',
       {
         color: buff_colors[2],
-        content: i18n().item.get_name(103),
+        content: di18n.item.get_name(103),
         title: __('item_desc.103'),
       },
       '……',

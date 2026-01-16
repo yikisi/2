@@ -5,6 +5,7 @@ const CustomizedMec = require('#/event/mec/mec-common');
 const { get_chara_color } = require('#/data/chara-colors');
 const HelloLifeMarks = require('#/data/event/life-event-marks/life-event-marks-308');
 
+const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 class MecChild extends CustomizedMec {
@@ -31,7 +32,7 @@ class MecChild extends CustomizedMec {
     if (era.get(`cflag:${this.id}:90`) === 308) {
       const { buff } = new HelloLifeMarks();
       ret.push({
-        ...i18n().kojo.get_titled_content(
+        ...di18n.kojo.get_titled_content(
           308,
           'dreamer_junior',
           100 * (buff + 1),

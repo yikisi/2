@@ -46,7 +46,7 @@ const {
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { get_breast_cup } = require('#/data/info-generator');
 
-const { i18n } = require('#/i18n/selector');
+const di18n = require('#/i18n/extended-def');
 
 const optimized_part_names = {};
 optimized_part_names[part_enum.mouth] = '口穴';
@@ -253,7 +253,7 @@ class CustomizedEro {
       era.print([
         chara.get_colored_name(),
         ' ',
-        i18n().n_penis[get_penis_size(this.id)],
+        di18n.n_penis[get_penis_size(this.id)],
         ' 的肉棒勃起了！',
       ]);
     } else if (extra_flag.part === part_enum.breast) {

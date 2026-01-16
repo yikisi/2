@@ -22,6 +22,7 @@ const {
 } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 
+const di18n = require('#/i18n/extended-def');
 const { __, i18n } = require('#/i18n/selector');
 
 /**
@@ -110,7 +111,7 @@ function cur_chara_component(cid, type, location_npc) {
     }
     name_columns.push(get_chara_talk(cid).get_colored_name());
     if (out_of_train >= 1) {
-      name_columns.push(` [${i18n().n_oot[out_of_train - 1]}]`);
+      name_columns.push(` [${di18n.n_oot[out_of_train - 1]}]`);
     }
     name_columns.push(` (${get_growth(growth, 1)})`);
     if (era.get('flag:当前位置') !== location_enum.basement) {
@@ -120,7 +121,7 @@ function cur_chara_component(cid, type, location_npc) {
           i18n().ui_moti,
           {
             color: motivation_colors[motivation + 2],
-            content: i18n().n_moti[motivation + 2],
+            content: di18n.n_moti[motivation + 2],
           },
           ' ',
           get_train_year(cid),

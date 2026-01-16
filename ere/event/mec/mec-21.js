@@ -8,6 +8,7 @@ const LegendUmaFilter = require('#/data/race/model/legend-uma-filter');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
+const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends CustomizedMec {
@@ -69,39 +70,39 @@ module.exports = class extends CustomizedMec {
       switch (lightning) {
         default:
           ret.push({
-            ...i18n().kojo.get_titled_content(this.id, 'flash'),
+            ...di18n.kojo.get_titled_content(this.id, 'flash'),
             color: get_chara_color(this.id),
           });
           break;
         case 1:
           ret.push({
-            ...i18n().kojo.get_titled_content(this.id, 'lightning'),
+            ...di18n.kojo.get_titled_content(this.id, 'lightning'),
             color: get_chara_color(this.id),
             fontWeight: 'bold',
           });
           break;
         case 2:
           ret.push({
-            ...i18n().kojo.get_titled_content(this.id, 'thundercloud'),
+            ...di18n.kojo.get_titled_content(this.id, 'thundercloud'),
             color: get_chara_color(this.id),
             fontWeight: 'bold',
           });
           break;
         case 3:
           ret.push({
-            ...i18n().kojo.get_titled_content(this.id, 'pilot'),
+            ...di18n.kojo.get_titled_content(this.id, 'pilot'),
             color: get_chara_color(this.id),
             fontWeight: 'bold',
           });
       }
       if (heal === 1) {
         ret.push({
-          ...i18n().kojo.get_titled_content(this.id, 'spartan'),
+          ...di18n.kojo.get_titled_content(this.id, 'spartan'),
           color: get_chara_color(this.id),
         });
       } else if (heal === -1) {
         ret.push({
-          ...i18n().kojo.get_titled_content(this.id, 'uma_first'),
+          ...di18n.kojo.get_titled_content(this.id, 'uma_first'),
           color: get_chara_color(this.id),
         });
       }

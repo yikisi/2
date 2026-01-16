@@ -29,7 +29,7 @@ const EventObject = require('#/data/event/event-object');
 const { race_enum } = require('#/data/race/race-const');
 const { attr_enum, fumble_result } = require('#/data/train-const');
 
-const { i18n } = require('#/i18n/selector');
+const di18n = require('#/i18n/extended-def');
 
 module.exports = class extends CustomizedEdu {
   get #dict() {
@@ -239,7 +239,7 @@ module.exports = class extends CustomizedEdu {
         if ((await kojo['情人节'](this.#dict))[1] === 1) {
           era.println();
           // ITEMNAME:100 = 情人节巧克力
-          era.print(i18n().item.notify(100));
+          era.print(di18n.item.notify(100));
           era.add('item:100', 1);
         } else {
           sys_change_attr_and_print(0, attr_enum.hp, 200);

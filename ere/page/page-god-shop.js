@@ -31,7 +31,7 @@ const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
 
-const { i18n } = require('#/i18n/selector');
+const di18n = require('#/i18n/extended-def');
 
 const button_contents = [
   '「啊，请帮帮我吧女神大人——」',
@@ -462,7 +462,7 @@ module.exports = async () => {
               },
               ...new Array(5).fill(0).map((_, i) => ({
                 accelerator: i,
-                content: `${i18n().n_attr[i]}（+80）`,
+                content: `${di18n.n_attr[i]}（+80）`,
                 config: {
                   disabled:
                     // BASENAME:5 - 9 = 速度 - 智力

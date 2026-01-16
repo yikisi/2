@@ -41,7 +41,8 @@ const { get_random_value } = require('#/utils/value-utils');
 const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks-32');
 const recruit_flags = require('#/data/event/recruit-flags');
 
-const { __, i18n } = require('#/i18n/selector');
+const di18n = require('#/i18n/extended-def');
+const { __ } = require('#/i18n/selector');
 
 module.exports = class extends MyPrivacyEvents {
   /**
@@ -203,7 +204,7 @@ module.exports = class extends MyPrivacyEvents {
       ...new Array(8).fill(0).map((_, i) => i),
       ...new Array(7).fill(0).map((_, i) => i + 10),
     ]);
-    await printAndWait(['获得了道具', i18n().item.get_name(item), '！']);
+    await printAndWait(['获得了道具', di18n.item.get_name(item), '！']);
     add(`item:${item}`, 1);
     if (get('flag:极端行为限制') > 0) {
       add_event(hook.hook, event_object.set_arg('strange_day2'));

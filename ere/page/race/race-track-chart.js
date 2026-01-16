@@ -1,6 +1,6 @@
 const era = require('#/era-electron');
 
-const { i18n } = require('#/i18n/selector');
+const di18n = require('#/i18n/extended-def');
 
 /**
  * @param {RaceInfo} info
@@ -9,19 +9,19 @@ const { i18n } = require('#/i18n/selector');
 async function print_race_track_chart(info) {
   era.print(
     [
-      i18n().race.get_track_name(info.track),
+      di18n.race.get_track_name(info.track),
       ' ',
-      i18n().n_adapt[info.ground],
+      di18n.n_adapt[info.ground],
       ' ',
       info.span.toLocaleString(),
       '米跑道 ',
-      i18n().race.n_rotation[info.rotation + 1],
+      di18n.race.n_rotation[info.rotation + 1],
     ],
     { align: 'center' },
   );
   if (info.attr_bonus.length > 0) {
     era.print(
-      ['加成属性：', info.attr_bonus.map((e) => i18n().n_attr[e]).join('、')],
+      ['加成属性：', info.attr_bonus.map((e) => di18n.n_attr[e]).join('、')],
       { align: 'center' },
     );
   }

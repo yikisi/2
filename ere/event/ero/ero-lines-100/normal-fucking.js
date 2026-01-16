@@ -6,7 +6,7 @@ const EroNormalFucking = require('#/event/ero/common/normal/fucking');
 
 const { vp_status_enum } = require('#/data/ero/status-const');
 
-const { i18n } = require('#/i18n/selector');
+const di18n = require('#/i18n/extended-def');
 
 module.exports = class extends EroNormalFucking {
   async missionary(attacker, defender, hook) {
@@ -694,7 +694,7 @@ module.exports = class extends EroNormalFucking {
       ]);
       // TALENTNAME:34 = 茎核类型
       await attacker.print_and_wait([
-        i18n().n_c_penis[era.get('talent:0:34')],
+        di18n.n_c_penis[era.get('talent:0:34')],
         '的肉棒，就在这一刻深入了小穴之中——',
       ]);
       if (era.get('talent:100:处女') > vp_status_enum.no) {

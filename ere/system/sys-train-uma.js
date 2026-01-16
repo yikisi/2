@@ -27,7 +27,7 @@ const { get_trainer_train_buff } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const { attr_enum, fumble_border, time_cost } = require('#/data/train-const');
 
-const { i18n } = require('#/i18n/selector');
+const di18n = require('#/i18n/extended-def');
 
 /**
  * @param {number} cid
@@ -294,7 +294,7 @@ module.exports = {
       ) {
         buffer.push({
           config: { offset: 1, width: 23 },
-          content: `${i18n().n_attr[attr]}训练 变得更擅长了！`,
+          content: `${di18n.n_attr[attr]}训练 变得更擅长了！`,
           type: 'text',
         });
       }

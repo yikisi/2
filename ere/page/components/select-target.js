@@ -40,6 +40,7 @@ const {
 const { get_growth_color } = require('#/data/other-const');
 const RaceHistory = require('#/data/race/model/race-history');
 
+const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 const arrows = { '-1': '▼', 0: '', 1: '▲' };
@@ -56,7 +57,7 @@ function get_edu_stage(cid, race, palace, in_train) {
     return '-';
   }
   if (palace >= 1) {
-    return i18n().n_oot[palace - 1];
+    return di18n.n_oot[palace - 1];
   }
   if (in_train) {
     return get_train_year(cid);
@@ -96,7 +97,7 @@ function get_suffix(cid, type) {
           color: motivation_colors[motivation + 2],
           width: 2,
         },
-        content: i18n().n_moti[motivation + 2],
+        content: di18n.n_moti[motivation + 2],
         type: 'text',
       },
       {

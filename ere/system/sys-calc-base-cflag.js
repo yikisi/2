@@ -19,7 +19,8 @@ const recruit_flags = require('#/data/event/recruit-flags');
 const extra_base = require('#/data/extra-base');
 const { location_enum } = require('#/data/locations');
 const { attr_enum } = require('#/data/train-const');
-const { i18n } = require('#/i18n/selector');
+
+const di18n = require('#/i18n/extended-def');
 
 /**
  * @param {number} cid
@@ -58,7 +59,7 @@ function sys_change_motivation(cid, val) {
       get_chara_talk(cid).get_colored_name(),
       ' 的干劲现在是 ',
       {
-        content: i18n().n_moti[new_val + 2],
+        content: di18n.n_moti[new_val + 2],
         color: motivation_colors[new_val + 2],
       },
     ]);
@@ -199,8 +200,8 @@ module.exports = {
           color: attr_colors[attr],
           content:
             attr > attr_enum.intelligence
-              ? i18n().n_base[attr - attr_enum.hp]
-              : i18n().n_attr[attr],
+              ? di18n.n_base[attr - attr_enum.hp]
+              : di18n.n_attr[attr],
         },
         change > 0
           ? {

@@ -27,6 +27,7 @@ const {
   track2location,
 } = require('#/data/race/race-location');
 
+const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 /**
@@ -240,14 +241,14 @@ async function reg_race_page() {
                   ...(flag_hide_adaptability || e === race_enum.begin_race
                     ? []
                     : [
-                        i18n().race.a_ground[ground],
+                        di18n.race.a_ground[ground],
                         '(',
                         ag,
                         ')',
                         ' ',
                         race_infos[e].span.toLocaleString(),
                         ' ',
-                        i18n().race.a_distance[distance],
+                        di18n.race.a_distance[distance],
                         '(',
                         ad,
                         ') ',

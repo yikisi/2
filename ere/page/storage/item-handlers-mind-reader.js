@@ -4,10 +4,10 @@ const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const { i18n } = require('#/i18n/selector');
+const di18n = require('#/i18n/extended-def');
 
 async function use_glasses(iid) {
-  const item_name = i18n().item.get_name(iid);
+  const item_name = di18n.item.get_name(iid);
   const sid = 24 + iid - 27;
   // ITEMNAME:26 = 万能镜框
   if (!era.get('item:26')) {
@@ -16,15 +16,15 @@ async function use_glasses(iid) {
   }
   if (era.get(`status:0:${sid}`)) {
     await era.printAndWait(
-      `已经给${i18n().item.get_name(26)}装上${item_name}了……`,
+      `已经给${di18n.item.get_name(26)}装上${item_name}了……`,
     );
   } else {
     const ret = await select_yes_or_no(
-      `要给${i18n().item.get_name(26)}装上${item_name}吗？这会导致原有镜片损坏！`,
+      `要给${di18n.item.get_name(26)}装上${item_name}吗？这会导致原有镜片损坏！`,
     );
     if (ret) {
       await era.printAndWait(
-        `给${i18n().item.get_name(26)}装上了${item_name}……`,
+        `给${di18n.item.get_name(26)}装上了${item_name}……`,
       );
       // STATUSNAME:24 = 好感度镜片
       // STATUSNAME:25 = 好感度镜片
@@ -33,7 +33,7 @@ async function use_glasses(iid) {
         const tmp_sid = 24 + tmp_iid - 27;
         if (era.get(`status:0:${tmp_sid}`) > 0) {
           await era.printAndWait(
-            `原有的${i18n().item.get_name(tmp_iid)}损毁了！`,
+            `原有的${di18n.item.get_name(tmp_iid)}损毁了！`,
           );
           era.set(`status:0:${tmp_sid}`, 0);
           break;

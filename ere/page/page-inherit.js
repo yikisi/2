@@ -39,6 +39,7 @@ const {
   gene_type_enum,
 } = require('#/data/race/model/uma-gene');
 
+const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 const gene_limit = 27;
@@ -665,7 +666,7 @@ async function print_inherit_page() {
               ' 的 ',
               i18n().adapt_template.replace(
                 '%ADAPT%',
-                i18n().n_adapt[gene.type_value],
+                di18n.n_adapt[gene.type_value],
               ),
               ' 现在是 ',
               {
@@ -688,7 +689,7 @@ async function print_inherit_page() {
               chara.get_colored_name(),
               ' 的 ',
               {
-                content: i18n().n_attr[gene.type_value],
+                content: di18n.n_attr[gene.type_value],
                 color: attr_colors[gene.type_value],
               },
               ' 现在是 ',

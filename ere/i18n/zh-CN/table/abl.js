@@ -1,4 +1,6 @@
 class I18nAbl {
+  template = '[%ABL%] Lv.%LEVEL%';
+
   5 = '粤语';
   6 = '英语';
   7 = '法语';

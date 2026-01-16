@@ -1,3 +1,4 @@
+const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 const gene_type_enum = { adapt: 0, base: 0, skill: 0 };
@@ -65,8 +66,8 @@ class UmaGene {
         fontWeight: 'bold',
         title: i18n()
           .gene.gn_title_template.replace('%NAME%', this.name)
-          .replace('%TYPE%', i18n().gene.gn_types[this.type])
-          .replace('%RARITY%', i18n().gene.gn_rarities[this.rarity])
+          .replace('%TYPE%', di18n.gene.gn_types[this.type])
+          .replace('%RARITY%', di18n.gene.gn_rarities[this.rarity])
           .replace('%DESC%', this.desc),
       },
       { content: '】', color: border_color },

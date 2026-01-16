@@ -59,6 +59,7 @@ const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const { attr_enum, pressure_border } = require('#/data/train-const');
 
+const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 function generate_button_title(...tlist) {
@@ -527,15 +528,11 @@ module.exports = async (cid, next_cb, flags) => {
               player_base,
             ) > 0 ||
             npc.t === 0,
-          title: generate_button_title(
-            npc.t > 0 ? `该地点有 ${npc.t} 人` : void 0,
-            event_marks.check(event_hooks.back_school)
-              ? '存在折返触发事件'
-              : void 0,
-            my_event_marks.check(event_hooks.school_trainer_office)
-              ? '该地点存在触发事件'
-              : void 0,
-            npc.te > 0 ? `该地点 ${npc.te} 人有节庆事件` : void 0,
+          title: di18n.get_loc_tips(
+            event_marks.check(event_hooks.back_school),
+            my_event_marks.check(event_hooks.school_trainer_office),
+            npc.t,
+            npc.te,
           ),
         },
         content: '前往训练员办公室',
@@ -564,16 +561,12 @@ module.exports = async (cid, next_cb, flags) => {
               player_base,
             ) > 0 ||
             npc.c === 0,
-          title: generate_button_title(
-            npc.c > 0 ? `该地点有 ${npc.c} 人` : void 0,
-            event_marks.check(event_hooks.back_school)
-              ? '存在折返触发事件'
-              : void 0,
+          title: di18n.get_loc_tips(
+            event_marks.check(event_hooks.back_school),
             event_marks.check(event_hooks.school_clinic) ||
-              my_event_marks.check(event_hooks.school_chairman)
-              ? '该地点存在触发事件'
-              : void 0,
-            npc.ce > 0 ? `该地点 ${npc.ce} 人有节庆事件` : void 0,
+              event_marks.check(event_hooks.school_clinic),
+            npc.c,
+            npc.ce,
           ),
         },
         content: '前往保健室',
@@ -700,15 +693,11 @@ module.exports = async (cid, next_cb, flags) => {
               player_base,
             ) > 0 ||
             npc.l === 0,
-          title: generate_button_title(
-            npc.l > 0 ? `该地点有 ${npc.l} 人` : void 0,
-            event_marks.check(event_hooks.back_school)
-              ? '存在折返触发事件'
-              : void 0,
-            my_event_marks.check(event_hooks.school_chairman)
-              ? '该地点存在触发事件'
-              : void 0,
-            npc.le > 0 ? `该地点 ${npc.le} 人有节庆事件` : void 0,
+          title: di18n.get_loc_tips(
+            event_marks.check(event_hooks.back_school),
+            my_event_marks.check(event_hooks.school_chairman),
+            npc.l,
+            npc.le,
           ),
         },
         content: '前往理事长办公室',
@@ -737,15 +726,11 @@ module.exports = async (cid, next_cb, flags) => {
               player_base,
             ) > 0 ||
             (npc.v === 0 && !my_event_marks.check(event_hooks.school_visitors)),
-          title: generate_button_title(
-            npc.v > 0 ? `该地点有 ${npc.v} 人` : void 0,
-            event_marks.check(event_hooks.back_school)
-              ? '存在折返触发事件'
-              : void 0,
-            my_event_marks.check(event_hooks.school_visitors)
-              ? '该地点存在触发事件'
-              : void 0,
-            npc.ve > 0 ? `该地点 ${npc.ve} 人有节庆事件` : void 0,
+          title: di18n.get_loc_tips(
+            event_marks.check(event_hooks.back_school),
+            my_event_marks.check(event_hooks.school_visitors),
+            npc.v,
+            npc.ve,
           ),
         },
         content: '前往访客接待室',
@@ -757,12 +742,11 @@ module.exports = async (cid, next_cb, flags) => {
         },
       },
       {
-        config: {
-          disabled: !awake.me,
-        },
+        config: { disabled: !awake.me },
         content: '前往小卖部',
         async h() {
-          era.set('flag:当前位置', location_enum.school_shop);
+          // FLAGNAME:4 = 当前位置
+          era.set('flag:4', location_enum.school_shop);
           const item_list = [
             ...new Array(8).fill(0).map((_, i) => i),
             ...new Array(11).fill(0).map((_, i) => i + 10),
@@ -773,15 +757,17 @@ module.exports = async (cid, next_cb, flags) => {
             { id: 42, limit: true },
             43,
           ];
-          era.set('flag:当前互动角色', 0);
-          if (era.get('cflag:0:模版角色') !== 32) {
+          // FLAGNAME:5 = 当前互动角色
+          era.set('flag:5', 0);
+          // CFLAGNAME:90 = 模版角色
+          if (era.get('cflag:0:90') !== 32) {
             await shop_start();
             await shop_end(await print_shop_page(item_list));
           } else {
             await print_shop_page(item_list);
           }
-          era.set('flag:当前互动角色', cid);
-          era.set('flag:当前位置', location_enum.office);
+          era.set('flag:5', cid);
+          era.set('flag:4', location_enum.office);
         },
       },
       {
@@ -812,9 +798,9 @@ module.exports = async (cid, next_cb, flags) => {
         content: `${cid > 0 ? '一起' : ''}外出`,
         async h() {
           sys_handle_action(sys_get_move_cost(location_enum.gate, cid), cid);
-          era.set('flag:当前位置', location_enum.gate);
+          era.set('flag:4', location_enum.gate);
           await print_out_page();
-          era.set('flag:当前位置', location_enum.office);
+          era.set('flag:4', location_enum.office);
         },
       },
     );
