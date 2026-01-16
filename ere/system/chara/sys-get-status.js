@@ -26,7 +26,6 @@ const LoveLimitStatus = require('#/data/love-limit-status');
 const { pressure_border } = require('#/data/train-const');
 
 const di18n = require('#/i18n/extended-def');
-const { i18n } = require('#/i18n/selector');
 
 /**
  * @param {number} cid

@@ -62,10 +62,6 @@ const { attr_enum, pressure_border } = require('#/data/train-const');
 const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
-function generate_button_title(...tlist) {
-  return tlist.filter((x) => x).join('\n') || void 0;
-}
-
 /**
  * @param {Record<string,number>} dict
  * @param {string} k

@@ -328,9 +328,12 @@ module.exports = (handlers) => {
         `说完，${flash.sex}拉起 ${your_name} 的手，示意一起向门外走去。`,
       );
       era.println();
-      flags.wait ||= get_attr_and_print_in_event(37, new Array(5).fill(20), 0, [
-        500,
-      ]);
+      flags.wait ||= get_attr_and_print_in_event(
+        37,
+        new Array(5).fill(20),
+        0,
+        [500],
+      );
     } else {
       await era.printAndWait(
         '虽然不是对荣进闪耀目前的实力没有信心，但是单纯从达成目标这个角度考虑的话。',

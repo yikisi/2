@@ -350,9 +350,12 @@ module.exports = class extends Edu67UntilSchoolAtrium {
       );
       era.println();
       wait_flag = sys_change_motivation(67, 2) || wait_flag;
-      wait_flag = get_attr_and_print_in_event(67, new Array(5).fill(10), 0, [
-        300,
-      ]);
+      wait_flag = get_attr_and_print_in_event(
+        67,
+        new Array(5).fill(10),
+        0,
+        [300],
+      );
     } else if (gacha === 9) {
       await era.printAndWait(
         '商店街人员「很可惜，没抽中！参加奖是『卫生纸』喔～」',
@@ -423,9 +426,12 @@ module.exports = class extends Edu67UntilSchoolAtrium {
       );
       era.println();
       wait_flag = sys_change_motivation(67, 2) || wait_flag;
-      wait_flag = get_attr_and_print_in_event(67, new Array(5).fill(10), 0, [
-        300,
-      ]);
+      wait_flag = get_attr_and_print_in_event(
+        67,
+        new Array(5).fill(10),
+        0,
+        [300],
+      );
     } else if (gacha < 5) {
       await era.printAndWait(
         '商店街人员「二等奖～！！奖品是『一整堆胡萝卜』！」',

@@ -464,9 +464,12 @@ out_church_handlers[47 + 1] = async (ss, me, callname, flags) => {
     me.get_colored_name(),
     ' 吃。',
   ]);
-  flags.wait_flag = get_attr_and_print_in_event(400, [0, 0, 0, 15, 0], 0, [
-    300,
-  ]);
+  flags.wait_flag = get_attr_and_print_in_event(
+    400,
+    [0, 0, 0, 15, 0],
+    0,
+    [300],
+  );
   flags.wait_flag = sys_like_chara(400, 0, 40) || flags.wait_flag;
 };
 

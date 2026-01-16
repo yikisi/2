@@ -6,7 +6,6 @@ const { get_chara_color } = require('#/data/chara-colors');
 const HelloLifeMarks = require('#/data/event/life-event-marks/life-event-marks-308');
 
 const di18n = require('#/i18n/extended-def');
-const { i18n } = require('#/i18n/selector');
 
 class MecChild extends CustomizedMec {
   get_race_finish_report(uma, race_id) {

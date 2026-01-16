@@ -22,7 +22,6 @@ const extra_base = require('#/data/extra-base');
 const { get_breast_cup, get_hair_color } = require('#/data/info-generator');
 
 const di18n = require('#/i18n/extended-def');
-const { i18n } = require('#/i18n/selector');
 
 const hair_color_names = [
   '白',

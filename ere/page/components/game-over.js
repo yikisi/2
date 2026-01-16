@@ -295,7 +295,6 @@ async function game_over(again) {
       } else {
         era.drawLine();
         const me = get_chara_talk(0);
-        const uma = era.get('flag:角色性别') === 1 ? '马郎' : '马娘';
         if (era.get('flag:当前位置') === location_enum.basement) {
           if (
             await select_yes_or_no(
