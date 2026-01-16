@@ -61,6 +61,19 @@ class I18nTitleDesc {
   es_egg_179 = '喜欢这么高的女生（比划）。';
   es_egg_621 = '你赢不了马娘，真可悲。';
 
+  get_trainer_title_desc(buff, level, extra) {
+    let ret = '';
+    if (buff > 0) {
+      ret += `指导训练时成功率与效果加成 +${buff}`;
+      if (extra.length > 0) {
+        ret += ` (↑${extra.join('+')})`;
+      }
+      ret += '，';
+    }
+    ret += `担当赏金 ${4 * level + 4}% 分成。`;
+    return ret;
+  }
+
   // 角色成就
   100101 =
     '以人气第一五马身以上身差赢取日本德比胜利，且赢取了春季天皇赏、秋季天皇赏和日本杯胜利。';

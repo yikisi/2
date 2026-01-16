@@ -12,7 +12,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const { medicine_enum, medicine_names } = require('#/data/ero/item-const');
+const { medicine_enum } = require('#/data/ero/item-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 
 module.exports = class extends CustomizedEro {
@@ -104,12 +104,14 @@ module.exports = class extends CustomizedEro {
       ]);
       era.println();
 
-      era.set('tflag:主导权', 9);
+      // TFLAGNAME:7 = 主导权
+      era.set('tflag:7', 9);
       let item = medicine_enum.fron_k;
-      if (!era.get('item:弗隆K')) {
+      // ITEMNAME:39 = 弗隆K
+      if (!era.get('item:39')) {
         item = medicine_enum.fron_p;
       }
-      era.add(`item:${medicine_names[item]}`, -1);
+      era.add(`item:${item}`, -1);
       await CustomizedEro.run_custom_ero(9, ero_hooks.use_medicine, {
         item,
         user: 9,

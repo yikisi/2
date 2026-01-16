@@ -7,27 +7,30 @@ const select_yes_or_no = require('#/page/components/select-yes-or-no');
 const CharaTalk = require('#/utils/chara-talk');
 
 const { buff_colors } = require('#/data/color-const');
-const { medicine_enum, medicine_names } = require('#/data/ero/item-const');
+const { medicine_enum } = require('#/data/ero/item-const');
 const { lust_border } = require('#/data/ero/orgasm-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
+
+const di18n = require('#/i18n/extended-def');
+const { i18n } = require('#/i18n/selector');
 
 /**
  * @param {CharaTalk} chara
  * @returns {Promise<{user:number,item:number}>}
  */
 async function use_ero_medicine(chara) {
-  const uma_z = era.get(`item:${medicine_names[medicine_enum.uma_z]}`),
-    uma_s = era.get(`item:${medicine_names[medicine_enum.uma_s]}`),
-    super_z = era.get(`item:${medicine_names[medicine_enum.super_z]}`),
-    anti_p_s = era.get(`item:${medicine_names[medicine_enum.anti_p_s]}`),
-    anti_p_l = era.get(`item:${medicine_names[medicine_enum.anti_p_l]}`),
-    drug_p = era.get(`item:${medicine_names[medicine_enum.drug_p]}`),
-    drug_m = era.get(`item:${medicine_names[medicine_enum.drug_m]}`),
-    fron_k = era.get(`item:${medicine_names[medicine_enum.fron_k]}`),
-    fron_p = era.get(`item:${medicine_names[medicine_enum.fron_p]}`),
-    milk_h = era.get(`item:${medicine_names[medicine_enum.milk_h]}`),
-    milk_u = era.get(`item:${medicine_names[medicine_enum.milk_u]}`),
-    stop_o = era.get(`item:${medicine_names[medicine_enum.stop_o]}`);
+  const uma_z = era.get(`item:${medicine_enum.uma_z}`);
+  const uma_s = era.get(`item:${medicine_enum.uma_s}`);
+  const super_z = era.get(`item:${medicine_enum.super_z}`);
+  const anti_p_s = era.get(`item:${medicine_enum.anti_p_s}`);
+  const anti_p_l = era.get(`item:${medicine_enum.anti_p_l}`);
+  const drug_p = era.get(`item:${medicine_enum.drug_p}`);
+  const drug_m = era.get(`item:${medicine_enum.drug_m}`);
+  const fron_k = era.get(`item:${medicine_enum.fron_k}`);
+  const fron_p = era.get(`item:${medicine_enum.fron_p}`);
+  const milk_h = era.get(`item:${medicine_enum.milk_h}`);
+  const milk_u = era.get(`item:${medicine_enum.milk_u}`);
+  const stop_o = era.get(`item:${medicine_enum.stop_o}`);
   if (
     !uma_z &&
     !uma_s &&
@@ -159,36 +162,36 @@ async function use_ero_medicine(chara) {
           : '要服用什么药物？',
         type: 'text',
       },
-      ...item_list.map((e) => {
+      ...item_list.map((e, i) => {
         return {
-          accelerator: e.a,
+          accelerator: i + 1,
           config: { align: 'center', disabled: !e.e, width: 4 },
-          content: `${medicine_names[e.a]} (${e.n})`,
+          content: `${i18n().item[e.a]} (${e.n})`,
           type: 'button',
         };
       }),
     ],
     { horizontalAlign: 'space-evenly' },
   );
-  const item_id = await era.input();
+  const iid = item_list[(await era.input()) - 1].a;
   if (
     !(await select_yes_or_no(
       aim_id
         ? [
             '要给 ',
             aim_chara.get_colored_name(),
-            ' 喂食 ',
+            ' 喂食',
             {
               color: buff_colors[2],
-              content: medicine_names[item_id],
+              content: di18n.item.get_name(iid),
             },
-            ' 吗？',
+            '吗？',
           ]
         : [
             '要服用 ',
             {
               color: buff_colors[2],
-              content: medicine_names[item_id],
+              content: di18n.item.get_name(iid),
             },
             ' 吗？',
           ],
@@ -199,14 +202,13 @@ async function use_ero_medicine(chara) {
     era.print([
       CharaTalk.me.get_colored_name(),
       ' 放弃了',
-      aim_id ? '喂食' : '饮用',
-      ' ',
-      { color: buff_colors[2], content: medicine_names[item_id] },
+      aim_id > 0 ? '喂食' : '饮用',
+      { color: buff_colors[2], content: di18n.item.get_name(iid) },
       '……',
     ]);
     return undefined;
   }
-  return { item: item_id, user: aim_id };
+  return { item: iid, user: aim_id };
 }
 
 module.exports = use_ero_medicine;

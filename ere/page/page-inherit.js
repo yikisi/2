@@ -410,7 +410,7 @@ async function print_inherit_page() {
             content: get(`callname:${e}:-1`),
             type: 'button',
           }))
-        : [{ content: '无', type: 'text' }]),
+        : [{ content: i18n().ui_nothing, type: 'text' }]),
       { accelerator: 999, content: '离开', type: 'button' },
     ]);
     const ret = await input({});

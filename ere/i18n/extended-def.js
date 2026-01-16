@@ -91,6 +91,18 @@ const di18n = {
     const _ = i18n();
     return [_.p_color_0, _.p_color_1, _.p_color_2];
   },
+  get_money_content: (money) =>
+    i18n().ui_money_template.replace('%MONEY%', money),
+  get_date_indicator: (...args) =>
+    i18n().ui_get_date(
+      ...args.map((t) => ({ content: t, fontWeight: 'bold' })),
+    ),
+  get_date: (...args) =>
+    i18n()
+      .ui_get_date(...args)
+      .join(''),
+  get_multi_month: (month) =>
+    i18n().ui_month_template.replace('%MONTH%', month),
   /**
    * @param {boolean} has_back_event
    * @param {boolean} has_event
@@ -206,13 +218,77 @@ const di18n = {
     },
   },
   tb_mark: {
-    get name() {
+    get names() {
       const _ = i18n().tb_mark;
       return [_.n_pleasure, _.n_ero, _.n_meek, _.n_pain, _.n_shame, _.n_hate];
     },
     get abbr() {
       const _ = i18n().tb_mark;
       return [_.a_pleasure, _.a_ero, _.a_meek, _.a_pain, _.a_shame, _.a_hate];
+    },
+    get s_titles() {
+      const _ = i18n().tb_mark;
+      return [
+        _.s_t_no,
+        _.s_t_milk,
+        _.s_t_pregnant,
+        _.s_t_worker,
+        _.s_t_inherit,
+        _.s_t_furniture,
+        _.s_t_assistant,
+      ];
+    },
+    get s_options() {
+      const _ = i18n().tb_mark;
+      return [
+        _.s_o_no,
+        _.s_o_milk,
+        _.s_o_pregnant,
+        _.s_o_worker,
+        _.s_o_inherit,
+        _.s_o_furniture,
+        _.s_o_assistant,
+      ];
+    },
+    get s_descriptions() {
+      const _ = i18n().tb_mark;
+      return [
+        _.s_d_no,
+        _.s_d_milk,
+        _.s_d_pregnant,
+        _.s_d_worker,
+        _.s_d_inherit,
+        _.s_d_furniture,
+        _.s_d_assistant,
+      ];
+    },
+  },
+  tb_stain: {
+    get names() {
+      const _ = i18n().tb_stain;
+      return [
+        _.n_dirt,
+        _.n_saliva,
+        _.n_wound,
+        _.n_virgin,
+        _.n_secretion,
+        _.n_anal,
+        _.n_semen,
+        _.n_milk,
+        _.n_lubricant,
+        _.n_chocolate,
+      ];
+    },
+  },
+  inmon: {
+    get_tip(pid, group, level, slot) {
+      const _ = i18n().inmon;
+      return _.tip_template
+        .replace('%NAME%', _[pid])
+        .replace('%GROUP%', _[group])
+        .replace('%LEVEL%', level)
+        .replace('%SLOT%', slot)
+        .replace('%DESC%', i18n().inmon_desc[[pid]]);
     },
   },
   gene: {

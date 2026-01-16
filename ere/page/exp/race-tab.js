@@ -125,7 +125,7 @@ module.exports = {
           );
         });
       } else {
-        race_info_list.push({ content: '无', type: 'text' });
+        race_info_list.push({ content: i18n().ui_nothing, type: 'text' });
       }
     } else {
       race_info_list.push(

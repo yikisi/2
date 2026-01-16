@@ -1,4 +1,6 @@
 class I18nInmon {
+  tip_template = '【%NAME%】（%GROUP% · 等级 %LEVEL% · %SLOT% 插槽）\n%DESC%';
+
   // 插件类型
   101 = '口腔调教';
   102 = '胸部调教';

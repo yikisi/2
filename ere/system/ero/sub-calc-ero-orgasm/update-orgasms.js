@@ -16,7 +16,7 @@ const { log_max_wp } = require('#/utils/value-utils');
 
 const { buff_colors } = require('#/data/color-const');
 const EroParticipant = require('#/data/ero/ero-participant');
-const { item_enum, item_names } = require('#/data/ero/item-const');
+const { item_enum } = require('#/data/ero/item-const');
 const { base_emotion_juel } = require('#/data/ero/juel-const');
 const {
   max_absent_mind_time,
@@ -31,6 +31,8 @@ const {
 const { stain_enum } = require('#/data/ero/stain-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 const { attr_enum } = require('#/data/train-const');
+
+const { i18n } = require('#/i18n/selector');
 
 /** @type {function(number,number,*?):Promise} */
 let run_custom_ero;
@@ -78,7 +80,7 @@ function get_milk_info(cid, is_orgasm = false) {
       if (loc.i === item_enum.milk_pump) {
         actions.push(
           '在 ',
-          { content: item_names[loc.i], color: buff_colors[2] },
+          { content: i18n().item[loc.i], color: buff_colors[2] },
           ' 中',
         );
       }
@@ -345,7 +347,7 @@ function common_orgasm(cid) {
                 chara.get_colored_name(),
                 ' 在 ',
                 {
-                  content: item_names[item_enum.artificial_virgin],
+                  content: i18n().item[item_enum.artificial_virgin],
                   color: buff_colors[2],
                 },
                 ' 中射出了',

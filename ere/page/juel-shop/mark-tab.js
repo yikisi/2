@@ -29,10 +29,7 @@ const {
   inmon_limit,
   mark_colors,
   mark_enum,
-  slavery_descriptions,
   slavery_enum,
-  slavery_options,
-  slavery_titles,
 } = require('#/data/ero/mark-const');
 const {
   inmon_plugin_dict,
@@ -44,6 +41,7 @@ const LoveLimitStatus = require('#/data/love-limit-status');
 const { max_chara_id } = require('#/data/other-const');
 const { get_trainer_salary } = require('#/data/other-const');
 
+const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 /**
@@ -425,14 +423,14 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
                         ? { disabled: true, title: '淫纹贴纸不能设置词条' }
                         : {}),
                     },
-                    content: `当前词条：${slavery_options[slave]}`,
+                    content: `当前词条：${di18n.tb_mark.s_options[slave]}`,
                     ...(chara.id > 0
                       ? { accelerator: 9, type: 'button' }
                       : { type: 'content' }),
                   },
                   {
                     config: { width: 18 },
-                    content: `效果：${slavery_descriptions[slave]}`,
+                    content: `效果：${di18n.tb_mark.s_descriptions[slave]}`,
                     type: 'text',
                   },
                 ]),
@@ -637,21 +635,21 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
       { config: { width: 18 }, content: '效果', type: 'text' },
     ]);
     const disabled = juel_dict['顺从'] < 1000;
-    const columns = slavery_options.map((e, i) => [
+    const columns = di18n.tb_mark.s_titles.map((t, i) => [
       {
         accelerator: i,
         config: { disabled: slave === i || (i > 0 && disabled), width: 3 },
-        content: slavery_options[i],
+        content: di18n.tb_mark.s_options[i],
         type: 'button',
       },
       {
         config: { width: 3 },
-        content: slavery_titles[i],
+        content: t,
         type: 'text',
       },
       {
         config: { width: 18 },
-        content: slavery_descriptions[i],
+        content: di18n.tb_mark.s_descriptions[i],
         type: 'text',
       },
     ]);
@@ -677,7 +675,7 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
     if (era.get('flag:助手') > 0) {
       columns[slavery_enum.assistant][0].config.disabled = true;
       columns[slavery_enum.assistant][0].config.title =
-        '已经有了一名' + slavery_options[slavery_enum.assistant] + '……';
+        '已经有了一名' + di18n.tb_mark.s_options[slavery_enum.assistant] + '……';
     }
     columns.forEach((e) => era.printMultiColumns(e));
     era.printButton('取消切换', 99);
@@ -699,7 +697,7 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
           ' 的淫纹词条切换为 ',
           {
             color: buff_colors[2],
-            content: slavery_options[ret],
+            content: di18n.tb_mark.s_options[ret],
           },
           ' 吗？花费：',
         ]);

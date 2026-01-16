@@ -6,8 +6,10 @@ const CharaTalk = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { buff_colors } = require('#/data/color-const');
-const { item_names, tequip_parts } = require('#/data/ero/item-const');
+const { tequip_parts } = require('#/data/ero/item-const');
 const { part_names, part_names4item } = require('#/data/ero/part-const');
+
+const { i18n } = require('#/i18n/selector');
 
 /**
  * @param {CharaTalk} chara
@@ -68,7 +70,7 @@ async function take_off_ero_item(chara) {
           content:
             typeof e.part === 'string'
               ? e.part
-              : `${item_names[e.item]} (${
+              : `${i18n().item[e.item]} (${
                   part_names4item[e.part] || part_names[e.part]
                 })`,
           type: 'button',
@@ -96,7 +98,7 @@ async function take_off_ero_item(chara) {
             ' 撤除 ',
             {
               color: buff_colors[2],
-              content: item_names[used_item.item],
+              content: i18n().item[used_item.item],
             },
             ' 吗？',
           ],
@@ -107,7 +109,7 @@ async function take_off_ero_item(chara) {
     era.print([
       get_chara_talk(0).get_colored_name(),
       ' 放弃了撤除 ',
-      { color: buff_colors[2], content: item_names[used_item.item] },
+      { color: buff_colors[2], content: i18n().item[used_item.item] },
       '……',
     ]);
     return undefined;

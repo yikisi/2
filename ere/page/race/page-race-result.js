@@ -12,7 +12,6 @@ const { sort_list } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { buff_colors } = require('#/data/color-const');
-const { item_names } = require('#/data/ero/item-const');
 const { class_enum } = require('#/data/race/model/race-info');
 
 const di18n = require('#/i18n/extended-def');
@@ -425,7 +424,7 @@ async function page_race_result(contestants, info, race_id) {
         const tmp = era.get(`equip:${cid}:${5 + i}`);
         if (tmp > 0) {
           era.set(`equip:${cid}:${5 + i}`, 0);
-          era.add(`item:${item_names[tmp]}`, 1 + (i === 0));
+          era.add(`item:${tmp}`, 1 + (i === 0));
           return p + 1;
         }
         return p;

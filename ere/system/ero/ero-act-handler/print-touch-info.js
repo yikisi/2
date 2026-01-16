@@ -5,12 +5,10 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { buff_colors } = require('#/data/color-const');
 const { part_abbr, part_alias } = require('#/data/ero/ero-alias.json');
-const {
-  get_item_action,
-  item_enum,
-  item_names,
-} = require('#/data/ero/item-const');
+const { get_item_action, item_enum } = require('#/data/ero/item-const');
 const { part_enum, part_touch, touch_list } = require('#/data/ero/part-const');
+
+const { i18n } = require('#/i18n/selector');
 
 const motion_info = [
   ['朝向床头躺着', '朝向床头趴着'],
@@ -41,7 +39,7 @@ function get_part_touch(cid, cpart) {
       if (body_part.item === item_enum.clamps) {
         item_name = cpart === part_enum.breast ? '乳头夹' : '阴蒂夹';
       }
-      item_name ||= item_names[body_part.item];
+      item_name ||= i18n().item[body_part.item];
       return [
         { color: buff_colors[2], content: item_name },
         ' (由 ',

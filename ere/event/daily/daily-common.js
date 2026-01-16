@@ -185,7 +185,7 @@ class CustomizedDaily {
       {
         columns: [
           i18n().ui_no,
-          ...money_list.slice(1).map((m) => i18n().get_money_content(m)),
+          ...money_list.slice(1).map((m) => di18n.get_money_content(m)),
         ].map((e, i) => {
           return {
             accelerator: i,
@@ -203,7 +203,7 @@ class CustomizedDaily {
         {
           columns: [
             i18n().ui_no,
-            ...time_list.slice(1).map((m) => i18n().get_multi_month(m)),
+            ...time_list.slice(1).map((m) => di18n.get_multi_month(m)),
           ].map((e, i) => {
             return {
               accelerator: i,

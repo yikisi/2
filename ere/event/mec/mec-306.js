@@ -6,6 +6,8 @@ const { get_chara_color } = require('#/data/chara-colors');
 const RikoLifeMarks = require('#/data/event/life-event-marks/life-event-marks-306');
 const recruit_flags = require('#/data/event/recruit-flags');
 
+const di18n = require('#/i18n/extended-def');
+
 module.exports = class extends MecNpc {
   get_love_limit() {
     if (get(`cflag:${this.id}:招募状态`) === recruit_flags.yes) {
@@ -26,10 +28,9 @@ module.exports = class extends MecNpc {
     const buff = this.get_take_care_buff();
     return [
       {
+        ...di18n.kojo.get_titled_content(this.id, 'buff', buff),
         color: get_chara_color(this.id),
-        content: '铁面代理',
         fontWeight: buff > 50 ? 'bold' : undefined,
-        title: `训练员头衔对训练成功率与效果加成上升一级，照看时训练效果+${buff}%。`,
       },
     ];
   }

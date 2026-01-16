@@ -11,17 +11,6 @@ module.exports = {
   base_skill_limit: 5,
   base_skill_price: 660,
   mark_prices: [0, 1000, 2000, 3500],
-  shop_list: [
-    '口腔快感',
-    '胸部快感',
-    '身体快感',
-    '阴茎快感',
-    '外阴快感',
-    '阴道快感',
-    '肛门快感',
-    '施虐快感',
-    '受虐快感',
-  ],
   shop_result_type_enum,
   talent_button_names_and_check_dict: {
     poisoned: {

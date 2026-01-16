@@ -159,11 +159,17 @@ class I18nEntry {
   ui_yes = '确定';
   ui_no = '取消';
   ui_skip = '跳过';
+  ui_nothing = '无';
   ui_money_template = '%MONEY% 马币';
-  get_money_content = (money) =>
-    this.ui_money_template.replace('%MONEY%', money);
+  ui_get_date = (year, month, week) => [
+    year,
+    ' 年 ',
+    month,
+    ' 月 第 ',
+    week,
+    ' 周',
+  ];
   ui_month_template = '%MONTH% 个月';
-  get_multi_month = (month) => this.ui_month_template.replace('%MONTH%', month);
 
   ui_show_team = '查看队伍列表';
   ui_train = '训练';
@@ -215,6 +221,7 @@ class I18nEntry {
 
   tb_abl = new (require('#/i18n/zh-CN/table/abl'))();
   tb_mark = new (require('#/i18n/zh-CN/table/mark'))();
+  tb_stain = new (require('#/i18n/zh-CN/table/stain'))();
 
   train_action = new (require('#/i18n/zh-CN/sex/actions'))();
   inmon = new (require('#/i18n/zh-CN/sex/inmons'))();

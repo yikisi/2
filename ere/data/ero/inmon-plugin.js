@@ -2,6 +2,7 @@ const get_gradient_color = require('#/utils/gradient-color');
 
 const { mark_colors, mark_enum } = require('#/data/ero/mark-const');
 
+const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 const base_color = mark_colors[mark_enum.ero];
@@ -49,7 +50,7 @@ class InmonPlugin {
   }
 
   get title() {
-    return `【${this.name}】（${i18n().inmon[this.group]} · 等级 ${this.level} · ${this.size} 插槽）\n${this.description}`;
+    return di18n.inmon.get_tip(this.id, this.group, this.level, this.size);
   }
 
   get colored_name() {

@@ -5,7 +5,7 @@ const { get_penis_size } = require('#/system/ero/sys-calc-ero-status');
 const CharaTalk = require('#/utils/chara-talk');
 
 const { buff_colors } = require('#/data/color-const');
-const { item_enum, item_names } = require('#/data/ero/item-const');
+const { item_enum } = require('#/data/ero/item-const');
 const {
   part_enum,
   part_names,
@@ -13,6 +13,8 @@ const {
 } = require('#/data/ero/part-const');
 const { vp_status_enum } = require('#/data/ero/status-const');
 const { location_enum } = require('#/data/locations');
+
+const { i18n } = require('#/i18n/selector');
 
 /**
  * @param {CharaTalk} chara
@@ -75,7 +77,7 @@ async function use_ero_item(chara) {
     },
   ]
     .map((e) => {
-      e.n = item_names[e.a];
+      e.n = i18n().item[e.a];
       e.c = era.get(`item:${e.n}`);
       return e;
     })
@@ -95,17 +97,17 @@ async function use_ero_item(chara) {
         return {
           accelerator: i,
           config: { align: 'center', disabled: !e.e, width: 4 },
-          content: `${item_names[e.a]} (${e.c})`,
+          content: `${i18n().item[e.a]} (${e.c})`,
           type: 'button',
         };
       }),
       config: { horizontalAlign: 'space-evenly' },
     },
   );
-  const item = item_list[await era.input()].a;
+  const iid = item_list[await era.input()].a;
   let part = 100,
     part_list = undefined;
-  switch (item) {
+  switch (iid) {
     case item_enum.gag:
       part = part_enum.mouth;
       break;
@@ -176,12 +178,12 @@ async function use_ero_item(chara) {
         {
           a: part_enum.virgin,
           d: !virgin_size || era.get(`tequip:${cur_lover}:阴道`) !== -1,
-          n: '阴道',
+          n: '小穴',
         },
         {
           a: part_enum.anal,
           d: era.get(`tequip:${cur_lover}:肛门`) !== -1,
-          n: '菊花',
+          n: '屁穴',
         },
       ];
       break;
@@ -191,15 +193,18 @@ async function use_ero_item(chara) {
           a: part_enum.virgin,
           d:
             !virgin_size ||
-            era.get(`tequip:${cur_lover}:阴道`) !== -1 ||
-            era.get(`talent:${cur_lover}:处女`) > vp_status_enum.no ||
-            era.get(`talent:${cur_lover}:处女`) === vp_status_enum.i_think,
-          n: '阴道',
+            // TEQUIPNAME:8 = 阴道
+            era.get(`tequip:${cur_lover}:8`) !== -1 ||
+            // TALENTNAME:31 = 处女
+            era.get(`talent:${cur_lover}:31`) > vp_status_enum.no ||
+            era.get(`talent:${cur_lover}:31`) === vp_status_enum.i_think,
+          n: '小穴',
         },
         {
           a: part_enum.anal,
-          d: era.get(`tequip:${cur_lover}:肛门`) !== -1,
-          n: '菊花',
+          // TEQUIPNAME:9 = 肛门
+          d: era.get(`tequip:${cur_lover}:9`) !== -1,
+          n: '屁穴',
         },
       ];
       break;
@@ -226,7 +231,7 @@ async function use_ero_item(chara) {
                 '要对 ',
                 chara.get_colored_name(),
                 ' 的什么部位使用 ',
-                { color: buff_colors[2], content: item_names[item] },
+                { color: buff_colors[2], content: i18n().item[iid] },
                 '？',
               ],
               type: 'text',
@@ -268,7 +273,7 @@ async function use_ero_item(chara) {
                   ]
                 : []),
               ' 使用 ',
-              { color: buff_colors[2], content: item_names[item] },
+              { color: buff_colors[2], content: i18n().item[iid] },
               ' 吗？',
             ],
             type: 'text',
@@ -301,12 +306,12 @@ async function use_ero_item(chara) {
     await era.printAndWait([
       CharaTalk.me.get_colored_name(),
       ' 放弃了使用 ',
-      { color: buff_colors[2], content: item_names[item] },
+      { color: buff_colors[2], content: i18n().item[iid] },
       '……',
     ]);
     return undefined;
   }
-  return { item, part };
+  return { item: iid, part };
 }
 
 module.exports = use_ero_item;

@@ -3,7 +3,7 @@ const era = require('#/era-electron');
 const { clean_part } = require('#/system/ero/sys-calc-ero-part');
 
 const EroParticipant = require('#/data/ero/ero-participant');
-const { item_enum, item_names } = require('#/data/ero/item-const');
+const { item_enum } = require('#/data/ero/item-const');
 const { part_enum, part_touch } = require('#/data/ero/part-const');
 
 /**
@@ -24,14 +24,11 @@ function remove_item(cid, p_or_i) {
           case item_enum.gag:
           case item_enum.milk_pump:
           case item_enum.artificial_virgin:
-            era.add(`item:${item_names[touch.item]}`, 1);
+            era.add(`item:${touch.item}`, 1);
             break;
           case item_enum.clamps:
           case item_enum.love_eggs:
-            era.add(
-              `item:${item_names[touch.item]}`,
-              1 + (p_or_i === part_enum.breast),
-            );
+            era.add(`item:${touch.item}`, 1 + (p_or_i === part_enum.breast));
         }
       }
     }

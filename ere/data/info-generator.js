@@ -27,12 +27,7 @@ const { get_date } = require('#/data/date-indicator');
 const status_desc = require('#/data/desc/status.json');
 const talent_desc = require('#/data/desc/talents.json');
 const CharaInmon = require('#/data/ero/chara-inmon');
-const {
-  mark_colors,
-  mark_enum,
-  slavery_descriptions,
-  slavery_titles,
-} = require('#/data/ero/mark-const');
+const { mark_colors, mark_enum } = require('#/data/ero/mark-const');
 const { lust_border } = require('#/data/ero/orgasm-const');
 const { part_enum } = require('#/data/ero/part-const');
 const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
@@ -303,11 +298,11 @@ module.exports = {
       const { slave } = CharaInmon.get(cid),
         obj = {
           color: buff_colors[2],
-          content: slavery_titles[slave],
+          content: di18n.tb_mark.s_titles[slave],
           fontWeight: 'bold',
         };
       if (cid > 0 && slave > 0) {
-        obj.title = `[${obj.content}]：${slavery_descriptions[slave]}`;
+        obj.title = `[${obj.content}]：${di18n.tb_mark.s_descriptions[slave]}`;
       }
       status_list.push(obj);
     }

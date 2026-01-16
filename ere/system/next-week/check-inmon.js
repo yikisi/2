@@ -8,11 +8,12 @@ const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const CharaInmon = require('#/data/ero/chara-inmon');
-const { slavery_enum, slavery_options } = require('#/data/ero/mark-const');
+const { slavery_enum } = require('#/data/ero/mark-const');
 const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const { gene_juel_names } = require('#/data/other-const');
 const { gene_type_colors } = require('#/data/race/model/uma-gene');
 
+const di18n = require('#/i18n/extended-def');
 const { __ } = require('#/i18n/selector');
 
 /** @param {number[]} in_team_list */
@@ -55,7 +56,7 @@ function check_inmon(in_team_list) {
         buffer[buffer.findLastIndex((e) => e === '，')] = ' 和 ';
         era.print([
           '【',
-          slavery_options[slavery_enum.milk],
+          di18n.tb_mark.s_options[slavery_enum.milk],
           ' ',
           ...buffer,
           buffer.length > 1 ? ' 各' : ' ',
@@ -96,7 +97,7 @@ function check_inmon(in_team_list) {
       j_count += val;
       era.print([
         '【',
-        slavery_options[slavery_enum.inherit],
+        di18n.tb_mark.s_options[slavery_enum.inherit],
         ' ',
         get_chara_talk(id).get_colored_name(),
         ' 贡上了 ',

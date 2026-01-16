@@ -1,3 +1,4 @@
+/** @returns {{[content]:string,[title]:string}} */
 function get_titled_content(dict, key, ...args) {
   if (!dict) {
     return {};

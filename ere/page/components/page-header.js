@@ -9,8 +9,6 @@ const sys_filter_chara = require('#/system/sys-filter-chara');
 
 const race_indicator = require('#/page/components/race-indicator');
 
-const { get_custom_mec } = require('#/event/mec/mec-factory');
-
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_abbr_number } = require('#/utils/value-utils');
 
@@ -83,8 +81,7 @@ function page_header(enable_race_info) {
     const money_buff = era.get('global:金钱加成');
     const rec_trainers = [304, 306]
       .filter((e) => era.get(`cflag:${e}:招募状态`) === recruit_flags.yes)
-      .map((e) => `[${get_custom_mec(e).get_talents()[0].content}]`)
-      .join('+');
+      .map((e) => `[${i18n().kojo[e].buff}]`);
     let billings = '账单：';
     let money_change = 0;
     sys_get_billings().forEach((e, i) => {
@@ -152,13 +149,11 @@ function page_header(enable_race_info) {
       .title_desc.tip_template.replace('%NAME%', trainer_title.full())
       .replace(
         '%DESC%',
-        `${
-          trainer_buff > 0
-            ? `指导训练时成功率与效果加成 +${trainer_buff}%${
-                rec_trainers.length > 0 ? ` (↑${rec_trainers})` : ''
-              }，`
-            : ''
-        }担当赏金 ${4 * get_trainer_level() + 4}% 分成。`,
+        i18n().title_desc.get_trainer_title_desc(
+          trainer_buff,
+          get_trainer_level(),
+          rec_trainers,
+        ),
       );
     title_info.push(...race_indicator(0));
     era.printInColRows(

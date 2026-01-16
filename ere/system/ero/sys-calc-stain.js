@@ -5,7 +5,9 @@ const get_gradient_color = require('#/utils/gradient-color');
 const { buff_colors } = require('#/data/color-const');
 const { item_enum } = require('#/data/ero/item-const');
 const { part_enum, part_touch } = require('#/data/ero/part-const');
-const { stain_enum, stain_names } = require('#/data/ero/stain-const');
+const { stain_enum } = require('#/data/ero/stain-const');
+
+const di18n = require('#/i18n/extended-def');
 
 const cache = {};
 
@@ -90,7 +92,7 @@ module.exports = {
     const cleaning_tolerance = era.get(`talent:${chara_id}:洁净重视`);
     upper_border += +(cleaning_tolerance === 1);
     const intolerable =
-      upper_border > stain_names.length ? 0 : stain >> upper_border;
+      upper_border > di18n.tb_stain.names.length ? 0 : stain >> upper_border;
     if (intolerable > 0) {
       stain -= intolerable << upper_border;
       ret = -2 * count_stain(intolerable);
@@ -142,6 +144,7 @@ module.exports = {
     const ret = [];
     let stain = era.get(`stain:${chara_id}:${part}`);
     if (stain > 0) {
+      const stain_names = di18n.tb_stain.names;
       Object.keys(stain_enum).forEach((_, i) => {
         if (stain % 2) {
           ret.push({

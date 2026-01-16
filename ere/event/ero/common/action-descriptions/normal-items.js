@@ -3,14 +3,11 @@ const era = require('#/era-electron');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { buff_colors } = require('#/data/color-const');
-const {
-  get_item_action,
-  item_enum,
-  item_names,
-  medicine_names,
-} = require('#/data/ero/item-const');
+const { get_item_action, item_enum } = require('#/data/ero/item-const');
 const { part_names, part_names4item } = require('#/data/ero/part-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
+
+const { i18n } = require('#/i18n/selector');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,HookArg,*):Promise>} handlers */
 module.exports = (handlers) => {
@@ -88,7 +85,7 @@ module.exports = (handlers) => {
         ' 给 ',
         defender.get_colored_name(),
         ' 喂食了 ',
-        { color: buff_colors[2], content: medicine_names[extra_flag.item] },
+        { color: buff_colors[2], content: i18n().item[extra_flag.item] },
         '】',
       ]);
     } else {
@@ -96,7 +93,7 @@ module.exports = (handlers) => {
         '【',
         attacker.get_colored_name(),
         ' 服用了 ',
-        { color: buff_colors[2], content: medicine_names[extra_flag.item] },
+        { color: buff_colors[2], content: i18n().item[extra_flag.item] },
         '】',
       ]);
     }
@@ -114,7 +111,7 @@ module.exports = (handlers) => {
         '【',
         get_chara_talk(extra_flag.owner).get_colored_name(),
         ` ${get_item_action(extra_flag.item, extra_flag.part)} 的 `,
-        { content: item_names[extra_flag.item], color: buff_colors[2] },
+        { content: i18n().item[extra_flag.item], color: buff_colors[2] },
         ' 持续刺激着 ',
         get_chara_talk(extra_flag.stay).get_colored_name(),
         ' 的 ',
@@ -152,7 +149,7 @@ module.exports = (handlers) => {
         ' 为 ',
         defender.get_colored_name(),
         ' 戴上了 ',
-        { content: item_names[extra_flag.item], color: buff_colors[2] },
+        { content: i18n().item[extra_flag.item], color: buff_colors[2] },
         '】',
       ]);
     } else {
@@ -168,7 +165,7 @@ module.exports = (handlers) => {
           color: buff_colors[2],
         },
         `  ${get_item_action(extra_flag.item, extra_flag.part)}了 `,
-        { content: item_names[extra_flag.item], color: buff_colors[2] },
+        { content: i18n().item[extra_flag.item], color: buff_colors[2] },
         '】',
       ]);
     }
@@ -212,7 +209,7 @@ module.exports = (handlers) => {
           color: buff_colors[2],
         },
         ' 取下了 ',
-        { content: item_names[extra_flag.item], color: buff_colors[2] },
+        { content: i18n().item[extra_flag.item], color: buff_colors[2] },
         '】',
       ]);
     }

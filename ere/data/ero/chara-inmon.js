@@ -32,10 +32,8 @@ class CharaInmon {
 
   /** @type {Record<string,0|1>} */
   get #obj() {
-    return (
-      era.get(`equip:${this.id}:淫纹插件`) ||
-      era.set(`equip:${this.id}:淫纹插件`, {})
-    );
+    // EQUIPNAME:0 = 淫纹插件
+    return era.get(`equip:${this.id}:0`) || era.set(`equip:${this.id}:0`, {});
   }
 
   get raw() {
@@ -50,12 +48,13 @@ class CharaInmon {
 
   /** @returns {number} */
   get slave() {
-    return era.get(`equip:${this.id}:淫纹奴役`);
+    // EQUIPNAME:1 = 淫纹奴役
+    return era.get(`equip:${this.id}:1`);
   }
 
   /** @param {number} v */
   set slave(v) {
-    era.set(`equip:${this.id}:淫纹奴役`, v);
+    era.set(`equip:${this.id}:1`, v);
   }
 
   get list() {

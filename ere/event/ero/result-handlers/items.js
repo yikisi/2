@@ -20,17 +20,14 @@ const add_meek_or_hate = require('#/event/ero/snippets/add-meek-or-hate');
 const { get_random_value } = require('#/utils/value-utils');
 
 const EroParticipant = require('#/data/ero/ero-participant');
-const {
-  item_enum,
-  item_names,
-  medicine_enum,
-  medicine_names,
-} = require('#/data/ero/item-const');
+const { item_enum, medicine_enum } = require('#/data/ero/item-const');
 const { base_emotion_juel } = require('#/data/ero/juel-const');
 const { palam_border } = require('#/data/ero/orgasm-const');
 const { part_enum, part_talents } = require('#/data/ero/part-const');
 const { stain_enum } = require('#/data/ero/stain-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
+
+const { i18n } = require('#/i18n/selector');
 
 /** @param {Record<string,function(number,number,HookArg,*)>} handlers */
 module.exports = (handlers) => {
@@ -55,7 +52,7 @@ module.exports = (handlers) => {
    */
   handlers[ero_hooks.use_medicine] = (attacker, __, ___, extra_flag) => {
     if (!attacker) {
-      era.add(`item:${medicine_names[extra_flag.item]}`, -1);
+      era.add(`item:${extra_flag.item}`, -1);
     }
     let temp;
     switch (extra_flag.item) {
@@ -94,10 +91,7 @@ module.exports = (handlers) => {
           ),
         );
         era.set(`palam:${extra_flag.user}:外阴快感`, 0);
-        era.set(
-          `status:${extra_flag.user}:${medicine_names[extra_flag.item]}`,
-          1,
-        );
+        era.set(`status:${extra_flag.user}:${i18n().item[extra_flag.item]}`, 1);
         break;
       case medicine_enum.anti_p_s:
         era.set(`status:${extra_flag.user}:短效避孕药`, 1);
@@ -201,10 +195,7 @@ module.exports = (handlers) => {
               era.get(`talent:${defender}:${part_talents[extra_flag.part]}`))),
       );
     } else {
-      era.set(
-        `tequip:${defender}:${item_names[extra_flag.item]}`,
-        extra_flag.item,
-      );
+      era.set(`tequip:${defender}:${extra_flag.item}`, extra_flag.item);
     }
     if (
       !attacker &&
@@ -213,7 +204,7 @@ module.exports = (handlers) => {
     ) {
       if (extra_flag.item !== item_enum.electric_stunner) {
         era.add(
-          `item:${item_names[extra_flag.item]}`,
+          `item:${extra_flag.item}`,
           -1 -
             (extra_flag.part === part_enum.breast &&
               (extra_flag.item === item_enum.clamps ||
