@@ -13,6 +13,81 @@ class I18nTimon {
   daily_child = proxy_kojo_js(require('#/i18n/zh-CN/timon/daily-child'));
   ero_child = proxy_kojo_js(require('#/i18n/zh-CN/timon/ero-child'));
 
+  /** @param {CharaTalk} chara */
+  get_it_office_study = (chara) => [
+    '【指导了 ',
+    chara.get_colored_name(),
+    ' 的学习】',
+  ];
+  /** @param {CharaTalk} chara */
+  get_it_office_prepare = (chara) => [
+    '【帮助 ',
+    chara.get_colored_name(),
+    ' 进行了赛前准备】',
+  ];
+  /** @param {CharaTalk} chara */
+  get_it_talk = (chara) => ['【和 ', chara.get_colored_name(), ' 搭话】'];
+  /** @param {CharaTalk} chara */
+  get_it_office_gift = (chara) => [
+    '【给 ',
+    chara.get_colored_name(),
+    ' 送上了一份小礼物】',
+  ];
+  it_self_cook = '【独自做了饭加餐】';
+  /** @param {CharaTalk} chara */
+  get_it_office_cook = (chara) => [
+    '【和 ',
+    chara.get_colored_name(),
+    ' 一起做了饭加餐】',
+  ];
+  it_self_rest = '【独自一人休息了】';
+  /** @param {CharaTalk} chara */
+  get_it_office_rest = (chara) => [
+    '【和 ',
+    chara.get_colored_name(),
+    ' 一起休息了】',
+  ];
+  it_self_game = '【独自一人玩了游戏】';
+  /** @param {CharaTalk} chara */
+  get_it_office_game = (chara) => [
+    '【和 ',
+    chara.get_colored_name(),
+    ' 一起打了游戏】',
+  ];
+  /**
+   * @param {CharaTalk} chara
+   * @param {string} celebration
+   */
+  get_it_celebration = (chara, celebration) => [
+    '【和 ',
+    chara.get_colored_name(),
+    ' 一起庆祝了 ',
+    celebration,
+    '】',
+  ];
+  /** @param {CharaTalk} chara */
+  get_it_birthday = (chara) => [
+    '【向 ',
+    chara.get_colored_name(),
+    ' 祝贺生日快乐】',
+  ];
+  /** @param {CharaTalk} chara */
+  get_it_check_love = (chara) => [
+    chara.get_colored_name(),
+    ' 似乎决定重新审视你们之间的关系……',
+  ];
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} you
+   */
+  get_it_basement_me = (chara, you) => [
+    '听了 ',
+    you.get_colored_name(),
+    ' 的请求，',
+    chara.get_colored_name(),
+    ' 似乎有些意动……',
+  ];
+
   ed_saying_01 = '九尺二间陋室里，红唇依竹共恩情。——高杉晋作';
   ed_saying_02 = '金钱、赛马娘、女人，男生永远搞不懂这三件事。——威尔・罗〇斯';
   ed_saying_03 = '一文钱难倒英雄汉。——李绿园';

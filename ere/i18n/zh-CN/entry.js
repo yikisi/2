@@ -255,6 +255,36 @@ class I18nEntry {
   ui_month_template = '%MONTH% 个月';
   get_multi_month = (month) => this.ui_month_template.replace('%MONTH%', month);
 
+  ui_show_team = '查看队伍列表';
+  ui_train = '训练';
+  ui_self_train = '自主训练';
+  ui_goto_race = '出走比赛';
+  ui_register_race = '登记出走';
+  ui_goto_sex = '邀请上床';
+  ui_next_turn = '休息到下周';
+  ui_office_study = '指导学习';
+  ui_office_prepare = '赛前准备';
+  ui_talk = '聊天';
+  ui_office_gift = '送礼物';
+  ui_self_cook = '加餐';
+  ui_office_cook = '一起加餐';
+  ui_self_rest = '小憩';
+  ui_office_rest = '一起小憩';
+  ui_self_game = '打游戏';
+  ui_office_game = '一起打游戏';
+  ui_change_take_care = '切换照看角色';
+  ui_ask_take_care = '请求照看';
+  ui_self_update = '提升自身性爱能力';
+  ui_ero_update = '提升角色性爱能力';
+  ui_borrow_money = '借钱';
+  ui_celebration_template = '一起庆祝 %CELEBRATION%';
+  ui_birthday = '庆祝生日';
+  ui_check_love = '重新触发爱慕事件';
+  ui_basement_me = '乞求狂爱';
+  ui_recruit = '前往训练场 (招募)';
+
+  ui_foreign_study_template = '%LAN%学习';
+
   name = new (require('#/i18n/zh-CN/chara/names'))();
   title = new (require('#/i18n/zh-CN/chara/titles'))();
   title_desc = new (require('#/i18n/zh-CN/chara/title-desc'))();

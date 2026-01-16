@@ -10,26 +10,29 @@ const { get_custom_mec } = require('#/event/mec/mec-factory');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 
+const { i18n } = require('#/i18n/selector');
+
 module.exports = {
   /**
-   * @param {number} chara_id
+   * @param {number} cid
    * @param {number} race_week
    * @param {number} cur_weeks
    */
-  generate_race_button(chara_id, race_week, cur_weeks) {
+  generate_race_button(cid, race_week, cur_weeks) {
     if (race_week === cur_weeks) {
       return {
         accelerator: 102,
         config: {
           buttonType: 'danger',
-          disabled: !sys_check_race_ready(chara_id) || !sys_check_awake(0),
+          disabled: !sys_check_race_ready(cid) || !sys_check_awake(0),
           width: 6,
         },
-        content: '出走比赛',
+        content: i18n().ui_goto_race,
         type: 'button',
       };
     }
-    const edu_weeks = era.get(`cflag:${chara_id}:育成回合计时`);
+    // CFLAGNAME:48 = 育成回合计时
+    const edu_weeks = era.get(`cflag:${cid}:48`);
     return {
       accelerator: 102,
       config: {
@@ -37,14 +40,15 @@ module.exports = {
           ? 'danger'
           : 'warning',
         disabled:
-          !get_custom_mec(chara_id).is_race_register_enabled() ||
-          !era.get(`cflag:${chara_id}:种族`) ||
-          (chara_id &&
+          !get_custom_mec(cid).is_race_register_enabled() ||
+          // CFLAGNAME:1 = 种族
+          !era.get(`cflag:${cid}:1`) ||
+          (cid > 0 &&
             (typeof edu_weeks !== 'number' ||
-              era.get(`cflag:${chara_id}:育成回合计时`) >= 48 * 3)),
+              era.get(`cflag:${cid}:48`) >= 48 * 3)),
         width: 6,
       },
-      content: '登记出走',
+      content: i18n().ui_register_race,
       type: 'button',
     };
   },

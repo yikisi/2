@@ -50,6 +50,12 @@ class I18nRaces {
     return [this.m_well, this.m_semi, this.m_heavy, this.m_bad];
   }
 
+  // 国家缩写
+  c_china = '中';
+  c_america = '美';
+  c_france = '法';
+  c_arab = '阿';
+
   // 竞马场
   t_playground = '训练场';
   t_sapporo = '札幌';

@@ -60,7 +60,7 @@ const track2race = {
 
 /**
  * @param {number} cid
- * @param {string} language
+ * @param {number} language
  * @param {number} loc
  * @param {boolean} before_race
  */
@@ -68,12 +68,12 @@ function handle_foreign_debuff(cid, language, loc, before_race) {
   sys_change_attr_and_print(cid, attr_enum.hp, -200);
   sys_change_attr_and_print(cid, attr_enum.tp, -500);
   sys_change_tired(cid, 2);
+  // STATUSNAME:7 = 语言不通
   era.set(
-    `status:${cid}:语言不通`,
+    `status:${cid}:7`,
     Math.max(
-      5 -
-        era.get(`abl:${cid}:${language}语`) +
-        era.get(`talent:${cid}:社交态度`),
+      // TALENTNAME:11 = 社交态度
+      5 - era.get(`abl:${cid}:${language}`) + era.get(`talent:${cid}:11`),
       0,
     ),
   );
@@ -306,28 +306,31 @@ async function check_new_activities(cur_round, in_team_list) {
         '回到特雷森了】',
       ]);
       in_team_list.forEach((id) => {
-        if (era.get(`cflag:${id}:位置`) === location.loc) {
+        // CFLAGNAME:45 = 位置
+        if (era.get(`cflag:${id}:45`) === location.loc) {
           sys_change_attr_and_print(id, attr_enum.hp, -100);
           sys_change_attr_and_print(id, attr_enum.tp, -600);
-          era.set(`status:${id}:语言不通`, 0);
-          era.set(`status:${id}:水土不服`, 0);
-          era.set(`status:${id}:客场作战`, 0);
+          // STATUSNAME:7 - 9 = 语言不通 - 客场作战
+          era.set(`status:${id}:7`, 0);
+          era.set(`status:${id}:8`, 0);
+          era.set(`status:${id}:9`, 0);
           sys_change_tired(id, 1);
-          era.set(`cflag:${id}:位置`, 0);
+          era.set(`cflag:${id}:45`, 0);
         }
       });
-      if (era.get('cflag:0:位置') === location.loc) {
-        era.set('flag:当前位置', location_enum.office);
+      if (era.get('cflag:0:45') === location.loc) {
+        // FLAGNAME:4 = 当前位置
+        era.set('flag:4', location_enum.office);
         sys_change_attr_and_print(0, attr_enum.hp, -100);
         sys_change_attr_and_print(0, attr_enum.tp, -600);
-        era.set('status:0:语言不通', 0);
-        era.set('status:0:水土不服', 0);
-        era.set('status:0:客场作战', 0);
+        era.set('status:0:7', 0);
+        era.set('status:0:8', 0);
+        era.set('status:0:9', 0);
         sys_change_tired(0, 1);
-        era.set('cflag:0:位置', 0);
+        era.set('cflag:0:45', 0);
       }
-      if (era.get('cflag:343:位置') === location.loc) {
-        era.set('cflag:343:位置', 0);
+      if (era.get('cflag:343:45') === location.loc) {
+        era.set('cflag:343:45', 0);
       }
     }
   }

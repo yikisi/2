@@ -383,14 +383,14 @@ class CustomizedEdu {
    * @param {CharaTalk} me
    * @param {string} callname
    * @param {HookArg} hook
-   * @param {{lan:string}} extra_flag
+   * @param {{lan:number}} extra_flag
    */
   async foreign_study(chara, me, callname, hook, extra_flag) {
-    const abl = era.get(`abl:${this.id}:${extra_flag.lan}语`);
+    const abl = era.get(`abl:${this.id}:${extra_flag.lan}`);
     hook.arg =
       abl === 5 ||
       Math.random() <
-        (5 - abl) / 5 + (era.get(`abl:0:${extra_flag.lan}语`) > abl) / 2;
+        (5 - abl) / 5 + (era.get(`abl:0:${extra_flag.lan}`) > abl) / 2;
     await i18n().timon.edu.foreign_study(chara, me, hook.arg);
   }
 

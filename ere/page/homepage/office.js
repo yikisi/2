@@ -59,6 +59,8 @@ const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const { attr_enum, pressure_border } = require('#/data/train-const');
 
+const { i18n } = require('#/i18n/selector');
+
 function generate_button_title(...tlist) {
   return tlist.filter((x) => x).join('\n') || void 0;
 }
@@ -81,28 +83,36 @@ function fill_npc_dict(dict, k, l) {
 module.exports = async (cid, next_cb, flags) => {
   const awake = { chara: sys_check_awake(cid), me: sys_check_awake(0) };
   const celebration = get_celebration();
-  const celebration_cost = 50 * (era.get('cflag:0:节日事件标记') + 1);
-  const cur_weeks = era.get('flag:当前回合数');
+  // CFLAGNAME:56 = 节日事件标记
+  const celebration_cost = 50 * (era.get('cflag:0:56') + 1);
+  // FLAGNAME:0 = 当前回合数
+  const cur_weeks = era.get('flag:0');
   const event_marks = EventMarks.get(cid);
   const my_event_marks = EventMarks.get(0);
-  const growth_stage = era.get(`cflag:${cid}:成长阶段`);
-  const is_love_rejected = era.get(`cflag:${cid}:爱慕暂拒`);
-  const jpy = era.get('flag:当前马币');
-  const not_in_same_loc =
-    era.get(`cflag:${cid}:位置`) !== era.get('cflag:0:位置');
-  const office_activity_filter = era.get('flag:筛除训练室活动');
-  const out_activity_filter = era.get('flag:筛除外出活动');
+  // CFLAGNAME:65 = 成长阶段
+  const growth_stage = era.get(`cflag:${cid}:65`);
+  // CFLAGNAME:46 = 爱慕暂拒
+  const is_love_rejected = era.get(`cflag:${cid}:46`);
+  // CFLAGNAME:16 = 当前马币
+  const jpy = era.get('flag:16');
+  // CFLAGNAME:45 = 位置
+  const not_in_same_loc = era.get(`cflag:${cid}:45`) !== era.get('cflag:0:45');
+  // FLAGNAME:60 = 筛除训练室活动
+  const office_activity_filter = era.get('flag:60');
+  // FLAGNAME:61 = 筛除外出活动
+  const out_activity_filter = era.get('flag:61');
   const personal_action = get_custom_check(cid).get_personal_action();
   const registered_race = sys_reg_race(cid).curr;
+  // BASENAME:0 - 1 = 体力 - 精力
   const player_base = {
-    stamina: era.get('base:0:体力'),
-    time: era.get('base:0:精力'),
+    stamina: era.get('base:0:0'),
+    time: era.get('base:0:1'),
   };
   const chara_base =
     cid > 0
       ? {
-          stamina: era.get(`base:${cid}:体力`),
-          time: era.get(`base:${cid}:精力`),
+          stamina: era.get(`base:${cid}:0`),
+          time: era.get(`base:${cid}:1`),
         }
       : void 0;
   const train_enabled = sys_check_train_enabled(cid);
@@ -118,10 +128,10 @@ module.exports = async (cid, next_cb, flags) => {
   buttons.push([
     {
       config: { width: 24 },
-      content: '查看队伍列表',
+      content: i18n().ui_show_team,
       async h() {
-        flags.after_select =
-          era.set('flag:当前互动角色', await select_target()) !== cid;
+        // FLAGNAME:5 = 当前互动角色
+        flags.after_select = era.set('flag:5', await select_target()) !== cid;
       },
     },
     {
@@ -132,20 +142,24 @@ module.exports = async (cid, next_cb, flags) => {
         disabled: !train_enabled || !awake.me,
       },
       // 训自己的话显示自主训练
-      content: `${!cid && train_enabled ? '自主' : ''}训练`,
+      content:
+        !cid && sys_check_train_enabled(cid)
+          ? i18n().ui_self_train
+          : i18n().ui_train,
       async h() {
-        era.set('flag:当前位置', location_enum.playground);
+        // FLAGNAME:4 = 当前位置
+        era.set('flag:4', location_enum.playground);
         await print_train_page();
-        era.set('flag:当前位置', location_enum.office);
+        era.set('flag:4', location_enum.office);
       },
     },
     {
       ...generate_race_button(cid, registered_race.week, cur_weeks),
       async h() {
-        if (registered_race.week === era.get('flag:当前回合数')) {
-          era.set('flag:当前位置', location_enum.race);
+        if (registered_race.week === cur_weeks) {
+          era.set('flag:4', location_enum.race);
           await race_page(registered_race.race);
-          era.set('flag:当前位置', location_enum.office);
+          era.set('flag:4', location_enum.office);
         } else {
           await reg_race_page();
         }
@@ -161,12 +175,12 @@ module.exports = async (cid, next_cb, flags) => {
           !awake.me ||
           not_in_same_loc,
       },
-      content: '邀请上床',
+      content: i18n().ui_goto_sex,
       async h() {
         if (await goto_sex(cid, location_enum.restroom)) {
           flags.week_start = true;
         }
-        era.set('flag:当前位置', location_enum.office);
+        era.set('flag:4', location_enum.office);
       },
     },
     {
@@ -178,10 +192,8 @@ module.exports = async (cid, next_cb, flags) => {
             ? 'danger'
             : 'warning',
       },
-      content: '休息到下周',
-      async h() {
-        flags.week_start = true;
-      },
+      content: i18n().ui_next_turn,
+      h: () => (flags.week_start = true),
     },
   ]);
   if (!office_activity_filter) {
@@ -195,17 +207,18 @@ module.exports = async (cid, next_cb, flags) => {
             : 'warning',
           disabled:
             !cid ||
-            era.get(`cflag:${cid}:育成回合计时`) >= 48 * 3 ||
+            // CFLAGNAME:48 = 育成回合计时
+            era.get(`cflag:${cid}:48`) >= 48 * 3 ||
             !awake.chara ||
             !awake.me ||
             player_base.time < 300 ||
             (chara_base && chara_base.time) < 300,
         },
-        content: '指导学习',
+        content: i18n().ui_office_study,
         async h() {
           if (!(await sys_get_random_event(event_hooks.office_study, cid)())) {
             era.drawLine();
-            era.print(['【指导了 ', chara.get_colored_name(), ' 的学习】']);
+            era.print(i18n().timon.get_it_office_study(chara));
             await run_custom_daily(cid, event_hooks.office_study);
           }
         },
@@ -217,7 +230,7 @@ module.exports = async (cid, next_cb, flags) => {
             : 'warning',
           disabled:
             !cid ||
-            era.get(`cflag:${cid}:育成回合计时`) >= 48 * 3 ||
+            era.get(`cflag:${cid}:48`) >= 48 * 3 ||
             !awake.chara ||
             !awake.me ||
             jpy < 20 ||
@@ -225,17 +238,13 @@ module.exports = async (cid, next_cb, flags) => {
             (chara_base && chara_base.time) < 300,
           width: 6,
         },
-        content: '赛前准备',
+        content: i18n().ui_office_prepare,
         async h() {
           if (
             !(await sys_get_random_event(event_hooks.office_prepare, cid)())
           ) {
             era.drawLine();
-            era.print([
-              '【帮助 ',
-              chara.get_colored_name(),
-              ' 进行了赛前准备】',
-            ]);
+            era.print(i18n().timon.get_it_office_prepare(chara));
             await run_custom_daily(cid, event_hooks.office_prepare);
           }
         },
@@ -243,9 +252,9 @@ module.exports = async (cid, next_cb, flags) => {
       {
         // 虚空聊天就更过分了！
         config: { disabled: !cid || !awake.me, width: 6 },
-        content: '聊天',
+        content: i18n().ui_talk,
         async h() {
-          era.print(['【和 ', chara.get_colored_name(), ' 搭话】']);
+          era.print(i18n().timon.get_it_talk(chara));
           await get_custom_daily(cid).talk();
         },
       },
@@ -263,9 +272,9 @@ module.exports = async (cid, next_cb, flags) => {
             player_base.time < 200,
           width: 6,
         },
-        content: '送礼物',
+        content: i18n().ui_office_gift,
         async h() {
-          era.print(['【给 ', chara.get_colored_name(), ' 送上了一份小礼物】']);
+          era.print(i18n().timon.get_it_office_gift(chara));
           await run_custom_daily(cid, event_hooks.office_gift);
         },
       },
@@ -280,14 +289,14 @@ module.exports = async (cid, next_cb, flags) => {
             not_in_same_loc ||
             player_base.stamina < 100,
         },
-        content: `${cid > 0 ? '一起' : ''}加餐`,
+        content: cid > 0 ? i18n().ui_office_cook : i18n().ui_self_cook,
         async h() {
           if (!(await sys_get_random_event(event_hooks.office_cook, cid)())) {
             era.drawLine();
             era.print(
               cid > 0
-                ? ['【和 ', chara.get_colored_name(), ' 一起做了饭加餐】']
-                : '【独自做了饭加餐】',
+                ? i18n().timon.get_it_office_cook(chara)
+                : i18n().timon.it_self_cook,
             );
             await run_custom_daily(cid, event_hooks.office_cook);
           }
@@ -304,14 +313,14 @@ module.exports = async (cid, next_cb, flags) => {
             not_in_same_loc ||
             player_base.time < 100,
         },
-        content: `${cid > 0 ? '一起' : ''}小憩`,
+        content: cid > 0 ? i18n().ui_office_rest : i18n().ui_self_rest,
         async h() {
           if (!(await sys_get_random_event(event_hooks.office_rest, cid)())) {
             era.drawLine();
             era.print(
               cid > 0
-                ? ['【和 ', chara.get_colored_name(), ' 一起休息了】']
-                : '【独自一人休息了】',
+                ? i18n().timon.get_it_office_rest(chara)
+                : i18n().timon.it_self_rest,
             );
             await run_custom_daily(cid, event_hooks.office_rest);
           }
@@ -329,44 +338,48 @@ module.exports = async (cid, next_cb, flags) => {
             player_base.time < 300 ||
             (chara_base && chara_base.time) < 300,
         },
-        content: `${cid > 0 ? '一起' : ''}打游戏`,
+        content: cid > 0 ? i18n().ui_office_game : i18n().ui_self_game,
         async h() {
           if (!(await sys_get_random_event(event_hooks.office_game, cid)())) {
             era.drawLine();
             era.print(
               cid > 0
-                ? ['【和 ', chara.get_colored_name(), ' 一起打了游戏】']
-                : '【独自一人玩了游戏】',
+                ? i18n().timon.get_it_office_game(chara)
+                : i18n().timon.it_self_game,
             );
             await run_custom_daily(cid, event_hooks.office_game);
           }
         },
       },
     );
-    if (cid > 0 && era.get(`cflag:${cid}:可再次育成`) > 0) {
+    // CFLAGNAME:50 = 可再次育成
+    if (cid > 0 && era.get(`cflag:${cid}:50`) > 0) {
       group.push({
         config: {
           disabled:
             !awake.chara || !awake.me || era.get(`relation:${cid}:0`) < 76,
         },
-        content: era.get(`cflag:${cid}:照看`) > 0 ? '切换照看角色' : '请求照看',
-        async h() {
-          await take_care(get_chara_talk(cid));
-        },
+        // CFLAGNAME:58
+        content:
+          era.get(`cflag:${cid}:58`) > 0
+            ? i18n().ui_change_take_care
+            : i18n().ui_ask_take_care,
+        h: () => take_care(chara),
       });
     }
     if (
       !cid ||
-      (growth_stage > 1 &&
-        era.get(`exp:${cid}:性爱次数`) > era.get(`exp:${cid}:睡奸次数`))
+      // EXPNAME:25 - 26 = 性爱次数 - 睡奸次数
+      (growth_stage > 1 && era.get(`exp:${cid}:25`) > era.get(`exp:${cid}:26`))
     ) {
       group.push({
-        content: `提升${cid ? '对方' : '自身'}性爱能力`,
+        content: cid > 0 ? i18n().ui_ero_update : i18n().ui_self_update,
         h: print_juel_shop_page,
       });
     }
     if (
-      era.get('flag:惩戒力度') <= 1 &&
+      // FLAGNAME:35 = 惩戒力度
+      era.get('flag:35') <= 1 &&
       cid > 0 &&
       !sys_get_billings()[0].creditor &&
       growth_stage >= 2
@@ -375,13 +388,12 @@ module.exports = async (cid, next_cb, flags) => {
         config: {
           disabled: !cid || !awake.chara || !awake.me || not_in_same_loc,
         },
-        content: '借钱',
-        async h() {
-          await get_custom_daily(cid).borrow_money();
-        },
+        content: i18n().ui_borrow_money,
+        h: () => get_custom_daily(cid).borrow_money(),
       });
     }
-    if (cid > 0 && era.get(`cflag:${cid}:节日事件标记`) > 0) {
+    // CFLAGNAME:56 = 节日事件标记
+    if (cid > 0 && era.get(`cflag:${cid}:56`) > 0) {
       group.push({
         config: {
           buttonType: 'danger',
@@ -392,25 +404,23 @@ module.exports = async (cid, next_cb, flags) => {
             player_base.time < celebration_cost ||
             not_in_same_loc,
         },
-        content: `一起庆祝 ${celebration}`,
+        content: i18n().ui_celebration_template.replace(
+          '%CELEBRATION%',
+          celebration,
+        ),
         async h() {
           sys_change_attr_and_print(0, attr_enum.tp, -celebration_cost);
           sys_change_attr_and_print(cid, attr_enum.tp, -50);
           if (!(await sys_get_random_event(event_hooks.celebration, cid)())) {
             era.drawLine();
-            era.print([
-              '【和 ',
-              chara.get_colored_name(),
-              ' 一起庆祝了 ',
-              celebration,
-              '】',
-            ]);
+            era.print(i18n().timon.get_it_celebration(chara, celebration));
             await run_custom_daily(cid, event_hooks.celebration, {});
           }
         },
       });
     }
-    if (cid > 0 && era.get(`status:${cid}:生日`) === 2) {
+    // STATUSNAME:17 = 生日
+    if (cid > 0 && era.get(`status:${cid}:17`) === 2) {
       group.push({
         config: {
           buttonType: 'danger',
@@ -420,11 +430,11 @@ module.exports = async (cid, next_cb, flags) => {
             chara_base.time < 50 ||
             player_base.time < celebration_cost,
         },
-        content: '庆祝生日',
+        content: i18n().ui_birthday,
         async h() {
           sys_change_attr_and_print(0, attr_enum.tp, -celebration_cost);
           sys_change_attr_and_print(cid, attr_enum.tp, -50);
-          era.print(['【向 ', chara.get_colored_name(), ' 祝贺生日快乐】']);
+          era.print(i18n().timon.get_it_birthday(chara));
           await run_custom_daily(cid, event_hooks.birthday, {});
         },
       });
@@ -441,14 +451,12 @@ module.exports = async (cid, next_cb, flags) => {
     if (is_love_rejected > 0 && is_love_rejected === era.get(`love:${cid}`)) {
       group.push({
         config: { disabled: not_in_same_loc },
-        content: '重新触发爱慕事件',
+        content: i18n().ui_check_love,
         async h() {
-          era.set(`cflag:${cid}:爱慕暂拒`, 0);
+          // CFLAGNAME:46 = 爱慕暂拒
+          era.set(`cflag:${cid}:46`, 0);
           get_custom_check(cid).check_love_events();
-          await era.printAndWait([
-            get_chara_talk(cid).get_colored_name(),
-            { content: ' 似乎决定重新审视你们之间的关系……' },
-          ]);
+          await era.printAndWait(i18n().timon.get_it_check_love(chara));
         },
       });
     }
@@ -456,24 +464,23 @@ module.exports = async (cid, next_cb, flags) => {
       cid > 0 &&
       !common_no_action_check(cid) &&
       basement_owners.is_empty() &&
-      era.get('flag:惩戒力度') >= 2 &&
-      !era.get(`status:${cid}:伤病`) &&
-      era.get(`base:${cid}:压力`) < pressure_border.depression
+      // FLAGNAME:35 = 惩戒力度
+      era.get('flag:35') >= 2 &&
+      // STATUSNAME:5 = 伤病
+      !era.get(`status:${cid}:5`) &&
+      // BASENAME:11 = 压力
+      era.get(`base:${cid}:11`) < pressure_border.depression
     ) {
       group.push({
         config: {
           disabled: !cid || !awake.chara || !awake.me || not_in_same_loc,
         },
-        content: '乞求狂爱',
+        content: i18n().ui_basement_me,
         async h() {
           basement_owners.push(cid);
-          await era.printAndWait([
-            { content: '听了 ' },
-            get_chara_talk(0).get_colored_name(),
-            { content: ' 的请求，' },
-            get_chara_talk(cid).get_colored_name(),
-            { content: ' 似乎有些意动……' },
-          ]);
+          await era.printAndWait(
+            i18n().timon.get_it_basement_me(chara, get_chara_talk(0)),
+          );
         },
       });
     }
@@ -491,14 +498,15 @@ module.exports = async (cid, next_cb, flags) => {
             ? 'danger'
             : 'warning',
           disabled:
-            era.get('flag:当前月') >= 4 ||
+            // FLAGNAME:2 = 当前月
+            era.get('flag:2') >= 4 ||
             !awake.me ||
             sys_check_act_disabled(
               sys_get_move_cost(location_enum.playground),
               player_base,
             ) > 0,
         },
-        content: '前往训练场 (招募)',
+        content: i18n().ui_recruit,
         async h() {
           sys_handle_action(sys_get_move_cost(location_enum.playground));
           await print_recruit_page();

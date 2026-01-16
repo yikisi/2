@@ -113,9 +113,10 @@ function sys_get_chara_pseudo(cid) {
     (buff) => Number(buff.substring(0, buff.indexOf('['))),
     false,
   );
-  temp = track2location[race_infos[era.get('flag:当前赛事')].track];
+  // FLAGNAME:7 = 当前赛事
+  temp = track2location[race_infos[era.get('flag:7')].track];
   if (temp) {
-    uma.base.language = era.get(`abl:${cid}:${temp.lan}语`);
+    uma.base.language = era.get(`abl:${cid}:${temp.lan}`);
   }
   temp = uma.attrs.reduce((p, c) => p + c, 0) / 5;
   uma.base.attr_err = uma.attrs.reduce((p, c) => p + (c - temp) ** 2, 0) / 5;

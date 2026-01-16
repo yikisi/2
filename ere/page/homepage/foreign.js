@@ -33,16 +33,10 @@ const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
+const { location2language } = require('#/data/race/race-location');
 const { attr_enum } = require('#/data/train-const');
 
-const location2language = {};
-location2language[location_enum.dubai] = location2language[
-  location_enum.new_york
-] = '英';
-location2language[location_enum.paris] = '法';
-location2language[location_enum.hongkong] = location2language[
-  location_enum.guangzhou
-] = '粤';
+const { i18n } = require('#/i18n/selector');
 
 /**
  * @param {number} cid
@@ -51,32 +45,38 @@ location2language[location_enum.hongkong] = location2language[
  */
 module.exports = async (cid, save_and_next_week, flags) => {
   const celebration = get_celebration();
-  const celebration_cost = 50 * (era.get('cflag:0:节日事件标记') + 1);
-  const cur_location = era.get('flag:当前位置');
-  const cur_weeks = era.get('flag:当前回合数');
+  // CFLAGNAME:56 = 节日事件标记
+  const celebration_cost = 50 * (era.get('cflag:0:56') + 1);
+  // FLAGNAME:4 = 当前位置
+  const cur_location = era.get('flag:4');
+  // FLAGNAME:0 = 当前回合数
+  const cur_weeks = era.get('flag:0');
   const event_marks = EventMarks.get(cid);
   const registered_race = sys_reg_race(cid).curr;
   const personal_action = get_custom_check(cid).get_personal_action();
+  // BASENAME:0 - 1 = 体力 - 精力
   const player_base = {
-    stamina: era.get('base:0:体力'),
-    time: era.get('base:0:精力'),
+    stamina: era.get('base:0:0'),
+    time: era.get('base:0:1'),
   };
   const chara_base =
     cid > 0
       ? {
-          stamina: era.get(`base:${cid}:体力`),
-          time: era.get(`base:${cid}:精力`),
+          stamina: era.get(`base:${cid}:0`),
+          time: era.get(`base:${cid}:1`),
         }
-      : undefined;
-  const not_in_same_loc =
-    era.get(`cflag:${cid}:位置`) !== era.get('cflag:0:位置');
-  const jpy = era.get('flag:当前马币');
+      : void 0;
+  // CFLAGNAME:45 = 位置
+  const not_in_same_loc = era.get(`cflag:${cid}:45`) !== era.get('cflag:0:45');
+  // FLAGNAME:16 = 当前马币
+  const jpy = era.get('flag:16');
+  const lan = location2language[cur_location];
   era.drawLine();
   era.printInColRows(
     [
       {
         accelerator: 100,
-        content: '查看队伍列表',
+        content: i18n().ui_show_team,
         type: 'button',
       },
       {
@@ -86,7 +86,10 @@ module.exports = async (cid, save_and_next_week, flags) => {
           width: 6,
         },
         // 训自己的话显示自主训练
-        content: `${!cid && sys_check_train_enabled(cid) ? '自主' : ''}训练`,
+        content:
+          !cid && sys_check_train_enabled(cid)
+            ? i18n().ui_self_train
+            : i18n().ui_train,
         type: 'button',
       },
       generate_race_button(cid, registered_race.week, cur_weeks),
@@ -96,10 +99,10 @@ module.exports = async (cid, save_and_next_week, flags) => {
           disabled:
             // 当然不能上自己
             !cid ||
-            // 没有性成熟不能上
-            era.get(`cflag:${cid}:成长阶段`) < 2 ||
+            // CFLAGNAME:65 = 成长阶段
+            era.get(`cflag:${cid}:65`) < 2 ||
             !sys_check_awake(0) ||
-            era.get(`cflag:${cid}:位置`) !== era.get('cflag:0:位置'),
+            not_in_same_loc,
           width: 6,
         },
         content: '邀请上床',
@@ -120,7 +123,6 @@ module.exports = async (cid, save_and_next_week, flags) => {
     [
       {
         accelerator: 201,
-        // 虚空聊天就更过分了！
         config: { disabled: !cid || !sys_check_awake(0), width: 6 },
         content: '聊天',
         type: 'button',
@@ -132,13 +134,16 @@ module.exports = async (cid, save_and_next_week, flags) => {
             not_in_same_loc ||
             !sys_check_awake(cid) ||
             !sys_check_awake(0) ||
-            (era.get(`abl:${cid}:${location2language[cur_location]}语`) === 5 &&
-              era.get(`abl:0:${location2language[cur_location]}语`) === 5) ||
+            (era.get(`abl:${cid}:${lan}`) === 5 &&
+              era.get(`abl:0:${lan}`) === 5) ||
             player_base.time < 400 ||
             (chara_base && chara_base.time < 400),
           width: 6,
         },
-        content: `${location2language[cur_location]}语学习`,
+        content: i18n().ui_foreign_study_template.replace(
+          '%LAN%',
+          i18n().tb_abl[lan],
+        ),
         type: 'button',
       },
       {
@@ -299,9 +304,7 @@ module.exports = async (cid, save_and_next_week, flags) => {
       break;
     case 202:
       era.drawLine();
-      await run_custom_edu(cid, event_hooks.foreign_study, {
-        lan: location2language[cur_location],
-      });
+      await run_custom_edu(cid, event_hooks.foreign_study, { lan });
       break;
     case 203:
       era.drawLine();

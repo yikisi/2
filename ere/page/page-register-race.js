@@ -228,7 +228,7 @@ async function reg_race_page() {
                 content:
                   race_infos[e].get_colored_name_with_class().content +
                   (is_foreign
-                    ? ` (${track2location[race_infos[e].track].con})`
+                    ? ` (${i18n().race[track2location[race_infos[e].track].con]})`
                     : '') +
                   (is_grand_live ? ' 🎤' : '') +
                   ((is_aim_race & 0b11) > 0 ? ' *' : ''),

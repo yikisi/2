@@ -34,6 +34,8 @@ const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const { attr_enum } = require('#/data/train-const');
 
+const { i18n } = require('#/i18n/selector');
+
 /**
  * @param {number} cid
  * @param {function(number,number,number):Promise} save_and_next_week
@@ -41,12 +43,15 @@ const { attr_enum } = require('#/data/train-const');
  */
 module.exports = async function (cid, save_and_next_week, flags) {
   const celebration = get_celebration();
-  const celebration_cost = 50 * (era.get('cflag:0:节日事件标记') + 1);
-  const cur_weeks = era.get('flag:当前回合数');
+  // CFLAGNAME:56 = 节日事件标记
+  const celebration_cost = 50 * (era.get('cflag:0:56') + 1);
+  // FLAGNAME:0 = 当前回合数
+  const cur_weeks = era.get('flag:0');
   const event_marks = EventMarks.get(cid);
-  const growth_stage = era.get(`cflag:${cid}:成长阶段`);
-  const not_in_same_loc =
-    era.get(`cflag:${cid}:位置`) !== era.get('cflag:0:位置');
+  // CFLAGNAME:65 = 成长阶段
+  const growth_stage = era.get(`cflag:${cid}:65`);
+  // CFLAGNAME:45 = 位置
+  const not_in_same_loc = era.get(`cflag:${cid}:45`) !== era.get('cflag:0:45');
   const personal_action = get_custom_check(cid).get_personal_action();
   const registered_race = sys_reg_race(cid).curr;
   era.drawLine();
@@ -54,7 +59,7 @@ module.exports = async function (cid, save_and_next_week, flags) {
     [
       {
         accelerator: 100,
-        content: '查看队伍列表',
+        content: i18n().ui_show_team,
         type: 'button',
       },
       {
@@ -64,7 +69,10 @@ module.exports = async function (cid, save_and_next_week, flags) {
           width: 6,
         },
         // 训自己的话显示自主训练
-        content: `${!cid && sys_check_train_enabled(cid) ? '自主' : ''}训练`,
+        content:
+          !cid && sys_check_train_enabled(cid)
+            ? i18n().ui_self_train
+            : i18n().ui_train,
         type: 'button',
       },
       generate_race_button(cid, registered_race.week, cur_weeks),

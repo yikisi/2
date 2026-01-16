@@ -311,15 +311,13 @@ class CustomizedMec {
    * @param {number} loc 要到达地点的ID
    */
   set_foreign_debuff(before_race, loc) {
-    era.set(
-      `status:${this.id}:水土不服`,
-      4 - era.get(`talent:${this.id}:身体素质`),
-    );
+    // STATUSNAME:8 = 水土不服
+    // TALENTNAME:17 = 身体素质
+    era.set(`status:${this.id}:8`, 4 - era.get(`talent:${this.id}:17`));
     if (before_race) {
-      era.set(
-        `status:${this.id}:客场作战`,
-        4 + era.get(`talent:${this.id}:自信程度`),
-      );
+      // STATUSNAME:9 = 客场作战
+      // TALENTNAME:1 = 自信程度
+      era.set(`status:${this.id}:`, 4 + era.get(`talent:${this.id}:1`));
     }
   }
 
