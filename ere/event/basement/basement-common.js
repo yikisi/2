@@ -17,8 +17,8 @@ class CustomizedBase {
    * @param {number} minutes
    * @param {boolean} [base_12]
    */
-  static get_cur_time(hours, minutes, base_12) {
-    return `${base_12 ? hours % 12 || 12 : hours} 点${minutes ? ` ${minutes} 分` : '整'}`;
+  static get_cur_time(hours, minutes, base_12 = false) {
+    return i18n().timon.basement.get_clock(hours, minutes, base_12);
   }
 
   constructor(chara_id) {

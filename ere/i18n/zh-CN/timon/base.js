@@ -9,6 +9,14 @@ const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
 module.exports = {
   /**
+   * @param {number} hours
+   * @param {number} minutes
+   * @param {boolean} [base_12]
+   */
+  get_clock(hours, minutes, base_12 = false) {
+    return `${base_12 ? (hours < 12 ? `上午 ${hours}` : `下午 ${hours % 12 || 12}`) : hours} 点${minutes ? ` ${minutes} 分` : '整'}`;
+  },
+  /**
    * @author 黑奴队长
    * @param {CharaTalk} chara
    */
