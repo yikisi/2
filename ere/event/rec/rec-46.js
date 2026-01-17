@@ -8,7 +8,10 @@ const { add_event, cb_enum } = require('#/event/queue');
 const CustomizedRecruit = require('#/event/rec/rec-common');
 
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const {
+  get_chara_talk,
+  say_by_passer_by_and_wait,
+} = require('#/utils/chara-talk-factory');
 const { say_by_passer_by } = require('#/utils/chara-talk-factory');
 
 const FalconEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-46');
@@ -78,7 +81,10 @@ module.exports = class extends CustomizedRecruit {
         await era.printAndWait(
           `对${falcon.teen_sex_title}来说，这也是所谓的顾此失彼吧。`,
         );
-        await say_by_passer_by(`怒气冲冲的人类教师`, `${falcon.name}！`);
+        await say_by_passer_by_and_wait(
+          '怒气冲冲的人类教师',
+          `${falcon.name}！`,
+        );
         await falcon.say_and_wait(`噫——`);
         await era.printAndWait(`一边是无辜的受害者，一边则是紧追不舍的敌人。`);
         await era.printAndWait(
@@ -396,8 +402,10 @@ module.exports = class extends CustomizedRecruit {
         new EventMarks(0).sub(event_hooks.out_river);
         new FalconEduMarks().after_recruit++;
         era.set('cflag:46:招募状态', recruit_flags.yes);
-        new FalconEduMarks().beginning++;
-        add_event(event_hooks.week_end, new EventObject(46, cb_enum.edu));
+        add_event(
+          event_hooks.week_end,
+          new EventObject(46, cb_enum.edu).set_arg('beginning'),
+        );
         era.set('flag:物色对象', 0);
         return true;
     }

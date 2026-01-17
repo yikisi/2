@@ -14,7 +14,7 @@ const FalconEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-46'
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const RaceHistory = require('#/data/race/model/race-history');
-const { class_enum } = require('#/data/race/model/race-info');
+const { class_enum, ground_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
 const aim_races = {};
@@ -31,42 +31,56 @@ aim_races[get_aim_race_index(race_enum.cham_cup, 2)] = 3;
 aim_races[get_aim_race_index(race_enum.toky_dai, 2)] = 3;
 
 module.exports = class extends CustomizedCheck {
-  check_after_race(extra_flag) {
-    const info = race_infos[extra_flag.race];
-    if (
-      (info.race_class === class_enum.G1 ||
-        info.race_class === class_enum.G2 ||
-        info.race_class === class_enum.G3 ||
-        info.race_class === class_enum.OP ||
-        info.race_class === class_enum['Pre-OP']) &&
-      extra_flag.rank === 1
-    ) {
-      new FalconEduMarks().race_count++;
-    }
-  }
-
   check_and_get_titles(aim_check) {
-    const races = new RaceHistory(this.id).get(),
-      titles = [];
+    const history = RaceHistory.get(this.id);
+    const races = history.get();
+    const titles = [];
+    const checks = {
+      japa_dir: check_aim_race(races, race_enum.japa_dir, 1, 1),
+      teio_sho: check_aim_race(races, race_enum.teio_sho, 2, 1),
+      toky_dai1: check_aim_race(races, race_enum.toky_dai, 1, 1),
+      toky_dai2: check_aim_race(races, race_enum.toky_dai, 2, 1),
+    };
     if (
-      check_aim_race(races, race_enum.japa_dir, 1, 1) &&
+      checks.japa_dir &&
       check_aim_race(races, race_enum.jbc_cls, 1, 1) &&
-      check_aim_race(races, race_enum.toky_dai, 1, 1) &&
+      checks.toky_dai1 &&
       check_aim_race(races, race_enum.febr_sta, 2, 1) &&
-      check_aim_race(races, race_enum.teio_sho, 2, 1) &&
+      checks.teio_sho &&
       check_aim_race(races, race_enum.jbc_cls, 2, 1) &&
       check_aim_race(races, race_enum.cham_cup, 2, 1) &&
-      check_aim_race(races, race_enum.toky_dai, 2, 1)
+      checks.toky_dai2
     ) {
       titles.push({
         c: get_chara_talk(46).color,
-        n: 'Top Idol',
+        n: this.get_personal_titles()[0],
       });
       aim_check && sys_personal_achievement.set(46, 1);
-    } else {
+    }
+    let max = 0;
+    let win = 0;
+    for (const r of history.get_values().slice(0)) {
+      const info = race_infos[r.race];
+      if (info.ground === ground_enum.dirt) {
+        if (r.rank === 1 && info.race_class <= class_enum.G3 && r.st === 0) {
+          win++;
+        } else {
+          win = 0;
+        }
+        if (win > max) {
+          max = win;
+        }
+      }
+    }
+    if (
+      checks.japa_dir &&
+      checks.teio_sho &&
+      (checks.toky_dai1 || checks.toky_dai2) &&
+      max >= 9
+    ) {
       titles.push({
         c: get_chara_talk(46).color,
-        n: '沙之飞隼',
+        n: this.get_personal_titles()[1],
       });
     }
     return titles;
@@ -184,6 +198,19 @@ module.exports = class extends CustomizedCheck {
         case 47 + 1:
           add_event(event_hooks.week_start, event_obj_special);
           break;
+        // 1月第2周 目标达成！
+        case 47 + 2:
+          if (
+            RaceHistory.get(this.id)
+              .get_values()
+              .filter((r) => r.race !== race_enum.begin_race && r.rank === 1) >=
+              2 &&
+            edu_weeks < 95
+          ) {
+            event_marks.target_finish++;
+            add_event(event_hooks.week_start, event_obj_special);
+          }
+          break;
         // 1月第三周 情人节
         case 47 + 6:
           add_event(event_hooks.week_start, event_obj_special);
@@ -296,13 +323,6 @@ module.exports = class extends CustomizedCheck {
         // 12月第四周 圣诞节
         case 95 + 48:
           add_event(event_hooks.week_start, event_obj_special);
-          break;
-        // 1月第2周 目标达成！
-        case 47 + 2:
-          if (new FalconEduMarks().race_count >= 2 && edu_weeks < 95) {
-            event_marks.target_finish++;
-            add_event(event_hooks.week_start, event_obj_special);
-          }
       }
     }
   }

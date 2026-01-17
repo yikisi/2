@@ -2,18 +2,13 @@ const era = require('#/era-electron');
 
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
-const { sys_get_callname } = require('#/system/sys-calc-chara-others');
+
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-/** @param {Record<string,function(CharaTalk,CharaTalk,CharaTalk,{wait_flag:boolean},FalconEduMarks,number,number,EventObject):Promise>} handlers */
+/** @param {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},FalconEduMarks,EventObject):Promise>} handlers */
 module.exports = (handlers) => {
-  const callname = sys_get_callname(46, 0);
-  let wait_flag = false;
-  handlers.next_beginning = async () => {
-    const me = get_chara_talk(0),
-      falcon = get_chara_talk(46);
+  handlers.next_beginning = async (falcon, me, callname) => {
     // 颤抖的双手 意象 梦中的故事 人物 交涉 细微的动作 脸庞 天空的变化 色彩 草原
-    //todo next_beginning无法触发
     await print_event_name(`First！偶像的第一步`, falcon);
     await era.printAndWait(`训练场\n`);
     era.printButton(`坚持住！最后一圈！`, 1);
@@ -103,10 +98,7 @@ module.exports = (handlers) => {
     );
   };
 
-  handlers[9] = async () => {
-    const me = get_chara_talk(0),
-      falcon = get_chara_talk(46);
-    const callname = sys_get_callname(46, 0);
+  handlers[9] = async (falcon, me, callname) => {
     const tokino = get_chara_talk(301);
     await print_event_name(`接下来也请多多指教⭐`, falcon);
     await era.printAndWait(`2月正是一年中最寒冷的日子。`);
@@ -285,14 +277,8 @@ module.exports = (handlers) => {
         `在飞鹰子的努力之下，在河边漂浮的废弃物全部都消失了。`,
       );
     }
-    wait_flag =
-      get_attr_and_print_in_event(46, [1000, 1000, 1000, 1000, 1000], 1000) ||
-      wait_flag;
   };
-  handlers[18] = async () => {
-    const me = get_chara_talk(0),
-      falcon = get_chara_talk(46);
-    const callname = sys_get_callname(46, 0);
+  handlers[18] = async (falcon, me, callname, flags) => {
     // 5月第3周
     await print_event_name(
       `于是大脑空空的${falcon.name}只剩下了一个念头`,
@@ -403,13 +389,11 @@ module.exports = (handlers) => {
         `在习得了${falcon.get_uma_sex_title()}偶像之心后的${falcon.name}，凭借其特有的敏感且细腻，吸引了大量的粉丝。`,
       );
     }
-    wait_flag =
-      get_attr_and_print_in_event(46, [10, 10, 10, 10, 10], 10) || wait_flag;
+    flags.wait_flag =
+      get_attr_and_print_in_event(46, [10, 10, 10, 10, 10], 10) ||
+      flags.wait_flag;
   };
-  handlers[24] = async () => {
-    const me = get_chara_talk(0),
-      falcon = get_chara_talk(46);
-    const callname = sys_get_callname(46, 0);
+  handlers[24] = async (falcon, me, callname, flags) => {
     await print_event_name(`薰衣草`, falcon);
     await era.printAndWait(`河边草地。\n`);
     await falcon.say_and_wait(`一直支持着飞鹰子的大家！飞鹰子现在终于`);
@@ -453,15 +437,11 @@ module.exports = (handlers) => {
       `唔——训练员${me.get_adult_sex_title()}对其他${falcon.get_uma_sex_title()}也会这么说吗？`,
     );
     await era.printAndWait(`${callname}假装没听到${falcon.name}的自言自语。`);
-    get_attr_and_print_in_event(46, [0, 0, 10, 0, 0], 0);
-    wait_flag =
-      get_attr_and_print_in_event(46, [10, 10, 10, 10, 10], 10) || wait_flag;
+    flags.wait_flag =
+      get_attr_and_print_in_event(46, [0, 0, 10, 0, 0], 0) || flags.wait_flag;
   };
 
-  handlers[30] = async () => {
-    const me = get_chara_talk(0),
-      falcon = get_chara_talk(46);
-    const callname = sys_get_callname(46, 0);
+  handlers[30] = async (falcon, me, callname, flags) => {
     await print_event_name('希望永远持续下去的日常', falcon);
     await falcon.say_and_wait(
       `训练员${me.get_adult_sex_title()}，飞鹰子最近找到了一个适合演出的场所，可以和飞鹰子一起去看看吗？`,
@@ -592,13 +572,11 @@ module.exports = (handlers) => {
     await era.printAndWait(
       `下意识的抬头看去，湛蓝的天空之中几朵积雨云无拘无束的飘动着。`,
     );
-    wait_flag =
-      get_attr_and_print_in_event(46, [10, 10, 10, 10, 10], 10) || wait_flag;
+    flags.wait_flag =
+      get_attr_and_print_in_event(46, [10, 10, 10, 10, 10], 10) ||
+      flags.wait_flag;
   };
-  handlers[40] = async () => {
-    const me = get_chara_talk(0),
-      falcon = get_chara_talk(46);
-    const callname = sys_get_callname(46, 0);
+  handlers[40] = async (falcon, me, callname, flags) => {
     // 夜间停止光合作用排出废气 为了摆脱某种“我已经过时、即将被埋葬”的恐惧。大量追赶新潮头试图击退自己的生存恐惧。
     await print_event_name('夜来香', falcon);
     await era.printAndWait(
@@ -704,7 +682,8 @@ module.exports = (handlers) => {
         `将手机调成免打扰后，${callname}继续陷入了睡眠之中。`,
       );
     }
-    wait_flag =
-      get_attr_and_print_in_event(46, [10, 10, 10, 10, 10], 10) || wait_flag;
+    flags.wait_flag =
+      get_attr_and_print_in_event(46, [10, 10, 10, 10, 10], 10) ||
+      flags.wait_flag;
   };
 };

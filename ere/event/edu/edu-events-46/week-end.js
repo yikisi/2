@@ -1,19 +1,23 @@
 const era = require('#/era-electron');
 
+const { sys_get_callname } = require('#/system/sys-calc-chara-others');
+
+const { add_event, cb_enum } = require('#/event/queue');
 const print_event_name = require('#/event/snippets/print-event-name');
+
+const { say_by_passer_by } = require('#/utils/chara-talk');
+const {
+  get_chara_talk,
+  say_by_passer_by_and_wait,
+} = require('#/utils/chara-talk-factory');
 
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const { location_enum } = require('#/data/locations');
-const { add_event, cb_enum } = require('#/event/queue');
-const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
-const { sys_get_callname } = require('#/system/sys-calc-chara-others');
-const { say_by_passer_by } = require('#/utils/chara-talk');
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},FalconEduMarks,number,number,EventObject):Promise>} handlers */
 module.exports = (handlers = {}) => {
-  handlers.beginning = async (me, falcon, callname, flags) => {
+  handlers.beginning = async (me, falcon, callname) => {
     const flash = get_chara_talk(37);
     await print_event_name(`喊声隆隆的沙地赛`, falcon);
     // 对于偶像活动相当热枕，但对于比赛有点强迫自己上去，可能是对失败未来的恐惧
@@ -24,9 +28,8 @@ module.exports = (handlers = {}) => {
     // 然而，悲观往往是对自身所做成就的忽视，如果将看向未来的视野收回到自身不足5米的可操纵区域，反而会得到继续下去的动力
     // 过大的期待会造成止步不前，最终会被借口所埋没，良心也因此蒙尘，最后欠下一个又一个谎言的债务
     // 训练员遵守约定带飞鹰子看沙地赛
-    //todo 无法触发beginning
     await era.printAndWait(`某处的沙地赛\n`);
-    await say_by_passer_by(
+    await say_by_passer_by_and_wait(
       `解说`,
       `比赛已经进入最终阶段！二号选手与四号选手从马群之中脱颖而出，开始了最后的角逐！`,
     );
@@ -145,11 +148,6 @@ module.exports = (handlers = {}) => {
     );
     await flash.say_and_wait(`。`);
     await era.printAndWait(`既然如此。`);
-    flags.wait_flag = get_attr_and_print_in_event(
-      46,
-      [800, 800, 800, 800, 800],
-      1000,
-    );
     add_event(
       event_hooks.week_start,
       new EventObject(46, cb_enum.edu).set_arg('next_beginning'),

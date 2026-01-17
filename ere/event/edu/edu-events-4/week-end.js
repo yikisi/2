@@ -216,7 +216,6 @@ module.exports = async function (hook, ebj) {
       `作为你与${zensky.name}签约后的第一次正式见面，就这样结束了。`,
     );
     //风属性为1
-    wait_flag = get_attr_and_print_in_event(4, undefined, 120) || wait_flag;
   } else if (edu_marks.dream === 1) {
     await print_event_name(`焦鹿梦`, zensky);
     edu_marks.dream++;
@@ -1965,6 +1964,8 @@ module.exports = async function (hook, ebj) {
       get_attr_and_print_in_event(4, [10, 10, 10, 10, 10], undefined) ||
       wait_flag;
     edu_marks.mygo--;
+    // STATUSNAME:15 = 领域
+    era.set('status:46:15', 1);
   } else if (edu_weeks === 95 + 9) {
     // 皇帝与${chara_talk.name}见面，想让${chara_talk.name}看到不同的风景
     await print_event_name(`焱炎`, zensky);

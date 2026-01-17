@@ -18,10 +18,6 @@ class FalconEduMarks extends EduEventMarks {
   petrichor_girl;
 
   //育成部分
-  //请叫我飞鹰子
-  beginning;
-  // First！偶像的第一步
-  next_beginning;
   //训练开始
   start;
 
@@ -35,8 +31,6 @@ class FalconEduMarks extends EduEventMarks {
   idol_road;
   //目标达成
   target_finish;
-  // 赛事胜利检查 - 胜利次数
-  race_count;
   // 招募标记
   after_recruit;
   // TE 顶级马娘偶像
