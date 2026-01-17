@@ -83,15 +83,12 @@ module.exports = class extends CustomizedCheck {
       add_event(event_hooks.week_end, event_obj);
     } else if (love === 99) {
       add_event(event_hooks.week_end, event_obj);
-    } else if (love === 100) {
-      add_event(event_hooks.week_end, event_obj);
     }
   }
 
   check_next_week() {
     const edu_weeks = era.get('cflag:46:育成回合计时');
     if (edu_weeks < 3 * 48) {
-      const love = era.get('love:46');
       const event_marks = new FalconEduMarks();
       const event_obj = new EventObject(46, cb_enum.edu);
       const event_obj_special = new EventObject(46, cb_enum.edu, true).set_arg(
@@ -154,15 +151,7 @@ module.exports = class extends CustomizedCheck {
         event_hooks.school_atrium,
         event_obj,
       );
-      if (love === 100) {
-        check_and_add_event(
-          event_marks,
-          edu_weeks,
-          'lucky_girl',
-          event_hooks.week_start,
-          event_obj,
-        );
-      }
+
       switch (edu_weeks) {
         // 前期 压力 马币不足 艰难的初期 资源匮乏造成的恐慌
         // 1-24周 三个事件  高架桥捡垃圾 资源匮乏 压力过大
@@ -370,7 +359,6 @@ module.exports = class extends CustomizedCheck {
     return buffer;
   }
 
-  // TODO 记得更新title-desc.json
   get_personal_titles() {
     return ['Top Idol⭐', '沙之飞隼'];
   }

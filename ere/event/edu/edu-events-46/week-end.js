@@ -7,6 +7,7 @@ const EventObject = require('#/data/event/event-object');
 const { location_enum } = require('#/data/locations');
 const { add_event, cb_enum } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
+const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 const { say_by_passer_by } = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
@@ -22,7 +23,8 @@ module.exports = (handlers = {}) => {
     // 因此，不过只是装作乐观的悲观者罢了
     // 然而，悲观往往是对自身所做成就的忽视，如果将看向未来的视野收回到自身不足5米的可操纵区域，反而会得到继续下去的动力
     // 过大的期待会造成止步不前，最终会被借口所埋没，良心也因此蒙尘，最后欠下一个又一个谎言的债务
-    // 训练员遵守约定带${falcon.name}看沙地赛
+    // 训练员遵守约定带飞鹰子看沙地赛
+    //todo 无法触发beginning
     await era.printAndWait(`某处的沙地赛\n`);
     await say_by_passer_by(
       `解说`,
@@ -34,7 +36,7 @@ module.exports = (handlers = {}) => {
     );
     await say_by_passer_by(`赛${falcon.get_uma_sex_title()}`, `哈啊啊啊啊！`);
     await era.printAndWait(
-      `两名马娘在前半段的比赛中一直位于先头阵营，但并未真正与马群拉开差距。直到最后的冲刺阶段才骤然加速，将马群逐渐甩在后面。`,
+      `两名${falcon.uma_sex_title}在前半段的比赛中一直位于先头阵营，但并未真正与马群拉开差距。直到最后的冲刺阶段才骤然加速，将马群逐渐甩在后面。`,
     );
     await era.printAndWait(
       `观众席上的尽然有序的加油助威声被戏剧性的场面划破而杂乱无章。`,
@@ -47,13 +49,15 @@ module.exports = (handlers = {}) => {
     await era.printAndWait(
       `追赶的${falcon.get_uma_sex_title()}与前方的${falcon.get_uma_sex_title()}并肩做好了超越的架势，而后——`,
     );
-    await falcon.say_and_wait(`这就是训练员先生想让我看到的画面吗？`);
+    await falcon.say_and_wait(
+      `这就是训练员${me.get_adult_sex_title()}想让我看到的画面吗？`,
+    );
     await era.printAndWait(`凝固的时间再次移动。`);
     await era.printAndWait(
       `取得胜利的${falcon.get_uma_sex_title()}，不顾浑身被沙土所覆盖，将混合着汗水与泪水的笑脸献给了观众们。\n\n`,
     );
     await era.printAndWait(
-      `场地的聚光灯集中照射在胜者的那位身上，其他马娘宛如众星拱月，将胜利的果实衬托得如此甜美诱人。`,
+      `场地的聚光灯集中照射在胜者的那位身上，其他${falcon.uma_sex_title}宛如众星拱月，将胜利的果实衬托得如此甜美诱人。`,
     );
     await era.printAndWait(
       `激动的喜悦也好，失败的不甘也罢，从喉咙之中挤出的不甘呐喊、喉咙嘶哑也要触及到的那片天空。`,
@@ -70,66 +74,74 @@ module.exports = (handlers = {}) => {
     await falcon.say_and_wait(`飞鹰子……飞鹰子感动得都要哭出来了！`);
     await era.printAndWait(`从出口处离开的${falcon.name}诉说着心中的感受。`);
     await falcon.say_and_wait(
-      `没想到沙地赛比想象中还要精彩，观众们的热情，还有马娘们为此付出的爱，与选择草地的马娘们都是一样的！`,
+      `没想到沙地赛比想象中还要精彩，观众们的热情，还有${falcon.uma_sex_title}们为此付出的爱，与选择草地的${falcon.uma_sex_title}们都是一样的！`,
     );
     await falcon.say_and_wait(`飞鹰子决定了！`);
-    await era.printAndWait(`被热情点燃的少女认真的看向你。`);
+    await era.printAndWait(
+      `被热情点燃的${falcon.teen_sex_title}认真的看向${callname}。`,
+    );
     await falcon.say_and_wait(
-      `飞鹰子要以沙地赛为起点，顺着这条赛道一气不停的直直冲向顶级马娘偶像的终点！`,
+      `飞鹰子要以沙地赛为起点，顺着这条赛道一气不停的直直冲向顶级${falcon.uma_sex_title}偶像的终点！`,
     );
     await era.printAndWait(
-      `吵闹声引得周围的游客纷纷侧目，而醒目飞鹰的泥地偶像之路才刚刚开始。`,
+      `吵闹声引得周围的游客纷纷侧目，而${falcon.name}的泥地偶像之路才刚刚开始。`,
     );
     era.drawLine();
     await falcon.say_and_wait(`快到门禁时间了！那么明天见⭐`);
     await era.printAndWait(
-      `在目送载着醒目飞鹰的电车离开之后，偶然间看到了一个熟悉的身影。`,
+      `在目送载着${falcon.name}的电车离开之后，偶然间看到了一个熟悉的身影。`,
     );
     await me.say_and_wait(
       `荣进闪耀，是荣进闪耀小姐没错吧。今晚真是个风和日丽的好日子。`,
     );
     await era.printAndWait(
-      `考虑到由学生来打招呼有点让你不太舒服，同时抱着了解对方的目的，你主动向对方打起了招呼。`,
+      `考虑到由学生来打招呼有点让${callname}不太舒服，同时抱着了解对方的目的，${callname}主动向对方打起了招呼。`,
     );
-    await flash.say_and_wait(`是呢，晚上好哦，（玩家名字）先生/小姐。`);
+    await flash.say_and_wait(
+      `是呢，晚上好哦，${callname}${me.get_adult_sex_title()}/小姐。`,
+    );
     await me.say_and_wait(
-      `是在等待醒目飞鹰小姐回来吗？请放心，醒目飞鹰小姐已经平安回到宿舍中了。`,
+      `是在等待${falcon.name}小姐回来吗？请放心，${falcon.name}小姐已经平安回到宿舍中了。`,
     );
     await me.say_and_wait(
       `在路上听飞鹰小姐说过自己有个能严格按照计划表进行的室友。虽然在路上就有所期待了，不过现在看来本人比飞鹰小姐说的更加可靠。`,
     );
     await era.printAndWait(
-      `在路上听到醒目飞鹰提到过自己有个守时的室友，与对方打好关系比较重要。`,
+      `在路上听到${falcon.name}提到过自己有个守时的室友，与对方打好关系比较重要。`,
     );
     await flash.say_and_wait(
       `呵呵，您过奖了。只是为了能顺利执行预定的事项而应该做的事情而已，没有什么了不起的。`,
     );
     await flash.say_and_wait(
-      `不过既然提到飞鹰同学的话，说来也是巧合，我也在这段时间内不止一次听到她谈论起您来了呢。`,
+      `不过既然提到飞鹰同学的话，说来也是巧合，我也在这段时间内不止一次听到${falcon.sex}谈论起您来了呢。`,
     );
-    await era.printAndWait(`荣进闪耀轻笑了几声，随后便将话题指向了你。`);
+    await era.printAndWait(
+      `荣进闪耀轻笑了几声，随后便将话题指向了${callname}。`,
+    );
     await me.say_and_wait(`飞鹰小姐对我如此看重实在令我感到荣幸。`);
     await me.say_and_wait(`既然这样，我也对接下来的三年时光开始期待了呢。`);
     await flash.say_and_wait(`三年时光啊……`);
-    await era.printAndWait(`听到你提起这个词汇，荣进闪耀沉默片刻。`);
+    await era.printAndWait(`听到${callname}提起这个词汇，荣进闪耀沉默片刻。`);
     await flash.say_and_wait(
-      `（玩家名字）先生/小姐，虽然在现在这个时间点提起这个问题可能会有一些冒犯与唐突，不过还是请容我询问一句。`,
+      `${callname}${me.get_adult_sex_title()}/小姐，虽然在现在这个时间点提起这个问题可能会有一些冒犯与唐突，不过还是请容我询问一句。`,
     );
     await flash.say_and_wait(
-      `身为担当训练员，您已经对此做出相应的觉悟了吗？与飞鹰同学她一心同体，肩负起责任的觉悟。`,
+      `身为担当训练员，您已经对此做出相应的觉悟了吗？与飞鹰同学${falcon.sex}一心同体，肩负起责任的觉悟。`,
     );
     await era.printAndWait(`来了，就是这句！`);
     await era.printAndWait(`和想象中一样，闪耀一定是看重这份友谊。`);
-    await era.printAndWait(`如果要通过她的考验，这边夜的拿出同样的诚意才行。`);
+    await era.printAndWait(
+      `如果要通过${falcon.sex}的考验，这边夜的拿出同样的诚意才行。`,
+    );
     era.printButton(
-      '「我会像醉心于园艺的园丁一样精心呵护埋下去的种子，带着祝福与希望祈祷她能顺利绽放。」',
+      '「我会像醉心于园艺的园丁一样精心呵护埋下去的种子，带着祝福与希望祈祷${falcon.sex}能顺利绽放。」',
       1,
     );
     await era.input();
     await flash.say_and_wait(`真是相当感性的回答呢，既然如此，那我也放心了。`);
-    await era.printAndWait(`荣进闪耀朝你微微鞠躬，似乎是在表达谢意。`);
+    await era.printAndWait(`荣进闪耀朝${callname}微微鞠躬，似乎是在表达谢意。`);
     await flash.say_and_wait(
-      `飞鹰同学她以后就拜托给您了，作为她的朋友，如果您有任何需要的话，我也会竭力提供帮助的。`,
+      `飞鹰同学${falcon.sex}以后就拜托给您了，作为${falcon.sex}的朋友，如果您有任何需要的话，我也会竭力提供帮助的。`,
     );
     await flash.say_and_wait(`。`);
     await era.printAndWait(`既然如此。`);
@@ -144,11 +156,14 @@ module.exports = (handlers = {}) => {
     );
   };
 
-  handlers[34] = async (me, falcon) => {
+  handlers[34] = async () => {
+    const me = get_chara_talk(0),
+      falcon = get_chara_talk(46);
+    const callname = sys_get_callname(46, 0);
     await print_event_name(`向着闪耀大舞台不停歇的前进！`, falcon);
     await falcon.say_and_wait(`……呼⭐谢谢大家！`);
     await era.printAndWait(
-      `即兴歌曲串烧结束后，此起彼伏的掌声汇聚成了对醒目飞鹰的认可。`,
+      `即兴歌曲串烧结束后，此起彼伏的掌声汇聚成了对${falcon.name}的认可。`,
     );
     await era.printAndWait(
       `出道战结束后，在赛场以及舞台上闪闪发光的飞鹰子受到了大量的关注。`,
@@ -163,50 +178,54 @@ module.exports = (handlers = {}) => {
     );
     await me.say_and_wait(`辛苦了！`);
     await era.printAndWait(
-      `等到最后一名粉丝满意离开后，你走向了${falcon.name}。`,
+      `等到最后一名粉丝满意离开后，${callname}走向了${falcon.name}。`,
     );
     await era.printAndWait(
       `因为预料到了这种情况，所以提前向宿舍长申请了外宿许可。`,
     );
     await era.printAndWait(
-      `你将准备好的毛巾递给她时，被汗水打湿的触感混杂着奇异的香味跳动着人的神经。`,
+      `${callname}将准备好的毛巾递给${falcon.sex}时，被汗水打湿的触感混杂着奇异的香味跳动着人的神经。`,
     );
     await falcon.say_and_wait(`非常感谢⭐`);
     await era.printAndWait(
-      `你一边协助${falcon.name}将搭建的舞台重新收起，一边观察着醒目飞鹰的神情。`,
+      `${callname}一边协助${falcon.name}将搭建的舞台重新收起，一边观察着${falcon.name}的神情。`,
     );
     await falcon.say_and_wait(`～～～♪`);
     await era.printAndWait(`心情不错的${falcon.name}还沉浸在演出之中。`);
     await me.say_and_wait(`辛苦了！接下来我来善后吧。`);
-    await era.printAndWait(`正准备揽下所有收尾工作的你被尾巴扑打到了好几下。`);
+    await era.printAndWait(
+      `正准备揽下所有收尾工作的${callname}被尾巴扑打到了好几下。`,
+    );
     await falcon.say_and_wait(
       `看到这么多支持着我的粉丝们，自己好像充满了动力一样，能一口气唱到第二天早上！`,
     );
     await falcon.say_and_wait(`即使是收拾的时候心脏也在扑通扑通的乱跳呢。`);
     await falcon.say_and_wait(`……而且。`);
     await era.printAndWait(
-      `似乎沉浸在演出之中无法自拔的醒目飞鹰，轻轻拉扯着衣袖的${falcon.name}期待着你的答复。`,
+      `似乎沉浸在演出之中无法自拔的${falcon.name}，轻轻拉扯着衣袖的${falcon.name}期待着${callname}的答复。`,
     );
     await me.say_and_wait(
       `飞鹰子的表演非常精彩，作为一直关注着飞鹰子的粉丝真的很感动！`,
     );
     await falcon.say_and_wait(`……真的吗！`);
-    await era.printAndWait(`醒目飞鹰紧紧握住了你的手。`);
+    await era.printAndWait(`${falcon.name}紧紧握住了${callname}的手。`);
     await falcon.say_and_wait(`太好了！`);
     await era.printAndWait(`如果不是突然其来的咕噜声，一切都显得这么美好。`);
     await falcon.say_and_wait(`……啊哈哈，还好粉丝们不在呢。`);
-    await era.printAndWait(`略显尴尬的醒目飞鹰不好意思的低下了头。`);
+    await era.printAndWait(`略显尴尬的${falcon.name}不好意思的低下了头。`);
     await me.say_and_wait(`说起来的话，最近有家拉面店很火爆，去看看吧？`);
-    await era.printAndWait(`你看了眼时间，现在快步走过去还来得及。`);
+    await era.printAndWait(`${callname}看了眼时间，现在快步走过去还来得及。`);
     await falcon.say_and_wait(`——好⭐那现在就赶过去吧！`);
-    await era.printAndWait(`醒目飞鹰拉住了你的手，你突然有种不祥的预感。`);
+    await era.printAndWait(
+      `${falcon.name}拉住了${callname}的手，${callname}突然有种不祥的预感。`,
+    );
     await falcon.say_and_wait(`——3，1！出发！`);
     era.drawLine({ content: '拉面店内' });
     await falcon.say_and_wait(
       `哇——啊啊！比想象中还美味呢，飞鹰子现在充满能量了⭐`,
     );
     await era.printAndWait(
-      `你看着${falcon.name}在马推上发出的拉着你与精心摆放的两碗拉面的合照。`,
+      `${callname}看着${falcon.name}在马推上发出的拉着${callname}与精心摆放的两碗拉面的合照。`,
     );
     await me.say_and_wait(`真是厉害啊。`);
     await era.printAndWait(
@@ -220,7 +239,10 @@ module.exports = (handlers = {}) => {
       `${falcon.get_uma_sex_title()}偶像究竟是什么？恐怕现在还没定论。`,
     );
   };
-  handlers[47 + 12] = async (_, falcon) => {
+  handlers[47 + 12] = async () => {
+    const me = get_chara_talk(0),
+      falcon = get_chara_talk(46);
+    const callname = sys_get_callname(46, 0);
     // 默认皋月赏结束
     // 演出结束之后，回到学校时发现缎带掉了一根，急忙寻找，离宵禁很近，抉择
     // 到失去地点，没找到，绝望时，被匆匆赶来的小${falcon.get_uma_sex_title()}捡到，被询问与训练员之间的感情
@@ -229,20 +251,22 @@ module.exports = (handlers = {}) => {
     await print_event_name(`早已察觉的恋心`, falcon);
     await era.printAndWait(`宿舍\n`);
     await falcon.say_and_wait(
-      `训练员${falcon.get_uma_sex_title()}，谢谢你送飞鹰子回宿舍！`,
+      `训练员${falcon.get_uma_sex_title()}，谢谢${callname}送飞鹰子回宿舍！`,
     );
     await era.printAndWait(
-      `目送着（玩家名）渐渐消失在转角处，带着微笑的${falcon.name}也转身离开。`,
+      `目送着${callname}渐渐消失在转角处，带着微笑的${falcon.name}也转身离开。`,
     );
     await era.printAndWait(
-      `因为参加比赛的缘故，同时也要满足一直支持${falcon.name}的愿望，为了在这两者之间保持平衡，你努力说服了${falcon.name}在参加比赛这个星期减少突击演出的时间。`,
+      `因为参加比赛的缘故，同时也要满足一直支持${falcon.name}的愿望，为了在这两者之间保持平衡，${callname}努力说服了${falcon.name}在参加比赛这个星期减少突击演出的时间。`,
     );
     await era.printAndWait(
       `为了珍惜宝贵的演出时间，${falcon.name}比以往更加努力的闪耀着。`,
     );
     await falcon.say_and_wait(`……训练员${falcon.get_uma_sex_title()}。`);
     falcon.print(`起床——上课——训练——演出——回宿舍，如流水一样平静的日常。`);
-    falcon.print(`目送训练员先生消失在道路的转角处，已经是我日常的一部分了。`);
+    falcon.print(
+      `目送训练员${me.get_adult_sex_title()}消失在道路的转角处，已经是我日常的一部分了。`,
+    );
     falcon.print(
       `为了让更多的人露出笑容，坚持着偶像活动直到精疲力竭为止，每天也因此过得很充实。`,
     );
@@ -259,7 +283,7 @@ module.exports = (handlers = {}) => {
       `因为比赛开始时恰好是工作日的缘故所以没能亲自观看吗……虽然这么想，但还是草地一边的比赛更吸引人吧。`,
     );
     falcon.print(
-      `皋月赏的舞台更大，参与的马娘更强，坐在远比飞鹰参与的泥地赛更大的观众席上观看比赛的粉丝也更多。`,
+      `皋月赏的舞台更大，参与的${falcon.uma_sex_title}更强，坐在远比飞鹰参与的泥地赛更大的观众席上观看比赛的粉丝也更多。`,
     );
     falcon.print(`说起来，还是有些不甘心呢——`);
     falcon.print(`决定了！飞鹰子要以最闪耀的姿态带给大家幸福！`);
@@ -302,7 +326,9 @@ module.exports = (handlers = {}) => {
       `特雷森门口，沿着商业街的小道，直到目的地河边草地，一路上都没有缎带的样子。`,
     );
     falcon.print(`就像是缎带长出了翅膀扑哧扑哧飞走了一样。`);
-    falcon.print(`啊啊，亲爱的缎带小姐，希望你在伊甸园的生活一直顺利。`);
+    falcon.print(
+      `啊啊，亲爱的缎带小姐，希望${callname}在伊甸园的生活一直顺利。`,
+    );
     falcon.print(`将胡乱的思绪甩开，飞鹰子重新意识到了一件事。`);
     await falcon.say_and_wait(`离宵禁已经过去半个小时了吧！怎么办！`);
     falcon.print(`恐怕得知情况的特雷森现在正焦急地寻找着飞鹰子吧。`);
@@ -344,50 +370,56 @@ module.exports = (handlers = {}) => {
     );
     era.drawLine();
     falcon.print(
-      `小心翼翼将缎带收进口袋之中，看着眼前为了归还缎带而偷偷离开的少女。`,
+      `小心翼翼将缎带收进口袋之中，看着眼前为了归还缎带而偷偷离开的${falcon.teen_sex_title}。`,
     );
     falcon.print(`失而复得的安慰感转瞬又被自责所覆盖。`);
     falcon.print(`如果没有为了缎带逃了宵禁的话，飞鹰子恐怕会陷入自责之中。`);
     falcon.print(
-      `看着眼前期待着表扬的少女，至少飞鹰子会负起责任好好把你送回去的。`,
+      `看着眼前期待着表扬的${falcon.teen_sex_title}，至少飞鹰子会负起责任好好把${callname}送回去的。`,
     );
     await era.printAndWait(
-      `${falcon.name}蹲下身体，努力保证自己的视线与少女平行。`,
+      `${falcon.name}蹲下身体，努力保证自己的视线与${falcon.teen_sex_title}平行。`,
     );
     await falcon.say_and_wait(
-      `谢谢你，飞鹰子一定会为了大家努力成为${falcon.get_uma_sex_title()}偶像的。`,
+      `谢谢${callname}，飞鹰子一定会为了大家努力成为${falcon.get_uma_sex_title()}偶像的。`,
     );
     falcon.print(
       `学着训练员${falcon.get_uma_sex_title()}抚摸的手法，尽可能温柔的笑着。`,
     );
     await falcon.say_and_wait(`抱歉，飞鹰子还是太不成熟了。`, true);
-    falcon.print(`向着心中的训练员先生道歉，后者只是苦笑的摇摇头。`);
-    await falcon.say_and_wait(`让飞鹰子姐姐送你回去吧。`);
+    falcon.print(
+      `向着心中的训练员${me.get_adult_sex_title()}道歉，后者只是苦笑的摇摇头。`,
+    );
+    await falcon.say_and_wait(`让飞鹰子姐姐送${callname}回去吧。`);
     await say_by_passer_by(
       `小${falcon.get_uma_sex_title()}`,
       `欸？真的吗！飞鹰子姐姐要送我回去了！`,
     );
     falcon.print(
-      `眼前的少女为了自己帮助到了他人而雀跃着，就像是飞鹰子所做的一样。`,
+      `眼前的${falcon.teen_sex_title}为了自己帮助到了他人而雀跃着，就像是飞鹰子所做的一样。`,
     );
     falcon.print(
-      `突然意识到自己给训练员先生添了多少麻烦的时候，背后传来一阵灼烧感。`,
+      `突然意识到自己给训练员${me.get_adult_sex_title()}添了多少麻烦的时候，背后传来一阵灼烧感。`,
     );
     await falcon.say_and_wait(`一起前往最闪耀的舞台吧！`);
-    falcon.print(`将破损的缎带小心收起，轻轻牵起少女的小手。`);
+    falcon.print(
+      `将破损的缎带小心收起，轻轻牵起${falcon.teen_sex_title}的小手。`,
+    );
     era.drawLine();
     await say_by_passer_by(
       `小${falcon.get_uma_sex_title()}`,
-      `谢谢你送我回家！`,
+      `谢谢${callname}送我回家！`,
     );
     await era.printAndWait(
       `在居民楼的门口，小${falcon.get_uma_sex_title()}向${falcon.name}道谢。`,
     );
     await falcon.say_and_wait(`不，我这边才是。`);
     falcon.print(`苦笑着做出了回礼。`);
-    falcon.print(`小马娘的父母经常出差，每天她都是独自一人上下学。`);
     falcon.print(
-      `虽然试着问了要不要每天接她，却被对方以不能麻烦他人而拒绝了。`,
+      `小${falcon.uma_sex_title}的父母经常出差，每天${falcon.sex}都是独自一人上下学。`,
+    );
+    falcon.print(
+      `虽然试着问了要不要每天接${falcon.sex}，却被对方以不能麻烦他人而拒绝了。`,
     );
     falcon.print(`这份执拗感有点像小时候的飞鹰子呢。`);
     await falcon.say_and_wait(
@@ -403,7 +435,7 @@ module.exports = (handlers = {}) => {
     );
     await say_by_passer_by(
       `小${falcon.get_uma_sex_title()}`,
-      `是想到训练员先生了吗？`,
+      `是想到训练员${me.get_adult_sex_title()}了吗？`,
     );
     falcon.print(`不，不是这种关系。`);
     falcon.print(`正打算这么反驳时，却怎么也说不出口。`);
@@ -413,17 +445,22 @@ module.exports = (handlers = {}) => {
       `明天我也会看飞鹰子姐姐的表演的！`,
     );
     falcon.print(`大门在眼前缓缓关上了。`);
-    falcon.print(`连小马娘都已经看出来了吗？`);
+    falcon.print(`连小${falcon.uma_sex_title}都已经看出来了吗？`);
     falcon.print(
-      `在没有实现马娘偶像的理想前，还是在众人面前稍微保持一点距离吧。`,
+      `在没有实现${falcon.uma_sex_title}偶像的理想前，还是在众人面前稍微保持一点距离吧。`,
     );
     falcon.print(`不过\n`);
-    await falcon.say_and_wait(`飞鹰子原来给训练员先生添了这么大麻烦吗？`);
+    await falcon.say_and_wait(
+      `飞鹰子原来给训练员${me.get_adult_sex_title()}添了这么大麻烦吗？`,
+    );
     await era.printAndWait(
-      `第二天，小${falcon.get_uma_sex_title()}一家向特雷森表达了对${falcon.name}送小${falcon.get_uma_sex_title()}回家的感谢，为此（玩家名）被手纲小姐狠狠的批评了。`,
+      `第二天，小${falcon.get_uma_sex_title()}一家向特雷森表达了对${falcon.name}送小${falcon.get_uma_sex_title()}回家的感谢，为此${callname}被手纲小姐狠狠的批评了。`,
     );
   };
-  handlers[47 + 21] = async (me, falcon) => {
+  handlers[47 + 21] = async () => {
+    const me = get_chara_talk(0),
+      falcon = get_chara_talk(46);
+    const callname = sys_get_callname(46, 0);
     await print_event_name(`训练室的花`, falcon);
     era.printButton(`终于结束了。`, 1);
     await era.input();
@@ -452,20 +489,22 @@ module.exports = (handlers = {}) => {
       `呆在空旷的训练室里，不知不觉间消极的想法就从记忆的角落里溢出。`,
     );
     await falcon.say_and_wait(`训练员${me.get_adult_sex_title()}我回来了⭐`);
-    await era.printAndWait(`醒目飞鹰圆圆的小脑袋从推门的间隙中窜了出来。`);
+    await era.printAndWait(
+      `${falcon.name}圆圆的小脑袋从推门的间隙中窜了出来。`,
+    );
     await me.say_and_wait(`辛苦了。在今天的训练开始之前，先休息一会吧。`);
     await era.printAndWait(
-      `为了重新振作起来，你离开座位，帮${falcon.name}倒了一杯红茶。`,
+      `为了重新振作起来，${callname}离开座位，帮${falcon.name}倒了一杯红茶。`,
     );
     await era.printAndWait(`然后看着眼前坐正的${falcon.name}。`);
     await era.printAndWait(
       `与平时的${falcon.name}相比，手中多了一份不知是谁赠送的种子。`,
     );
     await era.printAndWait(
-      `${falcon.name}察觉到了你的视线，耳朵动了动，然后将手中的小袋子挥了挥。`,
+      `${falcon.name}察觉到了${callname}的视线，耳朵动了动，然后将手中的小袋子挥了挥。`,
     );
     await era.printAndWait(
-      `在你和醒目飞鹰的努力之下，${falcon.get_uma_sex_title()}偶像的概念总算推了出去。`,
+      `在${callname}和${falcon.name}的努力之下，${falcon.get_uma_sex_title()}偶像的概念总算推了出去。`,
     );
     await era.printAndWait(
       `现如今，一提到${falcon.get_uma_sex_title()}偶像，关注沙地的观众们都会想到${falcon.name}。`,
@@ -478,7 +517,7 @@ module.exports = (handlers = {}) => {
       `不少粉丝都把${falcon.name}当作了自己理想的投影，所以帮助自己也是理所应当的吧？`,
     );
     await era.printAndWait(
-      `如果是信件，则会由身为训练员的你筛选之后再给${falcon.name}看，如果是包装的礼物也是同理。`,
+      `如果是信件，则会由身为训练员的${callname}筛选之后再给${falcon.name}看，如果是包装的礼物也是同理。`,
     );
     await era.printAndWait(
       `${falcon.name}意外的在这方面表现的很顺从，同时也有粉丝们之间的自律缘故，所以现在${falcon.sex}的小脑袋还没被丧气话所淹没。`,
@@ -489,7 +528,7 @@ module.exports = (handlers = {}) => {
       `先将种子种在靠近窗户的阴影处，等发芽时再放在阳光之下吧。`,
     );
     await era.printAndWait(
-      `看着${falcon.name}将花盆放下后，啪嗒啪嗒地坐在了你的旁边。`,
+      `看着${falcon.name}将花盆放下后，啪嗒啪嗒地坐在了${callname}的旁边。`,
     );
     await falcon.say_and_wait(`啊，训练员${me.get_adult_sex_title()}`);
     await me.say_and_wait(`嗯？飞鹰子怎么了？`);
@@ -501,6 +540,7 @@ module.exports = (handlers = {}) => {
     await era.printAndWait(`时间便在闲聊与训练之中度过。`);
   };
   handlers[47 + 32] = async (me, falcon, _, event_object) => {
+    const callname = sys_get_callname(46, 0);
     if (
       era.get('cflag:0:位置') !== location_enum.beach ||
       era.get('cflag:0:位置') !== era.get('cflag:46:位置')
@@ -523,12 +563,12 @@ module.exports = (handlers = {}) => {
       `就这样活用在夏季合宿中学到的技巧，在赛场上让更多的粉丝们看到飞鹰子闪耀的一面⭐`,
     );
     await era.printAndWait(
-      `即使是马娘，兼顾训练以及小镇演出恐怕早已力不从心，但${falcon.get_uma_sex_title()}却只是稍作休息之后便着手做起了演出的准备。`,
+      `即使是${falcon.uma_sex_title}，兼顾训练以及小镇演出恐怕早已力不从心，但${falcon.get_uma_sex_title()}却只是稍作休息之后便着手做起了演出的准备。`,
     );
     era.printButton(`这样会不会太辛苦了？`, 1);
     await era.input();
     await falcon.say_and_wait(
-      `比起其他马娘来说，或许飞鹰子的特点就是活力的模样呢。`,
+      `比起其他${falcon.uma_sex_title}来说，或许飞鹰子的特点就是活力的模样呢。`,
     );
     await era.printAndWait(
       `作为${falcon.get_uma_sex_title()}偶像的${falcon.name}，受邀在小镇的告别演唱会上献唱。`,
@@ -539,7 +579,7 @@ module.exports = (handlers = {}) => {
     await me.say_and_wait(`今晚的演唱会对于粉丝们来说，一定是一生一次的演出！`);
     await era.printAndWait(`至少做好身为训练员的职责。`);
     await falcon.say_and_wait(
-      `对于训练员先生也是这样吗……飞鹰子现在充满了活力！`,
+      `对于训练员${me.get_adult_sex_title()}也是这样吗……飞鹰子现在充满了活力！`,
     );
     era.drawLine({ content: '演唱会结束后' });
     await falcon.say_and_wait(`～～～～♪ 谢谢大家！`);
@@ -548,14 +588,14 @@ module.exports = (handlers = {}) => {
       `在附近小镇里举行的演唱会意外的很有人气，甚至有因为听到飞鹰子要开演唱会而专门开了3个小时车过来赶过来的粉丝。`,
     );
     await era.printAndWait(
-      `对于很多人来说比起演出，能亲眼见证作为泥地偶像的醒目飞鹰才是真正的目的吧。`,
+      `对于很多人来说比起演出，能亲眼见证作为泥地偶像的${falcon.name}才是真正的目的吧。`,
     );
     await falcon.say_and_wait(
       `嗯嗯！大家的呼唤传达到了飞鹰子的耳朵里了！飞鹰子很高兴哦！`,
     );
     await say_by_passer_by(`粉丝们`, `再来一首！飞鹰子！再来一首！`);
     await falcon.say_and_wait(`那么就再来一首……`);
-    await era.printAndWait(`醒目飞鹰注意到了你的视线。`);
+    await era.printAndWait(`${falcon.name}注意到了${callname}的视线。`);
     await falcon.say_and_wait(
       `啊哈哈……现在已经很晚了，还有的粉丝是从很远的地方专门来看飞鹰子的演唱会的……作为${falcon.get_uma_sex_title()}偶像，飞鹰子必须为每一位粉丝考虑，所以非常抱歉！`,
     );
@@ -570,13 +610,13 @@ module.exports = (handlers = {}) => {
     await say_by_passer_by(`粉丝们`, `一直追到地平线的大舞台！`);
     await falcon.say_and_wait(`谢谢大家⭐`);
     await era.printAndWait(
-      `等到现场的粉丝们渐渐散去，整个舞台只剩下了${me.actual_name}和醒目飞鹰。`,
+      `等到现场的粉丝们渐渐散去，整个舞台只剩下了${me.actual_name}和${falcon.name}。`,
     );
     era.printButton(`太精彩了。`, 1);
     await era.input();
     await era.printAndWait(`${falcon.name}露出了满足的表情。`);
     await era.printAndWait(
-      `站在舞台之上蹦跳的双腿，在你轻轻抱起她的一瞬间便像破娃娃一样瘫软在了地上。`,
+      `站在舞台之上蹦跳的双腿，在${callname}轻轻抱起${falcon.sex}的一瞬间便像破娃娃一样瘫软在了地上。`,
     );
     await falcon.say_and_wait(`……真希望每天都能像现在这样。`);
     await era.printAndWait(`飞鹰子的${falcon.sex}眼里却依然闪闪发光。`);
@@ -587,10 +627,13 @@ module.exports = (handlers = {}) => {
       `沙地因为${falcon.name}的存在，原本只关心草地的观众们也慢慢将视线注视到了现在。`,
     );
     await me.say_and_wait(`一定会成功的！`);
-    await era.printAndWait(`听到你的话语后，醒目飞鹰看向了观众席。`);
+    await era.printAndWait(
+      `听到${callname}的话语后，${falcon.name}看向了观众席。`,
+    );
     await falcon.say_and_wait(`就这样一步步的迈向最高的舞台。`);
   };
   handlers[47 + 39] = async (me, falcon) => {
+    const callname = sys_get_callname(46, 0);
     // 萱草 忘忧草，寓意忘记烦恼。
     // 过量摄入可能会中毒
     await print_event_name('萱草', falcon);
@@ -607,7 +650,7 @@ module.exports = (handlers = {}) => {
     );
     await say_by_passer_by(`粉丝们`, `飞鹰子！飞鹰子！`);
     await era.printAndWait(
-      `……正如多大的名声就会迎来多大的考验，虽说是${falcon.name}自愿的缘故而奔波于各类广告之间，但繁忙时训练都被迫停止有点让你笑不出来。`,
+      `……正如多大的名声就会迎来多大的考验，虽说是${falcon.name}自愿的缘故而奔波于各类广告之间，但繁忙时训练都被迫停止有点让${callname}笑不出来。`,
     );
     await me.say_and_wait(`……等到现在的合同结束后，我必须和飞鹰子好好谈谈了。`);
     await era.printAndWait(
@@ -623,7 +666,7 @@ module.exports = (handlers = {}) => {
     );
     await say_by_passer_by(
       `狂热粉丝C`,
-      `开什么玩笑！我可是从飞鹰子还未出道的时候就已经开始支持飞鹰子的资深粉丝！虽然现在经济有点拮据……不过对飞鹰子的爱比你们更强！`,
+      `开什么玩笑！我可是从飞鹰子还未出道的时候就已经开始支持飞鹰子的资深粉丝！虽然现在经济有点拮据……不过对飞鹰子的爱比${callname}们更强！`,
     );
     await era.printAndWait(
       `被粉丝们称作「偶像制作人」的你，本职却几乎被人所遗忘，你看着越来越狂热的粉丝群体，心中的担忧越来越深。`,
@@ -633,7 +676,7 @@ module.exports = (handlers = {}) => {
     );
     await era.printAndWait(`暂且用这个理由安慰自己。`);
     await era.printAndWait(
-      `看着不远处在舞台之上与粉丝互动的少女，精神恐怕也已经到极限了吧。`,
+      `看着不远处在舞台之上与粉丝互动的${falcon.teen_sex_title}，精神恐怕也已经到极限了吧。`,
     );
   };
 };

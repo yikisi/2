@@ -22,21 +22,24 @@ const FalconEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-46'
 
 module.exports = class extends CustomizedDaily {
   select() {
-    const falcon = get_chara_talk(46);
+    const callname = sys_get_callname(46, 0),
+      falcon = get_chara_talk(46);
     let temp;
     const love = era.get('love:46'),
       me = get_chara_talk(0),
       buffer = [];
     if ((temp = new FalconEduMarks()).after_recruit) {
-      falcon.say(`一、二、目·标·是！TOP UMAIDOL（顶级马娘偶像）⭐`);
+      falcon.say(
+        `一、二、目·标·是！TOP UMAIDOL（顶级${falcon.uma_sex_title}偶像）⭐`,
+      );
       falcon.say(`向着最大最闪耀的舞台中央一口气冲刺♪`);
-      falcon.say('飞鹰子就是这样的马娘！');
+      falcon.say(`飞鹰子就是这样的${falcon.uma_sex_title}！`);
       falcon.say(
         `虽然现在还只是随处可见的草根偶像。但·是，只要飞鹰子能站在舞台的中央，飞鹰子就能吸引所有观众的注意力！`,
       );
       falcon.say(`然后飞鹰子的粉丝们也会哗～地一口气增多吧。`);
       falcon.say(
-        `随着粉丝数的不断增加，飞鹰子成为顶级马娘偶像的目标也会一口气实现！。`,
+        `随着粉丝数的不断增加，飞鹰子成为顶级${falcon.uma_sex_title}偶像的目标也会一口气实现！。`,
       );
       falcon.say(`粉丝一号${me.get_adult_sex_title()}，接下来也请多多指教了⭐`);
       temp.after_recruit--;
@@ -48,16 +51,16 @@ module.exports = class extends CustomizedDaily {
             '打起精神来！飞鹰子必须回应粉丝们的期待才行！',
             '飞鹰子，加油！',
           ],
-          `勉强打起精神的${falcon.name}，带着略微疲惫的神态看着你。`,
+          `勉强打起精神的${falcon.name}，带着略微疲惫的神态看着${callname}。`,
         ]);
       } else {
         buffer.push(
           [
             [
-              `不回应粉丝们的期待可不是合格的马娘偶像！`,
+              `不回应粉丝们的期待可不是合格的${falcon.uma_sex_title}偶像！`,
               `训练员${me.get_adult_sex_title()}，今天的训练计划是什么？`,
             ],
-            `早早来到训练室的${falcon.name}等待着你的指令。`,
+            `早早来到训练室的${falcon.name}等待着${callname}的指令。`,
           ],
           [
             [
@@ -74,9 +77,9 @@ module.exports = class extends CustomizedDaily {
             [
               `能够遇到训练员${me.get_adult_sex_title()}真是太好了！`,
               `虽然飞鹰子现在还是处于偶像的位置……不过既然是偶像的话给予粉丝一号稍微特殊福利也不错吧`,
-              `在前往马娘偶像的道路之上，依然希望粉丝一号${me.get_adult_sex_title()}能和我一起努力呢`,
+              `在前往${falcon.uma_sex_title}偶像的道路之上，依然希望粉丝一号${me.get_adult_sex_title()}能和我一起努力呢`,
             ],
-            `飞鹰子在你进入训练室的瞬间就紧紧抱住了你`,
+            `飞鹰子在${callname}进入训练室的瞬间就紧紧抱住了${callname}`,
           ]);
         } else if (love > 90) {
           buffer.push([
@@ -104,7 +107,7 @@ module.exports = class extends CustomizedDaily {
                 `飞鹰子一直在训练室等着训练员${me.get_adult_sex_title()}呢！`,
                 `今天的训练也要努力！`,
               ],
-              `想到什么就立刻会去实践的${falcon.name}今天也等待着你的到来。`,
+              `想到什么就立刻会去实践的${falcon.name}今天也等待着${callname}的到来。`,
             ],
             [
               [
@@ -112,7 +115,7 @@ module.exports = class extends CustomizedDaily {
                 `要作为能站在舞台中央的顶级偶像，飞鹰子还要更努力一点才行！`,
                 `好！现在开始训练！`,
               ],
-              `${falcon.name}在训练场等待着你的指令。`,
+              `${falcon.name}在训练场等待着${callname}的指令。`,
             ],
           );
         } else {
@@ -122,7 +125,7 @@ module.exports = class extends CustomizedDaily {
               `去学习偶像方面的技巧还是先去练习一下昨天新学会的舞步呢？`,
               `究竟哪个更好呢。呜～要是飞鹰子能分成两个就好了呢。`,
             ],
-            `在训练时三心二意可无法成为顶级马娘偶像。`,
+            `在训练时三心二意可无法成为顶级${falcon.uma_sex_title}偶像。`,
           ]);
         }
       }
@@ -133,7 +136,8 @@ module.exports = class extends CustomizedDaily {
   }
 
   good_morning() {
-    const falcon = get_chara_talk(46);
+    const callname = sys_get_callname(46, 0),
+      falcon = get_chara_talk(46);
     const love = era.get('love:46'),
       me = get_chara_talk(0),
       buffer = [];
@@ -145,12 +149,14 @@ module.exports = class extends CustomizedDaily {
             '昨天举办live不小心唱的太晚了',
             `今天的训练可以稍微推迟一会吗？`,
           ],
-          `你让飞鹰子圆圆的脑袋靠着自己的大腿让她在沙发上稍微睡得舒服一点`,
+          `${callname}让飞鹰子圆圆的脑袋靠着自己的大腿让${falcon.sex}在沙发上稍微睡得舒服一点`,
         ]);
       } else {
         buffer.push([
-          [`不过是这种程度而已，作为马娘偶像的飞鹰子没有问题哦⭐`],
-          `虽然嘴巴上这么说，但摇摇欲坠的身体还是出卖了她，不得已你只好让她先在沙发上睡一会`,
+          [
+            `不过是这种程度而已，作为${falcon.uma_sex_title}偶像的飞鹰子没有问题哦⭐`,
+          ],
+          `虽然嘴巴上这么说，但摇摇欲坠的身体还是出卖了${falcon.sex}，不得已${callname}只好让${falcon.sex}先在沙发上睡一会`,
         ]);
       }
     } else {
@@ -172,34 +178,34 @@ module.exports = class extends CustomizedDaily {
         buffer.push([
           [
             `亲爱的早上好，今天打算做什么呢？`,
-            `偶像也好作为普通的小马娘也好，能够遇到训练员${me.get_adult_sex_title()}，即使作为轻飘飘的世界也慢慢变得存在实感了`,
+            `偶像也好作为普通的小${falcon.uma_sex_title}也好，能够遇到训练员${me.get_adult_sex_title()}，即使作为轻飘飘的世界也慢慢变得存在实感了`,
           ],
-          `一大早${falcon.name}就充满活力的向你问好了`,
+          `一大早${falcon.name}就充满活力的向${callname}问好了`,
         ]);
       } else if (love >= 75) {
         buffer.push([
           [
             `训练员${me.get_adult_sex_title()}早上好⭐`,
-            `身为马娘偶像的飞鹰子今天也要努力闪耀哦！`,
+            `身为${falcon.uma_sex_title}偶像的飞鹰子今天也要努力闪耀哦！`,
             `所以作为粉丝一号的训练员${me.get_adult_sex_title()}今后也好好看着努力的飞鹰子！`,
           ],
-          `飞鹰子围着你吵吵闹闹的样子吸引了周围人们的目光`,
+          `飞鹰子围着${callname}吵吵闹闹的样子吸引了周围人们的目光`,
         ]);
       } else if (love >= 50) {
         buffer.push(
           [
             [
               `闪耀同学像是行走的计划表一样呢`,
-              `如果我也能像她这样有条不紊的处理事情就不会有这么多烦恼了`,
+              `如果我也能像${falcon.sex}这样有条不紊的处理事情就不会有这么多烦恼了`,
             ],
-            `在训练室中，飞鹰子向你搭话道`,
+            `在训练室中，飞鹰子向${callname}搭话道`,
           ],
           [
             [
               `偶像之路一直都是充满着艰辛和苦痛呢`,
               '飞鹰子有时候也不知道自己能不能继续坚持下去',
             ],
-            `在训练室与飞鹰子闲聊的时候她对你诉说着苦恼`,
+            `在训练室与飞鹰子闲聊的时候${falcon.sex}对${callname}诉说着苦恼`,
           ],
         );
       } else {
@@ -248,7 +254,7 @@ module.exports = class extends CustomizedDaily {
         break;
       case 2:
         talk_arr = [
-          `最强的马娘偶像——${falcon.name}，参上♪今天一定要把这份心意传达给训练员${me.get_adult_sex_title()}⭐`,
+          `最强的${falcon.uma_sex_title}偶像——${falcon.name}，参上♪今天一定要把这份心意传达给训练员${me.get_adult_sex_title()}⭐`,
           `训练员${me.get_adult_sex_title()}不去追赶可爱的${falcon.name}吗？不会逃跑的哦❤`,
           `在地平线的尽头会有什么呢～当然是飞鹰子的大舞台啦！不想一起去看看飞鹰子的舞台吗？`,
         ];
@@ -281,7 +287,7 @@ module.exports = class extends CustomizedDaily {
       era.get('flag:当前月') === 11
     )
       talk_arr.push(
-        `艺术之秋，食欲之秋……还有马娘偶像之秋⭐在红杏之下举办一场演唱会吧！`,
+        `艺术之秋，食欲之秋……还有${falcon.uma_sex_title}偶像之秋⭐在红杏之下举办一场演唱会吧！`,
         `训练员${me.get_adult_sex_title()}要一起去看赏叶吗？秋天一直被大家认为是多愁善感的季节呢……不过飞鹰子会让大家都露出笑容的！`,
       );
     if (
@@ -291,14 +297,15 @@ module.exports = class extends CustomizedDaily {
       era.get('flag:当前月') === 2
     )
       talk_arr.push(
-        `冬天让粉丝们的大家都瑟瑟发抖了呢…….所以作为马娘偶像的飞鹰子要将这份温暖从冬天手里交还到粉丝们的手中！现在就去开演唱会吧！`,
+        `冬天让粉丝们的大家都瑟瑟发抖了呢…….所以作为${falcon.uma_sex_title}偶像的飞鹰子要将这份温暖从冬天手里交还到粉丝们的手中！现在就去开演唱会吧！`,
         `冬天适合坐在温暖的围炉之前，吃着橘子看着电视上的艺人们进行表演，就这样期待着春天的到来。`,
       );
     await falcon.say_and_wait(get_random_entry(talk_arr));
   }
 
   async office_gift() {
-    const falcon = get_chara_talk(46);
+    const callname = sys_get_callname(46, 0),
+      falcon = get_chara_talk(46);
     const me = get_chara_talk(0),
       talk_arr = [
         `这个是给飞鹰子的吗？非常感谢！`,
@@ -307,8 +314,8 @@ module.exports = class extends CustomizedDaily {
     // 好感100暗示剧情
     if (era.get('love:46') === 100) {
       talk_arr.push(
-        `比起（玩家名）赠送的礼物，更能感受到（玩家名）对飞鹰子的温柔呢。所以今后的日子里，也希望和训练员${me.get_adult_sex_title()}一起度过。`,
-        `这份礼物让飞鹰子感受到了（玩家名）全身心的爱与灵魂的重量呢，既然这样的话，飞鹰子也会将作为${falcon.name}与马娘偶像全身心的爱与灵魂送给粉丝一号${me.get_adult_sex_title()}，最喜欢你了！`,
+        `比起${me.actual_name}赠送的礼物，更能感受到${me.actual_name}对飞鹰子的温柔呢。所以今后的日子里，也希望和训练员${me.get_adult_sex_title()}一起度过。`,
+        `这份礼物让飞鹰子感受到了${me.actual_name}全身心的爱与灵魂的重量呢，既然这样的话，飞鹰子也会将作为${falcon.name}与${falcon.uma_sex_title}偶像全身心的爱与灵魂送给粉丝一号${me.get_adult_sex_title()}，最喜欢${callname}了！`,
       );
     } else if (era.get('love:46') >= 75) {
       talk_arr.push(
@@ -346,7 +353,7 @@ module.exports = class extends CustomizedDaily {
     const me = get_chara_talk(0),
       talk_arr = [
         '呜呜,飞鹰子不太擅长看书，考试都是靠闪耀同学提供的重点笔记前一天突击低空飘过的',
-        '如果赛马娘偶像史也能作为考试科目的话我一定能满分！不过为什么不考啊',
+        `如果赛${falcon.uma_sex_title}偶像史也能作为考试科目的话我一定能满分！不过为什么不考啊`,
       ];
     if (era.get('love:46') === 100) {
       talk_arr.push(
@@ -356,7 +363,7 @@ module.exports = class extends CustomizedDaily {
     } else if (era.get('love:46') >= 75) {
       talk_arr.push(
         `在训练员${me.get_adult_sex_title()}的辅导下，即使是最困难的数学也能摆脱低分通过的现状了⭐`,
-        `以前的话一直是在闪耀同学的辅导之下，不过现在她说着去问问自己的训练员吧，好奇怪啊`,
+        `以前的话一直是在闪耀同学的辅导之下，不过现在${falcon.sex}说着去问问自己的训练员吧，好奇怪啊`,
       );
     }
     await falcon.say_and_wait(get_random_entry(talk_arr));
@@ -372,7 +379,7 @@ module.exports = class extends CustomizedDaily {
     if (era.get('love:46') === 100) {
       talk_arr.push(
         `对于一直搬家的飞鹰子来说，故乡也是非常陌生的概念呢。`,
-        `小时候因为经常搬家的缘故，朋友也很少，所以有些内向呢……直到遇到了街头演出的偶像开始才慢慢开朗起来`,
+        `小时候因为经常搬家的缘故，朋友也很少，所以有些内向呢...直到遇到了街头演出的偶像开始才慢慢开朗起来`,
         `在飞鹰子充满闪闪发光亮晶晶的世界里，训练员${me.get_adult_sex_title()}可是最闪耀最珍贵的宝石哦，所以训练员${me.get_adult_sex_title()}可以在人生的道路上一直陪我走下去吗？`,
       );
     } else if (era.get('love:46') >= 75) {
@@ -396,7 +403,7 @@ module.exports = class extends CustomizedDaily {
     if (era.get('love:46') === 100) {
       talk_arr.push(
         `一定，一定要在接下来让最喜欢最喜欢的训练员${me.get_adult_sex_title()}好好看着飞鹰子从起跑到获胜的每一秒！`,
-        `经历了这么多迷茫与彷徨之时，能够在训练员${me.get_adult_sex_title()}的支持下站在最大的舞台上，不论是作为偶像还是马娘，${falcon.name}都～这么（双手张开画出了一个大爱心）喜欢训练员${me.get_adult_sex_title()}哦！`,
+        `经历了这么多迷茫与彷徨之时，能够在训练员${me.get_adult_sex_title()}的支持下站在最大的舞台上，不论是作为偶像还是${falcon.uma_sex_title}，${falcon.name}都～这么（双手张开画出了一个大爱心）喜欢训练员${me.get_adult_sex_title()}哦！`,
       );
     } else if (era.get('love:46') >= 75) {
       talk_arr.push(
@@ -423,7 +430,7 @@ module.exports = class extends CustomizedDaily {
       );
     } else if (era.get('love:46') >= 75) {
       talk_arr.push(
-        `飞鹰子很擅长随着动感节奏不断触及屏幕的游戏呢……欸，训练员${me.get_adult_sex_title()}你举起手机在拍视频吗？`,
+        `飞鹰子很擅长随着动感节奏不断触及屏幕的游戏呢……欸，训练员${me.get_adult_sex_title()}正在举起手机在拍视频吗？`,
         `说起来galgame作为文字冒险游戏也有相当悠久的历史了呢，训练员${me.get_adult_sex_title()}也会对它感兴趣吗？`,
         `托街头演出积累起来的经验，直播间的人数也在不断上升中！`,
         `不管是线上还是线下的粉丝，作为顶级偶像的飞鹰子都会平等对待的！`,
@@ -489,7 +496,8 @@ module.exports = class extends CustomizedDaily {
   }
 
   async out_church() {
-    const falcon = get_chara_talk(46);
+    const callname = sys_get_callname(46, 0),
+      falcon = get_chara_talk(46);
     const love = era.get('love:46'),
       me = get_chara_talk(0),
       chara340_talk = get_chara_talk(340),
@@ -500,18 +508,18 @@ module.exports = class extends CustomizedDaily {
     chara340_talk.name = '温柔的女神';
     chara341_talk.name = '睿智的女神';
     chara342_talk.name = '严肃的女神';
-    // 相传三女神下凡时啜饮过此处的清泉,于是这条山间的小溪便得到了她的祝福
+    // 相传三女神下凡时啜饮过此处的清泉,于是这条山间的小溪便得到了${falcon.sex}的祝福
     // 古代的人们便围绕着这条小溪建起了神社,前来参拜的人们祈求着事业或者爱情的成功
     if (edu_weeks < 47 + 15) {
       // 如果要宣传的话，为什么飞鹰子不去当志愿者或者做兼职巫女呢？
       // 如果是在这种地方活跃的话，对${falcon.name}印象深刻的人应该会有很多
       await era.printAndWait(`休息日的一天上午。`);
       await era.printAndWait(
-        `主动向神社申请作为志愿者的${falcon.name}拉着你来到了神社。`,
+        `主动向神社申请作为志愿者的${falcon.name}拉着${callname}来到了神社。`,
       );
       await falcon.say_and_wait(`早安⭐`);
       await falcon.say_and_wait(
-        `——即使在领放时依然闪闪发光的可爱马娘飞鹰子♪，应神社的邀请作为志愿者非常荣幸向大家介绍身后的景点。`,
+        `——即使在领放时依然闪闪发光的可爱${falcon.uma_sex_title}飞鹰子♪，应神社的邀请作为志愿者非常荣幸向大家介绍身后的景点。`,
       );
       await era.printAndWait(
         `身穿巫女服作为一日志愿者的${falcon.name}摇动着手中的御币。`,
@@ -529,23 +537,25 @@ module.exports = class extends CustomizedDaily {
       await falcon.say_and_wait(
         `——就是这样！作为偶像不好好回应粉丝的期待可不行！`,
       );
-      await falcon.say_and_wait(`飞鹰子会全力以赴回答你！`);
+      await falcon.say_and_wait(`飞鹰子会全力以赴回答${callname}！`);
       await era.printAndWait(
         `突然元气十足的声音似乎吓到了第一次前来的游客，但更多的游客却因为好奇而向这边靠近。`,
       );
       await falcon.say_and_wait(`很久很久以前，这条小溪比现在大的多得多。`);
       await falcon.say_and_wait(
-        `有一天，为了在世界各地创造马娘而不停奔走的三女神来到了这里，她们因为口渴而来到了这条小溪边。`,
+        `有一天，为了在世界各地创造${falcon.uma_sex_title}而不停奔走的三女神来到了这里，${falcon.sex}们因为口渴而来到了这条小溪边。`,
       );
-      await falcon.say_and_wait(`源自这条小溪而诞生的神明隆重的迎接了她们。`);
+      await falcon.say_and_wait(
+        `源自这条小溪而诞生的神明隆重的迎接了${falcon.sex}们。`,
+      );
       await falcon.say_and_wait(
         `在盛情款待之下，心满意足的三女神向小溪的神明提出了建议。`,
       );
       await say_by_passer_by(
         `三女神`,
-        `我们受到了你热情的款待，请允许我们给你祝福。`,
+        `我们受到了${callname}热情的款待，请允许我们给${callname}祝福。`,
       );
-      await falcon.say_and_wait(`神明则拒绝了她们的好意。`);
+      await falcon.say_and_wait(`神明则拒绝了${falcon.sex}们的好意。`);
       await say_by_passer_by(
         `小溪的神明`,
         `能得到女神的祝福不胜惶恐，但是请把这份祝福赋予围绕这条小溪生存的生灵吧。`,
@@ -575,7 +585,9 @@ module.exports = class extends CustomizedDaily {
       era.printButton(`咳咳。`, 1);
       await era.input();
       await falcon.say_and_wait(`哎？训练员${me.get_adult_sex_title()}？`);
-      await era.printAndWait(`被突然打断的${falcon.name}惊讶的看着你。`);
+      await era.printAndWait(
+        `被突然打断的${falcon.name}惊讶的看着${callname}。`,
+      );
       era.printButton(`别忘了来这里的目的！`, 1);
       await era.input();
       await falcon.say_and_wait(
@@ -585,7 +597,7 @@ module.exports = class extends CustomizedDaily {
       await era.input();
       await falcon.say_and_wait(`诶——`);
       await me.say_and_wait(
-        `打扰了，神社就在眼前这位可爱的马娘背后，如果再不出发前面的队伍会变得很长。`,
+        `打扰了，神社就在眼前这位可爱的${falcon.uma_sex_title}背后，如果再不出发前面的队伍会变得很长。`,
       );
       await say_by_passer_by(
         `游客D`,
@@ -593,7 +605,7 @@ module.exports = class extends CustomizedDaily {
       );
       await falcon.say_and_wait(`请跟随飞鹰子的指引——`);
       await era.printAndWait(
-        `聚拢而来的游客在你和${falcon.name}的引导之下排成了一条长队。`,
+        `聚拢而来的游客在${callname}和${falcon.name}的引导之下排成了一条长队。`,
       );
       await era.printAndWait(`一段时间过后\n\n`);
       await say_by_passer_by(`神主`, `${falcon.name}还有这位训练员辛苦了。`);
@@ -605,19 +617,21 @@ module.exports = class extends CustomizedDaily {
         `美丽又仁慈的三女神大人，请听作为侍从的在下所言。`,
       );
       await era.printAndWait(
-        `在神主向三女神祈求之时，你们站在一旁默默的等待者回应。`,
+        `在神主向三女神祈求之时，${callname}们站在一旁默默的等待者回应。`,
       );
       if (love > 75) {
         await say_by_passer_by(`神主`, `……我知道了。`);
-        await era.printAndWait(`仪式结束，神主看向你们。`);
-        await say_by_passer_by(`神主`, `三女神大人对你们有些话想说。`);
+        await era.printAndWait(`仪式结束，神主看向${callname}们。`);
+        await say_by_passer_by(`神主`, `三女神大人对${callname}们有些话想说。`);
         await falcon.say_and_wait(`欸？`);
         await era.printAndWait(
-          `在神主向三女神祈求之时，你们站在一旁默默的等待者回应。`,
+          `在神主向三女神祈求之时，${callname}们站在一旁默默的等待者回应。`,
         );
         await say_by_passer_by(`神主`, `请不要紧张，三女神大人只是有些好奇。`);
         await say_by_passer_by(`神主`, `那么，请跟随我的指引……`);
-        await era.printAndWait(`在专业人士的指导之下，你们闭上了眼睛。`);
+        await era.printAndWait(
+          `在专业人士的指导之下，${callname}们闭上了眼睛。`,
+        );
         switch (get_random_value(0, 2)) {
           case 0:
             await chara340_talk.say_and_wait('……真是坚强的孩子啊');
@@ -639,7 +653,9 @@ module.exports = class extends CustomizedDaily {
         await falcon.say_and_wait(
           `训练员${me.get_adult_sex_title()}许下了什么愿望呢⭐`,
         );
-        await era.printAndWait(`忧郁很快被少女的笑容所掩盖。`);
+        await era.printAndWait(
+          `忧郁很快被${falcon.teen_sex_title}的笑容所掩盖。`,
+        );
         event_marks.idol++;
       } else {
         await say_by_passer_by(`神主`, `……我知道了。`);
@@ -658,14 +674,15 @@ module.exports = class extends CustomizedDaily {
           `等二位关系更好一点的时候，希望还能来这里一趟，衷心祝愿二位能实现自己的目标。`,
         );
         await era.printAndWait(
-          `回到训练室后，你觉得和${falcon.name}之间的关系变好了一点。`,
+          `回到训练室后，${callname}觉得和${falcon.name}之间的关系变好了一点。`,
         );
       }
     }
   }
 
   async out_shopping(hook) {
-    const falcon = get_chara_talk(46);
+    const callname = sys_get_callname(46, 0),
+      falcon = get_chara_talk(46);
     const me = get_chara_talk(0),
       love = era.get('love:46');
     const buffer = [];
@@ -682,7 +699,7 @@ module.exports = class extends CustomizedDaily {
               `就算是新的事物也要全力以赴，飞鹰子，加油♪`,
             );
             await era.printAndWait(
-              `看着全perfect达成的${falcon.name}，以及勉强完赛的你，你陷入了沉默。`,
+              `看着全perfect达成的${falcon.name}，以及勉强完赛的${callname}，${callname}陷入了沉默。`,
             );
             break;
           case 1:
@@ -725,18 +742,18 @@ module.exports = class extends CustomizedDaily {
         );
         await falcon.say_and_wait(`下次的印刷还有小礼品也拜托了⭐`);
         await era.printAndWait(
-          `带着满满一袋的小礼物，${falcon.name}啪塔啪塔的来到了你的身边。`,
+          `带着满满一袋的小礼物，${falcon.name}啪塔啪塔的来到了${callname}的身边。`,
         );
         await falcon.say_and_wait(
           `训练员${me.get_adult_sex_title()}接下来还有什么想买的东西吗？`,
         );
         await era.printAndWait(
-          `你摇了摇头，然后看向了${falcon.name}紧紧握着的那张抽奖券。`,
+          `${callname}摇了摇头，然后看向了${falcon.name}紧紧握着的那张抽奖券。`,
         );
         await falcon.say_and_wait(
           `……那么，还是让训练员${me.get_adult_sex_title()}来抽吧！`,
         );
-        await era.printAndWait(`飞鹰子将你推到了抽奖机边上`);
+        await era.printAndWait(`飞鹰子将${callname}推到了抽奖机边上`);
         era.printButton(`既然这样的话`, 1);
         await era.input();
         switch (get_random_value(0, 4)) {
@@ -749,7 +766,7 @@ module.exports = class extends CustomizedDaily {
               `……纸巾吗。没关系！看着飞鹰子的笑容然后振作起来吧！`,
             );
             await era.printAndWait(
-              `虽然飞鹰子竭力调整现场的气氛，但抽到纸巾还是让你们感到沮丧。`,
+              `虽然飞鹰子竭力调整现场的气氛，但抽到纸巾还是让${callname}们感到沮丧。`,
             );
             break;
           case 1:
@@ -779,7 +796,7 @@ module.exports = class extends CustomizedDaily {
               `看着从抽奖机里掉落的胡萝卜色小球，店主瞥了一眼，然后摇动手中的铃铛。`,
             );
             await era.printAndWait(
-              `你从店主手中接过满满一箱胡萝卜，刚苦恼如何带回去时。`,
+              `${callname}从店主手中接过满满一箱胡萝卜，刚苦恼如何带回去时。`,
             );
             await era.printAndWait(`一双小手轻轻将困难提了起来。`);
             await falcon.say_and_wait(
@@ -795,21 +812,24 @@ module.exports = class extends CustomizedDaily {
             );
             await era.printAndWait(`当晚\n`);
             await falcon.say_and_wait(
-              `即使是领放也在不停闪耀，马娘偶像——${falcon.name}参上♪`,
+              `即使是领放也在不停闪耀，${falcon.uma_sex_title}偶像——${falcon.name}参上♪`,
             );
-            await say_by_passer_by(`你与竖着排成一排的胡萝卜们`, `噢噢噢噢！`);
+            await say_by_passer_by(
+              `${callname}与竖着排成一排的胡萝卜们`,
+              `噢噢噢噢！`,
+            );
             await falcon.say_and_wait(
               `嗯嗯！飞鹰子感受到大家的热情了呢！那么Let's go!`,
             );
             await say_by_passer_by(
-              `你与竖着排成一排的胡萝卜们`,
+              `${callname}与竖着排成一排的胡萝卜们`,
               `(疯狂摇动着应援棒)`,
             );
             await falcon.say_and_wait(
               `……没想到大家居然这么热情，飞鹰子感动的都要落泪了……好！为了粉丝们的期待，就让大家看看飞鹰子的浑身解数吧！`,
             );
             await era.printAndWait(
-              `不久之后，半夜时分的训练室会有胡萝卜化身马娘开演唱会的怪谈在校园传开了。`,
+              `不久之后，半夜时分的训练室会有胡萝卜化身${falcon.uma_sex_title}开演唱会的怪谈在校园传开了。`,
             );
             break;
           case 3:
@@ -843,7 +863,9 @@ module.exports = class extends CustomizedDaily {
               `店主`,
               `这张温泉旅行券没有使用时间，所以请好好珍惜。`,
             );
-            await era.printAndWait(`店主满脸笑容的将这张旅行券递给了你们。`);
+            await era.printAndWait(
+              `店主满脸笑容的将这张旅行券递给了${callname}们。`,
+            );
             await falcon.say_and_wait(`这样的话，什么时候用才好呢？`);
             era.printButton(`等到第三年结束之后再用吧！`, 1);
             await era.input();
@@ -852,7 +874,7 @@ module.exports = class extends CustomizedDaily {
             );
             await falcon.say_and_wait(`一定要好好爱惜才行！`);
             await era.printAndWait(
-              `回到训练室，在${falcon.name}的注视之下，你将这张温泉券放在了抽屉深处。`,
+              `回到训练室，在${falcon.name}的注视之下，${callname}将这张温泉券放在了抽屉深处。`,
             );
             break;
         }
@@ -862,24 +884,23 @@ module.exports = class extends CustomizedDaily {
           `训练员${me.get_adult_sex_title()}想听什么歌呢？这里的歌飞鹰子都会唱哦⭐`,
         );
         await era.printAndWait(
-          `看着进入了状态的飞鹰子，你也默默举起了荧光棒。`,
+          `看着进入了状态的飞鹰子，${callname}也默默举起了荧光棒。`,
         );
         break;
       case 3:
-        // todo 重要剧情暗示
         buffer.push(
           [
             [`《偶像的烦恼》训练员${me.get_adult_sex_title()}一起来看这部吧。`],
-            `作为偶像的男艺人喜欢上了一个普通的马娘，但百般暗示后马娘还是无动于衷。在男演员准备放弃时，马娘却向他告白了。`,
+            `作为偶像的男艺人喜欢上了一个普通的${falcon.uma_sex_title}，但百般暗示后${falcon.uma_sex_title}还是无动于衷。在男演员准备放弃时，${falcon.uma_sex_title}却向他告白了。`,
           ],
           [
             `《热血！偶像的奋斗之路！》，听起来好像很有趣的样子！训练员${me.get_adult_sex_title()}要一起看看吗？`,
-            `作为草根偶像孤独一人的男演员的因为遇到了温柔马娘的细心照料后重新燃起了勇气，在故事的最后向那位一直默默支持着自己的马娘告白了`,
+            `作为草根偶像孤独一人的男演员的因为遇到了温柔${falcon.uma_sex_title}的细心照料后重新燃起了勇气，在故事的最后向那位一直默默支持着自己的${falcon.uma_sex_title}告白了`,
           ],
           [
             [`《白玉之诗》……偶尔换换口味的话也不错呢⭐`],
-            `在幸福中生活的马娘对落魄的孤独诗人一见钟情后猛烈追求，在飘忽不定的命运折磨下，两人度过了一段颠沛流离的生活，剧情高潮时，因失去了珍贵的手稿绝望之下点燃了居住之所的诗人被马娘救了出来` +
-              `生与死之间终于产生勇气爱着生活的诗人与马娘紧紧抱在了一起。`,
+            `在幸福中生活的${falcon.uma_sex_title}对落魄的孤独诗人一见钟情后猛烈追求，在飘忽不定的命运折磨下，两人度过了一段颠沛流离的生活，剧情高潮时，因失去了珍贵的手稿绝望之下点燃了居住之所的诗人被${falcon.uma_sex_title}救了出来` +
+              `生与死之间终于产生勇气爱着生活的诗人与${falcon.uma_sex_title}紧紧抱在了一起。`,
           ],
         );
         if (love === 100) {
@@ -887,7 +908,7 @@ module.exports = class extends CustomizedDaily {
             [
               `《樱花易散，今宵待君》训练员${me.get_adult_sex_title()}要不要看看这部电影呢？`,
             ],
-            `（玩家名）与${falcon.name}气氛热烈的观讨论着电影，两人的手紧紧扣在了一起`,
+            `${me.actual_name}与${falcon.name}气氛热烈的观讨论着电影，两人的手紧紧扣在了一起`,
           ]);
         } else if (love >= 50) {
           buffer.push(
@@ -901,7 +922,7 @@ module.exports = class extends CustomizedDaily {
               [
                 `飞鹰子，其实什么电影都OK哦，只要是和训练员${me.get_adult_sex_title()}一起的话`,
               ],
-              `${falcon.name}兴致勃勃的看着你`,
+              `${falcon.name}兴致勃勃的看着${callname}`,
             ],
           );
         }
@@ -915,7 +936,8 @@ module.exports = class extends CustomizedDaily {
   }
 
   async out_station(hook) {
-    const falcon = get_chara_talk(46);
+    const callname = sys_get_callname(46, 0),
+      falcon = get_chara_talk(46);
     const me = get_chara_talk(0);
     hook.arg = await select_action_in_station(4);
     switch (Math.floor(Math.random() * 3)) {
@@ -934,7 +956,7 @@ module.exports = class extends CustomizedDaily {
             );
             await me.say_and_wait(`……这样吃的会不会太少了？`);
             await falcon.say_and_wait(`最近花的不小心超出预算了……`);
-            await era.printAndWait(`你们看向了菜单上的披萨套餐。`);
+            await era.printAndWait(`${callname}们看向了菜单上的披萨套餐。`);
             await me.say_and_wait(`要来一份吗？我请客。`);
             await falcon.say_and_wait(`非常感谢⭐`);
             await era.printAndWait(
@@ -948,7 +970,9 @@ module.exports = class extends CustomizedDaily {
         switch (get_random_value(0, 1)) {
           case 0:
             await era.printAndWait(`偶像和粉丝约会会被愤怒的粉丝炎上吧？`);
-            await falcon.say_and_wait(`是训练员与担当马娘之间非常健全的关系！`);
+            await falcon.say_and_wait(
+              `是训练员与担当${falcon.uma_sex_title}之间非常健全的关系！`,
+            );
             await era.printAndWait(`心情真是微妙呢。`);
             break;
           case 1:
@@ -957,7 +981,7 @@ module.exports = class extends CustomizedDaily {
             );
             await falcon.say_and_wait(`看起来并没有被认出来呢。`);
             await era.printAndWait(
-              `毕竟比起在草地奔跑的赛马娘，沙地偶像离观众的视线更远吧。`,
+              `毕竟比起在草地奔跑的赛${falcon.uma_sex_title}，沙地偶像离观众的视线更远吧。`,
             );
             break;
         }
@@ -966,7 +990,7 @@ module.exports = class extends CustomizedDaily {
         switch (get_random_value(0, 1)) {
           case 0:
             await era.printAndWait(
-              `在商场里随意闲逛时路过了贩卖赛马娘周边的店铺。`,
+              `在商场里随意闲逛时路过了贩卖赛${falcon.uma_sex_title}周边的店铺。`,
             );
             await falcon.say_and_wait(`飞鹰子的周边比上周多了一点呢♪`);
             await era.printAndWait(
