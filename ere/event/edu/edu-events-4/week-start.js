@@ -350,11 +350,8 @@ module.exports = async function (hook, event_object) {
     await era.printAndWait(`被留在原地的${zensky.name}一个人在自言自语。`);
     new EduEventMarks(4).add('wind');
     wait_flag =
-      get_attr_and_print_in_event(
-        4,
-        [1000, 1000, 1000, 1000, 1000],
-        undefined,
-      ) || wait_flag;
+      get_attr_and_print_in_event(4, [10, 10, 10, 10, 10], undefined) ||
+      wait_flag;
   } else if (edu_weeks === 24) {
     await print_event_name('训练结束的普通一天', zensky);
     await me.say_and_wait(`今天的训练就到这里为止了,辛苦了。`);
