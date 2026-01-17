@@ -10,49 +10,44 @@ const select_action_around_river = require('#/event/daily/snippets/select-action
 const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
 const select_action_in_shopping_street = require('#/event/daily/snippets/select-action-in-shopping-street');
 const select_action_in_station = require('#/event/daily/snippets/select-action-in-station');
+const generate_dictionary = require('#/event/snippets/generate-dictionary');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 module.exports = class extends CustomizedDaily {
   get #dict() {
-    const dict = {};
-    const tama = get_chara_talk(this.id);
-    dict['代表色'] = tama.color;
-    dict['她'] = tama.sex;
-    dict['称呼'] = sys_get_callname(this.id, 0);
-    const me = get_chara_talk(0);
-    dict['玩家名'] = me.name;
-    dict['他'] = me.sex;
-    return dict;
+    return generate_dictionary(this.id);
   }
 
   select() {
-    kojo['选中互动对象'](this.#dict);
+    kojo['select'](this.#dict);
   }
 
   good_morning() {
-    kojo['回合开始互动对话'](this.#dict);
+    get_chara_talk(45);
+    kojo['good_morning']({
+      ...this.#dict,
+      CALL_45: sys_get_callname(this.id, 45),
+    });
   }
 
   async talk() {
-    get_chara_talk(45);
-    const dict = this.#dict;
-    dict['小玉称呼小海湾'] = sys_get_callname(this.id, 45);
-    await kojo['闲聊'](dict);
+    await kojo['talk'](this.#dict);
   }
 
   async office_gift() {
-    await kojo['送礼'](this.#dict);
+    await kojo['office_gift'](this.#dict);
   }
 
   async out_river(hook) {
     if ((hook.arg = await select_action_around_river()) > 0) {
-      const dict = this.#dict;
-      get_chara_talk(20);
-      dict['小玉称呼Sky'] = sys_get_callname(this.id, 20);
-      await kojo['散步'](this.#dict);
+      await kojo['o_r_walk'](this.#dict);
     } else {
-      await kojo['钓鱼'](this.#dict);
+      get_chara_talk(20);
+      await kojo['o_r_fishing']({
+        ...this.#dict,
+        CALL_20: sys_get_callname(this.id, 20),
+      });
     }
   }
 
@@ -63,69 +58,70 @@ module.exports = class extends CustomizedDaily {
     switch (temp) {
       case 0:
         get_chara_talk(6);
-        dict['小玉称呼小栗'] = sys_get_callname(this.id, 6);
-        await kojo['街机厅'](dict);
+        dict.CALL_6 = sys_get_callname(this.id, 6);
+        await kojo['o_s_arcade'](dict);
         break;
       case 1:
-        await kojo['抽奖'](dict);
+        await kojo['o_s_drawing'](dict);
         break;
       case 2:
-        await kojo['卡拉OK'](dict);
+        await kojo['o_s_ktv'](dict);
         break;
       case 3:
-        await kojo['看电影'](dict);
+        await kojo['o_s_movie'](dict);
     }
   }
 
   async out_station(hook) {
+    const dict = generate_dictionary(this.id, { call: !0 });
     switch ((hook.arg = await select_action_in_station(this.id))) {
       case 0:
-        await kojo['车站吃饭'](this.#dict);
+        await kojo['o_s_restaurant'](dict);
         break;
       case 1:
-        await kojo['车站约会'](this.#dict);
+        await kojo['o_s_dating'](dict);
         break;
       case 2:
-        await kojo['逛商场'](this.#dict);
+        await kojo['o_s_shopping'](dict);
     }
   }
 
   async school_atrium(hook) {
     if ((hook.arg = !(await select_action_in_atrium()))) {
-      await kojo['枯树洞'](this.#dict);
+      await kojo['s_a_tree_hollow'](generate_dictionary(this.id, { uma: !0 }));
     } else {
-      await kojo['中庭约会'](this.#dict);
+      await kojo['s_a_dating'](this.#dict);
     }
   }
 
   async school_rooftop() {
-    await kojo['天台便当'](this.#dict);
+    await kojo['school_rooftop'](generate_dictionary(this.id, { call: !0 }));
   }
 
   async office_cook() {
-    await kojo['加餐'](this.#dict);
+    await kojo['office_cook'](generate_dictionary(this.id, { call: !0 }));
   }
 
   async office_study() {
-    await kojo['指导学习'](this.#dict);
+    await kojo['office_study'](this.#dict);
   }
 
   async office_rest() {
-    await kojo['小憩'](this.#dict);
+    await kojo['office_rest'](generate_dictionary(this.id, { your_sex: !0 }));
   }
 
   async office_prepare() {
-    await kojo['赛前准备'](this.#dict);
+    await kojo['office_prepare'](this.#dict);
   }
 
   async office_game() {
-    await kojo['游戏'](this.#dict);
+    await kojo['office_game'](this.#dict);
   }
 
   async out_church(hook) {
     hook.arg = Math.random() < 0.5;
     const dict = this.#dict;
     dict.dice = +hook.arg;
-    await kojo['神社'](dict);
+    await kojo['out_church'](dict);
   }
 };
