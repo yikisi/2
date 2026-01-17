@@ -327,7 +327,6 @@ module.exports = class extends CustomizedCheck {
   check_palace_and_get_aims() {
     const races = new RaceHistory(4).get();
     const event_marks = new MaEduMarks(4);
-    //todo ge条件,于第三年天秋击败皇帝
     if (
       check_aim_race(races, race_enum.toky_yus, 1, 1) &&
       check_aim_race(races, race_enum.sank_hai, 2, 1) &&

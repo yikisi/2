@@ -903,7 +903,6 @@ module.exports = async (hook, extra_flag) => {
     edu_weeks > 95 &&
     extra_flag.rank === 1
   ) {
-    // todo 仅当wind =15时出现该剧情，否则为通用成功
     await print_event_name('大阪杯结束后・风卷残云', chara_talk);
     await chara_talk.say_and_wait(`哈啊，哈啊，哈啊。`);
     await chara_talk.say_and_wait(`赢了吗？`, true);
@@ -1031,7 +1030,6 @@ module.exports = async (hook, extra_flag) => {
     edu_weeks > 95 &&
     extra_flag.rank === 1
   ) {
-    // todo 仅当wind =15时出现该剧情，否则为通用成功
     const chara340_talk = get_chara_talk(340),
       chara341_talk = get_chara_talk(341),
       chara342_talk = get_chara_talk(342);

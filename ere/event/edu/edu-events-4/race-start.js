@@ -361,7 +361,6 @@ module.exports = async (hook, extra_flag) => {
     await era.printAndWait(`依依不舍的分别之后，${maru.name}走向了赛场。`);
   } else if (extra_flag.race === race_enum.tenn_sho && edu_weeks > 95) {
     await print_event_name('天皇赏秋前・伊甸之梦', maru);
-    //todo 强敌：鲁铎象征(差) 速1700 力1200 耐1150 根1500 智1200 汝、皇帝の神威を見よ/汝等，瞻仰皇帝之神威吧 鎧袖一触/易如反掌 皇帝の眼差し/皇帝的视线 王手 优位形成 神速 光芒一閃
     await era.printAndWait(`与皇帝的第二次对决即将开始。`);
     await era.printAndWait(
       `作为${maru.name}与皇帝之间的第二次对决，对于观众们来说是空前盛大的盛况。`,
