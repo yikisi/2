@@ -3,7 +3,7 @@ const UmaSkill = require('#/data/race/model/uma-skill');
 module.exports = new UmaSkill(
   210371,
   '疗养创造奇迹',
-  '在最后冲刺的关键时刻，速度加快；在 TODO 发生的时候，技能效果提升',
+  '在最后冲刺的关键时刻，速度加快；疲惫层数越低，效果越好',
   21037,
   2,
   17,

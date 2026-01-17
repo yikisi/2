@@ -1,15 +1,18 @@
 const era = require('#/era-electron');
 
+const { sys_get_callname } = require('#/system/sys-calc-chara-others');
+
 const { add_event } = require('#/event/queue');
 const print_event_name = require('#/event/snippets/print-event-name');
 
-const { say_by_passer_by } = require('#/utils/chara-talk');
+const {
+  say_by_passer_by,
+  say_by_passer_by_and_wait,
+} = require('#/utils/chara-talk-factory');
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const event_hooks = require('#/data/event/event-hooks');
 const { location_enum } = require('#/data/locations');
-const { sys_get_callname } = require('#/system/sys-calc-chara-others');
-const { say_by_passer_by_and_wait } = require('#/utils/chara-talk-factory');
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},function):Promise>} handlers */
 module.exports = (handlers) => {
@@ -536,18 +539,14 @@ module.exports = (handlers) => {
     await era.printAndWait(`如往日一般，手忙脚乱的日常再次启动。`);
   };
 
-  /**
-   * @param {EventObject} event_object
-   */
-  handlers[95 + 29] = async (event_object) => {
-    const callname = sys_get_callname(46, 0),
-      me = get_chara_talk(0),
-      falcon = get_chara_talk(46);
+  handlers[95 + 29] = async (falcon, me, callname, ebj) => {
     // 节拍 场景 序列 幕 故事
-    if (era.get('flag:当前位置') === location_enum.beach) {
-      if (era.get('cflag:46:位置') !== era.get('cflag:0:位置')) {
-        add_event(event_hooks.week_start, event_object);
-      }
+    // CFLAGNAME:45 = 位置
+    if (
+      era.get('cflag:46:45') !== location_enum.beach ||
+      era.get('cflag:46:45') !== era.get('cflag:0:45')
+    ) {
+      add_event(event_hooks.week_start, ebj);
       return;
     }
     await print_event_name(`合宿开始！`, falcon);
