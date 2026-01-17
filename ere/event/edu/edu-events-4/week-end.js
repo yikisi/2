@@ -1969,7 +1969,7 @@ module.exports = async function (hook, event_object) {
       wait_flag;
     event_marks.mygo--;
 
-    //todo 领域
+    //todo 领域 行进距离≥50%、前半段保持名次≤50%时，速度增加0.55
   } else if (edu_weeks === 95 + 9) {
     // 皇帝与${chara_talk.name}见面，想让${chara_talk.name}看到不同的风景
     await print_event_name(`焱炎`, zensky);
@@ -2014,7 +2014,10 @@ module.exports = async function (hook, event_object) {
     );
     await era.printAndWait(`为此，下一个目标已经决定了。`);
     event_marks.wind++;
-    //todo 强敌：鲁铎象征 速1400 力1000 耐950 根1200 智900 汝、皇帝の神威を見よ/汝等，瞻仰皇帝之神威吧 鎧袖一触/易如反掌 皇帝の眼差し/皇帝的视线
+    //todo 增加强敌：鲁铎象征 出现在大阪杯 差马跑法 速1300 力1000 耐950 根1200 智1000
+    // 汝、皇帝の神威を見よ/汝等，瞻仰皇帝之神威吧 鎧袖一触/易如反掌 皇帝の眼差し/皇帝的视线/超越姿态/中距离直线○/中距离弯道○/会心一步/毫厘不让/威压
+    // 强敌：皇帝 出现在天皇赏秋 差马跑法 速1400 力1200 耐1200 根1200 智1200
+    // 汝、皇帝の神威を見よ/汝等，瞻仰皇帝之神威吧 鎧袖一触/易如反掌 皇帝の眼差し/皇帝的视线/向前取位/超越姿态/油门全开/热情洋溢/中距离直线○/中距离弯道○/火急/暴走/会心一步/毫厘不让/威压/差马直线○/差马弯道○/原原本本/燃魂
   } else if (edu_weeks === 95 + 32) {
     if (era.get('flag:当前位置') === location_enum.beach) {
       if (era.get('cflag:4:位置') !== era.get('cflag:0:位置')) {

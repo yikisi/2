@@ -2823,7 +2823,6 @@ module.exports = async function (hook, event_object) {
       `最后${me.name}与 ${zensky.name}享受着这份恋人之间独有的，无法衡量的氛围。`,
     );
     event_marks.wind++;
-
     wait_flag =
       get_attr_and_print_in_event(4, [10, 10, 10, 10, 10], undefined) ||
       wait_flag;
