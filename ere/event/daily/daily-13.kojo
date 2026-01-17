@@ -412,12 +412,12 @@
         content:
           - fontSize: bold
             content: 目白麦昆
-          - 「Waiting for Tomorrow~♫」
+          - 「Waiting for Tomorrow～♫」
       - color: %代表色%
         content:
           - fontSize: bold
             content: 目白麦昆
-          - 「少しずつ進めばいいよ~♫」
+          - 「少しずつ進めばいいよ～♫」
       - 轻快的伴奏与麦昆那温柔的声音融合在一起。
       - 真是无比享受。
 
