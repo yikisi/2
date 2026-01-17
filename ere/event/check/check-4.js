@@ -5,6 +5,7 @@ const sys_personal_achievement = require('#/system/global/sys-calc-personal-achi
 const CustomizedCheck = require('#/event/check/check-common');
 const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-get-entry');
 const check_and_add_event = require('#/event/check/snippets/check-and-add-event');
+const check_and_register_aim_race = require('#/event/check/snippets/check-and-register-aim-race');
 const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
 const { add_event, cb_enum } = require('#/event/queue');
 const check_aim_race = require('#/event/snippets/check-aim-race');
@@ -33,18 +34,21 @@ aim_races[get_aim_race_index(race_enum.tenn_sho, 2)] = 0b11;
 
 module.exports = class extends CustomizedCheck {
   check_and_get_titles(aim_check) {
-    const races = new RaceHistory(4).get_values(),
-      titles = [];
+    const titles = [];
     let max = 0,
       win = 0;
-    races.forEach((e) => {
-      if (e.rank === 1) {
-        win++;
-      } else {
-        win = 0;
-      }
-      max = Math.max(max, win);
-    });
+    RaceHistory.get(4)
+      .get_values()
+      .forEach((e) => {
+        if (e.rank === 1) {
+          win++;
+        } else {
+          win = 0;
+        }
+        if (win > max) {
+          max = win;
+        }
+      });
     if (max >= 8) {
       titles.push({
         c: get_chara_color(this.id),
@@ -280,7 +284,6 @@ module.exports = class extends CustomizedCheck {
             add_event(event_hooks.week_end, event_obj_special);
           } else {
             add_event(event_hooks.week_start, event_obj_special);
-            break;
           }
           break;
         // 6月第三周 少女的忧郁（上）
@@ -309,8 +312,8 @@ module.exports = class extends CustomizedCheck {
           ) {
             add_event(event_hooks.school_rooftop, event_obj_special);
           }
-          break;
       }
+      check_and_register_aim_race(this.id, this.get_aim_races(), edu_weeks);
     } else if (
       edu_weeks === 143 + 5 &&
       (event_marks.girls_dream === 1 ||

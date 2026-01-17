@@ -48,7 +48,7 @@ module.exports = async function (hook, event_object) {
     zensky.print(`还是说——`);
     await zensky.say_and_wait(`今天是休息日吗？`, true);
     zensky.print(`在得到这个好消息后，心满意足的就这么睡过去了——不对！`);
-    zensky.print(`要是是闹钟坏了呢？今天是星期...星期几来着？`);
+    zensky.print(`要是是闹钟坏了呢？今天是星期……星期几来着？`);
     zensky.print(`要是迟到的话，被${callname}发现的话……`);
     await zensky.say_and_wait(`真是压力山大！`, true);
     zensky.print(
@@ -66,7 +66,7 @@ module.exports = async function (hook, event_object) {
     zensky.print(
       `简单的用电吹风吹了一下头发后，用毛巾包裹住尚在滴水的头发走出了卫生间。`,
     );
-    zensky.print(`咕咚咕咚，哈啊~`);
+    zensky.print(`咕咚咕咚，哈啊～`);
     zensky.print(`将一整瓶咖啡牛奶一饮而尽后，心情也变得雀跃起来了♪`);
     await zensky.say_and_wait(`接下来做些什么呢？`);
     zensky.print(`休息日的今天，后辈们应该也去放松了。`);
@@ -89,7 +89,7 @@ module.exports = async function (hook, event_object) {
     );
     await era.printAndWait(`${zensky.name}来到了训练室门口。`);
     await era.printAndWait(
-      `带着最近新了解的“突然推开门吓人一跳”的潮流，推开门大声地宣布着自己的到来。`,
+      `带着最近新了解的「突然推开门吓人一跳」的潮流，推开门大声地宣布着自己的到来。`,
     );
     await era.printAndWait(
       `看着${
@@ -239,7 +239,7 @@ module.exports = async function (hook, event_object) {
     await zensky.say_and_wait(`所以学习是一个利润极高的收益机会。`);
     await me.say_and_wait(`原来如此，谢谢 ${zensky.name}老师！`);
     await zensky.say_and_wait(
-      `哎呀~ ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}真是太客气了。如果能帮助到 ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}，姐姐我才是最高兴的一边。`,
+      `哎呀～ ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}真是太客气了。如果能帮助到 ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}，姐姐我才是最高兴的一边。`,
     );
     await era.printAndWait(
       `因为帮助到了${me.name}而由衷高兴的 ${zensky.name}周围似乎有彩虹浮现。`,
@@ -328,7 +328,7 @@ module.exports = async function (hook, event_object) {
     );
     await me.say_and_wait(`有点兴奋啊。`, true);
     await zensky.say_and_wait(`呼呼，小塔似乎也感到很高兴的样子呢♪`);
-    await zensky.say_and_wait(`准备好了吗？Let‘s go！`);
+    await zensky.say_and_wait("准备好了吗？Let's go！");
     await me.say_and_wait(`哎？原来这就是跑车车车车吗啊啊啊啊啊。`);
     era.drawLine();
     await zensky.say_and_wait(
@@ -363,7 +363,7 @@ module.exports = async function (hook, event_object) {
       `按照这样的节奏继续前进的话，之后的朝日杯也有优胜的希望了。`,
     );
     await zensky.say_and_wait(
-      `不知道在G1级的比赛中又会有什么样的盛况出现呢？真期待呢~`,
+      `不知道在G1级的比赛中又会有什么样的盛况出现呢？真期待呢～`,
     );
     await me.say_and_wait(`${zensky.name}觉得奔跑快乐吗？`);
     await era.printAndWait(
@@ -421,13 +421,13 @@ module.exports = async function (hook, event_object) {
     );
     era.printButton(`「那当然。」`, 1);
     await era.input();
-    await zensky.say_and_wait(`呵呵~我也很期待呢。`);
+    await zensky.say_and_wait(`呵呵～我也很期待呢。`);
     await era.printAndWait(`在闲聊中不知不觉已经到了学院门口。`);
     await zensky.say_and_wait(`和${callname}在一起的时间总是这么短暂呢。`);
     await me.say_and_wait(
       `正是因为短暂所以才会加倍珍惜这段幸福的时间呢，对${zensky.name}来说这也是不错的回忆吧？`,
     );
-    await zensky.say_and_wait(`是段愉快的回忆呢，明天见，3166~`);
+    await zensky.say_and_wait(`是段愉快的回忆呢，明天见，3166～`);
     await era.printAndWait(
       `伴随着引擎的发动声响起,${zensky.name}的背影消失在了视野的角落之中。`,
     );
@@ -495,7 +495,7 @@ module.exports = async function (hook, event_object) {
     await era.printAndWait(
       `嘈杂的声音打断了${me.name}的思绪，双腿传来的酥麻感拖着${me.name}的意识回到了现实之中。`,
     );
-    await me.say_and_wait(`哈~啊。`);
+    await me.say_and_wait(`哈～啊。`);
     await era.printAndWait(
       `忍不住打了一个呵欠，回味着这份温暖的余韵，将视线从女神像移向了中庭的另一边。`,
     );
@@ -848,16 +848,16 @@ module.exports = async function (hook, event_object) {
       `虽说今天是法定的节假日，不过在训练员宿舍就这么懒散的度过也过于烦闷了。`,
     );
     await era.printAndWait(
-      `想着‘随便逛逛吧’，脚步迈向的方向却不知不觉又回到了特雷森。`,
+      `想着「随便逛逛吧」，脚步迈向的方向却不知不觉又回到了特雷森。`,
     );
     await me.say_and_wait(`既然来都来了，不如去训练室看看吧`);
     await era.printAndWait(`打定主意后，${me.actual_name}走向了训练室。`);
     era.drawLine({ content: '训练室' });
     await era.printAndWait(
-      `如果是平时的训练室，总有种‘又要上班啊’的烦躁感挥之不去。`,
+      `如果是平时的训练室，总有种「又要上班啊」的烦躁感挥之不去。`,
     );
     await era.printAndWait(
-      `但如果是休息日带着‘随便看看吧’的心态重新回到了训练室时。`,
+      `但如果是休息日带着「随便看看吧」的心态重新回到了训练室时。`,
     );
     await era.printAndWait(
       `与${zensky.name}讨论接下来的训练方针，一起品尝着美味的蛋糕，挤在沙发上全神贯注地看着重赏大赛的录像带。`,
@@ -910,7 +910,7 @@ module.exports = async function (hook, event_object) {
     era.printButton(`「现在的我只是一个非常普通的训练员罢了。」`, 1);
     await era.input();
     await zensky.say_and_wait(
-      `……啊啦，这位嗯...非常普通的训练员${me.get_adult_sex_title()}。`,
+      `……啊啦，这位嗯……非常普通的训练员${me.get_adult_sex_title()}。`,
     );
     await zensky.say_and_wait(
       `刚才喊的可真有气势，我在楼梯上都听到了那充满热情的声音。`,
@@ -1066,7 +1066,7 @@ module.exports = async function (hook, event_object) {
     );
     era.printButton(`「辛苦了,稍微休息一下吧。」`, 1);
     await era.input();
-    await zensky.say_and_wait(`哈...哈啊……呼~`);
+    await zensky.say_and_wait(`哈……哈啊……呼～`);
     await era.printAndWait(`周围的草地像是台风过境一样被弄得乱七八糟的。`);
     await zensky.say_and_wait(`非常感谢♪`);
     await era.printAndWait(
@@ -1083,7 +1083,7 @@ module.exports = async function (hook, event_object) {
     await zensky.say_and_wait(`${callname}对香味很感兴趣吗？`);
     await me.say_and_wait(`嗯，很好闻的体香味。`);
     await zensky.say_and_wait(
-      `呵呵~虽然和体香味很像，不过这其实是香水的味道。`,
+      `呵呵～虽然和体香味很像，不过这其实是香水的味道。`,
     );
     await zensky.say_and_wait(`虽然是为了心情变换才选择了这款。`);
     await zensky.say_and_wait(`不过从${callname}的反应看来。`);
@@ -1101,9 +1101,11 @@ module.exports = async function (hook, event_object) {
     const ret1 = await era.input();
     if (ret1 === 1) {
       await zensky.say_and_wait(`诶——`);
-      await zensky.say_and_wait(`${callname}用这种语气说的话，稍微有点可爱呢~`);
+      await zensky.say_and_wait(
+        `${callname}用这种语气说的话，稍微有点可爱呢～`,
+      );
       await era.printAndWait(`${zensky.name}轻轻抚摸着${me.name}的脑袋。`);
-      await zensky.say_and_wait(`哼哼哼~果然还是这样的${callname}最可爱了♪`);
+      await zensky.say_and_wait(`哼哼哼～果然还是这样的${callname}最可爱了♪`);
       event_marks.wind--;
     } else {
       await zensky.say_and_wait(`欸——`);
@@ -1328,7 +1330,7 @@ module.exports = async function (hook, event_object) {
     await me.say_and_wait(`……原来是这样吗？`);
     await say_by_passer_by(
       `${zensky.get_uma_sex_title()}`,
-      `诶...嗯。因为本格化的时间比较早，所以初中的时候就作为赛${zensky.get_uma_sex_title()}参赛了。`,
+      `诶……嗯。因为本格化的时间比较早，所以初中的时候就作为赛${zensky.get_uma_sex_title()}参赛了。`,
     );
     await say_by_passer_by(
       `${zensky.get_uma_sex_title()}`,
@@ -1378,7 +1380,7 @@ module.exports = async function (hook, event_object) {
     await era.printAndWait(
       `心乱如麻，恐怕这个${zensky.get_uma_sex_title()}也是这么想的吧。`,
     );
-    await say_by_passer_by(`${zensky.get_uma_sex_title()}`, `.....谢谢。`);
+    await say_by_passer_by(`${zensky.get_uma_sex_title()}`, `……谢谢。`);
     await say_by_passer_by(
       `${zensky.get_uma_sex_title()}`,
       `啊，抱歉，呆的太久了，既然丸善前辈还没过来的话，那我先告辞了。`,
@@ -1526,10 +1528,10 @@ module.exports = async function (hook, event_object) {
     );
     await me.say_and_wait(`得加快速度了。`);
     await era.printAndWait(
-      `牙齿因感受到寒冷而不自觉的上下打架，发出了一连串的”哒哒哒“声，喉咙也变得吞咽困难。`,
+      `牙齿因感受到寒冷而不自觉的上下打架，发出了一连串的「哒哒哒」声，喉咙也变得吞咽困难。`,
     );
     await era.printAndWait(
-      `只是为了满足”快点完成这份工作“，”还不能在这里倒下“的这份心情，${me.name}咬牙坚持着。`,
+      `只是为了满足「快点完成这份工作」，「还不能在这里倒下」的这份心情，${me.name}咬牙坚持着。`,
     );
     await me.say_and_wait(`结束了！`);
     await era.printAndWait(
@@ -1595,7 +1597,7 @@ module.exports = async function (hook, event_object) {
       await zensky.say_and_wait(
         `现在不是逞强的时候，病人应该乖乖躺在床上然后好好休息。`,
       );
-      await me.say_and_wait(`${zensky.name}...`);
+      await me.say_and_wait(`${zensky.name}……`);
       await era.printAndWait(
         `终于耗尽了最后一丝力气，不得不躺在床上。努力将送入口中的食物吞咽下去。`,
       );
@@ -1676,11 +1678,11 @@ module.exports = async function (hook, event_object) {
       `连这种古早流行语都回来了，看来${zensky.name}心情真的不错。`,
       true,
     );
-    await zensky.say_and_wait(`呵呵~${callname}真可爱呢♪`);
+    await zensky.say_and_wait(`呵呵～${callname}真可爱呢♪`);
     await era.printAndWait(
       `不知何处凑过来的${zensky.name}一直盯着${me.name}看。`,
     );
-    await zensky.say_and_wait(`再怎么夸奖都不会有福利的呦~`);
+    await zensky.say_and_wait(`再怎么夸奖都不会有福利的呦～`);
     await era.printAndWait(
       `预测到了${me.name}接下来打算说的话，${zensky.name}狡黠的笑了起来。`,
     );
@@ -1697,7 +1699,7 @@ module.exports = async function (hook, event_object) {
       }的身影。`,
     );
     await era.printAndWait(
-      `“是人流太大迷路了吧”正当${me.name}放空大脑看着人群不断汇入灯笼装饰着的庙会，眯着眼着打了一个哈欠时。`,
+      `「是人流太大迷路了吧」正当${me.name}放空大脑看着人群不断汇入灯笼装饰着的庙会，眯着眼着打了一个哈欠时。`,
     );
     await me.say_and_wait(`真是热闹啊。`);
     await era.printAndWait(
@@ -1837,7 +1839,7 @@ module.exports = async function (hook, event_object) {
     );
     await me.say_and_wait(`抱歉，虽然我也想尽快和${zensky.name}汇合，不过——`);
     await zensky.say_and_wait(
-      `嗯~比起道歉的话，接下来${
+      `嗯～比起道歉的话，接下来${
         callname
       }和我一起看表演才是最能用行动作为补偿吧。`,
     );
@@ -1849,7 +1851,7 @@ module.exports = async function (hook, event_object) {
     );
     await zensky.say_and_wait(`哎呀，这是什么新型告白方式吗？`);
     await zensky.say_and_wait(
-      `${zensky.get_bigger_sibling_sex_title()}我也是稍~微有点心动了呢。`,
+      `${zensky.get_bigger_sibling_sex_title()}我也是稍～微有点心动了呢。`,
     );
     await zensky.say_and_wait(`既然这样的话，${callname}就不要离开我了哦？`);
     await era.printAndWait(
@@ -1900,7 +1902,7 @@ module.exports = async function (hook, event_object) {
     await era.printAndWait(
       `就连这份疼痛都已经消失，带着这份几乎要瘫在地上的麻木感，${zensky.get_teen_sex_title()}品尝到了不知道是汗水还是泪水的咸味。`,
     );
-    await zensky.say_and_wait(`...接下来，换个地方说吧？${me.actual_name}？`);
+    await zensky.say_and_wait(`……接下来，换个地方说吧？${me.actual_name}？`);
     await era.printAndWait(
       `被散发出的迷人诱香的果实所吸引的无数游客们汇入了这份盛况之中，今夜，才刚刚进入高潮。`,
     );
@@ -2224,12 +2226,12 @@ module.exports = async function (hook, event_object) {
     await zensky.say_and_wait(`咚咚咚。`);
     await era.printAndWait(`门口传来了敲门声。`);
     if (era.get('love:4') >= 75) {
-      await zensky.say_and_wait(`哈喽~${callname}，起来了吗？`);
+      await zensky.say_and_wait(`哈喽～${callname}，起来了吗？`);
       await me.say_and_wait(`马上过来。`);
       await me.say_and_wait(`已经习惯在${zensky.name}家住下了吗。`, true);
       await era.printAndWait(`叠好被子，穿起衣服就开始准备工作。`);
     } else {
-      await zensky.say_and_wait(`哈喽~${callname}早上好？`);
+      await zensky.say_and_wait(`哈喽～${callname}早上好？`);
       await era.printAndWait(`${zensky.name}如往常一样来到了训练室。`);
     }
     await era.printAndWait(`新的一天开始了。`);
@@ -2312,7 +2314,7 @@ module.exports = async function (hook, event_object) {
     await era.input();
     await era.printAndWait(`不料，${zensky.name}看起来更开心了。`);
     await zensky.say_and_wait(
-      `呵呵~原来${callname}这么希望和我约会吗?啊啦♪${
+      `呵呵～原来${callname}这么希望和我约会吗?啊啦♪${
         era.get('cflag:4:性别') - 1 ? '美眉' : '帅锅'
       }我的魅力真是惊人呢⭐`,
     );
@@ -2321,7 +2323,7 @@ module.exports = async function (hook, event_object) {
     await zensky.say_and_wait(
       `我倒，和${callname}像这样走在步行道上也不错呢。`,
     );
-    era.printButton(`「啊啊.....好耀眼」`, 1);
+    era.printButton(`「啊啊……好耀眼」`, 1);
     await era.input();
     await era.printAndWait(
       `${me.name}与换上了冬装的${zensky.name}走在大街上,本就美丽的${
@@ -2345,7 +2347,7 @@ module.exports = async function (hook, event_object) {
     await era.printAndWait(
       `${me.name}握紧${zensky.name}逐渐温暖起来的小手，加快步伐试图甩开那些追星的粉丝们`,
     );
-    await zensky.say_and_wait(`.....呵呵♪`);
+    await zensky.say_and_wait(`……呵呵♪`);
     await era.printAndWait(
       `${me.get_couple_title()}好不容易才甩开了紧紧追在后面的粉丝群后,才发觉自己来到了市中心公园`,
     );
@@ -2355,7 +2357,7 @@ module.exports = async function (hook, event_object) {
       }似乎连呼吸都没有打乱节奏.`,
     );
     await era.printAndWait(`————比起平时的训练,这连开胃小菜都算不上.`);
-    await me.say_and_wait(`呼...呼...呼啊,总算甩开他们了吧`, true);
+    await me.say_and_wait(`呼……呼……呼啊,总算甩开他们了吧`, true);
     await zensky.say_and_wait(`${callname},这里好像很安静呢.`);
     await era.printAndWait(
       `相互交织的led灯缠绕在道路两旁的树木上,从${me.get_couple_title()}的身后向前方无限延伸.`,
@@ -2366,15 +2368,15 @@ module.exports = async function (hook, event_object) {
     era.printButton(`「是啊,这里真是一个约会的好地方啊」`, 1);
     await era.input();
     await zensky.say_and_wait(
-      `平安夜的话,训练员${me.get_adult_sex_title()}♪ ... 不想和最喜欢的人一起分享慢慢流逝的时光吗?`,
+      `平安夜的话,训练员${me.get_adult_sex_title()}♪ …… 不想和最喜欢的人一起分享慢慢流逝的时光吗?`,
     );
     await me.say_and_wait(`都说到这份上了，再不向前踏出这一步那就太失礼了！`);
-    await zensky.say_and_wait(`哼哼~所以${callname}的回答是?`);
+    await zensky.say_and_wait(`哼哼～所以${callname}的回答是?`);
     era.printButton(`${zensky.name}${me.get_adult_sex_title()},请和我约会!`, 1);
     await era.input();
 
     await zensky.say_and_wait(
-      `啊啦~${callname}可真有勇气呢,虽然我也想就这么顺着气势答应下来,不过————`,
+      `啊啦～${callname}可真有勇气呢,虽然我也想就这么顺着气势答应下来,不过————`,
     );
     await era.printAndWait(`在刚刚的奔跑中${me.name}的头发变得乱糟糟的`);
     await zensky.say_and_wait(
@@ -2391,7 +2393,7 @@ module.exports = async function (hook, event_object) {
       `${me.name}乖乖顺从${zensky.name}的意图将头低了下来.`,
     );
     await zensky.say_and_wait(
-      `嗯...${me.name}的头发有些干燥呢,${callname}真是辛苦了.`,
+      `嗯……${me.name}的头发有些干燥呢,${callname}真是辛苦了.`,
     );
     await era.printAndWait(
       `${zensky.sex}尽可能控制住力度温柔的梳理着${
@@ -2752,7 +2754,7 @@ module.exports = async function (hook, event_object) {
     await era.printAndWait(`将作为大人的矜持彻底抛开，像小孩子一样胡闹玩耍。`);
     await era.printAndWait(`意识到这样下去一定会输的${me.name}，加快了脚步。`);
     await era.printAndWait(
-      ` ${zensky.name}的眼神之中吐露出的‘想要跟现役的赛${zensky.get_uma_sex_title()}比赛跑步，${me.name}还要差了一百年呢’，以及因此故作充裕的将${me.name}的手放开，准备以优雅的脚步将${me.name}超越。`,
+      ` ${zensky.name}的眼神之中吐露出的「想要跟现役的赛${zensky.get_uma_sex_title()}比赛跑步，${me.name}还要差了一百年呢」，以及因此故作充裕的将${me.name}的手放开，准备以优雅的脚步将${me.name}超越。`,
     );
     await era.printAndWait(
       `——但${me.name}轻轻环住了${zensky.sex_code - 1 ? '她' : '他'}的腰肢，带着充满爱意的眼神直直的盯着对方看去。`,
@@ -2793,7 +2795,9 @@ module.exports = async function (hook, event_object) {
     );
     era.printButton(`「接下来还有烟火晚会吧？如果不赶快过去的话，」`, 1);
     await era.input();
-    await era.printAndWait(`‘还不够’， ${zensky.name}的手指依然没有停止动作。`);
+    await era.printAndWait(
+      `「还不够」， ${zensky.name}的手指依然没有停止动作。`,
+    );
     era.printButton(
       `「我想为了弥补去年的遗憾与 ${zensky.name}一同拥有这段美好的回忆！」`,
       1,
@@ -2836,7 +2840,7 @@ module.exports = async function (hook, event_object) {
       `突然意识到即将发生什么的${me.actual_name}从床上瞬间弹起，紧紧忙忙的穿起衣服。`,
     );
     await me.say_and_wait(`这下要被手纲${me.get_adult_sex_title()}说教了。`);
-    await zensky.say_and_wait(`呵呵~`);
+    await zensky.say_and_wait(`呵呵～`);
     await era.printAndWait(
       `看着${me.name}慌慌张张起床的样子，${zensky.name}轻轻的笑了。`,
     );
@@ -2845,7 +2849,7 @@ module.exports = async function (hook, event_object) {
     await me.say_and_wait(`${zensky.name}！`);
     await zensky.say_and_wait(`不给糖就捣蛋！`);
     await me.say_and_wait(`唔——万圣节不是愚人节啊！`);
-    await zensky.say_and_wait(`我就想要${callname}给我糖嘛~`);
+    await zensky.say_and_wait(`我就想要${callname}给我糖嘛～`);
     await me.say_and_wait(`之后一起去糖果店看吧。`);
     await era.printAndWait(`不知何时两人的嘴唇再次贴在了一起。`);
     await zensky.say_and_wait(`嗯——那就用这个稍微忍耐一下吧♪`);
@@ -2860,7 +2864,7 @@ module.exports = async function (hook, event_object) {
     );
     await me.say_and_wait(`接下来的话。`);
     await zensky.say_and_wait(`接下来的话？`);
-    await me.say_and_wait(`好像...有什么重要的事情要做？`);
+    await me.say_and_wait(`好像……有什么重要的事情要做？`);
     await zensky.say_and_wait(
       `${era.get('cflag:0:性别') - 1 ? '训·练·员·酱' : '训·练·员·君'}？`,
     );
@@ -2877,7 +2881,7 @@ module.exports = async function (hook, event_object) {
     await me.say_and_wait(`一起去糖果店吧？`);
     await era.printAndWait(`平静的语气连自己都感到了害怕。`);
     await zensky.say_and_wait(
-      `是呢。哎呀~${zensky.get_bigger_sibling_sex_title()}都差点忘了呢，真实多亏${callname}了♪`,
+      `是呢。哎呀～${zensky.get_bigger_sibling_sex_title()}都差点忘了呢，真实多亏${callname}了♪`,
     );
     await era.printAndWait(
       `刚才的压迫感就像什么也没发生一样消失了，话说${
@@ -2920,14 +2924,14 @@ module.exports = async function (hook, event_object) {
     await era.printAndWait(
       `当时的${
         zensky.sex
-      }似乎很开心的样子....不对,与以往在赛场之上不同,那是另一种的快乐.`,
+      }似乎很开心的样子……不对,与以往在赛场之上不同,那是另一种的快乐.`,
     );
     await era.printAndWait(
       `似乎为了和我一起享受奔跑的快乐故意放慢了脚步,当时的我大脑一片空白.`,
     );
-    await era.printAndWait(`还有情人节那次的接吻,粉丝感谢祭时的亲密接触...`);
+    await era.printAndWait(`还有情人节那次的接吻,粉丝感谢祭时的亲密接触……`);
     await era.printAndWait(`过去的回忆却如冒烟的炉火一般慢慢升起`);
-    await era.printAndWait(`实际上.....`);
+    await era.printAndWait(`实际上……`);
     await zensky.say_and_wait(`吓!`);
     await era.printAndWait(
       `似乎为了吓${me.name}一跳,${zensky.name}从${me.name}左手边的一棵榉树后突然冒了出来,那抹红色的身影在白雪的衬托下显得格外的耀眼.`,
@@ -3050,23 +3054,21 @@ module.exports = async function (hook, event_object) {
     await zensky.say_and_wait(
       `人们常说眼睛是心灵的窗户,那么在${callname}看来,我又是什么样的呢?`,
     );
-    await me.say_and_wait(`「些许感伤的温柔又美丽的眼睛」`);
+    await me.say_and_wait(`些许感伤的温柔又美丽的眼睛`);
     await zensky.say_and_wait(`${callname}又是想到了什么发出这份感慨呢?`);
-    await me.say_and_wait(`「那双温柔的眼睛一直在注视着后辈们」`);
-    await me.say_and_wait(`「虽然会因为快乐的时间不会一直持续下去而感伤」`);
-    await me.say_and_wait(
-      `「但因为坚信着后辈们会带来更加耀眼的光芒而感到快乐」`,
-    );
-    await me.say_and_wait(`「像是夏天万里无云的晴空一样」`);
+    await me.say_and_wait(`那双温柔的眼睛一直在注视着后辈们`);
+    await me.say_and_wait(`虽然会因为快乐的时间不会一直持续下去而感伤」`);
+    await me.say_and_wait(`但因为坚信着后辈们会带来更加耀眼的光芒而感到快乐`);
+    await me.say_and_wait(`像是夏天万里无云的晴空一样`);
     await zensky.say_and_wait(
       `${callname}是不是对我评价过高了呢?而且现在是冬季呢.`,
     );
     await me.say_and_wait(
-      `「没有人会小看那份温柔的力量,因为那归根结底可以算作爱.」`,
+      `没有人会小看那份温柔的力量,因为那归根结底可以算作爱.`,
     );
-    await me.say_and_wait(`「只有温柔的爱才能治愈人们心中的创伤.」`);
+    await me.say_and_wait(`只有温柔的爱才能治愈人们心中的创伤.`);
     await me.say_and_wait(
-      `「为回应那份爱而努力追逐着背影的孩子们所散发出的火焰,即使是冬天也能感受到和夏天一样的温暖」`,
+      `为回应那份爱而努力追逐着背影的孩子们所散发出的火焰,即使是冬天也能感受到和夏天一样的温暖`,
     );
     await zensky.say_and_wait(
       `如果注视着孩子们的背影的话,明天也会是一个温暖的晴天吧.`,
@@ -3148,10 +3150,10 @@ module.exports = async function (hook, event_object) {
     await zensky.say_and_wait(
       `嗯嗯，已经有两个小时没看到${
         callname
-      }了，${zensky.get_bigger_sibling_sex_title()}我真的好寂寞呢~`,
+      }了，${zensky.get_bigger_sibling_sex_title()}我真的好寂寞呢～`,
     );
     await zensky.say_and_wait(`作为补偿的话，今天下午和我一起约会吧♪`);
-    era.printButton(`「其实我也因为好~久没看到${zensky.name}所以不安了」`, 1);
+    era.printButton(`「其实我也因为好～久没看到${zensky.name}所以不安了」`, 1);
     await era.input();
     await zensky.say_and_wait(`${callname}果然一直想着我呢，那么惯例的——`);
     await era.printAndWait(`二人在训练场上紧紧地抱在了一起。`);
@@ -3209,7 +3211,7 @@ module.exports = async function (hook, event_object) {
     era.printButton(`「${zensky.name}我有话想对${me.name}说，所以」`, 1);
     await era.input();
     await zensky.say_and_wait(
-      `哼哼~${callname}想对${zensky.get_bigger_sibling_sex_title()}撒娇吗？`,
+      `哼哼～${callname}想对${zensky.get_bigger_sibling_sex_title()}撒娇吗？`,
     );
     await zensky.say_and_wait(`不管是什么恶……`);
     era.printButton(`「请跟我永远生活在一起」`, 1);
@@ -3326,14 +3328,14 @@ module.exports = async function (hook, event_object) {
     await zensky.say_and_wait(`不过真当自己拿到奖杯的那一刻，心底却非常平静。`);
     await say_by_passer_by(`记者A`, `可以和屏幕前的观众们详细说一下吗？`);
     await zensky.say_and_wait(
-      `是！${zensky.get_uma_sex_title()}们为了争夺第一在不为人知的地方挥洒汗水，在赛场之上奋力拼搏的朝气让我有了一种“啊，我就是为了这个才参加比赛的”。呵呵~`,
+      `是！${zensky.get_uma_sex_title()}们为了争夺第一在不为人知的地方挥洒汗水，在赛场之上奋力拼搏的朝气让我有了一种『啊，我就是为了这个才参加比赛的』。呵呵～`,
     );
     await say_by_passer_by(
       `记者A`,
       `${zensky.name}${zensky.get_adult_sex_title()}对${zensky.get_uma_sex_title()}们了解的很深呢。`,
     );
     await zensky.say_and_wait(
-      `是的！比赛之前我都会和参赛的${zensky.get_uma_sex_title()}们聊天。然后听到了很多有趣的事情呢~`,
+      `是的！比赛之前我都会和参赛的${zensky.get_uma_sex_title()}们聊天。然后听到了很多有趣的事情呢～`,
     );
     await say_by_passer_by(`记者A`, `可以和屏幕前的观众们说一下吗？`);
     await zensky.say_and_wait(
@@ -3403,7 +3405,7 @@ module.exports = async function (hook, event_object) {
     );
     await era.printAndWait(`再次醒来时，${me.name}来到了一片广阔无垠的草原。`);
     await era.printAndWait(
-      `与${zensky.name}谈笑时，${zensky.sex}半开玩笑的说着“我去过伊甸哦”。`,
+      `与${zensky.name}谈笑时，${zensky.sex}半开玩笑的说着「我去过伊甸哦」。`,
     );
     await era.printAndWait(
       `从这片人间绝对不存在的美景看来，${zensky.sex}说的恐怕是真的。`,
@@ -3502,9 +3504,9 @@ module.exports = async function (hook, event_object) {
       `落木归根，所见之人却非所思之人，心湖却被初春随风飞舞的第一片花瓣所覆盖，一切喧嚣归于沉寂。`,
     );
     await me.say_and_wait(`这是为了见到${me.name}所献上的礼物。`, true);
-    await me.say_and_wait(`我...我不会再逃避了。`, true);
+    await me.say_and_wait(`我……我不会再逃避了。`, true);
     await era.printAndWait(`不断涌出的泪水模糊了视野。`);
-    await me.say_and_wait(`${me.name}...${me.name}永远不会孤独了。`, true);
+    await me.say_and_wait(`${me.name}……${me.name}永远不会孤独了。`, true);
     await era.printAndWait(
       `最后的画面，定格在与${zensky.name}所见的那片大海。`,
     );
@@ -3596,7 +3598,7 @@ module.exports = async function (hook, event_object) {
     await era.printAndWait(`就像是梦中的幻影一样，${zensky.name}露出了笑容。`);
     await zensky.say_and_wait(`欢迎回来。`);
     await print_event_name(`GOOD END 伊甸之梦`, zensky);
-    await era.printAndWait(`Thank you for your watching!`);
+    await era.printAndWait(`Thank you for your playing!`);
   }
   wait_flag && (await era.waitAnyKey());
 };

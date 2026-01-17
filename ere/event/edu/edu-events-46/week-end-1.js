@@ -316,7 +316,7 @@ module.exports = (handlers = {}) => {
       `将头发自然的放下，若不是以其独特的发声，恐怕与人群之中来来往往的小${falcon.get_uma_sex_title()}没有区别。`,
     );
     await era.printAndWait(
-      `虽说你打算将保管于你的缎带交还给${falcon.name}，却以“还是放在训练员${falcon.get_uma_sex_title()}这边比较好哦，妈妈也同意了”的理由拒绝了。`,
+      `虽说你打算将保管于你的缎带交还给${falcon.name}，却以「还是放在训练员${falcon.get_uma_sex_title()}这边比较好哦，妈妈也同意了」的理由拒绝了。`,
     );
     await era.printAndWait(
       `……虽说自己不是那种会对小${falcon.get_uma_sex_title()}感兴趣的类型，但看向对方的时候，内心之中却涌现了一种难以言喻的感情。`,
@@ -389,7 +389,7 @@ module.exports = (handlers = {}) => {
         `啊拉，训练员君？今天把训练场地改到甜品店了是打算进行智力训练吗？`,
       );
       await chara4_talk.say_and_wait(
-        `呵呵~姐姐我也想一边吃着水果巴菲迅速提高智力呢。`,
+        `呵呵～姐姐我也想一边吃着水果巴菲迅速提高智力呢。`,
       );
       await era.printAndWait(`转弯抹角的暗示这不是训练员应该做的事情吗。`);
       await era.printAndWait(

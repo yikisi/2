@@ -478,7 +478,7 @@ recruit_4:
     content:
       - fontWeight: bold
         content: 目白麦昆
-      - 「呵呵~真是感到荣幸。」
+      - 「呵呵～真是感到荣幸。」
   - color: %代表色%
     content:
       - fontWeight: bold

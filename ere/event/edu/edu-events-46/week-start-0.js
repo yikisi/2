@@ -63,7 +63,7 @@ module.exports = (handlers) => {
     );
     await falcon.say_and_wait(`一定会是最棒的场景！`);
     await falcon.say_and_wait(
-      `啊啊。光是想到醒目飞鹰作为马娘偶像的场景，飞鹰子就有~说不尽的力气涌出来了！`,
+      `啊啊。光是想到醒目飞鹰作为马娘偶像的场景，飞鹰子就有～说不尽的力气涌出来了！`,
     );
     await falcon.say_and_wait(
       `训练员${me.get_adult_sex_title()}，接下来的目标是！`,
@@ -308,7 +308,7 @@ module.exports = (handlers) => {
       await falcon.say_and_wait(`但是应该找谁呢？`);
       await era.printAndWait(`如果考虑到醒目飞鹰积攒下来的人气。`);
       await me.say_and_wait(`我也会在旁边协助飞鹰子的。`);
-      await falcon.say_and_wait(`呼~得救了……太好了。`);
+      await falcon.say_and_wait(`呼～得救了……太好了。`);
       await era.printAndWait(`${falcon.name}兴奋的拉着你的手转起了圈。`);
       await era.printAndWait(`说起来——`);
       await era.printAndWait(
@@ -586,7 +586,7 @@ module.exports = (handlers) => {
           `不过昨天的演唱会上，有几个熟悉的面孔不见了。`,
         );
         await falcon.say_and_wait(
-          `在与粉丝之间的安可之上，也收到了“现实偶像不如虚拟偶像”的评价。`,
+          `在与粉丝之间的安可之上，也收到了「现实偶像不如虚拟偶像」的评价。`,
         );
         await falcon.say_and_wait(
           `虽然飞鹰子也不是那么在意这种事情啦⭐，不过飞鹰子还是觉得空落落的呢。`,

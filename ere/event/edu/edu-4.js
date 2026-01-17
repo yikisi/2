@@ -1,9 +1,10 @@
 /**
  * @file 丸善斯基 - 育成
- *
  * @author 黑奴一号
  */
 const era = require('#/era-electron');
+
+const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
 const CustomizedEdu = require('#/event/edu/edu-common');
 const maru_race_end = require('#/event/edu/edu-events-4/race-end');
@@ -19,7 +20,6 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const MaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-4');
 const { attr_names, fumble_result } = require('#/data/train-const');
-const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
 module.exports = class extends CustomizedEdu {
   async week_start(zensky, me, callname, hook, extra_flag, event_object) {
@@ -111,7 +111,7 @@ module.exports = class extends CustomizedEdu {
       await era.printAndWait(`${chara_talk.name}在之前的训练中不慎扭伤了脚踝`);
       await chara_talk.say_and_wait(`即使是我也已经到极限了哦`);
       await chara_talk.say_and_wait(
-        '不过，离下场比赛的日子也接近了呢...得赶快打起精神来！',
+        '不过，离下场比赛的日子也接近了呢……得赶快打起精神来！',
       );
       era.println();
 
@@ -125,7 +125,7 @@ module.exports = class extends CustomizedEdu {
         era.printButton('「如果伤口恶化的话就麻烦了。」', 1);
         await era.input();
         await chara_talk.say_and_wait(
-          '...知道了。既然决定要治疗了，那就要以完全恢复为目标才行！',
+          '……知道了。既然决定要治疗了，那就要以完全恢复为目标才行！',
         );
         await chara_talk.say_and_wait(
           '那么，为了打起精神来，去买点意式奶酪回来吧。',
@@ -135,7 +135,7 @@ module.exports = class extends CustomizedEdu {
         await chara_talk.say_and_wait(
           `哎呀，${callname}真是温柔呢，如果不是${
             era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'
-          }我而是后辈们的话，说不定一下子就被攻略了呢~`,
+          }我而是后辈们的话，说不定一下子就被攻略了呢～`,
         );
 
         era.printButton(`「${chara_talk.name}又在开玩笑了。」`, 1);
@@ -192,7 +192,7 @@ module.exports = class extends CustomizedEdu {
             `${me.name}随手拿起一张CD盘,脑海里不太确定是不是自己高中时反复听过这首歌.`,
           );
           await chara_talk.say_and_wait(
-            '呵呵~果然是首好歌♪让人忍不住想跳起舞来呢。',
+            '呵呵～果然是首好歌♪让人忍不住想跳起舞来呢。',
           );
           era.printButton(
             `「(只要${
@@ -227,14 +227,14 @@ module.exports = class extends CustomizedEdu {
         await chara_talk.say_and_wait(
           `不过受伤了这件事很没有${
             era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'
-          }的风采呢，这样会让小特${chara_talk.sex_code - 1 ? '她' : '他'}们....`,
+          }的风采呢，这样会让小特${chara_talk.sex_code - 1 ? '她' : '他'}们……`,
         );
 
         era.printButton('「没有这回事！」', 1);
         await era.input();
 
         await chara_talk.say_and_wait(
-          `嗯...说的没错，${
+          `嗯……说的没错，${
             era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'
           }我已经深刻反省了哦，等好好休息后一定会重新展现${
             era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'
@@ -280,7 +280,7 @@ module.exports = class extends CustomizedEdu {
             `${get_chara_talk(0).name}，我跳得怎么样？`,
           );
 
-          era.printButton('「......好耀眼！」', 1);
+          era.printButton('「……好耀眼！」', 1);
           await era.input();
           await chara_talk.say_and_wait(
             '呵呵♪就这样向后辈们展现出又酷又炫的风采吧！',
@@ -387,8 +387,8 @@ module.exports = class extends CustomizedEdu {
           `${zensky.sex}的手指触及${me.name}的肌肤，留下一丝冰凉的感觉.`,
         );
         await zensky.say_and_wait(
-          `这就是所谓的‘膝枕’吗？我也是第一次这么做.如果不舒服的话要和${
-            era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'
+          `这就是所谓的『膝枕』吗？我也是第一次这么做.如果不舒服的话要和${
+            zensky.elder_sibling_sex_title
           }说出来哦.`,
         );
         await era.printAndWait(
@@ -420,10 +420,10 @@ module.exports = class extends CustomizedEdu {
       era.printButton('「怎么了？」', 1);
       await era.input();
       await zensky.say_and_wait(
-        `那个....因为后辈们的邀请，我们打算去时髦的市区买东西，${me.name}也知道这种走在时尚最尖端的感觉吧？`,
+        `那个……因为后辈们的邀请，我们打算去时髦的市区买东西，${me.name}也知道这种走在时尚最尖端的感觉吧？`,
       );
       await zensky.say_and_wait(
-        `......可是，${me.name}也知道，时尚的变化非常快嘛。虽然我也有努力学习最新最潮的知识啦，不过，和后辈们交流的时候总会出现好像没有办法沟通的情况。`,
+        `……可是，${me.name}也知道，时尚的变化非常快嘛。虽然我也有努力学习最新最潮的知识啦，不过，和后辈们交流的时候总会出现好像没有办法沟通的情况。`,
       );
       await zensky.say_and_wait(
         `然后，气氛就会变得非常尴尬嘛。所以为了不让大家失望，${me.name}可以帮我想些好办法吗？`,
@@ -443,7 +443,7 @@ module.exports = class extends CustomizedEdu {
           `事不宜迟，就先确认那条街道的潮流趋势吧，那边的CD店也许能确认到最新的潮流哦♪`,
         );
         await era.printAndWait(
-          `${zensky.name}指向了一家颇具年代感的CD店，不过再怎么说在那里找到最新的潮流还是有点......`,
+          `${zensky.name}指向了一家颇具年代感的CD店，不过再怎么说在那里找到最新的潮流还是有点……`,
         );
         await zensky.say_and_wait(`${callname}，哪里不舒服吗？`);
         await era.printAndWait(
@@ -455,12 +455,12 @@ module.exports = class extends CustomizedEdu {
           `一段时间后，${me.name}和${zensky.name}确认了这条街道所有的店铺.`,
         );
         await zensky.say_and_wait(
-          `要追求最新潮流可真难，明明妈妈说过这种事只要掌握诀窍就没问题了.......`,
+          `要追求最新潮流可真难，明明妈妈说过这种事只要掌握诀窍就没问题了……`,
         );
         era.printButton(`「要不要试着说些妈妈教${me.name}的事呢？」`, 1);
         await era.input();
         await zensky.say_and_wait(
-          `和后辈们说吗......原来如此，这也是个可行的办法，与其追求流行，自己主动推广的话一定会更快乐!`,
+          `和后辈们说吗……原来如此，这也是个可行的办法，与其追求流行，自己主动推广的话一定会更快乐!`,
         );
         await zensky.say_and_wait(
           `那么明天就向后辈们推广潮流吧,${callname}谢谢${me.name}咯⭐`,
@@ -473,7 +473,7 @@ module.exports = class extends CustomizedEdu {
         get_attr_and_print_in_event(4, [10, 0, 0, 0, 0], 0) &&
           (await era.waitAnyKey());
       } else {
-        await zensky.say_and_wait(`要对自己的品味有自信吗......？`);
+        await zensky.say_and_wait(`要对自己的品味有自信吗……？`);
         await zensky.say_and_wait(
           `也许是我变得有些胆小了。踌躇不安的样子可真不像我呢。`,
         );
@@ -502,7 +502,7 @@ module.exports = class extends CustomizedEdu {
     const event_marks = new MaEduMarks();
     if (event_marks.favourite_things === 1) {
       event_marks.favourite_things++;
-      await print_event_name(`${zensky.name}，畅谈“喜欢”`, zensky);
+      await print_event_name(`${zensky.name}，畅谈「喜欢」`, zensky);
       await era.printAndWait(`今天的${zensky.name}在接受采访.`);
       await era.printAndWait(
         `记者:那么，接下来想谈谈您穿的决胜服。请问您对这套决胜服最满意的地方在哪里呢？`,
@@ -520,7 +520,7 @@ module.exports = class extends CustomizedEdu {
       await zensky.say_and_wait(
         `现在这个梦想也实现了哦，每天都开着小塔到处跑哦♪`,
       );
-      await era.printAndWait(`采访顺利进行着......`);
+      await era.printAndWait(`采访顺利进行着……`);
       await era.printAndWait(`记者：非常感谢，那么最后也拜托您让我们拍张照`);
       await zensky.say_and_wait(`了解！我会在尽量展现自己的魅力的.`);
       await zensky.say_and_wait(`对了！最熟悉我的人是${callname}吧？`);
@@ -552,10 +552,10 @@ module.exports = class extends CustomizedEdu {
           `几天后，在和${zensky.name}一起确认采访报导的时候.`,
         );
         await zensky.say_and_wait(
-          `拍出了很棒的笑容呢♪而且这里......也提到了${me.name}的名字呢.`,
+          `拍出了很棒的笑容呢♪而且这里……也提到了${me.name}的名字呢.`,
         );
         await zensky.say_and_wait(
-          `嗯......‘和训练员之间的羁绊关系所产生的令人印象深刻的笑容’上面是这么写的呢！`,
+          `嗯……『和训练员之间的羁绊关系所产生的令人印象深刻的笑容』上面是这么写的呢！`,
         );
         era.printButton('「有点不好意思」', 1);
         await era.input();
@@ -643,7 +643,7 @@ module.exports = class extends CustomizedEdu {
         era.printButton('「非常美味」', 1);
         await era.input();
         await zensky.say_and_wait(`真的吗!那${me.name}也来喂我吧？`);
-        await zensky.say_and_wait(`啊~嗯`);
+        await zensky.say_and_wait(`啊～嗯`);
         await era.printAndWait(
           `${zensky.name}正催促着${me.name}的行动,双耳抖动得更加激烈了.`,
         );
@@ -684,7 +684,7 @@ module.exports = class extends CustomizedEdu {
         await era.printAndWait(
           `${me.name}从钱包中抽出马币准备付款时,店主略微摇了摇头,然后继续擦起了高脚杯.`,
         );
-        era.printButton('「......谢谢」', 1);
+        era.printButton('「……谢谢」', 1);
         await era.input();
         await era.printAndWait(`然后${me.name}正准备离开时`);
         await era.printAndWait(`店主:这位客人,与${me.name}的小女友好好度过吧.`);
@@ -725,7 +725,7 @@ module.exports = class extends CustomizedEdu {
         await zensky.say_and_wait(
           `呵呵♪风的气息吹拂在脸上的感觉真是令人心潮澎湃，小塔也很高兴呢♪`,
         );
-        await zensky.say_and_wait(`.......${callname}，${me.name}还好吗。`);
+        await zensky.say_and_wait(`……${callname}，${me.name}还好吗。`);
         await era.printAndWait(
           `${zensky.name}放慢了车速，${me.name}的灵魂终于从三女神那回到了自己的身体里`,
         );
@@ -908,7 +908,7 @@ module.exports = class extends CustomizedEdu {
         `实际上也不是为了遵循传统，单纯的只是想要谋求好运气罢了。`,
       );
       await zensky.say_and_wait(
-        `果然新年还是在神社祈福对吧？这样比较有新年的感觉呢~！`,
+        `果然新年还是在神社祈福对吧？这样比较有新年的感觉呢～！`,
       );
       await zensky.say_and_wait(
         `一年之计在于春，向三女神大人献上一年份的汗水与努力吧！`,
@@ -916,15 +916,15 @@ module.exports = class extends CustomizedEdu {
       era.printButton(`「接下来的目标是什么？」`, 1);
       await era.input();
       await zensky.say_and_wait(
-        `呵呵~我的目标是——今年也能参加许多有趣的比赛！`,
+        `呵呵～我的目标是——今年也能参加许多有趣的比赛！`,
       );
       await zensky.say_and_wait(
-        `而且为了让大家都来追逐我的背影，所以我要比之前更~加大显风采！`,
+        `而且为了让大家都来追逐我的背影，所以我要比之前更～加大显风采！`,
       );
       era.printButton(`「我会好好协助${me.name}的！」`, 1);
       await era.input();
       await zensky.say_and_wait(
-        `${callname}真可靠呢~${era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'}我很稀饭这种感觉哦？`,
+        `${callname}真可靠呢～${era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'}我很稀饭这种感觉哦？`,
       );
       await era.printAndWait(`话说回来，接下来努力的方向是?`);
       era.println();
@@ -934,7 +934,7 @@ module.exports = class extends CustomizedEdu {
       const ret = await era.input();
       if (ret === 1) {
         await zensky.say_and_wait(
-          '俗话说“居移气,养移体”，注意身体健康确实很重要呢.',
+          '俗话说『居移气，养移体』，注意身体健康确实很重要呢.',
         );
         await zensky.say_and_wait('决定了！接下来的目标是身体健康管理！');
         await zensky.say_and_wait('好了，赶快进去吧！');
@@ -957,7 +957,7 @@ module.exports = class extends CustomizedEdu {
           (await era.waitAnyKey());
       } else {
         await zensky.say_and_wait('说到我的长处的话，果然还是驾驶技术吧？');
-        await zensky.say_and_wait('才怪~我在开玩笑呢！是要磨砺跑步技能对吧?');
+        await zensky.say_and_wait('才怪～我在开玩笑呢！是要磨砺跑步技能对吧?');
         await zensky.say_and_wait('OK！训练的时候我也会注意这一方面的.');
         await zensky.say_and_wait('嗯，稍微耽搁了一下下呢，赶快进去吧！');
         era.println();
@@ -985,12 +985,12 @@ module.exports = class extends CustomizedEdu {
       await era.printAndWait(`听到了微弱的哭泣声。`);
       await zensky.say_and_wait(`咦——这个声音是？`);
       await zensky.say_and_wait(`${me.name}在这里干什么啊，米浴？`);
-      await chara_30.say_and_wait('米浴......米浴是一个没用的孩子。');
+      await chara_30.say_and_wait('米浴……米浴是一个没用的孩子。');
       await chara_30.say_and_wait(
         '明明好不容易才邀请米浴一起玩警察抓小偷游戏的.',
       );
       await chara_30.say_and_wait(
-        '只有米浴还没有被抓住......明明朋友们为了掩护我都被抓住了，米浴该怎么办才好呢......',
+        '只有米浴还没有被抓住……明明朋友们为了掩护我都被抓住了，米浴该怎么办才好呢……',
       );
       await era.printAndWait(
         `听完米浴的话后，${zensky.name}和${me.name}一齐向下方看去，发现在中庭的中心有个像监狱一样的地方。`,
@@ -1002,7 +1002,7 @@ module.exports = class extends CustomizedEdu {
       await zensky.say_and_wait(
         `以体力决胜的A计划和以智慧取胜的B计划，${me.name}觉得哪个比较好呢？`,
       );
-      await chara_30.say_and_wait('米浴......米浴也不知道,');
+      await chara_30.say_and_wait('米浴……米浴也不知道,');
       await era.printAndWait(
         `米浴的目光捕捉到了${me.name}的存在，似乎是看到救星了一样看向${me.name}.`,
       );
@@ -1019,7 +1019,7 @@ module.exports = class extends CustomizedEdu {
             zensky.sex
           }保持一个相对稳定的距离，等到对方体力耗尽的时候就不得不停下来了.`,
         );
-        await chara_30.say_and_wait('这，这种事情.....米浴能办到吗？');
+        await chara_30.say_and_wait('这，这种事情……米浴能办到吗？');
         await zensky.say_and_wait(
           `绝对能办到！小米浴做事认真又努力，意志力又很强，而且是我自豪地后辈哦！`,
         );
@@ -1027,7 +1027,7 @@ module.exports = class extends CustomizedEdu {
         await chara_30.say_and_wait(
           `既然是丸善${
             era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'
-          }的保证，米、米浴......那个，会，会去试试看......!`,
+          }的保证，米、米浴……那个，会，会去试试看……!`,
         );
         await zensky.say_and_wait(
           `呵呵♪，托${me.name}的福，我也想到能够增强耐力的训练项目了`,
@@ -1042,15 +1042,15 @@ module.exports = class extends CustomizedEdu {
         await zensky.say_and_wait(
           `简单的说，就是把对面引诱到地势复杂的地方，比如说校舍之类的，然后在分叉处甩掉对方！`,
         );
-        await chara_30.say_and_wait('米、米浴，做得到这种事情吗......!');
+        await chara_30.say_and_wait('米、米浴，做得到这种事情吗……!');
         await chara_30.say_and_wait('可以的！米浴不是很擅长思考吗？');
         await era.printAndWait(`${zensky.name}说着紧紧地握住了米浴的手。`);
         await zensky.say_and_wait(
           `只要冷静下来好好思考，米浴一定没问题的！好吗？`,
         );
-        await chara_30.say_and_wait('唔 ......米浴......会试试看......！');
+        await chara_30.say_and_wait('唔 ……米浴……会试试看……！');
         await zensky.say_and_wait(
-          `.......呵呵，既然都对后辈这么说了，作为${
+          `……呵呵，既然都对后辈这么说了，作为${
             era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'
           }我也要好好做到才行呢。`,
         );
@@ -1086,7 +1086,7 @@ module.exports = class extends CustomizedEdu {
       await era.printAndWait(`那边的，是沉默的看着演出的${zensky.name}。`);
       await era.printAndWait(`应该在这种时候和她说话吗？`);
       era.printButton(`再怎么说还是要看气氛才行`, 1);
-      era.printButton(`......不对`, 2);
+      era.printButton(`……不对`, 2);
       const ret1 = await era.input();
       if (ret1 === 1) {
         await era.printAndWait(`这个时候上去搭话过于看不懂气氛了。`);
@@ -1096,19 +1096,19 @@ module.exports = class extends CustomizedEdu {
         await era.printAndWait(
           `不停的将周围的人群排开，你走到了${zensky.name}附近。`,
         );
-        await me.say_and_wait(`......${zensky.name}。`);
+        await me.say_and_wait(`……${zensky.name}。`);
         await era.printAndWait(
           `尽管一开始就打算向她提出的问题，现在到了关键时刻反而不知道该说些什么比较好了。`,
         );
         await zensky.say_and_wait(`欸？`);
         await era.printAndWait(`${zensky.name}带着不可置信的表情看着你。`);
         await zensky.say_and_wait(
-          `${me.actual_name}怎么会......抱歉，现在思绪有些混乱了。`,
+          `${me.actual_name}怎么会……抱歉，现在思绪有些混乱了。`,
         );
         await era.printAndWait(
           `尽管语气与之前相比更加轻快，但那份刺耳的刻意感却让你感到了难过。`,
         );
-        era.printButton(`......${zensky.name}。`, 1);
+        era.printButton(`……${zensky.name}。`, 1);
         era.printButton(`我有个问题想问`, 2);
         const ret2 = await era.input();
         if (ret2 === 1) {
@@ -1193,13 +1193,13 @@ module.exports = class extends CustomizedEdu {
       await era.printAndWait(`然后重重的关上了门。\n\n\n\n\n\n`);
       await era.printAndWait(`——黏在办公桌上的一便利贴`);
       await era.printAndWait(`与担当马娘${zensky.name}于天台见面。`);
-      await era.printAndWait(`......`);
+      await era.printAndWait(`……`);
       await era.printAndWait(`出道战结束后与${zensky.name}在预订餐厅庆祝。`);
-      await era.printAndWait(`......`);
+      await era.printAndWait(`……`);
       await era.printAndWait(
         `等到皋月赏结束后，向${zensky.name}学习开车以及做饭的技巧（注：${zensky.name}做饭非常好吃！）。`,
       );
-      await era.printAndWait(`......`);
+      await era.printAndWait(`……`);
       await era.printAndWait(`感谢一直以来的陪伴，是我承受不住压力，对不起。`);
       await print_event_name('BAD END:木旺土溃', zensky);
       await era.printAndWait(`不久后，你单方面向理事长提出了辞职申请。`);
@@ -1219,7 +1219,7 @@ module.exports = class extends CustomizedEdu {
       await zensky.say_and_wait(`${me.actual_name}，送到这里就可以了。`);
       await me.say_and_wait(`到了巴黎后，要给我发消息哦？`);
       await zensky.say_and_wait(
-        `呵呵~当然，虽然只是两个月的旅行，不过终于有机会可以去埃菲尔铁塔参观了。`,
+        `呵呵～当然，虽然只是两个月的旅行，不过终于有机会可以去埃菲尔铁塔参观了。`,
       );
       await zensky.say_and_wait(
         `${me.actual_name}也是，不要在我离开的时候勾搭其他马娘哦？`,
@@ -1233,7 +1233,7 @@ module.exports = class extends CustomizedEdu {
       await me.say_and_wait(`一路顺风！`);
       await zensky.say_and_wait(`${me.actual_name}回去的时候也要一路顺风哦！`);
       await era.printAndWait(`不知为何，${zensky.name}露出了寂寞的表情。`);
-      await zensky.say_and_wait(`${me.actual_name}......不，没什么。`);
+      await zensky.say_and_wait(`${me.actual_name}……不，没什么。`);
       await zensky.say_and_wait(`差不多该出发了。`);
       await era.printAndWait(`你看着${zensky.name}的身影消失在了人群之中。`);
       era.drawLine();
@@ -1280,13 +1280,13 @@ module.exports = class extends CustomizedEdu {
       await era.printAndWait(
         `比起任何时候都要温柔的抚摸，${me.actual_name}却感到了恐惧。`,
       );
-      await me.say_and_wait(`路上小心......无论如何也说不出口`, true);
+      await me.say_and_wait(`路上小心……无论如何也说不出口`, true);
       //节拍4 行动：丸善斯基鼓励训练员 反应：玩家笑着接受了这份鼓励 失/得(+)
       await zensky.say_and_wait(
         `即使身处异国他乡，我们之间相系的纽带也不会断开。`,
       );
       await zensky.say_and_wait(`所以，勇敢一点吧，我最喜欢的${callname}。`);
-      await me.say_and_wait(`......是啊，我感受到了这份温暖在我的心中涌动。`);
+      await me.say_and_wait(`……是啊，我感受到了这份温暖在我的心中涌动。`);
       //节拍5 行动：丸善斯基准备离开 反应：玩家目送丸善斯基离开 失/得(-)
       await me.say_and_wait(`那么，该出发了——`);
       await zensky.say_and_wait(`——是啊，现在是分别的时候了。`);
@@ -1386,11 +1386,11 @@ module.exports = class extends CustomizedEdu {
         `说不定在这段时间就想通该怎么面对 ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}和后辈们了呢♪`,
       );
       zensky.print(
-        `......就跟 ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}所想的一样，我不过是一个夹着尾巴逃跑的懦弱马娘。`,
+        `……就跟 ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}所想的一样，我不过是一个夹着尾巴逃跑的懦弱马娘。`,
       );
-      zensky.print(`......想来想去，恐怕也只有这条路可以走了呢。`);
+      zensky.print(`……想来想去，恐怕也只有这条路可以走了呢。`);
       zensky.print(
-        `虽然就这么抛下这边的后辈们内心多少还是有罪恶感......不，她们凭借自己的努力一定会超过我的！`,
+        `虽然就这么抛下这边的后辈们内心多少还是有罪恶感……不，她们凭借自己的努力一定会超过我的！`,
       );
       zensky.print(
         `我发自内心的相信，她们一定会变得更加勇敢，更加努力的向着更高的顶峰奔跑。`,
@@ -1410,7 +1410,7 @@ module.exports = class extends CustomizedEdu {
       await era.printAndWait(
         `信的最后一行被泪水沾湿，向四周扩散的字迹模糊不清。`,
       );
-      await me.say_and_wait(`......`);
+      await me.say_and_wait(`……`);
       await era.printAndWait(
         `但是${zensky.name}已经不会再回来了。你心中比谁都清楚。`,
       );

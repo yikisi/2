@@ -1,13 +1,15 @@
 const era = require('#/era-electron');
+
 const print_event_name = require('#/event/snippets/print-event-name');
 
-const MaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-4');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+
+const FalconEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-46');
 
 module.exports = async () => {
   const falcon = get_chara_talk(46),
     me = get_chara_talk(0);
-  if (new MaEduMarks().crazy_fan) {
+  if (new FalconEduMarks().crazy_fan) {
     await era.printAndWait(`一个平平无奇的早上`);
     await falcon.say_and_wait(
       `训练员${me.get_adult_sex_title()}今天也要加油哦⭐`,
@@ -134,22 +136,20 @@ module.exports = async () => {
     await era.printAndWait(
       `——打算最后看一眼的${falcon.name}却目睹了整个过程。`,
     );
-    await falcon.say_and_wait(
-      `训练员${me.get_adult_sex_title()}......欢迎回来！`,
-    );
+    await falcon.say_and_wait(`训练员${me.get_adult_sex_title()}……欢迎回来！`);
     await me.say_and_wait(`已经过去多久了？`);
     await era.printAndWait(
       `一定已经过去很久了，（玩家名）已经做好了最糟的打算。`,
     );
     await falcon.say_and_wait(`嗯——从那件事件后已经过去三年了。`);
-    await me.say_and_wait(`......这样啊。`);
+    await me.say_and_wait(`……这样啊。`);
     await era.printAndWait(`已经过去这么久了啊。`);
     await me.say_and_wait(`你看起来比之前更加闪耀了。`);
     await era.printAndWait(`难以想象孤独的少女是如何踏上这条偶像之路的。`);
     await falcon.say_and_wait(
       `嗯！训练员${me.get_adult_sex_title()}出院后也能看到闪耀的飞鹰子了！`,
     );
-    await me.say_and_wait(`......对不起。`);
+    await me.say_and_wait(`……对不起。`);
     await era.printAndWait(`明明作为训练员的我应该站在你的身边的。`);
     await falcon.say_and_wait(
       `不会的，飞鹰子能看到训练员${me.get_adult_sex_title()}清醒的样子，飞鹰子就已经很幸福了。`,
@@ -163,7 +163,7 @@ module.exports = async () => {
       `轻轻将大手放在了自己的脸颊，${falcon.name}闭上了双眼感受着久违的温暖。`,
     );
     await me.say_and_wait(
-      `......嗯，一定会的，飞鹰子的演唱会，与飞鹰子接下来的一切，全都会。`,
+      `……嗯，一定会的，飞鹰子的演唱会，与飞鹰子接下来的一切，全都会。`,
     );
     await era.printAndWait(
       `湿润的感觉从嘴唇之中传来，将接下来的话语生生遏止住了。`,

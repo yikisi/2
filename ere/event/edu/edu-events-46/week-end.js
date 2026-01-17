@@ -126,9 +126,7 @@ module.exports = (handlers = {}) => {
       1,
     );
     await era.input();
-    await flash.say_and_wait(
-      `“真是相当感性的回答呢，既然如此，那我也放心了。”`,
-    );
+    await flash.say_and_wait(`真是相当感性的回答呢，既然如此，那我也放心了。`);
     await era.printAndWait(`荣进闪耀朝你微微鞠躬，似乎是在表达谢意。`);
     await flash.say_and_wait(
       `飞鹰同学她以后就拜托给您了，作为她的朋友，如果您有任何需要的话，我也会竭力提供帮助的。`,
@@ -156,7 +154,7 @@ module.exports = (handlers = {}) => {
       `出道战结束后，在赛场以及舞台上闪闪发光的飞鹰子受到了大量的关注。`,
     );
     await era.printAndWait(
-      `马推上‘${falcon.get_uma_sex_title()}偶像？！${falcon.name}⭐’受到大量讨论。`,
+      `马推上「${falcon.get_uma_sex_title()}偶像？！${falcon.name}⭐」受到大量讨论。`,
     );
     await era.printAndWait(`随之而来的河边演出视频也在马推上收获了大量粉丝。`);
     await me.say_and_wait(`就这样继续前进！`, true);
@@ -177,7 +175,7 @@ module.exports = (handlers = {}) => {
     await era.printAndWait(
       `你一边协助${falcon.name}将搭建的舞台重新收起，一边观察着醒目飞鹰的神情。`,
     );
-    await falcon.say_and_wait(`~~~♪`);
+    await falcon.say_and_wait(`～～～♪`);
     await era.printAndWait(`心情不错的${falcon.name}还沉浸在演出之中。`);
     await me.say_and_wait(`辛苦了！接下来我来善后吧。`);
     await era.printAndWait(`正准备揽下所有收尾工作的你被尾巴扑打到了好几下。`);
@@ -253,7 +251,7 @@ module.exports = (handlers = {}) => {
     );
     falcon.print(`是偶像修行的程度还太浅的缘故吧，这么试着向自己问道。`);
     falcon.print(
-      `另一个自己却摇摇头，“不能让粉丝们看到飞鹰子消极的一面”，所以抛弃了消极的想法。`,
+      `另一个自己却摇摇头，「不能让粉丝们看到飞鹰子消极的一面」，所以抛弃了消极的想法。`,
     );
     falcon.print(`上一次已经试过了女仆装，这次要不要试试决胜服进行演出呢？`);
     falcon.print(`毕竟飞鹰子的粉丝们也总因为这样那样的理由没机会进入赛场呢。`);
@@ -443,7 +441,7 @@ module.exports = (handlers = {}) => {
       `但是，看着${falcon.name}日益增大的粉丝群体，以及变得越来越慢的日程表。`,
     );
     await era.printAndWait(`不知为何，心里的角落变得空落落的。`);
-    await me.say_and_wait(`......我有好好完成作为训练员的职责吗？`, true);
+    await me.say_and_wait(`……我有好好完成作为训练员的职责吗？`, true);
     await era.printAndWait(
       `每天的注意力资源非常有限，所以只能将注意力放在自己能察觉到的范围内。`,
     );
@@ -544,7 +542,7 @@ module.exports = (handlers = {}) => {
       `对于训练员先生也是这样吗……飞鹰子现在充满了活力！`,
     );
     era.drawLine({ content: '演唱会结束后' });
-    await falcon.say_and_wait(`~~~~♪ 谢谢大家！`);
+    await falcon.say_and_wait(`～～～～♪ 谢谢大家！`);
     await say_by_passer_by(`粉丝们`, `飞鹰子！飞鹰子！`);
     await era.printAndWait(
       `在附近小镇里举行的演唱会意外的很有人气，甚至有因为听到飞鹰子要开演唱会而专门开了3个小时车过来赶过来的粉丝。`,
@@ -597,7 +595,7 @@ module.exports = (handlers = {}) => {
     // 过量摄入可能会中毒
     await print_event_name('萱草', falcon);
     await era.printAndWait(`在商业街举行的突击演唱会\n`);
-    await falcon.say_and_wait(`~~~♪大家辛苦了！`);
+    await falcon.say_and_wait(`～～～♪大家辛苦了！`);
     await era.printAndWait(
       `以沙地为作战方向，在最先头一直闪耀的${falcon.get_uma_sex_title()}偶像——${falcon.name}，如今已经是热门话题。`,
     );
@@ -628,7 +626,7 @@ module.exports = (handlers = {}) => {
       `开什么玩笑！我可是从飞鹰子还未出道的时候就已经开始支持飞鹰子的资深粉丝！虽然现在经济有点拮据……不过对飞鹰子的爱比你们更强！`,
     );
     await era.printAndWait(
-      `被粉丝们称作“偶像制作人”的你，本职却几乎被人所遗忘，你看着越来越狂热的粉丝群体，心中的担忧越来越深。`,
+      `被粉丝们称作「偶像制作人」的你，本职却几乎被人所遗忘，你看着越来越狂热的粉丝群体，心中的担忧越来越深。`,
     );
     await me.say_and_wait(
       `……也许是现在的人内心越来越渴求寻找一个精神寄托的存在吧。`,

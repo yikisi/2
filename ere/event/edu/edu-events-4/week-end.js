@@ -3,8 +3,8 @@ const era = require('#/era-electron');
 const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
-const { say_by_passer_by } = require('#/utils/chara-talk');
 
+const { say_by_passer_by } = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const MaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-4');
@@ -12,20 +12,19 @@ const event_hooks = require('#/data/event/event-hooks');
 const { location_enum } = require('#/data/locations');
 
 /**
+ * @this CustomizedEdu
  * @param {HookArg} hook
- * @param {EventObject} event_object
+ * @param {EventObject} ebj
  */
-module.exports = async function (hook, event_object) {
-  const zensky = get_chara_talk(4),
-    luna = get_chara_talk(17),
-    digital = get_chara_talk(19),
-    me = get_chara_talk(0),
-    event_marks = new MaEduMarks(),
-    edu_weeks = era.get('cflag:4:育成回合计时');
+module.exports = async function (hook, ebj) {
+  const zensky = get_chara_talk(4);
+  const luna = get_chara_talk(17);
+  const digital = get_chara_talk(19);
+  const me = get_chara_talk(0);
+  const edu_marks = new MaEduMarks();
+  const edu_weeks = era.get('cflag:4:育成回合计时');
   let wait_flag = false;
-  // todo 报错
-  if (event_marks.beginning === 1) {
-    event_marks.beginning++;
+  if (ebj.arg === 'beginning') {
     // 从  ${zensky.name}登场开始 风数值为1 最终结局与风数值 例：TE=20 GE = 17-19 其余均为NE
     // 尽管竞争将造成极大的损耗，但你不想去看看那里的风景吗？
     await print_event_name(`序章·${zensky.name}登场`, zensky);
@@ -100,11 +99,11 @@ module.exports = async function (hook, event_object) {
     );
     era.printButton(`「而且」`, 1);
     await era.input();
-    await say_by_passer_by(
+    say_by_passer_by(
       `路人${zensky.get_uma_sex_title()}`,
       `欸？丸善${era.get('cflag:0:性别') - 1 ? '学姐' : '学长'}竟然会同意那样的人作为三年的担当？`,
     );
-    await say_by_passer_by(
+    say_by_passer_by(
       `路人训练员`,
       `说到底，${me.actual_name}只是被怪物一样的${zensky.name}心血来潮看上的幸运儿罢了，真是个运气好的家伙`,
     );
@@ -218,9 +217,9 @@ module.exports = async function (hook, event_object) {
     );
     //风属性为1
     wait_flag = get_attr_and_print_in_event(4, undefined, 120) || wait_flag;
-  } else if (event_marks.dream === 1) {
+  } else if (edu_marks.dream === 1) {
     await print_event_name(`焦鹿梦`, zensky);
-    event_marks.dream++;
+    edu_marks.dream++;
     //比喻虚幻迷离、得失无常，以及稀里糊涂、犹如做梦的状况。
     zensky.print(
       `醒来的时候，发现自己躺在草地上，周围是一片花田，从身边的草地一路延伸到地平线的尽头。`,
@@ -648,12 +647,12 @@ module.exports = async function (hook, event_object) {
       `差不多该回家吃饭了， ${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'} ——`,
     );
     await era.printAndWait(`月亮升起来了。`);
-    event_marks.wind++;
+    edu_marks.wind++;
     wait_flag =
       get_attr_and_print_in_event(4, [10, 0, 10, 0, 0], 0) || wait_flag;
-  } else if (edu_weeks === 47 + 12 && event_marks.sister_annoyance === 1) {
+  } else if (edu_weeks === 47 + 12 && edu_marks.sister_annoyance === 1) {
     // 训练员鼓励${chara_talk.name}，${chara_talk.name}在训练员相信自己的时候重整旗鼓
-    event_marks.sister_annoyance++;
+    edu_marks.sister_annoyance++;
     await print_event_name(
       `${era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'}的烦恼`,
       zensky,
@@ -805,7 +804,7 @@ module.exports = async function (hook, event_object) {
     await era.printAndWait(
       `谈笑之间你们走向了小塔。随后，惨叫声响彻了特雷森。`,
     );
-    event_marks.wind--;
+    edu_marks.wind--;
 
     wait_flag =
       get_attr_and_print_in_event(4, [10, 10, 10, 10, 10], undefined) ||
@@ -835,7 +834,7 @@ module.exports = async function (hook, event_object) {
       `虽然疑惑为什么负责的${zensky.get_uma_sex_title()}会在深夜打过来电话，但你还是毫不犹豫地接通了。`,
     );
     await zensky.say_and_wait(
-      `嗨~ ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'} ，今晚的天气可真不错呢~`,
+      `嗨～ ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'} ，今晚的天气可真不错呢～`,
     );
     await me.say_and_wait(`我这边的话除了看惯了的风景以外也没有什么特别的地方`);
     await me.say_and_wait(`以及，`);
@@ -944,7 +943,7 @@ module.exports = async function (hook, event_object) {
       );
       await me.say_and_wait(`……`);
       await era.printAndWait(`你度过了相当煎熬的一个晚上。`);
-      event_marks.wind++;
+      edu_marks.wind++;
     } else {
       await me.say_and_wait(`……${zensky.name}，我还是送你回去了吧。`);
       await zensky.say_and_wait(`诶？真的吗？`);
@@ -977,14 +976,14 @@ module.exports = async function (hook, event_object) {
       await era.printAndWait(
         `第二天，关于你和嗅到了大新闻气息的狗仔队斗智斗勇那就是另一场冒险了。`,
       );
-      event_marks.wind--;
+      edu_marks.wind--;
     }
 
     wait_flag =
       get_attr_and_print_in_event(4, [10, 10, 10, 10, 10], undefined) ||
       wait_flag;
-  } else if (edu_weeks === 47 + 21 && event_marks.girls_blue === 1) {
-    event_marks.girls_blue++;
+  } else if (edu_weeks === 47 + 21 && edu_marks.girls_blue === 1) {
+    edu_marks.girls_blue++;
     await print_event_name(`${zensky.get_teen_sex_title()}的忧郁`, zensky);
     await era.printAndWait(`空教室`);
     await era.printAndWait(
@@ -1066,7 +1065,7 @@ module.exports = async function (hook, event_object) {
       await era.printAndWait(
         `${zensky.get_uma_sex_title()}微微躬身之后，离开了空教室，这里又只剩下了你一个人。`,
       );
-      event_marks.happiness_day++;
+      edu_marks.happiness_day++;
       era.set('flag:强制BE', 4);
     } else if (ret1 === 2) {
       await me.say_and_wait(`我认为丸善前辈是很温柔——`);
@@ -1081,7 +1080,7 @@ module.exports = async function (hook, event_object) {
       await era.printAndWait(
         `${zensky.get_uma_sex_title()}微微躬身之后，离开了空教室，这里又只剩下了你一个人。`,
       );
-      event_marks.happiness_day++;
+      edu_marks.happiness_day++;
       era.set('flag:强制BE', 4);
     } else if (ret1 === 3) {
       await era.printAndWait(
@@ -1093,7 +1092,7 @@ module.exports = async function (hook, event_object) {
         }所期望的名为${zensky.name}的偶像。`,
       );
       await me.say_and_wait(
-        `我认为${zensky.name}是一个对于后辈很关照、会尽可能给予后辈帮助的...偶像。`,
+        `我认为${zensky.name}是一个对于后辈很关照、会尽可能给予后辈帮助的……偶像。`,
       );
       await say_by_passer_by(
         `${zensky.get_uma_sex_title()}`,
@@ -1200,7 +1199,7 @@ module.exports = async function (hook, event_object) {
   } else if (edu_weeks === 47 + 32) {
     if (era.get('flag:当前位置') === location_enum.beach) {
       if (era.get('cflag:4:位置') !== era.get('cflag:0:位置')) {
-        add_event(event_hooks.week_end, event_object);
+        add_event(event_hooks.week_end, ebj);
       }
       return;
     }
@@ -1228,7 +1227,7 @@ module.exports = async function (hook, event_object) {
       `呵呵，是啊。与小特 ${zensky.sex_code - 1 ? '她' : '他'} 们昨晚的结束派对，往前推是与 ${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'} 在海岸边一起戏水，再往前的话则是与 ${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'} 一起度过的小镇庆典。`,
     );
     await zensky.say_and_wait(`这么算下来的话，实际上过得很充实呢。`);
-    await zensky.say_and_wait(`真想再回到八月初重新开始呢~`);
+    await zensky.say_and_wait(`真想再回到八月初重新开始呢～`);
     era.printButton(`「大概是时间被意义固定住了吧？」`, 1);
     await era.input();
     await me.say_and_wait(`因为被赋予了意义，所以最终带来了些什么吧？`);
@@ -1240,7 +1239,7 @@ module.exports = async function (hook, event_object) {
     await era.printAndWait(
       `不久之后，坐在副驾驶的你开始对开车产生心理阴影了。`,
     );
-    event_marks.wind++;
+    edu_marks.wind++;
 
     wait_flag =
       get_attr_and_print_in_event(4, [0, 0, 10, 0, 0], 120) || wait_flag;
@@ -1409,17 +1408,15 @@ module.exports = async function (hook, event_object) {
     );
     era.printButton(`「是，有什么事吗？」`, 1);
     await era.input();
-    await say_by_passer_by(
+    say_by_passer_by(
       `${zensky.get_uma_sex_title()}A`,
-      `啊，训练员${
-        zensky.sex_code === 1 ? '先生' : '小姐'
-      }，嗯。会长让我给训练员${
-        zensky.sex_code === 1 ? '先生' : '小姐'
+      `啊，训练员${me.adult_sex_title}，嗯。会长让我给训练员${
+        me.adult_sex_title
       }带一句话。`,
     );
-    await say_by_passer_by(
+    say_by_passer_by(
       `${zensky.get_uma_sex_title()}A`,
-      `‘我这里有你想要的答案。’`,
+      `『我这里有你想要的答案。』`,
     );
     await me.say_and_wait(`……我知道了。现在就出发吧。`);
     await me.say_and_wait(`什么时候，不，难道从一开始就在一旁观看吗？`, true);
@@ -1529,7 +1526,7 @@ module.exports = async function (hook, event_object) {
     );
     await me.say_and_wait(`所以服从一种决定。`);
     await me.say_and_wait(
-      `.....既然我已经决定作为训练员，那么最能发挥作用的地方自然就是特雷森了。`,
+      `……既然我已经决定作为训练员，那么最能发挥作用的地方自然就是特雷森了。`,
     );
     await me.say_and_wait(
       `虽然我无法确定前进的方向与${zensky.name}所祈求的是否完全相同，`,
@@ -1581,7 +1578,7 @@ module.exports = async function (hook, event_object) {
       wait_flag;
   } else if (edu_weeks === 47 + 37) {
     await print_event_name(`思绪`, zensky);
-    await zensky.say_and_wait(`哼哼~这不是已经是恋人之间的关系了吗?`);
+    await zensky.say_and_wait(`哼哼～这不是已经是恋人之间的关系了吗?`);
     await era.printAndWait(
       `在闲聊时开玩笑地想在${zensky.name}家借住一段时间，没想到对方爽快的同意了。`,
     );
@@ -1628,7 +1625,7 @@ module.exports = async function (hook, event_object) {
     await zensky.say_and_wait(
       `${era.get('cflag:4:性别') - 1 ? '美眉' : '帅锅'}我也想和 ${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'} 留下美好的回忆呢……`,
     );
-    await zensky.say_and_wait(`呵呵~已经开始期待起明天的行程了呢♪`);
+    await zensky.say_and_wait(`呵呵～已经开始期待起明天的行程了呢♪`);
     await era.printAndWait(`${zensky.name}的心情看起来十分不错。`);
     era.drawLine({ content: '第二天早上' });
     await zensky.say_and_wait(
@@ -1675,7 +1672,7 @@ module.exports = async function (hook, event_object) {
     await era.printAndWait(`你开始走进${zensky.get_teen_sex_title()}的圣域。`);
     await me.say_and_wait(`即使如此，枯叶在风的指引下依然做出了自己的决定。`);
     await me.say_and_wait(`没有什么比这一过程更能体现枯叶的生命力了。`);
-    era.printButton(`「${zensky.name}...我有话想对你说。」`, 1);
+    era.printButton(`「${zensky.name}……我有话想对你说。」`, 1);
     await era.input();
     await zensky.say_and_wait(`嗯？`);
     await era.printAndWait(
@@ -1694,11 +1691,11 @@ module.exports = async function (hook, event_object) {
         }能带给我多大的惊喜。`,
       );
       await era.printAndWait(`隐约意识到了什么，${zensky.name}眨了眨眼。`);
-      event_marks.wind++;
+      edu_marks.wind++;
     } else {
       await me.say_and_wait(`接下来一定会让你大吃一惊！`, true);
       await era.printAndWait(`你松了口气，期待这下周的到来。`);
-      event_marks.wind--;
+      edu_marks.wind--;
     }
 
     wait_flag =
@@ -1752,7 +1749,7 @@ module.exports = async function (hook, event_object) {
       `你弯下腰将密密麻麻的签名交给了眼前的${zensky.sex_code - 1 ? '少女' : '少年'}。`,
     );
     await era.printAndWait(
-      `对方仔细确认着每一个签名，${zensky.sex_code - 1 ? '少女' : '少年'}头顶的小猫似乎对陌生的你颇感兴趣，围绕着你喵~喵的转来转去。`,
+      `对方仔细确认着每一个签名，${zensky.sex_code - 1 ? '少女' : '少年'}头顶的小猫似乎对陌生的你颇感兴趣，围绕着你喵～喵的转来转去。`,
     );
     await era.printAndWait(
       `尽管${zensky.sex_code - 1 ? '少女' : '少年'}需要踮起脚尖才能与你对视，但此刻的你大气不敢出，等待着最终的宣判。`,
@@ -1860,7 +1857,7 @@ module.exports = async function (hook, event_object) {
     zensky.print(
       `理事长和手纲${
         zensky.sex_code === 1 ? '先生' : '小姐'
-      }注意到了你们的到来，前者打开写着“愉！悦！”地纸扇，后者对你们报以微笑，顺带一提，理事长头上的小猫惬意的甩动着尾巴。`,
+      }注意到了你们的到来，前者打开写着「愉！悦！」的纸扇，后者对你们报以微笑，顺带一提，理事长头上的小猫惬意的甩动着尾巴。`,
     );
     zensky.print(`无论是谁，脸上都挂着满足的笑容。`);
     zensky.print(`就像在享受着庆典一样。`);
@@ -1913,14 +1910,14 @@ module.exports = async function (hook, event_object) {
     zensky.print(`所以，我决定试着向未来前进。`);
     zensky.print(`我所选择的道路是否是正确的，自己也不知道。`);
     zensky.print(
-      `.....也许，也许的话，在过去的摇篮曲中等待着机会的到来才是正确的。`,
+      `……也许，也许的话，在过去的摇篮曲中等待着机会的到来才是正确的。`,
     );
     zensky.print(`像这样的自己，准备不足，觉悟也只是激情的产物。`);
     zensky.print(`或许，会在某个偏僻的小道上遇到抛锚的烦恼也说不定。`);
     zensky.print(`什么才能救赎这一切呢？\n`);
     zensky.print(`意义，这就是我找到的答案`);
     zensky.print(
-      `‘在未来的某个时刻，我做了什么’,这个意义足以救赎我之后可能会受到的可怕的事情。`,
+      `『在未来的某个时刻，我做了什么』,这个意义足以救赎我之后可能会受到的可怕的事情。`,
     );
     zensky.print(
       `不是以自己的角度来看待，因为人类从来都是承载着时间流向某个地方的运输工具。`,
@@ -1963,11 +1960,11 @@ module.exports = async function (hook, event_object) {
     );
     await era.printAndWait(`如果是${zensky.name}的话，一定会想到类似的。`);
     await era.printAndWait(`就这么收拾好一切，面对接下来的事物。`);
-    event_marks.wind++;
+    edu_marks.wind++;
     wait_flag =
       get_attr_and_print_in_event(4, [10, 10, 10, 10, 10], undefined) ||
       wait_flag;
-    event_marks.mygo--;
+    edu_marks.mygo--;
 
     //todo 领域 行进距离≥50%、前半段保持名次≤50%时，速度增加0.55
   } else if (edu_weeks === 95 + 9) {
@@ -2013,7 +2010,7 @@ module.exports = async function (hook, event_object) {
       `一起努力吧， ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'} ♪`,
     );
     await era.printAndWait(`为此，下一个目标已经决定了。`);
-    event_marks.wind++;
+    edu_marks.wind++;
     //todo 增加强敌：鲁铎象征 出现在大阪杯 差马跑法 速1300 力1000 耐950 根1200 智1000
     // 汝、皇帝の神威を見よ/汝等，瞻仰皇帝之神威吧 鎧袖一触/易如反掌 皇帝の眼差し/皇帝的视线/超越姿态/中距离直线○/中距离弯道○/会心一步/毫厘不让/威压
     // 强敌：皇帝 出现在天皇赏秋 差马跑法 速1400 力1200 耐1200 根1200 智1200
@@ -2021,7 +2018,7 @@ module.exports = async function (hook, event_object) {
   } else if (edu_weeks === 95 + 32) {
     if (era.get('flag:当前位置') === location_enum.beach) {
       if (era.get('cflag:4:位置') !== era.get('cflag:0:位置')) {
-        add_event(event_hooks.week_end, event_object);
+        add_event(event_hooks.week_end, ebj);
       }
       return;
     }
@@ -2060,7 +2057,7 @@ module.exports = async function (hook, event_object) {
       `理事长也希望我们能好好享受青春的时光呢，所以 ${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'} `,
     );
     await era.printAndWait(`${zensky.name}满脸通红的看着你。`);
-    event_marks.wind++;
+    edu_marks.wind++;
     era.printButton(`「要上了」`, 1);
     era.printButton(`「还是算了吧」`, 2);
     const ret1 = await era.input();
@@ -2119,7 +2116,7 @@ module.exports = async function (hook, event_object) {
     zensky.print(`像是说给落叶，又像是对着自己诉说。`);
     await zensky.say_and_wait(`等待着后辈们超越我的那一天`, true);
     zensky.print(`直到后辈们追上背影的那一天，${zensky.name}都会一直等待着。`);
-    event_marks.wind++;
+    edu_marks.wind++;
   }
   wait_flag && (await era.waitAnyKey());
 };

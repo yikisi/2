@@ -3531,7 +3531,7 @@
     content:
       - fontWeight: bold
         content: 目白莱恩
-      - 「啊！对对、对不起.....唔。」
+      - 「啊！对对、对不起……唔。」
   - color: %莱恩色%
     content:
       - fontWeight: bold

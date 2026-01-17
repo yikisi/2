@@ -186,7 +186,7 @@ module.exports = class extends CustomizedRecruit {
         await era.printAndWait(
           `手纲缰绳一边将${falcon.name}手中尚未分发出去的海报没收，一边郑重的告诫对方。`,
         );
-        await falcon.say_and_wait(`......`);
+        await falcon.say_and_wait(`……`);
         await era.printAndWait(
           `从低垂的马耳来看，${falcon.name}似乎陷入了两难之地。`,
         );
@@ -238,7 +238,7 @@ module.exports = class extends CustomizedRecruit {
         await era.printAndWait(
           `随着太阳逐渐西沉，天空的颜色也从明亮的蔚蓝慢慢荡漾到橙黄，云朵也被夕阳染成了金红色。`,
         );
-        await falcon.say_and_wait(`~~~♪`);
+        await falcon.say_and_wait(`～～～♪`);
         // 通过行走暗示时间从下午到黄昏
         await era.printAndWait(
           `高架桥投下的阴影覆盖了桥下的区域，形成了大片的暗区，只有在黄昏之时，才会有一丝丝的光线洒在桥下的草地上。`,
@@ -247,7 +247,7 @@ module.exports = class extends CustomizedRecruit {
           `而被橙黄色的天空所渲染的少女，就在河边的草地，她的舞台上举行着演出。`,
         );
         // 节拍 1
-        await falcon.say_and_wait(`~~~♪谢谢大家！`);
+        await falcon.say_and_wait(`～～～♪谢谢大家！`);
         // 对比 空无一人的草地
         await era.printAndWait(`少女娴熟的面对着空地鞠躬。`);
         await era.printAndWait(`——尽管如此，少女的脸上依然带着笑容。`);

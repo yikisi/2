@@ -44,6 +44,7 @@ class FalconEduMarks extends EduEventMarks {
   // GE 安可曲
   encore;
   idol;
+  crazy_fan;
 
   constructor() {
     super(46);

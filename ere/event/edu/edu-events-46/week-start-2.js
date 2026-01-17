@@ -7,6 +7,7 @@ const { say_by_passer_by } = require('#/utils/chara-talk');
 
 const event_hooks = require('#/data/event/event-hooks');
 const { location_enum } = require('#/data/locations');
+const { say_by_passer_by_and_wait } = require('#/utils/chara-talk-factory');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},function):Promise>} handlers */
 module.exports = (handlers) => {
@@ -245,17 +246,23 @@ module.exports = (handlers) => {
       `忠实粉丝C`,
       `之前的飞鹰子一直有种跃动的活力感，不过现在却有种奇怪的感觉？`,
     );
-    await say_by_passer_by(
+    await say_by_passer_by_and_wait(
       `忠实粉丝D`,
       `应该与接下来的比赛有关吧，毕竟在粉丝发布会上宣布第三年的泥地赛要全部胜利。`,
     );
-    await say_by_passer_by(
+    await say_by_passer_by_and_wait(
       `忠实粉丝D`,
       `不过就算这么苛刻的难度，飞鹰子却依然能绽放出笑容。`,
     );
-    await say_by_passer_by(`忠实粉丝D`, `‘或许这才是马娘偶像吧’我总是这么想。`);
-    await say_by_passer_by(`新粉丝E`, `说起来去年不是有个粉丝袭——`);
-    await say_by_passer_by(`忠实粉丝B`, `Stop！这种事是不能讨论的禁忌!`);
+    await say_by_passer_by_and_wait(
+      `忠实粉丝D`,
+      `『或许这才是马娘偶像吧』我总是这么想。`,
+    );
+    await say_by_passer_by_and_wait(`新粉丝E`, `说起来去年不是有个粉丝袭——`);
+    await say_by_passer_by_and_wait(
+      `忠实粉丝B`,
+      `Stop！这种事是不能讨论的禁忌!`,
+    );
     await era.printAndWait(
       `原本讨论正热烈的粉丝群体被这一盆冷水所打岔，众人纷纷没了继续讨论下去的欲望。\n\n\n`,
     );
@@ -360,14 +367,14 @@ module.exports = (handlers) => {
     await falcon.say_and_wait(`大家一定要来参加哦？`);
     await say_by_passer_by(`马娘A`, `飞鹰子！飞鹰子！`);
     era.drawLine();
-    await falcon.say_and_wait(`~~~♪谢谢大家！`);
+    await falcon.say_and_wait(`～～～♪谢谢大家！`);
     await say_by_passer_by(`粉丝们`, `飞鹰子！飞鹰子！`);
     await falcon.say_and_wait(
       `接下来的比赛大家也要紧盯着闪耀的飞鹰子哟？那么，一二`,
     );
     await falcon.say_and_wait(`如果飞鹰子逃跑了？`);
     await say_by_passer_by(`粉丝们`, `那就只能追上去了！`);
-    await falcon.say_and_wait(`要追到地平线的尽头吗~？`);
+    await falcon.say_and_wait(`要追到地平线的尽头吗～？`);
     await say_by_passer_by(`粉丝们`, `那里就是飞鹰子的大舞台！`);
     await falcon.say_and_wait(`没有路就让飞鹰子来找! 发现目标就快快去抓到!`);
     await say_by_passer_by(`粉丝们`, `——去抓住大大的爱吧！`);
@@ -385,7 +392,7 @@ module.exports = (handlers) => {
       `虽然对想要从捷径处离开的你造成了些许困扰，但密密麻麻的人群却有一种虚幻的安全感。`,
     );
     await era.printAndWait(
-      `记得有位学者曾说过，一个人能维持稳定社交的人数是150人，而进一步交流的人数只有20人左右，最终能发展成为密友的人数却只剩下可怜的5~7人左右。`,
+      `记得有位学者曾说过，一个人能维持稳定社交的人数是150人，而进一步交流的人数只有20人左右，最终能发展成为密友的人数却只剩下可怜的5～7人左右。`,
     );
     await era.printAndWait(
       `对于他们来说，我也只是他们世界之中一个微不足道的配角，或者只是作为70亿人之一的背景板存在吧。`,
@@ -558,7 +565,7 @@ module.exports = (handlers) => {
     await era.printAndWait(
       `似乎是从这份目标之中得到了活力的缘故，${falcon.name}变得闪闪发光。`,
     );
-    await falcon.say_and_wait(`真是的~这个也不会落下的啦⭐`);
+    await falcon.say_and_wait(`真是的～这个也不会落下的啦⭐`);
     await era.printAndWait(
       `看着眼前的${falcon.name}又恢复到了原来的状态，你也放下了心。`,
     );
@@ -574,7 +581,7 @@ module.exports = (handlers) => {
     await era.printAndWait(
       `而作为最近冉冉升起的沙地之星而受到邀请的${falcon.name}正站在舞台的中央。`,
     );
-    await falcon.say_and_wait(`~~~♪呼——谢谢大家⭐`);
+    await falcon.say_and_wait(`～～～♪呼——谢谢大家⭐`);
     await era.printAndWait(
       `舞台之下的观众们向舞台之上的偶像献上了掌声与喝彩。`,
     );
@@ -746,7 +753,7 @@ module.exports = (handlers) => {
       `怎么会！如果没有训练员${me.get_adult_sex_title()}的话，飞鹰子连出场的机会都不存在！`,
     );
     await falcon.say_and_wait(
-      `而且，我对训练员${me.get_adult_sex_title()}......啊，抱歉。`,
+      `而且，我对训练员${me.get_adult_sex_title()}……啊，抱歉。`,
     );
     await falcon.say_and_wait(`接下来一起去哪里逛逛吧？`);
     await falcon.say_and_wait(`外宿许可也已经申请了哦！`);
@@ -797,7 +804,7 @@ module.exports = (handlers) => {
     );
     await era.printAndWait(`不知不觉恢复了平时说教的状态。`);
     await falcon.say_and_wait(
-      `咕~这种气氛下训练员${me.get_adult_sex_title()}真是木头呢。`,
+      `咕～这种气氛下训练员${me.get_adult_sex_title()}真是木头呢。`,
     );
     await era.printAndWait(
       `咕噜咕噜搅拌着还剩下一半果汁发出了不满声音的飞鹰子看着你。`,
@@ -812,7 +819,7 @@ module.exports = (handlers) => {
     await era.printAndWait(
       `说着将自己的身体靠近了${me.actual_name}坐着的位子。`,
     );
-    await me.say_and_wait(`......`);
+    await me.say_and_wait(`……`);
     await falcon.say_and_wait(`那么！一、二、三！`);
     await era.printAndWait(`在手机上拍下了接吻瞬间的${falcon.name}。`);
     await era.printAndWait(`作为偶像来说绝对NG的吧？`);

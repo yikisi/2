@@ -57,7 +57,7 @@ module.exports = class extends CustomizedLove {
     );
     await era.printAndWait(`拆开信封,里面只有一行文字`);
     await era.printAndWait(
-      `${era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'}我在天台等你哦~`,
+      `${era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'}我在天台等你哦～`,
     );
     await era.printAndWait(
       `午时也就是十一点到一点之间吗?不管怎样,先把这封信收起来吧.`,
@@ -105,7 +105,7 @@ module.exports = class extends CustomizedLove {
     );
     era.printButton(`「这么好的天气干脆在这里开午餐会议吧」`, 1);
     await zensky.say_and_wait(
-      `嗯~虽然是个好主意,不过还有更重要的事情要先做呢.`,
+      `嗯～虽然是个好主意,不过还有更重要的事情要先做呢.`,
     );
     await zensky.say_and_wait(`……${callname},可以和我约会吗?`);
     era.printButton(`「如果约会的时候更加温柔一点的话我就同意」`, 1);
@@ -149,7 +149,7 @@ module.exports = class extends CustomizedLove {
       await era.printAndWait(`她从沙发上坐直然后指着手中的少女漫画.`);
       await zensky.say_and_wait(`${callname}不觉得这样很浪漫吗?`);
       era.printButton(`「听上去蛮不错的样子」`, 1);
-      await zensky.say_and_wait(`是嘛~就是这样,所以明天的话就在泳池约会吧`);
+      await zensky.say_and_wait(`是嘛～就是这样,所以明天的话就在泳池约会吧`);
       era.printButton(`「游泳馆太早的话不开门吧」`, 1);
       await zensky.say_and_wait([
         '之后会和',
@@ -177,7 +177,7 @@ module.exports = class extends CustomizedLove {
     } else if (stage === event_hooks.back_school) {
       //丸善斯基在水池约了训练员
       begin_and_init_ero(4);
-      await era.printAndWait(`“水还很冷”`);
+      await me.say_and_wait('水还很冷');
       await era.printAndWait(`你单膝跪在池边，伸手摸到的水凉飕飕的.`);
       await era.printAndWait(
         `早上6点，性急的太阳照得满地都是阳光，但早晨的游泳池没有一丝生气，只有你和朋友以上恋人未满的${zensky.name}两人而已.`,
@@ -212,7 +212,7 @@ module.exports = class extends CustomizedLove {
       await era.clear(2);
       if (ret === 1) {
         await zensky.say_and_wait(
-          `${callname}真是好色呢~不过坦率的${callname}我也喜欢哦♪`,
+          `${callname}真是好色呢～不过坦率的${callname}我也喜欢哦♪`,
         );
         await era.printAndWait(`${zensky.name}朝你的方向飞吻后一头扎进水中.`);
         await era.printAndWait(`在清澈见底的水里她的身影像鱼儿一样欢快的游动.`);
@@ -231,7 +231,7 @@ module.exports = class extends CustomizedLove {
         era.printButton(`「!?」`, 1);
         await zensky.say_and_wait(`${callname}没事的.`);
         await era.printAndWait(`似乎是被她骗了.`);
-        await zensky.say_and_wait(`.....对不起,我做得是不是有点过分了.`);
+        await zensky.say_and_wait(`……对不起,我做得是不是有点过分了.`);
         await era.printAndWait(`开这种玩笑真是过分.`);
         await zensky.say_and_wait(
           `实在抱歉,不过${
@@ -306,7 +306,7 @@ module.exports = class extends CustomizedLove {
         `真是讨厌,明明年龄大我几岁.但是行为举止却像个高中生一样.`,
       );
       await zensky.say_and_wait(
-        `....不过,正是因为这样,所以${callname}才额外可爱呢.`,
+        `……不过,正是因为这样,所以${callname}才额外可爱呢.`,
       );
       await zensky.say_and_wait(
         `第一次见面的时候,我就把你当成比我小几岁的${me.get_smaller_sibling_sex_title()}.`,
@@ -314,7 +314,7 @@ module.exports = class extends CustomizedLove {
       await zensky.say_and_wait(
         `所以才下意识将你抱进怀里摸了摸头,看到你满脸通红的样子才放开了手.`,
       );
-      await zensky.say_and_wait(`真是不好意思呢,不过我也不会道歉的,哼~`);
+      await zensky.say_and_wait(`真是不好意思呢,不过我也不会道歉的,哼～`);
       await zensky.say_and_wait(
         `当你满脸兴奋地聊着我跑步时露出的笑容时,我真的非常很高兴.`,
       );
@@ -506,7 +506,7 @@ module.exports = class extends CustomizedLove {
           1,
         );
         await zensky.say_and_wait(
-          `哈啊~${callname}还真像个小孩子一样.你还会对其他人做这种事情吗?`,
+          `哈啊～${callname}还真像个小孩子一样.你还会对其他人做这种事情吗?`,
         );
         era.printButton(`「只对你做过罢了」`, 1);
         await zensky.say_and_wait(`也就是说我很荣幸成为你第一个牺牲品了吗?`);

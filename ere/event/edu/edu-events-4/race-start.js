@@ -41,7 +41,7 @@ module.exports = async (hook, extra_flag) => {
   } else if (extra_flag.race === race_enum.asah_sta && edu_weeks < 95) {
     await print_event_name('朝日杯前・五挡加速', maru);
     await era.printAndWait(`准备室内`);
-    await maru.say_and_wait(`哼哼哼~`);
+    await maru.say_and_wait(`哼哼哼～`);
     await era.printAndWait(`${maru.name}心情不错的在准备室里检查着决胜服。`);
     await me.say_and_wait(`${maru.name}，准备的怎么样了？`);
     await maru.say_and_wait(
@@ -251,10 +251,7 @@ module.exports = async (hook, extra_flag) => {
       }的理想恐怕就会动摇了`,
       true,
     );
-    await me.say_and_wait(
-      `我真的应该.....不，一定，一定这是最好的办法了`,
-      true,
-    );
+    await me.say_and_wait(`我真的应该……不，一定，一定这是最好的办法了`, true);
     await maru.say_and_wait(`真是令人怀念的衣服……不，没什么`);
     await era.printAndWait(`${maru.name}穿上了略显紧绷的决胜服。`);
     await maru.say_and_wait(
@@ -308,7 +305,7 @@ module.exports = async (hook, extra_flag) => {
       `站台上全是关注这场传奇大赛的粉丝，甚至连过道都占满了人。`,
     );
     era.drawLine({ content: '准备室中' });
-    await maru.say_and_wait(`哼哼哼~`);
+    await maru.say_and_wait(`哼哼哼～`);
     await era.printAndWait(`如此紧张的时刻${maru.name}依然相当从容。`);
     era.printButton(`「${maru.name}，这次一定会跑的非常开心」`, 1);
     await era.input();
@@ -463,7 +460,7 @@ module.exports = async (hook, extra_flag) => {
       `呵呵,谢谢 ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'} 了`,
     );
     await maru.say_and_wait(
-      `不要被${era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'}的背影迷上了哟~`,
+      `不要被${era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'}的背影迷上了哟～`,
     );
     await era.printAndWait(`你目送着${maru.name}走向了赛道`);
   }

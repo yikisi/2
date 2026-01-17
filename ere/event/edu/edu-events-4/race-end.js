@@ -148,7 +148,7 @@ module.exports = async (hook, extra_flag) => {
     await era.printAndWait(`不过说起来，训练员不就是这样的职业吗？`);
     era.drawLine({ content: '胜者舞台结束后' });
     await chara_talk.say_and_wait(
-      `呼~出了不少汗呢,不过之前的舞蹈训练真是派上大忙了⭐`,
+      `呼～出了不少汗呢,不过之前的舞蹈训练真是派上大忙了⭐`,
     );
     era.printButton(
       `不愧是 ${era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'} 大人`,
@@ -517,7 +517,7 @@ module.exports = async (hook, extra_flag) => {
       `在按摩了大约五分钟左右，十指轻轻按压大腿内侧，一遍观察着 ${chara_talk.name} 的反应一遍继续着对话。`,
     );
     await chara_talk.say_and_wait(
-      `嗯~谢谢 ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'} 这么关心了，与其说累到几乎动不了， ${era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'} 我可是从精神到身体都满足了呢。`,
+      `嗯～谢谢 ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'} 这么关心了，与其说累到几乎动不了， ${era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'} 我可是从精神到身体都满足了呢。`,
     );
     await era.printAndWait(
       `一边露出了笑容的 ${chara_talk.name} 不时的传出了小小的喘息声。`,
@@ -594,7 +594,7 @@ module.exports = async (hook, extra_flag) => {
       `当 ${chara_talk.sex_code - 1 ? '她' : '他'} 冲线的那一刻，如雷鸣般的喝彩声从观众席上传来。`,
     );
     await era.printAndWait(`休息室\n`);
-    await chara_talk.say_and_wait(`呼~不愧是经典三冠之中最受瞩目的赛事呢。`);
+    await chara_talk.say_and_wait(`呼～不愧是经典三冠之中最受瞩目的赛事呢。`);
     await chara_talk.say_and_wait(
       `参加德比的赛 ${chara_talk.get_uma_sex_title()} 们个个都是赛 ${chara_talk.get_uma_sex_title()} 的精英呢。`,
     );
@@ -617,7 +617,7 @@ module.exports = async (hook, extra_flag) => {
       await chara_talk.say_and_wait(
         `跪了！果然和${
           era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
-        }在一起每次都能感受到惊喜呢~`,
+        }在一起每次都能感受到惊喜呢～`,
       );
       await chara_talk.say_and_wait(
         `如果是凯旋门的话，说不定能在那里遇到世界级的赛 ${chara_talk.get_uma_sex_title()} 呢。`,
@@ -699,7 +699,7 @@ module.exports = async (hook, extra_flag) => {
       `当 ${chara_talk.sex_code - 1 ? '她' : '他'} 冲线的那一刻，如雷鸣般的喝彩声从观众席上传来。`,
     );
     await era.printAndWait(`休息室\n`);
-    await chara_talk.say_and_wait(`呼~不愧是经典三冠之中最受瞩目的赛事呢。`);
+    await chara_talk.say_and_wait(`呼～不愧是经典三冠之中最受瞩目的赛事呢。`);
     await chara_talk.say_and_wait(
       `参加德比的赛 ${chara_talk.get_uma_sex_title()} 们个个都是赛 ${chara_talk.get_uma_sex_title()} 的精英呢。`,
     );
@@ -712,7 +712,7 @@ module.exports = async (hook, extra_flag) => {
       await chara_talk.say_and_wait(
         `跪了！果然和${
           era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
-        }在一起每次都能感受到惊喜呢~`,
+        }在一起每次都能感受到惊喜呢～`,
       );
       await chara_talk.say_and_wait(
         `如果是凯旋门的话，说不定能在那里遇到世界级的赛 ${chara_talk.get_uma_sex_title()} 呢。`,
@@ -811,7 +811,7 @@ module.exports = async (hook, extra_flag) => {
     );
     await era.input();
     await chara_talk.say_and_wait(
-      `哼哼~那是当然的事情呦，不如说失败的话才更奇怪吧？`,
+      `哼哼～那是当然的事情呦，不如说失败的话才更奇怪吧？`,
     );
     era.printButton(`「大腿怎么样了？」`, 1);
     await era.input();
@@ -870,7 +870,7 @@ module.exports = async (hook, extra_flag) => {
     );
     await era.input();
     await chara_talk.say_and_wait(
-      ` ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'} 真会说话~不过，没有 ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'} 的鼓励的话，恐怕我也无法取得胜利呢。`,
+      ` ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'} 真会说话～不过，没有 ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'} 的鼓励的话，恐怕我也无法取得胜利呢。`,
     );
     await say_by_passer_by(
       `记者A`,
@@ -1262,7 +1262,7 @@ module.exports = async (hook, extra_flag) => {
     await print_event_name('竞赛败北', chara_talk);
     await chara_talk.say_and_wait('伤心……');
     await chara_talk.say_and_wait(
-      `抱歉呢....训练员。没能让你看到我帅气的模样…….`,
+      `抱歉呢……训练员。没能让你看到我帅气的模样…….`,
     );
     era.printButton(`「期待下一次的表现！」`, 1);
     era.printButton(`「垂头丧气也没有用！」`, 2);

@@ -1,6 +1,5 @@
 ﻿/**
  * @file 丸善斯基 - 日常
- *
  * @author 黑奴一号
  */
 const era = require('#/era-electron');
@@ -15,17 +14,17 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
-const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
+const MaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-4');
 
 module.exports = class extends CustomizedDaily {
   select() {
     const zensky = get_chara_talk(4);
-    let temp;
-    const love = era.get('love:4'),
-      buffer = [];
-    if ((temp = new EduEventMarks(4)).get('after_recruit')) {
+    const edu_marks = new MaEduMarks();
+    const love = era.get('love:4');
+    const buffer = [];
+    if (edu_marks.after_recruit > 0) {
       zensky.say(
-        `嗨~${
+        `嗨～${
           era.get('cflag:4:性别') - 1 ? '美眉' : '帅锅'
         }我是${zensky.name}哦。`,
       );
@@ -37,28 +36,26 @@ module.exports = class extends CustomizedDaily {
           era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
         }看起来真口耐呢,就像夏天带给人的感觉一样。`,
       );
-      temp.sub('after_recruit');
-    } else if (new EduEventMarks(4).get('sister_annoyance') === 1) {
+      edu_marks.after_recruit = 1;
+    } else if (edu_marks.get('sister_annoyance') === 1) {
       zensky.say('在更加盛大的舞台之上比赛，心情都变得亮闪闪的呢♪');
-      zensky.say(
-        `有什么事一定要和${era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'}我商量哦？`,
-      );
+      zensky.say(`有什么事一定要和${zensky.elder_sibling_sex_title}我商量哦？`);
       zensky.say('……如果我们之间没有秘密的话就好了呢。');
-      temp.sub('sister_annoyance');
-    } else if (new EduEventMarks(4).get('girls_blue') === 1) {
+      edu_marks.sub('sister_annoyance');
+    } else if (edu_marks.get('girls_blue') === 1) {
       zensky.say('膝盖比以前还要疼的厉害。');
       zensky.say('接下来还能撑多久呢？');
       zensky.say(
         `至少，不能让${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}看出来。`,
       );
-      temp.sub('girls_blue');
-    } else if (new EduEventMarks(4).get('true_end')) {
+      edu_marks.sub('girls_blue');
+    } else if (edu_marks.get('true_end')) {
       zensky.say('为了不让遗憾再次发生。');
       zensky.say('至少，为苦苦探索的后辈们提供一个可以参考的方法。');
       zensky.say('接下来也要努力才行！');
       zensky.say('就这样咔咔地back stepo吧！');
-      temp.sub('true_end');
-    } else if (new EduEventMarks(4).get('good_end')) {
+      edu_marks.sub('true_end');
+    } else if (edu_marks.get('good_end')) {
       zensky.say(
         `苦闷也好，孤独也好，与${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}在一起，似乎都不算什么了呢。`,
       );
@@ -70,26 +67,26 @@ module.exports = class extends CustomizedDaily {
       zensky.say(
         `唔，会不会让${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}压力山大了呢？`,
       );
-      temp.sub('good_end');
-    } else if (new EduEventMarks(4).get('wind') === 1) {
+      edu_marks.sub('good_end');
+    } else if (edu_marks.get('wind') === 1) {
       zensky.say(
         `接下来也请多多指教了。${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}♪`,
       );
-    } else if (new EduEventMarks(4).get('wind') === 5) {
+    } else if (edu_marks.get('wind') === 5) {
       zensky.say(
         `这是给${era.get('cflag:4:性别') - 1 ? '美眉' : '帅锅'}我的吗？`,
       );
       zensky.say(
         `那就谢谢${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}了♪`,
       );
-      zensky.say('呵呵~看起来真漂亮呢。');
-    } else if (new EduEventMarks(4).get('wind') === 10) {
+      zensky.say('呵呵～看起来真漂亮呢。');
+    } else if (edu_marks.get('wind') === 10) {
       zensky.say(
         '不管在草场之上奔跑多少回，似乎都找不到当初的感觉了,真是有点生无可恋呢。',
       );
       zensky.say('……');
       zensky.say('风停了。');
-    } else if (new EduEventMarks(4).get('wind') === 15) {
+    } else if (edu_marks.get('wind') === 15) {
       zensky.say(
         `在特雷森的那个夜晚，在草场上奔跑的${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}们。`,
       );
@@ -97,19 +94,19 @@ module.exports = class extends CustomizedDaily {
         `支持着我的后辈们，还有身边的${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}。`,
       );
       zensky.say('我由衷的感到了幸福。');
-    } else if (new EduEventMarks(4).get('wind') === 20) {
+    } else if (edu_marks.get('wind') === 20) {
       zensky.say('天空、草地，与徘徊的我们。');
       zensky.say('令人怀念的潮湿夏天与干燥的秋天。');
       zensky.say(
         `接下来我们也要一路走下去哦？${era.get('cflag:0:性别') - 1 ? '训·练·员·酱' : '训·练·员·君'}♪`,
       );
-    } else if (new EduEventMarks(4).get('Self_contempt')) {
+    } else if (edu_marks.get('Self_contempt')) {
       zensky.say(`为什么看起来有些消沉呢？`);
       zensky.say('快点打起精神来吧！');
       zensky.say(
         `我可是一直在等着${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}呢！`,
       );
-    } else if (new EduEventMarks(4).get('happiness_day')) {
+    } else if (edu_marks.get('happiness_day')) {
       zensky.say(`湛蓝的天空，清新的草地，总会让人有一种怀念的感觉呢。`);
       zensky.say(
         `哎呀，${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}什么时候过来的。`,
@@ -159,14 +156,14 @@ module.exports = class extends CustomizedDaily {
           buffer.push(
             [
               [
-                '唔嗯~说起来四季之风各有不同,若是让我来选择的话我还是喜欢春风。',
+                '唔嗯～说起来四季之风各有不同,若是让我来选择的话我还是喜欢春风。',
                 `不知${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}喜欢哪一个季节的风呢?`,
               ],
               `${zensky.name}含笑看着你`,
             ],
             [
               [
-                '"春天有一种魔力。一种让人想‘成为更好的自己’的魔力。"',
+                '"春天有一种魔力。一种让人想『成为更好的自己』的魔力。"',
                 `${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}又是怎么想的呢?`,
               ],
               `在拉伸运动开始前,与${zensky.name}闲聊时${
@@ -177,7 +174,7 @@ module.exports = class extends CustomizedDaily {
         } else {
           buffer.push([
             [
-              `将风的魅力带给憧憬着我的后辈们。希望之风的化身,${zensky.name}哦~`,
+              `将风的魅力带给憧憬着我的后辈们。希望之风的化身,${zensky.name}哦～`,
               `呵呵,${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}觉得这个台词怎么样？`,
             ],
             `露出笑容的${zensky.name},心情不错的摇晃着尾巴。`,
@@ -197,14 +194,14 @@ module.exports = class extends CustomizedDaily {
     if (era.get('base:4:体力') < era.get('maxbase:4:体力') / 3) {
       if (love >= 75) {
         buffer.push([
-          ['唔嗯~让我再睡一会嘛', '昨天不小心看漫画看太晚了'],
+          ['唔嗯～让我再睡一会嘛', '昨天不小心看漫画看太晚了'],
           `你无可奈何地摇醒${zensky.name}然后对着全身镜帮${
             zensky.sex_code - 1 ? '她' : '他'
           }梳理头发`,
         ]);
       } else {
         buffer.push([
-          ['我晕.....这副样子可不能让后辈们看到呢'],
+          ['我晕……这副样子可不能让后辈们看到呢'],
           `${zensky.name}看上去似乎很困的样子`,
         ]);
       }
@@ -340,7 +337,7 @@ module.exports = class extends CustomizedDaily {
       era.get('flag:当前月') === 11
     )
       talk_arr.push(
-        '唔嗯~秋天到了啊,秋天总有一种让人想要就这么睡过去才行的气息呢,训练结束后可以让我在训练室稍微休息一下吗' +
+        '唔嗯～秋天到了啊,秋天总有一种让人想要就这么睡过去才行的气息呢,训练结束后可以让我在训练室稍微休息一下吗' +
           `食欲之秋,文学之秋,秋天总有一种多愁善感的气氛呢,夏季的潮湿与热情也在秋天到来之时逐渐褪去了`,
       );
     if (
@@ -670,7 +667,7 @@ module.exports = class extends CustomizedDaily {
         );
         if (love >= 75) {
           buffer.push([
-            [`嗯...今天还是看恋爱喜剧吧`],
+            [`嗯……今天还是看恋爱喜剧吧`],
             `笨蛋情侣在电影达到高潮时也与主角一样互相接吻`,
           ]);
         } else if (love >= 50) {
@@ -799,7 +796,7 @@ module.exports = class extends CustomizedDaily {
           break;
         case 1:
           await zensky.say_and_wait(
-            `我的跑步究竟带给${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}们希望还是更深的绝望呢.....不不,没什么啦⭐`,
+            `我的跑步究竟带给${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}们希望还是更深的绝望呢……不不,没什么啦⭐`,
           );
           break;
       }
