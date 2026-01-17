@@ -9,6 +9,7 @@ const { get_chara_color } = require('#/data/chara-colors');
 const { buff_colors, sex_colors } = require('#/data/color-const');
 const status_desc = require('#/data/desc/status.json');
 const CharaInmon = require('#/data/ero/chara-inmon');
+const { mark_enum } = require('#/data/ero/mark-const');
 const { lust_border } = require('#/data/ero/orgasm-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const DarleyLifeMarks = require('#/data/event/life-event-marks/life-event-marks-340');
@@ -22,6 +23,7 @@ const LoveLimitStatus = require('#/data/love-limit-status');
 const { pressure_border } = require('#/data/train-const');
 
 const di18n = require('#/i18n/extended-def');
+const { i18n } = require('#/i18n/selector');
 
 /**
  * @param {number} cid
@@ -30,15 +32,17 @@ const di18n = require('#/i18n/extended-def');
 function sys_get_status(cid) {
   const status_list = [],
     show_train_buff =
-      era.get(`cflag:${cid}:种族`) > 0 &&
-      (cid === 0 || era.get(`cflag:${cid}:育成回合计时`) < 3 * 48);
-  if (era.get(`mark:${cid}:淫纹`) === 3) {
-    const sex_equip = CharaInmon.get(cid).slave,
-      obj = {
-        color: buff_colors[2],
-        content: di18n.tb_mark.s_titles[sex_equip],
-        fontWeight: 'bold',
-      };
+      // CFLAGNAME:1 = 种族
+      era.get(`cflag:${cid}:1`) > 0 &&
+      // CFLAGNAME:48 = 育成回合计时
+      (cid === 0 || era.get(`cflag:${cid}:48`) < 3 * 48);
+  if (era.get(`mark:${cid}:${mark_enum.ero}`) === 3) {
+    const sex_equip = CharaInmon.get(cid).slave;
+    const obj = {
+      color: buff_colors[2],
+      content: di18n.tb_mark.s_titles[sex_equip],
+      fontWeight: 'bold',
+    };
     if (cid === 0) {
       obj.title =
         sex_equip > 0
@@ -46,32 +50,36 @@ function sys_get_status(cid) {
           : '现役性奴，只能参加资深年比赛；没有工资，参赛时赏金分成+400%，和马娘性爱时获得声望。';
     } else {
       obj.title =
-        sex_equip > 0 ? di18n.tb_mark.s_descriptions[sex_equip] : undefined;
+        sex_equip > 0 ? di18n.tb_mark.s_descriptions[sex_equip] : void 0;
     }
     status_list.push(obj);
   }
-  if (era.get(`status:${cid}:淫纹贴纸`) > 0) {
+  status_list.push(...get_custom_mec(cid).get_status(show_train_buff));
+  // STATUSNAME:33 = 淫纹贴纸
+  if (era.get(`status:${cid}:33`) > 0) {
     status_list.push({
       color: buff_colors[2],
       content: '淫纹贴纸',
       title: status_desc['淫纹贴纸'],
     });
   }
-  status_list.push(...get_custom_mec(cid).get_status(show_train_buff));
-  if (era.get(`status:${cid}:生日`) > 0) {
+  // STATUSNAME:17 = 生日
+  if (era.get(`status:${cid}:17`) > 0) {
     status_list.push({
       color: buff_colors[1],
       content: '生日！',
       title: status_desc['生日'],
     });
   }
-  era.get(`status:${cid}:领域`) > 0 &&
+  // STATUSNAME:15 = 领域
+  era.get(`status:${cid}:15`) > 0 &&
     status_list.push({
       color: buff_colors[1],
       content: '领域！',
       title: status_desc['领域'],
     });
-  era.get(`status:${cid}:健康茶`) > 0 &&
+  // STATUSNAME:16 = 健康茶
+  era.get(`status:${cid}:16`) > 0 &&
     status_list.push({
       color: buff_colors[1],
       content: '健康茶',
@@ -82,7 +90,8 @@ function sys_get_status(cid) {
       content: '远程',
     });
   }
-  const pressure = era.get(`base:${cid}:压力`);
+  // BASENAME:11 = 压力
+  const pressure = era.get(`base:${cid}:11`);
   if (pressure === pressure_border.limit) {
     status_list.push({
       color: buff_colors[3],
@@ -102,7 +111,8 @@ function sys_get_status(cid) {
   }
   if (
     pressure >= pressure_border.unhappy &&
-    era.get('cflag:344:招募状态') === recruit_flags.yes
+    // CFLAGNAME:66 = 招募状态
+    era.get('cflag:344:66') === recruit_flags.yes
   ) {
     status_list.push({
       color: get_chara_color(344),
@@ -112,7 +122,7 @@ function sys_get_status(cid) {
   }
   if (show_train_buff) {
     let check;
-    if (era.get('cflag:340:招募状态') === recruit_flags.yes) {
+    if (era.get('cflag:340:66') === recruit_flags.yes) {
       check = (new DarleyLifeMarks().buff + 1) * 50;
       status_list.push({
         color: get_chara_color(340),
@@ -121,7 +131,7 @@ function sys_get_status(cid) {
         title: `速度与力量训练效果+${check}%。`,
       });
     }
-    if (era.get('cflag:341:招募状态') === recruit_flags.yes) {
+    if (era.get('cflag:341:66') === recruit_flags.yes) {
       check = (new GodolphinLifeMarks().buff + 1) * 25;
       status_list.push({
         color: get_chara_color(341),
@@ -130,7 +140,7 @@ function sys_get_status(cid) {
         title: `智力训练效果+${check * 2}%，技能点数训练效果+${check}%。`,
       });
     }
-    if (era.get('cflag:342:招募状态') === recruit_flags.yes) {
+    if (era.get('cflag:342:66') === recruit_flags.yes) {
       check = (new ByerleyLifeMarks().buff + 1) * 50;
       status_list.push({
         color: get_chara_color(342),
@@ -140,8 +150,9 @@ function sys_get_status(cid) {
       });
     }
     if (
-      era.get('cflag:343:招募状态') === recruit_flags.yes &&
-      foreign_locations[era.get(`cflag:${cid}:位置`)] > 0
+      era.get('cflag:343:66') === recruit_flags.yes &&
+      // CFLAGNAME:45 = 位置
+      foreign_locations[era.get(`cflag:${cid}:45`)] > 0
     ) {
       check = new MayLifeMarks().buff;
       status_list.push({
@@ -151,7 +162,7 @@ function sys_get_status(cid) {
         title: `海外远征的负面影响${check > 0 ? '减轻' : '减半'}。`,
       });
     }
-    if (era.get('cflag:345:招募状态') === recruit_flags.yes) {
+    if (era.get('cflag:345:66') === recruit_flags.yes) {
       check = (new LightLifeMarks().buff + 1) * 25;
       status_list.push({
         color: get_chara_color(345),
@@ -165,21 +176,26 @@ function sys_get_status(cid) {
     if (train_buff) {
       status_list.push({
         color: buff_colors[Number(train_buff > 0)],
-        content: di18n.train_buff_desc[train_buff + 1],
+        content: di18n.tb_status.train_buff[train_buff + 1],
       });
     }
   }
-  if (era.get(`status:${cid}:马跳S`) > 0 || era.get(`status:${cid}:沉睡`) > 0) {
+  // STATUSNAME:10 = 沉睡
+  // STATUSNAME:39 = 马跳S
+  if (era.get(`status:${cid}:10`) > 0 || era.get(`status:${cid}:39`) > 0) {
     status_list.push({ color: buff_colors[0], content: '沉睡' });
   } else {
-    if (era.get(`status:${cid}:熬夜`) > 0) {
+    // STATUSNAME:1 = 熬夜
+    if (era.get(`status:${cid}:1`) > 0) {
       status_list.push({ color: buff_colors[0], content: '熬夜' });
     }
-    if (era.get(`status:${cid}:摸鱼`) > 0) {
+    // STATUSNAME:2 = 摸鱼
+    if (era.get(`status:${cid}:2`) > 0) {
       status_list.push({ color: buff_colors[0], content: '摸鱼' });
     }
   }
-  const hurt = era.get(`status:${cid}:伤病`);
+  // STATUSNAME:5 = 伤病
+  const hurt = era.get(`status:${cid}:5`);
   if (hurt) {
     status_list.push({
       color: buff_colors[3],
@@ -188,7 +204,8 @@ function sys_get_status(cid) {
       opacity: hurt > 1 ? 1 : 0.5,
     });
   }
-  const tired = era.get(`status:${cid}:疲惫`);
+  // STATUSNAME:6 = 疲惫
+  const tired = era.get(`status:${cid}:6`);
   if (tired > 0) {
     status_list.push({
       color: buff_colors[0],
@@ -197,21 +214,19 @@ function sys_get_status(cid) {
       opacity: tired > 1 ? 1 : 0.5,
     });
   }
-  new Array(3).fill(0).forEach((_, i) => {
-    const status_id = 7 + i,
-      status_name = era.get(`statusname:${status_id}`),
-      num = era.get(`status:${cid}:${status_id}`);
-    if (num > 0) {
+  for (let sid = 7; sid <= 9; ++sid) {
+    const val = era.get(`status:${cid}:${sid}`);
+    if (val > 0) {
       status_list.push({
         color: buff_colors[0],
-        content: `${status_name}(${num})`,
-        title: status_desc[status_name],
+        ...di18n.tb_status.get_titled_status(sid, val),
       });
     }
-  });
-  if (era.get(`status:${cid}:发胖`) > 0) {
+  }
+  // STATUSNAME:3 = 发胖
+  if (era.get(`status:${cid}:3`) > 0) {
     status_list.push({ color: buff_colors[0], content: '发胖' });
-    if (era.get('cflag:207:招募状态') === recruit_flags.yes) {
+    if (era.get('cflag:207:66') === recruit_flags.yes) {
       status_list.push({
         color: get_chara_color(207),
         content: '艾尔菲相助',
@@ -219,38 +234,47 @@ function sys_get_status(cid) {
       });
     }
   }
-  const headache = era.get(`status:${cid}:偏头痛`);
+  // STATUSNAME:4 = 偏头痛
+  const headache = era.get(`status:${cid}:4`);
   if (headache > 0) {
     status_list.push({ color: buff_colors[0], content: '偏头痛' });
   }
   if (
     hurt + tired + headache > 0 &&
-    era.get('cflag:305:招募状态') === recruit_flags.yes
+    era.get('cflag:305:66') === recruit_flags.yes
   ) {
     status_list.push({
       color: get_chara_color(305),
       content: '针灸疗养',
     });
   }
-  if (era.get(`status:${cid}:发情`) > 0) {
+  // STATUSNAME:32 = 发情
+  if (era.get(`status:${cid}:32`) > 0) {
     status_list.push({
       color: buff_colors[2],
       content: '特别假期',
     });
-  } else if (era.get(`status:${cid}:经期`) > 0) {
+    // STATUSNAME:30 = 经期
+  } else if (era.get(`status:${cid}:`) > 0) {
     status_list.push({ color: buff_colors[0], content: '经期' });
   }
-  if (era.get(`mark:${cid}:淫纹`) > 0 && era.get(`status:${cid}:排卵期`) > 0) {
+  if (
+    era.get(`mark:${cid}:${mark_enum.ero}`) > 0 &&
+    // STATUSNAME:31 = 排卵期
+    era.get(`status:${cid}:31`) > 0
+  ) {
     status_list.push({
       color: buff_colors[2],
       content: '危险期',
     });
   }
-  const pregnant_status = era.get(`cflag:${cid}:妊娠阶段`);
+  // CFLAGNAME:81 = 妊娠阶段
+  const pregnant_status = era.get(`cflag:${cid}:81`);
   if (pregnant_status === 1 << pregnant_stage_enum.resume) {
     status_list.push({
       color: buff_colors[2],
-      content: `产后恢复(${era.get(`cflag:${cid}:妊娠回合计时`)})`,
+      // CFLAGNAME:82 = 妊娠回合计时
+      content: i18n().tb_status.pg_resume(era.get(`cflag:${cid}:82`)),
       title: status_desc['产后恢复'],
     });
   } else if (pregnant_status >> pregnant_stage_enum.late > 0) {
@@ -265,18 +289,25 @@ function sys_get_status(cid) {
     });
   }
   if (
-    era.get(`cflag:${cid}:性别`) !== 1 &&
-    era.get(`cflag:${cid}:成长阶段`) >= 2 &&
-    era.get(`talent:${cid}:泌乳`) > 0 &&
+    // CFLAGNAME:0 = 性别
+    era.get(`cflag:${cid}:0`) !== 1 &&
+    // CFLAGNAME:2 = 成长阶段
+    era.get(`cflag:${cid}:2`) >= 2 &&
+    // TALENTNAME:32 = 泌乳
+    era.get(`talent:${cid}:32`) > 0 &&
     (cid === 0 ||
       era.getCharactersInTrain().length > 0 ||
-      era.get('status:0:马语者') > 0 ||
-      era.get('status:0:透视镜片') > 0 ||
-      era.get(`exp:${cid}:性爱次数`) > era.get(`exp:${cid}:睡奸次数`))
+      // STATUSNAME:23 = 马语者
+      era.get('status:0:23') > 0 ||
+      // STATUSNAME:26 = 透视镜片
+      era.get('status:0:26') > 0 ||
+      // EXPNAME:25 - 26 = 性爱次数 - 睡奸次数
+      era.get(`exp:${cid}:25`) > era.get(`exp:${cid}:26`))
   ) {
     status_list.push({ color: buff_colors[2], content: '泌乳' });
   }
-  const lust = era.get(`base:${cid}:性欲`);
+  // BASENAME:10 = 性欲
+  const lust = era.get(`base:${cid}:10`);
   if (lust >= lust_border.want_sex) {
     status_list.push({
       color: buff_colors[2],
@@ -288,16 +319,18 @@ function sys_get_status(cid) {
   } else if (lust >= lust_border.itch) {
     status_list.push({ color: buff_colors[2], content: '不安' });
   }
-  if (era.get(`status:${cid}:讨厌药`)) {
+  // STATUSNAME:21 = 讨厌药
+  if (era.get(`status:${cid}:21`)) {
     status_list.push({ color: sex_colors[0], content: '讨厌药' });
   }
   if (!LoveLimitStatus.get(cid).is_empty()) {
     status_list.push({ color: sex_colors[0], content: '抑制药' });
   }
   if (
-    era.get(`status:${cid}:爱意克制`) > 0 &&
-    ((cid !== 32 && era.get('status:0:好感度镜片')) ||
-      era.get('status:0:马语者'))
+    // STATUSNAME:20 = 爱意克制
+    era.get(`status:${cid}:20`) > 0 &&
+    // STATUSNAME:24 = 好感度镜片
+    ((cid !== 32 && era.get('status:0:24')) || era.get('status:0:23'))
   ) {
     status_list.push({
       color: buff_colors[2],
@@ -306,16 +339,18 @@ function sys_get_status(cid) {
     });
   }
   sys_get_item_status(cid, status_list);
-  return status_list.map((e) => {
-    if (e.title === undefined) {
-      e.title = status_desc[e.content];
+  return status_list.map((s) => {
+    if (s.title === void 0) {
+      s.title = status_desc[s.content];
     }
-    e.content = `[${e.content}]`;
-    if (e.title !== undefined) {
-      e.title = `${e.content}：${e.title}`;
+    if (s.title !== void 0) {
+      s.title = i18n()
+        .status_desc.template.replace('%NAME%', s.content)
+        .replace('%DESC%', s.title);
     }
-    e.display = 'inline-block';
-    return e;
+    s.content = i18n().tb_status.template.replace('%NAME%', s.content);
+    s.display = 'inline-block';
+    return s;
   });
 }
 

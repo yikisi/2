@@ -44,10 +44,6 @@ class I18nEntry {
   oot_0 = '已育成';
   oot_1 = '殿堂';
 
-  train_debuff = '疏于训练';
-  train_buff_1 = '精于训练';
-  train_buff_2 = '极擅训练';
-
   honour_m = '失格';
   honour_0 = '新手';
   honour_1 = '老练';
@@ -222,8 +218,11 @@ class I18nEntry {
   tb_abl = new (require('#/i18n/zh-CN/table/abl'))();
   tb_mark = new (require('#/i18n/zh-CN/table/mark'))();
   tb_stain = new (require('#/i18n/zh-CN/table/stain'))();
+  tb_status = new (require('#/i18n/zh-CN/table/status'))();
+  status_desc = new (require('#/i18n/zh-CN/table/status-desc'))();
 
   train_action = new (require('#/i18n/zh-CN/sex/actions'))();
+  abl_desc = new (require('#/i18n/zh-CN/sex/abl-desc'))();
   inmon = new (require('#/i18n/zh-CN/sex/inmons'))();
   inmon_desc = new (require('#/i18n/zh-CN/sex/inmon-desc'))();
 

@@ -9,11 +9,13 @@ const LegendUmaFilter = require('#/data/race/model/legend-uma-filter');
 const LegendUmaSelector = require('#/data/race/model/legend-uma-selector');
 const { race_enum } = require('#/data/race/race-const');
 
+const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends CustomizedMec {
   init_love() {
-    era.set('love:17', 40 + era.get('flag:马娘初始爱慕'));
+    // FLAGNAME:105 = 马娘初始爱慕
+    era.set('love:17', 40 + era.get('flag:105'));
   }
 
   get_race_contestants(info) {
@@ -86,11 +88,11 @@ module.exports = class extends CustomizedMec {
   }
 
   get_love_buff() {
-    return 20 * era.get('status:17:迷恋');
+    return 20 * era.get('status:17:111');
   }
 
   get_love_limit() {
-    if (era.get('status:17:心术') > 0) {
+    if (era.get('status:17:113') > 0) {
       return 40;
     }
     return super.get_love_limit();
@@ -98,80 +100,83 @@ module.exports = class extends CustomizedMec {
 
   get_race_finish_report(uma, race_id) {
     if (race_id === race_enum.kiku_sho) {
-      return [
-        {
-          color: uma.color,
-          content: '红色的大朵鲜花在京都的阴云下盛放！',
-        },
-      ];
+      return i18n().kojo[this.id].report_kiku_sho(uma.get_colored_name());
     }
     return super.get_race_finish_report(uma, race_id);
   }
 
   get_relation_buff() {
-    return -20 * era.get('status:17:心术');
+    // STATUSNAME:113 = 心术
+    return -20 * era.get('status:17:113');
   }
 
   get_status() {
     const ret_list = [];
-    era.get('status:17:自毁') &&
+    // STATUSNAME:110 - 115 = 自毁 - 神经衰弱
+    if (era.get('status:17:110') > 0) {
       ret_list.push({
+        ...di18n.kojo.get_titled_content(this.id, 'self_destruct'),
         color: color_17[0],
-        content: '自毁',
-        title:
-          '对宿命的抗拒使其陷入自我毁灭；训练成功率-5%，训练效果-8%，参赛时属性-5%',
-      });
-    era.get('status:17:迷恋') &&
-      ret_list.push({
-        color: color_17[0],
-        content: '迷恋',
-        title: '对你的汹涌心意已无法再遮掩与克制；初始爱慕+40，爱慕获取+20%',
-      });
-    era.get('status:17:皇帝') &&
-      ret_list.push({
-        color: color_17[1],
-        content: '皇帝',
-        title:
-          '君临于此处，跪下；训练成功率+5%，训练效果+4%，参赛时属性+2%，每七回合以此形态活动获得一层[精神损伤]',
-      });
-    era.get('status:17:心术') &&
-      ret_list.push({
-        color: color_17[1],
-        content: '心术',
-        title: '不必揣度，只需臣服；好感获取-20%，爱慕上限为40',
-      });
-    let debuff_count = era.get('status:17:精神损伤');
-    if (debuff_count) {
-      ret_list.push({
-        color: buff_colors[0],
-        content: `精神损伤${debuff_count === 1 ? '' : `(${debuff_count})`}`,
-        title: `露娜训练效果-${debuff_count * 5}%，皇帝训练效果+${debuff_count * 3}%；6层[精神损伤]获得[神经衰弱]`,
       });
     }
-    era.get('status:17:神经衰弱') &&
+    if (era.get('status:17:111') > 0) {
       ret_list.push({
-        color: buff_colors[3],
-        content: '神经衰弱！',
-        fontWeight: 'bold',
-        title: '已无可挽回……露娜参赛时属性-8%',
+        ...di18n.kojo.get_titled_content(this.id, 'crush'),
+        color: color_17[0],
       });
+    }
+    if (era.get('status:17:112') > 0) {
+      ret_list.push({
+        ...di18n.kojo.get_titled_content(this.id, 'emperor'),
+        color: color_17[1],
+      });
+    }
+    if (era.get('status:17:113') > 0) {
+      ret_list.push({
+        ...di18n.kojo.get_titled_content(this.id, 'intention'),
+        color: color_17[1],
+      });
+    }
+    const debuff = era.get('status:17:114');
+    if (debuff > 0) {
+      ret_list.push({
+        ...di18n.kojo.get_titled_content(
+          this.id,
+          'moral_damage',
+          debuff,
+          debuff * 5,
+          debuff * 3,
+        ),
+        color: buff_colors[0],
+      });
+    }
+    if (era.get('status:17:115') > 0) {
+      ret_list.push({
+        ...di18n.kojo.get_titled_content(this.id, 'fallen'),
+        color: buff_colors[3],
+        fontWeight: 'bold',
+      });
+    }
     return ret_list;
   }
 
   get_success_rate_buff() {
-    return 5 * (era.get('status:17:皇帝') - era.get('status:17:自毁'));
+    // STATUSNAME:112 = 皇帝
+    // STATUSNAME:110 = 自毁
+    return 5 * (era.get('status:17:112') - era.get('status:17:110'));
   }
 
   get_train_buff() {
-    let train_buff = era.get('status:17:精神损伤');
-    if (train_buff) {
-      if (new LunaEduMarks().emperor) {
+    // STATUSNAME:114 = 精神损伤
+    let train_buff = era.get('status:17:114');
+    if (train_buff > 0) {
+      if (new LunaEduMarks().emperor > 0) {
         train_buff *= 3;
       } else {
         train_buff *= -5;
       }
     }
-    train_buff += 4 * era.get('status:17:皇帝') - 8 * era.get('status:17:自毁');
+    train_buff += 4 * era.get('status:17:112') - 8 * era.get('status:17:110');
     return train_buff;
   }
 
@@ -181,10 +186,11 @@ module.exports = class extends CustomizedMec {
       uma.attr_buffs.forEach((l) => l.push('+2%[皇帝]'));
     }
     // STATUSNAME:110 = 自毁
-    if (era.get('status:17:自毁') > 0) {
+    if (era.get('status:17:110') > 0) {
       uma.attr_buffs.forEach((l) => l.push('-5%[自毁]'));
     }
     if (!new LunaEduMarks().emperor) {
+      // STATUSNAME:115 = 神经衰弱
       const debuff = era.get('status:17:115');
       if (debuff > 0) {
         uma.attr_buffs.forEach((l) =>

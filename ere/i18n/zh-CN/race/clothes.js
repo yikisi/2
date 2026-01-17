@@ -249,6 +249,7 @@ class I18nClothes {
   112001 = '一心向前';
   112101 = 'Chevalier fidèle';
   112401 = 'POPPING!';
+  112410 = '晓光';
   112701 = '义心黑焰';
   113101 = 'Smile My Way!';
   113201 = '9927 Wishes';

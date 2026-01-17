@@ -42,10 +42,6 @@ const di18n = {
     const _ = i18n();
     return [_.oot_0, _.oot_1];
   },
-  get train_buff_desc() {
-    const _ = i18n();
-    return [_.train_debuff, '', _.train_buff_1, _.train_buff_2];
-  },
   get m_honour() {
     const _ = i18n();
     return [_.honour_0, _.honour_1, _.honour_2, _.honour_3, _.honour_4];
@@ -160,8 +156,14 @@ const di18n = {
     },
   },
   kojo: {
-    get_titled_content: (ckey, ...args) =>
-      get_titled_content(i18n().kojo[ckey], ...args),
+    get_titled_content: (ckey, key, ...args) =>
+      get_titled_content(
+        i18n().kojo[ckey],
+        key,
+        i18n().kojo[ckey],
+        (k) => `${k}_desc`,
+        ...args,
+      ),
   },
   timon: {
     get eds_slave() {
@@ -262,6 +264,7 @@ const di18n = {
         _.s_d_assistant,
       ];
     },
+    get_titled_slavery() {},
   },
   tb_stain: {
     get names() {
@@ -279,6 +282,20 @@ const di18n = {
         _.n_chocolate,
       ];
     },
+  },
+  tb_status: {
+    get train_buff() {
+      const _ = i18n().tb_status;
+      return [_.train_debuff, '', _.train_buff_1, _.train_buff_2];
+    },
+    get_titled_status: (key, ...args) =>
+      get_titled_content(
+        i18n().tb_status,
+        key,
+        i18n().status_desc,
+        (k) => k,
+        ...args,
+      ),
   },
   inmon: {
     get_tip(pid, group, level, slot) {

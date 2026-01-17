@@ -235,6 +235,7 @@ module.exports = class extends I18nClothes {
   112001 = '真実一路';
   112101 = 'Chevalier fidèle';
   112401 = 'POPPING!';
+  112410 = '暁光';
   112701 = '義心の黒焔';
   113101 = 'すまいる・まい・うぇい！';
   113201 = '9927 Wishes';

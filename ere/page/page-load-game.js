@@ -410,7 +410,8 @@ module.exports = async () => {
             if (version <= 1340) {
               const chara_list = era.getAddedCharacters();
               chara_list.forEach((cid) => {
-                era.set(`equip:${cid}:淫纹奴役`, era.get(`equip:${cid}:10`));
+                // EQUIPNAME:1 = 淫纹奴役
+                era.set(`equip:${cid}:1`, era.get(`equip:${cid}:10`));
                 if (era.get(`exp:${cid}:性爱次数`) > 0) {
                   era.set(`cstr:${cid}:初次潮吹经历`, []);
                   era.set(`cstr:${cid}:无自觉初次潮吹经历`, []);
