@@ -6,7 +6,7 @@
 * master 分支：唯一的主分支/保护分支，负责发布。
 * dev 分支：主开发分支，所有新增、改动和修复内容必须先合并到 dev 分支，再由 dev 分支合并到 master 分支进入发布。
 * 内容分支：由使用 JavaScript 的口上作者提交内容用，随用随开，不用即废。口上作者需要先将新口上或加笔提交到自己的分支（fork 项目作者需要先提 Merge Request 将内容合并到 [主仓库](https://gitgud.io/umaera/erauma) 相应分支），然后通过 dev 分支在最终合并到 master 中。
-    * 例：特别周的 spe 分支，丸善斯基、醒目飞鹰的 lines 分支，待兼福来的 kitaru 分支，调教地文的 train 分支。
+    * 例：特别周的 spe 分支，丸善斯基、醒目飞鹰的 lleader 分支，待兼福来的 kitaru 分支，调教地文的 train 分支。
     * 内容分支需要定期 merge 最新版本标签以兼容最新的游戏机制和系统。
 
 ## Commits

@@ -369,7 +369,7 @@ module.exports = (handlers) => {
         ' 熟悉的，拉钩仪式的邀请。',
       ]);
       await kitaru.say_and_wait('今后，会陪我一直走下去吧？');
-      await kitaru.say_and_wait(['我的 ', callname, '……']);
+      await kitaru.say_and_wait(`我的训练员${me.adult_sex_title}……`);
       await kitaru.say_and_wait('我的命定之人……');
       await kitaru.say_and_wait('以及……');
       await era.printAndWait([

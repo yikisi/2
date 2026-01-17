@@ -24,6 +24,7 @@ function generate_dictionary(
     title: false,
     uma: false,
     your_name: false,
+    your_sex: false,
   },
 ) {
   const ret = { id: cid, _g: true };
@@ -50,6 +51,9 @@ function generate_dictionary(
   }
   if (options.your_name) {
     ret.YOURNAME = era.get('callname:0:-1');
+  }
+  if (options.your_sex) {
+    ret.YOURSEX = era.get('cflag:0:0') === 1 ? '他' : '她';
   }
   if (options.sir) {
     ret.SIR = era.get('cflag:0:0') === 1 ? i18n().name.mr : i18n().name.miss;

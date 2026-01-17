@@ -1,6 +1,6 @@
 cd tools/uma
 node check-chara-colors.js
-node generate-race-clothes.js
+[ -d "./res/audio" ] && node generate-race-clothes.js
 cd ../event
 node generate-basement-factory.js
 node generate-chara-talk-factory.js

@@ -464,7 +464,8 @@ module.exports = {
       case ability_usage_enum.MultiplyFanCount:
       case ability_usage_enum.MultiplyFanCount2:
         skill.values[i][j] = skill.data.ability_values[i][j];
-        if (get(`cflag:${cid}:招募状态`) === recruit_flags.yes) {
+        // CFLAGNAME:66 = 招募状态
+        if (get(`cflag:${cid}:66`) === recruit_flags.yes) {
           skill.values[i][j] *=
             1 +
             get_trainer_level() *
@@ -505,7 +506,7 @@ module.exports = {
         break;
       case ability_usage_enum.MultiplyCookingPt:
         skill.values[i][j] = skill.data.ability_values[i][j];
-        if (get(`cflag:${cid}:招募状态`) === recruit_flags.yes) {
+        if (get(`cflag:${cid}:66`) === recruit_flags.yes) {
           const weight = get(`base:${cid}:体重偏差`);
           if (weight < 4000) {
             skill.values[i][j] *= 1 + ((4000 - weight) * 0.2) / 4000;
@@ -524,10 +525,7 @@ module.exports = {
         skill.values[i][j] = skill.data.ability_values[i][j];
         if (!cid) {
           skill.values[i][j] *= 2;
-        } else if (
-          get(`cflag:${cid}:招募状态`) === recruit_flags.yes &&
-          cid > 0
-        ) {
+        } else if (get(`cflag:${cid}:66`) === recruit_flags.yes && cid > 0) {
           temp = get(`love:${cid}`);
           if (temp >= 90) {
             skill.values[i][j] *= 4;
@@ -540,8 +538,9 @@ module.exports = {
         break;
       case ability_usage_enum.MultiplyIsland:
         skill.values[i][j] = skill.data.ability_values[i][j];
-        if (get(`cflag:${cid}:招募状态`) === recruit_flags.yes) {
-          const money = get('flag:当前马币');
+        if (get(`cflag:${cid}:66`) === recruit_flags.yes) {
+          // FLAGNAME:16 = 当前马币
+          const money = get('flag:16');
           if (money >= 100000) {
             skill.values[i][j] += 0.15;
           } else if (money >= 10000) {
@@ -554,6 +553,19 @@ module.exports = {
             skill.values[i][j] += 0.05;
           } else if (money >= 500) {
             skill.values[i][j] += 0.025;
+          }
+        }
+        break;
+      case ability_usage_enum.MultiplyHotSpring:
+        skill.values[i][j] = skill.data.ability_values[i][j];
+        if (get(`cflag:${cid}:66`) === recruit_flags.yes) {
+          // STATUSNAME:6 = 疲惫
+          switch (get(`status:${cid}:6`)) {
+            case 0:
+              skill.values[i][j] += 0.1;
+              break;
+            case 1:
+              skill.values[i][j] += 0.05;
           }
         }
         break;

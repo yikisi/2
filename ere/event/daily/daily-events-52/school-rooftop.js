@@ -287,7 +287,7 @@ module.exports = async (hook) => {
         break;
       case 4:
         await urara.say_and_wait([
-          '嘿嘿~今天的便当是我亲手做的哦！一起来吃吧 ',
+          '嘿嘿～今天的便当是我亲手做的哦！一起来吃吧 ',
           callname,
           '！',
         ]);

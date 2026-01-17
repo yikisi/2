@@ -194,7 +194,7 @@ module.exports = async (kitaru, me, callname, hook, extra_flag) => {
       era.printButton('握住待兼福来的脚', 2, {
         disabled: era.get('love:56') < 75,
       });
-      era.printButton('推到待兼福来', 3, {
+      era.printButton('推倒待兼福来', 3, {
         disabled: era.get('love:56') < 75,
       });
       switch (await era.input()) {

@@ -97,7 +97,7 @@ module.exports = class extends MyPrivacyEvents {
       println();
     }
     if (target.id !== 24) {
-      await get_chara_talk(24).say_and_wait('(~0~)');
+      await get_chara_talk(24).say_and_wait('(～0～)');
       await printAndWait('这位小祖宗又熬夜了吧。');
       println();
     }
@@ -171,7 +171,7 @@ module.exports = class extends MyPrivacyEvents {
       await target.say_and_wait('(ಡωಡ)');
       drawLine({ content: '解释了好一会' });
       await tachyon.say_and_wait('(//▽//)');
-      await tachyon.say_and_wait('～(￣▽￣～)~');
+      await tachyon.say_and_wait('～(￣▽￣～)～');
       await printAndWait([
         '最后，让 ',
         me.get_colored_name(),

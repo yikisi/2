@@ -91,7 +91,7 @@ train_additional:
         content:
           - fontWeight: bold
             content: %CHARA%
-          - 「谢谢%CALLNAME%！那么我要开始了哦~」
+          - 「谢谢%CALLNAME%！那么我要开始了哦～」
       - %YOU%看着铃鹿如同流星一样疾驰的背影，有些出神。
       - color: %COLOR%
         content:

@@ -735,7 +735,7 @@ module.exports = (handlers) => {
     ]);
     await acute.say_and_wait(['不哦，相反；我其实很开心啦。']);
     await acute.say_and_wait([
-      '不过呢，冲绳旅行……还是算了呢。我啊，对太热的地方没什么办法呢~',
+      '不过呢，冲绳旅行……还是算了呢。我啊，对太热的地方没什么办法呢～',
     ]);
     await era.printAndWait([
       acute.get_colored_name(),

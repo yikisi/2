@@ -672,7 +672,7 @@ async function chara_skill() {
   try {
     process.stdout.write(
       execSync(
-        'npx eslint --fix ./ere/data/race/model/condition-params.js ./ere/data/race/skill',
+        'git add ./ere/data/race/model/condition-params.js ./ere/data/race/skill',
         { cwd: join(process.cwd(), '../..') },
       ),
     );
@@ -701,7 +701,12 @@ async function chara_skill() {
     process.stdout.write(execSync('node parse-genes.js'));
     process.stdout.write(execSync('node parse-contestants.js'));
     process.stdout.write(
-      execSync('npx eslint --fix ./ere/data/race/gene ./ere/i18n', {
+      execSync('git add ./ere/data/race/gene', {
+        cwd: join(process.cwd(), '../..'),
+      }),
+    );
+    process.stdout.write(
+      execSync('pnpm run lint', {
         cwd: join(process.cwd(), '../..'),
       }),
     );

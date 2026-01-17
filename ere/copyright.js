@@ -26,12 +26,7 @@ function generate_copyrights() {
     [[get_copyright_entry(2)], '牛蛙煲'],
     [[get_copyright_entry(3)], '天马闪光蹄'],
     [
-      [
-        get_copyright_entry(4),
-        { isDivider: true },
-        get_copyright_entry(46),
-        '（招募）',
-      ],
+      [get_copyright_entry(4), { isDivider: true }, get_copyright_entry(46)],
       '黑奴一号',
     ],
     [
