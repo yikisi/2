@@ -8,8 +8,8 @@ const check_and_add_event = require('#/event/check/snippets/check-and-add-event'
 const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
 const { add_event, cb_enum } = require('#/event/queue');
 const check_aim_race = require('#/event/snippets/check-aim-race');
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const { get_chara_color } = require('#/data/chara-colors');
 const FalconEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-46');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
@@ -35,6 +35,7 @@ module.exports = class extends CustomizedCheck {
     const history = RaceHistory.get(this.id);
     const races = history.get();
     const titles = [];
+    const color = get_chara_color(this.id);
     const checks = {
       japa_dir: check_aim_race(races, race_enum.japa_dir, 1, 1),
       teio_sho: check_aim_race(races, race_enum.teio_sho, 2, 1),
@@ -52,8 +53,8 @@ module.exports = class extends CustomizedCheck {
       checks.toky_dai2
     ) {
       titles.push({
-        c: get_chara_talk(46).color,
-        n: this.get_personal_titles()[0],
+        c: color,
+        n: this.get_personal_titles()[1],
       });
       aim_check && sys_personal_achievement.set(46, 1);
     }
@@ -79,8 +80,8 @@ module.exports = class extends CustomizedCheck {
       max >= 9
     ) {
       titles.push({
-        c: get_chara_talk(46).color,
-        n: this.get_personal_titles()[1],
+        c: color,
+        n: this.get_personal_titles()[0],
       });
     }
     return titles;
@@ -379,7 +380,11 @@ module.exports = class extends CustomizedCheck {
     return buffer;
   }
 
+  get_personal_achieve() {
+    return '100303';
+  }
+
   get_personal_titles() {
-    return ['Top Idol⭐', '沙之飞隼'];
+    return ['104601', '104602'];
   }
 };
