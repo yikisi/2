@@ -1,6 +1,10 @@
 const era = require('#/era-electron');
 
 const {
+  check_chara_ero_image,
+  sys_get_ero_image,
+} = require('#/system/ero/sys-calc-ero-image');
+const {
   get_bust_size,
   get_hip_size,
   get_waist_size,
@@ -22,7 +26,6 @@ const {
   unknown_info,
 } = require('#/data/exp-const');
 const { get_breast_cup, get_talent, get_xp } = require('#/data/info-generator');
-const { sys_get_ero_image } = require('#/system/ero/sys-calc-ero-image');
 
 const page_name = '性爱情况';
 
@@ -377,17 +380,21 @@ module.exports = {
         { content: unknown_info(chara.id), type: 'text' },
       );
     }
-    const img_name = era.get(`cstr:${chara.id}:头像`);
-    const img_t = era.get(`cstr:${chara.id}:头像T`);
-    if (img_t) {
-      sex_info_list.push(
-        { content: [{ isBr: true }], type: 'text' },
-        {
+    // CSTRNAME:10 = 头像
+    // CSTRNAME:13 = 头像T
+    const img_name = era.get(`cstr:${chara.id}:10`);
+    if (check_chara_ero_image(chara.id)) {
+      sex_info_list.push({ content: [{ isBr: true }], type: 'text' });
+      const img_t = era.get(`cstr:${chara.id}:13`);
+      if (img_t) {
+        sex_info_list.push({
           accelerator: 100,
           content: `更改调教立绘（当前：第 ${img_t.substring(img_name.length) || '1'} 套）`,
           type: 'button',
-        },
-      );
+        });
+      } else {
+        sex_info_list.push({ content: '使用专属调教立绘', type: 'text' });
+      }
     }
     return {
       /** @param {number} cmd */
