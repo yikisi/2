@@ -1,8 +1,6 @@
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
 class ByerleyLifeMarks extends LifeEventMarks {
-  // 光环效果
-  buff;
   // 爱慕事件标记
   love;
 

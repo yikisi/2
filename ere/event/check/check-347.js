@@ -9,6 +9,7 @@ const check_aim_race = require('#/event/snippets/check-aim-race');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { get_chara_color } = require('#/data/chara-colors');
+const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
 
@@ -43,6 +44,7 @@ module.exports = class extends CustomizedCheck {
       if (aim_check) {
         sys_personal_achievement.set(this.id, 1);
       }
+      LifeEventMarks.get_marks(this.id).buff = 1;
     }
     return titles;
   }

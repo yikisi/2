@@ -27,14 +27,6 @@ writeFileSync(
       (e) =>
         `cons_dict[${isNaN(Number(e)) ? `'${e}'` : e}] = require('#/event/mec/mec-${e}');`,
     ),
-    `cons_dict[201] =
-  cons_dict[202] =
-  cons_dict[203] =
-    require('#/event/mec/mec-uma-npc');`,
-    `cons_dict[346] =
-  cons_dict[347] =
-  cons_dict[348] =
-    require('#/event/mec/mec-npc');`,
   ),
 );
 

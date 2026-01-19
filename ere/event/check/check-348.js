@@ -9,6 +9,7 @@ const { get_abbr_number } = require('#/utils/value-utils');
 
 const { get_chara_color } = require('#/data/chara-colors');
 const HaiseikoEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-348');
+const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_infos, race_rewards } = require('#/data/race/race-const');
 
@@ -32,6 +33,7 @@ module.exports = class extends CustomizedCheck {
       if (aim_check) {
         sys_personal_achievement.set(this.id, 1);
       }
+      LifeEventMarks.get_marks(this.id).buff = 1;
     }
     return titles;
   }

@@ -1,7 +1,6 @@
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
 class BryneLifeMarks extends LifeEventMarks {
-  buff;
   funds;
 
   constructor() {
