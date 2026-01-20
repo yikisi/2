@@ -1,113 +1,113 @@
 # @file 小栗帽 - 招募
 # @author 雞雞
 rec:
-  - 小栗帽，小栗帽。
-  - 对中央特雷森而言，那是一个陌生的名字，但 %YOU% 在过去的一年从未忘却过这个名字。不，更贴切的说法应该是……这位赛%UMA%的成绩。
-  - 十二战十胜，两次败北均为毫厘之差的二着……%YOU% 坐在办公室的桌前翻看着那份被 %YOU% 掀开过无数次的整合资料。
-  - 那位赛%UMA%是去年开始在地方系列赛声名鹊起的。
-  - 地方系列赛不像中央系列赛一样由政府官方承办，而是由地方赛区联盟自主举行，其竞技水平在身为中央训练员的 %YOU% 眼中仍然远远不及中央。
+  - Oguri Cap, Oguri Cap.
+  - To Central Tracen, that is an unfamiliar name, but %YOU% have never forgotten it over the past year. No, a more accurate way to put it would be... the results of this Race %UMA%.
+  - Twelve races, ten wins. The two defeats were second-place finishes by a hair's breadth... %YOU% sat at the office desk, flipping through the compiled data %YOU% had opened countless times.
+  - That Race %UMA% started making a name for herself in the Local Series last year.
+  - Unlike the Central Series which is officially run by the government, the Local Series is held autonomously by local racing leagues. In the eyes of %YOU%, a Central Trainer, their competitive level is still far below that of Central.
   -
   - acc: 1
-    content: 「但可不能因为来自地方就掉以轻心。」
+    content: "But we can't let our guard down just because she's from the locals."
   -
-  - '%YOU% 绝不会忘怀小时候曾经在电视上看过的传奇赛%UMA% 海塞克 的英姿。'
-  - 那位赛%UMA%与小栗帽同样来自地方系列赛，却跨越重重阻碍一路登上中央舞台最高峰，以一己之力让当时处于颓势的赛%UMA%竞技重新卷起热潮。
-  - 而在海塞克之后，也有洛奇老虎、谷百合等等来自地方的强马挑战中央。
-  - 尽管如今还没有一位赛%UMA%能达到海塞克的高度，但地方系列赛的水平悄然提升也是不争的事实……
-  - 如今，小栗帽似乎有望追赶海塞克，成为新一代的地方传奇。
-  - '%YOU% 的目光移动到放在一旁的老报纸，上面印刷着小栗帽初次取胜后的胜者舞台上——跳民谣歌舞的照片。'
+  - '%YOU% will never forget the heroic figure of the legendary Race %UMA%, Haiseiko, seen on TV during childhood.'
+  - That Race %UMA% came from the Local Series just like Oguri Cap, yet overcame obstacle after obstacle to reach the peak of the Central stage, single-handedly reigniting the fever for Race %UMA% sports which was in a slump at the time.
+  - And after Haiseiko, there were strong horses like Rocky Tiger and Valley Lily coming from the locals to challenge Central.
+  - Although no Race %UMA% has reached Haiseiko's height yet, it is an indisputable fact that the level of the Local Series is quietly rising...
+  - Now, Oguri Cap seems poised to chase after Haiseiko and become the new local legend.
+  - '%YOU%''s gaze moved to the old newspaper set aside, which printed a photo of Oguri Cap dancing a folk dance on the winning stage after her first victory.'
   -
-  - 与直到%SEX%在数月后的中京杯上大出风头后才关注起来的其他训练员不一样，%YOU% 正是从微不足道的地方比赛开始对小栗帽产生兴趣的。
-  - 而这周，%SEX%就会来到中央特雷森，届时 %YOU% 就会成为%SEX%的新一任训练员。
-  - 怪物进军中央特雷森的日子到了，%YOU% 满怀紧张地站在校门口等待着小栗帽。
-  - 理事长秘书 %T_NAME% 陪伴在 %YOU% 的身旁，有一搭没一搭地和 %YOU% 聊天打发时间。
+  - Unlike other trainers who only started paying attention after %SEX% made a big splash at the Chukyo Cup months later, %YOU% became interested in Oguri Cap starting from the insignificant local races.
+  - And this week, %SEX% will arrive at Central Tracen. At that time, %YOU% will become %SEX%'s new trainer.
+  - The day the monster marches into Central Tracen has arrived. %YOU% stood nervously at the school gate waiting for Oguri Cap.
+  - The Chairwoman's secretary, %T_NAME%, accompanied %YOU%, chatting idly to kill time.
   -
   - color: %T_COLOR%
     content:
       - content: %T_NAME%
         fontWeight: bold
-      - 「%YOURNAME% %SIR%，你接下来的责任可真是十分重大……当然，我不是说负责其他%UMA%的责任就不重大。」
+      - "%YOURNAME% %SIR%, your responsibility from here on out is quite heavy... Of course, I'm not saying the responsibility for other %UMA% isn't heavy."
   - color: %T_COLOR%
     content:
       - content: %T_NAME%
         fontWeight: bold
-      - 「但是像小栗帽一样的%UMA%……确实是难得一遇的奇才呢。」
+      - "But an %UMA% like Oguri Cap... is truly a rare prodigy."
   -
   - acc: 1
-    content: 「我懂的，这就是高知名度带来的副作用啊。」（小栗帽干劲+1）
+    content: "I understand. That's the side effect of high fame." (Oguri Cap Motivation +1)
     lines:
       - color: %T_COLOR%
         content:
           - content: %T_NAME%
             fontWeight: bold
-          - 「不过像是小栗帽同学这种赛%UMA%，%SEX%可能根本不会在意吧。」
-      - '%T_NAME% 说罢露出了意味深长的微笑，%YOU% 没想到%SEX%也关注小栗帽到了这个程度。'
-      - 如%SEX%所说的一样，小栗帽是难得的禁欲系赛%UMA%。
-      - 这个禁欲并非指七情六欲，而是指%SEX%在赛跑上的追求十分纯洁、纯净。
-      - 与很多赛%UMA%不一样，小栗帽并不是为了成名或利益而在场上奔跑，而是单纯地怀抱着对赛跑的热爱与竞争心而踏上赛道。
+          - "However, for a Race %UMA% like Oguri Cap, %SEX% probably doesn't care at all."
+      - '%T_NAME% showed a meaningful smile as she spoke. %YOU% didn''t expect %SEX% to follow Oguri Cap to this extent.'
+      - Just as %SEX% said, Oguri Cap is a rare, stoic Race %UMA%.
+      - This stoicism doesn't refer to emotions or desires, but rather that %SEX%'s pursuit of racing is extremely pure and unblemished.
+      - Unlike many Race %UMA%, Oguri Cap doesn't run for fame or profit, but steps onto the track simply embracing a love for racing and a competitive spirit.
   - acc: 2
-    content: 「奇才吗……和你相比又如何呢？」（%T_NAME% 好感-20，爱慕+2）
+    content: "A prodigy, huh... How does she compare to you?" (%T_NAME% Affection -20, Love +2)
     if: era.get('cflag:301:57')?.who_am_i >= 1
     lines:
       - color: %T_COLOR%
         content:
           - content: %T_NAME%
             fontWeight: bold
-          - 「还请不要开玩笑了，我只是个理事长秘书哦。」
-      - '%T_NAME% 说罢露出了意味深长的微笑，但 %YOU% 却切实地感觉到了%SEX%那微笑下隐藏着的杀气。'
-      - '%YOU% 并不害怕%SEX%真的会为了这个玩笑认真起来，因为%SEX%的这个小小秘密将会永久地留在 %YOU% 的心里。'
-      - '%T_NAME% 知道 %YOU% 不会出卖%SEX%，%YOU% 也知道%SEX%知道 %YOU% 不会出卖%SEX%，这就是你们心照不宣的默契。'
+          - "Please don't joke around. I am just the Chairwoman's secretary."
+      - '%T_NAME% showed a meaningful smile as she spoke, but %YOU% definitely felt the killing intent hidden beneath that smile.'
+      - '%YOU% are not afraid that %SEX% would really get serious over this joke, because %SEX%''s little secret will remain in %YOU%''s heart forever.'
+      - '%T_NAME% knows %YOU% won''t betray %SEX%, and %YOU% know that %SEX% knows %YOU% won''t betray %SEX%. This is your tacit understanding.'
   -
-  - 校门外出现了那个银发的身影，是小栗帽。
-  - 你们连忙踏起碎步前去迎接，%T_NAME% 则率先以完美无暇的端庄姿态向小栗帽打起招呼。
+  - That silver-haired figure appeared outside the school gate. It's Oguri Cap.
+  - You hurriedly trotted over to welcome her, while %T_NAME% took the lead to greet Oguri Cap with flawless elegance.
   - color: %T_COLOR%
     content:
       - content: %T_NAME%
         fontWeight: bold
-      - 「欢迎来到『日本赛%UMA%训练中心学园』，我是理事长秘书——骏川缰绳。」
+      - "Welcome to 'Japan Race %UMA% Training Center Academy'. I am the Chairwoman's secretary—Tazuna Hayakawa."
   - color: %T_COLOR%
     content:
       - content: %T_NAME%
         fontWeight: bold
-      - 「要是有什么不明白的事情，欢迎随时来找我商量哦。」
+      - "If there is anything you don't understand, feel free to come discuss it with me anytime."
   -
-  - 小栗帽的脸上一如既往地丝毫没有表露出什么感情的意思，但%SEX%看向 %T_NAME% 时眼神却突然变得认真起来。
-  - 你看得出%SEX%的眼里带着疑问，整个人的气场也变得就像是野兽闻到天敌气味时的警戒感觉。
+  - Oguri Cap's face, as always, showed no intention of expressing any emotion, but %SEX%'s eyes suddenly became serious when looking at %T_NAME%.
+  - You could see the doubt in %SEX%'s eyes, and her entire aura became alert, like a wild beast catching the scent of a natural predator.
   -
   - acc: 1
-    content: （怎么了？）（小栗帽干劲+1）
+    content: (What's wrong?) (Oguri Cap Motivation +1)
   - acc: 2
-    content: 「……这个家伙直觉真是敏鋭呢。」（%T_NAME% 好感-20，爱慕+5）
+    content: "...This girl's intuition is really sharp." (%T_NAME% Affection -20, Love +5)
     if: era.get('cflag:301:57')?.who_am_i >= 1
     lines:
-      - '%YOU% 以仅有 %T_NAME% 能听见的音量小声说道，然后小腿上随即被%SEX%隐蔽地踢了一脚。'
+      - '%YOU% whispered at a volume only %T_NAME% could hear, and was immediately kicked covertly in the calf by %SEX%.'
       - color: red
-        content: （体力-10%！）
+        content: (Stamina -10%!)
   -
-  - 对小栗帽而言，%T_NAME% 是陌生人，但%SEX%与 %YOU% 在笠松的时候就已经是老相识了。
-  - 这也是为什么小栗帽同意将%SEX%的生涯托付给 %YOU% 这位%TITLE%训练员身上。
-  - 此行见到熟人，小栗帽的扑克脸上也露出了浅浅的笑容。
+  - To Oguri Cap, %T_NAME% is a stranger, but %SEX% and %YOU% were already old acquaintances back in Kasamatsu.
+  - This is also why Oguri Cap agreed to entrust %SEX%'s career to %YOU%, this %TITLE% trainer.
+  - Seeing a familiar face on this trip, a faint smile appeared on Oguri Cap's poker face.
   -
   - color: %COLOR%
-    content: 小栗帽「%YOURNAME% 训练员，又见面了。」
+    content: Oguri Cap "%YOURNAME% Trainer, we meet again."
   -
   - acc: 1
-    content: 「好久不见了，小栗。」
+    content: "Long time no see, Oguri."
   -
   - color: %COLOR%
     content:
-      - content: 小栗帽
+      - content: Oguri Cap
         fontWeight: bold
-      - 「在这里重新自我介绍一下——我是小栗帽，是要夺取天下的赛%UMA%。」
+      - "Let me reintroduce myself here—I am Oguri Cap, the Race %UMA% who will seize the nation."
   - color: %COLOR%
     content:
-      - content: 小栗帽
+      - content: Oguri Cap
         fontWeight: bold
-      - 「请多指教。」
+      - "Please take care of me."
   -
-  - 在秘书 %T_NAME% 的见证下，%YOU% 与小栗帽轻轻地握手，相视而笑。
+  - Witnessed by Secretary %T_NAME%, %YOU% and Oguri Cap shook hands gently and smiled at each other.
   -
   - acc: 1
-    content: 「请多指教。」
+    content: "Please take care of me."
   - acc: 2
-    content: 「天下对你来说太肤浅了……来征服世界吧！」
+    content: "The nation is too shallow for you... Let's conquer the world!"
