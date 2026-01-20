@@ -383,7 +383,10 @@ module.exports = {
     // CSTRNAME:10 = 头像
     // CSTRNAME:13 = 头像T
     const img_name = era.get(`cstr:${chara.id}:10`);
-    if (check_chara_ero_image(chara.id)) {
+    if (
+      !era.getCharactersInTrain().includes(chara.id) &&
+      check_chara_ero_image(chara.id)
+    ) {
       sex_info_list.push({ content: [{ isBr: true }], type: 'text' });
       const img_t = era.get(`cstr:${chara.id}:13`);
       if (img_t) {
