@@ -1,7 +1,19 @@
 const I18nNames = require('#/i18n/zh-CN/chara/names');
 
 module.exports = class extends I18nNames {
+  // Callname
+  me = 'I';
   you = 'You';
+  you_mul = 'You';
+  he = 'He';
+  he_mul = 'They';
+  she = 'She';
+  she_mul = 'They';
+  mr = 'Mr.';
+  miss = 'Miss.';
+  uma_girl = 'Umamusume';
+
+  900111 = 'Miss. Hayakawa';
 
   // Special
   ruby_mother = 'Hagino Top Lady';

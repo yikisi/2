@@ -1,5 +1,6 @@
-# @file Oguri Cap - 日常
+# @file Oguri Cap - Daily
 # @author 雞雞
+# @translator 雞雞
 good_morning:
   sync: true
   lines:
@@ -42,20 +43,20 @@ good_morning:
 select:
   sync: true
   lines:
-  - random: true
-    lines:
-      - color: %COLOR%
-        content:
-          - fontWeight: bold
-            content: Oguri Cap
-          - 「I am Oguri Cap. I look forward to working with you.」
-  - random: true
-    lines:
-      - color: %COLOR%
-        content:
-          - fontWeight: bold
-            content: Oguri Cap
-          - 「Trainer... I'm counting on you.」
+    - random: true
+      lines:
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: Oguri Cap
+            - 「I am Oguri Cap. I look forward to working with you.」
+    - random: true
+      lines:
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: Oguri Cap
+            - 「Trainer... I'm counting on you.」
 
 talk:
   # BASENAME:0 = 体力
@@ -349,9 +350,9 @@ out_church:
     lines:
       - color: %COLOR%
         content:
-        - fontWeight: bold
-          content: Oguri Cap
-        - 「This is... a coupon for free extra noodles at the ramen shop! I didn't expect the blessing to come so soon!」
+          - fontWeight: bold
+            content: Oguri Cap
+          - 「This is... a coupon for free extra noodles at the ramen shop! I didn't expect the blessing to come so soon!」
       -
       - Oguri Cap pulled a piece of paper out of her pocket in surprise, though %YOU% suspected %SEX% had simply forgotten leaving it there earlier.
       - Regardless, seeing %SEX%'s smiling face, there was no need for %YOU% to ruin the mood.

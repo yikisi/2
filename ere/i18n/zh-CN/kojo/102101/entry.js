@@ -1,4 +1,4 @@
-class I18nKojo1021 {
+class I18nKojo102101 {
   flash = '闪光';
   flash_desc = '白色闪电，开放参与所有比赛';
 
@@ -31,4 +31,4 @@ class I18nKojo1021 {
   ];
 }
 
-module.exports = I18nKojo1021;
+module.exports = I18nKojo102101;

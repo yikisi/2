@@ -26,6 +26,7 @@ module.exports = class extends I18nEntry {
   ui_no = 'NO';
 
   name = new (require('#/i18n/en-US/chara/names'))();
+  kojo = new (require('#/i18n/en-US/kojo/entry'))();
 
   tb_abl = new (require('#/i18n/en-US/table/abl'))();
 

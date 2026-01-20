@@ -1,4 +1,4 @@
-class I18nKojo1017 {
+class I18nKojo101701 {
   self_destruct = '自毁';
   self_destruct_desc =
     '对宿命的抗拒使其陷入自我毁灭；训练成功率-5%，训练效果-8%，参赛时属性-5%';
@@ -27,4 +27,4 @@ class I18nKojo1017 {
   }
 }
 
-module.exports = I18nKojo1017;
+module.exports = I18nKojo101701;

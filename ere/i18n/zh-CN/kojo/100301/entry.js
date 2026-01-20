@@ -1,8 +1,8 @@
 const proxy_kojo_js = require('#/i18n/proxy');
 
-class I18nKojo1003 {
-  recruit = proxy_kojo_js(require('#/i18n/zh-CN/kojo/1003/rec-3'));
-  love = proxy_kojo_js(require('#/i18n/zh-CN/kojo/1003/love-3'));
+class I18nKojo100301 {
+  recruit = proxy_kojo_js(require('#/i18n/zh-CN/kojo/100301/rec-3'));
+  love = proxy_kojo_js(require('#/i18n/zh-CN/kojo/100301/love-3'));
 
   hurt = '腿伤！';
   hurt_desc =
@@ -25,4 +25,4 @@ class I18nKojo1003 {
   ];
 }
 
-module.exports = I18nKojo1003;
+module.exports = I18nKojo100301;

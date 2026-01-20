@@ -1,12 +1,12 @@
-class I18nKojo1006 {
+class I18nKojo100601 {
   /** @type {KojoFile} */
-  recruit = require('#/i18n/zh-CN/kojo/1006/rec-6.kojo');
+  recruit = require('#/i18n/zh-CN/kojo/100601/rec-6.kojo');
   /** @type {KojoFile} */
-  daily = require('#/i18n/zh-CN/kojo/1006/daily-6.kojo');
+  daily = require('#/i18n/zh-CN/kojo/100601/daily-6.kojo');
   /** @type {KojoFile} */
-  edu = require('#/i18n/zh-CN/kojo/1006/edu-6.kojo');
+  edu = require('#/i18n/zh-CN/kojo/100601/edu-6.kojo');
   /** @type {KojoFile} */
-  love = require('#/i18n/zh-CN/kojo/1006/love-6.kojo');
+  love = require('#/i18n/zh-CN/kojo/100601/love-6.kojo');
 
   cinderella = '灰姑娘';
   cinderella_desc = '回合开始时压力自动下降到抑郁以下，干劲自动上升到较差以上';
@@ -38,4 +38,4 @@ class I18nKojo1006 {
   palace_race = '拟・日本德比';
 }
 
-module.exports = I18nKojo1006;
+module.exports = I18nKojo100601;
