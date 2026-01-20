@@ -46,6 +46,8 @@ class LifeEventMarks extends PersonalEventMarks {
   // 地下室 - 初见
   b_start;
 
+  buff;
+
   /**
    * @param {number} cid
    * @returns {LifeEventMarks}

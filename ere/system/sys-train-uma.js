@@ -4,7 +4,10 @@ const { sys_get_chara } = require('#/system/chara/sys-calc-characteristic');
 const sys_hurt_uma = require('#/system/chara/sys-hurt-uma');
 const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
-const { sys_get_succ_rate } = require('#/system/sys-calc-chara-param');
+const {
+  sys_get_motivation,
+  sys_get_succ_rate,
+} = require('#/system/sys-calc-chara-param');
 const { sys_change_fame } = require('#/system/sys-calc-flag');
 
 const { get_custom_edu, run_custom_edu } = require('#/event/edu/edu-factory');
@@ -141,18 +144,21 @@ function get_success_base_reward(
  * @param {{teach_chara:number}} [between_weeks]
  */
 function get_train_bonus(cid, attr, between_weeks) {
-  const c_loc = era.get(`cflag:${cid}:位置`);
+  // CFLAGNAME:45 = 训练加成
+  const c_loc = era.get(`cflag:${cid}:45`);
   const inmon = CharaInmon.get(cid);
   let train_buff =
     // CFLAGNAME:25 - 29 = 速度加成 - 智力加成
     era.get(`cflag:${cid}:${25 + attr}`) +
-    era.get('flag:训练加成') +
-    (5 + (sys_get_chara(cid) === 2)) *
-      (era.get(`status:${cid}:摸鱼`) ? -4 : era.get(`cflag:${cid}:干劲`)) +
+    // FLAGNAME:101 = 训练加成
+    era.get('flag:101') +
+    (5 + (sys_get_chara(cid) === 2)) * sys_get_motivation(cid) +
     (sys_get_chara(cid) === -3) -
-    0.004 * era.get(`base:${cid}:压力`) +
+    // BASENAME:11 = 压力
+    0.004 * era.get(`base:${cid}:11`) +
     get_custom_mec(cid).get_train_buff() -
-    5 * era.get(`status:${cid}:疲惫`) -
+    // STATUSNAME:6 = 疲惫
+    5 * era.get(`status:${cid}:6`) -
     50 * inmon.on(plugin_enum.sex_1) -
     999 * inmon.on(plugin_enum.sex_2);
   if (c_loc > 0 && c_loc !== location_enum.beach) {
@@ -161,18 +167,19 @@ function get_train_bonus(cid, attr, between_weeks) {
   switch (attr) {
     case attr_enum.speed:
     case attr_enum.strength:
-      if (era.get('cflag:340:招募状态') === recruit_flags.yes) {
+      // CFLAGNAME:66 = 招募状态
+      if (era.get('cflag:340:66') === recruit_flags.yes) {
         train_buff += 50 * (1 + new DarleyLifeMarks().buff);
       }
       break;
     case attr_enum.intelligence:
-      if (era.get('cflag:341:招募状态') === recruit_flags.yes) {
+      if (era.get('cflag:341:66') === recruit_flags.yes) {
         train_buff += 50 * (1 + new GodolphinLifeMarks().buff);
       }
       break;
     case attr_enum.endurance:
     case attr_enum.toughness:
-      if (era.get('cflag:342:招募状态') === recruit_flags.yes) {
+      if (era.get('cflag:342:66') === recruit_flags.yes) {
         train_buff += 50 * (1 + new ByerleyLifeMarks().buff);
       }
   }
@@ -215,7 +222,8 @@ module.exports = {
    * @return {Promise<void>}
    */
   async train_uma(cid, attr, extra_buff) {
-    era.set(`cflag:${cid}:自主训练`, 0);
+    // CFLAGNAME:41 = 自主训练
+    era.set(`cflag:${cid}:41`, 0);
     const buffer = [];
     const changes = { attr_change: new Array(5).fill(0), pt_change: 0 };
     const t_level =

@@ -8,8 +8,8 @@ const sortRequiresByPath = require('eslint-plugin-sort-requires-by-path');
 module.exports = [
   nodePlugin.configs['flat/recommended'],
   eslint.configs.recommended,
-  { languageOptions: { ecmaVersion: 'latest' }, name: 'root-config' },
   {
+    languageOptions: { ecmaVersion: 'latest' },
     plugins: {
       prettier: prettierPlugin,
       'require-sort': requireSort,
@@ -21,6 +21,7 @@ module.exports = [
         { max: 1024, skipBlankLines: true, skipComments: true },
       ],
       'n/no-missing-require': 'off',
+      'n/no-process-exit': 'warn',
       'n/no-unpublished-import': 'off',
       'n/no-unpublished-require': 'off',
       'no-unused-vars': [

@@ -23,6 +23,7 @@ const LegendUmaFilter = require('#/data/race/model/legend-uma-filter');
 const LegendUmaSelector = require('#/data/race/model/legend-uma-selector');
 const PseudoUma = require('#/data/race/model/pseudo-uma');
 const RaceInfo = require('#/data/race/model/race-info');
+const { race_difficulty } = require('#/data/race/race-const');
 const {
   max_extra_attr,
   mod_motivation_coefficients,
@@ -145,25 +146,31 @@ function random_style(adapts, random = false) {
  */
 function sys_parse_for_race(team_chara, race, info, contestants) {
   const current = new Date().getTime();
-  let ret = [...team_chara],
-    unnamed_index = -1;
+  let ret = [...team_chara];
+  let unnamed_index = -1;
   info.has_legend = false;
   const edu_phase = Math.max(
-    ...team_chara.map((e) =>
-      e.index_chara === 0
-        ? 144
-        : era.get(`cflag:${e.index_chara}:育成回合计时`) + 1,
+    ...team_chara.map(({ index_chara: cid }) =>
+      // CFLAGNAME:48 = 育成回合计时
+      cid === 0 ? 144 : era.get(`cflag:${cid}:48`) + 1,
     ),
+  );
+  // FLAGNAME:102 = 比赛难度
+  const race_setting = era.get('flag:102');
+  const passer_by_upper = Math.max(
+    (passer_by_level[1] * (100 + race_setting)) / (100 + race_difficulty.hard),
+    passer_by_level[0],
   );
   const passer_by_difficulty =
     passer_by_level[0] +
-    ((passer_by_level[1] - passer_by_level[0]) * (edu_phase - 24)) /
-      (144 - 24) -
-    1;
+    ((passer_by_upper - passer_by_level[0]) * (edu_phase - 24)) / (144 - 24);
+  const named_upper = Math.max(
+    (named_level[1] * (100 + race_setting)) / (100 + race_difficulty.hard),
+    named_level[0],
+  );
   const named_difficulty =
     named_level[0] +
-    ((named_level[1] - named_level[0]) * (edu_phase - 24)) / (144 - 24) -
-    1;
+    ((named_upper - named_level[0]) * (edu_phase - 24)) / (144 - 24);
   if (Array.isArray(contestants)) {
     contestants.forEach((c) => {
       if (c instanceof PseudoUma) {
@@ -185,11 +192,10 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
               ),
             );
             if (uma.dress !== undefined) {
-              ret
-                .at(-1)
-                .set_image(
-                  `${era.get(`staticcstr:${uma.id}:头像`)}${uma.dress}_半身`,
-                );
+              ret.at(-1).set_image(
+                // CSTRNAME:10 = 头像
+                `${era.get(`staticcstr:${uma.id}:10`)}${uma.dress}_半身`,
+              );
             }
           }
         } else if (c instanceof LegendUmaFilter) {
@@ -216,7 +222,8 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
     info.extra_attr = (max_extra_attr * (144 - edu_phase)) / (144 - 24);
     const contestant_dict = {};
     team_chara.forEach((e) => (contestant_dict[e.index_chara] = 1));
-    contestant_dict[era.get('cflag:0:模版角色')] = 1;
+    // CFLAGNAME:90 = 模版角色
+    contestant_dict[era.get('cflag:0:90')] = 1;
     let legend_count = ((edu_phase - 24) * info.gates) / (144 - 24);
     switch (info.race_class) {
       case RaceInfo.class_enum.G1:
@@ -249,7 +256,8 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
           if (c instanceof LegendUmaSelector) {
             if (
               !contestant_dict[c.id] &&
-              era.get(`cflag:${c.id}:招募状态`) !== recruit_flags.yes
+              // CFLAGNAME:66 = 招募状态
+              era.get(`cflag:${c.id}:66`) !== recruit_flags.yes
             ) {
               const uma = select_data_from_contestants(
                 named_list.filter((e) => e.id === c.id),
@@ -269,7 +277,7 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
                   ret
                     .at(-1)
                     .set_image(
-                      `${era.get(`staticcstr:${uma.id}:头像`)}${uma.dress}_半身`,
+                      `${era.get(`staticcstr:${uma.id}:10`)}${uma.dress}_半身`,
                     );
                 }
                 legend_count--;
@@ -300,7 +308,7 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
       legend_count > 0 &&
       edu_phase === 144 &&
       info.race_class === RaceInfo.class_enum.G1 &&
-      era.get('flag:比赛难度') > 0
+      race_setting > 0
     ) {
       const legend = get_random_entry(
         legends_list.filter(
@@ -328,8 +336,8 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
       const legends_history = race2legends[race] || {};
       const list_history = legends.filter(
         (e) =>
-          !contestant_dict[e] &&
-          era.get(`cflag:${e}:招募状态`) !== recruit_flags.yes,
+          // CFLAGNAME:66 = 招募状态
+          !contestant_dict[e] && era.get(`cflag:${e}:66`) !== recruit_flags.yes,
       );
       // 先填史实冠军,史实冠军保证干劲非负
       gacha(
@@ -373,7 +381,7 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
               ret
                 .at(-1)
                 .set_image(
-                  `${era.get(`staticcstr:${uma.id}:头像`)}${uma.dress}_半身`,
+                  `${era.get(`staticcstr:${uma.id}:10`)}${uma.dress}_半身`,
                 );
             }
           }
@@ -393,7 +401,8 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
             .filter(
               (e) =>
                 !contestant_dict[e.id] &&
-                era.get(`cflag:${e.id}:招募状态`) !== recruit_flags.yes &&
+                // CFLAGNAME:66 = 招募状态
+                era.get(`cflag:${e.id}:66`) !== recruit_flags.yes &&
                 e.adapt_ground[info.ground] >= 5 &&
                 e.adapt_distance[info.distance] >= 5 &&
                 e.level <= named_difficulty + 200,
@@ -419,7 +428,7 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
           ret
             .at(-1)
             .set_image(
-              `${era.get(`staticcstr:${uma.id}:头像`)}${uma.dress}_半身`,
+              `${era.get(`staticcstr:${uma.id}:10`)}${uma.dress}_半身`,
             );
         }
       });
@@ -478,15 +487,13 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
   if (ret.findIndex((e) => e.legend > 0) !== -1) {
     info.has_legend = true;
   }
-  const from_setting = era.get('flag:比赛难度');
   ret.forEach((uma) => {
     if (uma.index_chara >= 0 && !uma.image) {
       uma.set_image(
         get_image(uma.index_chara)
           .map((_i) =>
-            era.get('flag:立绘类型') === 2
-              ? `${_i}_gif\t${_i}_半身`
-              : `${_i}_半身`,
+            // FLAGNAME:63 = 立绘类型
+            era.get('flag:63') === 2 ? `${_i}_gif\t${_i}_半身` : `${_i}_半身`,
           )
           .join('\t'),
       );
@@ -494,20 +501,19 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
   });
   ret.slice(team_chara.length).forEach((uma) => {
     if (uma.index_chara >= 0) {
-      uma.chara = era.get(`staticcflag:${uma.index_chara}:气性`);
-    }
-    if (from_setting !== 0) {
-      uma.attrs = uma.attrs.map((e) => (e * (100 + from_setting)) / 100);
+      // CFLAGNAME:2 = 气性
+      uma.chara = era.get(`staticcflag:${uma.index_chara}:2`);
     }
   });
 
   let season;
-  switch (era.get('flag:当前月')) {
+  // FLAGNAME:2 - 3 = 当前月 - 当前周
+  switch (era.get('flag:2')) {
     case 3:
-      season = 1 + 4 * (era.get('flag:当前周') >= 3);
+      season = 1 + 4 * (era.get('flag:3') >= 3);
       break;
     case 4:
-      season = 1 + 4 * (era.get('flag:当前周') <= 2);
+      season = 1 + 4 * (era.get('flag:3') <= 2);
       break;
     case 5:
       season = 1;

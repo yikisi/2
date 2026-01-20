@@ -21,19 +21,14 @@ csv = csv
 
 csv.shift();
 
-let output =
-  "const { bonus_params, id2bonus } = require('#/data/race/race-attr-bonus');\n" +
-  'const {\n' +
-  '  lane_params,\n' +
-  '  slope_params,\n' +
-  "} = require('#/data/race/race-params');const race_rewards = require('#/data/race/race-rewards');\n\nconst race_enum = {\n// 出道战\nbegin_race: 0,\n";
+let output = 'const race_enum = {\n// 出道战\nbegin_race: 0,\n';
 
-csv.forEach((e) => {
-  output += `// ${e[5]}\n${e[1]}:0,\n`;
+csv.forEach((r, i) => {
+  output += `// ${r[5]}\n${r[1]}:${i + 1},\n`;
 });
 
 output +=
-  '};\nObject.keys(race_enum).forEach((e, i) => (race_enum[e] = i));\n\nconst current = new Date().getTime();\n\n/** @type {RaceInfo[]} */\nconst race_infos = [];\n';
+  '};\n\nconst current = new Date().getTime();\n\n/** @type {RaceInfo[]} */\nconst race_infos = [];\n';
 
 const dict = {};
 
@@ -43,19 +38,8 @@ csv.forEach((e) => {
   } else {
     dict[e[6]] = 1;
   }
-  output += `race_infos[race_enum.${
-    e[1]
-  }] = require('#/data/race/${e[8].toLowerCase()}/race-${e[6]}');\n`;
+  output += `race_infos[race_enum.${e[1]}] = require('#/data/race/${e[8].toLowerCase()}/race-${e[6]}');`;
 });
-
-output +=
-  '\nrace_infos.forEach((e) => {\n' +
-  '  const param_id = e.param_id;\n' +
-  '  e.attr_bonus = bonus_params[id2bonus[param_id]] || [];\n' +
-  '  e.lanes = lane_params[param_id];\n' +
-  '  e.slopes = slope_params[param_id];\n' +
-  '  e.phases = [Math.ceil(e.span*4/24),Math.ceil(e.span*16/24),Math.ceil(e.span*20/24)]\n' +
-  "});\n\nrace_infos[race_enum.begin_race] = require('#/data/race/race-begin-race')\n\nconsole.log('比赛信息注册完毕!',(new Date().getTime()-current).toLocaleString(),'ms')\n\nmodule.exports = {\nrace_enum,\nrace_infos,\nrace_rewards};";
 
 const file_path = join(__dirname, '../../ere/data/race/race-const.js');
 
@@ -194,13 +178,11 @@ writeFileSync(
 
 try {
   process.stdout.write(
-    execSync('node generate-race-params.js', {
-      cwd: resolve(__dirname),
-    }),
+    execSync('node generate-race-params.js', { cwd: resolve(__dirname) }),
   );
   process.stdout.write(
     execSync(
-      'npx eslint --fix ./ere/data/race/g1 ./ere/data/race/g2 ./ere/data/race/g3 ./ere/data/race/op ./ere/data/race/race-const.js ./ere/data/race/race-params.js ./ere/data/race/race-attr-bonus.js ./ere/i18n/*/races.js',
+      'git add ./ere/data/race/g1 ./ere/data/race/g2 ./ere/data/race/g3 ./ere/data/race/op ./ere/data/race/race-const.js ./ere/data/race/race-params.js ./ere/data/race/race-attr-bonus.js ./ere/i18n/*/races.js && pnpm run lint',
       { cwd: join(__dirname, '../..') },
     ),
   );

@@ -1,355 +1,354 @@
-// GENERATED START
 const { bonus_params, id2bonus } = require('#/data/race/race-attr-bonus');
 const { lane_params, slope_params } = require('#/data/race/race-params');
 const race_rewards = require('#/data/race/race-rewards');
 
+// GENERATED START
 const race_enum = {
   // 出道战
   begin_race: 0,
   // 少年杯
-  juni_cup: 0,
+  juni_cup: 1,
   // 京都金杯
-  kyot_kim: 0,
+  kyot_kim: 2,
   // 中山金杯
-  naka_kim: 0,
+  naka_kim: 3,
   // 仙女锦标
-  fair_sta: 0,
+  fair_sta: 4,
   // 新山纪念
-  shin_kin: 0,
+  shin_kin: 5,
   // 爱知杯
-  aich_hai: 0,
+  aich_hai: 6,
   // 蓝鸟杯
-  blue_cup: 0,
+  blue_cup: 7,
   // 京成杯
-  keis_hai: 0,
+  keis_hai: 8,
   // 日经新春杯
-  nikk_hai: 0,
+  nikk_hai: 9,
   // 青年骏马锦标
-  waka_sta: 0,
+  waka_sta: 10,
   // 丝绸之路锦标
-  silk_sta: 0,
+  silk_sta: 11,
   // 根岸锦标
-  negi_sta: 0,
+  negi_sta: 12,
   // 东海锦标
-  toka_sta: 0,
+  toka_sta: 13,
   // 美国赛马会杯
-  amer_cup: 0,
+  amer_cup: 14,
   // 如月赏
-  kisa_sho: 0,
+  kisa_sho: 15,
   // 川崎纪念赛
-  kawa_kin: 0,
+  kawa_kin: 16,
   // 东京报杯
-  toky_hai: 0,
+  toky_hai: 17,
   // 女王杯
-  quee_cup: 0,
+  quee_cup: 18,
   // 共同通信杯
-  kyod_hai: 0,
+  kyod_hai: 19,
   // 京都纪念
-  kyot_kin: 0,
+  kyot_kin: 20,
   // 云取赏
-  kumo_sho: 0,
+  kumo_sho: 21,
   // 风信子锦标
-  hyac_sta: 0,
+  hyac_sta: 22,
   // 二月锦标
-  febr_sta: 0,
+  febr_sta: 23,
   // 京都皇冠锦标
-  kyo_sta: 0,
+  kyo_sta: 24,
   // 小仓大赏典
-  koku_dai: 0,
+  koku_dai: 25,
   // 钻石锦标
-  diam_sta: 0,
+  diam_sta: 26,
   // 堇锦标
-  viol_sta: 0,
+  viol_sta: 27,
   // 中山纪念
-  naka_kin: 0,
+  naka_kin: 28,
   // 阪急杯
-  hank_hai: 0,
+  hank_hai: 29,
   // 郁金香赏
-  tuli_sho: 0,
+  tuli_sho: 30,
   // 弥生赏
-  hoch_sho: 0,
+  hoch_sho: 31,
   // 海洋锦标
-  ocae_sta: 0,
+  ocae_sta: 32,
   // 报知杯皇冠赛
-  hoch_rev: 0,
+  hoch_rev: 33,
   // 金鯱赏
-  kink_sho: 0,
+  kink_sho: 34,
   // 中山赛皇冠锦标
-  irc_sho: 0,
+  irc_sho: 35,
   // 京浜杯
-  keii_hai: 0,
+  keii_hai: 36,
   // 春季锦标
-  sprg_sta: 0,
+  sprg_sta: 37,
   // 猎鹰锦标
-  falc_sta: 0,
+  falc_sta: 38,
   // 百花杯
-  flow_cup: 0,
+  flow_cup: 39,
   // 卧龙锦标
-  huku_sta: 0,
+  huku_sta: 40,
   // 大尾光纪念赛
-  dio_kin: 0,
+  dio_kin: 41,
   // 阪神大赏典
-  hans_dai: 0,
+  hans_dai: 42,
   // 东京短途锦标
-  toky_spr: 0,
+  toky_spr: 43,
   // 每日杯
-  main_hai: 0,
+  main_hai: 44,
   // 高松宫纪念
-  takm_kin: 0,
+  takm_kin: 45,
   // 日经赏
-  nikk_sho: 0,
+  nikk_sho: 46,
   // 三月锦标
-  marc_sta: 0,
+  marc_sta: 47,
   // 大阪杯
-  sank_hai: 0,
+  sank_hai: 48,
   // 德比伯爵挑战杯
-  lord_tro: 0,
+  lord_tro: 49,
   // 樱花赏
-  oka_sho: 0,
+  oka_sho: 50,
   // 新西兰优胜杯
-  new_tro: 0,
+  new_tro: 51,
   // 海洋杯
-  mari_cup: 0,
+  mari_cup: 52,
   // 阪神皇冠锦标
-  hans_sta: 0,
+  hans_sta: 53,
   // 皋月赏
-  sats_sho: 0,
+  sats_sho: 54,
   // 阿灵顿杯
-  arli_cup: 0,
+  arli_cup: 55,
   // 天蝎锦标
-  anta_sta: 0,
+  anta_sta: 56,
   // 芙罗拉锦标
-  flor_sta: 0,
+  flor_sta: 57,
   // 青叶赏
-  aoba_sho: 0,
+  aoba_sho: 58,
   // 春季天皇赏
-  tenn_spr: 0,
+  tenn_spr: 59,
   // 英里赛马杯
-  mile_cup: 0,
+  mile_cup: 60,
   // 福岛皇冠锦标
-  fuku_sta: 0,
+  fuku_sta: 61,
   // NHK英里杯
-  nhk_cup: 0,
+  nhk_cup: 62,
   // 肯塔基德比
-  kent_der: 0,
+  kent_der: 63,
   // 京都新闻杯
-  kyot_hai: 0,
+  kyot_hai: 64,
   // 柏市纪念赛
-  kash_kin: 0,
+  kash_kin: 65,
   // 新潟大賞典
-  niig_dai: 0,
+  niig_dai: 66,
   // 羽田杯
-  hane_hai: 0,
+  hane_hai: 67,
   // 蓝鹦鹉赏
-  prix_prb: 0,
+  prix_prb: 68,
   // 京王杯春季杯
-  keio_cup: 0,
+  keio_cup: 69,
   // 日本橡树大赛
-  yush_him: 0,
+  yush_him: 70,
   // 凤雏锦标
-  hous_sta: 0,
+  hous_sta: 71,
   // 维多利亚英里赛
-  vict_mile: 0,
+  vict_mile: 72,
   // 平安锦标
-  heia_sta: 0,
+  heia_sta: 73,
   // 日本德比
-  toky_yus: 0,
+  toky_yus: 74,
   // 葵锦标
-  aoi_sta: 0,
+  aoi_sta: 75,
   // 目黑纪念
-  megu_kin: 0,
+  megu_kin: 76,
   // 普瑞克尼斯锦标赛
-  prea_sta: 0,
+  prea_sta: 77,
   // 东京德比
-  toky_der: 0,
+  toky_der: 78,
   // 安田纪念
-  yasu_kin: 0,
+  yasu_kin: 79,
   // 鸣尾纪念
-  naru_kin: 0,
+  naru_kin: 80,
   // 函馆短程锦标
-  haks_sta: 0,
+  haks_sta: 81,
   // 叶森赏
-  epso_cup: 0,
+  epso_cup: 82,
   // 戴安娜锦标
-  prix_dia: 0,
+  prix_dia: 83,
   // 独角兽锦标
-  unic_sta: 0,
+  unic_sta: 84,
   // 人鱼锦标
-  merm_sta: 0,
+  merm_sta: 85,
   // 宝冢纪念
-  takz_kin: 0,
+  takz_kin: 86,
   // 帝王赏
-  teio_sho: 0,
+  teio_sho: 87,
   // 贝蒙锦标
-  belm_sta: 0,
+  belm_sta: 88,
   // 日经广播赏
-  radi_shi: 0,
+  radi_shi: 89,
   // CBC赏
-  cbc_sho: 0,
+  cbc_sho: 90,
   // 日本泥地德比
-  japa_dir: 0,
+  japa_dir: 91,
   // 南河三锦标
-  proc_sta: 0,
+  proc_sta: 92,
   // 七夕赏
-  tana_sho: 0,
+  tana_sho: 93,
   // 函馆少年锦标
-  hak2_sta: 0,
+  hak2_sta: 94,
   // 函馆纪念
-  hako_kin: 0,
+  hako_kin: 95,
   // 朱鹮夏季短跑赛
-  ibis_das: 0,
+  ibis_das: 96,
   // 中京纪念
-  toyo_kin: 0,
+  toyo_kin: 97,
   // 女皇锦标
-  quee_sta: 0,
+  quee_sta: 98,
   // 花豹锦标
-  leop_sta: 0,
+  leop_sta: 99,
   // 榆树锦标赛
-  elm_sta: 0,
+  elm_sta: 100,
   // 关屋纪念
-  seki_kin: 0,
+  seki_kin: 101,
   // 北九州纪念
-  kita_kin: 0,
+  kita_kin: 102,
   // 小仓纪念
-  koku_kin: 0,
+  koku_kin: 103,
   // 新潟少年锦标
-  niig_sta: 0,
+  niig_sta: 104,
   // 札幌纪念
-  sapp_kin: 0,
+  sapp_kin: 105,
   // 基兰杯
-  keen_cup: 0,
+  keen_cup: 106,
   // 小仓少年锦标
-  koku_sta: 0,
+  koku_sta: 107,
   // 札幌少年锦标
-  sapp_sta: 0,
+  sapp_sta: 108,
   // 新潟纪念
-  niig_kin: 0,
+  niig_kin: 109,
   // 紫苑锦标
-  shio_sta: 0,
+  shio_sta: 110,
   // 人马锦标
-  cent_sta: 0,
+  cent_sta: 111,
   // 京城杯秋季让磅赛
-  keis_han: 0,
+  keis_han: 112,
   // 玫瑰锦标
-  rose_sta: 0,
+  rose_sta: 113,
   // 圣列特纪念赛
-  stli_kin: 0,
+  stli_kin: 114,
   // 神户新闻杯
-  kobe_hai: 0,
+  kobe_hai: 115,
   // 产经赏开放赛
-  all_com: 0,
+  all_com: 116,
   // 短途马锦标
-  sprt_sta: 0,
+  sprt_sta: 117,
   // 凯旋门赏
-  prix_lat: 0,
+  prix_lat: 118,
   // 天狼星锦标
-  siri_sta: 0,
+  siri_sta: 119,
   // 英里冠军赛南部杯
-  mile_nbh: 0,
+  mile_nbh: 120,
   // 沙特阿拉伯皇家杯
-  saud_cup: 0,
+  saud_cup: 121,
   // 府中皇冠锦标
-  fuch_sta: 0,
+  fuch_sta: 122,
   // 每日王冠
-  main_oka: 0,
+  main_oka: 123,
   // 京都大赏典
-  kyot_dai: 0,
+  kyot_dai: 124,
   // 秋华赏
-  shuk_sho: 0,
+  shuk_sho: 125,
   // 富士锦标
-  fuji_sta: 0,
+  fuji_sta: 126,
   // 阿尔忒弥斯锦标
-  arte_sta: 0,
+  arte_sta: 127,
   // 菊花赏
-  kiku_sho: 0,
+  kiku_sho: 128,
   // 秋季天皇赏
-  tenn_sho: 0,
+  tenn_sho: 129,
   // 天鹅锦标
-  swan_sta: 0,
+  swan_sta: 130,
   // 京王杯少年锦标
-  keio_sta: 0,
+  keio_sta: 131,
   // 幻想锦标
-  fant_sta: 0,
+  fant_sta: 132,
   // 日本育马场杯短途赛
-  jbc_spr: 0,
+  jbc_spr: 133,
   // 日本育马场杯雌马经典赛
-  jbc_lad: 0,
+  jbc_lad: 134,
   // 日本育马场经典赛
-  jbc_cls: 0,
+  jbc_cls: 135,
   // 阿根廷共和国杯
-  copa_arg: 0,
+  copa_arg: 136,
   // 京城锦标
-  miya_sta: 0,
+  miya_sta: 137,
   // 和谐锦标
-  chn_frt: 0,
+  chn_frt: 138,
   // 每日杯少年锦标
-  dail_sta: 0,
+  dail_sta: 139,
   // 伊丽莎白二世女皇杯
-  eliz_cup: 0,
+  eliz_cup: 140,
   // 武藏野锦标
-  musa_sta: 0,
+  musa_sta: 141,
   // 福岛纪念
-  fuku_kin: 0,
+  fuku_kin: 142,
   // 东京体育杯少年锦标
-  toky_sta: 0,
+  toky_sta: 143,
   // 英里冠军赛
-  mile_cha: 0,
+  mile_cha: 144,
   // 京都少年锦标
-  kyot_sta: 0,
+  kyot_sta: 145,
   // 日本杯
-  japa_cup: 0,
+  japa_cup: 146,
   // 京阪杯
-  keih_hai: 0,
+  keih_hai: 147,
   // 冠军杯
-  cham_cup: 0,
+  cham_cup: 148,
   // 长途锦标
-  stay_sta: 0,
+  stay_sta: 149,
   // 挑战杯
-  asah_cup: 0,
+  asah_cup: 150,
   // 全日本少年优骏
-  zeni_you: 0,
+  zeni_you: 151,
   // 阪神皇冠大赛
-  hans_fil: 0,
+  hans_fil: 152,
   // 香港短途锦标
-  hk_spr: 0,
+  hk_spr: 153,
   // 香港英里锦标
-  hk_mil: 0,
+  hk_mil: 154,
   // 香港杯
-  hk_cup: 0,
+  hk_cup: 155,
   // 香港瓶
-  hk_vas: 0,
+  hk_vas: 156,
   // 五车二锦标
-  cape_sta: 0,
+  cape_sta: 157,
   // 中日报杯
-  chun_hai: 0,
+  chun_hai: 158,
   // 朝日杯未来锦标
-  asah_sta: 0,
+  asah_sta: 159,
   // 绿松石锦标
-  turq_sta: 0,
+  turq_sta: 160,
   // 希望锦标
-  hope_sta: 0,
+  hope_sta: 161,
   // 东京大赏典
-  toky_dai: 0,
+  toky_dai: 162,
   // 有马纪念
-  arim_kin: 0,
+  arim_kin: 163,
   // 美国橡树大赛
-  usa_oks: 0,
+  usa_oks: 164,
   // 阪神杯
-  hans_cup: 0,
+  hans_cup: 165,
   // 迪拜世界杯
-  duba_cup: 0,
+  duba_cup: 166,
   // 迪拜金莎轩锦标
-  duba_sha: 0,
+  duba_sha: 167,
   // 迪拜司马经典赛
-  duba_cls: 0,
+  duba_cls: 168,
   // 迪拜草地大赛
-  duba_tur: 0,
+  duba_tur: 169,
   // 阿乔斯短途锦标
-  alqu_spr: 0,
+  alqu_spr: 170,
   // 芙蓉锦标
-  fuyo_sta: 0,
+  fuyo_sta: 171,
 };
-Object.keys(race_enum).forEach((e, i) => (race_enum[e] = i));
 
 const current = new Date().getTime();
 
@@ -526,6 +525,7 @@ race_infos[race_enum.duba_cls] = require('#/data/race/g1/race-duba-cls');
 race_infos[race_enum.duba_tur] = require('#/data/race/g1/race-duba-tur');
 race_infos[race_enum.alqu_spr] = require('#/data/race/g1/race-alqu-spr');
 race_infos[race_enum.fuyo_sta] = require('#/data/race/op/race-fuyo-sta');
+// GENERATED END
 
 race_infos.forEach((e) => {
   const param_id = e.param_id;
@@ -551,5 +551,9 @@ module.exports = {
   race_enum,
   race_infos,
   race_rewards,
+  race_difficulty: {
+    easy: -20,
+    hard: 10,
+    normal: 0,
+  },
 };
-// GENERATED END

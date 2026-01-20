@@ -15,7 +15,7 @@ function get_chara(cid) {
       return i - 3;
     }
   }
-  return era.get(`cflag:${cid}:气性`);
+  return era.get(`cflag:${cid}:2`);
 }
 
 /** @param {number} chara */
@@ -35,7 +35,8 @@ module.exports = {
    */
   sys_get_full_chara(cid) {
     const chara = get_chara(cid);
-    const chara_flag = era.get(`cflag:${cid}:气性`);
+    // CFLAGNAME:2 = 气性
+    const chara_flag = era.get(`cflag:${cid}:2`);
     const info = get_chara_info(chara);
     if (chara_flag !== chara) {
       info.fontStyle = 'italic';

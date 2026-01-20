@@ -1,7 +1,6 @@
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
 class EtsukoLifeMarks extends LifeEventMarks {
-  buff;
   rape;
 
   constructor() {

@@ -17,6 +17,9 @@ const { zip } = require('compressing');
 const { copySync } = require('fs-extra');
 
 const work_dir = resolve('.');
+
+execSync('git submodule update --init engine res', { cwd: work_dir });
+
 const engine_path = join(work_dir, 'engine');
 const game_all_dir = join(engine_path, process.env.GAME_ALL_DIR);
 const game_all_zip = join(engine_path, process.env.GAME_ALL_ZIP);
@@ -132,7 +135,5 @@ const res_ver = String(
 writeFileSync(
   join(work_dir, 'res.env'),
   `RES_VERSION=${res_ver[0]}\nOLD_VERSION=${res_ver[1]}`,
-  {
-    encoding: 'utf-8',
-  },
+  { encoding: 'utf-8' },
 );

@@ -13,6 +13,8 @@ const CharaInmon = require('#/data/ero/chara-inmon');
 const { lust_border } = require('#/data/ero/orgasm-const');
 const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
+const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
+const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
 const { location_move_cost, vehicle_influences } = require('#/data/move-const');
 const { track_enum } = require('#/data/race/model/race-info');
@@ -31,6 +33,26 @@ function sys_check_awake(cid) {
   // STATUSNAME:10 = 沉睡
   // STATUSNAME:39 = 马跳S
   return !era.get(`status:${cid}:10`) && !era.get(`status:${cid}:39`);
+}
+
+/** @param {number} cid */
+function sys_get_motivation(cid) {
+  // STATUSNAME:2 = 摸鱼
+  if (era.get(`status:${cid}:2`) > 0) {
+    return -4;
+  }
+  // CFLAGNAME:40 = 干劲
+  let motivation = era.get(`cflag:${cid}:40`);
+  if (motivation === 2) {
+    // 结算三老登的效果
+    for (let c = 346; c <= 348; ++c) {
+      // CFLAGNAME:66 = 招募状态
+      if (era.get(`cflag:${c}:66`) === recruit_flags.yes) {
+        motivation += LifeEventMarks.get_marks(c).buff > 0 ? 1 : 0.5;
+      }
+    }
+  }
+  return motivation;
 }
 
 /**
@@ -235,17 +257,24 @@ module.exports = {
    * @returns {boolean}
    */
   sys_check_remote(cid) {
-    const cur_race = era.get('flag:当前赛事');
+    // FLAGNAME:7 = 当前赛事
+    const cur_race = era.get('flag:7');
     return (
       cid > 0 &&
-      era.get(`cflag:${cid}:位置`) !== era.get('cflag:0:位置') &&
+      // CFLAGNAME:45 = 位置
+      era.get(`cflag:${cid}:45`) !== era.get('cflag:0:45') &&
       (!cur_race ||
         race_infos[cur_race].track >= track_enum.longchamp ||
-        era.get('cflag:0:位置') !== 0)
+        era.get('cflag:0:45') !== 0)
     );
   },
   sys_check_train_enabled,
   sys_get_debuff,
+  sys_get_discount(cid) {
+    // CFLAGNAME:49 = 育成次数
+    return Math.min(era.get(`cflag:${cid}:49`) * 0.015, 0.1);
+  },
+  sys_get_motivation,
   sys_get_move_cost,
   /**
    * @param {number} cid train target
@@ -254,8 +283,8 @@ module.exports = {
    * @returns {number} success rate, 0-100
    */
   sys_get_succ_rate(cid, type, extra_buff) {
-    let stamina_ratio =
-      era.get(`base:${cid}:体力`) / era.get(`maxbase:${cid}:体力`);
+    // BASENAME:0 = 体力
+    let stamina_ratio = era.get(`base:${cid}:0`) / era.get(`maxbase:${cid}:0`);
     let ret = 100;
 
     // 体力低于阈值时训练有可能失败
@@ -268,11 +297,11 @@ module.exports = {
       // 线性降至0
       ret = (stamina_ratio * 100) / border_fail;
     }
-    // 属性超过400以后，越接近满百越难提升，各+-5%成功率
+    // 属性超过400以后，越接近满百越难提升，最多-10%成功率
     // BASENAME:5 - 9 = 速度 - 智力
     const attr = era.get(`base:${cid}:${5 + type}`);
     if (attr > 400) {
-      ret += 5 - (10 * (attr % 100)) / 100;
+      ret += -(10 * (attr % 100)) / 100;
     }
     // 训练等级带来的额外成功率，分别为0%、1%、2%、3%、5%
     // ABL:0 - 4 = 速度训练等级 - 智力训练等级
@@ -280,12 +309,16 @@ module.exports = {
 
     // 结算状态加成
     ret +=
-      2 * era.get(`status:${cid}:练习X手`) +
-      extra_buff -
-      10 * era.get(`status:${cid}:摸鱼`) -
-      era.get(`base:${cid}:压力`) / 500 -
-      10 * era.get(`status:${cid}:疲惫`) -
-      10 * era.get(`status:${cid}:水土不服`) +
+      // STATUSNAME:0 = 练习X手
+      2 * era.get(`status:${cid}:0`) +
+      extra_buff +
+      2.5 * sys_get_motivation(cid) -
+      // BASENAME:11 = 压力
+      era.get(`base:${cid}:11`) / 500 -
+      // STATUSNAME:6 = 疲惫
+      10 * era.get(`status:${cid}:6`) -
+      // STATUSNAME:8 = 水土不服
+      10 * era.get(`status:${cid}:8`) +
       get_custom_mec(cid).get_success_rate_buff();
     // 结算淫纹
     const inmon = CharaInmon.get(cid);
@@ -294,7 +327,8 @@ module.exports = {
       20 * inmon.on(plugin_enum.tra_2) +
       270 * inmon.on(plugin_enum.tra_3);
 
-    ret *= (100 + era.get('flag:训练难度')) / 100;
+    // FLAGNAME:100 = 训练难度
+    ret *= (100 + era.get('flag:100')) / 100;
 
     return Math.floor(Math.max(Math.min(ret, 100), 0));
   },

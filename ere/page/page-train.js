@@ -3,6 +3,7 @@ const era = require('#/era-electron');
 const {
   sys_check_train_enabled,
   sys_get_debuff,
+  sys_get_discount,
   sys_get_succ_rate,
 } = require('#/system/sys-calc-chara-param');
 const { switch_image } = require('#/system/sys-calc-image');
@@ -43,10 +44,6 @@ const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 const skill_limit = 27;
-
-function get_discount(chara_id) {
-  return Math.min(era.get(`cflag:${chara_id}:育成次数`) * 0.015, 0.1);
-}
 
 /**
  * @param {number} chara_id
@@ -154,7 +151,7 @@ module.exports = async () => {
   let cid = era.get('flag:当前互动角色');
   let skill_control = CharaSkills.get(cid);
   let index = train_list.indexOf(cid);
-  let discount = get_discount(cid);
+  let discount = sys_get_discount(cid);
 
   await game_guides.office_train();
 
@@ -465,13 +462,13 @@ module.exports = async () => {
           )),
         );
         skill_control = CharaSkills.get(cid);
-        discount = get_discount(cid);
+        discount = sys_get_discount(cid);
         break;
       case 101:
       case 102:
         cid = train_list[ret === 101 ? --index : ++index];
         skill_control = CharaSkills.get(cid);
-        discount = get_discount(cid);
+        discount = sys_get_discount(cid);
         break;
       case 103:
         if (

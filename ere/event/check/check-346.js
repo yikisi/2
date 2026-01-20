@@ -2,15 +2,16 @@ const era = require('#/era-electron');
 
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
 
+const CustomizedCheck = require('#/event/check/check-common');
 const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { get_chara_color } = require('#/data/chara-colors');
+const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
-const CustomizedCheck = require('#/event/check/check-common');
 
 const aim_races = {
   [race_enum.begin_race]: 4,
@@ -35,6 +36,7 @@ module.exports = class extends CustomizedCheck {
       if (aim_check) {
         sys_personal_achievement.set(this.id, 1);
       }
+      LifeEventMarks.get_marks(this.id).buff = 1;
     }
     return titles;
   }

@@ -1,5 +1,7 @@
 const era = require('#/era-electron');
 
+const { race_difficulty } = require('#/data/race/race-const');
+
 const difficulties = [
   {
     n: '地上神国',
@@ -114,7 +116,7 @@ function set_from_theme(theme) {
     case 0:
       era.set('flag:训练难度', 25);
       era.set('flag:训练加成', 25);
-      era.set('flag:比赛难度', -40);
+      era.set('flag:比赛难度', race_difficulty.easy);
       era.set('flag:可能伤病', 0);
       era.set('flag:马娘初始好感', 150);
       era.set('flag:马娘初始爱慕', 0);
@@ -143,7 +145,7 @@ function set_from_theme(theme) {
     case 1:
       era.set('flag:训练难度', 0);
       era.set('flag:训练加成', 0);
-      era.set('flag:比赛难度', 0);
+      era.set('flag:比赛难度', race_difficulty.normal);
       era.set('flag:可能伤病', 1);
       era.set('flag:马娘初始好感', 75);
       era.set('flag:马娘初始爱慕', 0);
@@ -172,7 +174,7 @@ function set_from_theme(theme) {
     case 2:
       era.set('flag:训练难度', -25);
       era.set('flag:训练加成', -25);
-      era.set('flag:比赛难度', 10);
+      era.set('flag:比赛难度', race_difficulty.hard);
       era.set('flag:可能伤病', 1);
       era.set('flag:马娘初始好感', 75);
       era.set('flag:马娘初始爱慕', 25);
@@ -201,7 +203,7 @@ function set_from_theme(theme) {
     case 3:
       era.set('flag:训练难度', -25);
       era.set('flag:训练加成', -25);
-      era.set('flag:比赛难度', 10);
+      era.set('flag:比赛难度', race_difficulty.hard);
       era.set('flag:可能伤病', 1);
       era.set('flag:马娘初始好感', -100);
       era.set('flag:马娘初始爱慕', 0);
@@ -230,7 +232,7 @@ function set_from_theme(theme) {
     case 4:
       era.set('flag:训练难度', 25);
       era.set('flag:训练加成', 25);
-      era.set('flag:比赛难度', -40);
+      era.set('flag:比赛难度', race_difficulty.easy);
       era.set('flag:可能伤病', 0);
       era.set('flag:马娘初始好感', 225);
       era.set('flag:马娘初始爱慕', 50);
@@ -259,7 +261,7 @@ function set_from_theme(theme) {
     case 5:
       era.set('flag:训练难度', 25);
       era.set('flag:训练加成', 25);
-      era.set('flag:比赛难度', -40);
+      era.set('flag:比赛难度', race_difficulty.easy);
       era.set('flag:可能伤病', 0);
       era.set('flag:马娘初始好感', 150);
       era.set('flag:马娘初始爱慕', 0);
@@ -288,7 +290,7 @@ function set_from_theme(theme) {
     case 6:
       era.set('flag:训练难度', 25);
       era.set('flag:训练加成', 25);
-      era.set('flag:比赛难度', -40);
+      era.set('flag:比赛难度', race_difficulty.easy);
       era.set('flag:可能伤病', 0);
       era.set('flag:马娘初始好感', 225);
       era.set('flag:马娘初始爱慕', 50);
@@ -317,7 +319,7 @@ function set_from_theme(theme) {
     case 7:
       era.set('flag:训练难度', 25);
       era.set('flag:训练加成', 25);
-      era.set('flag:比赛难度', -40);
+      era.set('flag:比赛难度', race_difficulty.easy);
       era.set('flag:可能伤病', 0);
       era.set('flag:马娘初始好感', 225);
       era.set('flag:马娘初始爱慕', 50);
@@ -467,9 +469,9 @@ async function page_settings() {
       {
         key: '比赛难度',
         options: [
-          { l: '低', v: -40 },
-          { l: '正常', v: 0 },
-          { l: '高', v: 10 },
+          { l: '低', v: race_difficulty.easy },
+          { l: '正常', v: race_difficulty.normal },
+          { l: '高', v: race_difficulty.hard },
         ],
       },
       {

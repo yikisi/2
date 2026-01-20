@@ -17,6 +17,7 @@ const GodolphinLifeMarks = require('#/data/event/life-event-marks/life-event-mar
 const ByerleyLifeMarks = require('#/data/event/life-event-marks/life-event-marks-342');
 const MayLifeMarks = require('#/data/event/life-event-marks/life-event-marks-343');
 const LightLifeMarks = require('#/data/event/life-event-marks/life-event-marks-345');
+const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { foreign_locations } = require('#/data/locations');
 const LoveLimitStatus = require('#/data/love-limit-status');
@@ -120,8 +121,11 @@ function sys_get_status(cid) {
       title: '消耗精力减压效果提高。',
     });
   }
+  // STATUSNAME:2 = 摸鱼
+  let slack_off = 0;
   if (show_train_buff) {
     let check;
+    slack_off = era.get(`status:${cid}:2`);
     if (era.get('cflag:340:66') === recruit_flags.yes) {
       check = (new DarleyLifeMarks().buff + 1) * 50;
       status_list.push({
@@ -171,6 +175,39 @@ function sys_get_status(cid) {
         title: `训练经验获取量+${check}%。`,
       });
     }
+    // CFLAGNAME:40 = 干劲
+    if (!slack_off && era.get(`cflag:${cid}:40`) === 2) {
+      if (era.get('cflag:346:66') === recruit_flags.yes) {
+        check = LifeEventMarks.get_marks(346).buff;
+        console.log(346, check);
+        status_list.push({
+          color: get_chara_color(346),
+          content: '传奇激励',
+          fontWeight: check > 0 ? 'bold' : void 0,
+          title: '训练成功率和效果' + (check > 0 ? '上升' : '稍微上升'),
+        });
+      }
+      if (era.get('cflag:347:66') === recruit_flags.yes) {
+        check = LifeEventMarks.get_marks(347).buff;
+        console.log(347, check);
+        status_list.push({
+          color: get_chara_color(347),
+          content: '先驱激励',
+          fontWeight: check > 0 ? 'bold' : void 0,
+          title: '训练成功率和效果' + (check > 0 ? '上升' : '稍微上升'),
+        });
+      }
+      if (era.get('cflag:348:66') === recruit_flags.yes) {
+        check = LifeEventMarks.get_marks(348).buff;
+        console.log(348, check);
+        status_list.push({
+          color: get_chara_color(348),
+          content: '偶像激励',
+          fontWeight: check > 0 ? 'bold' : void 0,
+          title: '训练成功率和效果' + (check > 0 ? '上升' : '稍微上升'),
+        });
+      }
+    }
     // STATUSNAME:0 = 练习X手
     const train_buff = era.get(`status:${cid}:0`);
     if (train_buff) {
@@ -189,8 +226,7 @@ function sys_get_status(cid) {
     if (era.get(`status:${cid}:1`) > 0) {
       status_list.push({ color: buff_colors[0], content: '熬夜' });
     }
-    // STATUSNAME:2 = 摸鱼
-    if (era.get(`status:${cid}:2`) > 0) {
+    if (slack_off > 0) {
       status_list.push({ color: buff_colors[0], content: '摸鱼' });
     }
   }

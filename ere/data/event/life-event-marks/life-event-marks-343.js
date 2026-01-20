@@ -3,7 +3,6 @@ const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 class MayLifeMarks extends LifeEventMarks {
   // 知道佐岳的身份
   who_am_i;
-  buff;
 
   constructor() {
     super(343);

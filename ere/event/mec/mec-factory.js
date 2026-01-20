@@ -63,19 +63,18 @@ cons_dict[342] = require('#/event/mec/mec-342');
 cons_dict[343] = require('#/event/mec/mec-343');
 cons_dict[344] = require('#/event/mec/mec-344');
 cons_dict[345] = require('#/event/mec/mec-345');
+cons_dict[346] = require('#/event/mec/mec-346');
+cons_dict[347] = require('#/event/mec/mec-347');
+cons_dict[348] = require('#/event/mec/mec-348');
 cons_dict[349] = require('#/event/mec/mec-349');
 cons_dict[400] = require('#/event/mec/mec-400');
 cons_dict['av-sister'] = require('#/event/mec/mec-av-sister');
 cons_dict['emperor'] = require('#/event/mec/mec-emperor');
+// GENERATED END
 cons_dict[201] =
   cons_dict[202] =
   cons_dict[203] =
     require('#/event/mec/mec-uma-npc');
-cons_dict[346] =
-  cons_dict[347] =
-  cons_dict[348] =
-    require('#/event/mec/mec-npc');
-// GENERATED END
 
 console.log(
   '角色机制脚本注册完毕!',

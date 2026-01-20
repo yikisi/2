@@ -573,14 +573,14 @@ async function select_target(
                     let edu_times = era.get(`cflag:${id}:育成回合计时`),
                       palace = era.get(`cflag:${id}:殿堂`);
                     if (edu_times < 3 * 48) {
-                      if (new_sort === 1) {
+                      if (new_sort === -1) {
                         edu_times = 144 - edu_times;
                       }
                     } else {
                       edu_times = 144;
                     }
                     if (palace > 0) {
-                      if (new_sort === 1) {
+                      if (new_sort === -1) {
                         palace = 3 - palace;
                       }
                     } else {
