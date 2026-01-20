@@ -96,7 +96,7 @@ module.exports = class extends CustomizedEdu {
     await print_title_with_kojo(this.#kojo, 'valentine', oguri, this.#dict);
     era.println();
     // ITEMNAME:100 = 情人节巧克力
-    era.print(di18n.item.notify(100));
+    era.print(di18n.tb_item.notify(100));
     era.add('item:100', 1);
     await era.waitAnyKey();
   }

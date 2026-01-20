@@ -2,8 +2,12 @@ const { get, set } = require('#/era-electron');
 
 const MecNpc = require('#/event/mec/mec-npc');
 
+const get_display_name = require('#/utils/calc-display-name');
+
 const { get_chara_color } = require('#/data/chara-colors');
 const recruit_flags = require('#/data/event/recruit-flags');
+
+const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends MecNpc {
   get_love_limit() {
@@ -27,6 +31,12 @@ module.exports = class extends MecNpc {
   }
 
   set_callname() {
-    set('callname:302:0', `${get('callname:0:-1')}君`);
+    set(
+      `callname:${this.id}:0`,
+      i18n().name.kun_template.replace(
+        '%NAME%',
+        get_display_name(get('callname:0:-1')),
+      ),
+    );
   }
 };

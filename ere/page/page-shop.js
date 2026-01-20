@@ -63,7 +63,7 @@ async function print_shop_page(item_list) {
     /** @type {*[]} */
     const buffer = [{ type: 'divider' }];
     cur_list.forEach((iid) => {
-      const name = __(`item.${iid}`);
+      const name = __(`tb_item.${iid}`);
       const max_count = Math.floor(cur_coin / price[iid]);
       buffer.push(
         {
@@ -179,7 +179,7 @@ async function print_shop_page(item_list) {
         content: [
           '*** 本周特惠！',
           {
-            content: __(`item.${off}`),
+            content: __(`tb_item.${off}`),
             color: money_color,
             fontWeight: 'bold',
           },
@@ -291,7 +291,7 @@ async function print_shop_page(item_list) {
       const sub_code = (ret - selected) / 1000;
       switch (sub_code) {
         case 0:
-          era.print(__(`item.${selected}`));
+          era.print(__(`tb_item.${selected}`));
           era.println();
           if (selected !== 30) {
             await era.printAndWait(__(`item_desc.${selected}`));
@@ -321,7 +321,7 @@ async function print_shop_page(item_list) {
           sys_change_money(-price[selected] * to_buy[selected]);
           era.add(`item:${selected}`, to_buy[selected]);
           await era.printAndWait(
-            `购买了 ${to_buy[selected]} 个 ${__(`item.${selected}`)} `,
+            `购买了 ${to_buy[selected]} 个 ${__(`tb_item.${selected}`)} `,
           );
           bought += to_buy[selected];
           to_buy[selected] = Math.max(

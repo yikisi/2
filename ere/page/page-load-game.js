@@ -78,6 +78,14 @@ function set_image_t(cid) {
   }
 }
 
+function find_key_by_value(dict, val) {
+  const pair = Object.entries(dict).find((e) => e[1] === val);
+  if (pair) {
+    return pair[0];
+  }
+  return val;
+}
+
 /**
  * load game
  * @return {Promise<boolean>} if true, tell main.js to call homepage
@@ -570,6 +578,25 @@ module.exports = async () => {
               check_titles(33, 113);
               set_image_t(7);
               set_image_t(25);
+            }
+            // i18n - 将游戏存档内所有字符串改成 i18n 框架内的内容
+            // TODO CSTR里一堆性经历也要改
+            if (version <= 2200) {
+              era.getAddedCharacters().forEach((_from) => {
+                const callname = era.get(`callname:${_from}`);
+                for (const _to in callname) {
+                  era.set(
+                    `callname:${_from}:${_to}`,
+                    find_key_by_value(
+                      i18n('zh-CN').name,
+                      era.get(`callname:${_from}:${_to}`),
+                    ),
+                  );
+                }
+                for (const t of CharaTitles.get(_from).get()) {
+                  t.n = find_key_by_value(i18n('zh-CN').title, t.n);
+                }
+              });
             }
             if (version < era.get('gamebase').version) {
               era.getAddedCharacters().forEach((cid) => {

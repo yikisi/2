@@ -33,7 +33,7 @@ function get_item_list() {
         {
           accelerator: item.id,
           config: { offset: i % 4 > 0, width: 3 },
-          content: __(`item.${item.id}`),
+          content: __(`tb_item.${item.id}`),
           type: 'button',
         },
         {
@@ -70,7 +70,7 @@ module.exports = async () => {
     if (selected === 999) {
       s_flag = false;
     } else {
-      era.print(__(`item.${selected}`));
+      era.print(__(`tb_item.${selected}`));
       era.println();
       era.print(__(`item_desc.${selected}`));
       if (handlers[selected]) {

@@ -151,7 +151,7 @@ function random_chara() {
       era.set('callname:0:-2', '渡鸦');
       break;
     default:
-      era.set('callname:0:-2', i18n().name.you);
+      era.set('callname:0:-2', 'you');
   }
   era.set('cstr:0:发色', get_random_entry(hair_color_names));
   era.set('cstr:0:呆毛', top_hairs[get_random_value(1, 5)] || '');
@@ -300,7 +300,7 @@ async function page_custom() {
       if (era.get('flag:彩蛋机制') === 179) {
         era.set('callname:0:-2', '豚鼠子');
       } else {
-        era.set('callname:0:-2', i18n().name.you);
+        era.set('callname:0:-2', 'you');
       }
       random_talent();
     } else if (first_button === 3) {
@@ -645,7 +645,8 @@ async function page_custom() {
 
       era.drawLine();
       era.print('那么就到称呼环节啦！');
-      switch (era.get('flag:彩蛋机制')) {
+      // FLAGNAME:179 = 彩蛋机制
+      switch (era.get('flag:179')) {
         case 3:
           era.drawLine();
           await era.printAndWait('哦哦，您取了一个很喜欢马蹄的名字呢！');
@@ -665,16 +666,20 @@ async function page_custom() {
           era.printInColRows([
             { content: '希望旁白君如何称呼您呢？', type: 'text' },
             { accelerator: 1, content: i18n().name.you, type: 'button' },
-            { accelerator: 2, content: '主人公', type: 'button' },
+            {
+              accelerator: 2,
+              content: i18n().name.leading_role,
+              type: 'button',
+            },
             { accelerator: 3, content: '自己决定！', type: 'button' },
           ]);
           temp = await era.input();
           switch (temp) {
             case 1:
-              era.set('callname:0:-2', i18n().name.you);
+              era.set('callname:0:-2', 'you');
               break;
             case 2:
-              era.set('callname:0:-2', '主人公');
+              era.set('callname:0:-2', 'leading_role');
               break;
             case 3:
               era.print('希望旁白君如何称呼您呢？（6个字符以内）');

@@ -211,18 +211,18 @@ class I18nEntry {
 
   achievement = new (require('#/i18n/zh-CN/achieve'))();
   achieve_desc = new (require('#/i18n/zh-CN/achieve-desc'))();
-  item = new (require('#/i18n/zh-CN/items'))();
-  item_desc = new (require('#/i18n/zh-CN/item-desc'))();
   note = new (require('#/i18n/zh-CN/notes'))();
 
   tb_abl = new (require('#/i18n/zh-CN/table/abl'))();
+  tb_item = new (require('#/i18n/zh-CN/table/item'))();
   tb_mark = new (require('#/i18n/zh-CN/table/mark'))();
   tb_stain = new (require('#/i18n/zh-CN/table/stain'))();
   tb_status = new (require('#/i18n/zh-CN/table/status'))();
+  abl_desc = new (require('#/i18n/zh-CN/sex/abl-desc'))();
+  item_desc = new (require('#/i18n/zh-CN/table/item-desc'))();
   status_desc = new (require('#/i18n/zh-CN/table/status-desc'))();
 
   train_action = new (require('#/i18n/zh-CN/sex/actions'))();
-  abl_desc = new (require('#/i18n/zh-CN/sex/abl-desc'))();
   inmon = new (require('#/i18n/zh-CN/sex/inmons'))();
   inmon_desc = new (require('#/i18n/zh-CN/sex/inmon-desc'))();
 

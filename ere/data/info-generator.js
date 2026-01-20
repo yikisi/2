@@ -15,6 +15,8 @@ const {
 
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 
+const get_display_name = require('#/utils/calc-display-name');
+
 const { calc_attr_score } = require('#/data/calc-attr-score');
 const chara_score = require('#/data/chara-score-table.json');
 const {
@@ -610,7 +612,8 @@ module.exports = {
   get_save_name() {
     // FLAGNAME:65 = 存档名
     const prefix =
-      era.get('flag:65') || `${era.get('callname:0:-1')} - ${get_date()}`;
+      era.get('flag:65') ||
+      `${get_display_name(era.get('callname:0:-1'))} - ${get_date()}`;
     return `${prefix} (${new Date().toLocaleString(lan())})`;
   },
   /** @param {number} cid */

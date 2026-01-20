@@ -16,7 +16,7 @@ const { i18n } = require('#/i18n/selector');
  */
 async function select_target_in_storage(iid, filter_cb = () => true) {
   const buffer = [];
-  const item_name = di18n.item.get_name(iid);
+  const item_name = di18n.tb_item.get_name(iid);
   // CFLAGNAME:66 = 招募状态
   let team_list = sys_filter_chara('cflag', '66', recruit_flags.yes).filter(
     filter_cb,

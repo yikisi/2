@@ -423,7 +423,7 @@ handlers[event_hooks.celebration] = async (cid) => {
   let wait_flag = false;
   if (era.get('flag:当前回合数') % 48 === 6) {
     // ITEMNAME:100 = 情人节巧克力
-    era.print(di18n.item.notify(100));
+    era.print(di18n.tb_item.notify(100));
     era.add('item:100', 1);
     wait_flag = true;
   }

@@ -756,7 +756,7 @@ async function cum_shop(chara, me) {
               }
               const item = get_random_entry(items);
               era.add(`item:${item}`, 1);
-              await era.printAndWait(di18n.item.notify(item));
+              await era.printAndWait(di18n.tb_item.notify(item));
             }
           }
         },

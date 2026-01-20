@@ -1,5 +1,6 @@
 class I18nNames {
   // Callname
+  leading_role = '主人公';
   me = '我';
   you = '你';
   you_mul = '你们';

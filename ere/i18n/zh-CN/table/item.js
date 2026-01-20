@@ -1,4 +1,4 @@
-class I18nItems {
+class I18nItem {
   template = '【%NAME%】';
   got_template = '获得了道具%INAME%！';
 
@@ -87,4 +87,4 @@ class I18nItems {
   114 = '现实透孔仪';
 }
 
-module.exports = I18nItems;
+module.exports = I18nItem;

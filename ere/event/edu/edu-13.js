@@ -239,7 +239,7 @@ module.exports = class extends CustomizedEdu {
         if ((await kojo['情人节'](this.#dict))[1] === 1) {
           era.println();
           // ITEMNAME:100 = 情人节巧克力
-          era.print(di18n.item.notify(100));
+          era.print(di18n.tb_item.notify(100));
           era.add('item:100', 1);
         } else {
           sys_change_attr_and_print(0, attr_enum.hp, 200);

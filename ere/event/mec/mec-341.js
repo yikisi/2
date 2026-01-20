@@ -2,6 +2,8 @@ const { get, set } = require('#/era-electron');
 
 const MecGod = require('#/event/mec/mec-god');
 
+const get_display_name = require('#/utils/calc-display-name');
+
 const { get_chara_color } = require('#/data/chara-colors');
 const GodolphinLifeMarks = require('#/data/event/life-event-marks/life-event-marks-341');
 
@@ -24,7 +26,10 @@ module.exports = class extends MecGod {
   set_callname() {
     set(
       `callname:${this.id}:0`,
-      i18n().name.kun_template.replace('%NAME%', get('callname:0:-1')),
+      i18n().name.kun_template.replace(
+        '%NAME%',
+        get_display_name(get('callname:0:-1')),
+      ),
     );
   }
 };

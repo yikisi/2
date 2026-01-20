@@ -44,40 +44,40 @@ module.exports = (handlers) => {
       }
       return true;
     } else {
-      await era.printAndWait([me.get_colored_name(), ' 已经很饱了……']);
+      await era.printAndWait([me.get_colored_name(), ' 已经很饱了']);
     }
   };
 
-  handlers[0] = async (item_id) => {
+  // ITEMNAME:0 = 蔬菜汁
+  handlers[0] = async (iid = 0) => {
     const aim = await select_target_in_storage(
-      item_id,
-      (chara_id) =>
-        era.get(`maxbase:${chara_id}:体力`) >
-          era.get(`base:${chara_id}:体力`) * 2 &&
-        era.get(`maxbase:${chara_id}:体力`) >= 500,
+      iid,
+      (cid) =>
+        // BASENAME:0 = 体力
+        era.get(`maxbase:${cid}:0`) > era.get(`base:${cid}:0`) * 2 &&
+        era.get(`maxbase:${cid}:0`) >= 500,
     );
     if (aim !== undefined) {
       const aim_chara = get_chara_talk(aim);
-      const val = era.get(`maxbase:${aim}:体力`) / 2;
-      era.add(`maxbase:${aim}:体力`, -get_random_value(100, 200));
+      const val = era.get(`maxbase:${aim}:0`) / 2;
+      era.add(`maxbase:${aim}:0`, -get_random_value(100, 200));
       await era.printAndWait([
         aim_chara.get_colored_name(),
         ' 的 ',
         ...sys_change_attr_and_print(aim, attr_enum.hp, val),
       ]);
       sys_change_motivation(aim, -1) && (await era.waitAnyKey());
-      era.add('item:蔬菜汁', -1);
+      era.add('item:0', -1);
       return true;
     }
   };
 
-  handlers[1] = async (item_id) => {
+  handlers[1] = async (iid = 1) => {
     const aim = await select_target_in_storage(
-      item_id,
-      (chara_id) =>
-        era.get(`maxbase:${chara_id}:体力`) >
-          era.get(`base:${chara_id}:体力`) &&
-        era.get(`base:${chara_id}:耐力`) > 10,
+      iid,
+      (cid) =>
+        era.get(`maxbase:${cid}:体力`) > era.get(`base:${cid}:体力`) &&
+        era.get(`base:${cid}:耐力`) > 10,
     );
     if (aim !== undefined) {
       const aim_chara = get_chara_talk(aim);
@@ -396,7 +396,7 @@ module.exports = (handlers) => {
         chara.id ? '给 ' : '',
         chara.get_colored_name(),
         ' 服用了',
-        di18n.item.get_name(iid),
+        di18n.tb_item.get_name(iid),
         '……',
         { isBr: true },
         chara.get_colored_name(),
@@ -411,7 +411,7 @@ module.exports = (handlers) => {
   };
 
   handlers[47] = handlers[48] = async (iid) => {
-    const item_name = di18n.item.get_name(iid);
+    const item_name = di18n.tb_item.get_name(iid);
     const total = era.get(`item:${iid}`);
     let to_sell = 1,
       flag_sell = true,

@@ -183,7 +183,7 @@ async function use_ero_medicine(chara) {
             ' 喂食',
             {
               color: buff_colors[2],
-              content: di18n.item.get_name(iid),
+              content: di18n.tb_item.get_name(iid),
             },
             '吗？',
           ]
@@ -191,7 +191,7 @@ async function use_ero_medicine(chara) {
             '要服用 ',
             {
               color: buff_colors[2],
-              content: di18n.item.get_name(iid),
+              content: di18n.tb_item.get_name(iid),
             },
             ' 吗？',
           ],
@@ -203,7 +203,7 @@ async function use_ero_medicine(chara) {
       CharaTalk.me.get_colored_name(),
       ' 放弃了',
       aim_id > 0 ? '喂食' : '饮用',
-      { color: buff_colors[2], content: di18n.item.get_name(iid) },
+      { color: buff_colors[2], content: di18n.tb_item.get_name(iid) },
       '……',
     ]);
     return undefined;

@@ -180,7 +180,8 @@ function get_chara_info(cid) {
     );
   });
   const s_penis = get_penis_size(cid);
-  const s_virgin = era.get(`cflag:${cid}:阴道尺寸`);
+  // CFLAGNAME:5 = 阴道尺寸
+  const s_virgin = era.get(`cflag:${cid}:5`);
   const l_param = [part_enum.mouth, part_enum.breast, part_enum.body];
   if (s_penis > 0) {
     l_param.push(part_enum.penis);

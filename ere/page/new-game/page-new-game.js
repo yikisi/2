@@ -13,7 +13,6 @@ const game_guides = require('#/event/others/game-guides');
 const event_queue = require('#/event/queue');
 const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
 
-const get_display_name = require('#/utils/calc-display-name');
 const { get_random_value } = require('#/utils/value-utils');
 
 const CharaAvailableSkills = require('#/data/chara-available-skills');
@@ -33,8 +32,6 @@ const { location_enum } = require('#/data/locations');
 const { first_child_id } = require('#/data/other-const');
 const { chara_skill_dict } = require('#/data/race/skill/skill-const');
 
-const { i18n } = require('#/i18n/selector');
-
 /**
  * start a new game, set data
  * @param {number} src_chara
@@ -51,10 +48,6 @@ module.exports = async (src_chara) => {
     era.set(`cflag:${src_chara}:随机招募`, 0);
     init_chara(0, src_chara);
     era.set('talent:0:调教度', 1);
-    player_name = era.set(
-      'callname:0:-1',
-      get_display_name(era.get('callname:0:-1')),
-    );
     CharaTitles.get(0).push(
       ...get_custom_check(src_chara)
         .get_personal_titles()
@@ -64,7 +57,7 @@ module.exports = async (src_chara) => {
       get_skills_and_print_in_event(0, [s], undefined, false),
     );
     CharaAvailableSkills.get(0).clear();
-    era.set('callname:0:-2', i18n().name.you);
+    era.set('callname:0:-2', 'you');
     era.set('cflag:0:成长阶段', 5);
     era.set('cstr:0:决胜服', 0);
   } else {

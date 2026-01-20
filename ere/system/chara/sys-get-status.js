@@ -179,7 +179,6 @@ function sys_get_status(cid) {
     if (!slack_off && era.get(`cflag:${cid}:40`) === 2) {
       if (era.get('cflag:346:66') === recruit_flags.yes) {
         check = LifeEventMarks.get_marks(346).buff;
-        console.log(346, check);
         status_list.push({
           color: get_chara_color(346),
           content: '传奇激励',
@@ -189,7 +188,6 @@ function sys_get_status(cid) {
       }
       if (era.get('cflag:347:66') === recruit_flags.yes) {
         check = LifeEventMarks.get_marks(347).buff;
-        console.log(347, check);
         status_list.push({
           color: get_chara_color(347),
           content: '先驱激励',
@@ -199,7 +197,6 @@ function sys_get_status(cid) {
       }
       if (era.get('cflag:348:66') === recruit_flags.yes) {
         check = LifeEventMarks.get_marks(348).buff;
-        console.log(348, check);
         status_list.push({
           color: get_chara_color(348),
           content: '偶像激励',

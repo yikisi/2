@@ -30,7 +30,7 @@ function generate_dictionary(
   const ret = { id: cid, _g: true };
   ret.CHARA = get_display_name(era.get(`callname:${cid}:-2`));
   ret.COLOR = get_chara_color(cid);
-  ret.YOU = era.get('callname:0:-2');
+  ret.YOU = get_display_name(era.get('callname:0:-2'));
   // CFLAGNAME:0 = 性别
   const sex = era.get(`cflag:${cid}:0`) === 1;
   ret.SEX = sex ? i18n().name.he : i18n().name.she;
@@ -50,10 +50,10 @@ function generate_dictionary(
     ret.UMA = sex ? i18n().name.uma_boy : i18n().name.uma_girl;
   }
   if (options.your_name) {
-    ret.YOURNAME = era.get('callname:0:-1');
+    ret.YOURNAME = get_display_name(era.get('callname:0:-1'));
   }
   if (options.your_sex) {
-    ret.YOURSEX = era.get('cflag:0:0') === 1 ? '他' : '她';
+    ret.YOURSEX = era.get('cflag:0:0') === 1 ? i18n().name.he : i18n().name.she;
   }
   if (options.sir) {
     ret.SIR = era.get('cflag:0:0') === 1 ? i18n().name.mr : i18n().name.miss;

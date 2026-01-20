@@ -207,17 +207,19 @@ const di18n = {
       ];
     },
   },
-  item: {
+  tb_item: {
     get_name(iid) {
-      const _ = i18n().item;
+      const _ = i18n().tb_item;
       return _.template.replace('%NAME%', _[iid] || `item.${iid}`);
     },
     notify(iid) {
-      return i18n().item.got_template.replace(
+      return i18n().tb_item.got_template.replace(
         '%INAME%',
-        di18n.item.get_name(iid),
+        di18n.tb_item.get_name(iid),
       );
     },
+    get_titled_item: (key) =>
+      get_titled_content(i18n().tb_item, key, i18n().item_desc, (k) => k),
   },
   tb_mark: {
     get names() {

@@ -61,7 +61,7 @@ function check_inmon(in_team_list) {
           ...buffer,
           buffer.length > 1 ? ' 各' : ' ',
           '贡上了一杯 ',
-          __(`item.${milk_item}`),
+          __(`tb_item.${milk_item}`),
           '】',
         ]);
         era.add(`item:${milk_item}`, milk_list[1 - i].length);

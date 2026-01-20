@@ -48,7 +48,7 @@ module.exports = (handlers) => {
         '给 ',
         chara.get_colored_name(),
         ' 以「暖腹」的名义贴上了',
-        __(`item.${item}`),
+        __(`tb_item.${item}`),
         '……',
       ]);
       era.print([chara.get_colored_name(), ' 小腹上浮现一个花纹繁复的淫纹……']);
