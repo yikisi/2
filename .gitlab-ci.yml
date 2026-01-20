@@ -24,7 +24,6 @@ build:
     - shell
   variables:
     NODE_OPTIONS: "--openssl-legacy-provider"
-    GIT_SUBMODULE_STRATEGY: recursive
   script:
     - pnpm install
     - node ci/build.js
