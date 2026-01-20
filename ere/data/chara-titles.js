@@ -2,8 +2,6 @@ const era = require('#/era-electron');
 
 const { distinct_list } = require('#/utils/list-utils');
 
-const title_desc = require('#/data/desc/titles.json');
-
 const { __, i18n } = require('#/i18n/selector');
 
 const dict = {};
@@ -19,7 +17,7 @@ class CharaTitles {
    * @returns {string}
    */
   static get_desc(n) {
-    const desc = __(`title_desc.${n}`, () => title_desc[n] || void 0);
+    const desc = __(`title_desc.${n}`, '');
     if (desc && (n === 'undef' || +n > 1000)) {
       return i18n().title_desc.personal_template.replace('%DESC%', desc);
     }

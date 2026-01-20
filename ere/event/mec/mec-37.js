@@ -9,36 +9,35 @@ const { buff_colors } = require('#/data/color-const');
 const LegendUmaSelector = require('#/data/race/model/legend-uma-selector');
 const { race_enum } = require('#/data/race/race-const');
 
+const di18n = require('#/i18n/extended-def');
+
 module.exports = class extends CustomizedMec {
   get_status(show_train_buff) {
     const ret = [];
     if (show_train_buff) {
-      if (era.get('status:37:荣耀德比')) {
+      // STATUSNAME:120 - 123 = 虚弱 - 必行之事
+      if (era.get('status:37:120') > 0) {
         ret.push({
-          color: get_chara_color(this.id),
-          content: '荣耀德比',
-          title: '参赛时属性+50%',
-        });
-      }
-      if (era.get('status:37:必行之事')) {
-        ret.push({
-          color: get_chara_color(this.id),
-          content: '必行之事',
-          title: '训练成功率+5%。',
-        });
-      }
-      if (era.get('status:37:虚弱')) {
-        ret.push({
+          ...di18n.kojo.get_titled_content(this.id, 'weak'),
           color: buff_colors[0],
-          content: '虚弱',
-          title: '干劲上限下降一阶段。',
         });
       }
-      if (era.get('status:37:分心')) {
+      if (era.get('status:37:121') > 0) {
         ret.push({
+          ...di18n.kojo.get_titled_content(this.id, 'derby'),
+          color: get_chara_color(this.id),
+        });
+      }
+      if (era.get('status:37:122') > 0) {
+        ret.push({
+          ...di18n.kojo.get_titled_content(this.id, 'distracted'),
           color: buff_colors[0],
-          content: '分心',
-          title: '训练成功率-5%。',
+        });
+      }
+      if (era.get('status:37:123') > 0) {
+        ret.push({
+          ...di18n.kojo.get_titled_content(this.id, 'duty'),
+          color: get_chara_color(this.id),
         });
       }
     }
@@ -46,18 +45,21 @@ module.exports = class extends CustomizedMec {
   }
 
   get_motivation_limit() {
-    return -1 * era.get('status:37:虚弱');
+    if (era.get(`status:${this.id}:120`) > 0) {
+      return -1;
+    }
+    return 0;
   }
 
   get_race_contestants(info) {
-    switch (era.get('flag:当前赛事')) {
+    switch (era.get('flag:7')) {
       case race_enum.japa_cup:
-        if (era.get('cflag:37:育成回合计时') < 96) {
+        if (era.get('cflag:37:48') < 96) {
           return [1, 47].map((e) => new LegendUmaSelector(e, 1.1));
         }
         break;
       case race_enum.arim_kin:
-        if (era.get('cflag:37:育成回合计时') < 96) {
+        if (era.get('cflag:37:48') < 96) {
           return [1, 5, 18, 47].map((e) => new LegendUmaSelector(e, 1.05));
         }
         break;
@@ -68,7 +70,7 @@ module.exports = class extends CustomizedMec {
   }
 
   get_success_rate_buff() {
-    return 5 * (era.get('status:37:必行之事') - era.get('status:37:分心'));
+    return 5 * (era.get('status:37:123') - era.get('status:37:122'));
   }
 
   set_callname() {

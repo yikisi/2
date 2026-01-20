@@ -219,7 +219,7 @@ const di18n = {
       );
     },
     get_titled_item: (key) =>
-      get_titled_content(i18n().tb_item, key, i18n().item_desc, (k) => k),
+      get_titled_content(i18n().tb_item, key, i18n().tb_item_desc, (k) => k),
   },
   tb_mark: {
     get names() {
@@ -378,7 +378,10 @@ const di18n = {
     get_track_name(track) {
       const _ = i18n().race;
       if (track >= 0) {
-        return _.track_name_template.replace('%NAME%', di18n.n_track[track]);
+        return _.track_name_template.replace(
+          '%NAME%',
+          di18n.race.n_track[track],
+        );
       }
       return _.t_playground;
     },

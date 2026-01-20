@@ -91,7 +91,10 @@ module.exports = (handlers) => {
           ),
         );
         era.set(`palam:${extra_flag.user}:外阴快感`, 0);
-        era.set(`status:${extra_flag.user}:${i18n().item[extra_flag.item]}`, 1);
+        era.set(
+          `status:${extra_flag.user}:${i18n().tb_item[extra_flag.item]}`,
+          1,
+        );
         break;
       case medicine_enum.anti_p_s:
         era.set(`status:${extra_flag.user}:短效避孕药`, 1);

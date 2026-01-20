@@ -4,6 +4,7 @@ const { sys_get_chara } = require('#/system/chara/sys-calc-characteristic');
 
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 
+const get_display_name = require('#/utils/calc-display-name');
 const { sort_list } = require('#/utils/list-utils');
 
 const { get_chara_color } = require('#/data/chara-colors');
@@ -29,7 +30,7 @@ function sys_get_chara_pseudo(cid) {
   const debuff = era.get(`status:${cid}:客场作战`);
   const uma = new PseudoUma(
     cid,
-    era.get(`callname:${cid}:-1`),
+    get_display_name(era.get(`callname:${cid}:-1`)),
     cid === 0
       ? get_chara_color(Math.max(era.get(`cflag:0:模版角色`), 0))
       : get_chara_color(cid),

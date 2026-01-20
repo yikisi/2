@@ -49,7 +49,7 @@ function get_flags(chara_id) {
   const no_fog =
       era.get(`exp:${chara_id}:性爱次数`) >
         era.get(`exp:${chara_id}:睡奸次数`) ||
-      era.get(`tcvar:${chara_id}:乳突`) !== undefined,
+      era.get(`tcvar:${chara_id}:乳突`) !== void 0,
     body_item = era.get('status:0:马语者') || era.get('status:0:透视镜片') > 0,
     show_all_body = !chara_id || body_item,
     show_all_exp =

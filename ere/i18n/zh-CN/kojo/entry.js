@@ -6,6 +6,7 @@ class I18nKojo {
   7 = new (require('#/i18n/zh-CN/kojo/100701/entry'))();
   17 = new (require('#/i18n/zh-CN/kojo/101701/entry'))();
   21 = new (require('#/i18n/zh-CN/kojo/102101/entry'))();
+  37 = new (require('#/i18n/zh-CN/kojo/103701/entry'))();
   50 = new (require('#/i18n/zh-CN/kojo/105001/entry'))();
   60 = new (require('#/i18n/zh-CN/kojo/106001/entry'))();
   74 = new (require('#/i18n/zh-CN/kojo/107401/entry'))();

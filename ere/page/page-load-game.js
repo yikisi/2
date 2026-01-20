@@ -71,7 +71,7 @@ function check_titles(...ids) {
 }
 
 function set_image_t(cid) {
-  if (era.getAddedCharacters().indexOf(cid) !== -1) {
+  if (era.getAddedCharacters().includes(cid)) {
     // CSTRNAME:13 = 头像T
     // CSTRNAME:10 = 头像
     era.set(`cstr:${cid}:13`, era.get(`staticcstr:${cid}:10`));

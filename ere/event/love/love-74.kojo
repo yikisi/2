@@ -482,11 +482,16 @@
   title: 不论你我，早已深陷其中
   lines:
     # 99爱慕，回合结束
-    - 假期的%CHARA%呆呆的坐在自己的房间里，看着窗户外的夜空。
-    - 少女风格的房间里，摆放着成对的人偶。
-    - 不知道从什么时候开始，房间里零零散散的人偶都有了伴。
-    - 每一个小小的人偶旁边，都坐着成对的另一个人偶。
-    - 此时此刻，房间里孤身一人的就只剩下%CHARA%自己……
+    - color: %COLOR%
+      content: 假期的%CHARA%呆呆的坐在自己的房间里，看着窗户外的夜空。
+    - color: %COLOR%
+      content: 少女风格的房间里，摆放着成对的人偶。
+    - color: %COLOR%
+      content: 不知道从什么时候开始，房间里零零散散的人偶都有了伴。
+    - color: %COLOR%
+      content: 每一个小小的人偶旁边，都坐着成对的另一个人偶。
+    - color: %COLOR%
+      content: 此时此刻，房间里孤身一人的就只剩下%CHARA%自己……
     - color: %COLOR%
       content:
         - fontWeight: bold
@@ -497,15 +502,19 @@
         - fontWeight: bold
           content: %CHARA%
         - 「如果%CALLNAME%在这里就好了……」
-    - 抱住最爱的两个玩偶，轻轻摇摆着够不到地面的小腿。
-    - 摇晃着上半身看着身旁——看着身旁留出的另一个位置。。
+    - color: %COLOR%
+      content: 抱住最爱的两个玩偶，轻轻摇摆着够不到地面的小腿。
+    - color: %COLOR%
+      content: 摇晃着上半身看着身旁——看着身旁留出的另一个位置。。
     - color: %COLOR%
       content:
         - fontWeight: bold
           content: %CHARA%
         - 「%CALLNAME%……」
-    - 缓缓的弯下腰，抱紧了怀里的人偶，遮住了半张脸。
-    - 瞳孔里反射出的房间里，有%YOU%的身影。
+    - color: %COLOR%
+      content: 缓缓的弯下腰，抱紧了怀里的人偶，遮住了半张脸。
+    - color: %COLOR%
+      content: 瞳孔里反射出的房间里，有%YOU%的身影。
     - if: era.get('cflag:0:0') === 1
       color: %COLOR%
       content:

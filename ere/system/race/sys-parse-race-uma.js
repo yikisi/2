@@ -84,6 +84,10 @@ function get_pseudo_from_template(
   if (!random) {
     ret.set_legend(t.level, difficulty);
   }
+  if (t.dress !== void 0) {
+    // CSTRNAME:10 = 头像
+    ret.set_image(`${era.get(`staticcstr:${t.id}:10`)}${t.dress}_半身`);
+  }
   return ret;
 }
 
@@ -188,15 +192,9 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
                 uma,
                 difficulty,
                 uma.id,
-                era.get(`static:${uma.id}:name`),
+                i18n().name[era.get(`static:${uma.id}:name`)],
               ),
             );
-            if (uma.dress !== undefined) {
-              ret.at(-1).set_image(
-                // CSTRNAME:10 = 头像
-                `${era.get(`staticcstr:${uma.id}:10`)}${uma.dress}_半身`,
-              );
-            }
           }
         } else if (c instanceof LegendUmaFilter) {
           const uma = select_data_from_contestants(
@@ -270,16 +268,9 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
                     uma,
                     difficulty,
                     uma.id,
-                    era.get(`static:${uma.id}:name`),
+                    i18n().name[era.get(`static:${uma.id}:name`)],
                   ).set_legend(uma.level, difficulty),
                 );
-                if (uma.dress !== undefined) {
-                  ret
-                    .at(-1)
-                    .set_image(
-                      `${era.get(`staticcstr:${uma.id}:10`)}${uma.dress}_半身`,
-                    );
-                }
                 legend_count--;
               }
             }
@@ -374,16 +365,9 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
                 uma,
                 named_difficulty,
                 uma.id,
-                era.get(`static:${uma.id}:name`),
+                i18n().name[era.get(`static:${uma.id}:name`)],
               ),
             );
-            if (uma.dress !== undefined) {
-              ret
-                .at(-1)
-                .set_image(
-                  `${era.get(`staticcstr:${uma.id}:10`)}${uma.dress}_半身`,
-                );
-            }
           }
         }
         if (uma) {
@@ -421,16 +405,9 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
             uma,
             named_difficulty,
             uma.id,
-            era.get(`static:${uma.id}:name`),
+            i18n().name[era.get(`static:${uma.id}:name`)],
           ),
         );
-        if (uma.dress !== undefined) {
-          ret
-            .at(-1)
-            .set_image(
-              `${era.get(`staticcstr:${uma.id}:10`)}${uma.dress}_半身`,
-            );
-        }
       });
     }
 

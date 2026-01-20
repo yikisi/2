@@ -16,11 +16,12 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const { get_chara_color } = require('#/data/chara-colors');
 const { buff_colors } = require('#/data/color-const');
-const status_desc = require('#/data/desc/status.json');
 const PseudoUma = require('#/data/race/model/pseudo-uma');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
 const { skill_sets, skills_dict } = require('#/data/race/skill/skill-const');
+
+const di18n = require('#/i18n/extended-def');
 
 /** @param {Record<string,function(CharaTalk,string,string,{wait:boolean},function):Promise<*>>} handlers */
 module.exports = (handlers) => {
@@ -253,9 +254,8 @@ module.exports = (handlers) => {
       flash.get_colored_name(),
       ' 变得 ',
       {
+        ...di18n.kojo.get_titled_content(this.id, 'weak'),
         color: buff_colors[0],
-        content: '[虚弱]',
-        title: status_desc['闪耀虚弱'],
       },
       ' 了！',
     ]);
@@ -379,9 +379,8 @@ module.exports = (handlers) => {
         flash.get_colored_name(),
         ' 不再 ',
         {
+          ...di18n.kojo.get_titled_content(this.id, 'weak'),
           color: buff_colors[0],
-          content: '[虚弱]',
-          title: status_desc['闪耀虚弱'],
         },
         ' 了！',
       ]);
@@ -774,9 +773,8 @@ module.exports = (handlers) => {
       flash.get_colored_name(),
       ' 变得 ',
       {
+        ...di18n.kojo.get_titled_content(this.id, 'distracted'),
         color: buff_colors[0],
-        content: '[分心]',
-        title: status_desc['闪耀分心'],
       },
       ' 了！',
     ]);

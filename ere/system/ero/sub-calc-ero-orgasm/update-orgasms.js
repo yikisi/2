@@ -80,7 +80,7 @@ function get_milk_info(cid, is_orgasm = false) {
       if (loc.i === item_enum.milk_pump) {
         actions.push(
           '在 ',
-          { content: i18n().item[loc.i], color: buff_colors[2] },
+          { content: i18n().tb_item[loc.i], color: buff_colors[2] },
           ' 中',
         );
       }
@@ -347,7 +347,7 @@ function common_orgasm(cid) {
                 chara.get_colored_name(),
                 ' 在 ',
                 {
-                  content: i18n().item[item_enum.artificial_virgin],
+                  content: i18n().tb_item[item_enum.artificial_virgin],
                   color: buff_colors[2],
                 },
                 ' 中射出了',

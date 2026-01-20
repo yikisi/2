@@ -70,7 +70,7 @@ async function take_off_ero_item(chara) {
           content:
             typeof e.part === 'string'
               ? e.part
-              : `${i18n().item[e.item]} (${
+              : `${i18n().tb_item[e.item]} (${
                   part_names4item[e.part] || part_names[e.part]
                 })`,
           type: 'button',
@@ -98,7 +98,7 @@ async function take_off_ero_item(chara) {
             ' 撤除 ',
             {
               color: buff_colors[2],
-              content: i18n().item[used_item.item],
+              content: i18n().tb_item[used_item.item],
             },
             ' 吗？',
           ],
@@ -109,7 +109,7 @@ async function take_off_ero_item(chara) {
     era.print([
       get_chara_talk(0).get_colored_name(),
       ' 放弃了撤除 ',
-      { color: buff_colors[2], content: i18n().item[used_item.item] },
+      { color: buff_colors[2], content: i18n().tb_item[used_item.item] },
       '……',
     ]);
     return undefined;

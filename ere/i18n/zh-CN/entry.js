@@ -90,13 +90,6 @@ class I18nEntry {
   p_color_1 = '泛紫';
   p_color_2 = '黝黑';
 
-  v_penis_v = '童贞';
-  v_penis_d = '无自觉非童贞';
-
-  v_vagina_v = '处女';
-  v_vagina_d = '无自觉非处女';
-  v_vagina_r = '再生处女';
-
   tt_disclaimer = '免责声明';
   tt_disclaimer_content = [
     '1. 本游戏仅为开发者自娱自乐及代码练习所用，开发它是因为开发者趣味低下，思想低俗所致，无任何经济收益和利益驱动。',

@@ -26,7 +26,6 @@ const {
 } = require('#/data/color-const');
 const { hair_colors } = require('#/data/const.json');
 const { get_date } = require('#/data/date-indicator');
-const status_desc = require('#/data/desc/status.json');
 const talent_desc = require('#/data/desc/talents.json');
 const CharaInmon = require('#/data/ero/chara-inmon');
 const { mark_colors, mark_enum } = require('#/data/ero/mark-const');
@@ -128,8 +127,8 @@ penis_state.chara[vp_status_enum.i_think] =
   penis_state.chara[vp_status_enum.virgin] =
   penis_state.player[vp_status_enum.dont_know] =
   penis_state.player[vp_status_enum.virgin] =
-    () => i18n().v_penis_v;
-penis_state.chara[vp_status_enum.dont_know] = () => i18n().v_penis_d;
+    'v_penis_v';
+penis_state.chara[vp_status_enum.dont_know] = 'v_penis_d';
 
 /** @type {{chara:Record<string,()=>string>,player:Record<string,()=>string>}} */
 const virgin_state = {
@@ -142,11 +141,11 @@ virgin_state.chara[vp_status_enum.i_think] =
   virgin_state.chara[vp_status_enum.virgin] =
   virgin_state.player[vp_status_enum.dont_know] =
   virgin_state.player[vp_status_enum.virgin] =
-    () => i18n().v_vagina_v;
-virgin_state.chara[vp_status_enum.dont_know] = () => i18n().v_vagina_d;
+    'v_vagina_v';
+virgin_state.chara[vp_status_enum.dont_know] = 'v_vagina_d';
 virgin_state.chara[vp_status_enum.reborn] = virgin_state.player[
   vp_status_enum.reborn
-] = () => i18n().v_vagina_r;
+] = 'v_vagina_r';
 
 /**
  * @param {number} cid
@@ -291,230 +290,266 @@ module.exports = {
    * @returns {{content:string,[color]:string,display:string,[opacity]:number}[]}
    */
   get_ero_status(cid) {
-    const status_list = [];
-    const sex_state =
-      cid > 0
-        ? [penis_state.chara, virgin_state.chara]
-        : [penis_state.player, virgin_state.player];
-    if (era.get(`mark:${cid}:${mark_enum.ero}`) === 3) {
-      const { slave } = CharaInmon.get(cid),
-        obj = {
-          color: buff_colors[2],
-          content: di18n.tb_mark.s_titles[slave],
-          fontWeight: 'bold',
-        };
-      if (cid > 0 && slave > 0) {
-        obj.title = `[${obj.content}]：${di18n.tb_mark.s_descriptions[slave]}`;
-      }
-      status_list.push(obj);
-    }
+    const ret = [];
+    const has_penis = get_penis_size(cid) > 0;
     // TFLAGNAME:7 = 主导权
     if (era.get('tflag:7') === cid) {
-      status_list.push({ color: buff_colors[1], content: '主导' });
-    }
-    // TALENTNAME:30 = 童贞
-    if (get_penis_size(cid) && era.get(`talent:${cid}:30`) !== 0) {
-      status_list.push({
-        color: buff_colors[2],
-        content: sex_state[0][era.get(`talent:${cid}:30`)](),
+      ret.push({
+        ...di18n.tb_status.get_titled_status('tr_leader'),
+        color: buff_colors[1],
       });
     }
-    // CFLAGNAME:5 = 阴道尺寸
-    // TALENTNAME:31 = 处女
-    if (era.get(`cflag:${cid}:5`) && era.get(`talent:${cid}:31`) !== 0) {
-      status_list.push({
-        color: buff_colors[2],
-        content: sex_state[1][era.get(`talent:${cid}:31`)](),
-      });
-    }
-    // TCVARNAME:44 = 发情
-    if (era.get(`tcvar:${cid}:44`)) {
-      status_list.push({
-        color: buff_colors[2],
-        content: '发情！',
-        key: '发情',
-      });
-    }
-    // BASENAME:10 = 性欲
-    if (era.get(`base:${cid}:10`) >= lust_border.want_sex) {
-      status_list.push({
-        color: buff_colors[2],
-        content: '焦躁！',
-        key: '焦躁',
-      });
-    }
+    // 主要状态
     // STATUSNAME:10 = 沉睡
     // STATUSNAME:39 = 马跳S
     if (era.get(`status:${cid}:10`) > 0 || era.get(`status:${cid}:39`) > 0) {
-      status_list.push({
+      ret.push({
+        ...di18n.tb_status.get_titled_status(10),
         color: buff_colors[2],
-        content: '沉睡！',
-        key: '沉睡',
       });
       // TCVAR:40 = 脱力
     } else if (era.get(`tcvar:${cid}:40`) > 0) {
-      status_list.push({
+      ret.push({
+        ...di18n.tb_status.get_titled_status('tr_tc_40'),
         color: buff_colors[2],
-        content: '脱力！',
-        key: '脱力',
       });
     }
+    // TCVARNAME:41 = 失神
+    const lost_mind = era.get(`tcvar:${cid}:41`);
+    if (lost_mind) {
+      ret.push({
+        ...di18n.tb_status.get_titled_status('tr_tc_41'),
+        color: buff_colors[2],
+        opacity: lost_mind > 1 ? 1 : 0.5,
+      });
+    }
+    // TCVARNAME:45 = 余韵
+    const last = era.get(`tcvar:${cid}:45`);
+    if (last) {
+      ret.push({
+        ...di18n.tb_status.get_titled_status('tr_tc_45', has_penis),
+        color: buff_colors[2],
+        opacity: last > 1 ? 1 : 0.5,
+      });
+    }
+    // TCVARNAME:44 = 发情
+    if (era.get(`tcvar:${cid}:44`) > 0) {
+      ret.push({
+        ...di18n.tb_status.get_titled_status('tr_tc_44'),
+        color: buff_colors[2],
+      });
+    }
+    // TCVARNAME:57 = 高潮抑制
+    const orgasm_stop = era.get(`tcvar:${cid}:57`);
+    if (orgasm_stop) {
+      ret.push({
+        ...di18n.tb_status.get_titled_status('tr_tc_57'),
+        color: buff_colors[2],
+        opacity: orgasm_stop > 1 ? 1 : 0.5,
+      });
+    }
+    // 主要部位 - 茎
+    if (has_penis) {
+      if (check_erect(cid)) {
+        ret.push({
+          ...di18n.tb_status.get_titled_status('tr_erect'),
+          color: buff_colors[2],
+        });
+      }
+      // TCVARNAME:47 = 避孕套
+      if (era.get(`tcvar:${cid}:47`) > 0) {
+        ret.push({
+          ...di18n.tb_status.get_titled_status('tr_tc_47'),
+          color: buff_colors[0],
+        });
+      }
+      // TCVARNAME:46 = 不应期
+      const penis_disabled = era.get(`tcvar:${cid}:46`);
+      if (penis_disabled > 0) {
+        ret.push({
+          ...di18n.tb_status.get_titled_status('tr_tc_46', penis_disabled),
+          color: buff_colors[0],
+          opacity: penis_disabled > 1 ? 1 : 0.5,
+        });
+      }
+      // EXNAME:55 = 寸止
+      const orgasm_denial = era.get(`ex:${cid}:55`);
+      if (orgasm_denial) {
+        ret.push({
+          ...di18n.tb_status.get_titled_status('tr_ex_55'),
+          color: buff_colors[2],
+        });
+      }
+    }
+    // 主要部位 - 膣
     // CFLAGNAME:5 = 阴道尺寸
-    // EXNAME:45 = 阴道撕裂
-    if (era.get(`cflag:${cid}:5`) > 0 && era.get(`ex:${cid}:45`) > 0) {
-      status_list.push({
-        color: buff_colors[3],
-        content: '膣撕裂！',
-        key: '膣撕裂',
+    if (era.get(`cflag:${cid}:5`) > 0) {
+      if (
+        // STATUSNAME:40 = 反避孕套
+        era.get(`status:${cid}:40`) > 0 &&
+        // EXNAME:40 = 膣内精液
+        era.get(`ex:${cid}:40`) > 0
+      ) {
+        ret.push({
+          ...di18n.tb_status.get_titled_status(40),
+          color: buff_colors[2],
+        });
+      }
+      if (check_lubrication(cid, part_enum.virgin)) {
+        ret.push({
+          ...di18n.tb_status.get_titled_status('tr_lb_vagina'),
+          color: buff_colors[2],
+        });
+      }
+      // TCVARNAME:48 = 阴道扩张
+      if (era.get(`tcvar:${cid}:48`) > 0) {
+        ret.push({
+          ...di18n.tb_status.get_titled_status(`tr_tc_48`),
+          color: buff_colors[2],
+          opacity: 0.5,
+        });
+      }
+      // EXNAME:45 = 阴道撕裂
+      if (era.get(`ex:${cid}:45`) > 0) {
+        ret.push({
+          ...di18n.tb_status.get_titled_status('tr_ex_45'),
+          color: buff_colors[3],
+        });
+      }
+      // STATUSNAME:41 - 42 = 短效避孕药 - 长效避孕药
+      if (era.get(`status:${cid}:41`) > 0 || era.get(`status:${cid}:42`) > 0) {
+        ret.push({
+          ...di18n.tb_status.get_titled_status(41),
+          color: buff_colors[0],
+        });
+      }
+    }
+    // 次要部位 - 胸
+    // TCVARNAME:50 = 乳突
+    if (era.get(`tcvar:${cid}:50`) > 0) {
+      ret.push({
+        ...di18n.tb_status.get_titled_status('tr_br_erect'),
+        color: buff_colors[2],
+      });
+    }
+    if (check_lubrication(cid, part_enum.breast)) {
+      ret.push({
+        ...di18n.tb_status.get_titled_status('tr_lb_breast'),
+        color: buff_colors[2],
+      });
+    }
+    // 次要部位 - 菊
+    if (check_lubrication(cid, part_enum.anal)) {
+      ret.push({
+        ...di18n.tb_status.get_titled_status('tr_lb_anal'),
+        color: buff_colors[2],
+      });
+    }
+    // TCVARNAME:49 = 肛门扩张
+    if (era.get(`tcvar:${cid}:49`) > 0) {
+      ret.push({
+        ...di18n.tb_status.get_titled_status(`tr_tc_49`),
+        color: buff_colors[2],
+        opacity: 0.5,
       });
     }
     // EXNAME:46 = 肛门撕裂
     if (era.get(`ex:${cid}:46`) > 0) {
-      status_list.push({
+      ret.push({
+        ...di18n.tb_status.get_titled_status('tr_ex_46'),
         color: buff_colors[3],
-        content: '肛撕裂！',
-        key: '肛撕裂',
       });
     }
-    if (check_erect(cid)) {
-      status_list.push({
+    // TEQUIPNAME:6 - 7 = 项圈 - 眼罩
+    for (let teid = 6; teid <= 7; ++teid) {
+      if (era.get(`tequip:${cid}:${teid}`) !== -1) {
+        ret.push({
+          ...di18n.tb_status.get_titled_status(`tr_te_${teid}`),
+          color: buff_colors[0],
+        });
+      }
+    }
+    // 与调教外共享的状态
+    if (era.get(`mark:${cid}:${mark_enum.ero}`) === 3) {
+      const { slave } = CharaInmon.get(cid);
+      const obj = {
         color: buff_colors[2],
-        content: '勃起！',
-        key: '勃起',
+        content: di18n.tb_mark.s_titles[slave],
+        fontWeight: 'bold',
+      };
+      if (cid > 0 && slave > 0) {
+        obj.title = di18n.tb_mark.s_descriptions[slave];
+      }
+      ret.push(obj);
+    }
+    // BASENAME:10 = 性欲
+    if (era.get(`base:${cid}:10`) >= lust_border.want_sex) {
+      ret.push({
+        ...di18n.tb_status.get_titled_status('eo_4'),
+        color: buff_colors[2],
       });
     }
-    if (check_lubrication(cid, part_enum.breast)) {
-      status_list.push({ color: buff_colors[2], content: '胸润滑' });
+    const sex_state =
+      cid > 0
+        ? [penis_state.chara, virgin_state.chara]
+        : [penis_state.player, virgin_state.player];
+    // TALENTNAME:30 = 童贞
+    if (has_penis && era.get(`talent:${cid}:30`) !== 0) {
+      ret.push({
+        ...di18n.tb_status.get_titled_status(
+          sex_state[0][era.get(`talent:${cid}:30`)],
+        ),
+        color: buff_colors[2],
+      });
     }
     // CFLAGNAME:5 = 阴道尺寸
-    if (
-      era.get(`cflag:${cid}:5`) > 0 &&
-      check_lubrication(cid, part_enum.virgin)
-    ) {
-      status_list.push({ color: buff_colors[2], content: '膣润滑' });
-    }
-    if (check_lubrication(cid, part_enum.anal)) {
-      status_list.push({ color: buff_colors[2], content: '肛润滑' });
-    }
-    // TCVARNAME:50 = 乳突
-    if (era.get(`tcvar:${cid}:50`) > 0) {
-      status_list.push({
+    // TALENTNAME:31 = 处女
+    if (era.get(`cflag:${cid}:5`) > 0 && era.get(`talent:${cid}:31`) !== 0) {
+      ret.push({
+        ...di18n.tb_status.get_titled_status(
+          sex_state[1][era.get(`talent:${cid}:31`)],
+        ),
         color: buff_colors[2],
-        content: '乳突！',
-        key: '乳突',
+      });
+    }
+    sys_get_item_status(cid, ret);
+    // TALENTNAME:32 = 泌乳
+    if (era.get(`talent:${cid}:32`) > 0) {
+      ret.push({
+        ...di18n.tb_status.get_titled_status('milk'),
+        color: buff_colors[2],
       });
     }
     const mark_level = cid > 0 ? era.get(`mark:${cid}:${mark_enum.ero}`) : 3;
-    // STATUSNAME:31 = 排卵期
-    if (mark_level >= 2 && era.get(`status:${cid}:31`) > 0) {
-      status_list.push({ color: buff_colors[2], content: '危险期' });
-    }
-    sys_get_item_status(cid, status_list);
-    if (era.get(`talent:${cid}:泌乳`)) {
-      status_list.push({ color: buff_colors[2], content: '泌乳' });
-    }
-    if (era.get(`tequip:${cid}:眼罩`) !== -1) {
-      status_list.push({ color: buff_colors[0], content: '眼罩' });
-    }
-    if (era.get(`tequip:${cid}:项圈`) !== -1) {
-      status_list.push({ color: buff_colors[0], content: '项圈' });
-    }
-    if (era.get(`tcvar:${cid}:避孕套`)) {
-      status_list.push({ color: buff_colors[0], content: '避孕套' });
-    }
     if (
-      era.get(`status:${cid}:反避孕套`) &&
-      era.get(`cflag:${cid}:子宫内精液`)
+      // CFLAGNAME:81 - 82 = 妊娠阶段 - 妊娠回合计时
+      era.get(`cflag:${cid}:81`) >> pregnant_stage_enum.embryo &&
+      (era.get(`cflag:${cid}:82`) >= 4 || (cid && mark_level >= 2))
     ) {
-      status_list.push({
-        color: buff_colors[2],
-        content: '避孕套溶解！',
-        key: '避孕套溶解',
-      });
-    }
-    if (
-      era.get(`status:${cid}:短效避孕药`) ||
-      era.get(`status:${cid}:长效避孕药`)
-    ) {
-      status_list.push({ color: buff_colors[0], content: '避孕' });
-    }
-    const orgasm_denial = era.get(`ex:${cid}:寸止`);
-    if (orgasm_denial) {
-      status_list.push({
-        color: buff_colors[2],
-        content: `寸止(${orgasm_denial})`,
-        key: '寸止',
-      });
-    }
-    const orgasm_stop = era.get(`tcvar:${cid}:高潮抑制`);
-    if (orgasm_stop) {
-      status_list.push({
-        color: buff_colors[2],
-        content: `绝顶控制！(${orgasm_stop})`,
-        key: '绝顶控制',
-        opacity: orgasm_stop > 1 ? 1 : 0.5,
-      });
-    }
-    if (
-      era.get(`cflag:${cid}:妊娠阶段`) >> pregnant_stage_enum.embryo &&
-      (era.get(`cflag:${cid}:妊娠回合计时`) >= 4 || (cid && mark_level >= 2))
-    ) {
-      status_list.push({
+      ret.push({
+        ...di18n.tb_status.get_titled_status('pg_normal'),
         color: buff_colors[0],
-        content: '有孕',
       });
-    } else if (era.get(`status:${cid}:经期`)) {
-      status_list.push({ color: buff_colors[2], content: '经期' });
-    }
-    const lost_mind = era.get(`tcvar:${cid}:失神`);
-    if (lost_mind) {
-      status_list.push({
+    } else if (era.get(`status:${cid}:30`) > 0) {
+      ret.push({
+        ...di18n.tb_status.get_titled_status(30),
         color: buff_colors[2],
-        content: '失神！',
-        key: '失神',
-        opacity: lost_mind > 1 ? 1 : 0.5,
       });
-    }
-    const last = era.get(`tcvar:${cid}:余韵`);
-    if (last) {
-      status_list.push({
+    } else if (mark_level >= 2 && era.get(`status:${cid}:31`) > 0) {
+      ret.push({
+        ...di18n.tb_status.get_titled_status(31),
         color: buff_colors[2],
-        content: '余韵！',
-        key: '余韵',
-        opacity: last > 1 ? 1 : 0.5,
       });
     }
-    if (era.get(`tcvar:${cid}:阴道扩张`)) {
-      status_list.push({
-        color: buff_colors[2],
-        content: '膣扩张',
-        opacity: 0.5,
-      });
-    }
-    if (era.get(`tcvar:${cid}:肛门扩张`)) {
-      status_list.push({
-        color: buff_colors[2],
-        content: '肛扩张',
-        opacity: 0.5,
-      });
-    }
-    const penis_disabled = era.get(`tcvar:${cid}:不应期`);
-    if (penis_disabled) {
-      status_list.push({
-        color: buff_colors[0],
-        content: '贤者',
-        opacity: penis_disabled > 1 ? 1 : 0.5,
-      });
-    }
-    return status_list.map((e) => {
-      let temp;
-      if ((temp = status_desc[e.key || e.content])) {
-        e.title = `[${e.key || e.content}]：${temp}`;
+    return ret.map((s) => {
+      if (s.title !== void 0) {
+        s.title = i18n()
+          .status_desc.template.replace('%NAME%', s.content)
+          .replace('%DESC%', s.title);
       }
-      e.display = 'inline-block';
-      e.content = `[${e.content}]`;
-      delete e.key;
-      return e;
+      s.content = i18n().tb_status.template.replace('%NAME%', s.content);
+      s.display = 'inline-block';
+      return s;
     });
   },
   get_filtered_talents,

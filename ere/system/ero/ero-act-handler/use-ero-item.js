@@ -77,7 +77,7 @@ async function use_ero_item(chara) {
     },
   ]
     .map((e) => {
-      e.n = i18n().item[e.a];
+      e.n = i18n().tb_item[e.a];
       e.c = era.get(`item:${e.n}`);
       return e;
     })
@@ -97,7 +97,7 @@ async function use_ero_item(chara) {
         return {
           accelerator: i,
           config: { align: 'center', disabled: !e.e, width: 4 },
-          content: `${i18n().item[e.a]} (${e.c})`,
+          content: `${i18n().tb_item[e.a]} (${e.c})`,
           type: 'button',
         };
       }),
@@ -231,7 +231,7 @@ async function use_ero_item(chara) {
                 '要对 ',
                 chara.get_colored_name(),
                 ' 的什么部位使用 ',
-                { color: buff_colors[2], content: i18n().item[iid] },
+                { color: buff_colors[2], content: i18n().tb_item[iid] },
                 '？',
               ],
               type: 'text',
@@ -273,7 +273,7 @@ async function use_ero_item(chara) {
                   ]
                 : []),
               ' 使用 ',
-              { color: buff_colors[2], content: i18n().item[iid] },
+              { color: buff_colors[2], content: i18n().tb_item[iid] },
               ' 吗？',
             ],
             type: 'text',
@@ -306,7 +306,7 @@ async function use_ero_item(chara) {
     await era.printAndWait([
       CharaTalk.me.get_colored_name(),
       ' 放弃了使用 ',
-      { color: buff_colors[2], content: i18n().item[iid] },
+      { color: buff_colors[2], content: i18n().tb_item[iid] },
       '……',
     ]);
     return undefined;

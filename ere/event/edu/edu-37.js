@@ -22,11 +22,12 @@ const { say_by_passer_by_and_wait } = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { buff_colors } = require('#/data/color-const');
-const status_desc = require('#/data/desc/status.json');
 const FlashEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-37');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const { attr_enum, fumble_result } = require('#/data/train-const');
+
+const di18n = require('#/i18n/extended-def');
 
 /** @type {Record<string,function(CharaTalk,string,string,{wait:boolean},function):Promise<*>>} */
 const week_start_handlers = {};
@@ -758,9 +759,8 @@ module.exports = class extends CustomizedEdu {
         flash.get_colored_name(),
         ' 不再 ',
         {
+          ...di18n.kojo.get_titled_content(this.id, 'distracted'),
           color: buff_colors[0],
-          content: '[分心]',
-          title: status_desc['闪耀分心'],
         },
         ' 了！',
       ]);

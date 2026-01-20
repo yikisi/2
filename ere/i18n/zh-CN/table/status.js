@@ -13,7 +13,6 @@ class I18nStatus {
   eo_4 = '焦躁！';
 
   buff207 = '艾尔菲相助';
-
   buff305 = '针灸疗养';
   buff340 = '女神之望';
   buff341 = '女神之爱';
@@ -21,6 +20,9 @@ class I18nStatus {
   buff343 = '佐岳相助';
   buff344 = '凉花相助';
   buff345 = '灯之相助';
+  buff346 = '传奇激励';
+  buff347 = '先驱激励';
+  buff348 = '偶像激励';
 
   milk = '泌乳';
 
@@ -60,8 +62,41 @@ class I18nStatus {
   36 = '弗隆K';
   37 = '弗隆P';
   38 = '超马跳Z';
-
   39 = '马跳S';
+  40 = '避孕套溶解！';
+  41 = '避孕';
+  42 = '避孕';
+
+  // 调教
+  tr_leader = '主导权';
+
+  v_penis_v = '童贞';
+  v_penis_d = '无自觉非童贞';
+
+  v_vagina_v = '处女';
+  v_vagina_d = '无自觉非处女';
+  v_vagina_r = '再生处女';
+
+  tr_erect = '勃起！';
+  tr_lb_breast = '胸润滑';
+  tr_lb_vagina = '穴润滑';
+  tr_lb_anal = '菊润滑';
+  tr_br_erect = '乳突！';
+
+  tr_tc_40 = '脱力！';
+  tr_tc_41 = '失神！';
+  tr_tc_44 = '发情！';
+  tr_tc_45 = (t) => `余韵！(${t})`;
+  tr_tc_46 = (t) => `贤者(${t})`;
+  tr_tc_47 = '避孕套';
+  tr_tc_48 = '穴扩张';
+  tr_tc_49 = '菊扩张';
+  tr_tc_57 = (t) => `绝顶控制！(${t})`;
+  tr_ex_45 = '膣撕裂！';
+  tr_ex_46 = '肛撕裂！';
+  tr_ex_55 = (t) => `寸止(${t})`;
+  tr_te_6 = '项圈';
+  tr_te_7 = '眼罩';
 }
 
 module.exports = I18nStatus;

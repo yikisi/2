@@ -10,10 +10,10 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const { say_by_passer_by_and_wait } = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const { buff_colors } = require('#/data/color-const');
-const status_desc = require('#/data/desc/status.json');
 const { location_enum } = require('#/data/locations');
 const { race_enum } = require('#/data/race/race-const');
+
+const di18n = require('#/i18n/extended-def');
 
 /** @param {Record<string,function(CharaTalk,string,string,{wait:boolean},function):Promise<*>>} handlers */
 module.exports = (handlers) => {
@@ -375,9 +375,8 @@ module.exports = (handlers) => {
         flash.get_colored_name(),
         ' 有了 ',
         {
-          color: buff_colors[1],
-          content: '[必行之事]',
-          title: status_desc['必行之事'],
+          ...di18n.kojo.get_titled_content(this.id, 'duty'),
+          color: flash.color,
         },
         ' 的觉悟！',
       ]);

@@ -166,7 +166,7 @@ async function use_ero_medicine(chara) {
         return {
           accelerator: i + 1,
           config: { align: 'center', disabled: !e.e, width: 4 },
-          content: `${i18n().item[e.a]} (${e.n})`,
+          content: `${i18n().tb_item[e.a]} (${e.n})`,
           type: 'button',
         };
       }),

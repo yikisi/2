@@ -39,7 +39,7 @@ function get_part_touch(cid, cpart) {
       if (body_part.item === item_enum.clamps) {
         item_name = cpart === part_enum.breast ? '乳头夹' : '阴蒂夹';
       }
-      item_name ||= i18n().item[body_part.item];
+      item_name ||= i18n().tb_item[body_part.item];
       return [
         { color: buff_colors[2], content: item_name },
         ' (由 ',

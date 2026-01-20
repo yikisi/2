@@ -396,7 +396,7 @@ async function preview_race(
                 disabled: !b_item && era.get('item:跳蛋') < 2,
                 width: 22,
               },
-              content: b_item > 0 ? i18n().item[b_item] : i18n().ui_nothing,
+              content: b_item > 0 ? i18n().tb_item[b_item] : i18n().ui_nothing,
               type: 'button',
             },
           ]);
@@ -416,7 +416,7 @@ async function preview_race(
                 disabled: !p_item && era.get('item:飞机杯') < 1,
                 width: 22,
               },
-              content: p_item > 0 ? i18n().item[p_item] : i18n().ui_nothing,
+              content: p_item > 0 ? i18n().tb_item[p_item] : i18n().ui_nothing,
               type: 'button',
             },
           ]);
@@ -431,7 +431,7 @@ async function preview_race(
                   !c_item && era.get('item:75') < 1 && era.get('item:74') < 1,
                 width: 22,
               },
-              content: c_item > 0 ? i18n().item[c_item] : i18n().ui_no,
+              content: c_item > 0 ? i18n().tb_item[c_item] : i18n().ui_no,
               type: 'button',
             },
           ]);
@@ -450,7 +450,7 @@ async function preview_race(
                   !v_item && era.get('item:75') < 1 && era.get('item:77') < 1,
                 width: 22,
               },
-              content: v_item > 0 ? i18n().item[v_item] : i18n().ui_no,
+              content: v_item > 0 ? i18n().tb_item[v_item] : i18n().ui_no,
               type: 'button',
             },
           ]);
@@ -471,7 +471,7 @@ async function preview_race(
                 era.get('item:80') < 1,
               width: 22,
             },
-            content: a_item > 0 ? i18n().item[a_item] : i18n().ui_no,
+            content: a_item > 0 ? i18n().tb_item[a_item] : i18n().ui_no,
             type: 'button',
           },
         ]);
@@ -499,7 +499,11 @@ async function preview_race(
               },
               { content: [], type: 'text' },
               // ITEMNAME:75 = 跳蛋
-              { config: { width: 2 }, content: i18n().item[75], type: 'text' },
+              {
+                config: { width: 2 },
+                content: i18n().tb_item[75],
+                type: 'text',
+              },
               {
                 accelerator: 1,
                 config: { width: 4 },
@@ -535,7 +539,11 @@ async function preview_race(
               },
               { content: [], type: 'text' },
               // ITEMNAME:75 = 跳蛋
-              { config: { width: 2 }, content: i18n().item[76], type: 'text' },
+              {
+                config: { width: 2 },
+                content: i18n().tb_item[76],
+                type: 'text',
+              },
               {
                 accelerator: 1,
                 config: { width: 4 },
@@ -577,7 +585,7 @@ async function preview_race(
                 p.push(
                   {
                     config: { width: 2 },
-                    content: i18n().item[c],
+                    content: i18n().tb_item[c],
                     type: 'text',
                   },
                   {
@@ -635,7 +643,7 @@ async function preview_race(
                 p.push(
                   {
                     config: { width: 2 },
-                    content: i18n().item[c],
+                    content: i18n().tb_item[c],
                     type: 'text',
                   },
                   {
@@ -695,7 +703,7 @@ async function preview_race(
                 p.push(
                   {
                     config: { width: 2 },
-                    content: i18n().item[c],
+                    content: i18n().tb_item[c],
                     type: 'text',
                   },
                   {

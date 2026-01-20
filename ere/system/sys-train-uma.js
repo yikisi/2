@@ -343,8 +343,8 @@ module.exports = {
     }
     const i_t3 = CharaInmon.get(cid).on(plugin_enum.tra_3);
     if (i_t3) {
-      t_cost.stamina = -era.get(`base:${cid}:体力`);
-      t_cost.time = -era.get(`base:${cid}:精力`);
+      t_cost.stamina = -era.get(`base:${cid}:0`);
+      t_cost.time = -era.get(`base:${cid}:1`);
     }
     let to_print = [
       sys_change_attr_and_print(cid, attr_enum.hp, t_cost.stamina),
@@ -421,6 +421,9 @@ module.exports = {
     if (i_t3) {
       sys_hurt_uma(cid, 1);
       sys_change_fame(-1);
+    }
+    if (era.get(`status:${cid}:0`) > 0) {
+      era.add(`status:${cid}:0`, -1);
     }
     await era.waitAnyKey();
   },

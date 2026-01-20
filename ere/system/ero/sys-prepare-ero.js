@@ -114,10 +114,11 @@ function update_ero_status(...ids) {
     }
     if (
       era.get(`talent:${cid}:乳头类型`) === 2 &&
-      (i_estrus || era.get(`talent:${cid}:淫乳`) > 0)
+      (i_estrus || era.get(`talent:${cid}:淫乳`) === 2)
     ) {
       era.set(`tcvar:${cid}:乳突`, 1);
     }
+    console.log(cid, i_estrus, era.get(`tcvar:${cid}:50`));
     if (
       p_size > 0 &&
       (i_estrus ||
