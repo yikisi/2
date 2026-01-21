@@ -7,6 +7,9 @@ const SuzukaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-2')
 const LegendUmaSelector = require('#/data/race/model/legend-uma-selector');
 const { race_enum } = require('#/data/race/race-const');
 
+const di18n = require('#/i18n/extended-def');
+const { i18n } = require('#/i18n/selector');
+
 module.exports = class extends CustomizedMec {
   get_motivation_limit() {
     const { debuff } = new SuzukaEduMarks();
@@ -20,11 +23,9 @@ module.exports = class extends CustomizedMec {
     return new SuzukaEduMarks().debuff < 3;
   }
 
-  get_race_contestants() {
-    if (
-      era.get('flag:7') === race_enum.takz_kin &&
-      era.get(`cflag:${this.id}:48`) > 96
-    ) {
+  get_race_contestants(info) {
+    // CFLAGNAME:48 = 育成回合计时
+    if (info.id === race_enum.takz_kin && era.get(`cflag:${this.id}:48`) > 96) {
       return [new LegendUmaSelector(11, 1.05), new LegendUmaSelector(18, 1.05)];
     }
     return [];
@@ -32,35 +33,20 @@ module.exports = class extends CustomizedMec {
 
   get_race_finish_report(uma, rid) {
     if (rid === race_enum.begin_race) {
-      return [
-        uma.get_colored_name(),
-        { color: uma.color, content: ' 强势夺下首胜！' },
-      ];
+      return i18n().kojo[this.id].report_begin_race(uma.get_colored_name());
     }
     return super.get_race_finish_report(uma, rid);
   }
 
   get_status(show_train_buff) {
     const { debuff } = new SuzukaEduMarks();
-    if (show_train_buff) {
-      let content = '';
-      let title = '';
-      switch (debuff) {
-        case 2:
-          content = '失意';
-          title = '干劲上限下降两阶段。';
-          break;
-        case 1:
-          content = '难过';
-          title = '干劲上限下降一阶段。';
-          break;
-        case 3:
-          content = '陈旧腿伤';
-          title = '命定的终点。';
-      }
-      if (content) {
-        return [{ color: get_chara_color(this.id), content, title }];
-      }
+    if (show_train_buff && debuff > 0) {
+      return [
+        {
+          ...di18n.kojo.get_titled_content(this.id, `debuff${debuff}`),
+          color: get_chara_color(this.id),
+        },
+      ];
     }
     return super.get_status(show_train_buff);
   }

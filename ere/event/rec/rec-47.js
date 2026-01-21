@@ -1,7 +1,3 @@
-/**
- * @file 荒漠英雄 - 招募
- * @author 某不思议的大嘴鸥
- */
 const era = require('#/era-electron');
 
 const {
@@ -12,77 +8,83 @@ const {
 const { sys_change_fame } = require('#/system/sys-calc-flag');
 
 const { add_event, cb_enum } = require('#/event/queue');
-const kojo = require('#/event/rec/rec-47.kojo');
 const CustomizedRecruit = require('#/event/rec/rec-common');
+const generate_dictionary = require('#/event/snippets/generate-dictionary');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const { get_chara_color } = require('#/data/chara-colors');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
 
+const { i18n } = require('#/i18n/selector');
+
 module.exports = class extends CustomizedRecruit {
-  async recruit(stage, event_object) {
-    const dict = {};
-    const rob = get_chara_talk(this.id);
-    dict['代表色'] = rob.color;
-    dict['她'] = rob.sex;
-    dict['马娘'] = rob.get_uma_sex_title();
-    dict['少女'] = rob.get_teen_sex_title();
-    const me = get_chara_talk(0);
-    dict['你'] = me.name;
-    dict['称呼'] = sys_get_callname(this.id, 0);
+  async recruit(stage, ebj) {
+    const kojo = i18n().kojo[this.id].recruit;
+    const dict = generate_dictionary(this.id, {
+      call: !0,
+      teen: !0,
+      uma: !0,
+      your_sex: !0,
+    });
     let temp;
-    switch (era.get(`cflag:${this.id}:招募状态`)) {
+    // CFLAGNAME:66 = 招募状态
+    switch (era.get(`cflag:${this.id}:66`)) {
       case recruit_flags.no:
-        dict['骏川'] = sys_get_callname(0, 301);
-        temp = await kojo['招募1'](dict);
+        dict.Y_CALL_301 = sys_get_callname(0, 301);
+        temp = (await kojo['rec1'](dict))['relation'];
         era.println();
-        if (temp[3] === 1) {
+        if (temp === 1) {
           if (sys_like_chara(this.id, 0, 5)) {
             await era.waitAnyKey();
           }
         } else if (sys_love_uma(this.id, 1)) {
           await era.waitAnyKey();
         }
-        era.set(`cflag:${this.id}:随机招募`, 0);
-        era.set(`cflag:${this.id}:招募状态`, -1);
+        // CFLAGNAME:67 = 随机招募
+        era.set(`cflag:${this.id}:67`, 0);
+        era.set(`cflag:${this.id}:66`, -1);
         EventMarks.get(0).add(event_hooks.school_atrium);
         add_event(
           event_hooks.school_atrium,
           new EventObject(this.id, cb_enum.recruit),
         );
-        era.set('flag:物色对象', this.id);
+        // FLAGNAME:33 = 物色对象
+        era.set('flag:33', this.id);
         return true;
       case -1:
-        if (era.get('flag:当前互动角色') > 0) {
-          add_event(stage, event_object);
+        // FLAGNAME:5 = 当前互动角色
+        if (era.get('flag:5') > 0) {
+          add_event(stage, ebj);
           return false;
         }
-        await kojo['招募2'](dict);
-        era.set(`cflag:${this.id}:招募状态`, -2);
-        add_event(stage, event_object);
+        dict.C_NAME = get_chara_talk(83).name;
+        await kojo['rec2'](dict);
+        era.set(`cflag:${this.id}:66`, -2);
+        add_event(stage, ebj);
         return true;
       case -2:
-        if (era.get('flag:当前互动角色') > 0) {
-          add_event(stage, event_object);
+        if (era.get('flag:5') > 0) {
+          add_event(stage, ebj);
           return false;
         }
-        await kojo['招募3'](dict);
-        era.set(`cflag:${this.id}:随机招募`, 1);
-        era.set(`cflag:${this.id}:招募状态`, -3);
+        await kojo['rec3'](dict);
+        era.set(`cflag:${this.id}:67`, 1);
+        era.set(`cflag:${this.id}:66`, -3);
         EventMarks.get(0).sub(event_hooks.school_atrium);
-        era.set('flag:物色对象', 0);
+        era.set('flag:33', 0);
         return true;
       case -3:
         if (await this.check_before_rec()) {
           return false;
+        } else {
+          const chris = get_chara_talk(83);
+          dict.C_NAME = chris.name;
+          dict.C_COLOR = chris.color;
         }
-        dict['他'] = me.sex;
-        dict['吉兆色'] = get_chara_color(83);
-        temp = await kojo['招募4'](dict);
+        temp = await kojo['rec4'](dict);
         if (temp[3] === 1) {
           if (sys_like_chara(this.id, 0, 5, true, 1)) {
             await era.waitAnyKey();
@@ -93,7 +95,7 @@ module.exports = class extends CustomizedRecruit {
             await era.waitAnyKey();
           }
         }
-        era.set(`cflag:${this.id}:招募状态`, recruit_flags.yes);
+        era.set(`cflag:${this.id}:66`, recruit_flags.yes);
     }
   }
 };

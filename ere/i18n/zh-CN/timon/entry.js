@@ -5,13 +5,13 @@ class I18nTimon {
   daily = proxy_kojo_js(require('#/i18n/zh-CN/timon/daily'));
   edu = proxy_kojo_js(require('#/i18n/zh-CN/timon/edu'));
   love = proxy_kojo_js(require('#/i18n/zh-CN/timon/love'));
-  ero = proxy_kojo_js(require('#/i18n/zh-CN/timon/ero'));
+  ero = proxy_kojo_js(require('#/i18n/zh-CN/timon/ero/ero'));
   basement = proxy_kojo_js(require('#/i18n/zh-CN/timon/base'));
 
   ending = proxy_kojo_js(require('#/i18n/zh-CN/timon/ending'));
 
-  daily_child = proxy_kojo_js(require('#/i18n/zh-CN/timon/daily-child'));
-  ero_child = proxy_kojo_js(require('#/i18n/zh-CN/timon/ero-child'));
+  daily_child = proxy_kojo_js(require('#/i18n/zh-CN/timon/child/daily'));
+  ero_child = proxy_kojo_js(require('#/i18n/zh-CN/timon/child/ero'));
 
   strange = '陌生';
   strange_desc = (debuff) =>

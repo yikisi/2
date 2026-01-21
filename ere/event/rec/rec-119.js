@@ -1,14 +1,8 @@
-/**
- * @file 梦之旅 - 招募
- * @author 幽白書
- */
 const era = require('#/era-electron');
 
-const { sys_get_callname } = require('#/system/sys-calc-chara-others');
-
-const kojo = require('#/event/rec/rec-119.kojo');
 const CustomizedRecruit = require('#/event/rec/rec-common');
-const print_name_and_show_kojo = require('#/event/snippets/print-name-and-show-kojo');
+const generate_dictionary = require('#/event/snippets/generate-dictionary');
+const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
@@ -16,28 +10,28 @@ const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const recruit_flags = require('#/data/event/recruit-flags');
 
+const { i18n } = require('#/i18n/selector');
+
 module.exports = class extends CustomizedRecruit {
-  async recruit() {
-    const dict = {};
+  async recruit(stage, ebj) {
+    const kojo = i18n().kojo[this.id].recruit;
+    const dict = generate_dictionary(this.id, { call: !0, uma: !0 });
     const dj = get_chara_talk(this.id);
-    dict['代表色'] = dj.color;
-    dict['她'] = dj.sex;
-    dict['马娘'] = dj.get_uma_sex_title();
-    dict['称呼'] = sys_get_callname(this.id, 0);
-    const me = get_chara_talk(0);
-    dict['你'] = me.name;
-    dict['舍妹'] = dj.sex_code === 1 ? '舍弟' : '舍妹';
-    if (era.get(`cflag:${this.id}:招募状态`) === recruit_flags.no) {
-      await print_name_and_show_kojo('不运的招募', dj, kojo, dict);
-      era.set('flag:物色对象', this.id);
-      era.set(`cflag:${this.id}:招募状态`, -1);
-      era.set(`cflag:${this.id}:随机招募`, 0);
+    // CFLAGNAME:66 = 招募状态
+    if (era.get(`cflag:${this.id}:66`) === recruit_flags.no) {
+      await print_title_with_kojo(kojo, 'rec1', dj, dict);
+      // FLAGNAME:33 = 物色对象
+      era.set('flag:33', this.id);
+      // CFLAGNAME:66 = 招募状态
+      era.set(`cflag:${this.id}:66`, -1);
+      // CFLAGNAME:67 = 随机招募
+      era.set(`cflag:${this.id}:67`, 0);
       return true;
     } else {
-      await print_name_and_show_kojo('命定的安排？', dj, kojo, dict);
+      await print_title_with_kojo(kojo, 'rec2', dj, dict);
       EventMarks.get(0).sub(event_hooks.recruit);
-      era.set('flag:物色对象', 0);
-      era.set(`cflag:${this.id}:招募状态`, recruit_flags.yes);
+      era.set('flag:33', 0);
+      era.set(`cflag:${this.id}:66`, recruit_flags.yes);
     }
   }
 };

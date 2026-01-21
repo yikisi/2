@@ -48,11 +48,9 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_next_week() {
-    if (
-      !get(`cflag:${this.id}:随机招募`) &&
-      get(`cflag:${this.id}:招募状态`) === -1
-    ) {
-      set(`cflag:${this.id}:随机招募`, 1);
+    // CFLAGNAME:66 - 67 = 招募状态 - 随机招募
+    if (!get(`cflag:${this.id}:67`) && get(`cflag:${this.id}:66`) === -1) {
+      set(`cflag:${this.id}:67`, 1);
     }
     super.check_next_week();
   }

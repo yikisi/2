@@ -4,7 +4,7 @@ const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const CustomizedDaily = require('#/event/daily/daily-common');
-const print_event_name = require('#/event/snippets/print-event-name');
+const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
@@ -86,24 +86,30 @@ class DailyChild extends CustomizedDaily {
 
   async growth(stage) {
     const child = get_chara_talk(this.id);
-    const father = get_chara_talk(era.get(`cflag:${this.id}:父方角色`));
-    const mother = get_chara_talk(era.get(`cflag:${this.id}:母方角色`));
+    // CFLAGNAME:15 - 16 = 父方角色 - 母方角色
+    const father = get_chara_talk(era.get(`cflag:${this.id}:15`));
+    const mother = get_chara_talk(era.get(`cflag:${this.id}:16`));
     era.drawLine();
-    let h;
+    let k;
     switch (stage) {
       case 0:
-        h = i18n().timon.daily_child.growth_0;
+        k = 'growth_0';
         break;
       case 1:
-        h = i18n().timon.daily_child.growth_1;
+        k = 'growth_1';
         LifeEventMarks.get_marks(this.id).unexpected_child = 0;
         break;
       case 2:
-        h = i18n().timon.daily_child.growth_2;
+        k = 'growth_2';
     }
-    if (h) {
-      await print_event_name(h.title, child);
-      await h(child, father, mother);
+    if (k) {
+      await print_title_with_kojo(
+        i18n().timon.daily_child,
+        k,
+        child,
+        father,
+        mother,
+      );
     }
   }
 
