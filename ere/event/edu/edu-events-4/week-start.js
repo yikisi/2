@@ -1,18 +1,21 @@
 const era = require('#/era-electron');
 
+const { sys_get_callname } = require('#/system/sys-calc-chara-others');
+
 const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
-const { say_by_passer_by } = require('#/utils/chara-talk');
-const { say_by_passer_by_and_wait } = require('#/utils/chara-talk');
 
+const {
+  say_by_passer_by,
+  say_by_passer_by_and_wait,
+} = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const MaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-4');
 const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const event_hooks = require('#/data/event/event-hooks');
 const { location_enum } = require('#/data/locations');
-const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
 /**
  * @param {HookArg} hook
@@ -1006,19 +1009,14 @@ module.exports = async function (hook, event_object) {
       await era.printAndWait(`等回到训练室的时候两人都筋疲力竭的靠在了沙发上`);
       era.println();
       wait_flag =
-        get_attr_and_print_in_event(
-          4,
-          [0, 0, 0, 0, 0],
-          0,
-          JSON.parse('{"体力":200}'),
-        ) || wait_flag;
+        get_attr_and_print_in_event(4, [0, 0, 0, 0, 0], 0, [200]) || wait_flag;
     } else {
       await zensky.say_and_wait(
         `说的也是,这么冷的天还是呆在温暖的训练室里才对吧`,
       );
       era.printButton(`「我把放在训练室里的小零食还有橘子都拿出来吧」`, 1);
       await era.input();
-      await zensky.say_and_wait(`呵呵,那我来剥橘子。`);
+      await zensky.say_and_wait(`呵呵，那我来剥橘子。`);
       await era.printAndWait(`于是这天靠着围炉两人气氛不错的度过了。`);
       era.println();
       wait_flag =

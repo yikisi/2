@@ -971,12 +971,8 @@ module.exports = class extends CustomizedEdu {
       era.printButton(`河神祈求土地的人们智慧`, 3);
       const ret1 = await era.input();
       if (ret1 === 1) {
-        get_attr_and_print_in_event(
-          46,
-          [0, 0, 0, 0, 0],
-          0,
-          JSON.parse('{"体力":600}'),
-        ) && (await era.waitAnyKey());
+        get_attr_and_print_in_event(46, [0, 0, 0, 0, 0], 0, [600]) &&
+          (await era.waitAnyKey());
       } else if (ret1 === 2) {
         get_attr_and_print_in_event(46, [10, 10, 10, 10, 10], 0) &&
           (await era.waitAnyKey());

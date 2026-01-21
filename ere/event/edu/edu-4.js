@@ -938,12 +938,8 @@ module.exports = class extends CustomizedEdu {
         );
         await zensky.say_and_wait('决定了！接下来的目标是身体健康管理！');
         await zensky.say_and_wait('好了，赶快进去吧！');
-        get_attr_and_print_in_event(
-          4,
-          [0, 0, 0, 0, 0],
-          0,
-          JSON.parse('{"体力":600}'),
-        ) && (await era.waitAnyKey());
+        get_attr_and_print_in_event(4, [0, 0, 0, 0, 0], 0, [600]) &&
+          (await era.waitAnyKey());
       } else if (ret === 2) {
         await zensky.say_and_wait(
           '原来如此！只要各方面都平均训练的话，就能比之前更上一层楼吧！',
