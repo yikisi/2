@@ -101,20 +101,27 @@ module.exports = async () => {
       era.get(`staticcflag:${cid}:17`) === real_month &&
       era.get(`staticcflag:${cid}:18`) === real_date
     ) {
-      if (birth_list.length > 0) {
-        birth_list.push(i18n().tt_birthday_comma);
-      }
-      birth_list.push({
+      birth_list.push(cid);
+    }
+  });
+
+  function get_birth_names() {
+    const ret = join_list(
+      birth_list.map((cid) => ({
         color: get_chara_color(cid),
         content: get_display_name(era.get(`static:${cid}:name`)),
         fontWeight: 'bold',
-      });
+      })),
+      i18n().tt_birthday_comma,
+    );
+    if (i18n().tt_birthday_comma !== i18n().tt_birthday_conjunction) {
+      const b_index = ret.findLastIndex((e) => e === i18n().tt_birthday_comma);
+      if (b_index !== -1) {
+        ret[b_index] = i18n().tt_birthday_conjunction;
+      }
     }
-  });
-  const b_index = birth_list.findLastIndex(
-    (e) => e === i18n().tt_birthday_comma,
-  );
-  birth_list[b_index] = i18n().tt_birthday_conjunction;
+    return ret;
+  }
 
   const copyrights = generate_copyrights();
   const buttons = [
@@ -384,7 +391,10 @@ module.exports = async () => {
       birth_list.length > 0
         ? [
             { type: 'divider' },
-            { type: 'text', content: i18n().tt_birthday_notify(birth_list) },
+            {
+              type: 'text',
+              content: i18n().tt_birthday_notify(get_birth_names()),
+            },
           ]
         : [],
       [

@@ -21,9 +21,28 @@ module.exports = class extends I18nEntry {
   a_edu_2 = this.edu_2;
 
   ui_moti = 'Motivation';
+  moti_0 = 'Worst';
+  moti_1 = 'Worse';
+  moti_2 = 'Normal';
+  moti_3 = 'Better';
+  moti_4 = 'Best';
 
+  tt_birthday_comma = ', ';
+  tt_birthday_conjunction = ' and ';
+  tt_birthday_notify = (birth_list) => [
+    'Today is the birthday of ',
+    ...birth_list,
+  ];
+
+  ui_back = 'BACK';
+  ui_achieve_title = 'New Achievement!';
   ui_yes = 'YES';
   ui_no = 'NO';
+  ui_skip = 'SKIP';
+  ui_nothing = 'NOTHING';
+  ui_money_template = '¥%MONEY%';
+  ui_get_date = (year, month, week) => ['Week ', week, ' ', month, '/', year];
+  ui_month_template = '%MONTH% months';
 
   name = new (require('#/i18n/en-US/chara/names'))();
 

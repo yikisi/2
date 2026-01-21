@@ -43,6 +43,14 @@ module.exports = class extends I18nEntry {
   tt_help = 'チュートリアル';
   tt_copyrights = 'クレジット';
 
+  tt_birthday_comma = ', ';
+  tt_birthday_conjunction = ', ';
+  tt_birthday_notify = (birth_list) => [
+    '今日は',
+    ...birth_list,
+    'の誕生日です',
+  ];
+
   ui_yes = 'はい';
   ui_no = 'いいえ';
 
