@@ -39,15 +39,15 @@ const week_end_handlers = {};
 ].forEach((f) => f(week_end_handlers));
 
 module.exports = class extends CustomizedEdu {
-  async race_start(chara, me, callname, hook, extra_flag) {
+  async race_start(falcon, me, callname, hook, extra_flag) {
     return await falcon_race_start(hook, extra_flag);
   }
 
-  async race_end(chara, me, callname, hook, extra_flag) {
+  async race_end(falcon, me, callname, hook, extra_flag) {
     return await falcon_race_end(hook, extra_flag);
   }
 
-  async week_start(me, falcon, callname, hook, extra_flag, event_object) {
+  async week_start(falcon, me, callname, hook, extra_flag, event_object) {
     if (week_start_handlers[event_object.arg] !== undefined) {
       const flags = { wait_flag: false },
         ret = await week_start_handlers[event_object.arg].call(
@@ -64,7 +64,7 @@ module.exports = class extends CustomizedEdu {
     }
   }
 
-  async week_end(me, falcon, callname, hook, extra_flag, event_object) {
+  async week_end(falcon, me, callname, hook, extra_flag, event_object) {
     if (week_end_handlers[event_object.arg]) {
       const flags = { wait_flag: false };
       const ret = await week_end_handlers[event_object.arg](

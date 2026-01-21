@@ -63,7 +63,7 @@ module.exports = class extends CustomizedRecruit {
           `究竟是自暴自弃的埋怨还是自嘲式的苦中作乐，亦或二者兼有。就算问${me.actual_name}自己，恐怕也没有准确回复。`,
         );
         era.println();
-        await say_by_passer_by(
+        await say_by_passer_by_and_wait(
           `怒气冲冲的人类教师`,
           `${falcon.name}！这已经是${callname}这个星期第三次未经许可擅自举办演唱会了！`,
         );

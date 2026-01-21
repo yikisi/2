@@ -16,7 +16,7 @@ const { location_enum } = require('#/data/locations');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},function):Promise>} handlers */
 module.exports = (handlers) => {
-  handlers[47 + 29] = async (me, falcon, _, event_object) => {
+  handlers[47 + 29] = async (falcon, me, _, event_object) => {
     if (
       era.get('cflag:0:位置') !== location_enum.beach ||
       era.get('cflag:0:位置') !== era.get('cflag:46:位置')
