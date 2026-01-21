@@ -44,11 +44,11 @@ module.exports = class extends CustomizedDaily {
     await this.#kojo['office_study'](generate_dictionary(this.id));
   }
 
-  async o_r_fishing() {
+  async o_r_fishing(oguri, me) {
     await this.#kojo['o_r_fishing'](generate_dictionary(this.id));
   }
 
-  async o_r_walking() {
+  async o_r_walking(oguri, me) {
     await this.#kojo['o_r_walking'](generate_dictionary(this.id));
   }
 
@@ -59,43 +59,43 @@ module.exports = class extends CustomizedDaily {
     });
   }
 
-  async o_s_arcade() {
+  async o_s_arcade(oguri, me) {
     await this.#kojo['o_s_arcade'](generate_dictionary(this.id));
   }
 
-  async o_s_drawing() {
+  async o_s_drawing(oguri, me) {
     await this.#kojo['o_s_drawing'](generate_dictionary(this.id));
   }
 
-  async o_s_ktv() {
+  async o_s_ktv(oguri, me) {
     await this.#kojo['o_s_ktv'](generate_dictionary(this.id));
   }
 
-  async o_s_movie() {
+  async o_s_movie(oguri, me) {
     await this.#kojo['o_s_movie'](generate_dictionary(this.id));
   }
 
-  async o_s_restaurant() {
+  async o_s_restaurant(oguri, me) {
     await this.#kojo['o_s_restaurant'](generate_dictionary(this.id));
   }
 
-  async o_s_dating() {
+  async o_s_dating(oguri, me) {
     await this.#kojo['o_s_dating'](generate_dictionary(this.id));
   }
 
-  async o_s_shopping() {
+  async o_s_shopping(oguri, me) {
     await this.#kojo['o_s_shopping'](generate_dictionary(this.id));
   }
 
-  async s_a_tree_hollow() {
+  async s_a_tree_hollow(oguri, me) {
     await this.#kojo['s_a_tree_hollow'](generate_dictionary(this.id));
   }
 
-  async s_a_dating() {
+  async s_a_dating(oguri, me) {
     await this.#kojo['s_a_dating'](generate_dictionary(this.id));
   }
 
-  async school_rooftop() {
+  async school_rooftop(hook) {
     await this.#kojo['school_rooftop'](generate_dictionary(this.id));
   }
 };

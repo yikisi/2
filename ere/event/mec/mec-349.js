@@ -10,7 +10,7 @@ module.exports = class extends MecNpc {
       {
         color: get_chara_color(this.id),
         content: '投资顾问',
-        fontWeight: buff > 0 ? 'bold' : undefined,
+        fontWeight: buff > 0 ? 'bold' : void 0,
         title: `使用提供的资金进行投资，每周获得${buff > 0 ? '更多' : '一定'}收益。`,
       },
     ];

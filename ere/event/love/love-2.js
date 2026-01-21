@@ -12,8 +12,6 @@ const {
 
 const print_ero_page = require('#/page/page-ero');
 
-/** @type {KojoFile} */
-const kojo = require('#/event/love/love-2.kojo');
 const CustomizedLove = require('#/event/love/love-common');
 const punish_rejecting_love = require('#/event/love/snippets/punish-rejecting-love');
 const generate_dictionary = require('#/event/snippets/generate-dictionary');
@@ -23,14 +21,20 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { get_date } = require('#/data/date-indicator');
 
+const { i18n } = require('#/i18n/selector');
+
 module.exports = class extends CustomizedLove {
+  get #kojo() {
+    return i18n().kojo[this.id].love;
+  }
+
   get #dict() {
     return generate_dictionary(this.id, { call: !0, uma: !0 });
   }
 
-  async 49(suzuka) {
+  async 49(suzuka, me, callname, hook, extra, ebj) {
     const spe = get_chara_talk(1);
-    await print_title_with_kojo(kojo, '49', suzuka, {
+    await print_title_with_kojo(this.#kojo, '49', suzuka, {
       ...this.#dict,
       '1_CALL': sys_get_callname(1, this.id),
       CALL_1: sys_get_callname(this.id, 1),
@@ -40,13 +44,15 @@ module.exports = class extends CustomizedLove {
     await sys_love_uma_in_event(this.id);
   }
 
-  async 74(suzuka, me) {
+  async 74(suzuka, me, callname, hook, extra, ebj) {
     if (
       (
-        await print_title_with_kojo(kojo, '74', suzuka, {
-          ...this.#dict,
-          YOUR_SEX: me.sex,
-        })
+        await print_title_with_kojo(
+          this.#kojo,
+          '74',
+          suzuka,
+          generate_dictionary(this.id, { call: !0, uma: !0, your_sex: !0 }),
+        )
       )['update'] === 1
     ) {
       await sys_love_uma_in_event(this.id);
@@ -58,17 +64,17 @@ module.exports = class extends CustomizedLove {
     }
   }
 
-  async 89(suzuka) {
-    await print_title_with_kojo(kojo, '89', suzuka, {
+  async 89(suzuka, me, callname, hook, extra, ebj) {
+    await print_title_with_kojo(this.#kojo, '89', suzuka, {
       ...this.#dict,
-      CHARA_FULL: suzuka.name + suzuka.adult_sex_title,
+      CHARA_FULL: suzuka.actual_name_with_title,
     });
     await sys_love_uma_in_event(this.id);
   }
 
-  async 99(suzuka) {
+  async 99(suzuka, me, callname, hook, extra, ebj) {
     const spe = get_chara_talk(1);
-    const ret = await print_title_with_kojo(kojo, '99', suzuka, {
+    const ret = await print_title_with_kojo(this.#kojo, '99', suzuka, {
       ...this.#dict,
       '1_CALL': sys_get_callname(1, this.id),
       CALL_1: sys_get_callname(this.id, 1),

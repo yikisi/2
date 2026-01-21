@@ -28,9 +28,7 @@ module.exports = class extends CustomizedRecruit {
     switch (ebj?.arg) {
       default:
         if (
-          (await print_title_with_kojo(kojo, 'start', suzuka, dict))[
-            'recruit'
-          ] < 3
+          (await print_title_with_kojo(kojo, 'start', suzuka, dict))['rec'] < 3
         ) {
           // FLAGNAME:33 = 物色对象
           era.set('flag:33', this.id);

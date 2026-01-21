@@ -101,6 +101,7 @@ class CustomizedDaily {
       )
     ) {
       await i18n().timon.daily.gn_sex_accept(chara, me);
+      return true;
     } else if (check === 2) {
       await i18n().timon.daily.gn_sex_force(
         chara,
@@ -110,6 +111,7 @@ class CustomizedDaily {
     } else {
       await i18n().timon.daily.gn_sex_reject(chara);
     }
+    return false;
   }
 
   /**
@@ -638,8 +640,9 @@ class CustomizedDaily {
    * @protected
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
+   * @param {HookArg} hook
    */
-  async cl_valentine(chara, me) {
+  async cl_valentine(chara, me, hook) {
     await print_title_with_kojo(i18n().timon.daily, 'cl_valentine', chara, me);
   }
 

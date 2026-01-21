@@ -62,9 +62,7 @@ module.exports = class extends CustomizedRecruit {
         dict.COLOR59 = get_chara_talk(59).color;
         dict.SIR = me.adult_sex_title;
         if (
-          (await print_title_with_kojo(kojo, 'rec1', bright, dict))[
-            'recruit'
-          ] === 1
+          (await print_title_with_kojo(kojo, 'rec1', bright, dict))['rec'] === 1
         ) {
           add_event(event_hooks.school_atrium, ebj);
           EventMarks.get(0).add(event_hooks.school_atrium);
@@ -83,14 +81,12 @@ module.exports = class extends CustomizedRecruit {
         dict.SIR = me.adult_sex_title;
         if (era.get(`cflag:${this.id}:66`) === recruit_flags.no) {
           r_flag =
-            (await print_title_with_kojo(kojo, 'rec2', bright, dict))[
-              'recruit'
-            ] === 2;
+            (await print_title_with_kojo(kojo, 'rec2', bright, dict))['rec'] ===
+            2;
         } else {
           r_flag =
-            (await print_title_with_kojo(kojo, 'rec3', bright, dict))[
-              'recruit'
-            ] === 1;
+            (await print_title_with_kojo(kojo, 'rec3', bright, dict))['rec'] ===
+            1;
         }
         if (r_flag) {
           era.set(`cflag:${this.id}:66`, recruit_flags.yes);

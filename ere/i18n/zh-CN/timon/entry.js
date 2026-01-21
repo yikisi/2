@@ -13,6 +13,10 @@ class I18nTimon {
   daily_child = proxy_kojo_js(require('#/i18n/zh-CN/timon/daily-child'));
   ero_child = proxy_kojo_js(require('#/i18n/zh-CN/timon/ero-child'));
 
+  strange = '陌生';
+  strange_desc = (debuff) =>
+    `彼此还很不熟悉……训练效果-${debuff}%；改善关系或与担当训练员谈论此事可改善该状态。`;
+
   /** @param {CharaTalk} chara */
   get_it_office_study = (chara) => [
     '【指导了 ',

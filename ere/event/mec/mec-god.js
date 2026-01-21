@@ -27,8 +27,10 @@ class MecGod extends CustomizedMec {
 
   get_love_limit() {
     if (!LifeEventMarks.get_marks(this.id).get('love')) {
-      return 50 + get('flag:回合爱慕惩罚');
-    } else if (get(`cflag:${this.id}:招募状态`) !== recruit_flags.yes) {
+      // FLAGNAME:113 = 回合爱慕惩罚
+      return 50 + get('flag:113');
+      // CFLAGNAME:66 = 招募状态
+    } else if (get(`cflag:${this.id}:66`) !== recruit_flags.yes) {
       return 55;
     }
     return 0;
@@ -37,7 +39,9 @@ class MecGod extends CustomizedMec {
   set_foreign_debuff() {}
 
   set_my_sex() {
-    return set(`cflag:${this.id}:性别`, get('flag:角色性别') === 99 ? 10 : 0);
+    // CFLAGNAME:0 = 性别
+    // FLAGNAME:116 = 角色性别
+    return set(`cflag:${this.id}:0`, get('flag:116') === 99 ? 10 : 0);
   }
 }
 

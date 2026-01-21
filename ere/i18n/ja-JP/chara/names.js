@@ -1,6 +1,9 @@
 const I18nNames = require('#/i18n/zh-CN/chara/names');
 
 module.exports = class extends I18nNames {
+  sir_template = '%NAME%先生';
+  madam_template = '%NAME%さん';
+
   danna = '旦那';
 
   // Special

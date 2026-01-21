@@ -1,6 +1,9 @@
 const I18nNames = require('#/i18n/zh-CN/chara/names');
 
 module.exports = class extends I18nNames {
+  sir_template = 'Mr. %NAME%';
+  madam_template = 'Miss. %NAME%';
+
   // Callname
   me = 'I';
   you = 'You';

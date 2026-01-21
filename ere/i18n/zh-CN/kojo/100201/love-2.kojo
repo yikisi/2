@@ -183,12 +183,12 @@
       content:
         - fontWeight: bold
           content: %CHARA%
-        - 「是%CALLNAME%吗……%YOUR_SEX%无微不至地照顾我，关心我，为我制定训练计划，让我看到了比以往美丽得多的风景……」
+        - 「是%CALLNAME%吗……%YOURSEX%无微不至地照顾我，关心我，为我制定训练计划，让我看到了比以往美丽得多的风景……」
     - color: %COLOR%
       content:
         - fontWeight: bold
           content: %CHARA%
-        - 「我想与%YOUR_SEX%并肩奔跑啊，把我的景色，也分享给%YOUR_SEX%……」
+        - 「我想与%YOURSEX%并肩奔跑啊，把我的景色，也分享给%YOURSEX%……」
     - divider: true
     - %YOU%在结束了一天的工作后，打开手机，发现铃鹿在几个小时之前给%YOU%发了一条消息。
     - color: %COLOR%

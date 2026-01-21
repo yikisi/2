@@ -8,8 +8,6 @@ const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
 const print_ero_page = require('#/page/page-ero');
 
-/** @type {KojoFile} */
-const kojo = require('#/event/edu/edu-74.kojo');
 const CustomizedEdu = require('#/event/edu/edu-common');
 const { add_event } = require('#/event/queue');
 const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
@@ -22,24 +20,31 @@ const BrightEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-74'
 const { location_enum } = require('#/data/locations');
 const { race_enum } = require('#/data/race/race-const');
 
+const { i18n } = require('#/i18n/selector');
+
 module.exports = class extends CustomizedEdu {
+  get #kojo() {
+    return i18n().kojo[this.id].edu;
+  }
+
   get #dict() {
     return generate_dictionary(this.id, { call: !0 });
   }
 
-  async train() {
-    await kojo.train(this.#dict);
+  async train(attr) {
+    await this.#kojo.train(this.#dict);
   }
 
   /** @param {CharaTalk} bright */
   async at_my_side(bright) {
-    await print_title_with_kojo(kojo, 'at_my_side', bright, {
+    await print_title_with_kojo(this.#kojo, 'at_my_side', bright, {
       ...generate_dictionary(this.id, { call: !0, uma: !0 }),
       CALL_13: sys_get_callname(this.id, 13),
       CALL_27: sys_get_callname(this.id, 27),
       CALL_64: sys_get_callname(this.id, 64),
       ELDER_SISTER: bright.elder_sibling_sex_title,
     });
+    return true;
   }
 
   /**
@@ -54,7 +59,7 @@ module.exports = class extends CustomizedEdu {
     new BrightEduMarks().main++;
     if (
       (
-        await print_title_with_kojo(kojo, 'mejiro_tea', bright, {
+        await print_title_with_kojo(this.#kojo, 'mejiro_tea', bright, {
           ...generate_dictionary(this.id, { call: !0, uma: !0 }),
           CALL_13: sys_get_callname(this.id, 13),
           CALL_27: sys_get_callname(this.id, 27),
@@ -85,7 +90,7 @@ module.exports = class extends CustomizedEdu {
   async inherit(bright, me) {
     const ryan = get_chara_talk(27);
     new BrightEduMarks().main++;
-    await print_title_with_kojo(kojo, 'inherit', bright, {
+    await print_title_with_kojo(this.#kojo, 'inherit', bright, {
       ...this.#dict,
       CALL_27: sys_get_callname(this.id, 27),
       ELDER_SISTER: bright.elder_sibling_sex_title,
@@ -102,7 +107,7 @@ module.exports = class extends CustomizedEdu {
   /** @param {CharaTalk} bright */
   async my_way(bright) {
     new BrightEduMarks().main++;
-    await print_title_with_kojo(kojo, 'my_way', bright, {
+    await print_title_with_kojo(this.#kojo, 'my_way', bright, {
       ...generate_dictionary(this.id, { call: !0, uma: !0 }),
       ELDER_SISTER: bright.elder_sibling_sex_title,
     });
@@ -114,9 +119,9 @@ module.exports = class extends CustomizedEdu {
   /** @param {CharaTalk} bright */
   async light(bright) {
     new BrightEduMarks().main++;
-    await print_title_with_kojo(kojo, 'light', bright, {
+    await print_title_with_kojo(this.#kojo, 'light', bright, {
       ...generate_dictionary(this.id, { call: !0, uma: !0 }),
-      CHARA_FULL: bright.name + bright.adult_sex_title,
+      CHARA_FULL: bright.actual_name_with_title,
     });
     if (all_reward_in_event(this.id, { relation: 20 })) {
       await era.waitAnyKey();
@@ -129,7 +134,12 @@ module.exports = class extends CustomizedEdu {
     let relation = 0;
     let love = 0;
     const ret = (
-      await print_title_with_kojo(kojo, 'for_tenn_spr', bright, this.#dict)
+      await print_title_with_kojo(
+        this.#kojo,
+        'for_tenn_spr',
+        bright,
+        this.#dict,
+      )
     )['relation'];
     if (ret === 1) {
       relation = 15;
@@ -147,7 +157,7 @@ module.exports = class extends CustomizedEdu {
     let relation = 0;
     let love = 0;
     const ret = (
-      await print_title_with_kojo(kojo, 'mejiro_name', bright, {
+      await print_title_with_kojo(this.#kojo, 'mejiro_name', bright, {
         ...this.#dict,
         ELDER_SISTER: bright.elder_sibling_sex_title,
       })
@@ -165,7 +175,7 @@ module.exports = class extends CustomizedEdu {
   /** @param {CharaTalk} bright */
   async accel_era(bright) {
     await print_title_with_kojo(
-      kojo,
+      this.#kojo,
       'accel_era',
       bright,
       generate_dictionary(this.id, { call: !0, uma: !0 }),
@@ -190,7 +200,12 @@ module.exports = class extends CustomizedEdu {
     }
     // CFLAGNAME:56 = 节日事件标记
     era.set(`cflag:${this.id}:56`, 0);
-    await print_title_with_kojo(kojo, 'hot_spring_ticket', bright, this.#dict);
+    await print_title_with_kojo(
+      this.#kojo,
+      'hot_spring_ticket',
+      bright,
+      this.#dict,
+    );
     new BrightEduMarks().hot_spring = 1;
     return true;
   }
@@ -209,21 +224,21 @@ module.exports = class extends CustomizedEdu {
       return;
     }
     const dict = { ...this.#dict, YOUR_NAME: me.actual_name };
-    await print_title_with_kojo(kojo, 'hot_spring', bright, dict);
+    await print_title_with_kojo(this.#kojo, 'hot_spring', bright, dict);
     // FLAGNAME:4 = 当前位置
     const curr_loc = era.get('flag:4');
     era.set('flag:4', location_enum.hot_spring);
     begin_and_init_ero(0, this.id);
     await print_ero_page(this.id, true);
     await end_ero_and_show_result(true);
-    await kojo['hot_spring_sex'](dict);
+    await this.#kojo['hot_spring_sex'](dict);
     era.set('flag:4', curr_loc);
     if (all_reward_in_event(this.id, { love: 2 })) {
       await era.waitAnyKey();
     }
     if (era.get(`love:${this.id}`) >= 90) {
       era.drawLine();
-      await print_title_with_kojo(kojo, 'wish', bright, dict);
+      await print_title_with_kojo(this.#kojo, 'wish', bright, dict);
       if (all_reward_in_event(this.id, { relation: 50 })) {
         await era.waitAnyKey();
       }
@@ -233,7 +248,12 @@ module.exports = class extends CustomizedEdu {
 
   /** @param {CharaTalk} bright */
   async where_is_time(bright) {
-    await print_title_with_kojo(kojo, 'where_is_time', bright, this.#dict);
+    await print_title_with_kojo(
+      this.#kojo,
+      'where_is_time',
+      bright,
+      this.#dict,
+    );
     // STATUSNAME:0 = 练习X手
     era.set(`status:${this.id}:0`, 0);
     if (all_reward_in_event(this.id, { attr: [0, 10, 0, 0, 10] })) {
@@ -243,7 +263,7 @@ module.exports = class extends CustomizedEdu {
 
   /** @param {CharaTalk} bright */
   async sleep(bright) {
-    await print_title_with_kojo(kojo, 'sleep', bright, this.#dict);
+    await print_title_with_kojo(this.#kojo, 'sleep', bright, this.#dict);
     // STATUSNAME:1 = 熬夜
     era.set('status:0:1', 0);
   }
@@ -349,7 +369,7 @@ module.exports = class extends CustomizedEdu {
     if (key === void 0) {
       await super.race_start(bright, me, callname, hook, extra);
     } else {
-      await kojo[key](dict);
+      await this.#kojo[key](dict);
     }
   }
 
@@ -423,14 +443,14 @@ module.exports = class extends CustomizedEdu {
       case race_enum.arim_kin:
         if (edu_weeks > 96 && extra.rank === 1) {
           dict = this.#dict;
-          const ret = (await kojo['arim_kin_win'](dict))['sex'];
+          const ret = (await this.#kojo['arim_kin_win'](dict))['sex'];
           if (ret === 1) {
             extra.love_change = 5;
           } else if (ret === 2) {
             begin_and_init_ero(0, this.id);
             await print_ero_page(this.id, true);
             await end_ero_and_show_result(true);
-            await kojo['arim_kin_sex'](dict);
+            await this.#kojo['arim_kin_sex'](dict);
           }
           return;
         }
@@ -438,7 +458,7 @@ module.exports = class extends CustomizedEdu {
     if (key === void 0) {
       await super.race_end(bright, me, callname, hook, extra);
     } else {
-      await kojo[key](dict);
+      await this.#kojo[key](dict);
     }
   }
 };

@@ -1,7 +1,3 @@
-/**
- * @file 目白光明 - 爱慕
- * @author KUN
- */
 const era = require('#/era-electron');
 
 const {
@@ -15,7 +11,6 @@ const {
 
 const print_ero_page = require('#/page/page-ero');
 
-const kojo = require('#/event/love/love-74.kojo');
 const CustomizedLove = require('#/event/love/love-common');
 const punish_rejecting_love = require('#/event/love/snippets/punish-rejecting-love');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
@@ -30,14 +25,20 @@ const event_hooks = require('#/data/event/event-hooks');
 const BrightLifeMarks = require('#/data/event/life-event-marks/life-event-marks-74');
 const { location_enum } = require('#/data/locations');
 
+const { i18n } = require('#/i18n/selector');
+
 module.exports = class extends CustomizedLove {
+  get #kojo() {
+    return i18n().kojo[this.id].love;
+  }
+
   get #dict() {
     return generate_dictionary(this.id, { call: !0 });
   }
 
-  async 49(bright) {
+  async 49(bright, me, callname, stage, extra, ebj) {
     if (
-      (await print_title_with_kojo(kojo, '49', bright, this.#dict))[
+      (await print_title_with_kojo(this.#kojo, '49', bright, this.#dict))[
         'update'
       ] === 1
     ) {
@@ -49,9 +50,9 @@ module.exports = class extends CustomizedLove {
     }
   }
 
-  async 74(bright) {
+  async 74(bright, me, callname, stage, extra, ebj) {
     const dober = get_chara_talk(59);
-    await print_title_with_kojo(kojo, '74', bright, {
+    await print_title_with_kojo(this.#kojo, '74', bright, {
       ...this.#dict,
       D_NAME: dober.name,
       D_COLOR: dober.color,
@@ -59,16 +60,16 @@ module.exports = class extends CustomizedLove {
     await sys_love_uma_in_event(this.id);
   }
 
-  async 89(bright) {
+  async 89(bright, me, callname, stage, extra, ebj) {
     if (
-      (await print_title_with_kojo(kojo, '89', bright, this.#dict))[
+      (await print_title_with_kojo(this.#kojo, '89', bright, this.#dict))[
         'update'
       ] === 1
     ) {
       begin_and_init_ero(0, this.id);
       await print_ero_page(this.id, true);
       await end_ero_and_show_result(true);
-      await kojo['89_sex'](this.#dict);
+      await this.#kojo['89_sex'](this.#dict);
       await sys_love_uma_in_event(this.id);
     } else {
       await punish_rejecting_love(this.id);
@@ -77,23 +78,23 @@ module.exports = class extends CustomizedLove {
     }
   }
 
-  async 99(bright, me, callname, stage, extra, event_object) {
+  async 99(bright, me, callname, stage, extra, ebj) {
     if (stage === event_hooks.week_end) {
-      await print_title_with_kojo(kojo, '99_1', bright, this.#dict);
-      add_event(event_hooks.week_start, event_object);
+      await print_title_with_kojo(this.#kojo, '99_1', bright, this.#dict);
+      add_event(event_hooks.week_start, ebj);
     } else {
       if (
         (
-          await print_title_with_kojo(kojo, '99_2', bright, {
+          await print_title_with_kojo(this.#kojo, '99_2', bright, {
             ...this.#dict,
-            CHARA_FULL: bright.name + bright.adult_sex_title,
+            CHARA_FULL: bright.actual_name_with_title,
           })
         )['sex'] === 2
       ) {
         begin_and_init_ero(0, this.id);
         await print_ero_page(this.id, true);
         await end_ero_and_show_result(true);
-        await kojo['99_sex'](this.#dict);
+        await this.#kojo['99_sex'](this.#dict);
       }
       get_custom_mec(this.id).set_callname();
       await sys_love_uma_in_event(this.id);
@@ -103,7 +104,7 @@ module.exports = class extends CustomizedLove {
   /** @param {CharaTalk} bright */
   async small_party(bright) {
     const dober = get_chara_talk(59);
-    await print_title_with_kojo(kojo, 'small_party', bright, {
+    await print_title_with_kojo(this.#kojo, 'small_party', bright, {
       ...generate_dictionary(this.id, { call: !0, uma: !0 }),
       D_COLOR: dober.color,
       D_NAME: dober.name,
@@ -130,9 +131,9 @@ module.exports = class extends CustomizedLove {
       return;
     }
     const dict = this.#dict;
-    const ret = (await print_title_with_kojo(kojo, 'all_along', bright, dict))[
-      'sex'
-    ];
+    const ret = (
+      await print_title_with_kojo(this.#kojo, 'all_along', bright, dict)
+    )['sex'];
     if (ret > 0) {
       begin_and_init_ero(0, this.id);
       if (ret === 2) {
@@ -141,7 +142,7 @@ module.exports = class extends CustomizedLove {
       }
       await print_ero_page(this.id, true);
       await end_ero_and_show_result(true);
-      await kojo['all_along_sex'](dict);
+      await this.#kojo['all_along_sex'](dict);
     }
     return true;
   }
@@ -168,9 +169,9 @@ module.exports = class extends CustomizedLove {
       P_NAME: pama.name,
       YOUNGER_SISTER: bright.younger_sibling_sex_title,
     };
-    const ret = (await print_title_with_kojo(kojo, 'miss_tram', bright, dict))[
-      'sex'
-    ];
+    const ret = (
+      await print_title_with_kojo(this.#kojo, 'miss_tram', bright, dict)
+    )['sex'];
     if (ret > 0) {
       // FLAGNAME:4 = 当前位置
       const curr_loc = era.get('flag:4');
@@ -186,7 +187,7 @@ module.exports = class extends CustomizedLove {
         await print_ero_page(64, true);
       }
       await end_ero_and_show_result(true);
-      await kojo['miss_tram_sex'](dict);
+      await this.#kojo['miss_tram_sex'](dict);
       era.set('flag:4', curr_loc);
     }
     return true;
@@ -198,13 +199,13 @@ module.exports = class extends CustomizedLove {
     const dict = {
       ...generate_dictionary(this.id, { call: !0, uma: !0 }),
       CALL_59: sys_get_callname(this.id, 59),
-      CHARA_FULL: bright.name + bright.adult_sex_title,
+      CHARA_FULL: bright.actual_name_with_title,
       D_COLOR: dober.color,
       D_NAME: dober.name,
       YOUNGER_SISTER: bright.younger_sibling_sex_title,
     };
     if (
-      (await print_title_with_kojo(kojo, 'dear_sister', bright, dict))[
+      (await print_title_with_kojo(this.#kojo, 'dear_sister', bright, dict))[
         'sex'
       ] === 1
     ) {
@@ -219,7 +220,7 @@ module.exports = class extends CustomizedLove {
   async the_fruit(bright) {
     // CFLAGNAME:56 = 节日事件标记
     era.set(`cflag:${this.id}:56`, 0);
-    await print_title_with_kojo(kojo, 'the_fruit', bright, this.#dict);
+    await print_title_with_kojo(this.#kojo, 'the_fruit', bright, this.#dict);
     if (all_reward_in_event(this.id, { relation: 30 })) {
       await era.waitAnyKey();
     }
@@ -239,7 +240,7 @@ module.exports = class extends CustomizedLove {
       return;
     }
     new BrightLifeMarks().know_us = 2;
-    await print_title_with_kojo(kojo, 'know_us', bright, {
+    await print_title_with_kojo(this.#kojo, 'know_us', bright, {
       ...generate_dictionary(this.id, { call: !0, uma: !0 }),
       ELDER_SISTER: bright.elder_sibling_sex_title,
     });
@@ -258,7 +259,7 @@ module.exports = class extends CustomizedLove {
       YOU_CALL_27: sys_get_callname(0, 27),
     };
     const ret = (
-      await print_title_with_kojo(kojo, 'dear_elder_sister', bright, dict)
+      await print_title_with_kojo(this.#kojo, 'dear_elder_sister', bright, dict)
     )['sex'];
     begin_and_init_ero(0, 27, this.id);
     if (ret === 1) {
@@ -270,6 +271,6 @@ module.exports = class extends CustomizedLove {
       await print_ero_page(27, true);
     }
     await end_ero_and_show_result(true);
-    await kojo['dear_elder_sister_sex'](dict);
+    await this.#kojo['dear_elder_sister_sex'](dict);
   }
 };

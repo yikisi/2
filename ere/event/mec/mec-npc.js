@@ -6,12 +6,13 @@ const CustomizedMec = require('#/event/mec/mec-common');
 
 class MecNpc extends CustomizedMec {
   init_love() {
-    if (get(`cflag:${this.id}:种族`) > 0) {
+    // CFLAGNAME:1 = 种族
+    if (get(`cflag:${this.id}:1`) > 0) {
       set(
         `love:${this.id}`,
         Math.min(
-          get('flag:马娘初始爱慕') +
-            (sys_personal_achievement.get(this.id) > 0) * 20,
+          // FLAGNAME:105 = 马娘初始爱慕
+          get('flag:105') + (sys_personal_achievement.get(this.id) > 0) * 20,
           30,
         ),
       );
@@ -22,13 +23,14 @@ class MecNpc extends CustomizedMec {
 
   is_able_to_be_selected() {
     return (
-      get(`cflag:${this.id}:位置`) > 0 ||
-      get(`cflag:${this.id}:育成回合计时`) < 3 * 48
+      // CFLAGNAME:45 = 位置
+      // CFLAGNAME:48 = 育成回合计时
+      get(`cflag:${this.id}:`) > 0 || get(`cflag:${this.id}:48`) < 3 * 48
     );
   }
 
   set_my_sex() {
-    if (get(`cflag:${this.id}:种族`) > 0) {
+    if (get(`cflag:${this.id}:1`) > 0) {
       return super.set_my_sex();
     }
     return 0;

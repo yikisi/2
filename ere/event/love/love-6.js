@@ -24,7 +24,7 @@ module.exports = class extends CustomizedLove {
     return i18n().kojo[this.id].love;
   }
 
-  async 49(oguri) {
+  async 49(oguri, me, callname, stage, extra, ebj) {
     begin_and_init_ero(this.id);
     await masturbate(this.id);
     end_ero_and_train();
@@ -45,7 +45,7 @@ module.exports = class extends CustomizedLove {
     }
   }
 
-  async 74(oguri, me, callname, stage, extra_flag, event_object) {
+  async 74(oguri, me, callname, stage, extra, ebj) {
     const dict = generate_dictionary(this.id, { uma: !0, your_name: !0 });
     if (stage === event_hooks.week_end) {
       if (
@@ -53,7 +53,7 @@ module.exports = class extends CustomizedLove {
           'update'
         ] === 1
       ) {
-        add_event(event_hooks.back_school, event_object);
+        add_event(event_hooks.back_school, ebj);
       } else {
         era.set(`cflag:${this.id}:46`, 74);
       }
@@ -71,7 +71,7 @@ module.exports = class extends CustomizedLove {
     }
   }
 
-  async 89(oguri) {
+  async 89(oguri, me, callname, stage, extra, ebj) {
     await print_title_with_kojo(
       this.#kojo,
       '49',

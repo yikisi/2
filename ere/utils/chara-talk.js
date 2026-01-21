@@ -111,6 +111,12 @@ class CharaTalk {
     return this.sex_code === 1 ? i18n().name.mr : i18n().name.miss;
   }
 
+  get actual_name_with_title() {
+    return (
+      this.sex_code ? i18n().name.sir_template : i18n().name.madam_template
+    ).replace('%NAME%', this.actual_name);
+  }
+
   get couple_title() {
     if (!this.id) {
       return i18n().name.you_mul;

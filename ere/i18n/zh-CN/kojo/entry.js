@@ -14,6 +14,7 @@ class I18nKojo {
   304 = new (require('#/i18n/zh-CN/kojo/900401/entry'))();
   306 = new (require('#/i18n/zh-CN/kojo/900601/entry'))();
   308 = new (require('#/i18n/zh-CN/kojo/900801/entry'))();
+  400 = new (require('#/i18n/zh-CN/kojo/400001/entry'))();
   av_sister = new (require('#/i18n/zh-CN/kojo/av-sister/entry'))();
 }
 

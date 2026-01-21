@@ -1,4 +1,7 @@
 class I18nNames {
+  sir_template = '%NAME%先生';
+  madam_template = '%NAME%小姐';
+
   // Callname
   leading_role = '主人公';
   me = '我';
