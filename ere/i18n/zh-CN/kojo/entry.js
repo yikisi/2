@@ -1,4 +1,5 @@
 class I18nKojo {
+  0 = new (require('#/i18n/zh-CN/kojo/1000/entry'))();
   1 = new (require('#/i18n/zh-CN/kojo/100101/entry'))();
   2 = new (require('#/i18n/zh-CN/kojo/100201/entry'))();
   3 = new (require('#/i18n/zh-CN/kojo/100301/entry'))();

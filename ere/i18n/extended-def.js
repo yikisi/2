@@ -164,6 +164,20 @@ const di18n = {
         (k) => `${k}_desc`,
         ...args,
       ),
+    get punishment() {
+      return [
+        i18n().kojo[0].pn_1,
+        i18n().tb_mark.s_t_no,
+        i18n().tb_mark.s_t_pregnant,
+      ];
+    },
+    get punish_desc() {
+      return [
+        i18n().kojo[0].pn_1_desc,
+        i18n().kojo[0].pn_2_desc,
+        i18n().kojo[0].pn_3_desc,
+      ];
+    },
   },
   timon: {
     get eds_slave() {
@@ -295,6 +309,16 @@ const di18n = {
         i18n().tb_status,
         key,
         i18n().status_desc,
+        (k) => k,
+        ...args,
+      ),
+  },
+  tb_talent: {
+    get_titled_talent: (key, ...args) =>
+      get_titled_content(
+        i18n().tb_talent,
+        key,
+        i18n().talent_desc,
         (k) => k,
         ...args,
       ),

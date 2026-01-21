@@ -29,25 +29,21 @@ const { i18n } = require('#/i18n/selector');
  * @returns {{content:string,[color]:string,display:string,[opacity]:number}[]}
  */
 function sys_get_status(cid) {
-  const status_list = [],
-    show_train_buff =
-      // CFLAGNAME:1 = 种族
-      era.get(`cflag:${cid}:1`) > 0 &&
-      // CFLAGNAME:48 = 育成回合计时
-      (cid === 0 || era.get(`cflag:${cid}:48`) < 3 * 48);
+  const status_list = [];
+  const show_train_buff =
+    // CFLAGNAME:1 = 种族
+    era.get(`cflag:${cid}:1`) > 0 &&
+    // CFLAGNAME:48 = 育成回合计时
+    (cid === 0 || era.get(`cflag:${cid}:48`) < 3 * 48);
   // 淫纹词条
-  if (era.get(`mark:${cid}:${mark_enum.ero}`) === 3) {
+  if (cid > 0 && era.get(`mark:${cid}:${mark_enum.ero}`) === 3) {
     const sex_equip = CharaInmon.get(cid).slave;
     const obj = {
       color: buff_colors[2],
       content: di18n.tb_mark.s_titles[sex_equip],
       fontWeight: 'bold',
+      title: sex_equip > 0 ? di18n.tb_mark.s_descriptions[sex_equip] : void 0,
     };
-    if (!cid) {
-      obj.title = sex_equip > 0 ? i18n().tb_mark.pn_3 : i18n().tb_mark.pn_2;
-    } else {
-      obj.title = di18n.tb_mark.s_descriptions[sex_equip];
-    }
     status_list.push(obj);
   }
   // 个人状态

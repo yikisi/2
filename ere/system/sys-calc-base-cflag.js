@@ -128,49 +128,55 @@ module.exports = {
     const ret = [];
     if (attr > attr_enum.intelligence) {
       if (change < 0) {
-        const in_train = era.get(`tcvar:${cid}:脱力`) !== undefined;
+        const in_train = era.getCharactersInTrain().includes(cid);
         let debuff =
           sys_get_debuff(cid) +
-          (era.get('flag:当前位置') === location_enum.beach &&
-            attr === attr_enum.hp) *
+          // FLAGNAME:4 = 当前位置
+          (era.get('flag:4') === location_enum.beach && attr === attr_enum.hp) *
             0.2;
         if (debuff <= 10) {
           change = Math.floor(change * (debuff + 1));
         }
         if (attr === attr_enum.hp) {
           let lose_weight =
-            1 -
-            0.4 * era.get(`status:${cid}:发胖`) +
-            era.get(`status:${cid}:健康茶`);
-          if (era.get('cflag:207:招募状态') === recruit_flags.yes) {
+            // STATUSNAME:3 = 发胖
+            // STATUSNAME:16 = 健康茶
+            1 - 0.4 * era.get(`status:${cid}:3`) + era.get(`status:${cid}:16`);
+          // CFLAGNAME:66 = 招募状态
+          if (era.get('cflag:207:66') === recruit_flags.yes) {
             lose_weight += 0.5;
           }
-          era.add(`base:${cid}:体重偏差`, lose_weight * change);
+          // BASENAME:12 = 体重偏差
+          era.add(`base:${cid}:12`, lose_weight * change);
           sys_change_pressure(cid, get_random_value(change / 5, 0));
           let delta = Math.min(-change / 500, 1);
-          if (era.get(`base:${cid}:体力`) < 0.45 * max) {
+          // BASENAME:0 = 体力
+          if (era.get(`base:${cid}:0`) < 0.45 * max) {
             delta += Math.random();
           }
           if (in_train) {
             add_attr_exp(cid, attr_enum.endurance, delta);
           } else {
-            era.add(`base:${cid}:耐力`, delta);
+            // BASENAME:6 = 耐力
+            era.add(`base:${cid}:6`, delta);
           }
         } else {
           sys_change_lust(cid, get_random_value(change, 0) / 4);
           let lose_pressure = get_random_value(change / 10, 0);
-          if (era.get('cflag:344:招募状态') === recruit_flags.yes) {
+          if (era.get('cflag:344:66') === recruit_flags.yes) {
             lose_pressure *= 1.5;
           }
           sys_change_pressure(cid, lose_pressure);
           let delta = Math.min(-change / 500, 1);
-          if (era.get(`base:${cid}:精力`) < 0.5 * max) {
+          // BASENAME:1 = 精力
+          if (era.get(`base:${cid}:1`) < 0.5 * max) {
             delta += Math.random();
           }
           if (in_train) {
             add_attr_exp(cid, attr_enum.intelligence, delta);
           } else {
-            era.add(`base:${cid}:智力`, delta);
+            // BASENAME:9 = 智力
+            era.add(`base:${cid}:9`, delta);
           }
         }
       }
@@ -179,9 +185,9 @@ module.exports = {
       } else {
         change = Math.min(change, -1);
       }
-    } else if (cid && !(era.get(`cflag:${cid}:育成回合计时`) < 3 * 48)) {
+    } else if (cid && !(era.get(`cflag:${cid}:66`) < 3 * 48)) {
       return [];
-    } else if (attr === attr_enum.speed && era.get(`status:${cid}:发胖`)) {
+    } else if (attr === attr_enum.speed && era.get(`status:${cid}:3`)) {
       return [];
     }
     if (change > max - val) {
@@ -231,10 +237,9 @@ module.exports = {
    * @param {number} val
    */
   sys_change_weight(cid, val) {
-    era.add(
-      `base:${cid}:体重偏差`,
-      val * (10 + era.get(`talent:${cid}:进食控制`)),
-    );
+    // BASENAME:12 = 体重偏差
+    // TALENTNAME:14 = 进食控制
+    era.add(`base:${cid}:12`, val * (10 + era.get(`talent:${cid}:14`)));
   },
   /** @param {number} cid */
   sys_fix_chara_base(cid) {

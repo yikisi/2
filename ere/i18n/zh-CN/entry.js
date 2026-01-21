@@ -143,6 +143,7 @@ class I18nEntry {
   nt_ask = '是否查看相关的小纸条？';
   nt_no = '之后去标题界面确认';
 
+  ui_ellipses = '……';
   ui_back = '返回';
   ui_achieve_title = '获得新成就！';
   ui_yes = '确定';
@@ -211,9 +212,11 @@ class I18nEntry {
   tb_mark = new (require('#/i18n/zh-CN/table/mark'))();
   tb_stain = new (require('#/i18n/zh-CN/table/stain'))();
   tb_status = new (require('#/i18n/zh-CN/table/status'))();
+  tb_talent = new (require('#/i18n/zh-CN/table/talent'))();
   abl_desc = new (require('#/i18n/zh-CN/sex/abl-desc'))();
   item_desc = new (require('#/i18n/zh-CN/table/item-desc'))();
   status_desc = new (require('#/i18n/zh-CN/table/status-desc'))();
+  talent_desc = new (require('#/i18n/zh-CN/table/talent-desc'))();
 
   train_action = new (require('#/i18n/zh-CN/sex/actions'))();
   inmon = new (require('#/i18n/zh-CN/sex/inmons'))();

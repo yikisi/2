@@ -26,7 +26,6 @@ const {
 } = require('#/data/color-const');
 const { hair_colors } = require('#/data/const.json');
 const { get_date } = require('#/data/date-indicator');
-const talent_desc = require('#/data/desc/talents.json');
 const CharaInmon = require('#/data/ero/chara-inmon');
 const { mark_colors, mark_enum } = require('#/data/ero/mark-const');
 const { lust_border } = require('#/data/ero/orgasm-const');
@@ -34,7 +33,6 @@ const { part_enum } = require('#/data/ero/part-const');
 const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const {
   pregnant_stage_enum,
-  trained_talent_names,
   vp_status_enum,
 } = require('#/data/ero/status-const');
 const recruit_flags = require('#/data/event/recruit-flags');
@@ -93,28 +91,7 @@ const levels = {
   relation: [-100, 0, 75, 150, 225, 375, 525],
 };
 
-const talent_names = [
-  ['粗神经', '感性'],
-  ['自大', '自卑'],
-  ['坚强', '怕痛'],
-  ['开朗', '阴郁'],
-  ['外向', '内向'],
-  ['温柔', '叛逆'],
-  ['懦弱', '强势'],
-  ['傲娇', '坦率'],
-  ['乐观', '悲观'],
-  ['猎奇', '无关心'],
-  ['贞操无定', '贞洁'],
-  ['社牛', '社恐'],
-  ['爱净', '不修边幅'],
-  ['守时', '夜猫子'],
-  ['有节制', '爱吃'],
-  ['勤劳', '懒惰'],
-  ['精明', '铺张'],
-  ['体弱多病', '身强体健'],
-];
-
-const breast_talent_names = ['贫乳', '', '巨乳', '爆乳'];
+const breast_talent_keys = ['br_micro', '', 'br_big', 'br_huge'];
 
 /** @type {{chara:Record<string,()=>string>,player:Record<string,()=>string>}} */
 const penis_state = {
@@ -662,53 +639,47 @@ module.exports = {
     return skin_colors[era.get(`cflag:${cid}:10`) + 1];
   },
   get_talent(cid) {
-    const yandere = era.get(`talent:${cid}:病娇`),
-      ret = get_custom_mec(cid).get_talents();
-    if (yandere === 2 || (yandere > 0 && era.get('status:0:马语者') > 0)) {
-      const temp = {
-        color: buff_colors[3],
-        content: '病娇',
-        opacity: yandere / 2,
-      };
+    // TALENTNAME:21 = 病娇
+    const yandere = era.get(`talent:${cid}:21`);
+    const ret = get_custom_mec(cid).get_talents();
+    // TALENTNAME:23 = 马语者
+    if (yandere === 2 || (yandere > 0 && era.get('status:0:23') > 0)) {
       const inmon = CharaInmon.get(cid);
       if (inmon.on(plugin_enum.no_yand)) {
-        delete temp.color;
-        delete temp.opacity;
-        temp.title = '已缓和。';
+        ret.push(di18n.tb_talent.get_titled_talent('no_yand'));
       } else if (inmon.on(plugin_enum.ntr)) {
-        temp.color = el_success_color;
-        delete temp.opacity;
-        temp.title = '已扭曲。';
+        ret.push({
+          ...di18n.tb_talent.get_titled_talent('re_yand'),
+          color: el_success_color,
+        });
+      } else {
+        ret.push({
+          ...di18n.tb_talent.get_titled_talent(21),
+          color: buff_colors[3],
+          opacity: yandere / 2,
+        });
       }
-      ret.push(temp);
     }
-    if (era.get(`talent:${cid}:捉摸不透`)) {
-      ret.push({ content: '捉摸不透' });
+    // TALENTNAME:0 - 17 = 情感活动 = 身体素质
+    for (let tid = 0; tid <= 17; ++tid) {
+      const val = era.get(`talent:${cid}:${tid}`);
+      if (val !== 0) {
+        ret.push(di18n.tb_talent.get_titled_talent(`${tid}_${val}`));
+      }
     }
-    ret.push(
-      ...new Array(18)
-        .fill(0)
-        .map((_, i) => {
-          return {
-            id: i,
-            val: era.get(`talent:${cid}:${i}`),
-          };
-        })
-        .filter((e) => e.val)
-        .map((e) => ({
-          content: talent_names[e.id][(e.val + 1) / 2],
-        })),
-    );
-    return ret.map((e) => {
-      if (e.title === undefined) {
-        e.title = talent_desc[e.content];
+    // TALENTNAME:20 = 捉摸不透
+    if (era.get(`talent:${cid}:20`) > 0) {
+      ret.push(di18n.tb_talent.get_titled_talent(20));
+    }
+    return ret.map((s) => {
+      if (s.title !== void 0) {
+        s.title = i18n()
+          .talent_desc.template.replace('%NAME%', s.content)
+          .replace('%DESC%', s.title);
       }
-      e.content = `[${e.content}]`;
-      if (e.title !== undefined) {
-        e.title = `${e.content}：${e.title}`;
-      }
-      e.display = 'inline-block';
-      return e;
+      s.content = i18n().tb_talent.template.replace('%NAME%', s.content);
+      s.display = 'inline-block';
+      return s;
     });
   },
   get_talent_bust_size,
@@ -747,8 +718,9 @@ module.exports = {
     ret +=
       levels.honour.buff[
         level +
-          (era.get('cflag:304:招募状态') === recruit_flags.yes) +
-          (era.get('cflag:306:招募状态') === recruit_flags.yes)
+          // CFLAGNAME:66 = 招募状态
+          (era.get('cflag:304:66') === recruit_flags.yes) +
+          (era.get('cflag:306:66') === recruit_flags.yes)
       ] ?? 0;
     if (cid > 0) {
       if (relation > 525) {
@@ -762,107 +734,109 @@ module.exports = {
     return ret;
   },
   get_xp(cid) {
-    if (era.get(`cflag:${cid}:成长阶段`) < 2) {
-      return ['……'];
+    // CFLAGNAME:65 = 成长阶段
+    if (era.get(`cflag:${cid}:65`) < 2) {
+      return [i18n().ui_ellipses];
     }
+    const ret = [];
+    const final = () =>
+      ret.map((s) => {
+        if (s.title !== void 0) {
+          s.title = i18n()
+            .talent_desc.template.replace('%NAME%', s.content)
+            .replace('%DESC%', s.title);
+        }
+        s.content = i18n().tb_talent.template.replace('%NAME%', s.content);
+        s.color ??= buff_colors[2];
+        s.display = 'inline-block';
+        return s;
+      });
     const show_all_body =
-        !cid || era.get('status:0:马语者') || era.get('status:0:透视镜片'),
-      breast_talent = get_talent_bust_size(get_breast_cup(cid, show_all_body)),
-      talent_list = [];
-    if (breast_talent_names[breast_talent + 1]) {
-      talent_list.push(breast_talent_names[breast_talent + 1]);
+      // STATUSNAME:26 = 透视镜片
+      !cid || era.get('status:0:23') || era.get('status:0:26');
+    const breast_talent = get_talent_bust_size(
+      get_breast_cup(cid, show_all_body),
+    );
+    if (breast_talent !== 0) {
+      ret.push(
+        di18n.tb_talent.get_titled_talent(
+          breast_talent_keys[breast_talent + 1],
+        ),
+      );
     }
     if (
       cid > 0 &&
-      era.get(`exp:${cid}:性爱次数`) === era.get(`exp:${cid}:睡奸次数`) &&
-      era.get('status:0:马语者') === 0 &&
-      era.get('status:0:马跳次数镜片') === 0
+      // EXPNAME:25 - 26 = 性爱次数 - 睡奸次数
+      era.get(`exp:${cid}:25`) === era.get(`exp:${cid}:26`) &&
+      // STATUSNAME:23 = 马语者
+      !era.get('status:0:23') &&
+      // STATUSNAME:25 = 马跳次数镜片
+      !era.get('status:0:25')
     ) {
-      return [
-        ...talent_list.map((e) => {
-          const print_obj = {
-            color: buff_colors[2],
-            content: `[${e}]`,
-            display: 'inline-block',
-          };
-          if (talent_desc[e]) {
-            print_obj.title = `[${e}]：${talent_desc[e]}`;
-          }
-          return print_obj;
-        }),
-        '……',
-      ];
+      return [...final(), i18n().ui_ellipses];
     }
-    const sex = era.get(`cflag:${cid}:性别`);
+    // CFLAGNAME:0 = 性别
+    const sex = era.get(`cflag:${cid}:0`);
     if (sex - 1) {
-      if (era.get(`talent:${cid}:泌乳`) === 3) {
-        talent_list.push('母乳体质');
+      // TALENTNAME:32 - 33 = 泌乳 - 乳头类型
+      if (era.get(`talent:${cid}:32`) === 3) {
+        ret.push(di18n.tb_talent.get_titled_talent('milk'));
       }
-      if (era.get(`talent:${cid}:乳头类型`) === 2) {
-        talent_list.push('凹陷乳头');
+      if (era.get(`talent:${cid}:33`) === 2) {
+        ret.push(di18n.tb_talent.get_titled_talent('nipple'));
       }
-      if (era.get(`talent:${cid}:隐形巨乳`) && breast_talent > 0) {
-        talent_list.push('隐形巨乳');
+      // TALENTNAME:37 = 隐形巨乳
+      if (era.get(`talent:${cid}:37`) > 0 && breast_talent > 0) {
+        ret.push(di18n.tb_talent.get_titled_talent(37));
       }
     }
     if (sys_check_cuckold(cid)) {
-      talent_list.push({
+      ret.push({
+        ...di18n.tb_talent.get_titled_talent(22),
         color: el_success_color,
-        content: '[绿帽癖]',
-        title: `[绿帽癖]：${talent_desc['绿帽癖']}`,
       });
     }
-    if (era.get(`talent:${cid}:钢之意志`)) {
-      talent_list.push({
+    // TALENTNAME:57 = 钢之意志
+    if (era.get(`talent:${cid}:57`)) {
+      ret.push({
+        ...di18n.tb_talent.get_titled_talent(57),
         color: mark_colors.iron,
-        content: '[钢之意志]',
-        title: `[钢之意志]：${talent_desc['钢之意志']}`,
       });
     }
-    talent_list.push(...new Array(3).fill(0).map((_, i) => i + 40));
-    const ero = era.get(`talent:${cid}:工口意愿`);
-    if (ero) {
-      talent_list.push(ero > 0 ? '好色' : '性保守');
+    // TALENTNAME:40 - 42 = 抖S - 喜欢痛苦
+    for (let tid = 40; tid <= 42; ++tid) {
+      ret.push(di18n.tb_talent.get_titled_talent(tid));
     }
-    talent_list.push(
-      ...new Array(4).fill(0).map((_, i) => i + 44),
-      ...get_filtered_talents(sex, 50),
-      ...get_filtered_talents(sex, 60)
-        .map((t) => {
-          return {
-            id: t,
-            level: era.get(`talent:${cid}:${t}`),
-          };
-        })
-        .filter((e) => e.level)
-        .map(
-          (e) => trained_talent_names[era.get(`talentname:${e.id}`)][e.level],
-        ),
-      ...new Array(8).fill(0).map((_, i) => i + 70),
-    );
-    return talent_list
-      .map((e) => {
-        if (typeof e === 'number') {
-          return era.get(`talent:${cid}:${e}`)
-            ? era.get(`talentname:${e}`).toUpperCase()
-            : '';
-        }
-        return e;
-      })
-      .filter((e) => e)
-      .map((e) => {
-        const print_obj =
-          typeof e === 'object'
-            ? e
-            : {
-                color: buff_colors[2],
-                content: `[${e}]`,
-              };
-        print_obj.display = 'inline-block';
-        if (talent_desc[e]) {
-          print_obj.title = `[${e}]：${talent_desc[e]}`;
-        }
-        return print_obj;
-      });
+    // TALENTNAME:43 = 工口意愿
+    const ero = era.get(`talent:${cid}:43`);
+    if (ero > 0) {
+      ret.push(di18n.tb_talent.get_titled_talent(`43_${ero}`));
+    }
+    // TALENTNAME:44 - 47 = 小恶魔 - 淫乱
+    for (let tid = 44; tid <= 47; ++tid) {
+      if (era.get(`talent:${cid}:${tid}`) > 0) {
+        ret.push(di18n.tb_talent.get_titled_talent(tid));
+      }
+    }
+    // TALENTNAME:50 - 56 = 荡唇 - 魔尻
+    for (const tid of get_filtered_talents(sex, 50)) {
+      if (era.get(`talent:${cid}:${tid}`) > 0) {
+        ret.push(di18n.tb_talent.get_titled_talent(tid));
+      }
+    }
+    // TALENTNAME:60 - 66 = 淫口 - 早泄
+    for (const tid of get_filtered_talents(sex, 60)) {
+      const val = era.get(`talent:${cid}:${tid}`);
+      if (val !== 0) {
+        ret.push(di18n.tb_talent.get_titled_talent(`${tid}_${val}`));
+      }
+    }
+    // TALENTNAME:70 - 77 = 饮精成瘾 - 气味敏感
+    for (let tid = 70; tid <= 77; ++tid) {
+      if (era.get(`talent:${cid}:${tid}`) > 0) {
+        ret.push(di18n.tb_talent.get_titled_talent(tid));
+      }
+    }
+    return final();
   },
 };

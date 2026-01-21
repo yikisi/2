@@ -37,6 +37,7 @@ pregnant_stage_names[1 << pregnant_stage_enum.late] =
 pregnant_stage_names[1 << pregnant_stage_enum.pre_birth] =
   '迎接生命奇迹的时刻即将到来，该做好准备了';
 
+// TODO Remove
 /*** @type {Record<string,Record>} */
 const trained_talent_names = {};
 [

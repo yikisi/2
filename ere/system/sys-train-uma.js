@@ -68,11 +68,11 @@ function get_success_base_reward(
   between_weeks,
 ) {
   let base_inc = train_level * 2 + get_random_value(3, 8);
-
   let train_buff =
     get_train_bonus(cid, attr, between_weeks) +
-    10 * (era.get(`cflag:${cid}:位置`) === location_enum.beach);
-  if (between_weeks !== undefined) {
+    // CFLAGNAME:45 = 位置
+    10 * (era.get(`cflag:${cid}:45`) === location_enum.beach);
+  if (between_weeks !== void 0) {
     if (between_weeks.teach_chara > 0) {
       train_buff +=
         Math.max(
@@ -124,12 +124,13 @@ function get_success_base_reward(
     changes.attr_change = changes.attr_change.map((e) => e + (e > 0));
   }
   changes.pt_change += 1.25 * (train_level - 1);
-  if (era.get('cflag:341:招募状态') === recruit_flags.yes) {
+  // CFLAGNAME:66 = 招募状态
+  if (era.get('cflag:341:66') === recruit_flags.yes) {
     changes.pt_change =
       changes.pt_change * (1 + 0.25 * (1 + new GodolphinLifeMarks().buff));
   }
   if (
-    between_weeks !== undefined &&
+    between_weeks !== void 0 &&
     between_weeks.teach_chara > 0 &&
     train_buff > 0
   ) {
@@ -227,7 +228,8 @@ module.exports = {
     const buffer = [];
     const changes = { attr_change: new Array(5).fill(0), pt_change: 0 };
     const t_level =
-      era.get(`cflag:${cid}:位置`) === location_enum.beach
+      // CFLAGNAME:45 = 位置
+      era.get(`cflag:${cid}:45`) === location_enum.beach
         ? 5
         : // ABLNAME:0 - 4 = 速度训练等级 - 智力训练等级
           era.get(`abl:${cid}:${attr}`) || 1;
@@ -235,10 +237,12 @@ module.exports = {
       stamina: -time_cost[t_level - 1] * get_random_value(0.9, 1.2, true),
       time: -time_cost[t_level - 1],
     };
-    let relation_change = era.get(`status:${cid}:摸鱼`) ? -10 : 0;
+    // STATUSNANE:2 = 摸鱼
+    let relation_change = era.get(`status:${cid}:2`) ? -10 : 0;
 
     const stamina_ratio =
-      era.get(`base:${cid}:体力`) / era.get(`maxbase:${cid}:体力`);
+      // BASENAME:0 = 体力
+      era.get(`base:${cid}:0`) / era.get(`maxbase:${cid}:0`);
     const succ_rate = sys_get_succ_rate(cid, attr, extra_buff);
     const f_succ = Math.random() * 100 < succ_rate;
 
@@ -255,9 +259,9 @@ module.exports = {
         t_level,
         t_cost,
         changes,
-        era.get(`cflag:${cid}:位置`) !== era.get('cflag:0:位置')
+        era.get(`cflag:${cid}:45`) !== era.get('cflag:0:45')
           ? { teach_chara: 0 }
-          : undefined,
+          : void 0,
       );
 
       /** @type {TrainSuccessParams} */
@@ -265,7 +269,7 @@ module.exports = {
         cid,
         event_hooks.train_success,
         new TrainSuccessParams(
-          stamina_ratio * !era.get(`status:${cid}:摸鱼`),
+          stamina_ratio * !era.get(`status:${cid}:2`),
           attr,
         ),
       );
@@ -368,7 +372,8 @@ module.exports = {
           stat &&
           (stat > 0
             ? Math.max(stat, 1)
-            : Math.min((stat * (100 - era.get('flag:训练加成'))) / 100, -1)),
+            : // FLAGNAME:101 = 训练加成
+              Math.min((stat * (100 - era.get('flag:101'))) / 100, -1)),
       )
       .forEach((stat, index) => {
         const to_print = sys_change_attr_and_print(cid, index, stat);
@@ -386,7 +391,8 @@ module.exports = {
         content: `获得了 ${changes.pt_change.toLocaleString()} 点技能点数`,
         type: 'text',
       });
-      era.add(`exp:${cid}:技能点数`, changes.pt_change);
+      // EXPNAME:1 = 技能点数
+      era.add(`exp:${cid}:1`, changes.pt_change);
     }
     if (
       f_succ &&
@@ -422,6 +428,7 @@ module.exports = {
       sys_hurt_uma(cid, 1);
       sys_change_fame(-1);
     }
+    // STATUSNAME:0 = 练习X手
     if (era.get(`status:${cid}:0`) > 0) {
       era.add(`status:${cid}:0`, -1);
     }

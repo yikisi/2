@@ -37,7 +37,7 @@ class MecChild extends CustomizedMec {
           100 * (buff + 1),
         ),
         color: get_chara_color(308),
-        fontWeight: buff > 0 ? 'bold' : undefined,
+        fontWeight: buff > 0 ? 'bold' : void 0,
       });
     }
     return ret;
