@@ -568,14 +568,15 @@ async function sys_next_week() {
     // 一个月四个星期，假设生日在第二周，则四周分别为：排卵期 出生周 经期 无
     if (c_sex !== 1) {
       if (is_p_slave) {
-        if (!era.get(`status:${cid}:发情`) && race > 0) {
-          era.set(`status:${cid}:发情`, 1);
+        // STATUSNAME:30 - 32 = 经期 - 危险期
+        if (era.get(`status:${cid}:30`) > 0) {
+          era.set(`status:${cid}:30`, 0);
         }
-        if (era.get(`status:${cid}:经期`) > 0) {
-          era.set(`status:${cid}:发情`, 0);
+        if (!era.get(`status:${cid}:31`)) {
+          era.set(`status:${cid}:31`, 1);
         }
-        if (!era.get(`status:${cid}:排卵期`)) {
-          era.set(`status:${cid}:排卵期`, 1);
+        if (!era.get(`status:${cid}:32`) && race > 0) {
+          era.set(`status:${cid}:32`, 1);
         }
       } else if (growth_stage >= 1) {
         // 经期为出生周的下一周（简单计算）
