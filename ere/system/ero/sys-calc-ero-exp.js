@@ -153,6 +153,9 @@ module.exports = {
         ]);
       }
     }
+    // EXPNAME:30 = 接吻次数
+    era.add(`exp:${aid}:30`, 1);
+    era.add(`exp:${did}:30`, 1);
   },
   /**
    * @param {string} date

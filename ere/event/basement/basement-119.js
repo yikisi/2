@@ -1,10 +1,10 @@
-const era = require('#/era-electron');
-
+const { update_kiss_exp } = require('#/system/ero/sys-calc-ero-exp');
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
 const CustomizedBase = require('#/event/basement/basement-common');
 const generate_dictionary = require('#/event/snippets/generate-dictionary');
 
+const { get_date } = require('#/data/date-indicator');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
 const { i18n } = require('#/i18n/selector');
@@ -71,9 +71,7 @@ module.exports = class extends CustomizedBase {
       b_start: life_marks.b_start,
     });
     if (life_marks.b_start) {
-      // EXPNAME:30 = 接吻次数
-      era.add('exp:0:30', 1);
-      era.add('exp:119:30', 1);
+      update_kiss_exp(get_date(), this.id, 0);
     }
   }
 

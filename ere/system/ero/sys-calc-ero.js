@@ -67,8 +67,6 @@ function sys_do_sex(atk, def, item) {
       switch (def_part) {
         case part_enum.mouth:
           atk_s_part = '接吻';
-          era.add(`exp:${atk.id}:接吻次数`, 1);
-          era.add(`exp:${def.id}:接吻次数`, 1);
           if (!atk.id || !def.id) {
             era.add(`tcvar:${atk.id || def.id}:获得因子`, 1);
           }
