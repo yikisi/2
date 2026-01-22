@@ -558,17 +558,15 @@ module.exports = async () => {
                   EventMarks.get(0).sub(event_hooks.out_shopping);
                 }
               }
-              set_image_t(21);
             }
             if (version <= 2172) {
               check_titles(33, 113);
-              set_image_t(7);
-              set_image_t(25);
-            }
-            if (version <= 2200) {
-              set_image_t(302);
             }
             if (version < era.get('gamebase').version) {
+              set_image_t(7);
+              set_image_t(21);
+              set_image_t(25);
+              set_image_t(302);
               era.getAddedCharacters().forEach((cid) => {
                 if (cid > 0) {
                   const t_table = era.get(`chara:${cid}`)?.talent;
