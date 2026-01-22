@@ -67,8 +67,8 @@ function check_titles(...ids) {
 }
 
 function set_image_t(cid) {
-  if (era.getAddedCharacters().indexOf(cid) !== -1) {
-    // CSTRNAME:13 = 头像T
+  // CSTRNAME:13 = 头像T
+  if (era.getAddedCharacters().includes(cid) && !era.get(`cstr:${cid}:13`)) {
     // CSTRNAME:10 = 头像
     era.set(`cstr:${cid}:13`, era.get(`staticcstr:${cid}:10`));
   }
@@ -564,6 +564,9 @@ module.exports = async () => {
               check_titles(33, 113);
               set_image_t(7);
               set_image_t(25);
+            }
+            if (version <= 2200) {
+              set_image_t(302);
             }
             if (version < era.get('gamebase').version) {
               era.getAddedCharacters().forEach((cid) => {
