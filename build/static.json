@@ -15906,7 +15906,8 @@
           "5": "",
           "6": "条形",
           "10": "矮子",
-          "11": "猫咪女王"
+          "11": "猫咪女王",
+          "13": "矮子"
         },
         "talent": {
           "32": 0,
@@ -17681,8 +17682,8 @@
       "title": "EraUma",
       "gameCode": 29407,
       "defaultChara": 0,
-      "version": 2200,
-      "versionName": "2.2 (agito)",
+      "version": 2201,
+      "versionName": "2.201 (agito)",
       "allowVersion": 1000,
       "site": "https://gitgud.io/umaera/erauma/-/releases/permalink/latest",
       "versionCheck": "https://umaera.gitgud.site/erauma/RELEASE",
@@ -19498,26 +19499,6 @@
       "posY": 0,
       "type": 0
     },
-    "阿船2_头": {
-      "path": "res/ero/100701/head/脸底.png",
-      "x": 0,
-      "y": 0,
-      "width": 720,
-      "height": 720,
-      "posX": 0,
-      "posY": 0,
-      "type": 0
-    },
-    "阿船2_头_发": {
-      "path": "res/ero/100701/head/头发.png",
-      "x": 0,
-      "y": 0,
-      "width": 720,
-      "height": 720,
-      "posX": 0,
-      "posY": 0,
-      "type": 0
-    },
     "阿船_脸_一般": {
       "path": "res/ero/100701/head/face/普通.png",
       "x": 0,
@@ -19580,6 +19561,26 @@
     },
     "阿船_脸_睡": {
       "path": "res/ero/100701/head/face/睡着.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "阿船2_头": {
+      "path": "res/ero/100701/head/脸底.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "阿船2_头_发": {
+      "path": "res/ero/100701/head/头发.png",
       "x": 0,
       "y": 0,
       "width": 720,
@@ -20648,16 +20649,6 @@
       "posY": 0,
       "type": 0
     },
-    "茶座2_裸": {
-      "path": "res/ero/102501/body/咖啡.png",
-      "x": 0,
-      "y": 0,
-      "width": 720,
-      "height": 720,
-      "posX": 0,
-      "posY": 0,
-      "type": 0
-    },
     "茶座_头_发": {
       "path": "res/ero/102501/head/头发.png",
       "x": 0,
@@ -20700,16 +20691,6 @@
     },
     "茶座_头_腮红": {
       "path": "res/ero/102501/head/腮红.png",
-      "x": 0,
-      "y": 0,
-      "width": 720,
-      "height": 720,
-      "posX": 0,
-      "posY": 0,
-      "type": 0
-    },
-    "茶座2_头": {
-      "path": "res/ero/102501/head/脸底.png",
       "x": 0,
       "y": 0,
       "width": 720,
@@ -20780,6 +20761,26 @@
     },
     "茶座_脸_睡": {
       "path": "res/ero/102501/head/face/睡觉.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "茶座2_裸": {
+      "path": "res/ero/102501/body/咖啡.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "茶座2_头": {
+      "path": "res/ero/102501/head/脸底.png",
       "x": 0,
       "y": 0,
       "width": 720,
@@ -21280,6 +21281,176 @@
     },
     "速子_脸_睡": {
       "path": "res/ero/103201/head/face/睡着.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "织姬_裸": {
+      "path": "res/ero/103301/body/无毛.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "织姬_裸_汗": {
+      "path": "res/ero/103301/body/体汗.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "织姬_裸_腋毛": {
+      "path": "res/ero/103301/body/腋毛.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "织姬_裸_阴毛": {
+      "path": "res/ero/103301/body/阴毛.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "织姬_裸_孕": {
+      "path": "res/ero/103301/body/孕肚.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "织姬_头_发": {
+      "path": "res/ero/103301/head/头发.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "织姬_头_汗": {
+      "path": "res/ero/103301/head/汗.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "织姬_头_泪": {
+      "path": "res/ero/103301/head/眼泪.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "织姬_头": {
+      "path": "res/ero/103301/head/脸底.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "织姬_头_腮红": {
+      "path": "res/ero/103301/head/腮红.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "织姬_脸_一般": {
+      "path": "res/ero/103301/head/face/普通.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "织姬_脸_兴奋": {
+      "path": "res/ero/103301/head/face/兴奋.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "织姬_脸_嫌恶": {
+      "path": "res/ero/103301/head/face/嫌恶.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "织姬_脸_害羞": {
+      "path": "res/ero/103301/head/face/羞涩.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "织姬_脸_痛苦": {
+      "path": "res/ero/103301/head/face/痛苦.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "织姬_脸_睡": {
+      "path": "res/ero/103301/head/face/睡着.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "织姬_脸_高潮": {
+      "path": "res/ero/103301/head/face/高潮.png",
       "x": 0,
       "y": 0,
       "width": 720,
@@ -23110,6 +23281,36 @@
     },
     "矮子_脸_睡": {
       "path": "res/ero/900201/head/face/睡着.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "矮子2_裸": {
+      "path": "res/ero/900201/body/无毛-戴帽.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "矮子2_头": {
+      "path": "res/ero/900201/head/脸底.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "矮子2_头_发": {
+      "path": "res/ero/900201/head/头发-戴帽.png",
       "x": 0,
       "y": 0,
       "width": 720,
