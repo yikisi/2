@@ -7,90 +7,130 @@ const era = require('#/era-electron');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
 const { add_event, cb_enum } = require('#/event/queue');
-const kojo = require('#/event/rec/rec-89.kojo');
 const CustomizedRecruit = require('#/event/rec/rec-common');
-const print_event_name = require('#/event/snippets/print-event-name');
+const generate_dictionary = require('#/event/snippets/generate-dictionary');
+const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const { get_chara_color } = require('#/data/chara-colors');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
-const { get_trainer_title } = require('#/data/info-generator');
+
+const { i18n } = require('#/i18n/selector');
+const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
 module.exports = class extends CustomizedRecruit {
-  async recruit(stage, event_obj) {
-    const dict = {};
+  async recruit(stage, ebj) {
     const grand = get_chara_talk(this.id);
-    const me = get_chara_talk(0);
-    dict['你'] = era.get('callname:0:-2');
-    dict['马娘'] = grand.uma_sex_title;
-    dict['少女'] = grand.teen_sex_title;
-    dict['她'] = grand.sex;
-    dict['女孩'] = grand.child_sex_title;
-    dict['代表色'] = grand.color;
+    const kojo = i18n().kojo[this.id].recruit;
+    let temp;
     switch (stage) {
       case event_hooks.recruit:
         if (
-          sys_filter_chara('cflag', '招募状态', recruit_flags.yes).length ===
-            1 &&
-          era.get('flag:当前声望') < 500
+          // CFLAGNAME:66 = 招募状态
+          sys_filter_chara('cflag', '66', recruit_flags.yes).length === 1 &&
+          // FLAGNAME:15 = 当前声望
+          era.get('flag:15') < 500
         ) {
-          await print_event_name('高尚骏逸登场！：「开头」', grand);
-          if ((await kojo['开头'](dict)).at(-1) === 1) {
-            era.set('flag:物色对象', this.id);
+          if (
+            (
+              await print_title_with_kojo(
+                kojo,
+                'rec0',
+                grand,
+                generate_dictionary(this.id, { child: !0, teen: !0, uma: !0 }),
+              )
+            )['rec'] === 1
+          ) {
+            // FLAGNAME:33 = 物色对象
+            era.set('flag:33', this.id);
             add_event(
               event_hooks.school_atrium,
               new EventObject(this.id, cb_enum.recruit),
             );
             new EventMarks(0).add(event_hooks.school_atrium);
-            era.set(`cflag:${this.id}:随机招募`, 0);
+            // CFLAGNAME:67 = 随机招募
+            era.set(`cflag:${this.id}:67`, 0);
           }
         } else {
-          dict['训练员头衔'] = get_trainer_title().prefix();
-          await print_event_name('高尚骏逸登场！：「开端」', grand);
-          if ((await kojo['开端'](dict)).at(-1) <= 2) {
-            await kojo['开端结束'](dict);
-            era.set(`cflag:${this.id}:招募状态`, recruit_flags.yes);
+          const dict = {
+            ...generate_dictionary(this.id, {
+              call: !0,
+              child: !0,
+              teen: !0,
+              uma: !0,
+              title: !0,
+            }),
+            YOURPHY: get_chara_talk(0).phy_sex_title,
+          };
+          if (
+            (await print_title_with_kojo(kojo, 'beginning', grand, dict))[
+              'rec'
+            ] <= 2
+          ) {
+            await kojo['beginning2'](dict);
+            era.set(`cflag:${this.id}:66`, recruit_flags.yes);
           }
         }
         break;
       case event_hooks.school_atrium:
-        if (era.get('flag:当前互动') > 0) {
-          add_event(stage, event_obj);
+        // FLAGNAME:5 = 当前互动角色
+        if (era.get('flag:5') > 0) {
+          add_event(stage, ebj);
           return;
         }
         new EventMarks(0).sub(event_hooks.school_atrium);
-        await print_event_name('高尚骏逸登场！：「起锚」', grand);
-        if ((await kojo['起锚'](dict)).at(-1) === 2) {
-          add_event(event_hooks.recruit_start, event_obj);
+        if (
+          (
+            await print_title_with_kojo(
+              kojo,
+              'rec1',
+              grand,
+              generate_dictionary(this.id, { uma: !0 }),
+            )
+          )['rec'] === 2
+        ) {
+          add_event(event_hooks.recruit_start, ebj);
           new EventMarks(0).add(event_hooks.recruit_start);
           return true;
         } else {
-          era.set('flag:物色对象', 0);
-          era.set(`cflag:${this.id}:随机招募`, 1);
+          era.set('flag:33', 0);
+          era.set(`cflag:${this.id}:67`, 1);
         }
         break;
       case event_hooks.recruit_start:
         new EventMarks(0).sub(event_hooks.recruit_start);
-        await print_event_name('高尚骏逸登场！：「入海」', grand);
-        dict['强击代表色'] = get_chara_color(91);
-        dict['极峰代表色'] = get_chara_color(90);
-        dict['姐姐'] = grand.get_bigger_sibling_sex_title();
-        dict['男性'] = me.get_phy_sex_title();
-        dict['他'] = me.sex;
-        dict['玩家名'] = me.actual_name;
-        dict['训练员先生'] = '训练员' + me.get_adult_sex_title();
-        if ((await kojo['入海'](dict))[1] === 1) {
-          era.set(`cflag:${this.id}:招募状态`, recruit_flags.yes);
+        temp = [get_chara_talk(90), get_chara_talk(91)];
+        if (
+          (
+            await print_title_with_kojo(kojo, 'rec2', grand, {
+              ...generate_dictionary(this.id, {
+                call: !0,
+                teen: !0,
+                uma: !0,
+                your_name: !0,
+                your_sex: !0,
+              }),
+              '91_CALL_90': sys_get_callname(91, 90),
+              CALL_90: sys_get_callname(this.id, 90),
+              COLOR_90: temp[0].color,
+              COLOR_91: temp[1].color,
+              NAME_90: temp[0].name,
+              NAME_91: temp[1].name,
+              YOUNGER_SISTER: i18n().name.younger_sister,
+              YOURPHY: get_chara_talk(0).phy_sex_title,
+            })
+          )['rec'] === 1
+        ) {
+          era.set(`cflag:${this.id}:66`, recruit_flags.yes);
         } else {
-          era.set(`cflag:${this.id}:随机招募`, 1);
+          era.set(`cflag:${this.id}:67`, 1);
         }
-        era.set('flag:物色对象', 0);
+        era.set('flag:33', 0);
     }
-    if (era.get(`cflag:${this.id}:招募状态`) === recruit_flags.yes) {
+    if (era.get(`cflag:${this.id}:66`) === recruit_flags.yes) {
       await this.recruit_end();
       if (stage !== event_hooks.recruit) {
         return true;
