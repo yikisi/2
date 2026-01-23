@@ -139,9 +139,11 @@ function get_jewel_result(cid, j_names, j_info, a_info) {
     );
   }
   if (!cid) {
-    for (const g_name of gene_juel_names) {
-      const final = era.get(`juel:${cid}:${g_name}`);
-      const got = era.get(`gotjuel:${cid}:${g_name}`);
+    // JEWELNAME:20 - 22 = 粉 - 白
+    for (let jid = 20; jid <= 22; ++jid) {
+      const final = era.get(`jewel:${cid}:${jid}`);
+      const got = j_info[jid];
+      const g_name = gene_juel_names[jid - 20];
       if (got > 0) {
         buffer.push(
           {
