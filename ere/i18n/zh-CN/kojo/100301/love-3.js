@@ -354,7 +354,7 @@ module.exports = {
     /**
      * @param {CharaTalk} teio
      * @param {CharaTalk} me
-     * @param {number} tname
+     * @param {string} tname
      * @return {Promise<number[]>}
      */
     const f = async (teio, me, tname) => {

@@ -19,6 +19,7 @@ function generate_dictionary(
   options = {
     call: false,
     child: false,
+    phy: false,
     sir: false,
     teen: false,
     title: false,
@@ -43,11 +44,14 @@ function generate_dictionary(
   if (options.teen) {
     ret.TEEN = sex ? i18n().name.teenager : i18n().name.frail;
   }
-  if (options.title) {
-    ret.TITLE = get_trainer_title().prefix();
+  if (options.phy) {
+    ret.PHY = sex ? i18n().name.male : i18n().name.female;
   }
   if (options.uma) {
     ret.UMA = sex ? i18n().name.uma_boy : i18n().name.uma_girl;
+  }
+  if (options.title) {
+    ret.TITLE = get_trainer_title().prefix();
   }
   if (options.your_name) {
     ret.YOURNAME = get_display_name(era.get('callname:0:-1'));

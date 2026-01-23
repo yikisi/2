@@ -27,6 +27,8 @@ const yandere_list = require('#/data/event/yandere-list');
 const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 
+const { i18n } = require('#/i18n/selector');
+
 /** @type {Record<string,function(CharaTalk,CharaTalk):{[handle]:function:Promise,[name]:string}>} */
 const handlers = {};
 
@@ -81,20 +83,19 @@ handlers[303] = () =>
     : {};
 
 handlers[343] = () =>
-  era.get('cflag:343:招募状态') !== recruit_flags.yes &&
+  // CFLAGNAME:66 = 招募状态
+  era.get('cflag:343:66') !== recruit_flags.yes &&
   new MayLifeMarks().who_am_i === 3
     ? {
-        name: '「一起努力吧！」（招募）',
+        name: i18n().kojo[this.id].rec_button,
         handle() {
           era.set('callname:343:-2', '904301');
-          era.set('cflag:343:招募状态', recruit_flags.yes);
-          if (era.get('talent:343:病娇')) {
+          era.set('cflag:343:66', recruit_flags.yes);
+          // TALENTNAME:21 = 病娇
+          if (era.get('talent:343:21') > 0) {
             yandere_list.push(343);
           }
-          return era.printAndWait([
-            get_chara_talk(343).get_colored_name(),
-            ' 加入了队伍！',
-          ]);
+          return i18n().timon.recruit.rec_end(get_chara_talk(343));
         },
       }
     : {};

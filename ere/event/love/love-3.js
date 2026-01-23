@@ -17,7 +17,7 @@ const { get_filtered_talents } = require('#/data/info-generator');
 const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends CustomizedLove {
-  async 49(teio, me, callname) {
+  async 49(teio, me, callname, stage, extra, ebj) {
     await print_event_name(i18n().kojo[this.id].love[49].title, teio);
     await i18n().kojo[this.id].love[49](teio, me, callname);
     // TALENTNAME:0 = 情感活动
@@ -27,7 +27,7 @@ module.exports = class extends CustomizedLove {
     await sys_love_uma_in_event(3);
   }
 
-  async 74(teio, me) {
+  async 74(teio, me, callname, stage, extra, ebj) {
     await print_event_name(i18n().kojo[this.id].love[74].title, teio);
     if ((await i18n().kojo[this.id].love[74](teio, me))[0] === 1) {
       const temp = get_random_entry(
@@ -47,7 +47,7 @@ module.exports = class extends CustomizedLove {
     }
   }
 
-  async 89(teio, me) {
+  async 89(teio, me, callname, stage, extra, ebj) {
     const is_hurt = era.get('status:3:100') > 0;
     // CFLAGNAME:100 = 腿伤
     const f = i18n().kojo[this.id].love[is_hurt ? '89-1' : '89-2'];
@@ -80,7 +80,7 @@ module.exports = class extends CustomizedLove {
     }
   }
 
-  async 99(teio, me) {
+  async 99(teio, me, callname, stage, extra, ebj) {
     await print_event_name(i18n().kojo[this.id].love[99].title, teio);
     const temp = get_random_entry(
       new Array(8)
