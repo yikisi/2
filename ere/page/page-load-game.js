@@ -71,8 +71,8 @@ function check_titles(...ids) {
 }
 
 function set_image_t(cid) {
-  if (era.getAddedCharacters().includes(cid)) {
-    // CSTRNAME:13 = 头像T
+  // CSTRNAME:13 = 头像T
+  if (era.getAddedCharacters().includes(cid) && !era.get(`cstr:${cid}:13`)) {
     // CSTRNAME:10 = 头像
     era.set(`cstr:${cid}:13`, era.get(`staticcstr:${cid}:10`));
   }
@@ -572,12 +572,9 @@ module.exports = async () => {
                   EventMarks.get(0).sub(event_hooks.out_shopping);
                 }
               }
-              set_image_t(21);
             }
             if (version <= 2172) {
               check_titles(33, 113);
-              set_image_t(7);
-              set_image_t(25);
             }
             // i18n - 将游戏存档内所有字符串改成 i18n 框架内的内容
             // TODO CSTR里一堆性经历也要改
@@ -599,6 +596,10 @@ module.exports = async () => {
               });
             }
             if (version < era.get('gamebase').version) {
+              set_image_t(7);
+              set_image_t(21);
+              set_image_t(25);
+              set_image_t(302);
               era.getAddedCharacters().forEach((cid) => {
                 if (cid > 0) {
                   const t_table = era.get(`chara:${cid}`)?.talent;

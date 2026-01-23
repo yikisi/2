@@ -17,7 +17,7 @@ const { location_enum } = require('#/data/locations');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},FalconEduMarks,number,number,EventObject):Promise>} handlers */
 module.exports = (handlers = {}) => {
-  handlers.beginning = async (me, falcon, callname) => {
+  handlers.beginning = async (falcon, me, callname) => {
     const flash = get_chara_talk(37);
     await print_event_name(`喊声隆隆的沙地赛`, falcon);
     // 对于偶像活动相当热枕，但对于比赛有点强迫自己上去，可能是对失败未来的恐惧
@@ -37,14 +37,17 @@ module.exports = (handlers = {}) => {
     await era.printAndWait(
       `雪花从天空悄然落到肩头，然后化为了潮湿的水汽，看台上的观众们裹着厚厚的围巾与大衣，手中挥舞着旗帜和彩带，此起彼伏的加油助威声打破了冬日的宁静。`,
     );
-    await say_by_passer_by(`赛${falcon.get_uma_sex_title()}`, `哈啊啊啊啊！`);
+    await say_by_passer_by_and_wait(
+      `赛${falcon.get_uma_sex_title()}`,
+      `哈啊啊啊啊！`,
+    );
     await era.printAndWait(
       `两名${falcon.uma_sex_title}在前半段的比赛中一直位于先头阵营，但并未真正与马群拉开差距。直到最后的冲刺阶段才骤然加速，将马群逐渐甩在后面。`,
     );
     await era.printAndWait(
       `观众席上的尽然有序的加油助威声被戏剧性的场面划破而杂乱无章。`,
     );
-    await say_by_passer_by(
+    await say_by_passer_by_and_wait(
       `解说`,
       `两人之间毫不相让，距离终点还有200米！100米！50米！最后的胜利者是——`,
     );
@@ -98,11 +101,9 @@ module.exports = (handlers = {}) => {
       `荣进闪耀，是荣进闪耀小姐没错吧。今晚真是个风和日丽的好日子。`,
     );
     await era.printAndWait(
-      `考虑到由学生来打招呼有点让${callname}不太舒服，同时抱着了解对方的目的，${callname}主动向对方打起了招呼。`,
+      `由学生来打招呼有点让${me.name}不太舒服，同时抱着了解对方的目的，${me.name}主动向对方打起了招呼。`,
     );
-    await flash.say_and_wait(
-      `是呢，晚上好哦，${callname}${me.get_adult_sex_title()}/小姐。`,
-    );
+    await flash.say_and_wait(`是呢，晚上好哦，${callname}。`);
     await me.say_and_wait(
       `是在等待${falcon.name}小姐回来吗？请放心，${falcon.name}小姐已经平安回到宿舍中了。`,
     );
@@ -537,7 +538,7 @@ module.exports = (handlers = {}) => {
     await falcon.say_and_wait(`说起来，接下来的训练方针是——`);
     await era.printAndWait(`时间便在闲聊与训练之中度过。`);
   };
-  handlers[47 + 32] = async (me, falcon, _, event_object) => {
+  handlers[47 + 32] = async (falcon, me, _, event_object) => {
     const callname = sys_get_callname(46, 0);
     if (
       era.get('cflag:0:位置') !== location_enum.beach ||
@@ -630,7 +631,7 @@ module.exports = (handlers = {}) => {
     );
     await falcon.say_and_wait(`就这样一步步的迈向最高的舞台。`);
   };
-  handlers[47 + 39] = async (me, falcon) => {
+  handlers[47 + 39] = async (falcon, me) => {
     const callname = sys_get_callname(46, 0);
     // 萱草 忘忧草，寓意忘记烦恼。
     // 过量摄入可能会中毒

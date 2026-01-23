@@ -413,12 +413,11 @@ function init_ero(...ids) {
       // CFLAGNAME:48 = 育成回合计时
       let edu_phase = era.get(`cflag:${cid}:48`);
       if (edu_phase < 3 * 48) {
-        edu_phase = Math.floor(edu_phase / 48) / 3;
-        const juels = sys_count_juels(cid);
+        const juels = sys_count_juels(cid, Math.floor(edu_phase / 48) / 3);
         // TCVARNAME:70 - 72 = 粉因子 - 白因子
-        era.set(`tcvar:${cid}:70`, Math.floor(juels.pink * edu_phase));
-        era.set(`tcvar:${cid}:71`, Math.floor(juels.blue * edu_phase));
-        era.set(`tcvar:${cid}:72`, Math.floor(juels.white * edu_phase));
+        era.set(`tcvar:${cid}:70`, Math.floor(juels.pink));
+        era.set(`tcvar:${cid}:71`, Math.floor(juels.blue));
+        era.set(`tcvar:${cid}:72`, Math.floor(juels.white));
       } else {
         for (let i = 0; i < 3; ++i) {
           // TCVARNAME:70 - 72 = 粉因子 - 白因子
@@ -648,12 +647,15 @@ function end_ero(skip_jewels, log_jewels, ids) {
       }
     }
   }
-  for (let i = 0; i < 3; ++i) {
-    // JEWELNAME:20 - 22 = 粉 - 白
-    era.add(`jewel:0:${20 + i}`, era.get(`gotjewel:0:${20 + i}`));
+  // JEWELNAME:20 - 22 = 粉 - 白
+  for (let jid = 20; jid <= 22; ++jid) {
+    era.add(
+      `jewel:0:${jid}`,
+      (ret.jewel[0][jid] = era.get(`gotjewel:0:${jid}`)),
+    );
   }
   if (!log_jewels) {
-    ret.jewel = undefined;
+    ret.jewel = void 0;
   }
   era
     .get('jewelkeys')
@@ -679,20 +681,20 @@ async function end_ero_and_show_result(shown = true) {
   const info = end_ero(false, shown, chara_list);
   if (shown) {
     if (era.get('flag:马跳结果显示简报') > 0) {
-      for (const chara_id of chara_list) {
+      for (const cid of chara_list) {
         const buffer = get_jewel_result(
-          chara_id,
+          cid,
           j_names,
-          info.jewel[chara_id],
-          info.attr[chara_id],
+          info.jewel[cid],
+          info.attr[cid],
         );
         era.printMultiColumns(buffer, { width: 18 });
         await era.waitAnyKey();
       }
     } else {
-      let result_flag = true,
-        page = 0,
-        chara_index = 0;
+      let result_flag = true;
+      let page = 0;
+      let chara_index = 0;
       era.println();
       get_chara_talk(302).say_as_unknown('发 表！高潮播报～♫');
       get_chara_talk(301).say_as_unknown('以下报上这次马儿跳的结果简报～');

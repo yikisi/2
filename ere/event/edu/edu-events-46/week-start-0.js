@@ -65,7 +65,7 @@ module.exports = (handlers) => {
       `不论是赛场还是舞台，比谁都要闪耀的存在，${falcon.sex}选择了这个方向啊。`,
     );
     await falcon.say_and_wait(
-      `毕竟飞鹰子是闪闪发光的${falcon.get_uma_sex_title()}偶像呦⭐`,
+      `毕竟飞鹰子是闪闪发光的${falcon.uma_sex_title}偶像呦⭐`,
     );
     await falcon.say_and_wait(
       `从过去到现在，直到之后的未来，都会一直闪耀下去的${falcon.get_uma_sex_title()}偶像!`,

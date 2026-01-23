@@ -105,7 +105,7 @@ class MejiroEvents {
         await good_events[key]({
           ...this.#dict,
           first: +!this.params[key],
-          reward,
+          reward: reward.toString(),
         });
         this.params[key] = true;
         era.add('item:「恩宠」', reward);
@@ -159,7 +159,7 @@ class MejiroEvents {
         const ret = await good_events[key]({
           ...this.#dict,
           first: +!this.params[key],
-          reward,
+          reward: reward.toString(),
         });
         this.params[key] = true;
         if (ret[0] === 1) {
@@ -212,8 +212,8 @@ class MejiroEvents {
           (
             await normal_events[key]({
               ...this.#dict,
-              reward,
               first: +!this.params[key],
+              reward: reward.toString(),
             })
           )[0] === 1
         ) {
@@ -231,8 +231,8 @@ class MejiroEvents {
           (
             await normal_events[key]({
               ...this.#dict,
-              reward,
               first: +!this.params[key],
+              reward: reward.toString(),
             })
           )[0] === 1
         ) {
