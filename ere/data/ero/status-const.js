@@ -130,11 +130,6 @@ module.exports = {
     1: '男性',
     10: '女性？',
   },
-  player_sex_title: {
-    0: '女士',
-    1: '先生',
-    10: '女士……？',
-  },
   pregnant_stage_enum,
   pregnant_stage_names,
   // SM时的称呼

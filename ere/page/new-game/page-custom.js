@@ -686,7 +686,7 @@ async function page_custom() {
               temp = '';
               do {
                 if (temp) {
-                  await era.printAndWait('太长了，请重新输入！');
+                  await era.printAndWait(i18n().ui_too_long);
                 }
                 temp = era.set('callname:0:-2', await era.input());
               } while (temp.length > 6);

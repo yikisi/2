@@ -129,30 +129,21 @@ const di18n = {
     }
     return ret.join('\n') || void 0;
   },
-  achievement: {
-    get n_type() {
-      const _ = i18n().achievement;
-      return [
-        _.type_edu,
-        _.type_race,
-        _.type_love,
-        _.type_sex,
-        _.type_birth,
-        _.type_end,
-        _.type_all,
-        _.type_hidden,
-      ];
-    },
+  name: {
     /**
-     * @param {number} r
+     * @param {string} name
+     * @param {number} sex
      * @returns {string}
      */
-    get_rarity_name(r) {
-      return i18n().achievement[`rarity_${r}`];
-    },
-    get n_platinum() {
-      const _ = i18n().achievement;
-      return [_.platinum_all];
+    get_name_with_adult_title(name, sex) {
+      switch (sex) {
+        case 0:
+        case 10:
+          return i18n().name.madam_template.replace('%NAME%', name);
+        case 1:
+          return i18n().name.sir_template.replace('%NAME%', name);
+      }
+      return name;
     },
   },
   kojo: {
@@ -219,6 +210,32 @@ const di18n = {
         _.ed_saying_10,
         _.ed_saying_13,
       ];
+    },
+  },
+  achievement: {
+    get n_type() {
+      const _ = i18n().achievement;
+      return [
+        _.type_edu,
+        _.type_race,
+        _.type_love,
+        _.type_sex,
+        _.type_birth,
+        _.type_end,
+        _.type_all,
+        _.type_hidden,
+      ];
+    },
+    /**
+     * @param {number} r
+     * @returns {string}
+     */
+    get_rarity_name(r) {
+      return i18n().achievement[`rarity_${r}`];
+    },
+    get n_platinum() {
+      const _ = i18n().achievement;
+      return [_.platinum_all];
     },
   },
   tb_item: {

@@ -14,9 +14,33 @@ module.exports = class extends I18nNames {
   she_mul = 'They';
   mr = 'Mr.';
   miss = 'Miss.';
+  dad = 'Dad';
+  mom = 'Mom';
+  dad_baby = 'Daddy';
+  mom_baby = 'Mommy';
+  boy = 'Boy';
+  girl = 'Girl';
   uma_girl = 'Umamusume';
+  trainer_m = 'Mr. Trainer';
+  trainer_f = 'Miss. Trainer';
 
   900111 = 'Miss. Hayakawa';
+  900112 = 'Mr. Hayakawa';
+  900311 = 'Miss. Otonashi';
+  900511 = 'Miss. Anshinzawa';
+  900811 = 'Miss. Light';
+  900812 = 'Mr. Light';
+  904411 = 'Miss. Tsurugi';
+  904311 = 'Miss. Satake';
+  904312 = 'Mr. Satake';
+  904313 = 'May';
+  904511 = 'Miss. Sugar';
+  904512 = 'Mr. Sugar';
+  904911 = 'Miss. Tucker';
+  904912 = 'Mr. Tucker';
+  905011 = 'Miss. Hoshina';
+  905111 = 'Miss. Yunohana';
+  905112 = 'Mr. Yunohana';
 
   // Special
   ruby_mother = 'Hagino Top Lady';

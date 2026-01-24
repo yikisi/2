@@ -125,15 +125,44 @@ class I18nEntry {
   tt_disclaimer_accept =
     '我读完并理解了以上 8 条，我对自己负责，我不删，我要玩。';
   tt_disclaimer_reject = '分男女搭配！不玩了！';
-  tt_birthday_comma = '，';
-  tt_birthday_conjunction = ' 和 ';
   tt_birthday_notify = (birth_list) => ['今天是 ', ...birth_list, ' 的诞生日'];
+  tt_version_template = '版本号：v%VERSION%';
+  tt_version_resource = '适配资源包版本：';
   tt_new_game = '开始新游戏';
   tt_load_game = '加载存档';
   tt_achieve = '游戏成就';
   tt_chara_achieve = '角色成就';
   tt_help = '帮助说明';
   tt_copyrights = '制作鸣谢';
+  tt_links = '相关链接：';
+  tt_link_release = 'EraUma 游戏发布页';
+  tt_link_desk_engine = 'EraElectron 引擎（PC 版）发布页';
+  tt_link_app_engine = 'ere.app 引擎（安卓版）发布页';
+  tt_link_community = 'ERA 特雷森学园（Discord 社区）';
+  tt_link_wiki = 'Wiki（使用说明/游戏设定/口上写作指引……）';
+
+  ng_custom = '做我自己';
+  ng_rp = '扮演角色';
+  ng_rp_select = '选择要扮演的角色';
+  ng_select_me = '我自己';
+
+  ng_select_tip_1 = '带有 * 号后缀的角色有口上';
+  ng_select_tip_2 = '只有完成了个人成就的角色才能进行扮演';
+  ng_select_tip_3 = (clist) => [...clist, ' 等特殊角色无法扮演'];
+
+  ng_info1 =
+    '十年寒窗终于金榜题名，\n邮箱里的那封信烫着金漆，\n闪着与你刚刚拿到的那块训练员徽章同样颜色的光芒。\n\n你用还在颤抖的手取下了上面的火漆————';
+  ng_info2 =
+    '聘书\n…………\n…………\n…………\n…………\n…………\n…………\n…………兹聘请贵方担任我校训练员一职。';
+  ng_info3 = '日本中央特雷森学园理事长';
+  ng_sign = (name) => ['(署名)', { isBlank: 2 }, name];
+  ng_time = ['(时间)', { isBlank: 2 }, '2000 年 1 月 1 日'];
+  ng_input_name =
+    '——然后在左下角签上了自己的名字（输入名字后回车，限定10个字符以内）';
+  ng_select_sex = '（请选择性别）';
+  ng_resign = '重新签名';
+  ng_submit = '提交聘书';
+  ng_re_select_sex = '重新选择性别';
 
   tk_speak_border = ['「', '」'];
   tk_think_border = ['（', '）'];
@@ -143,6 +172,9 @@ class I18nEntry {
   nt_ask = '是否查看相关的小纸条？';
   nt_no = '之后去标题界面确认';
 
+  ui_comma = '，';
+  ui_comma2 = '、';
+  ui_conjunction = ' 和 ';
   ui_ellipses = '……';
   ui_back = '返回';
   ui_achieve_title = '获得新成就！';
@@ -160,6 +192,7 @@ class I18nEntry {
     ' 周',
   ];
   ui_month_template = '%MONTH% 个月';
+  ui_too_long = '（太长了，请重新输入！）';
 
   ui_show_team = '查看队伍列表';
   ui_train = '训练';

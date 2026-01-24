@@ -16,7 +16,7 @@ class I18nNames {
   dad = '爸爸';
   mom = '妈妈';
   dad_baby = '叭叭';
-  mon_baby = '麻麻';
+  mom_baby = '麻麻';
   boy = '男孩';
   girl = '女孩';
   son = '儿子';
@@ -25,6 +25,7 @@ class I18nNames {
   frail = '少女';
   male = '男性';
   female = '女性';
+  futa = '扶她';
   brothers = '兄弟';
   sisters = '姐妹';
   elder_brother = '哥哥';

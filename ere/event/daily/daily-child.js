@@ -60,7 +60,7 @@ class DailyChild extends CustomizedDaily {
           get_chara_talk(0),
           {
             color: get_chara_color(0),
-            content: fid === 0 ? i18n().name.dad_baby : i18n().name.mon_baby,
+            content: fid === 0 ? i18n().name.dad_baby : i18n().name.mom_baby,
             fontWeight: 'bold',
           },
         );
@@ -121,7 +121,7 @@ class DailyChild extends CustomizedDaily {
         // CFLAGNAME:15 = 父方角色
         content: !era.get(`cflag:${this.id}:15`)
           ? i18n().name.dad_baby
-          : i18n().name.mon_baby,
+          : i18n().name.mom_baby,
         fontWeight: 'bold',
       };
     } else {

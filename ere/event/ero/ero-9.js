@@ -17,7 +17,7 @@ const { ero_hooks } = require('#/data/event/ero-hooks');
 
 module.exports = class extends CustomizedEro {
   /** @author 黑奴队长 */
-  async ero_start() {
+  async ero_start(h) {
     if (
       era.getCharactersInTrain().length === 2 &&
       sys_check_awake(0) &&
@@ -30,7 +30,7 @@ module.exports = class extends CustomizedEro {
       !era.get('status:9:弗隆P') &&
       (era.get('item:弗隆K') || era.get('item:弗隆P'))
     ) {
-      era.set('tcvar:9:TS大和T', 1);
+      era.set('flag:TS大和T', 1);
       const daiwa = get_chara_talk(9),
         me = get_chara_talk(0);
       await print_event_name('训练员身体不适！？', daiwa);
@@ -131,7 +131,7 @@ module.exports = class extends CustomizedEro {
 
   /** @author 黑奴队长 */
   async ero_end(handle_ero_act) {
-    if (era.get('tcvar:9:TS大和T')) {
+    if (era.get('flag:TS大和T')) {
       const daiwa = get_chara_talk(9),
         me = get_chara_talk(0),
         callname = sys_get_callname(9, 0);
@@ -259,7 +259,7 @@ module.exports = class extends CustomizedEro {
   }
 
   filter_in_rape() {
-    if (era.get('tcvar:9:TS大和T') || era.get('flag:惩戒力度') >= 2) {
+    if (era.get('flag:TS大和T') || era.get('flag:惩戒力度') >= 2) {
       return (e) =>
         (e >= ero_hooks.missionary && e <= ero_hooks.stimulate_g_spot) ||
         (e >= ero_hooks.double_fuck && e <= ero_hooks.spit_roast);

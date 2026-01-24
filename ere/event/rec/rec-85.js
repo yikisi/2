@@ -16,7 +16,7 @@ const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
 const RubyLifeMarks = require('#/data/event/life-event-marks/life-event-marks-85');
-const { yes } = require('#/data/event/recruit-flags');
+const recruit_flags = require('#/data/event/recruit-flags');
 const { get_breast_cup } = require('#/data/info-generator');
 
 /** @type {Record<string,function(extra_flag:*,event_object:EventObject):Promise<boolean>>} */
@@ -661,7 +661,7 @@ handlers[event_hooks.week_start] = async () => {
   era.set('callname:0:85', '108511');
 
   new RubyLifeMarks().after_recruit = 1;
-  era.set('cflag:85:招募状态', yes);
+  era.set('cflag:85:招募状态', recruit_flags.yes);
   era.set('flag:物色对象', 0);
 };
 

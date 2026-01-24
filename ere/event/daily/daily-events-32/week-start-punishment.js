@@ -21,7 +21,7 @@ const { get_random_entry } = require('#/utils/list-utils');
 const EroParticipant = require('#/data/ero/ero-participant');
 const { part_enum } = require('#/data/ero/part-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
-const { yes } = require('#/data/event/recruit-flags');
+const recruit_flags = require('#/data/event/recruit-flags');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,number,number)>} handlers */
 module.exports = (handlers) => {
@@ -570,7 +570,7 @@ module.exports = (handlers) => {
     );
     era.println();
 
-    if (era.get('cflag:25:招募状态') === yes) {
+    if (era.get('cflag:25:招募状态') === recruit_flags.yes) {
       init_ero(25);
       await quick_make_love(
         new EroParticipant(25, part_enum.hit),
@@ -596,7 +596,7 @@ module.exports = (handlers) => {
       era.println();
     }
 
-    if (era.get('cflag:94:招募状态') === yes) {
+    if (era.get('cflag:94:招募状态') === recruit_flags.yes) {
       !get_penis_size(94) && era.set('status:94:弗隆P', 1);
       init_ero(94);
       era.set('palam:94:阴茎快感', era.get('tcvar:94:阴茎快感上限'));
@@ -623,7 +623,7 @@ module.exports = (handlers) => {
       era.println();
     }
 
-    if (era.get('cflag:9:招募状态') === yes) {
+    if (era.get('cflag:9:招募状态') === recruit_flags.yes) {
       !get_penis_size(9) && era.set('status:9:弗隆P', 1);
       init_ero(9);
       era.set('palam:9:阴茎快感', era.get('tcvar:9:阴茎快感上限'));
@@ -654,7 +654,7 @@ module.exports = (handlers) => {
       era.println();
     }
 
-    if (era.get('cflag:5:招募状态') === yes) {
+    if (era.get('cflag:5:招募状态') === recruit_flags.yes) {
       init_ero(5);
       await quick_make_love(
         new EroParticipant(5, part_enum.abuse),
@@ -674,7 +674,7 @@ module.exports = (handlers) => {
       era.println();
     }
 
-    if (era.get('cflag:36:招募状态') === yes) {
+    if (era.get('cflag:36:招募状态') === recruit_flags.yes) {
       !get_penis_size(36) && era.set('status:36:弗隆P', 1);
       init_ero(36);
       era.set('palam:36:阴茎快感', era.get('tcvar:36:阴茎快感上限'));

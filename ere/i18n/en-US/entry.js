@@ -27,13 +27,14 @@ module.exports = class extends I18nEntry {
   moti_3 = 'Better';
   moti_4 = 'Best';
 
-  tt_birthday_comma = ', ';
-  tt_birthday_conjunction = ' and ';
   tt_birthday_notify = (birth_list) => [
     'Today is the birthday of ',
     ...birth_list,
   ];
 
+  ui_comma = ', ';
+  ui_comma2 = this.ui_comma;
+  ui_conjunction = ' and ';
   ui_back = 'BACK';
   ui_achieve_title = 'New Achievement!';
   ui_yes = 'YES';

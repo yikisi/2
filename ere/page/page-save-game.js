@@ -5,6 +5,8 @@ const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
 const { get_save_name } = require('#/data/info-generator');
 
+const { i18n } = require('#/i18n/selector');
+
 module.exports = async () => {
   let flag_save_game = true;
   let msg_notification = '';
@@ -70,13 +72,12 @@ module.exports = async () => {
 
     switch (ret) {
       case 97:
+        era.print('请输入存档命名：（最长不超过20个字符）');
         ret = '';
         do {
-          era.print(
-            `${
-              ret ? '名字太长了！' : ''
-            }请输入新的存档命名：（最长不超过20个字符）`,
-          );
+          if (ret) {
+            era.print(i18n().ui_too_long);
+          }
           ret = await era.input();
         } while (ret && ret.length > 50);
         if (
@@ -125,12 +126,11 @@ module.exports = async () => {
           }
         } else {
           let name;
+          era.print('请输入新的存档命名：（最长不超过50个字符）');
           do {
-            era.print(
-              `${
-                name ? '名字太长了！' : ''
-              }请输入新的存档命名：（最长不超过50个字符）`,
-            );
+            if (name) {
+              era.print(i18n().ui_too_long);
+            }
             name = await era.input();
           } while (name && name.length > 50);
           if (

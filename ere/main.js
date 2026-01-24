@@ -112,12 +112,12 @@ module.exports = async () => {
         content: get_display_name(era.get(`static:${cid}:name`)),
         fontWeight: 'bold',
       })),
-      i18n().tt_birthday_comma,
+      i18n().ui_comma,
     );
-    if (i18n().tt_birthday_comma !== i18n().tt_birthday_conjunction) {
-      const b_index = ret.findLastIndex((e) => e === i18n().tt_birthday_comma);
+    if (i18n().ui_comma !== i18n().ui_conjunction) {
+      const b_index = ret.findLastIndex((e) => e === i18n().ui_comma);
       if (b_index !== -1) {
-        ret[b_index] = i18n().tt_birthday_conjunction;
+        ret[b_index] = i18n().ui_conjunction;
       }
     }
     return ret;
@@ -134,18 +134,18 @@ module.exports = async () => {
         let ret = 0;
         if (achievements.length > 0) {
           era.drawLine();
-          era.printButton('做我自己', 1);
-          era.printButton('扮演角色', 2);
+          era.printButton(i18n().ng_custom, 1);
+          era.printButton(i18n().ng_rp, 2);
           if ((await era.input()) === 2) {
             era.printMultiColumns([
-              { config: { content: '选择要扮演的角色' }, type: 'divider' },
+              { config: { content: i18n().ng_rp_select }, type: 'divider' },
               {
                 accelerator: 0,
                 config: {
                   align: 'center',
                   width: 6,
                 },
-                content: '我自己',
+                content: i18n().ng_select_me,
                 type: 'button',
               },
               ...achievements.map((e) => {
@@ -165,23 +165,25 @@ module.exports = async () => {
               }),
               {
                 content: [
-                  '* 带有',
-                  { content: '*', fontWeight: 'bold' },
-                  '号后缀的角色有口上',
+                  '* ',
+                  i18n().ng_select_tip_1,
                   { isBr: true },
-                  '** 只有完成了个人成就的角色才能进行扮演',
+                  '** ',
+                  i18n().ng_select_tip_2,
                   { isBr: true },
                   '*** ',
-                  get_copyright_entry(201),
-                  '、',
-                  get_copyright_entry(204),
-                  '、',
-                  get_copyright_entry(301),
-                  '、',
-                  get_copyright_entry(304),
-                  '、',
-                  get_copyright_entry(400),
-                  ' 等特殊角色无法扮演',
+                  ...i18n().ng_select_tip_3(
+                    join_list(
+                      [
+                        get_copyright_entry(201),
+                        get_copyright_entry(204),
+                        get_copyright_entry(301),
+                        get_copyright_entry(304),
+                        get_copyright_entry(400),
+                      ],
+                      i18n().ui_comma2,
+                    ),
+                  ),
                 ],
                 type: 'text',
               },
@@ -190,7 +192,8 @@ module.exports = async () => {
           }
         }
         if (await new_game(ret)) {
-          era.set('global:新手教学', 1);
+          // GLOBALNAME:1 = 新手教学
+          era.set('global:1', 1);
           await homepage();
         }
       },
@@ -216,11 +219,10 @@ module.exports = async () => {
             type: 'divider',
           },
           ...era
-            .get('chara')
+            .getAllCharacters()
             .filter((cid) => cid > 0 && cid < first_child_id)
             .map((cid) => {
-              let name = era.get(`static:${cid}:name`);
-              name = __(`name.${name}`, name);
+              const name = get_display_name(era.get(`static:${cid}:name`));
               let title = get_custom_check(cid)
                 .get_this()
                 .get_personal_achieve();
@@ -307,7 +309,7 @@ module.exports = async () => {
         era.setAlign('center');
         era.setHorizontalAlign('space-evenly');
         const bottom_columns = [
-          { content: '\n', type: 'text' },
+          { content: [{ isBr: true }], type: 'text' },
           {
             accelerator: 0,
             config: { align: 'center', disableWarning: true },
@@ -327,7 +329,7 @@ module.exports = async () => {
           await era.delay(800);
         }
         era.replaceInColRows(...copyrights, [
-          { content: '\n', type: 'text' },
+          { content: [{ isBr: true }], type: 'text' },
           {
             accelerator: 0,
             config: {
@@ -368,12 +370,15 @@ module.exports = async () => {
           { config: { width: 7 }, names: 'logo', type: 'image.whole' },
           { config: { width: 17 }, names: 'title', type: 'image.whole' },
           {
-            content: ['版本号：v', versionName],
+            content: i18n().tt_version_template.replace(
+              '%VERSION%',
+              versionName,
+            ),
             type: 'text',
           },
           {
             content: [
-              '适配资源包版本：',
+              i18n().tt_version_resource,
               {
                 content: res_version,
                 url: `https://gitgud.io/umaera/data/uma-resource/-/archive/${res_version}/uma-resource-${res_version}.zip`,
@@ -407,34 +412,34 @@ module.exports = async () => {
         { type: 'divider' },
         {
           config: { offset: 6, width: 4 },
-          content: '相关链接：',
+          content: i18n().tt_links,
           type: 'text',
         },
         {
           config: { align: 'left', width: 12 },
           content: [
             {
-              content: 'EraUma 游戏发布页',
+              content: i18n().tt_link_release,
               url: site,
             },
             { isBr: true },
             {
-              content: 'EraElectron 引擎（PC 版）发布页',
+              content: i18n().tt_link_desk_engine,
               url: 'https://gitgud.io/umaera/engine/era-electron/-/releases/permalink/latest',
             },
             { isBr: true },
             {
-              content: 'ere.app 引擎（安卓版）发布页',
+              content: i18n().tt_link_app_engine,
               url: 'https://gitgud.io/umaera/engine/ere-app/-/releases/permalink/latest',
             },
             { isBr: true },
             {
-              content: 'ERA 特雷森学园（Discord 社区）',
+              content: i18n().tt_link_community,
               url: 'https://discord.gg/ake5SP3zUP',
             },
             { isBr: true },
             {
-              content: 'Wiki（使用说明/游戏设定/口上写作指引……）',
+              content: i18n().tt_link_wiki,
               url: 'https://gitgud.io/umaera/erauma/-/wikis',
             },
           ],
