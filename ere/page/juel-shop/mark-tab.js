@@ -217,7 +217,7 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
       });
     }
   }
-  era.printMultiColumns(buffer, { horizontalAlign: 'space-around' });
+  era.printMultiColumns(buffer, { horizontalAlign: 'space-between' });
 
   const inmon = CharaInmon.get(chara.id);
   const p_f_params = {

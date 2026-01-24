@@ -45,7 +45,7 @@ const {
 const { stain_enum } = require('#/data/ero/stain-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const { gene_juel_names } = require('#/data/other-const');
-const { attr_enum, attr_names } = require('#/data/train-const');
+const { attr_enum } = require('#/data/train-const');
 
 let j_names;
 
@@ -468,8 +468,9 @@ function end_ero(skip_jewels, log_jewels, ids) {
   let ret = { attr: {}, jewel: {} };
   sys_calc_ero_items.remove_all_items(...ids);
   clean_all_parts(...ids);
-  const is_slave = ids.indexOf(0) !== -1 && era.get('flag:惩戒力度') >= 2;
-  const is_sex = ids.length > 1;
+  const includes_me = ids.includes(0);
+  const is_slave = includes_me && era.get('flag:惩戒力度') >= 2;
+  const is_sex = includes_me && ids.length > 1;
   const is_sleeping = is_sex && !sys_check_awake(0);
   for (const cid of ids) {
     if (is_sex) {
@@ -600,11 +601,12 @@ function end_ero(skip_jewels, log_jewels, ids) {
             100,
       );
     }
-    ret.attr[cid] = Object.values(attr_enum).map((e) =>
+    ret.attr[cid] = Object.values(attr_enum).map((a, i) =>
       sys_change_attr_and_print(
         cid,
-        e,
-        era.get(`ex:${cid}:${attr_names[e]}获取`) / get_random_value(4, 6),
+        a,
+        // EXNAME:27 - 31 = 速度获取 - 智力获取
+        era.get(`ex:${cid}:${27 + i}`) / get_random_value(4, 6),
       ),
     );
     let pt = era.get(`ex:${cid}:技能点获取`);
@@ -614,34 +616,40 @@ function end_ero(skip_jewels, log_jewels, ids) {
       era.add(`exp:${cid}:技能点数`, pt);
     }
   }
-  for (const cid of ids) {
-    if (cid > 0 && era.get(`cflag:${cid}:种族`) > 0) {
-      let got = Math.floor(era.get(`tcvar:${cid}:获得因子`) / palam2juel),
-        juels = gene_juel_names.map((e) => era.get(`tcvar:${cid}:${e}因子`));
-      if (got > 0) {
-        if (got < juels.reduce((p, c) => p + c, 0)) {
-          juels = juels.map((e, i, l) => {
-            const val = get_random_value(
-              Math.max(got - l.slice(i + 1).reduce((p, c) => p + c, 0), 0),
-              got,
-            );
-            got -= val;
-            return val;
-          });
-        }
-        juels.forEach((e, i) => era.add(`gotjewel:0:${gene_juel_names[i]}`, e));
-        if (era.get(`cflag:${cid}:殿堂`) > 0) {
-          CharaAvailableGenes.merge_into_player(new CharaAvailableGenes(cid));
+  if (includes_me) {
+    for (const cid of ids) {
+      if (cid > 0 && era.get(`cflag:${cid}:种族`) > 0) {
+        let got = Math.floor(era.get(`tcvar:${cid}:获得因子`) / palam2juel);
+        let jewels = new Array(3)
+          .fill(0)
+          // TCVARNAME:70 - 72 = 粉因子 - 白因子
+          .map((_, i) => era.get(`tcvar:${cid}:${70 + i}`));
+        if (got > 0) {
+          if (got < jewels.reduce((p, c) => p + c, 0)) {
+            jewels = jewels.map((e, i, l) => {
+              const val = get_random_value(
+                Math.max(got - l.slice(i + 1).reduce((p, c) => p + c, 0), 0),
+                got,
+              );
+              got -= val;
+              return val;
+            });
+          }
+          // JEWELNAME:20 - 22 = 粉 - 白
+          jewels.forEach((e, i) => era.add(`gotjewel:0:${20 + i}`, e));
+          if (era.get(`cflag:${cid}:殿堂`) > 0) {
+            CharaAvailableGenes.merge_into_player(new CharaAvailableGenes(cid));
+          }
         }
       }
     }
-  }
-  // JEWELNAME:20 - 22 = 粉 - 白
-  for (let jid = 20; jid <= 22; ++jid) {
-    era.add(
-      `jewel:0:${jid}`,
-      (ret.jewel[0][jid] = era.get(`gotjewel:0:${jid}`)),
-    );
+    // JEWELNAME:20 - 22 = 粉 - 白
+    for (let jid = 20; jid <= 22; ++jid) {
+      era.add(
+        `jewel:0:${jid}`,
+        (ret.jewel[0][jid] = era.get(`gotjewel:0:${jid}`)),
+      );
+    }
   }
   if (!log_jewels) {
     ret.jewel = void 0;
