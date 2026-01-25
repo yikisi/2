@@ -1,1 +1,1 @@
-module.exports = { res_version: '20260123' };
+module.exports = { res_version: '20260125' };
