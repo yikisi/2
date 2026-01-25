@@ -546,18 +546,19 @@ async function sys_next_week() {
       era.set(`talent:${cid}:乳房尺寸`, 0);
     }
 
-    let special_month = era.get(`status:${cid}:发情`);
-    let special_body = era.get(`status:${cid}:排卵期`);
+    // STATUSNAME:30 - 32 = 经期 - 发情
+    let special_month = era.get(`status:${cid}:32`);
+    let special_body = era.get(`status:${cid}:31`);
     if (growth_stage >= 4 && race > 0 && !is_p_slave) {
       // 发情期为出生月的下一个月
       const _special_month = (birth_month % 12) + 1;
       // 第二年开始计算发情期，限定本格期，发情期内无经期
       // 安定期继续发情
       if (cur_month === _special_month && (pregnant_stage & 0b1010) > 0) {
-        if (!era.get(`status:${cid}:发情`)) {
+        if (!era.get(`status:${cid}:32`)) {
           special_month = era.set(`status:${cid}:发情`, 1);
         }
-      } else if (era.get(`status:${cid}:发情`)) {
+      } else if (era.get(`status:${cid}:32`)) {
         special_month = era.set(`status:${cid}:发情`, 0);
       }
     }
@@ -567,15 +568,16 @@ async function sys_next_week() {
     // 一个月四个星期，假设生日在第二周，则四周分别为：排卵期 出生周 经期 无
     if (c_sex !== 1) {
       if (is_p_slave) {
-        // STATUSNAME:30 - 32 = 经期 - 危险期
         if (era.get(`status:${cid}:30`) > 0) {
           era.set(`status:${cid}:30`, 0);
         }
-        if (!era.get(`status:${cid}:31`)) {
-          era.set(`status:${cid}:31`, 1);
+        if (pregnant_stage !== 1 << pregnant_stage_enum.no) {
+          special_body = era.set(`status:${cid}:31`, 0);
+        } else if (!special_body) {
+          special_body = era.set(`status:${cid}:31`, 1);
         }
-        if (!era.get(`status:${cid}:32`) && race > 0) {
-          era.set(`status:${cid}:32`, 1);
+        if (!special_month && race > 0) {
+          special_month = era.set(`status:${cid}:32`, 1);
         }
       } else if (growth_stage >= 1) {
         // 经期为出生周的下一周（简单计算）
@@ -589,9 +591,9 @@ async function sys_next_week() {
           pregnant_stage === 1 << pregnant_stage_enum.no &&
           !era.get(`status:${cid}:发情`)
         ) {
-          era.set(`status:${cid}:经期`, 1);
+          era.set(`status:${cid}:30`, 1);
         } else {
-          era.set(`status:${cid}:经期`, 0);
+          era.set(`status:${cid}:30`, 0);
         }
         // 经期再下一周（出生周上一周）排卵期
         special_week = ((special_week + 1) % 4) + 1;
@@ -602,9 +604,9 @@ async function sys_next_week() {
           // 生育次数检查
           era.get(`exp:${cid}:生产次数`) < baby_limit
         ) {
-          special_body = era.set(`status:${cid}:排卵期`, 1);
+          special_body = era.set(`status:${cid}:31`, 1);
         } else {
-          special_body = era.set(`status:${cid}:排卵期`, 0);
+          special_body = era.set(`status:${cid}:31`, 0);
         }
       }
       if (growth_stage >= 1) {
