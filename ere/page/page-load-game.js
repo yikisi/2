@@ -578,7 +578,7 @@ module.exports = async () => {
             }
             // i18n - 将游戏存档内所有字符串改成 i18n 框架内的内容
             // TODO CSTR里一堆性经历也要改
-            if (version <= 2200) {
+            if (version <= 2900) {
               era.getAddedCharacters().forEach((_from) => {
                 const callname = era.get(`callname:${_from}`);
                 for (const _to in callname) {

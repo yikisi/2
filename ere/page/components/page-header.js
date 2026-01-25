@@ -9,6 +9,7 @@ const sys_filter_chara = require('#/system/sys-filter-chara');
 
 const race_indicator = require('#/page/components/race-indicator');
 
+const get_display_name = require('#/utils/calc-display-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_abbr_number } = require('#/utils/value-utils');
 
@@ -94,7 +95,7 @@ function page_header(enable_race_info) {
         billings += `\n${delta > 0 ? '+' : ''}${delta}`;
         switch (e.creditor) {
           case -2:
-            billings += ` (${era.get('callname:349:-2')} 投资收益)`;
+            billings += ` (${get_display_name(era.get('callname:349:-2'))} 投资收益)`;
             break;
           case -1:
             billings += ' (月工资+年终奖)';
@@ -104,9 +105,9 @@ function page_header(enable_race_info) {
             break;
           default:
             if (e.timer > 0) {
-              billings += ` (${era.get(`callname:${e.creditor}:-2`)}${i === 0 ? ' · 主要' : ''} 余${e.timer}周)`;
+              billings += ` (${get_display_name(era.get(`callname:${e.creditor}:-2`))}${i === 0 ? ' · 主要' : ''} 余${e.timer}周)`;
             } else {
-              billings += ` (${era.get(`callname:${e.creditor}:-2`)} 献金)`;
+              billings += ` (${get_display_name(era.get(`callname:${e.creditor}:-2`))} 献金)`;
             }
         }
       }
@@ -191,8 +192,8 @@ function page_header(enable_race_info) {
             config: { width: 8 },
             content: [
               {
+                ...get_abbr_number(cur_coin),
                 color: money_color,
-                content: cur_coin.toLocaleString(),
                 fontWeight: 'bold',
               },
               money_change !== 0 ? ' ' : '',

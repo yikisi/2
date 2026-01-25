@@ -246,7 +246,7 @@ class I18nEntry {
   tb_stain = new (require('#/i18n/zh-CN/table/stain'))();
   tb_status = new (require('#/i18n/zh-CN/table/status'))();
   tb_talent = new (require('#/i18n/zh-CN/table/talent'))();
-  abl_desc = new (require('#/i18n/zh-CN/sex/abl-desc'))();
+  abl_desc = new (require('#/i18n/zh-CN/table/abl-desc'))();
   item_desc = new (require('#/i18n/zh-CN/table/item-desc'))();
   status_desc = new (require('#/i18n/zh-CN/table/status-desc'))();
   talent_desc = new (require('#/i18n/zh-CN/table/talent-desc'))();

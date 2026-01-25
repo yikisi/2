@@ -19,13 +19,11 @@ const CharaInmon = require('#/data/ero/chara-inmon');
 const { mark_colors, mark_enum } = require('#/data/ero/mark-const');
 const { palam2juel } = require('#/data/ero/orgasm-const');
 const { inmon_plugin_dict } = require('#/data/ero/plugin/plugin-const');
-const {
-  get_abl_title,
-  growth_info,
-  no_info,
-  unknown_info,
-} = require('#/data/exp-const');
+const { growth_info, no_info, unknown_info } = require('#/data/exp-const');
 const { get_breast_cup, get_talent, get_xp } = require('#/data/info-generator');
+
+const di18n = require('#/i18n/extended-def');
+const { i18n } = require('#/i18n/selector');
 
 const page_name = '性爱情况';
 
@@ -150,9 +148,9 @@ module.exports = {
           ...inmon_info,
         );
       } else {
-        const sex_count = era.get(`exp:${chara.id}:性爱次数`),
-          sleep_count = era.get(`exp:${chara.id}:睡奸次数`),
-          prison_count = era.get(`exp:${chara.id}:监禁次数`);
+        const sex_count = era.get(`exp:${chara.id}:性爱次数`);
+        const sleep_count = era.get(`exp:${chara.id}:睡奸次数`);
+        const prison_count = era.get(`exp:${chara.id}:监禁次数`);
         sex_info_list.push(
           {
             config: { content: '基本情况', position: 'left' },
@@ -233,50 +231,27 @@ module.exports = {
         config: { content: '性爱能力', position: 'left' },
         type: 'divider',
       });
-      const skill_list = [
-        '甜言蜜语',
-        '接吻技巧',
-        '口交技巧',
-        '口腔耐性',
-        '口腔掌握',
-        '乳交技巧',
-        '胸部耐性',
-        '胸部掌握',
-        '手交技巧',
-        '足交技巧',
-        '身体技巧',
-        '身体耐性',
-        '身体掌握',
-      ];
+      const skill_list = [40, 10, 11, 30, 20, 12, 31, 21, 13, 14, 15, 32, 22];
       if (chara.sex_code > 0) {
-        skill_list.push('插入技巧', '阴茎耐性');
+        skill_list.push(18, 36);
       }
-      skill_list.push('阴茎掌握');
+      skill_list.push(26);
       if (chara.sex_code !== 1) {
-        skill_list.push('性交技巧');
+        skill_list.push(16);
       }
       if (chara.sex_code === 0) {
-        skill_list.push('外阴耐性');
+        skill_list.push(33);
       }
       if (chara.sex_code !== 1) {
-        skill_list.push('阴道耐性');
+        skill_list.push(34);
       }
-      skill_list.push(
-        '外阴掌握',
-        '阴道掌握',
-        '肛交技巧',
-        '肛门耐性',
-        '肛门掌握',
-        '施虐技巧',
-        '受虐耐性',
-        '受虐掌握',
-      );
-      skill_list.forEach((e) => {
-        const level = era.get(`abl:${chara.id}:${e}`);
+      skill_list.push(23, 24, 17, 35, 25, 19, 37, 27);
+      skill_list.forEach((aid) => {
+        const level = era.get(`abl:${chara.id}:${aid}`);
         sex_info_list.push({
           config: { width: 6 },
           content: [
-            e,
+            i18n().tb_abl[aid],
             '：',
             {
               content: `Lv.${level}`,
@@ -285,7 +260,7 @@ module.exports = {
                 palam_colors.notifications[1],
                 level / 5,
               ),
-              title: get_abl_title(e, level),
+              title: di18n.tb_abl.get_abl_desc(aid, level),
             },
           ],
           type: 'text',
@@ -300,10 +275,10 @@ module.exports = {
         .get('palamnames')
         .slice(0, chara.id ? 15 : 10)
         .forEach((juel, i) => {
-          const num = era.get(`juel:${chara.id}:${juel}`),
-            got_juel = Math.floor(
-              (era.get(`gotjuel:${chara.id}:${juel}`) || 0) / palam2juel,
-            );
+          const num = era.get(`juel:${chara.id}:${juel}`);
+          const got_juel = Math.floor(
+            (era.get(`gotjuel:${chara.id}:${juel}`) || 0) / palam2juel,
+          );
           const buff = era.get(
             `tcvar:${chara.id}:${juel.substring(0, 2)}因子加成`,
           );

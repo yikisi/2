@@ -1,5 +1,5 @@
 const get_titled_content = require('#/i18n/get-titled-content');
-const { i18n } = require('#/i18n/selector');
+const { __, i18n } = require('#/i18n/selector');
 
 /** 基于 i18n 衍生的定义，不需要修改 */
 const di18n = {
@@ -236,6 +236,85 @@ const di18n = {
     get n_platinum() {
       const _ = i18n().achievement;
       return [_.platinum_all];
+    },
+  },
+  tb_abl: {
+    /**
+     * @param {number} aid
+     * @param {number} level
+     * @returns {string}
+     */
+    get_abl_desc(aid, level) {
+      if (level >= 10) {
+        return i18n().abl_desc.abl_ex;
+      } else if (level > 5) {
+        return i18n().abl_desc.abl_above;
+      }
+      let prefix;
+      let part;
+      if (aid <= 19 || aid === 40) {
+        prefix = 'atk';
+      } else if (aid <= 27) {
+        prefix = 'buff';
+      } else {
+        prefix = 'def';
+      }
+      switch (aid) {
+        case 10:
+          part = 'kiss';
+          break;
+        case 11:
+        case 20:
+        case 30:
+          part = 'mouth';
+          break;
+        case 12:
+        case 21:
+        case 31:
+          part = 'tit';
+          break;
+        case 13:
+          part = 'hand';
+          break;
+        case 14:
+          part = 'foot';
+          break;
+        case 15:
+        case 22:
+        case 32:
+          part = 'body';
+          break;
+        case 23:
+        case 33:
+          part = 'cli';
+          break;
+        case 16:
+        case 24:
+        case 34:
+          part = 'vagina';
+          break;
+        case 17:
+        case 25:
+        case 35:
+          part = 'anal';
+          break;
+        case 18:
+        case 26:
+        case 36:
+          part = 'penis';
+          break;
+        case 19:
+        case 27:
+        case 37:
+          part = 'sm';
+          break;
+        case 40:
+          part = 'talk';
+      }
+      return (
+        __(`abl_desc.${prefix}_${part}_lv${level}`) ||
+        __(`abl_desc.${prefix}_lv${level}`)
+      );
     },
   },
   tb_item: {

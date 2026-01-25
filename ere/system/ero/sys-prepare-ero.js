@@ -119,7 +119,6 @@ function update_ero_status(...ids) {
     ) {
       era.set(`tcvar:${cid}:乳突`, 1);
     }
-    console.log(cid, i_estrus, era.get(`tcvar:${cid}:50`));
     if (
       p_size > 0 &&
       (i_estrus ||

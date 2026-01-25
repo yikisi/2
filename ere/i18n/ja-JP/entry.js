@@ -63,6 +63,7 @@ module.exports = class extends I18nEntry {
 
   tb_abl = new (require('#/i18n/ja-JP/table/abl'))();
   tb_item = new (require('#/i18n/ja-JP/table/item'))();
+  abl_desc = new (require('#/i18n/ja-JP/table/abl-desc'))();
 
   clothe = new (require('#/i18n/ja-JP/race/clothes'))();
   race = new (require('#/i18n/ja-JP/race/races'))();
