@@ -562,6 +562,9 @@ module.exports = async () => {
             if (version <= 2172) {
               check_titles(33, 113);
             }
+            if (version <= 2202) {
+              check_titles(349);
+            }
             if (version < era.get('gamebase').version) {
               set_image_t(7);
               set_image_t(21);

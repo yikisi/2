@@ -6,12 +6,12 @@ const BryneLifeMarks = require('#/data/event/life-event-marks/life-event-marks-3
 
 module.exports = class extends CustomizedCheck {
   check_and_get_titles(aim_check) {
-    const life_marks = new BryneLifeMarks();
-    const _old = life_marks.buff;
     const ret = super.check_and_get_titles(aim_check);
-    if (life_marks.buff > _old) {
+    if (ret.length > 0) {
+      const life_marks = new BryneLifeMarks();
+      life_marks.buff = 1;
       const invest = sys_get_billings().find((e) => e.creditor === 2);
-      if (invest !== undefined) {
+      if (invest !== void 0) {
         invest.repay = life_marks.funds / 25;
       }
     }
