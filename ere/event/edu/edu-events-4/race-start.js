@@ -3,18 +3,18 @@ const era = require('#/era-electron');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { say_by_passer_by } = require('#/utils/chara-talk');
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { race_enum } = require('#/data/race/race-const');
 
 /**
+ * @this CustomizedEdu
+ * @param {CharaTalk} maru
+ * @param {CharaTalk} me
  * @param {HookArg} hook
  * @param {RaceStartParams} extra_flag
  */
-module.exports = async (hook, extra_flag) => {
-  const maru = get_chara_talk(4),
-    me = get_chara_talk(0),
-    edu_weeks = era.get('cflag:4:育成回合计时');
+module.exports = async (maru, me, hook, extra_flag) => {
+  const edu_weeks = era.get('cflag:4:育成回合计时');
   if (extra_flag.race === race_enum.begin_race && edu_weeks < 48) {
     await print_event_name('出道战前・一切的起点', maru);
     await era.printAndWait(`地下通道内`);

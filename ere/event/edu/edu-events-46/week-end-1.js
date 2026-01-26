@@ -1,20 +1,20 @@
 const era = require('#/era-electron');
 
+const { add_event } = require('#/event/queue');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
-const { add_event } = require('#/event/queue');
-const { sys_get_callname } = require('#/system/sys-calc-chara-others');
-const { say_by_passer_by } = require('#/utils/chara-talk');
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
+
+const {
+  get_chara_talk,
+  say_by_passer_by_and_wait,
+} = require('#/utils/chara-talk-factory');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},FalconEduMarks,number,number,EventObject):Promise>} handlers */
 module.exports = (handlers = {}) => {
-  handlers[95 + 10] = async () => {
-    const me = get_chara_talk(0),
-      falcon = get_chara_talk(46);
+  handlers[95 + 10] = async (falcon, me) => {
     await print_event_name('目眩感', falcon);
     await era.printAndWait(`训练室\n`);
     await era.printAndWait(`提不起劲。`);
@@ -60,10 +60,7 @@ module.exports = (handlers = {}) => {
       `重新为自己打气，作为${falcon.get_uma_sex_title()}偶像的${falcon.name}从后台回到了舞台之上。`,
     );
   };
-  handlers[95 + 17] = async () => {
-    const me = get_chara_talk(0),
-      falcon = get_chara_talk(46);
-    const callname = sys_get_callname(46, 0);
+  handlers[95 + 17] = async (falcon, me, callname) => {
     await print_event_name('倘若泪水能回到眼眶', falcon);
     await era.printAndWait(
       `打定主意后，${callname}便强行将${falcon.name}拉了过去。`,
@@ -308,11 +305,15 @@ module.exports = (handlers = {}) => {
       `——但对${falcon.name}来说，或许是人生中最重要的成年礼。`,
     );
   };
-  handlers[95 + 23] = async () => {
-    const me = get_chara_talk(0),
-      falcon = get_chara_talk(46);
-    const callname = sys_get_callname(46, 0);
-    const love = era.get('love:46');
+  handlers[95 + 23] = async (
+    falcon,
+    me,
+    callname,
+    flags,
+    edu_marks,
+    relation,
+    love,
+  ) => {
     const chara4_talk = get_chara_talk(4);
     await print_event_name('闲暇日', falcon);
     await era.printAndWait(
@@ -496,20 +497,23 @@ module.exports = (handlers = {}) => {
     }
   };
 
-  /**
-   * @param {EventObject} event_object
-   */
-  handlers[95 + 23] = async (event_object) => {
+  handlers[95 + 32] = async (
+    falcon,
+    me,
+    callname,
+    flags,
+    edu_marks,
+    relation,
+    love,
+    ebj,
+  ) => {
     if (
       era.get('cflag:0:位置') !== location_enum.beach ||
       era.get('cflag:0:位置') !== era.get('cflag:46:位置')
     ) {
-      add_event(event_hooks.week_end, event_object);
+      add_event(event_hooks.week_end, ebj);
       return;
     }
-    const callname = sys_get_callname(46, 0),
-      falcon = get_chara_talk(46),
-      me = get_chara_talk(0);
     await print_event_name('夏季合宿结束', falcon);
     await era.printAndWait(`${falcon.name}的第三年夏季合宿结束了。`);
     await falcon.say_and_wait(`向着顶级偶像的道路一刻不停的前进♪`);
@@ -577,10 +581,7 @@ module.exports = (handlers = {}) => {
     );
     await era.printAndWait(`${falcon.name}不再孤单了。`);
   };
-  handlers[95 + 37] = async () => {
-    const me = get_chara_talk(0),
-      falcon = get_chara_talk(46);
-    const callname = sys_get_callname(46, 0);
+  handlers[95 + 37] = async (falcon, me, callname) => {
     await print_event_name('前辈与后辈', falcon);
     await era.printAndWait(
       `在仔细考虑过后，${callname}将育马场经典赛、冠军杯以及东京大赏典这三场比赛列入了第三年下半的计划之中。`,
@@ -594,21 +595,21 @@ module.exports = (handlers = {}) => {
     await era.printAndWait(
       `${falcon.name}会直接推门进来，手纲小姐会事先在手机上发送消息，其他${falcon.get_uma_sex_title()}的话，一般都是自己主动联系。`,
     );
-    await say_by_passer_by(
+    await say_by_passer_by_and_wait(
       `${falcon.get_uma_sex_title()}`,
       `好久不见，训练员${falcon.get_uma_sex_title()}！`,
     );
     await era.printAndWait(
       `栗色的${falcon.get_uma_sex_title()}推门进来，甚至因为过于激动不小心把门把手卸了下来。`,
     );
-    await say_by_passer_by(
-      `${falcon.get_uma_sex_title()}`,
+    await say_by_passer_by_and_wait(
+      falcon.uma_sex_title,
       `啊，抱歉！我实在太激动了！`,
     );
     await era.printAndWait(`总觉得似曾相识的样子。`);
-    await say_by_passer_by(
-      `${falcon.get_uma_sex_title()}`,
-      `训练员${falcon.get_uma_sex_title()}还认识我吗？`,
+    await say_by_passer_by_and_wait(
+      falcon.uma_sex_title,
+      `训练员${me.adult_sex_title}还认识我吗？`,
     );
     await era.printAndWait(`脑海之中重复着将浮现的名字再次划去的工作，`);
     await era.printAndWait(`如果是${falcon.name}在这里的话，应该能一眼看出。`);
@@ -630,8 +631,8 @@ module.exports = (handlers = {}) => {
       `虽然体格与身高的变得几乎看不出来，过往的神态却依稀可见。`,
     );
     await me.say_and_wait(`${callname}也迎来本格化了呢。`);
-    await say_by_passer_by(
-      `${falcon.get_uma_sex_title()}`,
+    await say_by_passer_by_and_wait(
+      falcon.uma_sex_title,
       `不愧是训练员${falcon.get_uma_sex_title()}！一开始还有点担心训练员${falcon.get_uma_sex_title()}认不出来呢，看来是我想多了。`,
     );
     await era.printAndWait(
@@ -643,8 +644,8 @@ module.exports = (handlers = {}) => {
     await me.say_and_wait(
       `虽然我对偶像之道的了解也不多，希望能帮助到${callname}。`,
     );
-    await say_by_passer_by(
-      `${falcon.get_uma_sex_title()}`,
+    await say_by_passer_by_and_wait(
+      falcon.uma_sex_title,
       `训、训练员${falcon.get_uma_sex_title()}，${callname}到底经历了什么？`,
     );
     await era.printAndWait(
@@ -654,14 +655,12 @@ module.exports = (handlers = {}) => {
       `真是失礼，明明只是把自己的经历没有修饰的说了出来而已。`,
     );
     await falcon.say_and_wait(`训练员${falcon.get_uma_sex_title()}！`);
-    await say_by_passer_by(`${falcon.get_uma_sex_title()}`, `是飞鹰子前辈！`);
+    await say_by_passer_by_and_wait(falcon.uma_sex_title, `是飞鹰子前辈！`);
     await era.printAndWait(`在解释了之前的那一幕后。`);
     await falcon.say_and_wait(`不过是偶像的日常罢了。`);
     await era.printAndWait(`面带笑容的${falcon.name}语气没有任何变化。`);
   };
-  handlers[95 + 38] = async () => {
-    const me = get_chara_talk(0),
-      falcon = get_chara_talk(46);
+  handlers[95 + 38] = async (falcon, me) => {
     await print_event_name(`铭记的镜子`, falcon);
     era.drawLine();
     await me.say_and_wait(`${falcon.get_uma_sex_title()}偶像？`);

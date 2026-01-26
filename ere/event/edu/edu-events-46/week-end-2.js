@@ -1,12 +1,10 @@
 const era = require('#/era-electron');
+
 const print_event_name = require('#/event/snippets/print-event-name');
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},FalconEduMarks,number,number,EventObject):Promise>} handlers */
 module.exports = (handlers = {}) => {
-  handlers[95 + 40] = async () => {
-    const me = get_chara_talk(0),
-      falcon = get_chara_talk(46);
+  handlers[95 + 40] = async (falcon, me) => {
     await print_event_name(`天空、大地以及生活在这里的我们`, falcon);
     await era.printAndWait(`公园\n`);
     await era.printAndWait(`在飞鹰子的提议下，你 们来到了公园的一处草坪上。`);
@@ -159,9 +157,7 @@ module.exports = (handlers = {}) => {
     await falcon.say_and_wait(`诶嘿嘿⭐`);
     await era.printAndWait(`之后的谈话便在湖泊染上第一缕金色的光辉后结束了。`);
   };
-  handlers[95 + 45] = async () => {
-    const falcon = get_chara_talk(46),
-      me = get_chara_talk(0);
+  handlers[95 + 45] = async (falcon, me) => {
     await print_event_name(`莫桑石`, falcon);
     // 纵使失约，纵使内心陷入疯狂，
     // 既然作为偶像就要认真回应粉丝的期待
@@ -218,9 +214,7 @@ module.exports = (handlers = {}) => {
     falcon.print(`堵上飞鹰子身为${falcon.get_uma_sex_title()}偶像的觉悟！`);
     falcon.print(`就这么一口气闪耀到终点！`);
   };
-  handlers[95 + 47] = async () => {
-    const falcon = get_chara_talk(46),
-      me = get_chara_talk(0);
+  handlers[95 + 47] = async (falcon, me) => {
     await print_event_name(`${falcon.name}的决定`, falcon);
     await era.printAndWait(
       `你 与${falcon.name}紧张的准备着下周将要准备的东京大赏。`,

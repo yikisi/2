@@ -1,7 +1,8 @@
 const era = require('#/era-electron');
 
-const print_event_name = require('#/event/snippets/print-event-name');
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
+
+const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 

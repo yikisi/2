@@ -22,21 +22,21 @@ const MaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-4');
 const { attr_names, fumble_result } = require('#/data/train-const');
 
 module.exports = class extends CustomizedEdu {
-  async week_start(zensky, me, callname, hook, extra_flag, event_object) {
-    return await maru_week_start(hook, event_object);
+  async week_start(maru, me, callname, hook, extra_flag, event_object) {
+    return await maru_week_start(maru, me, callname, hook, event_object);
   }
 
-  async week_end(zensky, me, callname, hook, extra_flag, event_object) {
-    return await maru_week_end(hook, event_object);
+  async week_end(maru, me, callname, hook, extra_flag, event_object) {
+    return await maru_week_end(maru, me, hook, event_object);
   }
 
-  async race_start(chara, me, callname, hook, extra_flag) {
-    return await maru_race_start(hook, extra_flag);
+  async race_start(maru, me, callname, hook, extra) {
+    return await maru_race_start(maru, me, hook, extra);
   }
 
-  async race_end(chara, me, callname, hook, extra_flag) {
-    if (await maru_race_end(hook, extra_flag)) {
-      return await super.race_end(chara, me, callname, hook, extra_flag);
+  async race_end(maru, me, callname, hook, extra) {
+    if (await maru_race_end(maru, me, callname, hook, extra)) {
+      return await super.race_end(maru, me, callname, hook, extra);
     }
   }
 
@@ -1417,7 +1417,7 @@ module.exports = class extends CustomizedEdu {
       await era.printAndWait(`无可奈何。`);
       await print_event_name('丸善斯基的信', zensky);
     } else {
-      throw new Error();
+      await super.crazy_fan_end();
     }
   }
 };

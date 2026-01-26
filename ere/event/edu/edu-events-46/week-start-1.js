@@ -3,13 +3,11 @@ const era = require('#/era-electron');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { say_by_passer_by } = require('#/utils/chara-talk');
-
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
-/** @param {Record<string,function(CharaTalk,CharaTalk,CharaTalk,{wait_flag:boolean},number,number,FalconEduMarks,EventObject):Promise>} handlers */
+
+/** @param {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},FalconEduMarks,EventObject):Promise>} handlers */
 module.exports = (handlers) => {
-  handlers[47 + 1] = async () => {
-    const me = get_chara_talk(0),
-      falcon = get_chara_talk(46);
+  handlers[47 + 1] = async (falcon, me) => {
     await print_event_name('新年的感觉！', falcon);
     await era.printAndWait(`你与${falcon.name}共同迎来了新的一年。`);
     await era.printAndWait(`训练室\n`);
@@ -114,9 +112,7 @@ module.exports = (handlers) => {
     era.set('cflag:46:节日事件标记', 0);
   };
 
-  handlers[47 + 6] = async () => {
-    const me = get_chara_talk(0),
-      falcon = get_chara_talk(46);
+  handlers[47 + 6] = async (falcon, me) => {
     era.set('cflag:46:节日事件标记', 0);
     await print_event_name('恋心！飞鹰子的礼物！', falcon);
     await falcon.say_and_wait(`——早安⭐！`);
@@ -180,9 +176,7 @@ module.exports = (handlers) => {
     await era.printAndWait(`两人在附近的人气餐厅度过了情人节。`);
   };
 
-  handlers[47 + 9] = async () => {
-    const me = get_chara_talk(0),
-      falcon = get_chara_talk(46);
+  handlers[47 + 9] = async (falcon, me) => {
     const suzuka = get_chara_talk(2);
     await print_event_name('目标是皋月赏！', falcon);
     await era.printAndWait(
@@ -288,9 +282,7 @@ module.exports = (handlers) => {
       await era.printAndWait(`之后的草地特训一直持续到了宵禁才结束。`);
     }
   };
-  handlers[47 + 12] = async () => {
-    const me = get_chara_talk(0),
-      falcon = get_chara_talk(46);
+  handlers[47 + 12] = async (falcon, me) => {
     await print_event_name(`目标！皋月赏！`, falcon);
     await era.printAndWait(`训练场\n`);
     await falcon.say_and_wait(`哈啊，哈啊……`);
@@ -454,9 +446,7 @@ module.exports = (handlers) => {
     );
   };
 
-  handlers[47 + 40] = async () => {
-    const me = get_chara_talk(0),
-      falcon = get_chara_talk(46);
+  handlers[47 + 40] = async (falcon, me) => {
     await print_event_name(`飞鹰子的决定`, falcon);
     await era.printAndWait(`商业街广场\n`);
     await falcon.say_and_wait(`非常感谢大家一直以来默默支持着飞鹰子⭐`);
@@ -556,9 +546,7 @@ module.exports = (handlers) => {
     );
   };
 
-  handlers[47 + 41] = async () => {
-    const me = get_chara_talk(0),
-      falcon = get_chara_talk(46);
+  handlers[47 + 41] = async (falcon, me) => {
     await print_event_name(`决定的代价`, falcon);
     await era.printAndWait(
       `与11月的气候变换成反比的，有关${falcon.name}暂停偶像活动的相关报道。`,
@@ -718,9 +706,7 @@ module.exports = (handlers) => {
     await era.printAndWait(`即将远去的意识在最后一刻看到的——`);
     await era.printAndWait(`是赶不上新时代船只的乘客。`);
   };
-  handlers[47 + 42] = async () => {
-    const me = get_chara_talk(0),
-      falcon = get_chara_talk(46);
+  handlers[47 + 42] = async (falcon, me) => {
     // 我越喜欢，我对“我受不了的方式”的定义就越严苛。我去做点什么的动能就越强。
     // 什么也不做，对我就是痛苦的，内心深处就有双重辜负感——第一感觉自己辜负了自己所喜欢的对象，第二感觉辜负了自己的喜欢本身。
     await print_event_name(`水仙`, falcon);
@@ -859,9 +845,7 @@ module.exports = (handlers) => {
       `前半段旅程取得的成功都是这么过来的，又有什么理由不能证明后面的成功不也是顺着错误的方向与错误的目标而成就的呢？`,
     );
   };
-  handlers[47 + 48] = async () => {
-    const me = get_chara_talk(0),
-      falcon = get_chara_talk(46);
+  handlers[47 + 48] = async (falcon, me) => {
     await print_event_name(`圣诞祈愿`, falcon);
     await era.printAndWait(`中山竞马场·有马纪念`);
     await era.printAndWait(
