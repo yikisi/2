@@ -43,7 +43,11 @@ const {
   get_trainer_title,
 } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
-const { first_child_id, max_chara_id } = require('#/data/other-const');
+const {
+  creditors,
+  first_child_id,
+  max_chara_id,
+} = require('#/data/other-const');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
 const { attr_names } = require('#/data/train-const');
@@ -282,7 +286,8 @@ module.exports = async () => {
                     (1 + (cur_month === 12));
                 era.set('flag:18', 0);
                 billings.push({
-                  creditor: cur_month === 12 ? -1 : 0,
+                  creditor:
+                    cur_month === 12 ? creditors.annul_bonus : creditors.salary,
                   repay: salary,
                   timer: 1,
                 });
@@ -469,7 +474,7 @@ module.exports = async () => {
               if (marks.funds < 0) {
                 era.add('flag:当前马币', marks.funds);
                 const invest = sys_get_billings().find(
-                  (e) => e.creditor === -2,
+                  (e) => e.creditor === creditors.invest,
                 );
                 invest.repay = 0;
               }

@@ -37,7 +37,7 @@ const { remove_special_events } = require('#/event/queue');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry, sort_list } = require('#/utils/list-utils');
-const { get_random_value } = require('#/utils/value-utils');
+const { get_abbr_number, get_random_value } = require('#/utils/value-utils');
 
 const { money_color } = require('#/data/color-const');
 const { trainer_salary } = require('#/data/const.json');
@@ -65,7 +65,7 @@ const {
   get_trainer_title,
 } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
-const { max_chara_id } = require('#/data/other-const');
+const { creditors, max_chara_id } = require('#/data/other-const');
 const { pressure_border } = require('#/data/train-const');
 
 async function sys_next_week() {
@@ -242,18 +242,35 @@ async function sys_next_week() {
         e.repay = base_salary / 4;
       }
       if (e.timer !== 0) {
-        if (e.creditor === -2) {
+        if (e.creditor === creditors.invest) {
           const marks = new BryneLifeMarks();
           e.repay = marks.funds / (500 - 300 * marks.buff);
         }
         const money = sys_change_money(e.repay, -1);
-        if (i > 0 && e.creditor === 0 && money > 0) {
+        if (i > 0 && money > 0) {
           // 人类训练员有工资拿；马娘训练员？自己跑比赛去！
-          era.print([
-            '【收到了学园发放的训练员工资 ',
-            { color: money_color, content: money.toLocaleString() },
-            ' 马币】',
-          ]);
+          switch (e.creditor) {
+            case creditors.invest:
+              era.print([
+                '【收到了投资收益 ',
+                { ...get_abbr_number(money), color: money_color },
+                ' 马币】',
+              ]);
+              break;
+            case creditors.annul_bonus:
+              era.print([
+                '【收到了学园发放的训练员工资和年终奖 ',
+                { color: money_color, content: money.toLocaleString() },
+                ' 马币】',
+              ]);
+              break;
+            case creditors.salary:
+              era.print([
+                '【收到了学园发放的训练员工资 ',
+                { color: money_color, content: money.toLocaleString() },
+                ' 马币】',
+              ]);
+          }
         }
         if (e.timer > 0) {
           e.timer--;
@@ -270,7 +287,7 @@ async function sys_next_week() {
     .filter((e, i) => i === 0 || e.timer !== 0);
   if (cur_week === 4) {
     billings.push({
-      creditor: cur_month === 12 ? -1 : 0,
+      creditor: cur_month === 12 ? creditors.annul_bonus : creditors.salary,
       repay: salary,
       timer: 1,
     });

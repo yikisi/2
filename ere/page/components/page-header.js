@@ -27,6 +27,7 @@ const {
   get_trainer_train_buff,
 } = require('#/data/info-generator');
 const { location_name } = require('#/data/locations');
+const { creditors } = require('#/data/other-const');
 const { race_infos } = require('#/data/race/race-const');
 
 function get_progress_bar() {
@@ -109,13 +110,13 @@ function page_header(enable_race_info) {
         money_change += delta;
         billings += `\n${delta > 0 ? '+' : ''}${delta}`;
         switch (e.creditor) {
-          case -2:
+          case creditors.invest:
             billings += ` (${era.get('callname:349:-2')} 投资收益)`;
             break;
-          case -1:
+          case creditors.annul_bonus:
             billings += ' (月工资+年终奖)';
             break;
-          case 0:
+          case creditors.salary:
             billings += ' (月工资)';
             break;
           default:

@@ -716,7 +716,7 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
             era.set(
               'flag:账单',
               sys_get_billings().filter(
-                (e) => e.creditor !== chara.id || e.timer !== -1,
+                (e) => !(e.creditor === chara.id && e.timer === -1),
               ),
             );
             break;
