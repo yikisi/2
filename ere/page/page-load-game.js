@@ -43,6 +43,7 @@ const {
 } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const {
+  creditors,
   first_child_id,
   get_trainer_salary,
   max_chara_id,
@@ -292,7 +293,8 @@ module.exports = async () => {
                     (1 + (cur_month === 12));
                 era.set('flag:18', 0);
                 billings.push({
-                  creditor: cur_month === 12 ? -1 : 0,
+                  creditor:
+                    cur_month === 12 ? creditors.annul_bonus : creditors.salary,
                   repay: salary,
                   timer: 1,
                 });
@@ -480,7 +482,7 @@ module.exports = async () => {
               if (marks.funds < 0) {
                 era.add('flag:当前马币', marks.funds);
                 const invest = sys_get_billings().find(
-                  (e) => e.creditor === -2,
+                  (e) => e.creditor === creditors.invest,
                 );
                 invest.repay = 0;
               }
@@ -575,6 +577,23 @@ module.exports = async () => {
             }
             if (version <= 2172) {
               check_titles(33, 113);
+            }
+            if (version <= 2202) {
+              check_titles(349);
+              if (era.get('flag:当前回合数') % 48 || 48 >= 9) {
+                const bug_list = [4, 46, 346, 347, 348];
+                era
+                  .getAddedCharacters()
+                  .filter((cid) => bug_list.includes(cid))
+                  .forEach((cid) => {
+                    if (
+                      era.get(`cflag:${cid}:招募状态`) === recruit_flags.yes &&
+                      era.get(`cflag:${cid}:育成回合计时`) > 3 * 48
+                    ) {
+                      era.set(`cflag:${cid}:可再次育成`, 1);
+                    }
+                  });
+              }
             }
             // i18n - 将游戏存档内所有字符串改成 i18n 框架内的内容
             // TODO CSTR里一堆性经历也要改

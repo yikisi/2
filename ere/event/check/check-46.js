@@ -325,6 +325,8 @@ module.exports = class extends CustomizedCheck {
         case 95 + 48:
           add_event(event_hooks.week_start, event_obj_special);
       }
+    } else {
+      super.check_next_week();
     }
   }
 

@@ -26,6 +26,7 @@ const recruit_flags = require('#/data/event/recruit-flags');
 const yandere_list = require('#/data/event/yandere-list');
 const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
+const { creditors } = require('#/data/other-const');
 
 const { i18n } = require('#/i18n/selector');
 
@@ -350,9 +351,9 @@ handlers[349] = () =>
           }
           if (_old !== life_marks.funds) {
             const billings = sys_get_billings();
-            let invest = billings.find((e) => e.creditor === -2);
+            let invest = billings.find((e) => e.creditor === creditors.invest);
             if (!invest) {
-              invest = { creditor: -2, timer: -1, repay: 0 };
+              invest = { creditor: creditors.invest, timer: -1, repay: 0 };
               billings.push(invest);
             }
             invest.repay = life_marks.funds / (500 - 300 * life_marks.buff);

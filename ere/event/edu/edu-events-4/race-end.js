@@ -1,7 +1,5 @@
 const era = require('#/era-electron');
 
-const { sys_get_callname } = require('#/system/sys-calc-chara-others');
-
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const {
@@ -14,16 +12,17 @@ const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const { race_enum } = require('#/data/race/race-const');
 
 /**
+ * @this CustomizedEdu
+ * @param {CharaTalk} maru
+ * @param {CharaTalk} me
+ * @param {string} callname
  * @param {HookArg} hook
  * @param {RaceEndParams} extra_flag
  */
-module.exports = async (hook, extra_flag) => {
+module.exports = async (maru, me, callname, hook, extra_flag) => {
   const event_marks = new MaEduMarks();
-  const maru = get_chara_talk(4);
   const luna = get_chara_talk(17);
-  const me = get_chara_talk(0);
   const edu_weeks = era.get('cflag:4:育成回合计时');
-  const callname = sys_get_callname(4, 0);
   if (
     extra_flag.race === race_enum.begin_race &&
     edu_weeks < 48 &&

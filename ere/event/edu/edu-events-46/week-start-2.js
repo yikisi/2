@@ -1,7 +1,5 @@
 const era = require('#/era-electron');
 
-const { sys_get_callname } = require('#/system/sys-calc-chara-others');
-
 const { add_event } = require('#/event/queue');
 const print_event_name = require('#/event/snippets/print-event-name');
 
@@ -9,19 +7,18 @@ const {
   say_by_passer_by,
   say_by_passer_by_and_wait,
 } = require('#/utils/chara-talk-factory');
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const event_hooks = require('#/data/event/event-hooks');
 const { location_enum } = require('#/data/locations');
 
-/** @param {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},function):Promise>} handlers */
+/** @param {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},FalconEduMarks,EventObject):Promise>} handlers */
 module.exports = (handlers) => {
-  handlers[47 + 29] = async (falcon, me, _, event_object) => {
+  handlers[47 + 29] = async (falcon, me, _, flags, edu_marks, ebj) => {
     if (
       era.get('cflag:0:位置') !== location_enum.beach ||
       era.get('cflag:0:位置') !== era.get('cflag:46:位置')
     ) {
-      add_event(event_hooks.week_start, event_object);
+      add_event(event_hooks.week_start, ebj);
       return;
     }
     await print_event_name(`合宿开始！`, falcon);
@@ -57,10 +54,7 @@ module.exports = (handlers) => {
       `${me.actual_name}与${falcon.name}在确定了演出场地后，夏季合宿便在歌声中开始了。`,
     );
   };
-  handlers[47 + 30] = async () => {
-    const me = get_chara_talk(0),
-      falcon = get_chara_talk(46);
-    const callname = sys_get_callname(46, 0);
+  handlers[47 + 30] = async (falcon, me, callname) => {
     era.set('cflag:46:节日事件标记', 0);
     await print_event_name(`庙会`, falcon);
     await falcon.say_and_wait(`飞鹰子要好好准备一下！`);
@@ -195,9 +189,7 @@ module.exports = (handlers) => {
     await falcon.say_and_wait(`是！到时候请多指教！`);
     await era.printAndWait(`最美丽的烟火在${callname}眼前绽放。`);
   };
-  handlers[95 + 6] = async () => {
-    const me = get_chara_talk(0),
-      falcon = get_chara_talk(46);
+  handlers[95 + 6] = async (falcon, me) => {
     await print_event_name('飞鹰子与情人节♪', falcon);
     await era.printAndWait(`今年的情人节是在专门的会场举行的。`);
     await era.printAndWait(
@@ -233,10 +225,7 @@ module.exports = (handlers) => {
     );
     await era.printAndWait(`大概是反应过度了吧，最近还是好好休息才行。`);
   };
-  handlers[95 + 9] = async () => {
-    const me = get_chara_talk(0),
-      falcon = get_chara_talk(46);
-    const callname = sys_get_callname(46, 0);
+  handlers[95 + 9] = async (falcon, me, callname) => {
     await print_event_name('${falcon.name}', falcon);
     await era.printAndWait(`火红色的天空被深蓝所劈开，随后散为漫天星尘。`);
     await era.printAndWait(`与平时并无不同的演唱会。`);
@@ -365,10 +354,7 @@ module.exports = (handlers) => {
       `等到${callname}从目眩感中恢复时，身旁的${falcon.teen_sex_title}已经无影无踪。`,
     );
   };
-  handlers[95 + 14] = async () => {
-    const me = get_chara_talk(0),
-      falcon = get_chara_talk(46);
-    const callname = sys_get_callname(46, 0);
+  handlers[95 + 14] = async (falcon, me, callname) => {
     // 在第三年 ${falcon.name}作为泥地的马娘偶像成功提高了泥地赛道的人气
     // 马娘A、B选择了泥地赛道 A外向 B内向
     await print_event_name('粉丝感谢祭♪', falcon);
@@ -450,10 +436,7 @@ module.exports = (handlers) => {
     await me.say_and_wait(`接下来找机会好好和${falcon.name}聊聊吧。`, true);
     await era.printAndWait(`${callname}将注意力重新集中在训练计划上。`);
   };
-  handlers[95 + 18] = async () => {
-    const me = get_chara_talk(0),
-      falcon = get_chara_talk(46);
-    const callname = sys_get_callname(46, 0);
+  handlers[95 + 18] = async (falcon, me, callname) => {
     // 脑海之中闪现与训练员之间的过往
     await print_event_name(`日常`, falcon);
     await era.printAndWait(`被大幅的震动所惊醒。`);
@@ -539,7 +522,7 @@ module.exports = (handlers) => {
     await era.printAndWait(`如往日一般，手忙脚乱的日常再次启动。`);
   };
 
-  handlers[95 + 29] = async (falcon, me, callname, ebj) => {
+  handlers[95 + 29] = async (falcon, me, callname, flags, edu_marks, ebj) => {
     // 节拍 场景 序列 幕 故事
     // CFLAGNAME:45 = 位置
     if (
@@ -614,10 +597,14 @@ module.exports = (handlers) => {
     await falcon.say_and_wait(`好♪`);
     await era.printAndWait(`${callname}与飞鹰子之间第三年的夏季合宿开始了。`);
   };
-  handlers[95 + 30] = async () => {
-    const me = get_chara_talk(0),
-      falcon = get_chara_talk(46);
-    const callname = sys_get_callname(46, 0);
+  handlers[95 + 30] = async (falcon, me, callname, flags, edu_marks, ebj) => {
+    if (
+      era.get('cflag:46:45') !== location_enum.beach ||
+      era.get('cflag:46:45') !== era.get('cflag:0:45')
+    ) {
+      add_event(event_hooks.week_start, ebj);
+      return;
+    }
     await print_event_name(`庙会`, falcon);
     await era.printAndWait(`离沙滩不远的小镇上\n`);
     await era.printAndWait(`因为靠近沙滩而利用地势举行着一年一度的夏日庆典。`);
@@ -760,10 +747,7 @@ module.exports = (handlers) => {
     );
     era.set('cflag:46:节日事件标记', 0);
   };
-  handlers[95 + 48] = async () => {
-    const falcon = get_chara_talk(46),
-      me = get_chara_talk(0),
-      callname = sys_get_callname(46, 0);
+  handlers[95 + 48] = async (falcon, me, callname) => {
     await print_event_name(`圣诞节♪`, falcon);
     await era.printAndWait(
       `${me.actual_name}与${falcon.name}度过的第三个圣诞。`,

@@ -12,7 +12,6 @@ const check_aim_race = require('#/event/snippets/check-aim-race');
 
 const { get_chara_color } = require('#/data/chara-colors');
 const MaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-4');
-const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const RaceHistory = require('#/data/race/model/race-history');
@@ -127,14 +126,6 @@ module.exports = class extends CustomizedCheck {
           edu_weeks,
           'dream',
           event_hooks.week_end,
-          event_obj,
-        );
-      new EduEventMarks(4).get('wind') === 20 &&
-        check_and_add_event(
-          event_marks,
-          edu_weeks,
-          'windy',
-          event_hooks.week_start,
           event_obj,
         );
       switch (edu_weeks) {
@@ -321,6 +312,8 @@ module.exports = class extends CustomizedCheck {
         event_marks.fall_heaven === 1)
     ) {
       add_event(event_hooks.week_start, event_obj);
+    } else {
+      super.check_next_week();
     }
   }
 

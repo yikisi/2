@@ -1,12 +1,14 @@
 const era = require('#/era-electron');
 
-const print_event_name = require('#/event/snippets/print-event-name');
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
-const { say_by_passer_by } = require('#/utils/chara-talk');
 
-const { race_enum } = require('#/data/race/race-const');
+const print_event_name = require('#/event/snippets/print-event-name');
+
+const { say_by_passer_by } = require('#/utils/chara-talk');
 const CharaTalk = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+
+const { race_enum } = require('#/data/race/race-const');
 
 /**
  * @param {HookArg} hook

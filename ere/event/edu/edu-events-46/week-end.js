@@ -155,10 +155,7 @@ module.exports = (handlers = {}) => {
     );
   };
 
-  handlers[34] = async () => {
-    const me = get_chara_talk(0),
-      falcon = get_chara_talk(46);
-    const callname = sys_get_callname(46, 0);
+  handlers[34] = async (falcon, me, callname) => {
     await print_event_name(`向着闪耀大舞台不停歇的前进！`, falcon);
     await falcon.say_and_wait(`……呼⭐谢谢大家！`);
     await era.printAndWait(
@@ -238,10 +235,7 @@ module.exports = (handlers = {}) => {
       `${falcon.get_uma_sex_title()}偶像究竟是什么？恐怕现在还没定论。`,
     );
   };
-  handlers[47 + 12] = async () => {
-    const me = get_chara_talk(0),
-      falcon = get_chara_talk(46);
-    const callname = sys_get_callname(46, 0);
+  handlers[47 + 12] = async (falcon, me, callname) => {
     // 默认皋月赏结束
     // 演出结束之后，回到学校时发现缎带掉了一根，急忙寻找，离宵禁很近，抉择
     // 到失去地点，没找到，绝望时，被匆匆赶来的小${falcon.get_uma_sex_title()}捡到，被询问与训练员之间的感情
@@ -456,10 +450,7 @@ module.exports = (handlers = {}) => {
       `第二天，小${falcon.get_uma_sex_title()}一家向特雷森表达了对${falcon.name}送小${falcon.get_uma_sex_title()}回家的感谢，为此${callname}被手纲小姐狠狠的批评了。`,
     );
   };
-  handlers[47 + 21] = async () => {
-    const me = get_chara_talk(0),
-      falcon = get_chara_talk(46);
-    const callname = sys_get_callname(46, 0);
+  handlers[47 + 21] = async (falcon, me, callname) => {
     await print_event_name(`训练室的花`, falcon);
     era.printButton(`终于结束了。`, 1);
     await era.input();
@@ -538,13 +529,22 @@ module.exports = (handlers = {}) => {
     await falcon.say_and_wait(`说起来，接下来的训练方针是——`);
     await era.printAndWait(`时间便在闲聊与训练之中度过。`);
   };
-  handlers[47 + 32] = async (falcon, me, _, event_object) => {
+  handlers[47 + 32] = async (
+    falcon,
+    me,
+    _,
+    flags,
+    edu_marks,
+    relation,
+    love,
+    ebj,
+  ) => {
     const callname = sys_get_callname(46, 0);
     if (
       era.get('cflag:0:位置') !== location_enum.beach ||
       era.get('cflag:0:位置') !== era.get('cflag:46:位置')
     ) {
-      add_event(event_hooks.week_end, event_object);
+      add_event(event_hooks.week_end, ebj);
       return;
     }
     await print_event_name(`夏季合宿结束·为了更大的舞台`, falcon);
@@ -631,8 +631,7 @@ module.exports = (handlers = {}) => {
     );
     await falcon.say_and_wait(`就这样一步步的迈向最高的舞台。`);
   };
-  handlers[47 + 39] = async (falcon, me) => {
-    const callname = sys_get_callname(46, 0);
+  handlers[47 + 39] = async (falcon, me, callname) => {
     // 萱草 忘忧草，寓意忘记烦恼。
     // 过量摄入可能会中毒
     await print_event_name('萱草', falcon);

@@ -57,6 +57,7 @@ module.exports = class extends CustomizedCheck {
         ' 的事迹很感兴趣，也许可以在招待室遇到……',
       ]);
     }
+    super.check_next_week();
   }
 
   get_aim_races() {

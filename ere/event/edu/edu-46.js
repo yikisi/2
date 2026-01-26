@@ -1,6 +1,5 @@
 /**
  * @file 醒目飞鹰 - 育成
- *
  * @author 黑奴一号
  */
 const era = require('#/era-electron');
@@ -48,7 +47,7 @@ module.exports = class extends CustomizedEdu {
   }
 
   async week_start(falcon, me, callname, hook, extra_flag, event_object) {
-    if (week_start_handlers[event_object.arg] !== undefined) {
+    if (week_start_handlers[event_object.arg] !== void 0) {
       const flags = { wait_flag: false },
         ret = await week_start_handlers[event_object.arg].call(
           this,
@@ -62,6 +61,14 @@ module.exports = class extends CustomizedEdu {
       flags.wait_flag && (await era.waitAnyKey());
       return ret;
     }
+    return await super.week_start(
+      falcon,
+      me,
+      callname,
+      hook,
+      extra_flag,
+      event_object,
+    );
   }
 
   async week_end(falcon, me, callname, hook, extra_flag, event_object) {
