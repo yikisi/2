@@ -321,6 +321,8 @@ module.exports = class extends CustomizedCheck {
         event_marks.fall_heaven === 1)
     ) {
       add_event(event_hooks.week_start, event_obj);
+    } else {
+      super.check_next_week();
     }
   }
 

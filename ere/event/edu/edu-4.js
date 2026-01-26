@@ -23,6 +23,16 @@ const { attr_names, fumble_result } = require('#/data/train-const');
 
 module.exports = class extends CustomizedEdu {
   async week_start(maru, me, callname, hook, extra_flag, event_object) {
+    if (event_object?.arg === 'palace') {
+      return await super.week_start(
+        maru,
+        me,
+        callname,
+        hook,
+        extra_flag,
+        event_object,
+      );
+    }
     return await maru_week_start(maru, me, callname, hook, event_object);
   }
 

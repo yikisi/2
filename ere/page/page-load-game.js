@@ -564,6 +564,19 @@ module.exports = async () => {
             }
             if (version <= 2202) {
               check_titles(349);
+              if (era.get('flag:当前回合数') % 48 || 48 > 9) {
+                era
+                  .getAddedCharacters()
+                  .filter((cid) => cid === 4 || cid === 46)
+                  .forEach((cid) => {
+                    if (
+                      era.get(`cflag:${cid}:招募状态`) === recruit_flags.yes &&
+                      era.get(`cflag:${cid}:育成回合计时`) > 3 * 48
+                    ) {
+                      era.set(`cflag:${cid}:可再次育成`, 1);
+                    }
+                  });
+              }
             }
             if (version < era.get('gamebase').version) {
               set_image_t(7);
