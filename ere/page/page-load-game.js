@@ -570,9 +570,10 @@ module.exports = async () => {
             if (version <= 2202) {
               check_titles(349);
               if (era.get('flag:当前回合数') % 48 || 48 > 9) {
+                const bug_list = [4, 46, 346, 347, 348];
                 era
                   .getAddedCharacters()
-                  .filter((cid) => cid === 4 || cid === 46)
+                  .filter((cid) => bug_list.includes(cid))
                   .forEach((cid) => {
                     if (
                       era.get(`cflag:${cid}:招募状态`) === recruit_flags.yes &&
