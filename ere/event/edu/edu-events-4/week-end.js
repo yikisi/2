@@ -24,7 +24,7 @@ module.exports = async function (maru, me, hook, ebj) {
   const edu_marks = new MaEduMarks();
   const edu_weeks = era.get('cflag:4:育成回合计时');
   let wait_flag = false;
-  if (ebj.arg === 'beginning') {
+  if (ebj?.arg === 'beginning') {
     // 从  ${zensky.name}登场开始 风数值为1 最终结局与风数值 例：TE=20 GE = 17-19 其余均为NE
     // 尽管竞争将造成极大的损耗，但你不想去看看那里的风景吗？
     await print_event_name(`序章·${maru.name}登场`, maru);
@@ -212,9 +212,8 @@ module.exports = async function (maru, me, hook, ebj) {
       `作为你与${maru.name}签约后的第一次正式见面，就这样结束了。`,
     );
     //风属性为1
-  } else if (edu_marks.dream === 1) {
+  } else if (ebj?.arg === 'dream') {
     await print_event_name(`焦鹿梦`, maru);
-    edu_marks.dream++;
     //比喻虚幻迷离、得失无常，以及稀里糊涂、犹如做梦的状况。
     maru.print(
       `醒来的时候，发现自己躺在草地上，周围是一片花田，从身边的草地一路延伸到地平线的尽头。`,

@@ -569,7 +569,7 @@ module.exports = async () => {
             }
             if (version <= 2202) {
               check_titles(349);
-              if (era.get('flag:当前回合数') % 48 || 48 > 9) {
+              if (era.get('flag:当前回合数') % 48 || 48 >= 9) {
                 const bug_list = [4, 46, 346, 347, 348];
                 era
                   .getAddedCharacters()

@@ -27,7 +27,7 @@ function check_and_add_event(
     edu_marks._r_e_check--;
     edu_marks.add(param_name);
     add_event(hook, event_obj.copy().set_arg(param_name));
-    cb !== undefined && cb();
+    typeof cb === 'function' && cb();
   }
 }
 

@@ -19,16 +19,15 @@ const { location_enum } = require('#/data/locations');
  * @param {CharaTalk} me
  * @param {string} callname
  * @param {HookArg} hook
- * @param {EventObject} event_object
+ * @param {EventObject} ebj
  */
-module.exports = async function (maru, me, callname, hook, event_object) {
+module.exports = async function (maru, me, callname, hook, ebj) {
   const digital = get_chara_talk(19),
     falcon = get_chara_talk(46),
     event_marks = new MaEduMarks(),
     edu_weeks = era.get('cflag:4:育成回合计时');
   let wait_flag = false;
-  if (event_marks.memory === 1) {
-    event_marks.memory++;
+  if (ebj?.arg === 'memory') {
     await print_event_name(`早上好，${maru.name}`, maru);
     maru.print(`被直射的阳光照在脸上，不情愿地醒来了。`);
     maru.print(`昨天晚上玩过头歇菜了吗？`);
@@ -111,7 +110,7 @@ module.exports = async function (maru, me, callname, hook, event_object) {
     await era.printAndWait(
       `带着这份对未来的憧憬，${maru.name}迎来了新的一天。`,
     );
-  } else if (event_marks.teacher_sister === 1) {
+  } else if (ebj?.arg === 'teacher_sister') {
     // 训练员面对想要学习的东西提不起兴趣，丸善斯基对其进行指导
     await print_event_name(`请指导我，丸善斯基老师！`, maru);
     await era.printAndWait(`某个休息日的早上。`);
@@ -1597,7 +1596,7 @@ module.exports = async function (maru, me, callname, hook, event_object) {
       era.get('cflag:0:位置') !== location_enum.beach ||
       era.get('cflag:4:位置') !== era.get('cflag:0:位置')
     ) {
-      add_event(event_hooks.week_start, event_object);
+      add_event(event_hooks.week_start, ebj);
       return false;
     }
     await print_event_name('夏季合宿', maru);
@@ -1873,7 +1872,7 @@ module.exports = async function (maru, me, callname, hook, event_object) {
       era.get('cflag:0:位置') !== location_enum.beach ||
       era.get('cflag:4:位置') !== era.get('cflag:0:位置')
     ) {
-      add_event(event_hooks.week_start, event_object);
+      add_event(event_hooks.week_start, ebj);
       return;
     }
     await print_event_name('抉择', maru);
@@ -2605,7 +2604,7 @@ module.exports = async function (maru, me, callname, hook, event_object) {
       era.get('cflag:0:位置') !== location_enum.beach ||
       era.get('cflag:4:位置') !== era.get('cflag:0:位置')
     ) {
-      add_event(hook.hook, event_object);
+      add_event(hook.hook, ebj);
       return false;
     }
     await print_event_name('夏季合宿开始', maru);
