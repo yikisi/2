@@ -1,16 +1,25 @@
 const era = require('#/era-electron');
 
-const { base_skill_price, mark_prices } = require('#/data/ero/juel-const');
-const { skill2juel, talent2juel } = require('#/data/ero/price.json');
+const {
+  base_skill_price,
+  mark_prices,
+  skill2jewel,
+  talent2jewel,
+} = require('#/data/ero/juel-const');
 
 /**
  * @param {number} cid
- * @param {{[is_emotion]:boolean,[is_auto_update]:boolean}} [config]
+ * @param {{[is_emotion]:boolean,[is_auto_update]:boolean,[base_price]:number}} [config]
  * @returns {number}
  */
-function get_base_price(cid, config = {}) {
+function get_base_price(
+  cid,
+  config = {
+    base_price: base_skill_price,
+  },
+) {
   return (
-    (base_skill_price *
+    (config.base_price *
       (100 +
         era.get('flag:宝珠消耗量') * !config.is_auto_update +
         era.get(`talent:${cid}:工口好奇`) * 10 * !config.is_emotion)) /
@@ -19,6 +28,7 @@ function get_base_price(cid, config = {}) {
 }
 
 module.exports = {
+  get_base_price,
   /**
    * @param {number} cid
    * @param {number} aim_level
@@ -35,34 +45,34 @@ module.exports = {
   },
   /**
    * @param {number} cid
-   * @param {string} skill_name
+   * @param {number} aid
    * @param {number} level
    * @param {boolean} [is_auto_update]
    * @returns {Record<string,number>}
    */
-  get_skill_price(cid, skill_name, level, is_auto_update) {
+  get_skill_price(cid, aid, level, is_auto_update = false) {
     const base_price = get_base_price(cid, { is_auto_update });
-    const len = skill2juel[skill_name].length;
-    return skill2juel[skill_name].reduce((p, c) => {
+    const len = skill2jewel[aid].length;
+    return skill2jewel[aid].reduce((p, c) => {
       p[c] = Math.floor((base_price * level) / len);
       return p;
     }, {});
   },
   /**
    * @param {number} cid
-   * @param {string} talent_name
+   * @param {number} tid
    * @param {number} delta
    * @returns {Record<string,number>}
    */
-  get_talent_price(cid, talent_name, delta) {
+  get_talent_price(cid, tid, delta) {
     const base_price = get_base_price(cid);
     const emotion_base_price = get_base_price(cid, { is_emotion: true });
-    const len = talent2juel[talent_name].length;
-    return talent2juel[talent_name].reduce((p, c) => {
-      p[c] = Math.floor(
+    const len = talent2jewel[tid].length;
+    return talent2jewel[tid].reduce((p, jid) => {
+      p[jid] = Math.floor(
         (4 *
-          ((c === '顺从' ? emotion_base_price : base_price) *
-            Math.abs(delta))) /
+          // JEWELNAME:10 = 顺从
+          ((jid === 10 ? emotion_base_price : base_price) * Math.abs(delta))) /
           len,
       );
       return p;

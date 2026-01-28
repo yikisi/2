@@ -1,3 +1,5 @@
+let lan = 'zh-CN';
+
 module.exports = {
   /**
    * @param {number} _num
@@ -5,23 +7,23 @@ module.exports = {
    */
   get_abbr_number(_num) {
     if (_num < 10000) {
-      return { content: _num.toLocaleString() };
+      return { content: _num.toLocaleString(lan) };
     }
     if (_num < 10000000) {
       return {
-        content: `${Math.round(_num / 1000).toLocaleString()}K`,
-        title: _num.toLocaleString(),
+        content: `${Math.round(_num / 1000).toLocaleString(lan)}K`,
+        title: _num.toLocaleString(lan),
       };
     }
     if (_num < 10000000000) {
       return {
-        content: `${Math.round(_num / 1000000).toLocaleString()}M`,
-        title: _num.toLocaleString(),
+        content: `${Math.round(_num / 1000000).toLocaleString(lan)}M`,
+        title: _num.toLocaleString(lan),
       };
     }
     return {
-      content: `${Math.round(_num / 1000000000).toLocaleString()}B`,
-      title: _num.toLocaleString(),
+      content: `${Math.round(_num / 1000000000).toLocaleString(lan)}B`,
+      title: _num.toLocaleString(lan),
     };
   },
   /**
@@ -48,4 +50,7 @@ module.exports = {
   // ln1200，根性最大值的自然对数
   log_max_wp: Math.log(1200),
   minutes_in_a_day: 24 * 60,
+  set_lan(_lan) {
+    lan = _lan;
+  },
 };

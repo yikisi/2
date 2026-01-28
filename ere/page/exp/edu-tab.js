@@ -183,7 +183,7 @@ module.exports = {
       ...[5, 6, 7].map((aid) => ({
         config: { width: 6 },
         content: i18n()
-          .tb_abl.template.replace('%ABL%', i18n().tb_abl[aid])
+          .tb_abl.bordered_template.replace('%ABL%', i18n().tb_abl[aid])
           .replace('%LEVEL%', era.get(`abl:${chara.id}:${aid}`)),
         type: 'text',
       })),

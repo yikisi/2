@@ -184,18 +184,16 @@ function update_temp_base(cid, ratio) {
 
 /**
  * @param {number} cid
- * @param {string} jewel_name
+ * @param {string} jname
  * @param {number} val
  * @param {Record<string,number>} dict
  */
-function set_juel_buff(cid, jewel_name, val, dict) {
-  if (dict !== undefined) {
-    dict[jewel_name] = Math.min(Math.max(val, -0.99), 1);
+function set_jewel_buff(cid, jname, val, dict) {
+  const final = Math.min(Math.max(val, -0.99), 1);
+  if (dict !== void 0) {
+    dict[jname] = final;
   } else {
-    era.set(
-      `tcvar:${cid}:${jewel_name}因子加成`,
-      Math.min(Math.max(val, -0.99), 1),
-    );
+    era.set(`tcvar:${cid}:${jname}因子加成`, final);
   }
 }
 
@@ -231,7 +229,7 @@ function update_c_j_buff(cid, dict) {
       love_buff = 0;
     }
   }
-  set_juel_buff(
+  set_jewel_buff(
     cid,
     '顺从',
     ((era.get(`talent:${cid}:自信程度`) +
@@ -250,7 +248,7 @@ function update_c_j_buff(cid, dict) {
       !cid / 2,
     dict,
   );
-  set_juel_buff(
+  set_jewel_buff(
     cid,
     '痛苦',
     ((era.get(`talent:${cid}:痛苦感受`) +
@@ -267,7 +265,7 @@ function update_c_j_buff(cid, dict) {
           lust_buf / 2),
     dict,
   );
-  set_juel_buff(
+  set_jewel_buff(
     cid,
     '恐惧',
     ((era.get(`talent:${cid}:恐惧感受`) +
@@ -286,7 +284,7 @@ function update_c_j_buff(cid, dict) {
           lust_buf / 2),
     dict,
   );
-  set_juel_buff(
+  set_jewel_buff(
     cid,
     '羞耻',
     ((era.get(`talent:${cid}:羞耻忍耐`) +
@@ -305,7 +303,7 @@ function update_c_j_buff(cid, dict) {
           lust_buf / 2),
     dict,
   );
-  set_juel_buff(
+  set_jewel_buff(
     cid,
     '反感',
     0.3 *
@@ -324,32 +322,32 @@ function update_c_j_buff(cid, dict) {
           lust_buf / 2),
     dict,
   );
-  set_juel_buff(
+  set_jewel_buff(
     cid,
     '施虐',
     lust_buf +
       (era.get(`talent:${cid}:小恶魔`) + era.get(`talent:${cid}:变态`)) / 2,
     dict,
   );
-  set_juel_buff(
+  set_jewel_buff(
     cid,
     '受虐',
     lust_buf +
       (era.get(`talent:${cid}:圣母`) + era.get(`talent:${cid}:变态`)) / 2,
     dict,
   );
-  set_juel_buff(cid, '口腔', lust_buf, dict);
-  set_juel_buff(
+  set_jewel_buff(cid, '口腔', lust_buf, dict);
+  set_jewel_buff(
     cid,
     '胸部',
     lust_buf + era.get(`talent:${cid}:乳房尺寸`) / 5,
     dict,
   );
-  set_juel_buff(cid, '身体', lust_buf, dict);
-  set_juel_buff(cid, '外阴', lust_buf, dict);
-  set_juel_buff(cid, '阴道', lust_buf, dict);
-  set_juel_buff(cid, '肛门', lust_buf, dict);
-  set_juel_buff(cid, '阴茎', lust_buf, dict);
+  set_jewel_buff(cid, '身体', lust_buf, dict);
+  set_jewel_buff(cid, '外阴', lust_buf, dict);
+  set_jewel_buff(cid, '阴道', lust_buf, dict);
+  set_jewel_buff(cid, '肛门', lust_buf, dict);
+  set_jewel_buff(cid, '阴茎', lust_buf, dict);
 }
 
 /** @param {number} ids */

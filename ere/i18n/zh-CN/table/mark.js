@@ -1,4 +1,7 @@
 class I18nMark {
+  name_template = '%NAME%刻印';
+  lv_template = 'Lv.%LEVEL%';
+
   n_pleasure = '欢愉';
   n_ero = '淫纹';
   n_meek = '同心';
@@ -14,7 +17,17 @@ class I18nMark {
   a_hate = '反';
   a_iron = '钢';
 
-  abbr_template = '[%NAME%%LEVEL%]';
+  abbr_template = '[%MARK%%LEVEL%]';
+  mark_with_level = '%MARK% Lv.%LEVEL%';
+
+  get_mark_with_level_stars = (mark_with_level, full_stars, empty_stars) => [
+    mark_with_level,
+    ' ',
+    full_stars,
+    empty_stars,
+  ];
+
+  s_title_name = '别称';
 
   s_t_no = '泄欲用母马';
   s_t_milk = '榨乳用母马';
@@ -24,6 +37,8 @@ class I18nMark {
   s_t_furniture = '抱枕用母马';
   s_t_assistant = '陪床用母马';
 
+  s_option_name = '词条';
+
   s_o_no = '无';
   s_o_milk = '乳奴';
   s_o_pregnant = '孕奴';
@@ -31,6 +46,8 @@ class I18nMark {
   s_o_inherit = '珠奴';
   s_o_furniture = '枕奴';
   s_o_assistant = '助奴';
+
+  s_description_name = '效果';
 
   s_d_no = '-';
   s_d_milk = '每周提供一杯乳汁。';

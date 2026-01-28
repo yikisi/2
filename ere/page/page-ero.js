@@ -101,7 +101,7 @@ function get_ero_marks(cid) {
       status_list.push({
         color: get_color(undefined, mark_colors[i], lv / 3),
         content: i18n()
-          .tb_mark.abbr_template.replace('%NAME%', di18n.tb_mark.abbr[i])
+          .tb_mark.abbr_template.replace('%MARK%', di18n.tb_mark.abbr[i])
           .replace('%LEVEL%', lv.toString()),
       });
     }
@@ -111,7 +111,7 @@ function get_ero_marks(cid) {
     status_list.push({
       color: mark_colors.iron,
       content: i18n()
-        .tb_mark.abbr_template.replace('%NAME%', i18n().tb_mark.a_iron)
+        .tb_mark.abbr_template.replace('%MARK%', i18n().tb_mark.a_iron)
         .replace('%LEVEL%', ''),
     });
   }

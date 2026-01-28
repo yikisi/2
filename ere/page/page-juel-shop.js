@@ -13,7 +13,7 @@ const {
   default_handler,
   get_skill_buttons,
   get_talent_buttons,
-  pay_juels,
+  pay_jewels,
   print_footer,
   print_price_and_confirm,
 } = require('#/page/juel-shop/snippets');
@@ -31,15 +31,15 @@ const {
 } = require('#/data/color-const');
 const date_indicator = require('#/data/date-indicator');
 const CharaInmon = require('#/data/ero/chara-inmon');
-const { part_abbr } = require('#/data/ero/ero-alias.json');
 const {
   shop_result_type_enum,
   talent_button_names_and_check_dict,
 } = require('#/data/ero/juel-const');
 const { slavery_enum } = require('#/data/ero/mark-const');
-const { part_names, pleasure_list } = require('#/data/ero/part-const');
-const { skill_desc, talent_desc } = require('#/data/ero/shop-desc.json');
-const { trained_talent_names } = require('#/data/ero/status-const');
+const { get_skill_group_list } = require('#/data/ero/part-const');
+
+const di18n = require('#/i18n/extended-def');
+const { __, i18n, lan } = require('#/i18n/selector');
 
 async function shop_result(cid, change, result_type) {
   switch (result_type) {
@@ -78,7 +78,6 @@ async function shop_result(cid, change, result_type) {
 module.exports = async (cid = era.get('flag:当前互动角色')) => {
   const total_delta = {};
   await get_custom_ero(cid).shop_start();
-  const chara_sex = era.get(`cflag:${cid}:性别`);
   const chara = get_chara_talk(cid);
   const me = get_chara_talk(0);
   const page_pointer = {
@@ -91,205 +90,145 @@ module.exports = async (cid = era.get('flag:当前互动角色')) => {
     era.drawLine();
     era.print(date_indicator());
     era.drawLine({
-      content: `${chara.get_full_name()} 的 因子`,
+      content: i18n().jewel_shop.jewel_header.replace(
+        '%NAME%',
+        chara.full_name,
+      ),
     });
     let buffer = [];
-    const j_dict = {},
-      origin_dict = {};
-    pleasure_list.forEach((part) => {
-      const j_name = part_names[part];
-      const key = `${j_name}快感`;
+    // computed jewel dictionary
+    const cj_dict = {};
+    // jewel dictionary
+    const jewel_dict = {};
+    // JEWELNAME:0 - 8 = 口腔 - 受虐
+    for (let jid = 0; jid <= 8; ++jid) {
       const j_count =
-        (j_dict[key] =
-        origin_dict[key] =
-          era.get(`jewel:${cid}:${key}`));
-      if (cid) {
-        j_dict[key] += Math.floor(era.get(`jewel:0:${key}`) / 2);
+        (cj_dict[jid] =
+        jewel_dict[jid] =
+          era.get(`jewel:${cid}:${jid}`));
+      if (cid > 0) {
+        cj_dict[jid] += Math.floor(era.get(`jewel:0:${jid}`) / 2);
       }
       buffer.push({
         config: { align: 'left', width: 3 },
-        content: [
-          part_abbr[j_name],
-          '：',
+        content: i18n().tb_param.get_jewel_list_in_shop(
+          __(`tb_param.abbr${jid}`),
           {
-            color: j_count > 0 ? palam_colors.notifications[1] : undefined,
-            content:
-              j_count >= 10000
-                ? `${Math.floor(j_count / 1000).toLocaleString()}K`
-                : j_count.toLocaleString(),
-            title: j_count >= 10000 ? j_count.toLocaleString() : undefined,
+            ...get_abbr_number(j_count),
+            color: j_count > 0 ? palam_colors.notifications[1] : void 0,
           },
-        ],
+        ),
         type: 'text',
       });
-    });
+    }
     if (cid > 0) {
-      new Array(4).fill(0).forEach((_, i) => {
-        const j_name = era.get(`palamname:${i + 10}`);
+      // JEWELNAME:10 - 13 = 顺从 - 羞耻
+      for (let jid = 10; jid <= 13; ++jid) {
         const j_count =
-          (j_dict[j_name] =
-          origin_dict[j_name] =
-            era.get(`jewel:${cid}:${i + 10}`));
+          (cj_dict[jid] =
+          jewel_dict[jid] =
+            era.get(`jewel:${cid}:${jid}`));
         buffer.push({
           config: { align: 'left', width: 3 },
-          content: [
-            j_name.substring(0, 1),
-            '：',
+          content: i18n().tb_param.get_jewel_list_in_shop(
+            __(`tb_param.abbr${jid}`),
             {
-              color: j_count > 0 ? palam_colors.notifications[1] : undefined,
               ...get_abbr_number(j_count),
+              color: j_count > 0 ? palam_colors.notifications[1] : void 0,
             },
-          ],
+          ),
           type: 'text',
         });
-      });
+      }
     } else {
-      const key = '顺从';
+      // JEWELNAME:10 = 顺从
       const j_count =
-        (j_dict[key] =
-        origin_dict[key] =
-          era.get(`jewel:${cid}:${key}`));
+        (cj_dict[10] =
+        jewel_dict[10] =
+          era.get(`jewel:${cid}:10`));
       buffer.push({
         config: { align: 'left', width: 3 },
-        content: [
-          '顺',
-          '：',
-          {
-            color: j_count > 0 ? palam_colors.notifications[1] : undefined,
-            content:
-              j_count >= 10000
-                ? `${Math.floor(j_count / 1000).toLocaleString()}K`
-                : j_count.toLocaleString(),
-            title: j_count >= 10000 ? j_count.toLocaleString() : undefined,
-          },
-        ],
+        content: i18n().tb_param.get_jewel_list_in_shop(__(`tb_param.abbr10`), {
+          ...get_abbr_number(j_count),
+          color: j_count > 0 ? palam_colors.notifications[1] : void 0,
+        }),
         type: 'text',
       });
     }
     era.printMultiColumns(buffer);
     if (page_pointer.tab === 0) {
       era.drawLine({
-        content: `${chara.get_full_name()} 的 能力`,
+        content: i18n().jewel_shop.abl_header.replace(
+          '%NAME%',
+          chara.full_name,
+        ),
       });
       buffer = [];
-      const skill_dict = {};
-      ['甜言蜜语', '接吻技巧', '口交技巧', '口腔耐性', '口腔掌握'].forEach(
-        (e, i) =>
-          buffer.push(...get_skill_buttons(cid, i, e, skill_dict, j_dict)),
-      );
-      era.printMultiColumns(buffer);
-
-      buffer = [];
-      if (chara_sex - 1) {
-        buffer.push(
-          ...get_skill_buttons(cid, 5, '乳交技巧', skill_dict, j_dict),
+      // abl dictionary
+      const a_dict = {};
+      const skill_groups = get_skill_group_list(chara.sex_code);
+      skill_groups.forEach((g, i) => {
+        era.printMultiColumns(
+          g.reduce(
+            (p, aid, j) => [
+              ...p,
+              ...get_skill_buttons(cid, i * 10 + j, aid, a_dict, cj_dict),
+            ],
+            [],
+          ),
         );
-      }
-      ['胸部耐性', '胸部掌握'].forEach((e, i) =>
-        buffer.push(...get_skill_buttons(cid, i + 6, e, skill_dict, j_dict)),
-      );
-      era.printMultiColumns(buffer);
+      });
+      era.println();
+      era.print(i18n().jewel_shop.abl_tab_tooltip);
 
-      buffer = [];
-      ['手交技巧', '足交技巧', '身体技巧', '身体耐性', '身体掌握'].forEach(
-        (e, i) =>
-          buffer.push(...get_skill_buttons(cid, i + 8, e, skill_dict, j_dict)),
-      );
-      era.printMultiColumns(buffer);
-
-      buffer = [];
-      if (chara_sex) {
-        buffer.push(
-          ...get_skill_buttons(cid, 13, '插入技巧', skill_dict, j_dict),
-        );
-        buffer.push(
-          ...get_skill_buttons(cid, 14, '阴茎耐性', skill_dict, j_dict),
-        );
-      }
-      buffer.push(
-        ...get_skill_buttons(cid, 15, '阴茎掌握', skill_dict, j_dict),
-      );
-      era.printMultiColumns(buffer);
-
-      buffer = [];
-      if (chara_sex - 1) {
-        buffer.push(
-          ...get_skill_buttons(cid, 16, '性交技巧', skill_dict, j_dict),
-        );
-      }
-      if (!chara_sex) {
-        buffer.push(
-          ...get_skill_buttons(cid, 17, '外阴耐性', skill_dict, j_dict),
-        );
-      }
-      if (chara_sex - 1) {
-        buffer.push(
-          ...get_skill_buttons(cid, 18, '阴道耐性', skill_dict, j_dict),
-        );
-      }
-      ['外阴掌握', '阴道掌握'].forEach((e, i) =>
-        buffer.push(...get_skill_buttons(cid, i + 19, e, skill_dict, j_dict)),
-      );
-      era.printMultiColumns(buffer);
-
-      buffer = [];
-      ['肛交技巧', '肛门耐性', '肛门掌握'].forEach((e, i) =>
-        buffer.push(...get_skill_buttons(cid, i + 21, e, skill_dict, j_dict)),
-      );
-      era.printMultiColumns(buffer);
-
-      buffer = [];
-      ['施虐技巧', '受虐耐性', '受虐掌握'].forEach((e, i) =>
-        buffer.push(...get_skill_buttons(cid, i + 24, e, skill_dict, j_dict)),
-      );
-      era.printMultiColumns(buffer);
-
-      era.print(
-        '\n* 点击能力名显示说明，或者点击↑/↓升级或降级能力\n' +
-          `** 角色身体部位的调教因子不足所需时，${me.name} 可以以两倍的因子补足差额`,
-      );
       print_footer(cid, page_pointer.tab);
       const ret = await era.input();
       if (ret < 990) {
-        const skill_index = ret % 100;
-        const action = ret - skill_index;
-        const skill_name = skill_desc[skill_index].substring(0, 4);
+        const aid = skill_groups[((ret % 100) - (ret % 10)) / 10][ret % 10];
+        const action = ret - (ret % 100);
         if (action === 0) {
-          await era.printAndWait(skill_desc[skill_index]);
+          era.print(i18n().tb_abl[aid]);
+          era.println();
+          await era.printAndWait(i18n().abl_desc[aid]);
         } else {
-          era.print([
-            '要将 ',
-            chara.get_colored_name(),
-            ' 的',
-            {
-              content: ` ${skill_name} Lv.${skill_dict[skill_name]}`,
-              color: buff_colors[2],
-            },
-            action === 100
-              ? { content: ' 升级 ', color: attr_change_colors.up }
-              : { content: ' 降级 ', color: attr_change_colors.down },
-            '至',
-            {
-              content: ` Lv.${
-                skill_dict[skill_name] + (action === 100 ? 1 : -1)
-              } `,
-              color: buff_colors[2],
-            },
-            '吗？花费：',
-          ]);
+          era.print(
+            i18n().jewel_shop.get_abl_upgrade_confirm(
+              chara.get_colored_name(),
+              {
+                content: di18n.tb_abl.get_leveled_ability(aid, a_dict[aid]),
+                color: buff_colors[2],
+              },
+              action === 100
+                ? {
+                    content: i18n().jewel_shop.cf_upgrade,
+                    color: attr_change_colors.up,
+                  }
+                : {
+                    content: i18n().jewel_shop.cf_downgrade,
+                    color: attr_change_colors.down,
+                  },
+              {
+                content: i18n().tb_abl.lv_template.replace(
+                  '%LEVEL%',
+                  a_dict[aid] + (action === 100 ? 1 : -1),
+                ),
+                color: buff_colors[2],
+              },
+            ),
+          );
           const price_dict = get_skill_price(
             cid,
-            skill_name,
-            skill_dict[skill_name] + (action === 100 ? 1 : 0),
+            aid,
+            a_dict[aid] + (action === 100 ? 1 : 0),
           );
           const is_confirmed = await print_price_and_confirm(
-            cid,
+            chara,
             price_dict,
-            origin_dict,
+            jewel_dict,
           );
           if (is_confirmed) {
-            era.add(`abl:${cid}:${skill_name}`, action === 100 ? 1 : -1);
-            pay_juels(cid, price_dict, origin_dict);
+            era.add(`abl:${cid}:${aid}`, action === 100 ? 1 : -1);
+            pay_jewels(cid, price_dict, jewel_dict);
             total_delta.skill =
               (total_delta.skill || 0) + (action === 100) * 2 - 1;
           }
@@ -299,372 +238,360 @@ module.exports = async (cid = era.get('flag:当前互动角色')) => {
       }
     } else if (page_pointer.tab === 1) {
       era.drawLine({
-        content: `${chara.get_full_name()} 的 特性`,
+        content: i18n().jewel_shop.talent_header.replace(
+          '%NAME%',
+          chara.full_name,
+        ),
       });
-      const talent_dict = { slave_run: 0 };
-      new Array(7).fill(0).forEach((_, i) => {
-        talent_dict.slave_run +=
-          (talent_dict[era.get(`talentname:${i + 60}`)] = era.get(
-            `talent:${cid}:${i + 60}`,
-          )) === 2;
-      });
+      const t_dict = { slave_run: 0 };
+      // TALENTNAME:60 - 66 = 淫口 - 早泄
+      for (let tid = 60; tid <= 66; ++tid) {
+        t_dict.slave_run +=
+          (t_dict[tid] = era.get(`talent:${cid}:${tid}`)) === 2;
+      }
+      /** @type {{tid:number,[ceids]:number[]}[][]}*/
+      const talent_groups = [
+        [
+          // EXPNAME:33 = 口腔高潮次数
+          { tid: 60, ceids: [33] },
+          // EXPNAME:43 = 胸部高潮次数
+          { tid: 61, ceids: [43] },
+          // EXPNAME:72 = 身体高潮次数
+          { tid: 62, ceids: [72] },
+        ],
+      ];
+      if (chara.sex_code > 0) {
+        // EXPNAME:103 = 阴茎高潮次数
+        talent_groups[0].push({ tid: 66, ceids: [103] });
+      }
+      if (chara.sex_code === 0) {
+        // EXPNAME:112 = 外阴高潮次数
+        talent_groups[0].push({ tid: 63, ceids: [112] });
+      }
+      if (chara.sex_code !== 1) {
+        // EXPNAME:113 = 阴道高潮次数
+        talent_groups[0].push({ tid: 64, ceids: [113] });
+      }
+      // EXPNAME:81 = 肛门高潮次数
+      talent_groups[0].push({ tid: 65, ceids: [81] });
 
-      buffer = [];
-      buffer.push(
-        ...get_talent_buttons(
-          cid,
-          0,
-          '淫口',
-          era.get(`exp:${cid}:口腔高潮次数`),
-          talent_dict,
-          j_dict,
-        ),
+      // TALENTNAME:40 - 42 = 抖S - 喜欢痛苦
+      talent_groups[1] = [
+        // EXPNAME:92 = 施虐高潮次数
+        { tid: 40, ceids: [92] },
+        // EXPNAME:95 = 受虐高潮次数
+        { tid: 41, ceids: [95] },
+        { tid: 42, ceids: [95] },
+      ];
+
+      talent_groups[2] = [];
+      // TALENTNAME:77/73 = 喉咙敏感/饮精成瘾
+      [74, 70].forEach((tid) =>
+        // EXPNAME:36 = 饮精量
+        talent_groups[2].push({ tid, ceids: [36] }),
       );
-      buffer.push(
-        ...get_talent_buttons(
-          cid,
-          1,
-          '淫乳',
-          era.get(`exp:${cid}:胸部高潮次数`),
-          talent_dict,
-          j_dict,
-        ),
-      );
-      buffer.push(
-        ...get_talent_buttons(
-          cid,
-          2,
-          '淫身',
-          era.get(`exp:${cid}:身体高潮次数`),
-          talent_dict,
-          j_dict,
-        ),
-      );
-      if (chara_sex) {
-        buffer.push(
-          ...get_talent_buttons(
-            cid,
-            3,
-            '早泄',
-            era.get(`exp:${cid}:阴茎高潮次数`),
-            talent_dict,
-            j_dict,
-          ),
+      if (chara.sex_code !== 1) {
+        // TALENTNAME:77/73 = 子宫敏感/榨精成瘾
+        [75, 71].forEach((tid) =>
+          // EXPNAME:116 = 膣内精液量
+          talent_groups[2].push({ tid, ceids: [116] }),
         );
       }
-      if (chara_sex === 0) {
-        buffer.push(
-          ...get_talent_buttons(
-            cid,
-            4,
-            '淫核',
-            era.get(`exp:${cid}:外阴高潮次数`),
-            talent_dict,
-            j_dict,
-          ),
-        );
-      }
-      if (chara_sex - 1) {
-        buffer.push(
-          ...get_talent_buttons(
-            cid,
-            5,
-            '淫壶',
-            era.get(`exp:${cid}:阴道高潮次数`),
-            talent_dict,
-            j_dict,
-          ),
-        );
-      }
-      buffer.push(
-        ...get_talent_buttons(
-          cid,
-          6,
-          '淫臀',
-          era.get(`exp:${cid}:肛门高潮次数`),
-          talent_dict,
-          j_dict,
-        ),
+      // TALENTNAME:77/73 = 肠道敏感/精液灌肠
+      [76, 72].forEach((tid) =>
+        // EXPNAME:83 = 肠内精液量
+        talent_groups[2].push({ tid, ceids: [83] }),
       );
-      era.printMultiColumns(buffer);
-
-      buffer = [];
-      buffer.push(
-        ...get_talent_buttons(
-          cid,
-          7,
-          '抖S',
-          era.get(`exp:${cid}:施虐高潮次数`),
-          talent_dict,
-          j_dict,
-        ),
+      // TALENTNAME:77/73 = 气味敏感/浴精成瘾
+      [77, 73].forEach((tid) =>
+        // EXPNAME:35/42/71 = 被颜射精液量/胸部沾染精液量/身体沾染精液量
+        talent_groups[2].push({ tid, ceids: [35, 42, 71] }),
       );
-      buffer.push(
-        ...get_talent_buttons(
-          cid,
-          8,
-          '喜欢责骂',
-          era.get(`exp:${cid}:受虐高潮次数`),
-          talent_dict,
-          j_dict,
-        ),
-      );
-      buffer.push(
-        ...get_talent_buttons(
-          cid,
-          9,
-          '喜欢痛苦',
-          era.get(`exp:${cid}:受虐高潮次数`),
-          talent_dict,
-          j_dict,
-        ),
-      );
-      era.printMultiColumns(buffer);
-
-      buffer = [];
-      ['喉咙敏感', '饮精成瘾'].forEach((e, i) =>
-        buffer.push(
-          ...get_talent_buttons(
-            cid,
-            i + 10,
-            e,
-            era.get(`exp:${cid}:饮精量`),
-            talent_dict,
-            j_dict,
-          ),
-        ),
-      );
-      if (chara_sex - 1) {
-        ['子宫敏感', '榨精成瘾'].forEach((e, i) =>
+      let acc = 0;
+      talent_groups.forEach((groups) => {
+        buffer = [];
+        groups.forEach(({ tid, ceids }) =>
           buffer.push(
-            ...get_talent_buttons(
-              cid,
-              i + 12,
-              e,
-              era.get(`exp:${cid}:膣内精液量`),
-              talent_dict,
-              j_dict,
-            ),
+            ...get_talent_buttons(cid, acc++, tid, ceids, t_dict, cj_dict),
           ),
         );
-      }
-      ['肠道敏感', '精液灌肠'].forEach((e, i) =>
-        buffer.push(
-          ...get_talent_buttons(
-            cid,
-            i + 14,
-            e,
-            era.get(`exp:${cid}:肠内精液量`),
-            talent_dict,
-            j_dict,
-          ),
-        ),
-      );
-      const metric =
-        era.get(`exp:${cid}:颜射精液量`) +
-        era.get(`exp:${cid}:胸部沾染精液量`) +
-        era.get(`exp:${cid}:身体沾染精液量`);
-      ['气味敏感', '浴精成瘾'].forEach((e, i) =>
-        buffer.push(
-          ...get_talent_buttons(cid, i + 16, e, metric, talent_dict, j_dict),
-        ),
-      );
-      if (chara_sex - 1) {
-        const milk_talent = era.get(`talent:${cid}:泌乳`);
+        era.printMultiColumns(buffer);
+      });
+      if (chara.sex_code !== 1) {
+        buffer = [];
+        talent_groups[2].push({ tid: 32 }, { tid: 33 });
+        // TALENTNAME:32 = 泌乳
+        const milk_talent = era.get(`talent:${cid}:32`);
+        let mu_dict;
+        let mu_title = '';
+        if (milk_talent >= 2) {
+          mu_dict = void 0;
+        } else {
+          mu_dict = get_talent_price(cid, 32, 2);
+          mu_title = di18n.jewel_shop.get_price_title_with_other_tip(
+            mu_dict,
+            i18n().jewel_shop.milk_other_condition,
+            [['STATUS', milk_talent === 1 ? i18n().ui_on : i18n().ui_off]],
+          );
+          if (milk_talent !== 1) {
+            mu_dict = void 0;
+          }
+        }
+        mu_title ||= void 0;
+        const md_dict =
+          milk_talent !== 3 ? void 0 : get_talent_price(cid, 32, 1);
         buffer.push(
           ...[
             {
-              accelerator: 18,
-              config: {},
-              content: `母乳体质 [${milk_talent === 3 ? '是' : '否'}]`,
-              type: 'button',
+              accelerator: acc,
+              content: i18n()
+                .tb_talent.shop_template.replace(
+                  '%NAME%',
+                  i18n().tb_talent.milk,
+                )
+                .replace(
+                  '%STATUS%',
+                  milk_talent === 3 ? i18n().ui_on : i18n().ui_off,
+                ),
             },
             {
-              accelerator: 118,
+              accelerator: 100 + acc,
               config: {
                 disabled:
-                  milk_talent !== 2 ||
-                  Object.entries(
-                    get_talent_price(cid, '母乳体质', 2),
-                  ).findIndex((e) => e[1] > j_dict[e[0]]) !== -1,
+                  mu_dict === void 0 ||
+                  Object.entries(mu_dict).findIndex(
+                    (e) => e[1] > cj_dict[e[0]],
+                  ) !== -1,
+                title: mu_title,
               },
-              content: '获取特性',
-              type: 'button',
+              content: i18n().jewel_shop.bt_add,
             },
             {
-              accelerator: 218,
+              accelerator: 200 + acc,
               config: {
                 disabled:
-                  milk_talent !== 3 ||
-                  Object.entries(
-                    get_talent_price(cid, '母乳体质', 1),
-                  ).findIndex((e) => e[1] > j_dict[e[0]]) !== -1,
+                  md_dict === void 0 ||
+                  Object.entries(md_dict).findIndex(
+                    (e) => e[1] > cj_dict[e[0]],
+                  ) !== -1,
+                title:
+                  md_dict !== void 0
+                    ? di18n.jewel_shop.get_price_title(md_dict)
+                    : void 0,
               },
-              content: '消除特性',
-              type: 'button',
+              content: i18n().jewel_shop.bt_remove,
             },
-          ].map((e) => {
-            e.config.width = 4;
-            return e;
+          ].map((b) => {
+            b.config = { ...(b.config ?? {}), width: 4 };
+            b.type = 'button';
+            return b;
           }),
         );
-        const nipple_size = era.get(`talent:${cid}:乳头类型`);
+        // TALENTNAME:33 = 乳头类型
+        const nipple_size = era.get(`talent:${cid}:33`);
+        const nu_dict =
+          nipple_size === 2 ? void 0 : get_talent_price(cid, 33, 2);
+        const nd_dict =
+          nipple_size !== 2 ? void 0 : get_talent_price(cid, 33, 1);
         buffer.push(
           ...[
             {
-              accelerator: 19,
-              config: {},
-              content: `凹陷乳头 [${nipple_size === 2 ? '是' : '否'}]`,
-              type: 'button',
+              accelerator: acc + 1,
+              content: i18n()
+                .tb_talent.shop_template.replace(
+                  '%NAME%',
+                  i18n().tb_talent.nipple,
+                )
+                .replace(
+                  '%STATUS%',
+                  nipple_size === 2 ? i18n().ui_on : i18n().ui_off,
+                ),
             },
             {
-              accelerator: 119,
+              accelerator: 100 + acc + 1,
               config: {
                 disabled:
-                  nipple_size === 2 ||
-                  Object.entries(
-                    get_talent_price(cid, '凹陷乳头', 2),
-                  ).findIndex((e) => e[1] > j_dict[e[0]]) !== -1,
+                  nu_dict === void 0 ||
+                  Object.entries(nu_dict).findIndex(
+                    (e) => e[1] > cj_dict[e[0]],
+                  ) !== -1,
+                title:
+                  nu_dict !== void 0
+                    ? di18n.jewel_shop.get_price_title(nu_dict)
+                    : void 0,
               },
-              content: '获取特性',
-              type: 'button',
+              content: i18n().jewel_shop.bt_add,
             },
             {
-              accelerator: 219,
+              accelerator: 200 + acc + 1,
               config: {
                 disabled:
-                  nipple_size !== 2 ||
-                  Object.entries(
-                    get_talent_price(cid, '凹陷乳头', 1),
-                  ).findIndex((e) => e[1] > j_dict[e[0]]) !== -1,
+                  nd_dict === void 0 ||
+                  Object.entries(nd_dict).findIndex(
+                    (e) => e[1] > cj_dict[e[0]],
+                  ) !== -1,
+                title:
+                  nd_dict !== void 0
+                    ? di18n.jewel_shop.get_price_title(nd_dict)
+                    : void 0,
               },
-              content: '消除特性',
-              type: 'button',
+              content: i18n().jewel_shop.bt_remove,
             },
-          ].map((e) => {
-            e.config.width = 4;
-            return e;
+          ].map((b) => {
+            b.config = { ...(b.config ?? {}), width: 4 };
+            b.type = 'button';
+            return b;
           }),
         );
+        era.printMultiColumns(buffer);
       }
-      era.printMultiColumns(buffer);
 
       era.println();
-      era.print([
-        '* 点击特性名显示说明，或者点击之后的按钮升降感度/获取或消除特性',
-        { isBr: true },
-        `** 角色身体部位的调教因子不足所需时，${me.name} 可以以两倍的因子补足差额`,
-        { isBr: true },
-        `*** 可获取最高级敏感度的部位数量：${era.get(`talent:${cid}:调教度`)}`,
-      ]);
+      era.print(
+        i18n().jewel_shop.get_talent_tab_tooltip(
+          era.get(`talent:${cid}:调教度`),
+        ),
+      );
       print_footer(cid, page_pointer.tab);
       const ret = await era.input();
       if (ret < 990) {
-        const talent_index = ret % 100;
-        const action = ret - talent_index;
-        const talent_name = talent_desc[talent_index].replace(
-          /[/\n](.|\n)*$/,
-          '',
-        );
-        if (action === 0) {
-          await era.printAndWait(talent_desc[talent_index]);
+        const bt_index = ret % 100;
+        let tid;
+        if (bt_index < talent_groups[0].length) {
+          tid = talent_groups[0][bt_index].tid;
+        } else if (
+          bt_index <
+          talent_groups[0].length + talent_groups[1].length
+        ) {
+          tid = talent_groups[1][bt_index - talent_groups[0].length].tid;
         } else {
-          if (talent_index >= 18) {
+          tid =
+            talent_groups[2][
+              bt_index - talent_groups[0].length - talent_groups[1].length
+            ].tid;
+        }
+        const action = ret - bt_index;
+        if (action === 0) {
+          era.print(__(`tb_talent.s${tid}`, i18n().tb_talent[tid]));
+          era.println();
+          await era.printAndWait(__(`talent_desc.s${tid}`));
+        } else {
+          if (tid <= 33) {
             const inmon = CharaInmon.get(cid);
-            era.print([
-              '要',
-              action === 100
-                ? { content: ' 获取 ', color: attr_change_colors.up }
-                : { content: ' 消除 ', color: attr_change_colors.down },
-              chara.get_colored_name(),
-              ' 的',
-              {
-                content: ` [${talent_name}] `,
-                color: buff_colors[2],
-              },
-              '特性吗？',
+            era.print(
+              i18n().jewel_shop.get_talent_change_confirm(
+                chara.get_colored_name(),
+                {
+                  color: buff_colors[2],
+                  content: i18n().tb_talent.template.replace(
+                    '%NAME%',
+                    __(`tb_talent.s${tid}`, i18n().tb_talent[tid]),
+                  ),
+                },
+                action === 100
+                  ? {
+                      color: attr_change_colors.up,
+                      content: i18n().jewel_shop.cf_add,
+                    }
+                  : {
+                      color: attr_change_colors.down,
+                      content: i18n().jewel_shop.cf_remove,
+                    },
+              ),
+            );
+            if (
               action === 200 &&
-              talent_index === 18 &&
+              tid === 32 &&
               inmon.slave === slavery_enum.milk
-                ? '会取消淫纹词条 [乳奴]！'
-                : '',
-              '花费：',
-            ]);
+            ) {
+              era.print(i18n().jewel_shop.milk_slave_warning);
+            }
             const price_dict = get_talent_price(
               cid,
-              talent_name,
+              tid,
               action === 100 ? 2 : 1,
             );
             const is_confirmed = await print_price_and_confirm(
-              cid,
+              chara,
               price_dict,
-              origin_dict,
+              jewel_dict,
             );
             if (is_confirmed) {
-              if (talent_index === 18) {
+              if (tid === 32) {
                 era.set(`talent:${cid}:泌乳`, action === 100 ? 3 : 0);
-                if (
-                  action === 200 &&
-                  talent_index === 18 &&
-                  inmon.slave === slavery_enum.milk
-                ) {
+                if (action === 200 && inmon.slave === slavery_enum.milk) {
                   inmon.slave = 0;
                 }
               } else {
                 era.set(`talent:${cid}:乳头类型`, action === 100 ? 2 : 0);
               }
-              pay_juels(cid, price_dict, origin_dict);
+              pay_jewels(cid, price_dict, jewel_dict);
               total_delta.talent =
                 (total_delta.talent || 0) + (action === 100 ? 1 : -1);
             }
           } else {
-            if (talent_index < 7) {
-              era.print([
-                '要',
-                action === 100
-                  ? { content: ' 提升 ', color: attr_change_colors.up }
-                  : { content: ' 降低 ', color: attr_change_colors.down },
-                chara.get_colored_name(),
-                ' 的',
-                {
-                  content: ` ${trained_talent_names[talent_name][0].substring(
-                    0,
-                    2,
-                  )}敏感度 `,
-                  color: buff_colors[2],
-                },
-                '吗？花费：',
-              ]);
-            } else if (talent_index < 18) {
-              era.print([
-                '要',
-                action === 100
-                  ? { content: ' 获取 ', color: attr_change_colors.up }
-                  : { content: ' 消除 ', color: attr_change_colors.down },
-                chara.get_colored_name(),
-                ' 的',
-                {
-                  content: ` [${talent_name}] `,
-                  color: buff_colors[2],
-                },
-                '特性吗？花费：',
-              ]);
+            let delta_dict;
+            if (tid >= 60 && tid <= 66) {
+              era.print(
+                i18n().jewel_shop.get_sens_change_confirm(
+                  chara.get_colored_name(),
+                  {
+                    color: buff_colors[2],
+                    content: __(`tb_talent.sens${tid}`),
+                  },
+                  action === 100
+                    ? {
+                        color: attr_change_colors.up,
+                        content: i18n().jewel_shop.cf_s_up,
+                      }
+                    : {
+                        color: attr_change_colors.down,
+                        content: i18n().jewel_shop.cf_s_down,
+                      },
+                ),
+              );
+              delta_dict = talent_button_names_and_check_dict.trained;
+            } else {
+              era.print(
+                i18n().jewel_shop.get_talent_change_confirm(
+                  chara.get_colored_name(),
+                  {
+                    color: buff_colors[2],
+                    content: i18n().tb_talent.template.replace(
+                      '%NAME%',
+                      __(`tb_talent.s${tid}`, i18n().tb_talent[tid]),
+                    ),
+                  },
+                  action === 100
+                    ? {
+                        color: attr_change_colors.up,
+                        content: i18n().jewel_shop.cf_add,
+                      }
+                    : {
+                        color: attr_change_colors.down,
+                        content: i18n().jewel_shop.cf_remove,
+                      },
+                ),
+              );
+              if (tid >= 70) {
+                delta_dict = talent_button_names_and_check_dict.poisoned;
+              } else {
+                delta_dict = talent_button_names_and_check_dict.sm;
+              }
             }
-            const delta =
-              talent_button_names_and_check_dict[
-                talent_index < 7 ? 'trained' : 'poisoned'
-              ][action === 100 ? 'up_delta' : 'down_delta'][
-                talent_dict[talent_name]
-              ];
-            const price_dict = get_talent_price(cid, talent_name, delta);
+            const delta = (
+              action === 100 ? delta_dict.up_delta : delta_dict.down_delta
+            )[t_dict[tid]];
+            console.log(tid, delta);
+            const price_dict = get_talent_price(cid, tid, delta);
             const is_confirmed = await print_price_and_confirm(
-              cid,
+              chara,
               price_dict,
-              origin_dict,
+              jewel_dict,
             );
             if (is_confirmed) {
-              era.add(`talent:${cid}:${talent_name}`, delta);
-              pay_juels(cid, price_dict, origin_dict);
+              era.add(`talent:${cid}:${tid}`, delta);
+              pay_jewels(cid, price_dict, jewel_dict);
               total_delta.talent = (total_delta.talent || 0) + delta;
             }
           }
@@ -673,78 +600,65 @@ module.exports = async (cid = era.get('flag:当前互动角色')) => {
         default_handler(ret, page_pointer);
       }
     } else if (page_pointer.tab === 2) {
-      await print_mark_tab(chara, j_dict, total_delta, page_pointer);
+      await print_mark_tab(chara, cj_dict, total_delta, page_pointer);
     } else {
-      era.drawLine({ content: '采补之术' });
+      era.drawLine({ content: i18n().jewel_shop.transfer_header });
       era.printMultiColumns(
-        Object.keys(j_dict).map((e, i) => {
-          return {
-            accelerator: i,
-            config: { width: 12, disabled: origin_dict[e] < 10000 },
-            content: `将 ${chara.name} 的 ${e.substring(
-              0,
-              2,
-            )}因子 转换给 ${me.name}`,
-            type: 'button',
-          };
-        }),
+        Object.keys(jewel_dict).map((jid, i) => ({
+          accelerator: i,
+          config: { width: 12, disabled: jewel_dict[jid] < 10000 },
+          content: di18n.jewel_shop.get_transfer_button(
+            chara.name,
+            jid,
+            me.name,
+          ),
+          type: 'button',
+        })),
       );
-      era.print([
-        { isBr: true },
-        '* ',
-        chara.get_colored_name(),
-        ' 的',
-        { content: ' 10,000 ', color: buff_colors[2] },
-        '个部位因子与顺从因子，可以转换为 ',
-        me.get_colored_name(),
-        ' 的',
-        { content: ' 10 ', color: buff_colors[2] },
-        '个因子',
-        { isBr: true },
-        '* ',
-        chara.get_colored_name(),
-        ' 的',
-        { content: ' 10,000 ', color: buff_colors[2] },
-        '个痛苦、恐惧、羞耻因子，可以转换为 ',
-        me.get_colored_name(),
-        ' 的',
-        { content: ' 1 ', color: buff_colors[2] },
-        '个顺从因子',
-      ]);
+      era.println();
+      era.print(
+        i18n().jewel_shop.transfer_tab_tooltip.replaceAll('%YOU%', me.name),
+      );
       print_footer(cid, page_pointer.tab);
       const ret = await era.input();
       if (ret < 990) {
-        const src_j_name = Object.keys(j_dict)[ret],
-          dst_j_name = ret < 10 ? src_j_name : '顺从',
-          dst_j_count = ret < 10 ? 10 : 1;
+        const src_jid = Object.keys(cj_dict)[ret];
+        // 情感因子全部转换成顺从
+        const dst_jid = src_jid <= 10 ? src_jid : 10;
+        // 部位因子和顺从 10,000:10，情感因子 10,000:1
+        const dst_j_count = src_jid <= 10 ? 10 : 1;
         if (
           await select_yes_or_no(
-            [
-              '将 ',
+            i18n().jewel_shop.get_transfer_confirm(
               chara.get_colored_name(),
-              ' 的',
               {
-                content: ` ${src_j_name.substring(0, 2)}因子 × 10,000`,
+                content: i18n()
+                  .tb_param.jewel_with_count.replace(
+                    '%JEWEL%',
+                    __(`tb_param.jewel${src_jid}`),
+                  )
+                  .replace('%COUNT%', Object(10000).toLocaleString(lan())),
                 color: buff_colors[2],
               },
-              '（总共 ',
               {
-                content: origin_dict[src_j_name].toLocaleString(),
+                ...get_abbr_number(jewel_dict[src_jid]),
                 color: buff_colors[2],
               },
-              `）转换为 ${me.name} 的`,
+              me.get_colored_name(),
               {
-                content: ` ${dst_j_name.substring(0, 2)}因子 × ${dst_j_count} `,
+                content: i18n()
+                  .tb_param.jewel_with_count.replace(
+                    '%JEWEL%',
+                    __(`tb_param.jewel${dst_jid}`),
+                  )
+                  .replace('%COUNT%', dst_j_count.toString()),
                 color: buff_colors[2],
               },
-              '吗？',
-            ],
-            '确定',
-            '还是算了',
+            ),
           )
         ) {
-          era.add(`jewel:${cid}:${src_j_name}`, -10000);
-          era.add(`jewel:0:${dst_j_name}`, dst_j_count);
+          era.add(`jewel:${cid}:${src_jid}`, -10000);
+          era.add(`jewel:0:${dst_jid}`, dst_j_count);
         }
       } else {
         default_handler(ret, page_pointer);

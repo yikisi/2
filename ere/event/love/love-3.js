@@ -67,8 +67,8 @@ module.exports = class extends CustomizedLove {
     } else if (ret[0] === 1) {
       // TALENTNAME:62 = 淫身
       era.set('talent:3:62', 2);
-      get_skill_list(teio.sex_code).forEach((e) =>
-        era.set(`abl:3:${e}`, Math.min(era.get(`abl:3:${e}`) + 1, 5)),
+      get_skill_list(teio.sex_code).forEach((aid) =>
+        era.set(`abl:3:${aid}`, Math.min(era.get(`abl:3:${aid}`) + 1, 5)),
       );
     }
     if (ret[0] === 1) {

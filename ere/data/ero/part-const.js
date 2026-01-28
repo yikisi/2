@@ -107,28 +107,46 @@ const base_enum = {
 };
 Object.keys(base_enum).forEach((k, i) => (base_enum[k] = i));
 
+function get_skill_group_list(sex) {
+  // ABLNAME:40/10/11/30/20 = 甜言蜜语/接吻技巧/口交技巧/口腔耐性/口腔掌握
+  const ret = [[40, 10, 11, 30, 20]];
+  if (sex !== 1) {
+    // ABLNAME:12/31/32 = 乳交技巧/胸部耐性/胸部掌握
+    ret.push([12, 31, 21]);
+  } else {
+    ret.push([31, 21]);
+  }
+  // ABLNAME:13/14/15/32/22 = 手交技巧/足交技巧/身体技巧/身体耐性/身体掌握
+  ret.push([13, 14, 15, 32, 22]);
+  if (sex > 0) {
+    // ABLNAME:18/36/26 = 插入技巧/阴茎耐性/阴茎掌握
+    ret.push([18, 36, 26]);
+  } else {
+    ret.push([26]);
+  }
+  switch (sex) {
+    case 0:
+      // ABLNAME:16/33/34/23/24 = 性交技巧/外阴耐性/阴道耐性/外阴掌握/阴道掌握
+      ret.push([16, 33, 34, 23, 24]);
+      break;
+    case 1:
+      ret.push([23, 24]);
+      break;
+    default:
+      ret.push([16, 34, 23, 24]);
+  }
+  // ABLNAME:17/33/25 = 肛交技巧/肛门耐性/肛门掌握
+  ret.push([17, 35, 25]);
+  // ABLNAME:19/37/27 = 施虐技巧/受虐耐性/受虐掌握
+  ret.push([19, 37, 27]);
+  return ret;
+}
+
 module.exports = {
   base_enum,
-  /** 身体部位的枚举类型 */
-  get_skill_list: (sex) => [
-    '甜言蜜语',
-    '接吻技巧',
-    ...Object.entries(part_skills)
-      .map((e) => [Number(e), e[1]])
-      .filter((e) => {
-        switch (sex) {
-          case 0:
-            return e[0] !== part_enum.penis;
-          case 1:
-            return e[0] !== part_enum.clitoris && e[1] !== part_enum.virgin;
-          case 10:
-            return e[0] !== part_enum.clitoris;
-        }
-      })
-      .map((e) => e[1])
-      .filter((e, i, l) => i === l.indexOf(e)),
-  ],
-  /** 身体部位对应的快感名称 */
+  get_skill_group_list,
+  get_skill_list: (sex) =>
+    get_skill_group_list(sex).reduce((p, c) => [...p, ...c]),
   motion_enum: {
     // 躺
     lie: 0,
@@ -139,15 +157,17 @@ module.exports = {
     // 反向躺
     rev: 3,
   },
+  /** 身体部位的枚举类型 */
   part_enum,
   part_gifts,
-  /** 快感条名称数组 */
+  /** 身体部位对应的快感名称 */
   part_names,
   part_names4item,
   part_skills,
   part_talents,
   /** 身体部位对应的部位名称 */
   part_touch,
+  /** 快感条名称数组 */
   pleasure_list: [
     part_enum.mouth,
     part_enum.breast,

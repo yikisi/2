@@ -55,12 +55,12 @@ ${arr.map((e) => `    // ${e[2]}: ${e[5]}\n    ${e[7]}: ${e[0]},`).join('\n')}
 );
 
 read_and_write_generated(
-  join(__dirname, '../../ere/i18n/zh-CN/inmon-names.js'),
+  join(__dirname, '../../ere/i18n/zh-CN/sex/inmons.js'),
   '//',
   n_out,
 );
 read_and_write_generated(
-  join(__dirname, '../../ere/i18n/zh-CN/inmon-desc.js'),
+  join(__dirname, '../../ere/i18n/zh-CN/sex/inmon-desc.js'),
   '//',
   d_out,
 );
@@ -68,7 +68,7 @@ read_and_write_generated(
 try {
   process.stdout.write(
     execSync(
-      'npx eslint --fix ./ere/data/ero/plugin ./ere/i18n/zh-CN/inmon*.js',
+      'npx eslint --fix ./ere/data/ero/plugin ./ere/i18n/zh-CN/sex/inmon*.js',
       { cwd: join(__dirname, '../..') },
     ),
   );

@@ -33,6 +33,7 @@ const get_display_name = require('#/utils/calc-display-name');
 const { say_by_passer_by } = require('#/utils/chara-talk');
 const CharaTalk = require('#/utils/chara-talk');
 const { join_list } = require('#/utils/list-utils');
+const { set_lan: set_lan_for_value } = require('#/utils/value-utils');
 
 const { generate_copyrights, get_copyright_entry } = require('#/copyright');
 const { get_chara_color } = require('#/data/chara-colors');
@@ -45,6 +46,8 @@ const { res_version } = require('#/versions');
 module.exports = async () => {
   // GLOBALNAME:3 = 语言
   set_lan(era.get('global:3') || era.set('global:3', 'zh-CN'));
+  set_lan_for_value(lan());
+
   let flag_title = true;
   CharaTalk.me = new CharaTalk(0);
 
@@ -357,6 +360,7 @@ module.exports = async () => {
           era.printButton(i18n(lan_list[i]).language, i + 1);
         }
         set_lan(era.set('global:3', lan_list[(await era.input()) - 1]));
+        set_lan_for_value(lan());
       },
     });
   }

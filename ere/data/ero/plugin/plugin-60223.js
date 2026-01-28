@@ -6,7 +6,7 @@ module.exports = new InmonPlugin(
   602,
   3,
   19,
-  (args) => args.id > 0,
+  (args) => args.id > 0 && args.edu,
   1130,
 );
 // GENERATED END

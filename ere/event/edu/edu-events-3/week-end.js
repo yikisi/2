@@ -449,12 +449,12 @@ module.exports = class extends Edu3UntilSchoolAtrium {
         await era.printAndWait(
           `合眼之时，仿佛感到了什么东西靠过来，贴到了 ${me.name} 的身上。`,
         );
-        get_skill_list(teio.sex_code).forEach((e) =>
-          era.set(`abl:3:${e}`, Math.min(era.get(`abl:3:${e}`) + 1, 5)),
+        get_skill_list(teio.sex_code).forEach((aid) =>
+          era.set(`abl:3:${aid}`, Math.min(era.get(`abl:3:${aid}`) + 1, 5)),
         );
         get_filtered_talents(teio.sex_code, 60)
-          .filter((talent_id) => era.get(`talent:3:${talent_id}`) < 1)
-          .forEach((talent_id) => era.set(`talent:3:${talent_id}`, 1));
+          .filter((tid) => era.get(`talent:3:${tid}`) < 1)
+          .forEach((tid) => era.set(`talent:3:${tid}`, 1));
         touch_list
           .filter((e) => e !== part_enum.sadism)
           .forEach((e) =>

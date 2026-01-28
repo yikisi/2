@@ -1,5 +1,5 @@
 const get_titled_content = require('#/i18n/get-titled-content');
-const { __, i18n } = require('#/i18n/selector');
+const { __, i18n, lan } = require('#/i18n/selector');
 
 /** 基于 i18n 衍生的定义，不需要修改 */
 const di18n = {
@@ -244,6 +244,17 @@ const di18n = {
      * @param {number} level
      * @returns {string}
      */
+    get_leveled_ability(aid, level) {
+      const _ = i18n().tb_abl;
+      return _.template
+        .replace('%ABL%', _[aid])
+        .replace('%LEVEL%', level.toString());
+    },
+    /**
+     * @param {number} aid
+     * @param {number} level
+     * @returns {string}
+     */
     get_abl_desc(aid, level) {
       if (level >= 10) {
         return i18n().abl_desc.abl_ex;
@@ -329,7 +340,7 @@ const di18n = {
       );
     },
     get_titled_item: (key) =>
-      get_titled_content(i18n().tb_item, key, i18n().tb_item_desc, (k) => k),
+      get_titled_content(i18n().tb_item, key, i18n().item_desc, (k) => k),
   },
   tb_mark: {
     get names() {
@@ -340,6 +351,25 @@ const di18n = {
       const _ = i18n().tb_mark;
       return [_.a_pleasure, _.a_ero, _.a_meek, _.a_pain, _.a_shame, _.a_hate];
     },
+    get_mark_with_level_stars(mid, level, full_stars, empty_stars) {
+      const _ = i18n().tb_mark;
+      return _.get_mark_with_level_stars(
+        _.mark_with_level
+          .replace('%MARK%', di18n.tb_mark.names[mid])
+          .replace('%LEVEL%', level.toString()),
+        full_stars,
+        empty_stars,
+      );
+    },
+    get_mark_full_name: (mid) =>
+      i18n().tb_mark.name_template.replace('%NAME%', di18n.tb_mark.names[mid]),
+    get_mark_full_name_with_level: (mid, level) =>
+      i18n()
+        .tb_mark.mark_with_level.replace(
+          '%MARK%',
+          di18n.tb_mark.get_mark_full_name(mid),
+        )
+        .replace('%LEVEL%', level.toString()),
     get s_titles() {
       const _ = i18n().tb_mark;
       return [
@@ -418,6 +448,12 @@ const di18n = {
         (k) => k,
         ...args,
       ),
+    get_talent_with_status(tid, status) {
+      const _ = i18n().tb_talent;
+      return _.shop_template
+        .replace('%NAME%', _[tid])
+        .replace('%STATUS%', status ? i18n().ui_on : i18n().ui_off);
+    },
   },
   inmon: {
     get_tip(pid, group, level, slot) {
@@ -439,6 +475,104 @@ const di18n = {
       const _ = i18n().gene;
       return [_.r_n, _.r_r, _.r_sr, _.r_ssr];
     },
+  },
+  jewel_shop: {
+    get_price_title(price_dict) {
+      const _ = i18n().jewel_shop;
+      return _.price_title_template.replace(
+        '%PRICE%',
+        Object.entries(price_dict)
+          .map(([jid, count]) =>
+            _.jewel_price_template
+              .replace('%JEWEL%', __(`tb_param.jewel${jid}`))
+              .replace('%COUNT%', count.toString()),
+          )
+          .join(_.price_splitter),
+      );
+    },
+    get_price_title_with_other_tip(price_dict, other, dict) {
+      const _ = i18n().jewel_shop;
+      let price = Object.entries(price_dict)
+        .map(([jid, count]) =>
+          _.jewel_price_template
+            .replace('%JEWEL%', __(`tb_param.jewel${jid}`))
+            .replace('%COUNT%', count.toString()),
+        )
+        .join(_.price_splitter);
+      if (Array.isArray(dict)) {
+        dict
+          .filter(
+            (e) =>
+              Array.isArray(e) &&
+              typeof e[0] === 'string' &&
+              typeof e[1] === 'string',
+          )
+          .forEach(([a, r]) => (other = other.replaceAll(`%${a}%`, r)));
+      }
+      return _.price_title_template.replace('%PRICE%', `\n${other}\n${price}`);
+    },
+    get_price_title_with_condition(price_dict, ceids, now, cond) {
+      const _ = i18n().jewel_shop;
+      let price = Object.entries(price_dict)
+        .map(([jid, count]) =>
+          _.jewel_price_template
+            .replace('%JEWEL%', __(`tb_param.jewel${jid}`))
+            .replace('%COUNT%', count.toString()),
+        )
+        .join(_.price_splitter);
+      if (ceids.length > 1) {
+        price =
+          _.multi_cond_title_template
+            .replace('%COND%', cond.toString())
+            .replace(
+              '%ALL%',
+              now.reduce((p, c) => p + c, 0).toLocaleString(lan()),
+            )
+            .replace(
+              '%NOW%',
+              ceids
+                .map(
+                  (eid, i) =>
+                    now[i].toLocaleString(lan()) + ' ' + i18n().tb_exp[eid],
+                )
+                .join(_.price_splitter),
+            ) +
+          '\n' +
+          price;
+      } else if (ceids.length > 0) {
+        price =
+          _.cond_title_template
+            .replace('%COND%', cond.toString())
+            .replace('%EXP%', i18n().tb_exp[ceids[0]])
+            .replace('%NOW%', now[0].toLocaleString(lan())) +
+          '\n' +
+          price;
+      }
+      return _.price_title_template.replace('%PRICE%', '\n' + price);
+    },
+    get_price_info(jid, cost, all, chara) {
+      return i18n().jewel_shop.get_price_info(
+        __(`tb_param.jewel${jid}`),
+        cost,
+        all,
+        chara,
+      );
+    },
+    get_transfer_button: (chara, tid, you) =>
+      i18n()
+        .jewel_shop.bt_transfer.replace('%NAME%', chara)
+        .replace('%JEWEL%', __(`tb_param.jewel${tid}`))
+        .replace('%YOU%', you),
+    get_inmon_slave: (slave) =>
+      i18n().jewel_shop.inmon_slave_template.replace(
+        '%SLAVE%',
+        di18n.tb_mark.s_options[slave],
+      ),
+    get_inmon_slave_desc: (slave) =>
+      i18n().jewel_shop.inmon_slave_desc_template.replace(
+        '%DESC%',
+        di18n.tb_mark.s_descriptions[slave],
+      ),
   },
   race: {
     get a_ground() {

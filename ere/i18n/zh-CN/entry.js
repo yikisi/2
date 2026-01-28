@@ -166,7 +166,7 @@ class I18nEntry {
 
   tk_speak_border = ['「', '」'];
   tk_think_border = ['（', '）'];
-  tk_past_border = this.tk_think_border;
+  tk_past_border = ['（', '）'];
   tk_unknown = '？？？';
 
   nt_ask = '是否查看相关的小纸条？';
@@ -178,6 +178,8 @@ class I18nEntry {
   ui_ellipses = '……';
   ui_back = '返回';
   ui_achieve_title = '获得新成就！';
+  ui_on = '是';
+  ui_off = '否';
   ui_yes = '确定';
   ui_no = '取消';
   ui_skip = '跳过';
@@ -193,6 +195,8 @@ class I18nEntry {
   ];
   ui_month_template = '%MONTH% 个月';
   ui_too_long = '（太长了，请重新输入！）';
+  ui_pg_prev = '前一页';
+  ui_pg_next = '后一页';
 
   ui_show_team = '查看队伍列表';
   ui_train = '训练';
@@ -241,8 +245,10 @@ class I18nEntry {
   note = new (require('#/i18n/zh-CN/notes'))();
 
   tb_abl = new (require('#/i18n/zh-CN/table/abl'))();
+  tb_exp = new (require('#/i18n/zh-CN/table/exp'))();
   tb_item = new (require('#/i18n/zh-CN/table/item'))();
   tb_mark = new (require('#/i18n/zh-CN/table/mark'))();
+  tb_param = new (require('#/i18n/zh-CN/table/param'))();
   tb_stain = new (require('#/i18n/zh-CN/table/stain'))();
   tb_status = new (require('#/i18n/zh-CN/table/status'))();
   tb_talent = new (require('#/i18n/zh-CN/table/talent'))();
@@ -252,6 +258,7 @@ class I18nEntry {
   talent_desc = new (require('#/i18n/zh-CN/table/talent-desc'))();
 
   train_action = new (require('#/i18n/zh-CN/sex/actions'))();
+  jewel_shop = new (require('#/i18n/zh-CN/sex/shop'))();
   inmon = new (require('#/i18n/zh-CN/sex/inmons'))();
   inmon_desc = new (require('#/i18n/zh-CN/sex/inmon-desc'))();
 

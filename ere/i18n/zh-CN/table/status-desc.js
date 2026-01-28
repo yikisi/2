@@ -27,8 +27,14 @@ class I18nStatusDesc {
   buff345 = (buff) => `训练经验获取量+${buff}%。`;
   buff346 = (check) =>
     '训练成功率和效果' + (check > 0 ? '上升' : '稍微上升') + '。';
-  buff347 = this.buff346;
-  buff348 = this.buff346;
+  // 这里使用 getter，否则即使其他语言翻译库正确翻译了 buff346，buff347 和 buff348 还是会使用中文的 buff346
+  // <br>除非其他语言库重载 buff347 和 buff348
+  get buff347() {
+    return this.buff346;
+  }
+  get buff348() {
+    return this.buff346;
+  }
 
   milk = '胸部受到刺激会分泌乳汁。';
 

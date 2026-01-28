@@ -18,6 +18,7 @@ const { attr_change_colors, palam_colors } = require('#/data/color-const');
 const CharaInmon = require('#/data/ero/chara-inmon');
 const { mark_colors, mark_enum } = require('#/data/ero/mark-const');
 const { palam2juel } = require('#/data/ero/orgasm-const');
+const { get_skill_list } = require('#/data/ero/part-const');
 const { inmon_plugin_dict } = require('#/data/ero/plugin/plugin-const');
 const { growth_info, no_info, unknown_info } = require('#/data/exp-const');
 const { get_breast_cup, get_talent, get_xp } = require('#/data/info-generator');
@@ -231,22 +232,7 @@ module.exports = {
         config: { content: '性爱能力', position: 'left' },
         type: 'divider',
       });
-      const skill_list = [40, 10, 11, 30, 20, 12, 31, 21, 13, 14, 15, 32, 22];
-      if (chara.sex_code > 0) {
-        skill_list.push(18, 36);
-      }
-      skill_list.push(26);
-      if (chara.sex_code !== 1) {
-        skill_list.push(16);
-      }
-      if (chara.sex_code === 0) {
-        skill_list.push(33);
-      }
-      if (chara.sex_code !== 1) {
-        skill_list.push(34);
-      }
-      skill_list.push(23, 24, 17, 35, 25, 19, 37, 27);
-      skill_list.forEach((aid) => {
+      get_skill_list(chara.sex_code).forEach((aid) => {
         const level = era.get(`abl:${chara.id}:${aid}`);
         sex_info_list.push({
           config: { width: 6 },

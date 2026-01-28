@@ -7,7 +7,6 @@ const {
 
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
-const CharaTalk = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const get_color = require('#/utils/gradient-color');
 
@@ -17,21 +16,10 @@ const {
   talent_button_names_and_check_dict,
 } = require('#/data/ero/juel-const');
 const { mark_colors } = require('#/data/ero/mark-const');
-const { trained_talent_names } = require('#/data/ero/status-const');
 const extra_base = require('#/data/extra-base');
 
-/**
- * @param {Record<string,number>} p_dict
- * @returns {string}
- */
-function get_price_title(p_dict) {
-  return (
-    '需要：' +
-    Object.entries(p_dict)
-      .map(([k, n]) => `${k}×${n.toLocaleString()}`)
-      .join('＋')
-  );
-}
+const di18n = require('#/i18n/extended-def');
+const { __, i18n } = require('#/i18n/selector');
 
 module.exports = {
   /**
@@ -48,74 +36,79 @@ module.exports = {
   /**
    * @param {number} cid
    * @param {string} mid
-   * @param {number} _level
+   * @param {number} level
    * @returns {TextObject}
    */
-  get_mark_cols(cid, mid, _level) {
-    const level = Number(_level) || era.get(`mark:${cid}:${mid}`);
+  get_mark_cols(cid, mid, level = era.get(`mark:${cid}:${mid}`)) {
     return {
       config: {
         align: 'center',
         color: mark_colors[mid],
         width: 4,
       },
-      content: [
-        `${era.get(`markname:${mid}`)} Lv.${level} `,
+      content: di18n.tb_mark.get_mark_with_level_stars(
+        mid,
+        level,
         {
           content: new Array(level).fill('★').join(''),
-          color: get_color(undefined, mark_colors[mid], level / 3),
+          color: get_color(void 0, mark_colors[mid], level / 3),
         },
-        {
-          content: new Array(3 - level).fill('☆').join(''),
-        },
-      ],
+        { content: new Array(3 - level).fill('☆').join('') },
+      ),
       type: 'text',
     };
   },
   /**
    * @param {number} cid
    * @param {number} acc
-   * @param {string} skill_name
+   * @param {number} aid
    * @param {Record<string,number>} skill_dict
    * @param {Record<string,number>} juel_dict
    */
-  get_skill_buttons(cid, acc, skill_name, skill_dict, juel_dict) {
+  get_skill_buttons(cid, acc, aid, skill_dict, juel_dict) {
     let limit = base_skill_limit * (1 + (!cid && extra_base.skill));
-    const level = era.get(`abl:${cid}:${skill_name}`);
-    skill_dict[skill_name] = level;
-    const u_price = get_skill_price(cid, skill_name, level + 1);
-    const d_price = get_skill_price(cid, skill_name, level);
+    const level = era.get(`abl:${cid}:${aid}`);
+    skill_dict[aid] = level;
+    const u_price =
+      level >= limit ? void 0 : get_skill_price(cid, aid, level + 1);
+    const d_price = level <= 0 ? void 0 : get_skill_price(cid, aid, level);
     return [
       {
         accelerator: acc,
         config: { width: 4 },
-        content: `${skill_name} Lv.${level}`,
+        content: di18n.tb_abl.get_leveled_ability(aid, level),
         type: 'button',
       },
       {
         accelerator: acc + 100,
         config: {
           disabled:
-            level >= limit ||
+            u_price === void 0 ||
             Object.entries(u_price).findIndex(([j, n]) => n > juel_dict[j]) !==
               -1,
           width: 2,
-          title: level >= limit ? void 0 : get_price_title(u_price),
+          title:
+            u_price !== void 0
+              ? di18n.jewel_shop.get_price_title(u_price)
+              : void 0,
         },
-        content: '↑',
+        content: i18n().jewel_shop.bt_upgrade,
         type: 'button',
       },
       {
         accelerator: acc + 200,
         config: {
           disabled:
-            level <= 0 ||
+            d_price === void 0 ||
             Object.entries(d_price).findIndex(([j, n]) => n > juel_dict[j]) !==
               -1,
           width: 2,
-          title: level <= 0 ? void 0 : get_price_title(d_price),
+          title:
+            d_price !== void 0
+              ? di18n.jewel_shop.get_price_title(d_price)
+              : void 0,
         },
-        content: '↓',
+        content: i18n().jewel_shop.bt_downgrade,
         type: 'button',
       },
     ];
@@ -123,77 +116,110 @@ module.exports = {
   /**
    * @param {number} cid
    * @param {number} acc
-   * @param {string} t_name
-   * @param {number} cond
+   * @param {number} tid
+   * @param {number[]} ceids condition exp id
    * @param {Record<string,number>} t_dict
    * @param {Record<string,number>} j_dict
    */
-  get_talent_buttons(cid, acc, t_name, cond, t_dict, j_dict) {
-    let level = t_dict[t_name];
-    if (level === undefined) {
-      level = t_dict[t_name] = era.get(`talent:${cid}:${t_name}`);
+  get_talent_buttons(cid, acc, tid, ceids, t_dict, j_dict) {
+    let level = t_dict[tid];
+    if (level === void 0) {
+      level = t_dict[tid] = era.get(`talent:${cid}:${tid}`);
     }
-    const talent_bnc =
-      acc < 7
-        ? talent_button_names_and_check_dict.trained
-        : acc < 10
-          ? talent_button_names_and_check_dict.sm
-          : talent_button_names_and_check_dict.poisoned;
+    let talent_bnc;
+    let talent_name;
+    let bt_plus;
+    let bt_minus;
+    if (tid >= 70) {
+      talent_bnc = talent_button_names_and_check_dict.poisoned;
+      talent_name = di18n.tb_talent.get_talent_with_status(tid, level);
+      bt_plus = i18n().jewel_shop.bt_add;
+      bt_minus = i18n().jewel_shop.bt_remove;
+    } else if (tid >= 60) {
+      talent_bnc = talent_button_names_and_check_dict.trained;
+      talent_name = __(`tb_talent.${tid}_${level}`);
+      bt_plus = i18n().jewel_shop.bt_t_up;
+      bt_minus = i18n().jewel_shop.bt_t_down;
+    } else {
+      talent_bnc = talent_button_names_and_check_dict.sm;
+      talent_name = di18n.tb_talent.get_talent_with_status(tid, level);
+      bt_plus = i18n().jewel_shop.bt_add;
+      bt_minus = i18n().jewel_shop.bt_remove;
+    }
+    const u_price =
+      level >= talent_bnc.max
+        ? void 0
+        : get_talent_price(cid, tid, talent_bnc.up_delta[level]);
+    const d_price =
+      level <= talent_bnc.min
+        ? void 0
+        : get_talent_price(cid, tid, talent_bnc.down_delta[level]);
+    const now_exp = ceids.map((eid) => era.get(`exp:${cid}:${eid}`));
     return [
       {
         accelerator: acc,
         config: { width: 4 },
-        content: trained_talent_names[t_name]
-          ? trained_talent_names[t_name][level]
-          : `${t_name} [${level ? '是' : '否'}]`,
+        content: talent_name,
         type: 'button',
       },
       {
         accelerator: acc + 100,
         config: {
           disabled:
-            level === talent_bnc.max ||
-            Object.entries(
-              get_talent_price(cid, t_name, talent_bnc.up_delta[level]),
-            ).findIndex((e) => e[1] > j_dict[e[0]]) !== -1 ||
-            cond < (talent_bnc.metrics[level] || 0) ||
+            u_price === void 0 ||
+            Object.entries(u_price).findIndex((e) => e[1] > j_dict[e[0]]) !==
+              -1 ||
+            now_exp.reduce((p, c) => p + c, 0) <
+              (talent_bnc.metrics[level] || 0) ||
             (acc < 7 &&
               level === 1 &&
               t_dict.slave_run >= era.get(`talent:${cid}:调教度`)),
+          title:
+            u_price !== void 0
+              ? di18n.jewel_shop.get_price_title_with_condition(
+                  u_price,
+                  ceids,
+                  now_exp,
+                  talent_bnc.metrics[level] || 0,
+                )
+              : void 0,
           width: 4,
         },
-        content: talent_bnc.up,
+        content: bt_plus,
         type: 'button',
       },
       {
         accelerator: acc + 200,
         config: {
           disabled:
-            level === talent_bnc.min ||
-            Object.entries(
-              get_talent_price(cid, t_name, talent_bnc.down_delta[level]),
-            ).findIndex((e) => e[1] > j_dict[e[0]]) !== -1,
+            d_price === void 0 ||
+            Object.entries(d_price).findIndex((e) => e[1] > j_dict[e[0]]) !==
+              -1,
+          title:
+            d_price !== void 0
+              ? di18n.jewel_shop.get_price_title(d_price)
+              : void 0,
           width: 4,
         },
-        content: talent_bnc.down,
+        content: bt_minus,
         type: 'button',
       },
     ];
   },
   /**
-   * @param {number} chara_id
+   * @param {number} cid
    * @param {Record<string,number>} price_dict
    * @param {Record<string,number>} origin_dict
    */
-  pay_juels(chara_id, price_dict, origin_dict) {
-    Object.keys(price_dict).forEach((e) => {
-      if (origin_dict[e] >= price_dict[e]) {
-        era.add(`juel:${chara_id}:${e}`, -price_dict[e]);
+  pay_jewels(cid, price_dict, origin_dict) {
+    for (const jid of Object.keys(price_dict)) {
+      if (origin_dict[jid] >= price_dict[jid]) {
+        era.add(`juel:${cid}:${jid}`, -price_dict[jid]);
       } else {
-        era.set(`juel:${chara_id}:${e}`, 0);
-        era.add(`juel:0:${e}`, -(price_dict[e] - origin_dict[e]) * 2);
+        era.set(`juel:${cid}:${jid}`, 0);
+        era.add(`juel:0:${jid}`, -(price_dict[jid] - origin_dict[jid]) * 2);
       }
-    });
+    }
   },
   /**
    * @param {number} cid
@@ -205,89 +231,99 @@ module.exports = {
     era.printMultiColumns(
       [
         ...[
+          { content: i18n().jewel_shop.abl_tab },
+          { content: i18n().jewel_shop.talent_tab },
           {
-            accelerator: 990,
-            content: '能力学习',
-            type: 'button',
-          },
-          {
-            accelerator: 991,
-            content: '特性变更',
-            type: 'button',
-          },
-          {
-            accelerator: 992,
             config: { disabled: !cid && !mark },
-            content: mark ? '刻印定制' : '刻印消除',
-            type: 'button',
+            content: i18n().jewel_shop.mark_tab(mark > 0),
           },
-          {
-            accelerator: 993,
-            config: { disabled: !cid },
-            content: cid ? '因子采补' : '',
-            type: cid ? 'button' : 'text',
-          },
-        ].map((b) => {
+          cid > 0
+            ? { content: i18n().jewel_shop.transfer_tab }
+            : { content: [], type: 'text' },
+        ].map((b, i) => {
+          b.accelerator = 990 + i;
           b.config ||= {};
-          b.config.buttonType =
-            b.accelerator - 990 === tab_pointer ? 'warning' : 'info';
+          b.config.buttonType = i === tab_pointer ? 'warning' : 'info';
           return b;
         }),
         {
           accelerator: 999,
           config: { align: 'right', offset: 4 },
-          content: '结束升级',
-          type: 'button',
+          content: i18n().jewel_shop.update_end,
         },
       ].map((b) => {
         b.config.width = 4;
+        b.type ??= 'button';
         return b;
       }),
     );
   },
   /**
-   * @param {number} cid
+   * @param {CharaTalk} chara
    * @param {Record<string,number>} price_dict
    * @param {Record<string,number>} origin_dict
+   * @param {CharaTalk} me
    * @returns {Promise<boolean>}
    */
-  async print_price_and_confirm(cid, price_dict, origin_dict) {
-    const chara_talk = get_chara_talk(cid);
-    Object.keys(price_dict).forEach((juel_name) => {
-      const buffer = [
-        `${juel_name.substring(0, 2)}因子：`,
-        {
-          content: `${
-            price_dict[juel_name] > origin_dict[juel_name]
-              ? origin_dict[juel_name].toLocaleString()
-              : price_dict[juel_name].toLocaleString()
-          }/${origin_dict[juel_name].toLocaleString()}`,
-          color: buff_colors[2],
-        },
-        ' (',
-        { content: chara_talk.name, color: chara_talk.color },
-        ')',
-      ];
-      if (price_dict[juel_name] > origin_dict[juel_name]) {
+  async print_price_and_confirm(
+    chara,
+    price_dict,
+    origin_dict,
+    me = !chara.id ? chara : get_chara_talk(0),
+  ) {
+    for (const jid in price_dict) {
+      const buffer = [];
+      if (price_dict[jid] > origin_dict[jid]) {
         buffer.push(
-          ' + ',
-          {
-            content: `${(
-              (price_dict[juel_name] - origin_dict[juel_name]) *
-              2
-            ).toLocaleString()}/${era
-              .get(`juel:0:${juel_name}`)
-              .toLocaleString()}`,
-            color: buff_colors[2],
-          },
-          ` (${CharaTalk.me.name})`,
+          ...di18n.jewel_shop.get_price_info(
+            jid,
+            {
+              content: origin_dict[jid].toLocaleString(),
+              color: buff_colors[2],
+            },
+            {
+              content: origin_dict[jid].toLocaleString(),
+              color: buff_colors[2],
+            },
+            chara.get_colored_name(),
+          ),
+          i18n().jewel_shop.price_splitter,
+          ...i18n().jewel_shop.get_addition_price_info(
+            {
+              content: (
+                (price_dict[jid] - origin_dict[jid]) *
+                2
+              ).toLocaleString(),
+              color: buff_colors[2],
+            },
+            {
+              content: era.get(`juel:0:${jid}`).toLocaleString(),
+              color: buff_colors[2],
+            },
+            me.get_colored_name(),
+          ),
+        );
+      } else {
+        buffer.push(
+          ...di18n.jewel_shop.get_price_info(
+            jid,
+            {
+              content: price_dict[jid].toLocaleString(),
+              color: buff_colors[2],
+            },
+            {
+              content: origin_dict[jid].toLocaleString(),
+              color: buff_colors[2],
+            },
+            chara.get_colored_name(),
+          ),
         );
       }
       era.print(buffer, {
         offset: 1,
         width: 23,
       });
-    });
-    return await select_yes_or_no('', '确定', '还是算了');
+    }
+    return await select_yes_or_no([]);
   },
 };

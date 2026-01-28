@@ -37,49 +37,6 @@ pregnant_stage_names[1 << pregnant_stage_enum.late] =
 pregnant_stage_names[1 << pregnant_stage_enum.pre_birth] =
   '迎接生命奇迹的时刻即将到来，该做好准备了';
 
-// TODO Remove
-/*** @type {Record<string,Record>} */
-const trained_talent_names = {};
-[
-  { '-4': '口腔钝感', 0: '口腔正常', 1: '口腔敏感', 2: '淫口' },
-  {
-    '-4': '胸部钝感',
-    0: '胸部正常',
-    1: '胸部敏感',
-    2: '淫乳',
-  },
-  {
-    '-4': '身体钝感',
-    0: '身体正常',
-    1: '身体敏感',
-    2: '淫身',
-  },
-  {
-    '-4': '外阴钝感',
-    0: '外阴正常',
-    1: '外阴敏感',
-    2: '淫核',
-  },
-  {
-    '-4': '阴道钝感',
-    0: '阴道正常',
-    1: '阴道敏感',
-    2: '淫壶',
-  },
-  {
-    '-4': '臀部钝感',
-    0: '臀部正常',
-    1: '臀部敏感',
-    2: '淫臀',
-  },
-  {
-    '-4': '阴茎钝感',
-    0: '阴茎正常',
-    1: '阴茎敏感',
-    2: '早泄',
-  },
-].forEach((e) => (trained_talent_names[e[2]] = e));
-
 const u_g_stage = ['幼年期', '成长期', '本格期'];
 const h_g_stage = ['幼年', '少年', '青年'];
 
@@ -135,7 +92,6 @@ module.exports = {
   // SM时的称呼
   sex_slave_title: { 0: '母马', 1: '公马', 10: '扶她母马' },
   sex_title: { 0: '马娘', 1: '马郎', 10: '马娘？' },
-  trained_talent_names,
   unexpected_pregnant_enum: {
     father_sleep: -1,
     mother_sleep: 1,
