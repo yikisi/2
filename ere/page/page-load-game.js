@@ -584,6 +584,9 @@ module.exports = async () => {
                   });
               }
             }
+            if (version <= 2203) {
+              check_titles(63);
+            }
             if (version < era.get('gamebase').version) {
               set_image_t(7);
               set_image_t(21);

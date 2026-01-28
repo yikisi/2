@@ -1,13 +1,9 @@
-# [EraUma v2.203 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.203)
+# [EraUma v2.204 (agito)](https://gitgud.io/umaera/erauma/-/releases/2.204)
 
-_2026/1/26_
+_incoming_
 
 适配 [EraElectron v4.7.0 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.4.0) 与 [ere.app v1.2.8 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.2.8) 及以上版本
 
 ## Fixed
 
-* 修复了丸善斯基和醒目飞鹰的育成事件错误
-* 修复了丸善斯基、醒目飞鹰、圣烈特、速度象征和海塞克没有殿堂事件的错误
-  * 上述角色在错过殿堂事件的情况下会直接赋予可再次育成状态
-* 修复了百炼砥石投资收益计算不正确的错误
-* （待确认）修复了百炼砥石无法正确获得角色成就的错误
+* 修复了生野狄杜斯的育成目标错误
