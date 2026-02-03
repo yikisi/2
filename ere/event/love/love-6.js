@@ -46,12 +46,16 @@ module.exports = class extends CustomizedLove {
   }
 
   async 74(oguri, me, callname, stage, extra, ebj) {
-    const dict = generate_dictionary(this.id, { uma: !0, your_name: !0 });
     if (stage === event_hooks.week_end) {
       if (
-        (await print_title_with_kojo(this.#kojo, '49', oguri, dict))[
-          'update'
-        ] === 1
+        (
+          await print_title_with_kojo(
+            this.#kojo,
+            '74-1',
+            oguri,
+            generate_dictionary(this.id, { your_sex: !0 }),
+          )
+        )['update'] === 1
       ) {
         add_event(event_hooks.back_school, ebj);
       } else {
@@ -59,9 +63,14 @@ module.exports = class extends CustomizedLove {
       }
     } else {
       if (
-        (await print_title_with_kojo(this.#kojo, '49', oguri, dict))[
-          'update'
-        ] === 1
+        (
+          await print_title_with_kojo(
+            this.#kojo,
+            '74-2',
+            oguri,
+            generate_dictionary(this.id, { uma: !0, your_name: !0 }),
+          )
+        )['update'] === 1
       ) {
         update_kiss_exp(get_date(), this.id, 0);
       } else {
@@ -74,9 +83,9 @@ module.exports = class extends CustomizedLove {
   async 89(oguri, me, callname, stage, extra, ebj) {
     await print_title_with_kojo(
       this.#kojo,
-      '49',
+      '89',
       oguri,
-      generate_dictionary(this.id, { uma: !0 }),
+      generate_dictionary(this.id, { call: !0, uma: !0, your_sex: !0 }),
     );
     await sys_love_uma_in_event(this.id);
   }
