@@ -145,7 +145,6 @@ class I18nEntry {
   ng_rp = '扮演角色';
   ng_rp_select = '选择要扮演的角色';
   ng_select_me = '我自己';
-
   ng_select_tip_1 = '带有 * 号后缀的角色有口上';
   ng_select_tip_2 = '只有完成了个人成就的角色才能进行扮演';
   ng_select_tip_3 = (clist) => [...clist, ' 等特殊角色无法扮演'];

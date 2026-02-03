@@ -5,7 +5,7 @@ const get_gradient_color = require('#/utils/gradient-color');
 const { buff_colors } = require('#/data/color-const');
 const { item_enum } = require('#/data/ero/item-const');
 const { part_enum, part_touch } = require('#/data/ero/part-const');
-const { stain_enum } = require('#/data/ero/stain-const');
+const { stain_count, stain_enum } = require('#/data/ero/stain-const');
 
 const di18n = require('#/i18n/extended-def');
 
@@ -31,68 +31,60 @@ function count_stain(_stain) {
 module.exports = {
   /**
    * 暂时仅限牛子戴套的情况
-   * @param {number} chara_id
+   * @param {number} cid
    */
-  cache_penis_stain(chara_id) {
-    cache[chara_id] = era.get(`stain:${chara_id}:阴茎`);
-    era.set(`stain:${chara_id}:阴茎`, 1 << stain_enum.lubricant);
+  cache_penis_stain(cid) {
+    cache[cid] = era.get(`stain:${cid}:阴茎`);
+    era.set(`stain:${cid}:阴茎`, 1 << stain_enum.lubricant);
   },
   /**
-   * @param {number} chara_id
+   * @param {number} cid
    * @param {number} part
    * @param {number} stain_type
    */
-  check_stain(chara_id, part, stain_type) {
+  check_stain(cid, part, stain_type) {
     return (
-      (era.get(`stain:${chara_id}:${part_touch[part]}`) & (1 << stain_type)) > 0
+      (era.get(`stain:${cid}:${part_touch[part]}`) & (1 << stain_type)) > 0
     );
   },
   /**
-   * @param {number} chara_id
+   * @param {number} cid
    * @param {number} part
    * @param {number} kept_stains
    * @returns {number}
    */
-  clean_part_stain(chara_id, part, ...kept_stains) {
-    const stain = era.get(`stain:${chara_id}:${part_touch[part]}`),
-      kept = kept_stains.reduce((p, c) => p + (1 << c), 0);
-    era.set(`stain:${chara_id}:${part_touch[part]}`, stain & kept);
+  clean_part_stain(cid, part, ...kept_stains) {
+    const stain = era.get(`stain:${cid}:${part_touch[part]}`);
+    const kept = kept_stains.reduce((p, c) => p + (1 << c), 0);
+    era.set(`stain:${cid}:${part_touch[part]}`, stain & kept);
     return count_stain(stain & ~kept);
   },
   /**
-   * @param {number} chara_id
+   * @param {number} cid
    * @param {number} parts
    * @returns {number}
    */
-  clean_stain: (chara_id, ...parts) =>
+  clean_stain: (cid, ...parts) =>
     parts.reduce((previous_val, part) => {
       const ret =
-        previous_val +
-        count_stain(era.get(`stain:${chara_id}:${part_touch[part]}`));
-      era.set(`stain:${chara_id}:${part_touch[part]}`, 0);
+        previous_val + count_stain(era.get(`stain:${cid}:${part_touch[part]}`));
+      era.set(`stain:${cid}:${part_touch[part]}`, 0);
       return ret;
     }, 0),
   /**
-   * @param {number} chara_id
+   * @param {number} cid
    * @param {number} part
    * @param {number} lower_border
    * @param {number} upper_border
    * @param {function(number):number} [cb]
    * @returns {number}
    */
-  count_part_stain_in_range(
-    chara_id,
-    part,
-    lower_border,
-    upper_border = 99,
-    cb,
-  ) {
+  count_part_stain_in_range(cid, part, lower_border, upper_border = 99, cb) {
     let ret = 0;
     let stain = era.get(`stain:0:${part_touch[part]}`);
-    const cleaning_tolerance = era.get(`talent:${chara_id}:洁净重视`);
+    const cleaning_tolerance = era.get(`talent:${cid}:洁净重视`);
     upper_border += +(cleaning_tolerance === 1);
-    const intolerable =
-      upper_border > di18n.tb_stain.names.length ? 0 : stain >> upper_border;
+    const intolerable = upper_border > stain_count ? 0 : stain >> upper_border;
     if (intolerable > 0) {
       stain -= intolerable << upper_border;
       ret = -2 * count_stain(intolerable);
@@ -137,12 +129,12 @@ module.exports = {
     }
   },
   /**
-   * @param {number} chara_id
+   * @param {number} cid
    * @param {string} part
    */
-  poll_stain(chara_id, part) {
+  poll_stain(cid, part) {
     const ret = [];
-    let stain = era.get(`stain:${chara_id}:${part}`);
+    let stain = era.get(`stain:${cid}:${part}`);
     if (stain > 0) {
       const stain_names = di18n.tb_stain.names;
       Object.keys(stain_enum).forEach((_, i) => {
@@ -150,7 +142,7 @@ module.exports = {
           ret.push({
             n: stain_names[i],
             c: get_gradient_color(
-              undefined,
+              void 0,
               buff_colors[3],
               i / (stain_names.length - 1),
             ),
@@ -167,10 +159,10 @@ module.exports = {
       };
     });
   },
-  /** @param {number} chara_id */
-  rollback_penis_stain(chara_id) {
-    era.set(`stain:${chara_id}:阴茎`, cache[chara_id]);
-    delete cache[chara_id];
+  /** @param {number} cid */
+  rollback_penis_stain(cid) {
+    era.set(`stain:${cid}:阴茎`, cache[cid]);
+    delete cache[cid];
   },
   /**
    * @param {number} cid

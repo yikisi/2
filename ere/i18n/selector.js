@@ -6,25 +6,23 @@ dict['zh-CN'] = new (require('./zh-CN/entry'))();
 dict['ja-JP'] = new (require('./ja-JP/entry'))();
 dict['en-US'] = new (require('./en-US/entry'))();
 
-/**
- * @param {string} key
- * @param {string|(()=>string)} [_default]
- * @returns {string}
- */
-function __(key, _default = key) {
-  const arr = (key ?? '').split('.');
-  let o = dict[lan];
-  for (let i = 0; i < arr.length; ++i) {
-    if (o[arr[i]] === void 0) {
-      return typeof _default === 'function' ? _default() : _default;
-    }
-    o = o[arr[i]];
-  }
-  return o.toString();
-}
-
 module.exports = {
-  __,
+  /**
+   * @param {string} key
+   * @param {string|(()=>string)} [_default]
+   * @returns {string}
+   */
+  __(key, _default = key) {
+    const arr = (key ?? '').split('.');
+    let o = dict[lan];
+    for (let i = 0; i < arr.length; ++i) {
+      if (o[arr[i]] === void 0) {
+        return typeof _default === 'function' ? _default() : _default;
+      }
+      o = o[arr[i]];
+    }
+    return o.toString();
+  },
   /**
    * @param {string} _l
    * @returns {I18nEntry}

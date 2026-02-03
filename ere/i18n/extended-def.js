@@ -412,16 +412,16 @@ const di18n = {
     get names() {
       const _ = i18n().tb_stain;
       return [
-        _.n_dirt,
         _.n_saliva,
-        _.n_wound,
-        _.n_virgin,
-        _.n_secretion,
-        _.n_anal,
-        _.n_semen,
+        _.n_chocolate,
         _.n_milk,
         _.n_lubricant,
-        _.n_chocolate,
+        _.n_semen,
+        _.n_virgin,
+        _.n_wound,
+        _.n_secretion,
+        _.n_anal,
+        _.n_dirt,
       ];
     },
   },

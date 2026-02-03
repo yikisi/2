@@ -22,4 +22,4 @@ const stain_enum = {
 };
 Object.keys(stain_enum).forEach((k, i) => (stain_enum[k] = i));
 
-module.exports = { stain_enum };
+module.exports = { stain_enum, stain_count: Object.keys(stain_enum).length };
