@@ -26,6 +26,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { mark_enum } = require('#/data/ero/mark-const');
 const { part_enum } = require('#/data/ero/part-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
+const { sys_check_cuckold } = require('#/system/chara/sys-calc-cheat');
 
 class TachyonNormalLines extends NormalCommandLines {
   constructor(root) {
@@ -50,11 +51,30 @@ module.exports = class extends CustomizedEro {
     this.normal = new TachyonNormalLines(this);
   }
 
-  async ero_start() {
+  async ero_start(h) {
     await tachyon_ero_start();
   }
 
-  async orgasm(tachyon, me) {
+  async ero_end(h) {
+    if (
+      era.get('flag:角色性别') !== 1 &&
+      era.get('cflag:0:性别') > 0 &&
+      sys_check_awake(32) &&
+      era.getCharactersInTrain().includes(25) &&
+      sys_check_awake(25) &&
+      sys_check_cuckold(25)
+    ) {
+      const tachyon = get_chara_talk(32);
+      await tachyon.say_and_wait([
+        '把 ',
+        sys_get_colored_callname(32, 0),
+        ' 的精液和爱液混入咖啡？这样会好喝吗？',
+      ]);
+      await tachyon.say_and_wait('还是说，你只是在品尝屈辱和败北的滋味而已？');
+    }
+  }
+
+  async orgasm(tachyon, me, callname) {
     const penis_touched_part = era.get('tcvar:0:阴茎接触部位');
     if (
       sys_check_awake(32) &&
@@ -346,9 +366,9 @@ module.exports = class extends CustomizedEro {
     if (!sys_check_awake(32) || type === mark_enum.ero) {
       return await super.get_mark(level, type, _new);
     }
-    const callname = sys_get_colored_callname(32, 0),
-      love = era.get('love:32'),
-      tachyon = get_chara_talk(32);
+    const callname = sys_get_colored_callname(32, 0);
+    const love = era.get('love:32');
+    const tachyon = get_chara_talk(32);
     switch (type) {
       case mark_enum.pleasure:
         switch (level) {
