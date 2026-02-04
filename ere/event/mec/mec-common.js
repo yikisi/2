@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const CustomizedEvent = require('#/event/event-common');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 
 const { get_random_entry } = require('#/utils/list-utils');
@@ -13,22 +14,9 @@ const { race_enum, race_infos } = require('#/data/race/race-const');
  * 定制化机制脚本，可以用于定制角色的专属机制、立绘等<br>
  * 和 CustomizedCheck 拆分是因为解决环形依赖
  */
-class CustomizedMec {
+class CustomizedMec extends CustomizedEvent {
   /** @type {function(number):CustomizedMec} */
   static get_custom_mec;
-
-  /** @type {number} */
-  id;
-
-  /** @param {number} cid */
-  constructor(cid) {
-    this.id = cid;
-  }
-
-  /** 用于切换多口上 */
-  get_this() {
-    return this;
-  }
 
   /** 初始化爱慕 */
   init_love() {

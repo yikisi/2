@@ -5,6 +5,8 @@ const { recruit_chara } = require('#/system/sys-init-chara');
 
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
+const CustomizedEvent = require('#/event/event-common');
+
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { get_chara_color } = require('#/data/chara-colors');
@@ -12,12 +14,7 @@ const recruit_flags = require('#/data/event/recruit-flags');
 
 const { i18n } = require('#/i18n/selector');
 
-class CustomizedRecruit {
-  /** @param {number} cid */
-  constructor(cid) {
-    this.id = cid;
-  }
-
+class CustomizedRecruit extends CustomizedEvent {
   /**
    * @protected
    * @returns {Promise<boolean|void>}
@@ -33,10 +30,6 @@ class CustomizedRecruit {
       era.print(i18n().timon.recruit.get_check_no_msg(chara));
       return true;
     }
-  }
-
-  get_this() {
-    return this;
   }
 
   /**

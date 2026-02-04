@@ -7,6 +7,7 @@ const {
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const CustomizedEvent = require('#/event/event-common');
 const punish_rejecting_love = require('#/event/love/snippets/punish-rejecting-love');
 const { add_event } = require('#/event/queue');
 const add_jewel_reward = require('#/event/snippets/add-jewel-reward');
@@ -16,16 +17,7 @@ const event_hooks = require('#/data/event/event-hooks');
 
 const { i18n } = require('#/i18n/selector');
 
-class CustomizedLove {
-  /** @param {number} cid */
-  constructor(cid) {
-    this.id = cid;
-  }
-
-  get_this() {
-    return this;
-  }
-
+class CustomizedLove extends CustomizedEvent {
   /**
    * @param {CharaTalk} chara
    * @param {CharaTalk} me

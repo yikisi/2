@@ -21,6 +21,7 @@ const select_action_around_river = require('#/event/daily/snippets/select-action
 const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
 const select_action_in_shopping_street = require('#/event/daily/snippets/select-action-in-shopping-street');
 const select_action_in_station = require('#/event/daily/snippets/select-action-in-station');
+const CustomizedEvent = require('#/event/event-common');
 const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
 const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 const quick_into_sex = require('#/event/snippets/quick-into-sex');
@@ -35,18 +36,7 @@ const { location_enum } = require('#/data/locations');
 const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
-class CustomizedDaily {
-  /** @type {number} */
-  id;
-
-  constructor(chara_id) {
-    this.id = chara_id;
-  }
-
-  get_this() {
-    return this;
-  }
-
+class CustomizedDaily extends CustomizedEvent {
   good_morning() {
     i18n().timon.daily.good_morning(
       get_chara_talk(this.id),

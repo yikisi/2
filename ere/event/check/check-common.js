@@ -16,6 +16,7 @@ const MejiroCity = require('#/page/mejiro/mejiro-common');
 const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-get-entry');
 const check_and_register_aim_race = require('#/event/check/snippets/check-and-register-aim-race');
 const get_action_debuff = require('#/event/check/snippets/get-action-debuff');
+const CustomizedEvent = require('#/event/event-common');
 const { add_event, cb_enum } = require('#/event/queue');
 
 const { log_600m4 } = require('#/utils/value-utils');
@@ -51,23 +52,10 @@ function common_no_action_check(cid) {
 /**
  * 定制化检查脚本，一般用于生成判定值、在各个判定节点进行事件判定（将事件对象 EventObject 添加到事件队列）
  */
-class CustomizedCheck {
+class CustomizedCheck extends CustomizedEvent {
   static like_chara;
   static love_uma;
   static common_no_action_check = common_no_action_check;
-
-  /** @type {number} */
-  id;
-
-  /** @param {number} cid */
-  constructor(cid) {
-    this.id = cid;
-  }
-
-  /** 用于切换多口上 */
-  get_this() {
-    return this;
-  }
 
   /**
    * 玩家出轨后进行检查

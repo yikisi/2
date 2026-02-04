@@ -2,6 +2,7 @@ const era = require('#/era-electron');
 
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
+const CustomizedEvent = require('#/event/event-common');
 const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -11,7 +12,7 @@ const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
 const { i18n } = require('#/i18n/selector');
 
-class CustomizedBase {
+class CustomizedBase extends CustomizedEvent {
   /**
    * @param {number} hours
    * @param {number} minutes
@@ -19,14 +20,6 @@ class CustomizedBase {
    */
   static get_cur_time(hours, minutes, base_12 = false) {
     return i18n().timon.basement.get_clock(hours, minutes, base_12);
-  }
-
-  constructor(chara_id) {
-    this.id = chara_id;
-  }
-
-  get_this() {
-    return this;
   }
 
   /** 初入地下室的欢迎 - 无人版本 */

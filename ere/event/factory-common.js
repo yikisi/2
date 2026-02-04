@@ -18,7 +18,7 @@ class CommonKojoFactory {
   }
 
   check(cid) {
-    return this.#cons[cid] !== undefined;
+    return this.#cons[cid] !== void 0;
   }
 
   clean() {
@@ -40,7 +40,7 @@ class CommonKojoFactory {
         this.#cons[script_dict[script_name] || script_name] || con
       )(cid);
     }
-    return this.#dict[cid].get_this();
+    return this.#dict[cid].this;
   }
 }
 

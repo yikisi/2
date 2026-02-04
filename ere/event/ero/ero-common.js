@@ -24,6 +24,7 @@ const NormalCommandLines = require('#/event/ero/common/normal/normal-common');
 const pregnant_report_in_love = require('#/event/ero/common/pregnant-report-in-love');
 const RapeCommandLines = require('#/event/ero/common/rape/rape-common');
 const SleepCommandLines = require('#/event/ero/common/sleep/sleep-common');
+const CustomizedEvent = require('#/event/event-common');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -79,25 +80,21 @@ const sex_mark_desc = [
   '淫纹能显示出怀孕率和受孕的情况了……',
 ];
 
-class CustomizedEro {
+class CustomizedEro extends CustomizedEvent {
   /** @type {function(number):CustomizedEro} */
   static get_custom_ero;
   /** @type {function(number,number,*?):Promise} */
   static run_custom_ero;
 
-  get_this() {
-    return this;
-  }
-
   /**
-   * @param {number} chara_id
+   * @param {number} cid
    * @param [exclude]
    * @param {boolean} exclude.[normal]
    * @param {boolean} exclude.[sleep]
    * @param {boolean} exclude.[rape]
    */
-  constructor(chara_id, exclude) {
-    this.id = chara_id;
+  constructor(cid, exclude) {
+    super(cid);
     if (!exclude?.normal) {
       this.normal = new NormalCommandLines(this);
     }

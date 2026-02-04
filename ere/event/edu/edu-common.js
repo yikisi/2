@@ -12,6 +12,7 @@ const {
 const { sys_check_remote } = require('#/system/sys-calc-chara-param');
 const { sys_change_fame } = require('#/system/sys-calc-flag');
 
+const CustomizedEvent = require('#/event/event-common');
 const { check_sub_slavery } = require('#/event/snippets/check-slavery');
 const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 const quick_into_sex = require('#/event/snippets/quick-into-sex');
@@ -36,7 +37,7 @@ const { attr_enum, fumble_result } = require('#/data/train-const');
 
 const { i18n } = require('#/i18n/selector');
 
-class CustomizedEdu {
+class CustomizedEdu extends CustomizedEvent {
   /** @type {function} */
   static load_game;
   static common_event_count = 0;
@@ -204,15 +205,6 @@ class CustomizedEdu {
    */
   static async print_fail_info_in_train(chara, attr, is_fumble) {
     await i18n().timon.edu.tf_info(chara, attr, is_fumble);
-  }
-
-  /** @param {number} cid */
-  constructor(cid) {
-    this.id = cid;
-  }
-
-  get_this() {
-    return this;
   }
 
   /** @param {number} attr */
