@@ -595,6 +595,9 @@ module.exports = async () => {
                   });
               }
             }
+            if (version <= 2203) {
+              check_titles(63);
+            }
             // i18n - 将游戏存档内所有字符串改成 i18n 框架内的内容
             // TODO CSTR里一堆性经历也要改
             if (version <= 2900) {

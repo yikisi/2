@@ -44,7 +44,7 @@ module.exports = class extends CustomizedLove {
     ]);
     await silence.say_and_wait('我居然也会……这样想念一个人吗？');
     await silence.print_and_wait(
-      '心脏在剧烈的挑动，看向窗外皎洁的月亮，露出了一丝苦笑。',
+      '心脏在剧烈地跳动，看向窗外皎洁的月亮，露出了一丝苦笑。',
     );
     await silence.say_and_wait(
       '已经开始对夜晚感到焦躁了，但是为什么呢……是因为感觉和您在一起很美好……不想离开您吗？',

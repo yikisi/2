@@ -51,13 +51,11 @@ module.exports = class extends CustomizedEro {
       ) {
         era.print([
           '在 ',
-          get_chara_talk(
-            era.get('tcvar:0:阴茎接触部位').owner,
-          ).get_colored_name(),
+          get_chara_talk(era.get('tflag:前回对手')).get_colored_name(),
           ' 与 ',
           get_chara_talk(era.get('tflag:前回助手')).get_colored_name(),
           ' 的侍奉下，',
-          get_chara_talk(0).get_colored_name(),
+          me.get_colored_name(),
           ` ${di18n.n_penis[get_penis_size(0)]} 的肉棒很快就一柱擎天了。`,
         ]);
         return;

@@ -281,6 +281,8 @@ function generate_copyrights() {
           '西蟹瓜',
           { isBr: true },
           '颜色可以叫颜',
+          { isDivider: true },
+          'gmddst',
         ],
       },
     ],

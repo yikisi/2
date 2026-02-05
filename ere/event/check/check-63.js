@@ -7,21 +7,22 @@ const check_aim_race = require('#/event/snippets/check-aim-race');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
-const aim_races = {};
-aim_races[race_enum.begin_race] = 4;
-aim_races[get_aim_race_index(race_enum.hans_fil, 0)] = 4;
+const aims = [
+  [race_enum.hans_fil, 0, 5, 4],
+  [race_enum.oka_sho, 1, 5, 4],
+  [race_enum.flor_sta, 1, 5, 4],
+  [race_enum.yush_him, 1, 5, 4],
+  [race_enum.shuk_sho, 1, 3, 4],
+  [race_enum.sank_hai, 2, 3, 4],
+  [race_enum.tenn_spr, 2, 20, 4],
+  [race_enum.yasu_kin, 2, 3, 4],
+  [race_enum.takz_kin, 2, 3, 4],
+  [race_enum.all_com, 2, 3, 4],
+  [race_enum.eliz_cup, 2, 1, 4],
+];
 
-aim_races[get_aim_race_index(race_enum.oka_sho, 1)] = 4;
-aim_races[get_aim_race_index(race_enum.flor_sta, 1)] = 4;
-aim_races[get_aim_race_index(race_enum.yush_him, 1)] = 4;
-aim_races[get_aim_race_index(race_enum.shuk_sho, 1)] = 4;
-
-aim_races[get_aim_race_index(race_enum.sank_hai, 2)] = 4;
-aim_races[get_aim_race_index(race_enum.tenn_spr, 2)] = 4;
-aim_races[get_aim_race_index(race_enum.yasu_kin, 2)] = 4;
-aim_races[get_aim_race_index(race_enum.takz_kin, 2)] = 4;
-aim_races[get_aim_race_index(race_enum.all_com, 2)] = 4;
-aim_races[get_aim_race_index(race_enum.eliz_cup, 2)] = 4;
+const aim_races = { [race_enum.begin_race]: 4 };
+aims.forEach((a) => (aim_races[get_aim_race_index(a[0], a[1])] = a[3]));
 
 module.exports = require('#/event/check/snippets/check-uma-common-generator')(
   () => {},
@@ -34,18 +35,8 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
   aim_races,
   (buffer, races) => {
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
-    buffer.push(check_aim_and_get_entry(races, race_enum.hans_fil, 0, 5));
-
-    buffer.push(check_aim_and_get_entry(races, race_enum.oka_sho, 1, 5));
-    buffer.push(check_aim_and_get_entry(races, race_enum.flor_sta, 1, 5));
-    buffer.push(check_aim_and_get_entry(races, race_enum.yush_him, 1, 5));
-    buffer.push(check_aim_and_get_entry(races, race_enum.shuk_sho, 2, 3));
-
-    buffer.push(check_aim_and_get_entry(races, race_enum.sank_hai, 2, 3));
-    buffer.push(check_aim_and_get_entry(races, race_enum.tenn_spr, 2, 20));
-    buffer.push(check_aim_and_get_entry(races, race_enum.yasu_kin, 2, 3));
-    buffer.push(check_aim_and_get_entry(races, race_enum.takz_kin, 2, 3));
-    buffer.push(check_aim_and_get_entry(races, race_enum.all_com, 2, 3));
-    buffer.push(check_aim_and_get_entry(races, race_enum.eliz_cup, 2, 1));
+    aims.forEach(([race, year, rank]) =>
+      buffer.push(check_aim_and_get_entry(races, race, year, rank)),
+    );
   },
 );
