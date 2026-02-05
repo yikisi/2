@@ -862,3 +862,122 @@ halloween:
   - %CHARA% 这才想起了主要目的。
   - %YOU%有些哭笑不得地打开抽屉，把那一袋精装糖果拿了出来，递给铃鹿。
   - 今年的万圣节也在一种奇异的氛围内度过了。
+
+forbid_running:
+  title: 禁止跑步！
+  lines:
+    - acc: 1
+      content: 「太晚了！已经到了无法原谅的地步了！」
+    - %YOU%十分气愤地数落着眼前低着头的铃鹿。
+    - 此时已经是深夜，而铃鹿额头上还带有薄汗，显然是刚刚跑完步回来。
+    - acc: 1
+      content: 「是谁跟我说要去一趟便利店结果几个小时才回家的！」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「对不起……明明是今晚月色太美了，我忍不住才……」
+    - acc: 1
+      content: 「不行！罪大恶极，无法原谅！罚你三天不许跑步，你就在家里好好反省吧！」
+    - 铃鹿如同被雷劈中一般无力跌坐在地。
+    - 紧接着，%SEX%突然扑过来抱住%YOU%的大腿。
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「不要哇，那样我会活不下去的——」
+    - %YOU%没有理会悲痛欲绝的铃鹿，而是任由%SEX%抱着%YOU%的腿，一步一步地挪向卧室。
+    - 铃鹿乖巧地松开了%YOU%，简单洗漱后换好了睡衣，等%YOU%躺好之后，挤到了%YOU%的身侧。
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「那个……」
+    - acc: 1
+      content: 「不行。」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「我还什么都没说呢！」
+    - acc: 1
+      content: 「不行就是不行，铃鹿，我是真的很担心诶。」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「好吧，我会乖乖听话的，%CALLNAME%不要生气了……」
+    - 自知理亏的铃鹿侧过身来抱住了%YOU%，与%YOU%一起进入了梦乡。
+    - divider: true
+      content: 翌日
+      position: left
+    - %YOU%刚走进家门，便吓了一跳。
+    - 眼前赫然便是一座胡萝卜汉堡肉山。
+    - acc: 1
+      content: 「铃鹿？这些都是你做的吗？」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「是的哦？因为太无聊了所以一不小心就做了很多出来……」
+    - divider: true
+      content: 又翌日
+      position: left
+    - %YOU%发现铃鹿捧着手机在逆时针转圈圈。
+    - %YOU%观察到手机上是训练场的图片。
+    - acc: 1
+      content: 「铃鹿这是在？」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「我一边看着训练场的图片一边不停走路，就可以想象是在跑步哦？」
+    - %YOU%挠了挠头，不知道该不该称赞铃鹿的想象力。
+    - divider: true
+      content: 再翌日
+      position: left
+    - %YOU%回到家，却没有发现铃鹿的身影。
+    - %YOU%差点以为铃鹿按捺不住偷着去跑步了，最后却在卧室里发现了还在睡觉的铃鹿。
+    - acc: 1
+      content: 「……所以铃鹿是睡了一天吗？」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「毕竟睡觉可以让一天过得很快嘛……」
+    - %YOU%有些无言以对。
+    - divider: true
+    - 很快，三天就要结束了。%YOU%站在卧室门口有些疑惑地看着铃鹿，而铃鹿正守在钟表前面。
+    - acc: 1
+      content: 「喂，铃鹿，这么晚了还不睡觉吗？」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「一分五十八，一分五十七……」
+    - 当表针指向了某个时间点，铃鹿猛地转过头来看着%YOU%，眼中洋溢着激动，同时悄悄向大门的方向移动着。
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「已经三天整了哦，我可以出去跑一会了吗？」
+    - acc: 1
+      content: 「……需要我再延长三天吗？」
+    - 话音刚落，铃鹿便麻利地从大门旁边跑开了。
+    - 随后，%SEX%轻轻抱住了%YOU%。
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「我可是为了%CALLNAME%足足忍耐了三天哦？%CALLNAME%是不是应该奖励我点什么？」
+    - 铃鹿依偎在%YOU%的怀中，有些脸红地看着%YOU%。
+    - acc: 1
+      key: sex
+      content: 「好吧，那就表扬一下你的忍耐力。」
+      lines:
+        - 之后，%YOU%便抱着铃鹿走进了卧室。
+    - acc: 2
+      content: 「不行，明明是给你的惩罚，怎么还想要奖励呢？」
+      lines:
+        - 闻言，铃鹿立刻挣脱了%YOU%的怀抱。
+        - 然后，铃鹿把挣扎中的%YOU%扛了起来，进入了卧室。

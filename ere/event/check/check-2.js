@@ -97,6 +97,10 @@ module.exports = class extends CustomizedCheck {
           add_event(event_hooks.week_start, ebj.copy().set_arg('race_clothe'));
         }
       }
+      if (!edu_marks.run_together) {
+        edu_marks.run_together = 1;
+        add_event(event_hooks.week_start, ebj.copy().set_arg('run_together'));
+      }
       switch (edu_weeks) {
         case 24:
           if (!RaceHistory.get(this.id).check_begin()) {

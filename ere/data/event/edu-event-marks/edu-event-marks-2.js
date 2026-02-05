@@ -8,6 +8,9 @@ class SuzukaEduMarks extends EduEventMarks {
   // 2-失意，1-难过，4-严重腿伤，3-陈旧腿伤
   debuff;
 
+  run_together;
+  forbid_running;
+
   race_wear;
   choice;
 

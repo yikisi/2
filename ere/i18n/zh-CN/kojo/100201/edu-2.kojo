@@ -2901,3 +2901,124 @@ crazy_fan:
     - 很快，%YOU%便因为失血过多渐渐失去了意志。
     - 而陷入黑暗的前一刻，%YOU%还在想：
     - 早知如此，何必当初……
+
+# 熬夜之后触发
+# 速度+5，根性+15
+run_together:
+  title: 并跑
+  lines:
+    - acc: 1
+      content: 「铃鹿，铃鹿？」
+    - 某天早上，训练开始前，%YOU%发现铃鹿有些无精打采的样子。
+    - acc: 1
+      content: 「铃鹿你是不是又偷着去跑步啦？」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「哪有！我……我有好好睡觉的啦！」
+    - 铃鹿像是被吓了一跳一样，下意识开始反驳。
+    - %YOU%看着铃鹿明显熬过夜的样子，并不打算相信铃鹿的说辞。
+    - 于是%YOU%眼珠一转，想到了办法。
+    - acc: 1
+      content: 「好吧，那我们就开始训练吧？」
+    - divider: true
+    - 一天的训练很快结束了，%YOU%把铃鹿送到了宿舍门口并互道晚安。
+    - 然后%YOU%快步走到了宿舍楼的阴影里，静静地等待着。
+    - %YOU%没等多久，就发现穿着全套运动服的铃鹿出现在了宿舍门口。
+    - 铃鹿谨慎地左右看了看，之后便略得意地开始向运动场的方向走去。
+    - %YOU%悄悄地跟了上去，并伸出双手捂住了铃鹿的眼睛。
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「呜哇！」
+    - acc: 1
+      content: 「猜～猜～我～是～谁～？」
+    - 尽管%YOU%特地用了尖利的假嗓音，但铃鹿还是瞬间就安定了下来。
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「呜，对不起，%CALLNAME%……」
+    - acc: 1
+      content: 「现在人赃俱获，铃鹿你还有什么要解释的吗？」
+    - %YOU%开始欣赏起面前%UMA%紧张难堪的样子来。
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「我，我不会再这样了，%CALLNAME%，请放心……」
+    - %YOU%突然又想到了一个更有意思的主意。
+    - acc: 1
+      content: 「既然你已经穿好衣服了，那就去跑吧！」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「诶？」
+    - 铃鹿颇为不敢置信地抬头看着%YOU%，%YOU%只得重新宣布了自己的决定。
+    - 不过没等铃鹿欢呼出声，%YOU%又坏笑着追加了两条规矩。
+    - acc: 1
+      content: 「但是，由于铃鹿你敢不跟我商量就偷着自主训练，我要追加两条规则：」
+    - 「第一，我要跟你一起去跑；第二，你不许超过我。」
+    - 铃鹿显然不太理解%YOU%的用意。不过最终，对于跑步的向往还是战胜了%SEX%内心的狐疑。
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「那就……请吧？」
+    - 于是，%YOU%带着铃鹿来到了空无一人的训练场。
+    - %YOU%以标准的慢跑速度开始跑着，铃鹿也乖巧地跟在%YOU%身后慢慢跑着。
+    - 但是很快，铃鹿就开始感觉不对劲。
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - （%CALLNAME%跑得好慢！我明明是领放类型的%UMA%，现在却要跟在%CALLNAME%的后面……）
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - （好难受，好想超过去然后尽情奔跑！）
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - （呜，不能再胡思乱想了，乱想也是会消耗体力的！已经有点累了是怎么回事……）
+    - acc: 1
+      content: 「铃鹿，跑太快了哦？」
+    - %YOU%一偏头看到明显心不在焉的铃鹿不知不觉加快了脚步，便出声提醒。
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「对、对不起！」
+    - %YOU%听到铃鹿的声音已经略显疲惫了，心中有些高兴。
+    - 于是%YOU%带着铃鹿在训练场上跑了一圈又一圈，直到铃鹿大汗淋漓为止。
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「呼呼……好累……明明%CALLNAME%那么轻松的样子……我怎么会这么累呢……」
+    - %YOU%带着铃鹿来到一旁坐下，让铃鹿稍微休息了一会。
+    - acc: 1
+      content: 「那么，铃鹿，下次还敢背着我偷偷跑步吗？」
+    - %YOU%故意板起脸来指责着。
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「呜，不敢了，对不起！」
+    - 铃鹿捂住了脸不敢面对%YOU%的目光。
+    - acc: 1
+      content: 「很好，既然你已经知道了错误，那么你现在可以自己去跑两圈了。」
+    - 铃鹿的耳朵立了起来。
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「真的吗？好耶！」
+    - 铃鹿原地跳了起来，下一刻已经是在跑道上了。
+    - %YOU%看着铃鹿飞一般消失在夜色里的背影，暗自盘算着。
+    - 这样大概就能暂时遏制住%SEX%偷偷跑步的念头了吧。

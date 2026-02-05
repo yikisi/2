@@ -1,12 +1,24 @@
 const era = require('#/era-electron');
 
+const {
+  check_pregnant_unprotect,
+} = require('#/system/ero/sys-calc-ero-status');
+const {
+  begin_and_init_ero,
+  end_ero_and_show_result,
+} = require('#/system/ero/sys-prepare-ero');
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
+
+const print_ero_page = require('#/page/page-ero');
 
 const CustomizedDaily = require('#/event/daily/daily-common');
 const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
 const generate_dictionary = require('#/event/snippets/generate-dictionary');
+const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+
+const SuzukaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-2');
 
 const { i18n } = require('#/i18n/selector');
 
@@ -29,6 +41,36 @@ module.exports = class extends CustomizedDaily {
       ...this.#dict,
       CALL_1: sys_get_callname(this.id, 1),
     });
+  }
+
+  async good_night(hook) {
+    const edu_marks = new SuzukaEduMarks();
+    if (
+      !edu_marks.forbid_running &&
+      era.get(`love:${this.id}`) >= 90 &&
+      check_pregnant_unprotect(0) &&
+      check_pregnant_unprotect(2)
+    ) {
+      begin_and_init_ero(0, this.id);
+      if (
+        (
+          await print_title_with_kojo(
+            this.#kojo,
+            'forbid_running',
+            get_chara_talk(this.id),
+            this.#dict,
+          )
+        )['sex'] === 1
+      ) {
+        era.set('tflag:主导权', 0);
+      } else {
+        era.set('tflag:主导权', this.id);
+      }
+      await print_ero_page(this.id, true);
+      await end_ero_and_show_result();
+      return;
+    }
+    return await super.good_night(hook);
   }
 
   async good_night_sex(suzuka, me, check) {

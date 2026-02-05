@@ -464,6 +464,19 @@ module.exports = class extends CustomizedEdu {
     }
   }
 
+  /** @param {CharaTalk} suzuka */
+  async run_together(suzuka) {
+    await print_title_with_kojo(
+      this.#kojo,
+      'run_together',
+      suzuka,
+      generate_dictionary(this.id, { call: !0, uma: !0 }),
+    );
+    if (all_reward_in_event(this.id, { attr: [5, 0, 0, 15] })) {
+      await era.waitAnyKey();
+    }
+  }
+
   async race_start(suzuka, me, callname, hook, extra) {
     let key = '';
     const dict = generate_dictionary(this.id, { call: !0, uma: !0 });
