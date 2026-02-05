@@ -137,18 +137,21 @@ module.exports = async () => {
         let ret = 0;
         if (achievements.length > 0) {
           era.drawLine();
-          era.printButton(i18n().ng_custom, 1);
-          era.printButton(i18n().ng_rp, 2);
+          era.printButton(i18n().new_game.bt_custom, 1);
+          era.printButton(i18n().new_game.bt_rp, 2);
           if ((await era.input()) === 2) {
             era.printMultiColumns([
-              { config: { content: i18n().ng_rp_select }, type: 'divider' },
+              {
+                config: { content: i18n().new_game.rp_select },
+                type: 'divider',
+              },
               {
                 accelerator: 0,
                 config: {
                   align: 'center',
                   width: 6,
                 },
-                content: i18n().ng_select_me,
+                content: i18n().new_game.rp_select_me,
                 type: 'button',
               },
               ...achievements.map((e) => {
@@ -169,13 +172,13 @@ module.exports = async () => {
               {
                 content: [
                   '* ',
-                  i18n().ng_select_tip_1,
+                  i18n().new_game.rp_select_tip_1,
                   { isBr: true },
                   '** ',
-                  i18n().ng_select_tip_2,
+                  i18n().new_game.rp_select_tip_2,
                   { isBr: true },
                   '*** ',
-                  ...i18n().ng_select_tip_3(
+                  ...i18n().new_game.rp_select_tip_3(
                     join_list(
                       [
                         get_copyright_entry(201),
@@ -226,9 +229,7 @@ module.exports = async () => {
             .filter((cid) => cid > 0 && cid < first_child_id)
             .map((cid) => {
               const name = get_display_name(era.get(`static:${cid}:name`));
-              let title = get_custom_check(cid)
-                .get_this()
-                .get_personal_achieve();
+              let title = get_custom_check(cid).this.get_personal_achieve();
               const desc = sys_personal_achievement.describe(cid, title);
               title = __(`title.${title}`, i18n().title.undef);
               let t = sys_personal_achievement.get(cid);

@@ -141,28 +141,6 @@ class I18nEntry {
   tt_link_community = 'ERA 特雷森学园（Discord 社区）';
   tt_link_wiki = 'Wiki（使用说明/游戏设定/口上写作指引……）';
 
-  ng_custom = '做我自己';
-  ng_rp = '扮演角色';
-  ng_rp_select = '选择要扮演的角色';
-  ng_select_me = '我自己';
-  ng_select_tip_1 = '带有 * 号后缀的角色有口上';
-  ng_select_tip_2 = '只有完成了个人成就的角色才能进行扮演';
-  ng_select_tip_3 = (clist) => [...clist, ' 等特殊角色无法扮演'];
-
-  ng_info1 =
-    '十年寒窗终于金榜题名，\n邮箱里的那封信烫着金漆，\n闪着与你刚刚拿到的那块训练员徽章同样颜色的光芒。\n\n你用还在颤抖的手取下了上面的火漆————';
-  ng_info2 =
-    '聘书\n…………\n…………\n…………\n…………\n…………\n…………\n…………兹聘请贵方担任我校训练员一职。';
-  ng_info3 = '日本中央特雷森学园理事长';
-  ng_sign = (name) => ['(署名)', { isBlank: 2 }, name];
-  ng_time = ['(时间)', { isBlank: 2 }, '2000 年 1 月 1 日'];
-  ng_input_name =
-    '——然后在左下角签上了自己的名字（输入名字后回车，限定10个字符以内）';
-  ng_select_sex = '（请选择性别）';
-  ng_resign = '重新签名';
-  ng_submit = '提交聘书';
-  ng_re_select_sex = '重新选择性别';
-
   tk_speak_border = ['「', '」'];
   tk_think_border = ['（', '）'];
   tk_past_border = ['（', '）'];
@@ -176,6 +154,7 @@ class I18nEntry {
   ui_conjunction = ' 和 ';
   ui_ellipses = '……';
   ui_back = '返回';
+  ui_back_title = '返回标题';
   ui_achieve_title = '获得新成就！';
   ui_on = '是';
   ui_off = '否';
@@ -239,6 +218,7 @@ class I18nEntry {
   kojo = new (require('#/i18n/zh-CN/kojo/entry'))();
   timon = new (require('#/i18n/zh-CN/timon/entry'))();
 
+  new_game = new (require('#/i18n/zh-CN/new-game'))();
   achievement = new (require('#/i18n/zh-CN/achieve'))();
   achieve_desc = new (require('#/i18n/zh-CN/achieve-desc'))();
   note = new (require('#/i18n/zh-CN/notes'))();

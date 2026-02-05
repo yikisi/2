@@ -18,6 +18,7 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const CharaAvailableSkills = require('#/data/chara-available-skills');
 const { chara_colors, get_chara_color } = require('#/data/chara-colors');
+const CharaSkills = require('#/data/chara-skills');
 const CharaTitles = require('#/data/chara-titles');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
@@ -57,8 +58,11 @@ module.exports = async (src_chara) => {
         .get_personal_titles()
         .map((e) => ({ c: chara_colors[0], n: e })),
     );
-    (chara_skill_dict[src_chara] || []).forEach((s) =>
-      get_skills_and_print_in_event(0, [s], undefined, false),
+    get_skills_and_print_in_event(
+      0,
+      chara_skill_dict[src_chara] || [],
+      CharaSkills.get(0),
+      false,
     );
     CharaAvailableSkills.get(0).clear();
     era.set('callname:0:-2', 'you');
@@ -76,27 +80,27 @@ module.exports = async (src_chara) => {
   while (flag_new_game) {
     await era.clear();
     era.setAlign('center');
-    era.print(i18n().ng_info1);
+    era.print(i18n().new_game.intro_info1);
     era.drawLine();
-    era.print(i18n().ng_info2);
+    era.print(i18n().new_game.intro_info2);
     era.setAlign('left');
     era.println();
-    era.print(i18n().ng_info3, { align: 'right' });
+    era.print(i18n().new_game.intro_info3, { align: 'right' });
     era.print(get_display_name(era.get('static:302:name')), { align: 'right' });
     era.print(
-      i18n().ng_sign(
+      i18n().new_game.intro_sign(
         di18n.name.get_name_with_adult_title(
           get_display_name(player_name),
           player_gender,
         ),
       ),
     );
-    era.print(i18n().ng_time);
+    era.print(i18n().new_game.intro_time);
     era.drawLine();
 
     if (player_name === '') {
       // 未输入姓名
-      era.print(i18n().ng_input_name);
+      era.print(i18n().new_game.intro_input_name);
       player_name = (await era.input()).toString();
       if (player_name.length > 10) {
         await era.printAndWait(i18n().ui_too_long);
@@ -105,7 +109,7 @@ module.exports = async (src_chara) => {
     } else if (player_gender === 3) {
       // 再输入性别子循环
       era.printMultiColumns([
-        { type: 'text', content: i18n().ng_select_sex },
+        { type: 'text', content: i18n().new_game.intro_select_sex },
         {
           accelerator: 0,
           config: { width: 4 },
@@ -127,7 +131,7 @@ module.exports = async (src_chara) => {
         {
           accelerator: 98,
           config: { disabled: src_chara > 0, width: 4 },
-          content: i18n().ng_resign,
+          content: i18n().new_game.intro_resign,
           type: 'button',
         },
         {
@@ -156,19 +160,19 @@ module.exports = async (src_chara) => {
         {
           accelerator: 1,
           config: { width: 6 },
-          content: i18n().ng_submit,
+          content: i18n().new_game.intro_submit,
           type: 'button',
         },
         {
           accelerator: 97,
           config: { disabled: src_chara > 0, width: 6 },
-          content: i18n().ng_resign,
+          content: i18n().new_game.intro_resign,
           type: 'button',
         },
         {
           accelerator: 98,
           config: { width: 6 },
-          content: i18n().ng_re_select_sex,
+          content: i18n().new_game.intro_re_select_sex,
           type: 'button',
         },
         {
