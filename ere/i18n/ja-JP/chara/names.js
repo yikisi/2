@@ -6,7 +6,13 @@ module.exports = class extends I18nNames {
 
   mr = 'さん';
   miss = 'さん';
+  big_master = 'ご主人様';
+  trainer25t0 = 'モルモットさん';
+  trainer25t1 = 'モルモットさん';
+  trainer32 = 'モルモット君';
   danna = '旦那';
+
+  102511 = 'カフェ君';
 
   // Special
   ruby_mother = 'ハギノトップレディ';

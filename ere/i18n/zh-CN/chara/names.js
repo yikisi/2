@@ -1,6 +1,8 @@
 class I18nNames {
   sir_template = '%NAME%先生';
   madam_template = '%NAME%小姐';
+  chan_template = '小%NAME%';
+  kun_template = '%NAME%君';
 
   // Callname
   leading_role = '主人公';
@@ -62,9 +64,6 @@ class I18nNames {
   slave_p = '孕袋君';
   danna = '老爷';
   dear = '亲爱的';
-
-  chan_template = '小%NAME%';
-  kun_template = '%NAME%君';
 
   100011 = '弄臣';
   100012 = '训～练～员～';
