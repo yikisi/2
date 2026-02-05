@@ -22,7 +22,7 @@ const types = {
 };
 Object.keys(types).forEach((e, i) => (types[e] = i));
 
-// TODO 二期成就待用
+// 多期成就区分
 const platinum_type = {
   all: 0,
 };
@@ -80,6 +80,7 @@ class GlobalAchievement {
   ck_f = [4, types.birth, platinum_type.all];
   ck_d = [5, types.birth, platinum_type.all];
   ck = [6, types.birth, platinum_type.all];
+  et_tu = [6, types.hidden];
 
   end_los = [3, types.end, platinum_type.all];
   end_hnt = [3, types.end, platinum_type.all];
@@ -96,6 +97,7 @@ class GlobalAchievement {
   all = [8, types.hidden];
 
   c_luna1 = [7, types.hidden, void 0, get_chara_color(17)];
+  c_tachyon1 = [7, types.hidden, void 0, get_chara_color(32)];
 
   constructor() {
     this.#fields.forEach((m) => {
@@ -214,7 +216,7 @@ class GlobalAchievement {
           ).map((m) => {
             let desc;
             if (this.#bean[m] > 0) {
-              desc = i18n().achieve_desc[m].split('\n');
+              desc = this.get_desc(m).split('\n');
               if (desc.length > 1) {
                 desc = [
                   {
@@ -222,14 +224,19 @@ class GlobalAchievement {
                       '%DESC%',
                       desc[0],
                     ),
-                    title: i18n().achieve_desc[m],
+                    title: desc.join('\n'),
                   },
                 ];
               } else {
                 desc = join_list(desc, { isBr: true });
               }
             } else {
-              desc = [{ content: '？？？', title: i18n().achieve_desc[m] }];
+              desc = [
+                {
+                  content: i18n().achievement.ungot,
+                  title: this.get_desc(m),
+                },
+              ];
             }
             const rarity = dict[m][0];
             return {

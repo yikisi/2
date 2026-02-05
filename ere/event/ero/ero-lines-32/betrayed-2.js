@@ -6,6 +6,7 @@ const era = require('#/era-electron');
 
 const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
 const { init_ero, set_palam_to_max } = require('#/system/ero/sys-prepare-ero');
+const global_achievement = require('#/system/global/sys-calc-achievement');
 const {
   sys_get_callname,
   sys_get_colored_callname,
@@ -23,6 +24,7 @@ const di18n = require('#/i18n/extended-def');
 
 /** @param {TachyonLifeMarks} tachyon_marks */
 async function tachyon_betrayed_2(tachyon_marks) {
+  global_achievement.c_tachyon1 = 1;
   const tachyon = get_chara_talk(32);
   const coffee = get_chara_talk(25);
   const me = get_chara_talk(0);

@@ -16,6 +16,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { ero_hooks } = require('#/data/event/ero-hooks');
 const { get_custom_ero } = require('#/event/ero/ero-factory');
+const global_achievement = require('#/system/global/sys-calc-achievement');
 
 const debug = false;
 const default_my_filter = new Array(5).fill(false);
@@ -65,6 +66,15 @@ async function sys_rape_in_sleeping(cid, supporter = 0) {
     )} ms/action`,
   );
   if (wake_up) {
+    if (
+      !era.get(`cflag:${cid}:父方角色`) ||
+      !era.get(`cflag:${cid}:母方角色`) ||
+      (supporter > 0 &&
+        (!era.get(`cflag:${supporter}:父方角色`) ||
+          !era.get(`cflag:${supporter}:母方角色`)))
+    ) {
+      global_achievement.et_tu = 1;
+    }
     await era.printAndWait([
       '【强烈的刺激使 ',
       get_chara_talk(0).get_colored_name(),

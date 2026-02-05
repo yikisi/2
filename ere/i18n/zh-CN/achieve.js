@@ -15,10 +15,11 @@ class I18nAchievements {
   rarity_7 = '传说';
   rarity_8 = 'UMA';
 
-  platinum_all = '';
+  platinum_all = '主宰';
 
+  ungot = '？？？';
   name_template = '[%RARITY%] %NAME%';
-  platinum_template = '%DESC%\n\n（%PLATINUM%）';
+  platinum_template = '%DESC%\n\n（关联事迹：%PLATINUM%）';
   got_template = '[%RARITY%] 获取时间：%TIME%';
   ungot_template = '稀有度：[%RARITY%]';
   ui_type_template = '【%TYPE%】类成就获取情况';
@@ -64,6 +65,7 @@ class I18nAchievements {
   ck_f = '小奸小恶 · 阴';
   ck_d = '错奸乱恶';
   ck = '十字军之王';
+  et_tu = 'Et tu, Brute?';
 
   end_los = 'Loser';
   end_hnt = '「体面」的绅士';
@@ -80,6 +82,7 @@ class I18nAchievements {
   all = '学园主宰';
 
   c_luna1 = '伊甸见我';
+  c_tachyon1 = '芳香烃中毒';
 }
 
 module.exports = I18nAchievements;
