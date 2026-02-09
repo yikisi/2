@@ -27,12 +27,12 @@
 角色Flag,腰围,50
 角色Flag,臀围,74
 角色Flag,肤色深度,1
-角色Str,发色,橙
-角色Str,前发,齐刘海
+角色Str,发色,orange
+角色Str,前发,even_bangs
 角色Str,中发,
-角色Str,后发,长直发
+角色Str,后发,long_straight
 角色Str,呆毛,
-角色Str,毛色,栗
+角色Str,毛色,kurige
 角色Str,流星形状,条形
 角色Flag,流星大小,2
 特性,泌乳,0

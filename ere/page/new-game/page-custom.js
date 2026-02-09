@@ -1,5 +1,8 @@
 const era = require('#/era-electron');
 
+const {
+  sys_get_chara_info,
+} = require('#/system/chara/sys-calc-characteristic');
 const sys_change_hair = require('#/system/chara/sys-change-hair');
 const {
   get_bust_size,
@@ -14,98 +17,57 @@ const {
   get_random_entry,
   join_to_string,
 } = require('#/utils/list-utils');
-const { get_random_value } = require('#/utils/value-utils');
+const { get_display_width, get_random_value } = require('#/utils/value-utils');
 
 const CharaTitles = require('#/data/chara-titles');
-const { buff_colors, sex_colors, skin_colors } = require('#/data/color-const');
 const {
-  chara_desc,
-  chara_full_desc,
-  human_sex_title,
-} = require('#/data/ero/status-const');
+  bhc_names,
+  buff_colors,
+  hc_names,
+  sex_colors,
+  skin_colors,
+} = require('#/data/color-const');
 const {
   get_breast_cup,
+  get_colored_body_hair,
+  get_colored_hair,
   get_filtered_talents,
-  get_hair_color,
   get_talent,
   get_xp,
 } = require('#/data/info-generator');
 const { back_hairs, front_hairs, top_hairs } = require('#/data/other-const');
 
 const di18n = require('#/i18n/extended-def');
-const { i18n } = require('#/i18n/selector');
-
-const body_hair_type = ['天生光滑', '普通类型', '生长快而硬'];
-const characteristic_type = [
-  '发色',
-  '呆毛',
-  '前发',
-  '后发',
-  '肤色',
-  '腋毛',
-  '阴毛',
-  '性器颜色',
-];
-const hair_color_names = [
-  '黑',
-  '深棕',
-  '橙',
-  '红棕',
-  '白',
-  '金',
-  '浅棕',
-  '粉',
-  '蓝',
-];
-const taiwu_talents = [
-  '迅由危亡',
-  '纯凭自然',
-  '锋从磨砺',
-  '香自苦寒',
-  '意随心寂',
-];
-const taiwu_talent_desc = [
-  '迅由危亡，千钧一发，您的速度远胜常人。',
-  '纯凭自然，浑然天成，您的耐力远胜常人。',
-  '锋从磨砺，伏虎降龙，您的力量远胜常人。',
-  '香自苦寒，动心忍性，您的根性远胜常人。',
-  '意随心寂，感悟自生，您的智力远胜常人。',
-];
-const uma_hairs = ['黑鹿', '栗', '鹿', '青鹿', '芦', '枥栗', '青'];
+const { __, i18n } = require('#/i18n/selector');
 
 /** @type {(function(number):{color:string,content:string}|string)[]} */
 const hair_content_cb = [
-  (p) => {
-    const hair = hair_color_names[p];
-    return {
-      color: get_hair_color(hair),
-      content: hair,
-    };
-  },
-  (p) => top_hairs[p],
-  (p) => front_hairs[p],
-  (p) => back_hairs[p],
+  (p) => get_colored_hair(0, hc_names[p]),
+  (p) => __(`feature.th_${top_hairs[p]}`),
+  (p) => __(`feature.fh_${front_hairs[p]}`),
+  (p) => __(`feature.bh_${back_hairs[p]}`),
   (p) => ({
     color: skin_colors[p + 1],
-    content: di18n.n_skin[p + 1],
+    content: di18n.feature.n_skin[p + 1],
   }),
-  (p) => body_hair_type[p],
-  (p) => body_hair_type[p],
+  (p) => di18n.feature.n_body_hair[p],
+  (p) => di18n.feature.n_body_hair[p],
   (p) => {
-    return { color: sex_colors[p], content: di18n.n_c_penis[p] };
+    return { color: sex_colors[p], content: di18n.feature.n_c_sex_organ[p] };
   },
 ];
 const hair_length_arr = [
-  hair_color_names.length,
+  hc_names.length,
   top_hairs.length,
   front_hairs.length,
   back_hairs.length,
-  di18n.n_skin.length,
-  body_hair_type.length,
-  body_hair_type.length,
-  di18n.n_c_penis.length,
+  di18n.feature.n_skin.length,
+  di18n.feature.n_body_hair.length,
+  di18n.feature.n_body_hair.length,
+  di18n.feature.n_c_sex_organ.length,
 ];
 
+/** @param {number} size */
 function set_bust_size(size) {
   switch (size) {
     case 1:
@@ -125,9 +87,13 @@ function set_bust_size(size) {
   }
 }
 
-function set_height(height) {
+/**
+ * @param {number} height
+ * @param {number} my_sex
+ */
+function set_height(height, my_sex) {
   era.set('cflag:0:身高', height);
-  if (era.get('cflag:0:性别') === 1) {
+  if (my_sex === 1) {
     era.set('cflag:0:胸围', height * 0.48);
     era.set('cflag:0:下胸围', 200);
     era.set('cflag:0:腰围', height * 0.47);
@@ -139,7 +105,8 @@ function set_height(height) {
   }
 }
 
-function random_chara() {
+/** @param {number} my_sex */
+function random_chara(my_sex) {
   switch (era.get('flag:彩蛋机制')) {
     case 3:
       era.set('callname:0:-2', '天马');
@@ -153,7 +120,7 @@ function random_chara() {
     default:
       era.set('callname:0:-2', 'you');
   }
-  era.set('cstr:0:发色', get_random_entry(hair_color_names));
+  era.set('cstr:0:发色', get_random_entry(hc_names));
   era.set('cstr:0:呆毛', top_hairs[get_random_value(1, 5)] || '');
   era.set('cstr:0:前发', get_random_entry(front_hairs));
   era.set('cstr:0:后发', get_random_entry(back_hairs));
@@ -173,8 +140,7 @@ function random_chara() {
     case 2:
       era.set('cflag:0:出生日期', Math.min(era.get('cflag:0:出生日期'), 28));
   }
-  set_height(get_random_value(150, 200));
-  const my_sex = era.get('cflag:0:性别');
+  set_height(get_random_value(150, 200), my_sex);
   if (my_sex > 0) {
     era.set('cflag:0:阴茎尺寸', get_random_value(1, 5));
   }
@@ -182,7 +148,7 @@ function random_chara() {
     set_bust_size(get_random_value(1, 5));
   }
   era.set('cflag:0:气性', get_random_value(-3, 3));
-  era.set('cstr:0:毛色', get_random_entry(uma_hairs));
+  era.set('cstr:0:毛色', get_random_entry(bhc_names));
   for (let i = 0; i < 5; ++i) {
     // BASENAME:5 - 9 = 速度 - 智力
     era.set(`base:0:${5 + i}`, 25);
@@ -190,7 +156,8 @@ function random_chara() {
   era.add(`base:0:${get_random_value(5, 9)}`, 100);
 }
 
-function random_talent() {
+/** @param {number} my_sex */
+function random_talent(my_sex) {
   era.get('talentkeys').forEach((e) => {
     if (e >= 40 && e <= 66) {
       era.set(`talent:0:${e}`, 0);
@@ -199,9 +166,8 @@ function random_talent() {
   const chara_talents = new Array(18).fill(0).map((_, i) => i);
   chara_talents.forEach((tid) => era.set(`talent:0:${tid}`, 0));
   gacha(chara_talents, 5).forEach((e) =>
-    era.set(`talent:0:${e}`, 2 * get_random_value(0, 1) - 1),
+    era.set(`talent:0:${e}`, Math.random() < 0.5 ? 1 : -1),
   );
-  const my_sex = era.get('cflag:0:性别');
   era.set(`talent:0:${get_random_entry(get_filtered_talents(my_sex, 50))}`, 1);
   era.set(
     `talent:0:${get_random_entry(get_filtered_talents(my_sex, 60))}`,
@@ -222,6 +188,7 @@ function random_talent() {
 }
 
 async function page_custom() {
+  const my_sex = era.get('cflag:0:性别');
   let buffer;
   let flag_custom = true;
   let temp;
@@ -263,19 +230,31 @@ async function page_custom() {
     era.printMultiColumns([
       { type: 'divider' },
       {
-        content: '捏人时间！要随机生成角色吗？',
+        content: i18n().new_game.cus_intro_header,
         type: 'text',
       },
-      { accelerator: 1, content: '随机生成', type: 'button' },
-      { accelerator: 2, content: '默认就好', type: 'button' },
-      { accelerator: 3, content: '自己设置', type: 'button' },
+      {
+        accelerator: 1,
+        content: i18n().new_game.bt_cus_random,
+        type: 'button',
+      },
+      {
+        accelerator: 2,
+        content: i18n().new_game.bt_cus_default,
+        type: 'button',
+      },
+      {
+        accelerator: 3,
+        content: i18n().new_game.bt_cus_set,
+        type: 'button',
+      },
     ]);
     const first_button = await era.input();
     if (first_button === 1) {
-      random_chara();
-      random_talent();
+      random_chara(my_sex);
+      random_talent(my_sex);
     } else if (first_button === 2) {
-      era.set('cstr:0:发色', hair_color_names[0]);
+      era.set('cstr:0:发色', hc_names[0]);
       era.set('cstr:0:呆毛', '');
       era.set('cstr:0:前发', front_hairs[0]);
       era.set('cstr:0:后发', back_hairs[0]);
@@ -285,14 +264,14 @@ async function page_custom() {
       era.set('talent:0:茎核类型', 1);
       era.set('cflag:0:出生月份', 1);
       era.set('cflag:0:出生日期', 1);
-      set_height(170);
+      set_height(170, my_sex);
       set_bust_size(3);
       era.set('cflag:0:下胸围', era.get('cflag:0:胸围') - 15);
-      if (era.get('cflag:0:性别')) {
+      if (my_sex > 0) {
         era.set('cflag:0:阴茎尺寸', 3);
       }
       era.set('cflag:0:气性', 0);
-      era.set('cstr:0:毛色', uma_hairs[0]);
+      era.set('cstr:0:毛色', bhc_names[0]);
       for (let i = 0; i < 5; ++i) {
         // BASENAME:5 - 9 = 速度 - 智力
         era.add(`base:0:${5 + i}`, 20);
@@ -302,28 +281,29 @@ async function page_custom() {
       } else {
         era.set('callname:0:-2', 'you');
       }
-      random_talent();
+      random_talent(my_sex);
     } else if (first_button === 3) {
-      let flag_hair = true,
-        indexes = new Array(hair_content_cb.length).fill(0);
+      let flag_hair = true;
+      let indexes = new Array(hair_content_cb.length).fill(0);
+      let cur_line = era.getLineCount();
       while (flag_hair) {
-        await era.clear();
+        await era.clear(era.getLineCount() - cur_line);
         era.printInColRows(
           [
             { type: 'divider' },
-            { content: '首先来决定身体细节！', type: 'text' },
+            { content: i18n().new_game.cus_body_header, type: 'text' },
           ],
           ...indexes.map((e, i) => {
             return [
               {
                 config: { width: 3 },
-                content: `${characteristic_type[i]}：`,
+                content: di18n.feature.types[i],
                 type: 'text',
               },
               {
                 accelerator: i * 10,
                 config: { width: 3 },
-                content: '前一个',
+                content: i18n().ui_et_prev,
                 type: 'button',
               },
               {
@@ -334,16 +314,22 @@ async function page_custom() {
               {
                 accelerator: i * 10 + 1,
                 config: { width: 3 },
-                content: '后一个',
+                content: i18n().ui_et_next,
                 type: 'button',
               },
             ];
           }),
-          [{ accelerator: 99, content: '就这样！', type: 'button' }],
+          [
+            {
+              accelerator: 99,
+              content: i18n().new_game.bt_cus_confirm,
+              type: 'button',
+            },
+          ],
         );
         temp = await era.input();
         if (temp === 99) {
-          era.set('cstr:0:发色', hair_color_names[indexes[0]]);
+          era.set('cstr:0:发色', hc_names[indexes[0]]);
           era.set('cstr:0:呆毛', !indexes[1] ? '' : top_hairs[indexes[1]]);
           era.set('cstr:0:前发', front_hairs[indexes[2]]);
           era.set('cstr:0:后发', back_hairs[indexes[3]]);
@@ -371,20 +357,24 @@ async function page_custom() {
         }
       }
 
-      let flag_height = true,
-        height = 170,
-        month = 1,
-        day = 1;
+      let flag_height = true;
+      let height = 170;
+      let month = 1;
+      let day = 1;
+      cur_line = era.getLineCount();
       while (flag_height) {
-        await era.clear();
+        await era.clear(era.getLineCount() - cur_line);
         era.printMultiColumns([
           { type: 'divider' },
           {
-            content:
-              '然后是身高和生日！\nPS：开发者就假定您并非出生于2月29日啦',
+            content: i18n().new_game.cus_birthday_header,
             type: 'text',
           },
-          { config: { width: 2 }, content: '身高 (cm)', type: 'text' },
+          {
+            config: { width: 2 },
+            content: i18n().feature.n_height_with_cm,
+            type: 'text',
+          },
           {
             accelerator: 10,
             config: { align: 'center', width: 3 },
@@ -414,12 +404,16 @@ async function page_custom() {
             content: '+5',
             type: 'button',
           },
-          { config: { width: 7 }, content: '', type: 'text' },
-          { config: { width: 2 }, content: '出生月份', type: 'text' },
+          { content: [], type: 'text' },
+          {
+            config: { width: 2 },
+            content: i18n().new_game.cus_birthday_month,
+            type: 'text',
+          },
           {
             accelerator: 20,
             config: { align: 'center', offset: 3, width: 3 },
-            content: '前一月',
+            content: i18n().new_game.cus_bm_prev,
             type: 'button',
           },
           {
@@ -430,21 +424,25 @@ async function page_custom() {
           {
             accelerator: 21,
             config: { align: 'center', width: 3 },
-            content: '后一月',
+            content: i18n().new_game.cus_bm_next,
             type: 'button',
           },
-          { config: { width: 10 }, content: '', type: 'text' },
-          { config: { width: 2 }, content: '出生日期', type: 'text' },
+          { content: [], type: 'text' },
+          {
+            config: { width: 2 },
+            content: i18n().new_game.cus_birthday_date,
+            type: 'text',
+          },
           {
             accelerator: 30,
             config: { align: 'center', width: 3 },
-            content: '前五天',
+            content: i18n().new_game.cus_bd_prev_5,
             type: 'button',
           },
           {
             accelerator: 31,
             config: { align: 'center', width: 3 },
-            content: '前一天',
+            content: i18n().new_game.cus_bd_prev,
             type: 'button',
           },
           {
@@ -455,17 +453,21 @@ async function page_custom() {
           {
             accelerator: 32,
             config: { align: 'center', width: 3 },
-            content: '后一天',
+            content: i18n().new_game.cus_bd_next,
             type: 'button',
           },
           {
             accelerator: 33,
             config: { align: 'center', width: 3 },
-            content: '后五天',
+            content: i18n().new_game.cus_bd_next_5,
             type: 'button',
           },
-          { config: { width: 7 }, content: '', type: 'text' },
-          { accelerator: 99, content: '就这样！', type: 'button' },
+          { content: [], type: 'text' },
+          {
+            accelerator: 99,
+            content: i18n().new_game.bt_cus_confirm,
+            type: 'button',
+          },
         ]);
         temp = await era.input();
         switch (temp) {
@@ -520,7 +522,7 @@ async function page_custom() {
           case 99:
             era.set('cflag:0:出生月份', month);
             era.set('cflag:0:出生日期', day);
-            set_height(height);
+            set_height(height, my_sex);
             flag_height = false;
         }
         let date_limit = 31;
@@ -543,69 +545,62 @@ async function page_custom() {
         }
       }
 
-      if (era.get('cflag:0:性别') - 1) {
+      if (my_sex !== 1) {
         era.printMultiColumns([
           { type: 'divider' },
           {
-            content: '您希望您的女性象征有何种规模？\nPS：不是越大越好！',
+            content: i18n().new_game.cus_breast_header,
             type: 'text',
           },
-          { accelerator: 1, content: '……我是砧板', type: 'button' },
-          { accelerator: 2, content: '当然是稀有价值啦', type: 'button' },
-          { accelerator: 3, content: '普通的就好', type: 'button' },
-          { accelerator: 4, content: '希望能大一点！', type: 'button' },
-          {
-            accelerator: 5,
-            content: '我要傲视一切（不是）',
+          ...new Array(5).fill(0).map((_, i) => ({
+            accelerator: i + 1,
+            content: __(`new_game.cus_breast_${i + 1}`),
             type: 'button',
-          },
+          })),
         ]);
         set_bust_size(await era.input());
       }
 
-      if (era.get('cflag:0:性别')) {
+      if (my_sex > 0) {
         era.printMultiColumns([
           { type: 'divider' },
           {
-            content: '您希望您的「作案工具」有何种规模？\nPS：不是越大越好！',
+            content: i18n().new_game.cus_penis_header,
             type: 'text',
           },
-          { accelerator: 1, content: '所有人都能容纳的那种！', type: 'button' },
-          { accelerator: 2, content: '比上面那个偏大一点就好', type: 'button' },
-          { accelerator: 3, content: '普通的就好', type: 'button' },
-          { accelerator: 4, content: '当然要雄伟的！', type: 'button' },
-          {
-            accelerator: 5,
-            content: '我要让所有人都痛并快乐着！',
+          ...new Array(5).fill(0).map((_, i) => ({
+            accelerator: i + 1,
+            content: __(`new_game.cus_penis_${i + 1}`),
             type: 'button',
-          },
+          })),
         ]);
-        temp = await era.input();
-        era.set('cflag:0:阴茎尺寸', temp);
+        era.set('cflag:0:阴茎尺寸', await era.input());
       }
 
       buffer = [
         { type: 'divider' },
         {
-          content: '现在是幻想时间！如果您变成了马娘，您认为您是什么气性？',
+          content: i18n().new_game.cus_uma_header,
           type: 'text',
         },
       ];
-      chara_desc.forEach((e, i) =>
+      for (let i = 1; i <= 7; ++i) {
+        // 气性从 -3 开始
+        const c = i - 4;
         buffer.push(
           {
-            accelerator: i + 1,
+            accelerator: i,
             config: { width: 2 },
-            content: e,
+            content: __(`feature.chara_${c}`),
             type: 'button',
           },
           {
             config: { width: 22 },
-            content: chara_full_desc[i],
+            content: __(`feature.chara_${c}_desc`),
             type: 'text',
           },
-        ),
-      );
+        );
+      }
       era.printMultiColumns(buffer);
       temp = await era.input();
       era.set('cflag:0:气性', temp - 4);
@@ -613,13 +608,14 @@ async function page_custom() {
       buffer = [
         { type: 'divider' },
         {
-          content: `嗯嗯，您认为您将会是 ${
-            chara_desc[era.get('cflag:0:气性') + 3]
-          } 气性啊……那么您会是什么毛色的马娘呢？`,
+          content: i18n().new_game.cus_uma_color_header_template.replace(
+            '%CHARA%',
+            __(`feature.chara_${era.get('cflag:0:气性')}`),
+          ),
           type: 'text',
         },
       ];
-      uma_hairs.forEach((e, i) => {
+      bhc_names.forEach((hc, i) => {
         buffer.push(
           {
             accelerator: i + 1,
@@ -629,49 +625,48 @@ async function page_custom() {
           },
           {
             config: { width: 23 },
-            content: [
-              {
-                color: get_hair_color(e),
-                content: `${e}毛`,
-              },
-            ],
+            content: [get_colored_body_hair(0, hc)],
             type: 'text',
           },
         );
       });
       era.printMultiColumns(buffer);
       temp = await era.input();
-      era.set('cstr:0:毛色', uma_hairs[temp - 1]);
+      era.set('cstr:0:毛色', bhc_names[temp - 1]);
 
       era.drawLine();
-      era.print('那么就到称呼环节啦！');
+      era.print(i18n().new_game.cus_call_header);
       // FLAGNAME:179 = 彩蛋机制
       switch (era.get('flag:179')) {
         case 3:
           era.drawLine();
-          await era.printAndWait('哦哦，您取了一个很喜欢马蹄的名字呢！');
+          await era.printAndWait(i18n().new_game.cus_call_3);
           era.set('callname:0:-2', '天马');
           break;
         case 179:
           era.drawLine();
-          await era.printAndWait('哦哦，您取了一个很萝莉控的名字呢！');
+          await era.printAndWait(i18n().new_game.cus_call_179);
           era.set('callname:0:-2', '豚鼠子');
           break;
         case 621:
           era.drawLine();
-          await era.printAndWait('哦哦，您取了一个很想被欺负的名字呢！');
+          await era.printAndWait(i18n().new_game.cus_call_621);
           era.set('callname:0:-2', '渡鸦');
           break;
         default:
           era.printInColRows([
-            { content: '希望旁白君如何称呼您呢？', type: 'text' },
+            { content: i18n().new_game.cus_set_callname, type: 'text' },
             { accelerator: 1, content: i18n().name.you, type: 'button' },
             {
               accelerator: 2,
               content: i18n().name.leading_role,
               type: 'button',
             },
-            { accelerator: 3, content: '自己决定！', type: 'button' },
+            {
+              accelerator: 3,
+              content: i18n().new_game.cus_set_by_self,
+              type: 'button',
+            },
           ]);
           temp = await era.input();
           switch (temp) {
@@ -682,31 +677,31 @@ async function page_custom() {
               era.set('callname:0:-2', 'leading_role');
               break;
             case 3:
-              era.print('希望旁白君如何称呼您呢？（6个字符以内）');
+              era.print(i18n().new_game.cus_set_callname);
               temp = '';
               do {
                 if (temp) {
-                  await era.printAndWait(i18n().ui_too_long);
+                  await era.printAndWait(di18n.get_too_long(6));
                 }
                 temp = era.set('callname:0:-2', await era.input());
-              } while (temp.length > 6);
+              } while (get_display_width(temp) > 6);
           }
       }
-      await era.printAndWait([
-        CharaTalk.me.get_colored_actual_name(),
-        ' 训练员，旁白君从此就称您为 ',
-        CharaTalk.me.get_colored_name(),
-        ' 了！',
-      ]);
+      await era.printAndWait(
+        i18n().new_game.get_cus_callname_confirm(
+          CharaTalk.me.get_colored_actual_name(),
+          CharaTalk.me.get_colored_name(),
+        ),
+      );
 
       buffer = [
         { type: 'divider' },
         {
-          content: '最后是来自开发者的馈赠！',
+          content: i18n().new_game.cus_taiwu_header,
           type: 'text',
         },
       ];
-      taiwu_talents.forEach((e, i) => {
+      di18n.new_game.taiwu_talents.forEach((e, i) => {
         buffer.push(
           {
             accelerator: i + 1,
@@ -716,7 +711,7 @@ async function page_custom() {
           },
           {
             config: { width: 21 },
-            content: taiwu_talent_desc[i],
+            content: di18n.new_game.taiwu_talent_desc[i],
             type: 'text',
           },
         );
@@ -726,124 +721,121 @@ async function page_custom() {
       temp = await era.input();
       era.add(`base:0:${temp + 4}`, 100);
 
-      random_talent();
+      random_talent(my_sex);
     }
 
     let flag_check = true;
+    const cur_line = era.getLineCount();
     while (flag_check) {
-      const hair_color = era.get('cstr:0:发色'),
-        uma_hair_color = era.get('cstr:0:毛色');
       sys_change_hair(0);
       era.printMultiColumns([
         { type: 'divider' },
-        { content: '再来检查一下吧！', type: 'text' },
+        { content: i18n().new_game.cus_final_header, type: 'text' },
         {
-          content: [CharaTalk.me.get_colored_actual_name(), ' 训练员'],
+          content: i18n().new_game.get_cus_f_name(
+            CharaTalk.me.get_colored_actual_name(),
+          ),
+          type: 'text',
+        },
+        {
+          content: (my_sex === 1
+            ? i18n().new_game.get_cus_f_male
+            : i18n().new_game.get_cus_f_female)(
+            CharaTalk.me.get_colored_name(),
+            __(`feature.h_sex_${my_sex}`),
+            era.get('cflag:0:身高').toString(),
+            get_bust_size(0, true),
+            get_breast_cup(0),
+            get_waist_size(0),
+            get_hip_size(0),
+          ),
+          type: 'text',
+        },
+        {
+          content: i18n().new_game.get_cus_f_hair(
+            join_to_string(
+              [
+                di18n.feature.get_ahoge_hair(era.get('cstr:0:呆毛')),
+                __(`feature.fh_${era.get('cstr:0:前发')}`),
+                __(`feature.bh_${era.get('cstr:0:后发')}`),
+              ],
+              i18n().feature.hair_splitter,
+            ),
+            get_colored_hair(0),
+          ),
+          type: 'text',
+        },
+        {
+          content: (my_sex > 0
+            ? i18n().new_game.get_cus_f_skin_male
+            : i18n().new_game.get_cus_f_skin_female)(
+            {
+              // CFLAGNAME:10 = 肤色深度
+              color: skin_colors[era.get('cflag:0:10') + 1],
+              content: di18n.feature.n_skin[era.get('cflag:0:10') + 1],
+            },
+            di18n.feature.n_body_hair[era.get('talent:0:腋毛成长')],
+            di18n.feature.n_body_hair[era.get('talent:0:阴毛成长')],
+            {
+              // TALENTNAME:34 = 茎核类型
+              color: sex_colors[era.get('talent:0:34')],
+              content: di18n.feature.n_c_sex_organ[era.get('talent:0:34')],
+            },
+            di18n.feature.n_penis[era.get('cflag:0:阴茎尺寸')],
+          ),
+          type: 'text',
+        },
+        {
+          content: i18n().new_game.get_cus_f_uma(
+            get_colored_body_hair(0),
+            sys_get_chara_info(era.get('cflag:0:气性')),
+          ),
+          type: 'text',
+        },
+        {
+          content: [i18n().new_game.cus_f_talent, ...get_talent(0)],
+          type: 'text',
+        },
+        {
+          content: [i18n().new_game.cus_f_xp, ...get_xp(0)],
           type: 'text',
         },
         {
           content: [
-            '旁白君称为：',
-            CharaTalk.me.get_colored_name(),
-            ' | 性别：',
-            human_sex_title[era.get('cflag:0:性别')],
-            ` | 身高：${era.get('cflag:0:身高')}cm`,
-            era.get('cflag:0:性别') - 1
-              ? ` | 三围：B${get_bust_size(0, true)} (${get_breast_cup(
-                  0,
-                )} Cup) · W${get_waist_size(0)} · H${get_hip_size(0)}`
-              : '',
-            { isBr: true },
-            '发型：',
-            join_to_string(
-              [
-                era.get('cstr:0:呆毛') ? `${era.get('cstr:0:呆毛')}呆毛` : '',
-                era.get('cstr:0:前发'),
-                era.get('cstr:0:中发'),
-                era.get('cstr:0:后发'),
-              ],
-              '+',
-            ),
-            ' | 发色：',
-            {
-              color: get_hair_color(hair_color),
-              content: hair_color,
-            },
-            { isBr: true },
-            '肤色：',
-            {
-              // CFLAGNAME:10 = 肤色深度
-              color: skin_colors[era.get('cflag:0:10') + 1],
-              content: di18n.n_skin[era.get('cflag:0:10') + 1],
-            },
-            ` | 腋毛：${body_hair_type[era.get('talent:0:腋毛成长')]} | 阴毛：${
-              body_hair_type[era.get('talent:0:阴毛成长')]
-            } | 性器颜色：`,
-            {
-              // TALENTNAME:34 = 茎核类型
-              color: sex_colors[era.get('talent:0:34')],
-              content: di18n.n_c_penis[era.get('talent:0:34')],
-            },
-            era.get('cflag:0:性别')
-              ? ` | 阴茎长度：${di18n.n_penis[era.get('cflag:0:阴茎尺寸')]}`
-              : '',
-            { isBr: true },
-            '如果马娘化，认为自己将是 ',
-            {
-              color: get_hair_color(uma_hair_color),
-              content: `${uma_hair_color}毛 `,
-            },
-            {
-              content: chara_desc[era.get('cflag:0:气性') + 3],
-              title: `${chara_desc[era.get('cflag:0:气性') + 3]}：${
-                chara_full_desc[era.get('cflag:0:气性') + 3]
-              }`,
-            },
-            ' 马娘',
-            { isBr: true },
-            '性格特征：',
-            ...get_talent(0),
-            { isBr: true },
-            '其他特征：',
-            ...get_xp(0),
-            { isBr: true },
-            '开发者的馈赠：',
-            di18n.n_attr[
-              new Array(5)
-                .fill(0)
-                .findIndex((_, i) => era.get(`base:0:${5 + i}`) >= 100)
-            ] || '默认',
+            i18n().new_game.cus_f_gift,
+            di18n.n_attr.find((e, i) => era.get(`base:0:${5 + i}`) >= 100) ||
+              i18n().ui_default,
           ],
           type: 'text',
         },
         {
           accelerator: 1,
           config: { width: 4 },
-          content: '就这样！',
+          content: i18n().new_game.bt_cus_confirm,
           type: 'button',
         },
         {
           accelerator: 2,
           config: { width: 4 },
-          content: '随机一下特征',
+          content: i18n().new_game.bt_random_talents,
           type: 'button',
         },
         {
           accelerator: 3,
           config: { width: 4 },
-          content: '全部随机！',
+          content: i18n().new_game.bt_random_all,
           type: 'button',
         },
         {
           accelerator: 4,
           config: { width: 4 },
-          content: '我要重选！',
+          content: i18n().new_game.bt_re_make,
           type: 'button',
         },
         {
           accelerator: 99,
           config: { width: 4 },
-          content: '我不玩了……',
+          content: i18n().new_game.bt_exit,
           type: 'button',
         },
       ]);
@@ -854,13 +846,13 @@ async function page_custom() {
           flag_custom = false;
           break;
         case 2:
-          random_talent();
-          await era.clear();
+          random_talent(my_sex);
+          await era.clear(era.getLineCount() - cur_line);
           break;
         case 3:
-          random_chara();
-          random_talent();
-          await era.clear();
+          random_chara(my_sex);
+          random_talent(my_sex);
+          await era.clear(era.getLineCount() - cur_line);
           break;
         case 4:
           flag_check = false;

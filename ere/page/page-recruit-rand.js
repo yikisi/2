@@ -23,6 +23,7 @@ const { check_edu_script } = require('#/event/edu/edu-factory');
 const game_guides = require('#/event/others/game-guides');
 const { check_rec_script, run_custom_rec } = require('#/event/rec/rec-factory');
 
+const get_display_name = require('#/utils/calc-display-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const {
   gacha,
@@ -45,7 +46,8 @@ const recruit_flags = require('#/data/event/recruit-flags');
 const {
   get_adaptability_rank,
   get_breast_cup,
-  get_hair_color,
+  get_colored_body_hair,
+  get_colored_hair,
   get_skin,
   get_skin_color,
   get_talent,
@@ -223,21 +225,24 @@ async function print_rec_page() {
       }
       flag_recruit = false;
     } else if (ret > 1000 && ret <= 2000) {
-      const selected = ret - 1000,
-        name = era.get(`static:${selected}:name`),
-        body_hair_color = era.get(`cstr:${selected}:毛色`),
-        hair_color = era.get(`cstr:${selected}:发色`),
-        sex_code = era.get(`cflag:${selected}:性别`),
-        talent_list = [];
+      const selected = ret - 1000;
+      const name = get_display_name(era.get(`static:${selected}:name`));
+      const sex_code = era.get(`cflag:${selected}:性别`);
+      const talent_list = [];
       let hair = era.get(`cstr:${selected}:呆毛`);
       hair = join_to_string(
         [
-          hair ? `${hair}呆毛` : '',
-          era.get(`cstr:${selected}:前发`),
-          era.get(`cstr:${selected}:中发`),
-          era.get(`cstr:${selected}:后发`),
+          di18n.feature.get_ahoge_hair(hair),
+          __(`feature.fh_${era.get(`cstr:${selected}:前发`)}`),
+          __(`feature.bh_${era.get(`cstr:${selected}:中发`)}`, ''),
+          era
+            .get(`cstr:${selected}:后发`)
+            .split('+')
+            .map((h) => __(`feature.bh_${h}`, ''))
+            .filter((h) => h)
+            .join(i18n().feature.hair_splitter),
         ],
-        '+',
+        i18n().feature.hair_splitter,
       );
       let temp = get_talent(selected);
       if (temp.length > 0) {
@@ -283,14 +288,9 @@ async function print_rec_page() {
               '肤色',
               { color: get_skin_color(selected), content: get_skin(selected) },
               ' 的 ',
-              {
-                color: get_hair_color(hair_color),
-                content: `${hair_color}发`,
-              },
-              {
-                color: get_hair_color(body_hair_color),
-                content: `${body_hair_color}毛`,
-              },
+              get_colored_hair(selected),
+              ' ',
+              get_colored_body_hair(selected),
               ' ',
               sys_get_chara_info(era.get(`cflag:${selected}:气性`)),
               ' ',

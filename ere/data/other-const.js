@@ -3,23 +3,27 @@ const t_salaries = [120, 150, 180, 210, 240];
 
 module.exports = {
   back_hairs: [
-    '短发',
-    '长直发',
-    '双马尾',
-    '高马尾',
-    '发髻',
-    '侧马尾',
-    '蓬松双马尾',
-    '外翼式',
-    '单辫',
-    '双辫',
-    '双重丸子头',
-    '高马尾+长直发',
+    'shor_hair',
+    'long_straight',
+    'twin_tails',
+    'high_ponytail',
+    'hair_bun',
+    'side_ponytail',
+    'puf_twintails',
+    'wing_style',
+    'single_braid',
+    'twin_braids',
+    'doub_odango',
   ],
   creditors: { annul_bonus: -1, invest: -2, salary: 0 },
   first_child_id: 500,
-  front_hairs: ['厚刘海', '齐刘海', '侧分', '排气口', '中分'],
-  gene_juel_names: ['粉', '蓝', '白'],
+  front_hairs: [
+    'thic_bangs',
+    'even_bangs',
+    'side_part',
+    'exha_ports',
+    'midd_part',
+  ],
   /**
    * @param {number} growth
    * @returns {string}
@@ -29,7 +33,7 @@ module.exports = {
       case 0:
         return '#ff69b4';
       case 1:
-        return undefined;
+        return void 0;
       default:
         return '#f9a048';
     }
@@ -55,6 +59,6 @@ module.exports = {
     return t_salaries[level];
   },
   max_chara_id: 1000,
-  top_hairs: ['无', '短', '中', '长', '白'],
+  top_hairs: ['none', 'short', 'middle', 'long', 'white'],
   year_index: [-1, 47, 95],
 };

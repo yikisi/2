@@ -141,7 +141,7 @@ async function duty(chara, me) {
       ' 又一次饮用了药物，屈尊用',
       chara.sex,
       '那高贵而',
-      di18n.n_penis[get_penis_size(chara.id)],
+      di18n.feature.n_penis[get_penis_size(chara.id)],
       '的肉棒作为闹钟。',
     ]);
   } else {
@@ -153,7 +153,7 @@ async function duty(chara, me) {
       ' 又一次屈尊用',
       chara.sex,
       '那高贵',
-      di18n.n_penis[get_penis_size(chara.id)],
+      di18n.feature.n_penis[get_penis_size(chara.id)],
       '的肉棒作为闹钟。',
     ]);
   }

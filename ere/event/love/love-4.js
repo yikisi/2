@@ -18,6 +18,7 @@ const CustomizedLove = require('#/event/love/love-common');
 const { add_event } = require('#/event/queue');
 
 const event_hooks = require('#/data/event/event-hooks');
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 module.exports = class extends CustomizedLove {
   async 49(zensky, me, callname) {
@@ -38,13 +39,25 @@ module.exports = class extends CustomizedLove {
         zensky.name
       }最近很困扰,在${zensky.get_uma_sex_title()}们自建的小小圈子里悄悄传开了.`,
     );
-    await era.printAndWait(
-      `随着时间的不断推移，就连${sys_get_colored_callname(this.id, 301)}小姐也多次询问训练员${zensky.name}的情况.`,
-    );
-    await era.printAndWait(
-      `直到有一天,在自助餐厅聊天的时候,${sys_get_colored_callname(this.id, 24)}向${zensky.name}询问有关恋爱的话题.`,
-    );
-    await zensky.say_and_wait(`……原来是这样吗,谢谢你，小重炮`);
+    await era.printAndWait([
+      '随着时间的不断推移，就连 ',
+      get_chara_talk(301).get_colored_name(),
+      ' 也多次询问训练员 ',
+      zensky.get_colored_name(),
+      ' 的情况。',
+    ]);
+    await era.printAndWait([
+      '直到有一天,在自助餐厅聊天的时候，',
+      sys_get_colored_callname(this.id, 24),
+      '向 ',
+      zensky.get_colored_name(),
+      ' 询问有关恋爱的话题。',
+    ]);
+    await zensky.say_and_wait([
+      '……原来是这样吗，谢谢你，',
+      sys_get_colored_callname(this.id, 24),
+      '。',
+    ]);
     era.println();
     await era.printAndWait(`${zensky.name}意识到了自己对训练员的好感.`);
     era.printButton(`把${callname}约出来吧`, 1);

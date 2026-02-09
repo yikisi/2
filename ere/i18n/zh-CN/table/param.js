@@ -1,5 +1,5 @@
 class I18nParam {
-  get_jewel_list_in_shop = (abbr, jewel) => [abbr, '：', jewel];
+  get_jewel_count = (jewel, count) => [jewel, '：', count];
   jewel_with_count = '%JEWEL%×%COUNT%';
 
   // 缩写

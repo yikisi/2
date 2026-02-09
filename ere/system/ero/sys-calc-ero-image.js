@@ -2,11 +2,13 @@ const era = require('#/era-electron');
 
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
-const { hair_colors } = require('#/data/const.json');
+const { get_hair_color } = require('#/data/color-const');
 const { lust_border } = require('#/data/ero/orgasm-const');
 const { part_enum } = require('#/data/ero/part-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const { location_name } = require('#/data/locations');
+
+const { i18n } = require('#/i18n/selector');
 
 const dict = {};
 
@@ -158,11 +160,12 @@ function sys_get_ero_image(
   } else {
     let body_hair_css_filter =
       era.get(`cflag:${cid}:种族`) > 0
-        ? hair_colors[era.get(`cstr:${cid}:毛色`)] ||
-          hair_colors[era.get(`cstr:${cid}:发色`)] ||
+        ? get_hair_color(era.get(`cstr:${cid}:毛色`), true) ||
+          get_hair_color(era.get(`cstr:${cid}:发色`), true) ||
           ''
-        : '黑';
-    let hair_css_filter = hair_colors[era.get(`cstr:${cid}:发色`)] || '';
+        : get_hair_color('black', true);
+    let hair_css_filter =
+      get_hair_color(era.get(`cstr:${cid}:发色`), true) || '';
     let temp;
     if (body_hair_css_filter) {
       body_hair_css_filter = `hue-rotate(${body_hair_css_filter[0]}deg) saturate(${body_hair_css_filter[1]}%) brightness(${body_hair_css_filter[2]}%)`;
@@ -176,15 +179,14 @@ function sys_get_ero_image(
         names: '通用_裸_马尾',
       });
     }
-    era
-      .get(`cstr:${cid}:后发`)
-      .split('+')
-      .forEach((e) =>
+    if ((temp = era.get(`cstr:${cid}:后发`))) {
+      temp.split('+').forEach((e) =>
         ret.push({
           filter: hair_css_filter,
-          names: `通用_后发_${e}\t通用_后发_长直发`,
+          names: `通用_后发_${i18n('zh-CN').feature[`bh_${e}`]}\t通用_后发_长直发`,
         }),
       );
+    }
     ret.push('通用_裸');
     if (era.get(`cflag:${cid}:腋毛`) >= 2) {
       ret.push({
@@ -216,6 +218,7 @@ function sys_get_ero_image(
       ret.push(`通用_裸_汗`);
     }
     if ((temp = era.get(`cstr:${cid}:中发`))) {
+      temp = i18n('zh-CN').feature[`bh_${temp}`];
       ret.push({
         filter: hair_css_filter,
         names: `通用_中发_${temp}\t通用_后发_${temp}\t通用_后发_双马尾`,
@@ -266,11 +269,13 @@ function sys_get_ero_image(
       ret.push('通用_脸_微笑');
     }
     const suffix = era.get(`cflag:${cid}:种族`) > 0 ? '_马' : '';
+    temp = era.get(`cstr:${cid}:前发`);
     ret.push({
       filter: hair_css_filter,
-      names: `通用_前发_${era.get(`cstr:${cid}:前发`)}${suffix}\t通用_前发_厚刘海${suffix}`,
+      names: `通用_前发_${i18n('zh-CN').feature[`fh_${temp}`]}${suffix}\t通用_前发_厚刘海${suffix}`,
     });
     if ((temp = era.get(`cstr:${cid}:呆毛`))) {
+      temp = i18n('zh-CN').feature[`th_${temp}`];
       ret.push({
         filter: hair_css_filter,
         names: `通用_呆毛_${temp}\t通用_呆毛_短`,

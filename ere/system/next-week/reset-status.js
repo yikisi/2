@@ -29,7 +29,6 @@ const { lust_border } = require('#/data/ero/orgasm-const');
 const SasamiLifeMarks = require('#/data/event/life-event-marks/life-event-marks-305');
 const recruit_flags = require('#/data/event/recruit-flags');
 const LoveLimitStatus = require('#/data/love-limit-status');
-const { gene_juel_names } = require('#/data/other-const');
 const RaceHistory = require('#/data/race/model/race-history');
 
 const di18n = require('#/i18n/extended-def');
@@ -376,23 +375,25 @@ async function reset_status(
             edu_weeks % 48 === 8 &&
             era.get(`cflag:${cid}:继承方1`) > 0
           ) {
-            const a = era.get(`cflag:${cid}:继承方1`),
-              b = era.get(`cflag:${cid}:继承方2`),
-              juel_list = gene_juel_names.map(
-                (e) => era.get(`juel:${a}:${e}`) + era.get(`juel:${b}:${e}`),
+            const a = era.get(`cflag:${cid}:继承方1`);
+            const b = era.get(`cflag:${cid}:继承方2`);
+            // PARAMNAME:20 - 22 = 粉 - 白
+            const juel_list = new Array(3)
+              .fill(0)
+              .map(
+                (_, i) =>
+                  era.get(`juel:${a}:${20 + i}`) +
+                  era.get(`juel:${b}:${20 + i}`),
               );
             if (edu_weeks > 96) {
-              juel_list.forEach((e, i) =>
-                era.add(
-                  `juel:${cid}:${gene_juel_names[i]}`,
-                  Math.floor(e * 0.4),
-                ),
+              juel_list.forEach((count, i) =>
+                era.add(`juel:${cid}:${20 + i}`, Math.floor(count * 0.4)),
               );
             } else {
-              juel_list.forEach((e, i) =>
+              juel_list.forEach((cout, i) =>
                 era.add(
-                  `juel:${cid}:${gene_juel_names[i]}`,
-                  e - Math.floor(e * 0.3) - Math.floor(e * 0.4),
+                  `juel:${cid}:${20 + i}`,
+                  cout - Math.floor(cout * 0.3) - Math.floor(cout * 0.4),
                 ),
               );
             }

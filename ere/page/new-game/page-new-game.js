@@ -14,7 +14,7 @@ const event_queue = require('#/event/queue');
 const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
 
 const get_display_name = require('#/utils/calc-display-name');
-const { get_random_value } = require('#/utils/value-utils');
+const { get_display_width, get_random_value } = require('#/utils/value-utils');
 
 const CharaAvailableSkills = require('#/data/chara-available-skills');
 const { chara_colors, get_chara_color } = require('#/data/chara-colors');
@@ -102,8 +102,8 @@ module.exports = async (src_chara) => {
       // 未输入姓名
       era.print(i18n().new_game.intro_input_name);
       player_name = (await era.input()).toString();
-      if (player_name.length > 10) {
-        await era.printAndWait(i18n().ui_too_long);
+      if (get_display_width(player_name) > 10) {
+        await era.printAndWait(di18n.get_too_long(10));
         player_name = '';
       }
     } else if (player_gender === 3) {

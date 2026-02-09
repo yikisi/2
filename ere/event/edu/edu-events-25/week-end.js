@@ -418,8 +418,8 @@ module.exports = (handlers, check_tachyon_plan_b) => {
     if ((await era.input()) === 1) {
       era.println();
       for (let i = 0; i < 5; ++i) {
-        await era.delay(1000);
-        era.replaceText(new Array(i + 1).fill('…').join(''));
+        await era.delay(500);
+        era.replaceText('…'.repeat(i + 1));
       }
       await era.printAndWait([
         me.get_colored_name(),
@@ -430,7 +430,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
         Array.isArray(e) ? e[0] : e,
       );
       const buffer = [];
-      buffer.push({ content: '？？？', fontWeight: 'bold' });
+      buffer.push({ content: '？？？', fontWeight: 'bold' }, '「');
       const content = '我讨厌讨厌';
       for (let i = 0; i < content.length; ++i) {
         buffer.push({
@@ -438,7 +438,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
           color: get_random_entry(random_colors),
         });
       }
-      buffer.push('你！');
+      buffer.push('你！」');
       await era.printAndWait(buffer);
       era.println();
       await me.say_and_wait(['啊！']);

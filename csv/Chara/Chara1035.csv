@@ -27,12 +27,12 @@
 角色Flag,腰围,57
 角色Flag,臀围,85
 角色Flag,肤色深度,1
-角色Str,发色,黑
-角色Str,前发,侧分
+角色Str,发色,black
+角色Str,前发,side_part
 角色Str,中发,
-角色Str,后发,外翼式
+角色Str,后发,wing_style
 角色Str,呆毛,
-角色Str,毛色,黑鹿
+角色Str,毛色,kurokage
 角色Str,流星形状,未知
 角色Flag,流星大小,-1
 特性,泌乳,0

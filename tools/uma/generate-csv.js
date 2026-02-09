@@ -4,6 +4,8 @@ const { join } = require('path');
 const named_contestants = require('../../ere/data/race/contestants/named.json');
 const { read_and_write_generated } = require('../libs');
 
+const i18n_feat = new (require('../../ere/i18n/zh-CN/chara/feature'))();
+
 const cup_dict = {
   AA: 5,
 };
@@ -36,9 +38,23 @@ const adapt_start_index = header.findIndex((e) => e === '角色Flag|草地适性
 const title_index = header.findIndex((e) => e === '角色Str|称号');
 const race_index = header.findIndex((e) => e === '角色Flag|种族');
 const id_index = header.findIndex((e) => e === '角色编号');
+const hc_index = header.findIndex((e) => e === '角色Str|发色');
+const bhc_index = header.findIndex((e) => e === '角色Str|毛色');
+const fh_index = header.findIndex((e) => e === '角色Str|前发');
+const mh_index = header.findIndex((e) => e === '角色Str|中发');
+const bh_index = header.findIndex((e) => e === '角色Str|后发');
+const th_index = header.findIndex((e) => e === '角色Str|呆毛');
 
 function random_int(min, max) {
   return min + Math.floor((max + 1 - min) * Math.random());
+}
+
+function find_key_by_value(dict, val) {
+  const pair = Object.entries(dict).find((e) => e[1] === val);
+  if (pair) {
+    return pair[0];
+  }
+  return val;
 }
 
 function random_attr(chara_line) {
@@ -187,6 +203,18 @@ lines
             }
           } else if (i === title_index) {
             col_value = `${file_id}01`;
+          } else if (i === hc_index || i === bhc_index) {
+            col_value = find_key_by_value(i18n_feat, col_value).substring(3);
+          } else if (
+            i === fh_index ||
+            i === mh_index ||
+            i === bh_index ||
+            i === th_index
+          ) {
+            col_value = col_value
+              .split('+')
+              .map((e) => find_key_by_value(i18n_feat, e).substring(3))
+              .join('+');
           }
           buffer += `${header[i].replace('|', ',')},${col_value}\n`;
         }

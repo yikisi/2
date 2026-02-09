@@ -75,18 +75,6 @@ const di18n = {
       _.relation_7,
     ];
   },
-  get n_skin() {
-    const _ = i18n();
-    return [_.skin_0, _.skin_1, _.skin_2, _.skin_3];
-  },
-  get n_penis() {
-    const _ = i18n();
-    return ['', _.penis_1, _.penis_2, _.penis_3, _.penis_4, _.penis_5];
-  },
-  get n_c_penis() {
-    const _ = i18n();
-    return [_.p_color_0, _.p_color_1, _.p_color_2];
-  },
   get_money_content: (money) =>
     i18n().ui_money_template.replace('%MONEY%', money),
   get_date_indicator: (...args) =>
@@ -99,6 +87,10 @@ const di18n = {
       .join(''),
   get_multi_month: (month) =>
     i18n().ui_month_template.replace('%MONTH%', month),
+  get_too_long: (width) =>
+    i18n()
+      .ui_too_long_template.replace('%WIDTH%', width.toString())
+      .replace('%WIDTH*2%', (width * 2).toString()),
   /**
    * @param {boolean} has_back_event
    * @param {boolean} has_event
@@ -145,6 +137,63 @@ const di18n = {
       }
       return name;
     },
+    check_duplicate(name, check) {
+      const _ = i18n().name;
+      if (typeof check === 'string') {
+        return _.duplicate_template
+          .replace('%NAME%', name)
+          .replace('%LAN%', check);
+      }
+      return _.duplicate_template2.replace('%NAME%', name);
+    },
+  },
+  feature: {
+    get types() {
+      const _ = i18n().feature;
+      return [
+        _.n_hair_color,
+        _.n_ahoge_hair,
+        _.n_front_hair,
+        _.n_back_hair,
+        _.n_skin_color,
+        _.n_armpit_hair,
+        _.n_pubic_hair,
+        _.n_sex_organ_color,
+      ];
+    },
+    get n_skin() {
+      const _ = i18n().feature;
+      return [_.skin_0, _.skin_1, _.skin_2, _.skin_3];
+    },
+    get n_body_hair() {
+      const _ = i18n().feature;
+      return [_.body_hair_0, _.body_hair_1, _.body_hair_2];
+    },
+    get n_c_sex_organ() {
+      const _ = i18n().feature;
+      return [_.p_color_0, _.p_color_1, _.p_color_2];
+    },
+    get n_penis() {
+      const _ = i18n().feature;
+      return ['', _.penis_1, _.penis_2, _.penis_3, _.penis_4, _.penis_5];
+    },
+    get_hair_color: (hc) =>
+      i18n().feature.hair_color_template.replace(
+        '%COLOR%',
+        __(`feature.hc_${hc}`),
+      ),
+    get_body_hair_color: (bhc) =>
+      i18n().feature.uma_hair_color_template.replace(
+        '%COLOR%',
+        __(`feature.hc_${bhc}`),
+      ),
+    get_ahoge_hair: (th) =>
+      !th || th === 'none'
+        ? ''
+        : i18n().feature.ahoge_hair_template.replace(
+            '%LONG%',
+            __(`feature.th_${th}`),
+          ),
   },
   kojo: {
     get_titled_content: (ckey, key, ...args) =>
@@ -209,6 +258,28 @@ const di18n = {
         _.ed_saying_09,
         _.ed_saying_10,
         _.ed_saying_13,
+      ];
+    },
+  },
+  new_game: {
+    get taiwu_talents() {
+      const _ = i18n().new_game;
+      return [
+        _.taiwu_talent_speed,
+        _.taiwu_talent_stamina,
+        _.taiwu_talent_power,
+        _.taiwu_talent_guts,
+        _.taiwu_talent_wiz,
+      ];
+    },
+    get taiwu_talent_desc() {
+      const _ = i18n().new_game;
+      return [
+        _.taiwu_talent_speed_desc,
+        _.taiwu_talent_stamina_desc,
+        _.taiwu_talent_power_desc,
+        _.taiwu_talent_guts_desc,
+        _.taiwu_talent_wiz_desc,
       ];
     },
   },
@@ -408,6 +479,7 @@ const di18n = {
     },
     get_titled_slavery() {},
   },
+  tb_param: {},
   tb_stain: {
     get names() {
       const _ = i18n().tb_stain;
@@ -677,6 +749,17 @@ const di18n = {
         _.t_ero,
       ];
     },
+  },
+  inherit_shop: {
+    get_price_info: (jid, cost, all) =>
+      i18n().inherit_shop.get_price_info(__(`tb_param.jewel${jid}`), cost, all),
+    get_price_info_additional: (jid, cost, you_cost, you_all) =>
+      i18n().inherit_shop.get_price_info_additional(
+        __(`tb_param.jewel${jid}`),
+        cost,
+        you_cost,
+        you_all,
+      ),
   },
 };
 

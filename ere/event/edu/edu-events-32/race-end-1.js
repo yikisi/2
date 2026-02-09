@@ -675,7 +675,6 @@ module.exports = (handlers) => {
       );
     } else {
       await print_event_name('火苗点现', tachyon);
-      await print_event_name('火苗点现', tachyon);
       await tachyon.say_and_wait('………');
       era.printButton('「……」', 1);
       await era.input();

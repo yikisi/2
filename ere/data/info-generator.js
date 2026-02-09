@@ -22,9 +22,9 @@ const chara_score = require('#/data/chara-score-table.json');
 const {
   buff_colors,
   el_success_color,
+  get_hair_color,
   skin_colors,
 } = require('#/data/color-const');
-const { hair_colors } = require('#/data/const.json');
 const { get_date } = require('#/data/date-indicator');
 const CharaInmon = require('#/data/ero/chara-inmon');
 const { mark_colors, mark_enum } = require('#/data/ero/mark-const');
@@ -530,13 +530,25 @@ module.exports = {
     });
   },
   get_filtered_talents,
-  /** @param {string} hair_color */
-  get_hair_color(hair_color) {
-    const colors = hair_colors[hair_color];
-    if (!colors) {
-      return undefined;
-    }
-    return colors[3] || `hsl(${colors[0]}deg ${colors[1]}% ${colors[2]}%)`;
+  /**
+   * @param {number} cid
+   * @param {string} hc
+   */
+  get_colored_hair(cid, hc = era.get(`cstr:${cid}:发色`)) {
+    return {
+      color: get_hair_color(hc),
+      content: di18n.feature.get_hair_color(hc),
+    };
+  },
+  /**
+   * @param {number} cid
+   * @param {string} bhc
+   */
+  get_colored_body_hair(cid, bhc = era.get(`cstr:${cid}:毛色`)) {
+    return {
+      color: get_hair_color(bhc),
+      content: di18n.feature.get_body_hair_color(bhc),
+    };
   },
   /** @param {number} cid */
   get_love_border(cid) {
@@ -631,7 +643,7 @@ module.exports = {
   /** @param {number} cid */
   get_skin(cid) {
     // CFLAGNAME:10 = 肤色深度
-    return di18n.n_skin[era.get(`cflag:${cid}:10`) + 1];
+    return di18n.feature.n_skin[era.get(`cflag:${cid}:10`) + 1];
   },
   /** @param {number} cid */
   get_skin_color(cid) {
@@ -805,7 +817,9 @@ module.exports = {
     }
     // TALENTNAME:40 - 42 = 抖S - 喜欢痛苦
     for (let tid = 40; tid <= 42; ++tid) {
-      ret.push(di18n.tb_talent.get_titled_talent(tid));
+      if (era.get(`talent:${cid}:${tid}`) > 0) {
+        ret.push(di18n.tb_talent.get_titled_talent(tid));
+      }
     }
     // TALENTNAME:43 = 工口意愿
     const ero = era.get(`talent:${cid}:43`);

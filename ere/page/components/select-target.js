@@ -24,7 +24,6 @@ const {
 } = require('#/data/color-const');
 const {
   get_growth,
-  human_sex_title,
   pregnant_stage_enum,
   sex_title,
 } = require('#/data/ero/status-const');
@@ -41,7 +40,7 @@ const { get_growth_color } = require('#/data/other-const');
 const RaceHistory = require('#/data/race/model/race-history');
 
 const di18n = require('#/i18n/extended-def');
-const { i18n } = require('#/i18n/selector');
+const { __, i18n } = require('#/i18n/selector');
 
 const arrows = { '-1': '▼', 0: '', 1: '▲' };
 
@@ -136,7 +135,7 @@ function get_suffix(cid, type) {
     ret.push(
       {
         config: { align: 'center', width: 2 },
-        content: race ? sex_title[sex] : human_sex_title[sex],
+        content: race ? sex_title[sex] : __(`feature.h_sex_${sex}`),
         type: 'text',
       },
       {

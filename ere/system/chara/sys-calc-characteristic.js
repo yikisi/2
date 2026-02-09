@@ -2,7 +2,7 @@ const era = require('#/era-electron');
 
 const CharaInmon = require('#/data/ero/chara-inmon');
 const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
-const { chara_desc, chara_full_desc } = require('#/data/ero/status-const');
+const { __, i18n } = require('#/i18n/selector');
 
 /**
  * @param {number} cid
@@ -20,9 +20,12 @@ function get_chara(cid) {
 
 /** @param {number} chara */
 function get_chara_info(chara) {
+  const name = __(`feature.chara_${chara}`);
   return {
-    content: chara_desc[chara + 3],
-    title: `[${chara_desc[chara + 3]}]：${chara_full_desc[chara + 3]}。`,
+    content: name,
+    title: i18n()
+      .feature.chara_template.replace('%NAME%', name)
+      .replace('%DESC%', __(`feature.chara_${chara}_desc`)),
   };
 }
 

@@ -694,7 +694,7 @@ module.exports = class extends EroNormalFucking {
       ]);
       // TALENTNAME:34 = 茎核类型
       await attacker.print_and_wait([
-        di18n.n_c_penis[era.get('talent:0:34')],
+        di18n.feature.n_c_sex_organ[era.get('talent:0:34')],
         '的肉棒，就在这一刻深入了小穴之中——',
       ]);
       if (era.get('talent:100:处女') > vp_status_enum.no) {

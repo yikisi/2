@@ -25,21 +25,19 @@ const { get_date } = require('#/data/date-indicator');
 const { unexpected_pregnant_enum } = require('#/data/ero/status-const');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { get_filtered_talents } = require('#/data/info-generator');
-const { gene_juel_names } = require('#/data/other-const');
 const { gene_type_colors } = require('#/data/race/model/uma-gene');
 
-const duplicate_names = {};
-duplicate_names['骏川缰绳'] = 1;
-duplicate_names['丰收时刻'] = 1;
-duplicate_names['傲视一切'] = 1;
-duplicate_names['秋川弥生'] = 1;
-duplicate_names['北方风味'] = 1;
-duplicate_names['佐岳五月'] = 1;
-duplicate_names['狄杜斯'] = 1;
+const di18n = require('#/i18n/extended-def');
+const { __, i18n, lans } = require('#/i18n/selector');
 
 function check_duplicate(name) {
+  const a = lans().find(
+    (l) => Object.values(i18n(l).name).findIndex((n) => n === name) !== -1,
+  );
+  if (a !== void 0) {
+    return a;
+  }
   return (
-    duplicate_names[name] > 0 ||
     era
       .getAddedCharacters()
       .findIndex((cid) => era.get(`callname:${cid}:-1`) === name) >= 0 ||
@@ -65,7 +63,7 @@ async function rename() {
       era.print('孩子的名字不能超过 8 个字符！');
     }
     if (w_duplicate) {
-      era.print(`已经有名为 ${ret} 的角色！`);
+      era.print(di18n.name.check_duplicate(ret, w_duplicate));
     }
     ret = (await era.input()).toString();
     w_length = ret.length > 8;
@@ -103,8 +101,9 @@ async function name_baby(cid, fid, mid) {
   if (rand_param > 0) {
     ret = get_child_name(rand_param);
   }
-  if (check_duplicate(ret)) {
-    era.print(`已经有名为 ${ret} 的角色！请重新输入：`);
+  const check = check_duplicate(ret);
+  if (check !== false) {
+    era.print(di18n.name.check_duplicate(ret, check));
     ret = await rename();
   } else if (
     (!mid || !fid) &&
@@ -493,7 +492,7 @@ async function sys_have_baby(mid) {
       add_jewel_reward(mid || fid, '顺从', 200);
     }
   }
-  const j_index = get_random_value(0, 2);
+  const jid = get_random_value(20, 22);
   let j_num = 0;
   if (!fid) {
     j_num = get_random_value(25, 75);
@@ -501,13 +500,18 @@ async function sys_have_baby(mid) {
     j_num = get_random_value(75, 125);
   }
   if (j_num > 0) {
-    era.add(`juel:0:${gene_juel_names[j_index]}`, j_num);
+    era.add(`juel:0:${jid}`, j_num);
     era.print([
       get_chara_talk(0).get_colored_name(),
       ' 获得了 ',
       {
-        content: `${gene_juel_names[j_index]}因子 × ${j_num}`,
-        color: gene_type_colors[j_index],
+        content: i18n()
+          .tb_param.jewel_with_count.replace(
+            '%JEWEL%',
+            __(`tb_param.jewel${jid}`),
+          )
+          .replace('%COUNT%', j_num.toString()),
+        color: gene_type_colors[jid],
       },
     ]);
   }

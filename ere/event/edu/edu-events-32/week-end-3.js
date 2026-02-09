@@ -559,6 +559,7 @@ module.exports = (handlers) => {
       disabled: era.get('cflag:25:招募状态') !== recruit_flags.yes,
     });
     const ret = await era.input();
+    era.println();
     if (ret === 1) {
       await tachyon.print_and_wait('话到了嘴边，开不了口');
       await tachyon.print_and_wait([
@@ -654,7 +655,6 @@ module.exports = (handlers) => {
         '！',
       ]);
     } else {
-      era.println();
       await tachyon.say_and_wait('————是我，输了');
       era.println();
       await tachyon.print_and_wait('但是，不是永远');
@@ -708,7 +708,10 @@ module.exports = (handlers) => {
         coffee.get_colored_name(),
         ' 的瞪视下忽然噤了声，仿佛被无形的手捂住了口鼻一般',
       ]);
-      if (era.get('cflag:25:招募状态') === recruit_flags.yes) {
+      if (
+        era.get('cflag:25:招募状态') === recruit_flags.yes &&
+        era.get('love:25') >= 75
+      ) {
         await coffee.say_and_wait([
           c_call_m,
           '……等到……有马的时候，要是可以为我加油的话，我会很开心的',
@@ -911,14 +914,25 @@ module.exports = (handlers) => {
       await era.printAndWait('哪怕是以前输过的比赛，都没有感受过如此的压迫感');
     }
     era.println();
-    await tachyon.say_and_wait([
-      '要是……要是刚才，我真的输给了 ',
-      t_call_c,
-      ' 的话',
-    ]);
-    await tachyon.say_and_wait(
-      '一想到那种可能性，就感到全身颤抖……我在抗拒，抗拒那样的可能性',
-    );
+    if (ret === 1) {
+      await tachyon.say_and_wait([
+        '要是……要是刚才，我真的输给了 ',
+        t_call_c,
+        ' 的话',
+      ]);
+      await tachyon.say_and_wait(
+        '一想到那种可能性，就感到全身颤抖……我在抗拒，抗拒那样的可能性',
+      );
+    } else {
+      await tachyon.say_and_wait([
+        '要是……要是刚才，我要是赢过 ',
+        t_call_c,
+        ' 的话',
+      ]);
+      await tachyon.say_and_wait(
+        '一想到那种可能性，就感到全身颤抖……我在渴望，渴望那样的可能性',
+      );
+    }
     await tachyon.say_and_wait([
       '不想输给 ',
       t_call_c,

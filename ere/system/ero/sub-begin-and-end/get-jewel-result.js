@@ -5,7 +5,8 @@ const { get_abbr_number } = require('#/utils/value-utils');
 
 const { palam_colors } = require('#/data/color-const');
 const { mark_colors, mark_enum } = require('#/data/ero/mark-const');
-const { gene_juel_names } = require('#/data/other-const');
+
+const { __, i18n } = require('#/i18n/selector');
 
 /**
  * @param {number} cid
@@ -143,12 +144,14 @@ function get_jewel_result(cid, j_names, j_info, a_info) {
     for (let jid = 20; jid <= 22; ++jid) {
       const final = era.get(`jewel:${cid}:${jid}`);
       const got = j_info[jid];
-      const g_name = gene_juel_names[jid - 20];
       if (got > 0) {
         buffer.push(
           {
             config: { width: 4 },
-            content: `${g_name}因子：`,
+            content: i18n().tb_param.get_jewel_count(
+              __(`tb_param.jewel${jid}`),
+              '',
+            ),
             type: 'text',
           },
           {

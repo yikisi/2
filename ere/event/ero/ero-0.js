@@ -56,7 +56,7 @@ module.exports = class extends CustomizedEro {
           get_chara_talk(era.get('tflag:前回助手')).get_colored_name(),
           ' 的侍奉下，',
           me.get_colored_name(),
-          ` ${di18n.n_penis[get_penis_size(0)]} 的肉棒很快就一柱擎天了。`,
+          ` ${di18n.feature.n_penis[get_penis_size(0)]} 的肉棒很快就一柱擎天了。`,
         ]);
         return;
       }

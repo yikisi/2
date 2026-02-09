@@ -1,15 +1,17 @@
 const era = require('#/era-electron');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { get_abbr_number } = require('#/utils/value-utils');
 
 const CharaAvailableGenes = require('#/data/chara-available-genes');
 const CharaAvailableSkills = require('#/data/chara-available-skills');
 const CharaGenes = require('#/data/chara-genes');
 const CharaSkills = require('#/data/chara-skills');
-const { gene_juel_names } = require('#/data/other-const');
 const { gene_dict } = require('#/data/race/gene/gene-const');
 const { gene_type_colors } = require('#/data/race/model/uma-gene');
 const { skills_dict } = require('#/data/race/skill/skill-const');
+
+const { __, i18n } = require('#/i18n/selector');
 
 module.exports = {
   /**
@@ -73,9 +75,13 @@ module.exports = {
                   },
                 ]
               : []),
-            ...gene_juel_names.map((e, i) => ({
+            // PARAMNAME:20 - 22 = 粉 - 白
+            ...new Array(3).fill(0).map((_, i) => ({
               config: { color: gene_type_colors[i], width: 8 },
-              content: `${e}因子：${era.get(`juel:${chara.id}:${e}`)}`,
+              content: i18n().tb_param.get_jewel_count(
+                __(`tb_param.jewel${20 + i}`),
+                get_abbr_number(era.get(`juel:${chara.id}:${20 + i}`)),
+              ),
               type: 'text',
             })),
             { content: [], type: 'text' },
@@ -92,9 +98,13 @@ module.exports = {
               config: { content: '可继承因子', position: 'left' },
               type: 'divider',
             },
-            ...gene_juel_names.map((e, i) => ({
+            // PARAMNAME:20 - 22 = 粉 - 白
+            ...new Array(3).fill(0).map((_, i) => ({
               config: { color: gene_type_colors[i], width: 6 },
-              content: `${e}因子：${era.get(`juel:${chara.id}:${e}`)}`,
+              content: i18n().tb_param.get_jewel_count(
+                __(`tb_param.jewel${20 + i}`),
+                get_abbr_number(era.get(`juel:${chara.id}:${20 + i}`)),
+              ),
               type: 'text',
             })),
             ...(era.get(`cflag:${chara.id}:被继承`)

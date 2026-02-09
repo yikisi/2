@@ -50,10 +50,10 @@ module.exports = {
           penis_exp_list.push([
             '下方是',
             !chara.sex_code ? '借助药物获得的 ' : ' ',
-            di18n.n_penis[penis_size],
+            di18n.feature.n_penis[penis_size],
             ' 而 ',
             {
-              content: di18n.n_c_penis[p_type_code],
+              content: di18n.feature.n_c_sex_organ[p_type_code],
               color: sex_colors[p_type_code],
             },
             ' 的肉棒',

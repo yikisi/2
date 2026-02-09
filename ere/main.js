@@ -126,7 +126,6 @@ module.exports = async () => {
     return ret;
   }
 
-  const copyrights = generate_copyrights();
   const buttons = [
     {
       c: () => i18n().tt_new_game,
@@ -308,6 +307,7 @@ module.exports = async () => {
     {
       c: () => i18n().tt_copyrights,
       async h() {
+        const copyrights = generate_copyrights();
         era.drawLine();
         let c_flag = true;
         era.setAlign('center');
@@ -361,6 +361,7 @@ module.exports = async () => {
           era.printButton(i18n(lan_list[i]).language, i + 1);
         }
         set_lan(era.set('global:3', lan_list[(await era.input()) - 1]));
+        await era.saveGlobal();
         set_lan_for_value(lan());
       },
     });

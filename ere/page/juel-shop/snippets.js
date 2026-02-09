@@ -50,10 +50,10 @@ module.exports = {
         mid,
         level,
         {
-          content: new Array(level).fill('★').join(''),
+          content: '★'.repeat(level),
           color: get_color(void 0, mark_colors[mid], level / 3),
         },
-        { content: new Array(3 - level).fill('☆').join('') },
+        { content: '☆'.repeat(3 - level) },
       ),
       type: 'text',
     };
@@ -297,7 +297,7 @@ module.exports = {
               color: buff_colors[2],
             },
             {
-              content: era.get(`juel:0:${jid}`).toLocaleString(),
+              content: era.get(`jewel:0:${jid}`).toLocaleString(),
               color: buff_colors[2],
             },
             me.get_colored_name(),

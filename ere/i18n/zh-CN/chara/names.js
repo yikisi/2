@@ -3,6 +3,8 @@ class I18nNames {
   madam_template = '%NAME%小姐';
   chan_template = '小%NAME%';
   kun_template = '%NAME%君';
+  duplicate_template = '%NAME% 已在 %LAN% 语言库中被使用！请重新输入：';
+  duplicate_template2 = '已有名为 %NAME% 的角色！请重新输入：';
 
   // Callname
   leading_role = '主人公';

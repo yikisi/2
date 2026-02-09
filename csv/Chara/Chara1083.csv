@@ -27,12 +27,12 @@
 角色Flag,腰围,58
 角色Flag,臀围,88
 角色Flag,肤色深度,2
-角色Str,发色,黑
-角色Str,前发,厚刘海
+角色Str,发色,black
+角色Str,前发,thic_bangs
 角色Str,中发,
-角色Str,后发,高马尾
+角色Str,后发,high_ponytail
 角色Str,呆毛,
-角色Str,毛色,黑鹿
+角色Str,毛色,kurokage
 角色Str,流星形状,未知
 角色Flag,流星大小,-2
 特性,泌乳,0

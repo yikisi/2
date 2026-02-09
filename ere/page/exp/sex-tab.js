@@ -45,12 +45,10 @@ function get_mark_info(cid, mid, level = era.get(`mark:${cid}:${mid}`)) {
       },
       { isBr: true },
       {
-        content: new Array(level).fill('★').join(''),
+        content: '★'.repeat(level),
         color: get_gradient_color(undefined, mark_colors[mid], level / 3),
       },
-      {
-        content: new Array(3 - level).fill('☆').join(''),
-      },
+      { content: '☆'.repeat(level) },
     ],
     type: 'text',
   };

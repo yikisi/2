@@ -225,6 +225,131 @@ class I18nNewGame {
 
   set_gd_0 = '我已完全掌握！';
   set_gd_1 = '第一次的时候显示一下吧';
+
+  cus_intro_header = '捏人时间！要随机生成角色吗？';
+  bt_cus_random = '随机生成';
+  bt_cus_default = '默认就好';
+  bt_cus_set = '自己设置';
+
+  cus_body_header = '首先来决定身体细节！';
+  bt_cus_confirm = '就这样！';
+
+  cus_birthday_header =
+    '然后是身高和生日！\nPS：开发者就假定您并非出生于2月29日啦';
+  cus_birthday_month = '出生月份';
+  cus_bm_prev = '前一月';
+  cus_bm_next = '后一月';
+  cus_birthday_date = '出生日期';
+  cus_bd_prev_5 = '前五天';
+  cus_bd_prev = '前一天';
+  cus_bd_next = '后一天';
+  cus_bd_next_5 = '后五天';
+
+  cus_breast_header = '您希望您的女性象征有何种规模？\nPS：不是越大越好！';
+  cus_breast_1 = '……我是砧板';
+  cus_breast_2 = '当然是稀有价值啦';
+  cus_breast_3 = '普通的就好';
+  cus_breast_4 = '希望能大一点！';
+  cus_breast_5 = '我要傲视一切（不是）';
+
+  cus_penis_header = '您希望您的「作案工具」有何种规模？\nPS：不是越大越好！';
+  cus_penis_1 = '所有人都能容纳的那种！';
+  cus_penis_2 = '比上面那个偏大一点就好';
+  cus_penis_3 = '普通的就好';
+  cus_penis_4 = '当然要雄伟的！';
+  cus_penis_5 = '我要让所有人都痛并快乐着！';
+
+  cus_uma_header = '现在是幻想时间！如果您变成了马娘，您认为您是什么气性？';
+
+  cus_uma_color_header_template =
+    '嗯嗯，您认为您将会是 %CHARA% 气性啊……那么您会是什么毛色的马娘呢？';
+
+  cus_call_header = '那么就到称呼环节啦！';
+  cus_call_3 = '哦哦，您取了一个很喜欢马蹄的名字呢！';
+  cus_call_179 = '哦哦，您取了一个很萝莉控的名字呢！';
+  cus_call_621 = '哦哦，您取了一个很想被欺负的名字呢！';
+
+  cus_set_callname = '希望旁白君如何称呼您呢？';
+  cus_set_by_self = '自己决定！';
+
+  get_cus_callname_confirm = (actual, call) => [
+    actual,
+    ' 训练员，旁白君从此就称您为 ',
+    call,
+    ' 了！',
+  ];
+
+  cus_taiwu_header = '最后是来自开发者的馈赠！';
+
+  taiwu_talent_speed = '迅由危亡';
+  taiwu_talent_stamina = '纯凭自然';
+  taiwu_talent_power = '锋从磨砺';
+  taiwu_talent_guts = '香自苦寒';
+  taiwu_talent_wiz = '意随心寂';
+
+  taiwu_talent_speed_desc = '迅由危亡，千钧一发，您的速度远胜常人。';
+  taiwu_talent_stamina_desc = '纯凭自然，浑然天成，您的耐力远胜常人。';
+  taiwu_talent_power_desc = '锋从磨砺，伏虎降龙，您的力量远胜常人。';
+  taiwu_talent_guts_desc = '香自苦寒，动心忍性，您的根性远胜常人。';
+  taiwu_talent_wiz_desc = '意随心寂，感悟自生，您的智力远胜常人。';
+
+  cus_final_header = '再来检查一下吧！';
+  get_cus_f_name = (name) => [name, ' 训练员'];
+  get_cus_f_male = (callname, sex, height) => [
+    '旁白君称为：',
+    callname,
+    ' | 性别：',
+    sex,
+    ' | 身高：',
+    height,
+    'cm',
+  ];
+  get_cus_f_female = (callname, sex, height, bust, cup, waist, hip) => [
+    ...this.get_cus_f_male(callname, sex, height),
+    ' ｜ 三围：B',
+    bust,
+    ' (',
+    cup,
+    ' Cup) · W',
+    waist,
+    ' · H',
+    hip,
+  ];
+  get_cus_f_hair = (hair, hair_color) => [
+    '发型：',
+    hair,
+    ' | 发色：',
+    hair_color,
+  ];
+  get_cus_f_uma = (body_hair, chara) => [
+    '如果马娘化，认为自己将是 ',
+    body_hair,
+    ' ',
+    chara,
+    ' 马娘',
+  ];
+  get_cus_f_skin_male = (skin, armpit, pubic, pv_color, penis) => [
+    ...this.get_cus_f_skin_female(skin, armpit, pubic, pv_color),
+    ' | 阴茎长度：',
+    penis,
+  ];
+  get_cus_f_skin_female = (skin, armpit, pubic, pv_color) => [
+    '肤色：',
+    skin,
+    ' | 腋毛：',
+    armpit,
+    ' | 阴毛：',
+    pubic,
+    ' | 性器颜色：',
+    pv_color,
+  ];
+  cus_f_talent = '性格特征：';
+  cus_f_xp = '其他特征：';
+  cus_f_gift = '开发者的馈赠：';
+  bt_random_talents = '随机一下特征';
+  bt_random_all = '全部随机！';
+  bt_re_make = '我要重选！';
+  bt_exit = '我不玩了……';
 }
 
 module.exports = I18nNewGame;

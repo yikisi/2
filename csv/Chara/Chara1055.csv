@@ -27,12 +27,12 @@
 角色Flag,腰围,52
 角色Flag,臀围,77
 角色Flag,肤色深度,0
-角色Str,发色,深棕
-角色Str,前发,中分
+角色Str,发色,dark_brown
+角色Str,前发,midd_part
 角色Str,中发,
-角色Str,后发,蓬松双马尾
+角色Str,后发,puf_twintails
 角色Str,呆毛,
-角色Str,毛色,枥栗
+角色Str,毛色,
 角色Str,流星形状,未知
 角色Flag,流星大小,-1
 特性,泌乳,0

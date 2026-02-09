@@ -357,7 +357,7 @@ module.exports = (handlers) => {
             '哼哼，感觉现在特别冷吧，这就是在下水前给你喝的药的效果，可以提高知觉的药物，没错，就是对O忍里面会出现的那种药物！',
           );
           era.println();
-          await era.printAndWait('不要说O魔忍啊！？');
+          await era.printAndWait('不要说〇魔忍啊！？');
           await era.printAndWait(
             '但奇怪的是，除了现在的体感温度仿佛像在冬天泡冰块浴一般，就没有什么其他特别的感受了，如果是对魔O的话这时候应该是……',
           );

@@ -250,7 +250,7 @@ class CustomizedEro extends CustomizedEvent {
       era.print([
         chara.get_colored_name(),
         ' ',
-        di18n.n_penis[get_penis_size(this.id)],
+        di18n.feature.n_penis[get_penis_size(this.id)],
         ' 的肉棒勃起了！',
       ]);
     } else if (extra_flag.part === part_enum.breast) {

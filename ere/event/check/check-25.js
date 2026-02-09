@@ -179,6 +179,10 @@ module.exports = class extends CustomizedCheck {
     }
   }
 
+  get_aim_races() {
+    return aim_races;
+  }
+
   get_edu_aims() {
     const buffer = [];
     const races = RaceHistory.get(this.id).get();

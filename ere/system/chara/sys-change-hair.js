@@ -1,26 +1,25 @@
 const era = require('#/era-electron');
 
-/** @param {number} chara_id */
-function sys_change_hair(chara_id) {
-  switch (era.get(`cstr:${chara_id}:后发`)) {
+/** @param {number} cid */
+function sys_change_hair(cid) {
+  switch (era.get(`cstr:${cid}:后发`)) {
     default:
-    case '短发':
-      era.set(`cflag:${chara_id}:头发长度`, 0);
+    case 'shor_hair':
+      era.set(`cflag:${cid}:头发长度`, 0);
       break;
-    case '双马尾':
-    case '发髻':
-    case '侧马尾':
-    case '蓬松双马尾':
-    case '外翼式':
-    case '双重丸子头':
-      era.set(`cflag:${chara_id}:头发长度`, 1);
+    case 'twin_tails':
+    case 'hair_bun':
+    case 'side_ponytail':
+    case 'puf_twintails':
+    case 'wing_style':
+    case 'doub_odango':
+      era.set(`cflag:${cid}:头发长度`, 1);
       break;
-    case '长直发':
-    case '高马尾':
-    case '单辫':
-    case '双辫':
-    case '高马尾+长直发':
-      era.set(`cflag:${chara_id}:头发长度`, 2);
+    case 'long_straight':
+    case 'high_ponytail':
+    case 'single_braid':
+    case 'twin_braids':
+      era.set(`cflag:${cid}:头发长度`, 2);
   }
 }
 

@@ -263,7 +263,7 @@ module.exports = async (tachyon, me, callname) => {
   ]);
   era.println();
   await tachyon.say_and_wait([
-    new Array(5).fill(callname.substring(0, 1)).join(''),
+    callname.substring(0, 1).repeat(5),
     callname,
     '！？你在说什么！？',
   ]);

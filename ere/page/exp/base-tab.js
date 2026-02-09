@@ -16,11 +16,12 @@ const { join_to_string } = require('#/utils/list-utils');
 
 const CharaTitles = require('#/data/chara-titles');
 const race_clothes = require('#/data/clothe-const.json');
-const { human_sex_title, sex_title } = require('#/data/ero/status-const');
+const { sex_title } = require('#/data/ero/status-const');
 const { growth_info } = require('#/data/exp-const');
 const {
   get_breast_cup,
-  get_hair_color,
+  get_colored_body_hair,
+  get_colored_hair,
   get_skin,
   get_skin_color,
   get_talent,
@@ -28,6 +29,7 @@ const {
 } = require('#/data/info-generator');
 const { back_hairs, front_hairs, top_hairs } = require('#/data/other-const');
 
+const di18n = require('#/i18n/extended-def');
 const { __, i18n } = require('#/i18n/selector');
 
 const page_name = '个人情报';
@@ -52,46 +54,40 @@ module.exports = {
    */
   generate(chara, flags) {
     const right_intro_list = [];
-    const body_hair_color = era.get(`cstr:${chara.id}:毛色`);
-    const hair_color = era.get(`cstr:${chara.id}:发色`);
     const growth = era.get(`cflag:${chara.id}:成长阶段`);
     const race = era.get(`cflag:${chara.id}:种族`);
     let hair = era.get(`cstr:${chara.id}:呆毛`);
     hair = join_to_string(
       [
-        hair ? `${hair}呆毛` : '',
-        era.get(`cstr:${chara.id}:前发`),
-        era.get(`cstr:${chara.id}:中发`),
-        era.get(`cstr:${chara.id}:后发`),
+        di18n.feature.get_ahoge_hair(hair),
+        __(`feature.fh_${era.get(`cstr:${chara.id}:前发`)}`),
+        __(`feature.bh_${era.get(`cstr:${chara.id}:中发`)}`, ''),
+        era
+          .get(`cstr:${chara.id}:后发`)
+          .split('+')
+          .map((h) => __(`feature.bh_${h}`, ''))
+          .filter((h) => h)
+          .join(i18n().feature.hair_splitter),
       ],
-      '+',
+      i18n().feature.hair_splitter,
     );
-
     right_intro_list.push(
       { content: '个人情报', isDivider: true },
       '肤色',
       { color: get_skin_color(chara.id), content: get_skin(chara.id) },
       ' 的 ',
-      {
-        color: get_hair_color(hair_color),
-        content: `${hair_color}发`,
-      },
-      race
-        ? {
-            color: get_hair_color(body_hair_color),
-            content: `${body_hair_color}毛`,
-          }
-        : '',
+      get_colored_hair(chara.id),
+      ...(race > 0 ? [' ', get_colored_body_hair(chara.id)] : []),
       ' ',
     );
-    if (race) {
+    if (race > 0) {
       right_intro_list.push(
         !growth ? '幼年' : sys_get_full_chara(chara.id),
         ' ',
         sex_title[chara.sex_code],
       );
     } else {
-      right_intro_list.push(human_sex_title[chara.sex_code]);
+      right_intro_list.push(__(`feature.h_sex_${chara.sex_code}`));
     }
     if (hair) {
       right_intro_list.push({ isBr: true }, '发型：', hair);
@@ -280,7 +276,11 @@ module.exports = {
                   content: ['请选择 ', chara.get_colored_name(), ' 的新发型'],
                   type: 'text',
                 },
-                { config: { width: 2 }, content: '呆毛：', type: 'text' },
+                {
+                  config: { width: 2 },
+                  content: i18n().feature.n_ahoge_hair,
+                  type: 'text',
+                },
                 {
                   accelerator: 10,
                   config: { width: 3 },
@@ -289,7 +289,7 @@ module.exports = {
                 },
                 {
                   config: { width: 3 },
-                  content: top_hairs[hair_indexes.top],
+                  content: __(`feature.th_${top_hairs[hair_indexes.top]}`),
                   type: 'text',
                 },
                 {
@@ -300,7 +300,11 @@ module.exports = {
                 },
               ],
               [
-                { config: { width: 2 }, content: '前发：', type: 'text' },
+                {
+                  config: { width: 2 },
+                  content: i18n().feature.n_front_hair,
+                  type: 'text',
+                },
                 {
                   accelerator: 20,
                   config: { width: 3 },
@@ -309,7 +313,7 @@ module.exports = {
                 },
                 {
                   config: { width: 3 },
-                  content: front_hairs[hair_indexes.front],
+                  content: __(`feature.fh_${front_hairs[hair_indexes.front]}`),
                   type: 'text',
                 },
                 {
@@ -320,7 +324,11 @@ module.exports = {
                 },
               ],
               [
-                { config: { width: 2 }, content: '后发：', type: 'text' },
+                {
+                  config: { width: 2 },
+                  content: i18n().feature.n_back_hair,
+                  type: 'text',
+                },
                 {
                   accelerator: 30,
                   config: { width: 3 },
@@ -329,7 +337,7 @@ module.exports = {
                 },
                 {
                   config: { width: 3 },
-                  content: back_hairs[hair_indexes.back],
+                  content: __(`feature.bh_${back_hairs[hair_indexes.back]}`),
                   type: 'text',
                 },
                 {

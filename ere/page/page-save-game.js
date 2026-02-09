@@ -3,9 +3,11 @@
 const print_page_header = require('#/page/components/page-header');
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
+const { get_display_width } = require('#/utils/value-utils');
+
 const { get_save_name } = require('#/data/info-generator');
 
-const { i18n } = require('#/i18n/selector');
+const di18n = require('#/i18n/extended-def');
 
 module.exports = async () => {
   let flag_save_game = true;
@@ -72,14 +74,14 @@ module.exports = async () => {
 
     switch (ret) {
       case 97:
-        era.print('请输入存档命名：（最长不超过20个字符）');
+        era.print('请输入存档命名：');
         ret = '';
         do {
           if (ret) {
-            era.print(i18n().ui_too_long);
+            era.print(di18n.get_too_long(20));
           }
           ret = await era.input();
-        } while (ret && ret.length > 50);
+        } while (ret && get_display_width(ret) > 20);
         if (
           await select_yes_or_no(
             `要将这个故事${era.get('flag:存档名') ? '改名' : '取名'}为 [${ret}] 吗？`,
@@ -126,13 +128,13 @@ module.exports = async () => {
           }
         } else {
           let name;
-          era.print('请输入新的存档命名：（最长不超过50个字符）');
+          era.print('请输入新的存档命名：');
           do {
             if (name) {
-              era.print(i18n().ui_too_long);
+              era.print(di18n.get_too_long(40));
             }
             name = await era.input();
-          } while (name && name.length > 50);
+          } while (name && get_display_width(name) > 40);
           if (
             await select_yes_or_no(
               `要将 ${ret - 100} 号栏位的存档改名为 [${name}] 吗？`,

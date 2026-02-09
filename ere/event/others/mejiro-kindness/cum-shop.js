@@ -9,7 +9,12 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
-const { buff_colors } = require('#/data/color-const');
+const {
+  bhc_names,
+  buff_colors,
+  get_hair_color,
+  hc_names,
+} = require('#/data/color-const');
 const CharaInmon = require('#/data/ero/chara-inmon');
 const { mark_colors, slavery_enum } = require('#/data/ero/mark-const');
 const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
@@ -19,24 +24,10 @@ const {
 } = require('#/data/ero/status-const');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const extra_base = require('#/data/extra-base');
-const { get_breast_cup, get_hair_color } = require('#/data/info-generator');
+const { get_breast_cup } = require('#/data/info-generator');
 
 const di18n = require('#/i18n/extended-def');
-
-const hair_color_names = [
-  '白',
-  '橙',
-  '粉',
-  '黑',
-  '红棕',
-  '金',
-  '蓝',
-  '绿',
-  '浅棕',
-  '深棕',
-  '紫',
-];
-const body_color_names = ['枥栗', '栗', '芦', '青', '鹿', '黑鹿', '青鹿'];
+const { __ } = require('#/i18n/selector');
 
 /**
  * @this {CallOfMejiro}
@@ -226,7 +217,7 @@ async function cum_shop(chara, me) {
             ) {
               // CFLAGNAME:4 = 阴茎尺寸
               const penis_size = era.get(`cflag:${target.id}:4`);
-              const cur_desc = di18n.n_penis[get_penis_size(target.id)];
+              const cur_desc = di18n.feature.n_penis[get_penis_size(target.id)];
               buttons.push(
                 {
                   c: `${target.sex_code === 0 ? 'FUTA 化（15' : '增大阴茎（10'}「恩宠」，目前是 ${cur_desc || '女性'}）`,
@@ -347,7 +338,7 @@ async function cum_shop(chara, me) {
               const skin_status = era.get(`cflag:${target.id}:10`);
               buttons.push(
                 {
-                  c: `美白（5「恩宠」，现在是 ${di18n.n_skin[skin_status + 1]}）`,
+                  c: `美白（5「恩宠」，现在是 ${di18n.feature.n_skin[skin_status + 1]}）`,
                   ...(skin_status === -1
                     ? {
                         d: true,
@@ -360,7 +351,7 @@ async function cum_shop(chara, me) {
                   },
                 },
                 {
-                  c: `美黑（5「恩宠」，现在是 ${di18n.n_skin[skin_status + 1]}）`,
+                  c: `美黑（5「恩宠」，现在是 ${di18n.feature.n_skin[skin_status + 1]}）`,
                   ...(skin_status === 2
                     ? {
                         d: true,
@@ -378,23 +369,22 @@ async function cum_shop(chara, me) {
                     const curr_color = era.get(`cstr:${target.id}:发色`);
                     say_by_waiter('要染成什么颜色？');
                     era.printMultiColumns(
-                      hair_color_names.map((e, i) => ({
+                      hc_names.map((hc, i) => ({
                         accelerator: i + 1,
-                        config: { color: get_hair_color(e), width: 6 },
-                        content: e + (curr_color === e ? '（现发色）' : ''),
+                        config: { color: get_hair_color(hc), width: 6 },
+                        content:
+                          __(`feature.hc_${hc}`) +
+                          (curr_color === hc ? '（现发色）' : ''),
                         type: 'button',
                       })),
                     );
                     const ret = await era.input();
-                    era.set(
-                      `cstr:${target.id}:发色`,
-                      hair_color_names[ret - 1],
-                    );
+                    era.set(`cstr:${target.id}:发色`, hc_names[ret - 1]);
                   },
                 },
               );
             }
-            buttons.push(undefined);
+            buttons.push(void 0);
             if (era.get(`cflag:${target.id}:种族`) === 0) {
               buttons.push({
                 c:
@@ -407,7 +397,7 @@ async function cum_shop(chara, me) {
                   era.set(
                     `cstr:${target.id}:毛色`,
                     era.get(`cstr:${target.id}:毛色`) ||
-                      get_random_entry(body_color_names),
+                      get_random_entry(bhc_names),
                   );
                   era.set(`cflag:${target.id}:可再次育成`, 1);
                   if (easter_egg === 179 || easter_egg === 621) {
@@ -422,17 +412,19 @@ async function cum_shop(chara, me) {
                   const curr_color = era.get(`cstr:${target.id}:毛色`);
                   say_by_waiter('要染成什么颜色？');
                   era.printMultiColumns(
-                    body_color_names.map((e, i) => ({
+                    bhc_names.map((bhc, i) => ({
                       accelerator: i + 1,
-                      config: { color: get_hair_color(e), width: 6 },
-                      content: e + (curr_color === e ? '（现毛色）' : ''),
+                      config: { color: get_hair_color(bhc), width: 6 },
+                      content:
+                        __(`feature.hc_${bhc}`) +
+                        (curr_color === bhc ? '（现毛色）' : ''),
                       type: 'button',
                     })),
                   );
                   const ret = await era.input();
                   if (
                     curr_color !==
-                    era.set(`cstr:${target.id}:毛色`, body_color_names[ret - 1])
+                    era.set(`cstr:${target.id}:毛色`, bhc_names[ret - 1])
                   ) {
                     money = era.add('item:「恩宠」', -1);
                   }

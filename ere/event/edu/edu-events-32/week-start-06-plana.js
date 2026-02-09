@@ -361,7 +361,7 @@ module.exports = async (tachyon, me, callname, relation, love) => {
       );
       await era.printAndWait('难得的新年，还是好好享受一下这份平静吧');
       era.println();
-      await tachyon.say_and_wait(['速子笑了，然后轻轻咬了口年糕']);
+      await era.printAndWait('速子笑了，然后轻轻咬了口年糕');
       await era.printAndWait([
         '最近不知道为什么，只要提到「明天」、「以后」，',
         tachyon.get_colored_name(),

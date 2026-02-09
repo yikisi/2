@@ -111,13 +111,10 @@ module.exports = async (cid = era.get('flag:当前互动角色')) => {
       }
       buffer.push({
         config: { align: 'left', width: 3 },
-        content: i18n().tb_param.get_jewel_list_in_shop(
-          __(`tb_param.abbr${jid}`),
-          {
-            ...get_abbr_number(j_count),
-            color: j_count > 0 ? palam_colors.notifications[1] : void 0,
-          },
-        ),
+        content: i18n().tb_param.get_jewel_count(__(`tb_param.abbr${jid}`), {
+          ...get_abbr_number(j_count),
+          color: j_count > 0 ? palam_colors.notifications[1] : void 0,
+        }),
         type: 'text',
       });
     }
@@ -130,13 +127,10 @@ module.exports = async (cid = era.get('flag:当前互动角色')) => {
             era.get(`jewel:${cid}:${jid}`));
         buffer.push({
           config: { align: 'left', width: 3 },
-          content: i18n().tb_param.get_jewel_list_in_shop(
-            __(`tb_param.abbr${jid}`),
-            {
-              ...get_abbr_number(j_count),
-              color: j_count > 0 ? palam_colors.notifications[1] : void 0,
-            },
-          ),
+          content: i18n().tb_param.get_jewel_count(__(`tb_param.abbr${jid}`), {
+            ...get_abbr_number(j_count),
+            color: j_count > 0 ? palam_colors.notifications[1] : void 0,
+          }),
           type: 'text',
         });
       }
@@ -148,7 +142,7 @@ module.exports = async (cid = era.get('flag:当前互动角色')) => {
           era.get(`jewel:${cid}:10`));
       buffer.push({
         config: { align: 'left', width: 3 },
-        content: i18n().tb_param.get_jewel_list_in_shop(__(`tb_param.abbr10`), {
+        content: i18n().tb_param.get_jewel_count(__(`tb_param.abbr10`), {
           ...get_abbr_number(j_count),
           color: j_count > 0 ? palam_colors.notifications[1] : void 0,
         }),

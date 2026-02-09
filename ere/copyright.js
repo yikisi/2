@@ -6,12 +6,16 @@ const item_title_color =
   require('#/data/color-const').adaptability_colors.at(-1);
 const { get_chara_color } = require('#/data/chara-colors');
 
+const { i18n } = require('#/i18n/selector');
+
 /**
  * @param {number} cid
  * @param {string} [_suffix]
  */
 function get_copyright_entry(cid, _suffix) {
-  const suffix = _suffix ? `（${_suffix}）` : '';
+  const suffix = _suffix
+    ? i18n().cr_kojo_suffix_template.replace('%SUFFIX%', _suffix)
+    : '';
   return {
     color: get_chara_color(cid),
     content: `${get_display_name(era.get(`static:${cid}:name`))}${suffix}`,
@@ -22,7 +26,7 @@ function get_copyright_entry(cid, _suffix) {
 
 function generate_copyrights() {
   const line_copyrights = [
-    [[get_copyright_entry(1, '招募')], 'wwm'],
+    [[get_copyright_entry(1, i18n().cr_kojo_suffix_recruit)], 'wwm'],
     [[get_copyright_entry(2)], '牛蛙煲'],
     [[get_copyright_entry(3)], '天马闪光蹄'],
     [
@@ -55,17 +59,20 @@ function generate_copyrights() {
       '梦露',
     ],
     [[get_copyright_entry(32)], '幽白書'],
-    [[get_copyright_entry(35, '部分地下室')], '幽白書'],
-    [[get_copyright_entry(36, '招募')], '幽白書'],
+    [[get_copyright_entry(35, i18n().cr_kojo_suffix_part)], '幽白書'],
+    [[get_copyright_entry(36, i18n().cr_kojo_suffix_recruit)], '幽白書'],
     [[get_copyright_entry(37)], '爱放箭的袁本初'],
-    [[get_copyright_entry(47, '招募')], '某不思议的大嘴鸥'],
-    [[get_copyright_entry(50, '招募')], '卡特曼'],
+    [
+      [get_copyright_entry(47, i18n().cr_kojo_suffix_recruit)],
+      '某不思议的大嘴鸥',
+    ],
+    [[get_copyright_entry(50, i18n().cr_kojo_suffix_recruit)], '卡特曼'],
     [[get_copyright_entry(52)], '99'],
     [[get_copyright_entry(56)], 'ALEX'],
     [[get_copyright_entry(60)], '红红火火恍惚'],
     [[get_copyright_entry(64)], ['KUN', { isDivider: true }, 'Bottle']],
     [
-      [get_copyright_entry(67, '临时')],
+      [get_copyright_entry(67, i18n().cr_kojo_suffix_temporary)],
       [
         '某知名手游公司编剧',
         { isDivider: true },
@@ -86,33 +93,56 @@ function generate_copyrights() {
     ],
     [[get_copyright_entry(71)], '洛洛'],
     [[get_copyright_entry(74)], 'KUN'],
-    [[get_copyright_entry(86, '部分地下室')], 'イーウィヤ'],
-    [[get_copyright_entry(89, '招募、地下室')], '無奈'],
-    [[get_copyright_entry(100)], '夕阳红艺术团小组长-赤红彗星红桃爵士Q先生'],
-    [[get_copyright_entry(116, '招募')], 'AraP'],
-    [[get_copyright_entry(119, '招募、地下室')], '幽白書'],
-    [[get_copyright_entry(400)], '黑衣剑士-星爆气流斩准备就绪'],
-    [
-      [get_copyright_entry(303, '部分')],
-      ['雞雞', { isDivider: true }, '幽白書'],
-    ],
-    [[get_copyright_entry(340, '招募')], 'O口口口口口'],
-    [[get_copyright_entry(341, '招募')], 'フィンランド'],
-    [[get_copyright_entry(342, '招募')], '黑衣剑士-星爆气流斩准备就绪'],
+    [[get_copyright_entry(86, i18n().cr_kojo_suffix_part)], 'イーウィヤ'],
     [
       [
-        '招募地文',
+        get_copyright_entry(
+          89,
+          i18n().cr_kojo_suffix_recruit +
+            i18n().ui_comma2 +
+            i18n().cr_kojo_suffix_basement,
+        ),
+      ],
+      '無奈',
+    ],
+    [[get_copyright_entry(100)], '夕阳红艺术团小组长-赤红彗星红桃爵士Q先生'],
+    [[get_copyright_entry(116, i18n().cr_kojo_suffix_recruit)], 'AraP'],
+    [
+      [
+        get_copyright_entry(
+          119,
+          i18n().cr_kojo_suffix_recruit +
+            i18n().ui_comma2 +
+            i18n().cr_kojo_suffix_basement,
+        ),
+      ],
+      '幽白書',
+    ],
+    [[get_copyright_entry(400)], '黑衣剑士-星爆气流斩准备就绪'],
+    [
+      [get_copyright_entry(303, i18n().cr_kojo_suffix_part)],
+      ['雞雞', { isDivider: true }, '幽白書'],
+    ],
+    [[get_copyright_entry(340, i18n().cr_kojo_suffix_recruit)], 'O口口口口口'],
+    [[get_copyright_entry(341, i18n().cr_kojo_suffix_recruit)], 'フィンランド'],
+    [
+      [get_copyright_entry(342, i18n().cr_kojo_suffix_recruit)],
+      '黑衣剑士-星爆气流斩准备就绪',
+    ],
+    [
+      [
+        i18n().cr_timon_recruit,
         { isDivider: true },
-        '爱慕地文',
+        i18n().cr_timon_love,
         { isBr: true },
-        '新手教学',
+        i18n().cr_timon_guide,
         { isDivider: true },
-        '地下室教学',
+        i18n().cr_timon_guide_b,
       ],
       ['雞雞', { isDivider: true }, '黑奴队长'],
     ],
     [
-      ['日常地文', { isDivider: true }, '随机事件'],
+      [i18n().cr_timon_daily, { isDivider: true }, i18n().cr_timon_random],
       [
         '雞雞',
         { isDivider: true },
@@ -136,7 +166,7 @@ function generate_copyrights() {
       ],
     ],
     [
-      '育成地文',
+      i18n().cr_timon_edu,
       [
         '雞雞',
         { isDivider: true },
@@ -148,7 +178,7 @@ function generate_copyrights() {
       ],
     ],
     [
-      '调教地文',
+      i18n().cr_timon_ero,
       [
         'O口口口口口',
         { isDivider: true },
@@ -163,10 +193,10 @@ function generate_copyrights() {
         'ALEX',
       ],
     ],
-    ['地下室地文', ['露娜俘虏', { isDivider: true }, '黑奴队长']],
-    ['特殊角色（临时）', '黑奴队长'],
+    [i18n().cr_timon_basement, ['露娜俘虏', { isDivider: true }, '黑奴队长']],
+    [i18n().cr_timon_special, '黑奴队长'],
     [
-      '麦吉罗的呼唤',
+      i18n().cr_timon_mejiro,
       [
         'イーウィヤ',
         { isDivider: true },
@@ -186,7 +216,7 @@ function generate_copyrights() {
           fontWeight: 'bold',
           isParagraph: true,
         },
-        content: '鸣谢',
+        content: i18n().cr_title_copyrights,
       },
     ],
     [
@@ -196,7 +226,7 @@ function generate_copyrights() {
           fontSize: '1.25rem',
           isParagraph: true,
         },
-        content: '主催',
+        content: i18n().cr_header_susai,
       },
     ],
     [{ content: '雞雞' }],
@@ -209,7 +239,7 @@ function generate_copyrights() {
           offset: 3,
           width: 9,
         },
-        content: '架构',
+        content: i18n().cr_header_architecture,
       },
       {
         config: {
@@ -218,7 +248,7 @@ function generate_copyrights() {
           isParagraph: true,
           width: 9,
         },
-        content: '引擎',
+        content: i18n().cr_header_engine,
       },
     ],
     [
@@ -240,7 +270,7 @@ function generate_copyrights() {
           offset: 3,
           width: 9,
         },
-        content: '开发',
+        content: i18n().cr_header_developer,
       },
       {
         config: {
@@ -249,7 +279,7 @@ function generate_copyrights() {
           isParagraph: true,
           width: 9,
         },
-        content: '美术',
+        content: i18n().cr_header_art,
       },
     ],
     [
@@ -293,19 +323,19 @@ function generate_copyrights() {
           fontSize: '1.25rem',
           isParagraph: true,
         },
-        content: '翻译参考',
+        content: i18n().cr_header_translate_reference,
       },
     ],
     [
       {
         content: [
           {
-            content: "Trainers' Legend G 译文仓库",
+            content: i18n().cr_header_tr_repo,
             url: 'https://github.com/MinamiChiwa/Trainers-Legend-G-TRANS',
           },
           { isDivider: true },
           {
-            content: '赛马娘中文 Wiki',
+            content: i18n().cr_header_tr_wiki,
             url: 'https://wiki.biligame.com/umamusume/首页',
           },
         ],
@@ -317,14 +347,14 @@ function generate_copyrights() {
         content: [
           {
             color: item_title_color,
-            content: '口上',
+            content: i18n().cr_header_kojo,
             fontSize: '1.25rem',
           },
           { isBr: true },
-          '以负责角色ID最小值排序',
+          i18n().cr_kojo_tip,
           { isBr: true },
           {
-            content: '详细口上鸣谢',
+            content: i18n().cr_kojo_detail,
             url: 'https://gitgud.io/umaera/erauma/-/wikis/COPYRIGHT',
           },
         ],
@@ -363,7 +393,7 @@ function generate_copyrights() {
         fontSize: '1.25rem',
         isParagraph: true,
       },
-      content: '口上翻译',
+      content: i18n().cr_header_kojo_make,
     },
   ]);
   buffer.push([
@@ -379,12 +409,12 @@ function generate_copyrights() {
   ]);
   buffer.push([
     {
-      content: '测试反馈',
       config: {
         color: item_title_color,
         fontSize: '1.25rem',
         isParagraph: true,
       },
+      content: i18n().cr_header_test,
     },
   ]);
   buffer.push([
@@ -407,7 +437,7 @@ function generate_copyrights() {
         fontSize: '1.25rem',
         isParagraph: true,
       },
-      content: '社区管理',
+      content: i18n().cr_header_community_management,
     },
   ]);
   buffer.push([{ content: ['Advocator', { isDivider: true }, '雞雞'] }]);
@@ -418,7 +448,7 @@ function generate_copyrights() {
         fontSize: '1.25rem',
         isParagraph: true,
       },
-      content: '社区贡献',
+      content: i18n().cr_header_community_assistant,
     },
   ]);
   buffer.push([
@@ -452,13 +482,13 @@ function generate_copyrights() {
         fontWeight: 'bold',
         isParagraph: true,
       },
-      content: '特别鸣谢（笑）',
+      content: i18n().cr_header_special_thanks,
     },
   ]);
   buffer.push([
     {
       config: { fontSize: '1.25rem' },
-      content: ['午马牧师妹 · 普瑞提达比'],
+      content: [i18n().cr_umamusme_pretty_derby],
     },
   ]);
   buffer.forEach((l) => l.forEach((s) => (s.type = 'text')));

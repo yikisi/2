@@ -75,21 +75,6 @@ class I18nEntry {
   relation_6 = '亲密';
   relation_7 = '不渝';
 
-  skin_0 = '雪白';
-  skin_1 = '健康';
-  skin_2 = '红润';
-  skin_3 = '麦黄';
-
-  penis_1 = '可怜';
-  penis_2 = '寒酸';
-  penis_3 = '健壮';
-  penis_4 = '凶恶';
-  penis_5 = '骇人';
-
-  p_color_0 = '粉嫩';
-  p_color_1 = '泛紫';
-  p_color_2 = '黝黑';
-
   tt_disclaimer = '免责声明';
   tt_disclaimer_content = [
     '1. 本游戏仅为开发者自娱自乐及代码练习所用，开发它是因为开发者趣味低下，思想低俗所致，无任何经济收益和利益驱动。',
@@ -141,6 +126,41 @@ class I18nEntry {
   tt_link_community = 'ERA 特雷森学园（Discord 社区）';
   tt_link_wiki = 'Wiki（使用说明/游戏设定/口上写作指引……）';
 
+  cr_title_copyrights = '鸣谢';
+  cr_header_susai = '主催';
+  cr_header_architecture = '架构';
+  cr_header_engine = '引擎';
+  cr_header_developer = '开发';
+  cr_header_art = '美术';
+  cr_header_translate_reference = '翻译参考';
+  cr_header_tr_repo = "Trainers' Legend G 译文仓库";
+  cr_header_tr_wiki = '赛马娘中文 Wiki';
+  cr_header_kojo = '口上';
+  cr_kojo_tip = '以负责角色ID最小值排序';
+  cr_kojo_detail = '详细口上鸣谢';
+  cr_kojo_suffix_template = '（%SUFFIX%）';
+  cr_kojo_suffix_recruit = '招募';
+  cr_kojo_suffix_basement = '地下室';
+  cr_kojo_suffix_temporary = '临时';
+  cr_kojo_suffix_part = '部分';
+  cr_timon_recruit = '招募地文';
+  cr_timon_daily = '日常地文';
+  cr_timon_edu = '育成地文';
+  cr_timon_love = '爱慕地文';
+  cr_timon_ero = '调教地文';
+  cr_timon_basement = '地下室地文';
+  cr_timon_special = '特殊角色（临时）';
+  cr_timon_mejiro = '麦吉罗的呼唤';
+  cr_timon_random = '随机事件';
+  cr_timon_guide = '新手教学';
+  cr_timon_guide_b = '地下室教学';
+  cr_header_kojo_make = '口上制作';
+  cr_header_test = '测试反馈';
+  cr_header_community_management = '社区管理';
+  cr_header_community_assistant = '社区贡献';
+  cr_header_special_thanks = '特别鸣谢（笑）';
+  cr_umamusme_pretty_derby = '午马牧师妹 · 普瑞提达比';
+
   tk_speak_border = ['「', '」'];
   tk_think_border = ['（', '）'];
   tk_past_border = ['（', '）'];
@@ -172,9 +192,13 @@ class I18nEntry {
     ' 周',
   ];
   ui_month_template = '%MONTH% 个月';
-  ui_too_long = '（太长了，请重新输入！）';
+  ui_too_long_template =
+    '（显示宽度不能超过 %WIDTH% 个全角字符或 %WIDTH*2% 个半角字符，请重新输入！）';
+  ui_et_prev = '前一项';
+  ui_et_next = '后一项';
   ui_pg_prev = '前一页';
   ui_pg_next = '后一页';
+  ui_default = '默认';
 
   ui_show_team = '查看队伍列表';
   ui_train = '训练';
@@ -214,6 +238,7 @@ class I18nEntry {
   name = new (require('#/i18n/zh-CN/chara/names'))();
   title = new (require('#/i18n/zh-CN/chara/titles'))();
   title_desc = new (require('#/i18n/zh-CN/chara/title-desc'))();
+  feature = new (require('#/i18n/zh-CN/chara/feature'))();
 
   kojo = new (require('#/i18n/zh-CN/kojo/entry'))();
   timon = new (require('#/i18n/zh-CN/timon/entry'))();
@@ -245,6 +270,7 @@ class I18nEntry {
   race = new (require('#/i18n/zh-CN/race/races'))();
   skill = new (require('#/i18n/zh-CN/race/skills'))();
   skill_desc = new (require('#/i18n/zh-CN/race/skill-desc'))();
+  inherit_shop = new (require('#/i18n/zh-CN/race/inherit'))();
   gene = new (require('#/i18n/zh-CN/race/genes'))();
   gene_desc = new (require('#/i18n/zh-CN/race/gene-desc'))();
   mob = require('#/i18n/zh-CN/race/uma-mob.json');

@@ -27,6 +27,24 @@ module.exports = {
     };
   },
   /**
+   * @param {string} str
+   * @returns {number}
+   */
+  get_display_width(str) {
+    if (typeof str !== 'string') {
+      return 0;
+    }
+    let width = 0;
+    for (const char of str) {
+      if (char.charCodeAt(0) <= 0x80) {
+        width += 0.5;
+      } else {
+        width += 1;
+      }
+    }
+    return width;
+  },
+  /**
    * @param {number} min
    * @param {number} max
    * @param {boolean} [is_float=false]

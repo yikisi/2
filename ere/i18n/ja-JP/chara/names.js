@@ -3,14 +3,23 @@ const I18nNames = require('#/i18n/zh-CN/chara/names');
 module.exports = class extends I18nNames {
   sir_template = '%NAME%さん';
   madam_template = '%NAME%さん';
+  chan_template = '%NAME%ちゃん';
+  kun_template = '%NAME%君';
 
   mr = 'さん';
   miss = 'さん';
   big_master = 'ご主人様';
+  trainer = 'トレーナー';
   trainer25t0 = 'モルモットさん';
   trainer25t1 = 'モルモットさん';
   trainer32 = 'モルモット君';
+  trainer74 = 'トレーナー様';
+  trainer80 = 'トレちゃん';
+  trainer400 = 'トレーナー君';
+  trainer_m = 'トレーナーさん';
+  trainer_f = 'トレーナーさん';
   danna = '旦那';
+  dear = 'あなた';
 
   102511 = 'カフェ君';
 

@@ -118,7 +118,7 @@ class EroNormalOrgy extends EroOrgy {
       await era.printAndWait([
         attacker.get_colored_name(),
         ' 叉开腿，',
-        di18n.n_penis[get_penis_size(attacker.id)],
+        di18n.feature.n_penis[get_penis_size(attacker.id)],
         ' 的肉棒昂然挺立，',
         defender.get_colored_name(),
         ' 和 ',
@@ -200,11 +200,11 @@ class EroNormalOrgy extends EroOrgy {
             supporter.get_colored_name(),
             ' 中间，',
             ...(defender_penis === supporter_penis
-              ? ['两根 ', di18n.n_penis[defender_penis], ' 的']
+              ? ['两根 ', di18n.feature.n_penis[defender_penis], ' 的']
               : [
-                  di18n.n_penis[defender_penis],
+                  di18n.feature.n_penis[defender_penis],
                   ' 与 ',
-                  di18n.n_penis[supporter_penis],
+                  di18n.feature.n_penis[supporter_penis],
                   ' ',
                 ]),
             ' 的肉棒交替被 ',

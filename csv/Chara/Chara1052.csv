@@ -27,12 +27,12 @@
 角色Flag,腰围,51
 角色Flag,臀围,73
 角色Flag,肤色深度,0
-角色Str,发色,粉
-角色Str,前发,排气口
+角色Str,发色,pink
+角色Str,前发,exha_ports
 角色Str,中发,
-角色Str,后发,高马尾
+角色Str,后发,high_ponytail
 角色Str,呆毛,
-角色Str,毛色,鹿
+角色Str,毛色,kage
 角色Str,流星形状,未知
 角色Flag,流星大小,-2
 特性,泌乳,0

@@ -1,3 +1,8 @@
+/**
+ * @file 新手教学
+ * @author 雞雞
+ * @author 黑奴队长
+ */
 const era = require('#/era-electron');
 
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');

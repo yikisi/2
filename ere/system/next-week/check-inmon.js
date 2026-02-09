@@ -10,11 +10,10 @@ const { get_random_value } = require('#/utils/value-utils');
 const CharaInmon = require('#/data/ero/chara-inmon');
 const { slavery_enum } = require('#/data/ero/mark-const');
 const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
-const { gene_juel_names } = require('#/data/other-const');
 const { gene_type_colors } = require('#/data/race/model/uma-gene');
 
 const di18n = require('#/i18n/extended-def');
-const { __ } = require('#/i18n/selector');
+const { __, i18n } = require('#/i18n/selector');
 
 /** @param {number[]} in_team_list */
 function check_inmon(in_team_list) {
@@ -74,7 +73,7 @@ function check_inmon(in_team_list) {
     for (const id of jewel_list) {
       // CFLAGNAME:48 = 育成回合计时
       const edu_phase = era.get(`cflag:${id}:48`);
-      let jewel;
+      let jid;
       let val;
       if (edu_phase < 3 * 48) {
         const { pink, blue, white } = sys_count_juels(
@@ -82,18 +81,19 @@ function check_inmon(in_team_list) {
           Math.floor(edu_phase / 48) / 3,
         );
         const jewels = [pink, blue, white];
-        jewel = (get_random_entry(
+        // PARAMNAME:20 - 22 = 粉 - 白
+        jid = (get_random_entry(
           Object.entries(jewels).filter((e) => e[1] > 0),
         ) || [get_random_value(0, 2)])[0];
-        val = Math.max(Math.floor(jewels[jewel] / 10), 1);
+        val = Math.max(Math.floor(jewels[jid] / 10), 1);
+        jid += 20;
       } else {
-        jewel = get_random_value(0, 2);
+        jid = get_random_value(20, 22);
         val = Math.floor(
-          era.get(`jewel:${id}:${gene_juel_names[jewel]}`) *
-            get_random_value(0.08, 0.12, true),
+          era.get(`jewel:${id}:${jid}`) * get_random_value(0.08, 0.12, true),
         );
       }
-      era.add(`jewel:0:${gene_juel_names[jewel]}`, val);
+      era.add(`jewel:0:${jid}`, val);
       j_count += val;
       era.print([
         '【',
@@ -102,8 +102,13 @@ function check_inmon(in_team_list) {
         get_chara_talk(id).get_colored_name(),
         ' 贡上了 ',
         {
-          content: `${gene_juel_names[jewel]}因子 × ${val}`,
-          color: gene_type_colors[jewel],
+          content: i18n()
+            .tb_param.jewel_with_count.replace(
+              '%JEWEL%',
+              __(`tb_param.jewel${jid}`),
+            )
+            .replace('%COUNT%', val.toString()),
+          color: gene_type_colors[jid],
         },
         '】',
       ]);
