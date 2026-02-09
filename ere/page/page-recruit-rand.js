@@ -1,8 +1,5 @@
 const era = require('#/era-electron');
 
-const {
-  sys_get_chara_info,
-} = require('#/system/chara/sys-calc-characteristic');
 const sys_check_team_limit = require('#/system/chara/sys-check-team-limit');
 const {
   get_bust_size,
@@ -292,7 +289,7 @@ async function print_rec_page() {
               ' ',
               get_colored_body_hair(selected),
               ' ',
-              sys_get_chara_info(era.get(`cflag:${selected}:气性`)),
+              di18n.feature.get_chara_info(era.get(`cflag:${selected}:气性`)),
               ' ',
               sex_title[sex_code],
             ],

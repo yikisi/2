@@ -194,6 +194,15 @@ const di18n = {
             '%LONG%',
             __(`feature.th_${th}`),
           ),
+    get_chara_info(chara) {
+      const name = __(`feature.chara_${chara}`);
+      return {
+        content: name,
+        title: i18n()
+          .feature.chara_template.replace('%NAME%', name)
+          .replace('%DESC%', __(`feature.chara_${chara}_desc`)),
+      };
+    },
   },
   kojo: {
     get_titled_content: (ckey, key, ...args) =>

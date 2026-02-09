@@ -1,8 +1,5 @@
 const era = require('#/era-electron');
 
-const {
-  sys_get_chara_info,
-} = require('#/system/chara/sys-calc-characteristic');
 const sys_change_hair = require('#/system/chara/sys-change-hair');
 const {
   get_bust_size,
@@ -788,7 +785,7 @@ async function page_custom() {
         {
           content: i18n().new_game.get_cus_f_uma(
             get_colored_body_hair(0),
-            sys_get_chara_info(era.get('cflag:0:气性')),
+            di18n.feature.get_chara_info(era.get('cflag:0:气性')),
           ),
           type: 'text',
         },

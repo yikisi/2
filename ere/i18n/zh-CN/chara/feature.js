@@ -116,6 +116,8 @@ class I18nCharaFeature {
   chara_1_desc = '比赛中能力会稍微上升，但是会稍微提高输掉比赛后的压力';
   chara_2_desc = '面对强敌时比赛能力会稍微上升，且干劲的影响稍微变大';
   chara_3_desc = '面对强敌时比赛能力会上升，但是没有强敌的比赛能力会稍微下降';
+
+  chara_twisted = '（淫纹 · 气性转换发动中）';
 }
 
 module.exports = I18nCharaFeature;
