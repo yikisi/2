@@ -82,6 +82,7 @@ class ConditionParams {
   overtake_target_time;
   phase;
   phase_corner_random;
+  phase_firsthalf;
   phase_firsthalf_random;
   phase_firstquarter;
   phase_firstquarter_random;

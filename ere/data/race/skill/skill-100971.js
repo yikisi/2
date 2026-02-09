@@ -11,7 +11,7 @@ module.exports = new UmaSkill(
   [
     (args) =>
       args.distance_type === 3 &&
-      args.is_used_skill_id.indexOf(203781) !== -1 &&
+      args.is_used_skill_id.includes(203781) &&
       args.phase >= 2 &&
       args.corner !== 0,
     (args) =>

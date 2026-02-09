@@ -26,6 +26,7 @@ module.exports = class extends I18nClothes {
   100901 = 'トップ・オブ・ブルー';
   100946 = '緋色のニュイ・エトワレ';
   101001 = 'ワイルド・フロンティア';
+  101013 = 'Baa Baa Patisserie';
   101023 = 'Bubblegum☆Memories';
   101101 = '岩穿つ青';
   101102 = '蒼炎の誉';
@@ -211,6 +212,7 @@ module.exports = class extends I18nClothes {
   110001 = 'Butterfly Sting';
   110002 = '柔灯・湯の香の装い';
   110201 = 'リトモ・デッラ・テッラ';
+  110213 = 'ソナタ・アッラ・メンタ';
   110401 = '登竜之頂';
   110410 = '雅号・墨龍';
   110501 = 'Universe-Naut';
@@ -241,5 +243,6 @@ module.exports = class extends I18nClothes {
   113201 = '9927 Wishes';
   113301 = '陸離の編纂者';
   113501 = 'Sunlit Outsider';
+  113701 = 'Miracle Author';
   // GENERATED END
 };

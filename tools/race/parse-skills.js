@@ -156,9 +156,11 @@ const skip_translate_skills = [
 
 const used_skill_condition_dict = {
   100971:
-    '(args)=>args.distance_type===3&&args.is_used_skill_id.indexOf(203781)!==-1&&args.phase>=2&&args.corner!==0',
+    '(args)=>args.distance_type===3&&args.is_used_skill_id.includes(203781)&&args.phase>=2&&args.corner!==0',
   101201:
-    '(args)=>args.furlong===3&&args.order_rate<=50&&args.is_used_skill_id.indexOf(203061)!==-1&&args.is_used_skill_id.indexOf(203071)!==-1',
+    '(args)=>args.furlong===3&&args.order_rate<=50&&args.is_used_skill_id.includes(203061)&&args.is_used_skill_id.includes(203071)',
+  101371:
+    '(args)=>args.order_rate<=70&&args.phase_firsthalf===1&&args.is_used_skill_id.includes(202051)',
 };
 const ability_tag_dict = {
   203781:

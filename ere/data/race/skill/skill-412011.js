@@ -13,7 +13,7 @@ module.exports = new UmaSkill(
     () => false,
   ],
   [3, 0],
-  [500, 0],
+  [30, 0],
   [
     UmaSkill.ability_time_usage_enum.normal,
     UmaSkill.ability_time_usage_enum.normal,

@@ -40,6 +40,7 @@ class I18nClothes {
   100901 = '蓝色・顶点';
   100946 = '绯色的星月之夜';
   101001 = '狂野・边境';
+  101013 = 'Baa Baa Patisserie';
   101023 = 'Bubblegum☆Memories';
   101101 = '穿岩之蓝';
   101102 = '苍炎之誉';
@@ -225,6 +226,7 @@ class I18nClothes {
   110001 = 'Butterfly Sting';
   110002 = '柔灯・汤泉芳香之装';
   110201 = 'Ritmo・Della・Terra';
+  110213 = '心灵奏鸣曲';
   110401 = '登龙之顶';
   110410 = '雅号・墨龙';
   110501 = 'Universe-Naut';
@@ -255,6 +257,7 @@ class I18nClothes {
   113201 = '9927 Wishes';
   113301 = '光彩陆离的编纂者';
   113501 = 'Sunlit Outsider';
+  113701 = 'Miracle Author';
   // GENERATED END
 }
 
