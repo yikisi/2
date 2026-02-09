@@ -66,6 +66,7 @@ module.exports = class extends CustomizedRecruit {
           suzuka,
           dict,
         );
+        era.set('cflag:2:随机招募', 0);
         add_event(event_hooks.out_river, ebj.set_arg('river'));
         EventMarks.get(0).add(event_hooks.out_river);
         break;
