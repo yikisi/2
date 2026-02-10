@@ -186,6 +186,7 @@ module.exports = class extends I18nNames {
   113401 = "Curren Bouquetd'or";
   113501 = 'Stay Gold';
   113601 = 'Red Desire';
+  113701 = 'Kiseki';
   200101 = 'Happy Meek';
   200201 = 'Bitter Glasse';
   200301 = 'Little Cocon';
