@@ -78,7 +78,11 @@ class DailyChild extends CustomizedDaily {
       }
     }
     if (h) {
-      await h(get_chara_talk(this.id), get_chara_talk(0));
+      await h(
+        get_chara_talk(this.id),
+        get_chara_talk(0),
+        sys_get_colored_callname(this.id, 0),
+      );
     } else {
       await super.talk();
     }

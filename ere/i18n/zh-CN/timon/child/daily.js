@@ -34,7 +34,7 @@ module.exports = {
           ' 会不会一滚直接滚到地球的另一端。',
         ]),
     ];
-    get_random_entry(talk).h();
+    get_random_entry(talk)();
   },
   /**
    * @author 雞雞
