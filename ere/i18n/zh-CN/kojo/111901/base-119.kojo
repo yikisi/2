@@ -99,16 +99,29 @@ flatter:
           - 「……嗯，我改变想法了……%CALLNAME%，您确实错了……你的唇，太过聒噪了……请您好好的发挥它唯一的用途……用来倾诉对我的爱意❤️」
 
 strike_success:
-  - color: %COLOR%
-    content:
-      - fontWeight: bold
-        content: %CHARA%
-      - 「到最后……我也还是无法获得您的信任吗？」
-  # CFLAGNAME:1 = 种族
-  - if: "!era.get('cflag:0:1')"
-    content: 虽然是人类的力气，但对 %CHARA% 这样娇小的%UMA%却也已经足够
-  - %CHARA% 露出了悲伤的表情，缓缓倒地……
-  - %YOU% 逃离了地下室……
+  # EXPNAME:25 - 26 = 性爱次数 - 睡奸次数
+  - if: t = (era.get('exp:119:25') - era.get('exp:119:26')) >= 10
+    lines:
+      # @author 黑奴队长
+      - %YOU% 对梦旅的身体太熟悉了
+      - 毕竟 %YOU% 那么多次探索过%SEX%的每一寸肌肤，每一个角落
+      - 所以像现在这样，只是在某个地方轻轻一点，就让%SEX%面色潮红呼吸急促地瘫软在地，也是很正常的吧？
+      - %YOU% 抬起头，眼前是缝隙透着名为自由的微光的铁门；低头，面前躺着 %YOU% 的功绩、骄傲、挚爱与罪孽
+      - %YOU% 抱起因高潮余韵无法行动的娇小身体，慢慢走出爱巢与牢房
+      - 至少，不应该让%SEX%躺在这里
+  - if: t < 10
+    lines:
+      # @author 幽白書
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「到最后……我也还是无法获得您的信任吗？」
+      # CFLAGNAME:1 = 种族
+      - if: "!era.get('cflag:0:1')"
+        content: 虽然是人类的力气，但对 %CHARA% 这样娇小的%UMA%却也已经足够
+      - %CHARA% 露出了悲伤的表情，缓缓倒地……
+      - %YOU% 逃离了地下室……
 
 strike_fail:
   - 失败了……
