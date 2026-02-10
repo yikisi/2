@@ -1,4 +1,4 @@
-const era = require('#/era-electron');
+﻿const era = require('#/era-electron');
 
 const sys_handle_escape_basement = require('#/system/basement/sys-handle-escape-basement');
 const {
@@ -39,9 +39,11 @@ const { run_custom_daily } = require('#/event/daily/daily-factory');
 const { get_custom_edu } = require('#/event/edu/edu-factory');
 const { get_custom_ero } = require('#/event/ero/ero-factory');
 const anniversary = require('#/event/others/anniversary');
-const aps_kojo = require('#/event/others/as-pregnant-slave.kojo');
 const game_guides = require('#/event/others/game-guides');
 const { start_machine_gun, stop_machine_gun } = require('#/event/queue');
+const {
+  generate_common_dict,
+} = require('#/event/snippets/generate-dictionary');
 
 const {
   get_chara_talk,
@@ -54,7 +56,6 @@ const {
   action_type_enum,
   basement_status_enum,
 } = require('#/data/basement-const');
-const { buff_colors } = require('#/data/color-const');
 const CharaInmon = require('#/data/ero/chara-inmon');
 const { lust_border } = require('#/data/ero/orgasm-const');
 const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
@@ -63,10 +64,12 @@ const basement_owners = require('#/data/event/basement-owners');
 const event_hooks = require('#/data/event/event-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
-const { get_save_name } = require('#/data/info-generator');
+const { get_save_name, get_trainer_title } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const { first_child_id } = require('#/data/other-const');
 const { pressure_border } = require('#/data/train-const');
+
+const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 let notes_index = 0;
@@ -103,12 +106,9 @@ async function save_and_next_week(cid, cur_loc, rest_loc) {
   era.set('flag:床伴', lover);
   const punish = era.get('flag:惩戒力度') >= 2 && check_pregnant_unprotect(0);
   if (punish) {
-    await aps_kojo['工作']({
-      SLAVE: era.get('flag:惩戒力度') === 2 ? '性奴' : '孕袋',
-      YOU: era.get('callname:0:-2'),
-      ...(era.get('flag:角色性别') === 1
-        ? { SHE: '他', UMA: '马郎' }
-        : { SHE: '她', UMA: '马娘' }),
+    await i18n().timon.as_pregnant_slave['work']({
+      SLAVE: get_trainer_title().title(),
+      ...generate_common_dict(),
     });
   }
   if (cid > 0 && !sys_check_remote(cid) && !lover) {
@@ -295,15 +295,10 @@ module.exports = async () => {
       ) {
         cur_location = location_enum.office;
         era.drawLine();
-        await era.printAndWait([
-          '在经历了惊魂的一周后 ',
-          get_chara_talk(0).get_colored_name(),
-          ' 被学园的救援队救出了地下室……',
-        ]);
-        const jpy = Math.ceil(era.get('flag:当前马币') / 2);
-        if (jpy > 0) {
-          await era.printAndWait('……但是被扣除了一半存款作为上周误工的罚款。');
-          era.add('flag:当前马币', -jpy);
+        const fine = Math.ceil(era.get('flag:当前马币') / 2);
+        await i18n().timon.basement.school_rescue(get_chara_talk(0), fine);
+        if (fine > 0) {
+          era.add('flag:当前马币', -fine);
         }
         sys_handle_escape_basement(false);
       }
@@ -332,25 +327,7 @@ module.exports = async () => {
         await era.clear();
         era.drawLine();
         await get_custom_edu(force_be).crazy_fan_end();
-        era.print('GAME OVER', {
-          align: 'center',
-          color: buff_colors[3],
-          fontSize: '3rem',
-          fontWeight: 'bold',
-          isParagraph: true,
-        });
-        await era.printAndWait(
-          get_random_entry([
-            '日蚀当先，万物无光。——丹尼斯・奥凯利',
-            '杜鹃不鸣则杀之。——织田信长',
-            '探案过程中，我是最后的、最高的上诉法庭。——福尔摩斯',
-            '世以成败论人物，故操得在英雄之列。——苏轼',
-            '拥有一位伟大的赛马娘，就拥有了最伟大的宝座。——丘吉尔',
-          ]),
-          {
-            align: 'center',
-          },
-        );
+        await check_game_over.game_over_with_saying(di18n.timon.eds_crazy_fan);
         return;
       }
       if (await check_game_over(true)) {

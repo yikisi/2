@@ -29,13 +29,19 @@ const { location_enum } = require('#/data/locations');
 const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
-const basement_saying_arr = [
-  '九尺二间陋室里，红唇依竹共恩情。——高杉晋作',
-  '每一个被束缚的奴隶都可以靠着他自己的手脱掉锁链。——莎士比亚',
-  '我已不再孤单，如今我生命中的挚爱与我如此靠近。——悲惨世界',
-  '自由不是随心所欲，而是不必身不由己。——康德',
-  '金钱、赛马娘、女人，男生永远搞不懂这三件事。——威尔・罗杰斯',
-];
+/** @param {string[]} sayings */
+async function game_over_with_saying(sayings) {
+  era.print(i18n().ui_game_over, {
+    align: 'center',
+    color: buff_colors[3],
+    fontSize: '3rem',
+    fontWeight: 'bold',
+    isParagraph: true,
+  });
+  await era.printAndWait(get_random_entry(sayings), {
+    align: 'center',
+  });
+}
 
 /** @param {boolean} [again] */
 async function game_over(again) {
@@ -47,7 +53,7 @@ async function game_over(again) {
     era.drawLine();
     global_achievement.end_lov = 1;
     await get_custom_daily(basement_owners.get(0)).basement_end();
-    saying_arr = basement_saying_arr;
+    saying_arr = di18n.timon.eds_basement;
   } else if (
     game_over >= 2 &&
     era.get('flag:当前马币') < 0 &&
@@ -311,7 +317,7 @@ async function game_over(again) {
             await get_custom_daily(basement_owners.get(0)).basement_end();
           }
           global_achievement.end_lov = 1;
-          saying_arr = basement_saying_arr;
+          saying_arr = di18n.timon.eds_basement;
           // FLAGNAME:36 = 变态行为
         } else if (era.get('flag:36') > 0) {
           await print_title_with_kojo.ending(i18n().timon.ending, 'hentai', me);
@@ -328,16 +334,7 @@ async function game_over(again) {
     }
   }
   if (saying_arr) {
-    era.print('GAME OVER', {
-      align: 'center',
-      color: buff_colors[3],
-      fontSize: '3rem',
-      fontWeight: 'bold',
-      isParagraph: true,
-    });
-    await era.printAndWait(get_random_entry(saying_arr), {
-      align: 'center',
-    });
+    await game_over_with_saying(saying_arr);
     if (end_talk > 0) {
       era.println();
       const team_list = era.getAddedCharacters().filter(
@@ -360,5 +357,6 @@ async function game_over(again) {
   }
   return false;
 }
+game_over.game_over_with_saying = game_over_with_saying;
 
 module.exports = game_over;

@@ -9,12 +9,43 @@ const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
 module.exports = {
   /**
+   * 被学园救援队救出
+   * @param {CharaTalk} you
+   * @param {number} fine
+   */
+  async school_rescue(you, fine) {
+    await era.printAndWait([
+      '在经历了惊魂的一周后 ',
+      you.get_colored_name(),
+      ' 被学园的救援队救出了地下室……',
+    ]);
+    if (fine > 0) {
+      await era.printAndWait('……但是被扣除了一半存款作为上周误工的罚款。');
+    }
+  },
+  /**
    * @param {number} hours
    * @param {number} minutes
    * @param {boolean} [base_12]
    */
   get_clock(hours, minutes, base_12 = false) {
-    return `${base_12 ? (hours < 12 ? `上午 ${hours}` : `下午 ${hours % 12 || 12}`) : hours} 点${minutes ? ` ${minutes} 分` : '整'}`;
+    let p_hour;
+    let p_minute;
+    if (base_12) {
+      if (hours < 12) {
+        p_hour = '上午 ' + hours;
+      } else {
+        p_hour = `下午 ${hours % 12 || 12}`;
+      }
+    } else {
+      p_hour = hours.toString();
+    }
+    if (minutes > 0) {
+      p_minute = ` ${minutes} 分`;
+    } else {
+      p_minute = '整';
+    }
+    return `${p_hour} 点${p_minute}`;
   },
   /**
    * @author 黑奴队长

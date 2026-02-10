@@ -176,10 +176,12 @@ class I18nEntry {
   ui_back = '返回';
   ui_back_title = '返回标题';
   ui_achieve_title = '获得新成就！';
-  ui_on = '是';
-  ui_off = '否';
+  ui_on = '开';
+  ui_off = '关';
   ui_yes = '确定';
   ui_no = '取消';
+  ui_yes2 = '是';
+  ui_no2 = '否';
   ui_skip = '跳过';
   ui_nothing = '无';
   ui_money_template = '%MONEY% 马币';
@@ -199,6 +201,7 @@ class I18nEntry {
   ui_pg_prev = '前一页';
   ui_pg_next = '后一页';
   ui_default = '默认';
+  ui_game_over = 'GAME OVER';
 
   ui_show_team = '查看队伍列表';
   ui_train = '训练';
@@ -227,9 +230,30 @@ class I18nEntry {
   ui_check_love = '重新触发爱慕事件';
   ui_basement_me = '乞求狂爱';
   ui_recruit = '前往训练场 (招募)';
+  ui_trainer_office = '前往训练员办公室';
+  ui_clinic = '前往保健室';
+  ui_god_together = '一起前往三女神像';
+  ui_god_alone = '前往三女神像';
+  ui_atrium_together = '一起前往中庭';
+  ui_atrium_alone = '前往中庭';
+  ui_rooftop_together = '一起前往天台';
+  ui_rooftop_alone = '前往天台';
+  ui_chairman_office = '前往理事长办公室';
+  ui_visitors = '前往访客接待室';
+  ui_school_shop = '前往小卖部';
+  ui_out_together = '一起外出';
+  ui_out_alone = '外出';
+  ui_info_page = '角色情报';
+  ui_storage = '持有物品';
+  ui_races = '出走情报';
+  ui_office_filter_template = '筛除训练室活动 [%STATUS%]';
+  ui_out_filter_template = '筛除外出活动 [%STATUS%]';
+  ui_save_game = '保存故事';
+  ui_load_game = '加载存档';
 
   ui_foreign_study_template = '%LAN%学习';
 
+  ui_act_event_tip = '该行动存在触发事件';
   ui_loc_npc_tip_template = '该地点有 %COUNT% 人';
   ui_loc_back_tip = '存在折返触发事件';
   ui_loc_event_tip = '该地点存在触发事件';

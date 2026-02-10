@@ -65,4 +65,13 @@ function generate_dictionary(
   return ret;
 }
 
+generate_dictionary.generate_common_dict = () => {
+  return {
+    YOU: get_display_name(era.get('callname:0:-2')),
+    ...(era.get('flag:角色性别') === 1
+      ? { SEX: i18n().name.he, UMA: i18n().name.uma_boy }
+      : { SEX: i18n().name.she, UMA: i18n().name.uma_girl }),
+  };
+};
+
 module.exports = generate_dictionary;

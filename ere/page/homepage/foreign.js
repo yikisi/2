@@ -92,7 +92,7 @@ module.exports = async (cid, save_and_next_week, flags) => {
             : i18n().ui_train,
         type: 'button',
       },
-      generate_race_button(cid, registered_race.week, cur_weeks),
+      generate_race_button(cid, registered_race, cur_weeks),
       {
         accelerator: 103,
         config: {

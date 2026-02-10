@@ -1,5 +1,6 @@
 const { adaptability_colors } = require('#/data/color-const');
 
+const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 const class_enum = { G1: 0, G2: 1, G3: 2, OP: 3, 'Pre-OP': 4, Spe: 5 };
@@ -311,7 +312,9 @@ module.exports = class RaceInfo {
 
   get_colored_name_with_class() {
     const ret = this.get_colored_name();
-    ret.content += ` (${Object.keys(class_enum)[this.race_class]})`;
+    ret.content = i18n()
+      .race.name_with_class_template.replace('%NAME%', ret.content)
+      .replace('%CLASS%', di18n.race.n_class[this.race_class]);
     return ret;
   }
 };

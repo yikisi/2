@@ -8,12 +8,15 @@ class I18nTimon {
   ero = proxy_kojo_js(require('#/i18n/zh-CN/timon/ero/ero'));
   basement = proxy_kojo_js(require('#/i18n/zh-CN/timon/base'));
 
+  daily_child = proxy_kojo_js(require('#/i18n/zh-CN/timon/child/daily'));
+  ero_child = proxy_kojo_js(require('#/i18n/zh-CN/timon/child/ero'));
+
   game_guides = proxy_kojo_js(require('#/i18n/zh-CN/timon/guides/game'));
   base_guides = proxy_kojo_js(require('#/i18n/zh-CN/timon/guides/base'));
   ending = proxy_kojo_js(require('#/i18n/zh-CN/timon/ending'));
 
-  daily_child = proxy_kojo_js(require('#/i18n/zh-CN/timon/child/daily'));
-  ero_child = proxy_kojo_js(require('#/i18n/zh-CN/timon/child/ero'));
+  anniversary = require('#/i18n/zh-CN/timon/others/anniversary.kojo');
+  as_pregnant_slave = require('#/i18n/zh-CN/timon/others/as-pregnant-slave.kojo');
 
   strange = '陌生';
   strange_desc = (debuff) =>

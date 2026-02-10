@@ -9,23 +9,24 @@ const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
+const { race_infos } = require('#/data/race/race-const');
 
 const { i18n } = require('#/i18n/selector');
 
 module.exports = {
   /**
    * @param {number} cid
-   * @param {number} race_week
+   * @param {{week:number,race:number}} reg
    * @param {number} cur_weeks
    */
-  generate_race_button(cid, race_week, cur_weeks) {
-    if (race_week === cur_weeks) {
+  generate_race_button(cid, reg, cur_weeks) {
+    if (reg.week === cur_weeks) {
       return {
         accelerator: 102,
         config: {
           buttonType: 'danger',
           disabled: !sys_check_race_ready(cid) || !sys_check_awake(0),
-          width: 6,
+          title: race_infos[reg.race].get_colored_name_with_class().content,
         },
         content: i18n().ui_goto_race,
         type: 'button',
@@ -46,7 +47,6 @@ module.exports = {
           (cid > 0 &&
             (typeof edu_weeks !== 'number' ||
               era.get(`cflag:${cid}:48`) >= 48 * 3)),
-        width: 6,
       },
       content: i18n().ui_register_race,
       type: 'button',

@@ -600,7 +600,7 @@ module.exports = async () => {
             }
             // i18n - 将游戏存档内所有字符串改成 i18n 框架内的内容
             // TODO CSTR里一堆性经历也要改
-            if (version <= 2900) {
+            if (version <= 2800) {
               era.getAddedCharacters().forEach((cid) => {
                 const callname = era.get(`callname:${cid}`);
                 for (const _to in callname) {
@@ -617,13 +617,13 @@ module.exports = async () => {
                 }
                 // CSTRNAME:0 - 1 = 发色 - 毛色
                 for (let stid = 0; stid <= 1; ++stid) {
-                  era.set(
-                    `cstr:${cid}:${stid}`,
-                    find_key_by_value(
-                      i18n('zh-CN').feature,
-                      era.get(`cstr:${cid}:${stid}`),
-                    ).substring(3),
+                  const found = find_key_by_value(
+                    i18n('zh-CN').feature,
+                    era.get(`cstr:${cid}:${stid}`),
                   );
+                  if (found[2] === '_') {
+                    era.set(`cstr:${cid}:${stid}`, found.substring(3));
+                  }
                 }
                 // CSTRNAME:2 - 4 = 前发 - 呆毛
                 for (let stid = 2; stid <= 5; ++stid) {
@@ -632,11 +632,16 @@ module.exports = async () => {
                     era
                       .get(`cstr:${cid}:${stid}`)
                       .split('+')
-                      .map((e) =>
-                        find_key_by_value(i18n('zh-CN').feature, e).substring(
-                          3,
-                        ),
-                      )
+                      .map((e) => {
+                        const found = find_key_by_value(
+                          i18n('zh-CN').feature,
+                          e,
+                        );
+                        if (found[2] === '_') {
+                          return found.substring(3);
+                        }
+                        return found;
+                      })
                       .join('+'),
                   );
                 }

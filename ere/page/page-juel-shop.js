@@ -325,7 +325,7 @@ module.exports = async (cid = era.get('flag:当前互动角色')) => {
           mu_title = di18n.jewel_shop.get_price_title_with_other_tip(
             mu_dict,
             i18n().jewel_shop.milk_other_condition,
-            [['STATUS', milk_talent === 1 ? i18n().ui_on : i18n().ui_off]],
+            [['STATUS', milk_talent === 1 ? i18n().ui_yes2 : i18n().ui_no2]],
           );
           if (milk_talent !== 1) {
             mu_dict = void 0;
@@ -345,7 +345,7 @@ module.exports = async (cid = era.get('flag:当前互动角色')) => {
                 )
                 .replace(
                   '%STATUS%',
-                  milk_talent === 3 ? i18n().ui_on : i18n().ui_off,
+                  milk_talent === 3 ? i18n().ui_yes2 : i18n().ui_no2,
                 ),
             },
             {
@@ -398,7 +398,7 @@ module.exports = async (cid = era.get('flag:当前互动角色')) => {
                 )
                 .replace(
                   '%STATUS%',
-                  nipple_size === 2 ? i18n().ui_on : i18n().ui_off,
+                  nipple_size === 2 ? i18n().ui_yes2 : i18n().ui_no2,
                 ),
             },
             {

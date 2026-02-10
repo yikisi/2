@@ -1,4 +1,13 @@
 class I18nRaces {
+  name_with_class_template = '%NAME% (%CLASS%)';
+
+  g1 = 'G1';
+  g2 = 'G2';
+  g3 = 'G3';
+  op = 'OP';
+  pre_op = 'Pre-OP';
+  spe = 'Spe';
+
   // 跑道类型简称
   g_a_grass = '草';
   g_a_dirt = '泥';

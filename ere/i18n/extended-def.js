@@ -91,13 +91,26 @@ const di18n = {
     i18n()
       .ui_too_long_template.replace('%WIDTH%', width.toString())
       .replace('%WIDTH*2%', (width * 2).toString()),
+  /** @param {boolean} has_event */
+  get_act_tip(has_event) {
+    return has_event ? i18n().ui_act_event_tip : void 0;
+  },
+  get_activity_filter: (template, is_on) =>
+    template.replace('%STATUS%', is_on ? i18n().ui_on : i18n().ui_off),
   /**
    * @param {boolean} has_back_event
    * @param {boolean} has_event
    * @param {number} npc_count
    * @param {number} event_count
+   * @param {string} [additional]
    */
-  get_loc_tips(has_back_event, has_event, npc_count, event_count) {
+  get_loc_tips(
+    has_back_event,
+    has_event,
+    npc_count = 0,
+    event_count = 0,
+    additional,
+  ) {
     const _ = i18n();
     const ret = [];
     if (npc_count > 0) {
@@ -118,6 +131,9 @@ const di18n = {
           event_count.toString(),
         ),
       );
+    }
+    if (additional) {
+      ret.push(additional);
     }
     return ret.join('\n') || void 0;
   },
@@ -247,6 +263,16 @@ const di18n = {
         _.ed_saying_08,
         _.ed_saying_09,
         _.ed_saying_10,
+      ];
+    },
+    get eds_basement() {
+      const _ = i18n().timon;
+      return [
+        _.ed_saying_01,
+        _.ed_saying_02,
+        _.ed_saying_04,
+        _.ed_saying_05,
+        _.ed_saying_12,
       ];
     },
     get eds_hentai() {
@@ -533,7 +559,7 @@ const di18n = {
       const _ = i18n().tb_talent;
       return _.shop_template
         .replace('%NAME%', _[tid])
-        .replace('%STATUS%', status ? i18n().ui_on : i18n().ui_off);
+        .replace('%STATUS%', status ? i18n().ui_yes2 : i18n().ui_no2);
     },
   },
   inmon: {
@@ -656,6 +682,10 @@ const di18n = {
       ),
   },
   race: {
+    get n_class() {
+      const _ = i18n().race;
+      return [_.g1, _.g2, _.g3, _.op, _.pre_op, _.spe];
+    },
     get a_ground() {
       const _ = i18n().race;
       return [_.g_a_grass, _.g_a_dirt];

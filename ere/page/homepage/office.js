@@ -120,6 +120,7 @@ module.exports = async (cid, next_cb, flags) => {
   fill_npc_dict(npc, 'l', loc_characters.get(location_enum.chairman));
   fill_npc_dict(npc, 't', loc_characters.get(location_enum.trainer));
   fill_npc_dict(npc, 'v', loc_characters.get(location_enum.visitor));
+  let temp;
   /** @type {{[acc],[config]:Record<string,any>,content:string,h:function():Promise}[][]} */
   const buttons = [];
   buttons.push([
@@ -131,12 +132,16 @@ module.exports = async (cid, next_cb, flags) => {
         flags.after_select = era.set('flag:5', await select_target()) !== cid;
       },
     },
+  ]);
+  temp =
+    event_marks.check(event_hooks.train) ||
+    my_event_marks.check(event_hooks.train);
+  buttons.push([
     {
       config: {
-        buttonType: my_event_marks.check(event_hooks.train)
-          ? 'danger'
-          : 'warning',
+        buttonType: temp ? 'danger' : 'warning',
         disabled: !train_enabled || !awake.me,
+        title: di18n.get_act_tip(temp),
       },
       // 训自己的话显示自主训练
       content:
@@ -151,7 +156,7 @@ module.exports = async (cid, next_cb, flags) => {
       },
     },
     {
-      ...generate_race_button(cid, registered_race.week, cur_weeks),
+      ...generate_race_button(cid, registered_race, cur_weeks),
       async h() {
         if (registered_race.week === cur_weeks) {
           era.set('flag:4', location_enum.race);
@@ -196,35 +201,34 @@ module.exports = async (cid, next_cb, flags) => {
   if (!office_activity_filter) {
     const group = [];
     buttons.push(group);
+    temp = event_marks.check(event_hooks.office_study);
+    group.push({
+      config: {
+        buttonType: temp ? 'danger' : 'warning',
+        disabled:
+          !cid ||
+          // CFLAGNAME:48 = 育成回合计时
+          era.get(`cflag:${cid}:48`) >= 48 * 3 ||
+          !awake.chara ||
+          !awake.me ||
+          player_base.time < 300 ||
+          (chara_base && chara_base.time) < 300,
+        title: di18n.get_act_tip(temp),
+      },
+      content: i18n().ui_office_study,
+      async h() {
+        if (!(await sys_get_random_event(event_hooks.office_study, cid)())) {
+          era.drawLine();
+          era.print(i18n().timon.get_it_office_study(chara));
+          await run_custom_daily(cid, event_hooks.office_study);
+        }
+      },
+    });
+    temp = event_marks.check(event_hooks.office_prepare);
     group.push(
       {
         config: {
-          buttonType: event_marks.check(event_hooks.office_study)
-            ? 'danger'
-            : 'warning',
-          disabled:
-            !cid ||
-            // CFLAGNAME:48 = 育成回合计时
-            era.get(`cflag:${cid}:48`) >= 48 * 3 ||
-            !awake.chara ||
-            !awake.me ||
-            player_base.time < 300 ||
-            (chara_base && chara_base.time) < 300,
-        },
-        content: i18n().ui_office_study,
-        async h() {
-          if (!(await sys_get_random_event(event_hooks.office_study, cid)())) {
-            era.drawLine();
-            era.print(i18n().timon.get_it_office_study(chara));
-            await run_custom_daily(cid, event_hooks.office_study);
-          }
-        },
-      },
-      {
-        config: {
-          buttonType: event_marks.check(event_hooks.office_prepare)
-            ? 'danger'
-            : 'warning',
+          buttonType: temp ? 'danger' : 'warning',
           disabled:
             !cid ||
             era.get(`cflag:${cid}:48`) >= 48 * 3 ||
@@ -233,7 +237,7 @@ module.exports = async (cid, next_cb, flags) => {
             jpy < 20 ||
             player_base.time < 300 ||
             (chara_base && chara_base.time) < 300,
-          width: 6,
+          title: di18n.get_act_tip(temp),
         },
         content: i18n().ui_office_prepare,
         async h() {
@@ -267,7 +271,6 @@ module.exports = async (cid, next_cb, flags) => {
             !awake.chara ||
             not_in_same_loc ||
             player_base.time < 200,
-          width: 6,
         },
         content: i18n().ui_office_gift,
         async h() {
@@ -275,80 +278,82 @@ module.exports = async (cid, next_cb, flags) => {
           await run_custom_daily(cid, event_hooks.office_gift);
         },
       },
-      {
-        config: {
-          buttonType: event_marks.check(event_hooks.office_cook)
-            ? 'danger'
-            : 'warning',
-          disabled:
-            !awake.chara ||
-            !awake.me ||
-            not_in_same_loc ||
-            player_base.stamina < 100,
-        },
-        content: cid > 0 ? i18n().ui_office_cook : i18n().ui_self_cook,
-        async h() {
-          if (!(await sys_get_random_event(event_hooks.office_cook, cid)())) {
-            era.drawLine();
-            era.print(
-              cid > 0
-                ? i18n().timon.get_it_office_cook(chara)
-                : i18n().timon.it_self_cook,
-            );
-            await run_custom_daily(cid, event_hooks.office_cook);
-          }
-        },
-      },
-      {
-        config: {
-          buttonType: event_marks.check(event_hooks.office_rest)
-            ? 'danger'
-            : 'warning',
-          disabled:
-            !awake.chara ||
-            !awake.me ||
-            not_in_same_loc ||
-            player_base.time < 100,
-        },
-        content: cid > 0 ? i18n().ui_office_rest : i18n().ui_self_rest,
-        async h() {
-          if (!(await sys_get_random_event(event_hooks.office_rest, cid)())) {
-            era.drawLine();
-            era.print(
-              cid > 0
-                ? i18n().timon.get_it_office_rest(chara)
-                : i18n().timon.it_self_rest,
-            );
-            await run_custom_daily(cid, event_hooks.office_rest);
-          }
-        },
-      },
-      {
-        config: {
-          buttonType: event_marks.check(event_hooks.office_game)
-            ? 'danger'
-            : 'warning',
-          disabled:
-            growth_stage < 1 ||
-            !awake.chara ||
-            !awake.me ||
-            player_base.time < 300 ||
-            (chara_base && chara_base.time) < 300,
-        },
-        content: cid > 0 ? i18n().ui_office_game : i18n().ui_self_game,
-        async h() {
-          if (!(await sys_get_random_event(event_hooks.office_game, cid)())) {
-            era.drawLine();
-            era.print(
-              cid > 0
-                ? i18n().timon.get_it_office_game(chara)
-                : i18n().timon.it_self_game,
-            );
-            await run_custom_daily(cid, event_hooks.office_game);
-          }
-        },
-      },
     );
+    temp = event_marks.check(event_hooks.office_cook);
+    group.push({
+      config: {
+        buttonType: temp ? 'danger' : 'warning',
+        disabled:
+          !awake.chara ||
+          !awake.me ||
+          not_in_same_loc ||
+          player_base.stamina < 100,
+        title: di18n.get_act_tip(temp),
+      },
+      content: cid > 0 ? i18n().ui_office_cook : i18n().ui_self_cook,
+      async h() {
+        if (!(await sys_get_random_event(event_hooks.office_cook, cid)())) {
+          era.drawLine();
+          era.print(
+            cid > 0
+              ? i18n().timon.get_it_office_cook(chara)
+              : i18n().timon.it_self_cook,
+          );
+          await run_custom_daily(cid, event_hooks.office_cook);
+        }
+      },
+    });
+    temp = event_marks.check(event_hooks.office_rest);
+    group.push({
+      config: {
+        buttonType: temp ? 'danger' : 'warning',
+        disabled:
+          !awake.chara ||
+          !awake.me ||
+          not_in_same_loc ||
+          player_base.time < 100,
+        title: di18n.get_act_tip(temp),
+      },
+      content: cid > 0 ? i18n().ui_office_rest : i18n().ui_self_rest,
+      async h() {
+        if (!(await sys_get_random_event(event_hooks.office_rest, cid)())) {
+          era.drawLine();
+          era.print(
+            cid > 0
+              ? i18n().timon.get_it_office_rest(chara)
+              : i18n().timon.it_self_rest,
+          );
+          await run_custom_daily(cid, event_hooks.office_rest);
+        }
+      },
+    });
+    temp = event_marks.check(event_hooks.office_game);
+    group.push({
+      config: {
+        buttonType: event_marks.check(event_hooks.office_game)
+          ? 'danger'
+          : 'warning',
+        disabled:
+          growth_stage < 1 ||
+          !awake.chara ||
+          !awake.me ||
+          player_base.time < 300 ||
+          (chara_base && chara_base.time) < 300,
+        title: di18n.get_act_tip(temp),
+      },
+      content: cid > 0 ? i18n().ui_office_game : i18n().ui_self_game,
+      async h() {
+        if (!(await sys_get_random_event(event_hooks.office_game, cid)())) {
+          era.drawLine();
+          era.print(
+            cid > 0
+              ? i18n().timon.get_it_office_game(chara)
+              : i18n().timon.it_self_game,
+          );
+          await run_custom_daily(cid, event_hooks.office_game);
+        }
+      },
+    });
     // CFLAGNAME:50 = 可再次育成
     if (cid > 0 && era.get(`cflag:${cid}:50`) > 0) {
       group.push({
@@ -502,6 +507,13 @@ module.exports = async (cid, next_cb, flags) => {
               sys_get_move_cost(location_enum.playground),
               player_base,
             ) > 0,
+          title: di18n.get_loc_tips(
+            false,
+            my_event_marks.check(
+              event_hooks.recruit_start,
+              event_hooks.recruit,
+            ),
+          ),
         },
         content: i18n().ui_recruit,
         async h() {
@@ -531,7 +543,7 @@ module.exports = async (cid, next_cb, flags) => {
             npc.te,
           ),
         },
-        content: '前往训练员办公室',
+        content: i18n().ui_trainer_office,
         async h() {
           sys_handle_action(sys_get_move_cost(location_enum.trainer));
           if (!(await game_guides.school_trainer_office())) {
@@ -565,7 +577,7 @@ module.exports = async (cid, next_cb, flags) => {
             npc.ce,
           ),
         },
-        content: '前往保健室',
+        content: i18n().ui_clinic,
         async h() {
           sys_handle_action(sys_get_move_cost(location_enum.clinic));
           if (
@@ -595,8 +607,16 @@ module.exports = async (cid, next_cb, flags) => {
               chara_base,
             ) > 0 ||
             not_in_same_loc,
+          title: di18n.get_loc_tips(
+            event_marks.check(event_hooks.back_school),
+            my_event_marks.check(event_hooks.school_god),
+            0,
+            0,
+            era.get('flag:当前月') === 3 &&
+              i18n().inherit_shop.ui_inherit_enabled,
+          ),
         },
-        content: `${cid > 0 ? '一起' : ''}前往三女神像`,
+        content: cid > 0 ? i18n().ui_god_together : i18n().ui_god_alone,
         async h() {
           sys_handle_action(sys_get_move_cost(location_enum.god, cid), cid);
           if (
@@ -606,9 +626,9 @@ module.exports = async (cid, next_cb, flags) => {
             if (
               era.get('flag:当前月') === 3 &&
               (await select_yes_or_no(
-                '可以因子继承了！要进行吗',
-                '因子继承！',
-                '普通拜谒就好',
+                i18n().inherit_shop.select_inherit_or_god,
+                i18n().inherit_shop.sig_inherit,
+                i18n().inherit_shop.sig_god,
               ))
             ) {
               await print_inherit_page();
@@ -637,8 +657,13 @@ module.exports = async (cid, next_cb, flags) => {
               chara_base,
             ) > 0 ||
             not_in_same_loc,
+          title: di18n.get_loc_tips(
+            event_marks.check(event_hooks.back_school),
+            event_marks.check(event_hooks.school_atrium) ||
+              event_marks.check(event_hooks.school_atrium),
+          ),
         },
-        content: `${cid > 0 ? '一起' : ''}前往中庭`,
+        content: cid > 0 ? i18n().ui_atrium_together : i18n().ui_atrium_alone,
         async h() {
           sys_handle_action(sys_get_move_cost(location_enum.atrium, cid), cid);
           if (!(await game_guides.school_atrium())) {
@@ -665,8 +690,13 @@ module.exports = async (cid, next_cb, flags) => {
               chara_base,
             ) > 0 ||
             not_in_same_loc,
+          title: di18n.get_loc_tips(
+            event_marks.check(event_hooks.back_school),
+            event_marks.check(event_hooks.school_rooftop) ||
+              event_marks.check(event_hooks.school_rooftop),
+          ),
         },
-        content: `${cid > 0 ? '一起' : ''}前往天台`,
+        content: cid > 0 ? i18n().ui_rooftop_together : i18n().ui_rooftop_alone,
         async h() {
           sys_handle_action(sys_get_move_cost(location_enum.rooftop, cid), cid);
           if (!(await game_guides.school_rooftop())) {
@@ -696,7 +726,7 @@ module.exports = async (cid, next_cb, flags) => {
             npc.le,
           ),
         },
-        content: '前往理事长办公室',
+        content: i18n().ui_chairman_office,
         async h() {
           sys_handle_action(sys_get_move_cost(location_enum.chairman));
           if (
@@ -729,7 +759,7 @@ module.exports = async (cid, next_cb, flags) => {
             npc.ve,
           ),
         },
-        content: '前往访客接待室',
+        content: i18n().ui_visitors,
         async h() {
           sys_handle_action(sys_get_move_cost(location_enum.visitor));
           if (!(await game_guides.school_visitors())) {
@@ -739,7 +769,7 @@ module.exports = async (cid, next_cb, flags) => {
       },
       {
         config: { disabled: !awake.me },
-        content: '前往小卖部',
+        content: i18n().ui_school_shop,
         async h() {
           // FLAGNAME:4 = 当前位置
           era.set('flag:4', location_enum.school_shop);
@@ -790,8 +820,18 @@ module.exports = async (cid, next_cb, flags) => {
               chara_base,
             ) > 0 ||
             not_in_same_loc,
+          title: di18n.get_loc_tips(
+            event_marks.check(event_hooks.back_school),
+            event_marks.check(
+              event_hooks.out_start,
+              event_hooks.out_river,
+              event_hooks.out_shopping,
+              event_hooks.out_church,
+              event_hooks.out_station,
+            ) || event_marks.check(event_hooks.out_start),
+          ),
         },
-        content: `${cid > 0 ? '一起' : ''}外出`,
+        content: cid > 0 ? i18n().ui_out_together : i18n().ui_out_alone,
         async h() {
           sys_handle_action(sys_get_move_cost(location_enum.gate, cid), cid);
           era.set('flag:4', location_enum.gate);
@@ -803,42 +843,40 @@ module.exports = async (cid, next_cb, flags) => {
   }
   buttons.push([
     {
-      content: '角色情报',
+      content: i18n().ui_info_page,
       h: print_exp_page,
     },
     {
       config: { disabled: !awake.me },
-      content: '持有物品',
+      content: i18n().ui_storage,
       h: print_storage_page,
     },
     {
-      content: '出走情报',
+      content: i18n().ui_races,
       h: report_race_page,
     },
     {
-      config: {
-        buttonType: office_activity_filter ? 'warning' : 'info',
-      },
-      content: `筛除训练室活动 [${office_activity_filter ? '开' : '关'}]`,
-      h() {
-        era.set('flag:筛除训练室活动', !era.get('flag:筛除训练室活动'));
-      },
+      config: { buttonType: office_activity_filter ? 'warning' : 'info' },
+      content: di18n.get_activity_filter(
+        i18n().ui_office_filter_template,
+        office_activity_filter,
+      ),
+      h: () => era.set('flag:筛除训练室活动', !era.get('flag:筛除训练室活动')),
     },
     {
-      config: {
-        buttonType: out_activity_filter ? 'warning' : 'info',
-      },
-      content: `筛除外出活动 [${out_activity_filter ? '开' : '关'}]`,
-      h() {
-        era.set('flag:筛除外出活动', !era.get('flag:筛除外出活动'));
-      },
+      config: { buttonType: out_activity_filter ? 'warning' : 'info' },
+      content: di18n.get_activity_filter(
+        i18n().ui_out_filter_template,
+        out_activity_filter,
+      ),
+      h: () => era.set('flag:筛除外出活动', !era.get('flag:筛除外出活动')),
     },
     {
-      content: '保存进度',
+      content: i18n().ui_save_game,
       h: print_save_page,
     },
     {
-      content: '加载存档',
+      content: i18n().ui_load_game,
       h: print_load_page,
     },
   ]);

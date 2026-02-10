@@ -2,7 +2,11 @@ const era = require('#/era-electron');
 
 const global_achievement = require('#/system/global/sys-calc-achievement');
 
-const kojo = require('#/event/others/anniversary.kojo');
+const {
+  generate_common_dict,
+} = require('#/event/snippets/generate-dictionary');
+
+const { i18n } = require('#/i18n/selector');
 
 async function anniversary() {
   if (era.get('flag:当前回合数') % 48 === 1) {
@@ -25,15 +29,9 @@ async function anniversary() {
       case 2050:
         name = 'FIFTY';
     }
-    if (name !== undefined) {
+    if (name !== void 0) {
       era.drawLine();
-      // FLAGNAME:116 = 角色性别
-      const sex = era.get('flag:116');
-      await kojo[name]({
-        SHE: sex ? '他' : '她',
-        UMA: sex ? '马郎' : '马娘',
-        YOU: era.get('callname:0:-2'),
-      });
+      await i18n().timon.anniversary[name](generate_common_dict());
     }
     if (year >= 2009) {
       global_achievement.time_ten = 1;
