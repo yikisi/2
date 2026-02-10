@@ -36,6 +36,8 @@ const basement_owners = require('#/data/event/basement-owners');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { attr_enum } = require('#/data/train-const');
 
+const { i18n } = require('#/i18n/selector');
+
 const basement_desc = [
   '但完全没有防备',
   '但看来只需略施小计',
@@ -232,7 +234,7 @@ module.exports = async (_, save_and_next_week, flags) => {
             }
           });
       },
-      n: '虚与委蛇',
+      n: i18n().ui_bs_flatter,
     });
   } else {
     action_list.push({
@@ -270,7 +272,7 @@ module.exports = async (_, save_and_next_week, flags) => {
           await era.printAndWait([me.get_colored_name(), ' 未能破解机关……']);
         }
       },
-      n: '尝试脱困',
+      n: i18n().ui_bs_unlock,
     });
   }
   action_list.push(
@@ -279,7 +281,7 @@ module.exports = async (_, save_and_next_week, flags) => {
         action_time = get_random_value(15, 30);
         my_life_marks.b_time_buff = 1;
       },
-      n: '只是静坐',
+      n: i18n().ui_bs_relax,
     },
     {
       async h() {
@@ -290,7 +292,7 @@ module.exports = async (_, save_and_next_week, flags) => {
           ' 决定躺到床上小睡片刻恢复精神……',
         ]);
       },
-      n: '小睡片刻',
+      n: i18n().ui_bs_sleep,
     },
   );
   if (!my_life_marks.b_food_buff) {
@@ -325,7 +327,7 @@ module.exports = async (_, save_and_next_week, flags) => {
           ),
         );
       },
-      n: '略微进食',
+      n: i18n().ui_bs_eat,
     });
   }
   let action_time;
@@ -337,7 +339,7 @@ module.exports = async (_, save_and_next_week, flags) => {
           my_life_marks,
         );
       },
-      n: '邀请上床',
+      n: i18n().ui_bs_sex,
     });
     if (strike && chara_list.length === 2) {
       action_list.push({
@@ -354,9 +356,14 @@ module.exports = async (_, save_and_next_week, flags) => {
           );
           sys_like_chara(chara_list[1], 0, -get_random_value(75, 125), false);
           sys_change_pressure(chara_list[1], get_random_value(1000, 2000));
+          const sex_count =
+            era.get(`exp:${chara_list[1]}:性爱次数`) -
+            era.get(`exp:${chara_list[1]}:睡奸次数`);
+          const sex_buff = sex_count > 10 ? 2 - 10 / sex_count : 1;
           if (
             get_random_value(0, 100) <
             60 *
+              sex_buff *
               (sys_get_strength_ratio_in_fight(0, chara_list[1]) +
                 sys_get_intelligence_ratio_in_fight(0, chara_list[1]))
           ) {
@@ -394,7 +401,7 @@ module.exports = async (_, save_and_next_week, flags) => {
             );
           }
         },
-        n: '背面偷袭',
+        n: i18n().ui_bs_strike,
       });
     } else {
       action_list.push({
@@ -411,18 +418,21 @@ module.exports = async (_, save_and_next_week, flags) => {
           );
           const beat_list = chara_list.slice(1).filter(sys_check_awake);
           let win = true;
-          for (const chara_id of beat_list) {
-            sys_like_chara(chara_id, 0, -get_random_value(75, 125), false);
-            sys_change_pressure(chara_id, get_random_value(1000, 1500));
+          for (const cid of beat_list) {
+            sys_like_chara(cid, 0, -get_random_value(75, 125), false);
+            sys_change_pressure(cid, get_random_value(1000, 1500));
+            const sex_count =
+              era.get(`exp:${cid}:性爱次数`) - era.get(`exp:${cid}:睡奸次数`);
+            const sex_buff = sex_count > 10 ? 2 - 10 / sex_count : 1;
             win =
               get_random_value(0, 100) <
-                100 * sys_get_strength_ratio_in_fight(0, chara_id) && win;
+                100 * sex_buff * sys_get_strength_ratio_in_fight(0, cid) && win;
             if (win) {
               era.print('【反抗成功】');
-              await get_custom_basement(chara_id).battle_success();
+              await get_custom_basement(cid).battle_success();
             } else {
               era.print('【反抗失败】');
-              await get_custom_basement(chara_id).battle_fail();
+              await get_custom_basement(cid).battle_fail();
               break;
             }
           }
@@ -475,7 +485,7 @@ module.exports = async (_, save_and_next_week, flags) => {
             );
           }
         },
-        n: '正面反抗',
+        n: i18n().ui_bs_battle,
       });
     }
     if (is_awake === 1) {
@@ -501,7 +511,7 @@ module.exports = async (_, save_and_next_week, flags) => {
             sys_like_chara(chara_list[1], 0, -get_random_value(25, 75), false);
           }
         },
-        n: '请求释放',
+        n: i18n().ui_bs_release,
       });
     }
     action_list.push({
@@ -520,7 +530,7 @@ module.exports = async (_, save_and_next_week, flags) => {
           my_life_marks.b_timer % 60,
         );
       },
-      n: '询问时间',
+      n: i18n().ui_bs_clock,
     });
   }
   era.printInColRows(

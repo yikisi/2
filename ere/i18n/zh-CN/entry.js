@@ -235,6 +235,17 @@ class I18nEntry {
   ui_loc_event_tip = '该地点存在触发事件';
   ui_loc_celebration_tip_template = '该地点 %COUNT% 人有节庆事件';
 
+  ui_bs_flatter = '虚与委蛇';
+  ui_bs_unlock = '尝试脱困';
+  ui_bs_relax = '只是静坐';
+  ui_bs_sleep = '小睡片刻';
+  ui_bs_eat = '略微进食';
+  ui_bs_sex = '邀请上床';
+  ui_bs_strike = '背面偷袭';
+  ui_bs_battle = '正面反抗';
+  ui_bs_release = '请求释放';
+  ui_bs_clock = '询问时间';
+
   name = new (require('#/i18n/zh-CN/chara/names'))();
   title = new (require('#/i18n/zh-CN/chara/titles'))();
   title_desc = new (require('#/i18n/zh-CN/chara/title-desc'))();
