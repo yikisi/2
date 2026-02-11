@@ -15,12 +15,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
 
 const { buff_colors } = require('#/data/color-const');
 const EroParticipant = require('#/data/ero/ero-participant');
-const {
-  get_skill_list,
-  part_enum,
-  part_names,
-  touch_list,
-} = require('#/data/ero/part-const');
+const { get_skill_list, part_enum } = require('#/data/ero/part-const');
 const TeioEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-3');
 const { get_filtered_talents } = require('#/data/info-generator');
 
@@ -455,14 +450,6 @@ module.exports = class extends Edu3UntilSchoolAtrium {
         get_filtered_talents(teio.sex_code, 60)
           .filter((tid) => era.get(`talent:3:${tid}`) < 1)
           .forEach((tid) => era.set(`talent:3:${tid}`, 1));
-        touch_list
-          .filter((e) => e !== part_enum.sadism)
-          .forEach((e) =>
-            era.set(
-              `abl:3:${part_names[e]}掌握`,
-              Math.min(era.get(`abl:3:${part_names[e]}掌握`) + 1, 5),
-            ),
-          );
         sys_like_chara(3, 0, 12, true, 1) && (await era.waitAnyKey());
       }
     } else if (event_arg === 143 + 5 && event_marks.good_end === 1) {

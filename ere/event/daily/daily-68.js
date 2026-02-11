@@ -54,9 +54,11 @@ module.exports = class extends CustomizedDaily {
         ],
         [
           [
-            '今天总算是没有迟到了呢，',
-            sys_get_callname(68, 0),
-            '～那么事不宜迟，让我们开始训练吧',
+            [
+              '今天总算是没有迟到了呢，',
+              sys_get_callname(68, 0),
+              '～那么事不宜迟，让我们开始训练吧',
+            ],
           ],
           [
             '已经累出一身汗的 ',

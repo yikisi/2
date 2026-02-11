@@ -252,12 +252,24 @@ class I18nEntry {
   ui_load_game = '加载存档';
 
   ui_foreign_study_template = '%LAN%学习';
+  ui_foreign_rest = '休息调养';
+  ui_foreign_train = '适应性训练';
+  ui_foreign_travel = '旅行观光';
 
   ui_act_event_tip = '该行动存在触发事件';
   ui_loc_npc_tip_template = '该地点有 %COUNT% 人';
   ui_loc_back_tip = '存在折返触发事件';
   ui_loc_event_tip = '该地点存在触发事件';
   ui_loc_celebration_tip_template = '该地点 %COUNT% 人有节庆事件';
+
+  ui_cost_chara_stamina_tip_template = '角色体力不足 (需要：%STAMINA%)';
+  ui_cost_chara_time_tip_template = '角色精力不足 (需要：%TIME%)';
+  ui_cost_you_stamina_tip_template = '体力不足 (需要：%STAMINA%)';
+  ui_cost_you_time_tip_template = '精力不足 (需要：%TIME%)';
+  ui_cost_jpy_tip_template = '马币不足 (需要：%MONEY%)';
+  ui_foreign_lan_max_tip_template = '%LAN%已非常熟练';
+  ui_foreign_rest_max_tip = '身体已调理至健康';
+  ui_foreign_train_max_tip = '已完全适应跑道';
 
   ui_bs_flatter = '虚与委蛇';
   ui_bs_unlock = '尝试脱困';

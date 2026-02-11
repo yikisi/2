@@ -1,10 +1,8 @@
 const era = require('#/era-electron');
 
 const {
-  sys_change_attr_and_print,
   sys_get_billings,
   sys_handle_action,
-  sys_reg_race,
 } = require('#/system/sys-calc-base-cflag');
 const {
   sys_check_act_disabled,
@@ -12,30 +10,28 @@ const {
   sys_check_train_enabled,
   sys_get_move_cost,
 } = require('#/system/sys-calc-chara-param');
-const { switch_image } = require('#/system/sys-calc-image');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
 const goto_sex = require('#/page/components/goto-sex');
-const select_target = require('#/page/components/select-target');
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
 const take_care = require('#/page/components/take-care');
-const { generate_race_button } = require('#/page/homepage/snippets');
+const {
+  common_handle,
+  generate_celebration_buttons,
+  generate_common_activities,
+  generate_common_info_buttons,
+  generate_common_save_buttons,
+  generate_talk_button,
+} = require('#/page/homepage/snippets');
 const page_chairman_office = require('#/page/page-chairman-office');
 const page_clinic = require('#/page/page-clinic');
-const print_exp_page = require('#/page/page-exp');
 const print_god_shop = require('#/page/page-god-shop');
 const print_inherit_page = require('#/page/page-inherit');
 const print_juel_shop_page = require('#/page/page-juel-shop');
-const print_load_page = require('#/page/page-load-game');
 const print_out_page = require('#/page/page-out');
-const race_page = require('#/page/page-race');
 const print_recruit_page = require('#/page/page-recruit-rand');
-const reg_race_page = require('#/page/page-register-race');
-const report_race_page = require('#/page/page-report-race');
-const print_save_page = require('#/page/page-save-game');
 const print_school_page = require('#/page/page-school');
 const print_shop_page = require('#/page/page-shop');
-const print_storage_page = require('#/page/page-storage');
 const print_train_page = require('#/page/page-train');
 const page_trainer_office = require('#/page/page-trainer-office');
 const page_visitors = require('#/page/page-visitors');
@@ -55,9 +51,8 @@ const basement_owners = require('#/data/event/basement-owners');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const loc_characters = require('#/data/event/loc-characters');
-const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
-const { attr_enum, pressure_border } = require('#/data/train-const');
+const { pressure_border } = require('#/data/train-const');
 
 const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
@@ -78,28 +73,21 @@ function fill_npc_dict(dict, k, l) {
  * @param {{after_select:boolean,homepage:boolean,week_start:boolean}} flags
  */
 module.exports = async (cid, next_cb, flags) => {
-  const awake = { chara: sys_check_awake(cid), me: sys_check_awake(0) };
-  const celebration = get_celebration();
-  // CFLAGNAME:56 = 节日事件标记
-  const celebration_cost = 50 * (era.get('cflag:0:56') + 1);
-  // FLAGNAME:0 = 当前回合数
-  const cur_weeks = era.get('flag:0');
-  const event_marks = EventMarks.get(cid);
-  const my_event_marks = EventMarks.get(0);
+  const marks = { c: EventMarks.get(cid), m: EventMarks.get(0) };
+  const awake = { c: sys_check_awake(cid), m: sys_check_awake(0) };
+  const train_enabled = sys_check_train_enabled(cid);
   // CFLAGNAME:65 = 成长阶段
   const growth_stage = era.get(`cflag:${cid}:65`);
+  // CFLAGNAME:45 = 位置
+  const is_remote = era.get(`cflag:${cid}:45`) !== era.get('cflag:0:45');
   // CFLAGNAME:46 = 爱慕暂拒
   const is_love_rejected = era.get(`cflag:${cid}:46`);
   // CFLAGNAME:16 = 当前马币
   const jpy = era.get('flag:16');
-  // CFLAGNAME:45 = 位置
-  const not_in_same_loc = era.get(`cflag:${cid}:45`) !== era.get('cflag:0:45');
   // FLAGNAME:60 = 筛除训练室活动
   const office_activity_filter = era.get('flag:60');
   // FLAGNAME:61 = 筛除外出活动
   const out_activity_filter = era.get('flag:61');
-  const personal_action = get_custom_check(cid).get_personal_action();
-  const registered_race = sys_reg_race(cid).curr;
   // BASENAME:0 - 1 = 体力 - 精力
   const player_base = {
     stamina: era.get('base:0:0'),
@@ -112,7 +100,6 @@ module.exports = async (cid, next_cb, flags) => {
           time: era.get(`base:${cid}:1`),
         }
       : void 0;
-  const train_enabled = sys_check_train_enabled(cid);
   const chara = get_chara_talk(cid);
   /** @type {Record<string,number>} */
   const npc = {};
@@ -123,97 +110,52 @@ module.exports = async (cid, next_cb, flags) => {
   let temp;
   /** @type {{[acc],[config]:Record<string,any>,content:string,h:function():Promise}[][]} */
   const buttons = [];
-  buttons.push([
-    {
-      config: { width: 24 },
-      content: i18n().ui_show_team,
-      async h() {
-        // FLAGNAME:5 = 当前互动角色
-        flags.after_select = era.set('flag:5', await select_target()) !== cid;
-      },
-    },
-  ]);
-  temp =
-    event_marks.check(event_hooks.train) ||
-    my_event_marks.check(event_hooks.train);
-  buttons.push([
-    {
-      config: {
-        buttonType: temp ? 'danger' : 'warning',
-        disabled: !train_enabled || !awake.me,
-        title: di18n.get_act_tip(temp),
-      },
-      // 训自己的话显示自主训练
-      content:
-        !cid && sys_check_train_enabled(cid)
-          ? i18n().ui_self_train
-          : i18n().ui_train,
-      async h() {
+  buttons.push(
+    ...generate_common_activities(
+      cid,
+      flags,
+      marks,
+      awake,
+      train_enabled,
+      growth_stage,
+      is_remote,
+      async () => {
         // FLAGNAME:4 = 当前位置
         era.set('flag:4', location_enum.playground);
         await print_train_page();
         era.set('flag:4', location_enum.office);
       },
-    },
-    {
-      ...generate_race_button(cid, registered_race, cur_weeks),
-      async h() {
-        if (registered_race.week === cur_weeks) {
-          era.set('flag:4', location_enum.race);
-          await race_page(registered_race.race);
-          era.set('flag:4', location_enum.office);
-        } else {
-          await reg_race_page();
-        }
-      },
-    },
-    {
-      config: {
-        disabled:
-          // 当然不能上自己
-          !cid ||
-          // 没有性成熟不能上
-          growth_stage < 2 ||
-          !awake.me ||
-          not_in_same_loc,
-      },
-      content: i18n().ui_goto_sex,
-      async h() {
+      async () => {
         if (await goto_sex(cid, location_enum.restroom)) {
           flags.week_start = true;
         }
         era.set('flag:4', location_enum.office);
       },
-    },
-    {
-      acc: 999,
-      config: {
-        buttonType:
-          event_marks.check(event_hooks.week_end) ||
-          my_event_marks.check(event_hooks.week_end)
-            ? 'danger'
-            : 'warning',
-      },
-      content: i18n().ui_next_turn,
-      h: () => (flags.week_start = true),
-    },
-  ]);
+    ),
+  );
   if (!office_activity_filter) {
     const group = [];
     buttons.push(group);
-    temp = event_marks.check(event_hooks.office_study);
+    temp = [
+      marks.c.check(event_hooks.office_study),
+      {
+        mark:
+          0b10 * (player_base.time < 300) +
+          0b1000 * ((chara_base && chara_base.time) < 300),
+        time: 300,
+      },
+    ];
     group.push({
       config: {
-        buttonType: temp ? 'danger' : 'warning',
+        buttonType: temp[0] ? 'danger' : 'warning',
         disabled:
           !cid ||
           // CFLAGNAME:48 = 育成回合计时
           era.get(`cflag:${cid}:48`) >= 48 * 3 ||
-          !awake.chara ||
-          !awake.me ||
-          player_base.time < 300 ||
-          (chara_base && chara_base.time) < 300,
-        title: di18n.get_act_tip(temp),
+          !awake.c ||
+          !awake.m ||
+          temp[1].mark > 0,
+        title: di18n.get_act_tip(temp[0], temp[1]),
       },
       content: i18n().ui_office_study,
       async h() {
@@ -224,20 +166,32 @@ module.exports = async (cid, next_cb, flags) => {
         }
       },
     });
-    temp = event_marks.check(event_hooks.office_prepare);
+    temp = [
+      marks.c.check(event_hooks.office_prepare),
+      {
+        mark:
+          0b10 * (player_base.time < 300) +
+          0b1000 * ((chara_base && chara_base.time) < 300),
+        time: 300,
+      },
+    ];
     group.push(
       {
         config: {
-          buttonType: temp ? 'danger' : 'warning',
+          buttonType: temp[0] ? 'danger' : 'warning',
           disabled:
             !cid ||
             era.get(`cflag:${cid}:48`) >= 48 * 3 ||
-            !awake.chara ||
-            !awake.me ||
+            !awake.c ||
+            !awake.m ||
             jpy < 20 ||
-            player_base.time < 300 ||
-            (chara_base && chara_base.time) < 300,
-          title: di18n.get_act_tip(temp),
+            temp[1].mark > 0,
+          title: di18n.get_act_tip(
+            temp[0],
+            temp[1],
+            jpy < 20 &&
+              i18n().ui_cost_jpy_tip_template.replace('%MONEY%', '20'),
+          ),
         },
         content: i18n().ui_office_prepare,
         async h() {
@@ -250,45 +204,42 @@ module.exports = async (cid, next_cb, flags) => {
           }
         },
       },
-      {
-        // 虚空聊天就更过分了！
-        config: { disabled: !cid || !awake.me, width: 6 },
-        content: i18n().ui_talk,
-        async h() {
-          era.print(i18n().timon.get_it_talk(chara));
-          await get_custom_daily(cid).talk();
-        },
-      },
-      {
-        config: {
-          disabled:
-            // 不能给自己送礼
-            !cid ||
-            // 幼年期不能送礼
-            growth_stage < 1 ||
-            jpy < 10 ||
-            !awake.me ||
-            !awake.chara ||
-            not_in_same_loc ||
-            player_base.time < 200,
-        },
-        content: i18n().ui_office_gift,
-        async h() {
-          era.print(i18n().timon.get_it_office_gift(chara));
-          await run_custom_daily(cid, event_hooks.office_gift);
-        },
-      },
+      generate_talk_button(chara, awake.m),
     );
-    temp = event_marks.check(event_hooks.office_cook);
+    temp = { mark: 0b10 * (player_base.time < 200), time: 200 };
     group.push({
       config: {
-        buttonType: temp ? 'danger' : 'warning',
         disabled:
-          !awake.chara ||
-          !awake.me ||
-          not_in_same_loc ||
-          player_base.stamina < 100,
-        title: di18n.get_act_tip(temp),
+          // 不能给自己送礼
+          !cid ||
+          // 幼年期不能送礼
+          growth_stage < 1 ||
+          jpy < 10 ||
+          !awake.m ||
+          !awake.c ||
+          is_remote ||
+          temp.mark > 0,
+        title: di18n.get_act_tip(
+          !1,
+          temp,
+          jpy < 10 && i18n().ui_cost_jpy_tip_template.replace('%MONEY%', '10'),
+        ),
+      },
+      content: i18n().ui_office_gift,
+      async h() {
+        era.print(i18n().timon.get_it_office_gift(chara));
+        await run_custom_daily(cid, event_hooks.office_gift);
+      },
+    });
+    temp = [
+      marks.c.check(event_hooks.office_cook),
+      { mark: +(player_base.stamina < 100), stamina: 100 },
+    ];
+    group.push({
+      config: {
+        buttonType: temp[0] ? 'danger' : 'warning',
+        disabled: !awake.c || !awake.m || is_remote || temp[1].mark > 0,
+        title: di18n.get_act_tip(temp[0], temp[1]),
       },
       content: cid > 0 ? i18n().ui_office_cook : i18n().ui_self_cook,
       async h() {
@@ -303,16 +254,15 @@ module.exports = async (cid, next_cb, flags) => {
         }
       },
     });
-    temp = event_marks.check(event_hooks.office_rest);
+    temp = [
+      marks.c.check(event_hooks.office_rest),
+      { mark: 0b10 * (player_base.time < 100), time: 100 },
+    ];
     group.push({
       config: {
-        buttonType: temp ? 'danger' : 'warning',
-        disabled:
-          !awake.chara ||
-          !awake.me ||
-          not_in_same_loc ||
-          player_base.time < 100,
-        title: di18n.get_act_tip(temp),
+        buttonType: temp[0] ? 'danger' : 'warning',
+        disabled: !awake.c || !awake.m || is_remote || temp[1].mark > 0,
+        title: di18n.get_act_tip(temp[0], temp[1]),
       },
       content: cid > 0 ? i18n().ui_office_rest : i18n().ui_self_rest,
       async h() {
@@ -327,19 +277,22 @@ module.exports = async (cid, next_cb, flags) => {
         }
       },
     });
-    temp = event_marks.check(event_hooks.office_game);
+    temp = [
+      marks.c.check(event_hooks.office_game),
+      {
+        mark:
+          0b10 * (player_base.time < 300) +
+          0b1000 * ((chara_base && chara_base.time) < 300),
+        time: 300,
+      },
+    ];
     group.push({
       config: {
-        buttonType: event_marks.check(event_hooks.office_game)
+        buttonType: marks.c.check(event_hooks.office_game)
           ? 'danger'
           : 'warning',
-        disabled:
-          growth_stage < 1 ||
-          !awake.chara ||
-          !awake.me ||
-          player_base.time < 300 ||
-          (chara_base && chara_base.time) < 300,
-        title: di18n.get_act_tip(temp),
+        disabled: growth_stage < 1 || !awake.c || !awake.m || temp[1].mark > 0,
+        title: di18n.get_act_tip(temp[0], temp[1]),
       },
       content: cid > 0 ? i18n().ui_office_game : i18n().ui_self_game,
       async h() {
@@ -358,8 +311,7 @@ module.exports = async (cid, next_cb, flags) => {
     if (cid > 0 && era.get(`cflag:${cid}:50`) > 0) {
       group.push({
         config: {
-          disabled:
-            !awake.chara || !awake.me || era.get(`relation:${cid}:0`) < 76,
+          disabled: !awake.c || !awake.m || era.get(`relation:${cid}:0`) < 76,
         },
         // CFLAGNAME:58
         content:
@@ -388,71 +340,23 @@ module.exports = async (cid, next_cb, flags) => {
     ) {
       group.push({
         config: {
-          disabled: !cid || !awake.chara || !awake.me || not_in_same_loc,
+          disabled: !cid || !awake.c || !awake.m || is_remote,
         },
         content: i18n().ui_borrow_money,
         h: () => get_custom_daily(cid).borrow_money(),
       });
     }
-    // CFLAGNAME:56 = 节日事件标记
-    if (cid > 0 && era.get(`cflag:${cid}:56`) > 0) {
-      group.push({
-        config: {
-          buttonType: 'danger',
-          disabled:
-            !awake.chara ||
-            !awake.me ||
-            chara_base.time < 50 ||
-            player_base.time < celebration_cost ||
-            not_in_same_loc,
-        },
-        content: i18n().ui_celebration_template.replace(
-          '%CELEBRATION%',
-          celebration,
-        ),
-        async h() {
-          sys_change_attr_and_print(0, attr_enum.tp, -celebration_cost);
-          sys_change_attr_and_print(cid, attr_enum.tp, -50);
-          if (!(await sys_get_random_event(event_hooks.celebration, cid)())) {
-            era.drawLine();
-            era.print(i18n().timon.get_it_celebration(chara, celebration));
-            await run_custom_daily(cid, event_hooks.celebration, {});
-          }
-        },
-      });
-    }
-    // STATUSNAME:17 = 生日
-    if (cid > 0 && era.get(`status:${cid}:17`) === 2) {
-      group.push({
-        config: {
-          buttonType: 'danger',
-          disabled:
-            !awake.chara ||
-            !awake.me ||
-            chara_base.time < 50 ||
-            player_base.time < celebration_cost,
-        },
-        content: i18n().ui_birthday,
-        async h() {
-          sys_change_attr_and_print(0, attr_enum.tp, -celebration_cost);
-          sys_change_attr_and_print(cid, attr_enum.tp, -50);
-          era.print(i18n().timon.get_it_birthday(chara));
-          await run_custom_daily(cid, event_hooks.birthday, {});
-        },
-      });
-    }
-    if (personal_action.name !== undefined) {
-      group.push({
-        content: personal_action.name,
-        async h() {
-          await personal_action.handle();
-          await era.waitAnyKey();
-        },
-      });
-    }
+    group.push(
+      ...generate_celebration_buttons(
+        chara,
+        marks.c,
+        awake,
+        get_custom_check(cid).get_personal_action(),
+      ),
+    );
     if (is_love_rejected > 0 && is_love_rejected === era.get(`love:${cid}`)) {
       group.push({
-        config: { disabled: not_in_same_loc },
+        config: { disabled: is_remote },
         content: i18n().ui_check_love,
         async h() {
           // CFLAGNAME:46 = 爱慕暂拒
@@ -474,9 +378,7 @@ module.exports = async (cid, next_cb, flags) => {
       era.get(`base:${cid}:11`) < pressure_border.depression
     ) {
       group.push({
-        config: {
-          disabled: !cid || !awake.chara || !awake.me || not_in_same_loc,
-        },
+        config: { disabled: !cid || !awake.c || !awake.m || is_remote },
         content: i18n().ui_basement_me,
         async h() {
           basement_owners.push(cid);
@@ -490,285 +392,267 @@ module.exports = async (cid, next_cb, flags) => {
   if (!out_activity_filter) {
     const group = [];
     buttons.push(group);
+    temp = sys_get_move_cost(location_enum.playground);
+    temp.mark = sys_check_act_disabled(temp, player_base);
+    group.push({
+      config: {
+        buttonType: marks.m.check(
+          event_hooks.recruit_start,
+          event_hooks.recruit,
+        )
+          ? 'danger'
+          : 'warning',
+        disabled:
+          // FLAGNAME:2 = 当前月
+          era.get('flag:2') >= 4 || !awake.m || temp.mark > 0,
+        title: di18n.get_loc_tips(
+          false,
+          marks.m.check(event_hooks.recruit_start, event_hooks.recruit),
+          0,
+          0,
+          temp,
+        ),
+      },
+      content: i18n().ui_recruit,
+      async h() {
+        sys_handle_action(temp);
+        await print_recruit_page();
+      },
+    });
+    temp = sys_get_move_cost(location_enum.trainer);
+    temp.mark = sys_check_act_disabled(temp, player_base);
+    group.push({
+      config: {
+        buttonType:
+          marks.c.check(event_hooks.back_school) ||
+          marks.m.check(event_hooks.school_trainer_office) ||
+          npc.te > 0
+            ? 'danger'
+            : 'warning',
+        disabled: !awake.m || temp.mark > 0 || npc.t === 0,
+        title: di18n.get_loc_tips(
+          marks.c.check(event_hooks.back_school),
+          marks.m.check(event_hooks.school_trainer_office),
+          npc.t,
+          npc.te,
+          temp,
+        ),
+      },
+      content: i18n().ui_trainer_office,
+      async h() {
+        sys_handle_action(temp);
+        if (!(await game_guides.school_trainer_office())) {
+          await page_trainer_office();
+        }
+      },
+    });
+    temp = sys_get_move_cost(location_enum.clinic);
+    temp.mark = sys_check_act_disabled(temp, player_base);
+    group.push({
+      config: {
+        buttonType:
+          marks.c.check(event_hooks.school_clinic, event_hooks.back_school) ||
+          marks.m.check(event_hooks.school_clinic) ||
+          npc.ce > 0
+            ? 'danger'
+            : 'warning',
+        disabled: !awake.m || temp.mark > 0 || npc.c === 0,
+        title: di18n.get_loc_tips(
+          marks.c.check(event_hooks.back_school),
+          marks.c.check(event_hooks.school_clinic) ||
+            marks.c.check(event_hooks.school_clinic),
+          npc.c,
+          npc.ce,
+          temp,
+        ),
+      },
+      content: i18n().ui_clinic,
+      async h() {
+        sys_handle_action(temp);
+        if (
+          !(await game_guides.school_clinic()) &&
+          !(await sys_get_random_event(event_hooks.school_clinic)())
+        ) {
+          await page_clinic();
+        }
+      },
+    });
+    temp = sys_get_move_cost(location_enum.god, cid);
+    temp.mark = sys_check_act_disabled(temp, player_base, chara_base);
+    group.push({
+      config: {
+        buttonType:
+          marks.c.check(event_hooks.back_school) ||
+          era.get('flag:当前月') === 3 ||
+          marks.m.check(event_hooks.school_god)
+            ? 'danger'
+            : 'warning',
+        disabled:
+          growth_stage < 1 ||
+          (cid && !train_enabled) ||
+          !awake.c ||
+          !awake.m ||
+          temp.mark > 0 ||
+          is_remote,
+        title: di18n.get_loc_tips(
+          marks.c.check(event_hooks.back_school),
+          marks.m.check(event_hooks.school_god),
+          0,
+          0,
+          temp,
+          era.get('flag:当前月') === 3 &&
+            i18n().inherit_shop.ui_inherit_enabled,
+        ),
+      },
+      content: cid > 0 ? i18n().ui_god_together : i18n().ui_god_alone,
+      async h() {
+        sys_handle_action(temp, cid);
+        if (
+          !(await game_guides.school_god()) &&
+          !(await sys_get_random_event(event_hooks.school_god, cid)())
+        ) {
+          if (
+            era.get('flag:当前月') === 3 &&
+            (await select_yes_or_no(
+              i18n().inherit_shop.select_inherit_or_god,
+              i18n().inherit_shop.sig_inherit,
+              i18n().inherit_shop.sig_god,
+            ))
+          ) {
+            await print_inherit_page();
+          } else {
+            await print_god_shop();
+          }
+        }
+      },
+    });
+    temp = sys_get_move_cost(location_enum.atrium, cid);
+    temp.mark = sys_check_act_disabled(temp, player_base, chara_base);
+    group.push({
+      config: {
+        buttonType:
+          marks.c.check(event_hooks.school_atrium, event_hooks.back_school) ||
+          marks.m.check(event_hooks.school_atrium)
+            ? 'danger'
+            : 'warning',
+        disabled:
+          growth_stage < 1 ||
+          !awake.c ||
+          !awake.m ||
+          temp.mark > 0 ||
+          is_remote,
+        title: di18n.get_loc_tips(
+          marks.c.check(event_hooks.back_school),
+          marks.c.check(event_hooks.school_atrium) ||
+            marks.c.check(event_hooks.school_atrium),
+          0,
+          0,
+          temp,
+        ),
+      },
+      content: cid > 0 ? i18n().ui_atrium_together : i18n().ui_atrium_alone,
+      async h() {
+        sys_handle_action(temp, cid);
+        if (!(await game_guides.school_atrium())) {
+          await print_school_page(location_enum.atrium);
+        }
+      },
+    });
+    temp = sys_get_move_cost(location_enum.rooftop, cid);
+    temp.mark = sys_check_act_disabled(temp, player_base, chara_base);
+    group.push({
+      config: {
+        buttonType:
+          marks.c.check(event_hooks.school_rooftop, event_hooks.back_school) ||
+          marks.m.check(event_hooks.school_rooftop)
+            ? 'danger'
+            : 'warning',
+        disabled:
+          growth_stage < 1 ||
+          !awake.c ||
+          !awake.m ||
+          temp.mark > 0 ||
+          is_remote,
+        title: di18n.get_loc_tips(
+          marks.c.check(event_hooks.back_school),
+          marks.c.check(event_hooks.school_rooftop) ||
+            marks.c.check(event_hooks.school_rooftop),
+          0,
+          0,
+          temp,
+        ),
+      },
+      content: cid > 0 ? i18n().ui_rooftop_together : i18n().ui_rooftop_alone,
+      async h() {
+        sys_handle_action(temp, cid);
+        if (!(await game_guides.school_rooftop())) {
+          await print_school_page(location_enum.rooftop);
+        }
+      },
+    });
+    temp = sys_get_move_cost(location_enum.chairman);
+    temp.mark = sys_check_act_disabled(temp, player_base);
+    group.push({
+      config: {
+        buttonType:
+          marks.c.check(event_hooks.back_school) ||
+          marks.m.check(event_hooks.school_chairman) ||
+          npc.le > 0
+            ? 'danger'
+            : 'warning',
+        disabled: !awake.m || temp.mark > 0 || npc.l === 0,
+        title: di18n.get_loc_tips(
+          marks.c.check(event_hooks.back_school),
+          marks.m.check(event_hooks.school_chairman),
+          npc.l,
+          npc.le,
+          temp,
+        ),
+      },
+      content: i18n().ui_chairman_office,
+      async h() {
+        sys_handle_action(temp);
+        if (
+          !(await game_guides.school_chairman()) &&
+          !(await sys_get_random_event(event_hooks.school_chairman)())
+        ) {
+          await page_chairman_office();
+        }
+      },
+    });
+    temp = sys_get_move_cost(location_enum.visitor);
+    temp.mark = sys_check_act_disabled(temp, player_base);
     group.push(
       {
         config: {
-          buttonType: my_event_marks.check(
-            event_hooks.recruit_start,
-            event_hooks.recruit,
-          )
-            ? 'danger'
-            : 'warning',
-          disabled:
-            // FLAGNAME:2 = 当前月
-            era.get('flag:2') >= 4 ||
-            !awake.me ||
-            sys_check_act_disabled(
-              sys_get_move_cost(location_enum.playground),
-              player_base,
-            ) > 0,
-          title: di18n.get_loc_tips(
-            false,
-            my_event_marks.check(
-              event_hooks.recruit_start,
-              event_hooks.recruit,
-            ),
-          ),
-        },
-        content: i18n().ui_recruit,
-        async h() {
-          sys_handle_action(sys_get_move_cost(location_enum.playground));
-          await print_recruit_page();
-        },
-      },
-      {
-        config: {
           buttonType:
-            event_marks.check(event_hooks.back_school) ||
-            my_event_marks.check(event_hooks.school_trainer_office) ||
-            npc.te > 0
-              ? 'danger'
-              : 'warning',
-          disabled:
-            !awake.me ||
-            sys_check_act_disabled(
-              sys_get_move_cost(location_enum.trainer),
-              player_base,
-            ) > 0 ||
-            npc.t === 0,
-          title: di18n.get_loc_tips(
-            event_marks.check(event_hooks.back_school),
-            my_event_marks.check(event_hooks.school_trainer_office),
-            npc.t,
-            npc.te,
-          ),
-        },
-        content: i18n().ui_trainer_office,
-        async h() {
-          sys_handle_action(sys_get_move_cost(location_enum.trainer));
-          if (!(await game_guides.school_trainer_office())) {
-            await page_trainer_office();
-          }
-        },
-      },
-      {
-        config: {
-          buttonType:
-            event_marks.check(
-              event_hooks.school_clinic,
-              event_hooks.back_school,
-            ) ||
-            my_event_marks.check(event_hooks.school_clinic) ||
-            npc.ce > 0
-              ? 'danger'
-              : 'warning',
-          disabled:
-            !awake.me ||
-            sys_check_act_disabled(
-              sys_get_move_cost(location_enum.clinic),
-              player_base,
-            ) > 0 ||
-            npc.c === 0,
-          title: di18n.get_loc_tips(
-            event_marks.check(event_hooks.back_school),
-            event_marks.check(event_hooks.school_clinic) ||
-              event_marks.check(event_hooks.school_clinic),
-            npc.c,
-            npc.ce,
-          ),
-        },
-        content: i18n().ui_clinic,
-        async h() {
-          sys_handle_action(sys_get_move_cost(location_enum.clinic));
-          if (
-            !(await game_guides.school_clinic()) &&
-            !(await sys_get_random_event(event_hooks.school_clinic)())
-          ) {
-            await page_clinic();
-          }
-        },
-      },
-      {
-        config: {
-          buttonType:
-            event_marks.check(event_hooks.back_school) ||
-            era.get('flag:当前月') === 3 ||
-            my_event_marks.check(event_hooks.school_god)
-              ? 'danger'
-              : 'warning',
-          disabled:
-            growth_stage < 1 ||
-            (cid && !train_enabled) ||
-            !awake.chara ||
-            !awake.me ||
-            sys_check_act_disabled(
-              sys_get_move_cost(location_enum.god),
-              player_base,
-              chara_base,
-            ) > 0 ||
-            not_in_same_loc,
-          title: di18n.get_loc_tips(
-            event_marks.check(event_hooks.back_school),
-            my_event_marks.check(event_hooks.school_god),
-            0,
-            0,
-            era.get('flag:当前月') === 3 &&
-              i18n().inherit_shop.ui_inherit_enabled,
-          ),
-        },
-        content: cid > 0 ? i18n().ui_god_together : i18n().ui_god_alone,
-        async h() {
-          sys_handle_action(sys_get_move_cost(location_enum.god, cid), cid);
-          if (
-            !(await game_guides.school_god()) &&
-            !(await sys_get_random_event(event_hooks.school_god, cid)())
-          ) {
-            if (
-              era.get('flag:当前月') === 3 &&
-              (await select_yes_or_no(
-                i18n().inherit_shop.select_inherit_or_god,
-                i18n().inherit_shop.sig_inherit,
-                i18n().inherit_shop.sig_god,
-              ))
-            ) {
-              await print_inherit_page();
-            } else {
-              await print_god_shop();
-            }
-          }
-        },
-      },
-      {
-        config: {
-          buttonType:
-            event_marks.check(
-              event_hooks.school_atrium,
-              event_hooks.back_school,
-            ) || my_event_marks.check(event_hooks.school_atrium)
-              ? 'danger'
-              : 'warning',
-          disabled:
-            growth_stage < 1 ||
-            !awake.chara ||
-            !awake.me ||
-            sys_check_act_disabled(
-              sys_get_move_cost(location_enum.atrium, cid),
-              player_base,
-              chara_base,
-            ) > 0 ||
-            not_in_same_loc,
-          title: di18n.get_loc_tips(
-            event_marks.check(event_hooks.back_school),
-            event_marks.check(event_hooks.school_atrium) ||
-              event_marks.check(event_hooks.school_atrium),
-          ),
-        },
-        content: cid > 0 ? i18n().ui_atrium_together : i18n().ui_atrium_alone,
-        async h() {
-          sys_handle_action(sys_get_move_cost(location_enum.atrium, cid), cid);
-          if (!(await game_guides.school_atrium())) {
-            await print_school_page(location_enum.atrium);
-          }
-        },
-      },
-      {
-        config: {
-          buttonType:
-            event_marks.check(
-              event_hooks.school_rooftop,
-              event_hooks.back_school,
-            ) || my_event_marks.check(event_hooks.school_rooftop)
-              ? 'danger'
-              : 'warning',
-          disabled:
-            growth_stage < 1 ||
-            !awake.chara ||
-            !awake.me ||
-            sys_check_act_disabled(
-              sys_get_move_cost(location_enum.rooftop, cid),
-              player_base,
-              chara_base,
-            ) > 0 ||
-            not_in_same_loc,
-          title: di18n.get_loc_tips(
-            event_marks.check(event_hooks.back_school),
-            event_marks.check(event_hooks.school_rooftop) ||
-              event_marks.check(event_hooks.school_rooftop),
-          ),
-        },
-        content: cid > 0 ? i18n().ui_rooftop_together : i18n().ui_rooftop_alone,
-        async h() {
-          sys_handle_action(sys_get_move_cost(location_enum.rooftop, cid), cid);
-          if (!(await game_guides.school_rooftop())) {
-            await print_school_page(location_enum.rooftop);
-          }
-        },
-      },
-      {
-        config: {
-          buttonType:
-            event_marks.check(event_hooks.back_school) ||
-            my_event_marks.check(event_hooks.school_chairman) ||
-            npc.le > 0
-              ? 'danger'
-              : 'warning',
-          disabled:
-            !awake.me ||
-            sys_check_act_disabled(
-              sys_get_move_cost(location_enum.chairman),
-              player_base,
-            ) > 0 ||
-            npc.l === 0,
-          title: di18n.get_loc_tips(
-            event_marks.check(event_hooks.back_school),
-            my_event_marks.check(event_hooks.school_chairman),
-            npc.l,
-            npc.le,
-          ),
-        },
-        content: i18n().ui_chairman_office,
-        async h() {
-          sys_handle_action(sys_get_move_cost(location_enum.chairman));
-          if (
-            !(await game_guides.school_chairman()) &&
-            !(await sys_get_random_event(event_hooks.school_chairman)())
-          ) {
-            await page_chairman_office();
-          }
-        },
-      },
-      {
-        config: {
-          buttonType:
-            event_marks.check(event_hooks.back_school) ||
-            my_event_marks.check(event_hooks.school_visitors) ||
+            marks.c.check(event_hooks.back_school) ||
+            marks.m.check(event_hooks.school_visitors) ||
             npc.ve > 0
               ? 'danger'
               : 'warning',
           disabled:
-            !awake.me ||
-            sys_check_act_disabled(
-              sys_get_move_cost(location_enum.visitor),
-              player_base,
-            ) > 0 ||
-            (npc.v === 0 && !my_event_marks.check(event_hooks.school_visitors)),
+            !awake.m ||
+            temp.mark > 0 ||
+            (npc.v === 0 && !marks.m.check(event_hooks.school_visitors)),
           title: di18n.get_loc_tips(
-            event_marks.check(event_hooks.back_school),
-            my_event_marks.check(event_hooks.school_visitors),
+            marks.c.check(event_hooks.back_school),
+            marks.m.check(event_hooks.school_visitors),
             npc.v,
             npc.ve,
+            temp,
           ),
         },
         content: i18n().ui_visitors,
         async h() {
-          sys_handle_action(sys_get_move_cost(location_enum.visitor));
+          sys_handle_action(temp);
           if (!(await game_guides.school_visitors())) {
             await page_visitors();
           }
         },
       },
       {
-        config: { disabled: !awake.me },
+        config: { disabled: !awake.m },
         content: i18n().ui_school_shop,
         async h() {
           // FLAGNAME:4 = 当前位置
@@ -796,65 +680,54 @@ module.exports = async (cid, next_cb, flags) => {
           era.set('flag:4', location_enum.office);
         },
       },
-      {
-        // 幼年期只能呆在训练室
-        config: {
-          buttonType:
-            event_marks.check(
-              event_hooks.out_start,
-              event_hooks.out_river,
-              event_hooks.out_shopping,
-              event_hooks.out_church,
-              event_hooks.out_station,
-              event_hooks.back_school,
-            ) || my_event_marks.check(event_hooks.out_start)
-              ? 'danger'
-              : 'warning',
-          disabled:
-            growth_stage < 1 ||
-            !awake.chara ||
-            !awake.me ||
-            sys_check_act_disabled(
-              sys_get_move_cost(location_enum.gate, cid),
-              player_base,
-              chara_base,
-            ) > 0 ||
-            not_in_same_loc,
-          title: di18n.get_loc_tips(
-            event_marks.check(event_hooks.back_school),
-            event_marks.check(
-              event_hooks.out_start,
-              event_hooks.out_river,
-              event_hooks.out_shopping,
-              event_hooks.out_church,
-              event_hooks.out_station,
-            ) || event_marks.check(event_hooks.out_start),
-          ),
-        },
-        content: cid > 0 ? i18n().ui_out_together : i18n().ui_out_alone,
-        async h() {
-          sys_handle_action(sys_get_move_cost(location_enum.gate, cid), cid);
-          era.set('flag:4', location_enum.gate);
-          await print_out_page();
-          era.set('flag:4', location_enum.office);
-        },
-      },
     );
+    temp = sys_get_move_cost(location_enum.gate, cid);
+    temp.mark = sys_check_act_disabled(temp, player_base, chara_base);
+    group.push({
+      // 幼年期只能呆在训练室
+      config: {
+        buttonType:
+          marks.c.check(
+            event_hooks.out_start,
+            event_hooks.out_river,
+            event_hooks.out_shopping,
+            event_hooks.out_church,
+            event_hooks.out_station,
+            event_hooks.back_school,
+          ) || marks.m.check(event_hooks.out_start)
+            ? 'danger'
+            : 'warning',
+        disabled:
+          growth_stage < 1 ||
+          !awake.c ||
+          !awake.m ||
+          temp.mark > 0 ||
+          is_remote,
+        title: di18n.get_loc_tips(
+          marks.c.check(event_hooks.back_school),
+          marks.c.check(
+            event_hooks.out_start,
+            event_hooks.out_river,
+            event_hooks.out_shopping,
+            event_hooks.out_church,
+            event_hooks.out_station,
+          ) || marks.c.check(event_hooks.out_start),
+          0,
+          0,
+          temp,
+        ),
+      },
+      content: cid > 0 ? i18n().ui_out_together : i18n().ui_out_alone,
+      async h() {
+        sys_handle_action(temp, cid);
+        era.set('flag:4', location_enum.gate);
+        await print_out_page();
+        era.set('flag:4', location_enum.office);
+      },
+    });
   }
   buttons.push([
-    {
-      content: i18n().ui_info_page,
-      h: print_exp_page,
-    },
-    {
-      config: { disabled: !awake.me },
-      content: i18n().ui_storage,
-      h: print_storage_page,
-    },
-    {
-      content: i18n().ui_races,
-      h: report_race_page,
-    },
+    ...generate_common_info_buttons(awake.m),
     {
       config: { buttonType: office_activity_filter ? 'warning' : 'info' },
       content: di18n.get_activity_filter(
@@ -871,49 +744,9 @@ module.exports = async (cid, next_cb, flags) => {
       ),
       h: () => era.set('flag:筛除外出活动', !era.get('flag:筛除外出活动')),
     },
-    {
-      content: i18n().ui_save_game,
-      h: print_save_page,
-    },
-    {
-      content: i18n().ui_load_game,
-      h: print_load_page,
-    },
+    ...generate_common_save_buttons(),
   ]);
-
-  era.printInColRows(
-    [{ type: 'divider' }],
-    ...buttons.map((g, gi) =>
-      g.map((b, bi) => ({
-        accelerator: b.acc || (gi + 1) * 100 + bi,
-        config: {
-          ...b.config,
-          width: (b.config || {}).width || 6,
-        },
-        content: b.content,
-        type: 'button',
-      })),
-    ),
-  );
-
-  const ret = await era.input();
-  era.drawLine();
-  let button;
-  switch (ret) {
-    case 990:
-      switch_image();
-      break;
-    case 991:
-      await report_race_page();
-      break;
-    default:
-      if (ret === 999) {
-        button = buttons[0].find((e) => e.acc === ret);
-      } else {
-        button = buttons[Math.floor(ret / 100) - 1][ret % 100];
-      }
-      await button.h();
-  }
+  await common_handle(buttons);
   if (flags.week_start) {
     await next_cb(cid, location_enum.office, location_enum.home);
   }

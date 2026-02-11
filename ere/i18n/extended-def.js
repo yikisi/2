@@ -1,6 +1,57 @@
 const get_titled_content = require('#/i18n/get-titled-content');
 const { __, i18n, lan } = require('#/i18n/selector');
 
+/**
+ * @typedef CostInfo
+ * @property {number} mark
+ * @property {number} [stamina]
+ * @property {number} [time]
+ * @property {number} [ctime]
+ */
+
+/**
+ * @param {string[]} ret
+ * @param {I18nEntry} _
+ * @param {CostInfo} cost_info
+ */
+function fill_cost_info(ret, _, cost_info) {
+  if (!cost_info) {
+    return;
+  }
+  if ((cost_info.mark & (1 << 0)) > 0) {
+    ret.push(
+      _.ui_cost_you_stamina_tip_template.replace(
+        '%STAMINA%',
+        Math.ceil(cost_info.stamina).toLocaleString(lan()),
+      ),
+    );
+  }
+  if ((cost_info.mark & (1 << 1)) > 0) {
+    ret.push(
+      _.ui_cost_you_time_tip_template.replace(
+        '%TIME%',
+        Math.ceil(cost_info.time).toLocaleString(lan()),
+      ),
+    );
+  }
+  if ((cost_info.mark & (1 << 2)) > 0) {
+    ret.push(
+      _.ui_cost_chara_stamina_tip_template.replace(
+        '%STAMINA%',
+        Math.ceil(cost_info.stamina).toLocaleString(lan()),
+      ),
+    );
+  }
+  if ((cost_info.mark & (1 << 3)) > 0) {
+    ret.push(
+      _.ui_cost_chara_time_tip_template.replace(
+        '%TIME%',
+        Math.ceil(cost_info.ctime || cost_info.time).toLocaleString(lan()),
+      ),
+    );
+  }
+}
+
 /** 基于 i18n 衍生的定义，不需要修改 */
 const di18n = {
   get n_attr() {
@@ -91,9 +142,19 @@ const di18n = {
     i18n()
       .ui_too_long_template.replace('%WIDTH%', width.toString())
       .replace('%WIDTH*2%', (width * 2).toString()),
-  /** @param {boolean} has_event */
-  get_act_tip(has_event) {
-    return has_event ? i18n().ui_act_event_tip : void 0;
+  /**
+   * @param {boolean} has_event
+   * @param {CostInfo} [cost_info]
+   * @param {string} [additional]
+   */
+  get_act_tip(has_event, cost_info, ...additional) {
+    const ret = [];
+    if (has_event) {
+      ret.push(i18n().ui_act_event_tip);
+    }
+    additional.forEach((add) => add && ret.push(add));
+    fill_cost_info(ret, i18n(), cost_info);
+    return ret.join('\n') || void 0;
   },
   get_activity_filter: (template, is_on) =>
     template.replace('%STATUS%', is_on ? i18n().ui_on : i18n().ui_off),
@@ -102,6 +163,7 @@ const di18n = {
    * @param {boolean} has_event
    * @param {number} npc_count
    * @param {number} event_count
+   * @param {{mark:number,stamina:number,time:number}} cost_info
    * @param {string} [additional]
    */
   get_loc_tips(
@@ -109,7 +171,8 @@ const di18n = {
     has_event,
     npc_count = 0,
     event_count = 0,
-    additional,
+    cost_info,
+    ...additional
   ) {
     const _ = i18n();
     const ret = [];
@@ -132,9 +195,8 @@ const di18n = {
         ),
       );
     }
-    if (additional) {
-      ret.push(additional);
-    }
+    additional.forEach((add) => add && ret.push(add));
+    fill_cost_info(ret, _, cost_info);
     return ret.join('\n') || void 0;
   },
   name: {

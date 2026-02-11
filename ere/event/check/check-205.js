@@ -137,6 +137,30 @@ module.exports = class extends CustomizedCheck {
     }
   }
 
+  is_aim_race(race, edu_weeks, rank) {
+    if (race === race_enum.japa_cup) {
+      return new TreveEduMarks().japa_cup;
+    }
+    return super.is_aim_race(race, edu_weeks, rank);
+  }
+
+  is_prison() {
+    return (
+      era.get('cflag:205:招募状态') === recruit_flags.yes && super.is_prison()
+    );
+  }
+
+  is_rape_in_sleeping() {
+    return (
+      era.get('cflag:205:招募状态') === recruit_flags.yes &&
+      super.is_rape_in_sleeping()
+    );
+  }
+
+  get_aim_races() {
+    return aim_races;
+  }
+
   get_edu_aims() {
     const buffer = [];
     const races = RaceHistory.get(205);
@@ -161,25 +185,5 @@ module.exports = class extends CustomizedCheck {
       content: `5场其他G1比赛 一着 ${g1_count}/5 ${g1_count >= 5 ? '✔' : '✘'}`,
     });
     return buffer;
-  }
-
-  is_aim_race(race, edu_weeks, rank) {
-    if (race === race_enum.japa_cup) {
-      return new TreveEduMarks().japa_cup;
-    }
-    return super.is_aim_race(race, edu_weeks, rank);
-  }
-
-  is_prison() {
-    return (
-      era.get('cflag:205:招募状态') === recruit_flags.yes && super.is_prison()
-    );
-  }
-
-  is_rape_in_sleeping() {
-    return (
-      era.get('cflag:205:招募状态') === recruit_flags.yes &&
-      super.is_rape_in_sleeping()
-    );
   }
 };

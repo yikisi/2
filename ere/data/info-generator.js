@@ -220,24 +220,24 @@ module.exports = {
   get_breast_cup,
   /**
    * FLAGNAME:0 = 当前回合数
-   * @param {number} [_weeks]
+   * @param {number=} weeks
+   * @returns {string}
    */
-  get_celebration(_weeks = era.get('flag:0')) {
-    const weeks = (_weeks - 1) % 48;
-    switch (weeks) {
-      case 0: // 一月第一周
+  get_celebration(weeks = era.get('flag:0')) {
+    switch (weeks % 48) {
+      case 1: // 一月第一周
         return '新年';
-      case 5: //二月第二周
+      case 6: //二月第二周
         return '情人节';
-      case 8: //三月第一周
+      case 9: //三月第一周
         return '殿堂周';
-      case 13: //四月第二周
+      case 14: //四月第二周
         return '粉丝感谢祭';
-      case 29: //八月第二周
+      case 30: //八月第二周
         return '庙会';
-      case 39: // 十月第四周
+      case 40: // 十月第四周
         return '万圣节';
-      case 47: //十二月第四周
+      case 0: //十二月第四周
         return '圣诞节';
       default:
         return '';

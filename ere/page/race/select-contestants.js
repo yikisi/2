@@ -4,6 +4,8 @@ const { sys_reg_race } = require('#/system/sys-calc-base-cflag');
 const { sys_check_race_ready } = require('#/system/sys-calc-chara-param');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
+const get_display_name = require('#/utils/calc-display-name');
+
 const recruit_flags = require('#/data/event/recruit-flags');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
@@ -42,23 +44,20 @@ async function select_contestants(race) {
             type: 'text',
           },
         ],
-        {
-          columns: contestants.map((e) => {
-            return {
-              accelerator: e,
-              config: {
-                align: 'center',
-                buttonType: dict[e] ? 'warning' : 'info',
-                width: 6,
-              },
-              content: `${era.get(`callname:${e}:-1`)} [${
-                dict[e] ? '出走' : '避战'
-              }]`,
-              type: 'button',
-            };
-          }),
-          config: { horizontalAlign: 'center' },
-        },
+        contestants.map((e) => {
+          return {
+            accelerator: e,
+            config: {
+              align: 'center',
+              buttonType: dict[e] ? 'warning' : 'info',
+              width: 8,
+            },
+            content: `${get_display_name(era.get(`callname:${e}:-1`))} [${
+              dict[e] ? '出走' : '避战'
+            }]`,
+            type: 'button',
+          };
+        }),
         [
           {
             accelerator: 1000,

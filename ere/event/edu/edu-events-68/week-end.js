@@ -1,6 +1,5 @@
 const era = require('#/era-electron');
 
-const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
 const {
   begin_and_init_ero,
   end_ero_and_train,
@@ -13,12 +12,11 @@ const {
 const { add_event } = require('#/event/queue');
 const add_jewel_reward = require('#/event/snippets/add-jewel-reward');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
+const masturbate = require('#/event/snippets/masturbate');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { gacha } = require('#/utils/list-utils');
 
-const EroParticipant = require('#/data/ero/ero-participant');
-const { part_enum } = require('#/data/ero/part-const');
 const KitaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-68');
 const event_hooks = require('#/data/event/event-hooks');
 const { location_enum } = require('#/data/locations');
@@ -169,14 +167,8 @@ module.exports = async (kita, me, hook, event_object) => {
       `而后，一阵难以想象是 ${kita.name} 发出的放荡浪叫和拍打肉体的声音，毫不遮掩地从男厕所里喷溅出来。`,
     );
     begin_and_init_ero(0, 68);
-    const part = kita.sex_code - 1 ? '阴道' : '阴茎';
     era.set('palam:68:受虐快感', era.get('tcvar:68:受虐快感上限'));
-    era.set(`palam:68:${part}快感`, era.get(`tcvar:68:${part}快感上限`));
-    await quick_make_love(
-      new EroParticipant(0, part_enum.hit),
-      new EroParticipant(68, part_enum.anal),
-      false,
-    );
+    await masturbate(this.id);
     end_ero_and_train(false);
     era.println();
     sys_like_chara(68, 0, 5, true, 5);

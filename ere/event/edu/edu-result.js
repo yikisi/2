@@ -19,6 +19,8 @@ const { buff_colors } = require('#/data/color-const');
 const event_hooks = require('#/data/event/event-hooks');
 const { attr_enum, fumble_result } = require('#/data/train-const');
 
+const { i18n } = require('#/i18n/selector');
+
 /** @param {number} cid */
 function handle_rest_cost(cid) {
   change_attr_and_print(cid, attr_enum.tp, -get_random_value(50, 200));
@@ -54,34 +56,34 @@ function handle_travel_cost(cid) {
 
 /**
  * @param {number} cid
- * @param {string} lan_name
+ * @param {number} aid
  */
-function learn_language(cid, lan_name) {
+function learn_language(cid, aid) {
   change_attr_and_print(cid, attr_enum.intelligence, get_random_value(10, 20));
-  let level = era.get(`abl:${cid}:${lan_name}语`);
+  let level = era.get(`abl:${cid}:${aid}`);
   if (level === 0) {
-    level = era.add(`abl:${cid}:${lan_name}语`, 1);
+    level = era.add(`abl:${cid}:${aid}`, 1);
     era.print([
       get_chara_talk(cid).get_colored_name(),
       ' 学会了 ',
       {
-        content: `${lan_name}语`,
+        content: i18n().tb_abl[aid],
         fontWeight: 'bold',
       },
       '！',
     ]);
   } else if (level < 5) {
-    level = era.add(`abl:${cid}:${lan_name}语`, 1);
+    level = era.add(`abl:${cid}:${aid}`, 1);
     era.print([
       get_chara_talk(cid).get_colored_name(),
       ' 的 ',
       {
-        content: `${lan_name}语`,
+        content: i18n().tb_abl[aid],
         fontWeight: 'bold',
       },
       ' 更加熟练了，现在是 ',
       {
-        content: `Lv.${level.toString()}`,
+        content: i18n().tb_abl.lv_template.replace('%LEVEL%', level.toString()),
         fontWeight: 'bold',
       },
       '！',
@@ -137,7 +139,7 @@ handlers[event_hooks.foreign_rest] = async (cid) => {
 /**
  * @param {number} cid
  * @param {HookArg} hook
- * @param {{lan:string}} extra_flag
+ * @param {{lan:number}} extra_flag
  */
 handlers[event_hooks.foreign_study] = async (cid, hook, extra_flag) => {
   change_attr_and_print(0, attr_enum.tp, -get_random_value(200, 400));

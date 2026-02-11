@@ -2045,7 +2045,7 @@ module.exports = {
       {
         // TALENTNAME:7 = 坦率程度
         c: () =>
-          era.get(`talent:${chara.id}:7`) === 1 &&
+          era.get(`talent:${chara.id}:7`) === -1 &&
           era.get(`exp:${chara.id}:20`) === 0,
         async h() {
           await era.printAndWait([
@@ -2056,7 +2056,7 @@ module.exports = {
       },
       {
         c: () =>
-          era.get(`talent:${chara.id}:7`) === 1 &&
+          era.get(`talent:${chara.id}:7`) === -1 &&
           era.get(`exp:${chara.id}:20`) > 0,
         async h() {
           await era.printAndWait([
@@ -2069,7 +2069,7 @@ module.exports = {
       },
       {
         c:
-          era.get(`talent:${chara.id}:7`) === 1 &&
+          era.get(`talent:${chara.id}:7`) === -1 &&
           era.get(`exp:${chara.id}:20`) > 0,
         async h() {
           await era.printAndWait([

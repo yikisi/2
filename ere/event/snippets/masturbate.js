@@ -7,7 +7,7 @@ const EroParticipant = require('#/data/ero/ero-participant');
 const { part_enum } = require('#/data/ero/part-const');
 
 async function masturbate(chara_id) {
-  if (era.get(`cflag:${chara_id}:阴道尺寸`)) {
+  if (era.get(`cflag:${chara_id}:阴道尺寸`) > 0) {
     set_palam_to_max(chara_id, part_enum.virgin);
     await quick_make_love(
       new EroParticipant(chara_id, part_enum.hand),

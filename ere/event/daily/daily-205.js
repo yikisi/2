@@ -153,8 +153,11 @@ module.exports = class extends CustomizedDaily {
   office_game() {
     return get_chara_talk(205).say_and_wait(
       get_random_entry([
-        `${sys_get_callname(205, 0)}！为什么有人会把Umaisoft叫育婊啊？`,
-        '《刺客信条：特雷森》……从各个方面来说都是对系列所有前作进行的一次全面超越——',
+        [
+          sys_get_colored_callname(this.id, 0),
+          '！为什么有人会把 Umaisoft 叫育婊啊？',
+        ],
+        '《〇客信条：特雷森》……从各个方面来说都是对系列所有前作进行的一次全面超越——',
       ]),
     );
   }
