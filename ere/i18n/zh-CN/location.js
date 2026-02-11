@@ -1,0 +1,36 @@
+class I18nLocation {
+  office = '训练室';
+  playground = '训练场';
+  atrium = '中庭';
+  rooftop = '天台';
+  restroom = '休息室';
+  chairman = '理事长办公室';
+  gate = '学园大门';
+  basement = '地下室';
+  river = '河边';
+  church = '神社';
+  shopping = '商店街';
+  station = '车站';
+  mejiro = '目白城';
+  beach = '海边';
+  beach_market = '海边市集';
+  beach_train = '海边';
+  paris = '巴黎';
+  home = '自宅';
+  hotel = '酒店';
+  love_hotel = '情人酒店';
+  summer_home = '夏合宿宿舍';
+  school_shop = '神秘的小卖部';
+  race = '赛场';
+  hongkong = '香港';
+  guangzhou = '广州';
+  new_york = '纽约';
+  hot_spring = '温泉';
+  god = '三女神像';
+  trainer = '训练员办公室';
+  visitor = '访客接待室';
+  clinic = '保健室';
+  dubai = '迪拜';
+}
+
+module.exports = I18nLocation;

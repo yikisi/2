@@ -11,8 +11,10 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const chara_info_type = require('#/data/chara-info-type');
 const event_hooks = require('#/data/event/event-hooks');
-const { location_enum, location_name } = require('#/data/locations');
+const { location_enum } = require('#/data/locations');
 const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
+
+const { i18n } = require('#/i18n/selector');
 
 module.exports = async (location) => {
   await era.clear();
@@ -34,7 +36,9 @@ module.exports = async (location) => {
         ? ['和 ', get_chara_talk(cid).get_colored_name(), ' 一起']
         : ['独自']),
       vehicle ? `${vehicle_verbs[vehicle]}着 ${vehicle_names[vehicle]} ` : '',
-      `前往 ${location_name[location]}】`,
+      '前往 ',
+      i18n().location[location_enum.keys[location]],
+      '】',
     ]);
     await run_custom_daily(cid, hook);
     era.drawLine();

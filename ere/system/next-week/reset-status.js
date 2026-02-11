@@ -32,7 +32,6 @@ const LoveLimitStatus = require('#/data/love-limit-status');
 const RaceHistory = require('#/data/race/model/race-history');
 
 const di18n = require('#/i18n/extended-def');
-const { i18n } = require('#/i18n/selector');
 
 /**
  * @param {number[]} characters
@@ -434,12 +433,7 @@ async function reset_status(
         p +
         (new CharaTitles(c)
           .get()
-          .findIndex(
-            (t) =>
-              t['wins'] ||
-              t.n === 'e_100w' ||
-              t.n === i18n('zh-CN').title.e_100w,
-          ) !==
+          .findIndex((t) => t['wins'] || t.n === 'e_100w') !==
           -1),
       0,
     );

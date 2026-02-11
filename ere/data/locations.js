@@ -65,51 +65,17 @@ const location_enum = {
   dubai: 0,
 };
 Object.keys(location_enum).forEach((k, i) => (location_enum[k] = i));
-
-const location_name = [];
-location_name[location_enum.office] = '训练室';
-location_name[location_enum.playground] = '训练场';
-location_name[location_enum.atrium] = '中庭';
-location_name[location_enum.rooftop] = '天台';
-location_name[location_enum.restroom] = '休息室';
-location_name[location_enum.chairman] = '理事长办公室';
-location_name[location_enum.gate] = '学园大门';
-location_name[location_enum.basement] = '地下室';
-location_name[location_enum.river] = '河边';
-location_name[location_enum.church] = '神社';
-location_name[location_enum.shopping] = '商店街';
-location_name[location_enum.station] = '车站';
-location_name[location_enum.mejiro] = '目白城';
-location_name[location_enum.beach] = '海边';
-location_name[location_enum.beach_market] = '海边市集';
-location_name[location_enum.beach_train] = '海边';
-location_name[location_enum.paris] = '巴黎';
-location_name[location_enum.home] = '自宅';
-location_name[location_enum.hotel] = '酒店';
-location_name[location_enum.love_hotel] = '情人酒店';
-location_name[location_enum.summer_home] = '夏合宿宿舍';
-location_name[location_enum.school_shop] = '神秘的小卖部';
-location_name[location_enum.race] = '赛场';
-location_name[location_enum.hongkong] = '香港';
-location_name[location_enum.guangzhou] = '广州';
-location_name[location_enum.new_york] = '纽约';
-location_name[location_enum.hot_spring] = '温泉';
-location_name[location_enum.god] = '三女神像';
-location_name[location_enum.trainer] = '训练员办公室';
-location_name[location_enum.visitor] = '访客接待室';
-location_name[location_enum.clinic] = '保健室';
-location_name[location_enum.dubai] = '迪拜';
+location_enum.keys = Object.keys(location_enum);
 
 const foreign_locations = {
-  [location_name[location_enum.dubai]]: 1,
-  [location_name[location_enum.guangzhou]]: 1,
-  [location_name[location_enum.hongkong]]: 1,
-  [location_name[location_enum.new_york]]: 1,
-  [location_name[location_enum.paris]]: 1,
+  [location_enum.dubai]: 1,
+  [location_enum.guangzhou]: 1,
+  [location_enum.hongkong]: 1,
+  [location_enum.new_york]: 1,
+  [location_enum.paris]: 1,
 };
 
 module.exports = {
   foreign_locations,
   location_enum,
-  location_name,
 };

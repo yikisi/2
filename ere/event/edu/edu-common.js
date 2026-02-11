@@ -24,7 +24,7 @@ const CharaTitles = require('#/data/chara-titles');
 const { buff_colors, money_color } = require('#/data/color-const');
 const { lust_border } = require('#/data/ero/orgasm-const');
 const event_hooks = require('#/data/event/event-hooks');
-const { location_enum, location_name } = require('#/data/locations');
+const { location_enum } = require('#/data/locations');
 const RaceHistory = require('#/data/race/model/race-history');
 const RaceInfo = require('#/data/race/model/race-info');
 const { class_enum } = require('#/data/race/model/race-info');
@@ -58,12 +58,7 @@ class CustomizedEdu extends CustomizedEvent {
             t.n === 'r_3crown_f' ||
             t.n === 'r_3crown_m' ||
             t.n === 'r_3crown_d' ||
-            t.n === 'r_3crown_a' ||
-            t.n === i18n('zh-CN').title.r_3crown_c ||
-            t.n === i18n('zh-CN').title.r_3crown_f ||
-            t.n === i18n('zh-CN').title.r_3crown_m ||
-            t.n === i18n('zh-CN').title.r_3crown_d ||
-            t.n === i18n('zh-CN').title.r_3crown_a
+            t.n === 'r_3crown_a'
           );
         }) !== -1) ||
       (check >= 3 &&
@@ -74,13 +69,7 @@ class CustomizedEdu extends CustomizedEvent {
             t.n === 'r_3crown_mi' ||
             t.n === 'r_3crown_di' ||
             t.n === 'r_3crown_ai' ||
-            t.n === 'r_6crown' ||
-            t.n === i18n('zh-CN').title.r_3crown_ci ||
-            t.n === i18n('zh-CN').title.r_3crown_fi ||
-            t.n === i18n('zh-CN').title.r_3crown_mi ||
-            t.n === i18n('zh-CN').title.r_3crown_di ||
-            t.n === i18n('zh-CN').title.r_3crown_ai ||
-            t.n === i18n('zh-CN').title.r_6crown
+            t.n === 'r_6crown'
           );
         }) !== -1);
     let title = CharaTitles.get(chara.id).get_colored_curr_title();
@@ -416,7 +405,7 @@ class CustomizedEdu extends CustomizedEvent {
     await i18n().timon.edu.foreign_travel(
       chara,
       me,
-      location_name[era.get('flag:4')],
+      i18n().location[location_enum.keys[era.get('flag:4')]],
     );
   }
 

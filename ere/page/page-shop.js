@@ -4,9 +4,9 @@ const { sys_change_money } = require('#/system/sys-calc-flag');
 
 const { attr_change_colors, money_color } = require('#/data/color-const');
 const date_indicator = require('#/data/date-indicator');
-const { location_name } = require('#/data/locations');
+const { location_enum } = require('#/data/locations');
 
-const { __ } = require('#/i18n/selector');
+const { __, i18n } = require('#/i18n/selector');
 
 /** @param {({id:number,[limit]:boolean}|number)[]} item_list */
 async function print_shop_page(item_list) {
@@ -23,7 +23,7 @@ async function print_shop_page(item_list) {
   const price = {};
   const limit = {};
   // FLAGNAME:4 = 当前位置
-  const cur_loc = era.get('flag:4');
+  const cur_loc = i18n().location[location_enum.keys[era.get('flag:4')]];
   // FLAGNAME:119 = 道具价格
   // FLAGNAME:1 = 当前年
   const price_ratio =
@@ -233,7 +233,7 @@ async function print_shop_page(item_list) {
       {
         accelerator: 999,
         config: { align: 'right', width: 6 },
-        content: `离开 ${location_name[cur_loc]}`,
+        content: `离开 ${cur_loc}`,
         type: 'button',
       },
     );
@@ -263,7 +263,7 @@ async function print_shop_page(item_list) {
           },
           {
             config: { width: 10 },
-            content: `位于 ${location_name[cur_loc]}`,
+            content: `位于 ${cur_loc}`,
             type: 'text',
           },
         ],

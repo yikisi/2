@@ -2,8 +2,10 @@ const era = require('#/era-electron');
 
 const print_page_header = require('#/page/components/page-header');
 
-const { location_name } = require('#/data/locations');
+const { location_enum } = require('#/data/locations');
 const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
+
+const { i18n } = require('#/i18n/selector');
 
 async function arrive_location(loc) {
   await era.clear();
@@ -14,7 +16,7 @@ async function arrive_location(loc) {
     '【',
     vehicle > 0 ? `${vehicle_verbs[vehicle]}着 ${vehicle_names[vehicle]} ` : '',
     '抵达了 ',
-    location_name[loc],
+    i18n().location[location_enum.keys[loc]],
     '】',
   ]);
 }

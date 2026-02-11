@@ -59,7 +59,7 @@ const {
   get_love_info,
   get_relation_info,
 } = require('#/data/info-generator');
-const { location_enum, location_name } = require('#/data/locations');
+const { location_enum } = require('#/data/locations');
 
 const di18n = require('#/i18n/extended-def');
 const { __, i18n } = require('#/i18n/selector');
@@ -382,7 +382,9 @@ async function page_ero(lover, skip_start_end = false) {
       {
         config: { align: in_base ? 'left' : 'right', width: 16 },
         content: [
-          `位于 ${location_name[era.get('flag:当前位置')]} `,
+          '位于 ',
+          i18n().location[location_enum.keys[era.get('flag:当前位置')]],
+          ' ',
           {
             content: era.get('tflag:全身镜') > 0 ? '全身镜前' : '',
             color: buff_colors[2],

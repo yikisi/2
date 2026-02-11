@@ -6,7 +6,7 @@ const { get_hair_color } = require('#/data/color-const');
 const { lust_border } = require('#/data/ero/orgasm-const');
 const { part_enum } = require('#/data/ero/part-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
-const { location_name } = require('#/data/locations');
+const { location_enum } = require('#/data/locations');
 
 const { i18n } = require('#/i18n/selector');
 
@@ -73,7 +73,7 @@ function sys_get_ero_image(
   ret.push({
     borderRadius: 20,
     names: in_train
-      ? `位置_${location_name[era.get('flag:当前位置')]}`
+      ? `位置_${i18n('zh-CN').location[location_enum.keys[era.get('flag:当前位置')]]}`
       : '位置_自宅',
   });
   if (dict[cid]) {

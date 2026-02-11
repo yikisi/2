@@ -30,8 +30,6 @@ const RaceHistory = require('#/data/race/model/race-history');
 const RaceInfo = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
-const { i18n } = require('#/i18n/selector');
-
 const aim_races = {};
 aim_races[race_enum.begin_race] = 2;
 
@@ -294,12 +292,7 @@ module.exports = class extends CustomizedCheck {
       }
       if (!event_marks.famous_in_famous && edu_weeks >= 96) {
         const titles = CharaTitles.get(this.id).get();
-        if (
-          titles.findIndex(
-            (t) =>
-              t.n === 'r_3crown_c' || t.n === i18n('zh-CN').title.r_3crown_c,
-          ) !== -1
-        ) {
+        if (titles.findIndex((t) => t.n === 'r_3crown_c') !== -1) {
           event_marks.famous_in_famous++;
           add_event(
             event_hooks.out_start,

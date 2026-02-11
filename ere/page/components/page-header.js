@@ -27,7 +27,7 @@ const {
   get_trainer_title,
   get_trainer_train_buff,
 } = require('#/data/info-generator');
-const { location_name } = require('#/data/locations');
+const { location_enum } = require('#/data/locations');
 const { creditors, get_trainer_color } = require('#/data/other-const');
 const { race_infos } = require('#/data/race/race-const');
 
@@ -177,7 +177,8 @@ function page_header(enable_race_info) {
             content: [
               '位于 ',
               {
-                content: location_name[era.get('flag:当前位置')],
+                content:
+                  i18n().location[location_enum.keys[era.get('flag:当前位置')]],
                 fontWeight: 'bold',
               },
             ],

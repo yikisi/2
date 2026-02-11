@@ -291,6 +291,7 @@ class I18nEntry {
   timon = new (require('#/i18n/zh-CN/timon/entry'))();
 
   new_game = new (require('#/i18n/zh-CN/new-game'))();
+  location = new (require('#/i18n/zh-CN/location'))();
   achievement = new (require('#/i18n/zh-CN/achieve'))();
   achieve_desc = new (require('#/i18n/zh-CN/achieve-desc'))();
   note = new (require('#/i18n/zh-CN/notes'))();
