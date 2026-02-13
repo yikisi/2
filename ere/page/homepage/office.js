@@ -22,6 +22,7 @@ const {
   generate_common_info_buttons,
   generate_common_save_buttons,
   generate_talk_button,
+  get_c_base,
 } = require('#/page/homepage/snippets');
 const page_chairman_office = require('#/page/page-chairman-office');
 const page_clinic = require('#/page/page-clinic');
@@ -88,18 +89,8 @@ module.exports = async (cid, next_cb, flags) => {
   const office_activity_filter = era.get('flag:60');
   // FLAGNAME:61 = 筛除外出活动
   const out_activity_filter = era.get('flag:61');
-  // BASENAME:0 - 1 = 体力 - 精力
-  const player_base = {
-    stamina: era.get('base:0:0'),
-    time: era.get('base:0:1'),
-  };
-  const chara_base =
-    cid > 0
-      ? {
-          stamina: era.get(`base:${cid}:0`),
-          time: era.get(`base:${cid}:1`),
-        }
-      : void 0;
+  const player_base = get_c_base(0);
+  const chara_base = get_c_base(cid || void 0);
   const chara = get_chara_talk(cid);
   /** @type {Record<string,number>} */
   const npc = {};

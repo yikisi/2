@@ -305,6 +305,13 @@ const di18n = {
         i18n().kojo[0].pn_3_desc,
       ];
     },
+    get_npc_talk: (cid) => i18n().kojo[cid].npc_talk ?? i18n().timon.npc_talk,
+    get_npc_sex: (cid) => i18n().kojo[cid].npc_sex ?? i18n().timon.npc_sex,
+    get_npc_out: (cid) => i18n().kojo[cid].npc_out ?? i18n().timon.npc_out,
+    get_npc_celebration: (cid, celebration) =>
+      i18n().kojo[cid].get_npc_celebration(celebration) ??
+      i18n().timon.get_npc_celebration(celebration),
+    get_npc_bye: (cid) => i18n().kojo[cid].npc_bye ?? i18n().timon.npc_bye,
   },
   timon: {
     get eds_slave() {

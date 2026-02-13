@@ -28,6 +28,7 @@ const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const { creditors } = require('#/data/other-const');
 
+const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 /** @type {Record<string,function(CharaTalk,CharaTalk):{[handle]:function:Promise,[name]:string}>} */
@@ -425,25 +426,21 @@ async function page_visitors() {
             title,
             {
               async handle() {},
-              name: '聊天',
+              name: di18n.kojo.get_npc_talk(cid),
             },
             {
               loc: visitor_list.length > 1 && location_enum.restroom,
-              name: '求爱',
-              fail_cb() {
-                flag_visitor = flag_page = false;
-              },
+              name: di18n.kojo.get_npc_sex(cid),
+              fail_cb: () => (flag_visitor = flag_page = false),
             },
             {
               loc: location_enum.visitor,
-              name: '约会',
+              name: di18n.kojo.get_npc_out(cid),
               print_out_page,
             },
-            {
-              name: `庆祝 ${celebration}`,
-            },
+            { name: di18n.kojo.get_npc_celebration(cid, celebration) },
             handlers[cid](chara, me),
-            { name: '再见' },
+            { name: di18n.kojo.get_npc_bye(cid) },
           );
           if ((flag_visitor &&= temp_flag)) {
             await era.clear();

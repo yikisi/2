@@ -38,6 +38,7 @@ const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const { attr_enum } = require('#/data/train-const');
 const era = require('#/era-electron');
+const di18n = require('#/i18n/extended-def');
 const get_display_name = require('#/utils/calc-display-name');
 
 /** @type {Record<string,function(CharaTalk,CharaTalk):{handle:function:Promise,name:string}>} */
@@ -226,27 +227,21 @@ async function page_trainer_office() {
             title,
             {
               async handle() {},
-              name: '聊天',
+              name: di18n.kojo.get_npc_talk(chara.id),
             },
             {
               loc: trainer_list.length > 1 && location_enum.restroom,
-              name: '求爱',
-              fail_cb() {
-                flag_trainer = flag_page = false;
-              },
+              name: di18n.kojo.get_npc_sex(chara.id),
+              fail_cb: () => (flag_trainer = flag_page = false),
             },
             {
               loc: location_enum.trainer,
-              name: '约会',
+              name: di18n.kojo.get_npc_out(chara.id),
               print_out_page,
             },
-            {
-              name: `庆祝 ${celebration}`,
-            },
+            { name: di18n.kojo.get_npc_celebration(chara.id, celebration) },
             handlers[ret](chara, me),
-            {
-              name: '再见',
-            },
+            { name: di18n.kojo.get_npc_bye(chara.id) },
           );
           if ((flag_trainer &&= temp_flag)) {
             await clear();

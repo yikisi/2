@@ -34,6 +34,9 @@ const yandere_list = require('#/data/event/yandere-list');
 const { get_celebration, get_relation_info } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 
+const di18n = require('#/i18n/extended-def');
+const { i18n } = require('#/i18n/selector');
+
 async function page_chairman_office() {
   let flag_page = true;
   let nothing = true;
@@ -54,7 +57,7 @@ async function page_chairman_office() {
           chara,
           title,
           {
-            name: '「闲 谈！无聊了来找你玩！」',
+            name: di18n.kojo.get_npc_talk(chara.id),
             async handle() {
               nothing = false;
               switch (get_relation_info(302).level) {
@@ -99,7 +102,7 @@ async function page_chairman_office() {
                   flag_page = false;
               }
             },
-            name: '「做 爱！我想操你！」',
+            name: di18n.kojo.get_npc_sex(chara.id),
           },
           {
             async handle() {
@@ -112,11 +115,11 @@ async function page_chairman_office() {
               await print_out_page();
               era.set('flag:当前位置', location_enum.chairman);
             },
-            name: '「约 会！一起出去走走吧！」',
+            name: di18n.kojo.get_npc_out(chara.id),
           },
           {
             handle: async () => (nothing = false),
-            name: `「庆 贺！${celebration} 快乐！」`,
+            name: di18n.kojo.get_npc_celebration(chara.id, celebration),
           },
           {
             async handle() {
@@ -291,7 +294,7 @@ async function page_chairman_office() {
                 }
               }
             },
-            name: '「抗 议！训练场没有想训的爱马！」',
+            name: i18n().kojo[chara.id].npc_func,
           },
           {
             async handle() {
@@ -305,7 +308,7 @@ async function page_chairman_office() {
                 }
               }
             },
-            name: '「再 会！走了走了！」',
+            name: di18n.kojo.get_npc_bye(chara.id),
           },
           () => (nothing = false),
         );
@@ -314,17 +317,19 @@ async function page_chairman_office() {
         temp_flag = await npc_common(
           chara,
           title,
-          { name: '聊天' },
+          { name: di18n.kojo.get_npc_talk(chara.id) },
           {
-            name: '求爱',
-            fail_cb() {
-              flag_page = false;
-            },
+            name: di18n.kojo.get_npc_sex(chara.id),
+            fail_cb: () => (flag_page = false),
           },
-          { loc: location_enum.chairman, name: '约会', print_out_page },
-          { name: `庆祝 ${celebration}` },
+          {
+            loc: location_enum.chairman,
+            name: di18n.kojo.get_npc_out(chara.id),
+            print_out_page,
+          },
+          { name: di18n.kojo.get_npc_celebration(chara.id, celebration) },
           get_riko_button(chara, get_chara_talk(0)),
-          { name: '再见' },
+          { name: di18n.kojo.get_npc_bye(chara.id) },
         );
     }
     if ((flag_page &&= temp_flag)) {

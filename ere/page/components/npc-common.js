@@ -39,7 +39,7 @@ const {
 const { location_enum } = require('#/data/locations');
 const { attr_enum } = require('#/data/train-const');
 
-const { __ } = require('#/i18n/selector');
+const { __, i18n } = require('#/i18n/selector');
 
 /**
  * @param {CharaTalk} chara
@@ -49,7 +49,7 @@ const { __ } = require('#/i18n/selector');
  * @param {{name:string,handle:function():Promise}|{name:string,loc:number,print_out_page:function():Promise}} out_cb
  * @param {{name:string,[handle]:function():Promise}} cele_cb
  * @param {{name:string,handle:function():Promise,[disabled]:boolean}|{}} func_cb
- * @param {{name:string,[handle]:function():Promise}} back_cb
+ * @param {{name:string,[handle]:function():Promise}} bye_cb
  * @param {function()} [birth_cb]
  * @returns {Promise<boolean|void>}
  */
@@ -61,7 +61,7 @@ async function npc_common(
   out_cb,
   cele_cb,
   func_cb,
-  back_cb,
+  bye_cb,
   birth_cb,
 ) {
   const relation = get_relation_info(chara.id);
@@ -108,12 +108,9 @@ async function npc_common(
             await goto_sex(chara.id, sex_cb.loc || era.get('flag:当前位置'))
           ) {
             case true:
-              await era.printAndWait([
-                chara.get_colored_name(),
-                ' 与 ',
-                get_chara_talk(0).get_colored_name(),
-                ' 约定晚上在家见面……',
-              ]);
+              await era.printAndWait(
+                i18n().timon.get_it_home_sex(chara, get_chara_talk(0)),
+              );
               break;
             case 2:
               sex_cb.fail_cb();
@@ -125,15 +122,11 @@ async function npc_common(
     {
       b: {
         config: { disabled: era.get('base:0:精力') < 200 || !is_awake },
-        content: '送礼物',
+        content: i18n().ui_office_gift,
       },
       async h() {
         era.drawLine();
-        era.print([
-          '给 ',
-          get_chara_talk(chara.id).get_colored_name(),
-          ' 送上了一份小礼物……',
-        ]);
+        era.print(i18n().timon.get_it_office_gift(chara));
         era.println();
         await run_custom_daily(chara.id, event_hooks.office_gift);
       },
@@ -180,7 +173,7 @@ async function npc_common(
       },
     },
   ];
-  if (func_cb.handle !== undefined) {
+  if (func_cb.handle !== void 0) {
     buttons.push({
       b: {
         config: { disabled: !is_awake || func_cb.disabled },
@@ -213,13 +206,7 @@ async function npc_common(
           !(await sys_get_random_event(event_hooks.celebration, chara.id)())
         ) {
           era.drawLine();
-          era.print([
-            '【和 ',
-            chara.get_colored_name(),
-            ' 一起庆祝了 ',
-            get_celebration(),
-            '】',
-          ]);
+          era.print(i18n().timon.get_it_celebration(chara, get_celebration()));
           await run_custom_daily(chara.id, event_hooks.celebration, {});
         }
       },
@@ -236,13 +223,13 @@ async function npc_common(
             player_base.time < celebration_cost ||
             relation_check,
         },
-        content: '庆祝生日',
+        content: i18n().ui_birthday,
       },
       async h() {
         birth_cb && (await birth_cb());
         sys_change_attr_and_print(0, attr_enum.tp, -celebration_cost);
         sys_change_attr_and_print(chara.id, attr_enum.tp, -50);
-        era.print(['【向 ', chara.get_colored_name(), ' 祝贺生日快乐】']);
+        era.print(i18n().timon.get_it_birthday(chara));
         await run_custom_daily(chara.id, event_hooks.birthday, {});
       },
     });
@@ -256,7 +243,9 @@ async function npc_common(
         b: {
           config: { disabled: era.get(`relation:${chara.id}:0`) < 76 },
           content:
-            era.get(`cflag:${chara.id}:照看`) > 0 ? '切换照看角色' : '请求照看',
+            era.get(`cflag:${chara.id}:照看`) > 0
+              ? i18n().ui_change_take_care
+              : i18n().ui_ask_take_care,
         },
         h: take_care.bind(void 0, chara),
       });
@@ -265,7 +254,7 @@ async function npc_common(
       era.get(`exp:${chara.id}:性爱次数`) > era.get(`exp:${chara.id}:睡奸次数`)
     ) {
       buttons.push({
-        b: { content: '提升对方性爱能力' },
+        b: { content: i18n().ui_ero_update },
         h: print_juel_shop_page.bind(void 0, chara.id),
       });
     }
@@ -275,14 +264,11 @@ async function npc_common(
     era.get(`cflag:${chara.id}:爱慕暂拒`) === era.get(`love:${chara.id}`)
   ) {
     buttons.push({
-      b: { content: '重新触发爱慕事件' },
+      b: { content: i18n().ui_check_love },
       async h() {
         era.set(`cflag:${chara.id}:爱慕暂拒`, 0);
         get_custom_check(chara.id).check_love_events();
-        await era.printAndWait([
-          chara.get_colored_name(),
-          { content: ' 似乎决定重新审视你们之间的关系……' },
-        ]);
+        await era.printAndWait(i18n().timon.get_it_check_love(chara));
       },
     });
   }
@@ -374,7 +360,7 @@ async function npc_common(
       })),
       {
         accelerator: 99,
-        content: back_cb.name,
+        content: bye_cb.name,
         type: 'button',
       },
     ],
@@ -383,8 +369,8 @@ async function npc_common(
   const ret = await era.input();
   era.drawLine();
   if (ret === 99) {
-    if (back_cb.handle) {
-      await back_cb.handle();
+    if (bye_cb.handle) {
+      await bye_cb.handle();
     }
     return false;
   } else {

@@ -37,6 +37,19 @@ const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 module.exports = {
+  /**
+   * @param {number|undefined} cid
+   * @returns {{stamina:number,time:number}|undefined}
+   */
+  get_c_base(cid) {
+    if (cid === void 0) {
+      return cid;
+    }
+    return {
+      stamina: era.get(`base:${cid}:体力`),
+      time: era.get(`base:${cid}:精力`),
+    };
+  },
   async common_handle(buttons) {
     era.printInColRows(
       [{ type: 'divider' }],

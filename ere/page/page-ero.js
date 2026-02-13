@@ -99,7 +99,7 @@ function get_ero_marks(cid) {
     const lv = era.get(`mark:${cid}:${i}`);
     if (lv > 0) {
       status_list.push({
-        color: get_color(undefined, mark_colors[i], lv / 3),
+        color: get_color(void 0, mark_colors[i], lv / 3),
         content: i18n()
           .tb_mark.abbr_template.replace('%MARK%', di18n.tb_mark.abbr[i])
           .replace('%LEVEL%', lv.toString()),

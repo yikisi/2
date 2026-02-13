@@ -8,6 +8,7 @@ const sys_get_random_event = require('#/system/sys-get-random-event');
 const print_chara_info = require('#/page/components/cur-chara-info');
 const npc_common = require('#/page/components/npc-common');
 const print_page_header = require('#/page/components/page-header');
+const { get_c_base } = require('#/page/homepage/snippets');
 const MejiroCity = require('#/page/mejiro/mejiro-common');
 
 const { run_custom_daily } = require('#/event/daily/daily-factory');
@@ -23,8 +24,11 @@ const EventMarks = require('#/data/event/event-marks');
 const TokinoLifeMarks = require('#/data/event/life-event-marks/life-event-marks-301');
 const recruit_flags = require('#/data/event/recruit-flags');
 const yandere_list = require('#/data/event/yandere-list');
+const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
+
+const di18n = require('#/i18n/extended-def');
 
 require('#/page/mejiro/free-mejiro');
 require('#/page/mejiro/call-of-mejiro');
@@ -52,17 +56,8 @@ function get_position_buttons(positions, event_marks) {
 async function out_page() {
   let cid = era.get('flag:当前互动角色');
   let vehicle;
-  const player_base = {
-    stamina: era.get('base:0:体力'),
-    time: era.get('base:0:精力'),
-  };
-  const chara_base =
-    cid > 0
-      ? {
-          stamina: era.get(`base:${cid}:体力`),
-          time: era.get(`base:${cid}:精力`),
-        }
-      : undefined;
+  const player_base = get_c_base(0);
+  const chara_base = get_c_base(cid || void 0);
 
   await era.clear();
   print_page_header();
@@ -131,14 +126,12 @@ async function out_page() {
                   ' 聊了会天】',
                 ]);
               },
-              name: '聊天',
+              name: di18n.kojo.get_npc_talk(temp.chara.id),
             },
             {
-              fail_cb() {
-                temp.flag = false;
-              },
+              fail_cb: () => (temp.flag = false),
               loc: location_enum.restroom,
-              name: '求爱',
+              name: di18n.kojo.get_npc_sex(temp.chara.id),
             },
             {
               async handle() {
@@ -199,10 +192,13 @@ async function out_page() {
                 }
                 temp.flag = false;
               },
-              name: '邀请外出',
+              name: di18n.kojo.get_npc_out(temp.chara.id),
             },
             {
-              name: '庆贺',
+              name: di18n.kojo.get_npc_celebration(
+                temp.chara.id,
+                get_celebration(),
+              ),
             },
             era.get('cflag:301:招募状态') === recruit_flags.yes ||
               new TokinoLifeMarks().who_am_i !== 2
@@ -231,7 +227,7 @@ async function out_page() {
                   ' 离开了】',
                 ]);
               },
-              name: '再会',
+              name: di18n.kojo.get_npc_bye(temp.chara.id),
             },
           );
           if ((temp.flag &&= temp_flag)) {
@@ -248,9 +244,7 @@ async function out_page() {
             ? era.get('flag:多人载具')
             : era.get('flag:多人载具') || era.get('flag:单人载具');
         era.printMultiColumns([
-          {
-            type: 'divider',
-          },
+          { type: 'divider' },
           {
             content: [
               '【',

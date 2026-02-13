@@ -22,6 +22,12 @@ class I18nTimon {
   strange_desc = (debuff) =>
     `彼此还很不熟悉……训练效果-${debuff}%；改善关系或与担当训练员谈论此事可改善该状态。`;
 
+  npc_talk = '聊天';
+  npc_sex = '求爱';
+  npc_out = '约会';
+  get_npc_celebration = (celebration) => `庆祝 ${celebration}`;
+  npc_bye = '再见';
+
   /** @param {CharaTalk} chara */
   get_it_office_study = (chara) => [
     '【指导了 ',
@@ -95,6 +101,16 @@ class I18nTimon {
     ' 的请求，',
     chara.get_colored_name(),
     ' 似乎有些意动……',
+  ];
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} you
+   */
+  get_it_home_sex = (chara, you) => [
+    chara.get_colored_name(),
+    ' 与 ',
+    you.get_colored_name(),
+    '约定晚上在家见面……',
   ];
 
   ed_saying_01 = '九尺二间陋室里，红唇依竹共恩情。——高杉晋作';

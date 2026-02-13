@@ -14,6 +14,7 @@ const {
   generate_common_info_buttons,
   generate_common_save_buttons,
   generate_talk_button,
+  get_c_base,
 } = require('#/page/homepage/snippets');
 const print_train_page = require('#/page/page-train');
 
@@ -48,18 +49,8 @@ module.exports = async (cid, save_and_next_week, flags) => {
   // FLAGNAME:4 = 当前位置
   const cur_location = era.get('flag:4');
   const event_marks = EventMarks.get(cid);
-  // BASENAME:0 - 1 = 体力 - 精力
-  const player_base = {
-    stamina: era.get('base:0:0'),
-    time: era.get('base:0:1'),
-  };
-  const chara_base =
-    cid > 0
-      ? {
-          stamina: era.get(`base:${cid}:0`),
-          time: era.get(`base:${cid}:1`),
-        }
-      : void 0;
+  const player_base = get_c_base(0);
+  const chara_base = get_c_base(cid || void 0);
   // FLAGNAME:16 = 当前马币
   const jpy = era.get('flag:16');
   const lan = location2language[cur_location];

@@ -15,10 +15,11 @@ const { get_custom_ero } = require('#/event/ero/ero-factory');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 const add_jewel_reward = require('#/event/snippets/add-jewel-reward');
 
+const get_display_name = require('#/utils/calc-display-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { gacha } = require('#/utils/list-utils');
 const get_child_name = require('#/utils/naming');
-const { get_random_value } = require('#/utils/value-utils');
+const { get_display_width, get_random_value } = require('#/utils/value-utils');
 
 const { buff_colors } = require('#/data/color-const');
 const { get_date } = require('#/data/date-indicator');
@@ -60,13 +61,13 @@ async function rename() {
   let ret = '';
   while (flag) {
     if (w_length) {
-      era.print('孩子的名字不能超过 8 个字符！');
+      era.print(di18n.get_too_long(8));
     }
     if (w_duplicate) {
       era.print(di18n.name.check_duplicate(ret, w_duplicate));
     }
     ret = (await era.input()).toString();
-    w_length = ret.length > 8;
+    w_length = get_display_width(ret) > 8;
     w_duplicate = check_duplicate(ret);
     if (!w_length && !w_duplicate) {
       return ret;
@@ -108,7 +109,7 @@ async function name_baby(cid, fid, mid) {
   } else if (
     (!mid || !fid) &&
     rand_param > 0 &&
-    ret.replace(/\d+$/, '').length !== ret.length &&
+    (ret = get_display_name(ret)).replace(/\d+$/, '').length !== ret.length &&
     (await select_yes_or_no([
       get_chara_talk(mid).get_colored_name(),
       ' 的孩子起名为 ',

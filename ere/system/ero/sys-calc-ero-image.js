@@ -73,7 +73,7 @@ function sys_get_ero_image(
   ret.push({
     borderRadius: 20,
     names: in_train
-      ? `位置_${i18n('zh-CN').location[location_enum.keys[era.get('flag:当前位置')]]}`
+      ? `位置_${i18n('zh-CN').location[location_enum.keys[era.get('flag:当前位置')]]}\t位置_酒店`
       : '位置_自宅',
   });
   if (dict[cid]) {

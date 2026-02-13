@@ -17,6 +17,8 @@ const recruit_flags = require('#/data/event/recruit-flags');
 const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 
+const di18n = require('#/i18n/extended-def');
+
 async function page_clinic() {
   let flag_page = true;
   await arrive_location(era.set('flag:当前位置', location_enum.clinic));
@@ -27,15 +29,17 @@ async function page_clinic() {
     const temp = await npc_common(
       chara,
       title,
-      { name: '闲聊' },
+      { name: di18n.kojo.get_npc_talk(chara.id) },
       {
-        name: '邀请上床',
-        fail_cb() {
-          flag_page = false;
-        },
+        name: di18n.kojo.get_npc_sex(chara.id),
+        fail_cb: () => (flag_page = false),
       },
-      { loc: location_enum.clinic, name: '约会', print_out_page },
-      { name: `庆祝 ${celebration}` },
+      {
+        loc: location_enum.clinic,
+        name: di18n.kojo.get_npc_out(chara.id),
+        print_out_page,
+      },
+      { name: di18n.kojo.get_npc_celebration(chara.id, celebration) },
       era.get('cflag:305:招募状态') !== recruit_flags.yes &&
         era.get('love:305') >= 25
         ? {
@@ -50,7 +54,7 @@ async function page_clinic() {
             },
           }
         : {},
-      { name: '再见' },
+      { name: di18n.kojo.get_npc_bye(chara.id) },
     );
     if ((flag_page &&= temp)) {
       await era.clear();

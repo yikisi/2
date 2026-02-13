@@ -52,7 +52,7 @@ class MejiroCity {
   get_positions(cid, p_base, c_base) {
     let m_disabled;
     let m_title = [];
-    if (c_base === undefined) {
+    if (!c_base) {
       m_disabled = true;
       m_title.push('目白城不欢迎独身的旅客……');
     } else {
