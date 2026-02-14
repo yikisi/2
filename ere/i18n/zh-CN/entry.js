@@ -13,7 +13,7 @@ class I18nEntry {
   abbr_hp = '体';
   abbr_tp = '精';
 
-  ui_moti = '干劲';
+  ui_mot = '干劲';
   moti_0 = '极差';
   moti_1 = '较差';
   moti_2 = '一般';
@@ -36,6 +36,7 @@ class I18nEntry {
   edu_0 = '新秀年';
   edu_1 = '经典年';
   edu_2 = '资深年';
+  pre_edu = '待入学';
 
   a_edu_0 = '新秀';
   a_edu_1 = '经典';
@@ -56,6 +57,8 @@ class I18nEntry {
   title_2 = '性奴';
   title_3 = '孕袋';
 
+  ui_love = '爱慕';
+  ui_love_template = '爱慕：%LOVEINFO%';
   love_u = '？';
   love_0 = '平常';
   love_1 = '朦胧';
@@ -65,6 +68,8 @@ class I18nEntry {
   love_5 = '佳偶';
   love_6 = '依存';
 
+  ui_relation = '好感';
+  ui_relation_template = '好感：%RELATIONINFO%';
   relation_u = '？';
   relation_0 = '失望';
   relation_1 = '怀疑';
@@ -202,7 +207,42 @@ class I18nEntry {
   ui_pg_next = '后一页';
   ui_default = '默认';
   ui_game_over = 'GAME OVER';
+  ui_invalid_value = '-';
 
+  ui_no_target = '未选择互动角色';
+  get_ui_cur_chara_info = (
+    title,
+    name,
+    palace,
+    growth,
+    motivation,
+    edu,
+    race,
+  ) => [
+    '当前角色：',
+    ...title,
+    name,
+    palace,
+    ' (',
+    growth,
+    ')',
+    ...motivation,
+    edu,
+    ...race,
+  ];
+  ui_palace_template = '[%PALACE%]';
+  get_ui_motivation = (motivation) => [this.ui_mot, motivation];
+  ui_edu_template = '%EDU%';
+  get_ui_race_indicator = (race, delta) => [
+    '(距 ',
+    race,
+    ' 还有 ',
+    delta,
+    ' 周)',
+  ];
+  get_ui_curr_race_indicator = (race) => ['(本周有 ', race, ')'];
+
+  ui_change_image = '切换立绘';
   ui_show_team = '查看队伍列表';
   ui_train = '训练';
   ui_self_train = '自主训练';

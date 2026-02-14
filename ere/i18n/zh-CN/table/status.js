@@ -1,6 +1,10 @@
 class I18nStatus {
   template = '[%NAME%]';
 
+  n_status = '状态';
+
+  normal = '正常';
+
   remote = '远程';
 
   pr_1 = '不快';

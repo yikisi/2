@@ -9,8 +9,11 @@ module.exports = class extends I18nEntry {
   toughness = 'Guts';
   intelligence = 'Wiz';
 
-  abbr_hp = 'HP';
-  abbr_tp = 'TP';
+  hp = 'HP';
+  tp = 'TP';
+
+  abbr_hp = this.hp;
+  abbr_tp = this.tp;
 
   edu_0 = 'Junior';
   edu_1 = 'Classic';
@@ -20,12 +23,16 @@ module.exports = class extends I18nEntry {
   a_edu_1 = this.edu_1;
   a_edu_2 = this.edu_2;
 
-  ui_moti = 'Motivation';
+  ui_mot = 'Mot.';
   moti_0 = 'Worst';
   moti_1 = 'Worse';
   moti_2 = 'Normal';
   moti_3 = 'Better';
   moti_4 = 'Best';
+
+  ui_love = 'Love';
+
+  ui_relation = 'Rel.';
 
   tt_birthday_notify = (birth_list) => [
     'Today is the birthday of ',
@@ -79,6 +86,35 @@ module.exports = class extends I18nEntry {
   ui_money_template = '¥%MONEY%';
   ui_get_date = (year, month, week) => ['Week ', week, ' ', month, '/', year];
   ui_month_template = '%MONTH% months';
+
+  get_ui_cur_chara_info = (
+    title,
+    name,
+    palace,
+    growth,
+    motivation,
+    edu,
+    race,
+  ) => [
+    'Target: ',
+    ...title,
+    name,
+    palace,
+    ' (',
+    growth,
+    ')',
+    ...motivation,
+    edu,
+    ...race,
+  ];
+  get_ui_race_indicator = (race, delta) => [
+    '(',
+    race,
+    ': in ',
+    delta,
+    ' weeks)',
+  ];
+  get_ui_curr_race_indicator = (race) => ['(Current Week: ', race, ')'];
 
   name = new (require('#/i18n/en-US/chara/names'))();
 

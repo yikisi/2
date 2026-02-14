@@ -62,7 +62,7 @@ function cur_chara_component(cid, type, location_npc) {
             },
             {
               config: { width: 2 },
-              content: '好感',
+              content: i18n().ui_relation,
               type: 'text',
             },
             {
@@ -70,7 +70,7 @@ function cur_chara_component(cid, type, location_npc) {
               content: relation.full(),
               type: 'text',
             },
-            { config: { width: 2 }, content: '爱慕', type: 'text' },
+            { config: { width: 2 }, content: i18n().ui_love, type: 'text' },
             {
               config: { color: love_colors[love.level], width: 22 },
               content: love.full(),
@@ -87,7 +87,7 @@ function cur_chara_component(cid, type, location_npc) {
       era.printMultiColumns([
         { type: 'divider' },
         {
-          content: '未选择互动角色',
+          content: i18n().ui_no_target,
           type: 'text',
           config: { align: 'center' },
         },
@@ -104,32 +104,35 @@ function cur_chara_component(cid, type, location_npc) {
     const motivation = era.get(`cflag:${cid}:干劲`);
     const out_of_train = era.get(`cflag:${cid}:殿堂`);
     const race = era.get(`cflag:${cid}:种族`);
-    /** @type {*[]} */
-    const name_columns = ['当前角色：'];
-    if (title) {
-      name_columns.push(title, ' ');
-    }
-    name_columns.push(get_chara_talk(cid).get_colored_name());
-    if (out_of_train >= 1) {
-      name_columns.push(` [${di18n.n_oot[out_of_train - 1]}]`);
-    }
-    name_columns.push(` (${get_growth(growth, 1)})`);
+    const title_info = title ? [' ', title] : [];
+    const palace_info =
+      out_of_train >= 1
+        ? ' ' +
+          i18n().ui_palace_template.replace(
+            '%PALACE%',
+            di18n.n_oot[out_of_train - 1],
+          )
+        : '';
+    const growth_info = get_growth(growth, 1);
+    let mot_info = [];
+    let edu_info = '';
+    let race_info = [];
     if (era.get('flag:当前位置') !== location_enum.basement) {
       if (in_train) {
-        name_columns.push(
+        mot_info = [
           ' ',
-          i18n().ui_moti,
-          {
+          ...i18n().get_ui_motivation({
             color: motivation_colors[motivation + 2],
             content: di18n.n_moti[motivation + 2],
-          },
-          ' ',
-          get_train_year(cid),
-        );
+          }),
+        ];
+        edu_info =
+          ' ' + i18n().ui_edu_template.replace('%EDU%', get_train_year(cid));
       } else if (race > 0 && !out_of_train && (growth === 2 || growth === 3)) {
-        name_columns.push(' 待入学');
+        edu_info =
+          ' ' + i18n().ui_edu_template.replace('%EDU%', i18n().pre_edu);
       }
-      name_columns.push(...race_indicator(cid));
+      race_info = race_indicator(cid);
     }
     location_npc &&
       (temp = CharaTitles.get(location_npc).get_colored_curr_title());
@@ -138,7 +141,20 @@ function cur_chara_component(cid, type, location_npc) {
       status_list = get_status(cid);
     era.printInColRows(
       {
-        columns: [{ content: name_columns, type: 'text' }],
+        columns: [
+          {
+            content: i18n().get_ui_cur_chara_info(
+              title_info,
+              get_chara_talk(cid).get_colored_name(),
+              palace_info,
+              growth_info,
+              mot_info,
+              edu_info,
+              race_info,
+            ),
+            type: 'text',
+          },
+        ],
         config: { width: 18 },
       },
       {
@@ -186,7 +202,7 @@ function cur_chara_component(cid, type, location_npc) {
             ? {
                 accelerator: 990,
                 config: { showAcc: false },
-                content: '切换立绘',
+                content: i18n().ui_change_image,
                 type: 'button',
               }
             : { content: '\n', type: 'text' },
@@ -209,7 +225,7 @@ function cur_chara_component(cid, type, location_npc) {
             ? [
                 {
                   config: { width: 2 },
-                  content: '气性',
+                  content: i18n().feature.n_chara,
                   type: 'text',
                 },
                 {
@@ -221,17 +237,18 @@ function cur_chara_component(cid, type, location_npc) {
             : []),
           {
             config: { width: 2 },
-            content: '状态',
+            content: i18n().tb_status.n_status,
             type: 'text',
           },
           {
             config: { width: 16 + !(race && growth >= 1) * 6 },
-            content: status_list.length > 0 ? status_list : '正常',
+            content:
+              status_list.length > 0 ? status_list : i18n().tb_status.normal,
             type: 'text',
           },
           {
             config: { width: 2 },
-            content: '好感',
+            content: i18n().ui_relation,
             type: 'text',
           },
           {
@@ -239,7 +256,7 @@ function cur_chara_component(cid, type, location_npc) {
             content: relation.full(),
             type: 'text',
           },
-          { config: { width: 2 }, content: '爱慕', type: 'text' },
+          { config: { width: 2 }, content: i18n().ui_love, type: 'text' },
           {
             config: { color: love_colors[love.level], width: 4 },
             content: love.full(),
@@ -276,7 +293,10 @@ function cur_chara_component(cid, type, location_npc) {
                         (temp = get_relation_info(location_npc)).level
                       ],
                     content: temp.mark(),
-                    title: `好感：${temp.full()}`,
+                    title: i18n().ui_relation_template.replace(
+                      '%RELATIONINFO%',
+                      temp.full(),
+                    ),
                   },
                 ],
                 type: 'text',
@@ -288,7 +308,10 @@ function cur_chara_component(cid, type, location_npc) {
                     color:
                       love_colors[(temp = get_love_info(location_npc)).level],
                     content: temp.mark(),
-                    title: `爱慕：${temp.full()}`,
+                    title: i18n().ui_love_template.replace(
+                      '%LOVEINFO%',
+                      temp.full(),
+                    ),
                   },
                 ],
                 type: 'text',

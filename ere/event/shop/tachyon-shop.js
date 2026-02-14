@@ -105,10 +105,10 @@ module.exports = {
   async shop_start() {
     const src_chara = get('cflag:0:模版角色');
     if (src_chara !== 32) {
-      const callname = sys_get_callname(32, 0),
-        me = get_chara_talk(0),
-        tachyon = get_chara_talk(32),
-        { first } = new TachyonLifeMarks();
+      const callname = sys_get_callname(32, 0);
+      const me = get_chara_talk(0);
+      const tachyon = get_chara_talk(32);
+      const { first } = new TachyonLifeMarks();
       if (get('cflag:32:招募状态') === recruit_flags.yes) {
         if (get('relation:32:0') > 75 && get('love:32') >= 75 && first) {
           tachyon.say([

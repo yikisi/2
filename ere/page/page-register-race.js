@@ -11,6 +11,7 @@ const { get_custom_check } = require('#/event/check/check-factory');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 const game_guides = require('#/event/others/game-guides');
 
+const get_display_name = require('#/utils/calc-display-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { get_chara_color } = require('#/data/chara-colors');
@@ -191,23 +192,23 @@ async function reg_race_page() {
         (!curr || edu_weeks + round - cur_round < 48 * 3
           ? dict[round + 1] || []
           : []
-        ).forEach((e) => {
-          const ground = race_infos[e].ground;
-          const distance = race_infos[e].distance;
+        ).forEach((r) => {
+          const ground = race_infos[r].ground;
+          const distance = race_infos[r].distance;
           const ag = adaptability_dict[ground];
           const ad = adaptability_dict[2 + distance];
           const is_aim_race = get_custom_check(curr).is_aim_race(
-            e,
+            r,
             edu_weeks + round - cur_round,
           );
-          const is_foreign = race_infos[e].track >= track_enum.longchamp;
+          const is_foreign = race_infos[r].track >= track_enum.longchamp;
           const is_grand_live = grand_lives.check(
-            e,
+            r,
             +(round - year_begin >= 48),
           );
           if (
-            e === race_enum.begin_race ||
-            registered_race.race === e ||
+            r === race_enum.begin_race ||
+            registered_race.race === r ||
             is_aim_race !== 0 ||
             !flag_filter_race ||
             ((ag.content === 'S' || ag.content <= 'C') &&
@@ -215,21 +216,21 @@ async function reg_race_page() {
           ) {
             columns.push(
               {
-                accelerator: e,
+                accelerator: r,
                 config: {
                   align: 'center',
                   buttonType: is_aim_race !== 0 ? 'danger' : 'warning',
                   disabled:
                     base_disabled_check ||
                     (is_foreign &&
-                      race_infos[e].date + year_begin - cur_round <=
+                      race_infos[r].date + year_begin - cur_round <=
                         expedition_weeks) ||
-                    get_custom_mec(curr).is_race_disabled(e),
+                    get_custom_mec(curr).is_race_disabled(r),
                 },
                 content:
-                  race_infos[e].get_colored_name_with_class().content +
+                  race_infos[r].get_colored_name_with_class().content +
                   (is_foreign
-                    ? ` (${i18n().race[track2location[race_infos[e].track].con]})`
+                    ? ` (${i18n().race[track2location[race_infos[r].track].con]})`
                     : '') +
                   (is_grand_live ? ' 🎤' : '') +
                   ((is_aim_race & 0b11) > 0 ? ' *' : ''),
@@ -238,7 +239,7 @@ async function reg_race_page() {
               {
                 config: { align: 'center' },
                 content: [
-                  ...(flag_hide_adaptability || e === race_enum.begin_race
+                  ...(flag_hide_adaptability || r === race_enum.begin_race
                     ? []
                     : [
                         di18n.race.a_ground[ground],
@@ -246,22 +247,22 @@ async function reg_race_page() {
                         ag,
                         ')',
                         ' ',
-                        race_infos[e].span.toLocaleString(),
+                        race_infos[r].span.toLocaleString(),
                         ' ',
                         di18n.race.a_distance[distance],
                         '(',
                         ad,
                         ') ',
                         ...team_list
-                          .filter((en) => sys_reg_race(en).curr.race === e)
+                          .filter((en) => sys_reg_race(en).curr.race === r)
                           .map((en) => ({
                             color: get_chara_color(en),
                             content: '𖨆',
                             fontWeight: 'bold',
                           })),
-                        registered_race.race === e ? ' ' : '',
+                        registered_race.race === r ? ' ' : '',
                       ]),
-                  registered_race.race === e
+                  registered_race.race === r
                     ? {
                         color: el_danger_color,
                         content: '[▲已登记]',
@@ -312,15 +313,15 @@ async function reg_race_page() {
         : [],
       [{ type: 'divider' }],
       team_list.length > 1
-        ? team_list.map((e) => {
+        ? team_list.map((cid) => {
             return {
-              accelerator: 1000 + e,
+              accelerator: 1000 + cid,
               config: {
-                buttonType: e === curr ? 'warning' : 'info',
-                disabled: e === curr,
-                width: 4,
+                buttonType: cid === curr ? 'warning' : 'info',
+                disabled: cid === curr,
+                width: 6,
               },
-              content: era.get(`callname:${e}:-1`),
+              content: get_display_name(era.get(`callname:${cid}:-1`)),
               type: 'button',
             };
           })

@@ -34,9 +34,9 @@ module.exports = class extends I18nEntry {
   edu_1 = 'クラシック級';
   edu_2 = 'シニア級';
 
-  a_edu_0 = this.edu_0;
-  a_edu_1 = this.edu_1;
-  a_edu_2 = this.edu_2;
+  a_edu_0 = 'ジュニア';
+  a_edu_1 = 'クラシック';
+  a_edu_2 = 'シニア';
 
   tt_birthday_notify = (birth_list) => [
     '今日は',

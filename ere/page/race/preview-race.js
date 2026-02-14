@@ -205,7 +205,7 @@ async function preview_race(
                 fontWeight: 'bold',
               },
               { isDivider: true },
-              i18n().ui_moti,
+              i18n().ui_mot,
               '：',
               {
                 color: motivation_colors[cur_chara.motivation + 2],

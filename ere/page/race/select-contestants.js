@@ -18,18 +18,20 @@ async function select_contestants(race) {
     return [era.get('flag:当前互动角色')];
   }
   const registered_list = sys_filter_chara(
-      'cflag',
-      '招募状态',
-      recruit_flags.yes,
-    ).filter((e) => sys_reg_race(e).curr.race === race),
-    contestants = registered_list.filter((e) => sys_check_race_ready(e));
+    'cflag',
+    '招募状态',
+    recruit_flags.yes,
+  ).filter((cid) => sys_reg_race(cid).curr.race === race);
+  const contestants = registered_list.filter((cid) =>
+    sys_check_race_ready(cid),
+  );
   const dict = {};
   let ret = contestants;
-  ret.forEach((e) => (dict[e] = true));
+  ret.forEach((cid) => (dict[cid] = true));
   if (contestants.length > 1) {
     const cur_line = era.getLineCount();
-    let contestant_count = contestants.length,
-      flag = true;
+    let contestant_count = contestants.length;
+    let flag = true;
     while (flag) {
       await era.clear(era.getLineCount() - cur_line);
       era.drawLine();
@@ -44,16 +46,16 @@ async function select_contestants(race) {
             type: 'text',
           },
         ],
-        contestants.map((e) => {
+        contestants.map((cid) => {
           return {
-            accelerator: e,
+            accelerator: cid,
             config: {
               align: 'center',
-              buttonType: dict[e] ? 'warning' : 'info',
+              buttonType: dict[cid] ? 'warning' : 'info',
               width: 8,
             },
-            content: `${get_display_name(era.get(`callname:${e}:-1`))} [${
-              dict[e] ? '出走' : '避战'
+            content: `${get_display_name(era.get(`callname:${cid}:-1`))} [${
+              dict[cid] ? '出走' : '避战'
             }]`,
             type: 'button',
           };
@@ -79,11 +81,11 @@ async function select_contestants(race) {
       .filter((e) => e[1])
       .map((e) => Number(e[0]));
   }
-  registered_list.forEach((e) => {
-    if (dict[e]) {
-      era.set(`cflag:${e}:自主训练`, 0);
+  registered_list.forEach((cid) => {
+    if (dict[cid]) {
+      era.set(`cflag:${cid}:自主训练`, 0);
     } else {
-      sys_reg_race(e).curr = { race: -1, week: -1 };
+      sys_reg_race(cid).curr = { race: -1, week: -1 };
     }
   });
   return ret;

@@ -53,18 +53,18 @@ const arrows = { '-1': '▼', 0: '', 1: '▲' };
  */
 function get_edu_stage(cid, race, palace, in_train) {
   if (!cid || !race) {
-    return '-';
+    return i18n().ui_invalid_value;
   }
   if (palace >= 1) {
     return di18n.n_oot[palace - 1];
   }
   if (in_train) {
-    return get_train_year(cid);
+    return get_train_year(cid, di18n.a_edu);
   }
   if (era.get(`cflag:${cid}:可再次育成`) > 0) {
-    return '-';
+    return i18n().ui_invalid_value;
   }
-  return '待入学';
+  return i18n().pre_edu;
 }
 
 /**
@@ -114,12 +114,14 @@ function get_suffix(cid, type) {
       },
       {
         config: { align: 'center', width: 2 },
-        content: get_train_year(cid),
+        content: get_train_year(cid, di18n.a_edu),
         type: 'text',
       },
       {
         config: { align: 'center', width: 2 },
-        content: cid ? `${era.get(`cflag:${cid}:育成次数`) + 1}` : '-',
+        content: cid
+          ? `${era.get(`cflag:${cid}:育成次数`) + 1}`
+          : i18n().ui_invalid_value,
         type: 'text',
       },
     );
@@ -306,7 +308,7 @@ async function select_target(
       if (type === chara_info_type.train) {
         buffer.push(
           get_button(1007, '评价', 2),
-          get_button(1008, i18n().ui_moti, 2),
+          get_button(1008, i18n().ui_mot, 2),
           get_button(1009, '战绩', 2),
           get_button(1004, '育成', 2),
           get_button(1010, '周目', 2),

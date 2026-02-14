@@ -695,13 +695,16 @@ module.exports = {
     });
   },
   get_talent_bust_size,
-  /** @param {number} cid */
-  get_train_year(cid) {
+  /**
+   * @param {number} cid
+   * @param {string[]} dict
+   */
+  get_train_year(cid, dict = di18n.n_edu) {
     if (!cid) {
       return '-';
     }
     // CFLAGNAME:48 = 育成回合计时
-    return di18n.n_edu[Math.floor(era.get(`cflag:${cid}:48`) / 48)];
+    return dict[Math.floor(era.get(`cflag:${cid}:48`) / 48)];
   },
   get_trainer_level,
   /** @returns {{full:()=>string,level:number,prefix:()=>string,title:()=>string}} */

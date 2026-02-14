@@ -30,7 +30,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
 
 const {
   get_chara_talk,
-  say_by_passer_by,
+  say_by_passer_by_and_wait,
 } = require('#/utils/chara-talk-factory');
 const { get_random_entry, sort_list } = require('#/utils/list-utils');
 
@@ -195,7 +195,7 @@ module.exports = class extends CustomizedEdu {
     const etsuko_check =
       get('cflag:303:育成回合计时') < 3 * 48 || !check_pregnant_unprotect(303);
     const report = etsuko_check
-      ? (args) => say_by_passer_by('主持人', args)
+      ? (args) => say_by_passer_by_and_wait('主持人', args)
       : etsuko.say_and_wait.bind(etsuko);
     const year = get('flag:当前年') - 1;
     // FLAGNAME:116 = 角色性别

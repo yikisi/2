@@ -89,6 +89,10 @@ const di18n = {
     const _ = i18n();
     return [_.edu_0, _.edu_1, _.edu_2];
   },
+  get a_edu() {
+    const _ = i18n();
+    return [_.a_edu_0, _.a_edu_1, _.a_edu_2];
+  },
   get n_oot() {
     const _ = i18n();
     return [_.oot_0, _.oot_1];

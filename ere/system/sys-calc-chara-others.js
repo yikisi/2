@@ -298,12 +298,12 @@ function love_uma(cid, val, shown = true) {
  * @returns {string}
  */
 function get_callname(_from, _to) {
-  const callname = era.get(`callname:${_from}:${_to}`);
-  if (Array.isArray(callname)) {
-    return get_random_entry(callname);
-  }
+  let callname = era.get(`callname:${_from}:${_to}`);
   if (callname === '-') {
     return era.get(`static:${_to}:callname`);
+  }
+  if (Array.isArray(callname)) {
+    callname = get_random_entry(callname);
   }
   return __(`name.${callname}`, callname);
 }
