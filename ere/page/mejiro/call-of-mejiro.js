@@ -9,7 +9,7 @@ const {
 } = require('#/system/ero/sys-prepare-ero');
 const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
 
-const { get_progress_bar } = require('#/page/components/page-header');
+const get_progress_bar = require('#/page/components/get-progress-bar');
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
 const MejiroCity = require('#/page/mejiro/mejiro-common');
 const print_ero_page = require('#/page/page-ero');
@@ -176,7 +176,11 @@ class CallOfMejiro extends MejiroCity {
     era.printInColRows(
       [{ type: 'divider' }],
       {
-        columns: get_progress_bar(),
+        columns: get_progress_bar(0, {
+          prog_width: 9,
+          tp_offset: true,
+          use_empty_line: false,
+        }),
         config: { width: 16 },
       },
       {

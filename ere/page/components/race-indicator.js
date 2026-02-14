@@ -15,23 +15,17 @@ function race_indicator(cid) {
     return [];
   }
   if (race_delta > 0) {
-    return [
-      ' ',
-      ...i18n().get_ui_race_indicator(
-        race_infos[registered_race.race].get_colored_name(),
-        {
-          content: race_delta,
-          color: buff_colors[3],
-        },
-      ),
-    ];
-  }
-  return [
-    ' ',
-    i18n().get_ui_curr_race_indicator(
+    return i18n().get_ui_race_indicator(
       race_infos[registered_race.race].get_colored_name(),
-    ),
-  ];
+      {
+        content: race_delta,
+        color: buff_colors[3],
+      },
+    );
+  }
+  return i18n().get_ui_curr_race_indicator(
+    race_infos[registered_race.race].get_colored_name(),
+  );
 }
 
 module.exports = race_indicator;

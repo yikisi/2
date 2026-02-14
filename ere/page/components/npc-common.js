@@ -13,6 +13,7 @@ const {
 } = require('#/system/sys-calc-chara-param');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
+const get_progress_bar = require('#/page/components/get-progress-bar');
 const goto_sex = require('#/page/components/goto-sex');
 const take_care = require('#/page/components/take-care');
 const print_juel_shop_page = require('#/page/page-juel-shop');
@@ -23,11 +24,7 @@ const { run_custom_daily } = require('#/event/daily/daily-factory');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
-const {
-  attr_bg_colors,
-  love_colors,
-  relation_colors,
-} = require('#/data/color-const');
+const { love_colors, relation_colors } = require('#/data/color-const');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const recruit_flags = require('#/data/event/recruit-flags');
@@ -39,7 +36,7 @@ const {
 const { location_enum } = require('#/data/locations');
 const { attr_enum } = require('#/data/train-const');
 
-const { __, i18n } = require('#/i18n/selector');
+const { i18n } = require('#/i18n/selector');
 
 /**
  * @param {CharaTalk} chara
@@ -298,21 +295,7 @@ async function npc_common(
         { content: '\n', type: 'text' },
         ...(is_recruit
           ? [
-              ...['hp', 'tp'].reduce((p, c, i) => {
-                const val = era.get(`base:${chara.id}:${i}`);
-                const limit = era.get(`maxbase:${chara.id}:${i}`);
-                p.push(
-                  { config: { width: 2 }, content: __(c), type: 'text' },
-                  {
-                    config: { color: attr_bg_colors[c], height: 22, width: 12 },
-                    inContent: `${Math.floor(val)}/${Math.floor(limit)}`,
-                    percentage: (val * 100) / limit,
-                    type: 'progress',
-                  },
-                  { content: [], type: 'text' },
-                );
-                return p;
-              }, []),
+              ...get_progress_bar(chara.id),
               {
                 config: { width: 2 },
                 content: '状态',

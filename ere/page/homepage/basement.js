@@ -14,7 +14,7 @@ const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const { switch_image } = require('#/system/sys-calc-image');
 
 const print_cur_chara_info = require('#/page/components/cur-chara-info');
-const { get_progress_bar } = require('#/page/components/page-header');
+const get_progress_bar = require('#/page/components/get-progress-bar');
 const { print_chara_info } = require('#/page/page-exp');
 const print_load_page = require('#/page/page-load-game');
 const print_save_page = require('#/page/page-save-game');
@@ -83,7 +83,11 @@ function page_header() {
     [{ type: 'divider' }],
     {
       columns: [
-        ...get_progress_bar(),
+        ...get_progress_bar(0, {
+          prog_width: 9,
+          tp_offset: true,
+          use_empty_line: false,
+        }),
         {
           config: { width: 2 },
           content: '状态',

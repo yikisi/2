@@ -80,6 +80,15 @@ class I18nEntry {
   relation_6 = '亲密';
   relation_7 = '不渝';
 
+  celebration_template = '[%CELEBRATION%]';
+  cl_new_year = '新年';
+  cl_valentine = '情人节';
+  cl_palace = '殿堂周';
+  cl_fans = '粉丝感谢祭';
+  cl_temple_fair = '庙会';
+  cl_halloween = '万圣节';
+  cl_christmas = '圣诞节';
+
   tt_disclaimer = '免责声明';
   tt_disclaimer_content = [
     '1. 本游戏仅为开发者自娱自乐及代码练习所用，开发它是因为开发者趣味低下，思想低俗所致，无任何经济收益和利益驱动。',
@@ -208,6 +217,20 @@ class I18nEntry {
   ui_default = '默认';
   ui_game_over = 'GAME OVER';
   ui_invalid_value = '-';
+
+  get_ui_hd_location = (location) => ['位于 ', location];
+  get_ui_hd_honour = (honour) => [honour, ' 声望'];
+  ui_hd_income_template = '(%INCOME%)';
+  get_ui_hd_money = (money, income) => [money, ...income, ' 马币'];
+  ui_billing_title_start = '账单：';
+  ui_billing_invest_template = '%INCOME% (%CHARA% 投资收益)';
+  ui_billing_bonus_template = '%INCOME% (月工资+年终奖)';
+  ui_billing_salary_template = '%INCOME% (月工资)';
+  ui_billing_borrow_template = '%INCOME% (%CHARA%%MAIN% 余 %TIMER% 周)';
+  ui_billing_borrow_main = '· 主要';
+  ui_billing_slave_template = '%INCOME% (%CHARA% 献金)';
+  ui_hd_current_race = '本周赛事';
+  ui_hd_races = '查看全部';
 
   ui_no_target = '未选择互动角色';
   get_ui_cur_chara_info = (

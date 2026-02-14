@@ -6,13 +6,14 @@ const {
 const get_status = require('#/system/chara/sys-get-status');
 const { get_image } = require('#/system/sys-calc-image');
 
+const get_progress_bar = require('#/page/components/get-progress-bar');
 const race_indicator = require('#/page/components/race-indicator');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const chara_info_type = require('#/data/chara-info-type');
 const CharaTitles = require('#/data/chara-titles');
-const { attr_bg_colors, motivation_colors } = require('#/data/color-const');
+const { motivation_colors } = require('#/data/color-const');
 const { love_colors, relation_colors } = require('#/data/color-const');
 const { get_growth } = require('#/data/ero/status-const');
 const {
@@ -23,7 +24,7 @@ const {
 const { location_enum } = require('#/data/locations');
 
 const di18n = require('#/i18n/extended-def');
-const { __, i18n } = require('#/i18n/selector');
+const { i18n } = require('#/i18n/selector');
 
 /**
  * @param {number} cid
@@ -133,6 +134,9 @@ function cur_chara_component(cid, type, location_npc) {
           ' ' + i18n().ui_edu_template.replace('%EDU%', i18n().pre_edu);
       }
       race_info = race_indicator(cid);
+      if (race_info.length > 0) {
+        race_info.unshift(' ');
+      }
     }
     location_npc &&
       (temp = CharaTitles.get(location_npc).get_colored_curr_title());
@@ -206,21 +210,7 @@ function cur_chara_component(cid, type, location_npc) {
                 type: 'button',
               }
             : { content: '\n', type: 'text' },
-          ...['hp', 'tp'].reduce((p, c, i) => {
-            const val = era.get(`base:${cid}:${i}`);
-            const limit = era.get(`maxbase:${cid}:${i}`);
-            p.push(
-              { config: { width: 2 }, content: __(c), type: 'text' },
-              {
-                config: { color: attr_bg_colors[c], height: 22, width: 12 },
-                inContent: `${Math.floor(val)}/${Math.floor(limit)}`,
-                percentage: (val * 100) / limit,
-                type: 'progress',
-              },
-              { content: [], type: 'text' },
-            );
-            return p;
-          }, []),
+          ...get_progress_bar(cid),
           ...(race && growth >= 1
             ? [
                 {

@@ -1,12 +1,8 @@
-const era = require('#/era-electron');
+const get_progress_bar = require('#/page/components/get-progress-bar');
 
 const CharaTitles = require('#/data/chara-titles');
 const { love_colors, relation_colors } = require('#/data/color-const');
 const { get_love_info, get_relation_info } = require('#/data/info-generator');
-
-const { attr_bg_colors } = require('#/data/color-const');
-
-const { __ } = require('#/i18n/selector');
 
 /** @param {CharaTalk} chara */
 function exp_chara_info(chara) {
@@ -42,20 +38,11 @@ function exp_chara_info(chara) {
       ],
       type: 'text',
     },
-    ...['hp', 'tp'].reduce((p, c, i) => {
-      const val = era.get(`base:${chara.id}:${i}`);
-      const limit = era.get(`maxbase:${chara.id}:${i}`);
-      p.push(
-        { config: { offset: i, width: 2 }, content: __(c), type: 'text' },
-        {
-          config: { color: attr_bg_colors[c], height: 22, width: 9 },
-          inContent: `${Math.floor(val)}/${Math.floor(limit)}`,
-          percentage: (val * 100) / limit,
-          type: 'progress',
-        },
-      );
-      return p;
-    }, []),
+    ...get_progress_bar(chara.id, {
+      prog_width: 9,
+      tp_offset: !0,
+      use_empty_line: !1,
+    }),
   ];
 }
 

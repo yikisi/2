@@ -226,19 +226,19 @@ module.exports = {
   get_celebration(weeks = era.get('flag:0')) {
     switch (weeks % 48) {
       case 1: // 一月第一周
-        return '新年';
+        return i18n().cl_new_year;
       case 6: //二月第二周
-        return '情人节';
+        return i18n().cl_valentine;
       case 9: //三月第一周
-        return '殿堂周';
+        return i18n().cl_palace;
       case 14: //四月第二周
-        return '粉丝感谢祭';
+        return i18n().cl_fans;
       case 30: //八月第二周
-        return '庙会';
+        return i18n().cl_temple_fair;
       case 40: // 十月第四周
-        return '万圣节';
+        return i18n().cl_halloween;
       case 0: //十二月第四周
-        return '圣诞节';
+        return i18n().cl_christmas;
       default:
         return '';
     }

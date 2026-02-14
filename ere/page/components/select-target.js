@@ -4,19 +4,19 @@ const get_status = require('#/system/chara/sys-get-status');
 const { sys_check_train_enabled } = require('#/system/sys-calc-chara-param');
 const filter_chara = require('#/system/sys-filter-chara');
 
+const get_progress_bar = require('#/page/components/get-progress-bar');
+const print_page_header = require('#/page/components/page-header');
+const race_indicator = require('#/page/components/race-indicator');
+
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { sort_list } = require('#/utils/list-utils');
 
-const print_page_header = require('#/page/components/page-header');
-const race_indicator = require('#/page/components/race-indicator');
-
 const chara_info_type = require('#/data/chara-info-type');
 const CharaTitles = require('#/data/chara-titles');
 const {
   adaptability_colors,
-  attr_bg_colors,
   el_danger_color,
   love_colors,
   motivation_colors,
@@ -167,20 +167,11 @@ function get_suffix(cid, type) {
     );
   }
   ret.push(
-    ...['hp', 'tp'].map((a, i) => {
-      const val = era.get(`base:${cid}:${i}`);
-      const limit = era.get(`maxbase:${cid}:${i}`);
-      return {
-        config: {
-          color: attr_bg_colors[a],
-          height: 22,
-          width: 3,
-          barWidth: 20,
-        },
-        inContent: `${Math.floor(val)}/${Math.floor(limit)}`,
-        percentage: (val * 100) / limit,
-        type: 'progress',
-      };
+    ...get_progress_bar(cid, {
+      prog_bar_width: 20,
+      prog_width: 3,
+      use_empty_line: false,
+      use_tag: false,
     }),
     {
       config: { offset: 4, width: 20 },
@@ -317,12 +308,15 @@ async function select_target(
         buffer.push(
           get_button(1000, '性别', 2),
           get_button(1001, '年龄', 2),
-          get_button(1002, '好感', 2),
-          get_button(1003, '爱慕', 2),
+          get_button(1002, i18n().ui_relation, 2),
+          get_button(1003, i18n().ui_love, 2),
           get_button(1004, '育成', 2),
         );
       }
-      buffer.push(get_button(1005, '体力', 3), get_button(1006, '精力', 3));
+      buffer.push(
+        get_button(1005, i18n().hp, 3),
+        get_button(1006, i18n().tp, 3),
+      );
       const cur_list = show_list.slice(
         (page.curr - 1) * page_size,
         page.curr * page_size,

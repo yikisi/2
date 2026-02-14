@@ -23,6 +23,7 @@ const {
 } = require('#/system/sys-calc-chara-param');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
+const get_progress_bar = require('#/page/components/get-progress-bar');
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
 const { get_custom_check } = require('#/event/check/check-factory');
@@ -35,7 +36,6 @@ const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const {
-  attr_bg_colors,
   buff_colors,
   love_colors,
   palam_colors,
@@ -62,7 +62,7 @@ const {
 const { location_enum } = require('#/data/locations');
 
 const di18n = require('#/i18n/extended-def');
-const { __, i18n } = require('#/i18n/selector');
+const { i18n } = require('#/i18n/selector');
 
 /**
  * @param {number} cid
@@ -165,20 +165,13 @@ function get_chara_info(cid) {
       content: get_ero_status(cid),
       type: 'text',
     },
+    ...get_progress_bar(cid, {
+      get_key: (b) => `abbr_${b}`,
+      prog_width: 3,
+      tag_width: 1,
+      use_empty_line: false,
+    }),
   ];
-  ['hp', 'tp'].forEach((a, i) => {
-    const val = era.get(`base:${cid}:${i}`);
-    const limit = era.get(`maxbase:${cid}:${i}`);
-    ret.push(
-      { config: { width: 1 }, content: __(`abbr_${a}`), type: 'text' },
-      {
-        config: { color: attr_bg_colors[a], height: 22, width: 3 },
-        inContent: `${Math.floor(val)}/${Math.floor(limit)}`,
-        percentage: (val * 100) / limit,
-        type: 'progress',
-      },
-    );
-  });
   const s_penis = get_penis_size(cid);
   // CFLAGNAME:5 = 阴道尺寸
   const s_virgin = era.get(`cflag:${cid}:5`);
