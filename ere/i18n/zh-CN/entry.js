@@ -57,8 +57,11 @@ class I18nEntry {
   title_2 = '性奴';
   title_3 = '孕袋';
 
+  ui_rl_mark_with_value = '%MARK% (%VAL%)';
+
   ui_love = '爱慕';
   ui_love_template = '爱慕：%LOVEINFO%';
+  get_ui_colored_love = (love) => ['爱慕：', love];
   love_u = '？';
   love_0 = '平常';
   love_1 = '朦胧';
@@ -70,6 +73,7 @@ class I18nEntry {
 
   ui_relation = '好感';
   ui_relation_template = '好感：%RELATIONINFO%';
+  get_ui_colored_relation = (relation) => ['好感：', relation];
   relation_u = '？';
   relation_0 = '失望';
   relation_1 = '怀疑';
@@ -217,7 +221,9 @@ class I18nEntry {
   ui_default = '默认';
   ui_game_over = 'GAME OVER';
   ui_invalid_value = '-';
+  ui_unknown_value = '?';
 
+  ui_hd_no_save = '当前未加载存档';
   get_ui_hd_location = (location) => ['位于 ', location];
   get_ui_hd_honour = (honour) => [honour, ' 声望'];
   ui_hd_income_template = '(%INCOME%)';

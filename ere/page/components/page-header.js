@@ -36,7 +36,7 @@ function page_header(enable_race_info) {
   let cur_year = era.get('flag:当前年');
   if (!cur_year) {
     era.drawLine();
-    era.print('当前未加载存档', { align: 'center' });
+    era.print(i18n().ui_hd_no_save, { align: 'center' });
   } else {
     const celebration = get_celebration();
     const cur_coin = era.get('flag:当前马币');
@@ -47,14 +47,10 @@ function page_header(enable_race_info) {
       '招募状态',
       recruit_flags.yes,
     )
-      .map((cid) => {
-        const ret = sys_reg_race(cid).curr;
-        return {
-          id: cid,
-          race: ret.race,
-          week: ret.week,
-        };
-      })
+      .map((cid) => ({
+        ...sys_reg_race(cid).curr,
+        id: cid,
+      }))
       .filter((reg) => reg.week === cur_rounds);
     const trainer_title = get_trainer_title();
     const trainer_title_color = get_trainer_color(trainer_title.level);

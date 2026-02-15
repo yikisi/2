@@ -4,6 +4,8 @@ const CharaTitles = require('#/data/chara-titles');
 const { love_colors, relation_colors } = require('#/data/color-const');
 const { get_love_info, get_relation_info } = require('#/data/info-generator');
 
+const { i18n } = require('#/i18n/selector');
+
 /** @param {CharaTalk} chara */
 function exp_chara_info(chara) {
   const relation = get_relation_info(chara.id, 0);
@@ -22,19 +24,22 @@ function exp_chara_info(chara) {
     {
       config: { width: 6 },
       content: [
-        ' 好感：',
-        {
+        ' ',
+        ...i18n().get_ui_colored_relation({
           content: relation.full(),
           color: relation_colors[relation.level],
-        },
+        }),
       ],
       type: 'text',
     },
     {
       config: { width: 6 },
       content: [
-        ' 爱慕：',
-        { content: love.full(), color: love_colors[love.level] },
+        ' ',
+        ...i18n().get_ui_colored_love({
+          content: love.full(),
+          color: love_colors[love.level],
+        }),
       ],
       type: 'text',
     },

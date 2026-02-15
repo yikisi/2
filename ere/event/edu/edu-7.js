@@ -434,7 +434,7 @@ module.exports = class extends Edu7UntilWeekStart {
       era.printButton('你在这干嘛啊？不吃饭吗？', 1);
       await era.input();
 
-      await era.printAndWait('怎么说呢，我在回忆往事。');
+      await gold_ship.say_and_wait('怎么说呢，我在回忆往事。');
       await gold_ship.say_and_wait(
         '很久以前的一个风雪夜，幼小的我为了给家中的螺丝工厂补贴生意，于是独自在街上卖金属球棒……',
       );
@@ -472,7 +472,7 @@ module.exports = class extends Edu7UntilWeekStart {
       );
       era.println();
 
-      era.printButton('「试着重现当时的汤头吧？」（耐力&智力+10）', 1);
+      era.printButton('「试着重现当时的汤头吧？」（耐力 & 智力+10）', 1);
       era.printButton('「到当时的地方再看看吧？」（速度+20）', 2);
       const ret = await era.input();
 

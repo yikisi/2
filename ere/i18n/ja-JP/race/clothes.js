@@ -213,6 +213,7 @@ module.exports = class extends I18nClothes {
   110002 = '柔灯・湯の香の装い';
   110201 = 'リトモ・デッラ・テッラ';
   110213 = 'ソナタ・アッラ・メンタ';
+  110301 = 'Inspiring Genius';
   110401 = '登竜之頂';
   110410 = '雅号・墨龍';
   110501 = 'Universe-Naut';

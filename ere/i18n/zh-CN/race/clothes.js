@@ -227,6 +227,7 @@ class I18nClothes {
   110002 = '柔灯・汤泉芳香之装';
   110201 = 'Ritmo・Della・Terra';
   110213 = '心灵奏鸣曲';
+  110301 = 'Inspiring Genius';
   110401 = '登龙之顶';
   110410 = '雅号・墨龙';
   110501 = 'Universe-Naut';

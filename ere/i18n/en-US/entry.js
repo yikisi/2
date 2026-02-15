@@ -31,8 +31,14 @@ module.exports = class extends I18nEntry {
   moti_4 = 'Best';
 
   ui_love = 'Love';
+  ui_love_template = 'Love: %LOVEINFO%';
+  get_ui_colored_love = (love) => ['Love: ', love];
+  love_u = '?';
 
   ui_relation = 'Rel.';
+  ui_relation_template = 'Rel: %RELATIONINFO%';
+  get_ui_colored_relation = (relation) => ['Rel: ', relation];
+  relation_u = '?';
 
   tt_birthday_notify = (birth_list) => [
     'Today is the birthday of ',

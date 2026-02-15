@@ -431,7 +431,7 @@ async function preview_race(
                   !c_item && era.get('item:75') < 1 && era.get('item:74') < 1,
                 width: 22,
               },
-              content: c_item > 0 ? i18n().tb_item[c_item] : i18n().ui_no,
+              content: c_item > 0 ? i18n().tb_item[c_item] : i18n().ui_nothing,
               type: 'button',
             },
           ]);
@@ -450,7 +450,7 @@ async function preview_race(
                   !v_item && era.get('item:75') < 1 && era.get('item:77') < 1,
                 width: 22,
               },
-              content: v_item > 0 ? i18n().tb_item[v_item] : i18n().ui_no,
+              content: v_item > 0 ? i18n().tb_item[v_item] : i18n().ui_nothing,
               type: 'button',
             },
           ]);
@@ -471,7 +471,7 @@ async function preview_race(
                 era.get('item:80') < 1,
               width: 22,
             },
-            content: a_item > 0 ? i18n().tb_item[a_item] : i18n().ui_no,
+            content: a_item > 0 ? i18n().tb_item[a_item] : i18n().ui_nothing,
             type: 'button',
           },
         ]);
@@ -538,7 +538,7 @@ async function preview_race(
                 type: 'divider',
               },
               { content: [], type: 'text' },
-              // ITEMNAME:75 = 跳蛋
+              // ITEMNAME:76 = 飞机杯
               {
                 config: { width: 2 },
                 content: i18n().tb_item[76],
@@ -615,7 +615,7 @@ async function preview_race(
                 era.set(`equip:${chara.id}:7`, 0);
                 era.add(`item:${selected}`, 1);
               } else {
-                era.set(`equip:${chara.id}:7`, ret);
+                era.set(`equip:${chara.id}:7`, selected);
                 if (c_item > 0) {
                   era.add(`item:${c_item}`, 1);
                 }
@@ -674,7 +674,7 @@ async function preview_race(
                 era.set(`equip:${chara.id}:8`, 0);
                 era.add(`item:${selected}`, 1);
               } else {
-                era.set(`equip:${chara.id}:8`, ret);
+                era.set(`equip:${chara.id}:8`, selected);
                 if (v_item > 0) {
                   era.add(`item:${v_item}`, 1);
                 }
@@ -734,7 +734,7 @@ async function preview_race(
                 era.set(`equip:${chara.id}:9`, 0);
                 era.add(`item:${selected}`, 1);
               } else {
-                era.set(`equip:${chara.id}:9`, ret);
+                era.set(`equip:${chara.id}:9`, selected);
                 if (a_item > 0) {
                   era.add(`item:${a_item}`, 1);
                 }

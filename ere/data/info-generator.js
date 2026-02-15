@@ -566,14 +566,21 @@ module.exports = {
    */
   get_love_info(cid, love = era.get(`love:${cid}`)) {
     if (!cid) {
-      return { full: () => '-', level: -1, mark: () => '-' };
+      return {
+        full: () => i18n().ui_invalid_value,
+        level: -1,
+        mark: () => i18n().ui_invalid_value,
+      };
     }
     if ((sys_check_hide_relation_and_love(cid) & 0b1) > 0) {
       return {
-        full: () => '？ (?)',
+        full: () =>
+          i18n()
+            .ui_rl_mark_with_value.replace('%MARK%', i18n().love_u)
+            .replace('%VAL%', i18n().ui_unknown_value),
         level: -1,
-        mark: () => '？',
-        val: () => '?',
+        mark: () => i18n().love_u,
+        val: () => i18n().ui_unknown_value,
       };
     }
     if (sys_check_limit_relation_and_love(cid)) {
@@ -586,7 +593,10 @@ module.exports = {
     const mark = () => di18n.m_love[level];
     const val = () => love.toString();
     return {
-      full: () => `${mark()} (${val()})`,
+      full: () =>
+        i18n()
+          .ui_rl_mark_with_value.replace('%MARK%', mark())
+          .replace('%VAL%', val()),
       level,
       mark,
       val,
@@ -615,14 +625,21 @@ module.exports = {
     relation = era.get(`relation:${cid}:${target}`),
   ) {
     if (!cid) {
-      return { full: () => '-', level: -1, mark: () => '-' };
+      return {
+        full: () => i18n().ui_invalid_value,
+        level: -1,
+        mark: () => i18n().ui_invalid_value,
+      };
     }
     if (sys_check_hide_relation_and_love(cid) > 0) {
       return {
-        full: () => '？ (?)',
+        full: () =>
+          i18n()
+            .ui_rl_mark_with_value.replace('%MARK%', i18n().relation_u)
+            .replace('%VAL%', i18n().ui_unknown_value),
         level: -1,
-        mark: () => '？',
-        val: () => '?',
+        mark: () => i18n().relation_u,
+        val: () => i18n().ui_unknown_value,
       };
     }
     let level = 0;
@@ -631,7 +648,15 @@ module.exports = {
     }
     const mark = () => di18n.m_relation[level];
     const val = () => relation.toString();
-    return { full: () => `${mark()} (${val()})`, level, mark, val };
+    return {
+      full: () =>
+        i18n()
+          .ui_rl_mark_with_value.replace('%MARK%', mark())
+          .replace('%VAL%', val()),
+      level,
+      mark,
+      val,
+    };
   },
   get_save_name() {
     // FLAGNAME:65 = 存档名
