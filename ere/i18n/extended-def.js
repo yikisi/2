@@ -369,6 +369,52 @@ const di18n = {
         _.ed_saying_13,
       ];
     },
+    /**
+     * @param {string} vehicle
+     * @param {string} location
+     */
+    get_it_arrive_location(vehicle, location) {
+      return i18n().timon.get_it_arrive_location(
+        vehicle !== void 0
+          ? i18n()
+              .vehicle.use_vehicle_template.replace(
+                '%VERB%',
+                __(`vehicle.${vehicle}_verb`),
+              )
+              .replace('%VEHICLE%', i18n().vehicle[vehicle])
+          : '',
+        i18n().location[location],
+      );
+    },
+    /**
+     * @param {CharaTalk} chara
+     * @param {string} vehicle
+     * @param {string} location
+     */
+    get_it_goto_location(chara, vehicle, location) {
+      const vehicle_info =
+        vehicle !== void 0
+          ? i18n()
+              .vehicle.use_vehicle_template.replace(
+                '%VERB%',
+                __(`vehicle.${vehicle}_verb`),
+              )
+              .replace('%VEHICLE%', i18n().vehicle[vehicle])
+          : '';
+      const location_name = i18n().location[location];
+      if (chara.id > 0) {
+        return i18n().timon.get_it_goto_location(
+          chara,
+          vehicle_info,
+          location_name,
+        );
+      } else {
+        return i18n().timon.get_it_self_goto_location(
+          vehicle_info,
+          location_name,
+        );
+      }
+    },
   },
   new_game: {
     get taiwu_talents() {

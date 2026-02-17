@@ -563,7 +563,7 @@ async function print_rec_page() {
   }
   if (!flag_leave) {
     era.drawLine();
-    await era.printAndWait('【折返了】');
+    await era.printAndWait(i18n().timon.it_back_office);
     await sys_get_random_event(event_hooks.recruit_end)();
   }
   await game_guides.recruit_end();

@@ -364,6 +364,7 @@ class I18nEntry {
   achievement = new (require('#/i18n/zh-CN/achieve'))();
   achieve_desc = new (require('#/i18n/zh-CN/achieve-desc'))();
   note = new (require('#/i18n/zh-CN/notes'))();
+  vehicle = new (require('#/i18n/zh-CN/vehicle'))();
 
   tb_abl = new (require('#/i18n/zh-CN/table/abl'))();
   tb_exp = new (require('#/i18n/zh-CN/table/exp'))();

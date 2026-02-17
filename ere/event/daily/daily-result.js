@@ -336,9 +336,7 @@ handlers[event_hooks.out_shopping] = async (cid, hook) => {
 handlers[event_hooks.out_church] = async (cid) => {
   const condition_chara = cid > 0 && era.get(`status:${cid}:练习X手`) < 0;
   const condition_me = era.get('status:0:练习X手') < 0;
-  if (condition_chara || condition_me) {
-    era.println();
-  }
+  era.println();
   if (condition_chara) {
     era.set(`status:${cid}:练习X手`, 0);
     era.print([

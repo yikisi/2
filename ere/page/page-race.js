@@ -653,7 +653,7 @@ async function race_page(race) {
     await era.waitAnyKey();
   }
   era.drawLine();
-  await era.printAndWait('【折返了】');
+  await era.printAndWait(i18n().timon.it_back_office);
   era.println();
   await sys_get_random_event(event_hooks.back_school)();
   era.set('flag:当前赛事', 0);

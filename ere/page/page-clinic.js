@@ -18,6 +18,7 @@ const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 
 const di18n = require('#/i18n/extended-def');
+const { i18n } = require('#/i18n/selector');
 
 async function page_clinic() {
   let flag_page = true;
@@ -62,7 +63,7 @@ async function page_clinic() {
     }
   }
   era.drawLine();
-  await era.printAndWait('【折返了】');
+  await era.printAndWait(i18n().timon.it_back_office);
   if (!sys_check_awake(chara.id)) {
     loc_characters.set(location_enum.clinic, []);
   }

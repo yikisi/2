@@ -24,8 +24,10 @@ const { lust_border } = require('#/data/ero/orgasm-const');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const { location_enum } = require('#/data/locations');
-const { vehicle_names } = require('#/data/move-const');
+const { vehicle_enum } = require('#/data/move-const');
 const { attr_enum } = require('#/data/train-const');
+
+const { i18n } = require('#/i18n/selector');
 
 class CallOfMejiro extends MejiroCity {
   /**
@@ -530,7 +532,7 @@ class CallOfMejiro extends MejiroCity {
         ' 和 ',
         chara.get_colored_name(),
         ' 走出了迷雾，发现正处于',
-        vehicle > 0 ? vehicle_names[vehicle] : '公交车',
+        vehicle > 0 ? i18n().vehicle[vehicle_enum.keys[vehicle - 1]] : '公交车',
         '旁。',
       ]);
       await era.printAndWait('指向来路的路牌标着「目白城」的标志。');

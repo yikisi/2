@@ -338,7 +338,7 @@ async function page_chairman_office() {
     }
   }
   era.drawLine();
-  await era.printAndWait('【折返了】');
+  await era.printAndWait(i18n().timon.it_back_office);
   if (!sys_check_awake(chara.id)) {
     loc_characters.set(location_enum.chairman, []);
   }

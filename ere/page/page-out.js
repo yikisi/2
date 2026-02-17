@@ -26,9 +26,10 @@ const recruit_flags = require('#/data/event/recruit-flags');
 const yandere_list = require('#/data/event/yandere-list');
 const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
-const { vehicle_names, vehicle_verbs } = require('#/data/move-const');
+const { vehicle_enum } = require('#/data/move-const');
 
 const di18n = require('#/i18n/extended-def');
+const { i18n } = require('#/i18n/selector');
 
 require('#/page/mejiro/free-mejiro');
 require('#/page/mejiro/call-of-mejiro');
@@ -73,9 +74,12 @@ async function out_page() {
     );
     vehicle = !cid && era.get('flag:单人载具');
     era.drawLine();
-    if (vehicle) {
+    if (vehicle > 0) {
       era.print(
-        `【${vehicle_verbs[vehicle]}着 ${vehicle_names[vehicle]} 到达了 学园大门】`,
+        di18n.timon.get_it_arrive_location(
+          vehicle_enum.keys[vehicle - 1],
+          'gate',
+        ),
       );
     }
     await game_guides.out();
@@ -164,15 +168,11 @@ async function out_page() {
                   era.printMultiColumns([
                     { type: 'divider' },
                     {
-                      content: [
-                        '【和 ',
-                        temp.chara.get_colored_name(),
-                        ' 一起',
-                        vehicle
-                          ? `${vehicle_verbs[vehicle]}着 ${vehicle_names[vehicle]} `
-                          : '',
-                        `前往 ${positions[aim - 1].n}】`,
-                      ],
+                      content: di18n.timon.get_it_goto_location(
+                        temp.chara,
+                        vehicle_enum.keys[vehicle - 1],
+                        location_enum.keys[positions[aim - 1].l],
+                      ),
                       type: 'text',
                     },
                   ]);
@@ -246,16 +246,11 @@ async function out_page() {
         era.printMultiColumns([
           { type: 'divider' },
           {
-            content: [
-              '【',
-              ...(cid > 0
-                ? ['和 ', get_chara_talk(cid).get_colored_name(), ' 一起']
-                : ['独自']),
-              vehicle
-                ? `${vehicle_verbs[vehicle]}着 ${vehicle_names[vehicle]} `
-                : '',
-              `前往 ${positions[aim - 1].n}】`,
-            ],
+            content: di18n.timon.get_it_goto_location(
+              get_chara_talk(cid),
+              vehicle_enum.keys[vehicle - 1],
+              location_enum.keys[positions[aim - 1].l],
+            ),
             type: 'text',
           },
         ]);
@@ -269,7 +264,7 @@ async function out_page() {
         era.set('flag:当前位置', location_enum.gate);
     }
     era.drawLine();
-    await era.printAndWait('【折返了】');
+    await era.printAndWait(i18n().timon.it_back_office);
     await sys_get_random_event(
       event_hooks.back_school,
       cid,

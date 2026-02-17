@@ -277,7 +277,8 @@ function page_header(enable_race_info) {
                     }
                   : {
                       config: { align: 'center' },
-                      content: race_characters.length > 2 ? '……' : '',
+                      content:
+                        race_characters.length > 2 ? i18n().ui_ellipses : '',
                       type: 'text',
                     },
               ]

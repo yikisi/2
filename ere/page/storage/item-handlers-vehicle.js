@@ -2,7 +2,9 @@ const era = require('#/era-electron');
 
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
-const { vehicle_enum, vehicle_names } = require('#/data/move-const');
+const { vehicle_enum } = require('#/data/move-const');
+
+const { i18n } = require('#/i18n/selector');
 
 /**
  * @param {number} item
@@ -10,7 +12,7 @@ const { vehicle_enum, vehicle_names } = require('#/data/move-const');
  */
 async function single_vehicle(item, vehicle = item - 60 + 1) {
   const equipped = era.get('flag:单人载具');
-  const item_name = vehicle_names[vehicle];
+  const item_name = i18n().vehicle[vehicle_enum.keys[vehicle - 1]];
   if (equipped === vehicle) {
     const ret = await select_yes_or_no(
       `现在正以【${item_name}】作为单人载具！要解除装备吗？`,
@@ -22,7 +24,7 @@ async function single_vehicle(item, vehicle = item - 60 + 1) {
   } else {
     const ret = await select_yes_or_no(
       equipped > 0
-        ? `现在正以【${vehicle_names[equipped]}】作为单人载具！要换用【${item_name}】吗？`
+        ? `现在正以【${i18n().vehicle[vehicle_enum.keys[equipped - 1]]}】作为单人载具！要换用【${item_name}】吗？`
         : `要装备【${item_name}】吗`,
     );
     if (ret) {
@@ -38,7 +40,7 @@ async function single_vehicle(item, vehicle = item - 60 + 1) {
  */
 async function multiple_vehicle(item, vehicle = item - 60 + 1) {
   const equipped = era.get('flag:多人载具');
-  const item_name = vehicle_names[vehicle];
+  const item_name = i18n().vehicle[vehicle_enum.keys[vehicle - 1]];
   if (equipped === vehicle) {
     const ret = await select_yes_or_no(
       `现在与他人外出时乘坐【${item_name}】！要解除装备吗？`,
@@ -50,7 +52,7 @@ async function multiple_vehicle(item, vehicle = item - 60 + 1) {
   } else {
     const ret = await select_yes_or_no(
       equipped > 0
-        ? `现在与他人外出时乘坐【${vehicle_names[equipped]}】！要换用【${item_name}】吗？`
+        ? `现在与他人外出时乘坐【${i18n().vehicle[vehicle_enum.keys[equipped - 1]]}】！要换用【${item_name}】吗？`
         : `以后要乘【${item_name}】与其他人外出吗？`,
     );
     if (ret) {

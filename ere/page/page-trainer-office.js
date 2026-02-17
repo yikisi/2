@@ -39,6 +39,7 @@ const { location_enum } = require('#/data/locations');
 const { attr_enum } = require('#/data/train-const');
 const era = require('#/era-electron');
 const di18n = require('#/i18n/extended-def');
+const { i18n } = require('#/i18n/selector');
 const get_display_name = require('#/utils/calc-display-name');
 
 /** @type {Record<string,function(CharaTalk,CharaTalk):{handle:function:Promise,name:string}>} */
@@ -260,10 +261,10 @@ async function page_trainer_office() {
       }
     }
     drawLine();
-    await printAndWait('【折返了】');
+    await printAndWait(i18n().timon.it_back_office);
   } else {
     drawLine();
-    await printAndWait('【没有人在的样子……折返了】');
+    await printAndWait(i18n().timon.it_force_back_office);
   }
   loc_characters.set(location_enum.trainer, trainer_list);
   await sys_get_random_event(event_hooks.back_school)({

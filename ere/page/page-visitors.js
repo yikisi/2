@@ -459,10 +459,10 @@ async function page_visitors() {
       }
     }
     era.drawLine();
-    await era.printAndWait('【折返了】');
+    await era.printAndWait(i18n().timon.it_back_office);
   } else {
     era.drawLine();
-    await era.printAndWait('【没有人在的样子……折返了】');
+    await era.printAndWait(i18n().timon.it_force_back_office);
   }
   loc_characters.set(location_enum.visitor, visitor_list);
   await sys_get_random_event(event_hooks.back_school)({

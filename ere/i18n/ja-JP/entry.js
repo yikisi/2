@@ -180,6 +180,7 @@ module.exports = class extends I18nEntry {
     edu,
     race,
   ) => [...title, name, palace, ' (', growth, ')', ...motivation, edu, ...race];
+  get_ui_race_indicator = (race, delta) => ['(', race, ' まで ', delta, ' 週)'];
   get_ui_curr_race_indicator = (race) => ['(今週開催: ', race, ')'];
 
   ui_change_image = '立ち絵切替';

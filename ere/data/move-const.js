@@ -23,30 +23,7 @@ const vehicle_enum = {
   pama: 0,
 };
 Object.keys(vehicle_enum).forEach((e, i) => (vehicle_enum[e] = i + 1));
-
-const vehicle_names = [];
-vehicle_names[vehicle_enum.skateboard] = '滑板';
-vehicle_names[vehicle_enum.bicycle] = '自行车';
-vehicle_names[vehicle_enum.hoverboard] = '平衡车';
-vehicle_names[vehicle_enum.multi_bicycle] = '双人自行车';
-vehicle_names[vehicle_enum.electric_bicycle] = '电动车';
-vehicle_names[vehicle_enum.car] = '小汽车';
-vehicle_names[vehicle_enum.sports_car] = '跑车';
-vehicle_names[vehicle_enum.portal] = '便携式空间门';
-vehicle_names[vehicle_enum.gold_ship] = '小金船号';
-vehicle_names[vehicle_enum.pama] = '善信号';
-
-const vehicle_verbs = {};
-vehicle_verbs[vehicle_enum.skateboard] = '踩';
-vehicle_verbs[vehicle_enum.bicycle] = '骑';
-vehicle_verbs[vehicle_enum.hoverboard] = '踩';
-vehicle_verbs[vehicle_enum.multi_bicycle] = '骑';
-vehicle_verbs[vehicle_enum.electric_bicycle] = '骑';
-vehicle_verbs[vehicle_enum.car] = '开';
-vehicle_verbs[vehicle_enum.sports_car] = '开';
-vehicle_verbs[vehicle_enum.portal] = '用';
-vehicle_verbs[vehicle_enum.gold_ship] = '踩';
-vehicle_verbs[vehicle_enum.pama] = '开';
+vehicle_enum.keys = Object.keys(vehicle_enum);
 
 const vehicle_influences = {};
 vehicle_influences[vehicle_enum.skateboard] = { stamina: 0.8, time: 0.5 };
@@ -81,6 +58,4 @@ module.exports = {
   location_move_cost,
   vehicle_enum,
   vehicle_influences,
-  vehicle_names,
-  vehicle_verbs,
 };

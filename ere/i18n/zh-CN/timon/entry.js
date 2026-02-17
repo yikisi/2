@@ -28,6 +28,7 @@ class I18nTimon {
   get_npc_celebration = (celebration) => `庆祝 ${celebration}`;
   npc_bye = '再见';
 
+  // it = information timon
   /** @param {CharaTalk} chara */
   get_it_office_study = (chara) => [
     '【指导了 ',
@@ -112,6 +113,44 @@ class I18nTimon {
     you.get_colored_name(),
     '约定晚上在家见面……',
   ];
+  /**
+   * @param {string} vehicle
+   * @param {string} location
+   */
+  get_it_arrive_location = (vehicle, location) => [
+    '【',
+    vehicle,
+    '抵达了 ',
+    location,
+    '】',
+  ];
+  /**
+   * @param {CharaTalk} chara
+   * @param {string} vehicle
+   * @param {string} location
+   */
+  get_it_goto_location = (chara, vehicle, location) => [
+    '【和 ',
+    chara.get_colored_name(),
+    ' 一起',
+    vehicle,
+    '前往 ',
+    location,
+    '】',
+  ];
+  /**
+   * @param {string} vehicle
+   * @param {string} location
+   */
+  get_it_self_goto_location = (vehicle, location) => [
+    '【独自',
+    vehicle,
+    '前往 ',
+    location,
+    '】',
+  ];
+  it_back_office = '【折返了】';
+  it_force_back_office = '【没有人在的样子……折返了】';
 
   ed_saying_01 = '九尺二间陋室里，红唇依竹共恩情。——高杉晋作';
   ed_saying_02 = '金钱、赛马娘、女人，男生永远搞不懂这三件事。——威尔・罗〇斯';
