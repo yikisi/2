@@ -23,17 +23,6 @@ const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
-const auto_reg = [
-  get_aim_race_index(race_enum.fuyo_sta, 1),
-  get_aim_race_index(race_enum.waka_sta, 1),
-  get_aim_race_index(race_enum.viol_sta, 1),
-  get_aim_race_index(race_enum.naru_kin, 1),
-  get_aim_race_index(race_enum.koku_kin, 1),
-  get_aim_race_index(race_enum.niig_kin, 1),
-  get_aim_race_index(race_enum.fuku_kin, 1),
-  get_aim_race_index(race_enum.kobe_hai, 1),
-];
-
 const aim_races = {
   [race_enum.begin_race]: 0b10,
   [get_aim_race_index(race_enum.sats_sho, 1)]: -2,
@@ -47,11 +36,11 @@ const aim_races = {
 };
 
 module.exports = class extends CustomizedCheck {
-  check_after_race(extra_flag) {
+  check_after_race(extra) {
     const edu_marks = new TamaEduMarks();
     const edu_weeks = era.get(`cflag:${this.id}:育成回合计时`);
-    if (extra_flag.rank === 1) {
-      const { race_class } = race_infos[extra_flag.race];
+    if (extra.rank === 1) {
+      const { race_class } = race_infos[extra.race];
       if (race_class <= class_enum.OP && edu_weeks <= 47 + 8) {
         edu_marks.op_count++;
       }
@@ -68,7 +57,7 @@ module.exports = class extends CustomizedCheck {
       race_list = race_history.get_values();
     if (
       race_list.filter(
-        (e) => race_infos[e.race].race_class <= class_enum.G3 && e.rank === 1,
+        (r) => race_infos[r.race].race_class <= class_enum.G3 && r.rank === 1,
       ).length >= 8 &&
       check_aim_race(races, race_enum.tenn_spr, 2, 1) &&
       check_aim_race(races, race_enum.takz_kin, 2, 1) &&
@@ -162,17 +151,11 @@ module.exports = class extends CustomizedCheck {
           break;
         case 95 + 14:
           add_event(event_hooks.week_start, edu_event.set_arg('threaten'));
-          break;
       }
       if (edu_marks.heal === -1) {
         sys_change_motivation(this.id, 1);
       }
-      if (era.get(`cflag:${this.id}:育成次数`) > 0) {
-        auto_reg.forEach((e) => (aim_races[e] = -4));
-      } else {
-        auto_reg.forEach((e) => (aim_races[e] = 4));
-      }
-      check_and_register_aim_race(this.id, this.get_aim_races(), edu_weeks);
+      check_and_register_aim_race(this.id, aim_races, edu_weeks);
     } else {
       super.check_next_week();
     }
@@ -206,14 +189,14 @@ module.exports = class extends CustomizedCheck {
   }
 
   is_aim_race(race, edu_weeks, rank) {
-    if (rank !== undefined && rank !== 1) {
+    if (rank !== void 0 && rank !== 1) {
       return 0;
     }
     const history = RaceHistory.get(this.id).get();
     switch (race) {
       case race_enum.toky_yus:
         if (
-          (rank !== undefined && rank !== 1) ||
+          (rank !== void 0 && rank !== 1) ||
           !check_aim_race(history, race_enum.sats_sho, 1, 1)
         ) {
           return 0;
@@ -221,7 +204,7 @@ module.exports = class extends CustomizedCheck {
         break;
       case race_enum.kiku_sho:
         if (
-          (rank !== undefined && rank !== 1) ||
+          (rank !== void 0 && rank !== 1) ||
           !check_aim_race(history, race_enum.sats_sho, 1, 1) ||
           !check_aim_race(history, race_enum.toky_yus, 1, 1)
         ) {
