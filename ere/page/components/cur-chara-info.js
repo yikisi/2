@@ -15,7 +15,6 @@ const chara_info_type = require('#/data/chara-info-type');
 const CharaTitles = require('#/data/chara-titles');
 const { motivation_colors } = require('#/data/color-const');
 const { love_colors, relation_colors } = require('#/data/color-const');
-const { get_growth } = require('#/data/ero/status-const');
 const {
   get_love_info,
   get_relation_info,
@@ -114,7 +113,6 @@ function cur_chara_component(cid, type, location_npc) {
             di18n.n_oot[out_of_train - 1],
           )
         : '';
-    const growth_info = get_growth(growth, 1);
     let mot_info = [];
     let edu_info = '';
     let race_info = [];
@@ -124,7 +122,7 @@ function cur_chara_component(cid, type, location_npc) {
           ' ',
           ...i18n().get_ui_motivation({
             color: motivation_colors[motivation + 2],
-            content: di18n.n_moti[motivation + 2],
+            content: di18n.n_mot[motivation + 2],
           }),
         ];
         edu_info =
@@ -151,7 +149,7 @@ function cur_chara_component(cid, type, location_npc) {
               title_info,
               get_chara_talk(cid).get_colored_name(),
               palace_info,
-              growth_info,
+              di18n.feature.get_growth(growth, 1),
               mot_info,
               edu_info,
               race_info,

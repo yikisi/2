@@ -298,27 +298,24 @@ class I18nNewGame {
   get_cus_f_male = (callname, sex, height) => [
     '旁白君称为：',
     callname,
-    ' | 性别：',
+    { isDivider: true },
+    '性别：',
     sex,
-    ' | 身高：',
+    { isDivider: true },
+    '身高：',
     height,
     'cm',
   ];
-  get_cus_f_female = (callname, sex, height, bust, cup, waist, hip) => [
+  get_cus_f_female = (callname, sex, height, female_info) => [
     ...this.get_cus_f_male(callname, sex, height),
-    ' ｜ 三围：B',
-    bust,
-    ' (',
-    cup,
-    ' Cup) · W',
-    waist,
-    ' · H',
-    hip,
+    { isDivider: true },
+    ...female_info,
   ];
   get_cus_f_hair = (hair, hair_color) => [
     '发型：',
     hair,
-    ' | 发色：',
+    { isDivider: true },
+    '发色：',
     hair_color,
   ];
   get_cus_f_uma = (body_hair, chara) => [
@@ -330,17 +327,21 @@ class I18nNewGame {
   ];
   get_cus_f_skin_male = (skin, armpit, pubic, pv_color, penis) => [
     ...this.get_cus_f_skin_female(skin, armpit, pubic, pv_color),
-    ' | 阴茎长度：',
+    { isDivider: true },
+    '阴茎长度：',
     penis,
   ];
   get_cus_f_skin_female = (skin, armpit, pubic, pv_color) => [
     '肤色：',
     skin,
-    ' | 腋毛：',
+    { isDivider: true },
+    '腋毛：',
     armpit,
-    ' | 阴毛：',
+    { isDivider: true },
+    '阴毛：',
     pubic,
-    ' | 性器颜色：',
+    { isDivider: true },
+    '性器颜色：',
     pv_color,
   ];
   cus_f_talent = '性格特征：';

@@ -209,7 +209,7 @@ async function preview_race(
               '：',
               {
                 color: motivation_colors[cur_chara.motivation + 2],
-                content: di18n.n_moti[cur_chara.motivation + 2],
+                content: di18n.n_mot[cur_chara.motivation + 2],
               },
               { isDivider: true },
               '第 ',

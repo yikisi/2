@@ -62,9 +62,9 @@ const di18n = {
     const _ = i18n();
     return [_.hp, _.tp];
   },
-  get n_moti() {
+  get n_mot() {
     const _ = i18n();
-    return [_.moti_0, _.moti_1, _.moti_2, _.moti_3, _.moti_4];
+    return [_.mot_0, _.mot_1, _.mot_2, _.mot_3, _.mot_4];
   },
   get n_adapt() {
     const _ = i18n();
@@ -146,6 +146,10 @@ const di18n = {
     i18n()
       .ui_too_long_template.replace('%WIDTH%', width.toString())
       .replace('%WIDTH*2%', (width * 2).toString()),
+  get ui_select_order_marks() {
+    const [m_down, m_up] = i18n().ui_select_order_marks;
+    return { '-1': m_down, 0: '', 1: m_up };
+  },
   /**
    * @param {boolean} has_event
    * @param {CostInfo} [cost_info]
@@ -242,6 +246,25 @@ const di18n = {
         _.n_pubic_hair,
         _.n_sex_organ_color,
       ];
+    },
+    /**
+     * @param {number} sex
+     * @param {number} race
+     * @returns {string}
+     */
+    get_sex_title(sex, race) {
+      return __(`feature.${race > 0 ? 'u_sex' : 'h_sex'}_${sex}`);
+    },
+    /**
+     * @param {number} growth
+     * @param {number} race
+     * @returns {string}
+     */
+    get_growth(growth, race) {
+      if (growth > 2) {
+        growth = 2;
+      }
+      return __(`feature.${race > 0 ? 'u_age' : 'h_age'}_${growth}`);
     },
     get n_skin() {
       const _ = i18n().feature;

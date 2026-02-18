@@ -24,11 +24,11 @@ module.exports = class extends I18nEntry {
   a_edu_2 = this.edu_2;
 
   ui_mot = 'Mot.';
-  moti_0 = 'Worst';
-  moti_1 = 'Worse';
-  moti_2 = 'Normal';
-  moti_3 = 'Better';
-  moti_4 = 'Best';
+  mot_0 = 'Worst';
+  mot_1 = 'Worse';
+  mot_2 = 'Normal';
+  mot_3 = 'Better';
+  mot_4 = 'Best';
 
   ui_love = 'Love';
   ui_love_template = 'Love: %LOVEINFO%';

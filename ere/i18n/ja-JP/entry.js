@@ -16,11 +16,11 @@ module.exports = class extends I18nEntry {
   abbr_tp = '気';
 
   ui_mot = 'やる気';
-  moti_0 = '絶不調';
-  moti_1 = '不調';
-  moti_2 = '普通';
-  moti_3 = '好調';
-  moti_4 = '絶好調';
+  mot_0 = '絶不調';
+  mot_1 = '不調';
+  mot_2 = '普通';
+  mot_3 = '好調';
+  mot_4 = '絶好調';
 
   a_g_grass = '芝';
   a_g_dirt = 'ダート';

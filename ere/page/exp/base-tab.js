@@ -16,7 +16,6 @@ const { join_to_string } = require('#/utils/list-utils');
 
 const CharaTitles = require('#/data/chara-titles');
 const race_clothes = require('#/data/clothe-const.json');
-const { sex_title } = require('#/data/ero/status-const');
 const { growth_info } = require('#/data/exp-const');
 const {
   get_breast_cup,
@@ -56,10 +55,9 @@ module.exports = {
     const right_intro_list = [];
     const growth = era.get(`cflag:${chara.id}:成长阶段`);
     const race = era.get(`cflag:${chara.id}:种族`);
-    let hair = era.get(`cstr:${chara.id}:呆毛`);
-    hair = join_to_string(
+    const hair = join_to_string(
       [
-        di18n.feature.get_ahoge_hair(hair),
+        di18n.feature.get_ahoge_hair(era.get(`cstr:${chara.id}:呆毛`)),
         __(`feature.fh_${era.get(`cstr:${chara.id}:前发`)}`),
         __(`feature.bh_${era.get(`cstr:${chara.id}:中发`)}`, ''),
         era
@@ -84,7 +82,7 @@ module.exports = {
       right_intro_list.push(
         !growth ? '幼年' : sys_get_full_chara(chara.id),
         ' ',
-        sex_title[chara.sex_code],
+        __(`feature.u_sex_${chara.sex_code}`),
       );
     } else {
       right_intro_list.push(__(`feature.h_sex_${chara.sex_code}`));
@@ -107,7 +105,9 @@ module.exports = {
       right_intro_list.push(
         '身高：',
         era.get(`cflag:${chara.id}:身高`).toString(),
-        'cm ｜ 体重：',
+        'cm',
+        { isDivider: true },
+        '体重：',
       );
       if (era.get(`status:${chara.id}:发胖`)) {
         right_intro_list.push('幸、幸福胖哦……');
@@ -120,14 +120,12 @@ module.exports = {
         if (flags.show_body) {
           right_intro_list.push(
             { isBr: true },
-            '三围：B',
-            get_bust_size(chara.id, flags.show_all_body).toString(),
-            ' (',
-            get_breast_cup(chara.id, flags.show_all_body).toString(),
-            ' Cup) · W',
-            get_waist_size(chara.id).toString(),
-            ' · H',
-            get_hip_size(chara.id).toString(),
+            ...i18n().detail.get_base_female_info(
+              get_bust_size(chara.id, flags.show_all_body).toString(),
+              get_breast_cup(chara.id, flags.show_all_body),
+              get_waist_size(chara.id).toString(),
+              get_hip_size(chara.id).toString(),
+            ),
           );
         } else {
           right_intro_list.push({ isBr: true }, '没有更多数据了……');
@@ -532,14 +530,14 @@ module.exports = {
             type: 'text',
           },
           {
-            config: { content: '特征', position: 'left' },
+            config: { content: i18n().tb_talent.n_talent, position: 'left' },
             type: 'divider',
           },
           ...((temp = get_talent(chara.id)).length
             ? [
                 {
                   config: { width: 2 },
-                  content: '性格',
+                  content: i18n().tb_talent.n_normal,
                   type: 'text',
                 },
                 {
@@ -553,7 +551,7 @@ module.exports = {
             ? [
                 {
                   config: { width: 2 },
-                  content: '其他',
+                  content: i18n().tb_talent.n_xp,
                   type: 'text',
                 },
                 {

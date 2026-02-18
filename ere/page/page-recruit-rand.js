@@ -37,7 +37,6 @@ const {
   attr_colors,
   el_danger_color,
 } = require('#/data/color-const');
-const { sex_title } = require('#/data/ero/status-const');
 const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
 const {
@@ -58,13 +57,15 @@ const { __, i18n } = require('#/i18n/selector');
 
 async function print_rec_page() {
   const me = get_chara_talk(0);
+  const uma =
+    era.get('flag:角色性别') === 1 ? i18n().name.uma_boy : i18n().name.uma_girl;
   let event_chara_list, flag_recruit, flag_leave;
 
-  const team_list = filter_chara('cflag', '招募状态', recruit_flags.yes),
-    stay_list = [
-      sys_get_star_premium_draw().chara,
-      era.get('flag:物色对象'),
-    ].filter((e) => e > 0);
+  const team_list = filter_chara('cflag', '招募状态', recruit_flags.yes);
+  const stay_list = [
+    sys_get_star_premium_draw().chara,
+    era.get('flag:物色对象'),
+  ].filter((e) => e > 0);
   let today_list = gacha(
     filter_chara('cflag', '随机招募', 1).filter(
       (v) => !team_list.includes(v) && era.get(`cflag:${v}:成长阶段`) >= 2,
@@ -97,8 +98,7 @@ async function print_rec_page() {
       if (cur_recruit && today_list.indexOf(cur_recruit) === -1) {
         buffer[0].push({
           content: [
-            get_chara_talk(cur_recruit).get_colored_name(),
-            ' 似乎不在训练场……',
+            ...i18n().timon.get_it_chara_not_in_recruit(cur_recruit),
             { isBr: 2 },
           ],
           type: 'text',
@@ -106,26 +106,14 @@ async function print_rec_page() {
       } else if (flag_limit) {
         buffer[0].push({
           content: [
-            me.get_colored_name(),
-            ' 已经有一定数量的担当，其他马',
-            era.get('flag:角色性别') === 1 ? '郎' : '娘',
-            '不会同意 ',
-            me.get_colored_name(),
-            ' 的招募了……',
+            ...i18n().timon.get_it_recruit_disabled(me, uma),
             { isBr: 2 },
           ],
           type: 'text',
         });
       } else {
         buffer[0].push({
-          content: [
-            '在训练场内见到了几位马',
-            era.get('flag:角色性别') === 1 ? '郎' : '娘',
-            '，是谁吸引了 ',
-            me.get_colored_name(),
-            ' 的注意力呢？',
-            { isBr: 2 },
-          ],
+          content: [...i18n().timon.get_it_in_recruit(me, uma), { isBr: 2 }],
           type: 'text',
         });
       }
@@ -136,7 +124,7 @@ async function print_rec_page() {
             columns: [
               {
                 names: get_image(cid)
-                  .map((e) => `${e}_半身`)
+                  .map((img) => `${img}_半身`)
                   .join('\t'),
                 type: 'image.whole',
               },
@@ -156,13 +144,13 @@ async function print_rec_page() {
               {
                 accelerator: cid + 1000,
                 config: { align: 'center' },
-                content: '个人情报预览',
+                content: i18n().ui_rec_chara_info,
                 type: 'button',
               },
               {
                 accelerator: cid + 2000,
                 config: { align: 'center' },
-                content: '育成情报预览',
+                content: i18n().ui_rec_edu_info,
                 type: 'button',
               },
             ],
@@ -171,33 +159,22 @@ async function print_rec_page() {
         }),
         [
           {
-            content: [
-              { isBr: true },
-              '* 招募按钮显示为',
-              { color: el_danger_color, content: '红色' },
-              '的角色有口上',
-            ],
+            content: [{ isBr: true }, i18n().ui_recruit_tip],
             type: 'text',
           },
         ],
       );
     } else {
       buffer[0].push({
-        config: {
-          align: 'center',
-        },
-        content: [
-          '训练场没有引人注目的马',
-          era.get('flag:角色性别') === 1 ? '郎' : '娘',
-          '……',
-        ],
+        config: { align: 'center' },
+        content: i18n().timon.get_it_no_chara_in_recruit(uma),
         type: 'text',
       });
     }
     era.setHorizontalAlign('space-around');
     era.printInColRows(...buffer, [
       { type: 'divider' },
-      { type: 'button', accelerator: 999, content: '直接离开' },
+      { type: 'button', accelerator: 999, content: i18n().ui_rec_exit },
     ]);
     era.setHorizontalAlign('start');
 
@@ -226,10 +203,9 @@ async function print_rec_page() {
       const name = get_display_name(era.get(`static:${selected}:name`));
       const sex_code = era.get(`cflag:${selected}:性别`);
       const talent_list = [];
-      let hair = era.get(`cstr:${selected}:呆毛`);
-      hair = join_to_string(
+      const hair = join_to_string(
         [
-          di18n.feature.get_ahoge_hair(hair),
+          di18n.feature.get_ahoge_hair(era.get(`cstr:${selected}:呆毛`)),
           __(`feature.fh_${era.get(`cstr:${selected}:前发`)}`),
           __(`feature.bh_${era.get(`cstr:${selected}:中发`)}`, ''),
           era
@@ -246,7 +222,7 @@ async function print_rec_page() {
         talent_list.push(
           {
             config: { width: 2 },
-            content: '性格',
+            content: i18n().tb_talent.n_normal,
             type: 'text',
           },
           {
@@ -261,7 +237,7 @@ async function print_rec_page() {
         talent_list.push(
           {
             config: { width: 2 },
-            content: '其他',
+            content: i18n().tb_talent.n_xp,
             type: 'text',
           },
           {
@@ -275,27 +251,31 @@ async function print_rec_page() {
         [
           {
             config: {
-              content: `${name} 的个人情报`,
+              content: i18n().ui_rec_c_info_template.replace('%NAME%', name),
               position: 'left',
             },
             type: 'divider',
           },
           {
-            content: [
-              '肤色',
-              { color: get_skin_color(selected), content: get_skin(selected) },
-              ' 的 ',
+            content: i18n().detail.get_base_summary_info(
+              {
+                color: get_skin_color(selected),
+                content: get_skin(selected),
+              },
               get_colored_hair(selected),
-              ' ',
               get_colored_body_hair(selected),
-              ' ',
               di18n.feature.get_chara_info(era.get(`cflag:${selected}:气性`)),
-              ' ',
-              sex_title[sex_code],
-            ],
+              __(`feature.u_sex_${sex_code}`),
+            ),
             type: 'text',
           },
-          { content: ['发型：', hair], type: 'text' },
+          {
+            content: i18n().detail.base_hair_info_template.replace(
+              '%HAIR%',
+              hair,
+            ),
+            type: 'text',
+          },
           {
             content: [
               '出生于 ',
@@ -308,7 +288,7 @@ async function print_rec_page() {
           },
           {
             config: {
-              content: `${name} 的身体尺寸`,
+              content: i18n().ui_rec_c_body_template.replace('%NAME%', name),
               position: 'left',
             },
             type: 'divider',
@@ -317,7 +297,7 @@ async function print_rec_page() {
             content: [
               '身高：',
               era.get(`cflag:${selected}:身高`).toString(),
-              'cm ｜ 体重：控制得当',
+              'cm',
             ],
             type: 'text',
           },
@@ -325,23 +305,19 @@ async function print_rec_page() {
           (era.get('status:0:透视镜片') || era.get('status:0:马语者'))
             ? [
                 {
-                  content: [
-                    '三围：B',
+                  content: i18n().detail.get_base_female_info(
                     get_bust_size(selected, true).toString(),
-                    ' (',
-                    get_breast_cup(selected, true).toString(),
-                    ' Cup) · W',
+                    get_breast_cup(selected, true),
                     get_waist_size(selected).toString(),
-                    ' · H',
                     get_hip_size(selected).toString(),
-                  ],
+                  ),
                   type: 'text',
                 },
               ]
             : []),
           {
             config: {
-              content: `${name} 的性格特征`,
+              content: i18n().ui_rec_c_talent_template.replace('%NAME%', name),
               position: 'left',
             },
             type: 'divider',
@@ -452,7 +428,7 @@ async function print_rec_page() {
         [
           {
             config: {
-              content: `${name} 的训练加成`,
+              content: i18n().ui_rec_e_train_template.replace('%NAME%', name),
               position: 'left',
             },
             type: 'divider',
@@ -473,7 +449,7 @@ async function print_rec_page() {
             })),
           {
             config: {
-              content: `${name} 的比赛适应`,
+              content: i18n().ui_rec_e_adapt_template.replace('%NAME%', name),
               position: 'left',
             },
             type: 'divider',
@@ -481,7 +457,7 @@ async function print_rec_page() {
           ...adapt_info,
           {
             config: {
-              content: `${name} 的比赛技巧`,
+              content: i18n().ui_rec_e_skill_template.replace('%NAME%', name),
               position: 'left',
             },
             type: 'divider',
@@ -489,7 +465,7 @@ async function print_rec_page() {
           ...skill_buffer,
           {
             config: {
-              content: `${name} 的育成目标`,
+              content: i18n().ui_rec_e_aim_template.replace('%NAME%', name),
               position: 'left',
             },
             type: 'divider',
@@ -514,7 +490,7 @@ async function print_rec_page() {
             }),
           {
             config: {
-              content: `${name} 的专属称号`,
+              content: i18n().ui_rec_e_title_template.replace('%NAME%', name),
               position: 'left',
             },
             type: 'divider',

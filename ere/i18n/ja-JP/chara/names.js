@@ -8,6 +8,8 @@ module.exports = class extends I18nNames {
 
   mr = 'さん';
   miss = 'さん';
+  uma_boy = 'ウマ郎';
+  uma_girl = 'ウマ娘';
   big_master = 'ご主人様';
   trainer = 'トレーナー';
   trainer25t0 = 'モルモットさん';

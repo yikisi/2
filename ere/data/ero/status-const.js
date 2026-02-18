@@ -37,9 +37,6 @@ pregnant_stage_names[1 << pregnant_stage_enum.late] =
 pregnant_stage_names[1 << pregnant_stage_enum.pre_birth] =
   '迎接生命奇迹的时刻即将到来，该做好准备了';
 
-const u_g_stage = ['幼年期', '成长期', '本格期'];
-const h_g_stage = ['幼年', '少年', '青年'];
-
 module.exports = {
   breast_size: {
     AA: '可爱',
@@ -51,20 +48,6 @@ module.exports = {
     F: '丰硕',
     G: '硕大',
   },
-  child_title: { 0: '女儿', 1: '儿子', 10: '女儿？' },
-  /**
-   * @param {number} growth
-   * @param {number} race
-   * @returns {string}
-   */
-  get_growth(growth, race) {
-    const arr = race > 0 ? u_g_stage : h_g_stage;
-    if (growth > 2) {
-      return arr[2];
-    }
-    return arr[growth];
-  },
-  growth_stage: ['幼年期', '成长期', '本格期'],
   hair_desc: [
     '稀疏的绒毛',
     '整齐的短毛',

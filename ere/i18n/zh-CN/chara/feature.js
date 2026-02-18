@@ -4,9 +4,25 @@ class I18nCharaFeature {
   ahoge_hair_template = '%LONG%呆毛';
   chara_template = '[%NAME%]：%DESC%';
 
+  n_sex = '性别';
+
   h_sex_0 = '女性';
   h_sex_1 = '男性';
   h_sex_10 = '女性？';
+
+  u_sex_0 = '马娘';
+  u_sex_1 = '马郎';
+  u_sex_10 = '马娘？';
+
+  n_age = '年龄';
+
+  h_age_0 = '幼年';
+  h_age_1 = '少年';
+  h_age_2 = '青年';
+
+  u_age_0 = '幼年期';
+  u_age_1 = '成长期';
+  u_age_2 = '本格期';
 
   n_height_with_cm = '身高 (cm)';
 

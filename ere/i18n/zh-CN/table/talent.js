@@ -2,6 +2,10 @@ class I18nTalent {
   template = '[%NAME%]';
   shop_template = '%NAME% [%STATUS%]';
 
+  n_talent = '特征';
+  n_normal = '性格';
+  n_xp = '其他';
+
   '0_1' = '感性';
   '0_-1' = '粗神经';
   '1_1' = '自卑';

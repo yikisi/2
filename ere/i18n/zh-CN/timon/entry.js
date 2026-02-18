@@ -152,6 +152,39 @@ class I18nTimon {
   it_back_office = '【折返了】';
   it_force_back_office = '【没有人在的样子……折返了】';
 
+  /**
+   * @param {CharaTalk} you
+   * @param {string} uma
+   */
+  get_it_in_recruit = (you, uma) => [
+    '【在训练场内见到了几位',
+    uma,
+    '，是谁吸引了 ',
+    you.get_colored_name(),
+    ' 的注意力呢？】',
+  ];
+  /** @param {CharaTalk} chara */
+  get_it_chara_not_in_recruit = (chara) => [
+    '【',
+    chara.get_colored_name(),
+    ' 似乎不在训练场】',
+  ];
+  /**
+   * @param {CharaTalk} you
+   * @param {string} uma
+   */
+  get_it_recruit_disabled = (you, uma) => [
+    '【',
+    you.get_colored_name(),
+    ' 已经有一定数量的担当，其他',
+    uma,
+    '不会同意 ',
+    you.get_colored_name(),
+    ' 的招募了】',
+  ];
+  /** @param {string} uma */
+  get_it_no_chara_in_recruit = (uma) => ['【训练场没有引人注目的', uma, '】'];
+
   ed_saying_01 = '九尺二间陋室里，红唇依竹共恩情。——高杉晋作';
   ed_saying_02 = '金钱、赛马娘、女人，男生永远搞不懂这三件事。——威尔・罗〇斯';
   ed_saying_03 = '一文钱难倒英雄汉。——李绿园';

@@ -17,16 +17,11 @@ const chara_info_type = require('#/data/chara-info-type');
 const CharaTitles = require('#/data/chara-titles');
 const {
   adaptability_colors,
-  el_danger_color,
   love_colors,
   motivation_colors,
   relation_colors,
 } = require('#/data/color-const');
-const {
-  get_growth,
-  pregnant_stage_enum,
-  sex_title,
-} = require('#/data/ero/status-const');
+const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const EventMarks = require('#/data/event/event-marks');
 const recruit_flags = require('#/data/event/recruit-flags');
 const {
@@ -40,9 +35,7 @@ const { get_growth_color } = require('#/data/other-const');
 const RaceHistory = require('#/data/race/model/race-history');
 
 const di18n = require('#/i18n/extended-def');
-const { __, i18n } = require('#/i18n/selector');
-
-const arrows = { '-1': '▼', 0: '', 1: '▲' };
+const { i18n } = require('#/i18n/selector');
 
 /**
  * @param {number} cid
@@ -96,7 +89,7 @@ function get_suffix(cid, type) {
           color: motivation_colors[motivation + 2],
           width: 2,
         },
-        content: di18n.n_moti[motivation + 2],
+        content: di18n.n_mot[motivation + 2],
         type: 'text',
       },
       {
@@ -120,7 +113,7 @@ function get_suffix(cid, type) {
       {
         config: { align: 'center', width: 2 },
         content: cid
-          ? `${era.get(`cflag:${cid}:育成次数`) + 1}`
+          ? (era.get(`cflag:${cid}:育成次数`) + 1).toString()
           : i18n().ui_invalid_value,
         type: 'text',
       },
@@ -129,20 +122,19 @@ function get_suffix(cid, type) {
     const relation = get_relation_info(cid);
     const love = get_love_info(cid);
     const race = era.get(`cflag:${cid}:种族`);
-    const g_level = era.get(`cflag:${cid}:成长阶段`);
-    const growth = get_growth(g_level, race);
+    const growth = era.get(`cflag:${cid}:成长阶段`);
     const sex = era.get(`cflag:${cid}:性别`);
     const palace = era.get(`cflag:${cid}:殿堂`);
     const in_train = era.get(`cflag:${cid}:育成回合计时`) < 3 * 48;
     ret.push(
       {
         config: { align: 'center', width: 2 },
-        content: race ? sex_title[sex] : __(`feature.h_sex_${sex}`),
+        content: di18n.feature.get_sex_title(sex, race),
         type: 'text',
       },
       {
-        config: { align: 'center', color: get_growth_color(g_level), width: 2 },
-        content: growth,
+        config: { align: 'center', color: get_growth_color(growth), width: 2 },
+        content: di18n.feature.get_growth(growth, race),
         type: 'text',
       },
       {
@@ -267,7 +259,7 @@ async function select_target(
     return {
       accelerator: acc,
       config: { align: 'center', showAcc: false, width },
-      content: `${content}${arrows[sorters[acc - 1000]]}`,
+      content: `${content}${di18n.ui_select_order_marks[sorters[acc - 1000]]}`,
       type: 'button',
     };
   }
@@ -280,37 +272,42 @@ async function select_target(
     const buffer = [];
     buffer.push({
       config: {
-        content: `选择${
-          type === chara_info_type.info ? '要查看情报的' : '要互动的'
-        }角色 (${show_list.length})`,
+        content: (type === chara_info_type.info
+          ? i18n().ui_select_hd_info_template
+          : i18n().ui_select_hd_interact_template
+        ).replace('%COUNT%', show_list.length.toString()),
       },
       type: 'divider',
     });
 
     if (show_list.length) {
       buffer.push(
-        { config: { width: 4 }, content: '姓名', type: 'text' },
+        {
+          config: { width: 4 },
+          content: i18n().ui_select_hd_name,
+          type: 'text',
+        },
         {
           config: { align: 'center', width: 4 },
-          content: '称号',
+          content: i18n().title.n_title,
           type: 'text',
         },
       );
       if (type === chara_info_type.train) {
         buffer.push(
-          get_button(1007, '评价', 2),
+          get_button(1007, i18n().ui_select_hd_score, 2),
           get_button(1008, i18n().ui_mot, 2),
-          get_button(1009, '战绩', 2),
-          get_button(1004, '育成', 2),
-          get_button(1010, '周目', 2),
+          get_button(1009, i18n().ui_select_hd_races, 2),
+          get_button(1004, i18n().ui_select_hd_edu, 2),
+          get_button(1010, i18n().ui_select_hd_playthrough, 2),
         );
       } else {
         buffer.push(
-          get_button(1000, '性别', 2),
-          get_button(1001, '年龄', 2),
+          get_button(1000, i18n().feature.n_sex, 2),
+          get_button(1001, i18n().feature.n_age, 2),
           get_button(1002, i18n().ui_relation, 2),
           get_button(1003, i18n().ui_love, 2),
-          get_button(1004, '育成', 2),
+          get_button(1004, i18n().ui_select_hd_edu, 2),
         );
       }
       buffer.push(
@@ -325,18 +322,17 @@ async function select_target(
         const chara = get_chara_talk(cid);
         const titles = CharaTitles.get(cid);
         const title = titles.get_colored_curr_title(true);
-        const event_counts =
-          type === chara_info_type.school ? EventMarks.get(cid).count() : 0;
+        type === chara_info_type.school ? EventMarks.get(cid).count() : 0;
         buffer.push({
           accelerator: cid,
           config: {
-            buttonType: event_counts > 0 ? 'danger' : 'warning',
+            buttonType:
+              type === chara_info_type.school && EventMarks.get(cid).count() > 0
+                ? 'danger'
+                : 'warning',
             width: 4,
           },
-          content:
-            chara.actual_name === chara.name
-              ? chara.name
-              : `${chara.name} (${chara.actual_name})`,
+          content: chara.full_name,
           type: 'button',
         });
         if (title) {
@@ -348,13 +344,13 @@ async function select_target(
         } else if (titles.count() > 0) {
           buffer.push({
             config: { align: 'center', width: 4 },
-            content: `（${titles.count()}）`,
+            content: `(${titles.count()})`,
             type: 'text',
           });
         } else {
           buffer.push({
             config: { align: 'center', width: 4 },
-            content: '（无）',
+            content: `(${i18n().ui_nothing})`,
             type: 'text',
           });
         }
@@ -362,7 +358,7 @@ async function select_target(
       });
     } else {
       buffer.push({
-        content: '队伍中没有其他成员',
+        content: i18n().ui_select_no_character,
         config: { align: 'center' },
         type: 'text',
       });
@@ -371,11 +367,7 @@ async function select_target(
       buffer.push(
         { type: 'divider' },
         {
-          content: [
-            '* 选择按钮显示为',
-            { color: el_danger_color, content: '红色' },
-            '的角色本周有特殊事件需要你关注……',
-          ],
+          content: i18n().ui_select_event_filter_tooltip,
           type: 'text',
         },
       );
@@ -386,12 +378,14 @@ async function select_target(
         {
           accelerator: 1095,
           config: { disabled: page.curr === 1, width: 3 },
-          content: '上一页',
+          content: i18n().ui_pg_prev,
           type: 'button',
         },
         {
           config: { align: 'center', width: 4 },
-          content: `第 ${page.curr} 页 / 共 ${max_page} 页`,
+          content: i18n()
+            .ui_pagination_template.replace('%CURR%', page.curr.toString())
+            .replace('%TOTAL%', max_page.toString()),
           type: 'text',
         },
         {
@@ -401,7 +395,7 @@ async function select_target(
             disabled: page.curr === max_page,
             width: 3,
           },
-          content: '下一页',
+          content: i18n().ui_pg_next,
           type: 'button',
         },
       );
@@ -416,13 +410,16 @@ async function select_target(
               buttonType: e_filter ? 'warning' : 'info',
               width: 11,
             },
-            content: `仅显示有特殊事件的角色 [${e_filter ? '开' : '关'}]`,
+            content: i18n().ui_select_event_filter_template.replace(
+              '%STATUS%',
+              e_filter ? i18n().ui_on : i18n().ui_off,
+            ),
             type: 'button',
           },
           {
             accelerator: 1099,
             config: { align: 'right', width: 3 },
-            content: '返回',
+            content: i18n().ui_back,
             type: 'button',
           },
         );
@@ -432,13 +429,13 @@ async function select_target(
           {
             accelerator: 1098,
             config: { align: 'right', width: 11 },
-            content: '清空互动',
+            content: i18n().ui_select_clear,
             type: 'button',
           },
           {
             accelerator: 1099,
             config: { align: 'right', width: 3 },
-            content: '返回',
+            content: i18n().ui_back,
             type: 'button',
           },
         );
@@ -452,19 +449,22 @@ async function select_target(
               buttonType: e_filter ? 'warning' : 'info',
               width: 7,
             },
-            content: `仅显示有特殊事件的角色 [${e_filter ? '开' : '关'}]`,
+            content: i18n().ui_select_event_filter_template.replace(
+              '%STATUS%',
+              e_filter ? i18n().ui_on : i18n().ui_off,
+            ),
             type: 'button',
           },
           {
             accelerator: 1098,
             config: { align: 'right', width: 4 },
-            content: '清空互动',
+            content: i18n().ui_select_clear,
             type: 'button',
           },
           {
             accelerator: 1099,
             config: { align: 'right', width: 3 },
-            content: '返回',
+            content: i18n().ui_back,
             type: 'button',
           },
         );

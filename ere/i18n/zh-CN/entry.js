@@ -14,11 +14,11 @@ class I18nEntry {
   abbr_tp = '精';
 
   ui_mot = '干劲';
-  moti_0 = '极差';
-  moti_1 = '较差';
-  moti_2 = '一般';
-  moti_3 = '较佳';
-  moti_4 = '极佳';
+  mot_0 = '极差';
+  mot_1 = '较差';
+  mot_2 = '一般';
+  mot_3 = '较佳';
+  mot_4 = '极佳';
 
   a_g_grass = '草地';
   a_g_dirt = '泥地';
@@ -218,6 +218,7 @@ class I18nEntry {
   ui_et_next = '后一项';
   ui_pg_prev = '前一页';
   ui_pg_next = '后一页';
+  ui_pagination_template = '第 %CURR% 页 / 共 %TOTAL% 页';
   ui_default = '默认';
   ui_game_over = 'GAME OVER';
   ui_invalid_value = '-';
@@ -270,6 +271,20 @@ class I18nEntry {
     ' 周)',
   ];
   get_ui_curr_race_indicator = (race) => ['(本周有 ', race, ')'];
+
+  ui_select_hd_info_template = '选择要查看情报的角色 (%COUNT%)';
+  ui_select_hd_interact_template = '选择要互动的角色 (%COUNT%)';
+  ui_select_hd_name = '名字';
+  ui_select_hd_score = '评价';
+  ui_select_hd_races = '成绩';
+  ui_select_hd_edu = '育成';
+  ui_select_hd_playthrough = '周目';
+  ui_select_clear = '清空互动';
+  ui_select_no_character = '队伍中没有其他成员';
+  ui_select_event_filter_tooltip =
+    '* 选择按钮显示为红色的角色本周有特殊事件需要关注';
+  ui_select_event_filter_template = '仅显示有特殊事件的角色 [%STATUS%]';
+  ui_select_order_marks = ['▼', '▲'];
 
   ui_change_image = '切换立绘';
   ui_show_team = '查看队伍列表';
@@ -340,6 +355,20 @@ class I18nEntry {
   ui_foreign_rest_max_tip = '身体已调理至健康';
   ui_foreign_train_max_tip = '已完全适应跑道';
 
+  ui_recruit_tip = '* 招募按钮显示为红色的角色有口上';
+  ui_rec_chara_info = '个人情报预览';
+  ui_rec_edu_info = '育成情报预览';
+  ui_rec_exit = '直接离开';
+
+  ui_rec_c_info_template = '%NAME% 的个人情报';
+  ui_rec_c_body_template = '%NAME% 的身体尺寸';
+  ui_rec_c_talent_template = '%NAME% 的性格特征';
+  ui_rec_e_train_template = '%NAME% 的训练加成';
+  ui_rec_e_adapt_template = '%NAME% 的脚质适应';
+  ui_rec_e_skill_template = '%NAME% 的比赛技巧';
+  ui_rec_e_aim_template = '%NAME% 的育成目标';
+  ui_rec_e_title_template = '%NAME% 的专属称号';
+
   ui_bs_flatter = '虚与委蛇';
   ui_bs_unlock = '尝试脱困';
   ui_bs_relax = '只是静坐';
@@ -355,6 +384,7 @@ class I18nEntry {
   title = new (require('#/i18n/zh-CN/chara/titles'))();
   title_desc = new (require('#/i18n/zh-CN/chara/title-desc'))();
   feature = new (require('#/i18n/zh-CN/chara/feature'))();
+  detail = new (require('#/i18n/zh-CN/chara/detail'))();
 
   kojo = new (require('#/i18n/zh-CN/kojo/entry'))();
   timon = new (require('#/i18n/zh-CN/timon/entry'))();

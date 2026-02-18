@@ -78,7 +78,9 @@ class CharaTalk {
     if (this.actual_name === this.name) {
       return this.name;
     } else {
-      return `${this.name} (${this.actual_name})`;
+      return i18n()
+        .name.full_name_template.replace('%NAME%', this.name)
+        .replace('%ACTUALNAME%', this.actual_name);
     }
   }
 

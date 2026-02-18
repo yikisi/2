@@ -59,7 +59,7 @@ function sys_change_motivation(cid, val) {
       get_chara_talk(cid).get_colored_name(),
       ' 的干劲现在是 ',
       {
-        content: di18n.n_moti[new_val + 2],
+        content: di18n.n_mot[new_val + 2],
         color: motivation_colors[new_val + 2],
       },
     ]);

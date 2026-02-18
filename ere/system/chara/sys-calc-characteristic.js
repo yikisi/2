@@ -28,9 +28,9 @@ module.exports = {
    */
   sys_get_full_chara(cid) {
     const chara = get_chara(cid);
-    const chara_flag = era.get(`cflag:${cid}:气性`);
+    const cflag = era.get(`cflag:${cid}:气性`);
     const info = di18n.feature.get_chara_info(chara);
-    if (chara_flag !== chara) {
+    if (cflag !== chara) {
       info.fontStyle = 'italic';
       info.title += '\n' + i18n().feature.chara_twisted;
     }

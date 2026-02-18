@@ -5,6 +5,7 @@ class I18nNames {
   kun_template = '%NAME%君';
   duplicate_template = '%NAME% 已在 %LAN% 语言库中被使用！请重新输入：';
   duplicate_template2 = '已有名为 %NAME% 的角色！请重新输入：';
+  full_name_template = '%NAME% (%ACTUALNAME%)';
 
   // Callname
   leading_role = '主人公';
