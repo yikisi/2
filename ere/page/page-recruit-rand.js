@@ -1,11 +1,6 @@
 const era = require('#/era-electron');
 
 const sys_check_team_limit = require('#/system/chara/sys-check-team-limit');
-const {
-  get_bust_size,
-  get_hip_size,
-  get_waist_size,
-} = require('#/system/ero/sys-calc-ero-status');
 const sys_get_star_premium_draw = require('#/system/flag/sys-get-star-premium-draw');
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
 const { get_image } = require('#/system/sys-calc-image');
@@ -14,6 +9,13 @@ const sys_get_random_event = require('#/system/sys-get-random-event');
 
 const arrive_location = require('#/page/components/arrive-location');
 const print_page_header = require('#/page/components/page-header');
+const {
+  get_shared_com_base_birthday,
+  get_shared_com_base_body,
+  get_shared_com_base_female,
+  get_shared_com_base_hair,
+  get_shared_com_base_summary,
+} = require('#/page/exp/snippets');
 
 const { get_custom_check } = require('#/event/check/check-factory');
 const { check_edu_script } = require('#/event/edu/edu-factory');
@@ -22,11 +24,7 @@ const { check_rec_script, run_custom_rec } = require('#/event/rec/rec-factory');
 
 const get_display_name = require('#/utils/calc-display-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
-const {
-  gacha,
-  get_random_entry,
-  join_to_string,
-} = require('#/utils/list-utils');
+const { gacha, get_random_entry } = require('#/utils/list-utils');
 
 const CharaAvailableSkills = require('#/data/chara-available-skills');
 const { get_chara_color } = require('#/data/chara-colors');
@@ -41,11 +39,6 @@ const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
 const {
   get_adaptability_rank,
-  get_breast_cup,
-  get_colored_body_hair,
-  get_colored_hair,
-  get_skin,
-  get_skin_color,
   get_talent,
   get_xp,
 } = require('#/data/info-generator');
@@ -203,20 +196,6 @@ async function print_rec_page() {
       const name = get_display_name(era.get(`static:${selected}:name`));
       const sex_code = era.get(`cflag:${selected}:性别`);
       const talent_list = [];
-      const hair = join_to_string(
-        [
-          di18n.feature.get_ahoge_hair(era.get(`cstr:${selected}:呆毛`)),
-          __(`feature.fh_${era.get(`cstr:${selected}:前发`)}`),
-          __(`feature.bh_${era.get(`cstr:${selected}:中发`)}`, ''),
-          era
-            .get(`cstr:${selected}:后发`)
-            .split('+')
-            .map((h) => __(`feature.bh_${h}`, ''))
-            .filter((h) => h)
-            .join(i18n().feature.hair_splitter),
-        ],
-        i18n().feature.hair_splitter,
-      );
       let temp = get_talent(selected);
       if (temp.length > 0) {
         talent_list.push(
@@ -257,33 +236,15 @@ async function print_rec_page() {
             type: 'divider',
           },
           {
-            content: i18n().detail.get_base_summary_info(
-              {
-                color: get_skin_color(selected),
-                content: get_skin(selected),
-              },
-              get_colored_hair(selected),
-              get_colored_body_hair(selected),
-              di18n.feature.get_chara_info(era.get(`cflag:${selected}:气性`)),
-              __(`feature.u_sex_${sex_code}`),
-            ),
+            content: get_shared_com_base_summary(selected),
             type: 'text',
           },
           {
-            content: i18n().detail.base_hair_info_template.replace(
-              '%HAIR%',
-              hair,
-            ),
+            content: get_shared_com_base_hair(selected),
             type: 'text',
           },
           {
-            content: [
-              '出生于 ',
-              era.get(`cflag:${selected}:出生月份`),
-              ' 月 ',
-              era.get(`cflag:${selected}:出生日期`),
-              ' 日',
-            ],
+            content: get_shared_com_base_birthday(selected),
             type: 'text',
           },
           {
@@ -294,23 +255,14 @@ async function print_rec_page() {
             type: 'divider',
           },
           {
-            content: [
-              '身高：',
-              era.get(`cflag:${selected}:身高`).toString(),
-              'cm',
-            ],
+            content: get_shared_com_base_body(selected),
             type: 'text',
           },
           ...(sex_code !== 1 &&
           (era.get('status:0:透视镜片') || era.get('status:0:马语者'))
             ? [
                 {
-                  content: i18n().detail.get_base_female_info(
-                    get_bust_size(selected, true).toString(),
-                    get_breast_cup(selected, true),
-                    get_waist_size(selected).toString(),
-                    get_hip_size(selected).toString(),
-                  ),
+                  content: get_shared_com_base_female(selected, true),
                   type: 'text',
                 },
               ]

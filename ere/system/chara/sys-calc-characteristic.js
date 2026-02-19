@@ -24,9 +24,12 @@ module.exports = {
   sys_get_chara: get_chara,
   /**
    * @param {number} cid
-   * @returns {{content:string,title:string,[fontStyle]:string}}
+   * @returns {PrintedSpan|string}
    */
   sys_get_full_chara(cid) {
+    if (!era.get(`cflag:${cid}:成长阶段`)) {
+      return i18n().feature.baby_uma_adjective;
+    }
     const chara = get_chara(cid);
     const cflag = era.get(`cflag:${cid}:气性`);
     const info = di18n.feature.get_chara_info(chara);

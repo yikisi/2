@@ -28,7 +28,7 @@ const { attr_enum } = require('#/data/train-const');
 const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends CustomizedRecruit {
-  async recruit() {
+  async recruit(stage, ebj) {
     if (await this.check_before_rec()) {
       return;
     }
@@ -95,7 +95,7 @@ module.exports = class extends CustomizedRecruit {
       // ABLNAME:0 - 4 = 速度训练等级 - 智力训练等级
       era.add(`abl:${this.id}:${i}`, 2);
       // BASENAME:5 - 9 = 速度 - 智力
-      era.add(`base:${this.id}:${5 + i}`, get_random_value(400, 500));
+      era.add(`base:${this.id}:${5 + i}`, get_random_value(300, 400));
     }
     // EXPNAME:1 = 技能点数
     era.add(`exp:${this.id}:1`, 600);

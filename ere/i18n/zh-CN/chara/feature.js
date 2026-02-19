@@ -24,6 +24,8 @@ class I18nCharaFeature {
   u_age_1 = '成长期';
   u_age_2 = '本格期';
 
+  baby_uma_adjective = '幼年';
+
   n_height_with_cm = '身高 (cm)';
 
   n_hair_color = '发色';

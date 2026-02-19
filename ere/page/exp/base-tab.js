@@ -1,37 +1,24 @@
 const era = require('#/era-electron');
 
-const {
-  sys_get_full_chara,
-} = require('#/system/chara/sys-calc-characteristic');
 const sys_change_hair = require('#/system/chara/sys-change-hair');
 const { check_chara_ero_image } = require('#/system/ero/sys-calc-ero-image');
-const {
-  get_bust_size,
-  get_hip_size,
-  get_waist_size,
-} = require('#/system/ero/sys-calc-ero-status');
 const { get_image } = require('#/system/sys-calc-image');
 
-const { join_to_string } = require('#/utils/list-utils');
+const {
+  get_shared_com_base_birthday,
+  get_shared_com_base_body,
+  get_shared_com_base_female,
+  get_shared_com_base_hair,
+  get_shared_com_base_summary,
+} = require('#/page/exp/snippets');
 
 const CharaTitles = require('#/data/chara-titles');
 const race_clothes = require('#/data/clothe-const.json');
 const { growth_info } = require('#/data/exp-const');
-const {
-  get_breast_cup,
-  get_colored_body_hair,
-  get_colored_hair,
-  get_skin,
-  get_skin_color,
-  get_talent,
-  get_xp,
-} = require('#/data/info-generator');
+const { get_talent, get_xp } = require('#/data/info-generator');
 const { back_hairs, front_hairs, top_hairs } = require('#/data/other-const');
 
-const di18n = require('#/i18n/extended-def');
 const { __, i18n } = require('#/i18n/selector');
-
-const page_name = '个人情报';
 
 /**
  * @param {number} cid
@@ -53,82 +40,32 @@ module.exports = {
    */
   generate(chara, flags) {
     const right_intro_list = [];
-    const growth = era.get(`cflag:${chara.id}:成长阶段`);
-    const race = era.get(`cflag:${chara.id}:种族`);
-    const hair = join_to_string(
-      [
-        di18n.feature.get_ahoge_hair(era.get(`cstr:${chara.id}:呆毛`)),
-        __(`feature.fh_${era.get(`cstr:${chara.id}:前发`)}`),
-        __(`feature.bh_${era.get(`cstr:${chara.id}:中发`)}`, ''),
-        era
-          .get(`cstr:${chara.id}:后发`)
-          .split('+')
-          .map((h) => __(`feature.bh_${h}`, ''))
-          .filter((h) => h)
-          .join(i18n().feature.hair_splitter),
-      ],
-      i18n().feature.hair_splitter,
-    );
     right_intro_list.push(
-      { content: '个人情报', isDivider: true },
-      '肤色',
-      { color: get_skin_color(chara.id), content: get_skin(chara.id) },
-      ' 的 ',
-      get_colored_hair(chara.id),
-      ...(race > 0 ? [' ', get_colored_body_hair(chara.id)] : []),
-      ' ',
+      { content: i18n().detail.base_title, isDivider: true },
+      ...get_shared_com_base_summary(chara.id),
     );
-    if (race > 0) {
-      right_intro_list.push(
-        !growth ? '幼年' : sys_get_full_chara(chara.id),
-        ' ',
-        __(`feature.u_sex_${chara.sex_code}`),
-      );
-    } else {
-      right_intro_list.push(__(`feature.h_sex_${chara.sex_code}`));
-    }
-    if (hair) {
-      right_intro_list.push({ isBr: true }, '发型：', hair);
+    const hair_info = get_shared_com_base_hair(chara.id);
+    if (hair_info) {
+      right_intro_list.push({ isBr: true }, hair_info);
     }
     right_intro_list.push(
       { isBr: true },
-      era.get(`cstr:${chara.id}:出生经历`) ||
-        `出生于 ${era.get(`cflag:${chara.id}:出生月份`)} 月 ${era.get(
-          `cflag:${chara.id}:出生日期`,
-        )} 日`,
-      { content: '身体尺寸', isDivider: true },
+      get_shared_com_base_birthday(chara.id),
+      { content: i18n().detail.base_header_body, isDivider: true },
     );
 
     if (flags.in_growth) {
       right_intro_list.push(growth_info);
     } else {
-      right_intro_list.push(
-        '身高：',
-        era.get(`cflag:${chara.id}:身高`).toString(),
-        'cm',
-        { isDivider: true },
-        '体重：',
-      );
-      if (era.get(`status:${chara.id}:发胖`)) {
-        right_intro_list.push('幸、幸福胖哦……');
-      } else {
-        right_intro_list.push(
-          era.get(`base:${chara.id}:体重偏差`) >= 2000 ? '微增' : '控制得当',
-        );
-      }
-      if (chara.sex_code - 1) {
+      right_intro_list.push(...get_shared_com_base_body(chara.id));
+      if (chara.sex_code !== 1) {
         if (flags.show_body) {
           right_intro_list.push(
             { isBr: true },
-            ...i18n().detail.get_base_female_info(
-              get_bust_size(chara.id, flags.show_all_body).toString(),
-              get_breast_cup(chara.id, flags.show_all_body),
-              get_waist_size(chara.id).toString(),
-              get_hip_size(chara.id).toString(),
-            ),
+            ...get_shared_com_base_female(chara.id, flags.show_all_body),
           );
         } else {
-          right_intro_list.push({ isBr: true }, '没有更多数据了……');
+          right_intro_list.push({ isBr: true }, i18n().detail.base_body_hidden);
         }
       }
     }
@@ -155,7 +92,7 @@ module.exports = {
       },
       {
         config: { width: 5 },
-        content: '（无）',
+        content: i18n().ui_invalid_value,
         type: 'text',
       },
     );
@@ -237,7 +174,9 @@ module.exports = {
         action_buffer.push({
           accelerator: 101,
           config: { width: 8 },
-          content: curr ? `决胜服 (${curr.n})` : '决胜服',
+          content: curr
+            ? i18n().clothe.only_one_clothe_template.replace('%CLOTHE%', curr.n)
+            : i18n().clothe.n_clothe,
           type: 'button',
         });
       } else if (
@@ -246,7 +185,10 @@ module.exports = {
       ) {
         action_buffer.push({
           config: { width: 8 },
-          content: `决胜服：${image_list[0].n}`,
+          content: i18n().clothe.only_one_clothe_template.replace(
+            '%CLOTHE%',
+            image_list[0].n,
+          ),
           type: 'text',
         });
       }
@@ -271,7 +213,7 @@ module.exports = {
               [
                 { type: 'divider' },
                 {
-                  content: ['请选择 ', chara.get_colored_name(), ' 的新发型'],
+                  content: i18n().detail.get_base_hair_select(chara),
                   type: 'text',
                 },
                 {
@@ -282,7 +224,7 @@ module.exports = {
                 {
                   accelerator: 10,
                   config: { width: 3 },
-                  content: '前一个',
+                  content: i18n().ui_et_prev,
                   type: 'button',
                 },
                 {
@@ -293,7 +235,7 @@ module.exports = {
                 {
                   accelerator: 11,
                   config: { width: 3 },
-                  content: '后一个',
+                  content: i18n().ui_et_next,
                   type: 'button',
                 },
               ],
@@ -306,7 +248,7 @@ module.exports = {
                 {
                   accelerator: 20,
                   config: { width: 3 },
-                  content: '前一个',
+                  content: i18n().ui_et_prev,
                   type: 'button',
                 },
                 {
@@ -317,7 +259,7 @@ module.exports = {
                 {
                   accelerator: 21,
                   config: { width: 3 },
-                  content: '后一个',
+                  content: i18n().ui_et_next,
                   type: 'button',
                 },
               ],
@@ -330,7 +272,7 @@ module.exports = {
                 {
                   accelerator: 30,
                   config: { width: 3 },
-                  content: '前一个',
+                  content: i18n().ui_et_prev,
                   type: 'button',
                 },
                 {
@@ -341,7 +283,7 @@ module.exports = {
                 {
                   accelerator: 31,
                   config: { width: 3 },
-                  content: '后一个',
+                  content: i18n().ui_et_next,
                   type: 'button',
                 },
               ],
@@ -349,13 +291,13 @@ module.exports = {
                 {
                   accelerator: 99,
                   config: { width: 3 },
-                  content: '确定',
+                  content: i18n().ui_yes,
                   type: 'button',
                 },
                 {
                   accelerator: 98,
                   config: { width: 3 },
-                  content: '重置',
+                  content: i18n().ui_reset,
                   type: 'button',
                 },
               ],
@@ -429,15 +371,14 @@ module.exports = {
                 { type: 'divider' },
                 {
                   content: [
-                    '现在 ',
-                    chara.get_colored_name(),
-                    ' 在参赛时',
-                    suffix === 0
-                      ? `按照节庆决定决胜服，在URA颁奖典礼与结束育成后的殿堂周将身着决胜服 [${__(`clothe.${src_id}01`)}]`
-                      : `穿着决胜服 [${curr.n}]`,
-                    '。',
+                    ...(suffix === 0
+                      ? i18n().detail.get_base_clothe_auto_select(
+                          chara,
+                          __(`clothe.${src_id}01`),
+                        )
+                      : i18n().detail.get_base_clothe_keep_some(chara, curr.n)),
                     { isBr: true },
-                    '要更换吗？',
+                    i18n().detail.base_clothe_change_confirm,
                   ],
                   type: 'text',
                 },
@@ -471,7 +412,7 @@ module.exports = {
                     disabled: gif === 2,
                     width: 8,
                   },
-                  content: '切换立绘',
+                  content: i18n().ui_change_image,
                   type: 'button',
                 },
                 {
@@ -481,13 +422,13 @@ module.exports = {
                     disabled: suffix === 0,
                     width: 8,
                   },
-                  content: '即时选择',
+                  content: i18n().detail.base_clothe_bt_auto_select,
                   type: 'button',
                 },
                 {
                   accelerator: 99,
                   config: { align: 'center', width: 8 },
-                  content: '保持不变',
+                  content: i18n().detail.base_clothe_bt_keep_current,
                   type: 'button',
                 },
               ],
@@ -498,22 +439,20 @@ module.exports = {
               gif = 1 - gif;
               continue;
             } else if (ret === 98) {
-              await era.printAndWait([
-                '现在 ',
-                chara.get_colored_name(),
-                ' 在参赛时会按照场合和节庆决定着装，在URA颁奖典礼与结束育成后的殿堂周将身着决胜服 [',
-                __(`clothe.${src_id}01`),
-                ']。',
-              ]);
+              await era.printAndWait(
+                i18n().detail.get_base_clothe_auto_select(
+                  chara,
+                  __(`clothe.${src_id}01`),
+                ),
+              );
               era.set(`cstr:${chara.id}:决胜服`, 0);
             } else if (ret !== 99) {
-              await era.printAndWait([
-                '现在 ',
-                chara.get_colored_name(),
-                ' 在参赛时、URA颁奖典礼与结束育成后的殿堂周将身着决胜服 [',
-                image_list[ret - 1].n,
-                ']。',
-              ]);
+              await era.printAndWait(
+                i18n().detail.get_base_clothe_keep_some(
+                  chara,
+                  image_list[ret - 1].n,
+                ),
+              );
               era.set(`cstr:${chara.id}:决胜服`, image_list[ret - 1].s);
             }
             flag = false;
@@ -562,7 +501,7 @@ module.exports = {
               ]
             : []),
           {
-            config: { content: '称号', position: 'left' },
+            config: { content: i18n().title.n_title, position: 'left' },
             type: 'divider',
           },
           ...title_info_list,
@@ -570,5 +509,5 @@ module.exports = {
       },
     };
   },
-  name: page_name,
+  name: i18n().detail.base_title,
 };

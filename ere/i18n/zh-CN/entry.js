@@ -200,6 +200,7 @@ class I18nEntry {
   ui_no = '取消';
   ui_yes2 = '是';
   ui_no2 = '否';
+  ui_reset = '重置';
   ui_skip = '跳过';
   ui_nothing = '无';
   ui_money_template = '%MONEY% 马币';
