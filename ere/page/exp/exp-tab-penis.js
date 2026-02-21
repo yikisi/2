@@ -4,6 +4,7 @@ const { get_penis_size } = require('#/system/ero/sys-calc-ero-status');
 
 const {
   get_filled_exp_str,
+  get_unknown_info,
   push_link_break,
   remove_end_line_breaks,
 } = require('#/page/exp/snippets');
@@ -13,9 +14,9 @@ const { join_to_string } = require('#/utils/list-utils');
 
 const { sex_colors } = require('#/data/color-const');
 const { hair_desc } = require('#/data/ero/status-const');
-const { growth_info, unknown_info } = require('#/data/exp-const');
 
 const di18n = require('#/i18n/extended-def');
+const { i18n } = require('#/i18n/selector');
 
 const page_name = '肉体情报【茎】';
 
@@ -28,7 +29,11 @@ module.exports = {
   generate: function (chara, flags) {
     const penis_exp_list = [];
     if (flags.in_growth) {
-      penis_exp_list.push(chara.sex_code ? growth_info : '没有这个部位……');
+      penis_exp_list.push(
+        chara.sex_code > 0
+          ? i18n().detail.growth_info
+          : i18n().detail.no_part_info,
+      );
     } else {
       if (flags.show_body) {
         const penis_size = get_penis_size(chara.id);
@@ -158,7 +163,9 @@ module.exports = {
         }
       } else {
         penis_exp_list.push(
-          chara.sex_code ? unknown_info(chara.id) : '没有这个部位……',
+          chara.sex_code > 0
+            ? get_unknown_info(chara.id)
+            : i18n().detail.no_part_info,
         );
       }
       remove_end_line_breaks(penis_exp_list);

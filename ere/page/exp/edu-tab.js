@@ -1,19 +1,14 @@
 const era = require('#/era-electron');
 
+const { get_shared_com_edu_adapt } = require('#/page/exp/snippets');
+
 const { get_custom_check } = require('#/event/check/check-factory');
 
 const { adaptability_colors, attr_colors } = require('#/data/color-const');
-const { growth_info, no_info } = require('#/data/exp-const');
-const {
-  get_adaptability_rank,
-  get_chara_score,
-  get_rank_level,
-} = require('#/data/info-generator');
+const { get_chara_score, get_rank_level } = require('#/data/info-generator');
 
 const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
-
-const page_name = '育成情况';
 
 module.exports = {
   /**
@@ -25,65 +20,43 @@ module.exports = {
     const aim_list = [],
       attr_list = [
         {
-          config: { content: '基础属性', position: 'left' },
+          config: { content: i18n().detail.edu_header_attr, position: 'left' },
           type: 'divider',
         },
         ...(flags.in_growth
-          ? [{ content: growth_info, type: 'text' }]
+          ? [{ content: i18n().detail.growth_info, type: 'text' }]
           : new Array(5).fill(0).map((_, i) => ({
               config: { width: 4, color: attr_colors[i] },
-              content: [
-                di18n.n_attr[i],
-                '：',
-                {
-                  content: Math.floor(
-                    era.get(`base:${chara.id}:${5 + i}`),
-                  ).toLocaleString(),
-                  fontWeight: 'bold',
-                },
-              ],
+              content: i18n().detail.get_edu_attr(di18n.n_attr[i], {
+                content: Math.floor(
+                  era.get(`base:${chara.id}:${5 + i}`),
+                ).toLocaleString(),
+                fontWeight: 'bold',
+              }),
               type: 'text',
             }))),
       ];
     if (era.get(`cflag:${chara.id}:种族`)) {
-      const edu_weeks = era.get(`cflag:${chara.id}:48`);
+      let edu_weeks;
+      let out_of_train;
       if (
         !chara.id ||
         // CFLAGNAME:48 = 育成回合计时
-        edu_weeks < 3 * 48 ||
+        (edu_weeks = era.get(`cflag:${chara.id}:48`)) < 3 * 48 ||
         // CFLAGNAME:47 = 殿堂
-        era.get(`cflag:${chara.id}:47`)
+        (out_of_train = era.get(`cflag:${chara.id}:47`)) > 0
       ) {
-        const out_of_train = era.get(`cflag:${chara.id}:47`);
-        const train_time = `${di18n.n_edu[Math.floor(edu_weeks / 48)]} ${
-          (Math.floor(edu_weeks / 4) % 12) + 1
-        } 月 第 ${(edu_weeks % 4) + 1} 周`;
+        let playthrough;
         const chara_score = get_chara_score(chara.id);
-        const chara_level = get_rank_level(chara_score);
-        const adapt_info = [];
-        new Array(10).fill(0).forEach((_, i) => {
-          // 适性ID：30-40
-          const adapt = era.get(`cflag:${chara.id}:${30 + i}`);
-          adapt_info.push(
-            {
-              config: { width: 3 },
-              content: [di18n.n_adapt[i], '：'],
-              type: 'text',
-            },
-            {
-              config: {
-                color: adaptability_colors[adapt],
-                fontWeight: 'bold',
-                width: 1,
-              },
-              content: get_adaptability_rank(adapt),
-              type: 'text',
-            },
-          );
-        });
+        const adapt_info = get_shared_com_edu_adapt(chara.id);
+        const score_info = {
+          content: chara_score,
+          color: adaptability_colors[get_rank_level(chara_score)],
+          fontWeight: 'bold',
+        };
         aim_list.push(
           {
-            config: { content: '育成情况', position: 'left' },
+            config: { content: i18n().detail.edu_title, position: 'left' },
             type: 'divider',
           },
           {
@@ -91,60 +64,82 @@ module.exports = {
               out_of_train >= 1
                 ? [
                     di18n.n_oot[out_of_train - 1],
-                    ' ｜ 评价：',
-                    {
-                      content: chara_score,
-                      color: adaptability_colors[chara_level],
-                      fontWeight: 'bold',
-                    },
+                    { isDivider: true },
+                    ...i18n().detail.get_edu_score(score_info),
                   ]
                 : [
-                    '评价：',
-                    {
-                      content: chara_score,
-                      color: adaptability_colors[chara_level],
-                      fontWeight: 'bold',
-                    },
-                    ' ｜ ',
-                    train_time.length > 1
-                      ? // CFLAGNAME:49 = 育成次数
-                        `${train_time}${era.get(`cflag:${chara.id}:49`) > 0 ? ` (第 ${era.get(`cflag:${chara.id}:49`) + 1} 轮)` : ''} ｜ `
-                      : '',
-                    '拥有 ',
-                    {
+                    ...i18n().detail.get_edu_score(score_info),
+                    ...(chara.id > 0
+                      ? [
+                          { isDivider: true },
+                          // CFLAGNAME:49 = 育成次数
+                          ((playthrough = era.get(`cflag:${chara.id}:49`)) > 0
+                            ? i18n().detail.edu_date_with_playthrough_template
+                            : i18n().detail.edu_date_template
+                          )
+                            .replace(
+                              '%YEAR%',
+                              di18n.n_edu[Math.floor(edu_weeks / 48)],
+                            )
+                            .replace(
+                              '%MONTH%',
+                              ((Math.floor(edu_weeks / 4) % 12) + 1).toString(),
+                            )
+                            .replace('%WEEK%', ((edu_weeks % 4) + 1).toString())
+                            .replace(
+                              '%PLAYTHROUGH%',
+                              (playthrough + 1).toString(),
+                            ),
+                        ]
+                      : []),
+                    { isDivider: true },
+                    ...i18n().detail.get_edu_pt({
                       content: era.get(`exp:${chara.id}:技能点数`),
                       fontWeight: 'bold',
-                    },
-                    ' 点技能点数',
+                    }),
                   ],
             type: 'text',
           },
           ...attr_list,
           {
-            config: { content: '比赛适应', position: 'left' },
+            config: {
+              content: i18n().detail.edu_header_adapt,
+              position: 'left',
+            },
             type: 'divider',
           },
           ...adapt_info,
         );
-        if (chara.id) {
-          const aims = get_custom_check(chara.id).get_edu_aims(),
-            aim_count = aims.filter((e) => e.check === 1).length;
+        if (chara.id > 0) {
+          const aims = get_custom_check(chara.id).get_edu_aims();
+          const aim_count = aims.filter((e) => e.check === 1).length;
+          const aim_template = i18n().detail.edu_aim_template;
           aim_list.push(
             {
               config: {
-                content: `育成目标 (${
+                content:
                   aim_count === aims.length
-                    ? '完成！'
-                    : `${aim_count}/${aims.length}`
-                })`,
+                    ? i18n().detail.edu_header_aim_finished
+                    : i18n()
+                        .detail.edu_header_aim_template.replace(
+                          '%CURRENT%',
+                          aim_count.toString(),
+                        )
+                        .replace('%TOTAL%', aims.length.toString()),
                 position: 'left',
               },
               type: 'divider',
             },
-            ...aims.map((e) => {
+            ...aims.map(({ color, content, current, desc, mark, require }) => {
               return {
-                config: { color: e.color },
-                content: e.content,
+                config: { color: color },
+                content:
+                  content ??
+                  aim_template
+                    .replace('%DESC%', desc)
+                    .replace('%CURRENT%', current)
+                    .replace('%REQUIRE%', require)
+                    .replace('%MARK%', mark),
                 type: 'text',
               };
             }),
@@ -154,30 +149,33 @@ module.exports = {
         aim_list.push(
           {
             config: {
-              content: page_name,
+              content: i18n().detail.edu_title,
               position: 'left',
             },
             type: 'divider',
           },
-          { content: no_info, type: 'text' },
+          { content: i18n().detail.no_exp_info, type: 'text' },
         );
       }
     } else {
       aim_list.push(
         {
           config: {
-            content: page_name,
+            content: i18n().detail.edu_title,
             position: 'left',
           },
           type: 'divider',
         },
-        { content: '一介训练员而已……', type: 'text' },
+        { content: i18n().detail.trainer_info, type: 'text' },
         ...attr_list,
       );
     }
     aim_list.push(
       {
-        config: { content: '语言技能', position: 'left' },
+        config: {
+          content: i18n().detail.edu_header_language,
+          position: 'left',
+        },
         type: 'divider',
       },
       ...[5, 6, 7].map((aid) => ({
@@ -190,10 +188,8 @@ module.exports = {
     );
 
     return {
-      print() {
-        return aim_list;
-      },
+      print: () => aim_list,
     };
   },
-  name: page_name,
+  name: i18n().detail.edu_title,
 };

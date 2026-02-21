@@ -10,6 +10,8 @@ const {
   get_waist_size,
 } = require('#/system/ero/sys-calc-ero-status');
 
+const { get_unknown_info } = require('#/page/exp/snippets');
+
 const CharaTalk = require('#/utils/chara-talk');
 const get_gradient_color = require('#/utils/gradient-color');
 const { get_abbr_number } = require('#/utils/value-utils');
@@ -20,7 +22,6 @@ const { mark_colors, mark_enum } = require('#/data/ero/mark-const');
 const { palam2juel } = require('#/data/ero/orgasm-const');
 const { get_skill_list } = require('#/data/ero/part-const');
 const { inmon_plugin_dict } = require('#/data/ero/plugin/plugin-const');
-const { growth_info, no_info, unknown_info } = require('#/data/exp-const');
 const { get_breast_cup, get_talent, get_xp } = require('#/data/info-generator');
 
 const di18n = require('#/i18n/extended-def');
@@ -46,7 +47,7 @@ function get_mark_info(cid, mid, level = era.get(`mark:${cid}:${mid}`)) {
       { isBr: true },
       {
         content: '★'.repeat(level),
-        color: get_gradient_color(undefined, mark_colors[mid], level / 3),
+        color: get_gradient_color(void 0, mark_colors[mid], level / 3),
       },
       { content: '☆'.repeat(level) },
     ],
@@ -65,7 +66,7 @@ module.exports = {
     if (flags.in_growth) {
       sex_info_list.push(
         { type: 'divider', config: { content: page_name, position: 'left' } },
-        { content: growth_info, type: 'text' },
+        { content: i18n().detail.growth_info, type: 'text' },
       );
     } else if (!chara.id || flags.show_exp) {
       const in_train = era.get(`ex:${chara.id}:TotalEX`) !== undefined;
@@ -222,7 +223,7 @@ module.exports = {
                           ]
                         : [],
                     )
-                : no_info,
+                : i18n().detail.no_exp_info,
           },
         );
       }
@@ -334,7 +335,7 @@ module.exports = {
     } else {
       sex_info_list.push(
         { type: 'divider', config: { content: page_name, position: 'left' } },
-        { content: unknown_info(chara.id), type: 'text' },
+        { content: get_unknown_info(chara.id), type: 'text' },
       );
     }
     // CSTRNAME:10 = 头像

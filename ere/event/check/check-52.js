@@ -433,7 +433,7 @@ module.exports = class extends CustomizedCheck {
     buffer.push(check_aim_and_get_entry(races, race_enum.febr_sta, 2, 5));
     buffer.push(check_aim_and_get_entry(races, race_enum.elm_sta, 2, 5));
     buffer.push(check_aim_and_get_entry(races, race_enum.jbc_spr, 2, 1));
-    buffer.push(check_aim_and_get_entry(races, race_enum.arim_kin, 2, 16));
+    buffer.push(check_aim_and_get_entry(races, race_enum.arim_kin, 2, 20));
     return buffer;
   }
 

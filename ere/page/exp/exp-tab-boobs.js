@@ -2,6 +2,7 @@ const era = require('#/era-electron');
 
 const {
   get_filled_exp_str,
+  get_unknown_info,
   push_link_break,
   remove_end_line_breaks,
 } = require('#/page/exp/snippets');
@@ -10,8 +11,9 @@ const { join_to_string } = require('#/utils/list-utils');
 
 const { sex_colors } = require('#/data/color-const');
 const { breast_size } = require('#/data/ero/status-const');
-const { growth_info, unknown_info } = require('#/data/exp-const');
 const { get_breast_cup } = require('#/data/info-generator');
+
+const { i18n } = require('#/i18n/selector');
 
 const nipple_type = ['粉色小草莓', '深色小樱桃', '幽深火山湖'];
 
@@ -26,7 +28,7 @@ module.exports = {
   generate: function (chara, flags) {
     const breast_exp_list = [];
     if (flags.in_growth) {
-      breast_exp_list.push(growth_info);
+      breast_exp_list.push(i18n().detail.growth_info);
     } else {
       if (flags.show_body) {
         if (chara.sex_code === 1) {
@@ -153,7 +155,7 @@ module.exports = {
           }
         }
       } else {
-        breast_exp_list.push(unknown_info(chara.id));
+        breast_exp_list.push(get_unknown_info(chara.id));
       }
       remove_end_line_breaks(breast_exp_list);
     }

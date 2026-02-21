@@ -2,13 +2,14 @@ const era = require('#/era-electron');
 
 const {
   get_filled_exp_str,
+  get_unknown_info,
   push_link_break,
   remove_end_line_breaks,
 } = require('#/page/exp/snippets');
 
 const { join_to_string } = require('#/utils/list-utils');
 
-const { growth_info, unknown_info } = require('#/data/exp-const');
+const { i18n } = require('#/i18n/selector');
 
 const anal_semen_desc = [
   '',
@@ -25,10 +26,10 @@ module.exports = {
    * @param {{in_growth:boolean,mark_level:number,show_all_exp:boolean,show_body:boolean,show_exp:boolean}} flags
    * @returns {{print():*[]}}
    */
-  generate: function (chara, flags) {
+  generate(chara, flags) {
     const anal_exp_list = [];
     if (flags.in_growth) {
-      anal_exp_list.push(growth_info);
+      anal_exp_list.push(i18n().detail.growth_info);
     } else {
       if (flags.show_body) {
         if (era.get(`talent:${chara.id}:魔尻`)) {
@@ -104,7 +105,7 @@ module.exports = {
           );
         }
       } else {
-        anal_exp_list.push(unknown_info(chara.id));
+        anal_exp_list.push(get_unknown_info(chara.id));
       }
       remove_end_line_breaks(anal_exp_list);
     }

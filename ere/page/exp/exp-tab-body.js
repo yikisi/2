@@ -2,6 +2,7 @@ const era = require('#/era-electron');
 
 const {
   get_filled_exp_str,
+  get_unknown_info,
   push_link_break,
   remove_end_line_breaks,
 } = require('#/page/exp/snippets');
@@ -9,7 +10,8 @@ const {
 const { join_to_string } = require('#/utils/list-utils');
 
 const { hair_desc } = require('#/data/ero/status-const');
-const { growth_info, unknown_info } = require('#/data/exp-const');
+
+const { i18n } = require('#/i18n/selector');
 
 const body_semen_desc = [
   '',
@@ -29,7 +31,7 @@ module.exports = {
   generate: function (chara, flags) {
     const body_exp_list = [];
     if (flags.in_growth) {
-      body_exp_list.push(growth_info);
+      body_exp_list.push(i18n().detail.growth_info);
     } else {
       if (flags.show_body) {
         const body_hair_talent = era.get(`talent:${chara.id}:腋毛成长`),
@@ -124,7 +126,7 @@ module.exports = {
           );
         }
       } else {
-        body_exp_list.push(unknown_info(chara.id));
+        body_exp_list.push(get_unknown_info(chara.id));
       }
       remove_end_line_breaks(body_exp_list);
     }

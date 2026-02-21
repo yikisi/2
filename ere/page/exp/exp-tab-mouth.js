@@ -2,13 +2,14 @@ const era = require('#/era-electron');
 
 const {
   get_filled_exp_str,
+  get_unknown_info,
   push_link_break,
   remove_end_line_breaks,
 } = require('#/page/exp/snippets');
 
 const { join_to_string } = require('#/utils/list-utils');
 
-const { growth_info, unknown_info } = require('#/data/exp-const');
+const { i18n } = require('#/i18n/selector');
 
 const drunk_semen_desc = [
   '',
@@ -28,7 +29,7 @@ module.exports = {
   generate(chara, flags) {
     const mouth_exp_list = [];
     if (flags.in_growth) {
-      mouth_exp_list.push(growth_info);
+      mouth_exp_list.push(i18n().detail.growth_info);
     } else {
       if (flags.show_body) {
         const in_stomach_semen = era.get(`cflag:${chara.id}:腹中精液`);
@@ -188,7 +189,7 @@ module.exports = {
           );
         }
       } else {
-        mouth_exp_list.push(unknown_info(chara.id));
+        mouth_exp_list.push(get_unknown_info(chara.id));
       }
       remove_end_line_breaks(mouth_exp_list);
     }

@@ -15,6 +15,7 @@ const {
   get_shared_com_base_female,
   get_shared_com_base_hair,
   get_shared_com_base_summary,
+  get_shared_com_edu_adapt,
 } = require('#/page/exp/snippets');
 
 const { get_custom_check } = require('#/event/check/check-factory');
@@ -30,18 +31,13 @@ const CharaAvailableSkills = require('#/data/chara-available-skills');
 const { get_chara_color } = require('#/data/chara-colors');
 const CharaSkills = require('#/data/chara-skills');
 const {
-  adaptability_colors,
   attr_change_colors,
   attr_colors,
   el_danger_color,
 } = require('#/data/color-const');
 const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
-const {
-  get_adaptability_rank,
-  get_talent,
-  get_xp,
-} = require('#/data/info-generator');
+const { get_talent, get_xp } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const { skills_dict } = require('#/data/race/skill/skill-const');
 
@@ -354,26 +350,8 @@ async function print_rec_page() {
           },
         );
       }
-      const adapt_info = [];
-      new Array(10).fill(0).forEach((_, i) => {
-        const adapt = era.get(`cflag:${selected}:${30 + i}`);
-        adapt_info.push(
-          {
-            config: { width: 2 },
-            content: [di18n.n_adapt[i], '：'],
-            type: 'text',
-          },
-          {
-            config: {
-              color: adaptability_colors[adapt],
-              fontWeight: 'bold',
-              width: 2,
-            },
-            content: get_adaptability_rank(adapt),
-            type: 'text',
-          },
-        );
-      });
+      const adapt_info = get_shared_com_edu_adapt(selected);
+      const aim_template = i18n().detail.edu_aim_template_in_rec;
       const c_script = get_custom_check(selected);
       const personal_achieve = c_script.get_personal_achieve();
       era.printMultiColumns(
@@ -424,22 +402,18 @@ async function print_rec_page() {
           },
           ...c_script
             .get_edu_aims()
-            .filter(({ content }) => content.endsWith('✘'))
-            .map((e) => {
-              const g1 = e.content.indexOf('G1') !== -1;
-              const champion =
-                e.content.indexOf('1着') !== -1 ||
-                e.content.indexOf('一着') !== -1;
-              return {
-                config: {
-                  color: champion ? el_danger_color : undefined,
-                  fontStyle: g1 ? 'italic' : undefined,
-                  fontWeight: g1 && champion ? 'bold' : undefined,
-                },
-                content: e.content.substring(0, e.content.length - 2),
-                type: 'text',
-              };
-            }),
+            .filter(({ content }) => !content)
+            .map(({ champion, desc, g1, require }) => ({
+              config: {
+                color: champion ? el_danger_color : void 0,
+                fontStyle: g1 ? 'italic' : void 0,
+                fontWeight: g1 && champion ? 'bold' : void 0,
+              },
+              content: aim_template
+                .replace('%DESC%', desc)
+                .replace('%REQUIRE%', require),
+              type: 'text',
+            })),
           {
             config: {
               content: i18n().ui_rec_e_title_template.replace('%NAME%', name),

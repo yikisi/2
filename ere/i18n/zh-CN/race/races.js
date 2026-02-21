@@ -76,6 +76,9 @@ class I18nRaces {
 
   track_name_template = '%NAME%竞马场';
 
+  result_template = '%RANK%着';
+  no_result = '未出走';
+
   sim = '模拟赛';
 
   0 = '出道战';

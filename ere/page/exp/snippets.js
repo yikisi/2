@@ -14,8 +14,9 @@ const {
 
 const { join_to_string } = require('#/utils/list-utils');
 
-const { no_info } = require('#/data/exp-const');
+const { adaptability_colors } = require('#/data/color-const');
 const {
+  get_adaptability_rank,
   get_breast_cup,
   get_colored_body_hair,
   get_colored_hair,
@@ -118,6 +119,24 @@ module.exports = {
       di18n.feature.get_sex_title(era.get(`cflag:${cid}:性别`), race),
     );
   },
+  /** @param {number} cid */
+  get_shared_com_edu_adapt: (cid) =>
+    new Array(10).fill(0).map((_, i) => {
+      // 适性ID：30-40
+      const adapt = era.get(`cflag:${cid}:${30 + i}`);
+      return {
+        config: { width: 4 },
+        content: i18n().detail.get_edu_adapt(di18n.n_adapt[i], {
+          color: adaptability_colors[adapt],
+          content: get_adaptability_rank(adapt),
+          fontWeight: 'bold',
+        }),
+        type: 'text',
+      };
+    }),
+  /** @param {number} cid */
+  get_unknown_info: (cid) =>
+    !cid > 0 ? i18n().detail.no_known_info : i18n().detail.no_exp_info,
   /** @param {array} list */
   push_link_break(list) {
     if (list.length && !check_line_break(list[list.length - 1])) {
@@ -136,7 +155,7 @@ module.exports = {
       }
     }
     if (!list.length) {
-      list.push(no_info);
+      list.push(i18n().detail.no_exp_info);
     }
   },
 };

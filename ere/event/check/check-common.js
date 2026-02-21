@@ -147,7 +147,7 @@ class CustomizedCheck extends CustomizedEvent {
   /**
    * 角色结束育成时进行检查，主要用于检查粉丝袭击结局的触发<br>
    * 返回角色的育成目标完成情况
-   * @returns {{check:number,color:string,content:string}[]} 角色的育成目标完成情况数组
+   * @returns {{check:number,color:string,[content]:string,desc:string,current:string,require:string,mark:string,[champion]:boolean,[g1]:boolean}[]} 角色的育成目标完成情况数组
    */
   check_palace_and_get_aims() {
     if (era.get(`relation:${this.id}:0`) <= 0) {
@@ -194,7 +194,7 @@ class CustomizedCheck extends CustomizedEvent {
 
   /**
    * 获取育成目标完成情况
-   * @returns {{check:number,color:string,content:string}[]} 角色的育成目标完成情况数组<br>
+   * @returns {{check:number,color:string,[content]:string,desc:string,current:string,require:string,mark:string,[champion]:boolean,[g1]:boolean}[]}  角色的育成目标完成情况数组<br>
    * check 等于 1 时表示该项目标已完成，小于 1 时表示未完成，用与 1 的差值表示未完成的程度（用于育成结束时的好感惩罚）
    */
   get_edu_aims() {

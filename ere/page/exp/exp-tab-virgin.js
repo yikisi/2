@@ -8,11 +8,13 @@ const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
 const {
   get_filled_exp_str,
+  get_unknown_info,
   push_link_break,
   remove_end_line_breaks,
 } = require('#/page/exp/snippets');
 
 const CharaTalk = require('#/utils/chara-talk');
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { join_to_string } = require('#/utils/list-utils');
 
 const { sex_colors } = require('#/data/color-const');
@@ -24,8 +26,8 @@ const {
   unexpected_pregnant_enum,
 } = require('#/data/ero/status-const');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
-const { growth_info, unknown_info } = require('#/data/exp-const');
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
+
+const { i18n } = require('#/i18n/selector');
 
 const page_name = '肉体情报【女阴】';
 
@@ -47,7 +49,7 @@ module.exports = {
   generate: function (chara, flags) {
     const virgin_exp_list = [];
     if (flags.in_growth) {
-      virgin_exp_list.push(growth_info);
+      virgin_exp_list.push(i18n().detail.growth_info);
     } else {
       if (flags.show_body) {
         const penis_size = get_penis_size(chara.id);
@@ -255,7 +257,7 @@ module.exports = {
           }
         }
       } else {
-        virgin_exp_list.push(unknown_info(chara.id));
+        virgin_exp_list.push(get_unknown_info(chara.id));
       }
     }
     push_link_break(virgin_exp_list);

@@ -75,6 +75,37 @@ class I18nDetail {
   base_clothe_change_confirm = '要更换吗？';
   base_clothe_bt_auto_select = '即时选择';
   base_clothe_bt_keep_current = '保持不变';
+
+  edu_title = '育成情况';
+  get_edu_score = (score) => ['评价：', score];
+  edu_date_template = '%YEAR% %MONTH% 月 第 %WEEK% 周';
+  edu_date_with_playthrough_template =
+    '%YEAR% %MONTH% 月 第 %WEEK% 周 (第 %PLAYTHROUGH% 轮)';
+  get_edu_pt = (pt) => ['拥有 ', pt, ' 点技能点数'];
+  edu_header_attr = '基础属性';
+  get_edu_attr = (attr_name, attr) => [attr_name, '：', attr];
+  edu_header_adapt = '比赛适应';
+  get_edu_adapt = (adapt_name, adapt) => [adapt_name, '：', adapt];
+  edu_header_aim_template = '育成目标 (%CURRENT%/%TOTAL%)';
+  edu_header_aim_finished = '育成目标 (完成！)';
+  edu_aim_template = '%DESC% %CURRENT%/%REQUIRE% %MARK%';
+  edu_aim_template_in_rec = '%DESC% %REQUIRE%';
+  edu_aim_desc_template = '%EDUTIME% %RACE%';
+  edu_aim_require_1 = '1着';
+  edu_aim_require_2 = '2着以内';
+  edu_aim_require_3 = '3着以内';
+  edu_aim_require_4 = '4着以内';
+  edu_aim_require_5 = '入着';
+  edu_aim_require_20 = '出走';
+  edu_aim_mark_done = '✔';
+  edu_aim_mark_no = '✘';
+  edu_header_language = '语言技能';
+
+  trainer_info = '一介人类而已';
+  growth_info = '还在成长中哦';
+  no_exp_info = '还没有相关经历';
+  no_known_info = '还没有足够了解';
+  no_part_info = '没有这个部位';
 }
 
 module.exports = I18nDetail;

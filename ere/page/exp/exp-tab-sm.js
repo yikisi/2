@@ -2,6 +2,7 @@ const era = require('#/era-electron');
 
 const {
   get_filled_exp_str,
+  get_unknown_info,
   push_link_break,
   remove_end_line_breaks,
 } = require('#/page/exp/snippets');
@@ -9,7 +10,8 @@ const {
 const { join_to_string } = require('#/utils/list-utils');
 
 const { sex_slave_title } = require('#/data/ero/status-const');
-const { growth_info, unknown_info } = require('#/data/exp-const');
+
+const { i18n } = require('#/i18n/selector');
 
 const page_name = '肉体情报【虐】';
 
@@ -24,7 +26,7 @@ module.exports = {
   generate(chara, flags) {
     const sm_exp_list = [];
     if (flags.in_growth) {
-      sm_exp_list.push(growth_info);
+      sm_exp_list.push(i18n().detail.growth_info);
     } else {
       if (flags.show_body) {
         const sm_talent =
@@ -106,7 +108,7 @@ module.exports = {
           );
         }
       } else {
-        sm_exp_list.push(unknown_info(chara.id));
+        sm_exp_list.push(get_unknown_info(chara.id));
       }
       remove_end_line_breaks(sm_exp_list);
     }

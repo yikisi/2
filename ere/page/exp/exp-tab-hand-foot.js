@@ -2,13 +2,14 @@ const era = require('#/era-electron');
 
 const {
   get_filled_exp_str,
+  get_unknown_info,
   push_link_break,
   remove_end_line_breaks,
 } = require('#/page/exp/snippets');
 
 const { join_to_string } = require('#/utils/list-utils');
 
-const { growth_info, unknown_info } = require('#/data/exp-const');
+const { i18n } = require('#/i18n/selector');
 
 module.exports = {
   /**
@@ -20,8 +21,8 @@ module.exports = {
     const hand_exp_list = [],
       foot_exp_list = [];
     if (flags.in_growth) {
-      hand_exp_list.push(growth_info);
-      foot_exp_list.push(growth_info);
+      hand_exp_list.push(i18n().detail.growth_info);
+      foot_exp_list.push(i18n().detail.growth_info);
     } else {
       if (flags.show_body) {
         if (era.get(`talent:${chara.id}:神之手`)) {
@@ -126,8 +127,8 @@ module.exports = {
           );
         }
       } else {
-        hand_exp_list.push(unknown_info(chara.id));
-        foot_exp_list.push(unknown_info(chara.id));
+        hand_exp_list.push(get_unknown_info(chara.id));
+        foot_exp_list.push(get_unknown_info(chara.id));
       }
       remove_end_line_breaks(hand_exp_list);
       remove_end_line_breaks(foot_exp_list);

@@ -14,7 +14,6 @@ const {
 
 const CharaTitles = require('#/data/chara-titles');
 const race_clothes = require('#/data/clothe-const.json');
-const { growth_info } = require('#/data/exp-const');
 const { get_talent, get_xp } = require('#/data/info-generator');
 const { back_hairs, front_hairs, top_hairs } = require('#/data/other-const');
 
@@ -55,7 +54,7 @@ module.exports = {
     );
 
     if (flags.in_growth) {
-      right_intro_list.push(growth_info);
+      right_intro_list.push(i18n().detail.growth_info);
     } else {
       right_intro_list.push(...get_shared_com_base_body(chara.id));
       if (chara.sex_code !== 1) {
