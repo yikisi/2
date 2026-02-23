@@ -12,6 +12,8 @@ const DonnaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-116'
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
 
+const { i18n } = require('#/i18n/selector');
+
 const aim_races = {};
 aim_races[race_enum.begin_race] = 4;
 aim_races[get_aim_race_index(race_enum.shin_kin, 1)] = 4;
@@ -63,13 +65,12 @@ module.exports = class extends CustomizedCheck {
   get_edu_aims() {
     const races = RaceHistory.get(this.id).get(),
       ret = [];
-    if (check_aim_race(races, race_enum.yush_him, 1)) {
-      ret.push({
-        check: 1,
-        color: undefined,
-        content: `日本橡树大赛 5 马身以上获胜：${new DonnaEduMarks().title_check > 0 ? '是' : '否'}`,
-      });
-    }
+    ret.push({
+      content: i18n().kojo[this.id].achieve_track_aim_template.replace(
+        '%STATUS%',
+        new DonnaEduMarks().title_check > 0 ? i18n().ui_yes2 : i18n().ui_no2,
+      ),
+    });
     ret.push(check_aim_and_get_entry(races, race_enum.begin_race));
     ret.push(check_aim_and_get_entry(races, race_enum.shin_kin, 1, 5));
     ret.push(check_aim_and_get_entry(races, race_enum.oka_sho, 1, 5));

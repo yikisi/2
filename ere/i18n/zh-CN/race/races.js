@@ -78,6 +78,7 @@ class I18nRaces {
 
   result_template = '%RANK%着';
   no_result = '未出走';
+  no_win = '未胜利';
 
   sim = '模拟赛';
 

@@ -10,7 +10,7 @@ const RaceHistory = require('#/data/race/model/race-history');
  * @param {function(AfterRaceParams)} after_race_cb
  * @param {(function(Record<string,RaceResult>,RaceResult[],boolean):boolean)|undefined} title_check_cb
  * @param {Record<string,number>} aim_races
- * @param {function({check:number,color:string,content:string}[],Record<string,RaceResult>)} fill_edu_aims_cb
+ * @param {function(EduAim[],Record<string,RaceResult>)} fill_edu_aims_cb
  * @param {string[]} [personal_titles]
  * @returns {Class}
  */

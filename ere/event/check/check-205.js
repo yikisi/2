@@ -22,6 +22,8 @@ const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
+const { i18n } = require('#/i18n/selector');
+
 const aim_races = {};
 aim_races[race_enum.begin_race] = 4;
 
@@ -180,9 +182,17 @@ module.exports = class extends CustomizedCheck {
           e.rank === 1,
       ).length;
     buffer.push({
+      champion: true,
       check: Math.min(g1_count, 5) - 4,
       color: g1_count >= 5 ? attr_change_colors.up : attr_change_colors.down,
-      content: `5场其他G1比赛 一着 ${g1_count}/5 ${g1_count >= 5 ? '✔' : '✘'}`,
+      current: g1_count.toString(),
+      desc: i18n().kojo[this.id].aim_desc,
+      g1: true,
+      mark:
+        g1_count >= 5
+          ? i18n().detail.edu_aim_mark_done
+          : i18n().detail.edu_aim_mark_no,
+      require: i18n().detail.edu_aim_require_template.replace('%REQUIRE%', '5'),
     });
     return buffer;
   }

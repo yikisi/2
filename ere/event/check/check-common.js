@@ -36,6 +36,8 @@ const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 const { pressure_border } = require('#/data/train-const');
 
+const { i18n } = require('#/i18n/selector');
+
 const aim_races = { [race_enum.begin_race]: 4 };
 
 function common_no_action_check(cid) {
@@ -48,6 +50,25 @@ function common_no_action_check(cid) {
     era.get(`cflag:${cid}:位置`) !== era.get('cflag:0:位置')
   );
 }
+
+/**
+ * @typedef EduTrackerAim
+ * @property {string} content
+ */
+
+/**
+ * @typedef EduNormalAim
+ * @property {number} check
+ * @property {string} color
+ * @property {string} current
+ * @property {string} desc
+ * @property {string} mark
+ * @property {string} require
+ * @property {boolean} [champion]
+ * @property {boolean} [g1]
+ */
+
+/** @typedef {EduTrackerAim|EduNormalAim} EduAim */
 
 /**
  * 定制化检查脚本，一般用于生成判定值、在各个判定节点进行事件判定（将事件对象 EventObject 添加到事件队列）
@@ -147,7 +168,7 @@ class CustomizedCheck extends CustomizedEvent {
   /**
    * 角色结束育成时进行检查，主要用于检查粉丝袭击结局的触发<br>
    * 返回角色的育成目标完成情况
-   * @returns {{check:number,color:string,[content]:string,desc:string,current:string,require:string,mark:string,[champion]:boolean,[g1]:boolean}[]} 角色的育成目标完成情况数组
+   * @returns {EduAim[]} 角色的育成目标完成情况数组
    */
   check_palace_and_get_aims() {
     if (era.get(`relation:${this.id}:0`) <= 0) {
@@ -194,7 +215,7 @@ class CustomizedCheck extends CustomizedEvent {
 
   /**
    * 获取育成目标完成情况
-   * @returns {{check:number,color:string,[content]:string,desc:string,current:string,require:string,mark:string,[champion]:boolean,[g1]:boolean}[]}  角色的育成目标完成情况数组<br>
+   * @returns {EduAim[]}  角色的育成目标完成情况数组<br>
    * check 等于 1 时表示该项目标已完成，小于 1 时表示未完成，用与 1 的差值表示未完成的程度（用于育成结束时的好感惩罚）
    */
   get_edu_aims() {
@@ -219,17 +240,37 @@ class CustomizedCheck extends CustomizedEvent {
     buffer.push({
       check: Math.min(g1_count, 1),
       color: g1_count > 0 ? attr_change_colors.up : attr_change_colors.down,
-      content: `一场G1比赛 入着 ${g1_count}/1 ${g1_count > 0 ? '✔' : '✘'}`,
+      current: g1_count.toString(),
+      desc: i18n().detail.edu_aim_common_desc_1,
+      g1: true,
+      mark:
+        g1_count > 0
+          ? i18n().detail.edu_aim_mark_done
+          : i18n().detail.edu_aim_mark_no,
+      require: '1',
     });
     buffer.push({
       check: Math.min(g2_count, 3) - 2,
       color: g2_count >= 3 ? attr_change_colors.up : attr_change_colors.down,
-      content: `三场G2以上比赛 前三名 ${g2_count}/3 ${g2_count >= 3 ? '✔' : '✘'}`,
+      current: g2_count.toString(),
+      desc: i18n().detail.edu_aim_common_desc_2,
+      mark:
+        g2_count >= 3
+          ? i18n().detail.edu_aim_mark_done
+          : i18n().detail.edu_aim_mark_no,
+      require: '3',
     });
     buffer.push({
+      champion: true,
       check: Math.min(other_count, 5) - 4,
       color: other_count >= 5 ? attr_change_colors.up : attr_change_colors.down,
-      content: `五场比赛 1着 ${other_count}/5 ${other_count >= 5 ? '✔' : '✘'}`,
+      current: other_count.toString(),
+      desc: i18n().detail.edu_aim_common_desc_3,
+      mark:
+        other_count >= 5
+          ? i18n().detail.edu_aim_mark_done
+          : i18n().detail.edu_aim_mark_no,
+      require: '5',
     });
     return buffer;
   }

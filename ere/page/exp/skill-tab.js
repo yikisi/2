@@ -30,30 +30,36 @@ module.exports = {
       }));
     const aim_list = [
       {
-        config: { content: '习得技能', position: 'left' },
+        config: {
+          content: i18n().detail.skill_header_learnt,
+          position: 'left',
+        },
         type: 'divider',
       },
       ...(skill_list.length
         ? skill_list
-        : [{ content: '未习得', type: 'text' }]),
+        : [{ content: i18n().detail.skill_no_skill, type: 'text' }]),
     ];
     const available_skills = CharaAvailableSkills.get(chara.id).get();
     if (available_skills.length > 0) {
       aim_list.push(
         {
-          config: { content: '待解锁技能', position: 'left' },
+          config: {
+            content: i18n().detail.skill_header_available,
+            position: 'left',
+          },
           type: 'divider',
         },
-        ...available_skills.map((e) => ({
+        ...available_skills.map((s) => ({
           config: { width: 6 },
-          content: skills_dict[e].get_colored_name(),
+          content: skills_dict[s].get_colored_name(),
           type: 'text',
         })),
       );
     }
     aim_list.push(
       {
-        config: { content: '因子继承', position: 'left' },
+        config: { content: i18n().detail.skill_header_gene, position: 'left' },
         type: 'divider',
       },
       ...(!chara.id || (in_edu && era.get(`cflag:${chara.id}:继承方1`))
@@ -91,11 +97,14 @@ module.exports = {
               type: 'text',
             })),
           ]
-        : [{ content: '未继承', type: 'text' }]),
+        : [{ content: i18n().detail.skill_no_gene, type: 'text' }]),
       ...(in_palace
         ? [
             {
-              config: { content: '可继承因子', position: 'left' },
+              config: {
+                content: i18n().detail.skill_header_gene_available,
+                position: 'left',
+              },
               type: 'divider',
             },
             // PARAMNAME:20 - 22 = 粉 - 白
@@ -131,11 +140,9 @@ module.exports = {
         : []),
     );
     return {
-      print() {
-        return aim_list;
-      },
+      print: () => aim_list,
     };
   },
-  name: '比赛技巧',
+  name: i18n().detail.skill_title,
   uma: true,
 };

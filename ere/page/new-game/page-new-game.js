@@ -251,10 +251,9 @@ module.exports = async (src_chara) => {
           event_queue.init();
           basement_queue.init();
 
-          [
-            201, 202, 203, 204, 205, 206, 207, 301, 302, 303, 304, 305, 306,
-            308, 340, 341, 342, 343, 344, 345, 346, 347, 348, 349,
-          ].forEach((cid) => init_chara(cid));
+          era
+            .getAllCharacters()
+            .forEach((cid) => cid > 200 && cid < 400 && init_chara(cid));
           // FLAGNAME:179 = 彩蛋机制
           switch (era.get('flag:179')) {
             case 179:

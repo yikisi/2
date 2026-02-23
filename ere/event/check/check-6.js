@@ -19,6 +19,9 @@ const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 const { pressure_border } = require('#/data/train-const');
 
+const di18n = require('#/i18n/extended-def');
+const { i18n } = require('#/i18n/selector');
+
 const aim_races = {};
 aim_races[race_enum.begin_race] = 4;
 aim_races[get_aim_race_index(race_enum.new_tro, 1)] = 4;
@@ -155,9 +158,16 @@ module.exports = class extends CustomizedCheck {
     buffer.push({
       check: aim_check - 1,
       color: aim_check >= 2 ? attr_change_colors.up : attr_change_colors.down,
-      content: `资深年 1-6月 二场G1 前三名 ${aim_check}/2 ${
-        aim_check >= 2 ? '✔' : '✘'
-      }`,
+      current: aim_check.toString(),
+      desc: i18n()
+        .detail.edu_aim_desc_template.replace('%EDUTIME%', di18n.n_edu[2])
+        .replace('%RACE%', i18n().kojo[this.id].aim_desc),
+      g1: true,
+      mark:
+        aim_check >= 2
+          ? i18n().detail.edu_aim_mark_done
+          : i18n().detail.edu_aim_mark_no,
+      require: i18n().detail.edu_aim_require_template.replace('%REQUIRE%', '2'),
     });
     buffer.push(check_aim_and_get_entry(races, race_enum.tenn_sho, 2, 1));
     buffer.push(check_aim_and_get_entry(races, race_enum.arim_kin, 2, 1));

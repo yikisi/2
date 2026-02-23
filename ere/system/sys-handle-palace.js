@@ -24,6 +24,7 @@ const { get_chara_score } = require('#/data/info-generator');
 const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_infos } = require('#/data/race/race-const');
+const { i18n } = require('#/i18n/selector');
 
 /** @param {number} cid */
 function sys_handle_palace(cid) {
@@ -40,7 +41,9 @@ function sys_handle_palace(cid) {
       type: 'text',
     },
   ];
-  const aim_check = get_custom_check(cid).check_palace_and_get_aims();
+  const aim_check = get_custom_check(cid)
+    .check_palace_and_get_aims()
+    .filter(({ content }) => !content);
   let aim_punish_count = 0,
     aim_count = 0;
   if (aim_check.length) {
@@ -48,6 +51,7 @@ function sys_handle_palace(cid) {
       aim_punish_count += 1 - e.check;
       aim_count += e.check === 1;
     });
+    const aim_template = i18n().detail.edu_aim_template;
     buffer.push(
       {
         content: [
@@ -66,13 +70,15 @@ function sys_handle_palace(cid) {
         ],
         type: 'text',
       },
-      ...aim_check.map((e) => {
-        return {
-          config: { color: e.color, offset: 1, width: 23 },
-          content: e.content,
-          type: 'text',
-        };
-      }),
+      ...aim_check.map(({ color, current, desc, mark, require }) => ({
+        config: { color, offset: 1, width: 23 },
+        content: aim_template
+          .replace('%DESC%', desc)
+          .replace('%CURRENT%', current)
+          .replace('%REQUIRE%', require)
+          .replace('%MARK%', mark),
+        type: 'text',
+      })),
     );
   }
   if (miss_count) {

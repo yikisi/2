@@ -6,6 +6,9 @@ const { attr_change_colors } = require('#/data/color-const');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
+const di18n = require('#/i18n/extended-def');
+const { i18n } = require('#/i18n/selector');
+
 const aims = [
   [race_enum.kiku_sho, 1, 1, 4],
   [race_enum.takz_kin, 2, 3, 4],
@@ -24,7 +27,7 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
     check_aim_race(races, race_enum.kiku_sho, 1, 1, (r) => r.st === 2) &&
     check_aim_race(races, race_enum.japa_cup, 2, 1, (r) => r.st === 0),
   aim_races,
-  (buffer, races) => {
+  function (buffer, races) {
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     const check = +(
       Object.entries(races).findIndex(
@@ -35,9 +38,18 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
       ) !== -1
     );
     buffer.push({
+      champion: true,
       check,
       color: check > 0 ? attr_change_colors.up : attr_change_colors.down,
-      content: `经典年7月第2周前 G3以上比赛1着 ${check}/1 ${check > 0 ? '✔' : '✘'}`,
+      current: check.toString(),
+      desc: i18n()
+        .detail.edu_aim_desc_template.replace('%EDUTIME%', di18n.n_edu[1])
+        .replace('%RACE%', i18n().kojo[this.id].aim_desc),
+      mark:
+        check > 0
+          ? i18n().detail.edu_aim_mark_done
+          : i18n().detail.edu_aim_mark_no,
+      require: i18n().detail.edu_aim_require_template.replace('%REQUIRE%', '1'),
     });
     aims.forEach(([race, year, rank]) =>
       buffer.push(check_aim_and_get_entry(races, race, year, rank)),

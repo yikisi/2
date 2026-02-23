@@ -7,6 +7,8 @@ const RickyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-55')
 const { class_enum, ground_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
+const { i18n } = require('#/i18n/selector');
+
 const aim_races = {};
 aim_races[race_enum.begin_race] = 4;
 aim_races[get_aim_race_index(race_enum.huku_sta, 1)] = 4;
@@ -34,11 +36,12 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
     !new RickyEduMarks().mot_check &&
     aim_check,
   aim_races,
-  (buffer, races) => {
+  function (buffer, races) {
     buffer.push({
-      check: 1,
-      color: undefined,
-      content: `以非极佳干劲完赛次数：${new RickyEduMarks().mot_check}`,
+      content: i18n().kojo[this.id].achieve_track_aim_template.replace(
+        '%COUNT%',
+        new RickyEduMarks().mot_check.toString(),
+      ),
     });
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.huku_sta, 1, 3));

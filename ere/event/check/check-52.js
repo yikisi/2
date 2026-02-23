@@ -25,6 +25,8 @@ const RaceHistory = require('#/data/race/model/race-history');
 const RaceInfo = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
+const { i18n, lan } = require('#/i18n/selector');
+
 /**
  * @param {number} reward
  * @param {number} rank
@@ -113,18 +115,18 @@ module.exports = class extends CustomizedCheck {
     if (new UraraEduMarks().fans >= 250000) {
       titles.push({
         c,
-        n: '乌拉拉加油',
+        n: '105201',
       });
     }
     if (check_aim_race(races, race_enum.arim_kin, 2, 1)) {
       titles.push({
         c,
-        n: '中山之樱',
+        n: '105202',
       });
       if (check_aim_race(races, race_enum.arim_kin, 1, 1)) {
         titles.push({
           c,
-          n: '跨越世界',
+          n: '105203',
         });
       }
       aim_check && sys_personal_achievement.set(52, 1);
@@ -389,6 +391,7 @@ module.exports = class extends CustomizedCheck {
   }
 
   get_edu_aims() {
+    const _lan = lan();
     const buffer = [],
       edu_weeks = era.get('cflag:52:育成回合计时'),
       races = RaceHistory.get(52).get();
@@ -403,31 +406,44 @@ module.exports = class extends CustomizedCheck {
       fans3 = fans;
     }
     buffer.push({
-      check: 1,
-      color: undefined,
-      content: `粉丝数：${fans.toLocaleString()}`,
+      content: i18n().kojo[this.id].achieve_track_aim_template.replace(
+        '%COUNT%',
+        fans.toLocaleString(),
+      ),
     });
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push({
       check: Number(fans1 >= 5000),
       color: fans1 >= 5000 ? attr_change_colors.up : attr_change_colors.down,
-      content: `经典年7月第3周前 粉丝数 ${fans1.toLocaleString()}/5,000 ${
-        fans1 >= 5000 ? '✔' : '✘'
-      }`,
+      current: Object(fans1).toLocaleString(_lan),
+      desc: i18n().kojo[this.id].edu_aim_1,
+      mark:
+        fans1 >= 5000
+          ? i18n().detail.edu_aim_mark_done
+          : i18n().detail.edu_aim_mark_no,
+      require: Object(5000).toLocaleString(_lan),
     });
     buffer.push({
       check: Number(fans2 >= 9000),
       color: fans2 >= 9000 ? attr_change_colors.up : attr_change_colors.down,
-      content: `经典年11月第3周前 粉丝数 ${fans2.toLocaleString()}/9,000 ${
-        fans2 >= 9000 ? '✔' : '✘'
-      }`,
+      current: Object(fans2).toLocaleString(_lan),
+      desc: i18n().kojo[this.id].edu_aim_2,
+      mark:
+        fans2 >= 9000
+          ? i18n().detail.edu_aim_mark_done
+          : i18n().detail.edu_aim_mark_no,
+      require: Object(9000).toLocaleString(_lan),
     });
     buffer.push({
       check: Number(fans3 >= 12000),
       color: fans3 >= 12000 ? attr_change_colors.up : attr_change_colors.down,
-      content: `资深年1月第1周前 粉丝数 ${fans3.toLocaleString()}/12,000 ${
-        fans3 >= 12000 ? '✔' : '✘'
-      }`,
+      current: Object(fans3).toLocaleString(_lan),
+      desc: i18n().kojo[this.id].edu_aim_3,
+      mark:
+        fans3 >= 12000
+          ? i18n().detail.edu_aim_mark_done
+          : i18n().detail.edu_aim_mark_no,
+      require: Object(12000).toLocaleString(_lan),
     });
     buffer.push(check_aim_and_get_entry(races, race_enum.negi_sta, 2, 5));
     buffer.push(check_aim_and_get_entry(races, race_enum.febr_sta, 2, 5));

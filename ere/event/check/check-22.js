@@ -8,6 +8,7 @@ const { attr_change_colors } = require('#/data/color-const');
 const FineEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-22');
 const { race_enum } = require('#/data/race/race-const');
 
+const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 const aim_races = {};
@@ -53,7 +54,7 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
   },
   () => !new FineEduMarks().title_check,
   aim_races,
-  (buffer, races) => {
+  function (buffer, races) {
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.oka_sho, 1, 5));
     buffer.push(check_aim_and_get_entry(races, race_enum.yush_him, 1, 5));
@@ -70,14 +71,27 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
     ].map((e) => ({ c: check_aim_race(races, e, 2, 1), r: e }));
     const win_race =
       final_check.reduce((p, c) => p || (c.c && i18n().race[c.r]), '') ||
-      '未胜利';
+      i18n().race.no_win;
     final_check = Number(final_check.reduce((p, c) => p || c.c, false));
     buffer.push({
       check: final_check,
       color: final_check ? attr_change_colors.up : attr_change_colors.down,
-      content: `资深年 任意指定赛事赢取一着 ${win_race}/秋季天皇赏or伊丽莎白女王杯or英里冠军赛or有马纪念 ${
-        final_check === 1 ? '✔' : '✘'
-      }`,
+      desc: i18n()
+        .detail.edu_aim_desc_template.replace('%EDUTIME%', di18n.n_edu[2])
+        .replace('%RACE%', i18n().kojo[this.id].aim_desc),
+      current: win_race,
+      require: [
+        race_enum.tenn_sho,
+        race_enum.eliz_cup,
+        race_enum.mile_cha,
+        race_enum.arim_kin,
+      ]
+        .map((r) => i18n().race[r])
+        .join(i18n().kojo[this.id].aim_require_adj),
+      mark:
+        final_check === 1
+          ? i18n().detail.edu_aim_mark_done
+          : i18n().detail.edu_aim_mark_no,
     });
   },
 );

@@ -6,6 +6,8 @@ const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
 const GrassWonderEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-11');
 const { race_enum } = require('#/data/race/race-const');
 
+const { i18n } = require('#/i18n/selector');
+
 const aim_races = {};
 aim_races[race_enum.begin_race] = 4;
 aim_races[get_aim_race_index(race_enum.asah_sta, 0)] = 4;
@@ -33,9 +35,10 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
   aim_races,
   (buffer, races) => {
     buffer.push({
-      check: 1,
-      color: undefined,
-      content: `称号相关比赛以较佳及以下干劲完赛次数：${new GrassWonderEduMarks().aim_count}`,
+      content: i18n().kojo[this.id].achieve_track_aim_template.replace(
+        '%COUNT%',
+        new GrassWonderEduMarks().aim_count.toString(),
+      ),
     });
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.asah_sta, 0, 5));

@@ -9,6 +9,8 @@ const TurboEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-66')
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
+const { i18n } = require('#/i18n/selector');
+
 const aim_races = {};
 aim_races[race_enum.begin_race] = 4;
 aim_races[get_aim_race_index(race_enum.radi_shi, 1)] = 4;
@@ -33,7 +35,7 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
     check_aim_race(races, race_enum.arim_kin, 2, 1, (e) => e.st === 0) &&
     era.get('base:66:速度') >= 1200,
   aim_races,
-  (buffer, races) => {
+  function (buffer, races) {
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.radi_shi, 1, 5));
     buffer.push(check_aim_and_get_entry(races, race_enum.stli_kin, 1, 5));
@@ -42,7 +44,13 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
     buffer.push({
       check: Math.min(title_check - 2, 1),
       color: title_check >= 3 ? attr_change_colors.up : attr_change_colors.down,
-      content: `经典年10月至资深年5月第二周 三场G3以上比赛 三着以内 ${title_check}/3 ${title_check >= 3 ? '✔' : '✘'}`,
+      current: title_check.toString(),
+      desc: i18n().kojo[this.id].aim_desc,
+      mark:
+        title_check >= 3
+          ? i18n().detail.edu_aim_mark_done
+          : i18n().detail.edu_aim_mark_no,
+      require: i18n().detail.edu_aim_require_template.replace('%REQUIRE%', '3'),
     });
 
     buffer.push(check_aim_and_get_entry(races, race_enum.tana_sho, 2, 1));

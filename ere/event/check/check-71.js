@@ -18,6 +18,8 @@ const recruit_flags = require('#/data/event/recruit-flags');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
 
+const { i18n } = require('#/i18n/selector');
+
 const aim_races = {};
 aim_races[race_enum.begin_race] = 0b11;
 aim_races[get_aim_race_index(race_enum.sats_sho, 1)] = -1;
@@ -180,14 +182,16 @@ module.exports = class extends CustomizedCheck {
     const races = RaceHistory.get(this.id).get();
     const edu_marks = new ArdanEduMarks();
     buffer.push({
-      check: 1,
-      color: undefined,
-      content: `训练失败次数：${edu_marks.train_fail}`,
+      content: i18n().kojo[this.id].achieve_track_aim_template_1.replace(
+        '%COUNT%',
+        edu_marks.train_fail.toString(),
+      ),
     });
     buffer.push({
-      check: 1,
-      color: undefined,
-      content: `以非极佳干劲完赛次数：${edu_marks.motivation_count}`,
+      content: i18n().kojo[this.id].achieve_track_aim_template_2.replace(
+        '%COUNT%',
+        edu_marks.motivation_count.toString(),
+      ),
     });
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.aoba_sho, 1, 5));

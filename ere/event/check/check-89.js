@@ -12,6 +12,9 @@ const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
+const di18n = require('#/i18n/extended-def');
+const { i18n } = require('#/i18n/selector');
+
 const aim_races = {};
 aim_races[race_enum.begin_race] = 4;
 aim_races[get_aim_race_index(race_enum.japa_cup, 1)] = 4;
@@ -64,9 +67,15 @@ module.exports = class extends CustomizedCheck {
     ret.push({
       check: Math.min(goal, 3) - 2,
       color: goal >= 3 ? attr_change_colors.up : attr_change_colors.down,
-      content: `经典年 十二月第二周以前 三次G3以上比赛前三名 ${goal}/3 ${
-        goal >= 3 ? '✔' : '✘'
-      }`,
+      current: goal.toString(),
+      desc: i18n()
+        .detail.edu_aim_desc_template.replace('%EDUTIME%', di18n.n_edu[1])
+        .replace('%RACE%', i18n().kojo[this.id].aim_desc),
+      mark:
+        goal >= 3
+          ? i18n().detail.edu_aim_mark_done
+          : i18n().detail.edu_aim_mark_no,
+      require: i18n().detail.edu_aim_require_template.replace('%REQUIRE%', '3'),
     });
     ret.push(check_aim_and_get_entry(races, race_enum.hans_dai, 2, 1));
     ret.push(check_aim_and_get_entry(races, race_enum.tenn_spr, 2, 3));

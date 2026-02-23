@@ -91,6 +91,10 @@ class I18nDetail {
   edu_aim_template = '%DESC% %CURRENT%/%REQUIRE% %MARK%';
   edu_aim_template_in_rec = '%DESC% %REQUIRE%';
   edu_aim_desc_template = '%EDUTIME% %RACE%';
+  edu_aim_common_desc_1 = 'G1 比赛 入着';
+  edu_aim_common_desc_2 = 'G2 以上比赛 3 着以内';
+  edu_aim_common_desc_3 = '任意比赛 1 着';
+  edu_aim_require_template = '%REQUIRE% 次';
   edu_aim_require_1 = '1着';
   edu_aim_require_2 = '2着以内';
   edu_aim_require_3 = '3着以内';
@@ -100,6 +104,14 @@ class I18nDetail {
   edu_aim_mark_done = '✔';
   edu_aim_mark_no = '✘';
   edu_header_language = '语言技能';
+
+  skill_title = '比赛技巧';
+  skill_header_learnt = '习得技能';
+  skill_no_skill = '未习得';
+  skill_header_available = '待解锁技能';
+  skill_header_gene = '因子继承';
+  skill_no_gene = '未继承';
+  skill_header_gene_available = '可继承因子';
 
   trainer_info = '一介人类而已';
   growth_info = '还在成长中哦';

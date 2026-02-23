@@ -23,6 +23,8 @@ const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
+const { i18n } = require('#/i18n/selector');
+
 const aim_races = {
   [race_enum.begin_race]: 0b10,
   [get_aim_race_index(race_enum.sats_sho, 1)]: -2,
@@ -166,19 +168,33 @@ module.exports = class extends CustomizedCheck {
   }
 
   get_edu_aims() {
-    const buffer = [],
-      races = RaceHistory.get(this.id).get();
+    const buffer = [];
+    const races = RaceHistory.get(this.id).get();
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     const { op_count, g3_count } = new TamaEduMarks();
     buffer.push({
       check: Math.min(op_count - 1, 1),
       color: op_count >= 2 ? attr_change_colors.up : attr_change_colors.down,
-      content: `经典年三月前 二场OP以上比赛 1着 ${op_count}/2 ${op_count >= 2 ? '✔' : '✘'}`,
+      current: op_count.toString(),
+      desc: i18n().kojo[this.id].aim_desc_1,
+      champion: true,
+      mark:
+        op_count >= 2
+          ? i18n().detail.edu_aim_mark_done
+          : i18n().detail.edu_aim_mark_no,
+      require: i18n().detail.edu_aim_require_template.replace('%REQUIRE%', '2'),
     });
     buffer.push({
       check: Math.min(g3_count - 3, 1),
       color: g3_count >= 4 ? attr_change_colors.up : attr_change_colors.down,
-      content: `资深年前 四场G3以上比赛 1着 ${g3_count}/4 ${g3_count >= 4 ? '✔' : '✘'}`,
+      current: g3_count.toString(),
+      desc: i18n().kojo[this.id].aim_desc_2,
+      champion: true,
+      mark:
+        g3_count >= 4
+          ? i18n().detail.edu_aim_mark_done
+          : i18n().detail.edu_aim_mark_no,
+      require: i18n().detail.edu_aim_require_template.replace('%REQUIRE%', '4'),
     });
     buffer.push(check_aim_and_get_entry(races, race_enum.hans_dai, 2, 3));
     buffer.push(check_aim_and_get_entry(races, race_enum.tenn_spr, 2, 1));

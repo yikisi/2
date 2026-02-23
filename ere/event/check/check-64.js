@@ -26,6 +26,8 @@ const { class_enum } = require('#/data/race/model/race-info');
 const RaceInfo = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
+const { i18n } = require('#/i18n/selector');
+
 const aim_races = {
   [race_enum.begin_race]: 0b11,
   [get_aim_race_index(race_enum.hako_kin, 1)]: 0b11,
@@ -495,11 +497,16 @@ module.exports = class extends CustomizedCheck {
     const { aim_check } = new PamaEduMarks();
     ret.push(check_aim_and_get_entry(races, race_enum.begin_race));
     ret.push({
-      check: aim_check,
-      color: aim_check ? attr_change_colors.up : attr_change_colors.down,
-      content: `经典年6月第2周前 G3以上比赛1着 ${aim_check}/1 ${
-        aim_check ? '✔' : '✘'
-      }`,
+      champion: true,
+      check: aim_check > 0,
+      color: aim_check > 0 ? attr_change_colors.up : attr_change_colors.down,
+      current: aim_check.toString(),
+      desc: i18n().kojo[this.id].aim_desc,
+      mark:
+        aim_check > 0
+          ? i18n().detail.edu_aim_mark_done
+          : i18n().detail.edu_aim_mark_no,
+      require: i18n().detail.edu_aim_require_template.replace('%REQUIRE%', '1'),
     });
     ret.push(check_aim_and_get_entry(races, race_enum.hako_kin, 1, 1));
     ret.push(check_aim_and_get_entry(races, race_enum.nikk_hai, 2, 1));

@@ -9,6 +9,9 @@ const LaurelEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-76'
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
+const di18n = require('#/i18n/extended-def');
+const { i18n } = require('#/i18n/selector');
+
 const aim_races = {};
 aim_races[race_enum.begin_race] = 4;
 aim_races[get_aim_race_index(race_enum.naka_kim, 2)] = 4;
@@ -35,7 +38,7 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
     check_aim_race(races, race_enum.tenn_spr, 2, 1) &&
     check_aim_race(races, race_enum.arim_kin, 2, 1),
   aim_races,
-  (buffer, races) => {
+  function (buffer, races) {
     const event_marks = new LaurelEduMarks();
     event_marks.goal_1 ||= 0;
     event_marks.goal_2 ||= 0;
@@ -45,18 +48,31 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
       color: event_marks.goal_1
         ? attr_change_colors.up
         : attr_change_colors.down,
-      content: `经典年 五月前 G3以上比赛前三名 ${event_marks.goal_1}/1 ${
-        event_marks.goal_1 ? '✔' : '✘'
-      }`,
+      current: event_marks.goal_1.toString(),
+      desc: i18n()
+        .detail.edu_aim_desc_template.replace('%EDUTIME%', di18n.n_edu[1])
+        .replace('%RACE%', i18n().kojo[this.id].aim_desc_1),
+      mark:
+        event_marks.goal_1 > 0
+          ? i18n().detail.edu_aim_mark_done
+          : i18n().detail.edu_aim_mark_no,
+      require: i18n().detail.edu_aim_require_template.replace('%REQUIRE%', '1'),
     });
     buffer.push({
       check: Math.min(event_marks.goal_2, 1),
-      color: event_marks.goal_2
-        ? attr_change_colors.up
-        : attr_change_colors.down,
-      content: `经典年 五月至十一月 G3以上比赛前三名 ${event_marks.goal_2}/1 ${
-        event_marks.goal_2 ? '✔' : '✘'
-      }`,
+      color:
+        event_marks.goal_2 > 0
+          ? attr_change_colors.up
+          : attr_change_colors.down,
+      current: event_marks.goal_2.toString(),
+      desc: i18n()
+        .detail.edu_aim_desc_template.replace('%EDUTIME%', di18n.n_edu[1])
+        .replace('%RACE%', i18n().kojo[this.id].aim_desc_2),
+      mark:
+        event_marks.goal_2 > 0
+          ? i18n().detail.edu_aim_mark_done
+          : i18n().detail.edu_aim_mark_no,
+      require: i18n().detail.edu_aim_require_template.replace('%REQUIRE%', '1'),
     });
     buffer.push(check_aim_and_get_entry(races, race_enum.naka_kim, 2, 1));
     buffer.push(check_aim_and_get_entry(races, race_enum.tenn_spr, 2, 3));

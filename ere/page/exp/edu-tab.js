@@ -112,37 +112,41 @@ module.exports = {
         );
         if (chara.id > 0) {
           const aims = get_custom_check(chara.id).get_edu_aims();
-          const aim_count = aims.filter((e) => e.check === 1).length;
+          const aims_without_trackers = aims.filter(({ content }) => !content);
+          const aim_count = aims_without_trackers.filter(
+            (e) => e.check === 1,
+          ).length;
           const aim_template = i18n().detail.edu_aim_template;
           aim_list.push(
             {
               config: {
                 content:
-                  aim_count === aims.length
+                  aim_count === aims_without_trackers.length
                     ? i18n().detail.edu_header_aim_finished
                     : i18n()
                         .detail.edu_header_aim_template.replace(
                           '%CURRENT%',
                           aim_count.toString(),
                         )
-                        .replace('%TOTAL%', aims.length.toString()),
+                        .replace(
+                          '%TOTAL%',
+                          aims_without_trackers.length.toString(),
+                        ),
                 position: 'left',
               },
               type: 'divider',
             },
-            ...aims.map(({ color, content, current, desc, mark, require }) => {
-              return {
-                config: { color: color },
-                content:
-                  content ??
-                  aim_template
-                    .replace('%DESC%', desc)
-                    .replace('%CURRENT%', current)
-                    .replace('%REQUIRE%', require)
-                    .replace('%MARK%', mark),
-                type: 'text',
-              };
-            }),
+            ...aims.map(({ color, content, current, desc, mark, require }) => ({
+              config: { color },
+              content:
+                content ??
+                aim_template
+                  .replace('%DESC%', desc)
+                  .replace('%CURRENT%', current)
+                  .replace('%REQUIRE%', require)
+                  .replace('%MARK%', mark),
+              type: 'text',
+            })),
           );
         }
       } else {

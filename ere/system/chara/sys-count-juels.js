@@ -19,6 +19,7 @@ function sys_count_juels(
   adapts = new Array(10).fill(0).map((_, i) => get(`cflag:${cid}:${30 + i}`)),
   aim_ratio = get_custom_check(cid)
     .get_edu_aims()
+    .filter(({ content }) => !content)
     .reduce(
       (p, c) => {
         p[0][0] += c.check === 1;

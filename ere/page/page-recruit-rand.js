@@ -87,7 +87,9 @@ async function print_rec_page() {
       if (cur_recruit && today_list.indexOf(cur_recruit) === -1) {
         buffer[0].push({
           content: [
-            ...i18n().timon.get_it_chara_not_in_recruit(cur_recruit),
+            ...i18n().timon.get_it_chara_not_in_recruit(
+              get_chara_talk(cur_recruit),
+            ),
             { isBr: 2 },
           ],
           type: 'text',
@@ -276,27 +278,27 @@ async function print_rec_page() {
       );
       await era.waitAnyKey();
     } else if (ret > 2000) {
-      const selected = ret - 2000,
-        skill_list = CharaSkills.get(selected)
-          .get()
-          .map((e) => ({
-            config: { width: 5 },
-            content: skills_dict[e].get_colored_name(),
-            type: 'text',
-          })),
-        available_list = CharaAvailableSkills.get(selected)
-          .get()
-          .map((e) => ({
-            config: { width: 5 },
-            content: skills_dict[e].get_colored_name(),
-            type: 'text',
-          })),
-        skill_buffer = [];
+      const selected = ret - 2000;
+      const skill_list = CharaSkills.get(selected)
+        .get()
+        .map((e) => ({
+          config: { width: 5 },
+          content: skills_dict[e].get_colored_name(),
+          type: 'text',
+        }));
+      const available_list = CharaAvailableSkills.get(selected)
+        .get()
+        .map((e) => ({
+          config: { width: 5 },
+          content: skills_dict[e].get_colored_name(),
+          type: 'text',
+        }));
+      const skill_buffer = [];
       let name = era.get(`static:${selected}:name`);
       name = __(`name.${name}`, name);
       skill_buffer.push({
         config: { width: 3 },
-        content: '初始：',
+        content: i18n().ui_rec_e_skill_init,
         type: 'text',
       });
       if (skill_list.length > 0) {
@@ -304,7 +306,7 @@ async function print_rec_page() {
       } else {
         skill_buffer.push({
           config: { width: 6 },
-          content: '技能点数+680',
+          content: i18n().ui_rec_e_skill_init_pt,
           type: 'text',
         });
       }
@@ -313,14 +315,14 @@ async function print_rec_page() {
         skill_buffer.push(
           {
             config: { width: 3 },
-            content: '经典年解锁：',
+            content: i18n().ui_rec_e_skill_classic,
             type: 'text',
           },
           ...available_list.slice(0, 2),
           { content: [], type: 'text' },
           {
             config: { width: 3 },
-            content: '资深年解锁：',
+            content: i18n().ui_rec_e_skill_senior,
             type: 'text',
           },
           ...available_list.slice(2),
@@ -329,23 +331,23 @@ async function print_rec_page() {
         skill_buffer.push(
           {
             config: { width: 3 },
-            content: '经典年解锁：',
+            content: i18n().ui_rec_e_skill_classic,
             type: 'text',
           },
           {
             config: { width: 6 },
-            content: '技能点数+400',
+            content: i18n().ui_rec_e_skill_after_pt,
             type: 'text',
           },
           { content: [], type: 'text' },
           {
             config: { width: 3 },
-            content: '资深年解锁：',
+            content: i18n().ui_rec_e_skill_senior,
             type: 'text',
           },
           {
             config: { width: 6 },
-            content: '技能点数+400',
+            content: i18n().ui_rec_e_skill_after_pt,
             type: 'text',
           },
         );
@@ -422,7 +424,7 @@ async function print_rec_page() {
             type: 'divider',
           },
           ...c_script.get_personal_titles().map((tid) => {
-            const name = __(`title.${tid}`, tid || i18n().title.undef);
+            const name = __(`title.${tid}`, i18n().title.undef);
             return {
               content: i18n().title.template_in_rec(
                 { content: name, color: get_chara_color(selected) },
@@ -438,7 +440,10 @@ async function print_rec_page() {
             content: i18n().title.achieve_template_in_rec(
               {
                 color: get_chara_color(selected),
-                content: __(`title.${personal_achieve}`, personal_achieve),
+                content: __(
+                  `title.${personal_achieve}`,
+                  i18n().title_desc.undef,
+                ),
                 fontWeight: 'bold',
               },
               sys_personal_achievement.get(selected) > 0

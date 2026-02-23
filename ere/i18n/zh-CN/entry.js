@@ -369,6 +369,11 @@ class I18nEntry {
   ui_rec_e_skill_template = '%NAME% 的比赛技巧';
   ui_rec_e_aim_template = '%NAME% 的育成目标';
   ui_rec_e_title_template = '%NAME% 的专属称号';
+  ui_rec_e_skill_init = '初始：';
+  ui_rec_e_skill_init_pt = '技能点数+680';
+  ui_rec_e_skill_classic = '经典年解锁：';
+  ui_rec_e_skill_after_pt = '技能点数+400';
+  ui_rec_e_skill_senior = '资深年解锁：';
 
   ui_bs_flatter = '虚与委蛇';
   ui_bs_unlock = '尝试脱困';

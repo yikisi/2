@@ -355,10 +355,6 @@ module.exports = async () => {
               });
             }
             if (version <= 1310) {
-              init_chara(345);
-              init_chara(346);
-              init_chara(347);
-              init_chara(348);
               new MyEduMarks().kamen_rider = 1;
             }
             if (version <= 1311) {
@@ -431,13 +427,8 @@ module.exports = async () => {
                 const tokino = CharaTitles.get(cid)
                   .get()
                   .find((t) => t.n === i18n('zh-CN').title.e_above_all);
-                if (tokino !== undefined) {
+                if (tokino !== void 0) {
                   tokino.c = adaptability_colors.at(-2);
-                }
-              });
-              era.getAllCharacters().forEach((cid) => {
-                if (cid > 200 && chara_list.indexOf(cid) === -1) {
-                  init_chara(cid);
                 }
               });
               if (era.get('flag:惩戒力度') >= 2) {
@@ -652,7 +643,8 @@ module.exports = async () => {
               set_image_t(21);
               set_image_t(25);
               set_image_t(302);
-              era.getAddedCharacters().forEach((cid) => {
+              const added = era.getAddedCharacters();
+              added.forEach((cid) => {
                 if (cid > 0) {
                   const t_table = era.get(`chara:${cid}`)?.talent;
                   if (
@@ -690,6 +682,15 @@ module.exports = async () => {
                   }
                 }
               });
+              era
+                .getAllCharacters()
+                .forEach(
+                  (cid) =>
+                    cid > 200 &&
+                    cid < 400 &&
+                    !added.includes(cid) &&
+                    init_chara(cid),
+                );
             }
             return true;
           } else {

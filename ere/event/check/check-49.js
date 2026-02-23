@@ -5,6 +5,8 @@ const check_aim_race = require('#/event/snippets/check-aim-race');
 const FestaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-49');
 const { race_enum } = require('#/data/race/race-const');
 
+const { i18n } = require('#/i18n/selector');
+
 const aim_races = {};
 aim_races[race_enum.begin_race] = 4;
 
@@ -24,11 +26,12 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
     check_aim_race(races, race_enum.japa_cup, 2, 1) &&
     !new FestaEduMarks().train_fail,
   aim_races,
-  (buffer, races) => {
+  function (buffer, races) {
     buffer.push({
-      check: 1,
-      color: undefined,
-      content: `训练失败次数：${new FestaEduMarks().train_fail}`,
+      content: i18n().kojo[this.id].achieve_track_aim_template.replace(
+        '%COUNT%',
+        new FestaEduMarks().train_fail.toString(),
+      ),
     });
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.keis_hai, 1, 5));

@@ -50,11 +50,8 @@ aim_races[1][get_aim_race_index(race_enum.takz_kin, 2)] = 3;
 aim_races[1][get_aim_race_index(race_enum.prix_lat, 2)] = 2;
 
 function get_coffee_aim_entry(coffee, entry) {
-  return {
-    check: entry.check,
-    color: entry.color,
-    content: [coffee, ' ', entry.content],
-  };
+  entry.desc = `${coffee} ${entry.desc}`;
+  return entry;
 }
 
 module.exports = class extends CustomizedCheck {
@@ -429,12 +426,12 @@ module.exports = class extends CustomizedCheck {
   }
 
   get_edu_aims() {
-    const buffer = [],
-      { plan_b } = new TachyonEduMarks(),
-      races = RaceHistory.get(32).get();
+    const { plan_b } = new TachyonEduMarks();
+    const buffer = [];
+    const races = RaceHistory.get(this.id).get();
     if (plan_b) {
-      const coffee = get_chara_talk(25).get_colored_name(),
-        coffee_races = RaceHistory.get(25).get();
+      const coffee = get_chara_talk(25).name;
+      const coffee_races = RaceHistory.get(25).get();
       buffer.push(
         get_coffee_aim_entry(
           coffee,

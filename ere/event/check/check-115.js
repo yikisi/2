@@ -7,6 +7,8 @@ const check_aim_race = require('#/event/snippets/check-aim-race');
 const OrfevreEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-115');
 const { race_enum } = require('#/data/race/race-const');
 
+const { i18n } = require('#/i18n/selector');
+
 module.exports = require('#/event/check/snippets/check-uma-common-generator')(
   function (extra_flag) {
     if (
@@ -38,14 +40,13 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
     [get_aim_race_index(race_enum.japa_cup, 2)]: 4,
     [get_aim_race_index(race_enum.arim_kin, 2)]: 4,
   },
-  (buffer, races) => {
-    if (check_aim_race(races, race_enum.arim_kin, 2)) {
-      buffer.push({
-        check: 1,
-        color: undefined,
-        content: `资深级有马纪念 8 马身以上大胜：${new OrfevreEduMarks().title_check > 0 ? '是' : '否'}`,
-      });
-    }
+  function (buffer, races) {
+    buffer.push({
+      content: i18n().kojo[this.id].achieve_track_aim_template.replace(
+        '%STATUS%',
+        new OrfevreEduMarks().title_check > 0 ? i18n().ui_yes2 : i18n().ui_no2,
+      ),
+    });
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.sats_sho, 1, 1));
     buffer.push(check_aim_and_get_entry(races, race_enum.toky_yus, 1, 1));

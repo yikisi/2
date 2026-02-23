@@ -7,6 +7,8 @@ const check_aim_race = require('#/event/snippets/check-aim-race');
 const SundayEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-55');
 const { race_enum } = require('#/data/race/race-const');
 
+const { i18n } = require('#/i18n/selector');
+
 const aim_races = {};
 aim_races[race_enum.begin_race] = 4;
 
@@ -30,11 +32,12 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
     check_aim_race(races, race_enum.takz_kin, 2, 1) &&
     !new SundayEduMarks().mot_check,
   aim_races,
-  (buffer, races) => {
+  function (buffer, races) {
     buffer.push({
-      check: 1,
-      color: undefined,
-      content: `以非极佳干劲完赛次数：${new SundayEduMarks().mot_check}`,
+      content: i18n().kojo[this.id].achieve_track_aim_template.replace(
+        '%COUNT%',
+        new SundayEduMarks().mot_check.toString(),
+      ),
     });
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.asah_cup, 1, 1));

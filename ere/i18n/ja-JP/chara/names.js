@@ -24,6 +24,7 @@ module.exports = class extends I18nNames {
   dear = 'あなた';
 
   102511 = 'カフェ君';
+  105211 = 'ウララ';
 
   // Special
   ruby_mother = 'ハギノトップレディ';

@@ -20,6 +20,7 @@ writeFileSync(
     '//',
     `const chara_colors = {
 ${Object.entries(uma_colors)
+  .filter(([u]) => u.length < 4)
   .map(
     ([u, c]) =>
       `  ${u}: ${c instanceof Array ? `[${c.map((o) => `'${o}'`).join(', ')}]` : `'${c}'`},`,

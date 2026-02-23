@@ -8,6 +8,9 @@ class I18nKojo100601 {
   /** @type {KojoFile} */
   love = require('#/i18n/zh-CN/kojo/100601/love-6.kojo');
 
+  // 资深年 1-6月 G1 比赛 3着以内 2次
+  aim_desc = '1-6月 G1 比赛 3着以内';
+
   cinderella = '灰姑娘';
   cinderella_desc = '回合开始时压力自动下降到抑郁以下，干劲自动上升到较差以上';
   latecomer = '迟到者';

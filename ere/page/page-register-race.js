@@ -40,7 +40,7 @@ const { i18n } = require('#/i18n/selector');
  */
 function check_in_foreign(chara_id, year_begin, cur_round, registered_race) {
   return (
-    foreign_race_list.find((e) => e === registered_race.race) !== undefined &&
+    foreign_race_list.find((e) => e === registered_race.race) !== void 0 &&
     race_infos[registered_race.race].date + year_begin - cur_round <=
       expedition_weeks
   );

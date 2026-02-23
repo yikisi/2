@@ -63,7 +63,7 @@ class CustomizedRecruit extends CustomizedEvent {
     const temp = sys_get_star_premium_draw();
     if (temp.chara === this.id) {
       temp.chara = 0;
-      temp.cost += 20;
+      temp.cost += 40;
     }
     if (i18n().note[this.id]) {
       era.drawLine();

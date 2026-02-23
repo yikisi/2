@@ -11,7 +11,7 @@ const { __, i18n } = require('#/i18n/selector');
  * @param {number} aim_race
  * @param {number} [year]
  * @param {number} [req_rank]
- * @returns {{check:number,color:string,desc:string,current:string,require:string,mark:string,[champion]:boolean,[g1]:boolean}}
+ * @returns {EduAim}
  */
 function check_aim_and_get_entry(races, aim_race, year, req_rank) {
   if (aim_race === race_enum.begin_race) {
@@ -49,11 +49,14 @@ function check_aim_and_get_entry(races, aim_race, year, req_rank) {
         ? i18n().race.result_template.replace('%RANK%', temp_rank.toString())
         : i18n().race.no_result,
     desc: i18n()
-      .detail.edu_aim_desc_template.replace('%EDUTIME%', di18n.n_edu[0])
+      .detail.edu_aim_desc_template.replace('%EDUTIME%', di18n.n_edu[year])
       .replace('%RACE%', info.get_colored_name_with_class().content),
     g1: info.race_class === RaceInfo.class_enum.G1,
     mark: temp ? '✔' : '✘',
-    require: __(`detail.edu_aim_require_${req_rank}`),
+    require: __(
+      `detail.edu_aim_require_${req_rank}`,
+      i18n().detail.edu_aim_require_20,
+    ),
   };
 }
 

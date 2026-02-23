@@ -22,6 +22,8 @@ const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 const { attr_enum } = require('#/data/train-const');
 
+const { i18n } = require('#/i18n/selector');
+
 const aim_races = {};
 aim_races[race_enum.begin_race] = 3;
 aim_races[get_aim_race_index(race_enum.aoba_sho, 1)] = 0b11;
@@ -308,9 +310,10 @@ module.exports = class extends CustomizedCheck {
     const buffer = [],
       races = RaceHistory.get(56).get();
     buffer.push({
-      check: 1,
-      color: undefined,
-      content: `以极佳干劲参与 G2 以上赛事数：${new KitaruEduMarks().best_g2_count}`,
+      content: i18n().kojo[this.id].achieve_track_aim_template.replace(
+        '%COUNT%',
+        new KitaruEduMarks().best_g2_count.toString(),
+      ),
     });
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push(check_aim_and_get_entry(races, race_enum.aoba_sho, 1, 20)); // 入着即可

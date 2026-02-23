@@ -10,6 +10,8 @@ const FujikiEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-5')
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
 
+const { i18n } = require('#/i18n/selector');
+
 module.exports = class extends CustomizedCheck {
   check_after_race(extra_flag) {
     if (
@@ -92,14 +94,13 @@ module.exports = class extends CustomizedCheck {
   get_edu_aims() {
     const buffer = [],
       races = RaceHistory.get(this.id).get();
+    buffer.push({
+      content: i18n().kojo[this.id].achieve_track_aim_template.replace(
+        '%STATUS%',
+        new FujikiEduMarks().title_check > 0 ? i18n().ui_yes2 : i18n().ui_no2,
+      ),
+    });
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
-    if (check_aim_race(races, race_enum.begin_race)) {
-      buffer.push({
-        check: 1,
-        color: undefined,
-        content: `出道战 8 马身以上获胜：${new FujikiEduMarks().title_check > 0 ? '是' : '否'}`,
-      });
-    }
     buffer.push(check_aim_and_get_entry(races, race_enum.asah_sta, 0, 5));
     buffer.push(check_aim_and_get_entry(races, race_enum.hoch_sho, 1, 5));
     buffer.push(check_aim_and_get_entry(races, race_enum.sats_sho, 1, 5));

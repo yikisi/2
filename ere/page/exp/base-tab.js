@@ -458,54 +458,52 @@ module.exports = {
           }
         }
       },
-      print() {
-        return [
-          { content: [{ isBr: true }], type: 'text' },
-          { config: { width: 7 }, names: image, type: 'image.whole' },
-          {
-            config: { width: 17 },
-            content: right_intro_list,
-            type: 'text',
-          },
-          {
-            config: { content: i18n().tb_talent.n_talent, position: 'left' },
-            type: 'divider',
-          },
-          ...((temp = get_talent(chara.id)).length
-            ? [
-                {
-                  config: { width: 2 },
-                  content: i18n().tb_talent.n_normal,
-                  type: 'text',
-                },
-                {
-                  config: { width: 22 },
-                  content: temp,
-                  type: 'text',
-                },
-              ]
-            : []),
-          ...((temp = get_xp(chara.id)).length
-            ? [
-                {
-                  config: { width: 2 },
-                  content: i18n().tb_talent.n_xp,
-                  type: 'text',
-                },
-                {
-                  config: { width: 22 },
-                  content: temp,
-                  type: 'text',
-                },
-              ]
-            : []),
-          {
-            config: { content: i18n().title.n_title, position: 'left' },
-            type: 'divider',
-          },
-          ...title_info_list,
-        ];
-      },
+      print: () => [
+        { content: [{ isBr: true }], type: 'text' },
+        { config: { width: 7 }, names: image, type: 'image.whole' },
+        {
+          config: { width: 17 },
+          content: right_intro_list,
+          type: 'text',
+        },
+        {
+          config: { content: i18n().tb_talent.n_talent, position: 'left' },
+          type: 'divider',
+        },
+        ...((temp = get_talent(chara.id)).length
+          ? [
+              {
+                config: { width: 2 },
+                content: i18n().tb_talent.n_normal,
+                type: 'text',
+              },
+              {
+                config: { width: 22 },
+                content: temp,
+                type: 'text',
+              },
+            ]
+          : []),
+        ...((temp = get_xp(chara.id)).length
+          ? [
+              {
+                config: { width: 2 },
+                content: i18n().tb_talent.n_xp,
+                type: 'text',
+              },
+              {
+                config: { width: 22 },
+                content: temp,
+                type: 'text',
+              },
+            ]
+          : []),
+        {
+          config: { content: i18n().title.n_title, position: 'left' },
+          type: 'divider',
+        },
+        ...title_info_list,
+      ],
     };
   },
   name: i18n().detail.base_title,
