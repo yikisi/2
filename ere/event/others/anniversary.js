@@ -21,10 +21,10 @@ async function anniversary() {
         name = 'TWENTY';
         break;
       case 2030:
-        name = 'THRITY';
+        name = 'THIRTY';
         break;
       case 2040:
-        name = 'FOURTY';
+        name = 'FORTY';
         break;
       case 2050:
         name = 'FIFTY';
