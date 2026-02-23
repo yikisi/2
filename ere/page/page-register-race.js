@@ -32,24 +32,29 @@ const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 /**
- * @param {number} chara_id
+ * @param {number} cid
  * @param {number} year_begin
  * @param {number} cur_round
  * @param {{race:number,week:number}} registered_race
  * @returns {boolean}
  */
-function check_in_foreign(chara_id, year_begin, cur_round, registered_race) {
+function check_in_foreign(cid, year_begin, cur_round, registered_race) {
   return (
-    foreign_race_list.find((e) => e === registered_race.race) !== void 0 &&
+    foreign_race_list.find((r) => r === registered_race.race) !== void 0 &&
     race_infos[registered_race.race].date + year_begin - cur_round <=
       expedition_weeks
   );
 }
 
-function check_register_disabled(chara_id, in_foreign) {
+/**
+ * @param {number} cid
+ * @param {boolean} in_foreign
+ * @returns {boolean}
+ */
+function check_register_disabled(cid, in_foreign) {
   return (
-    era.get(`status:${chara_id}:伤病`) ||
-    !check_pregnant_unprotect(chara_id) ||
+    era.get(`status:${cid}:伤病`) ||
+    !check_pregnant_unprotect(cid) ||
     in_foreign
   );
 }

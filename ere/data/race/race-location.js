@@ -1,6 +1,5 @@
 const { location_enum } = require('#/data/locations');
 const { track_enum } = require('#/data/race/model/race-info');
-const { race_enum, race_infos } = require('#/data/race/race-const');
 
 // ABLNAME:5 - 7 = 粤语 - 法语
 /** @type {Record<string,{con:string,lan:number,loc:number}>} */
@@ -37,9 +36,7 @@ track2location[track_enum.longchamp] =
     { con: 'c_france', lan: 7, loc: location_enum.paris };
 
 module.exports = {
-  foreign_race_list: Object.values(race_enum).filter(
-    (r) => race_infos[r].track >= track_enum.longchamp,
-  ),
+  foreign_race_list: Object.keys(track2location).map(Number),
   track2location,
   location2language: {
     [location_enum.hongkong]: 5,
