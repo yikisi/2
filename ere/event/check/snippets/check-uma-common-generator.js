@@ -30,8 +30,8 @@ module.exports = (
       if (!title_check_cb) {
         return super.check_and_get_titles(aim_check);
       }
-      const races = RaceHistory.get(this.id),
-        titles = [];
+      const races = RaceHistory.get(this.id);
+      const titles = [];
       if (
         title_check_cb.call(this, races.get(), races.get_values(), aim_check)
       ) {
