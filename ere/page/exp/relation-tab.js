@@ -186,7 +186,7 @@ module.exports = {
               { type: 'divider' },
               {
                 content:
-                  i18n().detail.get_relation_change_callname_to_me_confirm(
+                  i18n().detail.get_relation_change_callname_to_you_confirm(
                     chara.get_colored_name(),
                     me.get_colored_name(),
                   ),
@@ -273,7 +273,7 @@ module.exports = {
                       accelerator: 100,
                       config: { width: 12 },
                       content:
-                        i18n().detail.relation_bt_change_callname_to_me_template.replace(
+                        i18n().detail.relation_bt_change_callname_to_you_template.replace(
                           '%YOU%',
                           (temp = get_display_name(era.get('callname:0:-2'))),
                         ),
@@ -283,7 +283,7 @@ module.exports = {
                       accelerator: 101,
                       config: { width: 12 },
                       content:
-                        i18n().detail.relation_bt_reset_callname_to_me_template.replace(
+                        i18n().detail.relation_bt_reset_callname_to_you_template.replace(
                           '%YOU%',
                           temp,
                         ),

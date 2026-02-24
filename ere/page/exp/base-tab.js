@@ -470,7 +470,7 @@ module.exports = {
           config: { content: i18n().tb_talent.n_talent, position: 'left' },
           type: 'divider',
         },
-        ...((temp = get_talent(chara.id)).length
+        ...((temp = get_talent(chara.id)).length > 0
           ? [
               {
                 config: { width: 2 },
@@ -484,7 +484,7 @@ module.exports = {
               },
             ]
           : []),
-        ...((temp = get_xp(chara.id)).length
+        ...((temp = get_xp(chara.id)).length > 0
           ? [
               {
                 config: { width: 2 },

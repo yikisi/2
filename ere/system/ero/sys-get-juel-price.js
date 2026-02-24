@@ -14,15 +14,17 @@ const {
  */
 function get_base_price(
   cid,
-  config = {
-    base_price: base_skill_price,
-  },
+  {
+    is_emotion = false,
+    is_auto_update = false,
+    base_price = base_skill_price,
+  } = {},
 ) {
   return (
-    (config.base_price *
+    (base_price *
       (100 +
-        era.get('flag:宝珠消耗量') * !config.is_auto_update +
-        era.get(`talent:${cid}:工口好奇`) * 10 * !config.is_emotion)) /
+        era.get('flag:宝珠消耗量') * !is_auto_update +
+        era.get(`talent:${cid}:工口好奇`) * 10 * !is_emotion)) /
     100
   );
 }

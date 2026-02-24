@@ -160,11 +160,11 @@ class I18nDetail {
     father,
   ];
   relation_no_family = '没有可以介绍的角色';
-  relation_bt_change_callname_to_me_template = '修改对 %YOU% 的称呼';
-  relation_bt_reset_callname_to_me_template = '重置对 %YOU% 的称呼';
+  relation_bt_change_callname_to_you_template = '修改对 %YOU% 的称呼';
+  relation_bt_reset_callname_to_you_template = '重置对 %YOU% 的称呼';
   relation_bt_change_callname_template = '修改对该角色的称呼 (%CALLNAME%)';
   relation_bt_reset_callname = '重置对该角色的称呼';
-  get_relation_change_callname_to_me_confirm = (chara, you) => [
+  get_relation_change_callname_to_you_confirm = (chara, you) => [
     '想让 ',
     chara,
     ' 怎么称呼 ',
@@ -186,6 +186,42 @@ class I18nDetail {
   ];
 
   sex_title = '性爱情况';
+  sex_header_inmon = '淫纹定制';
+  get_sex_exp = (you, sex_count, sleep_info, prison_info) => [
+    '和 ',
+    you,
+    ' 上过 ',
+    sex_count,
+    ' 次床',
+    ...sleep_info,
+    ...prison_info,
+  ];
+  get_sex_sleep_exp = (sleep_count) => ['，包括 ', sleep_count, ' 次睡奸'];
+  get_sex_prison_exp = (prison_count) => ['，实施过 ', prison_count, ' 次监禁'];
+  get_sex_exp_you = (sex_count, sleep_info, prison_info) => [
+    '和其他角色共上过 ',
+    sex_count,
+    ' 次床',
+    ...sleep_info,
+    ...prison_info,
+  ];
+  get_sex_sleep_exp_you = (sleep_count) => [
+    '，包括 ',
+    sleep_count,
+    ' 次被睡奸',
+  ];
+  get_sex_prison_exp_you = (prison_count) => [
+    '，被监禁过 ',
+    prison_count,
+    ' 次',
+  ];
+  sex_header_abl = '性爱能力';
+  get_sex_abl_entry = (abl, level) => [abl, '：', level];
+  sex_header_jewel = '持有因子';
+  sex_header_mark = '获得刻印';
+  sex_image_bt_change_template = '更改调教立绘 (当前：第 %SET% 套)';
+  sex_image_set_template = '第 %SET% 套';
+  sex_image_personal_info = '使用专属调教立绘';
 
   human_info = '一介人类而已';
   no_reward_info = '还没有可称道的战绩';

@@ -4,15 +4,14 @@ const {
   check_chara_ero_image,
   sys_get_ero_image,
 } = require('#/system/ero/sys-calc-ero-image');
+
 const {
-  get_bust_size,
-  get_hip_size,
-  get_waist_size,
-} = require('#/system/ero/sys-calc-ero-status');
+  get_shared_com_base_body,
+  get_shared_com_base_female,
+  get_unknown_info,
+} = require('#/page/exp/snippets');
 
-const { get_unknown_info } = require('#/page/exp/snippets');
-
-const CharaTalk = require('#/utils/chara-talk');
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const get_gradient_color = require('#/utils/gradient-color');
 const { get_abbr_number } = require('#/utils/value-utils');
 
@@ -22,7 +21,7 @@ const { mark_colors, mark_enum } = require('#/data/ero/mark-const');
 const { palam2juel } = require('#/data/ero/orgasm-const');
 const { get_skill_list } = require('#/data/ero/part-const');
 const { inmon_plugin_dict } = require('#/data/ero/plugin/plugin-const');
-const { get_breast_cup, get_talent, get_xp } = require('#/data/info-generator');
+const { get_talent, get_xp } = require('#/data/info-generator');
 
 const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
@@ -58,6 +57,7 @@ module.exports = {
    * @returns {{print():*[]}}
    */
   generate(chara, flags) {
+    const me = get_chara_talk(0);
     const sex_info_list = [];
     if (flags.in_growth) {
       sex_info_list.push(
@@ -76,7 +76,7 @@ module.exports = {
             ? [
                 {
                   config: { width: 2 },
-                  content: '淫纹',
+                  content: i18n().detail.sex_header_inmon,
                   type: 'text',
                 },
                 {
@@ -98,38 +98,28 @@ module.exports = {
             : [];
         sex_info_list.push(
           {
-            config: { content: '身体尺寸', position: 'left' },
+            config: {
+              content: i18n().detail.base_header_body,
+              position: 'left',
+            },
             type: 'divider',
           },
           {
             content: [
-              '身高：',
-              era.get(`cflag:${chara.id}:身高`).toString(),
-              'cm ｜ ',
-              '体重：',
-              era.get(`status:${chara.id}:发胖`)
-                ? '幸、幸福胖哦……'
-                : era.get(`base:${chara.id}:体重偏差`) >= 2000
-                  ? '微增'
-                  : '控制得当',
-              chara.sex_code === 1
-                ? ''
-                : ` ｜ 三围：B${get_bust_size(
-                    chara.id,
-                    true,
-                  )} (${get_breast_cup(chara.id, true)} Cup) · W${get_waist_size(
-                    chara.id,
-                  )} · H${get_hip_size(chara.id)}`,
+              ...get_shared_com_base_body(chara.id),
+              ...(chara.sex_code === 1
+                ? get_shared_com_base_female(chara.id, true)
+                : []),
             ],
             type: 'text',
           },
           {
-            config: { content: '特征', position: 'left' },
+            config: { content: i18n().tb_talent.n_talent, position: 'left' },
             type: 'divider',
           },
           {
             config: { width: 2 },
-            content: '性格',
+            content: i18n().tb_talent.n_normal,
             type: 'text',
           },
           {
@@ -139,7 +129,7 @@ module.exports = {
           },
           {
             config: { width: 2 },
-            content: '其他',
+            content: i18n().tb_talent.n_xp,
             type: 'text',
           },
           {
@@ -155,74 +145,49 @@ module.exports = {
         const prison_count = era.get(`exp:${chara.id}:监禁次数`);
         sex_info_list.push(
           {
-            config: { content: '基本情况', position: 'left' },
+            config: { content: i18n().detail.sex_title, position: 'left' },
             type: 'divider',
           },
           {
             type: 'text',
             content:
-              sex_count && flags.show_exp
-                ? chara.id
-                  ? [
-                      '和 ',
-                      CharaTalk.me.get_colored_name(),
-                      ' 上过 ',
+              sex_count > 0 && flags.show_exp > 0
+                ? chara.id > 0
+                  ? i18n().detail.get_sex_exp(
+                      me.get_colored_name(),
                       {
-                        content: sex_count.toLocaleString(),
+                        ...get_abbr_number(sex_count),
                         color: palam_colors.notifications[1],
                       },
-                      ' 次床',
-                    ].concat(
-                      sleep_count
-                        ? [
-                            '，包括 ',
-                            {
-                              content: sleep_count.toLocaleString(),
-                              color: palam_colors.notifications[1],
-                            },
-                            ' 次睡奸',
-                          ]
+                      sleep_count > 0
+                        ? i18n().detail.get_sex_sleep_exp({
+                            ...get_abbr_number(sleep_count),
+                            color: palam_colors.notifications[1],
+                          })
                         : [],
-                      prison_count
-                        ? [
-                            '；对 ',
-                            CharaTalk.me.get_colored_name(),
-                            ' 实施过 ',
-                            {
-                              content: prison_count.toLocaleString(),
-                              color: attr_change_colors.down,
-                            },
-                            ' 次监禁',
-                          ]
+                      prison_count > 0
+                        ? i18n().detail.get_sex_prison_exp({
+                            ...get_abbr_number(prison_count),
+                            color: attr_change_colors.down,
+                          })
                         : [],
                     )
-                  : [
-                      '和其他角色共上过 ',
+                  : i18n().detail.get_sex_exp_you(
                       {
-                        content: sex_count.toLocaleString(),
+                        ...get_abbr_number(sex_count),
                         color: palam_colors.notifications[1],
                       },
-                      ' 次床',
-                    ].concat(
-                      sleep_count
-                        ? [
-                            '，包括 ',
-                            {
-                              content: sleep_count.toLocaleString(),
-                              color: palam_colors.notifications[1],
-                            },
-                            ' 次被睡奸',
-                          ]
+                      sleep_count > 0
+                        ? i18n().detail.get_sex_sleep_exp_you({
+                            ...get_abbr_number(sleep_count),
+                            color: palam_colors.notifications[1],
+                          })
                         : [],
-                      prison_count
-                        ? [
-                            '；被监禁过 ',
-                            {
-                              content: prison_count.toLocaleString(),
-                              color: attr_change_colors.down,
-                            },
-                            ' 次',
-                          ]
+                      prison_count > 0
+                        ? i18n().detail.get_sex_prison_exp_you({
+                            ...get_abbr_number(prison_count),
+                            color: attr_change_colors.down,
+                          })
                         : [],
                     )
                 : i18n().detail.no_exp_info,
@@ -230,54 +195,51 @@ module.exports = {
         );
       }
       sex_info_list.push({
-        config: { content: '性爱能力', position: 'left' },
+        config: { content: i18n().detail.sex_header_abl, position: 'left' },
         type: 'divider',
       });
       get_skill_list(chara.sex_code).forEach((aid) => {
         const level = era.get(`abl:${chara.id}:${aid}`);
         sex_info_list.push({
           config: { width: 6 },
-          content: [
-            i18n().tb_abl[aid],
-            '：',
-            {
-              content: `Lv.${level}`,
-              color: get_gradient_color(
-                undefined,
-                palam_colors.notifications[1],
-                level / 5,
-              ),
-              title: di18n.tb_abl.get_abl_desc(aid, level),
-            },
-          ],
+          content: i18n().detail.get_sex_abl_entry(i18n().tb_abl[aid], {
+            content: i18n().tb_abl.lv_template.replace(
+              '%LEVEL%',
+              level.toString(),
+            ),
+            color: get_gradient_color(
+              void 0,
+              palam_colors.notifications[1],
+              level / 5,
+            ),
+            title: di18n.tb_abl.get_abl_desc(aid, level),
+          }),
           type: 'text',
         });
       });
 
       sex_info_list.push({
         type: 'divider',
-        config: { content: '因子', position: 'left' },
+        config: { content: i18n().detail.sex_header_jewel, position: 'left' },
       });
       era
-        .get('palamnames')
-        .slice(0, chara.id ? 15 : 10)
-        .forEach((juel, i) => {
-          const num = era.get(`juel:${chara.id}:${juel}`);
+        .get('jewelkeys')
+        .slice(0, chara.id > 0 ? 15 : 10)
+        .forEach((jid) => {
+          const num = era.get(`juel:${chara.id}:${jid}`);
           const got_juel = Math.floor(
-            (era.get(`gotjuel:${chara.id}:${juel}`) || 0) / palam2juel,
+            (era.get(`gotjuel:${chara.id}:${jid}`) || 0) / palam2juel,
           );
           const buff = era.get(
-            `tcvar:${chara.id}:${juel.substring(0, 2)}因子加成`,
+            `tcvar:${chara.id}:${i18n('zh-CN').tb_param[jid]}因子加成`,
           );
           sex_info_list.push({
             config: { width: 4 + 4 * in_train },
             content: [
-              juel.substring(0, 2),
-              '：',
-              {
+              ...i18n().tb_param.get_jewel_count(i18n().tb_param[jid], {
                 color: num > 0 ? palam_colors.notifications[1] : '',
                 ...get_abbr_number(num),
-              },
+              }),
               ...(got_juel
                 ? [
                     ' (',
@@ -296,7 +258,7 @@ module.exports = {
                     ' (',
                     {
                       color:
-                        i >= 10
+                        jid >= 11
                           ? buff > 0
                             ? attr_change_colors.down
                             : attr_change_colors.up
@@ -320,7 +282,7 @@ module.exports = {
       if (sex_level > 0 || chara.id > 0) {
         sex_info_list.push({
           type: 'divider',
-          config: { content: '刻印', position: 'left' },
+          config: { content: i18n().detail.sex_header_mark, position: 'left' },
         });
 
         if (sex_level > 0) {
@@ -355,11 +317,17 @@ module.exports = {
       if (img_t) {
         sex_info_list.push({
           accelerator: 100,
-          content: `更改调教立绘（当前：第 ${img_t.substring(img_name.length) || '1'} 套）`,
+          content: i18n().detail.sex_image_bt_change_template.replace(
+            '%SET%',
+            img_t.substring(img_name.length) || '1',
+          ),
           type: 'button',
         });
       } else {
-        sex_info_list.push({ content: '使用专属调教立绘', type: 'text' });
+        sex_info_list.push({
+          content: i18n().detail.sex_image_personal_info,
+          type: 'text',
+        });
       }
     }
     return {
@@ -384,7 +352,10 @@ module.exports = {
                   },
                   {
                     accelerator: 100 + i,
-                    content: `第 ${i + 1} 套`,
+                    content: i18n().detail.sex_image_set_template.replace(
+                      '%SET%',
+                      (i + 1).toString(),
+                    ),
                     type: 'button',
                   },
                 ],
