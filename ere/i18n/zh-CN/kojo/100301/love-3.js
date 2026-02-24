@@ -21,8 +21,8 @@ module.exports = {
         ' 自己就莫名奇妙地心跳加速，好像比赛前的反应……看到',
         me.sex,
         '跟别的',
-        teio.get_phy_sex_title().substring(0, 1),
-        '人交谈总感觉不太舒服，跑完步后看见',
+        teio.phy_sex_title,
+        '交谈总感觉不太舒服，跑完步后看见',
         me.sex,
         '微笑着向自己走来的时候身体会更热……',
       ]);

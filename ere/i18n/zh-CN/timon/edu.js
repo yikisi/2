@@ -49,11 +49,11 @@ module.exports = {
      */
     const f = async (chara, you, result, title) => {
       await era.printAndWait(
-        `每年一月，URA赛${chara.get_uma_sex_title()}殿堂就会开始针对退役马娘进行票选。`,
+        `每年一月，URA赛${chara.uma_sex_title}殿堂就会开始针对退役马娘进行票选。`,
       );
       era.println();
       await era.printAndWait(
-        `而到了三月，生涯功成名就，且在严格票选中脱颖而出的赛${chara.get_uma_sex_title()}将会登上殿堂，并获得《显彰赛${chara.get_uma_sex_title()}》此一至高无上的荣誉。`,
+        `而到了三月，生涯功成名就，且在严格票选中脱颖而出的赛${chara.uma_sex_title}将会登上殿堂，并获得《显彰赛${chara.get_uma_sex_title()}》此一至高无上的荣誉。`,
       );
       era.println();
       await era.printAndWait([
@@ -91,7 +91,7 @@ module.exports = {
       era.println();
       await era.printAndWait([
         '但 ',
-        you.get_couple_title(),
+        you.couple_title,
         ' 也仍然为竭尽全力达到的成果感到骄傲，并且相信后来者能站在自己的肩上爬向更高的顶点。',
       ]);
       era.println();
@@ -120,7 +120,7 @@ module.exports = {
         '时光如白驹过隙，与 ',
         chara.get_colored_name(),
         ' 相伴已逾数载，再过一段日子，',
-        you.get_couple_title(),
+        you.couple_title,
         ' 马上就要展开新的篇章',
       ]);
       era.println();
@@ -308,10 +308,7 @@ module.exports = {
       if (ret[0] === 1) {
         if (want_sex) {
           await era.printAndWait('对方兴致盎然的答应了。');
-          await era.printAndWait([
-            you.get_couple_title(),
-            ' 互相给对方擦了背。',
-          ]);
+          await era.printAndWait([you.couple_title, ' 互相给对方擦了背。']);
           await era.printAndWait([
             '结束洗浴后，',
             chara.sex,

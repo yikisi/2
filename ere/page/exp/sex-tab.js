@@ -27,8 +27,6 @@ const { get_breast_cup, get_talent, get_xp } = require('#/data/info-generator');
 const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
-const page_name = '性爱情况';
-
 const sex_color = mark_colors[mark_enum.ero];
 
 /**
@@ -38,19 +36,17 @@ const sex_color = mark_colors[mark_enum.ero];
  */
 function get_mark_info(cid, mid, level = era.get(`mark:${cid}:${mid}`)) {
   return {
-    config: { width: 4 },
-    content: [
-      {
-        color: mark_colors[mid],
-        content: `${era.get(`markname:${mid}`)} Lv.${level}`,
-      },
-      { isBr: true },
+    config: { color: mark_colors[mid], width: 4 },
+    content: di18n.tb_mark.get_mark_with_level_stars(
+      mid,
+      level,
       {
         content: '★'.repeat(level),
         color: get_gradient_color(void 0, mark_colors[mid], level / 3),
       },
-      { content: '☆'.repeat(level) },
-    ],
+      '☆'.repeat(3 - level),
+      { isBr: true },
+    ),
     type: 'text',
   };
 }
@@ -65,7 +61,10 @@ module.exports = {
     const sex_info_list = [];
     if (flags.in_growth) {
       sex_info_list.push(
-        { type: 'divider', config: { content: page_name, position: 'left' } },
+        {
+          type: 'divider',
+          config: { content: i18n().detail.sex_title, position: 'left' },
+        },
         { content: i18n().detail.growth_info, type: 'text' },
       );
     } else if (!chara.id || flags.show_exp) {
@@ -82,12 +81,15 @@ module.exports = {
                 },
                 {
                   config: { width: 22 },
-                  content: plugin_list.map((e) => {
-                    const p = inmon_plugin_dict[e];
+                  content: plugin_list.map((pid) => {
+                    const p = inmon_plugin_dict[pid];
                     return {
-                      content: `[${p.name}]`,
+                      content: i18n().inmon.bordered_name_template.replace(
+                        '%NAME%',
+                        p.name,
+                      ),
                       color: get_gradient_color('', sex_color, p.level / 3),
-                      title: `[${p.name}]：${p.description}`,
+                      title: p.title,
                     };
                   }),
                   type: 'text',
@@ -334,7 +336,10 @@ module.exports = {
       }
     } else {
       sex_info_list.push(
-        { type: 'divider', config: { content: page_name, position: 'left' } },
+        {
+          type: 'divider',
+          config: { content: i18n().detail.sex_title, position: 'left' },
+        },
         { content: get_unknown_info(chara.id), type: 'text' },
       );
     }
@@ -396,10 +401,8 @@ module.exports = {
           );
         }
       },
-      print() {
-        return sex_info_list;
-      },
+      print: () => sex_info_list,
     };
   },
-  name: page_name,
+  name: i18n().detail.sex_title,
 };

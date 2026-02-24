@@ -170,7 +170,7 @@ module.exports = {
           },
           type: 'divider',
         },
-        { content: i18n().detail.trainer_info, type: 'text' },
+        { content: i18n().detail.human_info, type: 'text' },
         ...attr_list,
       );
     }

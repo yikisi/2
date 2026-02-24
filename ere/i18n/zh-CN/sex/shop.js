@@ -12,9 +12,9 @@ class I18nJewelShop {
   inmon_header = '%NAME% 的淫纹';
   transfer_header = '采补之术';
 
-  price_title_template = '需要：%PRICE%';
-  cond_title_template = '%COND% %EXP% (当前 %NOW%)';
-  multi_cond_title_template = '%COND% 总沾染精液量(ml) (当前 %ALL% = %NOW%)';
+  price_tip_template = '需要：%PRICE%';
+  cond_tip_template = '%COND% %EXP% (当前 %NOW%)';
+  multi_cond_tip_template = '%COND% 总沾染精液量(ml) (当前 %ALL% = %NOW%)';
   jewel_price_template = '%JEWEL%×%COUNT%';
   price_splitter = ' + ';
 

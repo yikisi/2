@@ -20,12 +20,12 @@ class I18nMark {
   abbr_template = '[%MARK%%LEVEL%]';
   mark_with_level = '%MARK% Lv.%LEVEL%';
 
-  get_mark_with_level_stars = (mark_with_level, full_stars, empty_stars) => [
+  get_mark_with_level_stars = (
     mark_with_level,
-    ' ',
     full_stars,
     empty_stars,
-  ];
+    divider = ' ',
+  ) => [mark_with_level, divider, full_stars, empty_stars];
 
   s_title_name = '别称';
 

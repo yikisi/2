@@ -8,7 +8,7 @@ class I18nGenes {
   r_sr = '史诗';
   r_ssr = '传奇';
 
-  gn_title_template = '【%NAME%】（%TYPE% · %RARITY%）\n%DESC%';
+  gn_tip_template = '【%NAME%】（%TYPE% · %RARITY%）\n%DESC%';
 
   sg_name_template = '「%NAME%」之回响';
   sg_desc_template = '习得「%NAME%」';

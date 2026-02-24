@@ -1,8 +1,10 @@
 class I18nInmon {
+  bordered_name_template = '[%NAME%]';
   tip_template = '【%NAME%】（%GROUP% · 等级 %LEVEL% · %SLOT% 插槽）\n%DESC%';
   level_template = 'Lv. %LEVEL%';
   slot_cost_template = '%SLOT% 插槽';
   all_slot_template = '插槽：%SLOT%/%ALL%';
+  name_with_cost_template = '%NAME% (%SLOT%)';
   unlocked = '已解锁';
 
   // 插件类型

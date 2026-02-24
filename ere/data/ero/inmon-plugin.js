@@ -23,10 +23,6 @@ class InmonPlugin {
     return i18n().inmon[this.id];
   }
 
-  get description() {
-    return i18n().inmon_desc[this.id];
-  }
-
   /**
    *
    * @param {number} id

@@ -113,11 +113,108 @@ class I18nDetail {
   skill_no_gene = '未继承';
   skill_header_gene_available = '可继承因子';
 
-  trainer_info = '一介人类而已';
+  race_title = '出走成绩';
+  race_header_race = '赛事战绩';
+  race_no_race = '未出走';
+  get_race_summary = (race_count, win, reward) => [
+    race_count,
+    ' 战 ',
+    win,
+    ' 胜，总赏金 ',
+    reward,
+  ];
+  get_race_result = (year, race, result) => [year, ' 年 ', race, ' · ', result];
+  race_result_tip_template = '第 %POP% 人气 · %STYLE%';
+  race_header_title = '专属称号';
+
+  relation_title = '社交关系';
+  relation_header_relation = '人际交往';
+  get_relation_entry = (name, relation) => [name, '：', relation];
+  relation_no_relation = '没有在意的角色';
+  get_relation_take_care = (chara) => ['照看 ', chara, ' 中'];
+  get_relation_be_taken_care = (chara) => ['被 ', chara, ' 照看中'];
+  relation_header_family = '直系亲属';
+  get_relation_family_parents = (father, mother) => [
+    '父亲是 ',
+    father,
+    '，母亲是',
+    mother,
+  ];
+  relation_family_children_template = '现在是 %INFO%';
+  relation_family_as_father_template = '%COUNT% 个孩子的父亲';
+  relation_family_as_mother_template = '%COUNT% 个孩子的母亲';
+  relation_family_child_boy_title_template = '%NUMBER%子';
+  relation_family_child_girl_title_template = '%NUMBER%女';
+  get_relation_family_child_entry_as_father = (title, child, mother) => [
+    title,
+    ' ',
+    child,
+    '，其母为 ',
+    mother,
+  ];
+  get_relation_family_child_entry_as_mother = (title, child, father) => [
+    title,
+    ' ',
+    child,
+    '，其父为 ',
+    father,
+  ];
+  relation_no_family = '没有可以介绍的角色';
+  relation_bt_change_callname_to_me_template = '修改对 %YOU% 的称呼';
+  relation_bt_reset_callname_to_me_template = '重置对 %YOU% 的称呼';
+  relation_bt_change_callname_template = '修改对该角色的称呼 (%CALLNAME%)';
+  relation_bt_reset_callname = '重置对该角色的称呼';
+  get_relation_change_callname_to_me_confirm = (chara, you) => [
+    '想让 ',
+    chara,
+    ' 怎么称呼 ',
+    you,
+    '？',
+  ];
+  get_relation_change_callname_confirm = (chara) => [
+    '想怎么称呼 ',
+    chara,
+    '？',
+  ];
+  get_relation_change_callname_result = (caller, callee, callname) => [
+    caller,
+    ' 开始称呼 ',
+    callee,
+    ' 为 ',
+    callname,
+    ' 了',
+  ];
+
+  sex_title = '性爱情况';
+
+  human_info = '一介人类而已';
+  no_reward_info = '还没有可称道的战绩';
+  cannot_join_race_info = '不能出走比赛';
   growth_info = '还在成长中哦';
   no_exp_info = '还没有相关经历';
   no_known_info = '还没有足够了解';
   no_part_info = '没有这个部位';
+
+  get_child_number(num) {
+    const first = '长';
+    const second = '次';
+    const n10 = ['十', '廿', '卅', '卌'];
+    const n0 = ['一', '二', '三', '四', '五', '六', '七', '八', '九'];
+    if (num === 1) {
+      return first;
+    } else if (num === 2) {
+      return second;
+    } else if (num < 10) {
+      return n0[num - 1];
+    } else if (num < 50) {
+      let ret = n10[Math.floor(num / 10) - 1];
+      if (num % 10 > 0) {
+        ret += n0[(num % 10) - 1];
+      }
+      return ret;
+    }
+    return num.toString();
+  }
 }
 
 module.exports = I18nDetail;

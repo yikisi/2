@@ -9,7 +9,7 @@ module.exports = {
   /** @param {CharaTalk} chara */
   get_check_message: (chara) => [
     '训练员与',
-    chara.get_uma_sex_title(),
+    chara.uma_sex_title,
     '的契约足以影响双方一生，确定要招募 ',
     chara.get_colored_name(),
     ' 吗？',

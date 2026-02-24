@@ -65,7 +65,7 @@ class UmaGene {
         content: this.name,
         fontWeight: 'bold',
         title: i18n()
-          .gene.gn_title_template.replace('%NAME%', this.name)
+          .gene.gn_tip_template.replace('%NAME%', this.name)
           .replace('%TYPE%', di18n.gene.gn_types[this.type])
           .replace('%RARITY%', di18n.gene.gn_rarities[this.rarity])
           .replace('%DESC%', this.desc),

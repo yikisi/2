@@ -282,13 +282,15 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
       delete sex_mark_col.config.width;
       sex_mark_col.content.unshift({ isBr: true });
       const p_buffer = plugins
-        .filter((e) => inmon.on(e.p.id))
-        .map((e) => {
-          group_dict[e.p.group] = 1;
-          const name = e.p.colored_name;
-          name.content += ` (${e.p.size})`;
+        .filter((plug) => inmon.on(plug.p.id))
+        .map((plug) => {
+          group_dict[plug.p.group] = 1;
+          const name = plug.p.colored_name;
+          name.content += i18n()
+            .inmon.name_with_cost_template.replace('%NAME%', name.content)
+            .replace('%SLOT%', plug.p.size.toString());
           return {
-            accelerator: e.a,
+            accelerator: plug.a,
             config: {
               align: 'center',
               color: name.color,

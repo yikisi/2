@@ -17,8 +17,6 @@ const { race_enum, race_infos } = require('#/data/race/race-const');
 const di18n = require('#/i18n/extended-def');
 const { __, i18n } = require('#/i18n/selector');
 
-const page_name = '出走成绩';
-
 module.exports = {
   /**
    * @param {CharaTalk} chara
@@ -38,7 +36,7 @@ module.exports = {
         );
       race_info_list.push({
         config: {
-          content: '赛事战绩',
+          content: i18n().detail.race_header_race,
           position: 'left',
         },
         type: 'divider',
@@ -46,57 +44,65 @@ module.exports = {
       if (race_len) {
         race_info_list.push({
           type: 'text',
-          content: [
-            `${race_len} 战 ${
-              races.filter((e) => e.rank === 1).length
-            } 胜，总赏金 `,
+          content: i18n().detail.get_race_summary(
+            race_len.toString(),
+            races.filter(({ rank }) => rank === 1).length.toString(),
             {
               color: money_color,
               content: Math.floor(
                 era.get(`cflag:${chara.id}:总赏金`),
               ).toLocaleString(),
             },
-            ' 马币',
-          ],
+          ),
         });
         if (race_list.length > 0) {
           race_info_list.push({ content: [{ isBr: true }], type: 'text' });
         }
       } else {
-        race_info_list.push({ type: 'text', content: '未出走' });
+        race_info_list.push({
+          type: 'text',
+          content: i18n().detail.race_no_race,
+        });
       }
       const half_length = Math.ceil(race_list.length / 2);
       for (let i = 0; i < half_length; ++i) {
-        [race_list[i], race_list[i + half_length]]
-          .filter((e) => e)
-          .forEach((e) =>
+        [race_list[i], race_list[i + half_length]].forEach(
+          (r) =>
+            r &&
             race_info_list.push({
               config: { width: 12 },
-              content: [
-                `${e.year} 年 `,
-                race_infos[e.race].get_colored_name_with_class(),
-                ' · ',
+              content: i18n().detail.get_race_result(
+                r.year.toString(),
+                race_infos[r.race].get_colored_name_with_class(),
                 {
-                  content: `${e.rank} 着`,
+                  content: i18n().race.result_template.replace(
+                    '%RANK%',
+                    r.rank.toString(),
+                  ),
                   color:
-                    e.rank <= class_enum.Spe
-                      ? adaptability_colors.at(-1 - e.rank)
+                    r.rank <= class_enum.Spe
+                      ? adaptability_colors.at(-1 - r.rank)
                       : adaptability_colors[0],
-                  title: `第 ${e.pop} 人气 · ${di18n.n_style[e.st]}`,
+                  title: i18n()
+                    .detail.race_result_tip_template.replace(
+                      '%POP%',
+                      r.pop.toString(),
+                    )
+                    .replace('%STYLE%', di18n.n_style[r.st]),
                 },
-              ],
+              ),
               type: 'text',
             }),
-          );
+        );
       }
       if (race_info_list.length === 1) {
         race_info_list.push({
-          content: '还没有可称道的战绩……',
+          content: i18n().detail.no_reward_info,
           type: 'text',
         });
       }
       race_info_list.push({
-        config: { content: '专属称号', position: 'left' },
+        config: { content: i18n().detail.race_header_title, position: 'left' },
         type: 'divider',
       });
       const titles = CharaTitles.get(chara.id).get();
@@ -131,21 +137,19 @@ module.exports = {
       race_info_list.push(
         {
           config: {
-            content: page_name,
+            content: i18n().detail.race_title,
             position: 'left',
           },
           type: 'divider',
         },
-        { content: '并不能出走比赛……', type: 'text' },
+        { content: i18n().detail.cannot_join_race_info, type: 'text' },
       );
     }
 
     return {
-      print() {
-        return race_info_list;
-      },
+      print: () => race_info_list,
     };
   },
-  name: page_name,
+  name: i18n().detail.race_title,
   uma: true,
 };

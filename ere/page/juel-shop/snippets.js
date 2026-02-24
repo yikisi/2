@@ -53,7 +53,7 @@ module.exports = {
           content: '★'.repeat(level),
           color: get_color(void 0, mark_colors[mid], level / 3),
         },
-        { content: '☆'.repeat(3 - level) },
+        '☆'.repeat(3 - level),
       ),
       type: 'text',
     };

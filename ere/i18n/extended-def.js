@@ -600,7 +600,7 @@ const di18n = {
       const _ = i18n().tb_mark;
       return [_.a_pleasure, _.a_ero, _.a_meek, _.a_pain, _.a_shame, _.a_hate];
     },
-    get_mark_with_level_stars(mid, level, full_stars, empty_stars) {
+    get_mark_with_level_stars(mid, level, full_stars, empty_stars, divider) {
       const _ = i18n().tb_mark;
       return _.get_mark_with_level_stars(
         _.mark_with_level
@@ -608,6 +608,7 @@ const di18n = {
           .replace('%LEVEL%', level.toString()),
         full_stars,
         empty_stars,
+        divider,
       );
     },
     get_mark_full_name: (mid) =>
@@ -729,7 +730,7 @@ const di18n = {
   jewel_shop: {
     get_price_title(price_dict) {
       const _ = i18n().jewel_shop;
-      return _.price_title_template.replace(
+      return _.price_tip_template.replace(
         '%PRICE%',
         Object.entries(price_dict)
           .map(([jid, count]) =>
@@ -759,7 +760,7 @@ const di18n = {
           )
           .forEach(([a, r]) => (other = other.replaceAll(`%${a}%`, r)));
       }
-      return _.price_title_template.replace('%PRICE%', `\n${other}\n${price}`);
+      return _.price_tip_template.replace('%PRICE%', `\n${other}\n${price}`);
     },
     get_price_title_with_condition(price_dict, ceids, now, cond) {
       const _ = i18n().jewel_shop;
@@ -772,7 +773,7 @@ const di18n = {
         .join(_.price_splitter);
       if (ceids.length > 1) {
         price =
-          _.multi_cond_title_template
+          _.multi_cond_tip_template
             .replace('%COND%', cond.toString())
             .replace(
               '%ALL%',
@@ -791,14 +792,14 @@ const di18n = {
           price;
       } else if (ceids.length > 0) {
         price =
-          _.cond_title_template
+          _.cond_tip_template
             .replace('%COND%', cond.toString())
             .replace('%EXP%', i18n().tb_exp[ceids[0]])
             .replace('%NOW%', now[0].toLocaleString(lan())) +
           '\n' +
           price;
       }
-      return _.price_title_template.replace('%PRICE%', '\n' + price);
+      return _.price_tip_template.replace('%PRICE%', '\n' + price);
     },
     get_price_info(jid, cost, all, chara) {
       return i18n().jewel_shop.get_price_info(
