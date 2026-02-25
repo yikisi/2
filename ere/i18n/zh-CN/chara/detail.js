@@ -396,7 +396,61 @@ class I18nDetail {
   ];
   get_exp_breast_milking_count = (count) => ['进行授乳 ', count, ' 次'];
   get_exp_breast_milking_amount = (amount) => ['产出了 ', amount, 'ml 乳汁'];
-  get_exp_breast_orgasm = (count) => ['因为快感去了 ', count, ' 次'];
+  get_exp_breast_orgasm = (count) => ['因为快感去过 ', count, ' 次'];
+
+  exp_body_title = '肉体情报【身】';
+  exp_body_no_armpit_hair = '有着天生无毛的光洁腋下';
+  exp_body_clean_armpit_hair = '腋下现在光洁无毛';
+  get_exp_body_armpit_hair = (armpit_hair) => ['腋下有着 ', armpit_hair];
+  exp_body_trained_desc = '渴求着他人的温暖……肉体仿佛已经成为淫欲本身';
+  get_exp_body_face_semen = (date, chara) => [
+    '在 ',
+    date,
+    ' 初次被 ',
+    chara,
+    ' 以精液覆面',
+  ];
+  get_exp_body_unknown_face_semen = (date, chara) => [
+    '实际上，脸上在 ',
+    date,
+    ' 就覆盖了 ',
+    chara,
+    ' 的精液',
+  ];
+  get_exp_body_face_semen_count = (count, amount) => [
+    '被颜射了 ',
+    count,
+    ' 次，沾染过 ',
+    amount,
+    'ml 精液',
+  ];
+  get_exp_body_body_sex = (date, chara) => [
+    date,
+    '，是第一次用身体接纳 ',
+    chara,
+    ' 的肉棒和欲望的日子',
+  ];
+  get_exp_body_be_body_sex = (date, chara) => [
+    date,
+    '，是身体第一次被 ',
+    chara,
+    ' 的肉棒用欲望填满的日子',
+  ];
+  get_exp_body_unknown_be_body_sex = (date, chara) => [
+    '实际上，从 ',
+    date,
+    ' 起，睡颜，喘息，无防备的身体，都已成了 ',
+    chara,
+    ' 的肉棒套',
+  ];
+  get_exp_body_body_sex_count = (count) => ['抚慰性器 ', count, ' 次'];
+  get_exp_body_semen_amount = (amount) => ['沾染过 ', amount, 'ml 精液'];
+  exp_body_poisoned_sens = '每次染上温热的精液，肌肤就会躁动难耐';
+  exp_body_poisoned_meek = '每次染上温热的精液，就会感到幸福';
+  exp_body_poisoned_both = '每次染上温热的精液，肌肤就会幸福地躁动起来';
+  get_exp_body_orgasm = (count) => ['因为快感去过 ', count, ' 次'];
+
+  get_exp_pv_pubic_hair = (pubic_hair) => ['小腹有着 ', pubic_hair];
 
   human_info = '一介人类而已';
   no_reward_info = '还没有可称道的战绩';

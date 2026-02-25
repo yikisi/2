@@ -38,13 +38,6 @@ pregnant_stage_names[1 << pregnant_stage_enum.pre_birth] =
   '迎接生命奇迹的时刻即将到来，该做好准备了';
 
 module.exports = {
-  hair_desc: [
-    '稀疏的绒毛',
-    '整齐的短毛',
-    '浓密的丛林',
-    '杂乱的曲毛',
-    '刚硬的毛发',
-  ],
   pregnant_stage_enum,
   pregnant_stage_names,
   // SM时的称呼

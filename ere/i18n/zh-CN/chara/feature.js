@@ -103,9 +103,17 @@ class I18nCharaFeature {
 
   n_armpit_hair = '腋毛';
   n_pubic_hair = '腋毛';
-  body_hair_0 = '天生光滑';
-  body_hair_1 = '普通类型';
-  body_hair_2 = '生长快而硬';
+  body_hair_talent_0 = '天生光滑';
+  body_hair_talent_1 = '普通类型';
+  body_hair_talent_2 = '生长快而硬';
+
+  body_hair_0 = '稀疏的绒毛';
+  body_hair_1 = '整齐的短毛';
+  body_hair_2 = '浓密的丛林';
+  body_hair_3 = '杂乱的曲毛';
+  body_hair_4 = '刚硬的毛发';
+
+  body_hair_talent_suffix = '且正在飞速成长着';
 
   n_sex_organ_color = '性器颜色';
   p_color_0 = '粉嫩';

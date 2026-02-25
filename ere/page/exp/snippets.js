@@ -41,12 +41,9 @@ module.exports = {
    */
   get_filled_exp_str(arr, cid, callback, ...args) {
     if (Array.isArray(arr)) {
-      return arr.map((e) => {
-        if (e.c >= 0) {
-          return sys_get_colored_full_callname(cid, e.c);
-        }
-        return e;
-      });
+      return arr.map((e) =>
+        e.c >= 0 ? sys_get_colored_full_callname(cid, e.c) : e,
+      );
     } else if (typeof arr === 'object' && typeof callback === 'function') {
       return callback(
         get_date(arr.y, arr.d, arr.w),

@@ -47,8 +47,8 @@ const hair_content_cb = [
     color: skin_colors[p + 1],
     content: di18n.feature.n_skin[p + 1],
   }),
-  (p) => di18n.feature.n_body_hair[p],
-  (p) => di18n.feature.n_body_hair[p],
+  (p) => di18n.feature.n_body_hair_talent[p],
+  (p) => di18n.feature.n_body_hair_talent[p],
   (p) => {
     return { color: sex_colors[p], content: di18n.feature.n_c_sex_organ[p] };
   },
@@ -59,8 +59,8 @@ const hair_length_arr = [
   front_hairs.length,
   back_hairs.length,
   di18n.feature.n_skin.length,
-  di18n.feature.n_body_hair.length,
-  di18n.feature.n_body_hair.length,
+  di18n.feature.n_body_hair_talent.length,
+  di18n.feature.n_body_hair_talent.length,
   di18n.feature.n_c_sex_organ.length,
 ];
 
@@ -773,8 +773,8 @@ async function page_custom() {
               color: skin_colors[era.get('cflag:0:10') + 1],
               content: di18n.feature.n_skin[era.get('cflag:0:10') + 1],
             },
-            di18n.feature.n_body_hair[era.get('talent:0:腋毛成长')],
-            di18n.feature.n_body_hair[era.get('talent:0:阴毛成长')],
+            di18n.feature.n_body_hair_talent[era.get('talent:0:腋毛成长')],
+            di18n.feature.n_body_hair_talent[era.get('talent:0:阴毛成长')],
             {
               // TALENTNAME:34 = 茎核类型
               color: sex_colors[era.get('talent:0:34')],

@@ -13,7 +13,6 @@ const CharaTalk = require('#/utils/chara-talk');
 const { join_to_string } = require('#/utils/list-utils');
 
 const { sex_colors } = require('#/data/color-const');
-const { hair_desc } = require('#/data/ero/status-const');
 
 const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
@@ -47,9 +46,9 @@ module.exports = {
             penis_exp_list.push('小腹现在光洁无毛……');
           } else {
             penis_exp_list.push(
-              `小腹有着 ${hair_desc[sex_hair - 1]}${
-                sex_hair_talent === 2 ? '，且正在飞速成长着……' : ''
-              }`,
+              i18n().detail.get_exp_pv_pubic_hair(
+                di18n.feature.get_body_hair_desc(sex_hair - 1, sex_hair_talent),
+              ),
             );
           }
           penis_exp_list.push([

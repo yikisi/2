@@ -270,9 +270,16 @@ const di18n = {
       const _ = i18n().feature;
       return [_.skin_0, _.skin_1, _.skin_2, _.skin_3];
     },
-    get n_body_hair() {
+    get n_body_hair_talent() {
       const _ = i18n().feature;
-      return [_.body_hair_0, _.body_hair_1, _.body_hair_2];
+      return [_.body_hair_talent_0, _.body_hair_talent_1, _.body_hair_talent_2];
+    },
+    get_body_hair_desc(body_hair, talent) {
+      let ret = __(`feature.body_hair_${body_hair}`);
+      if (talent === 2) {
+        ret += i18n().ui_comma + i18n().feature.body_hair_talent_suffix;
+      }
+      return ret;
     },
     get n_c_sex_organ() {
       const _ = i18n().feature;
@@ -331,6 +338,17 @@ const di18n = {
         _.exp_breast_nipple_deep,
         _.exp_breast_nipple_inverted,
       ];
+    },
+    get_body_poisoned(poisoned) {
+      const _ = i18n().detail;
+      switch (poisoned) {
+        case 1:
+          return _.exp_body_poisoned_sens;
+        case 2:
+          return _.exp_body_poisoned_meek;
+        case 3:
+          return _.exp_body_poisoned_both;
+      }
     },
   },
   kojo: {

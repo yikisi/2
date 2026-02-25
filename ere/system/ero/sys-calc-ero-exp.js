@@ -85,17 +85,9 @@ module.exports = {
         era.add(`exp:${c_id}:颜射精液量`, semen_list[i]);
         if (!era.get(`cstr:${c_id}:初次颜射经历`)) {
           if (sys_check_awake(c_id)) {
-            era.set(`cstr:${c_id}:初次颜射经历`, [
-              `在 ${date} 初次被 `,
-              { c: cid },
-              ' 以精液覆面',
-            ]);
+            era.set(`cstr:${c_id}:初次颜射经历`, { ...date, c: cid });
           } else if (!era.get(`cstr:${c_id}:无自觉初次颜射经历`)) {
-            era.set(`cstr:${c_id}:无自觉初次颜射经历`, [
-              `实际上，在 ${date} 就盖上了 `,
-              { c: cid },
-              ' 的精液',
-            ]);
+            era.set(`cstr:${c_id}:无自觉初次颜射经历`, { ...date, c: cid });
           }
         }
         set_stain(c_id, part_enum.mouth, stain_enum.semen);
@@ -156,7 +148,7 @@ module.exports = {
         ...date,
         c: oid,
         cup,
-        s: sid > 0 ? sid : void 0,
+        ...(sid > 0 ? { s: sid } : {}),
       });
     }
     const milk_list = [amount];

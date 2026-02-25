@@ -208,11 +208,7 @@ function sys_do_sex(atk, def, item) {
           era.add(`exp:${atk.id}:身交次数`, 1);
           era.add(`exp:${def.id}:戳身体次数`, 1);
           if (!era.get(`cstr:${atk.id}:初次身交经历`)) {
-            era.set(`cstr:${atk.id}:初次身交经历`, [
-              `${date}，是第一次用身体接纳 `,
-              { c: def.id },
-              ' 肉棒和欲望的日子',
-            ]);
+            era.set(`cstr:${atk.id}:初次身交经历`, { ...date, c: def.id });
           }
       }
       atk_ex_buff += 2 * (era.get(`talent:${atk.id}:淫身`) === 2);
@@ -429,17 +425,16 @@ function sys_do_sex(atk, def, item) {
           era.add(`exp:${def.id}:身交次数`, 1);
           if (!era.get(`cstr:${def.id}:初次身交经历`)) {
             if (i_def_awake) {
-              era.set(`cstr:${def.id}:初次身交经历`, [
-                `${date}，是身体第一次被 `,
-                { c: atk.id },
-                ' 的肉棒用欲望填满的日子',
-              ]);
+              era.set(`cstr:${def.id}:初次身交经历`, {
+                ...date,
+                be: true,
+                c: atk.id,
+              });
             } else if (!era.get(`cstr:${def.id}:无自觉初次身交经历`)) {
-              era.set(`cstr:${def.id}:无自觉初次身交经历`, [
-                `实际上，从 ${date} 起，睡颜，娇喘，无防备的身体，都已成了 `,
-                { c: atk.id },
-                ' 的肉棒套',
-              ]);
+              era.set(`cstr:${def.id}:无自觉初次身交经历`, {
+                ...date,
+                c: atk.id,
+              });
             }
           }
           break;

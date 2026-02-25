@@ -20,13 +20,13 @@ const { join_to_string } = require('#/utils/list-utils');
 const { sex_colors } = require('#/data/color-const');
 const { baby_limit } = require('#/data/ero/orgasm-const');
 const {
-  hair_desc,
   pregnant_stage_enum,
   pregnant_stage_names,
   unexpected_pregnant_enum,
 } = require('#/data/ero/status-const');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
+const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 const page_name = '肉体情报【女阴】';
@@ -62,9 +62,9 @@ module.exports = {
             virgin_exp_list.push('小穴现在光洁无毛，粉腻可人……');
           } else {
             virgin_exp_list.push(
-              `小腹有着 ${hair_desc[sex_hair - 1]}${
-                sex_hair_talent === 2 ? '，且正在飞速成长着……' : ''
-              }`,
+              i18n().detail.get_exp_pv_pubic_hair(
+                di18n.feature.get_body_hair_desc(sex_hair - 1, sex_hair_talent),
+              ),
             );
           }
         }

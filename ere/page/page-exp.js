@@ -24,7 +24,7 @@ const handlers = [
   require('#/page/exp/exp-tab-body'),
   require('#/page/exp/exp-tab-hand-foot'),
   require('#/page/exp/exp-tab-penis'),
-  require('#/page/exp/exp-tab-virgin'),
+  require('#/page/exp/exp-tab-vagina'),
   require('#/page/exp/exp-tab-anal'),
   require('#/page/exp/exp-tab-sm'),
 ];

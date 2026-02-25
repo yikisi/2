@@ -7,20 +7,11 @@ const {
   remove_end_line_breaks,
 } = require('#/page/exp/snippets');
 
-const { join_to_string } = require('#/utils/list-utils');
+const { flat_join_list } = require('#/utils/list-utils');
+const { get_abbr_number } = require('#/utils/value-utils');
 
-const { hair_desc } = require('#/data/ero/status-const');
-
+const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
-
-const body_semen_desc = [
-  '',
-  '肌肤就会躁动难耐',
-  '就会感到幸福',
-  '肌肤就会幸福地躁动起来',
-];
-
-const page_name = '肉体情报【身】';
 
 module.exports = {
   /**
@@ -37,18 +28,18 @@ module.exports = {
         const body_hair_talent = era.get(`talent:${chara.id}:腋毛成长`),
           body_hair = era.get(`cflag:${chara.id}:腋毛`);
         if (!body_hair_talent) {
-          body_exp_list.push('有着天生无毛的光洁腋下……');
+          body_exp_list.push(i18n().detail.exp_body_no_armpit_hair);
         } else if (!body_hair) {
-          body_exp_list.push('腋下现在光洁无毛……');
+          body_exp_list.push(i18n().detail.exp_body_clean_armpit_hair);
         } else {
           body_exp_list.push(
-            `腋下有着 ${hair_desc[body_hair - 1]}${
-              body_hair_talent === 2 ? '，正在飞速成长着……' : ''
-            }`,
+            i18n().detail.get_exp_body_armpit_hair(
+              di18n.feature.get_body_hair_desc(body_hair - 1, body_hair_talent),
+            ),
           );
         }
         if (era.get(`talent:${chara.id}:淫身`) === 2) {
-          body_exp_list.push('渴求着他人的温暖……肉体仿佛已经成为淫欲本身……');
+          body_exp_list.push(i18n().detail.exp_body_trained_desc);
         }
         push_link_break(body_exp_list);
       }
@@ -58,8 +49,8 @@ module.exports = {
           body_orgasm_count = era.get(`exp:${chara.id}:身体高潮次数`),
           face_semen = era.get(`exp:${chara.id}:颜射次数`),
           body_semen_talent =
-            era.get(`talent:${chara.id}:浴精成瘾`) * 2 +
-            era.get(`talent:${chara.id}:气味敏感`);
+            ((era.get(`talent:${chara.id}:浴精成瘾`) > 0) << 1) +
+            (era.get(`talent:${chara.id}:气味敏感`) > 0);
         const face_semen_exp = era.get(`cstr:${chara.id}:初次颜射经历`),
           unknown_face_semen_exp = era.get(
             `cstr:${chara.id}:无自觉初次颜射经历`,
@@ -67,45 +58,72 @@ module.exports = {
           body_sex_exp = era.get(`cstr:${chara.id}:初次身交经历`),
           unknown_body_sex_exp = era.get(`cstr:${chara.id}:无自觉初次身交经历`);
         if (face_semen_exp) {
-          body_exp_list.push(get_filled_exp_str(face_semen_exp, chara.id));
+          body_exp_list.push(
+            get_filled_exp_str(
+              face_semen_exp,
+              chara.id,
+              i18n().detail.get_exp_body_face_semen,
+            ),
+          );
         }
         if (flags.show_all_exp || face_semen_exp) {
           if (unknown_face_semen_exp) {
             body_exp_list.push(
-              get_filled_exp_str(unknown_face_semen_exp, chara.id),
+              get_filled_exp_str(
+                unknown_face_semen_exp,
+                chara.id,
+                i18n().detail.get_exp_body_unknown_face_semen,
+              ),
             );
           }
           if (face_semen) {
             body_exp_list.push(
-              `被颜射了 ${face_semen.toLocaleString().toLocaleString()} 次，沾染过 ${era
-                .get(`exp:${chara.id}:颜射精液量`)
-                .toLocaleString()}ml 精液`,
+              i18n().detail.get_exp_body_face_semen_count(
+                get_abbr_number(face_semen),
+                get_abbr_number(era.get(`exp:${chara.id}:颜射精液量`)),
+              ),
             );
           }
         }
         push_link_break(body_exp_list);
 
         if (body_sex_exp) {
-          body_exp_list.push(get_filled_exp_str(body_sex_exp, chara.id));
+          body_exp_list.push(
+            get_filled_exp_str(
+              body_sex_exp,
+              chara.id,
+              body_sex_exp.be
+                ? i18n().detail.get_exp_body_be_body_sex
+                : i18n().detail.get_exp_body_body_sex,
+            ),
+          );
         }
         if (flags.show_all_exp || body_sex_exp) {
           if (unknown_body_sex_exp) {
             body_exp_list.push(
-              get_filled_exp_str(unknown_body_sex_exp, chara.id),
+              get_filled_exp_str(
+                unknown_body_sex_exp,
+                chara.id,
+                i18n().detail.get_exp_body_unknown_be_body_sex,
+              ),
             );
           }
           if (body_fuck_count || body_semen) {
             body_exp_list.push(
-              join_to_string(
+              flat_join_list(
                 [
-                  body_fuck_count
-                    ? `抚慰性器 ${body_fuck_count.toLocaleString()} 次`
-                    : '',
-                  body_semen
-                    ? `沾染过 ${body_semen.toLocaleString()}ml 精液`
-                    : '',
+                  body_fuck_count > 0
+                    ? i18n().detail.get_exp_body_body_sex_count(
+                        get_abbr_number(body_fuck_count),
+                      )
+                    : void 0,
+                  body_semen > 0
+                    ? i18n().detail.get_exp_body_semen_amount(
+                        get_abbr_number(body_semen),
+                      )
+                    : void 0,
                 ],
-                '，',
+                i18n().ui_comma,
               ),
             );
           }
@@ -114,15 +132,15 @@ module.exports = {
           (flags.mark_level >= 3 || body_semen || face_semen) &&
           body_semen_talent
         ) {
-          body_exp_list.push(
-            `每次染上温热的精液，${body_semen_desc[body_semen_talent]}`,
-          );
+          body_exp_list.push(di18n.detail.get_body_poisoned(body_semen_talent));
         }
         push_link_break(body_exp_list);
 
-        if (body_orgasm_count) {
+        if (body_orgasm_count > 0) {
           body_exp_list.push(
-            `因为快感去了 ${body_orgasm_count.toLocaleString()} 次`,
+            i18n().detail.get_exp_body_orgasm(
+              get_abbr_number(body_orgasm_count),
+            ),
           );
         }
       } else {
@@ -131,18 +149,17 @@ module.exports = {
       remove_end_line_breaks(body_exp_list);
     }
     return {
-      print() {
-        return [
-          {
-            type: 'divider',
-            config: { content: page_name, position: 'left' },
+      print: () => [
+        {
+          type: 'divider',
+          config: {
+            content: i18n().detail.exp_body_title,
+            position: 'left',
           },
-          ...body_exp_list.map((e) => {
-            return { content: e, type: 'text' };
-          }),
-        ];
-      },
+        },
+        ...body_exp_list.map((e) => ({ content: e, type: 'text' })),
+      ],
     };
   },
-  name: page_name,
+  name: i18n().detail.exp_body_title,
 };
