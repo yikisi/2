@@ -510,8 +510,6 @@ class I18nDetail {
   exp_penis_no_pubic_hair = '天生光滑无毛';
   exp_penis_clean_pubic_hair = '小腹现在光洁无毛';
   exp_penis_drug = '借助药物获得的';
-  exp_penis_gift_desc = '完美无敌的擎天巨龙，汩出的先走汁仿佛已能让卵子受孕';
-  exp_penis_trained_desc = '精关不牢，容易一泻千里';
   get_exp_penis_summary = (drug, color, size) => [
     '下方是',
     drug,
@@ -521,6 +519,8 @@ class I18nDetail {
     size,
     ' 的肉棒',
   ];
+  exp_penis_gift_desc = '完美无敌的擎天巨龙，汩出的先走汁仿佛已能让卵子受孕';
+  exp_penis_trained_desc = '精关不牢，容易一泻千里';
   get_exp_penis_lose_virgin = (date, chara) => [
     '在 ',
     date,
@@ -552,7 +552,7 @@ class I18nDetail {
   get_exp_penis_fuck_anal_count = (count) => ['戳弄屁穴 ', count, ' 次'];
   get_exp_penis_cum_semen_exp = (date, chara, _, amount) => [
     '第一次向 ',
-    date,
+    chara,
     ' 的身体注入 ',
     amount,
     'ml 种子，是在 ',
@@ -587,8 +587,177 @@ class I18nDetail {
     ' 次且没有察觉',
   ];
 
+  exp_vagina_title = '肉体情报【女阴】';
   exp_vagina_no_pubic_hair = '天生白虎，粉腻可人';
   exp_vagina_clean_pubic_hair = '小穴现在光洁无毛，粉腻可人';
+  exp_vagina_pink = '粉嫩可人';
+  exp_vagina_purple = '红润泛紫';
+  exp_vagina_deep = '深邃成熟';
+  get_exp_vagina_summary = (color) => ['有着 ', color, ' 的小穴'];
+  exp_vagina_gift_desc = '宛如活物般的洞穴，任何造访的客人都只能任其榨取';
+  exp_vagina_clitoris_trained_desc =
+    '轻轻摩擦便会充血勃起……已经是一颗淫荡的小豆豆了';
+  exp_vagina_vagina_trained_desc =
+    '全天候分泌爱液随时等待插入的淫壶……已经是一个淫荡的小穴了';
+  exp_vagina_semen = '大腿内侧星星点点……';
+  exp_vagina_semen_template = '小穴内大概还有 %SEMEN%ml 精液呢';
+  get_exp_vagina_lose_virgin = (date, chara, _, penis) => [
+    '在 ',
+    date,
+    ' 将处女献给了 ',
+    chara,
+    ' ',
+    penis,
+    ' 的肉棒',
+  ];
+  get_exp_vagina_lose_virgin_sleep = (date, chara, _, penis) => [
+    '在 ',
+    date,
+    ' 将处女偷偷献给了 ',
+    chara,
+    ' ',
+    penis,
+    ' 的肉棒',
+  ];
+  get_exp_vagina_be_lose_virgin = (date, chara, _, penis) => [
+    '处女在 ',
+    date,
+    ' 被 ',
+    chara,
+    ' ',
+    penis,
+    ' 的肉棒夺走了',
+  ];
+  get_exp_vagina_unknown_be_lose_virgin = (date, chara, _, penis) => [
+    '实际上，已在 ',
+    date,
+    ' 被 ',
+    chara,
+    ' ',
+    penis,
+    ' 的肉棒夺走了处女',
+  ];
+  get_exp_vagina_vagina_touched_count = (count) => ['被玩弄过 ', count, ' 次'];
+  get_exp_vagina_fucked_count = (count) => ['被刺入过 ', count, ' 次'];
+  get_exp_vagina_cumed_exp = (date, chara, _, amount) => [
+    '接纳了 ',
+    chara,
+    ' 的 ',
+    amount,
+    'ml 种子，是在 ',
+    date,
+  ];
+  get_exp_vagina_unknown_cumed_exp = (date, chara, _, amount) => [
+    '实际上，宝贵的阴道和子宫在  ',
+    date,
+    ' 就受到 ',
+    chara,
+    ' 的 ',
+    amount,
+    'ml 精液洗礼',
+  ];
+  get_exp_vagina_out_semen = (amount) => ['沾染过 ', amount, 'ml 精液'];
+  get_exp_vagina_cumed_semen = (count, amount) => [
+    '承受过 ',
+    count,
+    ' 次射精，被射入过 ',
+    amount,
+    'ml 精液',
+  ];
+  exp_vagina_poisoned_sens = '每次被射进温热的精液，子宫就会躁动难耐';
+  exp_vagina_poisoned_meek = '每次被射进温热的精液，就会感到幸福';
+  exp_vagina_poisoned_both = '每次被射进温热的精液，子宫就会幸福地躁动起来';
+  get_exp_vagina_squirt_exp = (date, chara) => [
+    date,
+    ' 在 ',
+    chara,
+    ' 面前第一次喷出了淫乱的蜜液',
+  ];
+  get_exp_vagina_squirt_exp_both = (date, chara, supporter) => [
+    date,
+    ' 在 ',
+    chara,
+    ' 与 ',
+    supporter,
+    ' 面前第一次喷出了淫乱的蜜液',
+  ];
+  get_exp_vagina_squirt_exp_self = (date) => [
+    date,
+    ' 第一次让自己喷出了淫乱的蜜液',
+  ];
+  get_exp_vagina_unknown_squirt_exp = (date, chara) => [
+    '实际上，在 ',
+    date,
+    ' 就被 ',
+    chara,
+    ' 采摘了花蜜',
+  ];
+  get_exp_vagina_unknown_squirt_exp_both = (date, chara, supporter) => [
+    '实际上，在 ',
+    date,
+    ' 就被 ',
+    chara,
+    ' 与 ',
+    supporter,
+    ' 采摘了花蜜',
+  ];
+  get_exp_vagina_unknown_squirt_exp_self = (date) => [
+    '实际上，在 ',
+    date,
+    ' 就不知不觉间分泌了第一缕蜜液',
+  ];
+  get_exp_vagina_clitoris_orgasm = (count) => ['因小豆豆高潮过 ', count, ' 次'];
+  get_exp_vagina_vagina_orgasm = (count) => ['因小穴高潮过 ', count, ' 次'];
+  get_exp_vagina_squirt_count = (count, amount) => [
+    '共潮吹 ',
+    count,
+    ' 次，分泌爱液 ',
+    amount,
+    'ml',
+  ];
+  get_exp_vagina_squirt_amount = (amount) => ['共分泌爱液 ', amount, 'ml'];
+  get_exp_vagina_fuck_sleep_penis = (count, you) => [
+    '曾趁熟睡之机侵犯过 ',
+    you,
+    ' ',
+    count,
+    ' 次',
+  ];
+  get_exp_vagina_fuck_sleep_penis_you = (count) => [
+    '曾趁熟睡之机侵犯过其他角色 ',
+    count,
+    ' 次',
+  ];
+  get_exp_vagina_be_sleep_fuck = (count) => [
+    '曾被趁熟睡之机侵犯过 ',
+    count,
+    ' 次且没有察觉',
+  ];
+  exp_vagina_pregnant_in_growth = '初潮还没有来';
+  exp_vagina_pregnant_menstrual_period = '月经来潮中';
+  exp_vagina_pregnant_too_many_birth = '无法承受更多种子了';
+  exp_vagina_pregnant_timer_template = '%DESC% (%TIMER% 周)';
+  exp_vagina_pregnant_egg_prepared = '卵子正在等待受精❤️';
+  exp_vagina_pregnant_egg_growth = '新的卵子正在成长中';
+  exp_vagina_pregnant_egg_out = '卵子已经失活，等待排出体外';
+  exp_vagina_pregnant_prob_template = '%DESC% (怀孕率 %PROB%%)';
+  exp_vagina_pregnant_desc_resume = '孩子已经顺利出生，现在是时候专注身体了';
+  exp_vagina_pregnant_desc_no = '宝宝的房间等待着爸爸的临幸❤️';
+  exp_vagina_pregnant_desc_embryo = '小小的新生命已在孕育';
+  exp_vagina_pregnant_desc_fetal =
+    '胎盘已经完全形成，母亲和孩子要摄入优质蛋白哦';
+  exp_vagina_pregnant_desc_late = '胎儿正在迎来最后的成熟，小腹已经高高隆起';
+  exp_vagina_pregnant_desc_pre_birth =
+    '迎接生命奇迹的时刻即将到来，该做好准备了';
+  exp_vagina_pregnant_desc_showing = '肚子已经大大地挺了起来';
+  exp_vagina_pregnant_desc_known =
+    '腹部尚且没有迹象，无意间改变的生活习惯与体检报告却在昭示生命的新生';
+  get_exp_vagina_pregnant_father = (chara) => ['孩子的父亲确认为是 ', chara];
+  get_exp_vagina_pregnant_father_you = (you) => [
+    you,
+    ' 知道孩子的父亲是 ',
+    you,
+  ];
 
   human_info = '一介人类而已';
   no_reward_info = '还没有可称道的战绩';

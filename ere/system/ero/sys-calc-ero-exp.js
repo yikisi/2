@@ -127,7 +127,6 @@ module.exports = {
       era.set(`cstr:${cid}:初次手交经历`, {
         ...date,
         c: oid,
-        self: cid === oid,
       });
     }
   },

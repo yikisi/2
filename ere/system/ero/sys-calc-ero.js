@@ -40,8 +40,6 @@ const { part_enum, part_names, part_skills } = require('#/data/ero/part-const');
 const { stain_enum } = require('#/data/ero/stain-const');
 const { vp_status_enum } = require('#/data/ero/status-const');
 
-const di18n = require('#/i18n/extended-def');
-
 /**
  * @param {EroParticipant} atk
  * @param {EroParticipant} def
@@ -264,13 +262,12 @@ function sys_do_sex(atk, def, item) {
             // 真 · 处女算破处
             atk_v_status === vp_status_enum.virgin
           ) {
-            era.set(`cstr:${atk.id}:破处经历`, [
-              `在 ${date} ${i_def_awake ? '' : '偷偷'}将处女献给了 `,
-              { c: def.id },
-              ' ',
-              di18n.feature.n_penis[get_penis_size(def.id)],
-              '的肉棒',
-            ]);
+            era.set(`cstr:${atk.id}:破处经历`, {
+              ...date,
+              c: def.id,
+              penis: get_penis_size(def.id),
+              sleep: !i_def_awake,
+            });
             era.set(`talent:${atk.id}:处女`, vp_status_enum.no);
           }
           // 没干过人的肉棒算失童贞
@@ -440,13 +437,12 @@ function sys_do_sex(atk, def, item) {
               // 因为有再生处女被睡奸成无自觉非处女的蛋疼情况，这里判断破处经历
               !era.get(`cstr:${def.id}:破处经历`)
             ) {
-              era.set(`cstr:${def.id}:破处经历`, [
-                `处女在 ${date} 被 `,
-                { c: atk.id },
-                ' ',
-                di18n.feature.n_penis[get_penis_size(atk.id)],
-                '的肉棒夺走了',
-              ]);
+              era.set(`cstr:${def.id}:破处经历`, {
+                ...date,
+                be: true,
+                c: atk.id,
+                penis: get_penis_size(atk.id),
+              });
             }
             // 都醒着就明牌了
             era.set(`talent:${atk.id}:童贞`, vp_status_enum.no);
@@ -456,11 +452,11 @@ function sys_do_sex(atk, def, item) {
             era.add(`exp:${def.id}:阴道被睡奸`, 1);
             // 只有真 · 处女才能在睡奸情况下破处
             if (def_v_status === vp_status_enum.virgin) {
-              era.set(`cstr:${def.id}:无自觉破处经历`, [
-                `实际上，已在 ${date} 被 `,
-                { c: atk.id },
-                ' 夺走',
-              ]);
+              era.set(`cstr:${def.id}:无自觉破处经历`, {
+                ...date,
+                c: atk.id,
+                penis: get_penis_size(atk.id),
+              });
               era.set(`talent:${def.id}:处女`, vp_status_enum.dont_know);
             } else if (def_v_status === vp_status_enum.i_think) {
               // 俺寻思处女被揭穿了

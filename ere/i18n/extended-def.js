@@ -350,6 +350,32 @@ const di18n = {
           return _.exp_body_poisoned_both;
       }
     },
+    get vagina_color() {
+      const _ = i18n().detail;
+      return [_.exp_vagina_pink, _.exp_vagina_purple, _.exp_vagina_deep];
+    },
+    get_vagina_poisoned(poisoned) {
+      const _ = i18n().detail;
+      switch (poisoned) {
+        case 1:
+          return _.exp_vagina_poisoned_sens;
+        case 2:
+          return _.exp_vagina_poisoned_meek;
+        case 3:
+          return _.exp_vagina_poisoned_both;
+      }
+    },
+    get pregnant_stage() {
+      const _ = i18n().detail;
+      return {
+        [1 << 0]: _.exp_vagina_pregnant_desc_resume,
+        [1 << 1]: _.exp_vagina_pregnant_desc_no,
+        [1 << 2]: _.exp_vagina_pregnant_desc_embryo,
+        [1 << 3]: _.exp_vagina_pregnant_desc_fetal,
+        [1 << 4]: _.exp_vagina_pregnant_desc_late,
+        [1 << 5]: _.exp_vagina_pregnant_desc_pre_birth,
+      };
+    },
   },
   kojo: {
     get_titled_content: (ckey, key, ...args) =>

@@ -544,36 +544,24 @@ async function sys_calc_orgasm(shown, ...ids) {
             if (!era.get(`cstr:${cid}:初次潮吹经历`)) {
               if (sys_check_awake(cid)) {
                 if (oid === -1) {
-                  era.set(`cstr:${cid}:初次潮吹经历`, [
-                    date,
-                    '，第一次感受到了从身体深处喷发的欲望之水',
-                  ]);
+                  era.set(`cstr:${cid}:初次潮吹经历`, { ...date });
                 } else {
-                  era.set(`cstr:${cid}:初次潮吹经历`, [
-                    date,
-                    '，在 ',
-                    { c: oid },
-                    ...(supporter > 0 ? [' 与 ', { c: supporter }] : []),
-                    ' 面前第一次喷出了淫乱的蜜液',
-                  ]);
+                  era.set(`cstr:${cid}:初次潮吹经历`, {
+                    ...date,
+                    c: oid,
+                    ...(supporter > 0 ? { s: supporter } : {}),
+                  });
                 }
               } else {
                 if (!era.get(`cstr:${cid}:无自觉初次潮吹经历`)) {
                   if (oid === -1) {
-                    era.set(`cstr:${cid}:无自觉初次潮吹经历`, [
-                      '实际上，在 ',
-                      date,
-                      ' 就不知不觉间分泌了第一缕蜜液',
-                    ]);
+                    era.set(`cstr:${cid}:无自觉初次潮吹经历`, { ...date });
                   } else {
-                    era.set(`cstr:${cid}:无自觉初次潮吹经历`, [
-                      '实际上，在 ',
-                      date,
-                      ' 就被 ',
-                      { c: oid },
-                      ...(supporter > 0 ? [' 与 ', { c: supporter }] : []),
-                      ' 采摘了花蜜',
-                    ]);
+                    era.set(`cstr:${cid}:无自觉初次潮吹经历`, {
+                      ...date,
+                      c: oid,
+                      ...(supporter > 0 ? { s: supporter } : {}),
+                    });
                   }
                 }
               }
@@ -705,17 +693,17 @@ async function sys_calc_orgasm(shown, ...ids) {
                   }
                   if (!era.get(`cstr:${oid}:初次被内射经历`)) {
                     if (sys_check_awake(oid)) {
-                      era.set(`cstr:${oid}:初次被内射经历`, [
-                        '接纳了 ',
-                        { c: cid },
-                        ` 的 ${amount}ml 种子，是在 ${date}`,
-                      ]);
+                      era.set(`cstr:${oid}:初次被内射经历`, {
+                        ...date,
+                        amount,
+                        c: cid,
+                      });
                     } else if (!era.get(`cstr:${oid}:无自觉初次被内射经历`)) {
-                      era.set(`cstr:${oid}:无自觉初次被内射经历`, [
-                        `实际上，宝贵的阴道和子宫在 ${date} 就受到 `,
-                        { c: cid },
-                        ` 的 ${amount}ml 精液洗礼`,
-                      ]);
+                      era.set(`cstr:${oid}:无自觉初次被内射经历`, {
+                        ...date,
+                        amount,
+                        c: cid,
+                      });
                     }
                   }
                   await run_custom_ero(oid || cid, ero_hooks.cum_in_womb, {

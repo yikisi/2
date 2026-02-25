@@ -150,7 +150,7 @@ module.exports = {
                     : void 0,
                   blow_job_count > 0
                     ? i18n().detail.get_exp_mouth_blow_job_count(
-                        get_abbr_number(suck_count),
+                        get_abbr_number(blow_job_count),
                       )
                     : void 0,
                 ],

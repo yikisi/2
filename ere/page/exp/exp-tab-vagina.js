@@ -13,32 +13,20 @@ const {
   remove_end_line_breaks,
 } = require('#/page/exp/snippets');
 
-const CharaTalk = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
-const { join_to_string } = require('#/utils/list-utils');
+const { flat_join_list, join_to_string } = require('#/utils/list-utils');
+const { get_abbr_number } = require('#/utils/value-utils');
 
 const { sex_colors } = require('#/data/color-const');
 const { baby_limit } = require('#/data/ero/orgasm-const');
 const {
   pregnant_stage_enum,
-  pregnant_stage_names,
   unexpected_pregnant_enum,
 } = require('#/data/ero/status-const');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
 const di18n = require('#/i18n/extended-def');
-const { i18n } = require('#/i18n/selector');
-
-const page_name = '肉体情报【女阴】';
-
-const virgin_semen_desc = [
-  '',
-  '子宫就会躁动难耐',
-  '就会感到幸福',
-  '子宫就会幸福地躁动起来',
-];
-
-const virgin_color_desc = ['粉嫩可人', '红润泛紫', '深邃成熟'];
+const { i18n, lan } = require('#/i18n/selector');
 
 module.exports = {
   /**
@@ -47,9 +35,9 @@ module.exports = {
    * @returns {{print():*[]}}
    */
   generate: function (chara, flags) {
-    const virgin_exp_list = [];
+    const vagina_exp_list = [];
     if (flags.in_growth) {
-      virgin_exp_list.push(i18n().detail.growth_info);
+      vagina_exp_list.push(i18n().detail.growth_info);
     } else {
       if (flags.show_body) {
         const penis_size = get_penis_size(chara.id);
@@ -57,11 +45,11 @@ module.exports = {
           const sex_hair_talent = era.get(`talent:${chara.id}:阴毛成长`),
             sex_hair = era.get(`cflag:${chara.id}:阴毛`);
           if (!sex_hair_talent) {
-            virgin_exp_list.push(i18n().detail.exp_vagina_no_pubic_hair);
+            vagina_exp_list.push(i18n().detail.exp_vagina_no_pubic_hair);
           } else if (!sex_hair) {
-            virgin_exp_list.push(i18n().detail.exp_vagina_clean_pubic_hair);
+            vagina_exp_list.push(i18n().detail.exp_vagina_clean_pubic_hair);
           } else {
-            virgin_exp_list.push(
+            vagina_exp_list.push(
               i18n().detail.get_exp_pv_pubic_hair(
                 di18n.feature.get_body_hair_desc(sex_hair - 1, sex_hair_talent),
               ),
@@ -70,66 +58,55 @@ module.exports = {
         }
         const in_womb_semen = era.get(`cflag:${chara.id}:子宫内精液`),
           v_type_code = era.get(`talent:${chara.id}:茎核类型`);
-        virgin_exp_list.push([
-          !penis_size ? '下方' : '',
-          '有着 ',
-          {
-            content: virgin_color_desc[v_type_code],
+        vagina_exp_list.push(
+          i18n().detail.get_exp_vagina_summary({
+            content: di18n.detail.vagina_color[v_type_code],
             color: sex_colors[v_type_code],
-          },
-          ' 的小穴',
-        ]);
+          }),
+        );
         if (era.get(`talent:${chara.id}:名穴`)) {
-          virgin_exp_list.push(
-            '宛如活物般的洞穴，任何造访的客人都只能任其榨取……',
-          );
+          vagina_exp_list.push(i18n().detail.exp_vagina_gift_desc);
         }
         const clitoris_talent =
             !get_penis_size(chara.id) && era.get(`talent:${chara.id}:淫核`),
-          virgin_talent = era.get(`talent:${chara.id}:淫壶`);
+          vagina_talent = era.get(`talent:${chara.id}:淫壶`);
         if (clitoris_talent === 2) {
-          virgin_exp_list.push(
-            '轻轻摩擦便会充血勃起……已经是一颗淫荡的小豆豆了……',
-          );
+          vagina_exp_list.push(i18n().detail.exp_vagina_clitoris_trained_desc);
         }
-        if (virgin_talent === 2) {
-          virgin_exp_list.push(
-            '全天候分泌爱液随时等待插入的淫壶……已经是一个淫荡的小穴了……',
-          );
-        }
-        if (clitoris_talent === 2 && virgin_talent === 2) {
-          virgin_exp_list[virgin_exp_list.length - 1] = `同时 ${
-            virgin_exp_list[virgin_exp_list.length - 1]
-          }`;
+        if (vagina_talent === 2) {
+          vagina_exp_list.push(i18n().detail.exp_vagina_vagina_trained_desc);
         }
         if (in_womb_semen) {
-          virgin_exp_list.push(
+          vagina_exp_list.push(
             join_to_string(
               [
-                '大腿内侧星星点点……',
+                i18n().detail.exp_vagina_semen,
                 flags.mark_level >= 3
-                  ? `小穴内大概还有 ${in_womb_semen.toLocaleString()}ml 精液呢……`
-                  : undefined,
+                  ? i18n().detail.exp_vagina_semen_template.replace(
+                      '%SEMEN%',
+                      Object(in_womb_semen).toLocaleString(lan()),
+                    )
+                  : void 0,
               ],
               '',
             ),
           );
         }
-        push_link_break(virgin_exp_list);
+        push_link_break(vagina_exp_list);
       }
       if (flags.show_exp) {
-        const virgin_touched_count = era.get(`exp:${chara.id}:阴部玩弄次数`);
+        const vagina_touched_count = era.get(`exp:${chara.id}:阴部玩弄次数`);
         const penis_sex_count = era.get(`exp:${chara.id}:性交次数`);
         const clitoris_orgasm_count = era.get(`exp:${chara.id}:外阴高潮次数`);
-        const virgin_orgasm_count = era.get(`exp:${chara.id}:阴道高潮次数`);
+        const vagina_orgasm_count = era.get(`exp:${chara.id}:阴道高潮次数`);
         const clitoris_semen = era.get(`exp:${chara.id}:外阴沾染精液量`);
-        const cum_in_virgin = era.get(`exp:${chara.id}:内射次数`);
-        const virgin_semen = era.get(`exp:${chara.id}:膣内精液量`);
+        const cum_in_womb = era.get(`exp:${chara.id}:内射次数`);
+        const vagina_semen = era.get(`exp:${chara.id}:膣内精液量`);
         const fuck_sleep_penis = era.get(`exp:${chara.id}:阴道睡奸`);
-        const sleep_virgin = era.get(`exp:${chara.id}:阴道被睡奸`);
-        const virgin_semen_talent =
-          era.get(`talent:${chara.id}:榨精成瘾`) * 2 +
-          era.get(`talent:${chara.id}:子宫敏感`);
+        const sleep_vagina = era.get(`exp:${chara.id}:阴道被睡奸`);
+        const vagina_semen_talent =
+          ((era.get(`talent:${chara.id}:榨精成瘾`) > 0) << 1) +
+          (era.get(`talent:${chara.id}:子宫敏感`) > 0);
         const virgin_exp = era.get(`cstr:${chara.id}:破处经历`);
         const unknown_virgin_exp = era.get(`cstr:${chara.id}:无自觉破处经历`);
         const cummed_exp = era.get(`cstr:${chara.id}:初次被内射经历`);
@@ -150,130 +127,213 @@ module.exports = {
         const squirt = era.get(`exp:${chara.id}:潮吹次数`);
         const secretion = era.get(`exp:${chara.id}:爱液分泌量`);
         if (virgin_exp) {
-          virgin_exp_list.push(get_filled_exp_str(virgin_exp, chara.id));
+          vagina_exp_list.push(
+            get_filled_exp_str(
+              virgin_exp,
+              chara.id,
+              virgin_exp.sleep
+                ? i18n().detail.get_exp_vagina_lose_virgin_sleep
+                : virgin_exp.be
+                  ? i18n().detail.get_exp_vagina_be_lose_virgin
+                  : i18n().detail.get_exp_vagina_lose_virgin,
+              virgin_exp.penis > 0
+                ? di18n.feature.n_penis[virgin_exp.penis]
+                : void 0,
+            ),
+          );
         }
         if (flags.show_all_exp || virgin_exp) {
           if (unknown_virgin_exp) {
-            virgin_exp_list.push(
-              get_filled_exp_str(unknown_virgin_exp, chara.id),
+            vagina_exp_list.push(
+              get_filled_exp_str(
+                unknown_virgin_exp,
+                chara.id,
+                i18n().detail.get_exp_vagina_unknown_be_lose_virgin,
+                virgin_exp.penis > 0
+                  ? di18n.feature.n_penis[virgin_exp.penis]
+                  : void 0,
+              ),
             );
           }
-          if (virgin_touched_count || penis_sex_count) {
-            virgin_exp_list.push(
-              join_to_string(
+          if (vagina_touched_count || penis_sex_count) {
+            vagina_exp_list.push(
+              flat_join_list(
                 [
-                  virgin_touched_count
-                    ? `被玩弄过 ${virgin_touched_count.toLocaleString()} 次`
+                  vagina_touched_count > 0
+                    ? i18n().detail.get_exp_vagina_vagina_touched_count(
+                        get_abbr_number(vagina_touched_count),
+                      )
                     : void 0,
-                  penis_sex_count
-                    ? `被刺入过 ${penis_sex_count.toLocaleString()} 次`
+                  penis_sex_count > 0
+                    ? i18n().detail.get_exp_vagina_fucked_count(
+                        get_abbr_number(penis_sex_count),
+                      )
                     : void 0,
                 ],
-                '，',
+                i18n().ui_comma,
               ),
             );
           }
         }
-        push_link_break(virgin_exp_list);
+        push_link_break(vagina_exp_list);
 
         if (cummed_exp) {
-          virgin_exp_list.push(get_filled_exp_str(cummed_exp, chara.id));
+          vagina_exp_list.push(
+            get_filled_exp_str(
+              cummed_exp,
+              chara.id,
+              i18n().detail.get_exp_vagina_cumed_exp,
+              cummed_exp.amount > 0
+                ? get_abbr_number(cummed_exp.amount)
+                : void 0,
+            ),
+          );
         }
         if (flags.show_all_exp || cummed_exp) {
           if (unknown_cummed_exp) {
-            virgin_exp_list.push(
-              get_filled_exp_str(unknown_cummed_exp, chara.id),
+            vagina_exp_list.push(
+              get_filled_exp_str(
+                unknown_cummed_exp,
+                chara.id,
+                i18n().detail.get_exp_vagina_unknown_cumed_exp,
+                unknown_cummed_exp.amount > 0
+                  ? get_abbr_number(unknown_cummed_exp.amount)
+                  : void 0,
+              ),
             );
           }
-          if (clitoris_semen || virgin_semen) {
-            virgin_exp_list.push(
-              join_to_string(
+          if (clitoris_semen || vagina_semen) {
+            vagina_exp_list.push(
+              flat_join_list(
                 [
-                  clitoris_semen
-                    ? `沾染过 ${clitoris_semen.toLocaleString()}ml 精液`
+                  clitoris_semen > 0
+                    ? i18n().detail.get_exp_vagina_out_semen(
+                        get_abbr_number(clitoris_semen),
+                      )
                     : '',
-                  virgin_semen
-                    ? `承受过 ${cum_in_virgin.toLocaleString()} 次射精，被射入过 ${virgin_semen.toLocaleString()}ml 精液`
+                  vagina_semen > 0
+                    ? i18n().detail.get_exp_vagina_cumed_semen(
+                        get_abbr_number(cum_in_womb),
+                        get_abbr_number(vagina_semen),
+                      )
                     : '',
                 ],
-                '，',
+                i18n().ui_comma,
               ),
             );
           }
         }
-        if ((flags.mark_level >= 3 || virgin_semen) && virgin_semen_talent) {
-          virgin_exp_list.push(
-            `每次被射进温热的精液，${virgin_semen_desc[virgin_semen_talent]}`,
+        if ((flags.mark_level >= 3 || vagina_semen) && vagina_semen_talent) {
+          vagina_exp_list.push(
+            di18n.detail.get_vagina_poisoned(vagina_semen_talent),
           );
         }
-        push_link_break(virgin_exp_list);
+        push_link_break(vagina_exp_list);
 
         if (squirt_exp) {
-          virgin_exp_list.push(get_filled_exp_str(squirt_exp, chara.id));
+          vagina_exp_list.push(
+            get_filled_exp_str(
+              squirt_exp,
+              chara.id,
+              !squirt_exp.c || squirt.c === chara.id
+                ? i18n().detail.get_exp_vagina_squirt_exp_self
+                : squirt_exp.s >= 0
+                  ? i18n().detail.get_exp_vagina_squirt_exp_both
+                  : i18n().detail.get_exp_vagina_squirt_exp,
+            ),
+          );
         }
         if (flags.show_all_exp || squirt_exp) {
           if (unknown_squirt_exp) {
-            virgin_exp_list.push(
-              get_filled_exp_str(unknown_squirt_exp, chara.id),
+            vagina_exp_list.push(
+              get_filled_exp_str(
+                unknown_squirt_exp,
+                chara.id,
+                !squirt_exp.c || squirt.c === chara.id
+                  ? i18n().detail.get_exp_vagina_unknown_squirt_exp_self
+                  : squirt_exp.s >= 0
+                    ? i18n().detail.get_exp_vagina_unknown_squirt_exp_both
+                    : i18n().detail.get_exp_vagina_unknown_squirt_exp,
+              ),
             );
           }
         }
         if (squirt > 0) {
-          virgin_exp_list.push(
-            join_to_string(
+          vagina_exp_list.push(
+            flat_join_list(
               [
                 clitoris_orgasm_count > 0
-                  ? `因小豆豆高潮 ${clitoris_orgasm_count.toLocaleString()} 次`
-                  : '',
-                virgin_orgasm_count > 0
-                  ? `因小穴高潮 ${virgin_orgasm_count.toLocaleString()} 次`
-                  : '',
+                  ? i18n().detail.get_exp_vagina_clitoris_orgasm(
+                      get_abbr_number(clitoris_orgasm_count),
+                    )
+                  : void 0,
+                vagina_orgasm_count > 0
+                  ? i18n().detail.get_exp_vagina_vagina_orgasm(
+                      get_abbr_number(vagina_orgasm_count),
+                    )
+                  : void 0,
               ],
-              '，',
+              i18n().ui_comma,
             ),
           );
-          virgin_exp_list.push(
-            `共潮吹 ${squirt.toLocaleString().toLocaleString()} 次，分泌爱液 ${secretion.toLocaleString()}ml`,
+          vagina_exp_list.push(
+            i18n().detail.get_exp_vagina_squirt_count(
+              get_abbr_number(squirt),
+              get_abbr_number(secretion),
+            ),
           );
         } else if (secretion > 0) {
-          virgin_exp_list.push(`共分泌爱液 ${secretion.toLocaleString()}ml`);
+          vagina_exp_list.push(
+            i18n().detail.get_exp_vagina_squirt_amount(
+              get_abbr_number(secretion),
+            ),
+          );
         }
-        push_link_break(virgin_exp_list);
+        push_link_break(vagina_exp_list);
 
         if (flags.show_all_exp || virgin_exp) {
           if (fuck_sleep_penis) {
-            virgin_exp_list.push(
-              `曾趁熟睡之机侵犯过${
-                chara.id ? ` ${CharaTalk.me.name}` : '他人'
-              }${fuck_sleep_penis > 1 ? ` ${fuck_sleep_penis.toLocaleString()} 次` : ''}`,
+            vagina_exp_list.push(
+              (chara.id > 0
+                ? i18n().detail.get_exp_vagina_fuck_sleep_penis
+                : i18n().detail.get_exp_vagina_fuck_sleep_penis_you)(
+                get_abbr_number(fuck_sleep_penis),
+                get_chara_talk(0),
+              ),
             );
           }
-          if (sleep_virgin) {
-            virgin_exp_list.push(
-              `曾被趁熟睡之机侵犯过${
-                sleep_virgin > 1 ? ` ${sleep_virgin.toLocaleString()} 次` : ''
-              }且没有察觉`,
+          if (sleep_vagina) {
+            vagina_exp_list.push(
+              i18n().detail.get_exp_vagina_be_sleep_fuck(
+                get_abbr_number(sleep_vagina),
+              ),
             );
           }
         }
       } else {
-        virgin_exp_list.push(get_unknown_info(chara.id));
+        vagina_exp_list.push(get_unknown_info(chara.id));
       }
     }
-    push_link_break(virgin_exp_list);
+    push_link_break(vagina_exp_list);
 
     const pregnant_stage = era.get(`cflag:${chara.id}:妊娠阶段`);
     const pregnant_timer = era.get(`cflag:${chara.id}:妊娠回合计时`);
     let is_preg = false;
     let pregnant_buffer = '';
     if (flags.in_growth) {
-      pregnant_buffer = '初潮还没有来';
+      pregnant_buffer = i18n().detail.exp_vagina_pregnant_in_growth;
     } else if (era.get(`status:${chara.id}:经期`)) {
-      pregnant_buffer = '月经来潮中';
+      pregnant_buffer = i18n().detail.exp_vagina_pregnant_menstrual_period;
     } else if (pregnant_stage === 1 << pregnant_stage_enum.resume) {
-      pregnant_buffer = pregnant_stage_names[1 << pregnant_stage_enum.resume];
+      pregnant_buffer =
+        di18n.detail.pregnant_stage[1 << pregnant_stage_enum.resume];
       if (flags.mark_level) {
-        pregnant_buffer += ` (${pregnant_timer} 周)`;
+        pregnant_buffer = i18n()
+          .detail.exp_vagina_pregnant_timer_template.replace(
+            '%DESC%',
+            pregnant_buffer,
+          )
+          .replace('%TIMER%', pregnant_timer.toString());
       }
     } else if (
       pregnant_stage === 1 << pregnant_stage_enum.no ||
@@ -284,7 +344,7 @@ module.exports = {
         flags.mark_level >= 2 &&
         era.get(`exp:${chara.id}:生产次数`) >= baby_limit
       ) {
-        pregnant_buffer = '无法承受更多种子了……';
+        pregnant_buffer = i18n().detail.exp_vagina_pregnant_too_many_birth;
       } else if (!chara.id || flags.mark_level >= 1) {
         switch (
           (era.get('flag:当前周') - era.get(`cflag:${chara.id}:月经周`) + 4) %
@@ -292,78 +352,83 @@ module.exports = {
         ) {
           case 0:
           case 2:
-            pregnant_buffer = '卵子正在等待受精❤️ ';
+            pregnant_buffer = i18n().detail.exp_vagina_pregnant_egg_prepared;
             break;
           case 1:
-            pregnant_buffer = '新的卵子正在成长中 ';
+            pregnant_buffer = i18n().detail.exp_vagina_pregnant_egg_growth;
             break;
           case 3:
-            pregnant_buffer = '卵子已经失活，等待排出体外 ';
+            pregnant_buffer = i18n().detail.exp_vagina_pregnant_egg_out;
         }
       } else {
-        pregnant_buffer = pregnant_stage_names[1 << pregnant_stage_enum.no];
+        pregnant_buffer =
+          di18n.detail.pregnant_stage[1 << pregnant_stage_enum.no];
       }
       if (flags.true_mark_level === 3) {
-        pregnant_buffer += `(怀孕率${(
-          get_pregnant_ratio(chara.id) * 100
-        ).toFixed(2)}%)`;
+        pregnant_buffer = i18n()
+          .detail.exp_vagina_pregnant_prob_template.replace(
+            '%DESC%',
+            pregnant_buffer,
+          )
+          .replace('%PROB%', (get_pregnant_ratio(chara.id) * 100).toFixed(2));
       }
     } else {
       is_preg = true;
       if (flags.mark_level >= 2) {
-        pregnant_buffer = pregnant_stage_names[pregnant_stage];
+        pregnant_buffer = di18n.detail.pregnant_stage[pregnant_stage];
       } else if (pregnant_stage >> pregnant_stage_enum.fetal > 0) {
-        pregnant_buffer = '肚子已经大大地挺了起来';
+        pregnant_buffer = i18n().detail.exp_vagina_pregnant_desc_showing;
       } else {
-        pregnant_buffer =
-          '腹部尚且没有迹象，无意间改变的生活习惯与体检报告却在昭示生命的新生';
+        pregnant_buffer = i18n().detail.exp_vagina_pregnant_desc_known;
       }
       if (flags.mark_level) {
-        pregnant_buffer += ` (${pregnant_timer} 周)`;
+        pregnant_buffer = i18n()
+          .detail.exp_vagina_pregnant_timer_template.replace(
+            '%DESC%',
+            pregnant_buffer,
+          )
+          .replace('%TIMER%', pregnant_timer.toString());
       }
     }
-    virgin_exp_list.push(pregnant_buffer);
+    vagina_exp_list.push(pregnant_buffer);
     const life_marks = LifeEventMarks.get_marks(chara.id);
     if (is_preg) {
       if (
         life_marks.unexpected_pregnant !== unexpected_pregnant_enum.mother_sleep
       ) {
         if (flags.true_mark_level === 3 || !life_marks.report) {
-          virgin_exp_list.push([
-            '孩子的父亲确认为是 ',
-            sys_get_colored_callname(chara.id, life_marks.sperm),
-          ]);
+          vagina_exp_list.push(
+            i18n().detail.get_exp_vagina_pregnant_father(
+              sys_get_colored_callname(chara.id, life_marks.sperm),
+            ),
+          );
         }
       } else if (chara.id > 0) {
-        const me = get_chara_talk(0);
-        virgin_exp_list.push([
-          me.get_colored_name(),
-          ' 知道 ',
-          chara.get_colored_name(),
-          ' 腹中孩子的父亲是 ',
-          me.get_colored_name(),
-        ]);
+        vagina_exp_list.push(
+          i18n().detail.get_exp_vagina_pregnant_father_you(
+            get_chara_talk(0).get_colored_name(),
+          ),
+        );
       } else if (life_marks.report === -1) {
-        virgin_exp_list.push([
-          '孩子的父亲确认为是 ',
-          sys_get_colored_callname(chara.id, life_marks.sperm),
-        ]);
+        vagina_exp_list.push(
+          i18n().detail.get_exp_vagina_pregnant_father(
+            sys_get_colored_callname(chara.id, life_marks.sperm),
+          ),
+        );
       }
     }
 
-    remove_end_line_breaks(virgin_exp_list);
+    remove_end_line_breaks(vagina_exp_list);
     return {
       print: () => [
         {
-          config: { content: page_name, position: 'left' },
+          config: { content: i18n().detail.exp_vagina_title, position: 'left' },
           type: 'divider',
         },
-        ...virgin_exp_list.map((e) => {
-          return { content: e, type: 'text' };
-        }),
+        ...vagina_exp_list.map((e) => ({ content: e, type: 'text' })),
       ],
     };
   },
-  name: page_name,
-  virgin: true,
+  name: i18n().detail.exp_vagina_title,
+  vagina: true,
 };

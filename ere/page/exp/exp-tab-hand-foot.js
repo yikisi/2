@@ -50,7 +50,7 @@ module.exports = {
             get_filled_exp_str(
               hand_job_exp,
               chara.id,
-              hand_job_exp.self
+              hand_job_exp.c === chara.id
                 ? i18n().detail.get_exp_hf_self_hand_job
                 : hand_job_exp.be
                   ? i18n().detail.get_exp_hf_be_hand_job
