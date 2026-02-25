@@ -138,14 +138,14 @@ module.exports = {
         );
         let squirt_exp = era.get(`cstr:${chara.id}:初次潮吹经历`);
         if (Array.isArray(squirt_exp) && squirt_exp.length === 0) {
-          squirt_exp = undefined;
+          squirt_exp = void 0;
         }
         let unknown_squirt_exp = era.get(`cstr:${chara.id}:无自觉初次潮吹经历`);
         if (
           Array.isArray(unknown_squirt_exp) &&
           unknown_squirt_exp.length === 0
         ) {
-          unknown_squirt_exp = undefined;
+          unknown_squirt_exp = void 0;
         }
         const squirt = era.get(`exp:${chara.id}:潮吹次数`);
         const secretion = era.get(`exp:${chara.id}:爱液分泌量`);
@@ -353,17 +353,15 @@ module.exports = {
 
     remove_end_line_breaks(virgin_exp_list);
     return {
-      print() {
-        return [
-          {
-            config: { content: page_name, position: 'left' },
-            type: 'divider',
-          },
-          ...virgin_exp_list.map((e) => {
-            return { content: e, type: 'text' };
-          }),
-        ];
-      },
+      print: () => [
+        {
+          config: { content: page_name, position: 'left' },
+          type: 'divider',
+        },
+        ...virgin_exp_list.map((e) => {
+          return { content: e, type: 'text' };
+        }),
+      ],
     };
   },
   name: page_name,

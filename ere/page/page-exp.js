@@ -12,8 +12,7 @@ const chara_into_type = require('#/data/chara-info-type');
 const recruit_flags = require('#/data/event/recruit-flags');
 
 /** @type {{generate:function(CharaTalk,{in_growth:boolean,mark_level:number,show_all_exp:boolean,show_body:boolean,show_exp:boolean}):{print:function:*[],[handle]:function(number)},name:string,[virgin]:boolean,[uma]:boolean}[]} */
-const handlers = [];
-handlers.push(
+const handlers = [
   require('#/page/exp/base-tab'),
   require('#/page/exp/edu-tab'),
   require('#/page/exp/skill-tab'),
@@ -28,7 +27,7 @@ handlers.push(
   require('#/page/exp/exp-tab-virgin'),
   require('#/page/exp/exp-tab-anal'),
   require('#/page/exp/exp-tab-sm'),
-);
+];
 
 /**
  * @param {CharaTalk} chara

@@ -132,7 +132,9 @@ module.exports = async () => {
       async h() {
         const achievements = sys_personal_achievement
           .list()
-          .filter((e) => e < 200);
+          .filter(
+            (cid) => cid < 200 && era.get(`staticcflag:${cid}:随机招募`) > 0,
+          );
         let ret = 0;
         if (achievements.length > 0) {
           era.drawLine();

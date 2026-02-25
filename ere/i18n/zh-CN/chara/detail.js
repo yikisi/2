@@ -186,6 +186,10 @@ class I18nDetail {
   ];
 
   sex_title = '性爱情况';
+  sex_exp_slave_2_accept = '接受了性奴的职责，享受着侍奉马娘大人的快乐';
+  sex_exp_slave_2_reject = '抗拒着性奴的身份，仍未沉溺于异常猛烈的肉体快感中';
+  sex_exp_slave_3_accept = '接受了孕袋的职责，享受着为马娘大人孕育新生命的快乐';
+  sex_exp_slave_3_reject = '抗拒着孕袋的身份，倔强地维持着身为人类的骄傲';
   sex_header_inmon = '淫纹定制';
   get_sex_exp = (you, sex_count, sleep_info, prison_info) => [
     '和 ',

@@ -3,7 +3,7 @@ const era = require('#/era-electron');
 const CustomizedMec = require('#/event/mec/mec-common');
 
 const { get_chara_color } = require('#/data/chara-colors');
-const { buff_colors } = require('#/data/color-const');
+const { buff_colors, palam_colors } = require('#/data/color-const');
 const ElfieLifeMarks = require('#/data/event/life-event-marks/life-event-marks-207');
 const TokinoLifeMarks = require('#/data/event/life-event-marks/life-event-marks-301');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
@@ -37,7 +37,6 @@ module.exports = class extends CustomizedMec {
       ret.push({
         ...di18n.kojo.get_titled_content(0, 'rape'),
         color: buff_colors[2],
-        content: '恶行易施',
       });
     }
     // FLAGNAME:4 = 当前位置
@@ -75,6 +74,17 @@ module.exports = class extends CustomizedMec {
           color: get_chara_color(cid),
         });
       }
+    }
+    return ret;
+  }
+
+  get_talents() {
+    const ret = [];
+    if (era.get('flag:恶堕') > 0) {
+      ret.push({
+        ...di18n.kojo.get_titled_content(0, 'akuochi'),
+        color: palam_colors.progress[1],
+      });
     }
     return ret;
   }

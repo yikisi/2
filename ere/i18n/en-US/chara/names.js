@@ -199,6 +199,13 @@ module.exports = class extends I18nNames {
   113501 = 'Stay Gold';
   113601 = 'Red Desire';
   113701 = 'Kiseki';
+  113801 = 'Forever Young';
+  114001 = 'Marche Lorraine';
+  114101 = 'Epiphaneia';
+  114201 = 'Logotype';
+  114301 = 'Victoire Pisa';
+  114401 = 'Rose Kingdom';
+  114501 = 'Rulership';
   200101 = 'Happy Meek';
   200201 = 'Bitter Glasse';
   200301 = 'Little Cocon';
@@ -226,6 +233,7 @@ module.exports = class extends I18nNames {
   904901 = 'Tucker Bryne';
   905001 = 'Hoshina Kiyoko';
   905101 = 'Yunohana Bloom';
+  113901 = 'Casino Drive';
   // GENERATED END
 
   // CHILDREN GENERATED START

@@ -18,6 +18,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_random_entry } = require('#/utils/list-utils');
 
+const { palam_colors } = require('#/data/color-const');
 const EroParticipant = require('#/data/ero/ero-participant');
 const { part_enum } = require('#/data/ero/part-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
@@ -912,8 +913,15 @@ module.exports = (handlers) => {
       );
       era.println();
       era.printButton('用嘴', 1);
+      era.print('（选择此项将会在相关事件中表现为接受态度）', {
+        color: palam_colors.progress[1],
+      });
       era.printButton('用扫具', 2);
+      era.print('（选择此项将会在相关事件中表现为抗拒态度）', {
+        color: palam_colors.notifications[1],
+      });
       if ((await era.input()) === 1) {
+        era.set('flag:恶堕', 1);
         await era.printAndWait(
           '反正，都已经回不去了，那不如干脆一点，放弃理智享受一切吧。',
         );
@@ -948,6 +956,7 @@ module.exports = (handlers) => {
           `不知不觉间，${me.name} 主动撅起了屁股，等待下名贵客的使用。`,
         );
       } else {
+        era.set('flag:恶堕', 0);
         await era.printAndWait(
           '虽然肉体上已经被改造了，但最起码，精神上不能放弃。',
         );
@@ -981,7 +990,7 @@ module.exports = (handlers) => {
           '是今天的使用者吗？这个问题，想必是无须回答的，不如说除开这个目的也想不到会有人靠近这个时不时有药物外泄的走廊的原因了。',
         );
         await era.printAndWait(
-          `但 ${me.name} 依然倔强的站着，装作没有听见，维持着自己身为人类的骄傲。`,
+          `但 ${me.name} 依然倔强地站着，装作没有听见，维持着自己身为人类的骄傲。`,
         );
         era.println();
         await era.printAndWait(

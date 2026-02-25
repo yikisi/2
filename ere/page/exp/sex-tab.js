@@ -24,7 +24,7 @@ const { inmon_plugin_dict } = require('#/data/ero/plugin/plugin-const');
 const { get_talent, get_xp } = require('#/data/info-generator');
 
 const di18n = require('#/i18n/extended-def');
-const { i18n } = require('#/i18n/selector');
+const { __, i18n } = require('#/i18n/selector');
 
 const sex_color = mark_colors[mark_enum.ero];
 
@@ -143,56 +143,69 @@ module.exports = {
         const sex_count = era.get(`exp:${chara.id}:性爱次数`);
         const sleep_count = era.get(`exp:${chara.id}:睡奸次数`);
         const prison_count = era.get(`exp:${chara.id}:监禁次数`);
-        sex_info_list.push(
-          {
-            config: { content: i18n().detail.sex_title, position: 'left' },
-            type: 'divider',
-          },
-          {
+        sex_info_list.push({
+          config: { content: i18n().detail.sex_title, position: 'left' },
+          type: 'divider',
+        });
+        const punishment = !chara.id && era.get('flag:惩戒力度');
+        if (punishment >= 2) {
+          const akuochi = era.get('flag:恶堕') > 0;
+          sex_info_list.push({
+            config: {
+              color: akuochi
+                ? palam_colors.progress[1]
+                : palam_colors.notifications[1],
+            },
+            content: __(
+              `detail.sex_exp_slave_${punishment}_${akuochi ? 'accept' : 'reject'}`,
+            ),
             type: 'text',
-            content:
-              sex_count > 0 && flags.show_exp > 0
-                ? chara.id > 0
-                  ? i18n().detail.get_sex_exp(
-                      me.get_colored_name(),
-                      {
-                        ...get_abbr_number(sex_count),
-                        color: palam_colors.notifications[1],
-                      },
-                      sleep_count > 0
-                        ? i18n().detail.get_sex_sleep_exp({
-                            ...get_abbr_number(sleep_count),
-                            color: palam_colors.notifications[1],
-                          })
-                        : [],
-                      prison_count > 0
-                        ? i18n().detail.get_sex_prison_exp({
-                            ...get_abbr_number(prison_count),
-                            color: attr_change_colors.down,
-                          })
-                        : [],
-                    )
-                  : i18n().detail.get_sex_exp_you(
-                      {
-                        ...get_abbr_number(sex_count),
-                        color: palam_colors.notifications[1],
-                      },
-                      sleep_count > 0
-                        ? i18n().detail.get_sex_sleep_exp_you({
-                            ...get_abbr_number(sleep_count),
-                            color: palam_colors.notifications[1],
-                          })
-                        : [],
-                      prison_count > 0
-                        ? i18n().detail.get_sex_prison_exp_you({
-                            ...get_abbr_number(prison_count),
-                            color: attr_change_colors.down,
-                          })
-                        : [],
-                    )
-                : i18n().detail.no_exp_info,
-          },
-        );
+          });
+        }
+        sex_info_list.push({
+          type: 'text',
+          content:
+            sex_count > 0 && flags.show_exp > 0
+              ? chara.id > 0
+                ? i18n().detail.get_sex_exp(
+                    me.get_colored_name(),
+                    {
+                      ...get_abbr_number(sex_count),
+                      color: palam_colors.notifications[1],
+                    },
+                    sleep_count > 0
+                      ? i18n().detail.get_sex_sleep_exp({
+                          ...get_abbr_number(sleep_count),
+                          color: palam_colors.notifications[1],
+                        })
+                      : [],
+                    prison_count > 0
+                      ? i18n().detail.get_sex_prison_exp({
+                          ...get_abbr_number(prison_count),
+                          color: attr_change_colors.down,
+                        })
+                      : [],
+                  )
+                : i18n().detail.get_sex_exp_you(
+                    {
+                      ...get_abbr_number(sex_count),
+                      color: palam_colors.notifications[1],
+                    },
+                    sleep_count > 0
+                      ? i18n().detail.get_sex_sleep_exp_you({
+                          ...get_abbr_number(sleep_count),
+                          color: palam_colors.notifications[1],
+                        })
+                      : [],
+                    prison_count > 0
+                      ? i18n().detail.get_sex_prison_exp_you({
+                          ...get_abbr_number(prison_count),
+                          color: attr_change_colors.down,
+                        })
+                      : [],
+                  )
+              : i18n().detail.no_exp_info,
+        });
       }
       sex_info_list.push({
         config: { content: i18n().detail.sex_header_abl, position: 'left' },

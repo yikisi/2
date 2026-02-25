@@ -1,4 +1,7 @@
 class I18nKojo1000 {
+  akuochi = '恶堕';
+  akuochi_desc = '只要享受就好了。';
+
   b_l_time = '昏昏欲睡';
   b_l_time_desc = '精神疲惫，心神涣散，随时可能昏睡过去！';
 
