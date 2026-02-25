@@ -9,15 +9,14 @@ const {
   remove_end_line_breaks,
 } = require('#/page/exp/snippets');
 
-const CharaTalk = require('#/utils/chara-talk');
-const { join_to_string } = require('#/utils/list-utils');
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { flat_join_list } = require('#/utils/list-utils');
+const { get_abbr_number } = require('#/utils/value-utils');
 
 const { sex_colors } = require('#/data/color-const');
 
 const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
-
-const page_name = '肉体情报【茎】';
 
 module.exports = {
   /**
@@ -41,9 +40,9 @@ module.exports = {
           const sex_hair_talent = era.get(`talent:${chara.id}:阴毛成长`),
             sex_hair = era.get(`cflag:${chara.id}:阴毛`);
           if (!sex_hair_talent) {
-            penis_exp_list.push('天生光滑无毛……');
+            penis_exp_list.push(i18n().detail.exp_penis_no_pubic_hair);
           } else if (!sex_hair) {
-            penis_exp_list.push('小腹现在光洁无毛……');
+            penis_exp_list.push(i18n().detail.exp_penis_clean_pubic_hair);
           } else {
             penis_exp_list.push(
               i18n().detail.get_exp_pv_pubic_hair(
@@ -51,37 +50,34 @@ module.exports = {
               ),
             );
           }
-          penis_exp_list.push([
-            '下方是',
-            !chara.sex_code ? '借助药物获得的 ' : ' ',
-            di18n.feature.n_penis[penis_size],
-            ' 而 ',
-            {
-              content: di18n.feature.n_c_sex_organ[p_type_code],
-              color: sex_colors[p_type_code],
-            },
-            ' 的肉棒',
-          ]);
+          penis_exp_list.push(
+            i18n().detail.get_exp_penis_summary(
+              !chara.sex_code ? i18n().detail.exp_penis_drug : '',
+              {
+                content: di18n.feature.n_c_sex_organ[p_type_code],
+                color: sex_colors[p_type_code],
+              },
+              di18n.feature.n_penis[penis_size],
+            ),
+          );
           if (era.get(`talent:${chara.id}:凶器`)) {
-            penis_exp_list.push(
-              '完美无敌的擎天巨龙，汩出的先走汁仿佛已能让卵子受孕……',
-            );
+            penis_exp_list.push(i18n().detail.exp_penis_gift_desc);
           }
           if (era.get(`talent:${chara.id}:早泄`) === 2) {
-            penis_exp_list.push('精关不牢，容易一泻千里……');
+            penis_exp_list.push(i18n().detail.exp_penis_trained_desc);
           }
         } else {
-          penis_exp_list.push('空无一物……');
+          penis_exp_list.push(i18n().detail.no_part_info);
         }
         push_link_break(penis_exp_list);
       }
       if (flags.show_exp) {
         const body_sex_count = era.get(`exp:${chara.id}:戳身体次数`),
-          virgin_sex_count = era.get(`exp:${chara.id}:戳阴部次数`),
+          vagina_sex_count = era.get(`exp:${chara.id}:戳阴部次数`),
           active_anal_sex_count = era.get(`exp:${chara.id}:戳肛门次数`),
           penis_orgasm_count = era.get(`exp:${chara.id}:阴茎高潮次数`),
           semen = era.get(`exp:${chara.id}:射精量`),
-          fuck_sleep_virgin = era.get(`exp:${chara.id}:阴茎睡奸`),
+          fuck_sleep_vagina = era.get(`exp:${chara.id}:阴茎睡奸`),
           sleep_penis = era.get(`exp:${chara.id}:阴茎被睡奸`);
         const penis_exp = era.get(`cstr:${chara.id}:失去童贞经历`),
           unknown_penis_exp = era.get(`cstr:${chara.id}:无自觉失去童贞经历`),
@@ -90,29 +86,49 @@ module.exports = {
             `cstr:${chara.id}:无自觉初次内射经历`,
           );
         if (penis_exp) {
-          penis_exp_list.push(get_filled_exp_str(penis_exp, chara.id));
+          penis_exp_list.push(
+            get_filled_exp_str(
+              penis_exp,
+              chara.id,
+              penis_exp.sleep
+                ? i18n().detail.get_exp_penis_lose_virgin_sleep
+                : penis_exp.be
+                  ? i18n().detail.get_exp_penis_be_lose_virgin
+                  : i18n().detail.get_exp_penis_lose_virgin,
+            ),
+          );
         }
         if (flags.show_all_exp || penis_exp) {
           if (unknown_penis_exp) {
             penis_exp_list.push(
-              get_filled_exp_str(unknown_penis_exp, chara.id),
+              get_filled_exp_str(
+                unknown_penis_exp,
+                chara.id,
+                i18n().detail.get_exp_penis_unknown_be_lose_virgin,
+              ),
             );
           }
-          if (body_sex_count || virgin_sex_count || active_anal_sex_count) {
+          if (body_sex_count || vagina_sex_count || active_anal_sex_count) {
             penis_exp_list.push(
-              join_to_string(
+              flat_join_list(
                 [
-                  body_sex_count
-                    ? `戳弄身体 ${body_sex_count.toLocaleString()} 次`
-                    : '',
-                  virgin_sex_count
-                    ? `戳弄阴核和小穴 ${virgin_sex_count.toLocaleString()} 次`
-                    : '',
-                  active_anal_sex_count
-                    ? `戳弄屁穴 ${active_anal_sex_count.toLocaleString()} 次`
-                    : '',
+                  body_sex_count > 0
+                    ? i18n().detail.get_exp_penis_fuck_body_count(
+                        get_abbr_number(body_sex_count),
+                      )
+                    : void 0,
+                  vagina_sex_count > 0
+                    ? i18n().detail.get_exp_penis_fuck_vagina_count(
+                        get_abbr_number(vagina_sex_count),
+                      )
+                    : void 0,
+                  active_anal_sex_count > 0
+                    ? i18n().detail.get_exp_penis_fuck_anal_count(
+                        get_abbr_number(active_anal_sex_count),
+                      )
+                    : void 0,
                 ],
-                '，',
+                i18n().ui_comma,
               ),
             );
           }
@@ -120,24 +136,42 @@ module.exports = {
         push_link_break(penis_exp_list);
 
         if (cum_semen_exp) {
-          penis_exp_list.push(get_filled_exp_str(cum_semen_exp, chara.id));
+          penis_exp_list.push(
+            get_filled_exp_str(
+              cum_semen_exp,
+              chara.id,
+              i18n().detail.get_exp_penis_cum_semen_exp,
+              get_abbr_number(cum_semen_exp.amount),
+            ),
+          );
         }
         if (flags.show_all_exp || cum_semen_exp) {
           if (unknown_cum_semen_exp) {
             penis_exp_list.push(
-              get_filled_exp_str(unknown_cum_semen_exp, chara.id),
+              get_filled_exp_str(
+                unknown_cum_semen_exp,
+                chara.id,
+                i18n().detail.get_exp_penis_unknown_cum_semen_exp,
+                get_abbr_number(unknown_cum_semen_exp.amount),
+              ),
             );
           }
           if (penis_orgasm_count) {
             penis_exp_list.push(
-              join_to_string(
+              flat_join_list(
                 [
-                  penis_orgasm_count
-                    ? `射精 ${penis_orgasm_count.toLocaleString()} 次`
-                    : '',
-                  semen ? `共射出 ${semen.toLocaleString()}ml 精液` : '',
+                  penis_orgasm_count > 0
+                    ? i18n().detail.get_exp_penis_cum_count(
+                        get_abbr_number(penis_orgasm_count),
+                      )
+                    : void 0,
+                  semen > 0
+                    ? i18n().detail.get_exp_penis_cum_amount(
+                        get_abbr_number(semen),
+                      )
+                    : void 0,
                 ],
-                '，',
+                i18n().ui_comma,
               ),
             );
           }
@@ -145,18 +179,21 @@ module.exports = {
         push_link_break(penis_exp_list);
 
         if (flags.show_all_exp || penis_exp) {
-          if (fuck_sleep_virgin) {
+          if (fuck_sleep_vagina > 0) {
             penis_exp_list.push(
-              `曾趁熟睡之机侵犯过${
-                chara.id ? ` ${CharaTalk.me.name}` : '他人'
-              }${fuck_sleep_virgin > 1 ? ` ${fuck_sleep_virgin.toLocaleString()} 次` : ''}`,
+              (chara.id > 0
+                ? i18n().detail.get_exp_penis_fuck_sleep_vagina
+                : i18n().detail.get_exp_penis_fuck_sleep_vagina_you)(
+                get_abbr_number(fuck_sleep_vagina),
+                get_chara_talk(0).get_colored_name(),
+              ),
             );
           }
-          if (sleep_penis) {
+          if (sleep_penis > 0) {
             penis_exp_list.push(
-              `曾被趁熟睡之机侵犯过${
-                sleep_penis > 1 ? ` ${sleep_penis.toLocaleString()} 次` : ''
-              }且没有察觉`,
+              i18n().detail.get_exp_penis_be_sleep_fuck(
+                get_abbr_number(sleep_penis),
+              ),
             );
           }
         }
@@ -170,18 +207,17 @@ module.exports = {
       remove_end_line_breaks(penis_exp_list);
     }
     return {
-      print() {
-        return [
-          {
-            type: 'divider',
-            config: { content: page_name, position: 'left' },
+      print: () => [
+        {
+          type: 'divider',
+          config: {
+            content: i18n().detail.exp_penis_title,
+            position: 'left',
           },
-          ...penis_exp_list.map((e) => {
-            return { content: e, type: 'text' };
-          }),
-        ];
-      },
+        },
+        ...penis_exp_list.map((e) => ({ content: e, type: 'text' })),
+      ],
     };
   },
-  name: page_name,
+  name: i18n().detail.exp_penis_title,
 };

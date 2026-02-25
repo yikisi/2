@@ -328,7 +328,7 @@ class I18nDetail {
   exp_breast_milk = '如果前襟有些湿润………请不要怀疑，那只是汗液哦……';
   exp_breast_milk_template =
     '因为夹子的阻碍，现在蓄积了 %MILK%ml 乳汁……乳头好痛';
-  get_exp_breast_self_milk = (date, chara) => [
+  get_exp_breast_self_milk = (date) => [
     '在 ',
     date,
     ' 第一次自己爱抚了乳头，立起来了',
@@ -450,7 +450,145 @@ class I18nDetail {
   exp_body_poisoned_both = '每次染上温热的精液，肌肤就会幸福地躁动起来';
   get_exp_body_orgasm = (count) => ['因为快感去过 ', count, ' 次'];
 
+  exp_hf_title = '肉体情报【手足】';
+  exp_hf_header_hand = '肉体情报【手】';
+  exp_hand_gift_desc = '爱抚技术自然如神，手指运转间就能让对方心荡神驰';
+  get_exp_hf_hand_job = (date, chara) => [
+    '手指，果然是最原始也最好用的取乐道具呀，在 ',
+    date,
+    ' 因 ',
+    chara,
+    ' 学会了这一点',
+  ];
+  get_exp_hf_self_hand_job = (date) => [
+    '手指，果然是最原始也最好用的取乐道具呀，在 ',
+    date,
+    ' 自己学会了这一点',
+  ];
+  get_exp_hf_be_hand_job = (date, chara) => [
+    '手指，果然是最原始也最好用的取乐道具呀，被 ',
+    chara,
+    ' 在 ',
+    date,
+    ' 教会了这一点',
+  ];
+  get_exp_hf_unknown_be_hand_job = (date, chara) => [
+    '实际上，在 ',
+    date,
+    '，手指就被 ',
+    chara,
+    ' 的爱液涂上了色情的气味',
+  ];
+  get_exp_hf_hand_job_count = (count) => ['揉弄过肉棒 ', count, ' 次'];
+  get_exp_hf_touch_vagina_count = (count) => ['抠弄过小穴 ', count, ' 次'];
+  get_exp_hf_touch_anal_count = (count) => ['抠弄过屁穴 ', count, ' 次'];
+  get_exp_hf_touch_body_count = (count) => ['抚弄过身体 ', count, ' 次'];
+  get_exp_hf_touch_breast_count = (count) => ['揉弄过乳房 ', count, ' 次'];
+  exp_hf_header_foot = '肉体情报【足】';
+  exp_foot_gift_desc = '腿脚运动连一毫米的偏差都不存在，足交技术自然如神';
+  get_exp_hf_foot_job = (date, chara) => [
+    '在 ',
+    date,
+    ' 第一次将 ',
+    chara,
+    ' 的肉棒踩在了脚下',
+  ];
+  get_exp_hf_unknown_be_foot_job = (date, chara) => [
+    '实际上，连足与趾都成了 ',
+    chara,
+    ' 肉棒的玩物，在 ',
+    date,
+    ' 之后走路时会觉得寂寞吗',
+  ];
+  get_exp_hf_foot_job_count = (count) => ['抚弄过肉棒 ', count, ' 次'];
+  get_exp_hf_step_on_vagina_count = (count) => ['抚弄过小穴 ', count, ' 次'];
+  get_exp_hf_step_on_body_count = (count) => ['踩踏过身体 ', count, ' 次'];
+
   get_exp_pv_pubic_hair = (pubic_hair) => ['小腹有着 ', pubic_hair];
+
+  exp_penis_title = '肉体情报【茎】';
+  exp_penis_no_pubic_hair = '天生光滑无毛';
+  exp_penis_clean_pubic_hair = '小腹现在光洁无毛';
+  exp_penis_drug = '借助药物获得的';
+  exp_penis_gift_desc = '完美无敌的擎天巨龙，汩出的先走汁仿佛已能让卵子受孕';
+  exp_penis_trained_desc = '精关不牢，容易一泻千里';
+  get_exp_penis_summary = (drug, color, size) => [
+    '下方是',
+    drug,
+    ' ',
+    color,
+    ' 而 ',
+    size,
+    ' 的肉棒',
+  ];
+  get_exp_penis_lose_virgin = (date, chara) => [
+    '在 ',
+    date,
+    ' 将童贞交给了 ',
+    chara,
+  ];
+  get_exp_penis_lose_virgin_sleep = (date, chara) => [
+    '在 ',
+    date,
+    ' 将童贞偷偷交给了 ',
+    chara,
+  ];
+  get_exp_penis_be_lose_virgin = (date, chara) => [
+    '童贞在 ',
+    date,
+    ' 被 ',
+    chara,
+    ' 夺走了',
+  ];
+  get_exp_penis_unknown_be_lose_virgin = (date, chara) => [
+    '实际上，已在 ',
+    date,
+    ' 被 ',
+    chara,
+    ' 夺走了童贞',
+  ];
+  get_exp_penis_fuck_body_count = (count) => ['戳弄身体 ', count, ' 次'];
+  get_exp_penis_fuck_vagina_count = (count) => ['戳弄小穴 ', count, ' 次'];
+  get_exp_penis_fuck_anal_count = (count) => ['戳弄屁穴 ', count, ' 次'];
+  get_exp_penis_cum_semen_exp = (date, chara, _, amount) => [
+    '第一次向 ',
+    date,
+    ' 的身体注入 ',
+    amount,
+    'ml 种子，是在 ',
+    date,
+  ];
+  get_exp_penis_unknown_cum_semen_exp = (date, chara, _, amount) => [
+    '实际上，在 ',
+    date,
+    ' 就被',
+    chara,
+    ' 淫乱的小穴榨取了 ',
+    amount,
+    'ml 精液',
+  ];
+  get_exp_penis_cum_count = (count) => ['射精 ', count, ' 次'];
+  get_exp_penis_cum_amount = (amount) => ['共射出 ', amount, 'ml 精液'];
+  get_exp_penis_fuck_sleep_vagina = (count, you) => [
+    '曾趁熟睡之机侵犯过 ',
+    you,
+    ' ',
+    count,
+    ' 次',
+  ];
+  get_exp_penis_fuck_sleep_vagina_you = (count) => [
+    '曾趁熟睡之机侵犯过其他角色 ',
+    count,
+    ' 次',
+  ];
+  get_exp_penis_be_sleep_fuck = (count) => [
+    '曾被趁熟睡之机侵犯过 ',
+    count,
+    ' 次且没有察觉',
+  ];
+
+  exp_vagina_no_pubic_hair = '天生白虎，粉腻可人';
+  exp_vagina_clean_pubic_hair = '小穴现在光洁无毛，粉腻可人';
 
   human_info = '一介人类而已';
   no_reward_info = '还没有可称道的战绩';

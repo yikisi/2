@@ -6,6 +6,7 @@ const get_sm_buff = require('#/system/ero/sub-calc-ero/get-sm-buff');
 const handle_lost_virginity = require('#/system/ero/sub-calc-ero/handle-lost-virginity');
 const {
   update_attacking_mouth_exp,
+  update_be_hand_job_exp,
   update_blow_job_exp,
   update_hand_job_exp,
   update_kiss_exp,
@@ -186,11 +187,7 @@ function sys_do_sex(atk, def, item) {
           era.add(`exp:${atk.id}:踩肉棒次数`, 1);
           era.add(`exp:${def.id}:戳身体次数`, 1);
           if (!era.get(`cstr:${atk.id}:初次足交经历`)) {
-            era.set(`cstr:${atk.id}:初次足交经历`, [
-              `在 ${date} 第一次将 `,
-              { c: def.id },
-              ' 的肉棒踩在了脚下',
-            ]);
+            era.set(`cstr:${atk.id}:初次足交经历`, { ...date, c: def.id });
           }
           break;
         default:
@@ -248,21 +245,7 @@ function sys_do_sex(atk, def, item) {
         case part_enum.hand:
           era.add(`exp:${atk.id}:性交次数`, 1);
           era.add(`exp:${def.id}:抠穴次数`, 1);
-          if (!era.get(`cstr:${def.id}:初次手交经历`)) {
-            if (i_def_awake) {
-              era.set(`cstr:${def.id}:初次手交经历`, [
-                `手指，果然是最原始也最好用的取乐道具呀，被 `,
-                { c: atk.id },
-                `在 ${date} 教会了这一点`,
-              ]);
-            } else if (!era.get(`cstr:${def.id}:无自觉初次手交经历`)) {
-              era.set(`cstr:${def.id}:无自觉初次手交经历`, [
-                `实际上，在 ${date} 的某一天，手指被 `,
-                { c: atk.id },
-                ' 的爱液涂上了色情的气味',
-              ]);
-            }
-          }
+          update_be_hand_job_exp(date, def.id, atk.id);
           break;
         case part_enum.penis:
           era.add(`exp:${atk.id}:性交次数`, 1);
@@ -302,11 +285,11 @@ function sys_do_sex(atk, def, item) {
               // 真 · 童贞算失童贞
               def_v_status === vp_status_enum.virgin
             ) {
-              era.set(`cstr:${def.id}:失去童贞经历`, [
-                `童贞在 ${date} 被 `,
-                { c: atk.id },
-                ' 夺走了',
-              ]);
+              era.set(`cstr:${def.id}:失去童贞经历`, {
+                ...date,
+                be: true,
+                c: atk.id,
+              });
             }
             // 都醒着就明牌了
             era.set(`talent:${atk.id}:处女`, vp_status_enum.no);
@@ -316,11 +299,10 @@ function sys_do_sex(atk, def, item) {
             era.add(`exp:${def.id}:阴茎被睡奸`, 1);
             // 只有真 · 童贞才能在睡奸情况下失去童贞
             if (def_v_status === vp_status_enum.virgin) {
-              era.set(`cstr:${def.id}:无自觉失去童贞经历`, [
-                `实际上，已在 ${date} 被 `,
-                { c: atk.id },
-                ' 夺走',
-              ]);
+              era.set(`cstr:${def.id}:无自觉失去童贞经历`, {
+                ...date,
+                c: atk.id,
+              });
               era.set(`talent:${def.id}:童贞`, vp_status_enum.dont_know);
             } else if (def_v_status === vp_status_enum.i_think) {
               // 俺寻思童贞会被揭穿
@@ -386,37 +368,18 @@ function sys_do_sex(atk, def, item) {
         case part_enum.hand:
           era.add(`exp:${atk.id}:戳身体次数`, 1);
           era.add(`exp:${def.id}:撸管次数`, 1);
-          if (!era.get(`cstr:${def.id}:初次手交经历`)) {
-            if (i_def_awake) {
-              era.set(`cstr:${def.id}:初次手交经历`, [
-                '手指，果然是最原始也最好用的取乐道具呀，被 ',
-                { c: atk.id },
-                ` 在 ${date} 教会了这一点`,
-              ]);
-            } else if (!era.get(`cstr:${def.id}:无自觉初次手交经历`)) {
-              era.set(`cstr:${def.id}:无自觉初次手交经历`, [
-                `实际上，在 ${date} 的某一天，手指被 `,
-                { c: atk.id },
-                ' 的爱液涂上了色情的气味',
-              ]);
-            }
-          }
+          update_be_hand_job_exp(date, def.id, atk.id);
           break;
         case part_enum.foot:
           era.add(`exp:${atk.id}:戳身体次数`, 1);
           if (!era.get(`cstr:${def.id}:初次足交经历`)) {
             if (i_def_awake) {
-              era.set(`cstr:${def.id}:初次足交经历`, [
-                `在 ${date}，第一次将 `,
-                { c: atk.id },
-                ' 的肉棒踩在了脚下',
-              ]);
+              era.set(`cstr:${def.id}:初次足交经历`, { ...date, c: atk.id });
             } else if (!era.get(`cstr:${def.id}:无自觉初次足交经历`)) {
-              era.set(`cstr:${def.id}:无自觉初次足交经历`, [
-                '实际上，连足与趾都成了 ',
-                { c: atk.id },
-                ` 肉棒的玩物，在 ${date} 之后走路时会觉得寂寞吗`,
-              ]);
+              era.set(`cstr:${def.id}:无自觉初次足交经历`, {
+                ...date,
+                c: atk.id,
+              });
             }
           }
           break;
@@ -458,10 +421,11 @@ function sys_do_sex(atk, def, item) {
             // 真 · 童贞算失童贞
             atk_v_status === vp_status_enum.virgin
           ) {
-            era.set(`cstr:${atk.id}:失去童贞经历`, [
-              `在 ${date} ${i_def_awake ? '' : '偷偷'}将童贞交给了 `,
-              { c: def.id },
-            ]);
+            era.set(`cstr:${atk.id}:失去童贞经历`, {
+              ...date,
+              c: def.id,
+              sleep: !i_def_awake,
+            });
             era.set(`talent:${atk.id}:童贞`, vp_status_enum.no);
           }
           // 有膜的情况下会流血

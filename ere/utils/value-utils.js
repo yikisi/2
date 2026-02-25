@@ -6,6 +6,9 @@ module.exports = {
    * @returns {{content:string,[title]:string}}
    */
   get_abbr_number(_num) {
+    if (typeof _num !== 'number') {
+      return void 0;
+    }
     if (_num < 10000) {
       return { content: _num.toLocaleString(lan) };
     }

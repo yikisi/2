@@ -70,7 +70,6 @@ class I18nCharaFeature {
   // middle part
   fh_midd_part = '中分';
 
-  // TODO 缺三股辫和单马尾
   n_back_hair = '后发';
   // short hair
   bh_shor_hair = '短发';

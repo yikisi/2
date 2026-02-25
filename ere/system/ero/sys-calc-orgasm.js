@@ -690,17 +690,17 @@ async function sys_calc_orgasm(shown, ...ids) {
                   }
                   if (!era.get(`cstr:${cid}:初次内射经历`)) {
                     if (sys_check_awake(cid)) {
-                      era.set(`cstr:${cid}:初次内射经历`, [
-                        '第一次向 ',
-                        { c: oid },
-                        ` 的身体注入 ${amount}ml 种子，是在 ${date}`,
-                      ]);
+                      era.set(`cstr:${cid}:初次内射经历`, {
+                        ...date,
+                        amount,
+                        c: oid,
+                      });
                     } else if (!era.get(`cstr:${cid}:无自觉初次内射经历`)) {
-                      era.set(`cstr:${cid}:无自觉初次内射经历`, [
-                        `实际上，在 ${date} 就被 `,
-                        { c: oid },
-                        ` 淫乱的小穴榨取了 ${amount}ml 精液`,
-                      ]);
+                      era.set(`cstr:${cid}:无自觉初次内射经历`, {
+                        ...date,
+                        amount,
+                        c: oid,
+                      });
                     }
                   }
                   if (!era.get(`cstr:${oid}:初次被内射经历`)) {

@@ -42,7 +42,6 @@ module.exports = {
   pregnant_stage_names,
   // SM时的称呼
   sex_slave_title: { 0: '母马', 1: '公马', 10: '扶她母马' },
-  sex_title: { 0: '马娘', 1: '马郎', 10: '马娘？' },
   unexpected_pregnant_enum: {
     father_sleep: -1,
     mother_sleep: 1,

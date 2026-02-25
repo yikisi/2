@@ -29,6 +29,20 @@ module.exports = {
    * @param {number} cid
    * @param {number} oid
    */
+  update_be_hand_job_exp(date, cid, oid) {
+    if (!era.get(`cstr:${cid}:初次手交经历`)) {
+      if (sys_check_awake(cid)) {
+        era.set(`cstr:${cid}:初次手交经历`, { ...date, be: true, c: oid });
+      } else if (!era.get(`cstr:${cid}:无自觉初次手交经历`)) {
+        era.set(`cstr:${cid}:无自觉初次手交经历`, { ...date, c: oid });
+      }
+    }
+  },
+  /**
+   * @param {string} date
+   * @param {number} cid
+   * @param {number} oid
+   */
   update_blow_job_exp(date, cid, oid) {
     if (!era.get(`cstr:${cid}:初次口交经历`)) {
       era.set(`cstr:${cid}:初次口交经历`, { ...date, c: oid });
@@ -110,12 +124,11 @@ module.exports = {
    */
   update_hand_job_exp(date, cid, oid) {
     if (!era.get(`cstr:${cid}:初次手交经历`)) {
-      era.set(`cstr:${cid}:初次手交经历`, [
-        `手指，果然是最原始也最好用的取乐道具呀，在 ${date} `,
-        cid !== oid ? '因 ' : '',
-        { c: oid },
-        ' 学会了这一点',
-      ]);
+      era.set(`cstr:${cid}:初次手交经历`, {
+        ...date,
+        c: oid,
+        self: cid === oid,
+      });
     }
   },
   update_kiss_exp(date, aid, did, i_def_awake = true) {
@@ -134,7 +147,6 @@ module.exports = {
     era.add(`exp:${did}:30`, 1);
   },
   /**
-   * TODO
    * @param {string} date
    * @param {number} cid
    * @param {number} amount

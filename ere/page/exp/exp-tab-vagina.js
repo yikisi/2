@@ -57,9 +57,9 @@ module.exports = {
           const sex_hair_talent = era.get(`talent:${chara.id}:阴毛成长`),
             sex_hair = era.get(`cflag:${chara.id}:阴毛`);
           if (!sex_hair_talent) {
-            virgin_exp_list.push('天生白虎，粉腻可人……');
+            virgin_exp_list.push(i18n().detail.exp_vagina_no_pubic_hair);
           } else if (!sex_hair) {
-            virgin_exp_list.push('小穴现在光洁无毛，粉腻可人……');
+            virgin_exp_list.push(i18n().detail.exp_vagina_clean_pubic_hair);
           } else {
             virgin_exp_list.push(
               i18n().detail.get_exp_pv_pubic_hair(

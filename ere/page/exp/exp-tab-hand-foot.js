@@ -7,7 +7,8 @@ const {
   remove_end_line_breaks,
 } = require('#/page/exp/snippets');
 
-const { join_to_string } = require('#/utils/list-utils');
+const { flat_join_list } = require('#/utils/list-utils');
+const { get_abbr_number } = require('#/utils/value-utils');
 
 const { i18n } = require('#/i18n/selector');
 
@@ -26,14 +27,12 @@ module.exports = {
     } else {
       if (flags.show_body) {
         if (era.get(`talent:${chara.id}:神之手`)) {
-          hand_exp_list.push('爱抚技术自然如神，手指运转间就能让对方心荡神驰');
+          hand_exp_list.push(i18n().detail.exp_hand_gift_desc);
         }
         push_link_break(hand_exp_list);
 
         if (era.get(`talent:${chara.id}:神之足`)) {
-          foot_exp_list.push(
-            '腿脚运动连一毫米的偏差都不存在，足交技术自然如神',
-          );
+          foot_exp_list.push(i18n().detail.exp_foot_gift_desc);
         }
         push_link_break(foot_exp_list);
       }
@@ -41,89 +40,133 @@ module.exports = {
         const touch_body_count = era.get(`exp:${chara.id}:摸身体次数`),
           touch_breast_count = era.get(`exp:${chara.id}:揉乳次数`),
           handjob_count = era.get(`exp:${chara.id}:撸管次数`),
-          touch_virgin_count = era.get(`exp:${chara.id}:抠穴次数`),
+          touch_vagina_count = era.get(`exp:${chara.id}:抠穴次数`),
           touch_anal_count = era.get(`exp:${chara.id}:慰菊次数`);
         const hand_job_exp = era.get(`cstr:${chara.id}:初次手交经历`),
           unknown_hand_job_exp = era.get(`cstr:${chara.id}:无自觉初次手交经历`);
 
         if (hand_job_exp) {
-          hand_exp_list.push(get_filled_exp_str(hand_job_exp, chara.id));
+          hand_exp_list.push(
+            get_filled_exp_str(
+              hand_job_exp,
+              chara.id,
+              hand_job_exp.self
+                ? i18n().detail.get_exp_hf_self_hand_job
+                : hand_job_exp.be
+                  ? i18n().detail.get_exp_hf_be_hand_job
+                  : i18n().detail.get_exp_hf_hand_job,
+            ),
+          );
         }
         if (flags.show_all_exp || hand_job_exp) {
           if (unknown_hand_job_exp) {
             hand_exp_list.push(
-              get_filled_exp_str(unknown_hand_job_exp, chara.id),
+              get_filled_exp_str(
+                unknown_hand_job_exp,
+                chara.id,
+                i18n().detail.get_exp_hf_unknown_be_hand_job,
+              ),
             );
           }
-          if (handjob_count || touch_virgin_count || touch_anal_count) {
+          if (
+            handjob_count > 0 ||
+            touch_vagina_count > 0 ||
+            touch_anal_count > 0
+          ) {
             hand_exp_list.push(
-              join_to_string(
+              flat_join_list(
                 [
-                  handjob_count
-                    ? `揉弄过 ${handjob_count.toLocaleString()} 次肉棒`
-                    : '',
-                  touch_virgin_count
-                    ? `抠弄过 ${touch_virgin_count.toLocaleString()} 次阴部`
-                    : '',
-                  touch_anal_count
-                    ? `慰弄过 ${touch_anal_count.toLocaleString()} 次屁股`
-                    : '',
+                  handjob_count > 0
+                    ? i18n().detail.get_exp_hf_hand_job_count(
+                        get_abbr_number(handjob_count),
+                      )
+                    : void 0,
+                  touch_vagina_count > 0
+                    ? i18n().detail.get_exp_hf_touch_vagina_count(
+                        get_abbr_number(touch_vagina_count),
+                      )
+                    : void 0,
+                  touch_anal_count > 0
+                    ? i18n().detail.get_exp_hf_touch_anal_count(
+                        get_abbr_number(touch_anal_count),
+                      )
+                    : void 0,
                 ],
-                '，',
+                i18n().ui_comma,
               ),
             );
           }
         }
         if (touch_body_count || touch_breast_count) {
           hand_exp_list.push(
-            join_to_string(
+            flat_join_list(
               [
-                touch_body_count
-                  ? `触摸过 ${touch_body_count.toLocaleString()} 次身体`
-                  : '',
-                touch_breast_count
-                  ? `揉弄过 ${touch_breast_count.toLocaleString()} 次乳房`
-                  : '',
+                touch_body_count > 0
+                  ? i18n().detail.get_exp_hf_touch_body_count(
+                      get_abbr_number(touch_body_count),
+                    )
+                  : void 0,
+                touch_breast_count > 0
+                  ? i18n().detail.get_exp_hf_touch_breast_count(
+                      get_abbr_number(touch_breast_count),
+                    )
+                  : void 0,
               ],
-              '，',
+              i18n().ui_comma,
             ),
           );
         }
 
         const step_on_body_count = era.get(`exp:${chara.id}:踩踏次数`),
           foot_job_count = era.get(`exp:${chara.id}:踩肉棒次数`),
-          step_on_virgin_count = era.get(`exp:${chara.id}:踩小穴次数`);
+          step_on_vagina_count = era.get(`exp:${chara.id}:踩小穴次数`);
         const foot_job_exp = era.get(`cstr:${chara.id}:初次足交经历`),
           unknown_foot_job_exp = era.get(`cstr:${chara.id}:无自觉初次足交经历`);
 
         if (foot_job_exp) {
-          foot_exp_list.push(get_filled_exp_str(foot_job_exp, chara.id));
+          foot_exp_list.push(
+            get_filled_exp_str(
+              foot_job_exp,
+              chara.id,
+              i18n().detail.get_exp_hf_foot_job,
+            ),
+          );
         }
         if (flags.show_all_exp || foot_job_exp) {
           if (unknown_foot_job_exp) {
             foot_exp_list.push(
-              get_filled_exp_str(unknown_foot_job_exp, chara.id),
+              get_filled_exp_str(
+                unknown_foot_job_exp,
+                chara.id,
+                i18n().detail.get_exp_hf_unknown_be_foot_job,
+              ),
             );
           }
-          if (foot_job_count || step_on_virgin_count) {
+          if (foot_job_count || step_on_vagina_count) {
             foot_exp_list.push(
-              join_to_string(
+              flat_join_list(
                 [
-                  foot_job_count
-                    ? `抚弄过 ${foot_job_count.toLocaleString()} 次肉棒`
-                    : '',
-                  step_on_virgin_count
-                    ? `抚弄过 ${step_on_virgin_count.toLocaleString()} 次阴部`
-                    : '',
+                  foot_job_count > 0
+                    ? i18n().detail.get_exp_hf_foot_job_count(
+                        get_abbr_number(foot_job_count),
+                      )
+                    : void 0,
+                  step_on_vagina_count > 0
+                    ? i18n().detail.get_exp_hf_step_on_vagina_count(
+                        get_abbr_number(step_on_vagina_count),
+                      )
+                    : void 0,
                 ],
-                '，',
+                i18n().ui_comma,
               ),
             );
           }
         }
         if (step_on_body_count) {
           foot_exp_list.push(
-            `用足踩踏过 ${step_on_body_count.toLocaleString()} 次身体`,
+            i18n().detail.get_exp_hf_step_on_body_count(
+              get_abbr_number(step_on_body_count),
+            ),
           );
         }
       } else {
@@ -138,21 +181,23 @@ module.exports = {
         return [
           {
             type: 'divider',
-            config: { content: '身体情报【手】', position: 'left' },
+            config: {
+              content: i18n().detail.exp_hf_header_hand,
+              position: 'left',
+            },
           },
-          ...hand_exp_list.map((e) => {
-            return { content: e, type: 'text' };
-          }),
+          ...hand_exp_list.map((e) => ({ content: e, type: 'text' })),
           {
             type: 'divider',
-            config: { content: '身体情报【足】', position: 'left' },
+            config: {
+              content: i18n().detail.exp_hf_header_foot,
+              position: 'left',
+            },
           },
-          ...foot_exp_list.map((e) => {
-            return { content: e, type: 'text' };
-          }),
+          ...foot_exp_list.map((e) => ({ content: e, type: 'text' })),
         ];
       },
     };
   },
-  name: '肉体情报【手足】',
+  name: i18n().detail.exp_hf_title,
 };
