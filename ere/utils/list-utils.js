@@ -52,6 +52,24 @@ module.exports = {
       .map((e) => e.entry);
   },
   /**
+   * @Template T1
+   * @Template T2
+   * @param {T1[]} list
+   * @param {T2} separator
+   * @returns {(T1|T2)[]}
+   */
+  flat_join_list(list, separator) {
+    list = list.filter((e) => e);
+    if (list.length === 0) {
+      return [];
+    }
+    const ret = [...list[0]];
+    for (let i = 1; i < list.length; ++i) {
+      ret.push(separator, ...list[i]);
+    }
+    return ret;
+  },
+  /**
    * @template T
    * @param {T[]} list
    * @param {number} max

@@ -309,6 +309,19 @@ const di18n = {
       };
     },
   },
+  detail: {
+    get_mouth_poisoned(poisoned) {
+      const _ = i18n().detail;
+      switch (poisoned) {
+        case 1:
+          return _.exp_mouth_poisoned_sens;
+        case 2:
+          return _.exp_mouth_poisoned_meek;
+        case 3:
+          return _.exp_mouth_poisoned_both;
+      }
+    },
+  },
   kojo: {
     get_titled_content: (ckey, key, ...args) =>
       get_titled_content(

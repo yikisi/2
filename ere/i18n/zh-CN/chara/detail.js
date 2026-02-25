@@ -227,6 +227,89 @@ class I18nDetail {
   sex_image_set_template = '第 %SET% 套';
   sex_image_personal_info = '使用专属调教立绘';
 
+  exp_mouth_title = '肉体情报【口】';
+  exp_mouth_gift_desc = '构造完美的唇齿口腔，天生的吸力能让任何对手缴械投降';
+  exp_mouth_trained_desc =
+    '无论何时何地都能感觉到瘙痒和寂寞……已经是一张淫荡的嘴唇了';
+  exp_mouth_drink_semen = '唇边有着淡淡的白浊……';
+  exp_mouth_drink_semen_template = '刚刚饮下了 %SEMEN%ml 精液的样子';
+  get_exp_mouth_kiss = (date, chara) => ['初吻在 ', date, ' 献给了 ', chara];
+  get_exp_mouth_unknown_kiss = (date, chara) => [
+    '实际上，初吻在 ',
+    date,
+    ' 就已被 ',
+    chara,
+    ' 夺走',
+  ];
+  get_exp_mouth_kiss_count = (count) => ['接过 ', count, ' 次吻'];
+  get_exp_mouth_blow_job = (date, chara) => [
+    '在 ',
+    date,
+    ' 与 ',
+    chara,
+    ' 探索了这张嘴的另一种用法',
+  ];
+  get_exp_mouth_be_blow_job = (date, chara) => [
+    '在 ',
+    date,
+    ' 被 ',
+    chara,
+    ' 教会了这张嘴的另一种用法',
+  ];
+  get_exp_mouth_unknown_be_blow_job = (date, chara) => [
+    '实际上，早在 ',
+    date,
+    ' 就初次被 ',
+    chara,
+    ' 使用过了',
+  ];
+  get_exp_mouth_suck_count = (count) => ['抚慰过 ', count, ' 次身体'];
+  get_exp_mouth_blow_job_count = (count) => ['吸吮过 ', count, ' 次性器'];
+  get_exp_mouth_drink_semen = (date, chara) => [
+    '在 ',
+    date,
+    ' 第一次品尝了 ',
+    chara,
+    ' 的精液，莫名地为那腥臭的味道而着迷',
+  ];
+  get_exp_mouth_unknown_drink_semen = (date, chara) => [
+    '实际上，在 ',
+    date,
+    '，就已经开始习惯 ',
+    chara,
+    ' 精液的味道了',
+  ];
+  get_exp_mouth_drink_semen_count = (count) => ['饮用过 ', count, 'ml 精液'];
+  exp_mouth_poisoned_sens = '每次饮下温热的精液，喉咙就会躁动难耐';
+  exp_mouth_poisoned_meek = '每次饮下温热的精液，就会感到幸福';
+  exp_mouth_poisoned_both = '每次饮下温热的精液，喉咙就会幸福地躁动起来';
+  get_exp_mouth_drink_secretion = (date, chara) => [
+    date,
+    '，从 ',
+    chara,
+    ' 的樱穴中第一次采饮了欢愉的蜜液',
+  ];
+  get_exp_mouth_unknown_drink_secretion = (date, chara) => [
+    '实际上，在 ',
+    date,
+    ' 就被喂食了 ',
+    chara,
+    ' 的淫液',
+  ];
+  get_exp_mouth_drink_secretion_count = (count) => [
+    '饮用过 ',
+    count,
+    'ml 爱液',
+  ];
+  get_exp_mouth_drink_milk = (date, chara) => [
+    date,
+    '，第一次并非因饥饿而吮吸了 ',
+    chara,
+    ' 的乳房，不知对味道是否满意呢？',
+  ];
+  get_exp_mouth_drink_milk_count = (count) => ['饮用过 ', count, 'ml 乳汁'];
+  get_exp_mouth_orgasm = (count) => ['因为快感去过 ', count, ' 次'];
+
   human_info = '一介人类而已';
   no_reward_info = '还没有可称道的战绩';
   cannot_join_race_info = '不能出走比赛';

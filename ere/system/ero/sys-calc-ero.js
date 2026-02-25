@@ -26,7 +26,7 @@ const { calc_pleasure } = require('#/system/ero/sys-calc-palam');
 const { merge_stain, set_stain } = require('#/system/ero/sys-calc-stain');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
-const { get_date } = require('#/data/date-indicator');
+const { get_date_obj } = require('#/data/date-indicator');
 const {
   action_cost,
   attack_juel_reward,
@@ -47,7 +47,7 @@ const di18n = require('#/i18n/extended-def');
  * @param {number} [item]
  */
 function sys_do_sex(atk, def, item) {
-  const date = get_date();
+  const date = get_date_obj();
   const i_def_awake = sys_check_awake(def.id);
   let dmg = {
     defender: base_damage.base,
@@ -231,13 +231,7 @@ function sys_do_sex(atk, def, item) {
           if (!atk.id || !def.id) {
             era.add(`tcvar:${atk.id || def.id}:获得因子`, 1);
           }
-          if (!era.get(`cstr:${def.id}:初次口交经历`)) {
-            era.set(`cstr:${def.id}:初次口交经历`, [
-              `在 ${date} 被 `,
-              { c: atk.id },
-              ' 教会了这张嘴的另一种用法',
-            ]);
-          }
+          update_blow_job_exp(date, def.id, atk.id);
           break;
         case part_enum.clitoris:
           era.add(`exp:${atk.id}:阴部玩弄次数`, 1);

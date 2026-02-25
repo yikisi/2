@@ -7,18 +7,11 @@ const {
   remove_end_line_breaks,
 } = require('#/page/exp/snippets');
 
-const { join_to_string } = require('#/utils/list-utils');
+const { flat_join_list, join_to_string } = require('#/utils/list-utils');
+const { get_abbr_number } = require('#/utils/value-utils');
 
-const { i18n } = require('#/i18n/selector');
-
-const drunk_semen_desc = [
-  '',
-  '喉咙就会躁动难耐',
-  '就会感到幸福',
-  '喉咙就会幸福地躁动起来',
-];
-
-const page_name = '肉体情报【口】';
+const di18n = require('#/i18n/extended-def');
+const { i18n, lan } = require('#/i18n/selector');
 
 module.exports = {
   /**
@@ -27,30 +20,30 @@ module.exports = {
    * @returns {{print():*[]}}
    */
   generate(chara, flags) {
+    const _lan = lan();
     const mouth_exp_list = [];
     if (flags.in_growth) {
       mouth_exp_list.push(i18n().detail.growth_info);
     } else {
       if (flags.show_body) {
         const in_stomach_semen = era.get(`cflag:${chara.id}:腹中精液`);
-        if (era.get(`talent:${chara.id}:荡唇`)) {
-          mouth_exp_list.push(
-            '构造完美的唇齿口腔，天生的吸力能让任何对手缴械投降……',
-          );
+        if (era.get(`talent:${chara.id}:荡唇`) > 0) {
+          mouth_exp_list.push(i18n().detail.exp_mouth_gift_desc);
         }
         if (era.get(`talent:${chara.id}:淫口`) === 2) {
-          mouth_exp_list.push(
-            '无论何时何地都能感觉到瘙痒和寂寞……已经是一张淫荡的嘴唇了……',
-          );
+          mouth_exp_list.push(i18n().detail.exp_mouth_trained_desc);
         }
         if (in_stomach_semen) {
           mouth_exp_list.push(
             join_to_string(
               [
-                '唇边有着淡淡的白浊……',
+                i18n().detail.exp_mouth_drink_semen,
                 flags.mark_level >= 3
-                  ? `刚刚饮下了 ${in_stomach_semen.toLocaleString()}ml 精液的样子……`
-                  : undefined,
+                  ? i18n().detail.exp_mouth_drink_semen_template.replace(
+                      '%SEMEN%',
+                      Object(in_stomach_semen).toLocaleString(_lan),
+                    )
+                  : void 0,
               ],
               '',
             ),
@@ -66,8 +59,8 @@ module.exports = {
         const drunk_semen = era.get(`exp:${chara.id}:饮精量`);
         const drunk_milk = era.get(`exp:${chara.id}:吸奶量`);
         const drunk_semen_talent =
-          era.get(`talent:${chara.id}:饮精成瘾`) * 2 +
-          era.get(`talent:${chara.id}:喉咙敏感`);
+          ((era.get(`talent:${chara.id}:饮精成瘾`) > 0) << 1) +
+          (era.get(`talent:${chara.id}:喉咙敏感`) > 0);
         const kiss_exp = era.get(`cstr:${chara.id}:初吻经历`);
         const unknown_kiss_exp = era.get(`cstr:${chara.id}:无自觉初吻经历`);
         const blow_job_exp = era.get(`cstr:${chara.id}:初次口交经历`);
@@ -84,7 +77,7 @@ module.exports = {
           Array.isArray(drunk_secretion_exp) &&
           drunk_secretion_exp.length === 0
         ) {
-          drunk_secretion_exp = undefined;
+          drunk_secretion_exp = void 0;
         }
         let unknown_drunk_secretion_exp = era.get(
           `cstr:${chara.id}:无自觉初次饮爱液经历`,
@@ -93,43 +86,75 @@ module.exports = {
           Array.isArray(unknown_drunk_secretion_exp) &&
           unknown_drunk_secretion_exp.length === 0
         ) {
-          unknown_drunk_secretion_exp = undefined;
+          unknown_drunk_secretion_exp = void 0;
         }
         const drunk_secretion = era.get(`exp:${chara.id}:饮爱液量`);
         if (kiss_exp) {
-          mouth_exp_list.push(get_filled_exp_str(kiss_exp, chara.id));
+          mouth_exp_list.push(
+            get_filled_exp_str(
+              kiss_exp,
+              chara.id,
+              i18n().detail.get_exp_mouth_kiss,
+            ),
+          );
         }
         if (flags.show_all_exp || kiss_exp) {
           if (unknown_kiss_exp) {
-            mouth_exp_list.push(get_filled_exp_str(unknown_kiss_exp, chara.id));
+            mouth_exp_list.push(
+              get_filled_exp_str(
+                unknown_kiss_exp,
+                chara.id,
+                i18n().detail.get_exp_mouth_unknown_kiss,
+              ),
+            );
           }
-          if (kiss_count) {
-            mouth_exp_list.push(`接过 ${kiss_count.toLocaleString()} 次吻`);
+          if (kiss_count > 0) {
+            mouth_exp_list.push(
+              i18n().detail.get_exp_mouth_kiss_count(
+                get_abbr_number(kiss_count),
+              ),
+            );
           }
         }
         push_link_break(mouth_exp_list);
 
         if (blow_job_exp) {
-          mouth_exp_list.push(get_filled_exp_str(blow_job_exp, chara.id));
+          mouth_exp_list.push(
+            get_filled_exp_str(
+              blow_job_exp,
+              chara.id,
+              blow_job_exp?.be
+                ? i18n().detail.get_exp_mouth_be_blow_job
+                : i18n().detail.get_exp_mouth_blow_job,
+            ),
+          );
         }
         if (flags.show_all_exp || blow_job_exp) {
           if (unknown_blow_job_exp) {
             mouth_exp_list.push(
-              get_filled_exp_str(unknown_blow_job_exp, chara.id),
+              get_filled_exp_str(
+                unknown_blow_job_exp,
+                chara.id,
+                i18n().detail.get_exp_mouth_unknown_be_blow_job,
+              ),
             );
           }
           if (suck_count || blow_job_count) {
             mouth_exp_list.push(
-              join_to_string(
+              flat_join_list(
                 [
                   suck_count > 0
-                    ? `抚慰过 ${suck_count.toLocaleString()} 次身体`
+                    ? i18n().detail.get_exp_mouth_suck_count(
+                        get_abbr_number(suck_count),
+                      )
                     : void 0,
                   blow_job_count > 0
-                    ? `吸吮过 ${blow_job_count.toLocaleString()} 次性器`
+                    ? i18n().detail.get_exp_mouth_blow_job_count(
+                        get_abbr_number(suck_count),
+                      )
                     : void 0,
                 ],
-                '，',
+                i18n().ui_comma,
               ),
             );
           }
@@ -137,55 +162,88 @@ module.exports = {
         push_link_break(mouth_exp_list);
 
         if (drunk_semen_exp) {
-          mouth_exp_list.push(get_filled_exp_str(drunk_semen_exp, chara.id));
+          mouth_exp_list.push(
+            get_filled_exp_str(
+              drunk_semen_exp,
+              chara.id,
+              i18n().detail.get_exp_mouth_drink_semen,
+            ),
+          );
         }
         if (flags.show_all_exp || drunk_semen_exp) {
           if (unknown_drunk_semen_exp) {
             mouth_exp_list.push(
-              get_filled_exp_str(unknown_drunk_semen_exp, chara.id),
+              get_filled_exp_str(
+                unknown_drunk_semen_exp,
+                chara.id,
+                i18n().detail.get_exp_mouth_unknown_drink_semen,
+              ),
             );
           }
           if (drunk_semen > 0) {
             mouth_exp_list.push(
-              `饮用过 ${drunk_semen.toLocaleString()}ml 精液`,
+              i18n().detail.get_exp_mouth_drink_semen_count(
+                get_abbr_number(drunk_semen),
+              ),
             );
           }
         }
-        if ((flags.mark_level >= 3 || drunk_semen > 0) && drunk_semen_talent) {
+        if (
+          (flags.mark_level >= 3 || drunk_semen > 0) &&
+          drunk_semen_talent > 0
+        ) {
           mouth_exp_list.push(
-            `每次饮下温热的精液，${drunk_semen_desc[drunk_semen_talent]}`,
+            di18n.detail.get_mouth_poisoned(drunk_semen_talent),
           );
         }
         push_link_break(mouth_exp_list);
         if (drunk_secretion_exp) {
           mouth_exp_list.push(
-            get_filled_exp_str(drunk_secretion_exp, chara.id),
+            get_filled_exp_str(
+              drunk_secretion_exp,
+              chara.id,
+              i18n().detail.get_exp_mouth_drink_secretion,
+            ),
           );
         }
         if (flags.show_all_exp || drunk_secretion_exp) {
           if (unknown_drunk_secretion_exp) {
             mouth_exp_list.push(
-              get_filled_exp_str(unknown_drunk_semen_exp, chara.id),
+              get_filled_exp_str(
+                unknown_drunk_semen_exp,
+                chara.id,
+                i18n().detail.get_exp_mouth_unknown_drink_secretion,
+              ),
             );
           }
           if (drunk_secretion > 0) {
             mouth_exp_list.push(
-              `饮用过 ${drunk_secretion.toLocaleString()}ml 爱液`,
+              i18n().detail.get_exp_mouth_drink_secretion_count(
+                get_abbr_number(drunk_secretion),
+              ),
             );
           }
         }
         push_link_break(mouth_exp_list);
         if (drunk_milk_exp) {
           mouth_exp_list.push(
-            get_filled_exp_str(drunk_milk_exp, chara.id),
-            `饮用过 ${drunk_milk.toLocaleString()}ml 乳汁`,
+            get_filled_exp_str(
+              drunk_milk_exp,
+              chara.id,
+              i18n().detail.get_exp_mouth_drink_milk,
+            ),
+            i18n().detail.get_exp_mouth_drink_milk_count(
+              get_abbr_number(drunk_milk),
+            ),
           );
         }
         push_link_break(mouth_exp_list);
 
         if (mouth_orgasm_count) {
           mouth_exp_list.push(
-            `因为快感去了 ${mouth_orgasm_count.toLocaleString()} 次`,
+            i18n().detail.get_exp_mouth_orgasm(
+              get_abbr_number(mouth_orgasm_count),
+            ),
           );
         }
       } else {
@@ -194,18 +252,17 @@ module.exports = {
       remove_end_line_breaks(mouth_exp_list);
     }
     return {
-      print() {
-        return [
-          {
-            type: 'divider',
-            config: { content: page_name, position: 'left' },
+      print: () => [
+        {
+          type: 'divider',
+          config: {
+            content: i18n().detail.exp_mouth_title,
+            position: 'left',
           },
-          ...mouth_exp_list.map((e) => {
-            return { content: e, type: 'text' };
-          }),
-        ];
-      },
+        },
+        ...mouth_exp_list.map((e) => ({ content: e, type: 'text' })),
+      ],
     };
   },
-  name: page_name,
+  name: i18n().detail.exp_mouth_title,
 };

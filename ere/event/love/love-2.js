@@ -19,7 +19,7 @@ const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const { get_date } = require('#/data/date-indicator');
+const { get_date_obj } = require('#/data/date-indicator');
 
 const { i18n } = require('#/i18n/selector');
 
@@ -56,7 +56,7 @@ module.exports = class extends CustomizedLove {
       )['update'] === 1
     ) {
       await sys_love_uma_in_event(this.id);
-      update_kiss_exp(get_date(), this.id, 0);
+      update_kiss_exp(get_date_obj(), this.id, 0);
     } else {
       await punish_rejecting_love(this.id);
       // CFLAGNAME:46 = 爱慕暂拒

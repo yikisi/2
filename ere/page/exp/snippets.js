@@ -15,6 +15,7 @@ const {
 const { join_to_string } = require('#/utils/list-utils');
 
 const { adaptability_colors } = require('#/data/color-const');
+const { get_date } = require('#/data/date-indicator');
 const {
   get_adaptability_rank,
   get_breast_cup,
@@ -35,15 +36,22 @@ module.exports = {
   /**
    * @param arr
    * @param {number} cid
+   * @param {function} [callback]
    */
-  get_filled_exp_str(arr, cid) {
+  get_filled_exp_str(arr, cid, callback) {
     if (Array.isArray(arr)) {
       return arr.map((e) => {
-        if (e.c !== undefined) {
+        if (e.c >= 0) {
           return sys_get_colored_full_callname(cid, e.c);
         }
         return e;
       });
+    } else if (typeof arr === 'object' && typeof callback === 'function') {
+      return callback(
+        get_date(arr.y, arr.d, arr.w),
+        sys_get_colored_full_callname(cid, arr.c),
+        arr.s >= 0 && sys_get_colored_full_callname(cid, arr.s),
+      );
     }
     return arr;
   },
@@ -136,7 +144,7 @@ module.exports = {
     }),
   /** @param {number} cid */
   get_unknown_info: (cid) =>
-    !cid > 0 ? i18n().detail.no_known_info : i18n().detail.no_exp_info,
+    cid > 0 ? i18n().detail.no_known_info : i18n().detail.no_exp_info,
   /** @param {array} list */
   push_link_break(list) {
     if (list.length && !check_line_break(list[list.length - 1])) {

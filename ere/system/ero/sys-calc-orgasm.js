@@ -41,7 +41,7 @@ const add_attr_exp = require('#/event/ero/snippets/add-attr-exp');
 
 const { get_random_value, log_max_wp } = require('#/utils/value-utils');
 
-const { get_date } = require('#/data/date-indicator');
+const { get_date_obj } = require('#/data/date-indicator');
 const { attack_juel_reward } = require('#/data/ero/battle-const');
 const CharaInmon = require('#/data/ero/chara-inmon');
 const EroParticipant = require('#/data/ero/ero-participant');
@@ -84,7 +84,7 @@ let run_custom_ero;
  * @param {number} ids
  */
 async function sys_calc_orgasm(shown, ...ids) {
-  const date = get_date();
+  const date = get_date_obj();
   for (const cid of ids) {
     const inmon = CharaInmon.get(cid);
     const l_times =
@@ -647,17 +647,12 @@ async function sys_calc_orgasm(shown, ...ids) {
                   }
                   if (!era.get(`cstr:${oid}:初次吞精经历`)) {
                     if (sys_check_awake(oid)) {
-                      era.set(`cstr:${oid}:初次吞精经历`, [
-                        `在 ${date} 第一次品尝了 `,
-                        { c: cid },
-                        ' 的精液，莫名地为那腥臭的味道而着迷',
-                      ]);
+                      era.set(`cstr:${oid}:初次吞精经历`, { ...date, c: cid });
                     } else if (!era.get(`cstr:${oid}:无自觉初次吞精经历`)) {
-                      era.set(`cstr:${oid}:无自觉初次吞精经历`, [
-                        `实际上，在 ${date}，就已经开始习惯 `,
-                        { c: cid },
-                        ' 精液的味道了',
-                      ]);
+                      era.set(`cstr:${oid}:无自觉初次吞精经历`, {
+                        ...date,
+                        c: cid,
+                      });
                     }
                   }
                   update_juels_from_talent(oid, '饮精成瘾');

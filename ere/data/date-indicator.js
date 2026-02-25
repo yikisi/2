@@ -11,7 +11,16 @@ function date_indicator() {
   );
 }
 
-date_indicator.get_date = () =>
-  di18n.get_date(era.get('flag:1'), era.get('flag:2'), era.get('flag:3'));
+date_indicator.get_date = (
+  year = era.get('flag:1'),
+  month = era.get('flag:2'),
+  week = era.get('flag:3'),
+) => di18n.get_date(year, month, week);
+
+date_indicator.get_date_obj = () => ({
+  y: era.get('flag:1').toString(),
+  m: era.get('flag:2').toString(),
+  w: era.get('flag:3').toString(),
+});
 
 module.exports = date_indicator;

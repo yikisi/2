@@ -4,7 +4,7 @@ const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 const CustomizedBase = require('#/event/basement/basement-common');
 const generate_dictionary = require('#/event/snippets/generate-dictionary');
 
-const { get_date } = require('#/data/date-indicator');
+const { get_date_obj } = require('#/data/date-indicator');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
 const { i18n } = require('#/i18n/selector');
@@ -71,7 +71,7 @@ module.exports = class extends CustomizedBase {
       b_start: life_marks.b_start,
     });
     if (life_marks.b_start) {
-      update_kiss_exp(get_date(), this.id, 0);
+      update_kiss_exp(get_date_obj(), this.id, 0);
     }
   }
 

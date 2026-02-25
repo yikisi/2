@@ -14,7 +14,7 @@ const generate_dictionary = require('#/event/snippets/generate-dictionary');
 const masturbate = require('#/event/snippets/masturbate');
 const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 
-const { get_date } = require('#/data/date-indicator');
+const { get_date_obj } = require('#/data/date-indicator');
 const event_hooks = require('#/data/event/event-hooks');
 
 const { i18n } = require('#/i18n/selector');
@@ -72,7 +72,7 @@ module.exports = class extends CustomizedLove {
           )
         )['update'] === 1
       ) {
-        update_kiss_exp(get_date(), this.id, 0);
+        update_kiss_exp(get_date_obj(), this.id, 0);
       } else {
         era.set(`cflag:${this.id}:46`, 74);
         await punish_rejecting_love(this.id);

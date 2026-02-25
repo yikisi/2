@@ -18,17 +18,9 @@ module.exports = {
   update_attacking_mouth_exp(date, cid, oid) {
     if (!era.get(`cstr:${cid}:初次口交经历`)) {
       if (sys_check_awake(cid)) {
-        era.set(`cstr:${cid}:初次口交经历`, [
-          `在 ${date} 被 `,
-          { c: oid },
-          ' 教会了这张嘴的另一种用法',
-        ]);
+        era.set(`cstr:${cid}:初次口交经历`, { ...date, c: oid, be: true });
       } else if (!era.get(`cstr:${cid}:无自觉初次口交经历`)) {
-        era.set(`cstr:${cid}:无自觉初次口交经历`, [
-          `实际上，早在 ${date} 就初次被 `,
-          { c: oid },
-          ' 使用过了',
-        ]);
+        era.set(`cstr:${cid}:无自觉初次口交经历`, { ...date, c: oid });
       }
     }
   },
@@ -39,11 +31,7 @@ module.exports = {
    */
   update_blow_job_exp(date, cid, oid) {
     if (!era.get(`cstr:${cid}:初次口交经历`)) {
-      era.set(`cstr:${cid}:初次口交经历`, [
-        `在 ${date} 与 `,
-        { c: oid },
-        ' 探索了这张嘴的另一种用法',
-      ]);
+      era.set(`cstr:${cid}:初次口交经历`, { ...date, c: oid });
     }
   },
   /**
@@ -140,17 +128,13 @@ module.exports = {
   },
   update_kiss_exp(date, aid, did, i_def_awake = true) {
     if (!era.get(`cstr:${aid}:初吻经历`)) {
-      era.set(`cstr:${aid}:初吻经历`, [`初吻在 ${date} 献给了 `, { c: did }]);
+      era.set(`cstr:${aid}:初吻经历`, { ...date, c: did });
     }
     if (!era.get(`cstr:${did}:初吻经历`)) {
       if (i_def_awake) {
-        era.set(`cstr:${did}:初吻经历`, [`初吻在 ${date} 献给了 `, { c: aid }]);
+        era.set(`cstr:${did}:初吻经历`, { ...date, c: aid });
       } else if (!era.get(`cstr:${did}:无自觉初吻经历`)) {
-        era.set(`cstr:${did}:无自觉初吻经历`, [
-          `实际上，初吻在 ${date} 就已被 `,
-          { c: aid },
-          ' 夺走',
-        ]);
+        era.set(`cstr:${did}:无自觉初吻经历`, { ...date, c: aid });
       }
     }
     // EXPNAME:30 = 接吻次数
@@ -201,13 +185,7 @@ module.exports = {
           era.add(`tcvar:${c_id}:获得因子`, milk_list[i] / 15);
         }
         if (!era.get(`cstr:${c_id}:初次吸奶经历`)) {
-          era.set(`cstr:${c_id}:初次吸奶经历`, [
-            `${date}，第一次并非因饥饿而吮吸了 `,
-            { c: cid },
-            ' 那对',
-            breast_desc,
-            '的乳房，不知对味道是否满意呢？',
-          ]);
+          era.set(`cstr:${c_id}:初次吸奶经历`, { ...date, c: cid });
         }
       });
   },
@@ -236,20 +214,9 @@ module.exports = {
         }
         if (!era.get(`cstr:${id}:初次饮爱液经历`)) {
           if (sys_check_awake(id)) {
-            era.set(`cstr:${id}:初次饮爱液经历`, [
-              date,
-              '，从 ',
-              { c: cid },
-              ' 的樱穴中第一次采饮了欢愉的蜜液',
-            ]);
+            era.set(`cstr:${id}:初次饮爱液经历`, { ...date, c: cid });
           } else if (!era.get(`cstr:${id}:无自觉初次饮爱液经历`)) {
-            era.set(`cstr:${id}:无自觉初次饮爱液经历`, [
-              '实际上，在 ',
-              date,
-              ' 就被喂食了 ',
-              { c: cid },
-              ' 的淫液',
-            ]);
+            era.set(`cstr:${id}:无自觉初次饮爱液经历`, { ...date, c: cid });
           }
         }
       });
