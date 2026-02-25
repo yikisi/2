@@ -10,6 +10,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const chara_into_type = require('#/data/chara-info-type');
 const recruit_flags = require('#/data/event/recruit-flags');
+const { i18n } = require('#/i18n/selector');
 
 /** @type {{generate:function(CharaTalk,{in_growth:boolean,mark_level:number,show_all_exp:boolean,show_body:boolean,show_exp:boolean}):{print:function:*[],[handle]:function(number)},name:string,[virgin]:boolean,[uma]:boolean}[]} */
 const handlers = [
@@ -87,12 +88,12 @@ async function print_chara_info(_id, chara_list, _page) {
       {
         columns: [...exp_chara_info(chara), ...info_page.print()],
         config: {
-          width: 18,
+          width: 19,
         },
       },
       {
         columns:
-          _page === undefined
+          _page === void 0
             ? handlers.map((e, i) => {
                 return {
                   accelerator: i + 10,
@@ -107,7 +108,7 @@ async function print_chara_info(_id, chara_list, _page) {
                 };
               })
             : [],
-        config: { width: 6 },
+        config: { width: 5 },
       },
     );
     era.setVerticalAlign('top');
@@ -129,13 +130,19 @@ async function print_chara_info(_id, chara_list, _page) {
                 {
                   accelerator: 4,
                   config: { width: 7 },
-                  content: `前一位 — ${get_display_name(era.get(`callname:${prev}:-2`))}`,
+                  content: i18n().detail.prev_template.replace(
+                    '%NAME%',
+                    get_display_name(era.get(`callname:${prev}:-2`)),
+                  ),
                   type: 'button',
                 },
                 {
                   accelerator: 6,
                   config: { width: 7 },
-                  content: `后一位 — ${get_display_name(era.get(`callname:${next}:-2`))}`,
+                  content: i18n().detail.next_template.replace(
+                    '%NAME%',
+                    get_display_name(era.get(`callname:${next}:-2`)),
+                  ),
                   type: 'button',
                 },
               ]
@@ -143,7 +150,7 @@ async function print_chara_info(_id, chara_list, _page) {
           {
             accelerator: 999,
             config: { align: 'right', offset: 4, width: 6 },
-            content: '返回',
+            content: i18n().ui_back,
             type: 'button',
           },
         ],
@@ -189,7 +196,7 @@ async function page_exp() {
     page = { curr: 1 };
   while (exp_flag) {
     const selected = await print_select_tar_page(chara_into_type.info, page);
-    if (selected === undefined) {
+    if (selected === void 0) {
       exp_flag = false;
       continue;
     }

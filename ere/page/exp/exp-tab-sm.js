@@ -7,15 +7,11 @@ const {
   remove_end_line_breaks,
 } = require('#/page/exp/snippets');
 
-const { join_to_string } = require('#/utils/list-utils');
+const { flat_join_list, join_to_string } = require('#/utils/list-utils');
 
-const { sex_slave_title } = require('#/data/ero/status-const');
-
-const { i18n } = require('#/i18n/selector');
-
-const page_name = '肉体情报【虐】';
-
-const sm_talent_desc = ['', '责骂', '击打', '凌辱'];
+const di18n = require('#/i18n/extended-def');
+const { __, i18n } = require('#/i18n/selector');
+const { get_abbr_number } = require('#/utils/value-utils');
 
 module.exports = {
   /**
@@ -29,25 +25,25 @@ module.exports = {
       sm_exp_list.push(i18n().detail.growth_info);
     } else {
       if (flags.show_body) {
-        const sm_talent =
-          era.get(`talent:${chara.id}:喜欢责骂`) +
-          2 * era.get(`talent:${chara.id}:喜欢痛苦`);
-        if (era.get(`talent:${chara.id}:抖S`)) {
+        const m_talent =
+          (era.get(`talent:${chara.id}:喜欢责骂`) > 0) +
+          ((era.get(`talent:${chara.id}:喜欢痛苦`) > 0) << 1);
+        const is_s = era.get(`talent:${chara.id}:抖S`) > 0;
+        if (is_s || m_talent > 0) {
           sm_exp_list.push(
-            `仿佛生来便是以施虐为己任的淫乱抖S ${
-              sex_slave_title[chara.sex_code]
-            }，只要在脑内想像凌辱他人就能兴奋起来`,
+            join_to_string(
+              [
+                is_s ? i18n().detail.exp_sm_sadism_talent_template : void 0,
+                m_talent > 0
+                  ? di18n.detail.get_machoism_poisoned(m_talent)
+                  : void 0,
+              ],
+              i18n().detail.desc_conjunction,
+            ).replace(
+              /%TITLE%/g,
+              __(`detail.exp_sm_sex_title_${chara.sex_code}`),
+            ),
           );
-        }
-        if (sm_talent) {
-          sm_exp_list.push(
-            `仿佛生来便是以受虐为己任的淫乱抖M ${
-              sex_slave_title[chara.sex_code]
-            }，只要在脑内想像被他人${sm_talent_desc[sm_talent]}就能兴奋起来`,
-          );
-        }
-        if (sm_exp_list.length === 2) {
-          sm_exp_list[1] = `同时 ${sm_exp_list[1]}`;
         }
         push_link_break(sm_exp_list);
       }
@@ -62,49 +58,75 @@ module.exports = {
           masochism_exp = era.get(`cstr:${chara.id}:初次受虐经历`);
 
         if (sadism_exp) {
-          sm_exp_list.push(get_filled_exp_str(sadism_exp, chara.id));
+          sm_exp_list.push(
+            get_filled_exp_str(
+              sadism_exp,
+              chara.id,
+              i18n().detail.get_exp_sm_sadism_exp,
+            ),
+          );
         }
         if (abuse_count || hit_count) {
           sm_exp_list.push(
-            join_to_string(
+            flat_join_list(
               [
-                abuse_count
-                  ? `责骂他人 ${abuse_count.toLocaleString()} 次`
-                  : '',
-                hit_count ? `击打他人 ${hit_count.toLocaleString()} 次` : '',
+                abuse_count > 0
+                  ? i18n().detail.get_exp_sm_abuse_count(
+                      get_abbr_number(abuse_count),
+                    )
+                  : void 0,
+                hit_count > 0
+                  ? i18n().detail.get_exp_sm_hit_count(
+                      get_abbr_number(hit_count),
+                    )
+                  : void 0,
               ],
-              '，',
+              i18n().ui_comma,
             ),
           );
         }
         if (s_orgasm_count) {
           sm_exp_list.push(
-            `因施虐感而高潮了 ${s_orgasm_count.toLocaleString()} 次`,
+            i18n().detail.get_exp_sm_sadism_count(
+              get_abbr_number(s_orgasm_count),
+            ),
           );
         }
         push_link_break(sm_exp_list);
 
         if (masochism_exp) {
-          sm_exp_list.push(get_filled_exp_str(masochism_exp, chara.id));
+          sm_exp_list.push(
+            get_filled_exp_str(
+              masochism_exp,
+              chara.id,
+              i18n().detail.get_exp_sm_machoism_exp,
+            ),
+          );
         }
         if (abused_count || be_hit_count) {
           sm_exp_list.push(
-            join_to_string(
+            flat_join_list(
               [
-                abused_count
-                  ? `被责骂 ${abused_count.toLocaleString()} 次`
-                  : '',
-                be_hit_count
-                  ? `被击打 ${be_hit_count.toLocaleString()} 次`
-                  : '',
+                abused_count > 0
+                  ? i18n().detail.get_exp_sm_be_abused_count(
+                      get_abbr_number(abused_count),
+                    )
+                  : void 0,
+                be_hit_count > 0
+                  ? i18n().detail.get_exp_sm_be_hit_count(
+                      get_abbr_number(be_hit_count),
+                    )
+                  : void 0,
               ],
-              '，',
+              i18n().ui_comma,
             ),
           );
         }
         if (m_orgasm_count) {
           sm_exp_list.push(
-            `因受虐感而高潮了 ${m_orgasm_count.toLocaleString()} 次`,
+            i18n().detail.get_exp_sm_machoism_count(
+              get_abbr_number(m_orgasm_count),
+            ),
           );
         }
       } else {
@@ -113,18 +135,14 @@ module.exports = {
       remove_end_line_breaks(sm_exp_list);
     }
     return {
-      print() {
-        return [
-          {
-            type: 'divider',
-            config: { content: page_name, position: 'left' },
-          },
-          ...sm_exp_list.map((e) => {
-            return { content: e, type: 'text' };
-          }),
-        ];
-      },
+      print: () => [
+        {
+          type: 'divider',
+          config: { content: i18n().detail.exp_sm_title, position: 'left' },
+        },
+        ...sm_exp_list.map((e) => ({ content: e, type: 'text' })),
+      ],
     };
   },
-  name: page_name,
+  name: i18n().detail.exp_sm_title,
 };

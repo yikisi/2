@@ -227,7 +227,7 @@ class I18nDetail {
   sex_image_set_template = '第 %SET% 套';
   sex_image_personal_info = '使用专属调教立绘';
 
-  exp_mouth_title = '肉体情报【口】';
+  exp_mouth_title = '情报【口】';
   exp_mouth_gift_desc = '构造完美的唇齿口腔，天生的吸力能让任何对手缴械投降';
   exp_mouth_trained_desc =
     '无论何时何地都能感觉到瘙痒和寂寞……已经是一张淫荡的嘴唇了';
@@ -310,7 +310,7 @@ class I18nDetail {
   get_exp_mouth_drink_milk_count = (count) => ['饮用过 ', count, 'ml 乳汁'];
   get_exp_mouth_orgasm = (count) => ['因为快感去过 ', count, ' 次'];
 
-  exp_breast_title = '肉体情报【胸】';
+  exp_breast_title = '情报【胸】';
   exp_breast_summary_man = '健硕的胸肌';
   exp_breast_nipple_pink = '粉色小草莓';
   exp_breast_nipple_deep = '深色小樱桃';
@@ -398,7 +398,7 @@ class I18nDetail {
   get_exp_breast_milking_amount = (amount) => ['产出了 ', amount, 'ml 乳汁'];
   get_exp_breast_orgasm = (count) => ['因为快感去过 ', count, ' 次'];
 
-  exp_body_title = '肉体情报【身】';
+  exp_body_title = '情报【身】';
   exp_body_no_armpit_hair = '有着天生无毛的光洁腋下';
   exp_body_clean_armpit_hair = '腋下现在光洁无毛';
   get_exp_body_armpit_hair = (armpit_hair) => ['腋下有着 ', armpit_hair];
@@ -450,8 +450,8 @@ class I18nDetail {
   exp_body_poisoned_both = '每次染上温热的精液，肌肤就会幸福地躁动起来';
   get_exp_body_orgasm = (count) => ['因为快感去过 ', count, ' 次'];
 
-  exp_hf_title = '肉体情报【手足】';
-  exp_hf_header_hand = '肉体情报【手】';
+  exp_hf_title = '情报【手足】';
+  exp_hf_header_hand = '情报【手】';
   exp_hand_gift_desc = '爱抚技术自然如神，手指运转间就能让对方心荡神驰';
   get_exp_hf_hand_job = (date, chara) => [
     '手指，果然是最原始也最好用的取乐道具呀，在 ',
@@ -484,7 +484,7 @@ class I18nDetail {
   get_exp_hf_touch_anal_count = (count) => ['抠弄过屁穴 ', count, ' 次'];
   get_exp_hf_touch_body_count = (count) => ['抚弄过身体 ', count, ' 次'];
   get_exp_hf_touch_breast_count = (count) => ['揉弄过乳房 ', count, ' 次'];
-  exp_hf_header_foot = '肉体情报【足】';
+  exp_hf_header_foot = '情报【足】';
   exp_foot_gift_desc = '腿脚运动连一毫米的偏差都不存在，足交技术自然如神';
   get_exp_hf_foot_job = (date, chara) => [
     '在 ',
@@ -506,7 +506,7 @@ class I18nDetail {
 
   get_exp_pv_pubic_hair = (pubic_hair) => ['小腹有着 ', pubic_hair];
 
-  exp_penis_title = '肉体情报【茎】';
+  exp_penis_title = '情报【茎】';
   exp_penis_no_pubic_hair = '天生光滑无毛';
   exp_penis_clean_pubic_hair = '小腹现在光洁无毛';
   exp_penis_drug = '借助药物获得的';
@@ -587,7 +587,7 @@ class I18nDetail {
     ' 次且没有察觉',
   ];
 
-  exp_vagina_title = '肉体情报【女阴】';
+  exp_vagina_title = '情报【女阴】';
   exp_vagina_no_pubic_hair = '天生白虎，粉腻可人';
   exp_vagina_clean_pubic_hair = '小穴现在光洁无毛，粉腻可人';
   exp_vagina_pink = '粉嫩可人';
@@ -759,6 +759,71 @@ class I18nDetail {
     you,
   ];
 
+  exp_anal_title = '情报【臀】';
+  exp_anal_gift_desc = '仿佛能吞噬一切的紧实黑洞，定让人有去无回';
+  exp_anal_trained_desc = '时刻渴望被温暖填满的直肠……已经是一个淫荡的屁穴了';
+  exp_anal_semen = '裤子的后面变湿了……';
+  exp_anal_semen_template = '是因为屁穴内还滞留着 %SEMEN%ml 精液吧';
+  get_exp_anal_anal_sex_exp = (date, chara) => [
+    date,
+    '，因 ',
+    chara,
+    ' 初次领会了臀部的性意义',
+  ];
+  get_exp_anal_be_anal_sex_exp = (date, chara) => [
+    date,
+    '，被 ',
+    chara,
+    ' 初次教会了臀部的性意义',
+  ];
+  get_exp_anal_unknown_be_anal_sex_exp = (date, chara) => [
+    '实际上，在 ',
+    date,
+    ' 就被 ',
+    chara,
+    ' 玩弄过，大概回不去了吧',
+  ];
+  get_exp_anal_anal_sex_count = (count) => ['抚慰性器 ', count, ' 次'];
+  get_exp_anal_cum_in_anal_count = (count, amount) => [
+    '承受过 ',
+    count,
+    ' 次射精，被射入过 ',
+    amount,
+    'ml 精液',
+  ];
+  exp_anal_poisoned_sens = '每次被射进温热的精液，直肠就会躁动难耐';
+  exp_anal_poisoned_meek = '每次被射进温热的精液，就会感到幸福';
+  exp_anal_poisoned_both = '每次被射进温热的精液，直肠就会幸福地躁动起来';
+  get_exp_anal_orgasm = (count) => ['因为快感去了 ', count, ' 次'];
+
+  exp_sm_title = '情报【虐】';
+  exp_sm_sex_title_0 = '母马';
+  exp_sm_sex_title_1 = '公马';
+  exp_sm_sex_title_10 = '扶她母马';
+  exp_sm_sadism_talent_template =
+    '仿佛生来便是以施虐为己任的淫乱抖 S %TITLE%，只要在脑内想像凌辱他人就能兴奋起来';
+  exp_sm_machoism_abuse_talent_template =
+    '仿佛生来便是以受虐为己任的淫乱抖 M %TITLE%，只要在脑内想像被他人责骂就能兴奋起来';
+  exp_sm_machoism_hit_talent_template =
+    '仿佛生来便是以受虐为己任的淫乱抖 M %TITLE%，只要在脑内想像被他人击打就能兴奋起来';
+  exp_sm_machoism_all_talent_template =
+    '仿佛生来便是以受虐为己任的淫乱抖 M %TITLE%，只要在脑内想像被他人凌辱就能兴奋起来';
+  get_exp_sm_sadism_exp = (date, chara) => ['在 ', date, ' 初次虐待了 ', chara];
+  get_exp_sm_abuse_count = (count) => ['责骂他人 ', count, ' 次'];
+  get_exp_sm_hit_count = (count) => ['击打他人 ', count, ' 次'];
+  get_exp_sm_sadism_count = (count) => ['因施虐感而高潮了 ', count, ' 次'];
+  get_exp_sm_machoism_exp = (date, chara) => [
+    '在 ',
+    date,
+    ' 初次被 ',
+    chara,
+    ' 虐待',
+  ];
+  get_exp_sm_be_abused_count = (count) => ['被责骂 ', count, ' 次'];
+  get_exp_sm_be_hit_count = (count) => ['被击打 ', count, ' 次'];
+  get_exp_sm_machoism_count = (count) => ['因受虐感而高潮了 ', count, ' 次'];
+
+  desc_conjunction = '\n同时，';
   human_info = '一介人类而已';
   no_reward_info = '还没有可称道的战绩';
   cannot_join_race_info = '不能出走比赛';
@@ -766,6 +831,9 @@ class I18nDetail {
   no_exp_info = '还没有相关经历';
   no_known_info = '还没有足够了解';
   no_part_info = '没有这个部位';
+
+  prev_template = '前一位 - %NAME%';
+  next_template = '后一位 - %NAME%';
 
   get_child_number(num) {
     const first = '长';

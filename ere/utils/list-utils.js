@@ -152,16 +152,14 @@ module.exports = {
    * @param {string} separator
    * @returns {string}
    */
-  join_to_string(list, separator) {
-    return list.filter((e) => e).join(separator);
-  },
+  join_to_string: (list, separator) => list.filter((e) => e).join(separator),
   /**
    * @param {number[]} list
    * @returns {number}
    */
   median(list) {
     if (list.length === 0) {
-      return undefined;
+      return void 0;
     }
     const sorted = sort_list(list, (e) => e);
     if (sorted.length % 2) {

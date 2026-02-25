@@ -26,8 +26,6 @@ Object.keys(pregnant_stage_enum).forEach((e, i) => {
 
 module.exports = {
   pregnant_stage_enum,
-  // SM时的称呼
-  sex_slave_title: { 0: '母马', 1: '公马', 10: '扶她母马' },
   unexpected_pregnant_enum: {
     father_sleep: -1,
     mother_sleep: 1,

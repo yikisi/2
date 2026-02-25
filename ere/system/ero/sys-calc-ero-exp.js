@@ -232,17 +232,10 @@ module.exports = {
    */
   update_sm_exp(date, attacker, defender) {
     if (!era.get(`cstr:${attacker}:初次施虐经历`)) {
-      era.set(`cstr:${attacker}:初次施虐经历`, [
-        `在 ${date} 初次虐待了 `,
-        { c: defender },
-      ]);
+      era.set(`cstr:${attacker}:初次施虐经历`, { ...date, c: defender });
     }
     if (!era.get(`cstr:${defender}:初次受虐经历`)) {
-      era.set(`cstr:${defender}:初次受虐经历`, [
-        `在 ${date} 初次被 `,
-        { c: attacker },
-        ' 虐待',
-      ]);
+      era.set(`cstr:${defender}:初次受虐经历`, { ...date, c: attacker });
     }
   },
 };

@@ -321,11 +321,7 @@ function sys_do_sex(atk, def, item) {
         era.add(`exp:${atk.id}:肛交次数`, 1);
         era.add(`exp:${def.id}:戳肛门次数`, 1);
         if (!era.get(`cstr:${atk.id}:初次肛交经历`)) {
-          era.set(`cstr:${atk.id}:初次肛交经历`, [
-            `${date}，因 `,
-            { c: def.id },
-            ' 初次领会了臀部的性意义',
-          ]);
+          era.set(`cstr:${atk.id}:初次肛交经历`, { ...date, c: def.id });
         }
         atk_ex_buff += 2 * era.get(`talent:${atk.id}:魔尻`);
         dmg.attacker += 20 * era.get(`talent:${def.id}:凶器`);
@@ -479,17 +475,16 @@ function sys_do_sex(atk, def, item) {
           era.add(`exp:${def.id}:肛交次数`, 1);
           if (!era.get(`cstr:${def.id}:初次肛交经历`)) {
             if (i_def_awake) {
-              era.set(`cstr:${def.id}:初次肛交经历`, [
-                `${date}，初次被 `,
-                { c: atk.id },
-                ' 教会了臀部的性意义',
-              ]);
+              era.set(`cstr:${def.id}:初次肛交经历`, {
+                ...date,
+                be: true,
+                c: atk.id,
+              });
             } else if (!era.get(`cstr:${def.id}:无自觉初次肛交经历`)) {
-              era.set(`cstr:${def.id}:无自觉初次肛交经历`, [
-                `实际上，在 ${date} 被 `,
-                { c: atk.id },
-                ' 玩弄过，大概回不去了吧',
-              ]);
+              era.set(`cstr:${def.id}:无自觉初次肛交经历`, {
+                ...date,
+                c: atk.id,
+              });
             }
           }
           atk_ex_buff += 2 * era.get(`talent:${atk.id}:凶器`);

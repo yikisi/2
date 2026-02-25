@@ -68,28 +68,32 @@ module.exports = {
           vagina_exp_list.push(i18n().detail.exp_vagina_gift_desc);
         }
         const clitoris_talent =
-            !get_penis_size(chara.id) && era.get(`talent:${chara.id}:淫核`),
-          vagina_talent = era.get(`talent:${chara.id}:淫壶`);
-        if (clitoris_talent === 2) {
-          vagina_exp_list.push(i18n().detail.exp_vagina_clitoris_trained_desc);
-        }
-        if (vagina_talent === 2) {
-          vagina_exp_list.push(i18n().detail.exp_vagina_vagina_trained_desc);
-        }
-        if (in_womb_semen) {
+          !get_penis_size(chara.id) > 0 && era.get(`talent:${chara.id}:淫核`);
+        const vagina_talent = era.get(`talent:${chara.id}:淫壶`);
+        if (clitoris_talent === 2 || vagina_talent === 2) {
           vagina_exp_list.push(
             join_to_string(
               [
-                i18n().detail.exp_vagina_semen,
-                flags.mark_level >= 3
-                  ? i18n().detail.exp_vagina_semen_template.replace(
-                      '%SEMEN%',
-                      Object(in_womb_semen).toLocaleString(lan()),
-                    )
+                clitoris_talent === 2
+                  ? i18n().detail.exp_vagina_clitoris_trained_desc
+                  : void 0,
+                vagina_talent === 2
+                  ? i18n().detail.exp_vagina_vagina_trained_desc
                   : void 0,
               ],
-              '',
+              i18n().detail.desc_conjunction,
             ),
+          );
+        }
+        if (in_womb_semen) {
+          vagina_exp_list.push(
+            i18n().detail.exp_vagina_semen +
+              (flags.mark_level >= 3
+                ? i18n().detail.exp_vagina_semen_template.replace(
+                    '%SEMEN%',
+                    Object(in_womb_semen).toLocaleString(lan()),
+                  )
+                : ''),
           );
         }
         push_link_break(vagina_exp_list);

@@ -7,7 +7,7 @@ const {
   remove_end_line_breaks,
 } = require('#/page/exp/snippets');
 
-const { flat_join_list, join_to_string } = require('#/utils/list-utils');
+const { flat_join_list } = require('#/utils/list-utils');
 const { get_abbr_number } = require('#/utils/value-utils');
 
 const di18n = require('#/i18n/extended-def');
@@ -35,18 +35,13 @@ module.exports = {
         }
         if (in_stomach_semen) {
           mouth_exp_list.push(
-            join_to_string(
-              [
-                i18n().detail.exp_mouth_drink_semen,
-                flags.mark_level >= 3
-                  ? i18n().detail.exp_mouth_drink_semen_template.replace(
-                      '%SEMEN%',
-                      Object(in_stomach_semen).toLocaleString(_lan),
-                    )
-                  : void 0,
-              ],
-              '',
-            ),
+            i18n().detail.exp_mouth_drink_semen +
+              (flags.mark_level >= 3
+                ? i18n().detail.exp_mouth_drink_semen_template.replace(
+                    '%SEMEN%',
+                    Object(in_stomach_semen).toLocaleString(_lan),
+                  )
+                : ''),
           );
         }
         push_link_break(mouth_exp_list);

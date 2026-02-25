@@ -76,6 +76,8 @@ class I18nRaces {
 
   track_name_template = '%NAME%竞马场';
 
+  summary_template = '%WIN%/%RACE%';
+  summary_tip_template = '%RACE% 战 %WIN% 胜';
   result_template = '%RANK%着';
   no_result = '未出走';
   no_win = '未胜利';

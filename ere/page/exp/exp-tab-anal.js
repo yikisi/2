@@ -7,18 +7,11 @@ const {
   remove_end_line_breaks,
 } = require('#/page/exp/snippets');
 
-const { join_to_string } = require('#/utils/list-utils');
+const { flat_join_list } = require('#/utils/list-utils');
+const { get_abbr_number } = require('#/utils/value-utils');
 
+const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
-
-const anal_semen_desc = [
-  '',
-  '直肠就会躁动难耐',
-  '就会感到幸福',
-  '直肠就会幸福地躁动起来',
-];
-
-const page_name = '肉体情报【臀】';
 
 module.exports = {
   /**
@@ -33,75 +26,88 @@ module.exports = {
     } else {
       if (flags.show_body) {
         if (era.get(`talent:${chara.id}:魔尻`)) {
-          anal_exp_list.push('仿佛能吞噬一切的紧实黑洞，定让人有去无回……');
+          anal_exp_list.push(i18n().detail.exp_anal_gift_desc);
         }
         if (era.get(`talent:${chara.id}:淫臀`) === 2) {
-          anal_exp_list.push(
-            '时刻渴望被温暖填满的直肠……已经是一个淫荡的屁穴了……',
-          );
+          anal_exp_list.push(i18n().detail.exp_anal_trained_desc);
         }
         const in_intestine_semen = era.get(`cflag:${chara.id}:肠道内精液`);
-        if (in_intestine_semen) {
+        if (in_intestine_semen > 0) {
           anal_exp_list.push(
-            join_to_string(
-              [
-                '裤子的后面变湿了……',
-                flags.mark_level >= 3
-                  ? `是因为屁穴内还滞留着 ${in_intestine_semen.toLocaleString()}ml 精液吧……`
-                  : undefined,
-              ],
-              '',
-            ),
+            i18n().detail.exp_anal_semen +
+              (flags.mark_level >= 3
+                ? i18n().detail.exp_anal_semen_template.replace(
+                    '%SEMEN%',
+                    in_intestine_semen.toString(),
+                  )
+                : ''),
           );
         }
         push_link_break(anal_exp_list);
       }
       if (flags.show_exp) {
         const anal_sex_count = era.get(`exp:${chara.id}:肛交次数`),
-          cum_in_anal = era.get(`exp:${chara.id}:肠内射精次数`),
+          cumed_in_anal = era.get(`exp:${chara.id}:肠内射精次数`),
           anal_semen = era.get(`exp:${chara.id}:肠内精液量`),
           anal_orgasm_count = era.get(`exp:${chara.id}:肛门高潮次数`),
           anal_semen_talent =
-            era.get(`talent:${chara.id}:精液灌肠`) * 2 +
-            era.get(`talent:${chara.id}:肠道敏感`);
+            ((era.get(`talent:${chara.id}:精液灌肠`) > 0) << 1) +
+            (era.get(`talent:${chara.id}:肠道敏感`) > 0);
         const anal_sex_exp = era.get(`cstr:${chara.id}:初次肛交经历`),
           unknown_anal_sex_exp = era.get(`cstr:${chara.id}:无自觉初次肛交经历`);
 
         if (anal_sex_exp) {
-          anal_exp_list.push(get_filled_exp_str(anal_sex_exp, chara.id));
+          anal_exp_list.push(
+            get_filled_exp_str(
+              anal_sex_exp,
+              chara.id,
+              anal_sex_exp.be
+                ? i18n().detail.get_exp_anal_be_anal_sex_exp
+                : i18n().detail.get_exp_anal_anal_sex_exp,
+            ),
+          );
         }
         if (flags.show_all_exp || anal_sex_exp) {
           if (unknown_anal_sex_exp) {
             anal_exp_list.push(
-              get_filled_exp_str(unknown_anal_sex_exp, chara.id),
+              get_filled_exp_str(
+                unknown_anal_sex_exp,
+                chara.id,
+                i18n().detail.get_exp_anal_unknown_be_anal_sex_exp,
+              ),
             );
           }
-          if (anal_sex_count || cum_in_anal) {
+          if (anal_sex_count || cumed_in_anal) {
             anal_exp_list.push(
-              join_to_string(
+              flat_join_list(
                 [
-                  anal_sex_count
-                    ? `抚慰性器 ${anal_sex_count.toLocaleString()} 次`
-                    : '',
-                  cum_in_anal
-                    ? `承受过 ${cum_in_anal.toLocaleString()} 次射精，被射入过 ${anal_semen.toLocaleString()}ml 精液`
-                    : '',
+                  anal_sex_count > 0
+                    ? i18n().detail.get_exp_anal_anal_sex_count(
+                        get_abbr_number(anal_sex_count),
+                      )
+                    : void 0,
+                  cumed_in_anal > 0
+                    ? i18n().detail.get_exp_anal_cum_in_anal_count(
+                        get_abbr_number(cumed_in_anal),
+                        get_abbr_number(anal_semen),
+                      )
+                    : void 0,
                 ],
-                '，',
+                i18n().ui_comma,
               ),
             );
           }
         }
-        if ((flags.mark_level >= 3 || cum_in_anal) && anal_semen_talent) {
-          anal_exp_list.push(
-            `每次被射进温热的精液，${anal_semen_desc[anal_semen_talent]}`,
-          );
+        if ((flags.mark_level >= 3 || cumed_in_anal) && anal_semen_talent) {
+          anal_exp_list.push(di18n.detail.get_anal_poisoned(anal_semen_talent));
         }
         push_link_break(anal_exp_list);
 
         if (anal_orgasm_count) {
           anal_exp_list.push(
-            `因为快感去了 ${anal_orgasm_count.toLocaleString()} 次`,
+            i18n().detail.get_exp_anal_orgasm(
+              get_abbr_number(anal_orgasm_count),
+            ),
           );
         }
       } else {
@@ -110,18 +116,14 @@ module.exports = {
       remove_end_line_breaks(anal_exp_list);
     }
     return {
-      print() {
-        return [
-          {
-            type: 'divider',
-            config: { content: page_name, position: 'left' },
-          },
-          ...anal_exp_list.map((e) => {
-            return { content: e, type: 'text' };
-          }),
-        ];
-      },
+      print: () => [
+        {
+          type: 'divider',
+          config: { content: i18n().detail.exp_anal_title, position: 'left' },
+        },
+        ...anal_exp_list.map((e) => ({ content: e, type: 'text' })),
+      ],
     };
   },
-  name: page_name,
+  name: i18n().detail.exp_anal_title,
 };

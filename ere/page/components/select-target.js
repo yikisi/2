@@ -97,12 +97,12 @@ function get_suffix(cid, type) {
         content:
           races.length > 0
             ? [
-                {
-                  content: `${wins}/${races.length}`,
-                  title: `${races.length} 战 ${wins} 胜`,
-                },
+                di18n.race.get_titled_result_summary(
+                  races.length.toString(),
+                  wins.toString(),
+                ),
               ]
-            : '未出走',
+            : i18n().race.no_result,
         type: 'text',
       },
       {
