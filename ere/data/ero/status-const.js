@@ -38,16 +38,6 @@ pregnant_stage_names[1 << pregnant_stage_enum.pre_birth] =
   '迎接生命奇迹的时刻即将到来，该做好准备了';
 
 module.exports = {
-  breast_size: {
-    AA: '可爱',
-    A: '娇小',
-    B: '小巧',
-    C: '可人',
-    D: '臌胀',
-    E: '丰满',
-    F: '丰硕',
-    G: '硕大',
-  },
   hair_desc: [
     '稀疏的绒毛',
     '整齐的短毛',

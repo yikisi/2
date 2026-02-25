@@ -142,21 +142,22 @@ module.exports = {
     era.add(`exp:${did}:30`, 1);
   },
   /**
+   * TODO
    * @param {string} date
    * @param {number} cid
    * @param {number} amount
-   * @param {string} breast_desc
+   * @param {string} cup
    * @param {number} oid
    * @param {number} sid
    */
-  update_milk_exp(date, cid, amount, breast_desc, oid, sid) {
+  update_milk_exp(date, cid, amount, cup, oid, sid) {
     if (!era.get(`cstr:${cid}:初次授乳经历`)) {
-      era.set(`cstr:${cid}:初次授乳经历`, [
-        `${date}，让 `,
-        { c: oid },
-        ...(sid > 0 ? [' 与 ', { c: sid }] : []),
-        ` 第一次品尝了自己那对 ${breast_desc} 乳房中内容物的味道`,
-      ]);
+      era.set(`cstr:${cid}:初次授乳经历`, {
+        ...date,
+        c: oid,
+        cup,
+        s: sid > 0 ? sid : void 0,
+      });
     }
     const milk_list = [amount];
     if (sid > 0) {

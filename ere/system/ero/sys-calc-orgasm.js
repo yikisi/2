@@ -68,7 +68,7 @@ const {
 } = require('#/data/ero/part-const');
 const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const { stain_enum } = require('#/data/ero/stain-const');
-const { breast_size, pregnant_stage_enum } = require('#/data/ero/status-const');
+const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { get_breast_cup } = require('#/data/info-generator');
@@ -482,14 +482,7 @@ async function sys_calc_orgasm(shown, ...ids) {
             ) {
               loc.c.push((supporter = last_supporter));
             }
-            update_milk_exp(
-              date,
-              cid,
-              amount,
-              breast_size[cup <= 'G' ? cup : 'G'],
-              oid,
-              supporter,
-            );
+            update_milk_exp(date, cid, amount, cup, oid, supporter);
           } else if (touch.item === item_enum.milk_pump) {
             loc.i = touch.item;
             era.add(

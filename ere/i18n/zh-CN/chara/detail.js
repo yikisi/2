@@ -310,6 +310,94 @@ class I18nDetail {
   get_exp_mouth_drink_milk_count = (count) => ['饮用过 ', count, 'ml 乳汁'];
   get_exp_mouth_orgasm = (count) => ['因为快感去过 ', count, ' 次'];
 
+  exp_breast_title = '肉体情报【胸】';
+  exp_breast_summary_man = '健硕的胸肌';
+  exp_breast_nipple_pink = '粉色小草莓';
+  exp_breast_nipple_deep = '深色小樱桃';
+  exp_breast_nipple_inverted = '幽深火山湖';
+  get_exp_breast_summary_woman = (nipple, size) => [
+    '顶端是 ',
+    nipple,
+    ' 的 ',
+    size,
+    ' 乳房',
+  ];
+  exp_breast_gift_desc = '曲线优美的天赐丰乳，完美的弹性让任何访客流连忘返';
+  exp_breast_trained_desc =
+    '无论何时何地都能感觉到瘙痒和寂寞……已经是一对淫荡的乳房了';
+  exp_breast_milk = '如果前襟有些湿润………请不要怀疑，那只是汗液哦……';
+  exp_breast_milk_template =
+    '因为夹子的阻碍，现在蓄积了 %MILK%ml 乳汁……乳头好痛';
+  get_exp_breast_self_milk = (date, chara) => [
+    '在 ',
+    date,
+    ' 第一次自己爱抚了乳头，立起来了',
+  ];
+  get_exp_breast_be_milk = (date, chara) => [
+    '在 ',
+    date,
+    ' 第一次被 ',
+    chara,
+    ' 爱抚了乳头，立起来了',
+  ];
+  get_exp_breast_unknown_be_milk = (date, chara) => [
+    '实际上，那对胸部已经成为 ',
+    chara,
+    ' 的玩物了，从 ',
+    date,
+    ' 开始',
+  ];
+  get_exp_milk_count = (count) => ['被玩弄过 ', count, ' 次'];
+  get_exp_breast_tit_job = (date, chara) => [
+    chara,
+    ' 的肉棒会因为胸部兴奋，在 ',
+    date,
+    ' 学会了这一点',
+  ];
+  get_exp_breast_be_tit_job = (date, chara) => [
+    chara,
+    ' 的肉棒会因为胸部兴奋，在 ',
+    date,
+    ' 被教会了这一点',
+  ];
+  get_exp_breast_unknown_be_tit_job = (date, chara) => [
+    '实际上，在 ',
+    date,
+    ' 之后，胸部已经适应侍弄 ',
+    chara,
+    ' 的肉棒了，虽然本人并不知情',
+  ];
+  get_exp_breast_tit_job_count = (count) => ['抚慰过性器 ', count, ' 次'];
+  get_exp_breast_semen_count = (count) => ['沾染过 ', count, 'ml 精液'];
+  /**
+   * @param {string} date
+   * @param {PrintedSpan} chara
+   * @param _ 这个参数是第二参加者的占位符，不能删！
+   * @param {string} cup
+   * @returns {TextContent}
+   */
+  get_exp_breast_milking = (date, chara, _, cup) => [
+    date,
+    '，让 ',
+    chara,
+    ' 第一次品尝了自己那对 ',
+    cup,
+    ' 乳房中内容物的味道',
+  ];
+  get_exp_breast_double_milking = (date, chara, supporter, cup) => [
+    date,
+    '，让 ',
+    chara,
+    ' 与 ',
+    supporter,
+    ' 第一次品尝了自己那对 ',
+    cup,
+    ' 乳房中内容物的味道',
+  ];
+  get_exp_breast_milking_count = (count) => ['进行授乳 ', count, ' 次'];
+  get_exp_breast_milking_amount = (amount) => ['产出了 ', amount, 'ml 乳汁'];
+  get_exp_breast_orgasm = (count) => ['因为快感去了 ', count, ' 次'];
+
   human_info = '一介人类而已';
   no_reward_info = '还没有可称道的战绩';
   cannot_join_race_info = '不能出走比赛';

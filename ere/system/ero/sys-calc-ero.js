@@ -108,10 +108,7 @@ function sys_do_sex(atk, def, item) {
           era.add(`exp:${atk.id}:乳交次数`, 1);
           era.add(`exp:${def.id}:戳身体次数`, 1);
           if (!era.get(`cstr:${atk.id}:初次乳交经历`)) {
-            era.set(`cstr:${atk.id}:初次乳交经历`, [
-              { c: def.id },
-              ` 的肉棒会因为胸部兴奋，在 ${date} 学会了这一点`,
-            ]);
+            era.set(`cstr:${atk.id}:初次乳交经历`, { ...date, c: def.id });
           }
           atk_ex_buff += 2 * era.get(`talent:${atk.id}:妖乳`);
           change_cost(def.id, atk.id, part_enum.breast, dmg);
@@ -140,18 +137,16 @@ function sys_do_sex(atk, def, item) {
           era.add(`exp:${def.id}:挤奶次数`, 1);
           if (!era.get(`cstr:${def.id}:初次挤奶经历`)) {
             if (i_def_awake) {
-              era.set(`cstr:${def.id}:初次挤奶经历`, [
-                `在 ${date} 第一次`,
-                atk.id !== def.id ? '被 ' : ' ',
-                { c: atk.id },
-                ' 爱抚了乳头，立起来了',
-              ]);
+              era.set(`cstr:${def.id}:初次挤奶经历`, {
+                ...date,
+                be: atk.id !== def.id,
+                c: atk.id,
+              });
             } else if (!era.get(`cstr:${def.id}:无自觉初次挤奶经历`)) {
-              era.set(`cstr:${def.id}:无自觉初次挤奶经历`, [
-                '实际上，那对胸部已经成为 ',
-                { c: atk.id },
-                ` 的玩物了，从 ${date} 开始`,
-              ]);
+              era.set(`cstr:${def.id}:无自觉初次挤奶经历`, {
+                ...date,
+                c: atk.id,
+              });
             }
           }
           break;
@@ -376,16 +371,16 @@ function sys_do_sex(atk, def, item) {
           era.add(`exp:${def.id}:乳交次数`, 1);
           if (!era.get(`cstr:${def.id}:初次乳交经历`)) {
             if (i_def_awake) {
-              era.set(`cstr:${def.id}:初次乳交经历`, [
-                { c: atk.id },
-                ` 的肉棒会因为胸部兴奋，在 ${date} 被教会了这一点`,
-              ]);
+              era.set(`cstr:${def.id}:初次乳交经历`, {
+                ...date,
+                be: true,
+                c: atk.id,
+              });
             } else if (!era.get(`cstr:${def.id}:无自觉初次乳交经历`)) {
-              era.set(`cstr:${def.id}:无自觉初次乳交经历`, [
-                `实际上，在 ${date} 之后，胸部已经适应侍弄 `,
-                { c: atk.id },
-                ' 的肉棒了，虽然本人并不知情',
-              ]);
+              era.set(`cstr:${def.id}:无自觉初次乳交经历`, {
+                ...date,
+                c: atk.id,
+              });
             }
           }
           atk_ex_buff += 2 * era.get(`talent:${atk.id}:凶器`);

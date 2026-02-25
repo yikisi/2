@@ -37,8 +37,9 @@ module.exports = {
    * @param arr
    * @param {number} cid
    * @param {function} [callback]
+   * @param args
    */
-  get_filled_exp_str(arr, cid, callback) {
+  get_filled_exp_str(arr, cid, callback, ...args) {
     if (Array.isArray(arr)) {
       return arr.map((e) => {
         if (e.c >= 0) {
@@ -51,6 +52,7 @@ module.exports = {
         get_date(arr.y, arr.d, arr.w),
         sys_get_colored_full_callname(cid, arr.c),
         arr.s >= 0 && sys_get_colored_full_callname(cid, arr.s),
+        ...args,
       );
     }
     return arr;

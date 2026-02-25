@@ -123,7 +123,7 @@ module.exports = {
             get_filled_exp_str(
               blow_job_exp,
               chara.id,
-              blow_job_exp?.be
+              blow_job_exp.be
                 ? i18n().detail.get_exp_mouth_be_blow_job
                 : i18n().detail.get_exp_mouth_blow_job,
             ),

@@ -112,13 +112,22 @@ class I18nCharaFeature {
   p_color_1 = '泛紫';
   p_color_2 = '黝黑';
 
+  breast_AA = '可爱';
+  breast_A = '娇小';
+  breast_B = '小巧';
+  breast_C = '可人';
+  breast_D = '臌胀';
+  breast_E = '丰满';
+  breast_F = '丰硕';
+  breast_G = '硕大';
+
   penis_1 = '可怜';
   penis_2 = '寒酸';
   penis_3 = '健壮';
   penis_4 = '凶恶';
   penis_5 = '骇人';
-
   n_chara = '气性';
+
   'chara_-3' = '弱气';
   'chara_-2' = '胆小';
   'chara_-1' = '认真';

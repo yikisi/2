@@ -34,7 +34,6 @@ const { shop_result_type_enum } = require('#/data/ero/juel-const');
 const { mark_enum } = require('#/data/ero/mark-const');
 const { part_enum, part_names } = require('#/data/ero/part-const');
 const {
-  breast_size,
   pregnant_stage_enum,
   unexpected_pregnant_enum,
 } = require('#/data/ero/status-const');
@@ -254,15 +253,11 @@ class CustomizedEro extends CustomizedEvent {
         ' 的肉棒勃起了！',
       ]);
     } else if (extra_flag.part === part_enum.breast) {
-      let cup = get_breast_cup(this.id);
-      if (cup > 'G') {
-        cup = 'G';
-      }
       era.print([
         '深色的小樱桃在 ',
         chara.get_colored_name(),
         ' 两只 ',
-        breast_size[cup],
+        di18n.feature.get_breast_desc(get_breast_cup(chara.id)),
         ' 的乳房顶端探出了头……',
       ]);
     }

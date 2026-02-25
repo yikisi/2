@@ -7,17 +7,14 @@ const {
   remove_end_line_breaks,
 } = require('#/page/exp/snippets');
 
-const { join_to_string } = require('#/utils/list-utils');
+const { flat_join_list } = require('#/utils/list-utils');
+const { get_abbr_number } = require('#/utils/value-utils');
 
 const { sex_colors } = require('#/data/color-const');
-const { breast_size } = require('#/data/ero/status-const');
 const { get_breast_cup } = require('#/data/info-generator');
 
-const { i18n } = require('#/i18n/selector');
-
-const nipple_type = ['粉色小草莓', '深色小樱桃', '幽深火山湖'];
-
-const page_name = '肉体情报【胸】';
+const di18n = require('#/i18n/extended-def');
+const { i18n, lan } = require('#/i18n/selector');
 
 module.exports = {
   /**
@@ -26,43 +23,40 @@ module.exports = {
    * @returns {{print():*[]}}
    */
   generate: function (chara, flags) {
+    const _lan = lan();
     const breast_exp_list = [];
     if (flags.in_growth) {
       breast_exp_list.push(i18n().detail.growth_info);
     } else {
       if (flags.show_body) {
         if (chara.sex_code === 1) {
-          breast_exp_list.push('健硕的胸肌');
+          breast_exp_list.push(i18n().detail.exp_breast_summary_man);
         } else {
-          let cup = get_breast_cup(chara.id);
-          if (cup > 'G') {
-            cup = 'G';
-          }
           const n_type_code = era.get(`talent:${chara.id}:乳头类型`);
-          breast_exp_list.push([
-            '顶端是 ',
-            {
-              content: nipple_type[n_type_code],
-              color: sex_colors[Math.min(n_type_code, 1)],
-            },
-            ` 的 ${breast_size[cup]} 乳房`,
-          ]);
+          breast_exp_list.push(
+            i18n().detail.get_exp_breast_summary_woman(
+              {
+                content: di18n.detail.nipple_type[n_type_code],
+                color: sex_colors[Math.min(n_type_code, 1)],
+              },
+              di18n.feature.get_breast_desc(get_breast_cup(chara.id)),
+            ),
+          );
           if (era.get(`talent:${chara.id}:妖乳`)) {
-            breast_exp_list.push(
-              '曲线优美的天赐丰乳，完美的弹性让任何访客流连忘返……',
-            );
+            breast_exp_list.push(i18n().detail.exp_breast_gift_desc);
           }
           if (era.get(`talent:${chara.id}:淫乳`) === 2) {
-            breast_exp_list.push(
-              '无论何时何地都能感觉到瘙痒和寂寞……已经是一对淫荡的乳房了……',
-            );
+            breast_exp_list.push(i18n().detail.exp_breast_trained_desc);
           }
           if (era.get(`talent:${chara.id}:泌乳`)) {
             const tmp = era.get(`ex:${chara.id}:喷奶阻碍`);
             breast_exp_list.push(
-              '如果前襟有些湿润………请不要怀疑，那只是汗液哦' +
+              i18n().detail.exp_breast_milk +
                 (tmp && flags.mark_level === 3
-                  ? `；因为夹子的阻碍，现在蓄积了 ${tmp.toLocaleString()}ml 乳汁……乳头好痛……`
+                  ? i18n().detail.exp_breast_milk_template.replace(
+                      '%MILK%',
+                      Object(tmp).toLocaleString(_lan),
+                    )
                   : ''),
             );
           }
@@ -85,43 +79,73 @@ module.exports = {
             ),
             milking_exp = era.get(`cstr:${chara.id}:初次授乳经历`);
           if (milk_exp) {
-            breast_exp_list.push(get_filled_exp_str(milk_exp, chara.id));
+            breast_exp_list.push(
+              get_filled_exp_str(
+                milk_exp,
+                chara.id,
+                milk_exp.be
+                  ? i18n().detail.get_exp_breast_be_milk
+                  : i18n().detail.get_exp_breast_self_milk,
+              ),
+            );
           }
           if (flags.show_all_exp || milk_exp) {
             if (unknown_milk_exp) {
               breast_exp_list.push(
-                get_filled_exp_str(unknown_milk_exp, chara.id),
+                get_filled_exp_str(
+                  unknown_milk_exp,
+                  chara.id,
+                  i18n().detail.get_exp_breast_unknown_be_milk,
+                ),
               );
             }
             if (breast_touched_count) {
               breast_exp_list.push(
-                `被玩弄过 ${breast_touched_count.toLocaleString()} 次`,
+                i18n().detail.get_exp_milk_count(
+                  get_abbr_number(breast_touched_count),
+                ),
               );
             }
           }
           push_link_break(breast_exp_list);
 
           if (tit_job_exp) {
-            breast_exp_list.push(get_filled_exp_str(tit_job_exp, chara.id));
+            breast_exp_list.push(
+              get_filled_exp_str(
+                tit_job_exp,
+                chara.id,
+                tit_job_exp.be
+                  ? i18n().detail.get_exp_breast_be_tit_job
+                  : i18n().detail.get_exp_breast_tit_job,
+              ),
+            );
           }
           if (flags.show_all_exp || tit_job_exp) {
             if (unknown_tit_job_exp) {
               breast_exp_list.push(
-                get_filled_exp_str(unknown_tit_job_exp, chara.id),
+                get_filled_exp_str(
+                  unknown_tit_job_exp,
+                  chara.id,
+                  i18n().detail.get_exp_breast_unknown_be_tit_job,
+                ),
               );
             }
             if (tit_job_count || breast_semen) {
               breast_exp_list.push(
-                join_to_string(
+                flat_join_list(
                   [
-                    tit_job_count
-                      ? `抚慰过性器 ${tit_job_count.toLocaleString()} 次`
-                      : '',
-                    breast_semen
-                      ? `沾染过 ${breast_semen.toLocaleString()}ml 精液`
-                      : '',
+                    tit_job_count > 0
+                      ? i18n().detail.get_exp_breast_tit_job_count(
+                          get_abbr_number(tit_job_count),
+                        )
+                      : void 0,
+                    breast_semen > 0
+                      ? i18n().detail.get_exp_breast_semen_count(
+                          get_abbr_number(breast_semen),
+                        )
+                      : void 0,
                   ],
-                  '，',
+                  i18n().ui_comma,
                 ),
               );
             }
@@ -129,20 +153,33 @@ module.exports = {
           push_link_break(breast_exp_list);
 
           if (milking_exp) {
-            breast_exp_list.push(get_filled_exp_str(milking_exp, chara.id));
+            breast_exp_list.push(
+              get_filled_exp_str(
+                milking_exp,
+                chara.id,
+                milking_exp.s > 0
+                  ? i18n().detail.get_exp_breast_double_milking
+                  : i18n().detail.get_exp_breast_milking,
+                di18n.feature.get_breast_desc(milking_exp.cup),
+              ),
+            );
           }
           if (milking_count || milk_amount) {
             breast_exp_list.push(
-              join_to_string(
+              flat_join_list(
                 [
-                  milking_count
-                    ? `进行授乳 ${milking_count.toLocaleString()} 次`
-                    : '',
-                  milk_amount
-                    ? `产出了 ${milk_amount.toLocaleString()}ml 乳汁`
-                    : '',
+                  milking_count > 0
+                    ? i18n().detail.get_exp_breast_milking_count(
+                        get_abbr_number(milking_count),
+                      )
+                    : void 0,
+                  milk_amount > 0
+                    ? i18n().detail.get_exp_breast_milking_amount(
+                        get_abbr_number(milk_amount),
+                      )
+                    : void 0,
                 ],
-                '，',
+                i18n().ui_comma,
               ),
             );
           }
@@ -150,7 +187,9 @@ module.exports = {
 
           if (breast_orgasm_count) {
             breast_exp_list.push(
-              `因为快感去了 ${breast_orgasm_count.toLocaleString()} 次`,
+              i18n().detail.get_exp_breast_orgasm(
+                get_abbr_number(breast_orgasm_count),
+              ),
             );
           }
         }
@@ -160,18 +199,17 @@ module.exports = {
       remove_end_line_breaks(breast_exp_list);
     }
     return {
-      print() {
-        return [
-          {
-            type: 'divider',
-            config: { content: page_name, position: 'left' },
+      print: () => [
+        {
+          type: 'divider',
+          config: {
+            content: i18n().detail.exp_breast_title,
+            position: 'left',
           },
-          ...breast_exp_list.map((e) => {
-            return { content: e, type: 'text' };
-          }),
-        ];
-      },
+        },
+        ...breast_exp_list.map((e) => ({ content: e, type: 'text' })),
+      ],
     };
   },
-  name: page_name,
+  name: i18n().detail.exp_breast_title,
 };

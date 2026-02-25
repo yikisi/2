@@ -278,6 +278,9 @@ const di18n = {
       const _ = i18n().feature;
       return [_.p_color_0, _.p_color_1, _.p_color_2];
     },
+    get_breast_desc(cup) {
+      return __(`feature.breast_${cup}`, i18n().feature.breast_G);
+    },
     get n_penis() {
       const _ = i18n().feature;
       return ['', _.penis_1, _.penis_2, _.penis_3, _.penis_4, _.penis_5];
@@ -320,6 +323,14 @@ const di18n = {
         case 3:
           return _.exp_mouth_poisoned_both;
       }
+    },
+    get nipple_type() {
+      const _ = i18n().detail;
+      return [
+        _.exp_breast_nipple_pink,
+        _.exp_breast_nipple_deep,
+        _.exp_breast_nipple_inverted,
+      ];
     },
   },
   kojo: {
