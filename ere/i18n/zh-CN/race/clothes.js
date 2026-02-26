@@ -258,6 +258,7 @@ class I18nClothes {
   112401 = 'POPPING!';
   112410 = '晓光';
   112701 = '义心黑焰';
+  112901 = 'The Changer';
   113101 = 'Smile My Way!';
   113201 = '9927 Wishes';
   113202 = 'New Scenario';

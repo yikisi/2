@@ -26,11 +26,11 @@
 角色Flag,胸围,86
 角色Flag,腰围,56
 角色Flag,臀围,84
-角色Flag,肤色深度,-1
+角色Flag,肤色深度,0
 角色Str,发色,green
 角色Str,前发,even_bangs
 角色Str,中发,
-角色Str,后发,
+角色Str,后发,long_straight
 角色Str,呆毛,white
 角色Str,毛色,kurokage
 角色Str,流星形状,无
