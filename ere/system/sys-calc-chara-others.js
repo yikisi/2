@@ -30,7 +30,7 @@ const {
 } = require('#/data/info-generator');
 const LoveLimitStatus = require('#/data/love-limit-status');
 
-const { __ } = require('#/i18n/selector');
+const { __, i18n } = require('#/i18n/selector');
 
 /**
  * @param {number} lover
@@ -182,26 +182,26 @@ function like_chara(target, aim, val, shown = true, extra_love = 0) {
     if (shown) {
       const r_info = get_relation_info(target, aim, _new);
       ret = true;
-      era.print([
-        get_chara_talk(target).get_colored_name(),
-        ' 对 ',
-        get_chara_talk(aim).get_colored_name(),
-        ' 的好感',
-        val > 0
-          ? {
-              color: attr_change_colors.up,
-              content: ' 提高 ',
-            }
-          : {
-              color: attr_change_colors.down,
-              content: ' 降低 ',
-            },
-        `了 ${r_info.level === -1 ? '?' : val > 0 ? val : -val}！现在为：`,
-        {
-          content: r_info.full(),
-          color: relation_colors[r_info.level],
-        },
-      ]);
+      era.print(
+        i18n().get_ui_change_relation(
+          get_chara_talk(target).get_colored_name(),
+          get_chara_talk(aim).get_colored_name(),
+          val > 0
+            ? {
+                color: attr_change_colors.up,
+                content: i18n().ui_increase,
+              }
+            : {
+                color: attr_change_colors.down,
+                content: i18n().ui_decrease,
+              },
+          r_info.level === -1 ? i18n().ui_unknown_value : val > 0 ? val : -val,
+          {
+            content: r_info.full(),
+            color: relation_colors[r_info.level],
+          },
+        ),
+      );
     }
   }
   if (love > 0 && love_uma(target, love, shown)) {
@@ -318,23 +318,21 @@ function get_callname(_from, _to) {
 function print_change(cid, old_val, new_val, shown = true) {
   if (shown && old_val !== new_val) {
     const love = [get_love_info(cid, old_val), get_love_info(cid, new_val)];
-    era.print([
-      get_chara_talk(cid).get_colored_name(),
-      ' 对 ',
-      get_chara_talk(0).get_colored_name(),
-      ' 的爱慕',
-      { content: ' 提高 ', color: love_colors[love[0].level] },
-      '了 ',
-      {
-        content: love[1].level === -1 ? '?' : new_val - old_val,
-        color: palam_colors.notifications[1],
-      },
-      '！现在为：',
-      {
-        content: love[1].full(),
-        color: love_colors[love[1].level],
-      },
-    ]);
+    era.print(
+      i18n().get_ui_change_love(
+        get_chara_talk(cid).get_colored_name(),
+        get_chara_talk(0).get_colored_name(),
+        { content: i18n().ui_increase, color: love_colors[love[0].level] },
+        {
+          content: love[1].level === -1 ? '?' : new_val - old_val,
+          color: palam_colors.notifications[1],
+        },
+        {
+          content: love[1].full(),
+          color: love_colors[love[1].level],
+        },
+      ),
+    );
     return true;
   }
 }

@@ -1,9 +1,14 @@
 class I18nSkills {
+  n_type = '技能类型';
   n_t_buff = '常时';
   n_t_heal = '恢复';
   n_t_speed = '增幅';
   n_t_control = '控制';
   n_t_debuff = '劣势';
+
+  n_ground = '场地类型';
+  n_dis = '距离类型';
+  n_style = '策略类型';
 
   r_normal = '普通';
   r_advanced = '传说';
@@ -13,6 +18,7 @@ class I18nSkills {
   r_ero_normal = '普通 · 调教';
   r_ero_advanced = '强化 · 调教';
 
+  n_ability = '效果类型';
   t_speed = '速度';
   t_stamina = '耐力';
   t_power = '力量';
@@ -31,6 +37,8 @@ class I18nSkills {
 
   tag_template = '＜%TAG%＞';
   title_template = '【%NAME%】（%TYPE% · %RARITY%）';
+  learnt = '[已习得]';
+  price_template = '%PRICE% PT';
 
   100039 = '没有舞步，我依然……';
   100601 = '一定就在前方……！';

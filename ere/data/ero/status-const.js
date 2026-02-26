@@ -20,9 +20,9 @@ const pregnant_stage_enum = {
   late: 0,
   pre_birth: 0,
 };
-Object.keys(pregnant_stage_enum).forEach((e, i) => {
-  pregnant_stage_enum[e] = i;
-});
+Object.keys(pregnant_stage_enum).forEach(
+  (e, i) => (pregnant_stage_enum[e] = i),
+);
 
 module.exports = {
   pregnant_stage_enum,

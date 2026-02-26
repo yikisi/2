@@ -320,7 +320,7 @@ async function race_page(race) {
         [-get_random_value(150, 250, true), -get_random_value(150, 250, true)],
       );
     } else {
-      get_attr_and_print_in_event(id, undefined, 10);
+      get_attr_and_print_in_event(id, void 0, 10);
       get_skills_and_print_in_event(id, [200302]) ||
         get_skills_and_print_in_event(id, [200301]);
     }

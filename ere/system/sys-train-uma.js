@@ -2,8 +2,6 @@
 
 const { sys_get_chara } = require('#/system/chara/sys-calc-characteristic');
 const sys_hurt_uma = require('#/system/chara/sys-hurt-uma');
-const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
-const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const {
   sys_get_motivation,
   sys_get_succ_rate,
@@ -12,8 +10,8 @@ const { sys_change_fame } = require('#/system/sys-calc-flag');
 
 const { get_custom_edu, run_custom_edu } = require('#/event/edu/edu-factory');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
+const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
 const CharaInmon = require('#/data/ero/chara-inmon');
@@ -31,6 +29,7 @@ const { location_enum } = require('#/data/locations');
 const { attr_enum, fumble_border, time_cost } = require('#/data/train-const');
 
 const di18n = require('#/i18n/extended-def');
+const { i18n } = require('#/i18n/selector');
 
 /**
  * @param {number} cid
@@ -145,7 +144,7 @@ function get_success_base_reward(
  * @param {{teach_chara:number}} [between_weeks]
  */
 function get_train_bonus(cid, attr, between_weeks) {
-  // CFLAGNAME:45 = 训练加成
+  // CFLAGNAME:45 = 位置
   const c_loc = era.get(`cflag:${cid}:45`);
   const inmon = CharaInmon.get(cid);
   let train_buff =
@@ -201,10 +200,15 @@ function get_train_bonus(cid, attr, between_weeks) {
  * EXPNAME:5 - 9 = 速度训练经验 - 智力训练经验
  * @param {number} cid
  * @param {number} train
+ * @param {number} [cur_level]
  * @returns {boolean}
  */
-function update_train_level(cid, train) {
-  if (era.get(`abl:${cid}:${train}`) < 5) {
+function update_train_level(
+  cid,
+  train,
+  cur_level = era.get(`abl:${cid}:${train}`),
+) {
+  if (cur_level < 5) {
     era.add(`abl:${cid}:${train}`, 1);
     era.set(`exp:${cid}:${5 + train}`, 0);
     return true;
@@ -225,7 +229,6 @@ module.exports = {
   async train_uma(cid, attr, extra_buff) {
     // CFLAGNAME:41 = 自主训练
     era.set(`cflag:${cid}:41`, 0);
-    const buffer = [];
     const changes = { attr_change: new Array(5).fill(0), pt_change: 0 };
     const t_level =
       // CFLAGNAME:45 = 位置
@@ -244,14 +247,14 @@ module.exports = {
       // BASENAME:0 = 体力
       era.get(`base:${cid}:0`) / era.get(`maxbase:${cid}:0`);
     const succ_rate = sys_get_succ_rate(cid, attr, extra_buff);
-    const f_succ = Math.random() * 100 < succ_rate;
+    const is_succ = Math.random() * 100 < succ_rate;
 
     if (await get_custom_edu(cid).train(attr)) {
       return;
     }
     era.println();
 
-    if (f_succ) {
+    if (is_succ) {
       // 训练成功时的处理（成功才扣体力）
       get_success_base_reward(
         cid,
@@ -290,26 +293,6 @@ module.exports = {
       }
 
       relation_change += 2;
-
-      // 结算训练等级变动
-      const exp = add_train_exp(
-        cid,
-        attr,
-        // CFLAGNAME:25 - 29 = 速度加成 - 智力加成
-        Math.max(era.get(`cflag:${cid}:${25 + attr}`) + 100, 50),
-      );
-
-      if (
-        exp >= 800 &&
-        exp >= t_level * 800 + get_random_value(0, 800) &&
-        update_train_level(cid, attr)
-      ) {
-        buffer.push({
-          config: { offset: 1, width: 23 },
-          content: `${di18n.n_attr[attr]}训练 变得更擅长了！`,
-          type: 'text',
-        });
-      }
     } else {
       switch (attr) {
         case attr_enum.toughness:
@@ -334,100 +317,52 @@ module.exports = {
       }
     }
 
-    const chara = get_chara_talk(cid);
-    const me = cid === 0 ? chara : get_chara_talk(0);
-    // 无论成功与否都会扣去精力（=时间）
-    if (cid > 0) {
-      // 训自己不额外消耗时间
-      era.print([
-        me.get_colored_name(),
-        ' 的 ',
-        ...sys_change_attr_and_print(0, attr_enum.tp, t_cost.time / 2),
-      ]);
-    }
     const i_t3 = CharaInmon.get(cid).on(plugin_enum.tra_3);
-    if (i_t3) {
-      t_cost.stamina = -era.get(`base:${cid}:0`);
-      t_cost.time = -era.get(`base:${cid}:1`);
-    }
-    let to_print = [
-      sys_change_attr_and_print(cid, attr_enum.hp, t_cost.stamina),
-      sys_change_attr_and_print(cid, attr_enum.tp, t_cost.time),
-    ];
-    era.print(
-      [
-        chara.get_colored_name(),
-        ' 的 ',
-        ...to_print[0],
-        to_print[0].length && to_print[1].length ? '，' : undefined,
-        ...to_print[1],
-      ].filter((e) => e),
-    );
-    sys_like_chara(cid, 0, relation_change);
 
     // 结算数值变动
-    changes.attr_change
-      .map(
-        (stat) =>
-          stat &&
-          (stat > 0
-            ? Math.max(stat, 1)
-            : // FLAGNAME:101 = 训练加成
-              Math.min((stat * (100 - era.get('flag:101'))) / 100, -1)),
-      )
-      .forEach((stat, index) => {
-        const to_print = sys_change_attr_and_print(cid, index, stat);
-        if (to_print.length) {
-          buffer.push({
-            config: { offset: 1, width: 23 },
-            content: to_print,
-            type: 'text',
-          });
-        }
-      });
-    if (changes.pt_change) {
-      buffer.push({
-        config: { offset: 1, width: 23 },
-        content: `获得了 ${changes.pt_change.toLocaleString()} 点技能点数`,
-        type: 'text',
-      });
-      // EXPNAME:1 = 技能点数
-      era.add(`exp:${cid}:1`, changes.pt_change);
+    all_reward_in_event(cid, {
+      attr: changes.attr_change.map(
+        (stat) => stat && (stat > 0 ? Math.max(stat, 1) : Math.min(stat, -1)),
+      ),
+      base: i_t3
+        ? [-era.get(`base:${cid}:0`), -era.get(`base:${cid}:1`)]
+        : [t_cost.stamina, t_cost.time],
+      pt: changes.pt_change,
+      relation: relation_change,
+    });
+    if (is_succ) {
+      // 结算训练等级变动
+      const exp = add_train_exp(
+        cid,
+        attr,
+        // CFLAGNAME:25 - 29 = 速度加成 - 智力加成
+        Math.max(era.get(`cflag:${cid}:${25 + attr}`) + 100, 50),
+      );
+      if (
+        exp >= 800 &&
+        exp >= t_level * 800 + get_random_value(0, 800) &&
+        update_train_level(cid, attr, t_level)
+      ) {
+        era.print(
+          i18n().ui_train_level_up_template.replace(
+            '%ATTR%',
+            di18n.n_attr[attr],
+          ),
+          { offset: 1, width: 23 },
+        );
+      }
     }
-    if (
-      f_succ &&
-      cid > 0 &&
-      (to_print = sys_change_attr_and_print(
-        0,
-        attr_enum.intelligence,
-        get_random_value(1, 2),
-      )).length
-    ) {
-      era.print([
-        { isBr: true },
-        get_chara_talk(0).get_colored_name(),
-        ' 的 ',
-        ...to_print,
-      ]);
-    }
-    if (buffer.length) {
-      era.printMultiColumns([
-        {
-          content: [
-            { isBr: true },
-            `经过训练，`,
-            chara.get_colored_name(),
-            ' 的属性有了如下变化：',
-          ],
-          type: 'text',
-        },
-        ...buffer,
-      ]);
+    if (cid > 0) {
+      all_reward_in_event(0, {
+        attr: is_succ ? [0, 0, 0, 0, get_random_value(1, 2)] : void 0,
+        base: [0, t_cost.time / 2],
+      });
     }
     if (i_t3) {
       sys_hurt_uma(cid, 1);
       sys_change_fame(-1);
     }
+
     // STATUSNAME:0 = 练习X手
     if (era.get(`status:${cid}:0`) > 0) {
       era.add(`status:${cid}:0`, -1);

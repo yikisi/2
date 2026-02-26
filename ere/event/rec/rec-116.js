@@ -130,11 +130,10 @@ module.exports = class extends CustomizedRecruit {
 
   async recruit(stage, ebj) {
     const donna = get_chara_talk(this.id);
-    const me = get_chara_talk(0);
     if (stage === event_hooks.recruit) {
-      await this.footprint(donna, me);
+      await this.footprint(donna);
     } else if (ebj && this[ebj.arg]) {
-      await this[ebj.arg].call(this, donna, me);
+      await this[ebj.arg].call(this, donna);
     }
   }
 };

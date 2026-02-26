@@ -18,7 +18,7 @@ const game_guides = require('#/event/others/game-guides');
 const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
-const { sort_list } = require('#/utils/list-utils');
+const { flat_join_list, sort_list } = require('#/utils/list-utils');
 const { get_abbr_number } = require('#/utils/value-utils');
 
 const CharaAvailableSkills = require('#/data/chara-available-skills');
@@ -43,6 +43,7 @@ const { attr_enum, time_cost } = require('#/data/train-const');
 const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
+// 感谢辛烈治先生吧，原谅我用了他最讨厌的人的数字和他的数字相乘
 const skill_limit = 27;
 
 /**
@@ -118,7 +119,7 @@ function get_skill_buffer(chara_id, skill_control, pt, discount) {
                   align: 'right',
                   width: 8,
                 },
-                content: '[已习得]',
+                content: i18n().skill.learnt,
                 type: 'text',
               }
             : {
@@ -128,7 +129,10 @@ function get_skill_buffer(chara_id, skill_control, pt, discount) {
                   showAcc: got_skills[s] !== 1,
                   width: 8,
                 },
-                content: `${price} PT`,
+                content: i18n().skill.price_template.replace(
+                  '%PRICE%',
+                  price.toString(),
+                ),
                 type: 'button',
               },
         ],
@@ -181,8 +185,8 @@ module.exports = async () => {
       const chara_score = get_chara_score(cid);
       let chara_level = get_rank_level(chara_score);
       columns.push(
-        { config: { content: '基础能力' }, type: 'divider' },
-        { config: { width: 4 }, content: '评价', type: 'text' },
+        { config: { content: i18n().ui_train_base }, type: 'divider' },
+        { config: { width: 4 }, content: i18n().ui_train_score, type: 'text' },
         {
           config: {
             color: adaptability_colors[chara_level],
@@ -194,7 +198,7 @@ module.exports = async () => {
         },
         {
           config: { align: 'right', width: 12 },
-          content: '技能点数',
+          content: i18n().ui_train_pt,
           type: 'text',
         },
         {
@@ -244,114 +248,71 @@ module.exports = async () => {
         {
           columns: [
             {
-              config: { content: '比赛能力' },
+              config: { content: i18n().ui_train_race },
               type: 'divider',
             },
             {
               config: { width: 3 },
-              content: '场地适性',
+              content: i18n().ui_train_adapt_track,
               type: 'text',
             },
             {
               config: { width: 4 },
-              content: [
-                i18n().race.g_a_grass,
-                {
-                  color: adaptability_colors[adaptivity[0]],
-                  content: get_adaptability_rank(adaptivity[0]),
-                  fontWeight: 'bold',
-                },
-                '·',
-                i18n().race.g_a_dirt,
-                {
-                  color: adaptability_colors[adaptivity[1]],
-                  content: get_adaptability_rank(adaptivity[1]),
-                  fontWeight: 'bold',
-                },
-              ],
+              content: flat_join_list(
+                di18n.race.a_ground.map((n, i) => [
+                  n,
+                  {
+                    color: adaptability_colors[adaptivity[i]],
+                    content: get_adaptability_rank(adaptivity[i]),
+                    fontWeight: 'bold',
+                  },
+                ]),
+                i18n().ui_train_adapt_ui_conjunction,
+              ),
               type: 'text',
             },
             {
               config: { width: 3 },
-              content: '距离适性',
+              content: i18n().ui_train_adapt_dis,
               type: 'text',
             },
             {
               config: { width: 6 },
-              content: [
-                i18n().race.d_a_short,
-                {
-                  color: adaptability_colors[adaptivity[2]],
-                  content: get_adaptability_rank(adaptivity[2]),
-                  fontWeight: 'bold',
-                },
-                '·',
-                i18n().race.d_a_mile,
-                {
-                  color: adaptability_colors[adaptivity[3]],
-                  content: get_adaptability_rank(adaptivity[3]),
-                  fontWeight: 'bold',
-                },
-                '·',
-                i18n().race.d_a_medium,
-                {
-                  color: adaptability_colors[adaptivity[4]],
-                  content: get_adaptability_rank(adaptivity[4]),
-                  fontWeight: 'bold',
-                },
-                '·',
-                i18n().race.d_a_long,
-                {
-                  color: adaptability_colors[adaptivity[5]],
-                  content: get_adaptability_rank(adaptivity[5]),
-                  fontWeight: 'bold',
-                },
-              ],
+              content: flat_join_list(
+                di18n.race.a_distance.map((n, i) => [
+                  n,
+                  {
+                    color: adaptability_colors[adaptivity[2 + i]],
+                    content: get_adaptability_rank(adaptivity[2 + i]),
+                    fontWeight: 'bold',
+                  },
+                ]),
+                i18n().ui_train_adapt_ui_conjunction,
+              ),
               type: 'text',
             },
             {
               config: { width: 3 },
-              content: '跑法适性',
+              content: i18n().ui_train_adapt_style,
               type: 'text',
             },
             {
               config: { width: 5 },
-              content: [
-                i18n().race.s_a_nige,
-                {
-                  color: adaptability_colors[adaptivity[6]],
-                  content: get_adaptability_rank(adaptivity[6]),
-                  fontWeight: 'bold',
-                },
-                '·',
-                i18n().race.s_a_senko,
-
-                {
-                  color: adaptability_colors[adaptivity[7]],
-                  content: get_adaptability_rank(adaptivity[7]),
-                  fontWeight: 'bold',
-                },
-                '·',
-                i18n().race.s_a_sashi,
-
-                {
-                  color: adaptability_colors[adaptivity[8]],
-                  content: get_adaptability_rank(adaptivity[8]),
-                  fontWeight: 'bold',
-                },
-                '·',
-                i18n().race.s_a_okimi,
-
-                {
-                  color: adaptability_colors[adaptivity[9]],
-                  content: get_adaptability_rank(adaptivity[9]),
-                  fontWeight: 'bold',
-                },
-              ],
+              content: flat_join_list(
+                di18n.race.a_style.map((n, i) => [
+                  n,
+                  {
+                    color: adaptability_colors[adaptivity[6 + i]],
+                    content: get_adaptability_rank(adaptivity[6 + i]),
+                    fontWeight: 'bold',
+                  },
+                ]),
+                i18n().ui_train_adapt_ui_conjunction,
+              ),
               type: 'text',
             },
             {
-              config: { content: '习得技能' },
+              config: { content: i18n().ui_train_adapt_skills },
               type: 'divider',
             },
             ...skill_control.get().map((e) => ({
@@ -370,7 +331,7 @@ module.exports = async () => {
       {
         accelerator: 100,
         config: { width: 4 },
-        content: '查看队伍列表',
+        content: i18n().ui_show_team,
         type: 'button',
       },
       ...(train_list.length > 1
@@ -378,13 +339,13 @@ module.exports = async () => {
             {
               accelerator: 101,
               config: { width: 4, disabled: index === 0 },
-              content: '上一位',
+              content: i18n().ui_ch_prev,
               type: 'button',
             },
             {
               accelerator: 102,
               config: { width: 4, disabled: index === train_list.length - 1 },
-              content: '下一位',
+              content: i18n().ui_ch_next,
               type: 'button',
             },
           ]
@@ -407,8 +368,8 @@ module.exports = async () => {
                 cid === 0 &&
                 skill_control.get().filter((e) => !skills_dict[e].is_generated)
                   .length >= skill_limit
-                  ? '重置技能'
-                  : '学习技能',
+                  ? i18n().ui_train_reset_skill
+                  : i18n().ui_train_learn_skill,
               type: 'button',
             },
           ]
@@ -442,14 +403,18 @@ module.exports = async () => {
               chara_stamina === 0 ||
               !train_enabled,
           },
-          content: `${di18n.n_attr[i]}训练 Lv.${train_level}\n成功率：${
-            train_level ? sys_get_succ_rate(cid, i, extra_buff) : 0
-          }%`,
+          content: i18n()
+            .ui_train_with_s_rate_template.replace('%ATTR%', di18n.n_attr[i])
+            .replace('%LEVEL%', train_level.toString())
+            .replace(
+              '%SUCCESS%',
+              train_level > 0 ? sys_get_succ_rate(cid, i, extra_buff) : '0',
+            ),
           type: 'button',
         };
       }),
     );
-    era.printButton('返回', 999);
+    era.printButton(i18n().ui_back, 999);
 
     const ret = await era.input();
     let flag_skill = true;
@@ -476,7 +441,7 @@ module.exports = async () => {
           skill_control.get().filter((e) => !skills_dict[e].is_generated)
             .length >= skill_limit
         ) {
-          if (await select_yes_or_no('要使用 100 点技能点数重置技能吗？')) {
+          if (await select_yes_or_no(i18n().ui_train_reset_skill_confirm)) {
             era.add('exp:0:技能点数', -100);
             const generated_skills = skill_control
               .get()
@@ -533,7 +498,10 @@ module.exports = async () => {
               [
                 {
                   config: {
-                    content: `为 ${get_chara_talk(cid).get_full_name()} 选择技能`,
+                    content: i18n().ui_train_skill_header_template.replace(
+                      '%NAME%',
+                      get_chara_talk(cid).full_name,
+                    ),
                   },
                   type: 'divider',
                 },
@@ -552,12 +520,17 @@ module.exports = async () => {
                         disabled: page === 1,
                         width: 4,
                       },
-                      content: '上一页',
+                      content: i18n().ui_pg_prev,
                       type: 'button',
                     },
                     {
                       config: { align: 'center', width: 6 },
-                      content: `第 ${page} 页 / 共 ${max_page} 页`,
+                      content: i18n()
+                        .ui_pagination_template.replace(
+                          '%CURR%',
+                          page.toString(),
+                        )
+                        .replace('%TOTAL%', max_page.toString()),
                       type: 'text',
                     },
                     {
@@ -567,7 +540,7 @@ module.exports = async () => {
                         disabled: page === max_page,
                         width: 4,
                       },
-                      content: '下一页',
+                      content: i18n().ui_pg_next,
                       type: 'button',
                     },
                   ],
@@ -577,10 +550,10 @@ module.exports = async () => {
                     [
                       {
                         config: { width: 3 },
-                        content: '技能类型',
+                        content: i18n().skill.n_type,
                         type: 'text',
                       },
-                      ...['全部', ...di18n.skill.n_type.slice(0, 4)].map(
+                      ...[i18n().ui_all, ...di18n.skill.n_type.slice(0, 4)].map(
                         (e, i) => ({
                           accelerator: 930 + i,
                           config: {
@@ -596,60 +569,67 @@ module.exports = async () => {
                     [
                       {
                         config: { width: 3 },
-                        content: '场地类型',
+                        content: i18n().skill.n_ground,
                         type: 'text',
                       },
-                      ...['全部', ...di18n.n_adapt.slice(0, 2)].map((e, i) => ({
-                        accelerator: 940 + i,
-                        config: {
-                          buttonType:
-                            i === ground_filter + 1 ? 'warning' : 'info',
-                          width: 3,
-                        },
-                        content: e,
-                        type: 'button',
-                      })),
+                      ...[i18n().ui_all, ...di18n.n_adapt.slice(0, 2)].map(
+                        (e, i) => ({
+                          accelerator: 940 + i,
+                          config: {
+                            buttonType:
+                              i === ground_filter + 1 ? 'warning' : 'info',
+                            width: 3,
+                          },
+                          content: e,
+                          type: 'button',
+                        }),
+                      ),
                     ],
                     [
                       {
                         config: { width: 3 },
-                        content: '距离类型',
+                        content: i18n().skill.n_dis,
                         type: 'text',
                       },
-                      ...['全部', ...di18n.n_adapt.slice(2, 6)].map((e, i) => ({
-                        accelerator: 950 + i,
-                        config: {
-                          buttonType: i === dis_filter + 1 ? 'warning' : 'info',
-                          width: 3,
-                        },
-                        content: e,
-                        type: 'button',
-                      })),
+                      ...[i18n().ui_all, ...di18n.n_adapt.slice(2, 6)].map(
+                        (e, i) => ({
+                          accelerator: 950 + i,
+                          config: {
+                            buttonType:
+                              i === dis_filter + 1 ? 'warning' : 'info',
+                            width: 3,
+                          },
+                          content: e,
+                          type: 'button',
+                        }),
+                      ),
                     ],
                     [
                       {
                         config: { width: 3 },
-                        content: '策略类型',
+                        content: i18n().skill.n_style,
                         type: 'text',
                       },
-                      ...['全部', ...di18n.n_adapt.slice(6)].map((e, i) => ({
-                        accelerator: 960 + i,
-                        config: {
-                          buttonType:
-                            i === style_filter + 1 ? 'warning' : 'info',
-                          width: 3,
-                        },
-                        content: e,
-                        type: 'button',
-                      })),
+                      ...[i18n().ui_all, ...di18n.n_adapt.slice(6)].map(
+                        (e, i) => ({
+                          accelerator: 960 + i,
+                          config: {
+                            buttonType:
+                              i === style_filter + 1 ? 'warning' : 'info',
+                            width: 3,
+                          },
+                          content: e,
+                          type: 'button',
+                        }),
+                      ),
                     ],
                     [
                       {
                         config: { width: 3 },
-                        content: '效果类型',
+                        content: i18n().skill.n_ability,
                         type: 'text',
                       },
-                      ...['全部', ...di18n.skill.n_tag].map((e, i) => ({
+                      ...[i18n().ui_all, ...di18n.skill.n_tag].map((e, i) => ({
                         accelerator: 970 + i,
                         config: {
                           buttonType:
@@ -665,7 +645,9 @@ module.exports = async () => {
               [
                 {
                   config: { width: 12 },
-                  content: ['技能点数：', pt.toString()],
+                  content: i18n().get_ui_train_skill_pt_info(
+                    get_abbr_number(pt),
+                  ),
                   type: 'text',
                 },
                 ...(enable_filter
@@ -673,7 +655,7 @@ module.exports = async () => {
                       {
                         accelerator: 997,
                         config: { width: 3 },
-                        content: '重置',
+                        content: i18n().ui_reset,
                         type: 'button',
                       },
                     ]
@@ -684,13 +666,15 @@ module.exports = async () => {
                     buttonType: enable_filter ? 'warning' : 'info',
                     width: 6,
                   },
-                  content: enable_filter ? '打开筛选器' : '关闭筛选器',
+                  content: enable_filter
+                    ? i18n().ui_train_skill_enable_filter
+                    : i18n().ui_train_skill_disable_filter,
                   type: 'button',
                 },
                 {
                   accelerator: 999,
                   config: { width: 3 },
-                  content: '结束',
+                  content: i18n().ui_back,
                   type: 'button',
                 },
               ],
@@ -737,14 +721,14 @@ module.exports = async () => {
                       )
                   ];
               if (
-                await select_yes_or_no([
-                  '要学习',
-                  ...skill.get_colored_name(),
-                  '吗？',
-                  ...(to_remove
-                    ? ['将取代', ...to_remove.get_colored_name(), '。']
-                    : []),
-                ])
+                await select_yes_or_no(
+                  to_remove
+                    ? i18n().get_ui_train_learn_skill(skill.get_colored_name())
+                    : i18n().get_ui_train_replace_skill(
+                        skill.get_colored_name(),
+                        to_remove.get_colored_name,
+                      ),
+                )
               ) {
                 pt = era.add(
                   `exp:${cid}:技能点数`,

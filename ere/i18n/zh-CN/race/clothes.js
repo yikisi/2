@@ -260,6 +260,7 @@ class I18nClothes {
   112701 = '义心黑焰';
   113101 = 'Smile My Way!';
   113201 = '9927 Wishes';
+  113202 = 'New Scenario';
   113301 = '光彩陆离的编纂者';
   113501 = 'Sunlit Outsider';
   113701 = 'Miracle Author';

@@ -219,11 +219,54 @@ class I18nEntry {
   ui_et_next = '后一项';
   ui_pg_prev = '前一页';
   ui_pg_next = '后一页';
+  ui_ch_prev = '前一位';
+  ui_ch_next = '后一位';
   ui_pagination_template = '第 %CURR% 页 / 共 %TOTAL% 页';
   ui_default = '默认';
   ui_game_over = 'GAME OVER';
   ui_invalid_value = '-';
   ui_unknown_value = '?';
+  ui_all = '全部';
+  ui_increase = '提高';
+  ui_decrease = '降低';
+
+  get_ui_reward_header = (chara) => [chara, ' 的属性有了如下变化：'];
+  get_ui_change_attr = (attr, change_mark, change_val) => [
+    attr,
+    ' ',
+    change_mark,
+    ' 了 ',
+    change_val,
+  ];
+  ui_get_pt_template = '获得了 %PT% 点技能点数！';
+  ui_train_level_up_template = '%ATTR%训练 变得更擅长了！';
+  get_ui_change_motivation = (chara, motivation) => [
+    chara,
+    ' 的干劲现在是 ',
+    motivation,
+  ];
+  get_ui_change_relation = (chara, target, change_mark, val, result) => [
+    chara,
+    ' 对 ',
+    target,
+    ' 的好感 ',
+    change_mark,
+    ' 了 ',
+    val,
+    '！现在为：',
+    result,
+  ];
+  get_ui_change_love = (chara, you, change_mark, val, result) => [
+    chara,
+    ' 对 ',
+    you,
+    ' 的爱慕 ',
+    change_mark,
+    ' 了 ',
+    val,
+    '！现在为：',
+    result,
+  ];
 
   ui_hd_no_save = '当前未加载存档';
   get_ui_hd_location = (location) => ['位于 ', location];
@@ -374,6 +417,32 @@ class I18nEntry {
   ui_rec_e_skill_classic = '经典年解锁：';
   ui_rec_e_skill_after_pt = '技能点数+400';
   ui_rec_e_skill_senior = '资深年解锁：';
+
+  ui_train_base = '基础能力';
+  ui_train_score = '评价';
+  ui_train_pt = '技能点数';
+  ui_train_race = '比赛能力';
+  ui_train_adapt_track = '场地适性';
+  ui_train_adapt_dis = '距离适性';
+  ui_train_adapt_style = '策略适性';
+  ui_train_adapt_ui_conjunction = '·';
+  ui_train_adapt_skills = '习得技能';
+  ui_train_learn_skill = '学习技能';
+  ui_train_reset_skill = '重置技能';
+  ui_train_with_s_rate_template = '%ATTR%训练 Lv.%LEVEL%\n成功率：%SUCCESS%%';
+  ui_train_reset_skill_confirm = '要用 100 点技能点数重置技能吗？';
+  ui_train_skill_header_template = '为 %NAME% 选择技能';
+  get_ui_train_skill_pt_info = (pt) => ['技能点数：', pt];
+  ui_train_skill_enable_filter = '打开筛选器';
+  ui_train_skill_disable_filter = '关闭筛选器';
+  get_ui_train_learn_skill = (skill) => ['要学习 ', ...skill, ' 吗？'];
+  get_ui_train_replace_skill = (skill, remove) => [
+    '要学习 ',
+    ...skill,
+    ' 吗？将取代 ',
+    ...remove,
+    '。',
+  ];
 
   ui_bs_flatter = '虚与委蛇';
   ui_bs_unlock = '尝试脱困';

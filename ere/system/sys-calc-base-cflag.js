@@ -21,6 +21,7 @@ const { location_enum } = require('#/data/locations');
 const { attr_enum } = require('#/data/train-const');
 
 const di18n = require('#/i18n/extended-def');
+const { i18n, lan } = require('#/i18n/selector');
 
 /**
  * @param {number} cid
@@ -55,14 +56,12 @@ function sys_change_motivation(cid, val) {
   const new_val = Math.max(Math.min(motivation + delta, motivation_limit), -2);
   if (new_val !== motivation) {
     era.set(`cflag:${cid}:干劲`, new_val);
-    era.print([
-      get_chara_talk(cid).get_colored_name(),
-      ' 的干劲现在是 ',
-      {
+    era.print(
+      i18n().get_ui_change_motivation(get_chara_talk(cid).get_colored_name(), {
         content: di18n.n_mot[new_val + 2],
         color: motivation_colors[new_val + 2],
-      },
-    ]);
+      }),
+    );
     return true;
   }
   return false;
@@ -125,7 +124,7 @@ module.exports = {
     const bid = attr > attr_enum.intelligence ? attr - attr_enum.hp : attr + 5;
     const val = era.get(`base:${cid}:${bid}`);
     const max = era.get(`maxbase:${cid}:${bid}`);
-    const ret = [];
+    let ret = [];
     if (attr > attr_enum.intelligence) {
       if (change < 0) {
         const in_train = era.getCharactersInTrain().includes(cid);
@@ -201,7 +200,7 @@ module.exports = {
       const stat = Math.abs(
         Math.floor(era.add(`base:${cid}:${bid}`, change)) - o,
       );
-      ret.push(
+      ret = i18n().get_ui_change_attr(
         {
           color: attr_colors[attr],
           content:
@@ -212,17 +211,16 @@ module.exports = {
         change > 0
           ? {
               color: attr_change_colors.up,
-              content: ' 上升',
+              content: i18n().ui_increase,
             }
           : {
               color: attr_change_colors.down,
-              content: ' 下降',
+              content: i18n().ui_decrease,
             },
-        ' 了',
         stat >= 1
           ? {
               color: attr_colors[attr],
-              content: ` ${stat.toLocaleString()}`,
+              content: stat.toLocaleString(lan()),
             }
           : '',
       );

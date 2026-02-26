@@ -242,6 +242,7 @@ module.exports = class extends I18nClothes {
   112701 = '義心の黒焔';
   113101 = 'すまいる・まい・うぇい！';
   113201 = '9927 Wishes';
+  113202 = '新シナリオ';
   113301 = '陸離の編纂者';
   113501 = 'Sunlit Outsider';
   113701 = 'Miracle Author';
