@@ -17,6 +17,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const { buff_colors, palam_colors } = require('#/data/color-const');
 const { part_enum } = require('#/data/ero/part-const');
 const { unexpected_pregnant_enum } = require('#/data/ero/status-const');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
@@ -24,7 +25,6 @@ const { ero_hooks } = require('#/data/event/ero-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
 
-const { buff_colors, palam_colors } = require('#/data/color-const');
 const di18n = require('#/i18n/extended-def');
 
 const stop_ex_options = {};
