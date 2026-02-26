@@ -7,6 +7,8 @@ class I18nKojo100201 {
   edu = require('#/i18n/zh-CN/kojo/100201/edu-2.kojo');
   /** @type {KojoFile} */
   love = require('#/i18n/zh-CN/kojo/100201/love-2.kojo');
+  /** @type {KojoFile} */
+  ero = require('#/i18n/zh-CN/kojo/100201/ero-2.kojo');
 
   debuff1 = '难过';
   debuff1_desc = '干劲上限下降一阶段。';

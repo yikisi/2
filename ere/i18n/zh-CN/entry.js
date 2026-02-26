@@ -155,7 +155,7 @@ class I18nEntry {
   cr_header_tr_wiki = '赛马娘中文 Wiki';
   cr_header_kojo = '口上';
   cr_kojo_tip = '以负责角色ID最小值排序';
-  cr_kojo_detail = '详细口上鸣谢';
+  cr_thanks_detail = '详细鸣谢';
   cr_kojo_suffix_template = '（%SUFFIX%）';
   cr_kojo_suffix_recruit = '招募';
   cr_kojo_suffix_basement = '地下室';
@@ -172,6 +172,9 @@ class I18nEntry {
   cr_timon_random = '随机事件';
   cr_timon_guide = '新手教学';
   cr_timon_guide_b = '地下室教学';
+  cr_header_image = '调教立绘';
+  cr_image_common = '通用立绘';
+  cr_image_gif = '指令动画';
   cr_header_kojo_make = '口上制作';
   cr_header_test = '测试反馈';
   cr_header_community_management = '社区管理';

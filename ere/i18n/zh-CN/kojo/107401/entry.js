@@ -7,6 +7,8 @@ class I18nKojo107401 {
   edu = require('#/i18n/zh-CN/kojo/107401/edu-74.kojo');
   /** @type {KojoFile} */
   love = require('#/i18n/zh-CN/kojo/107401/love-74.kojo');
+  /** @type {KojoFile} */
+  ero = require('#/i18n/zh-CN/kojo/107401/ero-74.kojo');
 }
 
 module.exports = I18nKojo107401;

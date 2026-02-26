@@ -25,7 +25,37 @@ function get_copyright_entry(cid, _suffix) {
 }
 
 function generate_copyrights() {
-  const line_copyrights = [
+  const buffer = [];
+
+  function push_copyrights(contents, cols_in_row = 3) {
+    buffer.push([]);
+    let tmp = buffer.at(-1);
+    for (const a of contents) {
+      const title = Array.isArray(a[0])
+        ? a[0].map((e) => (typeof e === 'object' ? e : { content: e }))
+        : [{ content: a[0] }];
+      const names = Array.isArray(a[1]) ? a[1] : [a[1]];
+      tmp.push({
+        config: { width: 24 / cols_in_row },
+        content: [
+          ...title.map((e) => ({
+            color: item_title_color,
+            fontSize: '1.125rem',
+            ...e,
+          })),
+          { isBr: true },
+          ...names,
+          { isBr: 2 },
+        ],
+      });
+      if (tmp.length === cols_in_row) {
+        buffer.push([]);
+        tmp = buffer.at(-1);
+      }
+    }
+  }
+
+  const kojo_copyrights = [
     [[get_copyright_entry(1, i18n().cr_kojo_suffix_recruit)], 'wwm'],
     [[get_copyright_entry(2)], '牛蛙煲'],
     [[get_copyright_entry(3)], '天马闪光蹄'],
@@ -206,7 +236,121 @@ function generate_copyrights() {
       ],
     ],
   ];
-  const buffer = [];
+
+  const img_copyrights = [
+    [
+      [
+        get_copyright_entry(2),
+        { isDivider: true },
+        get_copyright_entry(20),
+        { isDivider: true },
+        get_copyright_entry(38),
+        { isDivider: true },
+        get_copyright_entry(61),
+        { isDivider: true },
+        get_copyright_entry(65),
+        { isBr: true },
+        get_copyright_entry(74),
+        { isDivider: true },
+        get_copyright_entry(87),
+        { isDivider: true },
+        get_copyright_entry(91),
+        { isDivider: true },
+        get_copyright_entry(105),
+        { isDivider: true },
+        get_copyright_entry(302),
+      ],
+      '无名者Y',
+    ],
+    [
+      [
+        get_copyright_entry(3),
+        { isDivider: true },
+        get_copyright_entry(6),
+        { isDivider: true },
+        get_copyright_entry(7),
+        { isDivider: true },
+        get_copyright_entry(9),
+        { isDivider: true },
+        get_copyright_entry(17),
+        { isBr: true },
+        get_copyright_entry(21),
+        { isDivider: true },
+        get_copyright_entry(24),
+        { isDivider: true },
+        get_copyright_entry(25),
+        { isDivider: true },
+        get_copyright_entry(26),
+        { isDivider: true },
+        get_copyright_entry(30),
+        { isBr: true },
+        get_copyright_entry(32),
+        { isDivider: true },
+        get_copyright_entry(60),
+        { isDivider: true },
+        get_copyright_entry(67),
+        { isDivider: true },
+        get_copyright_entry(68),
+        { isDivider: true },
+        get_copyright_entry(98),
+        { isBr: true },
+        get_copyright_entry(304),
+      ],
+      'kxmodel',
+    ],
+    [
+      [
+        get_copyright_entry(13),
+        { isDivider: true },
+        get_copyright_entry(21, '2'),
+        { isDivider: true },
+        get_copyright_entry(45),
+        { isDivider: true },
+        get_copyright_entry(100),
+      ],
+      '洗发水',
+    ],
+    [
+      [
+        get_copyright_entry(33),
+        { isDivider: true },
+        get_copyright_entry(49),
+        { isDivider: true },
+        get_copyright_entry(89),
+        { isDivider: true },
+        get_copyright_entry(114),
+        { isDivider: true },
+        get_copyright_entry(115),
+        { isBr: true },
+        get_copyright_entry(117),
+        { isDivider: true },
+        get_copyright_entry(119),
+        { isDivider: true },
+        get_copyright_entry(127),
+        { isDivider: true },
+        get_copyright_entry(135),
+      ],
+      '西蟹瓜',
+    ],
+    [
+      [
+        get_copyright_entry(37),
+        { isDivider: true },
+        get_copyright_entry(46),
+        { isDivider: true },
+        get_copyright_entry(97),
+        { isDivider: true },
+        get_copyright_entry(132),
+      ],
+      '颜色可以叫颜',
+    ],
+    [[get_copyright_entry(71)], 'gmddst'],
+    [
+      [i18n().cr_image_common, { isDivider: true }, i18n().cr_image_gif],
+      'kxmodel',
+    ],
+  ];
+
   buffer.push(
     [
       {
@@ -296,23 +440,11 @@ function generate_copyrights() {
       {
         config: { width: 9 },
         content: [
-          'kxmodel',
-          { isDivider: true },
           '植物牙线',
           { isDivider: true },
           'フィンランド',
           { isBr: true },
           '提交bug',
-          { isDivider: true },
-          '洗发水',
-          { isDivider: true },
-          '无名者Y',
-          { isDivider: true },
-          '西蟹瓜',
-          { isBr: true },
-          '颜色可以叫颜',
-          { isDivider: true },
-          'gmddst',
         ],
       },
     ],
@@ -341,72 +473,70 @@ function generate_copyrights() {
         ],
       },
     ],
+  );
+  buffer.push([
+    {
+      config: { isParagraph: true },
+      content: [
+        {
+          color: item_title_color,
+          content: i18n().cr_header_kojo,
+          fontSize: '1.25rem',
+        },
+        { isBr: true },
+        i18n().cr_kojo_tip,
+        { isBr: true },
+        {
+          content: i18n().cr_thanks_detail,
+          url: 'https://gitgud.io/umaera/erauma/-/wikis/COPYRIGHT',
+        },
+      ],
+    },
+  ]);
+  push_copyrights(kojo_copyrights);
+  buffer.push([
+    {
+      config: { isParagraph: true },
+      content: [
+        {
+          color: item_title_color,
+          content: i18n().cr_header_image,
+          fontSize: '1.25rem',
+        },
+        { isBr: true },
+        i18n().cr_kojo_tip,
+        { isBr: true },
+        {
+          content: i18n().cr_thanks_detail,
+          url: 'https://gitgud.io/umaera/erauma/-/wikis/COPYRIGHT',
+        },
+      ],
+    },
+  ]);
+  push_copyrights(img_copyrights, 2);
+  buffer.push(
     [
       {
-        config: { isParagraph: true },
+        config: {
+          color: item_title_color,
+          fontSize: '1.25rem',
+          isParagraph: true,
+        },
+        content: i18n().cr_header_kojo_make,
+      },
+    ],
+    [
+      {
         content: [
-          {
-            color: item_title_color,
-            content: i18n().cr_header_kojo,
-            fontSize: '1.25rem',
-          },
-          { isBr: true },
-          i18n().cr_kojo_tip,
-          { isBr: true },
-          {
-            content: i18n().cr_kojo_detail,
-            url: 'https://gitgud.io/umaera/erauma/-/wikis/COPYRIGHT',
-          },
+          '黑奴队长',
+          { isDivider: true },
+          '黑奴一号',
+          { isDivider: true },
+          '黑奴二号',
         ],
       },
     ],
   );
-  buffer.push([]);
-  let tmp = buffer.at(-1);
-  for (const a of line_copyrights) {
-    const title = Array.isArray(a[0])
-      ? a[0].map((e) => (typeof e === 'object' ? e : { content: e }))
-      : [{ content: a[0] }];
-    const names = Array.isArray(a[1]) ? a[1] : [a[1]];
-    tmp.push({
-      config: { width: 8 },
-      content: [
-        ...title.map((e) => ({
-          color: item_title_color,
-          fontSize: '1.125rem',
-          ...e,
-        })),
-        { isBr: true },
-        ...names,
-        { isBr: 2 },
-      ],
-    });
-    if (tmp.length === 3) {
-      buffer.push([]);
-      tmp = buffer.at(-1);
-    }
-  }
-  buffer.push([
-    {
-      config: {
-        color: item_title_color,
-        fontSize: '1.25rem',
-        isParagraph: true,
-      },
-      content: i18n().cr_header_kojo_make,
-    },
-  ]);
-  buffer.push([
-    {
-      content: [
-        '黑奴队长',
-        { isDivider: true },
-        '黑奴一号',
-        { isDivider: true },
-        '黑奴二号',
-      ],
-    },
-  ]);
   buffer.push([
     {
       config: {
