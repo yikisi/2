@@ -46,17 +46,6 @@ const {
 } = require('#/data/race/race-sim-const');
 const { attr_enum } = require('#/data/train-const');
 
-const beginning_report_handlers = [
-  () => ['赛马娘请入闸……', '全部马娘准备妥当……', '准备……', '——开闸！'],
-  () => ['赛马娘准备好……', '随时预备起步……', '预备……', '——起步！'],
-  (info) => [
-    '比赛马上开始……',
-    `参赛马娘 ${info.gates} 名……`,
-    [`${get('flag:当前年')} 年度 `, info.get_colored_name(), '……'],
-    '——开始！',
-  ],
-];
-
 /**
  * @param {PseudoUma} uma
  * @param {number} r_index
@@ -124,31 +113,6 @@ function get_loc_mind_event(uma, event) {
   };
 }
 
-/** @type {Record<string,function(RaceInfo,PseudoUma):((string|{content:string})[])>} */
-const race_message_handlers = {};
-race_message_handlers.undefined = () => ['正在检查跑道……'];
-race_message_handlers[race_enum.sats_sho] = (_, top_pop) => [
-  top_pop.get_colored_name(),
-  ' 顺利入闸，感觉之后会成为名马娘呢。',
-];
-race_message_handlers[race_enum.toky_yus] = () => [
-  '赛马娘一生一度的德比，马上就要决出赢家了。',
-];
-race_message_handlers[race_enum.kiku_sho] = (info) => [
-  '今年的 ',
-  info.get_colored_name(),
-  ' 可谓战国时代，群雄辈出。',
-];
-race_message_handlers[race_enum.takz_kin] = (_, top_pop) => [
-  '各位的梦想是谁呢？我的梦想是 ',
-  top_pop.get_colored_name(),
-];
-race_message_handlers.default = (info) => [
-  '在这 ',
-  info.get_colored_name(),
-  ' 的赛场上，各位赛马娘也会全力以赴为大家带来梦想。',
-];
-
 /**
  * @param {PseudoUma[]} list_chara
  * @param {RaceInfo} info
@@ -156,15 +120,51 @@ race_message_handlers.default = (info) => [
  * @param {boolean} [shown=true]
  */
 function sys_sim_race(list_chara, info, race_id, shown = true) {
+  /** @type {(function(RaceInfo):TextContent)[]} */
+  const beginning_report_handlers = [
+    () => ['赛马娘请入闸……', '全部马娘准备妥当……', '准备……', '——开闸！'],
+    () => ['赛马娘准备好……', '随时预备起步……', '预备……', '——起步！'],
+    (info) => [
+      '比赛马上开始……',
+      `参赛马娘 ${info.gates} 名……`,
+      [`${get('flag:当前年')} 年度 `, info.get_colored_name(), '……'],
+      '——开始！',
+    ],
+  ];
+
+  /** @type {Record<string,function(RaceInfo,PseudoUma):((string|{content:string})[])>} */
+  const race_message_handlers = {
+    undefined: () => ['正在检查跑道……'],
+    [race_enum.sats_sho]: (_, top_pop) => [
+      top_pop.get_colored_name(),
+      ' 顺利入闸，感觉之后会成为名马娘呢。',
+    ],
+    [race_enum.toky_yus]: () => ['赛马娘一生一度的德比，马上就要决出赢家了。'],
+    [race_enum.kiku_sho]: (info) => [
+      '今年的 ',
+      info.get_colored_name(),
+      ' 可谓战国时代，群雄辈出。',
+    ],
+    [race_enum.takz_kin]: (_, top_pop) => [
+      '各位的梦想是谁呢？我的梦想是 ',
+      top_pop.get_colored_name(),
+    ],
+    default: (info) => [
+      '在这 ',
+      info.get_colored_name(),
+      ' 的赛场上，各位赛马娘也会全力以赴为大家带来梦想。',
+    ],
+  };
+
   const beginning_report =
-    race_id === undefined
+    race_id === void 0
       ? ['正在检查马闸……', '正在检查令枪……', '选手入闸……', '开赛！']
       : get_random_entry(beginning_report_handlers)(info);
   const current = new Date().getTime();
   const count_uma = list_chara.length;
   const top_pop = list_chara.find((e) => e.pop[0] === 1);
   const top_pop_message =
-    race_id === undefined
+    race_id === void 0
       ? '选手检查蹄铁……'
       : [
           '第 1 人气，',

@@ -10,6 +10,7 @@ const { skills_dict } = require('#/data/race/skill/skill-const');
 const { attr_enum } = require('#/data/train-const');
 
 const di18n = require('#/i18n/extended-def');
+const { i18n } = require('#/i18n/selector');
 
 const fron_cols = 4;
 const progress_width = 24 - 10 - 2 * fron_cols - 1;
@@ -29,9 +30,9 @@ function get_event_record(message, timer_record, timer) {
     content: [
       ...(timer_record ? [timer_record, ' '] : []),
       { content: '解说', fontWeight: 'bold' },
-      '「',
+      i18n().tk_speak_border[0],
       ..._content,
-      '」',
+      i18n().tk_speak_border[1],
     ],
     speak: count,
     timer,

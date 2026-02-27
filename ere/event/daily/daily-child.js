@@ -18,16 +18,15 @@ class DailyChild extends CustomizedDaily {
     if (!sys_check_awake(this.id)) {
       return super.select();
     }
-    // CFLAGNAME:65 = 成长阶段
-    const growth = era.get(`cflag:${this.id}:15`);
+    const growth = era.get(`cflag:${this.id}:成长阶段`);
     let h;
     if (growth === 0) {
       h = i18n().timon.daily_child.select_0;
     } else if (growth === 1) {
       h = i18n().timon.daily_child.select_1;
     } else if (
-      era.get(`cflag:${this.id}:15`) === 2 &&
-      era.get(`cflag:${this.id}:48`) === 'x' &&
+      growth === 2 &&
+      era.get(`cflag:${this.id}:育成回合计时`) === 'x' &&
       Math.random() < 1 / 3
     ) {
       h = i18n().timon.daily_child.select_2;
@@ -37,9 +36,8 @@ class DailyChild extends CustomizedDaily {
         get_chara_talk(this.id),
         get_chara_talk(0),
         get_chara_talk(
-          // CFLAGNAME:15 = 父方角色
-          // CFLAGNAME:16 = 母方角色
-          era.get(`cflag:${this.id}:15`) || era.get(`cflag:${this.id}:16`),
+          era.get(`cflag:${this.id}:父方角色`) ||
+            era.get(`cflag:${this.id}:母方角色`),
         ),
       );
     } else {
@@ -50,10 +48,8 @@ class DailyChild extends CustomizedDaily {
   async talk() {
     let h;
     if (sys_check_awake(this.id)) {
-      // CFLAGNAME:15 = 父方角色
-      const fid = era.get(`cflag:${this.id}:15`);
-      // CFLAGNAME:65 = 成长阶段
-      const growth = era.get(`cflag:${this.id}:65`);
+      const fid = era.get(`cflag:${this.id}:父方角色`);
+      const growth = era.get(`cflag:${this.id}:成长阶段`);
       if (growth === 0) {
         return await i18n().timon.daily_child.talk_0(
           get_chara_talk(this.id),
@@ -69,10 +65,8 @@ class DailyChild extends CustomizedDaily {
       } else if (growth === 2) {
         h = i18n().timon.daily_child.talk_2;
       } else if (
-        // STATUSNAME:32 = 发情
-        era.get(`status:${this.id}:32`) &&
-        // CFLAGNAME:16 = 母方角色
-        (fid === 0 || era.get(`cflag:${this.id}:16`) === 0)
+        era.get(`status:${this.id}:发情`) &&
+        (fid === 0 || era.get(`cflag:${this.id}:母方角色`) === 0)
       ) {
         h = i18n().timon.daily_child.talk_estrus;
       }
@@ -90,9 +84,8 @@ class DailyChild extends CustomizedDaily {
 
   async growth(stage) {
     const child = get_chara_talk(this.id);
-    // CFLAGNAME:15 - 16 = 父方角色 - 母方角色
-    const father = get_chara_talk(era.get(`cflag:${this.id}:15`));
-    const mother = get_chara_talk(era.get(`cflag:${this.id}:16`));
+    const father = get_chara_talk(era.get(`cflag:${this.id}:父方角色`));
+    const mother = get_chara_talk(era.get(`cflag:${this.id}:母方角色`));
     era.drawLine();
     let k;
     switch (stage) {
@@ -102,6 +95,7 @@ class DailyChild extends CustomizedDaily {
       case 1:
         k = 'growth_1';
         LifeEventMarks.get_marks(this.id).unexpected_child = 0;
+        LifeEventMarks.get_marks(this.id).rape_child = 0;
         break;
       case 2:
         k = 'growth_2';
@@ -122,8 +116,7 @@ class DailyChild extends CustomizedDaily {
     if (era.get(`cflag:${this.id}:65`) === 0) {
       callname = {
         color: get_chara_color(0),
-        // CFLAGNAME:15 = 父方角色
-        content: !era.get(`cflag:${this.id}:15`)
+        content: !era.get(`cflag:${this.id}:父方角色`)
           ? i18n().name.dad_baby
           : i18n().name.mom_baby,
         fontWeight: 'bold',

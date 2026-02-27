@@ -13,9 +13,11 @@ const game_guides = require('#/event/others/game-guides');
 
 const get_display_name = require('#/utils/calc-display-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { flat_join_list } = require('#/utils/list-utils');
 
 const { get_chara_color } = require('#/data/chara-colors');
 const { adaptability_colors, el_danger_color } = require('#/data/color-const');
+const { get_date } = require('#/data/date-indicator');
 const grand_lives = require('#/data/event/grand-lives');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_adaptability_rank } = require('#/data/info-generator');
@@ -29,7 +31,7 @@ const {
 } = require('#/data/race/race-location');
 
 const di18n = require('#/i18n/extended-def');
-const { i18n } = require('#/i18n/selector');
+const { i18n, lan } = require('#/i18n/selector');
 
 /**
  * @param {number} cid
@@ -120,6 +122,7 @@ function generate_race_dict(
 }
 
 async function reg_race_page() {
+  const _lan = lan();
   await game_guides.office_register();
   const cur_round = era.get('flag:当前回合数') - 1;
   const begin_round = cur_round - (cur_round % 4);
@@ -167,9 +170,7 @@ async function reg_race_page() {
         {
           config: { align: 'center' },
           content: [
-            '为 ',
-            chara.get_colored_name(),
-            ' 报名下一场比赛',
+            ...i18n().get_ui_reg_header(chara.get_colored_name()),
             { isBr: true },
             ...status_list,
           ],
@@ -181,7 +182,7 @@ async function reg_race_page() {
         const year = Math.floor(round / 48);
         const month = Math.floor((round - year * 48) / 4);
         const week = round - year * 48 - month * 4;
-        const date_str = `${2000 + year} 年 ${month + 1} 月 第 ${week + 1} 周`;
+        const date_str = get_date(2000 + year, month + 1, week + 1);
         const columns = [];
         columns.push(
           { config: { offset: 1, width: 22 }, type: 'divider' },
@@ -232,13 +233,24 @@ async function reg_race_page() {
                         expedition_weeks) ||
                     get_custom_mec(curr).is_race_disabled(r),
                 },
-                content:
-                  race_infos[r].get_colored_name_with_class().content +
-                  (is_foreign
-                    ? ` (${i18n().race[track2location[race_infos[r].track].con]})`
-                    : '') +
-                  (is_grand_live ? ' 🎤' : '') +
-                  ((is_aim_race & 0b11) > 0 ? ' *' : ''),
+                content: i18n()
+                  .ui_reg_race_template.replace(
+                    '%NAME%',
+                    race_infos[r].get_colored_name_with_class().content,
+                  )
+                  .replace(
+                    '%COUNTRY%',
+                    is_foreign
+                      ? i18n().race[track2location[race_infos[r].track].con]
+                      : '',
+                  )
+                  .replace(
+                    '%GRAND%',
+                    is_grand_live ? i18n().ui_reg_grand_mark : '',
+                  )
+                  .replace('%MARK%', (is_aim_race & 0b11) > 0 ? ' *' : '')
+                  .replace('()', '')
+                  .trimEnd(),
                 type: 'button',
               },
               {
@@ -252,7 +264,7 @@ async function reg_race_page() {
                         ag,
                         ')',
                         ' ',
-                        race_infos[r].span.toLocaleString(),
+                        race_infos[r].span.toLocaleString(_lan),
                         ' ',
                         di18n.race.a_distance[distance],
                         '(',
@@ -270,7 +282,7 @@ async function reg_race_page() {
                   registered_race.race === r
                     ? {
                         color: el_danger_color,
-                        content: '[▲已登记]',
+                        content: i18n().ui_reg_registered,
                         display: 'inline-block',
                         fontWeight: 'bold',
                       }
@@ -290,46 +302,41 @@ async function reg_race_page() {
         ? [
             { type: 'divider' },
             {
-              content: [
-                '* ',
-                chara.get_colored_name(),
-                ...(RaceHistory.get(chara.id).check_begin()
-                  ? [
-                      ' 很关注显示为',
-                      { color: el_danger_color, content: '红色' },
-                      '的比赛',
-                    ]
-                  : [' 需要先在下半年的出道战出道才能参加其他比赛']),
+              content: flat_join_list(
+                [
+                  (RaceHistory.get(chara.id).check_begin()
+                    ? i18n().get_ui_reg_tip_1_after_begin
+                    : i18n().get_ui_reg_tip_1_before_begin)(
+                    chara.get_colored_name(),
+                  ),
+                  i18n().ui_reg_tip_2,
+                  cur_round > 39 ? i18n().ui_reg_tip_3 : void 0,
+                  i18n().ui_reg_tip_4,
+                ]
+                  .filter((c) => c)
+                  .map((c, i) =>
+                    Array.isArray(c)
+                      ? ['*'.repeat(i + 1) + ' ', ...c]
+                      : '*'.repeat(i + 1) + ' ' + c,
+                  ),
                 { isBr: true },
-                '** 参加带有星号(*)后缀的比赛可能会有特殊的事情发生',
-                { isBr: true },
-                ...(cur_round > 39
-                  ? [
-                      '*** 带有🎤后缀的比赛会开设大舞台，参加能够获得更多的声望',
-                      { isBr: true },
-                      '*',
-                    ]
-                  : []),
-                '*** 带有(法)等后缀的比赛是海外赛事，需要在参赛两周前注册，并提前两周出发远征',
-              ],
+              ),
               type: 'text',
             },
           ]
         : [],
       [{ type: 'divider' }],
       team_list.length > 1
-        ? team_list.map((cid) => {
-            return {
-              accelerator: 1000 + cid,
-              config: {
-                buttonType: cid === curr ? 'warning' : 'info',
-                disabled: cid === curr,
-                width: 6,
-              },
-              content: get_display_name(era.get(`callname:${cid}:-1`)),
-              type: 'button',
-            };
-          })
+        ? team_list.map((cid) => ({
+            accelerator: 1000 + cid,
+            config: {
+              buttonType: cid === curr ? 'warning' : 'info',
+              disabled: cid === curr,
+              width: 6,
+            },
+            content: get_display_name(era.get(`callname:${cid}:-1`)),
+            type: 'button',
+          }))
         : [],
       [
         {
@@ -338,7 +345,10 @@ async function reg_race_page() {
             buttonType: flag_filter_race ? 'warning' : 'info',
             width: 6,
           },
-          content: `筛除不利比赛 [${flag_filter_race ? '开' : '关'}]`,
+          content: i18n().ui_reg_race_filter_template.replace(
+            '%STATUS%',
+            flag_filter_race ? i18n().ui_on : i18n().ui_off,
+          ),
           type: 'button',
         },
         {
@@ -347,13 +357,16 @@ async function reg_race_page() {
             buttonType: !flag_hide_adaptability ? 'warning' : 'info',
             width: 6,
           },
-          content: `显示更多信息 [${!flag_hide_adaptability ? '开' : '关'}]`,
+          content: i18n().ui_reg_race_more_info.replace(
+            '%STATUS%',
+            !flag_hide_adaptability ? i18n().ui_on : i18n().ui_off,
+          ),
           type: 'button',
         },
         {
           accelerator: 999,
           config: { width: 4 },
-          content: '结束出走登记',
+          content: i18n().ui_back,
           type: 'button',
         },
       ],

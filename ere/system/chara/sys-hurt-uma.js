@@ -5,6 +5,8 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const CharaInmon = require('#/data/ero/chara-inmon');
 const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 
+const { i18n } = require('#/i18n/selector');
+
 /**
  * @param {number} cid
  * @param {number} num
@@ -28,17 +30,11 @@ function sys_hurt_uma(cid, num, shown = true) {
 
     if (shown) {
       if (a > num) {
-        era.print([
-          get_chara_talk(cid).get_colored_name(),
-          ' 的受伤程度加深了！',
-        ]);
+        era.print(i18n().get_ui_hurt_uma_plus(get_chara_talk(cid)));
       } else if (tired > 0) {
-        era.print([
-          get_chara_talk(cid).get_colored_name(),
-          ' 在疲惫之下受了更加严重的伤！',
-        ]);
+        era.print(i18n().get_ui_hurt_tired_uma(get_chara_talk(cid)));
       } else {
-        era.print([get_chara_talk(cid).get_colored_name(), ' 受伤了！']);
+        era.print(i18n().get_ui_hurt_uma(get_chara_talk(cid)));
       }
     }
   }

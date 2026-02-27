@@ -137,7 +137,10 @@ module.exports = class extends CustomizedEro {
       await pregnant_report_in_love(father, mother, unexpected_pregnant);
     } else {
       const slavery = era.get('flag:惩戒力度');
-      if (slavery === 3) {
+      if (
+        slavery === 3 &&
+        unexpected_pregnant === unexpected_pregnant_enum.mother_sleep
+      ) {
         hook.override = true;
         const children_count = sys_filter_chara('cflag', '母方角色', 0).filter(
           (cid) =>
@@ -470,7 +473,7 @@ module.exports = class extends CustomizedEro {
             color: palam_colors.progress[1],
             disabled: era.get('flag:恶堕') === 0,
           });
-          era.printButton('不，无声地反抗', 2, {
+          era.printButton('无声地反抗', 2, {
             color: palam_colors.notifications[1],
             disabled: era.get('flag:恶堕') > 0,
           });
@@ -616,7 +619,7 @@ module.exports = class extends CustomizedEro {
           if (ret === 1) {
             era.set(`love:${ch_id}`, Math.max(era.get(`love:${ch_id}`), 1));
           }
-        } else {
+        } else if (LifeEventMarks.get_marks(0).rape_child === father.id) {
           /** @author 幽白書 */
           await print_event_name('新生命', mother);
           await era.printAndWait([mother.get_colored_name(), ' 抱起了孩子——']);
@@ -730,6 +733,9 @@ module.exports = class extends CustomizedEro {
           if (ret === 1) {
             (new MyEduMarks().orgy ||= []).push(ch_id);
           }
+        } else {
+          // TODO
+          await era.printAndWait('TODO 自愿献身生子');
         }
       } else {
         /** @author 雞雞 */

@@ -576,7 +576,6 @@ module.exports = async (cid = era.get('flag:当前互动角色')) => {
             const delta = (
               action === 100 ? delta_dict.up_delta : delta_dict.down_delta
             )[t_dict[tid]];
-            console.log(tid, delta);
             const price_dict = get_talent_price(cid, tid, delta);
             const is_confirmed = await print_price_and_confirm(
               chara,

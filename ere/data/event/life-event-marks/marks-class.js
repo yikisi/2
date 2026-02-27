@@ -9,6 +9,8 @@ class LifeEventMarks extends PersonalEventMarks {
   unexpected_child;
   // 意外怀孕
   unexpected_pregnant;
+  // 强奸授孕
+  rape_child;
   // 拖回家强奸
   marital_rape;
   // 临时胸围

@@ -39,7 +39,6 @@ const CharaTitles = require('#/data/chara-titles');
 const {
   adaptability_colors,
   attr_bg_colors,
-  el_danger_color,
   money_color,
 } = require('#/data/color-const');
 const date_indicator = require('#/data/date-indicator');
@@ -93,7 +92,7 @@ function page_race_header(_info, is_grand_live) {
           },
           content: [
             _info.get_colored_name_with_class(),
-            is_grand_live ? ' 🎤' : '',
+            is_grand_live ? ' ' + i18n().ui_reg_grand_mark : '',
           ],
           type: 'text',
         },
@@ -112,7 +111,9 @@ function page_race_header(_info, is_grand_live) {
       columns: [
         {
           config: { align: 'center', width: 4 },
-          content: [get_chara_talk(0).get_colored_name(), ' 的精力'],
+          content: i18n().get_ui_race_your_tp(
+            get_chara_talk(0).get_colored_name(),
+          ),
           type: 'text',
         },
         {
@@ -217,7 +218,10 @@ async function race_page(race) {
     const t_time = era.get('base:0:精力');
     era.setHorizontalAlign('space-around');
     era.printInColRows(
-      [{ type: 'divider' }, { content: '要给谁赛前打气？\n\n', type: 'text' }],
+      [
+        { type: 'divider' },
+        { content: [i18n().ui_race_start_event, { isBr: 2 }], type: 'text' },
+      ],
       ...team_list
         .filter((e) => e.index_chara > 0)
         .map((uma) => {
@@ -246,15 +250,10 @@ async function race_page(race) {
         }),
       [
         {
-          content: [
-            '* 互动按钮显示为',
-            { color: el_danger_color, content: '红色' },
-            '的角色有专属剧情事件',
-            { isBr: 2 },
-          ],
+          content: [i18n().ui_race_event_tip, { isBr: 2 }],
           type: 'text',
         },
-        { content: '结束', accelerator: 999, type: 'button' },
+        { content: i18n().ui_race_event_end, accelerator: 999, type: 'button' },
       ],
     );
     era.setHorizontalAlign('start');
@@ -293,12 +292,13 @@ async function race_page(race) {
   era.drawLine();
   sort_list(team_list, (e) => e.rank.curr, true).forEach((uma) => {
     const id = uma.index_chara;
-    era.print([
-      get_chara_talk(id).get_colored_name(),
-      ' 取得了 ',
-      info.get_colored_name(),
-      ` 的 ${uma.rank.curr} 着！`,
-    ]);
+    era.print(
+      i18n().get_ui_race_result(
+        get_chara_talk(id).get_colored_name(),
+        info.get_colored_name(),
+        i18n().race.result_template.replace('%RANK%', uma.rank.curr.toString()),
+      ),
+    );
     let rewards;
     let attr_change = new Array(5).fill(0);
     if (uma.rank.curr === 1) {
@@ -359,7 +359,10 @@ async function race_page(race) {
     const player_time = era.get('base:0:精力');
     era.setHorizontalAlign('space-around');
     era.printInColRows(
-      [{ type: 'divider' }, { content: '要祝贺/安慰谁？\n\n', type: 'text' }],
+      [
+        { type: 'divider' },
+        { content: [i18n().ui_race_end_event, { isBr: 2 }], type: 'text' },
+      ],
       ...team_list
         .filter((uma) => uma.index_chara > 0)
         .map((uma) => {
@@ -379,7 +382,15 @@ async function race_page(race) {
                   buttonType: (aim_dict[id] & 0b10) > 0 ? 'danger' : 'warning',
                   disabled: re_dict[id] || player_time < t_cost,
                 },
-                content: `${uma.name} (${uma.rank.curr}着)`,
+                content: i18n()
+                  .ui_race_event_chara_template.replace('%NAME%', uma.name)
+                  .replace(
+                    '%RANK%',
+                    i18n().race.result_template.replace(
+                      '%RANK%',
+                      uma.rank.curr.toString(),
+                    ),
+                  ),
                 type: 'button',
               },
             ],
@@ -388,15 +399,10 @@ async function race_page(race) {
         }),
       [
         {
-          content: [
-            '* 互动按钮显示为',
-            { color: el_danger_color, content: '红色' },
-            '的角色有专属剧情事件',
-            { isBr: 2 },
-          ],
+          content: [i18n().ui_race_event_tip, { isBr: 2 }],
           type: 'text',
         },
-        { content: '结束', accelerator: 999, type: 'button' },
+        { content: i18n().ui_race_event_end, accelerator: 999, type: 'button' },
       ],
     );
     era.setHorizontalAlign('start');
@@ -507,32 +513,35 @@ async function race_page(race) {
   }
   if (fame_reward !== 0 && (fame_reward > 0 || !i_p_slave)) {
     const delta = sys_change_fame(fame_reward);
+    const you = get_chara_talk(0);
     if (fame_reward > 0) {
-      await era.printAndWait([
-        '因为队伍成员的出色表现，社会对 ',
-        get_chara_talk(0).get_colored_name(),
-        ' 的评价',
-        { content: '上升了', title: `+${delta.toLocaleString()}` },
-        '！',
-      ]);
+      await era.printAndWait(
+        i18n().get_ui_race_honour_reward(you.get_colored_name(), {
+          content: i18n().ui_increase,
+          title: `+${delta.toString()}`,
+        }),
+      );
     } else if (!hentai_count && t_hentai_flag) {
-      await era.printAndWait([
-        '虽然队伍成员表现很出色，但现役训练员的私生子丑闻还是让社会对 ',
-        get_chara_talk(0).get_colored_name(),
-        ' 的评价',
-        { content: '降低了', title: `-${(-delta).toLocaleString()}` },
-        '！',
-      ]);
+      await era.printAndWait(
+        i18n().get_ui_race_honour_pregnant_punish(you.get_colored_name(), {
+          content: i18n().ui_decrease,
+          title: delta.toString(),
+        }),
+      );
+    } else if (hentai_count > 0) {
+      await era.printAndWait(
+        i18n().get_ui_race_honour_hentai_punish(you.get_colored_name(), {
+          content: i18n().ui_decrease,
+          title: delta.toString(),
+        }),
+      );
     } else {
-      await era.printAndWait([
-        '因为队伍成员的',
-        hentai_count > 0 ? '变态行为' : '比赛失利',
-        '，社会对 ',
-        get_chara_talk(0).get_colored_name(),
-        ' 的评价',
-        { content: '降低了', title: `-${(-delta).toLocaleString()}` },
-        '！',
-      ]);
+      await era.printAndWait(
+        i18n().get_ui_race_honour_lose_punish(you.get_colored_name(), {
+          content: i18n().ui_decrease,
+          title: delta.toString(),
+        }),
+      );
     }
   }
   fame_reward -= r_title_reward * 40;
@@ -585,14 +594,12 @@ async function race_page(race) {
       .reduce((p, c) => p + c),
   );
   if (total_prize > 0) {
-    await era.printAndWait([
-      '收到了比赛赏金分成 ',
-      {
+    await era.printAndWait(
+      i18n().get_ui_race_money_reward({
         content: total_prize.toLocaleString(),
         color: money_color,
-      },
-      ' 马币',
-    ]);
+      }),
+    );
   }
   let b_flag = true;
   for (const uma of team_list) {
@@ -631,15 +638,14 @@ async function race_page(race) {
     }
     if (r_punish > 0) {
       b_flag = false;
-      era.print([
-        '因为 ',
-        get_chara_talk(0).get_colored_name(),
-        ' 的忽视，',
-        get_chara_talk(cid).get_colored_name(),
-        ' ',
-        r_punish > RaceInfo.relation_rewards[2] ? '无比' : '有些',
-        '失望……',
-      ]);
+      era.print(
+        (r_punish > RaceInfo.relation_rewards[2]
+          ? i18n().get_ui_ignore_event_punish2
+          : i18n().get_ui_ignore_event_punish)(
+          get_chara_talk(cid).get_colored_name(),
+          get_chara_talk(0).get_colored_name(),
+        ),
+      );
       sys_like_chara(cid, 0, -r_punish);
       w_flag = true;
     }

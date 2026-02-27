@@ -24,13 +24,12 @@ class GrandLives {
    * @param {number} race
    * @param {0|1} [year]
    */
-  check(race, year) {
+  check(race, year = 0) {
     const obj = this.#obj;
-    const _year = year || 0;
-    if (_year >= obj.length) {
+    if (year >= obj.length) {
       return false;
     }
-    return obj[_year][race] > 0;
+    return obj[year][race] > 0;
   }
 
   shift() {

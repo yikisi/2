@@ -9,6 +9,8 @@ const get_display_name = require('#/utils/calc-display-name');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
+const { i18n } = require('#/i18n/selector');
+
 /**
  * @param {number} race
  * @returns {Promise<number[]>}
@@ -38,33 +40,37 @@ async function select_contestants(race) {
       era.printInColRows(
         [
           {
-            content: [
-              '下列队伍成员登记出走了 ',
+            content: i18n().get_ui_race_select_contestants(
               race_infos[race].get_colored_name_with_class(),
-              '，要要求避战吗？',
-            ],
+            ),
             type: 'text',
           },
         ],
-        contestants.map((cid) => {
-          return {
-            accelerator: cid,
-            config: {
-              align: 'center',
-              buttonType: dict[cid] ? 'warning' : 'info',
-              width: 8,
-            },
-            content: `${get_display_name(era.get(`callname:${cid}:-1`))} [${
-              dict[cid] ? '出走' : '避战'
-            }]`,
-            type: 'button',
-          };
-        }),
+        contestants.map((cid) => ({
+          accelerator: cid,
+          config: {
+            align: 'center',
+            buttonType: dict[cid] ? 'warning' : 'info',
+            width: 8,
+          },
+          content: i18n()
+            .ui_race_select_contestant_template.replace(
+              '%NAME%',
+              get_display_name(era.get(`callname:${cid}:-1`)),
+            )
+            .replace(
+              '%STATUS%',
+              dict[cid]
+                ? i18n().ui_race_select_selected
+                : i18n().ui_race_select_prevent,
+            ),
+          type: 'button',
+        })),
         [
           {
             accelerator: 1000,
             config: { disabled: !contestant_count },
-            content: '确认出走名单',
+            content: i18n().ui_race_select_done,
             type: 'button',
           },
         ],

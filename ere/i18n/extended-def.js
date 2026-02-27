@@ -207,6 +207,17 @@ const di18n = {
     fill_cost_info(ret, _, cost_info);
     return ret.join('\n') || void 0;
   },
+  get race_result_statistics() {
+    const _ = i18n();
+    return [
+      _.ui_race_result_summary,
+      _.ui_race_result_location,
+      _.ui_race_result_speed,
+      _.ui_race_result_endurance,
+      _.ui_race_result_skills,
+      _.ui_race_result_log,
+    ];
+  },
   ...require('#/i18n/extended-chara-def'),
   kojo: {
     get_titled_content: (ckey, key, ...args) =>

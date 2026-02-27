@@ -300,11 +300,10 @@ module.exports = {
         opacity: lost_mind > 1 ? 1 : 0.5,
       });
     }
-    // TCVARNAME:45 = 余韵
-    const last = era.get(`tcvar:${cid}:45`);
+    const last = era.get(`tcvar:${cid}:余韵`);
     if (last) {
       ret.push({
-        ...di18n.tb_status.get_titled_status('tr_tc_45', has_penis),
+        ...di18n.tb_status.get_titled_status('tr_tc_45', +last),
         color: buff_colors[2],
         opacity: last > 1 ? 1 : 0.5,
       });

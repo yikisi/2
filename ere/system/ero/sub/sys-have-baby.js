@@ -471,7 +471,9 @@ async function sys_have_baby(mid) {
   }
   const c_life_marks = LifeEventMarks.get_marks(ch_id);
   c_life_marks.unexpected_child = m_life_marks.unexpected_pregnant;
+  c_life_marks.rape_child = m_life_marks.rape_child;
   m_life_marks.unexpected_pregnant = 0;
+  m_life_marks.rape_child = 0;
   m_life_marks.report = 0;
 
   if (!fid && era.get(`love:${mid}`) < 90 && (mid < 340 || mid > 342)) {

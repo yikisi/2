@@ -733,6 +733,9 @@ async function sys_calc_orgasm(shown, ...ids) {
                     life_marks.sperm = cid;
                     life_marks.unexpected_pregnant =
                       sys_check_awake(cid) - sys_check_awake(oid);
+                    if (era.get('tflag:强奸') >= 0) {
+                      life_marks.rape_child = era.get('tflag:强奸');
+                    }
                     era.set(`status:${oid}:排卵期`, 0);
                     era.set(`status:${oid}:经期`, 0);
                     await run_custom_ero(oid || cid, ero_hooks.be_pregnant, {

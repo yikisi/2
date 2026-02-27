@@ -232,6 +232,7 @@ class I18nEntry {
   ui_all = '全部';
   ui_increase = '提高';
   ui_decrease = '降低';
+  ui_end = '结束';
 
   get_ui_reward_header = (chara) => [chara, ' 的属性有了如下变化：'];
   get_ui_change_attr = (attr, change_mark, change_val) => [
@@ -241,6 +242,7 @@ class I18nEntry {
     ' 了 ',
     change_val,
   ];
+  get_ui_add_skills = (chara, skills) => [chara, ' 习得了 ', ...skills];
   ui_get_pt_template = '获得了 %PT% 点技能点数！';
   ui_train_level_up_template = '%ATTR%训练 变得更擅长了！';
   get_ui_change_motivation = (chara, motivation) => [
@@ -269,6 +271,24 @@ class I18nEntry {
     val,
     '！现在为：',
     result,
+  ];
+  get_ui_hurt_uma = (chara) => [chara, ' 受伤了！'];
+  get_ui_hurt_uma_plus = (chara) => [chara, ' 的受伤程度加深了！'];
+  get_ui_hurt_tired_uma = (chara) => [chara, ' 在疲惫之下受了更加严重的伤！'];
+  get_ui_add_titles = (chara) => [chara, ' 获得了新称号！'];
+  get_ui_ignore_event_punish = (chara, you) => [
+    '【因为 ',
+    you,
+    ' 的忽视，',
+    chara,
+    ' 有些失望】',
+  ];
+  get_ui_ignore_event_punish2 = (chara, you) => [
+    '【因为 ',
+    you,
+    ' 的忽视，',
+    chara,
+    ' 无比失望】',
   ];
 
   ui_hd_no_save = '当前未加载存档';
@@ -446,6 +466,90 @@ class I18nEntry {
     ...remove,
     '。',
   ];
+
+  get_ui_reg_header = (chara) => ['为 ', chara, ' 报名下一场比赛'];
+  ui_reg_race_template = '%NAME% (%COUNTRY%) %GRAND% %MARK%';
+  ui_reg_grand_mark = '🎤';
+  ui_reg_registered = '[▲已登记]';
+  get_ui_reg_tip_1_before_begin = (chara) => [
+    chara,
+    ' 需要先通过出道战出道才能参加其他比赛',
+  ];
+  get_ui_reg_tip_1_after_begin = (chara) => [chara, ' 很关注显示为红色的比赛'];
+  ui_reg_tip_2 = '参加带有星号(*)后缀的比赛可能会有特殊的事情发生';
+  ui_reg_tip_3 = '带有🎤后缀的比赛会开设大舞台，参加能够获得更多的声望';
+  ui_reg_tip_4 =
+    '带有(法)等后缀的比赛是海外赛事，需要在参赛两周前注册，并提前两周出发远征';
+  ui_reg_race_filter_template = '筛除不利比赛 [%STATUS%]';
+  ui_reg_race_more_info = '显示更多信息 [%STATUS%]';
+
+  get_ui_race_select_contestants = (race) => [
+    '下列队伍成员登记出走了 ',
+    race,
+    '，要要求避战吗？',
+  ];
+  ui_race_select_contestant_template = '%NAME% [%STATUS%]';
+  ui_race_select_selected = '出走';
+  ui_race_select_prevent = '避战';
+  ui_race_select_done = '确认出走名单';
+  get_ui_race_your_tp = (you) => [you, ' 的精力'];
+  ui_race_start_event = '要给谁赛前打气？';
+  get_ui_race_result = (chara, race, rank) => [
+    chara,
+    ' 取得了 ',
+    race,
+    ' 的 ',
+    rank,
+    '！',
+  ];
+  ui_race_speed_1 = '一倍速观看';
+  ui_race_speed_2 = '二倍速观看';
+  ui_race_speed_4 = '四倍速观看';
+  ui_race_few_contestants = '减少参赛选手显示';
+  ui_race_skip_race = '查看结果';
+  ui_race_result_summary = '揭示板';
+  get_ui_race_result_summary_header = (track, race) => [track, ' ', race];
+  ui_race_result_location = '相对位置统计';
+  ui_race_result_location_header = '与头马相对位置统计图';
+  ui_race_result_speed = '速度统计';
+  ui_race_result_speed_header = '速度统计图';
+  ui_race_result_endurance = '持久力统计';
+  ui_race_result_endurance_header = '持久力统计图';
+  ui_race_result_skills = '发动技能统计';
+  ui_race_result_log = '比赛日志';
+  ui_race_end_event = '要祝贺/安慰谁？';
+  ui_race_event_chara_template = '%NAME% (%RANK%)';
+  ui_race_event_end = '结束';
+  ui_race_event_tip = '* 互动按钮显示为红色的角色有专属剧情事件';
+  get_ui_race_honour_reward = (you, up_info) => [
+    '因为队伍成员的出色表现，社会对 ',
+    you,
+    ' 的评价',
+    up_info,
+    '了！',
+  ];
+  get_ui_race_honour_pregnant_punish = (you, down_info) => [
+    '虽然队伍成员表现很出色，但现役训练员的私生子丑闻还是让社会对 ',
+    you,
+    ' 的评价',
+    down_info,
+    '了！',
+  ];
+  get_ui_race_honour_hentai_punish = (you, down_info) => [
+    '因为队伍成员的变态行为，社会对 ',
+    you,
+    ' 的评价',
+    down_info,
+    '了！',
+  ];
+  get_ui_race_honour_lose_punish = (you, down_info) => [
+    '因为队伍成员的比赛失利，社会对 ',
+    you,
+    ' 的评价',
+    down_info,
+    '了！',
+  ];
+  get_ui_race_money_reward = (money) => ['收到了比赛赏金分成 ', money, ' 马币'];
 
   ui_bs_flatter = '虚与委蛇';
   ui_bs_unlock = '尝试脱困';

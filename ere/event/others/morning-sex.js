@@ -34,6 +34,7 @@ const { part_enum } = require('#/data/ero/part-const');
 const { get_trainer_title } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 
+const { palam_colors } = require('#/data/color-const');
 const di18n = require('#/i18n/extended-def');
 
 /**
@@ -164,8 +165,14 @@ async function duty(chara, me) {
     me.sex,
     '还有未尽的义务。从早到晚，周而复始。',
   ]);
-  printButton('顺从地含住', 1);
-  printButton('厌恶地扭过脸去', 2);
+  printButton('顺从地含住', 1, {
+    color: palam_colors.progress[1],
+    disabled: get('flag:恶堕') === 0,
+  });
+  printButton('厌恶地扭过脸去', 2, {
+    color: palam_colors.notifications[1],
+    disabled: get('flag:恶堕') > 0,
+  });
   begin_and_init_ero(0, chara.id);
   set('tflag:主导权', chara.id);
   if ((await input()) === 1) {

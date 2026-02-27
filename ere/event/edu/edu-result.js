@@ -1,8 +1,8 @@
 const era = require('#/era-electron');
 
+const sys_add_titles = require('#/system/chara/sys-add-titles');
 const sys_hurt_uma = require('#/system/chara/sys-hurt-uma');
 const {
-  sys_change_attr_and_print,
   sys_change_motivation,
   sys_change_pressure,
 } = require('#/system/sys-calc-base-cflag');
@@ -14,7 +14,6 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
 
-const CharaTitles = require('#/data/chara-titles');
 const { buff_colors } = require('#/data/color-const');
 const event_hooks = require('#/data/event/event-hooks');
 const { attr_enum, fumble_result } = require('#/data/train-const');
@@ -23,7 +22,7 @@ const { i18n } = require('#/i18n/selector');
 
 /** @param {number} cid */
 function handle_rest_cost(cid) {
-  change_attr_and_print(cid, attr_enum.tp, -get_random_value(50, 200));
+  all_reward_in_event(cid, { base: [0, -get_random_value(50, 200)] });
   let debuff = era.get(`status:${cid}:水土不服`);
   era.set(
     `status:${cid}:水土不服`,
@@ -38,56 +37,50 @@ function handle_rest_cost(cid) {
 
 /** @param {number} cid */
 function handle_travel_cost(cid) {
-  era.print([
-    get_chara_talk(cid).get_colored_name(),
-    ' 的 ',
-    ...sys_change_attr_and_print(cid, attr_enum.hp, -get_random_value(50, 200)),
-    '，',
-    ...sys_change_attr_and_print(
-      cid,
-      attr_enum.tp,
-      -get_random_value(200, 400),
+  all_reward_in_event(cid, {
+    base: [-get_random_value(50, 200), -get_random_value(200, 400)],
+    motivation: +(
+      cid > 0 &&
+      era.get(`cflag:${cid}:种族`) > 0 &&
+      Math.random() > 0.2
     ),
-    '！',
-  ]);
+  });
   sys_change_pressure(cid, -get_random_value(-500, 1000));
-  get_random_value(0, 4) > 1 && sys_change_motivation(cid, 1);
 }
 
 /**
  * @param {number} cid
  * @param {number} aid
+ * @param {boolean} learnt
  */
-function learn_language(cid, aid) {
-  change_attr_and_print(cid, attr_enum.intelligence, get_random_value(10, 20));
+function learn_language(cid, aid, learnt) {
+  all_reward_in_event(cid, {
+    attr: [0, 0, 0, 0, +(learnt && get_random_value(10, 20))],
+    base: [0, -get_random_value(200, 400)],
+  });
+  if (!learnt) {
+    return;
+  }
   let level = era.get(`abl:${cid}:${aid}`);
   if (level === 0) {
     level = era.add(`abl:${cid}:${aid}`, 1);
-    era.print([
-      get_chara_talk(cid).get_colored_name(),
-      ' 学会了 ',
-      {
-        content: i18n().tb_abl[aid],
-        fontWeight: 'bold',
-      },
-      '！',
-    ]);
+    i18n().timon.edu.fs_learn_language(get_chara_talk(cid), {
+      content: i18n().tb_abl[aid],
+      fontWeight: 'bold',
+    });
   } else if (level < 5) {
     level = era.add(`abl:${cid}:${aid}`, 1);
-    era.print([
-      get_chara_talk(cid).get_colored_name(),
-      ' 的 ',
+    i18n().timon.edu.fs_update_language(
+      get_chara_talk(cid),
       {
         content: i18n().tb_abl[aid],
         fontWeight: 'bold',
       },
-      ' 更加熟练了，现在是 ',
       {
         content: i18n().tb_abl.lv_template.replace('%LEVEL%', level.toString()),
         fontWeight: 'bold',
       },
-      '！',
-    ]);
+    );
   }
   const debuff = era.get(`status:${cid}:语言不通`);
   debuff &&
@@ -97,30 +90,11 @@ function learn_language(cid, aid) {
     era.get(`abl:${cid}:英语`) === 5 &&
     era.get(`abl:${cid}:法语`) === 5
   ) {
-    CharaTitles.get(cid).push({
+    sys_add_titles(cid, {
       n: 'l_hello_world',
       c: buff_colors[1],
     });
   }
-}
-
-/**
- * @param {number} cid
- * @param {number} attr
- * @param {number} val
- */
-function change_attr_and_print(cid, attr, val) {
-  const to_print = sys_change_attr_and_print(cid, attr, val);
-  if (to_print.length > 0) {
-    era.print([
-      get_chara_talk(cid).get_colored_name(),
-      ' 的 ',
-      ...to_print,
-      '！',
-    ]);
-    return true;
-  }
-  return false;
 }
 
 /** @type {Record<string,function(number,HookArg,*):Promise<*>>} */
@@ -142,35 +116,22 @@ handlers[event_hooks.foreign_rest] = async (cid) => {
  * @param {{lan:number}} extra_flag
  */
 handlers[event_hooks.foreign_study] = async (cid, hook, extra_flag) => {
-  change_attr_and_print(0, attr_enum.tp, -get_random_value(200, 400));
-  if (cid > 0) {
-    change_attr_and_print(cid, attr_enum.tp, -get_random_value(200, 400));
-  }
-  if (hook.arg) {
-    era.println();
-    learn_language(cid, extra_flag.lan);
-    cid && learn_language(0, extra_flag.lan);
-    await era.waitAnyKey();
-  }
+  learn_language(cid, extra_flag.lan, hook.arg);
+  cid > 0 && learn_language(0, extra_flag.lan, hook.arg);
+  await era.waitAnyKey();
 };
 
 handlers[event_hooks.foreign_train] = async (cid) => {
-  era.println();
-  era.print([
-    get_chara_talk(cid).get_colored_name(),
-    ' 的 ',
-    ...sys_change_attr_and_print(
-      cid,
-      attr_enum.hp,
-      -get_random_value(100, 200),
-    ),
-    '，',
-    ...sys_change_attr_and_print(cid, attr_enum.tp, -get_random_value(50, 100)),
-    '！',
-  ]);
-  change_attr_and_print(cid, get_random_value(0, 3), get_random_value(5, 10));
+  const attr = new Array(5).fill(0);
+  attr[get_random_value(0, 3)] = get_random_value(5, 10);
+  all_reward_in_event(cid, {
+    attr,
+    base: [-get_random_value(100, 200), -get_random_value(50, 100)],
+  });
   if (cid > 0) {
-    change_attr_and_print(0, attr_enum.tp, -get_random_value(50, 100));
+    all_reward_in_event(0, {
+      base: [0, -get_random_value(50, 100)],
+    });
   }
   const debuff = era.get(`status:${cid}:客场作战`);
   era.set(
@@ -229,7 +190,6 @@ handlers[event_hooks.train_fail] = async (cid, hook, extra) => {
   let stamina = 0;
   if (extra.train !== attr_enum.intelligence) {
     era.println();
-    const chara_name = era.get(`callname:${cid}:-2`);
     let change_buff = 0,
       hurt = 1 + extra.fumble;
     switch (hook.arg) {
@@ -272,11 +232,7 @@ handlers[event_hooks.train_fail] = async (cid, hook, extra) => {
     }
     if (era.get(`status:${cid}:练习X手`) !== change_buff) {
       era.set(`status:${cid}:练习X手`, change_buff);
-      era.print(
-        `${chara_name} 感觉在练习上越来越${
-          change_buff > 0 ? '轻松' : '吃力'
-        }……`,
-      );
+      i18n().timon.edu.tf_change_debuff(get_chara_talk(cid), change_buff);
     }
     sys_hurt_uma(cid, hurt);
   } else if (extra.fumble) {

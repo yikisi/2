@@ -13,6 +13,7 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const { buff_colors } = require('#/data/color-const');
 const { class_enum } = require('#/data/race/model/race-info');
+const { frame_rate } = require('#/data/race/race-sim-const');
 
 const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
@@ -47,19 +48,19 @@ async function page_race_result(contestants, info, race_id) {
       {
         accelerator: 1,
         config: { width: 8, align: 'center' },
-        content: '一倍速观看',
+        content: i18n().ui_race_speed_1,
         type: 'button',
       },
       {
         accelerator: 2,
         config: { width: 8, align: 'center' },
-        content: '二倍速观看',
+        content: i18n().ui_race_speed_2,
         type: 'button',
       },
       {
-        accelerator: 8,
+        accelerator: 3,
         config: { width: 6, align: 'center' },
-        content: '四倍速观看',
+        content: i18n().ui_race_speed_4,
         type: 'button',
       },
       {
@@ -69,13 +70,13 @@ async function page_race_result(contestants, info, race_id) {
           buttonType: sum ? 'warning' : 'info',
           width: 8,
         },
-        content: '减少参赛选手显示',
+        content: i18n().ui_race_few_contestants,
         type: 'button',
       },
       {
         accelerator: 0,
         config: { align: 'center', width: 8 },
-        content: '查看结果',
+        content: i18n().ui_race_skip_race,
         type: 'button',
       },
     ]);
@@ -84,13 +85,13 @@ async function page_race_result(contestants, info, race_id) {
         flag_res = false;
         break;
       case 1:
-        interval = (1000 * 1.25) / 15;
+        interval = (1000 * 1.25) / frame_rate;
         break;
       case 2:
-        interval = (500 * 1.2) / 15;
+        interval = (500 * 1.2) / frame_rate;
         break;
       case 3:
-        interval = 250 / 15;
+        interval = 250 / frame_rate;
         break;
       case 4:
         era.set('flag:比赛缩略显示', +(sum = !sum));
@@ -179,10 +180,10 @@ async function page_race_result(contestants, info, race_id) {
     contestants.findIndex((e) => e.legend === 2) !== -1 &&
     contestants.find((e) => !e.legend && e.rank.curr === 1)?.index_chara >= 0
   ) {
-    era.setMask('滤镜_强敌击退');
+    era.setOverlay('滤镜_强敌击退');
     era.playMusic('音效_强敌击退');
     await era.waitAnyKey();
-    era.setMask();
+    era.setOverlay();
   } else {
     era.stopMusic();
   }
@@ -210,20 +211,13 @@ async function page_race_result(contestants, info, race_id) {
       era.printMultiColumns(
         [
           { type: 'divider' },
-          ...[
-            '揭示板',
-            '相对位置统计',
-            '速度统计',
-            '持久力统计',
-            '发动技能统计',
-            '比赛日志',
-          ].map((e, i) => ({
+          ...di18n.race_result_statistics.map((e, i) => ({
             accelerator: i + 1,
             config: { width: 4 },
             content: e,
             type: 'button',
           })),
-          { accelerator: 99, content: '结束', type: 'button' },
+          { accelerator: 99, content: i18n().ui_end, type: 'button' },
         ],
         { horizontalAlign: 'space-evenly' },
       );
@@ -240,13 +234,12 @@ async function page_race_result(contestants, info, race_id) {
               {
                 config: { align: 'center' },
                 content: [
-                  ...(info.track !== undefined
-                    ? [
+                  ...(info.track !== void 0
+                    ? i18n().get_ui_race_result_summary_header(
                         di18n.race.get_track_name(info.track),
-                        ' ',
                         info.get_colored_name_with_class(),
-                      ]
-                    : [`训练场 ${info.name}`]),
+                      )
+                    : [info.name]),
                   { isBr: 2 },
                 ],
                 type: 'text',
@@ -322,7 +315,7 @@ async function page_race_result(contestants, info, race_id) {
               align: 'center',
               fontSize: '1.5rem',
             },
-            content: '与头马相对位置统计图',
+            content: i18n().ui_race_result_location_header,
             type: 'text',
           },
         ]);
@@ -342,7 +335,7 @@ async function page_race_result(contestants, info, race_id) {
               align: 'center',
               fontSize: '1.5rem',
             },
-            content: '速度统计图',
+            content: i18n().ui_race_result_speed_header,
             type: 'text',
           },
         ]);
@@ -365,7 +358,7 @@ async function page_race_result(contestants, info, race_id) {
               align: 'center',
               fontSize: '1.5rem',
             },
-            content: '持久力统计图',
+            content: i18n().ui_race_result_endurance_header,
             type: 'text',
           },
         ]);
@@ -385,7 +378,7 @@ async function page_race_result(contestants, info, race_id) {
               align: 'center',
               fontSize: '1.5rem',
             },
-            content: '发动技能统计',
+            content: i18n().ui_race_result_skills,
             type: 'text',
           },
         ]);
@@ -406,7 +399,7 @@ async function page_race_result(contestants, info, race_id) {
                 align: 'center',
                 fontSize: '1.5rem',
               },
-              content: '比赛日志',
+              content: i18n().ui_race_result_log,
               type: 'text',
             },
           ],

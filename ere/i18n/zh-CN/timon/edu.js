@@ -412,6 +412,17 @@ module.exports = {
     return f;
   })(),
   /**
+   * @param {CharaTalk} chara
+   * @param {number} debuff
+   */
+  tf_change_debuff(chara, debuff) {
+    if (debuff > 0) {
+      era.print(['【', chara.get_colored_name(), ' 感觉在练习上越来越轻松】']);
+    } else {
+      era.print(['【', chara.get_colored_name(), ' 感觉在练习上越来越吃力】']);
+    }
+  },
+  /**
    * @author 雞雞
    * @param {CharaTalk} chara
    * @param {CharaTalk} you
@@ -438,6 +449,28 @@ module.exports = {
     } else {
       await era.printAndWait(['不好！', chara.get_colored_name(), ' 看睡了！']);
     }
+  },
+  /**
+   * @param {CharaTalk} chara
+   * @param {PrintedSpan} language
+   */
+  fs_learn_language(chara, language) {
+    era.print([chara.get_colored_name(), ' 学会了 ', language, '！']);
+  },
+  /**
+   * @param {CharaTalk} chara
+   * @param {PrintedSpan} language
+   * @param {PrintedSpan} new_level
+   */
+  fs_update_language(chara, language, new_level) {
+    era.print([
+      chara.get_colored_name(),
+      ' 的 ',
+      language,
+      ' 更加熟练了，现在是 ',
+      new_level,
+      '！',
+    ]);
   },
   /**
    * @author 雞雞

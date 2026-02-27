@@ -1545,6 +1545,10 @@ module.exports = {
       await era.printAndWait(['一阵风吹过，居然是 150 马币？！']);
     }
   },
+  /** @param {CharaTalk} chara */
+  oc_remove_train_debuff(chara) {
+    era.print(['【', chara.get_colored_name(), ' 的训练似乎更加顺利了】']);
+  },
   /**
    * @author 雞雞
    * @param {CharaTalk} chara

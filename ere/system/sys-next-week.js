@@ -71,6 +71,8 @@ const {
 } = require('#/data/other-const');
 const { pressure_border } = require('#/data/train-const');
 
+const { i18n } = require('#/i18n/selector');
+
 async function sys_next_week() {
   const me = get_chara_talk(0);
   const my_marks = new MyEduMarks();
@@ -346,15 +348,14 @@ async function sys_next_week() {
         r_punish += birthday === 2;
       }
       if (r_punish > 0) {
-        era.print([
-          '【因为 ',
-          me.get_colored_name(),
-          ' 的忽视，',
-          get_chara_talk(cid).get_colored_name(),
-          ' ',
-          r_punish > 2 ? '无比' : '感到',
-          '失望】',
-        ]);
+        era.print(
+          (r_punish > 2
+            ? i18n().get_ui_ignore_event_punish2
+            : i18n().get_ui_ignore_event_punish)(
+            get_chara_talk(cid).get_colored_name(),
+            get_chara_talk(0).get_colored_name(),
+          ),
+        );
         sys_like_chara(cid, 0, -50 * r_punish);
         await era.waitAnyKey();
       }

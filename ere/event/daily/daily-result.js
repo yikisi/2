@@ -14,6 +14,8 @@ const { sys_change_money } = require('#/system/sys-calc-flag');
 
 const print_shop_page = require('#/page/page-shop');
 
+const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
+
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
@@ -24,22 +26,7 @@ const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { attr_enum } = require('#/data/train-const');
 
 const di18n = require('#/i18n/extended-def');
-
-/**
- * @param {number} cid
- * @param {[]} to_print
- */
-function print_attr_change(cid, to_print) {
-  if (to_print.length > 0) {
-    era.print([
-      get_chara_talk(cid).get_colored_name(),
-      ' 的 ',
-      ...to_print,
-      '！',
-    ]);
-  }
-  return to_print.length > 0;
-}
+const { i18n } = require('#/i18n/selector');
 
 /**
  * @param {number} cid
@@ -70,87 +57,47 @@ handlers[event_hooks.office_gift] = async (cid) => {
 handlers[event_hooks.office_cook] = async (cid) => {
   era.println();
   let wait_flag = false;
-  wait_flag =
-    print_attr_change(
-      0,
-      sys_change_attr_and_print(0, attr_enum.hp, -get_random_value(50, 100)),
-    ) || wait_flag;
-  wait_flag =
-    print_attr_change(
-      0,
-      sys_change_attr_and_print(0, attr_enum.tp, get_random_value(0, 20)),
-    ) || wait_flag;
-  sys_change_weight(0, get_random_value(20, 40, true));
   if (cid > 0) {
     wait_flag =
-      print_attr_change(
-        cid,
-        sys_change_attr_and_print(
-          cid,
-          attr_enum.hp,
-          get_random_value(100, 200),
-        ),
-      ) || wait_flag;
-    wait_flag =
-      print_attr_change(
-        cid,
-        sys_change_attr_and_print(cid, attr_enum.tp, get_random_value(0, 50)),
-      ) || wait_flag;
-    wait_flag = sys_like_chara(cid, 0, get_random_value(5, 10)) || wait_flag;
+      all_reward_in_event(cid, {
+        base: [get_random_value(100, 200), get_random_value(0, 50)],
+        relation: get_random_value(5, 10),
+      }) || wait_flag;
     sys_change_weight(cid, get_random_value(20, 40, true));
   }
+  wait_flag =
+    all_reward_in_event(0, {
+      base: [-get_random_value(50, 100), get_random_value(0, 20)],
+    }) || wait_flag;
+  sys_change_weight(0, get_random_value(20, 40, true));
   wait_flag && (await era.waitAnyKey());
 };
 
 handlers[event_hooks.office_study] = async (cid) => {
   era.println();
   random_cost_in_action(cid, [0, 0], [100, 300]);
-  print_attr_change(
-    cid,
-    sys_change_attr_and_print(
-      cid,
-      attr_enum.intelligence,
-      get_random_value(5, 10),
-    ),
-  );
-  sys_like_chara(cid, 0, get_random_value(5, 10));
-  await era.printAndWait([
-    get_chara_talk(cid).get_colored_name(),
-    ' 获得了 4 点技能点数',
-  ]);
-  era.add(`exp:${cid}:技能点数`, 4);
+  all_reward_in_event(cid, {
+    attr: [0, 0, 0, 0, get_random_value(5, 10)],
+    relation: get_random_value(5, 10),
+    pt: 4,
+  });
+  await era.waitAnyKey();
 };
 
 handlers[event_hooks.office_rest] = async (cid) => {
   era.println();
   let wait_flag = false;
-  wait_flag =
-    print_attr_change(
-      0,
-      sys_change_attr_and_print(0, attr_enum.tp, -get_random_value(50, 100)),
-    ) || wait_flag;
-  wait_flag =
-    print_attr_change(
-      0,
-      sys_change_attr_and_print(0, attr_enum.hp, get_random_value(0, 20)),
-    ) || wait_flag;
   if (cid > 0) {
     wait_flag =
-      print_attr_change(
-        cid,
-        sys_change_attr_and_print(
-          cid,
-          attr_enum.tp,
-          get_random_value(100, 200),
-        ),
-      ) || wait_flag;
-    wait_flag =
-      print_attr_change(
-        cid,
-        sys_change_attr_and_print(cid, attr_enum.hp, get_random_value(0, 50)),
-      ) || wait_flag;
-    wait_flag = sys_like_chara(cid, 0, get_random_value(5, 10)) || wait_flag;
+      all_reward_in_event(cid, {
+        base: [get_random_value(0, 50), get_random_value(100, 200)],
+        relation: get_random_value(5, 10),
+      }) || wait_flag;
   }
+  wait_flag =
+    all_reward_in_event(0, {
+      base: [get_random_value(0, 20), -get_random_value(50, 100)],
+    }) || wait_flag;
   wait_flag && (await era.waitAnyKey());
 };
 
@@ -158,21 +105,12 @@ handlers[event_hooks.office_prepare] = async (cid) => {
   era.println();
   sys_change_money(-20);
   random_cost_in_action(cid, [0, 0], [100, 300]);
-  print_attr_change(
-    cid,
-    sys_change_attr_and_print(
-      cid,
-      attr_enum.intelligence,
-      get_random_value(5, 10),
-    ),
-  );
-  Math.random() < 0.75 + era.get('flag:训练难度') / 100 &&
-    sys_change_motivation(cid, 1);
-  await era.printAndWait([
-    get_chara_talk(cid).get_colored_name(),
-    ' 获得了 10 点技能点数',
-  ]);
-  era.add(`exp:${cid}:技能点数`, 10);
+  all_reward_in_event(cid, {
+    attr: [0, 0, 0, 0, get_random_value(5, 10)],
+    pt: 10,
+    motivation: +(Math.random() < 0.75 + era.get('flag:训练难度') / 100),
+  });
+  await era.waitAnyKey();
 };
 
 handlers[event_hooks.office_game] = async (cid) => {
@@ -191,7 +129,7 @@ handlers[event_hooks.office_game] = async (cid) => {
 };
 
 handlers[event_hooks.good_night] = async (cid, hook) => {
-  if (hook.arg !== undefined) {
+  if (hook.arg !== void 0) {
     if (hook.arg > 0) {
       era.set('flag:床伴', cid);
       hook.arg === 2 && (LifeEventMarks.get_marks(cid).marital_rape = 1);
@@ -229,24 +167,17 @@ handlers[event_hooks.school_atrium] = async (cid, hook) => {
 handlers[event_hooks.school_rooftop] = async (cid) => {
   era.println();
   let wait_flag = false;
-  let to_print = sys_change_attr_and_print(
-    0,
-    attr_enum.hp,
-    get_random_value(0, 100),
-  );
-  wait_flag = print_attr_change(0, to_print) || wait_flag;
-  sys_change_weight(0, get_random_value(20, 40, true));
   if (cid > 0) {
-    to_print = sys_change_attr_and_print(
-      cid,
-      attr_enum.hp,
-      get_random_value(50, 150),
-    );
-    print_attr_change(cid, to_print);
-    wait_flag ||= to_print.length > 0;
-    wait_flag = sys_like_chara(cid, 0, get_random_value(5, 15)) || wait_flag;
+    wait_flag =
+      all_reward_in_event(cid, {
+        base: [get_random_value(50, 150)],
+        relation: get_random_value(5, 15),
+      }) || wait_flag;
     sys_change_weight(cid, get_random_value(20, 40, true));
   }
+  wait_flag =
+    all_reward_in_event(0, { base: [get_random_value(0, 100)] }) || wait_flag;
+  sys_change_weight(0, get_random_value(20, 40, true));
   wait_flag && (await era.waitAnyKey());
 };
 
@@ -309,24 +240,21 @@ handlers[event_hooks.out_shopping] = async (cid, hook) => {
         (cid && sys_like_chara(cid, 0, get_random_value(5, 10))) || wait_flag;
     } else {
       // 卡拉OK和看电影
-      const temp = era.get(`cflag:${cid}:种族`)
-        ? sys_change_attr_and_print(
-            cid,
-            attr_enum.intelligence,
-            get_random_value(5, 10),
-          )
-        : [];
-      wait_flag =
-        (cid > 0 && sys_like_chara(cid, 0, get_random_value(10, 15))) ||
-        wait_flag;
-      print_attr_change(cid, temp);
-      wait_flag ||= temp.length > 0;
-      random_cost_in_action(cid, [0, 100], [200, 600]);
       const dice = Math.random();
       wait_flag =
-        (dice < 0.75 + era.get('flag:训练难度') / 100 &&
-          sys_change_motivation(cid, 1 + (dice < 0.25))) ||
-        wait_flag;
+        all_reward_in_event(cid, {
+          attr:
+            era.get(`cflag:${cid}:种族`) > 0
+              ? [0, 0, 0, 0, get_random_value(5, 10)]
+              : void 0,
+          relation: +(cid > 0 && get_random_value(10, 15)),
+          motivation: +(
+            cid > 0 &&
+            dice < 0.75 + era.get('flag:训练难度') / 100 &&
+            1 + (dice < 0.25)
+          ),
+        }) || wait_flag;
+      random_cost_in_action(cid, [0, 100], [200, 600]);
     }
     sys_change_money(-10);
     wait_flag && (await era.waitAnyKey());
@@ -339,17 +267,11 @@ handlers[event_hooks.out_church] = async (cid) => {
   era.println();
   if (condition_chara) {
     era.set(`status:${cid}:练习X手`, 0);
-    era.print([
-      get_chara_talk(cid).get_colored_name(),
-      ' 的训练似乎更加顺利了……',
-    ]);
+    i18n().timon.daily.oc_remove_train_debuff(get_chara_talk(cid));
   }
   if (condition_me) {
     era.set('status:0:练习X手', 0);
-    era.print([
-      get_chara_talk(0).get_colored_name(),
-      ' 的训练似乎更加顺利了……',
-    ]);
+    i18n().timon.daily.oc_remove_train_debuff(get_chara_talk(0));
   }
   if (
     sys_like_chara(
@@ -365,27 +287,22 @@ handlers[event_hooks.out_church] = async (cid) => {
 };
 
 handlers[event_hooks.out_station] = async (cid, hook) => {
-  let temp,
-    wait_flag = false;
+  let wait_flag = false;
   era.println();
   switch (hook.arg) {
     case 0:
       // 用餐
       sys_change_money(-10);
       random_cost_in_action(cid, [0, 0], [0, 200]);
-      sys_change_weight(0, get_random_value(20, 40, true));
       if (cid > 0) {
         wait_flag =
-          sys_like_chara(cid, 0, get_random_value(10, 15)) || wait_flag;
-        temp = sys_change_attr_and_print(
-          cid,
-          attr_enum.hp,
-          get_random_value(100, 200),
-        );
-        wait_flag ||= temp.length > 0;
-        print_attr_change(cid, temp);
+          all_reward_in_event(cid, {
+            base: [get_random_value(100, 200)],
+            relation: get_random_value(10, 15),
+          }) || wait_flag;
         sys_change_weight(cid, get_random_value(20, 40, true));
       }
+      sys_change_weight(0, get_random_value(20, 40, true));
       break;
     case 1:
       // 约会
