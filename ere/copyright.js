@@ -260,6 +260,8 @@ function generate_copyrights() {
         { isDivider: true },
         get_copyright_entry(105),
         { isBr: true },
+        get_copyright_entry(129),
+        { isDivider: true },
         get_copyright_entry(302),
       ],
       '无名者Y',
