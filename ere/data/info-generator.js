@@ -303,7 +303,7 @@ module.exports = {
     const last = era.get(`tcvar:${cid}:余韵`);
     if (last) {
       ret.push({
-        ...di18n.tb_status.get_titled_status('tr_tc_45', +last),
+        ...di18n.tb_status.get_titled_status('tr_tc_45', +last, has_penis),
         color: buff_colors[2],
         opacity: last > 1 ? 1 : 0.5,
       });
@@ -319,7 +319,7 @@ module.exports = {
     const orgasm_stop = era.get(`tcvar:${cid}:57`);
     if (orgasm_stop) {
       ret.push({
-        ...di18n.tb_status.get_titled_status('tr_tc_57'),
+        ...di18n.tb_status.get_titled_status('tr_tc_57', orgasm_stop),
         color: buff_colors[2],
         opacity: orgasm_stop > 1 ? 1 : 0.5,
       });
@@ -352,7 +352,7 @@ module.exports = {
       const orgasm_denial = era.get(`ex:${cid}:55`);
       if (orgasm_denial) {
         ret.push({
-          ...di18n.tb_status.get_titled_status('tr_ex_55'),
+          ...di18n.tb_status.get_titled_status('tr_ex_55', orgasm_denial),
           color: buff_colors[2],
         });
       }
