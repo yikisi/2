@@ -183,20 +183,20 @@ module.exports = class extends CustomizedMec {
   set_pseudo_uma(uma) {
     // STATUSNAME:112 = 皇帝
     if (era.get('status:17:112') > 0) {
-      uma.attr_buffs.forEach((l) => l.push('+2%[皇帝]'));
+      uma.attr_buffs.forEach((l) =>
+        l.push(['+2%', i18n().kojo[this.id].emperor]),
+      );
     }
     // STATUSNAME:110 = 自毁
     if (era.get('status:17:110') > 0) {
-      uma.attr_buffs.forEach((l) => l.push('-5%[自毁]'));
+      uma.attr_buffs.forEach((l) =>
+        l.push(['-5%', i18n().kojo[this.id].self_destruct]),
+      );
     }
-    if (!new LunaEduMarks().emperor) {
-      // STATUSNAME:115 = 神经衰弱
-      const debuff = era.get('status:17:115');
-      if (debuff > 0) {
-        uma.attr_buffs.forEach((l) =>
-          l.push(`-${8 * debuff}%[神经衰弱(${debuff})]`),
-        );
-      }
+    if (!new LunaEduMarks().emperor && era.get('status:17:115') > 0) {
+      uma.attr_buffs.forEach((l) =>
+        l.push(['-8%', i18n().kojo[this.id].r_fallen]),
+      );
     }
   }
 };

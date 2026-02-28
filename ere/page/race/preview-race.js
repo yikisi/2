@@ -9,8 +9,6 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const {
   adaptability_colors,
   attr_colors,
-  el_danger_color,
-  el_success_color,
   el_warning_color,
   motivation_colors,
 } = require('#/data/color-const');
@@ -25,12 +23,17 @@ const {
 } = require('#/data/info-generator');
 
 const di18n = require('#/i18n/extended-def');
-const { i18n } = require('#/i18n/selector');
+const { i18n, lan } = require('#/i18n/selector');
+
+const item_buff_key = 'slaanesh';
+const item_debuff_key = 'item';
 
 const pop_mark = ['➖', '◎', '◯', '▲', '△', '△'];
 
 /** @param {PseudoUma} chara */
 function generate_attribute_info(chara) {
+  const _lan = lan();
+  const _ = i18n();
   const ret = [];
   chara.attrs.forEach((_val, index) => {
     const value = Math.floor(_val);
@@ -56,11 +59,21 @@ function generate_attribute_info(chara) {
         },
         content: [
           {
-            content: `${value.toLocaleString()} (${rank})`,
+            content: _.ui_race_preview_contestant_attr
+              .replace('%ATTR%', value.toLocaleString(_lan))
+              .replace('%RANK%', rank),
             title: attr_buff_list.length
-              ? `${value.toLocaleString()}=${Math.floor(
-                  era.get(`base:${chara.index_chara}:${5 + index}`),
-                )}(基础)${attr_buff_list.join('')}`
+              ? `${value.toLocaleString(_lan)}=${_.tb_status.race_buff_template
+                  .replace(
+                    '%BUFF%',
+                    Math.floor(
+                      era.get(`base:${chara.index_chara}:${5 + index}`),
+                    ).toLocaleString(_lan),
+                  )
+                  .replace(
+                    '%NAME%',
+                    _.tb_status.r_base,
+                  )}${attr_buff_list.map(([buff, desc]) => _.tb_status.race_buff_template.replace('%BUFF%', buff).replace('%NAME%', desc)).join('')}`
               : void 0,
           },
         ],
@@ -83,24 +96,35 @@ async function preview_race(
   contestants,
   is_grand_live = false,
 ) {
+  const _lan = lan();
+  const buff_template = i18n().tb_status.race_buff_template;
   const item_inf = era.get('flag:道具影响');
   await era.clear();
   era.drawLine();
   const race_header = [
     {
       config: { align: 'center' },
-      content: [...date_indicator(), ' ', info.daytime ? '夜' : '昼'],
+      content: i18n().race.get_preview_header_env(
+        date_indicator(),
+        info.daytime ? i18n().race.d_night : i18n().race.d_day,
+      ),
       type: 'text',
     },
     {
       config: { align: 'center' },
-      content: `${info.track >= 0 ? di18n.race.n_track[info.track] : i18n().race.t_playground} ${
-        di18n.race.a_ground[info.ground]
-      } ${info.span.toLocaleString()}m (${
-        di18n.race.a_distance[info.distance]
-      }) ${di18n.race.n_rotation[info.rotation + 1]} · ${di18n.race.n_weather[info.weather]} ${
-        di18n.race.n_mess[info.mess]
-      }`,
+      content: i18n()
+        .race.preview_header_race_template.replace(
+          '%TRACK%',
+          info.track >= 0
+            ? di18n.race.n_track[info.track]
+            : i18n().race.t_playground,
+        )
+        .replace('%GROUND%', di18n.race.a_ground[info.ground])
+        .replace('%SPAN%', info.span.toLocaleString(lan()))
+        .replace('%DISTANCE%', di18n.race.a_distance[info.distance])
+        .replace('%ROTATION%', di18n.race.n_rotation[info.rotation + 1])
+        .replace('%WEATHER%', di18n.race.n_weather[info.weather])
+        .replace('%MESS%', di18n.race.n_mess[info.mess]),
       type: 'text',
     },
     {
@@ -108,7 +132,11 @@ async function preview_race(
         align: 'center',
         fontSize: '1.5rem',
       },
-      content: [info.get_colored_name_with_class(), is_grand_live ? ' 🎤' : ''],
+      content: [
+        info.get_colored_name_with_class(),
+        ' ',
+        is_grand_live ? i18n().ui_grand_live_mark : '',
+      ],
       type: 'text',
     },
   ];
@@ -116,7 +144,7 @@ async function preview_race(
     await era.printAndWait(header_line.content, header_line.config);
   }
   await era.clear();
-  const skill_buffer = [];
+  let skill_buffer = [];
   const item_chara = team_list.filter((e) => {
     const { index_chara: cid } = e;
     if (!cid) {
@@ -159,6 +187,19 @@ async function preview_race(
   cur_chara.list_skill.forEach((s) =>
     skill_buffer.push(...s.data.get_colored_name(cur_chara)),
   );
+  let temp;
+
+  /**
+   * @param {PseudoUma} uma
+   * @returns {string}
+   */
+  function get_button_type(uma) {
+    if (uma.legend > 0) {
+      return 'danger';
+    }
+    return team_list.includes(uma) ? 'success' : 'warning';
+  }
+
   while (flag_prepare_race) {
     era.setVerticalAlign('middle');
     const line_num = (flag_print ? era.printInColRows : era.replaceInColRows)(
@@ -168,8 +209,13 @@ async function preview_race(
           {
             accelerator:
               ((uma_index + contestants.length - 1) % contestants.length) + 1,
-            config: { align: 'center' },
-            content: `上一位\n${contestants.at(uma_index - 1).name}`,
+            config: {
+              align: 'center',
+              buttonType: get_button_type(
+                (temp = contestants.at(uma_index - 1)),
+              ),
+            },
+            content: i18n().ui_race_prev_template.replace('%NAME%', temp.name),
             type: 'button',
           },
         ],
@@ -197,79 +243,86 @@ async function preview_race(
         columns: [
           {
             config: { align: 'center' },
-            content: [
+            content: i18n().get_ui_race_preview_contestant_entry(
               {
                 color:
                   adaptability_colors[get_rank_level(cur_chara.score_rank)],
                 content: cur_chara.score_rank,
                 fontWeight: 'bold',
               },
-              { isDivider: true },
-              i18n().ui_mot,
-              '：',
-              {
+              i18n().get_ui_motivation({
                 color: motivation_colors[cur_chara.motivation + 2],
                 content: di18n.n_mot[cur_chara.motivation + 2],
-              },
-              { isDivider: true },
-              '第 ',
-              cur_chara.pop[0],
-              ' 人气 ',
+              }),
+              cur_chara.pop[0].toString(),
               cur_chara.pop
                 .slice(1)
                 .map((e) => pop_mark[e])
                 .join(' '),
-            ],
+            ),
             type: 'text',
           },
-          { config: { content: '基础能力' }, type: 'divider' },
+          { config: { content: i18n().ui_train_base }, type: 'divider' },
           ...attribute_info,
-          { config: { content: '比赛能力' }, type: 'divider' },
+          { config: { content: i18n().ui_train_race }, type: 'divider' },
           {
             config: { align: 'center', width: 12 },
-            content: [
-              `${di18n.n_adapt[info.ground]} `,
+            content: i18n().get_ui_race_preview_contestant_adapt(
+              di18n.n_ground[info.ground],
               {
                 color: adaptability_colors[cur_chara.adapts.ground],
                 content: get_adaptability_rank(cur_chara.adapts.ground),
                 fontWeight: 'bold',
                 title:
                   cur_chara.ground_buffs.length > 0
-                    ? `${get_adaptability_rank(cur_chara.adapts.ground)}=${get_adaptability_rank(
-                        era.get(
-                          // CFLAGNAME:30 - 31 = 草地适性 - 泥地适性
-                          `cflag:${cur_chara.index_chara}:${30 + info.ground}`,
-                        ),
-                      )}(基础)${cur_chara.ground_buffs.join('')}`
+                    ? `${get_adaptability_rank(cur_chara.adapts.ground)}=${buff_template
+                        .replace(
+                          '%BUFF%',
+                          get_adaptability_rank(
+                            cur_chara.o_a_ground_list[info.ground],
+                          ),
+                        )
+                        .replace(
+                          '%NAME%',
+                          i18n().tb_status.r_base,
+                        )}${cur_chara.ground_buffs.map(([buff, desc]) => buff_template.replace('%BUFF%', buff).replace('%NAME%', desc)).join('')}`
                     : void 0,
               },
-            ],
+            ),
             type: 'text',
           },
           {
             config: { align: 'center', width: 12 },
-            content: [
-              `${di18n.n_adapt[info.distance + 2]} `,
+            content: i18n().get_ui_race_preview_contestant_adapt(
+              di18n.n_dis[info.distance],
               {
                 color: adaptability_colors[cur_chara.adapts.distance],
                 content: get_adaptability_rank(cur_chara.adapts.distance),
                 fontWeight: 'bold',
                 title:
                   cur_chara.dis_buffs.length > 0
-                    ? `${get_adaptability_rank(cur_chara.adapts.distance)}=${get_adaptability_rank(
-                        era.get(
-                          // CFLAGNAME:32 - 25 = 短距离适性 - 长距离适性
-                          `cflag:${cur_chara.index_chara}:${22 + info.distance}`,
-                        ),
-                      )}(基础)${cur_chara.dis_buffs.join('')}`
+                    ? `${get_adaptability_rank(cur_chara.adapts.distance)}=${buff_template
+                        .replace(
+                          '%BUFF%',
+                          get_adaptability_rank(
+                            cur_chara.o_a_dis_list[info.distance],
+                          ),
+                        )
+                        .replace(
+                          '%NAME%',
+                          i18n().tb_status.r_base,
+                        )}${cur_chara.dis_buffs.map(([buff, desc]) => buff_template.replace('%BUFF%', buff).replace('%NAME%', desc)).join('')}`
                     : void 0,
               },
-            ],
+            ),
             type: 'text',
           },
-          { config: { content: '出走策略' }, type: 'divider' },
-          ...new Array(4).fill(0).map((_, i) =>
-            team_list.indexOf(cur_chara) !== -1
+          {
+            config: { content: i18n().ui_race_preview_contestant_style },
+            type: 'divider',
+          },
+          ...new Array(4).fill(0).map((_, i) => ({
+            ...(team_list.includes(cur_chara)
               ? {
                   accelerator: 21 + i,
                   config: {
@@ -277,7 +330,6 @@ async function preview_race(
                     buttonType: cur_chara.style === i ? 'warning' : 'info',
                     width: 6,
                   },
-                  content: `${di18n.race.a_style[i]} ${strategy_ability[i]}`,
                   type: 'button',
                 }
               : {
@@ -288,11 +340,19 @@ async function preview_race(
                       ? { color: el_warning_color, fontWeight: 'bold' }
                       : {}),
                   },
-                  content: `${di18n.race.a_style[i]} ${strategy_ability[i]}`,
                   type: 'text',
-                },
-          ),
-          { config: { content: '习得技能' }, type: 'divider' },
+                }),
+            content: i18n()
+              .get_ui_race_preview_contestant_adapt(
+                di18n.race.a_style[i],
+                strategy_ability[i],
+              )
+              .join(''),
+          })),
+          {
+            config: { content: i18n().ui_train_learnt_skills },
+            type: 'divider',
+          },
           {
             config: { align: 'center' },
             content: skill_buffer,
@@ -305,8 +365,14 @@ async function preview_race(
         columns: [
           {
             accelerator: ((uma_index + 1) % contestants.length) + 1,
-            config: { align: 'center', disableWarning: true },
-            content: `下一位\n${contestants[(uma_index + 1) % contestants.length].name}`,
+            config: {
+              align: 'center',
+              buttonType: get_button_type(
+                (temp = contestants[(uma_index + 1) % contestants.length]),
+              ),
+              disableWarning: true,
+            },
+            content: i18n().ui_race_next_template.replace('%NAME%', temp.name),
             type: 'button',
           },
         ],
@@ -319,11 +385,7 @@ async function preview_race(
             accelerator: i + 1,
             config: {
               align: 'center',
-              buttonType: uma.legend
-                ? 'danger'
-                : team_list.indexOf(uma) !== -1
-                  ? 'success'
-                  : 'warning',
+              buttonType: get_button_type(uma),
               disabled: uma.index_chara === cur_chara.index_chara,
               disableWarning: true,
               width: 4,
@@ -333,25 +395,20 @@ async function preview_race(
           })),
           {
             config: { align: 'center' },
-            content: [
-              '* 参赛选手按跑道号从低到高显示，队伍成员显示为 ',
-              { color: el_success_color, content: '绿名' },
-              '，强敌显示为 ',
-              { color: el_danger_color, content: '红名' },
-            ],
+            content: i18n().ui_race_preview_contestant_tip,
             type: 'text',
           },
           { type: 'divider' },
           {
             accelerator: 100,
             config: { width: 8, align: 'center' },
-            content: '出走！',
+            content: i18n().ui_race_bt_go,
             type: 'button',
           },
           {
             accelerator: 110,
             config: { width: 8, align: 'center' },
-            content: '赛场数据',
+            content: i18n().ui_race_bt_chart,
             type: 'button',
           },
           {
@@ -361,7 +418,7 @@ async function preview_race(
               disabled: item_chara.length === 0,
               width: 8,
             },
-            content: '使用玩具',
+            content: i18n().ui_race_bt_item,
             type: 'button',
           },
         ],
@@ -380,16 +437,30 @@ async function preview_race(
       const curr = era.getLineCount();
       era.drawLine();
       let flag = true;
-      let index = 0;
+      let index = team_list.indexOf(cur_chara);
+      if (index === -1) {
+        index = 0;
+      }
       let chara = get_chara_talk(item_chara[index].index_chara);
+      const ui_equip_template =
+        i18n().ui_race_preview_equip_item_part_template.replace(
+          '%NAME%',
+          chara.full_name,
+        );
       while (flag) {
         await era.clear(era.getLineCount() - curr - 1);
-        era.print(['为 ', chara.get_colored_full_name(), ' 装备性玩具：']);
+        era.print(
+          i18n().get_ui_race_preview_equip_item(chara.get_colored_full_name()),
+        );
         // EQUIPNAME:5 = 胸部
         const b_item = era.get(`equip:${chara.id}:5`);
         if (chara.sex_code !== 1) {
           era.printMultiColumns([
-            { config: { width: 2 }, content: '乳头', type: 'text' },
+            {
+              config: { width: 2 },
+              content: i18n().body_part.s_breast,
+              type: 'text',
+            },
             {
               accelerator: 1,
               config: {
@@ -409,7 +480,11 @@ async function preview_race(
           item_chara[index].ero.main.at(-1) === 'penis'
         ) {
           era.printMultiColumns([
-            { config: { width: 2 }, content: '肉棒', type: 'text' },
+            {
+              config: { width: 2 },
+              content: i18n().body_part.s_penis,
+              type: 'text',
+            },
             {
               accelerator: 2,
               config: {
@@ -422,7 +497,11 @@ async function preview_race(
           ]);
         } else {
           era.printMultiColumns([
-            { config: { width: 2 }, content: '阴核', type: 'text' },
+            {
+              config: { width: 2 },
+              content: i18n().body_part.s_clitoris,
+              type: 'text',
+            },
             {
               accelerator: 3,
               config: {
@@ -440,7 +519,11 @@ async function preview_race(
         const v_item = era.get(`equip:${chara.id}:8`);
         if (chara.sex_code !== 1) {
           era.printMultiColumns([
-            { config: { width: 2 }, content: '小穴', type: 'text' },
+            {
+              config: { width: 2 },
+              content: i18n().body_part.s_virgin,
+              type: 'text',
+            },
             {
               accelerator: 4,
               config: {
@@ -458,7 +541,11 @@ async function preview_race(
         // EQUIPNAME:9 = 肛门
         const a_item = era.get(`equip:${chara.id}:9`);
         era.printMultiColumns([
-          { config: { width: 2 }, content: '屁穴', type: 'text' },
+          {
+            config: { width: 2 },
+            content: i18n().body_part.s_anal,
+            type: 'text',
+          },
           {
             accelerator: 5,
             config: {
@@ -476,14 +563,28 @@ async function preview_race(
           },
         ]);
         if (item_chara.length > 1) {
-          era.printButton(`上一位 ${item_chara[index - 1]?.name ?? '-'}`, 10, {
-            disabled: index === 0,
-          });
-          era.printButton(`下一位 ${item_chara[index + 1]?.name ?? '-'}`, 11, {
-            disabled: index === item_chara.length - 1,
-          });
+          era.printButton(
+            i18n().ui_race_item_prev_template.replace(
+              '%NAME%',
+              item_chara[index - 1]?.name ?? '-',
+            ),
+            10,
+            {
+              disabled: index === 0,
+            },
+          );
+          era.printButton(
+            i18n().ui_race_item_next_template.replace(
+              '%NAME%',
+              item_chara[index + 1]?.name ?? '-',
+            ),
+            11,
+            {
+              disabled: index === item_chara.length - 1,
+            },
+          );
         }
-        era.printButton('结束', 99);
+        era.printButton(i18n().ui_end, 99);
         let ret = await era.input();
         /** @type {number[]} */
         const item_list = [];
@@ -492,7 +593,10 @@ async function preview_race(
             era.printMultiColumns([
               {
                 config: {
-                  content: `为 ${chara.get_full_name()} 的 乳头 装备性玩具`,
+                  content: ui_equip_template.replace(
+                    '%PART%',
+                    i18n().body_part.s_breast,
+                  ),
                   width: 12,
                 },
                 type: 'divider',
@@ -507,12 +611,18 @@ async function preview_race(
               {
                 accelerator: 1,
                 config: { width: 4 },
-                content: b_item === item_enum.love_eggs ? '摘下' : '装上',
+                content:
+                  b_item === item_enum.love_eggs
+                    ? i18n().body_part.r_v_drop
+                    : i18n().body_part.r_v_equip,
                 type: 'button',
               },
               {
                 config: { width: 18 },
-                content: ['还有 ', era.get('item:75').toLocaleString(), ' 件'],
+                content: i18n().get_ui_race_preview_item_stg_template.replace(
+                  '%COUNT%',
+                  era.get('item:75').toLocaleString(_lan),
+                ),
                 type: 'text',
               },
               { accelerator: 9, content: i18n().ui_back, type: 'button' },
@@ -532,7 +642,10 @@ async function preview_race(
             era.printMultiColumns([
               {
                 config: {
-                  content: `为 ${chara.get_full_name()} 的 肉棒 装备性玩具`,
+                  content: ui_equip_template.replace(
+                    '%PART%',
+                    i18n().body_part.s_penis,
+                  ),
                   width: 12,
                 },
                 type: 'divider',
@@ -548,12 +661,17 @@ async function preview_race(
                 accelerator: 1,
                 config: { width: 4 },
                 content:
-                  p_item === item_enum.artificial_virgin ? '摘下' : '装上',
+                  p_item === item_enum.artificial_virgin
+                    ? i18n().body_part.r_v_drop
+                    : i18n().body_part.r_v_equip,
                 type: 'button',
               },
               {
                 config: { width: 18 },
-                content: ['还有 ', era.get('item:76').toLocaleString(), ' 件'],
+                content: i18n().get_ui_race_preview_item_stg_template.replace(
+                  '%COUNT%',
+                  era.get('item:76').toLocaleString(_lan),
+                ),
                 type: 'text',
               },
               { accelerator: 9, content: i18n().ui_back, type: 'button' },
@@ -574,7 +692,10 @@ async function preview_race(
             era.printMultiColumns([
               {
                 config: {
-                  content: `为 ${chara.get_full_name()} 的 阴核 装备性玩具`,
+                  content: ui_equip_template.replace(
+                    '%PART%',
+                    i18n().body_part.s_clitoris,
+                  ),
                   width: 12,
                 },
                 type: 'divider',
@@ -594,12 +715,19 @@ async function preview_race(
                       disabled: c_item !== c && count < 1,
                       width: 4,
                     },
-                    content: c_item === c ? '摘下' : '装上',
+                    content:
+                      c_item === c
+                        ? i18n().body_part.r_v_drop
+                        : i18n().body_part.r_v_equip,
                     type: 'button',
                   },
                   {
                     config: { width: 18 },
-                    content: ['还有 ', count.toLocaleString(), ' 件'],
+                    content:
+                      i18n().get_ui_race_preview_item_stg_template.replace(
+                        '%COUNT%',
+                        Object(count).toLocaleString(_lan),
+                      ),
                     type: 'text',
                   },
                 );
@@ -628,7 +756,10 @@ async function preview_race(
             era.printMultiColumns([
               {
                 config: {
-                  content: `为 ${chara.get_full_name()} 的 小穴 装备性玩具`,
+                  content: ui_equip_template.replace(
+                    '%PART%',
+                    i18n().body_part.s_virgin,
+                  ),
                   width: 12,
                 },
                 type: 'divider',
@@ -650,15 +781,24 @@ async function preview_race(
                     accelerator: i + 1,
                     config: {
                       disabled: check || (v_item !== c && count < 1),
-                      title: check ? '还是处女！' : void 0,
+                      title: check
+                        ? i18n().ui_race_preview_equip_item_v_tip
+                        : void 0,
                       width: 4,
                     },
-                    content: v_item === c ? '摘下' : '装上',
+                    content:
+                      v_item === c
+                        ? i18n().body_part.r_v_pop
+                        : i18n().body_part.r_v_push,
                     type: 'button',
                   },
                   {
                     config: { width: 18 },
-                    content: ['还有 ', count.toLocaleString(), ' 件'],
+                    content:
+                      i18n().get_ui_race_preview_item_stg_template.replace(
+                        '%COUNT%',
+                        Object(count).toLocaleString(_lan),
+                      ),
                     type: 'text',
                   },
                 );
@@ -691,14 +831,17 @@ async function preview_race(
             era.printMultiColumns([
               {
                 config: {
-                  content: `为 ${chara.get_full_name()} 的 屁穴 装备性玩具`,
+                  content: ui_equip_template.replace(
+                    '%PART%',
+                    i18n().body_part.s_anal,
+                  ),
                   width: 12,
                 },
                 type: 'divider',
               },
               { content: [], type: 'text' },
               ...item_list.reduce((p, c, i) => {
-                const check = era.get(`exp:${chara.id}:肛交次数`) < 10 - i * 5;
+                const check = 10 - i * 5;
                 const count = era.get(`item:${c}`);
                 p.push(
                   {
@@ -709,16 +852,38 @@ async function preview_race(
                   {
                     accelerator: i + 1,
                     config: {
-                      disabled: check || (a_item !== c && count < 1),
-                      title: check ? '肛交经验不足！' : void 0,
+                      disabled:
+                        era.get(`exp:${chara.id}:肛交次数`) < check ||
+                        (a_item !== c && count < 1),
+                      title:
+                        era.get(`exp:${chara.id}:肛交次数`) < check
+                          ? i18n()
+                              .ui_race_preview_equip_item_a_cond.replace(
+                                '%REQUIRE%',
+                                check.toString(),
+                              )
+                              .replace(
+                                '%CURRENT%',
+                                Object(
+                                  era.get(`exp:${chara.id}:肛交次数`),
+                                ).toLocaleString(_lan),
+                              )
+                          : void 0,
                       width: 4,
                     },
-                    content: a_item === c ? '摘下' : '装上',
+                    content:
+                      a_item === c
+                        ? i18n().body_part.r_v_pop
+                        : i18n().body_part.r_v_push,
                     type: 'button',
                   },
                   {
                     config: { width: 18 },
-                    content: ['还有 ', count.toLocaleString(), ' 件'],
+                    content:
+                      i18n().get_ui_race_preview_item_stg_template.replace(
+                        '%COUNT%',
+                        Object(count).toLocaleString(_lan),
+                      ),
                     type: 'text',
                   },
                 );
@@ -775,33 +940,41 @@ async function preview_race(
         const buff_length = u.attr_buffs[0].length;
         if (ero_skill_level === 2) {
           const has_buff =
-            u.attr_buffs[0].findIndex((b) => b.endsWith('[欢愉赐福]')) !== -1;
+            u.attr_buffs[0].findIndex((b) => b[2] !== item_buff_key) !== -1;
           if (u.race.conditionParams.item === 1 && !has_buff) {
-            u.attr_buffs.forEach((l) => l.push('+10%[欢愉赐福]'));
+            u.attr_buffs.forEach((l) =>
+              l.push(['+10%', i18n().tb_status.r_item_buff, item_buff_key]),
+            );
           } else if (!u.race.conditionParams.item && has_buff) {
             u.attr_buffs = u.attr_buffs.map((l) =>
-              l.filter((b) => b !== '+10%[欢愉赐福]'),
+              l.filter((b) => b[2] !== item_buff_key),
             );
           }
-        } else if (era.get('flag:道具影响') !== 0 && ero_skill_level !== 1) {
+        } else if (item_inf !== 0 && ero_skill_level !== 1) {
           const has_debuff =
-            u.attr_buffs[0].findIndex((b) => b.endsWith('[性玩具]')) !== -1;
+            u.attr_buffs[0].findIndex((b) => b[2] === item_debuff_key) !== -1;
           if (u.race.conditionParams.item === 1 && !has_debuff) {
-            u.attr_buffs.forEach((l) => l.push(`${item_inf}%[性玩具]`));
+            u.attr_buffs.forEach((l) =>
+              l.push([
+                `${item_inf}%`,
+                i18n().tb_status.r_item_debuff,
+                item_debuff_key,
+              ]),
+            );
           } else if (!u.race.conditionParams.item && has_debuff) {
             u.attr_buffs = u.attr_buffs.map((l) =>
-              l.filter((b) => b !== `${item_inf}%[性玩具]`),
+              l.filter((b) => b[2] !== item_debuff_key),
             );
           }
         }
         if (u === cur_chara && o_has_item !== u.race.conditionParams.item) {
-          skill_buffer.splice(0);
+          skill_buffer = [];
           cur_chara.list_skill.forEach((s) =>
             skill_buffer.push(...s.data.get_colored_name(cur_chara)),
           );
         }
         if (buff_length !== u.attr_buffs[0].length) {
-          u.calc_attrs();
+          u.calc_attrs(info.ground, info.distance);
           if (u === cur_chara) {
             attribute_info = generate_attribute_info(cur_chara);
           }
@@ -814,7 +987,7 @@ async function preview_race(
       cur_chara = contestants[(uma_index = ret - 1)];
       attribute_info = generate_attribute_info(cur_chara);
       strategy_ability = cur_chara.adapt_style_list.map(get_adaptability_rank);
-      skill_buffer.splice(0);
+      skill_buffer = [];
       cur_chara.list_skill.forEach((s) =>
         skill_buffer.push(...s.data.get_colored_name(cur_chara)),
       );

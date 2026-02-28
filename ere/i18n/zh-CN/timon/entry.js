@@ -11,6 +11,7 @@ class I18nTimon {
   daily_child = proxy_kojo_js(require('#/i18n/zh-CN/timon/child/daily'));
   ero_child = proxy_kojo_js(require('#/i18n/zh-CN/timon/child/ero'));
 
+  race = proxy_kojo_js(require('#/i18n/zh-CN/timon/race'));
   game_guides = proxy_kojo_js(require('#/i18n/zh-CN/timon/guides/game'));
   base_guides = proxy_kojo_js(require('#/i18n/zh-CN/timon/guides/base'));
   ending = proxy_kojo_js(require('#/i18n/zh-CN/timon/ending'));

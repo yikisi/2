@@ -18,6 +18,7 @@
   temp_continue: 0,
 };
 Object.keys(race_event_enum).forEach((k, i) => (race_event_enum[k] = i));
+race_event_enum.keys = Object.keys(race_event_enum);
 
 module.exports = {
   acc_up_hill_mode: 2 / 3,

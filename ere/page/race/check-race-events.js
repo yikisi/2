@@ -81,7 +81,7 @@ const rec_list = {};
  */
 async function check_race_events(race, info, team) {
   const may_marks = new MayLifeMarks();
-  let handler = undefined;
+  let handler = void 0;
   const best = Math.min(...team.map((e) => e.rank.curr));
   const mvp = team.find((e) => e.rank.curr === best);
   const mvp_id = mvp.index_chara;

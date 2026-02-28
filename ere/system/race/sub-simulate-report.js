@@ -2,163 +2,29 @@ const { get_bashin_desc } = require('#/system/race/snippets');
 
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 
-const { get_random_entry, sort_list } = require('#/utils/list-utils');
+const {
+  get_random_entry,
+  get_random_entry_with_weight,
+  sort_list,
+} = require('#/utils/list-utils');
 
 const { race_enum } = require('#/data/race/race-const');
 const { race_event_enum } = require('#/data/race/race-sim-const');
 
-/** @type {(function(PseudoUma,PseudoUma):TextContent)[]} */
-const overtake_handlers = [
-  (top, over) => [
-    over.get_colored_name(),
-    ' 一下子就超越了 ',
-    top.get_colored_name(),
-    '！',
-  ],
-  (top, over) => [
-    over.get_colored_name(),
-    ' 在与 ',
-    top.get_colored_name(),
-    ' 的交战中占优！',
-  ],
-  (top, over) => [
-    '超越 ',
-    top.get_colored_name(),
-    ' 之后，正是 ',
-    over.get_colored_name(),
-    ' 的制胜时刻！',
-  ],
-  (top) => [top.get_colored_name(), ' 领先！要锁定胜局了吗！'],
-];
+const { i18n } = require('#/i18n/selector');
 
-/** @type {(function(PseudoUma,PseudoUma):TextContent)[]} */
-const battle_handlers = [
-  (first, second) => [
-    first.get_colored_name(),
-    '！',
-    second.get_colored_name(),
-    '！',
-  ],
-  (first, second) => [
-    first.get_colored_name(),
-    ' 与 ',
-    second.get_colored_name(),
-    ' 的交战还在继续！双方都为了胜利拼尽全力！',
-  ],
-  (first, second) => [
-    '焦灼！焦灼！',
-    first.get_colored_name(),
-    ' 和 ',
-    second.get_colored_name(),
-    ' 都无法独善其身！',
-  ],
-  (first, second) => [
-    '究竟会是 ',
-    first.get_colored_name(),
-    ' 还是 ',
-    second.get_colored_name(),
-    '！要到最后一刻才会揭晓悬念了吗！',
-  ],
-];
-
-/** @type {(function(PseudoUma,PseudoUma):TextContent)[]} */
-const top_handlers = [
-  (uma) => [uma.get_colored_name(), ' 牢牢把持着头位！'],
-  (uma) => ['太快了太快了！', uma.get_colored_name(), ' 一骑绝尘！'],
-  (uma) => [uma.get_colored_name(), ' 状态绝佳！要一路冲下去了吗！'],
-  (uma) => ['持续领先！终盘的 ', uma.get_colored_name(), ' 似乎已无人能敌！'],
-  (uma) => [uma.get_colored_name(), ' 即将迎来胜利！'],
-  (uma) => [uma.get_colored_name(), '！', uma.get_colored_name(), '！'],
-];
-
-/** @type {Record<string,(function([]))[]>} */
-const other_handlers = {};
-
-other_handlers[race_event_enum.lost_stamina] = [
-  (names) => [...names, '，失速！'],
-  (names) => [...names, ' 的步伐踉跄了起来，已经无法维持速度了！'],
-  (names) => [...names, ' 速度变慢了！'],
-  (names) => [...names, ' 到极限了吗！？'],
-];
-other_handlers[race_event_enum.orgasm] = [
-  (names) => [...names, ' 脸色好红，是拼尽全力了吗……'],
-  (names) => ['蒸汽正从 ', ...names, ' 的身上不断冒出！'],
-  (names) => ['是什么让 ', ...names, ' 的决胜服如此湿润……？'],
-  (names) => [...names, ' 脚步踉跄了一下，所幸没有失速！'],
-];
-other_handlers[race_event_enum.loc_mind_nige_ex] = [
-  (names) => ['逃马怎容他马在前！冲啊，', ...names, '！'],
-  (names) => ['那不是你的位置！', ...names, ' 在用奔跑警告着！'],
-  (names) => [...names, ' 正在夺回自己的头马之位！'],
-  (names) => [...names, ' 持续加速，要比其他马娘逃得更前！'],
-];
-other_handlers[race_event_enum.loc_mind_other_ex] = [
-  (names) => [...names, ' 大步奔向自己应处的位置！'],
-  (names) => [
-    '这才不是',
-    names.length > 1 ? '你' : '你们',
-    '的位置！加油啊 ',
-    ...names,
-    '！',
-  ],
-  (names) => [...names, ' 正在为夺回位置而战！'],
-];
-other_handlers[race_event_enum.loc_mind_nige_over_take] = [
-  (names) => [...names, ' 毫不犹豫向头位进发！'],
-  (names) => [...names, ' 正在争取头位！'],
-  (names) => [...names, ' 的眼里只有头位！'],
-];
-other_handlers[race_event_enum.loc_mind_nige_speed_up] = [
-  (names) => [...names, ' 持续加速，想要拉开更多距离！'],
-  (names) => [...names, ' 要逃得更远了！'],
-  (names) => ['逃下去，逃到世界尽头吧，', ...names, '！'],
-];
-other_handlers[race_event_enum.loc_mind_other_quick] = [
-  (names) => [...names, ' 不甘于被拉开距离，在奋起直追！'],
-  (names) => ['被拉得太远了！', ...names, ' 奋起直追！'],
-  (names) => [...names, ' 紧紧保持着距离！'],
-];
-other_handlers[race_event_enum.loc_mind_other_relax] = [
-  (names) => [...names, ' 似乎在保持体力，很大胆的战术！！'],
-  (names) => [...names, ' 的节奏变慢了，要小心啊！！'],
-  (names) => [...names, '，松懈可是大敌！'],
-];
-other_handlers[race_event_enum.blocked] = [
-  (names) => [...names, ' 被阻挡了，真是可惜！'],
-  (names) => [...names, ' 突围失败！'],
-  (names) => [...names, ' 身陷马群无法自拔！'],
-];
-other_handlers[race_event_enum.temptation] = [
-  (names) => [...names, ' 的节奏略显凌乱，似乎有点焦躁！'],
-  (names) => [...names, ' 有点气急了吗！'],
-  (names) => [...names, ' 陷入焦躁！'],
-];
-other_handlers[race_event_enum.temp_end] = [
-  (names) => [...names, ' 终于回归了正常的节奏！'],
-  (names) => [...names, ' 好像冷静下来了！'],
-  (names) => [...names, ' 摆脱焦躁了！'],
-];
-other_handlers[race_event_enum.temp_continue] = [
-  (names) => [...names, ' 的节奏持续紊乱，有点糟糕！'],
-  (names) => [...names, ' 深陷焦躁无法自拔！'],
-  (names) => ['冷静下来啊 ', ...names, '！小心错失时机！'],
-];
-other_handlers[race_event_enum.temp_wrong_style] = [
-  (names) => [...names, ' 似乎改变了跑法！'],
-  (names) => [...names, ' 怎么在拼命前冲！'],
-];
+/** @param {number} */
+let top_indexes;
 
 const event_enum_length = Object.keys(race_event_enum).length;
 const report_count = 2;
 
-/** @type {(function(PseudoUma,PseudoUma))[]} */
-let top_list;
-
-let order_start = 0,
-  go_in = true,
-  battle_intro_flag = true;
 /** @type {PseudoUma} */
-let final_push_pop = undefined;
+let final_push_pop;
+
+let order_start = 0;
+let go_in = true;
+let battle_intro_flag = true;
 
 /**
  * @typedef ReportEvent
@@ -185,8 +51,8 @@ let final_push_pop = undefined;
  * @param {number} race_id
  */
 function sub_simulate_report(events, in_race_list, info, race_id) {
-  if (race_id === undefined) {
-    return undefined;
+  if (race_id === void 0) {
+    return void 0;
   }
   /** @type {Record<string,ReportEventGroup>} */
   const dict = {};
@@ -226,42 +92,49 @@ function sub_simulate_report(events, in_race_list, info, race_id) {
   if (go_in) {
     let ret_list = [];
     if (loc_change.length > 0) {
-      const lane_events = loc_change.filter((e) => e.l !== undefined),
-        slope_events = loc_change.filter((e) => e.s !== undefined),
-        message_buffer = [];
+      const lane_events = loc_change.filter((e) => e.l !== void 0);
+      const slope_events = loc_change.filter((e) => e.s !== void 0);
+      const message_buffer = [];
       if (lane_events.length === 1) {
-        message_buffer.push(`进入${lane_events[0].l.get_name()}`);
-      } else if (lane_events.length >= 2) {
         message_buffer.push(
-          `经过 ${lane_events
-            .slice(0, lane_events.length - 2)
-            .map((e) => e.l.get_name())
-            .join('、')}`,
+          i18n().timon.race.location_change_location_report_template.replace(
+            '%LANE%',
+            lane_events.at(-1).l.name,
+          ),
         );
-        if (lane_events.length > 2) {
-          message_buffer[0] += '与';
-        }
-        message_buffer[0] += `${lane_events.at(-2).l.get_name()}，进入${lane_events.at(-1).l.get_name()}`;
       }
       if (slope_events.length > 0 && slope_events.at(-1).s !== 0) {
-        message_buffer.push(`正在${slope_events[0].s > 0 ? '爬' : '下'}坡`);
+        message_buffer.push(
+          i18n().timon.race.get_location_change_slope_report(
+            slope_events[0].s > 0,
+          ),
+        );
       } else if (slope_events.length > 1 && slope_events.at(-1).s === 0) {
-        message_buffer.push(`经过${slope_events.at(-2).s > 0 ? '爬' : '下'}坡`);
+        message_buffer.push(
+          i18n().timon.race.get_location_change_slope_over_report(
+            slope_events[0].s > 0,
+          ),
+        );
       }
       if (message_buffer.length > 0) {
-        ret_list.push('现在', message_buffer.join('，'));
+        ret_list.push(
+          i18n().timon.race.location_change_report_template.replace(
+            '%MESSAGE%',
+            message_buffer.join(i18n().ui_comma),
+          ),
+        );
       }
     }
     if (report_list.length === 0) {
-      if (final_push_pop !== undefined) {
-        if (ret_list.length) {
-          ret_list.push('！');
+      if (final_push_pop !== void 0) {
+        if (ret_list.length > 0) {
+          ret_list.push(i18n().ui_exclamation);
         }
         if (in_race_list[0] !== final_push_pop) {
           ret_list.push(
-            ...get_random_entry(overtake_handlers)(
-              final_push_pop,
-              in_race_list[0],
+            ...get_random_entry(i18n().timon.race.overtake_reports)(
+              final_push_pop.get_colored_name(),
+              in_race_list[0].get_colored_name(),
             ),
           );
           final_push_pop = in_race_list[0];
@@ -270,30 +143,36 @@ function sub_simulate_report(events, in_race_list, info, race_id) {
         ) {
           if (battle_intro_flag) {
             ret_list.push(
-              in_race_list[0].get_colored_name(),
-              ' 与 ',
-              in_race_list[1].get_colored_name(),
-              ' 展开激烈交战！',
+              ...i18n().timon.race.get_battle_start_report(
+                ...in_race_list.map((c) => c.get_colored_name()),
+              ),
             );
             battle_intro_flag = false;
           } else {
-            let dice = Math.random();
-            if (dice < 0.6) {
-              dice = 0;
-            } else if (dice < 0.9) {
-              dice = 1;
-            } else {
-              dice = 2;
-            }
             ret_list.push(
-              ...battle_handlers[dice](in_race_list[0], in_race_list[1]),
+              ...get_random_entry_with_weight(
+                i18n().timon.race.battle_reports,
+                (e) => e.w,
+              ).h(
+                in_race_list[0].get_colored_name(),
+                in_race_list[1].get_colored_name(),
+              ),
             );
           }
         } else {
-          if (top_list.length === 0) {
-            top_list = sort_list(top_handlers, Math.random);
+          if (top_indexes.length === 0) {
+            top_indexes = sort_list(
+              new Array(i18n().timon.race.top_reports.length)
+                .fill(0)
+                .map((_, i) => i),
+              Math.random,
+            );
           }
-          ret_list.push(...top_list.shift()(in_race_list[0]));
+          ret_list.push(
+            ...i18n().timon.race.top_reports[top_indexes.shift()](
+              in_race_list[0].get_colored_name(),
+            ),
+          );
         }
       } else {
         if (order_start >= in_race_list.length) {
@@ -301,29 +180,32 @@ function sub_simulate_report(events, in_race_list, info, race_id) {
         }
         if (ret_list.length === 0 && order_start === 0) {
           ret_list.push(
-            '现在是',
-            info.lanes
-              .find(
+            i18n().timon.race.location_in_order_report_template.replace(
+              '%LANE%',
+              info.lanes.find(
                 (e) =>
                   in_race_list[order_start].race.location >= e.start &&
                   in_race_list[order_start].race.location < e.end,
-              )
-              .get_name(),
+              ).name,
+            ),
           );
         }
         let i = 0;
         while (i + order_start < in_race_list.length && i < 2) {
           if (ret_list.length > 0) {
-            ret_list.push('，');
+            ret_list.push(i18n().ui_comma);
           }
           ret_list.push(
-            `第 ${order_start + i + 1} 位是 ${in_race_list[order_start + i].index_race + 1} 号 `,
-            in_race_list[order_start + i].get_colored_name(),
+            ...i18n().timon.race.get_order_report(
+              in_race_list[order_start + i].get_colored_name(),
+              (order_start + i + 1).toString(),
+              (in_race_list[order_start + i].index_race + 1).toString(),
+            ),
           );
           ++i;
         }
         order_start += i;
-        ret_list.push('。');
+        ret_list.push(i18n().ui_period);
       }
       return ret_list;
     } else if (report_list[0].e === race_event_enum.finish) {
@@ -342,16 +224,13 @@ function sub_simulate_report(events, in_race_list, info, race_id) {
         return temp;
       } else {
         ret_list.push(
-          champion.get_colored_name(),
-          ' 以 ',
-          get_bashin_desc(champion.race.conditionParams.bashin_diff_behind),
-          ' 率先冲线！',
+          ...(race_id === race_enum.begin_race
+            ? i18n().timon.race.get_finish_report_begin_race
+            : i18n().timon.race.get_finish_report)(
+            champion.get_colored_name(),
+            get_bashin_desc(champion.race.conditionParams.bashin_diff_behind),
+          ),
         );
-        if (race_id === race_enum.begin_race) {
-          ret_list.push(
-            Math.random() < 0.5 ? '恭喜出道！' : '真期待她后续的表现！',
-          );
-        }
         return ret_list;
       }
     } else {
@@ -370,29 +249,38 @@ function sub_simulate_report(events, in_race_list, info, race_id) {
           .slice(0, 2)
           .forEach((e, i) => {
             if (i > 0) {
-              name.push(' 与 ');
+              name.push(i18n().timon.race.contestants_conjunction);
             }
             name.push(e.u.get_colored_name());
           });
         switch (entry.e) {
           case race_event_enum.final_push:
-            if (final_push_pop !== undefined) {
-              ret_list.push(...name, ' 也开始最终冲刺了！');
+            if (final_push_pop !== void 0) {
+              ret_list.push(
+                ...i18n().timon.race.get_final_push_follow_report(name),
+              );
             } else {
               final_push_pop = entry.p[0].u;
-              ret_list.push(
-                ...name,
-                ` ${entry.p.length > 2 ? (entry.p[0].t === entry.p[1].t ? '同时' : '几乎同时') : ''}开始最终冲刺！`,
-              );
+              if (entry.p.length > 2) {
+                ret_list.push(
+                  ...i18n().timon.race.get_final_push_multi_report(
+                    name,
+                    entry.p[0].t === entry.p[1].t,
+                  ),
+                );
+              } else {
+                ret_list.push(
+                  ...i18n().timon.race.get_final_push_report(name[0]),
+                );
+              }
             }
             break;
           case race_event_enum.compete_fight:
             ret_list.push(
-              '以 ',
-              entry.p[0].a.get_colored_name(),
-              ' 为目标，',
-              entry.p[0].u.get_colored_name(),
-              ' 加快了自己的速度！',
+              ...i18n().timon.race.get_compete_fight_report(
+                entry.p[0].a.get_colored_name(),
+                entry.p[0].u.get_colored_name(),
+              ),
             );
             break;
           case race_event_enum.orgasm:
@@ -408,7 +296,11 @@ function sub_simulate_report(events, in_race_list, info, race_id) {
           case race_event_enum.temp_continue:
           case race_event_enum.lost_stamina:
           case race_event_enum.temp_wrong_style:
-            ret_list.push(...get_random_entry(other_handlers[entry.e])(name));
+            ret_list.push(
+              ...get_random_entry(
+                i18n().timon.race[`${race_event_enum.keys[entry.e]}_reports`],
+              )(name),
+            );
             break;
           default:
             ret_list.push(
@@ -422,14 +314,17 @@ function sub_simulate_report(events, in_race_list, info, race_id) {
       return ret_list;
     }
   }
-  return undefined;
+  return void 0;
 }
 
 module.exports = sub_simulate_report;
 module.exports.init = () => {
   order_start = 0;
   go_in = true;
-  final_push_pop = undefined;
-  top_list = sort_list(top_handlers, Math.random);
+  final_push_pop = void 0;
+  top_indexes = sort_list(
+    new Array(i18n().timon.race.top_reports.length).fill(0).map((_, i) => i),
+    Math.random,
+  );
   battle_intro_flag = true;
 };

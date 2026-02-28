@@ -10,6 +10,7 @@ const LegendUmaSelector = require('#/data/race/model/legend-uma-selector');
 const { race_enum } = require('#/data/race/race-const');
 
 const di18n = require('#/i18n/extended-def');
+const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends CustomizedMec {
   get_status(show_train_buff) {
@@ -87,9 +88,12 @@ module.exports = class extends CustomizedMec {
     }
   }
 
+  // TODO
   set_pseudo_uma(uma) {
     if (era.get('status:37:荣耀德比')) {
-      uma.attr_buffs.forEach((l) => l.push('+50%[荣耀德比]'));
+      uma.attr_buffs.forEach((l) =>
+        l.push(['+50%', i18n().kojo[this.id].derby]),
+      );
     }
   }
 };

@@ -11,6 +11,7 @@ module.exports = class extends I18nRaces {
 
   r_left = '左';
   r_right = '右';
+  r_straight = '直線';
 
   t_sapporo = '札幌';
   t_hakodate = '函館';
@@ -27,6 +28,24 @@ module.exports = class extends I18nRaces {
   t_funabashi = '船橋';
   t_morioka = '盛岡';
   t_longchamp = '隆尚';
+
+  track_name_template = '%NAME%レース場';
+
+  lan_lan_template = '%INDEX%直線';
+  lan_curve_template = '%INDEX%コーナー';
+  lan_lan_abbr_template = '%INDEX%直';
+  lan_curve_abbr_template = '%INDEX%コ';
+
+  lan_index_final = '最終';
+  lan_index_final_abbr = '終';
+  lan_index_template = '第%INDEX%';
+
+  chart_title_template = '%TRACK% %GROUND% %DISTANCE%m %ROTATION%';
+  chart_buff_attr_template = '強化属性: %ATTR%';
+  chart_splitter_1_template = '序 ⬅ %DISTANCE% ⮕ 中';
+  chart_splitter_2_template = '中 ⬅ %DISTANCE% ⮕ 終';
+  chart_splitter_loc_mind = '位置取り意識終了';
+  chart_slope_name = '坂';
 
   0 = 'メイクデビューに';
   // GENERATED START

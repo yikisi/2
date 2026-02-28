@@ -107,6 +107,23 @@ class I18nStatus {
   tr_ex_55 = (t) => `寸止(${t})`;
   tr_te_6 = '项圈';
   tr_te_7 = '眼罩';
+
+  race_buff_template = '%BUFF%[%NAME%]';
+  r_base = '基础';
+  r_away_race = (t) => `客场作战(${t})`;
+  r_tired = (t) => `疲惫(${t})`;
+  r_field = '领域！';
+  r_body_off = (t) => `水土不服(${t})`;
+  r_tong_tie = (t) => `语言不通(${t})`;
+  r_hp_low = '体力低下';
+  r_hp_ins = '体力不足';
+  r_tp_low = '精力低下';
+  r_tp_ins = '精力不足';
+  r_p_embryo = '孕早期';
+  r_p_fetal = '安定期';
+  r_p_late = '孕晚期';
+  r_item_buff = '欢愉赐福';
+  r_item_debuff = '性玩具';
 }
 
 module.exports = I18nStatus;

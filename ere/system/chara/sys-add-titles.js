@@ -12,7 +12,7 @@ const { i18n } = require('#/i18n/selector');
  */
 function sys_add_titles(cid, ...titles) {
   if (CharaTitles.get(cid).push(...titles)) {
-    era.print(i18n().get_ui_add_titles(get_chara_talk(cid)));
+    era.print(i18n().get_ui_add_titles(get_chara_talk(cid).get_colored_name()));
     return true;
   }
   return false;

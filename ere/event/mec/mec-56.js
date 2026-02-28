@@ -5,6 +5,9 @@ const CustomizedMec = require('#/event/mec/mec-common');
 const { get_chara_color } = require('#/data/chara-colors');
 const { buff_colors, motivation_colors } = require('#/data/color-const');
 
+const di18n = require('#/i18n/extended-def');
+const { i18n } = require('#/i18n/selector');
+
 module.exports = class extends CustomizedMec {
   set_callname() {
     if (!super.set_callname_from_src()) {
@@ -23,55 +26,44 @@ module.exports = class extends CustomizedMec {
     if (show_train_buff) {
       if (era.get('status:56:运势依赖')) {
         ret.push({
-          color: get_chara_color(56),
-          content: '运势依赖',
-          title: '今天的运势是什么呢？',
+          ...di18n.kojo.get_titled_content(this.id, 'dependency'),
+          color: get_chara_color(this.id),
         });
       }
-      if (era.get('status:56:大吉')) {
+      if (era.get('status:56:大吉') > 0) {
         ret.push({
+          ...di18n.kojo.get_titled_content(this.id, 'daikichi'),
           color: motivation_colors.at(-1),
-          content: '大吉',
-          title:
-            '灵力满溢！训练成功率+10%，所有训练效果+5%，好感获取+10%，参赛时属性+5%',
         });
       }
       if (era.get('status:56:中吉')) {
         ret.push({
+          ...di18n.kojo.get_titled_content(this.id, 'chuukichi'),
           color: motivation_colors.at(-2),
-          content: '中吉',
-          title: '好运气呢！训练成功率+5%，所有训练效果+5%，参赛时属性+3%',
         });
       }
       if (era.get('status:56:小吉')) {
         ret.push({
+          ...di18n.kojo.get_titled_content(this.id, 'shoukichi'),
           color: motivation_colors.at(-3),
-          content: '小吉',
-          title: '总之不坏！训练成功率+5%，参赛时属性+1%',
         });
       }
       if (era.get('status:56:凶')) {
         ret.push({
+          ...di18n.kojo.get_titled_content(this.id, 'kyou'),
           color: motivation_colors.at(-4),
-          content: '凶',
-          title:
-            '这个时候去安慰福来的话？训练成功率-10%，所有训练效果-10%，参赛时属性-10%，好感获取+20%',
         });
       }
       if (era.get('status:56:PTSD')) {
         ret.push({
+          ...di18n.kojo.get_titled_content(this.id, 'ptsd'),
           color: buff_colors[3],
-          content: 'PTSD',
-          title:
-            '不得不去面对的阴影。训练成功率-10%，所有训练效果-10%，参赛时属性-10%，干劲上限-3',
         });
       }
       if (era.get('status:56:稳定')) {
         ret.push({
+          ...di18n.kojo.get_titled_content(this.id, 'antei'),
           color: buff_colors[1],
-          content: '稳定',
-          title:
-            '训练员在身边的话，毫无疑问的是大吉呢！训练成功率+10%，所有训练效果+5%，好感获取+10%，参赛时属性+5%',
         });
       }
     }
@@ -111,23 +103,35 @@ module.exports = class extends CustomizedMec {
   }
 
   set_pseudo_uma(uma) {
-    if (era.get('status:56:PTSD')) {
-      uma.attr_buffs.forEach((l) => l.push('-5%[PTSD]'));
+    if (era.get('status:56:PTSD') > 0) {
+      uma.attr_buffs.forEach((l) =>
+        l.push(['-10%', i18n().kojo[this.id].ptsd]),
+      );
     }
-    if (era.get('status:56:大吉')) {
-      uma.attr_buffs.forEach((l) => l.push('+5%[大吉]'));
+    if (era.get('status:56:大吉') > 0) {
+      uma.attr_buffs.forEach((l) =>
+        l.push(['+5%', i18n().kojo[this.id].daikichi]),
+      );
     }
-    if (era.get('status:56:中吉')) {
-      uma.attr_buffs.forEach((l) => l.push('+3%[中吉]'));
+    if (era.get('status:56:中吉') > 0) {
+      uma.attr_buffs.forEach((l) =>
+        l.push(['+3%', i18n().kojo[this.id].chuukichi]),
+      );
     }
-    if (era.get('status:56:小吉')) {
-      uma.attr_buffs.forEach((l) => l.push('+1%[小吉]'));
+    if (era.get('status:56:小吉') > 0) {
+      uma.attr_buffs.forEach((l) =>
+        l.push(['+1%', i18n().kojo[this.id].shoukichi]),
+      );
     }
-    if (era.get('status:56:凶')) {
-      uma.attr_buffs.forEach((l) => l.push('-5%[凶]'));
+    if (era.get('status:56:凶') > 0) {
+      uma.attr_buffs.forEach((l) =>
+        l.push(['-10%', i18n().kojo[this.id].kyou]),
+      );
     }
-    if (era.get('status:56:稳定')) {
-      uma.attr_buffs.forEach((l) => l.push('+5%[稳定]'));
+    if (era.get('status:56:稳定') > 0) {
+      uma.attr_buffs.forEach((l) =>
+        l.push(['+5%', i18n().kojo[this.id].antei]),
+      );
     }
   }
 };

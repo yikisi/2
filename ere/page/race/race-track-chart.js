@@ -1,27 +1,31 @@
 const era = require('#/era-electron');
 
 const di18n = require('#/i18n/extended-def');
+const { i18n, lan } = require('#/i18n/selector');
 
 /**
  * @param {RaceInfo} info
  * @returns {Promise<number>}
  */
 async function print_race_track_chart(info) {
+  const _lan = lan();
   era.print(
-    [
-      di18n.race.get_track_name(info.track),
-      ' ',
-      di18n.n_adapt[info.ground],
-      ' ',
-      info.span.toLocaleString(),
-      '米跑道 ',
-      di18n.race.n_rotation[info.rotation + 1],
-    ],
+    i18n()
+      .race.chart_title_template.replace(
+        '%TRACK%',
+        di18n.race.get_track_name(info.track),
+      )
+      .replace('%GROUND%', di18n.n_ground[info.ground])
+      .replace('%SPAN%', info.span.toLocaleString(_lan))
+      .replace('%ROTATION%', di18n.race.n_rotation[info.rotation + 1]),
     { align: 'center' },
   );
   if (info.attr_bonus.length > 0) {
     era.print(
-      ['加成属性：', info.attr_bonus.map((e) => di18n.n_attr[e]).join('、')],
+      i18n().race.chart_buff_attr_template.replace(
+        '%ATTR%',
+        info.attr_bonus.map((e) => di18n.n_attr[e]).join(i18n().ui_comma2),
+      ),
       { align: 'center' },
     );
   }
@@ -53,7 +57,10 @@ async function print_race_track_chart(info) {
   annotations.dLabel1 = {
     backgroundColor: 'black',
     color: 'white',
-    content: `序 ⬅ ${info.phases[0]} ⮕ 中`,
+    content: i18n().race.chart_splitter_1_template.replace(
+      '%DISTANCE%',
+      info.phases[0].toLocaleString(_lan),
+    ),
     type: 'label',
     xValue: info.phases[0],
     yValue: -2.75,
@@ -67,7 +74,10 @@ async function print_race_track_chart(info) {
   annotations.dLabel2 = {
     backgroundColor: 'black',
     color: 'white',
-    content: `中 ⬅ ${info.phases[1]} ⮕ 终`,
+    content: i18n().race.chart_splitter_2_template.replace(
+      '%DISTANCE%',
+      info.phases[1].toLocaleString(_lan),
+    ),
     type: 'label',
     xValue: info.phases[1],
     yValue: -2.75,
@@ -77,7 +87,7 @@ async function print_race_track_chart(info) {
       (annotations[`lLabel${i + 1}`] = {
         color: 'white',
         // backgroundColor: 'rgb(255,255,255,0.9)',
-        content: `${e.is_last ? '终' : e.index}${e.is_curve ? '弯' : '直 '}`,
+        content: e.abbr,
         type: 'label',
         xValue: (e.start + e.end) / 2,
         yValue: 2.75,
@@ -93,7 +103,7 @@ async function print_race_track_chart(info) {
   annotations.dLabel3 = {
     backgroundColor: 'black',
     color: 'white',
-    content: '位置意识结束',
+    content: i18n().race.chart_splitter_loc_mind,
     type: 'label',
     xValue: loc_mind,
     yValue: -2.75,
@@ -104,7 +114,7 @@ async function print_race_track_chart(info) {
         {
           borderColor: '#cc34ff',
           data,
-          label: '坡度',
+          label: i18n().race.chart_slope_name,
           stepped: true,
         },
       ],
@@ -122,12 +132,12 @@ async function print_race_track_chart(info) {
         x: {
           suggestedMax: info.span,
           suggestedMin: 0,
-          ticks: { callback: ['x', 'return x % 200 ? undefined : x;'] },
+          ticks: { callback: ['x', 'return x % 200 ? void 0 : x;'] },
         },
         y: {
           suggestedMax: 3,
           suggestedMin: -3,
-          ticks: { callback: ['y', 'return y % 0.5 ? undefined : y;'] },
+          ticks: { callback: ['y', 'return y % 0.5 ? void 0 : y;'] },
         },
       },
     },

@@ -10,6 +10,7 @@ const { mess_enum, weather_enum } = require('#/data/race/model/race-info');
 const { race_enum } = require('#/data/race/race-const');
 
 const di18n = require('#/i18n/extended-def');
+const { i18n } = require('#/i18n/selector');
 
 /**
  * @param {number} [wins]
@@ -72,7 +73,7 @@ module.exports = class extends CustomizedMec {
     const { wins } = new SSEduMarks();
     if (wins > 0) {
       uma.attr_buffs.forEach((l) =>
-        l.push(`+${get_attr_buff(wins)}%[胜利的承诺]`),
+        l.push([`+${get_attr_buff(wins)}%`, i18n().kojo[this.id].win(wins)]),
       );
     }
   }

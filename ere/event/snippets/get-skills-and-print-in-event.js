@@ -44,7 +44,12 @@ function get_skills_and_print_in_event(
     if (got.length > 0 && shown) {
       const buffer = [];
       got.forEach((e) => buffer.push(...skills_dict[e].get_colored_name()));
-      era.print(i18n().get_ui_add_skills(get_chara_talk(cid), buffer));
+      era.print(
+        i18n().get_ui_add_skills(
+          get_chara_talk(cid).get_colored_name(),
+          buffer,
+        ),
+      );
       ret_flag = true;
     }
   }

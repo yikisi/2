@@ -24,6 +24,7 @@ const {
   frame_rate,
   race_event_enum,
 } = require('#/data/race/race-sim-const');
+const { i18n } = require('#/i18n/selector');
 
 let top_lane = undefined,
   top_slope = 0;
@@ -96,23 +97,34 @@ function sub_simulate_skill(
             offset: 1,
             width: progress_width,
           },
-          inContent: [
-            uma.race.location === top_loc_ir
-              ? '头马'
-              : `${(uma.race.location - top_loc_ir).toFixed(1)}m`,
-            '(',
-            cur_lane.get_abbr(),
-            uma.race.slope > 0
-              ? '上坡'
-              : uma.race.slope < 0
-                ? '下坡'
-                : undefined,
-            uma.race.conditionParams.blocked_front > 0 ? '阻挡！' : '',
-            uma.race.temptation > 0 ? '焦躁！' : '',
-            ')',
-          ]
-            .filter((e) => e)
-            .join(' '),
+          inContent: i18n()
+            .ui_race_contestant_progress_template.replace(
+              '%LOCATION%',
+              uma.race.location === top_loc_ir
+                ? i18n().race.first_contestant
+                : `${(uma.race.location - top_loc_ir).toFixed(1)}m`,
+            )
+            .replace('%LANE%', cur_lane.abbr)
+            .replace(
+              '%SLOPE%',
+              uma.race.slope > 0
+                ? i18n().race.slope_up
+                : uma.race.slope < 0
+                  ? i18n().race.slope_down
+                  : '',
+            )
+            .replace(
+              '%BLOCKED%',
+              uma.race.conditionParams.blocked_front > 0
+                ? i18n().race.s_blocked
+                : '',
+            )
+            .replace(
+              '%TEMPTATION%',
+              uma.race.temptation > 0 ? i18n().race.s_temptation : '',
+            )
+            .replace(/\(\s*\)/, '')
+            .trimEnd(),
           percentage: Math.min(
             Math.max(
               100 - ((top_loc_ir - uma.race.location) * 100) / con_len,
@@ -278,7 +290,7 @@ function sub_simulate_skill(
         uma.race.conditionParams.is_last_straight === 1,
     );
     uma.race.conditionParams.is_overtake = Number(
-      uma.race.overtakeAim !== undefined,
+      uma.race.overtakeAim !== void 0,
     );
     uma.race.conditionParams.near_count = 0;
     uma.race.conditionParams.near_infront_count = 0;

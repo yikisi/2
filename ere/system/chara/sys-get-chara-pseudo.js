@@ -5,18 +5,20 @@ const { sys_get_chara } = require('#/system/chara/sys-calc-characteristic');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const get_display_name = require('#/utils/calc-display-name');
-const { sort_list } = require('#/utils/list-utils');
 
 const { get_chara_color } = require('#/data/chara-colors');
 const CharaSkills = require('#/data/chara-skills');
 const CharaInmon = require('#/data/ero/chara-inmon');
 const { lust_border } = require('#/data/ero/orgasm-const');
 const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
+const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const PseudoUma = require('#/data/race/model/pseudo-uma');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_infos } = require('#/data/race/race-const');
 const { track2location } = require('#/data/race/race-location');
 const { skills_dict } = require('#/data/race/skill/skill-const');
+
+const { i18n } = require('#/i18n/selector');
 
 /**
  * @param {number} cid
@@ -27,7 +29,6 @@ function sys_get_chara_pseudo(cid) {
   const adapt_list = new Array(10)
     .fill(0)
     .map((_, i) => era.get(`cflag:${cid}:${30 + i}`));
-  const debuff = era.get(`status:${cid}:客场作战`);
   const uma = new PseudoUma(
     cid,
     get_display_name(era.get(`callname:${cid}:-1`)),
@@ -39,8 +40,8 @@ function sys_get_chara_pseudo(cid) {
     new Array(5).fill(0).map((_, i) => era.get(`base:${cid}:${5 + i}`)),
     era.get(`cflag:${cid}:跑法`),
     adapt_list.slice(6, 10),
-    adapt_list.slice(2, 6).map((adapt) => adapt - debuff),
-    adapt_list.slice(0, 2).map((adapt) => adapt - debuff),
+    adapt_list.slice(2, 6),
+    adapt_list.slice(0, 2),
     CharaSkills.get(cid)
       .get()
       .map((e) => skills_dict[e]),
@@ -49,71 +50,83 @@ function sys_get_chara_pseudo(cid) {
   uma.base.winCount = RaceHistory.get(cid)
     .get_values()
     .filter((e) => e.rank === 1).length;
-  if (debuff) {
-    uma.ground_buffs.push(`-${debuff}[客场作战(${debuff})]`);
-    uma.dis_buffs.push(`-${debuff}[客场作战${debuff}]`);
+  const debuff = era.get(`status:${cid}:客场作战`);
+  if (debuff > 0) {
+    uma.ground_buffs.push([
+      (-debuff).toString(),
+      i18n().tb_status.r_away_race(debuff),
+    ]);
+    uma.dis_buffs.push([
+      (-debuff).toString(),
+      i18n().tb_status.r_away_race(debuff),
+    ]);
   }
   let temp;
   if ((temp = era.get(`status:${cid}:疲惫`))) {
-    uma.attr_buffs.forEach((l) => l.push(`-${5 * temp}%[疲惫(${temp})]`));
+    uma.attr_buffs.forEach((l) =>
+      l.push([`-${5 * temp}%`, i18n().tb_status.r_tired(temp)]),
+    );
   }
   if (era.get(`status:${cid}:领域`)) {
-    uma.attr_buffs.forEach((l) => l.push('+5%[领域！]'));
+    uma.attr_buffs.forEach((l) => l.push(['+5%', i18n().tb_status.r_field]));
   }
   if ((temp = era.get(`status:${cid}:水土不服`))) {
     uma.attr_buffs
       .slice(0, 3)
-      .forEach((l) => l.push(`-${5 * temp}%[水土不服(${temp})]`));
+      .forEach((l) =>
+        l.push([`-${5 * temp}%`, i18n().tb_status.r_body_off(temp)]),
+      );
   }
   if ((temp = era.get(`status:${cid}:语言不通`))) {
     uma.attr_buffs
       .slice(3)
-      .forEach((l) => l.push(`-${5 * temp}%[语言不通(${temp})]`));
+      .forEach((l) =>
+        l.push([`-${5 * temp}%`, i18n().tb_status.r_tong_tie(temp)]),
+      );
   }
   const stamina_ratio =
       era.get(`base:${cid}:体力`) / era.get(`maxbase:${cid}:体力`),
     time_ratio = era.get(`base:${cid}:精力`) / era.get(`maxbase:${cid}:精力`);
   if (stamina_ratio < 0.3) {
-    uma.attr_buffs.slice(0, 3).forEach((l) => l.push('-50%[体力低下]'));
+    uma.attr_buffs
+      .slice(0, 3)
+      .forEach((l) => l.push(['-50%', i18n().tb_status.r_hp_low]));
   } else if (stamina_ratio < 0.5) {
-    uma.attr_buffs.slice(0, 3).forEach((l) => l.push('-20%[体力不足]'));
+    uma.attr_buffs
+      .slice(0, 3)
+      .forEach((l) => l.push(['-20%', i18n().tb_status.r_hp_ins]));
   }
   if (time_ratio < 0.3) {
-    uma.attr_buffs.slice(3).forEach((l) => l.push('-50%[精力低下]'));
+    uma.attr_buffs
+      .slice(3)
+      .forEach((l) => l.push(['-50%', i18n().tb_status.r_tp_low]));
   } else if (time_ratio < 0.5) {
-    uma.attr_buffs.slice(3).forEach((l) => l.push('-20%[精力不足]'));
+    uma.attr_buffs
+      .slice(3)
+      .forEach((l) => l.push(['-20%', i18n().tb_status.r_tp_ins]));
   }
   switch (era.get(`cflag:${cid}:妊娠阶段`)) {
     // 早期
-    case 0b100:
-      uma.attr_buffs.forEach((l) => l.push('-5%[孕早期]'));
+    case 1 << pregnant_stage_enum.embryo:
+      uma.attr_buffs.forEach((l) =>
+        l.push(['-5%', i18n().tb_status.r_p_embryo]),
+      );
       break;
     // 安定
-    case 0b1000:
-      uma.attr_buffs.forEach((l) => l.push('+5%[安定期]'));
+    case 1 << pregnant_stage_enum.fetal:
+      uma.attr_buffs.forEach((l) =>
+        l.push(['+5%', i18n().tb_status.r_p_fetal]),
+      );
       break;
     // 晚期
-    case 0b10000:
-      uma.attr_buffs.forEach((l) => l.push('-10%[孕晚期]'));
+    case 1 << pregnant_stage_enum.late:
+      uma.attr_buffs.forEach((l) =>
+        l.push(['-10%', i18n().tb_status.r_p_late]),
+      );
   }
   get_custom_mec(uma.index_chara).set_pseudo_uma(uma);
-  uma.calc_attrs();
-  uma.adapt_ground_list = uma.adapt_ground_list.map((e) =>
-    Math.min(Math.max(e, 0), 7),
-  );
-  uma.ground_buffs = sort_list(
-    uma.ground_buffs,
-    (buff) => Number(buff.substring(0, buff.indexOf('['))),
-    false,
-  );
-  uma.adapt_distance_list = uma.adapt_distance_list.map((e) =>
-    Math.min(Math.max(e, 0), 7),
-  );
-  uma.dis_buffs = sort_list(
-    uma.dis_buffs,
-    (buff) => Number(buff.substring(0, buff.indexOf('['))),
-    false,
-  );
+  const info = race_infos[era.get('flag:当前赛事')];
+  uma.calc_attrs(info.ground, info.distance);
   // FLAGNAME:7 = 当前赛事
   temp = track2location[race_infos[era.get('flag:7')].track];
   if (temp) {

@@ -318,15 +318,13 @@ module.exports = {
         { content: get_unknown_info(chara.id), type: 'text' },
       );
     }
-    // CSTRNAME:10 = 头像
-    // CSTRNAME:13 = 头像T
-    const img_name = era.get(`cstr:${chara.id}:10`);
+    const img_name = era.get(`cstr:${chara.id}:头像`);
     if (
       !era.getCharactersInTrain().includes(chara.id) &&
       check_chara_ero_image(chara.id)
     ) {
       sex_info_list.push({ content: [{ isBr: true }], type: 'text' });
-      const img_t = era.get(`cstr:${chara.id}:13`);
+      const img_t = era.get(`cstr:${chara.id}:头像T`);
       if (img_t) {
         sex_info_list.push({
           accelerator: 100,

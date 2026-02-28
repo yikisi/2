@@ -92,7 +92,7 @@ function page_race_header(_info, is_grand_live) {
           },
           content: [
             _info.get_colored_name_with_class(),
-            is_grand_live ? ' ' + i18n().ui_reg_grand_mark : '',
+            is_grand_live ? ' ' + i18n().ui_grand_live_mark : '',
           ],
           type: 'text',
         },

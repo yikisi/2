@@ -75,11 +75,15 @@ class PseudoUma {
    * @type {number[]}
    */
   adapt_distance_list;
+  /** @type {number[]} */
+  o_a_dis_list;
   /**
    * 地面适性表 决定加速度
    * @type {number[]}
    */
   adapt_ground_list;
+  /** @type {number[]} */
+  o_a_ground_list;
   /**
    * 技能数组
    * @type {RaceSkill[]}
@@ -88,17 +92,17 @@ class PseudoUma {
 
   /**
    * 五围加成
-   * @type {string[][]}
+   * @type {string[][][]}
    */
   attr_buffs;
   /**
    * 场地加成
-   * @type {string[]}
+   * @type {string[][]}
    */
   ground_buffs;
   /**
    * 距离加成
-   * @type {string[]}
+   * @type {string[][]}
    */
   dis_buffs;
 
@@ -299,7 +303,9 @@ class PseudoUma {
     this.style = style;
     this.adapt_style_list = adapt_style_list;
     this.adapt_distance_list = adapt_distance_list;
+    this.o_a_dis_list = [...this.adapt_distance_list];
     this.adapt_ground_list = adapt_ground_list;
+    this.o_a_ground_list = [...this.adapt_ground_list];
     this.list_skill = skills.map((item) => new RaceSkill(item));
     this.attr_buffs = new Array(5).fill(0).map(() => []);
     this.ground_buffs = [];
@@ -307,11 +313,23 @@ class PseudoUma {
     this.pop = new Array(4);
   }
 
-  calc_attrs() {
+  /**
+   * @param {number} cur_ground
+   * @param {number} cur_dis
+   */
+  calc_attrs(cur_ground, cur_dis) {
+    this.ground_buffs = sort_list(this.ground_buffs, ([buff]) => Number(buff));
+    this.dis_buffs = sort_list(this.dis_buffs, ([buff]) => Number(buff));
+    this.adapt_ground_list[cur_ground] =
+      this.o_a_ground_list[cur_ground] +
+      this.ground_buffs.reduce((p, c) => p + Number(c[0]), 0);
+    this.adapt_distance_list[cur_ground] =
+      this.o_a_dis_list[cur_ground] +
+      this.dis_buffs.reduce((p, c) => p + Number(c[0]), 0);
     this.attr_buffs = this.attr_buffs.map((l, i) => {
-      const buffs = l.map((e) => {
-        const ret = { buff: e },
-          val_str = e.substring(0, e.indexOf('['));
+      const buffs = l.map((buff) => {
+        const ret = { buff };
+        const val_str = buff[0];
         if (val_str.endsWith('%')) {
           ret.val = Number(val_str.substring(0, val_str.length - 1));
           ret.p = true;
@@ -324,8 +342,8 @@ class PseudoUma {
       this.attrs[i] *=
         (100 + buffs.filter((e) => e.p).reduce((p, c) => p + c.val, 0)) / 100;
       this.attrs[i] += buffs.filter((e) => !e.p).reduce((p, c) => p + c.val, 0);
-      return sort_list(buffs, (e) => (e.p ? 10000 + e.val : e.val), false).map(
-        (e) => e.buff,
+      return sort_list(buffs, (e) => (e.p ? 10000 + e.val : e.val)).map(
+        ({ buff }) => buff,
       );
     });
   }

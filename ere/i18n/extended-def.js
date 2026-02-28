@@ -81,6 +81,14 @@ const di18n = {
       _.a_s_okimi,
     ];
   },
+  get n_ground() {
+    const _ = i18n();
+    return [_.a_g_grass, _.a_g_dirt];
+  },
+  get n_dis() {
+    const _ = i18n();
+    return [_.a_d_short, _.a_d_mile, _.a_d_medium, _.a_d_long];
+  },
   get n_style() {
     const _ = i18n();
     return [_.a_s_nige, _.a_s_senko, _.a_s_sashi, _.a_s_okimi];

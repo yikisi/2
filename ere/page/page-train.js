@@ -312,7 +312,7 @@ module.exports = async () => {
               type: 'text',
             },
             {
-              config: { content: i18n().ui_train_adapt_skills },
+              config: { content: i18n().ui_train_learnt_skills },
               type: 'divider',
             },
             ...skill_control.get().map((e) => ({
@@ -572,18 +572,16 @@ module.exports = async () => {
                         content: i18n().skill.n_ground,
                         type: 'text',
                       },
-                      ...[i18n().ui_all, ...di18n.n_adapt.slice(0, 2)].map(
-                        (e, i) => ({
-                          accelerator: 940 + i,
-                          config: {
-                            buttonType:
-                              i === ground_filter + 1 ? 'warning' : 'info',
-                            width: 3,
-                          },
-                          content: e,
-                          type: 'button',
-                        }),
-                      ),
+                      ...[i18n().ui_all, ...di18n.n_ground].map((e, i) => ({
+                        accelerator: 940 + i,
+                        config: {
+                          buttonType:
+                            i === ground_filter + 1 ? 'warning' : 'info',
+                          width: 3,
+                        },
+                        content: e,
+                        type: 'button',
+                      })),
                     ],
                     [
                       {
@@ -591,18 +589,15 @@ module.exports = async () => {
                         content: i18n().skill.n_dis,
                         type: 'text',
                       },
-                      ...[i18n().ui_all, ...di18n.n_adapt.slice(2, 6)].map(
-                        (e, i) => ({
-                          accelerator: 950 + i,
-                          config: {
-                            buttonType:
-                              i === dis_filter + 1 ? 'warning' : 'info',
-                            width: 3,
-                          },
-                          content: e,
-                          type: 'button',
-                        }),
-                      ),
+                      ...[i18n().ui_all, ...di18n.n_dis].map((e, i) => ({
+                        accelerator: 950 + i,
+                        config: {
+                          buttonType: i === dis_filter + 1 ? 'warning' : 'info',
+                          width: 3,
+                        },
+                        content: e,
+                        type: 'button',
+                      })),
                     ],
                     [
                       {
@@ -610,18 +605,16 @@ module.exports = async () => {
                         content: i18n().skill.n_style,
                         type: 'text',
                       },
-                      ...[i18n().ui_all, ...di18n.n_adapt.slice(6)].map(
-                        (e, i) => ({
-                          accelerator: 960 + i,
-                          config: {
-                            buttonType:
-                              i === style_filter + 1 ? 'warning' : 'info',
-                            width: 3,
-                          },
-                          content: e,
-                          type: 'button',
-                        }),
-                      ),
+                      ...[i18n().ui_all, ...di18n.n_style].map((e, i) => ({
+                        accelerator: 960 + i,
+                        config: {
+                          buttonType:
+                            i === style_filter + 1 ? 'warning' : 'info',
+                          width: 3,
+                        },
+                        content: e,
+                        type: 'button',
+                      })),
                     ],
                     [
                       {

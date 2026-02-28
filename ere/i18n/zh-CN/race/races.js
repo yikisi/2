@@ -76,11 +76,51 @@ class I18nRaces {
 
   track_name_template = '%NAME%竞马场';
 
+  d_day = '昼';
+  d_night = '夜';
+
   summary_template = '%WIN%/%RACE%';
   summary_tip_template = '%RACE% 战 %WIN% 胜';
   result_template = '%RANK%着';
   no_result = '未出走';
   no_win = '未胜利';
+
+  lan_lan_template = '%INDEX%直线';
+  lan_curve_template = '%INDEX%弯道';
+  lan_lan_abbr_template = '%INDEX%直';
+  lan_curve_abbr_template = '%INDEX%弯';
+
+  lan_index_final = '最终';
+  lan_index_final_abbr = '终';
+  lan_index_template = '第 %INDEX% ';
+
+  get_preview_header_env = (date, daytime) => [...date, ' ', daytime];
+  preview_header_race_template =
+    '%TRACK% %GROUND% %SPAN%m (%DISTANCE%) %ROTATION% · %WEATHER% %MESS%';
+
+  chart_title_template = '%TRACK% %GROUND% %SPAN%米跑道 %ROTATION%';
+  chart_buff_attr_template = '加成属性：%ATTR%';
+  chart_splitter_1_template = '序 ⬅ %DISTANCE% ⮕ 中';
+  chart_splitter_2_template = '中 ⬅ %DISTANCE% ⮕ 终';
+  chart_splitter_loc_mind = '位置意识结束';
+  chart_slope_name = '坡度';
+
+  r_start = '出闸！';
+  r_bad_start = '出迟！';
+
+  slope_up = '上坡';
+  slope_down = '下坡';
+
+  s_blocked = '阻挡！';
+  s_temptation = '焦躁！';
+
+  first_contestant = '头马';
+
+  d_hanasa = '鼻差';
+  d_atamasa = '头差';
+  d_kubisa = '颈差';
+  d_oosa = '大差';
+  d_bashin_template = '%DIS% 马身';
 
   sim = '模拟赛';
 

@@ -10,14 +10,14 @@ const { skills_dict } = require('#/data/race/skill/skill-const');
 const { attr_enum } = require('#/data/train-const');
 
 const di18n = require('#/i18n/extended-def');
-const { i18n } = require('#/i18n/selector');
+const { i18n, lan } = require('#/i18n/selector');
 
 const fron_cols = 4;
 const progress_width = 24 - 10 - 2 * fron_cols - 1;
 const timer_unit = Math.floor(1000 / frame_rate) / 1000;
 
 /**
- * @param {string|array} message
+ * @param {TextContent} message
  * @param {string} [timer_record]
  * @param {number} [timer]
  */
@@ -29,7 +29,7 @@ function get_event_record(message, timer_record, timer) {
     config: { align: 'left' },
     content: [
       ...(timer_record ? [timer_record, ' '] : []),
-      { content: '解说', fontWeight: 'bold' },
+      { content: i18n().ui_race_reporter, fontWeight: 'bold' },
       i18n().tk_speak_border[0],
       ..._content,
       i18n().tk_speak_border[1],
@@ -109,34 +109,37 @@ module.exports = {
   get_bashin_desc(bashin) {
     bashin *= 2.5;
     if (bashin < 0.2) {
-      return '鼻差';
+      return i18n().race.d_hanasa;
     } else if (bashin < 0.4) {
-      return '头差';
+      return i18n().race.d_atamasa;
     } else if (bashin < 0.6) {
-      return '颈差';
+      return i18n().race.d_kubisa;
     } else {
       let temp;
       switch (Math.round((bashin * 4) / 2.5)) {
         case 1:
-          return '颈差';
+          return i18n().race.d_kubisa;
         case 2:
-          return '1/2 马身';
+          return i18n().race.d_bashin_template.replace('%DIS%', '1/2');
         case 3:
-          return '3/4 马身';
+          return i18n().race.d_bashin_template.replace('%DIS%', '3/4');
         case 4:
-          return '1 马身';
+          return i18n().race.d_bashin_template.replace('%DIS%', '1');
         case 5:
-          return '5/4 马身';
+          return i18n().race.d_bashin_template.replace('%DIS%', '5/4');
         case 6:
-          return '3/2 马身';
+          return i18n().race.d_bashin_template.replace('%DIS%', '3/2');
         case 7:
-          return '7/4 马身';
+          return i18n().race.d_bashin_template.replace('%DIS%', '7/4');
         default:
           temp = Math.round(bashin / 2.5);
           if (temp >= 10) {
-            return '大差';
+            return i18n().race.d_oosa;
           }
-          return `${temp} 马身`;
+          return i18n().race.d_bashin_template.replace(
+            '%DIS%',
+            temp.toString(),
+          );
       }
     }
   },
@@ -169,18 +172,19 @@ module.exports = {
    * @param {boolean} is_finished
    */
   get_table_header(fron_list, timer_record, top_loc, total_span, is_finished) {
+    const _lan = lan();
     const top_loc_ratio = (top_loc * 100) / total_span;
     return [
       { type: 'divider' },
       {
         config: { width: 8 },
-        content: `计时器：${timer_record}`,
+        content: i18n().ui_race_timer_template.replace('%TIMER%', timer_record),
         type: 'text',
       },
       top_loc_ratio >= 100
         ? {
             config: { align: 'center', width: 8 },
-            content: '结束！',
+            content: i18n().ui_end,
             type: 'text',
           }
         : {
@@ -191,7 +195,7 @@ module.exports = {
             },
             inContent: `${Math.round(top_loc).toLocaleString()}m/${total_span.toLocaleString()}m (${top_loc_ratio.toFixed(2)}%)`,
             percentage: top_loc_ratio,
-            outContent: '进度',
+            outContent: i18n().ui_race_progress,
             type: 'progress',
           },
       is_finished
@@ -199,40 +203,47 @@ module.exports = {
         : {
             accelerator: 0,
             config: { align: 'center', disableWarning: true, width: 8 },
-            content: '快进到结果',
+            content: i18n().ui_skip,
             type: 'button',
           },
       {
         config: { align: 'center', width: 1 },
-        content: '号码',
+        content: i18n().ui_race_contestant_no,
         type: 'text',
       },
       {
         config: { align: 'center', width: 4 },
-        content: '名字',
+        content: i18n().ui_race_contestant_name,
         type: 'text',
       },
       {
         config: { align: 'center', width: 1 },
-        content: '跑法',
+        content: i18n().ui_race_contestant_style,
         type: 'text',
       },
       {
         config: { align: 'right', width: 2 },
-        content: top_loc_ratio >= 100 ? '用时' : '速度',
+        content:
+          top_loc_ratio >= 100
+            ? i18n().ui_race_contestant_total_time
+            : i18n().ui_race_contestant_speed,
         type: 'text',
       },
       {
         config: { align: 'center', offset: 1, width: progress_width },
-        content: '相对位置',
+        content: i18n().ui_race_contestant_loc,
         type: 'text',
       },
       ...fron_list.map((e) => ({
         config: { align: 'right', width: 2 },
-        content: e.toLocaleString() + ' ',
+        content: e.toLocaleString(_lan) + ' ',
         type: 'text',
       })),
-      { config: { align: 'right', width: 2 }, content: '排名', type: 'text' },
+      {
+        config: { align: 'right', width: 2 },
+        content: i18n().ui_race_contestant_rank,
+        type: 'text',
+      },
     ];
   },
   /**
@@ -280,7 +291,10 @@ module.exports = {
         {
           config: { align: 'right', width: 2 },
           content: is_finished
-            ? [uma.rank.curr.toString(), ' 着']
+            ? i18n().race.result_template.replace(
+                '%RANK%',
+                uma.rank.curr.toString(),
+              )
             : uma.rank.curr.toString(),
           type: 'text',
         },

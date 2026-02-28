@@ -246,10 +246,10 @@ async function reg_race_page() {
                   )
                   .replace(
                     '%GRAND%',
-                    is_grand_live ? i18n().ui_reg_grand_mark : '',
+                    is_grand_live ? i18n().ui_grand_live_mark : '',
                   )
                   .replace('%MARK%', (is_aim_race & 0b11) > 0 ? ' *' : '')
-                  .replace('()', '')
+                  .replace(/\(\s*\)/, '')
                   .trimEnd(),
                 type: 'button',
               },

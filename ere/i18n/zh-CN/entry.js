@@ -192,6 +192,8 @@ class I18nEntry {
 
   ui_comma = '，';
   ui_comma2 = '、';
+  ui_period = '。';
+  ui_exclamation = '！';
   ui_conjunction = ' 和 ';
   ui_ellipses = '……';
   ui_back = '返回';
@@ -328,7 +330,7 @@ class I18nEntry {
     ...race,
   ];
   ui_palace_template = '[%PALACE%]';
-  get_ui_motivation = (motivation) => [this.ui_mot, motivation];
+  get_ui_motivation = (motivation) => [this.ui_mot, '·', motivation];
   ui_edu_template = '%EDU%';
   get_ui_race_indicator = (race, delta) => [
     '(距 ',
@@ -449,7 +451,7 @@ class I18nEntry {
   ui_train_adapt_dis = '距离适性';
   ui_train_adapt_style = '策略适性';
   ui_train_adapt_ui_conjunction = '·';
-  ui_train_adapt_skills = '习得技能';
+  ui_train_learnt_skills = '习得技能';
   ui_train_learn_skill = '学习技能';
   ui_train_reset_skill = '重置技能';
   ui_train_with_s_rate_template = '%ATTR%训练 Lv.%LEVEL%\n成功率：%SUCCESS%%';
@@ -469,7 +471,7 @@ class I18nEntry {
 
   get_ui_reg_header = (chara) => ['为 ', chara, ' 报名下一场比赛'];
   ui_reg_race_template = '%NAME% (%COUNTRY%) %GRAND% %MARK%';
-  ui_reg_grand_mark = '🎤';
+  ui_grand_live_mark = '🎤';
   ui_reg_registered = '[▲已登记]';
   get_ui_reg_tip_1_before_begin = (chara) => [
     chara,
@@ -493,20 +495,54 @@ class I18nEntry {
   ui_race_select_prevent = '避战';
   ui_race_select_done = '确认出走名单';
   get_ui_race_your_tp = (you) => [you, ' 的精力'];
-  ui_race_start_event = '要给谁赛前打气？';
-  get_ui_race_result = (chara, race, rank) => [
-    chara,
-    ' 取得了 ',
-    race,
-    ' 的 ',
-    rank,
-    '！',
+  ui_race_prev_template = '前一位\n%NAME%';
+  ui_race_next_template = '后一位\n%NAME%';
+  ui_race_item_prev_template = '前一位 %NAME%';
+  ui_race_item_next_template = '前一位 %NAME%';
+  get_ui_race_preview_contestant_entry = (score, motivation, pop, pop_mark) => [
+    score,
+    { isDivider: true },
+    ...motivation,
+    { isDivider: true },
+    ' 第 ',
+    pop,
+    ' 人气 ',
+    pop_mark,
   ];
+  ui_race_preview_contestant_attr = '%ATTR% (%RANK%)';
+  ui_race_preview_contestant_style = '出走策略';
+  get_ui_race_preview_contestant_adapt = (name, adapt) => [name, ' ', adapt];
+  ui_race_preview_contestant_tip =
+    '* 参赛选手按跑道号从低到高显示，队伍成员显示为绿名，强敌显示为红名';
+  ui_race_bt_go = '出走！';
+  ui_race_bt_chart = '赛道数据';
+  ui_race_bt_item = '装备玩具';
+  get_ui_race_preview_equip_item = (chara) => ['为 ', chara, ' 装备性玩具：'];
+  ui_race_preview_equip_item_part_template = '为 %NAME% 的 %PART% 装备性玩具';
+  get_ui_race_preview_item_stg_template = '还有 %COUNT% 件';
+  ui_race_preview_equip_item_v_tip = '还是处女！';
+  ui_race_preview_equip_item_a_cond =
+    '需要：肛交次数 %REQUIRE% (当前：%CURRENT%)';
+  ui_race_start_event = '要给谁赛前打气？';
   ui_race_speed_1 = '一倍速观看';
   ui_race_speed_2 = '二倍速观看';
   ui_race_speed_4 = '四倍速观看';
   ui_race_few_contestants = '减少参赛选手显示';
   ui_race_skip_race = '查看结果';
+  ui_race_timer_template = '计时器：%TIMER%';
+  ui_race_progress = '进程';
+  ui_race_contestant_no = '号码';
+  ui_race_contestant_name = '名字';
+  ui_race_contestant_style = '策略';
+  ui_race_contestant_total_time = '用时';
+  ui_race_contestant_speed = '速度';
+  ui_race_contestant_loc = '相对位置';
+  ui_race_contestant_rank = '排名';
+  ui_race_contestant_progress_template =
+    '%LOCATION% (%LANE% %SLOPE% %BLOCKED% %TEMPTATION%)';
+  ui_race_start = '出闸！';
+  ui_race_bad_start = '出迟！';
+  ui_race_reporter = '解说';
   ui_race_result_summary = '揭示板';
   get_ui_race_result_summary_header = (track, race) => [track, ' ', race];
   ui_race_result_location = '相对位置统计';
@@ -517,6 +553,14 @@ class I18nEntry {
   ui_race_result_endurance_header = '持久力统计图';
   ui_race_result_skills = '发动技能统计';
   ui_race_result_log = '比赛日志';
+  get_ui_race_result = (chara, race, rank) => [
+    chara,
+    ' 取得了 ',
+    race,
+    ' 的 ',
+    rank,
+    '！',
+  ];
   ui_race_end_event = '要祝贺/安慰谁？';
   ui_race_event_chara_template = '%NAME% (%RANK%)';
   ui_race_event_end = '结束';
@@ -592,6 +636,7 @@ class I18nEntry {
   talent_desc = new (require('#/i18n/zh-CN/table/talent-desc'))();
 
   train_action = new (require('#/i18n/zh-CN/sex/actions'))();
+  body_part = new (require('#/i18n/zh-CN/sex/parts'))();
   jewel_shop = new (require('#/i18n/zh-CN/sex/shop'))();
   inmon = new (require('#/i18n/zh-CN/sex/inmons'))();
   inmon_desc = new (require('#/i18n/zh-CN/sex/inmon-desc'))();

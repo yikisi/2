@@ -119,12 +119,31 @@ class RaceLane {
     this.is_last = isLast;
   }
 
-  get_abbr() {
-    return `${this.is_last ? '终' : this.index}${this.is_curve ? '弯' : '直'}`;
+  get abbr() {
+    return (
+      this.is_curve
+        ? i18n().race.lan_curve_abbr_template
+        : i18n().race.lan_lan_abbr_template
+    ).replace(
+      '%INDEX%',
+      this.is_last ? i18n().race.lan_index_final_abbr : this.index.toString(),
+    );
   }
 
-  get_name() {
-    return `${this.is_last ? '最终' : `第 ${this.index} `}${this.is_curve ? '弯道' : '直线'}`;
+  get name() {
+    return (
+      this.is_curve
+        ? i18n().race.lan_curve_template
+        : i18n().race.lan_lan_template
+    ).replace(
+      '%INDEX%',
+      this.is_last
+        ? i18n().race.lan_index_final
+        : i18n().race.lan_index_template.replace(
+            '%INDEX%',
+            this.index.toString(),
+          ),
+    );
   }
 }
 
@@ -302,6 +321,7 @@ module.exports = class RaceInfo {
     this.param_id = param_id;
   }
 
+  /** @returns {PrintedSpan} */
   get_colored_name() {
     return {
       color: adaptability_colors.at(-2 - this.race_class),
@@ -310,6 +330,7 @@ module.exports = class RaceInfo {
     };
   }
 
+  /** @returns {PrintedSpan} */
   get_colored_name_with_class() {
     const ret = this.get_colored_name();
     ret.content = i18n()
