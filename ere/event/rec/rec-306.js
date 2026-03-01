@@ -97,7 +97,7 @@ module.exports = class extends CustomizedRecruit {
         println();
         sys_like_chara(306, 0, -800) && (await waitAnyKey());
         add('flag:当前声望', -100 - hentai_check.filter((e) => e).length * 100);
-        set('flag:变态行为', true);
+        set('flag:变态行为', 1);
       } else {
         await printAndWait([
           riko.get_colored_name(),
@@ -133,7 +133,7 @@ module.exports = class extends CustomizedRecruit {
         ]);
       }
     }
-    set('callname:306:-2', '㭴本理子');
+    set('callname:306:-2', '900601');
     set('cflag:306:招募状态', recruit_flags.yes);
     new GlasseEduMarks().debuff = 0;
     new CoconEduMarks().debuff = 0;

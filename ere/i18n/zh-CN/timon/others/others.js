@@ -1,5 +1,5 @@
 /** @file 杂项 */
-const { printAndWait } = require('#/era-electron');
+const { printAndWait, println, waitAnyKey } = require('#/era-electron');
 
 module.exports = {
   /**
@@ -38,5 +38,232 @@ module.exports = {
         ' 商量吧',
       ]);
     }
+  },
+  ura_reward: (() => {
+    /**
+     * URA 颁奖典礼
+     * @author 雞雞
+     * @author 黑奴队长
+     * @param {CharaTalk} etusko
+     * @param {CharaTalk} you
+     * @param {function(TextContent):Promise} report 用于主持人发言的回调函数
+     * @param {string} year 年度
+     * @param {string} uma 马郎 or 马娘
+     * @param {boolean} is_etusko 是否是乙名史主持（乙名史怀孕或育成期间不会主持）
+     * @param uma_list_cb 用于输出选手立绘列表的回调函数们
+     * @param {function} uma_list_cb.g1 G1 马娘
+     * @param {function} uma_list_cb.best_trainer 年度训练员
+     * @param {function} uma_list_cb.junior 最佳新秀马娘
+     * @param {function} uma_list_cb.classic 最佳经典马娘
+     * @param {function} uma_list_cb.senior 最佳资深马娘
+     * @param {function} uma_list_cb.uoty 年度马娘
+     * @param {string} uma_list_cb.default_best_trainer 如果玩家没赢得年度训练员，作为替代的训练员名
+     * @returns {Promise<void>}
+     */
+    const f = async (
+      etusko,
+      you,
+      report,
+      year,
+      uma,
+      is_etusko,
+      uma_list_cb,
+    ) => {
+      await report([
+        '各位赛',
+        uma,
+        '粉丝们，晚上好！各位热切期盼的年度盛事，URA颁奖典礼就要开始了！',
+      ]);
+      await report([
+        '与往常一样，大会方设立了多个奖项，向拼尽全力以最高的竞技水平带来精彩表演的各位赛',
+        uma,
+        '，以及在背后默默支持',
+        uma,
+        '们的各位训练员们献上敬意！',
+      ]);
+      if (is_etusko) {
+        await report([
+          '今年也由我 ',
+          etusko.get_colored_actual_name(),
+          ' 来主持典礼，请大家多多指教了！',
+        ]);
+      }
+      println();
+      await report([
+        '在正式开始颁奖前，让我们来重温一下 ',
+        year,
+        ' 年的 G1 比赛都有哪些赛',
+        uma,
+        '脱颖而出！',
+      ]);
+      println();
+      if (typeof uma_list_cb.g1 === 'function') {
+        uma_list_cb.g1();
+        await waitAnyKey();
+      } else {
+        await printAndWait(
+          [
+            '（一些选手的名字，可惜没有 ',
+            you.get_colored_name(),
+            ' 的队伍成员）',
+          ],
+          { align: 'center' },
+        );
+      }
+      println();
+      await report('在此再次感谢各位选手为竞赛作出的努力！');
+      println();
+      await report('那么事不宜迟，立即就来开始公布备受瞩目的各个奖项吧！');
+      println();
+      await report('首先是……本年度《最佳训练员大奖》！');
+      println();
+      if (typeof uma_list_cb.best_trainer === 'function') {
+        uma_list_cb.best_trainer();
+        await waitAnyKey();
+        await report([
+          you.get_colored_actual_name(),
+          '训练员的努力有目共睹呢！',
+        ]);
+      } else {
+        if (typeof uma_list_cb.default_best_trainer === 'string') {
+          await report([
+            uma_list_cb.default_best_trainer,
+            '训练员的努力有目共睹呢！',
+          ]);
+        } else {
+          await report('由于本年度没有达标的候选人……');
+          await report('非常遗憾，希望来年能看到得奖的幸运儿！');
+        }
+      }
+      println();
+      await report('然后是……本年度《最佳新秀大奖》！');
+      println();
+      if (typeof uma_list_cb.junior === 'function') {
+        uma_list_cb.junior();
+        await waitAnyKey();
+      } else {
+        await printAndWait(
+          [
+            '（一位刚刚结束新秀年的选手的名字和照片，可惜并不是 ',
+            you.get_colored_name(),
+            ' 的队伍成员）',
+          ],
+          { align: 'center' },
+        );
+      }
+      println();
+      await report('希望这位选手能继续在赛场上发光发热呢！');
+      println();
+      await report('接下来是……本年度《最佳经典级大奖》！');
+      println();
+      if (typeof uma_list_cb.classic === 'function') {
+        uma_list_cb.classic();
+        await waitAnyKey();
+      } else {
+        await printAndWait(
+          [
+            '（一位刚刚结束经典年的选手的名字和照片，可惜并不是 ',
+            you.get_colored_name(),
+            ' 的队伍成员）',
+          ],
+          { align: 'center' },
+        );
+      }
+      println();
+      await report('已经逐渐成长成中流砥柱的模样了！');
+      println();
+      await report('然后是……本年度《最佳资深级大奖》！');
+      println();
+      if (typeof uma_list_cb.senior === 'function') {
+        uma_list_cb.senior();
+        await waitAnyKey();
+      } else {
+        await printAndWait(
+          [
+            '（一位刚刚结束资深年的选手的名字和照片，可惜并不是 ',
+            you.get_colored_name(),
+            ' 的队伍成员）',
+          ],
+          { align: 'center' },
+        );
+      }
+      println();
+      await report('毫无疑问，已经是百战老兵了！');
+      println();
+      await report([
+        '最后！便是决定本年度最快、最高、最强的历史一刻！能在诸多名马之列中留下自己独一无二的印记的赛',
+        uma,
+        '……到底是谁？！',
+      ]);
+      await report(['《年度代表', uma, '》，这个最终的荣耀归属于——']);
+      println();
+      if (typeof uma_list_cb.uoty === 'function') {
+        uma_list_cb.uoty();
+        await waitAnyKey();
+      } else {
+        await printAndWait(
+          [
+            '（一位选手的名字和照片，可惜并不是 ',
+            you.get_colored_name(),
+            ' 的队伍成员）',
+          ],
+          { align: 'center' },
+        );
+      }
+      println();
+      await report('此刻，最强者已经决出！');
+      println();
+      await report('感谢各位今天大驾光临，让我们明年再会吧！');
+    };
+    f.title = 'URA 颁奖典礼';
+    return f;
+  })(),
+  /** 乙名史怀孕或育成期间，URA 颁奖典礼的主持人称呼 */
+  ur_alternative_reporter: '主持人',
+  /**
+   * 训练员年度成绩
+   * @param {PrintedSpan} total 总胜场
+   * @param {PrintedSpan} money 总赏金
+   * @param {PrintedSpan} g1_wins G1 胜利数
+   * @param {PrintedSpan} all_wins 重赏胜利数
+   */
+  get_ur_trainer_reward(total, money, g1_wins, all_wins) {
+    return [
+      '年度团队总胜场：',
+      total,
+      { isBr: true },
+      '年度团队总赏金：',
+      money,
+      ' 马币',
+      { isBr: true },
+      '年度团队 G1 胜场：',
+      g1_wins,
+      { isBr: true },
+      '年度团队重赏胜场：',
+      all_wins,
+    ];
+  },
+  /**
+   * 训练员年度成绩
+   * @param {PrintedSpan} total 总胜场
+   * @param {PrintedSpan} money 总赏金
+   * @param {PrintedSpan} g1_wins G1 胜利数
+   * @param {PrintedSpan} all_wins 重赏胜利数
+   */
+  get_ur_uma_reward(total, money, g1_wins, all_wins) {
+    return [
+      '年度总胜场：',
+      total,
+      { isBr: true },
+      '年度总赏金：',
+      money,
+      ' 马币',
+      { isBr: true },
+      '年度 G1 胜场：',
+      g1_wins,
+      { isBr: true },
+      '年度重赏胜场：',
+      all_wins,
+    ];
   },
 };

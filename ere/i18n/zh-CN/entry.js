@@ -235,6 +235,7 @@ class I18nEntry {
   ui_increase = '提高';
   ui_decrease = '降低';
   ui_end = '结束';
+  ui_signature_result = '主胜鞍';
 
   get_ui_reward_header = (chara) => [chara, ' 的属性有了如下变化：'];
   get_ui_change_attr = (attr, change_mark, change_val) => [

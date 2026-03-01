@@ -77,7 +77,7 @@ module.exports = class extends CustomizedEdu {
       ]);
     }
     println();
-    sys_like_chara(306, 0, -200 - 100 * get('cflag:202:育成次数')) &&
+    sys_like_chara(306, 0, -260 - 40 * get('cflag:202:育成次数')) &&
       (await waitAnyKey());
   }
 
