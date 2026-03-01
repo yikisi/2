@@ -12,16 +12,13 @@ class I18nKojo100601 {
   aim_desc = '1-6月 G1 比赛 3着以内';
 
   cinderella = '灰姑娘';
-  cinderella_desc = '回合开始时压力自动下降到抑郁以下，干劲自动上升到较差以上';
+  cinderella_desc =
+    '回合开始时压力自动下降到抑郁以下，干劲自动上升到较差以上。';
   latecomer = '迟到者';
   latecomer_desc =
-    '育成从经典年开始，无法出赛经典三冠（皋月赏、日本德比、菊花赏）';
-  transfer(timer) {
-    return `转学生 (${timer})`;
-  }
-  transfer_desc(timer) {
-    return `${timer} 回合内训练效果+100%`;
-  }
+    '育成从经典年开始，无法出赛经典三冠（皋月赏、日本德比、菊花赏）。';
+  transfer = (timer) => `转学生 (${timer})`;
+  transfer_desc = (timer) => `${timer} 回合内训练效果+100%。`;
 
   report_arim_kin(oguri) {
     return [

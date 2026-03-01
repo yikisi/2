@@ -77,10 +77,8 @@ const handlers = {};
 handlers[303] = () =>
   era.get('cflag:303:招募状态') !== recruit_flags.yes
     ? {
-        name: '给予更多许可（招募）',
-        handle() {
-          return run_custom_rec(303, event_hooks.recruit);
-        },
+        name: i18n().kojo[303].npc_func,
+        handle: () => run_custom_rec(303, event_hooks.recruit),
       }
     : {};
 

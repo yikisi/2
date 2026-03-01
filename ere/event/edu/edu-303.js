@@ -48,7 +48,7 @@ const { race_enum, race_infos } = require('#/data/race/race-const');
 const { i18n } = require('#/i18n/selector');
 
 const random_trainers = [
-  undefined,
+  void 0,
   '雞雞',
   '无名路人',
   '黑奴队长',

@@ -133,7 +133,7 @@ module.exports = {
   /**
    * @template T
    * @param {T[]} list
-   * @param {function(T):number} weight_cb
+   * @param {function(T,number):number} weight_cb
    * @returns {T}
    */
   get_random_entry_with_weight(list, weight_cb) {
@@ -141,8 +141,9 @@ module.exports = {
       return list[0];
     }
     let dice = Math.random() * list.reduce((p, c) => p + weight_cb(c), 0);
-    for (const entry of list) {
-      if ((dice -= weight_cb(entry)) <= 0) {
+    for (let i = 0; i < list.length; ++i) {
+      const entry = list[i];
+      if ((dice -= weight_cb(entry, i)) <= 0) {
         return entry;
       }
     }
