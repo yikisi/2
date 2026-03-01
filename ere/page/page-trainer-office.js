@@ -44,7 +44,7 @@ const { attr_enum } = require('#/data/train-const');
 const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
-/** @type {Record<string,function(CharaTalk,CharaTalk):{handle:function:Promise,name:string}>} */
+/** @type {Record<string,function(CharaTalk):{handle:function:Promise,name:string}>} */
 const handlers = {};
 
 handlers[304] = (chara) => {
@@ -204,7 +204,7 @@ async function page_trainer_office() {
               print_out_page,
             },
             { name: di18n.kojo.get_npc_celebration(chara.id, celebration) },
-            handlers[ret](chara, me),
+            handlers[ret](chara),
             { name: di18n.kojo.get_npc_bye(chara.id) },
           );
           if ((flag_trainer &&= temp_flag)) {

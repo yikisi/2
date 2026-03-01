@@ -328,7 +328,7 @@ async function page_chairman_office() {
             print_out_page,
           },
           { name: di18n.kojo.get_npc_celebration(chara.id, celebration) },
-          get_riko_button(chara, get_chara_talk(0)),
+          get_riko_button(chara),
           { name: di18n.kojo.get_npc_bye(chara.id) },
         );
     }
