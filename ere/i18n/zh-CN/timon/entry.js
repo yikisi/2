@@ -11,11 +11,13 @@ class I18nTimon {
   daily_child = proxy_kojo_js(require('#/i18n/zh-CN/timon/child/daily'));
   ero_child = proxy_kojo_js(require('#/i18n/zh-CN/timon/child/ero'));
 
-  race = proxy_kojo_js(require('#/i18n/zh-CN/timon/race'));
   game_guides = proxy_kojo_js(require('#/i18n/zh-CN/timon/guides/game'));
   base_guides = proxy_kojo_js(require('#/i18n/zh-CN/timon/guides/base'));
+  god_shop = proxy_kojo_js(require('#/i18n/zh-CN/timon/god-shop'));
+  race = proxy_kojo_js(require('#/i18n/zh-CN/timon/race'));
   ending = proxy_kojo_js(require('#/i18n/zh-CN/timon/ending'));
 
+  others = proxy_kojo_js(require('#/i18n/zh-CN/timon/others/others'));
   anniversary = require('#/i18n/zh-CN/timon/others/anniversary.kojo');
   as_pregnant_slave = require('#/i18n/zh-CN/timon/others/as-pregnant-slave.kojo');
 
@@ -23,11 +25,15 @@ class I18nTimon {
   strange_desc = (debuff) =>
     `彼此还很不熟悉……训练效果-${debuff}%；改善关系或与担当训练员谈论此事可改善该状态。`;
 
+  npc_select = '要和谁交谈？';
   npc_talk = '聊天';
   npc_sex = '求爱';
   npc_out = '约会';
   get_npc_celebration = (celebration) => `庆祝 ${celebration}`;
   npc_bye = '再见';
+
+  npc_accept_task = '接受任务';
+  npc_retry_task = '再次尝试';
 
   // it = information timon
   /** @param {CharaTalk} chara */

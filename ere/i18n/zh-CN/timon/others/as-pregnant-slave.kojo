@@ -1,3 +1,5 @@
+# @file 性奴/孕袋工作事件
+# @author 黑奴队长
 work:
   sync: true
   lines:

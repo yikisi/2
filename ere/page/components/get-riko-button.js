@@ -20,6 +20,8 @@ const CoconEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-203'
 const recruit_flags = require('#/data/event/recruit-flags');
 const { attr_enum } = require('#/data/train-const');
 
+const { i18n } = require('#/i18n/selector');
+
 /**
  * @param {CharaTalk} chara
  * @param {CharaTalk} me
@@ -143,7 +145,10 @@ function get_riko_button(chara, me) {
               set('cflag:306:招募状态', [0, 0]);
               set('flag:当前互动角色', get_random_entry([202, 203]));
             },
-      name: get('cflag:202:育成次数') === 0 ? '接受任务' : '再次尝试',
+      name:
+        get('cflag:202:育成次数') === 0
+          ? i18n().timon.npc_accept_task
+          : i18n().timon.npc_retry_task,
     };
   } else if (get('cflag:202:育成回合计时') < 3 * 48) {
     return {

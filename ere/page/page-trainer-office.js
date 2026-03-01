@@ -25,7 +25,10 @@ const print_out_page = require('#/page/page-out');
 
 const { cb_enum } = require('#/event/queue');
 const { run_custom_rec } = require('#/event/rec/rec-factory');
+const generate_dictionary = require('#/event/snippets/generate-dictionary');
+const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 
+const get_display_name = require('#/utils/calc-display-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const CharaTitles = require('#/data/chara-titles');
@@ -37,43 +40,29 @@ const recruit_flags = require('#/data/event/recruit-flags');
 const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const { attr_enum } = require('#/data/train-const');
-const era = require('#/era-electron');
+
 const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
-const get_display_name = require('#/utils/calc-display-name');
 
 /** @type {Record<string,function(CharaTalk,CharaTalk):{handle:function:Promise,name:string}>} */
 const handlers = {};
 
-handlers[304] = (chara, me) => {
+handlers[304] = (chara) => {
   if (get('cflag:304:招募状态') === recruit_flags.yes) {
     return {};
   } else if (get('cflag:304:招募状态') === recruit_flags.no) {
     return {
       handle: () => {
         set('cflag:304:招募状态', -1);
-        return printAndWait([
-          chara.get_colored_name(),
-          ' 告诉 ',
-          me.get_colored_name(),
-          '，',
-          chara.sex,
-          '有一名负责',
-          chara.get_uma_sex_title(),
-          ' ',
-          get_chara_talk(201).get_colored_name(),
-          '，天赋很不错，马上要开始育成。',
-        ]).then(() =>
-          printAndWait([
-            '如果 ',
-            me.get_colored_name(),
-            ' 愿意的话，可以先辅助',
-            chara.sex,
-            '训练一段时间，也许可以增长一些经验。',
-          ]),
-        );
+        const meek = get_chara_talk(201);
+        return print_title_with_kojo(i18n().kojo[304].recruit, 'intro', chara, {
+          ...generate_dictionary(304),
+          H_NAME: meek.name,
+          H_SEX: meek.sex,
+          H_UMA: meek.uma_sex_title,
+        });
       },
-      name: '谈起训练员的工作',
+      name: i18n().kojo[304].npc_talk_about_trainer,
     };
   } else if (get('cflag:304:招募状态') === -1) {
     return {
@@ -86,22 +75,27 @@ handlers[304] = (chara, me) => {
           }
         });
       },
-      name: get('cflag:201:育成次数') === 0 ? '接受任务' : '再次尝试',
+      name:
+        get('cflag:201:育成次数') === 0
+          ? i18n().timon.npc_accept_task
+          : i18n().timon.npc_retry_task,
     };
   } else if (get('cflag:201:育成回合计时') < 3 * 48) {
     return {
       disabled: get('base:0:精力') < 200 || get('base:304:精力') < 200,
       async handle() {
         const edu_marks = new MeekEduMarks();
-        if (edu_marks.debuff) {
-          await printAndWait([
-            me.get_colored_name(),
-            ' 与 ',
-            chara.get_colored_name(),
-            ' 讨论了一会，增进了对 ',
-            get_chara_talk(201).get_colored_name(),
-            ' 的理解。',
-          ]);
+        await print_title_with_kojo(
+          i18n().kojo[304].daily,
+          'npc_talk_about_meek_in_edu',
+          chara,
+          {
+            ...generate_dictionary(304),
+            H_NAME: get_chara_talk(201).name,
+            debuff: edu_marks.debuff,
+          },
+        );
+        if (edu_marks.debuff > 0) {
           edu_marks.debuff = Math.max(
             edu_marks.debuff -
               1 -
@@ -111,34 +105,26 @@ handlers[304] = (chara, me) => {
           );
           sys_change_attr_and_print(0, attr_enum.tp, -200);
           sys_change_attr_and_print(304, attr_enum.tp, -200);
-        } else {
-          await printAndWait([
-            chara.get_colored_name(),
-            ' 表示已经没有什么新情报可以和 ',
-            me.get_colored_name(),
-            ' 分享了。',
-          ]);
         }
       },
-      name: '谈起 快乐米可 的训练',
+      name: i18n().kojo[304].npc_talk_about_meek,
     };
   } else {
     return {
-      handle: () =>
-        printAndWait([chara.get_colored_name(), ' 表示没什么特别。']).then(() =>
-          printAndWait([
-            '但',
-            chara.sex,
-            '同时也表示，如果 ',
-            me.get_colored_name(),
-            ' 找到了让',
-            chara.get_uma_sex_title(),
-            '获得第二次机会的方法，请一定要帮 ',
-            get_chara_talk(201).get_colored_name(),
-            ' 挽回遗憾',
-          ]),
-        ),
-      name: '谈起 快乐米可 的现状',
+      handle: () => {
+        const meek = get_chara_talk(201);
+        return print_title_with_kojo(
+          i18n().kojo[304].daily,
+          'npc_talk_about_meek',
+          chara,
+          {
+            ...generate_dictionary(304),
+            H_NAME: meek.name,
+            H_UMA: meek.uma_sex_title,
+          },
+        );
+      },
+      name: i18n().kojo[304].npc_talk_about_meek,
     };
   }
 };
@@ -155,36 +141,13 @@ async function page_trainer_office() {
       me = get_chara_talk(0);
     if (!get('flag:初见办公室')) {
       set('flag:初见办公室', 1);
-      await printAndWait([
-        me.get_colored_name(),
-        ' 来到训练员公用的办公室，里面已经有两位训练员在了。',
-      ]);
-      const trainer0 = get_chara_talk(304),
-        trainer1 = get_chara_talk(306);
-      await trainer1.say_as_unknown_and_wait([
-        '您好，您就是新来的 ',
-        me.actual_name,
-        ' 训练员吧。',
-      ]);
-      await trainer1.say_and_wait([
-        '我是 ',
-        trainer1.get_colored_actual_name(),
-        '，今后为了中央特雷森的荣光一起努力吧。',
-      ]);
-      await trainer0.say_and_wait([
-        '贵安，我是 ',
-        trainer0.get_colored_actual_name(),
-        '，今后请您多多指教。',
-      ]);
-      if (
-        sys_filter_chara('cflag', '招募状态', recruit_flags.yes).length === 1
-      ) {
-        await trainer1.say_and_wait([
-          '您现在还没有担当，如果有什么困难的话请尽管来找我或者这位 ',
-          sys_get_colored_callname(306, 304),
-          ' 商量吧',
-        ]);
-      }
+      await i18n().timon.others.welcome_trainer_office(
+        get_chara_talk(304),
+        get_chara_talk(306),
+        me,
+        sys_get_colored_callname(306, 304),
+        sys_filter_chara('cflag', '招募状态', recruit_flags.yes).length === 1,
+      );
       await clear();
       print_page_header();
       drawLine();
@@ -192,7 +155,7 @@ async function page_trainer_office() {
     while (flag_page) {
       setHorizontalAlign('space-around');
       printInColRows(
-        [{ content: '要和谁交谈？', type: 'text' }],
+        [{ content: i18n().timon.npc_select, type: 'text' }],
         ...trainer_list.map((cid) => ({
           columns: [
             {
@@ -208,13 +171,13 @@ async function page_trainer_office() {
                 buttonType:
                   EventMarks.get(cid).count() > 0 ? 'danger' : 'warning',
               },
-              content: get_display_name(era.get(`callname:${cid}:-2`)),
+              content: get_display_name(get(`callname:${cid}:-2`)),
               type: 'button',
             },
           ],
           config: { width: 4 },
         })),
-        [{ accelerator: 999, type: 'button', content: '离开' }],
+        [{ accelerator: 999, type: 'button', content: i18n().ui_back }],
       );
       setHorizontalAlign('start');
       const ret = await input();

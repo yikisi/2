@@ -376,9 +376,8 @@ module.exports = {
     /**
      * @author 雞雞
      * @param {CharaTalk} chara
-     * @param {CharaTalk} you
      */
-    const f = async (chara, you) => {
+    const f = async (chara) => {
       const ret = [];
       await era.printAndWait([chara.get_colored_name(), ' 训练失败了……']);
       era.println();
@@ -396,9 +395,8 @@ module.exports = {
     /**
      * @author 雞雞
      * @param {CharaTalk} chara
-     * @param {CharaTalk} you
      */
-    const f = async (chara, you) => {
+    const f = async (chara) => {
       const ret = [];
       await era.printAndWait([chara.get_colored_name(), ' 训练失败了……']);
       era.println();
