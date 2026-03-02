@@ -44,14 +44,11 @@ async function page_clinic() {
       era.get('cflag:305:招募状态') !== recruit_flags.yes &&
         era.get('love:305') >= 25
         ? {
-            name: '「一起努力吧！」（招募）',
+            name: i18n().timon.npc_recruit_in_school,
             handle() {
               era.set('callname:305:-2', '900501');
               era.set('cflag:305:招募状态', recruit_flags.yes);
-              return era.printAndWait([
-                get_chara_talk(305).get_colored_name(),
-                ' 加入了队伍！',
-              ]);
+              return i18n().timon.recruit.rec_end(get_chara_talk(305));
             },
           }
         : {},

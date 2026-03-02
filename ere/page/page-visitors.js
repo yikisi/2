@@ -38,16 +38,13 @@ const handlers = {};
   handlers[cid] = () =>
     era.get(`cflag:${cid}:招募状态`) !== recruit_flags.yes
       ? {
-          name: '「请来帮助我吧！」（招募）',
+          name: i18n().timon.npc_recruit_out_school,
           handle() {
             era.set(`cflag:${cid}:招募状态`, recruit_flags.yes);
             if (era.get(`talent:${cid}:病娇`) > 0) {
               yandere_list.push(cid);
             }
-            return era.printAndWait([
-              get_chara_talk(cid).get_colored_name(),
-              ' 加入了队伍！',
-            ]);
+            return i18n().timon.recruit.rec_end(get_chara_talk(cid));
           },
         }
       : {};
@@ -58,17 +55,14 @@ const handlers = {};
     era.get(`cflag:${cid}:招募状态`) !== recruit_flags.yes &&
     era.get(`love:${cid}`) >= 40
       ? {
-          name: '「一起努力吧！」（招募）',
+          name: i18n().timon.npc_recruit_out_school,
           handle() {
             era.set(`callname:${cid}:-2`, era.get(`callname:${cid}:-1`));
             era.set(`cflag:${cid}:招募状态`, recruit_flags.yes);
             if (era.get(`talent:${cid}:病娇`) > 0) {
               yandere_list.push(cid);
             }
-            return era.printAndWait([
-              get_chara_talk(cid).get_colored_name(),
-              ' 加入了队伍！',
-            ]);
+            return i18n().timon.recruit.rec_end(get_chara_talk(cid));
           },
         }
       : {};
@@ -108,10 +102,7 @@ handlers[344] = () =>
         handle() {
           era.set('callname:344:-2', '904401');
           era.set('cflag:344:招募状态', recruit_flags.yes);
-          return era.printAndWait([
-            get_chara_talk(344).get_colored_name(),
-            ' 加入了队伍！',
-          ]);
+          return i18n().timon.recruit.rec_end(get_chara_talk(344));
         },
       }
     : {};
@@ -368,10 +359,7 @@ handlers[349] = () =>
             if (era.get('talent:349:病娇') > 0) {
               yandere_list.push(349);
             }
-            return era.printAndWait([
-              get_chara_talk(349).get_colored_name(),
-              ' 加入了队伍！',
-            ]);
+            return i18n().timon.recruit.rec_end(get_chara_talk(349));
           },
         }
       : {};

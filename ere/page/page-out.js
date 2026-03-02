@@ -13,6 +13,7 @@ const MejiroCity = require('#/page/mejiro/mejiro-common');
 
 const { run_custom_daily } = require('#/event/daily/daily-factory');
 const game_guides = require('#/event/others/game-guides');
+const generate_dictionary = require('#/event/snippets/generate-dictionary');
 
 const get_display_name = require('#/utils/calc-display-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -121,15 +122,8 @@ async function out_page() {
             temp.chara,
             temp.title,
             {
-              async handle() {
-                await era.printAndWait([
-                  '【',
-                  get_chara_talk(0).get_colored_name(),
-                  ' 和 ',
-                  temp.chara.get_colored_name(),
-                  ' 聊了会天】',
-                ]);
-              },
+              handle: () =>
+                i18n().kojo[301].daily.npc_talk(generate_dictionary(301)),
               name: di18n.kojo.get_npc_talk(temp.chara.id),
             },
             {
@@ -204,17 +198,14 @@ async function out_page() {
               new TokinoLifeMarks().who_am_i !== 2
               ? {}
               : {
-                  name: '「来帮帮我吧」（招募）',
+                  name: i18n().timon.npc_recruit_in_school,
                   handle() {
                     era.set('callname:301:-2', '900101');
                     era.set('cflag:301:招募状态', recruit_flags.yes);
                     if (era.get('talent:301:病娇')) {
                       yandere_list.push(301);
                     }
-                    return era.printAndWait([
-                      temp.chara.get_colored_name(),
-                      ' 加入了队伍！',
-                    ]);
+                    return i18n().timon.recruit.rec_end(temp.chara);
                   },
                 },
             {

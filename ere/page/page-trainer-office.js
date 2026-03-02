@@ -26,7 +26,6 @@ const print_out_page = require('#/page/page-out');
 const { cb_enum } = require('#/event/queue');
 const { run_custom_rec } = require('#/event/rec/rec-factory');
 const generate_dictionary = require('#/event/snippets/generate-dictionary');
-const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 
 const get_display_name = require('#/utils/calc-display-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -47,7 +46,7 @@ const { i18n } = require('#/i18n/selector');
 /** @type {Record<string,function(CharaTalk):{handle:function:Promise,name:string}>} */
 const handlers = {};
 
-handlers[304] = (chara) => {
+handlers[304] = () => {
   if (get('cflag:304:招募状态') === recruit_flags.yes) {
     return {};
   } else if (get('cflag:304:招募状态') === recruit_flags.no) {
@@ -55,7 +54,7 @@ handlers[304] = (chara) => {
       handle: () => {
         set('cflag:304:招募状态', -1);
         const meek = get_chara_talk(201);
-        return print_title_with_kojo(i18n().kojo[304].recruit, 'intro', chara, {
+        return i18n().kojo[304].recruit['intro']({
           ...generate_dictionary(304),
           H_NAME: meek.name,
           H_SEX: meek.sex,
@@ -85,16 +84,11 @@ handlers[304] = (chara) => {
       disabled: get('base:0:精力') < 200 || get('base:304:精力') < 200,
       async handle() {
         const edu_marks = new MeekEduMarks();
-        await print_title_with_kojo(
-          i18n().kojo[304].daily,
-          'npc_talk_about_meek_in_edu',
-          chara,
-          {
-            ...generate_dictionary(304),
-            H_NAME: get_chara_talk(201).name,
-            debuff: edu_marks.debuff,
-          },
-        );
+        await i18n().kojo[304].daily['npc_talk_about_meek_in_edu']({
+          ...generate_dictionary(304),
+          H_NAME: get_chara_talk(201).name,
+          debuff: edu_marks.debuff,
+        });
         if (edu_marks.debuff > 0) {
           edu_marks.debuff = Math.max(
             edu_marks.debuff -
@@ -111,18 +105,13 @@ handlers[304] = (chara) => {
     };
   } else {
     return {
-      handle: () => {
+      async handle() {
         const meek = get_chara_talk(201);
-        return print_title_with_kojo(
-          i18n().kojo[304].daily,
-          'npc_talk_about_meek',
-          chara,
-          {
-            ...generate_dictionary(304),
-            H_NAME: meek.name,
-            H_UMA: meek.uma_sex_title,
-          },
-        );
+        await i18n().kojo[304].daily.npc_talk_about_meek({
+          ...generate_dictionary(304),
+          H_NAME: meek.name,
+          H_UMA: meek.uma_sex_title,
+        });
       },
       name: i18n().kojo[304].npc_talk_about_meek,
     };

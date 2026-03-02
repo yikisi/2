@@ -32,6 +32,9 @@ class I18nTimon {
   get_npc_celebration = (celebration) => `庆祝 ${celebration}`;
   npc_bye = '再见';
 
+  npc_recruit_in_school = '「一起努力吧！」（招募）';
+  npc_recruit_out_school = '「来帮助我吧！」（招募）';
+
   npc_accept_task = '接受任务';
   npc_retry_task = '再次尝试';
 

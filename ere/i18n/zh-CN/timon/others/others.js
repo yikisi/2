@@ -1,5 +1,11 @@
 /** @file 杂项 */
-const { printAndWait, println, waitAnyKey } = require('#/era-electron');
+const {
+  input,
+  printAndWait,
+  printButton,
+  println,
+  waitAnyKey,
+} = require('#/era-electron');
 
 module.exports = {
   /**
@@ -265,5 +271,85 @@ module.exports = {
       '年度重赏胜场：',
       all_wins,
     ];
+  },
+  /**
+   * 超得，但是队伍已达限额
+   * @param {CharaTalk} taste 理事长
+   */
+  async star_drew_limited(taste) {
+    await taste.say_and_wait('不 解！你的队伍已经有足够的成员了！');
+  },
+  /**
+   * 超得，但是不在招募季
+   * @param {CharaTalk} taste 理事长
+   */
+  async star_drew_wrong_date(taste) {
+    await taste.say_and_wait('疑 惑！现在并不是招募担当的时候！');
+  },
+  /**
+   * 超得开场白
+   * @param {CharaTalk} taste 理事长
+   */
+  star_drew_intro(taste) {
+    taste.say(
+      '告 知！对于还没有入队但是很有天赋的孩子，学园方面会允许已经做出成绩的训练员直接去指名教导对方，但是需要有能够服众的声望！',
+    );
+    taste.say('注 意！即使这样指名了，也还请好好和对方从头相处吧！');
+  },
+  star_drew_options: ['从列表里选', '用名字指名', '用 ID 指名', '再想想'],
+  get_star_drew_selected: (name) => `${name} [已指名]`,
+  star_drew_kojo_chara: '使用口上的角色',
+  star_drew_timon_chara: '使用地文的角色',
+  star_drew_chara_name_input: '请输入想指名的角色名',
+  star_drew_chara_id_input: '请输入想指名的角色 ID',
+  /**
+   * 超得，但是重复选择
+   * @param {CharaTalk} taste 理事长
+   * @param {CharaTalk} chara 被超得的对象
+   */
+  async star_drew_duplicate(taste, chara) {
+    await taste.say_and_wait([
+      '提 醒！',
+      chara.get_colored_name(),
+      ' 同学已经在训练场等着了！',
+    ]);
+  },
+  /**
+   * 超得，但是没有选中任何人
+   * @param {CharaTalk} taste 理事长
+   */
+  async star_drew_no_one(taste) {
+    await taste.say_and_wait('疑 惑！查无此人！');
+  },
+  /**
+   * 超得
+   * @param {CharaTalk} taste 理事长
+   * @param {CharaTalk} you 玩家
+   * @param {PrintedSpan} chara 被超得的对象
+   * @param {boolean} changed 是否是变更超得对象
+   * @returns {Promise<number>}
+   */
+  async star_drew(taste, you, chara, changed) {
+    taste.say(['抉 择！要让学园帮你接触 ', chara, ' 同学吗？']);
+    printButton('「超 得！！」', 1);
+    printButton('「慢 着！！」', 2);
+    const ret = await input();
+    if (ret === 1) {
+      await taste.say_and_wait([
+        '激 热！',
+        chara,
+        ' 同学最近将经常去训练场，好好把握！',
+      ]);
+      if (changed) {
+        await taste.say_and_wait([
+          '不 快！但还请 ',
+          you.get_colored_actual_name(),
+          ' 训练员下次想好了再决定！',
+        ]);
+      }
+    } else {
+      await taste.say_and_wait('愤 怒！想好了再来啊！');
+    }
+    return ret;
   },
 };

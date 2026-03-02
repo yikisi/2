@@ -6,7 +6,6 @@ const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
 const { cb_enum } = require('#/event/queue');
 const { run_custom_rec } = require('#/event/rec/rec-factory');
 const generate_dictionary = require('#/event/snippets/generate-dictionary');
-const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
@@ -18,11 +17,8 @@ const { attr_enum } = require('#/data/train-const');
 
 const { i18n } = require('#/i18n/selector');
 
-/**
- * @param {CharaTalk} riko
- * @returns {{[handle]:function:Promise,[name]:string}}
- */
-function get_riko_button(riko) {
+/** @returns {{[handle]:function:Promise,[name]:string}} */
+function get_riko_button() {
   if (get('cflag:306:招募状态') === recruit_flags.yes) {
     return {};
   } else if (get('cflag:306:招募状态') === recruit_flags.no) {
@@ -30,7 +26,7 @@ function get_riko_button(riko) {
       handle() {
         set('cflag:306:招募状态', -1);
         const glasse = get_chara_talk(202);
-        return print_title_with_kojo(i18n().kojo[306].recruit, 'intro', riko, {
+        return i18n().kojo[306].recruit['intro']({
           ...generate_dictionary(306),
           B_SEX: glasse.sex,
           B_UMA: glasse.uma_sex_title,
@@ -43,7 +39,7 @@ function get_riko_button(riko) {
       disabled: get('flag:当前月') > 3 || sys_check_team_limit() > -2,
       async handle() {
         const glasse = get_chara_talk(202);
-        await print_title_with_kojo(i18n().kojo[306].recruit, 'task', riko, {
+        await i18n().kojo[306].recruit['task']({
           ...generate_dictionary(306),
           B_NAME: glasse.name,
           B_SEX: glasse.sex,
@@ -100,22 +96,17 @@ function get_riko_button(riko) {
             aim = aims[0];
             break;
           case 0:
-            await print_title_with_kojo(
-              i18n().kojo[306].daily,
-              'npc_talk_about_nothing',
-              riko,
+            await i18n().kojo[306].daily['npc_talk_about_nothing'](
               generate_dictionary(306),
             );
             return;
         }
         aim_marks = aim === 202 ? glasse_edu_marks : cocon_edu_marks;
         aim = aim === 202 ? glasse : cocon;
-        await print_title_with_kojo(
-          i18n().kojo[306].daily,
-          'npc_talk_about_aim_in_edu',
-          riko,
-          { ...generate_dictionary(306), AIM: aim.name },
-        );
+        await i18n().kojo[306].daily['npc_talk_about_aim_in_edu']({
+          ...generate_dictionary(306),
+          AIM: aim.name,
+        });
         aim_marks.debuff = Math.max(
           aim_marks.debuff -
             1 -
@@ -131,12 +122,7 @@ function get_riko_button(riko) {
   } else {
     return {
       handle: () =>
-        print_title_with_kojo(
-          i18n().kojo[306].daily,
-          'npc_talk_about_aim',
-          riko,
-          generate_dictionary(306),
-        ),
+        i18n().kojo[306].daily['npc_talk_about_aim'](generate_dictionary(306)),
       name: i18n().kojo[306].npc_talk_about_uma,
     };
   }

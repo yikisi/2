@@ -20,6 +20,7 @@ const print_out_page = require('#/page/page-out');
 
 const { check_edu_script } = require('#/event/edu/edu-factory');
 const { check_rec_script } = require('#/event/rec/rec-factory');
+const generate_dictionary = require('#/event/snippets/generate-dictionary');
 
 const get_display_name = require('#/utils/calc-display-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -31,7 +32,7 @@ const TasteLifeMarks = require('#/data/event/life-event-marks/life-event-marks-3
 const loc_characters = require('#/data/event/loc-characters');
 const recruit_flags = require('#/data/event/recruit-flags');
 const yandere_list = require('#/data/event/yandere-list');
-const { get_celebration, get_relation_info } = require('#/data/info-generator');
+const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 
 const di18n = require('#/i18n/extended-def');
@@ -60,35 +61,9 @@ async function page_chairman_office() {
             name: di18n.kojo.get_npc_talk(chara.id),
             async handle() {
               nothing = false;
-              switch (get_relation_info(302).level) {
-                case 0:
-                  await chara.say_and_wait(
-                    '冷 漠！有来找我的空闲不如先把自己的工作做好！',
-                  );
-                  break;
-                case 1:
-                  await chara.say_and_wait('不 悦！不太想见到你！');
-                  break;
-                case 2:
-                  await chara.say_and_wait(
-                    '奇 怪！训练员有什么事要来找我一谈？',
-                  );
-                  break;
-                case 3:
-                  await chara.say_and_wait('寒 暄！今天还顺利吗？');
-                  break;
-                case 4:
-                  await chara.say_and_wait('赞 许！你也会跻身传奇之列！');
-                  break;
-                case 5:
-                  await chara.say_and_wait('欢 迎！有麻烦就来找我吧！');
-                  break;
-                case 6:
-                  await chara.say_and_wait('喜 悦！有空就来聊聊！');
-                  break;
-                case 7:
-                  await chara.say_and_wait('如果是你……幻 听！你什么都没听到！');
-              }
+              await i18n().kojo[chara.id].daily.npc_talk(
+                generate_dictionary(chara.id),
+              );
             },
           },
           {
@@ -96,7 +71,9 @@ async function page_chairman_office() {
               nothing = false;
               switch (await goto_sex(chara.id, location_enum.chairman)) {
                 case true:
-                  await chara.say_and_wait('羞 涩！那晚上在你家见面！');
+                  await i18n().kojo[chara.id].daily.npc_sex(
+                    generate_dictionary(chara.id),
+                  );
                   break;
                 case 2:
                   flag_page = false;
@@ -125,16 +102,11 @@ async function page_chairman_office() {
             async handle() {
               nothing = false;
               if (sys_check_team_limit() >= 0) {
-                await chara.say_and_wait('不 解！你的队伍已经有足够的成员了！');
+                await i18n().timon.others.star_drew_limited(chara);
               } else if (era.get('flag:当前月') > 3) {
-                await chara.say_and_wait('疑 惑！现在并不是招募担当的时候！');
+                await i18n().timon.others.star_drew_wrong_date(chara);
               } else {
-                chara.say(
-                  '告 知！对于还没有入队但是很有天赋的孩子，学园方面会允许已经做出成绩的训练员直接去指名教导对方，但是需要有能够服众的声望！',
-                );
-                chara.say(
-                  '注 意！即使这样指名了，也还请好好和对方从头相处吧！',
-                );
+                i18n().timon.others.star_drew_intro(chara);
                 const temp_list = era
                   .getAllCharacters()
                   .filter(
@@ -152,16 +124,12 @@ async function page_chairman_office() {
                   temp_list.push(302);
                 }
                 era.printMultiColumns(
-                  ['从列表里选', '用名字指名', '用 ID 指名', '再想想'].map(
-                    (e, i) => {
-                      return {
-                        accelerator: i + 1,
-                        content: e,
-                        config: { width: 6, align: 'center' },
-                        type: 'button',
-                      };
-                    },
-                  ),
+                  i18n().timon.others.star_drew_options.map((e, i) => ({
+                    accelerator: i + 1,
+                    config: { align: 'center', width: 6 },
+                    content: e,
+                    type: 'button',
+                  })),
                 );
                 let temp = await era.input();
                 switch (temp) {
@@ -184,10 +152,9 @@ async function page_chairman_office() {
                             width: 4,
                           },
                           content:
-                            name +
-                            (star_premium_draw.chara === cid
-                              ? ' [已指名]'
-                              : ''),
+                            star_premium_draw.chara === cid
+                              ? i18n().timon.others.get_star_drew_selected(name)
+                              : name,
                           priority: flag_script,
                           type: 'button',
                         };
@@ -204,8 +171,8 @@ async function page_chairman_office() {
                           temp.push({
                             config: {
                               content: l[0].priority
-                                ? '使用口上的角色'
-                                : '使用地文的角色',
+                                ? i18n().timon.others.star_drew_kojo_chara
+                                : i18n().timon.others.star_drew_timon_chara,
                             },
                             type: 'divider',
                           });
@@ -216,7 +183,7 @@ async function page_chairman_office() {
                     temp = await era.input();
                     break;
                   case 2:
-                    era.print('请输入想指名的角色名');
+                    era.print(i18n().timon.others.star_drew_chara_name_input);
                     temp = await era.input();
                     temp = temp_list.filter(
                       (e) =>
@@ -224,71 +191,50 @@ async function page_chairman_office() {
                     )[0];
                     break;
                   case 3:
-                    era.print('请输入想指名的角色ID');
+                    era.print(i18n().timon.others.star_drew_chara_id_input);
                     temp = await era.input();
                     break;
                   case 4:
                     temp = -255;
                 }
                 if (temp === 302) {
-                  await chara.say_and_wait('惊 愕！');
-                  await chara.say_and_wait('无 措！怎怎怎怎么办！');
-                  await get_chara_talk(0).say_and_wait(
-                    '将 军！无路可退了，来和我一起吧！',
-                  );
                   era.set('callname:302:-2', '900201');
-                  await chara.say_and_wait('啊吧啊吧啊吧啊吧……');
                   era.set('cflag:302:招募状态', recruit_flags.yes);
                   if (era.get('talent:302:病娇')) {
                     yandere_list.push(302);
                   }
-                  await era.printAndWait([
-                    '恭 喜！',
-                    chara.get_colored_actual_name(),
-                    ' 加入了队伍！',
-                  ]);
+                  await i18n().kojo[chara.id].recruit.recruit(
+                    generate_dictionary(chara.id),
+                  );
                 } else if (temp !== -255) {
                   if (temp === star_premium_draw.chara) {
-                    await chara.say_and_wait([
-                      '提 醒！',
-                      get_chara_talk(temp).get_colored_actual_name(),
-                      ' 同学已经在训练场等着了！',
-                    ]);
+                    await i18n().timon.others.star_drew_duplicate(
+                      chara,
+                      get_chara_talk(temp),
+                    );
                   } else if (temp_list.indexOf(temp) === -1) {
-                    await chara.say_and_wait('疑 惑！查无此人！');
+                    await i18n().timon.others.star_drew_no_one(chara);
                   } else {
-                    chara.say([
-                      '抉 择！要让学园帮你接触 ',
-                      {
-                        content: get_display_name(
-                          era.get(`static:${temp}:name`),
-                        ),
-                        color: get_chara_color(temp),
-                        fontWeight: 'bold',
-                      },
-                      ' 同学吗？',
-                    ]);
-                    era.printButton('「超 得！！」', 1);
-                    era.printButton('「慢 着！！」', 2);
-                    if ((await era.input()) === 1) {
-                      await chara.say_and_wait([
-                        '激 热！',
-                        get_chara_talk(temp).get_colored_actual_name(),
-                        ' 同学最近将经常去训练场，好好把握！',
-                      ]);
+                    if (
+                      (await i18n().timon.others.star_drew(
+                        chara,
+                        get_chara_talk(0),
+                        {
+                          content: get_display_name(
+                            era.get(`static:${temp}:name`),
+                          ),
+                          color: get_chara_color(temp),
+                          fontWeight: 'bold',
+                        },
+                        star_premium_draw.chara > 0,
+                      )) === 1
+                    ) {
                       sys_change_fame(-cost);
                       if (star_premium_draw.chara > 0) {
-                        await chara.say_and_wait([
-                          '不 快！还请 ',
-                          get_chara_talk(0).get_colored_actual_name(),
-                          ' 训练员下次想好了再决定！',
-                        ]);
                         era.println();
                         sys_like_chara(302, 0, -50) && (await era.waitAnyKey());
                       }
                       star_premium_draw.chara = temp;
-                    } else {
-                      await chara.say_and_wait('愤 怒！想好了再来啊！');
                     }
                   }
                 }
@@ -299,9 +245,10 @@ async function page_chairman_office() {
           {
             async handle() {
               if (sys_check_awake(chara.id)) {
-                await chara.say_and_wait(
-                  nothing ? '不 悦！不要消遣我！' : '再 会！要努力工作啊！',
-                );
+                await i18n().kojo[chara.id].daily.npc_bye({
+                  ...generate_dictionary(chara.id),
+                  nothing,
+                });
                 if (nothing) {
                   era.println();
                   sys_like_chara(302, 0, -25) && (await era.waitAnyKey());
@@ -328,7 +275,7 @@ async function page_chairman_office() {
             print_out_page,
           },
           { name: di18n.kojo.get_npc_celebration(chara.id, celebration) },
-          get_riko_button(chara),
+          get_riko_button(),
           { name: di18n.kojo.get_npc_bye(chara.id) },
         );
     }

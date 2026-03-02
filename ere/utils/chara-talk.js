@@ -80,7 +80,7 @@ class CharaTalk {
     } else {
       return i18n()
         .name.full_name_template.replace('%NAME%', this.name)
-        .replace('%ACTUALNAME%', this.actual_name);
+        .replace('%CHARA_ACTUAL%', this.actual_name);
     }
   }
 

@@ -7,6 +7,7 @@ const get_display_name = require('#/utils/calc-display-name');
 const { get_chara_color } = require('#/data/chara-colors');
 const recruit_flags = require('#/data/event/recruit-flags');
 
+const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends MecNpc {
@@ -23,9 +24,8 @@ module.exports = class extends MecNpc {
   get_talents() {
     return [
       {
+        ...di18n.kojo.get_titled_content(this.id, 'chairman'),
         color: get_chara_color(this.id),
-        content: '我系你上司',
-        title: '作为理事长的权利是无限的；通过学园指名招募马娘的声望消耗-25%。',
       },
     ];
   }
