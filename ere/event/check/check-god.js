@@ -1,16 +1,13 @@
 const era = require('#/era-electron');
 
-const {
-  sys_change_attr_and_print,
-  sys_change_motivation,
-} = require('#/system/sys-calc-base-cflag');
+const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
 const sys_filter_chara = require('#/system/sys-filter-chara');
-
-const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
 const CustomizedCheck = require('#/event/check/check-common');
 const { add_event, cb_enum } = require('#/event/queue');
+const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 
+const get_display_name = require('#/utils/calc-display-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 
@@ -19,7 +16,7 @@ const EventObject = require('#/data/event/event-object');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
 
-const di18n = require('#/i18n/extended-def');
+const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends CustomizedCheck {
   check_and_get_titles(aim_check) {
@@ -67,14 +64,14 @@ module.exports = class extends CustomizedCheck {
     const god = get_chara_talk(this.id),
       me = get_chara_talk(0);
     return {
-      name: '向女神祈祷',
+      name: i18n().timon.god_shop.bt_pray,
       async handle() {
-        const fame = era.get('flag:当前声望');
+        const honour = era.get('flag:当前声望');
         era.printMultiColumns([
-          { content: '要祈祷什么？', type: 'text' },
+          { content: i18n().timon.god_shop.pray_select, type: 'text' },
           ...[
-            { c: 1000, n: '变得有名（1000 声望）' },
-            { c: 500, n: '变得有钱（500 声望）' },
+            { c: 1000, n: i18n().timon.god_shop.bt_pray_honour_buff },
+            { c: 500, n: i18n().timon.god_shop.bt_pray_money_buff },
             {
               c: 200,
               d:
@@ -83,89 +80,61 @@ module.exports = class extends CustomizedCheck {
                     // BASENAME:5 - 9 = 速度 - 智力
                     era.get(`base:0:${5 + i}`) < era.get(`maxbase:0:${5 + i}`),
                 ) === -1,
-              n: '变得更强（200 声望）',
+              n: i18n().timon.god_shop.bt_pray_your_power,
             },
-            { c: 50, n: '突破极限（50-500 声望）' },
-            { c: 800, n: '恢复健康（800 声望）' },
+            { c: 50, n: i18n().timon.god_shop.bt_pray_self_over_limit },
+            { c: 800, n: i18n().timon.god_shop.bt_pray_self_heal },
           ].map((e, i) => ({
             accelerator: i + 1,
-            config: { disabled: e.d || fame < e.c, width: 6 },
+            config: { disabled: e.d || honour < e.c, width: 6 },
             content: e.n,
             type: 'button',
           })),
-          { accelerator: 99, content: '还是算了', type: 'button' },
+          { accelerator: 99, content: i18n().ui_cancel, type: 'button' },
         ]);
-        let ret = await era.input(),
-          relation,
-          temp_list;
+        let ret = await era.input();
+        let relation;
+        let temp_list;
         switch (ret) {
           case 1:
-            if (
-              await select_yes_or_no(
-                '确定吗？',
-                `确定（声望获取+${era.get('global:声望加成')}%->${era.get('global:声望加成') + 1}%）`,
-              )
-            ) {
+            if ((await i18n().timon.god_shop.handle_pray_honour_buff()) === 1) {
               era.add('global:声望加成', 1);
               era.add('flag:当前声望', -1000);
               relation = 500;
             }
             break;
           case 2:
-            if (
-              await select_yes_or_no(
-                '确定吗？',
-                `确定（马币获取+${era.get('global:金钱加成')}%->${era.get('global:金钱加成') + 1}%）`,
-              )
-            ) {
+            if ((await i18n().timon.god_shop.handle_pray_money_buff()) === 1) {
               era.add('global:金钱加成', 1);
               era.add('flag:当前声望', -500);
               relation = 250;
             }
             break;
           case 3:
-            era.print('想获得什么属性呢？');
-            era.printMultiColumns([
-              ...new Array(5).fill(0).map((_, i) => ({
-                accelerator: i,
-                content: `${di18n.n_attr[i]}（+80）`,
-                config: {
-                  disabled:
-                    era.get(`base:0:${5 + i}`) ===
-                    era.get(`maxbase:0:${5 + i}`),
-                  width: 6,
-                },
-                type: 'button',
-              })),
-              {
-                accelerator: 5,
-                content: '随便什么都可以！（随机属性+100）',
-                type: 'button',
-              },
-              { accelerator: 99, content: '还是算了', type: 'button' },
-            ]);
-            ret = await era.input();
-            if (ret <= 5) {
-              if (ret < 5) {
-                ret = sys_change_attr_and_print(0, ret, 80);
-              } else {
-                ret = sys_change_attr_and_print(
-                  0,
-                  get_random_entry(
-                    new Array(5)
-                      .fill(0)
-                      .map((_, i) => i)
-                      .filter(
-                        (i) =>
-                          era.get(`base:0:${5 + i}`) <
-                          era.get(`maxbase:0:${5 + i}`),
-                      )
-                      .map((e) => e[1]),
-                  ),
-                  100,
-                );
+            ret = new Array(5)
+              .fill(0)
+              .map(
+                (_, i) =>
+                  era.get(`base:0:${5 + i}`) >= era.get(`maxbase:0:${5 + i}`),
+              );
+            ret = await i18n().timon.god_shop.handle_pray_your_power(
+              ret,
+              get_random_entry(
+                ret
+                  .map((b, i) => [b, i])
+                  .filter(([b]) => !b)
+                  .map((e) => e[1]),
+              ),
+            );
+            if (ret[0] <= 5) {
+              const attr = new Array(5).fill(0);
+              attr[ret[1]] = 80;
+              if (ret[0] === 5) {
+                attr[ret[1]] += 20;
               }
-              era.print([me.get_colored_name(), ' 的 ', ...ret, '！']);
+              if (get_attr_and_print_in_event(0, attr)) {
+                await era.waitAnyKey();
+              }
               era.add('flag:当前声望', -200);
               relation = 100;
             }
@@ -199,7 +168,7 @@ module.exports = class extends CustomizedCheck {
             );
             if (temp_list.length) {
               era.printMultiColumns([
-                { content: '请选择目标', type: 'text' },
+                { content: i18n().timon.god_shop.select_target, type: 'text' },
                 ...temp_list.map((cur_id) => {
                   let cost;
                   if (ret === 4) {
@@ -215,16 +184,30 @@ module.exports = class extends CustomizedCheck {
                   } else {
                     cost = 800;
                   }
+                  const name = get_display_name(
+                    era.get(`callname:${cur_id}:-2`),
+                  );
                   return {
                     accelerator: cur_id,
-                    config: { width: 12, disabled: fame < cost },
+                    config: { width: 12, disabled: honour < cost },
                     content:
-                      era.get(`callname:${cur_id}:-2`) +
-                      `（${cost} 声望${ret === 4 ? '，训练加成-10%' : ''}）`,
+                      ret === 4
+                        ? i18n().timon.god_shop.get_target_entry_over_limit(
+                            name,
+                            cost,
+                          )
+                        : i18n().timon.god_shop.get_target_entry_heal(
+                            name,
+                            cost,
+                          ),
                     type: 'button',
                   };
                 }),
-                { accelerator: 9999, content: '取消', type: 'button' },
+                {
+                  accelerator: 9999,
+                  content: i18n().ui_cancel,
+                  type: 'button',
+                },
               ]);
               ret = [ret, 0];
               ret[1] = await era.input();
@@ -245,10 +228,9 @@ module.exports = class extends CustomizedCheck {
                     // CFLAGNAME:25 - 29 = 速度加成 - 智力加成
                     era.add(`cflag:${ret[1]}:${i + 25}`, -10);
                   });
-                  era.print([
-                    get_chara_talk(ret[1]).get_colored_name(),
-                    ' 似乎突破了极限……',
-                  ]);
+                  i18n().timon.god_shop.handle_pray_over_limit(
+                    get_chara_talk(ret[1]),
+                  );
                   relation =
                     limited_count >= 3
                       ? 50
@@ -271,25 +253,13 @@ module.exports = class extends CustomizedCheck {
                 }
               }
             } else {
-              era.print('没有满足条件的目标……');
+              era.print(i18n().timon.god_shop.no_targets);
             }
         }
-        if (relation) {
-          era.print([
-            god.get_colored_name(),
-            ' 满足了 ',
-            me.get_colored_name(),
-            ' 的愿望',
-          ]);
+        i18n().timon.god_shop.handle_pray_end(god, me, relation > 0);
+        if (relation > 0) {
           era.println();
           CustomizedCheck.like_chara(god.id, 0, relation);
-        } else {
-          era.print([
-            me.get_colored_name(),
-            ' 放弃了向 ',
-            god.get_colored_name(),
-            ' 祈祷……',
-          ]);
         }
       },
     };

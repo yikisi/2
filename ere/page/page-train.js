@@ -702,25 +702,25 @@ module.exports = async () => {
               pt = era.add(`exp:${cid}:技能点数`, 9999);
               buffer = get_skill_buffer(cid, skill_control, pt, discount);
             } else if (typeof ret === 'number' && buffer[ret - 1]) {
-              const skill = skills_dict[buffer[ret - 1].id],
-                to_remove =
-                  skills_dict[
-                    skill_control
-                      .get()
-                      .find(
-                        (s) =>
-                          s !== skill.id &&
-                          skills_dict[s].group_id === skill.group_id,
-                      )
-                  ];
+              const skill = skills_dict[buffer[ret - 1].id];
+              const to_remove =
+                skills_dict[
+                  skill_control
+                    .get()
+                    .find(
+                      (s) =>
+                        s !== skill.id &&
+                        skills_dict[s].group_id === skill.group_id,
+                    )
+                ];
               if (
                 await select_yes_or_no(
                   to_remove
-                    ? i18n().get_ui_train_learn_skill(skill.get_colored_name())
-                    : i18n().get_ui_train_replace_skill(
+                    ? i18n().get_ui_train_replace_skill(
                         skill.get_colored_name(),
-                        to_remove.get_colored_name,
-                      ),
+                        to_remove.get_colored_name(),
+                      )
+                    : i18n().get_ui_train_learn_skill(skill.get_colored_name()),
                 )
               ) {
                 pt = era.add(

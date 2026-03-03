@@ -1,23 +1,17 @@
-const { get } = require('#/era-electron');
-
 const MecNpc = require('#/event/mec/mec-npc');
 
 const { get_chara_color } = require('#/data/chara-colors');
 const SasamiLifeMarks = require('#/data/event/life-event-marks/life-event-marks-305');
 
-const { __, i18n } = require('#/i18n/selector');
+const di18n = require('#/i18n/extended-def');
 
 module.exports = class extends MecNpc {
   get_talents() {
     return [
       {
+        ...di18n.kojo.get_titled_content(this.id, 'doctor'),
         color: get_chara_color(this.id),
-        content: __(
-          `title.${get(`staticcstr:${this.id}:11`)}`,
-          i18n().title.undef,
-        ),
-        fontWeight: new SasamiLifeMarks().buff > 0 ? 'bold' : undefined,
-        title: '加快队伍成员偏头痛、伤病和疲惫恢复，且更不容易偏头痛。',
+        fontWeight: new SasamiLifeMarks().buff > 0 ? 'bold' : void 0,
       },
     ];
   }

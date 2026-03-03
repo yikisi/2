@@ -22,7 +22,7 @@ const get_child_name = require('#/utils/naming');
 const { get_display_width, get_random_value } = require('#/utils/value-utils');
 
 const { buff_colors } = require('#/data/color-const');
-const { get_date } = require('#/data/date-indicator');
+const { get_date_obj } = require('#/data/date-indicator');
 const { unexpected_pregnant_enum } = require('#/data/ero/status-const');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { get_filtered_talents } = require('#/data/info-generator');
@@ -320,7 +320,6 @@ async function sys_have_baby(mid) {
   const cur_month = era.get('flag:当前月');
   const cur_week = era.get('flag:当前周');
   const birth_day = 7 * cur_week + Math.floor(7 * Math.random()) - 6;
-  const date = get_date();
 
   era
     .getAddedCharacters()
@@ -448,20 +447,15 @@ async function sys_have_baby(mid) {
   await name_baby(ch_id, fid, mid);
 
   get_custom_mec(ch_id).set_callname();
-  const child = get_chara_talk(ch_id);
-  const c_call = child.sex_code === 1 ? '长子' : '长女';
+  const exp_obj = {
+    ...get_date_obj(),
+    c: ch_id,
+  };
   if (!era.get(`cstr:${fid}:长子女经历`)) {
-    era.set(`cstr:${fid}:长子女经历`, [
-      `${c_call} `,
-      child.get_colored_name(),
-      ` 出生于 ${date}`,
-    ]);
+    era.set(`cstr:${fid}:长子女经历`, exp_obj);
   }
   if (!era.get(`cstr:${mid}:长子女经历`)) {
-    era.set(`cstr:${mid}:长子女经历`, [
-      `在 ${date} 生下了 ${c_call} `,
-      child.get_colored_name(),
-    ]);
+    era.set(`cstr:${mid}:长子女经历`, { ...exp_obj, im: true });
   }
   if (!era.get(`cstr:${ch_id}:毛色`)) {
     era.set(

@@ -1,4 +1,4 @@
-const { add, get, input, printMultiColumns, set } = require('#/era-electron');
+const { add, get, set } = require('#/era-electron');
 
 const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
 const {
@@ -13,7 +13,7 @@ const print_ero_page = require('#/page/page-ero');
 
 const CustomizedLove = require('#/event/love/love-common');
 
-const { get_date } = require('#/data/date-indicator');
+const { get_date_obj } = require('#/data/date-indicator');
 const EroParticipant = require('#/data/ero/ero-participant');
 const { part_enum } = require('#/data/ero/part-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
@@ -21,51 +21,8 @@ const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
 
 class LoveGod extends CustomizedLove {
-  get fuck_her_button() {
-    return '';
-  }
-
-  get fuck_pregnant_button() {
-    return '';
-  }
-
-  get fuck_me_button() {
-    return '';
-  }
-
-  get reject_button() {
-    return '';
-  }
-
-  /**
-   * @param {CharaTalk} god
-   * @param {CharaTalk} me
-   */
-  async fuck_her(god, me) {}
-
-  /**
-   * @param {CharaTalk} god
-   * @param {CharaTalk} me
-   */
-  async fuck_me(god, me) {}
-
-  /**
-   * @param {CharaTalk} god
-   * @param {CharaTalk} me
-   */
-  async reject(god, me) {}
-
-  /**
-   * @param {CharaTalk} god
-   * @param {CharaTalk} me
-   */
-  async after_fuck(god, me) {}
-
-  /**
-   * @param {CharaTalk} god
-   * @param {CharaTalk} me
-   */
-  async 49(god, me) {
+  /** @param {CharaTalk} god */
+  async 49(god) {
     LifeEventMarks.get_marks(this.id).set('love', 1);
     if (get(`love:${this.id}`) === 49) {
       await sys_love_uma_in_event(this.id);
@@ -75,36 +32,16 @@ class LoveGod extends CustomizedLove {
   /**
    * @param {CharaTalk} god
    * @param {CharaTalk} me
+   * @param {number} selected
    */
-  async 50(god, me) {
+  async handle50(god, me, selected) {
     const cur_week = (get('flag:当前周') % 4) + 1;
     const cur_month = ((get('flag:当前月') + (cur_week === 1) - 1) % 12) + 1;
     const birth_day = 7 * cur_week + Math.floor(7 * Math.random()) - 6;
-    const date = get_date();
-    printMultiColumns(
-      [
-        { content: `${this.fuck_her_button}（让祂怀上神胎）`, type: 'button' },
-        {
-          config: { disabled: me.sex_code === 1 },
-          content:
-            get('cflag:0:妊娠阶段') >> pregnant_stage_enum.embryo
-              ? `${this.fuck_pregnant_button}（将腹中胎儿变成神胎）`
-              : `${this.fuck_me_button}（自己怀上神胎）`,
-          type: 'button',
-        },
-        { content: this.reject_button, type: 'button' },
-      ].map((e, i) => {
-        e.accelerator = i;
-        e.config ||= {};
-        e.config.width = 12;
-        return e;
-      }),
-    );
+    const date = get_date_obj();
     let temp;
-    const selected = await input();
     switch (selected) {
-      case 0:
-        await this.fuck_her(god, me);
+      case 1:
         if (me.sex_code === 0) {
           set('cflag:0:阴茎尺寸', 3);
         }
@@ -135,23 +72,12 @@ class LoveGod extends CustomizedLove {
         add('exp:0:孩子数量', 1);
         add(`exp:${god.id}:生产次数`, 1);
         if (!get('cstr:0:长子女经历')) {
-          set('cstr:0:长子女经历', [
-            '长女 ',
-            god.get_colored_name(),
-            ' 出生于 ',
-            date,
-          ]);
+          set('cstr:0:长子女经历', { ...date, c: god.id });
         }
-        set(`cstr:${god.id}:长子女经历`, [
-          '在 ',
-          date,
-          ' 生下了 长女 ',
-          god.get_colored_name(),
-        ]);
+        set(`cstr:${god.id}:长子女经历`, { ...date, c: god.id, im: true });
         LifeEventMarks.get_marks(god.id).add('love');
         break;
-      case 1:
-        await this.fuck_me(god, me);
+      case 2:
         if (!get(`cflag:${god.id}:性别`)) {
           set(`cflag:${god.id}:阴茎尺寸`, 1);
         }
@@ -179,19 +105,9 @@ class LoveGod extends CustomizedLove {
         set(`cflag:${god.id}:母方角色`, 0);
         add(`exp:${god.id}:孩子数量`, 1);
         add('exp:0:生产次数', 1);
-        set(`cstr:${god.id}:长子女经历`, [
-          '长女 ',
-          god.get_colored_name(),
-          ' 出生于 ',
-          date,
-        ]);
+        set(`cstr:${god.id}:长子女经历`, { ...date, c: god.id });
         if (!get('cstr:0:长子女经历')) {
-          set('cstr:0:长子女经历', [
-            '在 ',
-            date,
-            ' 生下了 长女 ',
-            god.get_colored_name(),
-          ]);
+          set('cstr:0:长子女经历', { ...date, c: god.id, im: true });
         }
         temp = LifeEventMarks.get_marks(0);
         temp.waist_buff = 8;
@@ -204,18 +120,23 @@ class LoveGod extends CustomizedLove {
         }
         add('base:0:体重偏差', -400);
         break;
-      case 2:
-        await this.reject(god, me);
+      case 3:
         LifeEventMarks.get_marks(god.id).sub('love');
     }
     if (selected < 2) {
-      await this.after_fuck(god, me);
+      await this.after_sex_50(god, me);
       set(`cflag:${god.id}:出生月份`, cur_month);
       set(`cflag:${god.id}:出生日期`, birth_day);
       set(`cflag:${god.id}:月经周`, 0);
       set(`cflag:${god.id}:招募状态`, -24);
     }
   }
+
+  /**
+   * @param {CharaTalk} god
+   * @param {CharaTalk} me
+   */
+  async after_sex_50(god, me) {}
 }
 
 module.exports = LoveGod;

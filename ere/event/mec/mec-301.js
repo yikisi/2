@@ -2,9 +2,13 @@ const { get } = require('#/era-electron');
 
 const MecNpc = require('#/event/mec/mec-npc');
 
+const get_display_name = require('#/utils/calc-display-name');
+
 const { get_chara_color } = require('#/data/chara-colors');
 const TokinoLifeMarks = require('#/data/event/life-event-marks/life-event-marks-301');
 const recruit_flags = require('#/data/event/recruit-flags');
+
+const di18n = require('#/i18n/extended-def');
 
 module.exports = class extends MecNpc {
   get_action_debuff() {
@@ -29,10 +33,14 @@ module.exports = class extends MecNpc {
     const buff = this.get_action_debuff();
     return [
       {
+        ...di18n.kojo.get_titled_content(
+          this.id,
+          'assist',
+          buff * 100,
+          get_display_name(get('callname:0:-1')),
+        ),
         color: get_chara_color(this.id),
-        content: '私人助理',
-        fontWeight: buff > 0.1 ? 'bold' : undefined,
-        title: `自身体力与精力消耗+${buff * 100}%，使 ${get('callname:0:-1')} 的体力与精力消耗-${buff * 100}%。`,
+        fontWeight: buff > 0.1 ? 'bold' : void 0,
       },
     ];
   }

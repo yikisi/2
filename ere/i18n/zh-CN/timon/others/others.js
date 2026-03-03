@@ -352,4 +352,5 @@ module.exports = {
     }
     return ret;
   },
+  grand_live_header: '明年如下赛事将举办大舞台：',
 };

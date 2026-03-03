@@ -253,7 +253,7 @@ module.exports = {
               get_filled_exp_str(
                 unknown_squirt_exp,
                 chara.id,
-                !squirt_exp.c || squirt.c === chara.id
+                !squirt_exp.c || squirt_exp.c === chara.id
                   ? i18n().detail.get_exp_vagina_unknown_squirt_exp_self
                   : squirt_exp.s >= 0
                     ? i18n().detail.get_exp_vagina_unknown_squirt_exp_both

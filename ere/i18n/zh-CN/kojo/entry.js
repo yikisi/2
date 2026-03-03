@@ -55,7 +55,10 @@ class I18nKojo {
   134 = new (require('#/i18n/zh-CN/kojo/113401/entry'))();
   137 = new (require('#/i18n/zh-CN/kojo/113701/entry'))();
   201 = new (require('#/i18n/zh-CN/kojo/200101/entry'))();
+  204 = new (require('#/i18n/zh-CN/kojo/200401/entry'))();
   205 = new (require('#/i18n/zh-CN/kojo/200501/entry'))();
+  206 = new (require('#/i18n/zh-CN/kojo/200601/entry'))();
+  207 = new (require('#/i18n/zh-CN/kojo/200701/entry'))();
   400 = new (require('#/i18n/zh-CN/kojo/400001/entry'))();
   301 = new (require('#/i18n/zh-CN/kojo/900101/entry'))();
   302 = new (require('#/i18n/zh-CN/kojo/900201/entry'))();

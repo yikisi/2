@@ -6,6 +6,8 @@ const {
   sys_get_colored_full_callname,
 } = require('#/system/sys-calc-chara-others');
 
+const { get_filled_exp_str } = require('#/page/exp/snippets');
+
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const get_display_name = require('#/utils/calc-display-name');
@@ -94,8 +96,17 @@ module.exports = {
     const birth_count = era.get(`exp:${chara.id}:生产次数`);
     const children_exp = era.get(`cstr:${chara.id}:长子女经历`);
     if (children_exp) {
+      const first_child = get_chara_talk(children_exp.c);
       family_info_list.push({
-        content: children_exp,
+        content: get_filled_exp_str(
+          children_exp,
+          chara.id,
+          children_exp.im
+            ? i18n().detail.get_relation_first_child_as_mother
+            : i18n().detail.get_relation_first_child_as_father,
+          first_child.get_colored_full_name(),
+          first_child.sex_code === 1,
+        ),
         type: 'text',
       });
       family_info_list.push({
@@ -140,7 +151,7 @@ module.exports = {
         const child = get_chara_talk(ch.id);
         const number = i18n().detail.get_child_number(i + 1);
         const child_title = (
-          chara.sex_code === 1
+          child.sex_code === 1
             ? i18n().detail.relation_family_child_boy_title_template
             : i18n().detail.relation_family_child_girl_title_template
         ).replace('%NUMBER%', number);

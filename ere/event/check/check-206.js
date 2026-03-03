@@ -2,18 +2,19 @@ const era = require('#/era-electron');
 
 const CustomizedCheck = require('#/event/check/check-common');
 
-const { get_chara_color } = require('#/data/chara-colors');
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
+
 const recruit_flags = require('#/data/event/recruit-flags');
+
+const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends CustomizedCheck {
   check_next_week() {
     if (era.get('cflag:206:随机招募') < 0 && era.get('flag:当前声望') >= 1000) {
       era.set('cflag:206:随机招募', 1);
-      era.print([
-        '据说有 ',
-        { color: get_chara_color(this.id), content: '一名优秀的法国幼驹' },
-        ' 已经准备来到中央交流，也许可以在训练场遇到……',
-      ]);
+      era.print(
+        i18n().kojo[this.id].get_visit_notification(get_chara_talk(this.id)),
+      );
     }
     super.check_next_week();
   }

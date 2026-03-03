@@ -46,7 +46,7 @@ module.exports = {
       );
     } else if (typeof arr === 'object' && typeof callback === 'function') {
       return callback(
-        get_date(arr.y, arr.d, arr.w),
+        get_date(arr.y, arr.m, arr.w),
         sys_get_colored_full_callname(cid, arr.c),
         arr.s >= 0 && sys_get_colored_full_callname(cid, arr.s),
         ...args,

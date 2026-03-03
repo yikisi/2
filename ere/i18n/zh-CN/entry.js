@@ -217,6 +217,7 @@ class I18nEntry {
     week,
     ' 周',
   ];
+  ui_date_without_year_template = '%MONTH% 月 第 %WEEK% 周';
   ui_month_template = '%MONTH% 个月';
   ui_too_long_template =
     '（显示宽度不能超过 %WIDTH% 个全角字符或 %WIDTH*2% 个半角字符，请重新输入！）';
@@ -235,6 +236,7 @@ class I18nEntry {
   ui_increase = '提高';
   ui_decrease = '降低';
   ui_end = '结束';
+  ui_cancel = '还是算了';
   ui_signature_result = '主胜鞍';
 
   get_ui_reward_header = (chara) => [chara, ' 的属性有了如下变化：'];

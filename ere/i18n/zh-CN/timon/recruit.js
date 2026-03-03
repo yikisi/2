@@ -5,7 +5,6 @@
 const era = require('#/era-electron');
 
 module.exports = {
-  check_no: '还是算了',
   /** @param {CharaTalk} chara */
   get_check_message: (chara) => [
     '训练员与',

@@ -120,7 +120,7 @@ module.exports = class extends CustomizedRecruit {
         );
         era.printButton('想要看着担当在奔跑时能尽情享受跑步的快乐', 1);
         await era.input();
-        await maru.say_and_wait('!');
+        await maru.say_and_wait('！');
         era.print(
           `${maru.name} 的耳朵明显地颤抖了一下，尾巴随着 ${maru.name} 打量着 ${me.name} 而有节奏地摆动着`,
         );

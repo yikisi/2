@@ -10,6 +10,8 @@ const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
 const { add_event, cb_enum } = require('#/event/queue');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
+
 const { get_chara_color } = require('#/data/chara-colors');
 const { attr_change_colors } = require('#/data/color-const');
 const TreveEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-205');
@@ -43,7 +45,7 @@ module.exports = class extends CustomizedCheck {
       check_aim_race(races, race_enum.prix_lat, 2, 1, (e) => e.pop === 1)
     ) {
       titles.push({
-        c: get_chara_color(205),
+        c: get_chara_color(this.id),
         n: this.get_personal_titles()[0],
       });
       aim_check && sys_personal_achievement.set(205, 1);
@@ -131,11 +133,11 @@ module.exports = class extends CustomizedCheck {
       era.get('flag:当前声望') >= 1000
     ) {
       era.set('cflag:205:随机招募', 1);
-      era.print([
-        '据说有 ',
-        { color: get_chara_color(this.id), content: '一名优秀的法国幼驹' },
-        ' 已经准备来到中央交流，也许可以在训练场遇到……',
-      ]);
+      era.print(
+        i18n().kojo[this.id].get_rec_enable_notification(
+          get_chara_talk(this.id),
+        ),
+      );
     }
   }
 

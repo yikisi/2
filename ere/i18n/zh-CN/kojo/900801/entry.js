@@ -1,4 +1,10 @@
 class I18nKojo900801 {
+  dreamer = '梦之开拓者';
+  dreamer_desc = (buff) =>
+    buff
+      ? '队伍成员参加大舞台赛事时声望奖励+100%，自身及后裔参赛时+200%。'
+      : '自身及后裔参加大舞台赛事时声望奖励+100%。';
+
   dreamer_junior = '梦之继承者';
   dreamer_junior_desc = (buff) => `参加大舞台比赛时声望奖励+${buff}%。`;
 }

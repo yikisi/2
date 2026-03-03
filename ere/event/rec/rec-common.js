@@ -24,7 +24,7 @@ class CustomizedRecruit extends CustomizedEvent {
     const ret = await select_yes_or_no(
       i18n().timon.recruit.get_check_message(chara),
       i18n().ui_yes,
-      i18n().timon.recruit.check_no,
+      i18n().ui_cancel,
     );
     if (!ret) {
       era.print(i18n().timon.recruit.get_check_no_msg(chara));

@@ -29,7 +29,7 @@ const { location_enum } = require('#/data/locations');
 const { creditors } = require('#/data/other-const');
 
 const di18n = require('#/i18n/extended-def');
-const { i18n } = require('#/i18n/selector');
+const { i18n, lan } = require('#/i18n/selector');
 
 /** @type {Record<string,function(CharaTalk,CharaTalk):{[handle]:function:Promise,[name]:string}>} */
 const handlers = {};
@@ -81,7 +81,7 @@ handlers[343] = () =>
   era.get('cflag:343:66') !== recruit_flags.yes &&
   new MayLifeMarks().who_am_i === 3
     ? {
-        name: i18n().kojo[this.id].rec_button,
+        name: i18n().timon.npc_recruit_out_school,
         handle() {
           era.set('callname:343:-2', '904301');
           era.set('cflag:343:66', recruit_flags.yes);
@@ -98,7 +98,7 @@ handlers[344] = () =>
   era.get('cflag:344:招募状态') !== recruit_flags.yes &&
   era.get('love:344') >= 25
     ? {
-        name: '「一起努力吧！」（招募）',
+        name: i18n().timon.npc_recruit_out_school,
         handle() {
           era.set('callname:344:-2', '904401');
           era.set('cflag:344:招募状态', recruit_flags.yes);
@@ -148,13 +148,13 @@ handlers[349] = () =>
                 {
                   accelerator: 2,
                   config: { align: 'center', disabled: _new <= 20, width: 4 },
-                  content: '-20,000',
+                  content: `-${Object(20000).toLocaleString(lan())}`,
                   type: 'button',
                 },
                 {
                   accelerator: 4,
                   config: { align: 'center', disabled: _new === 1, width: 4 },
-                  content: '-1000',
+                  content: `-${Object(1000).toLocaleString(lan())}`,
                   type: 'button',
                 },
                 {
@@ -162,7 +162,7 @@ handlers[349] = () =>
                     align: 'center',
                     width: 4,
                   },
-                  content: [get_abbr_number(_new * 1000), ' 马币'],
+                  content: i18n().get_ui_hd_money(get_abbr_number(_new * 1000)),
                   type: 'text',
                 },
                 {
@@ -172,7 +172,7 @@ handlers[349] = () =>
                     disabled: money <= _new * 1000,
                     width: 4,
                   },
-                  content: '+1000',
+                  content: `+${Object(1000).toLocaleString(lan())}`,
                   type: 'button',
                 },
                 {
@@ -182,20 +182,20 @@ handlers[349] = () =>
                     disabled: money < (_new + 20) * 1000,
                     width: 8,
                   },
-                  content: '+20,000',
+                  content: `+${Object(20000).toLocaleString(lan())}`,
                   type: 'button',
                 },
                 { content: [], type: 'text' },
                 {
                   config: { width: 4 },
                   accelerator: 98,
-                  content: '确定',
+                  content: i18n().ui_yes,
                   type: 'button',
                 },
                 {
                   config: { width: 4 },
                   accelerator: 99,
-                  content: '取消',
+                  content: i18n().ui_no,
                   type: 'button',
                 },
               ]);
@@ -250,13 +250,13 @@ handlers[349] = () =>
                 {
                   accelerator: 2,
                   config: { align: 'center', disabled: got <= 20, width: 4 },
-                  content: '-20,000',
+                  content: `-${Object(20000).toLocaleString(lan())}`,
                   type: 'button',
                 },
                 {
                   accelerator: 4,
                   config: { align: 'center', disabled: got === 1, width: 4 },
-                  content: '-1,000',
+                  content: `-${Object(1000).toLocaleString(lan())}`,
                   type: 'button',
                 },
                 {
@@ -264,7 +264,7 @@ handlers[349] = () =>
                     align: 'center',
                     width: 4,
                   },
-                  content: [get_abbr_number(got * 1000), ' 马币'],
+                  content: i18n().get_ui_hd_money(get_abbr_number(got * 1000)),
                   type: 'text',
                 },
                 {
@@ -274,7 +274,7 @@ handlers[349] = () =>
                     disabled: life_marks.funds <= got * 1000,
                     width: 4,
                   },
-                  content: '+1,000',
+                  content: `+${Object(1000).toLocaleString(lan())}`,
                   type: 'button',
                 },
                 {
@@ -284,20 +284,20 @@ handlers[349] = () =>
                     disabled: life_marks.funds < (got + 20) * 1000,
                     width: 8,
                   },
-                  content: '+20,000',
+                  content: `+${Object(20000).toLocaleString(lan())}`,
                   type: 'button',
                 },
                 { content: [], type: 'text' },
                 {
                   config: { width: 4 },
                   accelerator: 98,
-                  content: '确定',
+                  content: i18n().ui_yes,
                   type: 'button',
                 },
                 {
                   config: { width: 4 },
                   accelerator: 99,
-                  content: '取消',
+                  content: i18n().ui_no,
                   type: 'button',
                 },
               ]);
@@ -352,7 +352,7 @@ handlers[349] = () =>
       }
     : era.get('love:349') >= 40
       ? {
-          name: '「一起努力吧！」（招募）',
+          name: i18n().timon.npc_recruit_out_school,
           handle() {
             era.set('callname:349:-2', era.get('callname:349:-1'));
             era.set('cflag:349:招募状态', recruit_flags.yes);
@@ -375,7 +375,7 @@ async function page_visitors() {
     while (flag_page) {
       era.setHorizontalAlign('space-around');
       era.printInColRows(
-        [{ content: '要和谁交谈？', type: 'text' }],
+        [{ content: i18n().timon.npc_select, type: 'text' }],
         ...visitor_list.map((cid) => {
           const image = era.get(`cstr:${cid}:头像`);
           return {
@@ -398,7 +398,7 @@ async function page_visitors() {
             config: { width: 4 },
           };
         }),
-        [{ accelerator: 999, type: 'button', content: '离开' }],
+        [{ accelerator: 999, type: 'button', content: i18n().ui_back }],
       );
       era.setHorizontalAlign('start');
       const cid = await era.input();

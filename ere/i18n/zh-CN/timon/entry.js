@@ -195,6 +195,9 @@ class I18nTimon {
   /** @param {string} uma */
   get_it_no_chara_in_recruit = (uma) => ['【训练场没有引人注目的', uma, '】'];
 
+  bt_god_love_event_fuck_me = '自己怀上神胎';
+  bt_god_love_event_preg_me = '将腹中胎儿变成神胎';
+
   ed_saying_01 = '九尺二间陋室里，红唇依竹共恩情。——高杉晋作';
   ed_saying_02 = '金钱、赛马娘、女人，男生永远搞不懂这三件事。——威尔・罗〇斯';
   ed_saying_03 = '一文钱难倒英雄汉。——李绿园';

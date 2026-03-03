@@ -7,6 +7,7 @@ const get_display_name = require('#/utils/calc-display-name');
 const { get_chara_color } = require('#/data/chara-colors');
 const GodolphinLifeMarks = require('#/data/event/life-event-marks/life-event-marks-341');
 
+const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends MecGod {
@@ -15,10 +16,9 @@ module.exports = class extends MecGod {
     buff += 1;
     return [
       {
+        ...di18n.kojo.get_titled_content(this.id, 'buff', 50 * buff, 25 * buff),
         color: get_chara_color(this.id),
-        content: '爱',
-        fontWeight: buff > 1 ? 'bold' : undefined,
-        title: `队伍成员智力训练效果+${50 * buff}%，从训练中获得的技能点数+${25 * buff}%。`,
+        fontWeight: buff > 1 ? 'bold' : void 0,
       },
     ];
   }

@@ -4,8 +4,9 @@ const CustomizedCheck = require('#/event/check/check-common');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const { get_chara_color } = require('#/data/chara-colors');
 const recruit_flags = require('#/data/event/recruit-flags');
+
+const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends CustomizedCheck {
   check_next_week() {
@@ -15,15 +16,9 @@ module.exports = class extends CustomizedCheck {
     ) {
       era.set('cflag:204:招募状态', -1);
       era.set('cflag:204:随机招募', 0);
-      const montjeu = get_chara_talk(204);
-      era.print([
-        '据说 ',
-        {
-          color: get_chara_color(this.id),
-          content: '一名法国的传奇' + montjeu.get_uma_sex_title(),
-        },
-        ' 已经准备来到中央交流，也许可以在招待室遇到……',
-      ]);
+      era.print(
+        i18n().kojo[this.id].get_visit_notification(get_chara_talk(this.id)),
+      );
     }
     super.check_next_week();
   }

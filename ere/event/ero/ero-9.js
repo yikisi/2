@@ -30,7 +30,7 @@ module.exports = class extends CustomizedEro {
       !era.get('status:9:弗隆P') &&
       (era.get('item:弗隆K') || era.get('item:弗隆P'))
     ) {
-      era.set('flag:TS大和T', 1);
+      era.set('tflag:TS大和T', 1);
       const daiwa = get_chara_talk(9),
         me = get_chara_talk(0);
       await print_event_name('训练员身体不适！？', daiwa);
@@ -131,7 +131,7 @@ module.exports = class extends CustomizedEro {
 
   /** @author 黑奴队长 */
   async ero_end(handle_ero_act) {
-    if (era.get('flag:TS大和T')) {
+    if (era.get('tflag:TS大和T') > 0) {
       const daiwa = get_chara_talk(9),
         me = get_chara_talk(0),
         callname = sys_get_callname(9, 0);

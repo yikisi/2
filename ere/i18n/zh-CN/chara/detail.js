@@ -140,6 +140,21 @@ class I18nDetail {
     '，母亲是',
     mother,
   ];
+  get_relation_first_child_as_father = (date, _, __, chara, is_boy) => [
+    is_boy ? '长子' : '长女',
+    ' ',
+    chara,
+    ' 出生于 ',
+    date,
+  ];
+  get_relation_first_child_as_mother = (date, _, __, chara, is_boy) => [
+    '在 ',
+    date,
+    ' 生下了 ',
+    is_boy ? '长子' : '长女',
+    ' ',
+    chara,
+  ];
   relation_family_children_template = '现在是 %INFO%';
   relation_family_as_father_template = '%COUNT% 个孩子的父亲';
   relation_family_as_mother_template = '%COUNT% 个孩子的母亲';

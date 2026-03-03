@@ -8,6 +8,9 @@ class I18nKojo900201 {
   /** @type {KojoFile} */
   love = require('#/i18n/zh-CN/kojo/900201/love-302.kojo');
 
+  e_sorrows_of_young_chairman_p1_template = '%TEEN%理事长的烦恼之一';
+  e_sorrows_of_young_chairman_p2_template = '%TEEN%理事长的烦恼之二';
+
   chairman = '我系你上司';
   chairman_desc =
     '作为理事长的权利是无限的；通过学园指名招募马娘的声望消耗-25%。';
@@ -18,9 +21,6 @@ class I18nKojo900201 {
   get_npc_celebration = (celebration) => `「庆 贺！${celebration} 快乐！」`;
   npc_func = '「抗 议！训练场没有想训的爱马！」';
   npc_bye = '「再 会！走了走了！」';
-
-  e_sorrows_of_young_chairman_p1_template = '%TEEN%理事长的烦恼之一';
-  e_sorrows_of_young_chairman_p2_template = '%TEEN%理事长的烦恼之二';
 }
 
 module.exports = I18nKojo900201;
