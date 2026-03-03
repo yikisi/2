@@ -1,6 +1,7 @@
 /** @file 杂项 */
 const {
   input,
+  print,
   printAndWait,
   printButton,
   println,
@@ -45,6 +46,11 @@ module.exports = {
       ]);
     }
   },
+
+  /**
+   * 以下是 URA 颁奖典礼的地文
+   */
+
   ura_reward: (() => {
     /**
      * URA 颁奖典礼
@@ -272,6 +278,11 @@ module.exports = {
       all_wins,
     ];
   },
+
+  /**
+   * 以下是超得地文
+   */
+
   /**
    * 超得，但是队伍已达限额
    * @param {CharaTalk} taste 理事长
@@ -353,4 +364,79 @@ module.exports = {
     return ret;
   },
   grand_live_header: '明年如下赛事将举办大舞台：',
+
+  /**
+   * 以下是投资理财地文
+   */
+
+  /**
+   * 不够1k马币，拒绝投资
+   * @param {CharaTalk} bryne 百炼砥石
+   * @param {PrintedSpan} callname 百炼对玩家的称呼
+   */
+  async fund_reject(bryne, callname) {
+    await bryne.say_and_wait([
+      '抱歉呐，但是 ',
+      callname,
+      ' 你没有足够的资金吧？我的渠道里没有会接受 1,000 马币以下的微型投资的机构诶……',
+    ]);
+  },
+  /**
+   * 现在的投资总额和收益
+   * @param {CharaTalk} bryne 百炼砥石
+   * @param {PrintedSpan} funds 投资总额
+   * @param {PrintedSpan} income 周收益
+   */
+  fund_summary(bryne, funds, income) {
+    print([
+      '现在向 ',
+      bryne.get_colored_name(),
+      ' 提供了 ',
+      funds,
+      ' 马币资金，每周共提供 ',
+      income,
+      ' 马币收益。',
+    ]);
+  },
+  bt_fund: '投资（以 1000 马币为单位）',
+  bt_ransom: '赎回',
+  fund_confirm: '要投资多少马币？',
+  /**
+   * 追加投资额和总收益
+   * @param {CharaTalk} bryne 百炼砥石
+   * @param {PrintedSpan} new_funds 追加投资额
+   * @param {PrintedSpan} income 追加后的周收益
+   */
+  async fund_result(bryne, new_funds, income) {
+    await printAndWait([
+      '向 ',
+      bryne.get_colored_name(),
+      ' 追加了 ',
+      new_funds,
+      ' 马币资金，每周共提供 ',
+      income,
+      ' 马币收益。',
+    ]);
+  },
+  get_ransom_confirm(funds) {
+    return ['要赎回多少马币？共投资了 ', funds, ' 马币：'];
+  },
+  /**
+   * 赎回投资额、剩余投资额和总收益
+   * @param {PrintedSpan} ransomed 赎回额度
+   * @param {PrintedSpan|boolean} funds 赎回后的剩余投资额，如果还有就是 Object 类型，否则会是其他类型（Boolean）
+   * @param {PrintedSpan} income 赎回后的周收益
+   */
+  async ransom_result(ransomed, funds, income) {
+    print(['赎回了 ', ransomed, ' 马币。']);
+    if (typeof funds === 'object') {
+      await printAndWait([
+        '还有 ',
+        funds,
+        ' 马币资金，每周共提供 ',
+        income,
+        ' 马币收益。',
+      ]);
+    }
+  },
 };

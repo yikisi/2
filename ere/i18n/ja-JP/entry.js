@@ -163,7 +163,7 @@ module.exports = class extends I18nEntry {
   ui_hd_no_save = '現在セーブデータ未ロード';
   get_ui_hd_location = (location) => ['現在: ', location];
   get_ui_hd_honour = (honour) => ['名声: ', honour];
-  get_ui_hd_money = (money, income) => [money, ...income, ' ウマ円'];
+  get_ui_hd_money = (money, income = []) => [money, ...income, ' ウマ円'];
   ui_billing_title_start = '請求書：';
   ui_billing_invest_template = '%INCOME% (%CHARA% 投資収益)';
   ui_billing_bonus_template = '%INCOME% (月給＋ボーナス)';

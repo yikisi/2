@@ -71,6 +71,12 @@ class I18nKojo {
   341 = new (require('#/i18n/zh-CN/kojo/904101/entry'))();
   342 = new (require('#/i18n/zh-CN/kojo/904201/entry'))();
   343 = new (require('#/i18n/zh-CN/kojo/904301/entry'))();
+  344 = new (require('#/i18n/zh-CN/kojo/904401/entry'))();
+  345 = new (require('#/i18n/zh-CN/kojo/904501/entry'))();
+  346 = new (require('#/i18n/zh-CN/kojo/904601/entry'))();
+  347 = new (require('#/i18n/zh-CN/kojo/904701/entry'))();
+  348 = new (require('#/i18n/zh-CN/kojo/904801/entry'))();
+  349 = new (require('#/i18n/zh-CN/kojo/904901/entry'))();
   av_sister = new (require('#/i18n/zh-CN/kojo/av-sister/entry'))();
 }
 

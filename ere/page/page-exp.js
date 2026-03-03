@@ -10,9 +10,10 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const chara_into_type = require('#/data/chara-info-type');
 const recruit_flags = require('#/data/event/recruit-flags');
+
 const { i18n } = require('#/i18n/selector');
 
-/** @type {{generate:function(CharaTalk,{in_growth:boolean,mark_level:number,show_all_exp:boolean,show_body:boolean,show_exp:boolean}):{print:function:*[],[handle]:function(number)},name:string,[virgin]:boolean,[uma]:boolean}[]} */
+/** @type {{generate:function(CharaTalk,{in_growth:boolean,mark_level:number,show_all_exp:boolean,show_body:boolean,show_exp:boolean}):{print:function:*[],[handle]:function(number)},name:string,[vagina]:boolean,[uma]:boolean}[]} */
 const handlers = [
   require('#/page/exp/base-tab'),
   require('#/page/exp/edu-tab'),
@@ -32,11 +33,11 @@ const handlers = [
 
 /**
  * @param {CharaTalk} chara
- * @param {{[uma]:boolean,[virgin]:boolean}} page
+ * @param {{[uma]:boolean,[vagina]:boolean}} page
  */
 function check_page_disabled(chara, page) {
   return (
-    (chara.sex_code === 1 && page.virgin) ||
+    (chara.sex_code === 1 && page.vagina) ||
     (!era.get(`cflag:${chara.id}:种族`) && page.uma)
   );
 }

@@ -137,7 +137,7 @@ class I18nDetail {
   get_relation_family_parents = (father, mother) => [
     '父亲是 ',
     father,
-    '，母亲是',
+    '，母亲是 ',
     mother,
   ];
   get_relation_first_child_as_father = (date, _, __, chara, is_boy) => [

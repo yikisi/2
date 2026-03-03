@@ -300,7 +300,7 @@ class I18nEntry {
   get_ui_hd_location = (location) => ['位于 ', location];
   get_ui_hd_honour = (honour) => [honour, ' 声望'];
   ui_hd_income_template = '(%INCOME%)';
-  get_ui_hd_money = (money, income) => [money, ...income, ' 马币'];
+  get_ui_hd_money = (money, income = []) => [money, ...income, ' 马币'];
   ui_billing_title_start = '账单：';
   ui_billing_invest_template = '%INCOME% (%CHARA% 投资收益)';
   ui_billing_bonus_template = '%INCOME% (月工资+年终奖)';

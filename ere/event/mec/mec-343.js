@@ -6,6 +6,8 @@ const { get_chara_color } = require('#/data/chara-colors');
 const MayLifeMarks = require('#/data/event/life-event-marks/life-event-marks-343');
 const recruit_flags = require('#/data/event/recruit-flags');
 
+const di18n = require('#/i18n/extended-def');
+
 module.exports = class extends MecNpc {
   get_love_limit() {
     if (era.get(`cflag:${this.id}:招募状态`) !== recruit_flags.yes) {
@@ -24,10 +26,9 @@ module.exports = class extends MecNpc {
     const { buff } = new MayLifeMarks();
     return [
       {
+        ...di18n.kojo.get_titled_content(this.id, 'dream_chaser', buff > 0),
         color: get_chara_color(this.id),
-        content: '梦之追逐者',
-        fontWeight: buff > 0 ? 'bold' : undefined,
-        title: `队伍成员海外远征的负面影响${buff > 0 ? '减轻' : '减半'}。`,
+        fontWeight: buff > 0 ? 'bold' : void 0,
       },
     ];
   }

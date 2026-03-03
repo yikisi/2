@@ -13,6 +13,8 @@ const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_infos, race_rewards } = require('#/data/race/race-const');
 
+const { i18n } = require('#/i18n/selector');
+
 module.exports = class extends CustomizedCheck {
   check_after_race(extra_flag) {
     if (
@@ -42,17 +44,12 @@ module.exports = class extends CustomizedCheck {
     if (era.get(`cflag:${this.id}:随机招募`) <= -3) {
       era.set(`cflag:${this.id}:招募状态`, -1);
       era.set(`cflag:${this.id}:随机招募`, 0);
-      const chara = get_chara_talk(this.id);
-      era.print([
-        '据说 ',
-        {
-          color: get_chara_color(this.id),
-          content: '一名传奇' + chara.get_uma_sex_title(),
-        },
-        ' 对 ',
-        get_chara_talk(0).get_colored_name(),
-        ' 的事迹很感兴趣，也许可以在招待室遇到……',
-      ]);
+      era.print(
+        i18n().kojo[this.id].get_visit_notification(
+          get_chara_talk(this.id),
+          get_chara_talk(0),
+        ),
+      );
     }
     super.check_next_week();
   }
@@ -60,12 +57,9 @@ module.exports = class extends CustomizedCheck {
   get_edu_aims() {
     return [
       {
-        check: 1,
-        color: undefined,
-        content: [
-          '从 G1 赛事获胜中争得声望：',
+        content: i18n().kojo[this.id].get_achieve_track_aim(
           get_abbr_number(new HaiseikoEduMarks().fame),
-        ],
+        ),
       },
       ...super.get_edu_aims(),
     ];

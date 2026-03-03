@@ -13,6 +13,8 @@ const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
 
+const { i18n } = require('#/i18n/selector');
+
 const aim_races = {
   [race_enum.begin_race]: 4,
   [get_aim_race_index(race_enum.takz_kin, 1)]: -4,
@@ -53,17 +55,12 @@ module.exports = class extends CustomizedCheck {
     if (era.get(`cflag:${this.id}:随机招募`) <= -3) {
       era.set(`cflag:${this.id}:招募状态`, -1);
       era.set(`cflag:${this.id}:随机招募`, 0);
-      const chara = get_chara_talk(this.id);
-      era.print([
-        '据说 ',
-        {
-          color: get_chara_color(this.id),
-          content: '一名传奇' + chara.get_uma_sex_title(),
-        },
-        ' 对 ',
-        get_chara_talk(0).get_colored_name(),
-        ' 的事迹很感兴趣，也许可以在招待室遇到……',
-      ]);
+      era.print(
+        i18n().kojo[this.id].get_visit_notification(
+          get_chara_talk(this.id),
+          get_chara_talk(0),
+        ),
+      );
     }
     super.check_next_week();
   }

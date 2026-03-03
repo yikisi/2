@@ -1,7 +1,7 @@
 const era = require('#/era-electron');
 
 const { sys_get_billings } = require('#/system/sys-calc-base-cflag');
-const { sys_get_callname } = require('#/system/sys-calc-chara-others');
+const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
@@ -110,35 +110,34 @@ handlers[344] = () =>
 handlers[349] = () =>
   era.get('cflag:349:招募状态') === recruit_flags.yes
     ? {
-        name: '投资理财',
+        name: i18n().kojo[349].npc_func,
         async handle() {
           const bryne = get_chara_talk(349);
           const life_marks = new BryneLifeMarks();
           const money = era.get('flag:当前马币');
           if (money < 1000 && !life_marks.funds) {
-            await bryne.say_and_wait(
-              `抱歉呐，但是 ${sys_get_callname(349, 0)} 你没有足够的资金吧？我的渠道里没有会接受 1,000 马币以下的微型投资的机构诶……`,
+            await i18n().timon.others.fund_reject(
+              bryne,
+              sys_get_colored_callname(349, 0),
             );
             return;
           }
           if (life_marks.funds > 0) {
-            era.print([
-              '现在向 ',
-              bryne.get_colored_name(),
-              ' 提供了 ',
+            i18n().timon.others.fund_summary(
+              bryne,
               get_abbr_number(life_marks.funds),
-              ' 马币资金，每周共提供 ',
               get_abbr_number(life_marks.funds / (500 - 300 * life_marks.buff)),
-              ' 马币收益。',
-            ]);
+            );
           }
-          era.printButton('投资（以 1000 马币为单位）', 1, {
+          era.printButton(i18n().timon.others.bt_fund, 1, {
             disabled: money < 1000,
           });
-          era.printButton('赎回', 2, { disabled: life_marks.funds <= 0 });
+          era.printButton(i18n().timon.others.bt_ransom, 2, {
+            disabled: life_marks.funds <= 0,
+          });
           const _old = life_marks.funds;
           if ((await era.input()) === 1) {
-            era.print('要投资多少马币？');
+            era.print(i18n().timon.others.fund_confirm);
             let flag = true;
             let _new = 1;
             const curr = era.getLineCount();
@@ -223,24 +222,20 @@ handlers[349] = () =>
             if (_new > 0) {
               life_marks.funds += _new * 1000;
               era.add('flag:当前马币', -_new * 1000);
-              await era.printAndWait([
-                '向 ',
-                bryne.get_colored_name(),
-                ' 追加了 ',
+              await i18n().timon.others.fund_result(
+                bryne,
                 get_abbr_number(_new * 1000),
-                ' 马币资金，每周共提供 ',
                 get_abbr_number(
                   life_marks.funds / (500 - 300 * life_marks.buff),
                 ),
-                ' 马币收益。',
-              ]);
+              );
             }
           } else {
-            era.print([
-              '要赎回多少马币？共投资了 ',
-              get_abbr_number(life_marks.funds),
-              ' 马币：',
-            ]);
+            era.print(
+              i18n().timon.others.get_ransom_confirm(
+                get_abbr_number(life_marks.funds),
+              ),
+            );
             let flag = true;
             let got = 1;
             const curr = era.getLineCount();
@@ -325,17 +320,15 @@ handlers[349] = () =>
             if (got > 0) {
               life_marks.funds -= got * 1000;
               era.add('flag:当前马币', got * 1000);
-              era.print(['取回了 ', get_abbr_number(got * 1000), ' 马币。']);
-              if (life_marks.funds > 0) {
-                await era.printAndWait([
-                  '还有 ',
-                  get_abbr_number(life_marks.funds),
-                  ' 马币资金，每周共提供 ',
-                  get_abbr_number(
-                    life_marks.funds / (500 - 300 * life_marks.buff),
-                  ),
-                  ' 马币收益。',
-                ]);
+              await i18n().timon.others.ransom_result(
+                get_abbr_number(got * 1000),
+                life_marks.funds > 0 && get_abbr_number(life_marks.funds),
+                get_abbr_number(
+                  life_marks.funds / (500 - 300 * life_marks.buff),
+                ),
+              );
+              if (!life_marks.funds) {
+                await era.waitAnyKey();
               }
             }
           }
