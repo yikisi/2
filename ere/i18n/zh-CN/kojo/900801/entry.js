@@ -1,4 +1,7 @@
 class I18nKojo900801 {
+  /** @type {KojoFile} */
+  edu = require('#/i18n/zh-CN/kojo/900801/edu-308.kojo');
+
   dreamer = '梦之开拓者';
   dreamer_desc = (buff) =>
     buff

@@ -23,7 +23,7 @@ module.exports = class extends CustomizedEdu {
   async report(hello) {
     const cur_year = get('flag:当前年');
     const key = cur_year > 2002 ? 'report' : `report${cur_year}`;
-    await print_title_with_kojo(i18n().kojo[this.id], key, hello, {
+    await print_title_with_kojo(i18n().kojo[this.id].edu, key, hello, {
       ...generate_dictionary(this.id, { uma: !0 }),
       CHARA_ACTUAL: hello.actual_name,
     });

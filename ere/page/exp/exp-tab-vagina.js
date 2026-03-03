@@ -239,7 +239,7 @@ module.exports = {
             get_filled_exp_str(
               squirt_exp,
               chara.id,
-              !squirt_exp.c || squirt.c === chara.id
+              !squirt_exp.c || squirt_exp.c === chara.id
                 ? i18n().detail.get_exp_vagina_squirt_exp_self
                 : squirt_exp.s >= 0
                   ? i18n().detail.get_exp_vagina_squirt_exp_both
@@ -302,7 +302,7 @@ module.exports = {
                 ? i18n().detail.get_exp_vagina_fuck_sleep_penis
                 : i18n().detail.get_exp_vagina_fuck_sleep_penis_you)(
                 get_abbr_number(fuck_sleep_penis),
-                get_chara_talk(0),
+                get_chara_talk(0).get_colored_name(),
               ),
             );
           }

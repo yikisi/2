@@ -1,6 +1,5 @@
 # @file 光辉致意 - 育成
 # @author 黑奴队长（临时）
-
 report2000:
   title: 大舞台，始动！
   lines:
