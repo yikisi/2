@@ -253,17 +253,15 @@ function page_header(enable_race_info) {
                   content: i18n().ui_hd_current_race,
                   type: 'text',
                 },
-                ...race_characters.slice(0, 2).map((e) => {
-                  return {
-                    config: { align: 'center' },
-                    content: [
-                      get_chara_talk(e.id).get_colored_name(),
-                      ' ',
-                      race_infos[e.race].get_colored_name(),
-                    ],
-                    type: 'text',
-                  };
-                }),
+                ...race_characters.slice(0, 2).map((e) => ({
+                  config: { align: 'center' },
+                  content: [
+                    get_chara_talk(e.id).get_colored_name(),
+                    ' ',
+                    race_infos[e.race].get_colored_name(),
+                  ],
+                  type: 'text',
+                })),
                 enable_race_info
                   ? {
                       accelerator: 991,

@@ -598,6 +598,8 @@ class I18nEntry {
   ];
   get_ui_race_money_reward = (money) => ['收到了比赛赏金分成 ', money, ' 马币'];
 
+  ui_race_report_header = '比赛出走预定';
+
   ui_bs_flatter = '虚与委蛇';
   ui_bs_unlock = '尝试脱困';
   ui_bs_relax = '只是静坐';

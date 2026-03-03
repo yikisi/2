@@ -11,9 +11,12 @@ const race_page = require('#/page/page-race');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const { get_date } = require('#/data/date-indicator');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
 const { race_infos } = require('#/data/race/race-const');
+
+const { i18n } = require('#/i18n/selector');
 
 async function report_race_page() {
   await era.clear();
@@ -36,7 +39,7 @@ async function report_race_page() {
       { type: 'divider' },
       {
         config: { align: 'center' },
-        content: '比赛出走预定',
+        content: i18n().ui_race_report_header,
         type: 'text',
       },
     ],
@@ -44,10 +47,10 @@ async function report_race_page() {
       .fill(0)
       .map((_, i) => begin_round + i)
       .map((round) => {
-        const year = Math.floor(round / 48),
-          month = Math.floor((round - year * 48) / 4),
-          week = round - year * 48 - month * 4,
-          date_str = `${2000 + year} 年 ${month + 1} 月 第 ${week + 1} 周`;
+        const year = Math.floor(round / 48);
+        const month = Math.floor((round - year * 48) / 4);
+        const week = round - year * 48 - month * 4;
+        const date_str = get_date(2000 + year, month + 1, week + 1);
         /** @type {*[]} */
         const columns = [
           { config: { offset: 1, width: 22 }, type: 'divider' },
@@ -77,7 +80,7 @@ async function report_race_page() {
                 align: 'center',
                 disabled: !sys_check_race_ready(race.id) || !sys_check_awake(0),
               },
-              content: '参加比赛',
+              content: i18n().ui_goto_race,
               type: 'button',
             });
           }
@@ -92,7 +95,7 @@ async function report_race_page() {
       {
         accelerator: 999,
         config: { align: 'center' },
-        content: '返回上一级',
+        content: i18n().ui_back,
         type: 'button',
       },
     ],
