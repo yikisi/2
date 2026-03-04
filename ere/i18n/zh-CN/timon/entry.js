@@ -161,6 +161,12 @@ class I18nTimon {
   ];
   it_back_office = '【折返了】';
   it_force_back_office = '【没有人在的样子……折返了】';
+  /** @param {CharaTalk} chara */
+  get_it_npc_sleep = (chara) => [
+    '【',
+    chara.get_colored_name(),
+    ' 体力不支，要回去休息了】',
+  ];
 
   /**
    * @param {CharaTalk} you

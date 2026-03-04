@@ -59,6 +59,7 @@ class I18nEntry {
 
   ui_rl_mark_with_value = '%MARK% (%VAL%)';
 
+  ui_love_icon = '❤️';
   ui_love = '爱慕';
   ui_love_template = '爱慕：%LOVEINFO%';
   get_ui_colored_love = (love) => ['爱慕：', love];
@@ -71,6 +72,7 @@ class I18nEntry {
   love_5 = '佳偶';
   love_6 = '依存';
 
+  ui_relation_icon = '🤝';
   ui_relation = '好感';
   ui_relation_template = '好感：%RELATIONINFO%';
   get_ui_colored_relation = (relation) => ['好感：', relation];
@@ -422,7 +424,7 @@ class I18nEntry {
   ui_cost_chara_time_tip_template = '角色精力不足 (需要：%TIME%)';
   ui_cost_you_stamina_tip_template = '体力不足 (需要：%STAMINA%)';
   ui_cost_you_time_tip_template = '精力不足 (需要：%TIME%)';
-  ui_cost_jpy_tip_template = '马币不足 (需要：%MONEY%)';
+  ui_cost_money_tip_template = '马币不足 (需要：%MONEY%)';
   ui_foreign_lan_max_tip_template = '%LAN%已非常熟练';
   ui_foreign_rest_max_tip = '身体已调理至健康';
   ui_foreign_train_max_tip = '已完全适应跑道';
@@ -598,6 +600,20 @@ class I18nEntry {
   ];
   get_ui_race_money_reward = (money) => ['收到了比赛赏金分成 ', money, ' 马币'];
 
+  get_ui_out_confirm = (chara) => ['要和 ', chara, ' 一起去哪里？'];
+  ui_out_self_confirm = '要独自去哪里？';
+  get_ui_bt_talk_with_npc_template = '和 %NAME% 攀谈';
+  get_ui_out_bye = (chara, you) => [
+    '【和 ',
+    chara,
+    ' 道别后，',
+    you,
+    ' 离开了】',
+  ];
+  ui_mejiro_city_alone_tip = '目白城不欢迎独身的旅客';
+  ui_mejiro_city_love_tip_template =
+    '关系并未达到如此程度 (需要：%REQUIRE%以上，当前：%CURRENT%)';
+
   ui_race_report_header = '比赛出走预定';
 
   ui_bs_flatter = '虚与委蛇';
@@ -640,6 +656,7 @@ class I18nEntry {
   status_desc = new (require('#/i18n/zh-CN/table/status-desc'))();
   talent_desc = new (require('#/i18n/zh-CN/table/talent-desc'))();
 
+  sex = new (require('#/i18n/zh-CN/sex/main'))();
   train_action = new (require('#/i18n/zh-CN/sex/actions'))();
   body_part = new (require('#/i18n/zh-CN/sex/parts'))();
   jewel_shop = new (require('#/i18n/zh-CN/sex/shop'))();

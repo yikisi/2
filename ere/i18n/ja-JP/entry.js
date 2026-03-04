@@ -54,8 +54,8 @@ module.exports = class extends I18nEntry {
   title_3 = '孕袋';
 
   ui_love = '愛慕';
-  ui_love_template = '愛慕：%LOVEINFO%';
-  get_ui_colored_love = (love) => ['愛慕：', love];
+  ui_love_template = '愛慕: %LOVEINFO%';
+  get_ui_colored_love = (love) => ['愛慕: ', love];
   love_0 = '平常';
   love_1 = '淡恋';
   love_2 = '微恋';
@@ -65,8 +65,8 @@ module.exports = class extends I18nEntry {
   love_6 = '依存';
 
   ui_relation = '好感';
-  ui_relation_template = '好感：%RELATIONINFO%';
-  get_ui_colored_relation = (relation) => ['好感：', relation];
+  ui_relation_template = '好感: %RELATIONINFO%';
+  get_ui_colored_relation = (relation) => ['好感: ', relation];
   relation_0 = '失望';
   relation_1 = '疑念';
   relation_2 = '冷淡';
@@ -164,7 +164,7 @@ module.exports = class extends I18nEntry {
   get_ui_hd_location = (location) => ['現在: ', location];
   get_ui_hd_honour = (honour) => ['名声: ', honour];
   get_ui_hd_money = (money, income = []) => [money, ...income, ' ウマ円'];
-  ui_billing_title_start = '請求書：';
+  ui_billing_title_start = '請求書:';
   ui_billing_invest_template = '%INCOME% (%CHARA% 投資収益)';
   ui_billing_bonus_template = '%INCOME% (月給＋ボーナス)';
   ui_billing_salary_template = '%INCOME% (月給)';

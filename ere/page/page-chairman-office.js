@@ -12,6 +12,7 @@ const { sys_change_fame } = require('#/system/sys-calc-flag');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
 const arrive_location = require('#/page/components/arrive-location');
+const get_back_button_tip = require('#/page/components/get-back-button-tip');
 const get_riko_button = require('#/page/components/get-riko-button');
 const goto_sex = require('#/page/components/goto-sex');
 const npc_common = require('#/page/components/npc-common');
@@ -243,6 +244,7 @@ async function page_chairman_office() {
             name: i18n().kojo[chara.id].npc_func,
           },
           {
+            config: get_back_button_tip(),
             async handle() {
               if (sys_check_awake(chara.id)) {
                 await i18n().kojo[chara.id].daily.npc_bye({
@@ -276,7 +278,10 @@ async function page_chairman_office() {
           },
           { name: di18n.kojo.get_npc_celebration(chara.id, celebration) },
           get_riko_button(),
-          { name: di18n.kojo.get_npc_bye(chara.id) },
+          {
+            config: get_back_button_tip(),
+            name: di18n.kojo.get_npc_bye(chara.id),
+          },
         );
     }
     if ((flag_page &&= temp_flag)) {

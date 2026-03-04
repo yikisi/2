@@ -9,6 +9,7 @@ const { switch_image } = require('#/system/sys-calc-image');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
 const print_curr_chara = require('#/page/components/cur-chara-info');
+const get_back_button_tip = require('#/page/components/get-back-button-tip');
 const print_page_header = require('#/page/components/page-header');
 
 const { add_event, cb_enum } = require('#/event/queue');
@@ -136,7 +137,12 @@ module.exports = async () => {
           delete b.cost;
           return b;
         }),
-        { accelerator: 99, content: i18n().ui_back, type: 'button' },
+        {
+          accelerator: 99,
+          config: get_back_button_tip(),
+          content: i18n().ui_back,
+          type: 'button',
+        },
       ]);
       let temp = await era.input();
       if (temp === 99) {

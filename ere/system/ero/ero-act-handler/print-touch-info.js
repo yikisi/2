@@ -1,6 +1,5 @@
 const era = require('#/era-electron');
 
-const CharaTalk = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { buff_colors } = require('#/data/color-const');
@@ -66,13 +65,17 @@ function get_part_touch(cid, cpart) {
 
 function print_touch_info(cid) {
   const chara = get_chara_talk(cid);
+  const me = get_chara_talk(0);
   const temp = [
     [
       {
         columns: [
           {
             config: {
-              content: `${CharaTalk.me.name} 的身体接触`,
+              content: i18n().sex.touch_header_template.replace(
+                '%NAME%',
+                me.name,
+              ),
               position: 'left',
               width: 23,
             },
@@ -91,7 +94,10 @@ function print_touch_info(cid) {
         columns: [
           {
             config: {
-              content: `${chara.name} 的身体接触`,
+              content: i18n().sex.touch_header_template.replace(
+                '%NAME%',
+                chara.name,
+              ),
               offset: 1,
               position: 'right',
               width: 23,
@@ -115,7 +121,7 @@ function print_touch_info(cid) {
         columns: [
           {
             config: {
-              content: `${CharaTalk.me.name} 的性虐情报`,
+              content: i18n().sex.sm_header_template.replace('%NAME%', me.name),
               position: 'left',
               width: 23,
             },
@@ -128,7 +134,10 @@ function print_touch_info(cid) {
         columns: [
           {
             config: {
-              content: `${chara.name} 的性虐情报`,
+              content: i18n().sex.sm_header_template.replace(
+                '%NAME%',
+                chara.name,
+              ),
               offset: 1,
               position: 'right',
               width: 23,

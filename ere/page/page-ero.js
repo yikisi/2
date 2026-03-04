@@ -2,10 +2,7 @@ const era = require('#/era-electron');
 
 const sys_filter_ero_act = require('#/system/ero/sub/sys-filter-ero-act');
 const { sys_get_ero_image } = require('#/system/ero/sys-calc-ero-image');
-const {
-  check_satisfied,
-  get_penis_size,
-} = require('#/system/ero/sys-calc-ero-status');
+const { check_satisfied } = require('#/system/ero/sys-calc-ero-status');
 const check_ero_enabled = require('#/system/ero/sys-check-ero-action');
 const sys_handle_ero_act = require('#/system/ero/sys-handle-ero-act');
 const {
@@ -30,6 +27,7 @@ const { get_custom_check } = require('#/event/check/check-factory');
 const { get_custom_ero, run_custom_ero } = require('#/event/ero/ero-factory');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 
+const get_display_name = require('#/utils/calc-display-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const get_color = require('#/utils/gradient-color');
 const { get_random_entry } = require('#/utils/list-utils');
@@ -42,15 +40,9 @@ const {
   relation_colors,
 } = require('#/data/color-const');
 const date_indicator = require('#/data/date-indicator');
-const { part_abbr } = require('#/data/ero/ero-alias.json');
 const { mark_colors, mark_enum } = require('#/data/ero/mark-const');
 const { lust_border, lust_from_palam } = require('#/data/ero/orgasm-const');
-const {
-  motion_enum,
-  part_enum,
-  part_names,
-  up_enum,
-} = require('#/data/ero/part-const');
+const { motion_enum, up_enum } = require('#/data/ero/part-const');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const { ero_derive_check, ero_hooks } = require('#/data/event/ero-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
@@ -62,7 +54,8 @@ const {
 const { location_enum } = require('#/data/locations');
 
 const di18n = require('#/i18n/extended-def');
-const { i18n } = require('#/i18n/selector');
+const { __, i18n } = require('#/i18n/selector');
+const { get_param_list } = require('#/system/ero/ero-act-handler/snippets');
 
 /**
  * @param {number} cid
@@ -123,18 +116,18 @@ function get_ero_marks(cid) {
 
 /**
  * @param {number} cid
- * @param {number} part
+ * @param {number} pid
  * @param {number} offset
  * @returns {[TextObject,ProgressObject]}
  */
-function get_palam_progress(cid, part, offset = 0) {
-  const part_name = part_names[part];
+function get_palam_progress(cid, pid, offset = 0) {
+  const part_name = i18n('zh-CN').tb_param[pid];
   const param = Math.floor(era.get(`param:${cid}:${part_name}快感`));
   const limit = era.get(`tcvar:${cid}:${part_name}快感上限`);
   return [
     {
       config: { offset, width: 1 },
-      content: part_abbr[part_name],
+      content: __(`tb_param.abbr${pid}`),
       type: 'text',
     },
     {
@@ -172,30 +165,17 @@ function get_chara_info(cid) {
       use_empty_line: false,
     }),
   ];
-  const s_penis = get_penis_size(cid);
-  // CFLAGNAME:5 = 阴道尺寸
-  const s_virgin = era.get(`cflag:${cid}:5`);
-  const l_param = [part_enum.mouth, part_enum.breast, part_enum.body];
-  if (s_penis > 0) {
-    l_param.push(part_enum.penis);
-  }
-  if (s_virgin > 0) {
-    if (!s_penis) {
-      l_param.push(part_enum.clitoris);
-    }
-    l_param.push(part_enum.virgin);
-  }
-  l_param.push(part_enum.anal, part_enum.sadism, part_enum.masochism);
+  const l_param = get_param_list(cid);
   l_param.splice(0, 4).forEach((e) => ret.push(...get_palam_progress(cid, e)));
   ret.push({
     config: { width: 1 },
-    content: '欲',
+    content: i18n().sex.n_lust,
     type: 'text',
   });
   if (era.get('flag:当前位置') === location_enum.mejiro) {
     ret.push({
       config: { color: palam_colors.progress[1], height: 22, width: 3 },
-      inContent: '一心同体',
+      inContent: i18n().sex.l_mejiro,
       percentage: 100,
       type: 'progress',
     });
@@ -210,7 +190,7 @@ function get_chara_info(cid) {
         height: 22,
         width: 3,
       },
-      inContent: '？',
+      inContent: i18n().ui_unknown_value,
       percentage: random_lust * 100,
       type: 'progress',
     });
@@ -231,11 +211,6 @@ function get_chara_info(cid) {
   }
   ret.push(...get_palam_progress(cid, l_param.shift(), 4));
   l_param.forEach((e) => ret.push(...get_palam_progress(cid, e)));
-  ret.push({
-    config: { width: 9 * (10 - l_param) },
-    content: [],
-    type: 'text',
-  });
   return ret;
 }
 
@@ -319,13 +294,15 @@ async function page_ero(lover, skip_start_end = false) {
     sys_check_awake(assist) &&
     !sys_check_remote(assist) &&
     rape <= 0 &&
-    (await select_yes_or_no([
-      '要叫 ',
-      { content: '助奴', color: mark_colors[mark_enum.ero] },
-      ' ',
-      get_chara_talk(assist).get_colored_name(),
-      ' 一起来吗？',
-    ]))
+    (await select_yes_or_no(
+      i18n().sex.get_call_assistant_confirm(
+        {
+          content: i18n().tb_mark.s_o_assistant,
+          color: mark_colors[mark_enum.ero],
+        },
+        get_chara_talk(assist).get_colored_name(),
+      ),
+    ))
   ) {
     init_ero(assist);
     era.set('tflag:当前助手', assist);
@@ -374,58 +351,64 @@ async function page_ero(lover, skip_start_end = false) {
     l_cols.push(
       {
         config: { align: in_base ? 'left' : 'right', width: 16 },
-        content: [
-          '位于 ',
+        content: (era.get('tflag:全身镜') > 0
+          ? i18n().sex.get_hd_location
+          : i18n().get_ui_hd_location)(
           i18n().location[location_enum.keys[era.get('flag:当前位置')]],
-          ' ',
           {
-            content: era.get('tflag:全身镜') > 0 ? '全身镜前' : '',
+            content: i18n().tb_item[81],
             color: buff_colors[2],
           },
-        ],
+        ),
         type: 'text',
       },
       { type: 'divider' },
       ...get_chara_info(0),
       {
-        content: [{ isBr: true }],
+        content: [{ isBr: 1 }],
         type: 'text',
       },
       ...get_chara_info(lover),
     );
     l_cols.push({
       config: { width: 12 },
-      content: [`第 ${era.get('tflag:回合')} 回合 `],
+      content: i18n().sex.hd_turn_template.replace(
+        '%TURN%',
+        era.get('tflag:回合').toString(),
+      ),
       type: 'text',
     });
     if (rape === 0) {
       l_cols.at(-1).content.push({
         color: buff_colors[2],
-        content: '强奸事件发生！',
+        content: i18n().sex.rape_notification,
         fontWeight: 'bold',
       });
     } else if (rape > 0) {
       l_cols.at(-1).content.push({
         color: buff_colors[2],
-        content: '逆强奸事件发生！',
+        content: i18n().sex.raped_notification,
         fontWeight: 'bold',
       });
     }
     l_cols.push({
       config: { align: 'right', width: 12 },
       content: [
-        '🤝 ',
-        {
-          color: relation_colors[relation.level],
-          content: relation.mark(),
-          title: `好感：${relation.full()}`,
-        },
-        ' · ❤️ ',
-        {
-          color: love_colors[love.level],
-          content: love.mark(),
-          title: `爱慕：${love.full()}`,
-        },
+        ...i18n().sex.get_lover_relation(
+          {
+            color: relation_colors[relation.level],
+            content: relation.mark(),
+            title: i18n().ui_relation_template.replace(
+              '%RELATIONINFO%',
+              relation.full(),
+            ),
+          },
+          {
+            color: love_colors[love.level],
+            content: love.mark(),
+            title: i18n().ui_love_template.replace('%LOVEINFO%', love.full()),
+          },
+        ),
         ' ',
         ...marks,
       ],
@@ -439,7 +422,11 @@ async function page_ero(lover, skip_start_end = false) {
       if (characters_in_train.length > 2) {
         l_cols.push(
           { type: 'divider' },
-          { config: { width: 6 }, content: '对手', type: 'text' },
+          {
+            config: { width: 6 },
+            content: i18n().sex.n_select_lover,
+            type: 'text',
+          },
           ...characters_in_train
             .filter((v) => v)
             .map((id, i) => {
@@ -451,7 +438,7 @@ async function page_ero(lover, skip_start_end = false) {
                   offset: !i || i % 3 ? 0 : 6,
                   width: 6,
                 },
-                content: era.get(`callname:${id}:-2`),
+                content: get_display_name(era.get(`callname:${id}:-2`)),
                 type: 'button',
               };
             }),
@@ -464,7 +451,11 @@ async function page_ero(lover, skip_start_end = false) {
           });
         }
         l_cols.push(
-          { config: { width: 6 }, content: '协助者', type: 'text' },
+          {
+            config: { width: 6 },
+            content: i18n().sex.n_select_assistant,
+            type: 'text',
+          },
           ...characters_in_train
             .filter((v) => v)
             .map((id, i) => {
@@ -476,7 +467,7 @@ async function page_ero(lover, skip_start_end = false) {
                   offset: !i || i % 3 ? 0 : 6,
                   width: 6,
                 },
-                content: era.get(`callname:${id}:-2`),
+                content: get_display_name(era.get(`callname:${id}:-2`)),
                 type: 'button',
               };
             }),
@@ -486,10 +477,9 @@ async function page_ero(lover, skip_start_end = false) {
       l_cols.push(
         { type: 'divider' },
         {
-          content: [
-            '助手：',
+          content: i18n().sex.get_assistant_info(
             get_chara_talk(curr_supporter).get_colored_name(),
-          ],
+          ),
           type: 'text',
         },
       );
@@ -520,11 +510,10 @@ async function page_ero(lover, skip_start_end = false) {
     action_bar.push({
       content:
         last_action >= 0
-          ? [
+          ? i18n().sex.get_action_info(
               get_chara_talk(0).get_colored_name(),
-              ' 的行动：',
               i18n().train_action[ero_hooks.keys[last_action]],
-            ]
+            )
           : [],
       type: 'text',
     });
@@ -538,18 +527,20 @@ async function page_ero(lover, skip_start_end = false) {
               check_ero_enabled(lover, curr_supporter, last_action) < 0),
           disableWarning: true,
         },
-        content: `再次 ${i18n().train_action[ero_hooks.keys[last_action]]}`,
+        content: i18n().sex.redo_action_template.replace(
+          '%ACTION%',
+          i18n().train_action[ero_hooks.keys[last_action]],
+        ),
         type: 'button',
       });
     }
     action_bar.push({
       content:
         lover_action >= 0
-          ? [
+          ? i18n().sex.get_action_info(
               get_chara_talk(lover).get_colored_name(),
-              ' 的行动：',
               i18n().train_action[ero_hooks.keys[lover_action]],
-            ]
+            )
           : '',
       type: 'text',
     });
@@ -559,9 +550,9 @@ async function page_ero(lover, skip_start_end = false) {
       '脏污检查',
       '个人情报',
       '目标情报',
-    ];
+    ].map((e, i) => ({ a: 901 + i, n: e }));
     if (!master) {
-      setting_bar.unshift('转身');
+      setting_bar.unshift({ a: 900, n: '转身' });
     }
     era.printInColRows(
       [{ type: 'divider' }],
@@ -626,17 +617,17 @@ async function page_ero(lover, skip_start_end = false) {
         return e;
       }),
       [{ type: 'divider' }],
-      setting_bar.map((e, i) => ({
-        accelerator: 900 + i + (master > 0),
+      setting_bar.map((e) => ({
+        accelerator: e.a,
         config: { disabled: lost_mind > 0, width: 4 },
-        content: e,
+        content: e.n,
         type: 'button',
       })),
       [
         {
           accelerator: 999,
           config: { disabled: master > 0 || lost_mind > 0 },
-          content: '返回',
+          content: i18n().sex.try_end,
           type: 'button',
         },
       ],
@@ -675,7 +666,7 @@ async function page_ero(lover, skip_start_end = false) {
     }
   }
   era.drawLine();
-  await era.printAndWait('【性事结束了】');
+  await era.printAndWait(i18n().sex.end_info);
   if (!skip_start_end) {
     await get_custom_ero(lover).ero_end(sys_handle_ero_act);
   }

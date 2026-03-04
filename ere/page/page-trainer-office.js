@@ -18,6 +18,7 @@ const sys_filter_chara = require('#/system/sys-filter-chara');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
 const arrive_location = require('#/page/components/arrive-location');
+const get_back_button_tip = require('#/page/components/get-back-button-tip');
 const get_riko_button = require('#/page/components/get-riko-button');
 const npc_common = require('#/page/components/npc-common');
 const print_page_header = require('#/page/components/page-header');
@@ -166,7 +167,14 @@ async function page_trainer_office() {
           ],
           config: { width: 4 },
         })),
-        [{ accelerator: 999, type: 'button', content: i18n().ui_back }],
+        [
+          {
+            accelerator: 999,
+            config: get_back_button_tip(),
+            content: i18n().ui_back,
+            type: 'button',
+          },
+        ],
       );
       setHorizontalAlign('start');
       const ret = await input();

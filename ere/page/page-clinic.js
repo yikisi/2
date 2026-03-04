@@ -4,6 +4,7 @@ const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
 const arrive_location = require('#/page/components/arrive-location');
+const get_back_button_tip = require('#/page/components/get-back-button-tip');
 const npc_common = require('#/page/components/npc-common');
 const print_page_header = require('#/page/components/page-header');
 const print_out_page = require('#/page/page-out');
@@ -52,7 +53,7 @@ async function page_clinic() {
             },
           }
         : {},
-      { name: di18n.kojo.get_npc_bye(chara.id) },
+      { config: get_back_button_tip(), name: di18n.kojo.get_npc_bye(chara.id) },
     );
     if ((flag_page &&= temp)) {
       await era.clear();

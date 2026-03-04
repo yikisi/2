@@ -46,7 +46,7 @@ const { i18n } = require('#/i18n/selector');
  * @param {{name:string,handle:function():Promise}|{name:string,loc:number,print_out_page:function():Promise}} out_cb
  * @param {{name:string,[handle]:function():Promise}} cele_cb
  * @param {{name:string,handle:function():Promise,[disabled]:boolean}|{}} func_cb
- * @param {{name:string,[handle]:function():Promise}} bye_cb
+ * @param {{name:string,[config]:ButtonConfig,[handle]:function():Promise}} bye_cb
  * @param {function()} [birth_cb]
  * @returns {Promise<boolean|void>}
  */
@@ -298,7 +298,7 @@ async function npc_common(
               ...get_progress_bar(chara.id),
               {
                 config: { width: 2 },
-                content: '状态',
+                content: i18n().tb_status.n_status,
                 type: 'text',
               },
               {
@@ -310,7 +310,7 @@ async function npc_common(
           : []),
         {
           config: { width: 2 },
-          content: '好感',
+          content: i18n().ui_relation,
           type: 'text',
         },
         {
@@ -321,7 +321,7 @@ async function npc_common(
           content: relation.full(),
           type: 'text',
         },
-        { config: { width: 2 }, content: '爱慕', type: 'text' },
+        { config: { width: 2 }, content: i18n().ui_love, type: 'text' },
         {
           config: {
             color: love_colors[love.level],
@@ -343,6 +343,7 @@ async function npc_common(
       })),
       {
         accelerator: 99,
+        config: bye_cb.config,
         content: bye_cb.name,
         type: 'button',
       },
@@ -360,10 +361,7 @@ async function npc_common(
     await buttons[ret - 1].h();
   }
   if (!era.get(`base:${chara.id}:体力`)) {
-    await era.printAndWait([
-      chara.get_colored_name(),
-      ' 体力不支，要回去休息了……',
-    ]);
+    await era.printAndWait(i18n().timon.get_it_npc_sleep(chara));
     era.set(`status:${chara.id}:沉睡`, 1);
   }
   return sys_check_awake(chara.id);

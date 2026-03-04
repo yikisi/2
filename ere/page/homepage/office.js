@@ -181,7 +181,7 @@ module.exports = async (cid, next_cb, flags) => {
             temp[0],
             temp[1],
             jpy < 20 &&
-              i18n().ui_cost_jpy_tip_template.replace('%MONEY%', '20'),
+              i18n().ui_cost_money_tip_template.replace('%MONEY%', '20'),
           ),
         },
         content: i18n().ui_office_prepare,
@@ -213,7 +213,8 @@ module.exports = async (cid, next_cb, flags) => {
         title: di18n.get_act_tip(
           !1,
           temp,
-          jpy < 10 && i18n().ui_cost_jpy_tip_template.replace('%MONEY%', '10'),
+          jpy < 10 &&
+            i18n().ui_cost_money_tip_template.replace('%MONEY%', '10'),
         ),
       },
       content: i18n().ui_office_gift,

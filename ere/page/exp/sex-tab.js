@@ -239,9 +239,9 @@ module.exports = {
         .get('jewelkeys')
         .slice(0, chara.id > 0 ? 15 : 10)
         .forEach((jid) => {
-          const num = era.get(`juel:${chara.id}:${jid}`);
+          const num = era.get(`jewel:${chara.id}:${jid}`);
           const got_juel = Math.floor(
-            (era.get(`gotjuel:${chara.id}:${jid}`) || 0) / palam2juel,
+            (era.get(`gotjewel:${chara.id}:${jid}`) || 0) / palam2juel,
           );
           const buff = era.get(
             `tcvar:${chara.id}:${i18n('zh-CN').tb_param[jid]}因子加成`,

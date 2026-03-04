@@ -274,7 +274,7 @@ function cur_chara_component(cid, type, location_npc) {
           ? [
               {
                 content: [
-                  '🤝',
+                  i18n().ui_relation_icon,
                   {
                     color:
                       relation_colors[
@@ -291,7 +291,7 @@ function cur_chara_component(cid, type, location_npc) {
               },
               {
                 content: [
-                  ' ❤️',
+                  i18n().ui_love_icon,
                   {
                     color:
                       love_colors[(temp = get_love_info(location_npc)).level],

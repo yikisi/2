@@ -114,7 +114,7 @@ class CallOfMejiro extends MejiroCity {
           mejiro_button.t += '麦吉罗在呼唤……';
           /** @type {{[a]:number,s:number,d:boolean,l:number,n:string,[t]:string}[]} */
           const ret = new Array(5)
-            .fill(undefined)
+            .fill(void 0)
             .map(() => ({ ...mejiro_button }));
           if (Math.random() < 0.05) {
             ret[0].n = '麦';

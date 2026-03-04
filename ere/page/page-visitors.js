@@ -6,6 +6,7 @@ const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const sys_get_random_event = require('#/system/sys-get-random-event');
 
 const arrive_location = require('#/page/components/arrive-location');
+const get_back_button_tip = require('#/page/components/get-back-button-tip');
 const npc_common = require('#/page/components/npc-common');
 const print_page_header = require('#/page/components/page-header');
 const print_out_page = require('#/page/page-out');
@@ -391,7 +392,14 @@ async function page_visitors() {
             config: { width: 4 },
           };
         }),
-        [{ accelerator: 999, type: 'button', content: i18n().ui_back }],
+        [
+          {
+            accelerator: 999,
+            config: get_back_button_tip(),
+            content: i18n().ui_back,
+            type: 'button',
+          },
+        ],
       );
       era.setHorizontalAlign('start');
       const cid = await era.input();

@@ -138,7 +138,7 @@ module.exports = {
     if (stain > 0) {
       const stain_names = di18n.tb_stain.names;
       Object.keys(stain_enum).forEach((_, i) => {
-        if (stain % 2) {
+        if (stain % 2 > 0) {
           ret.push({
             n: stain_names[i],
             c: get_gradient_color(

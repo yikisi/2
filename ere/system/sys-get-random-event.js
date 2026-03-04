@@ -31,9 +31,9 @@ function sys_get_random_event(stage, random_or_cid) {
   if (event && cb_dict[event.type]) {
     return (extra) => cb_dict[event.type](event.chara_id, stage, extra, event);
   }
-  return stage === event_hooks.week_start || stage === event_hooks.week_end
-    ? undefined
-    : async () => false;
+  if (stage !== event_hooks.week_start && stage !== event_hooks.week_end) {
+    return async () => false;
+  }
 }
 
 module.exports = sys_get_random_event;

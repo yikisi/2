@@ -133,7 +133,7 @@ module.exports = async (cid, save_and_next_week, flags) => {
         false,
         temp.cost,
         temp.status && i18n().ui_foreign_rest_max_tip,
-        jpy < 50 && i18n().ui_cost_jpy_tip_template.replace('%MONEY%', '50'),
+        jpy < 50 && i18n().ui_cost_money_tip_template.replace('%MONEY%', '50'),
       ),
     },
     content: i18n().ui_foreign_rest,
@@ -189,7 +189,7 @@ module.exports = async (cid, save_and_next_week, flags) => {
       title: di18n.get_act_tip(
         false,
         temp[1],
-        jpy < 50 && i18n().ui_cost_jpy_tip_template.replace('%MONEY%', '50'),
+        jpy < 50 && i18n().ui_cost_money_tip_template.replace('%MONEY%', '50'),
       ),
     },
     content: i18n().ui_foreign_travel,
