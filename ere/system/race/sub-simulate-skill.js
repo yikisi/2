@@ -705,8 +705,7 @@ function sub_simulate_skill(
                 skill.ability_time[i] *= 1.5;
               }
               break;
-            case ability_time_usage_enum.ability_time_usage_enum
-              .blocked_side_continuetime:
+            case ability_time_usage_enum.blocked_side_continuetime:
               skill.ability_time[i] *=
                 Math.min(
                   Math.floor(uma.race.middleBlockedContinueTime / 2),
