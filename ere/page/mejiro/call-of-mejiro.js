@@ -10,12 +10,11 @@ const {
 const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
 
 const get_progress_bar = require('#/page/components/get-progress-bar');
-const select_yes_or_no = require('#/page/components/select-yes-or-no');
+const cum_shop = require('#/page/mejiro/cum-shop');
 const MejiroCity = require('#/page/mejiro/mejiro-common');
 const print_ero_page = require('#/page/page-ero');
 
-const cum_shop = require('#/event/others/mejiro-kindness/cum-shop');
-const MejiroEvents = require('#/event/others/mejiro-kindness/mejiro-events');
+const MejiroEvents = require('#/event/others/mejiro-cum-events');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
@@ -104,47 +103,37 @@ class CallOfMejiro extends MejiroCity {
   get_positions(cid, p_base, c_base) {
     const ret = super.get_positions(cid, p_base, c_base);
     const mejiro_button = ret.find((e) => e.l === location_enum.mejiro);
+    function addTip(tip) {
+      mejiro_button.t ??= '';
+      mejiro_button.t = tip + (mejiro_button.t && '\n') + mejiro_button.t;
+    }
     if (this.called > 0) {
       if (this.called === cid) {
         if (this.san === 0) {
           mejiro_button.a = 5;
-          if (mejiro_button.t || (mejiro_button.t = '')) {
-            mejiro_button.t += '\n';
-          }
-          mejiro_button.t += '麦吉罗在呼唤……';
+          addTip(i18n().timon.cum.calling_tip);
           /** @type {{[a]:number,s:number,d:boolean,l:number,n:string,[t]:string}[]} */
           const ret = new Array(5)
             .fill(void 0)
             .map(() => ({ ...mejiro_button }));
           if (Math.random() < 0.05) {
-            ret[0].n = '麦';
-            ret[1].n = '吉';
-            ret[2].n = '罗';
-            ret[3].n = '在';
-            ret[4].n = '呼唤';
+            for (let i = 0; i < mejiro_button.t; ++i) {
+              ret[i].n = i18n().timon.cum.calling_buttons[i];
+            }
           }
           return ret;
         }
       } else {
         mejiro_button.d = true;
-        if (mejiro_button.t || (mejiro_button.t = '')) {
-          mejiro_button.t += '\n';
-        }
-        mejiro_button.t += '麦吉罗并未呼唤此人……';
+        addTip(i18n().timon.cum.calling_not_chara_tip);
       }
     } else if (cid >= 340 && cid <= 342) {
       mejiro_button.d = true;
-      if ((mejiro_button.t ||= '')) {
-        mejiro_button.t += '\n';
-      }
-      mejiro_button.t += '麦吉罗也许不在三女神之下，但绝不在其之上……';
+      addTip(i18n().timon.cum.calling_god_tip);
     }
     if (this.limit === 0) {
       mejiro_button.d = true;
-      if ((mejiro_button.t ||= '')) {
-        mejiro_button.t += '\n';
-      }
-      mejiro_button.t += '本周内找不到目白城了……';
+      addTip(i18n().timon.cum.come_limited);
     }
     return ret;
   }
@@ -153,12 +142,7 @@ class CallOfMejiro extends MejiroCity {
     this.limit--;
     const chara = get_chara_talk(cid);
     const me = get_chara_talk(0);
-    await era.printAndWait([
-      me.get_colored_name(),
-      ' 和 ',
-      chara.get_colored_name(),
-      ' 一同进入了目白城……',
-    ]);
+    await i18n().timon.cum.come_in_mejiro_city(chara, me);
     if (era.get('item:「恩宠」') === 0 || (this.called > 0 && this.san === 0)) {
       await era.printAndWait('……然后迷雾吞没了你们……');
       if (this.called > 0) {
@@ -188,15 +172,10 @@ class CallOfMejiro extends MejiroCity {
       {
         columns: [
           {
-            content: [
-              '与 ',
-              chara.get_colored_name(),
-              ' 位于 ',
-              {
-                content: '目白城',
-                fontWeight: 'bold',
-              },
-            ],
+            content: i18n().timon.cum.get_header(chara, {
+              content: i18n().location.mejiro,
+              fontWeight: 'bold',
+            }),
             type: 'text',
           },
         ],
@@ -230,7 +209,7 @@ class CallOfMejiro extends MejiroCity {
     difficulty = Math.max(difficulty * 2 + get_random_value(0, 5), 6);
     const progress = { c: 0, p: 0 };
     begin_and_init_ero(0, chara.id);
-    const events = new MejiroEvents(chara, me);
+    const events = new MejiroEvents(chara);
     while (flag) {
       await era.clear();
       this.page_header(chara);
@@ -238,64 +217,14 @@ class CallOfMejiro extends MejiroCity {
       const my_lust = era.get('base:0:性欲');
       const lust = Math.max(my_lust, era.get(`base:${chara.id}:性欲`));
       if (lust >= lust_border.want_sex) {
-        await era.printAndWait([
-          me.get_colored_name(),
-          ' 和 ',
-          chara.get_colored_name(),
-          ' 被迷雾完全包围了……',
-        ]);
-        await era.printAndWait([
-          '目光所及除了迷雾就是一对对疯狂做爱的情侣，他们的面容依稀有着你们的影子。',
-        ]);
-        await era.printAndWait(
-          '性爱的声音盖过了其他所有，呼吸的空气中满是淫臭……',
-        );
-        if (my_lust >= lust_border.want_sex) {
-          await era.printAndWait([
-            me.get_colored_name(),
-            ' 听到血液在脑中轰鸣，自控在绮念的进攻下分崩离析……',
-          ]);
-          await era.printAndWait([
-            '看到身边的 ',
-            chara.get_colored_name(),
-            ' 也同样霞飞双颊，夹紧双腿，',
-            me.get_colored_name(),
-            ' 最终任由思想把自己控制……',
-          ]);
+        const ret = await i18n().timon.cum.fail_to_escape(chara, me);
+        if (ret.length === 0) {
           era.add('base:0:体力', Math.floor(era.get('maxbase:0:体力') * 0.2));
           era.add('base:0:精力', Math.floor(era.get('maxbase:0:精力') * 0.2));
         } else {
-          if (
-            await select_yes_or_no(
-              '',
-              '沉溺其中（「恩宠」+10）',
-              '试图冷静（体力&精力+50%）',
-            )
-          ) {
-            await era.printAndWait([
-              me.get_colored_name(),
-              ' 看向 ',
-              chara.get_colored_name(),
-              '，那眼眸中暗波荡漾……',
-            ]);
-            await era.printAndWait([
-              me.get_colored_name(),
-              ' 主动踏入欲望的泥淖，',
-            ]);
-            await era.printAndWait(['伴随着', chara.sex, '一同下坠，下坠……']);
+          if (ret[0] === 1) {
             era.add('item:「恩宠」', 10);
           } else {
-            await era.printAndWait([
-              me.get_colored_name(),
-              ' 看向 ',
-              chara.get_colored_name(),
-              '，那眼眸中暗波荡漾……',
-            ]);
-            await era.printAndWait([
-              me.get_colored_name(),
-              ' 惊慌地想抬腿离开欲望的泥淖，',
-            ]);
-            await era.printAndWait('脚步却越踩越深，直至坠落……');
             era.add('base:0:体力', Math.floor(era.get('maxbase:0:体力') * 0.5));
             era.add('base:0:精力', Math.floor(era.get('maxbase:0:精力') * 0.5));
           }
@@ -320,49 +249,16 @@ class CallOfMejiro extends MejiroCity {
         flag = false;
         temp = false;
       } else {
-        const buffer = [];
-        buffer.push([
-          me.get_colored_name(),
-          ' 和 ',
-          chara.get_colored_name(),
-          ' 身处迷雾笼罩的街道……',
-        ]);
-        if (lust >= lust_border.absent_mind) {
-          buffer.push(
-            '周围是成双成对纵欲狂欢的人群，放肆的呻吟、肉体碰撞的声音和喷溅的水声充斥着整片空间。',
-          );
-        } else if (lust >= lust_border.itch) {
-          buffer.push(
-            '周围是面容模糊的爱侣，正在欢爱、摆动，低低的娇吟和水声不绝于耳。',
-          );
-        } else if (lust >= 4000) {
-          buffer.push(
-            '周围是面容模糊的眷侣，正在相互抚摸、狎戏，偶尔能听见呻吟和绵密的水声。',
-          );
-        } else if (lust >= 3000) {
-          buffer.push(
-            '周围是成双成对的伴侣，相互拥抱、接吻，偶尔能听见轻悄悄的情话。',
-          );
-        } else if (lust >= 2000) {
-          buffer.push('周围是影影绰绰的一对对旅客，偶尔能听见模糊的低语。');
-        }
-        progress.p = progress.c / difficulty;
-        if (progress.c === difficulty - 1) {
-          buffer.push('前面的迷雾正在消散，能看见明亮、干净的街区。');
-        } else if (progress.p >= 0.66) {
-          buffer.push('前面的迷雾变得稀薄了一些，阳光穿过云层星星点点地照着。');
-        } else if (progress.p >= 0.33) {
-          buffer.push('来路已经看不见了，似乎只能向前。');
-        } else if (progress.c === 0) {
-          buffer.push(
-            '一条大道笔直通向前方，但并不清楚延伸向哪里。来路只剩下蒙蒙的灰。',
-          );
-        }
+        const buffer = i18n().timon.cum.get_misty_info(
+          chara,
+          me,
+          progress.c === difficulty - 1 ? 1 : progress.c / difficulty,
+        );
         const stamina = era.get('base:0:体力');
         const buttons = [
           {
             a: 100,
-            c: '谨慎前进（低风险，性欲+++，体力--）',
+            c: i18n().timon.cum.bt_slow_forward,
             d: stamina < 100,
             async h() {
               era.add(`base:${chara.id}:性欲`, get_random_value(600, 1200));
@@ -378,7 +274,7 @@ class CallOfMejiro extends MejiroCity {
           },
           {
             a: 101,
-            c: '正常前进（中风险，性欲++，体力--）',
+            c: i18n().timon.cum.bt_normal_forward,
             d: stamina < 100,
             async h() {
               era.add(`base:${chara.id}:性欲`, get_random_value(300, 900));
@@ -394,7 +290,7 @@ class CallOfMejiro extends MejiroCity {
           },
           {
             a: 102,
-            c: '大胆前进（高风险，性欲+，体力--）',
+            c: i18n().timon.cum.bt_fast_forward,
             d: stamina < 100,
             async h() {
               era.add(`base:${chara.id}:性欲`, get_random_value(0, 600));
@@ -408,10 +304,10 @@ class CallOfMejiro extends MejiroCity {
               await events.bad_event(progress, lust);
             },
           },
-          undefined,
+          void 0,
           {
             a: 200,
-            c: '仔细搜索（低风险，性欲++，体力---）',
+            c: i18n().timon.cum.bt_slow_search,
             d: stamina < 150,
             async h() {
               era.add(`base:${chara.id}:性欲`, get_random_value(300, 900));
@@ -426,7 +322,7 @@ class CallOfMejiro extends MejiroCity {
           },
           {
             a: 201,
-            c: '正常搜索（中风险，性欲++，体力--）',
+            c: i18n().timon.cum.bt_normal_search,
             d: stamina < 100,
             async h() {
               era.add(`base:${chara.id}:性欲`, get_random_value(300, 900));
@@ -441,7 +337,7 @@ class CallOfMejiro extends MejiroCity {
           },
           {
             a: 202,
-            c: '粗略搜索（高风险，性欲++，体力-）',
+            c: i18n().timon.cum.bt_fast_search,
             d: stamina < 50,
             async h() {
               era.add(`base:${chara.id}:性欲`, get_random_value(300, 900));
@@ -454,10 +350,10 @@ class CallOfMejiro extends MejiroCity {
               await events.bad_event(progress, lust);
             },
           },
-          undefined,
+          void 0,
           {
             a: 300,
-            c: '停下休息（性欲++，体力+）',
+            c: i18n().timon.cum.bt_rest,
             async h() {
               era.add(`base:${chara.id}:性欲`, get_random_value(300, 900));
               era.add('base:0:性欲', get_random_value(100, 500));
@@ -471,7 +367,7 @@ class CallOfMejiro extends MejiroCity {
           },
           {
             a: 301,
-            c: '放弃抵抗（一心同体❤️）',
+            c: i18n().timon.cum.bt_surrender,
             async h() {
               era.set('base:0:性欲', lust_border.want_sex);
               era.set(`base:${chara.id}:性欲`, lust_border.want_sex);
@@ -525,44 +421,21 @@ class CallOfMejiro extends MejiroCity {
     if (temp) {
       era.add('item:「恩宠」', difficulty * 5);
       end_ero_and_train();
-      era.drawLine();
-      const vehicle = era.get('flag:多人载具');
-      await era.printAndWait([
-        me.get_colored_name(),
-        ' 和 ',
-        chara.get_colored_name(),
-        ' 走出了迷雾，发现正处于',
-        vehicle > 0 ? i18n().vehicle[vehicle_enum.keys[vehicle - 1]] : '公交车',
-        '旁。',
-      ]);
-      await era.printAndWait('指向来路的路牌标着「目白城」的标志。');
-      await era.printAndWait('耳边传来满足的笑声……');
     } else {
       await end_ero_and_show_result(true);
-      era.drawLine();
-      await era.printAndWait([
-        '当 ',
-        me.get_colored_name(),
-        ' 清醒时，已出现在目白城外的长椅上，旁边是睡着的 ',
-        chara.get_colored_name(),
-        '。',
-      ]);
-      await era.printAndWait([
-        chara.sex,
-        '清醒过来后，',
-        me.get_couple_title(),
-        ' 在不知从何而来的满足笑声中离开了目白城……',
-      ]);
-      await era.printAndWait([
-        '……但是自那以后，',
-        chara.get_colored_name(),
-        ' 就会时不时听到若有若无的低语……',
-      ]);
       this.called = chara.id;
       this.san = Math.floor(
         era.get('item:「恩宠」') * get_random_value(0.5, 0.7),
       );
     }
+    era.drawLine();
+    const vehicle = era.get('flag:多人载具');
+    await i18n().timon.cum.leave_misty(
+      chara,
+      me,
+      vehicle > 0 && i18n().vehicle[vehicle_enum.keys[vehicle - 1]],
+      temp,
+    );
     era.set('item:「恩宠」', Math.floor(era.get('item:「恩宠」')));
   }
 
@@ -570,14 +443,11 @@ class CallOfMejiro extends MejiroCity {
     this.limit = 1;
     if (era.get('item:「恩宠」') > 0) {
       if (era.add('item:「恩宠」', -1) === 0) {
-        await era.printAndWait('目白城再次为迷雾笼罩……');
+        await i18n().timon.cum.notify_misty();
       }
     }
     if (this.called > 0 && this.san > 0 && --this.san === 0) {
-      await era.printAndWait([
-        get_chara_talk(this.called).get_colored_name(),
-        ' 从耳边的低语中听到了麦吉罗的呼唤……',
-      ]);
+      await i18n().timon.cum.notify_called(get_chara_talk(this.called));
       EventMarks.get(this.called).add(event_hooks.out_mejiro);
     }
   }

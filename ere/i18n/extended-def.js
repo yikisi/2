@@ -11,10 +11,10 @@ const { __, i18n, lan } = require('#/i18n/selector');
 
 /**
  * @param {string[]} ret
- * @param {I18nEntry} _
  * @param {CostInfo} cost_info
+ * @param {I18nEntry} _
  */
-function fill_cost_info(ret, _, cost_info) {
+function fill_cost_info(ret, cost_info, _) {
   if (!cost_info) {
     return;
   }
@@ -169,7 +169,7 @@ const di18n = {
       ret.push(i18n().ui_act_event_tip);
     }
     additional.forEach((add) => add && ret.push(add));
-    fill_cost_info(ret, i18n(), cost_info);
+    fill_cost_info(ret, cost_info, i18n());
     return ret.join('\n') || void 0;
   },
   get_activity_filter: (template, is_on) =>
@@ -197,11 +197,11 @@ const di18n = {
         _.ui_loc_npc_tip_template.replace('%COUNT%', npc_count.toString()),
       );
     }
-    if (has_back_event) {
-      ret.push(_.ui_loc_back_tip);
-    }
     if (has_event) {
       ret.push(_.ui_loc_event_tip);
+    }
+    if (has_back_event) {
+      ret.push(_.ui_loc_back_tip);
     }
     if (event_count > 0) {
       ret.push(
@@ -212,7 +212,7 @@ const di18n = {
       );
     }
     additional.forEach((add) => add && ret.push(add));
-    fill_cost_info(ret, _, cost_info);
+    fill_cost_info(ret, cost_info, _);
     return ret.join('\n') || void 0;
   },
   get race_result_statistics() {

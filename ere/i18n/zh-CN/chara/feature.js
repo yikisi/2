@@ -133,8 +133,8 @@ class I18nCharaFeature {
   penis_3 = '健壮';
   penis_4 = '凶恶';
   penis_5 = '骇人';
-  n_chara = '气性';
 
+  n_chara = '气性';
   'chara_-3' = '弱气';
   'chara_-2' = '胆小';
   'chara_-1' = '认真';

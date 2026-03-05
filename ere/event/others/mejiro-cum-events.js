@@ -1,7 +1,3 @@
-/**
- * @file 麦吉罗的呼唤 - 随机事件
- * @author イーウィヤ
- */
 const era = require('#/era-electron');
 
 const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
@@ -11,9 +7,7 @@ const {
   sys_change_lust,
 } = require('#/system/sys-calc-base-cflag');
 
-const bad_events = require('#/event/others/mejiro-kindness/bad-events.kojo');
-const good_events = require('#/event/others/mejiro-kindness/good-events.kojo');
-const normal_events = require('#/event/others/mejiro-kindness/normal-events.kojo');
+const generate_dictionary = require('#/event/snippets/generate-dictionary');
 
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
@@ -22,6 +16,8 @@ const EroParticipant = require('#/data/ero/ero-participant');
 const { lust_border } = require('#/data/ero/orgasm-const');
 const { part_enum } = require('#/data/ero/part-const');
 const { attr_enum } = require('#/data/train-const');
+
+const { i18n } = require('#/i18n/selector');
 
 /**
  * @typedef CityProgress
@@ -36,7 +32,7 @@ const { attr_enum } = require('#/data/train-const');
 
 /**
  * @param {MejiroEvent[]} events
- * @param {MejiroEvents} _this
+ * @param {MejiroCumEvents} _this
  * @param {CityProgress} progress
  * @param {number} lust
  */
@@ -53,59 +49,61 @@ function get_random_event(events, _this, progress, lust) {
 const action_type_enum = { good: 0, normal: 1, bad: 2, avg: 3 };
 
 /**
- * @this MejiroEvents
+ * @this MejiroCumEvents
  * @param {string} key
  * @param {Record<string,any>} dict
  */
 async function bad_event_common(key, dict) {
   sys_change_lust(this.chara.id, get_random_value(100, 300));
-  if ((await bad_events[key](dict))[0] === 1) {
+  if (
+    (
+      await i18n().timon.cum_events[key]({ ...dict, first: +!this.params[key] })
+    )[0] === 1
+  ) {
     sys_change_lust(0, get_random_value(100, 300));
     return true;
   } else {
     sys_change_lust(this.chara.id, get_random_value(100, 300));
   }
+  this.params[key] = true;
   return false;
 }
 
-class MejiroEvents {
+class MejiroCumEvents {
   /** @type {CharaTalk} */
   chara;
-  /** @type {CharaTalk} */
-  me;
   /** @type {Record<string,any>} */
   #dict = {};
   /** @type {Record<string,any>} */
   params = {};
+
+  get #kojo() {
+    return i18n().timon.cum_events;
+  }
+
   /** @type {MejiroEvent[]} */
   good_events = [
     {
       async h(_, type) {
-        const key = '甘泉水';
-        const d = { ...this.#dict, first: +!this.params[key] };
+        const key = 'g_water';
+        const d = {
+          ...this.#dict,
+          first: +!this.params[key],
+          action: type ?? 0,
+        };
         this.params[key] = true;
-        switch (type) {
-          case action_type_enum.good:
-            d['行动'] = '谨慎地从建筑的后方缓缓走出';
-            break;
-          case action_type_enum.bad:
-            d['行动'] = '急匆匆地跑来';
-            break;
-          default:
-            d['行动'] = '快步走来';
-        }
-        await good_events[key](d);
+        await this.#kojo[key](d);
         sys_change_attr_and_print(0, attr_enum.hp, get_random_value(50, 100));
       },
     },
     {
       async h() {
-        const key = '失物招领';
+        const key = 'g_lost_and_found';
         const reward = get_random_value(1, 3);
-        await good_events[key]({
+        await this.#kojo[key]({
           ...this.#dict,
           first: +!this.params[key],
-          reward: reward.toString(),
+          REWARD: reward.toString(),
         });
         this.params[key] = true;
         era.add('item:「恩宠」', reward);
@@ -113,8 +111,8 @@ class MejiroEvents {
     },
     {
       async h() {
-        const key = '整理衣装';
-        await good_events[key]({
+        const key = 'g_clothe';
+        await this.#kojo[key]({
           ...this.#dict,
           first: +!this.params[key],
         });
@@ -125,10 +123,13 @@ class MejiroEvents {
     },
     {
       async h() {
-        const key = '林荫长椅';
+        const key = 'g_chair';
         switch (
           (
-            await good_events[key]({ ...this.#dict, first: +!this.params[key] })
+            await this.#kojo[key]({
+              ...this.#dict,
+              first: +!this.params[key],
+            })
           )[0]
         ) {
           case 1:
@@ -146,20 +147,23 @@ class MejiroEvents {
     },
     {
       async h(p) {
-        const key = '公共交通';
-        await good_events[key]({ ...this.#dict, first: +!this.params[key] });
+        const key = 'g_bus';
+        await this.#kojo[key]({
+          ...this.#dict,
+          first: +!this.params[key],
+        });
         p.c++;
         this.params[key] = true;
       },
     },
     {
       async h() {
-        const key = '幸运奖励';
+        const key = 'g_lucky';
         const reward = get_random_value(1, 3);
-        const ret = await good_events[key]({
+        const ret = await this.#kojo[key]({
           ...this.#dict,
           first: +!this.params[key],
-          reward: reward.toString(),
+          REWARD: reward.toString(),
         });
         this.params[key] = true;
         if (ret[0] === 1) {
@@ -174,22 +178,28 @@ class MejiroEvents {
   normal_events = [
     {
       async h() {
-        const key = '普通穿行';
-        await normal_events[key]({ ...this.#dict, first: +!this.params[key] });
+        const key = 'n_walk_through';
+        await this.#kojo[key]({
+          ...this.#dict,
+          first: +!this.params[key],
+        });
         this.params[key] = true;
       },
     },
     {
       async h() {
-        const key = '街道漫步';
-        await normal_events[key]({ ...this.#dict, first: +!this.params[key] });
+        const key = 'n_walk';
+        await this.#kojo[key]({
+          ...this.#dict,
+          first: +!this.params[key],
+        });
         this.params[key] = true;
       },
     },
     {
       async h(p) {
-        const key = '林间捷径';
-        if ((await normal_events[key](this.#dict))[0] === 1) {
+        const key = 'n_shortcut';
+        if ((await this.#kojo[key](this.#dict))[0] === 1) {
           p.c++;
           sys_change_attr_and_print(0, attr_enum.hp, -get_random_value(25, 75));
         }
@@ -197,8 +207,8 @@ class MejiroEvents {
     },
     {
       async h() {
-        const key = '街头小吃';
-        if ((await normal_events[key](this.#dict))[0]) {
+        const key = 'n_street_food';
+        if ((await this.#kojo[key](this.#dict))[0]) {
           era.add('item:「恩宠」', -1);
           sys_change_attr_and_print(0, attr_enum.hp, get_random_value(50, 100));
         }
@@ -206,14 +216,14 @@ class MejiroEvents {
     },
     {
       async h() {
-        const key = '摇奖游戏';
+        const key = 'n_arcade';
         const reward = get_random_value(1, 5);
         if (
           (
-            await normal_events[key]({
+            await this.#kojo[key]({
               ...this.#dict,
               first: +!this.params[key],
-              reward: reward.toString(),
+              REWARD: reward.toString(),
             })
           )[0] === 1
         ) {
@@ -225,14 +235,14 @@ class MejiroEvents {
     },
     {
       async h() {
-        const key = '店面宣传';
+        const key = 'n_promotion';
         const reward = get_random_value(1, 5);
         if (
           (
-            await normal_events[key]({
+            await this.#kojo[key]({
               ...this.#dict,
               first: +!this.params[key],
-              reward: reward.toString(),
+              REWARD: reward.toString(),
             })
           )[0] === 1
         ) {
@@ -247,16 +257,14 @@ class MejiroEvents {
   /** @type {MejiroEvent[]} */
   bad_events = [
     {
-      f(_, lust) {
-        return lust < lust_border.absent_mind;
-      },
+      f: (_, lust) => lust < lust_border.absent_mind,
       async h() {
         await quick_make_love(
           new EroParticipant(this.chara.id, part_enum.hand),
           new EroParticipant(0, part_enum.anal),
           false,
         );
-        if (await bad_event_common.call(this, '摸屁股', this.#dict)) {
+        if (await bad_event_common.call(this, 'b_pet_anal', this.#dict)) {
           await quick_make_love(
             new EroParticipant(0, part_enum.hand),
             new EroParticipant(this.chara.id, part_enum.anal),
@@ -266,16 +274,14 @@ class MejiroEvents {
       },
     },
     {
-      f(_, lust) {
-        return lust < lust_border.absent_mind;
-      },
+      f: (_, lust) => lust < lust_border.absent_mind,
       async h() {
         await quick_make_love(
           new EroParticipant(this.chara.id, part_enum.hand),
           new EroParticipant(0, part_enum.body),
           false,
         );
-        if (await bad_event_common.call(this, '意外相拥', this.#dict)) {
+        if (await bad_event_common.call(this, 'b_hug', this.#dict)) {
           await quick_make_love(
             new EroParticipant(0, part_enum.hand),
             new EroParticipant(this.chara.id, part_enum.body),
@@ -285,11 +291,9 @@ class MejiroEvents {
       },
     },
     {
-      f(_, lust) {
-        return lust < lust_border.absent_mind;
-      },
+      f: (_, lust) => lust < lust_border.absent_mind,
       async h() {
-        if (await bad_event_common.call(this, '抚摸大腿', this.#dict)) {
+        if (await bad_event_common.call(this, 'b_pet_leg', this.#dict)) {
           await quick_make_love(
             new EroParticipant(0, part_enum.hand),
             new EroParticipant(this.chara.id, part_enum.body),
@@ -299,11 +303,9 @@ class MejiroEvents {
       },
     },
     {
-      f(_, lust) {
-        return lust < lust_border.absent_mind;
-      },
+      f: (_, lust) => lust < lust_border.absent_mind,
       async h() {
-        if (await bad_event_common.call(this, '街头放映', this.#dict)) {
+        if (await bad_event_common.call(this, 'b_movie', this.#dict)) {
           await quick_make_love(
             new EroParticipant(0, part_enum.mouth),
             new EroParticipant(this.chara.id, part_enum.mouth),
@@ -313,11 +315,10 @@ class MejiroEvents {
       },
     },
     {
-      f(_, lust) {
-        return lust >= lust_border.itch && lust < lust_border.absent_mind;
-      },
+      f: (_, lust) =>
+        lust >= lust_border.itch && lust < lust_border.absent_mind,
       async h() {
-        if (await bad_event_common.call(this, '咖啡馆', this.#dict)) {
+        if (await bad_event_common.call(this, 'b_cafe', this.#dict)) {
           await quick_make_love(
             new EroParticipant(0, part_enum.mouth),
             new EroParticipant(this.chara.id, part_enum.mouth),
@@ -327,16 +328,15 @@ class MejiroEvents {
       },
     },
     {
-      f(_, lust) {
-        return lust >= lust_border.itch && lust < lust_border.absent_mind;
-      },
+      f: (_, lust) =>
+        lust >= lust_border.itch && lust < lust_border.absent_mind,
       async h() {
         await quick_make_love(
           new EroParticipant(this.chara.id, part_enum.breast),
           new EroParticipant(0, part_enum.hand),
           false,
         );
-        if (await bad_event_common.call(this, '幸运色狼？', this.#dict)) {
+        if (await bad_event_common.call(this, 'b_lucky_sukebe', this.#dict)) {
           await quick_make_love(
             new EroParticipant(0, part_enum.hand),
             new EroParticipant(this.chara.id, part_enum.breast),
@@ -346,16 +346,15 @@ class MejiroEvents {
       },
     },
     {
-      f(_, lust) {
-        return lust >= lust_border.itch && lust < lust_border.absent_mind;
-      },
+      f: (_, lust) =>
+        lust >= lust_border.itch && lust < lust_border.absent_mind,
       async h() {
         await quick_make_love(
           new EroParticipant(this.chara.id, part_enum.breast),
           new EroParticipant(0, part_enum.hand),
           false,
         );
-        if (await bad_event_common.call(this, '突然降雨', this.#dict)) {
+        if (await bad_event_common.call(this, 'b_rain', this.#dict)) {
           await quick_make_love(
             new EroParticipant(0, part_enum.mouth),
             new EroParticipant(this.chara.id, part_enum.mouth),
@@ -365,25 +364,17 @@ class MejiroEvents {
       },
     },
     {
-      f(_, lust) {
-        return this.chara.sex_code !== 1 && lust < lust_border.absent_mind;
-      },
+      f: (_, lust) =>
+        this.chara.sex_code !== 1 && lust < lust_border.absent_mind,
       async h() {
         sys_change_lust(this.chara.id, get_random_value(150, 450));
-        const key = '震动玩具';
-        if (
-          await bad_event_common.call(this, key, {
-            ...this.#dict,
-            first: +!this.params[key],
-          })
-        ) {
+        if (await bad_event_common.call(this, 'b_ero_item', this.#dict)) {
           await quick_make_love(
             new EroParticipant(0, part_enum.hand),
             new EroParticipant(this.chara.id, part_enum.breast),
             false,
           );
         }
-        this.params[key] = true;
       },
     },
     {
@@ -399,7 +390,7 @@ class MejiroEvents {
           ),
           false,
         );
-        if (await bad_event_common.call(this, '无端挑逗', this.#dict)) {
+        if (await bad_event_common.call(this, 'b_advance', this.#dict)) {
           await quick_make_love(
             new EroParticipant(0, part_enum.hand),
             new EroParticipant(
@@ -416,7 +407,7 @@ class MejiroEvents {
         return lust >= lust_border.itch;
       },
       async h() {
-        if (await bad_event_common.call(this, '露天口交', this.#dict)) {
+        if (await bad_event_common.call(this, 'b_blow_job', this.#dict)) {
           await quick_make_love(
             new EroParticipant(this.chara.id, part_enum.mouth),
             new EroParticipant(
@@ -433,20 +424,13 @@ class MejiroEvents {
         return lust >= lust_border.itch;
       },
       async h() {
-        const key = '后穴玩具';
-        if (
-          await bad_event_common.call(this, key, {
-            ...this.#dict,
-            first: +!this.params[key],
-          })
-        ) {
+        if (await bad_event_common.call(this, 'b_anal_item', this.#dict)) {
           await quick_make_love(
             new EroParticipant(0, part_enum.hand),
             new EroParticipant(this.chara.id, part_enum.anal),
             false,
           );
         }
-        this.params[key] = true;
       },
     },
     {
@@ -459,7 +443,7 @@ class MejiroEvents {
           new EroParticipant(0, part_enum.penis),
           false,
         );
-        if (await bad_event_common.call(this, '隐秘游戏', this.#dict)) {
+        if (await bad_event_common.call(this, 'b_foot_job', this.#dict)) {
           await quick_make_love(
             new EroParticipant(this.chara.id, part_enum.hand),
             new EroParticipant(
@@ -473,17 +457,10 @@ class MejiroEvents {
     },
   ];
 
-  /**
-   * @param {CharaTalk} chara
-   * @param {CharaTalk} me
-   */
-  constructor(chara, me) {
+  /** @param {CharaTalk} chara */
+  constructor(chara) {
     this.chara = chara;
-    this.me = me;
-    this.#dict['你'] = me.name;
-    this.#dict['担当'] = chara.name;
-    this.#dict['她'] = chara.sex;
-    this.#dict['少女'] = chara.teen_sex_title;
+    this.#dict = generate_dictionary(chara.id, { teen: !0 });
   }
 
   /**
@@ -494,6 +471,7 @@ class MejiroEvents {
   #get_event_by_category(percentages, progress, lust) {
     const [good, normal] = percentages;
     let dice = Math.random();
+    console.log(dice, percentages.join(','));
     if (dice < good) {
       return get_random_event(this.good_events, this, progress, lust);
     }
@@ -553,4 +531,4 @@ class MejiroEvents {
   }
 }
 
-module.exports = MejiroEvents;
+module.exports = MejiroCumEvents;

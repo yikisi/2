@@ -7,9 +7,9 @@ const {
 
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
+const { get_love_info } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 
-const { get_love_info } = require('#/data/info-generator');
 const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
