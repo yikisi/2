@@ -8,6 +8,7 @@ const { get_display_width } = require('#/utils/value-utils');
 const { get_save_name } = require('#/data/info-generator');
 
 const di18n = require('#/i18n/extended-def');
+const { i18n } = require('#/i18n/selector');
 
 module.exports = async () => {
   let flag_save_game = true;
@@ -28,21 +29,24 @@ module.exports = async () => {
         },
       );
     }
-    buffer.push({ config: { content: '要保存至哪个栏位？' }, type: 'divider' });
+    buffer.push({
+      config: { content: i18n().ui_save_game_header },
+      type: 'divider',
+    });
     new Array(10).fill(0).forEach((_, e) => {
       const ind = e + 1;
       const comm_desc = era.get(`global:saves:${ind}`);
       buffer.push({
         accelerator: ind,
         config: { width: 20 },
-        content: comm_desc || '空存档栏位',
+        content: comm_desc || i18n().ui_empty_save,
         type: 'button',
       });
       if (comm_desc && !comm_desc.startsWith('(FILE LOST)')) {
         buffer.push({
           accelerator: ind + 100,
           config: { align: 'right', width: 4 },
-          content: '改名',
+          content: i18n().ui_save_rename,
           type: 'button',
         });
       }
@@ -52,19 +56,19 @@ module.exports = async () => {
       {
         accelerator: 97,
         config: { width: 8 },
-        content: '为这个故事命名',
+        content: i18n().ui_save_name_save,
         type: 'button',
       },
       {
         accelerator: 98,
         config: { disabled: !era.get('flag:存档名'), width: 8 },
-        content: '取消这个故事的命名',
+        content: i18n().ui_save_remove_save,
         type: 'button',
       },
       {
         accelerator: 99,
         config: { align: 'right', width: 8 },
-        content: '返回上一级',
+        content: i18n().ui_back,
         type: 'button',
       },
     );
@@ -74,7 +78,7 @@ module.exports = async () => {
 
     switch (ret) {
       case 97:
-        era.print('请输入存档命名：');
+        era.print(i18n().ui_save_name_save_header);
         ret = '';
         do {
           if (ret) {
@@ -84,25 +88,27 @@ module.exports = async () => {
         } while (ret && get_display_width(ret) > 20);
         if (
           await select_yes_or_no(
-            `要将这个故事${era.get('flag:存档名') ? '改名' : '取名'}为 [${ret}] 吗？`,
-            '是',
-            '否',
+            i18n().ui_save_name_save_confirm_template.replace('%NAME%', ret),
           )
         ) {
           era.set('flag:存档名', ret);
-          msg_notification = `为这个故事取名为 [${ret}]……`;
+          msg_notification = i18n().ui_save_name_save_result_template.replace(
+            '%NAME%',
+            ret,
+          );
         }
         break;
       case 98:
         if (
           await select_yes_or_no(
-            `要取消这个故事的命名 [${era.get('flag:存档名')}] 吗？`,
-            '是',
-            '否',
+            i18n().ui_save_name_remove_confirm_template.replace(
+              '%NAME%',
+              era.get('flag:存档名'),
+            ),
           )
         ) {
           era.set('flag:存档名', '');
-          msg_notification = '取消了存档的命名，下次保存将使用默认名……';
+          msg_notification = i18n().ui_save_name_remove_result;
         }
         break;
       case 99:
@@ -114,9 +120,10 @@ module.exports = async () => {
           if (cur && !cur.startsWith('(FILE LOST)')) {
             if (
               !(await select_yes_or_no(
-                `要覆盖 ${ret} 号栏位的存档吗？`,
-                '是',
-                '否',
+                i18n().ui_save_override_confirm_template.replace(
+                  '%NO%',
+                  ret.toString(),
+                ),
               ))
             ) {
               break;
@@ -124,11 +131,14 @@ module.exports = async () => {
           }
 
           if (await era.saveData(ret, get_save_name())) {
-            msg_notification = `已成功保存至 ${ret} 号栏位`;
+            msg_notification = i18n().ui_save_save_result_template.replace(
+              '%NO%',
+              ret.toString(),
+            );
           }
         } else {
           let name;
-          era.print('请输入新的存档命名：');
+          era.print(i18n().ui_save_name_save_header);
           do {
             if (name) {
               era.print(di18n.get_too_long(40));
@@ -137,16 +147,25 @@ module.exports = async () => {
           } while (name && get_display_width(name) > 40);
           if (
             await select_yes_or_no(
-              `要将 ${ret - 100} 号栏位的存档改名为 [${name}] 吗？`,
-              '是',
-              '否',
+              i18n()
+                .ui_save_rename_confirm_template.replace(
+                  '%NO%',
+                  (ret - 100).toString(),
+                )
+                .replace('%NAME%', name),
             )
           ) {
             era.set(`global:saves:${ret - 100}`, name.toString());
             await era.saveGlobal();
-            msg_notification = `${ret - 100} 号栏位的存档改名成功`;
+            msg_notification = i18n().ui_save_rename_result_template.replace(
+              '%NO%',
+              (ret - 100).toString(),
+            );
           } else {
-            msg_notification = `放弃了给 ${ret - 100} 号栏位的存档改名`;
+            msg_notification = i18n().ui_save_rename_cancel_template.replace(
+              '%NO%',
+              (ret - 100).toString(),
+            );
           }
         }
     }

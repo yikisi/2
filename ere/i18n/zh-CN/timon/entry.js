@@ -226,6 +226,15 @@ class I18nTimon {
     '人变得真正低劣时，除了高兴别人的不幸外，已无其他乐趣可言。——约翰・沃尔夫冈・冯・歌德';
   ed_saying_12 = '自由不是随心所欲，而是不必身不由己。——伊曼努尔・康德';
   ed_saying_13 = '我是自己最大的敌人。——拿破仑・波拿巴';
+
+  // Forward Compatibility - 向前兼容
+  fc_mejiro_confirm = '请选择目白城风格';
+  fc_mejiro_free = '「自由」';
+  fc_mejiro_cum = '「慈爱」';
+
+  fc_race_item_confirm = '请选择带玩具参赛的影响';
+  fc_race_item_yes = '有影响';
+  fc_race_item_no = '无影响';
 }
 
 module.exports = I18nTimon;

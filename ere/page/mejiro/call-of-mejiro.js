@@ -144,7 +144,7 @@ class CallOfMejiro extends MejiroCity {
     const me = get_chara_talk(0);
     await i18n().timon.cum.come_in_mejiro_city(chara, me);
     if (era.get('item:「恩宠」') === 0 || (this.called > 0 && this.san === 0)) {
-      await era.printAndWait('……然后迷雾吞没了你们……');
+      await i18n().timon.cum.misty_notify();
       if (this.called > 0) {
         if (EventMarks.get(this.called).get(event_hooks.out_mejiro) > 0) {
           EventMarks.get(this.called).sub(event_hooks.out_mejiro);

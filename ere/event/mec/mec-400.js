@@ -13,11 +13,11 @@ const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 /**
- * @param {number} [wins]
+ * @param {number} wins
  * @returns {number}
  */
 function get_attr_buff(wins) {
-  return Math.min(wins || new SSEduMarks().wins, 25);
+  return Math.min(wins, 25);
 }
 
 module.exports = class extends CustomizedMec {
@@ -44,7 +44,7 @@ module.exports = class extends CustomizedMec {
             this.id,
             'win',
             wins,
-            get_attr_buff(),
+            get_attr_buff(wins),
             this.get_relation_buff(),
           ),
           color: get_chara_color(this.id),

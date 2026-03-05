@@ -77,14 +77,14 @@ let random_event;
 
 async function next_week() {
   era.drawLine();
-  era.print('【时间开始流动】', {
+  era.print(i18n().ui_time_flow, {
     align: 'center',
     fontSize: '1.5rem',
   });
   era.println();
   await sys_next_week();
   era.drawLine();
-  await era.printAndWait('【新的一周开始了】', {
+  await era.printAndWait(i18n().ui_new_week, {
     align: 'center',
     fontSize: '1.5rem',
   });
@@ -97,7 +97,10 @@ async function next_week() {
  */
 async function save_and_next_week(cid, cur_loc, rest_loc) {
   if (!era.get('flag:强制BE')) {
-    await era.saveData(0, `${get_save_name()} (自动存档)`);
+    await era.saveData(
+      0,
+      i18n().ui_auto_save_template.replace('%NAME%', get_save_name()),
+    );
   }
   era.drawLine();
   era.set('flag:当前互动角色', 0);

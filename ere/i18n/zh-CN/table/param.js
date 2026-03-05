@@ -2,6 +2,8 @@ class I18nParam {
   get_jewel_count = (jewel, count) => [jewel, '：', count];
   jewel_with_count = '%JEWEL%×%COUNT%';
 
+  n_jewel = '因子';
+
   // 缩写
   abbr0 = '口';
   abbr1 = '胸';

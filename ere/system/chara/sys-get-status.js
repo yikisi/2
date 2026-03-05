@@ -106,7 +106,10 @@ function sys_get_status(cid) {
   // STATUSNAME:4 = 偏头痛
   const headache = era.get(`status:${cid}:4`);
   if (headache > 0) {
-    status_list.push({ color: buff_colors[0], content: '偏头痛' });
+    status_list.push({
+      ...di18n.tb_status.get_titled_status(4),
+      color: buff_colors[0],
+    });
   }
   // STATUSNAME:16 = 健康茶
   if (era.get(`status:${cid}:16`) > 0) {

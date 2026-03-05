@@ -4,6 +4,8 @@ const { sort_list } = require('#/utils/list-utils');
 
 const { gene_type_colors } = require('#/data/race/model/uma-gene');
 
+const { __, i18n } = require('#/i18n/selector');
+
 class CharaAvailableGenes {
   // SKILLNAME:3 = 可继承因子
 
@@ -78,13 +80,17 @@ class CharaAvailableGenes {
           (summary[Math.min(e[0].charCodeAt(0) - '1'.charCodeAt(0), 2)] +=
             e[1]),
       );
-      this.summary_cache = [
-        { content: `粉 × ${summary[0]}`, color: gene_type_colors[0] },
-        ' · ',
-        { content: `蓝 × ${summary[1]}`, color: gene_type_colors[1] },
-        ' · ',
-        { content: `白 × ${summary[2]}`, color: gene_type_colors[2] },
-      ];
+      this.summary_cache = i18n().inherit_shop.get_jewel_list(
+        ...summary.map((j, i) => ({
+          color: gene_type_colors[i],
+          content: i18n()
+            .tb_param.jewel_with_count.replace(
+              '%JEWEL%',
+              __(`tb_param.${20 + i}`),
+            )
+            .replace('%COUNT%', j.toString()),
+        })),
+      );
     }
     return this.summary_cache;
   }

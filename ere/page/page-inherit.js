@@ -8,6 +8,7 @@ const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
 const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
 
+const get_display_name = require('#/utils/calc-display-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_abbr_number } = require('#/utils/value-utils');
 
@@ -24,7 +25,7 @@ const {
 } = require('#/data/race/model/uma-gene');
 
 const di18n = require('#/i18n/extended-def');
-const { __, i18n } = require('#/i18n/selector');
+const { __, i18n, lan } = require('#/i18n/selector');
 
 const gene_limit = 27;
 
@@ -46,37 +47,45 @@ function generate_gene_buttons(
 ) {
   return [
     [
-      { type: 'divider', config: { content: '因子能力列表' } },
-      { config: { width: 6 }, content: '名称', type: 'text' },
+      { type: 'divider', config: { content: i18n().inherit_shop.list_header } },
       {
-        config: { align: 'right', width: 1 },
-        content: '习得',
+        config: { width: 6 },
+        content: i18n().inherit_shop.hd_name,
         type: 'text',
       },
       {
         config: { align: 'right', width: 1 },
-        content: '数量',
+        content: i18n().inherit_shop.hd_learnt,
         type: 'text',
       },
       {
         config: { align: 'right', width: 1 },
-        content: '价格',
-        type: 'text',
-      },
-      { config: { offset: 3, width: 6 }, content: '名称', type: 'text' },
-      {
-        config: { align: 'right', width: 1 },
-        content: '习得',
+        content: i18n().inherit_shop.hd_count,
         type: 'text',
       },
       {
         config: { align: 'right', width: 1 },
-        content: '数量',
+        content: i18n().inherit_shop.hd_price,
+        type: 'text',
+      },
+      {
+        config: { offset: 3, width: 6 },
+        content: i18n().inherit_shop.hd_name,
         type: 'text',
       },
       {
         config: { align: 'right', width: 1 },
-        content: '价格',
+        content: i18n().inherit_shop.hd_learnt,
+        type: 'text',
+      },
+      {
+        config: { align: 'right', width: 1 },
+        content: i18n().inherit_shop.hd_count,
+        type: 'text',
+      },
+      {
+        config: { align: 'right', width: 1 },
+        content: i18n().inherit_shop.hd_price,
         type: 'text',
       },
     ],
@@ -131,7 +140,7 @@ function generate_gene_buttons(
                   (!cid && genes.count() > gene_limit),
                 width: 6,
               },
-              content: '学习',
+              content: i18n().inherit_shop.bt_learn,
               type: 'button',
             },
           ],
@@ -182,7 +191,7 @@ function generate_gene_buttons(
               juels[2],
             width: 6,
           },
-          content: '学习',
+          content: i18n().inherit_shop.bt_learn,
           type: 'button',
         },
       ],
@@ -196,7 +205,7 @@ function generate_gene_buttons(
             disabled: all_juels === 0,
             width: 12,
           },
-          content: '将剩余因子转换为技能点数',
+          content: i18n().inherit_shop.bt_convert,
           type: 'button',
         },
       ],
@@ -244,12 +253,17 @@ async function print_inherit_page() {
       used_jewels = jewels.map((j, i) => j + era.get(`jewel:0:${20 + i}`) / 2);
       let gene_a = era.get(`cflag:${selected}:继承方1`);
       let gene_b = era.get(`cflag:${selected}:继承方2`);
-      era.drawLine({ content: `为 ${chara.actual_name} 继承因子` });
+      era.drawLine({
+        content: i18n().inherit_shop.header_template.replace(
+          '%NAME%',
+          chara.full_name,
+        ),
+      });
       if (gene_a > 0) {
         era.printInColRows(
           {
             columns: [
-              { config: { content: '因子' }, type: 'divider' },
+              { config: { content: i18n().tb_param.n_jewel }, type: 'divider' },
               ...jewels.map((e, i) => {
                 const jid = 20 + i;
                 const my_jewel = era.get(`jewel:0:${jid}`);
@@ -296,10 +310,9 @@ async function print_inherit_page() {
               },
               {
                 config: { offset: 1, width: 18 },
-                content: [
-                  '因子能力：',
-                  ...new CharaAvailableGenes(gene_a).get_summary(),
-                ],
+                content: i18n().inherit_shop.get_gene_list(
+                  new CharaAvailableGenes(gene_a).get_summary(),
+                ),
                 type: 'text',
               },
               {
@@ -315,10 +328,9 @@ async function print_inherit_page() {
               },
               {
                 config: { offset: 1, width: 18 },
-                content: [
-                  '因子能力：',
-                  ...new CharaAvailableGenes(gene_b).get_summary(),
-                ],
+                content: i18n().inherit_shop.get_gene_list(
+                  new CharaAvailableGenes(gene_b).get_summary(),
+                ),
                 type: 'text',
               },
               {
@@ -339,16 +351,19 @@ async function print_inherit_page() {
           ),
           [
             {
-              content:
-                '* 马娘的因子不足以继承因子能力时，训练员可以支付双倍差额帮助马娘继承因子能力',
+              content: i18n().inherit_shop.inherit_tip,
               type: 'text',
             },
           ],
         );
       } else if (palace_list.length > 0) {
-        era.printButton('选择继承角色', 200, { align: 'center' });
+        era.printButton(i18n().inherit_shop.bt_select_chara, 200, {
+          align: 'center',
+        });
       } else {
-        era.print('需要有两名以上可以继承的角色……', { align: 'center' });
+        era.print(i18n().inherit_shop.not_enough_chara_tip, {
+          align: 'center',
+        });
       }
     } else if (selected === 0) {
       used_jewels = jewels = new Array(3)
@@ -358,7 +373,12 @@ async function print_inherit_page() {
         [
           {
             type: 'divider',
-            config: { content: `为 ${chara.get_full_name()} 继承因子` },
+            config: {
+              content: i18n().inherit_shop.header_template.replace(
+                '%NAME%',
+                chara.full_name,
+              ),
+            },
           },
         ],
         used_jewels.map((e, i) => ({
@@ -381,22 +401,25 @@ async function print_inherit_page() {
           {
             accelerator: available_genes.get_values().length + 3,
             config: { disabled: chara_genes.count() < gene_limit },
-            content: '遗忘所有因子能力',
+            content: i18n().inherit_shop.bt_remove_genes,
             type: 'button',
           },
           {
-            content: [
-              '* 马娘训练员最多继承 ',
-              { content: gene_limit.toString(), fontWeight: 'bold' },
-              ' 个因子能力',
-            ],
+            content:
+              i18n().inherit_shop.player_genes_limit_tip_template.replace(
+                '%COUNT%',
+                gene_limit.toString(),
+              ),
             type: 'text',
           },
         ],
       );
     }
     era.printMultiColumns([
-      { type: 'divider', config: { content: '可继承因子的角色' } },
+      {
+        config: { content: i18n().inherit_shop.inherit_chara_header },
+        type: 'divider',
+      },
       ...(edu_list.length > 0
         ? edu_list.map((e) => ({
             accelerator: 1000 + e,
@@ -405,11 +428,11 @@ async function print_inherit_page() {
               disabled: selected === e,
               width: 4,
             },
-            content: era.get(`callname:${e}:-1`),
+            content: get_display_name(era.get(`callname:${e}:-1`)),
             type: 'button',
           }))
         : [{ content: i18n().ui_nothing, type: 'text' }]),
-      { accelerator: 999, content: '离开', type: 'button' },
+      { accelerator: 999, content: i18n().ui_back, type: 'button' },
     ]);
     const ret = await era.input({});
     era.drawLine();
@@ -431,14 +454,14 @@ async function print_inherit_page() {
                   buttonType: inherit_selected[e] ? 'warning' : 'info',
                   disabled: era.get(`cflag:${e}:被继承`) > 0,
                 },
-                content: era.get(`callname:${e}:-1`),
+                content: get_display_name(era.get(`callname:${e}:-1`)),
                 type: 'button',
               },
               {
                 config: { align: 'center' },
                 content: [
                   ...(era.get(`cflag:${e}:被继承`) > 0
-                    ? ['已被继承', { isBr: true }]
+                    ? [i18n().inherit_shop.have_inherited, { isBr: true }]
                     : []),
                   ...new CharaAvailableGenes(e).get_summary(),
                 ],
@@ -449,11 +472,7 @@ async function print_inherit_page() {
           })),
           [
             {
-              content: [
-                '* 必须同时选中两个角色才能开始因子继承',
-                { isBr: true },
-                '** 被继承的角色在继承角色结束育成前无法重新育成！',
-              ],
+              content: i18n().inherit_shop.select_chara_tip,
               type: 'text',
             },
             {
@@ -464,13 +483,13 @@ async function print_inherit_page() {
                   Object.values(inherit_selected).filter((e) => e).length !== 2,
                 width: 12,
               },
-              content: '确定',
+              content: i18n().ui_yes,
               type: 'button',
             },
             {
               accelerator: 1001,
               config: { align: 'center', width: 12 },
-              content: '取消',
+              content: i18n().ui_no,
               type: 'button',
             },
           ],
@@ -519,39 +538,46 @@ async function print_inherit_page() {
           flag_select_inherit = false;
           era.drawLine();
           await era.printAndWait([
-            '继承成功！',
-            chara.get_colored_name(),
-            ' 获得了：',
-            { isBr: true },
-            {
-              content: i18n()
-                .tb_param.jewel_with_count.replace(
-                  '%JEWEL%',
-                  __('tb_param.jewel20'),
-                )
-                .replace('%COUNT%', era.get(`jewel:${selected}:粉`).toString()),
-              color: gene_type_colors[0],
-            },
-            ' ',
-            {
-              content: i18n()
-                .tb_param.jewel_with_count.replace(
-                  '%JEWEL%',
-                  __('tb_param.jewel21'),
-                )
-                .replace('%COUNT%', era.get(`jewel:${selected}:蓝`).toString()),
-              color: gene_type_colors[1],
-            },
-            ' ',
-            {
-              content: i18n()
-                .tb_param.jewel_with_count.replace(
-                  '%JEWEL%',
-                  __('tb_param.jewel22'),
-                )
-                .replace('%COUNT%', era.get(`jewel:${selected}:白`).toString()),
-              color: gene_type_colors[2],
-            },
+            i18n().inherit_shop.get_inherit_success(chara.get_colored_name(), [
+              {
+                content: i18n()
+                  .tb_param.jewel_with_count.replace(
+                    '%JEWEL%',
+                    __('tb_param.jewel20'),
+                  )
+                  .replace(
+                    '%COUNT%',
+                    era.get(`jewel:${selected}:粉`).toString(),
+                  ),
+                color: gene_type_colors[0],
+              },
+              ' ',
+              {
+                content: i18n()
+                  .tb_param.jewel_with_count.replace(
+                    '%JEWEL%',
+                    __('tb_param.jewel21'),
+                  )
+                  .replace(
+                    '%COUNT%',
+                    era.get(`jewel:${selected}:蓝`).toString(),
+                  ),
+                color: gene_type_colors[1],
+              },
+              ' ',
+              {
+                content: i18n()
+                  .tb_param.jewel_with_count.replace(
+                    '%JEWEL%',
+                    __('tb_param.jewel22'),
+                  )
+                  .replace(
+                    '%COUNT%',
+                    era.get(`jewel:${selected}:白`).toString(),
+                  ),
+                color: gene_type_colors[2],
+              },
+            ]),
           ]);
           era.println();
           let wait_flag = sys_like_chara(selected, gene_owner_list[0], 100);
@@ -574,9 +600,7 @@ async function print_inherit_page() {
       chara_genes = new CharaGenes(selected);
       chara = get_chara_talk(selected);
     } else if (ret === available_genes.get_values().length + 3) {
-      if (
-        await select_yes_or_no('遗忘所有因子能力吗？已提高的属性上限不会消失')
-      ) {
+      if (await select_yes_or_no(i18n().inherit_shop.remove_genes_confirm)) {
         CharaSkills.get(0).remove(
           ...chara_genes
             .get_values()
@@ -601,23 +625,31 @@ async function print_inherit_page() {
           }
         });
         chara_genes.clear();
-        await era.printAndWait([
-          chara.get_colored_name(),
-          ' 遗忘了所有因子能力……所有适性、继承属性与继承技能都消失了……',
-        ]);
+        await era.printAndWait(
+          i18n().inherit_shop.get_remove_genes_result(chara.get_colored_name()),
+        );
       }
     } else if (ret === available_genes.get_values().length + 2) {
       const pt = 2 * jewels.reduce((p, c) => p + c, 0);
-      if (await select_yes_or_no(`将剩余因子转换成 ${pt} 点技能点数吗？`)) {
+      if (
+        await select_yes_or_no(
+          i18n().inherit_shop.convert_jewels_confirm_template.replace(
+            '%PT%',
+            pt.toString(),
+          ),
+        )
+      ) {
         era.add(`exp:${selected}:技能点数`, pt);
         for (let jid = 20; jid <= 22; ++jid) {
           era.set(`jewel:${selected}:${jid}`, 0);
         }
         await era.printAndWait([
           chara.get_colored_name(),
-          ' 获得了 ',
-          pt.toString(),
-          ' 点技能点数',
+          ' ',
+          i18n().ui_get_pt_template.replace(
+            '%PT%',
+            Object(pt).toLocaleString(lan()),
+          ),
         ]);
       }
     } else if (ret < 200) {
@@ -670,20 +702,20 @@ async function print_inherit_page() {
             } else {
               temp = era.set(`cflag:${selected}:${30 + gene.type_value}`, 7);
             }
-            await era.printAndWait([
-              chara.get_colored_name(),
-              ' 的 ',
-              i18n().adapt_template.replace(
-                '%ADAPT%',
-                di18n.n_adapt[gene.type_value],
+            await era.printAndWait(
+              i18n().inherit_shop.get_inherit_result(
+                chara.get_colored_name(),
+                i18n().adapt_template.replace(
+                  '%ADAPT%',
+                  di18n.n_adapt[gene.type_value],
+                ),
+                {
+                  color: adaptability_colors[temp],
+                  content: get_adaptability_rank(temp),
+                  fontWeight: 'bold',
+                },
               ),
-              ' 现在是 ',
-              {
-                color: adaptability_colors[temp],
-                content: get_adaptability_rank(temp),
-                fontWeight: 'bold',
-              },
-            ]);
+            );
             break;
           case gene_type_enum.base:
             era.set(
@@ -695,28 +727,30 @@ async function print_inherit_page() {
               ),
             );
             era.add(`base:${selected}:${5 + gene.type_value}`, gene.value);
-            await era.printAndWait([
-              chara.get_colored_name(),
-              ' 的 ',
-              {
-                content: di18n.n_attr[gene.type_value],
-                color: attr_colors[gene.type_value],
-              },
-              ' 现在是 ',
-              {
-                content: `${Math.floor(era.get(`base:${selected}:${5 + gene.type_value}`))}/${era.get(`maxbase:${selected}:${5 + gene.type_value}`)}`,
-                color: attr_colors[gene.type_value],
-              },
-            ]);
+            await era.printAndWait(
+              i18n().inherit_shop.get_inherit_result(
+                chara.get_colored_name(),
+                {
+                  content: di18n.n_attr[gene.type_value],
+                  color: attr_colors[gene.type_value],
+                },
+                {
+                  content: `${Math.floor(era.get(`base:${selected}:${5 + gene.type_value}`)).toLocaleString(lan())}/${era.get(`maxbase:${selected}:${5 + gene.type_value}`).toLocaleString()}`,
+                  color: attr_colors[gene.type_value],
+                },
+              ),
+            );
             break;
           case gene_type_enum.skill:
             if (gene.value < 100000) {
               era.add(`exp:${selected}:技能点数`, gene.value);
               await era.printAndWait([
                 chara.get_colored_name(),
-                ' 获得了 ',
-                gene.value.toString(),
-                ' 点技能点数',
+                ' ',
+                i18n().ui_get_pt_template.replace(
+                  '%PT%',
+                  Object(gene.value).toLocaleString(lan()),
+                ),
               ]);
             } else {
               get_skills_and_print_in_event(selected, [gene.value]) &&

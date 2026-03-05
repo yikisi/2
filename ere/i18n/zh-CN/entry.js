@@ -298,6 +298,9 @@ class I18nEntry {
     ' 无比失望】',
   ];
 
+  ui_time_flow = '【时间开始流动】';
+  ui_new_week = '【新的一周开始了】';
+
   ui_hd_no_save = '当前未加载存档';
   get_ui_hd_location = (location) => ['位于 ', location];
   get_ui_hd_honour = (honour) => [honour, ' 声望'];
@@ -634,6 +637,25 @@ class I18nEntry {
   ui_shop_acc_switch_template = '隐藏快捷键 [%STATUS%]';
   get_ui_shop_buy = (item, count) => ['购买了 ', count, ' 个 ', item];
 
+  get_ui_take_care = (chara) => ['想请 ', chara, ' 照看谁？'];
+  get_ui_take_care_change_confirm = (chara, curr) => [
+    chara,
+    ' 现在正在照看 ',
+    curr,
+    '。要切换照看角色吗？',
+  ];
+  ui_take_care_aim_continue_template = '%NAME%（照看中）';
+  ui_take_care_aim_taken_template = '%NAME%（%TEACHER% 照看中）';
+  ui_take_care_bt_cancel = '取消照看';
+  ui_take_care_bt_keep = '保持原状';
+  get_ui_take_care_continue = (chara, curr) => [chara, ' 会继续照看 ', curr];
+  get_ui_take_care_cancel = (chara, prev) => [chara, ' 不再照看 ', prev, ' 了'];
+  get_ui_take_care_change = (chara, next) => [
+    chara,
+    ' 从现在开始将照看 ',
+    next,
+  ];
+
   ui_bs_flatter = '虚与委蛇';
   ui_bs_unlock = '尝试脱困';
   ui_bs_relax = '只是静坐';
@@ -644,6 +666,29 @@ class I18nEntry {
   ui_bs_battle = '正面反抗';
   ui_bs_release = '请求释放';
   ui_bs_clock = '询问时间';
+
+  ui_save_game_header = '要保存至哪个栏位？';
+  ui_auto_save_template = '%NAME% (自动存档)';
+  ui_empty_save = '空存档栏位';
+  ui_save_rename = '改名';
+  ui_save_name_save = '为这个故事命名';
+  ui_save_remove_save = '取消这个故事的命名';
+  ui_save_name_save_header = '请输入存档命名：';
+  ui_save_name_save_confirm_template = '要将这个故事命名为 [%NAME%] 吗？';
+  ui_save_name_save_result_template = '为这个故事取名为 [%NAME%]';
+  ui_save_name_remove_confirm_template = '要取消这个故事的命名 [%NAME%] 吗？';
+  ui_save_name_remove_result = '取消了存档的命名，下次保存将使用默认名';
+  ui_save_override_confirm_template = '要覆盖 %NO% 号栏位的存档吗？';
+  ui_save_save_result_template = '已保存至 %NO% 号栏位';
+  ui_save_rename_confirm_template =
+    '要将 %NO% 号栏位的存档改名为 [%NAME%] 吗？';
+  ui_save_rename_result_template = '%NO% 号栏位的存档改名成功';
+  ui_save_rename_cancel_template = '放弃了给 %NO% 号栏位的存档改名';
+
+  ui_load_game_header = '要从哪个栏位读取？';
+  ui_load_remove = '删除';
+  ui_load_fail_template = '未能成功读取 %NO% 号栏位的存档';
+  ui_load_remove_success_template = '成功删除 %NO% 号栏位的存档';
 
   name = new (require('#/i18n/zh-CN/chara/names'))();
   title = new (require('#/i18n/zh-CN/chara/titles'))();

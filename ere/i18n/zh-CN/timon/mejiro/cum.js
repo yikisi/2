@@ -53,6 +53,10 @@ module.exports = {
    * 麦吉罗的的呼唤 - 迷雾
    */
 
+  /** 进入目白城后提示处于迷雾探索 */
+  async misty_notify() {
+    await printAndWait('……然后迷雾吞没了你们……');
+  },
   /**
    * 探索移动阶段，提示性欲状态
    * @param {CharaTalk} chara 同伴

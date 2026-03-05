@@ -110,21 +110,24 @@ module.exports = async () => {
         },
       );
     }
-    buffer.push({ config: { content: '要从哪个栏位读取？' }, type: 'divider' });
+    buffer.push({
+      config: { content: i18n().ui_load_game_header },
+      type: 'divider',
+    });
     new Array(11).fill(0).forEach((_, e) => {
       let comm_desc = era.get(`global:saves:${e}`);
       const enabled = comm_desc && !comm_desc.startsWith('(FILE LOST)');
       buffer.push({
         accelerator: e,
         config: { disabled: !enabled, width: 20 },
-        content: comm_desc || '空存档栏位',
+        content: comm_desc || i18n().ui_empty_save,
         type: 'button',
       });
       if (comm_desc) {
         buffer.push({
           accelerator: e + 100,
           config: { align: 'right', width: 4 },
-          content: '删除',
+          content: i18n().ui_load_remove,
           type: 'button',
         });
       }
@@ -132,7 +135,7 @@ module.exports = async () => {
     era.printMultiColumns(buffer);
 
     era.drawLine();
-    era.printButton('返回上一级', 99, { align: 'right' });
+    era.printButton(i18n().ui_back, 99, { align: 'right' });
 
     let ret = await era.input();
 
@@ -436,9 +439,9 @@ module.exports = async () => {
               }
               //              if (
               //                !(await select_yes_or_no(
-              //                  '请选择目白城风格',
-              //                  '「自由」',
-              //                  '「慈爱」',
+              //                  i18n().timon.fc_mejiro_confirm,
+              //                  i18n().timon.fc_mejiro_free,
+              //                  i18n().timon.fc_mejiro_cum,
               //                ))
               //              ) {
               era.set('flag:目白城风格', 1);
@@ -446,9 +449,9 @@ module.exports = async () => {
               //              }
               if (
                 await select_yes_or_no(
-                  '请选择带玩具参赛的影响',
-                  '无影响',
-                  '有影响',
+                  i18n().timon.fc_race_item_confirm,
+                  i18n().timon.fc_race_item_no,
+                  i18n().timon.fc_race_item_yes,
                 )
               ) {
                 era.set('flag:道具影响', 0);
@@ -673,7 +676,7 @@ module.exports = async () => {
                         ...get_filtered_talents(sex_code, 50),
                         ...get_filtered_talents(sex_code, 60),
                       ].forEach((tid) => {
-                        if (t_table[tid] !== undefined) {
+                        if (t_table[tid] !== void 0) {
                           era.set(`talent:${a}:${tid}`, t_table[tid]);
                         }
                       });
@@ -693,7 +696,10 @@ module.exports = async () => {
             }
             return true;
           } else {
-            msg_notification = `未能成功读取 ${ret} 号栏位的存档`;
+            msg_notification = i18n().ui_load_fail_template.replace(
+              '%NO%',
+              ret.toString(),
+            );
           }
         } else if (
           (era.get(`global:saves:${ret - 100}`) &&
@@ -702,9 +708,11 @@ module.exports = async () => {
           (await era.rmData(ret - 100))
         ) {
           await era.saveGlobal();
-          msg_notification = `成功删除 ${ret - 100} 号栏位的存档`;
+          msg_notification = i18n().ui_load_remove_success_template.replace(
+            '%NO%',
+            ret.toString(),
+          );
         }
-        break;
     }
   }
 };
