@@ -35,9 +35,9 @@ const { __, i18n, lan } = require('#/i18n/selector');
 /**
  * @this {CallOfMejiro}
  * @param {CharaTalk} chara
- * @param {CharaTalk} you
+ * @param {CharaTalk} me
  */
-async function cum_shop(chara, you) {
+async function cum_shop(chara, me) {
   const mayor = get_chara_talk(13);
   const waiters = [
     get_chara_talk(27),
@@ -64,7 +64,7 @@ async function cum_shop(chara, you) {
     await era.clear();
     this.page_header(chara);
     era.drawLine();
-    i18n().timon.cum.print_city_info(chara, you);
+    i18n().timon.cum.print_city_info(chara, me);
     era.drawLine();
     const buttons = [
       {
@@ -474,7 +474,7 @@ async function cum_shop(chara, you) {
             const ret = await era.input();
             switch (ret) {
               case 1:
-                target = target === chara ? you : chara;
+                target = target === chara ? me : chara;
                 break;
               case 99:
                 _flag = false;
@@ -579,7 +579,7 @@ async function cum_shop(chara, you) {
                 await i18n().timon.cum.city_hospital_b_scan(
                   say_by_waiter_and_wait,
                   get_chara_talk(life_marks.sperm),
-                  you,
+                  me,
                 );
                 life_marks.report = -1;
                 money = era.add('item:「恩宠」', 10);
@@ -645,7 +645,7 @@ async function cum_shop(chara, you) {
             const p = get_random_entry(talent_list);
             switch (await era.input()) {
               case 1:
-                target = target === chara ? you : chara;
+                target = target === chara ? me : chara;
                 break;
               case 2:
                 money = era.add('item:「恩宠」', -60);
@@ -692,7 +692,7 @@ async function cum_shop(chara, you) {
             era.printButton(
               i18n().timon.cum.city_lb_self_get_im_template.replace(
                 '%NAME%',
-                you.name,
+                me.name,
               ),
               1,
               { disabled: iron_mind },
@@ -700,7 +700,7 @@ async function cum_shop(chara, you) {
             era.printButton(
               i18n().timon.cum.city_lb_self_rm_im_template.replace(
                 '%NAME%',
-                you.name,
+                me.name,
               ),
               2,
               { disabled: !iron_mind },
@@ -730,7 +730,7 @@ async function cum_shop(chara, you) {
               _flag = false;
             } else {
               await i18n().timon.cum.handle_city_library(
-                ret <= 2 ? you : chara,
+                ret <= 2 ? me : chara,
                 ret % 2 === 1,
                 {
                   content: i18n().tb_talent.template.replace(
@@ -748,7 +748,7 @@ async function cum_shop(chara, you) {
               } else {
                 // ITEMNAME:110 = 「恩宠」
                 money = era.add('item:110', -5 - (ret === 1 || ret === 4) * 5);
-                const tid = ret <= 2 ? you.id : chara.id;
+                const tid = ret <= 2 ? me.id : chara.id;
                 if (ret % 2 === 1) {
                   era.set(`talent:${tid}:57`, 1);
                 } else {

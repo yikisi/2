@@ -438,6 +438,7 @@ class I18nEntry {
   ui_rec_c_body_template = '%NAME% 的身体尺寸';
   ui_rec_c_talent_template = '%NAME% 的性格特征';
   ui_rec_e_train_template = '%NAME% 的训练加成';
+  ui_rec_e_train_buff_template = '%ATTR%：+%BUFF%%';
   ui_rec_e_adapt_template = '%NAME% 的脚质适应';
   ui_rec_e_skill_template = '%NAME% 的比赛技巧';
   ui_rec_e_aim_template = '%NAME% 的育成目标';
@@ -615,6 +616,23 @@ class I18nEntry {
     '关系并未达到如此程度 (需要：%REQUIRE%以上，当前：%CURRENT%)';
 
   ui_race_report_header = '比赛出走预定';
+
+  ui_shop_limited_item_entry_template = '%ITEM%(限)';
+  ui_shop_hold = '持有';
+  ui_shop_max = '最大';
+  ui_shop_buy_template = '购买 (%PRICE% 马币)';
+  ui_shop_tip = '* 点击道具查看说明\n** 带「限」字样的商品只能拥有一件';
+  get_ui_shop_bargain = (item, discount) => [
+    '*** 本周特惠！',
+    item,
+    ' ',
+    discount,
+    '！',
+  ];
+  ui_shop_30_off = '30%off';
+  ui_shop_50_off = '50%off';
+  ui_shop_acc_switch_template = '隐藏快捷键 [%STATUS%]';
+  get_ui_shop_buy = (item, count) => ['购买了 ', count, ' 个 ', item];
 
   ui_bs_flatter = '虚与委蛇';
   ui_bs_unlock = '尝试脱困';

@@ -16,6 +16,9 @@ class I18nTimon {
   ending = proxy_kojo_js(require('#/i18n/zh-CN/timon/others/ending'));
 
   god_shop = proxy_kojo_js(require('#/i18n/zh-CN/timon/others/god-shop'));
+  tachyon_shop = proxy_kojo_js(
+    require('#/i18n/zh-CN/timon/others/tachyon-shop'),
+  );
   race = proxy_kojo_js(require('#/i18n/zh-CN/timon/others/race'));
   others = proxy_kojo_js(require('#/i18n/zh-CN/timon/others/others'));
   anniversary = require('#/i18n/zh-CN/timon/others/anniversary.kojo');

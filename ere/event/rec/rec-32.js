@@ -50,7 +50,7 @@ module.exports = class extends CustomizedRecruit {
         era.set('flag:物色对象', 32);
         {
           const life_marks = new TachyonLifeMarks();
-          if (life_marks.first) {
+          if (life_marks.first > 0) {
             life_marks.first = 1;
           }
         }

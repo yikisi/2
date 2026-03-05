@@ -376,7 +376,9 @@ async function print_rec_page() {
             .filter((e) => e.v > 0)
             .map((e) => ({
               config: { width: 4, color: attr_colors[e.i] },
-              content: [e.n, '：+', e.v.toString(), '%'],
+              content: i18n()
+                .ui_rec_e_train_buff_template.replace('%ATTR%', e.n)
+                .replace('%BUFF%', e.v.toString()),
               type: 'text',
             })),
           {

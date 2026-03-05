@@ -6,7 +6,7 @@ const { attr_change_colors, money_color } = require('#/data/color-const');
 const date_indicator = require('#/data/date-indicator');
 const { location_enum } = require('#/data/locations');
 
-const { __, i18n } = require('#/i18n/selector');
+const { __, i18n, lan } = require('#/i18n/selector');
 
 /** @param {({id:number,[limit]:boolean}|number)[]} item_list */
 async function print_shop_page(item_list) {
@@ -72,7 +72,9 @@ async function print_shop_page(item_list) {
             buttonType: iid === off ? 'danger' : 'warning',
             width: 4,
           },
-          content: `${name}${limit[iid] ? '(限)' : ''}`,
+          content: limit[iid]
+            ? i18n().ui_shop_limited_item_entry_template.replace('%ITEM%', name)
+            : name,
           type: 'button',
         },
         {
@@ -81,11 +83,11 @@ async function print_shop_page(item_list) {
             align: 'center',
             width: 1,
           },
-          content: '持有',
+          content: i18n().ui_shop_hold,
         },
         {
           type: 'text',
-          config: { width: 1 },
+          config: { align: 'right', width: 1 },
           // ITEMNAME:30 = 避孕套（5只装）
           // ITEMNAME:101 = 避孕套
           content: iid === 30 ? era.get('item:101') : era.get(`item:${iid}`),
@@ -153,7 +155,7 @@ async function print_shop_page(item_list) {
             showAcc: !flag_hide_acc,
             width: 3,
           },
-          content: '最大',
+          content: i18n().ui_shop_max,
           type: 'button',
         },
         {
@@ -164,32 +166,35 @@ async function print_shop_page(item_list) {
             showAcc: !flag_hide_acc,
             width: 5,
           },
-          content: `购买 (${price[iid] * to_buy[iid]} 马币)`,
+          content: i18n().ui_shop_buy_template.replace(
+            '%PRICE%',
+            (price[iid] * to_buy[iid]).toLocaleString(lan()),
+          ),
           type: 'button',
         },
       );
     });
     buffer.push({
       type: 'text',
-      content: '\n* 点击道具查看说明\n** 带「限」字样的商品只能拥有一件',
+      content: '\n' + i18n().ui_shop_tip,
     });
     if (on_sell_list.findIndex((e) => e === off) !== -1) {
       buffer.push({
         type: 'text',
-        content: [
-          '*** 本周特惠！',
+        content: i18n().get_ui_shop_bargain(
           {
             content: __(`tb_item.${off}`),
             color: money_color,
             fontWeight: 'bold',
           },
-          ' ',
           {
-            content: off_index >> 7 > 0 ? '50%off' : '30%off',
+            content:
+              off_index >> 7 > 0
+                ? i18n().ui_shop_50_off
+                : i18n().ui_shop_30_off,
             color: attr_change_colors.up,
           },
-          '！',
-        ],
+        ),
       });
     }
     buffer.push({ type: 'divider' });
@@ -199,12 +204,14 @@ async function print_shop_page(item_list) {
         {
           accelerator: 996,
           config: { align: 'center', disabled: cur_page === 1, width: 3 },
-          content: '上一页',
+          content: i18n().ui_pg_prev,
           type: 'button',
         },
         {
           config: { align: 'center', width: 6 },
-          content: `第 ${cur_page} 页 / 共 ${max_page} 页`,
+          content: i18n()
+            .ui_pagination_template.replace('%CURR%', cur_page.toString())
+            .replace('%TOTAL%', max_page.toString()),
           type: 'text',
         },
         {
@@ -214,7 +221,7 @@ async function print_shop_page(item_list) {
             disabled: cur_page === max_page,
             width: 3,
           },
-          content: '下一页',
+          content: i18n().ui_pg_next,
           type: 'button',
         },
       );
@@ -227,13 +234,16 @@ async function print_shop_page(item_list) {
           buttonType: flag_hide_acc ? 'warning' : 'info',
           width: 6,
         },
-        content: `隐藏快捷键 [${flag_hide_acc ? '开' : '关'}]`,
+        content: i18n().ui_shop_acc_switch_template.replace(
+          '%STATUS%',
+          flag_hide_acc ? i18n().ui_on : i18n().ui_off,
+        ),
         type: 'button',
       },
       {
         accelerator: 999,
         config: { align: 'right', width: 6 },
-        content: `离开 ${cur_loc}`,
+        content: i18n().ui_back,
         type: 'button',
       },
     );
@@ -251,19 +261,19 @@ async function print_shop_page(item_list) {
             config: {
               width: 5,
             },
-            content: [
+            content: i18n().get_ui_hd_money(
               {
                 color: money_color,
                 content: cur_coin.toLocaleString(),
                 fontWeight: 'bold',
               },
-              ' 马币',
-            ],
+              [],
+            ),
             type: 'text',
           },
           {
             config: { width: 10 },
-            content: `位于 ${cur_loc}`,
+            content: i18n().get_ui_hd_location(cur_loc),
             type: 'text',
           },
         ],
@@ -321,7 +331,10 @@ async function print_shop_page(item_list) {
           sys_change_money(-price[selected] * to_buy[selected]);
           era.add(`item:${selected}`, to_buy[selected]);
           await era.printAndWait(
-            `购买了 ${to_buy[selected]} 个 ${__(`tb_item.${selected}`)} `,
+            i18n().get_ui_shop_buy(
+              __(`tb_item.${selected}`),
+              to_buy[selected].toString(),
+            ),
           );
           bought += to_buy[selected];
           to_buy[selected] = Math.max(
