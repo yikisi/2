@@ -159,9 +159,9 @@ csv.forEach((e, i) => {
   );
 });
 
-const i18n_c = join(__dirname, '../../ere/i18n/zh-CN/races.js');
-const i18n_e = join(__dirname, '../../ere/i18n/en-US/races.js');
-const i18n_j = join(__dirname, '../../ere/i18n/ja-JP/races.js');
+const i18n_c = join(__dirname, '../../ere/i18n/zh-CN/race/races.js');
+const i18n_e = join(__dirname, '../../ere/i18n/en-US/race/races.js');
+const i18n_j = join(__dirname, '../../ere/i18n/ja-JP/race/races.js');
 
 writeFileSync(
   i18n_c,
