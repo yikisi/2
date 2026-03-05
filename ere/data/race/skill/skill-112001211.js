@@ -10,7 +10,7 @@ module.exports = new UmaSkill(
   [() => true, () => true],
   [
     (args) =>
-      args.distance_type === 1 && args.running_style === 1 && args.phase === 0,
+      args.distance_type === 1 && args.running_style === 1 && args.always === 1,
     (args) =>
       args.is_activate_other_skill_detail === 1 && args.straight_random === 1,
   ],

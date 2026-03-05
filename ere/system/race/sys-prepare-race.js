@@ -163,6 +163,7 @@ function sys_prepare_race(list_chara, team_list, race_info) {
     uma.race.conditionParams.is_used_skill_id = [];
     uma.race.conditionParams.lastspurt = 0;
     uma.race.conditionParams.order_rate_in20_continue = 1;
+    uma.race.conditionParams.order_rate_in50_continue = 1;
     uma.race.conditionParams.order_rate_in80_continue = 1;
     uma.race.conditionParams.order_rate_out20_continue = 1;
     uma.race.conditionParams.order_rate_out40_continue = 1;

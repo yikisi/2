@@ -65,6 +65,7 @@ class I18nRaces {
   t_morioka = '盛冈';
   t_longchamp = '隆尚';
   t_santa_anita = '圣安妮塔公园';
+  t_del_mar = '德尔玛';
   t_st_cloud = '圣克劳德';
   t_chantilly = '尚蒂伊';
   t_bashang = '从化';

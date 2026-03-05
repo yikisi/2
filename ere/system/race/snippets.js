@@ -476,6 +476,21 @@ module.exports = {
         }
         skill.values[i][j] *= skill.data.ability_values[i][j];
         break;
+      case ability_usage_enum.MultiplyTeamTotal:
+        skill.values[i][j] = uma.base.total_attrs.reduce((p, c) => p + c);
+        if (skill.values[i][j] >= 3600 * 5) {
+          skill.values[i][j] = 1.2;
+        } else if (skill.values[i][j] >= 2600 * 5) {
+          skill.values[i][j] = 1.1;
+        } else if (skill.values[i][j] >= 1800 * 5) {
+          skill.values[i][j] = 1;
+        } else if (skill.values[i][j] >= 1200 * 5) {
+          skill.values[i][j] = 0.9;
+        } else {
+          skill.values[i][j] = 0.8;
+        }
+        skill.values[i][j] *= skill.data.ability_values[i][j];
+        break;
       case ability_usage_enum.MultiplyFanCount:
       case ability_usage_enum.MultiplyFanCount2:
         skill.values[i][j] = skill.data.ability_values[i][j];

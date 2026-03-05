@@ -8,7 +8,7 @@ module.exports = new UmaSkill(
   17,
   334,
   [() => true, () => true],
-  [(args) => args.distance_type === 1 && args.phase === 0, () => false],
+  [(args) => args.distance_type === 1 && args.always === 1, () => false],
   [1.5, 0],
   [500, 0],
   [

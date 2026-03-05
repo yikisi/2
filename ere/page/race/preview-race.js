@@ -21,14 +21,24 @@ const {
   get_attr_rank,
   get_rank_level,
 } = require('#/data/info-generator');
+const { track_enum } = require('#/data/race/model/race-info');
 
 const di18n = require('#/i18n/extended-def');
-const { i18n, lan } = require('#/i18n/selector');
+const { __, i18n, lan } = require('#/i18n/selector');
 
 const item_buff_key = 'slaanesh';
 const item_debuff_key = 'item';
 
 const pop_mark = ['➖', '◎', '◯', '▲', '△', '△'];
+
+/**
+ * @param {number} track
+ * @returns {string}
+ */
+function get_track_name(track) {
+  const key = Object.entries(track_enum).find((t) => t[1] === track)[0];
+  return __(`race.t_${key}`);
+}
 
 /** @param {PseudoUma} chara */
 function generate_attribute_info(chara) {
@@ -116,7 +126,7 @@ async function preview_race(
         .race.preview_header_race_template.replace(
           '%TRACK%',
           info.track >= 0
-            ? di18n.race.n_track[info.track]
+            ? get_track_name(info.track)
             : i18n().race.t_playground,
         )
         .replace('%GROUND%', di18n.race.a_ground[info.ground])

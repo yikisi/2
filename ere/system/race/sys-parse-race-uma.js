@@ -560,6 +560,13 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
     uma.race.conditionParams.season = season;
     uma.race.conditionParams.time = info.daytime;
     uma.race.conditionParams.track_id = info.track;
+    uma.race.conditionParams.is_tight_track =
+      info.track === 10001 ||
+      info.track === 10002 ||
+      info.track === 10004 ||
+      info.track === 10010 ||
+      info.track === 10103 ||
+      info.track === 10104;
     uma.race.conditionParams.weather = info.weather + 1;
   });
 

@@ -69,6 +69,8 @@ const track_enum = {
   longchamp: 10201,
   // 圣安妮塔公园
   santa_anita: 10202,
+  // 德尔玛
+  del_mar: 10203,
   // 尚蒂伊
   chantilly: 33001,
   // 圣克劳德
@@ -86,7 +88,6 @@ const track_enum = {
   // 迈丹
   meydan: 97101,
 };
-Object.keys(track_enum).forEach((e, i) => (track_enum[e] = i));
 
 class RaceSlope {
   /**

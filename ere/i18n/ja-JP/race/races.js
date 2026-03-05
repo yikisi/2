@@ -28,6 +28,8 @@ module.exports = class extends I18nRaces {
   t_funabashi = '船橋';
   t_morioka = '盛岡';
   t_longchamp = '隆尚';
+  t_santa_anita = 'サンタアニタパーク';
+  t_del_mar = 'デルマー';
 
   track_name_template = '%NAME%レース場';
 

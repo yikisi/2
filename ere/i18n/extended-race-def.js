@@ -30,36 +30,6 @@ const _race_def = {
       const _ = i18n().race;
       return [_.m_well, _.m_semi, _.m_heavy, _.m_bad];
     },
-    /** @returns {string[]} */
-    get n_track() {
-      const _ = i18n().race;
-      return [
-        _.t_sapporo,
-        _.t_hakodate,
-        _.t_niigata,
-        _.t_fukushima,
-        _.t_nakayama,
-        _.t_tokyo,
-        _.t_chukyo,
-        _.t_kyoto,
-        _.t_hanshin,
-        _.t_kokura,
-        _.t_ohi,
-        _.t_kawasaki,
-        _.t_funabashi,
-        _.t_morioka,
-        _.t_longchamp,
-        _.t_santa_anita,
-        _.t_st_cloud,
-        _.t_chantilly,
-        _.t_bashang,
-        _.t_shatin,
-        _.t_kentucky,
-        _.t_baltimore,
-        _.t_new_york,
-        _.t_meydan,
-      ];
-    },
     get_titled_result_summary: (race, win) => ({
       content: i18n()
         .race.summary_template.replace('%RACE%', race)

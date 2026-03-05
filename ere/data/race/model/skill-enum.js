@@ -88,6 +88,8 @@ module.exports = {
     ActivateRandomRareSkill: 37,
     Connect: 41,
     Genesis: 42,
+    // TODO
+    Unknown: 48,
     // 育成继承活动使用
     // ChallengeMatchBonusXXX: 50,
     // 可以用性玩具
@@ -139,6 +141,9 @@ module.exports = {
     MultiplyLove: 30,
     MultiplyIsland: 31,
     MultiplyHotSpring: 32,
+    // TODO
+    MultiplyUnknown: 36,
+    MultiplyTeamTotal: 37,
     MultiplyCount: 99,
   },
   /**

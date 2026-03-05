@@ -60,6 +60,7 @@ class ConditionParams {
   is_overtake;
   is_surrounded;
   is_temptation;
+  is_tight_track;
   is_used_skill_id;
   item;
   lane_type;
@@ -72,6 +73,7 @@ class ConditionParams {
   order;
   order_rate;
   order_rate_in20_continue;
+  order_rate_in50_continue;
   order_rate_in80_continue;
   order_rate_out20_continue;
   order_rate_out40_continue;
@@ -94,6 +96,8 @@ class ConditionParams {
   random_lot;
   remain_distance;
   rotation;
+  // TODO
+  run_at_full_speed_random;
   running_style;
   running_style_count_nige_otherself;
   running_style_count_oikomi_otherself;
