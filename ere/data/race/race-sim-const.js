@@ -1,7 +1,9 @@
-﻿const race_event_enum = {
+﻿// 这个顺序也是解说的优先顺序，不能变换
+const race_event_enum = {
   finish: 0,
   loc_change: 0,
   lost_stamina: 0,
+  full_speed_push: 0,
   final_push: 0,
   compete_fight: 0,
   orgasm: 0,

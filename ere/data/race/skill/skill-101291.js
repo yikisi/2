@@ -33,14 +33,14 @@ module.exports = new UmaSkill(
       UmaSkill.ability_type_enum.no,
     ],
     [
-      UmaSkill.ability_type_enum.Unknown,
+      UmaSkill.ability_type_enum.AccelFullSpeed,
       UmaSkill.ability_type_enum.no,
       UmaSkill.ability_type_enum.no,
     ],
   ],
   [
     [
-      UmaSkill.ability_usage_enum.MultiplyUnknown,
+      UmaSkill.ability_usage_enum.MultiplyDisMedium,
       UmaSkill.ability_usage_enum.Direct,
       UmaSkill.ability_usage_enum.Direct,
     ],

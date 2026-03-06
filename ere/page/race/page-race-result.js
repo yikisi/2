@@ -8,6 +8,8 @@ const {
 const sys_sim_race = require('#/system/race/sys-simulate-race');
 const { sys_change_lust } = require('#/system/sys-calc-base-cflag');
 
+const { get_track_full_name } = require('#/page/race/get-track-name');
+
 const { sort_list } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
@@ -236,7 +238,7 @@ async function page_race_result(contestants, info, race_id) {
                 content: [
                   ...(info.track !== void 0
                     ? i18n().get_ui_race_result_summary_header(
-                        di18n.race.get_track_name(info.track),
+                        get_track_full_name(info.track),
                         info.get_colored_name_with_class(),
                       )
                     : [info.name]),

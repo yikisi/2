@@ -127,8 +127,13 @@ module.exports = {
    * @returns {TextContent}
    */
   get_order_report(chara, rank, no) {
-    return [`第 ${rank} 位是 ${no} 号`, chara];
+    return [`第 ${rank} 位是 ${no} 号 `, chara];
   },
+  full_speed_push_reports: [
+    (contestants) => [...contestants, ' 开始全力冲刺！'],
+    (contestants) => [...contestants, ' 为了最后的胜利开始继续加速！'],
+    (contestants) => ['超越极限！', ...contestants, ' 仍然在加速！'],
+  ],
   lost_stamina_reports: [
     (contestants) => [...contestants, '，失速！'],
     (contestants) => [
@@ -217,9 +222,7 @@ module.exports = {
    * @param {PrintedSpan} chara
    * @returns {TextContent}
    */
-  get_final_push_report(chara) {
-    return [chara, ' 开始最终冲刺！'];
-  },
+  get_final_push_report: (chara) => [chara, ' 开始最终冲刺！'],
   /**
    * @param {TextContent} contestants
    * @param {boolean} at_same_time
@@ -228,9 +231,7 @@ module.exports = {
   get_final_push_multi_report(contestants, at_same_time) {
     return [
       ...contestants,
-      ' ',
-      at_same_time ? '' : '几乎',
-      '同时开始最终冲刺！',
+      at_same_time ? ' 同时开始最终冲刺！' : ' 几乎同时开始最终冲刺！',
     ];
   },
   /**

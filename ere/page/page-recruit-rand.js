@@ -65,7 +65,7 @@ async function print_rec_page() {
   today_list = today_list.filter((e, i, l) => e && l.indexOf(e) === i);
   if (today_list.length > 6) {
     today_list.splice(
-      today_list.findIndex((e) => stay_list.indexOf(e) === -1),
+      today_list.findIndex((e) => !stay_list.includes(e)),
       1,
     );
   }

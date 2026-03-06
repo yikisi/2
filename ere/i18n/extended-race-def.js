@@ -38,16 +38,6 @@ const _race_def = {
         .race.summary_tip_template.replace('%RACE%', race)
         .replace('%WIN%', win),
     }),
-    get_track_name(track) {
-      const _ = i18n().race;
-      if (track >= 0) {
-        return _.track_name_template.replace(
-          '%NAME%',
-          _race_def.race.n_track[track],
-        );
-      }
-      return _.t_playground;
-    },
   },
   skill: {
     get n_type() {

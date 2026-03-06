@@ -1,5 +1,7 @@
 const era = require('#/era-electron');
 
+const { get_track_full_name } = require('#/page/race/get-track-name');
+
 const di18n = require('#/i18n/extended-def');
 const { i18n, lan } = require('#/i18n/selector');
 
@@ -13,7 +15,7 @@ async function print_race_track_chart(info) {
     i18n()
       .race.chart_title_template.replace(
         '%TRACK%',
-        di18n.race.get_track_name(info.track),
+        get_track_full_name(info.track),
       )
       .replace('%GROUND%', di18n.n_ground[info.ground])
       .replace('%SPAN%', info.span.toLocaleString(_lan))

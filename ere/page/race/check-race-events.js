@@ -15,6 +15,7 @@ const {
 const { sys_check_remote } = require('#/system/sys-calc-chara-param');
 
 const page_ero = require('#/page/page-ero');
+const { get_track_full_name } = require('#/page/race/get-track-name');
 
 const { check_edu_script } = require('#/event/edu/edu-factory');
 const { check_rec_script } = require('#/event/rec/rec-factory');
@@ -38,7 +39,6 @@ const { location_enum } = require('#/data/locations');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum } = require('#/data/race/race-const');
 
-const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 const rec_list = {};
@@ -90,7 +90,7 @@ async function check_race_events(race, info, team) {
       await print_title_with_kojo(i18n().kojo[303].recruit, 'rec_0', etsuko, {
         ...generate_dictionary(303, { phy: !0 }),
         CHARA_ACTUAL: etsuko.actual_name,
-        TRACK: di18n.race.get_track_name(info.track),
+        TRACK: get_track_full_name(info.track),
       });
       set('flag:初见URA颁奖', 2);
       set('cflag:303:招募状态', -1);

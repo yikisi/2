@@ -283,6 +283,7 @@ function sub_simulate_report(events, in_race_list, info, race_id) {
               ),
             );
             break;
+          case race_event_enum.full_speed_push:
           case race_event_enum.orgasm:
           case race_event_enum.loc_mind_nige_ex:
           case race_event_enum.loc_mind_other_ex:

@@ -96,7 +96,6 @@ class ConditionParams {
   random_lot;
   remain_distance;
   rotation;
-  // TODO
   run_at_full_speed_random;
   running_style;
   running_style_count_nige_otherself;

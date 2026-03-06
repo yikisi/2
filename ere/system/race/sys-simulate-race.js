@@ -788,34 +788,45 @@ function sys_sim_race(list_chara, info, race_id, shown = true) {
         Math.max(uma.race.stamina - uma.race.staminaCost, 0),
         uma.base.stamina,
       );
-      if (uma.race.stamina === 0) {
-        stamina_before > 0 &&
-          report_cache.at(-1).push({ e: race_event_enum.lost_stamina, u: uma });
-        uma.race.velocityIdeal =
-          uma.base.velocityMin + uma.race.velocityIdealBuff;
-        uma.race.acceleration = race_de_acc[4];
+      if (
+        uma.race.stamina > 0 &&
+        uma.race.conditionParams.run_at_full_speed_random > 0 &&
+        uma.race.velocityReal >= uma.race.velocityIdeal
+      ) {
+        uma.race.acceleration =
+          uma.base.accel_full_speed + uma.race.accel_full_speed_buff;
       } else {
-        uma.race.velocityIdeal += uma.race.velocityIdealBuff;
-        if (uma.race.loc_mind > 0) {
-          uma.race.velocityIdeal *=
-            loc_mind_multiply_velocity_ideal[
-              (uma.style > 0) * 3 + uma.race.loc_mind
-            ];
-        }
-        uma.race.velocityIdeal = Math.max(
-          Math.min(uma.race.velocityIdeal, 30),
-          uma.base.velocityMin,
-        );
-        if (uma.race.velocityReal > uma.race.velocityIdeal) {
-          if (uma.race.loc_mind === 2 && uma.race.style > 0) {
-            uma.race.acceleration = race_de_acc[3];
-          } else {
-            uma.race.acceleration =
-              race_de_acc[Math.min(uma.race.conditionParams.phase, 2)];
+        if (uma.race.stamina > 0) {
+          uma.race.velocityIdeal += uma.race.velocityIdealBuff;
+          if (uma.race.loc_mind > 0) {
+            uma.race.velocityIdeal *=
+              loc_mind_multiply_velocity_ideal[
+                (uma.style > 0) * 3 + uma.race.loc_mind
+              ];
           }
+          uma.race.velocityIdeal = Math.max(
+            Math.min(uma.race.velocityIdeal, 30),
+            uma.base.velocityMin,
+          );
+          if (uma.race.velocityReal > uma.race.velocityIdeal) {
+            if (uma.race.loc_mind === 2 && uma.race.style > 0) {
+              uma.race.acceleration = race_de_acc[3];
+            } else {
+              uma.race.acceleration =
+                race_de_acc[Math.min(uma.race.conditionParams.phase, 2)];
+            }
+          }
+        } else {
+          stamina_before > 0 &&
+            report_cache
+              .at(-1)
+              .push({ e: race_event_enum.lost_stamina, u: uma });
+          uma.race.velocityIdeal =
+            uma.base.velocityMin + uma.race.velocityIdealBuff;
+          uma.race.acceleration = race_de_acc[4];
         }
+        uma.race.acceleration += uma.race.accelerationBuff;
       }
-      uma.race.acceleration += uma.race.accelerationBuff;
     });
     if (timer >= next_report) {
       if (
@@ -868,7 +879,7 @@ function sys_sim_race(list_chara, info, race_id, shown = true) {
       (statistics[k] = statistics[k].map((e) => {
         e.data = e.data
           .filter((_, i, l) => i % frame_rate === 0 || i === l.length - 1)
-          .map((v) => v.toFixed(1));
+          .map((v) => v.toFixed(2));
         return e;
       })),
   );

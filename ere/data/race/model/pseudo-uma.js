@@ -130,6 +130,8 @@ class PseudoUma {
   tempPop;
   // 各个需重复使用的计算基底
   base = {
+    // 全力冲刺基础加速度
+    accel_full_speed: 0,
     acceleration: 0,
     // 五项属性方差
     attr_err: 0,
@@ -153,9 +155,11 @@ class PseudoUma {
   };
   // 比赛时信息
   race = {
+    // 全力冲刺加速度加成
+    accel_full_speed_buff: 0,
     acceleration: 0,
     accelerationBuff: 0,
-    competeFightAim: undefined,
+    competeFightAim: void 0,
     competeFightTimer: 0,
     conditionParams: new ConditionParams(),
     // 下坡计时
@@ -165,10 +169,10 @@ class PseudoUma {
     lane_move_buff: 0,
     loc_mind: 0,
     location: 0,
-    locationPlanRush: undefined,
+    locationPlanRush: void 0,
     middleBlockedContinueTime: 0,
     order_change: 0,
-    overtakeAim: undefined,
+    overtakeAim: void 0,
     slope: 0,
     stamina: 0,
     staminaCost: 0,

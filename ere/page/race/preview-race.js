@@ -2,6 +2,7 @@ const era = require('#/era-electron');
 
 const { get_sex_acceptable } = require('#/system/ero/sys-calc-ero-status');
 
+const { get_track_name } = require('#/page/race/get-track-name');
 const print_race_track_chart = require('#/page/race/race-track-chart');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -21,24 +22,14 @@ const {
   get_attr_rank,
   get_rank_level,
 } = require('#/data/info-generator');
-const { track_enum } = require('#/data/race/model/race-info');
 
 const di18n = require('#/i18n/extended-def');
-const { __, i18n, lan } = require('#/i18n/selector');
+const { i18n, lan } = require('#/i18n/selector');
 
 const item_buff_key = 'slaanesh';
 const item_debuff_key = 'item';
 
 const pop_mark = ['➖', '◎', '◯', '▲', '△', '△'];
-
-/**
- * @param {number} track
- * @returns {string}
- */
-function get_track_name(track) {
-  const key = Object.entries(track_enum).find((t) => t[1] === track)[0];
-  return __(`race.t_${key}`);
-}
 
 /** @param {PseudoUma} chara */
 function generate_attribute_info(chara) {

@@ -232,7 +232,7 @@ function sub_simulate_skill(
       uma.list_skill.forEach((e) => {
         for (let i = 0; i < e.ability_time.length; ++i) {
           if (
-            e.ability_time[i] &&
+            e.ability_time[i] > 0 &&
             e.data.ability_time_usages[i] ===
               ability_time_usage_enum.order_change &&
             uma.race.order_change++ < 3
@@ -444,6 +444,9 @@ function sub_simulate_skill(
       uma.race.velocityIdeal += uma.factorFinal.vIdealAdd;
       uma.race.staminaCost *= uma.factorFinal.sCostMult;
     }
+    // 重置全力冲刺基础加速度
+    uma.base.accel_full_speed =
+      (0.068 * uma.race.acceleration) / (race_info.span / 1000) ** 1.5;
     // 每个赛段的随机浮动
     uma.race.velocityIdeal +=
       uma.factorPhase.vRand[Math.min(uma.race.conditionParams.phase, 2)];
@@ -529,6 +532,16 @@ function sub_simulate_skill(
     }
     if (uma.race.conditionParams.is_lastspurt > 0) {
       uma.race.velocityIdeal = uma.race.velocityPlanRush;
+      if (
+        !uma.race.conditionParams.run_at_full_speed_random &&
+        uma.race.velocityPlanRush === uma.base.velocityMaxRush &&
+        uma.race.velocityReal >= uma.race.velocityIdeal
+      ) {
+        report_cache
+          .at(-1)
+          .push({ e: race_event_enum.full_speed_push, u: uma });
+        uma.race.conditionParams.run_at_full_speed_random = 1;
+      }
     }
     // 追比
     if (uma.race.competeFightAim) {
@@ -646,6 +659,13 @@ function sub_simulate_skill(
                         }
                       }
                     });
+                  break;
+                case ability_type_enum.AccelFullSpeed:
+                  skill.aims[i][j].forEach(
+                    (u) =>
+                      (u.race.accel_full_speed_buff -=
+                        skill.values[i][j] * 0.1),
+                  );
               }
             }
             skill.aims[i] = [];
@@ -925,6 +945,13 @@ function sub_simulate_skill(
                   break;
                 case ability_type_enum.Genesis:
                 case ability_type_enum.TargetLane:
+                  break;
+                case ability_type_enum.AccelFullSpeed:
+                  skill.aims[i][j].forEach(
+                    (u) =>
+                      (u.race.accel_full_speed_buff +=
+                        skill.values[i][j] * 0.1),
+                  );
                   break;
                 case ability_type_enum.ShareOrgasm:
                   skill.aims[i][j].forEach((e) =>

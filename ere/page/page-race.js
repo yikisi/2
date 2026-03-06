@@ -22,6 +22,7 @@ const sys_get_random_event = require('#/system/sys-get-random-event');
 
 const check_race_events = require('#/page/race/check-race-events');
 const fill_race_weather_and_mess = require('#/page/race/fill-race-weather-and-mess');
+const { get_track_full_name } = require('#/page/race/get-track-name');
 const page_race_result = require('#/page/race/page-race-result');
 const preview_race = require('#/page/race/preview-race');
 const select_contestants = require('#/page/race/select-contestants');
@@ -60,7 +61,6 @@ const {
 } = require('#/data/race/race-const');
 const { attr_enum } = require('#/data/train-const');
 
-const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 /**
@@ -101,7 +101,7 @@ function page_race_header(_info, is_grand_live) {
             fontWeight: 'bold',
             width: 8,
           },
-          content: di18n.race.get_track_name(_info.track),
+          content: get_track_full_name(_info.track),
           type: 'text',
         },
       ],

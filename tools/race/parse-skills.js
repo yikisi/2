@@ -154,7 +154,7 @@ const added_chara_skills = [
 // 这些技能的效果都根据游戏修改过，所以在从数据库中获取描述时需要跳过
 const skip_translate_skills = [
   101321, 210071, 210072, 210291, 210301, 210321, 210341, 210351, 210361,
-  210371,
+  210371, 210381,
 ];
 
 const used_skill_condition_dict = {

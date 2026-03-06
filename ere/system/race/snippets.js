@@ -599,6 +599,12 @@ module.exports = {
           }
         }
         break;
+      case ability_usage_enum.MultiplyDisMedium:
+        // 中距离 +0.2 速度
+        if (uma.race.conditionParams.distance_type === 3) {
+          skill.values[i][j] += 0.2;
+        }
+        break;
       case ability_usage_enum.MultiplyCount:
         skill.values[i][j] =
           skill.data.ability_values[i][j] * (0.98 + 0.01 * count);
