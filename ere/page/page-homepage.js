@@ -1,5 +1,6 @@
 ﻿const era = require('#/era-electron');
 
+const sys_calc_security_level = require('#/system/basement/sys-calc-security-level');
 const sys_handle_escape_basement = require('#/system/basement/sys-handle-escape-basement');
 const {
   sys_check_cuckold,
@@ -345,9 +346,9 @@ module.exports = async () => {
           Math.min(23, count + 6) * 60,
           24 * 60 - 1,
         );
-        const owners = basement_owners.get(),
-          owner = owners[0],
-          owner_marks = LifeEventMarks.get_marks(owner);
+        const owners = basement_owners.get();
+        const owner = owners[0];
+        const owner_marks = LifeEventMarks.get_marks(owner);
         basement_owners.clear();
         basement_owners.push(owner);
         era.add('exp:0:监禁次数', 1);
@@ -356,14 +357,7 @@ module.exports = async () => {
         basement_queue.add_action(
           new BasementAction(0, my_life_marks.b_timer, action_type_enum.get_up),
         );
-        owner_marks.b_s_level = Math.max(
-          Math.floor(
-            (era.get(`love:${owner}`) * (era.get('flag:极端行为限制') || 1) -
-              era.get(`relation:${owner}:0`)) /
-              200,
-          ),
-          1,
-        );
+        owner_marks.b_s_level = sys_calc_security_level(owner, 1);
         my_life_marks.b_now = my_life_marks.b_enhance = Math.max(
           owner_marks.b_s_level + get_random_value(-1, 1),
           1,

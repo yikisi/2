@@ -115,7 +115,7 @@ class CustomizedEro extends CustomizedEvent {
    * 睡奸惊醒
    * @param {number} supporter
    */
-  async raping_start(supporter) {
+  async raping_start(supporter = 0) {
     let temp;
     if (
       era.get('flag:惩戒力度') === 3 &&

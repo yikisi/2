@@ -656,6 +656,15 @@ class I18nEntry {
     next,
   ];
 
+  bs_info_template = '昏暗的房间……%DURABILITY%……';
+  bs_no_one_info_template = '昏暗、空无一人的房间……%DURABILITY%……';
+  ui_bs_durability_0 = '但完全没有防备';
+  ui_bs_durability_1 = '但看来只需略施小计';
+  ui_bs_durability_2 = '大门似乎很难打开';
+  ui_bs_durability_3 = '存在大量棘手的障碍';
+  ui_bs_durability_4 = '所有的设施都坚不可摧';
+  ui_bs_durability_5 = '任何反抗对这里都不痛不痒';
+
   ui_bs_flatter = '虚与委蛇';
   ui_bs_unlock = '尝试脱困';
   ui_bs_relax = '只是静坐';
@@ -666,6 +675,9 @@ class I18nEntry {
   ui_bs_battle = '正面反抗';
   ui_bs_release = '请求释放';
   ui_bs_clock = '询问时间';
+  ui_bs_info = '个人情报';
+  ui_bs_chara_info = '对方情报';
+  ui_bs_guide = '逃生指南';
 
   ui_save_game_header = '要保存至哪个栏位？';
   ui_auto_save_template = '%NAME% (自动存档)';

@@ -23,7 +23,7 @@ class LifeEventMarks extends PersonalEventMarks {
   b_cd;
   // 病娇二段转化
   yandere;
-  // 地下室初始牢固程度
+  // 地下室预期牢固程度
   b_enhance;
   // 地下室牢固程度
   b_now;

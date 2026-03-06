@@ -208,6 +208,188 @@ class I18nTimon {
   /** @param {string} uma */
   get_it_no_chara_in_recruit = (uma) => ['【训练场没有引人注目的', uma, '】'];
 
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} you
+   * @returns {TextContent}
+   */
+  get_it_chara_rape_in_sleeping = (chara, you) => [
+    '【强烈的刺激使 ',
+    you.get_colored_name(),
+    ' 从睡梦中惊醒，发现 ',
+    chara.get_colored_name(),
+    ' 伏在身上！】',
+  ];
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} you
+   * @param {CharaTalk} supporter
+   * @returns {TextContent}
+   */
+  get_it_multi_rape_in_sleeping = (chara, you, supporter) => [
+    '【强烈的刺激使 ',
+    you.get_colored_name(),
+    ' 从睡梦中惊醒，发现 ',
+    chara.get_colored_name(),
+    ' 与 ',
+    supporter.get_colored_name(),
+    ' 伏在身上！】',
+  ];
+
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} you
+   */
+  get_it_flatter = (chara, you) => [
+    '【',
+    you.get_colored_name(),
+    ' 尝试讨好 ',
+    chara.get_colored_name(),
+    '】',
+  ];
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} you
+   */
+  get_it_flatter_masters = (chara, you) => [
+    '【',
+    you.get_colored_name(),
+    ' 尝试讨好 ',
+    chara.sex,
+    '们】',
+  ];
+  /** @param {CharaTalk} you */
+  get_it_unlock_success = (you) => [
+    you.get_colored_name(),
+    ' 破解了一层机关！',
+  ];
+  /** @param {CharaTalk} you */
+  get_it_unlock_escape = (you) => [
+    you.get_colored_name(),
+    ' 成功解除了机关，逃离了地下室！',
+  ];
+  /** @param {CharaTalk} you */
+  get_it_bs_sleep = (you) => [
+    you.get_colored_name(),
+    ' 决定躺到床上小睡片刻恢复精神……',
+  ];
+  /** @param {CharaTalk} you */
+  get_it_bs_eat = (you) => [
+    '地下室主人给 ',
+    you.get_colored_name(),
+    ' 留下了一些粮食，',
+    you.get_colored_name(),
+    ' 决定稍微食用一点……',
+  ];
+  /** @param {CharaTalk} you */
+  get_it_bs_eat_uma_s = (you) => [
+    you.get_colored_name(),
+    ' 突然感到心跳加快，热血上涌，同时伴随着强烈的眩晕……',
+  ];
+  it_bs_strike_success = '【偷袭成功】';
+  it_bs_strike_fail = '【偷袭失败】';
+  it_bs_battle_success = '【反抗成功】';
+  it_bs_battle_fail = '【反抗失败】';
+  it_bs_battle_escape = '【解除机关成功】';
+  it_bs_battle_prison = '【解除机关失败】';
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} you
+   */
+  get_it_bs_release = (chara, you) => [
+    '【',
+    you.get_colored_name(),
+    ' 请求 ',
+    chara.get_colored_name(),
+    ' 释放自己】',
+  ];
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} you
+   */
+  get_it_bs_clock = (chara, you) => [
+    '【',
+    you.get_colored_name(),
+    ' 向 ',
+    chara.get_colored_name(),
+    ' 询问当前的时间】',
+  ];
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} you
+   */
+  get_it_bs_find_escape = (chara, you) => [
+    '【',
+    you.get_colored_name(),
+    ' 被 ',
+    chara.get_colored_name(),
+    ' 逮个正着！】',
+  ];
+  /** @param {CharaTalk} chara */
+  get_it_bs_awake = (chara) => ['【', chara.get_colored_name(), ' 醒来了】'];
+  /** @param {CharaTalk} chara */
+  get_it_bs_back = (chara) => ['【', chara.get_colored_name(), ' 回来了】'];
+  it_bs_rescue = '【救援到达】';
+  /** @param {CharaTalk} chara */
+  get_it_bs_fall_asleep = (chara) => [
+    '【',
+    chara.get_colored_name(),
+    ' 因精力不济而昏睡】',
+  ];
+  /** @param {CharaTalk} chara */
+  get_it_bs_chara_eat = (chara) => [
+    '【',
+    chara.get_colored_name(),
+    ' 吃了一些食物】',
+  ];
+  /** @param {CharaTalk} chara */
+  get_it_bs_chara_sleep = (chara) => [
+    '【',
+    chara.get_colored_name(),
+    ' 躺在床上睡着了】',
+  ];
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} you
+   */
+  get_it_bs_lure = (chara, you) => [
+    '【',
+    chara.get_colored_name(),
+    ' 挑逗了 ',
+    you.get_colored_name(),
+    '】',
+  ];
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} you
+   */
+  get_it_bs_rape = (chara, you) => [
+    '【',
+    chara.get_colored_name(),
+    ' 决定强奸 ',
+    you.get_colored_name(),
+    '】',
+  ];
+  /** @param {CharaTalk} chara */
+  get_it_bs_fix = (chara) => [
+    '【',
+    chara.get_colored_name(),
+    ' 开始加固地下室】',
+  ];
+  /** @param {CharaTalk} chara */
+  get_it_bs_chara_leave = (chara) => [
+    '【',
+    chara.get_colored_name(),
+    ' 离开了】',
+  ];
+  it_bs_final_escape = '【成功回到了训练室】';
+  /** @param {CharaTalk} chara */
+  get_it_bs_downgrade_security = (chara) => [
+    '【',
+    chara.get_colored_name(),
+    ' 的警戒心放松了】',
+  ];
+
   bt_god_love_event_fuck_me = '自己怀上神胎';
   bt_god_love_event_preg_me = '将腹中胎儿变成神胎';
 

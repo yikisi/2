@@ -8,15 +8,18 @@ const {
   end_ero_and_show_result,
   init_ero,
 } = require('#/system/ero/sys-prepare-ero');
+const global_achievement = require('#/system/global/sys-calc-achievement');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
 const page_ero = require('#/page/page-ero');
 
+const { get_custom_ero } = require('#/event/ero/ero-factory');
+
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { ero_hooks } = require('#/data/event/ero-hooks');
-const { get_custom_ero } = require('#/event/ero/ero-factory');
-const global_achievement = require('#/system/global/sys-calc-achievement');
+
+const { i18n } = require('#/i18n/selector');
 
 const debug = false;
 const default_my_filter = new Array(5).fill(false);
@@ -26,7 +29,9 @@ const default_my_filter = new Array(5).fill(false);
  * @param {number} [supporter=0]
  */
 async function sys_rape_in_sleeping(cid, supporter = 0) {
-  era.logger.debug(`角色 ${cid} 睡奸发生！`);
+  era.logger.debug(
+    `角色 ${[cid, supporter].filter((e) => e).join(', ')} 睡奸发生！`,
+  );
   begin_and_init_ero(0, cid);
   era.set('tflag:主导权', cid);
   era.set('tflag:当前对手', cid);
@@ -75,18 +80,17 @@ async function sys_rape_in_sleeping(cid, supporter = 0) {
     ) {
       global_achievement.et_tu = 1;
     }
-    await era.printAndWait([
-      '【强烈的刺激使 ',
-      get_chara_talk(0).get_colored_name(),
-      ' 从睡梦中惊醒，发现 ',
-      get_chara_talk(cid).get_colored_name(),
-      ...(supporter > 0
-        ? [' 与 ', get_chara_talk(supporter).get_colored_name()]
-        : []),
-      ' 伏在身上！】',
-    ]);
+    await era.printAndWait(
+      (supporter > 0
+        ? i18n().timon.get_it_multi_rape_in_sleeping
+        : i18n().timon.get_it_chara_rape_in_sleeping)(
+        get_chara_talk(cid),
+        get_chara_talk(0),
+        get_chara_talk(supporter),
+      ),
+    );
     await get_custom_ero(cid).raping_start(supporter);
-    await page_ero(undefined, true);
+    await page_ero(void 0, true);
   }
   await end_ero_and_show_result(wake_up);
   era.endTrain();

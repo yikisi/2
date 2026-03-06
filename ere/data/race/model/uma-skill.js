@@ -264,14 +264,14 @@ class UmaSkill {
       title += `\n${tags.join('\n')}`;
     }
     return [
-      { content: '【', color: border_color },
+      { content: i18n().skill.borders[0], color: border_color },
       {
         color: name_color,
         content: this.name,
         fontWeight: 'bold',
         title,
       },
-      { content: '】', color: border_color },
+      { content: i18n().skill.borders[1], color: border_color },
     ];
   }
 }

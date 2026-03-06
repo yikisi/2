@@ -35,6 +35,7 @@ class I18nSkills {
   t_laneMove = '突围';
   t_ero = '调教';
 
+  borders = ['【', '】'];
   tag_template = '＜%TAG%＞';
   title_template = '【%NAME%】（%TYPE% · %RARITY%）';
   learnt = '[已习得]';

@@ -37,7 +37,7 @@ class BasementOwners {
    * @returns {number|number[]}
    */
   get(index) {
-    if (index !== undefined) {
+    if (index !== void 0) {
       return this.#obj[index];
     }
     return this.#obj;

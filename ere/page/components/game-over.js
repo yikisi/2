@@ -132,7 +132,7 @@ async function game_over(again) {
             era.setWidth(24);
             era.setOffset(0);
             era.println();
-            if (era.get('cflag:0:种族')) {
+            if (era.get('cflag:0:种族') > 0) {
               await era.printAndWait([me.get_colored_name(), ' 遭受了改造！']);
             } else {
               era.set(

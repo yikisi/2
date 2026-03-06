@@ -36,16 +36,8 @@ const basement_owners = require('#/data/event/basement-owners');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { attr_enum } = require('#/data/train-const');
 
-const { i18n } = require('#/i18n/selector');
-
-const basement_desc = [
-  '但完全没有防备',
-  '但看来只需略施小计',
-  '大门似乎很难打开',
-  '存在大量棘手的障碍',
-  '所有的设施都坚不可摧',
-  '任何反抗对这里都不痛不痒',
-];
+const { __, i18n } = require('#/i18n/selector');
+const sys_calc_security_level = require('#/system/basement/sys-calc-security-level');
 
 /**
  * @param {[]} info_list
@@ -64,7 +56,7 @@ function handle_push_info(info_list, ...info) {
  * @param {boolean} [is_float]
  * @returns {number}
  */
-function get_random_value(min, max, is_float) {
+function get_random_value(min, max, is_float = true) {
   if (min >= max) {
     return min;
   }
@@ -90,12 +82,13 @@ function page_header() {
         }),
         {
           config: { width: 2 },
-          content: '状态',
+          content: i18n().tb_status.n_status,
           type: 'text',
         },
         {
           config: { width: 22 },
-          content: status_list.length > 0 ? status_list : '正常',
+          content:
+            status_list.length > 0 ? status_list : i18n().tb_status.normal,
           type: 'text',
         },
       ],
@@ -104,13 +97,10 @@ function page_header() {
     {
       columns: [
         {
-          content: [
-            '位于 ',
-            {
-              content: '地下室',
-              fontWeight: 'bold',
-            },
-          ],
+          content: i18n().get_ui_hd_location({
+            content: i18n().location.basement,
+            fontWeight: 'bold',
+          }),
           type: 'text',
         },
       ],
@@ -162,7 +152,7 @@ module.exports = async (_, save_and_next_week, flags) => {
     ),
   ];
   if (chara_list.length > 1) {
-    print_cur_chara_info(chara_list[1], undefined, chara_list[2]);
+    print_cur_chara_info(chara_list[1], void 0, chara_list[2]);
   }
   let strike = false,
     is_awake = 0;
@@ -189,16 +179,18 @@ module.exports = async (_, save_and_next_week, flags) => {
     }
     handle_push_info(
       basement_info,
-      '昏暗的房间……',
-      basement_desc[my_life_marks.b_now],
-      '……',
+      i18n().bs_info_template.replace(
+        '%DURABILITY%',
+        __(`ui_bs_durability_${my_life_marks.b_now}`),
+      ),
     );
   } else {
     handle_push_info(
       basement_info,
-      '昏暗、空无一人的房间……',
-      basement_desc[my_life_marks.b_now],
-      '……',
+      i18n().bs_no_one_info_template.replace(
+        '%DURABILITY%',
+        __(`ui_bs_durability_${my_life_marks.b_now}`),
+      ),
     );
   }
   const action_list = [];
@@ -208,17 +200,13 @@ module.exports = async (_, save_and_next_week, flags) => {
         action_time = get_random_value(30, 60);
         my_life_marks.b_time_buff = -1;
         const chara = get_chara_talk(chara_list[1]);
-        await era.printAndWait([
-          '【',
-          me.get_colored_name(),
-          ' 尝试讨好',
-          ...(is_awake === 2
-            ? [chara.sex, '们']
-            : [' ', chara.get_colored_name()]),
-          '】',
-        ]);
+        await era.printAndWait(
+          (is_awake === 2
+            ? i18n().timon.get_it_flatter_masters
+            : i18n().timon.get_it_flatter)(chara, me),
+        );
         await get_custom_basement(chara_list[1]).flatter(
-          is_awake === 2 ? chara_list[2] : undefined,
+          is_awake === 2 && chara_list[2],
         );
         chara_list
           .slice(1)
@@ -259,18 +247,12 @@ module.exports = async (_, save_and_next_week, flags) => {
         ) {
           my_life_marks.b_now--;
           if (my_life_marks.b_now < 0) {
-            await era.printAndWait([
-              me.get_colored_name(),
-              ' 成功解除了机关，逃离了地下室！',
-            ]);
+            await era.printAndWait(i18n().timon.get_it_unlock_escape(me));
             basement_owners.for_each((e) =>
               sys_change_pressure(e, get_random_value(100, 500)),
             );
           } else {
-            await era.printAndWait([
-              me.get_colored_name(),
-              ' 破解了一层机关！',
-            ]);
+            await era.printAndWait(i18n().timon.get_it_unlock_success(me));
           }
         } else {
           await era.printAndWait([me.get_colored_name(), ' 未能破解机关……']);
@@ -291,10 +273,7 @@ module.exports = async (_, save_and_next_week, flags) => {
       async h() {
         action_time = get_random_value(45, 90);
         era.set('status:0:沉睡', 1);
-        await era.printAndWait([
-          me.get_colored_name(),
-          ' 决定躺到床上小睡片刻恢复精神……',
-        ]);
+        await era.printAndWait(i18n().timon.get_it_bs_sleep(me));
       },
       n: i18n().ui_bs_sleep,
     },
@@ -303,18 +282,9 @@ module.exports = async (_, save_and_next_week, flags) => {
     action_list.push({
       async h() {
         action_time = get_random_value(5, 10);
-        await era.printAndWait([
-          '地下室主人给 ',
-          me.get_colored_name(),
-          ' 留下了一些粮食，',
-          me.get_colored_name(),
-          ' 决定稍微食用一点……',
-        ]);
+        await era.printAndWait(i18n().timon.get_it_bs_eat(me));
         if (my_life_marks.b_food_medicine) {
-          await era.printAndWait([
-            me.get_colored_name(),
-            ' 突然感到心跳加快，热血上涌，同时伴随着强烈的眩晕……',
-          ]);
+          await era.printAndWait(i18n().timon.get_it_bs_eat_uma_s(me));
           era.set('status:0:马跳S', 1);
           action_time = Math.ceil(
             get_random_value(240, 360) *
@@ -373,13 +343,13 @@ module.exports = async (_, save_and_next_week, flags) => {
           ) {
             LifeEventMarks.get_marks(chara_list[1]).b_escape =
               escape_enum.strike;
-            era.print('【偷袭成功】');
+            era.print(i18n().timon.it_bs_strike_success);
             await get_custom_basement(chara_list[1]).strike_success();
             my_life_marks.b_status = 1 << basement_status_enum.escape;
             my_life_marks.b_now = -1;
             action_time = get_random_value(5, 10);
           } else {
-            era.print('【偷袭失败】');
+            era.print(i18n().timon.it_bs_strike_fail);
             await get_custom_basement(chara_list[1]).strike_fail();
           }
           if (my_life_marks.b_now >= 0) {
@@ -432,10 +402,10 @@ module.exports = async (_, save_and_next_week, flags) => {
               get_random_value(0, 100) <
                 100 * sex_buff * sys_get_strength_ratio_in_fight(0, cid) && win;
             if (win) {
-              era.print('【反抗成功】');
+              era.print(i18n().timon.it_bs_battle_success);
               await get_custom_basement(cid).battle_success();
             } else {
-              era.print('【反抗失败】');
+              era.print(i18n().timon.it_bs_battle_fail);
               await get_custom_basement(cid).battle_fail();
               break;
             }
@@ -453,13 +423,13 @@ module.exports = async (_, save_and_next_week, flags) => {
                 (e) =>
                   (LifeEventMarks.get_marks(e).b_escape = escape_enum.beat),
               );
-              era.print('【解除机关成功】');
+              era.print(i18n().timon.it_bs_battle_escape);
               await get_custom_basement(beat_list[0]).battle_escape();
               my_life_marks.b_status = 1 << basement_status_enum.escape;
               my_life_marks.b_now = -1;
               action_time = get_random_value(10, 15);
             } else {
-              era.print('【解除机关失败】');
+              era.print(i18n().timon.it_bs_battle_prison);
               await get_custom_basement(beat_list[0]).battle_prison();
             }
             era.drawLine();
@@ -496,16 +466,13 @@ module.exports = async (_, save_and_next_week, flags) => {
       action_list.push({
         async h() {
           action_time = get_random_value(5, 10);
-          era.print([
-            '【',
-            get_chara_talk(0).get_colored_name(),
-            ' 请求释放自己】',
-          ]);
-          if (
-            era.get(`relation:${chara_list[1]}:0`) >
-            (era.get('flag:极端行为限制') || 1) *
-              era.get(`love:${chara_list[1]}`)
-          ) {
+          era.print(
+            i18n().timon.get_it_bs_release(
+              get_chara_talk(chara_list[1]),
+              get_chara_talk(0),
+            ),
+          );
+          if (sys_calc_security_level(chara_list[1]) < 0) {
             await get_custom_basement(chara_list[1]).ask_release_agree();
             my_life_marks.b_now = -1;
             LifeEventMarks.get_marks(chara_list[1]).b_escape = -1;
@@ -521,13 +488,12 @@ module.exports = async (_, save_and_next_week, flags) => {
     action_list.push({
       async h() {
         action_time = get_random_value(1, 5);
-        era.print([
-          '【',
-          get_chara_talk(0).get_colored_name(),
-          ' 向 ',
-          get_chara_talk(chara_list[1]).get_colored_name(),
-          ' 询问当前的时间】',
-        ]);
+        era.print(
+          i18n().timon.get_it_bs_clock(
+            get_chara_talk(chara_list[1]),
+            get_chara_talk(0),
+          ),
+        );
         await get_custom_basement(chara_list[1]).ask_time(
           my_life_marks.b_timer / minutes_in_a_day + 1,
           Math.floor((my_life_marks.b_timer % minutes_in_a_day) / 60),
@@ -556,36 +522,38 @@ module.exports = async (_, save_and_next_week, flags) => {
       {
         accelerator: 400,
         config: { width: 6 },
-        content: '个人情报',
+        content: i18n().ui_bs_info,
         type: 'button',
       },
-      chara_list.length > 1
-        ? {
-            accelerator: 401,
-            config: { width: 6 },
-            content: '对方情报',
-            type: 'button',
-          }
-        : undefined,
+      ...(chara_list.length > 1
+        ? [
+            {
+              accelerator: 401,
+              config: { width: 6 },
+              content: i18n().ui_bs_chara_info,
+              type: 'button',
+            },
+          ]
+        : []),
       {
         accelerator: 500,
         config: { width: 6 },
-        content: '逃生指南',
+        content: i18n().ui_bs_guide,
         type: 'button',
       },
       {
         accelerator: 900,
         config: { width: 6 },
-        content: '保存进度',
+        content: i18n().ui_save_game,
         type: 'button',
       },
       {
         accelerator: 901,
         config: { width: 6 },
-        content: '加载存档',
+        content: i18n().ui_load_game,
         type: 'button',
       },
-    ].filter((e) => e),
+    ],
   );
   const ret = await era.input();
   switch (ret) {
