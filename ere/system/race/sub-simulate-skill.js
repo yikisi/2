@@ -26,8 +26,8 @@ const {
 } = require('#/data/race/race-sim-const');
 const { i18n } = require('#/i18n/selector');
 
-let top_lane = undefined,
-  top_slope = 0;
+let top_lane = void 0;
+let top_slope = 0;
 
 /**
  * @param {PseudoUma[]} list_chara
@@ -459,7 +459,7 @@ function sub_simulate_skill(
       let planVelocity = uma.base.velocityMaxRush;
       let planStaminaCost =
         (20 / 144) *
-        Math.pow(planVelocity - uma.base.velocityIdeal + 12, 2) *
+        (planVelocity - uma.base.velocityIdeal + 12) ** 2 *
         mod_stamina_cost_mess *
         uma.factorFinal.sCostMult;
       // 体力足够以最大冲刺速度跑完则直接冲
@@ -480,7 +480,7 @@ function sub_simulate_skill(
           uma.factorFinal.sCostMult;
         // 提出冲刺计划
         let listPlan = [];
-        while (planVelocity > endSectVelocity) {
+        while ((planVelocity -= 0.1) > endSectVelocity) {
           // 预测冲刺计划的耐力消耗
           planStaminaCost =
             (20 / 144) *
@@ -508,9 +508,8 @@ function sub_simulate_skill(
             location: rushLocation,
           };
           listPlan.push(itemPlan);
-          planVelocity -= 0.1;
         }
-        for (let itemPlan of sort_list(listPlan, (e) => e.time)) {
+        for (const itemPlan of sort_list(listPlan, (e) => e.time, true)) {
           if (Math.random() < uma.probs.planRush) {
             uma.race.velocityPlanRush = itemPlan.velocity;
             uma.race.locationPlanRush = itemPlan.location;
@@ -528,7 +527,7 @@ function sub_simulate_skill(
       report_cache.at(-1).push({ e: race_event_enum.final_push, u: uma });
       uma.race.conditionParams.is_lastspurt = 1;
     }
-    if (uma.race.conditionParams.is_lastspurt) {
+    if (uma.race.conditionParams.is_lastspurt > 0) {
       uma.race.velocityIdeal = uma.race.velocityPlanRush;
     }
     // 追比
@@ -542,7 +541,7 @@ function sub_simulate_skill(
         uma.race.competeFightAim.race.conditionParams.order_rate > 50 ||
         uma.race.conditionParams.hp_per < 5
       ) {
-        uma.race.competeFightAim = undefined;
+        uma.race.competeFightAim = void 0;
         uma.race.competeFightTimer = 0;
       } else {
         uma.race.competeFightTimer = add_timer(uma.race.competeFightTimer);
