@@ -8,56 +8,110 @@ const { i18n } = require('#/i18n/selector');
 
 /**
  * @param {number} item
- * @param {number} [vehicle]
+ * @param {number} [vid]
  */
-async function single_vehicle(item, vehicle = item - 60 + 1) {
+async function single_vehicle(item, vid = item - 60 + 1) {
   const equipped = era.get('flag:单人载具');
-  const item_name = i18n().vehicle[vehicle_enum.keys[vehicle - 1]];
-  if (equipped === vehicle) {
+  const item_name = i18n().tb_item.template.replace(
+    '%NAME%',
+    i18n().vehicle[vehicle_enum.keys[vid - 1]],
+  );
+  if (equipped === vid) {
     const ret = await select_yes_or_no(
-      `现在正以【${item_name}】作为单人载具！要解除装备吗？`,
+      i18n().timon.storage.single_vehicle_info_template.replace(
+        '%ITEM%',
+        item_name,
+      ),
     );
     if (ret) {
-      await era.printAndWait(`取消装备了【${item_name}】`);
+      await era.printAndWait(
+        i18n().timon.storage.single_vehicle_canceled.replace(
+          '%ITEM%',
+          item_name,
+        ),
+      );
       era.set('flag:单人载具', 0);
     }
   } else {
     const ret = await select_yes_or_no(
       equipped > 0
-        ? `现在正以【${i18n().vehicle[vehicle_enum.keys[equipped - 1]]}】作为单人载具！要换用【${item_name}】吗？`
-        : `要装备【${item_name}】吗`,
+        ? i18n()
+            .timon.storage.single_vehicle_replace_confirm_template.replace(
+              '%ITEM%',
+              i18n().tb_item.template.replace(
+                '%NAME%',
+                i18n().vehicle[vehicle_enum.keys[equipped - 1]],
+              ),
+            )
+            .replace('%NEW%', item_name)
+        : i18n().timon.storage.single_vehicle_equip_confirm_template.replace(
+            '%NEW%',
+            item_name,
+          ),
     );
     if (ret) {
-      await era.printAndWait(`装备了【${item_name}】作为单人载具`);
-      era.set('flag:单人载具', vehicle);
+      await era.printAndWait(
+        i18n().timon.storage.single_vehicle_equip_template.replace(
+          '%NEW%',
+          item_name,
+        ),
+      );
+      era.set('flag:单人载具', vid);
     }
   }
 }
 
 /**
  * @param {number} item
- * @param {number} [vehicle]
+ * @param {number} [vid]
  */
-async function multiple_vehicle(item, vehicle = item - 60 + 1) {
+async function multiple_vehicle(item, vid = item - 60 + 1) {
   const equipped = era.get('flag:多人载具');
-  const item_name = i18n().vehicle[vehicle_enum.keys[vehicle - 1]];
-  if (equipped === vehicle) {
+  const item_name = i18n().tb_item.template.replace(
+    '%NAME%',
+    i18n().vehicle[vehicle_enum.keys[vid - 1]],
+  );
+  if (equipped === vid) {
     const ret = await select_yes_or_no(
-      `现在与他人外出时乘坐【${item_name}】！要解除装备吗？`,
+      i18n().timon.storage.multiple_vehicle_info_template.replace(
+        '%ITEM%',
+        item_name,
+      ),
     );
     if (ret) {
-      await era.printAndWait(`取消装备了【${item_name}】`);
+      await era.printAndWait(
+        i18n().timon.storage.multiple_vehicle_canceled.replace(
+          '%ITEM%',
+          item_name,
+        ),
+      );
       era.set('flag:多人载具', 0);
     }
   } else {
     const ret = await select_yes_or_no(
       equipped > 0
-        ? `现在与他人外出时乘坐【${i18n().vehicle[vehicle_enum.keys[equipped - 1]]}】！要换用【${item_name}】吗？`
-        : `以后要乘【${item_name}】与其他人外出吗？`,
+        ? i18n()
+            .timon.storage.multiple_vehicle_replace_confirm_template.replace(
+              '%ITEM%',
+              i18n().tb_item.template.replace(
+                '%NAME%',
+                i18n().vehicle[vehicle_enum.keys[equipped - 1]],
+              ),
+            )
+            .replace('%NEW%', item_name)
+        : i18n().timon.storage.multiple_vehicle_equip_confirm_template.replace(
+            '%NEW%',
+            item_name,
+          ),
     );
     if (ret) {
-      await era.printAndWait(`装备了【${item_name}】作为多人载具`);
-      era.set('flag:多人载具', vehicle);
+      await era.printAndWait(
+        i18n().timon.storage.multiple_vehicle_equip_template.replace(
+          '%NEW%',
+          item_name,
+        ),
+      );
+      era.set('flag:多人载具', vid);
     }
   }
 }

@@ -11,30 +11,40 @@ const add_jewel_reward = require('#/event/snippets/add-jewel-reward');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
-const { __ } = require('#/i18n/selector');
+const di18n = require('#/i18n/extended-def');
+const { i18n } = require('#/i18n/selector');
 
 /** @param {Record<string,function(number):Promise>} handlers */
 module.exports = (handlers) => {
-  new Array(13).fill(0).forEach(
-    (_, i) =>
-      (handlers[i + 70] = async () => {
-        era.println();
-        await era.printAndWait('仅能在调教中使用');
-      }),
-  );
+  new Array(13)
+    .fill(0)
+    .forEach(
+      (_, i) =>
+        (handlers[i + 70] = () =>
+          era.printAndWait([
+            { isBr: true },
+            i18n().timon.storage.in_ero_item_common_description,
+          ])),
+    );
 
   handlers[83] = async () => {
-    if (await select_yes_or_no('要丢弃吗？')) {
-      await era.printAndWait('丢弃了【透明棉被】……');
-      await era.printAndWait('……但是在丢弃之前从里面翻出了几张纸币……');
+    if (
+      await select_yes_or_no(
+        i18n().timon.storage.drop_confirm_template.replace(
+          '%ITEM%',
+          di18n.tb_item.get_name(83),
+        ),
+      )
+    ) {
+      await i18n().timon.storage.drop_quilt();
       era.set('item:透明棉被', 0);
       era.add('flag:当前马币', get_random_value(10, 50));
     }
   };
 
-  handlers[84] = handlers[85] = async (item) => {
+  handlers[84] = handlers[85] = async (iid) => {
     const ret = await select_target_in_storage(
-      item,
+      iid,
       (cid) =>
         cid > 0 &&
         !era.get(`mark:${cid}:淫纹`) &&
@@ -43,20 +53,15 @@ module.exports = (handlers) => {
           era.get(`relation:${cid}:0`) + era.get(`love:${cid}`) * 6 > 225),
     );
     if (ret > 0) {
-      const chara = get_chara_talk(ret);
-      era.print([
-        '给 ',
-        chara.get_colored_name(),
-        ' 以「暖腹」的名义贴上了',
-        __(`tb_item.${item}`),
-        '……',
-      ]);
-      era.print([chara.get_colored_name(), ' 小腹上浮现一个花纹繁复的淫纹……']);
-      era.set(`status:${ret}:淫纹贴纸`, item - 83);
-      if (item === 85) {
+      i18n().timon.storage.use_inmon_item(
+        get_chara_talk(ret),
+        di18n.tb_item.get_name(iid),
+      );
+      era.set(`status:${ret}:淫纹贴纸`, iid - 83);
+      if (iid === 85) {
         add_jewel_reward(ret, '顺从', 1666);
       }
-      era.add(`item:${item}`, -1);
+      era.add(`item:${iid}`, -1);
       if (sys_like_chara(ret, 0, -get_random_value(50, 100))) {
         await era.waitAnyKey();
       }
@@ -68,36 +73,45 @@ module.exports = (handlers) => {
     (e) =>
       (handlers[e] = async () => {
         era.println();
-        await era.printAndWait('仅能在调教中使用');
+        await era.printAndWait(
+          i18n().timon.storage.in_ero_item_common_description,
+        );
       }),
   );
 
   handlers[42] = async () => {
-    if (await select_yes_or_no('要丢弃吗？')) {
-      await era.printAndWait('丢弃了【马跳S家庭装】……');
-      await era.printAndWait('……然后因为乱丢化学制剂被处以100马币罚款');
+    if (
+      await select_yes_or_no(
+        i18n().timon.storage.drop_confirm_template.replace(
+          '%ITEM%',
+          di18n.tb_item.get_name(42),
+        ),
+      )
+    ) {
+      await i18n().timon.storage.drop_family_uma_s();
       era.set('item:马跳S家庭装', 0);
       era.add('flag:当前马币', -100);
     }
   };
 
-  handlers[37] = async (item_id) => {
-    const ret = await select_target_in_storage(
-      item_id,
-      (e) => !era.get(`talent:${e}:泌乳`),
+  handlers[37] = async (iid) => {
+    const aim = await select_target_in_storage(
+      iid,
+      (cid) => !era.get(`talent:${cid}:泌乳`),
     );
-    if (ret !== undefined) {
-      const chara = get_chara_talk(ret);
-      await era.printAndWait([
-        chara.id ? '给 ' : '',
-        chara.get_colored_name(),
-        ' 服用了【母乳药剂】……',
-        { isBr: true },
-        chara.get_colored_name(),
-        ' 开始分泌母乳了！',
-      ]);
-      sys_change_lust(ret, 100);
-      era.set(`talent:${ret}:泌乳`, 2);
+    if (aim !== void 0) {
+      const aim_chara = get_chara_talk(aim);
+      await era.printAndWait(
+        i18n().timon.storage.get_chara_use_medicine(
+          aim_chara,
+          di18n.tb_item.get_name(iid),
+        ),
+      );
+      await era.printAndWait(
+        i18n().timon.storage.get_chara_use_milk_medicine(aim_chara),
+      );
+      sys_change_lust(aim, 100);
+      era.set(`talent:${aim}:泌乳`, 2);
       era.add('item:母乳药剂', -1);
       return true;
     }
@@ -105,25 +119,28 @@ module.exports = (handlers) => {
 
   [32, 33].forEach(
     (e) =>
-      (handlers[e] = async () => {
-        era.println();
-        await era.printAndWait('仅能在调教前使用');
-      }),
+      (handlers[e] = () =>
+        era.printAndWait([
+          { isBr: true },
+          i18n().timon.storage.before_ero_item_common_description,
+        ])),
   );
 
   handlers[38] = async () => {
     const me = get_chara_talk(0);
     if (me.sex_code === 1) {
-      await era.printAndWait('男性不能使用【避孕套溶解剂】……');
+      await era.printAndWait(i18n().timon.storage.anti_condom_for_man);
     } else if (era.get('status:0:反避孕套')) {
-      await era.printAndWait('已经使用过【避孕套溶解剂】了……');
+      await era.printAndWait(i18n().timon.storage.anti_condom_duplicate);
     } else {
-      const ret = await select_yes_or_no('要使用【避孕套溶解剂】吗？');
+      const ret = await select_yes_or_no(
+        i18n().timon.storage.anti_condom_confirm,
+      );
       if (ret) {
-        await era.printAndWait([
-          me.get_colored_name(),
-          ' 将几滴【避孕套溶解剂】滴在了阴唇附近……',
-        ]);
+        await i18n().timon.storage.use_anti_condom(
+          me,
+          di18n.tb_item.get_name(38),
+        );
         era.set('status:0:反避孕套', 1);
         era.add('item:避孕套溶解剂', -1);
         return true;

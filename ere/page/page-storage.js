@@ -1,6 +1,6 @@
 const era = require('#/era-electron');
 
-const { __ } = require('#/i18n/selector');
+const { __, i18n } = require('#/i18n/selector');
 
 const handlers = {};
 
@@ -55,14 +55,14 @@ module.exports = async () => {
       {
         content:
           buffer.length > 0
-            ? '目前拥有以下道具：（点击道具按钮可以使用或查看说明）'
-            : '没有持有任何道具',
+            ? i18n().ui_storage_have_items
+            : i18n().ui_storage_no_items,
         type: 'text',
       },
       ...buffer,
       {
         accelerator: 999,
-        content: '返回',
+        content: i18n().ui_back,
         type: 'button',
       },
     ]);

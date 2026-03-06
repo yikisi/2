@@ -5,44 +5,64 @@ const select_yes_or_no = require('#/page/components/select-yes-or-no');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const di18n = require('#/i18n/extended-def');
+const { i18n } = require('#/i18n/selector');
 
 async function use_glasses(iid) {
   const item_name = di18n.tb_item.get_name(iid);
-  const sid = 24 + iid - 27;
+  const original = [27, 28, 29].find(
+    (tiid) => era.get(`status:0:${24 + tiid - 27}`) > 0,
+  );
   // ITEMNAME:26 = 万能镜框
   if (!era.get('item:26')) {
-    await era.printAndWait(`没有地方安装${item_name}！`);
+    await era.printAndWait(
+      i18n().timon.storage.no_glass_template.replace('%LENS%', item_name),
+    );
     return;
   }
-  if (era.get(`status:0:${sid}`)) {
+  const base_name = di18n.tb_item.get_name(26);
+  if (original === iid) {
     await era.printAndWait(
-      `已经给${di18n.tb_item.get_name(26)}装上${item_name}了……`,
+      i18n()
+        .timon.storage.glass_have_lens_template.replace('%GLASS%', base_name)
+        .replace('%LENS%', item_name),
     );
-  } else {
-    const ret = await select_yes_or_no(
-      `要给${di18n.tb_item.get_name(26)}装上${item_name}吗？这会导致原有镜片损坏！`,
+  } else if (
+    (!original &&
+      (await select_yes_or_no(
+        i18n()
+          .timon.storage.glass_equip_confirm_template.replace(
+            '%GLASS%',
+            base_name,
+          )
+          .replace('%LENS%', item_name),
+      ))) ||
+    (await select_yes_or_no(
+      i18n()
+        .timon.storage.glass_replace_confirm_template.replace(
+          '%GLASS%',
+          base_name,
+        )
+        .replace('%NEW%', item_name)
+        .replace('%LENS%', di18n.tb_item.get_name(original)),
+    ))
+  ) {
+    await era.printAndWait(
+      i18n()
+        .timon.storage.glass_equip_template.replace('%GLASS%', base_name)
+        .replace('%LENS%', item_name),
     );
-    if (ret) {
+    if (original > 0) {
       await era.printAndWait(
-        `给${di18n.tb_item.get_name(26)}装上了${item_name}……`,
+        i18n().timon.storage.glass_lens_broken_template.replace(
+          '%LENS%',
+          di18n.tb_item.get_name(original),
+        ),
       );
-      // STATUSNAME:24 = 好感度镜片
-      // STATUSNAME:25 = 好感度镜片
-      // STATUSNAME:26 = 透视镜片
-      for (let tmp_iid = 27; tmp_iid <= 29; ++tmp_iid) {
-        const tmp_sid = 24 + tmp_iid - 27;
-        if (era.get(`status:0:${tmp_sid}`) > 0) {
-          await era.printAndWait(
-            `原有的${di18n.tb_item.get_name(tmp_iid)}损毁了！`,
-          );
-          era.set(`status:0:${tmp_sid}`, 0);
-          break;
-        }
-      }
-      era.set(`status:0:${sid}`, 1);
-      era.add(`item:${iid}`, -1);
-      return true;
+      era.set(`status:0:${24 + original - 27}`, 0);
     }
+    era.set(`status:0:${24 + iid - 27}`, 1);
+    era.add(`item:${iid}`, -1);
+    return true;
   }
 }
 
@@ -64,7 +84,7 @@ module.exports = (handlers) => {
           [
             {
               config: { align: 'left' },
-              content: '请选择要使用的马语者点数卡数量',
+              content: i18n().timon.storage.use_mind_reader_select,
               type: 'text',
             },
           ],
@@ -81,7 +101,7 @@ module.exports = (handlers) => {
               content: '-1',
               type: 'button',
             },
-            { config: { width: 2 }, content: to_use, type: 'text' },
+            { config: { width: 2 }, content: to_use.toString(), type: 'text' },
             {
               accelerator: 6,
               config: { disabled: to_use === amount, width: 2 },
@@ -98,13 +118,13 @@ module.exports = (handlers) => {
             {
               accelerator: 5,
               config: { width: 3 },
-              content: '确定',
+              content: i18n().ui_yes,
               type: 'button',
             },
             {
               accelerator: 0,
               config: { width: 3 },
-              content: '取消',
+              content: i18n().ui_no,
               type: 'button',
             },
           ],
@@ -135,20 +155,31 @@ module.exports = (handlers) => {
     }
     if (to_use > 0) {
       await era.clear(era.getLineCount() - cur_line);
-      if (await select_yes_or_no(['要使用 ', to_use, ' 张马语者点数卡吗？'])) {
+      if (
+        await select_yes_or_no(
+          i18n().timon.storage.use_mind_reader_confirm_template.replace(
+            '%COUNT%',
+            to_use.toString(),
+          ),
+        )
+      ) {
         const timer = era.add('status:0:马语者', to_use);
         era.add('item:马语者', -to_use);
         await get_chara_talk(0).say_as_unknown_and_wait(
-          to_use === timer
-            ? `欢迎使用【马语者】App！您的会员身份将在 ${timer} 周后过期。`
-            : `感谢续费【马语者】App！您的会员身份将在 ${timer} 周后过期。`,
+          (to_use === timer
+            ? i18n().timon.storage.mind_reader_welcome_timer_template
+            : i18n().timon.storage.mind_reader_continue_timer_template
+          ).replace('%TIMER%', timer.toString()),
         );
         return true;
       }
     } else if (timer > 0) {
       await era.clear(era.getLineCount() - cur_line);
       await get_chara_talk(0).say_as_unknown_and_wait(
-        `您的会员身份将在 ${timer} 周后过期。`,
+        i18n().timon.storage.mind_reader_notify_timer_template.replace(
+          '%TIMER%',
+          timer.toString(),
+        ),
       );
     }
   };

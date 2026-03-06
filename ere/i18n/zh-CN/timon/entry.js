@@ -15,6 +15,7 @@ class I18nTimon {
   base_guides = proxy_kojo_js(require('#/i18n/zh-CN/timon/guides/base'));
   ending = proxy_kojo_js(require('#/i18n/zh-CN/timon/others/ending'));
 
+  storage = proxy_kojo_js(require('#/i18n/zh-CN/timon/others/storage'));
   god_shop = proxy_kojo_js(require('#/i18n/zh-CN/timon/others/god-shop'));
   tachyon_shop = proxy_kojo_js(
     require('#/i18n/zh-CN/timon/others/tachyon-shop'),

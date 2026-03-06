@@ -249,7 +249,7 @@ class I18nEntry {
     ' 了 ',
     change_val,
   ];
-  get_ui_add_skills = (chara, skills) => [chara, ' 习得了 ', ...skills];
+  get_ui_add_skills = (chara, skills) => [chara, ' 习得了', ...skills];
   ui_get_pt_template = '获得了 %PT% 点技能点数！';
   ui_train_level_up_template = '%ATTR%训练 变得更擅长了！';
   get_ui_change_motivation = (chara, motivation) => [
@@ -469,11 +469,11 @@ class I18nEntry {
   get_ui_train_skill_pt_info = (pt) => ['技能点数：', pt];
   ui_train_skill_enable_filter = '打开筛选器';
   ui_train_skill_disable_filter = '关闭筛选器';
-  get_ui_train_learn_skill = (skill) => ['要学习 ', ...skill, ' 吗？'];
+  get_ui_train_learn_skill = (skill) => ['要学习', ...skill, '吗？'];
   get_ui_train_replace_skill = (skill, remove) => [
-    '要学习 ',
+    '要学习',
     ...skill,
-    ' 吗？将取代 ',
+    '吗？将取代',
     ...remove,
     '。',
   ];
@@ -656,6 +656,12 @@ class I18nEntry {
     next,
   ];
 
+  ui_storage_have_items =
+    '目前拥有以下道具：（点击道具按钮可以使用或查看说明）';
+  ui_storage_no_items = '没有持有任何道具';
+  ui_storage_select_header_template = '选择要使用%ITEM%的对象';
+  ui_storage_no_targets_template = '没有可以使用%ITEM%的对象';
+
   bs_info_template = '昏暗的房间……%DURABILITY%……';
   bs_no_one_info_template = '昏暗、空无一人的房间……%DURABILITY%……';
   ui_bs_durability_0 = '但完全没有防备';
@@ -713,10 +719,10 @@ class I18nEntry {
 
   new_game = new (require('#/i18n/zh-CN/new-game'))();
   location = new (require('#/i18n/zh-CN/location'))();
+  vehicle = new (require('#/i18n/zh-CN/vehicle'))();
+  note = new (require('#/i18n/zh-CN/notes'))();
   achievement = new (require('#/i18n/zh-CN/achieve'))();
   achieve_desc = new (require('#/i18n/zh-CN/achieve-desc'))();
-  note = new (require('#/i18n/zh-CN/notes'))();
-  vehicle = new (require('#/i18n/zh-CN/vehicle'))();
 
   tb_abl = new (require('#/i18n/zh-CN/table/abl'))();
   tb_exp = new (require('#/i18n/zh-CN/table/exp'))();

@@ -46,7 +46,7 @@ module.exports = {
       era.setWidth(12);
       await era.printAndWait([
         you.get_colored_name(),
-        ' 忽视了成年人的社会责任，唆使负责马娘进行变态行为的事情败露，哪怕是特雷森也无法为 ',
+        ' 忽视了成年人的社会责任，唆使担当进行变态行为的事情败露，哪怕是特雷森也无法为 ',
         you.get_colored_name(),
         ' 掩盖过去。',
       ]);
@@ -194,6 +194,11 @@ module.exports = {
     f.title = '情爱囹圄';
     return f;
   })(),
+
+  /**
+   * 选择了黑暗交易之后的三阶段惩戒事件
+   */
+
   /**
    * @author 黑奴队长
    * @param {CharaTalk} you
@@ -220,9 +225,10 @@ module.exports = {
     await you.say_as_unknown_and_wait(
       '赎罪即将开始——如果不想遭受更多，就努力奔跑吧。',
     );
-    await you.say_as_unknown_and_wait(
-      `${you.actual_name} 小姐——自由在召唤你。`,
-    );
+    await you.say_as_unknown_and_wait([
+      you.get_colored_actual_name(),
+      ' 小姐——自由在召唤你。',
+    ]);
     await you.say_as_unknown_and_wait('希望不会再见了。');
     era.setWidth(24);
     era.setOffset(0);

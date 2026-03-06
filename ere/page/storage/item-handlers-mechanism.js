@@ -4,11 +4,13 @@ const { cb_enum, count_events, get: get_queue } = require('#/event/queue');
 
 const EventMarks = require('#/data/event/event-marks');
 
+const { i18n } = require('#/i18n/selector');
+
 /** @param {Record<string,function(number):Promise>} handlers */
 module.exports = (handlers) => {
   handlers[114] = async () => {
     era.println();
-    await era.printAndWait('【现实穿透启动中……】');
+    await era.printAndWait(i18n().timon.storage.fixer_start);
     const events = get_queue();
     const chara_list = era.getAddedCharacters().filter((cid) => cid > 0);
 
@@ -69,6 +71,6 @@ module.exports = (handlers) => {
         }
       });
     }
-    await era.printAndWait('【现实规律修复完毕。】');
+    await era.printAndWait(i18n().timon.storage.fixer_stop);
   };
 };

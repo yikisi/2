@@ -3,6 +3,8 @@ const era = require('#/era-electron');
 const get_status = require('#/system/chara/sys-get-status');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
+
 const { attr_bg_colors } = require('#/data/color-const');
 const recruit_flags = require('#/data/event/recruit-flags');
 
@@ -23,19 +25,24 @@ async function select_target_in_storage(iid, filter_cb = () => true) {
   );
   if (team_list.length) {
     buffer.push({
-      config: { content: `选择要使用${item_name}的对象` },
+      config: {
+        content: i18n().ui_storage_select_header_template.replace(
+          '%ITEM%',
+          item_name,
+        ),
+      },
       type: 'divider',
     });
-    team_list.forEach((e) => {
-      const stamina = era.get(`base:${e}:0`);
-      const max_stamina = era.get(`maxbase:${e}:0`);
-      const time = era.get(`base:${e}:1`);
-      const max_time = era.get(`maxbase:${e}:1`);
+    team_list.forEach((cid) => {
+      const stamina = era.get(`base:${cid}:0`);
+      const max_stamina = era.get(`maxbase:${cid}:0`);
+      const time = era.get(`base:${cid}:1`);
+      const max_time = era.get(`maxbase:${cid}:1`);
       buffer.push(
         {
-          accelerator: e,
+          accelerator: cid,
           config: { width: 4 },
-          content: era.get(`callname:${e}:-2`),
+          content: get_chara_talk(cid).name,
           type: 'button',
         },
         {
@@ -62,7 +69,7 @@ async function select_target_in_storage(iid, filter_cb = () => true) {
         },
         {
           config: { width: 12 },
-          content: get_status(e),
+          content: get_status(cid),
           type: 'text',
         },
       );
@@ -75,7 +82,9 @@ async function select_target_in_storage(iid, filter_cb = () => true) {
     }
     return ret;
   } else {
-    await era.printAndWait(`没有可以使用${item_name}的对象……`);
+    await era.printAndWait(
+      i18n().ui_storage_no_targets_template.replace('%ITEM%', item_name),
+    );
   }
 }
 
