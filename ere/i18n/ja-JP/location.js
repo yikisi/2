@@ -1,0 +1,36 @@
+const I18nLocation = require('#/i18n/zh-CN/location');
+
+module.exports = class extends I18nLocation {
+  office = 'トレ室';
+  playground = 'トレ場';
+  atrium = '中庭';
+  rooftop = '屋上';
+  restroom = '休憩室';
+  chairman = '理事長室';
+  gate = '学園正門';
+  basement = '地下室';
+  river = '川辺';
+  church = '神社';
+  shopping = '商店街';
+  station = '駅';
+  mejiro = 'メジロシティ';
+  beach = '海辺';
+  beach_market = '海辺の市場';
+  beach_train = '海辺';
+  paris = 'パリ';
+  home = '自宅';
+  hotel = 'ホテル';
+  love_hotel = 'ラブホテル';
+  summer_home = '夏合宿寮';
+  school_shop = '謎の売店';
+  race = 'レース場';
+  hongkong = '香港';
+  guangzhou = '広州';
+  new_york = 'ニューヨーク';
+  hot_spring = '温泉';
+  god = '三女神像';
+  trainer = 'トレーナー室';
+  visitor = '応接室';
+  clinic = '保健室';
+  dubai = 'ドバイ';
+};

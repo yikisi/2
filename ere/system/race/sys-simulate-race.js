@@ -368,14 +368,14 @@ function sys_sim_race(list_chara, info, race_id, shown = true) {
   }
 
   const list_finished = [];
-  let flag_race = true,
-    list_in_race = list_chara,
-    timer = 0,
-    timer_record,
-    next_report = get_report_internal(),
-    temp_report,
-    total_blocked = 0,
-    total_failed = 0;
+  let flag_race = true;
+  let list_in_race = list_chara;
+  let timer = 0;
+  let timer_record;
+  let next_report = get_report_internal();
+  let temp_report;
+  let total_blocked = 0;
+  let total_failed = 0;
 
   sub_simulate_report.init();
   while (flag_race) {

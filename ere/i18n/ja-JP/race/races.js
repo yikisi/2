@@ -42,7 +42,7 @@ module.exports = class extends I18nRaces {
   lan_index_final_abbr = '終';
   lan_index_template = '第%INDEX%';
 
-  chart_title_template = '%TRACK% %GROUND% %DISTANCE%m %ROTATION%';
+  chart_title_template = '%TRACK% %GROUND% %SPAN%m %ROTATION%';
   chart_buff_attr_template = '強化属性: %ATTR%';
   chart_splitter_1_template = '序 ⬅ %DISTANCE% ⮕ 中';
   chart_splitter_2_template = '中 ⬅ %DISTANCE% ⮕ 終';
