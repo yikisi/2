@@ -45,6 +45,9 @@ class I18nTimon {
   npc_accept_task = '接受任务';
   npc_retry_task = '再次尝试';
 
+  bt_god_love_event_fuck_me = '自己怀上神胎';
+  bt_god_love_event_preg_me = '将腹中胎儿变成神胎';
+
   // it = information timon
   /** @param {CharaTalk} chara */
   get_it_office_study = (chara) => [
@@ -389,9 +392,6 @@ class I18nTimon {
     chara.get_colored_name(),
     ' 的警戒心放松了】',
   ];
-
-  bt_god_love_event_fuck_me = '自己怀上神胎';
-  bt_god_love_event_preg_me = '将腹中胎儿变成神胎';
 
   ed_saying_01 = '九尺二间陋室里，红唇依竹共恩情。——高杉晋作';
   ed_saying_02 = '金钱、赛马娘、女人，男生永远搞不懂这三件事。——威尔・罗〇斯';

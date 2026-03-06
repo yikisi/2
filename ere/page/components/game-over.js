@@ -82,6 +82,7 @@ async function game_over(again) {
         const me = get_chara_talk(0);
         punish_level = era.add('flag:惩戒力度', 1);
         let jpy = era.get('flag:当前马币');
+        const uma = get_chara_talk(3);
         switch (punish_level) {
           case 1:
             era.set('cflag:0:阴茎尺寸', 1);
@@ -100,41 +101,9 @@ async function game_over(again) {
             }
             era
               .getAddedCharacters()
-              .filter((e) => e)
-              .forEach((e) => get_custom_mec(e).set_callname());
-
-            era.drawLine();
-            era.setOffset(6);
-            era.setWidth(12);
-            await me.say_as_unknown_and_wait(
-              '据说，人在被剥夺了自由后……才能真正了解自己。',
-            );
-            await me.say_as_unknown_and_wait('那么……你有多了解自己呢？');
-            await me.say_as_unknown_and_wait([
-              me.get_colored_actual_name(),
-              '……怠惰，傲慢',
-              era.get('flag:变态行为') ? '，色欲' : '',
-              '……今天……你获得了新生。',
-            ]);
-            await me.say_as_unknown_and_wait(
-              '但你很快就会明白……自由也是有代价的。',
-            );
-            await me.say_as_unknown_and_wait(
-              '监狱将伴你同行……这具肉体将是你永恒的惩戒。',
-            );
-            await me.say_as_unknown_and_wait(
-              '赎罪即将开始——如果不想遭受更多，就努力奔跑吧。',
-            );
-            await me.say_as_unknown_and_wait(
-              `${me.actual_name} 小姐——自由在召唤你。`,
-            );
-            await me.say_as_unknown_and_wait('希望不会再见了。');
-            era.setWidth(24);
-            era.setOffset(0);
-            era.println();
-            if (era.get('cflag:0:种族') > 0) {
-              await era.printAndWait([me.get_colored_name(), ' 遭受了改造！']);
-            } else {
+              .filter((cid) => cid)
+              .forEach((cid) => get_custom_mec(cid).set_callname());
+            if (!era.get('cflag:0:种族')) {
               era.set(
                 'maxbase:0:速度',
                 Math.min(2000, era.get('maxbase:0:速度') + 800),
@@ -147,21 +116,14 @@ async function game_over(again) {
                 'maxbase:0:力量',
                 Math.min(2000, era.get('maxbase:0:力量') + 800),
               );
-              await era.printAndWait([
-                me.get_colored_name(),
-                ' 被转变为了马娘！',
-              ]);
-              await era.printAndWait([
-                me.get_colored_name(),
-                ' 仍然可以招募马娘，训练她们，陪伴她们奔跑，但不再享有特雷森下发的工资。',
-              ]);
-              await era.printAndWait([
-                '相应的，',
-                me.get_colored_name(),
-                ' 可以进行自主训练，参与赛事，并赢取奖金和社会声望。',
-              ]);
             }
-            await era.printAndWait('声望再次低于零，会遭受更严厉的惩罚！');
+
+            era.drawLine();
+            await i18n().timon.ending.punishment1(
+              me,
+              uma.uma_sex_title,
+              uma.couple_title,
+            );
             era.set('cflag:0:种族', 1);
             break;
           case 2:
@@ -188,48 +150,12 @@ async function game_over(again) {
             era.set('mark:0:淫纹', 3);
 
             era.drawLine();
-            era.setOffset(6);
-            era.setWidth(12);
-            await era.printAndWait('性 奴 宣 言', {
-              align: 'center',
-              fontSize: '1.5rem',
-              fontWeight: 'bold',
-              isParagraph: true,
-            });
-            await era.printAndWait(
-              `本母马 ${me.actual_name} 自愿成为马娘大人们的奴隶，`,
+            await i18n().timon.ending.punishment2(
+              me,
+              date_indicator(),
+              uma.uma_sex_title,
+              uma.couple_title,
             );
-            await era.printAndWait(
-              '将身心调整至取悦主人们的最优状态，永远放弃所有人权，',
-            );
-            await era.printAndWait(
-              '从此接受主人们的一切调教，服从主人们的一切指令，绝不产生任何异议。',
-            );
-            era.setOffset(13);
-            era.setWidth(5);
-            era.setAlign('center');
-            era.print(me.actual_name);
-            era.print(`<${me.name} 的唇印>`);
-            era.print(`<${me.name} 的乳头印>`);
-            await era.printAndWait(`<${me.name} 的阴唇印>`);
-            await era.printAndWait(date_indicator());
-            era.setAlign('left');
-            era.setOffset(0);
-            era.setWidth(24);
-            era.println();
-            await era.printAndWait(
-              `被自愿签署这样的宣言后，${me.name} 被改造成了马娘们的性奴！`,
-            );
-            await era.printAndWait(
-              `${me.name} 仍然可以招募马娘，训练她们，陪伴她们奔跑，自主训练，参与赛事。`,
-            );
-            await era.printAndWait(
-              `但 ${me.name} 更重要的职责是供她们发泄性欲！`,
-            );
-            await era.printAndWait(
-              `${me.name} 的身体已经被调整到敏感度绝佳的状态，请继续精进自己的性能力，取悦主人们，以获取声望吧！`,
-            );
-            await era.printAndWait('声望再次低于零，会遭受更严厉的惩罚！');
             sys_add_titles(0, { c: buff_colors[2], n: 's_p_slave' });
             break;
           case 3:
@@ -248,70 +174,28 @@ async function game_over(again) {
             era.set('flag:当前马币', 0);
 
             era.drawLine();
-            era.setOffset(6);
-            era.setWidth(12);
-            await me.say_as_unknown_and_wait(
-              '没有想到过你竟然能堕落到这个地步。',
-            );
-            await me.say_as_unknown_and_wait(
-              '你的手里曾经把握着从谷底攀回地面的绳索。',
-            );
-            await me.say_as_unknown_and_wait('但你竟将救命索弃之不顾。');
-            await me.say_as_unknown_and_wait(
-              '事到如今，我甚至有点怀疑你就是故意放任自流，让一切都变得无法挽回。',
-            );
-            await me.say_as_unknown_and_wait(
-              '毕竟，我们已经给予你那么多次保留人权的机会。',
-            );
-            await me.say_as_unknown_and_wait('不过现在的你恐怕也听不见了吧。');
-            await me.say_as_unknown_and_wait(
-              `那么再见了，${me.actual_name} 小姐。`,
-            );
-            await me.say_as_unknown_and_wait([
-              {
-                color: buff_colors[3],
-                content: 'GAME OVER',
-                fontWeight: 'bold',
-              },
-            ]);
-            era.setWidth(24);
-            era.setOffset(0);
-            era.println();
-            await era.printAndWait(`繁殖用马娘，这就是 ${me.name} 的末路。`);
-            await era.printAndWait(
-              '过去的壮志随风飘散，曾经的理想被无情击碎。',
-            );
-            await era.printAndWait(
-              `从今以后 ${me.name} 的职责便是用短小肉棒取悦高贵的马娘，用劣等小穴容纳神圣的因子，与她们诞下优秀的后代！`,
-            );
-            await era.printAndWait(
-              `虽然人权已离 ${me.name} 远去，但还请作为孕袋继续精进。`,
-            );
-            await era.printAndWait(
-              `假如足够幸运的话，也许 ${me.name} 还能凭子而贵！`,
+            await i18n().timon.ending.punishment3(
+              me,
+              uma.uma_sex_title,
+              uma.couple_title,
             );
             sys_add_titles(0, { c: buff_colors[2], n: 's_p_preg' });
         }
-        sys_filter_chara('cflag', '招募状态', recruit_flags.yes).forEach(
-          (e) => {
-            get_custom_mec(e).set_callname();
-            get_custom_check(e).check_after_punish(punish_level);
-          },
-        );
+        sys_filter_chara('cflag', '招募状态', recruit_flags.yes)
+          .filter((cid) => cid > 0)
+          .forEach((cid) => {
+            get_custom_mec(cid).set_callname();
+            get_custom_check(cid).check_after_punish(punish_level);
+          });
       } else {
         era.drawLine();
         const me = get_chara_talk(0);
         if (era.get('flag:当前位置') === location_enum.basement) {
           if (
             await select_yes_or_no(
-              [
-                me.get_colored_name(),
-                ' 在地下室中迎来了结局……',
-                { isBr: true },
-                '要查看地下室结局吗？',
-              ],
-              '直面惨淡',
-              '呱我不要看',
+              i18n().timon.ending.get_basement_ending_confirm(me),
+              i18n().timon.ending.bt_confirm_yes,
+              i18n().timon.ending.bt_confirm_no,
             )
           ) {
             await get_custom_daily(basement_owners.get(0)).basement_end();
