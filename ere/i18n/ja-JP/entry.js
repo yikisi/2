@@ -98,7 +98,7 @@ module.exports = class extends I18nEntry {
   cr_header_kojo = '口上';
   cr_kojo_tip = '担当キャラID最小値順でソート';
   cr_thanks_detail = '詳細鳴謝';
-  cr_kojo_suffix_template = '（%SUFFIX%）';
+  cr_kojo_suffix_template = ' (%SUFFIX%)';
   cr_kojo_suffix_recruit = '募集';
   cr_kojo_suffix_basement = '地下室';
   cr_kojo_suffix_temporary = '臨時';
@@ -150,7 +150,7 @@ module.exports = class extends I18nEntry {
   ];
   ui_month_template = '%MONTH% ヶ月';
   ui_too_long_template =
-    '（表示幅は全角 %WIDTH% 文字または半角 %WIDTH*2% 文字を超えることはできません。再入力してください！）';
+    '(表示幅は全角 %WIDTH% 文字または半角 %WIDTH*2% 文字を超えることはできません。再入力してください！)';
   ui_et_prev = '前の項目';
   ui_et_next = '次の項目';
   ui_pg_prev = '前のページ';

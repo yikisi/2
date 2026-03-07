@@ -8,6 +8,8 @@ class I18nTimon {
   ero = proxy_kojo_js(require('#/i18n/zh-CN/timon/ero/ero'));
   basement = proxy_kojo_js(require('#/i18n/zh-CN/timon/base'));
 
+  ero_sys = proxy_kojo_js(require('#/i18n/zh-CN/timon/ero/system'));
+
   daily_child = proxy_kojo_js(require('#/i18n/zh-CN/timon/child/daily'));
   ero_child = proxy_kojo_js(require('#/i18n/zh-CN/timon/child/ero'));
 

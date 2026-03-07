@@ -372,10 +372,13 @@ async function page_ero(lover, skip_start_end = false) {
     );
     l_cols.push({
       config: { width: 12 },
-      content: i18n().sex.hd_turn_template.replace(
-        '%TURN%',
-        era.get('tflag:回合').toString(),
-      ),
+      content: [
+        i18n().sex.hd_turn_template.replace(
+          '%TURN%',
+          era.get('tflag:回合').toString(),
+        ),
+        ' ',
+      ],
       type: 'text',
     });
     if (rape === 0) {

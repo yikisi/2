@@ -3,9 +3,10 @@ let lan = 'zh-CN';
 module.exports = {
   /**
    * @param {number} _num
+   * @param {function(number):number} roundCb
    * @returns {{content:string,[title]:string}}
    */
-  get_abbr_number(_num) {
+  get_abbr_number(_num, roundCb = Math.floor) {
     if (typeof _num !== 'number') {
       return void 0;
     }
@@ -14,18 +15,18 @@ module.exports = {
     }
     if (_num < 10000000) {
       return {
-        content: `${Math.round(_num / 1000).toLocaleString(lan)}K`,
+        content: `${roundCb(_num / 1000).toLocaleString(lan)}K`,
         title: _num.toLocaleString(lan),
       };
     }
     if (_num < 10000000000) {
       return {
-        content: `${Math.round(_num / 1000000).toLocaleString(lan)}M`,
+        content: `${roundCb(_num / 1000000).toLocaleString(lan)}M`,
         title: _num.toLocaleString(lan),
       };
     }
     return {
-      content: `${Math.round(_num / 1000000000).toLocaleString(lan)}B`,
+      content: `${roundCb(_num / 1000000000).toLocaleString(lan)}B`,
       title: _num.toLocaleString(lan),
     };
   },

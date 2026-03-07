@@ -447,7 +447,7 @@ function generate_copyrights() {
           '植物牙线',
           { isDivider: true },
           'フィンランド',
-          { isBr: true },
+          { isDivider: true },
           '提交bug',
         ],
       },

@@ -5,6 +5,7 @@ const update_marks = require('#/system/ero/calc-sex/update-marks');
 const sys_get_intelligence_ratio_in_fight = require('#/system/ero/fight/sys-get-intelligence-ratio');
 const sys_get_strength_ratio_in_fight = require('#/system/ero/fight/sys-get-strength-ratio');
 const { get_sex_acceptable } = require('#/system/ero/sys-calc-ero-status');
+const { add_juel, update_juels } = require('#/system/ero/sys-calc-juel');
 const {
   begin_and_init_ero,
   end_ero_and_show_result,
@@ -15,7 +16,6 @@ const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const { sys_change_fame } = require('#/system/sys-calc-flag');
 
-const select_yes_or_no = require('#/page/components/select-yes-or-no');
 const print_ero_page = require('#/page/page-ero');
 
 const game_guides = require('#/event/others/game-guides');
@@ -26,38 +26,39 @@ const { get_random_value } = require('#/utils/value-utils');
 const { location_enum } = require('#/data/locations');
 const { attr_enum } = require('#/data/train-const');
 
+const di18n = require('#/i18n/extended-def');
+const { i18n } = require('#/i18n/selector');
+
+/** @returns {number|undefined} */
 async function select_medicine() {
-  const item_list = ['超马跳Z', '马跳S']
-    .map((e) => {
-      return {
-        n: e,
-        c: era.get(`item:${e}`),
-      };
-    })
-    .filter((e) => e.c);
+  const item_list = [33, 32]
+    .map((iid) => ({
+      iid,
+      n: i18n().tb_item[iid],
+      c: era.get(`item:${iid}`),
+    }))
+    .filter((e) => e.c > 0);
   if (item_list.length) {
     const button_width = 24 / (item_list.length + 1);
     era.printMultiColumns([
-      { content: '要使用什么药物？', type: 'text' },
-      ...item_list.map((e, i) => {
-        return {
-          accelerator: i,
-          config: { align: 'center', width: button_width },
-          content: `${e.n} (${e.c})`,
-          type: 'button',
-        };
-      }),
+      { content: i18n().timon.ero_sys.use_medicine_header, type: 'text' },
+      ...item_list.map((e, i) => ({
+        accelerator: i,
+        config: { align: 'center', width: button_width },
+        content: `${e.n} (${e.c})`,
+        type: 'button',
+      })),
       {
         accelerator: 999,
         config: { align: 'center', width: button_width },
-        content: '还是算了',
+        content: i18n().ui_cancel,
         type: 'button',
       },
     ]);
     const ret = await era.input();
-    return ret < item_list.length ? item_list[ret].n : undefined;
+    return ret < item_list.length ? item_list[ret].iid : void 0;
   } else {
-    await era.printAndWait('无药可用……');
+    await era.printAndWait(i18n().timon.ero_sys.no_medicine_notification);
   }
 }
 
@@ -70,35 +71,19 @@ async function ask_drink_medicine(chara) {
   if (!ret) {
     return true;
   }
-  await era.printAndWait([chara.get_colored_name(), ` 乖乖饮用了【${ret}】……`]);
-  await era.printAndWait([
-    chara.get_colored_name(),
-    ret === '马跳S' ? ' 面带潮红地睡着了……' : ' 变得极其兴奋！',
-  ]);
-  era.set(`status:${chara.id}:${ret}`, 1);
+  await (
+    ret === 32
+      ? i18n().timon.ero_sys.use_uma_s
+      : i18n().timon.ero_sys.use_super_uma_z
+  )(chara, di18n.tb_item.get_name(ret));
+  era.set(`status:${chara.id}:${i18n('zh-CN').tb_item[ret]}`, 1);
   era.add(`item:${ret}`, -1);
 }
 
-/**
- * @param {CharaTalk} chara
- * @param {CharaTalk} me
- */
-async function fail(chara, me) {
-  await era.printAndWait([
-    chara.get_colored_name(),
-    ' 将 ',
-    me.get_colored_name(),
-    ' 推倒在地，迅速离开了……',
-  ]);
+/** @param {CharaTalk} chara */
+async function fail(chara) {
   sys_change_attr_and_print(0, attr_enum.hp, -100);
   sys_like_chara(chara.id, 0, -400) && (await era.waitAnyKey());
-  await era.printAndWait([
-    '虽然 ',
-    chara.get_colored_name(),
-    ' 对此守口如瓶，但社会对 ',
-    me.get_colored_name(),
-    ' 的评价还是下降了！',
-  ]);
   sys_change_fame(-100);
   era.set('flag:变态行为', 1);
   if (era.get('flag:当前互动角色') === chara.id) {
@@ -129,24 +114,19 @@ async function goto_sex(cid, sex_loc) {
   if (!sys_check_awake(cid)) {
     era.printMultiColumns([
       {
-        content: [
-          chara.get_colored_name(),
-          ' 睡得正香。',
-          { isBr: true },
-          '要袭击吗？',
-        ],
+        content: i18n().timon.ero_sys.get_want_sex_sleep(chara),
         type: 'text',
       },
       {
         accelerator: 0,
         config: { align: 'center', width: 12 },
-        content: '袭击！',
+        content: i18n().timon.ero_sys.bt_rape_in_sleeping,
         type: 'button',
       },
       {
         accelerator: 100,
         config: { align: 'center', width: 12 },
-        content: '还是算了',
+        content: i18n().ui_cancel,
         type: 'button',
       },
     ]);
@@ -165,47 +145,45 @@ async function goto_sex(cid, sex_loc) {
         : -1;
     let ret, dice;
     if (check >= 0) {
+      const [confirm_info, bt_sex] = (
+        love_check
+          ? i18n().timon.ero_sys.get_want_sex_as_lover
+          : i18n().timon.ero_sys.get_want_sex_as_slave
+      )(chara, me);
       era.printMultiColumns(
         [
           {
-            content: [
-              chara.get_colored_name(),
-              love_check ? ' 含情脉脉地看着 ' : ' 略带轻浮地看着 ',
-              me.get_colored_name(),
-              '……',
-              { isBr: true },
-              '要怎么做？',
-            ],
+            content: confirm_info,
             type: 'text',
           },
           {
             accelerator: 0,
             config: { align: 'center', width: 4 },
-            content: love_check ? '正常求爱' : '提议献身',
+            content: bt_sex,
             type: 'button',
           },
           {
             accelerator: 1,
             config: { align: 'center', disabled: !love_check, width: 4 },
-            content: '邀请过夜',
+            content: i18n().timon.ero_sys.bt_back_home,
             type: 'button',
           },
           {
             accelerator: 2,
             config: { align: 'center', width: 4 },
-            content: '强奸Play',
+            content: i18n().timon.ero_sys.bt_rape_play,
             type: 'button',
           },
           {
             accelerator: 3,
             config: { align: 'center', disabled: !love_check, width: 4 },
-            content: '情趣用药',
+            content: i18n().timon.ero_sys.bt_use_medicine,
             type: 'button',
           },
           {
             accelerator: 4,
             config: { align: 'center', width: 4 },
-            content: '还是算了',
+            content: i18n().ui_cancel,
             type: 'button',
           },
         ],
@@ -225,21 +203,11 @@ async function goto_sex(cid, sex_loc) {
         case 2:
           if (
             love_check &&
-            (await select_yes_or_no('', `粗暴对待${chara.sex}`, '请粗暴对待我'))
+            (await i18n().timon.ero_sys.choose_who_to_rape(chara, me))
           ) {
             is_rape = 1;
-            await era.printAndWait([
-              chara.get_colored_name(),
-              ' 会意地装出了即将被强暴的惊恐神情……',
-            ]);
           } else {
             is_rape = 2;
-            await era.printAndWait([
-              me.get_colored_name(),
-              ' 露出惊恐柔弱的申请，激发了 ',
-              chara.get_colored_name(),
-              ' 的凶性……',
-            ]);
           }
           break;
         case 3:
@@ -274,40 +242,33 @@ async function goto_sex(cid, sex_loc) {
       if (accept) {
         era.printMultiColumns([
           {
-            content: [
-              chara.get_colored_name(),
-              ' 不愿意和 ',
-              me.get_colored_name(),
-              ' 共度春宵……',
-              { isBr: true },
-              is_pleasure
-                ? `但被肉体欢愉烧灼的内心已让${chara.sex}无法说出拒绝的话语……`
-                : '但仍然顺从地准备好了自己……',
-            ],
+            content: (is_pleasure > 0
+              ? i18n().timon.ero_sys.get_want_sex_as_master_by_pleasure
+              : i18n().timon.ero_sys.get_want_sex_as_master_by_meek)(chara, me),
             type: 'text',
           },
           {
             accelerator: 0,
             config: { align: 'center', width: 6 },
-            content: '开始调教',
+            content: i18n().timon.ero_sys.bt_start_train,
             type: 'button',
           },
           {
             accelerator: 1,
             config: { align: 'center', width: 6 },
-            content: '带回过夜',
+            content: i18n().timon.ero_sys.bt_train_back_home,
             type: 'button',
           },
           {
             accelerator: 2,
             config: { align: 'center', width: 6 },
-            content: '情趣用药',
+            content: i18n().timon.ero_sys.bt_use_medicine,
             type: 'button',
           },
           {
             accelerator: 3,
             config: { align: 'center', width: 6 },
-            content: '还是算了',
+            content: i18n().ui_cancel,
             type: 'button',
           },
         ]);
@@ -327,32 +288,25 @@ async function goto_sex(cid, sex_loc) {
       } else {
         era.printMultiColumns([
           {
-            content: [
-              chara.get_colored_name(),
-              ' 不愿意和 ',
-              me.get_colored_name(),
-              ' 共度春宵……',
-              { isBr: true },
-              '怎么办呢？',
-            ],
+            content: i18n().timon.ero_sys.get_want_sex_as_raper(chara, me),
             type: 'text',
           },
           {
             accelerator: 0,
             config: { align: 'center', width: 8 },
-            content: '尝试强奸',
+            content: i18n().timon.ero_sys.bt_rape,
             type: 'button',
           },
           {
             accelerator: 1,
             config: { align: 'center', width: 8 },
-            content: '尝试下药',
+            content: i18n().timon.ero_sys.bt_drug,
             type: 'button',
           },
           {
             accelerator: 2,
             config: { align: 'center', width: 8 },
-            content: '还是算了',
+            content: i18n().ui_cancel,
             type: 'button',
           },
         ]);
@@ -360,43 +314,24 @@ async function goto_sex(cid, sex_loc) {
         if (ret === 2) {
           return;
         } else if (ret === 0) {
-          sys_change_attr_and_print(
-            0,
-            attr_enum.hp,
-            -get_random_value(0, Math.min(era.get('base:0:体力'), 200)),
-          );
+          sys_change_attr_and_print(0, attr_enum.hp, -get_random_value(0, 200));
           sys_change_attr_and_print(
             cid,
             attr_enum.hp,
-            -get_random_value(0, Math.min(era.get(`base:${cid}:体力`), 200)),
+            -get_random_value(0, 200),
           );
-          if (
+          const success =
             !era.get('flag:强奸抵抗') ||
-            sys_get_strength_ratio_in_fight(0, cid) > (dice = Math.random())
-          ) {
-            await era.printAndWait([
-              me.get_colored_name(),
-              ' 的力量支持了 ',
-              me.get_colored_name(),
-              ' 的无耻行径……',
-            ]);
-            await era.printAndWait([
-              chara.get_colored_name(),
-              ' 露出了惊恐的神情……',
-            ]);
+            sys_get_strength_ratio_in_fight(0, cid) > (dice = Math.random());
+          await i18n().timon.ero_sys.rape(chara, me, success);
+          if (success) {
             sys_like_chara(cid, 0, -400) && (await era.waitAnyKey());
             era.set('flag:当前位置', sex_loc);
             begin_and_init_ero(0, cid);
             era.set('tflag:强奸', 0);
             update_juel_buff(cid);
           } else {
-            await era.printAndWait([
-              me.get_colored_name(),
-              ' 并未成功制服 ',
-              chara.get_colored_name(),
-              '……',
-            ]);
-            return await fail(chara, me);
+            return await fail(chara);
           }
         } else {
           ret = await select_medicine();
@@ -409,30 +344,17 @@ async function goto_sex(cid, sex_loc) {
             -get_random_value(0, Math.min(era.get('base:0:精力'), 200)),
           );
           era.add(`item:${ret}`, -1);
-          if (
+          const success =
             !era.get('flag:强奸抵抗') ||
-            sys_get_intelligence_ratio_in_fight(0, cid) > (dice = Math.random())
-          ) {
-            await era.printAndWait([
-              me.get_colored_name(),
-              ' 卑劣的小花招奏效了……',
-            ]);
-            await era.printAndWait([
-              chara.get_colored_name(),
-              ' 饮下了那杯加料茶水，',
-              ret === '马跳S'
-                ? '然后沉沉睡去……'
-                : '然后被腾起的性欲烧灼了所有理智……',
-            ]);
-            era.set(`status:${cid}:${ret}`, 1);
+            sys_get_intelligence_ratio_in_fight(0, cid) >
+              (dice = Math.random());
+          await i18n().timon.ero_sys.drug(chara, me, 1 + (ret === 32), success);
+          if (success) {
+            era.set(`status:${cid}:${i18n('zh-CN').tb_item[ret]}`, 1);
             era.set('flag:当前位置', sex_loc);
             begin_and_init_ero(0, cid);
           } else {
-            await era.printAndWait([
-              chara.get_colored_name(),
-              ' 机敏地发现了异样……',
-            ]);
-            return await fail(chara, me);
+            return await fail(chara);
           }
         }
       }
@@ -442,11 +364,7 @@ async function goto_sex(cid, sex_loc) {
       await print_ero_page(cid);
       if (check < 0) {
         if (era.get(`status:${cid}:超马跳Z`) > 0) {
-          await era.printAndWait([
-            '虽然一时情动，但当 ',
-            chara.get_colored_name(),
-            ' 回过神来，一定会对此羞愤难当吧……',
-          ]);
+          await i18n().timon.ero_sys.after_rape_by_super_uma_z(chara);
           sys_like_chara(cid, 0, -400) && (await era.waitAnyKey());
           if (
             era.get(`mark:${cid}:羞耻`) < 3 &&
@@ -464,23 +382,15 @@ async function goto_sex(cid, sex_loc) {
           if (dice < 0.95) {
             era.add(`status:${cid}:疲惫`, 3 + (dice < 0.05));
           }
-        } else if (era.get(`status:${cid}:马跳S`)) {
+        } else if (era.get(`status:${cid}:马跳S`) > 0) {
           if (dice < 0.95) {
             era.add(`status:${cid}:疲惫`, 2 + (dice < 0.05));
           }
         } else if (era.get('tflag:强奸') === 0) {
-          if (
-            era.get(`mark:${cid}:苦痛`) < 3 &&
-            !era.get(`ex:${cid}:苦痛获取`)
-          ) {
-            era.set(`nowex:${cid}:苦痛获取`, 1);
-          }
-          if (
-            era.get(`mark:${cid}:反抗`) < 3 &&
-            !era.get(`ex:${cid}:反抗获取`)
-          ) {
-            era.set(`nowex:${cid}:反抗获取`, 1);
-          }
+          add_juel(cid, '痛苦', 6000);
+          add_juel(cid, '恐惧', 4800);
+          add_juel(cid, '反感', 1500);
+          update_juels(true, cid);
           await update_marks(true, cid);
           if (dice < 0.95) {
             sys_hurt_uma(cid, 1 + (dice < 0.05));

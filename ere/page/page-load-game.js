@@ -270,7 +270,7 @@ module.exports = async () => {
                 const personal_title = CharaTitles.get(56)
                   .get()
                   .find((e) => e.n === i18n('zh-CN').title[105601]);
-                if (personal_title !== undefined) {
+                if (personal_title !== void 0) {
                   personal_title.c = get_chara_color(56);
                 }
               }
