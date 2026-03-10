@@ -3,6 +3,7 @@ const era = require('#/era-electron');
 const { sys_check_yandere } = require('#/system/chara/sys-calc-cheat');
 const use_item_by_character = require('#/system/ero/ero-act-handler/use-item-by-chara');
 const sys_filter_ero_act = require('#/system/ero/sub/sys-filter-ero-act');
+const { get_tequip_info } = require('#/system/ero/sys-calc-ero-item');
 const {
   check_satisfied,
   check_want_to_escape,
@@ -17,8 +18,8 @@ const { get_custom_ero, run_custom_ero } = require('#/event/ero/ero-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
-const { medicine_enum, tequip_parts } = require('#/data/ero/item-const');
-const { part_enum, part_names } = require('#/data/ero/part-const');
+const { medicine_enum } = require('#/data/ero/item-const');
+const { part_enum } = require('#/data/ero/part-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const { condition_type, default_tags } = require('#/data/event/ero-hook-tag');
 const {
@@ -136,15 +137,9 @@ async function sys_auto_rape(shown) {
       era.get(`talent:${master}:反抗意愿`) === 1 ||
       era.get(`talent:${master}:贞洁看法`) === 1)
   ) {
-    const tequip_list = tequip_parts
-      .map((part) => {
-        return {
-          part,
-          user: master,
-          item: era.get(`tequip:${master}:${part_names[part] || part}`),
-        };
-      })
-      .filter((e) => e.item !== -1);
+    const tequip_list = get_tequip_info(master).filter(
+      ({ user, item }) => user === master && item !== -1,
+    );
     if (tequip_list.length) {
       await run_custom_ero(
         master,

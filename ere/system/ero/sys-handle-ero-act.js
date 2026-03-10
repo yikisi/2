@@ -89,7 +89,7 @@ async function next_turn(shown) {
     for (const e of tequip_parts.slice(0, 6)) {
       if (era.get(`tequip:${cid}:${part_touch[e]}`) !== -1) {
         const tmp_part = era.get(`tcvar:${cid}:${part_touch[e]}接触部位`);
-        if (tmp_part.item === undefined) {
+        if (tmp_part.item === void 0) {
           clean_part(new EroParticipant(cid, e));
         } else {
           await run_custom_ero(cid, ero_hooks.use_item, {
@@ -314,9 +314,9 @@ async function sys_handle_ero_act(command, filters, shown = true) {
     print_stain_info(lover);
     await era.waitAnyKey();
   } else if (command === 904) {
-    await print_chara_info(0, undefined, 5);
+    await print_chara_info(0, void 0, 5);
   } else if (command === 905) {
-    await print_chara_info(lover, undefined, 5);
+    await print_chara_info(lover, void 0, 5);
   } else if (command === 999) {
     if (
       sys_check_awake(lover) &&
@@ -351,7 +351,7 @@ async function sys_handle_ero_act(command, filters, shown = true) {
       if (shown) {
         await era.printAndWait([
           get_chara_talk(master).get_colored_name(),
-          ' 逃离了……',
+          ' 逃离了',
         ]);
       }
       era.set(`tcvar:${master}:逃跑`, 1);

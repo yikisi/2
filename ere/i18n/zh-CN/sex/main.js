@@ -14,7 +14,7 @@ class I18nSex {
     location,
     ' ',
     mirror,
-    '前',
+    ' 前',
   ];
   hd_turn_template = '第 %TURN% 回合';
   rape_notification = '强奸事件发生！';

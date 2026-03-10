@@ -1,13 +1,14 @@
 const era = require('#/era-electron');
 
+const { get_tequip_info } = require('#/system/ero/sys-calc-ero-item');
+
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
-const CharaTalk = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { buff_colors } = require('#/data/color-const');
-const { tequip_parts } = require('#/data/ero/item-const');
-const { part_names, part_names4item } = require('#/data/ero/part-const');
+const { item_enum } = require('#/data/ero/item-const');
+const { get_slang_part_name_key, part_enum } = require('#/data/ero/part-const');
 
 const { i18n } = require('#/i18n/selector');
 
@@ -16,12 +17,13 @@ const { i18n } = require('#/i18n/selector');
  * @returns {Promise<{item:number,part:number,user:number}>}
  */
 async function take_off_ero_item(chara) {
+  const me = get_chara_talk(0);
   era.printMultiColumns([
-    { content: '要撤除谁身上的性玩具？', type: 'text' },
+    { content: i18n().timon.ero_sys.itm_take_off_select_target, type: 'text' },
     {
       accelerator: 0,
       config: { align: 'center', width: 8 },
-      content: CharaTalk.me.name,
+      content: me.name,
       type: 'button',
     },
     {
@@ -33,86 +35,71 @@ async function take_off_ero_item(chara) {
     {
       accelerator: 999,
       config: { align: 'center', width: 8 },
-      content: '容我想想',
+      content: i18n().ui_cancel,
       type: 'button',
     },
   ]);
   const aim_id = await era.input();
   if (aim_id === 999) {
-    era.print([CharaTalk.me.get_colored_name(), ' 放弃了撤除性玩具……']);
-    return undefined;
+    await era.printAndWait(i18n().timon.ero_sys.get_itm_give_up_take_off(me));
+    return void 0;
   }
-  const aim_chara = aim_id ? chara : CharaTalk.me;
-  let item_list = tequip_parts.map((p) => {
-    const item = era.get(`tequip:${aim_id}:${part_names[p] || p}`);
-    return {
-      item,
-      part: p,
-      user: aim_id,
-    };
-  });
-  item_list.push({
-    item: era.get('tflag:全身镜') - 1,
-    part: '全身镜',
-  });
-  item_list = item_list.filter((e) => e.item !== -1);
+  const aim_chara = aim_id > 0 ? chara : me;
+  let item_list = get_tequip_info(aim_id).filter(({ item }) => item !== -1);
   if (!item_list.length) {
-    era.print([aim_chara.get_colored_name(), ' 身上没有性玩具……']);
-    return undefined;
+    await era.printAndWait(
+      i18n().timon.ero_sys.get_itm_no_item_to_take_off(aim_chara),
+    );
+    return void 0;
   }
   era.printMultiColumns(
     [
-      { content: '要撤除什么性玩具？', type: 'text' },
-      ...item_list.map((e, i) => {
-        return {
-          accelerator: i,
-          config: { align: 'center', width: 4 },
-          content:
-            typeof e.part === 'string'
-              ? e.part
-              : `${i18n().tb_item[e.item]} (${
-                  part_names4item[e.part] || part_names[e.part]
-                })`,
-          type: 'button',
-        };
-      }),
+      { content: i18n().timon.ero_sys.itm_take_off_select_item, type: 'text' },
+      ...item_list.map(({ part, item }, i) => ({
+        accelerator: i,
+        config: { align: 'center', width: 4 },
+        content:
+          typeof part === 'number'
+            ? i18n()
+                .timon.ero_sys.itm_take_off_select_entry_template.replace(
+                  '%ITEM%',
+                  i18n().tb_item[item],
+                )
+                .replace('%PART%', i18n().body_part[part_enum.keys[part]])
+            : i18n().tb_item[part],
+        type: 'button',
+      })),
     ],
     { horizontalAlign: 'space-evenly' },
   );
   const used_item = item_list[await era.input()];
   if (
     !(await select_yes_or_no(
-      used_item.part === '全身镜'
-        ? '确定要撤除全身镜吗？'
-        : [
-            '确定要从 ',
-            aim_chara.get_colored_name(),
-            ' 的 ',
+      +used_item.part === item_enum.mirror
+        ? i18n().timon.ero_sys.itm_take_off_mirror_confirm
+        : i18n().timon.ero_sys.get_itm_take_off_confirm(
+            aim_chara,
             {
               color: buff_colors[2],
               content:
-                part_names4item[used_item.part] ||
-                part_names[used_item.part] ||
-                '身上',
+                i18n().body_part[get_slang_part_name_key(used_item.part)],
             },
-            ' 撤除 ',
             {
               color: buff_colors[2],
               content: i18n().tb_item[used_item.item],
             },
-            ' 吗？',
-          ],
-      '确定',
-      '容我想想',
+          ),
+      i18n().ui_yes,
+      i18n().ui_cancel,
     ))
   ) {
-    era.print([
-      get_chara_talk(0).get_colored_name(),
-      ' 放弃了撤除 ',
-      { color: buff_colors[2], content: i18n().tb_item[used_item.item] },
-      '……',
-    ]);
-    return undefined;
+    era.print(
+      i18n().timon.ero_sys.get_itm_take_off_give_up(me, {
+        color: buff_colors[2],
+        content: i18n().tb_item[used_item.item],
+      }),
+    );
+    return void 0;
   }
   return used_item;
 }

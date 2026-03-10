@@ -4,7 +4,7 @@ const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
-const CharaTalk = require('#/utils/chara-talk');
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { buff_colors } = require('#/data/color-const');
 const { medicine_enum } = require('#/data/ero/item-const');
@@ -45,15 +45,16 @@ async function use_ero_medicine(chara) {
     !milk_u &&
     !stop_o
   ) {
-    era.print('暂时没有可用的药物……');
-    return undefined;
+    await era.printAndWait(i18n().timon.ero_sys.med_no_medicines);
+    return void 0;
   }
+  const me = get_chara_talk(0);
   era.printMultiColumns([
-    { content: '要给谁喂食药物？', type: 'text' },
+    { content: i18n().timon.ero_sys.med_select_target, type: 'text' },
     {
       accelerator: 0,
       config: { align: 'center', width: 8 },
-      content: CharaTalk.me.name,
+      content: me.name,
       type: 'button',
     },
     {
@@ -65,148 +66,138 @@ async function use_ero_medicine(chara) {
     {
       accelerator: 999,
       config: { align: 'center', width: 8 },
-      content: '容我想想',
+      content: i18n().ui_cancel,
       type: 'button',
     },
   ]);
   const aim_id = await era.input();
   if (aim_id === 999) {
-    era.print([CharaTalk.me.get_colored_name(), ' 放弃了使用药物……']);
-    return undefined;
+    await era.printAndWait(i18n().timon.ero_sys.get_med_give_up(me));
+    return void 0;
   }
-  const aim_chara = aim_id ? chara : CharaTalk.me,
-    fron_status =
-      era.get(`status:${aim_id}:弗隆K`) ||
-      era.get(`status:${aim_id}:弗隆P`) ||
-      era.get(`tequip:${aim_id}:外阴`) !== -1,
-    p_status =
-      era.get(`cflag:${aim_id}:妊娠阶段`) !== 1 << pregnant_stage_enum.no ||
-      era.get(`status:${aim_id}:短效避孕药`) ||
-      era.get(`status:${aim_id}:长效避孕药`) ||
-      era.get(`status:${aim_id}:促排卵药`) ||
-      era.get(`status:${aim_id}:经期`),
-    sex_check = aim_chara.sex_code !== 1,
-    item_list = [
-      { a: medicine_enum.milk_h, n: milk_h },
-      { a: medicine_enum.milk_u, n: milk_u },
-      {
-        a: medicine_enum.uma_z,
-        n: uma_z,
-      },
-      {
-        a: medicine_enum.uma_s,
-        n: uma_s,
-        e: aim_id && sys_check_awake(aim_id),
-      },
-      {
-        a: medicine_enum.super_z,
-        n: super_z,
-        e:
-          aim_id &&
-          !era.get(`status:${aim_id}:超马跳Z`) &&
-          era.get(`base:${aim_id}:性欲`) < lust_border.absent_mind,
-      },
-      {
-        a: medicine_enum.fron_k,
-        e: !fron_status,
-        n: fron_k,
-      },
-      {
-        a: medicine_enum.fron_p,
-        e: !fron_status,
-        n: fron_p,
-      },
-      {
-        a: medicine_enum.drug_m,
-        e: sex_check && !era.get(`talent:${aim_id}:泌乳`),
-        n: drug_m,
-      },
-      {
-        a: medicine_enum.drug_p,
-        e: sex_check && !p_status && !era.get(`status:${aim_id}:排卵期`),
-        n: drug_p,
-      },
-      {
-        a: medicine_enum.anti_p_s,
-        e: sex_check && !p_status,
-        n: anti_p_s,
-      },
-      {
-        a: medicine_enum.anti_p_l,
-        e: sex_check && !p_status,
-        n: anti_p_l,
-      },
-      {
-        a: medicine_enum.stop_o,
-        n: stop_o,
-      },
-    ]
-      .filter((e) => e.n > 0)
-      .map((e) => {
-        e.e ||= e.e === undefined;
-        return e;
-      });
+  const aim_chara = aim_id ? chara : me;
+  const fron_status =
+    era.get(`status:${aim_id}:弗隆K`) ||
+    era.get(`status:${aim_id}:弗隆P`) ||
+    era.get(`tequip:${aim_id}:外阴`) !== -1;
+  const p_status =
+    era.get(`cflag:${aim_id}:妊娠阶段`) !== 1 << pregnant_stage_enum.no ||
+    era.get(`status:${aim_id}:短效避孕药`) ||
+    era.get(`status:${aim_id}:长效避孕药`) ||
+    era.get(`status:${aim_id}:促排卵药`) ||
+    era.get(`status:${aim_id}:经期`);
+  const sex_check = aim_chara.sex_code !== 1;
+  const item_list = [
+    { a: medicine_enum.milk_h, c: milk_h },
+    { a: medicine_enum.milk_u, c: milk_u },
+    {
+      a: medicine_enum.uma_z,
+      c: uma_z,
+    },
+    {
+      a: medicine_enum.uma_s,
+      c: uma_s,
+      e: aim_id && sys_check_awake(aim_id),
+    },
+    {
+      a: medicine_enum.super_z,
+      c: super_z,
+      e:
+        aim_id &&
+        !era.get(`status:${aim_id}:超马跳Z`) &&
+        era.get(`base:${aim_id}:性欲`) < lust_border.absent_mind,
+    },
+    {
+      a: medicine_enum.fron_k,
+      c: fron_k,
+      e: !fron_status,
+    },
+    {
+      a: medicine_enum.fron_p,
+      c: fron_p,
+      e: !fron_status,
+    },
+    {
+      a: medicine_enum.drug_m,
+      c: drug_m,
+      e: sex_check && !era.get(`talent:${aim_id}:泌乳`),
+    },
+    {
+      a: medicine_enum.drug_p,
+      c: drug_p,
+      e: sex_check && !p_status && !era.get(`status:${aim_id}:排卵期`),
+    },
+    {
+      a: medicine_enum.anti_p_s,
+      c: anti_p_s,
+      e: sex_check && !p_status,
+    },
+    {
+      a: medicine_enum.anti_p_l,
+      c: anti_p_l,
+      e: sex_check && !p_status,
+    },
+    {
+      a: medicine_enum.stop_o,
+      c: stop_o,
+    },
+  ]
+    .filter((e) => e.c > 0)
+    .map((e) => ({ ...e, e: e.e ?? true }));
   if (item_list.findIndex((e) => e.e) === -1) {
     await era.printAndWait(
-      aim_id
-        ? ['没有可以喂给 ', aim_chara.get_colored_name(), ' 的药物……']
-        : '没有可以服用的药物……',
+      aim_id > 0
+        ? i18n().timon.ero_sys.get_med_no_medicines_for_chara(aim_chara)
+        : i18n().timon.ero_sys.med_no_medicines_for_you,
     );
-    return undefined;
+    return void 0;
   }
   era.printMultiColumns(
     [
       {
-        content: aim_id
-          ? ['要给 ', aim_chara.get_colored_name(), ' 喂食什么药物？']
-          : '要服用什么药物？',
+        content:
+          aim_id > 0
+            ? i18n().timon.ero_sys.get_med_select_medicine(aim_chara)
+            : i18n().timon.ero_sys.med_select_medicine_for_you,
         type: 'text',
       },
-      ...item_list.map((e, i) => {
-        return {
-          accelerator: i + 1,
-          config: { align: 'center', disabled: !e.e, width: 4 },
-          content: `${i18n().tb_item[e.a]} (${e.n})`,
-          type: 'button',
-        };
-      }),
+      ...item_list.map((e, i) => ({
+        accelerator: i + 1,
+        config: { align: 'center', disabled: !e.e, width: 4 },
+        content: i18n()
+          .timon.ero_sys.select_entry_template.replace(
+            '%ITEM%',
+            i18n().tb_item[e.a],
+          )
+          .replace('%COUNT%', e.c.toString()),
+        type: 'button',
+      })),
     ],
     { horizontalAlign: 'space-evenly' },
   );
   const iid = item_list[(await era.input()) - 1].a;
   if (
     !(await select_yes_or_no(
-      aim_id
-        ? [
-            '要给 ',
-            aim_chara.get_colored_name(),
-            ' 喂食',
-            {
-              color: buff_colors[2],
-              content: di18n.tb_item.get_name(iid),
-            },
-            '吗？',
-          ]
-        : [
-            '要服用 ',
-            {
-              color: buff_colors[2],
-              content: di18n.tb_item.get_name(iid),
-            },
-            ' 吗？',
-          ],
-      '确定',
-      '容我想想',
+      aim_id > 0
+        ? i18n().timon.ero_sys.get_med_confirm_for_chara(aim_chara, {
+            color: buff_colors[2],
+            content: di18n.tb_item.get_name(iid),
+          })
+        : i18n().timon.ero_sys.get_med_confirm_for_you({
+            color: buff_colors[2],
+            content: di18n.tb_item.get_name(iid),
+          }),
+      i18n().ui_yes,
+      i18n().ui_cancel,
     ))
   ) {
-    era.print([
-      CharaTalk.me.get_colored_name(),
-      ' 放弃了',
-      aim_id > 0 ? '喂食' : '饮用',
-      { color: buff_colors[2], content: di18n.tb_item.get_name(iid) },
-      '……',
-    ]);
-    return undefined;
+    await era.printAndWait(
+      i18n().timon.ero_sys.get_med_give_up_medicine({
+        color: buff_colors[2],
+        content: di18n.tb_item.get_name(iid),
+      }),
+    );
+    return void 0;
   }
   return { item: iid, user: aim_id };
 }

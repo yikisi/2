@@ -245,4 +245,176 @@ module.exports = {
   ],
   /** 选择睡奸 */
   bt_rape_in_sleeping: '袭击！',
+
+  /**
+   * 使用道具
+   */
+  lub_select_target: '要给谁使用润滑液？',
+  select_entry_template: '%ITEM% (%COUNT%)',
+  /** @param {CharaTalk} you */
+  get_lub_give_up: (you) => [you.get_colored_name(), ' 放弃了使用润滑液'],
+  lub_no_parts: '没有需要润滑的部位',
+  /** @param {CharaTalk} chara */
+  get_lub_select_part: (chara) => [
+    '要润滑 ',
+    chara.get_colored_name(),
+    ' 的哪个部位？',
+  ],
+  /**
+   * @param {CharaTalk} chara
+   * @param {PrintedSpan} part
+   */
+  get_lub_confirm: (chara, part) => [
+    '要润滑 ',
+    chara.get_colored_name(),
+    ' 的 ',
+    part,
+    ' 吗？',
+  ],
+  med_no_medicines: '暂时没有可用的药物',
+  med_select_target: '要给谁喂食药物？',
+  /** @param {CharaTalk} you */
+  get_med_give_up: (you) => [you.get_colored_name(), ' 放弃了使用药物'],
+  /** @param {CharaTalk} chara */
+  get_med_no_medicines_for_chara: (chara) => [
+    '没有可以喂给 ',
+    chara.get_colored_name(),
+    ' 的药物',
+  ],
+  med_no_medicines_for_you: '没有可以服用的药物',
+  /** @param {CharaTalk} chara */
+  get_med_select_medicine: (chara) => [
+    '要给 ',
+    chara.get_colored_name(),
+    ' 喂食什么药物？',
+  ],
+  med_select_medicine_for_you: '要服用什么药物？',
+  /**
+   * @param {CharaTalk} chara
+   * @param {PrintedSpan} item
+   */
+  get_med_confirm_for_chara: (chara, item) => [
+    '要给 ',
+    chara.get_colored_name(),
+    ' 喂食 ',
+    item,
+    ' 吗？',
+  ],
+  /** @param {PrintedSpan} item */
+  get_med_confirm_for_you: (item) => ['要服用 ', item, ' 吗？'],
+  /** @param {PrintedSpan} item */
+  get_med_give_up_medicine: (item) => ['放弃了使用 ', item],
+  itm_no_items: '暂时没有可用的性玩具',
+  itm_select_item: '要使用什么性玩具？',
+  /**
+   * @param {CharaTalk} chara
+   * @param {PrintedSpan} item
+   */
+  get_itm_select_part: (chara, item) => [
+    '要对 ',
+    chara.get_colored_name(),
+    ' 的什么部位使用 ',
+    item,
+    '？',
+  ],
+  itm_no_parts: '没有可以使用该性玩具的部位',
+  /**
+   * @param {CharaTalk} chara
+   * @param {PrintedSpan} item
+   * @param {PrintedSpan} part
+   */
+  get_itm_confirm_with_part: (chara, item, part) => [
+    '确定要对 ',
+    chara.get_colored_name(),
+    ' 的 ',
+    part,
+    ' 使用 ',
+    item,
+    ' 吗？',
+  ],
+  /**
+   * @param {CharaTalk} chara
+   * @param {PrintedSpan} item
+   */
+  get_itm_confirm_without_part: (chara, item) => [
+    '确定要对 ',
+    chara.get_colored_name(),
+    ' 使用 ',
+    item,
+    ' 吗？',
+  ],
+  /**
+   * @param {CharaTalk} you
+   * @param {PrintedSpan} item
+   */
+  get_itm_give_up_item: (you, item) => [
+    you.get_colored_name(),
+    ' 放弃了使用 ',
+    item,
+  ],
+  itm_take_off_select_target: '要撤除谁身上的性玩具？',
+  /** @param {CharaTalk} you */
+  get_itm_give_up_take_off: (you) => [
+    you.get_colored_name(),
+    ' 放弃了撤除性玩具',
+  ],
+  /** @param {CharaTalk} you */
+  get_itm_no_item_to_take_off: (you) => [
+    you.get_colored_name(),
+    ' 身上没有性玩具',
+  ],
+  itm_take_off_select_item: '要撤除什么性玩具？',
+  itm_take_off_select_entry_template: '%ITEM% (%PART%)',
+  itm_take_off_mirror_confirm: '确定要撤除【全身镜】吗？',
+  /**
+   * @param {CharaTalk} chara
+   * @param {PrintedSpan} part
+   * @param {PrintedSpan} item
+   */
+  get_itm_take_off_confirm: (chara, part, item) => [
+    '确定要从 ',
+    chara.get_colored_name(),
+    ' 的 ',
+    part,
+    ' 取下 ',
+    item,
+    ' 吗？',
+  ],
+  /**
+   * @param {CharaTalk} you
+   * @param {PrintedSpan} item
+   */
+  get_itm_take_off_give_up: (you, item) => [
+    you.get_colored_name(),
+    ' 放弃了撤除 ',
+    item,
+  ],
+
+  /**
+   * 榨乳结算
+   */
+  /**
+   * @param {PrintedSpan} amount
+   * @param {string} item
+   * @returns {TextContent}
+   */
+  get_milk_ml: (amount, item) => ['用榨乳器收集到了 ', amount, 'ml ', item],
+  /**
+   * @param {PrintedSpan} amount
+   * @param {string} item
+   * @returns {TextContent}
+   */
+  get_milk_item: (amount, item) => ['，灌装处理后获得了 ', amount, ' 瓶', item],
+  /**
+   * @param {PrintedSpan} amount
+   * @param {CharaTalk} you
+   * @returns {TextContent}
+   */
+  get_your_milk_info: (amount, you) => [
+    '（其中 ',
+    amount,
+    ' 瓶来自于 ',
+    you.get_colored_name(),
+    '）',
+  ],
 };

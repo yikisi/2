@@ -178,12 +178,9 @@ module.exports = (handlers) => {
       add_juel(defender, '羞耻', base_emotion_juel);
     } else if (extra_flag.part !== 99) {
       sys_do_sex(
+        new EroParticipant(extra_flag.owner ?? attacker, part_enum.item),
         new EroParticipant(
-          extra_flag.owner !== undefined ? extra_flag.owner : attacker,
-          part_enum.item,
-        ),
-        new EroParticipant(
-          extra_flag.stay !== undefined ? extra_flag.stay : defender,
+          extra_flag.stay ?? defender,
           extra_flag.part,
           extra_flag.part === part_enum.breast ? get_nipple_buff(defender) : 0,
         ),
@@ -198,11 +195,14 @@ module.exports = (handlers) => {
               era.get(`talent:${defender}:${part_talents[extra_flag.part]}`))),
       );
     } else {
-      era.set(`tequip:${defender}:${extra_flag.item}`, extra_flag.item);
+      era.set(
+        `tequip:${defender}:${i18n('zh-CN').tb_item[extra_flag.item]}`,
+        extra_flag.item,
+      );
     }
     if (
       !attacker &&
-      extra_flag.stay === undefined &&
+      extra_flag.stay === void 0 &&
       extra_flag.item !== item_enum.mirror
     ) {
       if (extra_flag.item !== item_enum.electric_stunner) {
@@ -226,7 +226,7 @@ module.exports = (handlers) => {
    * @param {{part:number|string,user:number}} extra_flag
    */
   handlers[ero_hooks.take_off_item] = (attacker, _, __, extra_flag) => {
-    if (extra_flag.part === '全身镜') {
+    if (+extra_flag.part === item_enum.mirror) {
       era.set('tflag:全身镜', 0);
       update_juel_buff(...get_characters_in_train());
     } else {

@@ -95,19 +95,17 @@ async function print_chara_info(_id, chara_list, _page) {
       {
         columns:
           _page === void 0
-            ? handlers.map((e, i) => {
-                return {
-                  accelerator: i + 10,
-                  config: {
-                    buttonType: i === page ? 'warning' : 'info',
-                    disabled: check_page_disabled(chara, e),
-                    offset: 2,
-                    width: 22,
-                  },
-                  content: e.name,
-                  type: 'button',
-                };
-              })
+            ? handlers.map((e, i) => ({
+                accelerator: i + 10,
+                config: {
+                  buttonType: i === page ? 'warning' : 'info',
+                  disabled: check_page_disabled(chara, e),
+                  offset: 2,
+                  width: 22,
+                },
+                content: e.name,
+                type: 'button',
+              }))
             : [],
         config: { width: 5 },
       },

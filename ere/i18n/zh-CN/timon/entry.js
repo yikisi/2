@@ -5,10 +5,11 @@ class I18nTimon {
   daily = proxy_kojo_js(require('#/i18n/zh-CN/timon/daily'));
   edu = proxy_kojo_js(require('#/i18n/zh-CN/timon/edu'));
   love = proxy_kojo_js(require('#/i18n/zh-CN/timon/love'));
-  ero = proxy_kojo_js(require('#/i18n/zh-CN/timon/ero/ero'));
+  ero = proxy_kojo_js(require('#/i18n/zh-CN/timon/sex/ero'));
   basement = proxy_kojo_js(require('#/i18n/zh-CN/timon/base'));
 
-  ero_sys = proxy_kojo_js(require('#/i18n/zh-CN/timon/ero/system'));
+  ero_sys = proxy_kojo_js(require('#/i18n/zh-CN/timon/sex/system'));
+  act_desc = proxy_kojo_js(require('#/i18n/zh-CN/timon/sex/descriptions'));
 
   daily_child = proxy_kojo_js(require('#/i18n/zh-CN/timon/child/daily'));
   ero_child = proxy_kojo_js(require('#/i18n/zh-CN/timon/child/ero'));

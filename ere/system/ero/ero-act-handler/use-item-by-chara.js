@@ -56,21 +56,22 @@ function use_item_by_character() {
   });
   part_item_list[1].items.push(item_enum.electric_stunner);
   part_item_list[3].items.push(item_enum.electric_stunner);
-  if (era.get('tflag:全身镜')) {
+  if (era.get('tflag:全身镜') > 0) {
     part_item_list[7].items = [];
-  } else if (part_item_list[7].items.length) {
+  } else if (part_item_list[7].items.length > 0) {
     part_item_list.push({ items: [item_enum.mirror], part: 99 });
   }
   const virgin_size = era.get('cflag:0:阴道尺寸');
-  if (virgin_size) {
-    part_item_list[2].items = [];
-    if (get_penis_size(0)) {
+  if (virgin_size > 0) {
+    if (get_penis_size(0) > 0) {
       part_item_list[3].items = [];
+    } else {
+      part_item_list[2].items = [];
     }
   } else {
     part_item_list[3].items = part_item_list[4].items = [];
   }
-  return get_random_entry(part_item_list.filter((e) => e.items.length));
+  return get_random_entry(part_item_list.filter((e) => e.items.length > 0));
 }
 
 module.exports = use_item_by_character;

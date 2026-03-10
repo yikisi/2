@@ -662,6 +662,14 @@ class I18nEntry {
   ui_storage_select_header_template = '选择要使用%ITEM%的对象';
   ui_storage_no_targets_template = '没有可以使用%ITEM%的对象';
 
+  ui_bt_self_info = '个人情报';
+  ui_bt_chara_info = '对方情报';
+
+  ui_sex_bt_setting = '设置';
+  ui_sex_bt_touch = '身体接触';
+  ui_sex_bt_stain = '脏污检查';
+  ui_sex_bt_turn_around = '转身';
+
   bs_info_template = '昏暗的房间……%DURABILITY%……';
   bs_no_one_info_template = '昏暗、空无一人的房间……%DURABILITY%……';
   ui_bs_durability_0 = '但完全没有防备';
@@ -681,8 +689,6 @@ class I18nEntry {
   ui_bs_battle = '正面反抗';
   ui_bs_release = '请求释放';
   ui_bs_clock = '询问时间';
-  ui_bs_info = '个人情报';
-  ui_bs_chara_info = '对方情报';
   ui_bs_guide = '逃生指南';
 
   ui_save_game_header = '要保存至哪个栏位？';

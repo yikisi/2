@@ -27,21 +27,6 @@ const item_enum = {
   artificial_virgin: 76,
 };
 
-const item_actions = {};
-item_actions[item_enum.anal_beads] = '塞入';
-item_actions[item_enum.butt_plug] = '塞上';
-item_actions[item_enum.clamps] = '夹上';
-item_actions[item_enum.dildo] = '插入';
-item_actions[item_enum.gag] = '塞上';
-item_actions[item_enum.love_eggs] = {
-  [part_enum.anal]: '塞入',
-  [part_enum.breast]: '贴上',
-  [part_enum.clitoris]: '贴上',
-  [part_enum.virgin]: '塞入',
-};
-item_actions[item_enum.milk_pump] = '装上';
-item_actions[item_enum.artificial_virgin] = '套上';
-
 const medicine_enum = {
   // 长效避孕药
   anti_p_l: 35,
@@ -76,11 +61,27 @@ module.exports = {
    * @returns {string}
    */
   get_item_action(item, part) {
-    let ret = item_actions[item];
-    if (typeof ret === 'object') {
-      ret = ret[part];
+    switch (item) {
+      case item_enum.anal_beads:
+      case item_enum.butt_plug:
+      case item_enum.dildo:
+      case item_enum.gag:
+        return 'r_v_push';
+      case item_enum.clamps:
+      case item_enum.milk_pump:
+      case item_enum.artificial_virgin:
+        return 'r_v_equip';
+      case item_enum.love_eggs:
+        switch (part) {
+          case part_enum.breast:
+          case part_enum.clitoris:
+            return 'r_v_equip';
+          case part_enum.anal:
+          case part_enum.virgin:
+            return 'r_v_push';
+        }
     }
-    return ret;
+    return 'r_v_unknown';
   },
   item_enum,
   medicine_enum,
@@ -91,7 +92,7 @@ module.exports = {
     part_enum.clitoris,
     part_enum.virgin,
     part_enum.anal,
-    '项圈',
-    '眼罩',
+    '72',
+    '70',
   ],
 };

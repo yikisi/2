@@ -87,10 +87,6 @@ part_gifts[part_enum.penis] = '凶器';
 part_gifts[part_enum.virgin] = '名穴';
 part_gifts[part_enum.anal] = '魔尻';
 
-const part_names4item = {};
-part_names4item[part_enum.breast] = '乳头';
-part_names4item[part_enum.clitoris] = '阴蒂';
-
 const base_enum = {
   no: 0,
   same: 0,
@@ -147,6 +143,19 @@ module.exports = {
   get_skill_group_list,
   get_skill_list: (sex) =>
     get_skill_group_list(sex).reduce((p, c) => [...p, ...c]),
+  /**
+   * @param {number} part
+   * @returns {string}
+   */
+  get_slang_part_name_key(part) {
+    if (part === part_enum.breast) {
+      return 's_nipple';
+    }
+    if (part < part_enum.keys.length) {
+      return `s_${part_enum.keys[part]}`;
+    }
+    return 's_other';
+  },
   motion_enum: {
     // 躺
     lie: 0,
@@ -162,7 +171,6 @@ module.exports = {
   part_gifts,
   /** 身体部位对应的快感名称 */
   part_names,
-  part_names4item,
   part_skills,
   part_talents,
   /** 身体部位对应的部位名称 */

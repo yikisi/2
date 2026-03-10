@@ -31,7 +31,7 @@ const get_display_name = require('#/utils/calc-display-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const get_color = require('#/utils/gradient-color');
 const { get_random_entry } = require('#/utils/list-utils');
-const { get_random_value } = require('#/utils/value-utils');
+const { get_abbr_number, get_random_value } = require('#/utils/value-utils');
 
 const {
   buff_colors,
@@ -215,12 +215,13 @@ function get_chara_info(cid) {
 }
 
 /**
- * @param {string} type
+ * @param {number} iid
  * @param {number} size
  * @param {{count:number}} counter
  * @returns {boolean}
  */
-function print_milking(type, size, counter) {
+function print_milking(iid, size, counter) {
+  const type = i18n('zh-CN').tb_item[iid];
   const my_milk = era.get(`tflag:${type}可卖`);
   const milk = era.get(`tflag:${type}产量`) + my_milk;
   if (milk > 0) {
@@ -228,45 +229,41 @@ function print_milking(type, size, counter) {
     const got_me = Math.floor(my_milk / size);
     const buffer = [];
     buffer.push(
-      '用榨乳器收集到了 ',
-      {
-        color: palam_colors.notifications[1],
-        content: `${milk.toLocaleString()}ml`,
-        fontWeight: 'bold',
-      },
-      ' ',
-      type,
+      ...i18n().timon.ero_sys.get_milk_ml(
+        {
+          ...get_abbr_number(milk),
+          color: palam_colors.notifications[1],
+          fontWeight: 'bold',
+        },
+        __(`tb_item.${iid}`),
+      ),
     );
     if (got > 0) {
       buffer.push(
-        '，灌装处理后获得了 ',
-        {
-          color: palam_colors.notifications[1],
-          content: got.toString(),
-          fontWeight: 'bold',
-        },
-        ' 瓶【',
-        type,
-        '】',
+        ...i18n().timon.ero_sys.get_milk_item(
+          {
+            ...get_abbr_number(got),
+            color: palam_colors.notifications[1],
+            fontWeight: 'bold',
+          },
+          di18n.tb_item.get_name(iid),
+        ),
       );
     }
     if (got_me > 0) {
       buffer.push(
-        '（其中 ',
-        {
-          color: palam_colors.notifications[1],
-          content: got_me.toString(),
-          fontWeight: 'bold',
-        },
-        ' 瓶来自于 ',
-        get_chara_talk(0).get_colored_name(),
-        '）',
+        ...i18n().timon.ero_sys.get_your_milk_info(
+          {
+            ...get_abbr_number(got_me),
+            color: palam_colors.notifications[1],
+            fontWeight: 'bold',
+          },
+          get_chara_talk(0),
+        ),
       );
       counter.count += got_me;
     }
-    buffer.push('！');
-    era.println();
-    era.print(buffer);
+    era.print([{ isBr: true }, ...buffer]);
     era.add(`item:${type}`, got - got_me);
     era.add(`item:鲜榨${type}`, got_me);
     return true;
@@ -377,20 +374,16 @@ async function page_ero(lover, skip_start_end = false) {
           '%TURN%',
           era.get('tflag:回合').toString(),
         ),
-        ' ',
       ],
       type: 'text',
     });
-    if (rape === 0) {
-      l_cols.at(-1).content.push({
+    if (rape >= 0) {
+      l_cols.at(-1).content.push(' ', {
         color: buff_colors[2],
-        content: i18n().sex.rape_notification,
-        fontWeight: 'bold',
-      });
-    } else if (rape > 0) {
-      l_cols.at(-1).content.push({
-        color: buff_colors[2],
-        content: i18n().sex.raped_notification,
+        content:
+          rape === 0
+            ? i18n().sex.rape_notification
+            : i18n().sex.raped_notification,
         fontWeight: 'bold',
       });
     }
@@ -548,14 +541,14 @@ async function page_ero(lover, skip_start_end = false) {
       type: 'text',
     });
     const setting_bar = [
-      '设置',
-      '身体接触',
-      '脏污检查',
-      '个人情报',
-      '目标情报',
+      i18n().ui_sex_bt_setting,
+      i18n().ui_sex_bt_touch,
+      i18n().ui_sex_bt_stain,
+      i18n().ui_bt_self_info,
+      i18n().ui_bt_chara_info,
     ].map((e, i) => ({ a: 901 + i, n: e }));
     if (!master) {
-      setting_bar.unshift({ a: 900, n: '转身' });
+      setting_bar.unshift({ a: 900, n: i18n().ui_sex_bt_turn_around });
     }
     era.printInColRows(
       [{ type: 'divider' }],
@@ -715,8 +708,8 @@ async function page_ero(lover, skip_start_end = false) {
   }
   const size = 200 + 300 * !era.get('item:乳汁处理器');
   const achieve = { count: 0 };
-  wait_flag = print_milking('人奶', size, achieve) || wait_flag;
-  wait_flag = print_milking('马奶', size, achieve) || wait_flag;
+  wait_flag = print_milking(46, size, achieve) || wait_flag;
+  wait_flag = print_milking(45, size, achieve) || wait_flag;
   if (achieve.count >= 1) {
     global_achievement.play_mil1 = 1;
   }

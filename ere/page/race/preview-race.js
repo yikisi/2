@@ -459,7 +459,7 @@ async function preview_race(
           era.printMultiColumns([
             {
               config: { width: 2 },
-              content: i18n().body_part.s_breast,
+              content: i18n().body_part.s_nipple,
               type: 'text',
             },
             {
@@ -596,7 +596,7 @@ async function preview_race(
                 config: {
                   content: ui_equip_template.replace(
                     '%PART%',
-                    i18n().body_part.s_breast,
+                    i18n().body_part.s_nipple,
                   ),
                   width: 12,
                 },

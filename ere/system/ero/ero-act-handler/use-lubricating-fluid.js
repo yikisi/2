@@ -7,21 +7,27 @@ const {
 
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
-const CharaTalk = require('#/utils/chara-talk');
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { buff_colors } = require('#/data/color-const');
-const { part_enum, part_names } = require('#/data/ero/part-const');
+const { part_enum } = require('#/data/ero/part-const');
+
+const { __, i18n } = require('#/i18n/selector');
 
 /**
  * @param {CharaTalk} chara
  */
 async function use_lubricating_fluid(chara) {
+  const me = get_chara_talk(0);
   era.printMultiColumns([
-    { content: '要给谁使用润滑液？', type: 'text' },
+    {
+      content: i18n().timon.ero_sys.lub_select_target,
+      type: 'text',
+    },
     {
       accelerator: 0,
       config: { align: 'center', width: 8 },
-      content: CharaTalk.me.name,
+      content: me.name,
       type: 'button',
     },
     {
@@ -33,16 +39,16 @@ async function use_lubricating_fluid(chara) {
     {
       accelerator: 999,
       config: { align: 'center', width: 8 },
-      content: '容我想想',
+      content: i18n().ui_cancel,
       type: 'button',
     },
   ]);
   const aim_id = await era.input();
   if (aim_id === 999) {
-    era.print([CharaTalk.me.get_colored_name(), ' 放弃了使用润滑液……']);
-    return undefined;
+    await era.printAndWait(i18n().timon.ero_sys.get_lub_give_up(me));
+    return void 0;
   }
-  const aim_chara = aim_id ? chara : CharaTalk.me,
+  const aim_chara = aim_id ? chara : me,
     buffer = [
       {
         p: part_enum.breast,
@@ -60,55 +66,39 @@ async function use_lubricating_fluid(chara) {
       },
     ]
       .filter((e) => e.c !== false)
-      .map((e) => {
-        e.e = !check_lubrication(aim_id, e.p);
-        return e;
-      });
+      .map((e) => ({ ...e, e: !check_lubrication(aim_id, e.p) }));
   if (buffer.findIndex((e) => e.e) === -1) {
-    era.print('没有需要润滑的部位……');
-    return undefined;
+    await era.printAndWait(i18n().timon.ero_sys.lub_no_parts);
+    return void 0;
   }
   era.printMultiColumns(
     [
       {
-        content: ['要润滑 ', aim_chara.get_colored_name(), ' 的哪个部位？'],
+        content: i18n().timon.ero_sys.get_lub_select_part(aim_chara),
         type: 'text',
       },
-      ...buffer.map((e) => {
-        return {
-          accelerator: e.p,
-          config: { align: 'center', disabled: !e.e, width: 4 },
-          content: part_names[e.p],
-          type: 'button',
-        };
-      }),
+      ...buffer.map((e) => ({
+        accelerator: e.p,
+        config: { align: 'center', disabled: !e.e, width: 4 },
+        content: __(`body_part.s_${part_enum.keys[e.p]}`),
+        type: 'button',
+      })),
     ],
     { horizontalAlign: 'space-evenly' },
   );
   const part = await era.input();
   if (
     !(await select_yes_or_no(
-      [
-        '要润滑 ',
-        aim_chara.get_colored_name(),
-        ' 的 ',
-        {
-          color: buff_colors[2],
-          content: part_names[part],
-        },
-        ' 吗？',
-      ],
-      '确定',
-      '容我想想',
+      i18n().timon.ero_sys.get_lub_confirm(aim_chara, {
+        color: buff_colors[2],
+        content: __(`body_part.s_${part_enum.keys[part]}`),
+      }),
+      i18n().ui_yes,
+      i18n().ui_cancel,
     ))
   ) {
-    era.print([
-      CharaTalk.me.get_colored_name(),
-      ' 放弃了使用 ',
-      { color: buff_colors[2], content: '润滑液' },
-      '……',
-    ]);
-    return undefined;
+    await era.printAndWait(i18n().timon.ero_sys.get_lub_give_up(me));
+    return void 0;
   }
   return { part, user: aim_id };
 }

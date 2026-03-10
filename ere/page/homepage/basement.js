@@ -522,7 +522,7 @@ module.exports = async (_, save_and_next_week, flags) => {
       {
         accelerator: 400,
         config: { width: 6 },
-        content: i18n().ui_bs_info,
+        content: i18n().ui_bt_self_info,
         type: 'button',
       },
       ...(chara_list.length > 1
@@ -530,7 +530,7 @@ module.exports = async (_, save_and_next_week, flags) => {
             {
               accelerator: 401,
               config: { width: 6 },
-              content: i18n().ui_bs_chara_info,
+              content: i18n().ui_bt_chara_info,
               type: 'button',
             },
           ]
