@@ -9,6 +9,8 @@ const { base_emotion_juel } = require('#/data/ero/juel-const');
 const { part_touch } = require('#/data/ero/part-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 
+const { i18n } = require('#/i18n/selector');
+
 module.exports = {
   /**
    * @param {CharaTalk} attacker
@@ -53,7 +55,7 @@ module.exports = {
     if (
       !attacker ||
       era.get('tflag:强奸') > 0 ||
-      (defender !== undefined &&
+      (defender !== void 0 &&
         (temp = era.get(
           `tcvar:${attacker}:${part_touch[attacker_part]}接触部位`,
         )).owner === defender &&
@@ -65,13 +67,13 @@ module.exports = {
       {
         accelerator: 0,
         config: { align: 'center', width: 12 },
-        content: '同意',
+        content: i18n().ui_agree,
         type: 'button',
       },
       {
         accelerator: 100,
         config: { align: 'center', width: 12 },
-        content: '拒绝',
+        content: i18n().ui_disagree,
         type: 'button',
       },
     ]);
@@ -111,7 +113,7 @@ module.exports = {
    */
   async pet_leg(attacker, defender, hook) {
     if (hook.arg) {
-      if (attacker.id === 0 && era.get(`cflag:${defender.id}:种族`)) {
+      if (attacker.id === 0 && era.get(`cflag:${defender.id}:种族`) > 0) {
         await attacker.print_and_wait(
           '作为训练员，将面前担当的双腿，用性的意味去观赏与抚摸……',
         );
@@ -133,7 +135,7 @@ module.exports = {
       await attacker.print_and_wait(
         '有着能因为手指的爱抚而发起抖的绝佳敏感度。',
       );
-      if (era.get(`cflag:${defender.id}:种族`)) {
+      if (era.get(`cflag:${defender.id}:种族`) > 0) {
         await attacker.print_and_wait('真浪费啊……');
         await attacker.print_and_wait('这样的双腿只是为了比赛而存在什么的……');
       }

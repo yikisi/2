@@ -5,13 +5,17 @@ class I18nTimon {
   daily = proxy_kojo_js(require('#/i18n/zh-CN/timon/daily'));
   edu = proxy_kojo_js(require('#/i18n/zh-CN/timon/edu'));
   love = proxy_kojo_js(require('#/i18n/zh-CN/timon/love'));
-  ero = proxy_kojo_js(require('#/i18n/zh-CN/timon/sex/ero'));
   basement = proxy_kojo_js(require('#/i18n/zh-CN/timon/base'));
+
+  ero_c = proxy_kojo_js(require('#/i18n/zh-CN/timon/sex/ero-common'));
+  ero_r = proxy_kojo_js(require('#/i18n/zh-CN/timon/sex/ero-rape'));
+  ero_s = proxy_kojo_js(require('#/i18n/zh-CN/timon/sex/ero-sleep'));
+  ero_o = proxy_kojo_js(require('#/i18n/zh-CN/timon/sex/ero-others'));
 
   ero_sys = proxy_kojo_js(require('#/i18n/zh-CN/timon/sex/system'));
   act_desc_c = proxy_kojo_js(require('#/i18n/zh-CN/timon/sex/act-desc-common'));
-  act_desc_s = proxy_kojo_js(require('#/i18n/zh-CN/timon/sex/act-desc-sleep'));
   act_desc_r = proxy_kojo_js(require('#/i18n/zh-CN/timon/sex/act-desc-rape'));
+  act_desc_s = proxy_kojo_js(require('#/i18n/zh-CN/timon/sex/act-desc-sleep'));
 
   daily_child = proxy_kojo_js(require('#/i18n/zh-CN/timon/child/daily'));
   ero_child = proxy_kojo_js(require('#/i18n/zh-CN/timon/child/ero'));

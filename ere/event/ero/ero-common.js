@@ -13,12 +13,14 @@ const { sys_get_chara } = require('#/system/chara/sys-calc-characteristic');
 const { sys_check_cuckold } = require('#/system/chara/sys-calc-cheat');
 const { get_penis_size } = require('#/system/ero/sys-calc-ero-status');
 const global_achievement = require('#/system/global/sys-calc-achievement');
-const { sys_get_callname } = require('#/system/sys-calc-chara-others');
+const {
+  sys_get_callname,
+  sys_get_colored_callname,
+} = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
-const kojo = require('#/event/ero/common/common.kojo');
 const cum_in_womb = require('#/event/ero/common/cum-in-womb');
 const NormalCommandLines = require('#/event/ero/common/normal/normal-common');
 const pregnant_report_in_love = require('#/event/ero/common/pregnant-report-in-love');
@@ -32,7 +34,11 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { buff_colors } = require('#/data/color-const');
 const { shop_result_type_enum } = require('#/data/ero/juel-const');
 const { mark_enum } = require('#/data/ero/mark-const');
-const { part_enum, part_names } = require('#/data/ero/part-const');
+const {
+  get_slang_part_name_key,
+  part_enum,
+  part_names,
+} = require('#/data/ero/part-const');
 const {
   pregnant_stage_enum,
   unexpected_pregnant_enum,
@@ -47,11 +53,7 @@ const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { get_breast_cup } = require('#/data/info-generator');
 
 const di18n = require('#/i18n/extended-def');
-
-const optimized_part_names = {};
-optimized_part_names[part_enum.mouth] = '口穴';
-optimized_part_names[part_enum.virgin] = '小穴';
-optimized_part_names[part_enum.anal] = '屁穴';
+const { i18n } = require('#/i18n/selector');
 
 const hate_mark_desc = [
   '用锐利的目光瞪了过来……',
@@ -128,12 +130,12 @@ class CustomizedEro extends CustomizedEvent {
       const { c: child, f: father } = temp[0]
         ? { c: this.id, f: supporter }
         : { c: supporter, f: this.id };
-      const o = {};
-      o['玩家名'] = era.get('callname:0:-2');
-      o['马娘名'] = era.get(`callname:${father}:-2`);
-      o['女儿名'] = era.get(`callname:${child}:-2`);
-      o['称呼'] = sys_get_callname(child, 0);
-      await kojo['孕袋惊醒'](o);
+      await i18n().timon.ero_o.be_awake_as_slave(
+        get_chara_talk(father),
+        get_chara_talk(child),
+        get_chara_talk(0),
+        sys_get_colored_callname(child, 0),
+      );
     }
   }
 
@@ -286,14 +288,17 @@ class CustomizedEro extends CustomizedEvent {
    * @param {CharaTalk} me
    * @param {string} callname
    * @param {HookArg} hook
-   * @param {{continue:boolean,part:number}} extra_flag
+   * @param {{continue:boolean,part:number}} extra
    */
-  wound(chara, me, callname, hook, extra_flag) {
-    if (extra_flag.continue) {
+  wound(chara, me, callname, hook, extra) {
+    if (extra.continue) {
       era.print([
         chara.get_colored_name(),
         ' 的 ',
-        { content: part_names[extra_flag.part], color: buff_colors[2] },
+        {
+          content: i18n().body_part[part_enum.keys[extra.part]],
+          color: buff_colors[2],
+        },
         ' 还在',
         { content: ' 流血 ', color: buff_colors[3] },
         '！',
@@ -302,7 +307,10 @@ class CustomizedEro extends CustomizedEvent {
       era.print([
         chara.get_colored_name(),
         ' 的 ',
-        { content: part_names[extra_flag.part], color: buff_colors[2] },
+        {
+          content: i18n().body_part[part_enum.keys[extra.part]],
+          color: buff_colors[2],
+        },
         ' 被',
         { content: ' 撑裂 ', color: buff_colors[3] },
         '了！',
@@ -344,10 +352,14 @@ class CustomizedEro extends CustomizedEvent {
       touch.part === part_enum.virgin ||
       touch.part === part_enum.anal
     ) {
+      const part =
+        touch.part === part_enum.mouth
+          ? i18n().body_part.s_mouth_hole
+          : i18n().body_part[get_slang_part_name_key(touch.part)];
       if (
         await select_yes_or_no(
           [chara.get_colored_name(), ' 的肉棒已经达到极限……'],
-          `以 ${optimized_part_names[touch.part]} 接纳`,
+          `以 ${part} 接纳`,
           '避开精芒',
         )
       ) {
@@ -357,7 +369,7 @@ class CustomizedEro extends CustomizedEvent {
         era.print([
           me.get_colored_name(),
           ' 的 ',
-          optimized_part_names[touch.part],
+          part,
           ' 吐出了 ',
           chara.get_colored_name(),
           ' 蓄势待发的肉棒，温热的精液径直喷向了 ',

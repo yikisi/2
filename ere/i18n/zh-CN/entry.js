@@ -240,6 +240,8 @@ class I18nEntry {
   ui_end = '结束';
   ui_cancel = '还是算了';
   ui_signature_result = '主胜鞍';
+  ui_agree = '同意';
+  ui_disagree = '拒绝';
 
   get_ui_reward_header = (chara) => [chara, ' 的属性有了如下变化：'];
   get_ui_change_attr = (attr, change_mark, change_val) => [

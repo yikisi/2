@@ -256,7 +256,10 @@ handlers[location_enum.office] = require('#/page/homepage/office');
 const basement_handlers = {};
 
 basement_handlers[location_enum.basement] = async () => {
-  await era.saveData(0, `${get_save_name()} (自动存档)`);
+  await era.saveData(
+    0,
+    i18n().ui_auto_save_template.replace('%NAME%', get_save_name),
+  );
   era.set('flag:当前互动角色', 0);
   await next_week();
 };

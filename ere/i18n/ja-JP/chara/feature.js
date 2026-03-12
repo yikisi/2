@@ -1,6 +1,10 @@
 const I18nCharaFeature = require('#/i18n/zh-CN/chara/feature');
 
 module.exports = class extends I18nCharaFeature {
+  u_sex_0 = 'ウマ娘';
+  u_sex_1 = 'ウマ郎';
+  u_sex_10 = 'ウマ娘?';
+
   u_age_0 = '幼少期';
   u_age_1 = '成長期';
   u_age_2 = '本格化';

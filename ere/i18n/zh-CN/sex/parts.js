@@ -40,6 +40,7 @@ class I18nBodyParts {
 
   s_nipple = '乳头';
   s_other = '身上';
+  s_mouth_hole = '口穴';
 
   r_v_equip = '装上';
   r_v_drop = '取下';

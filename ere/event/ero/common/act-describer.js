@@ -396,6 +396,4 @@ const _desc = {
       i18n().timon.act_desc_s[ero_hooks.keys[act]](atk, def, hook.arg)),
 );
 
-console.lInfo(_desc.c[ero_hooks.kiss]);
-
 module.exports = _desc;

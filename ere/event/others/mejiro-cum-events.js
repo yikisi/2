@@ -471,7 +471,6 @@ class MejiroCumEvents {
   #get_event_by_category(percentages, progress, lust) {
     const [good, normal] = percentages;
     let dice = Math.random();
-    console.log(dice, percentages.join(','));
     if (dice < good) {
       return get_random_event(this.good_events, this, progress, lust);
     }
