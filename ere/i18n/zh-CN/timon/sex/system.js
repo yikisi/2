@@ -296,14 +296,14 @@ module.exports = {
   get_med_confirm_for_chara: (chara, item) => [
     '要给 ',
     chara.get_colored_name(),
-    ' 喂食 ',
+    ' 喂食',
     item,
-    ' 吗？',
+    '吗？',
   ],
   /** @param {PrintedSpan} item */
-  get_med_confirm_for_you: (item) => ['要服用 ', item, ' 吗？'],
+  get_med_confirm_for_you: (item) => ['要服用', item, '吗？'],
   /** @param {PrintedSpan} item */
-  get_med_give_up_medicine: (item) => ['放弃了使用 ', item],
+  get_med_give_up_medicine: (item) => ['放弃了使用', item],
   itm_no_items: '暂时没有可用的性玩具',
   itm_select_item: '要使用什么性玩具？',
   /**

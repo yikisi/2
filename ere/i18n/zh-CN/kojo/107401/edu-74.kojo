@@ -88,7 +88,7 @@ at_my_side:
       content:
         - fontWeight: bold
           content: %CHARA%
-        - 「%SEX%们在这里，哭泣的样子，总是能看见呢。」
+        - 「%THEY%在这里，哭泣的样子，总是能看见呢。」
     - 视线从树洞转向 %YOU%，轻巧的眨眨眼，
     - 短暂的对视之后，%CHARA%的脸色轻松了不少。
     - 如同从某个妄想中解放出来一样，又挂上了软绵绵的笑容。
@@ -778,7 +778,7 @@ hope_sta:
     content:
       - fontWeight: bold
         content: %CHARA%
-      - 「比赛之后，和多伯%SEX%们一起……」
+      - 「比赛之后，和多伯%THEY%一起……」
   - acc: 1
     content: 「那现在感觉如何？」
   - color: %COLOR%

@@ -6,14 +6,8 @@ const { buff_colors } = require('#/data/color-const');
 const { get_item_action, item_enum } = require('#/data/ero/item-const');
 const { part_enum, part_touch, touch_list } = require('#/data/ero/part-const');
 
+const di18n = require('#/i18n/extended-def');
 const { __, i18n } = require('#/i18n/selector');
-
-const motion_info = [
-  ['朝向床头躺着', '朝向床头趴着'],
-  ['朝向床尾坐着', '朝向床头坐着'],
-  ['朝向床尾站着', '朝向床头站着'],
-  ['朝向床尾趴着', '朝向床尾躺着'],
-];
 
 /**
  * @param {number} cid
@@ -27,34 +21,33 @@ function get_part_touch(cid, cpart) {
   }
   const touched_chara = get_chara_talk(touched_part.owner);
   if (cpart === part_enum.sadism) {
-    return ['之前虐待了 ', touched_chara.get_colored_name()];
+    return i18n().sex.get_sadism_touch_info(touched_chara.get_colored_name());
   } else if (cpart === part_enum.masochism) {
-    return ['之前被 ', touched_chara.get_colored_name(), ' 虐待'];
+    return i18n().sex.get_masochism_touch_info(
+      touched_chara.get_colored_name(),
+    );
   }
   const body_part = era.get(`tcvar:${cid}:${part_touch[cpart]}接触部位`);
   if (body_part.part === part_enum.item) {
-    let item_name = '';
+    let item_name;
     if (body_part.item === item_enum.clamps) {
-      item_name = cpart === part_enum.breast ? '乳头夹' : '阴蒂夹';
+      item_name =
+        cpart === part_enum.breast
+          ? i18n().sex.nipple_clamps
+          : i18n().sex.clitoris_clamps;
+    } else {
+      item_name = i18n().tb_item[body_part.item];
     }
-    item_name ||= i18n().tb_item[body_part.item];
-    return [
-      { color: buff_colors[2], content: item_name },
-      ' (由 ',
+    return i18n().sex.get_item_touch_info([
       touched_chara.get_colored_name(),
-      ' ',
       __(`body_part.${get_item_action(body_part.item, cpart)}`),
-      ')',
-    ];
+      { color: buff_colors[2], content: item_name },
+    ]);
   }
-  return [
-    touched_chara.get_colored_name(),
-    ' 的 ',
-    {
-      color: buff_colors[2],
-      content: __(`body_part.s_${part_enum.keys[body_part.part]}`),
-    },
-  ];
+  return i18n().sex.get_touch_info(touched_chara.get_colored_name(), {
+    color: buff_colors[2],
+    content: __(`body_part.s_${part_enum.keys[body_part.part]}`),
+  });
 }
 
 function print_touch_info(cid) {
@@ -78,7 +71,9 @@ function print_touch_info(cid) {
           {
             config: { align: 'center', width: 23 },
             content:
-              motion_info[era.get('tcvar:0:体位')][era.get('tcvar:0:朝向')],
+              di18n.sex.motion_info[era.get('tcvar:0:体位')][
+                era.get('tcvar:0:朝向')
+              ],
             type: 'text',
           },
         ],
@@ -101,7 +96,7 @@ function print_touch_info(cid) {
           {
             config: { align: 'center', offset: 1, width: 23 },
             content:
-              motion_info[era.get(`tcvar:${cid}:体位`)][
+              di18n.sex.motion_info[era.get(`tcvar:${cid}:体位`)][
                 era.get(`tcvar:${cid}:朝向`)
               ],
             type: 'text',

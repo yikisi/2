@@ -18,7 +18,7 @@ recruit:
       content:
         - fontWeight: bold
           content: %CHARA%
-        - 「训练员的工作很辛苦吧？身为引导%UMA%，为%SEX%们指引方向的人，迄今为止真是辛苦了呢。」
+        - 「训练员的工作很辛苦吧？身为引导%UMA%，为%THEY%指引方向的人，迄今为止真是辛苦了呢。」
     - color: %COLOR%
       content:
         - fontWeight: bold

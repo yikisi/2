@@ -35,8 +35,8 @@ function generate_dictionary(
   ret.CHARA = chara.name;
   ret.COLOR = chara.color;
   ret.YOU = me.name;
-  // CFLAGNAME:0 = 性别
   ret.SEX = chara.sex;
+  ret.THEY = chara.couple_title;
   if (options.call) {
     ret.CALLNAME = sys_get_callname(cid, 0);
   }
@@ -76,7 +76,15 @@ module.exports.generate_common_dict = () => {
     YOU: get_display_name(era.get('callname:0:-2')),
     _g: true,
     ...(era.get('flag:角色性别') === 1
-      ? { SEX: i18n().name.he, UMA: i18n().name.uma_boy }
-      : { SEX: i18n().name.she, UMA: i18n().name.uma_girl }),
+      ? {
+          SEX: i18n().name.he,
+          THEY: i18n().name.he_mul,
+          UMA: i18n().name.uma_boy,
+        }
+      : {
+          SEX: i18n().name.she,
+          THEY: i18n().name.she_mul,
+          UMA: i18n().name.uma_girl,
+        }),
   };
 };

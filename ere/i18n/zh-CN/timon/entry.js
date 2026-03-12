@@ -9,7 +9,9 @@ class I18nTimon {
   basement = proxy_kojo_js(require('#/i18n/zh-CN/timon/base'));
 
   ero_sys = proxy_kojo_js(require('#/i18n/zh-CN/timon/sex/system'));
-  act_desc = proxy_kojo_js(require('#/i18n/zh-CN/timon/sex/descriptions'));
+  act_desc_c = proxy_kojo_js(require('#/i18n/zh-CN/timon/sex/act-desc-common'));
+  act_desc_s = proxy_kojo_js(require('#/i18n/zh-CN/timon/sex/act-desc-sleep'));
+  act_desc_r = proxy_kojo_js(require('#/i18n/zh-CN/timon/sex/act-desc-rape'));
 
   daily_child = proxy_kojo_js(require('#/i18n/zh-CN/timon/child/daily'));
   ero_child = proxy_kojo_js(require('#/i18n/zh-CN/timon/child/ero'));

@@ -8,6 +8,7 @@ class I18nNames {
   full_name_template = '%NAME% (%CHARA_ACTUAL%)';
 
   // Callname
+  self = '自己';
   leading_role = '主人公';
   me = '我';
   you = '你';

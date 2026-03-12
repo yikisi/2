@@ -372,7 +372,7 @@ rec3:
     content:
       - fontWeight: bold
         content: %CHARA%
-      - 「我没有%SEX%们那样深刻的梦想和精彩的故事，所以……所以我才变成%SEX%们的背景板!」
+      - 「我没有%THEY%那样深刻的梦想和精彩的故事，所以……所以我才变成%THEY%的背景板!」
   - acc: 1
     content: 「那你，仍想成为英雄吗？」
   - color: %COLOR%

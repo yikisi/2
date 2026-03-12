@@ -100,7 +100,7 @@ function like_chara(target, aim, val, shown = true, extra_love = 0) {
   let relation = era.get(`relation:${target}:${aim}`);
   let love = 0;
   let coff = 100;
-  if (relation === undefined) {
+  if (relation === void 0) {
     relation = 75;
   }
   if (val > 0) {
@@ -281,11 +281,9 @@ function love_uma(cid, val, shown = true) {
     era.get(`cflag:${cid}:爱慕暂拒`) !== new_val
   ) {
     if ((sys_check_hide_relation_and_love(cid) & 0b1) === 0 && shown) {
-      era.print([
-        '和 ',
-        get_chara_talk(cid).get_colored_name(),
-        ' 的关系似乎可以更进一步了……',
-      ]);
+      era.print(
+        i18n().get_trigger_love_event(get_chara_talk(cid).get_colored_name()),
+      );
     }
     get_custom_check(cid).check_love_events();
   }
@@ -341,11 +339,6 @@ CustomizedCheck.like_chara = like_chara;
 CustomizedCheck.love_uma = love_uma;
 
 module.exports = {
-  sys_change_status_by_base(cid) {
-    if (!era.get(`base:${cid}:体力`)) {
-      era.set(`status:${cid}:沉睡`, 1);
-    }
-  },
   sys_get_callname: get_callname,
   /**
    * @param {number} _from
@@ -363,7 +356,7 @@ module.exports = {
     const chara = get_chara_talk(_to < 0 ? _from : _to);
     let content;
     if (_from === _to) {
-      content = '自己';
+      content = i18n().name.self;
     } else {
       content = get_callname(_from, _to);
       if (content !== chara.actual_name) {
@@ -389,7 +382,8 @@ module.exports = {
     const new_val = era.add(`love:${cid}`, 1);
     if (
       typeof era.get(`callname:${cid}:0`) === 'string' &&
-      era.get(`callname:${cid}:0`).startsWith('训练员')
+      (era.get(`callname:${cid}:0`) === 'trainer_m' ||
+        era.get(`callname:${cid}:0`) === 'trainer_f')
     ) {
       get_custom_mec(cid).set_callname();
     }
@@ -414,7 +408,7 @@ module.exports = {
     era.set(`cflag:${cid}:爱慕暂拒`, 0);
     const my_marks = new MyEduMarks();
     my_marks.pity = (my_marks.pity || []).filter((e) => e !== cid);
-    await get_chara_talk(0).say_and_wait('已经不能回头了……', true);
+    await get_chara_talk(0).say_and_wait(i18n().love_level_up, true);
     new_val >= 75 && (await punish_unfaithful(cid, new_val));
     return true;
   },

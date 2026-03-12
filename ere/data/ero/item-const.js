@@ -81,7 +81,7 @@ module.exports = {
             return 'r_v_push';
         }
     }
-    return 'r_v_unknown';
+    return 'r_v_equip';
   },
   item_enum,
   medicine_enum,

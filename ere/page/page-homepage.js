@@ -14,10 +14,7 @@ const {
   end_ero_and_show_result,
   init_ero,
 } = require('#/system/ero/sys-prepare-ero');
-const {
-  sys_change_status_by_base,
-  sys_like_chara,
-} = require('#/system/sys-calc-chara-others');
+const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const {
   sys_check_awake,
   sys_check_remote,
@@ -411,9 +408,10 @@ module.exports = async () => {
     const cid = era.get('flag:当前互动角色');
 
     if (cur_location !== location_enum.basement) {
-      sys_change_status_by_base(0);
-      if (cid > 0) {
-        sys_change_status_by_base(cid);
+      for (const c of [0, cid].filter((e) => e > 0)) {
+        if (!era.get(`base:${c}:体力`)) {
+          era.set(`status:${c}:沉睡`, 1);
+        }
       }
       await era.clear();
       page_header(true);

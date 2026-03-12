@@ -715,7 +715,7 @@ turn_cloudy:
           content:
             - fontWeight: bold
               content: %CHARA%
-            - 「或者说，我亲手毁掉了%SEX%们的梦想……」
+            - 「或者说，我亲手毁掉了%THEY%的梦想……」
         - %YOU%听到了铃鹿的这一番话，才想起来，%SEX%正是从庙会上的那个第二名特写镜头开始，变得如此无精打采的。
         - acc: 1
           content: 「既然是比赛，那么各有胜负是很正常的，完全不必为此担心。」
@@ -761,7 +761,7 @@ turn_cloudy:
           content:
             - fontWeight: bold
               content: %CHARA%
-            - 「%SEX%们似乎有什么非赢不可的理由，我……我不知不觉就被%SEX%们吓到了……」
+            - 「%THEY%似乎有什么非赢不可的理由，我……我不知不觉就被%THEY%吓到了……」
         - color: %COLOR%
           content:
             - fontWeight: bold
@@ -807,7 +807,7 @@ turn_cloudy:
             - 「然后肆意奔跑，再一次独享美景……」
         - %YOU%听到了铃鹿的这一番话，才想起来，%SEX%正是从庙会上的弥生赏重播开始，变得如此无精打采的。
         - acc: 1
-          content: 「下一次，铃鹿，下一次你将会是%SEX%们之中最亮眼的一个。」
+          content: 「下一次，铃鹿，下一次你将会是%THEY%之中最亮眼的一个。」
         - color: %COLOR%
           content:
             - fontWeight: bold
@@ -1303,7 +1303,7 @@ takz_kin_win:
     - color: %COLOR%
       content: 两位强敌%UMA%慢慢走了过来与 %CHARA% 并肩站立，有些感慨地说道。
     - color: %COLOR%
-      content: %CHARA% 并没有从%SEX%们二人的眼中看到懊悔，只有羡慕与对强敌的憧憬。
+      content: %CHARA% 并没有从%THEY%二人的眼中看到懊悔，只有羡慕与对强敌的憧憬。
     - color: %COLOR%
       content:
         - fontWeight: bold
@@ -1422,7 +1422,7 @@ takz_kin_lose:
     - color: %COLOR%
       content: %CHARA% 甚至都不太想去关心自己是否入着。
     - color: %COLOR%
-      content: %SEX%用尽最后的力气把头转向%A_NAME%与%G_NAME%，却发现%SEX%们聊得正欢。
+      content: %SEX%用尽最后的力气把头转向%A_NAME%与%G_NAME%，却发现%THEY%聊得正欢。
     - color: %COLOR%
       content: 是啊，胜利者的心境……
     - color: %COLOR%
@@ -1548,11 +1548,11 @@ curse:
     - content:
         - fontWeight: bold
           content: 路人A
-        - 「我见过好多人气第一的选手，%SEX%们在出场见面的时候是那么的风光，仿佛已经胜券在握。」
+        - 「我见过好多人气第一的选手，%THEY%在出场见面的时候是那么的风光，仿佛已经胜券在握。」
     - content:
         - fontWeight: bold
           content: 路人A
-        - 「但是比赛正式开始的时候，%SEX%们便像是受到了诅咒一样，出迟、斜行、焦躁……」
+        - 「但是比赛正式开始的时候，%THEY%便像是受到了诅咒一样，出迟、斜行、焦躁……」
     - content:
         - fontWeight: bold
           content: 路人A
@@ -2006,7 +2006,7 @@ wing_clipped:
     - 此刻，%YOU%已经什么也听不到了。
     - acc: 1
       content: 「铃鹿！铃鹿！」
-    - %YOU%冲上了跑道，在仍在奔跑的%UMA%们震惊的目光中绕过了%SEX%们，径直冲向大榉树的后面。
+    - %YOU%冲上了跑道，在仍在奔跑的%UMA%们震惊的目光中绕过了%THEY%，径直冲向大榉树的后面。
     - 求你了求你了不要——
     - %YOU%下意识想到了梦中铃鹿躺在草皮上的样子，于是加快了步伐。
     - 终于，%YOU%来到了大榉树的后面。
@@ -2806,7 +2806,7 @@ invincible:
     - 铃鹿成为了活着的传奇，领放%UMA%中无可辩驳的第一人。
     - 而你，也顺理成章地成为了指导领放%UMA%界的权威。
     - 许多刚入学的%UMA%都会以铃鹿为榜样，偏爱领放甚至是大逃跑法。
-    - 先不论效果如何，至少在%SEX%们的训练员看来，如果想要跑好领放跑法，最终还是要来请教%YOU%与铃鹿。
+    - 先不论效果如何，至少在%THEY%的训练员看来，如果想要跑好领放跑法，最终还是要来请教%YOU%与铃鹿。
     - 在工作的闲暇，%YOU%也时常会盯着铃鹿认真的侧脸出神。
     - 如果不是遇到了铃鹿，自己的生活又怎会如此多彩呢？
 

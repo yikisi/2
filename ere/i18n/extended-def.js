@@ -406,6 +406,17 @@ const di18n = {
     },
   },
   ...require('#/i18n/extended-table-def'),
+  sex: {
+    get motion_info() {
+      const _ = i18n().sex;
+      return [
+        [_.m_lie_right, _.m_lie_left],
+        [_.m_sit_right, _.m_sit_left],
+        [_.m_stand_right, _.m_stand_left],
+        [_.m_rev_right, _.m_rev_left],
+      ];
+    },
+  },
   jewel_shop: {
     get_price_title(price_dict) {
       const _ = i18n().jewel_shop;

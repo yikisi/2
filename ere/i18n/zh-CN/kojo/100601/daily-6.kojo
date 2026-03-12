@@ -559,7 +559,7 @@ s_a_dating:
         content:
           - fontWeight: bold
             content: 小栗帽
-          - 「能感受到%SEX%们的视线，一直在盯着我们看啊……」
+          - 「能感受到%THEY%的视线，一直在盯着我们看啊……」
   - if: era.get('love:6') >= 50
     random: true
     lines:

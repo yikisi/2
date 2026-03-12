@@ -1,3 +1,5 @@
+# @file 高尚骏逸 - 招募
+# @author 無奈
 rec0:
   title: 高尚骏逸登场！：「开头」
   lines:
@@ -471,9 +473,9 @@ rec2:
         - color: '%COLOR%'
           content: %CALL_90%的名字是%NAME_90%，%YOUNGER_SISTER%的名字是%NAME_91%。
         - color: '%COLOR%'
-          content: %SEX%们都像母亲那样……开朗又华丽，擅长与人交往。
+          content: %THEY%都像母亲那样……开朗又华丽，擅长与人交往。
         - color: '%COLOR%'
-          content: %SEX%们两人……与我完全相反。
+          content: %THEY%两人……与我完全相反。
         -
         - color: '%COLOR%'
           content: （女性亲戚「啊啦啊啦，这不是%NAME_90%和%NAME_91%吗？你们两个今天也穿的华丽又可爱呢！」）
@@ -537,7 +539,7 @@ rec2:
             - 「……是啊……比赛也……放弃好了……」）
         -
         - color: '%COLOR%'
-          content: ……站在中央的%SEX%们，与站在边缘的我。
+          content: ……站在中央的%THEY%，与站在边缘的我。
         - color: '%COLOR%'
           content: 我和她们两人有着根本上的差别……我……什么魅力都没有，这是理所当然、一成不变的……
         -
@@ -583,12 +585,12 @@ rec2:
           content:
             - fontWeight: bold
               content: '%CHARA%'
-            - '（……如果是%CALL_90%%SEX%们或者北部同学%SEX%们，应该很容易就能适应、并且做的很好吧。）'
+            - '（……如果是%CALL_90%%THEY%或者北部同学%THEY%，应该很容易就能适应、并且做的很好吧。）'
         -
         - color: '%COLOR%'
           content: '如果是%CALL_90%……肯定能赢得比赛，%NAME_91%的话，应该也能够主动出击吧。'
         - color: '%COLOR%'
-          content: '为什么%SEX%们能够如此坚强、如此勇敢……我却总是这么胆小呢？不可思议、完全不明白。'
+          content: '为什么%THEY%能够如此坚强、如此勇敢……我却总是这么胆小呢？不可思议、完全不明白。'
         - color: '%COLOR%'
           content: '……最重要的是，很羡慕。'
         - color: '%COLOR%'
@@ -1253,7 +1255,7 @@ beginning:
     - acc: 1
       content: '「……竞争心不足吗。」'
     -
-    - %YOU%一边说着可惜，一边扫视了一遍参赛的其他%UMA%，按下手里的秒表，目送%SEX%们冲过终点。
+    - %YOU%一边说着可惜，一边扫视了一遍参赛的其他%UMA%，按下手里的秒表，目送%THEY%冲过终点。
     - 这一组质量差了些，也就那个戴海军帽的%UMA%还不错，然而身后的训练员们已经一拥而上，包围了前三名的选手。
     -
     - color: '#cccccc'

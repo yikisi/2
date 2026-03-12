@@ -1339,7 +1339,7 @@ miss_tram_sex:
         content: %CHARA%
       - 「%CALL_64%，不要这样说嘛～」
   - 坐在电车上的两姐妹互相打趣着，顺便戳着被两个人夹在中间的 %YOU%。
-  - 只是已经昏昏欲睡的 %YOU%，并没有回应%SEX%们的打闹。
+  - 只是已经昏昏欲睡的 %YOU%，并没有回应%THEY%的打闹。
   - color: %COLOR%
     content:
       - fontWeight: bold
@@ -1690,7 +1690,7 @@ know_us:
       content:
         - fontWeight: bold
           content: %CHARA%
-        - 「其实和%ELDER_SISTER%%SEX%们在一起，我也……」
+        - 「其实和%ELDER_SISTER%%THEY%在一起，我也……」
     - acc: 1
       content: 「不会哦。」
     - 打断了%CHARA%有点低落的话，笑脸依旧。
