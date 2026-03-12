@@ -649,22 +649,9 @@ function sub_simulate_skill(
                   });
                   break;
                 // case ability_type_enum.TargetLane:
-                case ability_type_enum.ActivateRandomRareSkill:
-                  uma.list_skill
-                    .filter((s) => s !== skill)
-                    .forEach((s) => {
-                      for (let i = 0; i < 2; ++i) {
-                        if (s.ability_time[i] <= 0) {
-                          s.cooldown[i] = 0;
-                        }
-                      }
-                    });
-                  break;
                 case ability_type_enum.AccelFullSpeed:
                   skill.aims[i][j].forEach(
-                    (u) =>
-                      (u.race.accel_full_speed_buff -=
-                        skill.values[i][j] * 0.1),
+                    (u) => (u.race.accel_full_speed_buff -= skill.values[i][j]),
                   );
               }
             }
@@ -680,7 +667,8 @@ function sub_simulate_skill(
           skill.cooldown[i] <= 0 &&
           skill.data.cooldown_times[i] > 0 &&
           skill.precondition[i] &&
-          skill.data.conditions[i](uma.race.conditionParams)
+          skill.data.conditions[i](uma.race.conditionParams) &&
+          !(i === 0 && skill.data.is_two_phase && skill.count[i] > 0)
         ) {
           switch (skill.data.id) {
             case 203061:
@@ -689,9 +677,9 @@ function sub_simulate_skill(
           }
           uma.race.conditionParams.is_activate_any_skill = 1;
           skill.count[i]++;
-          skill.ability_time[i] = skill.data.ability_times[i] * frame_rate;
-          skill.cooldown[i] =
-            (skill.data.cooldown_times[i] * frame_rate * race_info.span) / 1000;
+          skill.ability_time[i] =
+            (skill.data.ability_times[i] * frame_rate * race_info.span) / 1000;
+          skill.cooldown[i] = skill.data.cooldown_times[i] * frame_rate;
           if (uma.chara === -1) {
             skill.cooldown[i] = Math.floor(skill.cooldown[i] * 0.99);
           }
@@ -947,11 +935,11 @@ function sub_simulate_skill(
                 case ability_type_enum.TargetLane:
                   break;
                 case ability_type_enum.AccelFullSpeed:
+                  skill.values[i][j] *= 0.1;
                   skill.aims[i][j].forEach(
-                    (u) =>
-                      (u.race.accel_full_speed_buff +=
-                        skill.values[i][j] * 0.1),
+                    (u) => (u.race.accel_full_speed_buff += skill.values[i][j]),
                   );
+                  uma.race.conditionParams.run_at_full_speed_random = 2;
                   break;
                 case ability_type_enum.ShareOrgasm:
                   skill.aims[i][j].forEach((e) =>
@@ -966,10 +954,6 @@ function sub_simulate_skill(
                   );
               }
             }
-          }
-          if (!skill.ability_time[i]) {
-            skill.aims[i] = [];
-            skill.values[i] = [];
           }
           buffer.skill.unshift(
             get_skill_record(uma, skill.data.id, params.timer_record, timer),

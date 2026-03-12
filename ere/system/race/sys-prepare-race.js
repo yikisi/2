@@ -383,7 +383,7 @@ function sys_prepare_race(list_chara, team_list, race_info) {
                   skill.data.ability_values[i][j];
                 break;
               case ability_type_enum.RunningStyleExOonige:
-                uma.race.conditionParams.is_used_skill_id.push(202051);
+                uma.race.conditionParams.is_used_skill_id.push(skill.data.id);
                 break;
               case ability_type_enum.TemptationPer:
                 temptation_prob += skill.data.ability_values[i][j];
@@ -434,8 +434,7 @@ function sys_prepare_race(list_chara, team_list, race_info) {
 
     // 01234：大逃、逃先差追
     const style_index =
-      uma.style +
-      (uma.race.conditionParams.is_used_skill_id.indexOf(202051) === -1);
+      uma.style + uma.race.conditionParams.is_used_skill_id.includes(202051);
     //调取当前跑法在赛中各阶段的目标速度及加速度倍率
     uma.factorPhase.vStyle = mod_velocity_style[style_index];
     uma.factorPhase.aStyle = mod_acceleration_style[style_index];
