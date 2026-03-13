@@ -40,12 +40,12 @@ module.exports = {
   async common_talk_with_in_urara(urara, me, in_urara) {
     await in_urara.print_and_wait([
       '在或许并没有很久的以前，一位性格任性、资质平庸的小',
-      in_urara.get_uma_sex_title(),
+      in_urara.uma_sex_title,
       '在某处的牧场中很随意的诞生了。',
     ]);
     await in_urara.print_and_wait([
       '但就是这样一位麻烦又平凡的',
-      in_urara.get_child_sex_title(),
+      in_urara.child_sex_title,
       '，却被最初爱着',
       in_urara.sex,
       '的人们授予了一个祝福般的可爱之名。',
@@ -114,7 +114,7 @@ module.exports = {
       '不过',
       in_urara.sex,
       '还是找到了，找到了可以让小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '寻得幸福，一同写下完整故事的「训练员」。',
     ]);
     era.drawLine();
@@ -124,12 +124,12 @@ module.exports = {
       '，贴近着 ',
       me.get_colored_name(),
       ' 的',
-      in_urara.get_teen_sex_title(),
+      in_urara.teen_sex_title,
       '冷漠的脸颊逐渐填充起粘稠的绯红。',
     ]);
     await era.printAndWait([
       '在不知何时开始的肌肤接触中踮起脚尖，',
-      in_urara.get_teen_sex_title(),
+      in_urara.teen_sex_title,
       '将柔软的湿润樱唇叠上了 ',
       me.get_colored_name(),
       ' 的唇齿。',
@@ -143,7 +143,7 @@ module.exports = {
       '温热的柔软纠缠着黏腻的水声一同浸入，与 ',
       urara.get_colored_name(),
       ' 相似的小',
-      in_urara.get_uma_sex_title(),
+      in_urara.uma_sex_title,
       '正利用着',
       in_urara.sex,
       '的神情向 ',
@@ -177,7 +177,7 @@ module.exports = {
       '随后，在这被',
       urara.sex,
       '所发起并主导的恍惚之吻中，',
-      urara.get_teen_sex_title(),
+      urara.teen_sex_title,
       '用力咬住了逐渐下陷的另一方嘴唇。',
     ]);
     await era.printAndWait(
@@ -202,7 +202,7 @@ module.exports = {
     ]);
     await era.printAndWait([
       '慢慢地结束了如报复般的深吻，完全就是猎食者的',
-      urara.get_teen_sex_title(),
+      urara.teen_sex_title,
       '意犹未尽的舔了舔还连在嘴边的银丝。',
     ]);
     await in_urara.say_as_unknown_and_wait([
@@ -253,7 +253,7 @@ module.exports = {
         '而发现身体终于恢复灵活的 ',
         me.get_colored_name(),
         ' 急忙上前想要拦下正要走进光中的',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '，但手却穿过了',
         urara.sex,
         '的身影。',
@@ -280,7 +280,7 @@ module.exports = {
       in_race
         ? [
             '站在通道的出口，',
-            urara.get_teen_sex_title(),
+            urara.teen_sex_title,
             '留下了一句意味深长的话语后，便如薄雾般消失在了阳光下。',
           ]
         : [
@@ -325,7 +325,7 @@ module.exports = {
       ' 还在思索着怎样和 ',
       urara.get_colored_name(),
       ' 讲述刚才幻觉般的经历时，却听见了小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '的一声惊呼。',
     ]);
     await urara.say_and_wait([

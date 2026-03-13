@@ -67,7 +67,7 @@ module.exports = async (urara, me, in_urara, callname) => {
   ]);
   await era.printAndWait([
     '洁白的病床上，蜷起身体的樱粉色',
-    urara.get_teen_sex_title(),
+    urara.teen_sex_title,
     '轻摇着马耳与尾巴，在健康平稳的呼吸声中安静地沉睡着。',
   ]);
   await era.printAndWait([
@@ -76,7 +76,7 @@ module.exports = async (urara, me, in_urara, callname) => {
   ]);
   await era.printAndWait([
     '但这名看上去只是在学习日睡过头的小',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '，却与此刻站在 ',
     me.get_colored_name(),
     ' 身旁陷入沉默的「',
@@ -213,7 +213,7 @@ module.exports = async (urara, me, in_urara, callname) => {
 
   await era.printAndWait([
     '明明与外貌与小',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '一模一样却总说着悲观的话，眼前这幅景象还真是让人难以忍受。',
   ]);
   await in_urara.say_as_unknown_and_wait([
@@ -250,7 +250,7 @@ module.exports = async (urara, me, in_urara, callname) => {
     '」抚摸 ',
     urara.get_colored_name(),
     ' 的手缓缓沉入了小',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '的身体，就如同穿过了放映机射出的投影。',
   ]);
   await in_urara.say_as_unknown_and_wait(
@@ -390,7 +390,7 @@ module.exports = async (urara, me, in_urara, callname) => {
     ' 想要缩回的手，将 ',
     me.get_colored_name(),
     ' 用',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '的力量轻易拽倒在了病床上。',
   ]);
   await era.printAndWait([

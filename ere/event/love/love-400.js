@@ -76,7 +76,7 @@ module.exports = class extends CustomizedLove {
     ]);
     await silence.say_and_wait([
       '被单都有点湿了，但是……好像……好点了，明明在成为三冠',
-      silence.get_uma_sex_title(),
+      silence.uma_sex_title,
       '之前，都不应该有这种念头才对的。但是……忘不了',
       me.sex,
       '啊。',
@@ -115,7 +115,7 @@ module.exports = class extends CustomizedLove {
         '自从',
         silence.sex,
         '成为三冠赛',
-        silence.get_uma_sex_title(),
+        silence.uma_sex_title,
         '之后，',
         me.get_colored_name(),
         ' 隐约能够察觉到',
@@ -303,7 +303,7 @@ module.exports = class extends CustomizedLove {
         '我不知道……',
         silence.sex,
         '们和我谈起赛',
-        silence.get_uma_sex_title(),
+        silence.uma_sex_title,
         '的时候，那种就好像是发光一样的眼神，',
       ]);
       await silence.say_and_wait('说到三冠赛事的时候的兴奋……但是我却失败了。');
@@ -342,7 +342,7 @@ module.exports = class extends CustomizedLove {
         '不仅仅只是作为我的训练员……感谢您一直陪伴在我的身边……',
         callname,
         '，这是一个小',
-        silence.get_uma_sex_title(),
+        silence.uma_sex_title,
         '微不足道但是真挚的心意，我喜欢你，',
       ]);
       await silence.say_and_wait(

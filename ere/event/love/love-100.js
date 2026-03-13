@@ -403,7 +403,7 @@ module.exports = class extends CustomizedLove {
           '像 ',
           acute.get_colored_name(),
           ' 这些坚强、勇敢的',
-          acute.get_phy_sex_title(),
+          acute.phy_sex_title,
           '，怎么可能会……',
         ]);
         await acute.say_and_wait(['我真的喜欢你哦，', me.actual_name, ' 君。']);
@@ -433,7 +433,7 @@ module.exports = class extends CustomizedLove {
       } else {
         await era.printAndWait([
           '与自己担当的',
-          acute.get_uma_sex_title(),
+          acute.uma_sex_title,
           '约会还需要理由吗？',
         ]);
         await era.printAndWait([
@@ -545,9 +545,9 @@ module.exports = class extends CustomizedLove {
         '小红马用户',
         '呜哇，尊嘟假嘟！？快拍下来，发个博先～',
       );
-      await say_by_passer_by_and_wait('某关西' + acute.get_uma_sex_title(), [
+      await say_by_passer_by_and_wait('某关西' + acute.uma_sex_title, [
         '好肉麻的两公婆，还是我校的',
-        acute.get_uma_sex_title(),
+        acute.uma_sex_title,
         '，这下便样衰了。',
       ]);
       await era.printAndWait('…………');
@@ -781,7 +781,7 @@ module.exports = class extends CustomizedLove {
       await era.printAndWait([
         acute.get_colored_name(),
         ' 说，这是特雷森最近的潮流。在身上持有这刻印的',
-        acute.get_uma_sex_title(),
+        acute.uma_sex_title,
         '，便会独属于这刻印的主人。',
       ]);
       await era.printAndWait('而现在，刻印只差最后一步。');

@@ -135,7 +135,7 @@ module.exports = (handlers) => {
       era.println();
       await tachyon.say_and_wait([
         '嗯？这些？是别的',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         '们送的礼物哦？',
       ]);
       await tachyon.say_and_wait(
@@ -211,7 +211,7 @@ module.exports = (handlers) => {
       await era.printAndWait('最后，还是不敢说出那两个字');
       await era.printAndWait([
         '怎么可以呢，身为训练员的自己，居然要问负责',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         '对自己是不是「真爱」',
       ]);
       era.println();
@@ -250,7 +250,7 @@ module.exports = (handlers) => {
         ]);
         await era.printAndWait([
           '途中捏到的，使得身前',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '发出娇声的肉块？',
         ]);
         await era.printAndWait(

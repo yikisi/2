@@ -116,21 +116,15 @@ module.exports = {
         await era.printAndWait([
           '不管是参赛还是接受采访，',
           you.get_colored_name(),
-          ' 和担当的紧张关系有目共睹，质疑这种紧张关系影响了担当发展的声音一直没有停息。校方对 ',
-          you.get_couple_title(),
-          ' 的组合开始失去耐心……但有些人比他们更缺乏耐性。',
+          ' 和担当的紧张关系有目共睹，质疑这种紧张关系影响了担当发展的声音一直没有停息。校方对你们的组合开始失去耐心……但有些人比他们更缺乏耐性。',
         ]);
       } else {
         await era.printAndWait([
           '或许是 ',
           you.get_colored_name(),
           ' 过于懈怠，又或许是负责',
-          chara.get_uma_sex_title(),
-          '的天赋不足，胜利与 ',
-          you.get_couple_title(),
-          ' 始终遥遥无期。校方对 ',
-          you.get_couple_title(),
-          ' 的组合开始失去耐心……但有些人比他们更缺乏耐性。',
+          chara.uma_sex_title,
+          '的天赋不足，胜利与你们始终遥遥无期。校方对你们的组合开始失去耐心……但有些人比他们更缺乏耐性。',
         ]);
       }
       await era.printAndWait([

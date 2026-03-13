@@ -102,7 +102,7 @@ module.exports = class extends Love52AfterGirlFriend {
             '名为「',
             urara.get_colored_name(),
             '」的',
-            urara.get_uma_sex_title(),
+            urara.uma_sex_title,
             '迷恋着 ',
             callname,
             '，甚至「恋人关系」也已经无法满足。',
@@ -197,7 +197,7 @@ module.exports = class extends Love52AfterGirlFriend {
             era.drawLine();
             await in_urara.say_as_unknown_and_wait([
               '因恋心而斗志高昂，',
-              urara.get_teen_sex_title(),
+              urara.teen_sex_title,
               '在心中拟定起未来的计划，并带着思索进入了梦乡。',
             ]);
             await in_urara.say_as_unknown_and_wait(
@@ -205,7 +205,7 @@ module.exports = class extends Love52AfterGirlFriend {
             );
             await in_urara.say_as_unknown_and_wait([
               '不管小',
-              urara.get_uma_sex_title(),
+              urara.uma_sex_title,
               '准备何时开始行动，即使稍显稚嫩，那也一定会是份合格的心意。',
             ]);
           }
@@ -244,13 +244,13 @@ module.exports = class extends Love52AfterGirlFriend {
           ]);
           await urara.print_and_wait([
             '过度的焦虑与藏起的自卑心被一同激发出来，',
-            urara.get_teen_sex_title(),
+            urara.teen_sex_title,
             '粗暴的将手伸向了焦躁的身体。',
           ]);
           era.drawLine();
           await in_urara.say_as_unknown_and_wait([
             '至少对小',
-            urara.get_uma_sex_title(),
+            urara.uma_sex_title,
             '来说，与 ',
             callname,
             ' 更进一步，以今夜的心理确实不够合适。',
@@ -309,7 +309,7 @@ module.exports = class extends Love52AfterGirlFriend {
           '但尽管与 ',
           me.get_colored_name(),
           ' 一同站在目送那对新人的草地上，小',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '的尾巴却依旧兴趣缺缺的摇摆着。',
         ]);
         await era.printAndWait([
@@ -319,7 +319,7 @@ module.exports = class extends Love52AfterGirlFriend {
         ]);
         await era.printAndWait([
           '理所当然的，毕竟不管再怎么美好，这里都是一位',
-          urara.get_teen_sex_title(),
+          urara.teen_sex_title,
           '抱有希望但被却爱人亲自拒绝的伤心地。',
         ]);
         await era.printAndWait([
@@ -342,7 +342,7 @@ module.exports = class extends Love52AfterGirlFriend {
         await urara.say_and_wait('……啊！');
         await era.printAndWait([
           '或许是两人习以为常的默契，又或是小',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '期待已久的感应，',
           urara.get_colored_name(),
           ' 瞪大眼睛，樱瞳从惊讶到惊喜。',
@@ -448,7 +448,7 @@ module.exports = class extends Love52AfterGirlFriend {
             '只是突然间的，牵着 ',
             me.get_colored_name(),
             ' 的手突然用上了',
-            urara.get_uma_sex_title(),
+            urara.uma_sex_title,
             '的力量，',
             urara.get_colored_name(),
             ' 的笑容中似乎多了份对宣誓权力的暗示。',
@@ -477,16 +477,16 @@ module.exports = class extends Love52AfterGirlFriend {
         '与婚礼现场只有一栅之隔，记忆中的 ',
         me.get_colored_name(),
         ' 与',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '，在栅栏之外目送着一对新人穿过献上祝福的人群。',
       ]);
       await era.printAndWait([
         '像是在暗示什么，这对新人一位是娇小的',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '，另一位则是大',
         urara.sex,
         '许多的',
-        me.get_phy_sex_title(),
+        me.phy_sex_title,
         '。',
       ]);
       await era.printAndWait([
@@ -500,7 +500,7 @@ module.exports = class extends Love52AfterGirlFriend {
       ]);
       await era.printAndWait([
         '但也没办法，与小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '成为了恋人的不是别人，正是',
         urara.sex,
         '的训练员。',
@@ -543,12 +543,12 @@ module.exports = class extends Love52AfterGirlFriend {
         ]);
         await era.printAndWait([
           '小',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '总露出与气氛不符的表情，但要说不知道为什么，恐怕连自己也不会信。',
         ]);
         await era.printAndWait([
           '但小',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '是感到憧憬还是不安，亦或是两者都有，只有这点 ',
           me.get_colored_name(),
           ' 现在无法确认。',
@@ -584,7 +584,7 @@ module.exports = class extends Love52AfterGirlFriend {
       await era.printAndWait([
         urara.sex,
         '一定懂得这些东西，但小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '想要的仍旧只有掌心的相触，以及勾起小指的约定。',
       ]);
       await era.printAndWait([
@@ -619,7 +619,7 @@ module.exports = class extends Love52AfterGirlFriend {
         ]);
         await era.printAndWait([
           '从简单的相合变为五指交叠，小',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '细嫩的手指有些羞涩的在 ',
           me.get_colored_name(),
           ' 的手掌之间蹭来蹭去。',
@@ -704,7 +704,7 @@ module.exports = class extends Love52AfterGirlFriend {
           ]);
           await era.printAndWait([
             '婚礼的钟声响起，小',
-            urara.get_uma_sex_title(),
+            urara.uma_sex_title,
             '以笑容转向了 ',
             me.get_colored_name(),
             '，脸上带着释然的爱意。',
@@ -751,7 +751,7 @@ module.exports = class extends Love52AfterGirlFriend {
           ]);
           await era.printAndWait([
             '在亲热后俯在恋人的耳边，',
-            urara.get_teen_sex_title(),
+            urara.teen_sex_title,
             '的笑容似乎有些苦涩。',
           ]);
           era.drawLine();
@@ -818,7 +818,7 @@ module.exports = class extends Love52AfterGirlFriend {
           ]);
           await era.printAndWait([
             '连眼角的泪水都顾不上擦，小',
-            urara.get_uma_sex_title(),
+            urara.uma_sex_title,
             '一下就安心的贴到了 ',
             callname,
             ' 身上。',
@@ -836,7 +836,7 @@ module.exports = class extends Love52AfterGirlFriend {
           ]);
           await era.printAndWait([
             '偷偷抹掉了眼角的泪水，',
-            urara.get_teen_sex_title(),
+            urara.teen_sex_title,
             '小声说着不知道如何得出的结论。',
           ]);
           await era.printAndWait([

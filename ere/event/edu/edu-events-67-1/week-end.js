@@ -183,7 +183,7 @@ module.exports = async (daiya, me, hook, event_object) => {
       '你要是一直这样静不下心来的话，比赛的时候就要遭殃啰，小北。',
     );
     await teio.say_and_wait(
-      `今天还有从国外邀请来参赛的赛${daiya.get_uma_sex_title()}。是一场充满不确定因素的比赛……`,
+      `今天还有从国外邀请来参赛的赛${daiya.uma_sex_title}。是一场充满不确定因素的比赛……`,
     );
     await teio.say_and_wait('但无论对手是谁，帝王大人我都会击溃她们的！！');
     await kita.say_and_wait('我不会被击溃的！我……会跑赢帝王的！！');
@@ -300,7 +300,7 @@ module.exports = async (daiya, me, hook, event_object) => {
       '这是击败了我和帝王，还有北部所赢得的『秋季资深三冠』。',
     );
     await mcqueen.say_and_wait(
-      `不单只是光钻个人的成就，也算是里见家在赛${daiya.get_uma_sex_title()}界所留下的辉煌成绩。`,
+      `不单只是光钻个人的成就，也算是里见家在赛${daiya.uma_sex_title}界所留下的辉煌成绩。`,
     );
     await mcqueen.say_and_wait('……你真的非常努力呢，光钻。');
     await daiya.say_and_wait('……！谢……谢谢你！！');
@@ -308,7 +308,7 @@ module.exports = async (daiya, me, hook, event_object) => {
       '呵呵，虽然我是用前辈的姿态恭喜你，但其实我们的立场是一样的。',
     );
     await mcqueen.say_and_wait(
-      `我们身为彼此的对手，且同样是背负家族名声的赛${daiya.get_uma_sex_title()}。今后也要继续互相切磋琢磨喔。`,
+      `我们身为彼此的对手，且同样是背负家族名声的赛${daiya.uma_sex_title}。今后也要继续互相切磋琢磨喔。`,
     );
     await daiya.say_and_wait('好的！我会继续精进自己的！');
     await daiya.say_and_wait('虽然我还有很多事情需要继续向麦昆学习，但……');

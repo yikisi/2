@@ -381,7 +381,7 @@ module.exports = async (tachyon, me, callname, relation, love) => {
     await era.printAndWait('是不会将自己的人生都投入在枯燥重复的研究中的吧');
     await era.printAndWait([
       '相信着',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '的可能性的',
       tachyon.sex,
       '，相信着 ',
@@ -472,7 +472,7 @@ module.exports = async (tachyon, me, callname, relation, love) => {
     era.println();
     await era.printAndWait([
       '今天晚上之前，一直都在配合着负责',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '的胡闹',
     ]);
     await era.printAndWait(

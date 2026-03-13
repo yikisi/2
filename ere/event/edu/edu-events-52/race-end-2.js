@@ -148,7 +148,7 @@ module.exports = (handlers) => {
         '这样说着，',
         me.get_colored_name(),
         ' 继续安抚着失落的小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '，直到',
         urara.sex,
         '稍微重新挂起平常的笑容为止。',
@@ -188,14 +188,14 @@ module.exports = (handlers) => {
           ' 自己所言，如今的',
           urara.sex,
           '已经成长为了拥有拿下G1的实绩的强大',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '。',
         ]);
         await era.printAndWait([
           '真是难以想象，最初那个迷迷糊糊到连训练都为难的小',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '竟然能成长为了常胜',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '。',
         ]);
         await era.printAndWait([
@@ -286,7 +286,7 @@ module.exports = (handlers) => {
         ]);
         await era.printAndWait([
           '不过现在的小',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '比起开心的去跑，今年的取胜欲望估计会更加强烈。',
         ]);
         await era.printAndWait(
@@ -380,7 +380,7 @@ module.exports = (handlers) => {
       ]);
       await era.printAndWait([
         '不过这样的状态并没有持续多久，想到了大家的小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '很快就将耳朵支起来回复了笑容。',
       ]);
       await urara.say_and_wait(
@@ -510,7 +510,7 @@ module.exports = (handlers) => {
     ]);
     await urara.say_and_wait('那个，你还好吗？是那里不舒服吗？');
     await era.printAndWait([
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       'A「……啊，乌拉拉……嗯，不用担心，我没事的……」',
     ]);
     await urara.say_and_wait(
@@ -519,18 +519,18 @@ module.exports = (handlers) => {
     await urara.say_and_wait(
       '不要勉强自己哦？我会陪着你的，所以直到恢复笑容前——',
     );
-    await era.printAndWait([urara.get_uma_sex_title(), 'A「现在别碰我！」']);
+    await era.printAndWait([urara.uma_sex_title, 'A「现在别碰我！」']);
     await urara.say_and_wait('……咦？好疼……！');
     await urara.print_and_wait([
       '伸出的手被用',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '的气力拍开了，被甩到的手背上逐渐传来了火辣辣的触感。',
     ]);
     await urara.print_and_wait([
       '而抬起头来时，',
       urara.sex,
       '明明是位总是笑眯眯的',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '，但如今展示向我展示出的却是一张彷徨又悲伤的脸。',
     ]);
     await urara.print_and_wait([
@@ -546,11 +546,11 @@ module.exports = (handlers) => {
       '的继续倾诉。',
     ]);
     await era.printAndWait([
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       'A「怎么可能，笑得出来啊……！」',
     ]);
     await era.printAndWait([
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       'A「好不容易能参加G1的，我也想站在舞台的中心啊！但难得有这个机会，我却这么弱……」',
     ]);
     await urara.print_and_wait(
@@ -562,12 +562,12 @@ module.exports = (handlers) => {
       '应该能轻松些吧？但是这张侧脸，也好像从哪里见过，这到底是怎样的表情来着？',
     ]);
     await era.printAndWait([
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       'A「对不起……乌拉拉，我不是故意想要这样的……但是，我真的很难笑出来啊……」',
     ]);
     await urara.say_and_wait('不，乌拉拉一点都不觉得疼！你真的没关系吗？');
     await era.printAndWait([
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       'A「……乌拉拉哪里像不疼的样子啊，明明表情都快哭出来了……」',
     ]);
     await urara.say_and_wait('诶？真的吗……不对！乌拉拉真的没事哦！');
@@ -580,11 +580,11 @@ module.exports = (handlers) => {
       '乌拉拉的目的是达成了没错，但是真的有让人破涕而笑的水平吗？乌拉拉的表情……',
     );
     await era.printAndWait([
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       'A「不是那个意思哦……不过我没事的，等上台的时候我就可以好好露出笑容了。」',
     ]);
     await era.printAndWait([
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       'A「乌拉拉总是愿意听我说话呢，这次也很感谢你，所以也赶快在上台前调整好表情吧！」',
     ]);
     await urara.say_and_wait('嗯！没关系的！无论几次乌拉拉都可以听你说话哦！');
@@ -594,13 +594,10 @@ module.exports = (handlers) => {
       '轻轻将我也拉了起来。',
     ]);
     await era.printAndWait([
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       'A「说的是呢，无论几次都行……下次我绝对……要站上正中间的位置！」',
     ]);
-    await era.printAndWait([
-      urara.get_uma_sex_title(),
-      'A「一定……还有下次的……！」',
-    ]);
+    await era.printAndWait([urara.uma_sex_title, 'A「一定……还有下次的……！」']);
     await urara.print_and_wait([
       '在道出「待会再见」后，',
       urara.sex,
@@ -749,7 +746,7 @@ module.exports = (handlers) => {
       ' 不易察觉的不充分笑容、「',
       urara.sex,
       '」的频繁出现，还是比赛前看到的那个阴沉的',
-      urara.get_child_sex_title(),
+      urara.child_sex_title,
       '。',
     ]);
     await era.printAndWait(
@@ -764,7 +761,7 @@ module.exports = (handlers) => {
       '说起来，训练员',
       me.get_adult_sex_title(),
       '（您）很清楚吧，',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '在奔跑中积累下的损伤是难医治。',
     ]);
     await in_urara.say_as_unknown_and_wait(

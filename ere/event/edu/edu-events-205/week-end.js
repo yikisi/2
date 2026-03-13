@@ -65,7 +65,7 @@ module.exports = async (vp, me, event_object) => {
       await era.printAndWait(`他一边用手指敲打收银机器一边扬起眉毛。`);
       await say_by_passer_by_and_wait(
         '茶叶店店主',
-        `好久不见，那个${vp.get_child_sex_title()}是新的担当吗？`,
+        `好久不见，那个${vp.child_sex_title}是新的担当吗？`,
       );
       await era.printAndWait(`店主隔着 ${me.name} 的肩膀向后看。`);
       await era.printAndWait(
@@ -88,7 +88,7 @@ module.exports = async (vp, me, event_object) => {
       await era.printAndWait(
         `两人似乎都是${
           vp.sex
-        }的粉丝，看起来是被开朗应对的憧憬的${vp.get_uma_sex_title()}深深迷住了。`,
+        }的粉丝，看起来是被开朗应对的憧憬的${vp.uma_sex_title}深深迷住了。`,
       );
       await era.printAndWait(
         `虽然在战胜G1之前就有所察觉，但 ${vp.name} 有着独特的魅力。`,
@@ -112,7 +112,7 @@ module.exports = async (vp, me, event_object) => {
         `虽然均等排列的行道树开始一点点地散落叶子，但似乎还能欣赏到金黄色的秋景。`,
       );
       await era.printAndWait(
-        `走在大街上，发现旁边的${vp.get_teen_sex_title()}回头看了看。`,
+        `走在大街上，发现旁边的${vp.teen_sex_title}回头看了看。`,
       );
       await era.printAndWait(`在那对面，${me.name} 看到了刚才两位女性的背影。`);
       era.printButton(`「是刚才的粉丝吗？」`, 1);
@@ -130,12 +130,12 @@ module.exports = async (vp, me, event_object) => {
         `一想到期待我跑步的人越来越多，我就忍不住想跑得更多，想赢得更多。`,
       );
       await era.printAndWait(
-        `很多${vp.get_uma_sex_title()}对暴露在众目睽睽之下感到压力。`,
+        `很多${vp.uma_sex_title}对暴露在众目睽睽之下感到压力。`,
       );
       await era.printAndWait(
         `在 ${
           me.name
-        } 的负责人中，也有${vp.get_uma_sex_title()}烦恼着在G1这样引人注目的舞台上不能很好地发挥实力。`,
+        } 的负责人中，也有${vp.uma_sex_title}烦恼着在G1这样引人注目的舞台上不能很好地发挥实力。`,
       );
       await era.printAndWait(
         `但是 ${vp.name} 对受到越活跃越会增加的期待毫不犹豫。`,
@@ -217,9 +217,7 @@ module.exports = async (vp, me, event_object) => {
         `黑色摇曳的水面上没有星星，只是静静地回响着捕捉不到的风吹出的波浪声。`,
       );
       await era.printAndWait(
-        `可 ${vp.name} 是个坚强的${vp.get_uma_sex_title()}，${
-          vp.sex
-        }一个人也能赢。`,
+        `可 ${vp.name} 是个坚强的${vp.uma_sex_title}，${vp.sex}一个人也能赢。`,
       );
       await montjeu.say_and_wait(
         `……你还记得${vp.sex}说过${vp.sex}是一个能背负人们期待的容器吗？`,
@@ -242,14 +240,14 @@ module.exports = async (vp, me, event_object) => {
       await era.printAndWait(
         `${
           vp.sex
-        }自己理所当然地做的事，在无限期待的过程中，${vp.get_teen_sex_title()}在这个世界上发现了什么。`,
+        }自己理所当然地做的事，在无限期待的过程中，${vp.teen_sex_title}在这个世界上发现了什么。`,
       );
       await era.printAndWait(`可能性和现状在脑海中相连。`);
       era.printButton(`「……对不被期待的事情的恐惧？」`, 1);
       await era.input();
       await montjeu.say_and_wait('Exactement。');
       await era.printAndWait(
-        `曾经成为传说，一个受到所有人期待的${vp.get_uma_sex_title()}继续道。`,
+        `曾经成为传说，一个受到所有人期待的${vp.uma_sex_title}继续道。`,
       );
       await montjeu.say_and_wait(
         `有必要回应期待。越是回应，新的期待就越会增加。如果${vp.sex}处在在这样的循环中，就有可能被误解为期待自己的价值。如果这是构成${vp.sex}根本的想法，就应该避免轻易否定。`,
@@ -339,7 +337,7 @@ module.exports = async (vp, me, event_object) => {
       await era.input();
       await vp.say_and_wait(`……我好像说过很多话。`);
       await me.say_and_wait(
-        `你说『如果负责能连霸凯旋门赏的${vp.get_uma_sex_title()}的话，作为社会人的评价也会提高吧。』`,
+        `你说『如果负责能连霸凯旋门赏的${vp.uma_sex_title}的话，作为社会人的评价也会提高吧。』`,
       );
       await vp.say_and_wait(
         `那个……太不好意思了，如果可以的话，我希望你当没发生过，${me.actual_name}。`,
@@ -436,16 +434,14 @@ module.exports = async (vp, me, event_object) => {
         temp[1]++;
       }
       await era.printAndWait(
-        `${
-          me.name
-        } 想要关门，很遗憾人类不可能用腕力战胜${vp.get_uma_sex_title()}。`,
+        `${me.name} 想要关门，很遗憾人类不可能用腕力战胜${vp.uma_sex_title}。`,
       );
       await era.printAndWait(`门被撬开了。`);
       await era.printAndWait(
-        `${vp.get_child_sex_title()}一不小心在门口摔了个屁股蹲儿。`,
+        `${vp.child_sex_title}一不小心在门口摔了个屁股蹲儿。`,
       );
       await era.printAndWait(
-        `法国的公主、天才${vp.get_teen_sex_title()}，不过在 ${
+        `法国的公主、天才${vp.teen_sex_title}，不过在 ${
           me.name
         } 眼前整理头发的样子让人忍俊不禁。`,
       );
@@ -463,13 +459,13 @@ module.exports = async (vp, me, event_object) => {
         `视线和视线互相碰撞。关于主张，${vp.sex}有一定的道理。${vp.name} 脸上露出了自豪的表情。`,
       );
       await era.printAndWait(
-        `${vp.name} 是世界最强的${vp.get_uma_sex_title()}，${
+        `${vp.name} 是世界最强的${vp.uma_sex_title}，${
           me.name
         } 不会忘记那时的情景。`,
       );
       await era.printAndWait(`身穿蓝色调的胜负服冲过终点线的瞬间。`);
       await era.printAndWait(
-        `那是一种兼具与中学生相称的坦率和正直，有着与年龄相称的不服输，充满活力的${vp.get_uma_sex_title()}的感觉。`,
+        `那是一种兼具与中学生相称的坦率和正直，有着与年龄相称的不服输，充满活力的${vp.uma_sex_title}的感觉。`,
       );
       await era.printAndWait(
         `那时的孩子长大了。个子变高，渐渐成了苗条的模特体型。`,
@@ -518,15 +514,13 @@ module.exports = async (vp, me, event_object) => {
           `也许是因为不想被粉丝发现，特征性的栗毛被整理得太整齐，反倒吸引了周围的目光。`,
         );
         await era.printAndWait(
-          `据说，${vp.get_uma_sex_title()}的美貌大部分由毛色决定。`,
+          `据说，${vp.uma_sex_title}的美貌大部分由毛色决定。`,
         );
         await era.printAndWait(
           `当然，长相等也要考虑，但总的来说，毛发的比重更重。`,
         );
         await era.printAndWait(
-          `${
-            vp.name
-          } 的头发和尾巴，和这一带的${vp.get_uma_sex_title()}完全不同。`,
+          `${vp.name} 的头发和尾巴，和这一带的${vp.uma_sex_title}完全不同。`,
         );
         await era.printAndWait(`变装，没有意义啊……`);
         await era.printAndWait(`${vp.name} 从车窗眺望外面的景色。`);
@@ -555,10 +549,7 @@ module.exports = async (vp, me, event_object) => {
         era.printButton(`「有点意外。」`, 1);
         await era.input();
         await vp.say_and_wait(`什么？`);
-        era.printButton(
-          `「凯旋门${vp.get_uma_sex_title()}对G3比赛感兴趣。」`,
-          1,
-        );
+        era.printButton(`「凯旋门${vp.uma_sex_title}对G3比赛感兴趣。」`, 1);
         await era.input();
         await vp.say_and_wait(`……也许是这样啊。`);
         await vp.say_and_wait(
@@ -626,7 +617,7 @@ module.exports = async (vp, me, event_object) => {
         await vp.say_and_wait(
           `……呐，${
             me.actual_name
-          }。如果我们不是训练员和${vp.get_uma_sex_title()}的话，我们能相遇吗？`,
+          }。如果我们不是训练员和${vp.uma_sex_title}的话，我们能相遇吗？`,
         );
         era.printButton(`「……不会。」`, 1);
         await era.input();
@@ -655,9 +646,7 @@ module.exports = async (vp, me, event_object) => {
         await era.printAndWait(
           `${me.name} 和${vp.sex}不一样，只会拖${vp.sex}的后腿。`,
         );
-        await era.printAndWait(
-          `${me.name} 不想拖${vp.get_uma_sex_title()}的后腿。`,
-        );
+        await era.printAndWait(`${me.name} 不想拖${vp.uma_sex_title}的后腿。`);
         await era.printAndWait(`所以——`);
         era.printButton(`「分手了。」`, 1);
         await era.input();
@@ -747,7 +736,7 @@ module.exports = async (vp, me, event_object) => {
         await era.printAndWait(
           `${
             me.name
-          } 感觉真的快要被${vp.get_uma_sex_title()}特有的怪力抱碎了，于是在 ${
+          } 感觉真的快要被${vp.uma_sex_title}特有的怪力抱碎了，于是在 ${
             vp.name
           } 的背上轻拍。`,
         );
@@ -810,7 +799,7 @@ module.exports = async (vp, me, event_object) => {
           `即使脱了妆，${vp.sex}还是很美。像是用神圣照亮夜晚的月亮。`,
         );
         await vp.say_and_wait(
-          `我是天才${vp.get_uma_sex_title()}！大部分的事情都可以说是fermez-la！`,
+          `我是天才${vp.uma_sex_title}！大部分的事情都可以说是fermez-la！`,
         );
         era.printButton(`「我不想让你烦心。」（好感+10，爱慕+1）`, 1);
         era.printButton(`「你要明白……」`, 2);
@@ -852,11 +841,11 @@ module.exports = async (vp, me, event_object) => {
           `不，笨蛋！就算弱小也没关系……如果没出息的话就携手支持就好了。你没有放弃责任，我更不能放弃。`,
         );
         await vp.say_and_wait(
-          `训练员和${vp.get_uma_sex_title()}的关系是对等的。我们会全力奔跑，训练员则会引导。就像是缺一不可的夫妇一样。`,
+          `训练员和${vp.uma_sex_title}的关系是对等的。我们会全力奔跑，训练员则会引导。就像是缺一不可的夫妇一样。`,
         );
         await vp.say_and_wait(`所以……咕、嘶，我们才会互相吸引，不是吗？`);
         await era.printAndWait(
-          `${me.name} 把比自己小十岁的${vp.get_child_sex_title()}子弄哭了。`,
+          `${me.name} 把比自己小十岁的${vp.child_sex_title}子弄哭了。`,
         );
         await era.printAndWait(
           `夜晚有点冷。因为白天很热，所以 ${me.get_couple_title()} 穿得很少。`,
@@ -881,7 +870,7 @@ module.exports = async (vp, me, event_object) => {
         era.printButton(`「${vp.name}，这是怎么回事……！？」`, 1);
         await era.input();
         await vp.say_and_wait(
-          `带${vp.get_child_sex_title()}子进房间，不觉得只有一件事要做吗？`,
+          `带${vp.child_sex_title}子进房间，不觉得只有一件事要做吗？`,
         );
         await era.printAndWait(
           `勉强遮住皮肤的布被解开，${vp.name} 那双海蓝的眼睛发出奇怪的光。`,

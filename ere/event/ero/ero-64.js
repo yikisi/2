@@ -238,7 +238,7 @@ module.exports = class extends CustomizedEro {
             ' 扶住 ',
             pama.get_colored_name(),
             ' 的头，将涌出的精子尽数倾泻至',
-            pama.get_teen_sex_title(),
+            pama.teen_sex_title,
             '口中，然后在包覆下享受着余韵。',
           ]);
           await era.printAndWait([
@@ -296,7 +296,7 @@ module.exports = class extends CustomizedEro {
             ' 的脑袋抵到最深处，在',
             pama.sex,
             '的紧拥下，向',
-            pama.get_teen_sex_title(),
+            pama.teen_sex_title,
             '的食道里倾泻精子直至最后一滴。',
           ]);
           await era.printAndWait([

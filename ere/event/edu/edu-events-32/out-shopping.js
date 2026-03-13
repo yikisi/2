@@ -31,7 +31,7 @@ async function common(tachyon, me) {
     '尤其对方还是准备给 ',
     me.get_colored_name(),
     ' 喂食的绝世美',
-    tachyon.get_teen_sex_title(),
+    tachyon.teen_sex_title,
   ]);
   era.println();
   await era.printAndWait([
@@ -226,7 +226,7 @@ module.exports = async (tachyon, me, callname, hook, event_object) => {
       await era.printAndWait('不知是否是应该吐槽的点，但这抽奖的奖品');
       await era.printAndWait([
         '怎么感觉除了安慰奖的面纸和特奖的温泉旅行券其他都是专门为',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         '而设计的呢？',
       ]);
       era.println();
@@ -346,13 +346,13 @@ module.exports = async (tachyon, me, callname, hook, event_object) => {
         if (era.get('cflag:0:种族')) {
           await era.printAndWait([
             '不，但就算是',
-            tachyon.get_uma_sex_title(),
+            tachyon.uma_sex_title,
             '自己也吃不了那么多啊……',
           ]);
           era.println();
           await tachyon.say_and_wait([
             '一般而言，对于',
-            tachyon.get_uma_sex_title(),
+            tachyon.uma_sex_title,
             '来说，消耗的能量越多需要补充的也就越多，所以吃得越多=越强其实是能够成立的',
           ]);
           era.println();
@@ -391,7 +391,7 @@ module.exports = async (tachyon, me, callname, hook, event_object) => {
           era.println();
           await tachyon.say_and_wait([
             '哦呀……你的意思是，要以人类转化',
-            tachyon.get_uma_sex_title(),
+            tachyon.uma_sex_title,
             '的可能性进行实验吗？这样的研究……或许也不是不行……',
           ]);
           era.println();
@@ -629,7 +629,7 @@ module.exports = async (tachyon, me, callname, hook, event_object) => {
         );
         await tachyon.say_and_wait([
           '不如说以人类的消化速率，对肉类的需求反而比',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '高上许多',
         ]);
         era.println();
@@ -701,7 +701,7 @@ module.exports = async (tachyon, me, callname, hook, event_object) => {
         if (relation <= 225) {
           await tachyon.say_and_wait([
             '身为G1赛',
-            tachyon.get_uma_sex_title(),
+            tachyon.uma_sex_title,
             '的 ',
             tachyon.get_colored_name(),
             ' 亲手喂食的汉堡排，这样有没有相应的价值了？',
@@ -709,9 +709,9 @@ module.exports = async (tachyon, me, callname, hook, event_object) => {
         } else {
           await tachyon.say_and_wait([
             '身为超绝美',
-            tachyon.get_teen_sex_title(),
+            tachyon.teen_sex_title,
             '，还是G1赛',
-            tachyon.get_uma_sex_title(),
+            tachyon.uma_sex_title,
             '的 ',
             tachyon.get_colored_name(),
             ' 亲手喂食的汉堡排，你愿意花多少来尝这一口呢？',

@@ -38,7 +38,7 @@ week_end_handlers.beginning = async (ss, me, callname, flags, event_object) => {
   );
   await era.printAndWait([
     '美丽的黑发',
-    ss.get_uma_sex_title(),
+    ss.uma_sex_title,
     '对 ',
     me.get_colored_name(),
     ' 伸出了手，自信的面容就好像是绽放的花朵一般，',
@@ -47,7 +47,7 @@ week_end_handlers.beginning = async (ss, me, callname, flags, event_object) => {
     '健康而丰满的肉体让 ',
     me.get_colored_name(),
     ' 不得不感慨本格化的',
-    ss.get_uma_sex_title(),
+    ss.uma_sex_title,
     '是如此的美好，',
   ]);
   await era.printAndWait([
@@ -244,7 +244,7 @@ week_end_handlers[47 + 24] = async (ss, me, callname, flags, event_object) => {
     ]);
     await era.printAndWait([
       '留下车上的几个小',
-      ss.get_uma_sex_title(),
+      ss.uma_sex_title,
       '被困在车子里面等待救援，但是救援来到的时间实在是太晚了，',
     ]);
     await era.printAndWait([
@@ -383,14 +383,14 @@ out_church_handlers[47 + 1] = async (ss, me, callname, flags) => {
     ' 看到几乎与',
     ss.sex,
     '长得一模一样的',
-    ss.get_uma_sex_title(),
+    ss.uma_sex_title,
     '和',
     ss.sex,
     '一起有说有笑的时候。',
   ]);
   await era.printAndWait([
     '两个几乎是一个模子里面刻出来的',
-    ss.get_uma_sex_title(),
+    ss.uma_sex_title,
     '就这样站在了 ',
     me.get_colored_name(),
     ' 的面前，',

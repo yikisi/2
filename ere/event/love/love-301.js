@@ -23,7 +23,7 @@ module.exports = class extends CustomizedLove {
       ]);
       era.set('callname:301:-1', '900102');
       await era.printAndWait([
-        tokino.get_uma_sex_title(),
+        tokino.uma_sex_title,
         ' ',
         tokino.get_colored_actual_name(),
         '，这才是',

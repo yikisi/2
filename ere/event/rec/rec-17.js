@@ -131,7 +131,7 @@ module.exports = class extends CustomizedRecruit {
       await era.printAndWait(
         `在伟大的名号和盛名之下，${
           luna.sex
-        }还只是个正值花样年华的${luna.get_teen_sex_title()}。`,
+        }还只是个正值花样年华的${luna.teen_sex_title}。`,
       );
       await era.printAndWait(`同时，${CharaTalk.me.name} 剧烈地动摇了。`);
       await era.printAndWait('谁都无法想信那个举世无双的「皇帝」——');
@@ -158,9 +158,7 @@ module.exports = class extends CustomizedRecruit {
       era.printButton('「露娜！」', 1);
       await era.input();
 
-      await era.printAndWait(
-        `虚弱的${luna.get_teen_sex_title()}抬起头看着你。`,
-      );
+      await era.printAndWait(`虚弱的${luna.teen_sex_title}抬起头看着你。`);
       await luna.say_and_wait(`……${CharaTalk.me.actual_name}……？`);
       await era.printAndWait(
         `说罢，${luna.sex}似乎终于支撑不住了，摇摇晃晃地倒在了地上。`,
@@ -173,7 +171,7 @@ module.exports = class extends CustomizedRecruit {
 
       era.drawLine();
       await era.printAndWait(
-        `鲁铎象征——在被这么称呼前，${luna.get_teen_sex_title()}原来的名字是露娜。`,
+        `鲁铎象征——在被这么称呼前，${luna.teen_sex_title}原来的名字是露娜。`,
       );
       await era.printAndWait(
         `${luna.sex}喜欢奔跑、喜欢甜食、喜欢懒懒散散度日。`,

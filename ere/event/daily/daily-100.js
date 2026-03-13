@@ -90,7 +90,7 @@ module.exports = class extends CustomizedDaily {
         '一向沉稳、处变不惊的 ',
         acute.get_colored_name(),
         '，只有在这个时候，才会变得像是同龄人的羞涩',
-        acute.get_teen_sex_title(),
+        acute.teen_sex_title,
         '。',
       ]);
       await era.printAndWait(['总感觉，有些想要捉弄', acute.sex, '的恶趣味——']);
@@ -107,7 +107,7 @@ module.exports = class extends CustomizedDaily {
       await acute.say_and_wait(['对了，', callname, '，计生工具用上了吗？']);
       await acute.say_and_wait([
         '年轻气盛是很好的啦，但是嘛，训练员和担当',
-        acute.get_uma_sex_title(),
+        acute.uma_sex_title,
         '之间还是要注意分寸的哦～',
       ]);
       await acute.say_and_wait('等毕业了之后，在真刀实枪的去做吧～');
@@ -598,7 +598,7 @@ module.exports = class extends CustomizedDaily {
             ]);
             await era.printAndWait([
               '粉红的嘴唇泛起了透明的汁液，身为',
-              acute.get_teen_sex_title(),
+              acute.teen_sex_title,
               '的猛兽露出了',
               acute.sex,
               '的獠牙。',
@@ -638,7 +638,7 @@ module.exports = class extends CustomizedDaily {
             await era.printAndWait('还没说完，自己便已被抱住。');
             await era.printAndWait([
               '被身为',
-              acute.get_teen_sex_title(),
+              acute.teen_sex_title,
               '的猛兽紧紧得抱住，自身绝没有逃脱的可能。',
             ]);
             await era.printAndWait(

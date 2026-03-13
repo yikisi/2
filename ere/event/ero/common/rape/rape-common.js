@@ -46,8 +46,9 @@ class RapeCommandLines extends EroCommandLines {
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    * @param extra_flag
+   * @param this_param
    */
-  async run(attacker, defender, hook, extra_flag) {
+  async run(attacker, defender, hook, extra_flag, this_param) {
     return await super.run(
       attacker,
       defender,

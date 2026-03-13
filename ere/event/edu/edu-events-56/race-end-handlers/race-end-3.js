@@ -41,7 +41,7 @@ module.exports = (handlers) => {
       ]);
       await kitaru.say_and_wait([
         '我已经是一位优秀的赛',
-        kitaru.get_uma_sex_title(),
+        kitaru.uma_sex_title,
         '了哦！',
       ]);
       await kitaru.print_and_wait([
@@ -108,7 +108,7 @@ module.exports = (handlers) => {
         ' 告诉的这个结论，那个认为自己被',
         kitaru.get_bigger_sibling_sex_title(),
         '的灵魂凭依上的',
-        kitaru.get_teen_sex_title(),
+        kitaru.teen_sex_title,
         '，正不安的站在屋内的一角。',
       ]);
       await kitaru.say_and_wait('对啊，我好像的确变得不太像是自己。');
@@ -120,7 +120,7 @@ module.exports = (handlers) => {
       await kitaru.say_and_wait('要是在两年前，我说不定会很高兴呢！');
       await kitaru.say_and_wait('但是一想到……');
       await era.printAndWait([
-        kitaru.get_teen_sex_title(),
+        kitaru.teen_sex_title,
         '颤抖的声音逐渐变得如雾般朦胧不清。',
       ]);
       era.printButton('「阿福？」', 1);
@@ -158,7 +158,7 @@ module.exports = (handlers) => {
         ' 喃喃地念着 ',
         kitaru.get_colored_name(),
         ' 告诉的这个结论，那个',
-        kitaru.get_teen_sex_title(),
+        kitaru.teen_sex_title,
         '，正不安的站在屋内的一角。',
       ]);
       await kitaru.say_and_wait('对啊，我好像的确变得不太像是自己。');
@@ -168,7 +168,7 @@ module.exports = (handlers) => {
       await kitaru.say_and_wait('这样子……我真的跑出来了吗？');
       await kitaru.say_and_wait('……');
       await era.printAndWait([
-        kitaru.get_teen_sex_title(),
+        kitaru.teen_sex_title,
         '颤抖的声音逐渐变得如雾般朦胧不清。',
       ]);
       era.printButton('「阿福？」', 1);
@@ -264,7 +264,7 @@ module.exports = (handlers) => {
         );
         await era.printAndWait([
           '配合着休息室内屏幕里解说员小姐的点评，一起品鉴起今日优胜',
-          kitaru.get_uma_sex_title(),
+          kitaru.uma_sex_title,
           '的久经锻炼的肉体。',
         ]);
         await era.printAndWait([
@@ -332,7 +332,7 @@ module.exports = (handlers) => {
     await print_event_name('福来今至', kitaru);
     await kitaru.print_and_wait([
       '从前，有一位赛',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '，叫 ',
       kitaru.get_colored_name(),
       '。',
@@ -340,7 +340,7 @@ module.exports = (handlers) => {
     await kitaru.print_and_wait([
       kitaru.sex,
       '一点才华都没有，是个贪心无比，只想靠幸运往上爬的',
-      kitaru.get_child_sex_title(),
+      kitaru.child_sex_title,
       '子。',
     ]);
     await kitaru.print_and_wait([
@@ -351,7 +351,7 @@ module.exports = (handlers) => {
     await kitaru.print_and_wait(['没错……', kitaru.sex, '付出了一切！']);
     await kitaru.print_and_wait([
       '那个',
-      kitaru.get_child_sex_title(),
+      kitaru.child_sex_title,
       '变成了神明，',
       kitaru.sex,
       '跳脱马的境界，进入了神域，然后变成了一道白光……',
@@ -380,7 +380,7 @@ module.exports = (handlers) => {
       ' 的衬衣上。',
     ]);
     await era.printAndWait([
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '比赛后湿热的甜腻体味被 ',
       me.get_colored_name(),
       ' 吸入，而胸前的那对乳肉被挤压的柔软感觉由于运动后的体温更是明显。',

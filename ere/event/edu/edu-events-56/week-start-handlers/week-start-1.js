@@ -49,7 +49,7 @@ module.exports = (handlers) => {
   };
 
   handlers.beginning = async (kitaru, me, callname, flags) => {
-    await print_event_name(['窥视命运的', kitaru.get_teen_sex_title()], kitaru);
+    await print_event_name(['窥视命运的', kitaru.teen_sex_title], kitaru);
     await kitaru.say_and_wait([callname, '！我做完了哦！']);
     await era.printAndWait([
       '不远处，刚做完一组训练的 ',
@@ -57,7 +57,7 @@ module.exports = (handlers) => {
       ' 正冲 ',
       me.get_colored_name(),
       ' 挥着手，那种过于热情的喊声引来不少其他赛',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '的侧目。',
     ]);
     await era.printAndWait([
@@ -117,7 +117,7 @@ module.exports = (handlers) => {
     await era.input();
     await era.printAndWait([
       '目标，也可以说成是赛',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '奔跑目的，愿望。',
     ]);
     await era.printAndWait('具体的像是经典三冠，春秋连霸，乃至凯旋门。');
@@ -127,7 +127,7 @@ module.exports = (handlers) => {
     await era.printAndWait('乃至更为抽象的，证明自己的存在，价值。');
     await kitaru.say_and_wait('目标吗……');
     era.printButton(
-      `「像是将来要跑什么比赛，或者是想要成为怎样的赛${kitaru.get_uma_sex_title()}。」`,
+      `「像是将来要跑什么比赛，或者是想要成为怎样的赛${kitaru.uma_sex_title}。」`,
       1,
     );
     await era.input();
@@ -147,12 +147,12 @@ module.exports = (handlers) => {
       '是名叫 ',
       kitaru.get_colored_name(),
       ' 的',
-      kitaru.get_teen_sex_title(),
+      kitaru.teen_sex_title,
       '！为了实现幸福！成为神明！命运中的必经之路！',
     ]);
     await era.printAndWait([
       '沉思片刻之后，',
-      kitaru.get_teen_sex_title(),
+      kitaru.teen_sex_title,
       '用',
       kitaru.sex,
       '那一如往常过于夸张的说辞回答了 ',
@@ -240,7 +240,7 @@ module.exports = (handlers) => {
     await kitaru.say_and_wait('偶尔妈妈也会来……');
     await era.printAndWait([
       '讲到这里，',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '细长的双耳蔫了下去。',
     ]);
     await kitaru.say_and_wait('毕竟在我记忆里……');
@@ -311,7 +311,7 @@ module.exports = (handlers) => {
     await era.input();
     await era.printAndWait([
       '看起来是一对',
-      kitaru.get_siblings_sex_title(),
+      kitaru.siblings_sex_title,
       '，年长的',
       kitaru.get_bigger_sibling_sex_title(),
       '正握着年幼',
@@ -423,7 +423,7 @@ module.exports = (handlers) => {
       '作为训练员的 ',
       me.get_colored_name(),
       ' 立刻认出来其上播放的内容是史上有名的逃马赛',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '的领放剪辑。',
     ]);
     era.printButton('「待兼福来？」', 1);
@@ -445,7 +445,7 @@ module.exports = (handlers) => {
       '抛开 ',
       kitaru.get_colored_name(),
       ' 的主要跑法是差行这点先不谈，那种表情也并非和其它赛',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '一样单纯因为看到了别人奔跑的感同身受的开心或是兴奋，而是……',
     ]);
     // await era.printAndWait('那种想要保持微笑，但又因为不断涌上来的悲伤而冲击出的呆滞。');
@@ -474,7 +474,7 @@ module.exports = (handlers) => {
       '总是像电视里那些逃马一样把我甩开了好大好大的一段距离呢！',
     ]);
     era.printButton(
-      `「听起来你的${kitaru.get_bigger_sibling_sex_title()}是位很优秀的赛${kitaru.get_uma_sex_title()}吧？」`,
+      `「听起来你的${kitaru.get_bigger_sibling_sex_title()}是位很优秀的赛${kitaru.uma_sex_title}吧？」`,
       1,
     );
     await era.input();
@@ -518,7 +518,7 @@ module.exports = (handlers) => {
     await era.printAndWait('「砰！！！」');
     await era.printAndWait([
       '直到在路过赛',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '宿舍的时候，听到了一声巨响。',
     ]);
     era.printButton('分辨一下声音的方向', 1);
@@ -528,17 +528,13 @@ module.exports = (handlers) => {
         '虽然 ',
         me.get_colored_name(),
         ' 的听力比不上那些赛',
-        kitaru.get_uma_sex_title(),
+        kitaru.uma_sex_title,
         '，但在宁静的早上定位这突兀声响的方位对 ',
         me.get_colored_name(),
         ' 而言不难。',
       ]);
       await tannhauser.say_as_unknown_and_wait('呜呜……');
-      await era.printAndWait([
-        '某位',
-        kitaru.get_uma_sex_title(),
-        '发出的哀叹。',
-      ]);
+      await era.printAndWait(['某位', kitaru.uma_sex_title, '发出的哀叹。']);
       await kitaru.say_as_unknown_and_wait('啊啊啊！万分抱歉！');
       await era.printAndWait([
         '以及，毫无疑问是 ',
@@ -646,7 +642,7 @@ module.exports = (handlers) => {
       '名叫 ',
       kitaru.get_colored_name(),
       ' 的赛',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '，意外的有很严重的囤积癖。',
     ]);
     await era.printAndWait('果然，答案只有一个了。');
@@ -740,7 +736,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '那种异常兴奋的姿态，不像是',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '，倒像是正在标记着自己领地的小动物。',
     ]);
     await kitaru.say_and_wait('欸嘿嘿！真是有些抱歉了！');
@@ -777,7 +773,7 @@ module.exports = (handlers) => {
       '似乎是知道自己的行为的确给 ',
       me.get_colored_name(),
       ' 添了不少的麻烦，橙发的',
-      kitaru.get_teen_sex_title(),
+      kitaru.teen_sex_title,
       '做出了',
       kitaru.sex,
       '标志性的动作，绷直的白皙双臂伸向天花板，期待着 ',

@@ -218,7 +218,7 @@ module.exports = class extends CustomizedEdu {
         await era.input();
         await era.printAndWait(`${me.name} 和 ${chara.name} 诉说着。`);
         await era.printAndWait(
-          `一旦本格化消失，再强大的赛${chara.get_uma_sex_title()}也泯然众人，只留下一点点的回忆。`,
+          `一旦本格化消失，再强大的赛${chara.uma_sex_title}也泯然众人，只留下一点点的回忆。`,
         );
         await era.printAndWait(
           `这是无可抗拒的，终有一天，${chara.name} 也会……`,
@@ -850,7 +850,7 @@ module.exports = class extends CustomizedEdu {
       await era.printAndWait(
         `${
           me.name
-        } 拍打着门，却只能听见门内${chara.get_teen_sex_title()}呕吐和啜泣的声音。`,
+        } 拍打着门，却只能听见门内${chara.teen_sex_title}呕吐和啜泣的声音。`,
       );
       await era.printAndWait(
         `${me.name} 无助地蹲在地上……${me.name} 知道，自己辜负了露娜的期望。`,

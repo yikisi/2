@@ -24,27 +24,23 @@ module.exports = (handlers) => {
       rice.get_colored_name(),
       ' 的身边出现了某些变化。',
     ]);
-    await era.printAndWait([
-      '赛',
-      rice.get_uma_sex_title(),
-      'A「啊、是米浴酱！」',
-    ]);
+    await era.printAndWait(['赛', rice.uma_sex_title, 'A「啊、是米浴酱！」']);
     await rice.say_and_wait(['咦……咦！？在叫、', self_name, ' 吗？']);
     await era.printAndWait([
       '赛',
-      rice.get_uma_sex_title(),
+      rice.uma_sex_title,
       'B「不用那么紧张的！呼呼，上次的 ',
       race_infos[race_enum.kiku_sho].get_colored_name(),
       ' 真精彩啊！」',
     ]);
     await era.printAndWait([
       '赛',
-      rice.get_uma_sex_title(),
+      rice.uma_sex_title,
       'A「嗯嗯！真的有种被感动到了的感觉！」',
     ]);
     await era.printAndWait([
       '赛',
-      rice.get_uma_sex_title(),
+      rice.uma_sex_title,
       'B「真的真的！那个时候的米浴同学。咕……超认真的样子太帅了！」',
     ]);
     await rice.say_and_wait(['欸欸欸？说 ', self_name, ' 帅气什么的……']);
@@ -75,17 +71,17 @@ module.exports = (handlers) => {
     await rice.say_and_wait('……不要靠近啦！');
     await era.printAndWait([
       '赛',
-      rice.get_uma_sex_title(),
+      rice.uma_sex_title,
       'A「……米浴同学，果然……会在意的吧。」',
     ]);
     await era.printAndWait([
       '赛',
-      rice.get_uma_sex_title(),
+      rice.uma_sex_title,
       'B「呀～那是肯定的吧。换做是我的话也会觉得讨厌的。」',
     ]);
     await era.printAndWait([
       '赛',
-      rice.get_uma_sex_title(),
+      rice.uma_sex_title,
       'B「因为那个完美无缺的波旁同学，在和自己比赛之后……怎么说……」',
     ]);
     await era.printAndWait('教学楼旁的阴影下。');

@@ -255,7 +255,7 @@ module.exports = class extends Edu7UntilRaceEnd {
       await era.printAndWait(
         `没错，就在这个节骨眼上，${
           me.name
-        } 可爱又迷人的负责赛${gold_ship.get_uma_sex_title()}黄金船又不知道跑哪去了。那家伙一边意气风发地从 ${
+        } 可爱又迷人的负责赛${gold_ship.uma_sex_title}黄金船又不知道跑哪去了。那家伙一边意气风发地从 ${
           me.name
         } 的跟前大步走过，一边在嘴里说着什么「哦嗬嗬嗬嗬！为了站到赛马娘的顶点所须的是压倒性的『美』……！！」，然后一溜烟地跑掉了。`,
       );
@@ -264,7 +264,7 @@ module.exports = class extends Edu7UntilRaceEnd {
       await era.printAndWait(
         `${
           me.name
-        } 连忙跟上，却偶尔撞见了一位以自身的美学为傲的${opera.get_uma_sex_title()}……`,
+        } 连忙跟上，却偶尔撞见了一位以自身的美学为傲的${opera.uma_sex_title}……`,
       );
       era.println();
 
@@ -280,7 +280,7 @@ module.exports = class extends Edu7UntilRaceEnd {
       );
       era.println();
       await era.printAndWait(
-        `然后，两位赛${opera.get_uma_sex_title()}就在 ${
+        `然后，两位赛${opera.uma_sex_title}就在 ${
           me.name
         } 的注视下进行了整整四小时的走秀对决……！二人乐在其中倒也罢了，为什么要把 ${
           me.name
@@ -310,9 +310,10 @@ module.exports = class extends Edu7UntilRaceEnd {
       era.println();
 
       await gold_ship.say_and_wait(
-        `奖券藏，我跟你讲啊，后生${gold_ship
-          .get_child_sex_title()
-          .substring(0, 1)}最重要的就系所谓的社会人力啊。`,
+        `奖券藏，我跟你讲啊，后生${gold_ship.child_sex_title.substring(
+          0,
+          1,
+        )}最重要的就系所谓的社会人力啊。`,
       );
       await winning_ticket.say_and_wait('人力公司？');
       await winning_ticket.say_and_wait(
@@ -407,7 +408,7 @@ module.exports = class extends Edu7UntilRaceEnd {
       era.println();
 
       await gold_ship.print_and_wait(
-        `这样啊……那家伙是成名${gold_ship.get_uma_sex_title()}，这种场合不好发作……`,
+        `这样啊……那家伙是成名${gold_ship.uma_sex_title}，这种场合不好发作……`,
       );
       era.println();
 
@@ -644,7 +645,7 @@ module.exports = class extends Edu7UntilRaceEnd {
       await print_event_name('拔萝卜之鬼', gold_ship);
       await era.printAndWait([
         '在学校里被一头芦毛的诡异',
-        gold_ship.get_uma_sex_title(),
+        gold_ship.uma_sex_title,
         '拦住了。',
       ]);
       await gold_ship.say_and_wait(

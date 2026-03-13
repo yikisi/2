@@ -41,7 +41,7 @@ module.exports = () => {
     () =>
       silence.say([
         '你问我的目标是什么？我想赢，站在赛',
-        silence.get_uma_sex_title(),
+        silence.uma_sex_title,
         '的战场上一路赢下去，仅此而已。',
       ]),
     () => {

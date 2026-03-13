@@ -67,7 +67,7 @@ handlers[0] = async (
     );
     await era.printAndWait([
       '小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '瞬间就被这台迷幻的机器勾住了灵魂，即使捂住差点因惊吓发声的小嘴，也早已被内含的「惊喜」夺取了视线。',
     ]);
     await era.printAndWait([
@@ -82,7 +82,7 @@ handlers[0] = async (
     );
     await era.printAndWait([
       '就像跃入洞前短暂犹豫的爱丽丝，',
-      urara.get_teen_sex_title(),
+      urara.teen_sex_title,
       '在未知的躁动中折起耳朵，颤颤巍巍地将手伸向了投币口。',
     ]);
     await era.printAndWait(
@@ -112,17 +112,17 @@ handlers[0] = async (
     ]);
     await era.printAndWait([
       '带有尖头与椭圆身体的金属塞子在',
-      urara.get_child_sex_title(),
+      urara.child_sex_title,
       '手中散发着寒气，由金属短杆连接的软质底座则下面又有着黑色的强力吸盘。',
     ]);
     await era.printAndWait([
       '在拿到手中后，小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '才意识到它足有一颗瘦长的梨子那么大，这绝对不是「新手」使用的东西。',
     ]);
     await era.printAndWait([
       '像是迷失了心智，',
-      urara.get_teen_sex_title(),
+      urara.teen_sex_title,
       '的樱瞳被灯光映照成了魅惑的深粉色，',
       urara.sex,
       '就这样失神地在角落中撩起了自己裙摆与上衣……',
@@ -134,12 +134,12 @@ handlers[0] = async (
       ' 按照包装上的指示，将吸盘固定在地板上。',
     ]);
     await era.printAndWait([
-      urara.get_teen_sex_title(),
+      urara.teen_sex_title,
       '在阴影中用一只手解开裙子、褪下安全裤与内裤扔到一边，另一只手则简单撩了下尾巴。',
     ]);
     await era.printAndWait([
       '学着漫画里受虐的女主的样子，下着赤裸的小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '以四肢着地的姿势缓缓地俯下身子。',
     ]);
     await era.printAndWait([
@@ -149,14 +149,14 @@ handlers[0] = async (
     if (era.get('exp:52:肛交次数') >= 10) {
       await era.printAndWait([
         '随着尖端冰凉的触感没入，',
-        urara.get_teen_sex_title(),
+        urara.teen_sex_title,
         '压抑着身体，想要耐心地吞下这枚稍显过分的长塞。',
       ]);
       await era.printAndWait([
         '但',
         urara.sex,
         '高估了自己的经验与性爱的耐性，也低估了这小小的',
-        urara.get_sex_slave_title(),
+        urara.sex_slave_title,
         '身体实际有多么的淫乱。',
       ]);
       await era.printAndWait(
@@ -165,7 +165,7 @@ handlers[0] = async (
     } else {
       await era.printAndWait([
         '尖端冰凉的触感令',
-        urara.get_teen_sex_title(),
+        urara.teen_sex_title,
         '刚要放松的菊穴一紧，也让',
         urara.sex,
         '找回了一丝理性的退意。',
@@ -174,14 +174,14 @@ handlers[0] = async (
         '但久经锻炼的双腿，却又敏感到在接触到身体的催情信号时就失去了力气。',
       );
       await era.printAndWait([
-        urara.get_teen_sex_title(),
+        urara.teen_sex_title,
         '以滑跪的姿势扑坐在地板上，硕大的肛塞在瞬间被整只吞入了后部……',
       ]);
     }
     era.println();
     await era.printAndWait([
       '连发出悲鸣的余地都没有的，小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '便在突如其来的刺激中下身紧绷着向前摔去。',
     ]);
     await era.printAndWait([
@@ -191,7 +191,7 @@ handlers[0] = async (
     ]);
     await era.printAndWait([
       '天生淫乱的身体因异常性器的突入被连绵地推至顶点，大脑瞬间沦陷的小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '喉咙中胡乱地挤着不成声的音节。',
     ]);
     await era.printAndWait(
@@ -235,7 +235,7 @@ handlers[0] = async (
     );
     await era.printAndWait([
       '在几轮水声暂停后，拿回了一点力气和理智的小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '终于想起了什么，开始努力地拖着淫秽的身体狼狈的爬行着……',
     ]);
     await era.printAndWait([
@@ -245,7 +245,7 @@ handlers[0] = async (
     ]);
     await era.printAndWait([
       '带着半遮半掩的淫荡模样，小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '还是赶在 ',
       callname,
       ' 之前半爬着返回了约定等待的地方。',
@@ -284,7 +284,7 @@ handlers[0] = async (
     ]);
     await era.printAndWait([
       '不过在一番拉扯后，实在没有自信经受住敏感的身体的小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '还是勉强同意了 ',
       me.get_colored_name(),
       ' 的搀扶。',
@@ -303,7 +303,7 @@ handlers[0] = async (
     ]);
     await era.printAndWait([
       '比如回家的路上，小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '也总会因不自然的抽搐而慢下脚步；',
     ]);
     await era.printAndWait(
@@ -342,7 +342,7 @@ handlers[0] = async (
     era.drawLine();
     await in_urara.say_as_unknown_and_wait([
       '或许淫乱的小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '，在某天会再次将手伸向角落里那台魔性的机器，也说不定……',
     ]);
     await in_urara.say_as_unknown_and_wait('呜……我不行了……');
@@ -524,7 +524,7 @@ handlers[1] = async (urara, me, in_urara, callname, edu_marks) => {
   ]);
   await era.printAndWait([
     '在小',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '充满期待的注视中，盒子在旋转中不断发出着不同的脆响，随后——',
   ]);
   switch (get_random_value(1 - !edu_marks.ticket, 4 + !edu_marks.spe_item)) {
@@ -725,7 +725,7 @@ handlers[1] = async (urara, me, in_urara, callname, edu_marks) => {
         '但 ',
         urara.get_colored_name(),
         ' 并不介意，带着一如既往的笑容，小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '将对半分的萝卜塞到了 ',
         me.get_colored_name(),
         ' 的手中。',
@@ -829,7 +829,7 @@ handlers[1] = async (urara, me, in_urara, callname, edu_marks) => {
       ]);
       await era.printAndWait([
         '随着小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '想起了什么的停顿，一抹羞红也顺着脸颊悄悄爬上了 ',
         urara.get_colored_name(),
         ' 的头顶。',
@@ -900,7 +900,7 @@ handlers[1] = async (urara, me, in_urara, callname, edu_marks) => {
       ]);
       await era.printAndWait([
         '而被小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '扯住衣服，走不了也拗不过的 ',
         me.get_colored_name(),
         '，还是无奈地将按摩棒交给了 ',

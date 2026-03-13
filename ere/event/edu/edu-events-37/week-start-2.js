@@ -126,7 +126,7 @@ module.exports = (handlers) => {
       `${your_name} 则拍了拍${flash.sex}的肩膀，脸上浮现出一丝微笑。`,
     );
     await era.printAndWait(
-      `如果关于赛${flash.get_uma_sex_title()}的问题，以训练员的视角无法给出答案的话，那么不妨就交由当事人自己来处理。`,
+      `如果关于赛${flash.uma_sex_title}的问题，以训练员的视角无法给出答案的话，那么不妨就交由当事人自己来处理。`,
     );
     await era.printAndWait('无需顾虑，信任是互相的，一心同体即是如此。');
     await era.printAndWait('也无需迟疑，这并非是一种逃避，因为——');
@@ -134,7 +134,7 @@ module.exports = (handlers) => {
     await era.input();
     await flash.say_and_wait('！');
     await era.printAndWait(
-      `昏黄的房间内，来自异国的${flash.get_teen_sex_title()}因为 ${your_name} 的话而陷入短暂的僵直。`,
+      `昏黄的房间内，来自异国的${flash.teen_sex_title}因为 ${your_name} 的话而陷入短暂的僵直。`,
     );
     await era.printAndWait(
       `周旁的时间仿若停滞，除了那抹转瞬即逝的绯红，${your_name} 没有看到${flash.sex}脸上的表情产生任何波动。`,
@@ -171,14 +171,14 @@ module.exports = (handlers) => {
     await era.printAndWait('正月，初诣。');
     await say_by_passer_by_and_wait(
       `主持人`,
-      `最强世代突入！？知名赛${flash.get_uma_sex_title()}的再度崛起！`,
+      `最强世代突入！？知名赛${flash.uma_sex_title}的再度崛起！`,
     );
     await era.printAndWait(
       `${your_name} 和荣进闪耀本应该安稳度过的上午，却被电视中一则突如其来的新闻打破了宁静。`,
     );
     await say_by_passer_by_and_wait(
       `主持人`,
-      `前段时间久违的于日本杯和有马纪念中再度登场的知名赛${flash.get_uma_sex_title()}们，在刚刚召开了记者会。`,
+      `前段时间久违的于日本杯和有马纪念中再度登场的知名赛${flash.uma_sex_title}们，在刚刚召开了记者会。`,
     );
     await say_by_passer_by_and_wait(
       `主持人`,
@@ -393,7 +393,7 @@ module.exports = (handlers) => {
     await print_event_name('粉丝感谢祭', flash);
     await era.printAndWait('四月，春天的粉丝大感谢祭活动到了');
     await era.printAndWait(
-      `在今天，赛${flash.get_uma_sex_title()}们会参与到多项可以和粉丝一起乐在其中的比赛中。`,
+      `在今天，赛${flash.uma_sex_title}们会参与到多项可以和粉丝一起乐在其中的比赛中。`,
     );
     await say_by_passer_by_and_wait(
       `主持人`,
@@ -405,7 +405,7 @@ module.exports = (handlers) => {
     );
     await say_by_passer_by_and_wait(
       `主持人`,
-      `比赛的规则很简单，第一个和粉丝一起冲过终点线的赛${flash.get_uma_sex_title()}即是冠军。`,
+      `比赛的规则很简单，第一个和粉丝一起冲过终点线的赛${flash.uma_sex_title}即是冠军。`,
     );
     await say_by_passer_by_and_wait(
       '主持人',

@@ -60,7 +60,7 @@ module.exports = (handlers) => {
     await era.input();
     await era.printAndWait([
       '出言夸赞了一下自己的担当，让站在一旁调度众人的',
-      kitaru.get_teen_sex_title(),
+      kitaru.teen_sex_title,
       '双耳微不可察的摆动了一下。',
     ]);
     await kitaru.say_and_wait('……嗯。');
@@ -68,7 +68,7 @@ module.exports = (handlers) => {
       '比划了一下高度，',
       kitaru.get_colored_name(),
       ' 示意负责纸灯笼的茶色',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '继续把挂绳拉高一些。',
     ]);
     await kitaru.say_and_wait([
@@ -79,9 +79,9 @@ module.exports = (handlers) => {
     await kitaru.say_and_wait('为此也一直有在准备就是了，这回应该能够用上吧？');
     await era.printAndWait([
       '在看着茶色头发的',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '成功把悬于道路上的纸灯笼串起之后，有着温暖发色的',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '转头等待起 ',
       me.get_colored_name(),
       ' 的答复。',
@@ -96,19 +96,19 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '社交媒体上早就有不少人的发言想要借着新年的参拜来让这位才在有马纪念中取得优胜的',
-      kitaru.get_teen_sex_title(),
+      kitaru.teen_sex_title,
       '为自己带来好运。',
     ]);
     await era.printAndWait([
       kitaru.get_colored_name(),
       ' 背后的故事也被一些好事的媒体挖了出来，除了对如此乐天的',
-      kitaru.get_teen_sex_title(),
+      kitaru.teen_sex_title,
       '居然有着如此沉重过往而感到的反差，更多则是因此而生的感动。',
     ]);
-    await me.say_and_wait(['背负命运奔跑的赛', kitaru.get_uma_sex_title()]);
+    await me.say_and_wait(['背负命运奔跑的赛', kitaru.uma_sex_title]);
     await era.printAndWait([
       '想到这里，下意识的念出了最近几张赛',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '期刊上为 ',
       kitaru.get_colored_name(),
       ' 冠上的名号。',
@@ -117,7 +117,7 @@ module.exports = (handlers) => {
     await kitaru.say_and_wait('有些夸张了！');
     await kitaru.say_and_wait([
       '还有什么',
-      kitaru.get_teen_sex_title(),
+      kitaru.teen_sex_title,
       '和',
       kitaru.sex,
       '的命定之人之类的花边新闻……',
@@ -151,7 +151,7 @@ module.exports = (handlers) => {
       '同样的柏树下，墓碑旁，名叫',
       me.get_colored_actual_name(),
       '的训练员身旁站着一位橙色',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '。',
     ]);
     await era.printAndWait([
@@ -174,7 +174,7 @@ module.exports = (handlers) => {
     await era.printAndWait([
       me.get_colored_name(),
       '注意到',
-      kitaru.get_teen_sex_title(),
+      kitaru.teen_sex_title,
       '只是呆立在墓碑前，一言不发。',
     ]);
     await me.say_and_wait('需要留你一个人静静吗？');
@@ -212,7 +212,7 @@ module.exports = (handlers) => {
       '，望着',
       kitaru.get_bigger_sibling_sex_title(),
       '的黑白照片，三年来变得成熟了许多的侧脸几乎和照片中的',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '无异。',
     ]);
     await kitaru.say_and_wait([
@@ -269,7 +269,7 @@ module.exports = (handlers) => {
       ]);
       await era.printAndWait([
         '若要说有什么不同的话，也许就是参拜客多了许多以菊花赏为目标的赛',
-        kitaru.get_uma_sex_title(),
+        kitaru.uma_sex_title,
         '吧。',
       ]);
       await era.printAndWait('以及……');
@@ -373,7 +373,7 @@ module.exports = (handlers) => {
       await kitaru.say_and_wait('我的命定之人……');
       await kitaru.say_and_wait('以及……');
       await era.printAndWait([
-        kitaru.get_teen_sex_title(),
+        kitaru.teen_sex_title,
         '的声音逐渐变得细若蚊鸣，绯红随着温暖的夕阳染上了',
         kitaru.sex,
         '的脸颊。',

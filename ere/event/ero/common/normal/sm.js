@@ -38,12 +38,10 @@ class EroNormalSm extends EroSm {
       talk_arr.push('杂鱼～杂鱼～');
     }
     if (era.get(`talent:${attacker.id}:抖S`)) {
-      talk_arr.push(
-        `蠢货！废物${defender.get_sex_slave_title()}！欠操的变态！`,
-      );
+      talk_arr.push(`蠢货！废物${defender.sex_slave_title}！欠操的变态！`);
     }
     if (talk_arr.length === 0) {
-      talk_arr.push(`就这么想被人辱骂吗，${defender.get_sex_slave_title()}？`);
+      talk_arr.push(`就这么想被人辱骂吗，${defender.sex_slave_title}？`);
     }
     await attacker.say_and_wait(get_random_entry(talk_arr));
   }

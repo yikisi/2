@@ -36,7 +36,7 @@ module.exports = class extends EroNormalCommunications {
       await defender.say_and_wait('啾噜……嗯……噗哈……啾噜……咕嗯');
       await defender.print_and_wait([
         '分明自己是跑长距离的赛',
-        defender.get_uma_sex_title(),
+        defender.uma_sex_title,
         '，才是应该主导的那一方啊……',
       ]);
       await defender.print_and_wait([
@@ -72,7 +72,7 @@ module.exports = class extends EroNormalCommunications {
       await defender.say_and_wait('唔！❤️');
       await attacker.print_and_wait([
         '当二人的舌头纠缠在一起时，怀中的栗毛',
-        defender.get_uma_sex_title(),
+        defender.uma_sex_title,
         '自喉中发出了黏糊糊的应答声。',
       ]);
       await attacker.print_and_wait([

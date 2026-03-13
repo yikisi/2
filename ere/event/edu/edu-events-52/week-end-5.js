@@ -50,7 +50,7 @@ module.exports = (handlers) => {
 
     await era.printAndWait([
       '面对被迫变得坚强了太多的小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '，',
       me.get_colored_name(),
       ' 还是选择了直言不讳。',
@@ -141,7 +141,7 @@ module.exports = (handlers) => {
       '说出令 ',
       me.get_colored_name(),
       ' 也意想不到的答案后，浑身湿漉漉的小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '再次露出平日里越来越少但依旧充满希望的笑容。',
     ]);
 
@@ -152,7 +152,7 @@ module.exports = (handlers) => {
       '直视着依旧隐藏在笑脸下的阴影，',
       me.get_colored_name(),
       ' 有些无奈的将毛巾搭在了',
-      urara.get_teen_sex_title(),
+      urara.teen_sex_title,
       '沾满了水珠的发丝上。',
     ]);
 
@@ -171,7 +171,7 @@ module.exports = (handlers) => {
       '好好好，',
       urara.get_colored_name(),
       ' 没关系。揉搓着小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '柔软的耳朵与小脸，',
       me.get_colored_name(),
       ' 悄悄叹了口气。',
@@ -639,7 +639,7 @@ module.exports = (handlers) => {
     );
     await era.printAndWait([
       '顺着奔跑声回首望去，明亮的月光下，两名容貌相仿的',
-      urara.get_teen_sex_title(),
+      urara.teen_sex_title,
       '似乎早已在此等候多时。',
     ]);
     era.drawLine();
@@ -804,7 +804,7 @@ module.exports = (handlers) => {
       '们」之间，',
       me.get_colored_name(),
       ' 倾听着两位',
-      urara.get_teen_sex_title(),
+      urara.teen_sex_title,
       '的平静的吹息。',
     ]);
     await era.printAndWait(

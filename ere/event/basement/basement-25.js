@@ -241,7 +241,7 @@ module.exports = class extends CustomizedBase {
     await era.printAndWait([
       me.get_colored_name(),
       ' 低估了',
-      coffee.get_uma_sex_title(),
+      coffee.uma_sex_title,
       '的体质。',
     ]);
     await era.printAndWait([
@@ -444,7 +444,7 @@ module.exports = class extends CustomizedBase {
 
     await coffee.say_and_wait([
       '如果对方不是爱着你的我……这样攻击',
-      coffee.get_uma_sex_title(),
+      coffee.uma_sex_title,
       '，可是非常危险的……',
     ]);
     await coffee.say_and_wait(['……不过，我也不能对这种行为视而不见……']);
@@ -478,7 +478,7 @@ module.exports = class extends CustomizedBase {
       ' 的状态，确实是晕倒了。',
     ]);
     await era.printAndWait([
-      coffee.get_uma_sex_title(),
+      coffee.uma_sex_title,
       '有这么脆弱吗……还是说，有人在帮助自己？',
     ]);
     await era.printAndWait(['……总之先逃出去吧。']);

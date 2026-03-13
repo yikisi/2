@@ -21,7 +21,7 @@ module.exports = async (tachyon, me) => {
   await era.printAndWait([me.get_colored_name(), ' 看向声音传来的方向']);
   await era.printAndWait([
     '眼前是一名栗毛的',
-    tachyon.get_uma_sex_title(),
+    tachyon.uma_sex_title,
     '，利落的短发以及身上的白大褂说明了',
     tachyon.sex,
     '研究者的身份，',
@@ -39,7 +39,7 @@ module.exports = async (tachyon, me) => {
   await tachyon.say_as_unknown_and_wait(
     '这个问题应该是我问你才对……你是什么人？为什么你会躺在我的实验室里？',
   );
-  await era.printAndWait(['栗毛', tachyon.get_uma_sex_title(), '说道']);
+  await era.printAndWait(['栗毛', tachyon.uma_sex_title, '说道']);
   await era.printAndWait([
     '这时 ',
     me.get_colored_name(),

@@ -108,7 +108,7 @@ module.exports = class extends CustomizedBase {
     ]);
     await tachyon.say_and_wait([
       '我始终不能明白……为什么你会如此执着于其他',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '，以及——为什么，我会如此执着于这件事。',
     ]);
     await tachyon.say_and_wait([
@@ -174,7 +174,7 @@ module.exports = class extends CustomizedBase {
     await tachyon.say_and_wait(['然而，你却没有考虑到规格上的差距……']);
     await tachyon.say_and_wait([
       '是平常我的药物让你产生了过度的自信……还是',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '平时表现的无害化导致你产生了自己能够战胜的错觉？',
     ]);
     await tachyon.say_and_wait([
@@ -182,11 +182,11 @@ module.exports = class extends CustomizedBase {
     ]);
     await tachyon.say_and_wait([
       '将',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '的素质，',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '的身体能力，',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '的性欲……都好好的，铭刻在身上。',
     ]);
   }
@@ -220,7 +220,7 @@ module.exports = class extends CustomizedBase {
     tachyon.say(['——', sys_get_colored_callname(32, 0), '，我一直很好奇，']);
     tachyon.say([
       '我，是你眼中最具可能性的',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '，不是吗？',
     ]);
     tachyon.say(['我的跑法，令你炫目，令你疯狂，不是吗？']);

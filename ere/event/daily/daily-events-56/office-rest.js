@@ -24,7 +24,7 @@ module.exports = async () => {
       '正依着',
       kitaru.sex,
       '的请求，顺起自己担当',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '毛茸茸的头发。',
     ]);
     await era.printAndWait([

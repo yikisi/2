@@ -53,10 +53,10 @@ module.exports = async (hook) => {
           `在河边散步对于${digital.name}来说是一种朝圣行为，`,
         );
         await era.printAndWait(
-          `因为各个角落，都能发现赛${digital.get_uma_sex_title()}，`,
+          `因为各个角落，都能发现赛${digital.uma_sex_title}，`,
         );
         await era.printAndWait(
-          `正在练习歌唱的小${digital.get_uma_sex_title()}偶像，正在适应泥地的小努力家。`,
+          `正在练习歌唱的小${digital.uma_sex_title}偶像，正在适应泥地的小努力家。`,
         );
         await era.printAndWait(
           `比较幸运的是这次${digital.sex}并没有尊得失魂。`,
@@ -69,22 +69,20 @@ module.exports = async (hook) => {
       edu_marks.catch_fish = 1;
       await print_event_name('钓上大鱼了，不过鱼看起来不太友善', digital);
       await era.printAndWait(
-        `去河边钓鱼是不少${digital.get_uma_sex_title()}在空闲时间的选择，`,
+        `去河边钓鱼是不少${digital.uma_sex_title}在空闲时间的选择，`,
       );
       await era.printAndWait([
         '但 ',
         me.get_colored_name(),
         ' 的担当',
-        digital.get_uma_sex_title(),
+        digital.uma_sex_title,
         ' ',
         digital.get_colored_name(),
         ' 不太一样，相比起自己钓鱼，',
         digital.sex,
         '更喜欢看别人钓鱼，',
       ]);
-      await era.printAndWait(
-        `不……应该是更喜欢看着${digital.get_uma_sex_title()}。`,
-      );
+      await era.printAndWait(`不……应该是更喜欢看着${digital.uma_sex_title}。`);
       await era.printAndWait(
         `所以，真让${digital.sex}坐在一个小板凳上，拿着钓竿，在河边静静等待上钩，就会比较难得了。`,
       );
@@ -92,7 +90,7 @@ module.exports = async (hook) => {
         `原来如此……原来钓鱼是这样的吗，这种本应是休闲活动，怎么会如此地耗精力……`,
       );
       await digital.say_and_wait(
-        `在钓鱼时的其他${digital.get_uma_sex_title()}到底是怎么想的呢……`,
+        `在钓鱼时的其他${digital.uma_sex_title}到底是怎么想的呢……`,
       );
       await me.say_and_wait(
         `${digital.sex}们更多的只是享受钓鱼这种活动吧，你看一下附近？`,
@@ -101,7 +99,7 @@ module.exports = async (hook) => {
       await era.printAndWait([
         digital.get_colored_name(),
         ' 张望了一下四处，在对岸上正好也有一个',
-        digital.get_uma_sex_title(),
+        digital.uma_sex_title,
         '正在钓鱼。',
       ]);
       await era.printAndWait(`与其说是钓鱼，不如说是睡觉。`);
@@ -109,7 +107,7 @@ module.exports = async (hook) => {
         `的确，我能感受到，${digital.sex}目前正在处于极度的放松状态，`,
       );
       await digital.say_and_wait(
-        `呜哇，在钓鱼的${digital.get_uma_sex_title()}，躺在无限静谧中，即使是鱼上钩也不能惊动${
+        `呜哇，在钓鱼的${digital.uma_sex_title}，躺在无限静谧中，即使是鱼上钩也不能惊动${
           digital.sex
         }分毫……`,
       );
@@ -163,7 +161,7 @@ module.exports = async (hook) => {
           '哦呀哦呀，是 ',
           sys_get_colored_callname(20, 19),
           ' 啊，居然不是在岸边看着其他',
-          digital.get_uma_sex_title(),
+          digital.uma_sex_title,
           '钓鱼吗？',
         ]);
         await sky.say_and_wait([
@@ -187,7 +185,7 @@ module.exports = async (hook) => {
         await sky.say_and_wait('哦？居然把鱼竿都弄掉了，Sky我可是要生气了哦！');
         await digital.say_and_wait([
           '不不不，这是我的不好，我的不好！我不应该来到这边和',
-          digital.get_uma_sex_title(),
+          digital.uma_sex_title,
           '酱一起钓鱼的……',
         ]);
       }
@@ -496,11 +494,11 @@ module.exports = async (hook) => {
             '上战场……赛场的理由，',
             digital.get_colored_name(),
             ' 之前一直说是',
-            digital.get_uma_sex_title(),
+            digital.uma_sex_title,
             '，',
             digital.sex,
             '……只想近距离观察',
-            digital.get_uma_sex_title(),
+            digital.uma_sex_title,
             '的奔跑，至少目前为止是。',
           ]);
           await me.say_and_wait([

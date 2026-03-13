@@ -27,14 +27,14 @@ module.exports = (handlers) => {
       '新的一年，',
       digital.get_colored_name(),
       ' 迎来了对于',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '来说至关重要的经典年。',
     ]);
     await era.printAndWait([
       '虽然',
       digital.sex,
       '好像还停留在对于可以切身接近经典年',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '而激动。',
     ]);
     await digital.say_and_wait(['新年快乐！', callname, '！']);
@@ -60,7 +60,7 @@ module.exports = (handlers) => {
     ]);
     await digital.say_and_wait([
       '啊，突然想起了去年，我还是太过得意忘形了，似乎都忘记了自己的初心，说好的要当合格的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '粉丝呢？！',
     ]);
     await era.printAndWait([
@@ -85,19 +85,19 @@ module.exports = (handlers) => {
       '！你可以给我一些建议吗！应该如何应援？',
     ]);
     era.print([me.get_colored_name(), ' 的选择是：']);
-    era.printButton(`侍奉${digital.get_uma_sex_title()}酱（速度+10）`, 1);
+    era.printButton(`侍奉${digital.uma_sex_title}酱（速度+10）`, 1);
     era.printButton('读书（耐力+10）', 2);
     era.printButton('从模仿中学习（技能点数+20）', 3);
     switch (await era.input()) {
       case 1:
         await me.say_and_wait([
           '像平时那样，侍奉',
-          digital.get_uma_sex_title(),
+          digital.uma_sex_title,
           '酱不挺不错吗？',
         ]);
         await digital.say_and_wait([
           '哦哦哦！很好的建议呢，说到这个，感觉最近无论是比赛什么的还是交流什么的一直都有在冒犯',
-          digital.get_uma_sex_title(),
+          digital.uma_sex_title,
           '酱呢……',
         ]);
         await digital.say_and_wait(
@@ -123,7 +123,7 @@ module.exports = (handlers) => {
         );
         await digital.say_and_wait([
           '摄入各种各样',
-          digital.get_uma_sex_title(),
+          digital.uma_sex_title,
           '酱的能量，这样在新的一年才有能量持续冲刺啊！',
         ]);
         await era.printAndWait([
@@ -142,7 +142,7 @@ module.exports = (handlers) => {
       case 3:
         await me.say_and_wait([
           '模仿一下其他',
-          digital.get_uma_sex_title(),
+          digital.uma_sex_title,
           '，从中学得技能如何？',
         ]);
         await digital.say_and_wait(
@@ -151,7 +151,7 @@ module.exports = (handlers) => {
         await digital.say_and_wait('哦哦哦！哦？');
         await era.printAndWait([
           '来到训练场上的看台，回忆之前在台上观察着',
-          digital.get_uma_sex_title(),
+          digital.uma_sex_title,
           '的技能……',
         ]);
         await digital.say_and_wait('接下来请看！帝王舞步！');
@@ -187,7 +187,7 @@ module.exports = (handlers) => {
     await print_event_name('夏季合宿（经典年）开始', digital);
     await era.printAndWait([
       '夏合宿！是一年中最重要的活动！这一段时间是',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '们进步的大好时机！作为训练员的 ',
       me.get_colored_name(),
       '，自然也特别重视这次活动。',
@@ -251,7 +251,7 @@ module.exports = (handlers) => {
     await era.printAndWait('为什么要用叠作为量词？！');
     await digital.say_and_wait([
       '这是我的心血之作！我将我所能想到的各位',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '的特征，都融入了这份巧克力！',
     ]);
     await era.printAndWait(
@@ -277,14 +277,14 @@ module.exports = (handlers) => {
     await digital.say_and_wait('接下来就一边吃着一边谈吧！');
     await digital.say_and_wait([
       '呜呜呜，我真是幸运啊，居然能遇到能一起讨论',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '的同志……',
     ]);
     await digital.say_and_wait([
       '来来来，',
       callname,
       '，聊一下最近最推的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '……是谁呀？',
     ]);
     await era.printAndWait('那还用问？');
@@ -295,7 +295,7 @@ module.exports = (handlers) => {
     await digital.say_and_wait('噫诶诶诶诶？不是，居然是巧克力？');
     await digital.say_and_wait([
       '这，这是何等的博爱？！居然，有人会想要推如此小众的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '？',
     ]);
     await me.say_and_wait([
@@ -339,7 +339,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '粉丝感谢祭呢……顾名思义，就是作为具有偶像属性的赛',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '回馈应援粉丝的活动。',
     ]);
     await era.printAndWait('说是这么说，事实上感觉也有点像校园祭。');
@@ -397,7 +397,7 @@ module.exports = (handlers) => {
       ' 的耳里，由',
       digital.sex,
       '亲自带领很多',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '过来感谢时……',
     ]);
     await digital.say_and_wait('怎么回事，我成为被推的一天了？！');
@@ -482,7 +482,7 @@ module.exports = (handlers) => {
     ]);
     await digital.say_and_wait([
       '诶？还有其他，被评为有实力的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '酱吗？',
     ]);
     await halo.say_and_wait([
@@ -509,7 +509,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '黑船……就是拿下今年NHK的那位',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '，具有着可怕的脚步。',
     ]);
     await era.printAndWait([digital.sex, '也要参加这场比赛啊。']);
@@ -521,12 +521,12 @@ module.exports = (handlers) => {
     await print_event_name('圣诞节', digital);
     await era.printAndWait([
       '特雷森对于圣诞节的自由活动通常都是比较支持的，毕竟这对于',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '来说也是一个特殊日子。',
     ]);
     await era.printAndWait([
       '在校外之余，为了给一些特立独行的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '一些光照，学校内部也举办了大型活动。',
     ]);
     await era.printAndWait([
@@ -561,7 +561,7 @@ module.exports = (handlers) => {
     await digital.say_and_wait('不，这个，这个是……！签名啊！');
     await era.printAndWait([
       '签名！定睛一看，这里面，包含了很多熟悉的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '的亲笔签名？！',
     ]);
     await digital.say_and_wait(
@@ -571,7 +571,7 @@ module.exports = (handlers) => {
       '这是这段时间以来，接受过 ',
       sys_get_colored_callname(17, 19),
       ' 帮助或者鼓舞的各位',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '的谢意，而且，作为学生会长，我也非常感谢你对学校的宣传……',
     ]);
     await emperor.say_and_wait([
@@ -580,7 +580,7 @@ module.exports = (handlers) => {
       ' 你的爱好……也有点独特，所以我募集了所有喜欢 ',
       sys_get_colored_callname(17, 19),
       ' 你的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '，为你准备了这份礼物。',
     ]);
     await era.printAndWait([
@@ -629,7 +629,7 @@ module.exports = (handlers) => {
       ]);
       await digital.print_and_wait([
         '不仅是为了胜利，也是为了和同志一起，去遇见更多的',
-        digital.get_uma_sex_title(),
+        digital.uma_sex_title,
         '。',
       ]);
       await digital.print_and_wait('在为了先行考察，并没有太多人知道的航班……');
@@ -655,7 +655,7 @@ module.exports = (handlers) => {
       ]);
       await digital.say_and_wait([
         '不过，我等不了了！异域的邂逅，我要和同志一起，想要和世界各地的',
-        digital.get_uma_sex_title(),
+        digital.uma_sex_title,
         '们相遇啊！',
       ]);
       await digital.print_and_wait([

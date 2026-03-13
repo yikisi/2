@@ -29,7 +29,7 @@ module.exports = (handlers) => {
       '虽然 ',
       digital.get_colored_name(),
       ' 目前还只是出道第一年，即使想要参加比赛，选择的空间也不多，但是对于其他',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '而言，最近是最为忙碌的一段时间。',
     ]);
     await era.printAndWait([
@@ -45,7 +45,7 @@ module.exports = (handlers) => {
       '在这场比赛里，',
       digital.get_colored_name(),
       ' 的激推',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '之一——',
       halo.get_colored_name(),
       ' 也会出赛。',
@@ -105,7 +105,7 @@ module.exports = (handlers) => {
     await era.printAndWait([
       halo.get_colored_name(),
       ' 原本是想要证明自己的才能，所以一直专注于经典赛事的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '，但是今年',
       digital.sex,
       '改变了路线，重新定下了目标。',
@@ -134,7 +134,7 @@ module.exports = (handlers) => {
     era.drawLine({ content: '回去的路上' });
     await era.printAndWait([
       '学校旁边的小河边，发现了一个低头奔跑在河边泥地的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '。',
     ]);
     const dotou = get_chara_talk(58);
@@ -425,7 +425,7 @@ module.exports = (handlers) => {
       '，',
       digital.get_colored_name(),
       ' 在以前就十分推的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '，当时的 ',
       race_infos[race_enum.mile_cha].get_colored_name(),
       ' ',
@@ -531,7 +531,7 @@ module.exports = (handlers) => {
     ]);
     await me.say_and_wait([
       '数码，你应该明白的才对，在赛场上的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '——',
     ]);
     await halo.say_and_wait([
@@ -548,7 +548,7 @@ module.exports = (handlers) => {
     await me.say_and_wait([sys_get_colored_callname(0, 61), '……十分感谢你。']);
     await halo.say_and_wait([
       '没问题，作为一流的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '自然要回馈一流的粉丝——啊哈哈哈哈！',
     ]);
     await era.printAndWait([
@@ -660,7 +660,7 @@ module.exports = (handlers) => {
       '那个，',
       sys_get_colored_callname(61, 19),
       '，你对我这个',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '，很感兴趣吧？',
     ]);
     await digital.say_and_wait('！是的！');
@@ -671,7 +671,7 @@ module.exports = (handlers) => {
       '让你看看，',
       halo.get_colored_name(),
       ' 是怎样的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '！',
     ]);
     await digital.say_and_wait('请务必！');
@@ -684,7 +684,7 @@ module.exports = (handlers) => {
       '在夏天的末尾，',
       digital.get_colored_name(),
       ' 和憧憬的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '建立了联系。',
     ]);
   };

@@ -32,21 +32,21 @@ module.exports = class extends CustomizedRecruit {
           return;
         }
         await say_by_passer_by(
-          `${falcon.get_uma_sex_title()}`,
+          `${falcon.uma_sex_title}`,
           `能得到训练员的邀请非常感谢，不过呢，我觉得自己的实力恐怕还是差了一点。`,
         );
         await say_by_passer_by(
-          `${falcon.get_uma_sex_title()}`,
-          `——啊，其实训练员真的很厉害，接下来一定能遇到更好的${falcon.get_uma_sex_title()}。`,
+          `${falcon.uma_sex_title}`,
+          `——啊，其实训练员真的很厉害，接下来一定能遇到更好的${falcon.uma_sex_title}。`,
         );
         era.printButton(`祝${callname}接下来遇到更好的训练员。`, 1);
         await era.input();
         await era.printAndWait(
-          `与接触的${falcon.get_uma_sex_title()}擦肩而过，因为付出的努力未达到想要的目标而懊恼。`,
+          `与接触的${falcon.uma_sex_title}擦肩而过，因为付出的努力未达到想要的目标而懊恼。`,
         );
         await era.printAndWait(`${me.actual_name}忍不住叹了一口气`);
         await era.printAndWait(
-          `今天就到此为止吧，${me.actual_name}努力克制着失落的情绪，${callname}将拿出的契约书草草塞回文件夹，${me.actual_name}从结伴而行的${falcon.get_uma_sex_title()}们身边快步经过，然后回到了训练室。`,
+          `今天就到此为止吧，${me.actual_name}努力克制着失落的情绪，${callname}将拿出的契约书草草塞回文件夹，${me.actual_name}从结伴而行的${falcon.uma_sex_title}们身边快步经过，然后回到了训练室。`,
         );
         era.drawLine();
         await era.printAndWait(
@@ -57,7 +57,7 @@ module.exports = class extends CustomizedRecruit {
         );
         await era.printAndWait(`雕像将夕阳的光芒截取，然后赠与了${callname}。`);
         await me.say_and_wait(
-          `美丽又充满智慧的三女神大人啊，请赋予我勇气让我找到合适的${falcon.get_uma_sex_title()}吧。`,
+          `美丽又充满智慧的三女神大人啊，请赋予我勇气让我找到合适的${falcon.uma_sex_title}吧。`,
         );
         await era.printAndWait(
           `究竟是自暴自弃的埋怨还是自嘲式的苦中作乐，亦或二者兼有。就算问${me.actual_name}自己，恐怕也没有准确回复。`,
@@ -92,11 +92,9 @@ module.exports = class extends CustomizedRecruit {
         );
         await falcon.say_and_wait(`……飞鹰子可不能在这种地方认输！`);
         await era.printAndWait(
-          `如果是${falcon.get_uma_sex_title()}的话，想要从人类的手中逃跑——甚至反过来将他打倒也不是什么难事。`,
+          `如果是${falcon.uma_sex_title}的话，想要从人类的手中逃跑——甚至反过来将他打倒也不是什么难事。`,
         );
-        await era.printAndWait(
-          `毕竟人类无法战胜${falcon.get_uma_sex_title()}。`,
-        );
+        await era.printAndWait(`毕竟人类无法战胜${falcon.uma_sex_title}。`);
         await falcon.say_and_wait(`为了飞鹰子的偶像之梦，只能这么做了！`);
         await era.printAndWait(
           `扶着墙站起的${callname}努力地理解混乱的状况，而后看到了正准备打开窗户的${falcon.teen_sex_title}。`,
@@ -117,14 +115,14 @@ module.exports = class extends CustomizedRecruit {
         await era.printAndWait(
           `不知为何，那道跃动的身影牢牢记在了${callname}的心底。`,
         );
-        era.printButton(`打扰了，刚刚的${falcon.get_uma_sex_title()}是？`, 1);
+        era.printButton(`打扰了，刚刚的${falcon.uma_sex_title}是？`, 1);
         await era.input();
         await say_by_passer_by(
           `人类教师`,
           `诶？${callname}说的是${falcon.name}吗？`,
         );
         await me.say_and_wait(
-          `是的，我正在寻找合适的担当${falcon.get_uma_sex_title()}。`,
+          `是的，我正在寻找合适的担当${falcon.uma_sex_title}。`,
         );
         await era.printAndWait(
           `虽然从刚才的决断来看稍显鲁莽，但这么独特的个性，应该早早就有训练员抛出橄榄枝才是。`,
@@ -145,7 +143,7 @@ module.exports = class extends CustomizedRecruit {
           `作为粉丝们期翼的理想存在，在万众瞩目的舞台上展现着自己最美好一面的，偶像。`,
         );
         await me.say_and_wait(
-          `……但是以赛${falcon.get_uma_sex_title()}为起点比其他方向成功的概率更大，耗时也更短。`,
+          `……但是以赛${falcon.uma_sex_title}为起点比其他方向成功的概率更大，耗时也更短。`,
         );
         await me.say_and_wait(`是个切实可行的方案。`);
         await era.printAndWait(
@@ -200,7 +198,7 @@ module.exports = class extends CustomizedRecruit {
           `${falcon.name}${falcon.get_adult_sex_title()}，如果想要合规的进行偶像活动，请在选拔赛上努力与合适的训练员进行签约。`,
         );
         await tokino.say_and_wait(
-          `特雷森学院是以培育优秀赛${falcon.get_uma_sex_title()}为目标而创立的，我想以此为目标希望一同前进的训练员应该不会少。`,
+          `特雷森学院是以培育优秀赛${falcon.uma_sex_title}为目标而创立的，我想以此为目标希望一同前进的训练员应该不会少。`,
         );
         await tokino.say_and_wait(
           `请把努力的方向修正后，与合适的训练员一同前进吧。`,
@@ -229,7 +227,7 @@ module.exports = class extends CustomizedRecruit {
           `${callname}顺着手纲小姐的目光看向了贴了一路的海报。`,
         );
         await tokino.say_and_wait(
-          `请在${falcon.get_uma_sex_title()}们上课之前把走廊恢复成原来的样子。`,
+          `请在${falcon.uma_sex_title}们上课之前把走廊恢复成原来的样子。`,
         );
         await era.printAndWait(
           `虽然手纲缰绳一直在笑容传来了极强的压迫感。\n\n\n`,

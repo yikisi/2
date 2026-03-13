@@ -35,7 +35,7 @@ module.exports = (handlers) => {
       '不过正赛明明能跑赢，为什么活动赛还是会落在最后呢？',
       urara.get_colored_name(),
       ' 也不是会随便应付的',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '。',
     ]);
     await era.printAndWait([
@@ -209,7 +209,7 @@ module.exports = (handlers) => {
     era.drawLine();
     await era.printAndWait([
       '路人A「那边的',
-      urara.get_child_sex_title(),
+      urara.child_sex_title,
       '，是刚才在比赛中垫底的那位吗？」',
     ]);
     await era.printAndWait([
@@ -251,7 +251,7 @@ module.exports = (handlers) => {
       ' 打算带 ',
       urara.get_colored_name(),
       ' 远离是非之地时，小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '却在仰头看到 ',
       me.get_colored_name(),
       ' 没藏好的表情后，主动放开了手。',
@@ -284,7 +284,7 @@ module.exports = (handlers) => {
     await era.printAndWait('路人A「呃，这个，我们……」');
     await era.printAndWait([
       '小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '摇了摇耳朵，清澈的樱瞳中映着两位路人不知所措的表情。',
     ]);
     await era.printAndWait([
@@ -294,7 +294,7 @@ module.exports = (handlers) => {
     ]);
     await urara.say_and_wait([
       '嘿嘿～没错哦！我的确并不是厉害的',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '，跑得不怎么快，还几乎每次都会输！',
     ]);
     await urara.say_and_wait(
@@ -324,7 +324,7 @@ module.exports = (handlers) => {
       await era.printAndWait('路人A&B「……！」');
       await era.printAndWait([
         '观察到两个可怜人从羞愧、治愈再到惊吓的表情变化后，小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '又重新挂起可爱的笑脸。',
       ]);
       await urara.say_and_wait([
@@ -387,7 +387,7 @@ module.exports = (handlers) => {
       '面对来自 ',
       me.get_colored_name(),
       ' 的关心，小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '也再次向 ',
       me.get_colored_name(),
       ' 表达出了纯粹的谢意。',
@@ -414,7 +414,7 @@ module.exports = (handlers) => {
     await era.printAndWait('……原来如此，还真是那样。');
     await era.printAndWait([
       '对赛',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '来说，粉丝的支持相当重要，而 ',
       urara.get_colored_name(),
       ' 则具有着少见的能让人愿意支援',
@@ -503,7 +503,7 @@ module.exports = (handlers) => {
     await print_event_name('商店街的偶像！', urara);
     await urara.say_and_wait([
       '咳咳……大家好！我是出任这条商店街……『招牌赛',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '』？的乌拉拉哦！',
     ]);
     await urara.say_and_wait(
@@ -530,7 +530,7 @@ module.exports = (handlers) => {
     era.drawLine();
     await era.printAndWait([
       '邀请有人望的现役',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '进行商业宣传，这样的活动并不少见，而 ',
       urara.get_colored_name(),
       ' 会被邀请其实也在预料之中。',
@@ -561,7 +561,7 @@ module.exports = (handlers) => {
       ' 的问题，',
       me.get_colored_name(),
       ' 将手中的委托函递给了凑过来的小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '。',
     ]);
     await era.printAndWait('现在的两人都没有不去接受委托的理由：');
@@ -590,7 +590,7 @@ module.exports = (handlers) => {
         ' 的意见？毕竟',
         urara.sex,
         '也是很受商店街欢迎的',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '。',
       ]);
       await era.printAndWait([
@@ -640,7 +640,7 @@ module.exports = (handlers) => {
     );
     await urara.say_and_wait([
       '让我来搭把手吧！没关系的，',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '的力气可是很大的，那么要上了——！',
     ]);
     await urara.say_and_wait(
@@ -653,7 +653,7 @@ module.exports = (handlers) => {
       '嗯？',
       urara.sex_code - 1 ? '姐姐' : '哥哥',
       '是赛',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '哦！下次要帮我加油？谢谢！',
     ]);
     await era.printAndWait([
@@ -774,7 +774,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '以父母般的心态守护着小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '的人们，或许是真心认为「只要',
       urara.sex,
       '能开心地奔跑就好了」。',
@@ -848,7 +848,7 @@ module.exports = (handlers) => {
     );
     await era.printAndWait([
       '眺望着远方火红的太阳，小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '认真的笑容中透出了志在必得。',
     ]);
     await urara.say_and_wait(

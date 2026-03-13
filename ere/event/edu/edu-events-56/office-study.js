@@ -64,14 +64,10 @@ module.exports = async (kitaru, me, callname, hook, event_object) => {
     await era.input();
     await kitaru.say_and_wait('嗯！');
     await kitaru.say_and_wait('也就是受到神明眷顾之类的意思啦！');
-    await kitaru.say_and_wait([
-      '赛',
-      kitaru.get_uma_sex_title(),
-      '也在其中呢！',
-    ]);
+    await kitaru.say_and_wait(['赛', kitaru.uma_sex_title, '也在其中呢！']);
     await era.printAndWait([
       '头突然有点疼，眼前的橙色',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '隐约变得不真切了起来……',
     ]);
     await kitaru.say_and_wait('哦！对了！');
@@ -113,7 +109,7 @@ module.exports = async (kitaru, me, callname, hook, event_object) => {
     ]);
     await era.printAndWait([
       '背对着门的',
-      kitaru.get_teen_sex_title(),
+      kitaru.teen_sex_title,
       '，看起来正聚精会神的思考着什么。',
     ]);
     await kitaru.say_and_wait('七福神……');

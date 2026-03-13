@@ -60,7 +60,7 @@ module.exports = class extends CustomizedLove {
       }
       era.println();
       era.printButton(
-        `「我，是这么简单的法兰西${vp.get_child_sex_title()}啊……」（升级关系）`,
+        `「我，是这么简单的法兰西${vp.child_sex_title}啊……」（升级关系）`,
         1,
       );
       era.printButton('「别胡思乱想了，再不睡要被师傅说的。」（暂停升级）', 2);
@@ -163,7 +163,7 @@ module.exports = class extends CustomizedLove {
         ]));
       await era.printAndWait([
         me.get_colored_name(),
-        ` 看着眼前的${vp.get_teen_sex_title()}，眼边还因为要见 `,
+        ` 看着眼前的${vp.teen_sex_title}，眼边还因为要见 `,
         me.get_colored_name(),
         ' 特地抹了胭脂，很可爱。',
       ]);
@@ -269,7 +269,7 @@ module.exports = class extends CustomizedLove {
           ' 脱掉鞋子爬上床，双腿张开到恰好处跪好。',
         ]);
         await era.printAndWait([
-          `${vp.get_teen_sex_title()}丝滑地坐了下来，蓝色的裙摆摊开成一个小圆。`,
+          `${vp.teen_sex_title}丝滑地坐了下来，蓝色的裙摆摊开成一个小圆。`,
         ]);
         await era.printAndWait([
           me.get_colored_name(),

@@ -60,7 +60,7 @@ module.exports = (handlers) => {
     ]);
     await nice_nature.say_and_wait([
       '暂停一下。那边的失控',
-      maya.get_child_sex_title(),
+      maya.child_sex_title,
       '给我等等。我还只是『受到邀约』而已吧？',
     ]);
     await sunday.say_and_wait([
@@ -89,7 +89,7 @@ module.exports = (handlers) => {
     await maya.say_and_wait(['那么，', callname, '。我们走吧♪']);
     await nice_nature.say_and_wait([
       '哦……？闪耀',
-      maya.get_child_sex_title(),
+      maya.child_sex_title,
       '真的很迷恋 ',
       callname,
       ' 呢～',
@@ -396,7 +396,7 @@ module.exports = (handlers) => {
     await amazon.say_and_wait('哦！很好，就是这种！要让身体记住，而不是脑袋！');
     await era.printAndWait([
       '──在灿烂的夕阳余晖照耀下，一群 ',
-      maya.get_teen_sex_title(),
+      maya.teen_sex_title,
       ' 流着汗，不断在赛道上奔跑。',
     ]);
   };
@@ -424,14 +424,10 @@ module.exports = (handlers) => {
     await snow.say_and_wait('而且包装也很华丽，亮晶晶的！你是在哪买到的？');
     await maya.say_and_wait([
       '哼哼哼……因为我是成熟的',
-      maya.get_phy_sex_title(),
+      maya.phy_sex_title,
       '！一下子就能找到正流行的店了☆',
     ]);
-    await snow.say_and_wait([
-      '哇……！是『城市',
-      maya.get_child_sex_title(),
-      '』耶！',
-    ]);
+    await snow.say_and_wait(['哇……！是『城市', maya.child_sex_title, '』耶！']);
     await maya.say_and_wait('嗯哼！逛街感到犹豫的时候，就交给人家吧！');
     await maya.say_and_wait(['……啊！是 ', callname, '！哈喽☆']);
     await maya.say_and_wait(
@@ -511,7 +507,7 @@ module.exports = (handlers) => {
     const amazon = get_chara_talk(12);
     await era.printAndWait([
       '粉丝感谢祭。这是会招待平时支持赛',
-      maya.get_uma_sex_title(),
+      maya.uma_sex_title,
       '的粉丝前来参加的祭典。',
     ]);
     await era.printAndWait('春季感谢祭的重头戏是运动对抗赛等活动──');
@@ -578,7 +574,7 @@ module.exports = (handlers) => {
       await maya.say_and_wait('嘿嘿……再多多夸奖我一点☆');
       await amazon.say_and_wait([
         '……真是前途无量的',
-        maya.get_child_sex_title(),
+        maya.child_sex_title,
         '。没想到不只是赢过了我，还赢过了那些人……',
       ]);
       await maya.say_and_wait([
@@ -596,7 +592,7 @@ module.exports = (handlers) => {
       await amazon.say_and_wait('唔……！全都是你临场想出来的吗？');
       await amazon.say_and_wait([
         '这',
-        maya.get_child_sex_title(),
+        maya.child_sex_title,
         '，真的是前途无量呢……！',
       ]);
       await era.printAndWait([

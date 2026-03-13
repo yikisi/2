@@ -152,7 +152,7 @@ module.exports = {
     );
     await attacker.print_and_wait([
       '喂喂……真的知道自己正在',
-      attacker.get_phy_sex_title(),
+      attacker.phy_sex_title,
       '的面前表演着怎样的动作吗，可怜的 ',
       sys_get_colored_callname(attacker.id, defender.id),
       '？',

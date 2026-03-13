@@ -12,7 +12,7 @@ module.exports = class extends EroNormalItems {
     if (
       attacker.id === 0 &&
       defender.id === 32 &&
-      extra_flag.stay === undefined &&
+      extra_flag.stay === void 0 &&
       extra_flag.item === item_enum.love_eggs &&
       extra_flag.part === part_enum.anal
     ) {

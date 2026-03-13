@@ -62,7 +62,7 @@ module.exports = (handlers) => {
     await era.input();
     await digital.say_and_wait([
       '啊啊啊，奔跑的时候，数码被其他',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '酱的情感冲击得乱七八糟，数码我……',
     ]);
     await digital.say_and_wait(
@@ -80,12 +80,12 @@ module.exports = (handlers) => {
     await digital.say_and_wait([
       callname,
       '，今天的比赛只是入门吧！接下来还有很多比赛吧！还会遇到更多的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '酱吧！',
     ]);
     await me.say_and_wait([
       '对，前面，还有很多',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '在等着你。',
     ]);
     await digital.say_and_wait(
@@ -93,7 +93,7 @@ module.exports = (handlers) => {
     );
     await digital.say_and_wait([
       '下一次，我想要再看到这样的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '酱们！',
     ]);
     await me.say_and_wait('那么，下一次跑草地比赛怎么样呢？');
@@ -121,17 +121,17 @@ module.exports = (handlers) => {
     await digital.say_and_wait('呼……哈……数码我，做到了……');
     await digital.say_and_wait([
       '冲过了终点，然后，见证到了，',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '酱们的光辉！',
     ]);
     await digital.say_and_wait([
       '该说是果然还是有点意外呢！我本以为是',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '酱们这种奔跑的觉悟很尊……',
     ]);
     await digital.say_and_wait([
       '但恐怕',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '酱们对比赛所寄托的愿望更深……只要我再继续比赛，那一定能知道',
       digital.sex,
       '们耀眼的原因！',
@@ -141,12 +141,12 @@ module.exports = (handlers) => {
     await say_by_passer_by_and_wait('？？？', '唔啊啊啊啊啊！');
     await digital.print_and_wait([
       '从不远处传来了某个',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '的痛哭。',
     ]);
     await digital.say_and_wait([
       '那个',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '，我记得是刚才……',
     ]);
     await digital.print_and_wait([
@@ -160,7 +160,7 @@ module.exports = (handlers) => {
     );
     await digital.print_and_wait([
       '一直以来都看着',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '的 ',
       digital.get_colored_name(),
       '，现在却完全不敢再继续注视了，扭开视角转过身来。',
@@ -169,69 +169,69 @@ module.exports = (handlers) => {
       '在穿过地下通道时，',
       digital.get_colored_name(),
       ' 一直都回避着其他',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '，不是以往的保持距离，而是刻意避开不看。',
     ]);
     await digital.say_and_wait('……');
     await digital.print_and_wait([
       '即使如此，前面还是看到了两个',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '，是刚才第二第三的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '啊。',
     ]);
     await digital.print_and_wait([
       digital.get_colored_name(),
       ' 正准备避开，然后……',
     ]);
-    await era.printAndWait([digital.get_uma_sex_title(), 'A「呜呜呜……」'], {
+    await era.printAndWait([digital.uma_sex_title, 'A「呜呜呜……」'], {
       color: dia_color,
     });
     await say_by_passer_by_and_wait(
-      `${digital.get_uma_sex_title()}B`,
+      `${digital.uma_sex_title}B`,
       '不是不是，第二名了哦？你哭什么啊？',
     );
     await era.printAndWait(
       [
-        digital.get_uma_sex_title(),
+        digital.uma_sex_title,
         'A「明明，明明，是与前辈你的对决的……一直以来都想着，能与你比胜负，然后，超越你……」',
       ],
       { color: dia_color },
     );
     await say_by_passer_by_and_wait(
-      `${digital.get_uma_sex_title()}B`,
+      `${digital.uma_sex_title}B`,
       '那不是达到了吗？你啊，真的很强啊，我也差不多要成老骨头了噢～',
     );
     await era.printAndWait(
       [
-        digital.get_uma_sex_title(),
+        digital.uma_sex_title,
         'A「……我一直都以为……我只要胜过前辈……我就能……但是，',
         digital.sex,
         '真的，很强……伸出手都无法……」',
       ],
       { color: dia_color },
     );
-    await say_by_passer_by_and_wait(`${digital.get_uma_sex_title()}B`, [
+    await say_by_passer_by_and_wait(`${digital.uma_sex_title}B`, [
       get_dia_name(),
       '！你努力了吧！全力以赴了吧！',
     ]);
     await say_by_diamond_lord('但是……');
     await say_by_passer_by_and_wait(
-      `${digital.get_uma_sex_title()}B`,
+      `${digital.uma_sex_title}B`,
       '不管你我的成绩如何，闪耀系列赛还是会一直持续下去，它可不会等我们！',
     );
-    await say_by_passer_by_and_wait(`${digital.get_uma_sex_title()}B`, [
+    await say_by_passer_by_and_wait(`${digital.uma_sex_title}B`, [
       '你比我强，而且，你还有潜力，你以后，一定会挑战重赏吧！一定会挑战G1吧！',
       '让',
       digital.sex,
       '们刮目相看吧！',
     ]);
     await say_by_passer_by_and_wait(
-      `${digital.get_uma_sex_title()}B`,
+      `${digital.uma_sex_title}B`,
       '胜者舞台，能一起去吧？',
     );
     await digital.print_and_wait([
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       'B抬起了手，擦了',
       digital.sex,
       '同伴的眼泪。',
@@ -264,7 +264,7 @@ module.exports = (handlers) => {
     await era.printAndWait([
       digital.get_colored_name(),
       ' 在此次比赛，似乎是能窥探到了一些',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '为何尊，为何伟大的奥秘了。',
     ]);
     await era.printAndWait([
@@ -298,12 +298,12 @@ module.exports = (handlers) => {
       '真的是足够强大的，为了给所有输给',
       digital.sex,
       '的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '一个交代。',
     ]);
     await digital.say_and_wait([
       '还有，想要确定一下，',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '酱们到底是如何面对G1比赛的！',
     ]);
     await era.printAndWait([
@@ -547,7 +547,7 @@ module.exports = (handlers) => {
     await me.say_and_wait('嗯。');
     await digital.say_and_wait([
       '从儿时开始，就一直让我入迷的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '酱的尊……',
     ]);
     await digital.say_and_wait([
@@ -555,8 +555,8 @@ module.exports = (handlers) => {
       race_infos[race_enum.japa_dir].get_colored_name(),
       '』后，明白了。',
     ]);
-    await digital.say_and_wait([digital.get_uma_sex_title(), '酱，可爱。']);
-    await digital.say_and_wait([digital.get_uma_sex_title(), '酱，很尊。']);
+    await digital.say_and_wait([digital.uma_sex_title, '酱，可爱。']);
+    await digital.say_and_wait([digital.uma_sex_title, '酱，很尊。']);
     await digital.say_and_wait([
       '那么，',
       digital.sex,
@@ -582,7 +582,7 @@ module.exports = (handlers) => {
     await me.say_and_wait('哈哈，简直就是定番的感想啊。');
     await digital.say_and_wait([
       '喂喂喂，你早就知道的吧，',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '酱们一直都是一样的。',
     ]);
     await digital.say_and_wait([
@@ -664,7 +664,7 @@ module.exports = (handlers) => {
     await halo.say_and_wait([
       halo.get_colored_name(),
       ' 是一个怎么样的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '。',
     ]);
     await digital.say_and_wait('是……是的……');
@@ -672,7 +672,7 @@ module.exports = (handlers) => {
       '被 ',
       halo.get_colored_name(),
       ' 教导了「',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '为何物」的 ',
       digital.get_colored_name(),
       '，在夺下 ',
@@ -689,7 +689,7 @@ module.exports = (handlers) => {
     await digital.say_and_wait('全身……都沐浴到了光辉……');
     await digital.say_and_wait([
       '然后，我明白了，作为',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '而活，意味着什么。',
     ]);
     await digital.say_and_wait(
@@ -700,23 +700,23 @@ module.exports = (handlers) => {
     );
     await digital.say_and_wait([
       '我现在，更喜欢',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '了！',
     ]);
     await halo.say_and_wait([
       '呵呵，你真是喜欢',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '呢。',
     ]);
     await halo.say_and_wait([
       sys_get_colored_callname(61, 19),
       '，和更多',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '比赛吧！吸收一切，然后……',
     ]);
     await halo.say_and_wait([
       '成为真正的全能选手吧！毕竟，你就是你最喜欢的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '的一员啊！',
     ]);
     await digital.print_and_wait([
@@ -726,7 +726,7 @@ module.exports = (handlers) => {
       ' 祝福，愿 ',
       digital.get_colored_name(),
       ' 在今后与更多',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '对决，成为真正的「全能跑者」',
     ]);
     era.drawLine({ content: '地下通道' });
@@ -738,7 +738,7 @@ module.exports = (handlers) => {
     ]);
     await digital.say_and_wait([
       '需要和更多',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '比赛，我需要做什么呢……',
     ]);
     await era.printAndWait('既然如此，不妨就……');
@@ -772,7 +772,7 @@ module.exports = (handlers) => {
     await era.printAndWait('咚咚咚咚——');
     await era.printAndWait([
       '在低沉的脚步声，',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '们逐渐逼近观众席，此时，意外地跑在外道的是——',
     ]);
     await say_by_passer_by_and_wait('解说', [
@@ -882,17 +882,17 @@ module.exports = (handlers) => {
       '多多多多，多谢！我是 ',
       digital.get_colored_name(),
       '！说到底我只不过是一个喜欢',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '酱的……',
     ]);
     await digital.say_and_wait([
       '我只不过是追着',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '酱的屁股……哦不，是尾巴，才来到这里的……',
     ]);
     await digital.say_and_wait([
       '能懂吗！这份感动！？我最一开始，甚至不能说是普通的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '酱，只是一个粉丝而已诶！',
     ]);
     await digital.say_and_wait(
@@ -903,7 +903,7 @@ module.exports = (handlers) => {
     );
     await digital.say_and_wait([
       '一路以来的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '酱，最一开始认为自己不该会有的粉丝，还有 ',
       callname,
       '！',
@@ -911,9 +911,9 @@ module.exports = (handlers) => {
     await digital.say_and_wait('今天，是大家让我拿下了胜利。');
     await digital.say_and_wait('感激……真的是，非常，感激……');
     await digital.say_and_wait([
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '酱们，比起身为在粉丝的时候所想的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '酱……要耀眼百倍，千倍……',
     ]);
     await era.printAndWait([
@@ -949,7 +949,7 @@ module.exports = (handlers) => {
     await digital.say_and_wait(['喂喂喂，', callname, '？']);
     await digital.say_and_wait('等等，至少请让我再说一句，我再说一句吧——');
     await digital.say_and_wait([
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '真是——太——棒——啦——！！！！',
     ]);
   };

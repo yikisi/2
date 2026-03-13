@@ -150,19 +150,19 @@ module.exports = (handlers) => {
       '对于生活在特雷森高墙中的 ',
       me.get_colored_name(),
       ' 而言，平日里的生活就是与前途无量的新人',
-      acute.get_uma_sex_title(),
+      acute.uma_sex_title,
       '进行着日复一日不间断的训练，自然也没有充足的时间，在高墙外与同龄的异性谈酸酸甜甜的恋爱了。',
     ]);
     await era.printAndWait([
       '虽然听说现在受欢迎的训练员偶尔也会在情人节收到担当',
-      acute.get_uma_sex_title(),
+      acute.uma_sex_title,
       '的友情巧克力……',
     ]);
     await era.printAndWait([
       '但不管怎么想，',
       acute.get_colored_name(),
       ' 都不像是那种会过情人节的年轻系',
-      acute.get_uma_sex_title(),
+      acute.uma_sex_title,
       '啊——',
     ]);
     await era.printAndWait('………………');
@@ -205,12 +205,12 @@ module.exports = (handlers) => {
     ]);
     await jordan.say_and_wait([
       '对，就是这个游戏中心新推出的，新设了『',
-      acute.get_uma_sex_title(),
+      acute.uma_sex_title,
       '』级别拳击机。',
     ]);
     await jordan.say_and_wait([
       '只要能在『',
-      acute.get_uma_sex_title(),
+      acute.uma_sex_title,
       '』级别里取得高分的话，就能够拿到奖品——',
     ]);
     await jordan.say_and_wait(
@@ -394,14 +394,14 @@ module.exports = (handlers) => {
       '结果一转眼，自己自成为 ',
       callname,
       ' 的担当',
-      acute.get_uma_sex_title(),
+      acute.uma_sex_title,
       '以来，都已经过了整整一年了呢。',
     ]);
     await acute.say_and_wait('……一整年啊，时间过的可真快呢。', true);
     await acute.say_and_wait(
       [
         '本以为，作为赛',
-        acute.get_uma_sex_title(),
+        acute.uma_sex_title,
         '在特雷森学园，会进行很枯燥的训练呢……没想到意外的还不赖呢。',
       ],
       true,
@@ -444,13 +444,13 @@ module.exports = (handlers) => {
     await acute.print_and_wait(['今天的 ', callname, '，回来得格外晚。']);
     era.drawLine({ content: '特雷森外的警局' });
     era.printButton(
-      `「警察先生，请你一定要相信我。我真的就只是担心自己担当的${acute.get_uma_sex_title()}，而在后面偷偷的跟着${acute.sex}而已。我真的不是尾行痴汉！」`,
+      `「警察先生，请你一定要相信我。我真的就只是担心自己担当的${acute.uma_sex_title}，而在后面偷偷的跟着${acute.sex}而已。我真的不是尾行痴汉！」`,
       1,
     );
     await era.input();
     await say_by_passer_by_and_wait('警察', [
       '少来！别以为我不知道，现在的痴汉都对当下最火的赛',
-      acute.get_uma_sex_title(),
+      acute.uma_sex_title,
       '们有性幻想。对外都宣称自己是特雷森的训练员。光这周，我就已经抓了八个自称训练员、三个自称老师、还有一个自称医学博士的尾行痴汉了。',
     ]);
     era.printButton(
@@ -490,7 +490,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '在听说自己是因为「尾随',
-      acute.get_uma_sex_title(),
+      acute.uma_sex_title,
       '」而进的监狱后，被 ',
       tokino.get_colored_name(),
       ' 狠狠的白了一眼。',
@@ -617,7 +617,7 @@ module.exports = (handlers) => {
     await era.printAndWait('怎么有种莫名的负罪感？');
     await era.printAndWait([
       '让自己担当',
-      acute.get_uma_sex_title(),
+      acute.uma_sex_title,
       '把自己打扫卫生洗衣服做饭，然后自己躺在被炉里插科打诨……',
     ]);
     await era.printAndWait('……嘶，这是不是有些猥琐啊？');

@@ -17,7 +17,7 @@ module.exports = (handlers) => {
       `出道战结束后，${me.name} 和里见光钻针对下一个目标进行讨论。`,
     );
     await era.printAndWait(
-      `「要成为能赢得G1的知名赛${daiya.get_uma_sex_title()}」考量到${
+      `「要成为能赢得G1的知名赛${daiya.uma_sex_title}」考量到${
         daiya.sex
       }的这个目标，选择新马级的G1竞赛应该是比较适合的──`,
     );
@@ -30,19 +30,19 @@ module.exports = (handlers) => {
       '在G1取胜当然也是我的目标，但那不过是一个过程而已。',
     );
     await daiya.say_and_wait(
-      `里见家所期望的『知名赛${daiya.get_uma_sex_title()}』，那是足以支撑赛${daiya.get_uma_sex_title()}界发展的赛${daiya.get_uma_sex_title()}。`,
+      `里见家所期望的『知名赛${daiya.uma_sex_title}』，那是足以支撑赛${daiya.uma_sex_title}界发展的赛${daiya.uma_sex_title}。`,
     );
     await daiya.say_and_wait(
-      `你也知道，里见家为了在赛${daiya.get_uma_sex_title()}界有所贡献，长年专心致力于协助营运和各种慈善活动。`,
+      `你也知道，里见家为了在赛${daiya.uma_sex_title}界有所贡献，长年专心致力于协助营运和各种慈善活动。`,
     );
     await daiya.say_and_wait(
-      `培育大量『能够赢得G1竞赛的知名赛${daiya.get_uma_sex_title()}』，这点也是能够支撑赛${daiya.get_uma_sex_title()}界的贡献之一。`,
+      `培育大量『能够赢得G1竞赛的知名赛${daiya.uma_sex_title}』，这点也是能够支撑赛${daiya.uma_sex_title}界的贡献之一。`,
     );
     await daiya.say_and_wait(
-      `我的目标是成为一个从内部支持赛${daiya.get_uma_sex_title()}界，以及赛${daiya.get_uma_sex_title()}竞赛文化的存在。`,
+      `我的目标是成为一个从内部支持赛${daiya.uma_sex_title}界，以及赛${daiya.uma_sex_title}竞赛文化的存在。`,
     );
     await daiya.say_and_wait(
-      `这样的话，我想我就必须走上最正统的道路。如果我的参赛能让经典三冠更加热闹的话，那也算是对赛${daiya.get_uma_sex_title()}界的一种贡献了吧。`,
+      `这样的话，我想我就必须走上最正统的道路。如果我的参赛能让经典三冠更加热闹的话，那也算是对赛${daiya.uma_sex_title}界的一种贡献了吧。`,
     );
     await daiya.say_and_wait([
       '如果可以的话，我希望能以万全的状态挑战 ',
@@ -67,23 +67,23 @@ module.exports = (handlers) => {
       '是说对目标吗？因为那就是我来到这世上的理由。这点是不用怀疑的。',
     );
     await daiya.say_and_wait(
-      `……这么说起来，我好像还没跟你说过，我和父母为什么会这么执着于知名赛${daiya.get_uma_sex_title()}吧。`,
+      `……这么说起来，我好像还没跟你说过，我和父母为什么会这么执着于知名赛${daiya.uma_sex_title}吧。`,
     );
     await daiya.say_and_wait(
-      `就像我刚才所说的，里见家虽然一直都对赛${daiya.get_uma_sex_title()}界的发展抱有热情，至今却从未有培育出知名赛${daiya.get_uma_sex_title()}的经验。`,
+      `就像我刚才所说的，里见家虽然一直都对赛${daiya.uma_sex_title}界的发展抱有热情，至今却从未有培育出知名赛${daiya.uma_sex_title}的经验。`,
     );
     await daiya.say_and_wait(
-      `里见家过去的赛${daiya.get_uma_sex_title()}当中，没有一位是曾经在G1竞赛中赢得胜利过的。`,
+      `里见家过去的赛${daiya.uma_sex_title}当中，没有一位是曾经在G1竞赛中赢得胜利过的。`,
     );
     await daiya.say_and_wait('久而久之，就被称作是『里见家的魔咒』了。');
     await daiya.say_and_wait(
-      `再加上，曾经很长一段时间都只生男生，家族一直没有新的赛${daiya.get_uma_sex_title()}诞生……`,
+      `再加上，曾经很长一段时间都只生男生，家族一直没有新的赛${daiya.uma_sex_title}诞生……`,
     );
     await daiya.say_and_wait(
-      `甚至让里见家一度认为，生不出赛${daiya.get_uma_sex_title()}也都是因为魔咒的关系。`,
+      `甚至让里见家一度认为，生不出赛${daiya.uma_sex_title}也都是因为魔咒的关系。`,
     );
     await daiya.say_and_wait(
-      `而我就是破除了这个魔咒所诞生的赛${daiya.get_uma_sex_title()}──`,
+      `而我就是破除了这个魔咒所诞生的赛${daiya.uma_sex_title}──`,
     );
     await daiya.say_and_wait('为了实现里见家梦想而生的，就是我。');
     await daiya.say_and_wait(
@@ -95,7 +95,7 @@ module.exports = (handlers) => {
       '所以我想要回应里见家的期望。这就是我的梦想！绝对不会有动摇的时候！',
     );
     await daiya.say_and_wait(
-      `里见家的赛${daiya.get_uma_sex_title()}赢不了G1的魔咒，如果是我的话就能将之破除──`,
+      `里见家的赛${daiya.uma_sex_title}赢不了G1的魔咒，如果是我的话就能将之破除──`,
     );
     await daiya.say_and_wait('我要赢得经典三冠，来证明这件事情！');
     era.printButton('「知道了，那我们就以经典三冠为目标吧」', 1);

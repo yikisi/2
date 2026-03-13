@@ -376,7 +376,7 @@ module.exports = async (tachyon, me, callname) => {
       '这就是 ',
       me.get_colored_name(),
       ' 所憧憬的',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '该做出的回答。',
     ]);
     await era.printAndWait(['不能说意外，只能说理所当然。']);
@@ -586,7 +586,7 @@ module.exports = async (tachyon, me, callname) => {
     await tachyon.print_and_wait([
       tachyon.get_colored_name(),
       '，是个欲望很强的',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '。',
     ]);
     await tachyon.print_and_wait(['二择一？不，', tachyon.sex, '两个都要。']);
@@ -646,7 +646,7 @@ module.exports = async (tachyon, me, callname) => {
     ]);
     await tachyon.print_and_wait([
       '只有，彼此相爱着的普通人及普通',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '，仅此而已。',
     ]);
     era.set('cflag:32:爱慕暂拒', 99);

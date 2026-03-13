@@ -72,7 +72,7 @@ module.exports = class extends CustomizedLove {
       '哇！人家也很喜欢当时那套服装～！咦？对了？这样一来──',
     );
     await ag.say_and_wait(
-      `……当然，我也会参加。因为我也是拥有婚纱服装的${ag.get_uma_sex_title()}。`,
+      `……当然，我也会参加。因为我也是拥有婚纱服装的${ag.uma_sex_title}。`,
     );
     await ag.say_and_wait(
       `此外……这项企划还有一个重点，走伸展台时要有伴行者领着你一起走。`,
@@ -103,7 +103,7 @@ module.exports = class extends CustomizedLove {
       ' 决定暂且旁观……',
     ]);
     await era.printAndWait(
-      `后辈赛${maya.get_uma_sex_title()}「重炮前辈！你决定选谁当伴行者呢？大家都很在意呢！」`,
+      `后辈赛${maya.uma_sex_title}「重炮前辈！你决定选谁当伴行者呢？大家都很在意呢！」`,
     );
     await maya.say_and_wait('谢谢～！我得赶快找到自愿的人呢～～！……（偷瞄）。');
     await era.printAndWait(
@@ -288,7 +288,7 @@ module.exports = class extends CustomizedLove {
       '穿上这套衣服时，我在心中发誓。要用我的闪耀光芒照得大家闪闪发光。',
     );
     await maya.say_and_wait(
-      `因为这样才是我最向往的──成熟${maya.get_phy_sex_title()}呀！`,
+      `因为这样才是我最向往的──成熟${maya.phy_sex_title}呀！`,
     );
     await rice.say_and_wait([
       '……！……那、那个，',

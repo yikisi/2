@@ -32,7 +32,7 @@ module.exports = class extends CustomizedBase {
 
         await era.printAndWait([
           '拒绝过后，欲言又止的',
-          grand.get_teen_sex_title(),
+          grand.teen_sex_title,
           '低下了头。',
         ]);
         era.println();
@@ -51,7 +51,7 @@ module.exports = class extends CustomizedBase {
           '不知道该作何反应的 ',
           me.get_colored_name(),
           '，静静地等待着小',
-          grand.get_uma_sex_title(),
+          grand.uma_sex_title,
           '心满意足的那一刻。',
         ]);
       } else {
@@ -60,7 +60,7 @@ module.exports = class extends CustomizedBase {
 
         await era.printAndWait([
           '拒绝过后，',
-          grand.get_teen_sex_title(),
+          grand.teen_sex_title,
           '的眼眶渐渐泛红。',
         ]);
         era.println();
@@ -118,7 +118,7 @@ module.exports = class extends CustomizedBase {
       await era.printAndWait(['离开的请求换来了斩钉截铁的拒绝。']);
       await era.printAndWait([
         '看到',
-        grand.get_teen_sex_title(),
+        grand.teen_sex_title,
         '不容争辩的表情，',
         me.get_colored_name(),
         ' 知道，能做的事情已经非常有限了。',
@@ -163,7 +163,7 @@ module.exports = class extends CustomizedBase {
       me = get_chara_talk(0);
     await era.printAndWait([
       '抱起',
-      grand.get_child_sex_title(),
+      grand.child_sex_title,
       '的身体放在床上，',
       me.get_colored_name(),
       ' 看着 ',
@@ -179,7 +179,7 @@ module.exports = class extends CustomizedBase {
     ]);
     await era.printAndWait([
       '厚重的铁门已经被推开，',
-      grand.get_teen_sex_title(),
+      grand.teen_sex_title,
       '的一切努力即将付之一炬。',
     ]);
     era.println();
@@ -196,7 +196,7 @@ module.exports = class extends CustomizedBase {
     ]);
     await era.printAndWait([
       '从被抓住的袖子那里，能感受到',
-      grand.get_child_sex_title(),
+      grand.child_sex_title,
       '的小手正不安地颤抖着。',
     ]);
     era.println();
@@ -206,7 +206,7 @@ module.exports = class extends CustomizedBase {
 
     await era.printAndWait([
       '本应熟睡的小',
-      grand.get_uma_sex_title(),
+      grand.uma_sex_title,
       '在梦中喊出了 ',
       me.get_colored_name(),
       ' 的名字。',
@@ -261,12 +261,12 @@ module.exports = class extends CustomizedBase {
     }
     await era.printAndWait([
       '在训练员会议上发放的「对',
-      grand.get_uma_sex_title(),
+      grand.uma_sex_title,
       '用安眠药」样品，没想到真的有用到的一天。',
     ]);
     await era.printAndWait([
       '讲师说这个药可以让',
-      grand.get_uma_sex_title(),
+      grand.uma_sex_title,
       '失去施暴时的记忆，以便回到正常的搭档关系。',
     ]);
     await era.printAndWait([
@@ -289,7 +289,7 @@ module.exports = class extends CustomizedBase {
       ]);
       await era.printAndWait([
         '刚刚不小心吸进去了一点……但还好这是「对……',
-        grand.get_uma_sex_title(),
+        grand.uma_sex_title,
         '用……安……眠……」',
       ]);
     } else if (era.get('relation:89:0') >= 100) {
@@ -306,7 +306,7 @@ module.exports = class extends CustomizedBase {
       ]);
       await era.printAndWait([
         '一想到这是「对',
-        grand.get_uma_sex_title(),
+        grand.uma_sex_title,
         '用」的特效药，',
         me.get_colored_name(),
         ' 没有拒绝。',
@@ -332,9 +332,9 @@ module.exports = class extends CustomizedBase {
     await era.printAndWait(['被吸入般的睡意袭来，思绪一步坠入深海。']);
     await era.printAndWait([
       '开什么玩笑……难道「对',
-      grand.get_uma_sex_title(),
+      grand.uma_sex_title,
       '用」指的是「药效强到对',
-      grand.get_uma_sex_title(),
+      grand.uma_sex_title,
       '也能生效」吗……？',
     ]);
     await era.printAndWait([
@@ -356,7 +356,7 @@ module.exports = class extends CustomizedBase {
       '，',
       me.get_colored_name(),
       ' 暗自庆幸准备了对',
-      grand.get_uma_sex_title(),
+      grand.uma_sex_title,
       '用的安眠药。',
     ]);
     await era.printAndWait([
@@ -527,7 +527,7 @@ module.exports = class extends CustomizedBase {
 
     era.print([
       '昏昏沉沉地抬起头，手机屏幕的荧光映出了',
-      grand.get_teen_sex_title(),
+      grand.teen_sex_title,
       '疲惫而苍白的面容。',
     ]);
     era.print([
@@ -561,7 +561,7 @@ module.exports = class extends CustomizedBase {
     ]);
     await era.printAndWait([
       '这样一来，想必',
-      grand.get_uma_sex_title(),
+      grand.uma_sex_title,
       '也会暂时失去行动能力吧。',
     ]);
     era.println();
@@ -606,7 +606,7 @@ module.exports = class extends CustomizedBase {
 
     await era.printAndWait([
       '骨节的脆响与',
-      grand.get_teen_sex_title(),
+      grand.teen_sex_title,
       '的呼喊声组成尖锐的合鸣。',
     ]);
     await era.printAndWait([
@@ -644,7 +644,7 @@ module.exports = class extends CustomizedBase {
     ]);
     await era.printAndWait([
       '怀中的',
-      grand.get_child_sex_title(),
+      grand.child_sex_title,
       '没挣扎几下，很快就安静了下来。',
     ]);
     era.println();
@@ -659,7 +659,7 @@ module.exports = class extends CustomizedBase {
     ]);
     await era.printAndWait([
       '虽然风险很大，但这的确是唯一一个不会对',
-      grand.get_child_sex_title(),
+      grand.child_sex_title,
       '的身体不会造成伤害的办法。',
     ]);
     era.println();
@@ -669,7 +669,7 @@ module.exports = class extends CustomizedBase {
 
     await era.printAndWait([
       '留意到怀中的',
-      grand.get_child_sex_title(),
+      grand.child_sex_title,
       '脸上用淡妆遮掩的黑眼圈，是时候将',
       grand.sex,
       '从罪恶感中解放出来了。',

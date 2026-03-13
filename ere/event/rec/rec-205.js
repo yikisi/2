@@ -121,14 +121,14 @@ module.exports = class extends CustomizedRecruit {
       era.printButton('「出道赛吗？」', 1);
       await era.input();
       await era.printAndWait(
-        `为数众多的${vp.get_uma_sex_title()}在实战性的比赛中彰显实力，接受发掘的机会。年轻的训练员们聚集在一起的那个地方。`,
+        `为数众多的${vp.uma_sex_title}在实战性的比赛中彰显实力，接受发掘的机会。年轻的训练员们聚集在一起的那个地方。`,
       );
       await era.printAndWait(
         '一边朝着与运动场完全相反的方向走，一边想起了热衷于发掘的往事。',
       );
       await era.printAndWait('即使讨厌也能理解吧，自己不适合这个地方。');
       await era.printAndWait(
-        `走在石板路上，和几个穿着体操服的${vp.get_uma_sex_title()}们擦肩而过。`,
+        `走在石板路上，和几个穿着体操服的${vp.uma_sex_title}们擦肩而过。`,
       );
       await era.printAndWait(
         `在这种情况下，又有什么刺激了 ${me.name} 的耳朵，是塞进口袋的手机的来电音。`,
@@ -150,7 +150,7 @@ module.exports = class extends CustomizedRecruit {
       era.printButton('「怎么了？」', 1);
       await era.input();
       await chairman.say_and_wait(
-        `告 知！实际上，那边的${vp.get_uma_sex_title()}里有个孩子虽然出道赛表现很好，但谁都没搭上话。实力很强，在比赛中好像也是第一名，所以为什么没被物色发掘，真是不可思议。`,
+        `告 知！实际上，那边的${vp.uma_sex_title}里有个孩子虽然出道赛表现很好，但谁都没搭上话。实力很强，在比赛中好像也是第一名，所以为什么没被物色发掘，真是不可思议。`,
       );
       era.printButton('「因为被理事长内定了吧。」', 1);
       await era.input();
@@ -159,15 +159,15 @@ module.exports = class extends CustomizedRecruit {
       );
       await era.printAndWait('这个装嫩的家伙耳朵洞是通了好让空气变通畅吗。');
       await era.printAndWait(
-        `为什么要把法国的${vp.get_uma_sex_title()}托付给刚来这片土地的训练员呢。`,
+        `为什么要把法国的${vp.uma_sex_title}托付给刚来这片土地的训练员呢。`,
       );
       await era.printAndWait(
         `${
           me.name
-        } 的脸在别人看来应该明显地扭曲了，很吓人，${vp.get_uma_sex_title()}们纷纷避开。`,
+        } 的脸在别人看来应该明显地扭曲了，很吓人，${vp.uma_sex_title}们纷纷避开。`,
       );
       await era.printAndWait(
-        `一边想着一边走路一边打电话，直到坐在路边的长椅上，和在对岸同样坐着的${vp.get_uma_sex_title()}对视。`,
+        `一边想着一边走路一边打电话，直到坐在路边的长椅上，和在对岸同样坐着的${vp.uma_sex_title}对视。`,
       );
       await era.printAndWait(
         `${me.name} 轻轻摇晃手里拿着的电话，栗毛的${vp.sex}对此点头。`,
@@ -181,7 +181,7 @@ module.exports = class extends CustomizedRecruit {
       await era.printAndWait(
         `${
           me.name
-        } 光听着就觉得是优秀的${vp.get_uma_sex_title()}。那么没有被物色的话，就说明……`,
+        } 光听着就觉得是优秀的${vp.uma_sex_title}。那么没有被物色的话，就说明……`,
       );
       era.printButton('「性格有问题。」', 1);
       await era.input();
@@ -194,7 +194,7 @@ module.exports = class extends CustomizedRecruit {
       await chairman.say_and_wait('无 奈！我也想知道啊！');
       await era.printAndWait('从电话那头传来叹息声，看来真的很有自信。');
       await era.printAndWait(
-        `被这么一说，${me.name} 很在意是什么样的${vp.get_uma_sex_title()}。`,
+        `被这么一说，${me.name} 很在意是什么样的${vp.uma_sex_title}。`,
       );
       await era.printAndWait('虽然基本会拒绝，但至少试着见次面吧。');
       await era.printAndWait(
@@ -204,12 +204,12 @@ module.exports = class extends CustomizedRecruit {
       era.printButton('「什么样的家伙？」', 1);
       await era.input();
       await chairman.say_and_wait(
-        `回 忆！嗯，是栗毛的${vp.get_uma_sex_title()}。只是发色比较明亮，玫瑰金之类的感觉。`,
+        `回 忆！嗯，是栗毛的${vp.uma_sex_title}。只是发色比较明亮，玫瑰金之类的感觉。`,
       );
       await era.printAndWait([
         me.get_colored_name(),
         ' 抬起头来，和刚才得到电话许可的',
-        vp.get_uma_sex_title(),
+        vp.uma_sex_title,
         '对视。',
       ]);
       await era.printAndWait('栗色，是明亮的发色。');
@@ -226,13 +226,13 @@ module.exports = class extends CustomizedRecruit {
         '白色的帽子和红色的丝带也在摇曳，能清楚地看到画着深蓝色的线。',
       );
       await era.printAndWait(
-        `尽管一直被盯着，那个栗毛的${vp.get_uma_sex_title()}却泰然自若地看着 ${
+        `尽管一直被盯着，那个栗毛的${vp.uma_sex_title}却泰然自若地看着 ${
           me.name
         }。`,
       );
       await era.printAndWait(`海蓝宝石的眼睛纹丝不动地朝向 ${me.name} 这边。`);
       await chairman.say_and_wait(
-        `如 何？那边的学校很大吧，现在进行出道赛的${vp.get_uma_sex_title()}也多，可能很难找到。`,
+        `如 何？那边的学校很大吧，现在进行出道赛的${vp.uma_sex_title}也多，可能很难找到。`,
       );
       era.printButton('「……不，我觉得很快就能找到。」', 1);
       await era.input();
@@ -243,9 +243,7 @@ module.exports = class extends CustomizedRecruit {
       );
       era.printButton('「不好意思——在这里做什么？」', 1);
       await era.input();
-      await era.printAndWait(
-        `那个${vp.get_uma_sex_title()}用手捂着嘴，思量着回答。`,
-      );
+      await era.printAndWait(`那个${vp.uma_sex_title}用手捂着嘴，思量着回答。`);
       await vp.say_as_unknown_and_wait(
         '嗯，虽然是赢了出道赛，但是哪个训练员都不愿意负责我。我现在在等某位大人物替我找的人……',
       );
@@ -300,21 +298,19 @@ module.exports = class extends CustomizedRecruit {
       era.printButton(`展开解释`, 1);
       await era.input();
       await me.say_and_wait(
-        `听好了，凯旋门赏可以说是这个国家乃至全世界${vp.get_uma_sex_title()}的目标。如果是以草地中距离为主战场的${vp.get_uma_sex_title()}，最后到达的肯定是凯旋门赏。`,
+        `听好了，凯旋门赏可以说是这个国家乃至全世界${vp.uma_sex_title}的目标。如果是以草地中距离为主战场的${vp.uma_sex_title}，最后到达的肯定是凯旋门赏。`,
       );
       await era.printAndWait(
         `当然，点头的${vp.sex}的素质还不确定，但如果能定下这样的目标，对草地中距离有相当的自信吧。`,
       );
-      await era.printAndWait(
-        `不过，光靠${vp.get_uma_sex_title()}的实力是不够的。`,
-      );
+      await era.printAndWait(`不过，光靠${vp.uma_sex_title}的实力是不够的。`);
       era.printButton(`「但是——挑战凯旋门赏接近赌博。」`, 1);
       await era.input();
       await me.say_and_wait(
-        `如果不收集各国的${vp.get_uma_sex_title()}的数据，并特别设定为此而进行的训练，就等于不可能赢得那场比赛。没有人能把为此而付出的巨大努力花在刚刚赢得出道赛的${vp.get_uma_sex_title()}身上。`,
+        `如果不收集各国的${vp.uma_sex_title}的数据，并特别设定为此而进行的训练，就等于不可能赢得那场比赛。没有人能把为此而付出的巨大努力花在刚刚赢得出道赛的${vp.uma_sex_title}身上。`,
       );
       await era.printAndWait(
-        `训练员基本上会负责多名${vp.get_uma_sex_title()}。众所周知，挑战凯旋门赏会大大降低团队的工作效率，甚至有训练员明确表示，为了提高平均成绩，不会参加国际比赛。`,
+        `训练员基本上会负责多名${vp.uma_sex_title}。众所周知，挑战凯旋门赏会大大降低团队的工作效率，甚至有训练员明确表示，为了提高平均成绩，不会参加国际比赛。`,
       );
       await era.printAndWait(
         `从一开始就以凯旋门赏为目标的 ${vp.name}，可以说是踩在了他们的雷区。`,
@@ -370,7 +366,7 @@ module.exports = class extends CustomizedRecruit {
       await era.input();
       await vp.say_and_wait('那么，请把这些全部给我！');
       await era.printAndWait(
-        `伸出张开的双手的${vp.get_teen_sex_title()}此时也无视了。`,
+        `伸出张开的双手的${vp.teen_sex_title}此时也无视了。`,
       );
       era.printButton('「拒绝。」', 1);
       await era.input();
@@ -383,7 +379,7 @@ module.exports = class extends CustomizedRecruit {
       );
       await era.printAndWait('让人很难擅长的清澈的眼睛。');
       await vp.say_and_wait(
-        `那么，我给你一个理由。如果负责能连霸凯旋门赏的${vp.get_uma_sex_title()}的话，作为社会人的评价也会提高吧？`,
+        `那么，我给你一个理由。如果负责能连霸凯旋门赏的${vp.uma_sex_title}的话，作为社会人的评价也会提高吧？`,
       );
       era.printButton('「那个自信是从哪里来的？」', 1);
       await era.input();
@@ -403,7 +399,7 @@ module.exports = class extends CustomizedRecruit {
         return true;
       }
       await era.printAndWait(
-        `眼前的${vp.get_teen_sex_title()}，眼神更加强烈地闪耀着。`,
+        `眼前的${vp.teen_sex_title}，眼神更加强烈地闪耀着。`,
       );
       await vp.say_and_wait('请多关照，训练员先生！');
       await era.printAndWait(
@@ -428,7 +424,7 @@ module.exports = class extends CustomizedRecruit {
         '能冷静地理解加速和最高出速的亮眼脚力，即使是最后直线也不显出疲态的耐久，以及自己临场制定战略的头脑。',
       );
       await era.printAndWait(
-        `${vp.get_uma_sex_title()}需要的东西都达到了极高的水平。`,
+        `${vp.uma_sex_title}需要的东西都达到了极高的水平。`,
       );
       await era.printAndWait(
         `因为平衡很好，所以 ${me.name} 认为无论哪个脚质都能取得好的胜负。`,
@@ -454,7 +450,7 @@ module.exports = class extends CustomizedRecruit {
         '既不是过分的自尊也不是谦虚，客观地对待自己的精神状态也提高了 ',
         vp.get_colored_name(),
         ' 这个',
-        vp.get_uma_sex_title(),
+        vp.uma_sex_title,
         '的完成度。',
       ]);
       await era.printAndWait(
@@ -462,7 +458,7 @@ module.exports = class extends CustomizedRecruit {
       );
       await era.printAndWait([
         '栗毛的',
-        vp.get_uma_sex_title(),
+        vp.uma_sex_title,
         '靠近想要结束练习的 ',
         me.get_colored_name(),
         '，告诉 ',

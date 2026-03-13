@@ -119,7 +119,7 @@ module.exports = class extends CustomizedEdu {
         `可以再稍微练习一会吗？飞鹰子还有想要完成的目标哦！`,
       );
       await falcon.say_and_wait(
-        `而且，作为${falcon.get_uma_sex_title()}偶像的话，目标稍微~定高一样也没关系吧？`,
+        `而且，作为${falcon.uma_sex_title}偶像的话，目标稍微~定高一样也没关系吧？`,
       );
       await falcon.say_and_wait(
         `那么，训练员${me.get_adult_sex_title()}又是怎么想呢？`,
@@ -131,10 +131,7 @@ module.exports = class extends CustomizedEdu {
       );
       await falcon.say_and_wait(`训练员${me.get_adult_sex_title()}？`);
       await era.printAndWait(`即使是路边生长的小草，也渴望着茁壮成长吗？`);
-      era.printButton(
-        `「那么加油哦，未来的${falcon.get_uma_sex_title()}偶像」`,
-        1,
-      );
+      era.printButton(`「那么加油哦，未来的${falcon.uma_sex_title}偶像」`, 1);
       era.printButton('「......今天的话就训练到这里了」', 2);
       hook.arg = (await era.input()) === 1;
       if (hook.arg) {
@@ -153,7 +150,7 @@ module.exports = class extends CustomizedEdu {
       } else {
         await falcon.say_and_wait(`可是......`);
         await me.say_and_wait(
-          `成为${falcon.get_uma_sex_title()}偶像的道路不是一蹴而就的，过度的训练只会适得其反！`,
+          `成为${falcon.uma_sex_title}偶像的道路不是一蹴而就的，过度的训练只会适得其反！`,
         );
         await falcon.say_and_wait('诶？');
         await me.say_and_wait(
@@ -561,7 +558,7 @@ module.exports = class extends CustomizedEdu {
         `帮助可爱的后辈是我的荣幸哦，那么我应该做什么呢？`,
       );
       await era.printAndWait(
-        `既享受着奔跑的快乐，也为了能让更多的${falcon.get_uma_sex_title()}追逐着自己的背影，`,
+        `既享受着奔跑的快乐，也为了能让更多的${falcon.uma_sex_title}追逐着自己的背影，`,
       );
     }
     await falcon.say_and_wait(`飞鹰子的话，正在车站进行粉丝劝诱呢⭐`);
@@ -738,10 +735,7 @@ module.exports = class extends CustomizedEdu {
       await era.printAndWait(
         `乐观，积极向上，一直盯着目标不断前行的${falcon.sex} 将乐观的希望带给了${callname} 与粉丝们。`,
       );
-      await me.say_and_wait(
-        `这样的${falcon.get_uma_sex_title()}真的存在吗？`,
-        true,
-      );
+      await me.say_and_wait(`这样的${falcon.uma_sex_title}真的存在吗？`, true);
       await era.printAndWait(`${callname} 的内心一直在怀疑这一点。`);
       await era.printAndWait(
         `想要一直保持作为偶像这一身份所遭受的痛苦与精神上的折磨。`,
@@ -781,30 +775,23 @@ module.exports = class extends CustomizedEdu {
     if (event_marks.petrichor_girl === 1) {
       event_marks.petrichor_girl++;
     }
-    await print_event_name(
-      `带着青草气息的${falcon.get_uma_sex_title()}们`,
-      falcon,
-    );
+    await print_event_name(`带着青草气息的${falcon.uma_sex_title}们`, falcon);
     await era.printAndWait(`今天是校园开放日。`);
     await falcon.say_and_wait(
       `这里是${falcon.name} 姐姐，接下来的话就让我来带领大家参观特雷森吧♪`,
     );
     await era.printAndWait(
-      `附近小学的小${falcon.get_uma_sex_title()}们来到特雷森学院进行参观。`,
+      `附近小学的小${falcon.uma_sex_title}们来到特雷森学院进行参观。`,
     );
     era.printButton(
-      `说不定之后这些小${falcon.get_uma_sex_title()}们其中也有人会成为我的担当${falcon.get_uma_sex_title()}呢`,
+      `说不定之后这些小${falcon.uma_sex_title}们其中也有人会成为我的担当${falcon.uma_sex_title}呢`,
       1,
     );
     await era.input();
+    await era.printAndWait(`小${falcon.uma_sex_title}A「这里就是特雷森吗？」`);
+    await era.printAndWait(`小${falcon.uma_sex_title}B「哇！好大的学院啊！」`);
     await era.printAndWait(
-      `小${falcon.get_uma_sex_title()}A「这里就是特雷森吗？」`,
-    );
-    await era.printAndWait(
-      `小${falcon.get_uma_sex_title()}B「哇！好大的学院啊！」`,
-    );
-    await era.printAndWait(
-      `小${falcon.get_uma_sex_title()}C「${
+      `小${falcon.uma_sex_title}C「${
         falcon.name
       } 姐姐可以讲一下特雷森学院的历史吗？」`,
     );
@@ -814,52 +801,50 @@ module.exports = class extends CustomizedEdu {
     await era.printAndWait(
       `充满活力的${falcon.name} 耐心讲解着与特雷森相关的事情。`,
     );
-    await era.printAndWait(
-      `小${falcon.get_uma_sex_title()}A「那边的人影是？」`,
-    );
+    await era.printAndWait(`小${falcon.uma_sex_title}A「那边的人影是？」`);
     await era.printAndWait(
       `簇拥在${
         falcon.name
-      } 周围蹦蹦跳跳的小${falcon.get_uma_sex_title()}发现了${callname} 。`,
+      } 周围蹦蹦跳跳的小${falcon.uma_sex_title}发现了${callname} 。`,
     );
     await falcon.say_and_wait(
-      `即使是特雷森学院的${falcon.get_uma_sex_title()}们，想要取得G1也是很辛苦的一件事呢...欸？等一下`,
+      `即使是特雷森学院的${falcon.uma_sex_title}们，想要取得G1也是很辛苦的一件事呢...欸？等一下`,
     );
     await era.printAndWait(
-      `小${falcon.get_uma_sex_title()}A「那边的训练员看起来很帅气呢？」`,
+      `小${falcon.uma_sex_title}A「那边的训练员看起来很帅气呢？」`,
     );
     await era.printAndWait(
       `刚还围绕在${
         falcon.name
-      } 身边的${falcon.get_uma_sex_title()}们呼啦一下全部围到了${callname} 身边。`,
+      } 身边的${falcon.uma_sex_title}们呼啦一下全部围到了${callname} 身边。`,
     );
     await falcon.say_and_wait(`训，训练员${me.get_adult_sex_title()}！`);
     await era.printAndWait(
-      `小${falcon.get_uma_sex_title()}B「等我进入特雷森的话，可以做我的钻数训练员吗？」`,
+      `小${falcon.uma_sex_title}B「等我进入特雷森的话，可以做我的钻数训练员吗？」`,
     );
     await era.printAndWait(
-      `小${falcon.get_uma_sex_title()}A「不要！明明应该是我先看到他的！」`,
+      `小${falcon.uma_sex_title}A「不要！明明应该是我先看到他的！」`,
     );
     await era.printAndWait(
-      `小${falcon.get_uma_sex_title()}B「是我先提出来的，所以应该跟我一起！」`,
+      `小${falcon.uma_sex_title}B「是我先提出来的，所以应该跟我一起！」`,
     );
     await era.printAndWait(
-      `小${falcon.get_uma_sex_title()}们像是抢心爱的玩具一样拉着${callname} 的双手`,
+      `小${falcon.uma_sex_title}们像是抢心爱的玩具一样拉着${callname} 的双手`,
     );
     era.printButton(`好，好痛啊！`, 1);
     await era.input();
     await era.printAndWait(
-      `众所周知${falcon.get_uma_sex_title()}的力气是成年人类的三倍。`,
+      `众所周知${falcon.uma_sex_title}的力气是成年人类的三倍。`,
     );
     await era.printAndWait(
-      `为了避免控制不住自己力量造成危险的发生，作为${falcon.get_uma_sex_title()}有一门必修课。`,
+      `为了避免控制不住自己力量造成危险的发生，作为${falcon.uma_sex_title}有一门必修课。`,
     );
     await era.printAndWait(`就是学会控制自己的力量。`);
     await era.printAndWait(
-      `对于大多数${falcon.get_uma_sex_title()}来说初中时就开始有意识控制自己的力量。`,
+      `对于大多数${falcon.uma_sex_title}来说初中时就开始有意识控制自己的力量。`,
     );
     await era.printAndWait(
-      `但对于连心智都尚处在发育阶段的小${falcon.get_uma_sex_title()}们来说。`,
+      `但对于连心智都尚处在发育阶段的小${falcon.uma_sex_title}们来说。`,
     );
     await era.printAndWait(
       `${callname} 像是被两个肌肉壮汉当成玩具一样拽来拽去。`,
@@ -868,12 +853,12 @@ module.exports = class extends CustomizedEdu {
     await era.printAndWait(`所幸，${falcon.name} 及时赶到了。`);
     await falcon.say_and_wait(`${callname} 们两个给我说清楚怎么回事！`);
     await era.printAndWait(
-      `两名小${falcon.get_uma_sex_title()}突然被一股巨大的力量提到了空中，想要查看发生了什么的时候就迎来了${
+      `两名小${falcon.uma_sex_title}突然被一股巨大的力量提到了空中，想要查看发生了什么的时候就迎来了${
         falcon.name
       } 像修罗一样的表情。`,
     );
-    await era.printAndWait(`小${falcon.get_uma_sex_title()}A「唔啊啊啊！」`);
-    await era.printAndWait(`小${falcon.get_uma_sex_title()}B「不要吃我啊！」`);
+    await era.printAndWait(`小${falcon.uma_sex_title}A「唔啊啊啊！」`);
+    await era.printAndWait(`小${falcon.uma_sex_title}B「不要吃我啊！」`);
     await era.printAndWait(
       `刚刚还在争吵的两人现在又蜷缩在了一起瑟瑟发抖地听着${falcon.name} 的训斥。`,
     );
@@ -886,10 +871,10 @@ module.exports = class extends CustomizedEdu {
     era.printButton(`没关系，不过是小朋友们淘气了一点。`, 1);
     await era.input();
     await era.printAndWait(`忍着剧痛来到了小朋友旁边。`);
-    await era.printAndWait(`小${falcon.get_uma_sex_title()}A「呜——」`);
-    await era.printAndWait(`小${falcon.get_uma_sex_title()}B「嗯？」`);
+    await era.printAndWait(`小${falcon.uma_sex_title}A「呜——」`);
+    await era.printAndWait(`小${falcon.uma_sex_title}B「嗯？」`);
     era.printButton(
-      `人类比起${falcon.get_uma_sex_title()}来说是很脆弱的生物，所以下次一定要控制住自己的力量才行。`,
+      `人类比起${falcon.uma_sex_title}来说是很脆弱的生物，所以下次一定要控制住自己的力量才行。`,
       1,
     );
     await era.input();
@@ -898,8 +883,8 @@ module.exports = class extends CustomizedEdu {
       1,
     );
     await era.input();
-    await era.printAndWait(`小${falcon.get_uma_sex_title()}A「嗯嗯。」`);
-    await era.printAndWait(`小${falcon.get_uma_sex_title()}B「我们知道了。」`);
+    await era.printAndWait(`小${falcon.uma_sex_title}A「嗯嗯。」`);
+    await era.printAndWait(`小${falcon.uma_sex_title}B「我们知道了。」`);
     await era.printAndWait(
       `带队老师这时才姗姗来迟，在了解经过之后向${callname} 们道歉。`,
     );

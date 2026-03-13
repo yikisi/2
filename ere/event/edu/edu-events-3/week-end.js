@@ -29,7 +29,7 @@ module.exports = class extends Edu3UntilSchoolAtrium {
       await era.printAndWait(
         `${
           me.name
-        } 一个人在宿舍内盯着电脑屏上的资料，有一搭没一搭地做着笔记，修改着担当${teio.get_uma_sex_title()}下一阶段的训练计划。事实上，这件事情 ${
+        } 一个人在宿舍内盯着电脑屏上的资料，有一搭没一搭地做着笔记，修改着担当${teio.uma_sex_title}下一阶段的训练计划。事实上，这件事情 ${
           me.name
         } 早已完成了，不知为何，${
           me.name
@@ -42,7 +42,7 @@ module.exports = class extends Edu3UntilSchoolAtrium {
       await era.printAndWait(
         `${
           me.name
-        } 愣了一下，然后快速跑到门口，瞥了一下猫眼便拉开房门。铃声余音回荡，大门敞开，深沉黑夜的最中央处，一位浑身湿漉的${teio.get_uma_sex_title()}立于 ${
+        } 愣了一下，然后快速跑到门口，瞥了一下猫眼便拉开房门。铃声余音回荡，大门敞开，深沉黑夜的最中央处，一位浑身湿漉的${teio.uma_sex_title}立于 ${
           me.name
         } 的面前。降水顺着雨衣滑落，一根长翘的白色刘海被水珠的重量压于鼻沿，又被轻轻撩起，随着${
           teio.sex
@@ -58,7 +58,7 @@ module.exports = class extends Edu3UntilSchoolAtrium {
       await teio.say_and_wait('……');
       era.println();
       await era.printAndWait(
-        `${teio.get_teen_sex_title()}一言不发坐在沙发上，任由 ${
+        `${teio.teen_sex_title}一言不发坐在沙发上，任由 ${
           me.name
         } 将热气腾腾的毛巾盖在头上抚弄。${
           me.name
@@ -67,12 +67,12 @@ module.exports = class extends Edu3UntilSchoolAtrium {
       await era.printAndWait(
         `即使 ${
           me.name
-        } 没有当过训练员，也可以一眼就可以看出${teio.get_uma_sex_title()}${teio.get_teen_sex_title()}正在崩溃的边缘。`,
+        } 没有当过训练员，也可以一眼就可以看出${teio.uma_sex_title}${teio.teen_sex_title}正在崩溃的边缘。`,
       );
       await era.printAndWait(
         `${
           teio.sex
-        }了无生气地坐在那里，双手合一，并非祈祷，而像是在寻求依赖般，把额头贴近双手。这位${teio.get_teen_sex_title()}，仿佛困在一片寂静的黑暗中，拒绝所有的光线与声音，${
+        }了无生气地坐在那里，双手合一，并非祈祷，而像是在寻求依赖般，把额头贴近双手。这位${teio.teen_sex_title}，仿佛困在一片寂静的黑暗中，拒绝所有的光线与声音，${
           me.name
         } 甚至不禁担心${teio.sex}是否切实存在于这里。`,
       );
@@ -83,7 +83,7 @@ module.exports = class extends Edu3UntilSchoolAtrium {
       era.printButton('「帝王……」', 1);
       await era.input();
       await era.printAndWait(
-        `没有声音。只有${teio.get_teen_sex_title()}轻颤的身体仿佛在回应着 ${
+        `没有声音。只有${teio.teen_sex_title}轻颤的身体仿佛在回应着 ${
           me.name
         }。`,
       );
@@ -93,7 +93,7 @@ module.exports = class extends Edu3UntilSchoolAtrium {
       era.println();
 
       await era.printAndWait(
-        `从未见过${teio.get_teen_sex_title()}这副样子。原本柔顺打着挺的毛发散乱不堪，双目无神黯淡，愈显瘦小的身形随着呼吸和脉搏起伏抖动。${
+        `从未见过${teio.teen_sex_title}这副样子。原本柔顺打着挺的毛发散乱不堪，双目无神黯淡，愈显瘦小的身形随着呼吸和脉搏起伏抖动。${
           me.name
         } 再次呼喊${
           teio.sex
@@ -114,10 +114,10 @@ module.exports = class extends Edu3UntilSchoolAtrium {
       await era.printAndWait(
         `一旦精神意志有丝毫的退让，${
           teio.sex
-        }仅存的抵抗意识就会烟消云散吧。${teio.get_teen_sex_title()}将会开始哭泣，无休无止地哭个不停吧。`,
+        }仅存的抵抗意识就会烟消云散吧。${teio.teen_sex_title}将会开始哭泣，无休无止地哭个不停吧。`,
       );
       await era.printAndWait(
-        `那就意味着${teio.name}这个${teio.get_uma_sex_title()}的崩溃。`,
+        `那就意味着${teio.name}这个${teio.uma_sex_title}的崩溃。`,
       );
       await era.printAndWait(
         '以常理论，若感神伤，又何妨大哭一场。确是如此。眼泪有种伟大的功效，它可以冲刷烦恼，不管多大的痛苦都可以得到缓解。',
@@ -126,13 +126,13 @@ module.exports = class extends Edu3UntilSchoolAtrium {
       await era.printAndWait(
         `但是——对于名为${
           teio.name
-        }的${teio.get_uma_sex_title()}而言，现在这些亦是不能采取之举。`,
+        }的${teio.uma_sex_title}而言，现在这些亦是不能采取之举。`,
       );
       await era.printAndWait(
         `若在此处，倚靠与 ${me.name} 的身上哭泣，是否是一种逃避责任呢？`,
       );
       await era.printAndWait(
-        `出道时便宣传三冠，立下无与伦比目标的${teio.get_uma_sex_title()}，跌倒在了独创的，自认为最合适的，结合了自己天赋的跑法上。最后，又因为自己的任性，而让信赖的训练员（${
+        `出道时便宣传三冠，立下无与伦比目标的${teio.uma_sex_title}，跌倒在了独创的，自认为最合适的，结合了自己天赋的跑法上。最后，又因为自己的任性，而让信赖的训练员（${
           me.name
         }）帮助自己承担了责任。如此情况，又何来脸面哭泣，在 ${
           me.name
@@ -141,15 +141,15 @@ module.exports = class extends Edu3UntilSchoolAtrium {
       await era.printAndWait(
         `也许此刻流下眼泪，逃避一切，对于${
           teio.name
-        }来说才是幸福的吧。但如此一来，那个坚忍不拔，自信地在世人面前宣示存在的${teio.get_uma_sex_title()}，便认输退场了。`,
+        }来说才是幸福的吧。但如此一来，那个坚忍不拔，自信地在世人面前宣示存在的${teio.uma_sex_title}，便认输退场了。`,
       );
       await era.printAndWait(
-        `所以${teio.get_teen_sex_title()}只是靠在 ${
+        `所以${teio.teen_sex_title}只是靠在 ${
           me.name
         } 的怀里，咬着嘴唇，紧闭着眼睛，有些滑稽地颤抖着身体。`,
       );
       await era.printAndWait(
-        ` ${me.name} 温柔地轻拂着${teio.get_uma_sex_title()}的背部，试图让${
+        ` ${me.name} 温柔地轻拂着${teio.uma_sex_title}的背部，试图让${
           teio.sex
         }平静下来。`,
       );
@@ -169,7 +169,7 @@ module.exports = class extends Edu3UntilSchoolAtrium {
       await teio.say_and_wait('我现在剩下的……只有你了。');
       era.println();
       await era.printAndWait(
-        `引以为傲的双腿，背负着的梦想的双翼，全部从${teio.get_teen_sex_title()}身上消失了。`,
+        `引以为傲的双腿，背负着的梦想的双翼，全部从${teio.teen_sex_title}身上消失了。`,
       );
       era.println();
       await teio.say_and_wait('我想要，你的这份心力。');
@@ -195,7 +195,7 @@ module.exports = class extends Edu3UntilSchoolAtrium {
           `犹豫。对于${teio.sex}所指的言外之意，${me.name} 感受到了自己单纯的喜悦。还有兴奋。`,
         );
         await era.printAndWait(
-          `但是，可以将身体交给这份涌动吗。那真的可以救赎这位${teio.get_teen_sex_title()}吗？`,
+          `但是，可以将身体交给这份涌动吗。那真的可以救赎这位${teio.teen_sex_title}吗？`,
         );
         await era.printAndWait(
           `——话虽如此，${me.name} 不是已经决定把一切都交给${teio.sex}自己的决断了吗。`,
@@ -219,7 +219,7 @@ module.exports = class extends Edu3UntilSchoolAtrium {
         await era.printAndWait(
           `火热柔软的触感让 ${
             me.name
-          } 尝到了${teio.get_uma_sex_title()}的滋味。不错，这是生来待人贪求的生物！那令人耽溺于其中的魅惑勾出了 ${
+          } 尝到了${teio.uma_sex_title}的滋味。不错，这是生来待人贪求的生物！那令人耽溺于其中的魅惑勾出了 ${
             me.name
           } 的情欲。`,
         );
@@ -232,13 +232,13 @@ module.exports = class extends Edu3UntilSchoolAtrium {
             teio.name
           }在颤抖。不加理会，${
             me.name
-          } 继续着已经开始的动作——伸出舌头打开${teio.get_teen_sex_title()}的唇，而后侵入。`,
+          } 继续着已经开始的动作——伸出舌头打开${teio.teen_sex_title}的唇，而后侵入。`,
         );
         await era.printAndWait(
-          `从光滑的牙齿舔至富有弹力的齿龈。舌头卷起${teio.get_teen_sex_title()}的上唇，舔舐其内侧。`,
+          `从光滑的牙齿舔至富有弹力的齿龈。舌头卷起${teio.teen_sex_title}的上唇，舔舐其内侧。`,
         );
         await era.printAndWait(
-          `很难说这是对待${teio.get_teen_sex_title()}的正确做法。但是这么做的冲动难以抑制。`,
+          `很难说这是对待${teio.teen_sex_title}的正确做法。但是这么做的冲动难以抑制。`,
         );
         await era.printAndWait(
           `${teio.name}一定是吓坏了吧，但${teio.sex}很顺从。既不反抗，也不躲闪，温顺地把身体交给 ${me.name}。`,
@@ -249,20 +249,20 @@ module.exports = class extends Edu3UntilSchoolAtrium {
         );
         await era.printAndWait('血液在沸腾。大脑失去了思考的功能。');
         await era.printAndWait(
-          `${teio.get_teen_sex_title()}薄薄的舌头束手无策地被玩弄着。眼眸因为过度的暴虐而噙着泪珠——水珠滴落到了紧贴的唇瓣上，传递出遭受了意料之外的粗暴对待这一事实。`,
+          `${teio.teen_sex_title}薄薄的舌头束手无策地被玩弄着。眼眸因为过度的暴虐而噙着泪珠——水珠滴落到了紧贴的唇瓣上，传递出遭受了意料之外的粗暴对待这一事实。`,
         );
         era.println();
 
         await era.printAndWait('——无比甘美。');
         await era.printAndWait(`${me.name} 内心深处发出了满足的咆哮声。`);
-        await era.printAndWait(`不过是一匹${teio.get_sex_slave_title()}而已。`);
+        await era.printAndWait(`不过是一匹${teio.sex_slave_title}而已。`);
         await era.printAndWait(
           `此念一出，${me.name} 原本就所剩无几的「师长风度」更是不知所踪。`,
         );
         await era.printAndWait(
           `嘴唇随着一定节奏吸吮着，啜饮着肉与肉的窄缝之间涌出的液体。阵阵淫靡之音响起。浑身脱力，被 ${
             me.name
-          } 半托半抱在臂弯中的${teio.get_teen_sex_title()}，身体一下子变得火热——大概是害羞的缘故吧。`,
+          } 半托半抱在臂弯中的${teio.teen_sex_title}，身体一下子变得火热——大概是害羞的缘故吧。`,
         );
         await era.printAndWait(`这更加勾起了 ${me.name} 的情欲。`);
         await era.printAndWait(
@@ -271,7 +271,7 @@ module.exports = class extends Edu3UntilSchoolAtrium {
         await era.printAndWait(
           `${
             me.name
-          } 缠绕着${teio.get_teen_sex_title()}的舌头，把它虏进自己的口中。轻咬，封住猎物的动作。`,
+          } 缠绕着${teio.teen_sex_title}的舌头，把它虏进自己的口中。轻咬，封住猎物的动作。`,
         );
         await era.printAndWait(
           `要怎样对待我。${teio.sex}蜷缩着僵硬身体向 ${me.name} 投来无声的疑问。`,
@@ -287,7 +287,7 @@ module.exports = class extends Edu3UntilSchoolAtrium {
         era.println();
 
         await era.printAndWait(
-          `发觉连这出秘地都惨遭掠夺，${teio.get_teen_sex_title()}心慌意乱。${
+          `发觉连这出秘地都惨遭掠夺，${teio.teen_sex_title}心慌意乱。${
             teio.sex
           }束手无措，下意识想要挣脱出去，但 ${
             me.name
@@ -304,7 +304,7 @@ module.exports = class extends Edu3UntilSchoolAtrium {
         era.println();
 
         await era.printAndWait(
-          `内心的声音响起，如此强制性地征服一个${teio.get_uma_sex_title()}让 ${
+          `内心的声音响起，如此强制性地征服一个${teio.uma_sex_title}让 ${
             me.name
           } 如痴如醉。${
             me.name
@@ -321,7 +321,7 @@ module.exports = class extends Edu3UntilSchoolAtrium {
         );
         await era.printAndWait('不去理睬。');
         await era.printAndWait(
-          `突然间，${teio.get_teen_sex_title()}战栗不已。肌肤顿时有如发烧症状般灼热。`,
+          `突然间，${teio.teen_sex_title}战栗不已。肌肤顿时有如发烧症状般灼热。`,
         );
         await era.printAndWait(`一切都是在 ${me.name} 手中被强行挑起的反应。`);
         await era.printAndWait(`……达到高潮了吧。`);
@@ -335,16 +335,16 @@ module.exports = class extends Edu3UntilSchoolAtrium {
         await era.printAndWait(
           `${teio.sex}说过希望 ${me.name} 这么做。${
             me.name
-          } 现在做的，并非满足自己的性欲或者发泄自己的情绪，只是顺从${teio.get_teen_sex_title()}的心意而已。`,
+          } 现在做的，并非满足自己的性欲或者发泄自己的情绪，只是顺从${teio.teen_sex_title}的心意而已。`,
         );
         await era.printAndWait('既如此，就接着到下个环节吧。');
         await era.printAndWait(
-          `${teio.get_teen_sex_title()}的视线涣散而无法集中，${me.name} 在${
+          `${teio.teen_sex_title}的视线涣散而无法集中，${me.name} 在${
             teio.sex
           }的注视下，把双手伸向${teio.sex}的衣物。`,
         );
         await era.printAndWait(
-          `${teio.get_teen_sex_title()}的身体已经足够灼热，仿佛往日时光。`,
+          `${teio.teen_sex_title}的身体已经足够灼热，仿佛往日时光。`,
         );
         await me.say_and_wait(`${teio.name}——你果然是这样的女人！`, true);
         await era.printAndWait(
@@ -354,10 +354,10 @@ module.exports = class extends Edu3UntilSchoolAtrium {
         await teio.say_and_wait('啊啊……');
         era.println();
         await era.printAndWait(
-          `又受到一番小小的掠夺，${teio.get_teen_sex_title()}似梦非梦地呻吟着。`,
+          `又受到一番小小的掠夺，${teio.teen_sex_title}似梦非梦地呻吟着。`,
         );
         await era.printAndWait(
-          `平日那么骄傲固执，在赛场上飞扬的马儿——只不过是这样的${teio.get_phy_sex_title()}罢了！`,
+          `平日那么骄傲固执，在赛场上飞扬的马儿——只不过是这样的${teio.phy_sex_title}罢了！`,
         );
         await era.printAndWait(
           `让 ${me.name} 吃了苦头的小东西，如今作为甜美细嫩的祭品羔羊摆在 ${me.name} 面前了！`,
@@ -372,9 +372,9 @@ module.exports = class extends Edu3UntilSchoolAtrium {
           '掌心覆于其上，轻轻挑弄。用手指肚抚上粉色的突起。',
         );
         await era.printAndWait(
-          `${teio.get_teen_sex_title()}似乎焦躁难耐，扭动起身体。这绝对在引诱 ${
+          `${teio.teen_sex_title}似乎焦躁难耐，扭动起身体。这绝对在引诱 ${
             me.name
-          }。${me.name} 想着，避开了${teio.get_teen_sex_title()}的伤患处，蹭了蹭${
+          }。${me.name} 想着，避开了${teio.teen_sex_title}的伤患处，蹭了蹭${
             teio.sex
           }尚未发育完全的翘臀，转而对其他部位上下其手，手中加力。毫无预警，开始残忍地蹂躏起尚且僵硬的小丘。`,
         );
@@ -388,7 +388,7 @@ module.exports = class extends Edu3UntilSchoolAtrium {
           `${me.name} 是明知，而故犯。正是渴求着这份悲痛，才这么做的。`,
         );
         await era.printAndWait(
-          `所以才继续。彻头彻尾地粗暴揉捏着${teio.get_teen_sex_title()}的第二私密部位。情欲高涨，胸部其上宛如附上了一层油亮，结合${
+          `所以才继续。彻头彻尾地粗暴揉捏着${teio.teen_sex_title}的第二私密部位。情欲高涨，胸部其上宛如附上了一层油亮，结合${
             teio.sex
           }恰到好处的尺寸，如同火候刚好的荷包蛋般诱人。`,
         );
@@ -399,7 +399,7 @@ module.exports = class extends Edu3UntilSchoolAtrium {
           `${teio.name}楚楚可怜地看着 ${me.name}。瞬时，血脉贲张。`,
         );
         await era.printAndWait(
-          `阴暗面在面对这个毫无抵抗的${teio.get_teen_sex_title()}时极致发挥。`,
+          `阴暗面在面对这个毫无抵抗的${teio.teen_sex_title}时极致发挥。`,
         );
         await era.printAndWait(
           `唔，一定是${teio.sex}刻意在撩动着 ${me.name} 的情热。真是头完美的小母兽。`,
@@ -436,7 +436,7 @@ module.exports = class extends Edu3UntilSchoolAtrium {
         await era.printAndWait(
           `在 ${
             me.name
-          } 不停的道歉和保证声中，小${teio.get_uma_sex_title()}总算是接受了 ${
+          } 不停的道歉和保证声中，小${teio.uma_sex_title}总算是接受了 ${
             me.name
           } 的歉意，躺在床上睡觉了。`,
         );
@@ -461,7 +461,7 @@ module.exports = class extends Edu3UntilSchoolAtrium {
       await era.printAndWait(
         `稍前面一点的是 ${me.name} 的担当，东海帝王。${teio.sex}捏着 ${
           me.name
-        } 的手，用一个对于${teio.get_uma_sex_title()}来说稍慢，但又比较锻炼 ${
+        } 的手，用一个对于${teio.uma_sex_title}来说稍慢，但又比较锻炼 ${
           me.name
         } 的速度走着。${me.get_couple_title()} 的掌心贴在一起，偶尔轻摇。天边太阳的余晖落到额前，${
           me.name
@@ -493,7 +493,7 @@ module.exports = class extends Edu3UntilSchoolAtrium {
       era.println();
 
       await era.printAndWait(
-        `面对残阳，${teio.get_teen_sex_title()}张开双臂，舒展身体，缓缓道来。光线投射下来，将${
+        `面对残阳，${teio.teen_sex_title}张开双臂，舒展身体，缓缓道来。光线投射下来，将${
           teio.sex
         }的阴影打在 ${me.name} 的脸上。${me.name} 沉默，脑海里浮现出过往的种种，${
           teio.sex
@@ -524,7 +524,7 @@ module.exports = class extends Edu3UntilSchoolAtrium {
       await era.input();
 
       await era.printAndWait(
-        `${teio.get_uma_sex_title()}没有立刻回应 ${
+        `${teio.uma_sex_title}没有立刻回应 ${
           me.name
         }，而是迎着夕阳低下头，而后轻摆着马尾，回眸一笑。`,
       );

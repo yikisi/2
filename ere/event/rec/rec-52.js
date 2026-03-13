@@ -41,7 +41,7 @@ module.exports = class extends CustomizedRecruit {
         '既然是您的选择，那就重新开始吧，期望您能在新的故事里得到答案。',
       );
       await in_urara.say_as_unknown_and_wait(
-        `与过往一致，这是一位渺小到不能再渺小的小${urara.get_uma_sex_title()}的故事——`,
+        `与过往一致，这是一位渺小到不能再渺小的小${urara.uma_sex_title}的故事——`,
       );
     } else if (life_marks.rec) {
       await in_urara.say_as_unknown_and_wait('……');
@@ -49,7 +49,7 @@ module.exports = class extends CustomizedRecruit {
         '这次的您做好准备了吗？希望这次您真有打算将故事带到结尾……我会期待着的。',
       );
       await in_urara.say_as_unknown_and_wait(
-        `那么，这是一位渺小到不能再渺小的小${urara.get_uma_sex_title()}的故事——`,
+        `那么，这是一位渺小到不能再渺小的小${urara.uma_sex_title}的故事——`,
       );
     } else {
       await in_urara.say_as_unknown_and_wait('……');
@@ -60,7 +60,7 @@ module.exports = class extends CustomizedRecruit {
         '这个故事或许很普通，或许有些长，但是既然有所选择，那就听到底吧。',
       );
       await in_urara.say_as_unknown_and_wait(
-        `这是一位渺小到不能再渺小的小${urara.get_uma_sex_title()}的故事——`,
+        `这是一位渺小到不能再渺小的小${urara.uma_sex_title}的故事——`,
       );
     }
     life_marks.rec = 1;
@@ -92,7 +92,7 @@ module.exports = class extends CustomizedRecruit {
       `尽管曾尝试过努力说服自己，但要使自己完全的心平气和也是不能的。`,
     );
     await era.printAndWait(
-      `若是能够轻易接受自己对${urara.get_uma_sex_title()}的理解被比下去的话，是没办法做好训练员的，而 ${
+      `若是能够轻易接受自己对${urara.uma_sex_title}的理解被比下去的话，是没办法做好训练员的，而 ${
         me.name
       } 至少还存在着想要继续精进的想法。`,
     );
@@ -114,7 +114,7 @@ module.exports = class extends CustomizedRecruit {
     await era.printAndWait(
       `随后在 ${
         me.name
-      } 身边环绕传开的，则是一股由天真烂漫的${urara.get_teen_sex_title()}所散发出的香气。`,
+      } 身边环绕传开的，则是一股由天真烂漫的${urara.teen_sex_title}所散发出的香气。`,
     );
     await era.printAndWait(
       `像是樱花的香气？别开玩笑了，淡薄如水的樱花怎会散发出如此令人安心的香气？`,
@@ -129,7 +129,7 @@ module.exports = class extends CustomizedRecruit {
       `不过在意识消失前，${me.name} 又切实地感受到有谁靠住了 ${me.name} 倒下的身体，并将 ${me.name} 温柔地抱在了怀中。`,
     );
     await era.printAndWait(
-      `接触的瞬间，${urara.get_teen_sex_title()}柔软的香气包裹住了 ${
+      `接触的瞬间，${urara.teen_sex_title}柔软的香气包裹住了 ${
         me.name
       } 的身心，似乎还夹带着运动结束后在体操服上留下的体香。`,
     );
@@ -139,7 +139,7 @@ module.exports = class extends CustomizedRecruit {
     await era.printAndWait(
       `身体在难以言说的安心感中到达了极限，${
         me.name
-      } 怀着对这位前来搭救的${urara.get_uma_sex_title()}的感激放飞了自己的意识。`,
+      } 怀着对这位前来搭救的${urara.uma_sex_title}的感激放飞了自己的意识。`,
     );
 
     era.drawLine();
@@ -167,7 +167,7 @@ module.exports = class extends CustomizedRecruit {
         me.name
       } 共枕的，正是在晕倒时将 ${
         me.name
-      } 搬到医务室的小${urara.get_uma_sex_title()}。`,
+      } 搬到医务室的小${urara.uma_sex_title}。`,
     );
     era.println();
 
@@ -177,7 +177,7 @@ module.exports = class extends CustomizedRecruit {
     era.printButton(
       `起床向${urara.sex}道谢。${
         me.name
-      } 打算睁开眼睛，先观察${urara.get_teen_sex_title()}的样子。`,
+      } 打算睁开眼睛，先观察${urara.teen_sex_title}的样子。`,
       1,
     );
     era.printButton(
@@ -195,7 +195,7 @@ module.exports = class extends CustomizedRecruit {
         `不论是熟睡中的柔软又有健康肉感的身体，还是仿佛朴素花香般的体味都令 ${me.name} 心旷神怡。`,
       );
       await era.printAndWait(
-        `${urara.get_teen_sex_title()}近在咫尺的吐息纯真地挑逗着 ${
+        `${urara.teen_sex_title}近在咫尺的吐息纯真地挑逗着 ${
           me.name
         } 的脖颈，这份丢失距离感的接触让 ${me.name} 的意识逐渐深陷其中。`,
       );
@@ -206,21 +206,19 @@ module.exports = class extends CustomizedRecruit {
         `只是此刻 ${me.name} 的大脑却因精神需求，正强迫着 ${me.name} 的身体进行『更进一步』的指示。`,
       );
       await era.printAndWait(
-        `在恍惚中，${
-          me.name
-        } 的手指攀上了小${urara.get_uma_sex_title()}的身体。`,
+        `在恍惚中，${me.name} 的手指攀上了小${urara.uma_sex_title}的身体。`,
       );
       await era.printAndWait(
         `从指尖接触到掌心的抚摸，${me.name} 用触觉测量着${urara.sex}意外娇小的轮廓与含苞待放的曲线；`,
       );
       await era.printAndWait(
-        `一只手抚过${urara.get_teen_sex_title()}身前的山丘，剐蹭着${urara.get_teen_sex_title()}柔软的脸蛋与嘴唇，顺着柔顺的发丝；`,
+        `一只手抚过${urara.teen_sex_title}身前的山丘，剐蹭着${urara.teen_sex_title}柔软的脸蛋与嘴唇，顺着柔顺的发丝；`,
       );
       await era.printAndWait(
         `手指摸索着探入耳套，享受着其中小小的耳朵的柔软；`,
       );
       await era.printAndWait(
-        `另一只手则顺着柔软的后颈与脊背一路向下，滑进了${urara.get_teen_sex_title()}被毛发遮盖的尾根处；`,
+        `另一只手则顺着柔软的后颈与脊背一路向下，滑进了${urara.teen_sex_title}被毛发遮盖的尾根处；`,
       );
       await era.printAndWait(
         `而除了那敏感的根部，甚至一拐手指就能从灯笼裤尾根处的洞中深入；`,
@@ -231,7 +229,7 @@ module.exports = class extends CustomizedRecruit {
       await era.printAndWait(
         `只是就在 ${
           me.name
-        } 还想继续深入之时，沉睡中的小${urara.get_uma_sex_title()}开始抖动起耳朵和尾巴。`,
+        } 还想继续深入之时，沉睡中的小${urara.uma_sex_title}开始抖动起耳朵和尾巴。`,
       );
       await era.printAndWait(
         `随着身体的轻微颤抖从喉咙中漏出了几点可爱的喘息声，这是即将醒梦的前兆。`,
@@ -250,7 +248,7 @@ module.exports = class extends CustomizedRecruit {
       `这双清澈的眼睛先是不带一丝偏见与怀疑的观察着 ${me.name}，随后向 ${me.name} 投来了毫无恶意的笑容。`,
     );
     await era.printAndWait(
-      `甩着自己樱色的马尾与红色缎带，如孩子般天真烂漫的小${urara.get_uma_sex_title()}先 ${
+      `甩着自己樱色的马尾与红色缎带，如孩子般天真烂漫的小${urara.uma_sex_title}先 ${
         me.name
       } 一步从医务室的床上坐起来。`,
     );
@@ -270,14 +268,14 @@ module.exports = class extends CustomizedRecruit {
       '你是训练员对吧？身体怎么样？训练员真辛苦呢！但是不用勉强自己也可以哦！',
     );
     await era.printAndWait(
-      `带着可爱的笑容与没有隔阂感的关照，樱色的小小${urara.get_uma_sex_title()}毫无防备地靠向了 ${
+      `带着可爱的笑容与没有隔阂感的关照，樱色的小小${urara.uma_sex_title}毫无防备地靠向了 ${
         me.name
       }。`,
     );
     await era.printAndWait(
       `这时的 ${me.name} 才反应过来，${
         me.name
-      } 还不知道这位出手相助的${urara.get_uma_sex_title()}的名字。`,
+      } 还不知道这位出手相助的${urara.uma_sex_title}的名字。`,
     );
     era.println();
 
@@ -303,14 +301,14 @@ module.exports = class extends CustomizedRecruit {
       `${me.name} 有些疑惑的看着乌拉拉，并非怀疑${urara.sex}缺乏觉悟或疏于锻炼，而是……`,
     );
     await era.printAndWait(
-      `一目了然的，这位名叫春乌拉拉的${urara.get_uma_sex_title()}有着闪光的品质，但目前的${
+      `一目了然的，这位名叫春乌拉拉的${urara.uma_sex_title}有着闪光的品质，但目前的${
         urara.sex
       }就是不像有多能跑的样子。`,
     );
     await era.printAndWait(`至少现在的话，结果只会是竹篮打水罢了。`);
     await urara.say_and_wait(`嗯！我会拿下一着的！因为我感觉到了！所以……`);
     await era.printAndWait(
-      `小小的${urara.get_uma_sex_title()}还兴奋地想说些什么，直到无意间瞄到了墙上的挂钟。`,
+      `小小的${urara.uma_sex_title}还兴奋地想说些什么，直到无意间瞄到了墙上的挂钟。`,
     );
     await urara.say_and_wait(
       `啊！已经这个时间了！那么训练员也要注意身体哦！那么下次再见啦！`,
@@ -351,7 +349,7 @@ module.exports = class extends CustomizedRecruit {
     await era.printAndWait(
       `周围的训练员也理所当然的不会长时间将目光放在${
         urara.sex
-      }身上，即使有偶尔的几道视线重新扫过，也会很快移动到别的${urara.get_uma_sex_title()}身上。`,
+      }身上，即使有偶尔的几道视线重新扫过，也会很快移动到别的${urara.uma_sex_title}身上。`,
     );
     await era.printAndWait(
       `但是，原本也只是想对${urara.sex}投以简短关注的 ${me.name}，现在却被只有 ${me.name} 所侧目的${urara.sex}吸引了。`,
@@ -400,7 +398,7 @@ module.exports = class extends CustomizedRecruit {
     await era.printAndWait(
       `${
         urara.sex
-      }并非在追赶着前方的哪一位，也并不是再拼了命的要超过谁，名为『春乌拉拉』的${urara.get_uma_sex_title()}只是在尽全力地享受着奔跑，仅此而已。`,
+      }并非在追赶着前方的哪一位，也并不是再拼了命的要超过谁，名为『春乌拉拉』的${urara.uma_sex_title}只是在尽全力地享受着奔跑，仅此而已。`,
     );
     await era.printAndWait(
       `灵魂为之鼓动的理由逐渐明晰，尽管依旧跑在末尾，想为${urara.sex}加油打气的心情却逐渐充满了 ${me.name} 的内心。`,
@@ -420,7 +418,7 @@ module.exports = class extends CustomizedRecruit {
     await era.printAndWait(
       `但 ${me.name} 却惊讶地发现，随着 ${
         me.name
-      } 的呼唤，有更多的${urara.get_uma_sex_title()}开始声援起来，就连有些训练员们也开始为那个身影加油。`,
+      } 的呼唤，有更多的${urara.uma_sex_title}开始声援起来，就连有些训练员们也开始为那个身影加油。`,
     );
     await era.printAndWait(
       `小小的水花逐渐扩散，最后的距离在呼喊声中不断减少。起始的 ${me.name} 身处这片呐喊的浪潮之中，触动随之涌上心头——`,
@@ -429,7 +427,7 @@ module.exports = class extends CustomizedRecruit {
       `那道竭尽全力的樱粉色身上，不仅有因职业条件契合而选择的「${me.name}」，更有那个因热爱与勇气选择成为训练员的「${me.name}」。`,
     );
     await era.printAndWait(
-      `最初的那个人仅是为了金钱或名誉，或是只为了训练出强大的${urara.get_uma_sex_title()}作为成绩才来到这里的吗？`,
+      `最初的那个人仅是为了金钱或名誉，或是只为了训练出强大的${urara.uma_sex_title}作为成绩才来到这里的吗？`,
     );
     await era.printAndWait(`不只是这样的吧？`);
     era.drawLine();
@@ -451,17 +449,17 @@ module.exports = class extends CustomizedRecruit {
     era.drawLine();
 
     await era.printAndWait(
-      `随着结束奔跑的参赛者们走出赛场，同行们为了能够招募到跑在最前端的${urara.get_uma_sex_title()}很快便散去了。`,
+      `随着结束奔跑的参赛者们走出赛场，同行们为了能够招募到跑在最前端的${urara.uma_sex_title}很快便散去了。`,
     );
     await era.printAndWait(
-      `聚集的${urara.get_uma_sex_title()}们也为了准备下一轮或许就是自己的比赛而奔走，只剩下还未离去的 ${
+      `聚集的${urara.uma_sex_title}们也为了准备下一轮或许就是自己的比赛而奔走，只剩下还未离去的 ${
         me.name
       } 与乌拉拉相互对视着。`,
     );
     await era.printAndWait(
       `在冲线前就因最初的呐喊声而认出了 ${
         me.name
-      } 的小${urara.get_uma_sex_title()}，此时此刻正带着无暇的笑容招着手向 ${
+      } 的小${urara.uma_sex_title}，此时此刻正带着无暇的笑容招着手向 ${
         me.name
       } 跑来。`,
     );
@@ -470,7 +468,7 @@ module.exports = class extends CustomizedRecruit {
     await era.printAndWait(
       `来到了 ${
         me.name
-      } 身边的小${urara.get_uma_sex_title()}在开心之余似乎也有些惊奇。`,
+      } 身边的小${urara.uma_sex_title}在开心之余似乎也有些惊奇。`,
     );
     await urara.say_and_wait(
       `诶嘿嘿～又输了呢！不过我也能够跑到最后了，奔跑真的很开心呢！所以训练员，下次也……`,
@@ -507,7 +505,7 @@ module.exports = class extends CustomizedRecruit {
     await era.printAndWait(
       `听到 ${
         me.name
-      } 的邀请，小小的${urara.get_uma_sex_title()}瞪大了湿润的眼睛，樱瞳也因突如其来的邀请惊得微微颤抖。`,
+      } 的邀请，小小的${urara.uma_sex_title}瞪大了湿润的眼睛，樱瞳也因突如其来的邀请惊得微微颤抖。`,
     );
     await era.printAndWait(
       `不过即使随后流露出了一点纯真的羞涩，乌拉拉还是清晰的回应了 ${me.name} 的请求。`,
@@ -521,7 +519,7 @@ module.exports = class extends CustomizedRecruit {
     await era.printAndWait(
       `学着 ${
         me.name
-      } 的样子，乌拉拉也向前一步。带着熟悉又纯粹的笑容，小小的${urara.get_uma_sex_title()}拉住了 ${
+      } 的样子，乌拉拉也向前一步。带着熟悉又纯粹的笑容，小小的${urara.uma_sex_title}拉住了 ${
         me.name
       } 的双手。`,
     );

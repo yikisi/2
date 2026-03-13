@@ -111,7 +111,7 @@ out_church_handlers[47 + 1] = async (ruby, me, r_call_m, m_call_r, flags) => {
       ]);
       await ruby.say_and_wait([r_call_m, '，请指导我。']);
       await era.printAndWait([
-        ruby.get_uma_sex_title(),
+        ruby.uma_sex_title,
         '天生的不服输精神真是哪里都看得到啊。',
       ]);
       await era.printAndWait([
@@ -241,7 +241,7 @@ out_church_handlers[95 + 1] = async (ruby, me, r_call_m, m_call_r, flags) => {
       ]);
       await era.printAndWait([
         '头上别的山茶花很漂亮，但也不如',
-        ruby.get_teen_sex_title(),
+        ruby.teen_sex_title,
         '自身动人。',
       ]);
       await era.printAndWait('衣服上的是……牵牛花啊。');
@@ -529,7 +529,7 @@ module.exports = class extends Edu85CrazyFanEnd {
         '车站前，',
         me.get_colored_name(),
         ' 朝着私服打扮的',
-        ruby.get_teen_sex_title(),
+        ruby.teen_sex_title,
         '微笑地打招呼。',
       ]);
       await era.printAndWait([
@@ -565,7 +565,7 @@ module.exports = class extends Edu85CrazyFanEnd {
       await era.printAndWait([
         me.get_colored_name(),
         ' 有点受不了那种「如同看富佬包养未成年',
-        ruby.get_teen_sex_title(),
+        ruby.teen_sex_title,
         '」的视线，好在 ',
         ruby.get_colored_name(),
         ' 拉着 ',

@@ -19,14 +19,14 @@ module.exports = (handlers) => {
     );
     await in_urara.say_as_unknown_and_wait([
       '您又是怎么想的？不过带领',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '们超越命运，也是作为训练员',
       me.get_adult_sex_title(),
       '（您）的使命吧。',
     ]);
     await in_urara.say_as_unknown_and_wait([
       '但是，那些无法超越命运的',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '们，又能像',
       urara.sex,
       '的愿望那样一起找到幸福吗？',
@@ -43,7 +43,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '不过这一次，或许是被周围的气氛所感染，虽然依旧没多紧张，但小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '却并没有往常的笑脸。',
     ]);
     await urara.say_and_wait([
@@ -59,7 +59,7 @@ module.exports = (handlers) => {
       '顺着担当的视线，',
       me.get_colored_name(),
       ' 发现了一位似乎在训练场上有过几面之缘的',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '。',
     ]);
     await era.printAndWait([
@@ -107,7 +107,7 @@ module.exports = (handlers) => {
       '因为',
       urara.sex,
       '是个很要强的',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '，而且一直把G1作为目标，所以这次的比赛',
       urara.sex,
       '一定非常重视。',
@@ -192,14 +192,14 @@ module.exports = (handlers) => {
       '在慢放的时间中，',
       me.get_colored_name(),
       ' 看向那双支撑',
-      urara.get_teen_sex_title(),
+      urara.teen_sex_title,
       '接近希望的腿，但随后就像提前看到了梦想破碎般皱起眉头。',
     ]);
     await era.printAndWait([
       '该怎么形容呢……说得不那么难听的话，',
       urara.sex,
       '作为一名赛',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '的「保质期」可能已经快到头了。',
     ]);
     await era.printAndWait([
@@ -538,7 +538,7 @@ module.exports = (handlers) => {
     await me.say_and_wait(
       [
         '因为',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '们已经踏入闸门，此时的训练员也只能目送自己的担当，祈祷',
         urara.sex,
         '能挺过这次难关。',

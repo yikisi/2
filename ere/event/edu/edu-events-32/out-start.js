@@ -186,7 +186,7 @@ module.exports = async (tachyon, me, callname, hook, event_object) => {
     ]);
     await tachyon.say_and_wait([
       '或者说不知道赛',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       ' ',
       tachyon.get_colored_name(),
       ' 是谁',
@@ -203,19 +203,16 @@ module.exports = async (tachyon, me, callname, hook, event_object) => {
       '认不出 ',
       tachyon.get_colored_name(),
       ' 或许可以理解，毕竟不是每个人都对',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '的比赛热衷到记得每一名选手的模样',
     ]);
     await era.printAndWait([
       '但不认识赛',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '的 ',
       tachyon.get_colored_name(),
       ...(check_aim_race(RaceHistory.get(32).get(), race_enum.prix_lat, 2, 1)
-        ? [
-            '……不认识拿下了世界最高峰，凯旋门赏冠军的',
-            tachyon.get_uma_sex_title(),
-          ]
+        ? ['……不认识拿下了世界最高峰，凯旋门赏冠军的', tachyon.uma_sex_title]
         : []),
       '，在这个世界上确实稀奇',
     ]);
@@ -239,7 +236,7 @@ module.exports = async (tachyon, me, callname, hook, event_object) => {
       ' 震惊了一下，但 ',
       tachyon.get_colored_name(),
       ' 也不是那种好名利的',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '，名声这种东西更可以说是',
       tachyon.sex,
       '最不在乎的东西之一了',
@@ -283,7 +280,7 @@ module.exports = async (tachyon, me, callname, hook, event_object) => {
         '，认识 ',
         tachyon.get_colored_name(),
         ' 这名',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         '的人都难以想像的',
       ]);
       await era.printAndWait([
@@ -348,7 +345,7 @@ module.exports = async (tachyon, me, callname, hook, event_object) => {
       era.println();
       await tachyon.say_and_wait([
         '如此广大，宁静，祥和的地方……应该也容得下一名凯旋门赏',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         '和',
         tachyon.sex,
         '的训练员吧',
@@ -357,7 +354,7 @@ module.exports = async (tachyon, me, callname, hook, event_object) => {
         '像这样……无人认识，安静平和的生活……也是一种可能性吗？',
       );
       era.println();
-      await era.printAndWait([tachyon.get_uma_sex_title(), '的可能性']);
+      await era.printAndWait([tachyon.uma_sex_title, '的可能性']);
       await era.printAndWait([
         '这是 ',
         tachyon.get_colored_name(),
@@ -365,12 +362,12 @@ module.exports = async (tachyon, me, callname, hook, event_object) => {
       ]);
       await era.printAndWait([
         '但',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         '是无法一辈子奔跑的',
       ]);
       await era.printAndWait([
         '就算是赛',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         '，也终会走上离开赛场，离开对速度的追求的道路',
       ]);
       era.println();
@@ -524,7 +521,7 @@ module.exports = async (tachyon, me, callname, hook, event_object) => {
     );
     await era.printAndWait([
       '难不成……其实一开始就是有人安排过的，只是借这个机会提供给',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '和训练员？',
     ]);
     era.println();
@@ -537,7 +534,7 @@ module.exports = async (tachyon, me, callname, hook, event_object) => {
     era.println();
     await era.printAndWait([
       '忽然，负责',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '在门外的呼喊将 ',
       me.get_colored_name(),
       ' 的神智唤回',
@@ -633,13 +630,13 @@ module.exports = async (tachyon, me, callname, hook, event_object) => {
     ]);
     await era.printAndWait([
       '此时不是什么天才',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '，也不是疯狂科学家',
     ]);
     await era.printAndWait([
       tachyon.sex,
       '也不过是一名普通的',
-      tachyon.get_teen_sex_title(),
+      tachyon.teen_sex_title,
       '而已',
     ]);
     era.println();

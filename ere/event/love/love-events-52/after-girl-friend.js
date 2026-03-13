@@ -78,7 +78,7 @@ module.exports = class extends Love52UntilGirlFriend {
       ]);
       await urara.print_and_wait([
         '小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '比人类略高的体温伴随着象征爱意的拥抱，将熟悉的温暖注入了 ',
         me.get_colored_name(),
         ' 的身体。',
@@ -99,7 +99,7 @@ module.exports = class extends Love52UntilGirlFriend {
       ]);
       await urara.print_and_wait([
         '小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '只是在劝说着自己稍微鼓起勇气，继续贴近这位令',
         urara.sex,
         '感到些许不安的仰慕者。',
@@ -124,7 +124,7 @@ module.exports = class extends Love52UntilGirlFriend {
     await urara.say_and_wait('啾……');
     await urara.print_and_wait([
       '带着热恋中纯真',
-      urara.get_teen_sex_title(),
+      urara.teen_sex_title,
       '的羞涩与勇气，来自担当的轻吻落在了将醒之际的 ',
       me.get_colored_name(),
       ' 的额头之上。',
@@ -151,7 +151,7 @@ module.exports = class extends Love52UntilGirlFriend {
       '被 ',
       me.get_colored_name(),
       ' 发现的乌拉拉，就像恶作剧的孩子般露出了被揭穿的羞涩笑意，此刻爬上',
-      urara.get_teen_sex_title(),
+      urara.teen_sex_title,
       '脸颊的微润娇羞也比任何时候都更加惹人怜爱。',
     ]);
     await urara.say_and_wait(
@@ -184,7 +184,7 @@ module.exports = class extends Love52UntilGirlFriend {
 
     await era.printAndWait([
       '主动牵起',
-      urara.get_teen_sex_title(),
+      urara.teen_sex_title,
       '的手，直视着那对湿润的樱瞳，',
       me.get_colored_name(),
       ' 也不假思索的对乌拉拉给予了「大人的承诺」。',
@@ -205,12 +205,12 @@ module.exports = class extends Love52UntilGirlFriend {
         '只是，在训练员',
         me.get_adult_sex_title(),
         '移开视线的瞬间，小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '纯洁的笑容中闪过了一丝难以察觉的暗色。',
       ]);
       await era.printAndWait([
         '凝视着最喜欢的人的侧脸，',
-        urara.get_teen_sex_title(),
+        urara.teen_sex_title,
         '的脑海中却在最不合时宜的时刻浮现出了最不合时宜的景象。',
       ]);
       await era.printAndWait([
@@ -339,7 +339,7 @@ module.exports = class extends Love52UntilGirlFriend {
       ]);
       await era.printAndWait([
         '但并不美丽，也总有一天会用根茎啃食',
-        urara.get_teen_sex_title(),
+        urara.teen_sex_title,
         '心灵的黑色种子，已然在乌拉拉的内心中埋下了。',
       ]);
       await urara.say_and_wait('对不起……但是乌拉拉已经……');

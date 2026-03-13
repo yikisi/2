@@ -25,7 +25,7 @@ module.exports = class extends EroNormalSm {
       await defender.say_and_wait('想被辱骂？');
       await defender.print_and_wait([
         '从圣洁的',
-        attacker.get_uma_sex_title(),
+        attacker.uma_sex_title,
         '巫女那里得到了这样奇怪的请求。',
       ]);
       await attacker.say_and_wait([
@@ -35,7 +35,7 @@ module.exports = class extends EroNormalSm {
       ]);
       await defender.print_and_wait([
         '看来自家担当果然是抖M呢，于是淫荡巫女，肉便器，飞机杯占卜师之类不痛不痒的侮辱话语骂向了面前的栗毛',
-        attacker.get_uma_sex_title(),
+        attacker.uma_sex_title,
         '。',
       ]);
       await defender.print_and_wait([
@@ -49,11 +49,7 @@ module.exports = class extends EroNormalSm {
       ]);
       await attacker.say_and_wait(['这种感觉，不想，不想停止……'], true);
       await attacker.say_and_wait(
-        [
-          '哈，自己，自己的确是个无可救药的，抖M',
-          attacker.get_uma_sex_title(),
-          '……',
-        ],
+        ['哈，自己，自己的确是个无可救药的，抖M', attacker.uma_sex_title, '……'],
         true,
       );
     }

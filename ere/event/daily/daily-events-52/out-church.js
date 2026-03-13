@@ -25,7 +25,7 @@ module.exports = async (hook) => {
     '，也为了在下次比赛前讨个彩头，',
     me.get_colored_name(),
     ' 决定带',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '一起去神社看看。',
   ]);
   await era.printAndWait('毕竟也没有要紧的事，再者来都来了。');
@@ -36,7 +36,7 @@ module.exports = async (hook) => {
   ]);
   await era.printAndWait([
     '一般来说这座小神社总是热闹的，除了周围的居民与会在这里玩耍小孩子，还会有借着长阶梯进行训练的',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '们。',
   ]);
   await era.printAndWait(
@@ -60,7 +60,7 @@ module.exports = async (hook) => {
       ' 点头认同了 ',
       urara.get_colored_name(),
       ' 的看法，心情也在同',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '相伴中逐渐明快起来。',
     ]);
   } else {
@@ -168,7 +168,7 @@ module.exports = async (hook) => {
     era.drawLine();
     await in_urara.say_as_unknown_and_wait([
       '从前有个被称为塞翁的人，遇上了一位',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '——',
     ]);
     await in_urara.say_as_unknown_and_wait('咳，不对，错了——');
@@ -237,12 +237,12 @@ module.exports = async (hook) => {
       ]);
       await era.printAndWait([
         '此刻的',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '已经来到了阶梯的顶层前，而阶梯中的某块石板正反射着镜面般的光。',
       ]);
       await era.printAndWait([
         '随后，小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '便在有些茫然的表情中脚下一滑……',
       ]);
 
@@ -302,7 +302,7 @@ module.exports = async (hook) => {
         ' 身后的 ',
         urara.get_colored_name(),
         ' 以最快速度跑了起来，但体型太小的',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '还是没能及时拽住 ',
         me.get_colored_name(),
         ' 偏移的身体。',
@@ -316,7 +316,7 @@ module.exports = async (hook) => {
         '于是随着脚底一空，',
         me.get_colored_name(),
         ' 就像训练失败的',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '那般，在 ',
         urara.get_colored_name(),
         ' 惊慌失措的呼声中噼里啪啦的滑下了神社那超长的阶梯……',

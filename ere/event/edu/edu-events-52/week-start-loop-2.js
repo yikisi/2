@@ -315,7 +315,7 @@ module.exports = async (urara, me, in_urara, callname) => {
     '随后在视野变为灰白的重压中强行替代了 ',
     me.get_colored_name(),
     ' 面前的小',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '，「',
     urara.sex,
     '」愤怒地拍开了 ',
@@ -359,7 +359,7 @@ module.exports = async (urara, me, in_urara, callname) => {
     '在忍无可忍后的爆发，上前一步用力抓住 ',
     me.get_colored_name(),
     ' 的衣服的',
-    urara.get_teen_sex_title(),
+    urara.teen_sex_title,
     '在哭泣中宣泄着自己压在心底的厌世情结。',
   ]);
   await era.printAndWait(
@@ -428,7 +428,7 @@ module.exports = async (urara, me, in_urara, callname) => {
     '暴躁地打断了 ',
     me.get_colored_name(),
     ' 的话，',
-    urara.get_teen_sex_title(),
+    urara.teen_sex_title,
     '在泪水中强挤出的笑容宛如一只破损的洋娃娃般令人心痛。',
   ]);
   await era.printAndWait([
@@ -460,14 +460,14 @@ module.exports = async (urara, me, in_urara, callname) => {
     '被自己的泪水所噎住了话语，无力地放开了 ',
     me.get_colored_name(),
     ' 的衣服，',
-    urara.get_teen_sex_title(),
+    urara.teen_sex_title,
     '自暴自弃的重新跌坐回了身后的长椅上。',
   ]);
   await era.printAndWait([
     '别说是吓退 ',
     me.get_colored_name(),
     ' 了，现在的小',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '就像快要倒下的 ',
     urara.get_colored_name(),
     ' 那样，马上就要被自己的扭曲所压倒了。',
@@ -546,7 +546,7 @@ module.exports = async (urara, me, in_urara, callname) => {
   );
   await era.printAndWait([
     '小小的',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '攥紧了手心，摇曳的樱瞳中倒映着另一个如同',
     urara.sex_code - 1 ? '姐姐' : '哥哥',
     '般的自己。',

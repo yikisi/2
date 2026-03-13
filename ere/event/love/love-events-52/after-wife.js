@@ -51,7 +51,7 @@ module.exports = class extends Love52UntilWife {
       '而等 ',
       me.get_colored_name(),
       ' 刚想出声询问是不是发生了什么，却被静静微笑的小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '用本格化的力量抓住了衣领。',
     ]);
     await era.printAndWait([
@@ -114,7 +114,7 @@ module.exports = class extends Love52UntilWife {
       ]);
       await era.printAndWait([
         '思考能力在小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '绵软的攻势中瓦解了，逐渐被吸干力量的身体再也无力与自己的担当抗衡。',
       ]);
       await era.printAndWait(
@@ -129,7 +129,7 @@ module.exports = class extends Love52UntilWife {
       '的气息烙印在 ',
       me.get_colored_name(),
       ' 的身上之前，小小的',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '苦恼过很久，但乌拉拉最后还是理解了。',
     ]);
     await era.printAndWait(
@@ -154,7 +154,7 @@ module.exports = class extends Love52UntilWife {
     ]);
     await era.printAndWait([
       '小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '终于从深吻中解放了自己的训练员，两人从互相紧抵的舌尖上拉出了一道恋恋不舍的丝线……',
     ]);
     await era.printAndWait([
@@ -171,7 +171,7 @@ module.exports = class extends Love52UntilWife {
     ]);
     await era.printAndWait([
       '没有一丝歉意的声音从',
-      urara.get_teen_sex_title(),
+      urara.teen_sex_title,
       '的唇边低声路过，曾经令',
       urara.sex,
       '不齿的对好友的背叛如今竟变得不痛不痒。',
@@ -267,7 +267,7 @@ module.exports = class extends Love52UntilWife {
     ]);
     await era.printAndWait([
       '伴随着',
-      urara.get_teen_sex_title(),
+      urara.teen_sex_title,
       '愈发浑浊的樱瞳，在不洁的爱意浇灌下，丑陋的种子绽放出了一朵妖艳而卑劣的花……',
     ]);
     era.set('abl:52:接吻技巧', Math.min(era.get('abl:52:接吻技巧') + 1, 5));

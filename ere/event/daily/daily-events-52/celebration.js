@@ -88,7 +88,7 @@ module.exports = async () => {
         '察觉到 ',
         callname,
         ' 的动作而准备起身的小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '，',
         me.get_colored_name(),
         ' 也适时的收回了还带有柔软触感的手指。',
@@ -112,7 +112,7 @@ module.exports = async () => {
         '因察觉到 ',
         callname,
         ' 的动作而准备起身的小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '，',
         me.get_colored_name(),
         ' 也适时的收回了还带有柔软触感的手指。',
@@ -130,7 +130,7 @@ module.exports = async () => {
     ]);
     await era.printAndWait([
       '而为了能够及时回应小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '的等待中的期待，',
       me.get_colored_name(),
       ' 也适当的加快了手指敲击键盘的节奏……',
@@ -141,7 +141,7 @@ module.exports = async () => {
   );
   await era.printAndWait([
     '所以，就算是为了感谢小',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '一直以来的努力，今天的',
     urara.sex,
     '也值得 ',
@@ -170,7 +170,7 @@ module.exports = async () => {
       '在 ',
       me.get_colored_name(),
       ' 的肯定下兴高采烈的翻开礼盒，小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '惊喜地从盒中收到了一副崭新的粉色耳套。',
     ]);
   } else {
@@ -196,13 +196,13 @@ module.exports = async () => {
     );
     await era.printAndWait([
       '虽然借着圣诞节送并不贵重的小饰品是有些卑鄙，但伴随小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '奔跑已久的旧耳套确实已经洗褪色了。',
     ]);
   } else {
     await era.printAndWait([
       '虽然向关系没那么好的',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '赠予耳套或尾饰可能会被视为失礼之举，但 ',
       urara.get_colored_name(),
       ' 应该不会太在乎这点。',
@@ -260,7 +260,7 @@ module.exports = async () => {
   ]);
   await era.printAndWait([
     '打开手心，小',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '交到 ',
     me.get_colored_name(),
     ' 手中的是一张被涂抹过的彩色纸片，纸片的中间还写着「什么都帮券」。',
@@ -294,11 +294,11 @@ module.exports = async () => {
   ]);
   await era.printAndWait([
     '带着',
-    urara.get_teen_sex_title(),
+    urara.teen_sex_title,
     '的俏皮笑容扑进 ',
     me.get_colored_name(),
     ' 的怀中，不知何时突然又长大了一点的小',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '有点任性的压在住了 ',
     me.get_colored_name(),
     '。',
@@ -355,7 +355,7 @@ module.exports = async () => {
     await era.printAndWait('——呼！');
     await era.printAndWait([
       '面对小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '依旧无暇的小脸，',
       me.get_colored_name(),
       ' 在心中长舒一口气。好险，还以为 ',
@@ -381,14 +381,14 @@ module.exports = async () => {
 
     await era.printAndWait([
       '不论回报的',
-      urara.get_teen_sex_title(),
+      urara.teen_sex_title,
       '早已将最适合的礼物送入 ',
       me.get_colored_name(),
       ' 的手中，那在圣夜降临之时，或许也无需其他？',
     ]);
     await era.printAndWait([
       '端详着',
-      urara.get_teen_sex_title(),
+      urara.teen_sex_title,
       '混入稍许疑惑的笑脸，',
       me.get_colored_name(),
       ' 与 ',
@@ -417,12 +417,12 @@ module.exports = async () => {
       '隔着布料用手指轻抚着 ',
       me.get_colored_name(),
       ' 的敏感之处，小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '稚嫩的脸颊逐渐染上绯色的潮红。',
     ]);
     await era.printAndWait([
       '迫不及待的水声早已浸透了',
-      urara.get_teen_sex_title(),
+      urara.teen_sex_title,
       '包裹紧致的下着，将发情的潮水失控的涂抹在 ',
       me.get_colored_name(),
       ' 的腿上。',
@@ -445,7 +445,7 @@ module.exports = async () => {
         '在湿漉漉的深吻中与 ',
         me.get_colored_name(),
         ' 缠绵地交换着粘稠的体液，进入状态的小',
-        urara.get_sex_slave_title(),
+        urara.sex_slave_title,
         '熟练的褪下自己的衣物。',
       ]);
     } else {
@@ -461,14 +461,14 @@ module.exports = async () => {
       ]);
       await era.printAndWait([
         '受本能的驱使与恋人相拥，在爱人的命令下，小',
-        urara.get_sex_slave_title(),
+        urara.sex_slave_title,
         '开始生疏但认真的进行着服侍主人的前戏。',
       ]);
       await era.printAndWait([
         '在朦胧失神的间隙被侵犯着口腔，任 ',
         me.get_colored_name(),
         ' 肆意摆布身体的小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '很快便被扯下了身上的衣物。',
       ]);
     }

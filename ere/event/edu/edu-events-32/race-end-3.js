@@ -41,7 +41,7 @@ module.exports = (handlers) => {
         '在 ',
         sys_get_colored_callname(32, 25),
         ' 奔跑时，无论是前后的',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         '都会感受到的极强压迫力',
       ]);
       await tachyon.print_and_wait([
@@ -117,9 +117,9 @@ module.exports = (handlers) => {
       era.drawLine();
       await tachyon.print_and_wait([
         '前方的',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         '是……跑在最前头的逃',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         '，以及 ',
         coffee.get_colored_name(),
       ]);
@@ -193,7 +193,7 @@ module.exports = (handlers) => {
       ]);
       await say_by_passer_by_and_wait('解说', [
         '最前面的逃',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         '已经后继无力，最后的激战果然还是这两人！',
       ]);
       await say_by_passer_by_and_wait('解说', [
@@ -205,9 +205,9 @@ module.exports = (handlers) => {
       if (check_aim_race(RaceHistory.get(25).get(), race_enum.kiku_sho, 1, 1)) {
         await say_by_passer_by_and_wait('解说', [
           '『最强的',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '』，与『最快的',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '』，要在这里决出胜负！',
         ]);
       }
@@ -241,11 +241,7 @@ module.exports = (handlers) => {
       era.println();
       await tachyon.print_and_wait('比起领域更上一层的极限');
       await tachyon.print_and_wait('超越极限吧');
-      await tachyon.print_and_wait([
-        '超越',
-        tachyon.get_uma_sex_title(),
-        '的极限',
-      ]);
+      await tachyon.print_and_wait(['超越', tachyon.uma_sex_title, '的极限']);
       await tachyon.print_and_wait([
         '超越 ',
         tachyon.get_colored_name(),

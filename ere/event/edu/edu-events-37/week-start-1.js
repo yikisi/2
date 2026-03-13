@@ -315,7 +315,7 @@ module.exports = (handlers) => {
     await era.printAndWait(
       `诚然，${
         flash.sex
-      }所说的这个训练方法 ${your_name} 确实有所耳闻。并且可以肯定的是，也在某些赛${flash.get_uma_sex_title()}身上出现过奇效。`,
+      }所说的这个训练方法 ${your_name} 确实有所耳闻。并且可以肯定的是，也在某些赛${flash.uma_sex_title}身上出现过奇效。`,
     );
     await era.printAndWait(
       `但是话又说回来，人和人之间的体质不能一概而论，${your_name} 并不清楚这种方式是否也同样的对荣进闪耀奏效。`,
@@ -408,7 +408,7 @@ module.exports = (handlers) => {
       `特雷森学园学生会办公室内，『皇帝』${luna.name} 面露平和之色地看着 ${your_name}。`,
     );
     await luna.say_and_wait(
-      `真是意外的请求啊。想要和我一起赛跑的${flash.get_uma_sex_title()}有很多，但需要我去赛跑的训练员可真是罕见呢。`,
+      `真是意外的请求啊。想要和我一起赛跑的${flash.uma_sex_title}有很多，但需要我去赛跑的训练员可真是罕见呢。`,
     );
     era.printButton(`「${flash.sex}需要你的力量。」`, 1);
     await era.input();
@@ -450,7 +450,7 @@ module.exports = (handlers) => {
       `${sys_get_callname(
         17,
         0,
-      )}，你对于担当${flash.get_uma_sex_title()}所抱有的想法我已切身体会到。因此相对的，我也有一个提案。`,
+      )}，你对于担当${flash.uma_sex_title}所抱有的想法我已切身体会到。因此相对的，我也有一个提案。`,
     );
     era.printButton('「提案？」', 1);
     await era.input();
@@ -480,16 +480,16 @@ module.exports = (handlers) => {
       `那么你呢？你又是因为什么而来的，${sys_get_callname(57, 0)}。`,
     );
     await era.printAndWait(
-      `说着，躯体修长，全身上下散发着如若草地般清新气息的赛${flash.get_uma_sex_title()}转身，对 ${your_name} 嫣然一笑。`,
+      `说着，躯体修长，全身上下散发着如若草地般清新气息的赛${flash.uma_sex_title}转身，对 ${your_name} 嫣然一笑。`,
     );
     era.printButton('「……千明代表。」', 1);
     await era.input();
     await era.printAndWait(
-      `出现在 ${your_name} 眼前的，赫然是以令人着迷且充满刺激的奔跑方式夺得三冠王称呼的赛${flash.get_uma_sex_title()}——千明代表。`,
+      `出现在 ${your_name} 眼前的，赫然是以令人着迷且充满刺激的奔跑方式夺得三冠王称呼的赛${flash.uma_sex_title}——千明代表。`,
     );
     await mr_cb.say_and_wait('嘛，话虽如此，不过详细的情况我也已经听说了。');
     await mr_cb.say_and_wait(
-      `总之，就是想让我跟即将出走德比的${flash.get_uma_sex_title()}併走吗？`,
+      `总之，就是想让我跟即将出走德比的${flash.uma_sex_title}併走吗？`,
     );
     era.printButton('「是的。」', 1);
     await era.input();
@@ -504,7 +504,7 @@ module.exports = (handlers) => {
     era.printButton('「非常感谢！」', 1);
     await era.input();
     await era.printAndWait(
-      `就这样，荣进闪耀的模拟赛对手选择好了，由三冠赛${flash.get_uma_sex_title()}千明代表亲自出马。`,
+      `就这样，荣进闪耀的模拟赛对手选择好了，由三冠赛${flash.uma_sex_title}千明代表亲自出马。`,
     );
     await era.printAndWait('接下来要做的，便是决定出一个时间即可。');
   };
@@ -512,7 +512,7 @@ module.exports = (handlers) => {
   handlers[47 + 18] = async (flash, your_name) => {
     const mr_cb = get_chara_talk(57);
     await print_event_name('经验之谈 · 三', flash);
-    await flash.say_and_wait(`三冠赛${flash.get_uma_sex_title()}啊……`);
+    await flash.say_and_wait(`三冠赛${flash.uma_sex_title}啊……`);
     await flash.say_and_wait(
       '不，我并不害怕。就像您说的那样，这是一个难得的机会，我必须要去把握住。',
     );
@@ -531,7 +531,7 @@ module.exports = (handlers) => {
     await era.input();
     await flash.say_and_wait('是！');
     await mr_cb.say_and_wait(
-      `呵呵～很好，完全不会因为我的三冠赛${flash.get_uma_sex_title()}这一名号而感到胆怯呢。`,
+      `呵呵～很好，完全不会因为我的三冠赛${flash.uma_sex_title}这一名号而感到胆怯呢。`,
     );
     await era.printAndWait(
       '荣进闪耀毫不退缩，沉着自如的表现让千明代表称赞地点了点头。',
@@ -557,7 +557,7 @@ module.exports = (handlers) => {
     await era.printAndWait([
       mr_cb.get_colored_name(),
       ' 是赛',
-      flash.get_uma_sex_title(),
+      flash.uma_sex_title,
       '这一职业中久负盛名的前辈。无论是实力还是经验，毫无疑问，作为三冠之王的',
       flash.sex,
       '都全方面的超越了 ',
@@ -637,7 +637,7 @@ module.exports = (handlers) => {
       '我不需要在上面依附更多的感情，我要做的只有赢，一直赢下去，直到一切结束的那一天。',
     );
     await mr_cb.say_and_wait(
-      `那日本德比呢？明明想要成为德比赛${flash.get_uma_sex_title()}，结果对于日本德比却没有任何的特殊情感？`,
+      `那日本德比呢？明明想要成为德比赛${flash.uma_sex_title}，结果对于日本德比却没有任何的特殊情感？`,
     );
     await flash.say_and_wait('是的。');
     await mr_cb.say_and_wait('单纯的为赢而赢啊，还真是无趣。');
@@ -727,7 +727,7 @@ module.exports = (handlers) => {
       await era.printAndWait('但……');
     }
     await era.printAndWait(
-      `凡事永远都不可能一帆风顺，伤病一直是赛${flash.get_uma_sex_title()}绕不开的一个话题。`,
+      `凡事永远都不可能一帆风顺，伤病一直是赛${flash.uma_sex_title}绕不开的一个话题。`,
     );
     await say_by_passer_by_and_wait(
       '医生',
@@ -869,7 +869,7 @@ module.exports = (handlers) => {
     await era.printAndWait(
       `${flash.sex}相信，${your_name} 是${
         flash.sex
-      }在赛${flash.get_uma_sex_title()}这一道途中的指引者。`,
+      }在赛${flash.uma_sex_title}这一道途中的指引者。`,
     );
     await era.printAndWait(
       `而事实也证明，${flash.sex}对于 ${your_name} 的大部分指令都会毫无异议地去执行。`,

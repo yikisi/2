@@ -58,7 +58,7 @@ module.exports = (handlers) => {
       '而看见推门而入的 ',
       me.get_colored_name(),
       '，等候多时的小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '从沙发上俏皮的坐起，对',
       urara.sex,
       '的训练员眨着樱粉色的眼睛。',
@@ -76,7 +76,7 @@ module.exports = (handlers) => {
 
     await era.printAndWait([
       '回应着跑过来帮忙收拾东西的小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '，',
       me.get_colored_name(),
       ' 似乎察觉了有哪里不对。',
@@ -89,7 +89,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '而从进屋前就摆在桌上的饮料与堆成小山的饼干也不难看出，这次的小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '的确是在专门等 ',
       me.get_colored_name(),
       '。',
@@ -111,7 +111,7 @@ module.exports = (handlers) => {
       '打断了 ',
       me.get_colored_name(),
       ' 的思考，小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '把发呆的客人按在椅子上，将桌上的那盘饼干小山推到 ',
       me.get_colored_name(),
       ' 面前。',
@@ -175,7 +175,7 @@ module.exports = (handlers) => {
       '将第二块饼干轻轻咽下，',
       me.get_colored_name(),
       ' 对认真等待着的小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '半开玩笑地给出了自己的最高评价。',
     ]);
 
@@ -287,12 +287,12 @@ module.exports = (handlers) => {
       '不问梦想问欲望啊，',
       urara.get_colored_name(),
       ' 原来是这么锐利的人吗？现在的小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '真是不容小觑。',
     ]);
     await era.printAndWait([
       '要跟成长时节的青春',
-      urara.get_teen_sex_title(),
+      urara.teen_sex_title,
       '讲大人充斥着世俗欲望的故事啊，嗯……',
     ]);
     await era.printAndWait([
@@ -440,7 +440,7 @@ module.exports = (handlers) => {
     await urara.say_and_wait([
       callname,
       '，最近我梦到了一位虽然很像乌拉拉，但却很孤单的',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '。',
     ]);
     await urara.say_and_wait([
@@ -502,7 +502,7 @@ module.exports = (handlers) => {
       );
       await me.say_and_wait([
         '而且乌拉拉不是还没向那位',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '传达出自己的心声吗？既然还没开始，也用不着害怕。',
       ]);
       await era.printAndWait([
@@ -559,7 +559,7 @@ module.exports = (handlers) => {
     era.println();
     await era.printAndWait([
       '看来，小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '已经在心中想好答案了。满意对 ',
       urara.get_colored_name(),
       ' 点点头，',
@@ -641,7 +641,7 @@ module.exports = (handlers) => {
     );
     await in_urara.say_as_unknown_and_wait([
       '嗯，是『讨厌』。我讨厌大部分人类与',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '，只是没那么讨厌您罢了，至少您足够真诚。',
     ]);
     await in_urara.say_as_unknown_and_wait('……');
@@ -649,7 +649,7 @@ module.exports = (handlers) => {
       '哈啊……您注意到了吧，现在的乌拉拉身上，正展现着不可思议的能力。',
     );
     await in_urara.say_as_unknown_and_wait([
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '身上的未解之谜多如繁星，或许也只有三女神能说清乌拉拉身上有怎么的加护。',
     ]);
     await in_urara.say_as_unknown_and_wait(
@@ -663,7 +663,7 @@ module.exports = (handlers) => {
     );
     await in_urara.say_as_unknown_and_wait([
       '而那位孤独的',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '……我想，乖僻的',
       urara.sex,
       '应该一个人也没关系吧。',

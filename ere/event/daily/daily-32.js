@@ -392,7 +392,7 @@ module.exports = class extends CustomizedDaily {
     if (Math.random() < 0.5) {
       await tachyon.say_and_wait([
         '啧……这个机体也太慢了，完全跟不上',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         '的输出速度嘛！',
       ]);
     } else {
@@ -488,7 +488,7 @@ module.exports = class extends CustomizedDaily {
             '无法参与训练的',
             tachyon.sex,
             '，哪怕自己已经尽量抽空陪伴了，在其他',
-            tachyon.get_uma_sex_title(),
+            tachyon.uma_sex_title,
             '训练时也还是必须要分开',
           ]);
           await tachyon.say_and_wait(['最近', tachyon.sex, '还好吗']);
@@ -534,7 +534,7 @@ module.exports = class extends CustomizedDaily {
           await me.say_and_wait('欸，有这回事？');
           await tachyon.say_and_wait([
             '是的哦，听说是有某名',
-            tachyon.get_uma_sex_title(),
+            tachyon.uma_sex_title,
             '在天台上做实验，不小心弄的有毒物质外泄了。',
           ]);
           await tachyon.say_and_wait('……怎么这种表情？');
@@ -616,7 +616,7 @@ module.exports = class extends CustomizedDaily {
             '……唉，',
             callname,
             '，以科学角度来说，',
-            tachyon.get_uma_sex_title(),
+            tachyon.uma_sex_title,
             '的肠胃也没有脆弱到会因为这种事吃坏肚子哦',
           ]);
           await me.say_and_wait('不是这个问题吧！？');
@@ -702,7 +702,7 @@ module.exports = class extends CustomizedDaily {
             '、',
             get_chara_talk(41).get_colored_name(),
             ' 等',
-            tachyon.get_uma_sex_title(),
+            tachyon.uma_sex_title,
             '，甚至眼睛里的百叶窗都彷佛变成了樱花的花瓣',
           ]);
 

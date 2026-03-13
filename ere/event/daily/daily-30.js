@@ -275,7 +275,7 @@ module.exports = class extends CustomizedDaily {
       Math.random() < 0.5
         ? [
             '《',
-            get_chara_talk(30).get_uma_sex_title(),
+            get_chara_talk(30).uma_sex_title,
             '小顽皮爱洗澡》，嘻嘻，',
             sys_get_callname(30, 0),
             ' 也很喜欢哦。',

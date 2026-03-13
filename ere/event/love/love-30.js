@@ -124,7 +124,7 @@ module.exports = class extends CustomizedLove {
     await rice.say_and_wait([
       callname,
       '，我一定会努力当一个好赛',
-      rice.get_uma_sex_title(),
+      rice.uma_sex_title,
       '的，所以请你不要放弃我。',
     ]);
     await era.printAndWait([

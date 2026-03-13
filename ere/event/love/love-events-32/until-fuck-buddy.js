@@ -21,7 +21,7 @@ module.exports = class extends CustomizedLove {
    */
   async 25(tachyon, me, callname) {
     await print_event_name(
-      `「爱丽速子」？「${tachyon.get_uma_sex_title()}A」？`,
+      `「爱丽速子」？「${tachyon.uma_sex_title}A」？`,
       tachyon,
     );
     const c_call_m = sys_get_callname(25, 0),
@@ -115,7 +115,7 @@ module.exports = class extends CustomizedLove {
       '那当然，毕竟说是出差，其实是被紧急找去处理 ',
       c_call_t,
       ' 前些日子弄出的实验外泄意外，这种事那个太过在乎',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '情感的 ',
       callname,
       ' 当然不会和',
@@ -164,7 +164,7 @@ module.exports = class extends CustomizedLove {
       '换句话说，不就是 ',
       tachyon.get_colored_name(),
       ' 这名',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '本身，对',
       me.sex,
       '而言完全没有任何的吸引力吗？',
@@ -176,9 +176,9 @@ module.exports = class extends CustomizedLove {
       '看着的，究竟是 ',
       tachyon.get_colored_name(),
       ' 这名',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '，还是『拥有这些东西的某',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       'A』呢？',
     ]);
     await tachyon.say_and_wait('……不……');
@@ -186,7 +186,7 @@ module.exports = class extends CustomizedLove {
       '反过来说，除了这些东西以外，',
       tachyon.get_colored_name(),
       ' 这名',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '，对',
       me.sex,
       '到底有何吸引力？',
@@ -285,7 +285,7 @@ module.exports = class extends CustomizedLove {
     ]);
     await tachyon.print_and_wait([
       '两人的关系就是研究者和豚鼠，训练员和',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
     ]);
     tachyon.print('其余的关系都是不需要的');
     era.printButton('真的是这样吗？', 1);
@@ -347,7 +347,7 @@ module.exports = class extends CustomizedLove {
     era.println();
     await tachyon.print_and_wait([
       '栗东寮的某间寝室内，一名',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '正用枕头捂住自己的嘴，低声的吐出模糊的声音',
     ]);
     await tachyon.say_and_wait(callname);
@@ -357,9 +357,9 @@ module.exports = class extends CustomizedLove {
     );
     await tachyon.print_and_wait([
       '一般都是某粉发',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '抱着枕头低诉对',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '的爱意',
     ]);
     era.println();
@@ -371,9 +371,9 @@ module.exports = class extends CustomizedLove {
     era.println();
     await tachyon.print_and_wait([
       '与粉发',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '同寝的栗发',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '，如今却做出了过去室友做过的，当时还使自己十分迷惑的行为',
     ]);
     await tachyon.say_and_wait(callname);
@@ -532,16 +532,16 @@ module.exports = class extends CustomizedLove {
       '看着的，究竟是 ',
       tachyon.get_colored_name(),
       ' 这名',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '，还是「拥有这些东西的某',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       'A」呢？',
     ]);
     await tachyon.print_and_wait([
       '反过来说，除了这些东西以外，',
       tachyon.get_colored_name(),
       ' 这名',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '，对',
       me.sex,
       '到底有何吸引力？',
@@ -637,7 +637,7 @@ module.exports = class extends CustomizedLove {
         '说到底，',
         tachyon.get_colored_name(),
         ' 也不是只会等待着王子大人出现的柔弱',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
       ]);
       await tachyon.print_and_wait('结合现有变量，透过实验证明');
       await tachyon.print_and_wait('这才是身为研究者，应该做的事情');
@@ -665,7 +665,7 @@ module.exports = class extends CustomizedLove {
       await tachyon.print_and_wait('啊啊');
       await tachyon.print_and_wait([
         '都是你，让我从一名研究者变成了普通的',
-        tachyon.get_teen_sex_title(),
+        tachyon.teen_sex_title,
       ]);
       await tachyon.print_and_wait([
         '所以啊，请负起责任吧，我亲爱的 ',

@@ -43,7 +43,7 @@ module.exports = (handlers) => {
     era.drawLine();
     await era.printAndWait([
       '刚走进选手通道内，赢下比赛的小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '便不顾身体的疲倦立刻冲向了 ',
       me.get_colored_name(),
       ' 的身边。',
@@ -62,7 +62,7 @@ module.exports = (handlers) => {
         ' 向 ',
         urara.get_colored_name(),
         ' 道出比赛辛苦的问候，小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '就立刻牵起 ',
         me.get_colored_name(),
         ' 的手跑向了后场的方向。',
@@ -87,7 +87,7 @@ module.exports = (handlers) => {
         ' 向',
         urara.sex,
         '说出第一句安慰，小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '就立刻牵起 ',
         me.get_colored_name(),
         ' 的手跑向了后场的方向。',
@@ -174,7 +174,7 @@ module.exports = (handlers) => {
       '但若是想现在稳住',
       urara.sex,
       '的心绪，也只能先听小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '讲完',
       urara.sex,
       '下一步希望如何奔跑了。',
@@ -275,7 +275,7 @@ module.exports = (handlers) => {
     await era.printAndWait([
       urara.get_colored_name(),
       ' 满足了吗？至少现在小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '终于安稳下来，也没有再强硬地闹着要的回去。',
     ]);
     await era.printAndWait([

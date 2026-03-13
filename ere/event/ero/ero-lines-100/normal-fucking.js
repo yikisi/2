@@ -489,7 +489,7 @@ module.exports = class extends EroNormalFucking {
       ]);
       await attacker.print_and_wait([
         '对于已经发情的',
-        defender.get_uma_sex_title(),
+        defender.uma_sex_title,
         '无需客气。按着 ',
         sys_get_colored_callname(attacker.id, defender.id),
         ' 的屁股，尽情的冲刺吧——',
@@ -549,7 +549,7 @@ module.exports = class extends EroNormalFucking {
     if (hook.arg) {
       await attacker.print_and_wait([
         '明明是在赛场上驰骋的',
-        defender.get_uma_sex_title(),
+        defender.uma_sex_title,
         '，可举起来时却一点也不重。',
       ]);
       await attacker.print_and_wait([
@@ -592,7 +592,7 @@ module.exports = class extends EroNormalFucking {
       ]);
       await defender.print_and_wait([
         '再这样下去，很快就会变成「放荡的',
-        defender.get_child_sex_title(),
+        defender.child_sex_title,
         '子了吧」。',
       ]);
       await defender.say_and_wait([
@@ -737,7 +737,7 @@ module.exports = class extends EroNormalFucking {
         '环绕着训练员脖颈，被不断抽插而失声娇喘的人，不是那个温柔的 ',
         sys_get_colored_callname(attacker.id, defender.id),
         '，而只是一个被侵犯而感到欢愉的',
-        defender.get_teen_sex_title(),
+        defender.teen_sex_title,
         '。',
       ]);
       await defender.say_and_wait(['要坏掉了❤️～～～～']);
@@ -764,7 +764,7 @@ module.exports = class extends EroNormalFucking {
       ]);
       await defender.say_and_wait([
         '我毕竟也是',
-        defender.get_uma_sex_title(),
+        defender.uma_sex_title,
         '嘛，',
         sys_get_colored_callname(defender.id, attacker.id),
         '，所以啊，在我满足之前，是不会停下来的哦。',
@@ -842,7 +842,7 @@ module.exports = class extends EroNormalFucking {
       await defender.say_and_wait(['咕哦哦哦齁哦❤️～～～～']);
       await defender.print_and_wait([
         '明明是对于',
-        defender.get_child_sex_title(),
+        defender.child_sex_title,
         '子来说是不可以发出的，下流、不成体统的声音，但却非常适合被蹂躏G点而发情的雌性。',
       ]);
       await defender.say_and_wait([
@@ -851,7 +851,7 @@ module.exports = class extends EroNormalFucking {
     } else {
       await defender.say_and_wait([
         '噗咕❤️～要变成',
-        defender.get_child_sex_title(),
+        defender.child_sex_title,
         '子了、变成雌性了❤️～',
       ]);
       await defender.say_and_wait([

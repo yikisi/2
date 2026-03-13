@@ -20,7 +20,7 @@ module.exports = async (_, __, event_object) => {
     case 'p1':
       await kitaru.say_and_wait([
         '呜啊！命定之人变成',
-        kitaru.get_uma_sex_title(),
+        kitaru.uma_sex_title,
         '了吗！',
       ]);
       await kitaru.say_and_wait(['不用担心！', callname, '，我会帮你适应的！']);
@@ -54,7 +54,7 @@ module.exports = async (_, __, event_object) => {
         '伸手将 ',
         me.get_colored_name(),
         ' 刚洗完澡，湿漉漉的耳朵捋直，擦干，橙色的赛',
-        kitaru.get_uma_sex_title(),
+        kitaru.uma_sex_title,
         '将耳饰戴在了 ',
         me.get_colored_name(),
         ' 的耳朵上。',

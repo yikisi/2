@@ -85,9 +85,9 @@ module.exports = (handlers) => {
     await era.printAndWait([
       me.get_colored_name(),
       ' 与可爱的茶杯们安静地聆听着',
-      urara.get_teen_sex_title(),
+      urara.teen_sex_title,
       '的思考，交替闪耀的彩灯又将',
-      urara.get_teen_sex_title(),
+      urara.teen_sex_title,
       '的樱瞳染上了更多的色彩。',
     ]);
     await urara.say_and_wait(
@@ -121,7 +121,7 @@ module.exports = (handlers) => {
         '听到 ',
         me.get_colored_name(),
         ' 的回答，小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '对 ',
         me.get_colored_name(),
         ' 露出了会心的笑容，随后与 ',
@@ -130,7 +130,7 @@ module.exports = (handlers) => {
       ]);
       await era.printAndWait([
         '茶杯随着音乐开始温柔的旋转，夕阳透过玻璃顶棚，照在小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '遥望着远方的脸上。',
       ]);
       await era.printAndWait([
@@ -149,7 +149,7 @@ module.exports = (handlers) => {
         '听见 ',
         me.get_colored_name(),
         ' 无奈的回答，',
-        urara.get_teen_sex_title(),
+        urara.teen_sex_title,
         '虽然有些失落，但还是笑着与身边的大人开起了玩笑。',
       ]);
 
@@ -260,7 +260,7 @@ module.exports = (handlers) => {
       '将 ',
       me.get_colored_name(),
       ' 留在学校门口，小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '以前所未见的速度冲向了商店街的方向。',
     ]);
 

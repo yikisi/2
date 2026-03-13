@@ -389,7 +389,7 @@ module.exports = (handlers) => {
         await maya.say_and_wait('咦！？');
         await maya.say_and_wait([callname, '！刚才那句话是……！？']);
         era.printButton(
-          '「我会让你成为比谁都耀眼的赛' + maya.get_uma_sex_title() + '！」',
+          '「我会让你成为比谁都耀眼的赛' + maya.uma_sex_title + '！」',
           1,
         );
         await era.input();

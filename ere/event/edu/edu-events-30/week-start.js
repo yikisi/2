@@ -33,26 +33,23 @@ module.exports = (handlers) => {
       self_name,
       ' 选手，在欢呼声中，走进了赛场——',
     ]);
-    await say_by_passer_by(`赛${rice.get_uma_sex_title()}A`, '哇！！！');
+    await say_by_passer_by(`赛${rice.uma_sex_title}A`, '哇！！！');
     await rice.say_and_wait('哎！？');
     const bourbon = get_chara_talk(26);
-    bourbon.name = '实力强劲的赛' + bourbon.get_uma_sex_title();
+    bourbon.name = '实力强劲的赛' + bourbon.uma_sex_title;
     await bourbon.say_and_wait('哈啊……哈啊……！');
-    await say_by_passer_by(`赛${rice.get_uma_sex_title()}A`, '又刷新了记录！');
+    await say_by_passer_by(`赛${rice.uma_sex_title}A`, '又刷新了记录！');
     await say_by_passer_by(
-      `赛${rice.get_uma_sex_title()}A`,
+      `赛${rice.uma_sex_title}A`,
       '这下已经能确定是来年的经典赛主役了呢！',
     );
     await say_by_passer_by(
-      `赛${rice.get_uma_sex_title()}B`,
+      `赛${rice.uma_sex_title}B`,
       '是啊……跑得真是太棒了。呐，那个，请一定……',
     );
     await bourbon.say_and_wait('……还有预定的安排等待执行。失礼了。');
     await era.printAndWait([bourbon.get_colored_name(), ' 跑开了。']);
-    await say_by_passer_by(
-      `赛${rice.get_uma_sex_title()}们`,
-      '啊～～等等～～！',
-    );
+    await say_by_passer_by(`赛${rice.uma_sex_title}们`, '啊～～等等～～！');
     await rice.say_and_wait('……好厉害。赛场边上也挤满了来旁观的人……');
     await rice.say_and_wait([
       '……现在，',
@@ -91,7 +88,7 @@ module.exports = (handlers) => {
       '，绝对不能错过。因为',
       rice.sex,
       '可是未来三冠赛',
-      rice.get_uma_sex_title(),
+      rice.uma_sex_title,
       '候补！',
     ]);
     await rice.say_and_wait(['新年好，', callname, '。']);
@@ -217,14 +214,14 @@ module.exports = (handlers) => {
       return;
     }
     const bourbon = get_chara_talk(26);
-    bourbon.name = '某赛博格' + bourbon.get_uma_sex_title();
+    bourbon.name = '某赛博格' + bourbon.uma_sex_title;
     await print_event_name('夏季合宿（经典年）开始', rice);
     await era.printAndWait('为了进一步提升实力，强化训练也开始了。');
     await rice.say_and_wait('……哇，怎么办啊。');
     await rice.say_and_wait([self_name, ' 也，跟着来合宿了。']);
     await rice.say_and_wait([
       '很多其他的赛',
-      rice.get_uma_sex_title(),
+      rice.uma_sex_title,
       '也在这里啊。要是 ',
       self_name,
       ' 招来不幸的话——',
@@ -675,7 +672,7 @@ module.exports = (handlers) => {
     await rice.say_and_wait([self_name, ' 在中间吗？']);
     await say_by_passer_by('工作人员A', [
       '是啊！因为是人气投票第一的',
-      rice.get_uma_sex_title(),
+      rice.uma_sex_title,
     ]);
     await say_by_passer_by('工作人员A', '中间可是主角的位置哦！');
     await rice.say_and_wait('但是……这个，今天—');
@@ -762,7 +759,7 @@ module.exports = (handlers) => {
     era.set('flag:当前位置', location_enum.office);
     await era.printAndWait([
       '「最初的三年」对赛',
-      rice.get_uma_sex_title(),
+      rice.uma_sex_title,
       '来说非常重要，',
       rice.get_colored_name(),
       ' 顺利地在这段时间拿下了极为亮眼的成绩。',
@@ -869,7 +866,7 @@ module.exports = (handlers) => {
     ]);
     await rice.print_and_wait([
       '于是，一直都觉得自己很没用的',
-      rice.get_child_sex_title(),
+      rice.child_sex_title,
       '，成为了某人的蓝蔷薇。',
     ]);
     await rice.print_and_wait('虽然和绘本不同，虽然偶有不幸的发生……');

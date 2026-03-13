@@ -78,7 +78,7 @@ module.exports = class extends CustomizedDaily {
           my_marks.fishing = 0;
           const sky = get_chara_talk(20);
           await print_event_name('钓鱼的心得', sky);
-          sky.name = '戴着斗笠的芦毛' + sky.get_uma_sex_title();
+          sky.name = '戴着斗笠的芦毛' + sky.uma_sex_title;
           await era.printAndWait([
             me.get_colored_name(),
             ' 带着钓竿在河边遇到了一名',

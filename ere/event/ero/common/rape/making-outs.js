@@ -80,7 +80,7 @@ async function common_hand_job(attacker, defender, hook) {
       defender.get_colored_actual_name(),
       ' 的',
       era.get(`cflag:${defender.id}:种族`) ? '马耳朵' : '',
-      defender.get_phy_sex_title(),
+      defender.phy_sex_title,
       '意识到了现在只能配合自己的事实。',
     ]);
     await attacker.print_and_wait([
@@ -280,7 +280,7 @@ class EroRapeMakingOuts extends EroMakingOuts {
     );
     await attacker.print_and_wait([
       '不过还是被轻松的抓住了，而后毫不犹豫的肆意拉扯起来，让眼前的赛',
-      defender.get_uma_sex_title(),
+      defender.uma_sex_title,
       '支支吾吾地吐出了求饶的话语。',
     ]);
     await attacker.print_and_wait([
@@ -465,9 +465,9 @@ class EroRapeMakingOuts extends EroMakingOuts {
     if (hook.arg) {
       await attacker.print_and_wait([
         '既不是以触诊，也不是以什么恋人的身份，而是违背了对方意愿的把玩着眼前',
-        (era.get(`cflag:${defender.id}:种族`)
-          ? defender.get_uma_sex_title
-          : defender.get_phy_sex_title)(),
+        era.get(`cflag:${defender.id}:种族`)
+          ? defender.uma_sex_title
+          : defender.phy_sex_title,
         '的大腿。',
       ]);
       await attacker.print_and_wait([
@@ -674,8 +674,8 @@ class EroRapeMakingOuts extends EroMakingOuts {
         defender.get_colored_name(),
         ' 的',
         era.get(`cflag:${defender.id}:种族`)
-          ? defender.get_sex_slave_title()
-          : defender.get_phy_sex_title(),
+          ? defender.sex_slave_title
+          : defender.phy_sex_title,
         '就会无意识地用吐出的舌头轻托着肉棒。',
       ]);
       await attacker.print_and_wait([

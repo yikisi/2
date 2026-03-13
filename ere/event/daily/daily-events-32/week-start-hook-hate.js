@@ -96,7 +96,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '或是纯粹忘记，或是把时间都用在培育其他',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '上了，',
     ]);
     await era.printAndWait(
@@ -265,7 +265,7 @@ module.exports = (handlers) => {
     era.println();
     await say_by_passer_by_and_wait('路人训练员A', [
       '所有',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '都开始暴走了！',
       tachyon.sex,
       '们不知道为什么忽然开始缠着自己的训练员要便当！',
@@ -278,7 +278,7 @@ module.exports = (handlers) => {
     era.println();
     await era.printAndWait([
       '某龙套训练员不知为何在闯进训练员室后彷佛在解说现状般的说完了上述那些后，被门外闯入的他的负责',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '拖了出去',
     ]);
     era.printButton('「到，到底……怎么回事……」', 1);
@@ -299,7 +299,7 @@ module.exports = (handlers) => {
     );
     await tachyon.say_and_wait([
       '为了贯彻',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '与便当的邪恶，可爱又迷人的疯狂科学家',
     ]);
     await tachyon.say_and_wait([
@@ -355,7 +355,7 @@ module.exports = (handlers) => {
     era.println();
     await get_chara_talk(302).say_and_wait([
       '宣布！由于某种未知因素的影响，学园内所有',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '陷入了对训练员亲手制作便当的不明执着，',
     ]);
     await get_chara_talk(302).say_and_wait([

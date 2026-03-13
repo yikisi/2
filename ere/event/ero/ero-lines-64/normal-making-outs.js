@@ -25,7 +25,7 @@ module.exports = class extends EroNormalMakingOuts {
           ' 小臂上的重量。',
         ]);
         await attacker.print_and_wait([
-          defender.get_teen_sex_title(),
+          defender.teen_sex_title,
           '在 ',
           attacker.get_colored_name(),
           ' 怀里轻轻喘着气，缓缓扭动摩擦着包覆在',
@@ -229,7 +229,7 @@ module.exports = class extends EroNormalMakingOuts {
     }
     await attacker.print_and_wait([
       '将',
-      defender.get_teen_sex_title(),
+      defender.teen_sex_title,
       '的花瓣张开，',
       attacker.get_colored_name(),
       ' 用舌面扫过胀红的阴蒂，然后在肉球上用舌尖打着转。',
@@ -266,7 +266,7 @@ module.exports = class extends EroNormalMakingOuts {
           ' 的腿间，用鼻尖轻触着顶端，尝试用气味缓解不适感。',
         ]);
         await attacker.print_and_wait([
-          defender.get_teen_sex_title(),
+          defender.teen_sex_title,
           '的鼻息拂过血脉崩张的根部，兴奋感直冲脊髓……',
         ]);
         await defender.say_and_wait(['要……开始了哦，如果哪里痛的话就告诉我。']);
@@ -302,7 +302,7 @@ module.exports = class extends EroNormalMakingOuts {
       ]);
       await attacker.print_and_wait([
         '被湿暖口穴包裹的前端，先走液与唾液相融，在',
-        defender.get_teen_sex_title(),
+        defender.teen_sex_title,
         '的唇间发出阵阵淫靡的水声。',
       ]);
       await attacker.print_and_wait(['「呲啾，呲啾。」']);
@@ -436,7 +436,7 @@ module.exports = class extends EroNormalMakingOuts {
         ' 将舌面在',
         defender.sex,
         '的阴唇上来回扫动，然后将舌尖伸入品尝着',
-        defender.get_teen_sex_title(),
+        defender.teen_sex_title,
         '的滋味。',
       ]);
       await attacker.print_and_wait([

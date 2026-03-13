@@ -97,7 +97,7 @@ module.exports = async (digital, me, callname) => {
     '纯白的',
     digital.sex_code - 1 ? '婚纱' : '西装',
     '装饰起粉色的',
-    digital.get_uma_sex_title(),
+    digital.uma_sex_title,
     '，头顶上的红色蝴蝶结依然展示它的存在感，精致的颈部，让人引起呵护之心的手，还有，那含泪的灰蓝色双眼。',
   ]);
   await era.printAndWait([
@@ -115,7 +115,7 @@ module.exports = async (digital, me, callname) => {
   await era.printAndWait('要不就打扫一些携带着重要回忆的东西就好了。');
   await era.printAndWait([
     '推门走进收藏室，里面摆着几个巨大的全方位透明柜子，摆满了各种',
-    digital.get_uma_sex_title(),
+    digital.uma_sex_title,
     '的各种周边。',
   ]);
   await era.printAndWait([
@@ -148,7 +148,7 @@ module.exports = async (digital, me, callname) => {
     '高举着应援棒流着口水的 ',
     m_call_d,
     '，想必也没其他',
-    digital.get_uma_sex_title(),
+    digital.uma_sex_title,
     '能有这种周边吧。',
   ]);
   await era.printAndWait([

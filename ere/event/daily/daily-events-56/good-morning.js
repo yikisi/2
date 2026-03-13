@@ -71,7 +71,7 @@ module.exports = () => {
         kitaru.say(['想要……', callname, '……']);
         era.print([
           '这样说着，带着晨跑完略高体温的',
-          kitaru.get_teen_sex_title(),
+          kitaru.teen_sex_title,
           '抱住了 ',
           me.get_colored_name(),
           '。',
@@ -128,7 +128,7 @@ module.exports = () => {
           kitaru.say(['欸嘿，被 ', callname, ' 看见了吗？']);
           era.print([
             '露出如狐狸般魅惑的笑容，',
-            kitaru.get_teen_sex_title(),
+            kitaru.teen_sex_title,
             '不慌不忙的整理起自己的裙摆，被白色内裤包裹的臀部清晰可见。',
           ]);
         },
@@ -149,7 +149,7 @@ module.exports = () => {
             common();
             era.print([
               '伴随着如妖狐般的魅惑笑容，',
-              kitaru.get_teen_sex_title(),
+              kitaru.teen_sex_title,
               '甚至稍稍提起了裙摆，半包着福来安产形臀部白色蕾丝内裤透出其下的肉色。',
             ]);
           },
@@ -157,7 +157,7 @@ module.exports = () => {
             common();
             era.print([
               '伴随着如妖狐般的魅惑笑容，',
-              kitaru.get_teen_sex_title(),
+              kitaru.teen_sex_title,
               '甚至稍稍提起了裙摆，明显略紧的黑色内裤在福来的安产臀部上勒出诱惑的沟壑。',
             ]);
           },
@@ -165,7 +165,7 @@ module.exports = () => {
             common();
             era.print([
               '伴随着如妖狐般的魅惑笑容，',
-              kitaru.get_teen_sex_title(),
+              kitaru.teen_sex_title,
               '甚至稍稍提起了裙摆，由几根修长布料组成的情趣内裤近乎完全露出了 ',
               kitaru.get_colored_name(),
               ' 的臀肉。',
@@ -185,7 +185,7 @@ module.exports = () => {
               ' 还没发现 ',
               me.get_colored_name(),
               ' 使坏般的拍了一下，让',
-              kitaru.get_teen_sex_title(),
+              kitaru.teen_sex_title,
               '抑制不住地发出了可爱的叫声。',
             ]);
           },
@@ -251,7 +251,7 @@ module.exports = () => {
             '在出言提醒之前，',
             me.get_colored_name(),
             ' 还是由于脚步声被发现了，脸上泛着红晕的',
-            kitaru.get_teen_sex_title(),
+            kitaru.teen_sex_title,
             '，意外冷静的整理起自己的裙摆。',
           ]);
         },

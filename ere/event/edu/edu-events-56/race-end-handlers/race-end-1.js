@@ -72,7 +72,7 @@ module.exports = (handlers) => {
       '况且 ',
       me.get_colored_name(),
       ' 也需要更多的时间了解这位状况游移不定的赛',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '。',
     ]);
     await era.printAndWait('青叶赏会是一个不错的选择。');

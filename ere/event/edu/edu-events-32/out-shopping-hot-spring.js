@@ -228,7 +228,7 @@ module.exports = async (tachyon, me, callname, relation, love) => {
       era.printButton('夫妻', 1);
       era.printButton('情侣', 2);
       era.printButton(
-        `「……一般的${tachyon.get_uma_sex_title()}和训练员不是本来就会去吗？」`,
+        `「……一般的${tachyon.uma_sex_title}和训练员不是本来就会去吗？」`,
         3,
       );
       switch (await era.input()) {
@@ -247,12 +247,12 @@ module.exports = async (tachyon, me, callname, relation, love) => {
         case 3:
           await era.printAndWait([
             '……不，一般',
-            tachyon.get_uma_sex_title(),
+            tachyon.uma_sex_title,
             '和训练员不是本来就很常去吗？',
           ]);
           await era.printAndWait([
             '每年四月都有很多前辈会和自己的负责',
-            tachyon.get_uma_sex_title(),
+            tachyon.uma_sex_title,
             '去……而且似乎都是在商店街抽到的，真不可思议',
           ]);
           await era.printAndWait(

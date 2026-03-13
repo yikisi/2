@@ -74,7 +74,7 @@ module.exports = async (hook) => {
           '如果是往常，根本无法想象老气横秋的 ',
           acute.get_colored_name(),
           ' 能发出这样小',
-          acute.get_child_sex_title(),
+          acute.child_sex_title,
           '的声音呢。',
         ]);
         await era.printAndWait(
@@ -301,7 +301,7 @@ module.exports = async (hook) => {
       if (Math.random() < 0.5) {
         await era.printAndWait([
           '故事讲述了一个天生残障的',
-          acute.get_uma_sex_title(),
+          acute.uma_sex_title,
           '，是如何在自强不息、屡败屡战的奋斗之中得到了三女神的眷顾，在多场赛事中创造了众多奇迹的故事——',
         ]);
         await acute.say_and_wait([
@@ -317,9 +317,9 @@ module.exports = async (hook) => {
       } else {
         await era.printAndWait([
           '故事讲述了一位而立之年的',
-          acute.get_uma_sex_title(),
+          acute.uma_sex_title,
           '，为了实现在年轻时与已故的训练员老伴一同环游世界的梦想，而与在路上结伴相识的关西小',
-          acute.get_uma_sex_title(),
+          acute.uma_sex_title,
           '一同进行环球奔跑旅行的传奇故事——',
         ]);
         await acute.say_and_wait(

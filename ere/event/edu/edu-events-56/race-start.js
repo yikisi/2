@@ -34,7 +34,7 @@ handlers[race_enum.begin_race] = async (kitaru, me, callname, edu_weeks) => {
     '从平日训练时的数据来看，名叫 ',
     kitaru.get_colored_name(),
     ' 的赛',
-    kitaru.get_uma_sex_title(),
+    kitaru.uma_sex_title,
     '除了面对逃马容易焦躁之外，其余的能力均在同期中上。',
   ]);
   await era.printAndWait([
@@ -58,7 +58,7 @@ handlers[race_enum.begin_race] = async (kitaru, me, callname, edu_weeks) => {
   if (era.get('flag:当前声望') >= 500) {
     await era.printAndWait([
       '印象中大部分赛',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '这个时候都会紧张的不得了，但是 ',
       kitaru.get_colored_name(),
       ' 却是一副兴奋不已的样子。',
@@ -66,7 +66,7 @@ handlers[race_enum.begin_race] = async (kitaru, me, callname, edu_weeks) => {
   } else {
     await era.printAndWait([
       '听前辈们说，大部分赛',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '这个时候都会紧张的不得了，但是 ',
       kitaru.get_colored_name(),
       ' 却是一副兴奋不已的样子。',
@@ -127,7 +127,7 @@ handlers[race_enum.aoba_sho] = async (kitaru, me, callname) => {
   await era.printAndWait('青叶赏乃是日本德比的预选赛。');
   await era.printAndWait([
     '因此许多想借此获取日本德比出走资格的赛',
-    kitaru.get_uma_sex_title(),
+    kitaru.uma_sex_title,
     '都会参加这比赛。',
   ]);
   await era.printAndWait(
@@ -202,7 +202,7 @@ handlers[race_enum.toky_yus] = async (kitaru, me, callname) => {
   ]);
   await era.printAndWait([
     '近乎所有同期的优秀赛',
-    kitaru.get_uma_sex_title(),
+    kitaru.uma_sex_title,
     '都报名参加了这场比赛，从人气排名来看，',
     kitaru.get_colored_name(),
     ' 只是那些被媒体评价为重在参与的，不起眼的一位。',
@@ -224,7 +224,7 @@ handlers[race_enum.toky_yus] = async (kitaru, me, callname) => {
     '这便是名叫 ',
     kitaru.get_colored_name(),
     ' 的赛',
-    kitaru.get_uma_sex_title(),
+    kitaru.uma_sex_title,
     '的决胜服，可爱，元气，性感，神秘，一切都在这一身服装之中得到了完美的结合。',
   ]);
   era.printButton('「没问题？」', 1);
@@ -234,7 +234,7 @@ handlers[race_enum.toky_yus] = async (kitaru, me, callname) => {
   await kitaru.say_and_wait(['但……', callname, '！']);
   await era.printAndWait([
     '橘发的',
-    kitaru.get_teen_sex_title(),
+    kitaru.teen_sex_title,
     '深吸一口气，回过头来冲 ',
     me.get_colored_name(),
     ' 尽可能的比了个笑容。',
@@ -362,7 +362,7 @@ handlers[race_enum.kobe_hai] = async (kitaru, me, callname) => {
     '没等 ',
     me.get_colored_name(),
     ' 回答，',
-    kitaru.get_teen_sex_title(),
+    kitaru.teen_sex_title,
     '自顾自地说了下去。',
   ]);
   await kitaru.say_and_wait(
@@ -411,7 +411,7 @@ handlers[race_enum.kiku_sho] = async (kitaru, me, callname) => {
     ' 的约定，支撑着名为 ',
     kitaru.get_colored_name(),
     ' 的',
-    kitaru.get_teen_sex_title(),
+    kitaru.teen_sex_title,
     '走到现在这一步。',
   ]);
   await era.printAndWait(['如今，', kitaru.sex, '的目标就在眼前。']);
@@ -420,7 +420,7 @@ handlers[race_enum.kiku_sho] = async (kitaru, me, callname) => {
   await era.input();
   await kitaru.say_and_wait('能握住我的手吗？');
   await era.printAndWait([
-    kitaru.get_teen_sex_title(),
+    kitaru.teen_sex_title,
     '有些扭捏的看向了 ',
     me.get_colored_name(),
     '。',
@@ -434,7 +434,7 @@ handlers[race_enum.kiku_sho] = async (kitaru, me, callname) => {
   await era.input();
   await era.printAndWait([
     '赛',
-    kitaru.get_uma_sex_title(),
+    kitaru.uma_sex_title,
     '略高的体温，自',
     kitaru.sex,
     '的掌心传来，',
@@ -591,7 +591,7 @@ handlers[race_enum.arim_kin] = async (kitaru, me, callname, edu_weeks) => {
   ]);
   await era.printAndWait([
     '出口如同被选中的人才能通过的怪物之口，而每当',
-    kitaru.get_uma_sex_title(),
+    kitaru.uma_sex_title,
     '被出口的阳光所吞噬时。',
   ]);
   await era.printAndWait(
@@ -627,7 +627,7 @@ handlers[race_enum.arim_kin] = async (kitaru, me, callname, edu_weeks) => {
   if (era.get('love:56') < 50) {
     await era.printAndWait([
       '带着炽热体温的橙发',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '扑进了 ',
       me.get_colored_name(),
       ' 的胸膛，耳朵抽动着拍了几下 ',
@@ -649,7 +649,7 @@ handlers[race_enum.arim_kin] = async (kitaru, me, callname, edu_weeks) => {
     await era.printAndWait('在明知可能会被其他选手看见的场合交换起唾液来。');
     era.println();
     await say_by_passer_by_and_wait(
-      `路人${kitaru.get_uma_sex_title()}`,
+      `路人${kitaru.uma_sex_title}`,
       '真是肉麻……',
     );
     era.println();
@@ -794,7 +794,7 @@ module.exports = async (kitaru, me, callname, extra_flag) => {
         '自铃口溢出的粘液被 ',
         kitaru.get_colored_name(),
         ' 的舌尖舔去，又将肉茎整个吞入口中，晶莹的涎水在肉棒进出间从赛',
-        kitaru.get_uma_sex_title(),
+        kitaru.uma_sex_title,
         '选手的嘴角滴落，为双唇的粉红抹上一层釉彩。',
       ]);
       await era.printAndWait([
@@ -833,7 +833,7 @@ module.exports = async (kitaru, me, callname, extra_flag) => {
         ' 却依然死死的抵着 ',
         me.get_colored_name(),
         ' 的胯下，让又腥又臭的气味被',
-        kitaru.get_uma_sex_title(),
+        kitaru.uma_sex_title,
         '灵敏的味蕾和鼻腔不断放大。',
       ]);
       await era.printAndWait([

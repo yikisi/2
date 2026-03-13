@@ -709,7 +709,7 @@ module.exports = class extends EroNormalFucking {
       await attacker.say_and_wait('所以……');
       await attacker.say_and_wait('拜托了……');
       await attacker.print_and_wait(
-        `身为${attacker.get_uma_sex_title()}，这也太丢人了不是吗……`,
+        `身为${attacker.uma_sex_title}，这也太丢人了不是吗……`,
       );
       await attacker.print_and_wait([
         '但是完全没法忍耐住——留着口水在 ',

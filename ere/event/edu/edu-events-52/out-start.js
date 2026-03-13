@@ -56,7 +56,7 @@ module.exports = async (urara, me, callname, hook, event_object) => {
     '不知何时注意到了远处的 ',
     me.get_colored_name(),
     '，小',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '正摇着耳朵向 ',
     me.get_colored_name(),
     ' 的方向招着手。',
@@ -121,13 +121,13 @@ module.exports = async (urara, me, callname, hook, event_object) => {
   ]);
   await era.printAndWait([
     '在分开之前，连着妈妈的手，男孩向这名',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     urara.sex_code - 1 ? '姐姐' : '哥哥',
     '投出了朦胧但勇敢的情意。',
   ]);
   await era.printAndWait([
     '勇气可嘉，但不明不白的',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     urara.sex_code - 1 ? '姐姐' : '哥哥',
     '只是回以了理所当然的答案，并向身旁紧贴的大人投出了笑容。',
   ]);
@@ -140,7 +140,7 @@ module.exports = async (urara, me, callname, hook, event_object) => {
   ]);
   await era.printAndWait([
     '作为赛',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '受欢迎的确不错，但总觉得有什么不知不觉间变得糟糕了，总之希望那名男孩一切安好吧……',
   ]);
   await era.printAndWait([

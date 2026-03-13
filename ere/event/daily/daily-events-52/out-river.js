@@ -198,7 +198,7 @@ module.exports = async (hook, extra_flag) => {
       await urara.say_and_wait([callname, '！这里、这里就能看见哦！']);
       await era.printAndWait([
         '按捺不住自己的兴奋，小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '刚到水边就笑着用手指接近了水面的鱼影。',
       ]);
     }
@@ -252,14 +252,14 @@ module.exports = async (hook, extra_flag) => {
       await era.printAndWait([
         urara.get_colored_name(),
         ' 确实很厉害啊，不过随便下水的话就算是',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '也是很容易着凉的。',
       ]);
       await era.printAndWait([
         '收起钓竿，',
         me.get_colored_name(),
         ' 伸手擦了擦小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '还沾着水珠的头发，而 ',
         urara.get_colored_name(),
         ' 也在要回应时轻声打了个可爱的喷嚏。',
@@ -273,7 +273,7 @@ module.exports = async (hook, extra_flag) => {
       ]);
       await era.printAndWait([
         '这次就给险些着凉的小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '炖个鱼汤吧。',
       ]);
       const attr_change = new Array(5).fill(0);
@@ -313,7 +313,7 @@ module.exports = async (hook, extra_flag) => {
       ]);
       await era.printAndWait([
         '想着对',
-        urara.get_teen_sex_title(),
+        urara.teen_sex_title,
         '来说可能有些失礼的内容，',
         me.get_colored_name(),
         ' 背着熟睡的悠悠地小 ',

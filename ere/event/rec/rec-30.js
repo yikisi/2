@@ -32,10 +32,10 @@ module.exports = class extends CustomizedRecruit {
           }的耳朵真大呢，远超平均水平了吧？`,
         );
         era.print(
-          `照理说这个年纪的孩子，尤其是${rice.get_uma_sex_title()}大多是活泼好动的。`,
+          `照理说这个年纪的孩子，尤其是${rice.uma_sex_title}大多是活泼好动的。`,
         );
         era.print(
-          `但黑发${rice.get_teen_sex_title()}似乎有为了不撞到他人，而小心翼翼地注意着尾巴。`,
+          `但黑发${rice.teen_sex_title}似乎有为了不撞到他人，而小心翼翼地注意着尾巴。`,
         );
         era.print(`而且在中央特雷森，这么弱气的孩子也是少见。`);
         era.print(
@@ -58,7 +58,7 @@ module.exports = class extends CustomizedRecruit {
         // 车站事件，只有独行才会显示
         era.print([
           '在稍远的车站前购物，返回学园的路上遇到了一位 ',
-          rice.get_uma_sex_title(),
+          rice.uma_sex_title,
           '。',
         ]);
         era.print(['休息结束的', rice.sex, '，忙着赶回去进行下一个训练任务。']);
@@ -89,7 +89,7 @@ module.exports = class extends CustomizedRecruit {
         rice.say(
           `不，就是 ${chara_self_name} 的错，因为 ${chara_self_name} 是会给别人带来不幸的坏孩子……`,
         );
-        era.print([rice.get_teen_sex_title(), '的大耳朵无力地低垂着。']);
+        era.print([rice.teen_sex_title, '的大耳朵无力地低垂着。']);
         rice.say(
           `对不起，但、但是只要 ${chara_self_name} 不在就没问题了！再见！`,
         );
@@ -144,7 +144,7 @@ module.exports = class extends CustomizedRecruit {
           '呼唤 ',
           rice.get_colored_name(),
           ' 的',
-          rice.get_uma_sex_title(),
+          rice.uma_sex_title,
           '很快被叫走了',
         ]);
         era.print(

@@ -223,7 +223,7 @@ module.exports = (handlers) => {
           ' 的身子变得特别沉重，就连 ',
           tachyon.get_colored_name(),
           ' 用',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '的力气想将 ',
           me.get_colored_name(),
           ' 托起都耗费了好大一番功夫',
@@ -244,14 +244,14 @@ module.exports = (handlers) => {
           ' 的绯闻',
         ]);
         await say_by_passer_by_and_wait(
-          `路人${tachyon.get_uma_sex_title()}A`,
+          `路人${tachyon.uma_sex_title}A`,
           '据说是用公主抱抱去参加会议的',
         );
         await say_by_passer_by_and_wait(
           '路人训练员A',
           '会议上也全程陪同，帮忙端茶递水，完全就是贤内助的模样',
         );
-        await say_by_passer_by_and_wait(`路人${tachyon.get_uma_sex_title()}B`, [
+        await say_by_passer_by_and_wait(`路人${tachyon.uma_sex_title}B`, [
           '没想到那个 ',
           tachyon.get_colored_name(),
           ' 也恋爱了啊…………',
@@ -350,7 +350,7 @@ module.exports = (handlers) => {
             '是 ',
             me.get_colored_name(),
             ' 的负责',
-            tachyon.get_uma_sex_title(),
+            tachyon.uma_sex_title,
             '，',
             me.get_colored_name(),
             ' 不能做这种事',
@@ -477,7 +477,7 @@ module.exports = (handlers) => {
         await era.printAndWait([
           me.get_colored_name(),
           ' 连忙抓紧了自己的衣服，但人类终究还是敌不过',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '的力量，在长达三秒的挣扎后，',
           me.get_colored_name(),
           ' 的衣服在拉扯间被撕了开来',
@@ -511,7 +511,7 @@ module.exports = (handlers) => {
         await tachyon.say_and_wait(
           era.get('cflag:0:种族')
             ? '原来具体是这样运作的……'
-            : `原来人类的身体具体是这样运作的……但是……和${tachyon.get_uma_sex_title()}之间的区别…………`,
+            : `原来人类的身体具体是这样运作的……但是……和${tachyon.uma_sex_title}之间的区别…………`,
         );
         era.println();
         await era.printAndWait([
@@ -519,7 +519,7 @@ module.exports = (handlers) => {
           ' 听见 ',
           tachyon.get_colored_name(),
           ' 喃喃自语的声音后察觉，这依然是为了探讨',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '的奥秘而展开的实验',
         ]);
         await era.printAndWait([

@@ -61,22 +61,18 @@ module.exports = (handlers) => {
     ]);
     await maya.say_and_wait([
       '希望你可以告诉我成为成熟',
-      maya.get_phy_sex_title(),
+      maya.phy_sex_title,
       '的秘诀～♪',
     ]);
     await city.say_and_wait([
       '『成熟',
-      maya.get_phy_sex_title(),
+      maya.phy_sex_title,
       '』吗……你真的很喜欢这个呢。',
     ]);
-    await snow.say_and_wait([
-      '成、成熟的',
-      maya.get_phy_sex_title(),
-      '！？哇……！',
-    ]);
+    await snow.say_and_wait(['成、成熟的', maya.phy_sex_title, '！？哇……！']);
     await snow.say_and_wait([
       '……不、不过如果那就是『城市',
-      maya.get_child_sex_title(),
+      maya.child_sex_title,
       '』的诀窍……希望你也能告诉我！',
     ]);
     await city.say_and_wait([
@@ -139,7 +135,7 @@ module.exports = (handlers) => {
       await snow.say_and_wait([
         sys_get_colored_callname(29, 40),
         '……那个，因为我也想成为『城市',
-        maya.get_child_sex_title(),
+        maya.child_sex_title,
         '』……！',
       ]);
       await city.say_and_wait('嗯，不用在意我没关系……好好加油吧。');
@@ -171,33 +167,33 @@ module.exports = (handlers) => {
     ]);
     era.drawLine();
     await say_by_passer_by_and_wait(
-      '赛' + maya.get_uma_sex_title() + 'A',
+      '赛' + maya.uma_sex_title + 'A',
       '唉，明天开始考试吗～',
     );
     await say_by_passer_by_and_wait(
-      '赛' + maya.get_uma_sex_title() + 'B',
+      '赛' + maya.uma_sex_title + 'B',
       '真是忧郁～干脆请假算了？',
     );
     await maya.say_and_wait('我懂我懂！人家也很讨厌考试～！！');
     await maya.say_and_wait(
       '明明一下就写完了，却不能睡觉也不能玩！真是的，这不就只能画画了吗～！！',
     );
-    await say_by_passer_by_and_wait('赛' + maya.get_uma_sex_title() + 'A', [
+    await say_by_passer_by_and_wait('赛' + maya.uma_sex_title + 'A', [
       maya.get_colored_name(),
       '，我说你啊～！',
     ]);
     await say_by_passer_by_and_wait(
-      '赛' + maya.get_uma_sex_title() + 'B',
+      '赛' + maya.uma_sex_title + 'B',
       '真羡慕～下次的考试你也全都『懂』吧？',
     );
     await maya.say_and_wait('算是吧～');
-    await say_by_passer_by_and_wait('赛' + maya.get_uma_sex_title() + 'A', [
+    await say_by_passer_by_and_wait('赛' + maya.uma_sex_title + 'A', [
       '对了，',
       maya.get_colored_name(),
       '！告诉我们可能会考哪些啦！',
     ]);
     await say_by_passer_by_and_wait(
-      '赛' + maya.get_uma_sex_title() + 'B',
+      '赛' + maya.uma_sex_title + 'B',
       '拜托你了～！就当作是帮助朋友！好吗？',
     );
     await maya.say_and_wait('收到☆全都包在我这摩耶重炮大人身上吧♪');
@@ -212,7 +208,7 @@ module.exports = (handlers) => {
     await maya.say_and_wait([
       maya.sex,
       '们还说『下次也麻烦你了』！嘿嘿，受欢迎的',
-      maya.get_phy_sex_title(),
+      maya.phy_sex_title,
       '还真辛苦啊～♪',
     ]);
     await era.printAndWait([
@@ -247,21 +243,21 @@ module.exports = (handlers) => {
       await maya.say_and_wait(['没错没错！我明天去问', maya.sex, '们♪']);
       era.drawLine();
       await say_by_passer_by_and_wait(
-        '赛' + maya.get_uma_sex_title() + 'A',
+        '赛' + maya.uma_sex_title + 'A',
         '给你的回礼？',
       );
       await maya.say_and_wait('对！希望你们能陪人家一起玩♪');
       await maya.say_and_wait('最近大家随口不离考试，都不陪我～');
-      await say_by_passer_by_and_wait('赛' + maya.get_uma_sex_title() + 'B', [
+      await say_by_passer_by_and_wait('赛' + maya.uma_sex_title + 'B', [
         ' 你说的是『',
         maya.get_colored_name(),
         ' 新兵训练营』……也就是大家一起尽全力去玩到没力对吧。',
       ]);
       await say_by_passer_by_and_wait(
-        '赛' + maya.get_uma_sex_title() + 'A',
+        '赛' + maya.uma_sex_title + 'A',
         '不错啊。我正想要放松一下！',
       );
-      await say_by_passer_by_and_wait('赛' + maya.get_uma_sex_title() + 'B', [
+      await say_by_passer_by_and_wait('赛' + maya.uma_sex_title + 'B', [
         '我也是！尽管来吧，',
         maya.get_colored_name(),
         ' 新兵训练营♪',
@@ -290,19 +286,19 @@ module.exports = (handlers) => {
       await maya.say_and_wait('哇～！这样人家根本就不开心──────！');
       era.drawLine();
       await maya.say_and_wait(['呜呜～！', callname, ' 坏心眼……']);
-      await say_by_passer_by_and_wait('赛' + maya.get_uma_sex_title() + 'A', [
+      await say_by_passer_by_and_wait('赛' + maya.uma_sex_title + 'A', [
         '啊哈哈，辛苦了，',
         maya.get_colored_name(),
         '！',
       ]);
-      await say_by_passer_by_and_wait('赛' + maya.get_uma_sex_title() + 'B', [
+      await say_by_passer_by_and_wait('赛' + maya.uma_sex_title + 'B', [
         '那个训练员还真有一手～！很懂要怎么跟 ',
         maya.get_colored_name(),
         ' 相处。',
       ]);
       await maya.say_and_wait(['对吧对吧！', callname, ' 可是很厉害的♪']);
       await say_by_passer_by_and_wait(
-        '赛' + maya.get_uma_sex_title() + 'A',
+        '赛' + maya.uma_sex_title + 'A',
         '……你到底是在闹别扭，还是很开心？',
       );
       await maya.say_and_wait('因、因为少女心是很复杂的～！');
@@ -310,7 +306,7 @@ module.exports = (handlers) => {
         '有了惨痛的教训后，',
         maya.get_colored_name(),
         ' 好像稍微变成更聪明的',
-        maya.get_phy_sex_title(),
+        maya.phy_sex_title,
         '了。',
       ]);
       flags.wait_flag = get_attr_and_print_in_event(24, [0, 0, 0, 0, 20], 0);

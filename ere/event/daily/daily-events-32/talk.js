@@ -58,7 +58,7 @@ module.exports = async () => {
         async () => {
           await tachyon.say_and_wait([
             '极限……',
-            tachyon.get_uma_sex_title(),
+            tachyon.uma_sex_title,
             '……腿……不，果然还是不行……',
             callname,
             '？你在这里站多久了？',
@@ -93,7 +93,7 @@ module.exports = async () => {
           ]);
           await tachyon.say_and_wait([
             '食物？没有必要，无论是人或者',
-            tachyon.get_uma_sex_title(),
+            tachyon.uma_sex_title,
             '，只需要补充最基础的营养值就够了，多余的追求味道不过是白费工夫。',
           ]);
         },
@@ -142,12 +142,12 @@ module.exports = async () => {
           tachyon.say_and_wait([
             callname,
             '，今天的药……想逃？哼哼，你怎么会觉得自己有办法从',
-            tachyon.get_uma_sex_title(),
+            tachyon.uma_sex_title,
             '的手中逃脱呢？',
           ]),
         async () => {
           await tachyon.say_and_wait([
-            tachyon.get_uma_sex_title(),
+            tachyon.uma_sex_title,
             '的极限……冲刺……进化……生存……人类补完计划……腐败的社会……救赎……重生……跳脱封闭的现况……',
           ]);
           await tachyon.say_and_wait('啊，我明白了，一切的真相都在埃及啊。');
@@ -466,7 +466,7 @@ module.exports = async () => {
             ' 只是想看见',
             tachyon.sex,
             '更加害羞，更加',
-            tachyon.get_teen_sex_title(),
+            tachyon.teen_sex_title,
             '的模样',
           ]);
           era.println();
@@ -474,7 +474,7 @@ module.exports = async () => {
             '…………',
             tachyon.get_colored_name(),
             '？',
-            tachyon.get_teen_sex_title(),
+            tachyon.teen_sex_title,
             '？',
           ]);
           await era.printAndWait('明明应该极不称对的两个词，现在却如此贴合');

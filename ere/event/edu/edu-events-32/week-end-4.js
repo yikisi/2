@@ -33,7 +33,7 @@ module.exports = (handlers) => {
       '虽然有些自卖自夸，但',
       tachyon.sex,
       '可是自己看中最有可能超越极限的',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
     ]);
     await tachyon.print_and_wait('只是最接近与能够超越，还是有着极大的区别');
     await tachyon.print_and_wait(['但是……', tachyon.sex, '真的做到了！']);
@@ -43,7 +43,7 @@ module.exports = (handlers) => {
     await tachyon.print_and_wait([
       tachyon.get_colored_name(),
       ' 是极限的',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '，而 ',
       coffee.get_colored_name(),
       ' ',
@@ -100,7 +100,7 @@ module.exports = (handlers) => {
           { color: 'white', content: '最强的' },
           {
             color: coffee.color,
-            content: coffee.get_uma_sex_title(),
+            content: coffee.uma_sex_title,
             fontWeight: 'bold',
           },
           { color: 'white', content: '，最快的' },
@@ -142,7 +142,7 @@ module.exports = (handlers) => {
       era.println();
       await say_by_passer_by_and_wait('解说', [
         '比赛开始！所有',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         '稳定的出闸',
       ]);
       era.println();
@@ -195,7 +195,7 @@ module.exports = (handlers) => {
       await tachyon.print_and_wait('那是……');
 
       era.printButton(
-        `「这是……融合了我所知道，最快，最强的两名${tachyon.get_uma_sex_title()}的跑法」`,
+        `「这是……融合了我所知道，最快，最强的两名${tachyon.uma_sex_title}的跑法」`,
         1,
       );
       await era.input();
@@ -204,7 +204,7 @@ module.exports = (handlers) => {
       );
       await tachyon.print_and_wait([
         '眼中的光，依旧闪烁，依旧盯着在赛场上奔跑的那名',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
       ]);
       await tachyon.print_and_wait('但是……');
       era.println();
@@ -242,13 +242,13 @@ module.exports = (handlers) => {
       era.drawLine();
       await era.printAndWait([
         '为了实现那名',
-        tachyon.get_teen_sex_title(),
+        tachyon.teen_sex_title,
         '能够超越朋友的梦想',
       ]);
       await era.printAndWait('为了让使自己魂牵梦萦的身影能够继续在眼前奔跑');
       await era.printAndWait([
         '让最强的',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         '与最快的速度结合',
       ]);
       await era.printAndWait('脑袋里想了许多应该在此时说出的帅气话语');
@@ -276,7 +276,7 @@ module.exports = (handlers) => {
       await era.printAndWait([
         tachyon.sex,
         '才总算想起了无论对人类还是',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         '而言，最重要的氧气的存在',
       ]);
       await era.printAndWait([

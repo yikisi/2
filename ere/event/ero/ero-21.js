@@ -22,7 +22,7 @@ module.exports = class extends CustomizedEro {
     const tama = get_chara_talk(this.id);
     o['她'] = tama.sex;
     o['玉藻色'] = tama.color;
-    o['马娘'] = tama.get_uma_sex_title();
+    o['马娘'] = tama.uma_sex_title;
     return o;
   }
 

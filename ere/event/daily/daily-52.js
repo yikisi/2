@@ -354,22 +354,18 @@ module.exports = class extends CustomizedDaily {
           ],
           [
             '屈服于卑鄙的药物，失去意识的 ',
-            urara.get_teen_sex_title(),
+            urara.teen_sex_title,
             ' 此刻只是等待使用的肉人偶。',
           ],
           [
             '肢体还在梦中抗拒地扭动着，小',
-            urara.get_uma_sex_title(),
+            urara.uma_sex_title,
             '的股间却已顺从的湿得一塌糊涂。',
           ],
         );
       } else {
         talk_arr.push(
-          [
-            '随着小小的呼气声，小',
-            urara.get_uma_sex_title(),
-            '在睡梦中翻了个身。',
-          ],
+          ['随着小小的呼气声，小', urara.uma_sex_title, '在睡梦中翻了个身。'],
           ['平静的靠在你身边，', urara.get_colored_name(), '安稳的沉睡着。'],
           [
             '睡着的',
@@ -423,7 +419,7 @@ module.exports = class extends CustomizedDaily {
           ' 那不靠谱的用刀方法，',
           me.get_colored_name(),
           ' 毫不犹豫的拒绝了小',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '的帮忙请求。',
         ]);
       },
@@ -477,7 +473,7 @@ module.exports = class extends CustomizedDaily {
         ]);
         await era.printAndWait([
           '带着无法抑制的火热思绪，小',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '颤抖着吐出舌头，将自己唾液悄悄混进了 ',
           me.get_colored_name(),
           ' 的饮料中……',

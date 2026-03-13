@@ -60,7 +60,7 @@ module.exports = class extends CustomizedDaily {
         `苦闷也好，孤独也好，与${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}在一起，似乎都不算什么了呢。`,
       );
       zensky.say(
-        `能在赛${zensky.get_uma_sex_title()}之道上遇到${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}，说不定是我一生的幸运呢。`,
+        `能在赛${zensky.uma_sex_title}之道上遇到${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}，说不定是我一生的幸运呢。`,
       );
       zensky.say('一直以来非常感谢你的帮助。');
       zensky.say('接下来也要一起努力才行哦？');
@@ -138,7 +138,7 @@ module.exports = class extends CustomizedDaily {
                 era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'
               }我都能从容应对`,
             ],
-            `不知何时周围的${zensky.get_uma_sex_title()}们都围了过来,这就是${
+            `不知何时周围的${zensky.uma_sex_title}们都围了过来,这就是${
               zensky.name
             }的魅力.`,
           ],

@@ -83,7 +83,7 @@ module.exports = async (hook) => {
         await era.printAndWait([
           me.get_colored_name(),
           ' 来到了中庭，毕竟是上课时间，因此这里没什么人，只有少数趁着没人前来发泄情绪的',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '。',
         ]);
         await era.printAndWait([
@@ -93,39 +93,39 @@ module.exports = async (hook) => {
         ]);
         await era.printAndWait([
           '朝着',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '靠近，针对',
           tachyon.sex,
           '们内心弱小处的黑影。',
         ]);
         await say_by_passer_by_and_wait(
-          `${tachyon.get_uma_sex_title()}A`,
+          `${tachyon.uma_sex_title}A`,
           '呜啊啊啊！我好弱啊……为什么，怎么都赢不了……！',
         );
         await tachyon.say_as_unknown_and_wait('你想……获得力量吗？');
         await say_by_passer_by_and_wait(
-          `${tachyon.get_uma_sex_title()}A`,
+          `${tachyon.uma_sex_title}A`,
           '……力量？',
         );
         await tachyon.say_as_unknown_and_wait(
           '能够变得比谁都强，胜过所有人的力量……',
         );
         await say_by_passer_by_and_wait(
-          `${tachyon.get_uma_sex_title()}A`,
+          `${tachyon.uma_sex_title}A`,
           '……真，真的可以吗？代价是什么？',
         );
         await tachyon.say_as_unknown_and_wait(
           '呵呵呵……想知道的话，就到旧理科实验室来吧……',
         );
         await say_by_passer_by_and_wait(
-          `${tachyon.get_uma_sex_title()}B`,
+          `${tachyon.uma_sex_title}B`,
           '为什么……就是无法提起勇气告白……那个木头……为什么都做到这种程度了还不明白……！',
         );
         await tachyon.say_as_unknown_and_wait(
           '想要诚实表达自己的心意吗？想要即便不说出口也能让他明白自己的心思吗？',
         );
         await say_by_passer_by_and_wait(
-          `${tachyon.get_uma_sex_title()}B`,
+          `${tachyon.uma_sex_title}B`,
           '你，你是……！',
         );
         await tachyon.say_as_unknown_and_wait(
@@ -136,7 +136,7 @@ module.exports = async (hook) => {
           '在枯树洞旁仿佛蛊惑人心的恶魔一般不停念叨着的无疑是 ',
           me.get_colored_name(),
           ' 的负责',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           ' ',
           tachyon.get_colored_name(),
         ]);
@@ -157,7 +157,7 @@ module.exports = async (hook) => {
         await me.say_and_wait('客人？');
         await tachyon.say_and_wait([
           '当然是那些困扰的',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '们啦。',
         ]);
         await tachyon.say_and_wait(
@@ -165,7 +165,7 @@ module.exports = async (hook) => {
         );
         await tachyon.say_and_wait([
           '现在想想这不是为我量身打造会主动筛选出心灵意志弱小的',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '们的场所吗。',
         ]);
         await era.printAndWait('因为意志不坚所以才需要外力引导发泄情绪。');
@@ -174,7 +174,7 @@ module.exports = async (hook) => {
         ]);
         await era.printAndWait([
           '某种意义上来讲，对某些图谋不轨的人来说，来到这里的',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '确实是最容易被坏人盯上的无辜孩子。',
         ]);
         await era.printAndWait([
@@ -228,7 +228,7 @@ module.exports = async (hook) => {
           ]);
           await era.printAndWait([
             '脑筋动的很快的天才',
-            tachyon.get_uma_sex_title(),
+            tachyon.uma_sex_title,
             '瞬间便明白了 ',
             me.get_colored_name(),
             ' 的意思。',
@@ -281,7 +281,7 @@ module.exports = async (hook) => {
           ]);
           await era.printAndWait([
             '最后，在周围',
-            tachyon.get_uma_sex_title(),
+            tachyon.uma_sex_title,
             '羞红的眼神中，',
             me.get_colored_name(),
             ' 牵着双腿颤抖已经走不动路的 ',

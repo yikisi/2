@@ -37,7 +37,7 @@ module.exports = class extends CustomizedDaily {
       buffer.push([
         callname,
         '！能和你一起推',
-        digital.get_uma_sex_title(),
+        digital.uma_sex_title,
         '酱真的是太好了！',
       ]);
     }
@@ -113,7 +113,7 @@ module.exports = class extends CustomizedDaily {
       talk_arr = [
         `嗨！${
           digital.name
-        } 登场！为了去寻找宇宙最尊的${digital.get_uma_sex_title()}之力！`,
+        } 登场！为了去寻找宇宙最尊的${digital.uma_sex_title}之力！`,
         `呜呼呼，${sys_get_callname(19, 0)}！今天也去积攒推活之力吧！`,
       ];
     digital.say(get_random_entry(talk_arr));
@@ -128,7 +128,7 @@ module.exports = class extends CustomizedDaily {
     if (era.get('base:19:体力') < era.get('maxbase:19:体力') / 3) {
       talk_arr = [
         `哈……燃尽了，没力气……推了……`,
-        `这种状态，无法对得起推的${digital.get_uma_sex_title()}酱的啊`,
+        `这种状态，无法对得起推的${digital.uma_sex_title}酱的啊`,
       ];
     } else {
       switch (era.get('cflag:19:干劲')) {
@@ -141,24 +141,24 @@ module.exports = class extends CustomizedDaily {
         case -1:
           talk_arr = [
             '啊……总感觉使不上劲啊，是萌力不够了吗',
-            `诶呀，刚才在想${digital.get_uma_sex_title()}的事情……`,
+            `诶呀，刚才在想${digital.uma_sex_title}的事情……`,
           ];
           break;
         case 0:
           talk_arr = [
             `嘶……呼……再多一些，萌萌之力！`,
-            `还差一些，感觉还不够，我还得吸取更多的${digital.get_uma_sex_title()}萌萌之力！`,
+            `还差一些，感觉还不够，我还得吸取更多的${digital.uma_sex_title}萌萌之力！`,
           ];
           break;
         case 1:
           talk_arr = [
-            `感觉状况正好！一起去汲取${digital.get_uma_sex_title()}萌萌之力积德吧！`,
-            `爱，正是对${digital.get_uma_sex_title()}酱的爱才让我有如此力量啊！`,
+            `感觉状况正好！一起去汲取${digital.uma_sex_title}萌萌之力积德吧！`,
+            `爱，正是对${digital.uma_sex_title}酱的爱才让我有如此力量啊！`,
           ];
           break;
         case 2:
           talk_arr = [
-            `哇啊啊啊！这边也是，那边都是${digital.get_uma_sex_title()}酱！感觉我现在什么都做得到！`,
+            `哇啊啊啊！这边也是，那边都是${digital.uma_sex_title}酱！感觉我现在什么都做得到！`,
             `哈呀！萌力已经突破天际了！`,
           ];
           break;
@@ -185,12 +185,12 @@ module.exports = class extends CustomizedDaily {
           '麻酱玩偶',
           '目白家同款茶杯',
           '速子茶座印象马克杯',
-          digital.get_uma_sex_title() + '跑鞋模型',
-          digital.get_uma_sex_title() + '限定联动周边',
-          digital.get_uma_sex_title() + '用耳套丝袜的签名本',
+          digital.uma_sex_title + '跑鞋模型',
+          digital.uma_sex_title + '限定联动周边',
+          digital.uma_sex_title + '用耳套丝袜的签名本',
         ]),
         '！我会好好汲取其中的',
-        digital.get_uma_sex_title(),
+        digital.uma_sex_title,
         '萌萌之力的！',
       ]);
     }
@@ -201,7 +201,7 @@ module.exports = class extends CustomizedDaily {
     switch (get_random_value(0, 2)) {
       case 0:
         await digital.say_and_wait(
-          `要怀着对担当${digital.get_uma_sex_title()}的爱来制作吗……真想不到训练员居然也有这样的信条啊，我也要学习！`,
+          `要怀着对担当${digital.uma_sex_title}的爱来制作吗……真想不到训练员居然也有这样的信条啊，我也要学习！`,
         );
         break;
       case 1:
@@ -211,7 +211,7 @@ module.exports = class extends CustomizedDaily {
         break;
       case 2:
         await digital.say_and_wait(
-          `${digital.get_uma_sex_title()}酱们青涩的感情，因不敢直接表达，所以融汇在便当里送出去吗！这太尊了啊！`,
+          `${digital.uma_sex_title}酱们青涩的感情，因不敢直接表达，所以融汇在便当里送出去吗！这太尊了啊！`,
         );
     }
   }
@@ -219,9 +219,9 @@ module.exports = class extends CustomizedDaily {
   async office_study() {
     const digital = get_chara_talk(19);
     const buffer = [
-      `诶？你问我为什么对${digital.get_uma_sex_title()}酱相关的知识这么熟悉？作为粉丝，这不是当然的吗！`,
+      `诶？你问我为什么对${digital.uma_sex_title}酱相关的知识这么熟悉？作为粉丝，这不是当然的吗！`,
       `事实上，为了进入特雷森学园，我当时在很多方面都很努力，所以……的确在学习上没什么大问题，有点自吹自擂了。`,
-      `我在想，有些${digital.get_uma_sex_title()}酱不是因为学习不好被拉去补课吗？到底要怎么才能帮到${
+      `我在想，有些${digital.uma_sex_title}酱不是因为学习不好被拉去补课吗？到底要怎么才能帮到${
         digital.sex
       }们啊……`,
     ];
@@ -233,12 +233,12 @@ module.exports = class extends CustomizedDaily {
     switch (get_random_value(0, 1 + (era.get('relation:19:0') > 375))) {
       case 0:
         await digital.say_and_wait(
-          `呼……听着可爱${digital.get_uma_sex_title()}酱的治愈系ASMR，感觉全身都要融化掉了……`,
+          `呼……听着可爱${digital.uma_sex_title}酱的治愈系ASMR，感觉全身都要融化掉了……`,
         );
         break;
       case 1:
         await digital.say_and_wait(
-          `像这样，跟着你漫无目的聊起${digital.get_uma_sex_title()}，真不错呢。`,
+          `像这样，跟着你漫无目的聊起${digital.uma_sex_title}，真不错呢。`,
         );
         break;
       case 2:
@@ -252,7 +252,7 @@ module.exports = class extends CustomizedDaily {
     const digital = get_chara_talk(19);
     if (Math.random() < 0.5) {
       await digital.say_and_wait(
-        `要不要来玩一下这个《赛${digital.get_uma_sex_title()}全明星大乱斗》呀，人物我就选随机，毕竟我可是DD啊！`,
+        `要不要来玩一下这个《赛${digital.uma_sex_title}全明星大乱斗》呀，人物我就选随机，毕竟我可是DD啊！`,
       );
     } else {
       await digital.say_and_wait(
@@ -269,24 +269,24 @@ module.exports = class extends CustomizedDaily {
       switch (get_random_value(0, 2)) {
         case 0:
           await digital.say_and_wait(
-            `一直都被${digital.get_uma_sex_title()}倾述着比赛的冷酷，训练的艰苦，感情的纠纷的你！为什么我会对一个树洞产生嫉妒的心理！`,
+            `一直都被${digital.uma_sex_title}倾述着比赛的冷酷，训练的艰苦，感情的纠纷的你！为什么我会对一个树洞产生嫉妒的心理！`,
           );
           break;
         case 1:
           await digital.say_and_wait(
-            `唔，你说，为什么战场上会有胜者也有败者呢……${digital.get_uma_sex_title()}酱们，如果全都是胜者，就好了……`,
+            `唔，你说，为什么战场上会有胜者也有败者呢……${digital.uma_sex_title}酱们，如果全都是胜者，就好了……`,
           );
           break;
         case 2:
           await digital.say_and_wait(
-            `我的觉悟还不够啊，不仅是作为对手的，还是作为${digital.get_uma_sex_title()}的觉悟……`,
+            `我的觉悟还不够啊，不仅是作为对手的，还是作为${digital.uma_sex_title}的觉悟……`,
           );
       }
     } else {
       switch (get_random_value(0, 2)) {
         case 0:
           await digital.say_and_wait(
-            `……怎么好像有很多${digital.get_uma_sex_title()}酱看着我们，好想找个地方躲起来……`,
+            `……怎么好像有很多${digital.uma_sex_title}酱看着我们，好想找个地方躲起来……`,
           );
           break;
         case 1:
@@ -312,7 +312,7 @@ module.exports = class extends CustomizedDaily {
         break;
       case 1:
         await digital.say_and_wait(
-          `唔，可爱的${digital.get_uma_sex_title()}酱，我怎么忍心下口……`,
+          `唔，可爱的${digital.uma_sex_title}酱，我怎么忍心下口……`,
         );
         break;
       case 2:
@@ -376,7 +376,7 @@ module.exports = class extends CustomizedDaily {
             break;
           case 1:
             await digital.say_and_wait(
-              `胜者舞台不仅是作为胜利${digital.get_uma_sex_title()}酱的奖励，也是给我们这些粉丝的奖赏啊！`,
+              `胜者舞台不仅是作为胜利${digital.uma_sex_title}酱的奖励，也是给我们这些粉丝的奖赏啊！`,
             );
             break;
           case 2:
@@ -392,12 +392,12 @@ module.exports = class extends CustomizedDaily {
         switch (get_random_value(0, 1)) {
           case 0:
             await digital.say_and_wait(
-              `太尊了！导演是懂的！把${digital.get_uma_sex_title()}酱的尊点都展现得淋漓尽致！`,
+              `太尊了！导演是懂的！把${digital.uma_sex_title}酱的尊点都展现得淋漓尽致！`,
             );
             break;
           case 1:
             await digital.say_and_wait(
-              `呜哦哦哦哦，太感动了，这种不甘，这种拼搏，就像在现实中的${digital.get_uma_sex_title()}酱一样啊！`,
+              `呜哦哦哦哦，太感动了，这种不甘，这种拼搏，就像在现实中的${digital.uma_sex_title}酱一样啊！`,
             );
         }
     }
@@ -417,7 +417,7 @@ module.exports = class extends CustomizedDaily {
     await era.printAndWait([
       me.get_colored_name(),
       ' 自然是祈求了担当',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '的健康，但 ',
       digital.get_colored_name(),
       ' 会祈求什么呢？',
@@ -433,7 +433,7 @@ module.exports = class extends CustomizedDaily {
     await era.printAndWait(['不久后', digital.sex, '转过身来，正经地说道：']);
     await digital.say_and_wait([
       '为了让神明保佑所有的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '，我理应尽我最大的虔诚去祈祷',
     ]);
     await digital.say_and_wait(
@@ -504,7 +504,7 @@ module.exports = class extends CustomizedDaily {
       case 0:
         if (Math.random() < 0.5) {
           await digital.say_and_wait(
-            `喜欢胡萝卜这种${digital.get_uma_sex_title()}酱普遍喜爱的食物，是因为我喜欢${digital.get_uma_sex_title()}酱，还是因为我是${digital.get_uma_sex_title()}呢……`,
+            `喜欢胡萝卜这种${digital.uma_sex_title}酱普遍喜爱的食物，是因为我喜欢${digital.uma_sex_title}酱，还是因为我是${digital.uma_sex_title}呢……`,
           );
         } else {
           await digital.say_and_wait(
@@ -521,7 +521,7 @@ module.exports = class extends CustomizedDaily {
             break;
           case 1:
             await digital.say_and_wait(
-              `诶？我选择地点吗？总感觉我总会选到那种${digital.get_uma_sex_title()}相关的地方……`,
+              `诶？我选择地点吗？总感觉我总会选到那种${digital.uma_sex_title}相关的地方……`,
             );
             break;
           case 2:

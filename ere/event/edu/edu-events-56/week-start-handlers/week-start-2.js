@@ -158,7 +158,7 @@ module.exports = (handlers) => {
       ' 在不停地喃喃自语，而后又几乎是自责，乃至愧疚般的扯着自己的耳朵与尾巴。',
     ]);
     await era.printAndWait([
-      kitaru.get_teen_sex_title(),
+      kitaru.teen_sex_title,
       '近乎疯狂的，想要逃避掉自己正在哭泣的现实。',
     ]);
     await kitaru.say_and_wait('唔！');
@@ -197,13 +197,13 @@ module.exports = (handlers) => {
     if (era.get('flag:当前声望') >= 500) {
       await era.printAndWait([
         '依据习惯，特雷森学院的训练员往往会和自己负责的赛',
-        kitaru.get_uma_sex_title(),
+        kitaru.uma_sex_title,
         '一同进行这个仪式。',
       ]);
     } else {
       await era.printAndWait([
         '来自特雷森内部的手册上，清楚无疑的写着，请尽量与自己负责的担当赛',
-        kitaru.get_uma_sex_title(),
+        kitaru.uma_sex_title,
         '一同进行。',
       ]);
     }
@@ -238,7 +238,7 @@ module.exports = (handlers) => {
     );
     await era.printAndWait([
       '舞台上的',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '正随着富有韵律感的音乐翩翩起舞。',
     ]);
     await era.printAndWait(
@@ -246,12 +246,12 @@ module.exports = (handlers) => {
     );
     await era.printAndWait([
       '一年以来人们积攒的疲惫与劳累，正随着舞台上那橘发金眼的',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '悄然曼妙的请神舞蹈下悄然脱落，无声无息。',
     ]);
     await era.printAndWait([
       '是啊，所谓',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '，不正是活着的，现人神之类的生灵吗？',
     ]);
     await era.printAndWait([
@@ -384,14 +384,14 @@ module.exports = (handlers) => {
     await era.printAndWait('随着青叶赏日期的逼近，训练的强度也逐渐降了下来。');
     await era.printAndWait([
       '靠在栏杆上，望着那些正在训练场上挥洒汗水的赛',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '们，',
       me.get_colored_name(),
       ' 若有所思。',
     ]);
     await era.printAndWait([
       '赛',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '踏上赛场的理由有很多。',
     ]);
     await era.printAndWait(['而 ', kitaru.get_colored_name(), '……']);
@@ -404,7 +404,7 @@ module.exports = (handlers) => {
     await kitaru.say_and_wait(
       [
         '是名叫待兼福来的',
-        kitaru.get_teen_sex_title(),
+        kitaru.teen_sex_title,
         '！为了实现幸福！成为神明！命运中的必经之路！',
       ],
       true,
@@ -430,7 +430,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '不过，对于赛',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '而言，为何奔跑可是至关重要的事情，考虑到 ',
       kitaru.get_colored_name(),
       ' 的交际圈，能和',
@@ -455,7 +455,7 @@ module.exports = (handlers) => {
     await era.input();
     await kitaru.say_and_wait([
       '赛',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '通过献祭变成神明什么的？',
     ]);
     await era.printAndWait([
@@ -472,7 +472,7 @@ module.exports = (handlers) => {
     await era.input();
     await kitaru.say_and_wait([
       '就是那种向神明呈上礼品的仪式啦！对于赛',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '而言，毫无疑问的就是赛跑后的胜利呢！',
     ]);
     await kitaru.say_and_wait(
@@ -505,7 +505,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '但这位',
-      kitaru.get_teen_sex_title(),
+      kitaru.teen_sex_title,
       '却远比 ',
       me.get_colored_name(),
       ' 想象的要麻烦，',
@@ -560,7 +560,7 @@ module.exports = (handlers) => {
       '而平时的 ',
       kitaru.get_colored_name(),
       ' 才能保持',
-      kitaru.get_teen_sex_title(),
+      kitaru.teen_sex_title,
       '的活泼，只有提到与',
       kitaru.sex,
       '',
@@ -580,7 +580,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '如果是涉及到赛',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '的事故话，当地的报纸应该会有相关报道。而 ',
       kitaru.get_colored_name(),
       ' 曾经也透露过',
@@ -593,7 +593,7 @@ module.exports = (handlers) => {
     if ((await era.input()) === 1) {
       await era.printAndWait([
         '快十年前的一张报纸，提到了一位',
-        kitaru.get_uma_sex_title(),
+        kitaru.uma_sex_title,
         '在训练的过程中因事故去世，由于是当地神社宫司的女儿，在当时引起了一阵不小的风波。',
       ]);
       await era.printAndWait(
@@ -623,7 +623,7 @@ module.exports = (handlers) => {
         '照片上是和 ',
         kitaru.get_colored_name(),
         ' 有着几分神似的长发',
-        kitaru.get_uma_sex_title(),
+        kitaru.uma_sex_title,
         '。',
       ]);
       await era.printAndWait([
@@ -742,7 +742,7 @@ module.exports = (handlers) => {
     } else {
       await kitaru.say_and_wait([
         '第一位担当就是我这样的',
-        kitaru.get_uma_sex_title(),
+        kitaru.uma_sex_title,
         '，是大凶吧。',
       ]);
     }

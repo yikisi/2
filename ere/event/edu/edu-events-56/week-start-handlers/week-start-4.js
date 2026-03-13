@@ -33,7 +33,7 @@ module.exports = (handlers) => {
     );
     await era.printAndWait([
       '空气如饱含汁水般甜蜜，充斥巧克力的甜腻味道与赛',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '们不自觉散发出的荷尔蒙味道。',
     ]);
     await era.printAndWait(
@@ -131,7 +131,7 @@ module.exports = (handlers) => {
       ]);
       await era.printAndWait([
         '橘色头发的',
-        kitaru.get_teen_sex_title(),
+        kitaru.teen_sex_title,
         '正骑在 ',
         me.get_colored_name(),
         ' 的腰间，',
@@ -208,7 +208,7 @@ module.exports = (handlers) => {
         ]);
         await era.printAndWait([
           '后知后觉的意识到了自己此时的姿势和所谓的骑乘位没什么两样，',
-          kitaru.get_teen_sex_title(),
+          kitaru.teen_sex_title,
           '的面色更加的红润，尾巴有意无意地拍了几下 ',
           me.get_colored_name(),
           ' 的腿。',
@@ -228,24 +228,24 @@ module.exports = (handlers) => {
         await era.printAndWait([
           me.get_colored_name(),
           '的手指拢齐，并作成手掌，以不轻不重的力道，极快地在',
-          kitaru.get_teen_sex_title(),
+          kitaru.teen_sex_title,
           '挺翘的臀部上打了一下。',
         ]);
         await era.printAndWait('随着洁白臀肉的抖动，酥麻的快感传递开来。');
         await era.printAndWait([
           '接下来，趁着',
-          kitaru.get_teen_sex_title(),
+          kitaru.teen_sex_title,
           '分神的瞬间，',
           me.get_colored_name(),
           ' 伸出双手，和骑在自己身上的',
-          kitaru.get_teen_sex_title(),
+          kitaru.teen_sex_title,
           '的双手相扣。',
         ]);
         era.printButton('「那你喂我。」', 1);
         await era.input();
         await kitaru.say_and_wait('欸！可是……');
         await era.printAndWait([
-          kitaru.get_teen_sex_title(),
+          kitaru.teen_sex_title,
           '柔若无骨的双手被 ',
           me.get_colored_name(),
           ' 握着，自然是没有办法用手喂 ',
@@ -271,7 +271,7 @@ module.exports = (handlers) => {
           '碎屑落在了 ',
           me.get_colored_name(),
           ' 的身上，又被',
-          kitaru.get_teen_sex_title(),
+          kitaru.teen_sex_title,
           '小心地用舌尖拭去。',
         ]);
         await era.printAndWait([
@@ -282,7 +282,7 @@ module.exports = (handlers) => {
           '本来处于半躺状态的 ',
           me.get_colored_name(),
           ' 趁着',
-          kitaru.get_teen_sex_title(),
+          kitaru.teen_sex_title,
           '对付巧克力的分神，坐了起来。',
         ]);
         await kitaru.say_and_wait('咕！');
@@ -298,7 +298,7 @@ module.exports = (handlers) => {
           '舌头在',
           kitaru.sex,
           '的口腔中游走，将巧克力的味道和',
-          kitaru.get_teen_sex_title(),
+          kitaru.teen_sex_title,
           '的唾液混合在一起，在搅动间发出浓稠的淫靡声响。',
         ]);
         await kitaru.say_and_wait('咕……');
@@ -353,7 +353,7 @@ module.exports = (handlers) => {
       await era.printAndWait([
         me.get_colored_name(),
         '见着橘色头发的',
-        kitaru.get_teen_sex_title(),
+        kitaru.teen_sex_title,
         '焦急的向 ',
         me.get_colored_name(),
         ' 跑过来。',
@@ -392,7 +392,7 @@ module.exports = (handlers) => {
       ]);
       await era.printAndWait([
         '整整十二个象征着星座的巧克力，尽管做工有些粗糙，但',
-        kitaru.get_teen_sex_title(),
+        kitaru.teen_sex_title,
         '的心意确实的蕴含在其中，除了份量对于一个人来说无论如何都有些过多了。',
       ]);
       era.printButton('「要我一个人吃完吗？」', 1);
@@ -411,7 +411,7 @@ module.exports = (handlers) => {
       await kitaru.say_and_wait('如果你不介意的话，可以两个人一起吃它吗？');
       await era.printAndWait([
         '指了指盒中看起来有些粗糙的手工巧克力，',
-        kitaru.get_teen_sex_title(),
+        kitaru.teen_sex_title,
         '的脸颊有些若有若无的绯红。',
       ]);
       await kitaru.say_and_wait('就是……感情很好的各吃一半这样。');
@@ -454,7 +454,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '在赛',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '中出身平平无奇的 ',
       kitaru.get_colored_name(),
       ' 在青叶赏的糟糕表现之后，还能接连取下包括菊花赏在内的几场重赏的冠军，',
@@ -463,9 +463,9 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '推不掉，毕竟相较于同期早早就宣称是以挑战速度极限的栗毛赛',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '，还是来自于目白家的长距离赛',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '，除了赛场，胜者live以外，偶尔会在神社露面的 ',
       kitaru.get_colored_name(),
       ' 可称得上是神秘。',
@@ -497,7 +497,7 @@ module.exports = (handlers) => {
       ' 打的圆场，才让话题风向往着 ',
       kitaru.get_colored_name(),
       ' 是一个冷静而沉默寡言的',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '导去。',
     ]);
     await era.printAndWait([
@@ -649,7 +649,7 @@ module.exports = (handlers) => {
     era.drawLine({ content: '市郊墓园' });
     await era.printAndWait([
       '橘色的赛',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '正对着那方代表着',
       kitaru.sex,
       '已逝',
@@ -668,7 +668,7 @@ module.exports = (handlers) => {
       '被 ',
       me.get_colored_name(),
       ' 拍到头的',
-      kitaru.get_teen_sex_title(),
+      kitaru.teen_sex_title,
       '发出了一声悲鸣。',
     ]);
     era.printButton('「需要帮助吗？」', 1);
@@ -706,12 +706,12 @@ module.exports = (handlers) => {
       '结果在金鯱赏之后，发现自己还是以前那个缩在',
       kitaru.get_bigger_sibling_sex_title(),
       '影子里的小',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '。',
     ]);
     await kitaru.say_and_wait([
       '完全不知道为什么要成为赛',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '，只是凭着命定之人的指示踏上赛场罢了……',
     ]);
     await kitaru.say_and_wait('是不是就此退役比较好呢？');
@@ -756,7 +756,7 @@ module.exports = (handlers) => {
     await era.input();
     await era.printAndWait([
       '面前',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '的双耳摆动了起来。',
     ]);
     era.printButton('「我说的没错吧？」', 1);
@@ -791,10 +791,7 @@ module.exports = (handlers) => {
   };
 
   handlers[95 + 14] = async (kitaru, me, callname) => {
-    await print_event_name(
-      ['背负众人愿望的', kitaru.get_teen_sex_title()],
-      kitaru,
-    );
+    await print_event_name(['背负众人愿望的', kitaru.teen_sex_title], kitaru);
     await era.printAndWait([
       kitaru.get_colored_name(),
       ' 在先前采访上的糟糕表现，引来了不少媒体的抨击。',
@@ -879,7 +876,7 @@ module.exports = (handlers) => {
     await era.input();
     await era.printAndWait([
       '将手放在',
-      kitaru.get_teen_sex_title(),
+      kitaru.teen_sex_title,
       '的肩膀上，稍稍用力将还在不断抗拒的',
       kitaru.sex,
       '推到了主持人的话筒前。',

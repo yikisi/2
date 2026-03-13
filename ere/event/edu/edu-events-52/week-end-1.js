@@ -45,7 +45,7 @@ module.exports = (handlers) => {
     );
     await era.printAndWait([
       '与躁动的青春期本格化',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '相处，在社会意义上正如走钢丝般危险。',
     ]);
     await era.printAndWait([
@@ -60,7 +60,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '「天真烂漫的小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '在追逐纯粹的梦想」，如此振奋人心的构成究竟有什么危险的？',
     ]);
     await era.printAndWait([
@@ -74,7 +74,7 @@ module.exports = (handlers) => {
       '怀揣着想要帮助名为「',
       urara.get_colored_actual_name(),
       '」的小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '实现愿望的热情，',
       me.get_colored_name(),
       ' 来到了与其约定的地点。',
@@ -148,7 +148,7 @@ module.exports = (handlers) => {
       '从草坪上坐起来，',
       urara.get_colored_name(),
       ' 终于想起了什么，但面对小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '迟钝的反应，',
       me.get_colored_name(),
       ' 也只是笑笑。',
@@ -163,7 +163,7 @@ module.exports = (handlers) => {
       ' 一同坐在夕阳下的草坪上，',
       me.get_colored_name(),
       ' 向望着红霞小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '问道。',
     ]);
 
@@ -173,7 +173,7 @@ module.exports = (handlers) => {
     await era.printAndWait([
       urara.get_colored_name(),
       ' 并非光说不练的',
-      urara.get_child_sex_title(),
+      urara.child_sex_title,
       '，',
       urara.sex,
       '所做出的一切都是真诚之举。',
@@ -185,9 +185,9 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '一般来说，尽管不推崇将一着作为',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '的全部，但选择「取胜」的',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '往往对第一有着很强的执念。',
     ]);
     await era.printAndWait([
@@ -208,7 +208,7 @@ module.exports = (handlers) => {
     await era.input();
     await era.printAndWait([
       '没有直接回答大人的问题，小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '反而向 ',
       me.get_colored_name(),
       ' 抛回了另一个问题。',
@@ -218,7 +218,7 @@ module.exports = (handlers) => {
       '嗯？要说一起玩过后确实很开心，但这是……？不等 ',
       me.get_colored_name(),
       ' 的回答，小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '继续笑着讲道。',
     ]);
     await urara.say_and_wait(
@@ -230,7 +230,7 @@ module.exports = (handlers) => {
       ' 身边，',
       urara.get_colored_name(),
       ' 开朗的笑着，',
-      urara.get_teen_sex_title(),
+      urara.teen_sex_title,
       '的樱花般的眼瞳中映着温柔的红霞。',
     ]);
     await urara.say_and_wait(
@@ -248,7 +248,7 @@ module.exports = (handlers) => {
       '原来如此，名为「',
       urara.get_colored_actual_name(),
       '」的',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '意外有点小麻烦，不过幸好',
       urara.sex,
       '很清楚自己想要什么。',
@@ -335,7 +335,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '视线跟着思维惯性转向一侧，脱掉了湿漉漉的运动服外套，小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '正安心的靠在 ',
       me.get_colored_name(),
       ' 身边。',
@@ -346,7 +346,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '但是还没得及感受小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '的温润，',
       me.get_colored_name(),
       ' 便惊恐地意识到事情有一丝不对。',
@@ -364,7 +364,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '抬头思索一番后，小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '像是终于想起了什么般恍然大悟，对噤声的 ',
       me.get_colored_name(),
       ' 露出了有点害羞的笑容。',
@@ -380,14 +380,14 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '面对如此没心没肺的小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '，',
       me.get_colored_name(),
       ' 彻底哑口无言了。',
     ]);
     await era.printAndWait([
       '回避着小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '越贴越紧的身体与略带疑惑的笑脸，',
       me.get_colored_name(),
       ' 忧愁的望着夕阳，眼中全是对 ',
@@ -419,7 +419,7 @@ module.exports = (handlers) => {
     era.drawLine();
     await in_urara.say_as_unknown_and_wait([
       '总之，与小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '一同前进的时光，终于运转了起来。',
     ]);
     await in_urara.say_as_unknown_and_wait('……');

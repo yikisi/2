@@ -199,7 +199,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '那是站上赛场准备冲出闸门时，与「历战的赛',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '」所相符的神态。',
     ]);
     await era.printAndWait([
@@ -310,7 +310,7 @@ module.exports = (handlers) => {
     ]);
     await in_urara.say_as_unknown_and_wait([
       '您，喜欢听故事吗？那是一位渺小到不能再渺小的……',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '的故事——',
     ]);
     era.drawLine();
@@ -639,7 +639,7 @@ module.exports = (handlers) => {
       '现在的 ',
       sys_get_colored_callname(61, 52),
       ' 已经知道了，对于绝大多数',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '来说，某些比赛一生都只有一次机会。',
     ]);
     await halo.say_and_wait(
@@ -656,7 +656,7 @@ module.exports = (handlers) => {
     );
     await halo.say_and_wait([
       '因为对于一流的',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '来说，虽然很恼人，但其实别人的非议与怨念都不重要。',
     ]);
     await halo.say_and_wait([

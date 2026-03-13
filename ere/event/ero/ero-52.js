@@ -45,7 +45,7 @@ module.exports = class extends CustomizedEro {
       await in_urara.say_as_unknown_and_wait('唉，您啊……为什么会变成这样呢？');
       await in_urara.say_as_unknown_and_wait([
         '不过值得庆幸，乌拉拉不会对训练员',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '（您）过于残酷，和别人不一样呢……',
       ]);
       era.drawLine();
@@ -57,7 +57,7 @@ module.exports = class extends CustomizedEro {
         '察觉到 ',
         me.get_colored_name(),
         ' 的醒来，在床边缩成一团的小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '急忙无力地撑起耳朵，揉搓着哭红的小脸与 ',
         me.get_colored_name(),
         ' 背身相向。',
@@ -67,7 +67,7 @@ module.exports = class extends CustomizedEro {
       ]);
       await era.printAndWait([
         '即使泪水不停滴在蜷起的膝上，即使话语如不加掩饰的陷阱，',
-        urara.get_teen_sex_title(),
+        urara.teen_sex_title,
         '依旧没能如愿变得「卑劣」。',
       ]);
       await era.printAndWait(['至少，密室半掩的大门并没有锁。']);
@@ -84,7 +84,7 @@ module.exports = class extends CustomizedEro {
       if ((await era.input()) === 1) {
         await era.printAndWait([
           '慢慢贴近小',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '的背后，',
           me.get_colored_name(),
           ' 从身后握住了',
@@ -145,7 +145,7 @@ module.exports = class extends CustomizedEro {
         ]);
         await era.printAndWait([
           '随着被推开的厚重门扉那沉闷的回弹声，没能得到回应的小',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '，被抛在了千疮百孔的昏暗中。',
         ]);
         era.drawLine();

@@ -43,7 +43,7 @@ module.exports = (handlers) => {
     await maya.say_and_wait('咦～！？那再去一个地方就好～！人家想去训练员室！');
     await maya.say_and_wait([
       '很久很久以前，有一位赛',
-      maya.get_uma_sex_title(),
+      maya.uma_sex_title,
       '在决胜服送到的前一天遭遇车祸身亡了……',
     ]);
     await maya.say_and_wait([

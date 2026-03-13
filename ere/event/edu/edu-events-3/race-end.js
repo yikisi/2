@@ -53,19 +53,19 @@ module.exports = class extends Edu3UntilOutStart {
         '首先是逃马。开闸后用极快的速度拉开与对手的距离，讲求速度和高爆发力，缺点是长距离时容易因耐力不足而失速，也因为脚程和速度问题，受伤往往比其他跑法严重。',
       );
       await era.printAndWait(
-        `听说有一位橘红发色，跑起来好似流线型载具的${teio.get_uma_sex_title()}便精于此道。`,
+        `听说有一位橘红发色，跑起来好似流线型载具的${teio.uma_sex_title}便精于此道。`,
       );
       era.println();
       await era.printAndWait(
-        `第二种是先行。此种跑法在开闸起跑后不急着拉开距离，反而利用自身的高耐力和速度紧咬在逃马后面，等到逃马一失速就马上反超过去，缺点是对于反超的时机不好掌握，同时对耐力和爆发力的要求颇高，也因为要瞬间加速，因此脚底和小腿更容易在比赛中受伤，且加速时的跑姿对${teio.get_uma_sex_title()}本身的柔韧度有一定的要求。`,
+        `第二种是先行。此种跑法在开闸起跑后不急着拉开距离，反而利用自身的高耐力和速度紧咬在逃马后面，等到逃马一失速就马上反超过去，缺点是对于反超的时机不好掌握，同时对耐力和爆发力的要求颇高，也因为要瞬间加速，因此脚底和小腿更容易在比赛中受伤，且加速时的跑姿对${teio.uma_sex_title}本身的柔韧度有一定的要求。`,
       );
       era.println();
       await era.printAndWait(
-        `另一种叫做差行。开闸后待在马群的中间，利用高意志力潜伏在逃马和先行马后，当时机成熟后将利用自身的高爆发力和极高的速度反超杀对方个措手不及，缺点为必须承得住气，对时机的掌握非常看经验判断，且对爆发力要求非常高。听闻，有一位来自乡下的芦毛${teio.get_uma_sex_title()}便以擅长此道而出名。`,
+        `另一种叫做差行。开闸后待在马群的中间，利用高意志力潜伏在逃马和先行马后，当时机成熟后将利用自身的高爆发力和极高的速度反超杀对方个措手不及，缺点为必须承得住气，对时机的掌握非常看经验判断，且对爆发力要求非常高。听闻，有一位来自乡下的芦毛${teio.uma_sex_title}便以擅长此道而出名。`,
       );
       era.println();
       await era.printAndWait(
-        `最后一种为追马。开闸后潜伏在马群的最后面，利用自身的高自制力和耐力蓄势待发，等时机一到马上利用自身的高爆发力和速度反超前面的对手，缺点为反追的成功率不高，也对${teio.get_uma_sex_title()}本身的自制力要求很高。在圈子里口口相传的某个个头小，但奔跑起来如闪电追风般的${teio.get_uma_sex_title()}便是其中佼佼者。`,
+        `最后一种为追马。开闸后潜伏在马群的最后面，利用自身的高自制力和耐力蓄势待发，等时机一到马上利用自身的高爆发力和速度反超前面的对手，缺点为反追的成功率不高，也对${teio.uma_sex_title}本身的自制力要求很高。在圈子里口口相传的某个个头小，但奔跑起来如闪电追风般的${teio.uma_sex_title}便是其中佼佼者。`,
       );
       era.println();
       await era.printAndWait(
@@ -73,7 +73,7 @@ module.exports = class extends Edu3UntilOutStart {
           teio.name
         } 首次参加正式跑步的姿态，结合过往的训练表现，在心里确认了${
           teio.sex
-        }的跑法，初步拟定了一个训练计划。皮下若隐若现的小腿肌腱饱满有力，几次加速的步伐展现出的柔韧性良好，对于发力时机的把控仿佛有一种天生的灵敏嗅觉——天才的先行${teio.get_uma_sex_title()}。`,
+        }的跑法，初步拟定了一个训练计划。皮下若隐若现的小腿肌腱饱满有力，几次加速的步伐展现出的柔韧性良好，对于发力时机的把控仿佛有一种天生的灵敏嗅觉——天才的先行${teio.uma_sex_title}。`,
       );
       await teio.say_and_wait('训练员？怎么样！');
       await era.printAndWait(
@@ -89,7 +89,7 @@ module.exports = class extends Edu3UntilOutStart {
       await teio.say_and_wait('欸——欸！');
       era.println();
       await era.printAndWait(
-        `手指在${teio.get_uma_sex_title()}最重要的腿部上摩挲，所有信息都从触觉中反馈而来——训练员的技术。果不其然，可以确认一个事实。被 ${
+        `手指在${teio.uma_sex_title}最重要的腿部上摩挲，所有信息都从触觉中反馈而来——训练员的技术。果不其然，可以确认一个事实。被 ${
           me.name
         } 的担当称作是「帝王舞步」的特殊跑法，尽管能基于${
           teio.sex
@@ -104,7 +104,7 @@ module.exports = class extends Edu3UntilOutStart {
           me.name
         } 正在集中精神思考，被传入耳边的娇声激了一下，回归现实。看着脸微微红，偏着头看 ${
           me.name
-        } 的${teio.get_uma_sex_title()}，${me.name} 一时竟然不知如何说起。`,
+        } 的${teio.uma_sex_title}，${me.name} 一时竟然不知如何说起。`,
       );
       era.printButton('「……没事，你的身体很厉害啊。」', 1);
       await era.input();
@@ -118,7 +118,7 @@ module.exports = class extends Edu3UntilOutStart {
       await era.printAndWait(
         `至于腿的问题……${
           me.name
-        } 想，可能不会影响生涯也说不定，毕竟${teio.get_uma_sex_title()}出现这种问题很常见，自己只要精心护理，制定合适的训练内容，就能至少让${
+        } 想，可能不会影响生涯也说不定，毕竟${teio.uma_sex_title}出现这种问题很常见，自己只要精心护理，制定合适的训练内容，就能至少让${
           teio.sex
         }在役期间不出问题。`,
       );
@@ -136,7 +136,7 @@ module.exports = class extends Edu3UntilOutStart {
       await era.printAndWait('漂亮。');
       await era.printAndWait(`${me.name} 不禁在内心喝起采来。`);
       await era.printAndWait(
-        `一骑绝尘的狂奔，瞬间爆发的加速，姿态完美的身体——真不愧是天才的${teio.get_uma_sex_title()}。`,
+        `一骑绝尘的狂奔，瞬间爆发的加速，姿态完美的身体——真不愧是天才的${teio.uma_sex_title}。`,
       );
       await era.printAndWait('刚出道便有这等表现，真是潜力十足，未来可期。');
       await era.printAndWait(
@@ -153,7 +153,7 @@ module.exports = class extends Edu3UntilOutStart {
       await era.printAndWait(
         ` ${me.name} 拍了拍${
           teio.sex
-        }的肩，顺手搭上去，用恰好的力道揉了揉——帮${teio.get_teen_sex_title()}缓解身体上的疲劳。`,
+        }的肩，顺手搭上去，用恰好的力道揉了揉——帮${teio.teen_sex_title}缓解身体上的疲劳。`,
       );
       await era.printAndWait(
         `${teio.sex}脸颊红晕未退，一脸兴奋地看着 ${me.name}。`,
@@ -168,7 +168,7 @@ module.exports = class extends Edu3UntilOutStart {
 
       await teio.say_and_wait('我的第一个目标——是此后无败，夺下三冠！');
       await era.printAndWait(
-        `${teio.get_teen_sex_title()}激情的发言不禁让 ${
+        `${teio.teen_sex_title}激情的发言不禁让 ${
           me.name
         } 嘴角上扬，该说是初生牛犊不怕虎，还是说${
           teio.sex
@@ -177,7 +177,7 @@ module.exports = class extends Edu3UntilOutStart {
       era.println();
 
       await me.say_and_wait(
-        `这可是个严峻的目标……要知道，曾经有很多出名的赛${teio.get_uma_sex_title()}，现在也有许多天才，${
+        `这可是个严峻的目标……要知道，曾经有很多出名的赛${teio.uma_sex_title}，现在也有许多天才，${
           teio.sex
         }们无一不想做到这个成就，实际上能达成的凤毛麟角。`,
       );
@@ -186,7 +186,7 @@ module.exports = class extends Edu3UntilOutStart {
       );
 
       await era.printAndWait(
-        `${teio.get_teen_sex_title()}眨了眨眼，斗志一丝一毫都没有消失。`,
+        `${teio.teen_sex_title}眨了眨眼，斗志一丝一毫都没有消失。`,
       );
       await teio.say_and_wait('我会努力让这个梦实现的！');
       era.printButton(`那么，我们一起加油吧。`, 1);
@@ -214,7 +214,7 @@ module.exports = class extends Edu3UntilOutStart {
       await era.printAndWait('真是一场出色的表演。');
       await era.printAndWait(`${me.name} 情不自禁地鼓掌叫好。`);
       await era.printAndWait(
-        `这种等级的比赛——场上拼搏的${teio.get_uma_sex_title()}${teio.get_teen_sex_title()}们，挥洒着汗水与青春奔跑的身姿，实在是感动人心。而 ${
+        `这种等级的比赛——场上拼搏的${teio.uma_sex_title}${teio.teen_sex_title}们，挥洒着汗水与青春奔跑的身姿，实在是感动人心。而 ${
           me.name
         } 的担当，无疑是其中最好的一部分。`,
       );
@@ -222,7 +222,7 @@ module.exports = class extends Edu3UntilOutStart {
       await era.printAndWait(
         `该去给${teio.sex}买杯蜂蜜特饮了，${
           me.name
-        } 心想着，快步跑到了餐车，又回到场下，观赏着自家${teio.get_uma_sex_title()}的演出。`,
+        } 心想着，快步跑到了餐车，又回到场下，观赏着自家${teio.uma_sex_title}的演出。`,
       );
       era.println();
 
@@ -272,7 +272,7 @@ module.exports = class extends Edu3UntilOutStart {
         '我们的梦想……还没有实现吧！我想接着跑下去，用我自己的方式，你答应过帮我的吧。',
       );
       await era.printAndWait(
-        `${teio.get_teen_sex_title()}抬起眼，澄澈纯洁，又暗含执念的眼神盯着 ${
+        `${teio.teen_sex_title}抬起眼，澄澈纯洁，又暗含执念的眼神盯着 ${
           me.name
         }，${me.name} 张口，却无言。`,
       );
@@ -300,7 +300,7 @@ module.exports = class extends Edu3UntilOutStart {
       await era.printAndWait(
         `${
           me.name
-        } 站在看台上，想着这一年来的种种经历。${teio.get_teen_sex_title()}能走到现在，离不开 ${
+        } 站在看台上，想着这一年来的种种经历。${teio.teen_sex_title}能走到现在，离不开 ${
           me.name
         }，而 ${me.name} 也是被${teio.sex}的坚韧和执着所吸引，自愿去帮助${
           teio.sex
@@ -321,9 +321,7 @@ module.exports = class extends Edu3UntilOutStart {
       await era.printAndWait(
         `${me.name} 抓紧栏杆猛地探出头去，在赛场上捕捉那个属于 ${
           me.name
-        } 的${teio.get_uma_sex_title()}。找到了，领头的位置——${
-          teio.sex
-        }的动作？！`,
+        } 的${teio.uma_sex_title}。找到了，领头的位置——${teio.sex}的动作？！`,
       );
       await era.printAndWait(
         `${me.name} 看到帝王以一种非常不正常的姿势向外侧滑——`,
@@ -338,7 +336,7 @@ module.exports = class extends Edu3UntilOutStart {
           me.name
         } 拉住，${me.name} 看着${
           teio.sex
-        }，即使相隔不近也能感受到，痛苦和不甘写满了${teio.get_teen_sex_title()}的脸庞……`,
+        }，即使相隔不近也能感受到，痛苦和不甘写满了${teio.teen_sex_title}的脸庞……`,
       );
       era.println();
       era.printButton('「帝王！」', 1);
@@ -383,7 +381,7 @@ module.exports = class extends Edu3UntilOutStart {
       );
       await era.printAndWait('不过，战况仿佛并非那么理想。');
       await era.printAndWait(
-        `搅成一团的${teio.get_uma_sex_title()}群，竞争激烈，帝王难以破开重围。`,
+        `搅成一团的${teio.uma_sex_title}群，竞争激烈，帝王难以破开重围。`,
       );
       await era.printAndWait(`${me.name} 的手心里不知不觉充满了汗水。`);
       era.drawLine();
@@ -455,14 +453,14 @@ module.exports = class extends Edu3UntilOutStart {
       era.drawLine();
       await teio.say_and_wait('太糟了……', true);
       await era.printAndWait(
-        `自己最擅长的先行跑法完全无法发挥优势，一群${teio.get_uma_sex_title()}互相顶住道路，突破宛如天方夜谭。`,
+        `自己最擅长的先行跑法完全无法发挥优势，一群${teio.uma_sex_title}互相顶住道路，突破宛如天方夜谭。`,
       );
       await era.printAndWait('真的……能做到吗。');
       era.println();
       await teio.say_and_wait('我一定能！', true);
       era.println();
       await era.printAndWait(
-        `奔跑着的${teio.get_uma_sex_title()}聚集又散开，一个狭窄，不易被发掘的只有半马位大小的缝隙暴露出来——`,
+        `奔跑着的${teio.uma_sex_title}聚集又散开，一个狭窄，不易被发掘的只有半马位大小的缝隙暴露出来——`,
       );
       era.println();
       await era.printAndWait(`解说「欸，那是——${teio.name}？！」`);
@@ -494,7 +492,7 @@ module.exports = class extends Edu3UntilOutStart {
         era.println();
 
         await era.printAndWait(
-          `${teio.get_uma_sex_title()}${teio.get_teen_sex_title()}化作一道炽焰流星，最大限度地狂放燃烧着自己的体能，奔跑在赛场上。`,
+          `${teio.uma_sex_title}${teio.teen_sex_title}化作一道炽焰流星，最大限度地狂放燃烧着自己的体能，奔跑在赛场上。`,
         );
         era.println();
 
@@ -583,7 +581,7 @@ module.exports = class extends Edu3UntilOutStart {
         await era.printAndWait(
           `沉重的双腿，火烧的肺，酸楚的手臂——痛苦回到了名为 ${
             teio.name
-          } 的${teio.get_uma_sex_title()}躯体中。`,
+          } 的${teio.uma_sex_title}躯体中。`,
         );
         await era.printAndWait('但是，同样回归的，还有斗志和信念。');
         era.println();
@@ -657,7 +655,7 @@ module.exports = class extends Edu3UntilOutStart {
         await era.printAndWait(
           `解说「时隔一年回到赛场的 ${teio.name} 能追上去吗？${
             teio.sex
-          }超过去了——不，其他的${teio.get_uma_sex_title()}正在紧紧黏在${
+          }超过去了——不，其他的${teio.uma_sex_title}正在紧紧黏在${
             teio.sex
           }的身旁，正在拼命追赶 ${teio.name}！」`,
         );
@@ -705,7 +703,7 @@ module.exports = class extends Edu3UntilOutStart {
         await era.printAndWait(
           `解说「${teio.name} 超越了吗？${
             teio.name
-          } 稍稍领先，要展现德比赛${teio.get_uma_sex_title()}的骨气了吗？！」`,
+          } 稍稍领先，要展现德比赛${teio.uma_sex_title}的骨气了吗？！」`,
         );
         era.println();
 
@@ -715,7 +713,7 @@ module.exports = class extends Edu3UntilOutStart {
         await era.printAndWait('解说「是哪边，哪边？！」');
         era.println();
 
-        await era.printAndWait(`赛${teio.get_uma_sex_title()}「是我——」`);
+        await era.printAndWait(`赛${teio.uma_sex_title}「是我——」`);
         era.println();
 
         await teio.say_and_wait('——赢了——');
@@ -775,7 +773,7 @@ module.exports = class extends Edu3UntilOutStart {
         era.println();
 
         await era.printAndWait(
-          `前方的${teio.get_uma_sex_title()}如风般奔驰，飘散的银发末梢都能打到自己的鼻尖，一旁的红发${teio.get_uma_sex_title()}则如一团跳动的红色火焰紧紧黏在身上，随时要将前方的东西统统吞下。`,
+          `前方的${teio.uma_sex_title}如风般奔驰，飘散的银发末梢都能打到自己的鼻尖，一旁的红发${teio.uma_sex_title}则如一团跳动的红色火焰紧紧黏在身上，随时要将前方的东西统统吞下。`,
         );
         await era.printAndWait(
           '最大限度发挥自己的天分，努力训练，带着绝不认输的觉悟奔赴赛场——如果只是这样，还真是令人恼火。',
@@ -787,7 +785,7 @@ module.exports = class extends Edu3UntilOutStart {
 
         await teio.say_and_wait('可恶……', true);
         await teio.say_and_wait(
-          `或许训练员以前说的没错……这世上有过，并且一直存在很多比我更强的${teio.get_uma_sex_title()}`,
+          `或许训练员以前说的没错……这世上有过，并且一直存在很多比我更强的${teio.uma_sex_title}`,
           true,
         );
         await teio.say_and_wait(
@@ -809,9 +807,7 @@ module.exports = class extends Edu3UntilOutStart {
         await era.input();
         await era.printAndWait(`解说「——是 ${teio.name}——」`);
         era.println();
-        await era.printAndWait(
-          `${teio.get_teen_sex_title()}俯身，发起最后的冲锋。`,
-        );
+        await era.printAndWait(`${teio.teen_sex_title}俯身，发起最后的冲锋。`);
       }
       extra_flag.relation_change = 20;
       extra_flag.love_change = 2;
@@ -860,7 +856,7 @@ module.exports = class extends Edu3UntilOutStart {
         await era.printAndWait(
           `${me.name} 看着灰头土脸，耳朵和尾巴都无精打采下垂，拖着身子走向 ${
             me.name
-          } 的担当${teio.get_uma_sex_title()}，内心也是五味杂陈。`,
+          } 的担当${teio.uma_sex_title}，内心也是五味杂陈。`,
         );
         await teio.say_and_wait(`……`);
         era.printButton(

@@ -31,7 +31,7 @@ module.exports = async (tachyon, me, callname, life_marks) => {
     ' 再也受不了 ',
     tachyon.get_colored_name(),
     ' 这名',
-    tachyon.get_uma_sex_title(),
+    tachyon.uma_sex_title,
     '的任性了',
   ]);
   await era.printAndWait([
@@ -101,7 +101,7 @@ module.exports = async (tachyon, me, callname, life_marks) => {
   await era.printAndWait('废话好多，到底喝不喝');
   await era.printAndWait([
     '……不，说到底这个一向习惯灌别人药的',
-    tachyon.get_phy_sex_title().substring(0, 1),
+    tachyon.phy_sex_title.substring(0, 1),
     '人',
   ]);
   await era.printAndWait('根本就没想过自己喝下药剂吧');
@@ -122,7 +122,7 @@ module.exports = async (tachyon, me, callname, life_marks) => {
   await era.printAndWait([
     me.get_colored_name(),
     ' 想要挣扎，但人类终究还是敌不过',
-    tachyon.get_uma_sex_title(),
+    tachyon.uma_sex_title,
     '的力量，即便是被药物改造过多次的 ',
     me.get_colored_name(),
     ' 也一样',
@@ -173,7 +173,7 @@ module.exports = async (tachyon, me, callname, life_marks) => {
   await era.printAndWait([me.get_colored_name(), ' 忍不住大骂出声']);
   await era.printAndWait([
     '这个',
-    tachyon.get_phy_sex_title().substring(0, 1),
+    tachyon.phy_sex_title.substring(0, 1),
     '在想什么，要死还要拖一个垫背的吗',
   ]);
   await era.printAndWait([
@@ -251,7 +251,7 @@ module.exports = async (tachyon, me, callname, life_marks) => {
     ]);
     await era.printAndWait([
       '从那时开始，这名',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '就不断的在用这些奇怪的药物折磨着自己',
     ]);
     await era.printAndWait('每次都看着自己喝下药物的反应哈哈大笑来取乐');
@@ -263,7 +263,7 @@ module.exports = async (tachyon, me, callname, life_marks) => {
     ' 确实对 ',
     tachyon.get_colored_name(),
     ' 这名',
-    tachyon.get_uma_sex_title(),
+    tachyon.uma_sex_title,
     '的跑法，及',
     tachyon.sex,
     '的梦想感到有趣',
@@ -292,7 +292,7 @@ module.exports = async (tachyon, me, callname, life_marks) => {
     '现在的 ',
     me.get_colored_name(),
     ' 只是希望能够尽快摆脱这名',
-    tachyon.get_uma_sex_title(),
+    tachyon.uma_sex_title,
     '，结果还得被灌这样的毒药，',
   ]);
   await me.say_and_wait(
@@ -394,7 +394,7 @@ module.exports = async (tachyon, me, callname, life_marks) => {
   ]);
   await era.printAndWait([
     '眼前的这名',
-    tachyon.get_uma_sex_title(),
+    tachyon.uma_sex_title,
     '又是谁，自己认识',
     tachyon.sex,
     '吗',
@@ -414,14 +414,14 @@ module.exports = async (tachyon, me, callname, life_marks) => {
   await be_common(tachyon, me);
   await era.printAndWait([
     '听起来真是个奇怪的名字……嘛，毕竟',
-    tachyon.get_uma_sex_title(),
+    tachyon.uma_sex_title,
     '的名字大多都是这样的，歧视他人的姓名也不好',
   ]);
   await era.printAndWait([
     '但不知为何，有种直觉在告诉 ',
     me.get_colored_name(),
     '，和眼前的这名',
-    tachyon.get_uma_sex_title(),
+    tachyon.uma_sex_title,
     '要保持距离',
   ]);
   era.println();
@@ -451,7 +451,7 @@ module.exports = async (tachyon, me, callname, life_marks) => {
   await era.printAndWait([
     me.get_colored_name(),
     ' 有种预感，要是自己踏出了这扇门，大概，就再也不会与这名',
-    tachyon.get_uma_sex_title(),
+    tachyon.uma_sex_title,
     '有所交集了吧',
   ]);
   era.println();

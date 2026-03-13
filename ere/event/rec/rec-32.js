@@ -28,7 +28,7 @@ module.exports = class extends CustomizedRecruit {
           return false;
         }
         era.print(
-          `${me.name} 在今天的选拔赛看到了难忘的一幕，一位有着绝代跑姿的${tachyon.get_uma_sex_title()}`,
+          `${me.name} 在今天的选拔赛看到了难忘的一幕，一位有着绝代跑姿的${tachyon.uma_sex_title}`,
         );
         era.print(
           `${tachyon.sex}起跑的瞬间，${tachyon.sex}冲刺的瞬间，${tachyon.sex}冲线的瞬间`,
@@ -40,7 +40,7 @@ module.exports = class extends CustomizedRecruit {
         era.println();
 
         era.print(
-          `${me.name} 有种急迫感，想要再次看到那名${tachyon.get_uma_sex_title()}，看见那道光`,
+          `${me.name} 有种急迫感，想要再次看到那名${tachyon.uma_sex_title}，看见那道光`,
         );
         await era.printAndWait(
           `${me.name} 也不知道为什么会有最后那个想法，仿佛虚幻这个词忽然出现在 ${me.name} 的脑海中一般……`,
@@ -66,7 +66,7 @@ module.exports = class extends CustomizedRecruit {
           `${me.name} 找遍了一般未出道${tachyon.uma_sex_title}会出没的地方，训练场、模拟赛场、健身房、食堂`,
         );
         await era.printAndWait(
-          `这几天，${me.name} 再没见过那名${tachyon.get_uma_sex_title()}的身影，仿佛凭空消失了一般`,
+          `这几天，${me.name} 再没见过那名${tachyon.uma_sex_title}的身影，仿佛凭空消失了一般`,
         );
         era.println();
 
@@ -86,7 +86,7 @@ module.exports = class extends CustomizedRecruit {
         await era.printAndWait([
           `${me.name} 没有精力去关注对方是谁，`,
           tachyon.get_colored_name(),
-          `，${me.name} 在心中咀嚼着这个名字，不知为何，${me.name} 在听见这个名字时内心猛地一震，${me.name} 有种直觉，这就是 ${me.name} 在寻找的${tachyon.get_uma_sex_title()}${tachyon.sex}的名字`,
+          `，${me.name} 在心中咀嚼着这个名字，不知为何，${me.name} 在听见这个名字时内心猛地一震，${me.name} 有种直觉，这就是 ${me.name} 在寻找的${tachyon.uma_sex_title}${tachyon.sex}的名字`,
         ]);
         era.println();
 
@@ -107,9 +107,7 @@ module.exports = class extends CustomizedRecruit {
         ]);
         era.print(`？？？「上课从来不出现」`);
         era.print(`？？？「随便占据了空教室当成自己的实验室」`);
-        era.print(
-          `？？？「常常给看见的${tachyon.get_uma_sex_title()}塞奇怪的药剂」`,
-        );
+        era.print(`？？？「常常给看见的${tachyon.uma_sex_title}塞奇怪的药剂」`);
         era.print(`？？？「速子前辈的药甜甜的，很好喝哦」`);
         await era.printAndWait(
           `各种奇怪的传闻，却没能传入 ${me.name} 的心里，${me.name} 只是一个劲的想要找到${tachyon.sex}`,
@@ -134,10 +132,10 @@ module.exports = class extends CustomizedRecruit {
         era.println();
 
         era.print(
-          `门后出现的，是一名穿着白大褂的${tachyon.get_uma_sex_title()}，栗色的发梢，干净利落的短发${tachyon.sex_code - 1 ? '，胸前的挺拔哪怕是白大褂都无法盖住' : ''}`,
+          `门后出现的，是一名穿着白大褂的${tachyon.uma_sex_title}，栗色的发梢，干净利落的短发${tachyon.sex_code - 1 ? '，胸前的挺拔哪怕是白大褂都无法盖住' : ''}`,
         );
         era.print(
-          `然后，${tachyon.sex}的腿……意外的纤细，哪怕穿着裤子也能看出，虽然大多的${tachyon.get_uma_sex_title()}都是身体纤细却有着无法想象的巨大怪力，但${tachyon.sex}的腿，明显也比其他${tachyon.get_uma_sex_title()}纤细许多`,
+          `然后，${tachyon.sex}的腿……意外的纤细，哪怕穿着裤子也能看出，虽然大多的${tachyon.uma_sex_title}都是身体纤细却有着无法想象的巨大怪力，但${tachyon.sex}的腿，明显也比其他${tachyon.uma_sex_title}纤细许多`,
         );
         era.print(`这就是那天 ${me.name} 会感到虚幻的原因`);
         era.print(`但是，比腿还更使人震撼的，是${tachyon.sex}的双眼`);

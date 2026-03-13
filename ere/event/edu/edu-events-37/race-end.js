@@ -60,7 +60,7 @@ module.exports = async function (
       '通过出道战来检验自己在中长距离赛道上的发挥，并为接下来参加经典级的经典三冠以及资深级的春秋三冠做好准备。',
     );
     await era.printAndWait(
-      `总的来讲，这就是荣进闪耀为自己赛${flash.get_uma_sex_title()}的生涯所做出的规划。可谓是想把一切能够拿到的荣誉都掌握在手中，光只是以文字的形式书写在纸面上都显得无比豪华。`,
+      `总的来讲，这就是荣进闪耀为自己赛${flash.uma_sex_title}的生涯所做出的规划。可谓是想把一切能够拿到的荣誉都掌握在手中，光只是以文字的形式书写在纸面上都显得无比豪华。`,
     );
     await flash.say_and_wait('只是……');
     await era.printAndWait(
@@ -176,7 +176,7 @@ module.exports = async function (
     await flash.say_and_wait('！');
     await say_by_passer_by_and_wait(
       `粉丝B`,
-      `德比赛${flash.get_uma_sex_title()}荣进闪耀！我会记得今天的。`,
+      `德比赛${flash.uma_sex_title}荣进闪耀！我会记得今天的。`,
     );
     await flash.say_and_wait('大家……');
     era.printButton('「恭喜你，闪耀。」', 1);
@@ -305,7 +305,7 @@ module.exports = async function (
     );
     await say_by_passer_by_and_wait(
       `观众A`,
-      `光是能看到那些很早之前就不再参赛的赛${flash.get_uma_sex_title()}们久违的再度登场这一点就很令人兴奋了，结果没想到${
+      `光是能看到那些很早之前就不再参赛的赛${flash.uma_sex_title}们久违的再度登场这一点就很令人兴奋了，结果没想到${
         flash.sex
       }们居然还能跑出这么惊人的成绩。`,
     );
@@ -316,7 +316,7 @@ module.exports = async function (
       );
       await say_by_passer_by_and_wait(
         `观众B`,
-        `明明作为尚未成长完全的经典级赛${flash.get_uma_sex_title()}，却在比赛的途中接连不断地超越成名已久的前辈。`,
+        `明明作为尚未成长完全的经典级赛${flash.uma_sex_title}，却在比赛的途中接连不断地超越成名已久的前辈。`,
       );
       await say_by_passer_by_and_wait(
         `观众A`,
@@ -424,7 +424,7 @@ module.exports = async function (
       `${flash.sex}此时的笑容无比璀璨，这是在历经磨难达成理想之后无法压抑的喜悦。`,
     );
     await flash.say_and_wait(
-      `在这成为德比赛${flash.get_uma_sex_title()}的东京竞马场上，能够再次取得胜利，真是太……`,
+      `在这成为德比赛${flash.uma_sex_title}的东京竞马场上，能够再次取得胜利，真是太……`,
     );
     await say_by_passer_by_and_wait(`闪耀的母亲`, `闪耀，恭喜 ${your_name}。`);
     await flash.say_and_wait('！');
@@ -553,7 +553,7 @@ module.exports = async function (
     await era.printAndWait(
       `说着，荣进闪耀伸出手，将那本记载了${
         flash.sex
-      }作为赛${flash.get_uma_sex_title()}迄今为止的所有计划的笔记本交给 ${your_name}。`,
+      }作为赛${flash.uma_sex_title}迄今为止的所有计划的笔记本交给 ${your_name}。`,
     );
     await flash.say_and_wait(
       '坦白来讲，即便是现在，在面对这个事实时，我都会产生一些不真实的想法。',
@@ -605,7 +605,7 @@ module.exports = async function (
     await era.input();
     await flash.say_and_wait('！！！');
     await era.printAndWait(
-      `选手休息室内，本因再无牵挂的异国${flash.get_teen_sex_title()}听到 ${your_name} 的话瞪大双眼。`,
+      `选手休息室内，本因再无牵挂的异国${flash.teen_sex_title}听到 ${your_name} 的话瞪大双眼。`,
     );
     await flash.say_and_wait('…………');
     await flash.say_and_wait('呵……呵呵……');

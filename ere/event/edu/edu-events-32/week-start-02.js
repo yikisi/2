@@ -13,7 +13,7 @@ module.exports = (handlers) => {
     await me.say_and_wait('我想看见速子在赛场上奔跑的模样，');
     await me.say_and_wait([
       '想看见速子与其他',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '在拼斗后最后赢下的样子',
     ]);
     await me.say_and_wait('想看速子站在Winning Live的中心C位闪烁的模样');
@@ -34,7 +34,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '虽然说这似乎是与',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '签约的第一天就该问的事情，但当时的 ',
       me.get_colored_name(),
       ' 似乎太为 ',
@@ -84,7 +84,7 @@ module.exports = (handlers) => {
     era.println();
     if (love >= 50 && relation <= 225 && tachyon.sex_code - 1) {
       era.printButton(
-        `「因为，你需要比赛，${tachyon.get_uma_sex_title()}需要比赛」`,
+        `「因为，你需要比赛，${tachyon.uma_sex_title}需要比赛」`,
         1,
       );
       await era.input();
@@ -96,7 +96,7 @@ module.exports = (handlers) => {
         '实验的验证',
       ]);
       await era.printAndWait([
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         '需要比赛，作为其斗争心的发泄',
       ]);
       await era.printAndWait([
@@ -123,7 +123,7 @@ module.exports = (handlers) => {
       await me.say_and_wait('毕竟事关速子的尊严，这届的孩子里也有很多强者，');
       await me.say_and_wait([
         '要是出现了实力上胜过速子的',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         '出现，说什么超越极限的速子不就像……',
       ]);
       era.println();
@@ -168,7 +168,7 @@ module.exports = (handlers) => {
       ]);
       await era.printAndWait([
         '更何况，从',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         '手中逃脱？',
         me.get_colored_name(),
         ' 虽然被 ',
@@ -200,7 +200,7 @@ module.exports = (handlers) => {
       ]);
       await era.printAndWait([
         '裤袜缓缓脱到胯部，彷佛不希望酿造至今的味道从中散去一般，黑色的丝绸却还与',
-        tachyon.get_child_sex_title(),
+        tachyon.child_sex_title,
         '子双腿间那神奇的部位牵连着线————',
       ]);
       await era.printAndWait([
@@ -319,7 +319,7 @@ module.exports = (handlers) => {
       await me.say_and_wait('速子最帅了');
       await me.say_and_wait('速子好可爱');
       await me.say_and_wait('速子好漂亮');
-      await me.say_and_wait(['最厉害最强的', tachyon.get_uma_sex_title()]);
+      await me.say_and_wait(['最厉害最强的', tachyon.uma_sex_title]);
       await me.say_and_wait([
         '超光速的',
         tachyon.sex_code === 1 ? '王子' : '公主',
@@ -570,7 +570,7 @@ module.exports = (handlers) => {
         await me.say_and_wait('我想看见速子在赛场上奔跑的模样');
         await me.say_and_wait([
           '想看见速子与其他',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '在拼斗后最后赢下的样子',
         ]);
         await me.say_and_wait('想看速子站在Winning Live的中心C位闪烁的模样！');
@@ -599,7 +599,7 @@ module.exports = (handlers) => {
         await tachyon.say_and_wait('我不在乎比赛，不在乎是否退学');
         await tachyon.say_and_wait([
           '说坦白讲，跟着这样的',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '也只会造成困扰吧……',
         ]);
         await tachyon.say_and_wait(
@@ -642,7 +642,7 @@ module.exports = (handlers) => {
           ' 对 ',
           tachyon.get_colored_name(),
           ' 这名',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '的了解……',
         ]);
         await era.printAndWait([
@@ -676,17 +676,17 @@ module.exports = (handlers) => {
           '这想都不用想，从',
           tachyon.sex,
           '的目标来看足以——寻找',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '的可能性，超越可能性的界限',
         ]);
         await era.printAndWait([
           '既然如此，那就需要先研究透彻',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '的一切才能谈及极限',
         ]);
         await era.printAndWait([
           '所以，拥有最多高质量的',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '所聚集的特雷森学园绝对是最佳的研究场所，没有之一',
         ]);
         await era.printAndWait([
@@ -704,7 +704,7 @@ module.exports = (handlers) => {
         era.println();
         await era.printAndWait([
           '特雷森学园除去学生也是有着各式各样的支持职位，也有非赛',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '学科，如果说想避免这些麻烦为什么不从一开始就加入这些科系？',
         ]);
         era.println();
@@ -712,12 +712,12 @@ module.exports = (handlers) => {
         era.println();
         await era.printAndWait([
           '成为赛',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '的原因，就是为了上场比赛',
         ]);
         await era.printAndWait([
           '如果不上场比赛的话，那么根本没有选择成为赛',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '的必要',
         ]);
         await era.printAndWait([
@@ -740,7 +740,7 @@ module.exports = (handlers) => {
         era.println();
         await me.say_and_wait([
           '如果连其他',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '，甚至同期都无法战胜，那还谈何超越速度极限？',
         ]);
         await me.say_and_wait([
@@ -767,13 +767,13 @@ module.exports = (handlers) => {
           '即便是模拟赛，只要有机会能够与 ',
           tachyon.get_colored_name(),
           ' 这般强悍的',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '一较高下，那么绝对不用担心对方不会拿出100%的实力来',
         ]);
         await era.printAndWait('但是……');
         era.println();
         era.printButton(
-          `「你有见过，发挥出120%实力的${tachyon.get_uma_sex_title()}吗？」`,
+          `「你有见过，发挥出120%实力的${tachyon.uma_sex_title}吗？」`,
           1,
         );
         await era.input();
@@ -782,7 +782,7 @@ module.exports = (handlers) => {
         await era.printAndWait('要想超越极限，只有在真正的赛场上才有办法');
         await era.printAndWait('从古至今，那么多的赛场爆冷，不都是如此？');
         era.printButton(
-          `「${tachyon.get_uma_sex_title()}的特性，便是只有在赛场上才能发挥出超越极限的实力」`,
+          `「${tachyon.uma_sex_title}的特性，便是只有在赛场上才能发挥出超越极限的实力」`,
           1,
         );
         await era.input();

@@ -48,7 +48,7 @@ module.exports = async () => {
   ]);
   await era.printAndWait([
     '原本应是很重要的问题，但现在只要伸手就能抚摸到小',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '柔顺的粉色长发，这些似乎也都无所谓了。',
   ]);
   await era.printAndWait([
@@ -60,7 +60,7 @@ module.exports = async () => {
   ]);
   await era.printAndWait([
     '总想离开最后却选择放弃的训练员，与选择监禁又逐渐变得温柔的',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '，到底是谁驯化了谁呢？',
   ]);
   await era.printAndWait(['这个答案，或许也只有在此处的二人自己知道了。']);
@@ -117,7 +117,7 @@ module.exports = async () => {
     '而幸福，被名为 ',
     urara.get_colored_actual_name(),
     ' 的小',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '爱着自己的训练员而幸福；',
   ]);
   await era.printAndWait([
@@ -126,7 +126,7 @@ module.exports = async () => {
     '也希望训练员能真心地看向自己，所以名为 ',
     urara.get_colored_actual_name(),
     ' 的小',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '不愿再将 ',
     me.get_colored_name(),
     ' 交给任何人。',
@@ -166,21 +166,21 @@ module.exports = async () => {
     ' 的',
     me.sex,
     '，喜欢过很多人、很多个',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '，但如今，选择已经没有了意义。',
   ]);
   await era.printAndWait([
     '因为站在 ',
     me.get_colored_name(),
     ' 身边的这名小小的',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '，愿意不留余地的成为 ',
     me.get_colored_name(),
     ' 的全部。',
   ]);
   await era.printAndWait([
     '正因如此，今天将会是个特别的日子，而小',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '也已经像曾经决定变成坏孩子那般下定了决心。',
   ]);
   await urara.say_and_wait([callname, '，我，想好了哦——']);
@@ -188,7 +188,7 @@ module.exports = async () => {
     '不知是不是听到了 ',
     me.get_colored_name(),
     ' 的轻声呢喃，小小的',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '发出了这样的宣言。',
   ]);
   await urara.say_and_wait([

@@ -33,7 +33,7 @@ module.exports = class extends Edu3UntilRaceEnd {
       era.println();
 
       await teio.print_and_wait(
-        `${teio.get_uma_sex_title()}的眼神捕捉到了角落里的一节空心树干——`,
+        `${teio.uma_sex_title}的眼神捕捉到了角落里的一节空心树干——`,
       );
       era.println();
 
@@ -106,7 +106,7 @@ module.exports = class extends Edu3UntilRaceEnd {
       era.println();
 
       await teio.print_and_wait(
-        `${teio.get_teen_sex_title()}情不自禁地大吼出声，眼前的幻象随之远去，但声音未停。脑海中，又有文字激昂。`,
+        `${teio.teen_sex_title}情不自禁地大吼出声，眼前的幻象随之远去，但声音未停。脑海中，又有文字激昂。`,
       );
       era.println();
 
@@ -120,7 +120,7 @@ module.exports = class extends Edu3UntilRaceEnd {
       era.println();
 
       await teio.print_and_wait(
-        `${teio.get_teen_sex_title()}握紧双拳，浑身发抖，奋力喊道`,
+        `${teio.teen_sex_title}握紧双拳，浑身发抖，奋力喊道`,
       );
       era.println();
 
@@ -169,7 +169,7 @@ module.exports = class extends Edu3UntilRaceEnd {
       await era.printAndWait(
         `训练刚刚结束，${
           me.name
-        } 和担当一起慢悠悠地散步在回宿舍的路上。${teio.get_uma_sex_title()}${teio.get_adult_sex_title()}此时正甩了甩头，激烈运动导致头发散下，几滴汗珠飞射出来，隐约能看见全身蒸腾的热气。`,
+        } 和担当一起慢悠悠地散步在回宿舍的路上。${teio.uma_sex_title}${teio.get_adult_sex_title()}此时正甩了甩头，激烈运动导致头发散下，几滴汗珠飞射出来，隐约能看见全身蒸腾的热气。`,
       );
       await teio.say_and_wait('嗯？训练员？你说什么？');
       era.println();
@@ -191,7 +191,7 @@ module.exports = class extends Edu3UntilRaceEnd {
       era.println();
 
       await era.printAndWait(
-        `小${teio.get_uma_sex_title()}拿眼睛瞟了 ${
+        `小${teio.uma_sex_title}拿眼睛瞟了 ${
           me.name
         } 一眼，抿嘴笑了，然后又突然面色转沉。`,
       );
@@ -207,9 +207,7 @@ module.exports = class extends Edu3UntilRaceEnd {
         '我的过去的成绩，现在的荣耀，将来的目标，都会与你共享。所以，让我们一起，继续吧。',
       );
       await era.printAndWait(
-        `${teio.get_teen_sex_title()}一丝不苟地，向 ${
-          me.name
-        } 吐露出了这段心声。`,
+        `${teio.teen_sex_title}一丝不苟地，向 ${me.name} 吐露出了这段心声。`,
       );
       era.println();
 
@@ -242,15 +240,13 @@ module.exports = class extends Edu3UntilRaceEnd {
       await era.printAndWait(
         `${
           me.name
-        } 不由得用余光瞥了瞥旁边的小${teio.get_uma_sex_title()}，裸露在外的白色肌肤，私服下藏着粉色肩带的内衣……不，实在太刺激了，再看下去恐怕有伤师德。`,
+        } 不由得用余光瞥了瞥旁边的小${teio.uma_sex_title}，裸露在外的白色肌肤，私服下藏着粉色肩带的内衣……不，实在太刺激了，再看下去恐怕有伤师德。`,
       );
       await era.printAndWait(
         `何况${teio.sex}这身还是如同彩色沙滩服一般的童装，更是让 ${me.name} 平添了一番罪恶感。`,
       );
       await era.printAndWait(
-        `如此可爱的${teio.get_uma_sex_title()}，是与 ${
-          me.name
-        } 签下担当契约的人……`,
+        `如此可爱的${teio.uma_sex_title}，是与 ${me.name} 签下担当契约的人……`,
       );
       era.println();
 
@@ -260,7 +256,7 @@ module.exports = class extends Edu3UntilRaceEnd {
       era.printButton('「什么？」', 1);
       await era.input();
       await era.printAndWait(
-        `元气的${teio.get_teen_sex_title()}声音响起，${
+        `元气的${teio.teen_sex_title}声音响起，${
           me.name
         } 迅速清空大脑放平心态，试图用最平常的样子回复。`,
       );
@@ -309,7 +305,7 @@ module.exports = class extends Edu3UntilRaceEnd {
       await print_event_name('与你一同前行的日子', teio);
 
       await era.printAndWait(
-        `学校的中心，有一处喷泉，上端坐着三女神的雕塑。每天，有无数${teio.get_uma_sex_title()}或人类在这里默默祈祷，许下愿望。`,
+        `学校的中心，有一处喷泉，上端坐着三女神的雕塑。每天，有无数${teio.uma_sex_title}或人类在这里默默祈祷，许下愿望。`,
       );
       await era.printAndWait(
         `${me.name} 盯着上面一张有些神似自己担当的脸，手指轻触口袋里的钱包，要不要许愿呢……`,
@@ -363,7 +359,7 @@ module.exports = class extends Edu3UntilRaceEnd {
         era.println();
 
         await era.printAndWait(
-          `脸红到耳根的小${teio.get_uma_sex_title()}放开了 ${me.name} 的手。`,
+          `脸红到耳根的小${teio.uma_sex_title}放开了 ${me.name} 的手。`,
         );
         await era.printAndWait(
           `一段时间后，等到 ${teio.name} 离去了，${me.name} 回到这里，咧嘴一笑，把钱包里的所有硬币都倒进池中，双手合十，首次认真地许了个愿。`,

@@ -71,37 +71,37 @@ module.exports = async (maru, me, hook, extra_flag) => {
     await print_event_name(`春季锦标前・火焰兰`, maru);
     await era.printAndWait(`准备室`);
     await era.printAndWait(
-      `春季锦标，作为皋月赏的前哨战，许多${maru.get_uma_sex_title()}全力以赴的场所。`,
+      `春季锦标，作为皋月赏的前哨战，许多${maru.uma_sex_title}全力以赴的场所。`,
     );
     await era.printAndWait(`然而此时。`);
     await say_by_passer_by(
       `工作人员`,
-      `已经确认过三遍了，包括${maru.name}在内，一共只有五名赛${maru.get_uma_sex_title()}。`,
+      `已经确认过三遍了，包括${maru.name}在内，一共只有五名赛${maru.uma_sex_title}。`,
     );
     await me.say_and_wait(`啊……谢谢。`);
     await era.printAndWait(
-      `对于${maru.name}来说，在赛场上能享受到了快乐程度是与赛事等级以及参赛的${maru.get_uma_sex_title()}成正比。`,
+      `对于${maru.name}来说，在赛场上能享受到了快乐程度是与赛事等级以及参赛的${maru.uma_sex_title}成正比。`,
     );
     await era.printAndWait(
-      `换句话说，赛事等级越高，能参战的${maru.get_uma_sex_title()}人数以及质量也随之变高，${maru.name}也就愈加享受。`,
+      `换句话说，赛事等级越高，能参战的${maru.uma_sex_title}人数以及质量也随之变高，${maru.name}也就愈加享受。`,
     );
     await era.printAndWait(`如果仅仅是这点还好。`);
     await say_by_passer_by(
-      `${maru.get_uma_sex_title()}A`,
+      `${maru.uma_sex_title}A`,
       `啊，我知道的，这场比赛一定是${maru.name}的胜利。`,
     );
     await say_by_passer_by(
-      `${maru.get_uma_sex_title()}B`,
+      `${maru.uma_sex_title}B`,
       `还有考虑的必要吗？如果不是${maru.name}获胜，我根本想不到其他人怎么战胜${
         maru.sex_code - 1 ? '她' : '他'
       }。`,
     );
     await say_by_passer_by(
-      `参赛的赛${maru.get_uma_sex_title()}A`,
+      `参赛的赛${maru.uma_sex_title}A`,
       `已经无所谓了，反正接下来一定是${maru.name}的胜利，我还是节省体力准备之后的赛事吧。`,
     );
     await say_by_passer_by(
-      `参赛的赛${maru.get_uma_sex_title()}A`,
+      `参赛的赛${maru.uma_sex_title}A`,
       `说到底，没有人能战胜那种怪物。`,
     );
     await maru.say_and_wait(
@@ -166,11 +166,11 @@ module.exports = async (maru, me, hook, extra_flag) => {
     await maru.say_and_wait(`是的，这是和负责的训练员商量之后的结果。`);
     await say_by_passer_by(
       `记者B`,
-      `不好意思打扰一下，听说上次春季锦标报名的赛${maru.get_uma_sex_title()}数只满足了最低参与条件的5人。`,
+      `不好意思打扰一下，听说上次春季锦标报名的赛${maru.uma_sex_title}数只满足了最低参与条件的5人。`,
     );
     await say_by_passer_by(
       `记者B`,
-      `是否可以认为赛${maru.get_uma_sex_title()}们认为自己赢不了${maru.name}所以纷纷避战了呢？`,
+      `是否可以认为赛${maru.uma_sex_title}们认为自己赢不了${maru.name}所以纷纷避战了呢？`,
     );
     await maru.say_and_wait(
       `关于春季锦标相关问题请咨询负责训练员，这里不做表态。`,
@@ -205,13 +205,13 @@ module.exports = async (maru, me, hook, extra_flag) => {
     );
     await era.printAndWait(`训练室内`);
     await maru.say_and_wait(
-      `不愧是德比比赛，前来参加的${maru.get_uma_sex_title()}们水平都很高呢`,
+      `不愧是德比比赛，前来参加的${maru.uma_sex_title}们水平都很高呢`,
     );
     await era.printAndWait(
-      `作为经典三冠之中的第二冠，东京优骏(日本德比)素有最幸运的${maru.get_uma_sex_title()}才能获胜的俗称。`,
+      `作为经典三冠之中的第二冠，东京优骏(日本德比)素有最幸运的${maru.uma_sex_title}才能获胜的俗称。`,
     );
     await era.printAndWait(
-      `即使是实力强大的${maru.get_uma_sex_title()}，在这一关翻车的也比比皆是，但对${
+      `即使是实力强大的${maru.uma_sex_title}，在这一关翻车的也比比皆是，但对${
         maru.name
       }来说`,
     );
@@ -263,7 +263,7 @@ module.exports = async (maru, me, hook, extra_flag) => {
   } else if (extra_flag.race === race_enum.arim_kin && edu_weeks >= 95) {
     await print_event_name('有马纪念前・最盛大的舞台', maru);
     await era.printAndWait(
-      `有马纪念是日本赛事之中最盛大的一场，众多的赛${maru.get_uma_sex_title()}通过投票获得出场许可。`,
+      `有马纪念是日本赛事之中最盛大的一场，众多的赛${maru.uma_sex_title}通过投票获得出场许可。`,
     );
     await era.printAndWait(
       `被称为超级跑车的拥有众多人气的${maru.name}自然也达到了入场的许可。`,
@@ -280,7 +280,7 @@ module.exports = async (maru, me, hook, extra_flag) => {
       `在${maru.name}摆脱阴影之后，以国内最大的舞台——有马纪念为目标，你们开始了练习。`,
     );
     await era.printAndWait(
-      `作为少数在经典年就掌握了领域的${maru.get_uma_sex_title()}，或许在参加经典年限定的赛事能稳压一头，不过在强敌如云的有马纪念上`,
+      `作为少数在经典年就掌握了领域的${maru.uma_sex_title}，或许在参加经典年限定的赛事能稳压一头，不过在强敌如云的有马纪念上`,
     );
     await me.say_and_wait(`只要${maru.name}高兴就好了`, true);
     await era.printAndWait(`这么想着，最后确认了没有遗漏之后。`);
@@ -351,7 +351,7 @@ module.exports = async (maru, me, hook, extra_flag) => {
       }，要一直一直盯着我的背影看哦。`,
     );
     await maru.say_and_wait(
-      `看着其他${maru.get_uma_sex_title()}的话，就算是${
+      `看着其他${maru.uma_sex_title}的话，就算是${
         era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'
       }我也会吃醋的。`,
     );
@@ -372,7 +372,7 @@ module.exports = async (maru, me, hook, extra_flag) => {
     era.printButton(`「有成功的把握吗？」`, 1);
     await era.input();
     await me.say_and_wait(
-      `挑战赫赫有名的${maru.get_uma_sex_title()}们，与${
+      `挑战赫赫有名的${maru.uma_sex_title}们，与${
         maru.sex_code - 1 ? '她' : '他'
       }们交流，对抗，决定胜负。`,
     );
@@ -381,13 +381,11 @@ module.exports = async (maru, me, hook, extra_flag) => {
     await maru.say_and_wait(
       `${
         era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'
-      }对在赛场之中奔跑的${maru.get_uma_sex_title()}们怎么看的呢？`,
+      }对在赛场之中奔跑的${maru.uma_sex_title}们怎么看的呢？`,
     );
     await me.say_and_wait(`为了在赛场上胜利，背后付出了汗水与努力。`);
     await me.say_and_wait(`可是。`);
-    await maru.say_and_wait(
-      `是啊，只有一名${maru.get_uma_sex_title()}能胜利。`,
-    );
+    await maru.say_and_wait(`是啊，只有一名${maru.uma_sex_title}能胜利。`);
     await era.printAndWait(
       `你的眼前再次浮现出了学生会办公室，正中央的那副名言。`,
     );
@@ -396,17 +394,15 @@ module.exports = async (maru, me, hook, extra_flag) => {
       `第一次见到的时候，我想了很久也没想明白该怎么理解。`,
     );
     await maru.say_and_wait(
-      `那些默默努力的${maru.get_uma_sex_title()}们，只是因为失败了，努力就全部都被否定了。`,
+      `那些默默努力的${maru.uma_sex_title}们，只是因为失败了，努力就全部都被否定了。`,
     );
     await maru.say_and_wait(
-      `如果只有一名${maru.get_uma_sex_title()}能够获胜的话，那么其他${maru.get_uma_sex_title()}的努力不就全部白费了吗？`,
+      `如果只有一名${maru.uma_sex_title}能够获胜的话，那么其他${maru.uma_sex_title}的努力不就全部白费了吗？`,
     );
     await maru.say_and_wait(
       `如果是注定失败的结局，那从一开始就放弃转向其他方向才是明智的选择吧？`,
     );
-    await maru.say_and_wait(
-      `——但是，奔跑才是${maru.get_uma_sex_title()}的天性吧？`,
-    );
+    await maru.say_and_wait(`——但是，奔跑才是${maru.uma_sex_title}的天性吧？`);
     await maru.say_and_wait(`起跑前紧张的等待着发令枪的响起。`);
     await maru.say_and_wait(
       `奔跑中孤独面对未知的世界，但并没有想象中那么害怕。`,

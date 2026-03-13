@@ -363,7 +363,7 @@ class EroSleepMakingOuts extends EroMakingOuts {
       '更是在说，将睡着的 ',
       sys_get_colored_callname(attacker.id, defender.id),
       ' 在床上翻了个面，撅着屁股连衣物都被褪下，',
-      defender.get_teen_sex_title(),
+      defender.teen_sex_title,
       '的私密之处被以如此粗暴的方式肆意观赏的自己……',
     ]);
   }
@@ -512,7 +512,7 @@ class EroSleepMakingOuts extends EroMakingOuts {
       );
     }
     await attacker.print_and_wait([
-      defender.get_teen_sex_title(),
+      defender.teen_sex_title,
       '的双唇被肉棒强硬地挤开，在理应用来获取养分的位置，被那硬邦邦挺立起的不妙家伙占为己有，正恣意地散发着叫身体变得奇怪的下流气味。',
     ]);
     await attacker.print_and_wait(
@@ -578,7 +578,7 @@ class EroSleepMakingOuts extends EroMakingOuts {
     await attacker.print_and_wait([
       '这份 ',
       sys_get_colored_callname(attacker.id, defender.id),
-      ` 俯低在自己身下，用手捧起独属于${defender.get_teen_sex_title()}的柔软将滚烫的肉棒围起的姿态……`,
+      ` 俯低在自己身下，用手捧起独属于${defender.teen_sex_title}的柔软将滚烫的肉棒围起的姿态……`,
     ]);
     await defender.say_and_wait('唔……');
     await attacker.print_and_wait(
@@ -663,7 +663,7 @@ class EroSleepMakingOuts extends EroMakingOuts {
       era.get(`talent:${defender.id}:乳头类型`) > 0 ? '粉' : '褐',
       '色的漂亮乳头躲开逐渐凑过来的 ',
       attacker.get_colored_name(),
-      ` 的本能，浅浅起伏着的${defender.get_teen_sex_title()}的柔软乖乖地被含入了坏家伙的嘴里。`,
+      ` 的本能，浅浅起伏着的${defender.teen_sex_title}的柔软乖乖地被含入了坏家伙的嘴里。`,
     ]);
     await attacker.say_and_wait('吸——');
     await attacker.print_and_wait([
@@ -692,7 +692,7 @@ class EroSleepMakingOuts extends EroMakingOuts {
     ]);
     await attacker.print_and_wait('诶……是吗……');
     await attacker.print_and_wait(
-      `轻轻地活用着牙齿，绕着敏感的乳头留下一圈参差的红痕……顺便让怀中的${defender.get_teen_sex_title()}身体不住地颤抖……`,
+      `轻轻地活用着牙齿，绕着敏感的乳头留下一圈参差的红痕……顺便让怀中的${defender.teen_sex_title}身体不住地颤抖……`,
     );
     await attacker.print_and_wait([
       '大概是明白了这边接下来的目标吧，在乳头被舌细细舔舐润滑的瞬间，',
@@ -821,7 +821,7 @@ class EroSleepMakingOuts extends EroMakingOuts {
       ' 的肉棒前所未有的兴奋着。',
     ]);
     await attacker.print_and_wait(
-      `原来……${defender.get_uma_sex_title()}们的尾巴真的能做到这种事吗……`,
+      `原来……${defender.uma_sex_title}们的尾巴真的能做到这种事吗……`,
     );
     await attacker.print_and_wait([
       '……感受着这份暴涨的热度，背过身撅起屁股的 ',

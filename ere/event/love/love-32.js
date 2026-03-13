@@ -496,7 +496,7 @@ module.exports = class extends Love32Base {
       '全世界都知道，',
       tachyon.get_colored_name(),
       ' 是一名疯狂的',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
     ]);
     await tachyon.print_and_wait([
       '但是 ',
@@ -508,7 +508,7 @@ module.exports = class extends Love32Base {
       '知道，',
       tachyon.get_colored_name(),
       ' 是这样的',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
     ]);
     await tachyon.print_and_wait([
       '而 ',
@@ -591,7 +591,7 @@ module.exports = class extends Love32Base {
       );
       await tachyon.print_and_wait([
         '在新居落成的当天，一定会很累吧，哪怕是',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         '的体力大概也会支撑不住',
       ]);
       await tachyon.print_and_wait([
@@ -673,7 +673,7 @@ module.exports = class extends Love32Base {
         '说到底，',
         tachyon.get_colored_name(),
         ' 这名',
-        tachyon.get_phy_sex_title(),
+        tachyon.phy_sex_title,
         '，真的有办法成为那样的陪伴者，那样的伴侣，那样的……',
       ]);
       await tachyon.print_and_wait('爱人吗？');

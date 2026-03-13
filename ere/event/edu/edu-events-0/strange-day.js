@@ -747,7 +747,7 @@ module.exports = class extends MyPrivacyEvents {
       ' 看着眼前已经开始闻起 ',
       me.get_colored_name(),
       ' 气味的',
-      target.get_uma_sex_title(),
+      target.uma_sex_title,
       '，心中恶趣味顿起。',
     ]);
     await printAndWait([

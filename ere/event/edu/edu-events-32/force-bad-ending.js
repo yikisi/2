@@ -20,7 +20,7 @@ async function betray_ending(tachyon, me) {
   await era.printAndWait([
     me.get_colored_name(),
     ' 作为训练员，理当寻找自己要负责的',
-    tachyon.get_uma_sex_title(),
+    tachyon.uma_sex_title,
     '。',
   ]);
   await era.printAndWait([
@@ -37,7 +37,7 @@ async function betray_ending(tachyon, me) {
   ]);
   await era.printAndWait([
     '没过多久，没有招募到任何',
-    tachyon.get_uma_sex_title(),
+    tachyon.uma_sex_title,
     '的 ',
     me.get_colored_name(),
     '，被开除出了特雷森学园。',
@@ -46,7 +46,7 @@ async function betray_ending(tachyon, me) {
   await era.printAndWait([me.get_colored_name(), ' 乐观地想着。']);
   await era.printAndWait([
     '与其被强迫着与不适合自己的',
-    tachyon.get_uma_sex_title(),
+    tachyon.uma_sex_title,
     '配合，不如干脆不干。',
   ]);
 
@@ -63,7 +63,7 @@ async function betray_ending(tachyon, me) {
   await era.printAndWait([
     me.get_colored_name(),
     ' 运用着那莫名熟练的厨艺，很快的就将餐馆的名声打响，特雷森周遭，甚至特雷森学园的',
-    tachyon.get_uma_sex_title(),
+    tachyon.uma_sex_title,
     '都经常来光顾 ',
     me.get_colored_name(),
     ' 的店面。',
@@ -95,7 +95,7 @@ async function betray_ending(tachyon, me) {
   await era.printAndWait(['忽然。']);
   await era.printAndWait([
     '那名',
-    tachyon.get_uma_sex_title(),
+    tachyon.uma_sex_title,
     '，如闪电一般划过天际。',
   ]);
   await era.printAndWait([
@@ -106,12 +106,12 @@ async function betray_ending(tachyon, me) {
   await era.printAndWait([
     tachyon.get_colored_name(),
     '，那个莫名其妙的',
-    tachyon.get_uma_sex_title(),
+    tachyon.uma_sex_title,
     '。',
   ]);
   await era.printAndWait([
     '自从那天在实验室里告别以来，就再未谋面的',
-    tachyon.get_uma_sex_title(),
+    tachyon.uma_sex_title,
     '。',
   ]);
   await era.printAndWait([

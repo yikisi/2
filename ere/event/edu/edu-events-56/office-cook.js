@@ -35,7 +35,7 @@ module.exports = async (kitaru, me, callname, hook, event_object) => {
     await kitaru.say_and_wait([callname, '！']);
     await era.printAndWait([
       '双手合十的',
-      kitaru.get_teen_sex_title(),
+      kitaru.teen_sex_title,
       '在 ',
       me.get_colored_name(),
       ' 面前摆出了楚楚可怜的表情，橙色的尾巴也低声下气的垂了下来。',
@@ -47,7 +47,7 @@ module.exports = async (kitaru, me, callname, hook, event_object) => {
   await me.say_and_wait('咕嘟');
   await era.printAndWait([
     '或许是由于',
-    kitaru.get_uma_sex_title(),
+    kitaru.uma_sex_title,
     '本身的味觉过于敏感，这碗汤的调味有些过于淡了！',
   ]);
   await era.printAndWait([
@@ -57,7 +57,7 @@ module.exports = async (kitaru, me, callname, hook, event_object) => {
   ]);
   await kitaru.say_and_wait([callname, '！味道如何？']);
   await era.printAndWait([
-    kitaru.get_teen_sex_title(),
+    kitaru.teen_sex_title,
     '黄水晶般的双眼闪闪发光的看着 ',
     me.get_colored_name(),
     '。',

@@ -48,7 +48,7 @@ module.exports = async (urara, me, callname, hook, event_object) => {
   ]);
   await era.printAndWait([
     '不会是被新年的人流堵在路上了吧？虽然倒不担心',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '会被挤住，可 ',
     urara.get_colored_name(),
     ' 找不到路的话……',
@@ -57,7 +57,7 @@ module.exports = async (urara, me, callname, hook, event_object) => {
     '但正当 ',
     me.get_colored_name(),
     ' 准备原路返回去寻找担当时，却又立刻在不远处听到了',
-    urara.get_teen_sex_title(),
+    urara.teen_sex_title,
     '熟悉的清脆呼唤声。',
   ]);
   await urara.say_and_wait([callname, '！我在这边！乌拉拉在这边哦！']);
@@ -186,7 +186,7 @@ module.exports = async (urara, me, callname, hook, event_object) => {
     ' 刚开口时 ',
     me.get_colored_name(),
     ' 想到了小',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '的一万种搭话模式，但唯独没想到竟然能是严肃又沉重的话题。',
   ]);
   await era.printAndWait([
@@ -317,7 +317,7 @@ module.exports = async (urara, me, callname, hook, event_object) => {
   era.drawLine();
   await era.printAndWait([
     '以小',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '的笑容做结，不知不觉中，',
     me.get_colored_name(),
     ' 与 ',
@@ -391,7 +391,7 @@ module.exports = async (urara, me, callname, hook, event_object) => {
     '可恶，怎么现在就连 ',
     urara.get_colored_name(),
     ' 也会这么想了？而且',
-    me.get_phy_sex_title(),
+    me.phy_sex_title,
     '婆妈一点有什么错！',
   ]);
   await urara.say_and_wait([

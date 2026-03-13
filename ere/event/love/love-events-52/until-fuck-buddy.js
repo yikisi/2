@@ -37,7 +37,7 @@ module.exports = class extends CustomizedLove {
     await in_urara.say_as_unknown_and_wait(
       `如果是往常，现在的 ${
         urara.name
-      } 理应早已进入了梦乡，但今夜的小${urara.get_uma_sex_title()}却些难以入眠。`,
+      } 理应早已进入了梦乡，但今夜的小${urara.uma_sex_title}却些难以入眠。`,
     );
     await in_urara.say_as_unknown_and_wait(
       `从舍友的床上不断传出的让人脸红心态的低吟声就像某种咒语一般，总将${urara.sex}的思绪带到不知名的某个地方……`,
@@ -53,7 +53,7 @@ module.exports = class extends CustomizedLove {
       `不过渴求地将 ${chara_self_name} 推倒的 ${callname}，虽然有点可怕，但现在好像接受了也不错的样子？`,
     );
     await urara.print_and_wait(
-      `梦里抱着 ${callname} 的${urara.get_uma_sex_title()}那副不害臊的神情也是，以后的 ${chara_self_name} 也会……变成那样不知羞耻的「${urara.get_phy_sex_title()}」吗？`,
+      `梦里抱着 ${callname} 的${urara.uma_sex_title}那副不害臊的神情也是，以后的 ${chara_self_name} 也会……变成那样不知羞耻的「${urara.phy_sex_title}」吗？`,
     );
     await urara.print_and_wait(
       `这样平等的相拥着，那时的 ${callname} 与 ${chara_self_name}，究竟是谁在渴求谁呢……`,
@@ -74,10 +74,10 @@ module.exports = class extends CustomizedLove {
       await urara.print_and_wait(
         `然而在褪掉睡衣，将手${
           urara.sex_code - 1 ? '伸进花园' : '伸向肉棒'
-        }的瞬间，${urara.get_teen_sex_title()} 娇嫩的身体就已做好了迎接高潮的准备。`,
+        }的瞬间，${urara.teen_sex_title} 娇嫩的身体就已做好了迎接高潮的准备。`,
       );
       await urara.print_and_wait(
-        `仅是轻轻一下，小${urara.get_uma_sex_title()}的身体就在比以往任何一次都要激烈的反应下，让无法抑制的让水声打湿了床单。`,
+        `仅是轻轻一下，小${urara.uma_sex_title}的身体就在比以往任何一次都要激烈的反应下，让无法抑制的让水声打湿了床单。`,
       );
       await urara.print_and_wait(
         `而即使用力捂住嘴不让声音漏出，在不住的颤抖中，对 ${callname} 微弱的呼唤还是从蒙住的被子下偷偷溜走了。`,
@@ -89,7 +89,7 @@ module.exports = class extends CustomizedLove {
         );
         await urara.print_and_wait([
           '即使身体酥软无比，汁水还是不断自发性地挤出着乳首，浸透着',
-          urara.get_teen_sex_title(),
+          urara.teen_sex_title,
           '的睡衣。',
         ]);
         era.println();
@@ -99,7 +99,7 @@ module.exports = class extends CustomizedLove {
         `身体发生了无法理解的反应，${chara_self_name} 有点慌张，但欲望依旧占据着身体绝对的支配。`,
       );
       await urara.print_and_wait(
-        `在手指失控的深入与不住的娇声呻吟中，小${urara.get_uma_sex_title()}比以往任何一次都沉浸在对某人的爱欲之中。`,
+        `在手指失控的深入与不住的娇声呻吟中，小${urara.uma_sex_title}比以往任何一次都沉浸在对某人的爱欲之中。`,
       );
       await urara.print_and_wait(
         `就像初尝发情的幼兽期望着被成年雄性所征服，${chara_self_name} 在被单下不断扭动着腰肢。`,
@@ -111,7 +111,7 @@ module.exports = class extends CustomizedLove {
         `被某人施以支配凌虐的妄想仿佛整晚都在持续，${chara_self_name} 甚至不知道自己何时睡着的。`,
       );
       await urara.print_and_wait(
-        `等${urara.get_teen_sex_title()}再次睁开眼睛时，已经是第二天被闹钟叫醒的时候了。`,
+        `等${urara.teen_sex_title}再次睁开眼睛时，已经是第二天被闹钟叫醒的时候了。`,
       );
       await urara.print_and_wait(
         '在发泄了欲望后，除了床的状况有些糟糕外，这一夜竟然睡得意外安稳，只是——',
@@ -120,7 +120,7 @@ module.exports = class extends CustomizedLove {
         `虽然不是很懂，但是……${callname}、好想来一次……真正的……`,
       );
       await urara.print_and_wait(
-        `在${urara.get_teen_sex_title()}起床时的意犹未尽之间，「不知羞耻」的话语竟再次小声地脱口而出了……`,
+        `在${urara.teen_sex_title}起床时的意犹未尽之间，「不知羞耻」的话语竟再次小声地脱口而出了……`,
       );
       era.println();
       await masturbate(52);
@@ -129,13 +129,13 @@ module.exports = class extends CustomizedLove {
     } else {
       await urara.say_and_wait(`下次还要去见${callname}，还是赶快睡吧……`);
       await urara.print_and_wait(
-        `强忍着躁动的身体，用力将尾巴拉到一边，小${urara.get_uma_sex_title()}艰难的在床上翻了个身。`,
+        `强忍着躁动的身体，用力将尾巴拉到一边，小${urara.uma_sex_title}艰难的在床上翻了个身。`,
       );
       await urara.print_and_wait(
         `用被子与枕头蒙住耳朵，在努力地折腾了一番后，${callname} 终于在室友断断续续的喘息声中进入了梦乡。`,
       );
       await urara.print_and_wait(
-        `但在梦中，小${urara.get_uma_sex_title()}又梦见了，像看待「${urara.get_phy_sex_title()}」般热切的将${
+        `但在梦中，小${urara.uma_sex_title}又梦见了，像看待「${urara.phy_sex_title}」般热切的将${
           urara.sex
         }推倒的 ${callname}……`,
       );
@@ -192,7 +192,7 @@ module.exports = class extends CustomizedLove {
     ]);
     await era.printAndWait([
       '只是即使仅有一墙之隔，沉溺于羞耻快感的小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '依旧没能发现 ',
       me.get_colored_name(),
       ' 已近在咫尺。',
@@ -205,7 +205,7 @@ module.exports = class extends CustomizedLove {
         '十只手指努力地探索着身体的每一个淫靡的角落，不断地从粉嫩的幼穴中拉出粘稠的银丝。',
       );
       await era.printAndWait([
-        urara.get_teen_sex_title(),
+        urara.teen_sex_title,
         '的淫水正源源不断地滴落，在光洁的地板上留下一滩充满背德欲望的小小水洼。',
       ]);
     }
@@ -221,7 +221,7 @@ module.exports = class extends CustomizedLove {
       );
       await era.printAndWait([
         '就算',
-        urara.get_teen_sex_title(),
+        urara.teen_sex_title,
         '将手臂搭在身前极力捧住两只因发情而乱颤的小怪物，乳白色的水渍也依旧在身下越积越多。',
       ]);
       await era.printAndWait(
@@ -255,7 +255,7 @@ module.exports = class extends CustomizedLove {
     );
     await era.printAndWait([
       '含苞待放的',
-      urara.get_teen_sex_title(),
+      urara.teen_sex_title,
       '，正无助又期待地向看不见的某人展示着自己的身体最不堪的一面。',
     ]);
     if (relation > 150) {
@@ -272,7 +272,7 @@ module.exports = class extends CustomizedLove {
       ]);
       await era.printAndWait([
         '小小的',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '此刻像着了魔一般，不断地搅动着敏感到一触即发的身体。',
       ]);
       await urara.say_and_wait([
@@ -291,7 +291,7 @@ module.exports = class extends CustomizedLove {
       ]);
       await era.printAndWait([
         '虽然精神在抗拒着，但堕入情欲的小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '却无法凭自己停下激烈自慰的手指。',
       ]);
       await era.printAndWait([
@@ -319,7 +319,7 @@ module.exports = class extends CustomizedLove {
     );
     await era.printAndWait([
       '失禁般飞溅的爱液浇灌着地板、打湿了鞋子与半脱的长袜，也浸透了',
-      urara.get_teen_sex_title(),
+      urara.teen_sex_title,
       '的内裤与安全裤。',
     ]);
     await era.printAndWait([
@@ -331,7 +331,7 @@ module.exports = class extends CustomizedLove {
       '只是当',
       urara.sex,
       '笨拙地想要收拾身体时，随着双腿的脱力，小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '还是滑坐在了身下那滩逐渐失温的汁水当中……',
     ]);
     await era.printAndWait([

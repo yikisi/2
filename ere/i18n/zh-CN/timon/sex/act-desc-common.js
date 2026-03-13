@@ -396,13 +396,14 @@ module.exports = {
         defender.get_colored_name(),
         ' 舔吸小穴】',
       ]);
-    await printAndWait([
-      '【',
-      attacker.get_colored_name(),
-      ' 请求 ',
-      defender.get_colored_name(),
-      ' 继续舔吸小穴】',
-    ]);
+    else
+      await printAndWait([
+        '【',
+        attacker.get_colored_name(),
+        ' 请求 ',
+        defender.get_colored_name(),
+        ' 继续舔吸小穴】',
+      ]);
   },
   /**
    * @param {CharaTalk} attacker 主动方

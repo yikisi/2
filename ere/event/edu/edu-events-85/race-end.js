@@ -488,7 +488,7 @@ module.exports = (handlers) => {
     await ruby.say_and_wait('关于下一个目标，我有建议想要提出。');
     await era.printAndWait([
       '那是，决定速度最快赛',
-      ruby.get_uma_sex_title(),
+      ruby.uma_sex_title,
       '的——',
       race_infos[race_enum.sprt_sta].get_colored_name(),
       '。',

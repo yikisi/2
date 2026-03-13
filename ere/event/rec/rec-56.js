@@ -24,7 +24,7 @@ module.exports = class extends CustomizedRecruit {
     }
     await era.printAndWait([
       '选拔赛，那是一个赛',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '与训练员相遇的地方。',
     ]);
     if (era.get('flag:当前声望') >= 200) {
@@ -35,7 +35,7 @@ module.exports = class extends CustomizedRecruit {
       ]);
       await era.printAndWait([
         '其中之一便是，赛',
-        kitaru.get_uma_sex_title(),
+        kitaru.uma_sex_title,
         '和训练员确定担当关系之后，这长达三年的契约，毫无疑问的，会使双方的命运在名为人生的漫长旅途中短暂的交织在一起。',
       ]);
       await era.printAndWait(
@@ -47,7 +47,7 @@ module.exports = class extends CustomizedRecruit {
       ]);
       await era.printAndWait([
         '赛',
-        kitaru.get_uma_sex_title(),
+        kitaru.uma_sex_title,
         '和训练员确定担当关系之后那长达三年的契约，毫无疑问的，会使双方的命运在名为人生的漫长旅途中短暂的交织在一起。',
       ]);
       await era.printAndWait(
@@ -60,7 +60,7 @@ module.exports = class extends CustomizedRecruit {
     ]);
     await era.printAndWait([
       '特雷森学生们常去的那座神社在此时往往会被选拔赛前来求神拜佛的训练员与',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '们堆满。',
     ]);
     await era.printAndWait([
@@ -100,12 +100,12 @@ module.exports = class extends CustomizedRecruit {
     await era.input();
     await era.printAndWait([
       '可惜，和习俗中说的不同，随着钟声而出现的不是什么神明，而是一位',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '。',
     ]);
     await era.printAndWait([
       '有着偏凌乱的橙色短发，领结因为那对挺拔而被明显的撑起，而宛如稻荷神的狐使般细长的耳朵，正一摆一摆的体现出了',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '的兴奋。',
     ]);
     await era.printAndWait([
@@ -114,14 +114,14 @@ module.exports = class extends CustomizedRecruit {
       '几乎要溢出来的元气外表不符，这位距离 ',
       me.get_colored_name(),
       ' 仅有咫尺之遥的',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '，身上散发着是如此间神社般清冷宁静的体香，配以其左耳悬挂着的肃穆达摩，与点缀在右耳处的黄色雏菊。',
     ]);
     await era.printAndWait([
       '两种截然不同的元素，就这么堆彻 在',
       me.get_colored_name(),
       ' 眼前的这位',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '身上。',
     ]);
     await era.printAndWait([
@@ -130,7 +130,7 @@ module.exports = class extends CustomizedRecruit {
       '抬起头望向 ',
       me.get_colored_name(),
       ' 时，那对星星状的瞳孔，即使是在',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '中，也算的上是独特的类型，正因撞见了 ',
       me.get_colored_name(),
       ' 而闪着欢喜的光芒。',
@@ -193,7 +193,7 @@ module.exports = class extends CustomizedRecruit {
       ]);
       await era.printAndWait([
         '说不定只是眼前这位',
-        kitaru.get_uma_sex_title(),
+        kitaru.uma_sex_title,
         '的癔想而已。',
       ]);
     }
@@ -206,7 +206,7 @@ module.exports = class extends CustomizedRecruit {
     if (temp === 1) {
       await era.printAndWait([
         '的确，毫不了解的成为一位赛',
-        kitaru.get_uma_sex_title(),
+        kitaru.uma_sex_title,
         '的训练员，是对双方都不负责的行为。',
       ]);
       await kitaru.say_and_wait('呜……');
@@ -214,7 +214,7 @@ module.exports = class extends CustomizedRecruit {
         '被 ',
         me.get_colored_name(),
         ' 拒绝后的',
-        kitaru.get_teen_sex_title(),
+        kitaru.teen_sex_title,
         '迅速低沉了下去，先前跃动的双耳，也随着马尾一同垂下。',
       ]);
       await era.printAndWait([
@@ -254,7 +254,7 @@ module.exports = class extends CustomizedRecruit {
       ]);
       await era.printAndWait([
         '不过，就这样成为一位赛',
-        kitaru.get_uma_sex_title(),
+        kitaru.uma_sex_title,
         '的训练员，是对双方都不负责的行为。',
       ]);
     }
@@ -305,9 +305,9 @@ module.exports = class extends CustomizedRecruit {
     ]);
     await era.printAndWait([
       '毕竟，这场选拔赛中，无论是那位早在新生中以大逃而闻名的',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '，还是目白家的新秀，又或是有夺得三冠可能的鹿毛',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '，单拎出来哪一位都会是那些训练员趋之若鹜的对象。',
     ]);
     await era.printAndWait([
@@ -332,7 +332,7 @@ module.exports = class extends CustomizedRecruit {
       '单论外表而言，',
       kitaru.sex,
       '确实是一位可爱的赛',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '。',
     ]);
     await era.printAndWait([
@@ -382,7 +382,7 @@ module.exports = class extends CustomizedRecruit {
       '名叫 ',
       kitaru.get_colored_name(),
       ' 的赛',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '似乎是意外的，认定了约定之后就咬死不放的类型。',
     ]);
     await kitaru.say_and_wait('非常抱歉！但是我已经有了命中注定的人了！');
@@ -437,7 +437,7 @@ module.exports = class extends CustomizedRecruit {
         '想要撞上来的进一步动作。',
       ]);
       await era.printAndWait([
-        kitaru.get_uma_sex_title(),
+        kitaru.uma_sex_title,
         '的力量理论上是人类的几倍，',
         me.get_colored_name(),
         '不可能挡住',

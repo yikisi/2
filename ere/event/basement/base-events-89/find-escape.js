@@ -32,7 +32,7 @@ function find_escape(out_of_prison, s_level_up, is_back) {
     ]);
     era.print([
       '步步逼近的',
-      grand.get_uma_sex_title(),
+      grand.uma_sex_title,
       '并非在问 ',
       me.get_colored_name(),
       '，只是在了解一切的基础上进行『确认』而已。',
@@ -101,7 +101,7 @@ function find_escape(out_of_prison, s_level_up, is_back) {
     era.print(['到底为什么会走到这一步呢？']);
     era.print([
       '脑海中，小',
-      grand.get_uma_sex_title(),
+      grand.uma_sex_title,
       '那天使般的笑容如幻影般浮现。',
     ]);
     era.println();
@@ -122,7 +122,7 @@ function find_escape(out_of_prison, s_level_up, is_back) {
     era.print([
       me.get_colored_name(),
       ' 甚至不敢回头确认',
-      grand.get_child_sex_title(),
+      grand.child_sex_title,
       '的神情，只是任凭自己被拖回床笫之上。',
     ]);
     era.println();

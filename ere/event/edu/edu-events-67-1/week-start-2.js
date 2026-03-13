@@ -171,7 +171,7 @@ module.exports = (handlers) => {
     const festa = get_chara_talk(49);
     const sirius = get_chara_talk(70);
     await era.printAndWait(
-      `今天是春季的粉丝大感谢祭。赛${daiya.get_uma_sex_title()}们跟现场众多的粉丝进行各种互动。`,
+      `今天是春季的粉丝大感谢祭。赛${daiya.uma_sex_title}们跟现场众多的粉丝进行各种互动。`,
     );
     await era.printAndWait(
       `里见光钻也被女性粉丝围绕，${daiya.sex}们正在聊天。`,
@@ -225,12 +225,12 @@ module.exports = (handlers) => {
     );
     await daiya.say_and_wait('我也是不小心就太兴奋了……真不好意思……');
     await era.printAndWait(
-      `担任播报的赛${daiya.get_uma_sex_title()}「大会报告。请『无情大翻牌游戏』的参赛选手前往准备区集合。」`,
+      `担任播报的赛${daiya.uma_sex_title}「大会报告。请『无情大翻牌游戏』的参赛选手前往准备区集合。」`,
     );
     await daiya.say_and_wait('啊，要集合了。那我先过去了！');
     era.drawLine();
     await era.printAndWait(
-      `担任播报的赛${daiya.get_uma_sex_title()}「──接下来是考验智谋和体力的『无情大翻牌游戏』！欢迎六位参赛选手入场！」`,
+      `担任播报的赛${daiya.uma_sex_title}「──接下来是考验智谋和体力的『无情大翻牌游戏』！欢迎六位参赛选手入场！」`,
     );
     await condor_pasa.say_and_wait(
       '直觉、计谋、热血！赢家的宝座是神鹰我的啦────！！',
@@ -243,47 +243,47 @@ module.exports = (handlers) => {
     await coffee.say_and_wait('……嗯，对……要翻到一样图案的……');
     await daiya.say_and_wait('？曼城茶座，你在跟谁说话……？');
     await era.printAndWait(
-      `担任播报的赛${daiya.get_uma_sex_title()}「六位选手都各自站上了起跑的位置！那么，『无情大翻牌游戏』就要开始了！！」`,
+      `担任播报的赛${daiya.uma_sex_title}「六位选手都各自站上了起跑的位置！那么，『无情大翻牌游戏』就要开始了！！」`,
     );
     await era.printAndWait('砰！！');
     await era.printAndWait(
-      `担任播报的赛${daiya.get_uma_sex_title()}「好的，这个比赛是要在赛道上翻牌，翻到一样图案的牌就可以得分的翻牌游戏！」`,
+      `担任播报的赛${daiya.uma_sex_title}「好的，这个比赛是要在赛道上翻牌，翻到一样图案的牌就可以得分的翻牌游戏！」`,
     );
     await condor_pasa.say_and_wait('No──────！！图案不一样────！！');
     await era.printAndWait(
-      `担任播报的赛${daiya.get_uma_sex_title()}「所有参赛选手会同时进行翻牌动作，所以比一般翻牌游戏更考验记忆力！」`,
+      `担任播报的赛${daiya.uma_sex_title}「所有参赛选手会同时进行翻牌动作，所以比一般翻牌游戏更考验记忆力！」`,
     );
     await daiya.say_and_wait('……好！翻到一对了♪');
     await era.printAndWait(
-      `担任播报的赛${daiya.get_uma_sex_title()}「里见光钻稳扎稳打地累积得分！」`,
+      `担任播报的赛${daiya.uma_sex_title}「里见光钻稳扎稳打地累积得分！」`,
     );
     await era.printAndWait(
-      `担任播报的赛${daiya.get_uma_sex_title()}「……这是！？曼城茶座接二连三地成功配对，目前得分数位居第一！」`,
+      `担任播报的赛${daiya.uma_sex_title}「……这是！？曼城茶座接二连三地成功配对，目前得分数位居第一！」`,
     );
     await coffee.say_and_wait(
       '……一样图案的……在那个右边的角落……是喔，太好了……谢谢……',
     );
     await era.printAndWait(
-      `担任播报的赛${daiya.get_uma_sex_title()}「从比赛开始到现在都没有失手过！${
+      `担任播报的赛${daiya.uma_sex_title}「从比赛开始到现在都没有失手过！${
         daiya.sex
       }自言自语地判断对错，难道这样慎重的方式就是零失手的诀窍吗！」`,
     );
     await era.printAndWait(
-      `担任播报的赛${daiya.get_uma_sex_title()}「剩余时间不到五分钟了！……哎呀？中山庆典开始出招了！是不是想要使用刚才翻到的那个呢！？」`,
+      `担任播报的赛${daiya.uma_sex_title}「剩余时间不到五分钟了！……哎呀？中山庆典开始出招了！是不是想要使用刚才翻到的那个呢！？」`,
     );
     await festa.say_and_wait('抱歉啦，大小姐。我要使用王牌了。');
     await daiya.say_and_wait('！！挑战书……！');
     await era.printAndWait(
-      `担任播报的赛${daiya.get_uma_sex_title()}「哎呀──中山庆典！${
+      `担任播报的赛${daiya.uma_sex_title}「哎呀──中山庆典！${
         daiya.sex
       }对里见光钻提出挑战书啦！」`,
     );
     await era.printAndWait(
-      `担任播报的赛${daiya.get_uma_sex_title()}「挑战书牌会让双方合意讨论出要赌多少分数，在接下来的对决中获胜的赢家则可以获得对方下注的分数！」`,
+      `担任播报的赛${daiya.uma_sex_title}「挑战书牌会让双方合意讨论出要赌多少分数，在接下来的对决中获胜的赢家则可以获得对方下注的分数！」`,
     );
     await sirius.say_and_wait('等一下！！我也要用挑战书！');
     await era.printAndWait(
-      `担任播报的赛${daiya.get_uma_sex_title()}「天狼星象征也在这时候加入战局！！挑战书的对决演变成三强鼎立的局面了！」`,
+      `担任播报的赛${daiya.uma_sex_title}「天狼星象征也在这时候加入战局！！挑战书的对决演变成三强鼎立的局面了！」`,
     );
     await sirius.say_and_wait('所以呢？你想赌多少分数？');
     await daiya.say_and_wait(
@@ -297,19 +297,19 @@ module.exports = (handlers) => {
     await daiya.say_and_wait('太好了！！是我赢了！');
     await sirius.say_and_wait('哦？没有被我骗到啊。很好，把分数拿去吧！');
     await era.printAndWait(
-      `担任播报的赛${daiya.get_uma_sex_title()}「里见光钻获得一千分！分数和暂居第一的曼城茶座并列了──！！──然而！！」`,
+      `担任播报的赛${daiya.uma_sex_title}「里见光钻获得一千分！分数和暂居第一的曼城茶座并列了──！！──然而！！」`,
     );
     await coffee.say_and_wait('…………赢了。');
     await gold_ship.say_and_wait(
       '啊啊啊啊啊啊可恶啊────！！从第一名身上把分数赢走的计划失败啦！',
     );
     await era.printAndWait(
-      `担任播报的赛${daiya.get_uma_sex_title()}「曼城茶座和黄金船之间的挑战书对决，获胜者是曼城茶座！！${
+      `担任播报的赛${daiya.uma_sex_title}「曼城茶座和黄金船之间的挑战书对决，获胜者是曼城茶座！！${
         daiya.sex
       }因此得到了黄金船所有的分数！」`,
     );
     await era.printAndWait(
-      `担任播报的赛${daiya.get_uma_sex_title()}「比赛时间结束！！『无情大翻牌游戏』的赢家是──曼城茶座！」`,
+      `担任播报的赛${daiya.uma_sex_title}「比赛时间结束！！『无情大翻牌游戏』的赢家是──曼城茶座！」`,
     );
     await era.printAndWait('光钻的粉丝B「光钻真是可惜啊！」');
     await era.printAndWait(
@@ -329,7 +329,7 @@ module.exports = (handlers) => {
     );
     await festa.say_and_wait('把我所有分数拿走吧。');
     await era.printAndWait(
-      `担任播报的赛${daiya.get_uma_sex_title()}「里见光钻成功获得中山庆典和天狼星象征的分数！！因此，${
+      `担任播报的赛${daiya.uma_sex_title}「里见光钻成功获得中山庆典和天狼星象征的分数！！因此，${
         daiya.sex
       }的分数超越了曼城茶座，成为了第一名──！」`,
     );
@@ -340,10 +340,10 @@ module.exports = (handlers) => {
     await gold_ship.say_and_wait('剪刀、石头、布！！');
     await daiya.say_and_wait('呵呵呵，是我赢了呢♪');
     await era.printAndWait(
-      `担任播报的赛${daiya.get_uma_sex_title()}「哎呀──里见光钻完全识破了黄金船的策略！！彻底击败了最后一名刺客──黄金船！」`,
+      `担任播报的赛${daiya.uma_sex_title}「哎呀──里见光钻完全识破了黄金船的策略！！彻底击败了最后一名刺客──黄金船！」`,
     );
     await era.printAndWait(
-      `担任播报的赛${daiya.get_uma_sex_title()}「比赛时间结束！！『无情大翻牌游戏』的赢家是──里见光钻！」`,
+      `担任播报的赛${daiya.uma_sex_title}「比赛时间结束！！『无情大翻牌游戏』的赢家是──里见光钻！」`,
     );
     await era.printAndWait('光钻的粉丝B「光钻，恭喜你获胜！」');
     await era.printAndWait('光钻的粉丝A「没想到光钻还有这么大胆的一面……！」');
@@ -439,7 +439,7 @@ module.exports = (handlers) => {
       '既然麦昆她们给了我这么难得的机会，我希望可以在万全的状态下迎战，我想要赢过她们……！',
     );
     await daiya.say_and_wait(
-      `还有就是，我身为一个『知名赛${daiya.get_uma_sex_title()}』，迟早也是要考量进军国外比赛的。`,
+      `还有就是，我身为一个『知名赛${daiya.uma_sex_title}』，迟早也是要考量进军国外比赛的。`,
     );
     await era.printAndWait(
       `这让 ${me.name} 想起新年的派对上，有人曾提起国外远征的事情。`,
@@ -456,7 +456,7 @@ module.exports = (handlers) => {
       '那时训练员给我的答案是可能性，这才让我想到国外远征的事情。',
     );
     await daiya.say_and_wait(
-      `日本赛${daiya.get_uma_sex_title()}界一直无法攻破的法国的传统大规模比赛──`,
+      `日本赛${daiya.uma_sex_title}界一直无法攻破的法国的传统大规模比赛──`,
     );
     await daiya.say_and_wait(
       '如果是破除里见家魔咒的我，说不定就能让大家看到缔造新历史的可能性。',

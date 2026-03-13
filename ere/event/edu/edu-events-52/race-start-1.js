@@ -19,7 +19,7 @@ module.exports = (handlers) => {
         '名为 ',
         urara.get_colored_actual_name(),
         ' 的小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '，终于要在『出道战』中出赛了——',
       ]);
       era.drawLine();
@@ -270,7 +270,7 @@ module.exports = (handlers) => {
           '是啊，',
           urara.get_colored_name(),
           ' 就是这样坚强的',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '，该担心的，恐怕只有不愿信任',
           urara.sex,
           '的我……',
@@ -302,7 +302,7 @@ module.exports = (handlers) => {
         '没有像周围训练员与担当继续交流什么，',
         me.get_colored_name(),
         ' 与靠在身边的小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '安静地等待着，直至提示入场的广播声响起。',
       ]);
       await urara.say_and_wait(['到时间了哦 ', callname, '！我要上了呦！']);
@@ -347,7 +347,7 @@ module.exports = (handlers) => {
       ]);
       await era.printAndWait([
         '而站在兴奋过头的小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '旁边的，则是',
         urara.sex,
         '略微有些头疼的 ',
@@ -374,7 +374,7 @@ module.exports = (handlers) => {
       ]);
       await era.printAndWait([
         '随便撇一眼周围的',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '与训练员们杀气腾腾的脸就看得出来，这里唯一不够紧张的可能只有 ',
         urara.get_colored_name(),
         '。',
@@ -428,12 +428,12 @@ module.exports = (handlers) => {
       } else {
         await era.printAndWait([
           '能赢的希望，何止有点渺茫，如今或许只有奇迹发生才能让小',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '赢下这场比赛吧。',
         ]);
         await era.printAndWait([
           '就算连三女神都能看见小',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '的努力，现在能回应',
           urara.sex,
           '的也只有愿意为',
@@ -461,7 +461,7 @@ module.exports = (handlers) => {
           '察觉到 ',
           me.get_colored_name(),
           ' 与以往不同的表情，小',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '大大方方的抱住了 ',
           me.get_colored_name(),
           '，露出了安抚孩童般的母亲的笑容。',
@@ -494,7 +494,7 @@ module.exports = (handlers) => {
       era.println();
       await era.printAndWait([
         '在漫长的一瞬后小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '的拥抱戛然而止，而紧接在 ',
         me.get_colored_name(),
         ' 的耳中响起的，则是比赛时登台的预告。',
@@ -591,9 +591,9 @@ module.exports = (handlers) => {
       ]);
       await era.printAndWait([
         '恍惚中的迟疑似乎点燃了',
-        urara.get_teen_sex_title(),
+        urara.teen_sex_title,
         '的怒火，积蓄的愤怒以',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '的力度将 ',
         me.get_colored_name(),
         ' 的身体摁在了通道的墙面上。',
@@ -610,7 +610,7 @@ module.exports = (handlers) => {
       ]);
       await era.printAndWait([
         '但是扯住身体的重压只持续了几秒，娇小的樱色',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '就如同哭泣般无力的松开了 ',
         me.get_colored_name(),
         ' 的衣襟。',
@@ -639,7 +639,7 @@ module.exports = (handlers) => {
         '面对眼前称得上诡异的情况，',
         me.get_colored_name(),
         ' 却冷静的出奇，仅是打算绕开眼前的',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '，再去守望 ',
         urara.get_colored_name(),
         ' 的比赛。',
@@ -664,7 +664,7 @@ module.exports = (handlers) => {
           '温和地挡在 ',
           me.get_colored_name(),
           ' 的身前，未闻其名的麻烦朋友像在安抚心绪般露出了与小',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '如出一辙的笑容。',
         ]);
       } else {
@@ -705,12 +705,12 @@ module.exports = (handlers) => {
         '向前一步与 ',
         me.get_colored_name(),
         ' 并肩望向通道外侧，与樱粉色的',
-        urara.get_teen_sex_title(),
+        urara.teen_sex_title,
         '摇晃着双耳与尾巴，将手伸向了阴晴难定的天空。',
       ]);
       await in_urara.say_as_unknown_and_wait([
         '那是一位渺小到不能再渺小的……',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '的故事。',
       ]);
     } else {
@@ -728,7 +728,7 @@ module.exports = (handlers) => {
         '这是一位渺小到不能再渺小，但也是任何人都无可替代的，名为『',
         urara.get_colored_actual_name(),
         '』的小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '的故事——',
       ]);
       era.drawLine();

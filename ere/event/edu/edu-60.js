@@ -700,7 +700,7 @@ module.exports = class extends Edu60RaceEnd {
         await quick_into_sex(60);
       } else {
         await nice_nature.say_and_wait(
-          `多才吗？确实呢，有更多才能的人也更会招${nice_nature.get_child_sex_title()}子喜欢对吧，${era.get(
+          `多才吗？确实呢，有更多才能的人也更会招${nice_nature.child_sex_title}子喜欢对吧，${era.get(
             'callname:60:0',
           )} 也到这个年龄了呢，也是时候该考虑考虑自己的${
             nice_nature.sex

@@ -200,7 +200,7 @@ module.exports = async () => {
       ]);
       await era.printAndWait([
         '明白小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '并没有期待回答，',
         me.get_colored_name(),
         ' 也只能无奈地做好迎接可能的未来的心理准备。',

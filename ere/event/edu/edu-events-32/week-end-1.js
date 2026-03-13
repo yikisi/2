@@ -63,7 +63,7 @@ module.exports = (handlers) => {
       '是 ',
       me.get_colored_name(),
       ' 前几天在训练场上看见的',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
     ]);
     await era.printAndWait([
       '当时的 ',
@@ -96,7 +96,7 @@ module.exports = (handlers) => {
     await era.printAndWait([
       me.get_colored_name(),
       ' 毫无大人样的，战战兢兢抬头看向负责',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '，正好对上了',
       tachyon.sex,
       '盯着 ',
@@ -197,9 +197,9 @@ module.exports = (handlers) => {
     await tachyon.print_and_wait('万物都有自己的代价');
     await tachyon.print_and_wait([
       '据说，曾经有',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '因为突破了',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '的极限，而付出生命的代价',
     ]);
     await tachyon.print_and_wait('倘若付出那样的代价真的能够突破极限也就算了');
@@ -217,7 +217,7 @@ module.exports = (handlers) => {
     era.println();
     await tachyon.print_and_wait([
       '并非',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '的极限，而是 ',
       tachyon.get_colored_name(),
       ' 的极限',
@@ -243,7 +243,7 @@ module.exports = (handlers) => {
     await me.used_to_say_and_wait('速子的话，绝对没问题');
     await me.used_to_say_and_wait([
       '一定，别说三冠，突破',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '的可能性也不成问题……！',
     ]);
     era.println();
@@ -366,7 +366,7 @@ module.exports = (handlers) => {
     ]);
     await tachyon.print_and_wait([
       '传说……',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '是身上宿有异世界的灵魂的存在',
     ]);
     await tachyon.print_and_wait([
@@ -478,7 +478,7 @@ module.exports = (handlers) => {
     await tachyon.print_and_wait([
       tachyon.get_colored_name(),
       '，是三冠',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
     ]);
     era.println();
     await tachyon.say_and_wait('……这样啊');
@@ -639,7 +639,7 @@ module.exports = (handlers) => {
       ' 提供协助的，同样也是 ',
       me.get_colored_name(),
       ' 负责',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '的 ',
       tachyon.get_colored_name(),
     ]);
@@ -655,7 +655,7 @@ module.exports = (handlers) => {
       '依然是 ',
       me.get_colored_name(),
       ' 的负责',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '，两人日常也总有接触',
     ]);
     await era.printAndWait('所以，正常的交流应该是没问题的');
@@ -685,24 +685,24 @@ module.exports = (handlers) => {
       '在那一瞬间，',
       me.get_colored_name(),
       ' 想到了许多，想到了前辈训练员说的与',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '维持安全的距离感',
     ]);
     await era.printAndWait([
       '想到了训练员讲座说到的',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '的独占欲',
     ]);
     await era.printAndWait([
       '想到了',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '生理学课上教到的',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '的发情期……',
     ]);
     await era.printAndWait([
       '但这些都帮不了现在手无寸铁面对负责',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '的自己',
     ]);
     await era.printAndWait([
@@ -757,7 +757,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '虽然听起来很离谱，但每天都在药物锤炼下的身体，或许真的能够胜过已经许久没锻炼过的',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
     ]);
     era.println();
     await era.printAndWait('那么，为什么……');
@@ -817,7 +817,7 @@ module.exports = (handlers) => {
     await era.printAndWait('直到现在，那还是自己常在午夜梦回出现的梦魇');
     await era.printAndWait([
       '怀抱着自己的梦想，与他人的梦想的',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '在眼前凋零的瞬间',
     ]);
     await era.printAndWait(
@@ -833,11 +833,11 @@ module.exports = (handlers) => {
       ' 已经绽放出了',
       tachyon.sex,
       '的光芒……是当之无愧，『最强』的',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
     ]);
     era.println();
-    await era.printAndWait(['最快的', tachyon.get_uma_sex_title(), '赢皋月赏']);
-    await era.printAndWait(['最强的', tachyon.get_uma_sex_title(), '赢菊花赏']);
+    await era.printAndWait(['最快的', tachyon.uma_sex_title, '赢皋月赏']);
+    await era.printAndWait(['最强的', tachyon.uma_sex_title, '赢菊花赏']);
     await era.printAndWait([
       me.get_colored_name(),
       ' 想起了从许久以前流传至今的话语',

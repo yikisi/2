@@ -28,7 +28,7 @@ module.exports = class extends CustomizedRecruit {
           await era.printAndWait([
             me.get_colored_name(),
             ' 注意到了一位黑发的',
-            coffee.get_uma_sex_title(),
+            coffee.uma_sex_title,
             '。',
           ]);
           await era.printAndWait([
@@ -50,7 +50,7 @@ module.exports = class extends CustomizedRecruit {
         } else {
           await era.printAndWait([
             '自那晚后又过了几天，那位训练场上的黑发',
-            coffee.get_uma_sex_title(),
+            coffee.uma_sex_title,
             '的身影和话语始终萦绕在 ',
             me.get_colored_name(),
             ' 的脑海中，直到选拔赛开始后，',
@@ -89,7 +89,7 @@ module.exports = class extends CustomizedRecruit {
             await era.printAndWait([
               coffee.sex,
               '的身影藏匿在同期的',
-              coffee.get_uma_sex_title(),
+              coffee.uma_sex_title,
               '和前来招募的训练员之中，尽管在选拔赛最后名列前茅，却似乎没有人来招募',
               coffee.sex,
               '的样子。',
@@ -124,7 +124,7 @@ module.exports = class extends CustomizedRecruit {
             ]);
             await era.printAndWait([
               '从别的',
-              coffee.get_uma_sex_title(),
+              coffee.uma_sex_title,
               '和一些曾对',
               coffee.sex,
               '感过兴趣的训练员口中可以得知，',
@@ -186,10 +186,7 @@ module.exports = class extends CustomizedRecruit {
               me.get_colored_name(),
               ' 的疑问也随之转化为感叹。',
             ]);
-            era.printButton(
-              `（怎么回事，这个${coffee.get_uma_sex_title()}……）`,
-              1,
-            );
+            era.printButton(`（怎么回事，这个${coffee.uma_sex_title}……）`, 1);
             await era.input();
             await era.printAndWait([
               me.get_colored_name(),
@@ -201,7 +198,7 @@ module.exports = class extends CustomizedRecruit {
               ' 离开后，',
               me.get_colored_name(),
               ' 无心再关注选拔赛，在几位不错的',
-              coffee.get_uma_sex_title(),
+              coffee.uma_sex_title,
               '进行交流无果后，先一步离开了特雷森。',
             ]);
             era.set('cflag:25:随机招募', 0);
@@ -230,7 +227,7 @@ module.exports = class extends CustomizedRecruit {
         );
         await era.printAndWait([
           '起了个大早前往训练场物色担当',
-          coffee.get_uma_sex_title(),
+          coffee.uma_sex_title,
           '的 ',
           me.get_colored_name(),
           ' 不出意料的一无所获，拖着疲惫的身体回到宿舍倒头就睡。醒来后，却摸遍全身也找不到自己的手机。',
@@ -275,7 +272,7 @@ module.exports = class extends CustomizedRecruit {
           '从背后传来的声音瞬间打碎了这种局面，在刹那间恢复行动能力的 ',
           me.get_colored_name(),
           ' 连忙大口呼吸着新鲜空气。强忍着想要拔腿就跑的恐惧感转过头来，一个喘着气的似乎是刚跑完步停下的',
-          coffee.get_uma_sex_title(),
+          coffee.uma_sex_title,
           '正在后面看着 ',
           me.get_colored_name(),
           '。',
@@ -307,7 +304,7 @@ module.exports = class extends CustomizedRecruit {
         await coffee.say_as_unknown_and_wait('朋友的话，不就在你身边吗……？');
         await era.printAndWait([
           '眼前黑长直发及腰的纤细',
-          coffee.get_uma_sex_title(),
+          coffee.uma_sex_title,
           '瞥了眼 ',
           me.get_colored_name(),
           ' 身边的空地，歪了歪脑袋，此时 ',
@@ -320,7 +317,7 @@ module.exports = class extends CustomizedRecruit {
         ]);
         await era.printAndWait([
           '黑发',
-          coffee.get_uma_sex_title(),
+          coffee.uma_sex_title,
           '头上的白色呆毛随着',
           coffee.sex,
           '的呼吸微微摇晃，',
@@ -329,7 +326,7 @@ module.exports = class extends CustomizedRecruit {
         ]);
         await era.printAndWait([
           '在这种地方居然还有心思开玩笑，真是个奇怪的',
-          coffee.get_uma_sex_title(),
+          coffee.uma_sex_title,
           '。',
         ]);
         await era.printAndWait([
@@ -345,7 +342,7 @@ module.exports = class extends CustomizedRecruit {
           '……',
         ]);
         await era.printAndWait([
-          coffee.get_uma_sex_title(),
+          coffee.uma_sex_title,
           '逐渐向 ',
           me.get_colored_name(),
           ' 走来，这时 ',
@@ -353,7 +350,7 @@ module.exports = class extends CustomizedRecruit {
           ' 才看清楚',
           coffee.sex,
           '的样貌：在',
-          coffee.get_uma_sex_title(),
+          coffee.uma_sex_title,
           '中也称得上美人的精致面孔；白皙得缺少血色的肌肤；从额间垂下的、将那精致面孔分割的黑色长发；而最让 ',
           me.get_colored_name(),
           ' 印象深刻的，便是',
@@ -364,13 +361,13 @@ module.exports = class extends CustomizedRecruit {
           '请马上和我一起离开这里，已经有东西盯上过你了，就在刚才……',
         );
         await era.printAndWait([
-          coffee.get_teen_sex_title(),
+          coffee.teen_sex_title,
           '的低语伴随着忽起的夜风传入 ',
           me.get_colored_name(),
           ' 耳中，身边的黑暗隐约传来阵阵嬉笑，就算在此之后 ',
           me.get_colored_name(),
           ' 与这位',
-          coffee.get_uma_sex_title(),
+          coffee.uma_sex_title,
           '一同安全的离开了训练场，这个夜晚也已深深刻入了 ',
           me.get_colored_name(),
           ' 的脑海中。',
@@ -569,7 +566,7 @@ module.exports = class extends CustomizedRecruit {
         ]);
         await era.printAndWait([
           '看着眼前突然变得有些急切的',
-          coffee.get_uma_sex_title(),
+          coffee.uma_sex_title,
           '，',
           me.get_colored_name(),
           ' 的心中却意外的没有多少对未来的恐惧。是这次成功脱险让 ',
@@ -584,7 +581,7 @@ module.exports = class extends CustomizedRecruit {
           '总之，',
           me.get_colored_name(),
           ' 想到了一种可能，并将其分享给了眼前的',
-          coffee.get_teen_sex_title(),
+          coffee.teen_sex_title,
           '。',
         ]);
         era.printButton(
@@ -600,7 +597,7 @@ module.exports = class extends CustomizedRecruit {
           '听到这一意料之外的招募请求后，',
           coffee.get_colored_name(),
           ' 惊讶地瞪大了眼睛，随后又突然意识到什么似的看向了一旁无人的角落。在一段时间的沉默后，',
-          coffee.get_teen_sex_title(),
+          coffee.teen_sex_title,
           '做出了回复。',
         ]);
         await coffee.say_and_wait([
@@ -630,7 +627,7 @@ module.exports = class extends CustomizedRecruit {
         ]);
         await era.printAndWait('那么，答案很明确了。');
         era.printButton(
-          `「尽管试试吧……！不管是朋友也好，还是其他强大的${coffee.get_uma_sex_title()}，我都会带着你去超越的！」`,
+          `「尽管试试吧……！不管是朋友也好，还是其他强大的${coffee.uma_sex_title}，我都会带着你去超越的！」`,
           1,
         );
         await era.input();

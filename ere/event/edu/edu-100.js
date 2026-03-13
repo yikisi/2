@@ -125,7 +125,7 @@ module.exports = class extends CustomizedEdu {
       await era.printAndWait([era.get('flag:当前年'), ' 年。']);
       await era.printAndWait([
         '这是一度失败的训练者，被担当的',
-        acute.get_uma_sex_title(),
+        acute.uma_sex_title,
         '捡回家的第一年。',
       ]);
       await era.printAndWait(
@@ -134,7 +134,7 @@ module.exports = class extends CustomizedEdu {
       await era.printAndWait([
         me.get_colored_name(),
         ' 决定，让自己的担当',
-        acute.get_uma_sex_title(),
+        acute.uma_sex_title,
       ]);
       await era.printAndWait('步入真正的殿堂——');
     } else {

@@ -39,7 +39,7 @@ module.exports = async (kita, me, hook, event_object) => {
       '时值新学期开始前的最后一天，正是春光明媚的好时候。',
     );
     await era.printAndWait(
-      `而在特雷森，生涯的开始是在让人心情愉快的大晴天里的赛${kita.get_uma_sex_title()}们也显得十分快乐。`,
+      `而在特雷森，生涯的开始是在让人心情愉快的大晴天里的赛${kita.uma_sex_title}们也显得十分快乐。`,
     );
     await era.printAndWait(
       `在这样美好的日子里，${me.name} 整理好着装，想好致辞，准备和担当迎接一起努力奔驰的三年。`,
@@ -55,13 +55,13 @@ module.exports = async (kita, me, hook, event_object) => {
     await era.printAndWait(
       `仅仅是这样的身体，便足以让 ${
         me.name
-      } 相信${kita.get_teen_sex_title()}的力量。`,
+      } 相信${kita.teen_sex_title}的力量。`,
     );
     await era.printAndWait(
       '训练场在太阳的照耀下显得是那么耀眼，绿茵茵的草场跑道的香味让人兴奋起来。',
     );
     await era.printAndWait(
-      `如何与青春期本格化的${kita.get_uma_sex_title()}相处？未来的训练和赛程计划？失败后又要如何面对自己的担当？那些就留给未来的自己去想吧！`,
+      `如何与青春期本格化的${kita.uma_sex_title}相处？未来的训练和赛程计划？失败后又要如何面对自己的担当？那些就留给未来的自己去想吧！`,
     );
     await era.printAndWait(
       `现在的 ${me.name}，只需要现在跑道上看着 ${kita.name} 奔跑的样子，这就足够了！`,
@@ -70,7 +70,7 @@ module.exports = async (kita, me, hook, event_object) => {
       `那么训练员${me.get_adult_sex_title()}，我开始跑了哦！请您认认真真的看好了！`,
     );
     await era.printAndWait(
-      `祭典般的赛${kita.get_uma_sex_title()}站在跑道上向 ${
+      `祭典般的赛${kita.uma_sex_title}站在跑道上向 ${
         me.name
       } 挥了挥手，弯下腰，绷紧小小的身体，在 ${
         me.name
@@ -97,12 +97,12 @@ module.exports = async (kita, me, hook, event_object) => {
       `在精神的时候爆发起来的气势，在训练员的指导下获得的勇气，以及毫不懈怠的刻苦锻炼。`,
     );
     await era.printAndWait(
-      `能够让赛${kita.get_uma_sex_title()}强大起来的要素，仿佛同水混和起来的面粉一样，肉眼可见地发酵，成型，散发着惊人的热量。`,
+      `能够让赛${kita.uma_sex_title}强大起来的要素，仿佛同水混和起来的面粉一样，肉眼可见地发酵，成型，散发着惊人的热量。`,
     );
     await era.printAndWait(
       `而随着夏季合宿即将落入尾声，${
         me.name
-      } 也放了这团美味的小${kita.get_uma_sex_title()}休息时间。`,
+      } 也放了这团美味的小${kita.uma_sex_title}休息时间。`,
     );
     await era.printAndWait(`让${kita.sex}好好休息一下吧。`);
     era.println();
@@ -130,21 +130,21 @@ module.exports = async (kita, me, hook, event_object) => {
       ' 进行着今天的约会，',
     ]);
     await era.printAndWait(
-      `满是骚味的狗项圈紧紧地套在赛${kita.get_uma_sex_title()}雪白的颈上，而连接着项圈的狗链则被 ${
+      `满是骚味的狗项圈紧紧地套在赛${kita.uma_sex_title}雪白的颈上，而连接着项圈的狗链则被 ${
         me.name
       } 抓在手里。`,
     );
     await era.printAndWait(
-      `粉嫩的小舌淫靡色气地垂落在口外，随着${kita.get_teen_sex_title()}粗重的喘息止不住的滴落着甜蜜的涎水。`,
+      `粉嫩的小舌淫靡色气地垂落在口外，随着${kita.teen_sex_title}粗重的喘息止不住的滴落着甜蜜的涎水。`,
     );
     await era.printAndWait(
-      `往日里骄傲可爱的${kita.get_teen_sex_title()}，此时此刻正被黑色透光的纱布眼罩蒙住双眼，用脸蛋蹭着 ${
+      `往日里骄傲可爱的${kita.teen_sex_title}，此时此刻正被黑色透光的纱布眼罩蒙住双眼，用脸蛋蹭着 ${
         me.name
       } 的裤脚。`,
     );
     if (kita.sex_code - 1) {
       await era.printAndWait(
-        `在赛${kita.get_uma_sex_title()}胸前，一条丝带将两颗硕大粉嫩的乳头绑在一起，在乳房的重压下在地面上拖拽着摩擦。`,
+        `在赛${kita.uma_sex_title}胸前，一条丝带将两颗硕大粉嫩的乳头绑在一起，在乳房的重压下在地面上拖拽着摩擦。`,
       );
     }
     await kita.say_and_wait(
@@ -156,7 +156,7 @@ module.exports = async (kita, me, hook, event_object) => {
     await era.printAndWait(
       `${
         me.name
-      } 拉紧狗链轻轻拉扯着项圈，而${kita.get_teen_sex_title()}则在发出一声闷哼后因为脖颈上的束缚而羞红了脸蛋，用脸蛋磨蹭着 ${
+      } 拉紧狗链轻轻拉扯着项圈，而${kita.teen_sex_title}则在发出一声闷哼后因为脖颈上的束缚而羞红了脸蛋，用脸蛋磨蹭着 ${
         me.name
       } 的鞋子欢快地摇起了尾巴。`,
     );
@@ -194,7 +194,7 @@ module.exports = async (kita, me, hook, event_object) => {
       `推开门，空无一人的酒吧里，只有穿着校服的${kita.name}单独坐在吧台前。`,
     );
     await era.printAndWait(
-      `${kita.get_teen_sex_title()}来回摇晃着空荡荡的酒杯，脸颊微微有些泛红，身旁却只是放着一瓶启封的汽水。`,
+      `${kita.teen_sex_title}来回摇晃着空荡荡的酒杯，脸颊微微有些泛红，身旁却只是放着一瓶启封的汽水。`,
     );
     await kita.say_and_wait(
       `那个……哈哈……这间酒吧是妈妈的熟人在圣诞节要回老家，正好想找个安静的地方就借来了。`,
@@ -247,7 +247,7 @@ module.exports = async (kita, me, hook, event_object) => {
       );
       await kita.say_and_wait(`嘿嘿，稍微有点讨厌啊……`);
       await era.printAndWait(
-        `抱着自己放在训练员室里的书本和用品，${kita.get_teen_sex_title()}露出了有些落寞的表情。`,
+        `抱着自己放在训练员室里的书本和用品，${kita.teen_sex_title}露出了有些落寞的表情。`,
       );
       await era.printAndWait(
         `并肩走在黄昏时分的寂静里，走廊里回荡着小北哒哒哒的脚步声，在空无一人的教室里回荡。`,
@@ -257,12 +257,10 @@ module.exports = async (kita, me, hook, event_object) => {
       );
       await era.printAndWait(`毕竟，${kita.name} 已经预定了要回老家去了。`);
       await era.printAndWait(
-        `虽然只是向年事已高的父亲报平安，并不是一定就不会回来，但是即使回到了特雷森，${kita.get_teen_sex_title()}也不一定会继续和你共事了。`,
+        `虽然只是向年事已高的父亲报平安，并不是一定就不会回来，但是即使回到了特雷森，${kita.teen_sex_title}也不一定会继续和你共事了。`,
       );
       await kita.say_and_wait(`我，喜欢训练员${me.get_adult_sex_title()}哦。`);
-      await era.printAndWait(
-        `转过拐角，${kita.get_teen_sex_title()}轻描淡写的说。`,
-      );
+      await era.printAndWait(`转过拐角，${kita.teen_sex_title}轻描淡写的说。`);
       await era.printAndWait(
         `夕阳映照在小北孩子气的脸蛋上，将那温暖的笑容染上了和以往不同的颜色。`,
       );
@@ -273,7 +271,7 @@ module.exports = async (kita, me, hook, event_object) => {
         `这时，${me.name} 注意到小北脸上的绯红从不是温暖夕阳的映照，${kita.sex}那仔细打理过的黑发柔滑地垂下，甚至能够闻到些许香水的味道。`,
       );
       await era.printAndWait(
-        `${kita.get_teen_sex_title()}露出羞涩的神情，那胆怯的声音一反往常的活泼，带着试探和讨好的声音，${
+        `${kita.teen_sex_title}露出羞涩的神情，那胆怯的声音一反往常的活泼，带着试探和讨好的声音，${
           kita.name
         } 问 ${me.name} 道：`,
       );
@@ -297,7 +295,7 @@ module.exports = async (kita, me, hook, event_object) => {
     } else if (love >= 75 && relation > 225) {
       await print_event_name(`${kita.name} 的小小祭典`, kita);
       await era.printAndWait(
-        `小${kita.get_uma_sex_title()}A「呜哇！小北${
+        `小${kita.uma_sex_title}A「呜哇！小北${
           kita.sex_code - 1 ? '姐姐' : '哥哥'
         }来啦！快跑！」`,
       );
@@ -305,13 +303,13 @@ module.exports = async (kita, me, hook, event_object) => {
       await era.printAndWait(
         `在小学的草操场上，${
           kita.name
-        } 嘻嘻哈哈的的追着年幼的${kita.get_uma_sex_title()}跑来跑去打闹在一起。`,
+        } 嘻嘻哈哈的的追着年幼的${kita.uma_sex_title}跑来跑去打闹在一起。`,
       );
       await era.printAndWait(
         `这是以地方学校为目的开展的公益比赛座谈会，在 ${kita.name} 结束赛程之后，由特雷森推动的公益计划。`,
       );
       await era.printAndWait(
-        `不仅会向偏远地区提供经费，同时也会努力发掘想要成为训练员和赛${kita.get_uma_sex_title()}的人。`,
+        `不仅会向偏远地区提供经费，同时也会努力发掘想要成为训练员和赛${kita.uma_sex_title}的人。`,
       );
       await era.printAndWait(
         `而作为形象大使，去考察地方学园的人选，则是北部玄驹。`,
@@ -323,7 +321,7 @@ module.exports = async (kita, me, hook, event_object) => {
         `而除了工作之外，小北最喜欢的就是和孩子们开心的追逐奔跑着。`,
       );
       await era.printAndWait(
-        `小北是很厉害的${kita.get_uma_sex_title()}，所以慢的孩子也会高兴，快的孩子也很高兴，老师们也能闲下来休息一下。`,
+        `小北是很厉害的${kita.uma_sex_title}，所以慢的孩子也会高兴，快的孩子也很高兴，老师们也能闲下来休息一下。`,
       );
       await kita.say_and_wait(
         `呼哇哇！嘿嘿～真是一群可爱的孩子们呢，训练员${me.get_adult_sex_title()}。`,

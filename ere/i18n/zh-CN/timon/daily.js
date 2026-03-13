@@ -1346,7 +1346,7 @@ module.exports = {
       era.println();
       await you.say_as_passer_by_and_wait('宣传', [
         '完美展现了赛',
-        chara.get_uma_sex_title(),
+        chara.uma_sex_title,
         '成长之路的全新作！',
       ]);
       era.println();
@@ -1522,7 +1522,7 @@ module.exports = {
     if (dice < 0.0001 && era.get('flag:122') === 1) {
       await era.printAndWait([
         '署名是未知的',
-        chara.get_uma_sex_title(),
+        chara.uma_sex_title,
         '文本施法素材！',
       ]);
     } else if (dice < 0.01) {
@@ -1638,7 +1638,7 @@ module.exports = {
     const f = async (chara, you) => {
       await era.printAndWait([
         '殿堂周，是对于志在奔跑的',
-        chara.get_uma_sex_title(),
+        chara.uma_sex_title,
         '们来说最重要的节日之一。',
       ]);
       // CFLAGNAME:47 = 殿堂
@@ -1721,9 +1721,9 @@ module.exports = {
           } else {
             await era.printAndWait([
               '每到这个时候，特雷森学园都会举行活动，其中之一就是邀请数位殿堂',
-              chara.get_uma_sex_title(),
+              chara.uma_sex_title,
               '前来进行连续几天的演讲，向其他',
-              chara.get_uma_sex_title(),
+              chara.uma_sex_title,
               '/训练员们传授经验。',
             ]);
             await era.printAndWait([
@@ -1736,7 +1736,7 @@ module.exports = {
             if (era.get(`cflag:${chara.id}:1`) > 0) {
               await era.printAndWait([
                 '随着台上',
-                chara.get_uma_sex_title(),
+                chara.uma_sex_title,
                 '沉静又不乏激情的声音响起，',
                 you.get_colored_name(),
                 ' 注意到 ',

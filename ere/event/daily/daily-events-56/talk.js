@@ -38,7 +38,7 @@ module.exports = async () => {
       ]);
       await era.printAndWait([
         '冒着粉光的纹路，忠实的履行着自己在',
-        kitaru.get_teen_sex_title(),
+        kitaru.teen_sex_title,
         '身上的职责。',
       ]);
     });

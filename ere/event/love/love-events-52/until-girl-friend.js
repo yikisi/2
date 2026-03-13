@@ -29,12 +29,12 @@ module.exports = class extends Love52UntilFuckBuddy {
         await print_event_name('躁动的爱意', urara);
         await in_urara.say_as_unknown_and_wait([
           '在床上翻了个身，今天的小',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '似乎真的失眠了……',
         ]);
         await in_urara.say_as_unknown_and_wait([
           '怀春的',
-          urara.get_teen_sex_title(),
+          urara.teen_sex_title,
           '，不管外表多么年幼，内在都会如此反复无常……',
         ]);
         era.drawLine();
@@ -52,12 +52,12 @@ module.exports = class extends Love52UntilFuckBuddy {
         );
         await urara.print_and_wait([
           '那个第一次相遇时就在眼前倒下去的人；会因初识的',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '简单两句就来应约的人；',
         ]);
         await urara.print_and_wait([
           '那个愿意为跑在最后的弱小',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '应援的人；不管发生什么都与不成器的',
           urara.sex,
           '走到了现在的人……',
@@ -155,7 +155,7 @@ module.exports = class extends Love52UntilFuckBuddy {
             '「',
             urara.actual_name,
             '」从来都不是厉害的',
-            urara.get_uma_sex_title(),
+            urara.uma_sex_title,
             '，',
             urara.sex,
             '的日常又笨又幼稚，和闪耀的大家根本没法相提并论……',
@@ -247,7 +247,7 @@ module.exports = class extends Love52UntilFuckBuddy {
           ]);
           await urara.print_and_wait([
             '虽然总觉得忘记了什么，又或者是小',
-            urara.get_uma_sex_title(),
+            urara.uma_sex_title,
             '还是没有完全理解自身的感受。',
           ]);
           await urara.print_and_wait([
@@ -280,7 +280,7 @@ module.exports = class extends Love52UntilFuckBuddy {
           await urara.say_and_wait('嗯～哈啊……');
           await urara.print_and_wait([
             '颤抖地将手再次深入敏感的地方，小',
-            urara.get_uma_sex_title(),
+            urara.uma_sex_title,
             '眼前又出现了那个人因渴求',
             urara.sex,
             '的身体而化身野兽的样子。',
@@ -293,12 +293,12 @@ module.exports = class extends Love52UntilFuckBuddy {
           await urara.say_and_wait('……');
           await urara.print_and_wait([
             '在通过释放欲望的方式放弃思考后，小',
-            urara.get_uma_sex_title(),
+            urara.uma_sex_title,
             '又暂时将这段思考驱逐出了脑海。',
           ]);
           await urara.print_and_wait([
             '但',
-            urara.get_teen_sex_title(),
+            urara.teen_sex_title,
             '的心情也没法永远忽略下去，可能过不了多久，',
             urara.sex,
             '又会被这些问题所缠住吧。',
@@ -332,12 +332,12 @@ module.exports = class extends Love52UntilFuckBuddy {
           '记忆中的 ',
           urara.get_colored_name(),
           ' 仰头看着夜空，小',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '安静地数着星星，樱瞳上洒满了点点星光。',
         ]);
         await era.printAndWait([
           '只是今天的小',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '依旧有些缺乏兴致，耳朵和尾巴也只是若有所思的耷拉着。',
         ]);
         await era.printAndWait([
@@ -443,7 +443,7 @@ module.exports = class extends Love52UntilFuckBuddy {
         ]);
         await era.printAndWait([
           '尚处天真时节的小',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '与已是大人年纪的训练员，不论差距多大还是选择了彼此。',
         ]);
         await era.printAndWait([
@@ -451,7 +451,7 @@ module.exports = class extends Love52UntilFuckBuddy {
         ]);
         await era.printAndWait([
           '不过只要在门禁前安全的回去就好了吧？回忆着那天的归路，',
-          urara.get_teen_sex_title(),
+          urara.teen_sex_title,
           '合上了',
           urara.sex,
           '画得到处都是的笔记。',
@@ -463,7 +463,7 @@ module.exports = class extends Love52UntilFuckBuddy {
         );
         await in_urara.say_as_unknown_and_wait([
           '回忆着那天的点点星光，小小的',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '如此祈愿着。',
         ]);
         await sys_love_uma_in_event(52);
@@ -494,7 +494,7 @@ module.exports = class extends Love52UntilFuckBuddy {
         '但当坐在桌前的 ',
         me.get_colored_name(),
         ' 转头看去，却发现小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '就站在身后，带着与竞争重赏时相当的神情靠了过来。',
       ]);
       await era.printAndWait([
@@ -520,7 +520,7 @@ module.exports = class extends Love52UntilFuckBuddy {
         '在樱瞳与 ',
         me.get_colored_name(),
         ' 的咫尺之间，小小的',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '带着严肃的笑意再次向 ',
         me.get_colored_name(),
         ' 问道。',
@@ -596,7 +596,7 @@ module.exports = class extends Love52UntilFuckBuddy {
         ]);
         await era.printAndWait([
           '小马就算懵懂，也明白自己是怎样的「',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '」，',
           urara.sex,
           '其实一直缺乏着安全感，只是很少会表现出来。',
@@ -737,7 +737,7 @@ module.exports = class extends Love52UntilFuckBuddy {
         if (relation > 150) {
           await era.printAndWait([
             '没有失落的样子，只是和平常一样普通的笑着，小',
-            urara.get_uma_sex_title(),
+            urara.uma_sex_title,
             '只是伸手拽了拽训练员的脸颊。',
           ]);
           await urara.say_and_wait(

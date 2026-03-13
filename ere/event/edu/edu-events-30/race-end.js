@@ -76,7 +76,7 @@ module.exports = (handlers) => {
     await say_by_passer_by('观众A', '我，绝对会为波旁应援的！');
     await say_by_passer_by('观众B', [
       '嗯嗯！未来的三冠赛',
-      rice.get_uma_sex_title(),
+      rice.uma_sex_title,
       '！',
     ]);
     await say_by_passer_by('观众A', '波旁的比赛，肯定会去看的！');
@@ -106,7 +106,7 @@ module.exports = (handlers) => {
     await rice.say_and_wait('……经典赛。');
     await era.printAndWait([
       '——前去参加经典赛，就意味着要和同年出道的赛',
-      rice.get_uma_sex_title(),
+      rice.uma_sex_title,
       '们竞争。',
     ]);
     await era.printAndWait([
@@ -580,7 +580,7 @@ module.exports = (handlers) => {
       '——',
       race_infos[race_enum.takz_kin].get_colored_name(),
       '，那是只有受到粉丝喜爱的赛',
-      rice.get_uma_sex_title(),
+      rice.uma_sex_title,
       '才能登场的舞台。',
     ]);
     await era.printAndWait(['……最开始在学校外面独自哭泣的', rice.sex, '。']);
@@ -715,7 +715,7 @@ module.exports = (handlers) => {
       ]);
       await era.printAndWait([
         '都是在粉丝中获得人气的赛',
-        rice.get_uma_sex_title(),
+        rice.uma_sex_title,
         '才能参加的比赛。',
       ]);
       await era.printAndWait([

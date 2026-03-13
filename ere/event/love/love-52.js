@@ -46,7 +46,7 @@ module.exports = class extends Love52AfterWife {
     ]);
     await era.printAndWait([
       '散开长发的小小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '借着温暖的阳光，肆无忌惮地横躺在长椅上安静地沉睡着。',
     ]);
     await era.printAndWait([
@@ -55,7 +55,7 @@ module.exports = class extends Love52AfterWife {
       ' 坐到',
       urara.sex,
       '身边，小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '塌下的耳朵也没有要竖起的迹象。',
     ]);
     await era.printAndWait([
@@ -78,7 +78,7 @@ module.exports = class extends Love52AfterWife {
     );
     await era.printAndWait([
       '面对在朝夕相处中自由炫耀身体的「坏',
-      urara.get_child_sex_title(),
+      urara.child_sex_title,
       '」，身为大人的理智也逐渐失去了控制。',
     ]);
     await era.printAndWait([
@@ -126,7 +126,7 @@ module.exports = class extends Love52AfterWife {
     } else {
       await era.printAndWait([
         '小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '紧张地注视着想要侵犯',
         urara.sex,
         '的 ',
@@ -144,7 +144,7 @@ module.exports = class extends Love52AfterWife {
       ]);
       await era.printAndWait([
         '眼角因紧张变得湿润，但小小的',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '还是强迫身体做好了被粗暴侵犯的心理准备。',
       ]);
       await urara.say_and_wait('只是一次的话，什么都能接受哦？');
@@ -203,7 +203,7 @@ module.exports = class extends Love52AfterWife {
     );
     await era.printAndWait([
       '短暂的一顿，小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '的笑容中竟融进了与稚嫩的脸庞所不符的复杂情感。',
     ]);
     await urara.say_and_wait([
@@ -221,7 +221,7 @@ module.exports = class extends Love52AfterWife {
     await urara.say_and_wait(['还是就算被 ', callname, ' 压倒，乌拉拉也……']);
     await era.printAndWait([
       '凝视着',
-      urara.get_teen_sex_title(),
+      urara.teen_sex_title,
       '变得焦急又伤感的眼神，',
       me.get_colored_name(),
       ' 终于理解了 ',
@@ -230,7 +230,7 @@ module.exports = class extends Love52AfterWife {
     ]);
     await era.printAndWait([
       '体能超群的',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '们不会被区区门窗所阻拦，从对方那里拿到的物件对',
       urara.sex,
       '们来说也更多的是象征意义。',
@@ -243,7 +243,7 @@ module.exports = class extends Love52AfterWife {
       ' 的选择。',
     ]);
     await era.printAndWait([
-      urara.get_teen_sex_title(),
+      urara.teen_sex_title,
       '一直等待着最喜欢的 ',
       callname,
       ' 主动邀请',
@@ -329,7 +329,7 @@ module.exports = class extends Love52AfterWife {
         '笑着接过 ',
         me.get_colored_name(),
         ' 的钥匙，小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '像攥着宝物般紧紧地攥着一把普通到不能再普通的钥匙。',
       ]);
       await era.printAndWait([
@@ -338,7 +338,7 @@ module.exports = class extends Love52AfterWife {
         '，',
         me.get_colored_name(),
         ' 也放松下来，伸手摸了摸小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '散开的发丝。',
       ]);
       await era.printAndWait(
@@ -386,7 +386,7 @@ module.exports = class extends Love52AfterWife {
       await urara.say_and_wait(['而且呢，', callname, ' 还是笑起来更好看！']);
       await era.printAndWait([
         '小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '还是接受了最初那个被 ',
         callname,
         ' 拒绝的结果，笑着重新扎起了马尾。',

@@ -60,7 +60,7 @@ module.exports = async (urara, me, in_urara, callname) => {
   );
   await era.printAndWait([
     '向本不可能出现在这里的「入侵者」投来愤恨的眼神，面前的小',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '正带着不安向 ',
     me.get_colored_name(),
     ' 质问道。',
@@ -92,7 +92,7 @@ module.exports = async (urara, me, in_urara, callname) => {
     '虽然的确完全不清楚 ',
     urara.get_colored_name(),
     ' 是怎么问的，反正不管是',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '的事还是三女神的事都不用整得那么明白对吧？',
   ]);
   await era.printAndWait([
@@ -112,7 +112,7 @@ module.exports = async (urara, me, in_urara, callname) => {
 
   await era.printAndWait([
     '差点就在陌生的地方挨马踢，在极限距离闪过了',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '的袭击的 ',
     me.get_colored_name(),
     ' 感觉自己的魂都要吓掉了。',
@@ -162,7 +162,7 @@ module.exports = async (urara, me, in_urara, callname) => {
     '叹了口气，',
     me.get_colored_name(),
     ' 试探地蹲在了沉默地坐回了灰白二色的草地上的小',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '旁边。',
   ]);
 
@@ -234,7 +234,7 @@ module.exports = async (urara, me, in_urara, callname) => {
   ]);
   await era.printAndWait([
     '或者说为了让不管什么都怯于相信的小',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '更幸福一些？管它呢，今天的主要任务是带',
     urara.sex,
     '回去啊。',
@@ -292,7 +292,7 @@ module.exports = async (urara, me, in_urara, callname) => {
   ]);
   await era.printAndWait([
     '虽然现在比起让小',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '「通往胜利」，可能更像是 ',
     urara.get_colored_name(),
     ' 要亲手「打破心房」吧。',
@@ -311,7 +311,7 @@ module.exports = async (urara, me, in_urara, callname) => {
     '所以哪怕没有记忆，大家在以前也隐约意识到了名为「',
     urara.get_colored_actual_name(),
     '」的小',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '似乎有着另外一面。',
   ]);
   await era.printAndWait([
@@ -496,7 +496,7 @@ module.exports = async (urara, me, in_urara, callname) => {
   ]);
   await era.printAndWait([
     '站在另一个自己面前，眼中绽放着花朵的小',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '露出了温暖的笑容。',
   ]);
   await urara.say_and_wait(
@@ -507,7 +507,7 @@ module.exports = async (urara, me, in_urara, callname) => {
   );
   await era.printAndWait([
     '就像不知要如何面对小',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '的微笑，「',
     urara.sex,
     '」胆怯的向后退去，却又被眼前的人牵住了双手。',
@@ -551,7 +551,7 @@ module.exports = async (urara, me, in_urara, callname) => {
   );
   await era.printAndWait([
     '而在闸门前，黑色的眼神逐渐锐利的小',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '也拉紧了与另一个自己相同，色泽却无比陈旧的决胜服。',
   ]);
   await in_urara.say_as_unknown_and_wait([
@@ -606,7 +606,7 @@ module.exports = async (urara, me, in_urara, callname) => {
   ]);
   await in_urara.print_and_wait([
     '望着前方曾经幼稚又弱小的「另一个自己」消失在视野之中，',
-    urara.get_teen_sex_title(),
+    urara.teen_sex_title,
     '逐渐失去了对速度的掌控。',
   ]);
   await in_urara.say_as_unknown_and_wait([
@@ -629,7 +629,7 @@ module.exports = async (urara, me, in_urara, callname) => {
     '名为 ',
     urara.get_colored_actual_name(),
     ' 的',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '的确并不坚强，',
     urara.sex,
     '只是，因为自己选择的改变而越来越坚强了而已。',
@@ -659,7 +659,7 @@ module.exports = async (urara, me, in_urara, callname) => {
   await in_urara.say_as_unknown_and_wait('好好说再见之类的，就下次再做吧……');
   await in_urara.print_and_wait([
     '面对身后步步紧逼的「结局」，孤僻的',
-    urara.get_teen_sex_title(),
+    urara.teen_sex_title,
     '松掉了本就见底的毅力，结束了只剩一人的比赛——',
   ]);
 
@@ -678,7 +678,7 @@ module.exports = async (urara, me, in_urara, callname) => {
   ]);
   await in_urara.print_and_wait([
     '前方在瞬间被重新照亮，',
-    urara.get_teen_sex_title(),
+    urara.teen_sex_title,
     '的正前方传来了本以为再也不会听到的，来自另一个自己的呼喊声。',
   ]);
   await in_urara.print_and_wait(
@@ -715,7 +715,7 @@ module.exports = async (urara, me, in_urara, callname) => {
     '还有一位虽然依旧步履艰难，但却同样带着笑容站在观众席的最前排，跟随着',
     urara.sex,
     '们向前的',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '……',
   ]);
   await in_urara.print_and_wait([
@@ -766,7 +766,7 @@ module.exports = async (urara, me, in_urara, callname) => {
     '当下的大家被名为「',
     urara.get_colored_actual_name(),
     '」的',
-    urara.get_teen_sex_title(),
+    urara.teen_sex_title,
     '相连，并还在不断编织的故事，或许就是能驱散黑暗的奇迹。',
   ]);
 
@@ -788,7 +788,7 @@ module.exports = async (urara, me, in_urara, callname) => {
   await in_urara.say_as_unknown_and_wait('你们……你们……真的全都是……');
   await era.printAndWait([
     '在所有人面前含糊不清的抱怨着，灰白色调的小',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '发出了最丢人、但也最开心的放声哭泣。',
   ]);
   await era.printAndWait(
@@ -804,19 +804,19 @@ module.exports = async (urara, me, in_urara, callname) => {
     '要放上拼图的最后一块碎片吗？那渺小到不能再渺小的、名为「',
     urara.get_colored_actual_name(),
     '」的',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '的故事？',
   ]);
   await era.printAndWait('是时候，与反复无常的自己和解了。');
   await era.printAndWait([
     '哭泣的',
-    urara.get_teen_sex_title(),
+    urara.teen_sex_title,
     '猛地扑进微笑的',
-    urara.get_teen_sex_title(),
+    urara.teen_sex_title,
     '身前，而微笑的',
-    urara.get_teen_sex_title(),
+    urara.teen_sex_title,
     '轻柔地将哭泣的',
-    urara.get_teen_sex_title(),
+    urara.teen_sex_title,
     '揽入怀中。',
   ]);
   await era.printAndWait([

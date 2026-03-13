@@ -54,9 +54,9 @@ module.exports = class extends EroNormalMakingOuts {
     if (era.get('mark:100:同心') - era.get('mark:100:反抗') === 3) {
       await attacker.print_and_wait([
         '对于',
-        defender.get_uma_sex_title(),
+        defender.uma_sex_title,
         '而言，耳朵是暴露在外的弱点。可为什么',
-        defender.get_uma_sex_title(),
+        defender.uma_sex_title,
         '天生会有这样的弱点呢？',
       ]);
       await attacker.print_and_wait('一定是为了给训练员牵耳执鞭用的吧？');
@@ -82,7 +82,7 @@ module.exports = class extends EroNormalMakingOuts {
       ]);
       await attacker.print_and_wait([
         '对于',
-        defender.get_uma_sex_title(),
+        defender.uma_sex_title,
         '而言，耳朵作为暴露在外的弱点，被这样狠狠的拉扯，果然就连一向善于忍耐疼痛的 ',
         sys_get_colored_callname(attacker.id, defender.id),
         ' 都有些吃不消。',
@@ -425,7 +425,7 @@ module.exports = class extends EroNormalMakingOuts {
       ]);
       await attacker.print_and_wait([
         '……听说对于一些',
-        defender.get_uma_sex_title(),
+        defender.uma_sex_title,
         '而言，尾巴是触碰的禁忌、只要碰到了就会被攻击……也不知是真是假。',
       ]);
       await defender.say_and_wait(['是真的哦～']);
@@ -464,7 +464,7 @@ module.exports = class extends EroNormalMakingOuts {
     }
     if (era.get('mark:100:同心') - era.get('mark:100:反抗') === 3) {
       await defender.print_and_wait([
-        defender.get_uma_sex_title(),
+        defender.uma_sex_title,
         '的尾巴，明明不是训练员专用的开关。',
       ]);
       await defender.print_and_wait([
@@ -485,7 +485,7 @@ module.exports = class extends EroNormalMakingOuts {
         ]);
         await defender.print_and_wait([
           '……有这样想法的',
-          defender.get_uma_sex_title(),
+          defender.uma_sex_title,
           '，一定不止自己一个吧？',
         ]);
       }
@@ -498,7 +498,7 @@ module.exports = class extends EroNormalMakingOuts {
       await attacker.print_and_wait(['只要稍微用力，屁股就会高高的翘起。']);
       await attacker.print_and_wait([
         '明明是',
-        defender.get_uma_sex_title(),
+        defender.uma_sex_title,
         '的禁区，一被碰触就会被攻击的位置，',
       ]);
       await attacker.print_and_wait([
@@ -524,7 +524,7 @@ module.exports = class extends EroNormalMakingOuts {
     }
     await attacker.print_and_wait([
       '出人意料的粉嫩，散发着',
-      defender.get_child_sex_title(),
+      defender.child_sex_title,
       '子特有的气息。',
     ]);
     await attacker.print_and_wait([
@@ -550,7 +550,7 @@ module.exports = class extends EroNormalMakingOuts {
     }
     await attacker.print_and_wait([
       '强硬得掰开因应激而合拢的双腿，将这张嘴贴近',
-      defender.get_child_sex_title(),
+      defender.child_sex_title,
       '所特有的器官。',
     ]);
     await attacker.print_and_wait([
@@ -661,7 +661,7 @@ module.exports = class extends EroNormalMakingOuts {
       '唔……真过分呐，',
       sys_get_colored_callname(defender.id, attacker.id),
       '。竟然用肉棒打',
-      defender.get_child_sex_title(),
+      defender.child_sex_title,
       '子的脸什么的……这样做，可是会被讨厌的呐？',
     ]);
     if (era.get('mark:100:同心') - era.get('mark:100:反抗') === 3) {
@@ -676,7 +676,7 @@ module.exports = class extends EroNormalMakingOuts {
       ]);
       await defender.say_and_wait([
         '可不要❤️……对其他❤️、',
-        defender.get_child_sex_title(),
+        defender.child_sex_title,
         '子❤️，这样做哦？',
       ]);
       await attacker.print_and_wait([

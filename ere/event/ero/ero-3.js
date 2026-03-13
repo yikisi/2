@@ -1,13 +1,103 @@
-/**
- * @file 东海帝王 - 调教
- * @author 天马闪光蹄
- */
 const era = require('#/era-electron');
 
+const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
+
+const EroNormalCommunications = require('#/event/ero/common/normal/communications');
+const EroNormalMakingOuts = require('#/event/ero/common/normal/making-outs-final');
 const NormalCommandLines = require('#/event/ero/common/normal/normal-common');
 const CustomizedEro = require('#/event/ero/ero-common');
-const TeioNormalCommunications = require('#/event/ero/ero-lines-3/normal-communications');
-const TeioNormalMakingOuts = require('#/event/ero/ero-lines-3/normal-making-outs');
+
+const { i18n } = require('#/i18n/selector');
+
+class TeioNormalCommunications extends EroNormalCommunications {
+  async talk(attacker, defender, hook) {
+    if (defender.id !== 3 || !era.get('status:3:腿伤')) {
+      return await super.talk(attacker, defender, hook);
+    }
+    await i18n().kojo[3].ero.talk_with_hurt(
+      defender,
+      attacker,
+      sys_get_colored_callname(attacker.id, defender.id),
+    );
+  }
+
+  async lure(attacker, defender, hook) {
+    if (defender.id !== 3) {
+      return await super.lure(attacker, defender, hook);
+    }
+    await i18n().kojo[3].ero.lure(
+      defender,
+      attacker,
+      (hook.arg = EroNormalCommunications.check_lure_success(
+        attacker.id,
+        defender.id,
+      )),
+    );
+  }
+
+  async switch(attacker, defender) {
+    if (defender.id !== 3) {
+      return await super.switch(attacker, defender);
+    }
+    await i18n().kojo[3].ero.switch(defender, attacker);
+  }
+}
+
+class TeioNormalMakingOuts extends EroNormalMakingOuts {
+  async pet_anal(attacker, defender, hook) {
+    if (defender.id !== 3 || !hook.arg) {
+      return await super.pet_anal(attacker, defender, hook);
+    }
+    await i18n().kojo[3].ero.pet_anal(
+      defender,
+      attacker,
+      sys_get_colored_callname(defender.id, attacker.id),
+    );
+  }
+
+  async prepare_anal(attacker, defender, hook) {
+    if (defender.id !== 3) {
+      return await super.prepare_anal(attacker, defender, hook);
+    }
+    await i18n().kojo[3].ero.prepare_anal(defender, attacker);
+  }
+
+  async ask_foot_job(attacker, defender, hook) {
+    if (defender.id !== 3 || !era.get('status:3:腿伤') || !hook.arg) {
+      return await super.ask_foot_job(attacker, defender, hook);
+    }
+    await i18n().kojo[3].ero.ask_foot_job_with_hurt(
+      defender,
+      attacker,
+      sys_get_colored_callname(defender.id, attacker.id),
+    );
+  }
+
+  async force_foot_job(attacker, defender, hook) {
+    if (defender.id !== 3 || !era.get('status:3:腿伤') || !hook.arg) {
+      return await super.force_foot_job(attacker, defender, hook);
+    }
+    await i18n().kojo[3].ero.ask_foot_job_with_hurt(
+      defender,
+      attacker,
+      sys_get_colored_callname(defender.id, attacker.id),
+    );
+  }
+
+  async ask_tail_job(attacker, defender, hook) {
+    if (defender.id !== 3) {
+      return await super.ask_tail_job(attacker, defender, hook);
+    }
+    await i18n().kojo[3].ero.ask_tail_job(defender, attacker, hook.arg);
+  }
+
+  async force_tail_job(attacker, defender, hook) {
+    if (defender.id !== 3) {
+      return await super.force_tail_job(attacker, defender, hook);
+    }
+    await i18n().kojo[3].ero.ask_tail_job(defender, attacker, hook.arg);
+  }
+}
 
 class TeioNormalLines extends NormalCommandLines {
   constructor(root) {
@@ -18,8 +108,8 @@ class TeioNormalLines extends NormalCommandLines {
 }
 
 module.exports = class extends CustomizedEro {
-  constructor(chara_id) {
-    super(chara_id, { normal: true });
+  constructor(cid) {
+    super(cid, { normal: true });
     this.normal = new TeioNormalLines(this);
   }
 
@@ -33,61 +123,6 @@ module.exports = class extends CustomizedEro {
         extra_flag,
       );
     }
-    if (era.get('status:3:腿伤') > 0) {
-      await era.printAndWait([
-        me.get_colored_name(),
-        ' 低头看着手里的报告，接受了里面显示的信息，抬头望向坐在窗前的担当。',
-      ]);
-      await era.printAndWait([
-        '夕阳斜照入室，照在',
-        teio.sex,
-        '抚摸着自己小腹的手上，又打在',
-        teio.sex,
-        '轻轻摆动，略显无力的小腿上。',
-      ]);
-      await teio.say_and_wait(['训练员……训练员啊。']);
-      await era.printAndWait([
-        teio.sex,
-        '笑了笑，指了指自己的肚子，对 ',
-        me.get_colored_name(),
-        ' 招招手。',
-      ]);
-      await era.printAndWait([
-        me.get_colored_name(),
-        ' 下定了决心，踩着影子走了过去。',
-      ]);
-      await era.printAndWait([me.get_couple_title(), '，是一家人。']);
-    } else {
-      await teio.say_and_wait(['训练员训练员——']);
-      await era.printAndWait([
-        me.get_colored_name(),
-        ' 还没反应过来发生了什么，就下意识张开双臂抱住了惊慌失措跑过来的自家担当，愣了一会才看懂',
-        teio.sex,
-        '捧在手里的那份文件。',
-      ]);
-      await era.printAndWait(['是这样吗……']);
-      await era.printAndWait([
-        me.get_colored_name(),
-        ' 目光下移，盯着',
-        teio.sex,
-        '的小腹。',
-      ]);
-      await me.say_and_wait(['那里就是，', teio.sex, '和我的……'], true);
-      await era.printAndWait([
-        me.get_colored_name(),
-        ' 怀里的东西抽动了一下，',
-        me.get_colored_name(),
-        ' 回过神来，对上了自家担当那双眼睛。',
-        teio.sex,
-        '也回望着 ',
-        me.get_colored_name(),
-        '，神色逐渐温和成熟起来。',
-      ]);
-      await era.printAndWait([
-        '好吧，',
-        me.get_colored_name(),
-        ' 想，以后要做的计划不止包括训练了。',
-      ]);
-    }
+    await i18n().kojo[this.id].ero.preg_report(teio, me);
   }
 };

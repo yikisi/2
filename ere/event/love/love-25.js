@@ -192,7 +192,7 @@ module.exports = class extends CustomizedLove {
           ' 胃口的地方，设计新奇的咖啡杯、洛可可风格的咖啡壶，',
           me.get_colored_name(),
           ' 仿佛可以想象在无人的午后，这个黑色长发的 ',
-          coffee.get_teen_sex_title(),
+          coffee.teen_sex_title,
           ' 一人漫步在货架之间，时而轻轻捧起仔细欣赏，时而微微弯腰停步驻目，阳光透过玻璃洒满整个小店，将一切涂上梦幻般的金黄。',
         ]);
         await coffee.say_and_wait([
@@ -227,7 +227,7 @@ module.exports = class extends CustomizedLove {
         await say_by_passer_by_and_wait('粉丝A', '脸好红啊！');
         await say_by_passer_by_and_wait('粉丝B', [
           '是恋爱中',
-          coffee.get_teen_sex_title(),
+          coffee.teen_sex_title,
           '的脸吗！',
         ]);
         era.printButton('「两位！现在是私人时间，请——」', 1);
@@ -342,7 +342,7 @@ module.exports = class extends CustomizedLove {
           '似乎此时才终于意识到自己刚才顺势说了些什么。在内心的小秘密被自己揭开后，',
           coffee.get_colored_name(),
           ' 只能用着「恋爱中',
-          coffee.get_teen_sex_title(),
+          coffee.teen_sex_title,
           '的脸」，抬头仰望着 ',
           me.get_colored_name(),
           '。',
@@ -648,17 +648,17 @@ module.exports = class extends CustomizedLove {
     ]);
     await coffee.print_and_wait([
       '正准备敲门时，却传来了陌生',
-      coffee.get_phy_sex_title(),
+      coffee.phy_sex_title,
       '的声音。',
     ]);
     await coffee.print_and_wait([
       '将耳朵轻轻贴在门前，',
-      coffee.get_uma_sex_title(),
+      coffee.uma_sex_title,
       '强大的听力能将这种普通的门视作无物。',
     ]);
     await coffee.say_and_wait([
       '不认识的',
-      coffee.get_phy_sex_title(),
+      coffee.phy_sex_title,
       '，正坐在 ',
       callname,
       ' 旁边，放松地聊着天……',
@@ -689,7 +689,7 @@ module.exports = class extends CustomizedLove {
     await coffee.print_and_wait('只是想想就变成这样……');
     await coffee.say_and_wait([
       '该不会真是个重',
-      coffee.get_phy_sex_title().substring(0, 1),
+      coffee.phy_sex_title.substring(0, 1),
       '吧，我……',
     ]);
     await sys_love_uma_in_event(25);

@@ -37,12 +37,12 @@ module.exports = {
     if (ret.update === 1) {
       await nature.print_and_wait([
         '在灯光下，',
-        nature.get_teen_sex_title(),
+        nature.teen_sex_title,
         '一边把玩着自己所珍视的纸奖杯，一边不自觉的喃喃道。',
       ]);
       await nature.say_and_wait([
         '等下！，我刚才在说什么啊！弄得像个恋爱中的',
-        nature.get_teen_sex_title(),
+        nature.teen_sex_title,
         '一样！我才不是这种角色啦！',
       ]);
       await nature.print_and_wait([
@@ -151,7 +151,7 @@ module.exports = {
     if (ret.update === 1) {
       await nature.print_and_wait([
         '声音虽然很微弱，但却透露出了',
-        nature.get_teen_sex_title(),
+        nature.teen_sex_title,
         '的坚定。',
       ]);
       await nature.print_and_wait([
@@ -175,7 +175,7 @@ module.exports = {
     );
     await nature.print_and_wait([
       '这是今天早上一位不知道名字的',
-      nature.get_uma_sex_title(),
+      nature.uma_sex_title,
       '给',
       nature.sex,
       '的，',
@@ -188,8 +188,8 @@ module.exports = {
       '既然被拜托了，就只能给',
       you.sex,
       '了。恋爱中的',
-      nature.get_uma_sex_title(),
-      nature.get_child_sex_title(),
+      nature.uma_sex_title,
+      nature.child_sex_title,
       '子的心情，',
       nature.get_colored_name(),
       ' 自己也很清楚',
@@ -205,7 +205,7 @@ module.exports = {
     );
     await nature.print_and_wait([
       '红发',
-      nature.get_teen_sex_title(),
+      nature.teen_sex_title,
       '一遍又一遍地思考。拼命想要找出正确的解答方式，却求而不得',
     ]);
     nature.say(['啊～～～', callname, '……']);
@@ -247,7 +247,7 @@ module.exports = {
     await nature.say_and_wait(['没想到会以这种形式交给', you.sex], true);
     await nature.print_and_wait([
       '这也是自作自受吗？虽然',
-      nature.get_teen_sex_title(),
+      nature.teen_sex_title,
       '这么想着，但还是下定了决心，把信交给了 ',
       callname,
       '。',
@@ -278,15 +278,15 @@ module.exports = {
     await era.input();
     await nature.say_and_wait('果然，收到这种东西会开心的吗？');
     era.printButton(
-      `「如果能从可爱的${nature.get_uma_sex_title()}${nature.get_child_sex_title()}，最好是自己喜欢的${nature.get_uma_sex_title()}${nature.get_child_sex_title()}那里得到的话，我会很高兴的。」`,
+      `「如果能从可爱的${nature.uma_sex_title}${nature.child_sex_title}，最好是自己喜欢的${nature.uma_sex_title}${nature.child_sex_title}那里得到的话，我会很高兴的。」`,
       1,
     );
     await era.input();
     await nature.say_and_wait(
       [
         '喜欢的',
-        nature.get_uma_sex_title(),
-        nature.get_child_sex_title(),
+        nature.uma_sex_title,
+        nature.child_sex_title,
         '……原来是这样啊',
       ],
       true,
@@ -295,8 +295,8 @@ module.exports = {
       [
         callname,
         ' 喜欢的',
-        nature.get_uma_sex_title(),
-        nature.get_child_sex_title(),
+        nature.uma_sex_title,
+        nature.child_sex_title,
         '给了',
         nature.sex,
         '一封情书。互相了解了对方的心意的两个人两情相悦……',
@@ -312,8 +312,8 @@ module.exports = {
       '这样啊，',
       callname,
       '，你喜欢的',
-      nature.get_uma_sex_title(),
-      nature.get_child_sex_title(),
+      nature.uma_sex_title,
+      nature.child_sex_title,
       '，',
       nature.sex,
       '也很可爱，不是很适合嘛？',
@@ -340,8 +340,8 @@ module.exports = {
         [
           callname,
           ' 以为是喜欢的',
-          nature.get_uma_sex_title(),
-          nature.get_child_sex_title(),
+          nature.uma_sex_title,
+          nature.child_sex_title,
           '寄来的情书，所以很高兴？',
         ],
         true,
@@ -351,8 +351,8 @@ module.exports = {
           '——也就是说，',
           callname,
           ' 喜欢的',
-          nature.get_uma_sex_title(),
-          nature.get_child_sex_title(),
+          nature.uma_sex_title,
+          nature.child_sex_title,
           '是……',
         ],
         true,

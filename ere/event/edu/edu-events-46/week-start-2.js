@@ -37,7 +37,7 @@ module.exports = (handlers) => {
       `是！训练员${me.get_adult_sex_title()}就看着飞鹰子活跃的表现吧！`,
     );
     await falcon.say_and_wait(
-      `不管是作为偶像的飞鹰子还是作为${falcon.get_uma_sex_title()}的${
+      `不管是作为偶像的飞鹰子还是作为${falcon.uma_sex_title}的${
         falcon.name
       }都要全部完成！`,
     );
@@ -395,9 +395,7 @@ module.exports = (handlers) => {
     await falcon.say_and_wait(`没有路就让飞鹰子来找! 发现目标就快快去抓到!`);
     await say_by_passer_by(`粉丝们`, `——去抓住大大的爱吧！`);
     await falcon.say_and_wait(
-      `最强的${falcon.get_uma_sex_title()}偶像，${
-        falcon.name
-      }♪今天也送到了呢⭐`,
+      `最强的${falcon.uma_sex_title}偶像，${falcon.name}♪今天也送到了呢⭐`,
     );
     await say_by_passer_by(`粉丝们`, `噢噢噢噢噢噢噢噢！飞鹰子！飞鹰子！`);
     await era.printAndWait(`飞鹰子的演出大获成功。`);
@@ -834,7 +832,7 @@ module.exports = (handlers) => {
     await falcon.say_and_wait(`萨莉亚的食物比想象中还要美味呢`);
     await me.say_and_wait(`是因为节日的缘故吧？这里的人都洋溢着快乐的气息。`);
     await falcon.say_and_wait(
-      `也有这一部分的缘故，不过更多的还是像普通${falcon.get_uma_sex_title()}一样享受着节日的气息。`,
+      `也有这一部分的缘故，不过更多的还是像普通${falcon.uma_sex_title}一样享受着节日的气息。`,
     );
     await me.say_and_wait(`飞鹰子对偶像感到疲惫了吗？`);
     await falcon.say_and_wait(`不会哦？不如说飞鹰子很享受呢！`);
@@ -866,7 +864,7 @@ module.exports = (handlers) => {
     await era.printAndWait(`在手机上拍下了接吻瞬间的${falcon.name}。`);
     await era.printAndWait(`作为偶像来说绝对NG的吧？`);
     await falcon.say_and_wait(
-      `作为偶像的飞鹰子必须把平等的爱给每一位粉丝，不过现在的我只是随处可见的普通${falcon.get_uma_sex_title()}哦！`,
+      `作为偶像的飞鹰子必须把平等的爱给每一位粉丝，不过现在的我只是随处可见的普通${falcon.uma_sex_title}哦！`,
     );
     era.set('cflag:46:节日事件标记', 0);
   };

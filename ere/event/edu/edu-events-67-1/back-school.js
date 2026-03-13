@@ -138,11 +138,12 @@ module.exports = class extends CustomizedEdu {
       const sirius = get_chara_talk(70);
       const coffee = get_chara_talk(25);
       const condor_pasa = get_chara_talk(14);
-      await era.printAndWait(
-        `${
-          me.name
-        } 和里见光钻一起外出后回程的路上，经过便利商店时……看见两名赛${daiya.get_uma_sex_title()}聚在那里。`,
-      );
+      await era.printAndWait([
+        me.name,
+        '和里见光钻一起外出后回程的路上，经过便利商店时……看见两名赛',
+        daiya.uma_sex_title,
+        '聚在那里。',
+      ]);
       await gold_ship.say_and_wait(
         '可恶！又──是红鹤子喔！都已经第五张了耶……！？',
       );
@@ -380,7 +381,7 @@ module.exports = class extends CustomizedEdu {
           '欸欸，我有一天也能以一个成熟女人的身份，去参加社交派对吗？',
         );
         await daiya.say_and_wait(
-          `当然可以！身为选手的赛${daiya.get_uma_sex_title()}是经常受邀参加宴会的！`,
+          `当然可以！身为选手的赛${daiya.uma_sex_title}是经常受邀参加宴会的！`,
         );
         await maya.say_and_wait(
           '真的吗！？那人家要赶快为了社交派对做准备才行呢☆',

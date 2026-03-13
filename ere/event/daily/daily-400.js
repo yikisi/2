@@ -391,7 +391,7 @@ module.exports = class extends CustomizedDaily {
     if (hook.arg) {
       if (Math.random() < 0.5) {
         await silence.say_and_wait(
-          `其实我没什么好喊的……算了，请帮助我在赛${silence.get_uma_sex_title()}的道路上走的更远吧！！！`,
+          `其实我没什么好喊的……算了，请帮助我在赛${silence.uma_sex_title}的道路上走的更远吧！！！`,
         );
         await era.printAndWait([
           silence.sex,
@@ -550,7 +550,7 @@ module.exports = class extends CustomizedDaily {
           await era.printAndWait([
             silence.sex,
             '恬静的看着平静小河平缓的水面的样子完全不像是平时那个风风火火我行我素的赛',
-            silence.get_uma_sex_title(),
+            silence.uma_sex_title,
             '，',
           ]);
           await era.printAndWait([
@@ -663,7 +663,7 @@ module.exports = class extends CustomizedDaily {
               )
               .then(() =>
                 silence.say_and_wait(
-                  `噗哈哈哈，开玩笑的，我可是赛${silence.get_uma_sex_title()}偶像啊，怎么可以不会唱歌呢？`,
+                  `噗哈哈哈，开玩笑的，我可是赛${silence.uma_sex_title}偶像啊，怎么可以不会唱歌呢？`,
                 ),
               ),
         );
@@ -847,7 +847,7 @@ module.exports = class extends CustomizedDaily {
             '有些苦恼的叹了口气。',
           ]);
           await silence.say_and_wait(
-            `好吧好吧，虽然但是……和我这样的${silence.get_uma_sex_title()}约会是不会有意思的哦。`,
+            `好吧好吧，虽然但是……和我这样的${silence.uma_sex_title}约会是不会有意思的哦。`,
           );
           await era.printAndWait([
             silence.get_colored_name(),
@@ -861,7 +861,7 @@ module.exports = class extends CustomizedDaily {
           );
           await era.input();
           await silence.say_and_wait(
-            `什么……什么啊！！！说这样的话……难道你是什么擅长骗${silence.get_uma_sex_title()}的花心萝卜吗？`,
+            `什么……什么啊！！！说这样的话……难道你是什么擅长骗${silence.uma_sex_title}的花心萝卜吗？`,
           );
           await era.printAndWait([
             silence.get_colored_name(),
@@ -881,7 +881,7 @@ module.exports = class extends CustomizedDaily {
             '，随后叹了口气。',
           ]);
           await silence.say_and_wait(
-            `不管是什么，比赛和训练才是最重要的不是吗？再说了和我这样阴沉的赛${silence.get_uma_sex_title()}出去约会很没意思的哦。`,
+            `不管是什么，比赛和训练才是最重要的不是吗？再说了和我这样阴沉的赛${silence.uma_sex_title}出去约会很没意思的哦。`,
           );
           await era.printAndWait([
             '一边说着，',

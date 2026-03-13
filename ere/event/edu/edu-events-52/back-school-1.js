@@ -63,7 +63,7 @@ module.exports = (handlers) => {
     );
     await era.printAndWait([
       '蹦蹦跳跳的将手中的袋子们摇得沙沙作响，小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '对 ',
       me.get_colored_name(),
       ' 露出了感谢的笑容。',
@@ -247,16 +247,16 @@ module.exports = (handlers) => {
     );
     await era.printAndWait([
       '原来是校园怪谈啊。特雷森的',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '们毕竟也是青春期的',
-      urara.get_teen_sex_title(),
+      urara.teen_sex_title,
       '们啊，感兴趣也是理所当然的。',
     ]);
     await era.printAndWait([
       '而且对身为训练员的 ',
       me.get_colored_name(),
       ' 来说，比起不确定的灵异传言，还是至今仍围绕着诸多谜团的',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '们更加有趣。',
     ]);
 
@@ -280,7 +280,7 @@ module.exports = (handlers) => {
       '察觉到大事不妙的 ',
       me.get_colored_name(),
       ' 立即将小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '夹在腋下，随后以人类最快的速度逃离了那个是非之地。',
     ]);
     await era.printAndWait([
@@ -381,7 +381,7 @@ module.exports = (handlers) => {
         '而在向 ',
         me.get_colored_name(),
         ' 咨询过许多与',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '与特雷森相关的问题后，她亲切的微笑中似乎又多了几分谢意。',
       ]);
       await era.printAndWait(
@@ -398,7 +398,7 @@ module.exports = (handlers) => {
         '在同行的终点与 ',
         me.get_colored_name(),
         ' 一同站上训练场的观望平台，仿佛熟知一切的她向奔跑的',
-        urara.get_teen_sex_title(),
+        urara.teen_sex_title,
         '们投去了欣慰的笑容。',
       ]);
     } else {
@@ -412,7 +412,7 @@ module.exports = (handlers) => {
       );
       await era.printAndWait([
         '成熟的马娘「只是就算这么想也已经太迟了，走上赛场的',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '一旦跑起来就不会轻易放弃。」',
       ]);
       await era.printAndWait([
@@ -476,7 +476,7 @@ module.exports = (handlers) => {
       '但在抬起头看向 ',
       me.get_colored_name(),
       ' 还有些懵懵的正脸时，虽然依旧笑容满面，小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '脸上的表情却逐渐掺入了疑惑。',
     ]);
     await urara.say_and_wait([
@@ -605,7 +605,7 @@ module.exports = (handlers) => {
           '还有 ',
           grass.get_colored_name(),
           ' 你其实很想去吃对吧？虽然',
-          grass.get_teen_sex_title(),
+          grass.teen_sex_title,
           '的矜持和体重控制限制了行动，但你在悄悄咽口水哦？',
         ],
         true,
@@ -695,7 +695,7 @@ module.exports = (handlers) => {
       );
       await era.printAndWait([
         '不愧是强大的',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '，竟然能面不改色的瞬间脱离包围圈……啊不对！',
         urara.sex,
         '好像是把其他的谁换进去了！',
@@ -704,14 +704,14 @@ module.exports = (handlers) => {
         '诶？',
         callname,
         ' 竟然要参加',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '级的比赛吗？真厉害啊！那么一起加油吧，',
         callname,
         '！',
       ]);
       await era.printAndWait([
         '面对两眼放光的小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '，以及用某种「温柔的眼神」注视着自己的 ',
         grass.get_colored_name(),
         '……',
@@ -769,7 +769,7 @@ module.exports = (handlers) => {
       '抱住 ',
       me.get_colored_name(),
       ' 伸来的手臂，在长椅上缩成一团的小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '一边在梦中轻声细语，一边逐渐侵占着 ',
       me.get_colored_name(),
       ' 的怀抱。',
@@ -800,7 +800,7 @@ module.exports = (handlers) => {
         ' 耳边，',
         me.get_colored_name(),
         ' 揉着小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '耳边的绒毛，小声摇晃着',
         urara.sex,
         '的梦乡。',
@@ -815,7 +815,7 @@ module.exports = (handlers) => {
       ]);
       await era.printAndWait([
         '但在小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '从朦胧中恢复清醒后，一片茫然的樱瞳中却又只有也被吓了一跳的训练员四目相对。',
       ]);
       await urara.say_and_wait('咦？点、点心……啊，难道是……？');
@@ -880,7 +880,7 @@ module.exports = (handlers) => {
       await urara.say_and_wait('诶……？原来乌拉拉睡着了……呼……');
       await era.printAndWait([
         '于是在背着小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '继续走出了一段距离后，',
         urara.sex,
         '立刻又回到了刚刚的美梦中。',

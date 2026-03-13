@@ -469,7 +469,7 @@ module.exports = class extends CustomizedEro {
                 ' 的意识。',
               ]);
               await era.printAndWait([
-                kitaru.get_uma_sex_title(),
+                kitaru.uma_sex_title,
                 '口中嚷嚷着的淫语，说明了白兴大人的彻底失败。',
               ]);
             } else {
@@ -583,7 +583,7 @@ module.exports = class extends CustomizedEro {
                 ' 的摆布，这位名叫 ',
                 kitaru.get_colored_name(),
                 ' 的赛',
-                kitaru.get_uma_sex_title(),
+                kitaru.uma_sex_title,
                 '正再次尝试将自己的记忆封闭起来。',
               ]);
             }

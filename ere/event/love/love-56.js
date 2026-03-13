@@ -91,7 +91,7 @@ module.exports = class extends CustomizedLove {
     await kitaru.say_and_wait('是……是因为……');
     await era.printAndWait([
       '似乎是自己也不知道为什么会突然说出这番话来，有些着急的',
-      kitaru.get_teen_sex_title(),
+      kitaru.teen_sex_title,
       '居然开始下意识的捋着自己的耳朵来。',
     ]);
     era.printButton('「占卜的结果？」', 1);
@@ -187,7 +187,7 @@ module.exports = class extends CustomizedLove {
       ]);
       await kitaru.print_and_wait([
         '刮蹭，摩擦，挑逗，直到最后的痉挛，狠狠的惩罚自己这个会对训练员发情的失格',
-        kitaru.get_uma_sex_title(),
+        kitaru.uma_sex_title,
         '。',
       ]);
       await kitaru.say_and_wait([me.get_colored_actual_name(), '！']);
@@ -316,7 +316,7 @@ module.exports = class extends CustomizedLove {
           '即使在重复了好几遍之后，自己还在呢喃着 ',
           me.get_colored_actual_name(),
           ' 的名字，宣告了自己的参拜路上被这个',
-          me.get_phy_sex_title(),
+          me.phy_sex_title,
           '闯入的事实。',
         ]);
         await kitaru.print_and_wait(
@@ -354,7 +354,7 @@ module.exports = class extends CustomizedLove {
           '来自 ',
           kitaru.get_colored_name(),
           ' 的这样一个下流',
-          kitaru.get_uma_sex_title(),
+          kitaru.uma_sex_title,
           '的，糟糕的气味充满了整间办公室。',
         ]);
         await kitaru.print_and_wait([
@@ -378,7 +378,7 @@ module.exports = class extends CustomizedLove {
         await era.printAndWait([
           kitaru.get_colored_name(),
           ' 的几乎被咖啡淋遍的下半身衣物，正如同样湿透的座椅与外套一被起',
-          kitaru.get_uma_sex_title(),
+          kitaru.uma_sex_title,
           '的体温加热后散发出咖啡的香气。',
         ]);
         era.printButton('「没事吧？」', 1);
@@ -481,7 +481,7 @@ module.exports = class extends CustomizedLove {
         '作为训练员的 ',
         me.get_colored_name(),
         ' 知道，赛',
-        kitaru.get_uma_sex_title(),
+        kitaru.uma_sex_title,
         '们只有在极为重要的场合才会穿上这样的服装。',
       ]);
       await kitaru.say_and_wait('那个……');
@@ -525,7 +525,7 @@ module.exports = class extends CustomizedLove {
         ' 握紧了 ',
         me.get_colored_name(),
         ' 的手，',
-        kitaru.get_uma_sex_title(),
+        kitaru.uma_sex_title,
         '略高的体温自她的掌心不断传递过来。',
       ]);
       era.printButton('接受', 1);
@@ -573,13 +573,13 @@ module.exports = class extends CustomizedLove {
     await era.printAndWait([
       me.get_colored_name(),
       ' 听别人说过耳朵大的',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '性欲强。',
     ]);
     await era.printAndWait([
       me.get_colored_name(),
       ' 也听说跑长距离的',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '性欲强',
     ]);
     await era.printAndWait('或许之前还有过怀疑……');
@@ -632,7 +632,7 @@ module.exports = class extends CustomizedLove {
       '得到如此评价的 ',
       kitaru.get_colored_name(),
       '，尾巴的摆动更加剧烈，直到本就不是为了',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '设计的衣物下摆被掀起。',
     ]);
     await era.printAndWait('因为方才激烈欢爱而留下的痕迹，清晰可见。');
@@ -731,7 +731,7 @@ module.exports = class extends CustomizedLove {
     await era.printAndWait([
       me.get_colored_name(),
       ' 只是插入，担当',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '敏感的身躯便几乎要抵达高潮，失焦的双眼不知道在想着些什么。',
     ]);
     era.println();
@@ -796,7 +796,7 @@ module.exports = class extends CustomizedLove {
     );
     await kitaru.print_and_wait([
       '被',
-      me.get_phy_sex_title(),
+      me.phy_sex_title,
       '抵在墙上，半脱的巫女服下的泛着樱红色身体随着抽插的动作一上一下的。',
     ]);
     await kitaru.say_and_wait('呜……自己居然会在白兴大人面前变成这样……', true);
@@ -805,7 +805,7 @@ module.exports = class extends CustomizedLove {
     await era.printAndWait('啵！');
     await era.printAndWait([
       '浓稠黏糊的精液，在',
-      me.get_phy_sex_title(),
+      me.phy_sex_title,
       '拔出的一瞬间，自巫女穴口涌出，淫靡的气味在本殿内弥漫开来。',
     ]);
     begin_and_init_ero(0, 56);
@@ -832,7 +832,7 @@ module.exports = class extends CustomizedLove {
     await kitaru.say_and_wait('好激烈啊……');
     await era.printAndWait([
       '尽管强装着镇定，但巫女服上液体干涸的痕迹还是表明了刚才那个淫乱的',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '就是她。',
     ]);
     era.printButton('「白兴大人不会怪罪吗？」', 1);

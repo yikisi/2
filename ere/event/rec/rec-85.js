@@ -344,9 +344,7 @@ handlers[event_hooks.out_start] = async (event_object) => {
       await ruby.say_and_wait('呼嗯…………');
 
       ruby.say('我知道了');
-      era.print(
-        `${ruby.get_child_sex_title()}的脸颊为何有淡红色浮现，你不得而知。`,
-      );
+      era.print(`${ruby.child_sex_title}的脸颊为何有淡红色浮现，你不得而知。`);
       ruby.say('请别忘记确认测试的曲目等事项……那么，晚安了。');
       era.print(`${ruby.name} 向你行了一礼。`);
       era.printButton('冲向体育馆', 1);
@@ -628,7 +626,7 @@ handlers[event_hooks.week_start] = async () => {
   await era.printAndWait(
     `${
       me.name
-    } 失望地垂下肩膀，没有注意到 ${ruby.get_child_sex_title()} 眼睛里的笑意。`,
+    } 失望地垂下肩膀，没有注意到 ${ruby.child_sex_title} 眼睛里的笑意。`,
   );
   era.println();
 

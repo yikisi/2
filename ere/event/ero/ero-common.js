@@ -34,11 +34,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { buff_colors } = require('#/data/color-const');
 const { shop_result_type_enum } = require('#/data/ero/juel-const');
 const { mark_enum } = require('#/data/ero/mark-const');
-const {
-  get_slang_part_name_key,
-  part_enum,
-  part_names,
-} = require('#/data/ero/part-const');
+const { get_slang_part_name_key, part_enum } = require('#/data/ero/part-const');
 const {
   pregnant_stage_enum,
   unexpected_pregnant_enum,
@@ -151,11 +147,7 @@ class CustomizedEro extends CustomizedEvent {
    * @returns {Promise<boolean>} 是否同意
    */
   async join_3p(lover) {
-    const chara = get_chara_talk(this.id);
-    era.print([chara.get_colored_name(), ' 面色绯红地想要加入……接受吗？']);
-    era.printButton('「你来的正是时候」', 1);
-    era.printButton('还是别了……', 2);
-    return (await era.input()) === 1;
+    return await i18n().timon.ero_o.join_3p(get_chara_talk(this.id));
   }
 
   /**
@@ -163,12 +155,10 @@ class CustomizedEro extends CustomizedEvent {
    * @param {number} lover 主要床伴
    */
   async join_3p_accept(lover) {
-    await era.printAndWait([
-      get_chara_talk(this.id).get_colored_name(),
-      ' 扑入 ',
-      get_chara_talk(0).get_colored_name(),
-      ' 怀中……',
-    ]);
+    await i18n().timon.ero_o.join_3p_accept(
+      get_chara_talk(this.id),
+      get_chara_talk(0),
+    );
   }
 
   /**
@@ -176,14 +166,11 @@ class CustomizedEro extends CustomizedEvent {
    * @param {number} lover 主要床伴
    */
   async join_3p_force(lover) {
-    await era.printAndWait([
-      get_chara_talk(this.id).get_colored_name(),
-      ' 征得 ',
-      get_chara_talk(lover).get_colored_name(),
-      ' 的同意后，华丽地无视了 ',
-      get_chara_talk(0).get_colored_name(),
-      ' 的抗议……',
-    ]);
+    await i18n().timon.ero_o.join_3p_force(
+      get_chara_talk(this.id),
+      get_chara_talk(lover),
+      get_chara_talk(0),
+    );
   }
 
   /**
@@ -191,10 +178,7 @@ class CustomizedEro extends CustomizedEvent {
    * @param {number} lover 主要床伴
    */
   async join_3p_reject(lover) {
-    await era.printAndWait([
-      get_chara_talk(this.id).get_colored_name(),
-      ' 掩面而去……',
-    ]);
+    await i18n().timon.ero_o.join_3p_reject(get_chara_talk(this.id));
   }
 
   /**
@@ -239,7 +223,6 @@ class CustomizedEro extends CustomizedEvent {
   async next_round() {}
 
   /**
-   * @author 黑奴队长
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {string} callname
@@ -248,25 +231,23 @@ class CustomizedEro extends CustomizedEvent {
    */
   become_erect(chara, me, callname, hook, extra_flag) {
     if (extra_flag.part === part_enum.penis) {
-      era.print([
-        chara.get_colored_name(),
-        ' ',
-        di18n.feature.n_penis[get_penis_size(this.id)],
-        ' 的肉棒勃起了！',
-      ]);
+      era.print(
+        i18n().timon.ero_o.get_penis_be_erect(
+          chara,
+          di18n.feature.n_penis[get_penis_size(this.id)],
+        ),
+      );
     } else if (extra_flag.part === part_enum.breast) {
-      era.print([
-        '深色的小樱桃在 ',
-        chara.get_colored_name(),
-        ' 两只 ',
-        di18n.feature.get_breast_desc(get_breast_cup(chara.id)),
-        ' 的乳房顶端探出了头……',
-      ]);
+      era.print(
+        i18n().timon.ero_o.get_nipple_be_erect(
+          chara,
+          di18n.feature.get_breast_desc(get_breast_cup(chara.id)),
+        ),
+      );
     }
   }
 
   /**
-   * @author 黑奴队长
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {string} callname
@@ -274,16 +255,15 @@ class CustomizedEro extends CustomizedEvent {
    * @param {{part:number}} extra_flag
    */
   become_lubrication(chara, me, callname, hook, extra_flag) {
-    era.print([
-      chara.get_colored_name(),
-      ' 的 ',
-      { content: part_names[extra_flag.part], color: buff_colors[2] },
-      ' 变得湿润了！',
-    ]);
+    era.print(
+      i18n().timon.ero_o.get_be_lubricated(chara, {
+        content: i18n().body_part[get_slang_part_name_key(extra_flag.part)],
+        color: buff_colors[2],
+      }),
+    );
   }
 
   /**
-   * @author 黑奴队长
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {string} callname
@@ -291,35 +271,18 @@ class CustomizedEro extends CustomizedEvent {
    * @param {{continue:boolean,part:number}} extra
    */
   wound(chara, me, callname, hook, extra) {
-    if (extra.continue) {
-      era.print([
-        chara.get_colored_name(),
-        ' 的 ',
-        {
-          content: i18n().body_part[part_enum.keys[extra.part]],
-          color: buff_colors[2],
-        },
-        ' 还在',
-        { content: ' 流血 ', color: buff_colors[3] },
-        '！',
-      ]);
-    } else {
-      era.print([
-        chara.get_colored_name(),
-        ' 的 ',
-        {
-          content: i18n().body_part[part_enum.keys[extra.part]],
-          color: buff_colors[2],
-        },
-        ' 被',
-        { content: ' 撑裂 ', color: buff_colors[3] },
-        '了！',
-      ]);
-    }
+    era.print(
+      (extra.continue
+        ? i18n().timon.ero_o.get_bleed
+        : i18n().timon.ero_o.get_be_wounded)(chara, {
+        content: i18n().body_part[part_enum.keys[extra.part]],
+        color: buff_colors[2],
+      }),
+      { color: buff_colors[3] },
+    );
   }
 
   /**
-   * @author 黑奴队长
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {string} callname
@@ -327,12 +290,7 @@ class CustomizedEro extends CustomizedEvent {
    * @param {{virgin:boolean}} extra_flag
    */
   lose_virginity(chara, me, callname, hook, extra_flag) {
-    era.print([
-      chara.get_colored_name(),
-      ' 失去了 ',
-      { content: extra_flag.virgin ? '处女' : '童贞', color: buff_colors[2] },
-      '！',
-    ]);
+    era.print(i18n().timon.ero_o.get_lose_virginity(chara, extra_flag.virgin));
   }
 
   /**
@@ -811,7 +769,7 @@ class CustomizedEro extends CustomizedEvent {
       case 1:
         era.drawLine();
         await era.printAndWait([
-          race > 0 ? chara.get_uma_sex_title() + '的鼻子十分灵敏，而 ' : '',
+          race > 0 ? chara.uma_sex_title + '的鼻子十分灵敏，而 ' : '',
           me.get_colored_name(),
           ' 身上传来的淫臭味无时无刻不在向周遭宣布着自己刚才马儿跳过的事实。',
           { isBr: true },

@@ -114,7 +114,7 @@ module.exports = (handlers) => {
         '──在 ',
         maya.get_colored_name(),
         ' 的视线前方，站着「三冠赛',
-        maya.get_uma_sex_title(),
+        maya.uma_sex_title,
         '」',
         brian.get_colored_name(),
         '，以及「女杰」',

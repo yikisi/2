@@ -376,7 +376,7 @@ module.exports = class extends Edu67UntilSchoolAtrium {
       era.printButton('「等一下！先冷静下来吧！？」', 1);
       await era.input();
       await daiya.say_and_wait(
-        `请不要阻止我！！身为里见家的赛${daiya.get_uma_sex_title()}，我绝不能逃避这个困难！`,
+        `请不要阻止我！！身为里见家的赛${daiya.uma_sex_title}，我绝不能逃避这个困难！`,
       );
       await era.printAndWait(
         `看来是${daiya.sex}对抗厄运的决心被点燃了，就像${daiya.sex}执着于破除魔咒一样。──不对，也有可能只是单纯不服气而已……`,

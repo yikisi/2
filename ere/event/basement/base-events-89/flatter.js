@@ -56,7 +56,7 @@ async function flatter() {
       ' 害羞的要求，',
       me.get_colored_name(),
       ' 缓缓枕上了',
-      grand.get_teen_sex_title(),
+      grand.teen_sex_title,
       '温暖、柔软、饱满的大腿。',
     ]);
     await era.printAndWait([
@@ -71,7 +71,7 @@ async function flatter() {
       ' 强打精神的讨好，',
       grand.get_colored_name(),
       ' 似乎很是受用，小',
-      grand.get_uma_sex_title(),
+      grand.uma_sex_title,
       '乖巧的坐在床边，像往常一样腼腆的笑着。',
     ]);
     era.println();

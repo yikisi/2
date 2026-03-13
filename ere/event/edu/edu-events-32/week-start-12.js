@@ -170,7 +170,7 @@ module.exports = (handlers) => {
     await era.printAndWait('一片苍白的空间中，只有前方，一扇古旧深桐的木门');
     await era.printAndWait([
       '印象中仿佛见过，踩着彩色光芒的',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '从门里跑出的画面',
     ]);
     await era.printAndWait([

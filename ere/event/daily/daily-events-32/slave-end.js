@@ -104,7 +104,7 @@ module.exports = async function () {
   await era.printAndWait('不是嫌弃赌场赌的东西太过小家子气———');
   await era.printAndWait([
     '据说这里的赌场甚至还有对',
-    tachyon.get_uma_sex_title(),
+    tachyon.uma_sex_title,
     '比赛下注这种一旦曝光便注定再也干不下去的营业',
   ]);
   await era.printAndWait([

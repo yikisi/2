@@ -47,7 +47,7 @@ module.exports = async (digital, me, callname) => {
     await print_event_name('记', digital);
     await digital.print_and_wait([
       '今天是让人期待无比初生牛犊的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '酱选拔赛噢！再次感叹女神们的无尽潜力！',
     ]);
     await digital.print_and_wait([
@@ -70,7 +70,7 @@ module.exports = async (digital, me, callname) => {
       '的邀请，成为了',
       me.sex,
       '的担当',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '。',
     ]);
     digital.print('……');
@@ -123,26 +123,26 @@ module.exports = async (digital, me, callname) => {
     await digital.print_and_wait([
       { isBr: true },
       '夏季合宿快要到了，到时候就可以看得到穿着泳衣的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '酱们！',
     ]);
     await digital.print_and_wait([
       '在阳光的照耀下，比阳光更闪耀的是——',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '酱啊！',
     ]);
     await digital.print_and_wait('飞溅的西瓜，到底是哪位的手笔呢。');
     await digital.print_and_wait('极速的排球，到底会由哪位接住呢。');
     await digital.print_and_wait([
       '还有刨冰，海鲜，全都在为',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '酱们增色啊！',
     ]);
     await digital.print_and_wait(['到时候邀请 ', callname, ' 一起去玩吧！']);
     await digital.print_and_wait('……啊');
     await digital.print_and_wait([
       '（坐在笔记本前的粉色',
-      digital.get_teen_sex_title(),
+      digital.teen_sex_title,
       '，停下了笔）',
     ]);
     await digital.say_and_wait('我是不是，一直都考虑的是自己的……');
@@ -150,12 +150,12 @@ module.exports = async (digital, me, callname) => {
     await digital.print_and_wait([
       { isBr: true },
       '如果说，要是把自私与',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '放在天平上掂量，那么天平，肯定会倾向右边。',
     ]);
     await digital.print_and_wait([
       '如果，把',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '与 ',
       callname,
       ' 放在天平上掂量呢？',
@@ -220,7 +220,7 @@ module.exports = async (digital, me, callname) => {
       '又和 ',
       callname,
       ' 一起去巡礼了，虽然',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '酱们还是依旧如此闪耀，',
     ]);
     await digital.print_and_wait([
@@ -251,7 +251,7 @@ module.exports = async (digital, me, callname) => {
     await digital.print_and_wait('不是，更像一个变态啊！');
     await digital.print_and_wait([
       '说起',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '就滔滔不绝的，一遇到熟悉的话题就语速不断加快的，这不就是变态吗？',
     ]);
     await digital.print_and_wait([
@@ -294,7 +294,7 @@ module.exports = async (digital, me, callname) => {
       '看起来',
       digital.sex,
       '除了应援',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '酱外，也有挺多心思啊。',
     ]);
     await era.printAndWait([
@@ -378,7 +378,7 @@ module.exports = async (digital, me, callname) => {
     );
     await era.printAndWait([
       '赛道，早上的朝阳恰好是给勤奋训练的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '最好的咖啡。',
     ]);
     await digital.say_and_wait(['那个，', callname, '？']);

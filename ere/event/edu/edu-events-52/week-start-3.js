@@ -57,7 +57,7 @@ module.exports = (handlers) => {
       '被 ',
       urara.get_colored_name(),
       ' 用力的抱着，比人类体温稍高的小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '透过冬衣向自己的 ',
       callname,
       ' 传递着',
@@ -66,7 +66,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '二月的气温依旧谈不上回暖，但因为是奔跑而来的缘故，此刻小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '的身体正散发着温热活泼的清香。',
     ]);
     await era.printAndWait([
@@ -87,7 +87,7 @@ module.exports = (handlers) => {
         ]);
         await era.printAndWait([
           '放开怀抱，面色温润的小',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '踮起脚尖，调皮地在 ',
           me.get_colored_name(),
           ' 的嘴唇上留下了一枚小巧而甜蜜的吻。',
@@ -113,7 +113,7 @@ module.exports = (handlers) => {
           '放开怀中的 ',
           me.get_colored_name(),
           '，小',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '在外套口袋中一阵摸索后掏出了一个包装精致的小礼物盒。',
         ]);
         await urara.say_and_wait([
@@ -149,7 +149,7 @@ module.exports = (handlers) => {
       ]);
       await era.printAndWait([
         '将巧克力塞过来的同时，小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '也悄悄踮起脚，趁着不注意时用樱唇在 ',
         me.get_colored_name(),
         ' 的脸颊上轻啄了一下。',
@@ -194,7 +194,7 @@ module.exports = (handlers) => {
     );
     await era.printAndWait([
       '为保护小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '的心意，',
       me.get_colored_name(),
       ' 把「就像有毒动植物的警戒色一样」的后半句用力地咽了回去。',
@@ -223,7 +223,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '虽然明白',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '是一种非常喜欢胡萝卜的生物，但这块物质的成因恐怕已经是炼金术的范畴了吧……',
     ]);
     await era.printAndWait([
@@ -386,7 +386,7 @@ module.exports = (handlers) => {
     era.drawLine();
     await era.printAndWait([
       '中央特雷森每年都会为了强化',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '们的能力而举办夏季集训，这次 ',
       me.get_colored_name(),
       ' 也为 ',
@@ -397,7 +397,7 @@ module.exports = (handlers) => {
       '这对 ',
       urara.get_colored_name(),
       ' 来说是个增进实力的绝佳机会，虽然从小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '的心情上讲，出游时的兴奋明显更占上风。',
     ]);
     await era.printAndWait([
@@ -485,14 +485,14 @@ module.exports = (handlers) => {
     era.println();
     await era.printAndWait([
       '虽说这个年纪的小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '有玩心是好事，但 ',
       urara.get_colored_name(),
       ' 好像兴奋过头了，没问题吗？',
     ]);
     await era.printAndWait([
       '虽然就算感到不安，时间和小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '也不会等人，尽全力上吧。',
     ]);
     await era.printAndWait('夏季集训开始！');
@@ -502,7 +502,7 @@ module.exports = (handlers) => {
     await print_event_name('「改变」&「选择」', urara);
     await in_urara.say_as_unknown_and_wait([
       '听说有名叫乌拉拉的赛',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '，不管跑输几次都依旧很努力。',
     ]);
     await in_urara.say_as_unknown_and_wait(
@@ -550,7 +550,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '没必要苛求，',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '的身体是有极限的，日常没必要绷得太紧，对 ',
       urara.get_colored_name(),
       ' 来说这点则更重要了。',
@@ -698,7 +698,7 @@ module.exports = (handlers) => {
       ]);
     } else if (best_mvp === 1) {
       await era.printAndWait([
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '的身体是不断变化的，资深年时 ',
         urara.get_colored_name(),
         ' 可能也会需要因常态的改变而调整。',
@@ -769,7 +769,7 @@ module.exports = (handlers) => {
       '在感受到 ',
       me.get_colored_name(),
       ' 的目光后，小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '也立刻期待已久的向 ',
       me.get_colored_name(),
       ' 送上了积极的信号。',
@@ -828,7 +828,7 @@ module.exports = (handlers) => {
       '在 ',
       me.get_colored_name(),
       ' 的指引下，早已做好准备的小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '，立刻以成长后的身影冲进了训练场上奔跑的人群当中。',
     ]);
     era.drawLine();

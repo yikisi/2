@@ -74,7 +74,7 @@ module.exports = async (hook) => {
     await say_by_passer_by_and_wait('空间转发者', '他们亲了多久？');
     await say_by_passer_by_and_wait('小红马用户', '不知道……应该有两小时了吧？');
     await say_by_passer_by_and_wait(
-      '某关西' + acute.get_uma_sex_title(),
+      '某关西' + acute.uma_sex_title,
       '嗨，破盖仔，天窦黑哇，嘛在这啵。咩哇，真噶蒜中庭开趴哈？',
     );
     await era.printAndWait('………………');
@@ -88,7 +88,7 @@ module.exports = async (hook) => {
   if (hook.arg) {
     await era.printAndWait([
       '中庭后面的枯树洞，常有',
-      acute.get_uma_sex_title(),
+      acute.uma_sex_title,
       '在比赛前，对着树洞呐喊自己的愿望来释放自身压力。',
     ]);
     await era.printAndWait([

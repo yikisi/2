@@ -29,7 +29,7 @@ module.exports = async (tachyon, me, callname, relation, love) => {
   era.println();
   await era.printAndWait([
     '能够赢下这三场比赛的话，应该就能抵达所谓',
-    tachyon.get_uma_sex_title(),
+    tachyon.uma_sex_title,
     '的极限了吧',
   ]);
   await era.printAndWait([
@@ -248,7 +248,7 @@ module.exports = async (tachyon, me, callname, relation, love) => {
   ) {
     await tachyon.say_and_wait([
       '极限……在我们的努力之下，我可以大胆说出现在的自己已经到达了极限……',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '的极限',
     ]);
   } else {
@@ -276,7 +276,7 @@ module.exports = async (tachyon, me, callname, relation, love) => {
   await era.printAndWait('毫无头绪，那么，就得寻找头绪了吧');
   era.printButton('「那么速子，试试看把精力投注在比赛上吧？」', 1);
   era.printButton(
-    `${tachyon.get_uma_sex_title()}的极限，果然还是必须在赛场上才能突破吧`,
+    `${tachyon.uma_sex_title}的极限，果然还是必须在赛场上才能突破吧`,
     2,
   );
   await era.input();

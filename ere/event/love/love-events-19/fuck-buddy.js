@@ -22,11 +22,11 @@ module.exports = async (digital, me, callname) => {
   );
   await era.printAndWait([
     '虽然今天是',
-    digital.get_uma_sex_title(),
+    digital.uma_sex_title,
     '的休息日，但是今天 ',
     me.get_colored_name(),
     ' 还是来到了教学楼，来提交',
-    digital.get_uma_sex_title(),
+    digital.uma_sex_title,
     '预先参赛资料。',
   ]);
   await era.printAndWait([
@@ -96,7 +96,7 @@ module.exports = async (digital, me, callname) => {
   await digital.say_and_wait([
     callname,
     '，虽然我淋雨是不好了，但是我觉得你的身体再怎么说也会比',
-    digital.get_uma_sex_title(),
+    digital.uma_sex_title,
     '弱一点吧？要是你感冒了那可不好！',
   ]);
   await era.printAndWait([
@@ -129,9 +129,9 @@ module.exports = async (digital, me, callname) => {
     '不不不，这时 ',
     me.get_colored_name(),
     ' 意识到了，虽然担当',
-    digital.get_uma_sex_title(),
+    digital.uma_sex_title,
     '湿身很不妙，但在担当',
-    digital.get_uma_sex_title(),
+    digital.uma_sex_title,
     '前湿身，好像也不太妙。',
   ]);
   await era.printAndWait([
@@ -178,7 +178,7 @@ module.exports = async (digital, me, callname) => {
   );
   await digital.print_and_wait([
     '嗯嗯，早上先是进行了在',
-    digital.get_uma_sex_title(),
+    digital.uma_sex_title,
     '酱跑过的草地里享福，中午在食堂摄入推活能量，下午……',
   ]);
   await digital.print_and_wait([
@@ -189,7 +189,7 @@ module.exports = async (digital, me, callname) => {
   await digital.print_and_wait('不是不是不是，数码，你在想什么啊！');
   await digital.print_and_wait([
     '感觉是很受',
-    digital.get_uma_sex_title(),
+    digital.uma_sex_title,
     '欢迎的类型……',
   ]);
   await digital.print_and_wait(
@@ -200,13 +200,13 @@ module.exports = async (digital, me, callname) => {
     '是 ',
     callname,
     ' 招揽',
-    digital.get_uma_sex_title(),
+    digital.uma_sex_title,
     '，然后发掘',
     digital.sex,
     '的才能的故事是吧！',
   ]);
   await digital.print_and_wait('然后，怎么样了来着？');
-  await digital.print_and_wait(['是', digital.get_uma_sex_title(), '酱察觉……']);
+  await digital.print_and_wait(['是', digital.uma_sex_title, '酱察觉……']);
   await digital.print_and_wait('然后自家发电……');
   await digital.say_and_wait('不不不！我为什么会联系到这个，再怎么说也……');
   await tachyon.say_and_wait([

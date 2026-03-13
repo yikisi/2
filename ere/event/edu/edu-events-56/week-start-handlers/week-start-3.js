@@ -165,7 +165,7 @@ module.exports = (handlers) => {
       await era.printAndWait([kitaru.sex, '闭上了双眼，双手合十。']);
       await era.printAndWait([
         '橙发',
-        kitaru.get_teen_sex_title(),
+        kitaru.teen_sex_title,
         '在营火光芒的照耀下，竟如教堂彩绘玻璃上那些圣光庇佑的修女般圣洁。',
       ]);
       pt_change = 20;
@@ -324,7 +324,7 @@ module.exports = (handlers) => {
     await era.printAndWait('柏树下，在一座并不算小的墓碑前，待兼福停了下来。');
     await era.printAndWait([
       '其上的黑白照片中的',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '，和 ',
       kitaru.get_colored_name(),
       ' 有几分神似，不过倒是留了显得更成熟的长发。',
@@ -429,7 +429,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '在办公室的沙发上凭借',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '优秀的平衡踱步着，穿着白色织物的玲珑双足交替着踏在沙发上。',
     ]);
     if (era.get('cflag:2:招募状态') === 1) {
@@ -457,7 +457,7 @@ module.exports = (handlers) => {
       '打了个哈欠，名叫 ',
       kitaru.get_colored_name(),
       ' 的赛',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '，径直向后栽倒在了办公室中央那堆积成山的开运道具中。',
     ]);
     await era.printAndWait('哗啦！');
@@ -493,7 +493,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '躺在开运道具堆上的',
-      kitaru.get_teen_sex_title(),
+      kitaru.teen_sex_title,
       '用慵懒的声线回答了 ',
       me.get_colored_name(),
       '，而后传来几声呼噜声，',
@@ -600,7 +600,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '今年算是暖冬吧，加上赛',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '本就略高的体温，这巫女服对',
       kitaru.sex,
       '而言可能还偏厚了。',
@@ -621,11 +621,11 @@ module.exports = (handlers) => {
       ' 手臂的同时肆意摇晃着。',
     ]);
     await era.printAndWait([
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '自身的活力与传统服饰带来的庄重，在这名叫 ',
       kitaru.get_colored_name(),
       ' 的',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '身上完美的交融在一起。',
     ]);
     era.printButton('「好美……」', 1);
@@ -812,7 +812,7 @@ module.exports = (handlers) => {
       await kitaru.say_and_wait('呀，不要……不要在这里……');
       await era.printAndWait([
         '只是',
-        kitaru.get_teen_sex_title(),
+        kitaru.teen_sex_title,
         '的欲拒还迎罢了，',
         kitaru.get_colored_name(),
         ' 虽是说着不情愿，但是并拢的双腿却微微分开，得以让 ',

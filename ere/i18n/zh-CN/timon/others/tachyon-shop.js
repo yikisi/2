@@ -226,9 +226,9 @@ module.exports = {
             );
             await tachyon.say_and_wait([
               '不知道为什么喝下这个药的人都会说自己看见了美',
-              tachyon.get_teen_sex_title(),
+              tachyon.teen_sex_title,
               '的模样，除了那名美',
-              tachyon.get_teen_sex_title(),
+              tachyon.teen_sex_title,
               '外世界上其他东西看起来都是一片肉块……',
             ]);
             await tachyon.say_and_wait(

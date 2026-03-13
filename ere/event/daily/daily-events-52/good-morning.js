@@ -50,7 +50,7 @@ module.exports = () => {
         ],
       ],
       [
-        `${call_me}，${call_me}！看杂志了吗？大家说我是『能带来勇气的${urara.get_uma_sex_title()}』来着！诶嘿嘿～`,
+        `${call_me}，${call_me}！看杂志了吗？大家说我是『能带来勇气的${urara.uma_sex_title}』来着！诶嘿嘿～`,
         [
           '不知 ',
           callname,
@@ -215,7 +215,7 @@ module.exports = () => {
           ],
           [
             '不知不觉中，仿佛不会长大的小小的',
-            urara.get_uma_sex_title(),
+            urara.uma_sex_title,
             '似乎有了怀春少女才会有的姿态。',
           ],
         ],
@@ -287,7 +287,7 @@ module.exports = () => {
           `这杯新口味的蜂蜜特饮很好喝哦？${call_me} 也来尝尝吧！间接kiss……？但 ${self_call} 觉得没关系哟？难道……${call_me} 害羞了？`,
           [
             '小小的',
-            urara.get_uma_sex_title(),
+            urara.uma_sex_title,
             '对 ',
             me.get_colored_name(),
             ' 笑着眯起眼睛，而手中甜得发腻的饮料，似乎也有了更多的含义。',
@@ -354,7 +354,7 @@ module.exports = () => {
             '紧紧拉着 ',
             me.get_colored_name(),
             ' 的袖口，小',
-            urara.get_uma_sex_title(),
+            urara.uma_sex_title,
             '的笑容有些寂寞，似乎希望 ',
             me.get_colored_name(),
             ' 能更近一些。',
@@ -584,7 +584,7 @@ module.exports = () => {
             `很舒服的事情，${self_call} 确实想和 ${call_me} 做，但是日常训练也很重要哦？而且下次拿到一着的话，${call_me} 也会更开心对吧，那个时候……`,
             [
               '虽然嘴上不情愿，但小',
-              urara.get_uma_sex_title(),
+              urara.uma_sex_title,
               '的脸颊还是挂起了红晕，不过那个时候又是要说什么呢？',
             ],
           ],
@@ -618,7 +618,7 @@ module.exports = () => {
             `未来的家庭，还有孩子们……${self_call} 是不是不应该期待这些？毕竟 ${call_me} 也……`,
             [
               '说着听起来前言不搭后语的话，小',
-              urara.get_uma_sex_title(),
+              urara.uma_sex_title,
               '的表情似乎变得有些忧愁？',
             ],
           ],

@@ -37,7 +37,7 @@ module.exports = async function () {
     ]);
     await era.printAndWait([
       '姑且不论以人类之身追上',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '的可能性，除了物理上的不可能外，',
     ]);
     await era.printAndWait([
@@ -221,7 +221,7 @@ module.exports = async function () {
         '当然，即便动作再像猫，依然改变不了',
         tachyon.sex,
         '的身体是',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         '身体的事实',
       ]);
       await era.printAndWait([
@@ -315,7 +315,7 @@ module.exports = async function () {
       era.println();
       await era.printAndWait([
         '好软，好舒服……原来如此，这就是',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         '的………',
       ]);
       era.println();

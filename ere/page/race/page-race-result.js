@@ -179,7 +179,7 @@ async function page_race_result(contestants, info, race_id) {
   }
   let flag_cha = 1;
   if (
-    contestants.findIndex((e) => e.legend === 2) !== -1 &&
+    contestants.some((e) => e.legend === 2) &&
     contestants.find((e) => !e.legend && e.rank.curr === 1)?.index_chara >= 0
   ) {
     era.setOverlay('滤镜_强敌击退');

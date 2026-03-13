@@ -75,7 +75,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '任谁都能看得出来，面前的少女身上有着寻常',
-      ss.get_uma_sex_title(),
+      ss.uma_sex_title,
       '难以匹敌的天赋，而',
       ss.sex,
       '靠着自己已经初步挖掘出了一部分天赋，就好像是矿脉表面裸露的黄金一般，只有真正开采 ',
@@ -95,7 +95,7 @@ module.exports = (handlers) => {
       '打造成',
       ss.sex,
       '需要的，能够赢下比赛的赛',
-      ss.get_uma_sex_title(),
+      ss.uma_sex_title,
       '。',
     ]);
     flags.wait_flag =
@@ -122,7 +122,7 @@ module.exports = (handlers) => {
     await era.input();
     await ss.say_and_wait([
       '这样啊，我并不喜欢大雨，仅此而已，不管是人还是',
-      ss.get_uma_sex_title(),
+      ss.uma_sex_title,
       '偶尔都会有没由来的就不喜欢某种东西的情况吧。',
     ]);
     await era.printAndWait([
@@ -271,7 +271,7 @@ module.exports = (handlers) => {
     await era.printAndWait([
       ss.sex,
       '眯起了眼睛，剥去冰冷的外表之后，一个文静端庄但是又充满活力的',
-      ss.get_uma_sex_title(),
+      ss.uma_sex_title,
       '出现在 ',
       me.get_colored_name(),
       ' 面前。',
@@ -432,7 +432,7 @@ module.exports = (handlers) => {
       ' ',
       ss.sex,
       '怎么说都是在长距离赛事方面难逢敌手的天才赛',
-      ss.get_uma_sex_title(),
+      ss.uma_sex_title,
       '呢。',
     ]);
     await era.printAndWait([

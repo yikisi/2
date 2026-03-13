@@ -73,9 +73,9 @@ module.exports = (handlers) => {
     era.drawLine();
     await era.printAndWait([
       '在赛',
-      ruby.get_uma_sex_title(),
+      ruby.uma_sex_title,
       '界无人不知，留下了一场场华丽之战的',
-      ruby.get_uma_sex_title(),
+      ruby.uma_sex_title,
       '……',
     ]);
     await say_by_mother([
@@ -87,7 +87,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '眼前的这个',
-      ruby.get_uma_sex_title(),
+      ruby.uma_sex_title,
       '，无论是堪称恐怖的美丽感，还是',
       ruby.sex,
       '的容貌、气场，样子简直就像——',
@@ -195,7 +195,7 @@ module.exports = (handlers) => {
       '你刚才问：『在你眼里',
       ruby.sex_code === 1 ? '父亲' : '母亲',
       '是怎样一位',
-      ruby.get_uma_sex_title(),
+      ruby.uma_sex_title,
       '』吧。',
     ]);
     await ruby.say_and_wait('答案是，最为华丽的。');
@@ -293,7 +293,7 @@ module.exports = (handlers) => {
     await ruby.say_and_wait('不这样做不行的吧？');
     await ruby.say_and_wait([
       '——因为是作为『华丽一族』的赛',
-      ruby.get_uma_sex_title(),
+      ruby.uma_sex_title,
       '出生而享受生命的。',
     ]);
     await ruby.say_and_wait(
@@ -482,9 +482,9 @@ module.exports = (handlers) => {
       ]);
       await era.printAndWait([
         '阴影下对着凤蝶露出笑颜的',
-        ruby.get_teen_sex_title(),
+        ruby.teen_sex_title,
         '，终于有了点这个年纪',
-        ruby.get_child_sex_title(),
+        ruby.child_sex_title,
         '该有的样子。',
       ]);
       era.println();
@@ -530,7 +530,7 @@ module.exports = (handlers) => {
     await print_event_name('夏季合宿（资深年）', ruby);
     await era.printAndWait([
       '夏季集训开始了。对跑比赛的',
-      ruby.get_uma_sex_title(),
+      ruby.uma_sex_title,
       '来说是个非常重要的季节。',
     ]);
     await era.printAndWait([
@@ -648,7 +648,7 @@ module.exports = (handlers) => {
         ' 用手肘轻轻往 ',
         me.get_colored_name(),
         ' 小腹一推，',
-        ruby.get_uma_sex_title(),
+        ruby.uma_sex_title,
         '的力道让 ',
         me.get_colored_name(),
         ' 呛得不停咳嗽。',
@@ -783,7 +783,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '实现赛',
-      ruby.get_uma_sex_title(),
+      ruby.uma_sex_title,
       '的梦想——训练员工作的本质可能就是这个。',
     ]);
     await ruby.say_and_wait('……');
@@ -797,12 +797,12 @@ module.exports = (handlers) => {
     await era.printAndWait('第一家宅邸');
     await era.printAndWait([
       '「华丽一族」，听到这个名字时，人们就会想起某位',
-      ruby.get_uma_sex_title(),
+      ruby.uma_sex_title,
       '……',
     ]);
     await era.printAndWait([
       '在历史上刻下了辉煌功绩的稀世名',
-      ruby.get_uma_sex_title(),
+      ruby.uma_sex_title,
       '们……',
     ]);
     await era.printAndWait([
@@ -814,7 +814,7 @@ module.exports = (handlers) => {
     await era.printAndWait([
       ruby.sex,
       '，便是如今作为「华丽一族」象征的',
-      ruby.get_uma_sex_title(),
+      ruby.uma_sex_title,
       '。',
     ]);
     await ruby.say_and_wait('让您久等了。');

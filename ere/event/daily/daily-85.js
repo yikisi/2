@@ -240,7 +240,7 @@ module.exports = class extends CustomizedDaily {
     } else {
       await ruby.say_and_wait([
         '卖相——相当不错。味道也无话可说，您一定能抓住',
-        ruby.get_child_sex_title(),
+        ruby.child_sex_title,
         '子的胃的。',
       ]);
     }
@@ -324,7 +324,7 @@ module.exports = class extends CustomizedDaily {
       if (Math.random() < 0.5) {
         await ruby.say_and_wait([
           '您愿意代替它，陪陪我，听我这个软弱的',
-          ruby.get_child_sex_title(),
+          ruby.child_sex_title,
           '诉苦吗？',
         ]);
       } else {
@@ -333,7 +333,7 @@ module.exports = class extends CustomizedDaily {
     } else if (Math.random() < 0.5) {
       await ruby.say_and_wait([
         '若无其事地在公众场合和年下',
-        ruby.get_child_sex_title(),
+        ruby.child_sex_title,
         '牵手，了不起。',
       ]);
     } else {
@@ -544,7 +544,7 @@ module.exports = class extends CustomizedDaily {
         if (era.get('love:85') >= 50) {
           buffer.push(() =>
             ruby.say_and_wait(
-              `像是抢劫或是强暴这类案件，大多就是发生在这种地铁街道。哪怕是本格化的${ruby.get_uma_sex_title()}，一不留神，也会惨遭毒手。`,
+              `像是抢劫或是强暴这类案件，大多就是发生在这种地铁街道。哪怕是本格化的${ruby.uma_sex_title}，一不留神，也会惨遭毒手。`,
             ),
           );
         }

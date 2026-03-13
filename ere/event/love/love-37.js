@@ -288,7 +288,7 @@ module.exports = class extends CustomizedLove {
       await era.printAndWait(`是的，${me.name} 爱${flash.sex}，毫无疑问。`);
       await flash.say_and_wait('！！');
       await era.printAndWait(
-        `冰冷的座舱内，初恋的${flash.get_teen_sex_title()}瞪大双眼。`,
+        `冰冷的座舱内，初恋的${flash.teen_sex_title}瞪大双眼。`,
       );
       await era.printAndWait(
         '温暖的触感从前方传来，悬浮于空中的手有了安稳的依靠。',
@@ -333,7 +333,7 @@ module.exports = class extends CustomizedLove {
       await era.printAndWait('但唯独，不能是更加平等的恋爱。');
       await flash.say_and_wait('………');
       await era.printAndWait(
-        `冰冷的座舱内，初恋的${flash.get_teen_sex_title()}缓缓垂下眼眉。`,
+        `冰冷的座舱内，初恋的${flash.teen_sex_title}缓缓垂下眼眉。`,
       );
       await era.printAndWait(
         '本应相交的视线在这一刻互相错开，如同两条永远无法汇聚的平行线。',

@@ -51,7 +51,7 @@ module.exports = {
       await attacker.print_and_wait('不想只停在唇瓣之前。');
       await defender.say_and_wait('唔——？');
       await attacker.print_and_wait([
-        `逐渐在接吻中被${attacker.get_phy_sex_title()}困在怀中的 `,
+        `逐渐在接吻中被${attacker.phy_sex_title}困在怀中的 `,
         defender.get_colored_name(),
         ' 大概是有些惊慌地想喊出 ',
         attacker.get_colored_name(),
@@ -101,7 +101,7 @@ module.exports = {
       Math.random() < 0.5
     ) {
       await attacker.say_and_wait([
-        defender.get_uma_sex_title(),
+        defender.uma_sex_title,
         '的耳朵表达情绪的方式，到底和那种动物比较像呢。',
       ]);
       await attacker.print_and_wait('被不满地盯着看了。');

@@ -18,7 +18,7 @@ module.exports = class extends CustomizedLove {
     await luna.print_and_wait('在出生时，就被安排好了生命的轨迹。');
     await luna.print_and_wait([
       '露娜，一个象征家的赛',
-      luna.get_uma_sex_title(),
+      luna.uma_sex_title,
       '。',
     ]);
     await luna.print_and_wait([
@@ -121,7 +121,7 @@ module.exports = class extends CustomizedLove {
     await luna.print_and_wait('学生们满怀期待，教职工们意气昂扬。');
     await luna.print_and_wait([
       '新的学期，哪怕日本赛',
-      luna.get_uma_sex_title(),
+      luna.uma_sex_title,
       '屡战屡败，但从今天开始，人们逐渐摆脱了丧气。',
     ]);
     await luna.print_and_wait(
@@ -160,7 +160,7 @@ module.exports = class extends CustomizedLove {
       '连 ',
       me.get_colored_actual_name(),
       ' 也不知道，这一幕会被这位高高在上的赛',
-      luna.get_uma_sex_title(),
+      luna.uma_sex_title,
       '铭记多久。',
     ]);
     era.println();
@@ -171,7 +171,7 @@ module.exports = class extends CustomizedLove {
     await print_event_name('圆', luna);
     await luna.print_and_wait([
       '赛',
-      luna.get_uma_sex_title(),
+      luna.uma_sex_title,
       '和训练员相处的时间，其实也就比任课教师要稍微多些。',
     ]);
     await luna.print_and_wait(
@@ -258,7 +258,7 @@ module.exports = class extends CustomizedLove {
     ]);
     await luna.print_and_wait([
       '但',
-      luna.get_teen_sex_title(),
+      luna.teen_sex_title,
       '抗拒可能性。未来怎样又如何？',
       luna.sex,
       '只要当下。',
@@ -303,7 +303,7 @@ module.exports = class extends CustomizedLove {
     );
     await luna.print_and_wait([
       '这一切发生的原因是什么呢？是自己变得越来越强了吗？身为象征家的',
-      luna.get_uma_sex_title(),
+      luna.uma_sex_title,
       '应该为此骄傲才对。',
     ]);
     await luna.print_and_wait(

@@ -47,7 +47,7 @@ module.exports = class extends CustomizedEdu {
         ' 因为不明的缘故被 ',
         tokino.get_colored_name(),
         ' 追赶着……说起来，为什么人类能追上',
-        taiki.get_uma_sex_title(),
+        taiki.uma_sex_title,
         '的速度啊？',
       ]);
     }

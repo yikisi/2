@@ -68,7 +68,7 @@ module.exports = class extends CustomizedLove {
       );
       await me.say_and_wait(`我和${falcon.sex}们不一样吗？`);
       await falcon.say_and_wait(
-        `那……那个……哦，对了！是训练员与${falcon.get_uma_sex_title()}之间的羁绊！是羁绊哦！`,
+        `那……那个……哦，对了！是训练员与${falcon.uma_sex_title}之间的羁绊！是羁绊哦！`,
       );
       await era.printAndWait(`拼命掩饰的飞鹰子显得额外可爱。`);
       await me.say_and_wait(`哦，原 来 如 此？`);
@@ -100,10 +100,7 @@ module.exports = class extends CustomizedLove {
       await falcon.say_and_wait(`赌上偶像之名！飞鹰子绝不会输！`);
       await era.printAndWait(`两人之间的战斗（？）吸引了周围游人的纷纷侧目。`);
       await era.printAndWait(`最终`);
-      era.printButton(
-        `咕！人类还是战胜不了${falcon.get_uma_sex_title()}吗？`,
-        1,
-      );
+      era.printButton(`咕！人类还是战胜不了${falcon.uma_sex_title}吗？`, 1);
       await era.input();
       await era.printAndWait(`以${me.actual_name}的完败告终。`);
       await falcon.say_and_wait(`这场对局是飞鹰子的胜利！`);
@@ -116,7 +113,7 @@ module.exports = class extends CustomizedLove {
       );
       await me.say_and_wait(`今天的天空像琉璃一样漂亮啊。`);
       await era.printAndWait(
-        `突然被天空中的白云吸引着的${callname}似乎忘了某个${falcon.get_uma_sex_title()}的身影。`,
+        `突然被天空中的白云吸引着的${callname}似乎忘了某个${falcon.uma_sex_title}的身影。`,
       );
       await era.printAndWait(`今天真是个好天气。`);
       await sys_love_uma_in_event(46);
@@ -262,7 +259,7 @@ module.exports = class extends CustomizedLove {
           await era.printAndWait(
             `${
               me.actual_name
-            }心中明白，人类是不可能战胜${falcon.get_uma_sex_title()}的。`,
+            }心中明白，人类是不可能战胜${falcon.uma_sex_title}的。`,
           );
           await era.printAndWait(`但是，此时此刻，唯一能做的就是。`);
           await falcon.say_and_wait(`……唔！`);
@@ -550,10 +547,10 @@ module.exports = class extends CustomizedLove {
       );
       await me.say_and_wait(`说起来的话，飞鹰子接下来的打算是？`);
       await falcon.say_and_wait(
-        `飞鹰子接下来打算以泥地偶像的身份作为前辈在赛场上激励着作为后辈的${falcon.get_uma_sex_title()}们！`,
+        `飞鹰子接下来打算以泥地偶像的身份作为前辈在赛场上激励着作为后辈的${falcon.uma_sex_title}们！`,
       );
       await falcon.say_and_wait(
-        `飞鹰子接下来打算以泥地偶像的身份作为前辈在赛场上激励着作为后辈的${falcon.get_uma_sex_title()}们！`,
+        `飞鹰子接下来打算以泥地偶像的身份作为前辈在赛场上激励着作为后辈的${falcon.uma_sex_title}们！`,
       );
       await falcon.say_and_wait(
         `虽然这样的话可能也会很辛苦，不过只要训练员${me.get_adult_sex_title()}在身边的话，不论什么困难都可以度过的！`,
@@ -584,7 +581,7 @@ module.exports = class extends CustomizedLove {
       await me.say_and_wait(`提前一个小时过来会不会有些早了？`);
       await era.printAndWait(`不如说时间刚刚好，在司仪的引导下走向了准备室。`);
       await era.printAndWait(
-        `教堂之中坐满了前来见证的${falcon.get_uma_sex_title()}们。`,
+        `教堂之中坐满了前来见证的${falcon.uma_sex_title}们。`,
       );
       era.printButton(`稍微有些紧张啊`, 1);
       await era.input();
@@ -639,13 +636,13 @@ module.exports = class extends CustomizedLove {
         `神父「在三女神的旨意下我将见证这场神圣的婚姻。」`,
       );
       await era.printAndWait(
-        `神父「${falcon.get_uma_sex_title()}是三女神引导来自异界的灵魂赋予身为母亲的祝福。」`,
+        `神父「${falcon.uma_sex_title}是三女神引导来自异界的灵魂赋予身为母亲的祝福。」`,
       );
       await era.printAndWait(
-        `神父「在三女神的祝福下美丽又强大，而且热爱奔跑的${falcon.get_uma_sex_title()}诞生了。」`,
+        `神父「在三女神的祝福下美丽又强大，而且热爱奔跑的${falcon.uma_sex_title}诞生了。」`,
       );
       await era.printAndWait(
-        `神父「三女神希望人类和${falcon.get_uma_sex_title()}能够一生一世、一心一意的结合在一起。」`,
+        `神父「三女神希望人类和${falcon.uma_sex_title}能够一生一世、一心一意的结合在一起。」`,
       );
       await era.printAndWait(
         `神父「诞下的子女也会受到来自三女神之间的祝福，是不可抛弃，必须抚养长大。」`,

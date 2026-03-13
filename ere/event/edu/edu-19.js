@@ -50,21 +50,21 @@ race_start_handlers[race_enum.begin_race] = async (digital, me, callname) => {
   ]);
   await digital.say_and_wait([
     '数码……数码……在',
-    digital.get_uma_sex_title(),
+    digital.uma_sex_title,
     '酱的周边……倒不如说就在',
-    digital.get_uma_sex_title(),
+    digital.uma_sex_title,
     '酱里面！',
   ]);
   await digital.say_and_wait([
     '已经要……萌死了……',
     callname,
     '！能看到吗！这周边的',
-    digital.get_uma_sex_title(),
+    digital.uma_sex_title,
     '酱们！',
   ]);
   await era.printAndWait([
     '看得到，周围的',
-    digital.get_uma_sex_title(),
+    digital.uma_sex_title,
     '有些都紧张地发抖了，有些眼神在发光，但其中最特别的是……',
   ]);
   await era.printAndWait([
@@ -82,7 +82,7 @@ race_start_handlers[race_enum.begin_race] = async (digital, me, callname) => {
   await digital.say_and_wait('哇！对啊！现在不是升天的场合！');
   await digital.say_and_wait([
     '现在的我，也是和',
-    digital.get_uma_sex_title(),
+    digital.uma_sex_title,
     '酱们肩并肩的存在，绝不能让我的存在使',
     digital.sex,
     '们蒙上阴影！',
@@ -92,7 +92,7 @@ race_start_handlers[race_enum.begin_race] = async (digital, me, callname) => {
   );
   await digital.say_and_wait([
     '数码的眼睛就是底片，要把',
-    digital.get_uma_sex_title(),
+    digital.uma_sex_title,
     '酱们所有的笑容与泪水全都印在里面！',
   ]);
   await era.printAndWait([
@@ -138,7 +138,7 @@ race_start_handlers[race_enum.hyac_sta] = async (digital, me, callname) => {
     '在亮相圈里，',
     digital.get_colored_name(),
     ' 死死地盯着其他的',
-    digital.get_uma_sex_title(),
+    digital.uma_sex_title,
     '。',
   ]);
   await era.printAndWait([
@@ -155,7 +155,7 @@ race_start_handlers[race_enum.hyac_sta] = async (digital, me, callname) => {
   await era.printAndWait([
     digital.get_colored_name(),
     ' 发现，每个',
-    digital.get_uma_sex_title(),
+    digital.uma_sex_title,
     '表情上都写满了严阵以待，这股情感让 ',
     digital.get_colored_name(),
     ' 欲罢不能，但气氛又不容 ',
@@ -164,7 +164,7 @@ race_start_handlers[race_enum.hyac_sta] = async (digital, me, callname) => {
   ]);
   await digital.say_and_wait([
     '在这里面，应该是有更为纯粹的事物，使得',
-    digital.get_uma_sex_title(),
+    digital.uma_sex_title,
     '为何为尊……',
   ]);
   await me.say_and_wait('你想，触碰它？');
@@ -202,7 +202,7 @@ race_start_handlers[race_enum.nhk_cup] = async (digital, me) => {
   );
   await digital.say_and_wait([
     '不过，我要搞明白，',
-    digital.get_uma_sex_title(),
+    digital.uma_sex_title,
     '酱的尊的奥妙！',
   ]);
   await digital.say_and_wait('就算……我会尊得幻化成灰……哈？！');
@@ -239,7 +239,7 @@ race_start_handlers[race_enum.japa_dir] = async (digital, me) => {
   await digital.say_and_wait(
     [
       '我还没注意到，',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '酱们的尊能源的根源，那一定是无比珍贵之物……',
     ],
     true,
@@ -262,7 +262,7 @@ race_start_handlers[race_enum.japa_dir] = async (digital, me) => {
     '无论是赛道、景色、还是草地泥地都不一样，就算如此也好……',
   );
   await digital.say_and_wait([
-    digital.get_uma_sex_title(),
+    digital.uma_sex_title,
     '酱的心情，都是一样的吧？',
   ]);
   await era.printAndWait(
@@ -280,7 +280,7 @@ race_start_handlers[race_enum.japa_dir] = async (digital, me) => {
   ]);
   await digital.say_and_wait([
     '现在！就和大井的泥地',
-    digital.get_uma_sex_title(),
+    digital.uma_sex_title,
     '酱一起，找到答案！',
   ]);
 };
@@ -299,7 +299,7 @@ race_start_handlers[race_enum.mile_cha] = async (digital) => {
     '，',
     digital.get_colored_name(),
     ' 出道前就已经一直仰望的',
-    digital.get_uma_sex_title(),
+    digital.uma_sex_title,
     '，现在，',
     digital.get_colored_name(),
     ' 终于能够和',
@@ -410,9 +410,9 @@ race_start_handlers[race_enum.tenn_sho] = async (digital) => {
   ]);
   await digital.say_and_wait([
     '这是……',
-    digital.get_uma_sex_title(),
+    digital.uma_sex_title,
     '酱的泪雨吗……不，是我遇见的所有',
-    digital.get_uma_sex_title(),
+    digital.uma_sex_title,
     '酱的喜极而泣，是庆祝我的胜利的雨啊！',
   ]);
   await opera.say_and_wait(
@@ -481,7 +481,7 @@ module.exports = class extends CustomizedEdu {
       ' 缺少劲敌，作为一名训练员，',
       me.get_colored_name(),
       ' 清楚竞争对手可以给',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '带来多少动力和鼓舞。',
     ]);
     await era.printAndWait([
@@ -490,7 +490,7 @@ module.exports = class extends CustomizedEdu {
       ' 的情况又过于特殊，',
       digital.sex,
       '所具备的那种特性，那种对',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '纯粹的喜欢也能给',
       digital.sex,
       '带来与竞争对手相似的效果。',
@@ -503,7 +503,7 @@ module.exports = class extends CustomizedEdu {
       '不过趁这次机会让 ',
       digital.get_colored_name(),
       ' 跟其他',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '交涉一下也挺好。',
     ]);
     await me.say_and_wait('那就去寻找劲敌吧！');
@@ -523,7 +523,7 @@ module.exports = class extends CustomizedEdu {
     );
     await falcon.say_and_wait([
       '啊哈哈，飞鹰子好像只能做个',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '小偶像呢，不适合那种……不过，十分感谢 ',
       sys_get_colored_callname(46, 19),
       ' 的邀请！',
@@ -595,7 +595,7 @@ module.exports = class extends CustomizedEdu {
       ' 在找的人才想到的，',
       digital.get_colored_name(),
       ' 找的人既有擅长草地，也有擅长泥地的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '，就如一开始的那般……',
     ]);
     await me.say_and_wait('只选一个什么的，是做不到的。');
@@ -608,7 +608,7 @@ module.exports = class extends CustomizedEdu {
     await digital.say_and_wait([
       sys_get_colored_callname(19, 61),
       ' 的话，『和更多',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '一起比赛』我一定能够达成！',
     ]);
     await digital.say_and_wait(
@@ -623,7 +623,7 @@ module.exports = class extends CustomizedEdu {
         await me.say_and_wait('要说的话，那就是养分吧');
         await digital.say_and_wait([
           '对的！',
-          digital.get_uma_sex_title(),
+          digital.uma_sex_title,
           '酱们，各自的美味之处，每次都给予我元气！',
         ]);
         await digital.say_and_wait(
@@ -631,7 +631,7 @@ module.exports = class extends CustomizedEdu {
         );
         await era.printAndWait([
           '在之后',
-          digital.get_uma_sex_title(),
+          digital.uma_sex_title,
           '们一定会给 ',
           digital.get_colored_name(),
           ' 带来更多的活力吧。',
@@ -642,7 +642,7 @@ module.exports = class extends CustomizedEdu {
         await me.say_and_wait('没错，就是友情！POWER！');
         await digital.say_and_wait([
           '哦吼吼，只要每个',
-          digital.get_uma_sex_title(),
+          digital.uma_sex_title,
           '酱们给我一点力量，我就是无敌的！',
         ]);
         await digital.say_and_wait(
@@ -652,7 +652,7 @@ module.exports = class extends CustomizedEdu {
           '与那个每人给一马币还是有点不一样的，',
           digital.get_colored_name(),
           ' 肯定能从',
-          digital.get_uma_sex_title(),
+          digital.uma_sex_title,
           '处得到力量，变得更强。',
         ]);
         get_attr_and_print_in_event(19, new Array(5).fill(5), 0) &&
@@ -662,7 +662,7 @@ module.exports = class extends CustomizedEdu {
         await me.say_and_wait('多样性，没错吧！');
         await digital.say_and_wait([
           '当然！',
-          digital.get_uma_sex_title(),
+          digital.uma_sex_title,
           '酱的奔跑，其多样性，不仅仅是平日所描定的跑法所能框定的！',
         ]);
         await digital.say_and_wait('就像收集UMAMO图鉴那样，全部都记录下来吧！');
@@ -702,7 +702,7 @@ module.exports = class extends CustomizedEdu {
         ]);
         await digital.say_and_wait([
           '能和',
-          digital.get_uma_sex_title(),
+          digital.uma_sex_title,
           '酱一起比赛……真的是非常开心……！',
         ]);
         await digital.say_and_wait(
@@ -713,7 +713,7 @@ module.exports = class extends CustomizedEdu {
         if ((await era.input()) === 1) {
           await digital.say_and_wait([
             '诶？这这这，怎可能？！这么多',
-            digital.get_uma_sex_title(),
+            digital.uma_sex_title,
             '，我就只是像空气一般的存在……居然看着我吗？',
           ]);
           await era.printAndWait('这份娇羞也是见多了。');
@@ -727,7 +727,7 @@ module.exports = class extends CustomizedEdu {
           );
           await digital.say_and_wait([
             '变得更强大，然后在更激烈的比赛中看到更加闪耀的',
-            digital.get_uma_sex_title(),
+            digital.uma_sex_title,
             '酱！',
           ]);
           await era.printAndWait('就是这个势头！继续加油吧！');
@@ -748,7 +748,7 @@ module.exports = class extends CustomizedEdu {
         );
         await era.printAndWait('喂喂喂。');
         era.printButton(
-          `「这次，有没有欣赏到${digital.get_uma_sex_title()}啊？」`,
+          `「这次，有没有欣赏到${digital.uma_sex_title}啊？」`,
           1,
         );
         era.printButton(`「下次争取在最前方欣赏${digital.sex}们吧！」`, 2);
@@ -758,7 +758,7 @@ module.exports = class extends CustomizedEdu {
         } else {
           await digital.say_and_wait([
             '如果在更前方的话，那绝对可以……！欣赏到更为美丽的',
-            digital.get_uma_sex_title(),
+            digital.uma_sex_title,
             '酱们！',
           ]);
           await era.printAndWait([
@@ -780,17 +780,17 @@ module.exports = class extends CustomizedEdu {
         () =>
           digital.say_and_wait([
             '胜券在握的',
-            digital.get_uma_sex_title(),
+            digital.uma_sex_title,
             '酱，紧绷的',
-            digital.get_uma_sex_title(),
+            digital.uma_sex_title,
             '酱，还是看似不在乎实则认真的',
-            digital.get_uma_sex_title(),
+            digital.uma_sex_title,
             '酱……呼……嘿……',
           ]),
         () =>
           digital.say_and_wait([
             '不不不，再怎么想我这种',
-            digital.get_uma_sex_title(),
+            digital.uma_sex_title,
             '上赛场还是很奇怪吧？',
           ]),
       ];

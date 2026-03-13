@@ -64,7 +64,7 @@ module.exports = class extends AcuteNormalMakingOuts1 {
     await defender.say_and_wait(['唔❤️……咕噗噗❤️～噗哈❤️～哈❤️～']);
     await attacker.print_and_wait([
       '明明表情看不出淫靡，却一再发出着',
-      defender.get_child_sex_title(),
+      defender.child_sex_title,
       '子不应该发出的下流的声音。',
     ]);
   }
@@ -198,7 +198,7 @@ module.exports = class extends AcuteNormalMakingOuts1 {
       ]);
       await attacker.say_and_wait([
         '唔……这种事情，可不能对其他的',
-        attacker.get_child_sex_title(),
+        attacker.child_sex_title,
         '子做哦？',
       ]);
       await defender.print_and_wait([
@@ -258,7 +258,7 @@ module.exports = class extends AcuteNormalMakingOuts1 {
         '要温柔些哦，',
         sys_get_colored_callname(defender.id, attacker.id),
         '，不管对我也好，对其他的',
-        defender.get_uma_sex_title(),
+        defender.uma_sex_title,
         '也好～',
       ]);
       await attacker.print_and_wait([
@@ -383,7 +383,7 @@ module.exports = class extends AcuteNormalMakingOuts1 {
     } else {
       await defender.print_and_wait([
         '让自己担当',
-        attacker.get_uma_sex_title(),
+        attacker.uma_sex_title,
         '为自己授乳，会感到羞耻吗？当然会。',
       ]);
       await attacker.say_and_wait([
@@ -435,7 +435,7 @@ module.exports = class extends AcuteNormalMakingOuts1 {
     } else {
       await attacker.print_and_wait([
         '肉杆紧贴着着阴唇来回着抽弄，面前',
-        defender.get_teen_sex_title(),
+        defender.teen_sex_title,
         '的身体时不时发出噗嗤噗嗤的声音。',
       ]);
       await defender.say_and_wait(['唔❤️……啊❤️～']);
@@ -499,7 +499,7 @@ module.exports = class extends AcuteNormalMakingOuts1 {
       '要是被 ',
       sys_get_colored_callname(defender.id, 301),
       '……或者其他',
-      defender.get_uma_sex_title(),
+      defender.uma_sex_title,
       '发现了头发上的味道的话……会怎么样呢？',
     ]);
     await attacker.print_and_wait([
@@ -542,7 +542,7 @@ module.exports = class extends AcuteNormalMakingOuts1 {
     ]);
     await attacker.print_and_wait([
       '就好像等待出嫁的',
-      defender.get_teen_sex_title(),
+      defender.teen_sex_title,
       '般，等待喷发的肉棒，在',
       defender.sex,
       '的头发上戴上纯白的无垢。',

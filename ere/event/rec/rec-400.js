@@ -38,11 +38,11 @@ module.exports = class extends CustomizedRecruit {
       '在走出了训练员宿舍之后，',
       me.get_colored_name(),
       ' 来到了附近的一片小树林里面，听说这里时不时会传出奇怪的声音被周边的小',
-      silence.get_uma_sex_title(),
+      silence.uma_sex_title,
       '们称为藏有怨灵的怪谈树林，但是 ',
       me.get_colored_name(),
       ' 知道这里面的真相其实比小',
-      silence.get_uma_sex_title(),
+      silence.uma_sex_title,
       '传言的要无趣的多。',
     ]);
     era.println();
@@ -67,13 +67,13 @@ module.exports = class extends CustomizedRecruit {
       ' 的脑海之中，',
       me.get_colored_name(),
       ' 不知道为什么这个时候会有',
-      silence.get_uma_sex_title(),
+      silence.uma_sex_title,
       '在这里晨练，毕竟要训练的话明显去训练场会舒服很多。',
     ]);
     era.println();
     await era.printAndWait([
       '沉默的黑发',
-      silence.get_uma_sex_title(),
+      silence.uma_sex_title,
       '明显也发现了 ',
       me.get_colored_name(),
       ' 的存在，',
@@ -89,7 +89,7 @@ module.exports = class extends CustomizedRecruit {
     await era.printAndWait([
       me.get_colored_name(),
       ' 疯狂的在脑海中寻找着关于这个',
-      silence.get_uma_sex_title(),
+      silence.uma_sex_title,
       '的印象，就这样 ',
       me.get_colored_name(),
       ' 搜索着自己的记忆停在了路边。',
@@ -98,7 +98,7 @@ module.exports = class extends CustomizedRecruit {
     await silence.say_as_unknown_and_wait('你好……');
     await era.printAndWait([
       '安静的黑发',
-      silence.get_uma_sex_title(),
+      silence.uma_sex_title,
       '用不带感情的冰冷语句将 ',
       me.get_colored_name(),
       ' 从回忆中拽了回来。',
@@ -112,7 +112,7 @@ module.exports = class extends CustomizedRecruit {
     era.println();
     await era.printAndWait([
       '听到这个名字的黑发',
-      silence.get_uma_sex_title(),
+      silence.uma_sex_title,
       '皱起了眉头，似乎对 ',
       me.get_colored_name(),
       ' 说的话有些不满。',
@@ -130,7 +130,7 @@ module.exports = class extends CustomizedRecruit {
       '肉感与力量感并存的一双美腿，在 ',
       me.get_colored_name(),
       ' 看来简直是最适合赛',
-      silence.get_uma_sex_title(),
+      silence.uma_sex_title,
       '偶像这个职业的双腿。',
     ]);
     era.println();
@@ -140,7 +140,7 @@ module.exports = class extends CustomizedRecruit {
       ' 的第一句话就让',
       silence.sex,
       '有些不满，但是面前的',
-      silence.get_uma_sex_title(),
+      silence.uma_sex_title,
       '并没有发作，',
       silence.sex,
       '只是背着耳朵说道。',
@@ -200,7 +200,7 @@ module.exports = class extends CustomizedRecruit {
       '这让 ',
       me.get_colored_name(),
       ' 有些尴尬的挠了挠脑袋，毕竟两个',
-      silence.get_uma_sex_title(),
+      silence.uma_sex_title,
       '的长相几乎一模一样。',
     ]);
     era.drawLine({ content: '选拔赛结束后' });
@@ -218,7 +218,7 @@ module.exports = class extends CustomizedRecruit {
     era.println();
     era.printButton(`尝试鼓起勇气和${silence.sex}搭话。`, 1);
     era.printButton(
-      `（还是不要去打扰刚刚跑完比赛需要休息的${silence.get_uma_sex_title()}比较好）`,
+      `（还是不要去打扰刚刚跑完比赛需要休息的${silence.uma_sex_title}比较好）`,
       2,
     );
     await era.input();

@@ -178,7 +178,7 @@ module.exports = class extends CustomizedDaily {
                 ],
                 [
                   '人家一定会成为闪闪发亮的成熟赛',
-                  maya.get_uma_sex_title(),
+                  maya.uma_sex_title,
                   '！所以请你要在最近的地方看着人家喔！',
                 ],
               ];
@@ -398,7 +398,7 @@ module.exports = class extends CustomizedDaily {
               ' 往 ',
               maya.get_colored_name(),
               ' 指示的方向看去，那里摆了一台里面装着赛',
-              maya.get_uma_sex_title(),
+              maya.uma_sex_title,
               '主题玩偶的夹娃娃机。',
             ]);
             await maya.say_and_wait('那个是嘚嘚玩偶吧！超可爱的～我好想要～！');
@@ -517,7 +517,7 @@ module.exports = class extends CustomizedDaily {
                 await maya.say_and_wait('店员～不好意思～！');
                 await maya.say_and_wait([
                   '感觉人家距离成为成熟的',
-                  maya.get_phy_sex_title(),
+                  maya.phy_sex_title,
                   '又更近了一步……！',
                 ]);
               } else {

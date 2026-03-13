@@ -27,7 +27,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
       '今天是 ',
       coffee.get_colored_name(),
       ' 的出道战，多数赛',
-      coffee.get_uma_sex_title(),
+      coffee.uma_sex_title,
       '都紧张得浑身发抖，但',
       coffee.sex,
       '的心思却不在此。',
@@ -137,7 +137,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
       '从现在开始就是',
       coffee.sex,
       '独自一人与其他参赛',
-      coffee.get_uma_sex_title(),
+      coffee.uma_sex_title,
       '——以及朋友的对决。',
     ]);
   };
@@ -234,15 +234,15 @@ module.exports = (handlers, check_tachyon_plan_b) => {
     ]);
     await era.printAndWait([
       '最快的赛',
-      coffee.get_uma_sex_title(),
+      coffee.uma_sex_title,
       '赢得 ',
       race_infos[race_enum.sats_sho].get_colored_name(),
       '，最幸运的赛',
-      coffee.get_uma_sex_title(),
+      coffee.uma_sex_title,
       '赢得 ',
       race_infos[race_enum.toky_yus].get_colored_name(),
       '，而最强的赛',
-      coffee.get_uma_sex_title(),
+      coffee.uma_sex_title,
       '将赢得 ',
       race_infos[race_enum.kiku_sho].get_colored_name(),
       '。',

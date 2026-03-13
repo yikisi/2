@@ -56,7 +56,7 @@ module.exports = async () => {
     '……我是 ',
     tachyon.get_colored_name(),
     '，是你的负责',
-    tachyon.get_uma_sex_title(),
+    tachyon.uma_sex_title,
   ]);
   await era.printAndWait('…………');
   era.println();
@@ -74,7 +74,7 @@ module.exports = async () => {
     await era.printAndWait([me.get_colored_name(), ' 摇了摇头']);
     await era.printAndWait([
       '眼前的',
-      tachyon.get_teen_sex_title(),
+      tachyon.teen_sex_title,
       '……虽然不知道为什么，给人一种熟悉的感觉',
     ]);
     await era.printAndWait('但自己确实，一点也不认识');
@@ -97,7 +97,7 @@ module.exports = async () => {
       '虽然不认识眼前名为 ',
       tachyon.get_colored_name(),
       ' 的',
-      tachyon.get_teen_sex_title(),
+      tachyon.teen_sex_title,
     ]);
     await era.printAndWait([
       '但潜意识在喊着，不能让',
@@ -207,7 +207,7 @@ module.exports = async () => {
     await era.printAndWait('怎么能点出来');
     await era.printAndWait([
       '点出那名',
-      tachyon.get_teen_sex_title(),
+      tachyon.teen_sex_title,
       '，徒劳无功的悲哀',
     ]);
     era.println();
@@ -262,7 +262,7 @@ module.exports = async () => {
     await tachyon.say_and_wait('……怎么了？忽然回忆起什么了吗？');
     await era.printAndWait([
       '……没有，只是从你说的感觉听起来，总觉得不只是训练员和',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '的关系……或者实验品与实验动物的关系',
     ]);
     era.println();
@@ -306,7 +306,7 @@ module.exports = async () => {
     era.println();
     await tachyon.say_and_wait([
       '真没礼貌，我可是清廉正直的青春美',
-      tachyon.get_teen_sex_title(),
+      tachyon.teen_sex_title,
       '啊',
     ]);
     await tachyon.say_and_wait(
@@ -435,7 +435,7 @@ module.exports = async () => {
       '欺骗了———眼前这名，叫做 ',
       tachyon.get_colored_name(),
       ' 的陌生',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
     ]);
     era.println();
     await tachyon.say_and_wait('豚鼠君……你还记得，之前发生什么事了吗？');
@@ -445,7 +445,7 @@ module.exports = async () => {
     await era.printAndWait('说实话，什么也不知道');
     await era.printAndWait([
       '这里是哪里，眼前的',
-      tachyon.get_teen_sex_title(),
+      tachyon.teen_sex_title,
       '是谁',
     ]);
     await era.printAndWait('一切的一切，都不知道');

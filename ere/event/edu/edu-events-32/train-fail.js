@@ -277,7 +277,7 @@ module.exports = async function (tachyon, me, callname, hook, fumble, train) {
           ]);
           await era.printAndWait([
             '对于给',
-            tachyon.get_uma_sex_title(),
+            tachyon.uma_sex_title,
             '的按摩，以及按摩的力道，可以说天底下没有比训练员更了解这些的人了',
           ]);
           await era.printAndWait([
@@ -481,7 +481,7 @@ module.exports = async function (tachyon, me, callname, hook, fumble, train) {
             '仔细想想，如果不是',
             tachyon.sex,
             '是这样专注于梦想，如此纯粹的',
-            tachyon.get_uma_sex_title(),
+            tachyon.uma_sex_title,
           ]);
           await era.printAndWait([
             '自己也不会这样跟着',

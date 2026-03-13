@@ -355,18 +355,18 @@ module.exports = (handlers, check_tachyon_plan_b) => {
       '在不知不觉间，因为在赛场上的身姿……',
       coffee.get_colored_name(),
       ' 受到了许多赛',
-      coffee.get_uma_sex_title(),
+      coffee.uma_sex_title,
       '的仰慕。',
     ]);
     await say_by_passer_by_and_wait(
-      `赛${coffee.get_uma_sex_title()}A`,
+      `赛${coffee.uma_sex_title}A`,
       '那个～茶座同学……我想请教该如何才能在泥地跑好，我总是跑不好……',
     );
     await coffee.say_and_wait('泥地……这样啊……');
     await coffee.say_and_wait('我觉得……不要用力过度会比较好。');
     await coffee.say_and_wait('就像在沙子里……摆动钟摆那样……');
     await say_by_passer_by_and_wait(
-      `赛${coffee.get_uma_sex_title()}B`,
+      `赛${coffee.uma_sex_title}B`,
       '再来到我！下次我打算挑战逃马的跑法，请问有没有什么诀窍呢！？',
     );
     await coffee.say_and_wait('逃马……虽然我不太擅长……');
@@ -375,17 +375,14 @@ module.exports = (handlers, check_tachyon_plan_b) => {
     );
     await coffee.say_and_wait('这样……有稍微给你们一些灵感了吗？');
     await say_by_passer_by_and_wait(
-      `赛${coffee.get_uma_sex_title()}们`,
+      `赛${coffee.uma_sex_title}们`,
       '有！非常感谢！！',
     );
     await coffee.say_and_wait('那你们……要喝杯咖啡再走吗？');
-    await say_by_passer_by_and_wait(
-      `赛${coffee.get_uma_sex_title()}们`,
-      '……要！',
-    );
+    await say_by_passer_by_and_wait(`赛${coffee.uma_sex_title}们`, '……要！');
     await era.printAndWait([
       '面对着众多',
-      coffee.get_uma_sex_title(),
+      coffee.uma_sex_title,
       '的提问，',
       coffee.get_colored_name(),
       ' 却能给所有人都提出充满灵性的建议，并且确实帮到',
@@ -413,7 +410,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
     );
     await coffee.say_and_wait([
       '可是同时……对在后方追着自己的赛',
-      coffee.get_uma_sex_title(),
+      coffee.uma_sex_title,
       '们给予支持也很重要。',
     ]);
     await coffee.say_and_wait(
@@ -421,7 +418,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
     );
     await coffee.say_and_wait([
       '静静地张开双手……到了未来的某天，让自己变得能够帮助所有的赛',
-      coffee.get_uma_sex_title(),
+      coffee.uma_sex_title,
       '……',
     ]);
     await era.printAndWait('——咻。');
@@ -436,11 +433,11 @@ module.exports = (handlers, check_tachyon_plan_b) => {
     await era.input();
     await coffee.say_and_wait('朋友的话，不就在……诶？不见了……');
     await era.printAndWait('——咻。');
-    era.printButton(`「茶座，你……就是赛${coffee.get_uma_sex_title()}的……」`, 1);
+    era.printButton(`「茶座，你……就是赛${coffee.uma_sex_title}的……」`, 1);
     await era.input();
     await era.printAndWait([
       '仿佛听见了……「种子」的声音。名为赛',
-      coffee.get_uma_sex_title(),
+      coffee.uma_sex_title,
       '种子的声音不断在耳边回绕……',
     ]);
     await era.printAndWait([
@@ -453,12 +450,12 @@ module.exports = (handlers, check_tachyon_plan_b) => {
     era.drawLine();
     await era.printAndWait([
       '有一个关于某位赛',
-      coffee.get_uma_sex_title(),
+      coffee.uma_sex_title,
       '的寓言故事。',
     ]);
     await era.printAndWait([
       '据说那名赛',
-      coffee.get_uma_sex_title(),
+      coffee.uma_sex_title,
       '拥有近乎究极的速度，并且和 ',
       coffee.get_colored_name(),
       ' 长得十分相似。',
@@ -472,7 +469,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
     ]);
     await era.printAndWait([
       '一场那位究极的赛',
-      coffee.get_uma_sex_title(),
+      coffee.uma_sex_title,
       '出现在眼前，并期待着 ',
       coffee.get_colored_name(),
       '「成为',
@@ -535,7 +532,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
         '听到了询问声，来客转过头来，',
         coffee.get_colored_name(),
         ' 看到的是一个仿佛照镜子般、与自己一模一样的',
-        coffee.get_uma_sex_title(),
+        coffee.uma_sex_title,
         '。',
       ]);
       era.println();
@@ -570,9 +567,9 @@ module.exports = (handlers, check_tachyon_plan_b) => {
       era.println();
       await coffee.print_and_wait([
         '另一个茶座「缘分吗……真是适合我们',
-        coffee.get_uma_sex_title(),
+        coffee.uma_sex_title,
         '的词汇，我们',
-        coffee.get_uma_sex_title(),
+        coffee.uma_sex_title,
         '不就是被命运所引导的存在吗？」',
       ]);
       era.println();

@@ -68,7 +68,7 @@ module.exports = (handlers) => {
     );
     await era.printAndWait([
       '……想想也是，都是打底有接近十万人左右粉丝的',
-      acute.get_uma_sex_title(),
+      acute.uma_sex_title,
       '偶像。要是真在特雷森打起拳击的话，搞不好现场的粉丝能把特雷森直接变成全武行了吧。',
     ]);
     await acute.say_and_wait([
@@ -91,7 +91,7 @@ module.exports = (handlers) => {
     await era.printAndWait([
       me.get_colored_name(),
       ' 只是喜欢看',
-      acute.get_uma_sex_title(),
+      acute.uma_sex_title,
       '们互相揪头发撕指甲的模样而已。',
     ]);
     await era.printAndWait('——仅此而已。');
@@ -157,11 +157,7 @@ module.exports = (handlers) => {
     );
     await say_by_passer_by_and_wait(
       '叼着烟坐在新提的缺了后视镜车里的大头中年男粉丝',
-      [
-        '我算是看明白了，特雷森的',
-        acute.get_uma_sex_title(),
-        '，各个身怀绝技啊——',
-      ],
+      ['我算是看明白了，特雷森的', acute.uma_sex_title, '，各个身怀绝技啊——'],
     );
     await era.printAndWait('…………');
     await era.printAndWait(
@@ -179,7 +175,7 @@ module.exports = (handlers) => {
     ]);
     await muteki.say_and_wait([
       '能与传说中的拳术大师的',
-      acute.get_uma_sex_title(),
+      acute.uma_sex_title,
       '过招，这实在令我非常的振奋。',
     ]);
     await acute.say_and_wait([
@@ -291,12 +287,12 @@ module.exports = (handlers) => {
     await era.input();
     await say_by_passer_by_and_wait('黝黑大汉', [
       '……不，三天三夜也只是人☆类这种生物的极限而已——如果是赛',
-      acute.get_uma_sex_title(),
+      acute.uma_sex_title,
       '的话，能够坚持的时间只会更久了吧。',
     ]);
     await say_by_passer_by_and_wait('黝黑大汉', [
       '面对精通古武术的',
-      acute.get_uma_sex_title(),
+      acute.uma_sex_title,
       ' ',
       muteki.get_colored_name(),
       '，传说中的拳术家的 ',
@@ -554,7 +550,7 @@ module.exports = (handlers) => {
         ' 特意的偏着头将视线望向远处黄昏的太阳，好不跟身后这总能看穿 ',
         me.get_colored_name(),
         ' 心事的',
-        acute.get_uma_sex_title(),
+        acute.uma_sex_title,
         '对上眼。',
       ]);
       era.printButton('「老实说……一开始，我确实对拳击没什么兴趣啦。」', 1);
@@ -689,7 +685,7 @@ module.exports = (handlers) => {
       ]);
       await acute.say_and_wait([
         '虽然……你大概已经听我——或者是其他的',
-        acute.get_uma_sex_title(),
+        acute.uma_sex_title,
         '，说过很多次了吧？',
       ]);
       await era.printAndWait('羞红的脸颊，散发着炽热的蒸汽。');
@@ -885,7 +881,7 @@ module.exports = (handlers) => {
       );
       await era.printAndWait([
         '不知怎的，望着背上「初次所见」的「柔弱',
-        acute.get_teen_sex_title(),
+        acute.teen_sex_title,
         '」，心脏便砰砰的跳动。',
       ]);
       await era.printAndWait(
@@ -912,7 +908,7 @@ module.exports = (handlers) => {
       await acute.print_and_wait('……其实，体力已经恢复了。');
       await acute.print_and_wait([
         '至少这么几步路，依靠身为',
-        acute.get_uma_sex_title(),
+        acute.uma_sex_title,
         '的毅力，还是可以轻松地走过去的。',
       ]);
       await acute.print_and_wait('……但是。');

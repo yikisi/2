@@ -121,18 +121,12 @@ module.exports = {
             ? ['扑进 ', you.get_colored_name(), ' 的怀里。']
             : ['把 ', you.get_colored_name(), ' 拉进怀里。']),
         ]);
-        await era.printAndWait([
-          '从今以后，',
-          you.get_couple_title(),
-          ' 多了一层关系，一双恋人。',
-        ]);
+        await era.printAndWait(['从今以后，你们多了一层关系，一双恋人。']);
       } else {
         await era.printAndWait([
           '纵有万般思绪在心头，但 ',
           you.get_colored_name(),
-          ' 始终认为 ',
-          you.get_couple_title(),
-          ' 注定不可能走在一起。',
+          ' 始终认为你们注定不可能走在一起。',
         ]);
         await era.printAndWait([
           chara.get_colored_name(),
@@ -200,9 +194,7 @@ module.exports = {
       if (ret[0] === 1) {
         await era.printAndWait([
           you.get_colored_name(),
-          ' 伸手接过钻戒。',
-          you.get_couple_title(),
-          ' 在经历过那么多之后也确实是时候结为连理了。',
+          ' 伸手接过钻戒。你们在经历过那么多之后也确实是时候结为连理了。',
         ]);
         await era.printAndWait([
           chara.get_colored_name(),

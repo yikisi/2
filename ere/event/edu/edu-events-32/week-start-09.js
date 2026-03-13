@@ -57,7 +57,7 @@ module.exports = (handlers) => {
     ]);
     await tachyon.print_and_wait([
       '无数日本',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '沉戟的地方',
     ]);
     await tachyon.print_and_wait([
@@ -159,12 +159,12 @@ module.exports = (handlers) => {
     await era.input();
     await era.printAndWait([
       '不忍心看那名追逐朋友背影的',
-      tachyon.get_teen_sex_title(),
+      tachyon.teen_sex_title,
       '孤单',
     ]);
     await era.printAndWait([
       '不忍心看独在异乡奔向绝路的',
-      tachyon.get_teen_sex_title(),
+      tachyon.teen_sex_title,
       '寂寞',
     ]);
     await era.printAndWait('所以，只能做出这种委屈自己的，优柔寡断的选择');
@@ -302,9 +302,9 @@ module.exports = (handlers) => {
     await tachyon.say_and_wait('什么为了你而跑……别想太多了');
     await tachyon.say_and_wait([
       '我的目的，至始至终就只有一个，那就是超越',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '的极限……证明',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '的可能性',
     ]);
     era.println();
@@ -548,7 +548,7 @@ module.exports = (handlers) => {
         ' ',
         tachyon.get_adult_sex_title(),
         '的目标是超越',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         '的极限，请问这是什么意思呢？',
       ]);
       await tachyon.say_and_wait([
@@ -571,7 +571,7 @@ module.exports = (handlers) => {
       await era.printAndWait([
         tachyon.get_colored_name(),
         ' 都不像是会讲精神论的',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
       ]);
       era.println();
       await say_by_passer_by_and_wait('记者A', [
@@ -687,7 +687,7 @@ module.exports = (handlers) => {
       '全场的欢呼声，以及',
       me.sex,
       '的目光全都聚集在跨越终点线，淡淡挥着手的那名',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '身上',
     ]);
     await tachyon.print_and_wait([

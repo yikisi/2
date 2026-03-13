@@ -52,7 +52,7 @@ module.exports = class extends CustomizedDaily {
           `${me.name} 赶忙示意${teio.sex}小声一点，要是任凭${teio.sex}这么喊下去自己的风评恐怕就要变成勾引学生的变态教师了。这孩子可真不让人省心。`,
         );
         await era.printAndWait(
-          `不过……看着担当${teio.get_uma_sex_title()}在自己身旁开心地蹦蹦跳跳，活力十足的样子，${
+          `不过……看着担当${teio.uma_sex_title}在自己身旁开心地蹦蹦跳跳，活力十足的样子，${
             me.name
           } 突然觉得，一年到头的忙碌都是值得的。`,
         );
@@ -63,7 +63,7 @@ module.exports = class extends CustomizedDaily {
         await era.printAndWait(
           ` ${me.name} 从桌上抬起头，看见了背手于身后，笑眯眯地看着 ${
             me.name
-          } 的${teio.get_uma_sex_title()}${teio.get_teen_sex_title()}。`,
+          } 的${teio.uma_sex_title}${teio.teen_sex_title}。`,
         );
         await teio.say_and_wait('训练员～这是我给你做的礼物～');
         await era.printAndWait(
@@ -88,7 +88,7 @@ module.exports = class extends CustomizedDaily {
             `等到${teio.sex}脸红到耳根的时候，${me.name} 突然把${teio.sex}一把揽入怀中，含着巧克力吻向${teio.sex}的唇。`,
           );
           await era.printAndWait(
-            `蜂蜜与可可的香甜缠绕上了${teio.get_teen_sex_title()}的小舌……`,
+            `蜂蜜与可可的香甜缠绕上了${teio.teen_sex_title}的小舌……`,
           );
           await quick_into_sex(3);
         }
@@ -100,7 +100,7 @@ module.exports = class extends CustomizedDaily {
         );
         await teio.say_and_wait(`训——练——员——`);
         await era.printAndWait(
-          `${teio.get_teen_sex_title()}换上了一身将稚气全部化为可爱，又隐约带着性感与诱惑的浴衣，在 ${
+          `${teio.teen_sex_title}换上了一身将稚气全部化为可爱，又隐约带着性感与诱惑的浴衣，在 ${
             me.name
           } 面前转了个圈。`,
         );
@@ -110,10 +110,10 @@ module.exports = class extends CustomizedDaily {
         await era.printAndWait(`不好回答。`);
         await era.printAndWait(`感觉在自己的内心深处，已经有什么东西绷掉了。`);
         await era.printAndWait(
-          `身型娇小的${teio.get_teen_sex_title()}穿着，完美透露出了那尚未发育完全，但同样充满性吸引力的身材。`,
+          `身型娇小的${teio.teen_sex_title}穿着，完美透露出了那尚未发育完全，但同样充满性吸引力的身材。`,
         );
         await era.printAndWait(
-          `最上面纯白色的耳套，仿佛钦点了小${teio.get_uma_sex_title()}作为纯情学生的身份，再往下，宽松的布料并没有完全贴近身体强调曲线，而是镂空了腋下侧肋的部分。`,
+          `最上面纯白色的耳套，仿佛钦点了小${teio.uma_sex_title}作为纯情学生的身份，再往下，宽松的布料并没有完全贴近身体强调曲线，而是镂空了腋下侧肋的部分。`,
         );
         await era.printAndWait(
           `平时隐藏着的，嫩滑洁白的敏感皮肤此时完全暴露在 ${me.name} 的目光里，如果 ${me.name} 想的话，甚至可以伸出手去亲自试试触感……`,
@@ -122,7 +122,7 @@ module.exports = class extends CustomizedDaily {
         await era.printAndWait([
           me.get_colored_name(),
           ' 沉浸在',
-          teio.get_teen_sex_title(),
+          teio.teen_sex_title,
           '绝美的样子中，一时难以自拔。',
         ]);
         era.printButton('忍不住了！', 1, { disabled: era.get('love:3') < 75 });
@@ -131,7 +131,7 @@ module.exports = class extends CustomizedDaily {
           await era.printAndWait(
             ` ${
               me.name
-            } 长吸一口气，迈着已变沉重的身体走到${teio.get_uma_sex_title()}身边，伸出大手——`,
+            } 长吸一口气，迈着已变沉重的身体走到${teio.uma_sex_title}身边，伸出大手——`,
           );
           await quick_into_sex(3);
         }
@@ -253,7 +253,7 @@ module.exports = class extends CustomizedDaily {
     if (temp === 0) {
       era.print([
         teio.get_colored_name(),
-        ` 貌似正在跟其他${teio.get_uma_sex_title()}聊天，听到`,
+        ` 貌似正在跟其他${teio.uma_sex_title}聊天，听到`,
         me.get_colored_name(),
         `叫${teio.sex}的名字，便结束了对话飞奔过来。`,
       ]);
@@ -297,7 +297,7 @@ module.exports = class extends CustomizedDaily {
         '嗯——」',
       ]);
       era.print(
-        `沉默之后又是同时发声，气氛好像又尴尬了。不过倒是有点滑稽，${teio.get_uma_sex_title()}的眉眼露出了几分笑意，也让${
+        `沉默之后又是同时发声，气氛好像又尴尬了。不过倒是有点滑稽，${teio.uma_sex_title}的眉眼露出了几分笑意，也让${
           teio.sex
         }更大胆了，先 ${me.name} 一步开口道`,
       );
@@ -346,7 +346,7 @@ module.exports = class extends CustomizedDaily {
           await era.printAndWait([
             me.get_colored_name(),
             ' 还没来得及发布或强调任何事情，就被发挥体能优势的',
-            teio.get_uma_sex_title(),
+            teio.uma_sex_title,
             '带着如一阵风般强行移动了……或许 ',
             me.get_colored_name(),
             ' 的意见在此时此地并不重要，',
@@ -442,7 +442,7 @@ module.exports = class extends CustomizedDaily {
         me.name
       } 无奈地瞥了一眼旁边全身贯注的${
         teio.sex
-      }，小${teio.get_uma_sex_title()}认真操纵着手柄，额头上甚至冒出了细汗，${
+      }，小${teio.uma_sex_title}认真操纵着手柄，额头上甚至冒出了细汗，${
         me.name
       } 笑了笑，把目光转回到游戏上。`,
     );
@@ -464,14 +464,14 @@ module.exports = class extends CustomizedDaily {
       await me.say_and_wait(`起来吧，帝王${teio.get_adult_sex_title()}。`);
       await teio.say_and_wait(`嗯——嗯～`);
       await era.printAndWait(
-        `${teio.get_teen_sex_title()}的身躯扑倒在 ${
+        `${teio.teen_sex_title}的身躯扑倒在 ${
           me.name
         } 的身上，${me.get_couple_title()} 两个陷进了沙发里。`,
       );
       await era.printAndWait(
         `吐息产生的气流搔痒着 ${me.name} 的脖颈，${
           me.name
-        } 有一搭没一搭地抚摸着担当${teio.get_uma_sex_title()}的后背，不忘用一只手顺带着帮${
+        } 有一搭没一搭地抚摸着担当${teio.uma_sex_title}的后背，不忘用一只手顺带着帮${
           teio.sex
         }梳理毛发。`,
       );
@@ -497,7 +497,7 @@ module.exports = class extends CustomizedDaily {
       me = get_chara_talk(0);
     await teio_talk.say_and_wait('训练员～快点快点，一起来抽一次吧！');
     await era.printAndWait(
-      `小${teio_talk.get_uma_sex_title()}拉起 ${me.name} 的手，向神龛跑去，${
+      `小${teio_talk.uma_sex_title}拉起 ${me.name} 的手，向神龛跑去，${
         me.name
       } 赶忙迈起大步跟着跑。不一会到达了目的地，${me.name} 已经满身是汗了……`,
     );
@@ -628,7 +628,7 @@ module.exports = class extends CustomizedDaily {
             `在帝王的强烈要求下，${me.name} 选了一部『有挑战性的恐怖刺激电影』。`,
           );
           await era.printAndWait(
-            `果不其然，每到关键镜头，小${teio.get_uma_sex_title()}就受不住了，${
+            `果不其然，每到关键镜头，小${teio.uma_sex_title}就受不住了，${
               me.name
             } 靠近 ${teio.sex} 的那条胳膊已经被紧抓到失去知觉……`,
           );
@@ -660,16 +660,16 @@ module.exports = class extends CustomizedDaily {
           `${teio.name} 和 ${me.name} 非常自然地靠在一起拉着手。${me.name} 不由得想到，自己和${teio.sex}之前好像就是如此……真的能算约会吗？`,
           `缓步前行之时两人的身体不停地紧贴又分离，${
             me.name
-          } 从中感受到了${teio.get_teen_sex_title()}些微的羞涩，确定了约会的真实。`,
+          } 从中感受到了${teio.teen_sex_title}些微的羞涩，确定了约会的真实。`,
         );
         await era.printAndWait(get_random_entry(talk_arr));
         break;
       case 2:
         await teio.say_and_wait('训练员训练员！来看这边这个！');
         await era.printAndWait(
-          `${teio.get_teen_sex_title()}的呼声响起，${me.name} 今天第21次奔向${
+          `${teio.teen_sex_title}的呼声响起，${me.name} 今天第21次奔向${
             teio.sex
-          }的位置。跟${teio.get_phy_sex_title()}逛街本来就是件费力的事，而跟这位${teio.get_uma_sex_title()}${teio.get_adult_sex_title()}一起来商场则更……${
+          }的位置。跟${teio.phy_sex_title}逛街本来就是件费力的事，而跟这位${teio.uma_sex_title}${teio.get_adult_sex_title()}一起来商场则更……${
             me.name
           } 不由得把苦笑挂在了脸上。`,
         );

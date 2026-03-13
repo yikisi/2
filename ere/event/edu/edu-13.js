@@ -37,9 +37,9 @@ module.exports = class extends CustomizedEdu {
     dict['训练员'] = era.get('callname:0:-2');
     const mcqueen = get_chara_talk(this.id);
     dict['代表色'] = mcqueen.color;
-    dict['马娘'] = mcqueen.get_uma_sex_title();
+    dict['马娘'] = mcqueen.uma_sex_title;
     dict['她'] = mcqueen.sex;
-    dict['姐妹'] = mcqueen.get_siblings_sex_title();
+    dict['姐妹'] = mcqueen.siblings_sex_title;
     if (mcqueen.sex_code === 1) {
       dict['马娘'] = '马郎';
       dict['大小姐'] = '大少爷';
@@ -225,7 +225,7 @@ module.exports = class extends CustomizedEdu {
     switch (event_object.arg) {
       case 12:
         await print_event_name(
-          '初识目白家' + mcqueen.get_siblings_sex_title(),
+          '初识目白家' + mcqueen.siblings_sex_title,
           mcqueen,
         );
         await kojo['初识目白家姐妹'](this.#dict);

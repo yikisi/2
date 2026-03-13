@@ -339,7 +339,7 @@ module.exports = class extends StrangeDayEvents {
       await get_chara_talk(400).say_as_unknown_and_wait('呦西呦西呦西呦西——');
       await coffee.say_as_unknown_and_wait('嗯……？');
       await printAndWait(
-        `好像有看见窗外有${coffee.get_uma_sex_title()}的影子掠过？怎么可能～这里可不是一楼啊。`,
+        `好像有看见窗外有${coffee.uma_sex_title}的影子掠过？怎么可能～这里可不是一楼啊。`,
       );
       wait_flag = get_attr_and_print_in_event(
         0,
@@ -466,7 +466,7 @@ module.exports = class extends StrangeDayEvents {
     await printAndWait([
       me.get_colored_name(),
       ' 尝试探查一番后发现，自己竟然在不知不觉间被当成了负心渣',
-      me.get_phy_sex_title()[0],
+      me.phy_sex_title[0],
       '？！',
     ]);
     printButton('「我不是，我没有！」', 1);
@@ -819,7 +819,7 @@ module.exports = class extends StrangeDayEvents {
           if (love >= 50) {
             await printAndWait([
               '作品内容是训练员与',
-              chara.get_uma_sex_title(),
+              chara.uma_sex_title,
               '的甜蜜日常，大受好评！就是不知道为什么训练员的脸好像有点……和 ',
               me.get_colored_name(),
               ' 相似？（马币+150）',

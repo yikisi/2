@@ -74,7 +74,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
         ' 最后以 ',
         coffee.get_colored_name(),
         ' 在最终直线上仿佛要猎杀前列',
-        coffee.get_uma_sex_title(),
+        coffee.uma_sex_title,
         '般的惊人末脚结束。在',
         coffee.sex,
         '冲线的一刻，京都竞马场的欢呼声响彻云霄。',
@@ -233,7 +233,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
       ' 意外的相遇，那时的',
       coffee.sex,
       '还是一个只会在夜晚的训练场独自追逐无形之物的孤僻',
-      coffee.get_uma_sex_title(),
+      coffee.uma_sex_title,
       '。',
     ]);
     await era.printAndWait('现在回头一看，已是走过了这么长的道路。');
@@ -332,7 +332,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
       '最终直线上，那道漆黑的影子从队伍的后段奔袭向前，仿佛撕咬着背影般、以无法抵挡的力量与爆发力猎杀了前方每一个「猎物」，被',
       coffee.sex,
       '超越的',
-      coffee.get_uma_sex_title(),
+      coffee.uma_sex_title,
       '甚至因为惊吓而短暂失速。',
     ]);
     await era.printAndWait([

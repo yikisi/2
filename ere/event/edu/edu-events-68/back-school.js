@@ -31,7 +31,7 @@ module.exports = async (kita, me, hook, event_object) => {
   await era.printAndWait(
     `这是在干什么啊……${
       me.name
-    } 目瞪口呆的看着今天应该没有训练任务的${kita.get_teen_sex_title()}。`,
+    } 目瞪口呆的看着今天应该没有训练任务的${kita.teen_sex_title}。`,
   );
   await kita.say_and_wait(
     `嘿嘿嘿～为了感谢训练员${me.get_adult_sex_title()}对人家的照顾，也是您最近身体总是嘎吱嘎吱的响。`,
@@ -47,7 +47,7 @@ module.exports = async (kita, me, hook, event_object) => {
   await era.printAndWait(
     `${
       me.name
-    } 这时才注意到小北穿的是一件近似肚兜的露背服，只要附身就能看到${kita.get_uma_sex_title()}背后外溢的春光。`,
+    } 这时才注意到小北穿的是一件近似肚兜的露背服，只要附身就能看到${kita.uma_sex_title}背后外溢的春光。`,
   );
   era.printButton('「不不不这再怎么说也不对劲吧……」', 1);
   era.printButton('「那么就麻烦小北了」', 2);
@@ -74,7 +74,7 @@ module.exports = async (kita, me, hook, event_object) => {
     await era.printAndWait(
       `这孩子到底是和谁学的啊……？${
         me.name
-      } 露出疑惑的表情，感受着${kita.get_teen_sex_title()}起身骑跨在 ${
+      } 露出疑惑的表情，感受着${kita.teen_sex_title}起身骑跨在 ${
         me.name
       } 后背上。`,
     );
@@ -82,7 +82,7 @@ module.exports = async (kita, me, hook, event_object) => {
       `在等待了半分钟后，${kita.name} 纤细有力的手指在 ${me.name} 背后摁压起紧绷的地方。`,
     );
     await kita.say_and_wait(
-      `训练员${me.get_adult_sex_title()}的身体，好紧绷呢……您和${kita.get_uma_sex_title()}不一样，身体要好好的修养哦。`,
+      `训练员${me.get_adult_sex_title()}的身体，好紧绷呢……您和${kita.uma_sex_title}不一样，身体要好好的修养哦。`,
     );
     await era.printAndWait(
       '尽管身体各处传来了嘎吱嘎吱的声响，但除了偶尔的疼痛之外只有舒服的感觉。',

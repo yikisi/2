@@ -86,14 +86,14 @@ module.exports = class extends CustomizedDaily {
         '低头一看，不知是否是夕阳的映衬，优秀素质低垂着的脸庞显得格外的娇红。',
       );
       era.print(
-        `一阵短暂的沉默后，红发${chara.get_teen_sex_title()}才支支吾吾开口打破了这份尴尬。`,
+        `一阵短暂的沉默后，红发${chara.teen_sex_title}才支支吾吾开口打破了这份尴尬。`,
       );
       chara.say(
         '今天……已经做好外宿申请了……所以……再在一起呆一会也是可以的哟？那个……如果……',
       );
       chara.say(`如果 ${sys_get_callname(60, 0)} 想的话……更、更进一步的事也——`);
       era.print(
-        `至此，${chara.get_teen_sex_title()}的双颊已经烧的通红，双眸含情脉脉的注视着 ${
+        `至此，${chara.teen_sex_title}的双颊已经烧的通红，双眸含情脉脉的注视着 ${
           me.name
         } 的眼睛，${chara.sex}后续的言语，及时没说出口，${
           me.name
@@ -114,13 +114,13 @@ module.exports = class extends CustomizedDaily {
         era.print(
           `就这样，${
             me.name
-          } 被优秀素质拉着离开了宿舍前的大门，在其他放学的${chara.get_uma_sex_title()}们温暖的目送下，走向了街道的另一头……`,
+          } 被优秀素质拉着离开了宿舍前的大门，在其他放学的${chara.uma_sex_title}们温暖的目送下，走向了街道的另一头……`,
         );
         hook.arg = true;
       } else {
         chara.say('是吗……这样啊……');
         era.print(
-          `${chara.get_teen_sex_title()}松开了抓住袖角的手，脸上浮现了一抹难以隐去的失落。`,
+          `${chara.teen_sex_title}松开了抓住袖角的手，脸上浮现了一抹难以隐去的失落。`,
         );
         chara.say(
           `嗯，没事的，我也真是，${sys_get_callname(
@@ -132,7 +132,7 @@ module.exports = class extends CustomizedDaily {
           )}，明天再见！`,
         );
         era.print(
-          `看着${chara.get_teen_sex_title()}落寞离去的背影，${
+          `看着${chara.teen_sex_title}落寞离去的背影，${
             me.name
           } 心头涌上一股说不出的滋味。`,
         );
@@ -435,7 +435,7 @@ module.exports = class extends CustomizedDaily {
         );
         await nice_nature.say_and_wait('欸……那个……嘛，等会训练场见！');
         await era.printAndWait(
-          `${nice_nature.get_teen_sex_title()}一副想说什么的样子，但最终没能开口，转身跑进校门。`,
+          `${nice_nature.teen_sex_title}一副想说什么的样子，但最终没能开口，转身跑进校门。`,
         );
         era.drawLine({ content: '⏰到了中午⏰' });
         await nice_nature.say_and_wait(

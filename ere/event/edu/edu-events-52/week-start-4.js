@@ -53,7 +53,7 @@ module.exports = (handlers) => {
           '对 ',
           me.get_colored_name(),
           ' 俏皮地笑着，小',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '摇晃着手中的袋子贴在 ',
           me.get_colored_name(),
           ' 的身上，暧昧的氛围变得更加浓厚起来。',
@@ -71,7 +71,7 @@ module.exports = (handlers) => {
         ]);
         await era.printAndWait([
           '露出天真可爱的笑容，小',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '在 ',
           me.get_colored_name(),
           ' 的玄关前蹦蹦跳跳地举着点心袋子。',
@@ -92,9 +92,9 @@ module.exports = (handlers) => {
       ]);
       await era.printAndWait([
         '轻轻举起怀中的纸袋，小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '带着一点',
-        urara.get_teen_sex_title(),
+        urara.teen_sex_title,
         '的暧昧，慢慢地将身体贴在了 ',
         me.get_colored_name(),
         ' 的身上。',
@@ -114,7 +114,7 @@ module.exports = (handlers) => {
       ]);
       await era.printAndWait([
         '一边向小手哈着气，小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '一边从怀中取出了装着巧克力的袋子。',
       ]);
 
@@ -162,7 +162,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '相比于去年过于有创造力的多口味巧克力，今年小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '的礼物并没有那么童趣。',
     ]);
     await era.printAndWait([
@@ -220,7 +220,7 @@ module.exports = (handlers) => {
         ' 却在下一秒变了脸色。突然跨坐上 ',
         me.get_colored_name(),
         ' 的腰间，小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '将 ',
         me.get_colored_name(),
         ' 按在了身下。',
@@ -229,7 +229,7 @@ module.exports = (handlers) => {
         '用娇小柔软的身体压在 ',
         me.get_colored_name(),
         ' 的身上，',
-        urara.get_teen_sex_title(),
+        urara.teen_sex_title,
         '绯红的脸颊与樱瞳中绽放出的满是恋人的情欲。',
       ]);
       await urara.say_and_wait([
@@ -254,7 +254,7 @@ module.exports = (handlers) => {
           '骑在 ',
           me.get_colored_name(),
           ' 身上轻轻剥开自己的外套，小',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '解开了已经在颤巍巍的发情中粘稠的湿了一片的束胸。',
         ]);
         await era.printAndWait(
@@ -273,7 +273,7 @@ module.exports = (handlers) => {
       }
       await era.printAndWait([
         '将饼干衔在唇间，小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '俯下身体，将柔软细嫩的唇舌与与融化着甜蜜的涎水一同送入了 ',
         me.get_colored_name(),
         ' 的口中。',
@@ -282,12 +282,12 @@ module.exports = (handlers) => {
         '从想要推开对方的坐立难安，到连思考都融化在吮吸中的十指相合，与 ',
         me.get_colored_name(),
         ' 缠绵的',
-        urara.get_teen_sex_title(),
+        urara.teen_sex_title,
         '放松了身体……',
       ]);
       await era.printAndWait([
         '随着攻守的互换，双眼涣散的小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '在 ',
         callname,
         ' 缠紧的怀抱与甜蜜的深吻中发出着绵软的娇吟声。',
@@ -296,7 +296,7 @@ module.exports = (handlers) => {
         '面对完全进入了情人节陷阱的 ',
         me.get_colored_name(),
         '，小小的',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '将身体的使用权安心的交给了自己的爱人……',
       ]);
 
@@ -315,12 +315,12 @@ module.exports = (handlers) => {
           '，但在 ',
           me.get_colored_name(),
           ' 意料之外的是，此时的小',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '却并没有表达出不满。',
         ]);
         await era.printAndWait([
           '安静地拉起自己半脱的衣物，小',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '依旧满是红晕的小脸上露出了恶作剧失败时的调皮笑容。',
         ]);
         await urara.say_and_wait([
@@ -342,7 +342,7 @@ module.exports = (handlers) => {
         '在 ',
         me.get_colored_name(),
         ' 的耳边轻声吹拂着，',
-        urara.get_teen_sex_title(),
+        urara.teen_sex_title,
         '的芳香与节日的祝福一同飘入了 ',
         me.get_colored_name(),
         ' 的耳中。',
@@ -364,14 +364,14 @@ module.exports = (handlers) => {
       ]);
       await era.printAndWait([
         '明明还不是恋人，但小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '却选择献上如此贵重的礼物，大家到底对',
         urara.sex,
         '说了些什么呢……',
       ]);
       await era.printAndWait([
         '用眼角的余光注视着',
-        urara.get_teen_sex_title(),
+        urara.teen_sex_title,
         '春光依旧的笑容，',
         me.get_colored_name(),
         ' 的心跳声也不由自主的打起了节拍。',
@@ -393,7 +393,7 @@ module.exports = (handlers) => {
       ]);
       await era.printAndWait([
         '所以这个「魔法咒语」，果然不是友情向的吧？看着兴高采烈的小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '，猜到什么的 ',
         me.get_colored_name(),
         ' 别开了视线。',
@@ -455,7 +455,7 @@ module.exports = (handlers) => {
     await print_event_name('夏合宿（资深年）开始', urara);
     await in_urara.say_as_unknown_and_wait([
       '虽然已经经历过一次，但小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '总会成长的。',
     ]);
     await in_urara.say_as_unknown_and_wait([
@@ -478,7 +478,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '而尽管失去了第一次时站在沙滩上时的新鲜感，但小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '依旧喜欢在太阳下开心的眺望远方。',
     ]);
     await era.printAndWait([
@@ -494,7 +494,7 @@ module.exports = (handlers) => {
       ]);
       await era.printAndWait([
         '小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '丰满的肉体在不太合身的紧身布料下不太情愿的扭动着，柔软的乳肉也在胸前印出了两只小小的突点；',
       ]);
     }
@@ -517,7 +517,7 @@ module.exports = (handlers) => {
       '注意到 ',
       me.get_colored_name(),
       ' 的视线，小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '踩着水从海浪与沙滩的分界线上向 ',
       me.get_colored_name(),
       ' 跑来，在身后留下了一串浅浅的脚印。',
@@ -530,7 +530,7 @@ module.exports = (handlers) => {
       ' 瞳中的花朵在阳光下闪着柔和的光。',
     ]);
     await era.printAndWait([
-      urara.get_teen_sex_title(),
+      urara.teen_sex_title,
       '逐渐成熟的气质与仍显天真稚嫩的脸庞如混为一杯的茶与奶，开始在 ',
       me.get_colored_name(),
       ' 的眼中氤氲融合着。',
@@ -546,7 +546,7 @@ module.exports = (handlers) => {
         '充满干劲的赶到 ',
         me.get_colored_name(),
         ' 的身边，将散发撩到肩后的小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '轻笑着拉起了 ',
         me.get_colored_name(),
         ' 的手。',

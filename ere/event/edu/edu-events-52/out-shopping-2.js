@@ -56,14 +56,14 @@ module.exports = (handlers) => {
       '毫不犹豫的应答着 ',
       me.get_colored_name(),
       ' 的请求，成长后的小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '已经看不到最初时对训练的无所适从了。',
     ]);
     await era.printAndWait([
       '随着双方理解的不断加深，',
       me.get_colored_name(),
       ' 能感受到小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '现在正走在进化的路上。',
     ]);
     await era.printAndWait([
@@ -88,7 +88,7 @@ module.exports = (handlers) => {
       ' 一同解决了别人的燃眉之急后，',
       me.get_colored_name(),
       ' 与小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '则再次收到了一份由',
       urara.sex,
       '所牵起的善意。',
@@ -230,7 +230,7 @@ module.exports = (handlers) => {
         ' 的笑容，',
         me.get_colored_name(),
         ' 想起了某些关于',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '的说法。',
       ]);
     } else {
@@ -254,12 +254,12 @@ module.exports = (handlers) => {
     era.println();
     await era.printAndWait([
       '「支持者人数越多，就越能增强赛',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '的力量」、「能将他人的祝福，化为自己的力量」。',
     ]);
     await era.printAndWait([
       '听起来像什么超能力系漫画的设定，但若是精灵般的',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '则一切皆有可能。',
     ]);
     await era.printAndWait([
@@ -331,7 +331,7 @@ module.exports = (handlers) => {
       ]);
       await era.printAndWait([
         '在不经意间，天真幼小的小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '，似乎又在重要的人心里种下了一颗「魔性」的种子……',
       ]);
     }
@@ -378,7 +378,7 @@ module.exports = (handlers) => {
       '站在观众席的边缘，',
       me.get_colored_name(),
       ' 一如既往的等待着运动场另一头的小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '摇摇晃晃地向 ',
       me.get_colored_name(),
       ' 靠过来。',
@@ -394,7 +394,7 @@ module.exports = (handlers) => {
       '不过即使想法是好的，实际执行起来也不是想法说的算了，就像 ',
       me.get_colored_name(),
       ' 面前这位即将累趴的小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '。',
     ]);
     await urara.say_and_wait([
@@ -416,7 +416,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '即使是在自己的粉丝感谢祭上，小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '依旧发挥着',
       urara.sex,
       '「正赛之外赢不了」的传统定则。',
@@ -428,7 +428,7 @@ module.exports = (handlers) => {
       '抹掉脸上的汗水，',
       urara.get_colored_name(),
       ' 笑着向刚刚一起比赛的',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '粉丝们招手，并随手拉下了自己的发带与号码布。',
     ]);
     await era.printAndWait([
@@ -438,26 +438,26 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '随着沾满汗水的粉色长发被散开，小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '的身上仿佛也飘散出包含着青春荷尔蒙的奇妙清香。',
     ]);
     await era.printAndWait([
       '因为浸透而收紧的体操服边缘勒进了',
-      urara.get_teen_sex_title(),
+      urara.teen_sex_title,
       '含苞待放的肉体，也勾勒出',
       urara.sex,
       '年幼却丰满肉感的曲线。',
     ]);
     await era.printAndWait([
       '而拿掉号码布的遮挡后，在阳光下因吸水变得半透明的衣物更是模糊地透出了',
-      urara.get_teen_sex_title(),
+      urara.teen_sex_title,
       '有些香艳的轮廓……',
     ]);
     await era.printAndWait([
       '于是，顶着周围火热的目光与动机不纯的镜头们，',
       me.get_colored_name(),
       ' 默默地将外套披在了毫无防备的小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '身上。',
     ]);
 
@@ -493,7 +493,7 @@ module.exports = (handlers) => {
         ' 的回应后，故意将柔软的身体倚靠着 ',
         me.get_colored_name(),
         '，小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '用绯红的脸颊害羞又魅惑地蹭着外套的衣领。',
       ]);
       await urara.say_and_wait([
@@ -518,7 +518,7 @@ module.exports = (handlers) => {
         '悄悄捂住节奏紊乱的心跳，',
         me.get_colored_name(),
         ' 轻轻拍了下小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '的头顶。好险，差点以为自己要喜欢上 ',
         urara.get_colored_name(),
         ' 了。',
@@ -560,7 +560,7 @@ module.exports = (handlers) => {
       '尽管听懂了 ',
       me.get_colored_name(),
       ' 的担忧，但准备出战的小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '还是笑着将外套重新塞回了 ',
       me.get_colored_name(),
       ' 的手里。',
@@ -619,14 +619,14 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '在慢镜头中望向于泥水飞溅的重场上，咬着牙维持领放的小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '，就连苛刻的',
       urara.sex,
       '也稍微扬起了嘴角。',
     ]);
     await era.printAndWait([
       '不过在若有所思的环顾看台后，',
-      urara.get_teen_sex_title(),
+      urara.teen_sex_title,
       '的表情再次蒙上了一层严肃的阴云，随后选择了转身离去。',
     ]);
 
@@ -653,7 +653,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '赛场的激昂解说与观众们的喝彩声一同响起，拼尽全力的小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '再次成功炒热了会场的气氛。',
     ]);
     await urara.say_and_wait('大家——接下来我也会努力奔跑，继续赢下去哦——！');

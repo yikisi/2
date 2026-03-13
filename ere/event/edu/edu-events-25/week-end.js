@@ -188,7 +188,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
       case 3:
         await coffee.say_and_wait([
           '马……是指',
-          coffee.get_uma_sex_title(),
+          coffee.uma_sex_title,
           '吗？……但四条腿是指……',
         ]);
         new CoffeeEduMarks().horse = 1;
@@ -362,7 +362,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
     await era.input();
     await era.printAndWait([
       '但赛',
-      coffee.get_uma_sex_title(),
+      coffee.uma_sex_title,
       '的生涯是不可能一直平淡下去的。在回到特雷森后，',
       me.get_couple_title(),
       ' 便要开始紧张的 ',

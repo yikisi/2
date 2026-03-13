@@ -75,12 +75,12 @@ module.exports = async (tachyon, me, callname) => {
     '要我，',
     tachyon.get_colored_name(),
     '，将这一切完全放弃，彻彻底底的放弃，变成一名普通的，和其他的青春期',
-    tachyon.get_teen_sex_title(),
+    tachyon.teen_sex_title,
     '没有任何差别的……',
   ]);
   await tachyon.say_and_wait([
     '陷入爱河的普通',
-    tachyon.get_child_sex_title(),
+    tachyon.child_sex_title,
     '子，你的意思，是要我放弃其他的可能性，选择和你在一起的可能性……',
   ]);
   era.println();
@@ -151,7 +151,7 @@ module.exports = async (tachyon, me, callname) => {
     case 1:
       await era.printAndWait([
         '人在遇见突发现象时，是无法维持住一心二用的，',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         '也是如此',
       ]);
       await era.printAndWait([
@@ -188,7 +188,7 @@ module.exports = async (tachyon, me, callname) => {
       await era.printAndWait('取而代之的是忍不住出口的一声娇吟');
       await era.printAndWait([
         '众所周知，大多数',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         '所特有，与人类不同的器官，都是',
         tachyon.sex,
         '们最为敏感的部位',
@@ -216,7 +216,7 @@ module.exports = async (tachyon, me, callname) => {
         ' 那比起拒绝更像是欲迎还拒的声音，',
         me.get_colored_name(),
         ' 变换了手法，以更加粗暴的力道，或揉或搓',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         '那弹性十足，敏感的耳尖',
       ]);
       era.println();
@@ -363,7 +363,7 @@ module.exports = async (tachyon, me, callname) => {
   ]);
   await era.printAndWait([
     '羞红着脸颊，看上去……就是一名彻彻底底沉醉于爱情，只是名普通的',
-    tachyon.get_teen_sex_title(),
+    tachyon.teen_sex_title,
     '的',
     tachyon.sex,
   ]);
@@ -383,7 +383,7 @@ module.exports = async (tachyon, me, callname) => {
     '但如今，',
     tachyon.get_colored_name(),
     ' 这名',
-    tachyon.get_uma_sex_title(),
+    tachyon.uma_sex_title,
     '在 ',
     me.get_colored_name(),
     ' 心目中的地位，已经胜过了那些',
@@ -443,7 +443,7 @@ module.exports = async (tachyon, me, callname) => {
     '第二天，',
     me.get_colored_name(),
     ' 看着明明前一天还说自己已经再也无法进行研究的某名',
-    tachyon.get_uma_sex_title(),
+    tachyon.uma_sex_title,
   ]);
   await era.printAndWait(
     '手上拿着比平时看起来还更不妙的荧光药剂一蹦一跳的进了训练员室',
@@ -553,7 +553,7 @@ module.exports = async (tachyon, me, callname) => {
   await era.printAndWait('对这名刁蛮、任性妄为，最可爱的疯狂科学家');
   await era.printAndWait([
     '对这名亲爱、惹人怜惜，最挚爱的恋爱',
-    tachyon.get_teen_sex_title(),
+    tachyon.teen_sex_title,
   ]);
   era.println();
   await me.say_and_wait([

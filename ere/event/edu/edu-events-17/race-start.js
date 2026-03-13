@@ -198,7 +198,7 @@ module.exports = class extends Edu17UntilRaceEnd {
       await chara.say_and_wait(
         emperor === 17 ? '展现吾的强权。' : '要做的事情只有一件。',
       );
-      await era.printAndWait(`${chara.get_teen_sex_title()}睁开双眼，喃喃道。`);
+      await era.printAndWait(`${chara.teen_sex_title}睁开双眼，喃喃道。`);
     } else if (extra_flag.race === race_enum.japa_cup && edu_weeks >= 96) {
       // 资深年日本杯
       await print_event_name(
@@ -265,7 +265,7 @@ module.exports = class extends Edu17UntilRaceEnd {
           ? '那就将皇帝的姿态铭记于心。'
           : '我明白你的担心，但为了我们的梦想，我不会后退。',
       );
-      await era.printAndWait(`说罢，${chara.get_teen_sex_title()}走向赛场。`);
+      await era.printAndWait(`说罢，${chara.teen_sex_title}走向赛场。`);
     } else {
       return await super.race_start(chara, me, callname, hook, extra_flag);
     }

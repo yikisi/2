@@ -81,7 +81,7 @@ module.exports = async () => {
   await me.say_and_wait(['试着掐一下我吧！']);
   await era.printAndWait([
     '就是这样，勾起赛',
-    kitaru.get_uma_sex_title(),
+    kitaru.uma_sex_title,
     '埋在心底的支配欲。',
   ]);
   await era.printAndWait([

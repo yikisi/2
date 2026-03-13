@@ -66,7 +66,7 @@ module.exports = class extends CustomizedBase {
     ]);
     await era.printAndWait([
       '望着阴影中神情落寞的小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '，一瞬间 ',
       me.get_colored_name(),
       ' 竟又涌起一丝想要继续陪',
@@ -252,7 +252,7 @@ module.exports = class extends CustomizedBase {
       ]);
       era.print([
         '大门缓缓地将光亮关在了外侧，',
-        urara.get_teen_sex_title(),
+        urara.teen_sex_title,
         '娇小纯真的面容也随着昏暗的笼罩而沾染上了一丝戏谑与嘲弄。',
       ]);
     } else {
@@ -264,7 +264,7 @@ module.exports = class extends CustomizedBase {
         ' 决定逃离这里，但在 ',
         me.get_colored_name(),
         ' 因重重机关而焦头烂额时，身后却传来了',
-        urara.get_teen_sex_title(),
+        urara.teen_sex_title,
         '的声音。',
       ]);
       urara.say([
@@ -278,7 +278,7 @@ module.exports = class extends CustomizedBase {
         '静静地站在背后观察着 ',
         me.get_colored_name(),
         ' 的无用功，',
-        urara.get_teen_sex_title(),
+        urara.teen_sex_title,
         '娇小纯真的面容在昏暗中沾染着一丝戏谑与嘲弄。',
       ]);
     }
@@ -324,7 +324,7 @@ module.exports = class extends CustomizedBase {
         '脸颊红晕的垮坐上 ',
         me.get_colored_name(),
         ' 的膝盖，小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '以潮湿粘稠的深吻堵住了 ',
         me.get_colored_name(),
         ' 的甜言蜜语。',
@@ -358,7 +358,7 @@ module.exports = class extends CustomizedBase {
     common_welcome();
     era.print([
       '从陌生又熟悉的房间中醒来，顺着身旁的温热看去，小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '即使在睡梦中依旧紧紧地环着 ',
       me.get_colored_name(),
       ' 的身体。',
@@ -379,7 +379,7 @@ module.exports = class extends CustomizedBase {
       '翻身压住 ',
       me.get_colored_name(),
       ' 的身体，不等人开口，',
-      urara.get_teen_sex_title(),
+      urara.teen_sex_title,
       '就用柔软的唇与舌，温柔又不容拒绝地堵住了嘴边的话语。',
     ]);
     common_welcome_end();
@@ -399,7 +399,7 @@ module.exports = class extends CustomizedBase {
     ]);
     await in_urara.say_as_unknown_and_wait([
       '您也仔细想想，乌拉拉怎么说也是一直维持在上升期的',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '，这个结果并不奇怪吧？',
     ]);
     await in_urara.say_as_unknown_and_wait([
@@ -457,7 +457,7 @@ module.exports = class extends CustomizedBase {
         '不等 ',
         me.get_colored_name(),
         ' 的回答，小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '的双臂便用力将 ',
         me.get_colored_name(),
         ' 抱在了身下，稚嫩的笑脸也逐渐染上了绯红。',

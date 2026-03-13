@@ -246,11 +246,11 @@ module.exports = class extends CustomizedDaily {
       buffer.push(
         [
           [
-            `深空之中的黑色烟火！魔法${kita.get_teen_sex_title()}玄色！这样的口号，能让变革同学喜欢的吧？`,
+            `深空之中的黑色烟火！魔法${kita.teen_sex_title}玄色！这样的口号，能让变革同学喜欢的吧？`,
           ],
           `${
             kita.name
-          } 转了个圈，摆出了今年光之美${kita.get_teen_sex_title()}的变身pose。`,
+          } 转了个圈，摆出了今年光之美${kita.teen_sex_title}的变身pose。`,
         ],
         [
           ['为了下一次的比赛，一定要加倍努力，锻炼出独属于我的武器！'],
@@ -466,7 +466,7 @@ module.exports = class extends CustomizedDaily {
             await era.printAndWait(
               `看着 ${kita.name} 气势汹汹的样子，${
                 me.name
-              }忍不住叹了口气，走到${kita.get_teen_sex_title()}身旁替${
+              }忍不住叹了口气，走到${kita.teen_sex_title}身旁替${
                 kita.sex
               }握住了操作杆。`,
             );
@@ -526,7 +526,7 @@ module.exports = class extends CustomizedDaily {
             await era.printAndWait(
               `看着绕起胡萝卜山转着圈，决定把胡萝卜分给大家的${kita.name}，${
                 me.name
-              }偷偷抽了一根出来，以免${kita.get_teen_sex_title()}忘记了自己的那份。`,
+              }偷偷抽了一根出来，以免${kita.teen_sex_title}忘记了自己的那份。`,
             );
             break;
           case 3:
@@ -880,7 +880,7 @@ module.exports = class extends CustomizedDaily {
     await era.printAndWait(
       `今天，${me.name} 同 ${kita.name} 一同前往神社。尽管今天是休息的日子，${
         me.name
-      } 还是陪伴着赛${kita.get_uma_sex_title()}一起来到了神社前`,
+      } 还是陪伴着赛${kita.uma_sex_title}一起来到了神社前`,
     );
     await era.printAndWait(
       `毕竟是为了兴致勃勃的担当，也是为了下次比赛的祈福，多劳累一点也是好的。`,
@@ -902,7 +902,7 @@ module.exports = class extends CustomizedDaily {
     if (get_random_value(0, 1)) {
       await kita.say_and_wait(`呼哇，太好了～`);
       await era.printAndWait(
-        `黑发的赛${kita.get_uma_sex_title()}长吁了一口气，开心的拍了拍胸脯，露出了阳光般灿烂的笑容。`,
+        `黑发的赛${kita.uma_sex_title}长吁了一口气，开心的拍了拍胸脯，露出了阳光般灿烂的笑容。`,
       );
       await kita.say_and_wait(
         `因为是历奇前辈推荐的特别灵验的神社，所以刚刚一直都不太敢说话呢～`,
@@ -962,7 +962,7 @@ module.exports = class extends CustomizedDaily {
     await era.printAndWait(
       `${
         kita.name
-      } 的脚步声一如既往地准时在门外响起，伴随着一同响起的是${kita.get_uma_sex_title()}欢快的歌声。`,
+      } 的脚步声一如既往地准时在门外响起，伴随着一同响起的是${kita.uma_sex_title}欢快的歌声。`,
     );
     await kita.say_and_wait(
       `训练员${me.get_adult_sex_title()}，中午好哦，有没有好好吃饭啊？`,

@@ -131,7 +131,7 @@ module.exports = async function (vp, me, event_object) {
       await era.printAndWait(
         `包括凯旋门赏上的战果在内，现在的${
           vp.sex
-        }作为一个背负着法国的${vp.get_teen_sex_title()}而驰名。`,
+        }作为一个背负着法国的${vp.teen_sex_title}而驰名。`,
       );
       await era.printAndWait(`但是，比赛的结果不会因此改变。`);
       await era.printAndWait(
@@ -218,7 +218,7 @@ module.exports = async function (vp, me, event_object) {
         `但在这场比赛中没能摆脱包围网，得意的末脚毫无建树就结束了。`,
       );
       await era.printAndWait(
-        `原来 ${vp.name} 就是个算不得高大的${vp.get_uma_sex_title()}。`,
+        `原来 ${vp.name} 就是个算不得高大的${vp.uma_sex_title}。`,
       );
       await era.printAndWait(
         `而且，如果战略也被知晓的话，出现互相勾结不让${vp.sex}向前的集团也不奇怪。`,
@@ -255,7 +255,7 @@ module.exports = async function (vp, me, event_object) {
           `用模糊的头呆呆地凝视着虚空，轻飘飘的香味扑鼻而来。`,
         );
         await era.printAndWait(
-          `紧接着，一个${vp.get_teen_sex_title()}突然映入眼帘。`,
+          `紧接着，一个${vp.teen_sex_title}突然映入眼帘。`,
         );
         await era.printAndWait(`柔软的栗色头发，清澈的苍蓝双眸。`);
         await era.printAndWait(
@@ -423,11 +423,11 @@ module.exports = async function (vp, me, event_object) {
         era.printButton(`「不知道吗，训练员都是这样的。」`, 1);
         await era.input();
         await era.printAndWait(
-          `每个人都想把负责的${vp.get_uma_sex_title()}变成英雄。`,
+          `每个人都想把负责的${vp.uma_sex_title}变成英雄。`,
         );
         await era.printAndWait(`拿到桂冠的第二天，就已经在寻觅新的奖杯了。`);
         await era.printAndWait(
-          `训练员这种生物实际上是比${vp.get_uma_sex_title()}更贪婪的生物。`,
+          `训练员这种生物实际上是比${vp.uma_sex_title}更贪婪的生物。`,
         );
         await era.printAndWait(
           `听到这句话，${vp.name} 发出比刚才更大的叹气，伸出双手。`,

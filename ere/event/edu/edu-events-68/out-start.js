@@ -68,7 +68,7 @@ module.exports = async (kita, me, hook, event_object) => {
       '怎么突然开始说这个了？',
       me.get_colored_name(),
       ' 略带诧异地看着面前的',
-      kita.get_teen_sex_title(),
+      kita.teen_sex_title,
       '。',
     ]);
     era.println();
@@ -83,7 +83,7 @@ module.exports = async (kita, me, hook, event_object) => {
       `但是，现在有了训练员${me.get_adult_sex_title()}的努力，就算稍微奖励一下小北也是可以的，对吧！`,
     );
     await era.printAndWait(
-      `黑发的${kita.get_teen_sex_title()}一步步地逼近，用纤细的双手压住 ${
+      `黑发的${kita.teen_sex_title}一步步地逼近，用纤细的双手压住 ${
         me.name
       } 的肩膀让 ${me.name} 无法动弹。`,
     );

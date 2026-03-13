@@ -510,7 +510,7 @@ module.exports = class extends CustomizedDaily {
       `跨过 ${me.name} 的 ${vp.name}，把手放在 ${me.name} 的胸前。`,
     );
     await era.printAndWait(
-      `本能喊着这样下去会很危险，但是不管怎么挣扎，手铐也不会脱落。更不可能用力量战胜${vp.get_uma_sex_title()}。`,
+      `本能喊着这样下去会很危险，但是不管怎么挣扎，手铐也不会脱落。更不可能用力量战胜${vp.uma_sex_title}。`,
     );
     await vp.say_and_wait([
       callname,

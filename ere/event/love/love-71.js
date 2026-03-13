@@ -31,7 +31,7 @@ module.exports = class extends CustomizedLove {
     o['你'] = me.name;
     o['称呼'] = sys_get_callname(this.id, 0);
     o['她'] = ardan.sex;
-    o['马娘'] = ardan.get_uma_sex_title();
+    o['马娘'] = ardan.uma_sex_title;
     o['小姐'] = ardan.sex_code === 1 ? '少爷' : '小姐';
     o['他'] = me.sex;
     return o;

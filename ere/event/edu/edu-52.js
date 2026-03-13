@@ -237,7 +237,7 @@ module.exports = class extends CustomizedEdu {
       ]);
       await era.printAndWait([
         '在众人的欢呼声中扬起蓄满阳光的小脸，小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '对送出毛巾和水的 ',
         me.get_colored_name(),
         ' 露出了胜利的笑容。',
@@ -397,7 +397,7 @@ module.exports = class extends CustomizedEdu {
         '在 ',
         me.get_colored_name(),
         ' 的帮助下用毛巾抹干脸上的汗水，小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '伴随着 ',
         me.get_colored_name(),
         ' 的鼓励用力点了点头。',
@@ -591,7 +591,7 @@ module.exports = class extends CustomizedEdu {
     ]);
     await era.printAndWait([
       '小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '在对方面前站定，而行事风格戏剧化的霸王也转向了 ',
       me.get_colored_name(),
       ' 与 ',

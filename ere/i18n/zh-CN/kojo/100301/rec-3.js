@@ -29,12 +29,12 @@ module.exports = {
       '训练员，',
       you.get_colored_name(),
       ' 今天依然奔走在去往特雷森学园，帮助',
-      teio.get_uma_sex_title(),
+      teio.uma_sex_title,
       '实现梦想的道路上。',
     ]);
     await era.printAndWait([
       '虽然工作绝对称不上轻松，但是不匪的物质收入（包揽食宿，以特殊的【马币】结算的高额工资）和精神财富（帮助',
-      teio.get_uma_sex_title(),
+      teio.uma_sex_title,
       '学生们成长，进步，看到',
       teio.sex,
       '们拼搏实现梦想后发自内心的笑容）足以抵消负面情绪。',
@@ -89,11 +89,11 @@ module.exports = {
     );
     await era.printAndWait([
       '充满朝气的',
-      teio.get_teen_sex_title(),
+      teio.teen_sex_title,
       '喉音从上方传来，',
       you.get_colored_name(),
       ' 抬眼，看见了一个娇小可爱的',
-      teio.get_uma_sex_title(),
+      teio.uma_sex_title,
       '，端坐在一跟较粗的枝干上，往下递出气球。不过，',
       teio.sex,
       '和小女孩的手，仍然差一点高度……',
@@ -104,20 +104,20 @@ module.exports = {
     await era.printAndWait([
       you.get_colored_name(),
       ' 不假思索的添了把手，接过了',
-      teio.get_uma_sex_title(),
+      teio.uma_sex_title,
       '手上的气球，递给了身旁的小女孩。小女孩道了一声谢。',
     ]);
     await era.printAndWait('小女孩「帝王大人！能不能再跳一次呢？」');
     await era.printAndWait([
       '显然，她是想看那位',
-      teio.get_uma_sex_title(),
+      teio.uma_sex_title,
       '翻身下树的潇洒模样。',
       you.get_colored_name(),
       ' 笑了笑，准备后退让下地方，或者今天能看到一个帅气的「super hero landing」也说不定。',
     ]);
     await era.printAndWait([
       '但奇怪的是，树上的',
-      teio.get_uma_sex_title(),
+      teio.uma_sex_title,
       '却并没有呼应自己的小粉丝',
     ]);
     era.println();
@@ -142,7 +142,7 @@ module.exports = {
       '小女孩看上去有些糊涂，不过还是向着自己妈妈的方向离去了。一时间，此处只剩下 ',
       you.get_colored_name(),
       '，与树上的',
-      teio.get_teen_sex_title(),
+      teio.teen_sex_title,
       '。',
     ]);
     era.println();
@@ -169,7 +169,7 @@ module.exports = {
     era.println();
     era.printButton('马上跑到树下伸出双手接应（爱慕+1）', 1);
     era.printButton(
-      `拾起刚刚被自己挡在内侧的，${teio.get_uma_sex_title()}蹬下的凉鞋，放在树下（好感+5）`,
+      `拾起刚刚被自己挡在内侧的，${teio.uma_sex_title}蹬下的凉鞋，放在树下（好感+5）`,
       2,
     );
     ret.push(await era.input());
@@ -189,10 +189,10 @@ module.exports = {
       await era.printAndWait([
         you.get_colored_name(),
         ' 感觉到自己的手掌内测摩挲到了',
-        teio.get_uma_sex_title(),
-        teio.get_teen_sex_title(),
+        teio.uma_sex_title,
+        teio.teen_sex_title,
         '柔弹又光滑的脚底——这就是',
-        teio.get_uma_sex_title(),
+        teio.uma_sex_title,
         '的天赋吗，高强度的训练和运动带来足部的矫健同时还能保持娇嫩——肌肤收缩，',
         you.get_colored_name(),
         ' 查觉到了',
@@ -200,18 +200,18 @@ module.exports = {
         '足弓略微的抬起，肉粉色的脚趾不安地抽动了几下，',
         you.get_colored_name(),
         ' 定了定神，将注意力从',
-        teio.get_uma_sex_title(),
+        teio.uma_sex_title,
         '可爱的双足上移开，缓慢而稳定地转身，将',
         teio.sex,
         '放在身旁的长椅上，然后背过身去，假装无视了',
-        teio.get_teen_sex_title(),
+        teio.teen_sex_title,
         '带点羞涩穿鞋的模样。',
       ]);
     } else {
       await era.printAndWait([
         you.get_colored_name(),
         ' 拎起为了不让小女孩看出端倪而挡在身体内测的凉鞋，放在了树旁，用眼神看护着',
-        teio.get_uma_sex_title(),
+        teio.uma_sex_title,
         '跳下，随时准备伸出双臂帮扶，不过',
         teio.sex,
         '没有给 ',
@@ -219,8 +219,8 @@ module.exports = {
         ' 这个机会。',
       ]);
       await era.printAndWait([
-        teio.get_uma_sex_title(),
-        teio.get_teen_sex_title(),
+        teio.uma_sex_title,
+        teio.teen_sex_title,
         '轻松一跃而下，踩到鞋上的动作又稳又准。',
         teio.sex,
         '抬头，冲 ',
@@ -244,7 +244,7 @@ module.exports = {
 
     await teio.say_as_unknown_and_wait([
       '对啦！我的名字是东海帝王！是日后将成为传奇的赛',
-      teio.get_uma_sex_title(),
+      teio.uma_sex_title,
       '哦！正好今天下午我会跑一次比赛，训练员先生有空也请一定过来看看吧！我还赶时间，现在就先失陪了，下午学园见！',
     ]);
     era.println();
@@ -271,8 +271,8 @@ module.exports = {
       '脑中浮现出那名为 ',
       teio.get_colored_name(),
       ' 的',
-      teio.get_uma_sex_title(),
-      teio.get_teen_sex_title(),
+      teio.uma_sex_title,
+      teio.teen_sex_title,
       '身姿，轻快的步伐蕴藏着极强的爆发力；紧绷的腿部肌肉收缩再舒张，与常人不同的，独一无二的摆步架势将力运至双足底部，与大地接触后再弹起，借势向前飞跃，甩出他人望尘莫及的高速……',
     ]);
     era.println();
@@ -296,8 +296,8 @@ module.exports = {
     await era.printAndWait([
       you.get_colored_name(),
       ' 在人群中努力向前挤，天才',
-      teio.get_uma_sex_title(),
-      teio.get_teen_sex_title(),
+      teio.uma_sex_title,
+      teio.teen_sex_title,
       '的初表现足以令任何人为之痴狂，所以这种情况是可以料想得到的。渴望着获取搭档的训练员们把这边团团围住。一身蓝天白云配色的帝王反倒像个小太阳，吸引着无数伸颈以待的向日葵。轻摇尾巴着的',
       teio.sex,
       '虽然看上去很兴奋，不过 ',
@@ -328,9 +328,9 @@ module.exports = {
         '。人墙知趣地散开，没有犹豫，',
         you.get_colored_name(),
         ' 伸出惯用手，拿出契约证明，另一只手又不自觉地抚平掉',
-        teio.get_teen_sex_title(),
+        teio.teen_sex_title,
         '肩头被风吹和汗浸弄得有些皱的衣料。',
-        teio.get_teen_sex_title(),
+        teio.teen_sex_title,
         '运动后脸颊的红润尚未散去，',
         teio.sex,
         '开心笑着，签下自己的名字，承认了 ',
@@ -340,7 +340,7 @@ module.exports = {
         '的训练员。',
       ]);
       era.println();
-      await era.printAndWait([you.get_couple_title(), ' 的故事从此开始。']);
+      await era.printAndWait('你们的故事从此开始。');
     } else {
       await era.printAndWait(
         '这孩子……或许对自己不怎么适合，太有挑战性了也说不定。',

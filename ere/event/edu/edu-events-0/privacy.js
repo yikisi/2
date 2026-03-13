@@ -165,7 +165,7 @@ module.exports = class extends CustomizedEdu {
     await printAndWait([
       me.get_colored_name(),
       ' 并没有在意，毕竟',
-      chara.get_uma_sex_title(),
+      chara.uma_sex_title,
       '很敏感。',
     ]);
     await printAndWait('……');
@@ -331,7 +331,7 @@ module.exports = class extends CustomizedEdu {
       if (get('flag:惩戒力度') === 3) {
         await chara.say_and_wait([
           '明明已经是',
-          chara.get_uma_sex_title(),
+          chara.uma_sex_title,
           '的所有物了。',
         ]);
         await chara.say_and_wait('居然还以为自己对这副身体有处置权吗？');
@@ -355,11 +355,7 @@ module.exports = class extends CustomizedEdu {
           ' 把衣服甩在一边，用最规范的土下座，将私处一览无余地展露给对方。',
         ]);
         await printAndWait(['浑身发热呢……']);
-        await printAndWait([
-          '是因为被',
-          chara.get_uma_sex_title(),
-          '大人呵斥……',
-        ]);
+        await printAndWait(['是因为被', chara.uma_sex_title, '大人呵斥……']);
         await printAndWait('还是，本来就期待被这样对待才会做出这样的事呢？');
         await printAndWait('脑子和身体都烧了起来，无法思考了。');
         await printAndWait('事到如今只知道用行动表示歉意了。');
@@ -394,7 +390,7 @@ module.exports = class extends CustomizedEdu {
           '虽然 ',
           me.get_colored_name(),
           ' 还想辩解什么，但是发情了的',
-          chara.get_uma_sex_title(),
+          chara.uma_sex_title,
           '显然不会听 ',
           me.get_colored_name(),
           ' 再说什么。',

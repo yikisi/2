@@ -137,10 +137,10 @@ module.exports = (handlers) => {
     await era.printAndWait('意外的，赛场上充满了自主训练的人');
     await era.printAndWait([
       '由于G1战线的开始，感到紧张的',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '们自作主张的训练也是这个时期特雷森的常见风景线啊',
     ]);
-    await say_by_passer_by_and_wait(tachyon.get_uma_sex_title() + 'A', [
+    await say_by_passer_by_and_wait(tachyon.uma_sex_title + 'A', [
       '啊，速子前……欸，训练员',
       me.get_adult_sex_title(),
       '！？',
@@ -158,7 +158,7 @@ module.exports = (handlers) => {
     await era.printAndWait('毕竟再怎么说，自主训练还是不被鼓励的行为……');
     await era.printAndWait([
       '不过，陪着负责',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '主动来自主训练的 ',
       me.get_colored_name(),
       ' 也没什么资格责备',
@@ -180,12 +180,12 @@ module.exports = (handlers) => {
       ' 说着话',
     ]);
     await say_by_passer_by_and_wait(
-      tachyon.get_uma_sex_title() + 'A',
+      tachyon.uma_sex_title + 'A',
       '速子前辈！我今年也进入经典赛了！皋月赏好可惜～～没办法参赛，但德比我会加油的！',
     );
     await tachyon.say_and_wait('呵呵，那要好好努力了');
     await say_by_passer_by_and_wait(
-      tachyon.get_uma_sex_title() + 'A',
+      tachyon.uma_sex_title + 'A',
       '可恶～～因为本格化的太晚，所以训练员让我回避了皋月赏……有没有办法能够加快本格化的速度呢',
     );
     await tachyon.say_and_wait(
@@ -209,16 +209,16 @@ module.exports = (handlers) => {
       '最看重可能性的 ',
       tachyon.get_colored_name(),
       '，是绝对不可能会容许，为了一时的成绩而牺牲',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '的可能性的',
     ]);
     await era.printAndWait('尤其对方还是拥有更宽广可能性的后辈');
     era.println();
     await say_by_passer_by_and_wait(
-      tachyon.get_uma_sex_title() + 'A',
+      tachyon.uma_sex_title + 'A',
       '啊……时间也不早了，速子前辈！我先回去了！',
     );
-    await say_by_passer_by_and_wait(tachyon.get_uma_sex_title() + 'A', [
+    await say_by_passer_by_and_wait(tachyon.uma_sex_title + 'A', [
       '另外……天皇赏春，虽然茶座前辈很强，但我相信速子前辈一定会赢的！',
     ]);
     era.println();
@@ -316,7 +316,7 @@ module.exports = (handlers) => {
     await era.printAndWait('不知道过去了多久');
     await era.printAndWait([
       '在其他自主训练的',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '们都已回去，沉默已经变成夜的常态',
     ]);
     era.println();
@@ -388,7 +388,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait('到底该怎么选择？');
     await say_by_passer_by_and_wait(
-      tachyon.get_uma_sex_title() + 'A',
+      tachyon.uma_sex_title + 'A',
       '是！我那天绝对会去给速子前辈加油的！',
     );
     era.println();
@@ -408,7 +408,7 @@ module.exports = (handlers) => {
         '要是还继续帮助 ',
         tachyon.get_colored_name(),
         ' 的话，对得起自己竭尽全力支持的那名',
-        tachyon.get_teen_sex_title(),
+        tachyon.teen_sex_title,
         '吗？对得起',
         tachyon.sex,
         '泡的咖啡吗？',
@@ -529,7 +529,7 @@ module.exports = (handlers) => {
     await tachyon.print_and_wait('躲着那个，为了我牺牲一切的人');
     await tachyon.print_and_wait([
       '理性而言，继续负责一名不想跑步，没有未来的',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '，这是毫无意义，浪费名额资源及时间的行为',
     ]);
     await tachyon.print_and_wait([
@@ -653,7 +653,7 @@ module.exports = (handlers) => {
     era.println();
     await tachyon.say_and_wait('……可是，这样的话，Plan B……');
     era.printButton(
-      `「必须要速子放水才能胜利的茶座，真的有可能超越${tachyon.get_uma_sex_title()}的极限吗？」`,
+      `「必须要速子放水才能胜利的茶座，真的有可能超越${tachyon.uma_sex_title}的极限吗？」`,
       1,
     );
     await era.input();
@@ -790,7 +790,7 @@ module.exports = (handlers) => {
     ]);
     era.println();
     await say_by_passer_by_and_wait(
-      tachyon.get_uma_sex_title() + 'A',
+      tachyon.uma_sex_title + 'A',
       '速……速子前辈！请，请等一下！',
     );
     era.println();
@@ -800,20 +800,17 @@ module.exports = (handlers) => {
       ' 和 ',
       tachyon.get_colored_name(),
       ' 同时疑惑的回头，看向了髮间有着巨大流星的小',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
     ]);
     era.println();
-    await say_by_passer_by_and_wait(tachyon.get_uma_sex_title() + 'A', [
+    await say_by_passer_by_and_wait(tachyon.uma_sex_title + 'A', [
       '今年秋天……我会出赛 ',
       race_infos[race_enum.kobe_hai].get_colored_name(),
       '……速子前辈……到时候可以来为我加油吗！',
     ]);
+    await say_by_passer_by_and_wait(tachyon.uma_sex_title + 'A', '加油……吗？');
     await say_by_passer_by_and_wait(
-      tachyon.get_uma_sex_title() + 'A',
-      '加油……吗？',
-    );
-    await say_by_passer_by_and_wait(
-      tachyon.get_uma_sex_title() + 'A',
+      tachyon.uma_sex_title + 'A',
       '是的！希望速子前辈能看看我的跑步的模样！',
     );
     era.println();
@@ -829,13 +826,13 @@ module.exports = (handlers) => {
     era.println();
     await tachyon.say_and_wait('嗯……可以啊，那个时候，目前还没有其他安排');
     await say_by_passer_by_and_wait(
-      tachyon.get_uma_sex_title() + 'A',
+      tachyon.uma_sex_title + 'A',
       '真的吗！太好了！我会努力赢下来的！',
     );
     era.println();
     await era.printAndWait([
       '小',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '兴奋的站起身来，完全看不出像是刚被强行灌完药的模样一溜烟的跑走了',
     ]);
     era.println();

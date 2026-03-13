@@ -152,7 +152,9 @@ async function common_standing(attacker, defender, hook) {
   if (hook.arg) {
     if (era.get(`cflag:${defender.id}:种族`) > 0) {
       await attacker.print_and_wait([
-        '果然，赛马娘都有着不错的柔韧性与平衡性呢。',
+        '果然，赛',
+        defender.uma_sex_title,
+        '都有着不错的柔韧性与平衡性呢。',
       ]);
     }
     await attacker.print_and_wait([

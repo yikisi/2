@@ -85,7 +85,7 @@ async function tachyon_betrayed_2(tachyon_marks) {
   await tachyon.say_and_wait([t_call_c, '，为什么……']);
   await coffee.say_and_wait([
     '喊的那么大声……也就只有不是',
-    tachyon.get_uma_sex_title(),
+    tachyon.uma_sex_title,
     '的 ',
     c_call_m,
     ' 会没发现吧。',
@@ -514,7 +514,7 @@ async function tachyon_betrayed_2(tachyon_marks) {
     ]);
     await coffee.say_and_wait([
       '明明，都已经完全超越了训练员和',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '的界限。',
     ]);
     await coffee.say_and_wait([
@@ -668,7 +668,7 @@ async function tachyon_betrayed_2(tachyon_marks) {
       '知道了 ',
       tachyon.get_colored_name(),
       ' 是这样的',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '。',
     ]);
     await tachyon.print_and_wait([
@@ -747,7 +747,7 @@ async function tachyon_betrayed_2(tachyon_marks) {
       '忽然，',
       t_call_c,
       ' 将嘴凑近到耳旁，用只有',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '才能听见的音量小声说道。',
     ]);
     era.println();

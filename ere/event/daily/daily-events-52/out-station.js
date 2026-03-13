@@ -138,7 +138,7 @@ module.exports = async (hook) => {
           ' 话音刚落，试图拒绝的 ',
           me.get_colored_name(),
           ' 马上就被兴致高涨的担当用',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '的力量挤住了脸。',
         ]);
         await era.printAndWait('这下，可真是要在社会层面完蛋了……');
@@ -160,7 +160,7 @@ module.exports = async (hook) => {
         if (era.get('exp:52:接吻次数') >= 10) {
           await era.printAndWait([
             '小',
-            urara.get_uma_sex_title(),
+            urara.uma_sex_title,
             '纯真中带着七分魅惑神情毫不紧张地靠近了 ',
             me.get_colored_name(),
             '，俏皮地咬住了 ',
@@ -169,7 +169,7 @@ module.exports = async (hook) => {
           ]);
           await era.printAndWait([
             '而在之后漫长的被小',
-            urara.get_uma_sex_title(),
+            urara.uma_sex_title,
             '索取的过程中，',
             me.get_colored_name(),
             ' 总觉得自己要失去意识了。',
@@ -198,7 +198,7 @@ module.exports = async (hook) => {
         } else {
           await era.printAndWait([
             '或许是出于害羞，又或是缺乏经验而紧张，操之过急的小',
-            urara.get_uma_sex_title(),
+            urara.uma_sex_title,
             '与 ',
             me.get_colored_name(),
             ' 的正脸撞了个正着。',
@@ -217,7 +217,7 @@ module.exports = async (hook) => {
           ]);
           await era.printAndWait([
             '尽量无视着周围的窃窃私语声，被小',
-            urara.get_uma_sex_title(),
+            urara.uma_sex_title,
             '侵略性拉扯着颈部的 ',
             me.get_colored_name(),
             ' 总觉得自己随时都会晕过去……',
@@ -343,7 +343,7 @@ module.exports = async (hook) => {
             );
             await era.printAndWait([
               '虽然被看到了用奇怪的方式吮吸食物的样子，但满脸无辜的小',
-              urara.get_uma_sex_title(),
+              urara.uma_sex_title,
               '好像自己也不知道在做什么。',
             ]);
             break;
@@ -368,7 +368,7 @@ module.exports = async (hook) => {
             );
             await era.printAndWait([
               '就算说不要也没什么用吧。撇着小',
-              urara.get_uma_sex_title(),
+              urara.uma_sex_title,
               '期待到有点狂热的眼神，',
               me.get_colored_name(),
               ' 默默地干起了饭。',
@@ -478,7 +478,7 @@ module.exports = async (hook) => {
         ]);
         await era.printAndWait([
           '而在与',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '店员的一番短暂交流后，',
           me.get_couple_title(),
           ' 了解到了事情的原委：',
@@ -514,7 +514,7 @@ module.exports = async (hook) => {
         await urara.say_and_wait('太好了——！');
         await era.printAndWait([
           '得到了肯定的答复，在短暂等待之后，小',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '便兴奋的在店员的指导下跳进了已经挂好试穿衣物的换衣间。',
         ]);
         await era.printAndWait([
@@ -582,7 +582,7 @@ module.exports = async (hook) => {
         ]);
         await era.printAndWait([
           '尽管没有歌声与音乐的衬托，自己也早已在其他地方看过很多次，小',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '红晕的脸颊与娇羞的飞吻还是击中了 ',
           me.get_colored_name(),
           ' 的心。',
@@ -599,7 +599,7 @@ module.exports = async (hook) => {
           '按住躁动不安的胸口，冷静下来的 ',
           me.get_colored_name(),
           ' 才反应过来，那位掷出了恋爱飞吻的',
-          urara.get_teen_sex_title(),
+          urara.teen_sex_title,
           '，正是表面还显稚嫩的小担当……',
         ]);
         era.drawLine();
@@ -630,16 +630,16 @@ module.exports = async (hook) => {
         ]);
         await urara.print_and_wait([
           '随着',
-          urara.get_teen_sex_title(),
+          urara.teen_sex_title,
           '视线上移，从余光的一角到逐渐直视，',
           urara.get_colored_name(),
           ' 从镜中看到了「另一位',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '」。',
         ]);
         await urara.print_and_wait([
           '镜中的',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '，是谁？虽然和 ',
           urara.get_colored_name(),
           ' 长得很像，穿着 ',
@@ -650,14 +650,14 @@ module.exports = async (hook) => {
           '就如同书里的',
           urara.sex_code - 1 ? '公主' : '王子',
           '那般，红透的脸颊，含羞的双眼……这大概是「初恋的',
-          urara.get_teen_sex_title(),
+          urara.teen_sex_title,
           '」的样子？',
         ]);
         await urara.print_and_wait([
           '虽然不是很懂，但就像大家说的那样，和幼稚的 ',
           urara.get_colored_name(),
           ' 一点也不一样，没人会不喜欢这样的',
-          urara.get_child_sex_title(),
+          urara.child_sex_title,
           '……',
         ]);
         await urara.say_and_wait(
@@ -665,7 +665,7 @@ module.exports = async (hook) => {
             '那……',
             callname,
             ' 也会喜欢这样的',
-            urara.get_child_sex_title(),
+            urara.child_sex_title,
             '子吗？',
           ],
           true,
@@ -674,7 +674,7 @@ module.exports = async (hook) => {
           '伸手轻轻抚摸着镜中的「',
           urara.get_colored_name(),
           '」，感受着再次加速的心跳，',
-          urara.get_teen_sex_title(),
+          urara.teen_sex_title,
           '没来由的想到。',
         ]);
         await urara.say_and_wait(
@@ -693,7 +693,7 @@ module.exports = async (hook) => {
           );
           await urara.print_and_wait([
             '小',
-            urara.get_uma_sex_title(),
+            urara.uma_sex_title,
             '看向了更衣室一角中，那件没有被挂起来的衣服。',
           ]);
           await urara.say_and_wait(
@@ -706,7 +706,7 @@ module.exports = async (hook) => {
           );
           await urara.print_and_wait([
             '努力的支起耳朵，逐渐失去理智的初恋的',
-            urara.get_teen_sex_title(),
+            urara.teen_sex_title,
             '决定做出一个激进的尝试。',
           ]);
         } else {
@@ -732,7 +732,7 @@ module.exports = async (hook) => {
           );
           await urara.print_and_wait([
             '掀开箱子，拿出那件衣服，初恋的',
-            urara.get_teen_sex_title(),
+            urara.teen_sex_title,
             '在犹豫了片刻后用笨拙的理由说服了自己。',
           ]);
         }
@@ -770,7 +770,7 @@ module.exports = async (hook) => {
         ]);
         await era.printAndWait([
           '被束紧的胸衣突出的弧度下方融为一体的，是被裹住的纤细腰肢与勒进',
-          urara.get_teen_sex_title(),
+          urara.teen_sex_title,
           '肉体曲线的紧致高叉；',
         ]);
         await era.printAndWait([
@@ -812,7 +812,7 @@ module.exports = async (hook) => {
         ]);
         await era.printAndWait([
           '但就在大人们陷入沉默的同时，小',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '却率先一步捂住了逐渐红透的脸。',
         ]);
         await urara.say_and_wait('对、对不起，乌拉拉做过头了，大概……');
@@ -905,7 +905,7 @@ module.exports = async (hook) => {
               ' 与 ',
               me.get_colored_name(),
               ' 一同望向了上方的',
-              urara.get_uma_sex_title(),
+              urara.uma_sex_title,
               '宣传广告牌。',
             ]);
             break;
@@ -926,7 +926,7 @@ module.exports = async (hook) => {
             );
             await era.printAndWait([
               '有新决胜服展出意味着新的',
-              urara.get_uma_sex_title(),
+              urara.uma_sex_title,
               '会参与到重赏之中，未来的压力可能就会更多一分。',
             ]);
             await era.printAndWait([

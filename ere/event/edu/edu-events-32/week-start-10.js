@@ -248,7 +248,7 @@ module.exports = (handlers) => {
       if (check_aim_race(RaceHistory.get(32).get(), race_enum.prix_lat, 2, 1)) {
         await say_by_passer_by_and_wait('书店老板', [
           '好不容易啊，日本',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '终于赢下世界的凯旋门！当然要摆出来做纪念了！',
         ]);
       }
@@ -353,11 +353,11 @@ module.exports = (handlers) => {
         await era.printAndWait('虽说如果毫无意义');
         await era.printAndWait([
           '但还是让人忍不住去想如果的',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
         ]);
         await era.printAndWait([
           '带来无限的可能性及遐想的',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
         ]);
         await era.printAndWait(['这就是 ', tachyon.get_colored_name()]);
         await say_by_passer_by_and_wait('书店老板', [
@@ -376,7 +376,7 @@ module.exports = (handlers) => {
           '实不相瞒，我其实从去年的皋月赏就开始关注 ',
           tachyon.get_colored_name(),
           ' 了！那种跑法……说是',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '的极限真的不夸张啊！',
         ]);
         era.println();
@@ -495,7 +495,7 @@ module.exports = (handlers) => {
         );
         await tachyon.print_and_wait([
           '跨越了各种阻碍，最终超越了极限的',
-          coffee.get_uma_sex_title(),
+          coffee.uma_sex_title,
         ]);
         await tachyon.print_and_wait([
           '用自己的跑法将魔女施加在',
@@ -763,7 +763,7 @@ module.exports = (handlers) => {
         ]);
         await era.printAndWait([
           '身为在特雷森学园附近的商店街，不认识上半年最为出名的',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '，可以说是极为异类的情况了',
         ]);
         era.println();
@@ -771,14 +771,14 @@ module.exports = (handlers) => {
           '看到这，',
           me.get_colored_name(),
           ' 不由得想起身为',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '的店主',
         ]);
         await era.printAndWait([
           '既然说老公是训练员，那么代表',
           tachyon.sex,
           '当初应该也是竞赛',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '吧',
         ]);
         await era.printAndWait('退役后却过着这样，与比赛几乎无缘的生活');
@@ -786,7 +786,7 @@ module.exports = (handlers) => {
         era.println();
         await tachyon.say_and_wait('……这也是，一种可能性吗');
         era.println();
-        await era.printAndWait([tachyon.get_uma_sex_title(), '的可能性']);
+        await era.printAndWait([tachyon.uma_sex_title, '的可能性']);
         await era.printAndWait([
           '这是 ',
           tachyon.get_colored_name(),
@@ -794,14 +794,14 @@ module.exports = (handlers) => {
         ]);
         await era.printAndWait([
           '……但，',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '绝对不是每个人都能成为赛',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '的',
         ]);
         await era.printAndWait([
           '就算是赛',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '，也能选择走上并非赛场的那条路',
         ]);
         era.println();

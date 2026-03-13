@@ -33,7 +33,7 @@ module.exports = async (hook) => {
         await kitaru.say_and_wait([
           kitaru.get_bigger_sibling_sex_title(),
           '！我一定会成为一名优秀的赛',
-          kitaru.get_uma_sex_title(),
+          kitaru.uma_sex_title,
           '的！',
         ]);
         await kitaru.say_and_wait('请你……呜……你一定要好好看着啊！');

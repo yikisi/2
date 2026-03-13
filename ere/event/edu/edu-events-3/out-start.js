@@ -24,7 +24,7 @@ module.exports = class extends CustomizedEdu {
       await print_event_name('舞蹈……武道？这样能训练帝王舞步吗？', teio);
 
       await era.printAndWait(
-        `木制的硬地板打上蜡，在这可以映上人影的平面上，一位${teio.get_uma_sex_title()}正穿着道服练习着抬腿和发力。`,
+        `木制的硬地板打上蜡，在这可以映上人影的平面上，一位${teio.uma_sex_title}正穿着道服练习着抬腿和发力。`,
       );
       era.println();
 
@@ -83,7 +83,7 @@ module.exports = class extends CustomizedEdu {
       era.println();
 
       await era.printAndWait(
-        `身穿黄色连衣裙的小${teio.get_uma_sex_title()}迎着阳光，在前方蹦蹦跳跳的走着，发散着自己那过剩的活力，不过或许是为了照顾 ${
+        `身穿黄色连衣裙的小${teio.uma_sex_title}迎着阳光，在前方蹦蹦跳跳的走着，发散着自己那过剩的活力，不过或许是为了照顾 ${
           me.name
         }，${teio.sex}始终没有离开 ${me.name} 的视野范围。`,
       );
@@ -112,7 +112,7 @@ module.exports = class extends CustomizedEdu {
         wait_flag = get_attr_and_print_in_event(3, [0, 15], 0) || wait_flag;
       } else {
         await era.printAndWait(
-          `小${teio.get_uma_sex_title()}看上去有点失望，不过还是退回到 ${
+          `小${teio.uma_sex_title}看上去有点失望，不过还是退回到 ${
             me.name
           } 身边，与 ${me.name} 并肩同行在正路上走了。`,
         );
@@ -160,7 +160,7 @@ module.exports = class extends CustomizedEdu {
       await era.printAndWait(
         `被 ${
           me.name
-        } 护在内测的${teio.get_uma_sex_title()}${teio.get_adult_sex_title()}，瞬间发劲，疾冲出去。`,
+        } 护在内测的${teio.uma_sex_title}${teio.get_adult_sex_title()}，瞬间发劲，疾冲出去。`,
       );
       await era.printAndWait('司机仰背，把刹车踩到极限，绝望地闭上双眼。');
       await era.printAndWait('然后奇迹发生了。');
@@ -173,14 +173,14 @@ module.exports = class extends CustomizedEdu {
       era.println();
 
       await era.printAndWait(
-        `小孩「好的……谢谢${teio.get_uma_sex_title()}${
+        `小孩「好的……谢谢${teio.uma_sex_title}${
           teio.sex_code - 1 ? '姐姐' : '哥哥'
         }？」`,
       );
       era.println();
 
       await era.printAndWait(
-        `${teio.get_uma_sex_title()}${teio.sex_code - 1 ? '姐姐' : '哥哥'}？！`,
+        `${teio.uma_sex_title}${teio.sex_code - 1 ? '姐姐' : '哥哥'}？！`,
       );
       era.println();
 
@@ -203,7 +203,7 @@ module.exports = class extends CustomizedEdu {
       await era.printAndWait(
         `众人的呼声一浪高过一浪，不少人闻讯而来向 ${me.get_couple_title()} 这边靠近。${me.get_couple_title()} 顿时觉得有些手脚无措。不过 ${
           me.name
-        } 看了一眼帝王，${teio.get_teen_sex_title()}的脸红彤彤的，但也没有明确表示出反感——看来名声总是能让人，或${teio.get_uma_sex_title()}高兴的吧。`,
+        } 看了一眼帝王，${teio.teen_sex_title}的脸红彤彤的，但也没有明确表示出反感——看来名声总是能让人，或${teio.uma_sex_title}高兴的吧。`,
       );
       await era.printAndWait(
         `然后 ${me.name} 注意到${teio.sex}的耳朵转了一个角度，紧接着 ${me.name} 也听到了一些声音。`,
@@ -211,26 +211,26 @@ module.exports = class extends CustomizedEdu {
       era.println();
 
       await era.printAndWait(
-        `${teio.get_uma_sex_title()}A「唔，真帅气啊！我也想成为这样的${teio.get_uma_sex_title()}！」`,
+        `${teio.uma_sex_title}A「唔，真帅气啊！我也想成为这样的${teio.uma_sex_title}！」`,
       );
       era.println();
 
       await era.printAndWait(
-        `${teio.get_uma_sex_title()}B「听说${
+        `${teio.uma_sex_title}B「听说${
           teio.sex
         }的训练员很厉害，应该就是现在在${teio.sex}旁边的那个人。」`,
       );
       era.println();
 
       await era.printAndWait(
-        `${teio.get_uma_sex_title()}C「真的吗？我也想找${
+        `${teio.uma_sex_title}C「真的吗？我也想找${
           me.sex
         }当我的专属训练员，我现在就要找${me.sex}签订契约！」`,
       );
       era.println();
 
       await era.printAndWait(
-        `${teio.get_uma_sex_title()}D「${me.sex}的样貌和气质也好好啊，真想……」`,
+        `${teio.uma_sex_title}D「${me.sex}的样貌和气质也好好啊，真想……」`,
       );
       era.println();
 

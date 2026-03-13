@@ -443,7 +443,7 @@ module.exports = class extends CustomizedEdu {
         await festa.say_and_wait(
           `虽然我很想直接拉着荣进闪耀去痛快跑一场，但是${
             flash.sex
-          }是你负责的担当${flash.get_uma_sex_title()}吧？`,
+          }是你负责的担当${flash.uma_sex_title}吧？`,
         );
         await festa.say_and_wait('你的意见呢？');
         era.printButton('「去吧，闪耀。」', 1);
@@ -624,7 +624,7 @@ module.exports = class extends CustomizedEdu {
         `${flash.sex}对着它凝视良久，直至落日收敛起自己的余光，才再度开口。`,
       );
       await flash.say_and_wait(
-        `……据说作为${flash.get_uma_sex_title()}出生，能够在赛场上奔跑是件十分骄傲的事情。所以我渴望着在此取得荣誉，最终做到荣归故里。`,
+        `……据说作为${flash.uma_sex_title}出生，能够在赛场上奔跑是件十分骄傲的事情。所以我渴望着在此取得荣誉，最终做到荣归故里。`,
       );
       await flash.say_and_wait(
         '这就是我奔跑的原动力，这就是我一直都如此执着的理由。',
@@ -721,7 +721,7 @@ module.exports = class extends CustomizedEdu {
         `${flash.sex}直视着 ${your_name} 的眼睛，一字一顿地说出了自己的想法。`,
       );
       await flash.say_and_wait(
-        `如果，因为身体的原因无法角逐只有同世代实力最强的赛${flash.get_uma_sex_title()}才能赢下的菊花赏的话，那么，不妨将目标放在其之上。`,
+        `如果，因为身体的原因无法角逐只有同世代实力最强的赛${flash.uma_sex_title}才能赢下的菊花赏的话，那么，不妨将目标放在其之上。`,
       );
       await flash.say_and_wait(
         '我想以自己的巅峰状态，去挑战比我更富有经验的前辈。',
@@ -739,7 +739,7 @@ module.exports = class extends CustomizedEdu {
         '是啊，有您在身边支持的话，我肯定是可以做到的吧。',
       );
       await era.printAndWait(
-        `夜幕初临的海滩上，来自异国的${flash.get_teen_sex_title()}面色柔和地对 ${your_name} 伸出左手。`,
+        `夜幕初临的海滩上，来自异国的${flash.teen_sex_title}面色柔和地对 ${your_name} 伸出左手。`,
       );
       await flash.say_and_wait('接下来，就以此为目标开始努力吧！');
       await era.printAndWait(
@@ -799,7 +799,7 @@ module.exports = class extends CustomizedEdu {
       era.printButton('「见证你梦想的实现。」', 1);
       await era.input();
       await era.printAndWait(
-        `所谓训练员，就是帮助${flash.get_uma_sex_title()}，引导${flash.get_uma_sex_title()}，管理${flash.get_uma_sex_title()}，最终令${
+        `所谓训练员，就是帮助${flash.uma_sex_title}，引导${flash.uma_sex_title}，管理${flash.uma_sex_title}，最终令${
           flash.sex
         }们得到一个圆满结局的存在。因此，${your_name} 觉得 ${your_name} 的说法并无不妥。`,
       );

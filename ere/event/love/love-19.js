@@ -47,12 +47,12 @@ module.exports = class extends CustomizedLove {
       dotou = get_chara_talk(58),
       palmer = get_chara_talk(64),
       helios = get_chara_talk(65);
-    teio.name = '看起来比较孩子气的' + teio.get_uma_sex_title();
-    opera.name = '看起来毫不在意的' + opera.get_uma_sex_title();
-    dotou.name = '看起来很冒失的' + dotou.get_uma_sex_title();
-    mcqueen.name = '某个浅紫色芦毛' + mcqueen.get_uma_sex_title();
-    palmer.name = '某个栗毛' + palmer.get_uma_sex_title();
-    helios.name = '看起来像是染了蓝毛的' + helios.get_uma_sex_title();
+    teio.name = '看起来比较孩子气的' + teio.uma_sex_title;
+    opera.name = '看起来毫不在意的' + opera.uma_sex_title;
+    dotou.name = '看起来很冒失的' + dotou.uma_sex_title;
+    mcqueen.name = '某个浅紫色芦毛' + mcqueen.uma_sex_title;
+    palmer.name = '某个栗毛' + palmer.uma_sex_title;
+    helios.name = '看起来像是染了蓝毛的' + helios.uma_sex_title;
     await print_event_name('推', digital);
     if (era.get('cflag:0:位置') !== location_enum.beach) {
       await get_chara_talk(302).say_and_wait('合宿！对，就是，如此！');
@@ -63,16 +63,16 @@ module.exports = class extends CustomizedLove {
     await me.say_and_wait('合宿吗，倒也不错。');
     await era.printAndWait([
       '对于',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '来说并不只是旅游，也有着训练这一重要环节的活动，简直跟暑假作业异曲同工。',
     ]);
     await era.printAndWait([
       '幸好，大部分的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '都是热爱训练的，',
       me.get_colored_name(),
       ' 的担当',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       ' ',
       digital.get_colored_name(),
       '，',
@@ -94,7 +94,7 @@ module.exports = class extends CustomizedLove {
     await era.printAndWait('哇哦，真不愧是特雷森，给到的条件还蛮不错的。');
     await era.printAndWait([
       '顺便环绕了下四周，各处都是穿着泳衣的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '，',
       digital.get_colored_name(),
       ' 应该会尊得要死要活吧，先不说训练了，',
@@ -115,7 +115,7 @@ module.exports = class extends CustomizedLove {
     await digital.say_and_wait('蓝天……白云……吹拂着青春之风……');
     await digital.say_and_wait([
       '在这里的一切',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '酱！啊！感觉呼吸都是亵渎……',
     ]);
     await digital.say_and_wait('明明是如此不敬，却又无法忍受，吸……');
@@ -134,7 +134,7 @@ module.exports = class extends CustomizedLove {
     await me.say_and_wait('难得来到这里，真不用先放松一下吗？');
     await era.printAndWait([
       '恰好，两个看起来关系很好的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '路过。',
     ]);
     await palmer.say_and_wait('你看看你，把雪糕都粘脸上了！这下怎么能啊？');
@@ -206,7 +206,7 @@ module.exports = class extends CustomizedLove {
     );
     await era.printAndWait([
       '虽说是来海边合宿的，但看起来也有不少的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '也带来了和服，尽情地享受这次难得的祭典。',
     ]);
     await digital.say_and_wait([
@@ -224,7 +224,7 @@ module.exports = class extends CustomizedLove {
     ]);
     await era.printAndWait([
       '正有两名',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '穿着和服在捞金鱼。',
     ]);
     await era.printAndWait(
@@ -317,19 +317,19 @@ module.exports = class extends CustomizedLove {
     await digital.say_and_wait(['也就是说，', callname, ' 也是重要的存在！']);
     await era.printAndWait([
       '把一切',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '放在心口上，也把 ',
       me.get_colored_name(),
       ' 放在了心口上。',
     ]);
     await digital.say_and_wait([
       '这么多赛',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '每天带着炙热的念想奔走着',
     ]);
     await digital.say_and_wait([
       '这个世界简直就是，大',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '酱尊死时代！',
     ]);
     await era.printAndWait([
@@ -339,7 +339,7 @@ module.exports = class extends CustomizedLove {
     ]);
     await digital.say_and_wait([
       '无论是前后左右，都有闪闪发光的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '酱！',
     ]);
     await digital.say_and_wait('不知道什么时候就会尊死，就像在战场一样');
@@ -371,7 +371,7 @@ module.exports = class extends CustomizedLove {
     await era.printAndWait([
       digital.sex,
       '一直带着对',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '不求回报的爱奔跑着。',
     ]);
     await era.printAndWait([
@@ -397,13 +397,13 @@ module.exports = class extends CustomizedLove {
       '想看着',
       digital.sex,
       '在推',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '时候尊死的样子，想看着',
       digital.sex,
       '和 ',
       me.get_colored_name(),
       ' 讨论',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '时候滔滔不绝的样子。',
     ]);
     await era.printAndWait([
@@ -438,7 +438,7 @@ module.exports = class extends CustomizedLove {
     await era.printAndWait(['是认识的 ', digital.get_colored_name(), '。']);
     await digital.say_and_wait([
       '那那！就快去摄取',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '酱能量吧！',
     ]);
     await digital.say_and_wait('GOGOGO！');
@@ -466,7 +466,7 @@ module.exports = class extends CustomizedLove {
       '在训练室的 ',
       digital.get_colored_name(),
       ' 眯着眼，应该是在想象着',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '，发出来了可能会让人拿出手机报警的笑声，看起来十分高兴。',
     ]);
     await me.say_and_wait('怎么了？这么高兴？');
@@ -494,7 +494,7 @@ module.exports = class extends CustomizedLove {
     await digital.say_and_wait('来阪神赛马场真是太好了！！精彩的出道战！');
     await digital.say_and_wait([
       '第一名的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '酱，可是继承累去年隐退的',
       digital.sex_code - 1 ? '姐姐' : '哥哥',
       '的意志出道的呢！这种传承感，太燃啦哇！',
@@ -518,7 +518,7 @@ module.exports = class extends CustomizedLove {
     await era.printAndWait('把日本的赛马场几乎逛个遍，');
     await digital.say_and_wait([
       '这次出场的那个芦毛',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '，前几次成绩一直都不算好，但是',
       digital.sex,
       '还斗志昂扬地站在那里啊！',
@@ -526,7 +526,7 @@ module.exports = class extends CustomizedLove {
     await era.printAndWait('还是有一点点……困难的。');
     await digital.say_and_wait([
       '感受到了吗？！',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '酱们的炙热！耀眼！震撼的连击！',
     ]);
     await era.printAndWait('感受到了，很浓，很劲啊！');
@@ -550,21 +550,21 @@ module.exports = class extends CustomizedLove {
     );
     await digital.say_and_wait([
       '果然呐，',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '酱们的那股精气神，就是想看到',
       digital.sex,
       '们朝气满满的样子啊。',
     ]);
     await era.printAndWait([
       '看着只剩下被',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '摧残过后的马场，',
       digital.get_colored_name(),
       ' 吐出了早就表露于面的心中之言。',
     ]);
     await era.printAndWait([
       '能把整个赛场都炒热气氛，连天都可以掀翻，这就是',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '。',
     ]);
     await era.printAndWait([
@@ -592,14 +592,14 @@ module.exports = class extends CustomizedLove {
     await digital.print_and_wait([
       digital.name,
       '，一个为了',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '酱而存在于世上的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '，今天也在全力推活！',
     ]);
     await digital.print_and_wait([
       '诶呀诶呀，今天也要去圣地巡游，把之前',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '酱们创造的圣迹全都再仔细地研磨一下啊！',
     ]);
     await digital.say_and_wait([
@@ -634,7 +634,7 @@ module.exports = class extends CustomizedLove {
     ]);
     await era.printAndWait([
       '为了担当',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '，像上次一样，',
       me.get_colored_name(),
       ' 也做好了准备。',
@@ -681,7 +681,7 @@ module.exports = class extends CustomizedLove {
     ]);
     await digital.say_and_wait([
       '没错！有多少',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '把代表幸运的四叶草，送给了同伴，竞争对手？互相拼搏却又互相祝福，呜呜呜——',
     ]);
     await me.say_and_wait(
@@ -701,7 +701,7 @@ module.exports = class extends CustomizedLove {
     await era.printAndWait('力……力量？');
     await digital.say_and_wait([
       '对！无数的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '来此聚会，来此歇息，还有，那个沙坑！',
     ]);
     await me.say_and_wait('哦哦哦？想起来了，是Team Gold曾经训练的沙坑吧？');
@@ -757,7 +757,7 @@ module.exports = class extends CustomizedLove {
       '然后就听到了',
       digital.sex,
       '的意外经历，在外面意外听到了路人',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '的建议，邀请 ',
       callname,
       ' 一起……',
@@ -765,7 +765,7 @@ module.exports = class extends CustomizedLove {
     await era.printAndWait([
       me.get_colored_name(),
       ' 发自内心地感谢了这位不知名的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '，因此 ',
       me.get_colored_name(),
       ' 对 ',
@@ -817,11 +817,11 @@ module.exports = class extends CustomizedLove {
     ]);
     await digital.say_and_wait([
       '在第一眼在电视的大屏幕上看到',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '酱的身姿时我就明白如此激励眩眼的激情四射的',
       digital.sex_code - 1 ? '女神' : '神明',
       '们是我的一生向往啊随后我就坠入了深渊哦不是升华到了天堂每天都供奉',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '酱们为',
       digital.sex,
       '们应援为',
@@ -829,7 +829,7 @@ module.exports = class extends CustomizedLove {
       '们喝彩为',
       digital.sex,
       '们制作同人本向大家宣传',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '酱们的美好伟大然后得益于偶尔的赐福我终于处身于这万神殿可以和各位',
       digital.sex_code - 1 ? '女神' : '神明',
       '同处于一个世界哦不是我只是同呼吸一处空气的凡人而已但是',
@@ -837,7 +837,7 @@ module.exports = class extends CustomizedLove {
       '们也都不嫌弃我还让我进入不可侵犯的赛场上进行劲的比赛简直是高贵的却又不嫌污秽的所有全肯定的伟大的',
       digital.sex_code - 1 ? '女神' : '神明',
       '们说了这么多数码碳我想说的仅是',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '酱真的是太棒了！',
     ]);
     await era.printAndWait([

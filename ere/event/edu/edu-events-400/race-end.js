@@ -267,7 +267,7 @@ module.exports = (handlers) => {
     extra_flag.pt_change = 45;
     await print_event_name('夙愿完成！', ss);
     era.printButton(
-      `「恭喜你，三冠王${ss.name}，成为最今年最强的赛${ss.get_uma_sex_title()}了呢。」`,
+      `「恭喜你，三冠王${ss.name}，成为最今年最强的赛${ss.uma_sex_title}了呢。」`,
       1,
     );
     await era.input();
@@ -505,7 +505,7 @@ module.exports = (handlers) => {
       '和您站在一起的时候，胜利就变得稀疏平常起来了呢……春秋天皇赏一着啊，听起来真是个伟大的成就啊。',
     );
     era.printButton(
-      `「但是你做到了，这就是 ${ss.name} 的能力，绝对强大的赛${ss.get_uma_sex_title()}」`,
+      `「但是你做到了，这就是 ${ss.name} 的能力，绝对强大的赛${ss.uma_sex_title}」`,
       1,
     );
     await era.input();

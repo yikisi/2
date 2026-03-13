@@ -33,7 +33,7 @@ module.exports = class extends CustomizedEdu {
     const o = {};
     o['玉藻色'] = tama.color;
     o['她'] = tama.sex;
-    o['马娘'] = tama.get_uma_sex_title();
+    o['马娘'] = tama.uma_sex_title;
     o['你'] = me.name;
     o['他'] = me.sex;
     return o;
@@ -307,10 +307,7 @@ module.exports = class extends CustomizedEdu {
       case race_enum.toky_yus:
         if (check_aim_race(history, race_enum.sats_sho, 1, 1)) {
           name = '优骏少女之一';
-          await print_event_name(
-            '优骏' + tama.get_teen_sex_title() + '之一',
-            tama,
-          );
+          await print_event_name('优骏' + tama.teen_sex_title + '之一', tama);
           if ((await kojo[name](this.#dict))[0] === 1) {
             extra_flag.love_change = 2;
             extra_flag.motivation_change = 1;
@@ -380,10 +377,7 @@ module.exports = class extends CustomizedEdu {
           check_aim_race(history, race_enum.sats_sho, 1, 1)
         ) {
           name = '优骏少女之二';
-          await print_event_name(
-            '优骏' + tama.get_teen_sex_title() + '之二',
-            tama,
-          );
+          await print_event_name('优骏' + tama.teen_sex_title + '之二', tama);
           await kojo[name](this.#dict);
           if (
             all_reward_in_event(this.id, {

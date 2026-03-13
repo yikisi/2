@@ -39,7 +39,7 @@ module.exports = class extends Edu7UntilWeekStart {
     o['你'] = era.get('callname:0:-2');
     const gold_ship = get_chara_talk(this.id);
     o['她'] = gold_ship.sex;
-    o['马娘'] = gold_ship.get_uma_sex_title();
+    o['马娘'] = gold_ship.uma_sex_title;
     o['代表色'] = gold_ship.color;
     return o;
   }
@@ -229,7 +229,7 @@ module.exports = class extends Edu7UntilWeekStart {
           gold_ship.name
         } 身后一段距离——然后${
           gold_ship.sex
-        }一头撞到了另一位${gold_ship.get_uma_sex_title()}身上，又被跟随在后的 ${
+        }一头撞到了另一位${gold_ship.uma_sex_title}身上，又被跟随在后的 ${
           me.name
         } 夹到了中间。`,
       );
@@ -245,7 +245,7 @@ module.exports = class extends Edu7UntilWeekStart {
       era.println();
 
       await era.printAndWait(
-        `竟然能承受如此巨大的冲击力，实在是奶……不对，实在是耐性超群的${creek.get_uma_sex_title()}！`,
+        `竟然能承受如此巨大的冲击力，实在是奶……不对，实在是耐性超群的${creek.uma_sex_title}！`,
       );
       era.println();
 
@@ -280,7 +280,7 @@ module.exports = class extends Edu7UntilWeekStart {
       await era.printAndWait(
         `${
           me.name
-        } 的眼前站着两个栩栩如生的${gold_ship.get_uma_sex_title()}雕像……但与其说是栩栩如生，不如说就是本人。`,
+        } 的眼前站着两个栩栩如生的${gold_ship.uma_sex_title}雕像……但与其说是栩栩如生，不如说就是本人。`,
       );
       era.println();
 
@@ -447,7 +447,7 @@ module.exports = class extends Edu7UntilWeekStart {
         '不过，在中途我就被彻骨的冷风冻得不成人形，都已经冷得哭出来了。',
       );
       await gold_ship.say_and_wait(
-        `然后……一位改变我命运的${gold_ship.get_uma_sex_title()}出现了。`,
+        `然后……一位改变我命运的${gold_ship.uma_sex_title}出现了。`,
       );
       await gold_ship.say_and_wait(
         `${gold_ship.sex}来到我的面前，向我递出了一碗温暖的拉面汤底泡饭。`,
@@ -460,10 +460,10 @@ module.exports = class extends Edu7UntilWeekStart {
       await gold_ship.say_and_wait(
         `${
           gold_ship.sex
-        }是这么对我说的：『我虽然也是${gold_ship.get_uma_sex_title()}，但不擅长跑步，于是现在开了一家拉面店，你也要记得自由地选择人生的目标哦。』`,
+        }是这么对我说的：『我虽然也是${gold_ship.uma_sex_title}，但不擅长跑步，于是现在开了一家拉面店，你也要记得自由地选择人生的目标哦。』`,
       );
       await gold_ship.say_and_wait(
-        `那个${gold_ship.get_uma_sex_title()}对我说的话让我意识到了，原来我是可以不继承老家的螺丝工厂的！`,
+        `那个${gold_ship.uma_sex_title}对我说的话让我意识到了，原来我是可以不继承老家的螺丝工厂的！`,
       );
       era.println();
 

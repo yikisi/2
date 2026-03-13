@@ -29,7 +29,7 @@ module.exports = (handlers) => {
     await kitaru.say_and_wait('来许个别的愿望吧……');
     await era.printAndWait([
       '然而在低头思索了一阵之后，原本静心凝神的',
-      kitaru.get_teen_sex_title(),
+      kitaru.teen_sex_title,
       '突然发出了',
       kitaru.sex,
       '标志性的怪叫声。',
@@ -39,7 +39,7 @@ module.exports = (handlers) => {
     era.drawLine({ content: me.name + ' 的办公室' });
     await era.printAndWait([
       '橙发的',
-      kitaru.get_teen_sex_title(),
+      kitaru.teen_sex_title,
       '火急火燎地推开了 ',
       me.get_colored_name(),
       ' 办公室的门，冲了进来。',
@@ -92,7 +92,7 @@ module.exports = (handlers) => {
       '，',
       kitaru.sex,
       '的神情看起来十分坦然，如果说是被神佛宠爱的赛',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '也不为过吧。',
     ]);
     era.printButton('「是啊。」', 1);
@@ -102,7 +102,7 @@ module.exports = (handlers) => {
     await kitaru.say_and_wait('仔细想想，在神明面前，也并不是只有许愿呢！');
     await era.printAndWait([
       '橙发的',
-      kitaru.get_teen_sex_title(),
+      kitaru.teen_sex_title,
       '向前踏出了一步，尽管还是穿着校服，神态却逐渐变得和作法时的巫女一样庄严。',
     ]);
     await kitaru.say_and_wait('坐镇于此地的神明啊！请收下我的誓约吧！');
@@ -171,7 +171,7 @@ module.exports = (handlers) => {
         '被 ',
         me.get_colored_name(),
         ' 指出问题之后的',
-        kitaru.get_teen_sex_title(),
+        kitaru.teen_sex_title,
         '有些气鼓鼓地瞪了 ',
         me.get_colored_name(),
         ' 一眼。',
@@ -194,7 +194,7 @@ module.exports = (handlers) => {
       ' 告诉 ',
       kitaru.get_colored_name(),
       '，已经事先通知了负责人，所以下游会有阻拦网收集并集中焚烧后，',
-      kitaru.get_teen_sex_title(),
+      kitaru.teen_sex_title,
       '总算可以放心的放流起',
       kitaru.sex,
       '的开运物品来。',
@@ -228,7 +228,7 @@ module.exports = (handlers) => {
       '然而无论 ',
       me.get_colored_name(),
       ' 怎么喊，跑在前面的',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '却似没听到般继续往树林的深处奔去。',
     ]);
     await era.printAndWait([
@@ -336,7 +336,7 @@ module.exports = (handlers) => {
       await kitaru.say_and_wait('当然啦，什么都可以！');
       await era.printAndWait([
         '面前的',
-        kitaru.get_uma_sex_title(),
+        kitaru.uma_sex_title,
         '，单论外表，样子的确和 ',
         me.get_colored_name(),
         ' 的担当一模一样，连笑的方式也没有差别。',
@@ -361,7 +361,7 @@ module.exports = (handlers) => {
         '以 ',
         kitaru.get_colored_name(),
         ' 的身姿出现的',
-        kitaru.get_teen_sex_title(),
+        kitaru.teen_sex_title,
         '，微微笑着。',
       ]);
       await era.printAndWait([
@@ -516,7 +516,7 @@ module.exports = (handlers) => {
     await kitaru.say_and_wait('这三年对我来说简直就像是梦一样。');
     await era.printAndWait([
       '说完这番话的',
-      kitaru.get_teen_sex_title(),
+      kitaru.teen_sex_title,
       '再次陷入了沉默，',
       me.get_colored_name(),
       ' 们二人就这样走在返程的路上，看着道路两侧如 ',

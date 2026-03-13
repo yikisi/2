@@ -63,7 +63,7 @@ async function incomplete_combustion(tachyon, me, callname, edu_marks) {
   ]);
   await era.printAndWait([
     '毕竟就如前辈训练员们说过的，贴近',
-    tachyon.get_uma_sex_title(),
+    tachyon.uma_sex_title,
     '的心灵才是身为训练员最重要的工作',
   ]);
   await era.printAndWait('但是……');
@@ -178,7 +178,7 @@ async function incomplete_combustion(tachyon, me, callname, edu_marks) {
     ]);
     await era.printAndWait([
       '在神圣的赛场上做这样的事情，当然不免会引起他人的关注，不知不觉间，一些还在锻炼的小',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '们也被 ',
       tachyon.get_colored_name(),
       ' 的娇吟吸引过来',
@@ -223,9 +223,9 @@ async function incomplete_combustion(tachyon, me, callname, edu_marks) {
       ' 的理智，提醒 ',
       me.get_colored_name(),
       ' 眼前的',
-      tachyon.get_teen_sex_title(),
+      tachyon.teen_sex_title,
       '，实际上是力量大过于成年男性三倍的',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
     ]);
     await era.printAndWait([
       me.get_colored_name(),
@@ -247,7 +247,7 @@ async function incomplete_combustion(tachyon, me, callname, edu_marks) {
       '此时 ',
       me.get_couple_title(),
       ' 二人看上去的模样哪里像是正常训练中的训练员及',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '，倒不如说是扑在男友怀中的撒娇女友，及温柔的将',
       tachyon.sex,
       '拥在怀中的男伴',
@@ -274,7 +274,7 @@ async function incomplete_combustion(tachyon, me, callname, edu_marks) {
       '于是，',
       me.get_couple_title(),
       ' 两人在周围',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '们的半是佩服半是羡慕的目光中，缓缓走回了实验室',
     ]);
     edu_marks.train_stop = 1;
@@ -361,7 +361,7 @@ module.exports = async () => {
           async () => {
             await tachyon.say_and_wait([
               '有种说法，训练员就是将',
-              tachyon.get_uma_sex_title(),
+              tachyon.uma_sex_title,
               '『驯服』的存在，因此驯服的驯才是马字旁，也因此驯和训的读音如此相近',
             ]);
             await tachyon.say_and_wait([
@@ -496,7 +496,7 @@ module.exports = async () => {
             ]);
             await tachyon.say_and_wait([
               '没问题没问题，现在你的身体素质如果短时间爆发已经能够跑出不输给',
-              tachyon.get_uma_sex_title(),
+              tachyon.uma_sex_title,
               '的速度了……',
             ]);
             await tachyon.say_and_wait(
@@ -517,7 +517,7 @@ module.exports = async () => {
             );
             await tachyon.say_and_wait([
               '先找到能够配合的',
-              tachyon.get_uma_sex_title(),
+              tachyon.uma_sex_title,
               '？',
               sys_get_colored_callname(32, 25),
               '……欸，不行吗？',
@@ -559,7 +559,7 @@ module.exports = async () => {
             await tachyon.say_and_wait([
               callname,
               '，你为什么会觉得自己能够胜过',
-              tachyon.get_uma_sex_title(),
+              tachyon.uma_sex_title,
               '的力量呢？',
             ]);
 
@@ -578,7 +578,7 @@ module.exports = async () => {
             era.println();
             await era.printAndWait([
               '即便怎么用力都纹丝不动的身躯，明明是如此娇小的身体，这就是',
-              tachyon.get_uma_sex_title(),
+              tachyon.uma_sex_title,
               '这种生物的神奇之处',
             ]);
             !era.get('cflag:0:种族') &&
@@ -652,7 +652,7 @@ module.exports = async () => {
               '的改造所赐，',
               me.get_colored_name(),
               ' 早就已经拥有虽说不能与',
-              tachyon.get_uma_sex_title(),
+              tachyon.uma_sex_title,
               '相等，但也相当于七八成的力量',
             ]);
             await era.printAndWait([
@@ -707,7 +707,7 @@ module.exports = async () => {
               '开口的，是与 ',
               tachyon.get_colored_name(),
               ' 共用同间空教室的灵异系黑鹿毛',
-              tachyon.get_uma_sex_title(),
+              tachyon.uma_sex_title,
               '，',
               coffee.get_colored_name(),
             ]);

@@ -1,7 +1,3 @@
-/**
- * @file 机伶金花 - 调教
- * @author 黑奴队长
- */
 const era = require('#/era-electron');
 
 const { set_stain } = require('#/system/ero/sys-calc-stain');
@@ -11,6 +7,8 @@ const CustomizedEro = require('#/event/ero/ero-common');
 
 const { part_enum } = require('#/data/ero/part-const');
 const { stain_enum } = require('#/data/ero/stain-const');
+
+const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends CustomizedEro {
   async orgasm(bouquetd) {
@@ -22,20 +20,7 @@ module.exports = class extends CustomizedEro {
         era.get(`nowex:${this.id}:阴道高潮`) > 0)
     ) {
       era.println();
-      await bouquetd.say_and_wait('……欸？');
-      await era.printAndWait([
-        bouquetd.get_colored_name(),
-        ' 的乳房喷出了星星点点的液体……',
-      ]);
-      await era.printAndWait([
-        '余韵中的 ',
-        bouquetd.get_colored_name(),
-        ' 呆呆地看着初乳划过空气的轨迹……',
-      ]);
-      await era.printAndWait([
-        bouquetd.get_colored_name(),
-        ' 的胸部开始泌乳了……',
-      ]);
+      await i18n().kojo[this.id].ero.have_milk(bouquetd);
       era.set(`cflag:${this.id}:泌乳`, 3);
       era.set(
         `palam:${this.id}:胸部快感`,

@@ -67,7 +67,7 @@ module.exports = async function (hook) {
             ]);
             await tachyon.say_and_wait([
               '什么叫再吃糖要糖尿病了，别担心别担心，',
-              tachyon.get_uma_sex_title(),
+              tachyon.uma_sex_title,
               '的代谢能力会想办法的',
             ]);
           },
@@ -237,7 +237,7 @@ module.exports = async function (hook) {
           ]);
           await tachyon.say_and_wait([
             '能和我这样的超绝美',
-            tachyon.get_teen_sex_title(),
+            tachyon.teen_sex_title,
             '出门逛街，这就已经可以等同于约会了吧。',
           ]);
         },
@@ -271,7 +271,7 @@ module.exports = async function (hook) {
             '我说 ',
             callname,
             '……衣服什么的网购不就好了，人类的衣服跟',
-            tachyon.get_uma_sex_title(),
+            tachyon.uma_sex_title,
             '的衣服又有什么关系',
           ]);
           await tachyon.say_and_wait('尾巴的地方没孔所以每次掀衣服都能看到？');

@@ -390,8 +390,8 @@ async function sys_auto_rape(shown) {
     temp_filters.push((e) => {
       const tags = ero_tagged_hooks[e] || default_tags;
       return (
-        tags.attacker_tags.findIndex((t) => poison_list.master[t]) !== -1 &&
-        tags.defender_tags.findIndex((t) => poison_list.lover[t]) !== -1
+        tags.attacker_tags.some((t) => poison_list.master[t]) &&
+        tags.defender_tags.some((t) => poison_list.lover[t])
       );
     });
   }
@@ -399,8 +399,8 @@ async function sys_auto_rape(shown) {
     temp_filters.push((e) => {
       const tags = ero_tagged_hooks[e] || default_tags;
       return (
-        tags.attacker_tags.findIndex((t) => sensitive_list.master[t]) === -1 ||
-        tags.defender_tags.findIndex((t) => sensitive_list.lover[t]) === -1
+        tags.attacker_tags.every((t) => !sensitive_list.master[t]) ||
+        tags.defender_tags.every((t) => !sensitive_list.lover[t])
       );
     });
   }
@@ -408,8 +408,8 @@ async function sys_auto_rape(shown) {
     temp_filters.push((e) => {
       const tags = ero_tagged_hooks[e] || default_tags;
       return (
-        tags.attacker_tags.findIndex((t) => white_list[t]) !== -1 ||
-        tags.defender_tags.findIndex((t) => week_list[t]) !== -1
+        tags.attacker_tags.some((t) => white_list[t]) ||
+        tags.defender_tags.some((t) => week_list[t])
       );
     });
   }
@@ -425,7 +425,7 @@ async function sys_auto_rape(shown) {
   if (Object.keys(black_list).length) {
     filters.push((e) => {
       const tags = ero_tagged_hooks[e] || default_tags;
-      return tags.attacker_tags.findIndex((t) => black_list[t]) === -1;
+      return tags.attacker_tags.some((t) => black_list[t]);
     });
   }
   const random_list = sys_filter_ero_act(master, 0, [

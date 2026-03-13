@@ -37,7 +37,7 @@ module.exports = async () => {
       await kitaru.say([callname, '！这幅怎么样？']);
       await era.printAndWait([
         '这样说着，',
-        kitaru.get_teen_sex_title(),
+        kitaru.teen_sex_title,
         '冲 ',
         me.get_colored_name(),
         ' 举起了那幅蕴含着神意般的线条艺术。',

@@ -148,7 +148,7 @@ function tachyon_default_talk(buffer, tachyon, me, callname, edu_marks) {
       if (era.get('cflag:0:种族')) {
         await tachyon.say_and_wait([
           '明明已经成为',
-          me.get_uma_sex_title(),
+          me.uma_sex_title,
           '了还不懂吗？',
           callname,
           ' 真是迟钝呢',
@@ -158,13 +158,13 @@ function tachyon_default_talk(buffer, tachyon, me, callname, edu_marks) {
       } else {
         await tachyon.say_and_wait([
           '不是……这种感觉很难说明，等你变成',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '大概就能懂了吧',
         ]);
         era.println();
         await me.say_and_wait([
           '不要说的好像我总有一天会变成',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '一样啊！？',
         ]);
       }
@@ -331,7 +331,7 @@ function tachyon_default_talk(buffer, tachyon, me, callname, edu_marks) {
             '然而，觉悟并没有帮助 ',
             me.get_colored_name(),
             ' 爆发小宇宙，人类再怎么样也是胜不过',
-            tachyon.get_uma_sex_title(),
+            tachyon.uma_sex_title,
             '的，五秒后 ',
             me.get_colored_name(),
             ' 便被按住了脸，强迫张开口被灌下液体',

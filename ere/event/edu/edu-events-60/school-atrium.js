@@ -241,7 +241,7 @@ module.exports = async (nature, me, hook, event_object) => {
     await era.printAndWait(
       `──结果在枯树洞前发现了${
         nature.sex
-      }。赛${nature.get_uma_sex_title()}们都知道，想大叫发泄内心的情绪时都会来这里。`,
+      }。赛${nature.uma_sex_title}们都知道，想大叫发泄内心的情绪时都会来这里。`,
     );
     await nature.say_and_wait('……应该没有人在吧。');
     await nature.say_and_wait('好……！');

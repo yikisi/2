@@ -24,7 +24,7 @@ module.exports = class extends EroNormalFucking {
         ]);
         await attacker.print_and_wait([
           '此时此刻，',
-          defender.get_teen_sex_title(),
+          defender.teen_sex_title,
           '身体上的每一部分都像是为交配而生的，无论是丰盈的酥胸还是垂涎的小穴。',
         ]);
         await attacker.print_and_wait([
@@ -69,7 +69,7 @@ module.exports = class extends EroNormalFucking {
       ]);
       await defender.say_and_wait(['嗯、嗯、嗯……']);
       await attacker.print_and_wait([
-        defender.get_teen_sex_title(),
+        defender.teen_sex_title,
         '按捺不住的娇声随着每一次抽插此起彼伏，两只丰腴的奶子也跟着恣意摇摆。',
       ]);
       await attacker.print_and_wait([
@@ -96,7 +96,7 @@ module.exports = class extends EroNormalFucking {
         '交合处被相融的体液沾污得一塌糊涂，',
         sys_get_colored_callname(attacker.id, defender.id),
         ' 也不再遮掩脸部，沉浸在性快感中的',
-        defender.get_teen_sex_title(),
+        defender.teen_sex_title,
         '面容一览无遗。',
       ]);
     }
@@ -358,7 +358,7 @@ module.exports = class extends EroNormalFucking {
         '双手紧紧扣住 ',
         sys_get_colored_callname(attacker.id, defender.id),
         ' 的腰部，从背后紧贴着进入了',
-        defender.get_teen_sex_title(),
+        defender.teen_sex_title,
         '的秘穴。',
       ]);
       await defender.say_and_wait([

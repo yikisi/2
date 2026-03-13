@@ -49,13 +49,13 @@ module.exports = async (kitaru, me, callname, hook, extra_flag) => {
       '坐在保健室的洁白床铺边缘，自知给 ',
       me.get_colored_name(),
       ' 添乱了的',
-      kitaru.get_teen_sex_title(),
+      kitaru.teen_sex_title,
       '有些局促不安的盯着地板，在令人难以忍受的寂静中等着校医的出现。',
     ]);
     await kitaru.say_and_wait(['那个，', callname, '……']);
     await era.printAndWait([
       '校医多半是有什么棘手的病人要照顾，毕竟特雷森每天训练失败的赛',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '可是数不胜数，那么初步的足部检查，也就是触诊，只能由 ',
       me.get_colored_name(),
       ' 做了。',
@@ -202,7 +202,7 @@ module.exports = async (kitaru, me, callname, hook, extra_flag) => {
           await kitaru.say_and_wait([callname, '……唔❤️！？']);
           await era.printAndWait([
             '在面前',
-            kitaru.get_uma_sex_title(),
+            kitaru.uma_sex_title,
             '的惊呼声中握住了',
             kitaru.sex,
             '左脚的脚踝，然后高高举起，在 ',
@@ -217,7 +217,7 @@ module.exports = async (kitaru, me, callname, hook, extra_flag) => {
           await kitaru.say_and_wait('……用脚做吗？');
           await era.printAndWait([
             '大概是察觉到了你的意思，病床上的栗毛',
-            kitaru.get_uma_sex_title(),
+            kitaru.uma_sex_title,
             '抬起头询问着 ',
             me.get_colored_name(),
             ' 的意思。',
@@ -289,7 +289,7 @@ module.exports = async (kitaru, me, callname, hook, extra_flag) => {
             ' 握住双足的 ',
             kitaru.get_colored_name(),
             ' 像是落入了猎人陷阱中的栗毛狐狸，上半身陷在保健室的床垫里，凭着',
-            kitaru.get_uma_sex_title(),
+            kitaru.uma_sex_title,
             '的柔韧性顺与床铺交织成更高的仰角。',
           ]);
           await kitaru.say_and_wait('命定之人❤️这么激烈，脚，好烫～！');
@@ -395,7 +395,7 @@ module.exports = async (kitaru, me, callname, hook, extra_flag) => {
         '说话的同时一边伸手顺着福来那乱糟糟的头发，在 ',
         me.get_colored_name(),
         ' 略微有些粗暴的动作下，',
-        kitaru.get_teen_sex_title(),
+        kitaru.teen_sex_title,
         '总算是停止了进一步的胡思乱想。',
       ]);
       await kitaru.say_and_wait(['欸！说的也是呢，唔，', callname, '！']);

@@ -118,12 +118,12 @@ module.exports = (handlers) => {
     } else {
       await maya.say_and_wait([
         '当然了！人家才不是光长得可爱的',
-        maya.get_phy_sex_title(),
+        maya.phy_sex_title,
         '♪',
       ]);
       await maya.say_and_wait([
         '我会在比赛中让你见识到，成熟的',
-        maya.get_phy_sex_title(),
+        maya.phy_sex_title,
         '是有各种面貌的！',
       ]);
       await maya.say_and_wait('所、以、说☆不管是比赛还是直播，都要帮我加油哦♪');

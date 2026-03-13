@@ -740,7 +740,7 @@ module.exports = class extends CustomizedDaily {
       );
       await flash.say_and_wait('那么，请容我问出最后一个问题。');
       await era.printAndWait(
-        `${flash.get_teen_sex_title()}抹去眼中的泪花，悲伤逐渐转变为一种清澈的质问。`,
+        `${flash.teen_sex_title}抹去眼中的泪花，悲伤逐渐转变为一种清澈的质问。`,
       );
       await flash.say_and_wait(
         '抛妻弃子，背信弃义。对你而言，所谓的誓言，都是些一文不值的事物吗？',

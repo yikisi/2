@@ -40,14 +40,14 @@ module.exports = (handlers) => {
       const t_call_c = sys_get_colored_callname(32, 25);
       await print_event_name('月光', tachyon);
       await say_by_passer_by_and_wait(
-        tachyon.get_uma_sex_title() + 'A',
+        tachyon.uma_sex_title + 'A',
         '速子前辈最近……似乎深夜总在沙滩上跑步的样子',
       );
       await say_by_passer_by_and_wait(
-        tachyon.get_uma_sex_title() + 'B',
+        tachyon.uma_sex_title + 'B',
         '虽然不算什么大事，但总觉得速子前辈跑起来好像……很吃力的样子',
       );
-      await say_by_passer_by_and_wait(tachyon.get_uma_sex_title() + 'C', [
+      await say_by_passer_by_and_wait(tachyon.uma_sex_title + 'C', [
         '毕竟也受过速子前辈不少帮助……速子前辈',
         tachyon.sex,
         '真的没事吧？',
@@ -55,16 +55,16 @@ module.exports = (handlers) => {
       era.println();
       await era.printAndWait([
         '由于许多',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         '的关心，',
         me.get_colored_name(),
         ' 在深夜离开了训练员宿舍，走向合宿的沙滩',
       ]);
       await era.printAndWait([
         '居然需要靠着其他',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         '的提醒才能发现自家',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         '的不对劲，真是……训练员失格',
       ]);
       await era.printAndWait([
@@ -250,7 +250,7 @@ module.exports = (handlers) => {
         ' 的药物帮助下，如今的 ',
         me.get_colored_name(),
         ' 在短暂爆发力上可以说已经不输给公开赛等级的',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         '了，',
       ]);
       await era.printAndWait([
@@ -415,7 +415,7 @@ module.exports = (handlers) => {
             '快啊，快啊，仔细想想这个时候训练员培训学校是怎么教的',
           );
           await me.say_and_wait(
-            ['寻找障碍物来干扰', tachyon.get_uma_sex_title(), '的动作！'],
+            ['寻找障碍物来干扰', tachyon.uma_sex_title, '的动作！'],
             true,
           );
           await era.printAndWait(
@@ -693,7 +693,7 @@ module.exports = (handlers) => {
     ]);
     await tachyon.say_and_wait([
       '中距离最强的大阪杯、全现役',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '中上半年及下半年最强的宝冢纪念和有马纪念……',
     ]);
     await tachyon.say_and_wait('要超越的目标，要抵达的巅峰不是比比皆是吗？');

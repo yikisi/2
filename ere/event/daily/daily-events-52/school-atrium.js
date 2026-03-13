@@ -65,7 +65,7 @@ module.exports = async (hook) => {
       ]);
       await era.printAndWait([
         '在其他人看来或许是意料之外，但对于特雷森的',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '们来说，又是情理之中的选择。',
       ]);
 
@@ -79,7 +79,7 @@ module.exports = async (hook) => {
       ]);
       await era.printAndWait([
         '表情片刻停滞后，小小的',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '将眼神又投向了谁也不在的中庭。',
       ]);
       await era.printAndWait([
@@ -224,7 +224,7 @@ module.exports = async (hook) => {
       );
       await in_urara.say_as_unknown_and_wait([
         '也愿未来的你，就算改变，也仍能守住这份与',
-        urara.get_teen_sex_title(),
+        urara.teen_sex_title,
         '相约的诺言……',
       ]);
       hook.override = true;
@@ -306,7 +306,7 @@ module.exports = async (hook) => {
           await era.printAndWait([
             urara.get_colored_name(),
             ' 并不疑惑地向树洞抛出了这样的问题，或许这位小',
-            urara.get_uma_sex_title(),
+            urara.uma_sex_title,
             '早就有了自己的答案。',
           ]);
           break;
@@ -346,7 +346,7 @@ module.exports = async (hook) => {
           '如 ',
           urara.get_colored_name(),
           ' 所言，聚集在树下的晒太阳的猫猫中，确实没出现那位熟悉的卢毛',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '。',
         ]);
         break;
@@ -357,7 +357,7 @@ module.exports = async (hook) => {
         ]);
         await era.printAndWait([
           '现在小',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '所指的中庭一角空荡荡的，看来福来',
           urara.sex,
           '最近又被赶走了吧。',
@@ -391,11 +391,11 @@ module.exports = async (hook) => {
           '在满载红晕的笑容中，',
           urara.get_colored_name(),
           ' 用',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '的力气将 ',
           me.get_colored_name(),
           ' 拉入了充斥着',
-          urara.get_teen_sex_title(),
+          urara.teen_sex_title,
           '体香的怀中……',
         ]);
         break;

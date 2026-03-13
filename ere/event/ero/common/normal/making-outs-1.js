@@ -275,12 +275,12 @@ module.exports = class extends EroMakingOuts {
     }
     if (hook.arg) {
       await attacker.print_and_wait(
-        `${defender.get_uma_sex_title()}的耳朵，果然是会让人憧憬的东西啊，不论是将它视为作为肢体的延伸，作为表情的延伸，亦或是作为……敏感带的延伸……`,
+        `${defender.uma_sex_title}的耳朵，果然是会让人憧憬的东西啊，不论是将它视为作为肢体的延伸，作为表情的延伸，亦或是作为……敏感带的延伸……`,
       );
       await attacker.print_and_wait([
         `只是用指尖蜻蜓点水似的轻柔触碰，`,
         attacker.get_colored_name(),
-        ` 还没能细细感受那份按摩着指尖的细腻触感，那对尖尖长长的马耳朵便害羞地从 ${attacker.get_phy_sex_title()} 的指间溜走了。`,
+        ` 还没能细细感受那份按摩着指尖的细腻触感，那对尖尖长长的马耳朵便害羞地从 ${attacker.phy_sex_title} 的指间溜走了。`,
       ]);
       await attacker.say_and_wait('…………');
       await defender.say_and_wait('请……再来摸一次吧，这次不会逃走了。');
@@ -299,7 +299,7 @@ module.exports = class extends EroMakingOuts {
       await attacker.print_and_wait([
         '仿佛由看不清的丝线连在一处，',
         sys_get_colored_callname(attacker.id, defender.id),
-        ` 的双腿随着 ${attacker.get_phy_sex_title()} 被马耳朵黏住的手羞人地一颤一颤。`,
+        ` 的双腿随着 ${attacker.phy_sex_title} 被马耳朵黏住的手羞人地一颤一颤。`,
       ]);
     }
   }
@@ -318,10 +318,10 @@ module.exports = class extends EroMakingOuts {
     await attacker.print_and_wait('……这不是作为恋人应当做的事……');
     await attacker.print_and_wait('……不过');
     await attacker.print_and_wait(
-      `不满足于单纯的温柔爱抚，被从下身涌起的支配欲所支配的${attacker.get_phy_sex_title()}，渐渐懂得了如何安全地增大指间的力道……`,
+      `不满足于单纯的温柔爱抚，被从下身涌起的支配欲所支配的${attacker.phy_sex_title}，渐渐懂得了如何安全地增大指间的力道……`,
     );
     await attacker.print_and_wait(
-      `……这样便能叫身下的马耳朵${defender.get_phy_sex_title()}明白，自体内逐渐苏醒的，对着人类摇晃尾巴的血脉记忆究竟从何时何处而来……`,
+      `……这样便能叫身下的马耳朵${defender.phy_sex_title}明白，自体内逐渐苏醒的，对着人类摇晃尾巴的血脉记忆究竟从何时何处而来……`,
     );
   }
 
@@ -358,7 +358,7 @@ module.exports = class extends EroMakingOuts {
       }
       await attacker.print_and_wait([
         era.get(`cflag:${defender.id}:成长阶段`) < 5
-          ? defender.get_teen_sex_title()
+          ? defender.teen_sex_title
           : '诱人',
         '的柔软……此刻落进了自己的掌心。',
       ]);
@@ -497,7 +497,7 @@ module.exports = class extends EroMakingOuts {
       return;
     }
     await attacker.print_and_wait(
-      `小心翼翼地探入两根手指，将敞露在自己面前，${defender.get_teen_sex_title()}合成一条细缝的窄窄肉穴翻弄开来。`,
+      `小心翼翼地探入两根手指，将敞露在自己面前，${defender.teen_sex_title}合成一条细缝的窄窄肉穴翻弄开来。`,
     );
     await attacker.print_and_wait('很美……');
     await defender.say_and_wait('别这么直勾勾地看着呀……', true);
@@ -589,7 +589,7 @@ module.exports = class extends EroMakingOuts {
    */
   async prepare_anal(attacker, defender, hook) {
     await attacker.print_and_wait(
-      `用手掌感受着自面前翕动的穴中吐出的撩人热气，四根手指如桩般将极力想让叫人害羞的肉穴合拢，以逃开 ${attacker.get_phy_sex_title()} 视线的臀肉固定住。`,
+      `用手掌感受着自面前翕动的穴中吐出的撩人热气，四根手指如桩般将极力想让叫人害羞的肉穴合拢，以逃开 ${attacker.phy_sex_title} 视线的臀肉固定住。`,
     );
     await attacker.print_and_wait(
       '唯独格外粗长的中指有另外的事做，如蝎尾般微曲着一点点凑近后穴，然后便是缓慢而坚决的插入。',
@@ -598,7 +598,7 @@ module.exports = class extends EroMakingOuts {
     await attacker.print_and_wait([
       '自发地蠕动起的穴肉如有生命般喘着气推阻着 ',
       attacker.get_colored_name(),
-      ` 的手指，明明并不如隔壁的小穴般是为了性爱而存在的淫肉，但如今面对着${attacker.get_phy_sex_title()}的手指却积极到叫人意外。`,
+      ` 的手指，明明并不如隔壁的小穴般是为了性爱而存在的淫肉，但如今面对着${attacker.phy_sex_title}的手指却积极到叫人意外。`,
     ]);
     await attacker.print_and_wait('在害怕吗……还是在喜悦着呢……？');
     await attacker.print_and_wait([
@@ -663,7 +663,7 @@ module.exports = class extends EroMakingOuts {
         ' 口中传出的荡漾的呻吟声是有毒的。',
       ]);
       await attacker.print_and_wait(
-        `在了解了，可以通过拽弄尾巴让面前的${defender.get_uma_sex_title()}变得温顺而听话后，从小腹内顶起的热气变得更加难以阻挡了。`,
+        `在了解了，可以通过拽弄尾巴让面前的${defender.uma_sex_title}变得温顺而听话后，从小腹内顶起的热气变得更加难以阻挡了。`,
       );
     } else {
       await pet_tail(attacker, defender);

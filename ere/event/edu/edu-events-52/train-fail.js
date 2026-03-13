@@ -128,7 +128,7 @@ module.exports = async (urara, me, callname, hook, extra_flag) => {
           await urara.say_and_wait(['……好、好痛……好痛啊……', callname, '……']);
           await era.printAndWait([
             '说什么来着？拉起开始抹眼泪的小',
-            urara.get_uma_sex_title(),
+            urara.uma_sex_title,
             '，',
             me.get_colored_name(),
             ' 默默地将',
@@ -187,7 +187,7 @@ module.exports = async (urara, me, callname, hook, extra_flag) => {
       );
       await era.printAndWait([
         '只是，身体一向很结实的小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '似乎对 ',
         me.get_colored_name(),
         ' 的担忧还是有些不以为然。',
@@ -207,7 +207,7 @@ module.exports = async (urara, me, callname, hook, extra_flag) => {
         '在 ',
         me.get_colored_name(),
         ' 试探地按了下腿部疑似肿胀的地方后，突然吃痛的小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '眼泪汪汪的停下动作。',
       ]);
       await urara.say_and_wait(
@@ -227,7 +227,7 @@ module.exports = async (urara, me, callname, hook, extra_flag) => {
         ' 的乱踢而撞到的脚趾，',
         me.get_colored_name(),
         ' 伸出手指弹了下小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '的额头。',
       ]);
 
@@ -242,7 +242,7 @@ module.exports = async (urara, me, callname, hook, extra_flag) => {
           '在两次疼痛外加 ',
           me.get_colored_name(),
           ' 的警告后，小',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '头顶那对不安分的耳朵终于丧气地垂了下来。',
         ]);
         await urara.say_and_wait(
@@ -256,7 +256,7 @@ module.exports = async (urara, me, callname, hook, extra_flag) => {
         await era.printAndWait([
           me.get_colored_name(),
           ' 立刻顺着小',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '的话抬起',
           urara.sex,
           '的脚仔细查看，结果发现刚刚被撞到的地方也有点肿……',
@@ -276,7 +276,7 @@ module.exports = async (urara, me, callname, hook, extra_flag) => {
           '但就算 ',
           me.get_colored_name(),
           ' 这样说，小',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '本就不安分的尾巴却摇摆地更加激烈了。',
         ]);
         await urara.say_and_wait(

@@ -132,12 +132,12 @@ module.exports = (handlers) => {
 
     await era.printAndWait([
       `忽然，正专心致志为`,
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       `主人服务的 ${me.name} 全身颤抖了起来。`,
     ]);
     await era.printAndWait([
       `在 ${me.name} 身下，那哪怕勃起到极限也没有`,
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       `主人一边睪丸大的「阴蒂」，喷出了今天第四发，稀薄如水的液体。`,
     ]);
     era.add('exp:0:阴茎高潮次数', 3);
@@ -153,7 +153,7 @@ module.exports = (handlers) => {
 
       await era.printAndWait([
         `${me.name} 连忙回过神来继续为自己的负责`,
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         `兼主人服务。`,
       ]);
       await era.printAndWait(
@@ -249,12 +249,12 @@ module.exports = (handlers) => {
       );
       await era.printAndWait([
         `${me.name} 慌忙将口中已经填满的腥臭浆液吞下，但 ${me.name} 的努力，终究无法将`,
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         `大人的恩赐全数含入。`,
       ]);
       await era.printAndWait([
         `最终……${me.name} 只能无助的用手接住了`,
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         `大人宝贵的子种汁。`,
       ]);
       era.println();
@@ -280,7 +280,7 @@ module.exports = (handlers) => {
       );
       await era.printAndWait([
         `${me.name} 抬起头，看见的是自己的负责`,
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         '兼主人的腿。',
       ]);
       await era.printAndWait(
@@ -507,7 +507,7 @@ module.exports = (handlers) => {
 
     await tachyon.say_and_wait([
       '啧啧……真是，毫不留情啊，我是不是小瞧一般',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '的性欲了。',
     ]);
     era.println();
@@ -556,7 +556,7 @@ module.exports = (handlers) => {
 
     await era.printAndWait([
       `速子高兴的看着自己及时在喷泉爆发瞬间掏出的烧杯，里面全是刚刚收集的`,
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       `体液，然而这样一个烧杯，装的量也不足 ${me.name} 穴内排出的三分之一，更多喷洒在地上，成为了扫除人员的麻烦。`,
     ]);
     await era.printAndWait('不过，谁造成的谁清理，这也是理所当然的吧。');
@@ -650,7 +650,7 @@ module.exports = (handlers) => {
       );
       await era.printAndWait([
         `哪怕在做爱上也要当第一的坚持，让${tachyon.sex}成为了这三天中骑在 ${me.name} 身上最久的一名`,
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
       ]);
       era.println();
     }
@@ -771,12 +771,12 @@ module.exports = (handlers) => {
     era.println();
     await era.printAndWait([
       `速子拂过 ${me.name} 身上写着的『母狗』、『便器10元一次』、『`,
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       `大人的精便器』、『性爱德比18着』。`,
     ]);
     await era.printAndWait([
       '每一行都是看见自己憧憬的训练员变成淫荡的母马孕袋后由爱生恨，由恨生欲的',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '们所留。',
     ]);
     era.println();
@@ -950,7 +950,7 @@ module.exports = (handlers) => {
           `马娘灵敏的耳朵让 ${me.name} 听见了，有人在走廊上朝着这边走来的声音。`,
         );
         await era.printAndWait(
-          `那么，又是哪位${tachyon.get_uma_sex_title()}大人需要自己的服侍了呢。`,
+          `那么，又是哪位${tachyon.uma_sex_title}大人需要自己的服侍了呢。`,
         );
         await era.printAndWait(
           `不知不觉间，${me.name} 主动撅起了屁股，等待下名贵客的使用。`,

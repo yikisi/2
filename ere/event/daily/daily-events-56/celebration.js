@@ -28,7 +28,7 @@ module.exports = async (handlers) => {
       ' 的轻块步伐发出清脆的声音。',
     ]);
     await era.printAndWait([
-      kitaru.get_teen_sex_title(),
+      kitaru.teen_sex_title,
       '带着妩媚的微笑看着 ',
       me.get_colored_name(),
       '，侧着身子，本就优美的臀股曲线更加的突出。',
@@ -43,7 +43,7 @@ module.exports = async (handlers) => {
         '伸手搭在了 ',
         kitaru.get_colored_name(),
         ' 的腰上，',
-        kitaru.get_teen_sex_title(),
+        kitaru.teen_sex_title,
         '的身体些微颤抖。',
       ]);
       await era.printAndWait([
@@ -56,7 +56,7 @@ module.exports = async (handlers) => {
         '而后，抬手在',
         kitaru.sex,
         '结实又圆润的臀部上轻拍了一下，',
-        kitaru.get_teen_sex_title(),
+        kitaru.teen_sex_title,
         '配合的发出了可爱的叫声。',
       ]);
       await kitaru.say_and_wait('咿！');
@@ -102,7 +102,7 @@ module.exports = async (handlers) => {
         '得到 ',
         me.get_colored_name(),
         ' 夸奖之后的',
-        kitaru.get_teen_sex_title(),
+        kitaru.teen_sex_title,
         '，连着转了好几个圈，惹得不少人向 ',
         me.get_couple_title(),
         ' 投来目光。',
@@ -125,7 +125,7 @@ module.exports = async (handlers) => {
     );
     await era.printAndWait([
       '在巨大蝙蝠挂饰和南瓜头的阴影下，各位赛',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '们也像是粉丝感谢祭那样摆起了摊。',
     ]);
     await kitaru.say_and_wait(['啊！是 ', callname, '！']);

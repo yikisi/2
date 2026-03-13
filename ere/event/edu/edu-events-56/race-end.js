@@ -66,11 +66,11 @@ module.exports = async (kitaru, me, callname, extra_flag) => {
         ' 的胸膛上撒娇般的蹭动着',
       ]);
       await era.printAndWait([
-        kitaru.get_uma_sex_title(),
+        kitaru.uma_sex_title,
         'A：「那个他们两个人在干什么？」',
       ]);
       await era.printAndWait([
-        kitaru.get_uma_sex_title(),
+        kitaru.uma_sex_title,
         'B：「胜者的庆祝仪式吧？」',
       ]);
       await era.printAndWait([

@@ -60,7 +60,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '但是说到底，即使并非不允许，用这样几乎是在否认其他',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '的努力的方式毫无疑问是错误的。',
     ]);
 
@@ -150,14 +150,14 @@ module.exports = (handlers) => {
     );
     await urara.say_and_wait('啊，还有你的腿……受伤了吗？到底是什么时候……');
     await era.printAndWait([
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       'A「……没关系的，其实也没什么，不过乌拉拉这又是什么……是为了参加『',
       race_infos[race_enum.arim_kin].get_colored_name(),
       '』吗？」',
     ]);
     await era.printAndWait([
       '生冷的打断乌拉拉的热情，神情复杂的好友将宣传单摆在了小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '的面前。',
     ]);
     await urara.say_and_wait([
@@ -166,7 +166,7 @@ module.exports = (handlers) => {
       ' 有关，所以乌拉拉来帮忙了！',
     ]);
     await era.printAndWait([
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       'A「',
       urara.get_colored_actual_name(),
       '，你果然不知道自己在做什么？开什么玩笑啊……」',
@@ -177,14 +177,14 @@ module.exports = (handlers) => {
     await urara.say_and_wait('诶？怎么了？你真的没关系吗？你的脸色好差……');
     await era.printAndWait([
       '从失望到绝望再到崩溃只在几秒之间，任由负面情绪爆发的',
-      urara.get_teen_sex_title(),
+      urara.teen_sex_title,
       '一把推开了想要靠近的好友。',
     ]);
     await era.printAndWait(
       '随后而至的，便是一声响亮的耳光，以及失控到仿佛是歇斯底里的斥责声。',
     );
     await era.printAndWait([
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       'A「别开玩笑了！拜托乌拉拉你别再这么幼稚了！仔细看看这张纸！你知道你在做什么吗？！」',
     ]);
     await era.printAndWait([
@@ -194,7 +194,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '不可置信地捂住红肿灼热的脸颊，茫然无助的泪水也委屈的蓄满了小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '的眼眶。',
     ]);
     await era.printAndWait([
@@ -203,30 +203,30 @@ module.exports = (handlers) => {
       '一点辩解的余地。',
     ]);
     await era.printAndWait([
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       'A「大家都正在为了想参加的比赛……为了想获胜的比赛而努力！甚至赌上了一切！」',
     ]);
     await era.printAndWait([
       '在哭泣中呐喊着，',
-      urara.get_teen_sex_title(),
+      urara.teen_sex_title,
       '因失意与不甘而积压在心底的声音倾泻而出。',
     ]);
     await era.printAndWait([
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       'A「但现在，乌拉拉你居然……居然真的想要利用别人轻易地实现梦想……」',
     ]);
     await era.printAndWait([
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       'A「你当然可以说不知道，但这样的话……燃烧自己的大家又都算是什么啊！」',
     ]);
     await era.printAndWait([
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       'A「反正乌拉拉为了自己能够连骗子都当……既然这样那就干脆不要再参加比赛好了！」',
     ]);
     await urara.say_and_wait('……我不是……乌拉拉不是的……对不起……但是……');
     await era.printAndWait([
       '压抑的呜咽在好友的声讨中逐渐转为低声的啜泣，小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '本就不设防的内心再也抑制不住眼角的泪水。',
     ]);
     await era.printAndWait([
@@ -236,7 +236,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '而在令人绝望的僵持中，受伤的',
-      urara.get_teen_sex_title(),
+      urara.teen_sex_title,
       '还是率先一把抹掉眼泪，沉默地向 ',
       urara.get_colored_name(),
       ' 踏出一步……',
@@ -245,18 +245,18 @@ module.exports = (handlers) => {
       '终于冲出了因事出突然而无人敢上前阻拦的旁观者们，',
       me.get_colored_name(),
       ' 抓住了那只伸向小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '的手腕。',
     ]);
     await era.printAndWait([
       '被 ',
       me.get_colored_name(),
       ' 的突然行动所吓到，逐渐恢复理智的',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '内疚地将手抽回，拖动着笨拙的伤腿挪回了原来的位置。',
     ]);
     await era.printAndWait([
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       'A「对不起，你是乌拉拉的训练员吗？我只是想拉',
       urara.sex,
       '起来……」',
@@ -296,27 +296,27 @@ module.exports = (handlers) => {
     );
     await era.printAndWait([
       '面对因自己的冲动而破碎也已然无法挽回的友谊，失落的',
-      urara.get_teen_sex_title(),
+      urara.teen_sex_title,
       '终于沙哑地说出了本来的目的。',
     ]);
     await era.printAndWait([
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       'A「……对不起，我本来只是想在离开特雷森前来看看乌拉拉的，但结果却变成这样……」',
     ]);
     await era.printAndWait([
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       'A「我本来是想说些开心的事、好好道别的，真的很对不起……」',
     ]);
     await era.printAndWait([
       '说完这些，',
-      urara.get_teen_sex_title(),
+      urara.teen_sex_title,
       '便拖着沉重的身体转身离去，一瘸一拐的背影慢慢消失了在逐渐被疏散的人群当中。',
     ]);
     await era.printAndWait([
       '而无力地借着 ',
       me.get_colored_name(),
       ' 的臂膀靠在身边，小小的',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '此刻既无法去追赶背影，也想不出该挽留。',
     ]);
     await urara.say_and_wait([
@@ -397,7 +397,7 @@ module.exports = (handlers) => {
       ' 与在场为 ',
       urara.get_colored_name(),
       ' 而来的每个人，都在小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '破碎的声音中几近窒息。',
     ]);
     await era.printAndWait([
@@ -455,7 +455,7 @@ module.exports = (handlers) => {
       '只是就算尽全力去安抚 ',
       urara.get_colored_name(),
       '，小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '那心碎的表情还是深深地印在了每个人的心里。',
     ]);
     await era.printAndWait([
@@ -478,7 +478,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '在找到填补小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '心伤的办法之前，恐怕很多人都会难以入眠吧……',
     ]);
     era.drawLine();
@@ -552,7 +552,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '结果还没将身下的长椅焐热，小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '就像是被自己手中的那块点心反咬一口般弹了起来。',
     ]);
     await era.printAndWait([

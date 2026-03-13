@@ -83,7 +83,7 @@ module.exports = class extends EroNormalMakingOuts {
         '不过并不是现在这样把 ',
         sys_get_colored_callname(attacker.id, defender.id),
         ' 那对，在',
-        defender.get_uma_sex_title(),
+        defender.uma_sex_title,
         '中算的上长的马耳朵，以带着性的意味，肆意的揉捏，把玩。',
       ]);
       await defender.say_and_wait(['唔呀❤️……']);
@@ -423,7 +423,7 @@ module.exports = class extends EroNormalMakingOuts {
         '已经积累起了些能在喉咙咕噜咕噜侍奉着肉棒的同时摇摆尾巴的余裕，',
         defender.get_colored_name(),
         ' 在这方面出乎',
-        attacker.get_phy_sex_title(),
+        attacker.phy_sex_title,
         '预料的有天赋。',
       ]);
       await defender.print_and_wait([
@@ -459,9 +459,9 @@ module.exports = class extends EroNormalMakingOuts {
     } else {
       await defender.print_and_wait([
         '无言地催促着，',
-        attacker.get_phy_sex_title(),
+        attacker.phy_sex_title,
         '再一次强硬地用手将面前的',
-        defender.get_teen_sex_title(),
+        defender.teen_sex_title,
         '固定在了自己的股间，直到自己满足之前。',
       ]);
     }

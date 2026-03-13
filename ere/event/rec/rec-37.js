@@ -43,7 +43,7 @@ async function why_choose_me(me, flash, me_is_new) {
         me_is_new ? `虽然荣进闪耀的邀请让 ${me.name} 有些措手不及，但` : ''
       }正好 ${
         me.name
-      } 今天来观看选拔赛的目的就是为了找到一位新的担当赛${flash.get_uma_sex_title()}，于是面对荣进闪耀的邀请，${
+      } 今天来观看选拔赛的目的就是为了找到一位新的担当赛${flash.uma_sex_title}，于是面对荣进闪耀的邀请，${
         me.name
       } 果断地选择了答应。`,
     );
@@ -71,7 +71,7 @@ async function why_choose_me(me, flash, me_is_new) {
   await flash.say_and_wait('换句话说，我是一名留学生。');
   await era.printAndWait('荣进闪耀伸出一根手指。');
   await flash.say_and_wait(
-    `至于来到日本的目的，因为我想要成为一位可以在赛场上所向披靡的赛${flash.get_uma_sex_title()}，进而……`,
+    `至于来到日本的目的，因为我想要成为一位可以在赛场上所向披靡的赛${flash.uma_sex_title}，进而……`,
   );
   era.printButton('「进而？」', 1);
   await era.input();
@@ -130,16 +130,14 @@ module.exports = class extends CustomizedRecruit {
         await era.printAndWait(
           `${
             me.name
-          } 匆匆地跑到了操场，此时的这里已经被其他训练员和赛${flash.get_uma_sex_title()}们堵的水泄不通。`,
+          } 匆匆地跑到了操场，此时的这里已经被其他训练员和赛${flash.uma_sex_title}们堵的水泄不通。`,
         );
         era.printButton('「呼……赶上了？」', 1);
         await era.input();
         await era.printAndWait(
           `不过好在，虽然因为迟到导致错失了先机，但选拔赛还没有正式开始，因此 ${
             me.name
-          } 还有机会去物色那些 ${
-            me.name
-          } 感兴趣的赛${flash.get_uma_sex_title()}。`,
+          } 还有机会去物色那些 ${me.name} 感兴趣的赛${flash.uma_sex_title}。`,
         );
         await era.printAndWait(
           `于是 ${me.name} 开始在拥挤的人流中左顾右盼，看看能否得到一些发现。`,
@@ -192,7 +190,7 @@ module.exports = class extends CustomizedRecruit {
         await era.printAndWait(
           `${
             me.name
-          } 转身，看到一位身穿学校运动服的赛${flash.get_uma_sex_title()}，正面露疑惑地看着 ${
+          } 转身，看到一位身穿学校运动服的赛${flash.uma_sex_title}，正面露疑惑地看着 ${
             me.name
           }。`,
         );
@@ -206,13 +204,13 @@ module.exports = class extends CustomizedRecruit {
           '身材方面，即便是宽大的运动服也无法掩盖的饱满胸脯因为自然的呼吸而上下起伏，和盈盈一握的纤细腰间一起组成一道让人浮想联翩的美妙曲线。',
         );
         await era.printAndWait(
-          `至于作为赛${flash.get_uma_sex_title()}重要的双腿部分，则同样继承了上半身给人带来的这份美好，并没有因为高强度的运动而损失半点温润细长。`,
+          `至于作为赛${flash.uma_sex_title}重要的双腿部分，则同样继承了上半身给人带来的这份美好，并没有因为高强度的运动而损失半点温润细长。`,
         );
         await era.printAndWait('真是个毫无疑问的美人啊。');
         await era.printAndWait(`大饱眼福的 ${me.name} 在心中默默发出感叹。`);
         await flash.say_and_wait('请问……您为什么要一直盯着我看呢？');
         await era.printAndWait(
-          `而面前的${flash.get_teen_sex_title()}也对 ${
+          `而面前的${flash.teen_sex_title}也对 ${
             me.name
           } 这半天不说话，只是自顾自地盯着${
             flash.sex
@@ -242,7 +240,7 @@ module.exports = class extends CustomizedRecruit {
           await flash.say_and_wait(
             '是的，我也没想到您居然也在这里担任训练员，看来之前没有遇到是运气原因呢。',
           );
-          await era.printAndWait(`${flash.get_teen_sex_title()}笑着摇了摇头。`);
+          await era.printAndWait(`${flash.teen_sex_title}笑着摇了摇头。`);
           await flash.say_and_wait('啊。');
           await era.printAndWait(
             `随后像是想起什么一样，${flash.sex}的脸上突然露出歉意的表情。`,
@@ -274,7 +272,7 @@ module.exports = class extends CustomizedRecruit {
         );
         await era.printAndWait(`${flash.sex}将手搭在胸口，神情变得端庄。`);
         await flash.say_and_wait(
-          `我叫荣进闪耀，如您所见，是一位赛${flash.get_uma_sex_title()}。`,
+          `我叫荣进闪耀，如您所见，是一位赛${flash.uma_sex_title}。`,
         );
         era.printButton('「所以现在在这里是因为……」', 1);
         await era.input();
@@ -290,7 +288,7 @@ module.exports = class extends CustomizedRecruit {
         await era.printAndWait(`看着神色低落的${flash.sex}，`);
         era.printButton('「立刻上前安慰。」', 1);
         era.printButton(
-          `「重要的是寻找担当赛${flash.get_uma_sex_title()}，安慰${
+          `「重要的是寻找担当赛${flash.uma_sex_title}，安慰${
             flash.sex
           }的事情之后再说。」`,
           2,
@@ -298,7 +296,7 @@ module.exports = class extends CustomizedRecruit {
         ret = await era.input();
         if (ret === 1) {
           await era.printAndWait(
-            `虽然知道现在去做这种事情，那些成绩好的赛${flash.get_uma_sex_title()}们可能就会被别的训练员抢先下手，但 ${
+            `虽然知道现在去做这种事情，那些成绩好的赛${flash.uma_sex_title}们可能就会被别的训练员抢先下手，但 ${
               me.name
             } 同样无法对悲伤的荣进闪耀坐视不管。`,
           );
@@ -384,7 +382,7 @@ module.exports = class extends CustomizedRecruit {
                 `见此，${me.name} 刚想开口询问${flash.sex}是否是身体感到不适。`,
               );
               await flash.say_and_wait(
-                `……您认为，假如我现在想要成为担当赛${flash.get_uma_sex_title()}的话，会有几位训练员同意呢？`,
+                `……您认为，假如我现在想要成为担当赛${flash.uma_sex_title}的话，会有几位训练员同意呢？`,
               );
               era.printButton('「诶？」', 1);
               await era.input();
@@ -704,7 +702,7 @@ module.exports = class extends CustomizedRecruit {
                   );
                 }
                 await flash.say_and_wait(
-                  `我希望我能够成为您的担当赛${flash.get_uma_sex_title()}。`,
+                  `我希望我能够成为您的担当赛${flash.uma_sex_title}。`,
                 );
                 era.printButton('「这是条件的交换吗？」', 1);
                 await era.input();
@@ -725,7 +723,7 @@ module.exports = class extends CustomizedRecruit {
               await era.printAndWait(
                 `${me.name} 跟${
                   flash.sex
-                }说自己在训练员这一行业已经干了很多年了，积攒不少经验，甚至在之前还培育出几位成绩不错的赛${flash.get_uma_sex_title()}。`,
+                }说自己在训练员这一行业已经干了很多年了，积攒不少经验，甚至在之前还培育出几位成绩不错的赛${flash.uma_sex_title}。`,
               );
               await flash.say_and_wait(
                 '也就是说，您是一位从业多年的资深训练员吗？',
@@ -811,12 +809,12 @@ module.exports = class extends CustomizedRecruit {
       await era.printAndWait(
         `回忆突然涌入脑海，${me.name} 记起来，这是之前 ${
           me.name
-        } 因为有事外出而在学园附近的地铁站候车时，遇到一位迷路的${flash.get_uma_sex_title()}，在帮助了${
+        } 因为有事外出而在学园附近的地铁站候车时，遇到一位迷路的${flash.uma_sex_title}，在帮助了${
           flash.sex
         }之后，得到的作为感谢的礼物。`,
       );
       await era.printAndWait(
-        `话虽如此，但那位${flash.get_uma_sex_title()}的模样已经在 ${
+        `话虽如此，但那位${flash.uma_sex_title}的模样已经在 ${
           me.name
         } 的记忆中模糊不清，${me.name} 只能依稀回想起${
           flash.sex

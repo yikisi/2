@@ -81,7 +81,9 @@ module.exports = {
       ]);
     } else {
       await era.printAndWait([
-        '看到%玩家名%的举动，',
+        '看到 ',
+        you.get_colored_name(),
+        ' 的举动，',
         chara.get_colored_name(),
         ' 与 ',
         child.get_colored_name(),
@@ -90,4 +92,101 @@ module.exports = {
     }
     await era.printAndWait('夜晚还在继续……');
   },
+  /** @param {CharaTalk} chara 想加入3P的第三者 */
+  async join_3p(chara) {
+    era.print([chara.get_colored_name(), ' 面色绯红地想要加入……接受吗？']);
+    era.printButton('「你来的正是时候」', 1);
+    era.printButton('还是别了……', 2);
+    return (await era.input()) === 1;
+  },
+  /**
+   * @param {CharaTalk} chara 想加入3P的第三者
+   * @param {CharaTalk} you 玩家
+   */
+  async join_3p_accept(chara, you) {
+    await era.printAndWait([
+      chara.get_colored_name(),
+      ' 扑入 ',
+      you.get_colored_name(),
+      ' 怀中……',
+    ]);
+  },
+  /**
+   * @param {CharaTalk} chara 想加入3P的第三者
+   * @param {CharaTalk} lover 主要床伴
+   * @param {CharaTalk} you 玩家
+   */
+  async join_3p_force(chara, lover, you) {
+    await era.printAndWait([
+      chara.get_colored_name(),
+      ' 征得 ',
+      lover.get_colored_name(),
+      ' 的同意后，华丽地无视了 ',
+      you.get_colored_name(),
+      ' 的抗议……',
+    ]);
+  },
+  /** @param {CharaTalk} chara 想加入3P的第三者 */
+  async join_3p_reject(chara) {
+    await era.printAndWait([chara.get_colored_name(), ' 掩面而去……']);
+  },
+  /**
+   * @param {CharaTalk} chara
+   * @param {string} p_desc 肉棒尺寸的形容词
+   */
+  get_penis_be_erect: (chara, p_desc) => [
+    chara.get_colored_name(),
+    ' ',
+    p_desc,
+    ' 的肉棒勃起了！',
+  ],
+  /**
+   * @param {CharaTalk} chara
+   * @param {string} b_desc 乳房尺寸的形容词
+   */
+  get_nipple_be_erect: (chara, b_desc) => [
+    '深色的小樱桃在 ',
+    chara.get_colored_name(),
+    ' 两只 ',
+    b_desc,
+    ' 的乳房顶端探出了头……',
+  ],
+  /**
+   * @param {CharaTalk} chara
+   * @param {PrintedSpan} part
+   */
+  get_be_lubricated: (chara, part) => [
+    chara.get_colored_name(),
+    ' 的 ',
+    part,
+    ' 变得湿润了！',
+  ],
+  /**
+   * @param {CharaTalk} chara
+   * @param {PrintedSpan} part
+   */
+  get_bleed: (chara, part) => [
+    chara.get_colored_name(),
+    ' 的 ',
+    part,
+    ' 还在流血！',
+  ],
+  /**
+   * @param {CharaTalk} chara
+   * @param {PrintedSpan} part
+   */
+  get_be_wounded: (chara, part) => [
+    chara.get_colored_name(),
+    ' 的 ',
+    part,
+    ' 被撑裂了！',
+  ],
+  /**
+   * @param {CharaTalk} chara
+   * @param {boolean} is_virgin 是否破处，如果是true就是失去处女，如果是false就是失去童贞
+   */
+  get_lose_virginity: (chara, is_virgin) => [
+    chara.get_colored_name(),
+    is_virgin ? ' 失去了处女！' : ' 失去了童贞！',
+  ],
 };

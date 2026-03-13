@@ -71,7 +71,7 @@ module.exports = async (hook, extra_flag) => {
       true,
     );
     await falcon.say_and_wait(
-      `闪耀的${falcon.get_uma_sex_title()}偶像——${falcon.name}！接下来会让观众席上所有人眼睛不眨的注视着飞鹰子！`,
+      `闪耀的${falcon.uma_sex_title}偶像——${falcon.name}！接下来会让观众席上所有人眼睛不眨的注视着飞鹰子！`,
     );
     await era.printAndWait(`${falcon.name}走向了赛场。`);
   } else if (extra_flag.race === race_enum.sats_sho && edu_weeks < 95) {
@@ -142,7 +142,7 @@ module.exports = async (hook, extra_flag) => {
     );
     await falcon.say_and_wait(`飞鹰子！加油！`);
     await era.printAndWait(
-      `之后，${falcon.name}作为参赛${falcon.get_uma_sex_title()}在比赛开始前还在演出而小小的成为了话题。`,
+      `之后，${falcon.name}作为参赛${falcon.uma_sex_title}在比赛开始前还在演出而小小的成为了话题。`,
     );
     await era.printAndWait(
       `不久后，手纲小姐恐怖的笑容以及下个月的工资让${callname} 保证不会再发生这种事情了。`,
@@ -221,20 +221,18 @@ module.exports = async (hook, extra_flag) => {
     await era.printAndWait(
       `在比赛前分发传单似乎已经成了${callname} 们之间的默契。`,
     );
-    await era.printAndWait(`${falcon.get_uma_sex_title()}「是，是飞鹰子吗？」`);
+    await era.printAndWait(`${falcon.uma_sex_title}「是，是飞鹰子吗？」`);
     await era.printAndWait(
-      `似乎是从地方特雷森来的${falcon.get_uma_sex_title()}注意到了${
-        falcon.name
-      }。`,
+      `似乎是从地方特雷森来的${falcon.uma_sex_title}注意到了${falcon.name}。`,
     );
     await era.printAndWait(
-      `${falcon.get_uma_sex_title()}「飞鹰子前辈！我也打算作为偶像在泥地出道！」`,
+      `${falcon.uma_sex_title}「飞鹰子前辈！我也打算作为偶像在泥地出道！」`,
     );
     await era.printAndWait(
-      `${falcon.get_uma_sex_title()}「看到了${callname} 在东京大赏奔跑的样受到了鼓舞，所以我也希望能成为带给人们希望的偶像！」`,
+      `${falcon.uma_sex_title}「看到了${callname} 在东京大赏奔跑的样受到了鼓舞，所以我也希望能成为带给人们希望的偶像！」`,
     );
     await era.printAndWait(
-      `带着崇拜的眼神看着${falcon.name}的${falcon.get_uma_sex_title()}。`,
+      `带着崇拜的眼神看着${falcon.name}的${falcon.uma_sex_title}。`,
     );
     await falcon.say_and_wait(`……飞鹰子`, true);
     await falcon.say_and_wait(
@@ -270,7 +268,7 @@ module.exports = async (hook, extra_flag) => {
     await era.printAndWait(`${me.actual_name}看了一眼时间，差不多该出发了。`);
     await me.say_and_wait(`那么，接下来就等着${callname} 的好消息了，飞鹰子！`);
     await falcon.say_and_wait(
-      `好！接下来就让后辈${falcon.get_uma_sex_title()}看看作为前辈的偶像是怎么做的！`,
+      `好！接下来就让后辈${falcon.uma_sex_title}看看作为前辈的偶像是怎么做的！`,
     );
     await era.printAndWait(`作为前辈偶像的飞鹰子走向了赛场。`);
   } else if (extra_flag.race === race_enum.jbc_cls && edu_weeks > 95) {
@@ -282,15 +280,13 @@ module.exports = async (hook, extra_flag) => {
     await era.printAndWait(`已经能与一些冷门的草地G1相比了。`);
     await era.printAndWait(`而对于飞鹰子来说。`);
     await falcon.say_and_wait(
-      `对于飞鹰子这样的普通${falcon.get_uma_sex_title()}来说，到面前为止的胜利全部都是奇迹般的出现。`,
+      `对于飞鹰子这样的普通${falcon.uma_sex_title}来说，到面前为止的胜利全部都是奇迹般的出现。`,
     );
     await falcon.say_and_wait(`即使是这样，飞鹰子依然希望能继续闪耀下去。`);
     await me.say_and_wait(
       `那么，接下来就放手去做吧。飞鹰子，按照自己的想法描绘这副画卷！`,
     );
-    await me.say_and_wait(
-      `顶级${falcon.get_uma_sex_title()}偶像是由自己定义的！`,
-    );
+    await me.say_and_wait(`顶级${falcon.uma_sex_title}偶像是由自己定义的！`);
     await era.printAndWait(
       `即使是在准备室中，外面震耳欲聋的呼喊声也隐隐约约传了进来。`,
     );

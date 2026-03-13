@@ -258,10 +258,10 @@ module.exports = class extends Edu67UntilRaceStart {
         '这个泳池的大小用来做训练或许是很足够没错……',
       );
       await gold_ship.say_and_wait(
-        `但是呢，我更相信赛${daiya.get_uma_sex_title()}的可能性！宽敞泳池的解放感能为赛${daiya.get_uma_sex_title()}带来什么样的新境界，这是我想要亲眼看见的！`,
+        `但是呢，我更相信赛${daiya.uma_sex_title}的可能性！宽敞泳池的解放感能为赛${daiya.uma_sex_title}带来什么样的新境界，这是我想要亲眼看见的！`,
       );
       await daiya.say_and_wait(
-        `哎呀！原来黄金船是这么地……为赛${daiya.get_uma_sex_title()}设想很多的人呀！`,
+        `哎呀！原来黄金船是这么地……为赛${daiya.uma_sex_title}设想很多的人呀！`,
       );
       await gold_ship.say_and_wait('是啊，所以我决定了……我要──');
       await gold_ship.say_and_wait('把这个泳池变成鄂霍次克海！');

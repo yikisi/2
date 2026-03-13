@@ -254,7 +254,7 @@ module.exports = async () => {
     await era.printAndWait([
       me.get_colored_name(),
       ' 桌下的脚尖被',
-      teio.get_uma_sex_title(),
+      teio.uma_sex_title,
       '轻踩了一下。',
     ]);
 
@@ -300,7 +300,7 @@ module.exports = async () => {
       ' 尽管做出了一些努力，但仍然未能挽救回',
       teio.sex,
       '的',
-      teio.get_uma_sex_title(),
+      teio.uma_sex_title,
       '生涯，就这样在复出后连续失利中草草退役了。',
     ]);
     await era.printAndWait('没有鲜花和掌声，用最低调的方式退出了整个系统。');
@@ -446,7 +446,7 @@ module.exports = async () => {
       ' 的生命力一同流出体外。',
       me.get_colored_name(),
       ' 呆笨地眨眨眼，将凶手——一位似乎有点印象的',
-      teio.get_uma_sex_title(),
+      teio.uma_sex_title,
       '——映入瞳中。',
     ]);
     era.println();
@@ -506,7 +506,7 @@ module.exports = async () => {
       ' 离开特雷森换了一个地方重新做起训练员的工作。然而，不知是什么原因，',
       me.get_colored_name(),
       ' 指导的',
-      teio.get_uma_sex_title(),
+      teio.uma_sex_title,
       '再也没有出过优异的成绩，',
       me.get_colored_name(),
       ' 的状态和能力也再没能回到和 ',

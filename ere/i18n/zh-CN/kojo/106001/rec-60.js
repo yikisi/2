@@ -19,14 +19,14 @@ module.exports = {
     await nature.say_as_unknown_and_wait('唔——嘛，一如既往的发挥呢。');
     await era.printAndWait([
       '声音传来之处，一位梳着蓬蓬的双马尾的红发',
-      nature.get_uma_sex_title(),
+      nature.uma_sex_title,
       '正望着揭示板上的排名，自言自语着。',
     ]);
     await nature.say_and_wait(
       '还是老样子的第三名呢，这个成绩的话，这次应该也不会有训练员愿意来指点我吧……',
     );
     await era.printAndWait([
-      nature.get_uma_sex_title(),
+      nature.uma_sex_title,
       '自嘲的话语中，似乎还带着一丝不甘和失落，听见这番话，但看完了选拔赛过程的 ',
       you.get_colored_name(),
       '，不禁上前……',

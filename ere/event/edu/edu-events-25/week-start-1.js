@@ -72,7 +72,7 @@ module.exports = (handlers) => {
       ' 做出的要求是按照',
       coffee.sex,
       '自己的节奏来跑，并想象其他',
-      coffee.get_uma_sex_title(),
+      coffee.uma_sex_title,
       '在场的情况。',
     ]);
     await era.printAndWait([
@@ -98,7 +98,7 @@ module.exports = (handlers) => {
       '仿佛是逐兔的猎犬、又像是饥渴的苍鹫，',
       me.get_colored_name(),
       ' 无法将这样狂野的步伐与那个沉默清冷的',
-      coffee.get_child_sex_title(),
+      coffee.child_sex_title,
       '联系在一起。',
     ]);
     await era.printAndWait('但……');
@@ -128,7 +128,7 @@ module.exports = (handlers) => {
       await tachyon.say_and_wait([
         t_call_c,
         ' 的目的是追上无人能看见的假想朋友。嗯，一般人确实难以理解。而我呢，追求的则是赛',
-        coffee.get_uma_sex_title(),
+        coffee.uma_sex_title,
         '的极限……更要超越极限，不止步于单纯的胜利。',
       ]);
       await tachyon.say_and_wait(
@@ -150,7 +150,7 @@ module.exports = (handlers) => {
         '哎呀，你看起来好像不是很高兴呢 ',
         t_call_c,
         '……但我们之间的交集肯定是会越来越深的，毕竟我们是同一个训练员手下的担当',
-        coffee.get_uma_sex_title(),
+        coffee.uma_sex_title,
         '嘛，你说是吧？训 · 练 · 员 · 君？',
       ]);
       await coffee.say_and_wait([
@@ -193,7 +193,7 @@ module.exports = (handlers) => {
         '是 ',
         coffee.get_colored_name(),
         '，与其他赛',
-        coffee.get_uma_sex_title(),
+        coffee.uma_sex_title,
         '无关。',
       ]);
     }
@@ -383,7 +383,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '通常这种时候，一般的训练员都会和担当',
-      coffee.get_uma_sex_title(),
+      coffee.uma_sex_title,
       '讨论彼此的远大抱负，但是……',
     ]);
     await coffee.say_and_wait(
@@ -691,7 +691,7 @@ module.exports = (handlers) => {
       ' 的决心的是，该说',
       coffee.sex,
       '们还只是一群学生吗，来到合宿地点的赛',
-      coffee.get_uma_sex_title(),
+      coffee.uma_sex_title,
       '们都相当兴奋。',
     ]);
     await coffee.say_and_wait('呵呵呵……好期待，合宿……要去哪里好呢？');
@@ -699,10 +699,10 @@ module.exports = (handlers) => {
       '咦？无人的断崖吗？我想想，深山里被人遗忘的洞窟或许也不错啊，呵呵呵呵……',
     );
     await say_by_passer_by_and_wait(
-      `赛${coffee.get_uma_sex_title()}A`,
+      `赛${coffee.uma_sex_title}A`,
       '你、你在跟谁说话啊？茶座～！？让人感觉心里毛毛的诶！',
     );
-    await say_by_passer_by_and_wait(`赛${coffee.get_uma_sex_title()}B`, [
+    await say_by_passer_by_and_wait(`赛${coffee.uma_sex_title}B`, [
       '哈哈哈……不知道为什么，但总觉得有',
       coffee.sex,
       '在就很灵异呢……',
@@ -815,7 +815,7 @@ module.exports = (handlers) => {
     await say_by_passer_by_and_wait('记者们', '————什么！？');
     await era.printAndWait([
       '作为经典三冠路线中最受瞩目的赛',
-      coffee.get_uma_sex_title(),
+      coffee.uma_sex_title,
       '之一，突如其来的宣布……让现场一片哗然。',
     ]);
     await say_by_passer_by_and_wait('记者A', [
@@ -873,7 +873,7 @@ module.exports = (handlers) => {
     await coffee.say_and_wait('新的……可能性？');
     await tachyon.say_and_wait([
       '没错，我的目标——抵达乃至于超越赛',
-      coffee.get_uma_sex_title(),
+      coffee.uma_sex_title,
       '的极限……但说到底真的需要我本人亲自去实现吗？道路并非只有一条，即便需要验证的真理只有一个，但却存在数条通往终点的道路。',
     ]);
     await coffee.say_and_wait('这是……什么意思？');

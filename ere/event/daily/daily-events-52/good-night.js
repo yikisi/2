@@ -59,7 +59,7 @@ module.exports = async (hook) => {
           ]);
           era.print([
             '用',
-            urara.get_teen_sex_title(),
+            urara.teen_sex_title,
             '渴求的眼神说着暧昧的借口，潮红爬上小脸的 ',
             callname,
             ' 一切尽在不言之中。',
@@ -127,7 +127,7 @@ module.exports = async (hook) => {
           '不等 ',
           me.get_colored_name(),
           ' 回答第一题，步步紧逼的小',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '便用欲求不满的神色向 ',
           me.get_colored_name(),
           ' 抛出了第二问。',
@@ -141,7 +141,7 @@ module.exports = async (hook) => {
         ]);
         era.print([
           '尽管很不情愿，小',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '还是满脸羞红地伸手拉住了 ',
           me.get_colored_name(),
           ' 的衣角。',
@@ -178,7 +178,7 @@ module.exports = async (hook) => {
             '对 ',
             me.get_colored_name(),
             ' 做出了善意的叮嘱，小',
-            urara.get_uma_sex_title(),
+            urara.uma_sex_title,
             '蹦蹦跳跳的跑向了宿舍。',
           ],
         ],
@@ -371,7 +371,7 @@ module.exports = async (hook) => {
             ],
             [
               '在爱人的脖子上吮下分开前的红印，小',
-              urara.get_uma_sex_title(),
+              urara.uma_sex_title,
               '清澈的声音浑浊而魅惑的缠绕在 ',
               me.get_colored_name(),
               ' 的耳边。',
@@ -400,7 +400,7 @@ module.exports = async (hook) => {
             '在笑着对 ',
             me.get_colored_name(),
             ' 做出提醒后，小',
-            urara.get_uma_sex_title(),
+            urara.uma_sex_title,
             '平平淡淡地走向了宿舍。',
           ],
         ],
@@ -457,7 +457,7 @@ module.exports = async (hook) => {
             ],
             [
               '即使看起来不够尽兴，小',
-              urara.get_uma_sex_title(),
+              urara.uma_sex_title,
               '还是听话地离开了，不过 ',
               me.get_colored_name(),
               ' 好像是被担当抱怨了？',
@@ -473,7 +473,7 @@ module.exports = async (hook) => {
             ],
             [
               '扭捏的小',
-              urara.get_uma_sex_title(),
+              urara.uma_sex_title,
               '还是接受了 ',
               me.get_colored_name(),
               ' 的请求，并肩而行的氛围也开始变得有些微妙起来。',
@@ -535,7 +535,7 @@ module.exports = async (hook) => {
             ],
             [
               '用樱唇轻触了恋人的脸颊，小',
-              urara.get_uma_sex_title(),
+              urara.uma_sex_title,
               '一边害羞地抖着耳朵，一边小声地鼓励着恋人。',
             ],
           ],
@@ -581,7 +581,7 @@ module.exports = async (hook) => {
             ],
             [
               '在分开前的爱人身上用力烙下自己的印记，小',
-              urara.get_uma_sex_title(),
+              urara.uma_sex_title,
               '用清澈的声音诉说着浑浊的欲望。',
             ],
           ],

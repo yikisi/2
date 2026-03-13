@@ -192,7 +192,7 @@ module.exports = async (hook, extra_flag) => {
     await falcon.say_and_wait(`是⭐`);
     await me.say_and_wait(`就这样顺着这股气势向前进！`);
     await falcon.say_and_wait(
-      `最强的${falcon.get_uma_sex_title()}偶像——${
+      `最强的${falcon.uma_sex_title}偶像——${
         falcon.name
       }⭐下次一定要让大家看着我闪耀的样子！`,
     );
@@ -217,9 +217,7 @@ module.exports = async (hook, extra_flag) => {
     );
     await me.say_and_wait(`飞鹰子作为偶像来说真是专业级别的啊。`);
     await era.printAndWait(
-      `比起赛${falcon.get_uma_sex_title()}也许${
-        falcon.sex
-      }应该向偶像方向发展？`,
+      `比起赛${falcon.uma_sex_title}也许${falcon.sex}应该向偶像方向发展？`,
     );
     await falcon.say_and_wait(
       `飞鹰子既然以顶级偶像为目标前进，那么作为偶像基础中的基础也是必须认真对待的！`,
@@ -272,7 +270,7 @@ module.exports = async (hook, extra_flag) => {
     era.drawLine();
     await me.say_and_wait(`飞鹰子！振作一点，飞鹰子！`);
     await era.printAndWait(
-      `${falcon.get_uma_sex_title()}「刚刚表演的时候还是活跃的样子，从升降机上下来结果就——」`,
+      `${falcon.uma_sex_title}「刚刚表演的时候还是活跃的样子，从升降机上下来结果就——」`,
     );
     await me.say_and_wait(`救护车！救护车在哪里？`);
     await era.printAndWait(`负责人「已经打电话叫救护车了。」`);
@@ -361,23 +359,23 @@ module.exports = async (hook, extra_flag) => {
     await era.printAndWait(`轻轻打开休息室的门。`);
     await me.say_and_wait(`抱歉，飞鹰子正在休息……${callname}是？`);
     await era.printAndWait(
-      `在发传单时见到的自称是后辈的${falcon.get_uma_sex_title()}。`,
+      `在发传单时见到的自称是后辈的${falcon.uma_sex_title}。`,
     );
     await era.printAndWait(
-      `${falcon.get_uma_sex_title()}「飞鹰子前辈！祝贺${callname}胜利了！」`,
+      `${falcon.uma_sex_title}「飞鹰子前辈！祝贺${callname}胜利了！」`,
     );
     await falcon.say_and_wait(`欸？`);
     await era.printAndWait(
-      `${falcon.get_uma_sex_title()}「飞鹰子前辈不知道吗？对参加泥地的${falcon.get_uma_sex_title()}们来说，飞鹰子可是闪耀着炫目光芒的存在呢！」`,
+      `${falcon.uma_sex_title}「飞鹰子前辈不知道吗？对参加泥地的${falcon.uma_sex_title}们来说，飞鹰子可是闪耀着炫目光芒的存在呢！」`,
     );
     await era.printAndWait(
-      `${falcon.get_uma_sex_title()}「虽然在草地上没有适应性而转战泥地的大家已经是退无可退了……不过，是飞鹰子前辈让我们看到了前进的希望！」`,
+      `${falcon.uma_sex_title}「虽然在草地上没有适应性而转战泥地的大家已经是退无可退了……不过，是飞鹰子前辈让我们看到了前进的希望！」`,
     );
     await era.printAndWait(
-      `${falcon.get_uma_sex_title()}「所以，希望飞鹰子前辈能够一直闪耀下去！」`,
+      `${falcon.uma_sex_title}「所以，希望飞鹰子前辈能够一直闪耀下去！」`,
     );
     await era.printAndWait(
-      `越说越激动的${falcon.get_uma_sex_title()}紧紧握住了${falcon.name}的手。`,
+      `越说越激动的${falcon.uma_sex_title}紧紧握住了${falcon.name}的手。`,
     );
     await falcon.say_and_wait(`那个，飞鹰子的话`);
     await me.say_and_wait(
@@ -385,13 +383,13 @@ module.exports = async (hook, extra_flag) => {
     );
     await era.printAndWait(`在这一步不可退让。`);
     await era.printAndWait(
-      `${falcon.get_uma_sex_title()}「飞鹰前辈的训练员吗？抱歉！太激动忘了这件事！」`,
+      `${falcon.uma_sex_title}「飞鹰前辈的训练员吗？抱歉！太激动忘了这件事！」`,
     );
     await era.printAndWait(
-      `${falcon.get_uma_sex_title()}「抱歉打扰${callname}们独处我先走了！」`,
+      `${falcon.uma_sex_title}「抱歉打扰${callname}们独处我先走了！」`,
     );
     await era.printAndWait(
-      `露出尴尬表情的${falcon.get_uma_sex_title()}姗笑着离开了休息室。`,
+      `露出尴尬表情的${falcon.uma_sex_title}姗笑着离开了休息室。`,
     );
     await me.say_and_wait(`总算离开了，飞鹰子？`);
     await falcon.say_and_wait(
@@ -509,7 +507,7 @@ module.exports = async (hook, extra_flag) => {
     await me.say_and_wait(
       `${
         falcon.name
-      }是我见过最坚强的${falcon.get_uma_sex_title()}了，所以我希望${callname}的梦想能够实现。`,
+      }是我见过最坚强的${falcon.uma_sex_title}了，所以我希望${callname}的梦想能够实现。`,
     );
     await era.printAndWait(
       `轻轻抚摸着${falcon.name}的小脑袋，比起一开始的抗拒，现在的${falcon.sex}看上去十分平静。`,

@@ -353,7 +353,7 @@ module.exports = class extends CustomizedRecruit {
       }
       await print_event_name('便服派对', daiya);
       await era.printAndWait(
-        `某天的体育馆里。代表目白家的其中一名赛${mcqueen.get_uma_sex_title()}─目白麦昆在此发表声明。`,
+        `某天的体育馆里。代表目白家的其中一名赛${mcqueen.uma_sex_title}─目白麦昆在此发表声明。`,
       );
       await mcqueen.say_and_wait(
         '各位在校生，以及平时照顾我们的各位训练员。今天，目白家有事情要宣布。',
@@ -431,17 +431,17 @@ module.exports = class extends CustomizedRecruit {
           '……是的，你说得没错。寻找合适的训练员，也等于是寻找一个能寄托我的梦想和里见家宿愿的人。',
         );
         await daiya.say_and_wait(
-          `里见家──虽然还只是新兴企业，但对赛${daiya.get_uma_sex_title()}竞赛文化抱持着深厚的情感，也希望能为将来的发展尽一份贡献。`,
+          `里见家──虽然还只是新兴企业，但对赛${daiya.uma_sex_title}竞赛文化抱持着深厚的情感，也希望能为将来的发展尽一份贡献。`,
         );
         await daiya.say_and_wait(
           '协助营运、慈善事业等等，我们在各方面都投注了努力，但我们的资历不比目白家，还未能做到『某个最重要的贡献』。',
         );
         await me.say_and_wait('最重要的贡献？');
         await daiya.say_and_wait(
-          `是，也就是──『从我们家族里大量培育出能够赢得G1竞赛的知名赛${daiya.get_uma_sex_title()}。`,
+          `是，也就是──『从我们家族里大量培育出能够赢得G1竞赛的知名赛${daiya.uma_sex_title}。`,
         );
         await mcqueen.say_and_wait(
-          `这是赛${daiya.get_uma_sex_title()}业界独有的文化。若能培育出大量知名赛${daiya.get_uma_sex_title()}那将会成为任何事都难以取代，最重要的贡献呢。`,
+          `这是赛${daiya.uma_sex_title}业界独有的文化。若能培育出大量知名赛${daiya.uma_sex_title}那将会成为任何事都难以取代，最重要的贡献呢。`,
         );
         await mcqueen.say_and_wait(
           `亲自背负这个重大期望的期待新星就是${daiya.sex}，这位里见光钻。训练员征选会，也是为了找到能够协助并支持${daiya.sex}的人而举办的。`,

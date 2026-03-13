@@ -171,7 +171,7 @@ module.exports = async function (
     );
     await say_by_passer_by_and_wait(
       `路人A`,
-      `嗯，皋月赏的竞争太过激烈，都说唯有最快的赛${flash.get_uma_sex_title()}才能赢下这场比赛。」`,
+      `嗯，皋月赏的竞争太过激烈，都说唯有最快的赛${flash.uma_sex_title}才能赢下这场比赛。」`,
     );
     await say_by_passer_by_and_wait(
       '路人B',
@@ -321,7 +321,7 @@ module.exports = async function (
     await say_by_passer_by_and_wait('观众B', '嗯嗯，还真是出乎意料啊。');
     await say_by_passer_by_and_wait(
       `观众A`,
-      `荒漠英雄，特别周……明明都是有一段时间没有出场的赛${flash.get_uma_sex_title()}，没想到还能在这场比赛中再次目睹${
+      `荒漠英雄，特别周……明明都是有一段时间没有出场的赛${flash.uma_sex_title}，没想到还能在这场比赛中再次目睹${
         flash.sex
       }们的发挥。`,
     );
@@ -371,7 +371,7 @@ module.exports = async function (
       '有马纪念，作为闪光训练赛年底的收官大赛，民间一直流传着『如果一年只看一场比赛的话那就非有马纪念赛莫属的说法。』',
     );
     await era.printAndWait(
-      `因为这场比赛的参赛规则采用的是粉丝投票制度，所以唯有在今年留下了亮眼表现的赛${flash.get_uma_sex_title()}才有资格登场。`,
+      `因为这场比赛的参赛规则采用的是粉丝投票制度，所以唯有在今年留下了亮眼表现的赛${flash.uma_sex_title}才有资格登场。`,
     );
     await era.printAndWait(
       '而赢下日本德比的荣进闪耀，不必多说，自然也在其列了。',
@@ -391,7 +391,7 @@ module.exports = async function (
     );
     await say_by_passer_by_and_wait(
       `观众A`,
-      `现在也好，之前的日本杯也好。连续两次见证了这么多知名赛${flash.get_uma_sex_title()}的再度登场。`,
+      `现在也好，之前的日本杯也好。连续两次见证了这么多知名赛${flash.uma_sex_title}的再度登场。`,
     );
     await say_by_passer_by_and_wait(
       '观众A',

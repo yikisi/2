@@ -328,7 +328,7 @@ module.exports = class extends CustomizedDaily {
         await coffee.say_and_wait([callname, '，接下来我们去哪……']);
         await era.printAndWait([
           '不顾周围的',
-          coffee.get_uma_sex_title(),
+          coffee.uma_sex_title,
           '和训练员的目光，',
           coffee.get_colored_name(),
           ' 紧紧抱着 ',
@@ -839,7 +839,7 @@ module.exports = class extends CustomizedDaily {
     ]);
     await era.printAndWait([
       '作为其担当',
-      coffee.get_uma_sex_title(),
+      coffee.uma_sex_title,
       '——',
       coffee.get_colored_name(),
       ' 成为了第一嫌疑人。但在经过详尽的调查和问询后，很快便排除了',

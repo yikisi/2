@@ -31,7 +31,7 @@ module.exports = (handlers) => {
       '看着担当再次投入训练，',
       me.get_colored_name(),
       ' 继续对小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '行为模式进行着梳理。',
     ]);
     await era.printAndWait([
@@ -70,7 +70,7 @@ module.exports = (handlers) => {
       ' 特意去询问与 ',
       urara.get_colored_name(),
       ' 相熟的',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '们时，',
       urara.sex,
       '们给出的答案也不尽相似。',
@@ -270,7 +270,7 @@ module.exports = (handlers) => {
       );
       await CharaTalk.say_by_passer_by_and_wait('商店街的人', [
         '可是我也有听说特雷森的训练员很多都会和担当',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '……',
       ]);
       await CharaTalk.say_by_passer_by_and_wait(
@@ -340,7 +340,7 @@ module.exports = (handlers) => {
 
     await urara.say_and_wait([
       '没关系的，全都交给我吧！乌拉拉可是',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '哦……呜诶，好重！但我会加油的！',
     ]);
     await era.printAndWait([
@@ -382,7 +382,7 @@ module.exports = (handlers) => {
       '在 ',
       me.get_colored_name(),
       ' 觉得自己的腰马上就要断掉之前，住在商店街附近的小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '们从就 ',
       me.get_colored_name(),
       ' 身边分过了 ',
@@ -393,7 +393,7 @@ module.exports = (handlers) => {
       '背起货箱，',
       urara.get_colored_name(),
       ' 追着小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '们的步伐认真地跑了起来，而 ',
       me.get_colored_name(),
       ' 则在完成阶段性任务后差点瘫坐在地上。',

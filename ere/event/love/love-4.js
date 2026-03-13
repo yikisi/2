@@ -37,7 +37,7 @@ module.exports = class extends CustomizedLove {
     await era.printAndWait(
       `似乎是平时多有照顾后辈们的功劳,${
         zensky.name
-      }最近很困扰,在${zensky.get_uma_sex_title()}们自建的小小圈子里悄悄传开了.`,
+      }最近很困扰,在${zensky.uma_sex_title}们自建的小小圈子里悄悄传开了.`,
     );
     await era.printAndWait([
       '随着时间的不断推移，就连 ',
@@ -86,10 +86,10 @@ module.exports = class extends CustomizedLove {
     await era.printAndWait(`通向天台的阶梯一如既往的沉默.`);
     era.printButton(`「究竟是谁在恶作剧」`, 1);
     await era.printAndWait(
-      `能在短短几秒之间关上门,能做到的话只有${zensky.get_uma_sex_title()}了吧?`,
+      `能在短短几秒之间关上门,能做到的话只有${zensky.uma_sex_title}了吧?`,
     );
     await era.printAndWait(
-      `是遇到想要找到担当训练员却害羞的内向${zensky.get_uma_sex_title()}了吗?`,
+      `是遇到想要找到担当训练员却害羞的内向${zensky.uma_sex_title}了吗?`,
     );
     await era.printAndWait(`怀念的香气传来,让你回忆起了夏天的气息.`);
     await era.printAndWait(
@@ -100,13 +100,13 @@ module.exports = class extends CustomizedLove {
     );
     era.printButton(`「难不成?!」`, 1);
     await era.printAndWait(
-      `你将目光投向天台的蓄水池上,有个看上去像${zensky.get_uma_sex_title()}一样模糊轮廓坐在蓄水池上.`,
+      `你将目光投向天台的蓄水池上,有个看上去像${zensky.uma_sex_title}一样模糊轮廓坐在蓄水池上.`,
     );
     await era.printAndWait(
-      `你将目光投向天台的蓄水池上,有位${zensky.get_uma_sex_title()}正坐在蓄水池上.`,
+      `你将目光投向天台的蓄水池上,有位${zensky.uma_sex_title}正坐在蓄水池上.`,
     );
     await era.printAndWait(
-      `白色的连衣裙,带着温柔的表情看着操场上的${zensky.get_uma_sex_title()}们.`,
+      `白色的连衣裙,带着温柔的表情看着操场上的${zensky.uma_sex_title}们.`,
     );
     era.printButton(`${zensky.name}?`, 1);
     await zensky.say_and_wait(`${callname},终于发现我了吗.`);
@@ -170,11 +170,11 @@ module.exports = class extends CustomizedLove {
         '小姐说一下的，这点不用担心。',
       ]);
       era.printButton(
-        `约会时间太久的话不会有${zensky.get_uma_sex_title()}过来吗?`,
+        `约会时间太久的话不会有${zensky.uma_sex_title}过来吗?`,
         1,
       );
       await zensky.say_and_wait(
-        `一大早的话${zensky.get_uma_sex_title()}们都在晨跑呢,而且游泳课的话明天10点之前都没有.`,
+        `一大早的话${zensky.uma_sex_title}们都在晨跑呢,而且游泳课的话明天10点之前都没有.`,
       );
       await zensky.say_and_wait(`${callname}还有想问的问题吗?`);
       era.printButton(`「暂时没有了.」`, 1);
@@ -215,7 +215,7 @@ module.exports = class extends CustomizedLove {
       await zensky.say_and_wait(`${callname}♪不下来一起游泳吗?`);
       await era.printAndWait(`${zensky.name}在水池中心处呼唤着你`);
       await era.printAndWait(
-        `虽然对普通人类来说水温处在一个比较微妙的地步,不过对于体温稍比人类要高的${zensky.get_uma_sex_title()}来说也许刚刚好吧?`,
+        `虽然对普通人类来说水温处在一个比较微妙的地步,不过对于体温稍比人类要高的${zensky.uma_sex_title}来说也许刚刚好吧?`,
       );
       await zensky.say_and_wait(`${callname}!不下来一起游泳吗?`);
       await era.printAndWait(`${zensky.name}的邀请打破了你的思考`);
@@ -259,7 +259,7 @@ module.exports = class extends CustomizedLove {
         );
         era.printButton(`「好冷」`, 1);
         await era.printAndWait(
-          `虽然对${zensky.get_uma_sex_title()}来说水温刚好,不过对普通人类的话还是偏凉了.`,
+          `虽然对${zensky.uma_sex_title}来说水温刚好,不过对普通人类的话还是偏凉了.`,
         );
         await zensky.say_and_wait(
           `那么${zensky.get_bigger_sibling_sex_title()}给你温暖一下吧?`,
@@ -427,7 +427,7 @@ module.exports = class extends CustomizedLove {
         `天台已经成了你们默契的据点,在你踏完天台最后一个台阶的时候,穿着校服的${zensky.name}已经在那里等你了.`,
       );
       await era.printAndWait(
-        `天气晴朗的时候,你们向下俯瞰着校园中成群结队的${zensky.get_uma_sex_title()}们聊着今天在学院中发生的趣事.`,
+        `天气晴朗的时候,你们向下俯瞰着校园中成群结队的${zensky.uma_sex_title}们聊着今天在学院中发生的趣事.`,
       );
       await era.printAndWait(
         `阴雨连绵的时候,你们则会在训练室靠着沙发相互依偎着.`,

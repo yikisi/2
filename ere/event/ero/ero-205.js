@@ -39,7 +39,7 @@ module.exports = class extends CustomizedEro {
       await era.printAndWait(
         ` ${me.name} 把 ${vp.name} 放在地上，用衣服垫在${
           vp.sex
-        }娇嫩的后背。摆好位置后，${vp.get_teen_sex_title()}青春的酮体，尤其是盈盈玉立的粉乳，彻底地暴露在 ${
+        }娇嫩的后背。摆好位置后，${vp.teen_sex_title}青春的酮体，尤其是盈盈玉立的粉乳，彻底地暴露在 ${
           me.name
         } 眼底。`,
       );
@@ -57,7 +57,7 @@ module.exports = class extends CustomizedEro {
       await era.printAndWait(
         `没理会 ${vp.name} 的微弱拒绝，${
           me.name
-        } 持续进行侵袭。在几轮舔弄以及吮吸过后，用牙齿轻啮住${vp.get_teen_sex_title()}樱桃般的玲珑乳蕾，舌尖来回挑拨。火热欲望立即化作一股电流，融合到奔腾的血液中，冲蚀着 ${
+        } 持续进行侵袭。在几轮舔弄以及吮吸过后，用牙齿轻啮住${vp.teen_sex_title}樱桃般的玲珑乳蕾，舌尖来回挑拨。火热欲望立即化作一股电流，融合到奔腾的血液中，冲蚀着 ${
           vp.name
         } 仅存的一点清醒意识。`,
       );
@@ -75,9 +75,9 @@ module.exports = class extends CustomizedEro {
         false,
       );
       await era.printAndWait(
-        `滑腻柔和的手感，与${vp.get_teen_sex_title()}抑制不住的低低呻吟声交相辉映，促使 ${
+        `滑腻柔和的手感，与${vp.teen_sex_title}抑制不住的低低呻吟声交相辉映，促使 ${
           me.name
-        } 在另一边的圆润乳球上加重了搅动的力道，直弄得${vp.get_teen_sex_title()}的小腹不停地短促起伏，白嫩的每一寸肌肤都在兴奋的冲击中，波浪般盈盈波动。`,
+        } 在另一边的圆润乳球上加重了搅动的力道，直弄得${vp.teen_sex_title}的小腹不停地短促起伏，白嫩的每一寸肌肤都在兴奋的冲击中，波浪般盈盈波动。`,
       );
       era.printButton('「你应该已经知道自己的肉体有多淫乱了吧？」', 1);
       era.printButton('「就算你不遇到我，你以为你还能抗拒？」', 2);
@@ -94,7 +94,7 @@ module.exports = class extends CustomizedEro {
       await era.printAndWait(
         `即使否认，${
           vp.name
-        } 也很难与自己春情勃发的肉体作对。${vp.get_uma_sex_title()}之血带来的发春期，现在已经全部转为欲火，无论是粉颈处的轻舔温啮，还是胸腹部的捻拢拨挑，总能让${
+        } 也很难与自己春情勃发的肉体作对。${vp.uma_sex_title}之血带来的发春期，现在已经全部转为欲火，无论是粉颈处的轻舔温啮，还是胸腹部的捻拢拨挑，总能让${
           vp.sex
         }爱欲横流，享受有如飞在云雾中的快乐感觉。`,
       );
@@ -111,7 +111,7 @@ module.exports = class extends CustomizedEro {
       await era.printAndWait(
         ` ${me.name} 轻声调笑，看着 ${
           vp.name
-        } 羞愤欲死地表情，眼中闪烁出几分得意。再次俯下身来，侵略${vp.get_teen_sex_title()}优美的脖颈。左手五指并用，悠闲地摩挲着${
+        } 羞愤欲死地表情，眼中闪烁出几分得意。再次俯下身来，侵略${vp.teen_sex_title}优美的脖颈。左手五指并用，悠闲地摩挲着${
           vp.sex
         }紧绷细致的后背，在曲线柔顺的脊椎和尾根上轻轻抚弄，犹似起舞。右手则从${
           vp.sex
@@ -131,7 +131,7 @@ module.exports = class extends CustomizedEro {
       await era.printAndWait(
         `随着${
           vp.sex
-        }愈渐紧促的呼吸，${vp.get_teen_sex_title()}终于不堪重负地呻吟出来。`,
+        }愈渐紧促的呼吸，${vp.teen_sex_title}终于不堪重负地呻吟出来。`,
       );
     }
   }

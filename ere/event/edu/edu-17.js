@@ -110,7 +110,7 @@ module.exports = class extends Edu17UntilWeekStart {
         '在 ',
         chara.get_colored_name(),
         ' 于训练场上疾驰时，围观的赛',
-        chara.get_uma_sex_title(),
+        chara.uma_sex_title,
         '和训练员们纷纷发出赞叹。',
       ]);
       await era.printAndWait(
@@ -356,7 +356,7 @@ module.exports = class extends Edu17UntilWeekStart {
       );
       await luna.say_and_wait('好想见你……');
       await luna.say_and_wait('好想见你……');
-      await luna.print_and_wait(`${luna.get_teen_sex_title()}一夜无眠。`);
+      await luna.print_and_wait(`${luna.teen_sex_title}一夜无眠。`);
     } else if (event_arg === 47 + 41) {
       await print_event_name(
         [{ color: color_17[1], content: '急转直下' }],

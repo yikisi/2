@@ -98,7 +98,7 @@ module.exports = class extends CustomizedEdu {
         `但是最初理解到的那个反射的记忆，是多次听到的${vp.sex}的胜者演唱会的声音。`,
       );
       await era.printAndWait(
-        `回头一看，苗条的高个子${vp.get_uma_sex_title()}挽着胳膊，注视着 ${me.get_couple_title()}。`,
+        `回头一看，苗条的高个子${vp.uma_sex_title}挽着胳膊，注视着 ${me.get_couple_title()}。`,
       );
       await era.printAndWait(`——传说。`);
       await vp.say_and_wait(`师傅！`);
@@ -113,7 +113,7 @@ module.exports = class extends CustomizedEdu {
       await era.printAndWait(
         `${
           montjeu.name
-        }。法国传奇般的${vp.get_uma_sex_title()}，凯旋门赏的冠军之一。`,
+        }。法国传奇般的${vp.uma_sex_title}，凯旋门赏的冠军之一。`,
       );
       await montjeu.say_and_wait(
         `进入特雷森之后，我也在休息日对${vp.sex}进行了个人指导。我简单地告诉${vp.sex}，如果${vp.sex}的素养有技术的话，我就会教${vp.sex}。一眨眼就掌握了比赛的心得。`,
@@ -142,7 +142,7 @@ module.exports = class extends CustomizedEdu {
       await era.input();
       await era.printAndWait(`${montjeu.name} 继续说了下去。`);
       await montjeu.say_and_wait(
-        `之前你的实绩有一定的说服力。好的地方就那样，坏的地方也能改正。即使最大限度地发挥${vp.get_uma_sex_title()}素质的做法结果看起来是放任主义，我也能理解这是一种育成手段。如果是负责完成度高的 ${
+        `之前你的实绩有一定的说服力。好的地方就那样，坏的地方也能改正。即使最大限度地发挥${vp.uma_sex_title}素质的做法结果看起来是放任主义，我也能理解这是一种育成手段。如果是负责完成度高的 ${
           vp.name
         }，就会越来越有说服力。`,
       );
@@ -152,7 +152,7 @@ module.exports = class extends CustomizedEdu {
       );
       await era.printAndWait(`那么，怎么办呢。`);
       await era.printAndWait(
-        `到现在为止，都相信自己的技术，信赖自己负责的${vp.get_uma_sex_title()}。那么，一位完美的${vp.get_uma_sex_title()}，残缺的自己该如何触碰？`,
+        `到现在为止，都相信自己的技术，信赖自己负责的${vp.uma_sex_title}。那么，一位完美的${vp.uma_sex_title}，残缺的自己该如何触碰？`,
       );
       await era.printAndWait(`${me.name} 该对${vp.sex}怎么想？`);
       await era.printAndWait(`${montjeu.name} 继续。`);
@@ -330,7 +330,7 @@ module.exports = class extends CustomizedEdu {
         `${vp.name} 在之前的比赛中也以巧妙的位置感取得了胜利，${vp.sex}最擅长先行的策略，尤其是处在集团领先位置的时候。`,
       );
       await era.printAndWait(
-        `如果有从那里开始的末脚，能追上不败${vp.get_teen_sex_title()}的${vp.get_uma_sex_title()}就不存在。`,
+        `如果有从那里开始的末脚，能追上不败${vp.teen_sex_title}的${vp.uma_sex_title}就不存在。`,
       );
       await era.printAndWait(
         `说白了，可以说到了这种环节，${vp.sex}的胜利是被确定的，就是有那么大的确信。`,
@@ -349,7 +349,7 @@ module.exports = class extends CustomizedEdu {
       await era.printAndWait(
         `在最后一条直线上领先的 ${
           vp.name
-        }，渐渐地拉开了后面的${vp.get_uma_sex_title()}。`,
+        }，渐渐地拉开了后面的${vp.uma_sex_title}。`,
       );
       await era.printAndWait(`就像被填满隆尚的声援所支持一样。`);
       await era.printAndWait(`到底，那个英姿有自己贡献的部分吗？`);
@@ -401,7 +401,7 @@ module.exports = class extends CustomizedEdu {
       const montjeu = get_chara_talk(204);
       await era.printAndWait(`秋高气爽的天空在隆尚的正上方蔓延。`);
       await era.printAndWait(
-        `可以说是与迎接来自全世界最高峰的${vp.get_uma_sex_title()}们的这场比赛相称的气候吧。`,
+        `可以说是与迎接来自全世界最高峰的${vp.uma_sex_title}们的这场比赛相称的气候吧。`,
       );
       await era.printAndWait(`虽然穿着平时的大衣来了，但是有点热。`);
       await era.printAndWait(`在观众席的最前排握栅栏也是第二次。`);
@@ -432,7 +432,7 @@ module.exports = class extends CustomizedEdu {
       await era.printAndWait(
         `已经察觉到，对 ${
           vp.name
-        } 的适应是由全世界的${vp.get_uma_sex_title()}逐渐进行的。`,
+        } 的适应是由全世界的${vp.uma_sex_title}逐渐进行的。`,
       );
       await era.printAndWait(`即便如此，也没有什么能给予${vp.sex}的东西。`);
       era.printButton(`「尽管如此，我还是要让${vp.sex}赢。」`, 1);
@@ -513,7 +513,7 @@ module.exports = class extends CustomizedEdu {
       await era.printAndWait(
         `在胜利和失败之前，${me.name} 希望一个叫 ${
           vp.name
-        } 的${vp.get_uma_sex_title()}，实现自己的梦想。`,
+        } 的${vp.uma_sex_title}，实现自己的梦想。`,
       );
       era.printButton(`「让我看看。」`, 1);
       await era.input();
@@ -537,12 +537,12 @@ module.exports = class extends CustomizedEdu {
       await era.printAndWait(
         `${
           vp.name
-        } 包围网前方的${vp.get_uma_sex_title()}那里，仅在一瞬间放慢速度后退。在最终直线这一最后的进攻场所产生的意料之外的行动，让对手回头看向后方。`,
+        } 包围网前方的${vp.uma_sex_title}那里，仅在一瞬间放慢速度后退。在最终直线这一最后的进攻场所产生的意料之外的行动，让对手回头看向后方。`,
       );
       await era.printAndWait(
         `但是，${
           vp.name
-        } 已经不在那里了。为了避开其他的${vp.get_uma_sex_title()}，跑到了最外面。`,
+        } 已经不在那里了。为了避开其他的${vp.uma_sex_title}，跑到了最外面。`,
       );
       await era.printAndWait(`然后，被封锁行动而保存的体力在瞬间爆发。`);
       await era.printAndWait(
@@ -580,7 +580,7 @@ module.exports = class extends CustomizedEdu {
       await era.printAndWait(
         `${
           vp.sex
-        }用尽最后的力气，在剩下不到100米的最后一瞬间超过了领头的${vp.get_uma_sex_title()}，甚至感觉时间停止了。`,
+        }用尽最后的力气，在剩下不到100米的最后一瞬间超过了领头的${vp.uma_sex_title}，甚至感觉时间停止了。`,
       );
       await era.printAndWait(
         `${me.name} 觉得 ${me.get_couple_title()}  至今为止的一切都成熟了。`,
@@ -589,7 +589,7 @@ module.exports = class extends CustomizedEdu {
         `越过计分板的最后的脚步声，比什么都大，响彻这个舞台。`,
       );
       await era.printAndWait(
-        `法国赛马史上时隔36年的伟业。实现凯旋门赏连霸的是一个无人捡到的${vp.get_uma_sex_title()}和一个无人捡到的异国训练员。`,
+        `法国赛马史上时隔36年的伟业。实现凯旋门赏连霸的是一个无人捡到的${vp.uma_sex_title}和一个无人捡到的异国训练员。`,
       );
       await era.printAndWait(
         `轻轻地吸气，呼出。满是草坪的味道，似乎滋润了人心。`,
@@ -654,7 +654,7 @@ module.exports = class extends CustomizedEdu {
         `${me.name} 清楚地记得接受 ${vp.name} 定下的胜负服样式时候的事情。`,
       );
       await era.printAndWait(
-        `${vp.sex}参加G1比赛的时机比其他的${vp.get_uma_sex_title()}早，${
+        `${vp.sex}参加G1比赛的时机比其他的${vp.uma_sex_title}早，${
           vp.sex
         }的比赛服马上就要定做了，但只有一点是${vp.sex}绝对不会让步的。`,
       );
@@ -676,7 +676,7 @@ module.exports = class extends CustomizedEdu {
         `在休息室进行最后一次检查的 ${vp.name}，一边仔细确认没有一点破绽的胜负服，一边在镜子前认真地看着自己的身影。`,
       );
       await era.printAndWait(
-        `今天的凯旋门赏不仅是英国和德国，连日本的${vp.get_uma_sex_title()}也参加了。`,
+        `今天的凯旋门赏不仅是英国和德国，连日本的${vp.uma_sex_title}也参加了。`,
       );
       await era.printAndWait(
         `在这场备受国际瞩目的比赛中，${vp.sex}会穿上如国旗般色彩的决胜服，但${vp.sex}却丝毫不紧张。`,

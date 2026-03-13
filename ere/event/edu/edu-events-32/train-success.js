@@ -231,14 +231,14 @@ module.exports = async (tachyon, me, callname, hook, stamina_ratio) => {
         ' 回来，却看见 ',
         tachyon.get_colored_name(),
         ' 追着一名',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         '朝着 ',
         me.get_colored_name(),
         ' 跑来',
       ]);
       era.println();
       await say_by_passer_by_and_wait(
-        `${tachyon.get_uma_sex_title()}A`,
+        `${tachyon.uma_sex_title}A`,
         '救，救命啊！',
       );
       await tachyon.say_and_wait(
@@ -247,7 +247,7 @@ module.exports = async (tachyon, me, callname, hook, stamina_ratio) => {
       era.println();
       await era.printAndWait([
         '眼看那名',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         '离 ',
         me.get_colored_name(),
         ' 越来越近',
@@ -256,7 +256,7 @@ module.exports = async (tachyon, me, callname, hook, stamina_ratio) => {
       era.printButton('放任两人通过', 1);
       era.printButton('拦住速子', 2);
       if ((await era.input()) === 1) {
-        await say_by_passer_by_and_wait(`${tachyon.get_uma_sex_title()}A`, [
+        await say_by_passer_by_and_wait(`${tachyon.uma_sex_title}A`, [
           '训练员',
           me.get_adult_sex_title(),
           '，为什么只是看着！？',
@@ -316,7 +316,7 @@ module.exports = async (tachyon, me, callname, hook, stamina_ratio) => {
           ' 已经跑了够多了，要是再增加的话可能会对身体造成损伤',
         ]);
         era.println();
-        await say_by_passer_by_and_wait(`${tachyon.get_uma_sex_title()}A`, [
+        await say_by_passer_by_and_wait(`${tachyon.uma_sex_title}A`, [
           '训练员',
           me.get_adult_sex_title(),
           '！谢谢您！',
@@ -329,7 +329,7 @@ module.exports = async (tachyon, me, callname, hook, stamina_ratio) => {
         ]);
         await era.printAndWait([
           '小',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '越跑越远，',
           tachyon.get_colored_name(),
           ' 看已经没有追上的机会，只能怨恨的瞪着 ',

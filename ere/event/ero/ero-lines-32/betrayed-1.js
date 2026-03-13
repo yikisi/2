@@ -144,7 +144,7 @@ async function tachyon_betrayed_1(tachyon_marks) {
   ]);
   await tachyon.print_and_wait([
     '……是可悲的',
-    tachyon.get_uma_sex_title(),
+    tachyon.uma_sex_title,
     '，用来脑补，将自己代入其中的现实。',
   ]);
   era.println();
@@ -164,7 +164,7 @@ async function tachyon_betrayed_1(tachyon_marks) {
     '会发现 ',
     tachyon.get_colored_name(),
     ' 是一名多么可悲的',
-    tachyon.get_uma_sex_title(),
+    tachyon.uma_sex_title,
     '。',
   ]);
   era.println();
@@ -173,7 +173,7 @@ async function tachyon_betrayed_1(tachyon_marks) {
   await tachyon.print_and_wait([me.sex, '们才是最适合的。']);
   await tachyon.print_and_wait([
     '温柔的训练员和与其孕育出爱情，为其实现梦想的',
-    tachyon.get_uma_sex_title(),
+    tachyon.uma_sex_title,
     '。',
   ]);
   await tachyon.print_and_wait(['比起来，自己的存在反而更像第三者。']);

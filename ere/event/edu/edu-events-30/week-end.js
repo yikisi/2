@@ -57,7 +57,7 @@ module.exports = (handlers) => {
     ]);
     await bakushin.say_and_wait([
       '拥有着能够制霸长距离的速度的赛',
-      rice.get_uma_sex_title(),
+      rice.uma_sex_title,
       '们都在那里！',
     ]);
     await rice.say_and_wait('一起？天皇……赏？');
@@ -205,11 +205,7 @@ module.exports = (handlers) => {
       callname,
       ' 失望了……',
     ]);
-    await era.printAndWait([
-      '说完，',
-      rice.get_teen_sex_title(),
-      '小声地抽泣起来。',
-    ]);
+    await era.printAndWait(['说完，', rice.teen_sex_title, '小声地抽泣起来。']);
     await me.say_and_wait('不要想那种事情。');
     await zob_zoy.say_and_wait([
       '没错！我也是！不会对 ',

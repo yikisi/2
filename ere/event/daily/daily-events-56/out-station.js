@@ -143,7 +143,7 @@ module.exports = async (hook) => {
               ' 顺着 ',
               me.get_colored_name(),
               ' 的目光看去，在见到海报上那些有着精心保养发型的',
-              kitaru.get_uma_sex_title(),
+              kitaru.uma_sex_title,
               '模特后，',
               kitaru.sex,
               '下意识的摸了摸自己日常乱糟糟的发型。',
@@ -169,7 +169,7 @@ module.exports = async (hook) => {
               ' 的担当 ',
               kitaru.get_colored_name(),
               ' 似乎本身就属于那种不怎么注意头发打理的，全凭',
-              kitaru.get_uma_sex_title(),
+              kitaru.uma_sex_title,
               '自身发质特有的韧性维持了一个大概的稳定的状态而已。',
             ]);
             await kitaru.say_and_wait([
@@ -307,7 +307,7 @@ module.exports = async (hook) => {
               '看着 ',
               kitaru.get_colored_name(),
               ' 指着那个以历代名',
-              kitaru.get_uma_sex_title(),
+              kitaru.uma_sex_title,
               '为题材的塔罗牌。',
             ]);
             break;

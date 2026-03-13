@@ -87,7 +87,7 @@ module.exports = (handlers) => {
         era.println();
         await era.printAndWait([
           '无视了躺在沙发上翘着脚的某名废柴',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
         ]);
         era.println();
         await tachyon.say_and_wait([
@@ -98,13 +98,13 @@ module.exports = (handlers) => {
         era.println();
         await era.printAndWait([
           '自己心目中，天才的',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '，超光速的粒子，',
           tachyon.get_colored_name(),
         ]);
         await era.printAndWait([
           '一定还在世界的某个角落，进行着与',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '的未来息息相关的研究',
         ]);
         era.println();
@@ -121,7 +121,7 @@ module.exports = (handlers) => {
         await era.printAndWait('现在已经完全将自己的家当成地盘');
         await era.printAndWait([
           '现在还在随意侵犯自己隐私的这名咸鱼',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
         ]);
         era.println();
         await tachyon.say_and_wait([
@@ -331,7 +331,7 @@ module.exports = (handlers) => {
           '与',
           tachyon.sex,
           '告别了的自己，也要回到原来的生活，迎来下一名负责',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '，支持',
           tachyon.sex,
           '的梦想',
@@ -342,7 +342,7 @@ module.exports = (handlers) => {
           '那样，能够将 ',
           me.get_colored_name(),
           ' 的目光灼烧的，如光一般的',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '……恐怕也再见不到了吧',
         ]);
         await era.printAndWait([
@@ -554,7 +554,7 @@ module.exports = (handlers) => {
         ]);
         await tachyon.say_and_wait([
           '…或许能够颠覆整个',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '世界也说不定啊',
         ]);
         era.println();
@@ -626,7 +626,7 @@ module.exports = (handlers) => {
           ' 当初的测量，现在的',
           tachyon.sex,
           '应该早就已经抵达',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '的极限了才对……',
         ]);
         era.println();

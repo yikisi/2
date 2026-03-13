@@ -427,7 +427,7 @@ module.exports = (handlers) => {
     if (extra_flag.rank !== 1) {
       return true;
     }
-    await print_event_name([tachyon.get_uma_sex_title(), '的极限'], tachyon);
+    await print_event_name([tachyon.uma_sex_title, '的极限'], tachyon);
     await tachyon.say_and_wait([callname, '，你看见了吗？']);
     era.println();
     await era.printAndWait([
@@ -449,7 +449,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '不，可以说如果',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '有极限的话，那必然就是今天的 ',
       tachyon.get_colored_name(),
     ]);
@@ -463,7 +463,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '那种跑法只能解释成，',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '这种生物的极限',
     ]);
     await era.printAndWait(
@@ -506,7 +506,7 @@ module.exports = (handlers) => {
     await era.printAndWait('不用经过思考，无须多加考虑');
     await era.printAndWait([
       '眼前的这名',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '，拥有超越极限的力量',
     ]);
     await era.printAndWait('这是从第一次见面就已经确信的');
@@ -639,9 +639,9 @@ module.exports = (handlers) => {
         if (race_history.get_values().findIndex((e) => e.rank !== 1) !== -1) {
           await say_by_passer_by_and_wait('解说', [
             '三冠',
-            tachyon.get_uma_sex_title(),
+            tachyon.uma_sex_title,
             '诞生！同年中的最强！最快最幸运最强的',
-            tachyon.get_uma_sex_title(),
+            tachyon.uma_sex_title,
             '就是，',
             tachyon.get_colored_name(),
             '！',
@@ -660,7 +660,7 @@ module.exports = (handlers) => {
           '，',
           tachyon.get_colored_name(),
           '！菊花赏最强的',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '，就是 ',
           tachyon.get_colored_name(),
           '！',
@@ -685,13 +685,13 @@ module.exports = (handlers) => {
       await era.input();
       await era.printAndWait([
         '比赛结束，荣光的菊花赏，决出最强',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         '的竞赛',
       ]);
       await era.printAndWait([
         me.get_colored_name(),
         ' 的负责',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         ' ',
         tachyon.get_colored_name(),
         ' 却败在了这场比赛之上',
@@ -718,7 +718,7 @@ module.exports = (handlers) => {
       await tachyon.say_and_wait('明明都觉得不会输的……哎呀，还是被超越了');
       await tachyon.say_and_wait([
         '果然，',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         '的可能性还是只有在比赛中才能探索啊',
       ]);
       await tachyon.say_and_wait('输了输了');
@@ -771,7 +771,7 @@ module.exports = (handlers) => {
         '同时也是，',
         me.get_colored_name(),
         ' 的另一名负责',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
       ]);
     }
     era.println();
@@ -793,7 +793,7 @@ module.exports = (handlers) => {
       if (coffee_love >= 75) {
         await coffee.say_and_wait([
           '还有，就算是负责',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '…不要占用别人的爱人太久了，',
           c_call_t,
         ]);

@@ -73,7 +73,7 @@ module.exports = async (hook) => {
         '正打算施以铁爪的右手被踮起脚尖的 ',
         kitaru.get_colored_name(),
         ' 握住了手腕，似有骨骼声响起，仍旧满脸堆笑的橙色',
-        kitaru.get_uma_sex_title(),
+        kitaru.uma_sex_title,
         '强行拖着 ',
         me.get_colored_name(),
         ' 离开了学生宿舍。',
@@ -126,11 +126,7 @@ module.exports = async (hook) => {
           me.get_colored_name(),
           ' 吻去',
         ]);
-        era.print([
-          '吸引了不少其他',
-          kitaru.get_uma_sex_title(),
-          '的指指点点。',
-        ]);
+        era.print(['吸引了不少其他', kitaru.uma_sex_title, '的指指点点。']);
       },
     );
   } else if (era.get('love:56') >= 50) {

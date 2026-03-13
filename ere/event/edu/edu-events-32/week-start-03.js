@@ -46,7 +46,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '希望锦标赛……那是十二月底的G1中距离赛事，可以说是对新秀级的',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '而言最重要的赛事之一',
     ]);
     await era.printAndWait(
@@ -529,7 +529,7 @@ module.exports = (handlers) => {
           '大年初一 ',
           me.get_colored_name(),
           ' 的胃就开始因负责',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '而生疼了，看来今年也一定不会是轻松的一年吧',
         ]);
         flags.wait_flag = get_attr_and_print_in_event(
@@ -694,7 +694,7 @@ module.exports = (handlers) => {
           era.println();
           await tachyon.say_and_wait([
             '啊，没什么，是啊，毕竟以训练员的身分而言，',
-            tachyon.get_uma_sex_title(),
+            tachyon.uma_sex_title,
             '的健康才是第一优先的吧，不过……稍微有些无聊了',
           ]);
           era.println();
@@ -748,26 +748,26 @@ module.exports = (handlers) => {
     ]);
     era.println();
     await say_by_passer_by_and_wait(
-      tachyon.get_uma_sex_title() + 'A',
+      tachyon.uma_sex_title + 'A',
       '那个人今天也站在这里啊',
     );
-    await say_by_passer_by_and_wait(tachyon.get_uma_sex_title() + 'B', [
+    await say_by_passer_by_and_wait(tachyon.uma_sex_title + 'B', [
       '嘘……小声点，听说',
       me.sex,
       '其实是某人的训练员来着',
     ]);
-    await say_by_passer_by_and_wait(tachyon.get_uma_sex_title() + 'A', [
+    await say_by_passer_by_and_wait(tachyon.uma_sex_title + 'A', [
       '欸……真的假的，',
       me.sex,
       '已经站了三天了吧，也没看到过',
       me.sex,
       '的负责',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '啊',
     ]);
-    await say_by_passer_by_and_wait(tachyon.get_uma_sex_title() + 'B', [
+    await say_by_passer_by_and_wait(tachyon.uma_sex_title + 'B', [
       '谁知道呢……听说其他年级有个存在感低到会完全被人忽视的',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '，说不定',
       me.sex,
       '负责的就是',
@@ -777,7 +777,7 @@ module.exports = (handlers) => {
     era.println();
     await era.printAndWait([
       '啊哈哈……被当成毫无存在的',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '了哦，',
       tachyon.get_colored_name(),
       ' ',
@@ -786,7 +786,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '不过，要是自己上去主动说自己的负责',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '是 ',
       tachyon.get_colored_name(),
       ' 的话，也一定不会有人相信的吧',
@@ -811,7 +811,7 @@ module.exports = (handlers) => {
       '岂止如此，甚至 ',
       me.get_colored_name(),
       ' 已经三天没有见到过自己的负责',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '了',
     ]);
     await era.printAndWait([
@@ -895,7 +895,7 @@ module.exports = (handlers) => {
       ' 的前哨战，大部分有志于 ',
       race_infos[race_enum.sats_sho].get_colored_name(),
       ' 的',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '都会以 ',
       race_infos[race_enum.hoch_sho].get_colored_name(),
       ' 或者 ',

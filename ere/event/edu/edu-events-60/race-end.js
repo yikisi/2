@@ -410,7 +410,7 @@ module.exports = class extends CustomizedEdu {
       await era.printAndWait(
         `优秀素质拥有坚定的忠实粉丝，也在『菊花赏』确实发挥出实力，现在的${
           nature.sex
-        }一定能够挑战『有马纪念』！不仅如此，『有马纪念』的参赛者都是今年倍受瞩目的各位赛${nature.get_uma_sex_title()}。跟${
+        }一定能够挑战『有马纪念』！不仅如此，『有马纪念』的参赛者都是今年倍受瞩目的各位赛${nature.uma_sex_title}。跟${
           nature.sex
         }们一起比赛一定能带来更多成长。`,
       );
@@ -447,7 +447,7 @@ module.exports = class extends CustomizedEdu {
           1,
         );
         await era.printAndWait(
-          `刚刚结束比赛的${nature.get_uma_sex_title()}，身体会不断散发出由于高速冲刺而产生的大量热量，因而会产生一种接近发情的状态，眼下的情况正是如此，哪怕是厚如决胜服下的安全裤，现在也已能略见湿润`,
+          `刚刚结束比赛的${nature.uma_sex_title}，身体会不断散发出由于高速冲刺而产生的大量热量，因而会产生一种接近发情的状态，眼下的情况正是如此，哪怕是厚如决胜服下的安全裤，现在也已能略见湿润`,
         );
         await nature.say_and_wait('但……但是，身上会有汗臭——');
         era.printButton('「内恰的汗怎么会臭？倒不如说就好这口！」', 1);
@@ -510,7 +510,7 @@ module.exports = class extends CustomizedEdu {
       );
       await era.printAndWait('商店街的大家「内恰──！你跑得很好呢──！」');
       await era.printAndWait(
-        `商店街的大家「你是世界第一的赛${nature.get_uma_sex_title()}！你是我们的骄傲──！」`,
+        `商店街的大家「你是世界第一的赛${nature.uma_sex_title}！你是我们的骄傲──！」`,
       );
       await nature.say_and_wait(
         '等一下，大、大家……！太大声了啦，这里又不是店里！',
@@ -528,7 +528,7 @@ module.exports = class extends CustomizedEdu {
         '该趁现在……尽情开心才行。因为并不是一切就到此结束了。',
       );
       await era.printAndWait(
-        `优秀素质小声地说着这些话，望向一起跑完『有马纪念』的赛${nature.get_uma_sex_title()}们……`,
+        `优秀素质小声地说着这些话，望向一起跑完『有马纪念』的赛${nature.uma_sex_title}们……`,
       );
       await nature.say_and_wait('你今天也有为我准备……歪歪扭扭的奖杯吗？');
       era.printButton('「当然！」', 1);
@@ -752,7 +752,7 @@ module.exports = class extends CustomizedEdu {
       );
       await nature.say_and_wait('这个嘛……我也觉得大家真的都很强。');
       await nature.say_and_wait(
-        `但我也是『很强的』赛${nature.get_uma_sex_title()}。我觉得应该是因为我发挥出了所有实力吧。`,
+        `但我也是『很强的』赛${nature.uma_sex_title}。我觉得应该是因为我发挥出了所有实力吧。`,
       );
       await nature.say_and_wait('嗯，是因为我很努力……我可以明确地这么说！');
       await era.printAndWait('记者A「那么，优秀素质，最后请对粉丝说句话！」');
@@ -773,7 +773,7 @@ module.exports = class extends CustomizedEdu {
       );
       await nature.say_and_wait('但是……但是啊，我想只有这点我可以保证。');
       await nature.say_and_wait(
-        `──我可是最不会背叛大家信赖的赛${nature.get_uma_sex_title()}哦！`,
+        `──我可是最不会背叛大家信赖的赛${nature.uma_sex_title}哦！`,
       );
       era.println();
       extra_flag.relation_change = 50;

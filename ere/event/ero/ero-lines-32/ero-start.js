@@ -99,7 +99,7 @@ module.exports = async () => {
             era.println();
             await era.printAndWait([
               '虽然没有动画里甚至冒出蒸气那么夸张，但闷了一天的肉棒，依然散发出了足以挑逗起任何',
-              tachyon.get_uma_sex_title(),
+              tachyon.uma_sex_title,
               '性欲的气味来',
             ]);
             await era.printAndWait([
@@ -490,7 +490,7 @@ module.exports = async () => {
             ]);
             await era.printAndWait([
               '哪怕是',
-              tachyon.get_uma_sex_title(),
+              tachyon.uma_sex_title,
               '的身体都只能娓娓配合着 ',
               me.get_colored_name(),
               ' 的动作来回',
@@ -583,7 +583,7 @@ module.exports = async () => {
             ]);
             await era.printAndWait([
               '勾引的眼前',
-              tachyon.get_uma_sex_title(),
+              tachyon.uma_sex_title,
               '再度露出雌性的表情',
             ]);
             break;

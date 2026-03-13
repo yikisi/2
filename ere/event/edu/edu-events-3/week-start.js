@@ -56,7 +56,7 @@ module.exports = class extends Edu3UntilWeekEnd {
       era.println();
 
       await era.printAndWait(
-        `${teio.get_teen_sex_title()}的话语虽然还有点孩子气，不过可以听出${
+        `${teio.teen_sex_title}的话语虽然还有点孩子气，不过可以听出${
           teio.sex
         }是认真的。`,
       );
@@ -89,7 +89,7 @@ module.exports = class extends Edu3UntilWeekEnd {
       await era.printAndWait(
         `被灯光和话筒所围绕，镜头前的每个人都用混杂着好奇和饥渴的眼神注视着 ${me.get_couple_title()}。${
           me.name
-        } 看了看旁边的小${teio.get_uma_sex_title()}，${
+        } 看了看旁边的小${teio.uma_sex_title}，${
           teio.sex
         }显然不习惯这样的事情——无敌的帝王大人也有怯场的时候。`,
       );
@@ -122,7 +122,7 @@ module.exports = class extends Edu3UntilWeekEnd {
       era.println();
 
       await me.say_and_wait(
-        `帝王，你的腿脚构造就算是在${teio.get_uma_sex_title()}中，也算是与众不同的，这种结构带给你独有的跑法，但这种『帝王舞步』实际上是透支自己的身体。`,
+        `帝王，你的腿脚构造就算是在${teio.uma_sex_title}中，也算是与众不同的，这种结构带给你独有的跑法，但这种『帝王舞步』实际上是透支自己的身体。`,
       );
       await me.say_and_wait(
         '上次比赛的失速，上上次比赛后的伤，只不过是前兆。对你来说最重要的双腿……有可能彻底毁掉',
@@ -147,7 +147,7 @@ module.exports = class extends Edu3UntilWeekEnd {
       );
       era.println();
       await era.printAndWait(
-        `转眼间，${teio.get_teen_sex_title()}已经抬起来头，${
+        `转眼间，${teio.teen_sex_title}已经抬起来头，${
           me.name
         } 能看到有液体汇聚在眼角，让${
           teio.sex
@@ -163,7 +163,7 @@ module.exports = class extends Edu3UntilWeekEnd {
       );
       era.println();
       await era.printAndWait(
-        `${teio.get_teen_sex_title()}倔强的眼神与你对视，你能看到${
+        `${teio.teen_sex_title}倔强的眼神与你对视，你能看到${
           teio.sex
         }瞳孔中自己的倒影。${teio.sex}最亲密的人，如今却「背叛」了${teio.sex}……${
           me.name
@@ -195,7 +195,7 @@ module.exports = class extends Edu3UntilWeekEnd {
       }
       if (ret === 1) {
         await era.printAndWait(
-          `${teio.get_teen_sex_title()}眼含泪光，但终究，还是被 ${
+          `${teio.teen_sex_title}眼含泪光，但终究，还是被 ${
             me.name
           } 压制住了。${teio.sex}沉默地离去，夕阳在${
             teio.sex
@@ -208,7 +208,7 @@ module.exports = class extends Edu3UntilWeekEnd {
         event_marks.give_up++;
       } else {
         await era.printAndWait(
-          `${teio.get_teen_sex_title()}破涕为笑，握着 ${
+          `${teio.teen_sex_title}破涕为笑，握着 ${
             me.name
           } 的手，体温烘暖了接触的部位。${
             me.name
@@ -318,11 +318,11 @@ module.exports = class extends Edu3UntilWeekEnd {
         await era.printAndWait(`粉丝A「你毁了${teio.sex}！」`);
         era.println();
         await era.printAndWait(
-          `粉丝B「就因为你自私，只追求成绩而毫不关心${teio.get_uma_sex_title()}的态度，你让东海帝王变成了现在这个样子！」`,
+          `粉丝B「就因为你自私，只追求成绩而毫不关心${teio.uma_sex_title}的态度，你让东海帝王变成了现在这个样子！」`,
         );
         era.println();
         await era.printAndWait(
-          `粉丝A「然后你这声称是训练员的家伙……完全可以拍拍屁股走人！声称的负责只不过是在别人面前说几句话，鞠个躬道个歉，大不了避纪念风头后再找新的苗子签契约！而原先${teio.get_uma_sex_title()}的一生可是就直接被毁掉了啊！」`,
+          `粉丝A「然后你这声称是训练员的家伙……完全可以拍拍屁股走人！声称的负责只不过是在别人面前说几句话，鞠个躬道个歉，大不了避纪念风头后再找新的苗子签契约！而原先${teio.uma_sex_title}的一生可是就直接被毁掉了啊！」`,
         );
         era.println();
         await era.printAndWait(
@@ -351,7 +351,7 @@ module.exports = class extends Edu3UntilWeekEnd {
       await era.printAndWait(
         `当时春季天皇赏赛后，${me.name} 被学校管理层叫去单独开会，并且让 ${
           me.name
-        } 去见一位已经退居二线的资深训练员前辈寻求指导，这位训练员在业界里很有名气，指导过无数名${teio.get_uma_sex_title()}，当 ${
+        } 去见一位已经退居二线的资深训练员前辈寻求指导，这位训练员在业界里很有名气，指导过无数名${teio.uma_sex_title}，当 ${
           me.name
         } 还在学生时代时，还曾有幸当过她一学期的学生。${
           me.name
@@ -369,7 +369,7 @@ module.exports = class extends Edu3UntilWeekEnd {
       await era.printAndWait(`${me.name} 点点头，算是回应。`);
       era.println();
       await era.printAndWait(
-        `中年妇人「我今天来是受校方之托，跟你谈一些关于你，和你的担当${teio.get_uma_sex_title()} ${
+        `中年妇人「我今天来是受校方之托，跟你谈一些关于你，和你的担当${teio.uma_sex_title} ${
           teio.name
         } 的事情。」`,
       );
@@ -379,7 +379,7 @@ module.exports = class extends Edu3UntilWeekEnd {
       );
       era.println();
       await era.printAndWait(
-        `中年妇人「我们就单刀直入吧——你是因为顺应了${teio.get_uma_sex_title()}的想法才会导致今天的失利吧？错不在你。而事实上，对训练员而言，实现自己目标的机会也有很多，一次培育失败，你完全可以解除契约后再签订新的${teio.get_uma_sex_title()}。我今天给你提供这个选择——与你的现担当解约吧，我保证你以后还能签约其他优秀的孩子，也保证你的原担当会得到我们最好的照顾。」`,
+        `中年妇人「我们就单刀直入吧——你是因为顺应了${teio.uma_sex_title}的想法才会导致今天的失利吧？错不在你。而事实上，对训练员而言，实现自己目标的机会也有很多，一次培育失败，你完全可以解除契约后再签订新的${teio.uma_sex_title}。我今天给你提供这个选择——与你的现担当解约吧，我保证你以后还能签约其他优秀的孩子，也保证你的原担当会得到我们最好的照顾。」`,
       );
       await era.printAndWait(
         `虽然 ${me.name} 早有会听到什么的心理准备，但仍不禁愕然。`,
@@ -431,7 +431,7 @@ module.exports = class extends Edu3UntilWeekEnd {
         era.printButton('「因此，我拒绝接受」', 1);
         await era.input();
         await me.say_and_wait(
-          `特雷森的训练员制度，是对${teio.get_uma_sex_title()}成长的帮扶不可缺少的部分。而训练员的任务，就是对自己的担当${teio.get_uma_sex_title()}负起责任。`,
+          `特雷森的训练员制度，是对${teio.uma_sex_title}成长的帮扶不可缺少的部分。而训练员的任务，就是对自己的担当${teio.uma_sex_title}负起责任。`,
         );
         era.println();
         era.printButton(`我作为 ${teio.name} 的专属训练员，会做应行之事。`, 1);

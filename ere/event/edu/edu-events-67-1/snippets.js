@@ -65,7 +65,7 @@ module.exports = {
     );
     await kita.say_and_wait('因为一直跑赢比赛，支持我的人才变多的！');
     await kita.say_and_wait(
-      `要是没有跑赢比赛的话，我就只是个不被注意的普通赛${daiya.get_uma_sex_title()}……`,
+      `要是没有跑赢比赛的话，我就只是个不被注意的普通赛${daiya.uma_sex_title}……`,
     );
     await kita.say_and_wait(
       '我也不像小钻有厉害的尾段加速能力，我没有那样的武器，就是一个只知道努力、很平凡的……',
@@ -128,22 +128,22 @@ module.exports = {
       '我刚刚一直在想，如果大家是因为能从小北身上看到自己而支持她，那支持我的人又是因为什么呢？',
     );
     await daiya.say_and_wait(
-      `身为『知名赛${daiya.get_uma_sex_title()}』的贡献……小北${
+      `身为『知名赛${daiya.uma_sex_title}』的贡献……小北${
         kita.sex
       }已经做到带给大家笑容的这个贡献了。`,
     );
     await daiya.say_and_wait('而我却连该做些什么都还没有想到……');
     await daiya.say_and_wait(
-      `为了赛${daiya.get_uma_sex_title()}界的发展，我所该做的事情……`,
+      `为了赛${daiya.uma_sex_title}界的发展，我所该做的事情……`,
     );
     await daiya.say_and_wait(
-      `身为一个赛${daiya.get_uma_sex_title()}，我的表现能带给大家的究竟是什么……`,
+      `身为一个赛${daiya.uma_sex_title}，我的表现能带给大家的究竟是什么……`,
     );
     await era.printAndWait(
       `大家在里见光钻身上所追求的事情。${daiya.sex}的表现能带给粉丝什么梦想。`,
     );
     await era.printAndWait(
-      `每一位「知名赛${daiya.get_uma_sex_title()}」都各自能带给大家不一样的梦想。`,
+      `每一位「知名赛${daiya.uma_sex_title}」都各自能带给大家不一样的梦想。`,
     );
     era.printButton('「我从你身上能感受到『可能性』」', 1);
     await era.input();
@@ -169,7 +169,7 @@ module.exports = {
     await daiya.say_and_wait(
       `无时无刻不忘挑战的心……这就是帝王${
         teio.sex
-      }身为『知名赛${daiya.get_uma_sex_title()}』的做法……`,
+      }身为『知名赛${daiya.uma_sex_title}』的做法……`,
     );
     await daiya.say_and_wait(
       '麦昆是接受挑战的身份，帝王则是挑战者的身份。',
@@ -196,13 +196,13 @@ module.exports = {
       '是的。一直以来我都在挑战各种事情，像是阻挠里见家的魔咒，还有挑战小北。',
     );
     await daiya.say_and_wait(
-      `所以，我想我身为一个『知名赛${daiya.get_uma_sex_title()}』，继续挑战各种事物，是不是就是最适合我的做法呢。`,
+      `所以，我想我身为一个『知名赛${daiya.uma_sex_title}』，继续挑战各种事物，是不是就是最适合我的做法呢。`,
     );
     await daiya.say_and_wait(
       '就像我挑战麦昆和帝王，在里见家的历史上开启一个新的篇章一样。',
     );
     await daiya.say_and_wait(
-      `我想要挑战各种事物，为里见家和赛${daiya.get_uma_sex_title()}界开拓新的历史。`,
+      `我想要挑战各种事物，为里见家和赛${daiya.uma_sex_title}界开拓新的历史。`,
     );
     await daiya.say_and_wait(
       '当我这么一想的同时，我才再次发现到，我想要挑战国外的比赛这件事。',
@@ -211,22 +211,22 @@ module.exports = {
       '不单只是为了让大家感受到可能性，而是为了实现我自己的心愿。',
     );
     await daiya.say_and_wait(
-      `想要在历史悠久的国外竞赛中取得胜利，把里见的名字刻划在赛${daiya.get_uma_sex_title()}界的历史中。`,
+      `想要在历史悠久的国外竞赛中取得胜利，把里见的名字刻划在赛${daiya.uma_sex_title}界的历史中。`,
     );
     await daiya.say_and_wait(
-      `然后，为里见家和日本赛${daiya.get_uma_sex_title()}开拓新的历史──`,
+      `然后，为里见家和日本赛${daiya.uma_sex_title}开拓新的历史──`,
     );
     await daiya.say_and_wait(
-      `我想，这就是我能为赛${daiya.get_uma_sex_title()}界所作的贡献吧。`,
+      `我想，这就是我能为赛${daiya.uma_sex_title}界所作的贡献吧。`,
     );
     era.printButton('「你找到自己的答案了呢」', 1);
     await era.input();
     await daiya.say_and_wait('是的！');
     await daiya.say_and_wait(
-      `身为『知名赛${daiya.get_uma_sex_title()}』的里见光钻所该有的模样……我已经确定自己的目标了。`,
+      `身为『知名赛${daiya.uma_sex_title}』的里见光钻所该有的模样……我已经确定自己的目标了。`,
     );
     await daiya.say_and_wait(
-      `我要在『有马纪念』获胜，正式加入『知名赛${daiya.get_uma_sex_title()}』的行列！`,
+      `我要在『有马纪念』获胜，正式加入『知名赛${daiya.uma_sex_title}』的行列！`,
     );
   },
 };

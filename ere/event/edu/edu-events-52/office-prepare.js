@@ -68,12 +68,12 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '话又说回来，决胜服的设计一般都是由',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '们亲自参与完成的，所以每件决胜服的诞生都是独一无二的。',
     ]);
     await era.printAndWait([
       '可以说，不管外人如何评价美与丑，这些各具特色的衣物都有资格被称为「承载',
-      urara.get_teen_sex_title(),
+      urara.teen_sex_title,
       '们梦想的盛装」。',
     ]);
     await era.printAndWait([
@@ -150,7 +150,7 @@ module.exports = (handlers) => {
         ' 的满脸期待，',
         me.get_colored_name(),
         ' 最终是没能向小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '那灿烂的笑容提出反对意见。',
       ]);
       await urara.say_and_wait([
@@ -182,7 +182,7 @@ module.exports = (handlers) => {
       '一定要帮 ',
       urara.get_colored_name(),
       ' 跑到最后。感受着心中与小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '相遇时相似的鼓动，',
       me.get_colored_name(),
       ' 对着手中的决胜服坚定了决心。',

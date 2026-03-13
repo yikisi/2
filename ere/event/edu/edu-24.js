@@ -193,14 +193,14 @@ module.exports = class extends CustomizedEdu {
         await maya.say_and_wait(['呵呵呵……', callname, '，太嫩，你还太嫩了！']);
         await maya.say_and_wait([
           '人家可是要成为出色的成熟',
-          maya.get_phy_sex_title(),
+          maya.phy_sex_title,
           '哦～☆',
         ]);
         era.printButton('「有哪里不同吗？」', 1);
         await era.input();
         await maya.say_and_wait([
           '完全不同啦～！受不了～！！『大人』和『成熟',
-          maya.get_phy_sex_title(),
+          maya.phy_sex_title,
           '』的差别就在……',
         ]);
         await maya.say_and_wait('……差在哪呢。');

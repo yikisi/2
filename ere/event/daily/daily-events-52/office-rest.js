@@ -44,18 +44,18 @@ module.exports = async (hook) => {
     ]);
     await era.printAndWait([
       '可爱的娃娃脸上带着安心的神情，在沉睡中自然伸展身体的小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '，肌肤在灯光反射着健康的光泽。',
     ]);
     await era.printAndWait([
       '紧身的内衣微微勒进',
-      urara.get_teen_sex_title(),
+      urara.teen_sex_title,
       '柔软的身体中，娇嫩的肉感与成长的曲线也在这幅似乎含苞待放的身体上达成了微妙平衡。',
     ]);
     if (era.get('talent:52:乳房尺寸') > 0) {
       await era.printAndWait([
         '因为某些原因过度丰满的乳房更是将上身仅剩的布料塞得满满当当，在小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '身上自由的挺起着。',
       ]);
     }
@@ -66,7 +66,7 @@ module.exports = async (hook) => {
     ]);
     await era.printAndWait([
       '面对如此没有戒心的可爱生物，与小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '初次相遇并同床共枕时类似的想法浮现在了 ',
       me.get_colored_name(),
       ' 的脑中。',
@@ -101,7 +101,7 @@ module.exports = async (hook) => {
     await urara.say_and_wait(['嗯？', callname, '……？']);
     await era.printAndWait([
       '摇晃着敏感的小耳朵，捕捉到声音的无防备',
-      urara.get_teen_sex_title(),
+      urara.teen_sex_title,
       '浅浅的睁开眼睛，用朦胧的目光辨认着准备帮',
       urara.sex,
       '盖毯子的 ',
@@ -115,7 +115,7 @@ module.exports = async (hook) => {
     ]);
     await era.printAndWait([
       '在小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '不收力量的拉扯下，',
       me.get_colored_name(),
       ' 连带着毯子一起被担当拉倒在了床上。',
@@ -141,7 +141,7 @@ module.exports = async (hook) => {
         '随着微弱的呼吸的趋于平缓，紧紧抱住 ',
         me.get_colored_name(),
         ' 的',
-        urara.get_teen_sex_title(),
+        urara.teen_sex_title,
         '安心地陷入了深层睡眠。',
       ]);
     } else {
@@ -162,7 +162,7 @@ module.exports = async (hook) => {
     era.println();
     await era.printAndWait([
       '埋在脖颈之间的发丝散发着清香，小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '仿佛拥有宁神功能的芬芳顺着肌肤相亲调皮地钻进了 ',
       me.get_colored_name(),
       ' 的鼻腔。',

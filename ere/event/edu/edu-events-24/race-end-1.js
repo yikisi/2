@@ -141,7 +141,7 @@ module.exports = (handlers) => {
     ]);
     await reporter.say_and_wait([
       '嗯，因为『三冠赛',
-      maya.get_uma_sex_title(),
+      maya.uma_sex_title,
       '』的 ',
       sys_get_colored_callname(303, 16),
       ' 也会参加今年的有马。',
@@ -151,18 +151,18 @@ module.exports = (handlers) => {
       '「',
       race_infos[race_enum.arim_kin].get_colored_name(),
       '」……是在每年年底举办的比赛。也是会忠实呈现出赛',
-      maya.get_uma_sex_title(),
+      maya.uma_sex_title,
       '的粉丝支持度，以及其当下实力的舞台。',
     ]);
     await era.printAndWait([
       '除了「三冠赛',
-      maya.get_uma_sex_title(),
+      maya.uma_sex_title,
       '」',
       get_chara_talk(16).get_colored_name(),
       '，还有像「女杰」',
       get_chara_talk(12).get_colored_name(),
       ' 等名声显赫的赛',
-      maya.get_uma_sex_title(),
+      maya.uma_sex_title,
       '应该都已经表明会参赛了。',
     ]);
     await maya.say_and_wait('嗯嗯，我会参加！');
@@ -548,7 +548,7 @@ module.exports = (handlers) => {
         '因为我之后要和 ',
         sys_get_colored_callname(24, 16),
         ' 比很多场比赛，成为成熟的赛',
-        maya.get_uma_sex_title(),
+        maya.uma_sex_title,
         '！',
       ]);
       await maya.say_and_wait(

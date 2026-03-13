@@ -243,9 +243,7 @@ async function common_hug_standing(attacker, defender, hook) {
     await attacker.print_and_wait('腰很快就塌下去了。');
     await attacker.print_and_wait(
       `明明是${
-        era.get(`cflag:${defender.id}:种族`)
-          ? defender.get_uma_sex_title()
-          : '大人'
+        era.get(`cflag:${defender.id}:种族`) ? defender.uma_sex_title : '大人'
       }，却失去了独自凭双足站稳的能力，变成扶着什么撅起屁股才能勉强站起的狼狈样子。`,
     );
     await attacker.print_and_wait(
@@ -526,7 +524,7 @@ async function common_ask_stimulate_hole(attacker, defender, hook) {
     await attacker.say_and_wait('拜托了……');
     if (era.get(`cflag:${attacker.id}:种族`) && attacker.id) {
       await attacker.print_and_wait(
-        `身为${attacker.get_uma_sex_title()}，这也太丢人了不是吗……`,
+        `身为${attacker.uma_sex_title}，这也太丢人了不是吗……`,
       );
     } else {
       await attacker.print_and_wait(

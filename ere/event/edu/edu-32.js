@@ -177,7 +177,7 @@ module.exports = class extends CustomizedEdu {
           await era.printAndWait('幸好，对方在坏的意义上并没有辜负自己');
           await era.printAndWait([
             '果然，是个会肆无忌惮对负责',
-            tachyon.get_uma_sex_title(),
+            tachyon.uma_sex_title,
             '出手的人渣',
           ]);
           era.println();

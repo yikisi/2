@@ -161,6 +161,13 @@ class CharaTalk {
     return this.sex_code === 1 ? i18n().name.uma_boy : i18n().name.uma_girl;
   }
 
+  /** 性奴角色的称呼 */
+  get sex_slave_title() {
+    return this.sex_code === 1
+      ? i18n().detail.exp_sm_sex_title_1
+      : i18n().detail.exp_sm_sex_title_0;
+  }
+
   /** @returns {number} */
   get race() {
     // CFLAGNAME:1 = 种族
@@ -206,30 +213,11 @@ class CharaTalk {
     };
   }
 
-  get_full_name() {
-    return this.full_name;
-  }
-
   /** 成人角色的称呼 */
   get_adult_sex_title = () => this.adult_sex_title;
 
-  /** 孩童角色的称呼 */
-  get_child_sex_title = () => this.child_sex_title;
-
   // 以角色为首的复数形式人称代词
   get_couple_title = () => this.couple_title;
-
-  /** 角色生理性别的称呼 */
-  get_phy_sex_title = () => this.phy_sex_title;
-
-  /** 性奴角色的称呼 */
-  get_sex_slave_title = () => (this.sex_code - 1 ? '母马' : '公马');
-
-  /** 青少年角色的称呼 */
-  get_teen_sex_title = () => this.teen_sex_title;
-
-  /** UMA角色的称呼 */
-  get_uma_sex_title = () => this.uma_sex_title;
 
   get_bigger_sibling_sex_title = () =>
     this.sex_code === 1 ? i18n().name.elder_brother : i18n().name.elder_sister;
@@ -238,8 +226,6 @@ class CharaTalk {
     this.sex_code === 1
       ? i18n().name.younger_brother
       : i18n().name.younger_sister;
-
-  get_siblings_sex_title = () => this.siblings_sex_title;
 
   /**
    * 事件从该角色视角展开时的旁白

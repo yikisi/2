@@ -61,7 +61,7 @@ module.exports = async (kitaru, me, callname, hook, event_object) => {
         ' 教 ',
         kitaru.get_colored_name(),
         ' 打游戏的啊，那个操作意识就算是用',
-        kitaru.get_uma_sex_title(),
+        kitaru.uma_sex_title,
         '的反应速度来解释也说不通。',
       ]);
     } else {
@@ -216,7 +216,7 @@ module.exports = async (kitaru, me, callname, hook, event_object) => {
     } else {
       await era.printAndWait([
         '漆着赛',
-        kitaru.get_uma_sex_title(),
+        kitaru.uma_sex_title,
         '特色涂装的赛车冲出了护栏，坠入了山谷。',
       ]);
     }
@@ -290,7 +290,7 @@ module.exports = async (kitaru, me, callname, hook, event_object) => {
       await era.printAndWait([
         me.get_colored_name(),
         ' 的肉棒在小穴内毫不留情的来回抽插，惩罚起这个在方才用脚玩弄它的',
-        kitaru.get_uma_sex_title(),
+        kitaru.uma_sex_title,
         '。',
       ]);
       await kitaru.say_and_wait('哈……哈……');

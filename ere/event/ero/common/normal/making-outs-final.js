@@ -542,7 +542,7 @@ class EroNormalMakingOuts extends EroNormalMakingOuts2 {
             ` 不禁露出了微笑。伸出双手，轻轻放在${defender.sex}的两只耳旁，温柔地扶住头部……然后抽动起了自己的腰。`,
           ]);
           await attacker.print_and_wait([
-            `下体在发间穿梭，将修建齐整的短发弄得凌乱不堪，清理出一片自己运动的路径。毛发和皮肤摩擦刺激使那关键部位的前端流出汁水，运动起来更为顺畅。液体从顶部划下，流到已经神志不清，娇喘着的${defender.get_phy_sex_title()}睫毛上，再向下滴落……`,
+            `下体在发间穿梭，将修建齐整的短发弄得凌乱不堪，清理出一片自己运动的路径。毛发和皮肤摩擦刺激使那关键部位的前端流出汁水，运动起来更为顺畅。液体从顶部划下，流到已经神志不清，娇喘着的${defender.phy_sex_title}睫毛上，再向下滴落……`,
           ]);
           await attacker.print_and_wait([
             attacker.get_colored_name(),
@@ -621,14 +621,14 @@ class EroNormalMakingOuts extends EroNormalMakingOuts2 {
             ' 性奋异常。',
           ]);
           await attacker.print_and_wait([
-            `下面的${defender.get_phy_sex_title()}发出若有若无的喘息，更激起 `,
+            `下面的${defender.phy_sex_title}发出若有若无的喘息，更激起 `,
             attacker.get_colored_name(),
             ' 的欲望。',
           ]);
           break;
         case 1:
           await attacker.print_and_wait([
-            `三个部位……三重触感……眼前的${defender.get_phy_sex_title()}主动为 `,
+            `三个部位……三重触感……眼前的${defender.phy_sex_title}主动为 `,
             attacker.get_colored_name(),
             ' 做出这种服务……',
           ]);
@@ -667,7 +667,7 @@ class EroNormalMakingOuts extends EroNormalMakingOuts2 {
           await attacker.print_and_wait([
             '突如其然地，',
             attacker.get_colored_name(),
-            ` 扳着面前这个${defender.get_phy_sex_title()}的脸，然后把自己温热充血的家伙放在了${
+            ` 扳着面前这个${defender.phy_sex_title}的脸，然后把自己温热充血的家伙放在了${
               defender.sex
             }耳廓与头发的空隙间，轻晃${
               defender.sex
@@ -691,13 +691,13 @@ class EroNormalMakingOuts extends EroNormalMakingOuts2 {
           await attacker.print_and_wait([
             `大踏步贴近，摁住${
               defender.sex
-            }的肩，挺腰直进，把分身放入对${defender.get_phy_sex_title()}来说隐秘的后颈上，在顺滑光泽的发丝和光滑白嫩的皮肤间，快乐地滑动起来。`,
+            }的肩，挺腰直进，把分身放入对${defender.phy_sex_title}来说隐秘的后颈上，在顺滑光泽的发丝和光滑白嫩的皮肤间，快乐地滑动起来。`,
           ]);
           break;
         case 2:
           await defender.say_and_wait('好吧……如果你一定要的话', true);
           await attacker.print_and_wait([
-            `一番对视，面前的${defender.get_phy_sex_title()}退缩了，`,
+            `一番对视，面前的${defender.phy_sex_title}退缩了，`,
             attacker.get_colored_name(),
             ' 带着胜利者的姿态开始享用战利品。',
           ]);
@@ -706,7 +706,7 @@ class EroNormalMakingOuts extends EroNormalMakingOuts2 {
             attacker.get_colored_name(),
             ` 玩弄起${
               defender.sex
-            }秀丽且有淡淡香气的长发，坏笑一声，从中挑起一捧，粗暴地将${defender.get_phy_sex_title()}平日细心打理的东西缠在自己的那玩意上，同时轻轻地拉扯，让自己有一种别样的撸管快感。`,
+            }秀丽且有淡淡香气的长发，坏笑一声，从中挑起一捧，粗暴地将${defender.phy_sex_title}平日细心打理的东西缠在自己的那玩意上，同时轻轻地拉扯，让自己有一种别样的撸管快感。`,
           ]);
       }
     } else {

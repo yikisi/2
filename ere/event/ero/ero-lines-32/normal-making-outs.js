@@ -186,7 +186,7 @@ module.exports = class extends EroNormalMakingOuts {
       ]);
       await defender.say_and_wait([
         '让我变成……只用屁穴就能不断高潮的淫乱',
-        defender.get_uma_sex_title(),
+        defender.uma_sex_title,
         '❤️',
       ]);
       era.println();
@@ -257,7 +257,7 @@ module.exports = class extends EroNormalMakingOuts {
     }
     await defender.print_and_wait([
       '看着自己认可的 ',
-      attacker.get_phy_sex_title(),
+      attacker.phy_sex_title,
       '，散发出了令自己发狂的气味。',
     ]);
     await defender.print_and_wait('提出了令自己发狂的请求。');
@@ -428,7 +428,7 @@ module.exports = class extends EroNormalMakingOuts {
     ]);
     await attacker.print_and_wait([
       '彻底的将眼前的负责',
-      defender.get_uma_sex_title(),
+      defender.uma_sex_title,
       '当成了性处理用具来使用……',
     ]);
   }
@@ -454,7 +454,7 @@ module.exports = class extends EroNormalMakingOuts {
       ]);
       await attacker.print_and_wait([
         '将自己的负责',
-        defender.get_uma_sex_title(),
+        defender.uma_sex_title,
         '当成工具使用的感觉使自己兴奋的不住颤抖……',
       ]);
     } else {

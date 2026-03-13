@@ -19,7 +19,7 @@ module.exports = (handlers) => {
     await print_event_name('超究极武神极巨化以下略 · 巧克力慕斯蛋糕', acute);
     await era.printAndWait([
       '冬意渐渐消去、万物逐渐复苏；伴随着在天台遇见的像奶奶一样的',
-      acute.get_teen_sex_title(),
+      acute.teen_sex_title,
       '后，转眼便来到了二月的中旬。',
     ]);
     await era.printAndWait([
@@ -27,9 +27,9 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '来此购物的大头自然是特雷森的',
-      acute.get_uma_sex_title(),
+      acute.uma_sex_title,
       '们——虽然',
-      acute.get_uma_sex_title(),
+      acute.uma_sex_title,
       '们大多专心于比赛，对恋爱不甚感兴趣。但买来些小食作为情人节友情礼品赠予友人，自然也是极好的。',
     ]);
     await era.printAndWait([
@@ -135,11 +135,11 @@ module.exports = (handlers) => {
     ]);
     await say_by_passer_by_and_wait('店员', [
       '可',
-      acute.get_uma_sex_title(),
+      acute.uma_sex_title,
       '就能做得到吧？',
     ]);
     await me.say_and_wait([
-      acute.get_uma_sex_title(),
+      acute.uma_sex_title,
       '也做不到的好嘛！？不要说的那么轻松啊！',
     ]);
     await say_by_passer_by_and_wait('店员', [
@@ -723,7 +723,7 @@ module.exports = (handlers) => {
       '的身上，恍惚间、',
       acute.get_colored_name(),
       ' 似乎失了往日的平和，却多了几分',
-      acute.get_teen_sex_title(),
+      acute.teen_sex_title,
       '般的脆弱。',
     ]);
     await me.say_and_wait(['……抱歉，让你伤心了吗？']);

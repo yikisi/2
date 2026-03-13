@@ -28,7 +28,7 @@ async function ask_release_common(teio, me) {
   await teio.say_and_wait('……哈。');
   await era.printAndWait([
     '跨坐在你对面椅子上的小',
-    teio.get_uma_sex_title(),
+    teio.uma_sex_title,
     '身体前倾，整个人探了过来，蓝黑色的双眸一眨不眨地盯着 ',
     me.get_colored_name(),
     '，仿佛一对墨色的门扉，吞没任何试图探入的光芒。',
@@ -152,7 +152,7 @@ module.exports = class extends CustomizedBase {
       ' 朝门口走去，余光中却看到那个 ',
       me.get_colored_name(),
       ' 曾认识的',
-      teio.get_child_sex_title(),
+      teio.child_sex_title,
       '正在颤抖着身体——',
     ]);
     era.printButton('放着不管', 1);
@@ -170,7 +170,7 @@ module.exports = class extends CustomizedBase {
         ' 没有犹豫，挪向那个缩成一团的身影，伸出手轻轻抚摸着',
         teio.sex,
         '的头，再从发辫根部一路向下，经过脊背，最终抵达尾稍，小',
-        teio.get_uma_sex_title(),
+        teio.uma_sex_title,
         '的身体一开始抖得更剧，后来逐渐平息下来。',
       ]);
       await era.printAndWait([
@@ -275,7 +275,7 @@ module.exports = class extends CustomizedBase {
       await era.printAndWait([
         me.get_colored_name(),
         ' 被',
-        teio.get_teen_sex_title(),
+        teio.teen_sex_title,
         '轻松摆平，看样子',
         teio.sex,
         '的惊讶要更甚于愤怒。',
@@ -298,7 +298,7 @@ module.exports = class extends CustomizedBase {
       '巨声回荡在地下的空间里，',
       me.get_colored_name(),
       ' 被震了回来，眼冒金星，刚刚和',
-      teio.get_uma_sex_title(),
+      teio.uma_sex_title,
       '对抗留下的伤痛似乎也同时发作，',
       me.get_colored_name(),
       ' 喘着粗气，重心一沉便不由自主地坐了下去，视线恰好对上自家担当那张昏睡的脸。',
@@ -310,7 +310,7 @@ module.exports = class extends CustomizedBase {
       '看上去就和那个 ',
       me.get_colored_name(),
       ' 熟知的',
-      teio.get_uma_sex_title(),
+      teio.uma_sex_title,
       '一样。',
     ]);
     era.println();
@@ -524,7 +524,7 @@ module.exports = class extends CustomizedBase {
         '训练员与',
         me.sex,
         '的担当',
-        teio.get_uma_sex_title(),
+        teio.uma_sex_title,
         '对视良久，默契地都转过头去。',
       ]);
       era.println();
@@ -549,7 +549,7 @@ module.exports = class extends CustomizedBase {
 
       await era.printAndWait([
         '许久未闻的',
-        teio.get_teen_sex_title(),
+        teio.teen_sex_title,
         '本音尖叫响起，',
         teio.sex,
         '被 ',

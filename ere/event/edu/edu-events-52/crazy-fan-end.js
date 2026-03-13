@@ -50,7 +50,7 @@ module.exports = async () => {
   ]);
   await era.printAndWait([
     '只是即使如此，身边的小',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '依旧善解人意的反过来安抚着精神不振的 ',
     me.get_colored_name(),
     '。',
@@ -71,7 +71,7 @@ module.exports = async () => {
       '自从在那场比赛跌倒之后，虽然身体一切正常，但 ',
       urara.get_colored_name(),
       ' 却过早地失去了',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '的能力。',
     ]);
     await era.printAndWait([
@@ -117,7 +117,7 @@ module.exports = async () => {
       '即使如此，为了掩饰伤感，也为了不让 ',
       me.get_colored_name(),
       ' 过于伤心，小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '还是强迫自己断断续续地说着。',
     ]);
     await urara.say_and_wait([
@@ -144,7 +144,7 @@ module.exports = async () => {
   ]);
   await era.printAndWait([
     '之后，小',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '忍耐到最后的泪水还是无法抑制地提前洒了出来。',
   ]);
   era.println();
@@ -199,7 +199,7 @@ module.exports = async () => {
   ]);
   await era.printAndWait([
     '虽然说的是「再见」，但即便没有依据，现在小',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '的离去，恐怕也等同于「再也不见」。',
   ]);
   await era.printAndWait([
@@ -212,7 +212,7 @@ module.exports = async () => {
     ' 在最初时是那么信任 ',
     me.get_colored_name(),
     '，甚至对愿意帮助自己的「可靠大人」怀有小小的',
-    urara.get_teen_sex_title(),
+    urara.teen_sex_title,
     '情愫。',
   ]);
   await era.printAndWait([
@@ -237,7 +237,7 @@ module.exports = async () => {
   ]);
   await era.printAndWait([
     '但就算「或许」堆积如山，也没有一个能够留住小',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '的分毫，更不可能逆转',
     urara.sex,
     '离开的事实。',

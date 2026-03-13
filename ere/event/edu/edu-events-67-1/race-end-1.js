@@ -61,7 +61,7 @@ module.exports = (handlers) => {
     );
     await say_by_passer_by_and_wait(
       '观众C',
-      `那个叫里见光钻的赛${daiya.get_uma_sex_title()}，${
+      `那个叫里见光钻的赛${daiya.uma_sex_title}，${
         daiya.sex
       }跑步的样子真的好漂亮喔！就是那场五亿对决的！」`,
     );
@@ -75,19 +75,19 @@ module.exports = (handlers) => {
       ' 也很有希望呢！」',
     ]);
     await era.printAndWait(
-      `观众B「……嗯？是说──里见集团有出过跑赢G1的赛${daiya.get_uma_sex_title()}吗……？」`,
+      `观众B「……嗯？是说──里见集团有出过跑赢G1的赛${daiya.uma_sex_title}吗……？」`,
     );
     await era.printAndWait(
-      `观众A「从来没有啊。以前还蛮多里见家的赛${daiya.get_uma_sex_title()}参赛的，但从来没人赢过G1。」`,
+      `观众A「从来没有啊。以前还蛮多里见家的赛${daiya.uma_sex_title}参赛的，但从来没人赢过G1。」`,
     );
     await era.printAndWait(
-      `观众A「所以才会在杂志上看到──『至今没有G1赛${daiya.get_uma_sex_title()}的里见家魔咒』这样的标语……」`,
+      `观众A「所以才会在杂志上看到──『至今没有G1赛${daiya.uma_sex_title}的里见家魔咒』这样的标语……」`,
     );
     await era.printAndWait(
       '观众C「是喔──还有这种传闻喔。所以是因为魔咒的关系才赢不了G1啰？」',
     );
     await era.printAndWait(
-      `观众A「对啊。里见光钻是里见家久违出现的赛${daiya.get_uma_sex_title()}，希望她能够跑赢G1呢。」`,
+      `观众A「对啊。里见光钻是里见家久违出现的赛${daiya.uma_sex_title}，希望她能够跑赢G1呢。」`,
     );
     await era.printAndWait(
       `${me.name} 一边听着走在前面的人所说的话，一边偷偷看向里见光钻。`,
@@ -162,11 +162,11 @@ module.exports = (handlers) => {
       );
       await daiya.say_and_wait('这真是……离我预期的表现差得好远……', true);
       await daiya.say_and_wait(
-        `速度最快的赛${daiya.get_uma_sex_title()}才能获胜的『皋月赏』，身为赢家的我怎么能是这种表现……！`,
+        `速度最快的赛${daiya.uma_sex_title}才能获胜的『皋月赏』，身为赢家的我怎么能是这种表现……！`,
         true,
       );
       await daiya.say_and_wait(
-        `什么知名赛${daiya.get_uma_sex_title()}，我根本完全不够格！`,
+        `什么知名赛${daiya.uma_sex_title}，我根本完全不够格！`,
         true,
       );
     } else {
@@ -197,7 +197,7 @@ module.exports = (handlers) => {
         '……可是……刚好今天遇上了坏天气。才没能发挥100%的实力，最后输掉了比赛……',
       );
       await daiya.say_and_wait(
-        `『里见家的赛${daiya.get_uma_sex_title()}赢不了G1』这个魔咒，我也……`,
+        `『里见家的赛${daiya.uma_sex_title}赢不了G1』这个魔咒，我也……`,
       );
       era.printButton('「光钻……」', 1);
       await era.input();
@@ -230,7 +230,7 @@ module.exports = (handlers) => {
     if (extra_flag.rank === 1) {
       await say_by_passer_by_and_wait(
         '实况',
-        `领先的是……里见光钻──！今年的德比赛${daiya.get_uma_sex_title()}是里见光钻！`,
+        `领先的是……里见光钻──！今年的德比赛${daiya.uma_sex_title}是里见光钻！`,
       );
       await say_by_passer_by_and_wait('观众', '哇啊啊啊啊啊啊啊！');
       await say_by_passer_by_and_wait(
@@ -244,7 +244,7 @@ module.exports = (handlers) => {
     } else {
       await say_by_passer_by_and_wait(
         '实况',
-        `……里见光钻没能做到！成为德比赛${daiya.get_uma_sex_title()}的梦想离${
+        `……里见光钻没能做到！成为德比赛${daiya.uma_sex_title}的梦想离${
           daiya.sex
         }远去──！！`,
       );
@@ -258,10 +258,10 @@ module.exports = (handlers) => {
     if (extra_flag.rank === 1) {
       const reporter = get_chara_talk(303);
       await reporter.say_and_wait(
-        `里见光钻${daiya.get_adult_sex_title()}，恭喜你！请问你成为德比赛${daiya.get_uma_sex_title()}的感想是？`,
+        `里见光钻${daiya.get_adult_sex_title()}，恭喜你！请问你成为德比赛${daiya.uma_sex_title}的感想是？`,
       );
       await daiya.say_and_wait(
-        `……谢谢。能够在赛${daiya.get_uma_sex_title()}的历史上留下自己的名字，我感到很光荣。`,
+        `……谢谢。能够在赛${daiya.uma_sex_title}的历史上留下自己的名字，我感到很光荣。`,
       );
       await daiya.say_and_wait(
         '在『日本德比』获胜，这对里见家来说也是至高的荣耀。',
@@ -290,13 +290,13 @@ module.exports = (handlers) => {
         `回到休息室时，${daiya.sex}的表情看起来似乎有些不满。`,
       );
       era.printButton(
-        `「恭喜你，今天起你就是德比赛${daiya.get_uma_sex_title()}了呢」`,
+        `「恭喜你，今天起你就是德比赛${daiya.uma_sex_title}了呢」`,
         1,
       );
       await era.input();
       await daiya.say_and_wait('谢谢，不过……');
       await daiya.say_and_wait(
-        `争夺德比赛${daiya.get_uma_sex_title()}头衔的比赛……我的表现居然是那样，我觉得自己很没用……`,
+        `争夺德比赛${daiya.uma_sex_title}头衔的比赛……我的表现居然是那样，我觉得自己很没用……`,
       );
       era.printButton('「怎么了吗？」', 1);
       await era.input();
@@ -585,7 +585,7 @@ module.exports = (handlers) => {
       '呵呵，当时我所想的舞台其实是G1竞赛，没想到现实却是更精彩的状况呢。',
     );
     await daiya.say_and_wait(
-      `在我要成为知名赛${daiya.get_uma_sex_title()}这个梦想的路上，小北也在……${
+      `在我要成为知名赛${daiya.uma_sex_title}这个梦想的路上，小北也在……${
         kita.sex
       }以对手的身份阻挡在前。`,
     );
@@ -736,10 +736,10 @@ module.exports = (handlers) => {
         '只是一个开始……喔喔喔！今后我也会追看你们的对决的！！',
       ]);
       await era.printAndWait(
-        `观众盛大的欢呼声笼罩整个看台，迟迟没有停止。这时，北部玄驹将所有参赛赛${daiya.get_uma_sex_title()}叫来优胜者区域。`,
+        `观众盛大的欢呼声笼罩整个看台，迟迟没有停止。这时，北部玄驹将所有参赛赛${daiya.uma_sex_title}叫来优胜者区域。`,
       );
       await era.printAndWait(
-        `赛${daiya.get_uma_sex_title()}排成一列面对着观众席。举起双手大大地左右挥动。`,
+        `赛${daiya.uma_sex_title}排成一列面对着观众席。举起双手大大地左右挥动。`,
       );
       await kita.say_and_wait('各位，明年也麻烦继续支持我们了──！！');
       await say_by_passer_by_and_wait('观众', '哇啊啊啊啊啊啊啊啊啊！');
@@ -751,7 +751,7 @@ module.exports = (handlers) => {
       await era.printAndWait(
         `距离跟时程上都没有问题。但是以防万一，${me.name} 还是要跟${
           daiya.sex
-        }确认，这是否是为了成为知名赛${daiya.get_uma_sex_title()}的梦想而做出来的决定。`,
+        }确认，这是否是为了成为知名赛${daiya.uma_sex_title}的梦想而做出来的决定。`,
       );
       await daiya.say_and_wait(
         '是的。毕竟『大阪杯』也是G1竞赛，所以没有问题。',
@@ -776,10 +776,10 @@ module.exports = (handlers) => {
         `小北用${kita.sex}比赛时的表现带给大家欢笑，并带动整个闪耀系列赛的热潮。`,
       );
       await daiya.say_and_wait(
-        `让我深刻觉得那就是『知名赛${daiya.get_uma_sex_title()}』的姿态。`,
+        `让我深刻觉得那就是『知名赛${daiya.uma_sex_title}』的姿态。`,
       );
       await daiya.say_and_wait(
-        `『知名赛${daiya.get_uma_sex_title()}』该是什么样子，我自己还没有找到答案。`,
+        `『知名赛${daiya.uma_sex_title}』该是什么样子，我自己还没有找到答案。`,
       );
       await daiya.say_and_wait(
         `以小北来说，${kita.sex}认真比赛的模样会让人忍不住想支持她。`,
@@ -798,10 +798,10 @@ module.exports = (handlers) => {
       );
       await daiya.say_and_wait('呵呵，你这么说我很开心……但不用担心。');
       await daiya.say_and_wait(
-        `我打算要找出属于自己的『知名赛${daiya.get_uma_sex_title()}』该有的姿态。`,
+        `我打算要找出属于自己的『知名赛${daiya.uma_sex_title}』该有的姿态。`,
       );
       await daiya.say_and_wait(
-        `看看里见光钻我究竟能用什么方式支持赛${daiya.get_uma_sex_title()}界……`,
+        `看看里见光钻我究竟能用什么方式支持赛${daiya.uma_sex_title}界……`,
       );
       await daiya.say_and_wait(
         `一边看着小北的表现，一边追着${kita.sex}的背影……我觉得这么做或许就能找到我想要的答案。`,
@@ -810,7 +810,7 @@ module.exports = (handlers) => {
       await era.input();
       await daiya.say_and_wait('好的！训练员，要麻烦你继续照顾了！');
       await era.printAndWait(
-        `『知名赛${daiya.get_uma_sex_title()}』该有的姿态。为了寻找这个未知的答案，${
+        `『知名赛${daiya.uma_sex_title}』该有的姿态。为了寻找这个未知的答案，${
           me.name
         } 和里见光钻即将要迈入资深级。`,
       );
@@ -848,7 +848,7 @@ module.exports = (handlers) => {
         '连在长距离的比赛也输给你了呢。你的实力已经无庸置疑了。',
       );
       await mcqueen.say_and_wait(
-        `──你这不是已经拥有了吗。你所说的『知名赛${daiya.get_uma_sex_title()}』的实力。`,
+        `──你这不是已经拥有了吗。你所说的『知名赛${daiya.uma_sex_title}』的实力。`,
       );
       await daiya.say_and_wait('谢谢……！');
       await teio.say_and_wait(
@@ -862,7 +862,7 @@ module.exports = (handlers) => {
         '一旦停下脚步，立刻就会被超越。我还打算要再次挑战你们呢。',
       );
       await teio.say_and_wait(
-        `况且，像你们这样厉害的赛${daiya.get_uma_sex_title()}，之后也还会陆陆续续出现吧。`,
+        `况且，像你们这样厉害的赛${daiya.uma_sex_title}，之后也还会陆陆续续出现吧。`,
       );
       await kita.say_and_wait(
         '是！我不会大意的！为了带给大家笑容，我一定会变得更强、更强的！',
@@ -871,37 +871,37 @@ module.exports = (handlers) => {
         '……光钻，你呢？已经清楚自己该前进的方向了吗？',
       );
       await daiya.say_and_wait(
-        `……是。身为里见家的赛${daiya.get_uma_sex_title()}，我要引领里见家，开拓更多的历史。`,
+        `……是。身为里见家的赛${daiya.uma_sex_title}，我要引领里见家，开拓更多的历史。`,
       );
       await daiya.say_and_wait(
-        `用成绩在赛${daiya.get_uma_sex_title()}界留下纪录，就这样继续打造属于里见家的历史。`,
+        `用成绩在赛${daiya.uma_sex_title}界留下纪录，就这样继续打造属于里见家的历史。`,
       );
       await mcqueen.say_and_wait('原来如此。那么，你打算开拓怎样的道路呢？');
       await daiya.say_and_wait(
         '──迈向顶点的道路。我要像我的名字一样，挑战绽放出最顶级的钻石光辉。',
       );
       await daiya.say_and_wait(
-        `挑战日本、世界各地的顶点，发扬赛${daiya.get_uma_sex_title()}界。`,
+        `挑战日本、世界各地的顶点，发扬赛${daiya.uma_sex_title}界。`,
       );
       await daiya.say_and_wait(
-        `这就是我──里见光钻所认为的『知名赛${daiya.get_uma_sex_title()}』该有的姿态。`,
+        `这就是我──里见光钻所认为的『知名赛${daiya.uma_sex_title}』该有的姿态。`,
       );
       await daiya.say_and_wait(
-        `我现在才刚到这条路的入口处。今后我会以此为志，继续朝『知名赛${daiya.get_uma_sex_title()}』迈进。`,
+        `我现在才刚到这条路的入口处。今后我会以此为志，继续朝『知名赛${daiya.uma_sex_title}』迈进。`,
       );
       await mcqueen.say_and_wait('呵呵，这是很了不起的心志呢。');
       await mcqueen.say_and_wait(
-        `那接下来就像个『知名赛${daiya.get_uma_sex_title()}』一般，出发去吧！大家都在等你了！`,
+        `那接下来就像个『知名赛${daiya.uma_sex_title}』一般，出发去吧！大家都在等你了！`,
       );
       await daiya.say_and_wait('好的！');
       await daiya.say_and_wait('各位，谢谢你们为我加油！');
       await era.printAndWait('观众A「光钻────！！恭喜你────！」');
       await era.printAndWait(
-        `观众B「赛${daiya.get_uma_sex_title()}界的至宝！！没有人能胜过钻石的光辉！」`,
+        `观众B「赛${daiya.uma_sex_title}界的至宝！！没有人能胜过钻石的光辉！」`,
       );
       await daiya.say_and_wait('呵呵呵，我也希望一直保持。');
       await daiya.say_and_wait(
-        `里见光钻身为里见家的赛${daiya.get_uma_sex_title()}，会尽心尽力、竭尽所能地为日本赛${daiya.get_uma_sex_title()}界的发展做出贡献。`,
+        `里见光钻身为里见家的赛${daiya.uma_sex_title}，会尽心尽力、竭尽所能地为日本赛${daiya.uma_sex_title}界的发展做出贡献。`,
       );
       await daiya.say_and_wait('而这一条路今后也──');
       await daiya.say_and_wait('小北！！');

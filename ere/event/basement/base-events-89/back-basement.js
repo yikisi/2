@@ -25,7 +25,7 @@ function back_basement() {
     era.print(['然而出现在门口的身影，远非想象中的凶恶歹徒。']);
     era.print([
       '小',
-      grand.get_uma_sex_title(),
+      grand.uma_sex_title,
       '背过手，锁芯伴随一声脆响，向反方向再次转动。',
     ]);
     era.print([
@@ -39,7 +39,7 @@ function back_basement() {
     era.println();
 
     era.print([
-      grand.get_teen_sex_title(),
+      grand.teen_sex_title,
       '向 ',
       me.get_colored_name(),
       ' 的后脑伸出颤颤巍巍的小手，悬停片刻，却转而压下帽檐。',
@@ -59,21 +59,21 @@ function back_basement() {
 
     era.print([
       '推开铁门现身的小',
-      grand.get_uma_sex_title(),
+      grand.uma_sex_title,
       '手中提着一个纸袋，包装表明里面是『光朝』的肉包。',
     ]);
     era.print([
       '面对 ',
       me.get_colored_name(),
       ' 一起享用的邀请，',
-      grand.get_teen_sex_title(),
+      grand.teen_sex_title,
       '只是微微摇头。',
     ]);
     era.print([
       '是吃过了吗？猜测原因的 ',
       me.get_colored_name(),
       '，没来得及咬下第一口，',
-      grand.get_teen_sex_title(),
+      grand.teen_sex_title,
       '的肚子却先传出了咕咕声。',
     ]);
     era.println();
@@ -95,7 +95,7 @@ function back_basement() {
 
     era.print([
       '湿透的校服，有一块没一块的贴着小',
-      grand.get_uma_sex_title(),
+      grand.uma_sex_title,
       '的身体。',
     ]);
     era.print(['海军帽被雨水染成深色，原本蓬松帅气的短发粘在冻红的脸颊。']);
@@ -109,7 +109,7 @@ function back_basement() {
     era.print([
       me.get_colored_name(),
       ' 强硬地将宛如傀偶的',
-      grand.get_teen_sex_title(),
+      grand.teen_sex_title,
       '拉到床边，为',
       grand.sex,
       '披上被褥。',

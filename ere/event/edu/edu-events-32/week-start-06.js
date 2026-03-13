@@ -97,11 +97,11 @@ module.exports = (handlers) => {
       await era.printAndWait('……没什么，只是，有点吓到了，呵呵');
       await era.printAndWait([
         '毕竟还是',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         '，哪怕是腿脚不便的',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         '身体素质比起人类还是强上许多，更何况还是今年要回归赛场的前G1',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         '了',
       ]);
       era.println();
@@ -126,7 +126,7 @@ module.exports = (handlers) => {
         '———',
         me.get_colored_name(),
         ' 的另一名负责',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
       ]);
       await era.printAndWait([
         '那么，在有限能够选择的比赛中，当然必须要以 ',

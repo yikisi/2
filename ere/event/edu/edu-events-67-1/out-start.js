@@ -147,7 +147,7 @@ module.exports = class extends Edu67BackSchool {
     } else if (edu_marks.satono_uma === 1) {
       edu_marks.satono_uma++;
       await print_event_name(
-        `身为里见家的一员，身为赛${daiya.get_uma_sex_title()}`,
+        `身为里见家的一员，身为赛${daiya.uma_sex_title}`,
         daiya,
       );
       const ryan = get_chara_talk(27),
@@ -207,7 +207,7 @@ module.exports = class extends Edu67BackSchool {
         '那是我们里见集团慈善事业的一环，目前正在计划要办一场慈善竞赛。',
       );
       await daiya.say_and_wait(
-        `毕竟我既是里见家的一分子也同时是赛${daiya.get_uma_sex_title()}，所以总想着自己能不能帮上点什么忙，想为大家尽点绵薄之力。`,
+        `毕竟我既是里见家的一分子也同时是赛${daiya.uma_sex_title}，所以总想着自己能不能帮上点什么忙，想为大家尽点绵薄之力。`,
       );
       await era.printAndWait(
         `${daiya.sex}在说这些话时的表情比平常更加正气凛然，可以感觉得出来${daiya.sex}对此抱持很大的责任感。`,
@@ -240,10 +240,10 @@ module.exports = class extends Edu67BackSchool {
         );
         await daiya.say_and_wait('是呀，我就是这么打算的。');
         await daiya.say_and_wait(
-          `如同我刚才所说，我毕竟既是里见家的一分子也同时是赛${daiya.get_uma_sex_title()}。`,
+          `如同我刚才所说，我毕竟既是里见家的一分子也同时是赛${daiya.uma_sex_title}。`,
         );
         await daiya.say_and_wait(
-          `虽然我现在还只是个年轻的晚辈，但我希望总有一天自己可以为里见家和赛${daiya.get_uma_sex_title()}业界都做出贡献！`,
+          `虽然我现在还只是个年轻的晚辈，但我希望总有一天自己可以为里见家和赛${daiya.uma_sex_title}业界都做出贡献！`,
         );
         await era.printAndWait(
           `从${daiya.sex}不仅考量着现在也规划着未来的眼神中，${me.name} 仿佛可以预见${daiya.sex}将来活跃的姿态。`,
@@ -312,7 +312,7 @@ module.exports = class extends Edu67BackSchool {
           '经过了数万年、数十万年的时间，不断地在同一个地方累积，才能变得又坚硬又大。',
         );
         await daiya.say_and_wait(
-          `我认为，赛${daiya.get_uma_sex_title()}的强大是跟这个很接近的。`,
+          `我认为，赛${daiya.uma_sex_title}的强大是跟这个很接近的。`,
         );
         await daiya.say_and_wait('──换句换说，就是贯彻到底的意思。');
         await daiya.say_and_wait(
@@ -692,7 +692,7 @@ module.exports = class extends Edu67BackSchool {
         '光钻的父亲「证明当初光钻的直觉果然没有错──之后的古马级赛事也要麻烦你了。」',
       );
       era.printButton(
-        `「好的。我一定会引导她成为『知名赛${daiya.get_uma_sex_title()}』」`,
+        `「好的。我一定会引导她成为『知名赛${daiya.uma_sex_title}』」`,
         1,
       );
       await era.input();
@@ -730,10 +730,10 @@ module.exports = class extends Edu67BackSchool {
       );
       await daiya.say_and_wait('哪里，我还差得远呢。');
       await daiya.say_and_wait(
-        `我还在努力钻研身为『知名赛${daiya.get_uma_sex_title()}』应该要有的样子。`,
+        `我还在努力钻研身为『知名赛${daiya.uma_sex_title}』应该要有的样子。`,
       );
       await era.printAndWait(
-        `光钻的前训练员「成为了知名赛${daiya.get_uma_sex_title()}……就代表国外远征也会在计划范围内啰？」`,
+        `光钻的前训练员「成为了知名赛${daiya.uma_sex_title}……就代表国外远征也会在计划范围内啰？」`,
       );
       await era.printAndWait(
         '运动产品公司的业务员「如果有国外远征的计划，敝公司能为您准备适合国外使用的训练机器及运动鞋喔。」',

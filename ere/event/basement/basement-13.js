@@ -286,7 +286,7 @@ module.exports = class extends CustomizedBase {
     ]);
     mcqueen.say([
       '你说这是哪里？呵……这是防止其他',
-      mcqueen.get_uma_sex_title(),
+      mcqueen.uma_sex_title,
       '来诱惑 ',
       callname,
       '，专门为我们彼此之间的独处而设置的空间哦。',

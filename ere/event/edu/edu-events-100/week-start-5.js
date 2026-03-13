@@ -296,7 +296,7 @@ module.exports = (handlers) => {
         await acute.say_and_wait('是去法国的事情哦，训练员桑。');
         await acute.say_and_wait([
           '你已经接受了法国赛',
-          acute.get_uma_sex_title(),
+          acute.uma_sex_title,
           '届的邀请、去巴黎深造。然后三天之后，就会一个人坐上去巴黎的飞机，对吧？',
         ]);
         await me.say_and_wait('……');
@@ -314,7 +314,7 @@ module.exports = (handlers) => {
         await me.say_and_wait('只是，不知道该如何告诉你而已。');
         await me.say_and_wait([
           '如果，要在赛',
-          acute.get_uma_sex_title(),
+          acute.uma_sex_title,
           '届更进一步的话。现在的我，恐怕并没有真正的资格，站在你的身边吧。',
         ]);
         await me.say_and_wait('可我……想要真正有资格的，站在你的身边。');
@@ -329,7 +329,7 @@ module.exports = (handlers) => {
         await me.say_and_wait('你说，法国赛马届的最高奖赛？');
         await acute.say_and_wait([
           '是呢，就是那个每年我们这边都会选出『最强',
-          acute.get_uma_sex_title(),
+          acute.uma_sex_title,
           '』孤身过海、前往巴黎所参加的比赛呢。',
         ]);
         await acute.say_and_wait('虽然今年，可能没有这个机会了。');
@@ -346,7 +346,7 @@ module.exports = (handlers) => {
         );
         await era.printAndWait([
           '月光之下，星光璀璨，灰色的',
-          acute.get_teen_sex_title(),
+          acute.teen_sex_title,
           '，许下了',
           acute.sex,
           '的诺言。',
@@ -534,17 +534,17 @@ module.exports = (handlers) => {
         await acute.print_and_wait('盆景之下，玻璃之旁。');
         await acute.print_and_wait([
           '一个',
-          acute.get_child_sex_title(),
+          acute.child_sex_title,
           '，静静地坐在这里。',
         ]);
         await acute.print_and_wait([
           '人们常说',
-          acute.get_child_sex_title(),
+          acute.child_sex_title,
           '平静、温和，以至于有些老态龙钟。',
         ]);
         await acute.print_and_wait([
           '其实，',
-          acute.get_child_sex_title(),
+          acute.child_sex_title,
           '并不像人们口中所说的那样，总是平静与温和。',
         ]);
         await acute.print_and_wait([
@@ -560,12 +560,12 @@ module.exports = (handlers) => {
         await acute.print_and_wait('藏在一个「没有人发现」的地方。');
         await acute.print_and_wait('在那里，轻轻地坐下来。');
         await acute.print_and_wait('就像「一开始」那样——');
-        tokino.name = `头戴绿色帽子的${tokino.get_phy_sex_title()}`;
-        acute.name = acute.get_child_sex_title();
+        tokino.name = `头戴绿色帽子的${tokino.phy_sex_title}`;
+        acute.name = acute.child_sex_title;
         await tokino.say_and_wait(['——不去跟', me.sex, '告别吗？']);
         await acute.print_and_wait([
           '身旁，好心的',
-          acute.get_phy_sex_title(),
+          acute.phy_sex_title,
           '，直立在',
           acute.sex,
           '的侧方。',
@@ -574,12 +574,12 @@ module.exports = (handlers) => {
         await tokino.say_and_wait('是吗……');
         await acute.print_and_wait([
           '眺望向台下的人流，凝练出',
-          me.get_child_sex_title(),
+          me.child_sex_title,
           '的背影。',
         ]);
         await acute.print_and_wait([
           '不知怎得，',
-          acute.get_phy_sex_title(),
+          acute.phy_sex_title,
           '不由自主的叹了声气。',
         ]);
         await tokino.say_and_wait('这家伙，真是个蠢蛋呢——');
@@ -587,35 +587,32 @@ module.exports = (handlers) => {
         await tokino.say_and_wait(['除了', me.sex, '以外，还能有谁呢？']);
         await acute.print_and_wait([
           '说罢，',
-          acute.get_phy_sex_title(),
+          acute.phy_sex_title,
           '的帽子为之一抖，隐藏着的秘密呼之欲出。',
         ]);
         await acute.say_and_wait('难道，我就不是了吗？', true);
         await acute.print_and_wait([
-          acute.get_child_sex_title(),
+          acute.child_sex_title,
           '将心中涌出的这句话，咽回到自己的口中。',
         ]);
         await acute.print_and_wait([
           '毕竟，',
-          me.get_child_sex_title(),
+          me.child_sex_title,
           '总是不擅长隐瞒。',
         ]);
         await acute.print_and_wait('不习于网络的空间，却又没有现实的余地。');
         await acute.print_and_wait([
           '来往的邮寄、NOK的劝诱，总是在送达特雷森后，经由',
-          acute.get_child_sex_title(),
+          acute.child_sex_title,
           '所转递。',
         ]);
         await acute.print_and_wait('——从一开始，二人之间就不存在任何的秘密。');
         await tokino.say_and_wait('……现在还来得及哦？');
-        await acute.print_and_wait([
-          acute.get_phy_sex_title(),
-          '似乎有些担心。',
-        ]);
+        await acute.print_and_wait([acute.phy_sex_title, '似乎有些担心。']);
         await tokino.say_and_wait('如果要见最后一面的话——');
         await acute.say_and_wait('不用了。');
         await acute.print_and_wait([
-          acute.get_child_sex_title(),
+          acute.child_sex_title,
           '坐在原地，斩钉截铁。',
         ]);
         await acute.print_and_wait([
@@ -625,15 +622,15 @@ module.exports = (handlers) => {
         ]);
         await acute.print_and_wait([
           '面向',
-          tokino.get_phy_sex_title(),
+          tokino.phy_sex_title,
           '，一向懦弱的',
-          acute.get_child_sex_title(),
+          acute.child_sex_title,
           '，终于吐露出了自己的心声——',
         ]);
         await acute.say_and_wait('笨蛋的话——这里，还有一个。');
         await acute.print_and_wait([
           '这一刻，步向殿堂的',
-          acute.get_child_sex_title(),
+          acute.child_sex_title,
         ]);
         await acute.print_and_wait('第一次，拥有了「勇气」。');
         era.drawLine();
@@ -713,7 +710,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '温和的话语下隐藏着无声的气息，身着红色运动服的',
-      acute.get_teen_sex_title(),
+      acute.teen_sex_title,
       '随即坐在白百合花旁的阶梯。',
     ]);
     await acute.say_and_wait([

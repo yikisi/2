@@ -75,7 +75,7 @@ async function bite_nipple(attacker, defender) {
   ]);
   await attacker.print_and_wait('诶……是吗……');
   await attacker.print_and_wait(
-    `轻轻地活用着牙齿，绕着敏感的乳头留下一圈参差的红痕……顺便让怀中的${defender.get_teen_sex_title()}身体不住地颤抖……`,
+    `轻轻地活用着牙齿，绕着敏感的乳头留下一圈参差的红痕……顺便让怀中的${defender.teen_sex_title}身体不住地颤抖……`,
   );
   await attacker.print_and_wait([
     '大概是明白了这边接下来的目标吧，在乳头被舌细细舔舐润滑的瞬间，',
@@ -158,7 +158,7 @@ async function hand_job(attacker, defender, hook) {
   } else {
     await attacker.print_and_wait('真的只需要这样就可以吗……');
     await attacker.print_and_wait(
-      `被${attacker.get_child_sex_title()}子的手捧起肉棒撸动就能满足……？`,
+      `被${attacker.child_sex_title}子的手捧起肉棒撸动就能满足……？`,
     );
     await attacker.print_and_wait('……');
     await attacker.print_and_wait('真的……没有其他想要做的事吗……');
@@ -176,7 +176,7 @@ async function suck_nipple(attacker, defender) {
       '眼前的白腻与玫红本能地想要躲开，但舌头可不是这么容易就能满足的东西。',
     );
     await attacker.print_and_wait(
-      `${defender.get_teen_sex_title()}的柔软左右闪躲，最终认命般的乖乖停留在了舌尖。`,
+      `${defender.teen_sex_title}的柔软左右闪躲，最终认命般的乖乖停留在了舌尖。`,
     );
     await attacker.say_and_wait('吸——');
     await attacker.print_and_wait(
@@ -375,7 +375,7 @@ module.exports = class extends EroNormalMakingOuts1 {
       await defender.print_and_wait([
         '已经积累起了些能在喉咙咕噜咕噜侍奉着肉棒的同时摇摆尾巴的余裕，',
         defender.get_colored_name(),
-        ` 在这方面出乎${attacker.get_phy_sex_title()}预料的有天赋。`,
+        ` 在这方面出乎${attacker.phy_sex_title}预料的有天赋。`,
       ]);
       await defender.print_and_wait([
         `用余光看着 `,
@@ -414,7 +414,7 @@ module.exports = class extends EroNormalMakingOuts1 {
       ]);
     } else {
       await defender.print_and_wait(
-        `无言地催促着，${attacker.get_phy_sex_title()}再一次强硬地用手将面前的${defender.get_teen_sex_title()}固定在了自己的股间，直到自己满足之前。`,
+        `无言地催促着，${attacker.phy_sex_title}再一次强硬地用手将面前的${defender.teen_sex_title}固定在了自己的股间，直到自己满足之前。`,
       );
     }
     await deep_blow_job_common(defender, attacker, hook);

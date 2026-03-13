@@ -18,7 +18,7 @@ module.exports = async (tachyon, me, _callname, life_marks) => {
     ' 回忆起了第一次见到 ',
     tachyon.get_colored_name(),
     ' 这名',
-    tachyon.get_uma_sex_title(),
+    tachyon.uma_sex_title,
     '时的画面',
   ]);
   await era.printAndWait([
@@ -238,7 +238,7 @@ module.exports = async (tachyon, me, _callname, life_marks) => {
   ]);
   await era.printAndWait([
     '但是，人类在力量上终究是敌不过',
-    tachyon.get_uma_sex_title(),
+    tachyon.uma_sex_title,
     '的，即便是受了如此多实验的 ',
     me.get_colored_name(),
     '，也不例外',
@@ -310,15 +310,15 @@ module.exports = async (tachyon, me, _callname, life_marks) => {
   await tachyon.say_and_wait([
     tachyon.get_colored_name(),
     ' 啊，其实，根本就不是那么厉害的',
-    tachyon.get_uma_sex_title(),
+    tachyon.uma_sex_title,
   ]);
   await tachyon.say_and_wait([
     '不是什么为了可能性能够放弃一切的',
-    tachyon.get_uma_sex_title(),
+    tachyon.uma_sex_title,
   ]);
   await tachyon.say_and_wait([
     '不是什么能够为了梦想而让心爱之人去死的',
-    tachyon.get_uma_sex_title(),
+    tachyon.uma_sex_title,
   ]);
   era.println();
   await era.printAndWait([
@@ -332,7 +332,7 @@ module.exports = async (tachyon, me, _callname, life_marks) => {
     '……不，这么说或许也不对，应该说，',
     tachyon.sex,
     '曾经是这样的',
-    tachyon.get_uma_sex_title(),
+    tachyon.uma_sex_title,
   ]);
   await tachyon.say_and_wait([
     '但是，就如刚刚所说的一样，被豚鼠君改变了的公主，已经知道了爱为何物，所以……',
@@ -342,7 +342,7 @@ module.exports = async (tachyon, me, _callname, life_marks) => {
   await tachyon.say_and_wait([
     tachyon.get_colored_name(),
     '，说到底，也不过是个普通的',
-    tachyon.get_child_sex_title(),
+    tachyon.child_sex_title,
     '子罢了',
   ]);
   await tachyon.say_and_wait([
@@ -370,7 +370,7 @@ module.exports = async (tachyon, me, _callname, life_marks) => {
   era.println();
   await era.printAndWait([
     '眼前的',
-    tachyon.get_teen_sex_title(),
+    tachyon.teen_sex_title,
     '脸上的泪珠已经不再滑落，笑容却依然灿烂',
   ]);
   era.println();
@@ -381,7 +381,7 @@ module.exports = async (tachyon, me, _callname, life_marks) => {
   era.println();
   await era.printAndWait('哈哈哈哈哈');
   await era.printAndWait([
-    tachyon.get_teen_sex_title(),
+    tachyon.teen_sex_title,
     '开怀大笑，',
     me.get_colored_name(),
     ' 看见',
@@ -399,7 +399,7 @@ module.exports = async (tachyon, me, _callname, life_marks) => {
     '」叫什么名字？「',
     tachyon.sex,
     '」就是眼前的',
-    tachyon.get_teen_sex_title(),
+    tachyon.teen_sex_title,
     '吗？',
   ]);
   era.println();
@@ -412,7 +412,7 @@ module.exports = async (tachyon, me, _callname, life_marks) => {
     '但请当作 ',
     tachyon.get_colored_name(),
     ' 最后的一次任性吧……下次，千万别再迷上这么麻烦的',
-    tachyon.get_phy_sex_title(),
+    tachyon.phy_sex_title,
     '了',
   ]);
   era.println();
@@ -432,7 +432,7 @@ module.exports = async (tachyon, me, _callname, life_marks) => {
   );
   await era.printAndWait([
     '就连眼前',
-    tachyon.get_teen_sex_title(),
+    tachyon.teen_sex_title,
     '的模样，也如消失在晨曦中的泡沫一样虚幻',
   ]);
   era.setToBottom();
@@ -452,7 +452,7 @@ module.exports = async (tachyon, me, _callname, life_marks) => {
     ' 的内心彷佛漏了一拍一样',
   ]);
   await era.printAndWait('明明应该没听过这个名字');
-  await era.printAndWait(['明明应该不认识这名', tachyon.get_uma_sex_title()]);
+  await era.printAndWait(['明明应该不认识这名', tachyon.uma_sex_title]);
   await era.printAndWait('但不知为何，却有种熟悉感');
   era.println();
   era.printButton('「我们……是不是在哪里见过？」', 1);
@@ -475,7 +475,7 @@ module.exports = async (tachyon, me, _callname, life_marks) => {
     '不知为何，身为训练员的直觉告诉 ',
     me.get_colored_name(),
     '，这名',
-    tachyon.get_uma_sex_title(),
+    tachyon.uma_sex_title,
     '绝对能够跑出使 ',
     me.get_colored_name(),
     ' 震撼的跑法来，',
@@ -486,7 +486,7 @@ module.exports = async (tachyon, me, _callname, life_marks) => {
     ' 的脑海中不断浮现，似乎是这名叫做 ',
     tachyon.get_colored_name(),
     ' 的',
-    tachyon.get_uma_sex_title(),
+    tachyon.uma_sex_title,
     '……',
   ]);
   await era.printAndWait('在不停索要便当的模样？？？');
@@ -500,7 +500,7 @@ module.exports = async (tachyon, me, _callname, life_marks) => {
   era.println();
   await tachyon.say_and_wait([
     '…………我说啊，一般会这么突然的就提出契约吗？这可是关系到',
-    tachyon.get_uma_sex_title(),
+    tachyon.uma_sex_title,
     '一生的事情，你不觉得应该更认真点对待吗？',
   ]);
   era.printButton('「我有种感觉，我们一定会很合拍的」', 1);
@@ -521,7 +521,7 @@ module.exports = async (tachyon, me, _callname, life_marks) => {
     '果不其然，名为 ',
     tachyon.get_colored_name(),
     ' 的',
-    tachyon.get_uma_sex_title(),
+    tachyon.uma_sex_title,
     '听完后愣了下，然后哈哈大笑，接着……',
   ]);
   await tachyon.say_and_wait('可以哦');
@@ -577,7 +577,7 @@ module.exports = async (tachyon, me, _callname, life_marks) => {
   await era.printAndWait([
     me.get_colored_name(),
     ' 和莫名有着熟悉感的栗毛',
-    tachyon.get_uma_sex_title(),
+    tachyon.uma_sex_title,
     '———',
     tachyon.get_colored_name(),
     ' 签订了契约',
@@ -708,11 +708,11 @@ module.exports = async (tachyon, me, _callname, life_marks) => {
   await era.printAndWait([tachyon.get_colored_name(), ' 也继续加速']);
   await era.printAndWait(['直到……', me.get_colored_name(), ' 的认知尽头']);
   await era.printAndWait('藏在脑海深处，最重要的东西');
-  await era.printAndWait([tachyon.get_uma_sex_title(), '的极限速度']);
+  await era.printAndWait([tachyon.uma_sex_title, '的极限速度']);
   await era.printAndWait([
     me.get_colored_name(),
     ' 所知的，',
-    tachyon.get_uma_sex_title(),
+    tachyon.uma_sex_title,
     '的极限',
   ]);
   await era.printAndWait(['————', tachyon.get_colored_name(), ' 的极限速度']);
@@ -735,7 +735,7 @@ module.exports = async (tachyon, me, _callname, life_marks) => {
     '，是 ',
     me.get_colored_actual_name(),
     ' 的负责',
-    tachyon.get_uma_sex_title(),
+    tachyon.uma_sex_title,
   ]);
   await era.printAndWait('回想起了相遇的事，比赛的事，还有……');
   era.println();
@@ -746,7 +746,7 @@ module.exports = async (tachyon, me, _callname, life_marks) => {
   await era.printAndWait([
     tachyon.get_colored_name(),
     '，是自己的负责',
-    tachyon.get_uma_sex_title(),
+    tachyon.uma_sex_title,
   ]);
   await era.printAndWait([
     me.get_colored_actual_name(),
@@ -777,7 +777,7 @@ module.exports = async (tachyon, me, _callname, life_marks) => {
     '却仍然好像对 ',
     tachyon.get_colored_name(),
     ' 这名',
-    tachyon.get_uma_sex_title(),
+    tachyon.uma_sex_title,
     '没有任何了解一般',
   ]);
   era.println();

@@ -436,9 +436,7 @@ async function race_page(race) {
   let fame_reward;
   if (best_rank === 1) {
     fame_reward = race_rewards[info.race_class].r01.fame;
-    if (
-      contestants.findIndex((e) => e.legend && e.name.startsWith('传奇')) !== -1
-    ) {
+    if (contestants.some((e) => e.legend === 2)) {
       // PARAMNAME:20 - 22 = 粉 - 白
       for (let jid = 20; jid <= 22; ++jid) {
         era.add(`juel:0:${jid}`, 300 + 200 * (mvp_id === 0));

@@ -142,7 +142,7 @@ module.exports = class extends Edu3UntilWeekStart {
       '和医生讨论出的一套帮助帝王恢复双腿的计划，每天都要严格执行，现在做的是每晚最后一步。',
     );
     await era.printAndWait(
-      `看着${teio.get_teen_sex_title()}外表完美的双腿，${
+      `看着${teio.teen_sex_title}外表完美的双腿，${
         me.name
       } 还是心疼了起来。内里的伤，恐怕很难痊愈了吧。`,
     );
@@ -154,7 +154,7 @@ module.exports = class extends Edu3UntilWeekStart {
     await era.printAndWait(
       `${
         me.name
-      } 想起医生私下跟自己说的一些类似病症的${teio.get_uma_sex_title()}们，${
+      } 想起医生私下跟自己说的一些类似病症的${teio.uma_sex_title}们，${
         teio.sex
       }们无一例外没能再次康复，选择了退役。那么帝王……`,
     );
@@ -184,7 +184,7 @@ module.exports = class extends Edu3UntilWeekStart {
       await era.printAndWait([
         me.get_colored_name(),
         ' 低下头去，不愿或者不敢搭话，只顾对',
-        teio.get_uma_sex_title(),
+        teio.uma_sex_title,
         '的腿部进行护理',
       ]);
       wait_flag =
@@ -218,7 +218,7 @@ module.exports = class extends Edu3UntilWeekStart {
     await era.printAndWait(
       `${me.name} 缓慢地，恰到好处地抚摸着趴在 ${
         me.name
-      } 大腿上，整个人蜷缩起来的担当${teio.get_uma_sex_title()}。`,
+      } 大腿上，整个人蜷缩起来的担当${teio.uma_sex_title}。`,
     );
     await era.printAndWait(
       `自从有次 ${me.name} 帮${teio.sex}按摩之后，${teio.sex}便食髓知味，不仅要求 ${me.name} 帮忙梳理毛发（倒也合理），还会偷偷溜进 ${me.name} 的办公室里，不管 ${me.name} 在不在工作，一定要往 ${me.name} 身上蹭，要求 ${me.name} 缓解${teio.sex}的身体疲劳。`,
@@ -228,9 +228,7 @@ module.exports = class extends Edu3UntilWeekStart {
     );
     await me.say_and_wait('你是猫吗', true);
     await era.printAndWait(
-      `${
-        me.name
-      } 不禁在心里吐槽起来，腿上的${teio.get_teen_sex_title()}好像真把 ${
+      `${me.name} 不禁在心里吐槽起来，腿上的${teio.teen_sex_title}好像真把 ${
         me.name
       } 这地方当成自己的窝了。`,
     );
@@ -272,7 +270,7 @@ module.exports = class extends Edu3UntilWeekStart {
         ' 起了坏心眼，先挠了挠',
         teio.sex,
         '的耳根和尻里（控制尾巴的内侧无毛处），小',
-        teio.get_uma_sex_title(),
+        teio.uma_sex_title,
         '浑身颤抖时 ',
         me.get_colored_name(),
         ' 又改变了策略，用按摩手法捏遍',
@@ -306,7 +304,7 @@ module.exports = class extends Edu3UntilWeekStart {
       await era.printAndWait(
         `或者说，拽着 ${me.name} 更为确切。有时候 ${
           me.name
-        } 也很好奇自己是怎么在保持思考的状态下跟上活蹦乱跳的${teio.get_uma_sex_title()}${teio.get_teen_sex_title()}的步伐的，或许是 ${
+        } 也很好奇自己是怎么在保持思考的状态下跟上活蹦乱跳的${teio.uma_sex_title}${teio.teen_sex_title}的步伐的，或许是 ${
           me.name
         } 在相处之中也耳濡目染会了些帝王舞步的技巧。`,
       );
@@ -356,7 +354,7 @@ module.exports = class extends Edu3UntilWeekStart {
         await era.printAndWait(
           `${me.name} 笑着摸了摸${
             teio.sex
-          }的头，转身去给自己买了一杯。举起蜂蜜特饮放在唇边，指间残留着的${teio.get_uma_sex_title()}发香和甜美的蜂蜜味道混在一起，让人陶醉……`,
+          }的头，转身去给自己买了一杯。举起蜂蜜特饮放在唇边，指间残留着的${teio.uma_sex_title}发香和甜美的蜂蜜味道混在一起，让人陶醉……`,
         );
         wait_flag =
           get_attr_and_print_in_event(3, [0, 0, 0, 0, 20], 0) || wait_flag;
@@ -392,10 +390,10 @@ module.exports = class extends Edu3UntilWeekStart {
         wait_flag = sys_love_uma(3, 1) || wait_flag;
       }
     } else if (event_object?.arg === 'uma_shopping') {
-      await print_event_name(`${teio.get_uma_sex_title()}的……血拼！`, teio);
+      await print_event_name(`${teio.uma_sex_title}的……血拼！`, teio);
       await era.printAndWait('陪女人逛街，辛苦。');
       await era.printAndWait('陪女人进商业中心，疲惫。');
-      await era.printAndWait(`陪${teio.get_uma_sex_title()}买东西，累麻了。`);
+      await era.printAndWait(`陪${teio.uma_sex_title}买东西，累麻了。`);
       await era.printAndWait(`很不幸，${me.name} 现在就在这第三个层级。`);
       await era.printAndWait(
         `推着购物车——速度比起${teio.sex}来说简直不是一个级别——一边对照列的清单一边查点货架上的东西。光是如此倒也不失为一种悠闲。`,
@@ -476,18 +474,18 @@ module.exports = class extends Edu3UntilWeekStart {
         await era.input();
 
         await era.printAndWait(
-          `${teio.get_teen_sex_title()}嘴角翘起，抬头与 ${me.name} 对视——`,
+          `${teio.teen_sex_title}嘴角翘起，抬头与 ${me.name} 对视——`,
         );
         if (relation > 150) {
           await era.printAndWait(
             `${teio.sex}伸出双手，置于 ${me.name} 张开的掌心上，${
               me.name
-            } 轻轻捏住担当的手，温热的触感传来，指尖感受到${teio.get_teen_sex_title()}健康而有弹性的肌肤，还有下面跳动着的，有些加速的脉搏。`,
+            } 轻轻捏住担当的手，温热的触感传来，指尖感受到${teio.teen_sex_title}健康而有弹性的肌肤，还有下面跳动着的，有些加速的脉搏。`,
           );
           await era.printAndWait(
             ` ${me.name} 望向${
               teio.sex
-            }如蓝宝石一般晶莹清澈的，${teio.get_teen_sex_title()}的坚韧，信念，希冀，折射进 ${
+            }如蓝宝石一般晶莹清澈的，${teio.teen_sex_title}的坚韧，信念，希冀，折射进 ${
               me.name
             } 的瞳孔。${me.name} 也笑了起来，却感觉，眼眶有些湿润。`,
           );
@@ -500,7 +498,7 @@ module.exports = class extends Edu3UntilWeekStart {
           era.println();
 
           await era.printAndWait(
-            `踏地的足音回荡在小房间里，${teio.get_teen_sex_title()}潇洒地一转身，挥了挥手，坚定地迈步向前。`,
+            `踏地的足音回荡在小房间里，${teio.teen_sex_title}潇洒地一转身，挥了挥手，坚定地迈步向前。`,
           );
         } else {
           await era.printAndWait(
@@ -540,7 +538,7 @@ module.exports = class extends Edu3UntilWeekStart {
         era.printButton('「会的，一定会……一直会的！」', 1);
         await era.input();
         await era.printAndWait(
-          `${teio.get_teen_sex_title()}轻点下颌，转身，大幅度地挥舞起手臂，披风刷地摆起，如同一团升腾的火焰，踏步入场，融入前方的光明。`,
+          `${teio.teen_sex_title}轻点下颌，转身，大幅度地挥舞起手臂，披风刷地摆起，如同一团升腾的火焰，踏步入场，融入前方的光明。`,
         );
       }
     } else {
@@ -583,7 +581,7 @@ module.exports = class extends Edu3UntilWeekStart {
     await era.printAndWait(
       `一阵轻风拂过，${
         me.name
-      } 昂首，看到${teio.get_uma_sex_title()}脚步一拧，双手略扬，转了个身，眼神与 ${
+      } 昂首，看到${teio.uma_sex_title}脚步一拧，双手略扬，转了个身，眼神与 ${
         me.name
       } 对视，说道`,
     );
@@ -605,7 +603,7 @@ module.exports = class extends Edu3UntilWeekStart {
     );
     if ((await era.input()) === 1) {
       await era.printAndWait(
-        `${teio.get_teen_sex_title()}躬身，冲 ${me.name} 灿烂一笑。`,
+        `${teio.teen_sex_title}躬身，冲 ${me.name} 灿烂一笑。`,
       );
       wait_flag =
         get_attr_and_print_in_event(3, [20, 20, 0, 0, 20], 0, [200]) ||

@@ -113,7 +113,7 @@ module.exports = (handlers) => {
     );
     await era.printAndWait([
       '不过曾经有赛',
-      maya.get_uma_sex_title(),
+      maya.uma_sex_title,
       '游了300米。既然都来这里测试了──',
     ]);
     era.printButton('「就试着以300米为目标吧」', 1);
@@ -201,7 +201,7 @@ module.exports = (handlers) => {
     );
     await maya.say_and_wait([
       '在场上比赛的',
-      maya.get_child_sex_title(),
+      maya.child_sex_title,
       '，每一个都很耀眼吧？',
     ]);
     await maya.say_and_wait('所以不管是出道战还是其他比赛，我一直都非常期待。');
@@ -253,7 +253,7 @@ module.exports = (handlers) => {
       '既然好不容易担任了像 ',
       maya.get_colored_name(),
       ' 这样如此有才能的赛',
-      maya.get_uma_sex_title(),
+      maya.uma_sex_title,
       '的签约训练员──',
     ]);
     await era.printAndWait([
@@ -288,7 +288,7 @@ module.exports = (handlers) => {
     await era.input();
     await maya.say_and_wait([
       '可是跟我同场比赛的，都是跟人家同年出道的赛',
-      maya.get_uma_sex_title(),
+      maya.uma_sex_title,
       '吧？',
     ]);
     await maya.say_and_wait('……那不就跟之前没两样吗。');
@@ -407,7 +407,7 @@ module.exports = (handlers) => {
     await era.printAndWait('终于到了春季经典赛的季节了。');
     await era.printAndWait([
       '……三冠路线、三宝冠路线。要如何度过这个赛',
-      maya.get_uma_sex_title(),
+      maya.uma_sex_title,
       '和训练员一生只会面临一次的时期可说是非常重要──',
     ]);
     await maya.say_and_wait(['……', callname, '。又在看那个资料了～']);
@@ -439,7 +439,7 @@ module.exports = (handlers) => {
     await era.printAndWait([
       teio.get_colored_name(),
       ' 是很崇拜学生会长鲁道夫象征的赛',
-      maya.get_uma_sex_title(),
+      maya.uma_sex_title,
       '，也是 ',
       maya.get_colored_name(),
       ' 的室友。',
@@ -462,13 +462,13 @@ module.exports = (handlers) => {
       '──',
       maya.sex,
       '是有着压倒性实力的赛',
-      maya.get_uma_sex_title(),
+      maya.uma_sex_title,
       '。',
     ]);
     await era.printAndWait([
       maya.sex,
       '是经典级中……以三冠路线全都获胜而闻名的「三冠赛',
-      maya.get_uma_sex_title(),
+      maya.uma_sex_title,
       '」。',
     ]);
     await era.printAndWait([
@@ -511,7 +511,7 @@ module.exports = (handlers) => {
     ]);
     await say_by_passer_by_and_wait('实况', [
       '脚力果然强劲！宛如怪物！技压全场！！压制其他赛',
-      maya.get_uma_sex_title(),
+      maya.uma_sex_title,
       '，抵达终点──！！',
     ]);
     await say_by_passer_by_and_wait('实况', [
@@ -527,7 +527,7 @@ module.exports = (handlers) => {
     await say_by_passer_by_and_wait('实况', [maya.sex, '已经只剩下这条路了！']);
     await say_by_passer_by_and_wait('实况', [
       '真是一场不愧于三冠赛',
-      maya.get_uma_sex_title(),
+      maya.uma_sex_title,
       '称号的比赛！',
       brian.get_colored_name(),
       '，表现太精彩了！',
@@ -552,7 +552,7 @@ module.exports = (handlers) => {
     await brian.say_and_wait('我只是为了满足自己而跑的。');
     await brian.say_and_wait([
       '上场的尽是渴望赢得比赛的赛',
-      maya.get_uma_sex_title(),
+      maya.uma_sex_title,
       '。',
     ]);
     await brian.say_and_wait([
@@ -565,22 +565,22 @@ module.exports = (handlers) => {
     await say_by_passer_by_and_wait('2人', '……');
     await era.printAndWait([
       '──在以三冠赛',
-      maya.get_uma_sex_title(),
+      maya.uma_sex_title,
       '为目标的路线当中，每个G1赛事都有各自的格言。',
     ]);
     await era.printAndWait([
       '「',
       race_infos[race_enum.sats_sho].get_colored_name(),
       '」──由最快的赛',
-      maya.get_uma_sex_title(),
+      maya.uma_sex_title,
       '获胜。「',
       race_infos[race_enum.toky_yus].get_colored_name(),
       '」──由运气最好的赛',
-      maya.get_uma_sex_title(),
+      maya.uma_sex_title,
       '获胜。「',
       race_infos[race_enum.kiku_sho].get_colored_name(),
       '」──由实力最强的赛',
-      maya.get_uma_sex_title(),
+      maya.uma_sex_title,
       '获胜。',
     ]);
     await era.printAndWait([
@@ -606,7 +606,7 @@ module.exports = (handlers) => {
     era.drawLine({ content: '隔天' });
     await say_by_passer_by_and_wait('电视', [
       '怎么有如此强大的赛',
-      maya.get_uma_sex_title(),
+      maya.uma_sex_title,
       '！──',
       brian.get_colored_name(),
       '，先拿下了一冠！！',
@@ -764,9 +764,9 @@ module.exports = (handlers) => {
     await maya.say_and_wait('嘿嘿，人家是不是真的已经变得更快了？');
     await maya.say_and_wait([
       '这样的话我就会是今年的赛',
-      maya.get_uma_sex_title(),
+      maya.uma_sex_title,
       '中最快的！不对，应该是全赛',
-      maya.get_uma_sex_title(),
+      maya.uma_sex_title,
       '中最快的吧？',
     ]);
     era.printButton('「会不会太夸张了？」', 1);
@@ -802,7 +802,7 @@ module.exports = (handlers) => {
       '──三冠路线。那是 ',
       get_chara_talk(16).get_colored_name(),
       ' 成为「三冠赛',
-      maya.get_uma_sex_title(),
+      maya.uma_sex_title,
       '」时所走的路线。',
     ]);
     await era.printAndWait([

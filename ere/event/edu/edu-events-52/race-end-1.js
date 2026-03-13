@@ -28,7 +28,7 @@ async function common1(urara, me, callname) {
     '顺着 ',
     urara.get_colored_name(),
     ' 注视的方向看去，只见那些平时与小',
-    urara.get_uma_sex_title(),
+    urara.uma_sex_title,
     '交情深厚的商店街邻里全都到齐了。',
   ]);
 }
@@ -77,7 +77,7 @@ module.exports = (handlers) => {
           '虽然还只是出道，但真是不容易啊，名为 ',
           urara.get_colored_actual_name(),
           ' 的小',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '，拿到了第一名——',
         ]);
         era.drawLine();
@@ -105,7 +105,7 @@ module.exports = (handlers) => {
         ]);
         await era.printAndWait([
           '沾湿的体操服上散发着',
-          urara.get_teen_sex_title(),
+          urara.teen_sex_title,
           '的清香，但与初遇时不同，今天的香气中也伴随着胜利的花香。',
         ]);
         await era.printAndWait([
@@ -468,11 +468,11 @@ module.exports = (handlers) => {
         ]);
         await era.printAndWait([
           '汗水沾湿的体操服散发着',
-          urara.get_teen_sex_title(),
+          urara.teen_sex_title,
           '的清香，看到 ',
           me.get_colored_name(),
           ' 的招呼，从另一侧跑来的小',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '带着胜利的笑容停在了 ',
           me.get_colored_name(),
           ' 的身前。',
@@ -493,7 +493,7 @@ module.exports = (handlers) => {
         if (era.get('relation:52:0') > 150) {
           await era.printAndWait([
             '伸手揉着小',
-            urara.get_uma_sex_title(),
+            urara.uma_sex_title,
             '的脸颊，',
             me.get_colored_name(),
             ' 笑着安抚着因为初次胜利而变得过于兴奋的担当。',
@@ -518,7 +518,7 @@ module.exports = (handlers) => {
         } else {
           await era.printAndWait([
             '将毛巾与运动饮料递给气喘吁吁的小',
-            urara.get_uma_sex_title(),
+            urara.uma_sex_title,
             '，',
             me.get_colored_name(),
             ' 轻声提醒着还有些晕头转向的担当。',
@@ -755,7 +755,7 @@ module.exports = (handlers) => {
         ' 来说各个方面都辛苦过头了。这样想着，',
         me.get_colored_name(),
         ' 笑着揉了揉小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '的脸颊。',
       ]);
 

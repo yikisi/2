@@ -47,7 +47,7 @@ module.exports = class extends CustomizedRecruit {
       await me.say_and_wait(
         [
           '还是对于付出了真情的赛',
-          acute.get_uma_sex_title(),
+          acute.uma_sex_title,
           '，一直犹豫不决不知道作为训练员究竟该与其保持怎样的距离；结果让双方一同受伤了呢？',
         ],
         true,
@@ -183,7 +183,7 @@ module.exports = class extends CustomizedRecruit {
         ' 外，还有 ',
         sys_get_colored_callname(0, 301),
         '、乃至于其他的担当',
-        acute.get_uma_sex_title(),
+        acute.uma_sex_title,
         '……',
         me.get_colored_name(),
         ' 想，',
@@ -214,14 +214,14 @@ module.exports = class extends CustomizedRecruit {
         '而就在此时，在',
         me.get_colored_name(),
         '面前出现的，是一位与夕阳同辉的',
-        acute.get_uma_sex_title(),
+        acute.uma_sex_title,
         '。',
       ]);
       await era.printAndWait([
         '那是在特雷森学园的天台上，落日的余晖之中。',
         me.get_colored_name(),
         ' 循声暗自回过头，一位始终温和微笑的',
-        acute.get_uma_sex_title(),
+        acute.uma_sex_title,
         '，浮现在了 ',
         me.get_colored_name(),
         ' 的眼前。',
@@ -291,7 +291,7 @@ module.exports = class extends CustomizedRecruit {
         '名为 ',
         acute.get_colored_name(),
         ' 的',
-        acute.get_teen_sex_title(),
+        acute.teen_sex_title,
         '，依靠着天台的墙壁，迎着夕阳坐了下来。',
       ]);
       await era.printAndWait(
@@ -304,11 +304,11 @@ module.exports = class extends CustomizedRecruit {
       await era.printAndWait([
         me.get_colored_name(),
         ' 与与夕阳同辉的',
-        acute.get_teen_sex_title(),
+        acute.teen_sex_title,
         '，同时也是日后成为了 ',
         me.get_colored_name(),
         ' 担当的',
-        acute.get_teen_sex_title(),
+        acute.teen_sex_title,
         '，奇瑞骏。',
       ]);
       await era.printAndWait('聊了许多、许多的话——');

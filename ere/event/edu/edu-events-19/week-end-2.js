@@ -95,7 +95,7 @@ module.exports = (handlers) => {
     );
     await digital.say_and_wait([
       '但是，在泪水的前方，必定存在着感动，正因如此，',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '们才能在又一个赛场上再次碰撞。',
     ]);
     await digital.say_and_wait('……但是……如果，连跑都不能跑的话，那又怎么说……');
@@ -130,9 +130,9 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '因为喜欢',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '，所以那位',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '的遭遇，才会像水草一样缠上',
       digital.sex,
       '的脚。',
@@ -163,13 +163,13 @@ module.exports = (handlers) => {
     await digital.say_and_wait('！那……那肯定不会。');
     await era.printAndWait([
       '出色的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '，不会因为这些挫折所击倒。',
     ]);
     await me.say_and_wait('给出你最好的答卷，这就是对黑船最好的帮助。');
     await digital.say_and_wait([
       '……',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '酱们，在痛苦中最后抓住的东西，在历经了那几位后，我知道了，那是无与伦比的事物。',
     ]);
     await digital.say_and_wait(
@@ -177,12 +177,12 @@ module.exports = (handlers) => {
     );
     await digital.say_and_wait([
       '所以我，我才能打心底里说出，',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '太棒了啊！',
     ]);
     await era.printAndWait([digital.get_colored_name(), ' 站起身跑到海边——']);
     await digital.say_and_wait([
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '，无论是怎样的苦难，都能用不屈的意志，全都，弹飞啊啊啊啊啊！！！！！',
     ]);
     await digital.say_and_wait([
@@ -217,7 +217,7 @@ module.exports = (handlers) => {
     await digital.say_and_wait('绝对！绝对要！');
     await digital.say_and_wait([
       '而且，要把我至今为止所有邂逅的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '的感情，全部倾倒出去！',
     ]);
     await digital.say_and_wait('这就是，我的责任！');
@@ -231,7 +231,7 @@ module.exports = (handlers) => {
 
   handlers[95 + 48] = async (digital, me, callname) => {
     await print_event_name(
-      ['只是作为普通的', digital.get_uma_sex_title(), digital.sex],
+      ['只是作为普通的', digital.uma_sex_title, digital.sex],
       digital,
     );
     const dober = get_chara_talk(59);
@@ -333,7 +333,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '艰难地穿插来到',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '专区，里面有几个正在布置的摊主看到 ',
       digital.get_colored_name(),
       ' 都远远地朝 ',
@@ -349,12 +349,12 @@ module.exports = (handlers) => {
       '嗯？伴随着 ',
       digital.get_colored_name(),
       ' 的眼光看过去，是一个带着口罩，带着帽子，穿比较多衣服稍显臃肿的……',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '。',
     ]);
     await era.printAndWait([
       '虽然穿的是那种普通的帽子，从帽子被略微顶起的形状也可以大致猜出是',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '。',
     ]);
     await era.printAndWait([
@@ -407,9 +407,9 @@ module.exports = (handlers) => {
     );
     await era.printAndWait([
       '远处从人群窜出来一个栗毛',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '，凭借着',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '的脚力立刻就来到 ',
       digital.get_colored_name(),
       ' 的面前。',
@@ -417,7 +417,7 @@ module.exports = (handlers) => {
     await digital.say_and_wait(['惯例的新刊请收好～']);
     await era.printAndWait([
       '接过新刊的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '一路小跳着离场了，第一位顾客，但接下来的是……',
     ]);
     era.printButton('「数码……虽说我对你的知名度也略有耳闻……」', 1);
@@ -500,7 +500,7 @@ module.exports = (handlers) => {
     );
     await era.printAndWait([
       '是最开始赶到摊位的栗毛',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '，',
       digital.sex,
       '也拿着一大包战利品，看起来也是来问候一下的。',
@@ -514,7 +514,7 @@ module.exports = (handlers) => {
       '名为 ',
       get_dia_name(),
       ' 的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       ' ',
       digital.sex,
       '……直接就坐在地上，翻找那个硕大的背包，从中拿出来了一本厚书。',
@@ -535,9 +535,9 @@ module.exports = (handlers) => {
     ]);
     await say_by_diamond_lord([
       '这一本，描绘的是一个初出牛犊的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '的比赛，除了一贯的对',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '的爱以外，里面，还有一些不一样的东西。',
     ]);
     await say_by_diamond_lord(
@@ -553,15 +553,15 @@ module.exports = (handlers) => {
     await era.printAndWait([
       digital.get_colored_name(),
       ' 出神地看着在场外Cos知名',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '跳舞的Coser。',
     ]);
     await era.printAndWait([
       digital.sex,
       '们有些是带着假耳的普通',
-      digital.get_phy_sex_title(),
+      digital.phy_sex_title,
       '，也有一些是直接戴上Cos耳套的',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '。',
     ]);
     await era.printAndWait([
@@ -576,7 +576,7 @@ module.exports = (handlers) => {
     await era.input();
     await digital.say_and_wait('……都是。');
     era.printButton(
-      `「数码你啊，是能在赛场中飞驰的赛${digital.get_uma_sex_title()}吧？`,
+      `「数码你啊，是能在赛场中飞驰的赛${digital.uma_sex_title}吧？`,
       1,
     );
     await era.input();
@@ -594,14 +594,14 @@ module.exports = (handlers) => {
     era.println();
     await era.printAndWait([
       '那个在赛道中虽然很变态，紧紧盯着其他',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '的 ',
       digital.get_colored_name(),
       '……',
     ]);
     await me.say_and_wait([
       '如果你不是赛',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '的话，那我，你的粉丝们，看到的数码又是谁呢？',
     ]);
     await digital.say_and_wait(['那个数码……只是还没认清现状的数码……']);
@@ -613,13 +613,13 @@ module.exports = (handlers) => {
     ]);
     await me.say_and_wait([
       '只要踏进赛场，你就成为赛',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '了，你就是被粉丝们所应援的存在了啊！',
     ]);
     await digital.say_and_wait(['只要……踏进赛场？']);
     await me.say_and_wait([
       '对！身为粉丝的你不是最清楚不过了吗！在赛场上的每一个',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '，无论表现如何，都是如此啊！',
     ]);
     era.println();
@@ -644,7 +644,7 @@ module.exports = (handlers) => {
       '唔噢噢噢噢噢噢，可不能辜负粉丝们的期待啊……啊哈哈哈……',
     ]);
     era.println();
-    await era.printAndWait([digital.get_uma_sex_title(), '啊。']);
+    await era.printAndWait([digital.uma_sex_title, '啊。']);
     await digital.say_and_wait('我还是，再努力一下好了。');
     await era.printAndWait(
       '眉毛低垂，眼神浑浊，还带着泪光，甚至可以说是苦笑。',

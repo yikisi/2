@@ -32,7 +32,7 @@ module.exports = {
       '和 ',
       tachyon.get_colored_name(),
       ' 一起，过着与比赛无关，与',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '的速度无关的平淡，祥和的日常',
     ]);
     await era.printAndWait('那样的生活，想必会十分美好吧');

@@ -262,7 +262,7 @@ module.exports = class extends CustomizedEdu {
           era.printButton(
             `「${
               chara_talk.name
-            }，美丽又强大的赛${chara_talk.get_uma_sex_title()}，像红焰一样又酷又炫的${
+            }，美丽又强大的赛${chara_talk.uma_sex_title}，像红焰一样又酷又炫的${
               era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'
             }大人！」`,
             1,
@@ -488,7 +488,7 @@ module.exports = class extends CustomizedEdu {
           `也许是我变得有些胆小了。踌躇不安的样子可真不像我呢。`,
         );
         await zensky.say_and_wait(
-          `而且，大家都知道我的品味。我是比谁都懂时尚趋势的，无论如何都要跑在时代尖端的赛${zensky.get_uma_sex_title()}。`,
+          `而且，大家都知道我的品味。我是比谁都懂时尚趋势的，无论如何都要跑在时代尖端的赛${zensky.uma_sex_title}。`,
         );
         await zensky.say_and_wait(`好！我会尽情享受和后辈们的出游的！`);
         await era.printAndWait(
@@ -765,23 +765,23 @@ module.exports = class extends CustomizedEdu {
           `不过看着孩子们一点点褪去青涩的外壳逐渐成熟追逐着自己的梦想，我也有一种说不清的感动和愉悦的心情.`,
         );
         await zensky.say_and_wait(
-          `或许训练员与${zensky.get_uma_sex_title()}之间的关系，也就是作为师傅与徒弟一样.`,
+          `或许训练员与${zensky.uma_sex_title}之间的关系，也就是作为师傅与徒弟一样.`,
         );
         await zensky.say_and_wait(
           `看着孩子们从刚接触的陌生与打量走向亲密与信赖，然后在三年的目标结束之后.`,
         );
         await zensky.say_and_wait(
-          `作为师傅的训练员与身为徒弟的${zensky.get_uma_sex_title()}积累了非常深厚的羁绊，这份羁绊又化作力量带来了奇迹,然后二人朝着更大的目标前进.`,
+          `作为师傅的训练员与身为徒弟的${zensky.uma_sex_title}积累了非常深厚的羁绊，这份羁绊又化作力量带来了奇迹,然后二人朝着更大的目标前进.`,
         );
         era.printButton(
-          `「作为训练员,衷心祝愿自己所负责的${zensky.get_uma_sex_title()}能在追求目标的道路上一帆风顺」`,
+          `「作为训练员,衷心祝愿自己所负责的${zensky.uma_sex_title}能在追求目标的道路上一帆风顺」`,
           1,
         );
         await era.input();
         era.printButton('「除此之外，再向前一步就是三女神的宠爱了」', 1);
         await era.input();
         await zensky.say_and_wait(
-          `呵呵♪训练员真是给了我一个有趣的答复，作为${zensky.get_uma_sex_title()}我也希望能在这三年内能和${callname}一起积累更多美好的回忆呢.`,
+          `呵呵♪训练员真是给了我一个有趣的答复，作为${zensky.uma_sex_title}我也希望能在这三年内能和${callname}一起积累更多美好的回忆呢.`,
         );
         await zensky.say_and_wait(
           `那么接下来也请多指教了,${era.get('cflag:0:性别') - 1 ? '训·练·员·酱' : '训·练·员·君'}♪`,
@@ -1340,7 +1340,7 @@ module.exports = class extends CustomizedEdu {
         `如果就这样一走了之，那么作为训练员的我就已经死了。`,
       );
       await me.say_and_wait(
-        `失去了训练员这一身份，作为训练员实现培养${zensky.get_uma_sex_title()}的这一理想也就不复存在了。`,
+        `失去了训练员这一身份，作为训练员实现培养${zensky.uma_sex_title}的这一理想也就不复存在了。`,
       );
       await me.say_and_wait(`失去了理想的我，只会堕落到更深的地狱。`);
       await me.say_and_wait(`所以，离开吧，从我身边就此离开吧。`);

@@ -15,6 +15,8 @@ const {
 
 const AgLifeMarks = require('#/data/event/life-event-marks/life-event-marks-19');
 
+const { i18n } = require('#/i18n/selector');
+
 /**
  * @param {CharaTalk} digital
  * @param {CharaTalk} me
@@ -22,8 +24,8 @@ const AgLifeMarks = require('#/data/event/life-event-marks/life-event-marks-19')
  */
 module.exports = async (digital, me, callname) => {
   const life_marks = new AgLifeMarks();
-  const child = digital.sex_code - 1 ? '女儿' : '儿子';
-  const parent = digital.sex_code === 1 ? '母亲' : '父亲';
+  const child = digital.sex_code === 1 ? i18n().name.son : i18n().name.daughter;
+  const parent = digital.sex_code === 1 ? i18n().name.dad : i18n().name.mom;
   if (life_marks.again_89) {
     await print_event_name('终究是，梦幻的泡影', digital);
     await me.say_and_wait(['周末了，要不在忙碌的过程中看一下', child, '吧？']);
@@ -134,7 +136,7 @@ module.exports = async (digital, me, callname) => {
       me.get_colored_name(),
       ' 房间的是……',
     ]);
-    await era.printAndWait(['各种', digital.get_uma_sex_title(), '周边。']);
+    await era.printAndWait(['各种', digital.uma_sex_title, '周边。']);
     await era.printAndWait([
       '比如说 ',
       get_chara_talk(32).get_colored_name(),
@@ -221,7 +223,7 @@ module.exports = async (digital, me, callname) => {
       '就很让人省心，看到 ',
       m_call_d,
       '，看到各种',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '周边就会安定，只是偶尔会模仿 ',
       m_call_d,
       ' 发出奇怪的声音。',
@@ -233,7 +235,7 @@ module.exports = async (digital, me, callname) => {
       '，',
       digital.sex,
       '从小就很喜欢',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '，特别是喜欢坐在电视前看 ',
       m_call_d,
       ' 的Live。',
@@ -266,7 +268,7 @@ module.exports = async (digital, me, callname) => {
       '在悉心照料下，健康地成长了。',
     ]);
     await era.printAndWait([
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '是成长得很快的，转眼间，',
       digital.sex,
       '就已经要进特雷森校园了。',
@@ -279,7 +281,7 @@ module.exports = async (digital, me, callname) => {
       ' 觉得照',
       child,
       '那个喜欢',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '的样，让',
       digital.sex,
       '自己去参加开幕式感觉会大事不妙。',
@@ -346,9 +348,9 @@ module.exports = async (digital, me, callname) => {
     ]);
     await era.printAndWait([
       '面前就是',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '专用道了，沿着这条路就可以很快到达特雷森，身为',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '，甚至不用叫出租车。',
     ]);
     await era.printAndWait([
@@ -446,7 +448,7 @@ module.exports = async (digital, me, callname) => {
     );
     await digital.say_and_wait([
       '大众普遍认为，这是一个精神疾病……传播方式不明，范围仅在',
-      digital.get_uma_sex_title(),
+      digital.uma_sex_title,
       '及所接触人群……',
     ]);
     await era.printAndWait('那……那是为什么……创造出来只是为了分离吗？');

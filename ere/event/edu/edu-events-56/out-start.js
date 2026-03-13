@@ -119,14 +119,14 @@ module.exports = async (kitaru, me, callname, hook, event_object) => {
     love >= 50
       ? [
           '橙发的',
-          kitaru.get_teen_sex_title(),
+          kitaru.teen_sex_title,
           '整个人像是树獭一样抱住了 ',
           me.get_colored_name(),
           ' 的腰，颤抖地指着那个还在不断发出响声的通讯设备。',
         ]
       : [
           '橙发的',
-          kitaru.get_teen_sex_title(),
+          kitaru.teen_sex_title,
           '颤抖地捏着 ',
           me.get_colored_name(),
           ' 的衣角，惊恐地指着那个还在不断发出响声的通讯设备。',

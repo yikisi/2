@@ -29,15 +29,15 @@ module.exports = (handlers) => {
   ) => {
     await print_event_name('A or B', tachyon);
     await say_by_passer_by_and_wait(
-      tachyon.get_uma_sex_title() + 'A',
+      tachyon.uma_sex_title + 'A',
       '速子前辈要参加月桂杯的事情是真的吗！',
     );
     await say_by_passer_by_and_wait(
-      tachyon.get_uma_sex_title() + 'B',
+      tachyon.uma_sex_title + 'B',
       '好期待……速子前辈的跑法真的好让人着迷……',
     );
     await say_by_passer_by_and_wait(
-      tachyon.get_uma_sex_title() + 'C',
+      tachyon.uma_sex_title + 'C',
       '绝对，绝对会去看的！',
     );
     era.println();
@@ -150,7 +150,7 @@ module.exports = (handlers) => {
     era.println();
     await tachyon.say_and_wait([
       '我自己早就已经有心理准备了……我的腿，本来就比一般',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '要脆弱，所以，没什么不能接受的',
     ]);
     await tachyon.say_and_wait('但是，这不代表我会放弃我的梦想');
@@ -158,9 +158,9 @@ module.exports = (handlers) => {
     await era.printAndWait([
       tachyon.get_colored_name(),
       ' 的梦想……超越',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '的极限，看见',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '的可能性',
     ]);
     era.println();
@@ -169,7 +169,7 @@ module.exports = (handlers) => {
     );
     await tachyon.say_and_wait([
       '无论是谁……只要能够证明这并不是',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '的极限，只要能够证明，这只不过是 ',
       tachyon.get_colored_name(),
       ' 的极限……我就心满意足了',
@@ -227,7 +227,7 @@ module.exports = (handlers) => {
       ' 对 ',
       get_chara_talk(25).get_colored_name(),
       ' 的关注可以说是大于其他',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '许多的……',
       get_chara_talk(9).get_colored_name(),
       ' 除外',
@@ -492,7 +492,7 @@ module.exports = (handlers) => {
         ' 想起了 ',
         me.get_colored_name(),
         ' 的另一名负责',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
       ]);
       await era.printAndWait([
         '想起了',
@@ -540,7 +540,7 @@ module.exports = (handlers) => {
         ]);
         await tachyon.say_and_wait([
           '没错，就只是一名路过的好心',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '，对 ',
           coffee.get_colored_name(),
           ' 与其训练员提出的帮助，仅此而已',
@@ -610,7 +610,7 @@ module.exports = (handlers) => {
       await era.printAndWait('绝对是的吧');
       await era.printAndWait([
         '不然的话……不就说明，自己放弃了，背叛了自己的负责',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         '，自己的光（Tachyon）了吗',
       ]);
       era.println();
@@ -705,12 +705,12 @@ module.exports = (handlers) => {
     await era.printAndWait('夏日集训');
     await era.printAndWait([
       '对',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '们而言，是兼具放松及提升实力的时间',
     ]);
     await era.printAndWait([
       '对记者们而言，则是平常除了比赛便不会轻易暴露于人前的',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '们难得有机会能够采访到的日子',
     ]);
     await era.printAndWait('也因此，狗仔队们早早便聚集在了合宿点外');

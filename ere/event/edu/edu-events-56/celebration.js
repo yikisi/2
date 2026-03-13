@@ -34,7 +34,7 @@ async function cristmas_common(kitaru, me, callname) {
   ]);
   await era.printAndWait([
     '那包不知道是什么的东西突然被狭窄的窗户卡住，直到在',
-    kitaru.get_uma_sex_title(),
+    kitaru.uma_sex_title,
     '的怪力下逐渐变形。',
   ]);
   await kitaru.say_and_wait('哎呀！');
@@ -139,7 +139,7 @@ module.exports = async (kitaru, me, callname, hook, event_object) => {
     await kitaru.say_and_wait('欸！天上的星星也不行吗？');
     await era.printAndWait([
       '在听到这句话的同时，橘发的',
-      kitaru.get_teen_sex_title(),
+      kitaru.teen_sex_title,
       '顿时低下了头。',
     ]);
     era.printButton('「比如……名叫待兼福来的星星就不错呢！」', 1);
@@ -147,7 +147,7 @@ module.exports = async (kitaru, me, callname, hook, event_object) => {
     await kitaru.say_and_wait('欸！我吗？');
     await era.printAndWait([
       '被叫到名字',
-      kitaru.get_teen_sex_title(),
+      kitaru.teen_sex_title,
       '转过头来看着 ',
       me.get_colored_name(),
       '，十字星状的瞳孔中闪烁着北极星般的明亮光芒。',
@@ -169,7 +169,7 @@ module.exports = async (kitaru, me, callname, hook, event_object) => {
       ' 便发现了',
       kitaru.sex,
       '即使是对',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '而言也有些略高的体温。',
     ]);
     await era.printAndWait('先是隔着校服抚摸着肩膀。');
@@ -362,7 +362,7 @@ module.exports = async (kitaru, me, callname, hook, event_object) => {
     await era.printAndWait('小穴内的爱液和穴内的空气一起被无情的挤出。');
     await era.printAndWait([
       '属于成年男性级别的肉棒霸占了穴内所有的空间，在',
-      kitaru.get_teen_sex_title(),
+      kitaru.teen_sex_title,
       '的私密地带横行霸道。',
     ]);
     await kitaru.say_and_wait(
@@ -407,7 +407,7 @@ module.exports = async (kitaru, me, callname, hook, event_object) => {
       '这次是对面立位，',
       me.get_colored_name(),
       ' 得以欣赏着平日里元气的',
-      kitaru.get_uma_sex_title(),
+      kitaru.uma_sex_title,
       '在性爱中的表情。',
     ]);
     await kitaru.say_and_wait('砰～砰～');
@@ -457,7 +457,7 @@ module.exports = async (kitaru, me, callname, hook, event_object) => {
     await kitaru.say_and_wait('欸！天上的星星也不行吗？');
     await era.printAndWait([
       '在听到这句话的同时，橘发的',
-      kitaru.get_teen_sex_title(),
+      kitaru.teen_sex_title,
       '顿时低下了头。',
     ]);
     era.printButton('「用有马纪念的胜利之星来装饰吧！」', 1);

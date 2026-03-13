@@ -74,7 +74,7 @@ module.exports = (handlers) => {
       '，只是路过的 ',
       me.get_colored_name(),
       ' 也只得向',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '们靠过去。',
     ]);
 
@@ -263,7 +263,7 @@ module.exports = (handlers) => {
         '于是，在后来逐渐转大的雨势中，',
         me.get_colored_name(),
         ' 与两位小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '终于在临近湿透时成功找回了 ',
         rice.get_colored_name(),
         ' 的缎带。',
@@ -360,7 +360,7 @@ module.exports = (handlers) => {
         '一大早跑出去就是为了去找缎带啊。心中的猜想得以印证，',
         me.get_colored_name(),
         ' 也向小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '的宿管和室友发去了消息……',
       ]);
       era.println();
@@ -389,14 +389,14 @@ module.exports = (handlers) => {
       ' 与 ',
       rice.get_colored_name(),
       ' 一同接受来自网络媒体、预计会登上名为《好朋友赛',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '》版块的特别采访。',
     ]);
     await era.printAndWait([
       '不过面对与经常于校园出没的 ',
       get_chara_talk(303).get_colored_name(),
       ' 完全不同的陌生人的采访，两名小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '似乎没能找到状态。',
     ]);
     await era.printAndWait(
@@ -583,7 +583,7 @@ module.exports = (handlers) => {
       ]);
       await era.printAndWait([
         '在调整后的重新采访中，特别采访节目终于完整录出了两位小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '受访时活跃的模样。',
       ]);
       await era.printAndWait(
@@ -603,7 +603,7 @@ module.exports = (handlers) => {
       ]);
       await era.printAndWait([
         '但是，是哪里出了差错吗？明明只是普通的小',
-        urara.get_child_sex_title(),
+        urara.child_sex_title,
         '玩闹，为什么听起来这么糟糕……',
       ]);
       await era.printAndWait(

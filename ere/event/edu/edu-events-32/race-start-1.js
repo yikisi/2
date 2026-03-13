@@ -23,13 +23,13 @@ module.exports = (handlers) => {
     await print_event_name('课题可行性分析', tachyon);
     await era.printAndWait([
       '如果说',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '与训练员的初遇，是两人的齿轮开始转动的瞬间',
     ]);
     await era.printAndWait('那么这一天，就是这齿轮运转的声音，震撼世界的瞬间');
     await era.printAndWait([
       '…………最起码，对其他',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '而言是如此的',
     ]);
 
@@ -37,9 +37,9 @@ module.exports = (handlers) => {
     await era.input();
     await era.printAndWait([
       '倘若自己的',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '真的有这种彷佛史诗的开卷一般的感想的话，现在大概便不会耗费重要的赛前准备时光于与其他',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '聊天上了吧',
     ]);
     era.println();
@@ -51,7 +51,7 @@ module.exports = (handlers) => {
     await era.printAndWait([
       me.get_colored_name(),
       ' 不由得感到无语，还差几分钟参赛',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '就要入场，一辈子理论上只有这么一次的首场出道赛，',
     ]);
     await era.printAndWait([
@@ -204,13 +204,13 @@ module.exports = (handlers) => {
     await era.printAndWait([
       race_infos[race_enum.hope_sta].get_colored_name(),
       '，可以说对刚出道的',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '们而言下半年最重要的比赛',
     ]);
     await era.printAndWait('尤其是三冠战线的更是如此');
     await era.printAndWait([
       '作为新秀级唯一的中距离G1赛事，这是许多有才能的',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '踏上梦想之旅的第一步。',
     ]);
     era.println();
@@ -218,7 +218,7 @@ module.exports = (handlers) => {
       '然而，如此重要的一天，',
       me.get_colored_name(),
       ' 的负责',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       ' ',
       tachyon.get_colored_name(),
       '……',
@@ -421,7 +421,7 @@ module.exports = (handlers) => {
     era.println();
     await tachyon.say_and_wait([
       '罢了，今天……就让你看看吧，动真格的模样…真正的，',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '的极限',
     ]);
     era.println();
@@ -447,16 +447,16 @@ module.exports = (handlers) => {
     era.println();
     await era.printAndWait([
       '日本德比，据说是最幸运的',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '得胜的比赛',
     ]);
     await era.printAndWait([
       '最快的',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '赢皋月，最幸运的',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '赢德比，最强的',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '赢菊花',
     ]);
     await era.printAndWait([
@@ -571,7 +571,7 @@ module.exports = (handlers) => {
       );
       await era.printAndWait([
         '菊花赏，最强的',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         '才能赢下的比赛',
       ]);
       await era.printAndWait([
@@ -607,7 +607,7 @@ module.exports = (handlers) => {
       await print_event_name('会赢吗？', tachyon);
       await era.printAndWait([
         '菊花赏，最强的',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         '才能赢下的比赛',
       ]);
       await era.printAndWait('最强，这个词代表着，是全方位');
@@ -715,7 +715,7 @@ module.exports = (handlers) => {
           '毕竟 ',
           t_call_c,
           ' 和其他',
-          tachyon.get_uma_sex_title(),
+          tachyon.uma_sex_title,
           '可完全不是一个等级的啊',
         ]);
         await tachyon.say_and_wait([

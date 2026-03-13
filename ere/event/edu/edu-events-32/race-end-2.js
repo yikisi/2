@@ -71,7 +71,7 @@ module.exports = (handlers) => {
     );
     await say_by_passer_by_and_wait('观众D', [
       '本来经典赛上的战绩就堪称逆天，这种',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '到底为什么会在闪耀系列赛里乱杀啊，哪怕梦之杯来人都赢不过的啦！',
     ]);
     await say_by_passer_by_and_wait(
@@ -95,16 +95,16 @@ module.exports = (handlers) => {
     await tachyon.print_and_wait('担心止步不前');
     await tachyon.print_and_wait('所以……不是不存在，只是没听见，因为不重要');
     await say_by_passer_by_and_wait(
-      tachyon.get_uma_sex_title() + 'A',
+      tachyon.uma_sex_title + 'A',
       '速子前辈好帅！',
     );
-    await say_by_passer_by_and_wait(tachyon.get_uma_sex_title() + 'B', [
+    await say_by_passer_by_and_wait(tachyon.uma_sex_title + 'B', [
       '果然速子前辈才是最强的',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '！',
     ]);
     await say_by_passer_by_and_wait(
-      tachyon.get_uma_sex_title() + 'C',
+      tachyon.uma_sex_title + 'C',
       '速子前辈必胜！',
     );
     await tachyon.print_and_wait('实际上，一直存在');
@@ -115,12 +115,12 @@ module.exports = (handlers) => {
     ]);
     await tachyon.print_and_wait([
       '在日本德比的时候，那个人一定喊过「让我看见',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '的可能性吧！」',
     ]);
     await tachyon.print_and_wait([
       '在菊花赏的时候，那个人一定喊过「向我证明，',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '的伤病是可以被超越的吧！」',
     ]);
     era.println();
@@ -354,12 +354,12 @@ module.exports = (handlers) => {
     await tachyon.print_and_wait([
       tachyon.get_colored_name(),
       '，说到底还是一名',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
     ]);
     await tachyon.print_and_wait('还是无法抗拒，奔跑和争胜的本能');
     await tachyon.print_and_wait([
       '明明关于',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '的可能性还有很多其他的路径',
     ]);
     await tachyon.print_and_wait('没有必要执着于赛场的');
@@ -378,14 +378,11 @@ module.exports = (handlers) => {
     await tachyon.print_and_wait('无论找多么冠冕堂皇的借口和理由来掩盖都一样');
     await tachyon.print_and_wait([
       '无论怎么努力，也无法挣脱',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '的本能',
     ]);
     await tachyon.print_and_wait('……也不想挣脱');
-    await tachyon.print_and_wait([
-      '想要变成最快最强的',
-      tachyon.get_uma_sex_title(),
-    ]);
+    await tachyon.print_and_wait(['想要变成最快最强的', tachyon.uma_sex_title]);
     await tachyon.print_and_wait('想要与敌手纠缠死斗到最后一刻');
     await tachyon.print_and_wait('想要……证明自己');
     era.println();
@@ -553,7 +550,7 @@ module.exports = (handlers) => {
       era.println();
       await era.printAndWait([
         '上半年最强',
-        tachyon.get_uma_sex_title(),
+        tachyon.uma_sex_title,
         '总决赛，这种比赛想也知道必然会聚集许多记者媒体',
       ]);
       era.print('就在这个舞台上，宣布今后的目标吧');
@@ -761,7 +758,7 @@ module.exports = (handlers) => {
     await era.printAndWait([tachyon.get_colored_name(), '，登上了世界的顶点']);
     await era.printAndWait([
       '来自日本的',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '，打破了世界的纪录',
     ]);
     await era.printAndWait(
@@ -808,14 +805,14 @@ module.exports = (handlers) => {
     await era.printAndWait('自己，一定不是个称职的训练员吧');
     await era.printAndWait([
       '身为训练员，应该要理智的为',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '考虑对',
       tachyon.sex,
       '们最好的选项',
     ]);
     await era.printAndWait([
       '但自己，只是为了看见最美的跑法，最强的跑姿，就放任自己的负责',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '做出了这种事',
     ]);
     await era.printAndWait('幸好，此时的问题也不是需要以训练员的身份做回答的');
@@ -860,14 +857,14 @@ module.exports = (handlers) => {
     await say_by_passer_by_and_wait('记者A', '最后……？');
     await tachyon.say_and_wait([
       '我，相信所有',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '都具有自己的可能性',
     ]);
     await tachyon.say_and_wait('无论是什么样的高墙，都一定能将其超越');
     await tachyon.say_and_wait('所以……这个纪录，只是个开始，而非结束');
     await tachyon.say_and_wait([
       '接下来，必然会有更多的',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '能够站上世界，然后……超越极限',
     ]);
     await tachyon.say_and_wait('我如此相信，并期望着各位，以及……');
@@ -909,7 +906,7 @@ module.exports = (handlers) => {
     await era.printAndWait('除了无法奔跑以外，就没有其他更严重的情况了');
     await era.printAndWait([
       '……然而对',
-      tachyon.get_uma_sex_title(),
+      tachyon.uma_sex_title,
       '而言，也不需要比这更严重的状况了',
     ]);
     era.println();

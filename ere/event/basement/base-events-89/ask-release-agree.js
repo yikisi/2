@@ -47,7 +47,7 @@ async function ask_release_agree() {
       await era.printAndWait([grand.get_colored_name(), ' 苦笑着。']);
       await era.printAndWait([
         '印象中，自从来到这地下室后，',
-        grand.get_teen_sex_title(),
+        grand.teen_sex_title,
         '总是在苦笑着。',
       ]);
       era.println();
@@ -72,7 +72,7 @@ async function ask_release_agree() {
       await era.printAndWait([grand.get_colored_name(), ' 苦笑着。']);
       await era.printAndWait([
         '印象中，自从来到这地下室后，',
-        grand.get_teen_sex_title(),
+        grand.teen_sex_title,
         '总是在苦笑着。',
       ]);
       era.println();
@@ -102,7 +102,7 @@ async function ask_release_agree() {
       '但是与 ',
       me.get_colored_name(),
       ' 目光接触后，',
-      grand.get_child_sex_title(),
+      grand.child_sex_title,
       '渐渐松开了手。',
     ]);
     era.println();
@@ -195,12 +195,12 @@ async function ask_release_agree() {
       ]);
       await era.printAndWait([
         '或许这次的行为只是一时冲动……但看到',
-        grand.get_child_sex_title(),
+        grand.child_sex_title,
         '就下意识感到恐惧的内心，毫无疑问是破镜难圆的证明。',
       ]);
       await era.printAndWait([
         '或许重见天日后帮',
-        grand.get_child_sex_title(),
+        grand.child_sex_title,
         '瞒下这次暴行，就是 ',
         me.get_colored_name(),
         ' 唯一能为',
@@ -220,7 +220,7 @@ async function ask_release_agree() {
     } else {
       await era.printAndWait([
         '视线在铁门与',
-        grand.get_child_sex_title(),
+        grand.child_sex_title,
         '之间来回移动，',
         me.get_colored_name(),
         ' 在心中默默有了决定。',
@@ -257,7 +257,7 @@ async function ask_release_agree() {
       ]);
       await era.printAndWait([
         '当时实现',
-        grand.get_child_sex_title(),
+        grand.child_sex_title,
         '梦想的约定，可不能仅是这样就轻易放弃。',
       ]);
       era.println();
@@ -303,7 +303,7 @@ async function ask_release_agree() {
         '因为 ',
         me.get_colored_name(),
         ' 从正面握住了',
-        grand.get_child_sex_title(),
+        grand.child_sex_title,
         '的双手，举在胸口。',
       ]);
       era.println();
@@ -348,7 +348,7 @@ async function ask_release_agree() {
         '冷静下来后，',
         me.get_colored_name(),
         ' 牵起',
-        grand.get_child_sex_title(),
+        grand.child_sex_title,
         '的手，走出了地下室。',
       ]);
     }
@@ -379,7 +379,7 @@ async function ask_release_agree() {
 
     await era.printAndWait([
       '没有任何犹豫，对于',
-      grand.get_teen_sex_title(),
+      grand.teen_sex_title,
       '提出的条件，',
       me.get_colored_name(),
       '再三保证，绝对不会再犯相同的错误。',

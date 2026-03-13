@@ -310,7 +310,7 @@ module.exports = (handlers) => {
     }
     await maya.say_and_wait([
       '在赛场上闪闪发亮的赛',
-      maya.get_uma_sex_title(),
+      maya.uma_sex_title,
       '，就是能让同场比赛的对手和观众，让大家的心都感到兴奋不已的存在。',
     ]);
     await maya.say_and_wait([

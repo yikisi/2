@@ -32,7 +32,7 @@ module.exports = async (handlers) => {
     await era.printAndWait(
       `是件很不错的礼物呢，在小北期待的目光下，${
         me.name
-      } 咬了一口巧克力，轻轻拍了拍${kita.get_teen_sex_title()}的小脑袋。`,
+      } 咬了一口巧克力，轻轻拍了拍${kita.teen_sex_title}的小脑袋。`,
     );
     if (era.get('cflag:68:育成回合计时') === 47 + 6) {
       new KitaEduMarks().classical_valentine++;

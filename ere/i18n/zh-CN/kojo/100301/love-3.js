@@ -32,7 +32,7 @@ module.exports = {
       );
       await teio.print_and_wait('这种事情总不能去问训练员吧啊啊！！');
       await era.printAndWait(
-        `在床上扑腾了一阵，散开头发的${teio.get_uma_sex_title()}摇晃着小腿，趾尖一下下地轻触着床沿。`,
+        `在床上扑腾了一阵，散开头发的${teio.uma_sex_title}摇晃着小腿，趾尖一下下地轻触着床沿。`,
       );
       await teio.say_and_wait('算了，就算是恋爱，也难不倒帝王大人。');
       await teio.print_and_wait(
@@ -78,12 +78,12 @@ module.exports = {
       await era.input();
 
       await era.printAndWait(
-        `专属于 ${me.name} 的担当${teio.get_uma_sex_title()}极其随意地用一只手撩起了自己的跑步过程中散开的头发，一边用头绳重新扎辫的同时一边用另一只手拿过 ${me.name} 手上已经拧好了的水瓶，小口小口地喝了起来。`,
+        `专属于 ${me.name} 的担当${teio.uma_sex_title}极其随意地用一只手撩起了自己的跑步过程中散开的头发，一边用头绳重新扎辫的同时一边用另一只手拿过 ${me.name} 手上已经拧好了的水瓶，小口小口地喝了起来。`,
       );
       await era.printAndWait(
         `不知是汗还是水的液体从白皙的皮肤上滴落，${
           me.name
-        } 赶忙移开目光，却扫到了${teio.get_uma_sex_title()}撩发露出的后颈上。`,
+        } 赶忙移开目光，却扫到了${teio.uma_sex_title}撩发露出的后颈上。`,
       );
       await teio.say_and_wait(`训练员，${me.name} 怎么了？`);
       era.println();
@@ -96,7 +96,7 @@ module.exports = {
       await teio.say_and_wait(`……？`);
       era.println();
       await era.printAndWait(
-        `小${teio.get_uma_sex_title()}笑意难忍，放下了水杯，脸颊微红地转身扭头，对上 ${
+        `小${teio.uma_sex_title}笑意难忍，放下了水杯，脸颊微红地转身扭头，对上 ${
           me.name
         } 的视线。`,
       );
@@ -119,14 +119,14 @@ module.exports = {
       if (ret[0] === 1) {
         await teio.say_and_wait('那，你想要变成什么身份呢？');
         await era.printAndWait(
-          `${teio.get_teen_sex_title()}眼珠一转，嘻嘻笑着加了个问题。`,
+          `${teio.teen_sex_title}眼珠一转，嘻嘻笑着加了个问题。`,
         );
         await era.printAndWait('这个小鬼！');
         await era.printAndWait(`${me.name} 不禁有些头大，下意识吐槽道`);
         await me.say_and_wait('哎……你要是一直这样，以后一起生活可怎么办啊。');
         await teio.say_and_wait('一，一起？');
         await era.printAndWait(
-          `${teio.get_teen_sex_title()}慌了阵脚，捂住了自己的下半张脸，${
+          `${teio.teen_sex_title}慌了阵脚，捂住了自己的下半张脸，${
             me.name
           } 见势便也豁出去了。`,
         );
@@ -135,7 +135,7 @@ module.exports = {
         );
         await teio.say_and_wait(`/////`);
         await era.printAndWait(
-          `${teio.get_teen_sex_title()}闭上双瞳，大口喘着气，随着一个深呼吸，${
+          `${teio.teen_sex_title}闭上双瞳，大口喘着气，随着一个深呼吸，${
             teio.sex
           }垂下了手，直视着 ${me.name}。`,
         );
@@ -146,7 +146,7 @@ module.exports = {
       } else {
         await teio.say_and_wait(`这样啊……`);
         await era.printAndWait(
-          `${teio.get_uma_sex_title()}不禁嘟起了嘴，${
+          `${teio.uma_sex_title}不禁嘟起了嘴，${
             me.name
           } 赶紧清了清嗓子，开始宣读今天的训练相关内容。`,
         );
@@ -169,7 +169,7 @@ module.exports = {
       await era.printAndWait(
         `${
           me.name
-        } 看着面前闭着眼睛，面上有水珠滴落，身体微微有些颤抖的${teio.get_uma_sex_title()}${teio.get_teen_sex_title()}。`,
+        } 看着面前闭着眼睛，面上有水珠滴落，身体微微有些颤抖的${teio.uma_sex_title}${teio.teen_sex_title}。`,
       );
       await era.printAndWait(
         `然后 ${me.name} 像之前一样，拿起加热过的，软绵的浴巾，开始给${teio.sex}擦拭身体，又拿起梳子和吹风机，帮${teio.sex}梳理毛发。`,
@@ -183,7 +183,7 @@ module.exports = {
       await era.printAndWait(
         `${
           me.name
-        } 带茧，略显粗糙的手在${teio.get_uma_sex_title()}${teio.get_teen_sex_title()}最重要的足和小腿处上下抚弄，时不时地用轻巧的力度摁压一下。`,
+        } 带茧，略显粗糙的手在${teio.uma_sex_title}${teio.teen_sex_title}最重要的足和小腿处上下抚弄，时不时地用轻巧的力度摁压一下。`,
       );
       await era.printAndWait(
         `光滑而有弹性的皮肤触感反馈到 ${me.name} 的指尖上，从外表看矫健美妙的双腿实则内藏着危难。就是它们，支撑着${teio.sex}前行，奔跑，驰骋赛场。而现在……`,
@@ -208,7 +208,7 @@ module.exports = {
         await era.printAndWait(
           `${
             me.name
-          } 掏出一只盒子，还没等${teio.get_uma_sex_title()}${teio.get_teen_sex_title()}反应过来，就轻轻捧起${
+          } 掏出一只盒子，还没等${teio.uma_sex_title}${teio.teen_sex_title}反应过来，就轻轻捧起${
             teio.sex
           }的左脚，打开包装，将里面的一枚戒指套在${teio.sex}的第四趾上。`,
         );
@@ -216,7 +216,7 @@ module.exports = {
           `被 ${me.name} 亲自挑选的趾戒尺寸刚好，可以固定在上又不会对佩戴者本人足趾的活动造成影响。`,
         );
         await era.printAndWait(
-          `双手指肚习惯性捏了捏一些位于${teio.get_uma_sex_title()}足部的，放松活血的穴位，`,
+          `双手指肚习惯性捏了捏一些位于${teio.uma_sex_title}足部的，放松活血的穴位，`,
         );
         await era.printAndWait(
           `随后 ${me.name} 抬起头，目光从下而上扫去，对上了自家担当红透了的脸和似乎含泪的双眸。`,
@@ -226,7 +226,7 @@ module.exports = {
         await teio.say_and_wait('……愿意！');
         era.println();
         await era.printAndWait(
-          `${teio.get_teen_sex_title()}破涕为笑，张开双臂，${me.name} 起身，将${
+          `${teio.teen_sex_title}破涕为笑，张开双臂，${me.name} 起身，将${
             teio.sex
           }紧抱住，再不分开。`,
         );
@@ -250,7 +250,7 @@ module.exports = {
         await era.printAndWait(
           `${
             me.name
-          } 默默地做着剩下的步骤，完事后把安静地${teio.get_teen_sex_title()}抱起再放下，走到房门外，送别。`,
+          } 默默地做着剩下的步骤，完事后把安静地${teio.teen_sex_title}抱起再放下，走到房门外，送别。`,
         );
       }
       return ret;
@@ -271,7 +271,7 @@ module.exports = {
       await teio.say_and_wait(`蜂蜜～`);
       era.println();
       await era.printAndWait(
-        `${me.name} 哎了一声，让小${teio.get_uma_sex_title()}坐进自己怀里（免得${
+        `${me.name} 哎了一声，让小${teio.uma_sex_title}坐进自己怀里（免得${
           teio.sex
         }挤来挤去闹腾），举起手上的毛巾，熟练地擦干${teio.sex}的头发。`,
       );
@@ -282,7 +282,7 @@ module.exports = {
       await teio.say_and_wait('唔……');
       era.println();
       await era.printAndWait(
-        `小${teio.get_uma_sex_title()}喝着从冰箱里拿出的蜂蜜特饮，也看着 ${
+        `小${teio.uma_sex_title}喝着从冰箱里拿出的蜂蜜特饮，也看着 ${
           me.name
         } 电脑上的资料。`,
       );
@@ -291,7 +291,7 @@ module.exports = {
       era.println();
       await era.printAndWait('忍不住了。');
       await era.printAndWait(
-        `刚刚出浴的${teio.get_teen_sex_title()}身上的香气，大腿上的肌肤触感，时不时扫弄自己小腹的${teio.get_uma_sex_title()}毛发……`,
+        `刚刚出浴的${teio.teen_sex_title}身上的香气，大腿上的肌肤触感，时不时扫弄自己小腹的${teio.uma_sex_title}毛发……`,
       );
       await era.printAndWait(`${me.name} 感觉血液流通已经产生了生理导向。`);
       era.println();
@@ -338,7 +338,7 @@ module.exports = {
         await era.printAndWait(
           `${
             me.name
-          } 强压住心中浮现出的那份再正常不过的生理冲动，扶住${teio.get_uma_sex_title()}，将${
+          } 强压住心中浮现出的那份再正常不过的生理冲动，扶住${teio.uma_sex_title}，将${
             teio.sex
           }放到一旁，站了起来，咳了一声，假装无事发生。${
             teio.name
@@ -367,7 +367,7 @@ module.exports = {
       );
       era.println();
       await me.say_and_wait(
-        `光天化日之下被${teio.get_uma_sex_title()}抱住的年上教练，旁人会怎么看啊。`,
+        `光天化日之下被${teio.uma_sex_title}抱住的年上教练，旁人会怎么看啊。`,
       );
       era.println();
       await teio.say_and_wait(
@@ -413,7 +413,7 @@ module.exports = {
       await teio.say_and_wait('呵呵……那解释一下？');
       era.println();
       await era.printAndWait(
-        `担当${teio.get_uma_sex_title()}的身体贴得更近了，${
+        `担当${teio.uma_sex_title}的身体贴得更近了，${
           me.name
         } 感觉自己口干舌燥，心跳异常，连忙说道`,
       );
@@ -423,7 +423,7 @@ module.exports = {
       await teio.say_and_wait('不过我倒是……也已经明白了那些事情呢……');
       era.println();
       await era.printAndWait(
-        `脸红的${teio.get_uma_sex_title()}${teio.get_teen_sex_title()}叽叽咕咕地絮叨着离开了 ${me.name}。令人舒适的体温渐行渐远。`,
+        `脸红的${teio.uma_sex_title}${teio.teen_sex_title}叽叽咕咕地絮叨着离开了 ${me.name}。令人舒适的体温渐行渐远。`,
       );
       await era.printAndWait(
         `不料，${teio.sex}马上又回来了。担当绕到 ${me.name} 跟前，想要钻进外衣里。`,
@@ -449,7 +449,7 @@ module.exports = {
         `船速不快，海风也很适宜。但仍能感觉到耳边寒风凛冽，是降温了吗？${me.name} 下意识拉开外衣的边缘，将 ${teio.name} 裹紧自己的怀里。身着白色婚纱——`,
       );
       await era.printAndWait(
-        `——看起来更像是花童——的小${teio.get_uma_sex_title()}从 ${me.name} 黑色的衣领处冒出头来，整个人倚在 ${me.name} 身上。`,
+        `——看起来更像是花童——的小${teio.uma_sex_title}从 ${me.name} 黑色的衣领处冒出头来，整个人倚在 ${me.name} 身上。`,
       );
       await era.printAndWait('啊……这下暖和了。');
       era.println();
@@ -462,7 +462,7 @@ module.exports = {
       await me.say_and_wait('……？');
       era.println();
       await era.printAndWait(
-        `怀中的${teio.get_teen_sex_title()}突然冒出这么一句话。`,
+        `怀中的${teio.teen_sex_title}突然冒出这么一句话。`,
       );
       await era.printAndWait(
         `凝视。眼前是为 ${me.name} 鼓气的微笑，以及不知怀疑为何物的明眸。`,
@@ -481,21 +481,19 @@ module.exports = {
       await teio.say_and_wait(`一定能行的，${me.actual_name}。`);
       era.println();
       await era.printAndWait(
-        `——让${teio.get_child_sex_title()}子这么安慰自己，反倒更尴尬和慌乱啊。`,
+        `——让${teio.child_sex_title}子这么安慰自己，反倒更尴尬和慌乱啊。`,
       );
       await era.printAndWait(
         `${me.name} 笑了笑，把手放在${teio.sex}的头上，胡乱摸了摸，${teio.sex}眯起眼，享受地哼起了小调。`,
       );
       await era.printAndWait('怀中至宝，如此美丽。');
       await era.printAndWait(
-        `这位${teio.get_uma_sex_title()}，拥有无垢纯洁的信念，并且为此奉献上了自己的躯体。${
+        `这位${teio.uma_sex_title}，拥有无垢纯洁的信念，并且为此奉献上了自己的躯体。${
           teio.sex
         }的灵魂又光彩照人，如太阳般闪耀。`,
       );
       await era.printAndWait(
-        `这位${teio.get_teen_sex_title()}……就是 ${
-          me.name
-        } 曾差点放弃的梦想之化身。`,
+        `这位${teio.teen_sex_title}……就是 ${me.name} 曾差点放弃的梦想之化身。`,
       );
       era.printButton(`「抱紧${teio.sex}，共同前进」（升级关系）`, 1);
       era.printButton('「松开手，驻足不前」（暂停升级）', 2);

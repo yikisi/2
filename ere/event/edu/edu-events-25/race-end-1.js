@@ -30,23 +30,23 @@ module.exports = (handlers, check_tachyon_plan_b) => {
     }
     await print_event_name('海市蜃楼', coffee);
     await say_by_passer_by_and_wait(
-      `赛${coffee.get_uma_sex_title()}A`,
+      `赛${coffee.uma_sex_title}A`,
       '哈、呼……！大家都辛苦了！是场很精彩的比赛呢！',
     );
-    await say_by_passer_by_and_wait(`赛${coffee.get_uma_sex_title()}A`, [
+    await say_by_passer_by_and_wait(`赛${coffee.uma_sex_title}A`, [
       '那边那位……是叫做 ',
       coffee.get_colored_name(),
       ' 吧？你也辛苦了……',
     ]);
     await say_by_passer_by_and_wait(
-      `赛${coffee.get_uma_sex_title()}A`,
+      `赛${coffee.uma_sex_title}A`,
       '呃，咦……没在听吗？那个……',
     );
     await coffee.say_and_wait('…………');
     await era.printAndWait([
       coffee.get_colored_name(),
       ' 背对着其他赛',
-      coffee.get_uma_sex_title(),
+      coffee.uma_sex_title,
       '，默默地望着远方。',
     ]);
     await era.printAndWait([
@@ -105,11 +105,11 @@ module.exports = (handlers, check_tachyon_plan_b) => {
       '一起追逐相同目标。',
     ]);
     await say_by_passer_by_and_wait(
-      `赛${coffee.get_uma_sex_title()}A`,
+      `赛${coffee.uma_sex_title}A`,
       '我说，那两个人是不是怪怪的啊……？一直盯着什么都没有的远处诶。',
     );
     await say_by_passer_by_and_wait(
-      `赛${coffee.get_uma_sex_title()}B`,
+      `赛${coffee.uma_sex_title}B`,
       '可能他们两个……都是怪人吧。还是不要靠太近比较好……」',
     );
     await era.printAndWait([
@@ -554,7 +554,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
         ' 回头看了 ',
         me.get_colored_name(),
         ' 的另一个担当',
-        coffee.get_uma_sex_title(),
+        coffee.uma_sex_title,
         '——',
         tachyon.get_colored_name(),
         '，',

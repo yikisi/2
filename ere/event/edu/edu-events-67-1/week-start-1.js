@@ -165,7 +165,7 @@ module.exports = (handlers) => {
     );
     await daiya.say_and_wait('我还差得远呢。到现在也还没创下特别厉害的成绩。');
     await nice_nature.say_and_wait(
-      `……感觉……拥有主角光环的赛${daiya.get_uma_sex_title()}其实好像也不是那么轻松的样子呢……`,
+      `……感觉……拥有主角光环的赛${daiya.uma_sex_title}其实好像也不是那么轻松的样子呢……`,
     );
     await palmer.say_and_wait(
       '我们也会帮你加油的。里见你要加油喔！千万不能认输！',
@@ -215,7 +215,7 @@ module.exports = (handlers) => {
       '今年的抱负……只是跑赢经典三冠的话，这也太过理所当然了。',
     );
     await daiya.say_and_wait(
-      `身为里见家的赛${daiya.get_uma_sex_title()}，一个知名赛${daiya.get_uma_sex_title()}应该要有怎样的表现……`,
+      `身为里见家的赛${daiya.uma_sex_title}，一个知名赛${daiya.uma_sex_title}应该要有怎样的表现……`,
     );
     await daiya.say_and_wait('我想要成为的模样──', true);
     await daiya.say_and_wait('我应该要特别注重的事情……', true);
@@ -236,7 +236,7 @@ module.exports = (handlers) => {
       '『春季资深三冠』……！我一定要好好表现，让更多的人为我加油！然后带给大家笑容！',
     );
     await daiya.say_and_wait(
-      `我会跑赢『经典三冠』！身为里见家的赛${daiya.get_uma_sex_title()}，我发誓会带给大家非常耀眼的表现！`,
+      `我会跑赢『经典三冠』！身为里见家的赛${daiya.uma_sex_title}，我发誓会带给大家非常耀眼的表现！`,
     );
     await era.printAndWait(
       `虽然${daiya.sex}们的目标赛事不同，但彼此眼神中的光芒却是一样的──`,
@@ -281,7 +281,7 @@ module.exports = (handlers) => {
     const ret = await era.input();
     if (ret === 1) {
       await kita.say_and_wait(
-        `说的是『新春赛${daiya.get_uma_sex_title()}长距离接力赛』吧！现在这个时间的话……就快要经过这附近了！`,
+        `说的是『新春赛${daiya.uma_sex_title}长距离接力赛』吧！现在这个时间的话……就快要经过这附近了！`,
       );
       await daiya.say_and_wait('比看谁更会加油是吧！那就交给训练员当裁判了！');
       era.printButton('「好！」', 1);
@@ -294,7 +294,7 @@ module.exports = (handlers) => {
         '可以的，一定可以追上的！！没错，就是这样！保持这个步调！',
       );
       await era.printAndWait(
-        `领先集团的赛${daiya.get_uma_sex_title()}们以飞快的速度跑过我们的面前。`,
+        `领先集团的赛${daiya.uma_sex_title}们以飞快的速度跑过我们的面前。`,
       );
       await kita.say_and_wait('好，赶去下一个加油地点吧！');
       await daiya.say_and_wait('接下来是上山路！');
@@ -340,7 +340,7 @@ module.exports = (handlers) => {
       await kita.say_and_wait('感觉会掉很多在那边！冲啊────！！');
       await daiya.say_and_wait('咦？咦……呀！');
       await daiya.say_and_wait(
-        `被……被人群给推出来了……赛${daiya.get_uma_sex_title()}区跟一般大众区，两边都……挤满了人……`,
+        `被……被人群给推出来了……赛${daiya.uma_sex_title}区跟一般大众区，两边都……挤满了人……`,
       );
       era.printButton('「你在后面的地上找找看」', 1);
       await era.input();

@@ -54,7 +54,7 @@ module.exports = {
       );
       era.println();
       await era.printAndWait(
-        `而到了三月，生涯功成名就，且在严格票选中脱颖而出的赛${chara.uma_sex_title}将会登上殿堂，并获得《显彰赛${chara.get_uma_sex_title()}》此一至高无上的荣誉。`,
+        `而到了三月，生涯功成名就，且在严格票选中脱颖而出的赛${chara.uma_sex_title}将会登上殿堂，并获得《显彰赛${chara.uma_sex_title}》此一至高无上的荣誉。`,
       );
       era.println();
       await era.printAndWait([
@@ -126,10 +126,7 @@ module.exports = {
       ]);
       era.println();
       if (era.get(`love:${chara.id}`) >= 75) {
-        await era.printAndWait([
-          you.get_couple_title(),
-          ' 在熟悉的训练员室里恩爱地亲热起来。',
-        ]);
+        await era.printAndWait('你们在熟悉的训练员室里恩爱地亲热起来。');
         await era.printAndWait(
           '两位小情人沉浸在幸福的二人世界，仿佛能把俗世的琐事都抛进虚空之中。',
         );
@@ -138,20 +135,16 @@ module.exports = {
           align: 'center',
         });
       } else if (can_sex) {
-        await era.printAndWait([
-          you.get_couple_title(),
-          ' 在熟悉的训练员室里热烈地拥吻。',
-        ]);
+        await era.printAndWait('你们在熟悉的训练员室里热烈地拥吻。');
         await era.printAndWait(
           '情欲的气息充斥整个房间，只有娇声与肉体碰撞的声音不住回荡。',
         );
         era.println();
         await era.printAndWait('食色，性也。——孟子', { align: 'center' });
       } else {
-        await era.printAndWait([
-          you.get_couple_title(),
-          ' 在熟悉的训练员室里相谈甚欢，又不禁为无可避免的别离伤感。',
-        ]);
+        await era.printAndWait(
+          '你们在熟悉的训练员室里相谈甚欢，又不禁为无可避免的别离伤感。',
+        );
         await era.printAndWait(
           '人生难得相逢，正是因为可能失去才会让珍惜眼前人如此重要。',
         );

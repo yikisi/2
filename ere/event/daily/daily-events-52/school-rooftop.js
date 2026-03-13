@@ -44,7 +44,7 @@ module.exports = async (hook) => {
     ]);
     await era.printAndWait([
       '虽然小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '主观上想要快点成为大人，但距离真的长大还是需要一点时间。',
     ]);
     await era.printAndWait([
@@ -89,13 +89,13 @@ module.exports = async (hook) => {
       ]);
       await era.printAndWait([
         '而在安心地将饭菜咽下后，小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '心满意足的将筷子上的另一半也吃了下去。',
       ]);
     } else {
       await era.printAndWait([
         '小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '看上去有点不太情愿，但疲惫占了上风的',
         urara.sex,
         '还是离 ',
@@ -116,7 +116,7 @@ module.exports = async (hook) => {
       ]);
       await era.printAndWait([
         '随着小小的咀嚼与吞咽声，小',
-        urara.get_uma_sex_title(),
+        urara.uma_sex_title,
         '还是在 ',
         me.get_colored_name(),
         ' 的投喂下逐渐地放下心来。',
@@ -140,7 +140,7 @@ module.exports = async (hook) => {
     ]);
     await era.printAndWait([
       '本来就比同龄人更显年幼，现在又因失去活力而变得软软糯糯后，小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '就更像个真正的小孩子了。',
     ]);
     await era.printAndWait([
@@ -178,7 +178,7 @@ module.exports = async (hook) => {
       '已经顾不上想法和态度什么的了，在得到 ',
       me.get_colored_name(),
       ' 的休息建议后，小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '立刻放松了强撑的身体。',
     ]);
     await era.printAndWait([
@@ -195,7 +195,7 @@ module.exports = async (hook) => {
       ' 果然还是个孩子吧？不过也正因',
       urara.sex,
       '是这样的好孩子，今天的小',
-      urara.get_uma_sex_title(),
+      urara.uma_sex_title,
       '治愈力也是一等一的。',
     ]);
     await era.printAndWait([
@@ -315,7 +315,7 @@ module.exports = async (hook) => {
         ]);
         await era.printAndWait([
           '明明在思考很危险的事情，小',
-          urara.get_uma_sex_title(),
+          urara.uma_sex_title,
           '却依旧顾及着别人的意愿。',
         ]);
     }

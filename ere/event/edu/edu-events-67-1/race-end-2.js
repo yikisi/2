@@ -48,7 +48,7 @@ module.exports = (handlers) => {
       );
       await say_by_passer_by_and_wait(
         '观众A',
-        `年度代表赛${daiya.get_uma_sex_title()}的实力今年也丝毫不减呢！`,
+        `年度代表赛${daiya.uma_sex_title}的实力今年也丝毫不减呢！`,
       );
       await say_by_passer_by_and_wait(
         '观众C',
@@ -144,7 +144,7 @@ module.exports = (handlers) => {
     await era.printAndWait(
       `里见光钻曾说过，${
         daiya.sex
-      }要追着北部玄驹的背影，找到身为「知名赛${daiya.get_uma_sex_title()}』该有姿态的答案。`,
+      }要追着北部玄驹的背影，找到身为「知名赛${daiya.uma_sex_title}』该有姿态的答案。`,
     );
     await era.printAndWait(
       `因此，${me.name} 预设${daiya.sex}会想跟北部玄驹参加同一场比赛。`,
@@ -168,7 +168,7 @@ module.exports = (handlers) => {
       ]);
     } else {
       await daiya.say_and_wait(
-        `我因为实力还不足以成为『知名赛${daiya.get_uma_sex_title()}』，今天才会落败。`,
+        `我因为实力还不足以成为『知名赛${daiya.uma_sex_title}』，今天才会落败。`,
       );
       await daiya.say_and_wait([
         '所以我下次一定要在 ',
@@ -342,23 +342,23 @@ module.exports = (handlers) => {
       '是呀……所以我也不能只顾着高兴了。难得有可以跟麦昆一起比赛的机会嘛。',
     );
     await daiya.say_and_wait(
-      `麦昆跟帝王都已经是以『知名赛${daiya.get_uma_sex_title()}』的身份在各处活跃的人了。`,
+      `麦昆跟帝王都已经是以『知名赛${daiya.uma_sex_title}』的身份在各处活跃的人了。`,
     );
     await daiya.say_and_wait(
       `我打算从${
         teio.sex
-      }们两位身上学习『知名赛${daiya.get_uma_sex_title()}』该有的姿态。`,
+      }们两位身上学习『知名赛${daiya.uma_sex_title}』该有的姿态。`,
     );
     await daiya.say_and_wait(
       `尤其是麦昆，${mcqueen.sex}背负着目白家的责任，感觉处境和我很接近。`,
     );
     await daiya.say_and_wait(
-      `我身为里见家的代表，该成为什么样的『知名赛${daiya.get_uma_sex_title()}』呢──`,
+      `我身为里见家的代表，该成为什么样的『知名赛${daiya.uma_sex_title}』呢──`,
     );
     era.printButton('「你可以随时跟我分享烦恼」', 1);
     await era.input();
     await era.printAndWait(
-      `『成为能够赢得G1竞赛的知名赛${daiya.get_uma_sex_title()}』，${
+      `『成为能够赢得G1竞赛的知名赛${daiya.uma_sex_title}』，${
         me.name
       } 答应过要和${daiya.sex}一起完成这个梦想。`,
     );
@@ -368,7 +368,7 @@ module.exports = (handlers) => {
     await daiya.say_and_wait('嘿嘿嘿，到时候就要靠你帮忙了♪');
     await daiya.say_and_wait('……要是我能赢过麦昆──');
     await era.printAndWait(
-      `赢过『知名赛${daiya.get_uma_sex_title()}』目白麦昆，实质上来说等同于实力达到『知名赛${daiya.get_uma_sex_title()}』的水准。`,
+      `赢过『知名赛${daiya.uma_sex_title}』目白麦昆，实质上来说等同于实力达到『知名赛${daiya.uma_sex_title}』的水准。`,
     );
     await era.printAndWait(
       `要完成里见家的宿愿也是指日可待──${me.name} 揣摩着她欲言又止的话，更重新意识到自己身负重任。`,
@@ -460,7 +460,7 @@ module.exports = (handlers) => {
     await daiya.say_and_wait('是！终于要和麦昆一起……！还有，小北也是！！');
     await daiya.say_and_wait('我梦寐以求的舞台终于就要……！');
     await daiya.say_and_wait(
-      `而且，只要跑赢了，就能证明我已经拥有『知名赛${daiya.get_uma_sex_title()}』的实力。`,
+      `而且，只要跑赢了，就能证明我已经拥有『知名赛${daiya.uma_sex_title}』的实力。`,
     );
     await daiya.say_and_wait(
       '崇拜的人和长久以来的对手……可以和她们一决胜负的机运──',
@@ -554,35 +554,35 @@ module.exports = (handlers) => {
     await mcqueen.say_and_wait('什么事呢？');
     await daiya.say_and_wait('麦昆你……为什么会愿意跟我们一起比赛呢？');
     await mcqueen.say_and_wait(
-      `……你们两个的比赛激起了我的斗志。再加上，身为目白家的赛${daiya.get_uma_sex_title()}，我认为我必须做这样的选择。`,
+      `……你们两个的比赛激起了我的斗志。再加上，身为目白家的赛${daiya.uma_sex_title}，我认为我必须做这样的选择。`,
     );
-    await daiya.say_and_wait(`身为目白家的赛${daiya.get_uma_sex_title()}……`);
+    await daiya.say_and_wait(`身为目白家的赛${daiya.uma_sex_title}……`);
     await mcqueen.say_and_wait('光钻想要知道的，是我现在的处境跟心境吧？');
     await daiya.say_and_wait(
-      `是的，因为麦昆是里见家期望能成为的『知名赛${daiya.get_uma_sex_title()}』，并以这样的身份在各处活跃。`,
+      `是的，因为麦昆是里见家期望能成为的『知名赛${daiya.uma_sex_title}』，并以这样的身份在各处活跃。`,
     );
     await daiya.say_and_wait(
-      `所以我才会认为，这次麦昆愿意跟我们一起比赛，是不是出自于『知名赛${daiya.get_uma_sex_title()}』的考量。`,
+      `所以我才会认为，这次麦昆愿意跟我们一起比赛，是不是出自于『知名赛${daiya.uma_sex_title}』的考量。`,
     );
     await mcqueen.say_and_wait('是的，正是如此。');
     await mcqueen.say_and_wait(
-      `──以绝对强势到甚至没有新意的实力，在赛${daiya.get_uma_sex_title()}界尽情打响目白家名号，这是我一直督促自己的课题。`,
+      `──以绝对强势到甚至没有新意的实力，在赛${daiya.uma_sex_title}界尽情打响目白家名号，这是我一直督促自己的课题。`,
     );
     await mcqueen.say_and_wait(
-      `因此，当我和目白家都特别看重的『天皇赏（春）』……出现强力赛${daiya.get_uma_sex_title()}参赛时，我就必须奋起迎战。`,
+      `因此，当我和目白家都特别看重的『天皇赏（春）』……出现强力赛${daiya.uma_sex_title}参赛时，我就必须奋起迎战。`,
     );
     await mcqueen.say_and_wait(
-      `不单是如此，我不仅要和在闪耀系列赛创下好成绩的赛${daiya.get_uma_sex_title()}比赛──`,
+      `不单是如此，我不仅要和在闪耀系列赛创下好成绩的赛${daiya.uma_sex_title}比赛──`,
     );
     await mcqueen.say_and_wait(
-      `也要接受像你们这些新一代崭露头角的赛${daiya.get_uma_sex_title()}的挑战，并用压倒性的实力赢过你们。`,
+      `也要接受像你们这些新一代崭露头角的赛${daiya.uma_sex_title}的挑战，并用压倒性的实力赢过你们。`,
     );
     await mcqueen.say_and_wait('用这种方式──让目白家的名声永不凋零。');
     await mcqueen.say_and_wait('这就是我现在的处境和心境。');
     await daiya.say_and_wait('为的是让目白家能够以实力继续自豪……');
     await mcqueen.say_and_wait('……然而，里见家和目白家的立场并不相同。');
     await mcqueen.say_and_wait(
-      `里见家在赛${daiya.get_uma_sex_title()}界的历史，可以说是由光钻开始的。`,
+      `里见家在赛${daiya.uma_sex_title}界的历史，可以说是由光钻开始的。`,
     );
     await mcqueen.say_and_wait('所以，光钻应该有和我不同的路可以选择。');
     await daiya.say_and_wait('……里见家的历史是由我开始……');
@@ -594,7 +594,7 @@ module.exports = (handlers) => {
     await daiya.say_and_wait(
       `${
         mcqueen.sex
-      }对『知名赛${daiya.get_uma_sex_title()}』的身份竟然会有那么坚定明确的定义跟目标……真的令我感到非常尊敬……！`,
+      }对『知名赛${daiya.uma_sex_title}』的身份竟然会有那么坚定明确的定义跟目标……真的令我感到非常尊敬……！`,
     );
     era.printButton('「能成为你的参考真是太好了呢」', 1);
     await era.input();
@@ -606,7 +606,7 @@ module.exports = (handlers) => {
     );
     await era.printAndWait([
       race_infos[race_enum.arim_kin].get_colored_name(),
-      `──里见光钻想要成为『知名赛${daiya.get_uma_sex_title()}』的梦想，或许真的能在那找到答案也不一定。`,
+      `──里见光钻想要成为『知名赛${daiya.uma_sex_title}』的梦想，或许真的能在那找到答案也不一定。`,
     ]);
   };
 
