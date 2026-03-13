@@ -310,7 +310,7 @@ module.exports = class extends CustomizedEro {
     switch (type) {
       case mark_enum.pleasure:
       case mark_enum.meek:
-        await kojo()[`mark_${mark_enum.keys[type]}`]({
+        await kojo()[`mark_${Object.keys(mark_enum)[type]}`]({
           ...generate_dictionary(this.id),
           level,
         });

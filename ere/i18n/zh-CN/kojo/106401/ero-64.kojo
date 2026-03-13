@@ -890,7 +890,7 @@ get_semen_doggy_style:
     content:
       - fontWeight: bold
         content: %CHARA%
-      - 「……哦……❤️。」
+      - 「……哦❤️……」
 
 get_semen_sitting:
   - 临近高潮，%CHARA% 的双腿紧紧缠绕在 %YOU% 的腰间，随着每一次深入而收紧。

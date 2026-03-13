@@ -324,8 +324,8 @@ const _desc = {
       i18n().timon.act_desc_c[ero_hooks.keys[act]](
         atk,
         def,
-        hook.arg,
         get_chara_talk(extra.supporter),
+        hook.arg,
       )),
 );
 

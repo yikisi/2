@@ -220,13 +220,7 @@ async function page_chairman_office() {
                       (await i18n().timon.others.star_drew(
                         chara,
                         get_chara_talk(0),
-                        {
-                          content: get_display_name(
-                            era.get(`static:${temp}:name`),
-                          ),
-                          color: get_chara_color(temp),
-                          fontWeight: 'bold',
-                        },
+                        get_chara_talk(temp).get_colored_actual_name(),
                         star_premium_draw.chara > 0,
                       )) === 1
                     ) {

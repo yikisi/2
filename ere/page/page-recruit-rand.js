@@ -55,6 +55,7 @@ async function print_rec_page() {
     sys_get_star_premium_draw().chara,
     era.get('flag:物色对象'),
   ].filter((e) => e > 0);
+  console.log(stay_list);
   let today_list = gacha(
     filter_chara('cflag', '随机招募', 1).filter(
       (v) => !team_list.includes(v) && era.get(`cflag:${v}:成长阶段`) >= 2,
@@ -62,7 +63,9 @@ async function print_rec_page() {
     5,
   );
   today_list.push(...stay_list);
+  console.log(1, today_list.join(','));
   today_list = today_list.filter((e, i, l) => e && l.indexOf(e) === i);
+  console.log(2, today_list.join(','));
   if (today_list.length > 6) {
     today_list.splice(
       today_list.findIndex((e) => !stay_list.includes(e)),
@@ -81,9 +84,10 @@ async function print_rec_page() {
     buffer.push([{ type: 'divider' }]);
     const cur_recruit = era.get('flag:物色对象');
     today_list = today_list.filter(
-      (chara_id) => era.get(`cflag:${chara_id}:随机招募`) > 0,
+      (cid) => era.get(`cflag:${cid}:随机招募`) > 0,
     );
-    if (today_list.length) {
+    console.log(3, today_list.join(','));
+    if (today_list.length > 0) {
       if (cur_recruit && today_list.indexOf(cur_recruit) === -1) {
         buffer[0].push({
           content: [

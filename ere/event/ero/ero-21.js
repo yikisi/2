@@ -42,6 +42,9 @@ module.exports = class extends CustomizedEro {
     if (type === mark_enum.ero || (type === mark_enum.shame && type > 1)) {
       return await super.get_mark(level, type, _new);
     }
-    await this.#kojo[`mark_${mark_enum.keys[type]}`]({ ...this.#dict, level });
+    await this.#kojo[`mark_${Object.keys(mark_enum)[type]}`]({
+      ...this.#dict,
+      level,
+    });
   }
 };
