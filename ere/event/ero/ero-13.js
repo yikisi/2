@@ -1,21 +1,14 @@
-/**
- * @file 目白麦昆 - 调教
- * @author 伊兰
- */
 const era = require('#/era-electron');
 
 const { sys_get_motion } = require('#/system/ero/sys-calc-distance');
-const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
 const EroNormalCommunications = require('#/event/ero/common/normal/communications');
 const EroNormalFucking = require('#/event/ero/common/normal/fucking');
 const EroNormalMakingOuts = require('#/event/ero/common/normal/making-outs-final');
 const NormalCommandLines = require('#/event/ero/common/normal/normal-common');
 const EroNormalSm = require('#/event/ero/common/normal/sm');
-const kojo = require('#/event/ero/ero-13.kojo');
 const CustomizedEro = require('#/event/ero/ero-common');
-
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const generate_dictionary = require('#/event/snippets/generate-dictionary');
 
 const EroTouch = require('#/data/ero/ero-touch');
 const { base_enum, part_enum } = require('#/data/ero/part-const');
@@ -24,14 +17,14 @@ const McqueenEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-13
 const McqueenLifeMarks = require('#/data/event/life-event-marks/life-event-marks-13');
 const { get_breast_cup } = require('#/data/info-generator');
 
+const { i18n } = require('#/i18n/selector');
+
+function kojo() {
+  return i18n().kojo[13].ero;
+}
+
 function dict() {
-  const o = {};
-  const mcqueen = get_chara_talk(13);
-  o['她'] = mcqueen.sex;
-  o['训练员'] = era.get('callname:0:-2');
-  o['代表色'] = mcqueen.color;
-  o['称呼'] = sys_get_callname(13, 0);
-  return o;
+  return generate_dictionary(this.id, { call: !0 });
 }
 
 class NormalCom extends EroNormalCommunications {
@@ -39,14 +32,14 @@ class NormalCom extends EroNormalCommunications {
     if (attacker.id !== 0) {
       return await super.kiss(attacker, defender, hook);
     }
-    await kojo['接吻'](dict());
+    await kojo()['kiss'](dict());
   }
 
   async french_kiss(attacker, defender, hook) {
     if (attacker.id !== 0) {
       return await super.french_kiss(attacker, defender, hook);
     }
-    await kojo['舌吻'](dict());
+    await kojo()['french_kiss'](dict());
   }
 }
 
@@ -58,10 +51,10 @@ class NormalMakingOuts extends EroNormalMakingOuts {
     const edu_marks = new McqueenEduMarks();
     if (!edu_marks.pet_breast) {
       edu_marks.pet_breast = 1;
-      await kojo['爱抚胸部——育成首次'](dict());
+      await kojo()['pet_breast_first'](dict());
       return;
     }
-    await kojo['爱抚胸部'](dict());
+    await kojo()['pet_breast'](dict());
   }
 
   async pet_nipple(attacker, defender, hook) {
@@ -71,10 +64,10 @@ class NormalMakingOuts extends EroNormalMakingOuts {
     const edu_marks = new McqueenEduMarks();
     if (!edu_marks.pet_nipple) {
       edu_marks.pet_nipple = 1;
-      await kojo['爱抚乳头——育成首次'](dict());
+      await kojo()['pet_nipple_first'](dict());
       return;
     }
-    await kojo['爱抚乳头'](dict());
+    await kojo()['pet_nipple'](dict());
   }
 
   async pet_clitoris(attacker, defender, hook) {
@@ -84,10 +77,10 @@ class NormalMakingOuts extends EroNormalMakingOuts {
     const edu_marks = new McqueenEduMarks();
     if (!edu_marks.pet_clitoris) {
       edu_marks.pet_clitoris = 1;
-      await kojo['爱抚阴核——育成首次'](dict());
+      await kojo()['pet_clitoris_first'](dict());
       return;
     }
-    await kojo['爱抚阴核'](dict());
+    await kojo()['pet_clitoris'](dict());
   }
 
   async prepare_virgin(attacker, defender, hook) {
@@ -97,10 +90,10 @@ class NormalMakingOuts extends EroNormalMakingOuts {
     const life_marks = new McqueenLifeMarks();
     if (!life_marks.prepare_virgin) {
       life_marks.prepare_virgin = 1;
-      await kojo['张开阴唇——存档初次'](dict());
+      await kojo()['prepare_virgin_first'](dict());
       return;
     }
-    await kojo['张开阴唇'](dict());
+    await kojo()['prepare_virgin'](dict());
   }
 
   async finger_fuck(attacker, defender, hook) {
@@ -110,10 +103,10 @@ class NormalMakingOuts extends EroNormalMakingOuts {
     const life_marks = new McqueenLifeMarks();
     if (!life_marks.finger_fuck) {
       life_marks.finger_fuck = 1;
-      await kojo['手指插入——存档初次'](dict());
+      await kojo()['finger_fuck_first'](dict());
       return;
     }
-    await kojo['手指插入'](dict());
+    await kojo()['finger_fuck'](dict());
   }
 
   async cunnilingus(attacker, defender, hook) {
@@ -123,31 +116,31 @@ class NormalMakingOuts extends EroNormalMakingOuts {
     const edu_marks = new McqueenEduMarks();
     if (!edu_marks.cunnilingus) {
       edu_marks.cunnilingus = 1;
-      await kojo['舐阴——育成初次'](dict());
+      await kojo()['cunnilingus_first'](dict());
       return;
     }
-    await kojo['舐阴'](dict());
+    await kojo()['cunnilingus'](dict());
   }
 
   async ask_blow_job(attacker, defender, hook) {
     if (attacker.id !== 0 || !hook.arg) {
       return await super.ask_blow_job(attacker, defender, hook);
     }
-    await kojo['请求口交'](dict());
+    await kojo()['ask_blow_job'](dict());
   }
 
   async ask_hand_and_blow_job(attacker, defender, hook) {
     if (attacker.id !== 0 || !hook.arg) {
       return await super.ask_hand_and_blow_job(attacker, defender, hook);
     }
-    await kojo['请求手搓口交'](dict());
+    await kojo()['ask_hand_and_blow_job'](dict());
   }
 
   async ask_deep_blow_job(attacker, defender, hook) {
     if (attacker.id !== 0) {
       return await super.ask_deep_blow_job(attacker, defender, hook);
     }
-    await kojo['请求深喉'](dict());
+    await kojo()['ask_deep_blow_job'](dict());
   }
 
   async ask_tit_job(atk, def, hook) {
@@ -156,11 +149,11 @@ class NormalMakingOuts extends EroNormalMakingOuts {
     }
     const edu_marks = new McqueenEduMarks();
     if (!edu_marks.ask_tit_job) {
-      await kojo['请求乳交——育成首次'](dict());
+      await kojo()['ask_tit_job_first'](dict());
       edu_marks.ask_tit_job = 1;
       return;
     }
-    await kojo['请求乳交——贫乳'](dict());
+    await kojo()['ask_tit_job'](dict());
   }
 }
 
@@ -170,9 +163,9 @@ class NormalFucking extends EroNormalFucking {
       return await super.missionary(attacker, defender, hook);
     }
     if (era.get(`talent:${this.id}:处女`) !== vp_status_enum.no) {
-      await kojo['插入类体位——失去处女'](dict());
+      await kojo()['lose_virginity'](dict());
     } else {
-      await kojo['正常位——未插入时首次点击'](dict());
+      await kojo()['missionary'](dict());
     }
   }
 
@@ -181,9 +174,9 @@ class NormalFucking extends EroNormalFucking {
       return await super.doggy_style(attacker, defender, hook);
     }
     if (era.get(`talent:${this.id}:处女`) !== vp_status_enum.no) {
-      await kojo['插入类体位——失去处女'](dict());
+      await kojo()['lose_virginity'](dict());
     } else {
-      await kojo['后背位——未插入时首次点击'](dict());
+      await kojo()['doggy_style'](dict());
     }
   }
 
@@ -192,9 +185,9 @@ class NormalFucking extends EroNormalFucking {
       return await super.sitting(attacker, defender, hook);
     }
     if (era.get(`talent:${this.id}:处女`) !== vp_status_enum.no) {
-      await kojo['插入类体位——失去处女'](dict());
+      await kojo()['lose_virginity'](dict());
     } else {
-      await kojo['对面坐位'](dict());
+      await kojo()['sitting'](dict());
     }
   }
 
@@ -205,7 +198,7 @@ class NormalFucking extends EroNormalFucking {
     ) {
       return await super.hug_sitting(attacker, defender, hook);
     }
-    await kojo['插入类体位——失去处女'](dict());
+    await kojo()['lose_virginity'](dict());
   }
 
   async standing(attacker, defender, hook) {
@@ -213,9 +206,9 @@ class NormalFucking extends EroNormalFucking {
       return await super.standing(attacker, defender, hook);
     }
     if (era.get(`talent:${this.id}:处女`) !== vp_status_enum.no) {
-      await kojo['插入类体位——失去处女'](dict());
+      await kojo()['lose_virginity'](dict());
     } else {
-      await kojo['对面立位'](dict());
+      await kojo()['standing'](dict());
     }
   }
 
@@ -226,7 +219,7 @@ class NormalFucking extends EroNormalFucking {
     ) {
       return await super.hug_standing(attacker, defender, hook);
     }
-    await kojo['插入类体位——失去处女'](dict());
+    await kojo()['lose_virginity'](dict());
   }
 }
 
@@ -244,14 +237,10 @@ class NormalSm extends EroNormalSm {
     ) {
       return await super.hit_anal(attacker, defender, hook);
     }
-    await kojo['后背位拍屁股'](dict());
+    await kojo()['hit_anal_when_doggy_style'](dict());
   }
 }
 
-/**
- * @file 目白麦昆 - 调教
- * @author 伊兰
- */
 class McqueenNormal extends NormalCommandLines {
   constructor(root) {
     super(root, {

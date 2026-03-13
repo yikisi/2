@@ -65,19 +65,17 @@ tied_heart:
 
 mark_pleasure:
   - if: d.level === 1
+    color: %COLOR%
     content:
-      color: %COLOR%
-      content:
-        - fontWeight: bold
-          content: %CHARA%
-        - 「等、等一下，身……身体好热……感觉好奇怪……」
+      - fontWeight: bold
+        content: %CHARA%
+      - 「等、等一下，身……身体好热……感觉好奇怪……」
   - if: d.level === 2
+    color: %COLOR%
     content:
-      color: %COLOR%
-      content:
-        - fontWeight: bold
-          content: %CHARA%
-        - 「……哈……那个……可以……再来一次吗？」
+      - fontWeight: bold
+        content: %CHARA%
+      - 「……哈……那个……可以……再来一次吗？」
   - if: d.level === 3
     lines:
       - color: %COLOR%
@@ -127,44 +125,39 @@ mark_meek:
 
 mark_pain:
   - if: d.level === 1
+    color: %COLOR%
     content:
-      color: %COLOR%
-      content:
-        - fontWeight: bold
-          content: %CHARA%
-        - 「没事的……咱会为了小不点忍下来的……」
+      - fontWeight: bold
+        content: %CHARA%
+      - 「没事的……咱会为了小不点忍下来的……」
   - if: d.level === 2
+    color: %COLOR%
     content:
-      color: %COLOR%
-      content:
-        - fontWeight: bold
-          content: %CHARA%
-        - 「对、对不起……咱什么都……都会做的……求……求求你……温柔一点点就好……」
+      - fontWeight: bold
+        content: %CHARA%
+      - 「对、对不起……咱什么都……都会做的……求……求求你……温柔一点点就好……」
   - if: d.level === 3
+    color: %COLOR%
     content:
-      color: %COLOR%
-      content:
-        - fontWeight: bold
-          content: %CHARA%
-        - 「妈妈……！」
+      - fontWeight: bold
+        content: %CHARA%
+      - 「妈妈……！」
 
 mark_shame:
   - if: d.level === 1
+    color: %COLOR%
     content:
-      color: %COLOR%
-      content:
-        - fontWeight: bold
-          content: %CHARA%
-        - 「不……不要看啦……！」
+      - fontWeight: bold
+        content: %CHARA%
+      - 「不……不要看啦……！」
 
 mark_hate:
   - if: d.level === 1
+    color: %COLOR%
     content:
-      color: %COLOR%
-      content:
-        - fontWeight: bold
-          content: %CHARA%
-        - 「干啥子呢！就算是咱也会生气哦！」
+      - fontWeight: bold
+        content: %CHARA%
+      - 「干啥子呢！就算是咱也会生气哦！」
   - if: d.level === 2
     lines:
       - color: %COLOR%
