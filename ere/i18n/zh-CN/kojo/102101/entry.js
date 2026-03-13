@@ -1,4 +1,7 @@
 class I18nKojo102101 {
+  /** @type {KojoFile} */
+  ero = require('#/i18n/zh-CN/kojo/102101/ero-21.kojo');
+
   // 经典年三月前 二场OP以上比赛 1着 2次
   aim_desc_1 = '经典年 3 月前 OP 以上比赛 1 着';
   // 资深年前 四场G3以上比赛 1着 4次

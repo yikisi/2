@@ -9,6 +9,7 @@ const slavery_enum = {
 Object.keys(slavery_enum).forEach((e, i) => (slavery_enum[e] = i + 1));
 
 const mark_enum = { pleasure: 0, ero: 1, meek: 2, pain: 3, shame: 4, hate: 5 };
+mark_enum.keys = Object.keys(mark_enum);
 
 const mark_colors = {
   [mark_enum.pleasure]: '#ee82ee',
