@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const { sys_get_motion } = require('#/system/ero/sys-calc-distance');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const EroNormalCommunications = require('#/event/ero/common/normal/communications');
@@ -15,11 +16,13 @@ const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { mark_enum } = require('#/data/ero/mark-const');
+const { base_enum, motion_enum, part_enum } = require('#/data/ero/part-const');
 const { unexpected_pregnant_enum } = require('#/data/ero/status-const');
 const PamaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-64');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
+const EroTouch = require('#/data/ero/ero-touch');
 const { i18n } = require('#/i18n/selector');
 
 function kojo() {
@@ -369,46 +372,45 @@ module.exports = class extends CustomizedEro {
     if (era.get('love:64') < 50) {
       return;
     }
-    const last_action = era.get('tflag:前回行动'),
-      master = era.get('tflag:主导权');
-    if (
-      (master === 0 && last_action === ero_hooks.ask_blow_job) ||
-      (master === 64 && last_action === ero_hooks.blow_job)
-    ) {
-      if (era.get('nowex:0:阴茎高潮') > 0) {
-        await kojo()['get_semen_blow_job'](dict());
-      }
-    } else if (era.get('nowex:0:阴茎高潮') > 0) {
+    const last_action = era.get('tflag:前回行动');
+    const master = era.get('tflag:主导权');
+    const motion = sys_get_motion(0, this.id);
+    if (era.get('nowex:0:阴茎高潮') > 0) {
       if (era.get('nowex:64:饮精量') > 0) {
         if (
+          (master === 0 && last_action === ero_hooks.ask_blow_job) ||
+          (master === 64 && last_action === ero_hooks.blow_job)
+        ) {
+          await kojo()['get_semen_blow_job'](dict());
+        } else if (
           (master === 0 && last_action === ero_hooks.ask_deep_blow_job) ||
           (master === 64 && last_action === ero_hooks.deep_blow_job)
         ) {
           await kojo()['get_semen_deep_blow_job'](dict());
-        } else if (
-          last_action === ero_hooks.sixty_nine &&
-          pama.sex_code === 0
-        ) {
+        } else if (motion === base_enum.diff && pama.sex_code === 0) {
           await kojo()['get_semen_sixty_nine'](dict());
         }
       } else if (
         era.get('nowex:0:射精量') > 0 &&
-        ((master === 0 && last_action === ero_hooks.ask_foot_job) ||
-          (master === 64 && last_action === ero_hooks.foot_job))
+        new EroTouch(0, part_enum.penis).check(this.id, part_enum.foot)
       ) {
         await kojo()['get_semen_foot_job'](dict());
       } else if (era.get('nowex:64:膣内精液') > 0) {
-        if (
-          (master === 0 && last_action === ero_hooks.missionary) ||
-          (master === 64 && last_action === ero_hooks.ask_fuck)
-        ) {
-          await kojo()['get_semen_missionary'](dict());
-        } else if (master === 0) {
-          if (last_action === ero_hooks.doggy_style) {
+        switch (motion) {
+          case base_enum.same:
+          case base_enum.s_tri:
+            switch (era.get(`tcvar:${this.id}:体位`)) {
+              case motion_enum.lie:
+              case motion_enum.rev:
+                await kojo()['get_semen_missionary'](dict());
+                break;
+              case motion_enum.sit:
+                await kojo()['get_semen_sitting'](dict());
+            }
+            break;
+          case base_enum.b_same:
+          case base_enum.b_tri:
             await kojo()['get_semen_doggy_style'](dict());
-          } else if (last_action === ero_hooks.sitting) {
-            await kojo()['get_semen_sitting'](dict());
-          }
         }
       }
     }

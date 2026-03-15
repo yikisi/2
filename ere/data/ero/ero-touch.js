@@ -52,6 +52,10 @@ class EroTouch {
     return this.#obj === -1;
   }
 
+  check(owner, part) {
+    return this.owner === owner && this.part === part;
+  }
+
   /**
    * @param {number} owner
    * @param {number} part

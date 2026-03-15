@@ -1,12 +1,3 @@
-/**
- * @file 调教地文
- * @author O口口口口口
- * @author 雞雞
- * @author 天马闪光蹄
- * @author 黑衣剑士-星爆气流斩准备就绪
- * @author 幽白書
- * @author 黑奴队长
- */
 const era = require('#/era-electron');
 
 const { sys_get_chara } = require('#/system/chara/sys-calc-characteristic');
@@ -21,13 +12,11 @@ const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
-const cum_in_womb = require('#/event/ero/common/cum-in-womb');
 const NormalCommandLines = require('#/event/ero/common/normal/normal-common');
-const pregnant_report_in_love = require('#/event/ero/common/pregnant-report-in-love');
 const RapeCommandLines = require('#/event/ero/common/rape/rape-common');
 const SleepCommandLines = require('#/event/ero/common/sleep/sleep-common');
 const CustomizedEvent = require('#/event/event-common');
-const print_event_name = require('#/event/snippets/print-event-name');
+const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
@@ -50,32 +39,6 @@ const { get_breast_cup } = require('#/data/info-generator');
 
 const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
-
-const hate_mark_desc = [
-  '用锐利的目光瞪了过来……',
-  '露出了愤怒的表情……',
-  '愤怒得面容扭曲，低声咒骂着……',
-];
-const pain_mark_desc = [
-  '面部扭曲，忍受着痛苦……',
-  '发出了一阵痛苦的悲鸣……',
-  '因过于痛苦而哭喊……',
-];
-const pleasure_mark_desc = [
-  '由于强烈的快感颤抖着身体……',
-  '接受着快感的余韵，面色舒缓……',
-  '似乎被强烈的快乐烧灼了身心……',
-];
-const shame_mark_desc = [
-  '羞辱地红着脸……',
-  '似乎被羞辱所支配了……',
-  '完全被羞辱支配了……',
-];
-const sex_mark_desc = [
-  '淫纹显示出了卵子的活动轨迹……',
-  '淫纹能随着胎儿的成长而变得更加瑰丽了……',
-  '淫纹能显示出怀孕率和受孕的情况了……',
-];
 
 class CustomizedEro extends CustomizedEvent {
   /** @type {function(number):CustomizedEro} */
@@ -294,7 +257,6 @@ class CustomizedEro extends CustomizedEvent {
   }
 
   /**
-   * @author 黑奴队长
    * @param {boolean} stop_success 如果寸止的话是否成功
    * @returns {Promise<0|2|undefined>}
    */
@@ -316,34 +278,20 @@ class CustomizedEro extends CustomizedEvent {
           : i18n().body_part[get_slang_part_name_key(touch.part)];
       if (
         await select_yes_or_no(
-          [chara.get_colored_name(), ' 的肉棒已经达到极限……'],
-          `以 ${part} 接纳`,
-          '避开精芒',
+          i18n().timon.ero_o.get_orgasm_denial_notification(chara),
+          i18n().timon.ero_o.get_bt_cum_in(part),
+          i18n().timon.ero_o.bt_cum_out,
         )
       ) {
         return 0;
       }
-      if (stop_success) {
-        era.print([
-          me.get_colored_name(),
-          ' 的 ',
-          part,
-          ' 吐出了 ',
-          chara.get_colored_name(),
-          ' 蓄势待发的肉棒，温热的精液径直喷向了 ',
-          me.get_colored_name(),
-          ' 的 ',
-          touch.part === part_enum.mouth ? '俏脸' : '玉体',
-          '……',
-        ]);
-      } else {
-        era.print([
-          me.get_colored_name(),
-          ' 在和 ',
-          chara.get_colored_name(),
-          ' 的竞速中失败了……',
-        ]);
-      }
+      await i18n().timon.ero_o.orgasm_denial(
+        chara,
+        me,
+        part,
+        stop_success,
+        touch.part === part_enum.mouth,
+      );
       return 2;
     }
   }
@@ -356,64 +304,44 @@ class CustomizedEro extends CustomizedEvent {
   async orgasm(chara, me, callname) {}
 
   /**
-   * @author 黑奴队长
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {string} callname
    */
   async zero_stamina(chara, me, callname) {
-    era.print([chara.get_colored_name(), ' 因体力过分消耗陷入了昏迷……']);
+    era.print(i18n().timon.ero_o.get_zero_stamina(chara));
   }
 
   /**
-   * @author 黑奴队长
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {string} callname
    */
   async lost_mind(chara, me, callname) {
-    era.print([chara.get_colored_name(), ' 因精力过分消耗陷入了失神……']);
+    era.print(i18n().timon.ero_o.get_lost_mind(chara));
   }
 
   /**
    * 获取刻印
-   * @author 黑奴队长
    * @param {number} level
    * @param {number} type
    * @param {boolean} _new
    */
   async get_mark(level, type, _new) {
     const chara = get_chara_talk(this.id);
-    let message = '';
     switch (type) {
-      case mark_enum.pleasure:
-        message = pleasure_mark_desc[level - 1];
-        break;
       case mark_enum.meek:
-        if (era.get(`love:${this.id}`) >= 75) {
-          message = ' 更加一心同体了……';
-        } else {
-          message = ' 更加屈服了……';
-        }
-        break;
-      case mark_enum.pain:
-        message = pain_mark_desc[level - 1];
-        break;
-      case mark_enum.shame:
-        message = shame_mark_desc[level - 1];
-        break;
-      case mark_enum.hate:
-        if (era.get(`love:${this.id}`) >= 75) {
-          await era.printAndWait('虽说是在交往，但好像做得有点过头了');
-        }
-        message = hate_mark_desc[level - 1];
+        await i18n().timon.ero_o.mark_meek(chara, get_chara_talk(0));
         break;
       case mark_enum.ero:
-        message =
-          (_new ? '小腹上出现了一个淫纹……' : '小腹上') +
-          sex_mark_desc[level - 1];
+        await i18n().timon.ero_o.mark_ero(chara, level, _new);
+        break;
+      default:
+        await i18n().timon.ero_o[`mark_${Object.keys(mark_enum)[type]}`](
+          chara,
+          level,
+        );
     }
-    await era.printAndWait([chara.get_colored_name(), ' ', message]);
   }
 
   /**
@@ -425,7 +353,6 @@ class CustomizedEro extends CustomizedEvent {
   async prison(chara, me, callname, hook) {}
 
   /**
-   * @author 雞雞
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {string} callname
@@ -433,34 +360,33 @@ class CustomizedEro extends CustomizedEvent {
    * @param {{father_id:number,mother_id:number}} extra_flag
    */
   async cum_in_womb(chara, me, callname, hook, extra_flag) {
-    await cum_in_womb.call(this, chara, me, callname, hook, extra_flag);
+    await i18n().timon.ero_o.cum_in_womb(
+      get_chara_talk(extra_flag.mother_id),
+      get_chara_talk(extra_flag.father_id),
+      sys_check_awake(extra_flag.mother_id),
+      sys_check_awake(extra_flag.father_id),
+    );
   }
 
   /**
-   * @author 黑奴队长
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {string} callname
    * @param {HookArg} hook
-   * @param {{father_id:number,mother_id:number}} extra_flag
+   * @param {{father_id:number,mother_id:number}} extra
    */
-  be_pregnant(chara, me, callname, hook, extra_flag) {
-    if (era.get(`mark:${extra_flag.mother_id}:淫纹`) === 3) {
-      era.print([
-        '在 ',
-        get_chara_talk(extra_flag.father_id).get_colored_name(),
-        ' 射进来之后，',
-        get_chara_talk(extra_flag.mother_id).get_colored_name(),
-        ' 的淫纹变得有点奇怪……',
-      ]);
+  be_pregnant(chara, me, callname, hook, extra) {
+    if (era.get(`mark:${extra.mother_id}:淫纹`) === 3) {
+      i18n().timon.ero_o.be_pregnant(
+        get_chara_talk(extra.mother_id),
+        get_chara_talk(extra.father_id),
+      );
     } else {
-      era.logger.debug(`角色 ${extra_flag.mother_id} 怀孕了！`);
+      era.logger.debug(`角色 ${extra.mother_id} 怀孕了！`);
     }
   }
 
   /**
-   * @author 雞雞
-   * @author 黑奴队长
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {string} callname
@@ -487,102 +413,21 @@ class CustomizedEro extends CustomizedEvent {
     ).unexpected_pregnant;
     era.drawLine();
     if (love >= 90) {
-      await pregnant_report_in_love(father, mother, unexpected_pregnant);
+      await print_title_with_kojo(
+        i18n().timon.ero_o,
+        'report_preg_in_love',
+        mother,
+        father,
+        unexpected_pregnant,
+      );
     } else {
-      await print_event_name('意外', mother);
-      await era.printAndWait([
-        mother.get_colored_name(),
-        ' 脸色煞白地看着 ',
-        ...(era.get(`mark:${mother.id}:淫纹`) === 3
-          ? [
-              {
-                content: '小腹淫纹上代表怀孕的图案',
-                color: buff_colors[2],
-              },
-              '，冲到卫生间呕吐了起来。',
-            ]
-          : [
-              { content: '手上的验孕棒', color: buff_colors[2] },
-              '，又一次在洗手台上吐了出来。',
-            ]),
-      ]);
-      if (unexpected_pregnant === unexpected_pregnant_enum.mother_sleep) {
-        await era.printAndWait([
-          mother.get_colored_name(),
-          ' 对自己如何怀孕完全没有印象，虽然难以相信犯人会是 ',
-          father.get_colored_name(),
-          '，但想来只有',
-          father.sex,
-          '有这个可能……',
-        ]);
-      }
-      if (unexpected_pregnant === unexpected_pregnant_enum.father_sleep) {
-        await era.printAndWait([
-          '之后，',
-          mother.get_colored_name(),
-          ' 小心翼翼地向 ',
-          father.get_colored_name(),
-          ' 说出了怀孕的事。',
-        ]);
-        await era.printAndWait([
-          father.get_colored_name(),
-          ' 再三询问确认，还是得到了孩子是自己骨肉的回答。',
-        ]);
-        await era.printAndWait([
-          '尽管 ',
-          father.get_colored_name(),
-          ' 对此毫无印象，但仍然在 ',
-          mother.get_colored_name(),
-          ' 的眼泪中选择负起父亲的责任……',
-        ]);
-        if (father.id === 0 && era.get(`cflag:${father.id}:阴道尺寸`) > 0) {
-          await era.printAndWait([
-            '……虽然 ',
-            father.get_colored_name(),
-            ' 其实也有点想成为母亲……',
-          ]);
-        }
-      } else if (era.get(`mark:${mother.id}:同心`) >= 2) {
-        await era.printAndWait([
-          '之后，',
-          mother.get_colored_name(),
-          ' 战战兢兢地向 ',
-          father.get_colored_name(),
-          ' 说出了怀孕的事。',
-        ]);
-        await era.printAndWait([
-          father.get_colored_name(),
-          ' 似乎看到了 ',
-          mother.get_colored_name(),
-          ' 的眼角泛泪……',
-        ]);
-        await era.printAndWait([
-          mother.get_colored_name(),
-          ' 胆怯地请求 ',
-          father.get_colored_name(),
-          ' 负起父亲的责任……',
-        ]);
-      } else {
-        await era.printAndWait([
-          '之后，',
-          mother.get_colored_name(),
-          ' 冷淡地向 ',
-          father.get_colored_name(),
-          ' 说出了怀孕的事。',
-        ]);
-        await era.printAndWait([
-          father.get_colored_name(),
-          ' 似乎看到了 ',
-          mother.get_colored_name(),
-          ' 的眼角泛泪……',
-        ]);
-        await era.printAndWait([
-          mother.get_colored_name(),
-          ' 愤恨地要求 ',
-          father.get_colored_name(),
-          ' 负起父亲的责任……',
-        ]);
-      }
+      await print_title_with_kojo(
+        i18n().timon.ero_o,
+        'report_preg',
+        mother,
+        father,
+        unexpected_pregnant,
+      );
     }
     if (
       !global_achievement.st_maria &&
@@ -595,7 +440,6 @@ class CustomizedEro extends CustomizedEvent {
 
   /**
    * 孩子出生
-   * @author 雞雞
    * @param {CharaTalk} father
    * @param {CharaTalk} mother
    * @param {number} child
@@ -610,152 +454,57 @@ class CustomizedEro extends CustomizedEvent {
     }
     if (era.get(`love:${mother.id || father.id}`) < 90) {
       era.drawLine();
-      await print_event_name('新生命', mother);
-      if (
-        LifeEventMarks.get_marks(mother.id).unexpected_pregnant ===
-        unexpected_pregnant_enum.father_sleep
-      ) {
-        await era.printAndWait([
-          mother.get_colored_name(),
-          ' 闪闪缩缩地看向 ',
-          father.get_colored_name(),
-          '，似乎是不知道应该怎么面对孩子的父亲。',
-        ]);
-      } else if (era.get(`mark:${mother.id}:同心`) >= 2) {
-        await era.printAndWait([
-          mother.get_colored_name(),
-          ' 闪闪缩缩地看向 ',
-          father.get_colored_name(),
-          '，似乎是不知道应该怎么看待孩子的父亲。',
-        ]);
-      } else {
-        await era.printAndWait([
-          mother.get_colored_name(),
-          ' 看向 ',
-          father.get_colored_name(),
-          ' 的眼神十分空虚，却对孩子露出了关爱的神情。',
-        ]);
-      }
+      await print_title_with_kojo(
+        i18n().timon.ero_o,
+        'have_baby',
+        mother,
+        father,
+        LifeEventMarks.get_marks(mother.id).unexpected_pregnant,
+      );
       era.println();
     }
   }
 
-  /**
-   * 进入能力升级
-   * @author 黑奴队长
-   */
+  /** 进入能力升级 */
   async shop_start() {
-    const chara = get_chara_talk(this.id),
-      me = get_chara_talk(0);
     era.drawLine();
-    if (!sys_check_awake(this.id)) {
-      await era.printAndWait([
-        chara.get_colored_name(),
-        ' 沉睡着，对 ',
-        me.get_colored_name(),
-        ` 将要对${chara.sex}做的事情丝毫不觉……`,
-      ]);
-    } else if (era.get(`mark:${this.id}:反抗刻印`)) {
-      await era.printAndWait([
-        chara.get_colored_name(),
-        ' 冷冷地看着 ',
-        me.get_colored_name(),
-        '，眼中只有愤恨……',
-      ]);
-    } else if (era.get('flag:惩戒力度') >= 2) {
-      await era.printAndWait([
-        chara.get_colored_name(),
-        ' 挑衅地看着 ',
-        me.get_colored_name(),
-        '，区区性奴还能搞出什么花样……',
-      ]);
-    } else if (
-      era.get(`mark:${this.id}:淫纹`) ||
-      era.get(`mark:${this.id}:欢愉`)
-    ) {
-      await era.printAndWait([
-        chara.get_colored_name(),
-        ' 跃跃欲试地看着 ',
-        me.get_colored_name(),
-        '，等不及让自己发生什么变化……',
-      ]);
-    } else if (era.get(`mark:${this.id}:同心`) >= 2) {
-      await era.printAndWait([
-        chara.get_colored_name(),
-        ' 怯生生地看着 ',
-        me.get_colored_name(),
-        '，不明白为什么要这么做……',
-      ]);
-    } else {
-      await era.printAndWait([
-        chara.get_colored_name(),
-        ' 不安地看着 ',
-        me.get_colored_name(),
-        '，不知道接下来将会发生什么……',
-      ]);
-    }
+    await i18n().timon.ero_o.shop_start(
+      get_chara_talk(this.id),
+      get_chara_talk(0),
+      sys_check_awake(this.id),
+    );
   }
 
   /**
    * 离开能力升级
-   * @author 黑奴队长
-   * @param {{hate_clear:number,mark_clear:number,pleasure_delta:number,sex_delta:number,skill:number,talent:number}} extra_flag
+   * @param {{hate_clear:number,mark_clear:number,pleasure_delta:number,sex_delta:number,skill:number,talent:number}} extra
    */
-  async shop_end(extra_flag) {
-    const chara = get_chara_talk(this.id),
-      me = get_chara_talk(0);
-    if (extra_flag.skill || extra_flag.talent) {
+  async shop_end(extra) {
+    const chara = get_chara_talk(this.id);
+    const me = get_chara_talk(0);
+    if (extra.skill || extra.talent) {
       era.drawLine();
       if (!sys_check_awake(this.id)) {
-        await era.printAndWait([
-          chara.get_colored_name(),
-          ' 沉睡着，对 ',
-          me.get_colored_name(),
-          ` 对${chara.sex}做的事情丝毫不觉……`,
-        ]);
-      } else if (era.get(`mark:${this.id}:反抗`)) {
-        await era.printAndWait([
-          chara.get_colored_name(),
-          ' 忍受着身体的变化，对 ',
-          me.get_colored_name(),
-          ` 把${chara.sex}当作性玩具肆意摆弄的行为出言讥讽……`,
-        ]);
+        await i18n().timon.ero_o.shop_end_sleep(chara, me);
+      } else if (era.get(`mark:${this.id}:反抗`) > 0) {
+        await i18n().timon.ero_o.shop_end_hate(chara, me);
         return shop_result_type_enum.hate;
       } else if (
-        era.get(`mark:${this.id}:淫纹`) ||
-        era.get(`mark:${this.id}:欢愉`)
+        (era.get(`mark:${this.id}:淫纹`) || era.get(`mark:${this.id}:欢愉`)) > 0
       ) {
-        await era.printAndWait([
-          chara.get_colored_name(),
-          ' 感受着身体的变化，忍不住想和 ',
-          me.get_colored_name(),
-          ' 一起享受欢愉……',
-        ]);
+        await i18n().timon.ero_o.shop_end_pleasure(chara, me);
         return shop_result_type_enum.pleasure;
       } else if (era.get(`mark:${this.id}:同心`) >= 2) {
-        await era.printAndWait([
-          chara.get_colored_name(),
-          ' 看着 ',
-          me.get_colored_name(),
-          ' 泫然欲涕，但意识总有一天会被身体潜移默化地改变……',
-        ]);
+        await i18n().timon.ero_o.shop_end_slave(chara, me);
         return shop_result_type_enum.slave;
       } else {
-        await era.printAndWait([
-          chara.get_colored_name(),
-          ' 失望地看着 ',
-          me.get_colored_name(),
-          '，对 ',
-          me.get_colored_name(),
-          ` 不满意${chara.sex}身体的事实感到悲伤……`,
-        ]);
+        await i18n().timon.ero_o.shop_end_lover(chara, me);
         return shop_result_type_enum.lover;
       }
     }
   }
 
   /**
-   * @author 雞雞
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {string} callname
@@ -763,61 +512,32 @@ class CustomizedEro extends CustomizedEvent {
    * @param {{partners:number[]}} extra_flag
    */
   async after_betrayed(chara, me, callname, hook, extra_flag) {
-    const race = era.get(`cflag:${this.id}:种族`);
     const cuckold = sys_check_cuckold(this.id);
     switch (era.get(`exp:${this.id}:被绿次数`) + 1) {
       case 1:
         era.drawLine();
-        await era.printAndWait([
-          race > 0 ? chara.uma_sex_title + '的鼻子十分灵敏，而 ' : '',
-          me.get_colored_name(),
-          ' 身上传来的淫臭味无时无刻不在向周遭宣布着自己刚才马儿跳过的事实。',
-          { isBr: true },
-          race > 0 ? '嗅到气味的 ' : '察觉此事 ',
-          chara.get_colored_name(),
-          ' 对 ',
-          me.get_colored_name(),
-          ' 的不忠产生了',
-          cuckold ? '情欲' : sys_get_chara(this.id) >= 0 ? '愤慨' : '悲伤',
-          '的情绪……',
-        ]);
+        i18n().timon.ero_o.after_betrayed_first(
+          chara,
+          me,
+          sys_get_chara(this.id),
+          cuckold,
+        );
+        await era.waitAnyKey();
         break;
       case 2:
         era.drawLine();
-        await era.printAndWait([
-          me.get_colored_name(),
-          ' 没有抵受住诱惑，再次背叛了 ',
-          chara.get_colored_name(),
-          '。',
-          { isBr: true },
-          '在一时性欲释放的背后，又有多少感情纠葛正在蔓延缠绕？',
-          { isBr: true },
-          race > 0 ? '嗅到气味的 ' : '察觉此事 ',
-          chara.get_colored_name(),
-          ' 对 ',
-          me.get_colored_name(),
-          ' 的不忠产生了',
-          cuckold ? '情欲' : sys_get_chara(this.id) >= 0 ? '愤慨' : '悲伤',
-          '的情绪……',
-        ]);
+        i18n().timon.ero_o.after_betrayed_second(
+          chara,
+          me,
+          sys_get_chara(this.id),
+          cuckold,
+        );
+        await era.waitAnyKey();
         break;
       default:
-        if (cuckold) {
-          await era.printAndWait([
-            me.get_colored_name(),
-            ' 的不忠让 ',
-            chara.get_colored_name(),
-            ' 无比伤心的同时，又涌起了一股隐隐难言的兴奋……',
-          ]);
-        } else {
-          await era.printAndWait([
-            me.get_colored_name(),
-            ' 的不忠让 ',
-            chara.get_colored_name(),
-            ' 无比愤怒……',
-          ]);
-        }
+        i18n().timon.ero_o.after_betrayed(chara, me, cuckold);
     }
+    await era.waitAnyKey();
   }
 
   /**

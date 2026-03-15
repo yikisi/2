@@ -54,7 +54,7 @@ async function update_marks(shown, ...ids) {
     if (
       me_in_sex &&
       cid > 0 &&
-      sys_like_chara(cid, 0, relation_change, shown)
+      sys_like_chara(cid, 0, relation_change, shown, -1)
     ) {
       await era.waitAnyKey();
     }

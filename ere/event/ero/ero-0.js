@@ -10,10 +10,10 @@ const { get_penis_size } = require('#/system/ero/sys-calc-ero-status');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
-const pregnant_report_in_love = require('#/event/ero/common/pregnant-report-in-love');
 const CustomizedEro = require('#/event/ero/ero-common');
 const add_jewel_reward = require('#/event/snippets/add-jewel-reward');
 const print_event_name = require('#/event/snippets/print-event-name');
+const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
@@ -26,6 +26,7 @@ const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
 
 const di18n = require('#/i18n/extended-def');
+const { i18n } = require('#/i18n/selector');
 
 const stop_ex_options = {};
 stop_ex_options[part_enum.virgin] = (chara_id) =>
@@ -128,13 +129,19 @@ module.exports = class extends CustomizedEro {
    * @author 雞雞
    */
   async report_pregnant_between_weeks(father, mother, callname, hook) {
-    const love = era.get(`love:${mother.id || father.id}`),
-      unexpected_pregnant = LifeEventMarks.get_marks(
-        mother.id,
-      ).unexpected_pregnant;
+    const love = era.get(`love:${mother.id || father.id}`);
+    const unexpected_pregnant = LifeEventMarks.get_marks(
+      mother.id,
+    ).unexpected_pregnant;
     era.drawLine();
     if (love >= 90) {
-      await pregnant_report_in_love(father, mother, unexpected_pregnant);
+      await print_title_with_kojo(
+        i18n().timon.ero_o,
+        'report_preg_in_love',
+        mother,
+        father,
+        unexpected_pregnant,
+      );
     } else {
       const slavery = era.get('flag:惩戒力度');
       if (
@@ -388,6 +395,7 @@ module.exports = class extends CustomizedEro {
         unexpected_pregnant_enum.mother_sleep &&
       !is_slave
     ) {
+      /** @author 雞雞 */
       if (era.get(`love:${father.id}`) >= 90) {
         await era.printAndWait([
           mother.get_colored_name(),

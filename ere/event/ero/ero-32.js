@@ -4,6 +4,7 @@
  */
 const era = require('#/era-electron');
 
+const { sys_check_cuckold } = require('#/system/chara/sys-calc-cheat');
 const {
   sys_get_callname,
   sys_get_colored_callname,
@@ -26,7 +27,6 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { mark_enum } = require('#/data/ero/mark-const');
 const { part_enum } = require('#/data/ero/part-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
-const { sys_check_cuckold } = require('#/system/chara/sys-calc-cheat');
 
 class TachyonNormalLines extends NormalCommandLines {
   constructor(root) {

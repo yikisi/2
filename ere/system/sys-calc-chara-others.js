@@ -204,7 +204,7 @@ function like_chara(target, aim, val, shown = true, extra_love = 0) {
       );
     }
   }
-  if (love > 0 && love_uma(target, love, shown)) {
+  if (extra_love >= 0 && love > 0 && love_uma(target, love, shown)) {
     ret = true;
   }
   return ret;
