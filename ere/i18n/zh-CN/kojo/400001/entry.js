@@ -1,4 +1,13 @@
+const proxy_kojo_js = require('#/i18n/proxy');
+
+// GENERATED START
 class I18nKojo400001 {
+  recruit = proxy_kojo_js(require('#/i18n/zh-CN/kojo/400001/rec-400.js'));
+  daily = proxy_kojo_js(require('#/i18n/zh-CN/kojo/400001/daily-400.js'));
+  edu = proxy_kojo_js(require('#/i18n/zh-CN/kojo/400001/edu-400.js'));
+  love = proxy_kojo_js(require('#/i18n/zh-CN/kojo/400001/love-400.js'));
+  // GENERATED END
+
   win = (t) => `胜利的承诺(${t})`;
   win_desc = (t, a_buff, r_buff) =>
     `参赛时属性+${a_buff}%（最高25%），好感获取+${r_buff}%（最高30%），效果随经典年后连胜次数增强。`;

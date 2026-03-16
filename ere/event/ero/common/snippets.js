@@ -135,7 +135,7 @@ module.exports = {
       await attacker.print_and_wait(
         '有着能因为手指的爱抚而发起抖的绝佳敏感度。',
       );
-      if (era.get(`cflag:${defender.id}:种族`) > 0) {
+      if (defender.race > 0) {
         await attacker.print_and_wait('真浪费啊……');
         await attacker.print_and_wait('这样的双腿只是为了比赛而存在什么的……');
       }

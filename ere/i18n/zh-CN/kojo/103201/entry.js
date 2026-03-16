@@ -1,4 +1,15 @@
+const proxy_kojo_js = require('#/i18n/proxy');
+
+// GENERATED START
 class I18nKojo103201 {
+  recruit = proxy_kojo_js(require('#/i18n/zh-CN/kojo/103201/rec-32.js'));
+  daily = proxy_kojo_js(require('#/i18n/zh-CN/kojo/103201/daily-32.js'));
+  edu = proxy_kojo_js(require('#/i18n/zh-CN/kojo/103201/edu-32.js'));
+  love = proxy_kojo_js(require('#/i18n/zh-CN/kojo/103201/love-32.js'));
+  ero = proxy_kojo_js(require('#/i18n/zh-CN/kojo/103201/ero-32.js'));
+  basement = proxy_kojo_js(require('#/i18n/zh-CN/kojo/103201/base-32.js'));
+  // GENERATED END
+
   uma_limit = (uma) => `${uma}的极限`;
   uma_limit_desc = (uma) =>
     `${uma}的极限，但不是赛${uma}爱丽速子的极限；仅限比赛时，全属性极大幅度提升。`;

@@ -1,6 +1,10 @@
+// GENERATED START
 class I18nKojo900101 {
   /** @type {KojoFile} */
   daily = require('#/i18n/zh-CN/kojo/900101/daily-301.kojo');
+  /** @type {KojoFile} */
+  love = require('#/i18n/zh-CN/kojo/900101/love-301.kojo');
+  // GENERATED END
 
   assist = '私人助理';
   assist_desc = (buff, you) =>

@@ -7,8 +7,6 @@
 const era = require('#/era-electron');
 
 const { buff_colors } = require('#/data/color-const');
-const CharaInmon = require('#/data/ero/chara-inmon');
-const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const {
   pregnant_stage_enum,
   unexpected_pregnant_enum,
@@ -405,8 +403,15 @@ module.exports = {
    * @param {CharaTalk} father 内射的父方
    * @param {boolean} is_mother_awake 母方是否醒着
    * @param {boolean} is_father_awake 父方是否醒着
+   * @param {boolean} inmon_no_preg 是否淫纹避孕
    */
-  async cum_in_womb(mother, father, is_mother_awake, is_father_awake) {
+  async cum_in_womb(
+    mother,
+    father,
+    is_mother_awake,
+    is_father_awake,
+    inmon_no_preg,
+  ) {
     const talent_palam =
       era.get(`talent:${mother.id}:子宫敏感`) > 0 ||
       era.get(`mark:${mother.id}:欢愉`) >= 2;
@@ -427,7 +432,7 @@ module.exports = {
       era.get(`cflag:${mother.id}:妊娠阶段`) !== 1 << pregnant_stage_enum.no ||
       era.get(`status:${mother.id}:长效避孕药`) > 0 ||
       era.get(`status:${mother.id}:短效避孕药`) > 0 ||
-      CharaInmon.get(mother.id).on(plugin_enum.no_preg)
+      inmon_no_preg
     ) {
       if (is_mother_awake && talent_check) {
         if (talent_palam) {

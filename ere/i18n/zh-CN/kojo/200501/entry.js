@@ -1,4 +1,14 @@
+const proxy_kojo_js = require('#/i18n/proxy');
+
+// GENERATED START
 class I18nKojo200501 {
+  recruit = proxy_kojo_js(require('#/i18n/zh-CN/kojo/200501/rec-205.js'));
+  daily = proxy_kojo_js(require('#/i18n/zh-CN/kojo/200501/daily-205.js'));
+  edu = proxy_kojo_js(require('#/i18n/zh-CN/kojo/200501/edu-205.js'));
+  love = proxy_kojo_js(require('#/i18n/zh-CN/kojo/200501/love-205.js'));
+  ero = proxy_kojo_js(require('#/i18n/zh-CN/kojo/200501/ero-205.js'));
+  // GENERATED END
+
   aim_desc = '5 场其他 G1 比赛 1着';
 
   /**

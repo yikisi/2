@@ -25,6 +25,12 @@ module.exports = class extends DailyChild {
     if (father > 0 && mother > 0) {
       return super.select();
     }
-    i18n().kojo.av_sister.daily.select(get_chara_talk(this.id), !father);
+    const chara = get_chara_talk(this.id);
+    i18n().kojo.av_sister.daily['select']({
+      CHARA: chara.name,
+      COLOR: chara.color,
+      DAD: !father ? i18n().name.dad : i18n().name.mom,
+      ELDER_BROTHER: get_chara_talk(0).elder_sibling_sex_title,
+    });
   }
 };

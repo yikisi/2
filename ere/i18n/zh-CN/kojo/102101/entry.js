@@ -1,6 +1,16 @@
+// GENERATED START
 class I18nKojo102101 {
   /** @type {KojoFile} */
+  recruit = require('#/i18n/zh-CN/kojo/102101/rec-21.kojo');
+  /** @type {KojoFile} */
+  daily = require('#/i18n/zh-CN/kojo/102101/daily-21.kojo');
+  /** @type {KojoFile} */
+  edu = require('#/i18n/zh-CN/kojo/102101/edu-21.kojo');
+  /** @type {KojoFile} */
+  love = require('#/i18n/zh-CN/kojo/102101/love-21.kojo');
+  /** @type {KojoFile} */
   ero = require('#/i18n/zh-CN/kojo/102101/ero-21.kojo');
+  // GENERATED END
 
   // 经典年三月前 二场OP以上比赛 1着 2次
   aim_desc_1 = '经典年 3 月前 OP 以上比赛 1 着';

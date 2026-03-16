@@ -1,3 +1,4 @@
+// GENERATED START
 class I18nKojo100201 {
   /** @type {KojoFile} */
   recruit = require('#/i18n/zh-CN/kojo/100201/rec-2.kojo');
@@ -9,6 +10,7 @@ class I18nKojo100201 {
   love = require('#/i18n/zh-CN/kojo/100201/love-2.kojo');
   /** @type {KojoFile} */
   ero = require('#/i18n/zh-CN/kojo/100201/ero-2.kojo');
+  // GENERATED END
 
   debuff1 = '难过';
   debuff1_desc = '干劲上限下降一阶段。';

@@ -13,6 +13,7 @@ const CustomizedCheck = require('#/event/check/check-common');
 const { get_custom_check } = require('#/event/check/check-factory');
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 
+const get_display_name = require('#/utils/calc-display-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
@@ -30,40 +31,39 @@ const {
 } = require('#/data/info-generator');
 const LoveLimitStatus = require('#/data/love-limit-status');
 
-const { __, i18n } = require('#/i18n/selector');
+const { i18n } = require('#/i18n/selector');
 
 /**
  * @param {number} lover
  * @param {number} new_love
  */
 async function punish_unfaithful(lover, new_love) {
-  const punish_option = era.get('flag:不忠惩罚') === 1,
-    me = get_chara_talk(0),
-    temp_chara_list = sys_filter_chara(
-      'cflag',
-      '招募状态',
-      recruit_flags.yes,
-    ).filter((cid) => {
-      return (
-        cid > 0 &&
-        cid !== lover &&
-        era.get(`love:${cid}`) >= 75 &&
-        era.get(`cflag:${cid}:成长阶段`) >= 2
-      );
-    });
-  for (const cid of temp_chara_list) {
+  const punish_option = era.get('flag:不忠惩罚') === 1;
+  const me = get_chara_talk(0);
+  const c_list = sys_filter_chara(
+    'cflag',
+    '招募状态',
+    recruit_flags.yes,
+  ).filter(
+    (cid) =>
+      cid > 0 &&
+      cid !== lover &&
+      era.get(`love:${cid}`) >= 75 &&
+      era.get(`cflag:${cid}:成长阶段`) >= 2,
+  );
+  for (const cid of c_list) {
     const is_aware =
       era.get(`cflag:${cid}:位置`) === era.get('cflag:0:位置') &&
       get_custom_mec(cid).is_anger_for_unfaithful([lover]) &&
       sys_check_yandere(cid, (y) => punish_option || y > 0);
     get_custom_check(cid).check_after_betrayed([lover], is_aware);
     if (is_aware) {
-      era.print([
-        me.get_colored_name(),
-        ' 的不忠让 ',
-        get_chara_talk(cid).get_colored_name(),
-        ' 无比愤怒……',
-      ]);
+      era.print(
+        i18n().get_ui_find_betrayed(
+          get_chara_talk(cid).get_colored_name(),
+          me.get_colored_name(),
+        ),
+      );
       sys_change_pressure(cid, get_random_value(1000, 2000));
       like_chara(
         cid,
@@ -78,7 +78,7 @@ async function punish_unfaithful(lover, new_love) {
       );
     }
   }
-  if (temp_chara_list.length > 0) {
+  if (c_list.length > 0) {
     await era.waitAnyKey();
   }
 }
@@ -298,12 +298,12 @@ function love_uma(cid, val, shown = true) {
 function get_callname(_from, _to) {
   let callname = era.get(`callname:${_from}:${_to}`);
   if (callname === '-') {
-    return era.get(`static:${_to}:callname`);
+    return get_display_name(era.get(`static:${_to}:callname`));
   }
   if (Array.isArray(callname)) {
     callname = get_random_entry(callname);
   }
-  return __(`name.${callname}`, callname);
+  return get_display_name(callname);
 }
 
 /**
@@ -408,7 +408,7 @@ module.exports = {
     era.set(`cflag:${cid}:爱慕暂拒`, 0);
     const my_marks = new MyEduMarks();
     my_marks.pity = (my_marks.pity || []).filter((e) => e !== cid);
-    await get_chara_talk(0).say_and_wait(i18n().love_level_up, true);
+    await get_chara_talk(0).say_and_wait(i18n().ui_love_level_up, true);
     new_val >= 75 && (await punish_unfaithful(cid, new_val));
     return true;
   },

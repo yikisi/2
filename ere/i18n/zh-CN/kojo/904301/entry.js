@@ -1,8 +1,10 @@
+// GENERATED START
 class I18nKojo904301 {
   /** @type {KojoFile} */
   recruit = require('#/i18n/zh-CN/kojo/904301/rec-343.kojo');
   /** @type {KojoFile} */
   love = require('#/i18n/zh-CN/kojo/904301/love-343.kojo');
+  // GENERATED END
 
   dream_chaser = '梦之追逐者';
   dream_chaser_desc = (buff) =>

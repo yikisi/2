@@ -1,4 +1,15 @@
+const proxy_kojo_js = require('#/i18n/proxy');
+
+// GENERATED START
 class I18nKojo105201 {
+  recruit = proxy_kojo_js(require('#/i18n/zh-CN/kojo/105201/rec-52.js'));
+  daily = proxy_kojo_js(require('#/i18n/zh-CN/kojo/105201/daily-52.js'));
+  edu = proxy_kojo_js(require('#/i18n/zh-CN/kojo/105201/edu-52.js'));
+  love = proxy_kojo_js(require('#/i18n/zh-CN/kojo/105201/love-52.js'));
+  ero = proxy_kojo_js(require('#/i18n/zh-CN/kojo/105201/ero-52.js'));
+  basement = proxy_kojo_js(require('#/i18n/zh-CN/kojo/105201/base-52.js'));
+  // GENERATED END
+
   echo = (c) => `回响(${c})`;
   echo_desc = (_, g_buff, d_buff) =>
     `？？？「若能相互理解，现实也能予以共鸣。」参赛时：${[

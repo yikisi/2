@@ -1,3 +1,4 @@
+// GENERATED START
 class I18nKojo900601 {
   /** @type {KojoFile} */
   recruit = require('#/i18n/zh-CN/kojo/900601/rec-306.kojo');
@@ -5,6 +6,7 @@ class I18nKojo900601 {
   daily = require('#/i18n/zh-CN/kojo/900601/daily-306.kojo');
   /** @type {KojoFile} */
   edu = require('#/i18n/zh-CN/kojo/900601/edu-306.kojo');
+  // GENERATED END
 
   buff = '铁面代理';
   buff_desc = (buff) =>

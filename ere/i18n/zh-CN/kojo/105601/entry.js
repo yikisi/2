@@ -1,4 +1,14 @@
+const proxy_kojo_js = require('#/i18n/proxy');
+
+// GENERATED START
 class I18nKojo105601 {
+  recruit = proxy_kojo_js(require('#/i18n/zh-CN/kojo/105601/rec-56.js'));
+  daily = proxy_kojo_js(require('#/i18n/zh-CN/kojo/105601/daily-56.js'));
+  edu = proxy_kojo_js(require('#/i18n/zh-CN/kojo/105601/edu-56.js'));
+  love = proxy_kojo_js(require('#/i18n/zh-CN/kojo/105601/love-56.js'));
+  ero = proxy_kojo_js(require('#/i18n/zh-CN/kojo/105601/ero-56.js'));
+  // GENERATED END
+
   dependency = '运势依赖';
   dependency_desc = '今天的运势是什么呢？';
 

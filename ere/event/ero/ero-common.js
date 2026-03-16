@@ -21,9 +21,11 @@ const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { buff_colors } = require('#/data/color-const');
+const CharaInmon = require('#/data/ero/chara-inmon');
 const { shop_result_type_enum } = require('#/data/ero/juel-const');
 const { mark_enum } = require('#/data/ero/mark-const');
 const { get_slang_part_name_key, part_enum } = require('#/data/ero/part-const');
+const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const {
   pregnant_stage_enum,
   unexpected_pregnant_enum,
@@ -365,6 +367,7 @@ class CustomizedEro extends CustomizedEvent {
       get_chara_talk(extra_flag.father_id),
       sys_check_awake(extra_flag.mother_id),
       sys_check_awake(extra_flag.father_id),
+      CharaInmon.get(extra_flag.mother_id).on(plugin_enum.no_preg),
     );
   }
 
@@ -407,7 +410,7 @@ class CustomizedEro extends CustomizedEvent {
     }
     const father = get_chara_talk(extra_flag.father_id);
     const mother = get_chara_talk(extra_flag.mother_id);
-    const love = era.get(`love:${mother.id || father.id}`);
+    const love = era.get(`love:${mother.id}`);
     const unexpected_pregnant = LifeEventMarks.get_marks(
       mother.id,
     ).unexpected_pregnant;
@@ -452,7 +455,7 @@ class CustomizedEro extends CustomizedEvent {
         child,
       );
     }
-    if (era.get(`love:${mother.id || father.id}`) < 90) {
+    if (era.get(`love:${mother.id}`) < 90) {
       era.drawLine();
       await print_title_with_kojo(
         i18n().timon.ero_o,

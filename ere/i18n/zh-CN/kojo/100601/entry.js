@@ -1,3 +1,4 @@
+// GENERATED START
 class I18nKojo100601 {
   /** @type {KojoFile} */
   recruit = require('#/i18n/zh-CN/kojo/100601/rec-6.kojo');
@@ -7,6 +8,7 @@ class I18nKojo100601 {
   edu = require('#/i18n/zh-CN/kojo/100601/edu-6.kojo');
   /** @type {KojoFile} */
   love = require('#/i18n/zh-CN/kojo/100601/love-6.kojo');
+  // GENERATED END
 
   // 资深年 1-6月 G1 比赛 3着以内 2次
   aim_desc = '1-6月 G1 比赛 3着以内';

@@ -1,3 +1,4 @@
+// GENERATED START
 class I18nKojo904101 {
   /** @type {KojoFile} */
   recruit = require('#/i18n/zh-CN/kojo/904101/rec-341.kojo');
@@ -5,6 +6,7 @@ class I18nKojo904101 {
   love = require('#/i18n/zh-CN/kojo/904101/love-341.kojo');
   /** @type {KojoFile} */
   ero = require('#/i18n/zh-CN/kojo/904101/ero-341.kojo');
+  // GENERATED END
 
   buff = '爱';
   buff_desc = (buff, buff2) =>

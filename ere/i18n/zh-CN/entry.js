@@ -270,6 +270,12 @@ class I18nEntry {
     '！现在为：',
     result,
   ];
+  get_ui_find_betrayed = (chara, you) => [
+    you,
+    ' 的不忠让 ',
+    chara,
+    ' 无比愤怒……',
+  ];
   get_ui_change_love = (chara, you, change_mark, val, result) => [
     chara,
     ' 对 ',
@@ -286,7 +292,7 @@ class I18nEntry {
     chara,
     ' 的关系似乎可以更进一步了……）',
   ];
-  love_level_up = '已经不能回头了……';
+  ui_love_level_up = '已经不能回头了……';
   get_ui_hurt_uma = (chara) => [chara, ' 受伤了！'];
   get_ui_hurt_uma_plus = (chara) => [chara, ' 的受伤程度加深了！'];
   get_ui_hurt_tired_uma = (chara) => [chara, ' 在疲惫之下受了更加严重的伤！'];

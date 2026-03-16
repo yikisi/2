@@ -20,7 +20,10 @@ module.exports = class extends CustomizedEro {
         era.get(`nowex:${this.id}:阴道高潮`) > 0)
     ) {
       era.println();
-      await i18n().kojo[this.id].ero.have_milk(bouquetd);
+      await i18n().kojo[this.id].ero['have_milk']({
+        CHARA: bouquetd.name,
+        COLOR: bouquetd.color,
+      });
       era.set(`cflag:${this.id}:泌乳`, 3);
       era.set(
         `palam:${this.id}:胸部快感`,

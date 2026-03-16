@@ -1,4 +1,13 @@
+const proxy_kojo_js = require('#/i18n/proxy');
+
+// GENERATED START
 class I18nKojo101701 {
+  recruit = proxy_kojo_js(require('#/i18n/zh-CN/kojo/101701/rec-17.js'));
+  daily = proxy_kojo_js(require('#/i18n/zh-CN/kojo/101701/daily-17.js'));
+  edu = proxy_kojo_js(require('#/i18n/zh-CN/kojo/101701/edu-17.js'));
+  love = proxy_kojo_js(require('#/i18n/zh-CN/kojo/101701/love-17.js'));
+  // GENERATED END
+
   self_destruct = '自毁';
   self_destruct_desc =
     '对宿命的抗拒使其陷入自我毁灭；训练成功率-5%，训练效果-8%，参赛时属性-5%。';

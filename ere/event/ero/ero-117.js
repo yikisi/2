@@ -1,4 +1,4 @@
-const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
+const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
 const EroRapeFucking = require('#/event/ero/common/rape/fucking');
 const RapeCommandLines = require('#/event/ero/common/rape/rape-common');
@@ -9,11 +9,12 @@ const { i18n } = require('#/i18n/selector');
 class VariationRapeFucking extends EroRapeFucking {
   async standing(attacker, defender, hook) {
     if (hook.arg && defender.id === 117) {
-      return i18n().kojo[134].ero.rape_standing(
-        defender,
-        attacker,
-        sys_get_colored_callname(attacker.id, defender.id),
-      );
+      return i18n().kojo[134].ero['rape_standing']({
+        CALL_117: sys_get_callname(defender.id, attacker.id),
+        CHARA: defender.name,
+        COLOR: defender.color,
+        UMA: defender.uma_sex_title,
+      });
     }
     return await super.standing(attacker, defender, hook);
   }

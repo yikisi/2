@@ -1,3 +1,4 @@
+// GENERATED START
 class I18nKojo107401 {
   /** @type {KojoFile} */
   recruit = require('#/i18n/zh-CN/kojo/107401/rec-74.kojo');
@@ -9,6 +10,7 @@ class I18nKojo107401 {
   love = require('#/i18n/zh-CN/kojo/107401/love-74.kojo');
   /** @type {KojoFile} */
   ero = require('#/i18n/zh-CN/kojo/107401/ero-74.kojo');
+  // GENERATED END
 }
 
 module.exports = I18nKojo107401;

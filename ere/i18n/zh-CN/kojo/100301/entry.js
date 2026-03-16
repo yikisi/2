@@ -1,9 +1,14 @@
 const proxy_kojo_js = require('#/i18n/proxy');
 
+// GENERATED START
 class I18nKojo100301 {
-  recruit = proxy_kojo_js(require('#/i18n/zh-CN/kojo/100301/rec-3'));
-  love = proxy_kojo_js(require('#/i18n/zh-CN/kojo/100301/love-3'));
-  ero = proxy_kojo_js(require('#/i18n/zh-CN/kojo/100301/ero-3'));
+  recruit = proxy_kojo_js(require('#/i18n/zh-CN/kojo/100301/rec-3.js'));
+  daily = proxy_kojo_js(require('#/i18n/zh-CN/kojo/100301/daily-3.js'));
+  edu = proxy_kojo_js(require('#/i18n/zh-CN/kojo/100301/edu-3.js'));
+  love = proxy_kojo_js(require('#/i18n/zh-CN/kojo/100301/love-3.js'));
+  ero = proxy_kojo_js(require('#/i18n/zh-CN/kojo/100301/ero-3.js'));
+  basement = proxy_kojo_js(require('#/i18n/zh-CN/kojo/100301/base-3.js'));
+  // GENERATED END
 
   hurt = '腿伤！';
   hurt_desc =

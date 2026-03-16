@@ -1,4 +1,13 @@
+const proxy_kojo_js = require('#/i18n/proxy');
+
+// GENERATED START
 class I18nKojo101901 {
+  recruit = proxy_kojo_js(require('#/i18n/zh-CN/kojo/101901/rec-19.js'));
+  daily = proxy_kojo_js(require('#/i18n/zh-CN/kojo/101901/daily-19.js'));
+  edu = proxy_kojo_js(require('#/i18n/zh-CN/kojo/101901/edu-19.js'));
+  love = proxy_kojo_js(require('#/i18n/zh-CN/kojo/101901/love-19.js'));
+  // GENERATED END
+
   // 资深年 1-6月 G1 比赛 3着以内 3次
   aim_desc = '1-6月 G1 比赛 3着以内';
 }
