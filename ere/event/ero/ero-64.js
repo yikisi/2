@@ -5,7 +5,7 @@ const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const EroNormalCommunications = require('#/event/ero/common/normal/communications');
 const EroNormalFucking = require('#/event/ero/common/normal/fucking');
-const EroNormalMakingOuts = require('#/event/ero/common/normal/making-outs-final');
+const EroNormalMakingOuts = require('#/event/ero/common/normal/making-outs');
 const NormalCommandLines = require('#/event/ero/common/normal/normal-common');
 const EroNormalSm = require('#/event/ero/common/normal/sm');
 const CustomizedEro = require('#/event/ero/ero-common');

@@ -2,7 +2,7 @@ const era = require('#/era-electron');
 
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
-const EroNormalMakingOuts = require('#/event/ero/common/normal/making-outs-final');
+const EroNormalMakingOuts = require('#/event/ero/common/normal/making-outs');
 const {
   after_refusing_by_attacker,
   after_refusing_by_defender,

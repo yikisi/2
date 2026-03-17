@@ -57,6 +57,8 @@ const { stain_enum } = require('#/data/ero/stain-const');
 const { condition_type, default_tags } = require('#/data/event/ero-hook-tag');
 const { ero_hooks, ero_tagged_hooks } = require('#/data/event/ero-hooks');
 
+const { i18n } = require('#/i18n/selector');
+
 /** @param {boolean} shown */
 async function next_turn(shown) {
   era.add('tflag:回合', 1);
@@ -297,7 +299,7 @@ async function sys_handle_ero_act(command, filters, shown = true) {
             type: 'button',
           };
         }),
-        { accelerator: 999, content: '尝试结束', type: 'button' },
+        { accelerator: 999, content: i18n().ui_back, type: 'button' },
       ]);
       option_flag = 2;
       const ret = await era.input({ hideInput: true });

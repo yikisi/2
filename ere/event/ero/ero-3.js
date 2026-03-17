@@ -3,7 +3,7 @@ const era = require('#/era-electron');
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
 const EroNormalCommunications = require('#/event/ero/common/normal/communications');
-const EroNormalMakingOuts = require('#/event/ero/common/normal/making-outs-final');
+const EroNormalMakingOuts = require('#/event/ero/common/normal/making-outs');
 const NormalCommandLines = require('#/event/ero/common/normal/normal-common');
 const CustomizedEro = require('#/event/ero/ero-common');
 

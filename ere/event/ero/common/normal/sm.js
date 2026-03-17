@@ -1,14 +1,4 @@
-/**
- * @file 调教地文 - 性虐系
- * @author 黑衣剑士-星爆气流斩准备就绪
- * @author 黑奴队长
- */
-const era = require('#/era-electron');
-
-const {
-  sys_get_callname,
-  sys_get_colored_callname,
-} = require('#/system/sys-calc-chara-others');
+const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
 const EroSm = require('#/event/ero/common/interface/ero-sm');
 const {
@@ -17,37 +7,21 @@ const {
   ask_action,
 } = require('#/event/ero/common/snippets');
 
-const { get_random_entry } = require('#/utils/list-utils');
-const { get_random_value } = require('#/utils/value-utils');
-
 const { part_enum } = require('#/data/ero/part-const');
+
+const { i18n } = require('#/i18n/selector');
 
 class EroNormalSm extends EroSm {
   /**
-   * @author 黑奴队长
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
   async insult(attacker, defender, hook) {
-    const talk_arr = [];
-    if (era.get('tflag:强奸') === defender.id) {
-      talk_arr.push('人渣！强奸犯！去死吧！');
-    }
-    if (era.get(`talent:${attacker.id}:小恶魔`)) {
-      talk_arr.push('杂鱼～杂鱼～');
-    }
-    if (era.get(`talent:${attacker.id}:抖S`)) {
-      talk_arr.push(`蠢货！废物${defender.sex_slave_title}！欠操的变态！`);
-    }
-    if (talk_arr.length === 0) {
-      talk_arr.push(`就这么想被人辱骂吗，${defender.sex_slave_title}？`);
-    }
-    await attacker.say_and_wait(get_random_entry(talk_arr));
+    await i18n().timon.ero_c.insult(attacker, defender);
   }
 
   /**
-   * @author 黑奴队长
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -56,7 +30,7 @@ class EroNormalSm extends EroSm {
     if (hook.arg) {
       if (await ask_action(attacker.id)) {
         await (
-          get_random_value(0, 1)
+          Math.random() > 0.5
             ? after_refusing_by_attacker
             : after_refusing_by_defender
         )(attacker, defender, hook);
@@ -67,7 +41,6 @@ class EroNormalSm extends EroSm {
   }
 
   /**
-   * @author 黑奴队长
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -76,7 +49,7 @@ class EroNormalSm extends EroSm {
     if (hook.arg) {
       if (await ask_action(attacker.id)) {
         await (
-          get_random_value(0, 1)
+          Math.random() > 0.5
             ? after_refusing_by_attacker
             : after_refusing_by_defender
         )(attacker, defender, hook);
@@ -85,7 +58,6 @@ class EroNormalSm extends EroSm {
   }
 
   /**
-   * @author 黑奴队长
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -94,7 +66,7 @@ class EroNormalSm extends EroSm {
     if (hook.arg) {
       if (await ask_action(attacker.id)) {
         await (
-          get_random_value(0, 1)
+          Math.random() > 0.5
             ? after_refusing_by_attacker
             : after_refusing_by_defender
         )(attacker, defender, hook);
@@ -103,71 +75,20 @@ class EroNormalSm extends EroSm {
   }
 
   /**
-   * @author 黑衣剑士-星爆气流斩准备就绪
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
    */
   async hit_face_by_penis(attacker, defender, hook) {
-    if (attacker.id > 0) {
-      await defender.print_and_wait([
-        '被 ',
-        sys_get_colored_callname(defender.id, attacker.id),
-        ' 住了头发，意识到了自己的力量完全不能与之抗衡，看着 ',
-        sys_get_colored_callname(defender.id, attacker.id),
-        ' 胯下的肉棒凶恶的抬头，',
-        defender.get_colored_name(),
-        ' 的内心有了不好的预感。',
-      ]);
-      await attacker.say_and_wait(
-        `${sys_get_callname(
-          attacker.id,
-          defender.id,
-        )}～要好好的记住我的气味哦～`,
-      );
-      await defender.print_and_wait([
-        '无法反抗，脸颊上感觉到了被拍打的触感，',
-        sys_get_colored_callname(defender.id, attacker.id),
-        ' 肉棒那凶恶的气味让 ',
-        defender.get_colored_name(),
-        ' 不自觉的想要屈服。',
-      ]);
-      await defender.print_and_wait([
-        '脸上留下了 ',
-        sys_get_colored_callname(defender.id, attacker.id),
-        ' 肉棒的印记，',
-        defender.get_colored_name(),
-        ' 仰起脸，等待着下一记耳光的到来',
-      ]);
-    } else {
-      await attacker.print_and_wait([
-        '抓着 ',
-        sys_get_colored_callname(attacker.id, defender.id),
-        ' 的头发，',
-        attacker.get_colored_name(),
-        ` 强硬地将自己的肉棒凑到了${defender.sex}的脸上，看着${defender.sex}的脸被 `,
-        attacker.get_colored_name(),
-        ' 用肉棒戳弄的样子露出笑容。',
-      ]);
-      await defender.say_and_wait('唔唔唔！！！');
-      await attacker.print_and_wait([
-        '充满了雄性气味的肉棒吸引着 ',
-        sys_get_colored_callname(attacker.id, defender.id),
-        ' 的鼻子不停的抽动，',
-        attacker.get_colored_name(),
-        ' 抓着 ',
-        sys_get_colored_callname(attacker.id, defender.id),
-        ' 的头发开始甩动起了自己的腰，肉棒与 ',
-        sys_get_colored_callname(attacker.id, defender.id),
-        ' 光滑的脸颊碰撞发出了色情的声音，让 ',
-        sys_get_colored_callname(attacker.id, defender.id),
-        ' 的眼神也变得迷离了起来。',
-      ]);
-    }
+    await i18n().timon.ero_c.hit_face_by_penis(
+      attacker,
+      defender,
+      sys_get_colored_callname(attacker.id, defender.id),
+      sys_get_colored_callname(defender.id, attacker.id),
+    );
   }
 
   /**
-   * @author 黑奴队长
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -176,7 +97,7 @@ class EroNormalSm extends EroSm {
     if (hook.arg) {
       if (await ask_action(attacker.id)) {
         await (
-          get_random_value(0, 1)
+          Math.random() > 0.5
             ? after_refusing_by_attacker
             : after_refusing_by_defender
         )(attacker, defender, hook);
@@ -185,7 +106,6 @@ class EroNormalSm extends EroSm {
   }
 
   /**
-   * @author 黑奴队长
    * @param {CharaTalk} attacker
    * @param {CharaTalk} defender
    * @param {HookArg} hook
@@ -201,7 +121,7 @@ class EroNormalSm extends EroSm {
         )
       ) {
         await (
-          get_random_value(0, 1)
+          Math.random() > 0.5
             ? after_refusing_by_attacker
             : after_refusing_by_defender
         )(attacker, defender, hook);

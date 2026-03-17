@@ -2,7 +2,7 @@ const EroCommandLines = require('#/event/ero/common/ero-command-lines');
 const EroNormalCommunications = require('#/event/ero/common/normal/communications');
 const EroNormalFucking = require('#/event/ero/common/normal/fucking');
 const EroNormalItems = require('#/event/ero/common/normal/items');
-const EroNormalMakingOuts = require('#/event/ero/common/normal/making-outs-final');
+const EroNormalMakingOuts = require('#/event/ero/common/normal/making-outs');
 const EroNormalOrgy = require('#/event/ero/common/normal/orgy');
 const EroNormalSm = require('#/event/ero/common/normal/sm');
 
