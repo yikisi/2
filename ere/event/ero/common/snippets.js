@@ -113,7 +113,7 @@ module.exports = {
    */
   async pet_leg(attacker, defender, hook) {
     if (hook.arg) {
-      if (attacker.id === 0 && era.get(`cflag:${defender.id}:种族`) > 0) {
+      if (attacker.id === 0 && defender.race > 0) {
         await attacker.print_and_wait(
           '作为训练员，将面前担当的双腿，用性的意味去观赏与抚摸……',
         );
