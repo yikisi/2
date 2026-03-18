@@ -507,7 +507,7 @@ module.exports = (handlers) => {
       new EroParticipant(attacker, part_enum.penis, -0.5),
       new EroParticipant(defender, part_enum.virgin, -0.5),
     );
-    add_juel(defender, '顺从', base_emotion_juel);
+    add_juel(defender, 10, base_emotion_juel);
     set_double_fuck(attacker, defender, extra_flag.supporter);
   };
 
@@ -525,7 +525,7 @@ module.exports = (handlers) => {
       new EroParticipant(atk, part_enum.virgin, -0.5),
       new EroParticipant(def, part_enum.penis, -0.5),
     );
-    add_juel(def, '顺从', base_emotion_juel);
+    add_juel(def, 10, base_emotion_juel);
     set_double_fuck(atk, def, extra.supporter);
   };
 
@@ -543,7 +543,7 @@ module.exports = (handlers) => {
       new EroParticipant(supporter, part_enum.penis),
       new EroParticipant(defender, part_enum.anal),
     );
-    add_juel(defender, '顺从', base_emotion_juel);
+    add_juel(defender, 10, base_emotion_juel);
     era.set(`tcvar:${attacker}:体位`, motion_enum.sit);
     era.set(`tcvar:${defender}:体位`, motion_enum.lie);
     era.set(`tcvar:${supporter}:体位`, motion_enum.lie);
@@ -564,7 +564,7 @@ module.exports = (handlers) => {
       new EroParticipant(extra_flag.supporter, part_enum.penis),
       new EroParticipant(defender, part_enum.mouth),
     );
-    add_juel(defender, '顺从', base_emotion_juel);
+    add_juel(defender, 10, base_emotion_juel);
     set_double_fuck(attacker, defender, extra_flag.supporter);
   };
 
@@ -582,7 +582,7 @@ module.exports = (handlers) => {
       new EroParticipant(extra_flag.supporter, part_enum.penis),
       new EroParticipant(defender, part_enum.mouth),
     );
-    add_juel(defender, '顺从', base_emotion_juel);
+    add_juel(defender, 10, base_emotion_juel);
     set_double_fuck(attacker, defender, extra_flag.supporter);
   };
 };

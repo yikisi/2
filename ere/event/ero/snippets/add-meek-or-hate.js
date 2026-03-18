@@ -10,9 +10,11 @@ const { base_emotion_juel } = require('#/data/ero/juel-const');
 
 function add_meek_or_hate(cid, check = 0, cb) {
   if (check >= 0) {
-    add_juel(cid, '顺从', base_emotion_juel * Math.min(1 + check / 100, 2));
+    // JEWELNAME:10 = 顺从
+    add_juel(cid, 10, base_emotion_juel * Math.min(1 + check / 100, 2));
   } else {
-    add_juel(cid, '反感', base_emotion_juel * (1 + cb(-check) / 10));
+    // JEWELNAME:14 = 反感
+    add_juel(cid, 14, base_emotion_juel * (1 + cb(-check) / 10));
   }
 }
 

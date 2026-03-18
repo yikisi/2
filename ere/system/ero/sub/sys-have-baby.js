@@ -473,9 +473,9 @@ async function sys_have_baby(mid) {
   if (!fid && era.get(`love:${mid}`) < 90 && (mid < 340 || mid > 342)) {
     if (era.get(`mark:${mid}:同心`) >= 2) {
       sys_like_chara(mid, 0, 50);
-      add_jewel_reward(mid, '顺从', 200);
+      add_jewel_reward(mid, 10, 200);
     } else {
-      add_jewel_reward(mid, '顺从', 50);
+      add_jewel_reward(mid, 10, 50);
     }
   } else if (!fid || !mid) {
     if (
@@ -483,10 +483,10 @@ async function sys_have_baby(mid) {
       c_life_marks.unexpected_child === unexpected_pregnant_enum.mother_sleep
     ) {
       sys_like_chara(mid || fid, 0, 200);
-      add_jewel_reward(mid || fid, '顺从', 400);
+      add_jewel_reward(mid || fid, 10, 400);
     } else {
       sys_like_chara(mid || fid, 0, 100);
-      add_jewel_reward(mid || fid, '顺从', 200);
+      add_jewel_reward(mid || fid, 10, 200);
     }
   }
   const jid = get_random_value(20, 22);

@@ -13,6 +13,8 @@ const { get_random_entry } = require('#/utils/list-utils');
 const CharaInmon = require('#/data/ero/chara-inmon');
 const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 
+const { i18n } = require('#/i18n/selector');
+
 /**
  * @param {number} without
  * @param {boolean} [shown=true]
@@ -42,7 +44,9 @@ function change_master(without, shown = true) {
   if (master !== _new) {
     change_ero_master(_new);
     if (shown) {
-      era.print([get_chara_talk(_new).get_colored_name(), ' 取得了主导权……']);
+      era.print(
+        i18n().timon.ero_sys.get_change_master_info(get_chara_talk(_new)),
+      );
     }
   }
 }

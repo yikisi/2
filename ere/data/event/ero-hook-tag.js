@@ -10,13 +10,15 @@ const EroTouch = require('#/data/ero/ero-touch');
 const { item_enum } = require('#/data/ero/item-const');
 const { lust_palam_border } = require('#/data/ero/orgasm-const');
 const {
+  part2jid,
   part_enum,
-  part_names,
   part_talents,
   part_touch,
 } = require('#/data/ero/part-const');
 const { vp_status_enum } = require('#/data/ero/status-const');
 const { get_breast_cup } = require('#/data/info-generator');
+
+const { i18n } = require('#/i18n/selector');
 
 class EroHookTag {
   /** @type {(number|function(number,number):boolean)[]} */
@@ -82,12 +84,12 @@ class EroHookTag {
    */
   static generate_self_talent_check(cpart) {
     return (cid) => {
+      const pname = i18n('zh-CN').tb_param[part2jid[cpart]];
       return (
         !cid ||
         era.get(`talent:${cid}:${part_talents[cpart]}`) === 2 ||
-        era.get(`palam:${cid}:${part_names[cpart]}快感`) >=
-          era.get(`tcvar:${cid}:${part_names[cpart]}快感上限`) *
-            lust_palam_border
+        era.get(`palam:${cid}:${pname}快感`) >=
+          era.get(`tcvar:${cid}:${pname}快感上限`) * lust_palam_border
       );
     };
   }

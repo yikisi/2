@@ -27,7 +27,7 @@ const { attr_enum } = require('#/data/train-const');
 function common_suspended_congress(attacker, defender, check) {
   add(`nowex:${attacker}:体力消耗`, get(`tcvar:${defender}:体重`) / 4);
   add_meek_or_hate(defender, check, (c) => c / 10);
-  add_juel(defender, '羞耻', base_emotion_juel / 2);
+  add_juel(defender, 13, base_emotion_juel / 2);
   add_attr_exp(attacker, attr_enum.strength, 1.5);
   return sys_change_motion(
     attacker,
@@ -43,7 +43,7 @@ function common_suspended_congress(attacker, defender, check) {
  */
 function common_ask_cowgirl(attacker, defender, check) {
   add_meek_or_hate(defender, check, (c) => c / 10);
-  add_juel(defender, '羞耻', base_emotion_juel);
+  add_juel(defender, 13, base_emotion_juel);
   add_attr_exp(defender, attr_enum.strength, 1);
   return sys_change_motion(attacker, defender, ...motion_codes.ask_cowgirl);
 }
@@ -55,8 +55,8 @@ function common_ask_cowgirl(attacker, defender, check) {
  */
 function common_cowgirl(attacker, defender, check) {
   add_meek_or_hate(defender, check, (c) => c / 10);
-  add_juel(defender, '羞耻', base_emotion_juel);
-  add_juel(attacker, '顺从', base_emotion_juel);
+  add_juel(defender, 13, base_emotion_juel);
+  add_juel(attacker, 10, base_emotion_juel);
   add_attr_exp(defender, attr_enum.strength, 1);
   return sys_change_motion(attacker, defender, ...motion_codes.cowgirl);
 }
@@ -68,8 +68,8 @@ function common_cowgirl(attacker, defender, check) {
  */
 function common_ask_fuck(attacker, defender, check) {
   add_meek_or_hate(defender, check, (c) => c / 10);
-  add_juel(defender, '羞耻', base_emotion_juel / 2);
-  add_juel(attacker, '顺从', base_emotion_juel);
+  add_juel(defender, 13, base_emotion_juel / 2);
+  add_juel(attacker, 10, base_emotion_juel);
   add_attr_exp(defender, attr_enum.strength, 1);
   return sys_change_motion(attacker, defender, ...motion_codes.ask_fuck);
 }
@@ -108,8 +108,8 @@ module.exports = (handlers) => {
     );
     add_attr_exp(atk, attr_enum.strength, 1);
     add_meek_or_hate(def, ex.check, (c) => c / 10);
-    add_juel(def, '恐惧', base_emotion_juel / 4);
-    add_juel(def, '羞耻', base_emotion_juel / 4);
+    add_juel(def, 12, base_emotion_juel / 4);
+    add_juel(def, 13, base_emotion_juel / 4);
     if (sys_change_motion(atk, def, ...motion_codes.doggy)) {
       sys_clean_oor_parts(atk, def, {
         a: part_enum.penis,
@@ -126,7 +126,7 @@ module.exports = (handlers) => {
     );
     add_attr_exp(attacker, attr_enum.strength, 1);
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
-    add_juel(defender, '羞耻', base_emotion_juel / 2);
+    add_juel(defender, 13, base_emotion_juel / 2);
     if (sys_change_motion(attacker, defender, ...motion_codes.sit)) {
       sys_clean_oor_parts(attacker, defender, {
         a: part_enum.penis,
@@ -148,8 +148,8 @@ module.exports = (handlers) => {
       new EroParticipant(def, def_part),
     );
     add_meek_or_hate(def, extra.check, (c) => c / 10);
-    add_juel(def, '恐惧', base_emotion_juel / 4);
-    add_juel(def, '羞耻', base_emotion_juel / 4);
+    add_juel(def, 12, base_emotion_juel / 4);
+    add_juel(def, 13, base_emotion_juel / 4);
     add_attr_exp(atk, attr_enum.strength, 1);
     if (sys_change_motion(atk, def, ...motion_codes.hug_sit)) {
       sys_clean_oor_parts(atk, def, {
@@ -172,7 +172,7 @@ module.exports = (handlers) => {
       new EroParticipant(def, def_part),
     );
     add_meek_or_hate(def, extra.check, (c) => c / 10);
-    add_juel(def, '羞耻', base_emotion_juel / 2);
+    add_juel(def, 13, base_emotion_juel / 2);
     add_attr_exp(atk, attr_enum.strength, 1);
     if (sys_change_motion(atk, def, ...motion_codes.stand)) {
       sys_clean_oor_parts(atk, def, {
@@ -193,7 +193,7 @@ module.exports = (handlers) => {
         new EroParticipant(def, def_part),
       );
       add_meek_or_hate(def, extra.check, (c) => c / 10);
-      add_juel(def, '恐惧', base_emotion_juel / 2);
+      add_juel(def, 12, base_emotion_juel / 2);
       add_attr_exp(atk, attr_enum.strength, 1);
       if (sys_change_motion(atk, def, ...motion_codes.hug_stand)) {
         sys_clean_oor_parts(atk, def, {
@@ -253,8 +253,8 @@ module.exports = (handlers) => {
       new EroParticipant(def, def_part, 0.8),
     );
     add_meek_or_hate(def, extra.check, (c) => c / 10);
-    add_juel(def, '恐惧', base_emotion_juel / 2);
-    add_juel(def, '羞耻', base_emotion_juel / 2);
+    add_juel(def, 12, base_emotion_juel / 2);
+    add_juel(def, 13, base_emotion_juel / 2);
     add_attr_exp(atk, attr_enum.strength, 1.5);
     add(`nowex:${atk}:体力消耗`, get(`tcvar:${def}:体重`) / 4);
     if (sys_change_motion(atk, def, ...motion_codes.hug_suspended_congress)) {
@@ -291,7 +291,7 @@ module.exports = (handlers) => {
       new EroParticipant(attacker, part_enum.penis, 0.5),
     );
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
-    add_juel(defender, '羞耻', base_emotion_juel);
+    add_juel(defender, 13, base_emotion_juel);
     add_attr_exp(defender, attr_enum.strength, 1.2);
   };
 
@@ -338,7 +338,7 @@ module.exports = (handlers) => {
       new EroParticipant(attacker, part_enum.penis, 0.5),
     );
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
-    add_juel(defender, '羞耻', base_emotion_juel);
+    add_juel(defender, 13, base_emotion_juel);
     add_attr_exp(defender, attr_enum.strength, 1.2);
   };
 
@@ -363,7 +363,7 @@ module.exports = (handlers) => {
     );
     add_palam(defender, part_enum.virgin, 50);
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
-    add_juel(defender, '痛苦', base_emotion_juel / 4);
+    add_juel(defender, 11, base_emotion_juel / 4);
     add_attr_exp(attacker, attr_enum.strength, 1.2);
   };
 
@@ -409,7 +409,7 @@ module.exports = (handlers) => {
       new EroParticipant(defender, part_enum.penis, 0.5),
     );
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
-    add_juel(attacker, '顺从', base_emotion_juel);
+    add_juel(attacker, 10, base_emotion_juel);
     add_attr_exp(attacker, attr_enum.strength, 1.2);
   };
 
@@ -424,7 +424,7 @@ module.exports = (handlers) => {
       new EroParticipant(attacker, part_enum.virgin, 0.5),
     );
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
-    add_juel(defender, '羞耻', base_emotion_juel / 4);
+    add_juel(defender, 13, base_emotion_juel / 4);
     add_attr_exp(defender, attr_enum.strength, 1.2);
   };
 
@@ -459,7 +459,7 @@ module.exports = (handlers) => {
       new EroParticipant(defender, part_enum.anal),
     );
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
-    add_juel(defender, '羞耻', base_emotion_juel / 2);
+    add_juel(defender, 13, base_emotion_juel / 2);
     add_attr_exp(attacker, attr_enum.strength, 1);
     if (sys_change_motion(attacker, defender, ...motion_codes.sit)) {
       sys_clean_oor_parts(attacker, defender, {
@@ -529,7 +529,7 @@ module.exports = (handlers) => {
       new EroParticipant(defender, part_enum.penis, 0.5),
     );
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
-    add_juel(attacker, '顺从', base_emotion_juel);
+    add_juel(attacker, 10, base_emotion_juel);
     add_attr_exp(attacker, attr_enum.strength, 1.2);
   };
 
@@ -544,7 +544,7 @@ module.exports = (handlers) => {
       new EroParticipant(attacker, part_enum.anal, 0.5),
     );
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
-    add_juel(defender, '羞耻', base_emotion_juel / 4);
+    add_juel(defender, 13, base_emotion_juel / 4);
     add_attr_exp(defender, attr_enum.strength, 1.2);
   };
 

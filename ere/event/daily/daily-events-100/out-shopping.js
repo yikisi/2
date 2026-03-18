@@ -147,7 +147,7 @@ module.exports = async (hook) => {
         era.println();
         get_attr_and_print_in_event(100, [0, 0, 0, 10], 0, undefined, true);
         sys_like_chara(100, 0, 20);
-        add_jewel_reward(100, '受虐快感', 100);
+        add_jewel_reward(100, 8, 100);
         await era.waitAnyKey();
       } else {
         await era.printAndWait([

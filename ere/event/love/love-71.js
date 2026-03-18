@@ -101,7 +101,7 @@ module.exports = class extends CustomizedLove {
       return;
     }
     era.println();
-    add_jewel_reward(this.id, '顺从', 500);
+    add_jewel_reward(this.id, 10, 500);
     return true;
   }
 

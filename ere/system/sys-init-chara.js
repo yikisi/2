@@ -17,7 +17,6 @@ const CharaGenes = require('#/data/chara-genes');
 const CharaSkills = require('#/data/chara-skills');
 const CharaTitles = require('#/data/chara-titles');
 const { buff_colors } = require('#/data/color-const');
-const { part_names, pleasure_list } = require('#/data/ero/part-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const recruit_flags = require('#/data/event/recruit-flags');
 const yandere_list = require('#/data/event/yandere-list');
@@ -122,11 +121,6 @@ function init_chara(cid, src = 0) {
         era.set(`talent:${cid}:喜欢责骂`, 1);
         era.set(`talent:${cid}:喜欢痛苦`, 1);
         era.set(`talent:${cid}:调教度`, 3);
-    }
-    if (era.get('flag:自带钝感')) {
-      pleasure_list.forEach((part) =>
-        era.set(`talent:${cid}:${part_names[part]}钝感`, 1),
-      );
     }
   }
   era.set(

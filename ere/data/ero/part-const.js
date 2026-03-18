@@ -17,22 +17,22 @@
 Object.keys(part_enum).forEach((k, i) => (part_enum[k] = i));
 part_enum.keys = Object.keys(part_enum);
 
-/** @type {string[]} */
-const part_names = [];
-part_names[part_enum.mouth] = '口腔';
-part_names[part_enum.breast] = '胸部';
-part_names[part_enum.hand] = '身体';
-part_names[part_enum.foot] = '身体';
-part_names[part_enum.body] = '身体';
-part_names[part_enum.clitoris] = '外阴';
-part_names[part_enum.virgin] = '阴道';
-part_names[part_enum.anal] = '肛门';
-part_names[part_enum.penis] = '阴茎';
-part_names[part_enum.abuse] = '施虐';
-part_names[part_enum.hit] = '施虐';
-part_names[part_enum.item] = '施虐';
-part_names[part_enum.sadism] = '施虐';
-part_names[part_enum.masochism] = '受虐';
+/** @type {number[]} */
+const part2jid = [];
+part2jid[part_enum.mouth] = 0;
+part2jid[part_enum.breast] = 1;
+part2jid[part_enum.hand] = 2;
+part2jid[part_enum.foot] = 2;
+part2jid[part_enum.body] = 2;
+part2jid[part_enum.clitoris] = 4;
+part2jid[part_enum.virgin] = 5;
+part2jid[part_enum.anal] = 6;
+part2jid[part_enum.penis] = 3;
+part2jid[part_enum.abuse] = 7;
+part2jid[part_enum.hit] = 7;
+part2jid[part_enum.item] = 7;
+part2jid[part_enum.sadism] = 7;
+part2jid[part_enum.masochism] = 8;
 
 /** @type {string[]} */
 const part_touch = [];
@@ -166,11 +166,10 @@ module.exports = {
     // 反向躺
     rev: 3,
   },
+  part2jid,
   /** 身体部位的枚举类型 */
   part_enum,
   part_gifts,
-  /** 身体部位对应的快感名称 */
-  part_names,
   part_skills,
   part_talents,
   /** 身体部位对应的部位名称 */

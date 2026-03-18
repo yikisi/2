@@ -172,7 +172,7 @@ module.exports = async (kita, me, hook, event_object) => {
     end_ero_and_train(false);
     era.println();
     sys_like_chara(68, 0, 5, true, 5);
-    add_jewel_reward(68, ['受虐快感', '顺从', '羞耻'], [100, 100, 50]);
+    add_jewel_reward(68, [8, 10, 13], [100, 100, 50]);
     wait_flag = true;
   } else if (event_arg === 95 + 48) {
     await print_event_name(`与 ${kita.name} 的酒吧生活`, kita);

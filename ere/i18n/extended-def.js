@@ -416,6 +416,19 @@ const di18n = {
         [_.m_rev_right, _.m_rev_left],
       ];
     },
+    get setting_options() {
+      const _ = i18n().sex;
+      return [
+        _.st_act_vagina_filter,
+        _.st_act_anal_filter,
+        _.st_act_sm_filter,
+        _.st_act_pet_filter,
+        _.st_act_breast_filter,
+        _.st_act_ask_filter,
+        _.st_act_force_filter,
+        _.st_simpler_report,
+      ];
+    },
   },
   jewel_shop: {
     get_price_title(price_dict) {

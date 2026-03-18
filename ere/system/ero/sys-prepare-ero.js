@@ -37,8 +37,8 @@ const {
   palam2juel,
 } = require('#/data/ero/orgasm-const');
 const {
+  part2jid,
   part_enum,
-  part_names,
   part_talents,
   pleasure_list,
 } = require('#/data/ero/part-const');
@@ -46,7 +46,10 @@ const { stain_enum } = require('#/data/ero/stain-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const { attr_enum } = require('#/data/train-const');
 
-let j_names;
+const { i18n } = require('#/i18n/selector');
+const get_display_name = require('#/utils/calc-display-name');
+
+let jewel_keys;
 
 /** @param {number} ids */
 function update_ero_status(...ids) {
@@ -85,7 +88,10 @@ function update_ero_status(...ids) {
       const rand_range = Math.min(limit / 10, 100);
       limit += get_random_value(-rand_range, rand_range);
       limit = Math.max(limit + c_mec.get_param_limit_buff(part), 100);
-      era.set(`tcvar:${cid}:${part_names[part]}快感上限`, limit);
+      era.set(
+        `tcvar:${cid}:${i18n('zh-CN').tb_param[part2jid[part]]}快感上限`,
+        limit,
+      );
     });
     if (!era.get(`status:${cid}:沉睡`) && !era.get(`base:${cid}:精力`)) {
       era.set(`tcvar:${cid}:失神`, get_random_value(1, 5));
@@ -449,8 +455,8 @@ function init_ero(...ids) {
 
 /** @param {number} ids */
 function begin_and_init_ero(...ids) {
-  if (j_names === undefined) {
-    j_names = era.get('jewelnames').slice(0, 13);
+  if (jewel_keys === void 0) {
+    jewel_keys = era.get('jewelkeys').slice(0, 13);
   }
   era.beginTrain();
   era.set('tflag:回合', 1);
@@ -483,10 +489,10 @@ function end_ero(skip_jewels, log_jewels, ids) {
     }
     era.add(`love:${cid}`, !era.get(`love:${cid}`));
     pleasure_list.forEach((part) => {
-      const part_name = part_names[part];
+      const pname = i18n('zh-CN').tb_param[part2jid[part]];
       if (
-        era.get(`param:${cid}:${part_name}快感`) >
-        era.get(`tcvar:${cid}:${part_name}快感上限`) * lust_palam_border
+        era.get(`param:${cid}:${pname}快感`) >
+        era.get(`tcvar:${cid}:${pname}快感上限`) * lust_palam_border
       ) {
         let times = 1;
         const talent_name = part_talents[part];
@@ -510,7 +516,7 @@ function end_ero(skip_jewels, log_jewels, ids) {
     ret.jewel[cid] = {};
     for (let i = 12; i >= 0; --i) {
       got[i] = Math.floor(
-        era.get(`gotjewel:${cid}:${j_names[i]}`) / palam2juel,
+        era.get(`gotjewel:${cid}:${jewel_keys[i]}`) / palam2juel,
       );
       if (!skip_jewels && i < 12) {
         un_got[i] = got[i + 1] + un_got[i + 1];
@@ -528,20 +534,21 @@ function end_ero(skip_jewels, log_jewels, ids) {
           );
     era.add(`jewel:${cid}:自卫`, got_self_protect - self_protect);
     if (log_jewels) {
-      ret.jewel[cid]['自卫'] = got_self_protect;
-      ret.jewel[cid]['-自卫'] = self_protect;
+      // JEWELNAME:15 = 自卫
+      ret.jewel[cid][15] = got_self_protect;
+      ret.jewel[cid][-15] = self_protect;
     }
-    j_names.forEach((j_name, i) => {
+    jewel_keys.forEach((jid, i) => {
       const lost = get_random_value(
         Math.max(self_protect - un_got[i], 0),
         Math.min(got[i], self_protect),
       );
       got[i] -= lost;
       self_protect -= lost;
-      era.add(`jewel:${cid}:${j_name}`, got[i]);
+      era.add(`jewel:${cid}:${jid}`, got[i]);
       if (log_jewels) {
-        ret.jewel[cid][j_name] = got[i];
-        ret.jewel[cid][`-${j_name}`] = lost;
+        ret.jewel[cid][jid] = got[i];
+        ret.jewel[cid][`-${jid}`] = lost;
       }
     });
     const s_orgasm_count = era.get(`ex:${cid}:施虐高潮`);
@@ -685,7 +692,7 @@ async function end_ero_and_show_result(shown = true) {
       for (const cid of chara_list) {
         const buffer = get_jewel_result(
           cid,
-          j_names,
+          jewel_keys,
           info.jewel[cid],
           info.attr[cid],
         );
@@ -697,35 +704,23 @@ async function end_ero_and_show_result(shown = true) {
       let page = 0;
       let chara_index = 0;
       era.println();
-      get_chara_talk(302).say_as_unknown('发 表！高潮播报～♫');
-      get_chara_talk(301).say_as_unknown('以下报上这次马儿跳的结果简报～');
-      const reporter = get_chara_talk(306);
-      if (Math.random() < 0.01) {
-        await reporter.say_as_unknown_and_wait('不……不喜欢……的话……');
-        await get_chara_talk(203).say_as_unknown_and_wait('训练员～');
-        await get_chara_talk(202).say_as_unknown_and_wait(
-          '加油！训练员～加油！',
-        );
-        await reporter.say_as_unknown_and_wait(
-          '……请在下次马儿跳过程中在界面的设置里开启【马跳结果显示简报】……',
-        );
-        await reporter.say_as_unknown_and_wait('……哦～');
-      } else {
-        await reporter.say_as_unknown_and_wait(
-          '不喜欢的话请在下次马儿跳过程中在界面的设置里开启【马跳结果显示简报】哦～',
-        );
-      }
-
+      await i18n().timon.ero_sys.ero_report(
+        get_chara_talk(302),
+        get_chara_talk(301),
+        get_chara_talk(306),
+        get_chara_talk(202),
+        get_chara_talk(203),
+      );
       while (result_flag) {
         await era.clear();
         era.setToBottom();
-        era.drawLine({ content: '马跳结果', position: 'left' });
+        era.drawLine({ content: i18n().sex.result_title, position: 'left' });
         switch (page) {
           case 0:
             era.printMultiColumns(
               get_jewel_result(
                 chara_list[chara_index],
-                j_names,
+                jewel_keys,
                 info.jewel[chara_list[chara_index]],
                 info.attr[chara_list[chara_index]],
               ),
@@ -737,16 +732,16 @@ async function end_ero_and_show_result(shown = true) {
           case 1:
             era.printMultiColumns(
               get_ex_result_in_the_end(chara_list[chara_index]),
-              {
-                width: 18,
-              },
+              { width: 18 },
             );
         }
         era.setVerticalAlign('middle');
         era.printInColRows(
           [{ type: 'divider' }],
           {
-            columns: [{ accelerator: 4, content: '上一页', type: 'button' }],
+            columns: [
+              { accelerator: 4, content: i18n().ui_pg_prev, type: 'button' },
+            ],
             config: { width: 6 },
           },
           {
@@ -754,24 +749,32 @@ async function end_ero_and_show_result(shown = true) {
               {
                 accelerator: 8,
                 config: { disabled: chara_list[chara_index - 1] === undefined },
-                content: `上一位 - ${era.get(
-                  `callname:${chara_list[chara_index - 1]}:-2`,
-                )}`,
+                content: i18n().detail.prev_template.replace(
+                  '%NAME%',
+                  get_display_name(
+                    era.get(`callname:${chara_list[chara_index - 1]}:-2`),
+                  ),
+                ),
                 type: 'button',
               },
               {
                 accelerator: 2,
                 config: { disabled: chara_list[chara_index + 1] === undefined },
-                content: `下一位 - ${era.get(
-                  `callname:${chara_list[chara_index + 1]}:-2`,
-                )}`,
+                content: i18n().detail.next_template.replace(
+                  '%NAME%',
+                  get_display_name(
+                    era.get(`callname:${chara_list[chara_index + 1]}:-2`),
+                  ),
+                ),
                 type: 'button',
               },
             ],
             config: { width: 6 },
           },
           {
-            columns: [{ accelerator: 6, content: '下一页', type: 'button' }],
+            columns: [
+              { accelerator: 6, content: i18n().ui_pg_next, type: 'button' },
+            ],
             config: { width: 6 },
           },
           {
@@ -779,7 +782,7 @@ async function end_ero_and_show_result(shown = true) {
               {
                 accelerator: 999,
                 config: { align: 'right' },
-                content: '结束',
+                content: i18n().ui_end,
                 type: 'button',
               },
             ],
@@ -823,15 +826,13 @@ module.exports = {
   init_ero,
   set_palam_to_max(cid, ...parts) {
     parts.forEach((part) => {
-      if (
-        part_names[part] &&
-        era.get(`tcvar:${cid}:${part_names[part]}快感上限`)
-      ) {
+      const pkey = i18n('zh-CN').tb_param[part2jid[part]];
+      if (pkey && era.get(`tcvar:${cid}:${pkey}快感上限`)) {
         era.set(
-          `param:${cid}:${part_names[part]}快感`,
+          `param:${cid}:${pkey}快感`,
           Math.max(
-            era.get(`param:${cid}:${part_names[part]}快感`),
-            era.get(`tcvar:${cid}:${part_names[part]}快感上限`),
+            era.get(`param:${cid}:${pkey}快感`),
+            era.get(`tcvar:${cid}:${pkey}快感上限`),
           ),
         );
       }

@@ -2,12 +2,12 @@ const { add_juel } = require('#/system/ero/sys-calc-juel');
 
 /**
  * @param {number} cid
- * @param {string} jewel
+ * @param {number} jid
  * @param {number} val
  */
-function add_juel_from_check(cid, jewel, val) {
+function add_juel_from_check(cid, jid, val) {
   if (val > 0) {
-    add_juel(cid, jewel, val);
+    add_juel(cid, jid, val);
   }
 }
 

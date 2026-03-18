@@ -19,7 +19,8 @@ module.exports = {
   async after_refusing_by_attacker(attacker, _, hook) {
     await i18n().timon.ero_c.after_refused(attacker);
     hook.override = true;
-    add_juel(attacker.id, '恐惧', base_emotion_juel * 2);
+    // JEWELNAME:12 = 恐惧
+    add_juel(attacker.id, 12, base_emotion_juel * 2);
     sys_change_lust(attacker.id, 100);
   },
   /**
@@ -30,7 +31,7 @@ module.exports = {
   async after_refusing_by_defender(attacker, defender, hook) {
     await i18n().timon.ero_c.after_refused(defender, false);
     hook.override = true;
-    add_juel(attacker.id, '恐惧', base_emotion_juel * 2);
+    add_juel(attacker.id, 12, base_emotion_juel * 2);
     sys_change_lust(attacker.id, 100);
   },
   /**

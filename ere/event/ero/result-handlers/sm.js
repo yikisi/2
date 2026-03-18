@@ -68,7 +68,7 @@ module.exports = (handlers) => {
     }
     add_juel(
       defender,
-      '羞耻',
+      13,
       base_emotion_juel /
         ((era.get(`talent:${defender}:喜欢责骂`) + 1) *
           (era.get(`talent:${defender}:圣母`) + 1)),
@@ -81,8 +81,8 @@ module.exports = (handlers) => {
       new EroParticipant(attacker, part_enum.masochism),
     );
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 5);
-    add_juel(defender, '羞耻', base_emotion_juel / 2);
-    add_juel(attacker, '顺从', base_emotion_juel);
+    add_juel(defender, 13, base_emotion_juel / 2);
+    add_juel(attacker, 10, base_emotion_juel);
   };
 
   handlers[ero_hooks.hit_anal] = (attacker, defender) => {
@@ -111,7 +111,7 @@ module.exports = (handlers) => {
     add_attr_exp(attacker, attr_enum.strength, 1);
     add_juel(
       defender,
-      '痛苦',
+      11,
       base_emotion_juel /
         ((era.get(`talent:${defender}:喜欢痛苦`) + 1) *
           Math.max(era.get(`talent:${defender}:淫臀`) + 1, 1)),
@@ -159,7 +159,7 @@ module.exports = (handlers) => {
     }
     add_juel(
       defender,
-      '痛苦',
+      11,
       (base_emotion_juel * 3) /
         ((era.get(`talent:${defender}:喜欢痛苦`) + 1) *
           Math.max(era.get(`talent:${defender}:淫臀`) + 1, 1) *
@@ -190,8 +190,8 @@ module.exports = (handlers) => {
       new EroParticipant(attacker, part_enum.anal),
     );
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 5);
-    add_juel(defender, '羞耻', base_emotion_juel / 2);
-    add_juel(attacker, '顺从', base_emotion_juel);
+    add_juel(defender, 13, base_emotion_juel / 2);
+    add_juel(attacker, 10, base_emotion_juel);
     add_attr_exp(defender, attr_enum.strength, 1);
     sys_cm_b_and_cop(attacker, defender, [base_enum.f_same], {
       a: part_enum.anal,
@@ -224,7 +224,7 @@ module.exports = (handlers) => {
     }
     add_juel(
       defender,
-      '痛苦',
+      11,
       base_emotion_juel /
         ((era.get(`talent:${defender}:喜欢痛苦`) + 1) *
           Math.max(era.get(`talent:${defender}:淫乳`) + 1, 1)),
@@ -261,7 +261,7 @@ module.exports = (handlers) => {
     }
     add_juel(
       defender,
-      '痛苦',
+      11,
       (base_emotion_juel * 3) /
         ((era.get(`talent:${defender}:喜欢痛苦`) + 1) *
           Math.max(era.get(`talent:${defender}:淫乳`) + 1, 1) *
@@ -280,8 +280,8 @@ module.exports = (handlers) => {
       new EroParticipant(attacker, part_enum.breast),
     );
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 5);
-    add_juel(defender, '羞耻', base_emotion_juel / 2);
-    add_juel(attacker, '顺从', base_emotion_juel);
+    add_juel(defender, 13, base_emotion_juel / 2);
+    add_juel(attacker, 10, base_emotion_juel);
     add_attr_exp(defender, attr_enum.strength, 1);
     sys_cm_b_and_cop(attacker, defender, [base_enum.same, base_enum.s_tri], {
       a: part_enum.breast,
@@ -318,7 +318,7 @@ module.exports = (handlers) => {
     }
     add_juel(
       defender,
-      '痛苦',
+      11,
       (base_emotion_juel * 4) /
         ((era.get(`talent:${defender}:喜欢痛苦`) + 1) *
           Math.max(era.get(`talent:${defender}:淫口`) + 1, 1) *
@@ -360,7 +360,7 @@ module.exports = (handlers) => {
     }
     add_juel(
       defender,
-      '痛苦',
+      11,
       (base_emotion_juel * 6) /
         ((era.get(`talent:${defender}:喜欢痛苦`) + 1) *
           Math.max(era.get(`talent:${defender}:淫口`) + 1, 1) *
@@ -401,12 +401,12 @@ module.exports = (handlers) => {
     }
     add_juel(
       defender,
-      '羞耻',
+      13,
       base_emotion_juel / ((era.get(`talent:${defender}:喜欢痛苦`) + 1) * 2),
     );
     add_juel(
       defender,
-      '痛苦',
+      11,
       base_emotion_juel / ((era.get(`talent:${defender}:喜欢痛苦`) + 1) * 2),
     );
     sys_cm_b_and_cop(attacker, defender, [base_enum.same, base_enum.diff], {
@@ -429,8 +429,8 @@ module.exports = (handlers) => {
       new EroParticipant(attacker, part_enum.mouth, -0.5),
     );
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 5);
-    add_juel(defender, '羞耻', base_emotion_juel / 2);
-    add_juel(attacker, '顺从', base_emotion_juel);
+    add_juel(defender, 13, base_emotion_juel / 2);
+    add_juel(attacker, 10, base_emotion_juel);
     add_attr_exp(defender, attr_enum.strength, 1);
     sys_cm_b_and_cop(attacker, defender, [base_enum.same, base_enum.s_tri], {
       a: part_enum.mouth,
@@ -464,7 +464,7 @@ module.exports = (handlers) => {
     }
     add_juel(
       defender,
-      '羞耻',
+      13,
       base_emotion_juel / ((era.get(`talent:${defender}:淫核`) === 2) + 1),
     );
     add_attr_exp(attacker, attr_enum.speed, 0.8);
@@ -484,8 +484,8 @@ module.exports = (handlers) => {
       new EroParticipant(attacker, part_enum.clitoris),
     );
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 5);
-    add_juel(defender, '羞耻', base_emotion_juel / 2);
-    add_juel(attacker, '顺从', base_emotion_juel);
+    add_juel(defender, 13, base_emotion_juel / 2);
+    add_juel(attacker, 10, base_emotion_juel);
     add_attr_exp(attacker, attr_enum.speed, 0.8);
     add_attr_exp(defender, attr_enum.strength, 0.8);
     sys_change_motion_by_base(attacker, defender, [base_enum.b_foot]);

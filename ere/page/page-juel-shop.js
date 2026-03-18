@@ -45,7 +45,7 @@ async function shop_result(cid, change, result_type) {
   switch (result_type) {
     case shop_result_type_enum.hate:
       sys_like_chara(cid, 0, -10 * change * (1 + era.get(`mark:${cid}:反抗`)));
-      add_jewel_reward(cid, '反感', 100 * change);
+      add_jewel_reward(cid, 14, 100 * change);
       break;
     case shop_result_type_enum.pleasure:
       sys_like_chara(
@@ -55,7 +55,7 @@ async function shop_result(cid, change, result_type) {
           change *
           (1 + era.get(`mark:${cid}:淫纹`) + era.get(`mark:${cid}:欢愉`)),
       );
-      add_jewel_reward(cid, '顺从', 100 * change);
+      add_jewel_reward(cid, 10, 100 * change);
       sys_change_lust(cid, 100);
       break;
     case shop_result_type_enum.slave:
@@ -64,13 +64,13 @@ async function shop_result(cid, change, result_type) {
         0,
         (-10 * change) / (era.get(`mark:${cid}:同心`) - 1),
       );
-      add_jewel_reward(cid, '羞耻', 100 * change);
+      add_jewel_reward(cid, 13, 100 * change);
       sys_change_lust(cid, 50);
       sys_like_chara(cid, 0, -50);
       break;
     case shop_result_type_enum.lover:
       sys_like_chara(cid, 0, -50);
-      add_jewel_reward(cid, ['羞耻', '反感'], new Array(2).fill(100 * change));
+      add_jewel_reward(cid, [13, 14], new Array(2).fill(100 * change));
   }
   result_type > 0 && (await era.waitAnyKey());
 }
@@ -90,7 +90,7 @@ module.exports = async (cid = era.get('flag:当前互动角色')) => {
     era.drawLine();
     era.print(date_indicator());
     era.drawLine({
-      content: i18n().jewel_shop.jewel_header.replace(
+      content: i18n().jewel_shop.jewel_header_template.replace(
         '%NAME%',
         chara.full_name,
       ),
@@ -152,7 +152,7 @@ module.exports = async (cid = era.get('flag:当前互动角色')) => {
     era.printMultiColumns(buffer);
     if (page_pointer.tab === 0) {
       era.drawLine({
-        content: i18n().jewel_shop.abl_header.replace(
+        content: i18n().jewel_shop.abl_header_template.replace(
           '%NAME%',
           chara.full_name,
         ),
@@ -232,7 +232,7 @@ module.exports = async (cid = era.get('flag:当前互动角色')) => {
       }
     } else if (page_pointer.tab === 1) {
       era.drawLine({
-        content: i18n().jewel_shop.talent_header.replace(
+        content: i18n().jewel_shop.talent_header_template.replace(
           '%NAME%',
           chara.full_name,
         ),

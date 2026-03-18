@@ -309,7 +309,7 @@ module.exports = class extends CustomizedEro {
         }
         era.println();
         if (ret[0] === 1) {
-          add_jewel_reward(0, '顺从', 1000);
+          add_jewel_reward(0, 10, 1000);
           sys_like_chara(
             father.id,
             0,
@@ -317,7 +317,7 @@ module.exports = class extends CustomizedEro {
             unexpected_pregnant !== unexpected_pregnant_enum.mother_sleep,
           );
         } else {
-          add_jewel_reward(0, '受虐快感', 200);
+          add_jewel_reward(0, 8, 200);
           sys_like_chara(
             father.id,
             0,

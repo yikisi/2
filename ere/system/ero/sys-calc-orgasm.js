@@ -61,8 +61,8 @@ const {
   wp_coefficient,
 } = require('#/data/ero/orgasm-const');
 const {
+  part2jid,
   part_enum,
-  part_names,
   part_talents,
   pleasure_list,
 } = require('#/data/ero/part-const');
@@ -73,6 +73,8 @@ const { ero_hooks } = require('#/data/event/ero-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { get_breast_cup } = require('#/data/info-generator');
 const { attr_enum } = require('#/data/train-const');
+
+const { i18n } = require('#/i18n/selector');
 
 /** @type {function(number):CustomizedEro} */
 let get_custom_ero;
@@ -100,7 +102,7 @@ async function sys_calc_orgasm(shown, ...ids) {
     let lost_lust = 0;
     for (let i = 0; i < orgasm_check_list.length; ++i) {
       const part = orgasm_check_list[i];
-      const p_name = part_names[part];
+      const pname = i18n('zh-CN').tb_param[part2jid[part]];
       const { curr, max, old } = update_palam(cid, part, shown);
       if (era.get(`tcvar:${cid}:高潮抑制`) > 0) {
         continue;
@@ -117,11 +119,11 @@ async function sys_calc_orgasm(shown, ...ids) {
         i_cum = true;
         const times = Math.min(Math.floor(curr / max), 6);
         let tmp_cost = {};
-        era.set(`palam:${cid}:${p_name}快感`, curr % max);
-        let abl = era.get(`abl:${cid}:${p_name}耐性`) || 0;
+        era.set(`palam:${cid}:${pname}快感`, curr % max);
+        let abl = era.get(`abl:${cid}:${pname}耐性`) || 0;
         if (part >= part_enum.sadism) {
           // 施虐和受虐属于精神高潮，只能造成普通高潮
-          era.set(`nowex:${cid}:${p_name}高潮`, times);
+          era.set(`nowex:${cid}:${pname}高潮`, times);
           Object.assign(tmp_cost, orgasm_cost.spirit);
           if (part === part_enum.masochism) {
             abl +=
@@ -131,10 +133,10 @@ async function sys_calc_orgasm(shown, ...ids) {
         } else {
           if (!sys_check_awake(cid)) {
             // 昏睡时计算无自觉高潮
-            era.set(`nowex:${cid}:无自觉${p_name}高潮`, times);
+            era.set(`nowex:${cid}:无自觉${pname}高潮`, times);
           } else {
             // 清醒时计算普通高潮
-            era.set(`nowex:${cid}:${p_name}高潮`, times);
+            era.set(`nowex:${cid}:${pname}高潮`, times);
           }
           Object.assign(tmp_cost, orgasm_cost.body);
           // 分泌液计算
@@ -314,16 +316,16 @@ async function sys_calc_orgasm(shown, ...ids) {
           // 寸止时不计算高潮次数
           // 不管肉棒高潮了几次，只射一次精
           if (part === part_enum.penis) {
-            era.add(`exp:${cid}:${p_name}高潮次数`, 1);
+            era.add(`exp:${cid}:${pname}高潮次数`, 1);
             limited_count += 1;
           } else {
-            era.add(`exp:${cid}:${p_name}高潮次数`, times);
+            era.add(`exp:${cid}:${pname}高潮次数`, times);
             limited_count += times;
           }
           orgasm_count += times;
           if (i >= orgasm_check_list.length - 2) {
             // 主要部位高潮额外获得20%的因子奖励
-            add_juel(cid, `${p_name}快感`, (palam_from_orgasm * times) / 5);
+            add_juel(cid, part2jid[part], (palam_from_orgasm * times) / 5);
           }
           update_palam_from_main_orgasm(cid, part, times, inmon);
           orgasm_part_count++;
@@ -794,12 +796,12 @@ async function sys_calc_orgasm(shown, ...ids) {
         1 - juel_reward + juel_reward * orgasm_part_count;
       add_juel(
         cid,
-        '顺从',
+        10,
         base_orgasm_juel_reward * orgasm_count * multi_part_reward,
       );
       add_juel(
         cid,
-        '羞耻',
+        13,
         base_orgasm_juel_reward * orgasm_count * multi_part_reward,
       );
       sys_change_lust(cid, -lost_lust * orgasm_count * multi_part_reward);
@@ -823,7 +825,7 @@ async function sys_calc_orgasm(shown, ...ids) {
       }
       // 宝珠结算
       pleasure_list.forEach((part) => {
-        const part_name = part_names[part];
+        const part_name = i18n('zh-CN').tb_param[part2jid[part]];
         let part_times =
           era.get(`nowex:${cid}:${part_name}高潮`) +
           (era.get(`nowex:${cid}:无自觉${part_name}高潮`) || 0);
@@ -838,13 +840,13 @@ async function sys_calc_orgasm(shown, ...ids) {
             part_times *
             Math.pow(1 + juel_reward, part_times - 1) *
             multi_part_reward;
-          add_juel(cid, `${part_name}快感`, juels);
+          add_juel(cid, part2jid[part], juels);
           const touched_part = era.get(`tcvar:${cid}:${part_name}接触部位`);
           // 沉睡的人会减少75%的对方高潮因子奖励
           if (-1 !== touched_part && touched_part.part !== part_enum.item) {
             add_juel(
               touched_part.owner,
-              `${part_name}快感`,
+              part2jid[part],
               (juels * (2 - attack_juel_reward)) /
                 (1 +
                   3 *

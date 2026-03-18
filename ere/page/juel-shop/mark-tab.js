@@ -143,7 +143,10 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
   const price_dict = [];
   if (chara.id > 0) {
     era.drawLine({
-      content: i18n().jewel_shop.mark_header.replace('%NAME%', chara.full_name),
+      content: i18n().jewel_shop.mark_header_template.replace(
+        '%NAME%',
+        chara.full_name,
+      ),
     });
     if (!l_sex) {
       buffer.push(get_mark_cols(chara.id, mark_enum.pleasure, l_pleasure));
@@ -269,7 +272,7 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
   const slave = inmon.slave;
   if (l_sex > 0 || (l_pleasure > 0 && l_meek > 0)) {
     era.drawLine({
-      content: i18n().jewel_shop.inmon_header.replace(
+      content: i18n().jewel_shop.inmon_header_template.replace(
         '%NAME%',
         chara.full_name,
       ),

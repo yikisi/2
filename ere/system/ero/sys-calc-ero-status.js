@@ -15,8 +15,8 @@ const {
 } = require('#/data/ero/orgasm-const');
 const {
   motion_enum,
+  part2jid,
   part_enum,
-  part_names,
   towards_enum,
   up_enum,
 } = require('#/data/ero/part-const');
@@ -24,6 +24,8 @@ const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const { stain_enum } = require('#/data/ero/stain-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
+
+const { i18n } = require('#/i18n/selector');
 
 /**
  * @param {number} cid
@@ -68,7 +70,7 @@ const reversed_no_lubricant_stains = ~(
  */
 function check_lubrication(cid, part) {
   return (
-    (era.get(`stain:${cid}:${part_names[part]}`) &
+    (era.get(`stain:${cid}:${i18n('zh-CN').tb_param[part2jid[part]]}`) &
       reversed_no_lubricant_stains) >
     0
   );

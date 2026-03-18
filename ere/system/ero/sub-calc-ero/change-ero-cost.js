@@ -14,8 +14,10 @@ const {
   wound_percentage,
 } = require('#/data/ero/battle-const');
 const { base_emotion_juel } = require('#/data/ero/juel-const');
-const { part_enum, part_names } = require('#/data/ero/part-const');
+const { part2jid, part_enum } = require('#/data/ero/part-const');
 const { stain_enum } = require('#/data/ero/stain-const');
+
+const { i18n } = require('#/i18n/selector');
 
 /**
  * @param {number} penis_owner
@@ -37,20 +39,22 @@ function change_ero_cost(penis_owner, hole_owner, body_part, damage) {
       hole_owner,
       body_part,
     );
+    const pname = i18n('zh-CN').tb_param[part2jid[body_part]];
     if (
-      era.get(`ex:${hole_owner}:${part_names[body_part]}撕裂`) === 0 &&
+      era.get(`ex:${hole_owner}:${pname}撕裂`) === 0 &&
       (expansion > 1 || (!lubrication && Math.random() < wound_percentage))
     ) {
       // 扩张后仍然过大，撕裂
       set_stain(hole_owner, body_part, stain_enum.wound);
       const pain = base_emotion_juel * Math.max(expansion * 2 - 1, 1);
-      add_juel(hole_owner, '痛苦', pain * (0.3 * expansion + 0.4));
-      add_juel(penis_owner, '痛苦', pain * (0.2 * expansion + 0.1));
-      era.set(`nowex:${hole_owner}:${part_names[body_part]}撕裂`, 1);
-    } else if (era.get(`ex:${hole_owner}:${part_names[body_part]}撕裂`) > 0) {
+      // JEWELNAME:11 = 痛苦
+      add_juel(hole_owner, 11, pain * (0.3 * expansion + 0.4));
+      add_juel(penis_owner, 11, pain * (0.2 * expansion + 0.1));
+      era.set(`nowex:${hole_owner}:${pname}撕裂`, 1);
+    } else if (era.get(`ex:${hole_owner}:${pname}撕裂`) > 0) {
       const pain = base_emotion_juel * Math.max(expansion * 2, 1);
-      add_juel(hole_owner, '痛苦', pain * (0.2 * expansion + 0.7));
-      add_juel(penis_owner, '痛苦', pain * (0.1 * expansion + 0.1));
+      add_juel(hole_owner, 11, pain * (0.2 * expansion + 0.7));
+      add_juel(penis_owner, 11, pain * (0.1 * expansion + 0.1));
     }
     if (expansion > 1) {
       expansion = 1 - expansion;
@@ -58,8 +62,9 @@ function change_ero_cost(penis_owner, hole_owner, body_part, damage) {
     coefficient *= 1 + expansion_coefficient[body_part] * expansion;
   }
   if (!lubrication) {
-    add_juel(penis_owner, '痛苦', base_emotion_juel);
-    add_juel(hole_owner, '痛苦', base_emotion_juel);
+    // JEWELNAME:11 = 痛苦
+    add_juel(penis_owner, 11, base_emotion_juel);
+    add_juel(hole_owner, 11, base_emotion_juel);
   }
   return {
     attacker: damage.attacker * coefficient,

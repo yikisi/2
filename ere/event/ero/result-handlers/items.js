@@ -41,7 +41,7 @@ module.exports = (handlers) => {
     !attacker && era.add('item:润滑液', -1);
     set_stain(extra_flag.user, extra_flag.part, stain_enum.lubricant);
     add_meek_or_hate(extra_flag.user, extra_flag.check, (c) => c / 10);
-    add_juel(extra_flag.user, '羞耻', base_emotion_juel / 2);
+    add_juel(extra_flag.user, 13, base_emotion_juel / 2);
   };
 
   /**
@@ -146,7 +146,7 @@ module.exports = (handlers) => {
     }
     update_ero_status(extra_flag.user);
     add_meek_or_hate(extra_flag.user, extra_flag.check, (c) => c / 10);
-    add_juel(extra_flag.user, '羞耻', base_emotion_juel);
+    add_juel(extra_flag.user, 13, base_emotion_juel);
   };
 
   handlers[ero_hooks.condom] = (attacker, defender) => {
@@ -155,7 +155,7 @@ module.exports = (handlers) => {
     era.set(`tcvar:${attacker}:避孕套`, 1);
     !attacker && era.add('item:避孕套', -1);
     era.get(`status:${defender}:危险期`) &&
-      add_juel(defender, '顺从', base_emotion_juel);
+      add_juel(defender, 10, base_emotion_juel);
   };
 
   handlers[ero_hooks.other_condom] = (attacker, defender) => {
@@ -175,7 +175,7 @@ module.exports = (handlers) => {
     if (extra_flag.item === item_enum.mirror) {
       era.set('tflag:全身镜', 1);
       update_juel_buff(...get_characters_in_train());
-      add_juel(defender, '羞耻', base_emotion_juel);
+      add_juel(defender, 13, base_emotion_juel);
     } else if (extra_flag.part !== 99) {
       sys_do_sex(
         new EroParticipant(extra_flag.owner ?? attacker, part_enum.item),
@@ -188,7 +188,7 @@ module.exports = (handlers) => {
       );
       add_juel(
         defender,
-        '羞耻',
+        13,
         base_emotion_juel /
           ((2 + era.get(`talent:${defender}:工口意愿`)) *
             (1 +

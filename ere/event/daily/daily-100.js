@@ -629,10 +629,10 @@ module.exports = class extends CustomizedDaily {
               true,
             );
             sys_change_motivation(100, 1);
-            add_jewel_reward(100, '受虐快感', 100);
+            add_jewel_reward(100, 8, 100);
             era.println();
             get_attr_and_print_in_event(0, [0, 0, 10], 0, undefined, true);
-            add_jewel_reward(0, '施虐快感', 100);
+            add_jewel_reward(0, 7, 100);
             await era.waitAnyKey();
           } else {
             await era.printAndWait('还没说完，自己便已被抱住。');
@@ -658,7 +658,7 @@ module.exports = class extends CustomizedDaily {
             await era.printAndWait('看来今天夜里，注定了是一场殊死的决斗了。');
             era.println();
             get_attr_and_print_in_event(100, [0, 0, 10], 0, undefined, true);
-            add_jewel_reward(100, '施虐快感', 100);
+            add_jewel_reward(100, 7, 100);
             era.println();
             get_attr_and_print_in_event(0, [0, 10], 0, [-100]);
             await era.waitAnyKey();

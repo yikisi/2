@@ -72,33 +72,33 @@ module.exports = (handlers) => {
 
   handlers[ero_hooks.relax] = (_, defender, hook) => {
     if (hook.arg === true) {
-      add_juel(defender, '恐惧', base_emotion_juel);
+      add_juel(defender, 12, base_emotion_juel);
     }
   };
 
   handlers[ero_hooks.lure] = (attacker, defender, hook) => {
     era.add(`nowex:${attacker}:精力消耗`, 20);
     if (!defender) {
-      add_juel(defender, '顺从', base_emotion_juel);
+      add_juel(defender, 10, base_emotion_juel);
     } else {
       const love = era.get(`love:${defender}`);
       if (love < 50) {
         const lust = era.get(`tcvar:${defender}:发情`);
-        add_juel(defender, '反感', base_emotion_juel / (1 + lust));
+        add_juel(defender, 14, base_emotion_juel / (1 + lust));
         if (lust) {
-          add_juel(defender, '顺从', base_emotion_juel / 4);
+          add_juel(defender, 10, base_emotion_juel / 4);
         }
       } else if (love < 75) {
-        add_juel(defender, '顺从', base_emotion_juel / 4);
+        add_juel(defender, 10, base_emotion_juel / 4);
       } else if (love < 90) {
-        add_juel(defender, '顺从', base_emotion_juel / 2);
+        add_juel(defender, 10, base_emotion_juel / 2);
       } else {
-        add_juel(defender, '顺从', base_emotion_juel);
+        add_juel(defender, 10, base_emotion_juel);
       }
     }
     if (hook.arg) {
       era.set(`tcvar:${defender}:发情`, true);
-      add_juel(defender, '反感', -base_emotion_juel / 2);
+      add_juel(defender, 14, -base_emotion_juel / 2);
     }
   };
 
@@ -108,16 +108,16 @@ module.exports = (handlers) => {
       if (era.get('tflag:强奸') !== attacker) {
         sys_like_chara(defender, 0, 2);
       } else {
-        add_juel(defender, '恐惧', base_emotion_juel / 5);
+        add_juel(defender, 12, base_emotion_juel / 5);
       }
     }
-    add_juel(defender, '顺从', base_emotion_juel / 5);
+    add_juel(defender, 10, base_emotion_juel / 5);
   };
 
   handlers[ero_hooks.switch] = (a, d) => {
     clean_s_parts(a, d);
     change_ero_master(d);
-    add_juel(d, '顺从', base_emotion_juel);
+    add_juel(d, 10, base_emotion_juel);
   };
 
   /**
@@ -131,11 +131,11 @@ module.exports = (handlers) => {
     if (s_flag) {
       clean_s_parts(a, d);
       change_ero_master(a);
-      add_juel(d, '恐惧', base_emotion_juel);
-      add_juel(d, '顺从', base_emotion_juel / 2);
+      add_juel(d, 12, base_emotion_juel);
+      add_juel(d, 10, base_emotion_juel / 2);
     } else {
-      add_juel(a, '恐惧', base_emotion_juel / 4);
-      add_juel(a, '顺从', base_emotion_juel / 2);
+      add_juel(a, 12, base_emotion_juel / 4);
+      add_juel(a, 10, base_emotion_juel / 2);
     }
   };
 
@@ -150,9 +150,9 @@ module.exports = (handlers) => {
       return 0;
     });
     if (r_stains[1]) {
-      add_juel(defender, '顺从', base_emotion_juel / 2);
+      add_juel(defender, 10, base_emotion_juel / 2);
     } else if (!r_stains[0]) {
-      add_juel(defender, '反感', base_emotion_juel * 0.5);
+      add_juel(defender, 14, base_emotion_juel * 0.5);
     }
   };
 
@@ -197,7 +197,7 @@ module.exports = (handlers) => {
     });
     add_juel(
       defender,
-      '顺从',
+      10,
       r_stains[1] > 0
         ? (base_emotion_juel * (Math.min(r_stains[1], 6) + 4)) / 5
         : base_emotion_juel / 2,

@@ -4,10 +4,7 @@
  */
 const era = require('#/era-electron');
 
-const {
-  sys_change_attr_and_print,
-  sys_change_motivation,
-} = require('#/system/sys-calc-base-cflag');
+const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
 const {
   sys_get_callname,
   sys_get_colored_callname,
@@ -19,27 +16,13 @@ const { sys_change_money } = require('#/system/sys-calc-flag');
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
 const CustomizedDaily = require('#/event/daily/daily-common');
+const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const event_hooks = require('#/data/event/event-hooks');
-const { attr_enum } = require('#/data/train-const');
-
-/**
- * @param {number} cid
- * @param {number} attr
- * @param {number} val
- * @returns {boolean}
- */
-function print_attr_change(cid, attr, val) {
-  const buffer = sys_change_attr_and_print(cid, attr, val);
-  if (buffer.length > 0) {
-    era.print([get_chara_talk(cid).get_colored_name(), ' 的 ', ...buffer]);
-    return true;
-  }
-}
 
 module.exports = class extends CustomizedDaily {
   async run(hook, extra_flag, event_object) {
@@ -633,10 +616,10 @@ module.exports = class extends CustomizedDaily {
             }
             era.println();
             wait_flag =
-              print_attr_change(24, attr_enum.hp, get_random_value(0, 50)) ||
-              wait_flag; //角色体力加0-50
-            wait_flag =
-              sys_like_chara(24, 0, get_random_value(0, 10)) || wait_flag; //好感上升随机0-10
+              all_reward_in_event(24, {
+                base: [get_random_value(0, 50)], //角色体力加0-50
+                relation: get_random_value(0, 10), //好感上升随机0-10
+              }) || wait_flag;
             break;
           case 2: //约会
             if (Math.random() < 0.5) {
@@ -725,16 +708,15 @@ module.exports = class extends CustomizedDaily {
                 ' 猜到了结果，但似乎也有好好的享受到乐趣？',
               ]);
             }
-            wait_flag = print_attr_change(
-              24,
-              attr_enum.hp,
-              get_random_value(0, 50),
-            );
             wait_flag =
-              print_attr_change(0, attr_enum.hp, get_random_value(0, 50)) ||
-              wait_flag; //玩家体力随机回复0-30
+              all_reward_in_event(24, {
+                base: [get_random_value(0, 50)], // 角色体力加0-50
+                relation: get_random_value(0, 10), // 好感上升随机0-10
+              }) || wait_flag;
             wait_flag =
-              sys_like_chara(24, 0, get_random_value(0, 10)) || wait_flag; //好感上升随机0-10
+              all_reward_in_event(0, {
+                base: [get_random_value(0, 30)], // 玩家体力随机回复0-30
+              }) || wait_flag;
             break;
         }
         break;

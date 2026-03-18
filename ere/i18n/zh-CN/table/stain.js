@@ -1,4 +1,6 @@
 class I18nStain {
+  template = '<%STAIN%>';
+
   n_saliva = '唾液';
   n_chocolate = '巧克力';
   n_milk = '母乳';

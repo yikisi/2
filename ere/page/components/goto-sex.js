@@ -387,9 +387,11 @@ async function goto_sex(cid, sex_loc) {
             era.add(`status:${cid}:疲惫`, 2 + (dice < 0.05));
           }
         } else if (era.get('tflag:强奸') === 0) {
-          add_juel(cid, '痛苦', 6000);
-          add_juel(cid, '恐惧', 4800);
-          add_juel(cid, '反感', 1500);
+          // JEWELNAME:11 - 12 = 痛苦 - 恐惧
+          add_juel(cid, 11, 6000);
+          add_juel(cid, 12, 4800);
+          // JEWELANEM:14 = 反感
+          add_juel(cid, 14, 1500);
           update_juels(true, cid);
           await update_marks(true, cid);
           if (dice < 0.95) {

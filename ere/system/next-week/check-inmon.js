@@ -48,11 +48,12 @@ function check_inmon(in_team_list) {
         const buffer = [];
         milk_list[1 - i].forEach((id) => {
           if (buffer.length > 0) {
-            buffer.push('，');
+            buffer.push(i18n().ui_comma);
           }
           buffer.push(get_chara_talk(id).get_colored_name());
         });
-        buffer[buffer.findLastIndex((e) => e === '，')] = ' 和 ';
+        buffer[buffer.findLastIndex((e) => e === i18n().ui_comma)] =
+          i18n().ui_conjunction;
         era.print([
           '【',
           di18n.tb_mark.s_options[slavery_enum.milk],

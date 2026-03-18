@@ -46,9 +46,9 @@ const { tequip_parts } = require('#/data/ero/item-const');
 const { base_emotion_juel } = require('#/data/ero/juel-const');
 const { lust_palam_border } = require('#/data/ero/orgasm-const');
 const {
+  part2jid,
   part_enum,
   part_gifts,
-  part_names,
   part_touch,
   pleasure_list,
 } = require('#/data/ero/part-const');
@@ -57,6 +57,7 @@ const { stain_enum } = require('#/data/ero/stain-const');
 const { condition_type, default_tags } = require('#/data/event/ero-hook-tag');
 const { ero_hooks, ero_tagged_hooks } = require('#/data/event/ero-hooks');
 
+const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 /** @param {boolean} shown */
@@ -76,11 +77,11 @@ async function next_turn(shown) {
     era.set(`tcvar:${cid}:刚刚高潮`, false);
     if (era.get(`ex:${cid}:阴道撕裂`)) {
       set_stain(cid, part_enum.virgin, stain_enum.wound);
-      add_juel(cid, '痛苦', base_emotion_juel);
+      add_juel(cid, 11, base_emotion_juel);
     }
     if (era.get(`ex:${cid}:肛门撕裂`)) {
       set_stain(cid, part_enum.anal, stain_enum.wound);
-      add_juel(cid, '痛苦', base_emotion_juel);
+      add_juel(cid, 11, base_emotion_juel);
     }
     if (era.get(`cflag:${cid}:阴道尺寸`) && !get_penis_size(cid)) {
       era.set(
@@ -120,18 +121,18 @@ async function next_turn(shown) {
   }
   await check_orgasm(
     shown,
-    ...train_list.map((chara_id) => {
-      const inmon = CharaInmon.get(chara_id);
-      if (era.get(`tcvar:${chara_id}:高潮抑制`) > 0) {
-        era.add(`tcvar:${chara_id}:高潮抑制`, -1);
+    ...train_list.map((cid) => {
+      const inmon = CharaInmon.get(cid);
+      if (era.get(`tcvar:${cid}:高潮抑制`) > 0) {
+        era.add(`tcvar:${cid}:高潮抑制`, -1);
       } else if (inmon.on(plugin_enum.org_c1)) {
-        era.set(`tcvar:${chara_id}:高潮抑制`, 1);
+        era.set(`tcvar:${cid}:高潮抑制`, 1);
       } else if (inmon.on(plugin_enum.org_c2)) {
-        era.set(`tcvar:${chara_id}:高潮抑制`, 2);
+        era.set(`tcvar:${cid}:高潮抑制`, 2);
       } else if (inmon.on(plugin_enum.org_c3)) {
-        era.set(`tcvar:${chara_id}:高潮抑制`, 4);
+        era.set(`tcvar:${cid}:高潮抑制`, 4);
       }
-      return chara_id;
+      return cid;
     }),
   );
   if (shown) {
@@ -149,12 +150,12 @@ async function next_turn(shown) {
       `tcvar:${cid}:接近高潮`,
       pleasure_list
         .map((part) => {
+          const pname = i18n('zh-CN').tb_param[part2jid[part]];
           return {
             k: part,
             v:
-              era.get(`palam:${cid}:${part_names[part]}快感`) >
-              era.get(`tcvar:${cid}:${part_names[part]}快感上限`) *
-                lust_palam_border,
+              era.get(`palam:${cid}:${pname}快感`) >
+              era.get(`tcvar:${cid}:${pname}快感上限`) * lust_palam_border,
           };
         })
         .filter((e) => e.v)
@@ -288,17 +289,15 @@ async function sys_handle_ero_act(command, filters, shown = true) {
     let option_flag = 1;
     while (option_flag) {
       (option_flag - 1 ? era.replaceInColRows : era.printInColRows)([
-        ...new Array(8).fill(0).map((_, i) => {
-          return {
-            accelerator: i,
-            config: {
-              buttonType: era.get(`flag:${i + 70}`) ? 'warning' : 'info',
-              width: 8,
-            },
-            content: era.get(`flagname:${i + 70}`).toUpperCase(),
-            type: 'button',
-          };
-        }),
+        ...di18n.sex.setting_options.map((n, i) => ({
+          accelerator: i,
+          config: {
+            buttonType: era.get(`flag:${i + 70}`) ? 'warning' : 'info',
+            width: 8,
+          },
+          content: n,
+          type: 'button',
+        })),
         { accelerator: 999, content: i18n().ui_back, type: 'button' },
       ]);
       option_flag = 2;
@@ -351,10 +350,9 @@ async function sys_handle_ero_act(command, filters, shown = true) {
   if (master) {
     if (check_want_to_escape(master)) {
       if (shown) {
-        await era.printAndWait([
-          get_chara_talk(master).get_colored_name(),
-          ' 逃离了',
-        ]);
+        await era.printAndWait(
+          i18n().timon.ero_sys.get_escape_info(get_chara_talk(master)),
+        );
       }
       era.set(`tcvar:${master}:逃跑`, 1);
     }

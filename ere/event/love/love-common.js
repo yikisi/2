@@ -128,7 +128,7 @@ class CustomizedLove extends CustomizedEvent {
       await print_title_with_kojo(i18n().timon.love, '99-2', chara, me);
       era.set('flag:5', this.id);
       era.println();
-      add_jewel_reward(this.id, '顺从', 300);
+      add_jewel_reward(this.id, 10, 300);
       await era.waitAnyKey();
     }
   }

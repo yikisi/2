@@ -1,8 +1,14 @@
 /**
  * @file 调教 -系统提示
+ * @author イーウィヤ
  * @author 黑奴队长
  */
-const { input, printAndWait, printButton } = require('#/era-electron');
+const { get, input, printAndWait, printButton } = require('#/era-electron');
+
+const { buff_colors } = require('#/data/color-const');
+const { item_enum } = require('#/data/ero/item-const');
+const { part_enum } = require('#/data/ero/part-const');
+const era = require('#/era-electron');
 
 module.exports = {
   /**
@@ -390,6 +396,234 @@ module.exports = {
     item,
   ],
 
+  /** @param {CharaTalk} chara */
+  get_change_master_info: (chara) => [
+    chara.get_colored_name(),
+    ' 取得了主导权',
+  ],
+  /** @param {CharaTalk} chara */
+  get_escape_info: (chara) => [chara.get_colored_name(), ' 逃离了'],
+
+  orgasm: '高潮了',
+  orgasm_template: '发生了 %TIME% 重高潮',
+
+  /**
+   * 多重高潮报告
+   * @param {CharaTalk} chara 高潮的角色
+   * @param {PrintedSpan} orgasm 多重高潮名
+   * @returns {TextContent}
+   */
+  get_chara_total_orgasm: (chara, orgasm) => [
+    chara.get_colored_name(),
+    ' 发生了 ',
+    orgasm,
+  ],
+  /**
+   * 部位高潮报告
+   * @param {CharaTalk} chara 高潮的角色
+   * @param {PrintedSpan} part 高潮的部位
+   * @param {PrintedSpan} orgasm 高潮信息
+   * @returns {TextContent}
+   */
+  get_chara_part_orgasm: (chara, part, orgasm) => [
+    chara.get_colored_name(),
+    ' 的 ',
+    part,
+    ' ',
+    orgasm,
+  ],
+  /**
+   * 精神高潮报告
+   * @param {CharaTalk} chara 高潮的角色
+   * @param {PrintedSpan} cause 高潮的原因（施虐或受虐）
+   * @param {PrintedSpan} orgasm 高潮信息
+   * @returns {TextContent}
+   */
+  get_chara_spirit_orgasm: (chara, cause, orgasm) => [
+    chara.get_colored_name(),
+    ' 因 ',
+    cause,
+    ' ',
+    orgasm,
+  ],
+  /**
+   * 液体分泌报告
+   * @param {CharaTalk} chara 分泌液体的角色
+   * @param {PrintedSpan} part 分泌液体的部位
+   * @param {[]} change 分泌信息
+   * @returns {TextContent}
+   */
+  get_chara_have_liquid: (chara, part, change) => [
+    chara.get_colored_name(),
+    ' 的 ',
+    part,
+    ' ',
+    ...change,
+  ],
+  liquid_amount_template: '%AMOUNT%ml',
+  /**
+   * 颜射报告
+   * @param {CharaTalk} chara 射精的角色
+   * @param {[]} targets 颜射的目标
+   * @param {PrintedSpan} semen 射精量
+   * @returns {TextContent}
+   */
+  get_chara_cum_on_face: (chara, targets, semen) => [
+    chara.get_colored_name(),
+    ' 对着 ',
+    ...targets,
+    ' 的脸庞射出了 ',
+    semen,
+    ' 精液',
+  ],
+  /**
+   * @param {CharaTalk} chara 射精的角色
+   * @param {PrintedSpan} semen 射精量
+   * @returns {TextContent}
+   */
+  get_chara_cum_in_condom: (chara, semen) => [
+    chara.get_colored_name(),
+    ' 在避孕套中射出了 ',
+    semen,
+    ' 精液',
+  ],
+  /**
+   * @param {CharaTalk} chara 射精的角色
+   * @param {PrintedSpan} item 飞机杯
+   * @param {PrintedSpan} semen 射精量
+   * @returns {TextContent}
+   */
+  get_chara_cum_in_artificial_vagina: (chara, item, semen) => [
+    chara.get_colored_name(),
+    ' 在 ',
+    item,
+    ' 中射出了 ',
+    semen,
+    ' 精液',
+  ],
+  /**
+   * @param {CharaTalk} chara 射精的角色
+   * @param {CharaTalk} target 被射的角色
+   * @param {string} part 射精位置
+   * @param {PrintedSpan} semen 射精量
+   * @returns {TextContent}
+   */
+  get_chara_cum_in_part: (chara, target, part, semen) => [
+    chara.get_colored_name(),
+    ' 在 ',
+    target.get_colored_name(),
+    ' 的 ',
+    part,
+    ' 射出了 ',
+    semen,
+    ' 精液',
+  ],
+  /**
+   * @param {CharaTalk} chara 射精的角色
+   * @param {PrintedSpan} semen 射精量
+   * @returns {TextContent}
+   */
+  get_chara_cum: (chara, semen) => [
+    chara.get_colored_name(),
+    ' 射出了 ',
+    semen,
+    ' 精液',
+  ],
+  // 射精位置
+  cum_in_anal: '屁穴中',
+  cum_in_body: '身体上',
+  cum_in_breast: '乳穴中',
+  cum_in_clitoris: '阴核上',
+  cum_in_foot: '足穴中',
+  cum_in_hand: '手中',
+  cum_in_mouth: '口穴中',
+  cum_in_penis: '肉棒上',
+  cum_in_virgin: '小穴中',
+  /**
+   * 获取母乳分泌报告
+   * @param {number} cid 分泌母乳的角色
+   * @param {[]} targets 分泌接触目标
+   * @param {number} part 分泌接触部位
+   * @param {PrintedSpan} amount 分泌量
+   * @param {boolean} is_orgasm 是否高潮（取决于是喷出来还是流出来）
+   */
+  get_milk_info(cid, targets, part, amount, is_orgasm) {
+    const actions = [];
+    switch (part) {
+      case part_enum.mouth:
+        actions.push('在 ', ...targets, ' 的口中');
+        break;
+      case part_enum.hand:
+        actions.push('在 ', ...targets, ' 的指间');
+        break;
+      case item_enum.milk_pump:
+        actions.push(
+          '在 ',
+          { content: '榨乳器', color: buff_colors[2] },
+          ' 中',
+        );
+    }
+    if (get(`ex:${cid}:喷奶阻碍`) > 0) {
+      actions.push('猛然喷出了 ');
+    } else if (is_orgasm) {
+      actions.push('喷出了 ');
+    } else {
+      switch (part) {
+        case part_enum.mouth:
+        case part_enum.hand:
+        case part_enum.item:
+          actions.push('泌出了 ');
+          break;
+        default:
+          actions.push('流出了 ');
+      }
+    }
+    actions.push(' ', amount, ' 乳汁');
+    return actions;
+  },
+  /**
+   * 获取爱液分泌报告
+   * @param {number} cid 分泌爱液的角色
+   * @param {[]} targets 爱液接触目标
+   * @param {number} part 爱液接触部位，100 - 非接触口，101 - 非接触阴茎
+   * @param {PrintedSpan} amount 分泌量
+   */
+  get_squirt_info(cid, targets, part, amount) {
+    const actions = [];
+    switch (part) {
+      case part_enum.mouth:
+        actions.push('向 ', ...targets, ' 的口中');
+        break;
+      case part_enum.hand:
+        actions.push('在 ', ...targets, ' 的指间');
+        break;
+      case part_enum.foot:
+        actions.push('在 ', ...targets, ' 的脚下');
+        break;
+      case part_enum.penis:
+        return ['将 ', amount, ' 爱液浇在了 ', ...targets, ' 的龟头上'];
+      case 100:
+        actions.push('朝 ', ...targets, ' 的嘴唇');
+        break;
+      case 101:
+        actions.push('朝 ', ...targets, ' 的肉棒');
+    }
+    if (era.get(`nowex:${cid}:潮吹`) > 0) {
+      actions.push('喷出了 ');
+    } else {
+      switch (part) {
+        case part_enum.mouth:
+        case 100:
+          actions.push('溅出了 ');
+          break;
+        default:
+          actions.push('流出了 ');
+      }
+    }
+    actions.push(' ', amount, ' 爱液');
+    return actions;
+  },
+
   /**
    * 榨乳结算
    */
@@ -417,4 +651,47 @@ module.exports = {
     you.get_colored_name(),
     '）',
   ],
+
+  /**
+   * 调教结束后的总结情报
+   * @param {CharaTalk} yaoi
+   * @param {CharaTalk} tokino
+   * @param {CharaTalk} riko
+   * @param {CharaTalk} glasse
+   * @param {CharaTalk} cocon
+   */
+  async ero_report(yaoi, tokino, riko, glasse, cocon) {
+    yaoi.say_as_unknown('发 表！高潮播报～♫');
+    tokino.say_as_unknown('以下报上这次马儿跳的结果简报～');
+    // 1% 几率理子会说不下去，让糖衣和蚕茧打气
+    if (Math.random() < 0.01) {
+      await riko.say_as_unknown_and_wait('不……不喜欢……的话……');
+      await cocon.say_as_unknown_and_wait('训练员～');
+      await glasse.say_as_unknown_and_wait('加油！训练员～加油！');
+      await riko.say_as_unknown_and_wait(
+        '……请在下次马儿跳过程中在界面的设置里开启【马跳结果显示简报】……',
+      );
+      await riko.say_as_unknown_and_wait('……哦～');
+    } else {
+      await riko.say_as_unknown_and_wait(
+        '不喜欢的话请在下次马儿跳过程中在界面的设置里开启【马跳结果显示简报】哦～',
+      );
+    }
+  },
+  // 各部位快感没有满足时的描述
+  unsatisfied_mouth: '不满足的嘴唇仍微微张开着，好似在期待着什么……',
+  unsatisfied_nipple: '不知足的莓果颤巍巍地凸起着……',
+  unsatisfied_hidden_nipple: '不知足的莓果在保护它的凹坑之外颤巍巍地凸起着……',
+  unsatisfied_body: '未被充分疼爱的身体泛着油亮的汗渍和红晕……',
+  unsatisfied_penis: '处于在极限边缘的肉棒仍渴望着出击……',
+  unsatisfied_clitoris: '完全肿起的通红豆豆妖艳而痛苦……',
+  unsatisfied_vagina: '翕动的小穴泛起阵阵热气……',
+  unsatisfied_sadism: '即将因施虐而感受的快乐仍然挥之不去……',
+  unsatisfied_sadism_zero_stamina: '施虐的梦境袭扰了逐渐静息的身体……',
+  unsatisfied_masochism: '即将因受虐而感受的快乐仍然挥之不去……',
+  unsatisfied_masochism_zero_stamina: '受虐的梦境袭扰了逐渐静息的身体……',
+
+  unsatisfied_lose_virgin_p: '但其中蕴含的洪荒之力并未能完全释放……',
+  unsatisfied_lose_virgin_v:
+    '破瓜的身体没能在初次咬下禁果的体验中尝及快乐的甜美……',
 };

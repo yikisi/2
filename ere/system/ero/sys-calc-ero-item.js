@@ -4,7 +4,7 @@ const { clean_part } = require('#/system/ero/sys-calc-ero-part');
 
 const EroParticipant = require('#/data/ero/ero-participant');
 const { item_enum, tequip_parts } = require('#/data/ero/item-const');
-const { part_enum, part_names, part_touch } = require('#/data/ero/part-const');
+const { part2jid, part_enum, part_touch } = require('#/data/ero/part-const');
 
 const { i18n } = require('#/i18n/selector');
 
@@ -52,7 +52,9 @@ module.exports = {
     return [
       ...tequip_parts.map((p) => {
         const kname =
-          typeof p === 'number' ? part_names[p] : i18n('zh-CN').tb_item[p];
+          typeof p === 'number'
+            ? i18n('zh-CN').tb_param[part2jid[p]]
+            : i18n('zh-CN').tb_item[p];
         return {
           item: era.get(`tequip:${cid}:${kname}`),
           part: p,

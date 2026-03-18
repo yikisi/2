@@ -17,7 +17,7 @@ function handle_lost_virginity(penis_owner, virgin_owner) {
     virgin_owner,
     part_enum.virgin,
   );
-  add_juel(virgin_owner, '痛苦', base_emotion_juel * (0.4 * expansion + 1.6));
+  add_juel(virgin_owner, 11, base_emotion_juel * (0.4 * expansion + 1.6));
 }
 
 module.exports = handle_lost_virginity;

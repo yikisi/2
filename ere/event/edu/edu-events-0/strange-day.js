@@ -827,7 +827,7 @@ module.exports = class extends MyPrivacyEvents {
       await tachyon.say_as_unknown_and_wait('嗷(∩∀°╭嗷∀∀嗷∀∀°)嗷嗷');
       drawLine({ content: '（感谢汤姆老师的配音）' });
       sys_like_chara(32, 0, get_random_value(100, 150));
-      add_jewel_reward(32, '顺从', 200);
+      add_jewel_reward(32, 10, 200);
     } else {
       await printAndWait([
         tachyon.sex,

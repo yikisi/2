@@ -59,7 +59,7 @@ module.exports = (handlers) => {
       );
       era.set(`status:${ret}:淫纹贴纸`, iid - 83);
       if (iid === 85) {
-        add_jewel_reward(ret, '顺从', 1666);
+        add_jewel_reward(ret, 10, 1666);
       }
       era.add(`item:${iid}`, -1);
       if (sys_like_chara(ret, 0, -get_random_value(50, 100))) {

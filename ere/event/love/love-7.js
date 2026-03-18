@@ -296,9 +296,9 @@ module.exports = class extends CustomizedLove {
         );
         era.println();
         if (ret === 1) {
-          add_jewel_reward(7, '顺从', 100);
+          add_jewel_reward(7, 10, 100);
         } else {
-          add_jewel_reward(7, '施虐快感', 100);
+          add_jewel_reward(7, 7, 100);
         }
         await sys_love_uma_in_event(7);
         era.set('flag:当前互动角色', 7);

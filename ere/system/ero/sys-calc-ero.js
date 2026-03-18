@@ -36,9 +36,11 @@ const {
 const EroParticipant = require('#/data/ero/ero-participant');
 const EroTouch = require('#/data/ero/ero-touch');
 const { item_enum } = require('#/data/ero/item-const');
-const { part_enum, part_names, part_skills } = require('#/data/ero/part-const');
+const { part2jid, part_enum, part_skills } = require('#/data/ero/part-const');
 const { stain_enum } = require('#/data/ero/stain-const');
 const { vp_status_enum } = require('#/data/ero/status-const');
+
+const { i18n } = require('#/i18n/selector');
 
 /**
  * @param {EroParticipant} atk
@@ -602,7 +604,10 @@ function sys_do_sex(atk, def, item) {
   // attack_extra_bonus：特质加成
   dmg.defender *=
     1 +
-    0.2 * era.get(`abl:${atk.id}:${part_names[def_part]}掌握`) +
+    0.2 *
+      era.get(
+        `abl:${atk.id}:${i18n('zh-CN').tb_param[part2jid[def_part]]}掌握`,
+      ) +
     atk_ex_bonus;
   // 部位倍率结算
   dmg.attacker *= atk.times;
@@ -623,7 +628,9 @@ function sys_do_sex(atk, def, item) {
     { id: atk.id, part: atk_part },
     { id: def.id, part: def_part },
   ].map((e) => {
-    let val = era.get(`abl:${e.id}:${part_names[e.part]}耐性`) || 0;
+    let val =
+      era.get(`abl:${e.id}:${i18n('zh-CN').tb_param[part2jid[e.part]]}耐性`) ||
+      0;
     if (
       !era.get(`cflag:${e.id}:性别`) &&
       (era.get(`status:${e.id}:弗隆K`) > 0 ||
@@ -675,7 +682,7 @@ function sys_do_sex(atk, def, item) {
   // 对面牛子是不应期，获得宝珠-90%（和快感计算同）
   add_juel(
     atk.id,
-    `${part_names[def_part]}快感`,
+    part2jid[def_part],
     (dmg.defender /
       (def_part === part_enum.penis && era.get(`tcvar:${def.id}:不应期`)
         ? 10
@@ -699,11 +706,8 @@ function sys_do_sex(atk, def, item) {
       true,
     );
     // 攻击者拿额外的受虐宝珠
-    add_juel(
-      atk.id,
-      `${part_names[part_enum.masochism]}快感`,
-      dmg.defender * attack_juel_reward,
-    );
+    // JEWELNAME:8 = 受虐快感
+    add_juel(atk.id, 8, dmg.defender * attack_juel_reward);
   }
 
   const atk_touch = new EroTouch(atk.id, atk.part);

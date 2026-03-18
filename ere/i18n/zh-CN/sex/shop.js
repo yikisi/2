@@ -5,11 +5,11 @@ class I18nJewelShop {
   transfer_tab = '因子采补';
   update_end = '结束升级';
 
-  jewel_header = '%NAME% 的因子';
-  abl_header = '%NAME% 的能力';
-  talent_header = '%NAME% 的特性';
-  mark_header = '%NAME% 的刻印';
-  inmon_header = '%NAME% 的淫纹';
+  jewel_header_template = '%NAME% 的因子';
+  abl_header_template = '%NAME% 的能力';
+  talent_header_template = '%NAME% 的特性';
+  mark_header_template = '%NAME% 的刻印';
+  inmon_header_template = '%NAME% 的淫纹';
   transfer_header = '采补之术';
 
   price_tip_template = '需要：%PRICE%';

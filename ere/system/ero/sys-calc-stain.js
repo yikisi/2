@@ -8,6 +8,7 @@ const { part_enum, part_touch } = require('#/data/ero/part-const');
 const { stain_count, stain_enum } = require('#/data/ero/stain-const');
 
 const di18n = require('#/i18n/extended-def');
+const { i18n } = require('#/i18n/selector');
 
 const cache = {};
 
@@ -117,7 +118,7 @@ module.exports = {
           return `stain:${p.id}:${part_touch[p.part]}`;
         }
       })
-      .filter((k) => k !== undefined);
+      .filter((k) => k !== void 0);
     if (stain_keys.length === 2) {
       const stain = era.get(stain_keys[0]) | era.get(stain_keys[1]);
       era.set(stain_keys[0], stain);
@@ -151,13 +152,11 @@ module.exports = {
         stain >>= 1;
       });
     }
-    return ret.map((e) => {
-      return {
-        color: e.c,
-        content: `<${e.n}>`,
-        display: 'inline-block',
-      };
-    });
+    return ret.map((e) => ({
+      color: e.c,
+      content: i18n().tb_stain.template.replace('%STAIN%', e.n),
+      display: 'inline-block',
+    }));
   },
   /** @param {number} cid */
   rollback_penis_stain(cid) {

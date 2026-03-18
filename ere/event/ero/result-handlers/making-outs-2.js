@@ -50,7 +50,7 @@ module.exports = (handlers) => {
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
     add_juel_from_check(
       defender,
-      '羞耻',
+      13,
       base_emotion_juel * (1 - extra_flag.check / 10),
     );
     sys_cm_b_and_cop(attacker, defender, get_hair_base_motions(defender), {
@@ -67,12 +67,12 @@ module.exports = (handlers) => {
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
     add_juel_from_check(
       defender,
-      '痛苦',
+      11,
       base_emotion_juel * (1 - extra_flag.check / 50),
     );
     add_juel_from_check(
       defender,
-      '羞耻',
+      13,
       base_emotion_juel * (1 - extra_flag.check / 20),
     );
     sys_cm_b_and_cop(
@@ -92,7 +92,7 @@ module.exports = (handlers) => {
       new EroParticipant(defender, part_enum.penis),
     );
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
-    add_juel(attacker, '顺从', base_emotion_juel);
+    add_juel(attacker, 10, base_emotion_juel);
     sys_cm_b_and_cop(
       attacker,
       defender,
@@ -117,7 +117,7 @@ module.exports = (handlers) => {
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
     add_juel_from_check(
       defender,
-      '羞耻',
+      13,
       base_emotion_juel * (1 - extra_flag.check / 10),
     );
     sys_cm_b_and_cop(attacker, defender, [base_enum.same, base_enum.b_same], {
@@ -143,12 +143,12 @@ module.exports = (handlers) => {
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
     add_juel_from_check(
       defender,
-      '恐惧',
+      12,
       base_emotion_juel * (1 - extra_flag.check / 10),
     );
     add_juel_from_check(
       defender,
-      '羞耻',
+      13,
       base_emotion_juel * (1 - extra_flag.check / 20),
     );
     sys_cm_b_and_cop(attacker, defender, [base_enum.same, base_enum.b_same], {
@@ -168,7 +168,7 @@ module.exports = (handlers) => {
       new EroParticipant(defender, part_enum.penis),
     );
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
-    add_juel(attacker, '顺从', base_emotion_juel);
+    add_juel(attacker, 10, base_emotion_juel);
     sys_cm_b_and_cop(attacker, defender, [base_enum.same, base_enum.f_same], {
       a: part_enum.breast,
       d: part_enum.penis,
@@ -184,7 +184,7 @@ module.exports = (handlers) => {
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
     add_juel_from_check(
       defender,
-      '羞耻',
+      13,
       base_emotion_juel * (1 - extra_flag.check / 10),
     );
     sys_cm_b_and_cop(
@@ -216,12 +216,12 @@ module.exports = (handlers) => {
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
     add_juel_from_check(
       defender,
-      '恐惧',
+      12,
       base_emotion_juel * (1 - extra_flag.check / 10),
     );
     add_juel_from_check(
       defender,
-      '羞耻',
+      13,
       base_emotion_juel * (1 - extra_flag.check / 20),
     );
     sys_cm_b_and_cop(attacker, defender, [base_enum.same, base_enum.diff], {
@@ -237,7 +237,7 @@ module.exports = (handlers) => {
     );
     add_attr_exp(attacker, attr_enum.speed, 1);
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
-    add_juel(attacker, '顺从', base_emotion_juel);
+    add_juel(attacker, 10, base_emotion_juel);
     sys_cm_b_and_cop(
       attacker,
       defender,
@@ -257,7 +257,7 @@ module.exports = (handlers) => {
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 5);
     add_juel_from_check(
       defender,
-      '羞耻',
+      13,
       base_emotion_juel * (1 - extra_flag.check / 10),
     );
     sys_cm_b_and_cop(
@@ -280,12 +280,12 @@ module.exports = (handlers) => {
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 5);
     add_juel_from_check(
       defender,
-      '恐惧',
+      12,
       base_emotion_juel * (1 - extra_flag.check / 10),
     );
     add_juel_from_check(
       defender,
-      '羞耻',
+      13,
       base_emotion_juel * (1 - extra_flag.check / 20),
     );
     sys_cm_b_and_cop(
@@ -302,7 +302,7 @@ module.exports = (handlers) => {
       new EroParticipant(defender, part_enum.penis),
     );
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
-    add_juel(attacker, '顺从', base_emotion_juel);
+    add_juel(attacker, 10, base_emotion_juel);
     sys_cm_b_and_cop(
       attacker,
       defender,
@@ -322,7 +322,7 @@ module.exports = (handlers) => {
     add_meek_or_hate(defender, extra_flag.check, (c) => c / 10);
     add_juel_from_check(
       defender,
-      '羞耻',
+      13,
       base_emotion_juel * (1 - extra_flag.check / 10),
     );
     sys_cm_b_and_cop(attacker, defender, [base_enum.same, base_enum.diff], {
@@ -336,7 +336,7 @@ module.exports = (handlers) => {
       new EroParticipant(attacker, part_enum.hand),
       new EroParticipant(attacker, part_enum.breast, get_nipple_buff(attacker)),
     );
-    add_juel_from_check(attacker, '羞耻', base_emotion_juel);
+    add_juel_from_check(attacker, 13, base_emotion_juel);
   };
 
   handlers[ero_hooks.self_hand_job] = (attacker) => {
@@ -344,7 +344,7 @@ module.exports = (handlers) => {
       new EroParticipant(attacker, part_enum.hand),
       new EroParticipant(attacker, part_enum.penis),
     );
-    add_juel_from_check(attacker, '羞耻', base_emotion_juel);
+    add_juel_from_check(attacker, 13, base_emotion_juel);
   };
 
   handlers[ero_hooks.self_pet_clitoris] = (attacker) => {
@@ -352,7 +352,7 @@ module.exports = (handlers) => {
       new EroParticipant(attacker, part_enum.hand),
       new EroParticipant(attacker, part_enum.clitoris),
     );
-    add_juel_from_check(attacker, '羞耻', base_emotion_juel);
+    add_juel_from_check(attacker, 13, base_emotion_juel);
   };
 
   handlers[ero_hooks.self_finger_fuck] = (attacker) => {
@@ -360,7 +360,7 @@ module.exports = (handlers) => {
       new EroParticipant(attacker, part_enum.hand),
       new EroParticipant(attacker, part_enum.virgin),
     );
-    add_juel_from_check(attacker, '羞耻', base_emotion_juel);
+    add_juel_from_check(attacker, 13, base_emotion_juel);
   };
 
   handlers[ero_hooks.self_pet_anal] = (attacker) => {
@@ -368,6 +368,6 @@ module.exports = (handlers) => {
       new EroParticipant(attacker, part_enum.hand),
       new EroParticipant(attacker, part_enum.anal),
     );
-    add_juel_from_check(attacker, '羞耻', base_emotion_juel);
+    add_juel_from_check(attacker, 13, base_emotion_juel);
   };
 };

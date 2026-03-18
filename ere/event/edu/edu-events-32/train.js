@@ -129,7 +129,7 @@ async function incomplete_combustion(tachyon, me, callname, edu_marks) {
       me.get_colored_name(),
       ' 一眼',
     ]);
-    add_jewel_reward(32, '顺从', 100);
+    add_jewel_reward(32, 10, 100);
     sys_like_chara(32, 0, -10) && (await era.waitAnyKey());
   } else {
     await era.printAndWait('身为训练员，不合理的过度训练也是应该避免的');

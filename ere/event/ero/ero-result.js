@@ -17,13 +17,15 @@ const print_ero_gif = require('#/event/ero/snippets/print-ero-gif');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { base_emotion_juel } = require('#/data/ero/juel-const');
-const { part_names } = require('#/data/ero/part-const');
+const { part2jid } = require('#/data/ero/part-const');
 const { unexpected_pregnant_enum } = require('#/data/ero/status-const');
 const basement_owners = require('#/data/event/basement-owners');
 const { condition_type, default_tags } = require('#/data/event/ero-hook-tag');
 const { ero_hooks, ero_tagged_hooks } = require('#/data/event/ero-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { location_enum } = require('#/data/locations');
+
+const { i18n } = require('#/i18n/selector');
 
 const current = new Date().getTime();
 
@@ -52,13 +54,18 @@ console.log(
  * @param {{part:number}} extra
  */
 handlers[ero_hooks.become_lubrication] = (cid, _, extra) => {
+  const pname = i18n('zh-CN').tb_param[part2jid[extra.part]];
+  const orgasm_exp = era.get(`exp:${cid}:${pname}高潮次数`);
   const ratio =
     1 -
     0.5 * era.get(`talent:${cid}:洁净重视`) -
-    0.5 * era.get(`talent:${cid}:工口意愿`);
-  add_juel(cid, '反感', base_emotion_juel * ratio);
-  if (!era.get(`exp:${cid}:${part_names[extra.part]}`)) {
-    add_juel(cid, '恐惧', (base_emotion_juel * ratio) / 2);
+    0.5 * era.get(`talent:${cid}:工口意愿`) +
+    0.2 * !orgasm_exp;
+  // JEWELNAME:14 = 反感
+  add_juel(cid, 14, base_emotion_juel * ratio);
+  if (!orgasm_exp) {
+    // JEWELNAME:12 = 恐惧
+    add_juel(cid, 12, (base_emotion_juel * ratio) / 2);
   }
 };
 

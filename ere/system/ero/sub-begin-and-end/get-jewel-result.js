@@ -1,55 +1,58 @@
 const era = require('#/era-electron');
 
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const get_gradient_color = require('#/utils/gradient-color');
 const { get_abbr_number } = require('#/utils/value-utils');
 
 const { palam_colors } = require('#/data/color-const');
 const { mark_colors, mark_enum } = require('#/data/ero/mark-const');
 
+const di18n = require('#/i18n/extended-def');
 const { __, i18n } = require('#/i18n/selector');
 
 /**
  * @param {number} cid
- * @param {string[]} j_names
+ * @param {number[]} j_names
  * @param {Record<string,number>} j_info
  * @param {(PrintedSpan|string)[][]} a_info
  */
 function get_jewel_result(cid, j_names, j_info, a_info) {
   const buffer = [];
+  const chara_name = get_chara_talk(cid).full_name;
   buffer.push({
     type: 'divider',
     config: {
-      content: `${era.get(`callname:${cid}:-2`)} 的因子`,
+      content: i18n().sex.jewel_header_template.replace('%NAME%', chara_name),
       position: 'left',
     },
   });
-  const self_protect = j_info['-自卫'];
+  const self_protect = j_info[-15];
   if (self_protect > 0) {
     buffer.push({
-      content: [
-        {
-          color: palam_colors.notifications[0],
-          content: self_protect.toLocaleString(),
-        },
-        ' 个自卫因子与其他因子相互抵消后：',
-      ],
+      content: i18n().sex.get_jewel_info_start({
+        ...get_abbr_number(self_protect),
+        color: palam_colors.notifications[0],
+      }),
       type: 'text',
     });
   }
-  for (const j_name of j_names) {
-    const final = era.get(`juel:${cid}:${j_name}`);
-    const got = j_info[j_name];
-    const un_got = j_info[`-${j_name}`];
+  for (const jid of j_names) {
+    const final = era.get(`juel:${cid}:${jid}`);
+    const got = j_info[jid];
+    const un_got = j_info[`-${jid}`];
     if (got > 0 || un_got > 0) {
       buffer.push(
         {
           config: { width: 4 },
-          content: `${j_name.substring(0, 2)}因子：`,
+          content: i18n().sex.get_jewel_row_start(__(`tb_param.jewel${jid}`)),
           type: 'text',
         },
         {
           config: { align: 'right', width: 5 },
-          content: [get_abbr_number(final - got), ' (具有) +'],
+          content: [
+            get_abbr_number(final - got),
+            ` (${i18n().sex.jewel_has}) +`,
+          ],
           type: 'text',
         },
         {
@@ -59,7 +62,7 @@ function get_jewel_result(cid, j_names, j_info, a_info) {
               color: palam_colors.notifications[1],
               ...get_abbr_number(got + un_got),
             },
-            ' (获得) -',
+            ` (${i18n().sex.jewel_got}) -`,
           ],
           type: 'text',
         },
@@ -70,7 +73,7 @@ function get_jewel_result(cid, j_names, j_info, a_info) {
               color: palam_colors.notifications[0],
               ...get_abbr_number(un_got),
             },
-            ' (抵消) = ',
+            ` (${i18n().sex.jewel_lose}) = `,
           ],
           type: 'text',
         },
@@ -82,7 +85,7 @@ function get_jewel_result(cid, j_names, j_info, a_info) {
               fontWeight: 'bold',
               ...get_abbr_number(final),
             },
-            ' (总计)',
+            ` (${i18n().sex.jewel_total})`,
           ],
           type: 'text',
         },
@@ -90,17 +93,20 @@ function get_jewel_result(cid, j_names, j_info, a_info) {
     }
   }
   if (self_protect > 0) {
-    const final = era.get(`juel:${cid}:自卫`),
-      got = j_info['自卫'];
+    const final = era.get(`juel:${cid}:自卫`);
+    const got = j_info[15];
     buffer.push(
       {
         config: { width: 4 },
-        content: '自卫因子：',
+        content: i18n().sex.get_jewel_row_start(i18n().tb_param.jewel14),
         type: 'text',
       },
       {
         config: { align: 'right', width: 5 },
-        content: [get_abbr_number(final - got + self_protect), ' (具有) +'],
+        content: [
+          get_abbr_number(final - got + self_protect),
+          ` (${i18n().sex.jewel_has}) +`,
+        ],
         type: 'text',
       },
       {
@@ -110,7 +116,7 @@ function get_jewel_result(cid, j_names, j_info, a_info) {
             color: palam_colors.notifications[1],
             ...get_abbr_number(got),
           },
-          ' (获得) -',
+          ` (${i18n().sex.jewel_got}) -`,
         ],
         type: 'text',
       },
@@ -121,7 +127,7 @@ function get_jewel_result(cid, j_names, j_info, a_info) {
             color: palam_colors.notifications[0],
             ...get_abbr_number(self_protect),
           },
-          ' (抵消) = ',
+          ` (${i18n().sex.jewel_lose}) =`,
         ],
         type: 'text',
       },
@@ -133,7 +139,7 @@ function get_jewel_result(cid, j_names, j_info, a_info) {
             fontWeight: 'bold',
             ...get_abbr_number(final),
           },
-          ' (总计)',
+          ` (${i18n().sex.jewel_total})`,
         ],
         type: 'text',
       },
@@ -156,7 +162,10 @@ function get_jewel_result(cid, j_names, j_info, a_info) {
           },
           {
             config: { align: 'right', width: 5 },
-            content: [get_abbr_number(final - got), ' (具有) + '],
+            content: [
+              get_abbr_number(final - got),
+              ` (${i18n().sex.jewel_has}) + `,
+            ],
             type: 'text',
           },
           {
@@ -166,7 +175,7 @@ function get_jewel_result(cid, j_names, j_info, a_info) {
                 color: palam_colors.notifications[1],
                 ...get_abbr_number(got),
               },
-              ' (获得) = ',
+              ` (${i18n().sex.jewel_got}) = `,
             ],
             type: 'text',
           },
@@ -178,7 +187,7 @@ function get_jewel_result(cid, j_names, j_info, a_info) {
                 fontWeight: 'bold',
                 ...get_abbr_number(final),
               },
-              ' (总计)',
+              ` (${i18n().sex.jewel_total})`,
             ],
             type: 'text',
           },
@@ -187,13 +196,13 @@ function get_jewel_result(cid, j_names, j_info, a_info) {
     }
   }
   if (buffer.length === 1) {
-    buffer.push({ content: '无变化', type: 'text' });
+    buffer.push({ content: i18n().sex.no_change, type: 'text' });
   }
   const buffer2 = [];
   if (cid > 0) {
     buffer2.push({
       config: {
-        content: era.get(`callname:${cid}:-2`) + ' 的刻印',
+        content: i18n().sex.mark_header_template.replace('%NAME%', chara_name),
         position: 'left',
       },
       type: 'divider',
@@ -205,25 +214,35 @@ function get_jewel_result(cid, j_names, j_info, a_info) {
       if (change > 0) {
         buffer2.push({
           config: { width: 8 },
-          content: [
-            { color, content: era.get(`markname:${mid}`) + '刻印' },
-            '：',
+          content: i18n().sex.get_mark_row(
             {
-              color: get_gradient_color(undefined, color, (now - change) / 3),
-              content: `Lv. ${now - change}`,
+              color,
+              content: i18n().tb_mark.name_template.replace(
+                '%NAME%',
+                di18n.tb_mark.names[mid],
+              ),
             },
-            ' → ',
             {
-              color: get_gradient_color(undefined, color, now / 3),
-              content: `Lv. ${now}`,
+              color: get_gradient_color(void 0, color, (now - change) / 3),
+              content: i18n().tb_mark.lv_template.replace(
+                '%LEVEL%',
+                (now - change).toString(),
+              ),
             },
-          ],
+            {
+              color: get_gradient_color(void 0, color, now / 3),
+              content: i18n().tb_mark.lv_template.replace(
+                '%LEVEL%',
+                now.toString(),
+              ),
+            },
+          ),
           type: 'text',
         });
       }
     });
     if (buffer2.length === 1) {
-      buffer2.push({ content: '无变化', type: 'text' });
+      buffer2.push({ content: i18n().sex.no_change, type: 'text' });
     }
   }
   const buffer3 = [];
@@ -235,7 +254,7 @@ function get_jewel_result(cid, j_names, j_info, a_info) {
   if (buffer3.length > 0) {
     buffer3.unshift({
       config: {
-        content: `${era.get(`callname:${cid}:-2`)} 的属性`,
+        content: i18n().sex.attr_header_template.replace('%NAME%', chara_name),
         position: 'left',
       },
       type: 'divider',
