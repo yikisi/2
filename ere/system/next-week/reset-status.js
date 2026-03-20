@@ -32,6 +32,7 @@ const LoveLimitStatus = require('#/data/love-limit-status');
 const RaceHistory = require('#/data/race/model/race-history');
 
 const di18n = require('#/i18n/extended-def');
+const { i18n } = require('#/i18n/selector');
 
 /**
  * @param {number[]} characters
@@ -64,13 +65,14 @@ async function reset_status(
     if (era.get(`talent:${cid}:泌乳`) === 2) {
       if (Math.random() < 0.05) {
         era.set(`talent:${cid}:泌乳`, 3);
-        await era.printAndWait([
-          '【',
-          chara.get_colored_name(),
-          ' 在 [母乳药剂] 的影响下变成 ',
-          { color: buff_colors[2], content: '[母乳体质]' },
-          ' 了！】',
-        ]);
+        await era.printAndWait(
+          i18n().timon.get_it_nt_get_milk(
+            chara,
+            di18n.tb_item.get_name(37),
+            i18n().tb_talent.template.replace('%NAME%', i18n().tb_talent.s32),
+          ),
+          { color: buff_colors[2] },
+        );
       } else {
         era.set(`talent:${cid}:泌乳`, 0);
       }
@@ -79,17 +81,23 @@ async function reset_status(
     const weight_delta = era.get(`base:${cid}:体重偏差`);
     if (!era.get(`status:${cid}:发胖`) && weight_delta >= 4000) {
       era.set(`status:${cid}:发胖`, 1);
-      era.print([
-        '【',
-        chara.get_colored_name(),
-        { color: buff_colors[0], content: ' [发胖] ' },
-        '了】',
-      ]);
+      era.print(
+        i18n().timon.get_it_nt_become_fat(
+          chara,
+          i18n().tb_status.template.replace('%NAME%', i18n().tb_status[3]),
+        ),
+        { color: buff_colors[2] },
+      );
       sys_change_pressure(cid, 1000);
     } else if (era.get(`status:${cid}:发胖`)) {
       if (weight_delta <= 2000) {
         era.set(`status:${cid}:发胖`, 0);
-        era.print(['【', chara.get_colored_name(), ' 的体重恢复了正常】']);
+        era.print(
+          i18n().timon.get_it_nt_not_be_fat(
+            chara,
+            i18n().tb_status.template.replace('%NAME%', i18n().tb_status[3]),
+          ),
+        );
       } else {
         sys_change_pressure(cid, weight_delta / 10 - 100);
       }
@@ -118,25 +126,24 @@ async function reset_status(
       drug_delta >= 100 + 20 * health_talent + 50 * race
     ) {
       era.set(`status:${cid}:偏头痛`, 1);
-      era.print([
-        '【',
-        chara.get_colored_name(),
-        ' 罹患了 ',
-        { color: buff_colors[0], content: '[偏头痛]' },
-        '】',
-      ]);
+      era.print(
+        i18n().timon.get_it_nt_become_headache(
+          chara,
+          i18n().tb_status.template.replace('%NAME%', i18n().tb_status[4]),
+        ),
+        { color: buff_colors[0] },
+      );
       sys_change_pressure(cid, get_random_value(500, 1500));
       headache = 1;
     } else if (era.get(`status:${cid}:偏头痛`) > 0) {
       if (drug_delta <= 80 + 20 * health_talent + 50 * race) {
         era.set(`status:${cid}:偏头痛`, 0);
-        era.print([
-          '【',
-          chara.get_colored_name(),
-          ' 的 ',
-          { color: buff_colors[0], content: '[偏头痛]' },
-          ' 痊愈了】',
-        ]);
+        era.print(
+          i18n().timon.get_it_nt_not_be_headache(
+            chara,
+            i18n().tb_status.template.replace('%NAME%', i18n().tb_status[4]),
+          ),
+        );
       } else {
         sys_change_pressure(cid, drug_delta * 4);
         headache = 1;
@@ -188,11 +195,7 @@ async function reset_status(
       );
       if (era.get(`cflag:${cid}:性别`) === 0) {
         era.set(`cflag:${cid}:性别`, 10);
-        era.print([
-          '【',
-          chara.get_colored_name(),
-          ' 的阴核长成了一根肉棒！】',
-        ]);
+        era.print(i18n().timon.get_it_nt_have_penis(chara));
       }
     }
     era.set(`status:${cid}:弗隆K`, 0);
@@ -274,15 +277,9 @@ async function reset_status(
           era.set(`love:${cid}`, status_limit.cache);
           const limit_delta = cur_round - status_limit.limit;
           status_limit.clear();
-          await era.printAndWait([
-            '【下给 ',
-            chara.get_colored_name(),
-            ' 的抑制药失效了……',
-            chara.get_colored_name(),
-            '对 ',
-            me.get_colored_name(),
-            ' 的恋心汹涌而来】',
-          ]);
+          await era.printAndWait(
+            i18n().timon.get_it_nt_love_unlimit(chara, me),
+          );
           sys_love_uma(cid, limit_delta * 2 + 8, true) &&
             (await era.waitAnyKey());
           sys_change_lust(cid, limit_delta * 100 + get_random_value(800, 1800));
@@ -361,13 +358,15 @@ async function reset_status(
             }
             for (let t = 0; t < 5; ++t) {
               if (update_train_level(cid, t)) {
-                era.print([
-                  '【',
-                  get_chara_talk(cid).get_colored_name(),
-                  ' 的 ',
-                  di18n.n_attr[t],
-                  '训练 变得更擅长了！】',
-                ]);
+                era.print(
+                  i18n().timon.get_it_nt_train_level_up(
+                    get_chara_talk(cid),
+                    i18n().ui_train_level_up_template.replace(
+                      '%ATTR%',
+                      di18n.n_attr[t],
+                    ),
+                  ),
+                );
               }
             }
           } else if (
@@ -396,11 +395,7 @@ async function reset_status(
                 ),
               );
             }
-            era.print([
-              '【',
-              get_chara_talk(cid).get_colored_name(),
-              ' 继承了新的因子！】',
-            ]);
+            era.print(i18n().timon.get_it_nt_get_jewel(get_chara_talk(cid)));
           }
           if (
             era.get(`status:${cid}:摸鱼`) ||

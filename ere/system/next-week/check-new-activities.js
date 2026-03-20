@@ -14,6 +14,7 @@ const {
 } = require('#/system/sys-calc-base-cflag');
 const { sys_change_fame } = require('#/system/sys-calc-flag');
 
+const select_yes_or_no = require('#/page/components/select-yes-or-no');
 const MejiroCity = require('#/page/mejiro/mejiro-common');
 
 const CustomizedEdu = require('#/event/edu/edu-common');
@@ -44,6 +45,8 @@ const {
   track2location,
 } = require('#/data/race/race-location');
 const { attr_enum } = require('#/data/train-const');
+
+const { i18n } = require('#/i18n/selector');
 
 const track2race = {
   [track_enum.meydan]: {
@@ -88,11 +91,12 @@ async function check_new_activities(cur_round, in_team_list) {
   era.drawLine();
   const celebration = get_celebration(cur_round);
   if (celebration && era.get('flag:当前回合数') > 1) {
-    era.print([
-      '【本周有 ',
-      { content: celebration, color: celebration_color },
-      '，队伍成员们也许有什么活动需要你关注哦】',
-    ]);
+    era.print(
+      i18n().timon.get_it_nt_celebration_notification({
+        content: celebration,
+        color: celebration_color,
+      }),
+    );
     era.set('cflag:0:节日事件标记', 0);
     if (celebration === '庙会') {
       in_team_list.forEach((cid) =>
@@ -134,13 +138,12 @@ async function check_new_activities(cur_round, in_team_list) {
   [0, ...in_team_list].forEach((id) => {
     const registered_race = sys_reg_race(id).curr;
     if (registered_race.week === cur_round) {
-      era.print([
-        '【本周有 ',
-        get_chara_talk(id).get_colored_name(),
-        ' 报名参加的 ',
-        race_infos[registered_race.race].get_colored_name_with_class(),
-        '】',
-      ]);
+      era.print(
+        i18n().timon.get_it_nt_race_notification(
+          get_chara_talk(id),
+          race_infos[registered_race.race].get_colored_name_with_class(),
+        ),
+      );
     }
     in_team_status_dict[id] = {
       no_hurt: !era.get(`status:${id}:伤病`),
@@ -185,11 +188,9 @@ async function check_new_activities(cur_round, in_team_list) {
         punish_list.push(id);
         return false;
       });
-      era.print([
-        '【',
-        race_colored_name,
-        ' 即将举办，参赛选手们要踏上远征之路了】',
-      ]);
+      era.print(
+        i18n().timon.get_it_nt_foreign_race_notification(race_colored_name),
+      );
       if (
         (era.get('cflag:343:招募状态') !== recruit_flags.yes ||
           (era.get('cflag:343:妊娠阶段') & 0b100001) > 0) &&
@@ -201,10 +202,7 @@ async function check_new_activities(cur_round, in_team_list) {
       if (foreign_list.length) {
         era.printMultiColumns([
           {
-            content: [
-              get_chara_talk(0).get_colored_name(),
-              ' 的队伍中以下成员报名了这场赛事：',
-            ],
+            content: i18n().timon.it_nt_race_contestants,
             type: 'text',
           },
           ...foreign_list.map((id) => {
@@ -228,27 +226,13 @@ async function check_new_activities(cur_round, in_team_list) {
           (CharaInmon.get(0).slave === slavery_enum.pregnant ? 30 : 33) ||
         (!foreign_list.length && !me_in_race);
       if (!temp) {
-        era.printMultiColumns([
-          {
-            content: [
-              '要',
-              me_in_race ? '' : '陪同',
-              '参加 ',
+        temp =
+          !(await select_yes_or_no(
+            i18n().timon.get_it_nt_to_foreign_confirm(
               race_colored_name,
-              ' 吗？',
-            ],
-            type: 'text',
-          },
-          ...['是', '否'].map((e, i) => {
-            return {
-              content: e,
-              type: 'button',
-              accelerator: i * 100,
-              config: { width: 12, align: 'center' },
-            };
-          }),
-        ]);
-        temp = await era.input();
+              me_in_race,
+            ),
+          )) * 100;
       }
       if (!temp) {
         handle_foreign_debuff(0, location.lan, location.loc, false);
@@ -268,7 +252,10 @@ async function check_new_activities(cur_round, in_team_list) {
       }
       if (punish_list.length) {
         era.printMultiColumns([
-          { content: '这些选手的缺席让舆论界流言四起：', type: 'text' },
+          {
+            content: i18n().timon.it_nt_foreign_avoid_notification,
+            type: 'text',
+          },
           ...punish_list.map((chara_id) => {
             const tmp = sys_reg_race(chara_id);
             tmp.curr.race = tmp.last.race = -1;
@@ -287,24 +274,22 @@ async function check_new_activities(cur_round, in_team_list) {
       if (era.get('cflag:343:招募状态') === recruit_flags.yes) {
         let { buff } = new MayLifeMarks();
         buff += 1;
-        foreign_list.forEach((id) => {
+        foreign_list.forEach((id) =>
           ['语言不通', '水土不服', '客场作战'].forEach((s) =>
             era.set(
               `status:${id}:${s}`,
               Math.ceil(Math.max(era.get(`status:${id}:${s}`) - 1, 0) / buff),
             ),
-          );
-        });
+          ),
+        );
       }
     } else {
       // 远征结束
-      era.print([
-        '【',
-        ...(era.get('cflag:0:位置') === location.loc
-          ? []
-          : ['远征 ', race_colored_name, ' 的人员']),
-        '回到特雷森了】',
-      ]);
+      era.print(
+        era.get('cflag:0:位置') === location.loc
+          ? i18n().timon.get_it_nt_back_info_from_foreign(race_colored_name)
+          : i18n().timon.it_nt_back_info,
+      );
       in_team_list.forEach((id) => {
         // CFLAGNAME:45 = 位置
         if (era.get(`cflag:${id}:45`) === location.loc) {
@@ -347,15 +332,11 @@ async function check_new_activities(cur_round, in_team_list) {
       flag && era.set(`cflag:${id}:位置`, location_enum.beach);
       return flag;
     });
-    era.print('【一年一度的夏合宿从本周开始】');
+    era.print(i18n().timon.it_nt_summer_start_notification);
     beach_group.length &&
       era.printMultiColumns([
         {
-          content: [
-            '今年 ',
-            get_chara_talk(0).get_colored_name(),
-            ' 的队伍中以下成员需要参加夏合宿：',
-          ],
+          content: i18n().timon.it_nt_summer_chara_list_start,
           type: 'text',
         },
         ...beach_group.map((cid) => {
@@ -377,21 +358,10 @@ async function check_new_activities(cur_round, in_team_list) {
       (!beach_group.length && !era.get('cflag:0:种族'));
     // 条件允许，弹选项让玩家选参加不参加
     if (!temp) {
-      era.printMultiColumns([
-        {
-          content: `要${beach_group.length ? '跟随' : ''}参加夏合宿吗？`,
-          type: 'text',
-        },
-        ...['是', '否'].map((e, i) => {
-          return {
-            content: e,
-            type: 'button',
-            accelerator: i * 100,
-            config: { width: 12, align: 'center' },
-          };
-        }),
-      ]);
-      temp = await era.input();
+      temp =
+        !(await select_yes_or_no(
+          i18n().timon.get_it_nt_summer_confirm(!beach_group.length),
+        )) * 100;
     }
     if (!temp) {
       era.set('cflag:0:位置', era.set('flag:当前位置', location_enum.beach));
@@ -421,7 +391,7 @@ async function check_new_activities(cur_round, in_team_list) {
     }
     if (follow_group.length) {
       era.printMultiColumns([
-        { content: '今年以下人员会跟随参加夏合宿：', type: 'text' },
+        { content: i18n().timon.it_nt_summer_chara_list_follow, type: 'text' },
         ...follow_group.map((id) => {
           const chara = get_chara_talk(id);
           sys_change_attr_and_print(id, attr_enum.hp, -10);
@@ -436,11 +406,11 @@ async function check_new_activities(cur_round, in_team_list) {
     }
   } else if (event_weeks === 33 - 1) {
     // 夏合宿结束
-    era.print([
-      '【',
-      era.get('cflag:0:位置') ? '' : '前往夏合宿的人员',
-      '回到特雷森了】',
-    ]);
+    era.print(
+      era.get('cflag:0:位置') > 0
+        ? i18n().timon.it_nt_back_info_summer
+        : i18n().timon.it_nt_back_info,
+    );
     in_team_list.forEach((id) => {
       if (era.get(`cflag:${id}:位置`)) {
         sys_change_attr_and_print(id, attr_enum.hp, -10);

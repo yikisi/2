@@ -1,6 +1,6 @@
 const era = require('#/era-electron');
 
-const { get_param_list } = require('#/system/ero/ero-act-handler/snippets');
+const get_param_list = require('#/system/ero/ero-act-handler/get-param-list');
 const { poll_stain } = require('#/system/ero/sys-calc-stain');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');

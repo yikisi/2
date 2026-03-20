@@ -121,7 +121,7 @@ function get_float_breast_size(cid, show_true_bust) {
   }
   // 非调教状态隐形巨乳-5cm胸围
   if (
-    nipple === undefined &&
+    nipple === void 0 &&
     chara_sex - 1 &&
     era.get(`talent:${cid}:隐形巨乳`) &&
     ret - down_size > 13

@@ -7,6 +7,7 @@ const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum, race_infos } = require('#/data/race/race-const');
+const { i18n } = require('#/i18n/selector');
 
 const edu_weeks_kiku_sho = 48 + race_infos[race_enum.kiku_sho].date;
 const edu_weeks_shuk_sho = 48 + race_infos[race_enum.shuk_sho].date;
@@ -228,10 +229,10 @@ function sys_check_titles_after_race(team_list, race, best_rank, mvp_id) {
     }
   }
   if (p_flag > 0) {
-    era.print('【选手大着肚子参赛的行为让社会各界议论纷纷】');
+    era.print(i18n().timon.race.in_race_pregnant_info);
   }
   if (o_flag > 0) {
-    era.print('【选手在比赛中公然高潮的行为在社会各界引起轩然大波】');
+    era.print(i18n().timon.race.in_race_orgasm_info);
   }
   if (p_flag > 0 || o_flag > 0) {
     era.set('flag:变态行为', 1);

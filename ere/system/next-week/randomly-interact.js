@@ -15,6 +15,8 @@ const {
   update_train_level,
 } = require('#/system/sys-train-uma');
 
+const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
+
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
@@ -26,6 +28,7 @@ const { location_enum } = require('#/data/locations');
 const { attr_enum, fail_sta_border, time_cost } = require('#/data/train-const');
 
 const di18n = require('#/i18n/extended-def');
+const { i18n } = require('#/i18n/selector');
 
 /** @param {number[]} in_team_list */
 function randomly_interact(in_team_list) {
@@ -122,7 +125,12 @@ function randomly_interact(in_team_list) {
         exp >= e.level * 800 + get_random_value(0, 800) &&
         update_train_level(e.chara.id, e.train)
       ) {
-        cost_result.unshift([`${di18n.n_attr[e.train]}训练 变得更擅长了！`]);
+        cost_result.unshift([
+          i18n().ui_train_level_up_template.replace(
+            '%ATTR%',
+            di18n.n_attr[e.train],
+          ),
+        ]);
       }
     }
     get_success_base_reward(e.chara.id, e.train, e.level, train_cost, changes, {
@@ -130,27 +138,21 @@ function randomly_interact(in_team_list) {
     });
     era.printMultiColumns([
       {
-        content: [
-          '在 ',
-          get_chara_talk(e.teach_chara).get_colored_name(),
-          ' 的照看下，',
-          e.chara.get_colored_name(),
-          ' 进行了 ',
+        content: i18n().timon.get_it_train_take_care(
+          e.chara,
+          get_chara_talk(e.teach_chara),
           {
             content: di18n.n_attr[e.train],
             color: attr_colors[e.train],
           },
-          ' 训练……',
-        ],
+        ),
         type: 'text',
       },
-      ...cost_result.map((e) => {
-        return {
-          content: e,
-          config: { offset: 1, width: 23 },
-          type: 'text',
-        };
-      }),
+      ...cost_result.map((e) => ({
+        content: e,
+        config: { offset: 1, width: 23 },
+        type: 'text',
+      })),
       ...changes.attr_change
         .map((stat, attr) => sys_change_attr_and_print(e.chara.id, attr, stat))
         .filter((e) => e.length > 0)
@@ -160,7 +162,10 @@ function randomly_interact(in_team_list) {
           type: 'text',
         })),
       {
-        content: `获得了 ${changes.pt_change} 点技能点数`,
+        content: i18n().ui_get_pt_template.replace(
+          '%PT%',
+          changes.pt_change.toString(),
+        ),
         config: { offset: 1, width: 23 },
         type: 'text',
       },
@@ -191,42 +196,29 @@ function randomly_interact(in_team_list) {
       [[]],
     );
     for (const l of list) {
-      const buffer = [];
       if (l.length > 1) {
         const tmp = [];
         for (let i = 0; i < l.length; ++i) {
           if (i === l.length - 1) {
-            tmp.push(' 和 ');
+            tmp.push(i18n().ui_conjunction);
           } else if (i > 0) {
-            tmp.push('、');
+            tmp.push(i18n().ui_comma2);
           }
           tmp.push(l[i].chara.get_colored_name());
         }
-        tmp.push(
-          ' 一起进行了 ',
-          {
+        era.print(
+          i18n().timon.get_it_train_together(tmp, {
             color: attr_colors[train],
             content: di18n.n_attr[train],
-          },
-          ' 方面的自主训练……',
+          }),
         );
-        buffer.push({
-          content: tmp,
-          type: 'text',
-        });
       } else {
-        buffer.push({
-          content: [
-            l[0].chara.get_colored_name(),
-            ' 进行了 ',
-            {
-              color: attr_colors[train],
-              content: di18n.n_attr[train],
-            },
-            ' 方面的自主训练……',
-          ],
-          type: 'text',
-        });
+        era.print(
+          i18n().timon.get_it_train_lonely(l[0].chara, {
+            color: attr_colors[train],
+            content: di18n.n_attr[train],
+          }),
+        );
       }
       for (const c of l) {
         const changes = {
@@ -238,14 +230,6 @@ function randomly_interact(in_team_list) {
           stamina: -base_time_cost * get_random_value(0.9, 1.2, true),
           time: -base_time_cost,
         };
-        const result = [
-          sys_change_attr_and_print(
-            c.chara.id,
-            attr_enum.hp,
-            train_cost.stamina,
-          ),
-          sys_change_attr_and_print(c.chara.id, attr_enum.tp, train_cost.time),
-        ];
         era.add(
           // EXPNAME:5 - 9 = 速度训练经验 - 智力训练经验
           `exp:${c.chara.id}:${5 + train}`,
@@ -258,36 +242,17 @@ function randomly_interact(in_team_list) {
           c.level,
           train_cost,
           changes,
-          {
-            buff: l.length * 5,
-          },
+          { buff: l.length * 5 },
         );
-        result.push(
-          ...changes.attr_change
-            .map((stat, attr) =>
-              sys_change_attr_and_print(c.chara.id, attr, stat),
-            )
-            .filter((e) => e.length > 0),
-        );
-        buffer.push(
-          ...result.map((e) => ({
-            config: { offset: 1, width: 23 },
-            content:
-              l.length > 1 ? [c.chara.get_colored_name(), ' 的 ', ...e] : e,
-            type: 'text',
-          })),
-          {
-            content: [
-              ...(l.length > 1 ? [c.chara.get_colored_name(), ' '] : []),
-              `获得了 ${changes.pt_change} 点技能点数`,
-            ],
-            config: { offset: 1, width: 23 },
-            type: 'text',
-          },
-        );
+        all_reward_in_event(c.chara.id, {
+          attr: changes.attr_change,
+          base: [train_cost.stamina, train_cost.time],
+          pt: changes.pt_change,
+          relation: 0,
+          skip_line_break: true,
+        });
         era.add(`exp:${c.chara.id}:技能点数`, changes.pt_change);
       }
-      era.printMultiColumns(buffer);
       for (let i = 0; i < l.length; ++i) {
         for (let j = 0; j < l.length; ++j) {
           if (i === j) {

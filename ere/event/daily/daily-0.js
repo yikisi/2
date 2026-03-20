@@ -20,11 +20,13 @@ const select_action_in_station = require('#/event/daily/snippets/select-action-i
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
-const { get_random_value } = require('#/utils/value-utils');
+const { get_abbr_number, get_random_value } = require('#/utils/value-utils');
 
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { gene_type_colors } = require('#/data/race/model/uma-gene');
+
+const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends CustomizedDaily {
   async office_cook() {
@@ -48,7 +50,7 @@ module.exports = class extends CustomizedDaily {
     ]);
   }
 
-  async out_church() {
+  async out_church(hook) {
     await era.printAndWait([
       get_chara_talk(0).get_colored_name(),
       ' 独自来到神社祈福。',
@@ -102,7 +104,7 @@ module.exports = class extends CustomizedDaily {
             ' 看了看，对方的身旁摆着一根破旧的钓竿以及一个假饵。',
           ]);
           era.printButton('选择钓竿（本次渔获翻倍）', 1);
-          era.printButton('选择假饵（获得20白因子）', 1);
+          era.printButton('选择假饵（20 白因子）', 1);
           if ((await era.input()) === 1) {
             await era.printAndWait([
               me.get_colored_name(),
@@ -119,16 +121,19 @@ module.exports = class extends CustomizedDaily {
               ' 忽然灵光一闪！',
             ]);
             era.println();
-            era.add('juel:0:白', 20);
-            await era.printAndWait([
-              me.get_colored_name(),
-              ' 获得了 ',
-              {
-                content: '白因子 × 20',
-                color: gene_type_colors[2],
-              },
-              '！',
-            ]);
+            era.add('jewel:0:22', 20);
+            await era.printAndWait(
+              i18n().sex.get_got_jewel_info_oot(
+                me,
+                i18n().tb_param.jewel22,
+                get_abbr_number(era.get('jewel:0:22')),
+                get_abbr_number(20),
+                {
+                  ...get_abbr_number(era.add('jewel:0:22', 20)),
+                  color: gene_type_colors[2],
+                },
+              ),
+            );
             extra_flag.jpy = 1;
           }
           return;

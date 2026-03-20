@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const get_param_list = require('#/system/ero/ero-act-handler/get-param-list');
 const sys_filter_ero_act = require('#/system/ero/sub/sys-filter-ero-act');
 const { sys_get_ero_image } = require('#/system/ero/sys-calc-ero-image');
 const { check_satisfied } = require('#/system/ero/sys-calc-ero-status');
@@ -55,7 +56,6 @@ const { location_enum } = require('#/data/locations');
 
 const di18n = require('#/i18n/extended-def');
 const { __, i18n } = require('#/i18n/selector');
-const { get_param_list } = require('#/system/ero/ero-act-handler/snippets');
 
 /**
  * @param {number} cid

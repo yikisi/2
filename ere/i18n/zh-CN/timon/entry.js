@@ -221,6 +221,276 @@ class I18nTimon {
   /** @param {string} uma */
   get_it_no_chara_in_recruit = (uma) => ['【训练场没有引人注目的', uma, '】'];
 
+  /** @param {CharaTalk} chara */
+  get_it_heal_yandere = (chara) => [
+    '【',
+    chara.get_colored_name(),
+    ' 重新变得温和起来】',
+  ];
+  /** @param {PrintedSpan} income */
+  get_it_income_invest = (income) => ['【收到了投资收益 ', income, ' 马币】'];
+  /** @param {PrintedSpan} income */
+  get_it_income_annal_bonus = (income) => [
+    '【收到了学园发放的训练员工资和年终奖 ',
+    income,
+    ' 马币】',
+  ];
+  /** @param {PrintedSpan} income */
+  get_it_income_salary = (income) => [
+    '【收到了学园发放的训练员工资 ',
+    income,
+    ' 马币】',
+  ];
+  /**
+   * @param {CharaTalk} you
+   * @param {[]} chara_list
+   * @returns {TextContent}
+   */
+  get_it_punish_avoid_race = (you, chara_list) => [
+    '【因为 ',
+    ...chara_list,
+    ' 的避战行为，社会对 ',
+    you.get_colored_name(),
+    ' 的评价降低了！】',
+  ];
+  /** @param {CharaTalk} you */
+  get_it_pregnant_slave_reward = (you) => [
+    '【',
+    you.get_colored_name(),
+    ' 履行了职责，作为孕袋的评价上升了】',
+  ];
+  /** @param {CharaTalk} you */
+  get_it_pregnant_slave_punish = (you) => [
+    '【让马娘主人怀孕的 ',
+    you.get_colored_name(),
+    ' 因为孕袋失格，受到了特雷森的处罚！】',
+  ];
+  it_pregnant_trainer_punish = '【现役训练员的私生子丑闻在社会上引起一阵非议】';
+  it_pregnant_uma_punish = '【现役马娘的私生子丑闻使社会各界议论纷纷】';
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} teacher
+   * @param {PrintedSpan} train
+   */
+  get_it_train_take_care = (chara, teacher, train) => [
+    '【在 ',
+    teacher.get_colored_name(),
+    ' 的照看下，',
+    chara.get_colored_name(),
+    ' 进行了 ',
+    train,
+    ' 训练】',
+  ];
+  /**
+   * @param {[]} chara_list
+   * @param {PrintedSpan} train
+   */
+  get_it_train_together = (chara_list, train) => [
+    '【',
+    ...chara_list,
+    ' 一起进行了 ',
+    train,
+    ' 方面的自主训练】',
+  ];
+  /**
+   * @param {CharaTalk} chara
+   * @param {PrintedSpan} train
+   */
+  get_it_train_lonely = (chara, train) => [
+    '【',
+    chara.get_colored_name(),
+    ' 进行了 ',
+    train,
+    ' 方面的自主训练】',
+  ];
+
+  /**
+   * @param {CharaTalk} chara
+   * @param {string} item 母乳药剂
+   * @param {string} talent 母乳体质特性名
+   */
+  get_it_nt_get_milk = (chara, item, talent) => [
+    '【',
+    chara.get_colored_name(),
+    ' 在',
+    item,
+    '的影响下变成 ',
+    talent,
+    ' 了！】',
+  ];
+  /**
+   * @param {CharaTalk} chara
+   * @param {string} status 发胖状态名
+   */
+  get_it_nt_become_fat = (chara, status) => [
+    '【',
+    chara.get_colored_name(),
+    ' ',
+    status,
+    ' 了！】',
+  ];
+  /**
+   * @param {CharaTalk} chara
+   * @param {string} status 发胖状态名
+   */
+  get_it_nt_not_be_fat = (chara, status) => [
+    '【',
+    chara.get_colored_name(),
+    ' 的体重恢复了正常】',
+  ];
+  /**
+   * @param {CharaTalk} chara
+   * @param {string} status 偏头痛状态名
+   */
+  get_it_nt_become_headache = (chara, status) => [
+    '【',
+    chara.get_colored_name(),
+    ' 罹患了 ',
+    status,
+    '！】',
+  ];
+  /**
+   * @param {CharaTalk} chara
+   * @param {string} status 偏头痛状态名
+   */
+  get_it_nt_not_be_headache = (chara, status) => [
+    '【',
+    chara.get_colored_name(),
+    ' 的 ',
+    status,
+    ' 痊愈了】',
+  ];
+  /** @param {CharaTalk} chara */
+  get_it_nt_have_penis = (chara) => [
+    '【',
+    chara.get_colored_name(),
+    ' 的阴核长成了一根肉棒！】',
+  ];
+  /**
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} you
+   */
+  get_it_nt_love_unlimit = (chara, you) => [
+    '【下给 ',
+    chara.get_colored_name(),
+    ' 的抑制药失效了……',
+    chara.get_colored_name(),
+    '对 ',
+    you.get_colored_name(),
+    ' 的恋心汹涌而来】',
+  ];
+  /**
+   * @param {CharaTalk} chara
+   * @param {string} up_info
+   */
+  get_it_nt_train_level_up = (chara, up_info) => [
+    '【',
+    chara.get_colored_name(),
+    ' 的 ',
+    up_info,
+    '】',
+  ];
+  /** @param {CharaTalk} chara */
+  get_it_nt_get_jewel = (chara) => [
+    '【',
+    chara.get_colored_name(),
+    ' 继承了新的因子！】',
+  ];
+  /**
+   * @param {CharaTalk} mother
+   * @param {CharaTalk} father
+   */
+  get_it_hb_info = (mother, father) => [
+    '【',
+    mother.get_colored_name(),
+    ' 生下了一个依稀有着 ',
+    father.get_colored_name(),
+    ' 外貌的健康的孩子！】',
+  ];
+  it_hb_let_mom_name = '让母亲取名';
+  it_hb_let_dad_name = '让父亲取名';
+  it_hb_you_name = '亲自取名';
+  it_hb_name_tip = '想给孩子起什么名字呢？';
+  /**
+   * @param {CharaTalk} mother
+   * @param {CharaTalk} child
+   */
+  get_it_name_result = (mother, child) => [
+    mother.get_colored_name(),
+    ' 的孩子起名为 ',
+    child.get_colored_name(),
+  ];
+  it_hb_rename = '要重新取名吗？';
+  /** @param {PrintedSpan} celebration */
+  get_it_nt_celebration_notification = (celebration) => [
+    '【本周有 ',
+    celebration,
+    '，队伍成员们也许有什么活动需要你关注哦】',
+  ];
+  /**
+   * @param {CharaTalk} chara
+   * @param {PrintedSpan} race
+   */
+  get_it_nt_race_notification = (chara, race) => [
+    '【本周有 ',
+    chara.get_colored_name(),
+    ' 报名参加的 ',
+    race,
+    '】',
+  ];
+  /** @param {PrintedSpan} race */
+  get_it_nt_foreign_race_notification = (race) => [
+    '【',
+    race,
+    ' 即将举办，参赛选手们要踏上远征之路了】',
+  ];
+  it_nt_race_contestants = '队伍中以下成员报名了这场赛事：';
+  /**
+   * @param {PrintedSpan} race
+   * @param {boolean} you_in_race 玩家是否参赛
+   */
+  get_it_nt_to_foreign_confirm = (race, you_in_race) =>
+    you_in_race ? ['要参加 ', race, ' 吗？'] : ['要陪同参加 ', race, ' 吗？'];
+  it_nt_foreign_avoid_notification = '这些选手的缺席让舆论界流言四起：';
+  it_nt_back_info = '【回到特雷森了】';
+  /** @param {PrintedSpan} race */
+  get_it_nt_back_info_from_foreign = (race) => [
+    '【远征 ',
+    race,
+    ' 的人员回到特雷森了】',
+  ];
+  it_nt_summer_start_notification = '【一年一度的夏合宿从本周开始】';
+  it_nt_summer_chara_list_start = '今年队伍中以下成员需要参加夏合宿：';
+  /** @param {boolean} just_you */
+  get_it_nt_summer_confirm = (just_you) =>
+    just_you ? '要参加夏合宿吗？' : '要跟随参加夏合宿吗？';
+  it_nt_summer_chara_list_follow = '今年以下人员会跟随参加夏合宿：';
+  it_nt_back_info_summer = '【前往夏合宿的人员回到特雷森了】';
+
+  /**
+   * @param {string} title
+   * @param {[]} chara_list
+   * @param {string} item
+   */
+  get_it_nt_inmon_milk_slave = (title, chara_list, item) =>
+    chara_list.length > 1
+      ? ['【', title, ' ', ...chara_list, '各贡上了一杯 ', item, '】']
+      : ['【', title, ' ', ...chara_list, '贡上了一杯 ', item, '】'];
+  /**
+   * @param {string} title
+   * @param {CharaTalk} chara
+   * @param {PrintedSpan} jewel
+   */
+  get_it_nt_inmon_inhert_slave = (title, chara, jewel) => [
+    '【',
+    title,
+    ' ',
+    chara.get_colored_name(),
+    ' 贡上了 ',
+    jewel,
+    '】',
+  ];
+
   /**
    * @param {CharaTalk} chara
    * @param {CharaTalk} you

@@ -54,16 +54,13 @@ function check_inmon(in_team_list) {
         });
         buffer[buffer.findLastIndex((e) => e === i18n().ui_comma)] =
           i18n().ui_conjunction;
-        era.print([
-          '【',
-          di18n.tb_mark.s_options[slavery_enum.milk],
-          ' ',
-          ...buffer,
-          buffer.length > 1 ? ' 各' : ' ',
-          '贡上了一杯 ',
-          __(`tb_item.${milk_item}`),
-          '】',
-        ]);
+        era.print(
+          i18n().timon.get_it_nt_inmon_milk_slave(
+            di18n.tb_mark.s_options[slavery_enum.milk],
+            buffer,
+            __(`tb_item.${milk_item}`),
+          ),
+        );
         era.add(`item:${milk_item}`, milk_list[1 - i].length);
       }
     }
@@ -96,23 +93,21 @@ function check_inmon(in_team_list) {
       }
       era.add(`jewel:0:${jid}`, val);
       j_count += val;
-      era.print([
-        '【',
-        di18n.tb_mark.s_options[slavery_enum.inherit],
-        ' ',
-        get_chara_talk(id).get_colored_name(),
-        ' 贡上了 ',
-        {
-          content: i18n()
-            .tb_param.jewel_with_count.replace(
-              '%JEWEL%',
-              __(`tb_param.jewel${jid}`),
-            )
-            .replace('%COUNT%', val.toString()),
-          color: gene_type_colors[jid],
-        },
-        '】',
-      ]);
+      era.print(
+        i18n().timon.get_it_nt_inmon_inhert_slave(
+          di18n.tb_mark.s_options[slavery_enum.inherit],
+          get_chara_talk(id),
+          {
+            content: i18n()
+              .tb_param.jewel_with_count.replace(
+                '%JEWEL%',
+                __(`tb_param.jewel${jid}`),
+              )
+              .replace('%COUNT%', val.toString()),
+            color: gene_type_colors[jid - 20],
+          },
+        ),
+      );
     }
     if (j_count >= 100) {
       global_achievement.slav_inh = 1;

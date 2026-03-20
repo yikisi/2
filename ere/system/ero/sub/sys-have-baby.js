@@ -19,7 +19,11 @@ const get_display_name = require('#/utils/calc-display-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { gacha } = require('#/utils/list-utils');
 const get_child_name = require('#/utils/naming');
-const { get_display_width, get_random_value } = require('#/utils/value-utils');
+const {
+  get_abbr_number,
+  get_display_width,
+  get_random_value,
+} = require('#/utils/value-utils');
 
 const { buff_colors } = require('#/data/color-const');
 const { get_date_obj } = require('#/data/date-indicator');
@@ -91,17 +95,25 @@ async function name_baby(cid, fid, mid) {
     rand_param = mid || fid;
   } else {
     if (
-      await select_yes_or_no('', `让${mid ? '母亲' : '父亲'}起名`, '亲自起名')
+      await select_yes_or_no(
+        '',
+        mid > 0
+          ? i18n().timon.it_hb_let_mom_name
+          : i18n().timon.it_hb_let_dad_name,
+        i18n().timon.it_hb_you_name,
+      )
     ) {
       rand_param = mid || fid;
     } else {
-      era.print('想给孩子起什么名字呢？');
+      era.print(i18n().timon.it_hb_name_tip);
       ret = await rename();
     }
   }
   if (rand_param > 0) {
     ret = get_child_name(rand_param);
   }
+  const mother = get_chara_talk(mid);
+  const child = get_chara_talk(cid);
   const check = check_duplicate(ret);
   if (check !== false) {
     era.print(di18n.name.check_duplicate(ret, check));
@@ -111,23 +123,15 @@ async function name_baby(cid, fid, mid) {
     rand_param > 0 &&
     (ret = get_display_name(ret)).replace(/\d+$/, '').length !== ret.length &&
     (await select_yes_or_no([
-      get_chara_talk(mid).get_colored_name(),
-      ' 的孩子起名为 ',
-      ret,
-      '……',
+      ...i18n().timon.get_it_name_result(mother, child),
       { isBr: true },
-      '要重新取名吗？',
+      i18n().timon.it_hb_rename,
     ]))
   ) {
     ret = await rename();
   }
   era.set(`callname:${cid}:-2`, era.set(`callname:${cid}:-1`, ret));
-  await era.printAndWait([
-    get_chara_talk(mid).get_colored_name(),
-    ' 的孩子最终起名为 ',
-    get_chara_talk(cid).get_colored_name(),
-    '！',
-  ]);
+  await era.printAndWait(i18n().timon.get_it_name_result(mother, child));
 }
 
 /** @param {number} mid */
@@ -406,13 +410,7 @@ async function sys_have_baby(mid) {
   const father = get_chara_talk(fid);
   const mother = get_chara_talk(mid);
   get_custom_check(ch_id).check_birth();
-  era.print([
-    '【',
-    mother.get_colored_name(),
-    ' 生下了一个依稀有着 ',
-    father.get_colored_name(),
-    ' 外貌的健康的孩子！】',
-  ]);
+  era.print(i18n().timon.get_it_hb_info(mother, father));
   era.set(
     `maxbase:${mid}:体力`,
     Math.max(era.get(`maxbase:${mid}:体力`) - 400, 200),
@@ -497,20 +495,18 @@ async function sys_have_baby(mid) {
     j_num = get_random_value(75, 125);
   }
   if (j_num > 0) {
-    era.add(`juel:0:${jid}`, j_num);
-    era.print([
-      get_chara_talk(0).get_colored_name(),
-      ' 获得了 ',
-      {
-        content: i18n()
-          .tb_param.jewel_with_count.replace(
-            '%JEWEL%',
-            __(`tb_param.jewel${jid}`),
-          )
-          .replace('%COUNT%', j_num.toString()),
-        color: gene_type_colors[jid],
-      },
-    ]);
+    era.print(
+      i18n().sex.get_got_jewel_info_oot(
+        get_chara_talk(0).get_colored_name(),
+        __(`tb_param.jewel${jid}`),
+        get_abbr_number(era.get(`jewel:0:${jid}`)),
+        get_abbr_number(j_num),
+        {
+          ...get_abbr_number(era.add(`jewel:0:${jid}`, j_num)),
+          color: gene_type_colors[jid - 20],
+        },
+      ),
+    );
   }
   if (
     new Array(3)

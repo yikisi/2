@@ -222,11 +222,7 @@ async function sys_next_week() {
       if (heal) {
         life_event_marks.yandere = 0;
         era.set(`talent:${id}:病娇`, 1);
-        era.print([
-          '【',
-          get_chara_talk(id).get_colored_name(),
-          ' 重新变得温和起来】',
-        ]);
+        era.print(i18n().timon.get_it_heal_yandere(get_chara_talk(id)));
       }
     }
   });
@@ -254,28 +250,18 @@ async function sys_next_week() {
         const money = sys_change_money(e.repay, -1);
         if (i > 0 && money > 0) {
           // 人类训练员有工资拿；马娘训练员？自己跑比赛去！
+          let h;
           switch (e.creditor) {
             case creditors.invest:
-              era.print([
-                '【收到了投资收益 ',
-                { ...get_abbr_number(money), color: money_color },
-                ' 马币】',
-              ]);
+              h = i18n().timon.get_it_income_invest;
               break;
             case creditors.annul_bonus:
-              era.print([
-                '【收到了学园发放的训练员工资和年终奖 ',
-                { color: money_color, content: money.toLocaleString() },
-                ' 马币】',
-              ]);
+              h = i18n().timon.get_it_income_annal_bonus;
               break;
             case creditors.salary:
-              era.print([
-                '【收到了学园发放的训练员工资 ',
-                { color: money_color, content: money.toLocaleString() },
-                ' 马币】',
-              ]);
+              h = i18n().timon.get_it_income_salary;
           }
+          era.print(h({ ...get_abbr_number(money), color: money_color }));
         }
         if (e.timer > 0) {
           e.timer--;
@@ -742,49 +728,27 @@ async function sys_next_week() {
   if (race_punish) {
     const buffer = [];
     out_race_list.forEach((e) => {
-      buffer.push(get_chara_talk(e).get_colored_name(), '，');
+      buffer.push(get_chara_talk(e).get_colored_name(), i18n().ui_comma);
     });
     buffer.length && buffer.splice(buffer.length - 1, 1);
-    era.print([
-      '【因为 ',
-      ...buffer,
-      ' 的避战行为，社会对 ',
-      me.get_colored_name(),
-      ' 的评价降低了！】',
-    ]);
+    era.print(i18n().timon.get_it_punish_avoid_race(me, buffer));
     sys_change_fame(-race_punish);
   }
   if (hentai_reward) {
     era.drawLine();
-    era.print([
-      '【',
-      me.get_colored_name(),
-      ' 履行了职责，作为孕袋的评价上升了】',
-    ]);
+    era.print(i18n().timon.get_it_pregnant_slave_reward(me));
     era.add('flag:当前声望', hentai_reward);
   }
   if (hentai_punish) {
     if (punish_level === 3) {
-      era.print([
-        '【让马娘主人怀孕的 ',
-        me.get_colored_name(),
-        ' 因为孕袋失格，受到了特雷森的处罚！】',
-      ]);
+      era.print(i18n().timon.get_it_pregnant_slave_punish(me));
       era.add('flag:当前马币', -hentai_punish);
     } else {
       if (hentai_marks[0]) {
-        era.print([
-          '【因为现役训练员的私生子丑闻，社会对 ',
-          me.get_colored_name(),
-          ' 的评价降低了！】',
-        ]);
+        era.print(i18n().timon.it_pregnant_trainer_punish);
       }
       if (hentai_marks[1]) {
-        era.print([
-          '【因为现役马娘的私生子丑闻，社会对 ',
-          me.get_colored_name(),
-          ' 的评价降低了！】',
-        ]);
+        era.print(i18n().timon.it_pregnant_uma_punish);
       }
       sys_change_fame(-hentai_punish);
       era.set('flag:变态行为', 1);

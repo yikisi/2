@@ -19,6 +19,7 @@ const { get_random_value } = require('#/utils/value-utils');
  * @param {number} changes.motivation=0
  * @param {number} changes.relation=0
  * @param {number} changes.love=0
+ * @param {boolean} changes.skip_line_break=false
  */
 function all_reward_in_event(
   cid,
@@ -30,9 +31,10 @@ function all_reward_in_event(
     motivation = 0,
     relation = get_random_value(0, 25),
     love = 0,
+    skip_line_break = false,
   } = {},
 ) {
-  let ret = get_attr_and_print_in_event(cid, attr, pt, base);
+  let ret = get_attr_and_print_in_event(cid, attr, pt, base, skip_line_break);
   ret = get_skills_and_print_in_event(cid, skills) || ret;
   ret = sys_change_motivation(cid, motivation) || ret;
   if (relation > 0) {

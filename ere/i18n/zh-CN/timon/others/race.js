@@ -383,4 +383,7 @@ module.exports = {
   orgasm_va_reports: [
     '小穴和屁眼要被硬东西插爆了噢噢噢噢❤️❤️❤️全身像要被撕裂了❤️❤️❤️——！',
   ],
+
+  in_race_pregnant_info: '【选手大着肚子参赛的行为让社会各界议论纷纷】',
+  in_race_orgasm_info: '【选手在比赛中公然高潮的行为在社会各界引起轩然大波】',
 };
