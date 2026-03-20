@@ -52,29 +52,30 @@ module.exports = class extends CustomizedEdu {
       await teio.say_and_wait('训练员，怎么说？');
       era.println();
 
-      await era.printAndWait(`${me.name} 看着笑嘻嘻的担当，如此回复到——`);
-      era.printButton(
-        '「我觉得应该先哈——地这样，然后侂阿——」（力量&根性+20，技能点数+15）',
-        1,
-      );
-      era.printButton(
-        '「舞就是武……就是修炼以臻极境！」（速度+30，技能点数+15，体力+200）',
-        2,
-      );
-      era.printButton(
-        `「我想我们可以通过这种训练控制身体的协调性，唔，试一试改变重心位置以造成瞬间的加速度用于冲线刹那？」（速度+15，耐力+20，智力+30，技能点数+30）`,
-        3,
-      );
-      const ret = await era.input();
-      if (ret === 1) {
-        wait_flag =
-          get_attr_and_print_in_event(3, [0, 0, 20, 20, 0], 15) || wait_flag;
-      } else if (ret === 2) {
-        wait_flag =
-          get_attr_and_print_in_event(3, [30], 15, [200]) || wait_flag;
-      } else {
-        wait_flag =
-          get_attr_and_print_in_event(3, [15, 20, 0, 0, 30], 30) || wait_flag;
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 看着笑嘻嘻的担当，如此回复道——',
+      ]);
+      era.printButton('跟着感觉走（力量&根性+20，技能点数+15）', 1);
+      era.printButton('修行为先（速度+30，技能点数+15，体力+200）', 2);
+      era.printButton(`冷静分析（速度+15，耐力+20，智力+30，技能点数+30）`, 3);
+      switch (await era.input()) {
+        case 1:
+          await me.say_and_wait('我觉得应该先哈——地这样，然后侂阿——');
+          wait_flag =
+            get_attr_and_print_in_event(3, [0, 0, 20, 20, 0], 15) || wait_flag;
+          break;
+        case 2:
+          await me.say_and_wait('舞就是武……就是修炼以臻极境！');
+          wait_flag =
+            get_attr_and_print_in_event(3, [30], 15, [200]) || wait_flag;
+          break;
+        case 3:
+          await me.say_and_wait(
+            '我想我们可以通过这种训练控制身体的协调性，唔，试一试改变重心位置以造成瞬间的加速度用于冲线刹那？',
+          );
+          wait_flag =
+            get_attr_and_print_in_event(3, [15, 20, 0, 0, 30], 30) || wait_flag;
       }
     } else if (event_arg === 'lets_go_together') {
       await print_event_name('一起走吧！', teio);

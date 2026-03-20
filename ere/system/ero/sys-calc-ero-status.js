@@ -212,15 +212,18 @@ module.exports = {
    */
   check_satisfied(cid) {
     if (era.get(`tcvar:${cid}:脱力`) > 0 || era.get(`tcvar:${cid}:失神`) > 0) {
+      era.logger.debug(`[${cid} 是否满足] 失去行动能力`);
       return 2;
     }
     if (
       !cid ||
       era.get(`status:${cid}:超马跳Z`) > 0 ||
-      era.get(`mark:${cid}:反抗`) >= 2 ||
-      era.get(`mark:${cid}:苦痛`) >= 2 ||
-      era.get(`mark:${cid}:羞耻`) >= 2
+      era.get(`mark:${cid}:反抗`) - era.get(`mark:${cid}:同心`) >= 2 ||
+      Math.max(era.get(`mark:${cid}:苦痛`), era.get(`mark:${cid}:羞耻`)) -
+        era.get(`mark:${cid}:欢愉`) >=
+        2
     ) {
+      cid > 0 && era.logger.debug(`[${cid} 是否满足] 发情 OR 抗拒`);
       return 0;
     }
     const lust = era.get(`base:${cid}:性欲`);
@@ -229,13 +232,14 @@ module.exports = {
       era.get(`tcvar:${cid}:接近高潮`) ||
       lust >= lust_border.itch
     ) {
+      cid > 0 && era.logger.debug(`[${cid} 是否满足] 完全没爽够`);
       return 0;
     }
     const dice = Math.random();
     const border =
       (lust + era.get(`tcvar:${cid}:发情`) * 1000) / lust_border.absent_mind;
     era.logger.debug(
-      `${cid} 未满足 掷骰：${(dice * 100).toFixed(2)} / 概率：${(border * 100).toFixed(2)}`,
+      `[${cid} 是否满足] 掷骰：${(dice * 100).toFixed(2)} / 概率：${(border * 100).toFixed(2)}`,
     );
     if (dice < border) {
       return 1;
