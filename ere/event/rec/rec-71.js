@@ -1,34 +1,20 @@
-/**
- * @file 目白阿尔丹 - 招募
- * @author 洛洛
- */
 const era = require('#/era-electron');
 
-const { sys_get_callname } = require('#/system/sys-calc-chara-others');
-
 const { add_event, cb_enum } = require('#/event/queue');
-const kojo = require('#/event/rec/rec-71.kojo');
 const CustomizedRecruit = require('#/event/rec/rec-common');
+const generate_dictionary = require('#/event/snippets/generate-dictionary');
 
-const { get_chara_color } = require('#/data/chara-colors');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
 
+const { i18n } = require('#/i18n/selector');
+
 module.exports = class extends CustomizedRecruit {
   async recruit() {
-    const dict = {};
-    dict['代表色'] = get_chara_color(this.id);
-    dict['你'] = era.get('callname:0:-2');
-    if (era.get(`cflag:${this.id}:性别`) === 1) {
-      dict['她'] = '他';
-      dict['马娘'] = '马郎';
-    } else {
-      dict['她'] = '她';
-      dict['马娘'] = '马娘';
-    }
-    dict['称呼'] = sys_get_callname(this.id, 0);
+    const kojo = i18n().kojo[this.id].recruit;
+    const dict = generate_dictionary(this.id, { call: !0, uma: !0 });
     const event_marks = new EventMarks(0);
     switch (era.get(`cflag:${this.id}:招募状态`)) {
       case recruit_flags.no:

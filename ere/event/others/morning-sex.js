@@ -4,6 +4,7 @@
  * @author 黑奴队长
  */
 const {
+  drawLine,
   get,
   input,
   printAndWait,
@@ -319,6 +320,7 @@ async function morning_sex() {
           s: get(`base:${cid}:体力`),
           t: get(`base:${cid}:精力`),
         };
+      drawLine();
       await handler(get_chara_talk(cid), get_chara_talk(0));
       set(`status:0:沉睡`, 0);
       set('base:0:体力', my_cache.s);

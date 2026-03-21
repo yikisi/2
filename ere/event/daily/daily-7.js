@@ -4,6 +4,7 @@
  */
 const era = require('#/era-electron');
 
+const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const lines = require('#/event/daily/daily-7.kojo');
@@ -19,7 +20,6 @@ const { get_random_entry } = require('#/utils/list-utils');
 const chara_colors = require('#/data/chara-colors').chara_colors[7];
 const { escape_enum } = require('#/data/basement-const');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
-const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
 module.exports = class extends CustomizedDaily {
   get #dict() {

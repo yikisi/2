@@ -1,7 +1,3 @@
-/**
- * @file 玉藻十字 - 育成
- * @author 雞雞
- */
 const era = require('#/era-electron');
 
 const {
@@ -10,47 +6,40 @@ const {
 } = require('#/system/sys-calc-chara-others');
 const { sys_change_fame } = require('#/system/sys-calc-flag');
 
-const kojo = require('#/event/rec/rec-21.kojo');
 const CustomizedRecruit = require('#/event/rec/rec-common');
+const generate_dictionary = require('#/event/snippets/generate-dictionary');
 
-const { get_chara_color } = require('#/data/chara-colors');
 const TamaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-21');
 const recruit_flags = require('#/data/event/recruit-flags');
+
+const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends CustomizedRecruit {
   async recruit() {
     if (await this.check_before_rec()) {
       return;
     }
-    const dict = {};
-    dict['代表色'] = get_chara_color(this.id);
-    dict['玩家名'] = era.get('callname:0:-2');
-    if (era.get(`cflag:${this.id}:性别`) === 1) {
-      dict['她'] = '他';
-      dict['马娘'] = '马郎';
-    } else {
-      dict['她'] = '她';
-      dict['马娘'] = '马娘';
-    }
-    const ret = await kojo['招募'](dict);
+    const kojo = i18n().kojo[this.id].recruit;
+    const dict = generate_dictionary(this.id, { uma: !0 });
+    const ret = await kojo.rec(dict);
     let relation = 0,
       love = 0,
       honour = 0;
-    if (ret[1] === 1) {
+    if (ret['nipple'] === 1) {
       relation += 10;
       love += 1;
     } else {
       relation += 5;
       love += 2;
     }
-    if (ret[2] === 1) {
+    if (ret['lolicon'] === 1) {
       relation += 10;
       love += 1;
     } else {
       relation += 5;
       love += 2;
     }
-    if (ret[4] === 1) {
+    if (ret['business'] === 1) {
       relation += 5;
       love += 2;
     } else {

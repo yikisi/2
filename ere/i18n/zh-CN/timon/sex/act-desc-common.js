@@ -1470,6 +1470,52 @@ module.exports = {
    * @param {CharaTalk} defender 被动方
    * @param {boolean} is_first 是否是连续动作的初次行动
    */
+  async hug_sitting(attacker, defender, is_first) {
+    if (is_first)
+      await printAndWait([
+        '【',
+        attacker.get_colored_name(),
+        ' 将背对着的 ',
+        defender.get_colored_name(),
+        ' 抱在怀里坐着，将肉棒插入了小穴】',
+      ]);
+    else
+      await printAndWait([
+        '【',
+        attacker.get_colored_name(),
+        ' 怀抱着 ',
+        defender.get_colored_name(),
+        ' 坐着，肉棒抽插着小穴】',
+      ]);
+  },
+  /**
+   * @param {CharaTalk} attacker 主动方
+   * @param {CharaTalk} defender 被动方
+   * @param {boolean} is_first 是否是连续动作的初次行动
+   */
+  async hug_sitting_anal_sex(attacker, defender, is_first) {
+    if (is_first)
+      await printAndWait([
+        '【',
+        attacker.get_colored_name(),
+        ' 将背对着的 ',
+        defender.get_colored_name(),
+        ' 抱在怀里坐着，将肉棒插入了屁穴】',
+      ]);
+    else
+      await printAndWait([
+        '【',
+        attacker.get_colored_name(),
+        ' 怀抱着 ',
+        defender.get_colored_name(),
+        ' 坐着，肉棒抽插着屁穴】',
+      ]);
+  },
+  /**
+   * @param {CharaTalk} attacker 主动方
+   * @param {CharaTalk} defender 被动方
+   * @param {boolean} is_first 是否是连续动作的初次行动
+   */
   async standing(attacker, defender, is_first) {
     if (is_first)
       await printAndWait([

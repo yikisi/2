@@ -1,7 +1,3 @@
-/**
- * @file 目白善信 - 招募
- * @author Bottle
- */
 const era = require('#/era-electron');
 
 const {
@@ -11,33 +7,30 @@ const {
 } = require('#/system/sys-calc-chara-others');
 
 const { add_event, cb_enum } = require('#/event/queue');
-const kojo = require('#/event/rec/rec-64.kojo');
 const CustomizedRecruit = require('#/event/rec/rec-common');
-
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const generate_dictionary = require('#/event/snippets/generate-dictionary');
 
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
 
+const { i18n } = require('#/i18n/selector');
+
 module.exports = class extends CustomizedRecruit {
   async recruit(stage, event_object) {
-    const dict = {};
-    const pama = get_chara_talk(this.id);
-    dict['代表色'] = pama.color;
-    dict['她'] = pama.sex;
-    dict['马娘'] = pama.uma_sex_title;
-    dict['你'] = era.get('callname:0:-2');
-    dict['善信称呼骏川'] = sys_get_callname(this.id, 301);
-    dict['称呼'] = sys_get_callname(this.id, 0);
+    const dict = {
+      ...generate_dictionary(this.id, { call: !0, uma: !0 }),
+      CALL_301: sys_get_callname(this.id, 301),
+    };
+    const kojo = i18n().kojo[this.id].recruit;
     if (era.get(`cflag:${this.id}:招募状态`) === 0) {
       let ret;
       switch (stage) {
         case event_hooks.recruit:
           era.set('flag:物色对象', this.id);
           era.set(`cflag:${this.id}:随机招募`, 0);
-          await kojo['前置']();
+          await kojo['pre']();
           EventMarks.get(0).add(event_hooks.school_rooftop);
           add_event(
             event_hooks.school_rooftop,
@@ -51,18 +44,15 @@ module.exports = class extends CustomizedRecruit {
           }
           EventMarks.get(0).sub(event_hooks.school_rooftop);
           EventMarks.get(0).add(event_hooks.school_atrium);
-          ret = await kojo['招募1'](dict);
-          if (ret[0] === 2) {
-            era.println();
-            ret = sys_like_chara(this.id, 0, -15);
-          } else if (ret[0] === 3) {
-            era.println();
-            ret = sys_like_chara(this.id, 0, 10);
-          } else {
-            ret = false;
-          }
-          if (ret) {
-            await era.waitAnyKey();
+          ret = await kojo['rec1'](dict);
+          switch (ret['reward']) {
+            case 2:
+              era.println();
+              sys_like_chara(this.id, 0, -15) && (await era.waitAnyKey());
+              break;
+            case 3:
+              era.println();
+              sys_like_chara(this.id, 0, 10) && (await era.waitAnyKey());
           }
           add_event(event_hooks.school_atrium, event_object);
           return true;
@@ -72,11 +62,9 @@ module.exports = class extends CustomizedRecruit {
             return;
           }
           EventMarks.get(0).sub(event_hooks.school_atrium);
-          if ((await kojo['招募2'](dict))[0] === 3) {
+          if ((await kojo['rec2'](dict))['reward'] === 3) {
             era.println();
-            if (sys_like_chara(this.id, 0, 10)) {
-              await era.waitAnyKey();
-            }
+            sys_like_chara(this.id, 0, 10) && (await era.waitAnyKey());
           }
           era.set('flag:物色对象', 0);
           era.set(`cflag:${this.id}:随机招募`, 1);
@@ -84,21 +72,19 @@ module.exports = class extends CustomizedRecruit {
           return true;
       }
     } else {
-      const ret = await kojo['招募3'](dict);
-      if (ret[0] === 2) {
+      const ret = await kojo['rec3'](dict);
+      if (ret['select'] === 2) {
         era.set(`cflag:${this.id}:招募状态`, recruit_flags.yes);
         add_event(
           event_hooks.week_start,
           new EventObject(this.id, cb_enum.edu).set_arg('beginning'),
         );
         era.println();
-        let wait_flag;
-        if (ret[1] === 1) {
-          wait_flag = sys_love_uma(this.id, 2);
-        } else {
-          wait_flag = sys_like_chara(this.id, 0, 15);
-        }
-        if (wait_flag) {
+        if (
+          ret['reward'] === 1
+            ? sys_love_uma(this.id, 2)
+            : sys_like_chara(this.id, 0, 15)
+        ) {
           await era.waitAnyKey();
         }
       }

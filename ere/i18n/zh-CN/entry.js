@@ -447,8 +447,8 @@ class I18nEntry {
   ui_foreign_train_max_tip = '已完全适应跑道';
 
   ui_recruit_tip = '* 招募按钮显示为红色的角色有口上';
-  ui_rec_chara_info = '个人情报预览';
-  ui_rec_edu_info = '育成情报预览';
+  ui_rec_chara_info = '个人情报';
+  ui_rec_edu_info = '育成预览';
   ui_rec_exit = '直接离开';
 
   ui_rec_c_info_template = '%NAME% 的个人情报';
