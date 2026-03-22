@@ -454,10 +454,11 @@ module.exports = async () => {
     const cid = era.get('flag:当前互动角色');
 
     if (cur_location !== location_enum.basement) {
-      for (const c of [0, cid].filter((e) => e > 0)) {
-        if (!era.get(`base:${c}:体力`)) {
-          era.set(`status:${c}:沉睡`, 1);
-        }
+      if (!era.get('base:0:体力')) {
+        era.set('status:0:沉睡', 1);
+      }
+      if (cid > 0 && !era.get(`base:${cid}:体力`)) {
+        era.set(`status:${cid}:沉睡`, 1);
       }
       await era.clear();
       page_header(true);

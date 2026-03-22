@@ -12,7 +12,7 @@ const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const get_display_name = require('#/utils/calc-display-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
-const { join_to_string } = require('#/utils/list-utils');
+const { join_to_string, sort_list } = require('#/utils/list-utils');
 
 const { relation_colors } = require('#/data/color-const');
 const { get_relation_info } = require('#/data/info-generator');
@@ -137,41 +137,58 @@ module.exports = {
       });
     }
 
-    era
-      .getAddedCharacters()
-      .map((e) => {
-        return {
-          f: era.get(`cflag:${e}:父方角色`),
-          id: e,
-          m: era.get(`cflag:${e}:母方角色`),
-        };
-      })
-      .filter((ch) => ch.f === chara.id || ch.m === chara.id)
-      .forEach((ch, i) => {
-        const child = get_chara_talk(ch.id);
-        const number = i18n().detail.get_child_number(i + 1);
-        const child_title = (
-          child.sex_code === 1
-            ? i18n().detail.relation_family_child_boy_title_template
-            : i18n().detail.relation_family_child_girl_title_template
-        ).replace('%NUMBER%', number);
-        family_info_list.push({
-          config: { width: 12 },
-          content:
-            ch.f === chara.id
-              ? i18n().detail.get_relation_family_child_entry_as_father(
-                  child_title,
-                  child.get_colored_full_name(),
-                  get_chara_talk(ch.m).get_colored_full_name(),
-                )
-              : i18n().detail.get_relation_family_child_entry_as_mother(
-                  child_title,
-                  child.get_colored_full_name(),
-                  get_chara_talk(ch.f).get_colored_full_name(),
-                ),
-          type: 'text',
-        });
+    sort_list(
+      era
+        .getAddedCharacters()
+        .map((e) => {
+          return {
+            f: era.get(`cflag:${e}:父方角色`),
+            id: e,
+            m: era.get(`cflag:${e}:母方角色`),
+          };
+        })
+        .filter((ch) => ch.f === chara.id || ch.m === chara.id),
+      (ch) => {
+        const y = era.get(`cstr:${ch.id}:出生经历`);
+        let order_key;
+        if (y.startsWith('出生于')) {
+          order_key = y.replace(
+            /出生于 (\d+) 年 (\d+) 月 (\d+) 日/,
+            (_, _y, _m, _d) =>
+              +`${_y}${_m.padStart(2, '0')}${_d.padStart(2, '0')}`,
+          );
+        } else {
+          order_key =
+            +`${y}${era.get(`cflag:${ch.id}:出生月份`).toString().padStart(2, '0')}${era.get(`cflag:${ch.id}:出生日期`).toString().padStart(2, '0')}`;
+        }
+        return order_key;
+      },
+      true,
+    ).forEach((ch, i) => {
+      const child = get_chara_talk(ch.id);
+      const number = i18n().detail.get_child_number(i + 1);
+      const child_title = (
+        child.sex_code === 1
+          ? i18n().detail.relation_family_child_boy_title_template
+          : i18n().detail.relation_family_child_girl_title_template
+      ).replace('%NUMBER%', number);
+      family_info_list.push({
+        config: { width: 12 },
+        content:
+          ch.f === chara.id
+            ? i18n().detail.get_relation_family_child_entry_as_father(
+                child_title,
+                child.get_colored_full_name(),
+                get_chara_talk(ch.m).get_colored_full_name(),
+              )
+            : i18n().detail.get_relation_family_child_entry_as_mother(
+                child_title,
+                child.get_colored_full_name(),
+                get_chara_talk(ch.f).get_colored_full_name(),
+              ),
+        type: 'text',
       });
+    });
     if (
       family_info_list[family_info_list.length - 1] &&
       family_info_list[family_info_list.length - 1].content[0].isBr
