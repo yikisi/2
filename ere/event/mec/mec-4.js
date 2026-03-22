@@ -7,6 +7,8 @@ const MaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-4');
 const LegendUmaSelector = require('#/data/race/model/legend-uma-selector');
 const { race_enum } = require('#/data/race/race-const');
 
+const { i18n } = require('#/i18n/selector');
+
 module.exports = class extends CustomizedMec {
   get_action_debuff() {
     return 0.2 * new MaEduMarks().mygo;
@@ -34,7 +36,7 @@ module.exports = class extends CustomizedMec {
       return [
         {
           color: buff_colors[3],
-          content: '迷茫',
+          content: i18n().kojo[this.id].mygo,
           fontWeight: 'bold',
         },
       ];
@@ -50,7 +52,7 @@ module.exports = class extends CustomizedMec {
     if (!this.set_callname_from_src()) {
       era.set(
         'callname:4:0',
-        era.get('cflag:0:性别') === 1 ? '训练员君' : '训练员酱',
+        era.get('cflag:0:性别') === 1 ? 'trainer_k' : 'trainer_c',
       );
     }
   }

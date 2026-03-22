@@ -1,4 +1,10 @@
+const proxy_kojo_js = require('#/i18n/proxy');
+
 class I18nKojo1000 {
+  daily = proxy_kojo_js(require('#/i18n/zh-CN/kojo/1000/daily-0'));
+  edu = proxy_kojo_js(require('#/i18n/zh-CN/kojo/1000/edu-0'));
+  ero = proxy_kojo_js(require('#/i18n/zh-CN/kojo/1000/ero-0'));
+
   akuochi = '恶堕';
   akuochi_desc = '只要享受就好了。';
 

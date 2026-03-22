@@ -696,9 +696,7 @@ module.exports = (handlers) => {
     await era.printAndWait(`是赶不上新时代船只的乘客。`);
   };
   handlers[47 + 42] = async (falcon, me) => {
-    // 我越喜欢，我对“我受不了的方式”的定义就越严苛。我去做点什么的动能就越强。
-    // 什么也不做，对我就是痛苦的，内心深处就有双重辜负感——第一感觉自己辜负了自己所喜欢的对象，第二感觉辜负了自己的喜欢本身。
-    await print_event_name(`水仙`, falcon);
+    // 我越喜欢，我对“我受不了的方式”的定义就越严苛。我去做点什么的动能就越强。// 什么也不做，对我就是痛苦的，内心深处就有双重辜负感——第一感觉自己辜负了自己所喜欢的对象，第二感觉辜负了自己的喜欢本身。await print_event_name(`水仙`, falcon);
     await era.printAndWait(`粉丝袭击事件已经过去了一周。`);
     await era.printAndWait(
       `身处于事件的风暴中心，出于对你与${falcon.name}的人生安全考虑。`,

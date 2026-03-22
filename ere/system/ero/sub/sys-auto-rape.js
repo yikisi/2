@@ -1,6 +1,7 @@
 const era = require('#/era-electron');
 
 const { sys_check_yandere } = require('#/system/chara/sys-calc-cheat');
+const set_previous_action = require('#/system/ero/ero-act-handler/set-previous-action');
 const use_item_by_character = require('#/system/ero/ero-act-handler/use-item-by-chara');
 const sys_filter_ero_act = require('#/system/ero/sub/sys-filter-ero-act');
 const { get_tequip_info } = require('#/system/ero/sys-calc-ero-item');
@@ -442,7 +443,7 @@ async function sys_auto_rape(shown) {
       (e !== ero_hooks.kiss && e !== ero_hooks.french_kiss),
   );
   const last_action = era.get('tflag:前回行动');
-  const action = get_random_act(master, random_list, last_action, ...filters);
+  let action = get_random_act(master, random_list, last_action, ...filters);
   (last_action === action ? era.add : era.set)(
     `tcvar:${master}:变招`,
     0.16 - 0.08 * era.get(`talent:${master}:工口好奇`),
@@ -580,7 +581,7 @@ async function sys_auto_rape(shown) {
       shown,
     });
   }
-  era.set('tflag:前回行动', action);
+  set_previous_action('前回行动', action);
   era.set('tflag:前回助手', cur_supporter);
   if (shown) {
     era.println();

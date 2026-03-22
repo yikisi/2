@@ -128,10 +128,10 @@ module.exports = async function (maru, me, callname, hook, ebj) {
       ` ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}，我进来了哦♪`,
     );
     await era.printAndWait(
-      `正准备带着这种借口摸鱼的时候， ${maru.name}推门而入。`,
+      `正准备带着这种借口摸鱼的时候，${maru.name}推门而入。`,
     );
     await era.printAndWait(
-      `该说是不是巧合呢， ${maru.name}看上去心情正好的样子。`,
+      `该说是不是巧合呢，${maru.name}看上去心情正好的样子。`,
     );
     await maru.say_and_wait(
       `这样的话，不得不和 ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}好好讲解一下了。`,
@@ -498,8 +498,9 @@ module.exports = async function (maru, me, callname, hook, ebj) {
     );
     await era.printAndWait(`似乎是刻意远离了${me.actual_name}谈论着什么。`);
     await me.say_and_wait(`还是回去吧。`, true);
-    await maru.say_and_wait(`${callname}？后辈们送了一些胡萝卜过来，今天的话。
-    `);
+    await maru.say_and_wait(
+      `${callname}？后辈们送了一些胡萝卜过来，今天的话。`,
+    );
     await era.printAndWait(`${maru.name}堵住了离开中庭最近的道路，而且。`);
     await digital.say_and_wait(`${maru.name}，别来无恙。`);
     await maru.say_and_wait(`小鲁铎今天看上去也很精神的样子呢。`);
@@ -2421,7 +2422,7 @@ module.exports = async function (maru, me, callname, hook, ebj) {
       `服务员:我们也很头疼呢,不过最后店主想到了一个好主意.`,
     );
     await era.printAndWait(`服务员:请二位来一个浪漫的kiss吧.`);
-    era.printButton(`「k..kiss?!」`, 1);
+    era.printButton(`「k……kiss?!」`, 1);
     await era.input();
 
     await era.printAndWait(
@@ -2688,7 +2689,7 @@ module.exports = async function (maru, me, callname, hook, ebj) {
     );
     await era.printAndWait(`一时之间，周围只剩下了${me.name}们两人。`);
     await maru.say_and_wait(
-      `哎呀哎呀，就像是少女漫画之中的跑出来的故事呢， ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}已经不是那种16-17岁正处于青春期的小朋友了哦？`,
+      `哎呀哎呀，就像是少女漫画之中的跑出来的故事呢，${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}已经不是那种16-17岁正处于青春期的小朋友了哦？`,
     );
     await era.printAndWait(
       `在这种暧昧的气氛中处于劣势的 ${maru.name}正试图重新占据主动权。`,
@@ -2716,7 +2717,7 @@ module.exports = async function (maru, me, callname, hook, ebj) {
     );
     era.printButton(`「接下来还有烟火晚会吧？如果不赶快过去的话，」`, 1);
     await era.input();
-    await era.printAndWait(`「还不够」， ${maru.name}的手指依然没有停止动作。`);
+    await era.printAndWait(`「还不够」，${maru.name}的手指依然没有停止动作。`);
     era.printButton(
       `「我想为了弥补去年的遗憾与 ${maru.name}一同拥有这段美好的回忆！」`,
       1,

@@ -575,8 +575,7 @@ module.exports = (handlers) => {
       flags.wait_flag;
   };
   handlers[40] = async (falcon, me, callname, flags) => {
-    // 夜间停止光合作用排出废气 为了摆脱某种“我已经过时、即将被埋葬”的恐惧。大量追赶新潮头试图击退自己的生存恐惧。
-    await print_event_name('夜来香', falcon);
+    // 夜间停止光合作用排出废气 为了摆脱某种“我已经过时、即将被埋葬”的恐惧。大量追赶新潮头试图击退自己的生存恐惧。await print_event_name('夜来香', falcon);
     await era.printAndWait(
       `为了在沙地赛上打响${falcon.name}的名气，${callname}们开始计划接下来要参加的比赛。`,
     );

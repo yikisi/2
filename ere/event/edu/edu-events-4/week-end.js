@@ -32,7 +32,7 @@ module.exports = async function (maru, me, hook, ebj) {
     await print_event_name(`序章·${maru.name}登场`, maru);
     await era.printAndWait(`草场上`);
     await maru.say_and_wait(
-      ` ${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'} ，接下来一起去哪里逛逛吧？`,
+      ` ${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'}，接下来一起去哪里逛逛吧？`,
     );
     await era.printAndWait(`挨着你坐下的${maru.uma_sex_title}向你搭话。`);
     era.printButton(`「抱歉，我还要会训练室整理一下文件。」`, 1);
@@ -68,7 +68,7 @@ module.exports = async function (maru, me, hook, ebj) {
     await me.say_and_wait(`${maru.name}？`, true);
     await era.printAndWait(`带着满腹的疑惑，拆开了信封。`);
     await maru.say_and_wait(
-      `锵锵！正阅读着这封信的 ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'} ，有没有觉得这样子很酷呢？`,
+      `锵锵！正阅读着这封信的 ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}，有没有觉得这样子很酷呢？`,
     );
     await maru.say_and_wait(
       `虽然一开始计划着在你差不多回到训练室的时候突然发短信来着，不过一直搞不定按键真是急死人了><`,
@@ -87,7 +87,7 @@ module.exports = async function (maru, me, hook, ebj) {
       `——嗯，如果按照漫画里的情节考虑的话，好像天台似乎不错的样子？`,
     );
     await maru.say_and_wait(
-      `所以今天晚上7点半在天台见面吧！那么， ${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'} ，待会见！`,
+      `所以今天晚上7点半在天台见面吧！那么，${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'}，待会见！`,
     );
     await era.printAndWait(
       `将信纸从信封中取出，展开，${me.actual_name}就这样站着读了起来。`,
@@ -514,7 +514,7 @@ module.exports = async function (maru, me, hook, ebj) {
     );
     await me.say_and_wait(`看上去心情不错的样子，遇到什么好事了吗？`);
     await maru.say_and_wait(
-      `汗， ${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'} 也看出来了吗？`,
+      `汗，${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'} 也看出来了吗？`,
     );
     await maru.say_and_wait(
       `今天的选拨赛上，一直关注着的后辈终于克服了障碍，同样领略到了奔跑的快乐哦？\n`,
@@ -538,13 +538,13 @@ module.exports = async function (maru, me, hook, ebj) {
     await maru.say_and_wait(`说起来。`);
     await era.printAndWait(`${maru.name}像是联想到了什么，两手轻轻合拍。\n`);
     await maru.say_and_wait(
-      `对了， ${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'} ,训练结束后一起出去兜风吧?`,
+      `对了，${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'} ,训练结束后一起出去兜风吧?`,
     );
     await maru.say_and_wait(
       `不同于其他季节，秋天的风总会带给人心情畅快的感觉呢。`,
     );
     await maru.say_and_wait(
-      `不过，干巴巴的讲述 ${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'} 恐怕也感受不到吧。所以我想， ${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'} 就这样用身体来感受或许更好。`,
+      `不过，干巴巴的讲述 ${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'} 恐怕也感受不到吧。所以我想，${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'} 就这样用身体来感受或许更好。`,
     );
     era.printButton(
       `既然${maru.name}都这么说了，我也想用感受一下秋风的感觉了。`,
@@ -644,7 +644,7 @@ module.exports = async function (maru, me, hook, ebj) {
       `"纵使有身败名裂的可能,作为训练员也要和担当一起闪耀。"用这颗虔诚的心,来救赎自己训练过程中的一切丑陋与不足之处。`,
     );
     await maru.say_and_wait(
-      `差不多该回家吃饭了， ${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'} ——`,
+      `差不多该回家吃饭了，${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'} ——`,
     );
     await era.printAndWait(`月亮升起来了。`);
     edu_marks.wind++;
@@ -771,7 +771,7 @@ module.exports = async function (maru, me, hook, ebj) {
     );
     await maru.say_and_wait(`……`);
     await era.printAndWait(
-      `${maru.name}陷入了迟疑之中， ${maru.sex_code - 1 ? '她' : '他'} 在思考究竟要不要把自己的真实想法告诉我。`,
+      `${maru.name}陷入了迟疑之中，${maru.sex_code - 1 ? '她' : '他'} 在思考究竟要不要把自己的真实想法告诉我。`,
     );
     await maru.say_and_wait(`……抱歉。`);
     await era.printAndWait(`${maru.name}的声音似乎显得很失落。`);
@@ -783,7 +783,7 @@ module.exports = async function (maru, me, hook, ebj) {
       `所以，请挺起胸膛来，你是我见过的最美丽的${maru.uma_sex_title}了。`,
     );
     await maru.say_and_wait(
-      `3q， ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'} 。`,
+      `3q，${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}。`,
     );
     await era.printAndWait(`${maru.name}恢复了之间的状态。`);
     await maru.say_and_wait(`不愧是可靠的成年人呢。`);
@@ -803,7 +803,7 @@ module.exports = async function (maru, me, hook, ebj) {
     era.printButton(`「无论发生了什么，我都会和${maru.name}说清楚的。」`, 1);
     await era.input();
     await me.say_and_wait(
-      `毕竟作为可靠的大 ${era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'} ，不管遇到了什么问题，都会轻松解决掉吧。`,
+      `毕竟作为可靠的大 ${era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'}，不管遇到了什么问题，都会轻松解决掉吧。`,
     );
     await maru.say_and_wait(`那就这么说定了。`);
     await me.say_and_wait(`我这边也是`);
@@ -843,7 +843,7 @@ module.exports = async function (maru, me, hook, ebj) {
       `虽然疑惑为什么负责的${maru.uma_sex_title}会在深夜打过来电话，但你还是毫不犹豫地接通了。`,
     );
     await maru.say_and_wait(
-      `嗨～ ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'} ，今晚的天气可真不错呢～`,
+      `嗨～ ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}，今晚的天气可真不错呢～`,
     );
     await me.say_and_wait(`我这边的话除了看惯了的风景以外也没有什么特别的地方`);
     await me.say_and_wait(`以及，`);
@@ -860,7 +860,7 @@ module.exports = async function (maru, me, hook, ebj) {
     );
     await me.say_and_wait(`说起来，${maru.name}怎么突然打电话过来了？`);
     await maru.say_and_wait(
-      `睡了一觉醒来后发现再也睡不着了，所以干脆来找 ${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'} 。`,
+      `睡了一觉醒来后发现再也睡不着了，所以干脆来找 ${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'}。`,
     );
     await me.say_and_wait(`这样吗？`);
     await era.printAndWait(
@@ -875,7 +875,7 @@ module.exports = async function (maru, me, hook, ebj) {
       `还没等你换好训练员制服时，暂时居住的房门被打开了。`,
     );
     await maru.say_and_wait(
-      `晚上好， ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'} `,
+      `晚上好，${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'} `,
     );
     await me.say_and_wait(`诶？`);
     await era.printAndWait(
@@ -890,7 +890,7 @@ module.exports = async function (maru, me, hook, ebj) {
     );
     await maru.say_and_wait(`非常感谢♪`);
     await era.printAndWait(
-      `随后，你和心血来潮的客人一同收拾着堆放在桌子上的杂物。将速溶红茶递给了 ${maru.sex_code - 1 ? '她' : '他'} 。`,
+      `随后，你和心血来潮的客人一同收拾着堆放在桌子上的杂物。将速溶红茶递给了 ${maru.sex_code - 1 ? '她' : '他'}。`,
     );
     await era.printAndWait(
       `看着小口小口吮吸着红茶的${maru.name}。你忍不住叹了口气。`,
@@ -900,7 +900,7 @@ module.exports = async function (maru, me, hook, ebj) {
     );
     await me.say_and_wait(`怎么办才好？`, true);
     await maru.say_and_wait(
-      `那个， ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'} ？`,
+      `那个，${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'} ？`,
     );
     await era.printAndWait(`${maru.name}在等待着答复，这里的话还是\n`);
     era.printButton(`让${maru.sex_code - 1 ? '她' : '他'}今晚留下来过夜`, 1);
@@ -1220,7 +1220,7 @@ module.exports = async function (maru, me, hook, ebj) {
     );
     maru.print(`与深夜独自前行观看潮水涨落，又是一种不同的感觉呢。`);
     await maru.say_and_wait(
-      `…… ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'} 。`,
+      `…… ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}。`,
     );
     maru.print(
       `意外的，没有对 ${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'} 的背叛感到过于愤怒。`,
@@ -1243,7 +1243,7 @@ module.exports = async function (maru, me, hook, ebj) {
     await me.say_and_wait(`因为被赋予了意义，所以最终带来了些什么吧？`);
     await maru.say_and_wait(`呵呵，真是有趣的想法呢。`);
     await maru.say_and_wait(
-      `既然这样， ${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'} 可以和我一起享受最后的夏季合宿吗？`,
+      `既然这样，${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'} 可以和我一起享受最后的夏季合宿吗？`,
     );
     await me.say_and_wait(`？`);
     await era.printAndWait(
@@ -1438,7 +1438,7 @@ module.exports = async function (maru, me, hook, ebj) {
     await era.printAndWait(
       `在${maru.uma_sex_title}的带领下，你来到了夜晚的学生会室。`,
     );
-    await era.printAndWait(`eclipse first， the rest nowhere。`);
+    await era.printAndWait(`eclipse first，the rest nowhere。`);
     await era.printAndWait(
       `巨大的牌匾与全神贯注处理文件的皇帝让你流下了冷汗。`,
     );
@@ -1490,7 +1490,7 @@ module.exports = async function (maru, me, hook, ebj) {
     await me.say_and_wait(`……`);
     await me.say_and_wait(`皇帝在谈作为训练员所需的领导力。`, true);
     await me.say_and_wait(
-      `而在这里的话， ${maru.sex_code - 1 ? '她' : '他'} 想要我证明我是否有资格作为${maru.name}的训练员。`,
+      `而在这里的话，${maru.sex_code - 1 ? '她' : '他'} 想要我证明我是否有资格作为${maru.name}的训练员。`,
       true,
     );
     await me.say_and_wait(`那么`, true);
@@ -1628,7 +1628,7 @@ module.exports = async function (maru, me, hook, ebj) {
       `而且，我也想在秋天留下和${maru.name}之间的美好回忆。`,
     );
     await maru.say_and_wait(
-      `哎呀， ${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'} 原来这么在意我吗？`,
+      `哎呀，${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'} 原来这么在意我吗？`,
     );
     await maru.say_and_wait(
       `${era.get('cflag:4:性别') - 1 ? '美眉' : '帅锅'}我也想和 ${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'} 留下美好的回忆呢……`,
@@ -1650,7 +1650,7 @@ module.exports = async function (maru, me, hook, ebj) {
     );
     era.drawLine();
     await maru.say_and_wait(
-      `快到中午了， ${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'} 尝尝我做的便当怎么样？`,
+      `快到中午了，${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'} 尝尝我做的便当怎么样？`,
     );
     era.drawLine();
     await me.say_and_wait(`抓娃娃可真是困难啊。`);
@@ -1718,10 +1718,10 @@ module.exports = async function (maru, me, hook, ebj) {
       `嘛，算了。重整心情后，去找亲爱的 ${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'} 吧！`,
     );
     maru.print(
-      `不管接下来走哪条路， ${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'} 都会温柔的鼓励着我吧。`,
+      `不管接下来走哪条路，${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'} 都会温柔的鼓励着我吧。`,
     );
     maru.print(
-      `说起来， ${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'} 好像有礼物要送给我。`,
+      `说起来，${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'} 好像有礼物要送给我。`,
     );
     await maru.say_and_wait(
       `我可是满怀期待地等着哦？ ${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'} ？`,
@@ -1812,10 +1812,10 @@ module.exports = async function (maru, me, hook, ebj) {
     era.printButton(`「今晚晚上一起去特雷森看看吧？」`, 1);
     await era.input();
     maru.print(
-      `在百货大厦的高级餐厅一边吃饭一边这么说着的 ${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'} 。`,
+      `在百货大厦的高级餐厅一边吃饭一边这么说着的 ${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'}。`,
     );
     await maru.say_and_wait(
-      `哎呀， ${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'} 终于要向我揭晓这份礼物了吗？`,
+      `哎呀，${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'} 终于要向我揭晓这份礼物了吗？`,
     );
     await me.say_and_wait(`不如说我已经激动到连叉子都握不稳了。`);
     await maru.say_and_wait(`有这么激动吗？`);
@@ -1853,7 +1853,7 @@ module.exports = async function (maru, me, hook, ebj) {
     maru.print(
       `就这么拉着 ${era.get('cflag:4:性别') - 1 ? '训练员酱' : '训练员君'} 向着特雷森跑去。`,
     );
-    maru.print(`像这样快乐的奔跑，有些怀念呢。 `);
+    maru.print(`像这样快乐的奔跑，有些怀念呢。`);
     maru.print(`顺着声音振幅的方向，我们慢慢走向了训练场所在的位置。`);
     maru.print(
       `就像是节日庆典一样，训练员与${maru.uma_sex_title}们谈笑着或在草场之上挥洒起了自己的汗水，或在观众席上交谈着，欢呼着。`,
@@ -2003,7 +2003,7 @@ module.exports = async function (maru, me, hook, ebj) {
       `在这份最盛大的舞台之上，说不定会让人牙齿都发颤的激动在等着我呢。`,
     );
     await maru.say_and_wait(
-      `一起努力吧， ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'} ♪`,
+      `一起努力吧，${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'} ♪`,
     );
     await era.printAndWait(`为此，下一个目标已经决定了。`);
     edu_marks.wind++;

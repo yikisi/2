@@ -15,7 +15,11 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const get_gradient_color = require('#/utils/gradient-color');
 const { get_abbr_number } = require('#/utils/value-utils');
 
-const { attr_change_colors, palam_colors } = require('#/data/color-const');
+const {
+  akuochi: a_colors,
+  attr_change_colors,
+  palam_colors,
+} = require('#/data/color-const');
 const CharaInmon = require('#/data/ero/chara-inmon');
 const { mark_colors, mark_enum } = require('#/data/ero/mark-const');
 const { palam2juel } = require('#/data/ero/orgasm-const');
@@ -148,14 +152,11 @@ module.exports = {
           type: 'divider',
         });
         const punishment = !chara.id && era.get('flag:惩戒力度');
-        if (punishment >= 2) {
-          const akuochi = era.get('flag:恶堕') > 0;
+        let akuochi = era.get('flag:恶堕');
+        if (punishment >= 2 && akuochi > 0) {
+          akuochi = akuochi === 2;
           sex_info_list.push({
-            config: {
-              color: akuochi
-                ? palam_colors.progress[1]
-                : palam_colors.notifications[1],
-            },
+            config: { color: a_colors[+akuochi] },
             content: __(
               `detail.sex_exp_slave_${punishment}_${akuochi ? 'accept' : 'reject'}`,
             ),

@@ -27,15 +27,13 @@ class EroNormalSm extends EroSm {
    * @param {HookArg} hook
    */
   async ask_insult(attacker, defender, hook) {
-    if (hook.arg) {
-      if (await ask_action(attacker.id)) {
-        await (
-          Math.random() > 0.5
-            ? after_refusing_by_attacker
-            : after_refusing_by_defender
-        )(attacker, defender, hook);
-        return;
-      }
+    if (hook.arg && (await ask_action(attacker.id))) {
+      await (
+        Math.random() > 0.5
+          ? after_refusing_by_attacker
+          : after_refusing_by_defender
+      )(attacker, defender, hook);
+      return;
     }
     await this.insult(defender, attacker, hook);
   }
@@ -46,14 +44,12 @@ class EroNormalSm extends EroSm {
    * @param {HookArg} hook
    */
   async ask_hit_anal(attacker, defender, hook) {
-    if (hook.arg) {
-      if (await ask_action(attacker.id)) {
-        await (
-          Math.random() > 0.5
-            ? after_refusing_by_attacker
-            : after_refusing_by_defender
-        )(attacker, defender, hook);
-      }
+    if (hook.arg && (await ask_action(attacker.id))) {
+      await (
+        Math.random() > 0.5
+          ? after_refusing_by_attacker
+          : after_refusing_by_defender
+      )(attacker, defender, hook);
     }
   }
 
@@ -63,14 +59,12 @@ class EroNormalSm extends EroSm {
    * @param {HookArg} hook
    */
   async ask_hit_breast(attacker, defender, hook) {
-    if (hook.arg) {
-      if (await ask_action(attacker.id)) {
-        await (
-          Math.random() > 0.5
-            ? after_refusing_by_attacker
-            : after_refusing_by_defender
-        )(attacker, defender, hook);
-      }
+    if (hook.arg && (await ask_action(attacker.id))) {
+      await (
+        Math.random() > 0.5
+          ? after_refusing_by_attacker
+          : after_refusing_by_defender
+      )(attacker, defender, hook);
     }
   }
 
@@ -94,14 +88,12 @@ class EroNormalSm extends EroSm {
    * @param {HookArg} hook
    */
   async ask_hit_face(attacker, defender, hook) {
-    if (hook.arg) {
-      if (await ask_action(attacker.id)) {
-        await (
-          Math.random() > 0.5
-            ? after_refusing_by_attacker
-            : after_refusing_by_defender
-        )(attacker, defender, hook);
-      }
+    if (hook.arg && (await ask_action(attacker.id))) {
+      await (
+        Math.random() > 0.5
+          ? after_refusing_by_attacker
+          : after_refusing_by_defender
+      )(attacker, defender, hook);
     }
   }
 
@@ -111,21 +103,20 @@ class EroNormalSm extends EroSm {
    * @param {HookArg} hook
    */
   async ask_virgin_foot_job(attacker, defender, hook) {
-    if (hook.arg) {
-      if (
-        await ask_action(
-          attacker.id,
-          defender.id,
-          part_enum.clitoris,
-          part_enum.foot,
-        )
-      ) {
-        await (
-          Math.random() > 0.5
-            ? after_refusing_by_attacker
-            : after_refusing_by_defender
-        )(attacker, defender, hook);
-      }
+    if (
+      hook.arg &&
+      (await ask_action(
+        attacker.id,
+        defender.id,
+        part_enum.clitoris,
+        part_enum.foot,
+      ))
+    ) {
+      await (
+        Math.random() > 0.5
+          ? after_refusing_by_attacker
+          : after_refusing_by_defender
+      )(attacker, defender, hook);
     }
   }
 }

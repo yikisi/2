@@ -629,8 +629,7 @@ module.exports = (handlers = {}) => {
     await falcon.say_and_wait(`就这样一步步的迈向最高的舞台。`);
   };
   handlers[47 + 39] = async (falcon, me, callname) => {
-    // 萱草 忘忧草，寓意忘记烦恼。
-    // 过量摄入可能会中毒
+    // 萱草 忘忧草，寓意忘记烦恼。// 过量摄入可能会中毒
     await print_event_name('萱草', falcon);
     await era.printAndWait(`在商业街举行的突击演唱会\n`);
     await falcon.say_and_wait(`～～～♪大家辛苦了！`);

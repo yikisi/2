@@ -1,9 +1,3 @@
-/**
- * @file 玩家 - 调教
- * @author 幽白書
- * @author 雞雞
- * @author 黑奴队长
- */
 const era = require('#/era-electron');
 
 const { get_penis_size } = require('#/system/ero/sys-calc-ero-status');
@@ -12,12 +6,12 @@ const sys_filter_chara = require('#/system/sys-filter-chara');
 
 const CustomizedEro = require('#/event/ero/ero-common');
 const add_jewel_reward = require('#/event/snippets/add-jewel-reward');
-const print_event_name = require('#/event/snippets/print-event-name');
 const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 
+const get_display_name = require('#/utils/calc-display-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { join_list, join_to_string } = require('#/utils/list-utils');
 
-const { buff_colors, palam_colors } = require('#/data/color-const');
 const { part_enum } = require('#/data/ero/part-const');
 const { unexpected_pregnant_enum } = require('#/data/ero/status-const');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
@@ -28,19 +22,12 @@ const recruit_flags = require('#/data/event/recruit-flags');
 const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
-const stop_ex_options = {};
-stop_ex_options[part_enum.virgin] = (chara_id) =>
-  `射到 ${era.get(`callname:${chara_id}:-2`)} 身上！`;
-stop_ex_options[part_enum.mouth] = (chara_id, is_double_blow_job) => {
-  return `射到 ${era.get(`callname:${chara_id}:-2`)}${
-    is_double_blow_job
-      ? ` 与 ${era.get(`callname:${era.get('tflag:当前助手')}:-2`)}`
-      : ''
-  } 脸上！`;
-};
-
 module.exports = class extends CustomizedEro {
-  /** @author 雞雞 */
+  get #kojo() {
+    return i18n().kojo[0].ero;
+  }
+
+  /**  */
   become_erect(chara, me, callname, hook, extra_flag) {
     if (extra_flag.part === part_enum.penis) {
       const last_action = era.get('tflag:前回行动');
@@ -50,25 +37,19 @@ module.exports = class extends CustomizedEro {
         last_action === ero_hooks.ask_double_tit_job ||
         last_action === ero_hooks.double_tit_job
       ) {
-        era.print([
-          '在 ',
-          get_chara_talk(era.get('tflag:前回对手')).get_colored_name(),
-          ' 与 ',
-          get_chara_talk(era.get('tflag:前回助手')).get_colored_name(),
-          ' 的侍奉下，',
-          me.get_colored_name(),
-          ` ${di18n.feature.n_penis[get_penis_size(0)]} 的肉棒很快就一柱擎天了。`,
-        ]);
+        this.#kojo.become_erect(
+          get_chara_talk(era.get('tflag:前回对手')),
+          get_chara_talk(era.get('tflag:前回助手')),
+          me,
+          di18n.feature.n_penis[get_penis_size(0)],
+        );
         return;
       }
     }
     super.become_erect(chara, me, callname, hook, extra_flag);
   }
 
-  /**
-   * 只有醒着的主控才能寸止，所以这里必然是需要输出的
-   * @author 黑奴队长
-   */
+  /** 只有醒着的主控才能寸止，所以这里必然是需要输出的 */
   async orgasm_denial(stop_success) {
     const me = get_chara_talk(0);
     const touch = era.get('tcvar:0:阴茎接触部位');
@@ -76,18 +57,32 @@ module.exports = class extends CustomizedEro {
     const is_double_blow_job =
       last_action === ero_hooks.ask_double_blow_job ||
       last_action === ero_hooks.double_blow_job;
+    let third_button;
+    if (!era.get('tcvar:0:避孕套')) {
+      switch (touch.part) {
+        case part_enum.mouth:
+          third_button = this.#kojo.get_cum_on_face(
+            join_to_string(
+              [touch.owner, is_double_blow_job && era.get('tflag:当前助手')]
+                .filter((cid) => cid)
+                .map((cid) => get_display_name(era.get(`callname:${cid}:-2`))),
+              i18n().ui_conjunction,
+            ),
+          );
+          break;
+        case part_enum.virgin:
+        case part_enum.anal:
+          third_button = this.#kojo.get_cum_on_body(
+            get_display_name(era.get(`callname:${touch.owner}:-2`)),
+          );
+      }
+    }
     era.printMultiColumns([
       {
-        content: [me.get_colored_name(), ' 的肉棒已经达到极限……'],
+        content: i18n().timon.ero_o.get_orgasm_denial_notification(me),
         type: 'text',
       },
-      ...[
-        '射了！',
-        '再忍一下',
-        !era.get('tcvar:0:避孕套') && stop_ex_options[touch.part]
-          ? stop_ex_options[touch.part](touch.owner, is_double_blow_job)
-          : '',
-      ]
+      ...[this.#kojo.bt_cum_in, this.#kojo.bt_cum_not, third_button]
         .filter((e) => e)
         .map((e, i, l) => ({
           accelerator: i,
@@ -97,38 +92,24 @@ module.exports = class extends CustomizedEro {
         })),
     ]);
     const ret = await era.input();
-    if (ret) {
-      // 寸止但没忍住
-      if (!stop_success) {
-        era.print([get_chara_talk(0).get_colored_name(), ' 的忍耐失败了！']);
-      } else if (ret === 2) {
-        // 忍住了且换目标
-        const touched_part = era.get('tcvar:0:阴茎接触部位');
-        if (touched_part !== -1) {
-          const curr_supporter = era.get('tflag:当前助手');
-          era.print([
-            me.get_colored_name(),
-            ' 拔出阴茎对准 ',
-            get_chara_talk(touched_part.owner).get_colored_name(),
-            ...(is_double_blow_job
-              ? [' 与 ', get_chara_talk(curr_supporter).get_colored_name()]
-              : []),
-            ` 的 ${touch.part === part_enum.virgin ? '玉体' : '俏脸'}`,
-          ]);
-        }
-      } else {
-        // 寸止成功
-        era.print([me.get_colored_name(), ' 暂时忍住了射精冲动……']);
-      }
+    if (ret > 0) {
+      this.#kojo.orgasm_denial(
+        get_chara_talk(0),
+        stop_success,
+        ret === 2,
+        touch.part === part_enum.mouth,
+        join_list(
+          [touch.owner, is_double_blow_job && era.get('tflag:当前助手')]
+            .filter((cid) => cid)
+            .map((cid) => get_chara_talk(cid).get_colored_name()),
+          i18n().ui_conjunction,
+        ),
+      );
     }
     return ret;
   }
 
-  /**
-   * @author 幽白書
-   * @author 雞雞
-   */
-  async report_pregnant_between_weeks(father, mother, callname, hook) {
+  async report_pregnant_between_weeks(father, mother, callname, hook, extra) {
     const love = era.get(`love:${mother.id || father.id}`);
     const unexpected_pregnant = LifeEventMarks.get_marks(
       mother.id,
@@ -160,153 +141,14 @@ module.exports = class extends CustomizedEro {
         ).filter(
           (cid) => cid > 0 && era.get(`cflag:${cid}:育成回合计时`) < 3 * 48,
         ).length;
-        /** @author 幽白書 */
-        await print_event_name('职责', mother);
-        await era.printAndWait([
-          mother.get_colored_name(),
-          ' 盯着 ',
-          { color: buff_colors[2], content: '小腹淫纹上代表怀孕的图案' },
-          '，冲到卫生间呕吐了起来。',
-        ]);
-        await era.printAndWait([
-          '对这个打乱步调的小生命，',
-          mother.get_colored_name(),
-          ' 决定——',
-        ]);
-        era.printButton('欢喜地期待到来 (顺从因子+200 父方好感+150)', 1, {
-          color: palam_colors.progress[1],
-          disabled: era.get('flag:恶堕') === 0,
-        });
-        era.printButton('无奈地接受事实 (受虐因子+200 父方好感+50)', 2, {
-          color: palam_colors.notifications[1],
-          disabled: era.get('flag:恶堕') > 0,
-        });
-        const ret = await era.input();
-        if (ret === 1) {
-          await era.printAndWait([mother.get_colored_name(), ' 欣喜地畅想着']);
-          await era.printAndWait('有了孩子之后的未来、孩子出生之后的教育……');
-          await era.printAndWait([
-            '但是，在 ',
-            mother.get_colored_name(),
-            ' 心中最值得思考的，果然还是',
-          ]);
-          era.println();
-          await era.printAndWait('孩子的父亲会是谁呢？');
-          await era.printAndWait(
-            `是前几天那个输掉了比赛，在自己的全身留下齿痕作为泄愤的${father.uma_sex_title}？`,
-          );
-          await era.printAndWait(
-            `还是那个赢下比赛，高兴的甚至在自己的子宫里尿出来的${father.uma_sex_title}？`,
-          );
-          if (edu_count > 0) {
-            await era.printAndWait(
-              `又或者，是那每天的训练时间都会先在自己的小穴内舒服的把一整天的存货灌进来，让自己夹着时不时滴落在走廊上的白浆到训练场上的负责${father.uma_sex_title}？`,
-            );
-          }
-          if (children_count > 0) {
-            await era.printAndWait(
-              '又或者，是明明印象中还只是个孩子，却仿佛还记得怎么从妈妈的肚子里出来的一般，每次都能把没用的妈妈操成阿嘿颜母猪的贴心小棉袄？',
-            );
-          }
-          era.println();
-          await era.printAndWait('无论是谁，新生命的诞生总是令人欢喜');
-          await era.printAndWait([
-            '不过，最令 ',
-            mother.get_colored_name(),
-            ' 担心的果然还是……',
-          ]);
-          era.println();
-          await era.printAndWait('（孩子出生前，身为孕袋的职责……）');
-          era.println();
-          await era.printAndWait([
-            '还没来得及完整的想完一句话，从身后传来的冲击便打断了 ',
-            mother.get_colored_name(),
-            ' 的思绪',
-          ]);
-          await era.printAndWait(
-            `对方毫不在意自己的意愿，甚至连确认一下下体是否湿润都没有———当然，由于肉体改造所以也无需确认，反正二十四小时都是湿润着欢迎${father.uma_sex_title}大人的使用———就直接插入`,
-          );
-          await era.printAndWait([
-            '在猛烈的撞击，将 ',
-            mother.get_colored_name(),
-            ' 操到几乎失去意识后，身后的',
-            father.uma_sex_title,
-            '才好不容易射了出来，用 ',
-            mother.get_colored_name(),
-            ' 的脸擦了擦肉棒后直接转身离去',
-          ]);
-          await era.printAndWait([
-            '过程中 ',
-            mother.get_colored_name(),
-            ' 甚至不知道对方长什么样子',
-          ]);
-          era.println();
-          await era.printAndWait('不说自己已经怀孕');
-          await era.printAndWait(
-            `哪怕自己已经大腹便便，对${father.uma_sex_title}主人而言，也就是多了个可以玩弄的部位而已吧`,
-          );
-          await era.printAndWait([
-            '领悟了这点的 ',
-            mother.get_colored_name(),
-            '，下体又忍不住一阵痉挛，无法控制的潮吹在阳光下竟生成了彩虹，仿佛在恭贺着自己的怀孕一般',
-          ]);
-        } else {
-          await era.printAndWait('没有什么好意外的');
-          await era.printAndWait(
-            '———每天就连上个厕所都会被五六根肉棒堵在门外，最后只能自己将混杂着潮水、精液以及失禁的尿液的地板仔细舔舐干净的生活，怀孕真的有那么难以想像吗？',
-          );
-          era.println();
-          await era.printAndWait('孩子的父亲是谁呢？');
-          await era.printAndWait([
-            mother.get_colored_name(),
-            ' 又忍不住想到——',
-          ]);
-          await era.printAndWait(
-            `是昨天那对关系看起来很好，连使用孕袋都是一起用的两名${father.uma_sex_title}？`,
-          );
-          await era.printAndWait(
-            '还是那只在自己面前誓师的队伍里的谁，将自己从里到外每个洞口射满，连吐出的气息都带着浓精味……最后还必须将身上的精液一点点舔入口中和塞进小穴——说不定就是这时怀上的',
-          );
-          era.println();
-          await era.printAndWait([
-            '不知不觉，',
-            mother.get_colored_name(),
-            ' 的心中莫名因孩子的未来感到恐惧和害怕',
-          ]);
-          if (children_count > 0) {
-            await era.printAndWait(
-              `想起那孩子小时候的事，仿佛才没过去多久，${father.sex}就已经从眼神纯真的幼儿，变成会以带着性欲的目光盯着自己诞生的洞口的野兽`,
-            );
-            await era.printAndWait([
-              mother.get_colored_name(),
-              ' 忍不住担心起，自己是否会再度被孩子玩弄成无法称为人母的羞耻模样',
-            ]);
-          }
-          if (!children_count) {
-            await era.printAndWait(
-              `将被生下来的这孩子，会不会变得像其他${father.uma_sex_title}们一样，将自己当成孕袋……`,
-            );
-            await era.printAndWait(
-              '……不行，必须要尽起职责，最起码，要好好将这孩子养育成材',
-            );
-          }
-          era.println();
-          await era.printAndWait('由孕袋培养出的孩子，真的有办法正常成人吗？');
-          await era.printAndWait(
-            `天天看着自己的妈妈被各式各样的${father.elder_sibling_sex_title}肏到涕沫横流，毫无尊严的求饶的模样`,
-          );
-          await era.printAndWait(
-            '这样的孩子，真的有可能不屈不挠的茁壮成长吗？',
-          );
-          await era.printAndWait('然而，也没什么好嘲笑的');
-          await era.printAndWait([
-            '毕竟现在又被路过厕所的小学部',
-            father.uma_sex_title,
-            '按在地上服侍肉棒的 ',
-            mother.get_colored_name(),
-            '，也只能将希望放在如此微薄的光芒上了',
-          ]);
-        }
+        const ret = await print_title_with_kojo(
+          this.#kojo,
+          'duty',
+          mother,
+          father,
+          edu_count,
+          children_count,
+        );
         era.println();
         if (ret[0] === 1) {
           add_jewel_reward(0, 10, 1000);
@@ -327,66 +169,17 @@ module.exports = class extends CustomizedEro {
         }
         await era.waitAnyKey();
       } else {
-        await print_event_name('意外', mother);
-        await era.printAndWait([
-          mother.get_colored_name(),
-          ' 盯着 ',
-          {
-            color: buff_colors[2],
-            content: slavery >= 2 ? '小腹淫纹上代表怀孕的图案' : '手上的验孕棒',
-          },
-          '，冲到卫生间呕吐了起来。',
-        ]);
-        if (unexpected_pregnant === unexpected_pregnant_enum.mother_sleep) {
-          await era.printAndWait([
-            mother.get_colored_name(),
-            ' 对自己如何怀孕完全没有印象，一想到谁都有可能是犯人就让 ',
-            mother.get_colored_name(),
-            ' 为之胆寒……',
-          ]);
-          if (mother.sex_code >= 1) {
-            await era.printAndWait([
-              '……而且明明 ',
-              mother.get_colored_name(),
-              ' 可以成为父亲的……',
-            ]);
-          }
-        } else {
-          await era.printAndWait([
-            '在短暂的慌乱后，',
-            mother.get_colored_name(),
-            ' 还是决定向 ',
-            father.get_colored_name(),
-            ' 报告消息',
-          ]);
-          if (unexpected_pregnant === unexpected_pregnant_enum.father_sleep) {
-            await era.printAndWait([
-              father.get_colored_name(),
-              ' 再三询问确认，还是得到了孩子是自己骨肉的回答。',
-            ]);
-            await era.printAndWait([
-              '但 ',
-              father.get_colored_name(),
-              ' 对此毫无印象……',
-            ]);
-          } else {
-            await era.printAndWait([
-              '在同样的惊慌后，平静下来的 ',
-              father.get_colored_name(),
-              ' 向 ',
-              mother.get_colored_name(),
-              ' 承诺一定会负起父亲的责任……',
-            ]);
-          }
-        }
+        await print_title_with_kojo(
+          this.#kojo,
+          'report_preg_not_love',
+          mother,
+          father,
+          unexpected_pregnant,
+        );
       }
     }
   }
 
-  /**
-   * @author 幽白書
-   * @author 雞雞
-   */
   async have_baby(father, mother, ch_id) {
     const is_slave = era.get('flag:惩戒力度') === 3;
     if (
@@ -395,58 +188,7 @@ module.exports = class extends CustomizedEro {
         unexpected_pregnant_enum.mother_sleep &&
       !is_slave
     ) {
-      /** @author 雞雞 */
-      if (era.get(`love:${father.id}`) >= 90) {
-        await era.printAndWait([
-          mother.get_colored_name(),
-          ' 躺在病床上，看着自己生下的孩子，脑中有些恍惚，想起了孩子的父亲。',
-        ]);
-        await era.printAndWait([
-          '没有想到，才这么短暂的时间，',
-          father.get_colored_name(),
-          ' 这孩子就已经成长的这么快速，到了能够让女性（',
-          mother.get_colored_name(),
-          '）为其生下孩子的年纪。',
-        ]);
-        await era.printAndWait([
-          '说曹操曹操到，',
-          father.get_colored_name(),
-          ' 沖进了房间内，当初那个在自己怀中喝奶的孩子，现在的背影却让 ',
-          mother.get_colored_name(),
-          ' 都忍不住脸红心跳。',
-        ]);
-        await era.printAndWait([
-          '比起母亲的身份，',
-          mother.get_colored_name(),
-          ' 选择了身为 ',
-          father.get_colored_name(),
-          ' 爱人的幸福。',
-        ]);
-      } else {
-        await era.printAndWait([
-          mother.get_colored_name(),
-          ' 抱着孩子，心中是无尽的担忧。作为与 ',
-          father.get_colored_name(),
-          ' 乱伦生下的孩子，',
-          mother.get_colored_name(),
-          ' 担心着这孩子接下来的命运。',
-        ]);
-        await era.printAndWait([
-          '如果当初没有和 ',
-          father.get_colored_name(),
-          '……',
-          mother.get_colored_name(),
-          ' 忍不住想要这么抱怨，但却又说不出口。',
-        ]);
-        await era.printAndWait(
-          '作为母亲的亲情与作为恋人的爱情混杂在一起，化作了连当事人都摸不清楚的感情。',
-        );
-        await era.printAndWait([
-          '最终变作一声撒娇的娇叱，吐在姗姗来迟的 ',
-          father.get_colored_name(),
-          ' 身上。',
-        ]);
-      }
+      await this.#kojo.have_baby_with_child(mother, father);
     } else if (era.get(`love:${father.id}`) < 90) {
       era.drawLine();
       if (is_slave) {
@@ -474,304 +216,42 @@ module.exports = class extends CustomizedEro {
             },
             { c: 0, s: 0 },
           );
-          /** @author 幽白書 */
-          await print_event_name('新生命', mother);
-          await era.printAndWait([mother.get_colored_name(), ' 抱起了孩子——']);
-          era.printButton('慈爱地轻抚', 1, {
-            color: palam_colors.progress[1],
-            disabled: era.get('flag:恶堕') === 0,
-          });
-          era.printButton('无声地反抗', 2, {
-            color: palam_colors.notifications[1],
-            disabled: era.get('flag:恶堕') > 0,
-          });
-          const ret = await era.input();
-          if (ret === 1) {
-            await era.printAndWait([
-              mother.get_colored_name(),
-              ' 的心中满是疼爱',
-            ]);
-            await era.printAndWait('孩子的父亲是谁已经不重要了');
-            await era.printAndWait([
-              '甚至不如说，只是进行孕袋的例行工作，就能获得如此可爱的孩子……',
-              mother.get_colored_name(),
-              ' 不禁在心中，对那未曾谋面的孩子父亲道了声谢',
-            ]);
-            await era.printAndWait('接下来，一定要好好的把这孩子养育成材……');
-            await era.printAndWait([
-              '不知不觉间，曾经在 ',
-              mother.get_colored_name(),
-              ' 心中的，身为训练员的责任感和荣誉感渐渐萌芽……',
-            ]);
-            era.printButton('「！」', 1);
-            await era.input();
-            await era.printAndWait([
-              '忽然的水流，将 ',
-              mother.get_colored_name(),
-              ' 从幻想中沖醒',
-            ]);
-            await era.printAndWait(
-              '被抱起的孩子朝着自己的母亲洒出了人生中的第一泡尿',
-            );
-            await era.printAndWait([
-              '被自己的孩子当成便所，即便只是意外，这都使 ',
-              mother.get_colored_name(),
-              ' 感到无比的快感，仿佛自己便是为了让这孩子能够将自己当成厕所使用才将',
-            ]);
-            await era.printAndWait([
-              mother.get_colored_name(),
-              ' 温柔地帮孩子舔干净了尿出尿液的私处，接着将洒在自己身上的液体全部干干凈凈沾进口中，满足的舔了舔手指',
-            ]);
-            era.println();
-            await era.printAndWait(
-              '如此下贱的模样，哪怕最低等的孕袋也不过如此',
-            );
-            await era.printAndWait('这样的自己，怎么还有可能回到原来的生活');
-            await era.printAndWait('又怎么能够忍受回到那样的生活');
-            await era.printAndWait([
-              mother.get_colored_name(),
-              ' 温柔地看着怀中的孩子，表情依旧',
-            ]);
-            await era.printAndWait('但心中想的已然不同');
-            await era.printAndWait(
-              '————该怎么做，才能将这孩子养育成最适合调教自己的主人呢？',
-            );
-          } else {
-            await era.printAndWait(
-              '对这个孩子，理论上身为母亲应该要有的感情都变得淡漠',
-            );
-            await era.printAndWait('明明知道，刚出生的孩子是无罪的……');
-            era.printButton('「！」', 1);
-            await era.printAndWait([
-              '忽然，',
-              mother.get_colored_name(),
-              ' 发出一声惊呼',
-            ]);
-            await era.printAndWait([
-              '孩子的第一泡尿仿佛瞄准了角度一般，顿时喷洒而出，淋了 ',
-              mother.get_colored_name(),
-              ' 一脸',
-            ]);
-            await era.printAndWait(
-              '护士也发出了善意的笑声，仿佛是为了孩子的健康而喜悦',
-            );
-            await era.printAndWait([
-              '但 ',
-              mother.get_colored_name(),
-              ' 的心中却毫无喜色，脑海中回想起了那些过往',
-            ]);
-            era.println();
-            await era.printAndWait(
-              `早上被迫双腿岔开蹲坐，张口为没睡醒的${father.uma_sex_title}处理晨勃，将${father.uma_sex_title}一天的初精和初尿一同吞入腹中的经验`,
-            );
-            await era.printAndWait(
-              `傍晚，在训练场上就被训练结束的${father.uma_sex_title}们恳求处理性欲，将那充满了一整天未能清理的汗臭和尿垢的肉棒含在口中，让${father.sex}们将训练的辛劳全数发泄在自己嘴里`,
-            );
-            if (diff_mark.c > 0 || diff_mark.s > 0) {
-              await era.printAndWait([
-                mother.get_colored_name(),
-                ' 悲哀地想起前几天的晚上',
-              ]);
-              await era.printAndWait([
-                '哪怕自己的',
-                diff_mark.c > 0 ? '孩子' : `负责${father.uma_sex_title}`,
-                '梦游到自己房中，半梦半醒间把自己的小穴灌满后再强行撑开自己正处于睡梦中的双唇进行清理，自己都没能醒过来的事',
-              ]);
-              era.println();
-              await era.printAndWait([
-                mother.get_colored_name(),
-                ' 甚至开始怀疑，自己是不是已经习惯起这种生活……',
-              ]);
-              await era.printAndWait([
-                '不行，不能这么想，',
-                mother.get_colored_name(),
-                ' 惊醒般摇了摇头',
-              ]);
-            }
-            era.println();
-            await era.printAndWait('……果然，想起的都是痛苦的回忆。但是……');
-            await era.printAndWait(
-              '看着怀中一无所知，即便尿在自己母亲脸上也不觉得有什么，露出咯咯笑容的孩子',
-            );
-            await era.printAndWait('孩子的天性，是无关善恶的……');
-            await era.printAndWait('或许，还能有机会……？');
-            era.println();
-            await era.printAndWait('忘却了孩子对周围行为的学习能力');
-            await era.printAndWait(
-              `也忘却了孕袋所要服务的对象是无关身份的「全体${father.uma_sex_title}」`,
-            );
-            await era.printAndWait(
-              '没发现一旁的护士已经忍不住想要接受孕袋的口穴侍奉',
-            );
-            await era.printAndWait(
-              '更没发现自己在无意识中舔干净了亲生孩子尿在自己身上的尿液',
-            );
-            await era.printAndWait([
-              mother.get_colored_name(),
-              ' 抱着孩子，哪怕被强迫着吮吸护士裙下粗壮的巨物，眼中的光芒也未曾消失',
-            ]);
-            era.println();
-            if (era.get('exp:0:生产次数') > 0)
-              await era.printAndWait([
-                '再一次怀抱着空虚的梦想，',
-                mother.get_colored_name(),
-                ' 下定决心这次一定要好好的养育这个孩子',
-              ]);
-            if (!era.get('exp:0:生产次数'))
-              await era.printAndWait([
-                '怀抱着空虚的梦想，',
-                mother.get_colored_name(),
-                ' 下定决心这次一定要好好的养育这个孩子',
-              ]);
-          }
-          if (ret === 1) {
+          const ret = await print_title_with_kojo(
+            this.#kojo,
+            'have_baby_in_sleep',
+            mother,
+            father,
+            diff_mark.c,
+            diff_mark.s,
+          );
+          if (ret[0] === 1) {
             era.set(`love:${ch_id}`, Math.max(era.get(`love:${ch_id}`), 1));
           }
         } else if (LifeEventMarks.get_marks(0).rape_child === father.id) {
-          /** @author 幽白書 */
-          await print_event_name('新生命', mother);
-          await era.printAndWait([mother.get_colored_name(), ' 抱起了孩子——']);
-          era.printButton('孩子必须有个爸爸', 1, {
-            color: palam_colors.progress[1],
-            disabled: era.get('flag:恶堕') === 0,
-          });
-          era.printButton('不，我自己也能照顾的来', 2, {
-            color: palam_colors.notifications[1],
-            disabled: era.get('flag:恶堕') > 0,
-          });
-          const ret = await era.input();
-          if (ret === 1) {
-            await era.printAndWait('……无论如何，自己或许可以一个人过');
-            await era.printAndWait('但最起码，还是想让孩子有个完整的家庭');
-            era.println();
-            await era.printAndWait(
-              `看向了孩子的父亲，将手上的孩子抱给${father.sex}看`,
-            );
-            await era.printAndWait(
-              `希望这个孩子，能够勾起${father.sex}的责任感`,
-            );
-            await era.printAndWait([
-              father.get_colored_name(),
-              ' 紧紧地将 ',
-              mother.get_colored_name(),
-              ' 与孩子抱在怀中，发誓以后会好好对待 ',
-              mother.get_colored_name(),
-              ' 和孩子',
-            ]);
-            await era.printAndWait('浪子回头的父亲，以及不离不弃的母亲');
-            await era.printAndWait('刚刚那一家三口的幻想，仿佛直接化作了现实');
-            era.println();
-            await era.printAndWait('然而……');
-            await era.printAndWait([
-              '身为孕袋的职业本能，让 ',
-              mother.get_colored_name(),
-              ' 没有错过',
-            ]);
-            await era.printAndWait([
-              '在看见自己给婴儿喂奶时，',
-              father.get_colored_name(),
-              ' 胯下颤动的模样',
-            ]);
-            era.println();
-            await era.printAndWait('家庭生活……真是个好理由');
-            await era.printAndWait(
-              '这样的话，就算在自己给孩子喂奶的同时将肉棒塞入自己口中，也可以以「补充营养」的名分一言带过吧',
-            );
-            await era.printAndWait([
-              '作为丈夫的 ',
-              father.get_colored_name(),
-              ' 亲切的将抱着孩子的自己抱在怀中的画面，想必会让任何对自己家庭有疑问的人抛却疑心吧……只要他们没发现与此同时堵住自己下面流水的小穴的粗壮肉棒',
-            ]);
-            await era.printAndWait(
-              '甚至，等到孩子长大之后……被孩子与孩子的父亲一起使用，被紧紧夹在中间，沉溺于雄性的肉棒之中……',
-            );
-            era.println();
-            await era.printAndWait([
-              '想到那样的未来，',
-              mother.get_colored_name(),
-              ' 不由得舔了舔唇……',
-            ]);
-            await era.printAndWait('开始期待起那样的明天');
-          } else if (ret === 2) {
-            await era.printAndWait([
-              mother.get_colored_name(),
-              ' 瞪着当初痛快在自己体内释放欲望，毫无责任感的在自己体内中出的 ',
-              father.get_colored_name(),
-            ]);
-            await era.printAndWait(
-              `这样的${father.sex}，怎么想也不可能会担起父亲的责任来吧`,
-            );
-            await era.printAndWait(
-              '自己需要的是在饱受侮辱的时候可以扶持自己与孩子，保护孩子的人',
-            );
-            await era.printAndWait(
-              '而不是在自己被当成泄欲工具时，会上来用肉棒堵住最后的发声管道的人渣',
-            );
-            era.println();
-            await era.printAndWait('就算只有自己一人，也要照顾好这孩子');
-            await era.printAndWait([
-              '此刻的 ',
-              mother.get_colored_name(),
-              '，无疑选择了一条最为艰难的道路',
-            ]);
-            era.println();
-            await era.printAndWait('忽然，怀中的孩子发出了哭声');
-            await era.printAndWait('是肚子饿了吗？要喝奶吗？');
-            await era.printAndWait('那么……现在的自己，这个饱经调教的身体');
-            await era.printAndWait(
-              `在被吸住乳头的时候，一定会想起对自己的乳头又咬又舔的那些${father.uma_sex_title}们吧`,
-            );
-            await era.printAndWait(
-              '在被含住乳房的瞬间，一定会因为回忆起被揉胸挤奶的那些晚上而瞬间高潮吧',
-            );
-            await era.printAndWait(
-              '甚至，在孩子喝完奶，躺在自己胸间时……会不会想起，那和婴儿体温差不多的肉棒在自己胸前宣示主权，最后在自己口中灌入浓浓白浆的时候呢？',
-            );
-            era.println();
-            await era.printAndWait(
-              '然后，即便撑过了这些，好不容易将这孩子养育成人……',
-            );
-            await era.printAndWait(
-              '当孩子，将那还不懂得什么叫作爱，就已经靠着本能明白什么叫做性的眼光投向自己时',
-            );
-            await era.printAndWait('自己又该如何是好');
-            era.println();
-            await era.printAndWait('眼前的道路，仿佛一片漆黑……');
-          }
-          if (ret === 1) {
+          const ret = await print_title_with_kojo(
+            this.#kojo,
+            'have_baby_after_raped',
+            mother,
+            father,
+          );
+          if (ret[0] === 1) {
             (new MyEduMarks().orgy ||= []).push(ch_id);
           }
         } else {
-          // TODO
-          await era.printAndWait('TODO 自愿献身生子');
+          await print_title_with_kojo(
+            this.#kojo,
+            'have_baby_as_slave',
+            mother,
+            father,
+          );
         }
       } else {
-        /** @author 雞雞 */
-        await print_event_name('新生命', mother);
-        await era.printAndWait([mother.get_colored_name(), ' 抱起了孩子——']);
-        era.printButton('无视孩子的父亲', 1);
-        era.printButton(`让${father.sex}一起来看`, 2);
-        if ((await era.input()) === 1) {
-          await era.printAndWait([
-            mother.get_colored_name(),
-            ' 看向 ',
-            father.get_colored_name(),
-            ' 的眼神十分空虚，却对孩子露出了关爱的神情。',
-          ]);
-        } else {
-          await era.printAndWait([
-            mother.get_colored_name(),
-            ' 思前想后，还是招手让 ',
-            father.get_colored_name(),
-            ' 上前来。',
-          ]);
-          await era.printAndWait([
-            father.get_colored_name(),
-            ' 惊喜地环住 ',
-            mother.get_colored_name(),
-            '，两人一起安抚着熟睡的孩子。',
-          ]);
-        }
+        await print_title_with_kojo(
+          this.#kojo,
+          'have_baby_with_fuck_buddy',
+          mother,
+          father,
+        );
       }
       era.println();
     }

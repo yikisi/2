@@ -340,7 +340,7 @@ module.exports = async (maru, me, hook, extra_flag) => {
     );
     await maru.say_and_wait(`所以我现在也燃烧起来了呢。`);
     await maru.say_and_wait(
-      `那么惯例的， ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'} 。`,
+      `那么惯例的，${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}。`,
     );
     await era.printAndWait(
       `轻搂着${maru.name}纤弱的腰肢，你们沉浸在幸福的时刻之中`,

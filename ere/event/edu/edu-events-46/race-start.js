@@ -157,7 +157,7 @@ module.exports = async (hook, extra_flag) => {
     await era.printAndWait(`在飞鹰子的努力之下，来往的粉丝显得络绎不绝？！`);
     await me.say_and_wait(`如果是飞鹰子的话，说不定真的可以？`);
     await era.printAndWait(
-      `即使是一直担心着飞鹰子身体健康的${callname} ，心里似乎也开始不切实际的期待着。`,
+      `即使是一直担心着飞鹰子身体健康的${callname}，心里似乎也开始不切实际的期待着。`,
     );
     await say_by_passer_by(`路人A`, `欸？这附近还有比赛？`);
     await say_by_passer_by(`路人B`, `泥地比赛？没啥兴……${falcon.name}会参加？`);
@@ -218,9 +218,7 @@ module.exports = async (hook, extra_flag) => {
       `希望大家能来赛场看朝着顶级偶像前进的飞鹰子的赛跑♪`,
     );
     await falcon.say_and_wait(`飞鹰子的话，一定会把最棒的比赛带给大家⭐`);
-    await era.printAndWait(
-      `在比赛前分发传单似乎已经成了${callname} 们之间的默契。`,
-    );
+    await era.printAndWait(`在比赛前分发传单似乎已经成了你们之间的默契。`);
     await era.printAndWait(`${falcon.uma_sex_title}「是，是飞鹰子吗？」`);
     await era.printAndWait(
       `似乎是从地方特雷森来的${falcon.uma_sex_title}注意到了${falcon.name}。`,
@@ -328,7 +326,7 @@ module.exports = async (hook, extra_flag) => {
     await era.input();
     await falcon.say_and_wait(`……出发吧，为了追寻那份答案。`);
     await era.printAndWait(
-      `被混杂着沙粒的风吹得几乎睁不开眼睛的${callname} ，恍惚间将走向赛场的${falcon.name}与初次见面时的${falcon.teen_sex_title}重合在了一起。`,
+      `被混杂着沙粒的风吹得几乎睁不开眼睛的${callname}，恍惚间将走向赛场的${falcon.name}与初次见面时的${falcon.teen_sex_title}重合在了一起。`,
     );
   }
 };

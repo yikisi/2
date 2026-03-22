@@ -1118,9 +1118,7 @@ module.exports = class extends CustomizedEdu {
         era.printButton(`我有个问题想问`, 2);
         const ret2 = await era.input();
         if (ret2 === 1) {
-          await zensky.say_and_wait(
-            ` ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}，可以借一下你的肩膀吗？`,
-          );
+          await zensky.say_and_wait(`${callname}，可以借一下你的肩膀吗？`);
           await era.printAndWait(
             `你无言的借过肩膀，${zensky.name}紧紧抱住了你的手臂。`,
           );
@@ -1129,9 +1127,7 @@ module.exports = class extends CustomizedEdu {
           );
         } else {
           await me.say_and_wait(`请等一下，${zensky.name}。`);
-          await zensky.say_and_wait(
-            `抱歉， ${era.get('cflag:0:性别') - 1 ? '训练员酱' : '训练员君'}。`,
-          );
+          await zensky.say_and_wait(`抱歉，${callname}。`);
           await zensky.say_and_wait(`这里的声音太大，我恐怕听不清你问的问题。`);
           await zensky.say_and_wait(`有什么问题，可以回去再说吗？`);
           await era.printAndWait(

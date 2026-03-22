@@ -46,7 +46,6 @@ class I18nNames {
   big_brother = '哥哥大人';
   big_sister = '姐姐大人';
   trainer = '训练员';
-  trainer24 = '训练员酱';
   trainer25t0 = '豚鼠先生';
   trainer25t1 = '豚鼠小姐';
   trainer32 = '豚鼠君';
@@ -62,6 +61,8 @@ class I18nNames {
   trainer400 = '托雷纳君';
   trainer_m = '训练员先生';
   trainer_f = '训练员小姐';
+  trainer_k = '训练员君';
+  trainer_c = '训练员酱';
   comrade = '同志';
   the_guy = '那家伙';
   slave_s = '性奴君';

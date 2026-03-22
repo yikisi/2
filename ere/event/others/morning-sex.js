@@ -30,13 +30,14 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 
+const { akuochi } = require('#/data/color-const');
 const EroParticipant = require('#/data/ero/ero-participant');
 const { part_enum } = require('#/data/ero/part-const');
 const { get_trainer_title } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 
-const { palam_colors } = require('#/data/color-const');
 const di18n = require('#/i18n/extended-def');
+const { degeneration_to_evil } = require('#/i18n/zh-CN/snippets');
 
 /**
  * @author 雞雞
@@ -166,33 +167,44 @@ async function duty(chara, me) {
     me.sex,
     '还有未尽的义务。从早到晚，周而复始。',
   ]);
-  printButton('顺从地含住', 1, {
-    color: palam_colors.progress[1],
-    disabled: get('flag:恶堕') === 0,
-  });
-  printButton('厌恶地扭过脸去', 2, {
-    color: palam_colors.notifications[1],
-    disabled: get('flag:恶堕') > 0,
-  });
   begin_and_init_ero(0, chara.id);
   set('tflag:主导权', chara.id);
-  if ((await input()) === 1) {
-    await printAndWait([
-      '其实不劳费心，',
-      me.get_colored_name(),
-      ' 刚刚张开一点嘴唇，那根肉棒就迫不及待地捅了进来。',
-    ]);
-    await printAndWait([
-      me.get_colored_name(),
-      ' 刚刚张开一点嘴唇，那根肉棒就迫不及待地捅了进来。',
-    ]);
-    await printAndWait([
-      '在 ',
-      chara.get_colored_name(),
-      ' 肆意地使用之下，',
-      me.get_colored_name(),
-      ' 温顺地用唇舌服侍着。',
-    ]);
+  if ((await degeneration_to_evil('顺从地含住', '厌恶地扭过脸去')) === 1) {
+    const color = akuochi[1];
+    await printAndWait(
+      [
+        '其实不劳费心，',
+        me.get_colored_name(),
+        ' 刚刚张开一点嘴唇，那根肉棒就迫不及待地捅了进来。',
+      ],
+      { color },
+    );
+    await printAndWait(
+      [
+        me.get_colored_name(),
+        ' 刚刚张开一点嘴唇，那根肉棒就迫不及待地捅了进来。',
+      ],
+      { color },
+    );
+    await printAndWait(
+      [
+        '在 ',
+        chara.get_colored_name(),
+        ' 肆意地使用之下，',
+        me.get_colored_name(),
+        ' 温顺地用唇舌服侍着。',
+      ],
+      { color },
+    );
+    await printAndWait(
+      [
+        get_trainer_title().full(),
+        ' ',
+        me.get_colored_actual_name(),
+        '，今天也牢记着自己的职责……',
+      ],
+      { color },
+    );
     await quick_make_love(
       new EroParticipant(chara.id, part_enum.penis),
       new EroParticipant(0, part_enum.mouth),
@@ -203,28 +215,48 @@ async function duty(chara, me) {
       new EroParticipant(chara.id, part_enum.penis),
       false,
     );
-    await printAndWait([
-      get_trainer_title().full(),
-      ' ',
-      me.get_colored_actual_name(),
-      '，今天也牢记着自己的职责……',
-    ]);
   } else {
-    await printAndWait([
-      '即使沦落到这步田地，',
-      me.get_colored_name(),
-      ' 也是有尊严、至少是脾气的——',
-    ]);
-    await printAndWait([
-      me.get_colored_name(),
-      ' 只是微微扭开了脸、正打算如此主张时，早已失去耐心的 ',
-      chara.get_colored_name(),
-      ' 主人甩了 ',
-      me.get_colored_name(),
-      ' 一个耳光，提醒着 ',
-      me.get_colored_name(),
-      ' 现在到底是何等处境。',
-    ]);
+    const color = akuochi[0];
+    await printAndWait(
+      [
+        '即使沦落到这步田地，',
+        me.get_colored_name(),
+        ' 也是有尊严、至少是脾气的——',
+      ],
+      { color },
+    );
+    await printAndWait(
+      [
+        me.get_colored_name(),
+        ' 只是微微扭开了脸、正打算如此主张时，早已失去耐心的 ',
+        chara.get_colored_name(),
+        ' 主人甩了 ',
+        me.get_colored_name(),
+        ' 一个耳光，提醒着 ',
+        me.get_colored_name(),
+        ' 现在到底是何等处境。',
+      ],
+      { color },
+    );
+    await printAndWait(
+      [
+        '随后，',
+        chara.get_colored_name(),
+        ' 不再希冀 ',
+        me.get_colored_name(),
+        ' 的配合，就开始自行取用这顿自助的早餐。',
+      ],
+      { color },
+    );
+    await printAndWait(
+      [
+        get_trainer_title().full(),
+        ' ',
+        me.get_colored_actual_name(),
+        '，今天也被灌输着、自己的职责……',
+      ],
+      { color },
+    );
     await quick_make_love(
       new EroParticipant(chara.id, part_enum.hit),
       new EroParticipant(0, part_enum.body),
@@ -235,19 +267,6 @@ async function duty(chara, me) {
       new EroParticipant(0, part_enum.mouth, -0.5),
       false,
     );
-    await printAndWait([
-      '随后，',
-      chara.get_colored_name(),
-      ' 不再希冀 ',
-      me.get_colored_name(),
-      ' 的配合，就开始自行取用这顿自助的早餐。',
-    ]);
-    await printAndWait([
-      get_trainer_title().full(),
-      ' ',
-      me.get_colored_actual_name(),
-      '，今天也被灌输着、自己的职责……',
-    ]);
     set('tflag:强奸', chara.id);
   }
   await print_ero_page(chara.id, true);

@@ -7,6 +7,8 @@ class I18nKojo100401 {
   edu = proxy_kojo_js(require('#/i18n/zh-CN/kojo/100401/edu-4.js'));
   love = proxy_kojo_js(require('#/i18n/zh-CN/kojo/100401/love-4.js'));
   // GENERATED END
+
+  mygo = '迷茫';
 }
 
 module.exports = I18nKojo100401;

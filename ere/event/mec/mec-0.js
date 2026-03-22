@@ -3,7 +3,7 @@ const era = require('#/era-electron');
 const CustomizedMec = require('#/event/mec/mec-common');
 
 const { get_chara_color } = require('#/data/chara-colors');
-const { buff_colors, palam_colors } = require('#/data/color-const');
+const { akuochi, buff_colors } = require('#/data/color-const');
 const ElfieLifeMarks = require('#/data/event/life-event-marks/life-event-marks-207');
 const TokinoLifeMarks = require('#/data/event/life-event-marks/life-event-marks-301');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
@@ -80,10 +80,10 @@ module.exports = class extends CustomizedMec {
 
   get_talents() {
     const ret = [];
-    if (era.get('flag:恶堕') > 0) {
+    if (era.get('flag:恶堕') === 2) {
       ret.push({
         ...di18n.kojo.get_titled_content(0, 'akuochi'),
-        color: palam_colors.progress[1],
+        color: akuochi[1],
       });
     }
     return ret;

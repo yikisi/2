@@ -45,11 +45,19 @@ module.exports = {
     if (
       !attacker ||
       era.get('tflag:强奸') > 0 ||
-      (defender !== void 0 &&
-        new EroTouch(attacker, attacker_part).check(defender, defender_part))
+      defender === void 0 ||
+      new EroTouch(attacker, attacker_part).check(defender, defender_part)
     ) {
       return false;
     }
-    return !(await select_yes_or_no([], i18n().ui_agree, i18n().ui_disagree));
+    if (!(await select_yes_or_no([], i18n().ui_agree, i18n().ui_disagree))) {
+      if (era.get('tflag:主导权') === attacker) {
+        era.set('tflag:前回行动', -2);
+      } else {
+        era.set('tflag:对手行动', -2);
+      }
+      return true;
+    }
+    return false;
   },
 };

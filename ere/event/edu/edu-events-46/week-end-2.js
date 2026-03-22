@@ -38,7 +38,7 @@ module.exports = (handlers = {}) => {
       `你 一边从带来的背包之中取出亲手制作的便当，一遍随口问道。`,
     );
     await falcon.say_and_wait(`来湖边的游客很大一部分都是情侣呢。`);
-    await era.printAndWait(`飞鹰子乖巧的坐在了铺好的毯子上看着你 。`);
+    await era.printAndWait(`飞鹰子乖巧的坐在了铺好的毯子上看着你。`);
     await me.say_and_wait(`也许在马推上作为著名的情侣打卡圣地而出名了吧。给。`);
     await falcon.say_and_wait(`毕竟情侣们只有休息日才会有时间出来玩呢——`);
     await era.printAndWait(`飞鹰子接过了准备好的胡萝卜蜂蜜特饮。`);
@@ -80,7 +80,7 @@ module.exports = (handlers = {}) => {
     await falcon.say_and_wait(`啊，对不起。突然之间激动起来了。`);
     await falcon.say_and_wait(`这样子可不像飞鹰子呢⭐哈哈哈。`);
     await era.printAndWait(`意识到了什么，飞鹰子低着头脸红得几乎滴出水来。`);
-    era.printButton(`谢谢你 ，飞鹰子`, 1);
+    era.printButton(`谢谢你，飞鹰子`, 1);
     await era.input();
     await era.printAndWait(`你 轻轻抚摸着飞鹰子的小脑袋。`);
     await falcon.say_and_wait(`飞鹰子已经不是小孩子了。`);
@@ -157,8 +157,7 @@ module.exports = (handlers = {}) => {
   };
   handlers[95 + 45] = async (falcon, me) => {
     await print_event_name(`莫桑石`, falcon);
-    // 纵使失约，纵使内心陷入疯狂，
-    // 既然作为偶像就要认真回应粉丝的期待
+    // 纵使失约，纵使内心陷入疯狂，// 既然作为偶像就要认真回应粉丝的期待
     await era.printAndWait(
       `送走训练员${me.get_adult_sex_title()}后，醒目飞鹰独自坐在训练室的沙发上。`,
     );
@@ -235,7 +234,7 @@ module.exports = (handlers = {}) => {
     );
     await me.say_and_wait(`就在这里稍微等一下${falcon.name}吧。`);
     await era.printAndWait(
-      `如果实在抽不开身时，${falcon.name}便会自行前来等待着你 。`,
+      `如果实在抽不开身时，${falcon.name}便会自行前来等待着你。`,
     );
     await era.printAndWait(
       `虽然没有特意约定过，但两人之间已经达成了这种默契。`,
@@ -333,7 +332,7 @@ module.exports = (handlers = {}) => {
     // 根据上文恋心与责任之间做出的决定 此处的对话将会改变 但仅仅只是侧重的方向发生改变，${falcon.name}对训练员的恋心无论如何压制都不会消灭，就像暗火一样
     // 恋心大于责任
     await me.say_and_wait(`这下要被讨厌了。`, true);
-    await falcon.say_and_wait(`训练员${falcon.uma_sex_title}，我喜欢你 。`);
+    await falcon.say_and_wait(`训练员${falcon.uma_sex_title}，我喜欢你。`);
     await me.say_and_wait(`果然……嗯？`);
     await era.printAndWait(
       `比想象之中更加凌然的表情，是你 从未见过的，作为${falcon.name}的${falcon.teen_sex_title}所露出的不为人知的一面。`,
@@ -391,7 +390,7 @@ module.exports = (handlers = {}) => {
     await era.printAndWait(
       `微微的刺痛感，伴随着苦涩的咸味……这就是${falcon.name}的吻吗，原来如此。`,
     );
-    await falcon.say_and_wait(`我喜欢你 。`);
+    await falcon.say_and_wait(`我喜欢你。`);
     await era.printAndWait(
       `突然其来的告白，却让你 有股一只脚踏在悬崖边的错觉。于是你 等待着对方接下来的话语`,
     );

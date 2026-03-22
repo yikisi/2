@@ -137,66 +137,59 @@ module.exports = async () => {
           );
         let ret = 0;
         if (achievements.length > 0) {
-          era.drawLine();
-          era.printButton(i18n().new_game.bt_custom, 1);
-          era.printButton(i18n().new_game.bt_rp, 2);
-          if ((await era.input()) === 2) {
-            era.printMultiColumns([
-              {
-                config: { content: i18n().new_game.rp_select },
-                type: 'divider',
+          era.printMultiColumns([
+            {
+              config: { content: i18n().new_game.rp_select },
+              type: 'divider',
+            },
+            {
+              accelerator: 0,
+              config: {
+                align: 'center',
+                width: 6,
               },
-              {
-                accelerator: 0,
-                config: {
-                  align: 'center',
-                  width: 6,
-                },
-                content: i18n().new_game.rp_select_me,
-                type: 'button',
+              content: i18n().new_game.rp_select_me,
+              type: 'button',
+            },
+            ...achievements.map((e) => ({
+              accelerator: e,
+              config: {
+                align: 'center',
+                buttonType: '',
+                color: get_chara_color(e),
+                width: 6,
               },
-              ...achievements.map((e) => {
-                return {
-                  accelerator: e,
-                  config: {
-                    align: 'center',
-                    buttonType: '',
-                    color: get_chara_color(e),
-                    width: 6,
-                  },
-                  content: `${get_display_name(era.get(`static:${e}:name`))}${
-                    check_rec_script(e) && check_edu_script(e) ? '*' : ''
-                  }`,
-                  type: 'button',
-                };
-              }),
-              {
-                content: [
-                  '* ',
-                  i18n().new_game.rp_select_tip_1,
-                  { isBr: true },
-                  '** ',
-                  i18n().new_game.rp_select_tip_2,
-                  { isBr: true },
-                  '*** ',
-                  ...i18n().new_game.rp_select_tip_3(
-                    join_list(
-                      [
-                        get_copyright_entry(201),
-                        get_copyright_entry(204),
-                        get_copyright_entry(301),
-                        get_copyright_entry(304),
-                        get_copyright_entry(400),
-                      ],
-                      i18n().ui_comma2,
-                    ),
+              content: `${get_display_name(era.get(`static:${e}:name`))}${
+                check_rec_script(e) && check_edu_script(e) ? '*' : ''
+              }`,
+              type: 'button',
+            })),
+            {
+              content: [
+                '* ',
+                i18n().new_game.rp_select_tip_1,
+                { isBr: true },
+                '** ',
+                i18n().new_game.rp_select_tip_2,
+                { isBr: true },
+                '*** ',
+                ...i18n().new_game.rp_select_tip_3(
+                  join_list(
+                    [
+                      get_copyright_entry(201),
+                      get_copyright_entry(204),
+                      get_copyright_entry(301),
+                      get_copyright_entry(304),
+                      get_copyright_entry(400),
+                    ],
+                    i18n().ui_comma2,
                   ),
-                ],
-                type: 'text',
-              },
-            ]);
-            ret = await era.input();
-          }
+                ),
+              ],
+              type: 'text',
+            },
+          ]);
+          ret = await era.input();
         }
         if (await new_game(ret)) {
           // GLOBALNAME:1 = 新手教学

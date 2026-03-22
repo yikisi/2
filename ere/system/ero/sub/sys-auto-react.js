@@ -1,5 +1,6 @@
 const era = require('#/era-electron');
 
+const set_previous_action = require('#/system/ero/ero-act-handler/set-previous-action');
 const sys_filter_ero_act = require('#/system/ero/sub/sys-filter-ero-act');
 const { get_sex_acceptable } = require('#/system/ero/sys-calc-ero-status');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
@@ -73,12 +74,12 @@ async function sys_auto_react(shown) {
   era.logger.debug(
     `角色 ${lover} 思考反应结束！${(new Date().getTime() - current).toLocaleString()}ms`,
   );
-  era.set('tflag:对手行动', action);
   await run_custom_ero(lover, action, {
     attacker: lover,
     defender: 0,
     shown,
   });
+  set_previous_action('对手行动', action);
   shown && era.println();
 }
 

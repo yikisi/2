@@ -40,6 +40,7 @@ module.exports = {
     '#eeb93f',
     '#f8c7ff',
   ],
+  akuochi: ['#ee82ee', '#ff54ff'],
   attr_bg_colors: { hp: '#006800', tp: '#0000ff' },
   attr_change_colors: { down: '#ff7744', up: '#98fb98' },
   attr_colors: [

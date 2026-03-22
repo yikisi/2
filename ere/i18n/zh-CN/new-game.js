@@ -1,6 +1,4 @@
 class I18nNewGame {
-  bt_custom = '做我自己';
-  bt_rp = '扮演角色';
   rp_select = '选择要扮演的角色';
   rp_select_me = '我自己';
   rp_select_tip_1 = '带有 * 号后缀的角色有口上';

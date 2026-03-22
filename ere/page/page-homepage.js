@@ -14,6 +14,7 @@ const {
   end_ero_and_show_result,
   init_ero,
 } = require('#/system/ero/sys-prepare-ero');
+const global_achievement = require('#/system/global/sys-calc-achievement');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const {
   sys_check_awake,
@@ -36,7 +37,6 @@ const { get_custom_check } = require('#/event/check/check-factory');
 const { run_custom_daily } = require('#/event/daily/daily-factory');
 const { get_custom_edu } = require('#/event/edu/edu-factory');
 const { get_custom_ero } = require('#/event/ero/ero-factory');
-const anniversary = require('#/event/others/anniversary');
 const game_guides = require('#/event/others/game-guides');
 const { start_machine_gun, stop_machine_gun } = require('#/event/queue');
 const {
@@ -72,6 +72,49 @@ const { i18n } = require('#/i18n/selector');
 
 let notes_index = 0;
 let random_event;
+
+async function anniversary() {
+  if (era.get('flag:当前回合数') % 48 === 1) {
+    // FLAGNAME:1 = 当前年
+    const year = era.get('flag:1');
+    let name;
+    switch (year) {
+      case 2010:
+        name = 'TEN';
+        break;
+      case 2020:
+        name = 'TWENTY';
+        break;
+      case 2030:
+        name = 'THIRTY';
+        break;
+      case 2040:
+        name = 'FORTY';
+        break;
+      case 2050:
+        name = 'FIFTY';
+    }
+    if (name !== void 0) {
+      era.drawLine();
+      await i18n().timon.anniversary[name](generate_common_dict());
+    }
+    if (year >= 2009) {
+      global_achievement.time_ten = 1;
+    }
+    if (year >= 2016) {
+      global_achievement.time_twe = 1;
+    }
+    if (year >= 2021) {
+      global_achievement.time_thr = 1;
+    }
+    if (year >= 2024) {
+      global_achievement.time_for = 1;
+    }
+    if (year >= 2025) {
+      global_achievement.time_fif = 1;
+    }
+  }
+}
 
 async function next_week() {
   era.drawLine();
