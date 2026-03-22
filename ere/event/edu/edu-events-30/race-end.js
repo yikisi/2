@@ -15,7 +15,7 @@ const {
 const { gacha } = require('#/utils/list-utils');
 
 const { race_enum, race_infos } = require('#/data/race/race-const');
-const { attr_enum } = require('#/data/train-const');
+const { base_attr_list } = require('#/data/train-const');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,string,RaceEndParams)>} handlers */
 module.exports = (handlers) => {
@@ -148,9 +148,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait('作为三冠路线上的前哨站，决定朝向那个方向而努力。');
     extra_flag.attr_change = new Array(5).fill(0);
-    gacha(Object.values(attr_enum), 3).forEach(
-      (e) => (extra_flag.attr_change[e] = 3),
-    );
+    gacha(base_attr_list, 3).forEach((e) => (extra_flag.attr_change[e] = 3));
     extra_flag.pt_change = 30;
   };
 
@@ -444,9 +442,7 @@ module.exports = (handlers) => {
     await rice.say_and_wait('没有哦，抱歉。但是，谢谢你。');
     await rice.say_and_wait(['虽然有点不好意思……', self_name, '，很高兴哦。']);
     extra_flag.attr_change = new Array(5).fill(0);
-    gacha(Object.values(attr_enum), 4).forEach(
-      (e) => (extra_flag.attr_change[e] = 3),
-    );
+    gacha(base_attr_list, 4).forEach((e) => (extra_flag.attr_change[e] = 3));
     extra_flag.pt_change = 30;
   };
 

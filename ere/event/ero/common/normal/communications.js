@@ -89,7 +89,7 @@ class EroNormalCommunications extends EroCommunications {
       attacker,
       defender,
       hook.arg,
-      (extra.success = EroNormalCommunications.check_resist_success(
+      (extra.success = EroCommunications.check_resist_success(
         attacker.id,
         defender.id,
       )),

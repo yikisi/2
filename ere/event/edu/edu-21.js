@@ -24,7 +24,7 @@ const { get_chara_color } = require('#/data/chara-colors');
 const TamaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-21');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
-const { attr_enum } = require('#/data/train-const');
+const { attr_enum, base_attr_list } = require('#/data/train-const');
 
 module.exports = class extends CustomizedEdu {
   get #dict() {
@@ -198,7 +198,7 @@ module.exports = class extends CustomizedEdu {
     );
     if (
       all_reward_in_event(this.id, {
-        attr: gacha(Object.values(attr_enum), 3).reduce((p, c) => {
+        attr: gacha(base_attr_list, 3).reduce((p, c) => {
           p[c] += 5;
           return p;
         }, new Array(5).fill(3)),

@@ -1,3 +1,5 @@
+const era = require('#/era-electron');
+
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
 const EroCommunications = require('#/event/ero/common/interface/ero-communications');
@@ -41,6 +43,23 @@ class EroRapeCommunications extends EroCommunications {
       hook.arg,
       sys_get_colored_callname(attacker.id, defender.id),
     );
+  }
+
+  async resist(attacker, defender, hook, extra) {
+    extra.success = EroCommunications.check_resist_success(
+      attacker.id,
+      defender.id,
+    );
+    if (era.get('flag:惩戒力度') === 3) {
+      await i18n().timon.ero_c.resist(
+        attacker,
+        defender,
+        hook.arg,
+        extra.success,
+        sys_get_colored_callname(attacker.id, defender.id),
+        sys_get_colored_callname(defender.id, attacker.id),
+      );
+    }
   }
 }
 

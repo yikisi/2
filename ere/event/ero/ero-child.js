@@ -24,8 +24,7 @@ class EroChild extends CustomizedEro {
       if (
         index !== -1 &&
         // CFLAGNAME:15 = 父方角色
-        era.getCharactersInTrain().indexOf(era.get(`cflag:${this.id}:15`)) !==
-          -1
+        era.getCharactersInTrain().includes(era.get(`cflag:${this.id}:15`))
       ) {
         const fid = era.get(`cflag:${this.id}:15`);
         my_marks.orgy.splice(index, 1);

@@ -18,7 +18,7 @@ const color_17 = require('#/data/chara-colors').chara_colors[17];
 const { buff_colors } = require('#/data/color-const');
 const LunaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-17');
 const { race_enum } = require('#/data/race/race-const');
-const { attr_enum } = require('#/data/train-const');
+const { base_attr_list } = require('#/data/train-const');
 
 module.exports = class extends CustomizedEdu {
   async race_end(chara, me, callname, hook, extra_flag) {
@@ -319,7 +319,7 @@ module.exports = class extends CustomizedEdu {
         );
         era.println();
         const tmp = new Array(5).fill(0);
-        tmp[get_random_entry(Object.values(attr_enum))] = 15;
+        tmp[get_random_entry(base_attr_list)] = 15;
         wait_flag = get_attr_and_print_in_event(17, tmp, 0) || wait_flag;
       } else if (extra_flag.race === race_enum.japa_cup && edu_weeks >= 96) {
         // 资深年日本杯

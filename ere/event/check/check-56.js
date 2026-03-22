@@ -10,7 +10,7 @@ const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
 const { add_event, cb_enum } = require('#/event/queue');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 
-const { get_random_value } = require('#/utils/value-utils');
+const { get_random_entry } = require('#/utils/list-utils');
 
 const { get_chara_color } = require('#/data/chara-colors');
 const KitaruEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-56');
@@ -20,7 +20,7 @@ const recruit_flags = require('#/data/event/recruit-flags');
 const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
-const { attr_enum } = require('#/data/train-const');
+const { base_attr_list } = require('#/data/train-const');
 
 const { i18n } = require('#/i18n/selector');
 
@@ -201,10 +201,7 @@ module.exports = class extends CustomizedCheck {
           event_obj.copy().set_arg('fortune_game_duel_2'),
         );
       }
-      edu_marks.luck_train = get_random_value(
-        1,
-        Object.values(attr_enum).length,
-      );
+      edu_marks.luck_train = get_random_entry(base_attr_list) + 1;
       switch (edu_weeks) {
         case 14: // 入局
           add_event(event_hooks.week_start, event_obj_special);

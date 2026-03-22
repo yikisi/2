@@ -754,7 +754,7 @@ module.exports = {
    * @param {boolean} awake 角色是否醒着
    */
   async shop_start(chara, you, awake) {
-    if (awake) {
+    if (!awake) {
       await era.printAndWait([
         chara.get_colored_name(),
         ' 沉睡着，对 ',

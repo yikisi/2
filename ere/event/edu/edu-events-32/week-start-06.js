@@ -12,7 +12,7 @@ const {
 } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 
-const { attr_enum } = require('#/data/train-const');
+const { base_attr_list } = require('#/data/train-const');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},number,number,TachyonEduMarks,EventObject):Promise>} handlers */
 module.exports = (handlers) => {
@@ -548,7 +548,7 @@ module.exports = (handlers) => {
       case 2:
         {
           const temp = new Array(5).fill(0);
-          temp[get_random_entry(Object.values(attr_enum))] = 20;
+          temp[get_random_entry(base_attr_list)] = 20;
           flags.wait_flag = get_attr_and_print_in_event(32, temp, 0);
         }
         break;

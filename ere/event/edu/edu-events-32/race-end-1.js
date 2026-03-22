@@ -19,7 +19,7 @@ const { gacha } = require('#/utils/list-utils');
 const recruit_flags = require('#/data/event/recruit-flags');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum, race_infos } = require('#/data/race/race-const');
-const { attr_enum } = require('#/data/train-const');
+const { base_attr_list } = require('#/data/train-const');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,RaceEndParams,TachyonEduMarks,number,number):Promise<boolean|void>>} handlers */
 module.exports = (handlers) => {
@@ -100,9 +100,7 @@ module.exports = (handlers) => {
         me.get_couple_title(),
         ' 不停观看着纪录下来的数据，提出一个又一个的猜想，直到 Winning Live 开始，外面传来了急促的敲门声才回过神来',
       ]);
-      gacha(Object.values(attr_enum), 3).forEach(
-        (e) => (extra_flag.attr_change[e] = 3),
-      );
+      gacha(base_attr_list, 3).forEach((e) => (extra_flag.attr_change[e] = 3));
     } else {
       await era.printAndWait('什，什么玩意！？');
       await era.printAndWait(
@@ -131,9 +129,7 @@ module.exports = (handlers) => {
       era.println();
       sys_change_fame(-5);
       await era.printAndWait('声望下降了！');
-      gacha(Object.values(attr_enum), 3).forEach(
-        (e) => (extra_flag.attr_change[e] = 6),
-      );
+      gacha(base_attr_list, 3).forEach((e) => (extra_flag.attr_change[e] = 6));
     }
   };
 

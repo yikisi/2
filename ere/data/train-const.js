@@ -11,6 +11,7 @@ Object.keys(attr_enum).forEach((k, i) => (attr_enum[k] = i));
 
 module.exports = {
   attr_enum,
+  base_attr_list: Object.values(attr_enum).slice(0, 5),
   fail_sta_border: {
     intelligence: 0.3, // 30%
     other: 0.5, // 50%

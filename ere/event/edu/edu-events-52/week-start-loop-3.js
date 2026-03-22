@@ -12,7 +12,7 @@ const { get_random_entry } = require('#/utils/list-utils');
 
 const PseudoUma = require('#/data/race/model/pseudo-uma');
 const { race_enum } = require('#/data/race/race-const');
-const { attr_enum } = require('#/data/train-const');
+const { base_attr_list } = require('#/data/train-const');
 
 /**
  * @param {CharaTalk} urara
@@ -853,7 +853,7 @@ module.exports = async (urara, me, in_urara, callname) => {
   era.rmData(52);
   era.println();
   const attr_change = new Array(5).fill(0);
-  attr_change[get_random_entry(Object.values(attr_enum))] = 10;
+  attr_change[get_random_entry(base_attr_list)] = 10;
   let wait_flag = false;
   wait_flag =
     get_attr_and_print_in_event(52, attr_change, 45, undefined, true) ||

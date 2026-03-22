@@ -16,7 +16,11 @@ const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
 
 const { buff_colors } = require('#/data/color-const');
 const event_hooks = require('#/data/event/event-hooks');
-const { attr_enum, fumble_result } = require('#/data/train-const');
+const {
+  attr_enum,
+  base_attr_list,
+  fumble_result,
+} = require('#/data/train-const');
 
 const { i18n } = require('#/i18n/selector');
 
@@ -208,7 +212,7 @@ handlers[event_hooks.train_fail] = async (cid, hook, extra) => {
         }
         attr_change[extra.train] = args.attr_down_again;
         gacha(
-          Object.values(attr_enum).filter((e) => e !== extra.train),
+          base_attr_list.filter((e) => e !== extra.train),
           args.attr_down_times_again - 1,
         ).forEach((e) => (attr_change[e] = args.attr_down_again));
         sys_change_motivation(cid, args.motivate_down);
@@ -222,7 +226,7 @@ handlers[event_hooks.train_fail] = async (cid, hook, extra) => {
         }
         attr_change[extra.train] = args.attr_down;
         gacha(
-          Object.values(attr_enum).filter((e) => e !== extra.train),
+          base_attr_list.filter((e) => e !== extra.train),
           args.attr_down_times - 1,
         ).forEach((e) => (attr_change[e] = args.attr_down));
         sys_change_motivation(cid, args.motivate_down);

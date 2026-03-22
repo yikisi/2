@@ -289,7 +289,7 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
         .map((plug) => {
           group_dict[plug.p.group] = 1;
           const name = plug.p.colored_name;
-          name.content += i18n()
+          name.content = i18n()
             .inmon.name_with_cost_template.replace('%NAME%', name.content)
             .replace('%SLOT%', plug.p.size.toString());
           return {
@@ -314,7 +314,7 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
         },
         type: 'divider',
       });
-      if (keys[1] !== undefined) {
+      if (keys[1] !== void 0) {
         buffer.push({
           config: {
             content: i18n().inmon[keys[1]],
@@ -435,7 +435,7 @@ module.exports = async (chara, juel_dict, total_delta, pointer) => {
                     content: di18n.jewel_shop.get_inmon_slave(slave),
                     ...(chara.id > 0
                       ? { accelerator: 9, type: 'button' }
-                      : { type: 'content' }),
+                      : { type: 'text' }),
                   },
                   {
                     config: { width: 18 },

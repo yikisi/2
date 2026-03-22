@@ -26,7 +26,7 @@ const { location_enum } = require('#/data/locations');
 const LegendUmaSelector = require('#/data/race/model/legend-uma-selector');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
-const { attr_enum } = require('#/data/train-const');
+const { base_attr_list } = require('#/data/train-const');
 
 const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
@@ -106,7 +106,7 @@ module.exports = class extends CustomizedEdu {
     await print_title_with_kojo(this.#kojo, 'worry', oguri, this.#dict);
     if (
       all_reward_in_event(this.id, {
-        attr: gacha(Object.values(attr_enum), 3).reduce(
+        attr: gacha(base_attr_list, 3).reduce(
           (p, c) => {
             p[c] = 10;
             return p;

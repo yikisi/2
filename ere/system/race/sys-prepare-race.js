@@ -26,7 +26,7 @@ const {
   mod_velocity_final_adapt_distance,
   mod_velocity_style,
 } = require('#/data/race/race-sim-const');
-const { attr_enum } = require('#/data/train-const');
+const { attr_enum, base_attr_list } = require('#/data/train-const');
 
 /**
  * @param {PseudoUma[]} list_chara
@@ -291,7 +291,7 @@ function sys_prepare_race(list_chara, team_list, race_info) {
     }
 
     // 计算基础属性值（属性值加干劲修正）
-    Object.values(attr_enum).forEach((v) => {
+    base_attr_list.forEach((v) => {
       uma.attrs[v] *= motivation_coefficient;
       if (uma.attrs[v] > half_attr_border) {
         uma.attrs[v] = half_attr_border + (uma.attrs[v] - half_attr_border) / 2;
@@ -300,9 +300,7 @@ function sys_prepare_race(list_chara, team_list, race_info) {
 
     if (team_list.indexOf(uma) !== -1) {
       uma.base.total_attrs = team_total_attrs;
-      Object.values(attr_enum).forEach(
-        (v) => (team_total_attrs[v] += uma.attrs[v]),
-      );
+      base_attr_list.forEach((v) => (team_total_attrs[v] += uma.attrs[v]));
     }
 
     // 由基础智力决定技能触发率 最低20%

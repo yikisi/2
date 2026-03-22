@@ -18,7 +18,7 @@ const { gacha } = require('#/utils/list-utils');
 const EroParticipant = require('#/data/ero/ero-participant');
 const { part_enum } = require('#/data/ero/part-const');
 const { location_enum } = require('#/data/locations');
-const { attr_enum } = require('#/data/train-const');
+const { base_attr_list } = require('#/data/train-const');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,string,{wait_flag:boolean},function)>} handlers */
 module.exports = (handlers) => {
@@ -46,7 +46,7 @@ module.exports = (handlers) => {
     await ruby.say_and_wait('首先必须向家里传达决断。');
     await ruby.say_and_wait('之后，还请继续多多指教。');
     const attr_change = new Array(5).fill(0);
-    gacha(Object.values(attr_enum), 3).forEach((e) => (attr_change[e] = 5));
+    gacha(base_attr_list, 3).forEach((e) => (attr_change[e] = 5));
     flags.wait_flag = get_attr_and_print_in_event(85, attr_change, 0);
   };
 
@@ -334,7 +334,7 @@ module.exports = (handlers) => {
     await ruby.say_and_wait('我，不能允许……');
     await era.printAndWait('夏天的集训，在不安中结束了。');
     const attr_change = new Array(5).fill(0);
-    gacha(Object.values(attr_enum), 3).forEach((e) => (attr_change[e] = 5));
+    gacha(base_attr_list, 3).forEach((e) => (attr_change[e] = 5));
     flags.wait_flag =
       get_attr_and_print_in_event(85, attr_change, 0) || flags.wait_flag;
   };

@@ -10,7 +10,7 @@ const { gacha } = require('#/utils/list-utils');
 
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum, race_infos } = require('#/data/race/race-const');
-const { attr_enum } = require('#/data/train-const');
+const { base_attr_list } = require('#/data/train-const');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,RaceEndParams)>} handlers */
 module.exports = (handlers) => {
@@ -92,9 +92,7 @@ module.exports = (handlers) => {
         ss.get_colored_name(),
         ' 完成了自己的出道赛。',
       ]);
-      gacha(Object.values(attr_enum), 3).forEach(
-        (e) => (extra_flag.attr_change[e] = 5),
-      );
+      gacha(base_attr_list, 3).forEach((e) => (extra_flag.attr_change[e] = 5));
       extra_flag.pt_change = 30;
     } else {
       await print_event_name('好的开始', ss);
@@ -102,9 +100,7 @@ module.exports = (handlers) => {
         '果然啊，上次只是略有偏差而已，我们的组合并不是错误的选择。',
       );
       await ss.say_and_wait('一起前进吧，我们可是赢下来了哦。');
-      gacha(Object.values(attr_enum), 2).forEach(
-        (e) => (extra_flag.attr_change[e] = 3),
-      );
+      gacha(base_attr_list, 2).forEach((e) => (extra_flag.attr_change[e] = 3));
     }
   };
 
@@ -113,9 +109,7 @@ module.exports = (handlers) => {
       return true;
     }
     extra_flag.attr_change = new Array(5).fill(0);
-    gacha(Object.values(attr_enum), 3).forEach(
-      (e) => (extra_flag.attr_change[e] = 10),
-    );
+    gacha(base_attr_list, 3).forEach((e) => (extra_flag.attr_change[e] = 10));
     const coffee = get_chara_talk(25);
     await print_event_name('胜利的大舞台', ss);
     await ss.say_and_wait(['我们赢了对吗？', callname, '！！！']);
@@ -177,9 +171,7 @@ module.exports = (handlers) => {
       return true;
     }
     extra_flag.attr_change = new Array(5).fill(0);
-    gacha(Object.values(attr_enum), 3).forEach(
-      (e) => (extra_flag.attr_change[e] = 10),
-    );
+    gacha(base_attr_list, 3).forEach((e) => (extra_flag.attr_change[e] = 10));
     extra_flag.relation_change = 30;
     await print_event_name('第二场大胜', ss);
     await era.printAndWait([

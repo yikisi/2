@@ -16,7 +16,7 @@ const { gacha } = require('#/utils/list-utils');
 
 const event_hooks = require('#/data/event/event-hooks');
 const { location_enum } = require('#/data/locations');
-const { attr_enum } = require('#/data/train-const');
+const { attr_enum, base_attr_list } = require('#/data/train-const');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,CharaTalk,string,UraraEduMarks,EventObject):Promise<*>>} handlers */
 module.exports = (handlers) => {
@@ -981,7 +981,7 @@ module.exports = (handlers) => {
     await in_urara.say_as_unknown_and_wait('……呜……');
     era.println();
     const attr_change = new Array(5).fill(0);
-    gacha(Object.values(attr_enum), 3).forEach((e) => (attr_change[e] = 5));
+    gacha(base_attr_list, 3).forEach((e) => (attr_change[e] = 5));
     let wait_flag = false;
     wait_flag =
       get_attr_and_print_in_event(52, attr_change, 0, undefined, true) ||

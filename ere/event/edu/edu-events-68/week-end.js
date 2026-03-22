@@ -20,7 +20,7 @@ const { gacha } = require('#/utils/list-utils');
 const KitaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-68');
 const event_hooks = require('#/data/event/event-hooks');
 const { location_enum } = require('#/data/locations');
-const { attr_enum } = require('#/data/train-const');
+const { base_attr_list } = require('#/data/train-const');
 
 /**
  * @param {CharaTalk} kita
@@ -107,7 +107,7 @@ module.exports = async (kita, me, hook, event_object) => {
     await era.printAndWait(`让${kita.sex}好好休息一下吧。`);
     era.println();
     const attr_change = new Array(5).fill(0);
-    gacha(Object.values(attr_enum), 3).forEach((e) => (attr_change[e] = 5));
+    gacha(base_attr_list, 3).forEach((e) => (attr_change[e] = 5));
     wait_flag = get_attr_and_print_in_event(68, attr_change, 0) || wait_flag;
   } else if (event_arg === 95 + 10) {
     event_marks.senior_valentine++;

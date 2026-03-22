@@ -14,7 +14,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const { gacha } = require('#/utils/list-utils');
 
 const TeioEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-3');
-const { attr_enum } = require('#/data/train-const');
+const { base_attr_list } = require('#/data/train-const');
 
 module.exports = class extends Edu3UntilRaceEnd {
   async school_atrium(teio, me, callname, hook, extra_flag, event_object) {
@@ -367,9 +367,7 @@ module.exports = class extends Edu3UntilRaceEnd {
         era.println();
 
         const attr_change = new Array(5).fill(0);
-        gacha(Object.values(attr_enum), 2).forEach(
-          (e) => (attr_change[e] += 10),
-        );
+        gacha(base_attr_list, 2).forEach((e) => (attr_change[e] += 10));
         wait_flag = sys_love_uma(3, 1) || wait_flag;
         wait_flag = sys_change_motivation(3, 1) || wait_flag;
         wait_flag = get_attr_and_print_in_event(3, attr_change, 0) || wait_flag;

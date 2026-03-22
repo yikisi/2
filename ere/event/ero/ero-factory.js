@@ -86,8 +86,7 @@ class EroFactory extends CommonKojoFactory {
     let ret;
     if (extra_flag.shown !== false) {
       if (action > ero_hooks.ACTION_START && action < ero_hooks.ACTION_END) {
-        // TFLAGNAME:7 = 主导权
-        const master = get('tflag:7');
+        const master = get('tflag:主导权');
         const { attacker: _a, defender: _d } =
           (ero_tagged_hooks[action] || default_tags).condition ===
           condition_type.active
@@ -96,19 +95,15 @@ class EroFactory extends CommonKojoFactory {
               : { attacker: 0, defender: cid }
             : extra_flag;
         if (_a === master) {
-          // TFLAGNAME:1 = 前回行动
-          hook.arg = get('tflag:1') !== hook.hook;
-          // TFLAGNAME:3 = 前回对手
-        } else if (_a === get('tflag:3')) {
-          // TFLAGNAME:2 = 对手行动
-          hook.arg = get('tflag:2') !== hook.hook;
+          hook.arg = get('tflag:前回行动') !== hook.hook;
+        } else if (_a === get('tflag:前回对手')) {
+          hook.arg = get('tflag:对手行动') !== hook.hook;
         } else {
           hook.arg = true;
         }
         const attacker = get_chara_talk(_a);
         const defender = get_chara_talk(_d);
-        // TFLAGNAME:9 = 强奸
-        const raper = get('tflag:');
+        const raper = get('tflag:强奸');
         if (!sys_check_awake(_d)) {
           await (describers.s[action] || describers.c[action])(
             attacker,

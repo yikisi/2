@@ -7,7 +7,7 @@ const { gacha } = require('#/utils/list-utils');
 const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
-const { attr_enum } = require('#/data/train-const');
+const { base_attr_list } = require('#/data/train-const');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,CharaTalk,string,{race:number,rank:number,relation_change:number,love_change:number,attr_change:number[],pt_change:number},UraraEduMarks):Promise<*>>} handlers */
 module.exports = (handlers) => {
@@ -328,9 +328,7 @@ module.exports = (handlers) => {
       extra_flag.relation_change = 50;
     } else {
       extra_flag.attr_change = new Array(5).fill(0);
-      gacha(Object.values(attr_enum), 4).forEach(
-        (e) => (extra_flag.attr_change[e] = 2),
-      );
+      gacha(base_attr_list, 4).forEach((e) => (extra_flag.attr_change[e] = 2));
       extra_flag.relation_change = 10;
     }
   };

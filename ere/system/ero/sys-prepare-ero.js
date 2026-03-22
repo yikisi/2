@@ -44,7 +44,7 @@ const {
 } = require('#/data/ero/part-const');
 const { stain_enum } = require('#/data/ero/stain-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
-const { attr_enum } = require('#/data/train-const');
+const { base_attr_list } = require('#/data/train-const');
 
 const { i18n } = require('#/i18n/selector');
 const get_display_name = require('#/utils/calc-display-name');
@@ -610,7 +610,7 @@ function end_ero(skip_jewels, log_jewels, ids) {
             100,
       );
     }
-    ret.attr[cid] = Object.values(attr_enum).map((a, i) =>
+    ret.attr[cid] = base_attr_list.map((a, i) =>
       sys_change_attr_and_print(
         cid,
         a,

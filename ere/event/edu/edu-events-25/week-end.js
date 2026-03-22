@@ -20,7 +20,7 @@ const CoffeeEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-25'
 const event_hooks = require('#/data/event/event-hooks');
 const { location_enum } = require('#/data/locations');
 const { race_enum, race_infos } = require('#/data/race/race-const');
-const { attr_enum } = require('#/data/train-const');
+const { base_attr_list } = require('#/data/train-const');
 
 /**
  * @param {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},EventObject):Promise>} handlers
@@ -322,7 +322,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
       ]));
     era.println();
     const attr_change = new Array(5).fill(0);
-    gacha(Object.values(attr_enum), 3).forEach((e) => (attr_change[e] = 10));
+    gacha(base_attr_list, 3).forEach((e) => (attr_change[e] = 10));
     flags.wait_flag = get_attr_and_print_in_event(
       25,
       new Array(5).fill(0).map(() => (Math.random() > 0.4 ? 10 : 0)),
@@ -392,7 +392,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
     }
     era.println();
     const attr_change = new Array(5).fill(0);
-    gacha(Object.values(attr_enum), 3).forEach((e) => (attr_change[e] = 10));
+    gacha(base_attr_list, 3).forEach((e) => (attr_change[e] = 10));
     flags.wait_flag = get_attr_and_print_in_event(
       25,
       attr_change,

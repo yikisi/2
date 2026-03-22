@@ -8,7 +8,7 @@ const { gacha, get_random_entry } = require('#/utils/list-utils');
 
 const recruit_flags = require('#/data/event/recruit-flags');
 const { race_enum } = require('#/data/race/race-const');
-const { attr_enum } = require('#/data/train-const');
+const { base_attr_list } = require('#/data/train-const');
 
 /**
  * @param {CharaTalk} kita
@@ -70,9 +70,7 @@ module.exports = async (kita, me, hook, extra_flag) => {
       );
       await era.printAndWait(`？？？「那么接下来的比赛是……」`);
       await era.printAndWait(`于是就这样，${kita.name} 的出道赛结束了。`);
-      gacha(Object.values(attr_enum), 3).forEach(
-        (e) => (extra_flag.attr_change[e] = 3),
-      );
+      gacha(base_attr_list, 3).forEach((e) => (extra_flag.attr_change[e] = 3));
     } else {
       await print_event_name('第一次的……', kita);
       await kita.say_and_wait('我……赢了么了？这次真的赢了么……');
@@ -90,7 +88,7 @@ module.exports = async (kita, me, hook, extra_flag) => {
       );
 
       extra_flag.motivation_change = 1;
-      extra_flag.attr_change[get_random_entry(Object.values(attr_enum))] = 5;
+      extra_flag.attr_change[get_random_entry(base_attr_list)] = 5;
     }
   } else if (extra_flag.race === race_enum.sats_sho && extra_flag.rank === 1) {
     await print_event_name('胜利的大舞台', kita);
@@ -107,7 +105,7 @@ module.exports = async (kita, me, hook, extra_flag) => {
     await era.printAndWait(
       `带着一波三折后如同老僧入定的心态，${me.name} 在昏昏欲睡中才勉强想到，${kita.name} 已经拿下了三冠马的第一冠了。`,
     );
-    extra_flag.attr_change[get_random_entry(Object.values(attr_enum))] = 10;
+    extra_flag.attr_change[get_random_entry(base_attr_list)] = 10;
     extra_flag.pt_change = 10;
   } else if (extra_flag.race === race_enum.toky_yus && extra_flag.rank === 1) {
     const baku = get_chara_talk(41);
@@ -172,7 +170,7 @@ module.exports = async (kita, me, hook, extra_flag) => {
     await era.printAndWait(
       `看着又恢复了往日神采的 ${kita.name}，${me.name} 偷偷把进王同学平时形象完全不同这一件事吞进了肚里，希望这只是人家偶然的灵光一闪而已。`,
     );
-    extra_flag.attr_change[get_random_entry(Object.values(attr_enum))] = 10;
+    extra_flag.attr_change[get_random_entry(base_attr_list)] = 10;
     extra_flag.pt_change = 10;
   } else if (extra_flag.race === race_enum.stli_kin && extra_flag.rank === 1) {
     const dia = get_chara_talk(67);
@@ -219,7 +217,7 @@ module.exports = async (kita, me, hook, extra_flag) => {
       `听着小北和小钻慢悠悠的的闲聊，${me.name} 感叹着女孩子之间的友谊可真是麻烦，偷偷露出了微笑。`,
     );
     extra_flag.relation_change = 10;
-    extra_flag.attr_change[get_random_entry(Object.values(attr_enum))] = 10;
+    extra_flag.attr_change[get_random_entry(base_attr_list)] = 10;
     extra_flag.pt_change = 10;
   } else if (extra_flag.race === race_enum.kiku_sho && extra_flag.rank === 1) {
     const races = era.get('cflag:68:育成成绩');
@@ -347,7 +345,7 @@ module.exports = async (kita, me, hook, extra_flag) => {
       `${me.name} 和里见光钻并肩注视着仍然在挥手致意的小北。`,
     );
     await era.printAndWait(`而经典年最后的比赛，有马纪念就这么落入了尾声。`);
-    extra_flag.attr_change[get_random_entry(Object.values(attr_enum))] = 10;
+    extra_flag.attr_change[get_random_entry(base_attr_list)] = 10;
     extra_flag.pt_change = 10;
   } else if (extra_flag.race === race_enum.sank_hai && extra_flag.rank === 1) {
     await print_event_name('没有劲敌的世界', kita);

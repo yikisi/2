@@ -15,7 +15,7 @@ const { gacha } = require('#/utils/list-utils');
 const event_hooks = require('#/data/event/event-hooks');
 const { location_enum } = require('#/data/locations');
 const { race_enum, race_infos } = require('#/data/race/race-const');
-const { attr_enum } = require('#/data/train-const');
+const { base_attr_list } = require('#/data/train-const');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,string,{wait_flag:boolean},EventObject):Promise<boolean|void>>} handlers */
 module.exports = (handlers) => {
@@ -120,7 +120,7 @@ module.exports = (handlers) => {
     await me.say_and_wait('多亏了大家的等待呢。');
     await rice.say_and_wait('嗯！不和大家说声谢谢的话——');
     const change_list = new Array(5).fill(0);
-    gacha(Object.values(attr_enum), 3).forEach((e) => (change_list[e] = 5));
+    gacha(base_attr_list, 3).forEach((e) => (change_list[e] = 5));
     flags.wait_flag = get_attr_and_print_in_event(30, change_list, 0);
   };
 
@@ -371,7 +371,7 @@ module.exports = (handlers) => {
       ' 一起给管理人员帮了忙。',
     ]);
     const change_list = new Array(5).fill(0);
-    gacha(Object.values(attr_enum), 3).forEach((e) => (change_list[e] = 5));
+    gacha(base_attr_list, 3).forEach((e) => (change_list[e] = 5));
     flags.wait_flag = get_attr_and_print_in_event(30, change_list, 0);
   };
 };

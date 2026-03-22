@@ -27,7 +27,6 @@ module.exports = class extends CustomizedEro {
     return i18n().kojo[0].ero;
   }
 
-  /**  */
   become_erect(chara, me, callname, hook, extra_flag) {
     if (extra_flag.part === part_enum.penis) {
       const last_action = era.get('tflag:前回行动');

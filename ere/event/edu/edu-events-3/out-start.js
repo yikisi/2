@@ -9,7 +9,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
 
 const { gacha } = require('#/utils/list-utils');
 
-const { attr_enum } = require('#/data/train-const');
+const { base_attr_list } = require('#/data/train-const');
 
 module.exports = class extends CustomizedEdu {
   async out_start(teio, me, callname, hook, extra_flag, event_object) {
@@ -266,9 +266,7 @@ module.exports = class extends CustomizedEdu {
           get_attr_and_print_in_event(3, [0, 0, 0, 0, 30], 10) || wait_flag;
       } else {
         const attr_change = new Array(5).fill(0);
-        gacha(Object.values(attr_enum), 3).forEach(
-          (e) => (attr_change[e] += 15),
-        );
+        gacha(base_attr_list, 3).forEach((e) => (attr_change[e] += 15));
         wait_flag =
           get_attr_and_print_in_event(3, attr_change, 10) || wait_flag;
       }

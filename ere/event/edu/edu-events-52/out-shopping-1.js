@@ -13,7 +13,7 @@ const CharaTalk = require('#/utils/chara-talk');
 const { get_random_entry } = require('#/utils/list-utils');
 
 const recruit_flags = require('#/data/event/recruit-flags');
-const { attr_enum } = require('#/data/train-const');
+const { attr_enum, base_attr_list } = require('#/data/train-const');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,CharaTalk,string,UraraEduMarks,{wait_flag:boolean},EventObject):Promise<*>>} handlers */
 module.exports = (handlers) => {
@@ -939,9 +939,7 @@ module.exports = (handlers) => {
     }
     attr_change[attr_enum.toughness] += 5;
     attr_change[
-      get_random_entry(
-        Object.values(attr_enum).filter((e) => e !== attr_enum.toughness),
-      )
+      get_random_entry(base_attr_list.filter((e) => e !== attr_enum.toughness))
     ] += 5;
     edu_marks.fan_buff += 5;
     flags.wait_flag =

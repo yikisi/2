@@ -16,7 +16,7 @@ const { gacha } = require('#/utils/list-utils');
 const chara_colors = require('#/data/chara-colors').chara_colors[7];
 const GoldShipEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-7');
 const { location_enum } = require('#/data/locations');
-const { attr_enum } = require('#/data/train-const');
+const { attr_enum, base_attr_list } = require('#/data/train-const');
 
 module.exports = class extends Edu7UntilRaceEnd {
   async week_start(gold_ship, me, callname, hook, extra_flag, event_object) {
@@ -227,11 +227,9 @@ module.exports = class extends Edu7UntilRaceEnd {
       era.println();
 
       const changed_attrs = {};
-      gacha(Object.values(attr_enum), 3).forEach(
-        (e) => (changed_attrs[e] = true),
-      );
+      gacha(base_attr_list, 3).forEach((e) => (changed_attrs[e] = true));
       const change_list = new Array(5).fill(3);
-      gacha(Object.values(attr_enum), 3).forEach((e) => (change_list[e] = 8));
+      gacha(base_attr_list, 3).forEach((e) => (change_list[e] = 8));
       get_attr_and_print_in_event(7, change_list, 45) &&
         (await era.waitAnyKey());
     } else if (event_arg === 47 + 41) {
