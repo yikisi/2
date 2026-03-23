@@ -500,6 +500,11 @@ const era = {
    */
   setBack(name, config) {},
   /**
+   * Set default text color.
+   * @param {string} [color]
+   */
+  setColor(color) {},
+  /**
    * set default horizontal align of inColRows
    * @param {'start'|'end'|'center'|'space-around'|'space-between'|'space-evenly'} align REQUIRED the vertical align: start (default), end, center, space-around, space-between or space-evenly
    * @returns {void}

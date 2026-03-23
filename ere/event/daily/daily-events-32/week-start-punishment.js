@@ -916,169 +916,125 @@ module.exports = (handlers) => {
       ]);
       era.println();
       if ((await degeneration_to_evil('用嘴', '用扫具')) === 1) {
-        const color = akuochi[1];
+        era.setColor(akuochi[1]);
         await era.printAndWait(
           '反正，都已经回不去了，那不如干脆一点，放弃理智享受一切吧。',
-          { color },
         );
         era.println();
-        await era.printAndWait(
-          [
-            me.get_colored_name(),
-            ' 跪伏在地上，舔舐着三天以来 ',
-            me.get_colored_name(),
-            ' 留下的痕迹。',
-          ],
-          { color },
-        );
-        await era.printAndWait('原因究竟为何呢？', { color });
-        await era.printAndWait(
-          [
-            '因为要是被',
-            tachyon.uma_sex_title,
-            '大人们看到了自己使用工具清理，可能会变得更加悲惨？',
-          ],
-          { color },
-        );
+        await era.printAndWait([
+          me.get_colored_name(),
+          ' 跪伏在地上，舔舐着三天以来 ',
+          me.get_colored_name(),
+          ' 留下的痕迹。',
+        ]);
+        await era.printAndWait('原因究竟为何呢？');
+        await era.printAndWait([
+          '因为要是被',
+          tachyon.uma_sex_title,
+          '大人们看到了自己使用工具清理，可能会变得更加悲惨？',
+        ]);
         await era.printAndWait(
           '因为这样悲惨的处境才能更加警惕自己要努力脱离这样的生活？',
-          { color },
         );
         await era.printAndWait(
           '还是……真的就像速子说的一样，自己只是个为了精液和肉棒能够不顾形象跪在地上舔地板的贱货？',
-          { color },
         );
         era.println();
-        await era.printAndWait('这些原因都无所谓了。', { color });
-        await era.printAndWait(
-          [
-            '趴在地上的 ',
-            me.get_colored_name(),
-            ' 现在，眼睛看到的，耳朵听到的，嘴巴尝到的，都只有在地上，自己身体上，自己全身上下能够插入的洞中流出的白浊精华了。',
-          ],
-          { color },
-        );
+        await era.printAndWait('这些原因都无所谓了。');
+        await era.printAndWait([
+          '趴在地上的 ',
+          me.get_colored_name(),
+          ' 现在，眼睛看到的，耳朵听到的，嘴巴尝到的，都只有在地上，自己身体上，自己全身上下能够插入的洞中流出的白浊精华了。',
+        ]);
         era.println();
         await era.printAndWait('「哒……哒……」');
-        await era.printAndWait(
-          [
-            me.uma_sex_title,
-            '灵敏的耳朵让 ',
-            me.get_colored_name(),
-            ' 听见了，有人在走廊上朝着这边走来的声音。',
-          ],
-          { color },
-        );
-        await era.printAndWait(
-          ['那么，又是哪位', tachyon.uma_sex_title, '大人需要自己的服侍了呢。'],
-          { color },
-        );
-        await era.printAndWait(
-          [
-            '不知不觉间，',
-            me.get_colored_name(),
-            ' 主动撅起了屁股，等待下名贵客的使用。',
-          ],
-          { color },
-        );
+        await era.printAndWait([
+          me.uma_sex_title,
+          '灵敏的耳朵让 ',
+          me.get_colored_name(),
+          ' 听见了，有人在走廊上朝着这边走来的声音。',
+        ]);
+        await era.printAndWait([
+          '那么，又是哪位',
+          tachyon.uma_sex_title,
+          '大人需要自己的服侍了呢。',
+        ]);
+        await era.printAndWait([
+          '不知不觉间，',
+          me.get_colored_name(),
+          ' 主动撅起了屁股，等待下名贵客的使用。',
+        ]);
       } else {
-        const color = akuochi[0];
+        era.setColor(akuochi[0]);
         await era.printAndWait(
           '虽然肉体上已经被改造了，但最起码，精神上不能放弃。',
-          { color },
         );
         era.println();
-        await era.printAndWait(
-          [
-            me.get_colored_name(),
-            ' 挣扎着站起身来——哪怕是',
-            me.uma_sex_title,
-            '之身，对 ',
-            me.get_colored_name(),
-            ' 那刚经过三天玩弄的身体来说这依然算是个辛苦的举动——拿出扫具柜里这几天沾满了 ',
-            me.get_colored_name(),
-            ' 及各式各样',
-            tachyon.uma_sex_title,
-            '体液的扫除工具，清理着地面上自己留下的痕迹。',
-          ],
-          { color },
-        );
+        await era.printAndWait([
+          me.get_colored_name(),
+          ' 挣扎着站起身来——哪怕是',
+          me.uma_sex_title,
+          '之身，对 ',
+          me.get_colored_name(),
+          ' 那刚经过三天玩弄的身体来说这依然算是个辛苦的举动——拿出扫具柜里这几天沾满了 ',
+          me.get_colored_name(),
+          ' 及各式各样',
+          tachyon.uma_sex_title,
+          '体液的扫除工具，清理着地面上自己留下的痕迹。',
+        ]);
         era.println();
-        await era.printAndWait(
-          [
-            '虽然光是站起身对脚底板的刺激就足以使 ',
-            me.get_colored_name(),
-            ' 达到一次小高潮。',
-          ],
-          { color },
-        );
-        await era.printAndWait(
-          [
-            '虽然到现在 ',
-            me.get_colored_name(),
-            ' 的小穴和屁穴仍在不停的流出混合着白浊及爱液的黏液，增加 ',
-            me.get_colored_name(),
-            ' 的扫除困难。',
-          ],
-          { color },
-        );
+        await era.printAndWait([
+          '虽然光是站起身对脚底板的刺激就足以使 ',
+          me.get_colored_name(),
+          ' 达到一次小高潮。',
+        ]);
+        await era.printAndWait([
+          '虽然到现在 ',
+          me.get_colored_name(),
+          ' 的小穴和屁穴仍在不停的流出混合着白浊及爱液的黏液，增加 ',
+          me.get_colored_name(),
+          ' 的扫除困难。',
+        ]);
         await era.printAndWait(
           '虽然看见钝头的扫帚柄，和闻到上面带着的气味，心中就有种冲动想要用其填满自己那不过五分钟没有插入过东西的小穴。',
-          { color },
         );
         era.println();
-        await era.printAndWait(
-          [
-            me.get_colored_name(),
-            ' 依然倔强的站起身，用扫帚和畚箕进行着徒劳无功的扫除。',
-          ],
-          { color },
-        );
-        await era.printAndWait('自己是人类，不是马娘，不是性奴，不是孕袋。', {
-          color,
-        });
-        await era.printAndWait(
-          ['这样的坚持依然存在于 ', me.get_colored_name(), ' 的心中。'],
-          {
-            color,
-          },
-        );
-        await era.printAndWait('然而……', { color });
+        await era.printAndWait([
+          me.get_colored_name(),
+          ' 依然倔强的站起身，用扫帚和畚箕进行着徒劳无功的扫除。',
+        ]);
+        await era.printAndWait('自己是人类，不是马娘，不是性奴，不是孕袋。');
+        await era.printAndWait([
+          '这样的坚持依然存在于 ',
+          me.get_colored_name(),
+          ' 的心中。',
+        ]);
+        await era.printAndWait('然而……');
         era.println();
         await era.printAndWait('「哒……哒……」');
-        await era.printAndWait(
-          [
-            me.uma_sex_title,
-            '灵敏的耳朵让 ',
-            me.get_colored_name(),
-            ' 准确捕捉到了，有人在走廊上朝着这边走来的声音。',
-          ],
-          { color },
-        );
+        await era.printAndWait([
+          me.uma_sex_title,
+          '灵敏的耳朵让 ',
+          me.get_colored_name(),
+          ' 准确捕捉到了，有人在走廊上朝着这边走来的声音。',
+        ]);
         await era.printAndWait(
           '是今天的使用者吗？这个问题，想必是无须回答的，不如说除开这个目的也想不到会有人靠近这个时不时有药物外泄的走廊的原因了。',
-
-          { color },
         );
-        await era.printAndWait(
-          [
-            '但 ',
-            me.get_colored_name(),
-            ' 依然倔强地站着，装作没有听见，维持着自己身为人类的骄傲。',
-          ],
-          { color },
-        );
+        await era.printAndWait([
+          '但 ',
+          me.get_colored_name(),
+          ' 依然倔强地站着，装作没有听见，维持着自己身为人类的骄傲。',
+        ]);
         era.println();
-        await era.printAndWait(
-          [
-            '——————纵使，那是在五分钟后便会被 ',
-            me.get_colored_name(),
-            ' 主动抛弃的东西。',
-          ],
-          { color },
-        );
+        await era.printAndWait([
+          '——————纵使，那是在五分钟后便会被 ',
+          me.get_colored_name(),
+          ' 主动抛弃的东西。',
+        ]);
       }
     }
+    era.setColor();
     end_ero_and_train();
     get_custom_mec(32).set_callname();
   };

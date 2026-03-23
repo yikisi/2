@@ -150,7 +150,7 @@ async function save_and_next_week(cid, cur_loc, rest_loc) {
   era.set('flag:床伴', lover);
   const punish = era.get('flag:惩戒力度') >= 2 && check_pregnant_unprotect(0);
   if (punish) {
-    i18n().timon.as_pregnant_slave['work']({
+    i18n().timon.work_as_pregnant_slave['work']({
       SLAVE: get_trainer_title().title(),
       ...generate_common_dict(),
     });

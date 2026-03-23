@@ -35,7 +35,7 @@ class CharaTalk {
     content.push(
       mental ? i18n().tk_think_border[1] : i18n().tk_speak_border[1],
     );
-    era.print(content);
+    era.print(content, { color: 'white' });
   }
 
   /**

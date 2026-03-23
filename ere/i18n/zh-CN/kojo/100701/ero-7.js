@@ -8,11 +8,11 @@ module.exports = {
   /**
    * @param {CharaTalk} gs
    * @param {CharaTalk} you
-   * @param {CharaTalk} yaoi
+   * @param {CharaTalk} yayoi
    * @param {CharaTalk} tokino
    * @param {PrintedSpan} callname
    */
-  async report_preg(gs, you, yaoi, tokino, callname) {
+  async report_preg(gs, you, yayoi, tokino, callname) {
     await gs.say_and_wait('……');
     era.println();
     await gs.print_and_wait([
@@ -65,7 +65,7 @@ module.exports = {
     era.println();
     await era.printAndWait([
       '让负责马娘怀孕的事不得不向特雷森高层报告，',
-      yaoi.get_colored_name(),
+      yayoi.get_colored_name(),
       ' 与 ',
       tokino.get_colored_name(),
       ' 难得地露出了想要杀人的眼神，但她们还是会很负责地协助你们应对将要来临的育儿生活——以及尽力按下一切影响声誉的丑闻。',

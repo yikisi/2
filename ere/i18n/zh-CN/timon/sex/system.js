@@ -654,14 +654,14 @@ module.exports = {
 
   /**
    * 调教结束后的总结情报
-   * @param {CharaTalk} yaoi
+   * @param {CharaTalk} yayoi
    * @param {CharaTalk} tokino
    * @param {CharaTalk} riko
    * @param {CharaTalk} glasse
    * @param {CharaTalk} cocon
    */
-  async ero_report(yaoi, tokino, riko, glasse, cocon) {
-    yaoi.say_as_unknown('发 表！高潮播报～♫');
+  async ero_report(yayoi, tokino, riko, glasse, cocon) {
+    yayoi.say_as_unknown('发 表！高潮播报～♫');
     tokino.say_as_unknown('以下报上这次马儿跳的结果简报～');
     // 1% 几率理子会说不下去，让糖衣和蚕茧打气
     if (Math.random() < 0.01) {

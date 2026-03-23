@@ -1,3 +1,7 @@
+/**
+ * @file 比赛相关 - 系统提示
+ * @author 黑奴队长
+ */
 const { get } = require('#/era-electron');
 
 const { get_random_entry } = require('#/utils/list-utils');
