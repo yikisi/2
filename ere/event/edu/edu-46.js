@@ -17,7 +17,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const FalconEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-46');
 const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
-const { attr_names, fumble_result } = require('#/data/train-const');
+const { attr_enum, attr_names, fumble_result } = require('#/data/train-const');
 
 /** @type {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},number,number,FalconEduMarks,EventObject):Promise>} */
 const week_start_handlers = {};
@@ -169,6 +169,9 @@ module.exports = class extends CustomizedEdu {
     extra_flag['args'] = extra_flag.fumble
       ? fumble_result.fumble
       : fumble_result.fail;
+    if (extra_flag.train === attr_enum.intelligence) {
+      return;
+    }
     if (extra_flag.fumble) {
       await print_event_name('严禁逞强！', falcon);
       await falcon.say_and_wait(`${callname}……`);
@@ -177,8 +180,7 @@ module.exports = class extends CustomizedEdu {
       await era.printAndWait(`可能是接连不断的突击live大量消耗了飞鹰子的体力`);
       era.printButton('「接下来的街头live需要暂时停止了。」', 1);
       era.printButton('「试试看街头演出吧？」', 2);
-      hook.arg = (await era.input()) === 1;
-      if (hook.arg) {
+      if ((await era.input()) === 1) {
         await falcon.say_and_wait(`呜~那些期待着飞鹰子的粉丝们该怎么办呢？`);
         era.printButton(
           '「就这样挺着受伤的腿强行表演的话，粉丝们也会担心的吧？」',
@@ -276,8 +278,7 @@ module.exports = class extends CustomizedEdu {
       );
       era.printButton('「没关系的，飞鹰子就这样好好休息吧」', 1);
       era.printButton('「……」', 2);
-      hook.arg = (await era.input()) === 1;
-      if (hook.arg) {
+      if ((await era.input()) === 1) {
         await falcon.say_and_wait(`……嗯，飞鹰子一定很快会好起来的。`);
         await falcon.say_and_wait(
           `飞鹰子有的时候也过于急躁了，所以不全是${callname}的错哦。`,
@@ -291,41 +292,39 @@ module.exports = class extends CustomizedEdu {
         await falcon.say_and_wait(`嗯。`);
         await era.printAndWait(`轻轻关上了医务室的门，飞鹰子似乎已经睡下了。`);
         hook.arg = 0;
+      } else if (Math.random() < extra_flag['args'].ratio.fail_again) {
+        await falcon.say_and_wait(`${callname}。`);
+        await era.printAndWait(`飞鹰子抢在${callname} 之前打破了沉默。`);
+        await falcon.say_and_wait(`可以握着我的手吗？`);
+        await era.printAndWait(`飞鹰子的目光从天花板慢慢移向了窗外。`);
+        await falcon.say_and_wait(`与朋友们分开，也是在这个夕阳的时候。`);
+        await falcon.say_and_wait('好痛！');
+        await me.say_and_wait(`飞鹰子！`);
+        await falcon.say_and_wait(`${callname}，可以再稍微靠近一点吗？`);
+        await falcon.say_and_wait(
+          `已经与那么多朋友分开了，我不想再失去${callname}了。`,
+        );
+        await era.printAndWait(
+          `紧紧抱住了哽咽着的飞鹰子，${me.actual_name}看着巨大的金黄色物体慢慢被地平线吞没。`,
+        );
+        await era.printAndWait(`漫长的黑夜要到了。`);
+        hook.arg = -1;
       } else {
-        if (Math.random() < extra_flag['args'].ratio.fail_again) {
-          await falcon.say_and_wait(`${callname}。`);
-          await era.printAndWait(`飞鹰子抢在${callname} 之前打破了沉默。`);
-          await falcon.say_and_wait(`可以握着我的手吗？`);
-          await era.printAndWait(`飞鹰子的目光从天花板慢慢移向了窗外。`);
-          await falcon.say_and_wait(`与朋友们分开，也是在这个夕阳的时候。`);
-          await falcon.say_and_wait('好痛！');
-          await me.say_and_wait(`飞鹰子！`);
-          await falcon.say_and_wait(`${callname}，可以再稍微靠近一点吗？`);
-          await falcon.say_and_wait(
-            `已经与那么多朋友分开了，我不想再失去${callname}了。`,
-          );
-          await era.printAndWait(
-            `紧紧抱住了哽咽着的飞鹰子，${me.actual_name}看着巨大的金黄色物体慢慢被地平线吞没。`,
-          );
-          await era.printAndWait(`漫长的黑夜要到了。`);
-          hook.arg = -1;
-        } else {
-          await falcon.say_and_wait(`${callname}`);
-          await era.printAndWait(`飞鹰子呼唤着${callname} 的名字。`);
-          await era.printAndWait(
-            `不知为何，${callname} 紧紧握住了${falcon.sex} 的手。`,
-          );
-          await falcon.say_and_wait(`我能感受到，${callname}那温暖的大手`);
-          await falcon.say_and_wait(`感觉稍微好点了。`);
-          await me.say_and_wait(`我就在这里，哪里也不会去！`);
-          await falcon.say_and_wait(`${callname}，真温柔呢。`);
-          await era.printAndWait(`飞鹰子将大手放到了自己的脸庞`);
-          await falcon.say_and_wait(`就这样，好好休息一会吧。`);
-          await era.printAndWait(`没过多久，飞鹰子就这样睡着了。`);
-          await era.printAndWait(`悄悄关上房门后，${callname} 离开了医务室。`);
-          await era.printAndWait(`飞鹰子很快就恢复了活力。`);
-          hook.arg = 0;
-        }
+        await falcon.say_and_wait(`${callname}`);
+        await era.printAndWait(`飞鹰子呼唤着${callname} 的名字。`);
+        await era.printAndWait(
+          `不知为何，${callname} 紧紧握住了${falcon.sex} 的手。`,
+        );
+        await falcon.say_and_wait(`我能感受到，${callname}那温暖的大手`);
+        await falcon.say_and_wait(`感觉稍微好点了。`);
+        await me.say_and_wait(`我就在这里，哪里也不会去！`);
+        await falcon.say_and_wait(`${callname}，真温柔呢。`);
+        await era.printAndWait(`飞鹰子将大手放到了自己的脸庞`);
+        await falcon.say_and_wait(`就这样，好好休息一会吧。`);
+        await era.printAndWait(`没过多久，飞鹰子就这样睡着了。`);
+        await era.printAndWait(`悄悄关上房门后，${callname} 离开了医务室。`);
+        await era.printAndWait(`飞鹰子很快就恢复了活力。`);
+        hook.arg = 0;
       }
     }
   }

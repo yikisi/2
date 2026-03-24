@@ -1,14 +1,18 @@
 /**
  * @file 孕袋职责之惩戒 - H事件
  * @author 幽白書
+ * @author 黑奴队长
  */
-const { akuochi } = require('#/data/color-const');
 const era = require('#/era-electron');
+
+const { akuochi } = require('#/data/color-const');
+
 const { degeneration_to_evil } = require('#/i18n/zh-CN/snippets');
 
 module.exports = {
   punish_first: (() => {
     /**
+     * @author 幽白書
      * @param {CharaTalk} you
      * @param {CharaTalk} yayoi
      * @param {CharaTalk} tazuna
@@ -203,6 +207,7 @@ module.exports = {
   })(),
   punish: (() => {
     /**
+     * @author 幽白書
      * @param {CharaTalk} you
      * @param {string} uma_sex_title
      * @param {boolean} is_teammate

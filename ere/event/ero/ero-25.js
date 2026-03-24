@@ -1,8 +1,3 @@
-/**
- * @file 曼城茶座 - 调教
- * @author Necroz
- * @author 幽白書
- */
 const era = require('#/era-electron');
 
 const { sys_check_cuckold } = require('#/system/chara/sys-calc-cheat');
@@ -18,8 +13,10 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks-32');
 
+const { i18n } = require('#/i18n/selector');
+
 module.exports = class extends CustomizedEro {
-  async ero_start() {
+  async ero_start(h) {
     if (
       sys_check_awake(25) &&
       sys_check_awake(0) &&
@@ -27,20 +24,15 @@ module.exports = class extends CustomizedEro {
       era.getCharactersInTrain().indexOf(32) !== -1 &&
       sys_check_cuckold(32)
     ) {
-      const coffee = get_chara_talk(25);
-      const c_call_m = sys_get_colored_callname(25, 0);
-      const c_call_t = sys_get_colored_callname(25, 32);
-      await coffee.say_and_wait([c_call_t, '，可以请你趴在这里吗？']);
-      await coffee.say_and_wait('嗯，就是这样，土下座的姿势，屁股转过来。');
-      await coffee.say_and_wait([
-        '反正已经没有被 ',
-        c_call_m,
-        ' 宠爱的价值了，就干脆作为无机物的台子存在吧。',
-      ]);
+      await i18n().kojo[this.id].ero.ero_start(
+        get_chara_talk(this.id),
+        sys_get_colored_callname(this.id, 0),
+        sys_get_colored_callname(this.id, 32),
+      );
     }
   }
 
-  async ero_end() {
+  async ero_end(h) {
     if (
       sys_check_awake(25) &&
       sys_check_awake(32) &&

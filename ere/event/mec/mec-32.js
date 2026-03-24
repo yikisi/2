@@ -70,7 +70,7 @@ module.exports = class extends CustomizedMec {
 
   set_pseudo_uma(uma) {
     if (new TachyonEduMarks().uma_limit) {
-      const buff_name = i18n().kojo[this.id].r_limit[this.#uma];
+      const buff_name = i18n().kojo[this.id].uma_limit(this.#uma);
       uma.attr_buffs.forEach((l, i) => {
         const val = Math.ceil(1200 - uma.attrs[i]);
         if (val > 0) {
