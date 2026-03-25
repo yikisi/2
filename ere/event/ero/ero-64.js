@@ -290,19 +290,19 @@ module.exports = class extends CustomizedEro {
     await kojo()['raping_start'](dict());
   }
 
-  async join_3p() {
+  async join_3p(l) {
     return (await kojo()['join_3p'](dict()))[0] === 1;
   }
 
-  async join_3p_accept() {
+  async join_3p_accept(l) {
     await kojo()['join_3p_accept'](dict());
   }
 
-  async join_3p_reject() {
+  async join_3p_reject(l) {
     await kojo()['join_3p_reject'](dict());
   }
 
-  async join_3p_force() {
+  async join_3p_force(l) {
     await kojo()['join_3p_force'](dict());
   }
 
