@@ -11,6 +11,7 @@ const {
 const global_achievement = require('#/system/global/sys-calc-achievement');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
+const select_yes_or_no = require('#/page/components/select-yes-or-no');
 const page_ero = require('#/page/page-ero');
 
 const { get_custom_ero } = require('#/event/ero/ero-factory');
@@ -46,13 +47,18 @@ async function sys_rape_in_sleeping(cid, supporter = 0) {
   let wake_up = false;
   let temp;
   while (r_flag) {
-    await sys_handle_ero_act(ero_hooks.relax, default_my_filter, debug);
+    await sys_handle_ero_act(
+      ero_hooks.relax,
+      default_my_filter,
+      debug || era.get('tflag:装睡') > 0,
+    );
     a_count++;
     if (
       era.get(`tcvar:${cid}:逃跑`) > 0 ||
       (check_satisfied(cid) > 0 &&
         (!supporter || check_satisfied(supporter) > 0)) ||
       (wake_up =
+        !era.get('tflag:装睡') &&
         !era.get('status:0:马跳S') &&
         era.get('base:0:体力') > 0 &&
         (temp = era.get('ex:0:TotalEX')) > 0 &&
@@ -60,6 +66,24 @@ async function sys_rape_in_sleeping(cid, supporter = 0) {
       a_count > 36
     ) {
       r_flag = false;
+      if (
+        wake_up &&
+        (await select_yes_or_no(
+          (supporter > 0
+            ? i18n().timon.get_it_multi_rape_in_sleeping
+            : i18n().timon.get_it_chara_rape_in_sleeping)(
+            get_chara_talk(cid),
+            get_chara_talk(0),
+            supporter > 0 && get_chara_talk(supporter),
+          ),
+          i18n().ui_wur_sleep,
+          i18n().ui_wur_wake,
+        ))
+      ) {
+        wake_up = false;
+        r_flag = true;
+        era.set('tflag:装睡', 1);
+      }
     }
   }
   current = new Date().getTime() - current;
@@ -80,20 +104,10 @@ async function sys_rape_in_sleeping(cid, supporter = 0) {
     ) {
       global_achievement.et_tu = 1;
     }
-    await era.printAndWait(
-      (supporter > 0
-        ? i18n().timon.get_it_multi_rape_in_sleeping
-        : i18n().timon.get_it_chara_rape_in_sleeping)(
-        get_chara_talk(cid),
-        get_chara_talk(0),
-        get_chara_talk(supporter),
-      ),
-    );
     await get_custom_ero(cid).raping_start(supporter);
     await page_ero(void 0, true);
   }
-  await end_ero_and_show_result(wake_up);
-  era.endTrain();
+  await end_ero_and_show_result(wake_up || era.get('tflag:装睡') > 0);
   era.set('status:0:熬夜', 1 - era.get('status:0:马跳S'));
   era.set(`status:${cid}:熬夜`, 1);
   sys_like_chara(cid, 0, 25, false);

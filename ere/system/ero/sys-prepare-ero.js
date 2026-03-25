@@ -688,7 +688,7 @@ async function end_ero_and_show_result(shown = true) {
   const chara_list = era.getCharactersInTrain();
   const info = end_ero(false, shown, chara_list);
   if (shown) {
-    if (era.get('flag:马跳结果显示简报') > 0) {
+    if (era.get('flag:马跳结果显示简报') > 0 || era.get('tflag:装睡') > 0) {
       for (const cid of chara_list) {
         const buffer = get_jewel_result(
           cid,
@@ -724,9 +724,7 @@ async function end_ero_and_show_result(shown = true) {
                 info.jewel[chara_list[chara_index]],
                 info.attr[chara_list[chara_index]],
               ),
-              {
-                width: 18,
-              },
+              { width: 18 },
             );
             break;
           case 1:

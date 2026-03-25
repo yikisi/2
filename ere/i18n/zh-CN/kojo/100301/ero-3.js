@@ -6,9 +6,9 @@ const era = require('#/era-electron');
 
 module.exports = {
   /**
-   * @param {CharaTalk} teio
-   * @param {CharaTalk} you
-   * @param {PrintedSpan} call_t 对帝王的称呼
+   * @param {CharaTalk} teio 东海帝王
+   * @param {CharaTalk} you 玩家
+   * @param {PrintedSpan} call_t 玩家对东海帝王的称呼
    */
   async talk_with_hurt(teio, you, call_t) {
     await teio.say_and_wait('……');
@@ -25,9 +25,9 @@ module.exports = {
     ]);
   },
   /**
-   * @param {CharaTalk} teio
-   * @param {CharaTalk} you
-   * @param {boolean} success
+   * @param {CharaTalk} teio 东海帝王
+   * @param {CharaTalk} you 玩家
+   * @param {boolean} success 调情是否成功
    */
   async lure(teio, you, success) {
     await you.print_and_wait([
@@ -46,9 +46,9 @@ module.exports = {
     }
   },
   /**
-   * @param {CharaTalk} teio
-   * @param {CharaTalk} you
-   * @param {PrintedSpan} callname
+   * @param {CharaTalk} teio 东海帝王
+   * @param {CharaTalk} you 玩家
+   * @param {PrintedSpan} callname 东海帝王对玩家的称呼
    */
   async switch(teio, you, callname) {
     await teio.say_and_wait([callname, '！你又欺负我——']);
@@ -70,9 +70,9 @@ module.exports = {
     ]);
   },
   /**
-   * @param {CharaTalk} teio
-   * @param {CharaTalk} you
-   * @param {PrintedSpan} callname
+   * @param {CharaTalk} teio 东海帝王
+   * @param {CharaTalk} you 玩家
+   * @param {PrintedSpan} callname 东海帝王对玩家的称呼
    */
   async pet_anal(teio, you, callname) {
     if (Math.random() >= 0.5) {
@@ -102,8 +102,8 @@ module.exports = {
     }
   },
   /**
-   * @param {CharaTalk} teio
-   * @param {CharaTalk} you
+   * @param {CharaTalk} teio 东海帝王
+   * @param {CharaTalk} you 玩家
    */
   async prepare_anal(teio, you) {
     await teio.say_and_wait(['……']);
@@ -116,9 +116,9 @@ module.exports = {
     await you.print_and_wait(['娇俏的臀瓣抖动着，粉嫩干净的孔洞敞开了……']);
   },
   /**
-   * @param {CharaTalk} teio
-   * @param {CharaTalk} you
-   * @param {PrintedSpan} callname
+   * @param {CharaTalk} teio 东海帝王
+   * @param {CharaTalk} you 玩家
+   * @param {PrintedSpan} callname 东海帝王对玩家的称呼
    */
   async ask_foot_job_with_hurt(teio, you, callname) {
     await teio.say_and_wait([
@@ -150,8 +150,8 @@ module.exports = {
     ]);
   },
   /**
-   * @param {CharaTalk} teio
-   * @param {CharaTalk} you
+   * @param {CharaTalk} teio 东海帝王
+   * @param {CharaTalk} you 玩家
    * @param {boolean} is_first 是否是连续动作的初次行动
    */
   async ask_tail_job(teio, you, is_first) {
@@ -190,8 +190,8 @@ module.exports = {
     }
   },
   /**
-   * @param {CharaTalk} teio
-   * @param {CharaTalk} you
+   * @param {CharaTalk} teio 东海帝王
+   * @param {CharaTalk} you 玩家
    */
   async preg_report(teio, you) {
     if (era.get('status:3:腿伤') > 0) {

@@ -679,6 +679,9 @@ class I18nEntry {
   ui_bt_self_info = '个人情报';
   ui_bt_chara_info = '对方情报';
 
+  ui_wur_sleep = '默默享受';
+  ui_wur_wake = '就此醒来';
+
   ui_sex_bt_setting = '设置';
   ui_sex_bt_touch = '身体接触';
   ui_sex_bt_stain = '脏污检查';

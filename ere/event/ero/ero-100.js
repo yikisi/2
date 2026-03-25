@@ -1,3 +1,5 @@
+const { get } = require('#/era-electron');
+
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
 const EroNormalCommunications = require('#/event/ero/common/normal/communications');
@@ -17,6 +19,7 @@ const CustomizedEro = require('#/event/ero/ero-common');
 
 const { get_breast_cup } = require('#/data/info-generator');
 
+const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 class AcuteNormalCommunications extends EroNormalCommunications {
@@ -810,6 +813,7 @@ class AcuteNormalFucking extends EroNormalFucking {
       sys_get_colored_callname(defender.id, attacker.id),
       sys_get_colored_callname(attacker.id, defender.id),
       hook.arg,
+      di18n.feature.n_c_sex_organ[get('talent:0:茎核类型')],
     );
   }
 

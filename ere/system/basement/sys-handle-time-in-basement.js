@@ -43,6 +43,7 @@ const { location_enum } = require('#/data/locations');
 const { attr_enum } = require('#/data/train-const');
 
 const { i18n } = require('#/i18n/selector');
+const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
 const basement_just_status =
     (1 << basement_status_enum.just_back) +
@@ -175,12 +176,17 @@ async function handle_rape(part_list, my_life_marks, is_rape) {
     let temp;
     wake_up = false;
     while (r_flag) {
-      await sys_handle_ero_act(ero_hooks.relax, default_my_filter, false);
+      await sys_handle_ero_act(
+        ero_hooks.relax,
+        default_my_filter,
+        era.get('tflag:装睡') > 0,
+      );
       a_count++;
       if (
         (check_satisfied(part_list[1]) > 0 &&
           (!part_list[2] || check_satisfied(part_list[2]) > 0)) ||
         (wake_up =
+          !era.get('tflag:装睡') &&
           era.get('base:0:精力') > 0 &&
           !era.get('status:0:马跳S') &&
           (3 * era.get('tflag:回合') >= get_up_time ||
@@ -189,6 +195,24 @@ async function handle_rape(part_list, my_life_marks, is_rape) {
         a_count > 36
       ) {
         r_flag = false;
+        if (
+          wake_up &&
+          (await select_yes_or_no(
+            (part_list[2] > 0
+              ? i18n().timon.get_it_multi_rape_in_sleeping
+              : i18n().timon.get_it_chara_rape_in_sleeping)(
+              get_chara_talk(part_list[1]),
+              get_chara_talk(0),
+              part_list[2] > 0 && get_chara_talk(part_list[2]),
+            ),
+            i18n().ui_wur_sleep,
+            i18n().ui_wur_wake,
+          ))
+        ) {
+          wake_up = false;
+          r_flag = true;
+          era.set('tflag:装睡', 1);
+        }
       }
     }
     current = new Date().getTime() - current;
@@ -203,15 +227,6 @@ async function handle_rape(part_list, my_life_marks, is_rape) {
       era.set('status:0:沉睡', 0);
       basement_queue.clean_actions(
         (e) => e.chara_id === 0 && e.type === action_type_enum.get_up,
-      );
-      await era.printAndWait(
-        (part_list[2] > 0
-          ? i18n().timon.get_it_multi_rape_in_sleeping
-          : i18n().timon.get_it_chara_rape_in_sleeping)(
-          get_chara_talk(part_list[1]),
-          get_chara_talk(0),
-          get_chara_talk(part_list[2] ?? 0),
-        ),
       );
       await page_ero(void 0, true);
     }
@@ -234,7 +249,7 @@ async function handle_rape(part_list, my_life_marks, is_rape) {
       new BasementAction(e, sex_end_time, action_type_enum.stop_sex),
     );
   });
-  await end_ero_and_show_result(wake_up);
+  await end_ero_and_show_result(wake_up || era.get('tflag:装睡') > 0);
 }
 
 /**

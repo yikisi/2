@@ -3,7 +3,9 @@
  * <br>指令含义看 #/i18n/zh-CN/sex/actions
  * @author 黑奴队长
  */
-const { printAndWait } = require('#/era-electron');
+const { get, printAndWait } = require('#/era-electron');
+
+const { get_random_entry } = require('#/utils/list-utils');
 
 module.exports = {
   // 沟通系
@@ -55,7 +57,31 @@ module.exports = {
   },
   /** @param {CharaTalk} attacker 主动方 */
   async sleep(attacker) {
-    await printAndWait(['【', attacker.get_colored_name(), ' 毫无反应】']);
+    const buffer = [
+      () => printAndWait(['【', attacker.get_colored_name(), ' 毫无反应】']),
+    ];
+    if (get(`status:${attacker.id}:沉睡`) > 0) {
+      buffer.push(() =>
+        printAndWait(['【', attacker.get_colored_name(), ' 静静地沉睡着】']),
+      );
+    }
+    if (get(`status:${attacker.id}:马跳S`) > 0) {
+      buffer.push(
+        () =>
+          printAndWait([
+            '【',
+            attacker.get_colored_name(),
+            ' 略微沉重地呼吸着】',
+          ]),
+        () =>
+          printAndWait([
+            '【',
+            attacker.get_colored_name(),
+            ' 在睡梦中呼出暧昧的吐息】',
+          ]),
+      );
+    }
+    await get_random_entry(buffer)();
   },
   /**
    * @param {CharaTalk} attacker 主动方

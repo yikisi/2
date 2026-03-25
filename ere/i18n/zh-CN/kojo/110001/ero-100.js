@@ -8,8 +8,6 @@ const { get_random_entry } = require('#/utils/list-utils');
 
 const { vp_status_enum } = require('#/data/ero/status-const');
 
-const di18n = require('#/i18n/extended-def');
-
 module.exports = {
   /**
    * @param {CharaTalk} acute 奇锐骏
@@ -2416,8 +2414,16 @@ module.exports = {
    * @param {PrintedSpan} callname 奇锐骏对玩家的称呼
    * @param {PrintedSpan} y_call_a 玩家对奇锐骏的称呼
    * @param {boolean} is_first 是否是连续动作的初次行动
+   * @param {string} penis_color 玩家阴茎的颜色
    */
-  async hug_suspended_congress(acute, you, callname, y_call_a, is_first) {
+  async hug_suspended_congress(
+    acute,
+    you,
+    callname,
+    y_call_a,
+    is_first,
+    penis_color,
+  ) {
     if (is_first) {
       await you.print_and_wait([
         '举着屁股，将背对着的 ',
@@ -2434,7 +2440,7 @@ module.exports = {
         '，不知是兴奋还是恐惧地颤抖着。',
       ]);
       await you.print_and_wait([
-        di18n.feature.n_c_sex_organ[era.get('talent:0:茎核类型')],
+        penis_color,
         '的肉棒，就在这一刻深入了小穴之中——',
       ]);
       if (era.get('talent:100:处女') > vp_status_enum.no) {
