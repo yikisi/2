@@ -783,7 +783,7 @@ module.exports = (handlers) => {
     ]);
     await in_urara.say_as_unknown_and_wait([
       '温泉什么的最后再说，总之快点把 训练员',
-      me.get_adult_sex_title(),
+      me.adult_sex_title,
       ' 拉上来！',
     ]);
     await era.printAndWait([

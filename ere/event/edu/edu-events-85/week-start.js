@@ -44,7 +44,7 @@ module.exports = (handlers) => {
       ruby.sex,
       '所重视的东西。',
     ]);
-    await era.printAndWait(['然而在 ', me.get_couple_title(), ' 动身前……']);
+    await era.printAndWait(['然而在你们动身前……']);
     await ruby.say_and_wait('不好意思，临时更改一下行程。');
     await era.printAndWait([
       '在没有被告知事态的情况下，',
@@ -336,11 +336,7 @@ module.exports = (handlers) => {
         ' 准备好挨骂的时候。',
       ]);
       await ruby.say_and_wait('帮我把鞋子穿好。');
-      await era.printAndWait([
-        '之后 ',
-        me.get_couple_title(),
-        ' 顺利地完成了训练。',
-      ]);
+      await era.printAndWait(['之后你们顺利地完成了训练。']);
       relation_change = 3;
       love_change = 1;
     }

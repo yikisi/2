@@ -115,11 +115,7 @@ module.exports = class extends CustomizedDaily {
       kita = get_chara_talk(68),
       me = get_chara_talk(0),
       buffer = [
-        [
-          [
-            `今天的身体也没有异常，训练员${me.get_adult_sex_title()}，开始训练吧！`,
-          ],
-        ],
+        [[`今天的身体也没有异常，训练员${me.adult_sex_title}，开始训练吧！`]],
         [
           [
             [
@@ -216,14 +212,14 @@ module.exports = class extends CustomizedDaily {
       buffer.push(
         [
           [
-            `最近，总感觉训练员${me.get_adult_sex_title()}指导我的声音变得离不开了呢。`,
+            `最近，总感觉训练员${me.adult_sex_title}指导我的声音变得离不开了呢。`,
             '下达指令的时候心脏就会砰砰直跳，完成命令的时候就会想要被夸奖，简直就像祭典一样的兴奋了呢。',
           ],
           `${kita.name} 戳着手指，脸蛋微微泛起了红晕。`,
         ],
         [
           [
-            `最近我在挑战用尾巴能不能举重，训练员${me.get_adult_sex_title()}可以陪我一起尝试么？`,
+            `最近我在挑战用尾巴能不能举重，训练员${me.adult_sex_title}可以陪我一起尝试么？`,
           ],
           `用尾巴缠住 ${me.name} 小腿的 ${kita.name}，用开玩笑般的语气对 ${me.name} 说道。`,
         ],
@@ -236,7 +232,7 @@ module.exports = class extends CustomizedDaily {
         ],
         [
           [
-            `训练员${me.get_adult_sex_title()}，这周末我们一起去雪山训练吧！`,
+            `训练员${me.adult_sex_title}，这周末我们一起去雪山训练吧！`,
             '没关系，时间上来不及的话就让我抱着训练员跑回来吧！一定不会迟到的！',
           ],
           `跃跃欲试的 ${kita.name}，对 ${me.name} 动手动脚了起来。`,
@@ -264,7 +260,7 @@ module.exports = class extends CustomizedDaily {
         ],
         [
           [
-            `训练员${me.get_adult_sex_title()}就是我的助人大将呢，所以一直以来谢谢训练员${me.get_adult_sex_title()}了哦！诶嘿嘿！`,
+            `训练员${me.adult_sex_title}就是我的助人大将呢，所以一直以来谢谢训练员${me.adult_sex_title}了哦！诶嘿嘿！`,
           ],
           `${kita.name} 笑着贴了过来，黑色的马耳扑扇扑扇地敲着 ${me.name} 的脖颈。`,
         ],
@@ -273,7 +269,7 @@ module.exports = class extends CustomizedDaily {
       buffer.push(
         [
           [
-            `只是闻到训练员${me.get_adult_sex_title()}的味道，胸口就小鹿乱撞似的停不下来了呢。`,
+            `只是闻到训练员${me.adult_sex_title}的味道，胸口就小鹿乱撞似的停不下来了呢。`,
             '这种心情，到底是怎么回事呢？',
           ],
           `${kita.name} 用尾巴敲打着 ${me.name} 的小腿，露出了难以言说的表情。`,
@@ -287,13 +283,13 @@ module.exports = class extends CustomizedDaily {
         ],
         [
           [
-            `唔，昨天和黄金船前辈并跑后，脚总是有点疼……训练员${me.get_adult_sex_title()}可以帮我看看么？`,
+            `唔，昨天和黄金船前辈并跑后，脚总是有点疼……训练员${me.adult_sex_title}可以帮我看看么？`,
           ],
           `脱下靴子的 ${kita.name}，把那双肥嫩白皙的小脚抬到 ${me.name} 面前。`,
         ],
         [
           [
-            `在特雷森学园的时候，训练员${me.get_adult_sex_title()}一直都对我非常照顾呢！`,
+            `在特雷森学园的时候，训练员${me.adult_sex_title}一直都对我非常照顾呢！`,
             '但是，毕业后这段照顾的时间就要结束了吧，所以在毕业之前，我要好好的回报训练员才是！',
           ],
           `在不经意间流露出感慨表情的 ${kita.name}，为了 ${me.name} 变得更加努力了。`,
@@ -310,7 +306,7 @@ module.exports = class extends CustomizedDaily {
       me = get_chara_talk(0),
       buffer = [
         [
-          `训练员${me.get_adult_sex_title()}，不好好吃饭用泡面对付可不行啊，就算要吃也要吃点菜叶子啊。`,
+          `训练员${me.adult_sex_title}，不好好吃饭用泡面对付可不行啊，就算要吃也要吃点菜叶子啊。`,
           `像${kita.sex_code - 1 ? '妈妈' : '爸爸'}一样的 ${kita.name}，在经 ${
             me.name
           } 同意后把菠菜和白菜放进了小锅里。`,
@@ -344,13 +340,13 @@ module.exports = class extends CustomizedDaily {
         [
           [
             `要休息么？没事啦没事，小北我的身体可是结实的很哦。`,
-            `比起这个训练员${me.get_adult_sex_title()}，还是接着训练吧！`,
+            `比起这个训练员${me.adult_sex_title}，还是接着训练吧！`,
           ],
           `这样敲打着胸脯露出笑容的 ${kita.name}，在 ${me.name} 的命令下还是乖乖的休息了。`,
         ],
         [
           [
-            `训练员${me.get_adult_sex_title()}，我真的不累啦……所以不午睡也是可以的哦……`,
+            `训练员${me.adult_sex_title}，我真的不累啦……所以不午睡也是可以的哦……`,
           ],
           `轻轻嘟囔着的 ${kita.name}，在躺下之后不久后就睡了过去。`,
         ],
@@ -374,10 +370,10 @@ module.exports = class extends CustomizedDaily {
           `把蜂蜜倒入一小勺，而后木瓜切片倒入……好！比赛前的准备之一做好了！`,
           `这样笑着对 ${me.name} 说的${
             kita.name
-          }，在之后为了不浪费粮食把蜂蜜水全部给帝王${kita.get_adult_sex_title()}喝掉了。`,
+          }，在之后为了不浪费粮食把蜂蜜水全部给帝王${kita.adult_sex_title}喝掉了。`,
         ],
         [
-          `训练员${me.get_adult_sex_title()}在帮我钉蹄铁么？诶嘿嘿～这种小事让我自己来就好啦～`,
+          `训练员${me.adult_sex_title}在帮我钉蹄铁么？诶嘿嘿～这种小事让我自己来就好啦～`,
           `这么说着的 ${kita.name}，用手指把蹄铁上的钉子一个一个摁了进去。`,
         ],
         [
@@ -410,7 +406,7 @@ module.exports = class extends CustomizedDaily {
         break;
       case 2:
         await kita.say_and_wait(
-          `训练员${me.get_adult_sex_title()}训练员${me.get_adult_sex_title()}！我们来玩骰子吧！很有意思的哦！`,
+          `训练员${me.adult_sex_title}训练员${me.adult_sex_title}！我们来玩骰子吧！很有意思的哦！`,
         );
         await kita.say_and_wait(
           `在老家的时候我经常和东城会的大哥哥玩这个呢，诶嘿嘿～`,
@@ -434,7 +430,7 @@ module.exports = class extends CustomizedDaily {
         switch (get_random_value(0, 2)) {
           case 0:
             await kita.say_and_wait(
-              `训练员${me.get_adult_sex_title()}，我要上了哦！花鸟风月哦哦哦哦！`,
+              `训练员${me.adult_sex_title}，我要上了哦！花鸟风月哦哦哦哦！`,
             );
             await era.printAndWait(
               `轻快地敲击着按键，${kita.name} 操控的花之妖怪一跃而起，将黑曜石武术家的肋骨打断了。`,
@@ -449,7 +445,7 @@ module.exports = class extends CustomizedDaily {
           case 2:
             await era.printAndWait(`和 ${kita.name} 一起去了街机厅……`);
             await kita.say_and_wait(
-              `帝王${kita.get_adult_sex_title()}和麦昆${kita.get_adult_sex_title()}的玩偶！特雷森附近的抓娃娃机终于也有供货了！`,
+              `帝王${kita.adult_sex_title}和麦昆${kita.adult_sex_title}的玩偶！特雷森附近的抓娃娃机终于也有供货了！`,
             );
             await era.printAndWait(
               `虽然是这么说，但是目标并不是街机厅，而是街机厅里的抓娃娃机呢。`,
@@ -570,20 +566,20 @@ module.exports = class extends CustomizedDaily {
         buffer.push(
           [
             [
-              `啊啊啊～嗯！发声练习正常！训练员${me.get_adult_sex_title()}，我这就开始训练唱歌了哦！`,
+              `啊啊啊～嗯！发声练习正常！训练员${me.adult_sex_title}，我这就开始训练唱歌了哦！`,
             ],
             `握紧了麦克风，${kita.name} 像往常那样唱起了老家的演歌。`,
           ],
           [
             [
-              `今天不仅要训练唱歌也要训练舞步哦，训练员${me.get_adult_sex_title()}要看好了！沙吧嗒吧嗒～`,
+              `今天不仅要训练唱歌也要训练舞步哦，训练员${me.adult_sex_title}要看好了！沙吧嗒吧嗒～`,
             ],
             `踮着脚转起了圈，${kita.name} 蹦跳着模仿起了帝王的舞步。`,
           ],
           [
             [
-              `被变革${kita.get_adult_sex_title()}推荐了黑金属音乐呢，虽然还没听过不过今天就来试试唱吧……`,
-              `诶，不行？为什么啊训练员${me.get_adult_sex_title()}？`,
+              `被变革${kita.adult_sex_title}推荐了黑金属音乐呢，虽然还没听过不过今天就来试试唱吧……`,
+              `诶，不行？为什么啊训练员${me.adult_sex_title}？`,
             ],
             `想要尝试不同音乐类型的 ${kita.name} 气呼呼的说。`,
           ],
@@ -591,7 +587,7 @@ module.exports = class extends CustomizedDaily {
         if (love >= 75) {
           buffer.push([
             [
-              `呜哇啊啊啊……这……这首曲子好过分！训练员${me.get_adult_sex_title()}不许听！`,
+              `呜哇啊啊啊……这……这首曲子好过分！训练员${me.adult_sex_title}不许听！`,
             ],
             `听了带着黄色风格的歌词之后，${me.name} 和 ${kita.name} 立刻慌慌张张地换了首曲子。`,
           ]);
@@ -599,13 +595,13 @@ module.exports = class extends CustomizedDaily {
           buffer.push(
             [
               [
-                `怎么样训练员${me.get_adult_sex_title()}，有没有被小北我的歌喉震撼到呢？`,
+                `怎么样训练员${me.adult_sex_title}，有没有被小北我的歌喉震撼到呢？`,
                 `为什么要露出这样的表情？我有什么地方做错了么？`,
               ],
               `在不知多少次听到 ${kita.name} 对 ${me.name} 唱出情歌又毫无自觉之后，${me.name} 露出了近乎觉悟的表情。`,
             ],
             [
-              [`训练员${me.get_adult_sex_title()}，我唱的怎么样呢，诶嘿嘿……`],
+              [`训练员${me.adult_sex_title}，我唱的怎么样呢，诶嘿嘿……`],
               `在得到 ${me.name} 发自真心的赞叹之后，用尾巴拍打着 ${me.name} 的 ${kita.name} 合拢双腿，轻轻磨蹭了起来。`,
             ],
           );
@@ -643,7 +639,7 @@ module.exports = class extends CustomizedDaily {
           ],
           [
             [
-              `那就是历奇前辈推荐的中华料理店呢，训练员${me.get_adult_sex_title()}，今天就在这里吃炒饭吧！`,
+              `那就是历奇前辈推荐的中华料理店呢，训练员${me.adult_sex_title}，今天就在这里吃炒饭吧！`,
             ],
             `被强拉着走进看起来相当老旧的料理店后，${me.name} 和 ${kita.name} 扶着墙走出来了。`,
           ],
@@ -653,7 +649,7 @@ module.exports = class extends CustomizedDaily {
           ],
           [
             [
-              `训练员${me.get_adult_sex_title()}！上周隔壁街开了一家新的炸猪排店呢。`,
+              `训练员${me.adult_sex_title}！上周隔壁街开了一家新的炸猪排店呢。`,
               `听说那家店不仅分量十足，就连花山组的大哥也会拍手称赞呢，我们去试试吧！`,
             ],
             `担当推荐的确是一间分量十足的好店，但是这份好心情在看到 ${kita.name} 鼓起的肚子后消失的无影无踪了。`,
@@ -662,7 +658,7 @@ module.exports = class extends CustomizedDaily {
         if (love >= 90) {
           buffer.push([
             [
-              `今天，要吃鳗鱼饭呢……嘿嘿，训练员${me.get_adult_sex_title()}要干劲十足哦～\n`,
+              `今天，要吃鳗鱼饭呢……嘿嘿，训练员${me.adult_sex_title}要干劲十足哦～\n`,
             ],
             `坐在身旁的 ${kita.name} 依偎在 ${me.name} 的肩头，在 ${me.name} 看不见的地方露出了害羞的表情。`,
           ]);
@@ -672,7 +668,7 @@ module.exports = class extends CustomizedDaily {
         buffer.push(
           [
             [
-              `呜哇～商店街今天有攀岩比赛呢～训练员${me.get_adult_sex_title()}想尝试一下么？`,
+              `呜哇～商店街今天有攀岩比赛呢～训练员${me.adult_sex_title}想尝试一下么？`,
             ],
             `${me.name} 目视着远处正在热身的大相扑力士，总算是拦住了准备去报名的 ${kita.name}。`,
           ],
@@ -682,7 +678,7 @@ module.exports = class extends CustomizedDaily {
           ],
           [
             [
-              `好漂亮的纪念品店呢，会不会有帝王${kita.get_adult_sex_title()}和麦昆${kita.get_adult_sex_title()}的纪念品呢？`,
+              `好漂亮的纪念品店呢，会不会有帝王${kita.adult_sex_title}和麦昆${kita.adult_sex_title}的纪念品呢？`,
             ],
             `虽然这家店铺看起来有些老旧，但既然 ${kita.name} 很有兴趣，那就一起去逛一逛吧。`,
           ],
@@ -690,7 +686,7 @@ module.exports = class extends CustomizedDaily {
         if (love >= 90) {
           buffer.push([
             [
-              `只是和训练员${me.get_adult_sex_title()}一起走在街上，就感觉好放松啊～哼哼哼～`,
+              `只是和训练员${me.adult_sex_title}一起走在街上，就感觉好放松啊～哼哼哼～`,
               '训练员，可以多陪我走一走么？',
             ],
             `轻轻挽住 ${me.name} 的胳膊，${kita.name} 愉快靠在 ${me.name} 肩膀上。`,
@@ -698,7 +694,7 @@ module.exports = class extends CustomizedDaily {
         } else if (love > 75) {
           buffer.push([
             [
-              `这个时间点商店街的人流量很大呢，训练员${me.get_adult_sex_title()}可要小心注意不要走丢了哦。`,
+              `这个时间点商店街的人流量很大呢，训练员${me.adult_sex_title}可要小心注意不要走丢了哦。`,
             ],
             `悄悄握紧 ${me.name} 的手，${kita.name} 摇晃着耳朵，如同一只黑色的导盲犬般走在 ${me.name} 前面。`,
           ]);
@@ -747,7 +743,7 @@ module.exports = class extends CustomizedDaily {
             `没想到在河边散步也会碰到摔伤的格斗家呢，搬运的工作就交给我吧！`,
           );
           await kita.say_and_wait(
-            `诶？不是摔伤更像是被打伤的？训练员${me.get_adult_sex_title()}真会开玩笑呢～这只是寻常的扭伤哦～`,
+            `诶？不是摔伤更像是被打伤的？训练员${me.adult_sex_title}真会开玩笑呢～这只是寻常的扭伤哦～`,
           );
           await era.printAndWait(
             `打着哈哈的 ${kita.name}，背着受伤的格斗家轻轻一跃跳过了数米长的河流。`,
@@ -770,7 +766,7 @@ module.exports = class extends CustomizedDaily {
           break;
         case 1:
           await kita.say_and_wait(
-            `又钓上来了一条！训练员${me.get_adult_sex_title()}看到了么？`,
+            `又钓上来了一条！训练员${me.adult_sex_title}看到了么？`,
           );
           await era.printAndWait(
             `不愧是黑${
@@ -813,13 +809,13 @@ module.exports = class extends CustomizedDaily {
         hook.arg = 2;
       }
     } else if (era.get('love:68') >= 50) {
-      kita.say(`诶嘿嘿，训练员${me.get_adult_sex_title()}明天见哦！`);
+      kita.say(`诶嘿嘿，训练员${me.adult_sex_title}明天见哦！`);
       era.print(
         `一边说着，${kita.name} 狠狠地在 ${me.name} 身上蹭了蹭，而后哒哒哒地跑走了。`,
       );
     } else {
       kita.say(
-        `训练员${me.get_adult_sex_title()}，今天真是辛苦您了，明天我也会继续努力的。`,
+        `训练员${me.adult_sex_title}，今天真是辛苦您了，明天我也会继续努力的。`,
       );
       era.print([
         kita.get_colored_name(),
@@ -846,7 +842,7 @@ module.exports = class extends CustomizedDaily {
       case -2:
         talk_arr = [
           '啊嘞？明明我的长处就是韧性十足……来着吧？',
-          `对不起训练员${me.get_adult_sex_title()}，平时训练的力气……好像消失不见了……`,
+          `对不起训练员${me.adult_sex_title}，平时训练的力气……好像消失不见了……`,
         ];
         break;
       case -1:
@@ -855,13 +851,13 @@ module.exports = class extends CustomizedDaily {
       case 0:
         talk_arr = [
           `不管是什么样的训练，都咚咚咚的解决吧`,
-          `训练员${me.get_adult_sex_title()}，让训练开始吧！我已经准备好了哦！`,
+          `训练员${me.adult_sex_title}，让训练开始吧！我已经准备好了哦！`,
         ];
         break;
       case 1:
         talk_arr = [
           '即使是比平常还要厉害的训练，也不在话下',
-          `我可是韧性十足的哦，训练员${me.get_adult_sex_title()}，请把我努力训练成兵器一样的存在吧！`,
+          `我可是韧性十足的哦，训练员${me.adult_sex_title}，请把我努力训练成兵器一样的存在吧！`,
         ];
         break;
       case 2:
@@ -965,7 +961,7 @@ module.exports = class extends CustomizedDaily {
       } 的脚步声一如既往地准时在门外响起，伴随着一同响起的是${kita.uma_sex_title}欢快的歌声。`,
     );
     await kita.say_and_wait(
-      `训练员${me.get_adult_sex_title()}，中午好哦，有没有好好吃饭啊？`,
+      `训练员${me.adult_sex_title}，中午好哦，有没有好好吃饭啊？`,
     );
     await era.printAndWait(
       `向两侧拉开拉门，映入眼帘的是小北那有如阳光般温暖的表情。`,

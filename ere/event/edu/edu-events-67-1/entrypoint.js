@@ -346,7 +346,7 @@ module.exports = class extends Edu67UntilSchoolAtrium {
       await era.input();
       await daiya.say_and_wait('那就这么决定了！约好了喔！');
       await era.printAndWait(
-        `${me.get_couple_title()} 约好要在资深级这一年留下满意的成绩。完成之后再一起使用这张旅游券。`,
+        `你们约好要在资深级这一年留下满意的成绩。完成之后再一起使用这张旅游券。`,
       );
       era.println();
       wait_flag = sys_change_motivation(67, 2) || wait_flag;
@@ -831,9 +831,7 @@ module.exports = class extends Edu67UntilSchoolAtrium {
       await era.printAndWait([
         '于是，在 ',
         daiya.get_colored_name(),
-        ' 热情的解说下，',
-        me.get_couple_title(),
-        '一起看完了以 ',
+        ' 热情的解说下，你们一起看完了以 ',
         kita.get_colored_name(),
         ' 为重点的比赛影片。',
       ]);

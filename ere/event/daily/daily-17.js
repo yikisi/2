@@ -443,7 +443,7 @@ module.exports = class extends CustomizedDaily {
         `${CharaTalk.me.name} 的脸色稍微有点阴沉，${CharaTalk.me.name} 知道的。`,
       );
       await era.printAndWait(
-        `如果 ${CharaTalk.me.get_couple_title()} 看不见未来的曲折前路，还要平添神明的苛责……`,
+        '如果你们看不见未来的曲折前路，还要平添神明的苛责……',
       );
       await era.printAndWait('稍微，有点烦躁。');
     }

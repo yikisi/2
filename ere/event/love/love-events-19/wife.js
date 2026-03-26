@@ -301,19 +301,12 @@ module.exports = async (digital, me, callname) => {
       me.get_colored_name(),
       ' 还是特雷森的训练员，明明',
       child,
-      '随时都可以见到 ',
-      me.get_couple_title(),
-      '，但 ',
+      '随时都可以见到你们，但 ',
       me.get_colored_name(),
       ' 也在苦恼着是不是还缺必备物品。',
     ]);
     await era.printAndWait([m_call_d, ' 也笑了，说着这难道还是永别不成。']);
-    await era.printAndWait([
-      child,
-      '倒是哭得很大声，让 ',
-      me.get_couple_title(),
-      ' 安慰了很久。',
-    ]);
+    await era.printAndWait([child, '倒是哭得很大声，让你们安慰了很久。']);
     await era.printAndWait([
       '不过，明天终会成为今天，现在是',
       digital.sex,
@@ -339,13 +332,7 @@ module.exports = async (digital, me, callname) => {
       m_call_d,
       ' 却不肯松手。',
     ]);
-    await era.printAndWait([
-      '纠缠不过 ',
-      me.get_couple_title(),
-      '，',
-      child,
-      '也只能作罢。',
-    ]);
+    await era.printAndWait(['纠缠不过你们，', child, '也只能作罢。']);
     await era.printAndWait([
       '面前就是',
       digital.uma_sex_title,
@@ -579,15 +566,14 @@ module.exports = async (digital, me, callname) => {
       await era.printAndWait('……甜的。');
       await era.printAndWait('想必是……不再是泪水。');
       await era.printAndWait('舌头交融，身体相贴，双手交织。');
-      await era.printAndWait(['再也没人能分开 ', me.get_couple_title(), '。']);
+      await era.printAndWait(['再也没人能分开你们。']);
       await sys_love_uma_in_event(19);
     } else {
       await era.printAndWait(
         '一切的事情就像是一场噩梦，但事实上什么都没有发生。',
       );
       await era.printAndWait([
-        me.get_couple_title(),
-        ' 的',
+        '你们的',
         child,
         '一切正常地入学了特雷森，',
         me.get_colored_name(),

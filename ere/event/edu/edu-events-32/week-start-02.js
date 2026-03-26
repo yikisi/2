@@ -631,11 +631,7 @@ module.exports = (handlers) => {
           '的话语中得到了什么启发',
         ]);
         era.println();
-        await era.printAndWait([
-          '虽说 ',
-          me.get_couple_title(),
-          ' 认识的可能，大概，或许还没有那么久',
-        ]);
+        await era.printAndWait(['虽说你们认识的可能，大概，或许还没有那么久']);
         await era.printAndWait([
           '但根据 ',
           me.get_colored_name(),
@@ -819,9 +815,7 @@ module.exports = (handlers) => {
         me.get_colored_name(),
         ' 的神情，随后将目光停留在 ',
         me.get_colored_name(),
-        ' 的眼睛，就如 ',
-        me.get_couple_title(),
-        ' 初次见面那时一般，凝视着 ',
+        ' 的眼睛，就如你们初次见面那时一般，凝视着 ',
         me.get_colored_name(),
         ' 的眼眸深处',
       ]);

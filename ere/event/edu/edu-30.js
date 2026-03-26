@@ -466,9 +466,7 @@ module.exports = class extends CustomizedEdu {
             rice.sex,
             '步履蹒跚的身影，',
             me.get_colored_name(),
-            ' 深切认识到 ',
-            me.get_couple_title(),
-            ' 之间的关系产生了某种变化。',
+            ' 深切认识到你们之间的关系产生了某种变化。',
           ]);
           await era.printAndWait([
             '最近，',
@@ -598,11 +596,7 @@ module.exports = class extends CustomizedEdu {
             self_name,
             ' 要找到这次输掉的原因。然后，下一次想要赢！',
           ]);
-          await era.printAndWait([
-            '后来 ',
-            me.get_couple_title(),
-            ' 重新检讨这次比赛落败的因素。。',
-          ]);
+          await era.printAndWait(['后来你们重新检讨这次比赛落败的因素。。']);
           await era.printAndWait([
             rice.get_colored_name(),
             ' 不可思议地情绪高涨。',

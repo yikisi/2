@@ -90,10 +90,7 @@ module.exports = async function () {
     );
     era.println();
     await era.printAndWait('总而言之，大致上就是出于如此不敬的原因');
-    await era.printAndWait([
-      me.get_couple_title(),
-      ' 今日来到了偏远地方无人经过的神社',
-    ]);
+    await era.printAndWait(['你们今日来到了偏远地方无人经过的神社']);
     await me.say_and_wait(
       '南无三，还请三女神大人有大量，别计较这种小事情了，万分拜托，阿弥陀佛，阿门',
       true,
@@ -114,11 +111,7 @@ module.exports = async function () {
       '手上那莫名其妙的能量探测器之前先参拜一次表示敬意',
     ]);
     era.println();
-    await era.printAndWait([
-      '于是 ',
-      me.get_couple_title(),
-      ' 双手合十，朝着神社敬拜……',
-    ]);
+    await era.printAndWait(['于是你们双手合十，朝着神社敬拜……']);
     await tachyon.say_and_wait('好啦！那么废话不多说就让我们开始……');
     era.println();
     await era.printAndWait([
@@ -352,9 +345,7 @@ module.exports = async function () {
         '，露出苦笑',
       ]);
       await era.printAndWait([
-        '先前不知道发生了什么事，',
-        me.get_couple_title(),
-        ' 忽然就在神社里昏过去了，再次醒来时 ',
+        '先前不知道发生了什么事，你们忽然就在神社里昏过去了，再次醒来时 ',
         tachyon.get_colored_name(),
         ' 发现',
         tachyon.sex,
@@ -400,11 +391,7 @@ module.exports = async function () {
         tachyon.sex,
         '而言的好事吗？',
       ]);
-      await era.printAndWait([
-        '在不明所以中，',
-        me.get_couple_title(),
-        ' 就这么下了山回去了',
-      ]);
+      await era.printAndWait(['在不明所以中，你们就这么下了山回去了']);
     }
     return;
   } else if (edu_marks.plan_b) {

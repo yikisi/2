@@ -91,7 +91,7 @@ module.exports = async (maru, me, callname, hook, extra_flag) => {
     await me.say_and_wait(`果不其然被嘲笑了啊。`, true);
     await say_by_passer_by_and_wait(
       ` ${maru.uma_sex_title} `,
-      `这位训练员${me.get_adult_sex_title()}比想象中还有趣啊。`,
+      `这位训练员${me.adult_sex_title}比想象中还有趣啊。`,
     );
     await say_by_passer_by_and_wait(
       ` ${maru.uma_sex_title} `,
@@ -110,7 +110,7 @@ module.exports = async (maru, me, callname, hook, extra_flag) => {
     await era.printAndWait(`难怪一路上会有那么多好奇的视线。`);
     await say_by_passer_by_and_wait(
       ` ${maru.uma_sex_title} `,
-      `作为丸善前辈的训练员${maru.get_adult_sex_title()}，接下来的道路要加油哦！我也会一直支持你和丸善前辈的！`,
+      `作为丸善前辈的训练员${maru.adult_sex_title}，接下来的道路要加油哦！我也会一直支持你和丸善前辈的！`,
     );
     await era.printAndWait(`这位 ${maru.uma_sex_title} 看上去非常开心的样子。`);
     await era.printAndWait(

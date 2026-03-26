@@ -164,9 +164,7 @@ module.exports = class extends CustomizedEdu {
         ]);
         await maya.say_and_wait('然后等祈祷完，我们要继续去约会哦♪知道吗☆');
         await era.printAndWait([
-          '然后在新年参拜完的回程路上，',
-          me.get_couple_title(),
-          ' 进行了一场路边摊约会后就回去了。',
+          '然后在新年参拜完的回程路上，你们进行了一场路边摊约会后就回去了。',
         ]);
         wait_flag = get_attr_and_print_in_event(24, [], 0, [300]);
         break;

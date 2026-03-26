@@ -159,7 +159,7 @@ module.exports = {
     await era.printAndWait(
       `里见光钻又再次陷入沉思。为了不打扰${
         daiya.sex
-      }的思绪，${me.get_couple_title()} 就这样静静地走向车站。`,
+      }的思绪，你们就这样静静地走向车站。`,
     );
   },
   async japa_cup_common(daiya, me, kita, teio) {

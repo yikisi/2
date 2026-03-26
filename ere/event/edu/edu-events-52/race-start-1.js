@@ -670,7 +670,7 @@ module.exports = (handlers) => {
       } else {
         await in_urara.say_as_unknown_and_wait([
           '明明平时对乌拉拉也没有多关怀的样子？为什么这么紧张呢？训练员',
-          me.get_adult_sex_title(),
+          me.adult_sex_title,
           '（您）？',
         ]);
         await era.printAndWait([

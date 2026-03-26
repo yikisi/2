@@ -477,9 +477,7 @@ module.exports = (handlers) => {
     await era.printAndWait([
       '接着，这天在 ',
       maya.get_colored_name(),
-      ' 的希望下，',
-      me.get_couple_title(),
-      ' 出门去了巧克力专卖店。',
+      ' 的希望下，你们出门去了巧克力专卖店。',
     ]);
     await era.printAndWait('……看起来有种手工制朴素感的巧克力杯子蛋糕。');
     await era.printAndWait(

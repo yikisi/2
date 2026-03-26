@@ -852,7 +852,7 @@ module.exports = (handlers) => {
     await say_by_passer_by_and_wait('女主持人', [
       kitaru.get_colored_name(),
       ' ',
-      kitaru.get_adult_sex_title(),
+      kitaru.adult_sex_title,
       '，你愿意告诉我们你春季的目标吗？',
     ]);
     await kitaru.say_and_wait('咕啊！上来就问这种问题吗？');

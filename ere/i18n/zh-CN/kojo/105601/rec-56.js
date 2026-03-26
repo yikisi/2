@@ -152,7 +152,7 @@ module.exports = {
     ]);
     await kitaru.say_and_wait([
       '等待着自己命中注定的人的到来！也就说，是训练员',
-      you.get_adult_sex_title(),
+      you.adult_sex_title,
       '你了！',
     ]);
     await era.printAndWait([

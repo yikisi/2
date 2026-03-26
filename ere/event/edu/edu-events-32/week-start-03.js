@@ -781,7 +781,7 @@ module.exports = (handlers) => {
       '了哦，',
       tachyon.get_colored_name(),
       ' ',
-      tachyon.get_adult_sex_title(),
+      tachyon.adult_sex_title,
       '？',
     ]);
     await era.printAndWait([

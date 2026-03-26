@@ -300,11 +300,7 @@ module.exports = async (tachyon, me, callname, relation, love) => {
       era.println();
       await era.printAndWait('等一下等一下！最后那个明显做不到吧！');
       era.println();
-      await era.printAndWait([
-        '在嬉笑中，',
-        me.get_couple_title(),
-        ' 回到了特雷森学园',
-      ]);
+      await era.printAndWait(['在嬉笑中，你们回到了特雷森学园']);
       await era.printAndWait('明年四月啊……真令人期待');
     } else {
       await era.printAndWait([

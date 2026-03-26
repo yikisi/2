@@ -577,11 +577,7 @@ module.exports = class extends Edu85CrazyFanEnd {
       await me.say_and_wait('那么，这里是什么地方呢。');
       await ruby.say_and_wait('是的，是小宝宝本铺。');
       await era.printAndWait('周围有肚子略胀的女性，抱着小孩走路的夫妇等。');
-      await era.printAndWait([
-        '都是比 ',
-        me.get_couple_title(),
-        ' 更适合来这家店的客人。',
-      ]);
+      await era.printAndWait(['都是比你们更适合来这家店的客人。']);
       await era.printAndWait([
         '在这里，',
         me.get_colored_name(),

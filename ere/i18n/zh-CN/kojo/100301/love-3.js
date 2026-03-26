@@ -102,7 +102,7 @@ module.exports = {
       );
       era.println();
       await teio.say_and_wait(
-        `那么，训练员${me.get_adult_sex_title()}是怎么看我的呢？`,
+        `那么，训练员${me.adult_sex_title}是怎么看我的呢？`,
       );
       era.println();
       await era.printAndWait(
@@ -402,7 +402,7 @@ module.exports = {
       await era.printAndWait([
         teio.get_colored_name(),
         {
-          content: `「……训练员${me.get_adult_sex_title()}啊，不会是对自己负责的学生起反应的变态吧？」`,
+          content: `「……训练员${me.adult_sex_title}啊，不会是对自己负责的学生起反应的变态吧？」`,
           color: teio.color,
         },
         '（笑）',

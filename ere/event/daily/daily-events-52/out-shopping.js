@@ -660,9 +660,7 @@ handlers[1] = async (urara, me, in_urara, callname, edu_marks) => {
         ' 一起踏上了回去的路。',
       ]);
       await era.printAndWait([
-        '但在回去的路上，',
-        me.get_couple_title(),
-        ' 又受到了商店街的大叔和阿姨们热烈的祝福与关照。',
+        '但在回去的路上，你们又受到了商店街的大叔和阿姨们热烈的祝福与关照。',
       ]);
       await era.printAndWait([
         '不过现在这个分量，就算发也很难发完吧？',

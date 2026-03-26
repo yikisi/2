@@ -153,7 +153,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
       '呼、呼……',
       callname,
       '、',
-      me.get_adult_sex_title(),
+      me.adult_sex_title,
       '……咳咳、咳……',
     ]);
     era.printButton('「没事吧！？」', 1);
@@ -170,11 +170,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
       coffee.get_colored_name(),
       ' 最终冲线时才松了一口气。',
     ]);
-    await era.printAndWait([
-      '但……单纯的胜利并不是 ',
-      me.get_couple_title(),
-      ' 的目标。',
-    ]);
+    await era.printAndWait(['但……单纯的胜利并不是你们的目标。']);
     era.printButton('「朋友怎么样？」', 1);
     await era.input();
     await coffee.say_and_wait('还是没能追上……但是，距离缩短了……！');
@@ -210,9 +206,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
         coffee.get_colored_name(),
         ' 显得更加游刃有余，带着标志性的笑容，',
         coffee.sex,
-        '走向了 ',
-        me.get_couple_title(),
-        ' 两人。',
+        '走向了你们两人。',
       ]);
       await tachyon.say_and_wait([
         t_call_c,
@@ -357,7 +351,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
       me.get_colored_name(),
       '。',
     ]);
-    await coffee.say_and_wait(['训练员……', me.get_adult_sex_title(), '……']);
+    await coffee.say_and_wait(['训练员……', me.adult_sex_title, '……']);
     era.printButton('「你做得很好，茶座……」', 1);
     await era.input();
     await era.printAndWait([

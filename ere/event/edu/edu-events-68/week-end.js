@@ -67,7 +67,7 @@ module.exports = async (kita, me, hook, event_object) => {
       `现在的 ${me.name}，只需要现在跑道上看着 ${kita.name} 奔跑的样子，这就足够了！`,
     );
     await kita.say_and_wait(
-      `那么训练员${me.get_adult_sex_title()}，我开始跑了哦！请您认认真真的看好了！`,
+      `那么训练员${me.adult_sex_title}，我开始跑了哦！请您认认真真的看好了！`,
     );
     await era.printAndWait(
       `祭典般的赛${kita.uma_sex_title}站在跑道上向 ${
@@ -180,16 +180,14 @@ module.exports = async (kita, me, hook, event_object) => {
     await era.printAndWait(
       `在同 ${
         kita.name
-      } 共度了三年的时光后，${me.get_couple_title()} 终于迎来了终局，或许这个月就会是和${
+      } 共度了三年的时光后，你们终于迎来了终局，或许这个月就会是和${
         kita.sex
       }共度的时光了吧。`,
     );
     await era.printAndWait(
       `带着这样忧伤的想法，${me.name} 推开地下酒吧挂着黑猫门牌的门走入其中。`,
     );
-    await kita.say_and_wait(
-      `啊，训练员${me.get_adult_sex_title()}……欢……欢迎光临～`,
-    );
+    await kita.say_and_wait(`啊，训练员${me.adult_sex_title}……欢……欢迎光临～`);
     await era.printAndWait(
       `推开门，空无一人的酒吧里，只有穿着校服的${kita.name}单独坐在吧台前。`,
     );
@@ -200,7 +198,7 @@ module.exports = async (kita, me, hook, event_object) => {
       `那个……哈哈……这间酒吧是妈妈的熟人在圣诞节要回老家，正好想找个安静的地方就借来了。`,
     );
     await kita.say_and_wait(
-      `所以……酒水什么的是没有的哦，训练员${me.get_adult_sex_title()}～啊哈哈哈～`,
+      `所以……酒水什么的是没有的哦，训练员${me.adult_sex_title}～啊哈哈哈～`,
     );
     era.println();
     era.printButton(`「和小北在一起肯定不会喝酒啦……」`, 1);
@@ -213,7 +211,7 @@ module.exports = async (kita, me, hook, event_object) => {
       `那黑色的马耳贴在冰凉的玻璃上，一下一下地轻轻拍打着……`,
     );
     await kita.say_and_wait(
-      `训练员${me.get_adult_sex_title()}，喜欢这种安静的感觉么？`,
+      `训练员${me.adult_sex_title}，喜欢这种安静的感觉么？`,
     );
     era.println();
     era.printButton(`「安静？」`, 1);
@@ -243,7 +241,7 @@ module.exports = async (kita, me, hook, event_object) => {
         `还有几天就要和您分开了呢，感觉，心里有点落寞啊。`,
       );
       await kita.say_and_wait(
-        `毕竟训练员${me.get_adult_sex_title()}，过几个月就要迎来新的孩子，成为那孩子专属的训练员了吧。`,
+        `毕竟训练员${me.adult_sex_title}，过几个月就要迎来新的孩子，成为那孩子专属的训练员了吧。`,
       );
       await kita.say_and_wait(`嘿嘿，稍微有点讨厌啊……`);
       await era.printAndWait(
@@ -259,13 +257,13 @@ module.exports = async (kita, me, hook, event_object) => {
       await era.printAndWait(
         `虽然只是向年事已高的父亲报平安，并不是一定就不会回来，但是即使回到了特雷森，${kita.teen_sex_title}也不一定会继续和你共事了。`,
       );
-      await kita.say_and_wait(`我，喜欢训练员${me.get_adult_sex_title()}哦。`);
+      await kita.say_and_wait(`我，喜欢训练员${me.adult_sex_title}哦。`);
       await era.printAndWait(`转过拐角，${kita.teen_sex_title}轻描淡写的说。`);
       await era.printAndWait(
         `夕阳映照在小北孩子气的脸蛋上，将那温暖的笑容染上了和以往不同的颜色。`,
       );
       await kita.say_and_wait(
-        `不如说最喜欢训练员${me.get_adult_sex_title()}你了，想要成为训练员${me.get_adult_sex_title()}的伴侣一直在一起呢。`,
+        `不如说最喜欢训练员${me.adult_sex_title}你了，想要成为训练员${me.adult_sex_title}的伴侣一直在一起呢。`,
       );
       await era.printAndWait(
         `这时，${me.name} 注意到小北脸上的绯红从不是温暖夕阳的映照，${kita.sex}那仔细打理过的黑发柔滑地垂下，甚至能够闻到些许香水的味道。`,
@@ -275,9 +273,7 @@ module.exports = async (kita, me, hook, event_object) => {
           kita.name
         } 问 ${me.name} 道：`,
       );
-      await kita.say_and_wait(
-        `训练员${me.get_adult_sex_title()}，能一直喜欢我么？`,
-      );
+      await kita.say_and_wait(`训练员${me.adult_sex_title}，能一直喜欢我么？`);
       await era.printAndWait(`哒，哒，哒。`);
       await era.printAndWait(
         `寂静的走廊里只听得到两人的脚步声，看来那泛着红晕的夕阳还没有消退的样子。`,
@@ -324,7 +320,7 @@ module.exports = async (kita, me, hook, event_object) => {
         `小北是很厉害的${kita.uma_sex_title}，所以慢的孩子也会高兴，快的孩子也很高兴，老师们也能闲下来休息一下。`,
       );
       await kita.say_and_wait(
-        `呼哇哇！嘿嘿～真是一群可爱的孩子们呢，训练员${me.get_adult_sex_title()}。`,
+        `呼哇哇！嘿嘿～真是一群可爱的孩子们呢，训练员${me.adult_sex_title}。`,
       );
       await era.printAndWait(
         `用毛巾擦着额头上的汗水，${kita.name} 笑眯眯地带着孩子们凑了过来。`,
@@ -333,7 +329,7 @@ module.exports = async (kita, me, hook, event_object) => {
         `似乎是看到外人有些兴奋，孩子们七嘴八舌地说着各自的话。`,
       );
       await era.printAndWait(
-        `小马娘B「那个那个！训练员${me.get_adult_sex_title()}和小北${
+        `小马娘B「那个那个！训练员${me.adult_sex_title}和小北${
           kita.sex_code - 1 ? '姐姐' : '哥哥'
         }在交往么！」`,
       );
@@ -341,7 +337,7 @@ module.exports = async (kita, me, hook, event_object) => {
       await kita.say_and_wait(`诶！？那个，这个……诶，在交往么？。`);
       await kita.say_and_wait(`这个，啊哈哈……怎么说呢……不太想说出来呢……`);
       await kita.say_and_wait(
-        `但是，我和训练员${me.get_adult_sex_title()}每天都在一起，所以也算是交往？`,
+        `但是，我和训练员${me.adult_sex_title}每天都在一起，所以也算是交往？`,
       );
       await era.printAndWait(
         `轻轻抚摸着孩子们的脑袋，${kita.name} 露出了有些尴尬的微笑。`,

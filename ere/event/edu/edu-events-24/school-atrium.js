@@ -71,8 +71,7 @@ module.exports = (handlers) => {
     era.printButton('「在摩耶重炮等人的身后……」（根性+20）', 2);
     if ((await era.input()) === 1) {
       await era.printAndWait([
-        me.get_couple_title(),
-        ' 讲到那个幽灵一定很想穿上决胜服，在赛场上奔驰──',
+        '你们讲到那个幽灵一定很想穿上决胜服，在赛场上奔驰──',
       ]);
       await maya.say_and_wait(['对啊。', maya.sex, '一定很喜欢跑步吧……']);
       await maya.say_and_wait([
@@ -109,8 +108,7 @@ module.exports = (handlers) => {
       await era.input();
       await maya.say_and_wait('好、好的！');
       await era.printAndWait([
-        me.get_couple_title(),
-        ' 急忙追着 ',
+        '你们急忙追着 ',
         teio.get_colored_name(),
         '，不过却彻底跟丢了。',
       ]);
@@ -143,9 +141,7 @@ module.exports = (handlers) => {
       await era.printAndWait([
         '带着不知道为什么沉默的 ',
         teio.get_colored_name(),
-        '，',
-        me.get_couple_title(),
-        ' 三人一起回去了。',
+        '，你们三人一起回去了。',
       ]);
       era.drawLine();
       await maya.say_and_wait(['呼啊～', callname, '，早安～']);
@@ -177,9 +173,7 @@ module.exports = (handlers) => {
       me.get_colored_name(),
       ' 一起回去的路上，',
       maya.sex,
-      '说有想去的地方，所以 ',
-      me.get_couple_title(),
-      ' 就来到了这里……',
+      '说有想去的地方，所以你们就来到了这里……',
     ]);
     era.printButton('「你有东西忘在校舍吗？」', 1);
     await era.input();
@@ -289,9 +283,7 @@ module.exports = (handlers) => {
         me.get_colored_name(),
         ' 露出微笑看着害羞的 ',
         maya.get_colored_name(),
-        '……在满天星空照耀下，',
-        me.get_couple_title(),
-        ' 一起回去了。',
+        '……在满天星空照耀下，你们一起回去了。',
       ]);
       flags.wait_flag = get_attr_and_print_in_event(24, [20], 0);
     }

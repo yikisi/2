@@ -105,7 +105,7 @@ module.exports = (handlers) => {
       '干嘛干嘛？要玩翁仔标的话也算上我吧！我刚好正觉得无聊呢──！',
     );
     await era.printAndWait(
-      `向 ${me.get_couple_title()} 搭话的人是目白善信。生野狄杜斯和优秀素质也在一旁。`,
+      `向你们搭话的人是目白善信。生野狄杜斯和优秀素质也在一旁。`,
     );
     await daiya.say_and_wait(
       '你愿意一起玩的话，当然好呀！其实呢，我们现在正在做破除魔咒的训练喔。',
@@ -187,7 +187,7 @@ module.exports = (handlers) => {
       '「新年参拜，到时还请多多指教！」',
     ]);
     await era.printAndWait(
-      `这是来自于两人充满热情的，今年的第一个请求。为了许下新年愿望，${me.get_couple_title()} 三人一同前往神社。`,
+      `这是来自于两人充满热情的，今年的第一个请求。为了许下新年愿望，你们三人一同前往神社。`,
     );
     await daiya.say_and_wait('嗯～～我要许什么愿望好呢。');
     era.printButton('「难道不是在经典三冠获得胜利吗？」', 1);
@@ -355,7 +355,7 @@ module.exports = (handlers) => {
       );
       await daiya.say_and_wait('嗯！');
       await era.printAndWait(
-        `${me.get_couple_title()} 在回程的路上买了红豆，回到学园后，三个人一起享用了很多红豆汤。`,
+        `你们在回程的路上买了红豆，回到学园后，三个人一起享用了很多红豆汤。`,
       );
       era.println();
       flags.wait =
@@ -497,7 +497,7 @@ module.exports = (handlers) => {
     await era.printAndWait(
       `${
         daiya.sex
-      }的目光停留在离 ${me.get_couple_title()} 一段距离，流着满身大汗却仍旧一个接一个完成训练的北部玄驹身上。`,
+      }的目光停留在离你们一段距离，流着满身大汗却仍旧一个接一个完成训练的北部玄驹身上。`,
     );
     await era.printAndWait(
       `但 ${me.name} 还是认为北部玄驹那种凭着气势和意志力，以超越极限为目标的训练方式并不适合里见光钻。`,

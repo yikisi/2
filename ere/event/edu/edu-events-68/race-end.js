@@ -36,7 +36,7 @@ module.exports = async (kita, me, hook, extra_flag) => {
         `而现在，尘埃落定，${me.name} 看着跌跌撞撞向这边跑来的担当，拿着毛巾和矿泉水凑了上去。`,
       );
       await kita.say_and_wait(
-        `训练员${me.get_adult_sex_title()}！我…赢了哦！赢了对吧！是这样赢了的对吧！`,
+        `训练员${me.adult_sex_title}！我…赢了哦！赢了对吧！是这样赢了的对吧！`,
       );
       await era.printAndWait(
         `带着满身滚烫的热气猛地逼近，${kita.name} 带着急切的表情向 ${me.name} 询问道。`,
@@ -61,7 +61,7 @@ module.exports = async (kita, me, hook, extra_flag) => {
       await era.printAndWait(
         `毕竟是小北啊，${me.name} 如此感叹着将视线移开，而直到这时 ${me.name} 才注意到，小北的衣服已经被汗液彻底淋透了。`,
       );
-      await kita.say_and_wait(`呜哇啊～训练员${me.get_adult_sex_title()}！？`);
+      await kita.say_and_wait(`呜哇啊～训练员${me.adult_sex_title}！？`);
       await era.printAndWait(
         `不好……在不像样的想法从脑海中浮现时，${me.name} 迅速展开毛巾盖在小北身上，将${kita.sex}的身体仔仔细细的盖了起来。`,
       );
@@ -92,7 +92,7 @@ module.exports = async (kita, me, hook, extra_flag) => {
     }
   } else if (extra_flag.race === race_enum.sats_sho && extra_flag.rank === 1) {
     await print_event_name('胜利的大舞台', kita);
-    await kita.say_and_wait(`谢谢你，训练员${me.get_adult_sex_title()}。`);
+    await kita.say_and_wait(`谢谢你，训练员${me.adult_sex_title}。`);
     await era.printAndWait(
       `在皋月赏后的休息室中，${kita.name} 对 ${me.name} 深深地鞠了一躬。`,
     );
@@ -125,7 +125,7 @@ module.exports = async (kita, me, hook, extra_flag) => {
       `而直到回到休息室里过了好长时间，${kita.name} 才正常的开口说话。`,
     );
     await kita.say_and_wait(
-      `训练员${me.get_adult_sex_title()}，日本德比，真的是好厉害啊……`,
+      `训练员${me.adult_sex_title}，日本德比，真的是好厉害啊……`,
     );
     era.println();
     era.printButton('「缓过来了么，小北？」', 1);
@@ -135,7 +135,7 @@ module.exports = async (kita, me, hook, extra_flag) => {
       `是啊，勉勉强强的缓过来了，但是，还是没有胜利的实感。`,
     );
     await kita.say_and_wait(
-      `真奇怪啊，训练员${me.get_adult_sex_title()}，明明小北我对自己的韧性还是很有自信的，但是……`,
+      `真奇怪啊，训练员${me.adult_sex_title}，明明小北我对自己的韧性还是很有自信的，但是……`,
     );
     await kita.say_and_wait(
       `这份胜利后还是没法驱散的疲惫，是我从来没没有感觉到的，莫非我并不适合这么长的距离么？`,
@@ -201,7 +201,7 @@ module.exports = async (kita, me, hook, extra_flag) => {
     );
     if (era.get('cflag:67:招募状态') !== recruit_flags.yes) {
       await dia.say_and_wait(
-        `而且，可能也要谢谢你的那位训练员${me.get_adult_sex_title()}呢，是他对你的锻炼，让我燃起了兴趣啊。`,
+        `而且，可能也要谢谢你的那位训练员${me.adult_sex_title}呢，是他对你的锻炼，让我燃起了兴趣啊。`,
       );
       await era.printAndWait(`说着，里见光钻对 ${me.name} 微微点头以致意。`);
     }
@@ -282,7 +282,7 @@ module.exports = async (kita, me, hook, extra_flag) => {
       );
       era.println();
       await kita.say_and_wait(
-        `训练员${me.get_adult_sex_title()}，可以在这里稍微陪我坐一下么？`,
+        `训练员${me.adult_sex_title}，可以在这里稍微陪我坐一下么？`,
       );
       await era.printAndWait(
         `在走廊拐角的地方，黑色的赛${kita.uma_sex_title}摸索着在塑料椅子上坐下。`,
@@ -294,11 +294,9 @@ module.exports = async (kita, me, hook, extra_flag) => {
         `诶嘿嘿，总感觉还是没什么实感呢，虽然还是一如既往地以『祭典』风格奔跑的……`,
       );
       await kita.say_and_wait(
-        `但是，果然啊……没有训练员${me.get_adult_sex_title()}的帮助，尽凭我自己是达不到这个程度的吧。`,
+        `但是，果然啊……没有训练员${me.adult_sex_title}的帮助，尽凭我自己是达不到这个程度的吧。`,
       );
-      await kita.say_and_wait(
-        `所以，谢谢你哦！训练员${me.get_adult_sex_title()}！`,
-      );
+      await kita.say_and_wait(`所以，谢谢你哦！训练员${me.adult_sex_title}！`);
       await era.printAndWait(
         `一边说着，${kita.name} 冲 ${me.name} 深深地鞠了一躬，而${kita.sex}的表情也终于恢复到了平常的姿态。`,
       );
@@ -325,9 +323,7 @@ module.exports = async (kita, me, hook, extra_flag) => {
     );
     await era.printAndWait(`在竞马场中再一次传达给了注视着小北的大家。`);
     await era.printAndWait(`也有，${me.name}。`);
-    await dia.say_and_wait(
-      `真是漂亮的胜利啊，训练员${me.get_adult_sex_title()}。`,
-    );
+    await dia.say_and_wait(`真是漂亮的胜利啊，训练员${me.adult_sex_title}。`);
     await era.printAndWait(`在 ${me.name} 身旁，${dia.name} 轻声赞叹道。`);
     await dia.say_and_wait(
       `小北${kita.sex}，赢下了有马纪念呢，哼哼～简直就像是祭典一样。`,
@@ -360,7 +356,7 @@ module.exports = async (kita, me, hook, extra_flag) => {
       `但在惊讶之余，${kita.name} 脸上露出的则更多是喜悦和兴奋的表情。`,
     );
     await kita.say_and_wait(
-      `训练员${me.get_adult_sex_title()}，我，突破了今年的目标了哦。`,
+      `训练员${me.adult_sex_title}，我，突破了今年的目标了哦。`,
     );
     await era.printAndWait(`握住训练员的手，${kita.name} 兴奋地对你说。`);
     await era.printAndWait(
@@ -373,7 +369,7 @@ module.exports = async (kita, me, hook, extra_flag) => {
       `而如今，${kita.name} 想要将这份感情传达给自己的训练员。`,
     );
     await kita.say_and_wait(
-      `训练员${me.get_adult_sex_title()}！嗯！根本有没什么做不做得到的哦！也没有什么跑不完的比赛！`,
+      `训练员${me.adult_sex_title}！嗯！根本有没什么做不做得到的哦！也没有什么跑不完的比赛！`,
     );
     await kita.say_and_wait(
       '这次做到了，下一次我也一定能做到！所以，接下来的天皇赏（春）请你好好期待吧！',
@@ -406,7 +402,7 @@ module.exports = async (kita, me, hook, extra_flag) => {
     );
     await era.printAndWait(`但是——`);
     await pero.say_and_wait(
-      `${kita.name} 的训练员${me.get_adult_sex_title()}，可以稍微谈一谈么？`,
+      `${kita.name} 的训练员${me.adult_sex_title}，可以稍微谈一谈么？`,
     );
     await era.printAndWait(
       `在音乐奏响起的一刹那间，${me.name} 的耳边传来了女人的声音。`,
@@ -489,7 +485,7 @@ module.exports = async (kita, me, hook, extra_flag) => {
       `叹息着发出哀怨的声音，${kita.name} 用脚尖戳着一块翻起的泥土。`,
     );
     await kita.say_and_wait(
-      `不过，这就是属于我们的奔跑，胜者要带着败者的份，同训练员${me.get_adult_sex_title()}一起胜利下去，这是我和大鸣大放同学约好的。`,
+      `不过，这就是属于我们的奔跑，胜者要带着败者的份，同训练员${me.adult_sex_title}一起胜利下去，这是我和大鸣大放同学约好的。`,
     );
     await era.printAndWait(
       `${kita.name} 张开双臂，背对着竞马场露出了坚毅无比的表情。`,
@@ -501,9 +497,7 @@ module.exports = async (kita, me, hook, extra_flag) => {
       `保守考验的老将和崭露头角的新人，更不要说近乎连轴转的比赛本就是对体力的消耗。`,
     );
     await era.printAndWait(`但是。若是 ${kita.name} 的话，一定……`);
-    await kita.say_and_wait(
-      `训练员${me.get_adult_sex_title()}，让我们胜利下去吧！`,
-    );
+    await kita.say_and_wait(`训练员${me.adult_sex_title}，让我们胜利下去吧！`);
     await era.printAndWait(`没错，${kita.sex}会这么说着然后露出温暖的微笑。`);
     await era.printAndWait(`这就是 ${kita.name}，黑色的祭典。`);
     extra_flag.attr_change.fill(3);
@@ -553,11 +547,11 @@ module.exports = async (kita, me, hook, extra_flag) => {
       }一点的，这下丢大人了……`,
     );
     await kita.say_and_wait(
-      `天皇赏秋的赛${kita.uma_sex_title}是个跑的脸红脖子粗的孩子不要啊……呜诶～训练员${me.get_adult_sex_title()}在哪啊。`,
+      `天皇赏秋的赛${kita.uma_sex_title}是个跑的脸红脖子粗的孩子不要啊……呜诶～训练员${me.adult_sex_title}在哪啊。`,
       true,
     );
     await kita.print_and_wait(
-      `四下摇晃着脑袋寻找着训练员${me.get_adult_sex_title()}的踪迹，${
+      `四下摇晃着脑袋寻找着训练员${me.adult_sex_title}的踪迹，${
         kita.name
       } 注意到不远处，${me.name} 正跨越栏杆向这边飞奔而来。`,
     );
@@ -565,7 +559,7 @@ module.exports = async (kita, me, hook, extra_flag) => {
     era.printButton('「小北！脸！鼻子！怎么样！」', 1);
     await era.input();
     await kita.print_and_wait(
-      `？怎么训练员${me.get_adult_sex_title()}也在说听不懂的话啊…？啊，是在说比赛的感想么？`,
+      `？怎么训练员${me.adult_sex_title}也在说听不懂的话啊…？啊，是在说比赛的感想么？`,
     );
     await kita.print_and_wait(
       `${kita.name} 猛的吸了吸鼻子，一股铁锈般美味的泥土味涌入喉咙当中。`,
@@ -633,9 +627,7 @@ module.exports = async (kita, me, hook, extra_flag) => {
     await era.printAndWait(
       `带着足以灼烧他人的温度的美丽瞳孔，带着笑意就这么同 ${me.name} 对视起来。`,
     );
-    await kita.say_and_wait(
-      `而且我也没有辜负训练员${me.get_adult_sex_title()}你。`,
-    );
+    await kita.say_and_wait(`而且我也没有辜负训练员${me.adult_sex_title}你。`);
     await kita.say_and_wait(`嘿嘿嘿～这就是我人生中最后的比赛，太好了……`);
     await era.printAndWait(
       `${kita.teen_sex_title}的脸蛋因为羞涩和奔跑涨得通红，似乎就连说出这番言论的${
@@ -649,7 +641,7 @@ module.exports = async (kita, me, hook, extra_flag) => {
     extra_flag.pt_change = 15;
   } else if (extra_flag.rank === 1) {
     await print_event_name('竞赛获胜！', kita);
-    await kita.say_and_wait(`训练员${me.get_adult_sex_title()}！我，赢了哦！`);
+    await kita.say_and_wait(`训练员${me.adult_sex_title}！我，赢了哦！`);
     await kita.say_and_wait(`来看望比赛的大家也很开心的样子，真是太好了！`);
     await era.printAndWait(`高兴地摇晃起尾巴，${kita.name} 露出了愉快的表情。`);
     await era.printAndWait(
@@ -658,7 +650,7 @@ module.exports = async (kita, me, hook, extra_flag) => {
     await era.printAndWait(
       `那么今天也用果汁庆祝一下吧，这么说着，${me.name} 拿出饮料倒了两杯果汁。`,
     );
-    await kita.say_and_wait(`好耶，训练员${me.get_adult_sex_title()}，干杯！`);
+    await kita.say_and_wait(`好耶，训练员${me.adult_sex_title}，干杯！`);
     await era.printAndWait(
       `在纸杯的碰撞中，${kita.name} 毫不在乎撒在手腕上的果汁，开心地庆祝起了胜利。`,
     );
@@ -669,13 +661,13 @@ module.exports = async (kita, me, hook, extra_flag) => {
       `在休息室里，${kita.name} 咕咚咕咚的大口喝着水，而后长长的舒了一口气。`,
     );
     await kita.say_and_wait(
-      `噗哇～感觉好多了！谢谢你训练员${me.get_adult_sex_title()}……诶？为什么要露出这样的表情？`,
+      `噗哇～感觉好多了！谢谢你训练员${me.adult_sex_title}……诶？为什么要露出这样的表情？`,
     );
     await era.printAndWait(
       `看着露出担忧表情的 ${me.name}，${kita.name} 嘿嘿笑着将瓶盖拧上。`,
     );
     await kita.say_and_wait(
-      `只不过是没有赢下比赛而已啦，训练员${me.get_adult_sex_title()}请不要太担心哦。`,
+      `只不过是没有赢下比赛而已啦，训练员${me.adult_sex_title}请不要太担心哦。`,
     );
     await kita.say_and_wait(
       `虽然小北我觉得很不甘心，但是下一次一定会加倍努力，赢得比赛的！`,
@@ -707,7 +699,7 @@ module.exports = async (kita, me, hook, extra_flag) => {
       `这么多的人都在为我应援，鼓励我呢，既然如此，我又有什么资格沮丧呢！`,
     );
     await kita.say_and_wait(
-      `训练员${me.get_adult_sex_title()}，等我们回去了就去加倍锻炼吧！`,
+      `训练员${me.adult_sex_title}，等我们回去了就去加倍锻炼吧！`,
     );
     await era.printAndWait(`这么说着，小北站起身，仿佛比之前更有精神了。`);
   } else {

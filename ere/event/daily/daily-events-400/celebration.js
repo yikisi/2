@@ -35,8 +35,7 @@ module.exports = async () => {
     '在夏日祭典举办的场所之中随处走动。',
   ]);
   await era.printAndWait([
-    me.get_couple_title(),
-    ' 体验了几乎所有的小商家，从吃的到玩的一个都没有放过，',
+    '你们体验了几乎所有的小商家，从吃的到玩的一个都没有放过，',
   ]);
   await era.printAndWait([
     ss.get_colored_name(),
@@ -50,9 +49,7 @@ module.exports = async () => {
     '今天我玩的很愉快哦……说实话如果没有遇到你的话，说不定我连烟花都不会想来看呢。',
   );
   await era.printAndWait([
-    '在盛大的烟火表演之下，',
-    me.get_couple_title(),
-    ' 坐在某个不容易被发现的角落之中，看起来就好像是一对甜蜜的小情侣一般。',
+    '在盛大的烟火表演之下，你们坐在某个不容易被发现的角落之中，看起来就好像是一对甜蜜的小情侣一般。',
   ]);
   era.printButton('「是吗？我有礼物要送给你，和我来吧。」', 1);
   await era.input();
@@ -123,8 +120,6 @@ module.exports = async () => {
     ' 的礼物实在是太贵重了……还请允许用身体来偿还这份贵重的礼物吧。',
   ]);
   await era.printAndWait([
-    '最后 ',
-    me.get_couple_title(),
-    ' 还是因为在夜晚的沙滩上疯玩了大半个晚上，最后精疲力尽回到房间一碰床就睡着了为结束。',
+    '最后你们还是因为在夜晚的沙滩上疯玩了大半个晚上，最后精疲力尽回到房间一碰床就睡着了为结束。',
   ]);
 };

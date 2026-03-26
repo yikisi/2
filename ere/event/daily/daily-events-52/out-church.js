@@ -193,7 +193,7 @@ module.exports = async (hook) => {
 
     await in_urara.say_as_unknown([
       '这时，训练员',
-      me.get_adult_sex_title(),
+      me.adult_sex_title,
       '（您）的选择是……',
     ]);
     era.printButton('「是、是大凶哦……」（耐力+10）', 1);

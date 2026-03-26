@@ -536,7 +536,7 @@ module.exports = (handlers) => {
       await say_by_passer_by_and_wait('记者A', [
         tachyon.get_colored_name(),
         ' ',
-        tachyon.get_adult_sex_title(),
+        tachyon.adult_sex_title,
         '，请问对今年底的有马纪念自己是第一人气有什么感想吗？',
       ]);
       await tachyon.say_and_wait([
@@ -546,7 +546,7 @@ module.exports = (handlers) => {
       await say_by_passer_by_and_wait('记者B', [
         tachyon.get_colored_name(),
         ' ',
-        tachyon.get_adult_sex_title(),
+        tachyon.adult_sex_title,
         '的目标是超越',
         tachyon.uma_sex_title,
         '的极限，请问这是什么意思呢？',
@@ -558,7 +558,7 @@ module.exports = (handlers) => {
         '请问目前对于有马纪念，',
         tachyon.get_colored_name(),
         ' ',
-        tachyon.get_adult_sex_title(),
+        tachyon.adult_sex_title,
         '有进行过哪些准备呢？',
       ]);
       await tachyon.say_and_wait(

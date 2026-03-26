@@ -479,9 +479,7 @@ module.exports = async (hook) => {
         await era.printAndWait([
           '而在与',
           urara.uma_sex_title,
-          '店员的一番短暂交流后，',
-          me.get_couple_title(),
-          ' 了解到了事情的原委：',
+          '店员的一番短暂交流后，你们了解到了事情的原委：',
         ]);
         await era.printAndWait(
           '最近他们是收到了来自其他特雷森的委托，需要定制一套新款舞台装。',
@@ -858,7 +856,7 @@ module.exports = async (hook) => {
           '面对 ',
           urara.get_colored_name(),
           ' 的问题，训练员',
-          me.get_adult_sex_title(),
+          me.adult_sex_title,
           '（您）回答道。',
         ]);
         era.printButton('「说什么呢，那样也太过激了……」（好感+10）', 1);

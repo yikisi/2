@@ -258,7 +258,7 @@ module.exports = async (tachyon, me, callname, hook, stamina_ratio) => {
       if ((await era.input()) === 1) {
         await say_by_passer_by_and_wait(`${tachyon.uma_sex_title}A`, [
           '训练员',
-          me.get_adult_sex_title(),
+          me.adult_sex_title,
           '，为什么只是看着！？',
         ]);
         await tachyon.say_and_wait([
@@ -318,7 +318,7 @@ module.exports = async (tachyon, me, callname, hook, stamina_ratio) => {
         era.println();
         await say_by_passer_by_and_wait(`${tachyon.uma_sex_title}A`, [
           '训练员',
-          me.get_adult_sex_title(),
+          me.adult_sex_title,
           '！谢谢您！',
         ]);
         era.println();

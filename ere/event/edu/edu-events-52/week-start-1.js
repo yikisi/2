@@ -15,7 +15,7 @@ module.exports = (handlers) => {
     await print_event_name('乌拉拉式训练', urara);
     await in_urara.say_as_unknown_and_wait([
       '旁观着乌拉拉的奔跑，训练员',
-      me.get_adult_sex_title(),
+      me.adult_sex_title,
       '（您）还在思考着',
       urara.sex,
       '专属的训练计划。',
@@ -242,7 +242,7 @@ module.exports = (handlers) => {
     );
     await CharaTalk.say_by_passer_by_and_wait('商店街的人', [
       '训练员',
-      me.get_adult_sex_title(),
+      me.adult_sex_title,
       '！这孩子虽然有点冒失，但',
       urara.sex,
       '很努力哦！',

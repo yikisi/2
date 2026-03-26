@@ -540,9 +540,7 @@ module.exports = (handlers) => {
       me.get_colored_name(),
     ]);
     await era.printAndWait([
-      '一股热流，在 ',
-      me.get_couple_title(),
-      ' 的口间传递，被两人饮下热流顺着 ',
+      '一股热流，在你们的口间传递，被两人饮下热流顺着 ',
       me.get_colored_name(),
       ' 的喉咙向下',
     ]);

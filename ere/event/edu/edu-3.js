@@ -41,9 +41,9 @@ module.exports = class extends Edu3UntilWeekStart {
     );
     era.println();
     await era.printAndWait(
-      `主治医「${teio.name}${teio.get_adult_sex_title()}，以及 ${
+      `主治医「${teio.name}${teio.adult_sex_title}，以及 ${
         me.actual_name
-      }${me.get_adult_sex_title()}，${
+      }${me.adult_sex_title}，${
         teio.sex
       }的训练员，我必须再次强调一遍，要做好此生放弃赛跑的准备。」`,
     );
@@ -501,11 +501,9 @@ module.exports = class extends Edu3UntilWeekStart {
             `踏地的足音回荡在小房间里，${teio.teen_sex_title}潇洒地一转身，挥了挥手，坚定地迈步向前。`,
           );
         } else {
+          await era.printAndWait(`你们二人默契地伸出惯用手，松握成拳，相碰。`);
           await era.printAndWait(
-            `${me.get_couple_title()} 二人默契地伸出惯用手，松握成拳，相碰。`,
-          );
-          await era.printAndWait(
-            `小小躯体中蕴藏的力量，以及如太阳般的温暖从触碰的表面传来。${me.get_couple_title()} 看着对方，不禁都笑出了声。`,
+            `小小躯体中蕴藏的力量，以及如太阳般的温暖从触碰的表面传来。你们看着对方，不禁都笑出了声。`,
           );
           era.println();
 

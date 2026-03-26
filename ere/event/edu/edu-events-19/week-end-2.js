@@ -247,9 +247,7 @@ module.exports = (handlers) => {
     await era.printAndWait('即使作为摊主，能够提前进场布置，但……');
     await era.printAndWait('还是不禁感叹，就算只有摊主，都还是很多人啊。');
     await era.printAndWait([
-      '看着一条狞狰的长蛇不断向展览中心扭去，不知还得多久轮到 ',
-      me.get_couple_title(),
-      '。',
+      '看着一条狞狰的长蛇不断向展览中心扭去，不知还得多久轮到你们。',
     ]);
     await digital.say_and_wait([
       '哼哼哼，',

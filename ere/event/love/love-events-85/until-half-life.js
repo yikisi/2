@@ -106,9 +106,7 @@ module.exports = class extends Love85UntilWife {
         me.get_colored_name(),
         '，选 ',
         me.get_colored_name(),
-        ' 的是她，这就是 ',
-        me.get_couple_title(),
-        ' 最幸福的形式吧。',
+        ' 的是她，这就是你们最幸福的形式吧。',
       ]);
       await quick_into_sex(85, 85, true);
     } else {
@@ -312,11 +310,7 @@ module.exports = class extends Love85UntilWife {
         me.get_colored_name(),
         ' 的全身。',
       ]);
-      await era.printAndWait([
-        '深夜，',
-        me.get_couple_title(),
-        ' 结束了亲昵，却没有去洗浴。',
-      ]);
+      await era.printAndWait(['深夜，你们结束了亲昵，却没有去洗浴。']);
       await era.printAndWait([
         '不在乎满床的湿腻淫水，',
         me.get_colored_name(),

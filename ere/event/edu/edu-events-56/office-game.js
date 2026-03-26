@@ -67,8 +67,7 @@ module.exports = async (kitaru, me, callname, hook, event_object) => {
     } else {
       await era.printAndWait('险而又险。');
       await era.printAndWait([
-        me.get_couple_title(),
-        ' 玩的是竞速赛车游戏，幸好在最后一圈的时候趁着 ',
+        '你们玩的是竞速赛车游戏，幸好在最后一圈的时候趁着 ',
         kitaru.get_colored_name(),
         ' 没反应过来超过了',
         kitaru.sex,

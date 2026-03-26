@@ -171,7 +171,7 @@ module.exports = async (tachyon, me, callname, hook, event_object) => {
         await tachyon.say_and_wait('走吧，该回去继续实验了');
         era.println();
         await era.printAndWait([tachyon.get_colored_name(), ' 的心情变差了']);
-        await era.printAndWait([me.get_couple_title(), ' 默默的回到了学园']);
+        await era.printAndWait(['你们默默的回到了学园']);
       } else {
         await tachyon.say_and_wait('安慰奖啊……算了，其实也没什么关系');
         era.println();
@@ -315,9 +315,7 @@ module.exports = async (tachyon, me, callname, hook, event_object) => {
         era.printButton('「得再多买一些了」', 2);
         await era.input();
         await era.printAndWait([
-          '于是，',
-          me.get_couple_title(),
-          ' 又回到商店街，买了足够做晚饭的量的胡萝卜',
+          '于是，你们又回到商店街，买了足够做晚饭的量的胡萝卜',
         ]);
         await era.printAndWait('……这不是上了商店街推销的当了吗？');
         await era.printAndWait([
@@ -561,7 +559,7 @@ module.exports = async (tachyon, me, callname, hook, event_object) => {
           me.get_colored_name(),
           ' 的喂食',
         ]);
-        await era.printAndWait([me.get_couple_title(), ' 分享完了这个汉堡排']);
+        await era.printAndWait(['你们分享完了这个汉堡排']);
       } else if (love >= 50) {
         await tachyon.say_and_wait('……再说，做的也不如你');
         era.println();

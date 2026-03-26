@@ -296,9 +296,7 @@ module.exports = class extends Edu7UntilRaceEnd {
       );
 
       await era.printAndWait('年复年始，资深级的比赛已经开始了。');
-      await era.printAndWait(
-        `很快，天皇赏与宝塚记念等重大赛事也会迫近 ${me.get_couple_title()}。`,
-      );
+      await era.printAndWait(`很快，天皇赏与宝塚记念等重大赛事也会迫近你们。`);
       era.println();
 
       await era.printAndWait('然而，黄金船还没有来到训练员室。');
@@ -487,15 +485,11 @@ module.exports = class extends Edu7UntilRaceEnd {
       era.printButton('「哼，不用你操心！我们走！」', 1);
       await era.input();
 
-      await era.printAndWait(
-        `幽暗，这是 ${me.get_couple_title()} 对这个地方的第一印象。`,
-      );
-      await era.printAndWait(
-        `寒冷，则是这个地方对 ${me.get_couple_title()} 发起的第一波攻击。`,
-      );
+      await era.printAndWait(`幽暗，这是你们对这个地方的第一印象。`);
+      await era.printAndWait(`寒冷，则是这个地方对你们发起的第一波攻击。`);
       era.println();
       await era.printAndWait(
-        `在几乎伸手不见五指的洞窟中，唯有一点光线似在引导着 ${me.get_couple_title()} 不断前进。`,
+        `在几乎伸手不见五指的洞窟中，唯有一点光线似在引导着你们不断前进。`,
       );
       era.println();
       await era.printAndWait(
@@ -570,7 +564,7 @@ module.exports = class extends Edu7UntilRaceEnd {
       await era.input();
 
       await era.printAndWait(
-        `就这样，${me.get_couple_title()} 的三年旅途在欢笑嬉闹与莫名其妙中告一段落了。`,
+        `就这样，你们的三年旅途在欢笑嬉闹与莫名其妙中告一段落了。`,
       );
 
       era.drawLine();

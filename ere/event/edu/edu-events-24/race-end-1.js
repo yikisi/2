@@ -116,7 +116,7 @@ module.exports = (handlers) => {
     ]);
     await maya.say_and_wait([
       '嗯，没错！记者',
-      reporter.get_adult_sex_title(),
+      reporter.adult_sex_title,
       '，我问你哦！我的表现有比 ',
       sys_get_colored_callname(24, 16),
       ' 更令人兴奋吗？有吗？',

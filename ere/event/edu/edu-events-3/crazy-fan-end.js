@@ -264,17 +264,11 @@ module.exports = async () => {
     });
 
     await era.printAndWait([
-      '距离 ',
-      me.get_couple_title(),
-      ' 相知相识，相伴，再到如今，过去多久了呢？或许已经有了三五年吧，不过 ',
-      me.get_couple_title(),
-      ' 两个似乎也没谁关心这些事情。',
+      '距离你们相知相识，相伴，再到如今，过去多久了呢？或许已经有了三五年吧，不过你们两个似乎也没谁关心这些事情。',
     ]);
     era.println();
     await era.printAndWait([
-      '毕竟，对于 ',
-      me.get_couple_title(),
-      ' 而言，有关特雷森，有关比赛，过去所有一切都已经结束了。',
+      '毕竟，对于你们而言，有关特雷森，有关比赛，过去所有一切都已经结束了。',
     ]);
     era.println();
     await era.printAndWait([
@@ -295,9 +289,7 @@ module.exports = async () => {
     era.println();
     await era.printAndWait([
       teio.sex,
-      '腿伤之后，',
-      me.get_couple_title(),
-      ' 尽管做出了一些努力，但仍然未能挽救回',
+      '腿伤之后，你们尽管做出了一些努力，但仍然未能挽救回',
       teio.sex,
       '的',
       teio.uma_sex_title,
@@ -338,9 +330,7 @@ module.exports = async () => {
     await teio.say_and_wait('唔——');
     era.println();
     await era.printAndWait([
-      '突然间，一阵声响从屋里其他房间传来。',
-      me.get_couple_title(),
-      ' 对视一眼，然后',
+      '突然间，一阵声响从屋里其他房间传来。你们对视一眼，然后',
       teio.sex,
       '便消失于门外。不到一分钟的时间，又重新回到 ',
       me.get_colored_name(),

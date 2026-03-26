@@ -21,7 +21,7 @@ module.exports = (handlers) => {
       '您又是怎么想的？不过带领',
       urara.uma_sex_title,
       '们超越命运，也是作为训练员',
-      me.get_adult_sex_title(),
+      me.adult_sex_title,
       '（您）的使命吧。',
     ]);
     await in_urara.say_as_unknown_and_wait([
@@ -276,7 +276,7 @@ module.exports = (handlers) => {
       '后悔的样子，',
       urara.sex,
       '的训练员',
-      me.get_adult_sex_title(),
+      me.adult_sex_title,
       '自然也答不上这些嘛，也难怪会生气呢。',
     ]);
     await in_urara.say_as_unknown_and_wait(

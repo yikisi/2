@@ -48,10 +48,7 @@ module.exports = async (tachyon, me, callname, hook, event_object) => {
   ]);
   era.println();
   await era.printAndWait('在偶然整理实验室时');
-  await era.printAndWait([
-    me.get_couple_title(),
-    ' 发现了被藏在某个角落的信封袋',
-  ]);
+  await era.printAndWait(['你们发现了被藏在某个角落的信封袋']);
   if (love >= 75) {
     await era.printAndWait('嗯……？');
     await era.printAndWait('不知道为什么，总觉得违和感十分重');
@@ -102,7 +99,7 @@ module.exports = async (tachyon, me, callname, hook, event_object) => {
     await tachyon.say_and_wait('我说……我们真的没走错吧');
     era.printButton('「……地图写的确实是这里没错」', 1);
     await era.input();
-    await era.printAndWait(['也不免 ', me.get_couple_title(), ' 会有些迟疑']);
+    await era.printAndWait(['也不免你们会有些迟疑']);
     await era.printAndWait(
       '此处两人所在的地方，是称之为原始森林也不为过的深山',
     );
@@ -512,8 +509,7 @@ module.exports = async (tachyon, me, callname, hook, event_object) => {
     ]);
   } else {
     await era.printAndWait([
-      me.get_couple_title(),
-      ' 来到的温泉旅店，就商店街的活动标准来看，算是相当豪华的场所',
+      '你们来到的温泉旅店，就商店街的活动标准来看，算是相当豪华的场所',
     ]);
     await era.printAndWait('独间的温泉池，日式的标准客房，甚至还有怀石料理');
     await era.printAndWait(
@@ -617,9 +613,7 @@ module.exports = async (tachyon, me, callname, hook, event_object) => {
     ]);
     era.println();
     await era.printAndWait([
-      '接下来的时间，',
-      me.get_couple_title(),
-      ' 二人谁也没说话，只是互相依偎着',
+      '接下来的时间，你们二人谁也没说话，只是互相依偎着',
     ]);
     await era.printAndWait([
       '此时的 ',

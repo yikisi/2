@@ -225,9 +225,7 @@ module.exports = async (tachyon, me, callname, relation, love) => {
   }
   era.drawLine();
   await era.printAndWait([
-    '虽然过年的神社十分热闹，',
-    me.get_couple_title(),
-    ' 还是很快就结束了参拜的过程',
+    '虽然过年的神社十分热闹，你们还是很快就结束了参拜的过程',
   ]);
   await era.printAndWait([
     '结束参拜后，',
@@ -299,16 +297,11 @@ module.exports = async (tachyon, me, callname, relation, love) => {
   switch (ret) {
     case 1:
       await era.printAndWait([
-        me.get_couple_title(),
-        ' 回到了 ',
+        '你们回到了 ',
         tachyon.get_colored_name(),
         ' 的实验室',
       ]);
-      await era.printAndWait([
-        '而后，',
-        me.get_couple_title(),
-        ' 做的第一件事……',
-      ]);
+      await era.printAndWait(['而后，你们做的第一件事……']);
       era.println();
       await tachyon.say_and_wait(
         '……虽然由我来这么说有点不对吧，但我们……明明才刚说了那样的话，现在却在干嘛啊',
@@ -448,8 +441,7 @@ module.exports = async (tachyon, me, callname, relation, love) => {
       ]);
       era.println();
       await era.printAndWait([
-        me.get_couple_title(),
-        ' 参拜完后便回到了 ',
+        '你们参拜完后便回到了 ',
         tachyon.get_colored_name(),
         ' 的实验室，今天的 ',
         tachyon.get_colored_name(),

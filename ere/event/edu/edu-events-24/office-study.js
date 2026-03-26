@@ -32,11 +32,7 @@ module.exports = (handlers) => {
       ' 果然好漂亮哦～♪穿裸露度高的衣服也很好看！',
     ]);
     await maya.say_and_wait('……对了！人家想到了一个好主意～！');
-    await era.printAndWait([
-      '整理完文件后，',
-      me.get_couple_title(),
-      ' 在外面走着──',
-    ]);
+    await era.printAndWait(['整理完文件后，你们在外面走着──']);
     await city.say_and_wait([
       '哦，是 ',
       sys_get_colored_callname(40, 24),

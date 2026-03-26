@@ -252,7 +252,7 @@ module.exports = (handlers) => {
     await kitaru.say_as_unknown_and_wait('喂！');
     await kitaru.say_as_unknown_and_wait([
       me.get_colored_actual_name(),
-      me.get_adult_sex_title(),
+      me.adult_sex_title,
       '！',
     ]);
     await kitaru.say_as_unknown_and_wait('在这里！');
@@ -312,7 +312,7 @@ module.exports = (handlers) => {
       await kitaru.say_and_wait([
         '那么，',
         me.get_colored_actual_name(),
-        me.get_adult_sex_title(),
+        me.adult_sex_title,
         '，有什么想要我占卜的吗？',
       ]);
       era.printButton('「该回去了吧？」', 1);
@@ -453,7 +453,7 @@ module.exports = (handlers) => {
       ]);
       await kami.say_and_wait([
         me.get_colored_actual_name(),
-        me.get_adult_sex_title(),
+        me.adult_sex_title,
       ]);
       era.printButton('「在？」', 1);
       era.printButton('「什么事？」', 2);

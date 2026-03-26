@@ -80,8 +80,7 @@ module.exports = (handlers) => {
       ' 身后',
     ]);
     await era.printAndWait([
-      me.get_couple_title(),
-      ' 两人的脚步声在空荡的地下道内回荡着，气氛一时竟有些尴尬',
+      '你们两人的脚步声在空荡的地下道内回荡着，气氛一时竟有些尴尬',
     ]);
 
     era.printButton('「……没想到，你这么善于与人交流啊」', 1);
@@ -699,12 +698,8 @@ module.exports = (handlers) => {
       );
       await era.printAndWait([me.get_colored_name(), ' 在心里忍不住吐槽道']);
       era.println();
-      await era.printAndWait([
-        '就在 ',
-        me.get_couple_title(),
-        ' 毫无压力的谈天时，比赛时间也快到了',
-      ]);
-      await era.printAndWait([me.get_couple_title(), ' 漫步走向赛场']);
+      await era.printAndWait(['就在你们毫无压力的谈天时，比赛时间也快到了']);
+      await era.printAndWait(['你们漫步走向赛场']);
       era.printButton('「今天的比赛，能赢吧？」', 1);
       await era.input();
       await tachyon.say_and_wait('这个吗……究竟能不能呢～～');

@@ -15,7 +15,7 @@ module.exports = (handlers) => {
     await print_event_name('后援会•暴走！', urara);
     await in_urara.say_as_unknown_and_wait([
       '您说过，您一定会保护乌拉拉的对吧？不用担心，我不是在怀疑训练员',
-      me.get_adult_sex_title(),
+      me.adult_sex_title,
       '（您）',
     ]);
     await in_urara.say_as_unknown_and_wait([

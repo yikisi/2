@@ -103,9 +103,7 @@ module.exports = async (handlers) => {
         me.get_colored_name(),
         ' 夸奖之后的',
         kitaru.teen_sex_title,
-        '，连着转了好几个圈，惹得不少人向 ',
-        me.get_couple_title(),
-        ' 投来目光。',
+        '，连着转了好几个圈，惹得不少人向你们投来目光。',
       ]);
       await era.printAndWait([
         '就算穿着如此精致典雅的衣服，',

@@ -256,7 +256,7 @@ module.exports = class extends Love52AfterWife {
     ]);
 
     in_urara.say_as_unknown(
-      `此时此刻，钥匙就在训练员${me.get_adult_sex_title()}自己手中——`,
+      `此时此刻，钥匙就在训练员${me.adult_sex_title}自己手中——`,
     );
     era.printButton(
       `「对不起忘记了重要的事，让${sys_get_callname(0, 52)}久等了……」（好感+10）`,

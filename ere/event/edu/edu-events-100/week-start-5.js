@@ -236,9 +236,7 @@ module.exports = (handlers) => {
           ' 步入殿堂后的第三天。',
         ]);
         await era.printAndWait([
-          '在理事长的慷慨解囊下，',
-          me.get_couple_title(),
-          ' 来到了北海道的一家民俗旅店度假。',
+          '在理事长的慷慨解囊下，你们来到了北海道的一家民俗旅店度假。',
         ]);
         await era.printAndWait([
           '……嘛，虽然在 ',

@@ -463,7 +463,7 @@ module.exports = class extends Edu3UntilSchoolAtrium {
           me.name
         } 的手，用一个对于${teio.uma_sex_title}来说稍慢，但又比较锻炼 ${
           me.name
-        } 的速度走着。${me.get_couple_title()} 的掌心贴在一起，偶尔轻摇。天边太阳的余晖落到额前，${
+        } 的速度走着。你们的掌心贴在一起，偶尔轻摇。天边太阳的余晖落到额前，${
           me.name
         } 脚踏大理石打磨成的小道，仰头注视前方，看见有淡金色的光班从${
           teio.sex
@@ -476,7 +476,7 @@ module.exports = class extends Edu3UntilSchoolAtrium {
         '黄昏之下，大地借用落日最后的光亮裹住自己，披上了一件布料，星星点点的金线溜过它凹凸不平的表面。并没有积雪反射光芒，只有刚出头的绿色嫩芽贪婪地吸取着能量。',
       );
       await era.printAndWait('春天要来了。');
-      await era.printAndWait(`${me.get_couple_title()} 的梦，也结束了。`);
+      await era.printAndWait(`你们的梦，也结束了。`);
       await era.printAndWait('是时候说……');
       era.println();
 
@@ -536,9 +536,7 @@ module.exports = class extends Edu3UntilSchoolAtrium {
       await era.printAndWait(
         `随后，是${teio.sex}动人的笑声，${me.name} 不禁也随之而笑。二人携手，继续向前。`,
       );
-      await era.printAndWait(
-        `属于 ${me.get_couple_title()} 的故事，还将继续。`,
-      );
+      await era.printAndWait(`属于你们的故事，还将继续。`);
       era.println();
       era.set('status:3:腿伤', 0);
       if (era.get('talent:3:自信程度') === 1) {

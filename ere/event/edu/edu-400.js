@@ -105,9 +105,7 @@ week_end_handlers[47 + 24] = async (ss, me, callname, flags, event_object) => {
     ' 要不稍微在这里坐一会……',
   ]);
   await era.printAndWait([
-    '窗外雷声大作，狂风暴雨袭击着 ',
-    me.get_couple_title(),
-    ' 所居住的酒店，在一道震耳欲聋的雷声之后，整个酒店似乎都停电了。',
+    '窗外雷声大作，狂风暴雨袭击着你们所居住的酒店，在一道震耳欲聋的雷声之后，整个酒店似乎都停电了。',
   ]);
   await ss.say_and_wait([
     '等等……等等等等等等，呼……呼……呼……',
@@ -509,9 +507,7 @@ out_church_handlers[95 + 1] = async (ss, me, callname, flags) => {
     ss.sex,
     '有些心慌意乱，很明显',
     ss.sex,
-    '的诱惑战术时间并不恰当，还没一分钟的时间 ',
-    me.get_couple_title(),
-    ' 就站在了神社的门口。',
+    '的诱惑战术时间并不恰当，还没一分钟的时间你们就站在了神社的门口。',
   ]);
   await ss.say_and_wait([
     '唉，算了算了，',
@@ -519,9 +515,7 @@ out_church_handlers[95 + 1] = async (ss, me, callname, flags) => {
     ' 这样的木头人还是太不解风情了。',
   ]);
   await era.printAndWait([
-    '紧接着 ',
-    me.get_couple_title(),
-    ' 进入了神社，一如既往的按照参拜的过程，将硬币投入纳奉箱之中之后拍手许愿。',
+    '紧接着你们进入了神社，一如既往的按照参拜的过程，将硬币投入纳奉箱之中之后拍手许愿。',
   ]);
   await ss.say_and_wait([callname, ' 你许了什么愿望呢？']);
   era.printButton('「希望我们两个人都身体健康，过上安心幸福的日子。」', 1);

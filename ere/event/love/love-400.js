@@ -107,9 +107,7 @@ module.exports = class extends CustomizedLove {
         silence.get_colored_name(),
         ' 二话不说拉着 ',
         me.get_colored_name(),
-        ' 的手走进了 ',
-        me.get_couple_title(),
-        ' 初遇的那片小树林里面，',
+        ' 的手走进了你们初遇的那片小树林里面，',
       ]);
       await era.printAndWait([
         '自从',
@@ -194,9 +192,7 @@ module.exports = class extends CustomizedLove {
           ' 的嘴唇。',
         ]);
         await era.printAndWait([
-          '但是 ',
-          me.get_couple_title(),
-          ' 什么都没有说，两个人在小树林里面拥抱着，直到似乎有人靠近这里才像是偷到了鸡的黄鼠狼逃跑一样匆匆离开。',
+          '但是你们什么都没有说，两个人在小树林里面拥抱着，直到似乎有人靠近这里才像是偷到了鸡的黄鼠狼逃跑一样匆匆离开。',
         ]);
         begin_and_init_ero(0, 400);
         await quick_make_love(
@@ -385,9 +381,7 @@ module.exports = class extends CustomizedLove {
           ' 的嘴唇。',
         ]);
         await era.printAndWait([
-          '但是 ',
-          me.get_couple_title(),
-          ' 什么都没有说，两个人拥吻在一起，许久之后才松开嘴唇，',
+          '但是你们什么都没有说，两个人拥吻在一起，许久之后才松开嘴唇，',
           silence.get_colored_name(),
           ' 舔着口腔中的血腥味，露出了愉快的笑容。',
         ]);
@@ -425,9 +419,7 @@ module.exports = class extends CustomizedLove {
         ]);
         await era.printAndWait([
           silence.get_colored_name(),
-          ' 头也不回的离开了 ',
-          me.get_couple_title(),
-          ' 所在的地方，似乎是怕 ',
+          ' 头也不回的离开了你们所在的地方，似乎是怕 ',
           me.get_colored_name(),
           ' 看到',
           silence.sex,

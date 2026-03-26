@@ -202,9 +202,7 @@ module.exports = class extends CustomizedEdu {
       '一同完成的咖啡，一定会比现在喝到的还要美味吧。',
     ]);
     await era.printAndWait([
-      '就这样，',
-      me.get_couple_title(),
-      ' 对那比夜晚更加香醇浓厚的未来充满了期待。',
+      '就这样，你们对那比夜晚更加香醇浓厚的未来充满了期待。',
     ]);
     era.println();
     let wait_flag = get_attr_and_print_in_event(
@@ -273,9 +271,7 @@ module.exports = class extends CustomizedEdu {
     await era.printAndWait([
       '为了祈求 ',
       coffee.get_colored_name(),
-      ' 今年能够得到成功，',
-      me.get_couple_title(),
-      ' 来到神社进行新年参拜。',
+      ' 今年能够得到成功，你们来到神社进行新年参拜。',
     ]);
     if (check_tachyon_plan_b()) {
       const tachyon = get_chara_talk(32);
@@ -378,9 +374,7 @@ module.exports = class extends CustomizedEdu {
           '我想，我能继续努力训练了。不再低着头……往前迈进……',
         );
         await era.printAndWait([
-          '刚才那座城镇是幻觉吗……？一转眼，',
-          me.get_couple_title(),
-          ' 就又回到了普通的街道上。',
+          '刚才那座城镇是幻觉吗……？一转眼，你们就又回到了普通的街道上。',
         ]);
         await era.printAndWait([
           '无论如何，',
@@ -415,9 +409,7 @@ module.exports = class extends CustomizedEdu {
         await era.printAndWait([
           '当 ',
           me.get_colored_name(),
-          ' 从恍惚中醒来时，',
-          me.get_couple_title(),
-          ' 就又回到了普通的街道上。',
+          ' 从恍惚中醒来时，你们就又回到了普通的街道上。',
         ]);
         await era.printAndWait('刚才的是梦吗，或者有是一次灵异事件？');
         await era.printAndWait([
@@ -450,9 +442,7 @@ module.exports = class extends CustomizedEdu {
           me.get_colored_name(),
           ' 在一旁所见的，只不过是 ',
           coffee.get_colored_name(),
-          ' 闭上眼又睁开眼的一瞬后，',
-          me.get_couple_title(),
-          ' 就又回到了普通的街道上。',
+          ' 闭上眼又睁开眼的一瞬后，你们就又回到了普通的街道上。',
         ]);
         wait_flag = get_attr_and_print_in_event(25, undefined, 35);
     }

@@ -282,8 +282,7 @@ function tachyon_default_talk(buffer, tachyon, me, callname, edu_marks) {
           await me.say_and_wait('…………');
           era.println();
           await era.printAndWait([
-            me.get_couple_title(),
-            ' 两人相顾无言，',
+            '你们两人相顾无言，',
             me.get_colored_name(),
             ' 认命的喝下了饮料',
           ]);

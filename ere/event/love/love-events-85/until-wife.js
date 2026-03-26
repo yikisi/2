@@ -192,9 +192,7 @@ module.exports = class extends Love85AfterGirlFriend {
           ' 身边，开始整理略显凌乱的衣服。',
         ]);
         await era.printAndWait([
-          '刚才妖艳的氛围荡然无存，',
-          me.get_couple_title(),
-          ' 回到了平日训练时的感觉。',
+          '刚才妖艳的氛围荡然无存，你们回到了平日训练时的感觉。',
         ]);
         await sys_love_uma_in_event(85);
         begin_and_init_ero(0, 85);
@@ -349,11 +347,7 @@ module.exports = class extends Love85AfterGirlFriend {
       ' 不甚满意。',
     ]);
     await ruby.say_and_wait('没有其他更好的了吗？');
-    await era.printAndWait([
-      '不一会儿，老板人来了。他邀请 ',
-      me.get_couple_title(),
-      ' 上楼交谈。',
-    ]);
+    await era.printAndWait(['不一会儿，老板人来了。他邀请你们上楼交谈。']);
     await era.printAndWait('一个盒子被端上来，打开以后见到的是一对翡翠坠子。');
     await era.printAndWait(
       '原来是一对鸳鸯戏水图，完全一样的造型，周围有莲叶缠绕，圆满丰腴。',
@@ -402,11 +396,7 @@ module.exports = class extends Love85AfterGirlFriend {
     } else {
       await era.printAndWait('一番畅谈……');
       await era.printAndWait([
-        '这位老板倒是个真性情的人，表示会为 ',
-        me.get_couple_title(),
-        ' 留下首饰后，',
-        me.get_couple_title(),
-        ' 离开了玉石店。',
+        '这位老板倒是个真性情的人，表示会为你们留下首饰后，你们离开了玉石店。',
       ]);
     }
     return true;

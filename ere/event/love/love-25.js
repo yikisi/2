@@ -39,7 +39,7 @@ module.exports = class extends CustomizedLove {
       coffee.get_colored_name(),
       ' 的脸上不禁染上泛上羞红，双手划过微疼的小腹，钻进了睡衣内部。',
     ]);
-    await coffee.say_and_wait(['训练员、', me.get_adult_sex_title(), '……']);
+    await coffee.say_and_wait(['训练员、', me.adult_sex_title, '……']);
     if (coffee.sex_code === 0) {
       await coffee.print_and_wait(
         '嘴里念叨着梦中人，中指与食指则不停地在阴蒂上画着圈，已然兴奋的乳头被幻想中的大手轻轻揉搓，变得红肿。',
@@ -348,7 +348,7 @@ module.exports = class extends CustomizedLove {
           '。',
         ]);
         era.printButton(
-          `「${coffee.name}${coffee.get_adult_sex_title()}，我能问你几个问题吗。」`,
+          `「${coffee.name}${coffee.adult_sex_title}，我能问你几个问题吗。」`,
           1,
         );
         await era.input();
@@ -539,7 +539,7 @@ module.exports = class extends CustomizedLove {
         ' 看。',
       ]);
       era.printButton(
-        `「${coffee.name}${coffee.get_adult_sex_title()}，你愿意嫁给我吗？」`,
+        `「${coffee.name}${coffee.adult_sex_title}，你愿意嫁给我吗？」`,
         1,
       );
       await era.input();

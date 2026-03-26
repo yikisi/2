@@ -50,7 +50,7 @@ module.exports = (handlers) => {
     await say_by_passer_by('记者A', [
       '虽然有点早，但有人认为三重宝冠正是 ',
       ruby.get_colored_name(),
-      ruby.get_adult_sex_title(),
+      ruby.adult_sex_title,
       ' 的本命路线。',
     ]);
     await say_by_passer_by('记者B', '看了今天的比赛，我也感受到了。');
@@ -82,9 +82,7 @@ module.exports = (handlers) => {
     await era.printAndWait([
       '以 ',
       ruby.get_colored_name(),
-      ' 足以在新秀级拿下G1胜利的素质来看，三重宝冠也不过是 ',
-      me.get_couple_title(),
-      ' 旅途的中转站吧。',
+      ' 足以在新秀级拿下G1胜利的素质来看，三重宝冠也不过是你们旅途的中转站吧。',
     ]);
     await era.printAndWait([
       '不想扫记者们的兴致，',
@@ -377,7 +375,7 @@ module.exports = (handlers) => {
     era.drawLine({ content: '记者招待会上' });
     await say_by_passer_by('记者A', [
       '训练员',
-      me.get_adult_sex_title(),
+      me.adult_sex_title,
       '，这些没错吧。',
     ]);
     era.printButton('是的，没有问题。', 1);

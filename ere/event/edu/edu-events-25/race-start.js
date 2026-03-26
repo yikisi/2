@@ -430,11 +430,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
       race_infos[race_enum.japa_cup].get_colored_name(),
       ' 当天，选手通道内。',
     ]);
-    await era.printAndWait([
-      '因意外而相遇的 ',
-      me.get_couple_title(),
-      ' 终于走到了这里。',
-    ]);
+    await era.printAndWait(['因意外而相遇的你们终于走到了这里。']);
     await coffee.say_and_wait('…………');
     await era.printAndWait([
       '和 ',

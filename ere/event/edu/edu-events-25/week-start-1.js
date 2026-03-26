@@ -197,11 +197,7 @@ module.exports = (handlers) => {
         '无关。',
       ]);
     }
-    await era.printAndWait([
-      '整理好思绪，',
-      me.get_couple_title(),
-      ' 开始了今天的训练。',
-    ]);
+    await era.printAndWait(['整理好思绪，你们开始了今天的训练。']);
   };
 
   handlers[28] = async (coffee, me, callname, flags) => {
@@ -412,9 +408,7 @@ module.exports = (handlers) => {
         await era.printAndWait([
           '于是带着 ',
           coffee.get_colored_name(),
-          '，',
-          me.get_couple_title(),
-          ' 来到了水族馆。',
+          '，你们来到了水族馆。',
           coffee.sex,
           '非常专注地盯着水槽里的鱼……',
         ]);
@@ -443,9 +437,7 @@ module.exports = (handlers) => {
         await era.printAndWait([
           '在 ',
           coffee.get_colored_name(),
-          ' 的带领下，',
-          me.get_couple_title(),
-          ' 来到了一间小小的咖啡厅。',
+          ' 的带领下，你们来到了一间小小的咖啡厅。',
           coffee.sex,
           '熟络地坐在了常坐的座位上……',
         ]);
@@ -474,9 +466,7 @@ module.exports = (handlers) => {
         await era.printAndWait([
           '于是带着 ',
           coffee.get_colored_name(),
-          '，',
-          me.get_couple_title(),
-          ' 来到了特雷森附近的街道。',
+          '，你们来到了特雷森附近的街道。',
           coffee.sex,
           '好奇地四处张望路边的店铺的橱窗……',
         ]);
@@ -620,9 +610,7 @@ module.exports = (handlers) => {
       coffee.get_colored_name(),
       ' 到底能否参加 ',
       race_infos[race_enum.toky_yus].get_colored_name(),
-      '，',
-      me.get_couple_title(),
-      ' 来到了训练场上。',
+      '，你们来到了训练场上。',
     ]);
     await coffee.say_and_wait(['呼、呼……', callname, '，这个单圈时间的话……']);
     await coffee.say_and_wait(
@@ -821,7 +809,7 @@ module.exports = (handlers) => {
     await say_by_passer_by_and_wait('记者A', [
       tachyon.get_colored_name(),
       ' ',
-      tachyon.get_adult_sex_title(),
+      tachyon.adult_sex_title,
       '……你明明在赛事上展露出了极大潜能，为何会做出这样的决定呢！？',
     ]);
     await tachyon.print_and_wait(

@@ -191,7 +191,7 @@ module.exports = class extends Love52UntilWife {
     if (love_30 && love_61) {
       await in_urara.say_as_unknown_and_wait([
         '训练员',
-        me.get_adult_sex_title(),
+        me.adult_sex_title,
         '很贪心，明明已经拥有了乌拉拉最好的朋友，还想要连乌拉拉也拥有。',
       ]);
       await in_urara.say_as_unknown_and_wait(
@@ -205,7 +205,7 @@ module.exports = class extends Love52UntilWife {
     } else {
       await in_urara.say_as_unknown_and_wait([
         '为什么训练员',
-        me.get_adult_sex_title(),
+        me.adult_sex_title,
         '会在接受了 ',
         sys_get_colored_callname(52, love_30 ? 30 : 61),
         ' 后，还能如此轻松的对待乌拉拉呢？',
@@ -215,7 +215,7 @@ module.exports = class extends Love52UntilWife {
       );
       await in_urara.say_as_unknown_and_wait([
         '为什么乌拉拉明知道这一点，却还在笑着与这样的训练员',
-        me.get_adult_sex_title(),
+        me.adult_sex_title,
         '相拥呢？',
       ]);
     }

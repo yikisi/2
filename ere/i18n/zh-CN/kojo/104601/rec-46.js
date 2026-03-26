@@ -171,7 +171,7 @@ module.exports = {
     era.println();
     await falcon.say_and_wait(`非常抱歉。`);
     await tokino.say_and_wait(
-      `${falcon.name}${falcon.get_adult_sex_title()}，如果想要合规的进行偶像活动，请在选拔赛上努力与合适的训练员进行签约。`,
+      `${falcon.name}${falcon.adult_sex_title}，如果想要合规的进行偶像活动，请在选拔赛上努力与合适的训练员进行签约。`,
     );
     await tokino.say_and_wait(
       `特雷森学院是以培育优秀赛${falcon.uma_sex_title}为目标而创立的，我想以此为目标希望一同前进的训练员应该不会少。`,
@@ -187,7 +187,7 @@ module.exports = {
       `从低垂的马耳来看，${falcon.name}似乎陷入了两难之地。`,
     );
     await tokino.say_and_wait(
-      `……${you.actual_name}${you.get_adult_sex_title()}，请问有什么事情吗？`,
+      `……${you.actual_name}${you.adult_sex_title}，请问有什么事情吗？`,
     );
     await era.printAndWait(`手纲迅速切换到了工作模式。`);
     era.printButton(`抱歉，我之后会好好和${falcon.name}谈谈的。`, 1);
@@ -210,7 +210,7 @@ module.exports = {
       `在拼命的努力后，总算在上课铃响起之前将海报全部撕了下来。`,
     );
     await falcon.say_and_wait(
-      `……谢谢${callname}！飞鹰子的粉丝一号${you.get_adult_sex_title()}！`,
+      `……谢谢${callname}！飞鹰子的粉丝一号${you.adult_sex_title}！`,
     );
     await era.printAndWait(`粉丝一号？`);
     await falcon.say_and_wait(`飞鹰子在河边举行的演唱会，一定要来看哦？`);
@@ -265,7 +265,7 @@ module.exports = {
     );
     await era.printAndWait(`或许，这就是${falcon.sex}的舞台吧。`);
     await era.printAndWait(`孤独的偶像吗。`);
-    await falcon.say_and_wait(`飞鹰子的粉丝一号${you.get_adult_sex_title()}⭐`);
+    await falcon.say_and_wait(`飞鹰子的粉丝一号${you.adult_sex_title}⭐`);
     await era.printAndWait(`正准备转身离开的${callname}被叫住了。`);
     era.printButton(`……粉丝一号？`, 1);
     await era.input();
@@ -273,7 +273,7 @@ module.exports = {
       `沐浴在光线之下的${falcon.teen_sex_title}以一种活跃到几乎是亢奋的声音向${callname}宣布到。`,
     );
     await falcon.say_and_wait(
-      `因为粉丝一号${you.get_adult_sex_title()}是第一个听完飞鹰子整场演唱会的人⭐`,
+      `因为粉丝一号${you.adult_sex_title}是第一个听完飞鹰子整场演唱会的人⭐`,
     );
     era.println();
     await era.printAndWait(
@@ -286,7 +286,7 @@ module.exports = {
       `能在1月的寒风中坚持2小时，被称为粉丝也是确切的说法吧。`,
     );
     await falcon.say_and_wait(
-      `粉丝一号${you.get_adult_sex_title()}有什么愿望吗？只要是飞鹰子的能力范围内，飞鹰子都会实现的⭐`,
+      `粉丝一号${you.adult_sex_title}有什么愿望吗？只要是飞鹰子的能力范围内，飞鹰子都会实现的⭐`,
     );
     await era.printAndWait(`${callname}稍稍想了一下。`);
     era.printButton(`可以在沙地选拔赛上见到飞鹰子吗？`, 1);
@@ -302,7 +302,7 @@ module.exports = {
     await era.printAndWait(`${falcon.name}似乎在用自己的方式庆祝。`);
     await falcon.say_and_wait(`飞鹰子的粉丝一号同时还是一名训练员！`);
     await falcon.say_and_wait(
-      `既然这样就让训练员${you.get_adult_sex_title()}看到飞鹰子在草地上的潜力吧！`,
+      `既然这样就让训练员${you.adult_sex_title}看到飞鹰子在草地上的潜力吧！`,
     );
     await era.printAndWait(
       `越说越激动的${falcon.name}情不自禁的握住了${callname}的手。`,
@@ -355,7 +355,7 @@ module.exports = {
     );
     await you.say_and_wait(`为了共同的理想出发吧。`);
     await falcon.say_and_wait(
-      `接下来请多指教了，训练员……不！飞鹰子的粉丝一号${you.get_adult_sex_title()}⭐`,
+      `接下来请多指教了，训练员……不！飞鹰子的粉丝一号${you.adult_sex_title}⭐`,
     );
     await era.printAndWait(`两人的手紧紧的握在了一起。\n`);
     await era.printAndWait(`成功招募${falcon.name}了！`);

@@ -24,7 +24,7 @@ module.exports = (handlers) => {
     );
     await in_urara.say_as_unknown_and_wait([
       '是很标准的展开呢，不过训练员',
-      me.get_adult_sex_title(),
+      me.adult_sex_title,
       '（您）可就相当头疼了。',
     ]);
     await in_urara.say_as_unknown_and_wait(
@@ -198,7 +198,7 @@ module.exports = (handlers) => {
     era.drawLine();
     await in_urara.say_as_unknown_and_wait([
       '但就在训练员',
-      me.get_adult_sex_title(),
+      me.adult_sex_title,
       '（您）即将陷入另一种怀疑时，却听见了擦肩而过的议论声。',
     ]);
     await in_urara.say_as_unknown_and_wait([

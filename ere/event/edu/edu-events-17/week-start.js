@@ -351,13 +351,12 @@ module.exports = class extends Edu17UntilRaceStart {
         '经受不住残酷的赛事和训练，对自己失望时，在假期回到了温暖的家中……',
       );
       await luna_talk.say_and_wait('或许就会萌生放弃的想法。');
-      await era.printAndWait(
-        `${
-          me.name
-        } 沉默地听露娜娓娓道来。说实话，站在 ${me.get_couple_title()} 的立场——鲁铎象征的立场上，${
-          me.name
-        } 无法说什么漂亮话。`,
-      );
+      await era.printAndWait([
+        me.get_colored_name(),
+        ' 沉默地听露娜娓娓道来。说实话，站在你们的立场——鲁铎象征的立场上，',
+        me.get_colored_name(),
+        ' 无法说什么漂亮话。',
+      ]);
       await era.printAndWait(
         `${me.name} 知道，很多赛马娘听到露娜将会参赛时，${luna_talk.sex}们的第一反应就是选择退赛。`,
       );

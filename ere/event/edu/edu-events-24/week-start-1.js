@@ -269,9 +269,7 @@ module.exports = (handlers) => {
     era.set('cflag:24:节日事件标记', 0);
     await print_event_name('新年的抱负', maya);
     await era.printAndWait([
-      '从今年起就要开始挑战经典赛了。',
-      me.get_couple_title(),
-      ' 为了决定新年的抱负，相约碰面──',
+      '从今年起就要开始挑战经典赛了。你们为了决定新年的抱负，相约碰面──',
     ]);
     await maya.say_and_wait('…………');
     await maya.say_and_wait([callname, '，一定要决定抱负才行吗？']);

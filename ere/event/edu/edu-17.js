@@ -41,7 +41,7 @@ module.exports = class extends Edu17UntilWeekStart {
     );
     await chara.say_and_wait('感觉你似乎，在想什么失礼的事情。');
     await era.printAndWait(
-      `解决了阶段性的任务后，${me.get_couple_title()} 终于有时间去参拜。路上，露娜不知怎的突然嘟囔。`,
+      `解决了阶段性的任务后，你们终于有时间去参拜。路上，露娜不知怎的突然嘟囔。`,
     );
     await era.printAndWait(
       `${me.name} 连忙否认。露娜不置可否，${chara.sex}看着神社的钟鼓，闭上了双眼。`,

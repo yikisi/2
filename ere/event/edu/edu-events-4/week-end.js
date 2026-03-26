@@ -1070,7 +1070,7 @@ module.exports = async function (maru, me, hook, ebj) {
       );
       await say_by_passer_by_and_wait(
         `${maru.uma_sex_title}`,
-        `作为上次帮助过我的回报，我不会和丸善前辈说的，这位训练员${me.get_adult_sex_title()}。`,
+        `作为上次帮助过我的回报，我不会和丸善前辈说的，这位训练员${me.adult_sex_title}。`,
       );
       await era.printAndWait(
         `${maru.uma_sex_title}微微躬身之后，离开了空教室，这里又只剩下了你一个人。`,
@@ -1085,7 +1085,7 @@ module.exports = async function (maru, me, hook, ebj) {
       );
       await say_by_passer_by_and_wait(
         `${maru.uma_sex_title}`,
-        `作为上次帮助过我的回报，我不会和丸善前辈说的，这位训练员${me.get_adult_sex_title()}。`,
+        `作为上次帮助过我的回报，我不会和丸善前辈说的，这位训练员${me.adult_sex_title}。`,
       );
       await era.printAndWait(
         `${maru.uma_sex_title}微微躬身之后，离开了空教室，这里又只剩下了你一个人。`,

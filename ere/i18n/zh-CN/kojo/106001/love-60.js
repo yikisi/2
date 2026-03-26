@@ -67,7 +67,7 @@ module.exports = {
         nature.sex,
         '一边把T恤抵在鼻尖上，一边伸手去摸已经有些潮湿的私密处。时而摩擦穴口，有时用手指夹住突起，这种行为循序渐进着。',
       ]);
-      nature.say(['训练员、', you.get_adult_sex_title(), '，还要……更多……']);
+      nature.say(['训练员、', you.adult_sex_title, '，还要……更多……']);
       await nature.print_and_wait([
         nature.get_colored_name(),
         ' 的手狂乱的刺激着',

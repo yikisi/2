@@ -251,7 +251,7 @@ module.exports = async () => {
   await in_urara.say_as_unknown_and_wait('……');
   await in_urara.say_as_unknown_and_wait([
     '但是很抱歉呢，讨人厌的',
-    me.get_adult_sex_title(),
+    me.adult_sex_title,
     '（您），我不会让故事就这么结束的。',
   ]);
   await in_urara.say_as_unknown_and_wait(

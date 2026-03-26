@@ -86,7 +86,7 @@ module.exports = (handlers) => {
       '……让你久等了，',
       me.actual_name,
       '；这是骏川',
-      tokino.get_adult_sex_title(),
+      tokino.adult_sex_title,
       '为您预订的『超究极武神极巨化威力加强豪华特典版 · 巧克力慕斯蛋糕』',
     ]);
     await era.printAndWait(['……怎么着，你们蛋糕店的店员是都会说贯口是吗？']);
@@ -107,7 +107,7 @@ module.exports = (handlers) => {
     ]);
     await say_by_passer_by_and_wait('店员', [
       '那就没错了，骏川',
-      tokino.get_adult_sex_title(),
+      tokino.adult_sex_title,
       '为您预订的『超究极武神极巨化威力加强豪华特典版 · 巧克力慕斯蛋糕。』',
     ]);
     await era.printAndWait(['好，这下逃不掉了。']);
@@ -144,7 +144,7 @@ module.exports = (handlers) => {
     ]);
     await say_by_passer_by_and_wait('店员', [
       '可骏川',
-      tokino.get_adult_sex_title(),
+      tokino.adult_sex_title,
       '做的到哦？',
     ]);
     await me.say_and_wait(['骏川……']);
@@ -162,7 +162,7 @@ module.exports = (handlers) => {
     ]);
     await say_by_passer_by_and_wait('店员', [
       '总而言之，本店商品一经售出，概不退换；这就是骏川',
-      tokino.get_adult_sex_title(),
+      tokino.adult_sex_title,
       '为您定制的蛋糕——',
     ]);
     await era.printAndWait([

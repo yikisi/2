@@ -273,7 +273,7 @@ module.exports = {
       ]));
     await in_urara.say_as_unknown_and_wait([
       '再仔细想想啊训练员',
-      me.get_adult_sex_title(),
+      me.adult_sex_title,
       '（您），我的名字，您会猜不到吗？',
     ]);
     await era.printAndWait(

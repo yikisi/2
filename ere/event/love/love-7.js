@@ -508,8 +508,7 @@ module.exports = class extends CustomizedLove {
       );
       era.println();
       await era.printAndWait([
-        me.get_couple_title(),
-        ' 在训练员室欢声笑语的风景，相信在将来也不会消失。',
+        '你们在训练员室欢声笑语的风景，相信在将来也不会消失。',
       ]);
     } else {
       era.println();

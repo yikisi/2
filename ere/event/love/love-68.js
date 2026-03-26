@@ -115,12 +115,10 @@ module.exports = class extends CustomizedLove {
     await era.printAndWait(
       `在不知道多少次担当离开 ${me.name} 一个人去女厕所后，${me.name} 终于拉住少女问她到底发生了什么。`,
     );
-    await kita.say_and_wait(
-      `训练员${me.get_adult_sex_title()}……就是，嗯，那个……`,
-    );
+    await kita.say_and_wait(`训练员${me.adult_sex_title}……就是，嗯，那个……`);
     await kita.say_and_wait(`小北我……可能到了发情期了……呜呜……`);
     await kita.say_and_wait(
-      `即使吃了药也没有用，在路上只是闻到您的味道就很想要，训练员${me.get_adult_sex_title()}，我该怎么办啊……`,
+      `即使吃了药也没有用，在路上只是闻到您的味道就很想要，训练员${me.adult_sex_title}，我该怎么办啊……`,
     );
     await era.printAndWait(
       `摘下口罩，小北纯熟的发情体味，混合着闷在衣服里的雌性臭味，在空气中升华为肉眼可见的热气。`,
@@ -153,7 +151,7 @@ module.exports = class extends CustomizedLove {
       `似乎是察觉到了训练员的视线，小北夹紧双腿，发出呜咽的声音。`,
     );
     await kita.say_and_wait(
-      `嗯……嗯呜……想要……想要训练员${me.get_adult_sex_title()}……啊……`,
+      `嗯……嗯呜……想要……想要训练员${me.adult_sex_title}……啊……`,
     );
     await era.printAndWait(
       `突然，${kita.name} 上下摇晃着胸部，让一对肥嫩的大白兔翻腾着跳出胸罩。`,
@@ -184,7 +182,7 @@ module.exports = class extends CustomizedLove {
       `骚臭粘稠的淫水在沙发上弥散开来，无法抑制两腿间爱液的 ${kita.name} 扭动着肥臀，在乳头被指尖捏住时喷出欢喜的淫叫。`,
     );
     await kita.say_and_wait(
-      `训练员${me.get_adult_sex_title()}去了要去了咿喔喔喔喔呜呜呜呜！？`,
+      `训练员${me.adult_sex_title}去了要去了咿喔喔喔喔呜呜呜呜！？`,
     );
     await era.printAndWait(
       `浑浊的雌汁从 ${kita.name} 的两腿间喷涌而出，让赛马娘的大脑发生了不可逆的转化。`,
@@ -257,7 +255,7 @@ module.exports = class extends CustomizedLove {
     );
     era.println();
     await kita.say_and_wait(
-      `训练员${me.get_adult_sex_title()}，一直以来在我烦恼的时候帮助我，指导我锻炼，真的是非常感谢！`,
+      `训练员${me.adult_sex_title}，一直以来在我烦恼的时候帮助我，指导我锻炼，真的是非常感谢！`,
     );
     await kita.say_and_wait(
       `以这次我想给训练员，一份足够体现小北敬意的礼物，请你不要太惊讶哦！`,

@@ -203,7 +203,7 @@ module.exports = class extends Love52UntilGirlFriend {
       era.println();
       await era.printAndWait([
         '只是，在训练员',
-        me.get_adult_sex_title(),
+        me.adult_sex_title,
         '移开视线的瞬间，小',
         urara.uma_sex_title,
         '纯洁的笑容中闪过了一丝难以察觉的暗色。',

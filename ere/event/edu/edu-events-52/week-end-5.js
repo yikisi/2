@@ -673,7 +673,7 @@ module.exports = (handlers) => {
 
     in_urara.say_as_unknown([
       '所以……训练员',
-      me.get_adult_sex_title(),
+      me.adult_sex_title,
       '，不管怎样，请您说些什么吧？',
     ]);
     const attr_change = new Array(5).fill(0);
@@ -738,7 +738,7 @@ module.exports = (handlers) => {
     if (era.get('love:52') >= 50) {
       await in_urara.say_as_unknown_and_wait([
         '难得是圣诞节，我还以为小乌拉拉会单独送些特别的礼物给自己的训练员',
-        me.get_adult_sex_title(),
+        me.adult_sex_title,
         '呢？',
       ]);
       await urara.say_and_wait([
@@ -778,7 +778,7 @@ module.exports = (handlers) => {
     }
     in_urara.say_as_unknown([
       '训练员',
-      me.get_adult_sex_title(),
+      me.adult_sex_title,
       '，您倒是也说说话啊——',
     ]);
     era.printButton('「……不也挺好嘛？」（爱慕+5）', 1);
@@ -786,7 +786,7 @@ module.exports = (handlers) => {
     const ret = await era.input();
     await in_urara.say_as_unknown_and_wait([
       '训练员',
-      me.get_adult_sex_title(),
+      me.adult_sex_title,
       '（您）——！！',
     ]);
     era.drawLine();
@@ -885,7 +885,7 @@ module.exports = (handlers) => {
     );
     await in_urara.say_as_unknown_and_wait([
       '训练员',
-      me.get_adult_sex_title(),
+      me.adult_sex_title,
       '，我爱着您。',
     ]);
     era.println();

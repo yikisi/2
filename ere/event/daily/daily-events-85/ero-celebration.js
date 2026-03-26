@@ -259,8 +259,7 @@ module.exports = async (handlers) => {
     ]);
     await ruby.say_and_wait('那就要看你的表现了。');
     await era.printAndWait([
-      me.get_couple_title(),
-      ' 专门购进了一批圣诞树来装饰，某个角度来说，何尝不是 ',
+      '你们专门购进了一批圣诞树来装饰，某个角度来说，何尝不是 ',
       ruby.get_colored_name(),
       ' 的孩子心性呢。',
     ]);

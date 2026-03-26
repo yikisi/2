@@ -269,9 +269,7 @@ module.exports = (handlers) => {
       await era.printAndWait([
         '持续了不知道多久，久到 ',
         me.get_colored_name(),
-        ' 开始起自己的生命，以及静下心来的观众会发现 ',
-        me.get_couple_title(),
-        ' 二人的不对时，',
+        ' 开始起自己的生命，以及静下心来的观众会发现你们二人的不对时，',
       ]);
       await era.printAndWait([
         tachyon.sex,

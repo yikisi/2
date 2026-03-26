@@ -41,7 +41,7 @@ module.exports = async (kita, me, hook, event_object) => {
       `若不是同样穿着印有荷叶纹样黑色和服，满脸笑意轻松写意的小北正坐在 ${me.name} 身旁，恐怕 ${me.name} 早就起身鞠躬站到弟子的行列里了吧。`,
     );
     await kita.say_and_wait(
-      `训练员${me.get_adult_sex_title()}，第一次在这么多人面前很紧张对吧～`,
+      `训练员${me.adult_sex_title}，第一次在这么多人面前很紧张对吧～`,
     );
     await era.printAndWait(
       `合上推拉门，小北笑嘻嘻地凑在 ${me.name} 身边对 ${me.name} 说。`,
@@ -56,10 +56,10 @@ module.exports = async (kita, me, hook, event_object) => {
     await print_event_name('温泉旅行', kita);
     await era.printAndWait(`${me.name} 在训练员室里整理着文件……`);
     await kita.say_and_wait(
-      `训练员${me.get_adult_sex_title()}！那个，我要和你说温泉券的声音！`,
+      `训练员${me.adult_sex_title}！那个，我要和你说温泉券的声音！`,
     );
     await kita.say_and_wait(`这三年，我有好好努力对吧！`);
-    await kita.say_and_wait(`是这样了吧训练员${me.get_adult_sex_title()}！`);
+    await kita.say_and_wait(`是这样了吧训练员${me.adult_sex_title}！`);
 
     await era.printAndWait(
       `突然闯进训练员室的小北，这么大声向 ${me.name} 询问道。`,
@@ -80,7 +80,7 @@ module.exports = async (kita, me, hook, event_object) => {
     );
     await kita.say_and_wait(`谢谢你，这三年来小北我一直在压抑着自己……`);
     await kita.say_and_wait(
-      `但是，现在有了训练员${me.get_adult_sex_title()}的努力，就算稍微奖励一下小北也是可以的，对吧！`,
+      `但是，现在有了训练员${me.adult_sex_title}的努力，就算稍微奖励一下小北也是可以的，对吧！`,
     );
     await era.printAndWait(
       `黑发的${kita.teen_sex_title}一步步地逼近，用纤细的双手压住 ${

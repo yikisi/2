@@ -102,9 +102,7 @@ module.exports = (handlers) => {
     );
     await digital.say_and_wait('我还想再跑一次泥地比赛，再感受一次这种气氛！');
     await era.printAndWait([
-      '商量过后，',
-      me.get_couple_title(),
-      ' 决定下一次比赛是：新年的 ',
+      '商量过后，你们决定下一次比赛是：新年的 ',
       race_infos[race_enum.hyac_sta].get_colored_name(),
     ]);
   };

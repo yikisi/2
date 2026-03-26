@@ -342,7 +342,7 @@ module.exports = class extends Edu67BackSchool {
           `${daiya.sex}在说这些话时的眼神中，浮现着和${daiya.sex}对荷叶边的信念一样的温柔的光芒。`,
         );
         await era.printAndWait(
-          `之后 ${me.get_couple_title()} 又聊了许久，距离正式拍摄还有一段时间。`,
+          `之后你们又聊了许久，距离正式拍摄还有一段时间。`,
         );
         era.printButton('「边喝东西边等吧」', 1);
         await era.input();
@@ -537,9 +537,7 @@ module.exports = class extends Edu67BackSchool {
           '就是这样。要不要找其他也受魔咒所苦的人呢？说不定能帮上忙呢！',
         );
         await kita.say_and_wait('我也要、我也要！去问问商店街的其他人看看吧！');
-        await era.printAndWait(
-          `${me.get_couple_title()} 三人一起走在商店街上，寻找着未知的魔咒！`,
-        );
+        await era.printAndWait(`你们三人一起走在商店街上，寻找着未知的魔咒！`);
         era.println();
         wait_flag = get_attr_and_print_in_event(67, [20, 0, 0, 0, 0], 0);
       } else {
@@ -600,7 +598,7 @@ module.exports = class extends Edu67BackSchool {
       await daiya.say_and_wait('训练员，你怎么了吗？是不是不太想玩呀……？');
       await daiya.say_and_wait('如果是这样……我可以等到你想玩再玩喔♪');
       await era.printAndWait(
-        `${me.get_couple_title()} 决定暂时先在园区内闲晃，度过一段悠闲的时光。`,
+        `你们决定暂时先在园区内闲晃，度过一段悠闲的时光。`,
       );
       await daiya.say_and_wait('嚼嚼……');
       await daiya.say_and_wait('我吃饱了♪');
@@ -655,7 +653,7 @@ module.exports = class extends Edu67BackSchool {
         );
         await daiya.say_and_wait('……坐在最前面的位子不知道会看见什么呢！');
         await era.printAndWait(
-          `${me.get_couple_title()} 一直重复排队，直到能坐最前面的位子，度过了既好玩又累到头昏眼花的一天！`,
+          `你们一直重复排队，直到能坐最前面的位子，度过了既好玩又累到头昏眼花的一天！`,
         );
         era.println();
         wait_flag = get_attr_and_print_in_event(67, [0, 0, 0, 20, 0], 0);
@@ -804,7 +802,7 @@ module.exports = class extends Edu67BackSchool {
           '哎呀，刚过新年就在家懒懒散散的吗……有种会充满罪恶感的感觉呢♪那我们就一起躺过年吧！',
         );
         await era.printAndWait(
-          `${me.get_couple_title()} 决定一起在训练员室里，一边吃零食，一边看新年特别节目。`,
+          `你们决定一起在训练员室里，一边吃零食，一边看新年特别节目。`,
         );
         await daiya.say_and_wait(
           '……这些人明明是参加巴士之旅，却几乎都在走路呢……',
@@ -821,7 +819,7 @@ module.exports = class extends Edu67BackSchool {
           '没问题的，毕竟我和训练员都这么努力，这点小任性，父亲还是会愿意听的♪',
         );
         await era.printAndWait(
-          `于是──${me.get_couple_title()} 一起享用了用新干线外送过来的美味鳗鱼饭。`,
+          `于是──你们一起享用了用新干线外送过来的美味鳗鱼饭。`,
         );
         era.println();
         wait_flag = get_attr_and_print_in_event(67, undefined, 0, [300]);
@@ -858,7 +856,7 @@ module.exports = class extends Edu67BackSchool {
           '玩游戏让时间过得好快呢。好了，我们就赶快回去开福袋吧！',
         );
         await era.printAndWait(
-          `${me.get_couple_title()} 一起度过了愉快的排队时间，也顺利买到了福袋！`,
+          `你们一起度过了愉快的排队时间，也顺利买到了福袋！`,
         );
         era.println();
         wait_flag = get_attr_and_print_in_event(67, new Array(5).fill(10), 0);
@@ -870,7 +868,7 @@ module.exports = class extends Edu67BackSchool {
         await era.input();
         await daiya.say_and_wait('是的！大毛笔跟宣纸我会请家里的人去帮忙买！');
         await era.printAndWait(
-          `所幸过年时间没有人在使用，让 ${me.get_couple_title()} 借到了体育馆，来完成书法表演艺术。`,
+          `所幸过年时间没有人在使用，让你们借到了体育馆，来完成书法表演艺术。`,
         );
         await daiya.say_and_wait(
           '嗯……不先模拟好要怎么写的话，感觉会拿捏不了比例呢。',

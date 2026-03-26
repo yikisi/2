@@ -73,7 +73,7 @@ module.exports = {
       );
       await you.say_as_passer_by_and_wait(
         '工作人员',
-        `训练员${you.get_adult_sex_title()}，选拔赛快要开始了，您怎么还没有到场。`,
+        `训练员${you.adult_sex_title}，选拔赛快要开始了，您怎么还没有到场。`,
       );
       await era.printAndWait('电话那头传来了焦急的声音。');
       era.printButton('「选拔赛？」', 1);
@@ -160,9 +160,7 @@ module.exports = {
     await era.printAndWait(
       `${you.name} 好奇地观察着周围的情况时，与别的地方的热闹相比，已经远离操场中心的此处显得格外落寂。`,
     );
-    await flash.say_and_wait(
-      `${you.get_adult_sex_title()}您好，请问有什么事情吗？`,
-    );
+    await flash.say_and_wait(`${you.adult_sex_title}您好，请问有什么事情吗？`);
     era.printButton('「！」', 1);
     await era.input();
     await era.printAndWait(
@@ -320,7 +318,7 @@ module.exports = {
         `见此，${you.name} 刚想要说些什么，却发现${flash.sex}突然抬起头，目光盯着 ${you.name} 佩戴在胸口的训练员徽章。`,
       );
       await flash.say_and_wait(
-        `${you.get_adult_sex_title()}，请问我能问一个比较失礼的问题吗？`,
+        `${you.adult_sex_title}，请问我能问一个比较失礼的问题吗？`,
       );
       era.printButton('「？」', 1);
       await era.input();
@@ -451,7 +449,7 @@ module.exports = {
           await flash.say_and_wait(
             `${
               you.actual_name
-            }${you.get_adult_sex_title()}，我有个不情之请想要拜托于您。`,
+            }${you.adult_sex_title}，我有个不情之请想要拜托于您。`,
           );
           era.printButton('「？」', 1);
           await era.input();

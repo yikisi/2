@@ -733,9 +733,7 @@ module.exports = class extends StrangeDayEvents {
           '身为社畜，对死线的厌恶早就刻在了骨子里；作为训练员，帮助担当也责无旁贷！',
         ]);
         await printAndWait([
-          '终于，在周日即将结束的时候，',
-          me.get_couple_title(),
-          ' 完成了这本作品。',
+          '终于，在周日即将结束的时候，你们完成了这本作品。',
         ]);
         const love = get(`love:${chara.id}`),
           relation = get(`relation:${chara.id}:0`);

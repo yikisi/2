@@ -148,7 +148,7 @@ module.exports = {
     await era.input();
     await coffee.say_as_unknown_and_wait([
       '……才不是什么玩笑……而且，这位训练员',
-      you.get_adult_sex_title(),
+      you.adult_sex_title,
       '……',
     ]);
     await era.printAndWait([
@@ -242,7 +242,7 @@ module.exports = {
       await era.input();
       await coffee.say_and_wait([
         '……非常感谢，那天的训练员',
-        you.get_adult_sex_title(),
+        you.adult_sex_title,
         '……',
       ]);
       await era.printAndWait([
@@ -416,14 +416,14 @@ module.exports = {
     ]);
     await coffee.say_and_wait([
       '训练员',
-      you.get_adult_sex_title(),
+      you.adult_sex_title,
       '，你已……另一个世界，我是借……朋友才能与你沟……',
     ]);
     era.printButton('「另一个世界……我已经死了吗？」', 1);
     await era.input();
     await coffee.say_and_wait([
       '不……时间……落日前都有机会……训练员',
-      you.get_adult_sex_title(),
+      you.adult_sex_title,
       '，我无法直接帮到你……冷静……幻觉迷惑，它们也无法直接……找到应对的方法，就一定……',
     ]);
     await era.printAndWait([
@@ -491,11 +491,7 @@ module.exports = {
     ]);
     await era.printAndWait('低头看去，影子老老实实地待在脚下。');
     await era.printAndWait('看来是结束了。');
-    await coffee.say_and_wait([
-      '欢迎回来，训练员',
-      you.get_adult_sex_title(),
-      '……',
-    ]);
+    await coffee.say_and_wait(['欢迎回来，训练员', you.adult_sex_title, '……']);
     await era.printAndWait([coffee.get_colored_name(), ' 的声音从身后传来。']);
     await era.printAndWait([
       '回头看去，',
@@ -511,12 +507,12 @@ module.exports = {
     await era.printAndWait([coffee.get_colored_name(), ' 摇了摇头。']);
     await coffee.say_and_wait([
       '请不要对我这样说，是训练员先生你凭借自己的意志找到回来的方法的……不如说，我对训练员',
-      you.get_adult_sex_title(),
+      you.adult_sex_title,
       '你这次陷入危险也有责任……',
     ]);
     await coffee.say_and_wait([
       '训练员',
-      you.get_adult_sex_title(),
+      you.adult_sex_title,
       '你，对他们的诱惑比我预想的还要大……我原本以为那天晚上是我把它们引来的，但……如果能早点发现的话，也许今天的事就不会发生了……',
     ]);
     await era.printAndWait([
@@ -577,7 +573,7 @@ module.exports = {
     ]);
     await coffee.say_and_wait([
       '那么，训练员',
-      you.get_adult_sex_title(),
+      you.adult_sex_title,
       '……你能帮我追上那孩子吗？追上我的……朋友？',
     ]);
     await era.printAndWait([

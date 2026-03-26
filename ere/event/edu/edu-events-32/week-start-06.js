@@ -170,9 +170,7 @@ module.exports = (handlers) => {
         tachyon.sex,
         '指着神社，然后 ',
         me.get_colored_name(),
-        ' 才发现，',
-        me.get_couple_title(),
-        ' 匆忙跑入的，是本舍前祈求神明保佑的长列',
+        ' 才发现，你们匆忙跑入的，是本舍前祈求神明保佑的长列',
       ]);
       era.printButton('「速子你不是不信这些吗？」', 1);
       await era.input();
@@ -231,11 +229,7 @@ module.exports = (handlers) => {
         await era.printAndWait([tachyon.get_colored_name(), ' 不屑的笑了声']);
       }
       era.println();
-      await era.printAndWait([
-        '对话的途中，',
-        me.get_couple_title(),
-        ' 已经排到了队伍最前方',
-      ]);
+      await era.printAndWait(['对话的途中，你们已经排到了队伍最前方']);
       await era.printAndWait([me.get_colored_name(), ' 望着眼前的神像']);
       await era.printAndWait('那么……该许什么愿呢');
       era.println();
@@ -272,8 +266,7 @@ module.exports = (handlers) => {
         me.get_colored_name(),
       ]);
       await era.printAndWait([
-        me.get_couple_title(),
-        ' 两人离开人群，小心的避开了还不死心的记者回到学园',
+        '你们两人离开人群，小心的避开了还不死心的记者回到学园',
       ]);
       era.println();
       await tachyon.say_and_wait(['那么……你都祈祷了什么？']);

@@ -20,9 +20,9 @@ module.exports = async (handlers) => {
     await era.printAndWait(
       `在放下七八份照顾过的学生和同事送来的巧克力之后，${me.name} 坐在办公桌后，准备工作。`,
     );
-    await kita.say_and_wait(`训练员${me.get_adult_sex_title()}，在这里么？`);
+    await kita.say_and_wait(`训练员${me.adult_sex_title}，在这里么？`);
     await kita.say_and_wait(
-      `嘿嘿嘿～情人节快乐训练员${me.get_adult_sex_title()}！这个是小北我送 ${
+      `嘿嘿嘿～情人节快乐训练员${me.adult_sex_title}！这个是小北我送 ${
         me.name
       } 的礼物哦！`,
     );

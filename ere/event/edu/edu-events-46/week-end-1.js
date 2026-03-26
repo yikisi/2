@@ -369,7 +369,7 @@ module.exports = (handlers = {}) => {
     await era.printAndWait(
       `从服务员处得到了菜单，看着琳琅满页的甜品照片，${callname}有些犹豫。`,
     );
-    await falcon.say_and_wait(`训练员${me.get_adult_sex_title()}喜欢什么呢？`);
+    await falcon.say_and_wait(`训练员${me.adult_sex_title}喜欢什么呢？`);
     era.printButton(`水果巴菲感觉就不错！`, 1);
     era.printButton(`有点想尝尝看巧克力口味的新品！`, 2);
     const ret1 = await era.input();
@@ -452,11 +452,11 @@ module.exports = (handlers = {}) => {
           `只是觉得丸善前辈差不多也要到了该去结婚的年纪了，为什么还在这里呢？`,
         );
         await chara4_talk.say_and_wait(
-          `说起来飞鹰子不是作为偶像的吗？就这样和训练员${me.get_adult_sex_title()}坐在一起不怕有绯闻出现吗？`,
+          `说起来飞鹰子不是作为偶像的吗？就这样和训练员${me.adult_sex_title}坐在一起不怕有绯闻出现吗？`,
         );
         await chara4_talk.say_and_wait(`训练员君，${callname}怎么想的呢？`);
         await falcon.say_and_wait(
-          `不会的哦？如果出现了，干脆直接宣布和训练员${me.get_adult_sex_title()}结婚就好了♪对吧，训练员${me.get_adult_sex_title()}？`,
+          `不会的哦？如果出现了，干脆直接宣布和训练员${me.adult_sex_title}结婚就好了♪对吧，训练员${me.adult_sex_title}？`,
         );
         await era.printAndWait(
           `游仞有余的丸善斯基看着露出了认真态势的${falcon.name}，无形的气浪让周围的人纷纷开始远离。`,
@@ -529,7 +529,7 @@ module.exports = (handlers = {}) => {
       `${falcon.name}的身体向前微倾，右手食指竖在嘴唇中心，眨了眨右眼。`,
     );
     await falcon.say_and_wait(
-      `而且，${falcon.name}想和最喜欢的训练员${me.get_adult_sex_title()}一起登上世界上最大的舞台！`,
+      `而且，${falcon.name}想和最喜欢的训练员${me.adult_sex_title}一起登上世界上最大的舞台！`,
     );
     await falcon.say_and_wait(
       `等到那个时候……飞鹰子……不对，${falcon.name}什么都没说哦⭐`,

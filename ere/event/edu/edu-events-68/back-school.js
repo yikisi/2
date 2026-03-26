@@ -22,9 +22,7 @@ module.exports = async (kita, me, hook, event_object) => {
     return;
   }
   await print_event_name('紧急开店 · 小北按摩！', kita);
-  await kita.say_and_wait(
-    `训练员${me.get_adult_sex_title()}！欢迎光临小北按摩店！`,
-  );
+  await kita.say_and_wait(`训练员${me.adult_sex_title}！欢迎光临小北按摩店！`);
   await era.printAndWait(
     `推开训练员室的门，${me.name} 看到穿着和服的 ${kita.name} 正跪在门后，而身后的训练员室的桌子则被铺上了一块白布。`,
   );
@@ -34,10 +32,10 @@ module.exports = async (kita, me, hook, event_object) => {
     } 目瞪口呆的看着今天应该没有训练任务的${kita.teen_sex_title}。`,
   );
   await kita.say_and_wait(
-    `嘿嘿嘿～为了感谢训练员${me.get_adult_sex_title()}对人家的照顾，也是您最近身体总是嘎吱嘎吱的响。`,
+    `嘿嘿嘿～为了感谢训练员${me.adult_sex_title}对人家的照顾，也是您最近身体总是嘎吱嘎吱的响。`,
   );
   await kita.say_and_wait(
-    `所以……唔，是呢，今天的小北是为您提供临时按摩服务，让训练员${me.get_adult_sex_title()}放松身体的按摩${
+    `所以……唔，是呢，今天的小北是为您提供临时按摩服务，让训练员${me.adult_sex_title}放松身体的按摩${
       kita.sex_code - 1 ? '女将' : '大将'
     }小北哦！`,
   );
@@ -82,7 +80,7 @@ module.exports = async (kita, me, hook, event_object) => {
       `在等待了半分钟后，${kita.name} 纤细有力的手指在 ${me.name} 背后摁压起紧绷的地方。`,
     );
     await kita.say_and_wait(
-      `训练员${me.get_adult_sex_title()}的身体，好紧绷呢……您和${kita.uma_sex_title}不一样，身体要好好的修养哦。`,
+      `训练员${me.adult_sex_title}的身体，好紧绷呢……您和${kita.uma_sex_title}不一样，身体要好好的修养哦。`,
     );
     await era.printAndWait(
       '尽管身体各处传来了嘎吱嘎吱的声响，但除了偶尔的疼痛之外只有舒服的感觉。',

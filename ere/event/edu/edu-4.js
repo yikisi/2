@@ -177,9 +177,7 @@ module.exports = class extends CustomizedEdu {
           await era.printAndWait(
             `虽然是工作日，但人流量还是相当巨大，${me.name}为了防止有人不小心撞到${chara_talk.name}受伤的腿处处小心。`,
           );
-          await era.printAndWait(
-            `${me.get_couple_title()}两个在大楼里看得眼花缭乱。`,
-          );
+          await era.printAndWait(`你们两个在大楼里看得眼花缭乱。`);
           await chara_talk.say_and_wait(
             `诶？现在的潮流我都没有听说过了，难道${
               era.get('cflag:4:性别') - 1 ? '姐姐' : '哥哥'
@@ -329,7 +327,7 @@ module.exports = class extends CustomizedEdu {
       await zensky.say_and_wait(
         `没有理由拒绝${
           zensky.name
-        } 的邀请，于是${me.get_couple_title()}一同走向了暂时停在校外的红色跑车.`,
+        } 的邀请，于是你们一同走向了暂时停在校外的红色跑车.`,
       );
       await zensky.say_and_wait('那么，出发咯！');
       await era.printAndWait(
@@ -1303,7 +1301,7 @@ module.exports = class extends CustomizedEdu {
       await era.printAndWait(
         `${me.actual_name}紧紧地抱住了${
           zensky.sex
-        }，周围的旅客不由得停下了脚步看着${me.get_couple_title()}。`,
+        }，周围的旅客不由得停下了脚步看着你们。`,
       );
       await zensky.say_and_wait(`${me.actual_name}，放开我。`);
       await era.printAndWait(`从未听过的${zensky.name}焦躁的声音。`);

@@ -67,7 +67,7 @@ module.exports = async (urara, me, callname, hook, event_object) => {
 
   await era.printAndWait([
     '阿姨A「别客气嘛，训练员',
-    me.get_adult_sex_title(),
+    me.adult_sex_title,
     '，就当是感谢您的担当陪我家孩子玩了！」',
   ]);
   await era.printAndWait([

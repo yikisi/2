@@ -614,7 +614,7 @@ module.exports = {
       await defender.say_and_wait('唔嗯——！？');
       await attacker.print_and_wait([
         '虽然稍迟了一些，面前的屁股',
-        defender.get_adult_sex_title(),
+        defender.adult_sex_title,
         '很明显察觉到了来自这边的意图，被来自',
         attacker.get_colored_name(),
         '的手指暧昧地凑近过来，用叫身体恰到好处能警惕起来的粗糙质感，沿着那小巧的穴口绕着圈。',

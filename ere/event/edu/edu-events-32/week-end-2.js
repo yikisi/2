@@ -40,9 +40,7 @@ module.exports = (handlers) => {
       ' 提起',
     ]);
     await era.printAndWait([
-      '自从菊花赏结束以来，',
-      me.get_couple_title(),
-      ' 便一直维持着这样在晚上进行训练及指导的关系',
+      '自从菊花赏结束以来，你们便一直维持着这样在晚上进行训练及指导的关系',
     ]);
     await era.printAndWait([
       '原本尴尬的对话，在两个月的接触沟通后也已经渐渐回到了以往的熟悉',
@@ -118,11 +116,7 @@ module.exports = (handlers) => {
       ' 将在有马纪念后马上召开记者会',
     ]);
     await era.printAndWait('宣布回归赛场的消息，也许会造成社会的轩然大波吧');
-    await era.printAndWait([
-      '但这些后续与现在的 ',
-      me.get_couple_title(),
-      ' 两人没有半点关系',
-    ]);
+    await era.printAndWait(['但这些后续与现在的你们两人没有半点关系']);
   };
 
   handlers[95 + 15] = async (tachyon, me, callname, flags) => {
@@ -142,7 +136,7 @@ module.exports = (handlers) => {
     ]);
     await say_by_passer_by_and_wait(tachyon.uma_sex_title + 'A', [
       '啊，速子前……欸，训练员',
-      me.get_adult_sex_title(),
+      me.adult_sex_title,
       '！？',
     ]);
     era.println();
@@ -393,9 +387,7 @@ module.exports = (handlers) => {
     );
     era.println();
     await era.printAndWait([
-      '欢快的脚步声离开，留下 ',
-      me.get_couple_title(),
-      ' 两人继续在寂静的训练场上，星空作伴',
+      '欢快的脚步声离开，留下你们两人继续在寂静的训练场上，星空作伴',
     ]);
     era.println();
     await era.printAndWait([
@@ -784,10 +776,7 @@ module.exports = (handlers) => {
     }
     await print_event_name('换位实验', tachyon);
     await era.printAndWait('于是，愉快的夏日集训时间也过去了');
-    await era.printAndWait([
-      me.get_couple_title(),
-      ' 准备跟着学园的巴士回到学校',
-    ]);
+    await era.printAndWait(['你们准备跟着学园的巴士回到学校']);
     era.println();
     await say_by_passer_by_and_wait(
       tachyon.uma_sex_title + 'A',

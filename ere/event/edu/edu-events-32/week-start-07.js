@@ -583,9 +583,7 @@ module.exports = (handlers) => {
         '或许是温度影响，也或许是谁率先断了这维持不易的连结',
       );
       await era.printAndWait([
-        '巧克力在 ',
-        me.get_couple_title(),
-        ' 两人的口中融化，断裂，进入了两人的口中',
+        '巧克力在你们两人的口中融化，断裂，进入了两人的口中',
       ]);
       era.printButton('「！？」', 1);
       await era.input();
@@ -747,7 +745,7 @@ module.exports = (handlers) => {
       era.drawLine();
       await say_by_passer_by_and_wait('粉丝A', [
         '速子',
-        tachyon.get_adult_sex_title(),
+        tachyon.adult_sex_title,
         '！请问可以和您拍张照吗！',
       ]);
       await tachyon.say_and_wait('呵呵，当然可以了，需要摆什么特殊的姿势吗？');

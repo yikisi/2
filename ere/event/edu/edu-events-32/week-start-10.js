@@ -125,15 +125,9 @@ module.exports = (handlers) => {
         ]);
       }
       era.println();
+      await era.printAndWait(['没过多久，你们走到了商店街中央的圣诞树前']);
       await era.printAndWait([
-        '没过多久，',
-        me.get_couple_title(),
-        ' 走到了商店街中央的圣诞树前',
-      ]);
-      await era.printAndWait([
-        '忽然，一阵狂风，将周围有马纪念的报导吹到了 ',
-        me.get_couple_title(),
-        ' 面前',
+        '忽然，一阵狂风，将周围有马纪念的报导吹到了你们面前',
       ]);
       await era.printAndWait([
         '报纸上是日本杯时的 ',
@@ -213,14 +207,9 @@ module.exports = (handlers) => {
         ]);
       }
       era.println();
+      await era.printAndWait(['最后，你们走到了商店街末尾']);
       await era.printAndWait([
-        '最后，',
-        me.get_couple_title(),
-        ' 走到了商店街末尾',
-      ]);
-      await era.printAndWait([
-        me.get_couple_title(),
-        ' 看见路旁的书店，店内最引人注目的地方，摆放着几本过期的杂志',
+        '你们看见路旁的书店，店内最引人注目的地方，摆放着几本过期的杂志',
       ]);
       await era.printAndWait('过期……也不能这么说');
       await era.printAndWait(
@@ -401,11 +390,7 @@ module.exports = (handlers) => {
       }
       era.println();
       if (edu_marks.chris >= 2) {
-        await era.printAndWait([
-          '不知不觉，',
-          me.get_couple_title(),
-          ' 漫步到了河堤旁',
-        ]);
+        await era.printAndWait(['不知不觉，你们漫步到了河堤旁']);
         await era.printAndWait(
           '昏暗寂静的河岸，与远处商店街的灯火及圣诞歌曲成为对比',
         );

@@ -498,9 +498,7 @@ module.exports = class extends CustomizedDaily {
             await era.printAndWait([
               '结束了 ',
               coffee.get_colored_name(),
-              ' 的话题后 ',
-              me.get_couple_title(),
-              ' 忽然陷入沉默，很快就结束了这一餐',
+              ' 的话题后你们忽然陷入沉默，很快就结束了这一餐',
             ]);
           } else {
             await tachyon.say_and_wait('我？……也就那样吧，没什么特别的。');

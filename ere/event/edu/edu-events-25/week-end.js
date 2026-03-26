@@ -363,9 +363,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
     await era.printAndWait([
       '但赛',
       coffee.uma_sex_title,
-      '的生涯是不可能一直平淡下去的。在回到特雷森后，',
-      me.get_couple_title(),
-      ' 便要开始紧张的 ',
+      '的生涯是不可能一直平淡下去的。在回到特雷森后，你们便要开始紧张的 ',
       race_infos[race_enum.japa_cup].get_colored_name(),
       ' 备战工作了。',
     ]);

@@ -319,7 +319,7 @@ module.exports = (handlers) => {
     await print_event_name('「那个人」的偶遇', urara);
     await in_urara.say_as_unknown_and_wait([
       '啊～是那个人。训练员',
-      me.get_adult_sex_title(),
+      me.adult_sex_title,
       '（您），虽然只是偶然的邂逅，但还请做好准备哦？',
     ]);
     await in_urara.say_as_unknown_and_wait(
@@ -749,9 +749,7 @@ module.exports = (handlers) => {
     await era.printAndWait([
       '外出回程的路上，可能因为是玩得太开心了，',
       urara.get_colored_name(),
-      ' 看起来有点累，于是 ',
-      me.get_couple_title(),
-      ' 便决定就近休息。',
+      ' 看起来有点累，于是你们便决定就近休息。',
     ]);
     await era.printAndWait([
       '坐在附近公园的长椅上，先是花了点时间计划之后要玩什么，随后 ',

@@ -313,9 +313,7 @@ module.exports = (handlers) => {
         ' 呢。',
       ]);
       await era.printAndWait([
-        '于是，',
-        me.get_couple_title(),
-        ' 三人一起开心吃饭，转眼便度过了一段可贵的时光。',
+        '于是，你们三人一起开心吃饭，转眼便度过了一段可贵的时光。',
       ]);
       flags.wait_flag = get_attr_and_print_in_event(30, [0, 0, 10], 0);
     } else {
@@ -350,8 +348,7 @@ module.exports = (handlers) => {
         '。',
       ]);
       await era.printAndWait([
-        me.get_couple_title(),
-        ' 三个人就这样愉快地吃着饭，度过了短暂的休憩时光。',
+        '你们三个人就这样愉快地吃着饭，度过了短暂的休憩时光。',
       ]);
       flags.wait_flag = get_attr_and_print_in_event(30, [0, 0, 0, 10], 0);
     }

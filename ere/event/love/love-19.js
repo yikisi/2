@@ -728,9 +728,7 @@ module.exports = class extends CustomizedLove {
       '不错嘛！居然知道本店还有秘密菜单！',
     ]);
     await era.printAndWait([
-      '一旁拿着漏子制作料理的店长听到，诧异地跟 ',
-      me.get_couple_title(),
-      ' 说了一句。',
+      '一旁拿着漏子制作料理的店长听到，诧异地跟你们说了一句。',
     ]);
     await digital.say_and_wait('秘密菜单？为何？为何我不知道的？');
     await era.printAndWait([

@@ -219,9 +219,7 @@ module.exports = (handlers) => {
       '，我们现在分开找吧——',
     ]);
     await era.printAndWait([
-      '但正当 ',
-      me.get_couple_title(),
-      ' 打算三人分头寻找时，随着脚边的水渍逐渐扩散，雨水突然成群结队地落了下来了。',
+      '但正当你们打算三人分头寻找时，随着脚边的水渍逐渐扩散，雨水突然成群结队地落了下来了。',
     ]);
     await rice.say_and_wait([
       '下雨了！？难、难道都是 ',

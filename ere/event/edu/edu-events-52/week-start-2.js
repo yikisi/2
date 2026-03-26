@@ -211,7 +211,7 @@ module.exports = (handlers) => {
     ]);
     await in_urara.say_as_unknown_and_wait([
       '那么擅长解谜的训练员',
-      me.get_adult_sex_title(),
+      me.adult_sex_title,
       '（您）觉得，近期最适合乌拉拉的活动是——',
     ]);
     era.printButton(
@@ -552,7 +552,7 @@ module.exports = (handlers) => {
       );
       await urara.say_and_wait([
         '那么大灰狼',
-        me.get_adult_sex_title(),
+        me.adult_sex_title,
         '，乌拉拉到底好不好吃呢？',
       ]);
     }

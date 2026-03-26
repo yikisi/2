@@ -26,7 +26,7 @@ module.exports = (handlers) => {
       '至于',
       urara.sex,
       '想要向训练员',
-      me.get_adult_sex_title(),
+      me.adult_sex_title,
       '（您）咨询什么，就请亲自去聆听吧。',
     ]);
     era.drawLine();
@@ -480,7 +480,7 @@ module.exports = (handlers) => {
 
     await in_urara.say_as_unknown_and_wait([
       '……真是突然又关键的咨询，那训练员',
-      me.get_adult_sex_title(),
+      me.adult_sex_title,
       '（您）的意见是？',
     ]);
     era.printButton(

@@ -660,9 +660,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait('所以，正常的交流应该是没问题的');
     await era.printAndWait([
-      '但是这几个月以来，',
-      me.get_couple_title(),
-      ' 的交流几乎就没有一次离开过 ',
+      '但是这几个月以来，你们的交流几乎就没有一次离开过 ',
       coffee.get_colored_name(),
     ]);
     await era.printAndWait('除此之外，再加上合训那时候的事……');

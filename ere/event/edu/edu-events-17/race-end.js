@@ -489,9 +489,7 @@ module.exports = class extends CustomizedEdu {
             `${me.name} 已经不在乎了自己的喉咙会否撕裂了。`,
           );
           await era.printAndWait(
-            `${me.name} 只知道，${
-              chara.name
-            } 正向 ${me.get_couple_title()} 的梦想迎头迈进。`,
+            `${me.name} 只知道，${chara.name} 正向你们的梦想迎头迈进。`,
           );
           await era.printAndWait('很近了！很近了！');
           await era.printAndWait(
@@ -745,7 +743,7 @@ module.exports = class extends CustomizedEdu {
               '？？？「皇帝的征途，已经结束了啊。」',
             );
             await era.printAndWait(
-              `露娜过去忧愁的目光带着迷茫，明明 ${me.get_couple_title()} 的愿望已经达成，${
+              `露娜过去忧愁的目光带着迷茫，明明你们的愿望已经达成，${
                 chara.sex
               }却不知为何如此怅然若失。`,
             );
@@ -856,7 +854,7 @@ module.exports = class extends CustomizedEdu {
         `${me.name} 无助地蹲在地上……${me.name} 知道，自己辜负了露娜的期望。`,
       );
       await era.printAndWait(`${me.name} 没能帮到${chara.sex}。`);
-      await era.printAndWait(`${me.get_couple_title()}输了。`);
+      await era.printAndWait(`你们输了。`);
       if (ret === 2) {
         await handle_debuff(edu_marks, luna);
       }

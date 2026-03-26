@@ -184,9 +184,7 @@ module.exports = class extends CustomizedDaily {
         era.println();
         await era.printAndWait([
           me.get_colored_name(),
-          ' 连声应是，按 ',
-          me.get_couple_title(),
-          ' 约定好的陪',
+          ' 连声应是，按你们约定好的陪',
           teio.sex,
           '出门了……',
         ]);
@@ -429,7 +427,7 @@ module.exports = class extends CustomizedDaily {
       '」',
     ]);
     await era.printAndWait(
-      `笑着对视了一下，${me.get_couple_title()} 便埋头开始享用亲手做出的美味。`,
+      `笑着对视了一下，你们便埋头开始享用亲手做出的美味。`,
     );
   }
 
@@ -461,12 +459,12 @@ module.exports = class extends CustomizedDaily {
       me = get_chara_talk(0),
       relation = era.get(`relation:3:0`);
     if (relation > 150) {
-      await me.say_and_wait(`起来吧，帝王${teio.get_adult_sex_title()}。`);
+      await me.say_and_wait(`起来吧，帝王${teio.adult_sex_title}。`);
       await teio.say_and_wait(`嗯——嗯～`);
       await era.printAndWait(
         `${teio.teen_sex_title}的身躯扑倒在 ${
           me.name
-        } 的身上，${me.get_couple_title()} 两个陷进了沙发里。`,
+        } 的身上，你们两个陷进了沙发里。`,
       );
       await era.printAndWait(
         `吐息产生的气流搔痒着 ${me.name} 的脖颈，${
@@ -539,7 +537,7 @@ module.exports = class extends CustomizedDaily {
         await era.printAndWait(
           `${
             me.name
-          } 犹豫了一下，没有出声，帝王察觉到了什么，有些尴尬地站在原地，然后 ${me.get_couple_title()} 两个决定将此事抛诸脑后。`,
+          } 犹豫了一下，没有出声，帝王察觉到了什么，有些尴尬地站在原地，然后你们两个决定将此事抛诸脑后。`,
         );
     }
   }
@@ -574,10 +572,10 @@ module.exports = class extends CustomizedDaily {
         await era.printAndWait(
           `${me.name} 和 ${
             teio.name
-          } 一起来到了街机厅痛快玩了一段时间，临走前，${me.get_couple_title()} 决定去娃娃机『浪费』掉多余的币。`,
+          } 一起来到了街机厅痛快玩了一段时间，临走前，你们决定去娃娃机『浪费』掉多余的币。`,
         );
         await era.printAndWait(
-          `不过话虽这么说，${me.get_couple_title()} 两个还是比较紧张地操纵着摇杆，再三思考后摁下按钮……`,
+          `不过话虽这么说，你们两个还是比较紧张地操纵着摇杆，再三思考后摁下按钮……`,
         );
         break;
       case 1:
@@ -608,7 +606,7 @@ module.exports = class extends CustomizedDaily {
           await era.printAndWait(
             `不知不觉走到了一家KTV里，在${
               teio.sex
-            }的强烈要求下 ${me.get_couple_title()} 进去享受了一段时光——不过主要都是${
+            }的强烈要求下你们进去享受了一段时光——不过主要都是${
               teio.sex
             }在唱就对了。`,
           );
@@ -650,7 +648,7 @@ module.exports = class extends CustomizedDaily {
         talk_arr.push(
           `${me.name} 和往常一样，带着 ${
             teio.name
-          } ${teio.get_adult_sex_title()}来到了……家庭餐厅。这里的气氛很适合 ${me.get_couple_title()} 呢。`,
+          } ${teio.adult_sex_title}来到了……家庭餐厅。这里的气氛很适合你们呢。`,
           `${me.name} 问了问帝王的意见，小家伙想了好几个地方，又没能真正决定目标，最后还是拜托 ${me.name} 来选……${me.name} 便随便挑了一家口味不错的带${teio.sex}去了。`,
         );
         await era.printAndWait(get_random_entry(talk_arr));
@@ -669,7 +667,7 @@ module.exports = class extends CustomizedDaily {
         await era.printAndWait(
           `${teio.teen_sex_title}的呼声响起，${me.name} 今天第21次奔向${
             teio.sex
-          }的位置。跟${teio.phy_sex_title}逛街本来就是件费力的事，而跟这位${teio.uma_sex_title}${teio.get_adult_sex_title()}一起来商场则更……${
+          }的位置。跟${teio.phy_sex_title}逛街本来就是件费力的事，而跟这位${teio.uma_sex_title}${teio.adult_sex_title}一起来商场则更……${
             me.name
           } 不由得把苦笑挂在了脸上。`,
         );
@@ -701,10 +699,9 @@ module.exports = class extends CustomizedDaily {
 
   async school_rooftop() {
     await get_chara_talk(3).say_and_wait('到这里吃饭意外地有感觉呢！');
-    await era.printAndWait([
-      get_chara_talk(0).get_couple_title(),
-      ' 将食盒摊放在……「天花板」上？一起享受起了美好的午饭时间。',
-    ]);
+    await era.printAndWait(
+      '你们将食盒摊放在……「天花板」上？一起享受起了美好的午饭时间。',
+    );
   }
 
   select() {

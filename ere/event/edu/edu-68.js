@@ -31,7 +31,7 @@ module.exports = class extends CustomizedEdu {
     const kita = get_chara_talk(68),
       me = get_chara_talk(0);
     if (new KitaEduMarks().crazy_fan) {
-      await kita.say_and_wait(`抱歉，训练员${me.get_adult_sex_title()}。`);
+      await kita.say_and_wait(`抱歉，训练员${me.adult_sex_title}。`);
       await era.printAndWait(
         `站在返回家乡的车站，${kita.name} 对 ${me.name} 深深地鞠了一躬。`,
       );
@@ -48,7 +48,7 @@ module.exports = class extends CustomizedEdu {
       era.printButton(`「对不起，小北。」`, 1);
       await era.input();
       await kita.say_and_wait(
-        `不，应该是我对不起您才对，训练员${me.get_adult_sex_title()}是什么错也没有的。`,
+        `不，应该是我对不起您才对，训练员${me.adult_sex_title}是什么错也没有的。`,
       );
       await era.printAndWait(
         `露出惨淡的微笑，${kita.name} 忍不住又一次流下泪来。`,
@@ -63,7 +63,7 @@ module.exports = class extends CustomizedEdu {
         '样貌普普通通，只有结实这一个优点，真是对不起，耽误了您这么长的时间。',
       );
       await kita.say_and_wait(
-        `我会负起责任的，再见了，训练员${me.get_adult_sex_title()}。`,
+        `我会负起责任的，再见了，训练员${me.adult_sex_title}。`,
       );
       await era.printAndWait(
         `登上归乡的巴士，${kita.name} 在嗡嗡作响的手机上说了一句话。`,
@@ -102,7 +102,7 @@ module.exports = class extends CustomizedEdu {
         `有些孩子会偶尔进行通讯，有些则不会，但是每年一如既往地，${kita.name} 会在你也有时间的时候打电话给你。`,
       );
       await kita.say_and_wait(
-        `训练员${me.get_adult_sex_title()}，最近过得怎么样呢？`,
+        `训练员${me.adult_sex_title}，最近过得怎么样呢？`,
       );
       await kita.say_and_wait(
         `新的担当么？会不会很累？毕竟仔细想想的话，小北我那个时候不是一般的听话呢～`,
@@ -121,7 +121,7 @@ module.exports = class extends CustomizedEdu {
       await print_event_name(
         [
           {
-            content: `训练员${me.get_adult_sex_title()}，最近还好么！`,
+            content: `训练员${me.adult_sex_title}，最近还好么！`,
             color: buff_colors[3],
           },
         ],
@@ -146,7 +146,7 @@ module.exports = class extends CustomizedEdu {
       `在神社鸟居旁的角落里，${me.name} 看到了带着滚烫热情的 ${kita.name}，看样子已经等 ${me.name} 等了很久的样子。`,
     );
     await kita.say_and_wait(
-      `训练员${me.get_adult_sex_title()}，新年的一年请您多多指教！诶嘿嘿～`,
+      `训练员${me.adult_sex_title}，新年的一年请您多多指教！诶嘿嘿～`,
     );
     await era.printAndWait(
       `${kita.name} 向 ${me.name} 打了个招呼，哒哒哒地跑了过来，小小的靴子在石板上发出了清脆的响声。`,
@@ -168,7 +168,7 @@ module.exports = class extends CustomizedEdu {
       `聆听着两人安静而单调的脚步声，${me.name} 和 ${kita.name} 踏过八十八节略显圆滑的台阶。`,
     );
     await era.printAndWait(
-      `而在追着迫不及待跑上的${kita.teen_sex_title}走过最后几节台阶后，出现在 ${me.get_couple_title()} 面前的是满是欢声笑语的热闹景象。`,
+      `而在追着迫不及待跑上的${kita.teen_sex_title}走过最后几节台阶后，出现在你们面前的是满是欢声笑语的热闹景象。`,
     );
     await kita.say_and_wait('呜哈哈～就算是东京的神社也和老家的神社差不多啊～');
     await era.printAndWait(
@@ -248,7 +248,7 @@ module.exports = class extends CustomizedEdu {
     await era.printAndWait(
       `在没有课也没有训练计划的某个下午，${me.name} 在食堂旁的侧门处找到了小北。`,
     );
-    await kita.say_and_wait(`啊～训练员${me.get_adult_sex_title()}中午好。`);
+    await kita.say_and_wait(`啊～训练员${me.adult_sex_title}中午好。`);
     await era.printAndWait(
       `小北搬着两箱罐装汽水，尾巴左摇右晃的向这边打了个招呼。`,
     );
@@ -261,13 +261,13 @@ module.exports = class extends CustomizedEdu {
       '啊，这个是食堂小卖部的阿姨搬汽水扭到了腰，所以我想帮她把箱子都搬进去。',
     );
     await kita.say_and_wait(
-      `诶嘿嘿……被训练员${me.get_adult_sex_title()}看到了其他的样子，有点害羞呢……`,
+      `诶嘿嘿……被训练员${me.adult_sex_title}看到了其他的样子，有点害羞呢……`,
     );
     await era.printAndWait(
       `看着 ${me.name} 惊讶的样子，${kita.name}害羞的嘿嘿笑着用箱子挡住了脸。`,
     );
     await kita.say_and_wait(
-      `先不和训练员${me.get_adult_sex_title()}说了，我接着搬箱子了哦。`,
+      `先不和训练员${me.adult_sex_title}说了，我接着搬箱子了哦。`,
     );
     await era.printAndWait(
       `这么说着，小北将几个箱子叠在一块，稳稳当当地顺着侧门走了进去。`,
@@ -327,7 +327,7 @@ module.exports = class extends CustomizedEdu {
         );
         await kita.say_and_wait(`休息么……真不甘心啊……`);
         await kita.say_and_wait(
-          `但是既然训练员${me.get_adult_sex_title()}这么说了，也只能这样了……`,
+          `但是既然训练员${me.adult_sex_title}这么说了，也只能这样了……`,
         );
         await era.printAndWait(
           `${kita.name} 翻身用被子包裹住了自己，闭上眼开始睡觉了。`,
@@ -372,7 +372,7 @@ module.exports = class extends CustomizedEdu {
       await print_event_name(`不过是平平无常的${kita.teen_sex_title}`, kita);
       era.println();
       await kita.say_and_wait(
-        `训练员${me.get_adult_sex_title()}！今天也请您多多指教了！`,
+        `训练员${me.adult_sex_title}！今天也请您多多指教了！`,
       );
       await era.printAndWait(
         `向 ${me.name} 深深鞠了一躬，${kita.name} 小跑着翻过栅栏，像只活泼的小鹿似的跳进跑道里开始了今天的锻炼。`,
@@ -387,7 +387,7 @@ module.exports = class extends CustomizedEdu {
         `仅仅在进入赛道后不到二十分钟的时间，${kita.name} 便完成了预计应是半小时的热身任务。`,
       );
       await kita.say_and_wait(
-        `训练员${me.get_adult_sex_title()}，我热身完了，接下来的计划是什么！？`,
+        `训练员${me.adult_sex_title}，我热身完了，接下来的计划是什么！？`,
       );
       await kita.say_and_wait('是速度训练么？还是耐力训练？这些我都可以哦。');
       await era.printAndWait(
@@ -461,9 +461,9 @@ module.exports = class extends CustomizedEdu {
         `自从出道战之后已经过去了三个半月的时间，${me.name} 和小北在赛道上一如往常地进行着并跑锻炼。`,
       );
       await era.printAndWait(`而今天作为训练的陪同对象是……`);
-      await kita.say_and_wait(`啊，是素质${nature.get_adult_sex_title()}！`);
+      await kita.say_and_wait(`啊，是素质${nature.adult_sex_title}！`);
       await nature.say_and_wait(
-        `呀吼～训练员${me.get_adult_sex_title()}我来了呦～小北久等了么？`,
+        `呀吼～训练员${me.adult_sex_title}我来了呦～小北久等了么？`,
       );
       await era.printAndWait(
         `向这边挥着手慢步跑来，碰巧有时间的素质小姐慵懒地嘿嘿笑着同小北闲聊起来。`,
@@ -475,7 +475,7 @@ module.exports = class extends CustomizedEdu {
         `虽然 ${kita.name} 并没有在泥地赛道奔跑的天赋，但是这样反而能更好的进行训练吧。`,
       );
       await kita.say_and_wait(
-        `今天请多多指教，素质${nature.get_adult_sex_title()}！`,
+        `今天请多多指教，素质${nature.adult_sex_title}！`,
       );
       await nature.say_and_wait(`不要这么认真啦，叫我素质就好了～`);
       await era.printAndWait(
@@ -485,7 +485,7 @@ module.exports = class extends CustomizedEdu {
       await era.printAndWait(`就结果而言，并不乐观。`);
       await nature.say_and_wait(`呜哇～小北 ${me.name} 没事吧～脚还好么？`);
       await kita.say_and_wait(
-        `哈啊哈啊……没…没关系的……素质${nature.get_adult_sex_title()}！`,
+        `哈啊哈啊……没…没关系的……素质${nature.adult_sex_title}！`,
       );
       await nature.say_and_wait(`都说了叫我素质就好……`);
       await era.printAndWait(
@@ -508,9 +508,7 @@ module.exports = class extends CustomizedEdu {
       await era.printAndWait(
         `白色情人节，${me.name} 一大早便在草场跑道上等着${kita.name}。`,
       );
-      await kita.say_and_wait(
-        `训练员${me.get_adult_sex_title()}！到的真早啊～`,
-      );
+      await kita.say_and_wait(`训练员${me.adult_sex_title}！到的真早啊～`);
       await era.printAndWait(`等了没多久，小北便从跑道上踩着草地跑了过来。`);
       await era.printAndWait(
         `呼吸着清新的新鲜空气，${
@@ -518,7 +516,7 @@ module.exports = class extends CustomizedEdu {
         } 看向穿着运动服的${kita.teen_sex_title}，心里怀着小北对礼物还一无所知的些许窃喜，慢步走了上去。`,
       );
       await kita.say_and_wait(
-        `？训练员${me.get_adult_sex_title()}？那一脸奇怪的笑容是怎么回事？`,
+        `？训练员${me.adult_sex_title}？那一脸奇怪的笑容是怎么回事？`,
       );
       await era.printAndWait(
         `像是头警惕的小鹿似的在 ${me.name} 面前停步，${kita.name}小心翼翼地弯下腰，一点一点的靠近。`,
@@ -538,7 +536,7 @@ module.exports = class extends CustomizedEdu {
         `在调笑了小北好一阵后，${me.name} 面带微笑的看着小北拆开包装吃起里面的巧克力。`,
       );
       await kita.say_and_wait(
-        `谢谢训练员${me.get_adult_sex_title()}，我不客气……好酸！这是话梅……啊！口水口水！`,
+        `谢谢训练员${me.adult_sex_title}，我不客气……好酸！这是话梅……啊！口水口水！`,
       );
       await era.printAndWait(
         `在入口的一瞬间，刺激的酸味便让${kita.teen_sex_title}的表情反射性的扭曲起来。`,
@@ -577,7 +575,7 @@ module.exports = class extends CustomizedEdu {
         `虽然妈妈她也是退役下来的赛马娘，身材也非常好啦，但是感觉就是很平常，或者说没有特殊的地方？`,
       );
       await kita.say_and_wait(
-        `啊，不过妈妈她很会唱演歌呢，训练员${me.get_adult_sex_title()}有机会的话可以一起哦。`,
+        `啊，不过妈妈她很会唱演歌呢，训练员${me.adult_sex_title}有机会的话可以一起哦。`,
       );
       await era.printAndWait(
         `听着 ${kita.name} 讲着 ${kita.sex} 和妈妈的日常，${me.name} 开始不知不觉间期待起和小北家人见面的时候。`,
@@ -592,10 +590,10 @@ module.exports = class extends CustomizedEdu {
       await print_event_name('稳健的支持与皋月阴云', kita);
       const teio = get_chara_talk(3);
       await kita.say_and_wait(
-        `训练员${me.get_adult_sex_title()}！表格已经填好了吧！没有错误吧？比如说，比如说名字啊年龄啊……`,
+        `训练员${me.adult_sex_title}！表格已经填好了吧！没有错误吧？比如说，比如说名字啊年龄啊……`,
       );
       await kita.say_and_wait(
-        `啊啊还有两分钟就要开始确认了好吓人！帝王${teio.get_adult_sex_title()}当年也是这样的吗！？`,
+        `啊啊还有两分钟就要开始确认了好吓人！帝王${teio.adult_sex_title}当年也是这样的吗！？`,
       );
       await era.printAndWait(
         `在训练员室里苦恼的来回度步，${kita.name}焦急地翻查着手里的报名表，一副忧心忡忡的样子。`,
@@ -613,7 +611,7 @@ module.exports = class extends CustomizedEdu {
         `坐在沙发上悠闲地喝着蜂蜜特饮，${kita.name} 的偶像 ${teio.name} 晃着两条小腿。`,
       );
       await kita.say_and_wait(
-        `但是，帝王${teio.get_adult_sex_title()}！报名马上就开始了，不第一时间——`,
+        `但是，帝王${teio.adult_sex_title}！报名马上就开始了，不第一时间——`,
       );
       await teio.say_and_wait(
         `但是报名时间是从今天开始的一周左右吧，这么急也是一周后统一审查啊。`,
@@ -622,7 +620,7 @@ module.exports = class extends CustomizedEdu {
         `一边说着，${teio.name} 招手把 ${kita.name} 拉到身边，将蜂蜜特饮塞进自己的小粉丝手里。`,
       );
       await kita.say_and_wait(
-        `好啦～放下心好好休息啦～事情交给训练员${me.get_adult_sex_title()}处理就好。`,
+        `好啦～放下心好好休息啦～事情交给训练员${me.adult_sex_title}处理就好。`,
       );
       await kita.say_and_wait(`唔唔……唔唔唔唔……还是好不安啊……`);
       await era.printAndWait(
@@ -658,13 +656,13 @@ module.exports = class extends CustomizedEdu {
         `而对于${kita.name}来说，夏季合宿也是有效巩固自身力量的最好时间。`,
       );
       await kita.say_and_wait(
-        `呜诶啊！好软的沙滩啊！训练员${me.get_adult_sex_title()}快看快看，我的脚整个都陷进去了诶！`,
+        `呜诶啊！好软的沙滩啊！训练员${me.adult_sex_title}快看快看，我的脚整个都陷进去了诶！`,
       );
       await era.printAndWait(
         `在白色的沙滩上赤着脚踩来踩去，黑色的赛${kita.uma_sex_title}笑着高高举起双手，露出糯米般光滑的腋下。`,
       );
       await kita.say_and_wait(
-        `哈哈，感觉好厉害啊训练员${me.get_adult_sex_title()}！这样的话，感觉怎么样的训练也能忍受了～`,
+        `哈哈，感觉好厉害啊训练员${me.adult_sex_title}！这样的话，感觉怎么样的训练也能忍受了～`,
       );
       await era.printAndWait(
         `看着像是小孩子似的${kita.name}，${me.name} 也忍不住有些想要闹腾起来了。`,
@@ -690,7 +688,7 @@ module.exports = class extends CustomizedEdu {
         `看来要加大日后的训练力度了……${me.name} 在心底里的笔记本上默默记上了一笔。`,
       );
       await kita.say_and_wait(
-        `唔嘿嘿～谢谢你训练员${me.get_adult_sex_title()}，明明是难得的圣诞节还要陪我出来玩。`,
+        `唔嘿嘿～谢谢你训练员${me.adult_sex_title}，明明是难得的圣诞节还要陪我出来玩。`,
       );
       await era.printAndWait(
         `抱着一大盘食物坐在空出的椅子上，${kita.name} 露出不好意思的表情，将可乐递给了 ${me.name}。`,
@@ -767,7 +765,7 @@ module.exports = class extends CustomizedEdu {
           `虽然完全可以理解，毕竟哪有${kita.child_sex_title}子听了这种话还会开心啊……`,
         );
         await kita.say_and_wait(
-          `训练员${me.get_adult_sex_title()}……这可是难得的圣诞节哦，惹我不开心真的可以么？`,
+          `训练员${me.adult_sex_title}……这可是难得的圣诞节哦，惹我不开心真的可以么？`,
         );
         await era.printAndWait(
           `嘟着嘴咔嚓咔嚓地薯条，${kita.name} 仿佛是威胁一样地说着话。`,
@@ -792,7 +790,7 @@ module.exports = class extends CustomizedEdu {
           `但就在 ${me.name} 道歉的时候，小北正偷偷侧过身来看着 ${me.name} 的态度，露出了得意的坏笑。`,
         );
         await era.printAndWait(
-          `在被强行塞了一个汉堡吃证明训练员${me.get_adult_sex_title()}也很适合吃汉堡后，在 ${
+          `在被强行塞了一个汉堡吃证明训练员${me.adult_sex_title}也很适合吃汉堡后，在 ${
             me.name
           } 眼里，小北终于开心的转过神来。`,
         );
@@ -837,13 +835,13 @@ module.exports = class extends CustomizedEdu {
         `其冷酷的表情，满是审视的眼神……不管怎么看这都是黑道啊！骏川小姐 ${me.name} 怎么把他们放进来的啊！？`,
       );
       await kita.say_and_wait(
-        `啊，花山哥，桐生哥，这个人就是我的训练员${me.get_adult_sex_title()}哦～`,
+        `啊，花山哥，桐生哥，这个人就是我的训练员${me.adult_sex_title}哦～`,
       );
       await era.printAndWait(
         `在两位壮汉身后，${me.name} 的担当笑嘻嘻地钻了出来，抱着一纸袋的礼物替 ${me.name} 介绍起来。`,
       );
       await kita.say_and_wait(
-        `训练员${me.get_adult_sex_title()}，这就是我和你说过的花山哥和桐生哥哦。`,
+        `训练员${me.adult_sex_title}，这就是我和你说过的花山哥和桐生哥哦。`,
       );
       await kita.say_and_wait(
         `嘻嘻，虽然表情凶了点，但是都是和小北我关系很好的好人，所以不要害怕哦。`,
@@ -862,7 +860,7 @@ module.exports = class extends CustomizedEdu {
         `在吃过火锅又聊了几个小时的黑道传奇历史之后，${me.name} 和小北一起看着两位黑道大哥走向校门。`,
       );
       await era.printAndWait(
-        `……并且给路边坐在亭子里的骏川${kita.get_adult_sex_title()}深深地鞠了一躬。`,
+        `……并且给路边坐在亭子里的骏川${kita.adult_sex_title}深深地鞠了一躬。`,
       );
       await era.printAndWait(
         `最后那个就当做没有看到吧，${me.name} 一边这样想着，一边转身享受起这美好的一夜。`,
@@ -879,14 +877,12 @@ module.exports = class extends CustomizedEdu {
       await era.printAndWait(
         `虽然是需要赠送巧克力的节日，不过打开门的时候却发现小北少见的打扮了一番。`,
       );
-      await kita.say_and_wait(
-        `啊！训练员${me.get_adult_sex_title()}，已经来了么！`,
-      );
+      await kita.say_and_wait(`啊！训练员${me.adult_sex_title}，已经来了么！`);
       await era.printAndWait(
         `穿着昂贵和服的 ${kita.name} 慌慌张张地摆好桌子，对着 ${me.name} 紧张地深深鞠了一躬。`,
       );
       await kita.say_and_wait(
-        `训练员${me.get_adult_sex_title()}，情人节快乐！那个，这个，这个！是小北我上供给训练员的礼物，请您笑纳！`,
+        `训练员${me.adult_sex_title}，情人节快乐！那个，这个，这个！是小北我上供给训练员的礼物，请您笑纳！`,
       );
       era.println();
       era.printButton(`「礼物么？谢谢你小北。」`, 1);
@@ -898,7 +894,7 @@ module.exports = class extends CustomizedEdu {
         `而在盒子的小格子里，还能隐约看到无色透明的液体……是甜酒啊！`,
       );
       await kita.say_and_wait(
-        `呜呜……虽然是想要给训练员${me.get_adult_sex_title()}一个惊喜的，但是不知道为什么巧克力全碎掉了……`,
+        `呜呜……虽然是想要给训练员${me.adult_sex_title}一个惊喜的，但是不知道为什么巧克力全碎掉了……`,
       );
       await era.printAndWait(
         `看到盒子里的样子，早已知道这副惨样的 ${kita.name} 露出了不安的表情。`,

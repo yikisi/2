@@ -75,9 +75,9 @@ module.exports = (handlers) => {
     ]);
     await say_by_passer_by('记者A', [
       '红宝石',
-      ruby.get_adult_sex_title(),
+      ruby.adult_sex_title,
       '、训练员',
-      me.get_adult_sex_title(),
+      me.adult_sex_title,
       '，非常抱歉。我有向工作人员传达拒绝那位的访问。',
     ]);
     era.printButton('「因为没能拒绝所以也没办法。」', 1);

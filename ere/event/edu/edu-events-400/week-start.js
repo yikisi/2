@@ -246,9 +246,7 @@ module.exports = (handlers) => {
     }
     await print_event_name('愉快而炎热的夏日之初', ss);
     await era.printAndWait([
-      '一望无际的海平面与蔚蓝的海水让 ',
-      me.get_couple_title(),
-      ' 感觉到心旷神怡。',
+      '一望无际的海平面与蔚蓝的海水让你们感觉到心旷神怡。',
     ]);
     await ss.say_and_wait([
       '唔，我还没有在海滩上尝试过训练呢，',

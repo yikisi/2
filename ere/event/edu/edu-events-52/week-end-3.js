@@ -297,7 +297,7 @@ module.exports = (handlers) => {
     const ret = [0, 0];
     await in_urara.say_as_unknown_and_wait([
       '话虽如此，该做的引导还是会做吧？这样的话，训练员',
-      me.get_adult_sex_title(),
+      me.adult_sex_title,
       '（您）……',
     ]);
     era.printButton(

@@ -169,7 +169,7 @@ module.exports = class extends Edu3UntilRaceEnd {
       await era.printAndWait(
         `训练刚刚结束，${
           me.name
-        } 和担当一起慢悠悠地散步在回宿舍的路上。${teio.uma_sex_title}${teio.get_adult_sex_title()}此时正甩了甩头，激烈运动导致头发散下，几滴汗珠飞射出来，隐约能看见全身蒸腾的热气。`,
+        } 和担当一起慢悠悠地散步在回宿舍的路上。${teio.uma_sex_title}${teio.adult_sex_title}此时正甩了甩头，激烈运动导致头发散下，几滴汗珠飞射出来，隐约能看见全身蒸腾的热气。`,
       );
       await teio.say_and_wait('嗯？训练员？你说什么？');
       era.println();
@@ -214,7 +214,7 @@ module.exports = class extends Edu3UntilRaceEnd {
       era.printButton('「当然」', 1);
       await era.input();
 
-      await era.printAndWait(`${me.get_couple_title()} 一同，向目标位置走去——`);
+      await era.printAndWait(`你们一同，向目标位置走去——`);
       wait_flag = sys_like_chara(3, 0, 10, true, 1) || wait_flag;
       wait_flag =
         get_attr_and_print_in_event(3, [35, 0, 35, 0, 0], 0, [350]) ||

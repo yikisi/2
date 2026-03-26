@@ -24,7 +24,7 @@ module.exports = (handlers) => {
     await print_event_name('应援会！？', urara);
     await in_urara.say_as_unknown_and_wait([
       '或许不太准确，但训练员',
-      me.get_adult_sex_title(),
+      me.adult_sex_title,
       '（您）与乌拉拉，确实跨越了不曾想象的过去。',
     ]);
     await in_urara.say_as_unknown_and_wait(
@@ -173,7 +173,7 @@ module.exports = (handlers) => {
 
     in_urara.say_as_unknown([
       '呃？这个……训练员',
-      me.get_adult_sex_title(),
+      me.adult_sex_title,
       '（您）怎么说呢——',
     ]);
     era.printButton(
@@ -341,7 +341,7 @@ module.exports = (handlers) => {
     );
     await in_urara.say_as_unknown_and_wait([
       '不过因为经历所致，训练员',
-      me.get_adult_sex_title(),
+      me.adult_sex_title,
       '（您）其实没太意外。',
     ]);
     await in_urara.say_as_unknown_and_wait('……');

@@ -171,9 +171,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
       me.get_colored_name(),
       ' 无法说服 ',
       coffee.get_colored_name(),
-      ' 放弃远征。最后，',
-      me.get_couple_title(),
-      ' 决定先保留国内目标 ',
+      ' 放弃远征。最后，你们决定先保留国内目标 ',
       race_infos[race_enum.takz_kin].get_colored_name(),
       '，至于是否前往法国远征，则等到下个月中旬再做出决定。',
     ]);
@@ -258,9 +256,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
       '。那里……就相当于我们的法国了对吧……',
     ]);
     await era.printAndWait([
-      '作为无法实现的梦想的延续，11月的东京便是 ',
-      me.get_couple_title(),
-      ' 的巴黎。',
+      '作为无法实现的梦想的延续，11月的东京便是你们的巴黎。',
     ]);
     if (check_tachyon_plan_b()) {
       const t_call_c = sys_get_colored_callname(32, 25),
@@ -408,9 +404,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
     await era.printAndWait([
       '就用这最后的 ',
       race_infos[race_enum.arim_kin].get_colored_name(),
-      '，检验 ',
-      me.get_couple_title(),
-      ' 这三年来的成就吧。',
+      '，检验你们这三年来的成就吧。',
     ]);
     extra_flag.attr_change = new Array(5).fill(10);
     extra_flag.pt_change = 45;
@@ -592,9 +586,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
       await coffee.say_and_wait('是你……激励了朋友。是你……激励了我。');
       await coffee.say_and_wait('让我到达了，一个人绝对无法触及的……高度……');
       await era.printAndWait([
-        '朋友究竟是什么，',
-        me.get_couple_title(),
-        ' 似乎终于看到了答案的曙光。',
+        '朋友究竟是什么，你们似乎终于看到了答案的曙光。',
       ]);
       await era.printAndWait('朋友既不是善、也不是恶，因为——');
       await coffee.say_and_wait('我想还会变得更快吧……朋友……');
@@ -612,8 +604,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
         ' 一起追逐着朋友的背影，不断前行吧。',
       ]);
       await era.printAndWait([
-        me.get_couple_title(),
-        ' 并肩仰望着天空，细细体会着，两人的这个目标是多么珍贵且无边无际……',
+        '你们并肩仰望着天空，细细体会着，两人的这个目标是多么珍贵且无边无际……',
       ]);
       extra_flag.attr_change = new Array(5).fill(10);
       extra_flag.pt_change = 45;

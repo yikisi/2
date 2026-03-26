@@ -560,7 +560,7 @@ module.exports = class extends Love52UntilFuckBuddy {
         '面对安静等待着的 ',
         urara.get_colored_name(),
         '，训练员 ',
-        me.get_adult_sex_title(),
+        me.adult_sex_title,
         '（您）当时的选择是——',
       ]);
       era.printButton(`抱住 ${urara.name}`, 1);

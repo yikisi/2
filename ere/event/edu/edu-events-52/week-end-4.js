@@ -42,7 +42,7 @@ module.exports = (handlers) => {
     if (RaceHistory.get(52).get_result(47 + 48)) {
       await in_urara.say_as_unknown_and_wait([
         '请记住我最后的，训练员',
-        me.get_adult_sex_title(),
+        me.adult_sex_title,
         '（您）',
       ]);
       return;
@@ -58,7 +58,7 @@ module.exports = (handlers) => {
     );
     await in_urara.say_as_unknown_and_wait([
       '主动追寻的未来，该是什么颜色的梦想呢？训练员',
-      me.get_adult_sex_title(),
+      me.adult_sex_title,
       '（您）会知道答案吗？',
     ]);
     await in_urara.say_as_unknown_and_wait([

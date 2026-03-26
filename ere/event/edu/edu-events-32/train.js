@@ -244,9 +244,7 @@ async function incomplete_combustion(tachyon, me, callname, edu_marks) {
       ' 怀中',
     ]);
     await era.printAndWait([
-      '此时 ',
-      me.get_couple_title(),
-      ' 二人看上去的模样哪里像是正常训练中的训练员及',
+      '此时你们二人看上去的模样哪里像是正常训练中的训练员及',
       tachyon.uma_sex_title,
       '，倒不如说是扑在男友怀中的撒娇女友，及温柔的将',
       tachyon.sex,
@@ -271,9 +269,7 @@ async function incomplete_combustion(tachyon, me, callname, edu_marks) {
       ' 变回了听话的豚鼠',
     ]);
     await era.printAndWait([
-      '于是，',
-      me.get_couple_title(),
-      ' 两人在周围',
+      '于是，你们两人在周围',
       tachyon.uma_sex_title,
       '们的半是佩服半是羡慕的目光中，缓缓走回了实验室',
     ]);
@@ -674,9 +670,7 @@ module.exports = async () => {
             ]);
             era.println();
             await era.printAndWait([
-              '正当 ',
-              me.get_couple_title(),
-              ' 两人都觉得这场无聊的战争大概还得持续个十几二十分钟时，神奇的事情发生了',
+              '正当你们两人都觉得这场无聊的战争大概还得持续个十几二十分钟时，神奇的事情发生了',
             ]);
             await era.printAndWait([
               '彷彿被什么未知的力量所附身一般，于 ',

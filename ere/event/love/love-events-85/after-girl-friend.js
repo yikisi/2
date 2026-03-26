@@ -24,11 +24,7 @@ module.exports = class extends Love85UtilGirlFriend {
    */
   async delicious(ruby, me) {
     await print_event_name('美食', ruby);
-    await era.printAndWait([
-      '不止怎的，',
-      me.get_couple_title(),
-      ' 突然说到饮食上来了。',
-    ]);
+    await era.printAndWait(['不止怎的，你们突然说到饮食上来了。']);
     await era.printAndWait([
       '于是，',
       me.get_colored_name(),
@@ -92,10 +88,7 @@ module.exports = class extends Love85UtilGirlFriend {
       ' 出了主馆。',
     ]);
     await era.printAndWait([
-      me.get_couple_title(),
-      ' 沿着一条石头小径走着，这是通往庄园的路，但 ',
-      me.get_couple_title(),
-      ' 只是随便走走。',
+      '你们沿着一条石头小径走着，这是通往庄园的路，但你们只是随便走走。',
     ]);
     await era.printAndWait([
       ruby.get_colored_name(),
@@ -261,9 +254,7 @@ module.exports = class extends Love85UtilGirlFriend {
     ]);
     await era.printAndWait([
       ruby.get_colored_name(),
-      ' 有些困了，',
-      me.get_couple_title(),
-      ' 俩裹着厚厚的被子，在大床上相互拥抱。',
+      ' 有些困了，你们俩裹着厚厚的被子，在大床上相互拥抱。',
     ]);
     await era.printAndWait([
       me.get_colored_name(),
@@ -548,9 +539,7 @@ module.exports = class extends Love85UtilGirlFriend {
     await era.printAndWait([
       '尽管如此，',
       ruby.get_colored_name(),
-      ' 捧起沾着 ',
-      me.get_couple_title(),
-      ' 两人味道的清水泼在身上的动作还是优雅可爱。',
+      ' 捧起沾着你们两人味道的清水泼在身上的动作还是优雅可爱。',
     ]);
     await era.printAndWait([
       me.get_colored_name(),
@@ -790,9 +779,7 @@ module.exports = class extends Love85UtilGirlFriend {
         ' 的怀抱。',
       ]);
       await era.printAndWait([
-        '随后，',
-        me.get_couple_title(),
-        ' 清理了足够引人遐想的痕迹，快速互相清洗干净。',
+        '随后，你们清理了足够引人遐想的痕迹，快速互相清洗干净。',
       ]);
       await quick_make_love(
         new EroParticipant(0, part_enum.mouth),

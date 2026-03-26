@@ -80,7 +80,7 @@ module.exports = (handlers) => {
       '啊哈哈……',
       acute.get_colored_name(),
       '，这话千万别当着骏川',
-      acute.get_adult_sex_title(),
+      acute.adult_sex_title,
       '的面说，我会死的。',
     ]);
     await era.printAndWait([

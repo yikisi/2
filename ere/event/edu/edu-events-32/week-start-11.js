@@ -361,9 +361,7 @@ module.exports = (handlers) => {
           '……这种妄想，当然是不存在的',
         ]);
         await era.printAndWait([
-          '在毕业典礼结束后就没有人进入过的这间教室，还维持着 ',
-          me.get_couple_title(),
-          ' 最后一次使用时的样貌',
+          '在毕业典礼结束后就没有人进入过的这间教室，还维持着你们最后一次使用时的样貌',
         ]);
         await era.printAndWait([
           '放置在实验桌上的空试管、里面液体已经干枯的烧瓶，以及桌上的红茶污渍，岁月的痕迹勾起了 ',
@@ -393,9 +391,7 @@ module.exports = (handlers) => {
           me.get_colored_name(),
           ' 的刹那，露出了一如往常的笑容，笑容明媚到 ',
           me.get_colored_name(),
-          ' 产生了一种错觉，仿佛 ',
-          me.get_couple_title(),
-          ' 之间什么也没改变',
+          ' 产生了一种错觉，仿佛你们之间什么也没改变',
         ]);
         await era.printAndWait(
           '也是啊，既然已经毕业，那么这里的实验器具等，当然也必须搬走了',
@@ -621,9 +617,7 @@ module.exports = (handlers) => {
           '而言早就不算什么了，',
         ]);
         await era.printAndWait([
-          '或者说，以 ',
-          me.get_couple_title(),
-          ' 当初的测量，现在的',
+          '或者说，以你们当初的测量，现在的',
           tachyon.sex,
           '应该早就已经抵达',
           tachyon.uma_sex_title,

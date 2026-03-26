@@ -159,14 +159,14 @@ module.exports = (handlers = {}) => {
     await print_event_name(`莫桑石`, falcon);
     // 纵使失约，纵使内心陷入疯狂，// 既然作为偶像就要认真回应粉丝的期待
     await era.printAndWait(
-      `送走训练员${me.get_adult_sex_title()}后，醒目飞鹰独自坐在训练室的沙发上。`,
+      `送走训练员${me.adult_sex_title}后，醒目飞鹰独自坐在训练室的沙发上。`,
     );
     await era.printAndWait(`将天真无邪的面具摘下，享受着宁静的瞬间。`);
     await falcon.say_and_wait(`……`);
     await era.printAndWait(`特雷森的夜晚比想象中还要安静。`);
     await falcon.say_and_wait(`说起来`);
     falcon.print(
-      `等到东京大赏结束之后，与训练员${me.get_adult_sex_title()}之间的契约就结束了。`,
+      `等到东京大赏结束之后，与训练员${me.adult_sex_title}之间的契约就结束了。`,
     );
     falcon.print(
       `虽然根据情形可以向理事长申请续约，但不知为什么，总是提不起干劲。`,
@@ -179,7 +179,7 @@ module.exports = (handlers = {}) => {
       `视野顺着白色丝绸的延展的方向落下，幻想的尽头是冰冷的黑色固体。`,
     );
     falcon.print(
-      `……因为使用过于频繁而提前完成了使命的麦克风${me.get_adult_sex_title()}吗。`,
+      `……因为使用过于频繁而提前完成了使命的麦克风${me.adult_sex_title}吗。`,
     );
     await falcon.say_and_wait(`你 也完成了自己的使命呢。`);
     falcon.print(`黑色固体默不作声的看着自己。`);
@@ -188,12 +188,12 @@ module.exports = (handlers = {}) => {
     await falcon.say_and_wait(`……是啊，飞鹰子已经什么都没有了。`);
     await falcon.say_and_wait(`想要握住两件互不相容的事物，最后却全部失去了。`);
     await falcon.say_and_wait(
-      `为了调整与粉丝之间的关系，将对训练员${me.get_adult_sex_title()}的恋心深深埋在心底。`,
+      `为了调整与粉丝之间的关系，将对训练员${me.adult_sex_title}的恋心深深埋在心底。`,
     );
     await falcon.say_and_wait(
       `尽管如此，对一直支持飞鹰子的粉丝大家们，存在裂纹的钻石无论如何都无法比拟之前的光彩。`,
     );
-    falcon.print(`我认真的回答着麦克风${me.get_adult_sex_title()}的问题。`);
+    falcon.print(`我认真的回答着麦克风${me.adult_sex_title}的问题。`);
     falcon.print(
       `纵使期望最后以无法承受的代价实现，我也想站在舞台之上，亲眼见证那个瞬间的诞生。`,
     );
@@ -265,7 +265,7 @@ module.exports = (handlers = {}) => {
     await era.printAndWait(
       `轻轻打开门锁，却看见了散着头发的栗色${falcon.uma_sex_title}。`,
     );
-    await falcon.say_and_wait(`……训练员${me.get_adult_sex_title()}。`);
+    await falcon.say_and_wait(`……训练员${me.adult_sex_title}。`);
     await me.say_and_wait(`先进来。`);
     await era.printAndWait(
       `你 从挂钩上取下毛巾递给了${falcon.name}，然后关上了门。`,
@@ -432,7 +432,7 @@ module.exports = (handlers = {}) => {
     );
     await era.printAndWait(`尽管如此，你 依然尊重${falcon.sex}的决定。`);
     await me.say_and_wait(`晚安`);
-    await falcon.say_and_wait(`训练员${me.get_adult_sex_title()}晚安。`);
+    await falcon.say_and_wait(`训练员${me.adult_sex_title}晚安。`);
     await era.printAndWait(`等到中断的思绪再次恢复时，忽然发现自己已经在。`);
     await era.printAndWait(`像是从遥远的地方一样传来的微弱声音。`);
     await me.say_and_wait(`不，怎么会。`);
@@ -443,10 +443,10 @@ module.exports = (handlers = {}) => {
     await me.say_and_wait(`所以，飞鹰子不用害怕。`);
     era.printButton(`抉择之时，我会推你 一把`, 1);
     await era.input();
-    await falcon.say_and_wait(`……训练员${me.get_adult_sex_title()}。`);
+    await falcon.say_and_wait(`……训练员${me.adult_sex_title}。`);
     await era.printAndWait(`${me.actual_name}紧紧握住了${falcon.name}伸出的手`);
     await falcon.say_and_wait(
-      `训练员${me.get_adult_sex_title()}一定要记住今天说的话呦？`,
+      `训练员${me.adult_sex_title}一定要记住今天说的话呦？`,
     );
     await me.say_and_wait(`嗯，已经记住了。`);
     await era.printAndWait(

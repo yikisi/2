@@ -44,7 +44,7 @@ module.exports = class extends Edu3UntilWeekEnd {
         `${me.name} 把大锅炖菜搬到桌上，${teio.sex}一听开饭便一下子溜了过来，端坐在椅子上，顺便帮 ${me.name} 分好了餐具。`,
       );
       await era.printAndWait(
-        `${me.get_couple_title()} 一起开心地享用了一顿新年晚宴。温馨欢乐的气氛让 ${
+        `你们一起开心地享用了一顿新年晚宴。温馨欢乐的气氛让 ${
           me.name
         } 不禁觉得与${teio.sex}一起，就像一个小家一样。`,
       );
@@ -87,7 +87,7 @@ module.exports = class extends Edu3UntilWeekEnd {
     } else if (event_arg === 47 + 12) {
       await print_event_name('记者招待会', teio);
       await era.printAndWait(
-        `被灯光和话筒所围绕，镜头前的每个人都用混杂着好奇和饥渴的眼神注视着 ${me.get_couple_title()}。${
+        `被灯光和话筒所围绕，镜头前的每个人都用混杂着好奇和饥渴的眼神注视着你们。${
           me.name
         } 看了看旁边的小${teio.uma_sex_title}，${
           teio.sex
@@ -229,7 +229,7 @@ module.exports = class extends Edu3UntilWeekEnd {
           `虽然 ${me.name} 和东海帝王已经宣布了将要避战的消息，不过粉丝们的热情还是一如既往。`,
         );
         await era.printAndWait(
-          `听到了腿伤的理由后都纷纷表示理解，并对 ${me.get_couple_title()} 送上了祝福。`,
+          `听到了腿伤的理由后都纷纷表示理解，并对你们送上了祝福。`,
         );
         await era.printAndWait(`帝王的神情看来也回复了以前朝气的样子……`);
         await era.printAndWait(
@@ -238,7 +238,7 @@ module.exports = class extends Edu3UntilWeekEnd {
       } else {
         await era.printAndWait(`临上台前，${me.name} 再度帮助帝王梳理着毛发。`);
         await era.printAndWait(
-          `其实今天已经做了好几遍类似的动作，不过，${me.get_couple_title()} 都默契地没人点破，或许这也是梳理内心的方式。`,
+          `其实今天已经做了好几遍类似的动作，不过，你们都默契地没人点破，或许这也是梳理内心的方式。`,
         );
         await era.printAndWait(
           '踏入场中，面对着不远而来的众多粉丝，帝王又向往常一样展露出自信的模样，即兴的帝王舞步 · 改让现场气氛活跃至极。',

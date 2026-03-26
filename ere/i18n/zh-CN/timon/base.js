@@ -561,7 +561,7 @@ module.exports = {
           '在 ',
           you.get_colored_name(),
           ' 以为会大打出手时，',
-          chara.get_couple_title(),
+          chara.couple_title,
           '竟然握手言和了……',
         ]);
       } else {

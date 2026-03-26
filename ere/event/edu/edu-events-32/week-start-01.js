@@ -368,8 +368,7 @@ module.exports = (handlers) => {
             '没事的……这个药的药效最多也就一个小时……只要撑过一个小时就……',
           );
           await era.printAndWait([
-            me.get_couple_title(),
-            ' 没有再多说什么，',
+            '你们没有再多说什么，',
             me.get_colored_name(),
             ' 和瘫软着身子坐在地上的',
             tachyon.sex,

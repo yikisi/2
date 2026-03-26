@@ -507,7 +507,7 @@ module.exports = class extends CustomizedDaily {
     ]);
     await say_by_passer_by(`神主`, [
       '哎呀，您不是红宝石',
-      ruby.get_adult_sex_title(),
+      ruby.adult_sex_title,
       '吗。感谢您的参拜。',
     ]);
     await ruby.say_and_wait(`神主大人。接下来正要去事务性问候。`);

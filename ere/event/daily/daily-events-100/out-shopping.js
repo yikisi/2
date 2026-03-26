@@ -227,9 +227,7 @@ module.exports = async (hook) => {
             ' 给人的感觉就对这种道具非常的熟练啊——',
           ]);
           era.printButton(
-            '「请不要说这种会被骏川' +
-              acute.get_adult_sex_title() +
-              '盯上的话。」',
+            '「请不要说这种会被骏川' + acute.adult_sex_title + '盯上的话。」',
             1,
           );
           await era.input();
@@ -237,7 +235,7 @@ module.exports = async (hook) => {
             '嗯姆？为什么会被 ',
             {
               color: get_chara_color(301),
-              content: `骏川${acute.get_adult_sex_title()}`,
+              content: `骏川${acute.adult_sex_title}`,
               fontWeight: 'bold',
             },
             ' 盯上呢？',
@@ -249,7 +247,7 @@ module.exports = async (hook) => {
             '姑且在没有解释「为什么会被 ',
             {
               color: get_chara_color(301),
-              content: `骏川${acute.get_adult_sex_title()}`,
+              content: `骏川${acute.adult_sex_title}`,
               fontWeight: 'bold',
             },
             ' 盯上」的情况下将这个糊弄了过去。',

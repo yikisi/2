@@ -138,12 +138,12 @@ module.exports = class extends CustomizedEdu {
         `${me.name} 也穿上一件不起眼的衣服，把衣领竖起来随意遮了遮脸，再加一顶鸭舌帽，ok。`,
       );
       await era.printAndWait(
-        `${me.get_couple_title()} 就像两个蹩脚的特工一样遮掩住了自己的身份，走上街头。`,
+        `你们就像两个蹩脚的特工一样遮掩住了自己的身份，走上街头。`,
       );
       await era.printAndWait(
         `——完成三冠后，${teio.name} 的知名度越来越高了，当然，${
           me.name
-        } 的知名度也随之水涨船高。现在如果不加以遮掩的话，${me.get_couple_title()} 往往出现在人流量大的地方就会被粉丝们团团包围，什么都干不成了。`,
+        } 的知名度也随之水涨船高。现在如果不加以遮掩的话，你们往往出现在人流量大的地方就会被粉丝们团团包围，什么都干不成了。`,
       );
       await era.printAndWait(
         '所以，像这种前置工作，是必须的。但准备往往不能应付所有场面，比如——',
@@ -161,7 +161,7 @@ module.exports = class extends CustomizedEdu {
       await era.printAndWait(
         `被 ${
           me.name
-        } 护在内测的${teio.uma_sex_title}${teio.get_adult_sex_title()}，瞬间发劲，疾冲出去。`,
+        } 护在内测的${teio.uma_sex_title}${teio.adult_sex_title}，瞬间发劲，疾冲出去。`,
       );
       await era.printAndWait('司机仰背，把刹车踩到极限，绝望地闭上双眼。');
       await era.printAndWait('然后奇迹发生了。');
@@ -202,7 +202,7 @@ module.exports = class extends CustomizedEdu {
       era.println();
 
       await era.printAndWait(
-        `众人的呼声一浪高过一浪，不少人闻讯而来向 ${me.get_couple_title()} 这边靠近。${me.get_couple_title()} 顿时觉得有些手脚无措。不过 ${
+        `众人的呼声一浪高过一浪，不少人闻讯而来向你们这边靠近。你们顿时觉得有些手脚无措。不过 ${
           me.name
         } 看了一眼帝王，${teio.teen_sex_title}的脸红彤彤的，但也没有明确表示出反感——看来名声总是能让人，或${teio.uma_sex_title}高兴的吧。`,
       );
@@ -250,14 +250,14 @@ module.exports = class extends CustomizedEdu {
       era.println();
 
       await teio.say_and_wait(
-        `抱歉大家，我们还有事先行一步，感谢大家对我们的厚爱和支持，让我们等到赛场上再见吧。训～练～员～跟帝王${teio.get_adult_sex_title()}出发吧？`,
+        `抱歉大家，我们还有事先行一步，感谢大家对我们的厚爱和支持，让我们等到赛场上再见吧。训～练～员～跟帝王${teio.adult_sex_title}出发吧？`,
       );
       era.println();
 
       era.print(`${me.name} 顿感有些哭笑不得，只好回复——`);
       era.printButton('「侍于无敌的帝王大人身旁，是在下的使命」（智力+30）', 1);
       era.printButton(
-        `「竭尽所能，我的${teio.get_adult_sex_title()}」（随机三项属性+15）`,
+        `「竭尽所能，我的${teio.adult_sex_title}」（随机三项属性+15）`,
         2,
       );
       const ret = await era.input();

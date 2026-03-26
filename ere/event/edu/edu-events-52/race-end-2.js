@@ -303,7 +303,7 @@ module.exports = (handlers) => {
     era.drawLine();
     await in_urara.say_as_unknown_and_wait([
       '就这样，训练员',
-      me.get_adult_sex_title(),
+      me.adult_sex_title,
       '（您）与 ',
       urara.get_colored_name(),
       ' 决定好了下次的参赛目标。',
@@ -757,7 +757,7 @@ module.exports = (handlers) => {
     await in_urara.say_as_unknown_and_wait('可以和我随便聊一聊吗？');
     await in_urara.say_as_unknown_and_wait([
       '说起来，训练员',
-      me.get_adult_sex_title(),
+      me.adult_sex_title,
       '（您）很清楚吧，',
       urara.uma_sex_title,
       '在奔跑中积累下的损伤是难医治。',

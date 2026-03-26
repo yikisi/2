@@ -56,9 +56,7 @@ module.exports = (handlers) => {
     await daiya.say_and_wait(
       '……我要用这双脚继续奔跑、跑赢比赛，再继续赢下去。一定要完成里见家的宿愿！',
     );
-    await era.printAndWait(
-      `${me.get_couple_title()} 跟着散场的人潮，从赛场慢慢走向车站。`,
-    );
+    await era.printAndWait(`你们跟着散场的人潮，从赛场慢慢走向车站。`);
     await say_by_passer_by_and_wait(
       '观众C',
       `那个叫里见光钻的赛${daiya.uma_sex_title}，${
@@ -258,7 +256,7 @@ module.exports = (handlers) => {
     if (extra_flag.rank === 1) {
       const reporter = get_chara_talk(303);
       await reporter.say_and_wait(
-        `里见光钻${daiya.get_adult_sex_title()}，恭喜你！请问你成为德比赛${daiya.uma_sex_title}的感想是？`,
+        `里见光钻${daiya.adult_sex_title}，恭喜你！请问你成为德比赛${daiya.uma_sex_title}的感想是？`,
       );
       await daiya.say_and_wait(
         `……谢谢。能够在赛${daiya.uma_sex_title}的历史上留下自己的名字，我感到很光荣。`,
@@ -271,7 +269,7 @@ module.exports = (handlers) => {
         '是的，这是当然的。但我想，大家也会叮咛我不可骄傲自满吧。',
       );
       await reporter.say_and_wait(
-        `哎呀！不过也正是这种严谨的上进心，才能将里见光钻${daiya.get_adult_sex_title()}培养得如此坚强吧！`,
+        `哎呀！不过也正是这种严谨的上进心，才能将里见光钻${daiya.adult_sex_title}培养得如此坚强吧！`,
       );
       await daiya.say_and_wait('是的，集团的大家总是督促我要更加进步。');
       await daiya.say_and_wait(
@@ -717,7 +715,7 @@ module.exports = (handlers) => {
       era.printButton('「呃……光钻！？」', 1);
       await era.input();
       await era.printAndWait(
-        `下一场比赛，不，甚至连资深级的参赛方针，${me.get_couple_title()} 都还没有讨论过。`,
+        `下一场比赛，不，甚至连资深级的参赛方针，你们都还没有讨论过。`,
       );
       await era.printAndWait(
         `然而，里见光钻在看了 ${me.name} 一眼之后，又朝着观众席再重复了一次。`,

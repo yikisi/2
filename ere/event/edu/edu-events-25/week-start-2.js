@@ -33,9 +33,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
     await era.printAndWait([
       '在与 ',
       coffee.get_colored_name(),
-      ' 进行讨论过后，',
-      me.get_couple_title(),
-      ' 正式决定前往国外远征——参加法国G1赛事 ',
+      ' 进行讨论过后，你们正式决定前往国外远征——参加法国G1赛事 ',
       race_infos[race_enum.prix_lat].get_colored_name(),
       '。',
     ]);
@@ -115,9 +113,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
     await era.printAndWait([
       '毫不留情地作出告别，留下背影转身而去。',
       coffee.get_colored_name(),
-      ' 用含血的话语打算切断 ',
-      me.get_couple_title(),
-      ' 之间的关系——不，不只是话语含血。',
+      ' 用含血的话语打算切断你们之间的关系——不，不只是话语含血。',
     ]);
     await era.printAndWait([
       '不知何时起，',
@@ -168,9 +164,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
       await era.input();
       await era.printAndWait([
         tachyon.get_colored_name(),
-        ' 不知为何偷偷跟随来到了机场，在旁观 ',
-        me.get_couple_title(),
-        ' 的对话后，选择了加入现场。',
+        ' 不知为何偷偷跟随来到了机场，在旁观你们的对话后，选择了加入现场。',
       ]);
       await era.printAndWait([
         me.get_colored_name(),
@@ -228,9 +222,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
       await era.printAndWait([
         '抱着哭泣的 ',
         coffee.get_colored_name(),
-        '，',
-        me.get_couple_title(),
-        ' 三人一同踏上了返回特雷森的路途。',
+        '，你们三人一同踏上了返回特雷森的路途。',
       ]);
       await era.printAndWait([
         coffee.get_colored_name(),
@@ -613,7 +605,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
         '另一个茶座「……看来就要在此别过了。再见，这边 ',
         coffee.get_colored_name(),
         ' ',
-        coffee.get_adult_sex_title(),
+        coffee.adult_sex_title,
         '。」',
       ]);
       era.println();
@@ -621,7 +613,7 @@ module.exports = (handlers, check_tachyon_plan_b) => {
         '你也是，请保重，那边 ',
         coffee.get_colored_name(),
         ' ',
-        coffee.get_adult_sex_title(),
+        coffee.adult_sex_title,
         '……',
       ]);
       era.drawLine();

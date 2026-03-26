@@ -24,9 +24,7 @@ module.exports = {
     era.print([
       '但是 ',
       you.get_colored_name(),
-      ' 没有注意到，不远处有一双眼睛一直在注视着 ',
-      you.get_couple_title(),
-      '，而随着 ',
+      ' 没有注意到，不远处有一双眼睛一直在注视着你们，而随着 ',
       you.get_colored_name(),
       ' 和',
       another.sex,

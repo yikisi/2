@@ -204,10 +204,7 @@ module.exports = class extends CustomizedLove {
         acute.get_colored_name(),
         ' 似乎也一样，羞涩得不敢说出口。',
       ]);
-      await era.printAndWait([
-        me.get_couple_title(),
-        ' 默契地不去看向彼此的脸，一同转过头。',
-      ]);
+      await era.printAndWait(['你们默契地不去看向彼此的脸，一同转过头。']);
       await era.printAndWait(
         '望着一旁最初以为狭小的树洞，心中即感慨着，又下意识想要打破这尴尬的沉默般，开了口——',
       );

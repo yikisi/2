@@ -727,9 +727,7 @@ module.exports = class extends CustomizedDaily {
               .then(() =>
                 era.printAndWait([
                   silence.get_colored_name(),
-                  ' 接过了电影票，',
-                  me.get_couple_title(),
-                  ' 一起看了一部很有意思的老科幻电影。',
+                  ' 接过了电影票，你们一起看了一部很有意思的老科幻电影。',
                 ]),
               ),
         );

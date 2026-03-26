@@ -16,11 +16,7 @@ const { get_random_value } = require('#/utils/value-utils');
 module.exports = (handlers) => {
   handlers[95 + 2] = async (maya, me, callname, flags) => {
     await print_event_name('抽奖试手气！', maya);
-    await era.printAndWait([
-      '某天傍晚，',
-      me.get_couple_title(),
-      ' 经过商店街的时候──',
-    ]);
+    await era.printAndWait(['某天傍晚，你们经过商店街的时候──']);
     await maya.say_and_wait(['欸欸，', callname, '。那边好像有什么活动！']);
     await say_by_passer_by_and_wait(
       '商店街人员',
@@ -47,10 +43,7 @@ module.exports = (handlers) => {
     ]);
     await maya.say_and_wait([callname, '！我们拿到一张抽奖券！机会只有一次！']);
     await maya.say_and_wait('唔～拜托拜托，一定要中特等奖……！');
-    await era.printAndWait([
-      me.get_couple_title(),
-      ' 两个人一边祈祷，一起握住握把转动抽奖机。',
-    ]);
+    await era.printAndWait(['你们两个人一边祈祷，一起握住握把转动抽奖机。']);
     await era.printAndWait('结果是──');
     switch (get_random_value(0, 9)) {
       case 0:
@@ -92,8 +85,7 @@ module.exports = (handlers) => {
         await maya.say_and_wait('嘿嘿，太棒了！就这么决定了！');
         await maya.say_and_wait('到时候要尽情放松，尽情享受哦！');
         await era.printAndWait([
-          me.get_couple_title(),
-          ' 两个人一起期待着，使用温泉旅游券那天的到来。',
+          '你们两个人一起期待着，使用温泉旅游券那天的到来。',
         ]);
         flags.wait_flag = get_attr_and_print_in_event(
           24,
@@ -453,9 +445,7 @@ module.exports = (handlers) => {
         await maya.say_and_wait('然后给大家一个好看！');
         await era.printAndWait([
           me.get_colored_name(),
-          ' 点了点头，抬头望向夜空，仿佛在预示 ',
-          me.get_couple_title(),
-          ' 的未来一般，满天的星星在闪烁着。',
+          ' 点了点头，抬头望向夜空，仿佛在预示你们的未来一般，满天的星星在闪烁着。',
         ]);
         flags.wait_flag = get_attr_and_print_in_event(24, [0, 0, 20], 0);
         break;

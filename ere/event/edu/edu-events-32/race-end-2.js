@@ -596,7 +596,7 @@ module.exports = (handlers) => {
         '请问 ',
         tachyon.get_colored_name(),
         ' ',
-        tachyon.get_adult_sex_title(),
+        tachyon.adult_sex_title,
         '去年由于不明原因暂停出赛闪耀系列赛的原因是……？今年凯旋门杯应该不会……',
       ]);
       await tachyon.say_and_wait([
@@ -606,7 +606,7 @@ module.exports = (handlers) => {
         '……那个，今天的比赛很精彩，请问 ',
         tachyon.get_colored_name(),
         ' ',
-        tachyon.get_adult_sex_title(),
+        tachyon.adult_sex_title,
         '有没有什么想对对手 ',
         coffee.get_colored_name(),
         ' 说的话吗？',
@@ -791,9 +791,7 @@ module.exports = (handlers) => {
       ' 用药冷却及减轻腿的负担',
     ]);
     await era.printAndWait([
-      '直到官方通知，颁奖仪式已经准备好了，',
-      me.get_couple_title(),
-      ' 才慢慢的朝着舞台走去',
+      '直到官方通知，颁奖仪式已经准备好了，你们才慢慢的朝着舞台走去',
     ]);
     era.println();
     await tachyon.say_and_wait('……那么，怎么样？这场比赛，让你满意了吗？');
@@ -844,7 +842,7 @@ module.exports = (handlers) => {
     era.println();
     await say_by_passer_by_and_wait('记者A', [
       '速子',
-      tachyon.get_adult_sex_title(),
+      tachyon.adult_sex_title,
       '！恭喜您今天拿下凯旋门赏！除此之外，这次的凯旋门还打破了历届以来的纪录！',
     ]);
     await say_by_passer_by_and_wait(

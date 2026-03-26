@@ -119,6 +119,7 @@ class CharaTalk {
     ).replace('%NAME%', this.actual_name);
   }
 
+  // 以角色为首的复数形式人称代词
   get couple_title() {
     if (!this.id) {
       return i18n().name.you_mul;
@@ -212,12 +213,6 @@ class CharaTalk {
       fontWeight: 'bold',
     };
   }
-
-  /** 成人角色的称呼 */
-  get_adult_sex_title = () => this.adult_sex_title;
-
-  // 以角色为首的复数形式人称代词
-  get_couple_title = () => this.couple_title;
 
   get_bigger_sibling_sex_title = () =>
     this.sex_code === 1 ? i18n().name.elder_brother : i18n().name.elder_sister;

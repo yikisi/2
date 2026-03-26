@@ -220,7 +220,7 @@ module.exports = async (urara, me, in_urara, callname) => {
     '是这样吗？我还不需要被婆婆妈妈的',
     urara.sex_code - 1 ? '萝莉' : '正太',
     '控',
-    me.get_adult_sex_title(),
+    me.adult_sex_title,
     '（您）找茬啊。',
   ]);
   await era.printAndWait([
@@ -405,7 +405,7 @@ module.exports = async (urara, me, in_urara, callname) => {
     '不觉得现在的样子，很像您与乌拉拉相遇的那个时候吗，健忘的',
     urara.sex_code - 1 ? '萝莉' : '正太',
     '控',
-    me.get_adult_sex_title(),
+    me.adult_sex_title,
     '（您）？',
   ]);
   await in_urara.print_and_wait(

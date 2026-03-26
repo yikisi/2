@@ -91,14 +91,11 @@ module.exports = (handlers) => {
       ]);
       era.println();
       await era.printAndWait([
-        '刚获得的胜利、即将开始的 Winning Live，一切的一切都不在 ',
-        me.get_couple_title(),
-        ' 眼中，彷佛刚才并非跑了场比赛，而只是一场普通的研究一般',
+        '刚获得的胜利、即将开始的 Winning Live，一切的一切都不在你们眼中，彷佛刚才并非跑了场比赛，而只是一场普通的研究一般',
       ]);
       era.println();
       await era.printAndWait([
-        me.get_couple_title(),
-        ' 不停观看着纪录下来的数据，提出一个又一个的猜想，直到 Winning Live 开始，外面传来了急促的敲门声才回过神来',
+        '你们不停观看着纪录下来的数据，提出一个又一个的猜想，直到 Winning Live 开始，外面传来了急促的敲门声才回过神来',
       ]);
       gacha(base_attr_list, 3).forEach((e) => (extra_flag.attr_change[e] = 3));
     } else {
@@ -122,9 +119,7 @@ module.exports = (handlers) => {
         ' 总算成功回收了器械。一切都十分顺利',
       ]);
       await era.printAndWait([
-        '……只是，在回收期间，那些职员看 ',
-        me.get_couple_title(),
-        ' 的眼光有些刺痛而已',
+        '……只是，在回收期间，那些职员看你们的眼光有些刺痛而已',
       ]);
       era.println();
       sys_change_fame(-5);
@@ -693,9 +688,7 @@ module.exports = (handlers) => {
         ' 却败在了这场比赛之上',
       ]);
       await era.printAndWait([
-        '在比赛结束进入选手休息室后，',
-        me.get_couple_title(),
-        ' 两人就一直维持着沉默',
+        '在比赛结束进入选手休息室后，你们两人就一直维持着沉默',
       ]);
       await era.printAndWait([
         me.get_colored_name(),

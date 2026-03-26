@@ -397,7 +397,7 @@ module.exports = class extends CustomizedLove {
       await era.printAndWait('荣进闪耀起身，露出甜蜜的微笑。');
       await flash.say_and_wait([
         '那么，我们回去吧，训练员',
-        me.get_adult_sex_title(),
+        me.adult_sex_title,
         '。',
       ]);
       era.set('cflag:37:爱慕暂拒', 74);

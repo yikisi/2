@@ -469,7 +469,7 @@ module.exports = (handlers) => {
       await era.input();
       await say_by_passer_by_and_wait(tachyon.uma_sex_title + 'A', [
         '……看着眼前的场景居然能说出这种话来，训练员',
-        me.get_adult_sex_title(),
+        me.adult_sex_title,
         '您也……真不愧是速子前辈的训练员啊',
       ]);
       era.println();
@@ -704,9 +704,7 @@ module.exports = (handlers) => {
         era.printButton('「速……速子？」', 1);
         await era.input();
         await era.printAndWait([
-          '原本趴在地上装死的后辈们忽然抬起眼睛盯着 ',
-          me.get_couple_title(),
-          ' 两人',
+          '原本趴在地上装死的后辈们忽然抬起眼睛盯着你们两人',
         ]);
         await era.printAndWait([
           tachyon.get_colored_name(),

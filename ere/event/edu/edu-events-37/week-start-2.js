@@ -191,7 +191,7 @@ module.exports = (handlers) => {
     await say_by_passer_by_and_wait('主持人', '接下来让我们把镜头给现场记者——');
     await say_by_passer_by_and_wait(
       `记者`,
-      `富士奇石${flash.get_adult_sex_title()}，请问在这个时间点表明要出战接下来的G1级重赏是出于什么意图呢？`,
+      `富士奇石${flash.adult_sex_title}，请问在这个时间点表明要出战接下来的G1级重赏是出于什么意图呢？`,
     );
     await fuji.say_and_wait('嗯……具体的意图很难明说，是为了成为『高墙』吧。');
     await say_by_passer_by_and_wait('记者', '高墙？');
@@ -492,7 +492,7 @@ module.exports = (handlers) => {
     await say_by_passer_by_and_wait('荣进闪耀的粉丝', '！！！！');
     await say_by_passer_by_and_wait(
       '荣进闪耀的粉丝',
-      `荣……荣进${flash.get_adult_sex_title()}，非常感谢您！`,
+      `荣……荣进${flash.adult_sex_title}，非常感谢您！`,
     );
     await flash.say_and_wait(
       '呵呵～是我应该这么说才对哦，感谢你愿意来与我一起参加这场比赛。',

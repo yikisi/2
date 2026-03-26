@@ -595,7 +595,7 @@ module.exports = class extends Love52AfterGirlFriend {
         ' 的回答。',
       ]);
       in_urara.say_as_unknown(
-        `面对依旧等待着训练员${me.get_adult_sex_title()}（您）的${sys_get_callname(
+        `面对依旧等待着训练员${me.adult_sex_title}（您）的${sys_get_callname(
           0,
           52,
         )}，您的决定……`,

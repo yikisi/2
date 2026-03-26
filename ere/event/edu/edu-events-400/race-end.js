@@ -47,9 +47,7 @@ module.exports = (handlers) => {
       ]);
       await ss.say_and_wait([callname, '，一起向着我们的目标，迈出步伐吧……']);
       await era.printAndWait([
-        '观众的欢呼与赞扬声成为 ',
-        me.get_couple_title(),
-        ' 之间的背影音，',
+        '观众的欢呼与赞扬声成为你们之间的背影音，',
         ss.sex,
         '赛前略显不安的神色在此刻荡然无存，留下的只有开心。',
       ]);
@@ -124,7 +122,7 @@ module.exports = (handlers) => {
     await era.input();
     await ss.say_and_wait([
       '太好了……太好了，果然训练员你就是最适合我的训练员',
-      get_chara_talk(0).get_adult_sex_title(),
+      get_chara_talk(0).adult_sex_title,
     ]);
     await ss.say_and_wait([
       '接下来……还有 ',
@@ -399,9 +397,7 @@ module.exports = (handlers) => {
         me.get_colored_name(),
         ' 拉出了休息室，和',
         ss.sex,
-        '一起走向属于 ',
-        me.get_couple_title(),
-        ' 的更远的未来。',
+        '一起走向属于你们的更远的未来。',
       ]);
       extra_flag.relation_change = 100;
     }

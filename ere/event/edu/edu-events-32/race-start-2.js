@@ -104,11 +104,7 @@ module.exports = (handlers) => {
     );
     await tachyon.used_to_say_and_wait('综合以上……没错，获得观众的支持……');
     era.println();
-    await era.printAndWait([
-      '说到这，',
-      me.get_couple_title(),
-      ' 忽然陷入了卡壳',
-    ]);
+    await era.printAndWait(['说到这，你们忽然陷入了卡壳']);
     era.println();
     await era.printAndWait(
       '回想起几个月前暑期的事……以及在那之后各种的拒绝采访',
@@ -302,11 +298,7 @@ module.exports = (handlers) => {
       await era.input();
     } else {
       await print_event_name('万众其心', tachyon);
-      await era.printAndWait([
-        '在 ',
-        me.get_couple_title(),
-        ' 抵达阪神赛场的时候，全场已经人声鼎沸',
-      ]);
+      await era.printAndWait(['在你们抵达阪神赛场的时候，全场已经人声鼎沸']);
       era.println();
       await say_by_passer_by_and_wait('观众A', [
         '果然看好的还是 ',
@@ -486,7 +478,7 @@ module.exports = (handlers) => {
       era.println();
       await say_by_passer_by_and_wait('记者A', [
         '请问速子',
-        tachyon.get_adult_sex_title(),
+        tachyon.adult_sex_title,
         '，这次的有马纪念有没有特别关注的对手呢',
       ]);
       era.println();

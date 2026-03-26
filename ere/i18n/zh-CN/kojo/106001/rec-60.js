@@ -33,7 +33,7 @@ module.exports = {
     ]);
     await nature.say_and_wait([
       '啊、那个……是训练员',
-      you.get_adult_sex_title(),
+      you.adult_sex_title,
       '……对吧？找 ',
       self_call,
       ' 有什么事吗？',

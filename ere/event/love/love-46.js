@@ -27,7 +27,7 @@ module.exports = class extends CustomizedLove {
       await era.printAndWait(
         `休息日的某天，当${me.actual_name}打开训练室时，那是一个晴朗的天气。`,
       );
-      await falcon.say_and_wait(`训练员${me.get_adult_sex_title()}♪`);
+      await falcon.say_and_wait(`训练员${me.adult_sex_title}♪`);
       await era.printAndWait(
         `意外的，${falcon.name}比${me.actual_name}来得要早。`,
       );
@@ -41,7 +41,7 @@ module.exports = class extends CustomizedLove {
       await falcon.say_and_wait(`已经全部都准备好了！`);
       await era.printAndWait(`飞鹰子似乎很期待的样子。`);
       await falcon.say_and_wait(
-        `所以，训练员${me.get_adult_sex_title()}，可以和飞鹰子一起出发吗？`,
+        `所以，训练员${me.adult_sex_title}，可以和飞鹰子一起出发吗？`,
       );
       await era.printAndWait(`答案当然是。`);
       era.printButton(`我也很高兴。`, 1);
@@ -64,7 +64,7 @@ module.exports = class extends CustomizedLove {
       await falcon.say_and_wait(
         `不，不一样哦？和闪耀${
           falcon.sex
-        }们野餐是朋友性质的，和训练员${me.get_adult_sex_title()}之间则是`,
+        }们野餐是朋友性质的，和训练员${me.adult_sex_title}之间则是`,
       );
       await me.say_and_wait(`我和${falcon.sex}们不一样吗？`);
       await falcon.say_and_wait(
@@ -73,24 +73,22 @@ module.exports = class extends CustomizedLove {
       await era.printAndWait(`拼命掩饰的飞鹰子显得额外可爱。`);
       await me.say_and_wait(`哦，原 来 如 此？`);
       await falcon.say_and_wait(
-        `诶？训练员${me.get_adult_sex_title()}不要捉弄飞鹰子啦！`,
+        `诶？训练员${me.adult_sex_title}不要捉弄飞鹰子啦！`,
       );
-      await falcon.say_and_wait(
-        `这样的训练员${me.get_adult_sex_title()}最讨厌了！`,
-      );
+      await falcon.say_and_wait(`这样的训练员${me.adult_sex_title}最讨厌了！`);
       await me.say_and_wait(`飞鹰子原来讨厌我吗？`);
       await falcon.say_and_wait(`不对！这是两回事！`);
       await me.say_and_wait(`我好伤心，所以这块肉是我的了！`);
       await era.printAndWait(
         `${me.actual_name}突然从飞鹰子的便当里夹走了一块肉。`,
       );
-      await falcon.say_and_wait(`训练员${me.get_adult_sex_title()}坏心眼！`);
+      await falcon.say_and_wait(`训练员${me.adult_sex_title}坏心眼！`);
       await falcon.say_and_wait(`那么飞鹰子也要回敬！`);
       await era.printAndWait(
         `从${callname}的便当里夹走了两份寿司的${falcon.name}露出了得意的表情。`,
       );
       await falcon.say_and_wait(
-        `哼哼♪这下训练员${me.get_adult_sex_title()}知道飞鹰子的厉害了吧！`,
+        `哼哼♪这下训练员${me.adult_sex_title}知道飞鹰子的厉害了吧！`,
       );
       era.printButton(`开什么玩笑，现在正是气氛高涨的时候！`, 1);
       await era.input();
@@ -107,7 +105,7 @@ module.exports = class extends CustomizedLove {
       await falcon.say_and_wait(`诶?这样是不是互相投喂对方的便当啊？`, true);
       await era.printAndWait(`突然意识到这点飞鹰子刷一下脸变得通红。`);
       await falcon.say_and_wait(`不！不对！这样子还太早了啦！`);
-      await falcon.say_and_wait(`训练员${me.get_adult_sex_title()}真H！`);
+      await falcon.say_and_wait(`训练员${me.adult_sex_title}真H！`);
       await era.printAndWait(
         `不知为何突然跑开的飞鹰子留下了一脸懵逼的${callname}以及一片狼藉的战场。`,
       );
@@ -121,7 +119,7 @@ module.exports = class extends CustomizedLove {
       //希翼着训练员能听到自己心声的${chara_talk.name}暗自期待着
       await print_event_name(`二叶代表希望⭐`, falcon);
       await falcon.print_and_wait(
-        `训练员${me.get_adult_sex_title()}比想象之中还要迟钝呢`,
+        `训练员${me.adult_sex_title}比想象之中还要迟钝呢`,
       );
       await falcon.print_and_wait(
         `明明已经那么明显的暗示了，为什么他的眼神还是那么无动于衷呢？`,
@@ -150,11 +148,11 @@ module.exports = class extends CustomizedLove {
       );
       await me.say_and_wait(`但是，说不定在室内的话也能遇到好事情发生呢！`);
       await falcon.say_and_wait(
-        `就算训练员${me.get_adult_sex_title()}这么说的话……对啊！`,
+        `就算训练员${me.adult_sex_title}这么说的话……对啊！`,
       );
       await era.printAndWait(`刚才还耷拉着的耳朵一瞬间就恢复了状态。`);
       await falcon.say_and_wait(`不如就在训练室里表演吧！`);
-      await falcon.say_and_wait(`训练员${me.get_adult_sex_title()}等我一下♪`);
+      await falcon.say_and_wait(`训练员${me.adult_sex_title}等我一下♪`);
       await era.printAndWait(`一想到什么就决定去行动也是飞鹰子的特点。`);
       await me.say_and_wait(`不过，窗外的雨吗？`);
       await era.printAndWait(
@@ -190,7 +188,7 @@ module.exports = class extends CustomizedLove {
         await me.say_and_wait(`飞鹰子比想象之中还要可爱啊`);
         await falcon.say_and_wait(`……?`);
         await falcon.say_and_wait(
-          `训练员${me.get_adult_sex_title()}什么时候变成笨蛋了？飞鹰子一直都很可爱呦？`,
+          `训练员${me.adult_sex_title}什么时候变成笨蛋了？飞鹰子一直都很可爱呦？`,
         );
         await me.say_and_wait(
           `不，我说的是飞鹰子作为${falcon.teen_sex_title}的部分。`,
@@ -201,7 +199,7 @@ module.exports = class extends CustomizedLove {
         );
         await era.printAndWait(`飞鹰子的脸慢慢红了起来。`);
         await falcon.say_and_wait(
-          `训练员${me.get_adult_sex_title()}，变态！色狼！H！`,
+          `训练员${me.adult_sex_title}，变态！色狼！H！`,
         );
         await falcon.say_and_wait(`再也不理${callname}了！`);
         await era.printAndWait(
@@ -229,7 +227,7 @@ module.exports = class extends CustomizedLove {
           await me.say_and_wait(`……飞鹰子，${callname}在哪里？`);
           await era.printAndWait(`洋甘菊丛在涨潮的河水中几乎被全部淹没。`);
           await falcon.say_and_wait(
-            `……如果是训练员${me.get_adult_sex_title()}的话，说不定可以实现我的梦想。`,
+            `……如果是训练员${me.adult_sex_title}的话，说不定可以实现我的梦想。`,
           );
           await me.say_and_wait(`……没错！一定在那里！`);
           await era.printAndWait(
@@ -244,7 +242,7 @@ module.exports = class extends CustomizedLove {
           );
           await me.say_and_wait(`${falcon.name}！`);
           await falcon.say_and_wait(
-            `……训练员${me.get_adult_sex_title()}请不要在过来了。`,
+            `……训练员${me.adult_sex_title}请不要在过来了。`,
           );
           await era.printAndWait(
             `像是意识到了什么一样，试图远离${callname}的${falcon.name}慢慢向围栏退去。`,
@@ -254,7 +252,7 @@ module.exports = class extends CustomizedLove {
             `向前逼近的${me.actual_name}与一步一步向后退去的飞鹰子。`,
           );
           await falcon.say_and_wait(
-            `飞鹰子……飞鹰子急了的话也会踢训练员${me.get_adult_sex_title()}的哦！`,
+            `飞鹰子……飞鹰子急了的话也会踢训练员${me.adult_sex_title}的哦！`,
           );
           await era.printAndWait(
             `${
@@ -284,7 +282,7 @@ module.exports = class extends CustomizedLove {
           );
           await falcon.say_and_wait(`……`);
           await falcon.say_and_wait(
-            `……训练员${me.get_adult_sex_title()}真是坏心眼呢。`,
+            `……训练员${me.adult_sex_title}真是坏心眼呢。`,
           );
           await falcon.say_and_wait(`回答的话，不是只有一个了吗？`);
           await era.printAndWait(
@@ -319,14 +317,14 @@ module.exports = class extends CustomizedLove {
       await print_event_name(`三叶代表爱情❤`, falcon);
       await falcon.say_and_wait(`女仆${falcon.name}参上⭐`);
       await falcon.say_and_wait(
-        `训练员${me.get_adult_sex_title()}觉得飞鹰子这身打扮怎么样？`,
+        `训练员${me.adult_sex_title}觉得飞鹰子这身打扮怎么样？`,
       );
       await era.printAndWait(
         `换上了可爱风女仆装的${falcon.name}穿上了吊带袜。`,
       );
       await me.say_and_wait(`飞鹰子穿起来真合适啊。`);
       await falcon.say_and_wait(
-        `现在站在这里的是${falcon.name}哦，训练员${me.get_adult_sex_title()}♪`,
+        `现在站在这里的是${falcon.name}哦，训练员${me.adult_sex_title}♪`,
       );
       await me.say_and_wait(
         `一如既往将${falcon.name}与飞鹰子分的很清楚啊。`,
@@ -419,7 +417,7 @@ module.exports = class extends CustomizedLove {
       await me.say_and_wait(`世界啊毁灭吧，为啥这么多看着我的人。`, true);
       await me.say_and_wait(`今天的天气也是那种即将要下雨的样子啊。`, true);
       await era.printAndWait(`灰蒙蒙的天气意外让${me.actual_name}感到了愉悦。`);
-      await falcon.say_and_wait(`久等了训练员${me.get_adult_sex_title()}♪`);
+      await falcon.say_and_wait(`久等了训练员${me.adult_sex_title}♪`);
       await era.printAndWait(
         `将两人的午餐端在了桌子上，${falcon.name}带着期待的目光看着${callname}。`,
       );
@@ -456,7 +454,7 @@ module.exports = class extends CustomizedLove {
       await era.printAndWait(`${me.actual_name}心中愤愤不平的想着。`);
       await me.say_and_wait(`接下来的话，做什么好呢？`);
       await falcon.say_and_wait(
-        `比起这个的话，训练员${me.get_adult_sex_title()}嘴角边的酱汁没有擦干净！`,
+        `比起这个的话，训练员${me.adult_sex_title}嘴角边的酱汁没有擦干净！`,
       );
       await era.printAndWait(
         `就这样，${falcon.name}快速贴近到了${callname}的身旁，伸出了舌头擦得一干二净。`,
@@ -464,7 +462,7 @@ module.exports = class extends CustomizedLove {
       await falcon.say_and_wait(`多谢款待！`);
       await era.printAndWait(`正准备后退的${falcon.name}却被环住了腰肢。`);
       await me.say_and_wait(`飞鹰子嘴角边也有酱汁没舔干净哦？`);
-      await falcon.say_and_wait(`欸~训练员${me.get_adult_sex_title()}❤`);
+      await falcon.say_and_wait(`欸~训练员${me.adult_sex_title}❤`);
       await era.printAndWait(`再次品尝了${falcon.name}嘴角的美味后。`);
       await me.say_and_wait(`${falcon.name}。`);
       await falcon.say_and_wait(`${me.actual_name}❤`);
@@ -538,12 +536,12 @@ module.exports = class extends CustomizedLove {
       );
       await me.say_and_wait(`像天使一样可爱。`);
       await falcon.say_and_wait(
-        `啊，说起来的话训练员${me.get_adult_sex_title()}选好了西装吗？`,
+        `啊，说起来的话训练员${me.adult_sex_title}选好了西装吗？`,
       );
       await me.say_and_wait(`嗯，已经选好了。`);
       await falcon.say_and_wait(`时间还有剩的话先在附近逛逛吧！`);
       await falcon.say_and_wait(
-        `像这样和训练员${me.get_adult_sex_title()}一起度过的时间可真幸福呢！`,
+        `像这样和训练员${me.adult_sex_title}一起度过的时间可真幸福呢！`,
       );
       await me.say_and_wait(`说起来的话，飞鹰子接下来的打算是？`);
       await falcon.say_and_wait(
@@ -553,7 +551,7 @@ module.exports = class extends CustomizedLove {
         `飞鹰子接下来打算以泥地偶像的身份作为前辈在赛场上激励着作为后辈的${falcon.uma_sex_title}们！`,
       );
       await falcon.say_and_wait(
-        `虽然这样的话可能也会很辛苦，不过只要训练员${me.get_adult_sex_title()}在身边的话，不论什么困难都可以度过的！`,
+        `虽然这样的话可能也会很辛苦，不过只要训练员${me.adult_sex_title}在身边的话，不论什么困难都可以度过的！`,
       );
       await falcon.say_and_wait(`而且，飞鹰子比起今天更期待着明天！`);
       await me.say_and_wait(`我也是！`);
@@ -570,7 +568,7 @@ module.exports = class extends CustomizedLove {
       await falcon.say_and_wait(`飞鹰子也这么认为。`);
       await era.printAndWait(`在黄昏之际两人幸福的接吻在了一起。`);
       await falcon.say_and_wait(`飞鹰子开始期待着明天的到来了呢⭐`);
-      await falcon.say_and_wait(`训练员${me.get_adult_sex_title()}，明天见⭐`);
+      await falcon.say_and_wait(`训练员${me.adult_sex_title}，明天见⭐`);
       era.drawLine({ content: '第二天' });
       await era.printAndWait(
         `预想之中因为过度紧张而失眠的情况没有发生，${me.actual_name}睡得比平时还要深沉。`,
@@ -586,21 +584,21 @@ module.exports = class extends CustomizedLove {
       era.printButton(`稍微有些紧张啊`, 1);
       await era.input();
       await era.printAndWait(`乖乖地在座位上等着化妆。`);
-      await falcon.say_and_wait(`训练员${me.get_adult_sex_title()}⭐`);
+      await falcon.say_and_wait(`训练员${me.adult_sex_title}⭐`);
       await me.say_and_wait(`欸？飞鹰子你怎么在这里？`);
       await falcon.say_and_wait(
-        `因为想要早点看到训练员${me.get_adult_sex_title()}的脸！`,
+        `因为想要早点看到训练员${me.adult_sex_title}的脸！`,
       );
       await falcon.say_and_wait(
-        `一想到训练员${me.get_adult_sex_title()}的温柔的笑容，飞鹰子的心就跳的好快。`,
+        `一想到训练员${me.adult_sex_title}的温柔的笑容，飞鹰子的心就跳的好快。`,
       );
       await falcon.say_and_wait(
-        `然后，突然的失落感就出来了，如果训练员${me.get_adult_sex_title()}不在这里的话。`,
+        `然后，突然的失落感就出来了，如果训练员${me.adult_sex_title}不在这里的话。`,
       );
       await falcon.say_and_wait(`飞鹰子又该怎么办呢？`);
       await falcon.say_and_wait(`等待着等待着，飞鹰子的心就越来越不安。`);
       await falcon.say_and_wait(
-        `想要早点看见训练员${me.get_adult_sex_title()}的模样！想要早点被那双温柔的手臂抱住！`,
+        `想要早点看见训练员${me.adult_sex_title}的模样！想要早点被那双温柔的手臂抱住！`,
       );
       await falcon.say_and_wait(`所以，飞鹰子已经等不及了！`);
       await era.printAndWait(
@@ -617,9 +615,7 @@ module.exports = class extends CustomizedLove {
       await me.say_and_wait(
         `接下来的话，我会一直陪在你身边的，所以，请不要紧张。`,
       );
-      await falcon.say_and_wait(
-        `嗯！训练员${me.get_adult_sex_title()}，待会见♪`,
-      );
+      await falcon.say_and_wait(`嗯！训练员${me.adult_sex_title}，待会见♪`);
       await era.printAndWait(
         `轻轻提起婚纱的${falcon.name}回到了自己的准备室。`,
       );

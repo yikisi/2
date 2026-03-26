@@ -223,10 +223,7 @@ module.exports = class extends Love85UtilFuckBuddy {
           ruby.get_colored_name(),
           ' 的小手。',
         ]);
-        await era.printAndWait([
-          me.get_couple_title(),
-          ' 并排坐在豪华的大床边缘。',
-        ]);
+        await era.printAndWait(['你们并排坐在豪华的大床边缘。']);
         await era.printAndWait([
           '看着在身旁战战兢兢的 ',
           ruby.get_colored_name(),
@@ -236,11 +233,7 @@ module.exports = class extends Love85UtilFuckBuddy {
         ]);
       }
     } else {
-      await era.printAndWait([
-        '训练员室成了 ',
-        me.get_couple_title(),
-        ' 今天挥洒汗水锻炼的场所。',
-      ]);
+      await era.printAndWait(['训练员室成了你们今天挥洒汗水锻炼的场所。']);
     }
     await era.printAndWait([
       '在客厅的沙发上，',
@@ -469,9 +462,7 @@ module.exports = class extends Love85UtilFuckBuddy {
         '大股大股的精液直接顶着子宫口射进了爱马的稚嫩孕袋内。',
       );
       await era.printAndWait([
-        '那用来孕育 ',
-        me.get_couple_title(),
-        ' 后代的纯洁之地，此刻便被 ',
+        '那用来孕育你们后代的纯洁之地，此刻便被 ',
         me.get_colored_name(),
         ' 彻底地玷污。',
       ]);
@@ -511,9 +502,7 @@ module.exports = class extends Love85UtilFuckBuddy {
         ' 射精后不见疲软的肉棒依旧把紧实的小穴撑得满满当当。',
       ]);
       await era.printAndWait([
-        '娇嫩的子宫颈肉环随着 ',
-        me.get_couple_title(),
-        ' 的呼吸在 ',
+        '娇嫩的子宫颈肉环随着你们的呼吸在 ',
         me.get_colored_name(),
         ' 龟头上磨来磨去，为 ',
         me.get_colored_name(),
@@ -531,7 +520,7 @@ module.exports = class extends Love85UtilFuckBuddy {
       );
       era.printButton('「我们一起下地狱吧。」', 2);
       await era.input();
-      await end_ero_and_train();
+      end_ero_and_train();
     } else {
       await print_ero_page(85);
       await end_ero_and_show_result(true);
