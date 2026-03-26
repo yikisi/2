@@ -7,6 +7,7 @@ const {
 const {
   sys_check_act_disabled,
   sys_check_awake,
+  sys_check_remote,
   sys_check_train_enabled,
   sys_get_move_cost,
 } = require('#/system/sys-calc-chara-param');
@@ -343,6 +344,7 @@ module.exports = async (cid, next_cb, flags) => {
         chara,
         marks.c,
         awake,
+        sys_check_remote(cid),
         get_custom_check(cid).get_personal_action(),
       ),
     );

@@ -52,6 +52,7 @@ const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
 
 const { i18n } = require('#/i18n/selector');
+const { check_chara_ero_image } = require('#/system/ero/sys-calc-ero-image');
 
 function check_titles(...ids) {
   ids
@@ -595,6 +596,12 @@ module.exports = async () => {
             // i18n - 将游戏存档内所有字符串改成 i18n 框架内的内容
             if (version <= 2210) {
               era.getAddedCharacters().forEach((cid) => {
+                if (check_chara_ero_image(cid)) {
+                  era.set(
+                    `cstr:${cid}:头像T`,
+                    era.get(`cstr:${cid}:头像T`) || era.get(`cstr:${cid}:头像`),
+                  );
+                }
                 const callname = era.get(`callname:${cid}`);
                 for (const _to in callname) {
                   era.set(

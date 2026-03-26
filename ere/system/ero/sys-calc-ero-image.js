@@ -76,7 +76,7 @@ function sys_get_ero_image(
       ? `位置_${i18n('zh-CN').location[location_enum.keys[era.get('flag:当前位置')]]}\t位置_酒店`
       : '位置_自宅',
   });
-  if (dict[cid]) {
+  if (dict[cid] && img_name) {
     if (in_train && era.get(`tcvar:${cid}:刚刚高潮`)) {
       ret.push(get_image_name(img_name, base_name, '_裸_高潮', '_裸'));
     } else {
@@ -211,9 +211,10 @@ function sys_get_ero_image(
       });
     }
     if (
-      era.get(`ex:${cid}:寸止`) ||
-      era.get(`tcvar:${cid}:接近高潮`) ||
-      era.get(`tcvar:${cid}:余韵`)
+      in_train &&
+      (era.get(`ex:${cid}:寸止`) ||
+        era.get(`tcvar:${cid}:接近高潮`) ||
+        era.get(`tcvar:${cid}:余韵`))
     ) {
       ret.push(`通用_裸_汗`);
     }
@@ -225,46 +226,50 @@ function sys_get_ero_image(
       });
     }
     ret.push('通用_头');
-    if (check_excited(cid, recent_s, recent_m, m_abused, m_hit)) {
-      ret.push('通用_头_腮红');
-    }
-    if (
-      era.get(`mark:${cid}:反抗`) ||
-      era.get('tflag:强奸') >= 0 ||
-      era.get(`mark:${cid}:苦痛`) ||
-      recent_m ||
-      (recent_s && era.get(`talent:${cid}:抖S`))
-    ) {
-      ret.push('通用_头_阴影');
-    }
-    if (
-      era.get(`ex:${cid}:寸止`) ||
-      era.get(`tcvar:${cid}:接近高潮`) ||
-      era.get(`ex:${cid}:破处`)
-    ) {
-      ret.push('通用_头_汗');
-    }
-    if (!sys_check_awake(cid) || era.get(`tcvar:${cid}:脱力`)) {
-      ret.push('通用_脸_微笑');
-    } else if (
-      era.get(`tcvar:${cid}:刚刚高潮`) ||
-      era.get(`tcvar:${cid}:失神`)
-    ) {
-      ret.push('通用_脸_高潮');
-    } else if (
-      era.get(`mark:${cid}:反抗`) ||
-      (recent_m === part_enum.abuse && !m_abused) ||
-      era.get('tflag:强奸') === 0 ||
-      era.get(`mark:${cid}:苦痛`) ||
-      (recent_m === part_enum.hit && !m_hit && !era.get(`talent:${cid}:圣母`))
-    ) {
-      ret.push('通用_脸_咬牙');
-    } else if (
-      recent_m ||
-      era.get('tflag:强奸') === cid ||
-      (recent_s && era.get(`talent:${cid}:抖S`))
-    ) {
-      ret.push('通用_脸_舔嘴');
+    if (in_train) {
+      if (check_excited(cid, recent_s, recent_m, m_abused, m_hit)) {
+        ret.push('通用_头_腮红');
+      }
+      if (
+        era.get(`mark:${cid}:反抗`) ||
+        era.get('tflag:强奸') >= 0 ||
+        era.get(`mark:${cid}:苦痛`) ||
+        recent_m ||
+        (recent_s && era.get(`talent:${cid}:抖S`))
+      ) {
+        ret.push('通用_头_阴影');
+      }
+      if (
+        era.get(`ex:${cid}:寸止`) ||
+        era.get(`tcvar:${cid}:接近高潮`) ||
+        era.get(`ex:${cid}:破处`)
+      ) {
+        ret.push('通用_头_汗');
+      }
+      if (!sys_check_awake(cid) || era.get(`tcvar:${cid}:脱力`)) {
+        ret.push('通用_脸_微笑');
+      } else if (
+        era.get(`tcvar:${cid}:刚刚高潮`) ||
+        era.get(`tcvar:${cid}:失神`)
+      ) {
+        ret.push('通用_脸_高潮');
+      } else if (
+        era.get(`mark:${cid}:反抗`) ||
+        (recent_m === part_enum.abuse && !m_abused) ||
+        era.get('tflag:强奸') === 0 ||
+        era.get(`mark:${cid}:苦痛`) ||
+        (recent_m === part_enum.hit && !m_hit && !era.get(`talent:${cid}:圣母`))
+      ) {
+        ret.push('通用_脸_咬牙');
+      } else if (
+        recent_m ||
+        era.get('tflag:强奸') === cid ||
+        (recent_s && era.get(`talent:${cid}:抖S`))
+      ) {
+        ret.push('通用_脸_舔嘴');
+      } else {
+        ret.push('通用_脸_微笑');
+      }
     } else {
       ret.push('通用_脸_微笑');
     }

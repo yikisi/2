@@ -2,6 +2,7 @@ const era = require('#/era-electron');
 
 const {
   sys_check_awake,
+  sys_check_remote,
   sys_check_train_enabled,
 } = require('#/system/sys-calc-chara-param');
 
@@ -67,6 +68,7 @@ module.exports = async function (cid, save_and_next_week, flags) {
       chara,
       marks.c,
       awake,
+      sys_check_remote(cid),
       get_custom_check(cid).get_personal_action(),
     ),
   );

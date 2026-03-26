@@ -83,9 +83,16 @@ module.exports = {
    * @param {CharaTalk} chara
    * @param {EventMarks} c_marks
    * @param {{c:boolean,m:boolean}} awake
+   * @param {boolean} is_remote
    * @param {{[name]:string,[handle]:function}} personal_action
    */
-  generate_celebration_buttons(chara, c_marks, awake, personal_action) {
+  generate_celebration_buttons(
+    chara,
+    c_marks,
+    awake,
+    is_remote,
+    personal_action,
+  ) {
     if (!chara.id) {
       return [];
     }
@@ -101,13 +108,17 @@ module.exports = {
     // CFLAGNAME:56 = 节日事件标记
     if (era.get(`cflag:${chara.id}:56`) > 0) {
       const celebration = get_celebration();
+      const remote_disabled =
+        era.get('flag:当前回合数') % 48 === 30 && !is_remote;
       ret.push({
         config: {
           buttonType: 'danger',
-          disabled: !awake.c || !awake.m || cost_info.mark > 0,
+          disabled:
+            !awake.c || !awake.m || cost_info.mark > 0 || remote_disabled,
           title: di18n.get_act_tip(
             c_marks.check(event_hooks.celebration),
             cost_info,
+            remote_disabled && i18n().ui_celebration_remote_tip,
           ),
         },
         content: i18n().ui_celebration_template.replace(

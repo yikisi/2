@@ -238,9 +238,11 @@ class I18nDetail {
   get_sex_abl_entry = (abl, level) => [abl, '：', level];
   sex_header_jewel = '持有因子';
   sex_header_mark = '获得刻印';
-  sex_image_bt_change_template = '更改调教立绘 (当前：第 %SET% 套)';
+  sex_image_bt_change_template = '更改调教立绘 (当前：%CURRENT%)';
   sex_image_set_template = '第 %SET% 套';
-  sex_image_personal_info = '使用专属调教立绘';
+  sex_image_set_common = '通用';
+  sex_image_common_info = '使用通用调教立绘';
+  sex_image_personal_info = '可用专属调教立绘';
 
   exp_mouth_title = '情报【口】';
   exp_mouth_gift_desc = '构造完美的唇齿口腔，天生的吸力能让任何对手缴械投降';

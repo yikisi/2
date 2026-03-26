@@ -445,6 +445,7 @@ class I18nEntry {
   ui_foreign_lan_max_tip_template = '%LAN%已非常熟练';
   ui_foreign_rest_max_tip = '身体已调理至健康';
   ui_foreign_train_max_tip = '已完全适应跑道';
+  ui_celebration_remote_tip = '无法远程庆祝';
 
   ui_recruit_tip = '* 招募按钮显示为红色的角色有口上';
   ui_rec_chara_info = '个人情报';
@@ -454,6 +455,7 @@ class I18nEntry {
   ui_rec_c_info_template = '%NAME% 的个人情报';
   ui_rec_c_body_template = '%NAME% 的身体尺寸';
   ui_rec_c_talent_template = '%NAME% 的性格特征';
+  ui_rec_c_image_template = '%NAME% 的调教立绘';
   ui_rec_e_train_template = '%NAME% 的训练加成';
   ui_rec_e_train_buff_template = '%ATTR%：+%BUFF%%';
   ui_rec_e_adapt_template = '%NAME% 的脚质适应';

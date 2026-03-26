@@ -43,6 +43,7 @@ const { skills_dict } = require('#/data/race/skill/skill-const');
 
 const di18n = require('#/i18n/extended-def');
 const { __, i18n } = require('#/i18n/selector');
+const { check_chara_ero_image } = require('#/system/ero/sys-calc-ero-image');
 
 async function print_rec_page() {
   const me = get_chara_talk(0);
@@ -273,6 +274,26 @@ async function print_rec_page() {
             type: 'divider',
           },
           ...talent_list,
+          ...(era.checkImage('通用_裸')
+            ? [
+                {
+                  config: {
+                    content: i18n().ui_rec_c_image_template.replace(
+                      '%NAME%',
+                      name,
+                    ),
+                    position: 'left',
+                  },
+                  type: 'divider',
+                },
+                {
+                  content: check_chara_ero_image(selected)
+                    ? i18n().detail.sex_image_personal_info
+                    : i18n().detail.sex_image_common_info,
+                  type: 'text',
+                },
+              ]
+            : []),
         ],
         { width: 18 },
       );

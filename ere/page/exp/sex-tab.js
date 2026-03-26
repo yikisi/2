@@ -72,7 +72,7 @@ module.exports = {
         { content: i18n().detail.growth_info, type: 'text' },
       );
     } else if (!chara.id || flags.show_exp) {
-      const in_train = era.get(`ex:${chara.id}:TotalEX`) !== undefined;
+      const in_train = !era.getCharactersInTrain().includes(chara.id);
       if (in_train) {
         const plugin_list = CharaInmon.get(chara.id).list;
         const inmon_info =
@@ -322,22 +322,27 @@ module.exports = {
     const img_name = era.get(`cstr:${chara.id}:头像`);
     if (
       !era.getCharactersInTrain().includes(chara.id) &&
-      check_chara_ero_image(chara.id)
+      era.checkImage('通用_裸')
     ) {
       sex_info_list.push({ content: [{ isBr: true }], type: 'text' });
-      const img_t = era.get(`cstr:${chara.id}:头像T`);
-      if (img_t) {
+      if (check_chara_ero_image(chara.id)) {
+        const img_t = era.get(`cstr:${chara.id}:头像T`);
         sex_info_list.push({
           accelerator: 100,
           content: i18n().detail.sex_image_bt_change_template.replace(
-            '%SET%',
-            img_t.substring(img_name.length) || '1',
+            '%CURRENT%',
+            img_t
+              ? i18n().detail.sex_image_set_template.replace(
+                  '%SET%',
+                  img_t.substring(img_name.length) || '1',
+                )
+              : i18n().detail.sex_image_set_common,
           ),
           type: 'button',
         });
       } else {
         sex_info_list.push({
-          content: i18n().detail.sex_image_personal_info,
+          content: i18n().detail.sex_image_common_info,
           type: 'text',
         });
       }
@@ -346,7 +351,7 @@ module.exports = {
       /** @param {number} cmd */
       async handle(cmd) {
         if (cmd === 100) {
-          let option = 2;
+          let option = 1;
           const get_name = (i) => `${img_name}${i > 1 ? i : ''}`;
           while (era.checkImage(`${get_name(option + 1)}_头`)) {
             option++;
@@ -354,33 +359,44 @@ module.exports = {
           era.setHorizontalAlign('space-evenly');
           era.setAlign('center');
           era.printInColRows(
-            ...new Array(option).fill(void 0).map((_, i) => {
-              const names = sys_get_ero_image(chara.id, get_name(i + 1), false);
-              return {
-                columns: [
-                  {
-                    names,
-                    type: 'image.whole',
-                  },
-                  {
-                    accelerator: 100 + i,
-                    content: i18n().detail.sex_image_set_template.replace(
-                      '%SET%',
-                      (i + 1).toString(),
-                    ),
-                    type: 'button',
-                  },
-                ],
-                config: { width: 4 },
-              };
-            }),
+            {
+              columns: [
+                {
+                  names: sys_get_ero_image(chara.id, '', false),
+                  type: 'image.whole',
+                },
+                {
+                  accelerator: 100,
+                  content: i18n().detail.sex_image_set_common,
+                  type: 'button',
+                },
+              ],
+              config: { width: 4 },
+            },
+            ...new Array(option).fill(void 0).map((_, i) => ({
+              columns: [
+                {
+                  names: sys_get_ero_image(chara.id, get_name(i + 1), false),
+                  type: 'image.whole',
+                },
+                {
+                  accelerator: 101 + i,
+                  content: i18n().detail.sex_image_set_template.replace(
+                    '%SET%',
+                    (i + 1).toString(),
+                  ),
+                  type: 'button',
+                },
+              ],
+              config: { width: 4 },
+            })),
           );
           era.setAlign('left');
           era.setHorizontalAlign('start');
           const ret = (await era.input()) - 100;
           era.set(
             `cstr:${chara.id}:头像T`,
-            `${img_name}${ret > 0 ? ret + 1 : ''}`,
+            ret > 0 ? `${img_name}${ret > 1 ? ret : ''}` : '',
           );
         }
       },

@@ -34,7 +34,7 @@ const { chara_skill_dict } = require('#/data/race/skill/skill-const');
 function init_chara(cid, src = 0) {
   const current = new Date().getTime();
   if (
-    (era.get(`base:${cid}:5`) !== undefined && cid > 0) ||
+    (era.getAddedCharacters().includes(cid) && cid > 0) ||
     !era.addCharacter(src > 0 ? [cid, src] : cid)
   ) {
     return;
@@ -44,6 +44,9 @@ function init_chara(cid, src = 0) {
     .forEach((k) =>
       era.set(`cstr:${cid}:${k}`, era.get(`cstr:${cid}:${k}`) || ''),
     );
+  if (src === 0) {
+    era.set(`cstr:${cid}:头像T`, era.get(`cstr:${cid}:头像`));
+  }
   if (src > 0) {
     era.set(`cflag:${cid}:模版角色`, src);
     era.set(`cflag:${cid}:种族`, 1);
