@@ -41,13 +41,13 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
       check_aim_race(races, race_enum.japa_cup, 2, 1)),
   aim_races,
   function (buffer, races) {
-    buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     buffer.push({
       content: i18n().kojo[this.id].achieve_track_aim_template.replace(
         '%COUNT%',
         new EyeEduMarks().title_check.toString(),
       ),
     });
+    buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
     aims.forEach(([race, year, rank]) =>
       buffer.push(check_aim_and_get_entry(races, race, year, rank)),
     );

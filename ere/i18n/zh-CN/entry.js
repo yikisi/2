@@ -623,6 +623,8 @@ class I18nEntry {
   get_ui_out_confirm = (chara) => ['要和 ', chara, ' 一起去哪里？'];
   ui_out_self_confirm = '要独自去哪里？';
   get_ui_bt_talk_with_npc_template = '和 %NAME% 攀谈';
+  ui_deep_interact_with_npc_template =
+    '关系并未达到如此程度 (需要：%R_REQUIRE%以上，当前：%R_CURRENT%；或：%L_REQUIRE%以上，当前：%L_CURRENT%)';
   get_ui_out_bye = (chara, you) => [
     '【和 ',
     chara,

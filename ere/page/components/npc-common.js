@@ -16,6 +16,7 @@ const sys_get_random_event = require('#/system/sys-get-random-event');
 const get_progress_bar = require('#/page/components/get-progress-bar');
 const goto_sex = require('#/page/components/goto-sex');
 const take_care = require('#/page/components/take-care');
+const { get_c_base } = require('#/page/homepage/snippets');
 const print_juel_shop_page = require('#/page/page-juel-shop');
 
 const { get_custom_check } = require('#/event/check/check-factory');
@@ -36,6 +37,7 @@ const {
 const { location_enum } = require('#/data/locations');
 const { attr_enum } = require('#/data/train-const');
 
+const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 /**
@@ -62,29 +64,39 @@ async function npc_common(
   birth_cb,
 ) {
   const relation = get_relation_info(chara.id);
-  const celebration_cost = 50 * (era.get('cflag:0:节日事件标记') + 1);
   const love = get_love_info(chara.id);
   const relation_check =
     era.get(`relation:${chara.id}:0`) <= 225 &&
     era.get(`love:${chara.id}`) < 50;
+  const relation_tip =
+    relation_check &&
+    i18n()
+      .ui_deep_interact_with_npc_template.replace(
+        '%R_REQUIRE%',
+        i18n().relation_5,
+      )
+      .replace('%R_CURRENT%', relation.mark())
+      .replace('%L_REQUIRE%', i18n().love_3)
+      .replace('%L_CURRENT%', love.mark());
   const is_awake = sys_check_awake(chara.id);
-  const player_base = {
-    stamina: era.get('base:0:体力'),
-    time: era.get('base:0:精力'),
-  };
-  const chara_base = {
-    stamina: era.get(`base:${chara.id}:体力`),
-    time: era.get(`base:${chara.id}:精力`),
-  };
+  const player_base = get_c_base(0);
+  const chara_base = get_c_base(chara.id);
   const is_recruit =
     era.get(`cflag:${chara.id}:招募状态`) === recruit_flags.yes;
   const image = era.get(`cstr:${chara.id}:头像`);
   era.setVerticalAlign('middle');
+  let cost_info;
+  cost_info = {
+    mark: 0b10 * (era.get('base:0:精力') < 200),
+    time: 200,
+  };
+  const jpy = era.get('flag:当前马币');
   const buttons = [
     {
       b: {
-        config: { disabled: era.get('base:0:精力') < 200 || !is_awake },
+        config: { disabled: cost_info.mark > 0 || !is_awake },
         content: talk_cb.name,
+        title: di18n.get_act_tip(false, cost_info),
       },
       async h() {
         sys_change_attr_and_print(0, attr_enum.tp, -200);
@@ -118,8 +130,14 @@ async function npc_common(
     },
     {
       b: {
-        config: { disabled: era.get('base:0:精力') < 200 || !is_awake },
+        config: { disabled: cost_info.mark > 0 || !is_awake || jpy < 0 },
         content: i18n().ui_office_gift,
+        title: di18n.get_act_tip(
+          false,
+          cost_info,
+          jpy < 10 &&
+            i18n().ui_cost_money_tip_template.replace('%MONEY%', '10'),
+        ),
       },
       async h() {
         era.drawLine();
@@ -128,48 +146,58 @@ async function npc_common(
         await run_custom_daily(chara.id, event_hooks.office_gift);
       },
     },
-    {
-      b: {
-        config: {
-          disabled:
-            !is_awake ||
-            sys_check_act_disabled(
-              sys_get_move_cost(location_enum.gate, chara.id),
-              player_base,
-              chara_base,
-            ) > 0 ||
-            relation_check,
-          buttonType: EventMarks.get(chara.id).check(
+  ];
+  cost_info = sys_get_move_cost(location_enum.gate, chara.id);
+  cost_info.mark = sys_check_act_disabled(cost_info, player_base, chara_base);
+  const c_marks = EventMarks.get(chara.id);
+  buttons.push({
+    b: {
+      config: {
+        disabled: !is_awake || cost_info.mark > 0 || relation_check,
+        buttonType: c_marks.check(
+          event_hooks.out_start,
+          event_hooks.out_river,
+          event_hooks.out_shopping,
+          event_hooks.out_church,
+          event_hooks.out_station,
+          event_hooks.back_school,
+        )
+          ? 'danger'
+          : 'warning',
+        title: di18n.get_loc_tips(
+          c_marks.check(event_hooks.back_school),
+          c_marks.check(
             event_hooks.out_start,
             event_hooks.out_river,
             event_hooks.out_shopping,
             event_hooks.out_church,
             event_hooks.out_station,
-            event_hooks.back_school,
-          )
-            ? 'danger'
-            : 'warning',
-        },
-        content: out_cb.name,
+          ),
+          0,
+          0,
+          cost_info,
+          relation_tip,
+        ),
       },
-      async h() {
-        const temp = era.get('flag:当前互动角色');
-        era.set('flag:当前互动角色', chara.id);
-        if (out_cb.handle) {
-          await out_cb.handle();
-        } else {
-          sys_handle_action(
-            sys_get_move_cost(location_enum.gate, chara.id),
-            chara.id,
-          );
-          era.set('flag:当前位置', location_enum.gate);
-          await out_cb.print_out_page();
-          era.set('flag:当前位置', out_cb.loc);
-        }
-        era.set('flag:当前互动角色', temp);
-      },
+      content: out_cb.name,
     },
-  ];
+    async h() {
+      const temp = era.get('flag:当前互动角色');
+      era.set('flag:当前互动角色', chara.id);
+      if (out_cb.handle) {
+        await out_cb.handle();
+      } else {
+        sys_handle_action(
+          sys_get_move_cost(location_enum.gate, chara.id),
+          chara.id,
+        );
+        era.set('flag:当前位置', location_enum.gate);
+        await out_cb.print_out_page();
+        era.set('flag:当前位置', out_cb.loc);
+      }
+      era.set('flag:当前互动角色', temp);
+    },
+  });
   if (func_cb.handle !== void 0) {
     buttons.push({
       b: {
@@ -179,16 +207,25 @@ async function npc_common(
       h: func_cb.handle,
     });
   }
+  const celebration_cost = 50 * (era.get('cflag:0:节日事件标记') + 1);
+  cost_info = {
+    mark:
+      0b10 * (player_base.time < celebration_cost) +
+      0b1000 * (chara_base.time < 50),
+    time: celebration_cost,
+    ctime: 50,
+  };
   if (era.get(`cflag:${chara.id}:节日事件标记`) > 0) {
     buttons.push({
       b: {
         config: {
           buttonType: 'danger',
-          disabled:
-            !is_awake ||
-            chara_base.time < 50 ||
-            player_base.time < celebration_cost ||
-            relation_check,
+          disabled: !is_awake || cost_info.mark > 0 || relation_check,
+          title: di18n.get_act_tip(
+            c_marks.check(event_hooks.celebration),
+            cost_info,
+            relation_tip,
+          ),
         },
         content: cele_cb.name,
       },
@@ -214,11 +251,8 @@ async function npc_common(
       b: {
         config: {
           buttonType: 'danger',
-          disabled:
-            !is_awake ||
-            chara_base.time < 50 ||
-            player_base.time < celebration_cost ||
-            relation_check,
+          disabled: !is_awake || cost_info.mark > 0 || relation_check,
+          title: di18n.get_act_tip(!1, cost_info, relation_tip),
         },
         content: i18n().ui_birthday,
       },

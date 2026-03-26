@@ -43,7 +43,7 @@ module.exports = {
    */
   get_c_base(cid) {
     if (cid === void 0) {
-      return cid;
+      return void 0;
     }
     return {
       stamina: era.get(`base:${cid}:体力`),
@@ -109,7 +109,7 @@ module.exports = {
     if (era.get(`cflag:${chara.id}:56`) > 0) {
       const celebration = get_celebration();
       const remote_disabled =
-        era.get('flag:当前回合数') % 48 === 30 && !is_remote;
+        era.get('flag:当前回合数') % 48 === 30 && is_remote;
       ret.push({
         config: {
           buttonType: 'danger',

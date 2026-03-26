@@ -454,7 +454,7 @@ module.exports = async (cid, next_cb, flags) => {
         title: di18n.get_loc_tips(
           marks.c.check(event_hooks.back_school),
           marks.c.check(event_hooks.school_clinic) ||
-            marks.c.check(event_hooks.school_clinic),
+            marks.m.check(event_hooks.school_clinic),
           npc.c,
           npc.ce,
           temp,
@@ -538,7 +538,7 @@ module.exports = async (cid, next_cb, flags) => {
         title: di18n.get_loc_tips(
           marks.c.check(event_hooks.back_school),
           marks.c.check(event_hooks.school_atrium) ||
-            marks.c.check(event_hooks.school_atrium),
+            marks.m.check(event_hooks.school_atrium),
           0,
           0,
           temp,
@@ -570,7 +570,7 @@ module.exports = async (cid, next_cb, flags) => {
         title: di18n.get_loc_tips(
           marks.c.check(event_hooks.back_school),
           marks.c.check(event_hooks.school_rooftop) ||
-            marks.c.check(event_hooks.school_rooftop),
+            marks.m.check(event_hooks.school_rooftop),
           0,
           0,
           temp,
@@ -705,7 +705,7 @@ module.exports = async (cid, next_cb, flags) => {
             event_hooks.out_shopping,
             event_hooks.out_church,
             event_hooks.out_station,
-          ) || marks.c.check(event_hooks.out_start),
+          ) || marks.m.check(event_hooks.out_start),
           0,
           0,
           temp,
