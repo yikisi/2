@@ -308,9 +308,13 @@ module.exports = {
     taste.say('注 意！即使这样指名了，也还请好好和对方从头相处吧！');
   },
   star_drew_options: ['从列表里选', '用名字指名', '用 ID 指名', '再想想'],
+  star_drew_filter_template: '拥有 %FILTERS% 的角色',
+  star_drew_filter_kojo: '口上',
+  star_drew_filter_image: '专属调教立绘',
+  star_drew_bt_filter_image: '调教',
   get_star_drew_selected: (name) => `${name} [已指名]`,
-  star_drew_kojo_chara: '使用口上的角色',
-  star_drew_timon_chara: '使用地文的角色',
+  star_drew_all_chara: '可指名角色',
+  star_drew_other_chara: '其他角色',
   star_drew_chara_name_input: '请输入想指名的角色名',
   star_drew_chara_id_input: '请输入想指名的角色 ID',
   /**

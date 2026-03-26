@@ -10,6 +10,7 @@ module.exports = {
   async degeneration_to_evil(bt_yes, bt_no) {
     const flag = era.get('flag:恶堕');
     era.printButton(bt_yes, 1, {
+      buttonType: '',
       color: akuochi[1],
       disabled: flag === 1,
     });
@@ -19,6 +20,7 @@ module.exports = {
       });
     }
     era.printButton(bt_no, 2, {
+      buttonType: '',
       color: akuochi[0],
       disabled: flag === 2,
     });

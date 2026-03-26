@@ -1,6 +1,7 @@
 const era = require('#/era-electron');
 
 const sys_check_team_limit = require('#/system/chara/sys-check-team-limit');
+const { check_chara_ero_image } = require('#/system/ero/sys-calc-ero-image');
 const sys_get_star_premium_draw = require('#/system/flag/sys-get-star-premium-draw');
 const { sys_handle_action } = require('#/system/sys-calc-base-cflag');
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
@@ -25,6 +26,7 @@ const generate_dictionary = require('#/event/snippets/generate-dictionary');
 
 const get_display_name = require('#/utils/calc-display-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { join_to_string } = require('#/utils/list-utils');
 
 const { get_chara_color } = require('#/data/chara-colors');
 const CharaTitles = require('#/data/chara-titles');
@@ -35,6 +37,7 @@ const recruit_flags = require('#/data/event/recruit-flags');
 const yandere_list = require('#/data/event/yandere-list');
 const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
+const { max_chara_id } = require('#/data/other-const');
 
 const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
@@ -135,12 +138,9 @@ async function page_chairman_office() {
                 let temp = await era.input();
                 switch (temp) {
                   case 1:
-                    temp = [];
-                    temp_list
-                      .map((cid) => {
-                        const color = get_chara_color(cid);
-                        const flag_script =
-                          check_rec_script(cid) && check_edu_script(cid);
+                    temp = -1;
+                    {
+                      const get_name_button = (cid) => {
                         const name = get_display_name(
                           era.get(`static:${cid}:name`),
                         );
@@ -149,39 +149,112 @@ async function page_chairman_office() {
                           config: {
                             align: 'center',
                             buttonType: '',
-                            color,
+                            color: get_chara_color(cid),
                             width: 4,
                           },
                           content:
                             star_premium_draw.chara === cid
                               ? i18n().timon.others.get_star_drew_selected(name)
                               : name,
-                          priority: flag_script,
                           type: 'button',
                         };
-                      })
-                      .reduce(
-                        (p, c) => {
-                          p[1 - c.priority].push(c);
-                          return p;
-                        },
-                        [[], []],
-                      )
-                      .forEach((l) => {
-                        if (l.length > 0) {
-                          temp.push({
-                            config: {
-                              content: l[0].priority
-                                ? i18n().timon.others.star_drew_kojo_chara
-                                : i18n().timon.others.star_drew_timon_chara,
-                            },
-                            type: 'divider',
+                      };
+                      const curr = era.getLineCount();
+                      const filter_cb = [
+                        (cid) => check_rec_script(cid) && check_edu_script(cid),
+                        (cid) => check_chara_ero_image(cid),
+                      ];
+                      const filters = [true, false];
+                      while (temp === -1) {
+                        await era.clear(era.getLineCount() - curr);
+                        const filter_enable = filters.reduce((p, c) => p || c);
+                        const two_list = [[], []];
+                        if (filter_enable) {
+                          temp_list.forEach((cid) => {
+                            if (
+                              filters.reduce(
+                                (p, c, i) => p && (!c || filter_cb[i](cid)),
+                                true,
+                              )
+                            ) {
+                              two_list[0].push(cid);
+                            } else {
+                              two_list[1].push(cid);
+                            }
                           });
-                          temp.push(...l);
+                        } else {
+                          two_list[1] = temp_list;
                         }
-                      });
-                    era.printMultiColumns(temp);
-                    temp = await era.input();
+                        if (filter_enable) {
+                          era.drawLine({
+                            content:
+                              i18n().timon.others.star_drew_filter_template.replace(
+                                '%FILTERS%',
+                                join_to_string(
+                                  [
+                                    filters[0] &&
+                                      i18n().timon.others.star_drew_filter_kojo,
+                                    filters[1] &&
+                                      i18n().timon.others
+                                        .star_drew_filter_image,
+                                  ].filter((e) => e),
+                                  i18n().ui_conjunction,
+                                ),
+                              ),
+                          });
+                          era.printMultiColumns(
+                            two_list[0].map(get_name_button),
+                          );
+                        }
+                        era.printMultiColumns(
+                          [
+                            {
+                              config: {
+                                content: filter_enable
+                                  ? i18n().timon.others.star_drew_other_chara
+                                  : i18n().timon.others.star_drew_all_chara,
+                                position: 'left',
+                                width: 20,
+                              },
+                              type: 'divider',
+                            },
+                            {
+                              accelerator: 1000,
+                              config: {
+                                align: 'center',
+                                buttonType: filters[0] ? 'warning' : 'info',
+                                showAcc: false,
+                                width: 2,
+                              },
+                              content:
+                                i18n().timon.others.star_drew_filter_kojo,
+                              type: 'button',
+                            },
+                            {
+                              accelerator: 1001,
+                              config: {
+                                align: 'center',
+                                buttonType: filters[1] ? 'warning' : 'info',
+                                showAcc: false,
+                                width: 2,
+                                disabled: !era.checkImage('通用_裸'),
+                              },
+                              content:
+                                i18n().timon.others.star_drew_bt_filter_image,
+                              type: 'button',
+                            },
+                            ...two_list[1].map(get_name_button),
+                          ],
+                          { verticalAlign: 'middle' },
+                        );
+                        const ret = await era.input();
+                        if (ret < max_chara_id) {
+                          temp = ret;
+                        } else {
+                          filters[ret - 1000] = !filters[ret - 1000];
+                        }
+                      }
+                    }
                     break;
                   case 2:
                     era.print(i18n().timon.others.star_drew_chara_name_input);
@@ -201,7 +274,7 @@ async function page_chairman_office() {
                 if (temp === 302) {
                   era.set('callname:302:-2', '900201');
                   era.set('cflag:302:招募状态', recruit_flags.yes);
-                  if (era.get('talent:302:病娇')) {
+                  if (era.get('talent:302:病娇') > 0) {
                     yandere_list.push(302);
                   }
                   await i18n().kojo[chara.id].recruit.recruit(
@@ -213,24 +286,22 @@ async function page_chairman_office() {
                       chara,
                       get_chara_talk(temp),
                     );
-                  } else if (temp_list.indexOf(temp) === -1) {
+                  } else if (!temp_list.includes(temp)) {
                     await i18n().timon.others.star_drew_no_one(chara);
-                  } else {
-                    if (
-                      (await i18n().timon.others.star_drew(
-                        chara,
-                        get_chara_talk(0),
-                        get_chara_talk(temp).get_colored_actual_name(),
-                        star_premium_draw.chara > 0,
-                      )) === 1
-                    ) {
-                      sys_change_fame(-cost);
-                      if (star_premium_draw.chara > 0) {
-                        era.println();
-                        sys_like_chara(302, 0, -50) && (await era.waitAnyKey());
-                      }
-                      star_premium_draw.chara = temp;
+                  } else if (
+                    (await i18n().timon.others.star_drew(
+                      chara,
+                      get_chara_talk(0),
+                      get_chara_talk(temp).get_colored_actual_name(),
+                      star_premium_draw.chara > 0,
+                    )) === 1
+                  ) {
+                    sys_change_fame(-cost);
+                    if (star_premium_draw.chara > 0) {
+                      era.println();
+                      sys_like_chara(302, 0, -50) && (await era.waitAnyKey());
                     }
+                    star_premium_draw.chara = temp;
                   }
                 }
               }
