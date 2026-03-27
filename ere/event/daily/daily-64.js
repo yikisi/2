@@ -10,6 +10,7 @@ const sys_do_sex = require('#/system/ero/sys-calc-ero');
 const { remove_item } = require('#/system/ero/sys-calc-ero-item');
 const {
   begin_and_init_ero,
+  end_ero_and_show_result,
   end_ero_and_train,
   set_palam_to_max,
 } = require('#/system/ero/sys-prepare-ero');
@@ -26,11 +27,12 @@ const select_action_around_river = require('#/event/daily/snippets/select-action
 const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
 const select_action_in_shopping_street = require('#/event/daily/snippets/select-action-in-shopping-street');
 const select_action_in_station = require('#/event/daily/snippets/select-action-in-station');
-const l_kojo = require('#/event/love/love-64.kojo');
 const { i_pama_yandere } = require('#/event/snippets/64');
 const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
+const generate_dictionary = require('#/event/snippets/generate-dictionary');
 const print_event_name = require('#/event/snippets/print-event-name');
 const print_name_and_show_kojo = require('#/event/snippets/print-name-and-show-kojo');
+const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -44,6 +46,8 @@ const { part_enum } = require('#/data/ero/part-const');
 const PamaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-64');
 const PamaLifeMarks = require('#/data/event/life-event-marks/life-event-marks-64');
 const { location_enum } = require('#/data/locations');
+
+const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends CustomizedDaily {
   get #dict() {
@@ -240,14 +244,13 @@ module.exports = class extends CustomizedDaily {
     const lust = era.get(`base:${this.id}:性欲`);
     if (i_pama_yandere() && love >= 95 && lust >= lust_border.absent_mind) {
       new PamaEduMarks().only_you++;
-      const ret = await print_name_and_show_kojo(
-        '负距离的我们',
+      const ret = await print_title_with_kojo(
+        i18n().kojo[this.id].love,
+        'nega_dis',
         get_chara_talk(this.id),
-        l_kojo,
         {
-          ...this.#dict,
-          玩家名: era.get('callname:0:-1'),
-          自称: sys_get_callname(this.id, this.id),
+          ...generate_dictionary(this.id, { uma: !0, your_name: !0 }),
+          SELF_CALL: sys_get_callname(this.id, this.id),
         },
       );
       if (ret[0] === 1) {
@@ -273,14 +276,37 @@ module.exports = class extends CustomizedDaily {
       check > 0
     ) {
       new PamaEduMarks().only_you++;
-      hook.arg = (
-        await print_name_and_show_kojo(
-          '入夜，我为你而来',
-          get_chara_talk(this.id),
-          l_kojo,
-          this.#dict,
-        )
-      )[0];
+      hook.override = true;
+      begin_and_init_ero(0, this.id);
+      set_palam_to_max(0, part_enum.penis);
+      era.set(
+        `param:${this.id}:阴道快感`,
+        era.get(`tcvar:${this.id}:阴道快感上限`) / 2,
+      );
+      await quick_make_love(
+        new EroParticipant(this.id, part_enum.mouth),
+        new EroParticipant(0, part_enum.penis),
+      );
+      await quick_make_love(
+        new EroParticipant(this.id, part_enum.hand),
+        new EroParticipant(0, part_enum.penis),
+      );
+      if (
+        (
+          await print_title_with_kojo(
+            i18n().kojo[this.id].love,
+            'come_for_you',
+            get_chara_talk(this.id),
+            this.#dict,
+          )
+        )['select'] === 1
+      ) {
+        await quick_into_sex(this.id);
+      } else {
+        await quick_into_sex(this.id, this.id, true);
+      }
+      await end_ero_and_show_result();
+      await i18n().kojo[this.id].love['come_fy_end'](this.#dict);
       return;
     }
     if (check > 0) {
@@ -384,9 +410,12 @@ module.exports = class extends CustomizedDaily {
     const pama = get_chara_talk(this.id);
     let name;
     if (i_pama_yandere()) {
-      name = '无终的逃亡';
-      await l_kojo[name](this.#dict);
-      await print_event_name([{ color: buff_colors[3], content: name }], pama);
+      const event = i18n().kojo[this.id].love['endless_escape'];
+      await print_event_name(
+        [{ color: buff_colors[3], content: event.title }],
+        pama,
+      );
+      await event(generate_dictionary(this.id));
     } else if (era.get(`love:${this.id}`) >= 75) {
       name = '明日再会';
       await kojo[name](this.#dict);
@@ -400,9 +429,12 @@ module.exports = class extends CustomizedDaily {
     const pama = get_chara_talk(this.id);
     let name;
     if (i_pama_yandere()) {
-      name = '无终的逃亡';
-      await l_kojo[name](this.#dict);
-      await print_event_name([{ color: buff_colors[3], content: name }], pama);
+      const event = i18n().kojo[this.id].love['endless_escape'];
+      await print_event_name(
+        [{ color: buff_colors[3], content: event.title }],
+        pama,
+      );
+      await event(generate_dictionary(this.id));
     } else if (era.get(`love:${this.id}`) >= 75) {
       name = '迷途终点';
       await kojo[name](this.#dict);

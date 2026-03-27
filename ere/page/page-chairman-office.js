@@ -198,7 +198,7 @@ async function page_chairman_office() {
                                       i18n().timon.others
                                         .star_drew_filter_image,
                                   ].filter((e) => e),
-                                  i18n().ui_conjunction,
+                                  i18n().ui_comma,
                                 ),
                               ),
                           });

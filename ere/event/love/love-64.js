@@ -1,8 +1,3 @@
-/**
- * @file 目白善信 - 爱慕
- * @author Bottle
- * @author KUN
- */
 const era = require('#/era-electron');
 
 const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
@@ -25,14 +20,14 @@ const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const print_ero_page = require('#/page/page-ero');
 
-const kojo = require('#/event/love/love-64.kojo');
 const CustomizedLove = require('#/event/love/love-common');
 const punish_rejecting_love = require('#/event/love/snippets/punish-rejecting-love');
 const { add_event } = require('#/event/queue');
 const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
+const generate_dictionary = require('#/event/snippets/generate-dictionary');
 const masturbate = require('#/event/snippets/masturbate');
 const print_event_name = require('#/event/snippets/print-event-name');
-const print_name_and_show_kojo = require('#/event/snippets/print-name-and-show-kojo');
+const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 const quick_into_3p = require('#/event/snippets/quick-into-3p');
 const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
@@ -48,19 +43,20 @@ const { location_enum } = require('#/data/locations');
 const { vehicle_enum } = require('#/data/move-const');
 const RaceHistory = require('#/data/race/model/race-history');
 
+const { i18n } = require('#/i18n/selector');
+
 module.exports = class extends CustomizedLove {
+  get #kojo() {
+    return i18n().kojo[this.id].love;
+  }
+
   get #dict() {
-    const ret = {};
-    const pama = get_chara_talk(this.id);
-    const me = get_chara_talk(0);
-    ret['代表色'] = pama.color;
-    ret.T = me.name;
-    ret['她'] = pama.sex;
-    ret['少女'] = pama.teen_sex_title;
-    ret['称呼'] = sys_get_callname(this.id, 0);
-    ret['女'] = pama.phy_sex_title[0];
-    ret['马娘'] = pama.uma_sex_title;
-    return ret;
+    return generate_dictionary(this.id, {
+      call: !0,
+      teen: !0,
+      uma: !0,
+      your_name: !0,
+    });
   }
 
   /**
@@ -78,7 +74,7 @@ module.exports = class extends CustomizedLove {
       return;
     }
     new PamaLifeMarks().love_24 = 2;
-    await print_name_and_show_kojo('距离感', pama, kojo, this.#dict);
+    await print_title_with_kojo(this.#kojo, 'distance', pama, this.#dict);
     return true;
   }
 
@@ -94,16 +90,10 @@ module.exports = class extends CustomizedLove {
   async happy(pama, me, callname, stage, extra_flag, event_object) {
     if (sys_check_awake(this.id) && sys_check_awake(0)) {
       add_event(stage, event_object);
-      await era.printAndWait([
-        '【假如有一天，',
-        pama.get_colored_name(),
-        ' 或 ',
-        me.get_colored_name(),
-        ' 睡着了……】',
-      ]);
+      await this.#kojo['pre-happy'](this.#dict);
       return;
     }
-    await print_name_and_show_kojo('喜悦', pama, kojo, this.#dict);
+    await print_title_with_kojo(this.#kojo, 'happy', pama, this.#dict);
   }
 
   async 49(pama, me, callname, stage, extra_flag, event_object) {
@@ -117,12 +107,14 @@ module.exports = class extends CustomizedLove {
         event_object,
       );
     }
-    const dict = this.#dict;
     const helios = get_chara_talk(65);
-    dict['太阳神色'] = helios.color;
-    dict['太阳神称呼善信'] = sys_get_callname(65, this.id);
-    const ret = await print_name_and_show_kojo('温度', pama, kojo, dict);
-    if (ret[1] === 2) {
+    const ret = await print_title_with_kojo(this.#kojo, '49', pama, {
+      ...this.#dict,
+      '65_CALL': sys_get_callname(65, this.id),
+      COLOR_65: helios.color,
+      HELIOS: helios.name,
+    });
+    if (ret['update'] === 2) {
       await sys_love_uma_in_event(this.id);
     } else {
       await punish_rejecting_love(this.id);
@@ -141,8 +133,8 @@ module.exports = class extends CustomizedLove {
         event_object,
       );
     }
-    const ret = await print_name_and_show_kojo('承诺', pama, kojo, this.#dict);
-    if (ret.at(-1) === 2) {
+    const ret = await print_title_with_kojo(this.#kojo, '74', pama, this.#dict);
+    if (ret['update'] === 2) {
       await sys_love_uma_in_event(this.id);
     } else {
       era.set(`cflag:${this.id}:爱慕暂拒`, 74);
@@ -161,10 +153,11 @@ module.exports = class extends CustomizedLove {
         event_object,
       );
     }
-    const dict = this.#dict;
-    dict['姐妹'] = pama.siblings_sex_title;
-    const ret = await print_name_and_show_kojo('暖阳', pama, kojo, dict);
-    if (ret[0] === 2) {
+    const ret = await print_title_with_kojo(this.#kojo, '89', pama, {
+      ...this.#dict,
+      SISTERS: pama.siblings_sex_title,
+    });
+    if (ret['update'] === 2) {
       await sys_love_uma_in_event(this.id);
       begin_and_init_ero(0, this.id);
       await quick_make_love(
@@ -172,7 +165,7 @@ module.exports = class extends CustomizedLove {
         new EroParticipant(this.id, part_enum.mouth),
         false,
       );
-      if (ret[1] === 1) {
+      if (ret['sex'] === 1) {
         await print_ero_page(this.id, true);
         await end_ero_and_show_result(true);
       } else {
@@ -194,11 +187,14 @@ module.exports = class extends CustomizedLove {
         event_object,
       );
     }
-    const dict = this.#dict;
-    dict['ACE色'] = get_chara_talk(104).color;
-    dict['ACE称呼善信'] = sys_get_callname(104, this.id);
-    const ret = await print_name_and_show_kojo('锁', pama, kojo, dict);
-    if (ret[0] === 2) {
+    const ace = get_chara_talk(104);
+    const ret = await print_title_with_kojo(this.#kojo, '99', pama, {
+      ...this.#dict,
+      '104_CALL': sys_get_callname(104, this.id),
+      ACE: ace.name,
+      COLOR_104: ace.color,
+    });
+    if (ret['update'] === 2) {
       await sys_love_uma_in_event(this.id);
       begin_and_init_ero(this.id);
       await quick_make_love(
@@ -206,7 +202,7 @@ module.exports = class extends CustomizedLove {
         new EroParticipant(this.id, part_enum.virgin),
         false,
       );
-      if (ret[3] === 1) {
+      if (ret['orgasm'] === 1) {
         await masturbate(this.id);
         sys_change_lust(this.id, -1000);
       } else {
@@ -235,7 +231,7 @@ module.exports = class extends CustomizedLove {
       add_event(stage, event_object);
       return;
     }
-    await print_name_and_show_kojo('在这里也可以哦', pama, kojo, this.#dict);
+    await print_title_with_kojo(this.#kojo, 'here', pama, this.#dict);
     new PamaEduMarks().movie_job = 0;
     begin_and_init_ero(0, this.id);
     await quick_make_love(
@@ -261,25 +257,21 @@ module.exports = class extends CustomizedLove {
 
   /** @param {CharaTalk} pama */
   async escape(pama) {
-    const dict = this.#dict;
-    dict['自称'] = era.get('callname:64:64');
-    const ret = await print_name_and_show_kojo(
-      '和你一同逃去天涯海角',
-      pama,
-      kojo,
-      dict,
-    );
+    const ret = print_title_with_kojo(this.#kojo, 'escape', pama, {
+      ...this.#dict,
+      SELF_CALL: sys_get_callname(this.id, this.id),
+    });
     era.set(`cflag:${this.id}:节日事件标记`, 0);
     const l_cache = era.get('flag:当前位置');
     let loc = -1;
     if (era.get(`love:${this.id}`) >= 75) {
-      if (ret[1] === 1 && ret[5] === 2) {
-        if (ret[8] === 1) {
+      if (ret['out'] === 1 && ret['special'] === 2) {
+        if (ret['location'] === 1) {
           loc = location_enum.atrium;
         } else {
           loc = location_enum.love_hotel;
         }
-      } else if (ret[1] === 2 && ret[3] === 2) {
+      } else if (ret['out'] === 2 && ret['special'] === 2) {
         loc = location_enum.office;
       }
     }
@@ -288,10 +280,10 @@ module.exports = class extends CustomizedLove {
       await quick_into_sex(this.id);
       switch (loc) {
         case location_enum.office:
-          await kojo['情人节办公室马跳结束'](dict);
+          await this.#kojo['valentine_out_after_sex'](this.#dict);
           break;
         case location_enum.atrium:
-          await kojo['情人节外出马跳结束'](dict);
+          await this.#kojo['valentine_office_after_sex'](this.#dict);
       }
     }
     era.set('flag:当前位置', l_cache);
@@ -318,10 +310,11 @@ module.exports = class extends CustomizedLove {
       add_event(stage, event_object);
       return;
     }
-    await print_name_and_show_kojo('你所信任的我……', pama, kojo, {
+    const ace = get_chara_talk(104);
+    await print_title_with_kojo(this.#kojo, 'trust', pama, {
       ...this.#dict,
-      ACE色: get_chara_talk(104).color,
-      玩家本名: era.get('callname:0:-1'),
+      ACE: ace.name,
+      COLOR_104: ace.color,
     });
     if (!era.get(`talent:${this.id}:病娇`)) {
       era.set(`talent:${this.id}:病娇`, 1);
@@ -331,10 +324,7 @@ module.exports = class extends CustomizedLove {
 
   /** @param {CharaTalk} pama */
   async is_you(pama) {
-    await print_name_and_show_kojo('正因为是你……', pama, kojo, {
-      ...this.#dict,
-      玩家本名: era.get('callname:0:-1'),
-    });
+    await print_title_with_kojo(this.#kojo, 'is_you', pama, this.#dict);
   }
 
   /**
@@ -350,19 +340,21 @@ module.exports = class extends CustomizedLove {
       era.get('flag:当前互动角色') > 0 &&
       era.get('flag:当前互动角色') !== this.id
     ) {
-      await era.printAndWait(['【', pama.get_colored_name(), ' 在天台等待】']);
+      await this.#kojo['pre-rooftop'](this.#dict);
       add_event(stage, event_object);
       await era.clear(1);
       return;
     }
+    let title;
     if (new PamaEduMarks().only_you > 3) {
-      await print_event_name('等待，或是……期待', pama);
+      title = this.#kojo['root_top_3'].title;
     } else {
-      await print_event_name('等待，或是……', pama);
+      title = this.#kojo['rooftop'].title;
     }
-    await kojo['依存心天台事件']({
+    await print_event_name(title, pama);
+    await this.#kojo['rooftop_event']({
       ...this.#dict,
-      自称: sys_get_callname(this.id, this.id),
+      SELF_CALL: sys_get_callname(this.id, this.id),
     });
     if (all_reward_in_event(this.id, { relation: get_random_value(50, 100) })) {
       await era.waitAnyKey();
@@ -388,16 +380,16 @@ module.exports = class extends CustomizedLove {
     new PamaEduMarks().only_you++;
     if (
       (
-        await print_name_and_show_kojo('异样感', pama, kojo, {
+        await print_title_with_kojo(this.#kojo, 's_feeling', pama, {
           ...this.#dict,
-          自称: sys_get_callname(this.id, this.id),
+          SELF_CALL: sys_get_callname(this.id, this.id),
         })
-      )[0] === 2
+      )['select'] === 2
     ) {
       const cache = era.get('flag:当前位置');
       era.set('flag:当前位置', location_enum.love_hotel);
       await quick_into_sex(this.id, this.id, true);
-      await kojo['异样感马跳结束'](this.#dict);
+      await this.#kojo['s_feeling_end'](this.#dict);
       era.set('flag:当前位置', cache);
     }
     return true;
@@ -414,24 +406,19 @@ module.exports = class extends CustomizedLove {
   async nap(pama, me, callname, stage, extra, event_object) {
     if (era.get('flag:当前互动角色') !== this.id) {
       add_event(stage, event_object);
-      await era.printAndWait(
-        ['【想和 ', pama.get_colored_name(), ' 在天台吃午饭吗】'],
-        {
-          color: pama.color,
-        },
-      );
+      await this.#kojo['pre-nap'](this.#dict);
       await era.clear(1);
       return;
     }
-    const ret = await print_name_and_show_kojo(
-      '宁静的午睡时光',
+    const ret = await print_title_with_kojo(
+      this.#kojo,
+      'nap',
       pama,
-      kojo,
       this.#dict,
     );
     let relation = 0;
     let love;
-    switch (ret[2]) {
+    switch (ret['select']) {
       case 1:
         relation = 10;
         break;
@@ -439,11 +426,11 @@ module.exports = class extends CustomizedLove {
         love = 2;
         break;
       case 3:
-        if (ret[6] === 1) {
+        if (ret['sex'] === 1) {
           sys_change_lust(this.id, 1000);
         } else {
           await quick_into_sex(this.id, this.id, ret[7] === 2);
-          await kojo['午睡马跳后续'](this.#dict);
+          await this.#kojo['nap_end'](this.#dict);
         }
     }
     if (all_reward_in_event(this.id, { love, relation })) {
@@ -463,20 +450,15 @@ module.exports = class extends CustomizedLove {
   async leisure(pama, me, callname, stage, extra, event_object) {
     if (era.get('flag:当前互动角色') !== this.id) {
       add_event(stage, event_object);
-      await era.printAndWait(
-        ['【和 ', pama.get_colored_name(), ' 去唱卡拉OK吧！】'],
-        {
-          color: pama.color,
-        },
-      );
+      await this.#kojo['pre-leisure'](this.#dict);
       await era.clear(1);
       return;
     }
-    const ret = await print_name_and_show_kojo('休闲时光', pama, kojo, {
+    const ret = await print_title_with_kojo(this.kojo, 'leisure', pama, {
       ...this.#dict,
-      自称: sys_get_callname(this.id, this.id),
+      SELF_CALL: sys_get_callname(this.id, this.id),
     });
-    if (ret[1] === 3 && ret[2] === 1) {
+    if (ret['sex'] === 3 && ret['sex2'] === 1) {
       await quick_into_sex(this.id);
     }
     if (all_reward_in_event(this.id)) {
@@ -494,39 +476,27 @@ module.exports = class extends CustomizedLove {
    * @param {EventObject} event_object
    */
   async cinema(pama, me, callname, stage, extra, event_object) {
+    const ardan = get_chara_talk(71);
+    const dict = {
+      ...this.#dict,
+      ARDAN: ardan.name,
+      COLOR_71: ardan.color,
+    };
     if (
       era.get('flag:当前互动角色') !== this.id ||
       era.get('cflag:71:位置') !== era.get(`cflag:${this.id}:位置`)
     ) {
       add_event(stage, event_object);
-      await era.printAndWait(
-        [
-          '【在 ',
-          get_chara_talk(71).get_colored_name(),
-          ' 也在的时候，和 ',
-          pama.get_colored_name(),
-          ' 去看电影吧！】',
-        ],
-        {
-          color: pama.color,
-        },
-      );
+      await this.#kojo['pre-cinema'](dict);
       await era.clear(1);
       return;
     }
-    const dict = this.#dict;
-    dict['阿尔丹色'] = get_chara_talk(71).color;
-    const ret = await print_name_and_show_kojo(
-      '电影院怪谈！？',
-      pama,
-      kojo,
-      dict,
-    );
+    const ret = await print_title_with_kojo(this.#kojo, 'cinema', pama, dict);
     let lover = 0;
     const cache = era.get('flag:当前位置');
     era.set('flag:当前位置', location_enum.love_hotel);
-    if (ret[0] === 1) {
-      if (ret[4] === 2) {
+    if (ret['movie'] === 1) {
+      if (ret['sex'] === 2) {
         lover = this.id;
       }
     } else {
@@ -542,7 +512,7 @@ module.exports = class extends CustomizedLove {
         supporter = 71;
       }
       await quick_into_3p(lover, supporter, master);
-      await kojo['电影院怪谈马跳结束'](dict);
+      await this.#kojo['movie_end'](dict);
     }
     era.set('flag:当前位置', cache);
     if (all_reward_in_event(this.id)) {
@@ -564,7 +534,7 @@ module.exports = class extends CustomizedLove {
       add_event(stage, event_object);
       return;
     }
-    await print_name_and_show_kojo('突然美食时间？', pama, kojo, this.#dict);
+    await print_title_with_kojo(this.#kojo, 'delicious', pama, this.#dict);
     let wait = all_reward_in_event(this.id, {
       base: [200],
     });
@@ -593,7 +563,7 @@ module.exports = class extends CustomizedLove {
       add_event(stage, event_object);
       return;
     }
-    await print_name_and_show_kojo('休息……？', pama, kojo, this.#dict);
+    await print_title_with_kojo(this.#kojo, 'rest', pama, this.#dict);
     await quick_into_sex(this.id);
     return true;
   }
@@ -612,14 +582,10 @@ module.exports = class extends CustomizedLove {
       era.get('flag:多人载具') !== vehicle_enum.pama
     ) {
       add_event(stage, event_object);
-      await era.printAndWait([
-        '【乘坐善信号和 ',
-        pama.get_colored_name(),
-        ' 去兜风吧！】',
-      ]);
+      await this.#kojo['pre-travel'](this.#dict);
       return;
     }
-    await print_name_and_show_kojo('短暂旅程', pama, kojo, this.#dict);
+    await print_title_with_kojo(this.#kojo, 'travel', pama, this.#dict);
     const cache = era.get('flag:当前位置');
     era.set('flag:当前位置', location_enum.river);
     await quick_into_sex(this.id);
@@ -648,10 +614,11 @@ module.exports = class extends CustomizedLove {
       ]);
       return;
     }
-    await print_name_and_show_kojo('一场小故事的开始', pama, kojo, {
-      ACE色: get_chara_talk(104).color,
-      代表色: get_chara_talk(this.id).color,
-      玩家本名: era.get('callname:0:-1'),
+    const ace = get_chara_talk(104);
+    await print_title_with_kojo(this.#kojo, 'joke', pama, {
+      ...this.#dict,
+      ACE: ace.name,
+      COLOR_104: ace.color,
     });
     add_event(stage, event_object.set_arg('not_joke'));
   }
@@ -665,13 +632,13 @@ module.exports = class extends CustomizedLove {
    * @param {EventObject} event_object
    */
   async not_joke(pama, me, callname, hook, extra, event_object) {
-    const ret = await print_name_and_show_kojo('并不好笑的玩笑', pama, kojo, {
+    const ret = await print_title_with_kojo(this.#kojo, 'not_joke', pama, {
       ...this.#dict,
-      自称: sys_get_callname(this.id, this.id),
+      SELF_CALL: sys_get_callname(this.id, this.id),
     });
-    if (ret[2] === 1) {
+    if (ret['sex'] === 1) {
       await quick_into_sex(this.id);
-      await kojo['玩笑马跳结束'](this.#dict);
+      await this.#kojo['not_joke_end'](this.#dict);
     } else {
       add_event(event_hooks.week_start, event_object.set_arg('end_joke'));
     }
@@ -679,7 +646,7 @@ module.exports = class extends CustomizedLove {
 
   /** @param {CharaTalk} pama */
   async end_joke(pama) {
-    await print_name_and_show_kojo('玩笑已经结束了', pama, kojo, this.#dict);
+    await print_title_with_kojo(this.#kojo, 'end_joke', pama, this.#dict);
     if (all_reward_in_event(this.id, { relation: 0, love: 4 })) {
       await era.waitAnyKey();
     }
@@ -701,15 +668,18 @@ module.exports = class extends CustomizedLove {
       add_event(stage, event_object);
       return;
     }
-    const dict = this.#dict;
-    dict['莱恩色'] = get_chara_talk(27).color;
-    dict['莱恩称呼T'] = sys_get_callname(27, 0);
-    dict['自称'] = sys_get_callname(this.id, this.id);
+    const ryan = get_chara_talk(27);
+    const dict = {
+      ...this.#dict,
+      CALLNAME_27: sys_get_callname(27, 0),
+      COLOR_27: ryan.color,
+      RYAN: ryan.name,
+    };
     let lover = this.id;
     let supporter;
     let master = 0;
     switch (
-      (await print_name_and_show_kojo('过度关心啦！', pama, kojo, dict))[4]
+      (await print_title_with_kojo(this.#kojo, 'concern', pama, dict))['sex']
     ) {
       case 1:
         lover = 27;
@@ -723,7 +693,7 @@ module.exports = class extends CustomizedLove {
         master = this.id;
     }
     await quick_into_3p(lover, supporter, master);
-    await kojo['过度关心马跳结束'](dict);
+    await this.#kojo['concern_end'](dict);
   }
 
   /**
@@ -742,20 +712,23 @@ module.exports = class extends CustomizedLove {
       add_event(stage, event_object);
       return;
     }
-    const dict = this.#dict;
-    dict['麦昆色'] = get_chara_talk(13).color;
-    dict['玩家尊称'] = get_chara_talk(0).adult_sex_title;
-    dict['自称'] = sys_get_callname(this.id, this.id);
+    const mcqueen = get_chara_talk(13);
+    const dict = {
+      ...this.#dict,
+      CALLNAME_13: sys_get_callname(13, 0),
+      COLOR_13: mcqueen.color,
+      MCQUEEN: mcqueen.name,
+    };
     let master = 0;
     if (
-      (
-        await print_name_and_show_kojo('甜品……好像不对？', pama, kojo, dict)
-      )[5] === 2
+      (await print_title_with_kojo(this.#kojo, 'dessert', pama, dict))[
+        'sex'
+      ] === 2
     ) {
       master = 13;
     }
     await quick_into_3p(13, this.id, master);
-    await kojo['甜品事件马跳结束'](dict);
+    await this.#kojo['dessert_end'](dict);
   }
 
   /**
@@ -775,19 +748,22 @@ module.exports = class extends CustomizedLove {
       add_event(stage, event_object);
       return;
     }
-    const dict = this.#dict;
-    dict['你'] = get_chara_talk(0).name;
-    dict['太阳神色'] = get_chara_talk(65).color;
-    dict['称呼'] = sys_get_callname(this.id, 0);
-    dict['训练P'] = sys_get_callname(65, 0);
+    const helios = get_chara_talk(65);
+    const dict = {
+      ...this.#dict,
+      CALLNAME_65: sys_get_callname(65, 0),
+      COLOR_65: helios.color,
+      HELIOS: helios.name,
+    };
     let master = 0;
     if (
-      (await print_name_and_show_kojo('派对时间', pama, kojo, dict))[3] === 2
+      (await print_title_with_kojo(this.#kojo, 'party', pama, dict))['sex'] ===
+      2
     ) {
       master = this.id;
     }
     await quick_into_3p(this.id, 65, master);
-    await kojo['派对马跳结束'](dict);
+    await this.#kojo['party_end'](dict);
     return true;
   }
 };

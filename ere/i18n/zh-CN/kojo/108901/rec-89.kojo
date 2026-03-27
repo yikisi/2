@@ -292,7 +292,7 @@ rec2:
     - color: '%COLOR_91%'
       content:
         - fontWeight: bold
-          content: %NAME_91%
+          content: %VIVLOS%
         - 「啊！发现高尚亲——～！」
     -
     - ————却被另一个声音抢先了。
@@ -302,7 +302,7 @@ rec2:
       content:
         - fontWeight: bold
           content: %CHARA%
-        - 「……%NAME_91%、还有%CALL_90%……」
+        - 「……%VIVLOS%、还有%CALL_90%……」
     - color: '%COLOR%'
       content:
         - fontWeight: bold
@@ -311,17 +311,17 @@ rec2:
     - color: '%COLOR_91%'
       content:
         - fontWeight: bold
-          content: %NAME_91%
+          content: %VIVLOS%
         - 「因为高尚亲比赛完一下～子就消失了！人家很担心嘛～！」
     - color: '%COLOR_90%'
       content:
         - fontWeight: bold
-          content: %NAME_90%
+          content: %VERXINA%
         - 「是比赛后发生什么事了吗？有什么烦恼的话，可以向我们倾诉一下哦？」
     - color: '%COLOR_91%'
       content:
         - fontWeight: bold
-          content: %NAME_91%
+          content: %VIVLOS%
         - 「高尚亲，还好吗……？」
     - color: '%COLOR%'
       content:
@@ -329,7 +329,7 @@ rec2:
           content: %CHARA%
         - 「……」
     -
-    - 似乎是察觉到了%CHARA%的异常，被称为%NAME_91%的%UMA%抱住了%SEX%的手臂，歪着头把脸凑到海军帽下方，试图看清对方的表情。
+    - 似乎是察觉到了%CHARA%的异常，被称为%VIVLOS%的%UMA%抱住了%SEX%的手臂，歪着头把脸凑到海军帽下方，试图看清对方的表情。
     - 然而对于这份关心，%TEEN%却微微移开了视线。
     -
     - color: '%COLOR%'
@@ -340,12 +340,12 @@ rec2:
     - color: '%COLOR_90%'
       content:
         - fontWeight: bold
-          content: %NAME_90%
+          content: %VERXINA%
         - 「……这样啊，如果要商量的话我们随时欢迎哦。」
     - color: '%COLOR_90%'
       content:
         - fontWeight: bold
-          content: %NAME_90%
+          content: %VERXINA%
         - 「其实，爸爸妈妈说，今晚要办家庭聚会，我们想来问问你有没有时间。」
     - color: '%COLOR%'
       content:
@@ -355,12 +355,12 @@ rec2:
     - color: '%COLOR_90%'
       content:
         - fontWeight: bold
-          content: %NAME_90%
+          content: %VERXINA%
         - 「妈妈刚才说，因为今天是高尚的招募赛，这个重要的日子，如果一家人能在一起聚一聚就好了，爸爸今天也会来的。」
     - color: '%COLOR_91%'
       content:
         - fontWeight: bold
-          content: %NAME_91%
+          content: %VIVLOS%
         - 「来吧来吧高尚亲～♡绝对会很开心的。」
     - color: '%COLOR%'
       content:
@@ -379,17 +379,17 @@ rec2:
         - 「而且，就算我不在也无所谓吧…有你们两个在不就够了吗……」
     -
     - 当「无所谓」三个字说出口时，%TEEN%仿佛被自己的话刺痛，用力地咬住了下唇，最后一个音节几乎是从牙缝里挤出来的。
-    - 看到%SEX%这幅样子，%NAME_91%急忙靠了过去，这次直接抱住了%SEX%的手臂。
+    - 看到%SEX%这幅样子，%VIVLOS%急忙靠了过去，这次直接抱住了%SEX%的手臂。
     -
     - color: '%COLOR_91%'
       content:
         - fontWeight: bold
-          content: %NAME_91%
+          content: %VIVLOS%
         - 「不要这么说嘛！高尚亲、你可是今天的主角哦！而且我们都想慰劳一下努力的高尚亲～！」
     - color: '%COLOR_90%'
       content:
         - fontWeight: bold
-          content: %NAME_90%
+          content: %VERXINA%
         - 「是啊，今天比赛时的高尚很帅气呢，虽然结果有些可惜，不过你的表现非常亮眼哦，高尚。」
     - color: '%COLOR%'
       content:
@@ -404,33 +404,33 @@ rec2:
     - color: '%COLOR_91%'
       content:
         - fontWeight: bold
-          content: %NAME_91%
+          content: %VIVLOS%
         - 「为什么呀～～！人家还想听高尚亲说说学园里的事情呢～%91_CALL_90%！你也来劝劝高尚亲呀～！」
     - color: '%COLOR_90%'
       content:
         - fontWeight: bold
-          content: %NAME_90%
+          content: %VERXINA%
         - 「……嘛，不过、偶尔是会有这样的日子呢。」
     - color: '%COLOR_91%'
       content:
         - fontWeight: bold
-          content: %NAME_91%
+          content: %VIVLOS%
         - 「%91_CALL_90%～！？」
     - color: '%COLOR_90%'
       content:
         - fontWeight: bold
-          content: %NAME_90%
-        - 「走吧，%NAME_91%。偶尔也要给高尚些私人空间，爸妈那边……我会想办法的。」
+          content: %VERXINA%
+        - 「走吧，%VIVLOS%。偶尔也要给高尚些私人空间，爸妈那边……我会想办法的。」
     -
-    - 似乎想通了什么，%NAME_90%说着揽住了%NAME_91%的肩膀，轻轻把她转了个方向，随后在%CHARA%的肩上安抚地拍了拍。
+    - 似乎想通了什么，%VERXINA%说着揽住了%VIVLOS%的肩膀，轻轻把她转了个方向，随后在%CHARA%的肩上安抚地拍了拍。
     -
     - color: '%COLOR_91%'
       content:
         - fontWeight: bold
-          content: %NAME_91%
+          content: %VIVLOS%
         - 「唔……%91_CALL_90%倒是再坚持一下呀。呐，高尚亲，为了下次一定要来，一定不要太勉强自己哦……？」
     -
-    - 说完，%NAME_91%虽然有些担心，但还是笑着朝%CHARA%挥了挥手，转身小跑着追上了%NAME_90%的背影。
+    - 说完，%VIVLOS%虽然有些担心，但还是笑着朝%CHARA%挥了挥手，转身小跑着追上了%VERXINA%的背影。
     -
     - color: '%COLOR%'
       content:
@@ -471,19 +471,19 @@ rec2:
         - color: '%COLOR%'
           content: 我有着%CALL_90%和%YOUNGER_SISTER%。
         - color: '%COLOR%'
-          content: %CALL_90%的名字是%NAME_90%，%YOUNGER_SISTER%的名字是%NAME_91%。
+          content: %CALL_90%的名字是%VERXINA%，%YOUNGER_SISTER%的名字是%VIVLOS%。
         - color: '%COLOR%'
           content: %THEY%都像母亲那样……开朗又华丽，擅长与人交往。
         - color: '%COLOR%'
           content: %THEY%两人……与我完全相反。
         -
         - color: '%COLOR%'
-          content: （女性亲戚「啊啦啊啦，这不是%NAME_90%和%NAME_91%吗？你们两个今天也穿的华丽又可爱呢！」）
+          content: （女性亲戚「啊啦啊啦，这不是%VERXINA%和%VIVLOS%吗？你们两个今天也穿的华丽又可爱呢！」）
         - color: '%COLOR_90%'
           content:
             - （
             - fontWeight: bold
-              content: 幼时的%NAME_90%
+              content: 幼时的%VERXINA%
             - 「呵呵……谢谢您的夸奖！这是妈妈给我们买的衣服。之后我们还会一起跳舞哦！请一定要来看哦♪」）
         - color: '%COLOR%'
           content: （女性亲戚「啊呀，跳舞吗？真是华丽的爱好呢，啊，小高尚会一起吗？」）
@@ -501,13 +501,13 @@ rec2:
           content:
             - （
             - fontWeight: bold
-              content: 幼时的%NAME_90%
+              content: 幼时的%VERXINA%
             - 「……好——！今天就再跑一组！」）
         - color: '%COLOR_91%'
           content:
             - （
             - fontWeight: bold
-              content: 幼时的%NAME_91%
+              content: 幼时的%VIVLOS%
             - 「……我也要我也要！%91_CALL_90%等等我呀～」）
         - color: '%COLOR%'
           content: （青年俱乐部教练「……哈哈哈！今天也元气满满呢！周围的孩子都被带动着积极起来了！」）
@@ -524,7 +524,7 @@ rec2:
               content: 幼时的%CHARA%
             - 「……比赛、好开心啊……我从来都不知道，还有这么有趣的事情……！我一定要…变得更加强大才行！」）
         - color: '%COLOR%'
-          content: （青年俱乐部教练「……那边的姐妹真有天赋啊！%NAME_90%未来可期，%NAME_91%也是块潜力无限的璞玉！」）
+          content: （青年俱乐部教练「……那边的姐妹真有天赋啊！%VERXINA%未来可期，%VIVLOS%也是块潜力无限的璞玉！」）
         - color: '%COLOR%'
           content:
             - （
@@ -588,7 +588,7 @@ rec2:
             - '（……如果是%CALL_90%%THEY%或者北部同学%THEY%，应该很容易就能适应、并且做的很好吧。）'
         -
         - color: '%COLOR%'
-          content: '如果是%CALL_90%……肯定能赢得比赛，%NAME_91%的话，应该也能够主动出击吧。'
+          content: '如果是%CALL_90%……肯定能赢得比赛，%VIVLOS%的话，应该也能够主动出击吧。'
         - color: '%COLOR%'
           content: '为什么%THEY%能够如此坚强、如此勇敢……我却总是这么胆小呢？不可思议、完全不明白。'
         - color: '%COLOR%'
@@ -770,7 +770,7 @@ rec2:
         - color: '%COLOR%'
           content: '……难道、难道说是那个吗！？对我的胸部居然这么执着吗！？'
         - color: '%COLOR%'
-          content: '我知道自己的胸部比%CALL_90%和%NAME_91%的稍微大那么一点点……但、但是也没必要这么着迷吧！？'
+          content: '我知道自己的胸部比%CALL_90%和%VIVLOS%的稍微大那么一点点……但、但是也没必要这么着迷吧！？'
         - color: '%COLOR%'
           content: '想到这里，我不禁用手挡住了自己的胸部。'
         -
@@ -866,7 +866,7 @@ rec2:
         - color: '%COLOR%'
           content: '……没错，绝对是那样，不然怎么可能只是因为碰到%YOURPHY%的手脸就烫成这个样子呢！'
         - color: '%COLOR%'
-          content: '没想到……居然准备了这么多，如果遇到最坏的情况……至少要保护%CALL_90%和%NAME_91%。'
+          content: '没想到……居然准备了这么多，如果遇到最坏的情况……至少要保护%CALL_90%和%VIVLOS%。'
         -
         - acc: 1
           content: '「哦，对了，差点忘了这个。」'

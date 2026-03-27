@@ -7,7 +7,7 @@ const sys_do_sex = require('#/system/ero/sys-calc-ero');
  * @param {EroParticipant} defender
  * @param {boolean} [output]
  */
-async function quick_make_love(attacker, defender, output) {
+async function quick_make_love(attacker, defender, output = false) {
   sys_do_sex(attacker, defender);
   await next_turn(output);
 }

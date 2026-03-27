@@ -113,8 +113,8 @@ module.exports = class extends CustomizedRecruit {
               CALL_90: sys_get_callname(this.id, 90),
               COLOR_90: temp[0].color,
               COLOR_91: temp[1].color,
-              NAME_90: temp[0].name,
-              NAME_91: temp[1].name,
+              VERXINA: temp[0].name,
+              VIVLOS: temp[1].name,
               YOUNGER_SISTER: i18n().name.younger_sister,
               YOURPHY: get_chara_talk(0).phy_sex_title,
             })

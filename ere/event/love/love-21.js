@@ -1,7 +1,3 @@
-/**
- * @file 玉藻十字 - 爱慕
- * @author 雞雞
- */
 const era = require('#/era-electron');
 
 const {
@@ -11,7 +7,6 @@ const {
 const { sys_love_uma_in_event } = require('#/system/sys-calc-chara-others');
 const { sys_check_remote } = require('#/system/sys-calc-chara-param');
 
-const kojo = require('#/event/love/love-21.kojo');
 const CustomizedLove = require('#/event/love/love-common');
 const punish_rejecting_love = require('#/event/love/snippets/punish-rejecting-love');
 const { add_event } = require('#/event/queue');
@@ -20,12 +15,17 @@ const masturbate = require('#/event/snippets/masturbate');
 const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 
 const event_hooks = require('#/data/event/event-hooks');
+const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends CustomizedLove {
+  get #kojo() {
+    return i18n().kojo[this.id].love;
+  }
+
   async 49(tama, me, callname, stage, extra_flag, event_object) {
     if (event_object.arg.length === 1) {
       await print_title_with_kojo(
-        kojo,
+        this.#kojo,
         '49-1',
         tama,
         generate_dictionary(this.id, { call: !0 }),
@@ -42,7 +42,7 @@ module.exports = class extends CustomizedLove {
       if (
         (
           await print_title_with_kojo(
-            kojo,
+            this.#kojo,
             '49-2',
             tama,
             generate_dictionary(this.id, { uma: !0 }),
@@ -63,7 +63,7 @@ module.exports = class extends CustomizedLove {
       if (
         (
           await print_title_with_kojo(
-            kojo,
+            this.#kojo,
             '74-1',
             tama,
             generate_dictionary(this.id, { your_name: !0, your_sex: !0 }),
@@ -82,7 +82,7 @@ module.exports = class extends CustomizedLove {
       if (
         (
           await print_title_with_kojo(
-            kojo,
+            this.#kojo,
             '74-2',
             tama,
             generate_dictionary(this.id, { your_name: !0 }),

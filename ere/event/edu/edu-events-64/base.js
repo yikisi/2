@@ -8,13 +8,14 @@ const {
 
 const kojo = require('#/event/edu/edu-64.kojo');
 const CustomizedEdu = require('#/event/edu/edu-common');
-const l_kojo = require('#/event/love/love-64.kojo');
 const { add_event, cb_enum } = require('#/event/queue');
 const { i_pama_yandere } = require('#/event/snippets/64');
 const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
 const check_aim_race = require('#/event/snippets/check-aim-race');
+const generate_dictionary = require('#/event/snippets/generate-dictionary');
 const print_event_name = require('#/event/snippets/print-event-name');
 const print_name_and_show_kojo = require('#/event/snippets/print-name-and-show-kojo');
+// const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -28,6 +29,8 @@ const { location_enum } = require('#/data/locations');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
 const { attr_enum, fumble_result } = require('#/data/train-const');
+
+const { i18n } = require('#/i18n/selector');
 
 class Edu64Base extends CustomizedEdu {
   /** @returns {Record<string,any>} */
@@ -707,9 +710,12 @@ class Edu64Base extends CustomizedEdu {
     const pama = get_chara_talk(this.id);
     let name;
     if (i_pama_yandere()) {
-      name = '无终的逃亡';
-      await l_kojo[name](this.dict);
-      await print_event_name([{ color: buff_colors[3], content: name }], pama);
+      const event = i18n().kojo[this.id].love['endless_escape'];
+      await print_event_name(
+        [{ color: buff_colors[3], content: event.title }],
+        pama,
+      );
+      await event(generate_dictionary(this.id));
     } else if (era.get(`love:${this.id}`) >= 75) {
       name = '无力逃亡';
       await kojo[name](this.dict);
