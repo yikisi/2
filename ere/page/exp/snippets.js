@@ -57,9 +57,6 @@ module.exports = {
   /** @param {number} cid */
   get_shared_com_base_birthday(cid) {
     const birth_cstr = era.get(`cstr:${cid}:出生经历`);
-    if (birth_cstr.startsWith('出生于')) {
-      return birth_cstr;
-    }
     return (
       birth_cstr.length > 0
         ? i18n().detail.base_birthday_info_template

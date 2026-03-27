@@ -1,22 +1,25 @@
 const era = require('#/era-electron');
 
+const { i18n } = require('#/i18n/selector');
+
 /** @returns {Promise<number>} */
 function select_action_in_shopping_street() {
   era.printInColRows(
-    { columns: [{ content: '前往商店街做什么呢？', type: 'text' }] },
+    { columns: [{ content: i18n().ui_select_action_shopping, type: 'text' }] },
     {
       columns: [
-        '街机厅',
-        '抽奖',
-        '卡拉OK',
-        '看电影',
-        era.get('flag:当前互动角色') > 0 ? '' : '粉红色的小店',
+        i18n().ui_action_shopping_arcade,
+        i18n().ui_action_shopping_drawing,
+        i18n().ui_action_shopping_ktv,
+        i18n().ui_action_shopping_movie,
+        era.get('flag:当前互动角色') === 0 &&
+          i18n().ui_action_shopping_ero_item,
       ]
         .filter((e) => e)
         .map((action, i, l) => ({
           accelerator: i,
           config: { align: 'center', width: Math.floor(24 / l.length) },
-          content: `去${action}吧`,
+          content: action,
           type: 'button',
         })),
       config: { horizontalAlign: 'space-evenly' },

@@ -645,6 +645,16 @@ module.exports = async () => {
                       .join('+'),
                   );
                 }
+                const birth = era.get(`cstr:${cid}:出生经历`);
+                if (birth && birth.startsWith('出生于')) {
+                  era.set(
+                    `cstr:${cid}:出生经历`,
+                    birth.replace(
+                      /出生于 (\d+) 年 (\d+) 月 (\d+) 日/,
+                      (_, _y) => `${_y}`,
+                    ),
+                  );
+                }
               });
             }
             if (version < era.get('gamebase').version) {

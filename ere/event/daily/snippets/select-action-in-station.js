@@ -1,17 +1,23 @@
 const era = require('#/era-electron');
 
+const { i18n } = require('#/i18n/selector');
+
 /**
  * @param {number} cid
  * @returns {Promise<number>}
  */
 function select_action_in_station(cid = 0) {
   era.printInColRows(
-    { columns: [{ content: '前往车站做什么呢？', type: 'text' }] },
+    { columns: [{ content: i18n().ui_select_action_station, type: 'text' }] },
     {
-      columns: ['吃饭', '约会', '逛商场']
+      columns: [
+        i18n().ui_action_station_restaurant,
+        i18n().ui_action_station_date,
+        i18n().ui_action_station_shopping,
+      ]
         .map((action, i) => ({
           accelerator: i,
-          content: `去${action}吧`,
+          content: action,
           type: 'button',
         }))
         .filter((_, i) => i !== 1 || cid > 0)

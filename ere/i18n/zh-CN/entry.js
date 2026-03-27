@@ -636,6 +636,23 @@ class I18nEntry {
   ui_mejiro_city_love_tip_template =
     '关系并未达到如此程度 (需要：%REQUIRE%以上，当前：%CURRENT%)';
 
+  ui_select_action_atrium = '前往中庭做什么呢？';
+  ui_action_atrium_tree_hollow = '看看枯树洞';
+  ui_action_atrium_date = '约会';
+  ui_select_action_river = '前往河边做什么呢？';
+  ui_action_river_fish = '钓鱼';
+  ui_action_river_walk = '散步';
+  ui_select_action_shopping = '前往商店街做什么呢？';
+  ui_action_shopping_arcade = '去街机厅';
+  ui_action_shopping_drawing = '抽奖';
+  ui_action_shopping_ktv = '唱卡拉OK';
+  ui_action_shopping_movie = '看电影';
+  ui_action_shopping_ero_item = '逛粉红色的小店';
+  ui_select_action_station = '前往车站做什么呢？';
+  ui_action_station_restaurant = '吃饭';
+  ui_action_station_date = '约会';
+  ui_action_station_shopping = '逛商场';
+
   ui_race_report_header = '比赛出走预定';
 
   ui_shop_limited_item_entry_template = '%ITEM%(限)';

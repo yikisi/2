@@ -148,21 +148,8 @@ module.exports = {
           };
         })
         .filter((ch) => ch.f === chara.id || ch.m === chara.id),
-      (ch) => {
-        const y = era.get(`cstr:${ch.id}:出生经历`);
-        let order_key;
-        if (y.startsWith('出生于')) {
-          order_key = y.replace(
-            /出生于 (\d+) 年 (\d+) 月 (\d+) 日/,
-            (_, _y, _m, _d) =>
-              +`${_y}${_m.padStart(2, '0')}${_d.padStart(2, '0')}`,
-          );
-        } else {
-          order_key =
-            +`${y}${era.get(`cflag:${ch.id}:出生月份`).toString().padStart(2, '0')}${era.get(`cflag:${ch.id}:出生日期`).toString().padStart(2, '0')}`;
-        }
-        return order_key;
-      },
+      (ch) =>
+        +`${era.get(`cstr:${ch.id}:出生经历`)}${era.get(`cflag:${ch.id}:出生月份`).toString().padStart(2, '0')}${era.get(`cflag:${ch.id}:出生日期`).toString().padStart(2, '0')}`,
       true,
     ).forEach((ch, i) => {
       const child = get_chara_talk(ch.id);

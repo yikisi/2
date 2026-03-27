@@ -1,16 +1,20 @@
 const era = require('#/era-electron');
 
+const { i18n } = require('#/i18n/selector');
+
 /** @returns {Promise<number>} */
 function select_action_around_river() {
   era.printInColRows(
-    { columns: [{ content: '前往河边做什么呢？', type: 'text' }] },
+    { columns: [{ content: i18n().ui_select_action_river, type: 'text' }] },
     {
-      columns: ['钓鱼', '散步'].map((action, i) => ({
-        accelerator: i * 100,
-        config: { align: 'center', width: 12 },
-        content: `去${action}吧`,
-        type: 'button',
-      })),
+      columns: [i18n().ui_action_river_fish, i18n().ui_action_river_walk].map(
+        (action, i) => ({
+          accelerator: i * 100,
+          config: { align: 'center', width: 12 },
+          content: action,
+          type: 'button',
+        }),
+      ),
     },
   );
   return era.input();
