@@ -31,6 +31,7 @@ class I18nTimon {
   );
   race = proxy_kojo_js(require('#/i18n/zh-CN/timon/others/race'));
   others = proxy_kojo_js(require('#/i18n/zh-CN/timon/others/others'));
+  random_events = proxy_kojo_js(require('#/i18n/zh-CN/timon/others/random'));
   pregnant_slave = proxy_kojo_js(
     require('#/i18n/zh-CN/timon/others/pregnant-slave'),
   );

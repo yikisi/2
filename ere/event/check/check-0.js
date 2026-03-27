@@ -10,6 +10,7 @@ const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
+const { max_chara_id } = require('#/data/other-const');
 
 module.exports = class extends CustomizedCheck {
   check_next_week() {
@@ -168,15 +169,15 @@ module.exports = class extends CustomizedCheck {
     }
     if (
       !my_marks.justice &&
-      in_team_list.filter(
+      in_team_list.some(
         (cid) =>
           cid > 0 &&
-          cid < 1000 &&
+          cid < max_chara_id &&
           get(`cflag:${cid}:成长阶段`) >= 2 &&
           get(`cflag:${cid}:种族`) > 0 &&
           get(`relation:${cid}:0`) <=
             get(`love:${cid}`) * (get('flag:极端行为限制') || 1),
-      ).length > 0
+      )
     ) {
       add_event(
         event_hooks.week_start,

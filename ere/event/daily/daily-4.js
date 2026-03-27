@@ -10,6 +10,7 @@ const select_action_in_atrium = require('#/event/daily/snippets/select-action-in
 const select_action_in_shopping_street = require('#/event/daily/snippets/select-action-in-shopping-street');
 const select_action_in_station = require('#/event/daily/snippets/select-action-in-station');
 
+const CharaTalk = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
@@ -455,9 +456,9 @@ module.exports = class extends CustomizedDaily {
   async out_church() {
     const zensky = get_chara_talk(4);
     const love = era.get('love:4'),
-      chara340_talk = get_chara_talk(340),
-      chara341_talk = get_chara_talk(341),
-      chara342_talk = get_chara_talk(342);
+      chara340_talk = new CharaTalk(340),
+      chara341_talk = new CharaTalk(341),
+      chara342_talk = new CharaTalk(342);
     chara340_talk.name = '温柔的女神';
     chara341_talk.name = '睿智的女神';
     chara342_talk.name = '严肃的女神';

@@ -19,6 +19,7 @@ const select_action_in_shopping_street = require('#/event/daily/snippets/select-
 const select_action_in_station = require('#/event/daily/snippets/select-action-in-station');
 const print_event_name = require('#/event/snippets/print-event-name');
 
+const CharaTalk = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_abbr_number, get_random_value } = require('#/utils/value-utils');
 
@@ -78,7 +79,7 @@ module.exports = class extends CustomizedDaily {
         } else if (Math.random() < 0.2) {
           /** @author 幽白書 */
           my_marks.fishing = 0;
-          const sky = get_chara_talk(20);
+          const sky = new CharaTalk(20);
           await print_event_name('钓鱼的心得', sky);
           sky.name = '戴着斗笠的芦毛' + sky.uma_sex_title;
           await era.printAndWait([

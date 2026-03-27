@@ -281,6 +281,90 @@ module.exports = {
   },
 
   /**
+   * 重复育成
+   */
+
+  sc_event_name: '「梦」',
+  get_sc_buttons: () =>
+    get('flag:初见重复育成') === 1
+      ? {
+          yes: '「我就是为此而来」',
+          no: '「……已经够了」',
+        }
+      : {
+          yes: '继续前进',
+          no: '就此回头',
+        },
+  /**
+   * 事件前半段
+   * @param {CharaTalk} you 玩家
+   */
+  async sc_event_former(you) {
+    if (get('flag:初见重复育成') === 1) {
+      await printAndWait('夜深人静。');
+      await printAndWait([
+        you.get_colored_name(),
+        ' 独自前往特雷森的学院中心。',
+      ]);
+      await printAndWait('一尊三女神的雕塑安然竖立于此。');
+      await printAndWait([
+        you.get_colored_name(),
+        ' 深呼吸，走向泉边，将自己先前所写的书信敬上，投入水中。',
+      ]);
+      await printAndWait([
+        '池里倒映的月光霎时轻摇起来，一片幽光浮动，',
+        you.get_colored_name(),
+        ' 感觉到数个声音一齐在脑中回荡——',
+      ]);
+      await printAndWait(
+        '人生无常，无论是一马当先的勇者，统治世代的霸主又或是制御领域的帝皇，所经之路都未必一帆风顺，无论光辉黑暗，终究是梦幻的泡影。',
+      );
+      await printAndWait(
+        '不过，噩梦终会逝去，美梦也能成真。浮沫中，也有想要捞出保存的事物。',
+      );
+      await you.say_as_unknown_and_wait('那么，告诉我你的决心。');
+    } else {
+      await printAndWait([you.get_colored_name(), ' 又一次回到了这个地方。']);
+      await printAndWait([
+        '这是……第几次？',
+        you.get_colored_name(),
+        ' 对此的记忆诡异地模糊起来。',
+      ]);
+      await printAndWait('不过，这不是关键……');
+      await printAndWait([you.get_colored_name(), ' 心中所想之事，才是必需。']);
+    }
+  },
+  sc_limit_template: '请选择要再次育成的角色 (最多选择 %LIMIT% 名)',
+  sc_name_template: '%NAME%',
+  sc_name_inherited_template: '%NAME%（已被继承）',
+  /**
+   * 事件前半段
+   * @param {CharaTalk} you 玩家
+   */
+  async sc_event_latter(you) {
+    if (get('flag:初见重复育成') === 1) {
+      await printAndWait([
+        you.get_colored_name(),
+        ' 望向雕像的面部，盯着那三对灵动似真的眼眸，俯首行礼。',
+      ]);
+      await printAndWait('随后，一片光彩绽放——');
+      await printAndWait('是时候追寻「下一次」的真实了。');
+    } else {
+      await printAndWait([
+        you.get_colored_name(),
+        ' 看着三女神的塑像，水雾模糊了她们的面容，',
+        you.get_colored_name(),
+        ' 想做些什么，刚欲张口伸手，却——',
+      ]);
+      await printAndWait('眼前的一切在面前扭曲。');
+      await printAndWait('随后立刻恢复，仿佛什么都没发生过。');
+      await printAndWait('……');
+      await printAndWait('一切如常……或有不同？');
+      await printAndWait('自己……做了什么来着？');
+    }
+  },
+
+  /**
    * 超得地文
    */
 

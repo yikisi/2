@@ -29,10 +29,11 @@ module.exports = {
       return CharaTalk.me;
     }
     CharaTalk.init_chara(id);
-    if (!color && obj_dict[id] !== undefined) {
+    if (!color && obj_dict[id] !== void 0) {
+      obj_dict[id].name = void 0;
       return obj_dict[id];
     }
-    if (cons_dict[id] !== undefined) {
+    if (cons_dict[id] !== void 0) {
       return (obj_dict[id] = new cons_dict[id](id, color));
     }
     return (obj_dict[id] = new CharaTalk(id, color));
