@@ -39,9 +39,6 @@ const { get_custom_edu } = require('#/event/edu/edu-factory');
 const { get_custom_ero } = require('#/event/ero/ero-factory');
 const game_guides = require('#/event/others/game-guides');
 const { start_machine_gun, stop_machine_gun } = require('#/event/queue');
-const {
-  generate_common_dict,
-} = require('#/event/snippets/generate-dictionary');
 
 const {
   get_chara_talk,
@@ -75,8 +72,7 @@ let random_event;
 
 async function anniversary() {
   if (era.get('flag:当前回合数') % 48 === 1) {
-    // FLAGNAME:1 = 当前年
-    const year = era.get('flag:1');
+    const year = era.get('flag:当前年');
     let name;
     switch (year) {
       case 2010:
@@ -96,7 +92,12 @@ async function anniversary() {
     }
     if (name !== void 0) {
       era.drawLine();
-      await i18n().timon.anniversary[name](generate_common_dict());
+      await i18n().timon.others[name](
+        get_chara_talk(0),
+        ...(era.get('flag:角色性别') === 1
+          ? [i18n().name.uma_boy, i18n().name.he_mul]
+          : [i18n().name.uma_girl, i18n().name.she_mul]),
+      );
     }
     if (year >= 2009) {
       global_achievement.time_ten = 1;
@@ -150,10 +151,13 @@ async function save_and_next_week(cid, cur_loc, rest_loc) {
   era.set('flag:床伴', lover);
   const punish = era.get('flag:惩戒力度') >= 2 && check_pregnant_unprotect(0);
   if (punish) {
-    i18n().timon.work_as_pregnant_slave['work']({
-      SLAVE: get_trainer_title().title(),
-      ...generate_common_dict(),
-    });
+    i18n().timon.pregnant_slave.work(
+      get_chara_talk(0),
+      ...(era.get('flag:角色性别') === 1
+        ? [i18n().name.uma_boy, i18n().name.he, i18n().name.he_mul]
+        : [i18n().name.uma_girl, i18n().name.she, i18n().name.she_mul]),
+      get_trainer_title().title(),
+    );
   }
   if (cid > 0 && !sys_check_remote(cid) && !lover) {
     if (punish) {

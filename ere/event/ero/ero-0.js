@@ -141,8 +141,8 @@ module.exports = class extends CustomizedEro {
           (cid) => cid > 0 && era.get(`cflag:${cid}:育成回合计时`) < 3 * 48,
         ).length;
         const ret = await print_title_with_kojo(
-          this.#kojo,
-          'duty',
+          i18n().timon.pregnant_slave,
+          'report_preg_duty',
           mother,
           father,
           edu_count,
@@ -216,7 +216,7 @@ module.exports = class extends CustomizedEro {
             { c: 0, s: 0 },
           );
           const ret = await print_title_with_kojo(
-            this.#kojo,
+            i18n().timon.pregnant_slave,
             'have_baby_in_sleep',
             mother,
             father,
@@ -228,7 +228,7 @@ module.exports = class extends CustomizedEro {
           }
         } else if (LifeEventMarks.get_marks(0).rape_child === father.id) {
           const ret = await print_title_with_kojo(
-            this.#kojo,
+            i18n().timon.pregnant_slave,
             'have_baby_after_raped',
             mother,
             father,
@@ -238,8 +238,8 @@ module.exports = class extends CustomizedEro {
           }
         } else {
           await print_title_with_kojo(
-            this.#kojo,
-            'have_baby_as_slave',
+            i18n().timon.pregnant_slave,
+            'have_baby_dedicate',
             mother,
             father,
           );

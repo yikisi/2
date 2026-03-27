@@ -4,7 +4,7 @@ const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
 const CustomizedEro = require('#/event/ero/ero-common');
-const print_event_name = require('#/event/snippets/print-event-name');
+const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
@@ -39,8 +39,9 @@ class EroChild extends CustomizedEro {
           }
           era.set(`status:${cid}:${36 + (Math.random() < 0.5)}`, 1);
         }
-        await print_event_name(i18n().timon.ero_child.oyakodon.title, child);
-        await i18n().timon.ero_child.oyakodon(
+        await print_title_with_kojo(
+          i18n().timon.pregnant_slave,
+          'oyakodon',
           child,
           get_chara_talk(fid),
           get_chara_talk(0),

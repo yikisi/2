@@ -30,16 +30,10 @@ class I18nTimon {
     require('#/i18n/zh-CN/timon/others/tachyon-shop'),
   );
   race = proxy_kojo_js(require('#/i18n/zh-CN/timon/others/race'));
-  /** @type {KojoFile} */
-  anniversary = require('#/i18n/zh-CN/timon/others/anniversary.kojo');
-  morning_sex = proxy_kojo_js(require('#/i18n/zh-CN/timon/others/morning-sex'));
   others = proxy_kojo_js(require('#/i18n/zh-CN/timon/others/others'));
-  punish_pregnant_slave = proxy_kojo_js(
-    require('#/i18n/zh-CN/timon/others/punish-pregnant-slave'),
+  pregnant_slave = proxy_kojo_js(
+    require('#/i18n/zh-CN/timon/others/pregnant-slave'),
   );
-  /** @type {KojoFile} */
-  work_as_pregnant_slave = require('#/i18n/zh-CN/timon/others/work-as-pregnant-slave.kojo');
-
   cum = proxy_kojo_js(require('#/i18n/zh-CN/timon/mejiro/cum'));
   /** @type {KojoFile} */
   cum_events = require('#/i18n/zh-CN/timon/mejiro/cum-events.kojo');

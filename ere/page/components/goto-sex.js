@@ -140,7 +140,8 @@ async function goto_sex(cid, sex_loc) {
   } else {
     const love_check = era.get(`love:${cid}`) >= 50;
     const check =
-      love_check || era.get('flag:惩戒力度') >= 2
+      love_check ||
+      (era.get(`cflag:${cid}:种族`) > 0 && era.get('flag:惩戒力度') >= 2)
         ? get_sex_acceptable(cid)
         : -1;
     let ret, dice;

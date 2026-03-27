@@ -36,7 +36,7 @@ async function blowjob(chara, me) {
   if (
     (
       await print_title_with_kojo(
-        i18n().timon.morning_sex,
+        i18n().timon.others,
         'blowjob',
         chara,
         me,
@@ -64,7 +64,22 @@ async function blowjob(chara, me) {
 }
 
 /**
- * @author 黑奴队长
+ * @param {CharaTalk} chara
+ * @param {CharaTalk} me
+ */
+async function naked_apron(chara, me) {
+  if (
+    (
+      await print_title_with_kojo(i18n().timon.others, 'naked_apron', chara, me)
+    )[0] === 1
+  ) {
+    begin_and_init_ero(0, chara.id);
+    await print_ero_page(chara.id, true);
+    await end_ero_and_show_result();
+  }
+}
+
+/**
  * @param {CharaTalk} chara
  * @param {CharaTalk} me
  */
@@ -77,8 +92,8 @@ async function duty(chara, me) {
   if (
     (
       await print_title_with_kojo(
-        i18n().timon.morning_sex,
-        'duty',
+        i18n().timon.pregnant_slave,
+        'morning_duty',
         chara,
         me,
         get_trainer_title().full(),
@@ -111,28 +126,6 @@ async function duty(chara, me) {
   }
   await print_ero_page(chara.id, true);
   await end_ero_and_show_result();
-}
-
-/**
- * @author 雞雞
- * @param {CharaTalk} chara
- * @param {CharaTalk} me
- */
-async function naked_apron(chara, me) {
-  if (
-    (
-      await print_title_with_kojo(
-        i18n().timon.morning_sex,
-        'naked_apron',
-        chara,
-        me,
-      )
-    )[0] === 1
-  ) {
-    begin_and_init_ero(0, chara.id);
-    await print_ero_page(chara.id, true);
-    await end_ero_and_show_result();
-  }
 }
 
 async function morning_sex() {

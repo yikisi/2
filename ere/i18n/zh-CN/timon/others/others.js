@@ -1,5 +1,6 @@
 /** @file 杂项 */
 const {
+  get,
   input,
   print,
   printAndWait,
@@ -280,7 +281,7 @@ module.exports = {
   },
 
   /**
-   * 以下是超得地文
+   * 超得地文
    */
 
   /**
@@ -370,7 +371,7 @@ module.exports = {
   grand_live_header: '明年如下赛事将举办大舞台：',
 
   /**
-   * 以下是投资理财地文
+   * 投资理财地文
    */
 
   /**
@@ -443,4 +444,264 @@ module.exports = {
       ]);
     }
   },
+
+  /**
+   * 周年庆事件
+   */
+
+  /**
+   * 十周年
+   * @author 雞雞
+   * @param {CharaTalk} you 玩家
+   * @param {string} uma 马娘 or 马郎
+   */
+  async TEN(you, uma) {
+    await printAndWait('时光荏苒，三年之后又三年，三年之后又三年。');
+    await printAndWait([
+      '樱花开了又谢，谢了又开，',
+      you.get_colored_name(),
+      '在特雷森学园的时光已过了十年。',
+    ]);
+    await printAndWait([
+      '这十年间',
+      you.get_colored_name(),
+      '见证着一个个赛',
+      uma,
+      '的成长，',
+      you.get_colored_name(),
+      '也从初出茅庐的训练员成长为学园中备受尊敬的存在。',
+    ]);
+    await printAndWait([
+      '感谢',
+      you.get_colored_name(),
+      '在幕后默默守护，陪伴',
+      uma,
+      '们一路前行。',
+    ]);
+    await printAndWait([
+      '正因为有',
+      you.get_colored_name(),
+      '，这十年的故事才如此闪耀。',
+    ]);
+  },
+  /**
+   * 二十周年
+   * @author 雞雞
+   * @param {CharaTalk} you 玩家
+   * @param {string} uma 马娘 or 马郎
+   * @param {string} they 她们 or 他们
+   */
+  async TWENTY(you, uma, they) {
+    await printAndWait('二十载光阴如白驹过隙，匆匆而逝。');
+    await printAndWait(['特雷森学园的训练场上，赛', uma, '的脚步仍未停歇。']);
+    await printAndWait([
+      '感谢',
+      you.get_colored_name(),
+      '从未放弃任何一个梦想。',
+    ]);
+    await printAndWait([
+      they,
+      '的每一次冲刺，都有',
+      you.get_colored_name(),
+      '的影子在其中。',
+    ]);
+    await printAndWait([
+      you.get_colored_name(),
+      '翻阅着新一代学员的档案，或许，这些青涩的名字中又会诞生下一个改变历史的存在。',
+    ]);
+  },
+  /**
+   * 三十周年
+   * @author 雞雞
+   * @param {CharaTalk} you 玩家
+   */
+  async THIRTY(you) {
+    await printAndWait([
+      '三十年的岁月，足够让',
+      you.get_colored_name(),
+      '成为一代人心中的传奇。',
+    ]);
+    await printAndWait('赛场依旧热血沸腾，特雷森的校徽依旧散发着光辉。');
+    await printAndWait([
+      '而',
+      you.get_colored_name(),
+      '的故事早已被无数人铭记。',
+    ]);
+    await printAndWait([
+      '感谢',
+      you.get_colored_name(),
+      '用三十年的坚持与信念，书写了不可复制的传奇。',
+    ]);
+  },
+  /**
+   * 四十周年
+   * @author 雞雞
+   * @param {CharaTalk} you 玩家
+   * @param {string} uma 马娘 or 马郎
+   * @param {string} they 她们 or 他们
+   */
+  async FORTY(you, uma, they) {
+    await printAndWait([
+      '四十年就在弹指一挥间，',
+      you.get_colored_name(),
+      '的故事已然成为特雷森学园的无可分割的一部分。',
+    ]);
+    await printAndWait([
+      '即使岁月更迭，',
+      you.get_colored_name(),
+      '的坚持从未改变。',
+    ]);
+    await printAndWait([
+      '赛',
+      uma,
+      '们不断突破自我，为了彼此的梦想而奔跑，而',
+      you.get_colored_name(),
+      '始终是',
+      they,
+      '背后最温暖的存在。',
+    ]);
+    await printAndWait([
+      '学园某面荣誉墙之上中挂满了四十年来的照片，每一张都记录着',
+      you.get_colored_name(),
+      '的足迹。',
+    ]);
+  },
+  /**
+   * 五十周年
+   * @author 雞雞
+   * @param {CharaTalk} you 玩家
+   * @param {string} uma 马娘 or 马郎
+   * @param {string} they 她们 or 他们
+   */
+  async FIFTY(you, uma, they) {
+    await printAndWait('人生五十年，如梦亦似幻。');
+    await printAndWait(
+      '樱花依旧如初般绽放，特雷森学园迎来了属于她的半世纪辉煌。',
+    );
+    await printAndWait('半个世纪的时间足以改变一切，但有些事却从未改变。');
+    await printAndWait([
+      '曾经的赛',
+      uma,
+      '们有的成为了传奇，有的退居幕后，但',
+      they,
+      '的故事都因',
+      you.get_colored_name(),
+      '而延续。',
+    ]);
+    await printAndWait([
+      '而',
+      you.get_colored_name(),
+      '也依然站在训练场上，注视着新的赛',
+      uma,
+      '们奔跑的身影。',
+    ]);
+  },
+
+  /**
+   * 隔日清晨系列事件
+   */
+
+  naked_apron: (() => {
+    /**
+     * @author 雞雞
+     * @param {CharaTalk} chara
+     * @param {CharaTalk} you
+     */
+    const f = async (chara, you) => {
+      const ret = [];
+      await printAndWait([
+        '早上醒来时，发现 ',
+        chara.get_colored_name(),
+        ' 已经不在床上了。',
+      ]);
+      await printAndWait([
+        '起床梳洗后在厨房发现了',
+        chara.sex,
+        '的身影，对方似乎在准备早餐的样子，然而……',
+      ]);
+      await printAndWait([
+        '浑身上下赤裸，只穿着围裙认真地准备早餐的 ',
+        chara.get_colored_name(),
+        ' 一边扭着可爱的屁股一边做菜的模样实在是——',
+      ]);
+      printButton('（可恶，忍不了了！）', 1);
+      printButton('（数质数冷静下来吧……）', 2);
+      ret.push(await input());
+      if (ret[0] === 2) {
+        await printAndWait([
+          you.get_colored_name(),
+          ' 抑制住了冲动，用理性向 ',
+          chara.get_colored_name(),
+          ' 打招呼。',
+        ]);
+      }
+      return ret;
+    };
+    f.title = '隔日清晨之裸体围裙';
+    return f;
+  })(),
+  blow_job: (() => {
+    /**
+     * @author 雞雞
+     * @param {CharaTalk} chara
+     * @param {CharaTalk} you
+     * @param {PrintedSpan} callname
+     */
+    const f = async (chara, you, callname) => {
+      const ret = [];
+      await printAndWait([
+        '早上醒来时，',
+        you.get_colored_name(),
+        ' 自下身感受到一股异样的感觉。',
+      ]);
+      await printAndWait([
+        '睁开眼睛后出现在眼前的是 ',
+        chara.get_colored_name(),
+        ' 光着身子用嘴巴吸吮着 ',
+        you.get_colored_name(),
+        ' 的',
+        you.sex_code === 0 ? '阴蒂' : '阴茎',
+        '的淫靡景象。',
+      ]);
+      const skill = get(`abl:${chara.id}:口交技巧`);
+      await printAndWait([
+        chara.get_colored_name(),
+        ' ',
+        get(`talent:${chara.id}:饮精成瘾`) > 0 ||
+        get(`talent:${chara.id}:淫口`) > 0
+          ? '贪婪'
+          : skill > 2
+            ? '熟练'
+            : '生涩',
+        '地',
+        you.sex_code === 0 ? '舔舐着阴蒂' : '吞吐着阴茎',
+        '，',
+        you.get_colored_name(),
+        ' 也不禁以手按住 ',
+        chara.get_colored_name(),
+        ' 的脑袋渴求更多的快感。',
+      ]);
+      printButton('（可恶，忍不了了！）', 1);
+      printButton('（要去了……！）', 2);
+      ret.push(await input());
+      if (ret[0] === 2) {
+        await printAndWait([
+          '在 ',
+          chara.get_colored_name(),
+          ' 的早安口交下，',
+          you.get_colored_name(),
+          ' 很快就达到了高潮，',
+          you.sex_code === 0 ? '爱液' : '精液',
+          '尽数射进了 ',
+          chara.get_colored_name(),
+          ' 的樱桃小嘴当中。',
+        ]);
+        await chara.say_and_wait(['满嘴都是……', callname, ' 的味道呢……']);
+        await printAndWait('欲望得以发泄之后，新的一天开始了……');
+      }
+      return ret;
+    };
+    f.title = '隔日清晨之早安口交';
+    return f;
+  })(),
 };

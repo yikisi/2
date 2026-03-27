@@ -91,7 +91,7 @@ class CustomizedEro extends CustomizedEvent {
       const { c: child, f: father } = temp[0]
         ? { c: this.id, f: supporter }
         : { c: supporter, f: this.id };
-      await i18n().timon.ero_o.be_awake_as_slave(
+      await i18n().timon.pregnant_slave.be_awake_as_slave(
         get_chara_talk(father),
         get_chara_talk(child),
         get_chara_talk(0),

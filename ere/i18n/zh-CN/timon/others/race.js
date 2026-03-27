@@ -30,29 +30,29 @@ module.exports = {
   prepare_record_sim: '正在检查跑道……',
   /**
    * @param {PrintedSpan} race 比赛名
-   * @param {string} sex_title 马娘 or 马郎
+   * @param {string} uma 马娘 or 马郎
    */
-  get_prepare_record_default: (race, sex_title) => [
+  get_prepare_record_default: (race, uma) => [
     '在这 ',
     race,
     ' 的赛场上，各位赛',
-    sex_title,
+    uma,
     '也会全力以赴为大家带来梦想。',
   ],
   /**
    * @param {PrintedSpan} chara 第一人气选手名
-   * @param {string} sex_title 马娘 or 马郎
+   * @param {string} uma 马娘 or 马郎
    */
-  get_prepare_record_sats_sho: (chara, sex_title) => [
+  get_prepare_record_sats_sho: (chara, uma) => [
     chara,
     ' 顺利入闸，感觉之后会成为名',
-    sex_title,
+    uma,
     '呢。',
   ],
-  /** @param {string} sex_title 马娘 or 马郎 */
-  get_prepare_record_toky_yus: (sex_title) => [
+  /** @param {string} uma 马娘 or 马郎 */
+  get_prepare_record_toky_yus: (uma) => [
     '赛',
-    sex_title,
+    uma,
     '一生一度的德比，马上就要决出赢家了。',
   ],
   /** @param {PrintedSpan} race 比赛名 */
@@ -75,43 +75,39 @@ module.exports = {
   /**
    * @param {PrintedSpan} race 比赛名
    * @param {string} gates 参赛选手人数
-   * @param {string} sex_title 马娘 or 马郎
+   * @param {string} uma 马娘 or 马郎
    * @returns {TextContent}
    */
-  get_beginning_report(race, gates, sex_title) {
+  get_beginning_report(race, gates, uma) {
     const buffer = [
       [
-        ['赛', sex_title, '请入闸……'],
-        ['全部', sex_title, '准备妥当……'],
+        ['赛', uma, '请入闸……'],
+        ['全部', uma, '准备妥当……'],
         '准备……',
         '——开闸！',
       ],
-      [['赛', sex_title, '准备好……'], '随时预备起步……', '预备……', '——起步！'],
+      [['赛', uma, '准备好……'], '随时预备起步……', '预备……', '——起步！'],
       [
         '比赛马上开始……',
-        ['参赛', sex_title, ' ', gates, ' 名……'],
+        ['参赛', uma, ' ', gates, ' 名……'],
         [get('flag:当前年').toString(), ' 年度 ', race, '……'],
         '——开始！',
       ],
     ];
     return get_random_entry(buffer);
   },
-  /** @param {string} sex_title 马娘 or 马郎 */
-  get_first_report_no_bad_start: (sex_title) => [
-    '比赛开始，所有',
-    sex_title,
-    '平排出闸！',
-  ],
+  /** @param {string} uma 马娘 or 马郎 */
+  get_first_report_no_bad_start: (uma) => ['比赛开始，所有', uma, '平排出闸！'],
   /**
    * @param {PrintedSpan} first 率先出闸选手名
    * @param {PrintedSpan} last 出迟选手名
-   * @param {string} sex_title 马娘 or 马郎
+   * @param {string} uma 马娘 or 马郎
    */
-  get_first_report: (first, last, sex_title) => [
+  get_first_report: (first, last, uma) => [
     '比赛开始，',
     first,
     ' 首先跑出！其他',
-    sex_title,
+    uma,
     '紧随其后，最后是',
     Math.random() < 0.5 ? '出闸慢了的 ' : '落后了的 ',
     last,

@@ -49,7 +49,7 @@ async function punish_pregnant_slave() {
       // 次数=1
       if (!my_marks.p_slave_punish) {
         my_marks.p_slave_punish = 1;
-        const h = i18n().timon.punish_pregnant_slave.punish_first;
+        const h = i18n().timon.pregnant_slave.punish_first;
         await print_event_name(
           [{ content: h.title, color: buff_colors[3] }],
           me,
@@ -120,7 +120,7 @@ async function punish_pregnant_slave() {
             ),
           );
         }
-        const h = i18n().timon.punish_pregnant_slave.punish;
+        const h = i18n().timon.pregnant_slave.punish;
 
         await print_event_name(
           [{ content: h.title, color: buff_colors[3] }],
