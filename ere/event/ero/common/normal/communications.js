@@ -94,7 +94,6 @@ class EroNormalCommunications extends EroCommunications {
         defender.id,
       )),
       sys_get_colored_callname(attacker.id, defender.id),
-      sys_get_colored_callname(defender.id, attacker.id),
     );
   }
 

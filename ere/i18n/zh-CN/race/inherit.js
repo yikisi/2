@@ -68,12 +68,12 @@ class I18nInheritShop {
   ];
   get_inherit_confirm = (price, chara, gene, available_info) => [
     '使用 ',
-    price,
+    ...price,
     ' 为 ',
     chara,
-    ' 继承 ',
+    ' 继承',
     ...gene,
-    ' 吗？',
+    '吗？',
     available_info,
   ];
 }

@@ -165,16 +165,12 @@ function random_talent(my_sex) {
   gacha(chara_talents, 5).forEach((e) =>
     era.set(`talent:0:${e}`, Math.random() < 0.5 ? 1 : -1),
   );
-  era.set(`talent:0:${get_random_entry(get_filtered_talents(my_sex, 50))}`, 1);
-  era.set(
-    `talent:0:${get_random_entry(get_filtered_talents(my_sex, 60))}`,
-    get_random_value(0, 1) || -4,
-  );
-  const temp = get_random_value(40, 47);
-  era.set(
-    `talent:0:${temp}`,
-    1 - 2 * (temp === 43 ? get_random_value(0, 1) : 0),
-  );
+  const t1 = get_random_entry(get_filtered_talents(my_sex, 50));
+  era.set(`talent:0:${t1}`, 1);
+  const t2 = get_random_entry(get_filtered_talents(my_sex, 60));
+  era.set(`talent:0:${t2}`, get_random_value(0, 1) || -4);
+  const t3 = get_random_value(40, 47);
+  era.set(`talent:0:${t3}`, t3 === 43 ? get_random_entry([-1, 1]) : 1);
   if (my_sex === 1) {
     era.set('talent:0:乳头类型', 0);
     era.set('talent:0:泌乳', 0);

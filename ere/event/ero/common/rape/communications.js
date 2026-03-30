@@ -57,7 +57,6 @@ class EroRapeCommunications extends EroCommunications {
         hook.arg,
         extra.success,
         sys_get_colored_callname(attacker.id, defender.id),
-        sys_get_colored_callname(defender.id, attacker.id),
       );
     }
   }

@@ -253,8 +253,8 @@ module.exports = (handlers) => {
       ]);
       await era.printAndWait('脑袋里想了许多应该在此时说出的帅气话语');
       await era.printAndWait('但在开口的瞬间……又被堵了回去');
-      await era.printAndWait('啾……咕……啾咕……');
-      await tachyon.say_and_wait('如此多人的观众席上，如此大胆的吻');
+      await tachyon.say_and_wait('啾……咕……啾咕……');
+      await era.printAndWait('如此多人的观众席上，如此大胆的吻');
       await era.printAndWait([
         '……如果不是周围的人都在关注赛场中央的 ',
         coffee.get_colored_name(),

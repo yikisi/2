@@ -13,7 +13,9 @@ module.exports = class extends CustomizedCheck {
     if (era.get('cflag:206:随机招募') < 0 && era.get('flag:当前声望') >= 1000) {
       era.set('cflag:206:随机招募', 1);
       era.print(
-        i18n().kojo[this.id].get_visit_notification(get_chara_talk(this.id)),
+        i18n().kojo[this.id].get_rec_enable_notification(
+          get_chara_talk(this.id),
+        ),
       );
     }
     super.check_next_week();

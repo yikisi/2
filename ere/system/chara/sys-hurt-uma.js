@@ -30,11 +30,17 @@ function sys_hurt_uma(cid, num, shown = true) {
 
     if (shown) {
       if (a > num) {
-        era.print(i18n().get_ui_hurt_uma_plus(get_chara_talk(cid)));
+        era.print(
+          i18n().get_ui_hurt_uma_plus(get_chara_talk(cid).get_colored_name()),
+        );
       } else if (tired > 0) {
-        era.print(i18n().get_ui_hurt_tired_uma(get_chara_talk(cid)));
+        era.print(
+          i18n().get_ui_hurt_tired_uma(get_chara_talk(cid).get_colored_name()),
+        );
       } else {
-        era.print(i18n().get_ui_hurt_uma(get_chara_talk(cid)));
+        era.print(
+          i18n().get_ui_hurt_uma(get_chara_talk(cid).get_colored_name()),
+        );
       }
     }
   }

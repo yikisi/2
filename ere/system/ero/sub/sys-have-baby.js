@@ -115,6 +115,7 @@ async function name_baby(cid, fid, mid) {
   const mother = get_chara_talk(mid);
   const child = get_chara_talk(cid);
   const check = check_duplicate(ret);
+  era.set(`callname:${cid}:-2`, era.set(`callname:${cid}:-1`, ret));
   if (check !== false) {
     era.print(di18n.name.check_duplicate(ret, check));
     ret = await rename();

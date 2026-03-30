@@ -107,7 +107,8 @@ async function sys_rape_in_sleeping(cid, supporter = 0) {
     await get_custom_ero(cid).raping_start(supporter);
     await page_ero(void 0, true);
   }
-  await end_ero_and_show_result(wake_up || era.get('tflag:装睡') > 0);
+  const fake = era.get('tflag:装睡') > 0;
+  await end_ero_and_show_result(wake_up || fake);
   era.set('status:0:熬夜', 1 - era.get('status:0:马跳S'));
   era.set(`status:${cid}:熬夜`, 1);
   sys_like_chara(cid, 0, 25, false);
@@ -118,6 +119,9 @@ async function sys_rape_in_sleeping(cid, supporter = 0) {
     era.set('flag:床伴', cid);
   }
   era.set('status:0:沉睡', 1);
+  if (fake) {
+    era.drawLine();
+  }
 }
 
 module.exports = sys_rape_in_sleeping;

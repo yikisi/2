@@ -850,7 +850,7 @@ module.exports = {
     }
     // TALENTNAME:43 = 工口意愿
     const ero = era.get(`talent:${cid}:43`);
-    if (ero > 0) {
+    if (ero !== 0) {
       ret.push(di18n.tb_talent.get_titled_talent(`43_${ero}`));
     }
     // TALENTNAME:44 - 47 = 小恶魔 - 淫乱

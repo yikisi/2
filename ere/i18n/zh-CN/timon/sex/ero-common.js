@@ -180,12 +180,13 @@ module.exports = {
    * @param {boolean} is_first 是否是连续反抗的初次行动
    * @param {boolean} success 反抗是否成功
    * @param {PrintedSpan} a_call_d 主动方对被动方的称呼
-   * @param {PrintedSpan} d_call_a 被动方对主动方的称呼
    */
-  async resist(attacker, defender, is_first, success, a_call_d, d_call_a) {
+  async resist(attacker, defender, is_first, success, a_call_d) {
     if (era.get('flag:惩戒力度') === 3) {
       if (attacker.id === 0) {
+        // 孕袋反抗主人
         if (success) {
+          // 反抗成功，孕袋主视角
           await attacker.print_and_wait('明明是孕袋，却想要占据主动');
           await attacker.print_and_wait('这样大逆不道的行为却得到了主人的默认');
           await attacker.print_and_wait('是对这淫乱母畜的恩赐吗？');
@@ -193,6 +194,7 @@ module.exports = {
             '还是……只是想再多欣赏些自己主动沉溺欲望的表演？',
           );
         } else {
+          // 反抗失败，孕袋主视角
           await attacker.print_and_wait(
             '身为孕袋，明明臣服与顺从是被刻在精神底层的烙印',
           );
@@ -202,22 +204,25 @@ module.exports = {
             '还是……只是想要更深的感受，被迫服从的快感？',
           );
         }
+        // 主人反抗孕袋
       } else if (success) {
-        await attacker.print_and_wait('无论怎么努力，也无法抗拒内心臣服的诱惑');
-        await attacker.print_and_wait('主人的一个动作，就能让自己彻底放弃抵抗');
-        await attacker.print_and_wait(
+        // 反抗成功，孕袋主视角
+        await defender.print_and_wait('无论怎么努力，也无法抗拒内心臣服的诱惑');
+        await defender.print_and_wait('主人的一个动作，就能让自己彻底放弃抵抗');
+        await defender.print_and_wait(
           '会容忍自己的主导，其实也只是想让孕袋认清自己服从的天性而已吧……',
         );
       } else {
-        await defender.print_and_wait([
-          d_call_a,
+        // 反抗失败，主人主视角
+        await attacker.print_and_wait([
+          a_call_d,
           ' 摇晃着身体，沉溺于欲望及肉体的模样',
         ]);
-        await defender.print_and_wait('根本难以看出原来身为训练员的矜持');
-        await defender.print_and_wait('再看一会吧，就一会');
-        await defender.print_and_wait([
+        await attacker.print_and_wait('根本难以看出原来身为训练员的矜持');
+        await attacker.print_and_wait('再看一会吧，就一会');
+        await attacker.print_and_wait([
           '看看本应身为指导者的 ',
-          d_call_a,
+          a_call_d,
           ' 究竟还能堕落到什么地步',
         ]);
       }

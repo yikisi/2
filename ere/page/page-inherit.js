@@ -537,7 +537,7 @@ async function print_inherit_page() {
           );
           flag_select_inherit = false;
           era.drawLine();
-          await era.printAndWait([
+          await era.printAndWait(
             i18n().inherit_shop.get_inherit_success(chara.get_colored_name(), [
               {
                 content: i18n()
@@ -551,7 +551,7 @@ async function print_inherit_page() {
                   ),
                 color: gene_type_colors[0],
               },
-              ' ',
+              i18n().ui_comma,
               {
                 content: i18n()
                   .tb_param.jewel_with_count.replace(
@@ -564,7 +564,7 @@ async function print_inherit_page() {
                   ),
                 color: gene_type_colors[1],
               },
-              ' ',
+              i18n().ui_comma,
               {
                 content: i18n()
                   .tb_param.jewel_with_count.replace(
@@ -578,7 +578,7 @@ async function print_inherit_page() {
                 color: gene_type_colors[2],
               },
             ]),
-          ]);
+          );
           era.println();
           let wait_flag = sys_like_chara(selected, gene_owner_list[0], 100);
           wait_flag =
@@ -665,7 +665,7 @@ async function print_inherit_page() {
       if (
         await select_yes_or_no(
           i18n().inherit_shop.get_inherit_confirm(
-            ...(delta <= 0
+            delta <= 0
               ? di18n.inherit_shop.get_price_info(
                   gene.type + 20,
                   get_abbr_number(cost),
@@ -678,9 +678,9 @@ async function print_inherit_page() {
                   get_abbr_number(delta * 2),
                   get_abbr_number(used_jewels[gene.type] - jewels[gene.type]) *
                     2,
-                )),
+                ),
             chara.get_colored_name(),
-            ...gene.get_colored_name(),
+            gene.get_colored_name(),
             available_count > 0
               ? i18n().inherit_shop.gene_available_template.replace(
                   '%COUNT%',

@@ -2,6 +2,8 @@ const era = require('#/era-electron');
 
 const names = require('#/data/child-names.json');
 
+const { __ } = require('#/i18n/selector');
+
 function get_child_name(chara_id) {
   let chara_name = era.get(`callname:${chara_id}:-1`);
   const index = era.get(`cflag:${chara_id}:后代命名索引`);
@@ -12,7 +14,7 @@ function get_child_name(chara_id) {
     era.add(`cflag:${chara_id}:后代命名索引`, 1);
     return names[chara_name][index];
   }
-  return `${chara_name}${era.get('flag:当前年')}`;
+  return `${__(`name.${chara_name}`)}${era.get('flag:当前年')}`;
 }
 
 module.exports = get_child_name;
