@@ -475,8 +475,8 @@ class I18nTimon {
    */
   get_it_nt_inmon_milk_slave = (title, chara_list, item) =>
     chara_list.length > 1
-      ? ['【', title, ' ', ...chara_list, '各贡上了一杯 ', item, '】']
-      : ['【', title, ' ', ...chara_list, '贡上了一杯 ', item, '】'];
+      ? ['【', title, ' ', ...chara_list, ' 各贡上了一杯 ', item, '】']
+      : ['【', title, ' ', ...chara_list, ' 贡上了一杯 ', item, '】'];
   /**
    * @param {string} title
    * @param {CharaTalk} chara

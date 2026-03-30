@@ -378,6 +378,12 @@ module.exports = {
    * @returns {number}
    */
   get_pregnant_ratio(cid, oid = -1) {
+    // 生到 500 强行关掉怀孕，不然最大 ID 会超过 1000
+    // 在需要输入角色 ID 的场合，1000 以上是功能按钮，角色 ID 不低于 1000 会导致出错
+    // 9017 皇帝不会被输出也不会被选中，所以无所谓
+    if (era.get('flag:怀孕计数') >= 500) {
+      return 0;
+    }
     /** @type {CharaInmon} */
     let inmon;
     if (

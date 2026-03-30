@@ -212,7 +212,9 @@ class GlobalAchievement {
                   this.#bean[m] > 0),
             ),
             (m) =>
-              this.#bean[m] > 0 ? this.#bean[m] : 100 - this.#fields.indexOf(m),
+              this.#bean[m] > 0
+                ? this.#bean[m] + dict[m][0] * 1000000000000
+                : 100 - this.#fields.indexOf(m),
           ).map((m) => {
             let desc;
             if (this.#bean[m] > 0) {

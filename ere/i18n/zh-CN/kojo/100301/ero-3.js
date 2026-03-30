@@ -217,7 +217,7 @@ module.exports = {
         you.get_colored_name(),
         ' 下定了决心，踩着影子走了过去。',
       ]);
-      await era.printAndWait([you.couple_title, '，是一家人。']);
+      await era.printAndWait('你们，是一家人。');
     } else {
       await teio.say_and_wait(['训练员训练员——']);
       await era.printAndWait([

@@ -286,7 +286,7 @@ class CustomizedDaily extends CustomizedEvent {
       if (
         (
           await print_title_with_kojo(
-            i18n().timon.daily,
+            i18n().timon.random_events,
             'sr_strange_lunch',
             chara,
             me,
@@ -358,7 +358,7 @@ class CustomizedDaily extends CustomizedEvent {
         if (
           (
             await print_title_with_kojo(
-              i18n().timon.daily,
+              i18n().timon.random_events,
               'or_riverside_walk',
               chara,
               me,
@@ -438,7 +438,7 @@ class CustomizedDaily extends CustomizedEvent {
           if (
             (
               await print_title_with_kojo(
-                i18n().timon.daily,
+                i18n().timon.random_events,
                 'os_is_movie_right',
                 chara,
                 me,
@@ -507,9 +507,13 @@ class CustomizedDaily extends CustomizedEvent {
   async out_church(hook) {
     const chara = get_chara_talk(this.id);
     const me = get_chara_talk(0);
-    const dice = Math.random();
+    let dice = Math.random();
+    // 玩家独行的情况下，大成功结果修正
+    // 提高好感和性欲修正成获得马币
+    if (dice < 0.05 && this.id === 0 && dice >= 0.01 && dice < 0.03) {
+      dice = 0.04;
+    }
     await this.o_c_pray(chara, me, dice);
-    hook.arg = dice < 0.5;
     if (dice < 0.05) {
       await i18n().timon.daily.oc_great_luck(chara, dice);
       // FLAGNAME:122 = 强奸抵抗
@@ -528,6 +532,7 @@ class CustomizedDaily extends CustomizedEvent {
         era.add('flag:16', 150);
       }
     }
+    hook.arg = dice < 0.5;
   }
 
   /**

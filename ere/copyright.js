@@ -57,7 +57,10 @@ function generate_copyrights() {
 
   const kojo_copyrights = [
     [[get_copyright_entry(1, i18n().cr_kojo_suffix_recruit)], 'wwm'],
-    [[get_copyright_entry(2)], '牛蛙煲'],
+    [
+      [get_copyright_entry(2), { isDivider: true }, get_copyright_entry(61)],
+      '牛蛙煲',
+    ],
     [[get_copyright_entry(3)], '天马闪光蹄'],
     [
       [get_copyright_entry(4), { isDivider: true }, get_copyright_entry(46)],
@@ -76,6 +79,7 @@ function generate_copyrights() {
     [[get_copyright_entry(13)], '伊兰'],
     [[get_copyright_entry(17)], '露娜俘虏'],
     [[get_copyright_entry(19)], '片手虾好评发售中！'],
+    [[get_copyright_entry(20)], 'Wolke'],
     [[get_copyright_entry(24)], '黑奴二号'],
     [[get_copyright_entry(25)], ['Necroz', { isDivider: true }, 'Mr.E.']],
     [
@@ -92,11 +96,12 @@ function generate_copyrights() {
     [[get_copyright_entry(35, i18n().cr_kojo_suffix_part)], '幽白書'],
     [[get_copyright_entry(36, i18n().cr_kojo_suffix_recruit)], '幽白書'],
     [[get_copyright_entry(37)], '爱放箭的袁本初'],
+    [[get_copyright_entry(44)], '阿格尼斯数码公司'],
     [
       [get_copyright_entry(47, i18n().cr_kojo_suffix_recruit)],
       '某不思议的大嘴鸥',
     ],
-    [[get_copyright_entry(50, i18n().cr_kojo_suffix_recruit)], '卡特曼'],
+    [[get_copyright_entry(50)], '卡特曼'],
     [[get_copyright_entry(52)], '99'],
     [[get_copyright_entry(56)], 'ALEX'],
     [[get_copyright_entry(60)], '红红火火恍惚'],
@@ -149,6 +154,7 @@ function generate_copyrights() {
       '幽白書',
     ],
     [[get_copyright_entry(400)], '黑衣剑士-星爆气流斩准备就绪'],
+    [[get_copyright_entry(304)], '魔法亚瑟'],
     [
       [get_copyright_entry(303, i18n().cr_kojo_suffix_part)],
       ['雞雞', { isDivider: true }, '幽白書'],

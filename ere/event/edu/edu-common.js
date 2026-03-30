@@ -265,7 +265,7 @@ class CustomizedEdu extends CustomizedEvent {
         if (
           (
             await print_title_with_kojo(
-              i18n().timon.edu,
+              i18n().timon.random_events,
               'ts_shower',
               chara,
               me,
@@ -326,7 +326,9 @@ class CustomizedEdu extends CustomizedEvent {
    */
   async train_success_sex(chara, me, callname, hook, extra) {
     return (
-      (await print_title_with_kojo(i18n().timon.edu, 'ts_sex', chara))[0] === 1
+      (
+        await print_title_with_kojo(i18n().timon.random_events, 'ts_sex', chara)
+      )[0] === 1
     );
   }
 

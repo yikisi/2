@@ -104,7 +104,7 @@ function cur_chara_component(cid, type, location_npc) {
     const motivation = era.get(`cflag:${cid}:干劲`);
     const out_of_train = era.get(`cflag:${cid}:殿堂`);
     const race = era.get(`cflag:${cid}:种族`);
-    const title_info = title ? [' ', title] : [];
+    const title_info = title ? [title, ' '] : [];
     const palace_info =
       out_of_train >= 1
         ? ' ' +

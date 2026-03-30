@@ -174,6 +174,7 @@ module.exports = {
         await printAndWait('脚步却越踩越深，直至坠落……');
       }
     }
+    return ret;
   },
   /**
    * 离开目白城

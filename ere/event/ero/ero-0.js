@@ -150,7 +150,7 @@ module.exports = class extends CustomizedEro {
         );
         era.println();
         if (ret[0] === 1) {
-          add_jewel_reward(0, 10, 1000);
+          add_jewel_reward(0, 10, 100);
           sys_like_chara(
             father.id,
             0,

@@ -8,6 +8,7 @@ const Edu7UntilRaceEnd = require('#/event/edu/edu-events-7/race-end');
 const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
+const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -17,6 +18,8 @@ const chara_colors = require('#/data/chara-colors').chara_colors[7];
 const GoldShipEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-7');
 const { location_enum } = require('#/data/locations');
 const { attr_enum, base_attr_list } = require('#/data/train-const');
+
+const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends Edu7UntilRaceEnd {
   async week_start(gold_ship, me, callname, hook, extra_flag, event_object) {
@@ -634,31 +637,17 @@ module.exports = class extends Edu7UntilRaceEnd {
       }
       sys_like_chara(7, 0, 200) && (await era.waitAnyKey());
     } else if (event_arg === 'carrot') {
-      await print_event_name('拔萝卜之鬼', gold_ship);
-      await era.printAndWait([
-        '在学校里被一头芦毛的诡异',
-        gold_ship.uma_sex_title,
-        '拦住了。',
-      ]);
-      await gold_ship.say_and_wait(
-        '唏！那边那位训练员！要不要跟小金船一起到海边拔萝卜啊！',
-      );
-      await era.printAndWait([
-        '原来是问题儿童 ',
-        gold_ship.get_colored_name(),
-        '……而且海边哪有什么萝卜可以拔啊？',
-      ]);
-      era.printButton('「你要拔，那便拔！」（马币+20）', 1);
-      era.printButton('「总觉得有点可疑……」（体力+100）', 2);
-      if ((await era.input()) === 1) {
-        await era.printAndWait(
-          '竟然从沙滩里挖出来了散发着彩虹色光芒，而且看起来像是宝石的萝卜？！',
-        );
+      if (
+        (
+          await print_title_with_kojo(
+            i18n().timon.random_events,
+            'gs_carrot',
+            gold_ship,
+          )
+        )[0] === 1
+      ) {
         sys_change_money(20);
       } else {
-        await era.printAndWait(
-          '得到了普通的萝卜……等下长在海边真的算普通吗！？总之先拿回去给午饭加餐了。',
-        );
         sys_change_attr_and_print(0, attr_enum.hp, 100);
       }
     } else {

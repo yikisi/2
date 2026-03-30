@@ -5,13 +5,8 @@ class I18nKojo900201 {
   /** @type {KojoFile} */
   daily = require('#/i18n/zh-CN/kojo/900201/daily-302.kojo');
   /** @type {KojoFile} */
-  edu = require('#/i18n/zh-CN/kojo/900201/edu-302.kojo');
-  /** @type {KojoFile} */
   love = require('#/i18n/zh-CN/kojo/900201/love-302.kojo');
   // GENERATED END
-
-  e_sorrows_of_young_chairman_p1_template = '%TEEN%理事长的烦恼之一';
-  e_sorrows_of_young_chairman_p2_template = '%TEEN%理事长的烦恼之二';
 
   chairman = '我系你上司';
   chairman_desc =

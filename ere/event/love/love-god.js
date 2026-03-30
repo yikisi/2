@@ -13,7 +13,6 @@ const print_ero_page = require('#/page/page-ero');
 
 const CustomizedLove = require('#/event/love/love-common');
 
-const { get_date_obj } = require('#/data/date-indicator');
 const EroParticipant = require('#/data/ero/ero-participant');
 const { part_enum } = require('#/data/ero/part-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
@@ -37,8 +36,15 @@ class LoveGod extends CustomizedLove {
   async handle50(god, me, selected) {
     const cur_week = (get('flag:当前周') % 4) + 1;
     const cur_month = ((get('flag:当前月') + (cur_week === 1) - 1) % 12) + 1;
+    const cur_year =
+      get('flag:当前年') +
+      (get('flag:当前月') === 1 && get('flag:当前周') === 1);
     const birth_day = 7 * cur_week + Math.floor(7 * Math.random()) - 6;
-    const date = get_date_obj();
+    const date = {
+      y: cur_year.toString(),
+      m: cur_month.toString(),
+      w: cur_week.toString(),
+    };
     let temp;
     switch (selected) {
       case 1:
@@ -129,6 +135,7 @@ class LoveGod extends CustomizedLove {
       set(`cflag:${god.id}:出生日期`, birth_day);
       set(`cflag:${god.id}:月经周`, 0);
       set(`cflag:${god.id}:招募状态`, -24);
+      set(`cstr:${god.id}:出生经历`, cur_year.toString());
     }
   }
 

@@ -8,7 +8,8 @@ const love_scripts = readdirSync(join(__dirname, '../../ere/event/love'))
     (e) =>
       e.endsWith('.js') &&
       !e.endsWith('common.js') &&
-      !e.endsWith('factory.js'),
+      !e.endsWith('factory.js') &&
+      !e.endsWith('god.js'),
   )
   .map((e) => e.substring(5).replace(/\.js$/, ''))
   .sort(compare_chara_id);

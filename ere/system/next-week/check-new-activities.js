@@ -287,8 +287,8 @@ async function check_new_activities(cur_round, in_team_list) {
       // 远征结束
       era.print(
         era.get('cflag:0:位置') === location.loc
-          ? i18n().timon.get_it_nt_back_info_from_foreign(race_colored_name)
-          : i18n().timon.it_nt_back_info,
+          ? i18n().timon.it_nt_back_info
+          : i18n().timon.get_it_nt_back_info_from_foreign(race_colored_name),
       );
       in_team_list.forEach((id) => {
         // CFLAGNAME:45 = 位置
@@ -408,8 +408,8 @@ async function check_new_activities(cur_round, in_team_list) {
     // 夏合宿结束
     era.print(
       era.get('cflag:0:位置') > 0
-        ? i18n().timon.it_nt_back_info_summer
-        : i18n().timon.it_nt_back_info,
+        ? i18n().timon.it_nt_back_info
+        : i18n().timon.it_nt_back_info_summer,
     );
     in_team_list.forEach((id) => {
       if (era.get(`cflag:${id}:位置`)) {

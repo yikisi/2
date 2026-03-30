@@ -72,7 +72,7 @@ module.exports = {
         { content: i18n().detail.growth_info, type: 'text' },
       );
     } else if (!chara.id || flags.show_exp) {
-      const in_train = !era.getCharactersInTrain().includes(chara.id);
+      const in_train = era.getCharactersInTrain().includes(chara.id);
       if (in_train) {
         const plugin_list = CharaInmon.get(chara.id).list;
         const inmon_info =
@@ -320,31 +320,33 @@ module.exports = {
       );
     }
     const img_name = era.get(`cstr:${chara.id}:头像`);
-    if (
-      !era.getCharactersInTrain().includes(chara.id) &&
-      era.checkImage('通用_裸')
-    ) {
-      sex_info_list.push({ content: [{ isBr: true }], type: 'text' });
-      if (check_chara_ero_image(chara.id)) {
-        const img_t = era.get(`cstr:${chara.id}:头像T`);
-        sex_info_list.push({
-          accelerator: 100,
-          content: i18n().detail.sex_image_bt_change_template.replace(
-            '%CURRENT%',
-            img_t
-              ? i18n().detail.sex_image_set_template.replace(
-                  '%SET%',
-                  img_t.substring(img_name.length) || '1',
-                )
-              : i18n().detail.sex_image_set_common,
-          ),
-          type: 'button',
-        });
-      } else {
-        sex_info_list.push({
-          content: i18n().detail.sex_image_common_info,
-          type: 'text',
-        });
+    if (chara.id > 0) {
+      if (
+        !era.getCharactersInTrain().includes(chara.id) &&
+        era.checkImage('通用_裸')
+      ) {
+        sex_info_list.push({ content: [{ isBr: true }], type: 'text' });
+        if (check_chara_ero_image(chara.id)) {
+          const img_t = era.get(`cstr:${chara.id}:头像T`);
+          sex_info_list.push({
+            accelerator: 100,
+            content: i18n().detail.sex_image_bt_change_template.replace(
+              '%CURRENT%',
+              img_t
+                ? i18n().detail.sex_image_set_template.replace(
+                    '%SET%',
+                    img_t.substring(img_name.length) || '1',
+                  )
+                : i18n().detail.sex_image_set_common,
+            ),
+            type: 'button',
+          });
+        } else {
+          sex_info_list.push({
+            content: i18n().detail.sex_image_common_info,
+            type: 'text',
+          });
+        }
       }
     }
     return {

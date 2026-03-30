@@ -650,10 +650,36 @@ module.exports = async () => {
                   era.set(
                     `cstr:${cid}:出生经历`,
                     birth.replace(
-                      /出生于 (\d+) 年 (\d+) 月 (\d+) 日/,
+                      /出生于 (\d+) 年 (\d+) 月 第 (\d+) 周/,
                       (_, _y) => `${_y}`,
                     ),
                   );
+                }
+
+                // 尝试修复三女神的出生时间
+                if (cid >= 340 && cid <= 342) {
+                  const fc_exp = era.get(`cstr:${cid}:长子女经历`);
+                  if (Array.isArray(fc_exp)) {
+                    const y = fc_exp[1].substring(0, 4);
+                    era.set(`cstr:${cid}:出生经历`, fc_exp[1].substring(0, 4));
+                    era.set(`cstr:${cid}:长子女经历`, {
+                      y,
+                      m: era.get(`cflag:${cid}:出生月份`).toString(),
+                      w: Math.floor(
+                        (era.get(`cflag:${cid}:出生日期`) + 6) / 7,
+                      ).toString(),
+                      c: cid,
+                    });
+                    if (era.get(`cflag:${cid}:母方角色`) === cid) {
+                      era.get(`cstr:${cid}:长子女经历`).im = true;
+                    }
+                  }
+                }
+                if (cid >= 500 && cid < max_chara_id) {
+                  era.add('flag:怀孕计数', 1);
+                }
+                if (era.get(`cflag:${cid}:妊娠阶段`) >> 2 > 0) {
+                  era.add('flag:怀孕计数', 1);
                 }
               });
             }

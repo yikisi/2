@@ -1,6 +1,6 @@
 const { get } = require('#/era-electron');
 
-const LoveGod = require('#/event/love/snippets/love-god');
+const LoveGod = require('#/event/love/love-god');
 const generate_dictionary = require('#/event/snippets/generate-dictionary');
 const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 

@@ -724,6 +724,7 @@ async function sys_calc_orgasm(shown, ...ids) {
                     ).toFixed(2)}%`,
                   );
                   if (temp >= 1 || (temp > 0 && Math.random() < temp)) {
+                    era.add('flag:怀孕计数', 1);
                     era.add(`exp:${cid}:授种次数`, 1);
                     era.set(
                       `cflag:${oid}:妊娠阶段`,

@@ -197,12 +197,8 @@ module.exports = {
             );
           }
         }
-      } else {
-        penis_exp_list.push(
-          chara.sex_code > 0
-            ? get_unknown_info(chara.id)
-            : i18n().detail.no_part_info,
-        );
+      } else if (chara.sex_code > 0) {
+        penis_exp_list.push(get_unknown_info(chara.id));
       }
       remove_end_line_breaks(penis_exp_list);
     }

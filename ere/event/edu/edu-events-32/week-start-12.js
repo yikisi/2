@@ -5,6 +5,7 @@ const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
 const print_event_name = require('#/event/snippets/print-event-name');
+const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
@@ -12,12 +13,7 @@ const { get_random_value } = require('#/utils/value-utils');
 const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks-32');
 const recruit_flags = require('#/data/event/recruit-flags');
 
-const effects = [
-  '在训练里更容易集中',
-  '快速消耗卡路里',
-  '让马娘流出母乳',
-  '稍微削弱理性',
-];
+const { i18n } = require('#/i18n/selector');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},number,number,TachyonEduMarks,EventObject):Promise>} handlers */
 module.exports = (handlers) => {
@@ -286,21 +282,10 @@ module.exports = (handlers) => {
     }
   };
 
-  /** @author 雞雞 */
   handlers.drug_notice = async (tachyon, me) => {
     new TachyonLifeMarks().drug_notice = get_random_value(12, 36);
-    await print_event_name('学园通知・药物散播', tachyon);
-    await era.printAndWait(
-      [
-        '【来自学园的通知——刚才 ',
-        tachyon.get_colored_name(),
-        ' 错误地散布在操场的药品真面目至今不明，请各位训练员如无必要请不要使用操场进行训练。】',
-      ],
-      { fontSize: '1.5rem' },
-    );
     const dice = Math.random();
-    let effect,
-      tachyon_flag = 2;
+    let effect;
     if (dice < 0.1) {
       effect = 0;
     } else if (dice < 0.5) {
@@ -315,80 +300,39 @@ module.exports = (handlers) => {
       '招募状态',
       recruit_flags.yes,
     );
-    while (tachyon_flag > 0) {
-      era.printButton('（应该不会出问题吧？）', 1);
-      era.printButton('既然通知了那就算了……', 2);
-      if (
-        era.get('cflag:32:招募状态') === recruit_flags.yes &&
-        tachyon_flag === 2
-      ) {
-        era.printButton('「速子……你这家伙！」', 3);
-      }
-      switch (await era.input()) {
+    const ret = await print_title_with_kojo(
+      i18n().timon.random_events,
+      'drug_notice',
+      tachyon,
+      me,
+      effect,
+    );
+    if (ret[0] === 1) {
+      switch (effect) {
+        case 0:
+          in_team_list
+            .filter((e) => era.get(`cflag:${e}:育成回合计时`) < 3 * 48)
+            .forEach((e) =>
+              era.set(
+                `talent:${e}:练习X手`,
+                Math.min(era.get(`talent:${e}:练习X手`) + 1, 2),
+              ),
+            );
+          break;
         case 1:
-          switch (effect) {
-            case 0:
-              in_team_list
-                .filter((e) => era.get(`cflag:${e}:育成回合计时`) < 3 * 48)
-                .forEach((e) =>
-                  era.set(
-                    `talent:${e}:练习X手`,
-                    Math.min(era.get(`talent:${e}:练习X手`) + 1, 2),
-                  ),
-                );
-              await era.printAndWait([
-                { isBr: true },
-                '队伍成员的训练更顺利了……',
-              ]);
-              break;
-            case 1:
-              in_team_list.forEach((e) => era.set(`status:${e}:健康茶`, 1));
-              await era.printAndWait([
-                { isBr: true },
-                '队伍成员本周的减肥会更有效果……',
-              ]);
-              break;
-            case 2:
-              in_team_list.forEach(
-                (e) =>
-                  era.get(`talent:${e}:泌乳`) === 0 &&
-                  era.set(`talent:${e}:泌乳`, 2),
-              );
-              await era.printAndWait([
-                { isBr: true },
-                '队伍成员都开始流出母乳了……',
-              ]);
-              break;
-            case 3:
-              in_team_list.forEach((e) =>
-                sys_change_lust(e, get_random_value(500, 1500)),
-              );
-              await era.printAndWait([
-                { isBr: true },
-                '队伍成员的性欲上升了……',
-              ]);
-          }
-          tachyon_flag = 0;
+          in_team_list.forEach((e) => era.set(`status:${e}:健康茶`, 1));
           break;
         case 2:
-          tachyon_flag = 0;
+          in_team_list.forEach(
+            (e) =>
+              era.get(`talent:${e}:泌乳`) === 0 &&
+              era.set(`talent:${e}:泌乳`, 2),
+          );
           break;
         case 3:
-          await era.printAndWait([
-            '在 ',
-            me.get_colored_name(),
-            ' 的逼问下，',
-            tachyon.get_colored_name(),
-            ' 坦白了',
-            tachyon.sex,
-            '投放的药物大致会有怎么样的效果——',
-          ]);
-          await tachyon.say_and_wait([
-            '简单的说大概就是会让人',
-            effects[effect],
-            '的药啦……',
-          ]);
-          tachyon_flag = 1;
+          in_team_list.forEach((e) =>
+            sys_change_lust(e, get_random_value(500, 1500)),
+          );
       }
     }
   };

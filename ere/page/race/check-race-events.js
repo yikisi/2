@@ -208,7 +208,7 @@ async function check_race_events(race, info, team) {
     handler = async () => {
       my_marks.we_are_one = get_random_value(4, 8);
       const ret = await print_title_with_kojo(
-        i18n().timon.edu,
+        i18n().timon.random_events,
         'we_are_one',
         get_chara_talk(mvp_id),
         get_chara_talk(0),

@@ -13,23 +13,27 @@ const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { i18n } = require('#/i18n/selector');
 
 class CustomizedBase extends CustomizedEvent {
+  get #timon() {
+    return i18n().timon.basement;
+  }
+
   /**
    * @param {number} hours
    * @param {number} minutes
    * @param {boolean} [base_12]
    */
   static get_cur_time(hours, minutes, base_12 = false) {
-    return i18n().timon.basement.get_clock(hours, minutes, base_12);
+    return this.#timon.get_clock(hours, minutes, base_12);
   }
 
   /** 初入地下室的欢迎 - 无人版本 */
   first_time() {
-    i18n().timon.basement.first_time(get_chara_talk(0));
+    this.#timon.first_time(get_chara_talk(0));
   }
 
   /** 初入地下室的欢迎 */
   welcome() {
-    i18n().timon.basement.welcome(get_chara_talk(this.id), get_chara_talk(0));
+    this.#timon.welcome(get_chara_talk(this.id), get_chara_talk(0));
   }
 
   /**
@@ -39,7 +43,7 @@ class CustomizedBase extends CustomizedEvent {
   get_basement_info(can_strike) {
     const chara = get_chara_talk(this.id);
     if (can_strike) {
-      return i18n().timon.basement.get_info_strike(chara);
+      return this.#timon.get_info_strike(chara);
     } else if (sys_check_awake(this.id)) {
       const { b_s_level } = LifeEventMarks.get_marks(this.id);
       const relation = era.get(`relation:${this.id}:0`);
@@ -51,7 +55,7 @@ class CustomizedBase extends CustomizedEvent {
       if (love_level === 3 && relation < 0) {
         love_level = 4;
       }
-      return i18n().timon.basement.get_info_awake(
+      return this.#timon.get_info_awake(
         chara,
         get_chara_talk(0),
         b_s_level,
@@ -61,7 +65,7 @@ class CustomizedBase extends CustomizedEvent {
           0,
       );
     } else {
-      return i18n().timon.basement.get_info_sleep(chara);
+      return this.#timon.get_info_sleep(chara);
     }
   }
 
@@ -73,17 +77,17 @@ class CustomizedBase extends CustomizedEvent {
 
   /** 趁角色刚回到地下室偷袭成功 */
   async strike_success() {
-    await i18n().timon.basement.strike_success(get_chara_talk(0));
+    await this.#timon.strike_success(get_chara_talk(0));
   }
 
   /** 趁角色刚回到地下室偷袭失败，被打晕了 */
   async strike_fail() {
-    await i18n().timon.basement.strike_fail(get_chara_talk(0));
+    await this.#timon.strike_fail(get_chara_talk(0));
   }
 
   /** 正面击败角色，但还不知道能不能解除机关 */
   async battle_success() {
-    await i18n().timon.basement.battle_success(
+    await this.#timon.battle_success(
       get_chara_talk(this.id),
       get_chara_talk(0),
     );
@@ -91,20 +95,17 @@ class CustomizedBase extends CustomizedEvent {
 
   /** 没能正面击败角色，直接就被打晕了 */
   async battle_fail() {
-    await i18n().timon.basement.battle_fail(
-      get_chara_talk(this.id),
-      get_chara_talk(0),
-    );
+    await this.#timon.battle_fail(get_chara_talk(this.id), get_chara_talk(0));
   }
 
   /** 正面击败角色后当面成功解除机关 */
   async battle_escape() {
-    await i18n().timon.basement.battle_escape(get_chara_talk(0));
+    await this.#timon.battle_escape(get_chara_talk(0));
   }
 
   /** 正面击败角色后解除机关失败，没跑出去又被打晕了 */
   async battle_prison() {
-    await i18n().timon.basement.battle_prison(get_chara_talk(0));
+    await this.#timon.battle_prison(get_chara_talk(0));
   }
 
   /**
@@ -114,7 +115,7 @@ class CustomizedBase extends CustomizedEvent {
    * @param {boolean} [is_back]
    */
   find_escape(out_of_prison, s_level_up, is_back) {
-    i18n().timon.basement.find_escape(
+    this.#timon.find_escape(
       get_chara_talk(this.id),
       get_chara_talk(0),
       out_of_prison,
@@ -125,21 +126,18 @@ class CustomizedBase extends CustomizedEvent {
 
   /** 加固地下室 */
   fix_prison() {
-    i18n().timon.basement.fix_prison(get_chara_talk(this.id));
+    this.#timon.fix_prison(get_chara_talk(this.id));
   }
 
   /** 从沉睡中清醒 */
   get_up() {
-    i18n().timon.basement.get_up(get_chara_talk(this.id), get_chara_talk(0));
+    this.#timon.get_up(get_chara_talk(this.id), get_chara_talk(0));
     LifeEventMarks.get_marks(this.id).b_start = 0;
   }
 
   /** 回到地下室 */
   back_basement() {
-    i18n().timon.basement.back_basement(
-      get_chara_talk(this.id),
-      get_chara_talk(0),
-    );
+    this.#timon.back_basement(get_chara_talk(this.id), get_chara_talk(0));
     LifeEventMarks.get_marks(this.id).b_start = 0;
   }
 
@@ -157,7 +155,7 @@ class CustomizedBase extends CustomizedEvent {
 
   /** 选择雷普玩家 */
   async rape(supporter) {
-    await i18n().timon.basement.rape(
+    await this.#timon.rape(
       get_chara_talk(this.id),
       get_chara_talk(0),
       supporter > 0 ? get_chara_talk(supporter) : void 0,
@@ -172,7 +170,7 @@ class CustomizedBase extends CustomizedEvent {
 
   /** 请求对方释放，对方同意 */
   async ask_release_agree() {
-    await i18n().timon.ask_release_agree(
+    await this.#timon.ask_release_agree(
       get_chara_talk(this.id),
       get_chara_talk(0),
     );
@@ -180,7 +178,7 @@ class CustomizedBase extends CustomizedEvent {
 
   /** 请求对方释放，对方拒绝 */
   async ask_release_reject() {
-    await i18n().timon.ask_release_reject(
+    await this.#timon.ask_release_reject(
       get_chara_talk(this.id),
       get_chara_talk(0),
     );
@@ -188,7 +186,7 @@ class CustomizedBase extends CustomizedEvent {
 
   /** 询问时间 */
   async ask_time(date, hours, minutes) {
-    await i18n().timon.ask_time(get_chara_talk(this.id), get_chara_talk(0));
+    await this.#timon.ask_time(get_chara_talk(this.id), get_chara_talk(0));
   }
 
   /**
@@ -198,14 +196,14 @@ class CustomizedBase extends CustomizedEvent {
   async rescue_fail(owner_id) {
     if (sys_check_awake(0)) {
       await print_title_with_kojo(
-        i18n().timon.basement,
+        this.#timon,
         'rescue_fail_awake',
         get_chara_talk(this.id),
         get_chara_talk(0),
         get_chara_talk(owner_id),
       );
     } else {
-      await i18n().timon.basement.rescue_fail_sleep(
+      await this.#timon.rescue_fail_sleep(
         get_chara_talk(owner_id),
         get_chara_talk(0),
       );
@@ -218,7 +216,7 @@ class CustomizedBase extends CustomizedEvent {
    */
   async rescue_sneak_success(owner_id) {
     await print_title_with_kojo(
-      i18n().timon.basement,
+      this.#timon,
       'rescue_sneak_success',
       get_chara_talk(this.id),
       get_chara_talk(0),
@@ -234,7 +232,7 @@ class CustomizedBase extends CustomizedEvent {
    */
   async rescue_sneak_prison(owner_id) {
     await print_title_with_kojo(
-      i18n().timon.basement,
+      this.#timon,
       'rescue_sneak_prison',
       get_chara_talk(this.id),
       get_chara_talk(0),
@@ -250,7 +248,7 @@ class CustomizedBase extends CustomizedEvent {
    */
   async rescue_join(owner_id) {
     await print_title_with_kojo(
-      i18n().timon.basement,
+      this.#timon,
       'rescue_join',
       get_chara_talk(this.id),
       get_chara_talk(0),
@@ -265,7 +263,7 @@ class CustomizedBase extends CustomizedEvent {
    */
   async rescue_battle_success(owner_id) {
     await print_title_with_kojo(
-      i18n().timon.basement,
+      this.#timon,
       'rescue_battle_success',
       get_chara_talk(this.id),
       get_chara_talk(0),
@@ -280,7 +278,7 @@ class CustomizedBase extends CustomizedEvent {
    */
   async rescue_battle_prison(owner_id) {
     await print_title_with_kojo(
-      i18n().timon.basement,
+      this.#timon,
       'rescue_battle_prison',
       get_chara_talk(this.id),
       get_chara_talk(0),

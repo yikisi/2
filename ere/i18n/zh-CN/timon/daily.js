@@ -1,8 +1,9 @@
 /**
  * @file 日常地文
  * @author 雞雞
- * @author KUN
  * @author 幽白書
+ * @author Mr.E.
+ * @author 阿格尼斯数码公司
  * @author 黑奴队长
  */
 const era = require('#/era-electron');
@@ -1071,84 +1072,6 @@ module.exports = {
       }
     }
   },
-  sr_strange_lunch: (() => {
-    /**
-     * @author KUN
-     * @param {CharaTalk} chara
-     * @param {CharaTalk} you
-     * @param {PrintedSpan} callname
-     */
-    const f = async (chara, you, callname) => {
-      const ret = [];
-      await era.printAndWait([
-        '到了午餐时间，',
-        you.get_colored_name(),
-        ' 和 ',
-        chara.get_colored_name(),
-        ' 不约而同的来到了天台。',
-      ]);
-      await era.printAndWait([
-        '不知为何，今天 ',
-        chara.get_colored_name(),
-        ' 带来的饭盒格外的丰盛',
-      ]);
-      era.println();
-      await chara.say_and_wait([callname, '，来试试看味道怎么样吧。']);
-      await chara.say_and_wait('这可是得意之作哦～');
-      era.println();
-      await era.printAndWait([
-        you.get_colored_name(),
-        ' 把眼前的饭盒接过来，毫无顾虑的拿起了餐具。',
-      ]);
-      await era.printAndWait(['美美的享受了几口之后，身体却逐渐温热了起来……']);
-      era.println();
-      await era.printAndWait([
-        you.get_colored_name(),
-        ' 有点奇怪的转头看向身边的 ',
-        chara.get_colored_name(),
-        '，才发现也同样面对潮红。',
-      ]);
-      await era.printAndWait([
-        '正当 ',
-        you.get_colored_name(),
-        ' 想要问什么的时候，却被强行吻住嘴唇打断了话语。',
-      ]);
-      era.println();
-      await era.printAndWait(['直到松开的时候，嘴边还拉出了一道长长的银丝。']);
-      era.printButton('「这下不得不做了……」', 1);
-      era.printButton('「我可是正人君子！鋼の意志发动！」', 2);
-      ret.push(await era.input());
-      if (ret[0] === 1) {
-        await era.printAndWait([
-          '明明是在天台，',
-          you.get_colored_name(),
-          ' 和 ',
-          chara.get_colored_name(),
-          ' 却在不断的渴求着对方。',
-        ]);
-        await era.printAndWait([
-          '但一想到这还是午休时间，',
-          you.get_colored_name(),
-          ' 便没有继续想其他的事情，伸手抓住了 ',
-          chara.get_colored_name(),
-          ' 的肩膀……',
-        ]);
-      } else {
-        await era.printAndWait([
-          you.get_colored_name(),
-          ' 猛的摇摇头唤回了坚定的意志，立刻收起了手上的饭盒。',
-        ]);
-        await era.printAndWait([
-          '当着 ',
-          chara.get_colored_name(),
-          ' 的面站起身，如同逃跑似的离开了天台……',
-        ]);
-      }
-      return ret;
-    };
-    f.title = '奇怪的午饭';
-    return f;
-  })(),
   /**
    * @author 雞雞
    * @param {CharaTalk} chara
@@ -1175,108 +1098,6 @@ module.exports = {
       ' 一起来到河边散步，今天也是好心情呢。',
     ]);
   },
-  or_riverside_walk: (() => {
-    /**
-     * @author KUN
-     * @param {CharaTalk} chara
-     * @param {CharaTalk} you
-     */
-    const f = async (chara, you) => {
-      const ret = [];
-      await era.printAndWait([
-        '在河堤边上休闲的度过了一段时间之后，',
-        you.get_colored_name(),
-        ' 和 ',
-        chara.get_colored_name(),
-        ' 踏上了返程。',
-      ]);
-      await era.printAndWait('温柔的风吹过了两个人的脸，很是惬意。');
-      era.printButton('「该回去了呢，」', 1);
-      era.printButton('「时间有点晚了。」', 2);
-      await era.input();
-      await era.printAndWait([
-        '在 ',
-        you.get_colored_name(),
-        ' 说话的同时，身旁的 ',
-        chara.get_colored_name(),
-        ' 偷偷把视线转了过来，默默把肩膀靠在一起。',
-      ]);
-      era.println();
-      await era.printAndWait('一同慢悠悠的走在路上，一路上都看不见多少人。');
-      await chara.say_and_wait('很安静呢……');
-      await era.printAndWait([
-        '似乎察觉到了什么的 ',
-        chara.get_colored_name(),
-        '，放缓了脚步。',
-      ]);
-      era.println();
-      await era.printAndWait([
-        '发现身旁的 ',
-        chara.get_colored_name(),
-        ' 停下了脚步时，',
-        you.get_colored_name(),
-        ' 也停住脚步回头看过去。',
-      ]);
-      era.printButton('「怎么了？」', 1);
-      await era.input();
-      await chara.say_and_wait('可以，稍微合上眼睛一会吗？');
-      await era.printAndWait([
-        '听着摸不着头脑的要求，',
-        you.get_colored_name(),
-        ' 稍微愣了一下，但还是合上了眼睛。',
-      ]);
-      era.println();
-      await era.printAndWait('风声在耳边吹过，清凉中却夹杂了一丝热风。');
-      await era.printAndWait([
-        '即使不睁眼，',
-        you.get_colored_name(),
-        ' 也能猜到发生了什么。',
-      ]);
-      await era.printAndWait('双臂环过身体，脸上感受到了一点温热的湿润感。');
-      era.println();
-      await chara.say_and_wait('……好啦，我们回去吧。');
-      await era.printAndWait([
-        '再次睁开眼的时候，',
-        chara.get_colored_name(),
-        ' 已经安静地站在 ',
-        you.get_colored_name(),
-        ' 的面前了。',
-      ]);
-      await era.printAndWait(
-        '虽然脸上还带着一点微红色，但却是微笑着后退了两步。',
-      );
-      era.printButton('「回去吧。」（好感+10）', 1);
-      era.printButton('「或许……可以晚点再回去……」（爱慕+1）', 2);
-      ret.push(await era.input());
-      if (ret[0] === 1) {
-        await era.printAndWait([
-          chara.get_colored_name(),
-          ' 抓住了 ',
-          you.get_colored_name(),
-          ' 温暖的手，安心的走在路上。',
-        ]);
-        await you.say_and_wait('刚才的触感，到底是什么呢……', true);
-      } else {
-        await chara.say_and_wait('晚点……');
-        await chara.say_and_wait('也就是……');
-        await era.printAndWait([
-          '面对眼前红着脸的 ',
-          chara.get_colored_name(),
-          '，',
-          you.get_colored_name(),
-          ' 只是笑了笑。',
-        ]);
-        await era.printAndWait([
-          '今天，就带着 ',
-          chara.get_colored_name(),
-          ' 再玩一会吧。',
-        ]);
-      }
-      return ret;
-    };
-    f.title = '河堤漫步时光';
-    return f;
-  })(),
   /**
    * @author 雞雞
    * @param {CharaTalk} chara
@@ -1329,164 +1150,6 @@ module.exports = {
       ' 一起来到商店街看电影，最近有什么好电影吗？',
     ]);
   },
-  os_is_movie_right: (() => {
-    /**
-     * @author KUN
-     * @param {CharaTalk} chara
-     * @param {CharaTalk} you
-     * @param {PrintedSpan} callname
-     */
-    const f = async (chara, you, callname) => {
-      const ret = [];
-      await era.printAndWait([
-        '原本想要和 ',
-        chara.get_colored_name(),
-        ' 一起去商店街随意的闲逛几下，但却发现了一个意外的宣传。',
-      ]);
-      era.println();
-      await you.say_as_passer_by_and_wait('宣传', [
-        '完美展现了赛',
-        chara.uma_sex_title,
-        '成长之路的全新作！',
-      ]);
-      era.println();
-      await era.printAndWait([
-        '虽然并没有听说，但 ',
-        you.get_colored_name(),
-        ' 和 ',
-        chara.get_colored_name(),
-        ' 本着好奇心还是买票进场了。',
-      ]);
-      await era.printAndWait('坐进了影院，有些期待的等着灯光熄灭，故事开始。');
-      await era.printAndWait(
-        '屏幕上的电影画面确实是符合全新作的制作水平，但成长之路却有些令人意外。',
-      );
-      era.println();
-      await you.say_as_passer_by_and_wait('演员', '训练员，多亏了你……');
-      await you.say_as_passer_by_and_wait('演员', '都是因为训练员，我现在才……');
-      era.println();
-      await era.printAndWait([
-        '屏幕上的画面有点夸张，让 ',
-        you.get_colored_name(),
-        ' 觉得这稍微有些不对劲。',
-      ]);
-      await era.printAndWait('这真的是成长的过程吗？');
-      era.println();
-      await era.printAndWait([
-        '察觉到了有些不对劲的 ',
-        you.get_colored_name(),
-        '，正准备转身去和 ',
-        chara.get_colored_name(),
-        ' 说说剩下的部分就不看了。',
-      ]);
-      era.println();
-      await chara.say_and_wait('……');
-      era.println();
-      await era.printAndWait('手臂的上方传来了一阵暖和的感觉。');
-      await era.printAndWait([
-        '坐在身旁的 ',
-        chara.get_colored_name(),
-        ' 轻轻地握住 ',
-        you.get_colored_name(),
-        ' 的手。',
-      ]);
-      era.println();
-      await chara.say_and_wait('……要走了吗？');
-      era.println();
-      await era.printAndWait([
-        '影院黑暗的环境里，唯有 ',
-        chara.get_colored_name(),
-        ' 的脸格外明显。',
-      ]);
-      await era.printAndWait([
-        '双手重叠在 ',
-        you.get_colored_name(),
-        ' 的手臂上，轻轻靠在肩膀上。',
-      ]);
-      era.println();
-      await era.printAndWait(
-        '画面在两个人的心里已经不再重要，视线已经被紧紧锁死了。',
-      );
-      await era.printAndWait('屏幕的微光照在彼此的脸上，折射出眼中的光线。');
-      era.println();
-      await chara.say_and_wait([callname, '……']);
-      await chara.say_and_wait('我……');
-      await you.say_as_passer_by_and_wait('演员', '我喜欢你！');
-      era.println();
-      await era.printAndWait('影片来到高潮的时刻，打断了两个人原有的动作。');
-      await era.printAndWait([
-        '声音覆盖在 ',
-        you.get_colored_name(),
-        ' 和 ',
-        chara.get_colored_name(),
-        ' 之间，视线中夹杂着一点尴尬。',
-      ]);
-      era.printButton('「还是……冷静点吧」（干劲上升，好感+10）', 1);
-      era.printButton('「我们……一起出去吧」（干劲大幅上升，爱慕+1）', 2);
-      ret.push(await era.input());
-      if (ret[0] === 1) {
-        await era.printAndWait('电影逐渐走向尾声，照明灯也适时点亮了。');
-        await era.printAndWait([
-          '明亮的光线照在 ',
-          you.get_colored_name(),
-          ' 尴尬的脸上，',
-          you.get_colored_name(),
-          ' 也轻咳了一声。',
-        ]);
-        era.println();
-        await chara.say_and_wait('……嗯。');
-        era.println();
-        await era.printAndWait([
-          '仍然贴在一起的手转而抓住了 ',
-          you.get_colored_name(),
-          '，跟着一起站起身来。',
-        ]);
-        await era.printAndWait([
-          '即使是带着一点遗憾，但也乖巧的站了起来，跟在 ',
-          you.get_colored_name(),
-          ' 的身后。',
-        ]);
-      } else {
-        await era.printAndWait([
-          '即使是在电影的高潮节点里，',
-          you.get_colored_name(),
-          ' 还是从中间找到了一丝声音。',
-        ]);
-        await era.printAndWait([
-          '跟着气氛喊出来的 ',
-          chara.get_colored_name(),
-          ' 愣了一下，立刻自顾自的向后缩去。',
-        ]);
-        await era.printAndWait([
-          '相对的，',
-          you.get_colored_name(),
-          ' 脸上的表情软化了，缓缓往前探去。',
-        ]);
-        await era.printAndWait([
-          '嘴唇贴在一起，将 ',
-          chara.get_colored_name(),
-          ' 的惊讶和羞涩全部压回了心里，享受着幸福感。',
-        ]);
-        era.println();
-        await era.printAndWait([
-          you.get_colored_name(),
-          ' 牵住 ',
-          chara.get_colored_name(),
-          ' 的手，悄悄的离开了影院。',
-        ]);
-        await era.printAndWait([
-          '带着满脸都是绯红色的 ',
-          chara.get_colored_name(),
-          '，看着面前的旅馆，缓慢的挽住了',
-          chara.sex,
-          '的肩膀走进去……',
-        ]);
-      }
-      return ret;
-    };
-    f.title = '这电影对吗？';
-    return f;
-  })(),
   /**
    * @author 雞雞
    * @param {CharaTalk} chara
@@ -1520,11 +1183,7 @@ module.exports = {
   async oc_great_luck(chara, dice) {
     // FLAGNAME:122 = 强奸抵抗
     if (dice < 0.0001 && era.get('flag:122') === 1) {
-      await era.printAndWait([
-        '署名是未知的',
-        chara.uma_sex_title,
-        '文本施法素材！',
-      ]);
+      await era.printAndWait('署名是未知的施法素材！');
     } else if (dice < 0.01) {
       await era.printAndWait([
         '眼前突然幻视到一扇彩色的闸门，心情突然好了起来',

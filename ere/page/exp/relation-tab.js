@@ -94,8 +94,35 @@ module.exports = {
     }
     const children_count = era.get(`exp:${chara.id}:孩子数量`);
     const birth_count = era.get(`exp:${chara.id}:生产次数`);
-    const children_exp = era.get(`cstr:${chara.id}:长子女经历`);
+    let children_exp = era.get(`cstr:${chara.id}:长子女经历`);
     if (children_exp) {
+      const child_list = sort_list(
+        era
+          .getAddedCharacters()
+          .map((e) => ({
+            f: era.get(`cflag:${e}:父方角色`),
+            id: e,
+            m: era.get(`cflag:${e}:母方角色`),
+          }))
+          .filter((ch) => ch.f === chara.id || ch.m === chara.id),
+        (ch) =>
+          +`${era.get(`cstr:${ch.id}:出生经历`)}${era.get(`cflag:${ch.id}:出生月份`).toString().padStart(2, '0')}${era.get(`cflag:${ch.id}:出生日期`).toString().padStart(2, '0')}${ch.id.toString().padStart(3, '0')}`,
+        true,
+      );
+      // 修复长子女经历错误
+      if (Array.isArray(children_exp)) {
+        children_exp = era.set(`cstr:${chara.id}:长子女经历`, {
+          y: era.get(`cstr:${child_list[0].id}:出生经历`),
+          m: era.get(`cflag:${child_list[0].id}:出生月份`).toString(),
+          w: Math.floor(
+            (era.get(`cflag:${child_list[0].id}:出生日期`) + 6) / 7,
+          ).toString(),
+          c: child_list[0].id,
+        });
+        if (chara.id === child_list[0].m) {
+          children_exp.im = true;
+        }
+      }
       const first_child = get_chara_talk(children_exp.c);
       family_info_list.push({
         content: get_filled_exp_str(
@@ -135,51 +162,33 @@ module.exports = {
         ],
         type: 'text',
       });
-    }
-
-    sort_list(
-      era
-        .getAddedCharacters()
-        .map((e) => {
-          return {
-            f: era.get(`cflag:${e}:父方角色`),
-            id: e,
-            m: era.get(`cflag:${e}:母方角色`),
-          };
-        })
-        .filter((ch) => ch.f === chara.id || ch.m === chara.id),
-      (ch) =>
-        +`${era.get(`cstr:${ch.id}:出生经历`)}${era.get(`cflag:${ch.id}:出生月份`).toString().padStart(2, '0')}${era.get(`cflag:${ch.id}:出生日期`).toString().padStart(2, '0')}`,
-      true,
-    ).forEach((ch, i) => {
-      const child = get_chara_talk(ch.id);
-      const number = i18n().detail.get_child_number(i + 1);
-      const child_title = (
-        child.sex_code === 1
-          ? i18n().detail.relation_family_child_boy_title_template
-          : i18n().detail.relation_family_child_girl_title_template
-      ).replace('%NUMBER%', number);
-      family_info_list.push({
-        config: { width: 12 },
-        content:
-          ch.f === chara.id
-            ? i18n().detail.get_relation_family_child_entry_as_father(
-                child_title,
-                child.get_colored_full_name(),
-                get_chara_talk(ch.m).get_colored_full_name(),
-              )
-            : i18n().detail.get_relation_family_child_entry_as_mother(
-                child_title,
-                child.get_colored_full_name(),
-                get_chara_talk(ch.f).get_colored_full_name(),
-              ),
-        type: 'text',
+      child_list.forEach((ch, i) => {
+        const child = get_chara_talk(ch.id);
+        const number = i18n().detail.get_child_number(i + 1);
+        const child_title = (
+          child.sex_code === 1
+            ? i18n().detail.relation_family_child_boy_title_template
+            : i18n().detail.relation_family_child_girl_title_template
+        ).replace('%NUMBER%', number);
+        family_info_list.push({
+          config: { width: 12 },
+          content:
+            ch.f === chara.id
+              ? i18n().detail.get_relation_family_child_entry_as_father(
+                  child_title,
+                  child.get_colored_full_name(),
+                  get_chara_talk(ch.m).get_colored_full_name(),
+                )
+              : i18n().detail.get_relation_family_child_entry_as_mother(
+                  child_title,
+                  child.get_colored_full_name(),
+                  get_chara_talk(ch.f).get_colored_full_name(),
+                ),
+          type: 'text',
+        });
       });
-    });
-    if (
-      family_info_list[family_info_list.length - 1] &&
-      family_info_list[family_info_list.length - 1].content[0].isBr
-    ) {
+    }
+    if (family_info_list.at(-1) && family_info_list.at(-1).content[0].isBr) {
       family_info_list.pop();
     }
     if (!family_info_list.length) {

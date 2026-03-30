@@ -36,8 +36,8 @@ async function blowjob(chara, me) {
   if (
     (
       await print_title_with_kojo(
-        i18n().timon.others,
-        'blowjob',
+        i18n().timon.random_events,
+        'mr_blowjob',
         chara,
         me,
         sys_get_colored_callname(chara.id, 0),
@@ -70,7 +70,12 @@ async function blowjob(chara, me) {
 async function naked_apron(chara, me) {
   if (
     (
-      await print_title_with_kojo(i18n().timon.others, 'naked_apron', chara, me)
+      await print_title_with_kojo(
+        i18n().timon.random_events,
+        'mr_naked_apron',
+        chara,
+        me,
+      )
     )[0] === 1
   ) {
     begin_and_init_ero(0, chara.id);

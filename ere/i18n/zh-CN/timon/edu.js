@@ -2,7 +2,6 @@
  * @file 育成地文
  * @author 雞雞
  * @author 幽白書
- * @author Mr.E.
  * @author 黑奴队长
  */
 const era = require('#/era-electron');
@@ -90,11 +89,9 @@ module.exports = {
     const f = async (chara, you, result, title) => {
       await era.printAndWait('很遗憾未能入选殿堂。');
       era.println();
-      await era.printAndWait([
-        '但 ',
-        you.couple_title,
-        ' 也仍然为竭尽全力达到的成果感到骄傲，并且相信后来者能站在自己的肩上爬向更高的顶点。',
-      ]);
+      await era.printAndWait(
+        '但你们也仍然为竭尽全力达到的成果感到骄傲，并且相信后来者能站在自己的肩上爬向更高的顶点。',
+      );
       era.println();
       for (const seg of result) {
         await era.printAndWait(seg);
@@ -120,9 +117,7 @@ module.exports = {
       await era.printAndWait([
         '时光如白驹过隙，与 ',
         chara.get_colored_name(),
-        ' 相伴已逾数载，再过一段日子，',
-        you.couple_title,
-        ' 马上就要展开新的篇章',
+        ' 相伴已逾数载，再过一段日子，你们马上就要展开新的篇章',
       ]);
       era.println();
       if (era.get(`love:${chara.id}`) >= 75) {
@@ -255,77 +250,6 @@ module.exports = {
       return ret;
     };
     f.title = '热血的追加训练！';
-    return f;
-  })(),
-  ts_sex: (() => {
-    /**
-     * @author 雞雞
-     * @param {CharaTalk} chara
-     */
-    const f = async (chara) => {
-      const ret = [];
-      await era.printAndWait([
-        '一天的训练结束后，',
-        chara.get_colored_name(),
-        ' 的样子好像有点奇怪……',
-      ]);
-      await era.printAndWait(
-        '面色潮红，在双腿间流下的不明液体与汗液混在一起，散发出一股淫靡的味道。',
-      );
-      era.printButton('「这也是训练员的义务……」', 1);
-      era.printButton('「总之先去医务室吧！」', 2);
-      return ret;
-    };
-    f.title = '训练后的性欲高涨';
-    return f;
-  })(),
-  ts_shower: (() => {
-    /**
-     * @author 幽白書
-     * @param {CharaTalk} chara
-     * @param {CharaTalk} you
-     * @param {boolean} want_sex
-     */
-    const f = async (chara, you, want_sex) => {
-      const ret = [];
-      await era.printAndWait(['嗯？', chara.get_colored_name(), ' 还没来吗？']);
-      await era.printAndWait('正好，趁现在先沖个澡吧！');
-      era.println();
-      await era.printAndWait([
-        '打开门，映入眼帘的是身无寸缕的 ',
-        chara.get_colored_name(),
-        '……',
-      ]);
-      era.printButton('「哦，要一起洗澡吗？」', 1);
-      era.printButton('「不好意思打扰了！」', 2);
-      ret.push(await era.input());
-      if (ret[0] === 1) {
-        if (want_sex) {
-          await era.printAndWait('对方兴致盎然的答应了。');
-          await era.printAndWait([you.couple_title, ' 互相给对方擦了背。']);
-          await era.printAndWait([
-            '结束洗浴后，',
-            chara.sex,
-            '带着不甚满足的眼光看向 ',
-            you.get_colored_name(),
-            '……',
-          ]);
-        } else {
-          await chara.say_and_wait('笨蛋，在想什么啊你！');
-          await era.printAndWait([you.get_colored_name(), ' 被赶了出去……']);
-        }
-      } else {
-        await you.say_and_wait('不好意思打扰了！');
-        await era.printAndWait([you.get_colored_name(), ' 大喊一声跑了出去。']);
-        await era.printAndWait([
-          '没过多久，冲好澡的 ',
-          chara.get_colored_name(),
-          ' 红着脸走了出来。',
-        ]);
-      }
-      return ret;
-    };
-    f.title = '淋浴间内';
     return f;
   })(),
   /**
@@ -722,92 +646,6 @@ module.exports = {
       ]);
     };
     f.title = '夏季合宿';
-    return f;
-  })(),
-  we_are_one: (() => {
-    /**
-     * @author Mr.E.
-     * @param {CharaTalk} chara
-     * @param {CharaTalk} you
-     * @param {PrintedSpan} callname
-     */
-    const f = async (chara, you, callname) => {
-      await era.printAndWait([
-        '回到训练室，',
-        chara.get_colored_name(),
-        ' 带着头上的洗澡巾在沙发上起身，笑眯眯地看着 ',
-        you.get_colored_name(),
-        '。',
-      ]);
-      era.println();
-      await chara.say_and_wait([
-        '今天我的发挥也很不错吧，',
-        callname,
-        ' 是不是要～好好奖励奖励我？',
-      ]);
-      era.printButton('「今天真是辛苦你了，好好休息，我们出去玩一圈吧！」', 1);
-      era.print('（干劲-1，好感+50）');
-      era.printButton('「那，你想要什么奖励？」', 2);
-      const ret = [await era.input()];
-      if (ret[0] === 2) {
-        await era.printAndWait(['下意识的反问调笑，却等到了意料之外的回答。']);
-        era.println();
-        await chara.say_and_wait([
-          '我想成为 ',
-          callname,
-          ' 的『新娘子』，怎么样？」',
-        ]);
-        era.println();
-        await era.printAndWait([
-          '眼前的马娘笑嘻嘻的，一边说着一边又把 ',
-          you.get_colored_name(),
-          ' 的手往',
-          chara.sex,
-          '的身上放。',
-        ]);
-        era.println();
-        await chara.say_and_wait([
-          '我们是一心同体的关系，对吧？这个时候一定是一样的想法对吧？反正不管 ',
-          you.get_colored_name(),
-          ' 怎么说，我已经忍不了啦！！！',
-        ]);
-        era.println();
-        await era.printAndWait([
-          '她用尾巴反锁上了门，一把抱住 ',
-          you.get_colored_name(),
-          ' 冲向边上的沙发上。',
-        ]);
-        era.println();
-        await chara.say_and_wait(['扯下我的「头纱」，像对待妻子一样对我吧～']);
-        era.println();
-        await era.printAndWait([
-          '在 ',
-          you.get_colored_name(),
-          ' 意识过来的时候，一切都来不及了。',
-        ]);
-        era.println();
-        era.printButton('「冷静一下，我想我们还有别的事情要做……」', 1);
-        era.printButton(
-          '粗暴地扯下被当做头纱的浴巾，是时候让她知道谁才是床上的霸主了！',
-          2,
-        );
-        ret.push(await era.input());
-        if (ret[1] === 1) {
-          await era.printAndWait([
-            '听到 ',
-            you.get_colored_name(),
-            ' 拒绝，只见抱着 ',
-            you.get_colored_name(),
-            ' 的马娘依旧是那副笑脸。',
-          ]);
-          await chara.say_and_wait(
-            '不想要？看来我们的默契还不够啊，我知道了，只要一直做，做到一心同体就没问题了吧？',
-          );
-        }
-      }
-      return ret;
-    };
-    f.title = '「」心「」体';
     return f;
   })(),
 };

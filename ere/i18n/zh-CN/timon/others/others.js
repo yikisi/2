@@ -1,4 +1,8 @@
-/** @file 杂项 */
+/**
+ * @file 杂项
+ * @author 雞雞
+ * @author 黑奴队长
+ */
 const {
   get,
   input,
@@ -12,7 +16,6 @@ const {
 module.exports = {
   /**
    * 办公室初见
-   * @author 黑奴队长
    * @param {CharaTalk} aoi
    * @param {CharaTalk} riko
    * @param {CharaTalk} you
@@ -56,7 +59,6 @@ module.exports = {
     /**
      * URA 颁奖典礼
      * @author 雞雞
-     * @author 黑奴队长
      * @param {CharaTalk} etusko
      * @param {CharaTalk} you
      * @param {function(TextContent):Promise} report 用于主持人发言的回调函数
@@ -282,6 +284,7 @@ module.exports = {
 
   /**
    * 重复育成
+   * @author 天马闪光蹄
    */
 
   sc_event_name: '「梦」',
@@ -680,112 +683,4 @@ module.exports = {
       '们奔跑的身影。',
     ]);
   },
-
-  /**
-   * 隔日清晨系列事件
-   */
-
-  naked_apron: (() => {
-    /**
-     * @author 雞雞
-     * @param {CharaTalk} chara
-     * @param {CharaTalk} you
-     */
-    const f = async (chara, you) => {
-      const ret = [];
-      await printAndWait([
-        '早上醒来时，发现 ',
-        chara.get_colored_name(),
-        ' 已经不在床上了。',
-      ]);
-      await printAndWait([
-        '起床梳洗后在厨房发现了',
-        chara.sex,
-        '的身影，对方似乎在准备早餐的样子，然而……',
-      ]);
-      await printAndWait([
-        '浑身上下赤裸，只穿着围裙认真地准备早餐的 ',
-        chara.get_colored_name(),
-        ' 一边扭着可爱的屁股一边做菜的模样实在是——',
-      ]);
-      printButton('（可恶，忍不了了！）', 1);
-      printButton('（数质数冷静下来吧……）', 2);
-      ret.push(await input());
-      if (ret[0] === 2) {
-        await printAndWait([
-          you.get_colored_name(),
-          ' 抑制住了冲动，用理性向 ',
-          chara.get_colored_name(),
-          ' 打招呼。',
-        ]);
-      }
-      return ret;
-    };
-    f.title = '隔日清晨之裸体围裙';
-    return f;
-  })(),
-  blow_job: (() => {
-    /**
-     * @author 雞雞
-     * @param {CharaTalk} chara
-     * @param {CharaTalk} you
-     * @param {PrintedSpan} callname
-     */
-    const f = async (chara, you, callname) => {
-      const ret = [];
-      await printAndWait([
-        '早上醒来时，',
-        you.get_colored_name(),
-        ' 自下身感受到一股异样的感觉。',
-      ]);
-      await printAndWait([
-        '睁开眼睛后出现在眼前的是 ',
-        chara.get_colored_name(),
-        ' 光着身子用嘴巴吸吮着 ',
-        you.get_colored_name(),
-        ' 的',
-        you.sex_code === 0 ? '阴蒂' : '阴茎',
-        '的淫靡景象。',
-      ]);
-      const skill = get(`abl:${chara.id}:口交技巧`);
-      await printAndWait([
-        chara.get_colored_name(),
-        ' ',
-        get(`talent:${chara.id}:饮精成瘾`) > 0 ||
-        get(`talent:${chara.id}:淫口`) > 0
-          ? '贪婪'
-          : skill > 2
-            ? '熟练'
-            : '生涩',
-        '地',
-        you.sex_code === 0 ? '舔舐着阴蒂' : '吞吐着阴茎',
-        '，',
-        you.get_colored_name(),
-        ' 也不禁以手按住 ',
-        chara.get_colored_name(),
-        ' 的脑袋渴求更多的快感。',
-      ]);
-      printButton('（可恶，忍不了了！）', 1);
-      printButton('（要去了……！）', 2);
-      ret.push(await input());
-      if (ret[0] === 2) {
-        await printAndWait([
-          '在 ',
-          chara.get_colored_name(),
-          ' 的早安口交下，',
-          you.get_colored_name(),
-          ' 很快就达到了高潮，',
-          you.sex_code === 0 ? '爱液' : '精液',
-          '尽数射进了 ',
-          chara.get_colored_name(),
-          ' 的樱桃小嘴当中。',
-        ]);
-        await chara.say_and_wait(['满嘴都是……', callname, ' 的味道呢……']);
-        await printAndWait('欲望得以发泄之后，新的一天开始了……');
-      }
-      return ret;
-    };
-    f.title = '隔日清晨之早安口交';
-    return f;
-  })(),
 };

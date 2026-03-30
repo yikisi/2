@@ -7,7 +7,7 @@ const { get_random_value } = require('#/utils/value-utils');
  */
 function get_random_entry(list) {
   if (!list.length) {
-    return undefined;
+    return void 0;
   }
   if (list.length === 1) {
     return list[0];
@@ -19,7 +19,7 @@ function get_random_entry(list) {
  * @template T
  * @param {T[]} list
  * @param {function(T,number):number} order_by
- * @param {boolean} is_asc
+ * @param {boolean=false} is_asc
  * @returns {T[]}
  */
 function sort_list(list, order_by, is_asc = false) {
@@ -108,16 +108,14 @@ module.exports = {
     if (list.length <= 1) {
       return { max: list[0], min: list[0] };
     }
-    const _list = list.map((v) => {
-      return {
-        val: v,
-        orderBy: order_by(v),
-      };
-    });
-    let max_entry = _list[0],
-      min_entry = _list[0],
-      max_val = max_entry.orderBy,
-      min_val = min_entry.orderBy;
+    const _list = list.map((v) => ({
+      val: v,
+      orderBy: order_by(v),
+    }));
+    let max_entry = _list[0];
+    let min_entry = _list[0];
+    let max_val = max_entry.orderBy;
+    let min_val = min_entry.orderBy;
     _list.forEach((e) => {
       if (e.orderBy > max_val) {
         max_entry = e;
@@ -140,7 +138,7 @@ module.exports = {
     if (list.length <= 1) {
       return list[0];
     }
-    let dice = Math.random() * list.reduce((p, c) => p + weight_cb(c), 0);
+    let dice = Math.random() * list.reduce((p, c, i) => p + weight_cb(c, i), 0);
     for (let i = 0; i < list.length; ++i) {
       const entry = list[i];
       if ((dice -= weight_cb(entry, i)) <= 0) {

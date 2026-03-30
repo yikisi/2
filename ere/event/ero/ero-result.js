@@ -105,9 +105,9 @@ handlers[ero_hooks.prison] = (cid) => {
  */
 handlers[ero_hooks.cum_in_womb] = async (_, __, extra) => {
   if (extra.shown) {
-    const last_action = era.get('tflag:前回行动'),
-      master = era.get('tflag:主导权'),
-      lover = era.get('tflag:前回对手');
+    const last_action = era.get('tflag:前回行动');
+    const master = era.get('tflag:主导权');
+    const lover = era.get('tflag:前回对手');
     if (
       (master === extra.mother_id &&
         (last_action === ero_hooks.cowgirl ||

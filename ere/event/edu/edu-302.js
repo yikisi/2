@@ -7,7 +7,6 @@ const {
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
-const generate_dictionary = require('#/event/snippets/generate-dictionary');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const CustomizedEdu = require('#/event/edu/edu-common');
@@ -22,26 +21,16 @@ const { attr_enum } = require('#/data/train-const');
 const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends CustomizedEdu {
-  get #kojo() {
-    return i18n().kojo[this.id].edu;
-  }
-
-  get #dict() {
-    return generate_dictionary(this.id);
-  }
-
   /** @param {CharaTalk} taste */
   async annoyance1(taste) {
     new TasteLifeMarks().annoyance = -get_random_value(5, 12);
     EventMarks.get(0).sub(event_hooks.school_chairman);
+    const h = i18n().timon.random_events.chairman_annoyance1;
     await print_event_name(
-      i18n().kojo[this.id].e_sorrows_of_young_chairman_p1_template.replace(
-        '%TEEN%',
-        taste.teen_sex_title,
-      ),
+      h.title.replace('%TEEN%', taste.teen_sex_title),
       taste,
     );
-    if ((await this.#kojo['annoyance1'](this.#dict))[0] === 1) {
+    if ((await h(taste))[0] === 1) {
       sys_filter_chara('cflag', '招募状态', recruit_flags.yes)
         .filter((e) => get(`cflag:${e}:育成回合计时`) < 3 * 48)
         .forEach((e) => add(`exp:${e}:技能点数`, 10));
@@ -55,14 +44,12 @@ module.exports = class extends CustomizedEdu {
   /** @param {CharaTalk} taste */
   async annoyance2(taste) {
     EventMarks.get(0).sub(event_hooks.school_chairman);
+    const h = i18n().timon.random_events.chairman_annoyance2;
     await print_event_name(
-      i18n().kojo[this.id].e_sorrows_of_young_chairman_p2_template.replace(
-        '%TEEN%',
-        taste.teen_sex_title,
-      ),
+      h.title.replace('%TEEN%', taste.teen_sex_title),
       taste,
     );
-    if ((await this.#kojo['annoyance2'](this.#dict))[0] === 1) {
+    if ((await h(taste))[0] === 1) {
       println();
       sys_change_attr_and_print(0, attr_enum.tp, -50);
       sys_like_chara(302, 0, get_random_value(40, 60)) && (await waitAnyKey());

@@ -385,12 +385,23 @@ module.exports = {
     } else {
       const love = era.get(`love:${mother.id || father.id}`);
       if (love < 75) {
-        await era.printAndWait([
-          father.get_colored_name(),
-          ' 射出的大量精子正朝向 ',
-          mother.get_colored_name(),
-          ' 毫无防备的卵子前进……',
-        ]);
+        if (
+          era.get(`status:${mother.id}:反避孕套`) > 0 &&
+          era.get(`tcvar:${father.id}:避孕套`) > 0 &&
+          is_father_awake
+        ) {
+          await era.printAndWait([
+            father.get_colored_name(),
+            ' 感觉到自己射出的精液并没有被那一层薄膜阻拦……',
+          ]);
+        } else {
+          await era.printAndWait([
+            father.get_colored_name(),
+            ' 射出的大量精子正朝向 ',
+            mother.get_colored_name(),
+            ' 毫无防备的卵子前进……',
+          ]);
+        }
         if (is_mother_awake && !talent_check) {
           await era.printAndWait([
             mother.get_colored_name(),
@@ -398,12 +409,23 @@ module.exports = {
           ]);
         }
       } else if (love < 90) {
-        await era.printAndWait([
-          father.get_colored_name(),
-          ' 射出的大量精子正朝向 ',
-          mother.get_colored_name(),
-          ' 卸下防备的卵子前进……',
-        ]);
+        if (
+          era.get(`status:${mother.id}:反避孕套`) > 0 &&
+          era.get(`tcvar:${father.id}:避孕套`) > 0 &&
+          is_father_awake
+        ) {
+          await era.printAndWait([
+            father.get_colored_name(),
+            ' 感觉到自己射出的精液畅通无阻……',
+          ]);
+        } else {
+          await era.printAndWait([
+            father.get_colored_name(),
+            ' 射出的大量精子正朝向 ',
+            mother.get_colored_name(),
+            ' 卸下防备的卵子前进……',
+          ]);
+        }
         if (is_mother_awake && !talent_check) {
           await era.printAndWait([
             mother.get_colored_name(),
