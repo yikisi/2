@@ -172,7 +172,7 @@ module.exports = class extends CustomizedLove {
     era.println();
 
     era.printButton(`「你当然是我最重要的人」（升级关系）`, 1);
-    era.printButton(`「请让我与你伴行」（暂停升级）`, 2);
+    era.printButton(`「请让我与你伴行」（暂不升级）`, 2);
     if ((await era.input()) === 1) {
       await maya.say_and_wait(
         '……真、真的吗？人家最特别？人家最重要，最闪闪发光吗？',
@@ -308,7 +308,7 @@ module.exports = class extends CustomizedLove {
     era.println();
 
     era.printButton('「不管穿上什么衣服，重炮都是最闪耀的」（升级关系）', 1);
-    era.printButton('「为了下次也能当上模特儿，继续努力吧！」（暂停升级）', 2);
+    era.printButton('「为了下次也能当上模特儿，继续努力吧！」（暂不升级）', 2);
     if ((await era.input()) === 1) {
       await maya.say_and_wait('……！！');
       await maya.say_and_wait('人、人家……被攻陷了……人家被求婚了～～！');

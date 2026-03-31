@@ -352,7 +352,8 @@ module.exports = class extends Edu60RaceEnd {
           `${me.name} 已经被逼得打出两好球，眼看就要到此为止时──`,
         );
         await nature.say_and_wait('加油──！');
-        era.printWholeImage(`${era.get('cstr:60:头像')}_应援_半身`, {
+        // Do not translate this
+        era.printWholeImage('内恰_应援_半身', {
           width: 8,
           offset: 8,
         });

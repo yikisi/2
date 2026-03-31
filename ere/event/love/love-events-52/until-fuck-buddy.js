@@ -68,14 +68,18 @@ module.exports = class extends CustomizedLove {
     ]);
     urara.print('呜呜……身体好热，就算掀掉被子也还是好热……');
     era.printButton('试一下，试一下就好……（升级关系）', 1);
-    era.printButton('唔……但还是好困啊……（暂停升级）', 2);
+    era.printButton('唔……但还是好困啊……（暂不升级）', 2);
     if ((await era.input()) === 1) {
       begin_and_init_ero(52);
-      await urara.print_and_wait(
-        `然而在褪掉睡衣，将手${
-          urara.sex_code - 1 ? '伸进花园' : '伸向肉棒'
-        }的瞬间，${urara.teen_sex_title} 娇嫩的身体就已做好了迎接高潮的准备。`,
-      );
+      if (urara.sex_code === 1) {
+        await urara.print_and_wait(
+          `然而在褪掉睡衣，将手伸向肉棒的瞬间，${urara.teen_sex_title} 娇嫩的身体就已做好了迎接高潮的准备。`,
+        );
+      } else {
+        await urara.print_and_wait(
+          `然而在褪掉睡衣，将手伸进花园的瞬间，${urara.teen_sex_title} 娇嫩的身体就已做好了迎接高潮的准备。`,
+        );
+      }
       await urara.print_and_wait(
         `仅是轻轻一下，小${urara.uma_sex_title}的身体就在比以往任何一次都要激烈的反应下，让无法抑制的让水声打湿了床单。`,
       );

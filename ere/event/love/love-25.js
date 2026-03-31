@@ -90,7 +90,7 @@ module.exports = class extends CustomizedLove {
       edu_marks.our_taste += edu_marks.our_taste === 1;
       era.println();
       era.printButton(`「好想见到你，${callname}……」（升级关系）`, 1);
-      era.printButton('「只是错觉罢了……」（暂停升级）', 2);
+      era.printButton('「只是错觉罢了……」（暂不升级）', 2);
       if ((await era.input()) === 1) {
         await coffee.print_and_wait([
           '闭上眼睛，渴求睡眠能够消除此刻的迷茫与孤寂，但 ',
@@ -155,7 +155,7 @@ module.exports = class extends CustomizedLove {
       ]);
       era.println();
       era.printButton('「嗯，有空，想做些什么吗。」（升级关系）', 1);
-      era.printButton('「抱歉，今晚的话稍微有点……」（暂停升级）', 2);
+      era.printButton('「抱歉，今晚的话稍微有点……」（暂不升级）', 2);
       const ret = await era.input();
       if (ret === 1) {
         await era.printAndWait([
@@ -515,7 +515,7 @@ module.exports = class extends CustomizedLove {
       '……能和我结婚吗？',
     ]);
     era.printButton('「不行。」（升级关系）', 1);
-    era.printButton('「对我们来说……有点太早了。」（暂停升级）', 2);
+    era.printButton('「对我们来说……有点太早了。」（暂不升级）', 2);
     const ret = await era.input();
     if (ret === 1) {
       await era.printAndWait([

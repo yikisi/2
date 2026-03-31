@@ -15,7 +15,7 @@ const {
 
 const { get_random_entry } = require('#/utils/list-utils');
 
-const { akuochi } = require('#/data/color-const');
+const { akuochi, buff_colors } = require('#/data/color-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 
 const { degeneration_to_evil } = require('#/i18n/zh-CN/snippets');
@@ -608,7 +608,7 @@ module.exports = {
         '…………哪怕，那只是在五秒后，下一根肉棒插入进来时便会遗忘的记忆。',
       ]);
     };
-    f.title = '孕袋职责之惩戒';
+    f.title = [{ color: buff_colors[2], content: '孕袋职责之惩戒' }];
     return f;
   })(),
   punish: (() => {
@@ -792,7 +792,7 @@ module.exports = {
         ]);
       }
     };
-    f.title = '孕袋职责之惩戒';
+    f.title = [{ color: buff_colors[2], content: '孕袋职责之惩戒' }];
     return f;
   })(),
   report_preg_duty: (() => {

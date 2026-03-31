@@ -9,13 +9,12 @@ const {
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
 const { run_custom_ero } = require('#/event/ero/ero-factory');
-const print_event_name = require('#/event/snippets/print-event-name');
+const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { gacha, get_random_entry, sort_list } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
-const { buff_colors } = require('#/data/color-const');
 const EroParticipant = require('#/data/ero/ero-participant');
 const { item_enum } = require('#/data/ero/item-const');
 const { part_enum } = require('#/data/ero/part-const');
@@ -49,12 +48,13 @@ async function punish_pregnant_slave() {
       // 次数=1
       if (!my_marks.p_slave_punish) {
         my_marks.p_slave_punish = 1;
-        const h = i18n().timon.pregnant_slave.punish_first;
-        await print_event_name(
-          [{ content: h.title, color: buff_colors[3] }],
+        await print_title_with_kojo(
+          i18n().timon.pregnant_slave,
+          'punish_first',
           me,
+          get_chara_talk(302),
+          get_chara_talk(301),
         );
-        await h(me, get_chara_talk(302), get_chara_talk(301));
         rape_list = [
           301,
           302,
@@ -120,13 +120,9 @@ async function punish_pregnant_slave() {
             ),
           );
         }
-        const h = i18n().timon.pregnant_slave.punish;
-
-        await print_event_name(
-          [{ content: h.title, color: buff_colors[3] }],
-          me,
-        );
-        await h(
+        await print_title_with_kojo(
+          i18n().timon.pregnant_slave,
+          'punish',
           me,
           era.get('flag:角色性别') === 1
             ? i18n().name.uma_boy

@@ -63,7 +63,7 @@ module.exports = class extends CustomizedLove {
         `「我，是这么简单的法兰西${vp.child_sex_title}啊……」（升级关系）`,
         1,
       );
-      era.printButton('「别胡思乱想了，再不睡要被师傅说的。」（暂停升级）', 2);
+      era.printButton('「别胡思乱想了，再不睡要被师傅说的。」（暂不升级）', 2);
       if ((await era.input()) === 1) {
         era.println();
         if (

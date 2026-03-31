@@ -159,7 +159,7 @@ module.exports = class extends CustomizedLove {
     await kitaru.say_and_wait('简单抽一张吧……');
     era.println();
     era.printButton('星星 正位（升级关系）', 1);
-    era.printButton('世界 逆位（暂停升级）', 2);
+    era.printButton('世界 逆位（暂不升级）', 2);
     if ((await era.input()) === 1) {
       await kitaru.say_and_wait('凭心意顺势而行吗？');
       await kitaru.say_and_wait('欸嘿，也是理所应当呢！');
@@ -307,7 +307,7 @@ module.exports = class extends CustomizedLove {
       ]);
       era.println();
       era.printButton('恋人 正位（升级关系）', 1);
-      era.printButton('月亮 正位（暂停升级）', 2);
+      era.printButton('月亮 正位（暂不升级）', 2);
       if ((await era.input()) === 1) {
         await kitaru.print_and_wait('毫不意外。');
         await kitaru.say_and_wait('喜欢……');

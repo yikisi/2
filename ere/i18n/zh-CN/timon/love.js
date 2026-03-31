@@ -45,7 +45,7 @@ module.exports = {
         '但那到底是年少无知的情窦初开，抑或是日常相伴下产生的情感错觉？',
       );
       era.printButton('「我也许是认真的……」（升级关系）', 1);
-      era.printButton('「不，我也许只是想多了……」（暂停升级）', 2);
+      era.printButton('「不，我也许只是想多了……」（暂不升级）', 2);
       ret.push(await era.input());
       if (ret[0] === 1) {
         await chara.print_and_wait([

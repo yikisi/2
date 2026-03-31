@@ -7,7 +7,7 @@ const {
 
 const CustomizedLove = require('#/event/love/love-common');
 const punish_rejecting_love = require('#/event/love/snippets/punish-rejecting-love');
-const print_event_name = require('#/event/snippets/print-event-name');
+const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 
 const { get_random_entry } = require('#/utils/list-utils');
 
@@ -17,19 +17,23 @@ const { get_filtered_talents } = require('#/data/info-generator');
 const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends CustomizedLove {
+  get #kojo() {
+    return i18n().kojo[this.id].love;
+  }
+
   async 49(teio, me, callname, stage, extra, ebj) {
-    await print_event_name(i18n().kojo[this.id].love[49].title, teio);
-    await i18n().kojo[this.id].love[49](teio, me, callname);
+    await print_title_with_kojo(this.#kojo, '49', teio, me, callname);
     // TALENTNAME:0 = 情感活动
     era.set('talent:3:0', 1);
-
     sys_like_chara(3, 0, 20);
     await sys_love_uma_in_event(3);
   }
 
   async 74(teio, me, callname, stage, extra, ebj) {
-    await print_event_name(i18n().kojo[this.id].love[74].title, teio);
-    if ((await i18n().kojo[this.id].love[74](teio, me))[0] === 1) {
+    if (
+      (await print_title_with_kojo(this.#kojo, '74', teio, me, callname))[0] ===
+      1
+    ) {
       const temp = get_random_entry(
         get_filtered_talents(teio.sex_code, 60).filter(
           (talent_id) => era.get(`talent:3:${talent_id}`) < 1,
@@ -48,11 +52,13 @@ module.exports = class extends CustomizedLove {
   }
 
   async 89(teio, me, callname, stage, extra, ebj) {
-    const is_hurt = era.get('status:3:100') > 0;
-    // CFLAGNAME:100 = 腿伤
-    const f = i18n().kojo[this.id].love[is_hurt ? '89-1' : '89-2'];
-    await print_event_name(f.title, teio);
-    const ret = await f(teio, me);
+    const is_hurt = era.get('status:3:腿伤') > 0;
+    const ret = await print_title_with_kojo(
+      this.#kojo,
+      is_hurt ? '89-hurt' : '89',
+      teio,
+      me,
+    );
     if (is_hurt) {
       if (ret[0] === 1) {
         era.set('talent:3:53', 1);
@@ -81,7 +87,6 @@ module.exports = class extends CustomizedLove {
   }
 
   async 99(teio, me, callname, stage, extra, ebj) {
-    await print_event_name(i18n().kojo[this.id].love[99].title, teio);
     const temp = get_random_entry(
       new Array(8)
         .fill(0)
@@ -89,8 +94,10 @@ module.exports = class extends CustomizedLove {
         .filter((e) => (e !== 71 && e !== 75) || teio.sex_code !== 1)
         .filter((e) => !era.get(`talent:3:${e}`)),
     );
-    const tname = temp > 0 ? era.get(`talentname:${temp}`) : void 0;
-    if ((await i18n().kojo[this.id].love[99](teio, me, tname))[0] === 1) {
+    const tname = temp > 0 && era.get(`talentname:${temp}`);
+    if (
+      (await print_title_with_kojo(this.#kojo, '99', teio, me, tname))[0] === 1
+    ) {
       if (temp > 0) {
         era.set(`talent:3:${temp}`, 1);
       }
