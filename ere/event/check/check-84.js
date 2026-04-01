@@ -20,7 +20,7 @@ aim_races[get_aim_race_index(race_enum.japa_cup, 2)] = 4;
 module.exports = require('#/event/check/snippets/check-uma-common-generator')(
   () => {},
   (races, race_list) =>
-    race_list.findIndex((e) => e.st !== 3 || e.rank !== 1) === -1 &&
+    race_list.every((e) => e.st === 3 && e.rank === 1) &&
     check_aim_race(races, race_enum.sats_sho, 1, 1) &&
     check_aim_race(races, race_enum.nhk_cup, 1, 1) &&
     check_aim_race(races, race_enum.toky_yus, 1, 1),

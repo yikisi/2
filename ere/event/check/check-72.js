@@ -25,15 +25,15 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
   () => {},
   (races) =>
     check_aim_race(races, race_enum.sats_sho, 1, 1) &&
-    RaceHistory.get(72)
+    !RaceHistory.get(72)
       .get_entries()
-      .findIndex(
+      .some(
         (e) =>
           e.rank === 1 &&
           race_infos[e.race].race_class === class_enum.G1 &&
           race_infos[e.race].ground === ground_enum.grass &&
           e.weeks < 47 + race_infos[race_enum.sats_sho].date,
-      ) === -1 &&
+      ) &&
     check_aim_race(races, race_enum.sank_hai, 2, 1) &&
     check_aim_race(races, race_enum.yasu_kin, 2, 1) &&
     check_aim_race(races, race_enum.takz_kin, 2, 1) &&

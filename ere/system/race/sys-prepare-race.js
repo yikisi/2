@@ -39,23 +39,14 @@ function sys_prepare_race(list_chara, team_list, race_info) {
   const running_style_counts = [0, 0, 0, 0];
   const skill_counts = {};
   list_chara.forEach((uma) => running_style_counts[uma.style]++);
-  [201631, 201641].forEach((e) => {
-    if (
-      list_chara.findIndex(
-        (uma) => uma.list_skill.findIndex((s) => s.data.id === e) !== -1,
-      ) !== -1
-    ) {
-      if (skill_counts[e]) {
-        skill_counts[e]++;
-      } else {
-        skill_counts[e] = 1;
-      }
-    }
-  });
+  [201631, 201641].forEach(
+    (e) =>
+      (skill_counts[e] = list_chara.filter((uma) =>
+        uma.list_skill.some((s) => s.data.id === e),
+      ).length),
+  );
   if (
-    list_chara.findIndex((uma) =>
-      uma.list_skill.findIndex((s) => s.data.id === 201632),
-    ) !== 1
+    list_chara.some((uma) => uma.list_skill.some((s) => s.data.id === 201632))
   ) {
     skill_counts[201631] = 5;
   }

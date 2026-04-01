@@ -445,7 +445,7 @@ function init_ero(...ids) {
     }
     if (
       era.get(`status:${cid}:爱意克制`) > 0 &&
-      era.getCharactersInTrain().findIndex((e) => !e) !== -1 &&
+      era.getCharactersInTrain().some((e) => !e) &&
       sys_check_awake(0)
     ) {
       era.set(`status:${cid}:爱意克制`, 0);
@@ -808,6 +808,7 @@ async function end_ero_and_show_result(shown = true) {
         }
       }
     }
+    era.drawLine();
   }
   era.endTrain();
 }

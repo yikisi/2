@@ -160,13 +160,13 @@ class CustomizedEro extends CustomizedEvent {
   filter_in_rape() {
     if (era.get(`tcvar:${this.id}:孕袋卖奶`) > 0) {
       return (e) =>
-        (ero_tagged_hooks[e] || default_tags).attacker_tags.findIndex(
+        (ero_tagged_hooks[e] || default_tags).attacker_tags.some(
           (t) =>
             t === ero_hook_tags.super_sadism ||
             t === ero_hook_tags.sadism ||
             t === ero_hook_tags.imp ||
             t === ero_hook_tags.insert,
-        ) !== -1;
+        );
     }
     if (era.get('flag:惩戒力度') >= 2) {
       if (

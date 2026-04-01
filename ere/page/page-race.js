@@ -504,7 +504,7 @@ async function race_page(race) {
   let t_hentai_flag = false;
   if (
     era.get('cflag:0:妊娠阶段') >> pregnant_stage_enum.late > 0 &&
-    team_list.findIndex((uma) => uma.index_chara === 0) === -1
+    team_list.every((uma) => uma.index_chara > 0)
   ) {
     t_hentai_flag = true;
     fame_reward -= 50;

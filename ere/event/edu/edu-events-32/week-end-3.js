@@ -903,7 +903,7 @@ module.exports = (handlers) => {
     if (
       RaceHistory.get(32)
         .get_values()
-        .findIndex((e) => e.rank !== 1) === -1
+        .every((e) => e.rank === 1)
     ) {
       await era.printAndWait([
         '从未感受过败北的 ',

@@ -52,26 +52,24 @@ class CustomizedEdu extends CustomizedEvent {
     const in_palace =
       check >= 6 ||
       (check >= 4 &&
-        titles.findIndex((t) => {
-          return (
+        titles.some(
+          (t) =>
             t.n === 'r_3crown_c' ||
             t.n === 'r_3crown_f' ||
             t.n === 'r_3crown_m' ||
             t.n === 'r_3crown_d' ||
-            t.n === 'r_3crown_a'
-          );
-        }) !== -1) ||
+            t.n === 'r_3crown_a',
+        )) ||
       (check >= 3 &&
-        titles.findIndex((t) => {
-          return (
+        titles.some(
+          (t) =>
             t.n === 'r_3crown_ci' ||
             t.n === 'r_3crown_fi' ||
             t.n === 'r_3crown_mi' ||
             t.n === 'r_3crown_di' ||
             t.n === 'r_3crown_ai' ||
-            t.n === 'r_6crown'
-          );
-        }) !== -1);
+            t.n === 'r_6crown',
+        ));
     let title = CharaTitles.get(chara.id).get_colored_curr_title();
     title = title ? [title, ' '] : [];
     const fame_reward =

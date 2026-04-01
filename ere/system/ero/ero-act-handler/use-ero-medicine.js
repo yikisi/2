@@ -144,7 +144,7 @@ async function use_ero_medicine(chara) {
   ]
     .filter((e) => e.c > 0)
     .map((e) => ({ ...e, e: e.e ?? true }));
-  if (item_list.findIndex((e) => e.e) === -1) {
+  if (item_list.every((e) => !e.e)) {
     await era.printAndWait(
       aim_id > 0
         ? i18n().timon.ero_sys.get_med_no_medicines_for_chara(aim_chara)

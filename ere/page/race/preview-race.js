@@ -940,8 +940,7 @@ async function preview_race(
         )?.data?.group_level;
         const buff_length = u.attr_buffs[0].length;
         if (ero_skill_level === 2) {
-          const has_buff =
-            u.attr_buffs[0].findIndex((b) => b[2] !== item_buff_key) !== -1;
+          const has_buff = u.attr_buffs[0].some((b) => b[2] !== item_buff_key);
           if (u.race.conditionParams.item === 1 && !has_buff) {
             u.attr_buffs.forEach((l) =>
               l.push(['+10%', i18n().tb_status.r_item_buff, item_buff_key]),
@@ -952,8 +951,9 @@ async function preview_race(
             );
           }
         } else if (item_inf !== 0 && ero_skill_level !== 1) {
-          const has_debuff =
-            u.attr_buffs[0].findIndex((b) => b[2] === item_debuff_key) !== -1;
+          const has_debuff = u.attr_buffs[0].some(
+            (b) => b[2] === item_debuff_key,
+          );
           if (u.race.conditionParams.item === 1 && !has_debuff) {
             u.attr_buffs.forEach((l) =>
               l.push([

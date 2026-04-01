@@ -29,13 +29,11 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
   aim_races,
   function (buffer, races) {
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));
-    const check = +(
-      Object.entries(races).findIndex(
-        ([t, r]) =>
-          Number(t) <= 47 + 26 &&
-          race_infos[r.race].race_class <= class_enum.G3 &&
-          r.rank === 1,
-      ) !== -1
+    const check = +Object.entries(races).some(
+      ([t, r]) =>
+        Number(t) <= 47 + 26 &&
+        race_infos[r.race].race_class <= class_enum.G3 &&
+        r.rank === 1,
     );
     buffer.push({
       champion: true,

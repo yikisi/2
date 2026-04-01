@@ -484,13 +484,13 @@ module.exports = class extends CustomizedEdu {
       if (extra.race === race_enum.takz_kin) {
         const grass = get_chara_talk(11);
         dict.G_COLOR = grass.color;
-        if (extra.contestants.findIndex((u) => u.index_chara === 11) !== -1) {
+        if (extra.contestants.some((u) => u.index_chara === 11)) {
           dict.G_NAME =
             era.get('cflag:11:66') !== 1 ? grass.name : dict.UMA + 'G';
         }
         const groove = get_chara_talk(18);
         dict.A_COLOR = groove.color;
-        if (extra.contestants.findIndex((u) => u.index_chara === 18) !== -1) {
+        if (extra.contestants.some((u) => u.index_chara === 18)) {
           dict.A_NAME = groove.name;
           dict.CALL_18 = sys_get_callname(this.id, 18);
         } else {
@@ -547,14 +547,12 @@ module.exports = class extends CustomizedEdu {
             const groove = get_chara_talk(18);
             dict.G_COLOR = grass.color;
             dict.A_COLOR = groove.color;
-            dict.G_NAME =
-              extra.contestants.findIndex((u) => u.index_chara === 11) !== -1
-                ? grass.name
-                : dict.UMA + 'G';
-            dict.A_NAME =
-              extra.contestants.findIndex((u) => u.index_chara === 18) !== -1
-                ? groove.name
-                : dict.UMA + 'A';
+            dict.G_NAME = extra.contestants.some((u) => u.index_chara === 11)
+              ? grass.name
+              : dict.UMA + 'G';
+            dict.A_NAME = extra.contestants.some((u) => u.index_chara === 18)
+              ? groove.name
+              : dict.UMA + 'A';
             dict['11_CALL'] = sys_get_callname(11, this.id);
             key = extra.rank === 1 ? 'takz_kin_win' : 'takz_kin_3';
           } else {

@@ -75,7 +75,7 @@ async function use_ero_item(chara) {
     .map((e) => ({ ...e, n: i18n().tb_item[e.a], c: era.get(`item:${e.a}`) }))
     .filter((e) => e.c > 0)
     .map((e) => ({ ...e, e: e.e ?? true }));
-  if (item_list.findIndex((e) => e.e) === -1) {
+  if (item_list.every((e) => !e.e)) {
     await era.printAndWait(i18n().timon.ero_sys.itm_no_items);
     return void 0;
   }

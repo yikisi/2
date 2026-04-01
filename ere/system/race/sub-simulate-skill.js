@@ -268,9 +268,9 @@ function sub_simulate_skill(
     uma.race.conditionParams.hp_per =
       (uma.race.stamina * 100) / uma.base.stamina;
     uma.race.conditionParams.is_activate_any_skill = Number(
-      uma.list_skill.findIndex(
+      uma.list_skill.some(
         (e) => e.ability_time[0] > 0 || e.ability_time[1] > 0,
-      ) !== -1,
+      ),
     );
     uma.race.conditionParams.is_finalcorner = Number(
       params.has_final_corner && cur_lane.is_last,

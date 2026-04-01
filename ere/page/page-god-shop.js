@@ -78,11 +78,11 @@ module.exports = async () => {
             config: {
               disabled:
                 cur_id ||
-                new Array(5).fill(0).findIndex(
+                new Array(5).fill(0).every(
                   (_, i) =>
                     // BASENAME:5 - 9 = 速度 - 智力
-                    era.get(`base:0:${5 + i}`) < era.get(`maxbase:0:${5 + i}`),
-                ) === -1,
+                    era.get(`base:0:${5 + i}`) >= era.get(`maxbase:0:${5 + i}`),
+                ),
             },
             content: i18n().timon.god_shop.bt_pray_your_power,
             cost: 200,
@@ -98,10 +98,10 @@ module.exports = async () => {
                       era.get(`base:${cur_id}:${5 + i}`) <=
                     50,
                 ).length < 3 ||
-                new Array(5).fill(0).findIndex(
+                new Array(5).fill(0).every(
                   // BASENAME:5 - 9 = 速度 - 智力
-                  (_, i) => era.get(`maxbase:${cur_id}:${5 + i}`) < 2000,
-                ) === -1,
+                  (_, i) => era.get(`maxbase:${cur_id}:${5 + i}`) >= 2000,
+                ),
             },
             content:
               aim.id > 0
@@ -295,7 +295,7 @@ module.exports = async () => {
                 era.set(`status:${cur_id}:伤病`, 0);
                 era.set(`status:${cur_id}:疲惫`, 0);
                 sys_change_motivation(cur_id, 4) && (await era.waitAnyKey());
-                era.set(`status:${cur_id}:练习X手`, 1);
+                era.set(`status:${cur_id}:练习X手`, 2);
                 era.add('flag:当前声望', -800);
                 relation += 400;
               }

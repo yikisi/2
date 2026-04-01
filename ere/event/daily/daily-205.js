@@ -76,7 +76,7 @@ module.exports = class extends CustomizedDaily {
           arr.push('刚刚是我自己在训练，是训练哦。');
           era
             .getAddedCharacters()
-            .findIndex((e) => e !== 205 && era.get(`love:${e}`) >= 50) !== -1 &&
+            .some((cid) => cid !== 205 && era.get(`love:${cid}`) >= 50) &&
             arr.push(`不能给我讲讲你和${vp.sex}们是怎么相识的吗？`);
           era.get('love:205') >= 50 &&
             arr.push('能对你说『我的爱人』，这种感觉真好。');

@@ -27,7 +27,7 @@ const { get_breast_cup } = require('#/data/info-generator');
  * @returns {boolean}
  */
 function check_tags(tags, cid, oid, chara_check, common_check) {
-  const fail = tags.findIndex((tag) => {
+  const fail = tags.some((tag) => {
     let ret;
     if (typeof tag === 'function') {
       ret = !tag(cid, oid);
@@ -36,7 +36,7 @@ function check_tags(tags, cid, oid, chara_check, common_check) {
     }
     return ret;
   });
-  return fail === -1;
+  return !fail;
 }
 
 const c_cup_code = 'C'.charCodeAt(0);

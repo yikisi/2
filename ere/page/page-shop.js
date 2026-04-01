@@ -178,7 +178,7 @@ async function print_shop_page(item_list) {
       type: 'text',
       content: '\n' + i18n().ui_shop_tip,
     });
-    if (on_sell_list.findIndex((e) => e === off) !== -1) {
+    if (on_sell_list.some((e) => e === off)) {
       buffer.push({
         type: 'text',
         content: i18n().get_ui_shop_bargain(

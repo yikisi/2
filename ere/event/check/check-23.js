@@ -20,7 +20,7 @@ aim_races[get_aim_race_index(race_enum.takz_kin, 1)] = -4;
 module.exports = require('#/event/check/snippets/check-uma-common-generator')(
   () => {},
   (races, race_list, aim_check) =>
-    race_list.findIndex((e) => e.rank > 2) === -1 &&
+    race_list.every((e) => e.rank <= 2) &&
     check_aim_race(races, race_enum.kiku_sho, 1, 1) &&
     check_aim_race(races, race_enum.tenn_spr, 2, 1) &&
     (check_aim_race(races, race_enum.takz_kin, 1, 1) ||

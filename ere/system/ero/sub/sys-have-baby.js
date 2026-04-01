@@ -36,8 +36,8 @@ const di18n = require('#/i18n/extended-def');
 const { __, i18n, lans } = require('#/i18n/selector');
 
 function check_duplicate(name) {
-  const a = lans().find(
-    (l) => Object.values(i18n(l).name).findIndex((n) => n === name) !== -1,
+  const a = lans().find((l) =>
+    Object.values(i18n(l).name).some((n) => n === name),
   );
   if (a !== void 0) {
     return a;
@@ -45,10 +45,8 @@ function check_duplicate(name) {
   return (
     era
       .getAddedCharacters()
-      .findIndex((cid) => era.get(`callname:${cid}:-1`) === name) >= 0 ||
-    era
-      .getAllCharacters()
-      .findIndex((cid) => era.get(`static:${cid}:name`) === name) >= 0
+      .some((cid) => era.get(`callname:${cid}:-1`) === name) ||
+    era.getAllCharacters().some((cid) => era.get(`static:${cid}:name`) === name)
   );
 }
 
@@ -122,7 +120,8 @@ async function name_baby(cid, fid, mid) {
   } else if (
     (!mid || !fid) &&
     rand_param > 0 &&
-    (ret = get_display_name(ret)).replace(/\d+$/, '').length !== ret.length &&
+    get_display_name(ret).replace(/\d+$/, '').length !==
+      get_display_name(ret).length &&
     (await select_yes_or_no([
       ...i18n().timon.get_it_name_result(mother, child),
       { isBr: true },
@@ -435,9 +434,9 @@ async function sys_have_baby(mid) {
     global_achievement.ck_d = 1;
   }
   if (
-    global_achievement.ck_m +
-      global_achievement.ck_f +
-      global_achievement.ck_d >=
+    !!global_achievement.ck_m +
+      !!global_achievement.ck_f +
+      !!global_achievement.ck_d >=
     2
   ) {
     global_achievement.ck = 1;

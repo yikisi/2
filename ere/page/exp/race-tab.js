@@ -109,9 +109,8 @@ module.exports = {
       const personal_titles = get_custom_check(chara.id).get_personal_titles();
       if (personal_titles.length > 0) {
         personal_titles.map((tid) => {
-          const name = __(`title.${tid}`, tid || i18n().title.undef);
-          const check =
-            titles.findIndex((t) => t.n === tid || t.n === name) !== -1;
+          const name = __(`title.${tid}`, i18n().title.undef);
+          const check = titles.some((t) => t.n === tid);
           race_info_list.push(
             {
               config: { color: chara.color, width: 5 },

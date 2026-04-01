@@ -718,11 +718,11 @@ module.exports = (handlers) => {
     if (
       era
         .getAddedCharacters()
-        .filter(
+        .some(
           (e) =>
             era.get(`cflag:${e}:父方角色`) === 52 ||
             era.get(`cflag:${e}:母方角色`) === 52,
-        ).length > 0
+        )
     ) {
       await era.printAndWait([
         '况且，既然选择在错误的时间地点摘下禁果，不论今后幸福与否，',

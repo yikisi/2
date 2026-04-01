@@ -1986,7 +1986,7 @@ module.exports = {
     await printAndWait([
       '【',
       attacker.get_colored_name(),
-      ' 用小穴套弄者 ',
+      ' 用小穴套弄着 ',
       defender.get_colored_name(),
       ' 的肉棒】',
     ]);
@@ -1999,7 +1999,7 @@ module.exports = {
     await printAndWait([
       '【',
       attacker.get_colored_name(),
-      ' 用屁穴套弄者 ',
+      ' 用屁穴套弄着 ',
       defender.get_colored_name(),
       ' 的肉棒】',
     ]);

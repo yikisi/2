@@ -427,9 +427,9 @@ module.exports = class extends Love52AfterGirlFriend {
         if (
           era
             .getAddedCharacters()
-            .findIndex(
-              (e) => e > 0 && e !== 52 && era.get(`love:${e}`) >= 75,
-            ) !== -1
+            .some(
+              (cid) => cid > 0 && cid !== 52 && era.get(`love:${cid}`) >= 75,
+            )
         ) {
           era.println();
           await urara.say_and_wait([
@@ -734,9 +734,9 @@ module.exports = class extends Love52AfterGirlFriend {
         if (
           era
             .getAddedCharacters()
-            .findIndex(
-              (e) => e > 0 && e !== 52 && era.get(`love:${e}`) >= 75,
-            ) !== -1
+            .some(
+              (cid) => cid > 0 && cid !== 52 && era.get(`love:${cid}`) >= 75,
+            )
         ) {
           era.println();
           await urara.say_and_wait([

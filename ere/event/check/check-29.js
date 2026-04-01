@@ -20,15 +20,15 @@ aim_races[get_aim_race_index(race_enum.japa_cup, 2)] = 4;
 module.exports = require('#/event/check/snippets/check-uma-common-generator')(
   () => {},
   (_, race_list) =>
-    race_list.findIndex(
+    race_list.some(
       (e) =>
         race_infos[e.race].race_class <= class_enum.G3 &&
         race_infos[e.race].track === track_enum.morioka &&
         e.rank === 1,
-    ) !== -1 &&
+    ) &&
     CharaTitles.get(29)
       .get()
-      .findIndex((t) => t.n === 'r_3crown_f') !== -1,
+      .some((t) => t.n === 'r_3crown_f'),
   aim_races,
   (buffer, races) => {
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));

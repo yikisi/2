@@ -4,6 +4,7 @@ const {
   getAddedCharacters,
   input,
   print,
+  printAndWait,
   printInColRows,
   println,
   replaceInColRows,
@@ -616,8 +617,8 @@ module.exports = class extends CustomizedEdu {
       ...new Array(8).fill(0).map((_, i) => i),
       ...new Array(7).fill(0).map((_, i) => i + 10),
     ]);
-    di18n.tb_item.notify(item);
-    await waitAnyKey();
+    println();
+    await printAndWait(di18n.tb_item.notify(item));
     add(`item:${item}`, 1);
     if (get('flag:极端行为限制') > 0) {
       add_event(hook.hook, event_object.set_arg('strange_day2'));

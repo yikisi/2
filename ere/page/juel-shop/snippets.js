@@ -84,8 +84,7 @@ module.exports = {
         config: {
           disabled:
             u_price === void 0 ||
-            Object.entries(u_price).findIndex(([j, n]) => n > juel_dict[j]) !==
-              -1,
+            Object.entries(u_price).some(([j, n]) => n > juel_dict[j]),
           width: 2,
           title:
             u_price !== void 0
@@ -100,8 +99,7 @@ module.exports = {
         config: {
           disabled:
             d_price === void 0 ||
-            Object.entries(d_price).findIndex(([j, n]) => n > juel_dict[j]) !==
-              -1,
+            Object.entries(d_price).some(([j, n]) => n > juel_dict[j]),
           width: 2,
           title:
             d_price !== void 0
@@ -167,8 +165,7 @@ module.exports = {
         config: {
           disabled:
             u_price === void 0 ||
-            Object.entries(u_price).findIndex((e) => e[1] > j_dict[e[0]]) !==
-              -1 ||
+            Object.entries(u_price).some((e) => e[1] > j_dict[e[0]]) ||
             now_exp.reduce((p, c) => p + c, 0) <
               (talent_bnc.metrics[level] || 0) ||
             (acc < 7 &&
@@ -193,8 +190,7 @@ module.exports = {
         config: {
           disabled:
             d_price === void 0 ||
-            Object.entries(d_price).findIndex((e) => e[1] > j_dict[e[0]]) !==
-              -1,
+            Object.entries(d_price).some((e) => e[1] > j_dict[e[0]]),
           title:
             d_price !== void 0
               ? di18n.jewel_shop.get_price_title(d_price)

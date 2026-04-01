@@ -328,7 +328,7 @@ module.exports = class extends CustomizedEdu {
       case race_enum.takz_kin:
         if (
           edu_weeks >= 96 &&
-          extra.contestants.findIndex((u) => u.index_chara === 59) !== -1
+          extra.contestants.some((u) => u.index_chara === 59)
         ) {
           const dober = get_chara_talk(59);
           key = 'takz_kin';

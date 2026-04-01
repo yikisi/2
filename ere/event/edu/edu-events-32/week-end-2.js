@@ -236,9 +236,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait('除此之外……');
     if (
-      new Array(5)
-        .fill(0)
-        .findIndex((_, i) => era.get(`base:32:${5 + i}`) < 1200) === -1
+      new Array(5).fill(0).every((_, i) => era.get(`base:32:${5 + i}`) >= 1200)
     ) {
       await era.printAndWait([
         '虽然能力上足够，但在比赛经验上，以及几个月没踏上赛场的 ',

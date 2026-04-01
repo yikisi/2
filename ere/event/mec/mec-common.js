@@ -187,7 +187,7 @@ class CustomizedMec extends CustomizedEvent {
    */
   get_race_finish_report(uma, race_id) {
     const races = RaceHistory.get(this.id);
-    const invincible = races.get_values().findIndex((e) => e.rank !== 1) === -1;
+    const invincible = races.get_values().every((e) => e.rank === 1);
     if (race_id === race_enum.tenn_spr) {
       return '春季的长距离之王诞生！';
     } else if (race_id === race_enum.tenn_sho && uma.pop[0] === 1) {
@@ -196,8 +196,7 @@ class CustomizedMec extends CustomizedEvent {
       invincible &&
       races
         .get_values()
-        .findIndex((e) => race_infos[e.race].race_class === class_enum.G1) ===
-        -1 &&
+        .every((e) => race_infos[e.race].race_class > class_enum.G1) &&
       race_infos[race_id]?.race_class === class_enum.G1
     ) {
       return [

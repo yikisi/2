@@ -19,7 +19,7 @@ aims.forEach((a) => (aim_races[get_aim_race_index(a[0], a[1])] = a[3]));
 
 module.exports = require('#/event/check/snippets/check-uma-common-generator')(
   () => {},
-  (_, race_list) => race_list.findIndex((r) => r.pop > 3) === -1,
+  (_, race_list) => race_list.every((r) => r.pop <= 3),
   aim_races,
   (buffer, races) => {
     buffer.push(check_aim_and_get_entry(races, race_enum.begin_race));

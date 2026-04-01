@@ -353,9 +353,7 @@ module.exports = async (cid = era.get('flag:当前互动角色')) => {
               config: {
                 disabled:
                   mu_dict === void 0 ||
-                  Object.entries(mu_dict).findIndex(
-                    (e) => e[1] > cj_dict[e[0]],
-                  ) !== -1,
+                  Object.entries(mu_dict).some((e) => e[1] > cj_dict[e[0]]),
                 title: mu_title,
               },
               content: i18n().jewel_shop.bt_add,
@@ -365,9 +363,7 @@ module.exports = async (cid = era.get('flag:当前互动角色')) => {
               config: {
                 disabled:
                   md_dict === void 0 ||
-                  Object.entries(md_dict).findIndex(
-                    (e) => e[1] > cj_dict[e[0]],
-                  ) !== -1,
+                  Object.entries(md_dict).some((e) => e[1] > cj_dict[e[0]]),
                 title:
                   md_dict !== void 0
                     ? di18n.jewel_shop.get_price_title(md_dict)
@@ -406,9 +402,7 @@ module.exports = async (cid = era.get('flag:当前互动角色')) => {
               config: {
                 disabled:
                   nu_dict === void 0 ||
-                  Object.entries(nu_dict).findIndex(
-                    (e) => e[1] > cj_dict[e[0]],
-                  ) !== -1,
+                  Object.entries(nu_dict).some((e) => e[1] > cj_dict[e[0]]),
                 title:
                   nu_dict !== void 0
                     ? di18n.jewel_shop.get_price_title(nu_dict)
@@ -421,9 +415,7 @@ module.exports = async (cid = era.get('flag:当前互动角色')) => {
               config: {
                 disabled:
                   nd_dict === void 0 ||
-                  Object.entries(nd_dict).findIndex(
-                    (e) => e[1] > cj_dict[e[0]],
-                  ) !== -1,
+                  Object.entries(nd_dict).some((e) => e[1] > cj_dict[e[0]]),
                 title:
                   nd_dict !== void 0
                     ? di18n.jewel_shop.get_price_title(nd_dict)

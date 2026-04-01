@@ -24,10 +24,10 @@ module.exports = class extends CustomizedRecruit {
     if (
       RaceHistory.get(201)
         .get_values()
-        .findIndex(
+        .some(
           (e) =>
             race_infos[e.race].race_class === class_enum.G1 && e.rank === 1,
-        ) !== -1
+        )
     ) {
       await print_title_with_kojo(
         i18n().kojo[this.id].recruit,

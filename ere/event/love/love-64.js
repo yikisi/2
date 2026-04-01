@@ -301,7 +301,7 @@ module.exports = class extends CustomizedLove {
     if (
       RaceHistory.get(this.id)
         .get_entries()
-        .filter((r) => r.weeks >= 96).length > 0 ||
+        .some((r) => r.weeks >= 96) ||
       era.get(`cflag:${this.id}:育成回合计时`) >= 3 * 48
     ) {
       return;

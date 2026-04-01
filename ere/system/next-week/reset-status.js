@@ -425,11 +425,7 @@ async function reset_status(
     }
     const wins = characters.reduce(
       (p, c) =>
-        p +
-        (new CharaTitles(c)
-          .get()
-          .findIndex((t) => t['wins'] || t.n === 'e_100w') !==
-          -1),
+        p + new CharaTitles(c).get().some((t) => t['wins'] || t.n === 'e_100w'),
       0,
     );
     if (wins >= 1) {

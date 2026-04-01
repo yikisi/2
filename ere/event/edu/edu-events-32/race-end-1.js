@@ -627,7 +627,13 @@ module.exports = (handlers) => {
         check_aim_race(race_history.get(), race_enum.sats_sho, 1, 1) &&
         check_aim_race(race_history.get(), race_enum.toky_yus, 1, 1)
       ) {
-        if (race_history.get_values().findIndex((e) => e.rank !== 1) !== -1) {
+        if (race_history.get_values().every((e) => e.rank === 1)) {
+          await say_by_passer_by_and_wait('解说', [
+            '无败三冠诞生！历史的车轮再一次的转动了！',
+            tachyon.get_colored_name(),
+            '，无败三冠达成！',
+          ]);
+        } else {
           await say_by_passer_by_and_wait('解说', [
             '三冠',
             tachyon.uma_sex_title,
@@ -636,12 +642,6 @@ module.exports = (handlers) => {
             '就是，',
             tachyon.get_colored_name(),
             '！',
-          ]);
-        } else {
-          await say_by_passer_by_and_wait('解说', [
-            '无败三冠诞生！历史的车轮再一次的转动了！',
-            tachyon.get_colored_name(),
-            '，无败三冠达成！',
           ]);
         }
       } else {

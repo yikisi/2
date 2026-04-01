@@ -91,19 +91,17 @@ module.exports = class extends CustomizedRecruit {
   async know_me(donna) {
     const in_team_list = sys_filter_chara(
       'cflag',
-      '66',
+      '招募状态',
       recruit_flags.yes,
-      // CFLAGNAME:66 = 招募状态
-      // CFLAGNAME:1 = 种族
-    ).filter((cid) => cid > 0 && era.get(`cflag:${cid}:1`) > 0);
-    const has_palace =
-      in_team_list.findIndex(
-        (cid) =>
-          // CFLAGNAME:47 - 48 = 殿堂 - 育成回合计时
-          era.get(`cflag:${cid}:48`) >= 144 && era.get(`cflag:${cid}:47`) > 0,
-      ) !== -1;
-    const has_in_edu =
-      in_team_list.findIndex((cid) => era.get(`cflag:${cid}:48`) < 144) !== -1;
+    ).filter((cid) => cid > 0 && era.get(`cflag:${cid}:种族`) > 0);
+    const has_palace = in_team_list.some(
+      (cid) =>
+        era.get(`cflag:${cid}:育成回合计时`) >= 3 * 48 &&
+        era.get(`cflag:${cid}:殿堂`) > 1,
+    );
+    const has_in_edu = in_team_list.some(
+      (cid) => era.get(`cflag:${cid}:育成回合计时`) < 3 * 48,
+    );
     const bv = get_chara_talk(114);
     await print_title_with_kojo(
       i18n().kojo[this.id].recruit,

@@ -87,16 +87,14 @@ function check_nige_loc_mind_over_take_mode(uma, r_index, race_info) {
 function check_nige_loc_mind_ex_mode(uma, r_index, l) {
   const nige_type =
     uma.race.conditionParams.is_used_skill_id.indexOf(202051) + 1;
-  return (
-    l
-      .slice(0, r_index)
-      .findIndex(
-        (e) =>
-          e.style -
-            (e.race.conditionParams.is_used_skill_id.indexOf(202051) + 1) >
-          -nige_type,
-      ) !== -1
-  );
+  return l
+    .slice(0, r_index)
+    .some(
+      (e) =>
+        e.style -
+          (e.race.conditionParams.is_used_skill_id.indexOf(202051) + 1) >
+        -nige_type,
+    );
 }
 
 /**
@@ -318,9 +316,7 @@ function sys_sim_race(list_chara, info, race_id, shown = true) {
   });
 
   if (race_id !== void 0) {
-    if (
-      list_chara.findIndex((e) => e.race.conditionParams.is_badstart) === -1
-    ) {
+    if (list_chara.every((e) => !e.race.conditionParams.is_badstart)) {
       buffer.report.unshift(
         get_event_record(
           i18n().timon.race.get_first_report_no_bad_start(uma_sex_title),

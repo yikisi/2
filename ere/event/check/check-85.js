@@ -237,7 +237,7 @@ module.exports = class extends CustomizedCheck {
 
   check_palace_and_get_aims() {
     const aims = super.check_palace_and_get_aims();
-    if (aims.findIndex((e) => e.check !== 1) === -1) {
+    if (aims.every((e) => e.check === 1)) {
       add_event(
         event_hooks.week_start,
         new EventObject(this.id, cb_enum.edu).set_arg('rose_master'),

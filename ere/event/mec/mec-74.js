@@ -11,14 +11,14 @@ module.exports = class extends CustomizedMec {
     if (
       era.get('flag:126') > 0 &&
       new BrightLifeMarks().know_us === 2 &&
-      partners.findIndex(
+      partners.every(
         (cid) =>
-          cid !== 13 &&
-          cid !== 27 &&
-          cid !== 59 &&
-          cid !== 64 &&
-          cid !== 71 &&
-          cid !== 86,
+          cid === 13 ||
+          cid === 27 ||
+          cid === 59 ||
+          cid === 64 ||
+          cid === 71 ||
+          cid === 86,
       )
     ) {
       return false;

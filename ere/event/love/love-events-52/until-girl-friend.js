@@ -203,9 +203,9 @@ module.exports = class extends Love52UntilFuckBuddy {
             ' 成为——',
           ]);
           if (
-            sys_filter_chara('cflag', '招募状态', recruit_flags.yes).filter(
+            sys_filter_chara('cflag', '招募状态', recruit_flags.yes).some(
               (e) => e > 0 && era.get(`love:${e}`) >= 75,
-            ).length > 0
+            )
           ) {
             await urara.say_and_wait([
               '即使 ',
@@ -426,9 +426,9 @@ module.exports = class extends Love52UntilFuckBuddy {
         if (
           era
             .getAddedCharacters()
-            .findIndex(
-              (e) => e > 0 && e !== 52 && era.get(`love:${e}`) >= 75,
-            ) !== -1
+            .some(
+              (cid) => cid > 0 && cid !== 52 && era.get(`love:${cid}`) >= 75,
+            )
         ) {
           await urara.say_and_wait(
             '不过训练员，走夜路真的很黑呢，不要只送别人回家哦？',
@@ -674,9 +674,9 @@ module.exports = class extends Love52UntilFuckBuddy {
         if (
           era
             .getAddedCharacters()
-            .findIndex(
-              (e) => e > 0 && e !== 52 && era.get(`love:${e}`) >= 75,
-            ) !== -1
+            .some(
+              (cid) => cid > 0 && cid !== 52 && era.get(`love:${cid}`) >= 75,
+            )
         ) {
           await urara.say_and_wait(
             '但这下子，就算乌拉拉被大家说卑鄙，也不能回头了哦……',

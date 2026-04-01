@@ -637,9 +637,7 @@ module.exports = (handlers) => {
         '有帮助吗？',
       ]);
       if (
-        new Array(5)
-          .fill(0)
-          .findIndex((_, i) => era.get(`base:32:${5 + i}`) < 1200) !== -1
+        new Array(5).fill(0).some((_, i) => era.get(`base:32:${5 + i}`) < 1200)
       ) {
         await era.printAndWait([
           '说到底，现在的',

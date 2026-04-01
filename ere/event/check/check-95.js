@@ -57,7 +57,7 @@ module.exports = class extends CustomizedCheck {
     if (
       CharaTitles.get(this.id)
         .get()
-        .findIndex((t) => t.n === 's_dirty') >= 0
+        .some((t) => t.n === 's_dirty')
     ) {
       titles.push({
         c: get_chara_color(this.id),

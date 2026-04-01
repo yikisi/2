@@ -67,7 +67,7 @@ async function use_lubricating_fluid(chara) {
     ]
       .filter((e) => e.c !== false)
       .map((e) => ({ ...e, e: !check_lubrication(aim_id, e.p) }));
-  if (buffer.findIndex((e) => e.e) === -1) {
+  if (buffer.every((e) => !e.e)) {
     await era.printAndWait(i18n().timon.ero_sys.lub_no_parts);
     return void 0;
   }

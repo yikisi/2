@@ -413,7 +413,6 @@ function get_ex_result_in_the_end(cid) {
   }
   temp_val = [era.get(`ex:${cid}:阴道撕裂`), era.get(`ex:${cid}:肛门撕裂`)];
   if (temp_val[0] + temp_val[1] > 0) {
-    console.log(i18n().ui_conjunction);
     temp_buffer.push({
       config: { offset: 1, width: 23, color: buff_colors[3] },
       content: i18n().sex.get_wound_info(

@@ -100,7 +100,7 @@ module.exports = class extends CustomizedLove {
     if (
       CharaTitles.get(400)
         .get()
-        .findIndex((t) => t.n === 'r_3crown_a') !== -1
+        .some((t) => t.n === 'r_3crown_a')
     ) {
       await silence.say_and_wait([callname, '……我有件事想要和你说。']);
       await era.printAndWait([

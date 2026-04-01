@@ -100,7 +100,7 @@ async function check_race_events(race, info, team) {
     get('flag:惩戒力度') === 3 &&
     get('cflag:303:招募状态') === recruit_flags.yes &&
     get('cflag:0:妊娠阶段') >> pregnant_stage_enum.fetal > 0 &&
-    team.findIndex((e) => e.index_chara === 0) === -1 &&
+    team.every((e) => e.index_chara > 0) &&
     get(`love:${mvp_id}`) < 75 &&
     get('love:303') < 75 &&
     best === 1 &&

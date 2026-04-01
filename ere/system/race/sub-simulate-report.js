@@ -80,13 +80,9 @@ function sub_simulate_report(events, in_race_list, info, race_id) {
         event_enum_length -
         entry.e +
         event_enum_length *
-          (entry.p.findIndex(
-            (e) => e.u?.index_chara >= 0 || e.u?.legend >= 0,
-          ) !==
-            -1) +
+          entry.p.some((e) => e.u?.index_chara >= 0 || e.u?.legend >= 0) +
         event_enum_length *
-          (entry.p.findIndex((e) => e.u?.index_chara >= 0 && !e.u?.legend) !==
-            -1),
+          entry.p.some((e) => e.u?.index_chara >= 0 && !e.u?.legend),
     ).slice(0, report_count);
   }
   if (go_in) {

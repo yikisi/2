@@ -461,7 +461,7 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
     }
   }
 
-  if (ret.findIndex((e) => e.legend > 0) !== -1) {
+  if (ret.some((e) => e.legend > 0)) {
     info.has_legend = true;
   }
   ret.forEach((uma) => {

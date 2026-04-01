@@ -257,11 +257,11 @@ module.exports = class extends CustomizedCheck {
             edu_marks.plan_b &&
             era
               .getAddedCharacters()
-              .findIndex(
-                (e) =>
-                  era.get(`cflag:${e}:招募状态`) === recruit_flags.yes &&
-                  sys_reg_race(e).curr.race === race_enum.kiku_sho,
-              ) !== -1
+              .some(
+                (cid) =>
+                  era.get(`cflag:${cid}:招募状态`) === recruit_flags.yes &&
+                  sys_reg_race(cid).curr.race === race_enum.kiku_sho,
+              )
           ) {
             add_event(event_hooks.week_start, event_obj_special);
           }
@@ -407,7 +407,7 @@ module.exports = class extends CustomizedCheck {
 
   check_palace_and_get_aims() {
     const aim_check = this.get_edu_aims();
-    if (aim_check.findIndex((e) => e.check !== 1) === -1) {
+    if (aim_check.every((e) => e.check === 1)) {
       // 薛定鄂的超光速粒子 or 其他的可能性
       add_event(
         event_hooks.out_start,

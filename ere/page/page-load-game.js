@@ -258,9 +258,9 @@ module.exports = async () => {
                 new MyEduMarks().strange_day = 0;
               } else if (
                 new MyEduMarks().strange_day === 0 &&
-                (get_queue()[event_hooks.week_start] || []).findIndex(
-                  (e) => e.arg === 'strange_day',
-                ) === -1
+                (get_queue()[event_hooks.week_start] || []).every(
+                  (e) => e.arg !== 'strange_day',
+                )
               ) {
                 add_event(
                   event_hooks.week_start,
@@ -392,7 +392,7 @@ module.exports = async () => {
                 clean_actions(
                   (a, i, l) =>
                     (a.chara_id !== 0 &&
-                      owners.findIndex((e) => e === a.chara_id) === -1 &&
+                      owners.every((e) => e !== a.chara_id) &&
                       a.type !== action_type_enum.rescue) ||
                     l.findIndex(
                       (e) => e.chara_id === a.chara_id && e.type === a.type,
