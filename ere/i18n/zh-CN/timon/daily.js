@@ -17,9 +17,9 @@ module.exports = {
   /**
    * @param {CharaTalk} chara
    * @param {CharaTalk} you
-   * @param {CharaTalk} tokino
+   * @param {CharaTalk} minoru
    */
-  good_morning(chara, you, tokino) {
+  good_morning(chara, you, minoru) {
     const talk = [
       /** @author 雞雞 */
       {
@@ -54,7 +54,7 @@ module.exports = {
           era.print([
             chara.get_colored_name(),
             ' 正在接待处向 ',
-            tokino.get_colored_name(),
+            minoru.get_colored_name(),
             ' 查询着什么。',
           ]);
         },
@@ -1731,7 +1731,7 @@ module.exports = {
         },
       },
       {
-        c:
+        c: () =>
           era.get(`talent:${chara.id}:7`) === -1 &&
           era.get(`exp:${chara.id}:20`) > 0,
         async h() {

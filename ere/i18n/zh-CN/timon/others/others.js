@@ -16,11 +16,11 @@ const {
 module.exports = {
   /**
    * 办公室初见
-   * @param {CharaTalk} aoi
-   * @param {CharaTalk} riko
-   * @param {CharaTalk} you
-   * @param {PrintedSpan} r_call_a
-   * @param {boolean} empty_team
+   * @param {CharaTalk} aoi 桐生院葵
+   * @param {CharaTalk} riko 㭴本理子
+   * @param {CharaTalk} you 玩家
+   * @param {PrintedSpan} r_call_a 㭴本理子对桐生院葵的称呼
+   * @param {boolean} empty_team 是否没有队伍成员
    */
   async welcome_trainer_office(aoi, riko, you, r_call_a, empty_team) {
     await printAndWait([

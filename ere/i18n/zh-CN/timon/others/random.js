@@ -142,22 +142,22 @@ module.exports = {
     f.title = '废旧理科教室探险';
     return f;
   })(),
-  shadow_tokino: (() => {
+  shadow_minoru: (() => {
     /**
      * @author 雞雞
-     * @param {CharaTalk} tokino 骏川缰绳/丰收时刻
+     * @param {CharaTalk} minoru 骏川缰绳/丰收时刻
      * @param {CharaTalk} taiki 大树快车
      * @param {CharaTalk} you 玩家
-     * @param {boolean} know_tokino 是否知道骏川缰绳的真实身份
+     * @param {boolean} know_minoru 是否知道骏川缰绳的真实身份
      */
-    const f = async (tokino, taiki, you, know_tokino) => {
-      if (know_tokino) {
+    const f = async (minoru, taiki, you, know_minoru) => {
+      if (know_minoru) {
         await printAndWait([
           you.get_colored_name(),
           ' 远远地看到了两抹绿色的身影在视野里不断变大，原来是 ',
           taiki.get_colored_name(),
           ' 因为不明的缘故被 ',
-          tokino.get_colored_name(),
+          minoru.get_colored_name(),
           ' 追赶着……真是宝刀未老啊！',
         ]);
       } else {
@@ -166,7 +166,7 @@ module.exports = {
           ' 远远地看到了两抹绿色的身影在视野里不断变大，原来是 ',
           taiki.get_colored_name(),
           ' 因为不明的缘故被 ',
-          tokino.get_colored_name(),
+          minoru.get_colored_name(),
           ' 追赶着……说起来，为什么人类能追上',
           taiki.uma_sex_title,
           '的速度啊？',
@@ -1457,12 +1457,12 @@ module.exports = {
      * @param {CharaTalk} you 玩家
      * @param {CharaTalk} chara 卷入事件的担当，可能是爱丽速子
      * @param {CharaTalk|false} tachyon 爱丽速子，如果 chara 是爱丽速子则是 false
-     * @param {CharaTalk|false} tokino 骏川缰绳/丰收时刻，如果 chara 是骏川缰绳/丰收时刻则是 false
+     * @param {CharaTalk|false} minoru 骏川缰绳/丰收时刻，如果 chara 是骏川缰绳/丰收时刻则是 false
      * @param {CharaTalk|false} dotou 名将怒涛，如果 chara 是名将怒涛则是 false
      * @param {CharaTalk|false} maya 摩耶重炮，如果 chara 是摩耶重炮则是 false
      * @param {CharaTalk|false} sky 青云天空，如果 chara 是青云天空则是 false
      */
-    const f = async (you, chara, tachyon, tokino, dotou, maya, sky) => {
+    const f = async (you, chara, tachyon, minoru, dotou, maya, sky) => {
       await printAndWait([
         '早上，',
         you.get_colored_name(),
@@ -1474,9 +1474,9 @@ module.exports = {
         ' 没有在意那么多，在洗漱完毕后出门了。',
       ]);
       println();
-      if (tokino) {
-        await tokino.say_and_wait('Y(^_^)Y');
-        await printAndWait([tokino.sex, '还是一如既往在校门口欢迎每一个人。']);
+      if (minoru) {
+        await minoru.say_and_wait('Y(^_^)Y');
+        await printAndWait([minoru.sex, '还是一如既往在校门口欢迎每一个人。']);
         println();
       }
       await you.say_and_wait('……？', true);
@@ -2763,10 +2763,10 @@ module.exports = {
      * @author 牛蛙煲
      * @param {CharaTalk} you 玩家
      * @param {CharaTalk} chara 角色
-     * @param {CharaTalk} tokino 骏川缰绳
+     * @param {CharaTalk} minoru 骏川缰绳
      * @param {PrintedSpan} call_301 一般角色对骏川缰绳的称呼
      */
-    const f = async (you, chara, tokino, call_301) => {
+    const f = async (you, chara, minoru, call_301) => {
       chara.name = chara.sex_code === 1 ? '怪异的马郎' : '怪异的马娘';
       await printAndWait([
         you.get_colored_name(),
@@ -2827,7 +2827,7 @@ module.exports = {
             '也两股战战，但',
             you.get_colored_name(),
             '下意识做出了最正确的选择——把',
-            tokino.get_colored_name(),
+            minoru.get_colored_name(),
             '搬了出来。',
           ]);
           await printAndWait([

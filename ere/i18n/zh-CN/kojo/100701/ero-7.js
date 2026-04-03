@@ -6,13 +6,13 @@ const era = require('#/era-electron');
 
 module.exports = {
   /**
-   * @param {CharaTalk} gs
-   * @param {CharaTalk} you
-   * @param {CharaTalk} yayoi
-   * @param {CharaTalk} tokino
-   * @param {PrintedSpan} callname
+   * @param {CharaTalk} gs 黄金船
+   * @param {CharaTalk} you 玩家
+   * @param {CharaTalk} taste 秋川弥生/北方风味
+   * @param {CharaTalk} minoru 骏川缰绳/丰收时刻
+   * @param {PrintedSpan} callname 黄金船对玩家的称呼
    */
-  async report_preg(gs, you, yayoi, tokino, callname) {
+  async report_preg(gs, you, taste, minoru, callname) {
     await gs.say_and_wait('……');
     era.println();
     await gs.print_and_wait([
@@ -65,9 +65,9 @@ module.exports = {
     era.println();
     await era.printAndWait([
       '让负责马娘怀孕的事不得不向特雷森高层报告，',
-      yayoi.get_colored_name(),
+      taste.get_colored_name(),
       ' 与 ',
-      tokino.get_colored_name(),
+      minoru.get_colored_name(),
       ' 难得地露出了想要杀人的眼神，但她们还是会很负责地协助你们应对将要来临的育儿生活——以及尽力按下一切影响声誉的丑闻。',
     ]);
     era.println();

@@ -137,12 +137,12 @@ module.exports = {
     await era.printAndWait('去天台抽根烟吧……');
   },
   /**
-   * @param {CharaTalk} acute
-   * @param {CharaTalk} yayoi
-   * @param {CharaTalk} tokino
-   * @param {CharaTalk} you
+   * @param {CharaTalk} acute 奇锐骏
+   * @param {CharaTalk} taste 秋川弥生/北方风味
+   * @param {CharaTalk} minoru 骏川缰绳/丰收时刻
+   * @param {CharaTalk} you 玩家
    */
-  async rec_rooftop(acute, yayoi, tokino, you) {
+  async rec_rooftop(acute, taste, minoru, you) {
     await era.printAndWait(
       '黄昏的天台上，下意识地想要点上一根能让自己暂时忘记一切的香烟。',
     );
@@ -157,7 +157,7 @@ module.exports = {
     );
     await era.printAndWait([
       '当初，自己欠下一百二十一亿天价债务时，是 ',
-      yayoi.get_colored_name(),
+      taste.get_colored_name(),
       ' 收留了 ',
       you.get_colored_name(),
       '，让 ',
@@ -167,16 +167,16 @@ module.exports = {
     await era.printAndWait([
       you.get_colored_name(),
       ' 想，时至今日，或许 ',
-      yayoi.get_colored_name(),
+      taste.get_colored_name(),
       ' 仍旧很信任 ',
       you.get_colored_name(),
       '。',
     ]);
     await era.printAndWait([
       '除却 ',
-      yayoi.get_colored_name(),
+      taste.get_colored_name(),
       ' 外，还有 ',
-      tokino.get_colored_name(),
+      minoru.get_colored_name(),
       '、乃至于其他的担当',
       acute.uma_sex_title,
       '……',

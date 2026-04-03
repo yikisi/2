@@ -61,9 +61,9 @@ async function out_page() {
 
   await era.clear();
   print_page_header();
-  const tokino_check = cid !== 301 && sys_check_npc_working(301);
-  const tokino = get_chara_talk(301);
-  print_chara_info(cid, chara_info_type.out, tokino_check && 301);
+  const minoru_check = cid !== 301 && sys_check_npc_working(301);
+  const minoru = get_chara_talk(301);
+  print_chara_info(cid, chara_info_type.out, minoru_check && 301);
   era.drawLine();
   if (!(await sys_get_random_event(event_hooks.out_start, cid)())) {
     const positions = MejiroCity.instance().get_positions(
@@ -91,13 +91,13 @@ async function out_page() {
         type: 'text',
       },
       ...get_position_buttons(positions),
-      ...(!cid && tokino_check
+      ...(!cid && minoru_check
         ? [
             {
               accelerator: 10,
               content: i18n().get_ui_bt_talk_with_npc_template.replace(
                 '%NAME%',
-                tokino.name,
+                minoru.name,
               ),
               type: 'button',
             },
@@ -121,17 +121,17 @@ async function out_page() {
         };
         while (temp.flag) {
           const temp_flag = await npc_common(
-            tokino,
+            minoru,
             temp.title,
             {
               handle: () =>
                 i18n().kojo[301].daily.npc_talk(generate_dictionary(301)),
-              name: di18n.kojo.get_npc_talk(tokino.id),
+              name: di18n.kojo.get_npc_talk(minoru.id),
             },
             {
               fail_cb: () => (temp.flag = false),
               loc: location_enum.restroom,
-              name: di18n.kojo.get_npc_sex(tokino.id),
+              name: di18n.kojo.get_npc_sex(minoru.id),
             },
             {
               async handle() {
@@ -149,7 +149,7 @@ async function out_page() {
                 era.printMultiColumns([
                   {
                     content: i18n().get_ui_out_confirm(
-                      tokino.get_colored_name(),
+                      minoru.get_colored_name(),
                     ),
                     type: 'text',
                   },
@@ -163,7 +163,7 @@ async function out_page() {
                     { type: 'divider' },
                     {
                       content: di18n.timon.get_it_goto_location(
-                        tokino,
+                        minoru,
                         vehicle_enum.keys[vehicle - 1],
                         location_enum.keys[positions[aim - 1].l],
                       ),
@@ -186,11 +186,11 @@ async function out_page() {
                 }
                 temp.flag = false;
               },
-              name: di18n.kojo.get_npc_out(tokino.id),
+              name: di18n.kojo.get_npc_out(minoru.id),
             },
             {
               name: di18n.kojo.get_npc_celebration(
-                tokino.id,
+                minoru.id,
                 get_celebration(),
               ),
             },
@@ -205,18 +205,18 @@ async function out_page() {
                     if (era.get('talent:301:病娇')) {
                       yandere_list.push(301);
                     }
-                    return i18n().timon.recruit.rec_end(tokino);
+                    return i18n().timon.recruit.rec_end(minoru);
                   },
                 },
             {
               handle: () =>
                 era.printAndWait(
                   i18n().get_ui_out_bye(
-                    tokino.get_colored_name(),
+                    minoru.get_colored_name(),
                     get_chara_talk(0).get_colored_name(),
                   ),
                 ),
-              name: di18n.kojo.get_npc_bye(tokino.id),
+              name: di18n.kojo.get_npc_bye(minoru.id),
             },
           );
           if ((temp.flag &&= temp_flag)) {

@@ -66,6 +66,7 @@ class I18nAchieveDesc {
 
   c_luna1 = '【鲁铎象征】请见证，这前无古人的伟业——我们的太阳，我的月亮。';
   c_tachyon1 = '【爱丽速子】见证沉溺于被背叛的肉体欢愉。';
+  c_pama1 = '【目白善信】接纳她快要坏掉的心吧。';
 }
 
 module.exports = I18nAchieveDesc;

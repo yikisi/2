@@ -455,7 +455,7 @@ module.exports = {
      * @param {CharaTalk} dotou 名将怒涛
      * @param {CharaTalk} palmer 目白善信
      * @param {CharaTalk} helios 大拓太阳神
-     * @param {CharaTalk} yayoi 秋川弥生/北方风味
+     * @param {CharaTalk} taste 秋川弥生/北方风味
      * @param {CharaTalk} you 玩家
      * @param {string} callname 爱丽数码对玩家的称呼
      * @param {PrintedSpan} y_call_d 玩家对爱丽数码的称呼
@@ -468,7 +468,7 @@ module.exports = {
       dotou,
       palmer,
       helios,
-      yayoi,
+      taste,
       you,
       callname,
       y_call_d,
@@ -480,7 +480,7 @@ module.exports = {
       palmer.name = '某个栗毛' + palmer.uma_sex_title;
       helios.name = '看起来像是染了蓝毛的' + helios.uma_sex_title;
       if (era.get('cflag:0:位置') !== location_enum.beach) {
-        await yayoi.say_and_wait('合宿！对，就是，如此！');
+        await taste.say_and_wait('合宿！对，就是，如此！');
         await era.printAndWait(
           '不得不说不愧是那个理事长吗，即使现在明明不是夏季合宿的时间段，却突然来这么一出。',
         );

@@ -6,12 +6,12 @@ const era = require('#/era-electron');
 
 module.exports = {
   /**
-   * @param {CharaTalk} falcon
-   * @param {CharaTalk} you
-   * @param {CharaTalk} tokino
-   * @param {string} callname
+   * @param {CharaTalk} falcon 醒目飞鹰
+   * @param {CharaTalk} you 玩家
+   * @param {CharaTalk} minoru 骏川缰绳/丰收时刻
+   * @param {string} callname 醒目飞鹰对玩家的称呼
    */
-  async rec_start(falcon, you, tokino, callname) {
+  async rec_start(falcon, you, minoru, callname) {
     await falcon.say_as_passer_by_and_wait(
       falcon.uma_sex_title,
       `能得到训练员的邀请非常感谢，不过呢，我觉得自己的实力恐怕还是差了一点。`,
@@ -170,13 +170,13 @@ module.exports = {
     await era.printAndWait(`于是${callname}便向着骚动传来的方向迈出了脚步。`);
     era.println();
     await falcon.say_and_wait(`非常抱歉。`);
-    await tokino.say_and_wait(
+    await minoru.say_and_wait(
       `${falcon.name}${falcon.adult_sex_title}，如果想要合规的进行偶像活动，请在选拔赛上努力与合适的训练员进行签约。`,
     );
-    await tokino.say_and_wait(
+    await minoru.say_and_wait(
       `特雷森学院是以培育优秀赛${falcon.uma_sex_title}为目标而创立的，我想以此为目标希望一同前进的训练员应该不会少。`,
     );
-    await tokino.say_and_wait(
+    await minoru.say_and_wait(
       `请把努力的方向修正后，与合适的训练员一同前进吧。`,
     );
     await era.printAndWait(
@@ -186,7 +186,7 @@ module.exports = {
     await era.printAndWait(
       `从低垂的马耳来看，${falcon.name}似乎陷入了两难之地。`,
     );
-    await tokino.say_and_wait(
+    await minoru.say_and_wait(
       `……${you.actual_name}${you.adult_sex_title}，请问有什么事情吗？`,
     );
     await era.printAndWait(`手纲迅速切换到了工作模式。`);
@@ -195,14 +195,14 @@ module.exports = {
     await era.printAndWait(
       `不知为何，${callname}想起了在窗边闪闪发光的${falcon.teen_sex_title}。`,
     );
-    await tokino.say_and_wait(
+    await minoru.say_and_wait(
       `……这样的话，之后请把契约书复印一份放在理事长办公室，不过在此之前。`,
     );
-    await tokino.say_and_wait(`和${falcon.name}小姐正式契约更好。`);
+    await minoru.say_and_wait(`和${falcon.name}小姐正式契约更好。`);
     await era.printAndWait(
       `${callname}顺着手纲小姐的目光看向了贴了一路的海报。`,
     );
-    await tokino.say_and_wait(
+    await minoru.say_and_wait(
       `请在${falcon.uma_sex_title}们上课之前把走廊恢复成原来的样子。`,
     );
     await era.printAndWait(`虽然手纲缰绳一直在笑容传来了极强的压迫感。\n\n\n`);

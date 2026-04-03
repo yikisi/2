@@ -6,16 +6,16 @@ const era = require('#/era-electron');
 
 module.exports = {
   /**
-   * @param {CharaTalk} treve
-   * @param {CharaTalk} yayoi
-   * @param {CharaTalk} may
-   * @param {CharaTalk} you
-   * @param {PrintedSpan} callname
+   * @param {CharaTalk} treve 卓芙
+   * @param {CharaTalk} taste 秋川弥生/北方风味
+   * @param {CharaTalk} may 佐岳五月/狄杜斯
+   * @param {CharaTalk} you 玩家
+   * @param {PrintedSpan} callname 卓芙对玩家的称呼
    */
-  async rec(treve, yayoi, may, you, callname) {
+  async rec(treve, taste, may, you, callname) {
     const ret = [];
     await era.printAndWait(
-      `某个休息日，${you.name} 同时收到了 ${yayoi.name} 与巴黎特雷森学园官方的联络邮件。`,
+      `某个休息日，${you.name} 同时收到了 ${taste.name} 与巴黎特雷森学园官方的联络邮件。`,
     );
     await era.printAndWait('虽然内容不尽相同，但都表达了一个意思：');
     if (era.get('flag:当前声望') >= 1000) {
@@ -25,7 +25,7 @@ module.exports = {
     }
     await era.printAndWait([
       '日前巴黎特雷森学园的院长就已经和 ',
-      yayoi.get_colored_name(),
+      taste.get_colored_name(),
       ' 有过一番洽谈，其结果是——',
     ]);
     await era.printAndWait(
@@ -123,9 +123,9 @@ module.exports = {
       await era.printAndWait('拿着的电话。');
       era.printButton('「你好。」', 1);
       await era.input();
-      await yayoi.say_and_wait('歉 意！有点事想拜托你。');
+      await taste.say_and_wait('歉 意！有点事想拜托你。');
       await era.printAndWait([
-        yayoi.get_colored_name(),
+        taste.get_colored_name(),
         '，虽说是看似普通的学园理事长，但考虑到这样的组织与才能还有眼力，绝对是独一无二的存在。',
       ]);
       await era.printAndWait(
@@ -133,12 +133,12 @@ module.exports = {
       );
       era.printButton('「怎么了？」', 1);
       await era.input();
-      await yayoi.say_and_wait(
+      await taste.say_and_wait(
         `告 知！实际上，那边的${treve.uma_sex_title}里有个孩子虽然出道赛表现很好，但谁都没搭上话。实力很强，在比赛中好像也是第一名，所以为什么没被物色发掘，真是不可思议。`,
       );
       era.printButton('「因为被理事长内定了吧。」', 1);
       await era.input();
-      await yayoi.say_and_wait(
+      await taste.say_and_wait(
         `冗 谈！这个……总之你有实力，我想能不能在你那里收留${treve.sex}。`,
       );
       await era.printAndWait('这个装嫩的家伙耳朵洞是通了好让空气变通畅吗。');
@@ -159,7 +159,7 @@ module.exports = {
       await era.printAndWait(`总之，这样打电话也不会给 ${you.name} 添麻烦。`);
       era.printButton('「得看实力。」', 1);
       await era.input();
-      await yayoi.say_and_wait(
+      await taste.say_and_wait(
         `赞 许！特别是脑袋聪明，很擅长比赛的展开。因为${treve.sex}冷静的表现不像新人，教官都很快没有能教${treve.sex}的东西了。`,
       );
       await era.printAndWait(
@@ -169,13 +169,13 @@ module.exports = {
       );
       era.printButton('「性格有问题。」', 1);
       await era.input();
-      await yayoi.say_and_wait('没 有！也很有自信。');
+      await taste.say_and_wait('没 有！也很有自信。');
       era.printButton('「脚部不安。」', 1);
       await era.input();
-      await yayoi.say_and_wait('健 康！一切都没有问题');
+      await taste.say_and_wait('健 康！一切都没有问题');
       era.printButton('「那为什么没有被物色发掘呢？」', 1);
       await era.input();
-      await yayoi.say_and_wait('无 奈！我也想知道啊！');
+      await taste.say_and_wait('无 奈！我也想知道啊！');
       await era.printAndWait('从电话那头传来叹息声，看来真的很有自信。');
       await era.printAndWait(
         `被这么一说，${you.name} 很在意是什么样的${treve.uma_sex_title}。`,
@@ -187,7 +187,7 @@ module.exports = {
 
       era.printButton('「什么样的家伙？」', 1);
       await era.input();
-      await yayoi.say_and_wait(
+      await taste.say_and_wait(
         `回 忆！嗯，是栗毛的${treve.uma_sex_title}。只是发色比较明亮，玫瑰金之类的感觉。`,
       );
       await era.printAndWait([
@@ -199,11 +199,11 @@ module.exports = {
       await era.printAndWait('栗色，是明亮的发色。');
       era.printButton('「……其他的呢？」', 1);
       await era.input();
-      await yayoi.say_and_wait('特 点！头发后面有两个小小的结。');
+      await taste.say_and_wait('特 点！头发后面有两个小小的结。');
       await era.printAndWait(`${treve.sex}的两结头发被风吹得摇动。`);
       era.printButton('「……还有呢。」', 1);
       await era.input();
-      await yayoi.say_and_wait(
+      await taste.say_and_wait(
         '补 充！耳饰的话，左边是白色的帽子和红色的丝带，这个比较有特色，所以很容易辨认吧。',
       );
       await era.printAndWait(
@@ -215,12 +215,12 @@ module.exports = {
         }。`,
       );
       await era.printAndWait(`海蓝宝石的眼睛纹丝不动地朝向 ${you.name} 这边。`);
-      await yayoi.say_and_wait(
+      await taste.say_and_wait(
         `如 何？那边的学校很大吧，现在进行出道赛的${treve.uma_sex_title}也多，可能很难找到。`,
       );
       era.printButton('「……不，我觉得很快就能找到。」', 1);
       await era.input();
-      await yayoi.say_and_wait('好 极！能找到就好，再见。');
+      await taste.say_and_wait('好 极！能找到就好，再见。');
       await era.printAndWait(`然后 ${you.name} 和无机质的蜂鸣音一起挂断电话。`);
       await era.printAndWait(
         `慢慢地收好手机后，双手交叉，隔着石阶的人行道重新面对，面对面地坐在对面的${treve.sex}。`,
@@ -375,7 +375,7 @@ module.exports = {
         era.printButton('「那个自信是从哪里来的？」', 1);
         await era.input();
         await era.printAndWait(
-          `话虽如此，实力由 ${yayoi.name} 和比赛的结果保证。`,
+          `话虽如此，实力由 ${taste.name} 和比赛的结果保证。`,
         );
         await era.printAndWait(`${you.name} 微微叹气，仰望天空。`);
         await era.printAndWait(

@@ -542,7 +542,7 @@ module.exports = class extends CustomizedEdu {
 
   /** @param {CharaTalk} me */
   async justice(me) {
-    const tokino = get_chara_talk(301);
+    const minoru = get_chara_talk(301);
     const { min } = get_extremum_entry(
       sys_filter_chara('cflag', '招募状态', recruit_flags.yes).filter(
         (cid) =>
@@ -562,8 +562,8 @@ module.exports = class extends CustomizedEdu {
           'justice',
           me,
           min === 301 ? new CharaTalk(301) : get_chara_talk(min),
-          tokino,
-          tokino.sex_code === 1 ? i18n().name[900112] : i18n().name[900111],
+          minoru,
+          minoru.sex_code === 1 ? i18n().name[900112] : i18n().name[900111],
         )
       )[0]
     ) {

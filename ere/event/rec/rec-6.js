@@ -32,7 +32,7 @@ module.exports = class extends CustomizedRecruit {
     if (await this.check_before_rec()) {
       return;
     }
-    const tokino = get_chara_talk(301);
+    const minoru = get_chara_talk(301);
     const dict = {
       ...generate_dictionary(this.id, {
         sir: !0,
@@ -40,8 +40,8 @@ module.exports = class extends CustomizedRecruit {
         uma: !0,
         your_name: !0,
       }),
-      T_COLOR: tokino.color,
-      T_NAME: tokino.name,
+      T_COLOR: minoru.color,
+      T_NAME: minoru.name,
     };
     // CFLAGNAME:66 = 招募状态
     era.set(`cflag:${this.id}:66`, recruit_flags.yes);

@@ -14,15 +14,15 @@ const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends CustomizedEdu {
   /**
-   * @param {CharaTalk} tokino
+   * @param {CharaTalk} minoru
    * @param {CharaTalk} me
    */
-  async shadow(tokino, me) {
+  async shadow(minoru, me) {
     const life_marks = new TokinoLifeMarks();
     await print_title_with_kojo(
       i18n().timon.random_events,
-      'shadow_tokino',
-      tokino,
+      'shadow_minoru',
+      minoru,
       get_chara_talk(10),
       me,
       life_marks.who_am_i >= 1,

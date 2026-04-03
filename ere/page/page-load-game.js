@@ -428,11 +428,11 @@ module.exports = async () => {
                   era.set(`cstr:${cid}:初次饮爱液经历`, []);
                   era.set(`cstr:${cid}:无自觉初次饮爱液经历`, []);
                 }
-                const tokino = CharaTitles.get(cid)
+                const t_above_all = CharaTitles.get(cid)
                   .get()
                   .find((t) => t.n === i18n('zh-CN').title.e_above_all);
-                if (tokino !== void 0) {
-                  tokino.c = adaptability_colors.at(-2);
+                if (t_above_all !== void 0) {
+                  t_above_all.c = adaptability_colors.at(-2);
                 }
               });
               if (era.get('flag:惩戒力度') >= 2) {

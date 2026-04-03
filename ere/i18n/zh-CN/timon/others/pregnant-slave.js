@@ -421,11 +421,11 @@ module.exports = {
   punish_first: (() => {
     /**
      * @author 幽白書
-     * @param {CharaTalk} you
-     * @param {CharaTalk} yayoi
-     * @param {CharaTalk} tazuna
+     * @param {CharaTalk} you 玩家
+     * @param {CharaTalk} taste 秋川弥生/北方风味
+     * @param {CharaTalk} minoru 骏川缰绳/丰收时刻
      */
-    const f = async (you, yayoi, tazuna) => {
+    const f = async (you, taste, minoru) => {
       await you.say_and_wait(['唔……咕……呜……']);
       println();
       await printAndWait(['特雷森学园内，有个平时总无人造访的地方。']);
@@ -442,12 +442,12 @@ module.exports = {
         ' 终于知道这个地方是用来做什么的了。',
       ]);
       println();
-      await yayoi.say_as_unknown_and_wait([
+      await taste.say_as_unknown_and_wait([
         '惩处！身为孕袋逃避职责，必须严厉责罚！',
       ]);
-      await tazuna.say_as_unknown_and_wait([
+      await minoru.say_as_unknown_and_wait([
         '本来，作为孕袋就已经是最严厉的惩罚了……原本是希望在为特雷森及',
-        yayoi.uma_sex_title,
+        taste.uma_sex_title,
         '未来贡献心力的同时，训练员小姐能够好好反省自己的过错，但看来，似乎还是缺了剂猛药呢。',
       ]);
       println();
@@ -464,7 +464,7 @@ module.exports = {
       ]);
       await printAndWait([
         '哪怕想要从声音来听，但被降噪耳机盖住的双耳，哪怕是',
-        yayoi.uma_sex_title,
+        taste.uma_sex_title,
         '那卓越的听力，也只能听清在体内发出的声音。',
       ]);
       println();
@@ -510,25 +510,25 @@ module.exports = {
       ]);
       await printAndWait([
         '因此，那假装矜持的窄小穴道肯定，是为了让',
-        yayoi.uma_sex_title,
+        taste.uma_sex_title,
         '大人雄壮的肉棒能有征服感，才会总装着冷漠，却在肉棒大人触碰到的瞬间便缠绕而上，完美的达成从烈女到荡妇的转变，那缠绕时发出的声音，同样也代表着身体主人的态度。',
       ]);
       await printAndWait([
         '明明想怀孕，想的不得了，明明装作正经训练员的模样，就是为了让',
-        yayoi.uma_sex_title,
+        taste.uma_sex_title,
         '大人在享用自己时能够享受到更多情绪上的满足，',
       ]);
       await printAndWait([
         '结果却因此而丧失了被',
-        yayoi.uma_sex_title,
+        taste.uma_sex_title,
         '大人的精子侵犯，让',
-        yayoi.uma_sex_title,
+        taste.uma_sex_title,
         '大人教会自己，自己是多么可悲下贱的雌性的机会，这是何等的得不偿失啊。',
       ]);
       println();
       await printAndWait([
         '幸好，仁慈的',
-        yayoi.uma_sex_title,
+        taste.uma_sex_title,
         '大人会给予愚笨的孕袋机会。',
       ]);
       println();
@@ -543,7 +543,7 @@ module.exports = {
       ]);
       await printAndWait([
         '抵抗？孕袋的身体，怎么可能对',
-        yayoi.uma_sex_title,
+        taste.uma_sex_title,
         '大人的侵犯做出抵抗呢？这是被刻在基因深层的根本逻辑。',
       ]);
       println();
@@ -561,19 +561,19 @@ module.exports = {
       await printAndWait(['本来这条皮带就没有任何必要，']);
       await printAndWait([
         '毕竟哪有孕袋会反抗',
-        yayoi.uma_sex_title,
+        taste.uma_sex_title,
         '大人的肉棒呢？',
       ]);
       await printAndWait([
         '哪有孕袋会拒绝',
-        yayoi.uma_sex_title,
+        taste.uma_sex_title,
         '大人的赏赐呢？',
       ]);
       println();
       await printAndWait([
         '终于，比跑步更加令人心跳加速，比初恋更让人心生荡漾，',
       ]);
-      await printAndWait([yayoi.uma_sex_title, '大人的侵犯，来到了尾声。']);
+      await printAndWait([taste.uma_sex_title, '大人的侵犯，来到了尾声。']);
       println();
       await printAndWait(['咻………咻噜噜噜噜……']);
       println();
@@ -584,7 +584,7 @@ module.exports = {
       await printAndWait(['让原本贵为此处主人的卵子彻底臣服，']);
       await printAndWait([
         '土下座，舔脚，贡献出母体的一切也要讨好的，',
-        yayoi.uma_sex_title,
+        taste.uma_sex_title,
         '大人高贵的种付精液。',
       ]);
       await printAndWait(['精子不断的喷涌而出，']);

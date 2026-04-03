@@ -28,8 +28,8 @@ module.exports = async (rice, me, callname, event_object) => {
   if (event_object.arg !== 95 + 21) {
     return;
   }
-  const self_name = sys_get_callname(30, 30),
-    tokino = get_chara_talk(301);
+  const self_name = sys_get_callname(30, 30);
+  const minoru = get_chara_talk(301);
   await print_event_name('万有一失', rice);
   await era.printAndWait([
     '把参加 ',
@@ -53,25 +53,25 @@ module.exports = async (rice, me, callname, event_object) => {
   await rice.say_and_wait('欸嘿嘿……令人开心的事情竟然有这么多，真的好吗？');
   await me.say_and_wait('要连带着这份一起努力呢。');
   await rice.say_and_wait('说的是啊……');
-  await tokino.say_and_wait('啊，两位都找到了！');
+  await minoru.say_and_wait('啊，两位都找到了！');
   await me.say_and_wait('是有什么事吗？');
-  await tokino.say_and_wait('其实是这样的！');
-  await tokino.say_and_wait('刚才阪神赛马场传来了消息……！！');
-  await tokino.say_and_wait([
+  await minoru.say_and_wait('其实是这样的！');
+  await minoru.say_and_wait('刚才阪神赛马场传来了消息……！！');
+  await minoru.say_and_wait([
     '在【粉丝人气投票】中，',
     sys_get_colored_callname(301, 30),
     ' 可是遥遥领先的第一哦！',
   ]);
-  await tokino.say_and_wait('希望能来参加开幕仪式！');
+  await minoru.say_and_wait('希望能来参加开幕仪式！');
   await rice.say_and_wait('欸欸欸欸欸？');
-  await tokino.say_and_wait('所以，要在明天进行彩排。');
+  await minoru.say_and_wait('所以，要在明天进行彩排。');
   await rice.say_and_wait(['……哇。', self_name, ' 是……人气第一？开幕、仪式？']);
-  await tokino.say_and_wait('啊哈哈……抱歉。我好像也有点太兴奋了。');
-  await tokino.say_and_wait(
+  await minoru.say_and_wait('啊哈哈……抱歉。我好像也有点太兴奋了。');
+  await minoru.say_and_wait(
     '详细内容已经整理成了文件，请稍后确认，讨论一下吧。',
   );
-  await tokino.say_and_wait('那，我告辞了。');
-  await era.printAndWait([tokino.get_colored_name(), ' 离开后……']);
+  await minoru.say_and_wait('那，我告辞了。');
+  await era.printAndWait([minoru.get_colored_name(), ' 离开后……']);
   await rice.say_and_wait(['……好棒，', self_name, ' 是，大家的……']);
   await me.say_and_wait('去参加彩排吧。');
   await rice.say_and_wait('嗯！');

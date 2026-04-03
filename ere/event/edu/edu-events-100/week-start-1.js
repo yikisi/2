@@ -14,7 +14,7 @@ const {
 /** @param {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean}):Promise<boolean|void>>} handlers */
 module.exports = (handlers) => {
   handlers[5] = async (acute, me, callname, flags) => {
-    const tokino = get_chara_talk(301);
+    const minoru = get_chara_talk(301);
     era.set('cflag:100:节日事件标记', 0);
     await print_event_name('超究极武神极巨化以下略 · 巧克力慕斯蛋糕', acute);
     await era.printAndWait([
@@ -62,9 +62,9 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '本来取「巧克力慕斯蛋糕」的工作是 ',
-      tokino.get_colored_name(),
+      minoru.get_colored_name(),
       ' 的工作来着。可',
-      tokino.sex,
+      minoru.sex,
       '说什么也要让 ',
       me.get_colored_name(),
       ' 来走这一遭……真是奇了个怪。',
@@ -86,7 +86,7 @@ module.exports = (handlers) => {
       '……让你久等了，',
       me.actual_name,
       '；这是骏川',
-      tokino.adult_sex_title,
+      minoru.adult_sex_title,
       '为您预订的『超究极武神极巨化威力加强豪华特典版 · 巧克力慕斯蛋糕』',
     ]);
     await era.printAndWait(['……怎么着，你们蛋糕店的店员是都会说贯口是吗？']);
@@ -107,7 +107,7 @@ module.exports = (handlers) => {
     ]);
     await say_by_passer_by_and_wait('店员', [
       '那就没错了，骏川',
-      tokino.adult_sex_title,
+      minoru.adult_sex_title,
       '为您预订的『超究极武神极巨化威力加强豪华特典版 · 巧克力慕斯蛋糕。』',
     ]);
     await era.printAndWait(['好，这下逃不掉了。']);
@@ -144,7 +144,7 @@ module.exports = (handlers) => {
     ]);
     await say_by_passer_by_and_wait('店员', [
       '可骏川',
-      tokino.adult_sex_title,
+      minoru.adult_sex_title,
       '做的到哦？',
     ]);
     await me.say_and_wait(['骏川……']);
@@ -162,7 +162,7 @@ module.exports = (handlers) => {
     ]);
     await say_by_passer_by_and_wait('店员', [
       '总而言之，本店商品一经售出，概不退换；这就是骏川',
-      tokino.adult_sex_title,
+      minoru.adult_sex_title,
       '为您定制的蛋糕——',
     ]);
     await era.printAndWait([
@@ -330,10 +330,10 @@ module.exports = (handlers) => {
       ' 道别之后，虽然不知为何感觉身后又重了不少。但毕竟只有两三步路了，',
       me.get_colored_name(),
       ' 很快便将巨大巧克力慕斯蛋糕交给了 ',
-      tokino.get_colored_name(),
+      minoru.get_colored_name(),
       '。',
     ]);
-    await tokino.say_and_wait([
+    await minoru.say_and_wait([
       '辛苦你了，',
       me.actual_name,
       '。现在派对就差你一个了，快进来吧——',
@@ -343,7 +343,7 @@ module.exports = (handlers) => {
       sys_get_colored_callname(0, 301),
       '，我得先休息了。',
     ]);
-    await tokino.say_and_wait(['唉？']);
+    await minoru.say_and_wait(['唉？']);
     await era.printAndWait([
       '再怎么说，背着这么大的蛋糕盒走了那么远的路早已耗光了 ',
       me.get_colored_name(),
@@ -353,7 +353,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '再跟 ',
-      tokino.get_colored_name(),
+      minoru.get_colored_name(),
       ' 说明原委后，',
       me.get_colored_name(),
       ' 便头也不回的回到了休息室；今天又是辛苦的一天啊。',
@@ -385,7 +385,7 @@ module.exports = (handlers) => {
   };
 
   handlers[47] = async (acute, me, callname, flags) => {
-    const tokino = get_chara_talk(301);
+    const minoru = get_chara_talk(301);
     era.set('cflag:100:节日事件标记', 0);
     await print_event_name('赌局与爱与飞行', acute);
     await era.printAndWait(['春去秋来，恍然间时间已到了圣诞的节前。']);
@@ -468,30 +468,30 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '——直到 ',
-      tokino.get_colored_name(),
+      minoru.get_colored_name(),
       ' 来了为止。',
     ]);
 
     era.drawLine({ content: '特雷森教职员办公室' });
-    await tokino.used_to_say_and_wait([
+    await minoru.used_to_say_and_wait([
       '哦……1980年西德进口的最新科技，能够透视的X光眼镜啊……',
     ]);
     await me.used_to_say_and_wait(['唔！？']);
     await era.printAndWait([
       me.get_colored_name(),
       ' 紧张的回过头，却发现不知何时，',
-      tokino.get_colored_name(),
+      minoru.get_colored_name(),
       ' 已经来到了 ',
       me.get_colored_name(),
       ' 的身后。',
     ]);
-    await tokino.used_to_say_and_wait([
+    await minoru.used_to_say_and_wait([
       '放心，我没打算揭露你；',
       me.actual_name,
       '……',
     ]);
     await era.printAndWait([
-      tokino.get_colored_name(),
+      minoru.get_colored_name(),
       ' 冷冷地说着，轻轻拍了一下 ',
       me.get_colored_name(),
       ' 的肩膀；可霎时间，',
@@ -500,10 +500,10 @@ module.exports = (handlers) => {
       me.get_colored_name(),
       ' 按在了椅子上。',
     ]);
-    await tokino.used_to_say_and_wait([
+    await minoru.used_to_say_and_wait([
       '我之前就跟大家说过，在特雷森里打扑克牌可以，但是涉赌的话是不行的。可惜大家一直就不听呢……不过这下好啦，有了这次赌博作为教训，以后应该没人会在学校里赌博了吧……',
     ]);
-    await tokino.used_to_say_and_wait([
+    await minoru.used_to_say_and_wait([
       '不过呢，让你赢了这么多；传出去也不好……正好最近 ',
       sys_get_colored_callname(301, 302),
       ' 那边又有资金缺口了，所以——',
@@ -526,7 +526,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '放弃自己的赃款来保持自己的名誉，还是让 ',
-      tokino.get_colored_name(),
+      minoru.get_colored_name(),
       ' 曝光自己作弊的事，让赃款和名誉一起丢失……',
       me.get_colored_name(),
       ' 想自己还没有疯魔到选后者的地步。',
@@ -543,18 +543,18 @@ module.exports = (handlers) => {
       '在 ',
       me.get_colored_name(),
       ' 只剩下「3000」马币的赃款时，',
-      tokino.get_colored_name(),
+      minoru.get_colored_name(),
       ' 主动停了手。',
     ]);
-    await tokino.used_to_say_and_wait([
+    await minoru.used_to_say_and_wait([
       '呼……就到为止吧，真是一场酣畅淋漓的战斗呢。辛苦了。',
     ]);
     await me.used_to_say_and_wait(['唉？不继续了吗？']);
-    await tokino.used_to_say_and_wait([
+    await minoru.used_to_say_and_wait([
       '不了，毕竟我也不是什么恶魔嘛。可不会赶尽杀绝呢——再者说，你要这笔钱也用吧？',
     ]);
     await era.printAndWait([
-      tokino.get_colored_name(),
+      minoru.get_colored_name(),
       ' 摆了摆头，绿色的帽子左右晃动；',
       acute.sex,
       '将食指摆在嘴边，露出了一个狡猾的微笑。',
@@ -566,15 +566,15 @@ module.exports = (handlers) => {
       me.get_colored_name(),
       ' 现在急需用钱来着？',
     ]);
-    await tokino.used_to_say_and_wait(['嘛，可不要小瞧我的情报网啊。']);
+    await minoru.used_to_say_and_wait(['嘛，可不要小瞧我的情报网啊。']);
     await era.printAndWait([acute.sex, '笑着说道，似乎不想做过多的解释。']);
-    await tokino.used_to_say_and_wait([
+    await minoru.used_to_say_and_wait([
       '不过，话又说回来了。你是从哪搞来的这西德的高科技产品啊？我记得这种X光眼镜早就已经停产了来着……',
     ]);
     await me.used_to_say_and_wait([
       '不……首先这就不是X光眼镜。这是插入了透视镜框的万能镜框……',
     ]);
-    await tokino.used_to_say_and_wait(['……透视镜框？']);
+    await minoru.used_to_say_and_wait(['……透视镜框？']);
     await me.used_to_say_and_wait([
       '对，简单来说只要插入了这个镜框后，用这个眼镜观测其实事物时都能达到透视的效果。就连衣服也不例……',
     ]);
@@ -584,7 +584,7 @@ module.exports = (handlers) => {
       me.get_colored_name(),
       ' 刚刚顺嘴说了什么？',
     ]);
-    await tokino.used_to_say_and_wait([
+    await minoru.used_to_say_and_wait([
       '……衣服也不例外，那就是说；你现在看谁都是裸体……吗？',
     ]);
     await me.used_to_say_and_wait(['…………']);
@@ -611,7 +611,7 @@ module.exports = (handlers) => {
       '——对了，',
       me.get_colored_name(),
       ' 想到了；怎么能把这么重要的事情给忘记了呢？',
-      tokino.get_colored_name(),
+      minoru.get_colored_name(),
       ' 听了 ',
       me.get_colored_name(),
       ' 的这段话后，一定会原谅 ',
@@ -629,7 +629,7 @@ module.exports = (handlers) => {
     await me.used_to_say_and_wait(['上上上上上上上上上上上上上———']);
     await era.printAndWait([
       '……待反应过来之时，身体已沦为了 ',
-      tokino.get_colored_name(),
+      minoru.get_colored_name(),
       ' 的双节棍。',
     ]);
 

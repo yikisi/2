@@ -1582,9 +1582,9 @@ module.exports = {
    * @param {CharaTalk} acute 奇锐骏
    * @param {CharaTalk} you 玩家
    * @param {PrintedSpan} y_call_a 玩家对奇锐骏的称呼
-   * @param {PrintedSpan} call_tokino 奇锐骏对骏川的称呼
+   * @param {PrintedSpan} call_minoru 奇锐骏对骏川的称呼
    */
-  async ask_hair_fuck(acute, you, y_call_a, call_tokino) {
+  async ask_hair_fuck(acute, you, y_call_a, call_minoru) {
     await you.print_and_wait([
       '侧过头，飘飘的银色长发落于肉棒之上，抓住其中一缕，环着肉棒绕了三圈，好似要将其绑起来一般。',
     ]);
@@ -1597,7 +1597,7 @@ module.exports = {
     ]);
     await acute.say_and_wait([
       '要是被 ',
-      call_tokino,
+      call_minoru,
       '……或者其他',
       acute.uma_sex_title,
       '发现了头发上的味道的话……会怎么样呢？',

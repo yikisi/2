@@ -83,6 +83,7 @@ class I18nAchievements {
 
   c_luna1 = '伊甸见我';
   c_tachyon1 = '芳香烃……';
+  c_pama1 = '无力逃亡';
 }
 
 module.exports = I18nAchievements;

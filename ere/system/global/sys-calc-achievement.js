@@ -98,6 +98,7 @@ class GlobalAchievement {
 
   c_luna1 = [7, types.hidden, void 0, get_chara_color(17)];
   c_tachyon1 = [7, types.hidden, void 0, get_chara_color(32)];
+  c_pama1 = [7, types.hidden, void 0, get_chara_color(64)];
 
   constructor() {
     this.#fields.forEach((m) => {

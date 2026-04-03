@@ -486,8 +486,8 @@ module.exports = (handlers) => {
   };
 
   handlers[95 + 24] = async (rice, me, callname, self_name, flags) => {
-    const tokino = get_chara_talk(301),
-      chairman = get_chara_talk(302);
+    const minoru = get_chara_talk(301);
+    const chairman = get_chara_talk(302);
     await print_event_name('不会折断的蔷薇', rice);
     await era.printAndWait([
       race_infos[race_enum.takz_kin].get_colored_name(),
@@ -547,23 +547,23 @@ module.exports = (handlers) => {
     ]);
     await rice.say_and_wait('也许会添麻烦，也许会很困难，但请一定要帮帮我！');
     await rice.say_and_wait('为了支持着我的大家，能做到的事情一定尽我所能。');
-    await tokino.say_and_wait('啊，让您久等了！终于批准下来了！');
+    await minoru.say_and_wait('啊，让您久等了！终于批准下来了！');
     await chairman.say_and_wait([
       sys_get_colored_callname(302, 301),
       '！！！期待～',
     ]);
-    await tokino.say_and_wait([
+    await minoru.say_and_wait([
       '嗯嗯！这次的 ',
       race_infos[race_enum.takz_kin].get_colored_name(),
       '，决定要在京都赛马场举办了！',
     ]);
     await rice.say_and_wait('……那么！');
-    await tokino.say_and_wait(
+    await minoru.say_and_wait(
       '没错，阪神和京都，两个会场的工作人员紧密地保持着联系。',
     );
-    await tokino.say_and_wait('才让举办变得可能的！');
-    await tokino.say_and_wait('无论哪一方的工作人员，都表示一定要尽全力。');
-    await tokino.say_and_wait(['……也是为了 ', self_name, '。']);
+    await minoru.say_and_wait('才让举办变得可能的！');
+    await minoru.say_and_wait('无论哪一方的工作人员，都表示一定要尽全力。');
+    await minoru.say_and_wait(['……也是为了 ', self_name, '。']);
     await rice.say_and_wait('……！！');
     era.drawLine({ content: '回到训练室后' });
     await rice.say_and_wait('呜……太好了……');

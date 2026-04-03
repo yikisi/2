@@ -476,14 +476,14 @@ class Edu64Base extends CustomizedEdu {
 
   /** @param {CharaTalk} pama */
   async sports_car(pama) {
-    const tokino = get_chara_talk(301);
+    const minoru = get_chara_talk(301);
     const chairman = get_chara_talk(302);
     await print_name_and_show_kojo('震惊！跑车是礼物！', pama, kojo, {
       ...this.dict,
       理事长色: chairman.color,
       秋川弥生: chairman.name,
-      绿帽色: tokino.color,
-      骏川缰绳: tokino.name,
+      绿帽色: minoru.color,
+      骏川缰绳: minoru.name,
     });
     era.set('item:善信号', 1);
   }

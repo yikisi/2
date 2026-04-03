@@ -97,7 +97,7 @@ module.exports = (handlers) => {
   };
 
   handlers[9] = async (falcon, me, callname) => {
-    const tokino = get_chara_talk(301);
+    const minoru = get_chara_talk(301);
     await print_event_name(`接下来也请多多指教⭐`, falcon);
     await era.printAndWait(`2月正是一年中最寒冷的日子。`);
     await era.printAndWait(
@@ -116,7 +116,7 @@ module.exports = (handlers) => {
     await era.printAndWait(
       `或许正是这点支撑着对方在长时间的${falcon.uma_sex_title}偶像活动仍然充满活力吧。`,
     );
-    await tokino.say_and_wait(`哎呀，今天来这么早吗？`);
+    await minoru.say_and_wait(`哎呀，今天来这么早吗？`);
     await era.printAndWait(
       `思考的时间总是过得很快，手纲小姐就像是理所当然的出现在了特雷森校门，带着一丝微笑看着${callname}。`,
     );
@@ -125,7 +125,7 @@ module.exports = (handlers) => {
       1,
     );
     await era.input();
-    await tokino.say_and_wait(`呵呵，真是的，就算夸奖我也不会有什么好处哦？`);
+    await minoru.say_and_wait(`呵呵，真是的，就算夸奖我也不会有什么好处哦？`);
     await era.printAndWait(
       `轻笑着的手纲小姐露出了不会动摇的神情。某种意义上${falcon.sex}更像是理想的成年人。`,
     );

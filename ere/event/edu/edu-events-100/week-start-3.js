@@ -162,14 +162,14 @@ module.exports = (handlers) => {
     await era.printAndWait(
       '然而，就在这时，却听嘎登一声，休息室的大门被打开了——',
     );
-    const tokino = get_chara_talk(301);
-    await tokino.say_and_wait([me.actual_name, '在吗？这儿有一份你的快件……']);
+    const minoru = get_chara_talk(301);
+    await minoru.say_and_wait([me.actual_name, '在吗？这儿有一份你的快件……']);
     await era.printAndWait([
       '大门前，正趴在洗浴室门前的自己，被 ',
-      tokino.get_colored_name(),
+      minoru.get_colored_name(),
       ' 一览无余。',
     ]);
-    await tokino.say_and_wait('………………');
+    await minoru.say_and_wait('………………');
     await era.printAndWait('哗啦啦啦啦啦～');
     await era.printAndWait('哗啦啦啦啦啦～');
     era.printButton('「………………」', 1);
@@ -217,7 +217,7 @@ module.exports = (handlers) => {
     await era.printAndWait([
       me.get_colored_name(),
       ' 倒也不是没有品赏浴袍的余情，只不过是自己刚刚被 ',
-      tokino.get_colored_name(),
+      minoru.get_colored_name(),
       '点了「如果再多看一眼裸体就会七窍流血爆体而亡」的穴位。',
     ]);
     await era.printAndWait([
@@ -247,7 +247,7 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '可恶……如果不是因为一时鬼迷心窍被 ',
-      tokino.get_colored_name(),
+      minoru.get_colored_name(),
       ' 点了穴道的话，',
       me.get_colored_name(),
       ' 现在必须立刻马上变身红色形态召唤无尽战神……',
@@ -391,8 +391,8 @@ module.exports = (handlers) => {
       ' 待在一起的话，就经常会遇上这种意料之外的惊喜呢——',
     ]);
     era.drawLine({ content: '地下审讯室' });
-    await tokino.say_and_wait('最近收到学生举报。');
-    await tokino.say_and_wait([
+    await minoru.say_and_wait('最近收到学生举报。');
+    await minoru.say_and_wait([
       '说 ',
       acute.get_colored_name(),
       ' 的训练员捧着花束向 ',
@@ -401,7 +401,7 @@ module.exports = (handlers) => {
       acute.get_colored_name(),
       ' 穿着浴袍在校内狂奔以表示爱意。',
     ]);
-    await tokino.say_and_wait(['有这回事吗，', me.actual_name, '训练员']);
+    await minoru.say_and_wait(['有这回事吗，', me.actual_name, '训练员']);
     era.printButton('「………………」', 1);
     await era.input();
     await era.printAndWait([

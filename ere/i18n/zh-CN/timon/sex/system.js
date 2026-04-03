@@ -654,15 +654,15 @@ module.exports = {
 
   /**
    * 调教结束后的总结情报
-   * @param {CharaTalk} yayoi
-   * @param {CharaTalk} tokino
-   * @param {CharaTalk} riko
-   * @param {CharaTalk} glasse
-   * @param {CharaTalk} cocon
+   * @param {CharaTalk} taste 秋川弥生/北方风味
+   * @param {CharaTalk} minoru 骏川缰绳/丰收时刻
+   * @param {CharaTalk} riko 㭴本理子
+   * @param {CharaTalk} glasse 苦涩糖衣
+   * @param {CharaTalk} cocon 小小蚕茧
    */
-  async ero_report(yayoi, tokino, riko, glasse, cocon) {
-    yayoi.say_as_unknown('发 表！高潮播报～♫');
-    tokino.say_as_unknown('以下报上这次马儿跳的结果简报～');
+  async ero_report(taste, minoru, riko, glasse, cocon) {
+    taste.say_as_unknown('发 表！高潮播报～♫');
+    minoru.say_as_unknown('以下报上这次马儿跳的结果简报～');
     // 1% 几率理子会说不下去，让糖衣和蚕茧打气
     if (Math.random() < 0.01) {
       await riko.say_as_unknown_and_wait('不……不喜欢……的话……');

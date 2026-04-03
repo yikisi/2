@@ -478,10 +478,10 @@ module.exports = (handlers) => {
     await era.input();
     era.drawLine();
 
-    const tokino = get_chara_talk(301);
+    const minoru = get_chara_talk(301);
     await era.printAndWait([
       '后来，',
-      tokino.get_colored_name(),
+      minoru.get_colored_name(),
       ' 巡逻的时候路过了当地的派出所，听到了 ',
       me.get_colored_name(),
       ' 的救命声后，终于把 ',
@@ -492,12 +492,12 @@ module.exports = (handlers) => {
       '在听说自己是因为「尾随',
       acute.uma_sex_title,
       '」而进的监狱后，被 ',
-      tokino.get_colored_name(),
+      minoru.get_colored_name(),
       ' 狠狠的白了一眼。',
     ]);
     await era.printAndWait([
       '回来的路上拼命的向 ',
-      tokino.get_colored_name(),
+      minoru.get_colored_name(),
       ' 解释自己真的不是尾行痴汉。并出于诚意请',
       acute.sex,
       '来自己的休息室里吃宵夜。',
@@ -507,7 +507,7 @@ module.exports = (handlers) => {
       acute.get_colored_name(),
       '。',
     ]);
-    await tokino.say_and_wait('………………');
+    await minoru.say_and_wait('………………');
     era.printButton('「………………」', 1);
     await era.input();
     era.printButton('「我说我是被动的你信吗？」', 1);
@@ -519,7 +519,7 @@ module.exports = (handlers) => {
       '自那之后，',
       get_chara_talk(302).get_colored_name(),
       '、',
-      tokino.get_colored_name(),
+      minoru.get_colored_name(),
       '，',
       acute.get_colored_name(),
       ' 看 ',

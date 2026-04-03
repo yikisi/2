@@ -7,6 +7,7 @@ const {
   end_ero_and_train,
   set_palam_to_max,
 } = require('#/system/ero/sys-prepare-ero');
+const global_achievement = require('#/system/global/sys-calc-achievement');
 const {
   sys_change_lust,
   sys_change_motivation,
@@ -319,6 +320,7 @@ module.exports = class extends CustomizedLove {
     if (!era.get(`talent:${this.id}:病娇`)) {
       era.set(`talent:${this.id}:病娇`, 1);
     }
+    global_achievement.c_pama1 = 1;
     add_event(event_hooks.week_start, event_object.set_arg('is_you'));
   }
 
