@@ -1737,13 +1737,11 @@ module.exports = {
         async h() {
           await era.printAndWait([
             chara.get_colored_name(),
-            ' 之前所总结一百个',
+            ' 之前所总结一百个 ',
             you.get_colored_name(),
-            '办事不力的说辞此刻终于派上了用场',
+            ' 办事不力的说辞此刻终于派上了用场',
           ]);
-          await era.printAndWait([
-            '不过，意料之外地称赞了这次生日活动办得很好',
-          ]);
+          await era.printAndWait('不过，意料之外地称赞了这次生日活动办得很好');
         },
       },
     ];

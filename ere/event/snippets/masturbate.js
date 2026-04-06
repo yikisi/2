@@ -6,20 +6,19 @@ const { set_palam_to_max } = require('#/system/ero/sys-prepare-ero');
 const EroParticipant = require('#/data/ero/ero-participant');
 const { part_enum } = require('#/data/ero/part-const');
 
-async function masturbate(chara_id) {
-  if (era.get(`cflag:${chara_id}:阴道尺寸`) > 0) {
-    set_palam_to_max(chara_id, part_enum.virgin);
+/** @param {number|string} cid */
+async function masturbate(cid) {
+  if (era.get(`cflag:${cid}:阴道尺寸`) > 0) {
+    set_palam_to_max(cid, part_enum.virgin);
     await quick_make_love(
-      new EroParticipant(chara_id, part_enum.hand),
-      new EroParticipant(chara_id, part_enum.virgin),
-      false,
+      new EroParticipant(cid, part_enum.hand),
+      new EroParticipant(cid, part_enum.virgin),
     );
   } else {
-    set_palam_to_max(chara_id, part_enum.penis);
+    set_palam_to_max(cid, part_enum.penis);
     await quick_make_love(
-      new EroParticipant(chara_id, part_enum.hand),
-      new EroParticipant(chara_id, part_enum.penis),
-      false,
+      new EroParticipant(cid, part_enum.hand),
+      new EroParticipant(cid, part_enum.penis),
     );
   }
 }

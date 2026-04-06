@@ -1,10 +1,8 @@
 const era = require('#/era-electron');
 
-const { get_chara_color } = require('#/data/chara-colors');
+const ruby_color = require('#/data/chara-colors').get_chara_color(85);
 
 const { i18n } = require('#/i18n/selector');
-
-const ruby_color = get_chara_color(85);
 
 /** @param {array|string} _content */
 async function say_by_mother(_content) {
@@ -12,13 +10,11 @@ async function say_by_mother(_content) {
   await era.printAndWait(
     [
       { content: i18n().name.ruby_mother, fontWeight: 'bold' },
-      '「',
+      i18n().tk_speak_border[0],
       ...content,
-      '」',
+      i18n().tk_speak_border[1],
     ],
-    {
-      color: ruby_color,
-    },
+    { color: ruby_color },
   );
 }
 

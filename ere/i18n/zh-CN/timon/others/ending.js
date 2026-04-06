@@ -33,7 +33,7 @@ module.exports = {
       era.setWidth(24);
       era.setOffset(0);
     };
-    f.title = '身败名裂';
+    f.title = '扫地出门';
     return f;
   })(),
   hentai: (() => {
@@ -63,7 +63,7 @@ module.exports = {
       era.setWidth(24);
       era.setOffset(0);
     };
-    f.title = '扫地出门';
+    f.title = '身败名裂';
     return f;
   })(),
   slave_end: (() => {
