@@ -117,7 +117,7 @@ module.exports = async (vp, me, event_object) => {
       await era.printAndWait(`在那对面，${me.name} 看到了刚才两位女性的背影。`);
       era.printButton(`「是刚才的粉丝吗？」`, 1);
       await era.input();
-      await vp.say_and_wait(`是的……听说${vp.sex}们一直在看我的比赛。`);
+      await vp.say_and_wait(`是的……听说${vp.couple_title}一直在看我的比赛。`);
       await vp.say_and_wait(`好开心。`);
       await era.printAndWait(`${vp.name} 害羞地说。`);
       await era.printAndWait(
@@ -368,7 +368,7 @@ module.exports = async (vp, me, event_object) => {
         `从凯旋门赏这个拥有世界最高峰之称的比赛诞生之日开始。`,
       );
       await era.printAndWait(
-        `从接触到带着『我们』没有的可能性出生的『${vp.sex}们』的那天开始。`,
+        `从接触到带着『我们』没有的可能性出生的『${vp.couple_title}』的那天开始。`,
       );
       await era.printAndWait(`作为一个人，${me.name} 是愿意的。`);
       era.printButton(`「${vp.name}，把我的灵魂烧焦吧。」（爱慕+5）`, 1);
@@ -551,7 +551,7 @@ module.exports = async (vp, me, event_object) => {
         await era.input();
         await vp.say_and_wait(`……也许是这样啊。`);
         await vp.say_and_wait(
-          `如果你也是训练员的话应该知道，在${vp.sex}们看来，这也像凯旋门一样。`,
+          `如果你也是训练员的话应该知道，在${vp.couple_title}看来，这也像凯旋门一样。`,
         );
         era.printButton(`「那不是说得太过分了吗？」`, 1);
         await era.input();
@@ -559,7 +559,7 @@ module.exports = async (vp, me, event_object) => {
         await era.printAndWait(`${vp.name} 的话，不知什么时候分量增加了。`);
         await era.printAndWait(`几年前的 ${me.name} 没有资格说${vp.sex}。`);
         await vp.say_and_wait(
-          `对${vp.sex}们来说是大舞台，为此而调整，来到这里。赌上自己的灵魂。所以——`,
+          `对${vp.couple_title}来说是大舞台，为此而调整，来到这里。赌上自己的灵魂。所以——`,
         );
         await me.say_and_wait('冲线了。', true);
         era.printButton(`「……是吗？」`, 1);

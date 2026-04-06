@@ -92,7 +92,7 @@ module.exports = {
     part_enum.clitoris,
     part_enum.virgin,
     part_enum.anal,
-    '72',
-    '70',
+    item_enum.collar.toString(),
+    item_enum.blindfold.toString(),
   ],
 };

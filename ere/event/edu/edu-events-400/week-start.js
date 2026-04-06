@@ -228,7 +228,7 @@ module.exports = (handlers) => {
     await ss.say_and_wait(
       '不是这个啦，我是问你，觉得我现在的状态怎么样，与到时候要同期竞争三冠的对手比起来。',
     );
-    era.printButton(`「我觉得你比${ss.sex}们强」`, 1);
+    era.printButton(`「我觉得你比${ss.couple_title}强」`, 1);
     era.printButton('「我觉得你还需要继续训练」', 2);
     await era.input();
     await ss.say_and_wait(['不管怎么样，', callname, '，我会一直相信你的。']);

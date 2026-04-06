@@ -485,7 +485,7 @@ module.exports = class extends Edu67UntilOutStart {
         '亮相圈里的观众全都在热烈讨论着里见光钻和北部玄驹的事情。',
       );
       await era.printAndWait(
-        `观众A「北部玄驹对里见光钻……没想到还能再看到这个组合的对决！希望${daiya.sex}们都能好好加油呢！」`,
+        `观众A「北部玄驹对里见光钻……没想到还能再看到这个组合的对决！希望${daiya.couple_title}都能好好加油呢！」`,
       );
       await era.printAndWait(
         `观众B「北部玄驹在去年『大阪杯』很可惜地拿到了第二名，这次${daiya.sex}应该很想赢吧。」`,
@@ -547,7 +547,7 @@ module.exports = class extends Edu67UntilOutStart {
         `观众C「起初没什么知名度，却让观众渐渐对${daiya.sex}的努力和韧性产生共鸣，渐渐崭露头角的北部玄驹……」`,
       );
       await era.printAndWait(
-        `观众A「而且${daiya.sex}们还是从小玩到大的好朋友。有一种命运的对决的感觉！」`,
+        `观众A「而且${daiya.couple_title}还是从小玩到大的好朋友。有一种命运的对决的感觉！」`,
       );
       await era.printAndWait(
         `观众C「但今天应该也是北部玄驹比较占优势吧。毕竟去年赢的人也是${daiya.sex}。」`,

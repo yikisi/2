@@ -640,8 +640,8 @@ module.exports = class extends CustomizedEdu {
       await print_event_name('夏季合宿', kita);
       await era.printAndWait(
         `对于年轻的小赛${kita.uma_sex_title}们来说，中央学园每年八月的夏季合宿，是${
-          kita.sex
-        }们仅次于几次假期最为期待的日子。`,
+          kita.couple_title
+        }仅次于几次假期最为期待的日子。`,
       );
       await era.printAndWait(
         `毕竟谈到特雷森的合宿，便是阳光，沙滩，南国舒适的温度和带有咸味的海风。`,

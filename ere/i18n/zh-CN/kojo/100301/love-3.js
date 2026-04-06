@@ -28,7 +28,7 @@ module.exports = {
       ]);
       await teio.say_and_wait('呜——是怎样啦！');
       await teio.print_and_wait(
-        `问好友，${teio.sex}们要么红着脸躲开，打着哈哈岔开话题，要么笑来笑去就没有正经解释，还有人半开玩笑半认真地问${teio.sex}是不是喜欢上了自己的训练员，可恶，这种事情……`,
+        `问好友，${teio.couple_title}要么红着脸躲开，打着哈哈岔开话题，要么笑来笑去就没有正经解释，还有人半开玩笑半认真地问${teio.sex}是不是喜欢上了自己的训练员，可恶，这种事情……`,
       );
       await teio.print_and_wait('这种事情总不能去问训练员吧啊啊！！');
       await era.printAndWait(

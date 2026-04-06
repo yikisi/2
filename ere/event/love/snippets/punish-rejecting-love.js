@@ -7,6 +7,7 @@ const { get_random_value } = require('#/utils/value-utils');
 
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 
+/** @param {number} cid */
 async function punish_rejecting_love(cid) {
   era.println();
   if (
@@ -23,7 +24,7 @@ async function punish_rejecting_love(cid) {
     get_random_value(1000, 2500 - 1000 * era.get(`talent:${cid}:病娇`)),
   );
   const my_marks = new MyEduMarks();
-  (my_marks.pity || (my_marks.pity = [])).push(cid);
+  (my_marks.pity ||= []).push(cid);
 }
 
 module.exports = punish_rejecting_love;

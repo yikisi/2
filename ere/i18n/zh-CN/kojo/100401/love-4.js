@@ -260,13 +260,13 @@ module.exports = {
     ]);
   },
   /**
+   * 丸善斯基在水池约了训练员
    * @param {CharaTalk} maru 丸善斯基
    * @param {CharaTalk} you 玩家
    * @param {string} callname 丸善斯基对玩家的称呼
    * @param {string} y_call_m 玩家对丸善斯基的称呼
    */
   async '74-2'(maru, you, callname, y_call_m) {
-    //丸善斯基在水池约了训练员
     await you.say_and_wait('水还很冷');
     await era.printAndWait([
       you.get_colored_name(),

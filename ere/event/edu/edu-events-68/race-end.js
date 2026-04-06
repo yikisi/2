@@ -542,7 +542,7 @@ module.exports = async (kita, me, hook, extra_flag) => {
       `不，摸了一下没感觉啊，只有黏糊糊的汗液的感觉……难道是跑的脸红脖子粗露出了不像样的表情么？`,
     );
     await kita.print_and_wait(
-      `呜哇啊，不要啊……我还是想要像光钻${kita.sex}们一样像个闪亮亮的${
+      `呜哇啊，不要啊……我还是想要像光钻${kita.couple_title}一样像个闪亮亮的${
         kita.sex_code - 1 ? '大小姐' : '明星'
       }一点的，这下丢大人了……`,
     );

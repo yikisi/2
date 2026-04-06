@@ -222,8 +222,8 @@ module.exports = class extends CustomizedDaily {
       `诶？你问我为什么对${digital.uma_sex_title}酱相关的知识这么熟悉？作为粉丝，这不是当然的吗！`,
       `事实上，为了进入特雷森学园，我当时在很多方面都很努力，所以……的确在学习上没什么大问题，有点自吹自擂了。`,
       `我在想，有些${digital.uma_sex_title}酱不是因为学习不好被拉去补课吗？到底要怎么才能帮到${
-        digital.sex
-      }们啊……`,
+        digital.couple_title
+      }啊……`,
     ];
     await digital.say_and_wait(get_random_entry(buffer));
   }

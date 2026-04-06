@@ -411,8 +411,8 @@ module.exports = class extends CustomizedEdu {
         `优秀素质拥有坚定的忠实粉丝，也在『菊花赏』确实发挥出实力，现在的${
           nature.sex
         }一定能够挑战『有马纪念』！不仅如此，『有马纪念』的参赛者都是今年倍受瞩目的各位赛${nature.uma_sex_title}。跟${
-          nature.sex
-        }们一起比赛一定能带来更多成长。`,
+          nature.couple_title
+        }一起比赛一定能带来更多成长。`,
       );
       await nature.say_and_wait('『有马纪念』吗……');
       await nature.say_and_wait(
@@ -581,7 +581,7 @@ module.exports = class extends CustomizedEdu {
       await nature.say_and_wait('别这么说，我才要……谢谢你们！');
       era.drawLine();
       await nature.say_and_wait(
-        `那两位直到最后都这么爽朗呢。${mcqueen_talk.sex}们已经看向前方了。`,
+        `那两位直到最后都这么爽朗呢。${mcqueen_talk.couple_title}已经看向前方了。`,
       );
       await nature.say_and_wait(
         '就算跑输，仍立刻将目光朝向未来。已经伸手朝向下个阶段，想着下次绝对要赢。',

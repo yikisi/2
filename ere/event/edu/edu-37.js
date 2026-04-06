@@ -727,7 +727,7 @@ module.exports = class extends CustomizedEdu {
         '我想以自己的巅峰状态，去挑战比我更富有经验的前辈。',
       );
       await flash.say_and_wait(
-        `我想尝试，赢下日本德比的自己，是否能够战胜${flash.sex}们。`,
+        `我想尝试，赢下日本德比的自己，是否能够战胜${flash.couple_title}。`,
       );
       era.printButton('「如果是你的话一定可以做到。」', 1);
       await era.input();
@@ -800,8 +800,8 @@ module.exports = class extends CustomizedEdu {
       await era.input();
       await era.printAndWait(
         `所谓训练员，就是帮助${flash.uma_sex_title}，引导${flash.uma_sex_title}，管理${flash.uma_sex_title}，最终令${
-          flash.sex
-        }们得到一个圆满结局的存在。因此，${your_name} 觉得 ${your_name} 的说法并无不妥。`,
+          flash.couple_title
+        }得到一个圆满结局的存在。因此，${your_name} 觉得 ${your_name} 的说法并无不妥。`,
       );
       await flash.say_and_wait('………');
       await era.printAndWait(

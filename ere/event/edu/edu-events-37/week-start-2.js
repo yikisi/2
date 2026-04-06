@@ -182,7 +182,7 @@ module.exports = (handlers) => {
     );
     await say_by_passer_by_and_wait(
       `主持人`,
-      `这场会议中，${flash.sex}们都明确表示——将陆续参加今年一整年的G1比赛！！！`,
+      `这场会议中，${flash.couple_title}都明确表示——将陆续参加今年一整年的G1比赛！！！`,
     );
     await say_by_passer_by_and_wait(
       '主持人',
@@ -226,7 +226,7 @@ module.exports = (handlers) => {
       `${your_name} 开口，为${flash.sex}简单解释起自己的看法。`,
     );
     await flash.say_and_wait(
-      `原来如此，这么说富士奇石同学的本意是为了让后辈在挑战${flash.sex}们的路上得到成长啊。`,
+      `原来如此，这么说富士奇石同学的本意是为了让后辈在挑战${flash.couple_title}的路上得到成长啊。`,
     );
     await era.printAndWait('荣进闪耀点了点头，露出了然的神色。');
     era.printButton('「就以日本杯和有马纪念时的态度面对吧。」', 1);
@@ -397,11 +397,11 @@ module.exports = (handlers) => {
     );
     await say_by_passer_by_and_wait(
       `主持人`,
-      `接下来让我们把目光转向G区的挑战者，${flash.sex}们分别是荣进闪耀、中山庆典以及黄金船。`,
+      `接下来让我们把目光转向G区的挑战者，${flash.couple_title}分别是荣进闪耀、中山庆典以及黄金船。`,
     );
     await say_by_passer_by_and_wait(
       `主持人`,
-      `${flash.sex}们要挑战的比赛是——粉丝搬运竞跑！`,
+      `${flash.couple_title}要挑战的比赛是——粉丝搬运竞跑！`,
     );
     await say_by_passer_by_and_wait(
       `主持人`,
@@ -436,7 +436,9 @@ module.exports = (handlers) => {
       '诶诶，哇……居然单手就把我抬起来了……好厉害！',
     );
     await flash.say_and_wait('唔……');
-    await era.printAndWait(`与${flash.sex}们相比，荣进闪耀就显得仔细许多。`);
+    await era.printAndWait(
+      `与${flash.couple_title}相比，荣进闪耀就显得仔细许多。`,
+    );
     await era.printAndWait(`${flash.sex}在喧闹的人群中观察片刻。`);
     await flash.say_and_wait('那个……能请你来协助我一臂之力吗？');
     await era.printAndWait(

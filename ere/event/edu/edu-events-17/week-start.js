@@ -358,7 +358,7 @@ module.exports = class extends Edu17UntilRaceStart {
         ' 无法说什么漂亮话。',
       ]);
       await era.printAndWait(
-        `${me.name} 知道，很多赛马娘听到露娜将会参赛时，${luna_talk.sex}们的第一反应就是选择退赛。`,
+        `${me.name} 知道，很多赛马娘听到露娜将会参赛时，${luna_talk.couple_title}的第一反应就是选择退赛。`,
       );
       era.printButton('「能直面现实和困境的，才是真正的勇者。」', 1);
       era.printButton('「或许我们应该给她们更多的帮助。」', 2);

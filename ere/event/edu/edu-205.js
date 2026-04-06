@@ -438,7 +438,7 @@ module.exports = class extends CustomizedEdu {
         `第二次凯旋门赏。复杂的坡度和深沉的草坪，2400米的舞台。`,
       );
       await era.printAndWait(
-        `伴随着轰鸣声奔跑的${vp.sex}们和观众的热烈声援，其中也包含了不少对现在开始背负法国这个国家本身的 ${vp.name} 的期待。`,
+        `伴随着轰鸣声奔跑的${vp.couple_title}和观众的热烈声援，其中也包含了不少对现在开始背负法国这个国家本身的 ${vp.name} 的期待。`,
       );
       await era.printAndWait(
         `今年以来没有赢过，也有很多人察觉到${vp.sex}的衰落。`,
@@ -448,7 +448,7 @@ module.exports = class extends CustomizedEdu {
       );
       await era.printAndWait(`${vp.name} 踏上了这个世界上最长的两分半路程。`);
       await era.printAndWait(
-        `看着穿过布洛涅森林的${vp.sex}们，抱起胳膊。${montjeu.name} 挺直腰板注视。`,
+        `看着穿过布洛涅森林的${vp.couple_title}，抱起胳膊。${montjeu.name} 挺直腰板注视。`,
       );
       await montjeu.say_and_wait(
         `……我知道战略已经破裂了。即便如此，如果不采取先行对策，属于${vp.sex}的胜负就无法开始。`,

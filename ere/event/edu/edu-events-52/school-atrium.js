@@ -530,8 +530,8 @@ module.exports = (handlers) => {
       urara.sex,
       '们缓解情绪，有什么好办法吗……',
     ]);
-    era.printButton(`帮${urara.sex}们拿些点心。（力量+20）`, 1);
-    era.printButton(`带${urara.sex}们一起去玩。（耐力+20）`, 2);
+    era.printButton(`帮${urara.couple_title}拿些点心。（力量+20）`, 1);
+    era.printButton(`带${urara.couple_title}一起去玩。（耐力+20）`, 2);
     const attr_change = new Array(5).fill(0);
     if ((await era.input()) === 1) {
       attr_change[attr_enum.strength] = 20;

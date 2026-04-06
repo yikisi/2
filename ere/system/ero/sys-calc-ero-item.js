@@ -40,7 +40,7 @@ function remove_item(cid, p_or_i) {
     }
   } else if (era.get(`tequip:${cid}:${equip_part}`) !== -1) {
     era.set(`tequip:${cid}:${equip_part}`, -1);
-    if (cid) {
+    if (cid > 0) {
       era.add(`item:${equip_part}`, 1);
     }
   }
@@ -77,16 +77,7 @@ module.exports = {
   },
   /** @param {number} ids */
   remove_all_items(...ids) {
-    ids.forEach((cid) => {
-      remove_item(cid, part_enum.mouth);
-      remove_item(cid, part_enum.breast);
-      remove_item(cid, part_enum.penis);
-      remove_item(cid, part_enum.clitoris);
-      remove_item(cid, part_enum.virgin);
-      remove_item(cid, part_enum.anal);
-      remove_item(cid, '项圈');
-      remove_item(cid, '眼罩');
-    });
+    ids.forEach((cid) => tequip_parts.forEach((p) => remove_item(cid, p)));
   },
   remove_item,
   /**

@@ -1025,7 +1025,7 @@ module.exports = {
           `早上被迫双腿岔开蹲坐，张口为没睡醒的${father.uma_sex_title}处理晨勃，将${father.uma_sex_title}一天的初精和初尿一同吞入腹中的经验`,
         );
         await printAndWait(
-          `傍晚，在训练场上就被训练结束的${father.uma_sex_title}们恳求处理性欲，将那充满了一整天未能清理的汗臭和尿垢的肉棒含在口中，让${father.sex}们将训练的辛劳全数发泄在自己嘴里`,
+          `傍晚，在训练场上就被训练结束的${father.uma_sex_title}们恳求处理性欲，将那充满了一整天未能清理的汗臭和尿垢的肉棒含在口中，让${father.couple_title}将训练的辛劳全数发泄在自己嘴里`,
         );
         if (children_count > 0 || edu_count > 0) {
           await printAndWait([

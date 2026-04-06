@@ -145,7 +145,7 @@ module.exports = async function (
     await era.input();
     await era.printAndWait(`见此，${your_name} 微笑着说道。`);
     await flash.say_and_wait(
-      `嗯……不过也不只是我，其他的参赛选手，论坛里的网友对于${flash.sex}们也有着各种各样的支持理由。`,
+      `嗯……不过也不只是我，其他的参赛选手，论坛里的网友对于${flash.couple_title}也有着各种各样的支持理由。`,
     );
     await flash.say_and_wait(
       '可以理解呢。毕竟日本德比，无论对谁而言，都是特别的比赛吧？',
@@ -244,7 +244,7 @@ module.exports = async function (
         `赛后，选手休息室内，刚从赛场上归来的荣进闪耀对 ${your_name} 露出有些疲惫的微笑。`,
       );
       await flash.say_and_wait(
-        `特别周同学和荒漠英雄同学的实力，真的很强。我竭尽了全力才勉强超越了${flash.sex}们。`,
+        `特别周同学和荒漠英雄同学的实力，真的很强。我竭尽了全力才勉强超越了${flash.couple_title}。`,
       );
       era.printButton('「很精彩的比赛。」', 1);
       await era.input();
@@ -279,7 +279,7 @@ module.exports = async function (
       era.printButton('「很精彩的比赛。」', 1);
       await era.input();
       await flash.say_and_wait(
-        `是的，也算是切实体验到与${flash.sex}们之间的差距了。`,
+        `是的，也算是切实体验到与${flash.couple_title}之间的差距了。`,
       );
       await era.printAndWait(
         '荣进闪耀点了点头，言语之间倒是没有太重的失落情绪。',
@@ -290,7 +290,7 @@ module.exports = async function (
     }
     await era.printAndWait(`紧接着，${flash.sex}的脸上浮现出若有所思地表情。`);
     await flash.say_and_wait(
-      `一直这样进步下去的话。终有一天，肯定是可以正面战胜${flash.sex}们，实现一马当先的吧。`,
+      `一直这样进步下去的话。终有一天，肯定是可以正面战胜${flash.couple_title}，实现一马当先的吧。`,
     );
     era.printButton('「就用下一场比赛，来印证这一场比赛得到的成果吧。」', 1);
     await era.input();
@@ -306,8 +306,8 @@ module.exports = async function (
     await say_by_passer_by_and_wait(
       `观众A`,
       `光是能看到那些很早之前就不再参赛的赛${flash.uma_sex_title}们久违的再度登场这一点就很令人兴奋了，结果没想到${
-        flash.sex
-      }们居然还能跑出这么惊人的成绩。`,
+        flash.couple_title
+      }居然还能跑出这么惊人的成绩。`,
     );
     if (extra_flag.rank === 1) {
       await say_by_passer_by_and_wait(
@@ -347,7 +347,7 @@ module.exports = async function (
     } else {
       await say_by_passer_by_and_wait(
         `观众B`,
-        `跟后辈们拉开了一道非常明显的差距啊。难以想象，如果明年${flash.sex}们还接着参赛，经典级的孩子们应该怎么面对。`,
+        `跟后辈们拉开了一道非常明显的差距啊。难以想象，如果明年${flash.couple_title}还接着参赛，经典级的孩子们应该怎么面对。`,
       );
       await say_by_passer_by_and_wait(
         `观众A`,

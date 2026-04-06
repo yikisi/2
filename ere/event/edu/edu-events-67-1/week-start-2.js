@@ -170,7 +170,7 @@ module.exports = (handlers) => {
       `今天是春季的粉丝大感谢祭。赛${daiya.uma_sex_title}们跟现场众多的粉丝进行各种互动。`,
     );
     await era.printAndWait(
-      `里见光钻也被女性粉丝围绕，${daiya.sex}们正在聊天。`,
+      `里见光钻也被女性粉丝围绕，${daiya.couple_title}正在聊天。`,
     );
     await era.printAndWait('光钻的粉丝A「我真的非常喜欢光钻跑步的样子！！」');
     await era.printAndWait(
@@ -217,16 +217,18 @@ module.exports = (handlers) => {
     era.printButton('「我想说打扰你们也不好嘛」', 1);
     await era.input();
     await era.printAndWait(
-      `${me.name} 向她表明因为看${daiya.sex}和粉丝们互动得很愉快，所以不好意思打扰。`,
+      `${me.name} 向${daiya.sex}表明因为看${daiya.sex}和粉丝们互动得很愉快，所以不好意思打扰。`,
     );
     await daiya.say_and_wait('我也是不小心就太兴奋了……真不好意思……');
-    await era.printAndWait(
-      `担任播报的赛${daiya.uma_sex_title}「大会报告。请『无情大翻牌游戏』的参赛选手前往准备区集合。」`,
+    await me.say_as_passer_by_and_wait(
+      `担任播报的赛${daiya.uma_sex_title}`,
+      '大会报告。请『无情大翻牌游戏』的参赛选手前往准备区集合。',
     );
     await daiya.say_and_wait('啊，要集合了。那我先过去了！');
     era.drawLine();
-    await era.printAndWait(
-      `担任播报的赛${daiya.uma_sex_title}「──接下来是考验智谋和体力的『无情大翻牌游戏』！欢迎六位参赛选手入场！」`,
+    await me.say_as_passer_by_and_wait(
+      `担任播报的赛${daiya.uma_sex_title}`,
+      '──接下来是考验智谋和体力的『无情大翻牌游戏』！欢迎六位参赛选手入场！',
     );
     await condor_pasa.say_and_wait(
       '直觉、计谋、热血！赢家的宝座是神鹰我的啦────！！',

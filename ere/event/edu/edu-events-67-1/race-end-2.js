@@ -60,14 +60,16 @@ module.exports = (handlers) => {
       '你这是用什么身份的角度在说的啊……不过，我也是这么想的。',
     );
     await teio.say_and_wait(
-      `看着${daiya.sex}们比赛的样子，让我忍不住想起我跟你对决的时候。`,
+      `看着${daiya.couple_title}比赛的样子，让我忍不住想起我跟你对决的时候。`,
     );
     await mcqueen.say_and_wait([
       '你是在说 ',
       race_infos[race_enum.tenn_spr].get_colored_name(),
       ' 吧。',
     ]);
-    await mcqueen.say_and_wait(`说不定……${daiya.sex}们的下一场比赛也会是呢。`);
+    await mcqueen.say_and_wait(
+      `说不定……${daiya.couple_title}的下一场比赛也会是呢。`,
+    );
     await teio.say_and_wait('说不定喔～是说，麦昆。');
     await teio.say_and_wait('我现在觉得超～～～～想要跑步的！');
     await mcqueen.say_and_wait('哎呀，还真巧呢。我也是这么想的。');
@@ -212,7 +214,9 @@ module.exports = (handlers) => {
       '穿着帽T的男性',
       '呜呜……两个人都……！都表现得很好……！！',
     );
-    await teio.say_and_wait(`哈……啊哈哈！${daiya.sex}们两个都很厉害嘛！`);
+    await teio.say_and_wait(
+      `哈……啊哈哈！${daiya.couple_title}两个都很厉害嘛！`,
+    );
     await teio.say_and_wait('……欸，麦昆。');
     await mcqueen.say_and_wait('嗯，我们走吧。');
     if (extra_flag.rank === 1) {
@@ -292,7 +296,7 @@ module.exports = (handlers) => {
     await daiya.say_and_wait('好开心……没想到竟然会有这一天……');
     await era.printAndWait('里见光钻感动得湿了眼眶。北部玄驹也一样。');
     await era.printAndWait(
-      `毕竟${daiya.sex}们各自都是因为崇拜目白麦昆和东海帝王才进入特雷森学园的，反应会这么大也是理所当然的。`,
+      `毕竟${daiya.couple_title}各自都是因为崇拜目白麦昆和东海帝王才进入特雷森学园的，反应会这么大也是理所当然的。`,
     );
     await kita.say_and_wait([
       race_infos[race_enum.tenn_sho].get_colored_name(),
@@ -346,8 +350,8 @@ module.exports = (handlers) => {
     );
     await daiya.say_and_wait(
       `我打算从${
-        teio.sex
-      }们两位身上学习『知名赛${daiya.uma_sex_title}』该有的姿态。`,
+        teio.couple_title
+      }两位身上学习『知名赛${daiya.uma_sex_title}』该有的姿态。`,
     );
     await daiya.say_and_wait(
       `尤其是麦昆，${mcqueen.sex}背负着目白家的责任，感觉处境和我很接近。`,

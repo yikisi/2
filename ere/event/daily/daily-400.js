@@ -401,7 +401,7 @@ module.exports = class extends CustomizedDaily {
         ]);
       } else {
         await silence.say_and_wait(
-          `你说要是三女神真的会在这里听这些东西的话，${silence.sex}们会不会觉得烦恼呢？`,
+          `你说要是三女神真的会在这里听这些东西的话，${silence.couple_title}会不会觉得烦恼呢？`,
         );
         await era.printAndWait([
           silence.get_colored_name(),

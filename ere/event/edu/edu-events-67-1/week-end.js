@@ -193,11 +193,11 @@ module.exports = async (daiya, me, hook, event_object) => {
       '观众B「超越『帝王』吧！我们的北部一定能做到的！！」',
     );
     await era.printAndWait(
-      `观众C「让${daiya.sex}们见识『帝王』的威严吧！东海帝王！！」`,
+      `观众C「让${daiya.couple_title}见识『帝王』的威严吧！东海帝王！！」`,
     );
     await daiya.say_and_wait('……两边的声援声势也算是旗鼓相当吧……');
     await era.printAndWait(
-      `${daiya.sex}们本就是拥有大量热情粉丝的两人。这次的「日本杯』也比往年更加热闹。`,
+      `${daiya.couple_title}本就是拥有大量热情粉丝的两人。这次的「日本杯』也比往年更加热闹。`,
     );
     await daiya.say_and_wait('小北……加油──！');
     await era.printAndWait(
@@ -216,7 +216,7 @@ module.exports = async (daiya, me, hook, event_object) => {
     );
     await era.printAndWait('东海帝王和北部玄驹之间，展开了非常激烈的攻防战。');
     await daiya.say_and_wait(
-      `小北和帝王，${kita.sex}们明明都是参加过『日本杯』拥有经历优势的……`,
+      `小北和帝王，${kita.couple_title}明明都是参加过『日本杯』拥有经历优势的……`,
     );
     await daiya.say_and_wait(
       '却没有局限于专注自己的跑法，反而是积极展开攻势……！',

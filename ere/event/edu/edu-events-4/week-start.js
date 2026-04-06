@@ -702,8 +702,8 @@ module.exports = async function (maru, me, callname, hook, ebj) {
     await era.printAndWait(`不禁对之后的行程感到绝望。`);
     await maru.say_and_wait(
       `——说起来，小特${
-        maru.sex
-      }们成长的比预想之中还要迅速呢，看到后辈们这么努力的样子，连${maru.get_bigger_sibling_sex_title()}我也有些兴奋起来了呢。`,
+        maru.couple_title
+      }成长的比预想之中还要迅速呢，看到后辈们这么努力的样子，连${maru.get_bigger_sibling_sex_title()}我也有些兴奋起来了呢。`,
     );
     await era.printAndWait(
       `想着一定要找个借口抱着${maru.uma_sex_title}取暖，缩着身体忍受着寒冷。`,
@@ -908,7 +908,7 @@ module.exports = async function (maru, me, callname, hook, ebj) {
     await me.say_and_wait(`非常抱歉。`, true);
 
     await era.printAndWait(`${maru.name}只是静静的仰望着天空。`);
-    era.printButton(`……不去找小特${maru.sex}们一起去玩吗?`, 1);
+    era.printButton(`……不去找小特${maru.couple_title}一起去玩吗?`, 1);
     era.printButton(`「可以告诉我${me.name}的想法吗？」`, 1, {
       disabled: true,
     });
@@ -923,15 +923,15 @@ module.exports = async function (maru, me, callname, hook, ebj) {
     );
     await maru.say_and_wait(
       `去年还和小特${
-        maru.sex
-      }们一起开新年派对的,不过今年说着什么快去陪自己的训练员然后就把我推出来了`,
+        maru.couple_title
+      }一起开新年派对的,不过今年说着什么快去陪自己的训练员然后就把我推出来了`,
     );
-    era.printButton(`小特${maru.sex}们其实很关心${me.name}呢`, 1);
+    era.printButton(`小特${maru.couple_title}其实很关心${me.name}呢`, 1);
     await era.input();
     await era.printAndWait(`从${maru.name}身上飘来了芬芳馥郁的气味，`);
     await me.say_and_wait(`是洗发水的味道吗？为什么今天这么香呢`, true);
     await maru.say_and_wait(
-      `${callname}也是这么想的吗?${maru.sex}们可是充满着希望的幼苗呢`,
+      `${callname}也是这么想的吗?${maru.couple_title}可是充满着希望的幼苗呢`,
     );
     await maru.say_and_wait(`总有一天会冲破风与雨的束缚,成为参天大树`);
     await era.printAndWait(
@@ -947,7 +947,7 @@ module.exports = async function (maru, me, callname, hook, ebj) {
       `如果能化为天空中吹拂的风,我也许能在后辈们苦恼的时候`,
     );
     await maru.say_and_wait(
-      `就差一点就能成功的时候，在叹息的时候给予${maru.sex}们鼓励了`,
+      `就差一点就能成功的时候，在叹息的时候给予${maru.couple_title}鼓励了`,
     );
     await me.say_and_wait(`${maru.name}现在已经做的很好了。`);
     await me.say_and_wait(`现在就尽情享受新年的快乐吧`);
@@ -1119,8 +1119,8 @@ module.exports = async function (maru, me, callname, hook, ebj) {
     await me.say_and_wait(`所以，${maru.name}一直都在默默努力着啊。`);
     await maru.say_and_wait(
       `当然，像这样带着稚嫩的后辈们慢慢前进，等待${
-        maru.sex
-      }们开花结果的时刻到来。`,
+        maru.couple_title
+      }开花结果的时刻到来。`,
     );
     await maru.say_and_wait(`一切的辛苦都将会得到应分的回报。`);
     await era.printAndWait(
@@ -2079,13 +2079,13 @@ module.exports = async function (maru, me, callname, hook, ebj) {
       );
       await me.say_and_wait(
         `我虽然没有这种被后辈们寄托了大量希望与期待的经历，但我也知道，${maru.name}是出于爱而帮助的${
-          maru.sex
-        }们。`,
+          maru.couple_title
+        }。`,
       );
       await me.say_and_wait(
         `就是这个宁可粉身碎骨、万劫不复也要帮助${
-          maru.sex
-        }们的这个名叫爱的东西！`,
+          maru.couple_title
+        }的这个名叫爱的东西！`,
       );
       await me.say_and_wait(`所以，我不会阻止${maru.name}践行自己的道路。`);
       await era.printAndWait(
@@ -2393,7 +2393,7 @@ module.exports = async function (maru, me, callname, hook, ebj) {
     era.printButton(`「那我就心怀感激的收下了,谢谢${me.name}${maru.name}」`, 1);
     await era.input();
     await maru.say_and_wait(
-      `啊，对了!我听小特${maru.sex}们说百货大楼有家店铺情人节的时候如果双方是情侣的话拍照打卡可以打六折呢.`,
+      `啊，对了!我听小特${maru.couple_title}说百货大楼有家店铺情人节的时候如果双方是情侣的话拍照打卡可以打六折呢.`,
     );
     await era.printAndWait(`${callname}有兴趣吗?`);
     era.printButton(`「没问题」`, 1);
@@ -2405,7 +2405,7 @@ module.exports = async function (maru, me, callname, hook, ebj) {
       `可能是什么本周的打卡圣地吧,门口排起了长队,看这样子似乎都是情侣.`,
     );
     await maru.say_and_wait(
-      `好多人啊,小特${maru.sex}们果然没有说错呢,应该就是这家了`,
+      `好多人啊,小特${maru.couple_title}果然没有说错呢,应该就是这家了`,
     );
     await era.printAndWait(`那么我们也去排队吧.`);
     await era.printAndWait(
@@ -2540,7 +2540,7 @@ module.exports = async function (maru, me, callname, hook, ebj) {
       `后辈们看上去都活力四射的样子呢,${callname}也是这么想的吗?`,
     );
     era.printButton(
-      `「${maru.sex}们都是因为憧憬着${maru.name},希望能超越${
+      `「${maru.couple_title}都是因为憧憬着${maru.name},希望能超越${
         maru.sex
       }的背影所以才拼命努力的」`,
       1,
@@ -3163,8 +3163,8 @@ module.exports = async function (maru, me, callname, hook, ebj) {
     );
     await maru.say_and_wait(
       `接下来的日子里，在草场的一端默默地注视着赛${maru.uma_sex_title}们，然后引导${
-        maru.sex
-      }们前往伊甸园便是我新的使命了。`,
+        maru.couple_title
+      }前往伊甸园便是我新的使命了。`,
     );
     await maru.say_and_wait(
       `不过此刻的话，能和${

@@ -1893,9 +1893,11 @@ module.exports = async function (maru, me, hook, ebj) {
     maru.print(
       `呼喊着，祈祷着有人能帮助${maru.sex_code - 1 ? '她' : '他'}们。`,
     );
-    maru.print(`然而，唯一的解决方法却只有${maru.sex}们自己领悟到才能挣脱。`);
     maru.print(
-      `祈祷着，祈祷着${maru.sex}们能原谅着缺乏才能的自己，卸下那份沉重的负担（日夜诅咒着无能的自己）。`,
+      `然而，唯一的解决方法却只有${maru.couple_title}自己领悟到才能挣脱。`,
+    );
+    maru.print(
+      `祈祷着，祈祷着${maru.couple_title}能原谅着缺乏才能的自己，卸下那份沉重的负担（日夜诅咒着无能的自己）。`,
     );
     maru.print(`于是，难以言及的悲伤变成了悲伤的黑白二色。`);
     maru.print(`在我的世界里默默矗立着，像一座缄默的城墙，灰色的幽灵。`);

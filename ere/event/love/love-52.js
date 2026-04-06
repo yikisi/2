@@ -14,7 +14,7 @@ const {
 } = require('#/system/sys-calc-chara-others');
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
-const Love52AfterWife = require('#/event/love/love-events-52/after-wife');
+const CustomizedLove = require('#/event/love/love-common');
 const punish_rejecting_love = require('#/event/love/snippets/punish-rejecting-love');
 const { add_event } = require('#/event/queue');
 const masturbate = require('#/event/snippets/masturbate');
@@ -34,7 +34,7 @@ const { max_chara_id } = require('#/data/other-const');
 
 const { i18n } = require('#/i18n/selector');
 
-module.exports = class extends Love52AfterWife {
+module.exports = class extends CustomizedLove {
   get #kojo() {
     return i18n().kojo[this.id].love;
   }

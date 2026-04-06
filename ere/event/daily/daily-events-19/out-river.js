@@ -93,7 +93,7 @@ module.exports = async (hook) => {
         `在钓鱼时的其他${digital.uma_sex_title}到底是怎么想的呢……`,
       );
       await me.say_and_wait(
-        `${digital.sex}们更多的只是享受钓鱼这种活动吧，你看一下附近？`,
+        `${digital.couple_title}更多的只是享受钓鱼这种活动吧，你看一下附近？`,
       );
       await digital.say_and_wait('诶？');
       await era.printAndWait([

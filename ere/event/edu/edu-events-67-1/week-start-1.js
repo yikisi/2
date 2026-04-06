@@ -239,10 +239,10 @@ module.exports = (handlers) => {
       `我会跑赢『经典三冠』！身为里见家的赛${daiya.uma_sex_title}，我发誓会带给大家非常耀眼的表现！`,
     );
     await era.printAndWait(
-      `虽然${daiya.sex}们的目标赛事不同，但彼此眼神中的光芒却是一样的──`,
+      `虽然${daiya.couple_title}的目标赛事不同，但彼此眼神中的光芒却是一样的──`,
     );
     await era.printAndWait(
-      `在走到分岔路前都要并肩前进的态度，让 ${me.name} 深刻感受到${daiya.sex}们从小到大的好交情。`,
+      `在走到分岔路前都要并肩前进的态度，让 ${me.name} 深刻感受到${daiya.couple_title}从小到大的好交情。`,
     );
     await kita.say_and_wait(
       '嘿嘿！我现在也慢慢地越来越受到瞩目了喔！所以我要为了得到更多人支持，更努力表现！',
@@ -273,7 +273,7 @@ module.exports = (handlers) => {
     await daiya.say_and_wait('对战的内容就由训练员来决定好了！');
     await kita.say_and_wait('麻烦了！请一定要想一个能让我们全力决胜负的事情！');
     await era.printAndWait(
-      `能让${daiya.sex}们两个都拿出全力又符合新年气氛的对决……`,
+      `能让${daiya.couple_title}两个都拿出全力又符合新年气氛的对决……`,
     );
     era.printButton('「当长距离接力赛的啦啦队」', 1);
     era.printButton('「在撒年糕仪式捡年糕」', 2);
@@ -325,7 +325,7 @@ module.exports = (handlers) => {
       era.printButton('「…………唔！…………唔唔！！」', 1);
       await era.input();
       await era.printAndWait(
-        `……看来不用担心${daiya.sex}们会在新年期间变胖，真是太好了。`,
+        `……看来不用担心${daiya.couple_title}会在新年期间变胖，真是太好了。`,
       );
       era.println();
       flags.wait = get_attr_and_print_in_event(67, [0, 20, 0, 0, 0], 0);

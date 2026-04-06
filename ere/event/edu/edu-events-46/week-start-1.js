@@ -815,7 +815,7 @@ module.exports = (handlers) => {
       `就算看不到方向又如何，就算错了又怎么样！就这么带着这个伤口一直向前！就这样在赛场之上舞台中心一直闪耀下去！。`,
     );
     await me.say_and_wait(
-      `让${falcon.sex}们看看作为初代${falcon.uma_sex_title}偶像的${falcon.name}，到底能做到什么地步！`,
+      `让${falcon.couple_title}看看作为初代${falcon.uma_sex_title}偶像的${falcon.name}，到底能做到什么地步！`,
     );
     await era.printAndWait(
       `世界上不存在同时满足正确的方向与正确的目标而造成的成功。`,

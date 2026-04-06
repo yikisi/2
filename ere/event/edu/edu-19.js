@@ -751,7 +751,10 @@ module.exports = class extends CustomizedEdu {
           `「这次，有没有欣赏到${digital.uma_sex_title}啊？」`,
           1,
         );
-        era.printButton(`「下次争取在最前方欣赏${digital.sex}们吧！」`, 2);
+        era.printButton(
+          `「下次争取在最前方欣赏${digital.couple_title}吧！」`,
+          2,
+        );
         if ((await era.input()) === 1) {
           await digital.say_and_wait('诶！对诶！数码，可！');
           await era.printAndWait('这是什么意思？');

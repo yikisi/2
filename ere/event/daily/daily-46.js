@@ -1,6 +1,5 @@
 /**
  * @file 醒目飞鹰 - 日常
- *
  * @author 黑奴一号
  */
 const era = require('#/era-electron');
@@ -13,7 +12,6 @@ const select_action_in_atrium = require('#/event/daily/snippets/select-action-in
 const select_action_in_shopping_street = require('#/event/daily/snippets/select-action-in-shopping-street');
 const select_action_in_station = require('#/event/daily/snippets/select-action-in-station');
 
-const { say_by_passer_by } = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
@@ -42,7 +40,7 @@ module.exports = class extends CustomizedDaily {
         `随着粉丝数的不断增加，飞鹰子成为顶级${falcon.uma_sex_title}偶像的目标也会一口气实现！。`,
       );
       falcon.say(`粉丝一号${me.adult_sex_title}，接下来也请多多指教了⭐`);
-      temp.after_recruit--;
+      temp.after_recruit = 0;
     } else {
       if (era.get('base:46:体力') < era.get('maxbase:46:体力') / 3) {
         buffer.push([
@@ -530,9 +528,9 @@ module.exports = class extends CustomizedDaily {
       await era.printAndWait(
         `说到这里，${falcon.name}大幅度的晃动着手臂，手中的御币在空中划过一条银色之线。`,
       );
-      await say_by_passer_by(
+      await me.say_as_passer_by_and_wait(
         `游客A`,
-        `志愿者小姐，我第一次来，可以给我讲一下这个神社的背景吗？`,
+        `志愿者${falcon.adult_sex_title}，我第一次来，可以给我讲一下这个神社的背景吗？`,
       );
       await falcon.say_and_wait(
         `——就是这样！作为偶像不好好回应粉丝的期待可不行！`,
@@ -543,24 +541,24 @@ module.exports = class extends CustomizedDaily {
       );
       await falcon.say_and_wait(`很久很久以前，这条小溪比现在大的多得多。`);
       await falcon.say_and_wait(
-        `有一天，为了在世界各地创造${falcon.uma_sex_title}而不停奔走的三女神来到了这里，${falcon.sex}们因为口渴而来到了这条小溪边。`,
+        `有一天，为了在世界各地创造${falcon.uma_sex_title}而不停奔走的三女神来到了这里，${falcon.couple_title}因为口渴而来到了这条小溪边。`,
       );
       await falcon.say_and_wait(
-        `源自这条小溪而诞生的神明隆重的迎接了${falcon.sex}们。`,
+        `源自这条小溪而诞生的神明隆重的迎接了${falcon.couple_title}。`,
       );
       await falcon.say_and_wait(
         `在盛情款待之下，心满意足的三女神向小溪的神明提出了建议。`,
       );
-      await say_by_passer_by(
+      await me.say_as_passer_by_and_wait(
         `三女神`,
         `我们受到了${callname}热情的款待，请允许我们给${callname}祝福。`,
       );
-      await falcon.say_and_wait(`神明则拒绝了${falcon.sex}们的好意。`);
-      await say_by_passer_by(
+      await falcon.say_and_wait(`神明则拒绝了${falcon.couple_title}的好意。`);
+      await me.say_as_passer_by_and_wait(
         `小溪的神明`,
         `能得到女神的祝福不胜惶恐，但是请把这份祝福赋予围绕这条小溪生存的生灵吧。`,
       );
-      await say_by_passer_by(`小溪的神明`, `他们比我重要得多。`);
+      await me.say_as_passer_by_and_wait(`小溪的神明`, `他们比我重要得多。`);
       await falcon.say_and_wait(
         `被神明无私所感动的三女神们允许了他的请求，将祝福转受给了这条小溪。`,
       );
@@ -572,9 +570,9 @@ module.exports = class extends CustomizedDaily {
       );
       await falcon.say_and_wait(`但为了祈求事业和幸福的人们却依然络绎不绝。`);
       await falcon.say_and_wait(`综上，这就是这个神社的由来。`);
-      await say_by_passer_by(`游客A`, `好，再来一个！`);
-      await say_by_passer_by(`游客B`, `果然？`);
-      await say_by_passer_by(`游客C`, `那还用说！`);
+      await me.say_as_passer_by_and_wait(`游客A`, `好，再来一个！`);
+      await me.say_as_passer_by_and_wait(`游客B`, `果然？`);
+      await me.say_as_passer_by_and_wait(`游客C`, `那还用说！`);
       await era.printAndWait(
         `被故事吸引的游客们不知不觉间把飞鹰子紧紧围住了。`,
       );
@@ -599,7 +597,7 @@ module.exports = class extends CustomizedDaily {
       await me.say_and_wait(
         `打扰了，神社就在眼前这位可爱的${falcon.uma_sex_title}背后，如果再不出发前面的队伍会变得很长。`,
       );
-      await say_by_passer_by(
+      await me.say_as_passer_by_and_wait(
         `游客D`,
         `说的也是！不赶快排队的话要等的时间就更多了！`,
       );
@@ -608,11 +606,14 @@ module.exports = class extends CustomizedDaily {
         `聚拢而来的游客在${callname}和${falcon.name}的引导之下排成了一条长队。`,
       );
       await era.printAndWait(`一段时间过后\n\n`);
-      await say_by_passer_by(`神主`, `${falcon.name}还有这位训练员辛苦了。`);
+      await me.say_as_passer_by_and_wait(
+        `神主`,
+        `${falcon.name}还有这位训练员辛苦了。`,
+      );
       await falcon.say_and_wait(`飞鹰子过得很开心呢⭐`);
-      await say_by_passer_by(`神主`, `作为志愿者的报酬，我想想——`);
+      await me.say_as_passer_by_and_wait(`神主`, `作为志愿者的报酬，我想想——`);
       await era.printAndWait(`准备片刻后，他开始向三女神神像祈祷。`);
-      await say_by_passer_by(
+      await me.say_as_passer_by_and_wait(
         `神主`,
         `美丽又仁慈的三女神大人，请听作为侍从的在下所言。`,
       );
@@ -620,15 +621,21 @@ module.exports = class extends CustomizedDaily {
         `在神主向三女神祈求之时，${callname}们站在一旁默默的等待者回应。`,
       );
       if (love > 75) {
-        await say_by_passer_by(`神主`, `……我知道了。`);
+        await me.say_as_passer_by_and_wait(`神主`, `……我知道了。`);
         await era.printAndWait(`仪式结束，神主看向${callname}们。`);
-        await say_by_passer_by(`神主`, `三女神大人对${callname}们有些话想说。`);
+        await me.say_as_passer_by_and_wait(
+          `神主`,
+          `三女神大人对${callname}们有些话想说。`,
+        );
         await falcon.say_and_wait(`欸？`);
         await era.printAndWait(
           `在神主向三女神祈求之时，${callname}们站在一旁默默的等待者回应。`,
         );
-        await say_by_passer_by(`神主`, `请不要紧张，三女神大人只是有些好奇。`);
-        await say_by_passer_by(`神主`, `那么，请跟随我的指引……`);
+        await me.say_as_passer_by_and_wait(
+          `神主`,
+          `请不要紧张，三女神大人只是有些好奇。`,
+        );
+        await me.say_as_passer_by_and_wait(`神主`, `那么，请跟随我的指引……`);
         await era.printAndWait(
           `在专业人士的指导之下，${callname}们闭上了眼睛。`,
         );
@@ -658,9 +665,9 @@ module.exports = class extends CustomizedDaily {
         );
         event_marks.idol++;
       } else {
-        await say_by_passer_by(`神主`, `……我知道了。`);
+        await me.say_as_passer_by_and_wait(`神主`, `……我知道了。`);
         await era.printAndWait(`仪式结束，神主从怀中取出了一张符卡。`);
-        await say_by_passer_by(`神主`, `小小礼物不成敬意。`);
+        await me.say_as_passer_by_and_wait(`神主`, `小小礼物不成敬意。`);
         await era.printAndWait([
           falcon.get_colored_name(),
           '/',
@@ -669,7 +676,7 @@ module.exports = class extends CustomizedDaily {
           { content: '非常', color: falcon.color },
           '感谢！」',
         ]);
-        await say_by_passer_by(
+        await me.say_as_passer_by_and_wait(
           `神主`,
           `等二位关系更好一点的时候，希望还能来这里一趟，衷心祝愿二位能实现自己的目标。`,
         );
@@ -721,20 +728,26 @@ module.exports = class extends CustomizedDaily {
       case 1:
         // 商业街开展活动 ${falcon.name}拿到了一张抽奖券
         // 玩家决定是自己抽还是让${falcon.name}抽
-        await say_by_passer_by(
+        await me.say_as_passer_by_and_wait(
           `杂货店店主`,
           `我看看……海报还有传单，嗯……这次还额外购买了空白明信片。`,
         );
-        await say_by_passer_by(`杂货店店主`, `东西都齐了，路上小心。`);
+        await me.say_as_passer_by_and_wait(
+          `杂货店店主`,
+          `东西都齐了，路上小心。`,
+        );
         await falcon.say_and_wait(`好的⭐`);
-        await say_by_passer_by(`杂货店店主`, `哦，对了，这是附赠的抽奖券。`);
+        await me.say_as_passer_by_and_wait(
+          `杂货店店主`,
+          `哦，对了，这是附赠的抽奖券。`,
+        );
         await era.printAndWait(`店主笑呵呵的递给了${falcon.name}一张抽奖券。`);
-        await say_by_passer_by(
+        await me.say_as_passer_by_and_wait(
           `杂货店店主`,
           `从进来的入口处那边找那个小老头，然后把这张票交给他就行了。`,
         );
         await falcon.say_and_wait(`非常感谢。说不定今天是飞鹰子的幸运日呢⭐`);
-        await say_by_passer_by(
+        await me.say_as_passer_by_and_wait(
           `杂货店店主`,
           `幸运星小姐下次也要元气满满的哦，路上小心。`,
         );
@@ -756,7 +769,7 @@ module.exports = class extends CustomizedDaily {
         await era.input();
         switch (get_random_value(0, 4)) {
           case 0:
-            await say_by_passer_by(`店主`, `四等奖 纸巾！`);
+            await me.say_as_passer_by_and_wait(`店主`, `四等奖 纸巾！`);
             await era.printAndWait(
               `看着从抽奖机里掉落的白色小球，店主摇动手中的铃铛。`,
             );
@@ -768,7 +781,7 @@ module.exports = class extends CustomizedDaily {
             );
             break;
           case 1:
-            await say_by_passer_by(`店主`, `三等奖 一根胡萝卜！`);
+            await me.say_as_passer_by_and_wait(`店主`, `三等奖 一根胡萝卜！`);
             await era.printAndWait(
               `看着从抽奖机里掉落的黄色小球，店主瞥了一眼，然后摇动手中的铃铛。`,
             );
@@ -789,7 +802,7 @@ module.exports = class extends CustomizedDaily {
             );
             break;
           case 2:
-            await say_by_passer_by(`店主`, `二等奖 一堆胡萝卜！`);
+            await me.say_as_passer_by_and_wait(`店主`, `二等奖 一堆胡萝卜！`);
             await era.printAndWait(
               `看着从抽奖机里掉落的胡萝卜色小球，店主瞥了一眼，然后摇动手中的铃铛。`,
             );
@@ -812,14 +825,14 @@ module.exports = class extends CustomizedDaily {
             await falcon.say_and_wait(
               `即使是领放也在不停闪耀，${falcon.uma_sex_title}偶像——${falcon.name}参上♪`,
             );
-            await say_by_passer_by(
+            await me.say_as_passer_by_and_wait(
               `${callname}与竖着排成一排的胡萝卜们`,
               `噢噢噢噢！`,
             );
             await falcon.say_and_wait(
               `嗯嗯！飞鹰子感受到大家的热情了呢！那么Let's go!`,
             );
-            await say_by_passer_by(
+            await me.say_as_passer_by_and_wait(
               `${callname}与竖着排成一排的胡萝卜们`,
               `(疯狂摇动着应援棒)`,
             );
@@ -831,7 +844,7 @@ module.exports = class extends CustomizedDaily {
             );
             break;
           case 3:
-            await say_by_passer_by(`店主`, `一等奖 胡萝卜汉堡！`);
+            await me.say_as_passer_by_and_wait(`店主`, `一等奖 胡萝卜汉堡！`);
             await era.printAndWait(
               `看着从抽奖机里掉落的红色小球，店主轻轻将它拾起，然后摇动着手中的铃铛。`,
             );
@@ -848,7 +861,10 @@ module.exports = class extends CustomizedDaily {
             );
             break;
           case 4:
-            await say_by_passer_by(`店主`, `特等奖 温泉旅行券！恭喜！`);
+            await me.say_as_passer_by_and_wait(
+              `店主`,
+              `特等奖 温泉旅行券！恭喜！`,
+            );
             await era.printAndWait(
               `看着从抽奖机里掉落的粉色小球，店主将它拾起看了又看，然后大声的宣布结果。`,
             );
@@ -857,7 +873,7 @@ module.exports = class extends CustomizedDaily {
             await falcon.say_and_wait(`果然今天是飞鹰子的幸运日呢！`);
             era.printButton(`诶？真的中了？`, 1);
             await era.input();
-            await say_by_passer_by(
+            await me.say_as_passer_by_and_wait(
               `店主`,
               `这张温泉旅行券没有使用时间，所以请好好珍惜。`,
             );
@@ -943,7 +959,10 @@ module.exports = class extends CustomizedDaily {
         switch (get_random_value(0, 1)) {
           // 吃饭
           case 0:
-            await say_by_passer_by(`服务员`, `久等了，两份水果巴菲。`);
+            await me.say_as_passer_by_and_wait(
+              `服务员`,
+              `久等了，两份水果巴菲。`,
+            );
             await falcon.say_and_wait(`比想象之中还要美味呢。`);
             await era.printAndWait(``);
             break;
@@ -1003,7 +1022,6 @@ module.exports = class extends CustomizedDaily {
             await era.printAndWait(`避免了一场（自认为）炎上，真是可喜可贺。`);
             break;
         }
-        break;
     }
   }
 
@@ -1027,7 +1045,6 @@ module.exports = class extends CustomizedDaily {
           await falcon.say_and_wait(
             `如果飞鹰子也处在丸善前辈的位置上……唔，飞鹰子的小脑袋恐怕受不了这么大的压力。`,
           );
-          break;
       }
     } else {
       switch (get_random_value(0, 1)) {
@@ -1046,7 +1063,6 @@ module.exports = class extends CustomizedDaily {
             `被鱼钩钩住的贪食鱼儿被一股巨力拽出了水面，稳稳的落入了鱼桶之中。`,
           );
           await falcon.say_and_wait(`这就是飞鹰子流的钓鱼法！`);
-          break;
       }
     }
   }

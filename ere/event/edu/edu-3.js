@@ -155,8 +155,8 @@ module.exports = class extends Edu3UntilWeekStart {
       `${
         me.name
       } 想起医生私下跟自己说的一些类似病症的${teio.uma_sex_title}们，${
-        teio.sex
-      }们无一例外没能再次康复，选择了退役。那么帝王……`,
+        teio.couple_title
+      }无一例外没能再次康复，选择了退役。那么帝王……`,
     );
     era.println();
 

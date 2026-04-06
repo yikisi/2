@@ -37,7 +37,7 @@ module.exports = class extends Edu67BackSchool {
       era.printButton('「不是，我只是对光钻的活动感到很惊讶……」', 1);
       await era.input();
       await era.printAndWait(
-        `我向 ${daiya.sex}们 询问怎么会有里见光钻的活动。`,
+        `我向 ${daiya.couple_title} 询问怎么会有里见光钻的活动。`,
       );
       await daiya.say_and_wait('这是一间摆设里见集团开发的游戏机台的游戏厅。');
       await daiya.say_and_wait(
@@ -172,7 +172,7 @@ module.exports = class extends Edu67BackSchool {
       era.printButton('「告诉我这件事情非常感谢」', 1);
       await era.input();
       await era.printAndWait(
-        `${me.name} 告诉${daiya.sex}们接下来的事情由 ${me.name} 来处理，并决定要打电话给里见光钻。`,
+        `${me.name} 告诉${daiya.couple_title}接下来的事情由 ${me.name} 来处理，并决定要打电话给里见光钻。`,
       );
       await daiya.say_and_wait('哎呀，是训练员呀？');
       era.printButton('「你说你还在公司？」', 1);

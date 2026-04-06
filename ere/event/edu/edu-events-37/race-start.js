@@ -322,12 +322,12 @@ module.exports = async function (
     await say_by_passer_by_and_wait(
       `观众A`,
       `荒漠英雄，特别周……明明都是有一段时间没有出场的赛${flash.uma_sex_title}，没想到还能在这场比赛中再次目睹${
-        flash.sex
-      }们的发挥。`,
+        flash.couple_title
+      }的发挥。`,
     );
     await say_by_passer_by_and_wait(
       `观众B`,
-      `不仅如此，更惊人的是，${flash.sex}们之前都赢下过日本杯。`,
+      `不仅如此，更惊人的是，${flash.couple_title}之前都赢下过日本杯。`,
     );
     await say_by_passer_by_and_wait(
       '观众B',
@@ -420,7 +420,7 @@ module.exports = async function (
     await flash.say_and_wait(
       '已经携手跨越了这么多障碍的我们，所拥有的实力也是不容小窥的。',
     );
-    era.printButton(`「让${flash.sex}们见识你的力量吧。」`, 1);
+    era.printButton(`「让${flash.couple_title}见识你的力量吧。」`, 1);
     await era.input();
     await flash.say_and_wait('嗯！');
     await flash.say_and_wait('要一直奔跑下去，直至登临绝巅。');

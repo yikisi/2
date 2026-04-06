@@ -37,7 +37,7 @@ module.exports = class extends CustomizedRecruit {
         }
         await kojo.rec_final(falcon, me, callname);
         new EventMarks(0).sub(event_hooks.out_river);
-        new FalconEduMarks().after_recruit++;
+        new FalconEduMarks().after_recruit = 1;
         era.set('cflag:46:招募状态', recruit_flags.yes);
         add_event(
           event_hooks.week_end,

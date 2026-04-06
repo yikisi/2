@@ -43,10 +43,10 @@ module.exports = class extends Edu3UntilOutStart {
       await print_event_name('帝王，启程！', teio);
 
       await era.printAndWait(
-        `相传，三女神赐下马魂赋予婴孩，让${teio.sex}们拥有无与伦比的身体技能用以驰骋赛场。`,
+        `相传，三女神赐下马魂赋予婴孩，让${teio.couple_title}拥有无与伦比的身体技能用以驰骋赛场。`,
       );
       await era.printAndWait(
-        `而${teio.sex}们所给予的能力，通过赛场表现而分类，大概可以分为以下几种跑法：`,
+        `而${teio.couple_title}所给予的能力，通过赛场表现而分类，大概可以分为以下几种跑法：`,
       );
       era.println();
       await era.printAndWait(
@@ -178,8 +178,8 @@ module.exports = class extends Edu3UntilOutStart {
 
       await me.say_and_wait(
         `这可是个严峻的目标……要知道，曾经有很多出名的赛${teio.uma_sex_title}，现在也有许多天才，${
-          teio.sex
-        }们无一不想做到这个成就，实际上能达成的凤毛麟角。`,
+          teio.couple_title
+        }无一不想做到这个成就，实际上能达成的凤毛麟角。`,
       );
       await me.say_and_wait(
         '不过，我既然成为了你的训练员，便会尽力辅导你，让你达成心愿的。',

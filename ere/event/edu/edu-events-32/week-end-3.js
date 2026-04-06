@@ -746,7 +746,7 @@ module.exports = (handlers) => {
         ' 和后辈应付了几声后，后辈也离开了赛场',
       ]);
       await era.printAndWait('直到这时……');
-      era.printButton(`「……可以了，${tachyon.sex}们都走了」`, 1);
+      era.printButton(`「……可以了，${tachyon.couple_title}都走了」`, 1);
       await era.input();
       await tachyon.say_and_wait('哈啊～～');
       era.println();

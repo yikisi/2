@@ -95,8 +95,8 @@ module.exports = {
           `牡蛎牡蛎！我就是个普通的${digital.uma_sex_title}${
             digital.name
           }，不可以这样影响到${
-            digital.sex
-          }们！数码我只需要远远地看着就好了！天仙般的${digital.uma_sex_title}只可远视！`,
+            digital.couple_title
+          }！数码我只需要远远地看着就好了！天仙般的${digital.uma_sex_title}只可远视！`,
         );
         await era.printAndWait(
           `可以看得到，${digital.sex}把头摇得像鼓浪一样。`,
@@ -110,7 +110,7 @@ module.exports = {
         }不也是${digital.uma_sex_title}吗。`,
       );
       await you.say_and_wait(
-        `为什么不打算参赛，在近距离观察${digital.sex}们呢？`,
+        `为什么不打算参赛，在近距离观察${digital.couple_title}呢？`,
       );
       await digital.say_and_wait(`诶？虽然这说得很有道理……但是我不想出道`);
       await digital.say_and_wait(
@@ -217,7 +217,7 @@ module.exports = {
         } 已经看过了或者听过了很多泥地${digital.uma_sex_title}，短距离${digital.uma_sex_title}苦恼于不能参加在闪耀系列赛里面最热门的中距离草地比赛。`,
       );
       await era.printAndWait(
-        `但是，到了最后，${digital.sex}们都意识到了——比赛本身的巨大意义，也就是比赛所带来的价值，相比起人气来说都不值一提。`,
+        `但是，到了最后，${digital.couple_title}都意识到了——比赛本身的巨大意义，也就是比赛所带来的价值，相比起人气来说都不值一提。`,
       );
       await era.printAndWait(
         `这位${digital.uma_sex_title}呢？自称为 ${

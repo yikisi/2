@@ -727,7 +727,7 @@ module.exports = (handlers) => {
       ]);
       await say_by_passer_by_and_wait(
         '观众B',
-        `里见光钻对北部玄驹，${daiya.sex}们的对决还要继续啊！`,
+        `里见光钻对北部玄驹，${daiya.couple_title}的对决还要继续啊！`,
       );
       await say_by_passer_by_and_wait('观众A', [
         race_infos[race_enum.arim_kin].get_colored_name(),

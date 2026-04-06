@@ -42,7 +42,7 @@ module.exports = {
         `赛马娘，尤其是中等部马娘的体重，有多少呢？30kg？35kg？无论怎么想，也不会超过40kg吧。`,
       );
       await era.printAndWait(
-        `但如果加上${maya.sex}们所背负的愿望，祝福和意志，其Uma-Soul的重量，便不下400kg！`,
+        `但如果加上${maya.couple_title}所背负的愿望，祝福和意志，其Uma-Soul的重量，便不下400kg！`,
       );
       await era.printAndWait(
         `三倍于人类的速度，三倍于人类的握力，三倍于人类的体重，加起来便远远超过人类的10倍甚至9倍！`,

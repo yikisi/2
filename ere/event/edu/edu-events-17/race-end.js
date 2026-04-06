@@ -804,7 +804,7 @@ module.exports = class extends CustomizedEdu {
 
         await chara.say_and_wait(
           i_emperor
-            ? `${chara.sex}们根本称不上是我的对手。就这点程度，也需要我亲自出手？`
+            ? `${chara.couple_title}根本称不上是我的对手。就这点程度，也需要我亲自出手？`
             : '……如果这是你希望看到的结局，我不会反对。',
         );
         era.printButton('「无可奈何之举。」', 1);

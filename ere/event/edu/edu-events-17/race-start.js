@@ -207,10 +207,10 @@ module.exports = class extends Edu17UntilRaceEnd {
       );
 
       await era.printAndWait(
-        `赛马娘有着天生的胜负欲，${chara.sex}们无论何时都想着疾驰到更远的地方。`,
+        `赛马娘有着天生的胜负欲，${chara.couple_title}无论何时都想着疾驰到更远的地方。`,
       );
       await era.printAndWait(
-        `而在规定距离的赛场上，${chara.sex}们会豁出一切，试图成为最快抵达终点的胜者。`,
+        `而在规定距离的赛场上，${chara.couple_title}会豁出一切，试图成为最快抵达终点的胜者。`,
       );
       await era.printAndWait(
         '而似乎是为了回应这样的愿望，赛马娘们将在本格化中急速成长，最终能够站上赛场。',
@@ -235,7 +235,7 @@ module.exports = class extends Edu17UntilRaceEnd {
       );
       await era.printAndWait('命运从未怜悯，一切事物都暗中标好了价格。');
       await era.printAndWait(
-        `强大如象征家，${chara.sex}们也会无法克制血脉的暴力而走向自我毁灭。`,
+        `强大如象征家，${chara.couple_title}也会无法克制血脉的暴力而走向自我毁灭。`,
       );
       await era.printAndWait(
         `露娜描述过进入领域的感觉，仿佛一切静止，而${chara.sex}来到一片无垠的草原。`,

@@ -35,13 +35,12 @@ module.exports = {
   },
   /**
    * @param {CharaTalk} tachyon 爱丽速子
-   * @param {CharaTalk} me 玩家
+   * @param {CharaTalk} you 玩家
    * @param {PrintedSpan} callname 爱丽速子对玩家的称呼
    */
-  async ask_release_agree(tachyon, me, callname) {
+  async ask_release_agree(tachyon, you, callname) {
     await tachyon.say_and_wait(['可以哦。']);
     era.println();
-
     await era.printAndWait([
       '明明已经做好了被拒绝的准备，没想到 ',
       tachyon.get_colored_name(),
@@ -58,9 +57,9 @@ module.exports = {
       '忽然，',
       tachyon.get_colored_name(),
       '靠近 ',
-      me.get_colored_name(),
+      you.get_colored_name(),
       ' 的面前，盯着 ',
-      me.get_colored_name(),
+      you.get_colored_name(),
       ' 的眼睛。',
     ]);
     era.println();
@@ -91,7 +90,7 @@ module.exports = {
       tachyon.get_colored_name(),
       '，眼中还有那种，让人愿意为其付出一切的魔力吗？',
     ]);
-    await era.printAndWait([me.get_colored_name(), ' 摇了摇头。']);
+    await era.printAndWait([you.get_colored_name(), ' 摇了摇头。']);
     era.println();
 
     await tachyon.say_and_wait(['…………啊，这样啊。']);
@@ -100,7 +99,7 @@ module.exports = {
     era.println();
 
     await era.printAndWait([
-      me.get_colored_name(),
+      you.get_colored_name(),
       ' 将东西整理好，准备离开时，却发现 ',
       tachyon.get_colored_name(),
       ' 背对着自己坐在床边。',
@@ -114,7 +113,7 @@ module.exports = {
     await tachyon.say_and_wait(['我没事，我等下也会离开。只是……']);
     await tachyon.say_and_wait(['我不太想，让你看见我此刻———丑陋的眼眸。']);
 
-    await era.printAndWait([me.get_colored_name(), ' 离开了地下室，']);
+    await era.printAndWait([you.get_colored_name(), ' 离开了地下室，']);
     await era.printAndWait([
       '从头到尾，',
       tachyon.get_colored_name(),
