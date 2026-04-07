@@ -39,11 +39,6 @@ function init_chara(cid, src = 0) {
   ) {
     return;
   }
-  era
-    .get('cstrkeys')
-    .forEach((k) =>
-      era.set(`cstr:${cid}:${k}`, era.get(`cstr:${cid}:${k}`) || ''),
-    );
   if (src === 0) {
     era.set(`cstr:${cid}:头像T`, era.get(`cstr:${cid}:头像`));
   }

@@ -460,7 +460,9 @@ module.exports = async (cid = era.get('flag:当前互动角色')) => {
         if (action === 0) {
           era.print(__(`tb_talent.s${tid}`, i18n().tb_talent[tid]));
           era.println();
-          await era.printAndWait(__(`talent_desc.s${tid}`));
+          await era.printAndWait(
+            __(`talent_desc.s${tid}`, i18n().talent_desc[tid]),
+          );
         } else {
           if (tid <= 33) {
             const inmon = CharaInmon.get(cid);

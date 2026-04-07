@@ -5,6 +5,8 @@ const { sys_check_remote } = require('#/system/sys-calc-chara-param');
 
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 
+const { collapse_list } = require('#/utils/value-utils');
+
 const { get_chara_color } = require('#/data/chara-colors');
 const { buff_colors, sex_colors } = require('#/data/color-const');
 const CharaInmon = require('#/data/ero/chara-inmon');
@@ -26,9 +28,10 @@ const { i18n } = require('#/i18n/selector');
 
 /**
  * @param {number} cid
+ * @param {number} collapse_limit
  * @returns {{content:string,[color]:string,display:string,[opacity]:number}[]}
  */
-function sys_get_status(cid) {
+function sys_get_status(cid, collapse_limit = 0) {
   const status_list = [];
   const show_train_buff =
     // CFLAGNAME:1 = 种族
@@ -365,16 +368,19 @@ function sys_get_status(cid) {
       color: buff_colors[2],
     });
   }
-  return status_list.map((s) => {
-    if (s.title !== void 0) {
-      s.title = i18n()
-        .status_desc.template.replace('%NAME%', s.content)
-        .replace('%DESC%', s.title);
-    }
-    s.content = i18n().tb_status.template.replace('%NAME%', s.content);
-    s.display = 'inline-block';
-    return s;
-  });
+  return collapse_list(
+    status_list.map((s) => {
+      if (s.title !== void 0) {
+        s.title = i18n()
+          .status_desc.template.replace('%NAME%', s.content)
+          .replace('%DESC%', s.title);
+      }
+      s.content = i18n().tb_status.template.replace('%NAME%', s.content);
+      s.display = 'inline-block';
+      return s;
+    }),
+    collapse_limit,
+  );
 }
 
 module.exports = sys_get_status;

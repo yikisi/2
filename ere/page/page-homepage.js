@@ -61,7 +61,7 @@ const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { get_save_name, get_trainer_title } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
-const { first_child_id } = require('#/data/other-const');
+const { first_child_id, max_chara_id } = require('#/data/other-const');
 const { pressure_border } = require('#/data/train-const');
 
 const di18n = require('#/i18n/extended-def');
@@ -430,6 +430,7 @@ module.exports = async () => {
             sys_filter_chara('cflag', '招募状态', recruit_flags.yes).filter(
               (e) =>
                 e > 0 &&
+                e < max_chara_id &&
                 e !== owner &&
                 !common_no_action_check(e) &&
                 era.get(`love:${e}`) >= 75 &&
@@ -437,13 +438,14 @@ module.exports = async () => {
                 era.get(`base:${e}:压力`) < pressure_border.depression,
             ),
           );
-        if (rescue_chara) {
+        if (rescue_chara > 0) {
           basement_queue.add_action(
             new BasementAction(
               rescue_chara,
               3 * minutes_in_a_day + get_random_value(0, minutes_in_a_day),
               action_type_enum.rescue,
             ),
+            true,
           );
         }
       }

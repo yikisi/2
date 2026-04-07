@@ -70,7 +70,7 @@ function get_random_value(min, max, is_float = true) {
 }
 
 function page_header() {
-  const status_list = sys_get_status(0);
+  const status_list = sys_get_status(0, 36);
   era.printInColRows(
     [{ type: 'divider' }],
     {

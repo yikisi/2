@@ -292,10 +292,17 @@ async function page_chairman_office() {
                     (await i18n().timon.others.star_drew(
                       chara,
                       get_chara_talk(0),
-                      get_chara_talk(temp).get_colored_actual_name(),
+                      {
+                        color: get_chara_color(temp),
+                        content: get_display_name(
+                          era.get(`static:${temp}:name`),
+                        ),
+                        fontWeight: 'bold',
+                      },
                       star_premium_draw.chara > 0,
                     )) === 1
                   ) {
+                    get_chara_talk(temp);
                     sys_change_fame(-cost);
                     if (star_premium_draw.chara > 0) {
                       era.println();

@@ -155,7 +155,7 @@ function get_chara_info(cid) {
     },
     {
       config: { width: 20 },
-      content: get_ero_status(cid),
+      content: get_ero_status(cid, 32),
       type: 'text',
     },
     ...get_progress_bar(cid, {

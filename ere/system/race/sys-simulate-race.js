@@ -278,7 +278,7 @@ function sys_sim_race(list_chara, info, race_id, shown = true) {
       if (s.data.ability_types[0][0] !== ability_type_enum.StartDash) {
         return true;
       }
-      start_delay[uma.index_race] *= s.data.ability_values[0];
+      start_delay[uma.index_race] *= s.data.ability_values[0][0];
       buffer.skill.unshift(get_skill_record(uma, s.data.id, '0.0"', 0));
       uma.race.conditionParams.activate_count_all++;
       uma.race.conditionParams.activate_count_start++;
@@ -397,14 +397,15 @@ function sys_sim_race(list_chara, info, race_id, shown = true) {
         uma.race.velocityReal = uma.base.velocityMin;
         start_delay[uma.index_race] = 0;
       } else {
-        const temp = (uma.race.velocityReal = Math.min(
+        const temp = Math.min(
           Math.max(
             uma.race.velocityReal + uma.race.acceleration / frame_rate,
             uma.base.velocityMin,
           ),
           30,
-        ));
+        );
         uma.race.location += (uma.race.velocityReal + temp) / (2 * frame_rate);
+        uma.race.velocityReal = temp;
         uma.race.staminaCost =
           ((20 / 144) *
             (uma.race.velocityReal - uma.base.velocityIdeal + 12) ** 2 *

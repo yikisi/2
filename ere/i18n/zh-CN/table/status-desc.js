@@ -19,7 +19,7 @@ class I18nStatusDesc {
   buff303 = (buff) => `声望获取+${buff}%，声望下降-${buff}%。`;
   buff340 = (buff) => `速度与力量训练效果+${buff}%。`;
   buff341 = (buff1, buff2) =>
-    `智力训练效果+${buff1}%，技能点数训练效果+${buff2}%。`;
+    `智力训练效果+${buff1}%，训练获得的技能点数+${buff2}%。`;
   buff342 = (buff) => `耐力与根性训练效果+${buff}%。`;
   buff343 = (check) =>
     '海外远征的负面影响' + (check > 0 ? '减轻' : '减半') + '。';

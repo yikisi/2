@@ -337,7 +337,7 @@ async function npc_common(
               },
               {
                 config: { width: 22 },
-                content: get_status(chara.id),
+                content: get_status(chara.id, 24),
                 type: 'text',
               },
             ]

@@ -241,7 +241,9 @@ async function handle_rape(part_list, my_life_marks, is_rape) {
       sys_like_chara(
         e,
         0,
-        is_rape ? get_random_value(20, 40) : get_random_value(40, 60),
+        is_rape
+          ? get_random_value(20, 40, false)
+          : get_random_value(40, 60, false),
         false,
       );
     }
@@ -422,16 +424,16 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
           ) {
             rescue_result_type = 3;
           } else if (
-            get_random_value(0, 1, true) <
+            get_random_value(0, 1) <
             sys_get_strength_ratio_in_fight(action.chara_id, owner)
           ) {
             rescue_result_type =
               4 +
               (relation_check > 0) * era.get(`cflag:${action.chara_id}:种族`);
-            sys_hurt_uma(owner, get_random_value(0, 2), false);
+            sys_hurt_uma(owner, get_random_value(0, 2, false), false);
             sys_change_pressure(owner, get_random_value(500, 1000));
           } else {
-            sys_hurt_uma(action.chara_id, get_random_value(0, 2), false);
+            sys_hurt_uma(action.chara_id, get_random_value(0, 2, false), false);
             sys_change_pressure(action.chara_id, get_random_value(500, 1000));
           }
           const basement_scripts = get_custom_basement(action.chara_id);
@@ -543,14 +545,14 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
           attr_enum.hp,
           (stamina_delta + life_marks.b_stamina_buff + life_marks.b_food_buff) *
             delta *
-            get_random_value(0.8, 1.2, true),
+            get_random_value(0.8, 1.2),
         );
         sys_change_attr_and_print(
           e,
           attr_enum.tp,
           (time_delta + life_marks.b_time_buff) *
             delta *
-            get_random_value(0.8, 1.2, true),
+            get_random_value(0.8, 1.2),
         );
         if (!era.get(`base:${e}:精力`) && !era.get(`status:${e}:沉睡`)) {
           if (!e || sys_check_awake(0)) {
@@ -681,12 +683,12 @@ async function sys_handle_time_in_basement(my_life_marks, basement_owners) {
                     ),
                   );
                   get_custom_basement(e).lure();
-                  sys_like_chara(e, 0, get_random_value(-5, 5), false);
+                  sys_like_chara(e, 0, get_random_value(-5, 5, false), false);
                   sys_change_lust(0, get_random_value(0, 100));
                   sys_change_lust(e, get_random_value(0, 200));
                 } else {
                   sys_change_lust(e, get_random_value(-100, 200));
-                  sys_like_chara(e, 0, get_random_value(-5, 19), false);
+                  sys_like_chara(e, 0, get_random_value(-5, 19, false), false);
                 }
                 life_marks.b_status = 1 << basement_status_enum.action;
                 basement_queue.add_action(

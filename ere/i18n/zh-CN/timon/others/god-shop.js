@@ -12,6 +12,8 @@ const {
   println,
 } = require('#/era-electron');
 
+const { money_color } = require('#/data/color-const');
+
 module.exports = {
   /**
    * 三女神像，不同气性随行角色的反应
@@ -274,7 +276,8 @@ module.exports = {
     pray_cb,
     finish_cb,
   ) {
-    print('（哪方面，最需要提升呢？）\n脑海中冒出了这样的疑问……');
+    print('（哪方面，最需要提升呢？）');
+    print('脑海中冒出了这样的疑问……');
     printButton('速度（+80）', 0, { disabled: disabled_list[0] });
     printButton('耐力（+80）', 1, { disabled: disabled_list[1] });
     printButton('力量（+80）', 2, { disabled: disabled_list[2] });
@@ -736,5 +739,39 @@ module.exports = {
         ' 祈祷……',
       ]);
     }
+  },
+  /**
+   * 三女神受肉后，借钱会变成祈祷发财
+   * @param {CharaTalk} god 三女神之一
+   * @param {CharaTalk} you 玩家
+   */
+  async borrow_money(god, you) {
+    const honour = get('flag:当前声望');
+    if (honour < 50) {
+      return await printAndWait('声望不足');
+    }
+    print('想要多少马币？');
+    printButton('400 马币（50 声望）', 1);
+    printButton('800 马币（100 声望）', 2, { disabled: honour < 100 });
+    printButton('1200 马币（150 声望）', 2, { disabled: honour < 150 });
+    printButton('1600 马币（200 声望）', 2, { disabled: honour < 200 });
+    printButton('还是算了', 99);
+    const ret = await input();
+    if (ret === 99) {
+      await printAndWait([
+        you.get_colored_name(),
+        ' 放弃了向 ',
+        god.get_colored_name(),
+        ' 祈祷马币……',
+      ]);
+    } else {
+      await printAndWait([
+        you.get_colored_name(),
+        ' 收到了特雷森补发 ',
+        { color: money_color, content: (400 * ret).toLocaleString() },
+        ' 马币额外补贴的通知……但是似乎被那条消息鄙视了……',
+      ]);
+    }
+    return ret;
   },
 };

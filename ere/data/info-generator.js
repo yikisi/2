@@ -16,6 +16,7 @@ const {
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 
 const get_display_name = require('#/utils/calc-display-name');
+const { collapse_list } = require('#/utils/value-utils');
 
 const { calc_attr_score } = require('#/data/calc-attr-score');
 const chara_score = require('#/data/chara-score-table.json');
@@ -208,6 +209,9 @@ function get_trainer_level() {
 module.exports = {
   /** @param {number} adaptability */
   get_adaptability_rank(adaptability) {
+    if (adaptability >= 8) {
+      return 'U';
+    }
     if (adaptability >= 7) {
       return 'S';
     }
@@ -264,9 +268,10 @@ module.exports = {
   },
   /**
    * @param {number} cid
+   * @param {number} collapse_limit
    * @returns {{content:string,[color]:string,display:string,[opacity]:number}[]}
    */
-  get_ero_status(cid) {
+  get_ero_status(cid, collapse_limit = 0) {
     const ret = [];
     const has_penis = get_penis_size(cid) > 0;
     // TFLAGNAME:7 = 主导权
@@ -517,16 +522,19 @@ module.exports = {
         color: buff_colors[2],
       });
     }
-    return ret.map((s) => {
-      if (s.title !== void 0) {
-        s.title = i18n()
-          .status_desc.template.replace('%NAME%', s.content)
-          .replace('%DESC%', s.title);
-      }
-      s.content = i18n().tb_status.template.replace('%NAME%', s.content);
-      s.display = 'inline-block';
-      return s;
-    });
+    return collapse_list(
+      ret.map((s) => {
+        if (s.title !== void 0) {
+          s.title = i18n()
+            .status_desc.template.replace('%NAME%', s.content)
+            .replace('%DESC%', s.title);
+        }
+        s.content = i18n().tb_status.template.replace('%NAME%', s.content);
+        s.display = 'inline-block';
+        return s;
+      }),
+      collapse_limit,
+    );
   },
   get_filtered_talents,
   /**

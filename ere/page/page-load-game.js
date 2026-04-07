@@ -615,6 +615,15 @@ module.exports = async () => {
                 for (const t of CharaTitles.get(cid).get()) {
                   t.n = find_key_by_value(i18n('zh-CN').title, t.n);
                 }
+                let tmp;
+                if (
+                  cid === 46 &&
+                  (tmp = CharaTitles.get(cid)
+                    .get()
+                    .find((t) => t.n === '沙地之隼'))
+                ) {
+                  tmp.n = '104601';
+                }
                 // CSTRNAME:0 - 1 = 发色 - 毛色
                 for (let stid = 0; stid <= 1; ++stid) {
                   const found = find_key_by_value(

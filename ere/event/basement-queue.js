@@ -11,7 +11,7 @@ module.exports = {
    * @param {BasementAction} action
    * @param {boolean} [from_init]
    */
-  add_action(action, from_init) {
+  add_action(action, from_init = false) {
     if (!from_init && action.type === action_type_enum.rescue) {
       return;
     }

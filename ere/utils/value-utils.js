@@ -1,6 +1,58 @@
 let lan = 'zh-CN';
 
+/**
+ * @param {string} str
+ * @returns {number}
+ */
+function get_display_width(str) {
+  if (typeof str !== 'string') {
+    return 0;
+  }
+  let width = 0;
+  for (const char of str) {
+    if (char.charCodeAt(0) <= 0x80) {
+      width += 0.5;
+    } else {
+      width += 1;
+    }
+  }
+  return width;
+}
+
 module.exports = {
+  collapse_list(_list, collapse_limit) {
+    if (collapse_limit <= 0) {
+      return _list;
+    }
+    let ret = _list;
+    if (collapse_limit > 0) {
+      let collapse_index = 0;
+      let len = 0;
+      for (let i = 0; i < _list.length; i++) {
+        const c = _list[i];
+        const ret = len + get_display_width(c.content);
+        if (len < collapse_limit && ret >= collapse_limit) {
+          collapse_index = i;
+          break;
+        }
+        len = ret;
+      }
+      if (collapse_index > 0) {
+        ret = [
+          ..._list.slice(0, collapse_index),
+          ' ',
+          {
+            content: `+${_list.length - collapse_index}`,
+            title: _list
+              .slice(collapse_index)
+              .map((s) => s.title ?? s.content)
+              .join('\n'),
+          },
+        ];
+      }
+    }
+    return ret;
+  },
   /**
    * @param {number} _num
    * @param {function(number):number} roundCb
@@ -30,24 +82,7 @@ module.exports = {
       title: _num.toLocaleString(lan),
     };
   },
-  /**
-   * @param {string} str
-   * @returns {number}
-   */
-  get_display_width(str) {
-    if (typeof str !== 'string') {
-      return 0;
-    }
-    let width = 0;
-    for (const char of str) {
-      if (char.charCodeAt(0) <= 0x80) {
-        width += 0.5;
-      } else {
-        width += 1;
-      }
-    }
-    return width;
-  },
+  get_display_width,
   /**
    * @param {number} min
    * @param {number} max

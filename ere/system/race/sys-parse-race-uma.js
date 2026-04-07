@@ -26,6 +26,7 @@ const RaceInfo = require('#/data/race/model/race-info');
 const { race_difficulty } = require('#/data/race/race-const');
 const {
   max_extra_attr,
+  mod_acceleration_adapt_distance,
   mod_motivation_coefficients,
 } = require('#/data/race/race-sim-const');
 const { mod_acceleration_adapt_ground } = require('#/data/race/race-sim-const');
@@ -598,8 +599,20 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
   ret.forEach((uma, i) => {
     uma.index_race = i;
     uma.race.conditionParams.post_number = i + 1;
-    uma.adapts.ground = uma.adapt_ground_list[info.ground];
-    uma.adapts.distance = uma.adapt_distance_list[info.distance];
+    uma.adapts.ground = Math.max(
+      Math.min(
+        uma.adapt_ground_list[info.ground],
+        mod_acceleration_adapt_ground.length - 1,
+      ),
+      0,
+    );
+    uma.adapts.distance = Math.max(
+      Math.min(
+        uma.adapt_distance_list[info.distance],
+        mod_acceleration_adapt_distance.length - 1,
+      ),
+      0,
+    );
     const cof_dis = mod_acceleration_adapt_ground[uma.adapts.distance],
       cof_ground = mod_acceleration_adapt_ground[uma.adapts.ground],
       cof_motivation = (mod_motivation_coefficients[uma.chara] ||

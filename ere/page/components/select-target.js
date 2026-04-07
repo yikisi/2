@@ -36,6 +36,7 @@ const RaceHistory = require('#/data/race/model/race-history');
 
 const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
+const { get_display_width } = require('#/utils/value-utils');
 
 /**
  * @param {number} cid
@@ -158,6 +159,11 @@ function get_suffix(cid, type) {
       },
     );
   }
+  const race_tip = race_indicator(cid);
+  const race_length = race_tip.reduce(
+    (p, c) => p + get_display_width(c.content ?? c),
+    0,
+  );
   ret.push(
     ...get_progress_bar(cid, {
       prog_bar_width: 20,
@@ -167,7 +173,11 @@ function get_suffix(cid, type) {
     }),
     {
       config: { offset: 4, width: 20 },
-      content: [...race_indicator(cid), ' ', ...get_status(cid)],
+      content: [
+        ...race_indicator(cid),
+        ' ',
+        ...get_status(cid, 48 - race_length - (race_length > 0)),
+      ],
       type: 'text',
     },
   );

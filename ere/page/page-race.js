@@ -128,7 +128,7 @@ function page_race_header(_info, is_grand_live) {
         },
         {
           config: { align: 'center', width: 12 },
-          content: get_status(0),
+          content: get_status(0, 19),
           type: 'text',
         },
       ],

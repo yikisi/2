@@ -265,7 +265,13 @@ function sys_prepare_race(list_chara, team_list, race_info) {
       uma.random.up_slope = get_random_value(temp.start, temp.end - 10);
     }
 
-    uma.adapts.style = uma.adapt_style_list[uma.style];
+    uma.adapts.style = Math.max(
+      Math.min(
+        uma.adapt_style_list[uma.style],
+        mod_attr_intelligence_adapt_style.length - 1,
+      ),
+      0,
+    );
 
     let motivation_coefficient = (mod_motivation_coefficients[uma.chara] ||
       mod_motivation_coefficients.default)[uma.motivation + 2];

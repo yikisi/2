@@ -436,10 +436,14 @@ function init_ero(...ids) {
       era.get(`cflag:${cid}:性别`) !== 1 &&
       era.get(`status:${cid}:经期`) === 0 &&
       era.get(`cflag:${cid}:妊娠阶段`) === 1 << pregnant_stage_enum.no &&
-      sys_check_yandere(cid, (y) => y > 0)
+      (sys_check_yandere(cid, (y) => y > 0) ||
+        era.get(`status:${cid}:爱意克制`) > 0)
     ) {
-      const yandere = era.get(`talent:${cid}:病娇`);
-      if (Math.random() < yandere * 0.4) {
+      if (
+        Math.random() <
+        era.get(`talent:${cid}:病娇`) * 0.4 +
+          (era.get(`status:${cid}:爱意克制`) > 0) * 0.2
+      ) {
         era.set(`status:${cid}:反避孕套`, 1);
       }
     }

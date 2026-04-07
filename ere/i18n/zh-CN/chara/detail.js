@@ -242,7 +242,7 @@ class I18nDetail {
   sex_image_set_template = '第 %SET% 套';
   sex_image_set_common = '通用';
   sex_image_common_info = '使用通用调教立绘';
-  sex_image_personal_info = '可用专属调教立绘';
+  sex_image_personal_info = '专属调教立绘可用';
 
   exp_mouth_title = '情报【口】';
   exp_mouth_gift_desc = '构造完美的唇齿口腔，天生的吸力能让任何对手缴械投降';

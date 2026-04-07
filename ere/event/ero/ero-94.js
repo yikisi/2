@@ -16,7 +16,9 @@ module.exports = class extends CustomizedEro {
         e === ero_hooks.force_deep_blow_job ||
         e === ero_hooks.force_hand_and_blow_job ||
         e === ero_hooks.fuck_tit_and_mouth ||
-        e === ero_hooks.sixty_nine;
+        e === ero_hooks.sixty_nine ||
+        e === ero_hooks.spit_roast ||
+        e === ero_hooks.spit_roast_anal_sex;
     }
     return super.filter_in_rape();
   }

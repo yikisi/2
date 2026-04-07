@@ -69,7 +69,7 @@ async function select_target_in_storage(iid, filter_cb = () => true) {
         },
         {
           config: { width: 12 },
-          content: get_status(cid),
+          content: get_status(cid, 29),
           type: 'text',
         },
       );

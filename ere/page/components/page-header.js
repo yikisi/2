@@ -130,7 +130,7 @@ function page_header(enable_race_info) {
             },
           ]
         : [];
-    const status_list = sys_get_status(0);
+    const status_list = sys_get_status(0, 36);
     const title_info = [
       ...i18n().get_ui_hd_honour({
         ...get_abbr_number(cur_fame),

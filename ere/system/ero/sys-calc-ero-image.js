@@ -55,7 +55,7 @@ function get_image_name(img, base, ...suffixes) {
 
 function sys_get_ero_image(
   cid,
-  img_name = era.get(`cstr:${cid}:头像T`) || era.get(`cstr:${cid}:头像`),
+  img_name = era.get(`cstr:${cid}:头像T`) ?? era.get(`cstr:${cid}:头像`),
   in_train = true,
 ) {
   const base_name = era.get(`cstr:${cid}:头像`);

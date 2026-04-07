@@ -33,6 +33,8 @@ const {
 const di18n = require('#/i18n/extended-def');
 const { i18n, lan } = require('#/i18n/selector');
 
+const status_collapse_limit = 59;
+
 /**
  * @param {number} cid
  * @param {number} year_begin
@@ -160,7 +162,7 @@ async function reg_race_page() {
     registered_race,
   );
   let base_disabled_check = check_register_disabled(curr, in_foreign);
-  let status_list = sys_get_status(curr);
+  let status_list = sys_get_status(curr, status_collapse_limit);
 
   while (flag_race_reg) {
     await era.clear();
@@ -398,7 +400,7 @@ async function reg_race_page() {
         registered_race,
       );
       base_disabled_check = check_register_disabled(curr, in_foreign);
-      status_list = sys_get_status(curr);
+      status_list = sys_get_status(curr, status_collapse_limit);
     } else {
       if (registered_race.race === ret) {
         registered_race.race = registered_race.week = -1;

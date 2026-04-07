@@ -27,26 +27,25 @@ function get_part_touch(cid, cpart) {
       touched_chara.get_colored_name(),
     );
   }
-  const body_part = era.get(`tcvar:${cid}:${part_touch[cpart]}接触部位`);
-  if (body_part.part === part_enum.item) {
+  if (touched_part.part === part_enum.item) {
     let item_name;
-    if (body_part.item === item_enum.clamps) {
+    if (touched_part.item === item_enum.clamps) {
       item_name =
         cpart === part_enum.breast
           ? i18n().sex.nipple_clamps
           : i18n().sex.clitoris_clamps;
     } else {
-      item_name = i18n().tb_item[body_part.item];
+      item_name = i18n().tb_item[touched_part.item];
     }
-    return i18n().sex.get_item_touch_info([
+    return i18n().sex.get_item_touch_info(
       touched_chara.get_colored_name(),
-      __(`body_part.${get_item_action(body_part.item, cpart)}`),
+      __(`body_part.${get_item_action(touched_part.item, cpart)}`),
       { color: buff_colors[2], content: item_name },
-    ]);
+    );
   }
   return i18n().sex.get_touch_info(touched_chara.get_colored_name(), {
     color: buff_colors[2],
-    content: __(`body_part.s_${part_enum.keys[body_part.part]}`),
+    content: __(`body_part.s_${part_enum.keys[touched_part.part]}`),
   });
 }
 
