@@ -40,12 +40,11 @@ module.exports = class extends Edu3UntilWeekStart {
       `${me.name} 转头，努力微笑着看向自家担当，随后看到了那双无神的双眸，将 ${me.name} 的思想吸回现实。`,
     );
     era.println();
-    await era.printAndWait(
-      `主治医「${teio.name}${teio.adult_sex_title}，以及 ${
-        me.actual_name
-      }${me.adult_sex_title}，${
-        teio.sex
-      }的训练员，我必须再次强调一遍，要做好此生放弃赛跑的准备。」`,
+    await me.say_as_passer_by_and_wait(
+      '主治医生',
+      `${teio.actual_name_with_title}，以及 ${
+        me.actual_name_with_title
+      }，${teio.sex}的训练员，我必须再次强调一遍，要做好此生放弃赛跑的准备。`,
     );
     era.println();
     await era.printAndWait(
@@ -628,21 +627,22 @@ module.exports = class extends Edu3UntilWeekStart {
         ' 趴在桌面上，失去了学习动力。',
       ]);
       await me.say_and_wait('果然有些事情不会骗人，不会就是不会。', true);
-    } else if (era.get('status:3:腿伤') > 0) {
-      await teio.say_and_wait('啊！唔……');
-      await era.printAndWait(
-        `平时充满活力带着几分娇气的音色在痛苦的影响下扭曲成尖锐的叫声，直扎 ${me.name} 的耳膜和心房，${me.name} 三步并作两步飞奔过去，小心翼翼地安抚着${teio.sex}，仔细检查身体，同时轻揉患处。`,
-      );
-      hook.arg = 0;
     } else {
-      await teio.say_and_wait('咿——');
-      await era.printAndWait([
-        '伴随着一声长音，',
-        me.get_colored_name(),
-        ' 的担当不小心摔倒了。',
-        me.get_colored_name(),
-        ' 赶忙过去查看情况。',
-      ]);
+      if (era.get('status:3:腿伤') > 0) {
+        await teio.say_and_wait('啊！唔……');
+        await era.printAndWait(
+          `平时充满活力带着几分娇气的音色在痛苦的影响下扭曲成尖锐的叫声，直扎 ${me.name} 的耳膜和心房，${me.name} 三步并作两步飞奔过去，小心翼翼地安抚着${teio.sex}，仔细检查身体，同时轻揉患处。`,
+        );
+      } else {
+        await teio.say_and_wait('咿——');
+        await era.printAndWait([
+          '伴随着一声长音，',
+          me.get_colored_name(),
+          ' 的担当不小心摔倒了。',
+          me.get_colored_name(),
+          ' 赶忙过去查看情况。',
+        ]);
+      }
       hook.arg = 0;
     }
   }

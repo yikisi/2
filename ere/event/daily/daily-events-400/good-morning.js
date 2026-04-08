@@ -5,8 +5,6 @@ const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
 
-const { get_chara_color } = require('#/data/chara-colors');
-
 module.exports = () => {
   const love = era.get('love:400'),
     silence = get_chara_talk(400),
@@ -47,11 +45,7 @@ module.exports = () => {
     () => {
       silence.say([
         '是 ',
-        {
-          content: '骏川' + (era.get('flag:角色性别') === 1 ? '先生' : '小姐'),
-          color: get_chara_color(301),
-          fontWeight: 'bold',
-        },
+        sys_get_colored_callname(400, 301),
         ' 啊……',
         silence.sex,
         '是一个很强……不，没什么，忘了吧。',

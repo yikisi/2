@@ -45,7 +45,7 @@ async function single_vehicle(item, vid = item - 60 + 1) {
             )
             .replace('%NEW%', item_name)
         : i18n().timon.storage.single_vehicle_equip_confirm_template.replace(
-            '%NEW%',
+            '%ITEM%',
             item_name,
           ),
     );
@@ -100,7 +100,7 @@ async function multiple_vehicle(item, vid = item - 60 + 1) {
             )
             .replace('%NEW%', item_name)
         : i18n().timon.storage.multiple_vehicle_equip_confirm_template.replace(
-            '%NEW%',
+            '%ITEM%',
             item_name,
           ),
     );

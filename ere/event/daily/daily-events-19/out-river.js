@@ -568,8 +568,8 @@ module.exports = async (hook) => {
             me.get_colored_name(),
             ' 闭上眼，只能说声谢谢。',
           ]);
+          era.println();
           await era.printAndWait([
-            { isBr: true },
             digital.get_colored_name(),
             ' 异常的娇小，但 ',
             me.get_colored_name(),
