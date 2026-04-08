@@ -156,7 +156,7 @@ module.exports = class extends CustomizedLove {
     }
     const ret = await print_title_with_kojo(this.#kojo, '89', pama, {
       ...this.#dict,
-      SISTERS: pama.siblings_sex_title,
+      SIBLINGS: pama.siblings_sex_title,
     });
     if (ret['update'] === 2) {
       await sys_love_uma_in_event(this.id);

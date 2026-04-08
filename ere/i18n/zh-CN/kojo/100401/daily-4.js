@@ -5,7 +5,6 @@
 const era = require('#/era-electron');
 
 const { get_random_entry } = require('#/utils/list-utils');
-const { get_random_value } = require('#/utils/value-utils');
 
 module.exports = {
   /**
@@ -908,16 +907,12 @@ module.exports = {
         ' 在意识模糊之中似乎看到了三女神的笑容',
       ]);
     } else {
-      switch (get_random_value(0, 2)) {
-        case 0:
-          await darley.say_and_wait('加油吧孩子们');
-          break;
-        case 1:
-          await godolphin.say_and_wait('我可爱的孩子们，希望你们能幸福');
-          break;
-        case 2:
-          await byerley.say_and_wait('去奔跑吧，希望在驰骋的尽头');
-      }
+      const buffer = [
+        () => darley.say_and_wait('加油吧孩子们'),
+        () => godolphin.say_and_wait('我可爱的孩子们，希望你们能幸福'),
+        () => byerley.say_and_wait('去奔跑吧，希望在驰骋的尽头'),
+      ];
+      await get_random_entry(buffer)();
       await era.printAndWait(`叮铃铃`);
       await era.printAndWait(`你似乎听到了三女神的低语。`);
       await era.printAndWait(`你偷偷睁开眼睛往${maru.name}的方向瞟了一眼。`);

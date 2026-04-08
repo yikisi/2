@@ -1,38 +1,24 @@
-/**
- * @file 目白阿尔丹 - 日常
- * @author 洛洛
- */
 const era = require('#/era-electron');
 
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
-const kojo = require('#/event/daily/daily-71.kojo');
 const CustomizedDaily = require('#/event/daily/daily-common');
-const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
-const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
-const select_action_in_shopping_street = require('#/event/daily/snippets/select-action-in-shopping-street');
-const select_action_in_station = require('#/event/daily/snippets/select-action-in-station');
-const print_event_name = require('#/event/snippets/print-event-name');
+const generate_dictionary = require('#/event/snippets/generate-dictionary');
+const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const { get_chara_color } = require('#/data/chara-colors');
 const ArdanLifeMarks = require('#/data/event/life-event-marks/life-event-marks-71');
 
+const { i18n } = require('#/i18n/selector');
+
 module.exports = class extends CustomizedDaily {
+  get #kojo() {
+    return i18n().kojo[this.id].daily;
+  }
+
   get #dict() {
-    const o = {};
-    o['代表色'] = get_chara_color(this.id);
-    o['你'] = era.get('callname:0:-2');
-    o['称呼'] = sys_get_callname(this.id, 0);
-    if (era.get(`cflag:${this.id}:性别`) === 1) {
-      o['她'] = '他';
-      o['马娘'] = '马郎';
-    } else {
-      o['她'] = '她';
-      o['马娘'] = '马娘';
-    }
-    return o;
+    return generate_dictionary(this.id, { call: !0, uma: !0 });
   }
 
   #get_callname(id) {
@@ -40,149 +26,180 @@ module.exports = class extends CustomizedDaily {
     return sys_get_callname(this.id, id);
   }
 
-  select() {
-    if (era.get('status:0:生日') > 0) {
-      kojo['生日选中互动'](this.#dict);
-    } else {
-      kojo['回合开始'](this.#dict);
-    }
-  }
-
   good_morning() {
     if (era.get('status:0:生日') > 0) {
-      kojo['生日选中互动'](this.#dict);
+      this.#kojo['select_in_birthday'](this.#dict);
     } else {
-      kojo['回合开始'](this.#dict);
+      this.#kojo['good_morning'](this.#dict);
     }
   }
 
-  async good_night() {
-    kojo['回合结束'](this.#dict);
+  select() {
+    if (era.get('status:0:生日') > 0) {
+      this.#kojo['select_in_birthday'](this.#dict);
+    } else {
+      this.#kojo['select'](this.#dict);
+    }
+  }
+
+  good_night_normal() {
+    this.#kojo['good_night_normal'](this.#dict);
   }
 
   async talk() {
-    const dict = this.#dict;
-    dict['阿尔丹称呼小栗帽'] = this.#get_callname(6);
-    dict['阿尔丹称呼玉藻十字'] = this.#get_callname(21);
-    dict['阿尔丹称呼速子'] = this.#get_callname(32);
-    dict['阿尔丹称呼善信'] = this.#get_callname(64);
-    dict['阿尔丹称呼千代王'] = this.#get_callname(69);
-    dict['阿尔丹称呼八重无敌'] = this.#get_callname(72);
-    dict['阿尔丹称呼高峰'] = this.#get_callname(86);
-    await kojo['闲聊'](dict);
+    await this.#kojo['talk']({
+      ...this.#dict,
+      CALL_21: this.#get_callname(21),
+      CALL_32: this.#get_callname(32),
+      CALL_6: this.#get_callname(6),
+      CALL_64: this.#get_callname(64),
+      CALL_69: this.#get_callname(69),
+      CALL_72: this.#get_callname(72),
+      CALL_86: this.#get_callname(86),
+    });
   }
 
   async office_gift() {
-    await kojo['送礼'](this.#dict);
+    await this.#kojo['office_gift'](this.#dict);
   }
 
-  async out_church() {
-    await kojo['外出神社祈福'](this.#dict);
+  async o_c_pray() {
+    await this.#kojo['o_c_pray'](this.#dict);
   }
 
-  async out_river(hook) {
-    if ((hook.arg = (await select_action_around_river()) > 0)) {
-      await kojo['散步'](this.#dict);
-    } else {
-      await kojo['河边钓鱼'](this.#dict);
-    }
+  async o_r_fishing() {
+    await this.#kojo['o_r_fishing'](this.#dict);
   }
 
-  async out_shopping(hook) {
-    const temp = await select_action_in_shopping_street();
-    hook.arg = temp <= 1;
-    switch (temp) {
-      case 0:
-        await kojo['街机厅'](this.#dict);
-        break;
-      case 1:
-        await kojo['抽奖'](this.#dict);
-        break;
-      case 2:
-        await kojo['卡拉OK'](this.#dict);
-        break;
-      case 3:
-        await kojo['看电影'](this.#dict);
-    }
+  async o_r_walking() {
+    await this.#kojo['o_r_walking'](this.#dict);
   }
 
-  async out_station(hook) {
-    switch ((hook.arg = await select_action_in_station(3))) {
-      case 0:
-        await kojo['吃饭'](this.#dict);
-        break;
-      case 1:
-        await kojo['约会'](this.#dict);
-        break;
-      case 2:
-        await kojo['逛商场'](this.#dict);
-    }
+  async o_s_arcade() {
+    await this.kojo['o_s_arcade'](this.#dict);
   }
 
-  async school_atrium(hook) {
-    if (!(hook.arg = await select_action_in_atrium())) {
-      await kojo['枯树洞'](this.#dict);
-    } else {
-      await kojo['中庭约会'](this.#dict);
-    }
+  async o_s_drawing() {
+    await this.kojo['o_s_drawing'](this.#dict);
+  }
+
+  async o_s_ktv() {
+    await this.kojo['o_s_ktv'](this.#dict);
+  }
+
+  async o_s_movie() {
+    await this.kojo['o_s_movie'](this.#dict);
+  }
+
+  async o_s_restaurant() {
+    await this.kojo['o_s_restaurant'](this.#dict);
+  }
+
+  async o_s_dating() {
+    await this.kojo['o_s_dating'](this.#dict);
+  }
+
+  async o_s_shopping() {
+    await this.kojo['o_s_shopping'](this.#dict);
+  }
+
+  async s_a_tree_hollow() {
+    await this.#kojo['s_a_tree_hollow'](this.#dict);
+  }
+
+  async s_a_dating() {
+    await this.#kojo['s_a_dating'](this.#dict);
   }
 
   async school_rooftop() {
-    await kojo['吃便当'](this.#dict);
+    await this.#kojo['school_rooftop'](this.#dict);
   }
 
   async office_cook() {
-    await kojo['一起做饭'](this.#dict);
+    await this.#kojo['office_cook'](this.#dict);
   }
 
   async office_study() {
-    await kojo['指导学习'](this.#dict);
+    await this.#kojo['office_study'](this.#dict);
   }
 
   async office_rest() {
-    await kojo['一起休息'](this.#dict);
+    await this.#kojo['office_rest'](this.#dict);
   }
 
   async office_game() {
-    await kojo['一起打游戏机'](this.#dict);
+    await this.#kojo['office_game'](this.#dict);
   }
 
-  async celebration(hook) {
-    let name;
-    switch (era.get('flag:当前回合数') % 48) {
-      case 1:
-        name = '新年';
-        break;
-      case 6:
-        name = '情人节';
-        break;
-      case 14:
-        name = '粉丝感谢祭';
-        break;
-      case 30:
-        name = '庙会';
-        break;
-      case 40:
-        name = '万圣节';
-        break;
-      case 0:
-        name = '圣诞节';
-    }
-    if (!name) {
-      return await super.celebration(hook);
-    }
-    await print_event_name(name, get_chara_talk(this.id));
-    await kojo[name](this.#dict);
+  async cl_new_year() {
+    await print_title_with_kojo(
+      this.#kojo,
+      'cl_new_year',
+      get_chara_talk(this.id),
+      this.#dict,
+    );
+  }
+
+  async cl_valentine() {
+    await print_title_with_kojo(
+      this.#kojo,
+      'cl_valentine',
+      get_chara_talk(this.id),
+      this.#dict,
+    );
+  }
+
+  async cl_fans() {
+    await print_title_with_kojo(
+      this.#kojo,
+      'cl_fans',
+      get_chara_talk(this.id),
+      this.#dict,
+    );
+  }
+
+  async cl_temple_fair() {
+    await print_title_with_kojo(
+      this.#kojo,
+      'cl_temple_fair',
+      get_chara_talk(this.id),
+      this.#dict,
+    );
+  }
+
+  async cl_halloween() {
+    await this.#kojo['cl_halloween'](this.#dict);
+    await print_title_with_kojo(
+      this.#kojo,
+      'cl_christmas',
+      get_chara_talk(this.id),
+      this.#dict,
+    );
+  }
+
+  async cl_christmas() {
+    await print_title_with_kojo(
+      this.#kojo,
+      'cl_christmas',
+      get_chara_talk(this.id),
+      this.#dict,
+    );
   }
 
   async birthday() {
-    await print_event_name('生日', get_chara_talk(this.id));
     const life_marks = new ArdanLifeMarks();
+    let key;
     if (era.get(`love:${this.id}`) === 100 && !life_marks.birthday) {
       life_marks.birthday = 1;
-      await kojo['特殊生日'](this.#dict);
+      key = 'birthday_dependence';
     } else {
-      await kojo['普通生日'](this.#dict);
+      key = 'birthday';
     }
+    await print_title_with_kojo(
+      this.#kojo,
+      key,
+      get_chara_talk(this.id),
+      this.#dict,
+    );
   }
 };

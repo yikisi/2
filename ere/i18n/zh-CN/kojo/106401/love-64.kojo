@@ -450,7 +450,7 @@ happy:
           content:
             - fontWeight: bold
               content: %CHARA%
-            - 「%CALLNAME%……可以哦，如果想做的话，要小声一点……被%SISTERS%们听到就麻烦了呢」
+            - 「%CALLNAME%……可以哦，如果想做的话，要小声一点……被%SIBLINGS%们听到就麻烦了呢」
         -
         - acc: 1
           key: sex

@@ -1,7 +1,3 @@
-/**
- * @file 目白善信 - 日常
- * @author KUN
- */
 const era = require('#/era-electron');
 
 const next_turn = require('#/system/ero/calc-sex/next-turn');
@@ -21,24 +17,16 @@ const {
 } = require('#/system/sys-calc-chara-others');
 
 const { get_custom_check } = require('#/event/check/check-factory');
-const kojo = require('#/event/daily/daily-64.kojo');
 const CustomizedDaily = require('#/event/daily/daily-common');
-const select_action_around_river = require('#/event/daily/snippets/select-action-around-river');
-const select_action_in_atrium = require('#/event/daily/snippets/select-action-in-atrium');
-const select_action_in_shopping_street = require('#/event/daily/snippets/select-action-in-shopping-street');
-const select_action_in_station = require('#/event/daily/snippets/select-action-in-station');
 const { i_pama_yandere } = require('#/event/snippets/64');
 const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
 const generate_dictionary = require('#/event/snippets/generate-dictionary');
-const print_event_name = require('#/event/snippets/print-event-name');
-const print_name_and_show_kojo = require('#/event/snippets/print-name-and-show-kojo');
 const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
-const { buff_colors } = require('#/data/color-const');
 const EroParticipant = require('#/data/ero/ero-participant');
 const { item_enum } = require('#/data/ero/item-const');
 const { lust_border } = require('#/data/ero/orgasm-const');
@@ -50,20 +38,16 @@ const { location_enum } = require('#/data/locations');
 const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends CustomizedDaily {
+  get #kojo() {
+    return i18n().kojo[this.id].daily;
+  }
+
   get #dict() {
-    const dict = {};
-    const pama = get_chara_talk(this.id);
-    dict['称呼'] = sys_get_callname(this.id, 0);
-    dict['代表色'] = pama.color;
-    dict['小姐'] = pama.adult_sex_title;
-    dict['她'] = pama.sex;
-    dict['姐妹'] = pama.siblings_sex_title;
-    dict['马娘'] = pama.uma_sex_title;
-    const me = get_chara_talk(0);
-    dict.T = me.name;
-    dict['T称呼善信'] = sys_get_callname(0, this.id);
-    dict.half_life = +i_pama_yandere();
-    return dict;
+    return {
+      ...generate_dictionary(this.id, { call: !0, uma: !0, teen: !0 }),
+      half_life: +i_pama_yandere(),
+      SELF_CALL: sys_get_callname(this.id, this.id),
+    };
   }
 
   good_morning() {
@@ -72,57 +56,60 @@ module.exports = class extends CustomizedDaily {
 
   select() {
     const life_marks = new PamaEduMarks();
-    const dict = this.#dict;
     if (life_marks.b_escape > 0) {
       life_marks.b_escape = 0;
-      kojo['地下室逃脱'](dict);
+      this.#kojo['select_escape'](this.#dict);
     } else {
       get_chara_talk(65);
-      dict['善信称呼太阳神'] = sys_get_callname(this.id, 65);
-      kojo['主界面'](dict);
+      this.#kojo['select']({
+        ...this.#dict,
+        CALL_65: sys_get_callname(this.id, 65),
+      });
     }
   }
 
   async office_study() {
-    await kojo['指导学习'](this.#dict);
-  }
-
-  async office_cook() {
-    await kojo['加餐'](this.#dict);
+    await this.#kojo['office_study'](this.#dict);
   }
 
   async office_prepare() {
-    await kojo['赛前准备'](this.#dict);
-  }
-
-  async office_rest() {
-    await kojo['小憩'](this.#dict);
+    await this.#kojo['office_prepare'](this.#dict);
   }
 
   async talk() {
-    const dict = this.#dict;
     get_chara_talk(59);
-    dict['善信称呼多伯'] = sys_get_callname(this.id, 59);
     get_chara_talk(65);
-    dict['善信称呼太阳神'] = sys_get_callname(this.id, 65);
     get_chara_talk(71);
-    dict['善信称呼阿尔丹'] = sys_get_callname(this.id, 71);
     get_chara_talk(74);
-    dict['善信称呼光明'] = sys_get_callname(this.id, 74);
     get_chara_talk(86);
-    dict['善信称呼高峰'] = sys_get_callname(this.id, 86);
-    await kojo['聊天'](dict);
-  }
-
-  async office_game() {
-    const dict = this.#dict;
-    get_chara_talk(27);
-    dict['善信称呼莱恩'] = sys_get_callname(this.id, 27);
-    await kojo['玩游戏'](dict);
+    await this.#kojo['talk']({
+      ...this.#dict,
+      CALL_59: sys_get_callname(this.id, 59),
+      CALL_65: sys_get_callname(this.id, 65),
+      CALL_71: sys_get_callname(this.id, 71),
+      CALL_74: sys_get_callname(this.id, 74),
+      CALL_86: sys_get_callname(this.id, 86),
+    });
   }
 
   async office_gift() {
-    await kojo['送礼物'](this.#dict);
+    await this.#kojo['office_gift'](this.#dict);
+  }
+
+  async office_cook() {
+    await this.#kojo['office_cook'](this.#dict);
+  }
+
+  async office_rest() {
+    await this.#kojo['office_rest'](this.#dict);
+  }
+
+  async office_game() {
+    get_chara_talk(27);
+    await this.#kojo['office_game']({
+      ...this.#dict,
+      CALL_27: sys_get_callname(this.id, 27),
+    });
   }
 
   async school_atrium(hook) {
@@ -134,18 +121,11 @@ module.exports = class extends CustomizedDaily {
       !edu_marks.snails
     ) {
       edu_marks.snails = 1;
-      const pama = get_chara_talk(this.id);
-      const ret = await print_name_and_show_kojo(
-        '要变成蜗牛了///',
+      const ret = await print_title_with_kojo(
+        this.#kojo,
+        'tree_hollow_snails',
         get_chara_talk(this.id),
-        kojo,
-        {
-          代表色: pama.color,
-          T: era.get(`callname:${this.id}:-2`),
-          她: pama.sex,
-          少女: pama.teen_sex_title,
-          称呼: sys_get_callname(this.id, 0),
-        },
+        this.#dict,
       );
       begin_and_init_ero(0, this.id);
       sys_do_sex(
@@ -172,11 +152,15 @@ module.exports = class extends CustomizedDaily {
       hook.override = true;
       return;
     }
-    if ((hook.arg = !(await select_action_in_atrium()))) {
-      await kojo['枯树洞'](this.#dict);
-    } else {
-      await kojo['中庭约会'](this.#dict);
-    }
+    return super.school_atrium(hook);
+  }
+
+  async s_a_tree_hollow() {
+    await this.#kojo['s_a_tree_hollow'](this.#dict);
+  }
+
+  async s_a_dating() {
+    await this.#kojo['s_a_tree_hollow'](this.#dict);
   }
 
   async school_rooftop() {
@@ -186,57 +170,59 @@ module.exports = class extends CustomizedDaily {
       life_marks.love_rooftop = 1;
       dict.check = 1;
     }
-    if ((await kojo['天台'](dict))[0] === 2 && sys_love_uma(this.id, 1)) {
+    if (
+      (await this.#kojo['school_rooftop'](dict))[0] === 2 &&
+      sys_love_uma(this.id, 1)
+    ) {
       await era.waitAnyKey();
     }
   }
 
-  async out_river(hook, extra) {
-    if ((hook.arg = await select_action_around_river()) > 0) {
-      await kojo['散步'](this.#dict);
-    } else {
-      await kojo['钓鱼'](this.#dict);
-      extra.jpy = get_random_value(0, 5);
-    }
+  async o_r_fishing() {
+    await this.#kojo['o_r_fishing'](this.#dict);
   }
 
-  async out_shopping(hook) {
-    const temp = await select_action_in_shopping_street();
-    hook.arg = temp <= 1;
-    const dict = this.#dict;
-    switch (temp) {
-      case 0:
-        await kojo['街机厅'](dict);
-        break;
-      case 1:
-        await kojo['抽奖'](dict);
-        break;
-      case 2:
-        await kojo['卡拉OK'](dict);
-        break;
-      case 3:
-        dict['善信称呼阿尔丹'] = sys_get_callname(this.id, 71);
-        await kojo['电影'](dict);
-    }
+  async o_r_walking() {
+    await this.#kojo['o_r_walking'](this.#dict);
   }
 
-  async out_church() {
-    const dict = this.#dict;
-    dict.dice = +(Math.random() < 0.5);
-    await kojo['神社'](dict);
+  async o_s_arcade() {
+    await this.#kojo['o_s_arcade']({
+      ...this.#dict,
+      SIBLINGS: get_chara_talk(this.id).siblings_sex_title,
+    });
   }
 
-  async out_station(hook) {
-    switch ((hook.arg = await select_action_in_station(this.id))) {
-      case 0:
-        await kojo['车站吃饭'](this.#dict);
-        break;
-      case 1:
-        await kojo['车站约会'](this.#dict);
-        break;
-      case 2:
-        await kojo['商店'](this.#dict);
-    }
+  async o_s_drawing() {
+    await this.#kojo['o_s_drawing'](this.#dict);
+  }
+
+  async o_s_ktv() {
+    await this.#kojo['o_s_ktv'](this.#dict);
+  }
+
+  async o_s_movie() {
+    get_chara_talk(71);
+    await this.#kojo['o_s_movie']({
+      ...this.#dict,
+      CALL_71: sys_get_callname(this.id, 71),
+    });
+  }
+
+  async o_c_pray(_, __, dice) {
+    await this.#kojo['o_c_pray']({ ...this.#dict, dice });
+  }
+
+  async o_s_restaurant() {
+    await this.#kojo['o_s_restaurant'](this.#dict);
+  }
+
+  async o_s_dating() {
+    await this.#kojo['o_s_dating'](this.#dict);
+  }
+
+  async o_s_shopping() {
+    await this.#kojo['o_s_shopping'](this.#dict);
   }
 
   async good_night(hook) {
@@ -309,117 +295,131 @@ module.exports = class extends CustomizedDaily {
       await i18n().kojo[this.id].love['come_fy_end'](this.#dict);
       return;
     }
-    if (check > 0) {
-      const ret = await kojo['晚安求爱']({ check, ...this.#dict });
-      if (ret[0] === 1) {
-        hook.arg = 1;
-      } else if (ret[0] === 2) {
-        if (check === 2) {
-          hook.arg = 2;
-        } else {
-          hook.arg = 0;
-        }
-      }
+    return super.good_night(hook);
+  }
+
+  async good_night_sex(_, __, check) {
+    return (
+      (await this.#kojo['good_night_sex']({ ...this.#dict, check }))[0] === 1
+    );
+  }
+
+  good_night_normal() {
+    this.#kojo['good_night_normal'](this.#dict);
+  }
+
+  async cl_palace(pama, me) {
+    if (era.get(`cflag:${this.id}:殿堂`) > 0) {
+      return await super.cl_palace(pama, me);
+    }
+    await print_title_with_kojo(this.#kojo, 'cl_palace', pama, this.#dict);
+  }
+
+  async cl_fans(pama) {
+    if (era.get(`cflag:${this.id}:育成回合计时`) < 3 * 48) {
+      const bourbon = get_chara_talk(26);
+      await print_title_with_kojo(this.#kojo, 'cl_fans_in_edu', pama, {
+        ...this.#dict,
+        BOURBON: bourbon.name,
+        COLOR_26: bourbon.color,
+      });
     } else {
-      kojo['晚安'](this.#dict);
+      await print_title_with_kojo(this.#kojo, 'cl_fans', pama, this.#dict);
+    }
+  }
+
+  async cl_temple_fair(pama, me, hook) {
+    if (!(era.get(`cflag:${this.id}:育成回合计时`) < 3 * 48)) {
+      return await super.cl_temple_fair(pama, me);
+    }
+    const ret = await print_title_with_kojo(
+      this.#kojo,
+      'cl_temple_fair',
+      pama,
+      this.#dict,
+    );
+    let relation = 0;
+    let love = 0;
+    let base = [];
+    let pt = 0;
+    if (ret[0] === 1) {
+      hook.override = true;
+      relation = 10;
+      love = 2;
+      if (ret[1] === 1) {
+        base = [100];
+      } else {
+        pt = 35;
+      }
+      switch (ret.at(-1)) {
+        case 1:
+          relation += 10;
+          break;
+        case 2:
+          love += 2;
+          break;
+        case 3:
+          sys_change_lust(this.id, get_random_value(800, 1200));
+      }
+      if (all_reward_in_event(this.id, { relation, love, base, pt })) {
+        await era.waitAnyKey();
+      }
+    }
+    era.set(`cflag:${this.id}:节日事件标记`, 0);
+  }
+
+  async cl_halloween(pama) {
+    await print_title_with_kojo(this.#kojo, 'cl_halloween', pama, this.#dict);
+  }
+
+  async cl_christmas(pama) {
+    const nature = get_chara_talk(60);
+    const tannhauser = get_chara_talk(62);
+    const helios = get_chara_talk(65);
+    const turbo = get_chara_talk(66);
+    if (
+      (
+        await print_title_with_kojo(this.#kojo, 'cl_christmas', pama, {
+          ...this.#dict,
+          COLOR_60: nature.color,
+          COLOR_62: tannhauser.color,
+          COLOR_65: helios.color,
+          COLOR_66: turbo.color,
+          HELIOS: helios.name,
+          NATURE: nature.name,
+          TANNHAUSER: tannhauser.name,
+          TURBO: turbo.name,
+        })
+      )[6] === 1
+    ) {
+      const cache = era.get('flag:当前位置');
+      era.set('flag:当前位置', location_enum.home);
+      await quick_into_sex(this.id);
+      era.set('flag:当前位置', cache);
+      await this.#kojo['cl_christmas_sex_end'](this.#dict);
     }
   }
 
   async load_talk() {
-    await kojo['读档对话'](this.#dict);
-  }
-
-  async celebration(hook) {
-    const pama = get_chara_talk(this.id);
-    const dict = this.#dict;
-    let temp;
-    let relation;
-    let love;
-    let base;
-    let pt;
-    switch (era.get('flag:当前回合数') % 48) {
-      case 9:
-        if (era.get(`cflag:${this.id}:殿堂`) > 0) {
-          return await super.celebration(hook);
-        }
-        await print_name_and_show_kojo('殿堂周', pama, kojo, dict);
-        break;
-      case 14:
-        await print_event_name('粉丝感谢祭', pama);
-        if (era.get(`cflag:${this.id}:育成回合计时`) < 3 * 48) {
-          dict['波旁色'] = get_chara_talk(26).color;
-          await kojo['育成中粉丝感谢祭'](dict);
-        } else {
-          dict['自称'] = era.get('callname:64:64');
-          await kojo['已育成粉丝感谢祭'](dict);
-        }
-        break;
-      case 30:
-        if (!(era.get(`cflag:${this.id}:育成回合计时`) < 3 * 48)) {
-          return await super.celebration(hook);
-        }
-        era.set(`cflag:${this.id}:节日事件标记`, 0);
-        dict['自称'] = era.get('callname:64:64');
-        temp = await print_name_and_show_kojo('庙会', pama, kojo, dict);
-        if (temp[0] === 1) {
-          hook.override = true;
-          relation = 10;
-          love = 2;
-          if (temp[1] === 1) {
-            base = [100];
-          } else {
-            pt = 35;
-          }
-          switch (temp[temp.length - 1]) {
-            case 1:
-              relation += 10;
-              break;
-            case 2:
-              love += 2;
-              break;
-            case 3:
-              sys_change_lust(this.id, get_random_value(800, 1200));
-          }
-          if (all_reward_in_event(this.id, { relation, love, base, pt })) {
-            await era.waitAnyKey();
-          }
-        }
-        break;
-      case 40:
-        await print_name_and_show_kojo('万圣节', pama, kojo, dict);
-        break;
-      case 48:
-        dict['内恰色'] = get_chara_talk(60).color;
-        dict['双涡轮色'] = get_chara_talk(66).color;
-        dict['诗歌剧色'] = get_chara_talk(62).color;
-        if (
-          (await print_name_and_show_kojo('圣诞节', pama, kojo, dict))[6] === 1
-        ) {
-          const cache = era.get('flag:当前位置');
-          era.set('flag:当前位置', location_enum.home);
-          await quick_into_sex(this.id);
-          era.set('flag:当前位置', cache);
-        }
-        break;
-      default:
-        return await super.celebration(hook);
-    }
+    await this.#kojo['load_talk'](this.#dict);
   }
 
   async basement_end() {
     const pama = get_chara_talk(this.id);
-    let name;
     if (i_pama_yandere()) {
-      const event = i18n().kojo[this.id].love['endless_escape'];
-      await print_event_name(
-        [{ color: buff_colors[3], content: event.title }],
+      await print_title_with_kojo.ending(
+        i18n().kojo[this.id].love,
+        'endless_escape',
         pama,
+        this.#dict,
       );
-      await event(generate_dictionary(this.id));
     } else if (era.get(`love:${this.id}`) >= 75) {
-      name = '明日再会';
-      await kojo[name](this.#dict);
-      await print_event_name([{ color: buff_colors[3], content: name }], pama);
+      await print_title_with_kojo.ending(
+        this.#kojo,
+        'basement_end',
+        pama,
+        this.#dict,
+      );
     } else {
       return await super.basement_end();
     }
@@ -427,18 +427,20 @@ module.exports = class extends CustomizedDaily {
 
   async slave_end() {
     const pama = get_chara_talk(this.id);
-    let name;
     if (i_pama_yandere()) {
-      const event = i18n().kojo[this.id].love['endless_escape'];
-      await print_event_name(
-        [{ color: buff_colors[3], content: event.title }],
+      await print_title_with_kojo.ending(
+        i18n().kojo[this.id].love,
+        'endless_escape',
         pama,
+        this.#dict,
       );
-      await event(generate_dictionary(this.id));
     } else if (era.get(`love:${this.id}`) >= 75) {
-      name = '迷途终点';
-      await kojo[name](this.#dict);
-      await print_event_name([{ color: buff_colors[3], content: name }], pama);
+      await print_title_with_kojo.ending(
+        this.#kojo,
+        'slave_end',
+        pama,
+        this.#dict,
+      );
     } else {
       return await super.slave_end();
     }

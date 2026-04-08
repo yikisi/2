@@ -1530,7 +1530,7 @@ tenn_spr_win:
   - if: era.get('love:74') >= 50
     lines:
       - 带着明亮的笑脸，一路小跑到了 %YOU% 的跟前。
-      - 有些刻意的无视了 %YOU% 身边的几位%SISTERS%，轻声喊着。
+      - 有些刻意的无视了 %YOU% 身边的几位%SIBLINGS%，轻声喊着。
       - color: %COLOR%
         content:
           - fontWeight: bold

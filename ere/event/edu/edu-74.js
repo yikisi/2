@@ -428,7 +428,7 @@ module.exports = class extends CustomizedEdu {
       case race_enum.tenn_spr:
         if (extra.rank === 1) {
           key = 'tenn_spr_win';
-          dict = { ...this.#dict, SISTERS: bright.siblings_sex_title };
+          dict = { ...this.#dict, SIBLINGS: bright.siblings_sex_title };
         }
         break;
       case race_enum.tenn_sho:
