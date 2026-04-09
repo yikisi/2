@@ -639,7 +639,7 @@ module.exports = {
       );
       await era.printAndWait(`女化妆师「抱歉请问有没有看到……」`);
       await era.printAndWait(
-        `女化妆师「${falcon.name}小姐！请赶快过来，马上就要开始了！」`,
+        `女化妆师「${falcon.actual_name_with_title}！请赶快过来，马上就要开始了！」`,
       );
       await you.say_and_wait(
         `接下来的话，我会一直陪在你身边的，所以，请不要紧张。`,

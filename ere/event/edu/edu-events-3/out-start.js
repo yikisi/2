@@ -161,7 +161,7 @@ module.exports = class extends CustomizedEdu {
       await era.printAndWait(
         `被 ${
           me.name
-        } 护在内测的${teio.uma_sex_title}${teio.adult_sex_title}，瞬间发劲，疾冲出去。`,
+        } 护在内测的${teio.actual_name_with_title}，瞬间发劲，疾冲出去。`,
       );
       await era.printAndWait('司机仰背，把刹车踩到极限，绝望地闭上双眼。');
       await era.printAndWait('然后奇迹发生了。');

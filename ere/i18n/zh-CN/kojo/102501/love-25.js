@@ -500,7 +500,7 @@ module.exports = {
         ' 看。',
       ]);
       era.printButton(
-        `「${coffee.name}${coffee.adult_sex_title}，你愿意嫁给我吗？」`,
+        `「${coffee.actual_name_with_title}，你愿意嫁给我吗？」`,
         1,
       );
       await era.input();

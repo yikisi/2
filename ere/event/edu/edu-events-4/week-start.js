@@ -2306,17 +2306,17 @@ module.exports = async function (maru, me, callname, hook, ebj) {
     );
     await me.say_and_wait(`都说到这份上了，再不向前踏出这一步那就太失礼了！`);
     await maru.say_and_wait(`哼哼～所以${callname}的回答是?`);
-    era.printButton(`${maru.name}${me.adult_sex_title},请和我约会!`, 1);
+    era.printButton(`${maru.actual_name_with_title},请和我约会!`, 1);
     await era.input();
 
     await maru.say_and_wait(
       `啊啦～${callname}可真有勇气呢,虽然我也想就这么顺着气势答应下来,不过————`,
     );
-    await era.printAndWait(`在刚刚的奔跑中${me.name}的头发变得乱糟糟的`);
+    await era.printAndWait(`在刚刚的奔跑中 ${me.name} 的头发变得乱糟糟的`);
     await maru.say_and_wait(
-      `${callname}的样子可真可爱呢,与其约会不如先把头发梳理一下吧`,
+      `${callname}的样子可真可爱呢，与其约会不如先把头发梳理一下吧`,
     );
-    era.printButton(`「「啊hao」」`, 1);
+    era.printButton(`「啊hao」」`, 1);
     await era.input();
 
     await era.printAndWait(
@@ -3228,7 +3228,7 @@ module.exports = async function (maru, me, callname, hook, ebj) {
     );
     await say_by_passer_by(
       `记者A`,
-      `${maru.name}${me.adult_sex_title}，请问${me.name}拿到奖杯的感受是什么？`,
+      `${maru.actual_name_with_title}，请问${me.name}拿到奖杯的感受是什么？`,
     );
     await maru.say_and_wait(`一般来说应该会非常激动吧？毕竟是这么盛大的赛事。`);
     await maru.say_and_wait(`不过真当自己拿到奖杯的那一刻，心底却非常平静。`);
@@ -3238,7 +3238,7 @@ module.exports = async function (maru, me, callname, hook, ebj) {
     );
     await say_by_passer_by(
       `记者A`,
-      `${maru.name}${maru.adult_sex_title}对${maru.uma_sex_title}们了解的很深呢。`,
+      `${maru.actual_name_with_title}对${maru.uma_sex_title}们了解的很深呢。`,
     );
     await maru.say_and_wait(
       `是的！比赛之前我都会和参赛的${maru.uma_sex_title}们聊天。然后听到了很多有趣的事情呢～`,
@@ -3256,7 +3256,7 @@ module.exports = async function (maru, me, callname, hook, ebj) {
     );
     await say_by_passer_by(
       `记者B`,
-      `不好意思，请问${maru.name}${me.adult_sex_title}接下来的目标是什么？`,
+      `不好意思，请问${maru.actual_name_with_title}接下来的目标是什么？`,
     );
     await maru.say_and_wait(`唔，真是一个比较困难的问题呢——`);
     await maru.say_and_wait(`与训练员商讨的结果是休战一段时间。`);

@@ -105,7 +105,7 @@ module.exports = (handlers = {}) => {
     );
     await flash.say_and_wait(`是呢，晚上好哦，${callname}。`);
     await me.say_and_wait(
-      `是在等待${falcon.name}小姐回来吗？请放心，${falcon.name}小姐已经平安回到宿舍中了。`,
+      `是在等待${falcon.actual_name_with_title}回来吗？请放心，${falcon.actual_name_with_title}已经平安回到宿舍中了。`,
     );
     await me.say_and_wait(
       `在路上听飞鹰小姐说过自己有个能严格按照计划表进行的室友。虽然在路上就有所期待了，不过现在看来本人比飞鹰小姐说的更加可靠。`,
@@ -125,9 +125,9 @@ module.exports = (handlers = {}) => {
     await me.say_and_wait(`飞鹰小姐对我如此看重实在令我感到荣幸。`);
     await me.say_and_wait(`既然这样，我也对接下来的三年时光开始期待了呢。`);
     await flash.say_and_wait(`三年时光啊……`);
-    await era.printAndWait(`听到${callname}提起这个词汇，荣进闪耀沉默片刻。`);
+    await era.printAndWait(`听到${me.name}提起这个词汇，荣进闪耀沉默片刻。`);
     await flash.say_and_wait(
-      `${callname}${me.adult_sex_title}/小姐，虽然在现在这个时间点提起这个问题可能会有一些冒犯与唐突，不过还是请容我询问一句。`,
+      `${sys_get_callname(37, 0)}，虽然在现在这个时间点提起这个问题可能会有一些冒犯与唐突，不过还是请容我询问一句。`,
     );
     await flash.say_and_wait(
       `身为担当训练员，您已经对此做出相应的觉悟了吗？与飞鹰同学${falcon.sex}一心同体，肩负起责任的觉悟。`,

@@ -447,9 +447,7 @@ module.exports = {
             );
           }
           await flash.say_and_wait(
-            `${
-              you.actual_name
-            }${you.adult_sex_title}，我有个不情之请想要拜托于您。`,
+            `${you.actual_name_with_title}，我有个不情之请想要拜托于您。`,
           );
           era.printButton('「？」', 1);
           await era.input();
