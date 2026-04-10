@@ -268,23 +268,22 @@ function sys_get_status(cid, collapse_limit = 0) {
   }
   // 其他长期状态
   if (
-    // STATUSNAME:20 = 爱意克制
-    era.get(`status:${cid}:20`) > 0 &&
-    // STATUSNAME:24 = 好感度镜片
-    ((cid !== 32 && era.get('status:0:24')) || era.get('status:0:23'))
+    era.get(`status:${cid}:爱意克制`) > 0 &&
+    ((cid !== 32 && era.get('status:0:好感度镜片') > 0) ||
+      era.get('status:0:马语者') > 0)
   ) {
     status_list.push({
       ...di18n.tb_status.get_titled_status(20),
       color: buff_colors[2],
     });
   }
-  // STATUSNAME:21 = 讨厌药
-  if (era.get(`status:${cid}:21`)) {
+  if (era.get(`status:${cid}:讨厌药`)) {
     status_list.push({
       ...di18n.tb_status.get_titled_status(21),
       color: sex_colors[0],
     });
   }
+  // STATUSNAME:22 = 抑制药
   if (!LoveLimitStatus.get(cid).is_empty()) {
     status_list.push({
       ...di18n.tb_status.get_titled_status(22),
@@ -292,15 +291,13 @@ function sys_get_status(cid, collapse_limit = 0) {
     });
   }
   // 性相关的
-  // STATUSNAME:32 = 发情
-  if (era.get(`status:${cid}:32`) > 0) {
+  if (era.get(`status:${cid}:发情`) > 0) {
     status_list.push({
       ...di18n.tb_status.get_titled_status(32),
       color: buff_colors[2],
     });
   }
-  // STATUSNAME:33 = 淫纹贴纸
-  if (era.get(`status:${cid}:33`) > 0) {
+  if (era.get(`status:${cid}:淫纹贴纸`) > 0) {
     status_list.push({
       ...di18n.tb_status.get_titled_status(33),
       color: buff_colors[2],
@@ -308,13 +305,11 @@ function sys_get_status(cid, collapse_limit = 0) {
   }
   // 短期药物状态放前面
   sys_get_item_status(cid, status_list);
-  // CFLAGNAME:81 = 妊娠阶段
-  const pregnant_status = era.get(`cflag:${cid}:81`);
+  const pregnant_status = era.get(`cflag:${cid}:妊娠阶段`);
   if (pregnant_status === 1 << pregnant_stage_enum.resume) {
     status_list.push({
       ...di18n.tb_status.get_titled_status(
         'pg_resume',
-        // CFLAGNAME:82 = 妊娠回合计时
         era.get(`cflag:${cid}:82`),
       ),
       color: buff_colors[2],
@@ -324,14 +319,16 @@ function sys_get_status(cid, collapse_limit = 0) {
       ...di18n.tb_status.get_titled_status('pg_prebirth'),
       color: buff_colors[2],
     });
-  } else if (era.get(`cflag:${cid}:82`) >= 4) {
+  } else if (
+    era.get(`cflag:${cid}:妊娠回合计时`) >> pregnant_stage_enum.embryo >
+    0
+  ) {
     status_list.push({
       ...di18n.tb_status.get_titled_status('pg_normal'),
       color: buff_colors[2],
     });
   }
-  // STATUSNAME:30 = 经期
-  if (era.get(`status:${cid}:30`) > 0) {
+  if (era.get(`status:${cid}:经期`) > 0) {
     status_list.push({
       ...di18n.tb_status.get_titled_status(30),
       color: buff_colors[0],
@@ -339,8 +336,7 @@ function sys_get_status(cid, collapse_limit = 0) {
   }
   if (
     era.get(`mark:${cid}:${mark_enum.ero}`) > 0 &&
-    // STATUSNAME:31 = 排卵期
-    era.get(`status:${cid}:31`) > 0
+    era.get(`status:${cid}:排卵期`) > 0
   ) {
     status_list.push({
       ...di18n.tb_status.get_titled_status(31),
@@ -348,20 +344,14 @@ function sys_get_status(cid, collapse_limit = 0) {
     });
   }
   if (
-    // CFLAGNAME:0 = 性别
-    era.get(`cflag:${cid}:0`) !== 1 &&
-    // CFLAGNAME:2 = 成长阶段
-    era.get(`cflag:${cid}:2`) >= 2 &&
-    // TALENTNAME:32 = 泌乳
-    era.get(`talent:${cid}:32`) > 0 &&
+    era.get(`cflag:${cid}:性别`) !== 1 &&
+    era.get(`cflag:${cid}:成长阶段`) >= 2 &&
+    era.get(`talent:${cid}:泌乳`) > 0 &&
     (cid === 0 ||
       era.getCharactersInTrain().length > 0 ||
-      // STATUSNAME:23 = 马语者
-      era.get('status:0:23') > 0 ||
-      // STATUSNAME:26 = 透视镜片
-      era.get('status:0:26') > 0 ||
-      // EXPNAME:25 - 26 = 性爱次数 - 睡奸次数
-      era.get(`exp:${cid}:25`) > era.get(`exp:${cid}:26`))
+      era.get('status:0:马语者') > 0 ||
+      era.get('status:0:透视镜片') > 0 ||
+      era.get(`exp:${cid}:性爱次数`) > era.get(`exp:${cid}:睡奸次数`))
   ) {
     status_list.push({
       ...di18n.tb_status.get_titled_status('milk'),

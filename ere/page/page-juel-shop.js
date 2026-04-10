@@ -316,22 +316,21 @@ module.exports = async (cid = era.get('flag:当前互动角色')) => {
         talent_groups[2].push({ tid: 32 }, { tid: 33 });
         // TALENTNAME:32 = 泌乳
         const milk_talent = era.get(`talent:${cid}:32`);
-        let mu_dict;
-        let mu_title = '';
-        if (milk_talent >= 2) {
-          mu_dict = void 0;
-        } else {
-          mu_dict = get_talent_price(cid, 32, 2);
-          mu_title = di18n.jewel_shop.get_price_title_with_other_tip(
-            mu_dict,
-            i18n().jewel_shop.milk_other_condition,
-            [['STATUS', milk_talent === 1 ? i18n().ui_yes2 : i18n().ui_no2]],
-          );
-          if (milk_talent !== 1) {
-            mu_dict = void 0;
-          }
-        }
-        mu_title ||= void 0;
+        const mu_dict =
+          milk_talent === 3 ? void 0 : get_talent_price(cid, 32, 2);
+        const mu_title =
+          milk_talent === 3
+            ? void 0
+            : di18n.jewel_shop.get_price_title_with_other_tip(
+                mu_dict,
+                i18n().jewel_shop.milk_other_condition,
+                [
+                  [
+                    'STATUS',
+                    milk_talent === 2 ? i18n().ui_yes2 : i18n().ui_no2,
+                  ],
+                ],
+              );
         const md_dict =
           milk_talent !== 3 ? void 0 : get_talent_price(cid, 32, 1);
         buffer.push(
@@ -352,6 +351,7 @@ module.exports = async (cid = era.get('flag:当前互动角色')) => {
               accelerator: 100 + acc,
               config: {
                 disabled:
+                  milk_talent !== 2 ||
                   mu_dict === void 0 ||
                   Object.entries(mu_dict).some((e) => e[1] > cj_dict[e[0]]),
                 title: mu_title,

@@ -7,7 +7,6 @@ const era = require('#/era-electron');
 const { get_random_entry } = require('#/utils/list-utils');
 
 const { buff_colors } = require('#/data/color-const');
-const { say_by_passer_by_and_wait } = require('#/utils/chara-talk-factory');
 
 module.exports = {
   /**
@@ -900,12 +899,12 @@ module.exports = {
       await era.printAndWait('——叮铃叮铃叮铃叮铃……');
       era.printButton('「……一下子进来了好多人！」', 1);
       await era.input();
-      await say_by_passer_by_and_wait('男性', [
+      await you.say_as_passer_by_and_wait('男性', [
         '喔，就是这里！那位 ',
         coffee.get_colored_name(),
         ' 经营的咖啡厅！',
       ]);
-      await say_by_passer_by_and_wait('女性', [
+      await you.say_as_passer_by_and_wait('女性', [
         '是啊，很有气氛呢～！装潢也好漂亮～！我可是',
         coffee.sex,
         '的粉丝呢～',
