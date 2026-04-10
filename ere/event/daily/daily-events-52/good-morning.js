@@ -66,8 +66,8 @@ module.exports = () => {
           ' 与 ',
           sys_get_colored_callname(52, 20),
           ' ',
-          urara.sex,
-          '们一起去吃拉面了，但是我有好好注意食量哦？虽然还是吃多了！',
+          urara.couple_title,
+          '一起去吃拉面了，但是我有好好注意食量哦？虽然还是吃多了！',
         ],
         [
           callname,

@@ -72,8 +72,8 @@ module.exports = (handlers) => {
       ' 相熟的',
       urara.uma_sex_title,
       '们时，',
-      urara.sex,
-      '们给出的答案也不尽相似。',
+      urara.couple_title,
+      '给出的答案也不尽相似。',
     ]);
     era.println();
 

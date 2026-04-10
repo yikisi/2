@@ -21,6 +21,7 @@ const { part_enum } = require('#/data/ero/part-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const { ero_hooks } = require('#/data/event/ero-hooks');
+const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
 
@@ -39,7 +40,7 @@ async function punish_pregnant_slave() {
     if (
       era.get('cflag:0:位置') === 0 &&
       era.get('flag:当前位置') !== location_enum.basement &&
-      my_marks.not_pregnant >= get_random_value(1, 3)
+      my_marks.not_pregnant >= get_random_value(2, 6)
     ) {
       const cache = era.get('status:0:马跳S');
       era.set('status:0:马跳S', 1);
@@ -165,6 +166,7 @@ async function punish_pregnant_slave() {
       }
       end_ero_and_train();
       era.set('status:0:马跳S', cache);
+      LifeEventMarks.get_marks(0).report = 0;
       era.drawLine();
     }
   }

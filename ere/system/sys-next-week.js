@@ -248,7 +248,7 @@ async function sys_next_week() {
           e.repay = marks.funds / (500 - 300 * marks.buff);
         }
         const money = sys_change_money(e.repay, -1);
-        if (i > 0 && money > 0) {
+        if (i > 0 && money > 0 && e.creditor <= 0) {
           // 人类训练员有工资拿；马娘训练员？自己跑比赛去！
           let h;
           switch (e.creditor) {
@@ -267,6 +267,7 @@ async function sys_next_week() {
           e.timer--;
         } else if (
           e.creditor > 0 &&
+          money > 0 &&
           !global_achievement.slav_mon &&
           (my_marks.a_s_mon += money) >= 100000
         ) {
@@ -427,7 +428,6 @@ async function sys_next_week() {
           cid,
           500 * (1 + (era.get(`cflag:${cid}:育成回合计时`) < 3 * 48)),
         );
-        life_marks.report = 0;
         const father_id = life_marks.sperm;
         await run_custom_ero(
           cid || father_id,
@@ -437,6 +437,7 @@ async function sys_next_week() {
             mother_id: cid,
           },
         );
+        life_marks.report = 0;
       } else if (timer < 13) {
         // 1-12周孕早期
         sys_change_pressure(cid, get_random_value(200, 300));

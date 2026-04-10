@@ -296,6 +296,9 @@ function love_uma(cid, val, shown = true) {
  * @returns {string}
  */
 function get_callname(_from, _to) {
+  if (_to > 0) {
+    get_chara_talk(_to);
+  }
   let callname = era.get(`callname:${_from}:${_to}`);
   if (callname === '-') {
     return get_display_name(era.get(`static:${_to}:callname`));

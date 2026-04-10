@@ -32,8 +32,8 @@ async function betray_ending(tachyon, me) {
     '仿佛内心有个声音在说：不是',
     tachyon.sex,
     '，不是',
-    tachyon.sex,
-    '们。',
+    tachyon.couple_title,
+    '。',
   ]);
   await era.printAndWait([
     '没过多久，没有招募到任何',

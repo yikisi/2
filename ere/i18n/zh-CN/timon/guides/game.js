@@ -111,8 +111,8 @@ module.exports = {
     await minoru.say_and_wait('所以在赛场之外的地方，您必须全力支持您的担当。');
     await minoru.say_and_wait([
       '身心调理也好竞赛训练也罢，',
-      minoru.sex,
-      '们在奔向梦想的过程中，需要名为『训练员』的大人的引导与协助。',
+      minoru.couple_title,
+      '在奔向梦想的过程中，需要名为『训练员』的大人的引导与协助。',
     ]);
     await minoru.say_and_wait('所以，还请清楚认识到您身上将要背负的责任。');
     era.println();

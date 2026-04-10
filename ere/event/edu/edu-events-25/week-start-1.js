@@ -162,8 +162,8 @@ module.exports = (handlers) => {
       ]);
       await era.printAndWait([
         '这下麻烦了，没想到',
-        coffee.sex,
-        '们两人认识，而且貌似还不太对付的样子……',
+        coffee.couple_title,
+        '两人认识，而且貌似还不太对付的样子……',
       ]);
       await tachyon.say_and_wait([
         '拜拜啦，两位。今后我们可要多多彼此关照。而且我对你期望很高喔，',
@@ -677,8 +677,8 @@ module.exports = (handlers) => {
       '然而有别于 ',
       me.get_colored_name(),
       ' 的决心的是，该说',
-      coffee.sex,
-      '们还只是一群学生吗，来到合宿地点的赛',
+      coffee.couple_title,
+      '还只是一群学生吗，来到合宿地点的赛',
       coffee.uma_sex_title,
       '们都相当兴奋。',
     ]);

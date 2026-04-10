@@ -517,8 +517,8 @@ module.exports = (handlers) => {
       ' 提前收到了 ',
       kitaru.get_colored_name(),
       ' 的邀请，前往了',
-      kitaru.sex,
-      '们家的神社。',
+      kitaru.couple_title,
+      '家的神社。',
     ]);
     await era.printAndWait([
       '此时神社的人数还不算多，',

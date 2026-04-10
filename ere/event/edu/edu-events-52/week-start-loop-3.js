@@ -713,8 +713,8 @@ module.exports = async (urara, me, in_urara, callname) => {
   );
   await in_urara.print_and_wait([
     '还有一位虽然依旧步履艰难，但却同样带着笑容站在观众席的最前排，跟随着',
-    urara.sex,
-    '们向前的',
+    urara.couple_title,
+    '向前的',
     urara.uma_sex_title,
     '……',
   ]);

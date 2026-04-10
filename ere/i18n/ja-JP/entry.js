@@ -36,9 +36,10 @@ module.exports = class extends I18nEntry {
   edu_0 = 'ジュニア級';
   edu_1 = 'クラシック級';
   edu_2 = 'シニア級';
+  pre_edu = '入学予定';
 
   a_edu_0 = 'ジュニア';
-  a_edu_1 = 'クラシック';
+  a_edu_1 = 'クラシ';
   a_edu_2 = 'シニア';
 
   honour_m = '失格';

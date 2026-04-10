@@ -496,8 +496,8 @@ module.exports = (handlers) => {
       '于是 ',
       me.get_colored_name(),
       ' 便和',
-      maya.sex,
-      '们一起观看 ',
+      maya.couple_title,
+      '一起观看 ',
       brian.get_colored_name(),
       ' 的比赛视频……',
     ]);
@@ -555,8 +555,8 @@ module.exports = (handlers) => {
     ]);
     await brian.say_and_wait([
       '正因为这样，我才要击败',
-      maya.sex,
-      '们。为了要满足我的饥渴。',
+      maya.couple_title,
+      '。为了要满足我的饥渴。',
     ]);
     await brian.say_and_wait('──下场比赛也是。');
     era.drawLine();

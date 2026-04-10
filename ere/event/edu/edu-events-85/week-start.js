@@ -803,8 +803,8 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '继承了',
-      ruby.sex,
-      '们的血脉，让其绽放出更大的花朵——',
+      ruby.couple_title,
+      '的血脉，让其绽放出更大的花朵——',
     ]);
     await era.printAndWait([ruby.get_colored_name(), '。']);
     await era.printAndWait([

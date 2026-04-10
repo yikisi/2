@@ -991,8 +991,8 @@ module.exports = {
       ]);
       era.println();
 
-      await tachyon.print_and_wait([you.sex, '们才是般配的。']);
-      await tachyon.print_and_wait([you.sex, '们才是最适合的。']);
+      await tachyon.print_and_wait([you.couple_title, '才是般配的。']);
+      await tachyon.print_and_wait([you.couple_title, '才是最适合的。']);
       await tachyon.print_and_wait([
         '温柔的训练员和与其孕育出爱情，为其实现梦想的',
         tachyon.uma_sex_title,
@@ -1004,8 +1004,8 @@ module.exports = {
       await tachyon.print_and_wait(['幻觉中的那两人，看起来如此舒服。']);
       await tachyon.print_and_wait([
         '也想要……变得，和',
-        you.sex,
-        '们一样舒服。',
+        you.couple_title,
+        '一样舒服。',
       ]);
       era.println();
 
@@ -1050,11 +1050,15 @@ module.exports = {
       await tachyon.say_and_wait(['好舒服……好舒服……']);
       era.println();
 
-      await tachyon.print_and_wait(['脑中的', you.sex, '们依然在恩爱着。']);
+      await tachyon.print_and_wait([
+        '脑中的',
+        you.couple_title,
+        '依然在恩爱着。',
+      ]);
       await tachyon.print_and_wait([
         '脑中的自己，看着',
-        you.sex,
-        '们恩爱的模样，吃吃地咬着手指。',
+        you.couple_title,
+        '恩爱的模样，吃吃地咬着手指。',
       ]);
       await tachyon.print_and_wait(['下体又一次喷出了潮水。']);
     };
@@ -1151,8 +1155,8 @@ module.exports = {
         '却是……该怎么恳求 ',
         t_call_c,
         '，允许自己听着',
-        you.sex,
-        '们做爱的声音来安慰自己。',
+        you.couple_title,
+        '做爱的声音来安慰自己。',
       ]);
       era.println();
 
@@ -1285,8 +1289,8 @@ module.exports = {
         await tachyon.print_and_wait(['喜欢上一个人原来是这么难懂的事吗。']);
         await tachyon.print_and_wait([
           '如果出于合理，这里应该要心甘情愿的祝福',
-          you.sex,
-          '们。',
+          you.couple_title,
+          '。',
         ]);
         await tachyon.print_and_wait(['而不是，而不是……']);
         era.println();

@@ -333,8 +333,8 @@ module.exports = (handlers) => {
       ' 正在和 ',
       get_chara_talk(25).get_colored_name(),
       ' 窃窃私语，看起来简直就好像有一面镜子放在',
-      ss.sex,
-      '们中间，而其中一个人仿佛是倒影一般。',
+      ss.couple_title,
+      '中间，而其中一个人仿佛是倒影一般。',
     ]);
     await ss.say_and_wait([
       '好好好，我知道了，你说得对，我应该去思考一下该给 ',

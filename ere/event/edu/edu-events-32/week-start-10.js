@@ -510,8 +510,8 @@ module.exports = (handlers) => {
         await tachyon.print_and_wait('只要一次就好');
         await tachyon.print_and_wait([
           '然后自己就能放弃，衷心的祝福',
-          me.sex,
-          '们了',
+          me.couple_title,
+          '了',
         ]);
         await tachyon.print_and_wait(
           '无视脑海中「你真的觉得自己能够放弃吗」的低语',

@@ -172,8 +172,8 @@ module.exports = (handlers) => {
     await era.printAndWait('超越了极限');
     await era.printAndWait([
       '超越了在赛前测出的，',
-      tachyon.sex,
-      '们的理论最大速度',
+      tachyon.couple_title,
+      '的理论最大速度',
     ]);
     era.println();
     await tachyon.say_and_wait([
@@ -437,8 +437,8 @@ module.exports = (handlers) => {
         '更何况 ',
         me.get_colored_name(),
         ' 是',
-        tachyon.sex,
-        '们两人的训练员',
+        tachyon.couple_title,
+        '两人的训练员',
       ]);
     }
     await era.printAndWait('甚至不需要特殊安排，只需要租借场地就好');

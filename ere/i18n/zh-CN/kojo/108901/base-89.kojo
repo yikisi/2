@@ -722,7 +722,7 @@ ask_release_agree_first:
         content:
           - fontWeight: bold
             content: %CHARA%
-          - 「我知道%SEX%们是为了我好，但也说明……这里已经不安全了……」
+          - 「我知道%THEY%是为了我好，但也说明……这里已经不安全了……」
       - color: %COLOR%
         content:
           - fontWeight: bold

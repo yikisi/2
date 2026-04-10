@@ -182,8 +182,8 @@ module.exports = {
       '……',
       you.get_colored_name(),
       ' 想，',
-      acute.sex,
-      '们仍对 ',
+      acute.couple_title,
+      '仍对 ',
       you.get_colored_name(),
       ' 有期望。',
     ]);

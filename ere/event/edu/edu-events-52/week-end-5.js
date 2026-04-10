@@ -800,8 +800,8 @@ module.exports = (handlers) => {
     );
     await era.printAndWait([
       '在这时间都失去意义的星空与草原之中，在樱与褐的「',
-      urara.sex,
-      '们」之间，',
+      urara.couple_title,
+      '」之间，',
       me.get_colored_name(),
       ' 倾听着两位',
       urara.teen_sex_title,

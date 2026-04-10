@@ -1254,8 +1254,8 @@ module.exports = {
             '众所周知，大多数',
             tachyon.uma_sex_title,
             '所特有，与人类不同的器官，都是',
-            tachyon.sex,
-            '们最为敏感的部位',
+            tachyon.couple_title,
+            '最为敏感的部位',
           ]);
           await era.printAndWait([
             '因此，谁能责怪 ',
@@ -2304,8 +2304,8 @@ module.exports = {
       ]);
       await era.printAndWait([
         '…………为什么',
-        minoru.sex,
-        '们会以一种悲伤的眼神看着自己',
+        minoru.couple_title,
+        '会以一种悲伤的眼神看着自己',
       ]);
       await minoru.say_and_wait('我能理解，又是那孩子的药吧……');
       await era.printAndWait('什么意思，那孩子是谁？');
@@ -2316,8 +2316,8 @@ module.exports = {
       ]);
       await era.printAndWait([
         '这又是什么意思……',
-        minoru.sex,
-        '们知道 ',
+        minoru.couple_title,
+        '知道 ',
         you.get_colored_name(),
         ' 失忆了？难道说 ',
         you.get_colored_name(),
@@ -3181,8 +3181,8 @@ module.exports = {
         ]);
         await tachyon.print_and_wait([
           '但话题往往总是会进入到床事间的部分，这也怪不得一听见类似话题就满脸通红的',
-          tachyon.sex,
-          '们了',
+          tachyon.couple_title,
+          '了',
         ]);
       }
       era.println();

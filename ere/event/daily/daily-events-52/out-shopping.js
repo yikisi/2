@@ -419,8 +419,8 @@ handlers[0] = async (
           ' 和 ',
           get_chara_talk(24).get_colored_name(),
           ' 会喜欢恐怖游戏，恐怕',
-          urara.sex,
-          '们又是人云亦云的顺便入手了吧。',
+          urara.couple_title,
+          '又是人云亦云的顺便入手了吧。',
         ]);
         break;
       case 3:

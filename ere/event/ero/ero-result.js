@@ -135,7 +135,7 @@ handlers[ero_hooks.report_pregnant_between_weeks] = async (_, __, extra) => {
       LifeEventMarks.get_marks(mother_id).unexpected_pregnant;
   era.println();
   let wait_flag;
-  if (mother_id) {
+  if (mother_id > 0) {
     let relation_change = 100;
     if (love < 90 && (mother_id < 340 || mother_id > 342)) {
       switch (unexpected_pregnant) {

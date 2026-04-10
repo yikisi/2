@@ -156,8 +156,8 @@ module.exports = (handlers) => {
       '主动来自主训练的 ',
       me.get_colored_name(),
       ' 也没什么资格责备',
-      tachyon.sex,
-      '们吧',
+      tachyon.couple_title,
+      '吧',
     ]);
     era.printButton('「嘘」', 1);
     await era.input();
@@ -732,9 +732,13 @@ module.exports = (handlers) => {
       ' 的训练员做出的回答',
     ]);
     await era.printAndWait('理由？天春的时候不就说过了吗？');
-    await era.printAndWait(['因为自己，深深的爱着', tachyon.sex, '们的跑法']);
+    await era.printAndWait([
+      '因为自己，深深的爱着',
+      tachyon.couple_title,
+      '的跑法',
+    ]);
     if (love >= 75 && era.get('love:25') >= 75) {
-      await era.printAndWait(['因为自己，深深的爱着', tachyon.sex, '们']);
+      await era.printAndWait(['因为自己，深深的爱着', tachyon.couple_title]);
     }
     era.println();
     await tachyon.say_and_wait(['……', callname]);

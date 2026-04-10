@@ -471,9 +471,9 @@ module.exports = (handlers) => {
       await era.printAndWait([
         '看得出来，',
         urara.get_colored_name(),
-
-        urara.sex,
-        '们现在的状况，似乎跟采访者们原本预料的方向完全南辕北辙了。',
+        ' ',
+        urara.couple_title,
+        '现在的状况，似乎跟采访者们原本预料的方向完全南辕北辙了。',
       ]);
     }
     await era.printAndWait([
@@ -483,8 +483,8 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '记者A「很抱歉，但请给我们一点时间，为了更好的展现',
-      urara.sex,
-      '们，现在可能得重新拟定采访的方向……」',
+      urara.couple_title,
+      '，现在可能得重新拟定采访的方向……」',
     ]);
 
     era.printButton('「辛苦了，我也试着想想办法吧。」', 1);
@@ -527,8 +527,8 @@ module.exports = (handlers) => {
 
     era.print([
       '要在下个环节中能够帮',
-      urara.sex,
-      '们缓解情绪，有什么好办法吗……',
+      urara.couple_title,
+      '缓解情绪，有什么好办法吗……',
     ]);
     era.printButton(`帮${urara.couple_title}拿些点心。（力量+20）`, 1);
     era.printButton(`带${urara.couple_title}一起去玩。（耐力+20）`, 2);

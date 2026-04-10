@@ -131,8 +131,8 @@ module.exports = (handlers) => {
       '但恐怕',
       digital.uma_sex_title,
       '酱们对比赛所寄托的愿望更深……只要我再继续比赛，那一定能知道',
-      digital.sex,
-      '们耀眼的原因！',
+      digital.couple_title,
+      '耀眼的原因！',
     ]);
     await digital.say_and_wait('再接着以这种不干扰的主义推下去吧！');
     await say_by_passer_by_and_wait('？？？', '呜呜呜……呜……');
@@ -221,8 +221,8 @@ module.exports = (handlers) => {
     await say_by_passer_by_and_wait(`${digital.uma_sex_title}B`, [
       '你比我强，而且，你还有潜力，你以后，一定会挑战重赏吧！一定会挑战G1吧！',
       '让',
-      digital.sex,
-      '们刮目相看吧！',
+      digital.couple_title,
+      '刮目相看吧！',
     ]);
     await say_by_passer_by_and_wait(
       `${digital.uma_sex_title}B`,
@@ -241,8 +241,8 @@ module.exports = (handlers) => {
     ]);
     await digital.print_and_wait([
       '看着',
-      digital.sex,
-      '们拉着手远去，',
+      digital.couple_title,
+      '拉着手远去，',
       digital.get_colored_name(),
       ' 这次，再也无法说出任何「磕到了」的话。',
     ]);
@@ -314,8 +314,8 @@ module.exports = (handlers) => {
     ]);
     await digital.say_and_wait([
       '我要，出赛，然后——带着',
-      digital.sex,
-      '们的份一起！',
+      digital.couple_title,
+      '的份一起！',
     ]);
     await era.printAndWait([
       '偶然的事件，但并不是偶然的结果，胜利与失败，其所蕴含的悲哀——推动了 ',
@@ -405,8 +405,8 @@ module.exports = (handlers) => {
     await digital.say_and_wait('嗯……嗯……诶？！');
     await digital.say_and_wait([d_call_o, ' 和 ', d_call_do, '？！你们怎么？']);
     await me.say_and_wait([
-      digital.sex,
-      '们非常担心你，所以也来到了休息室来看望你……倒不如说是一开始就在休息室里面了。',
+      digital.couple_title,
+      '非常担心你，所以也来到了休息室来看望你……倒不如说是一开始就在休息室里面了。',
     ]);
     await digital.say_and_wait('怎么这么突然？');
     await opera.say_and_wait([
@@ -450,7 +450,7 @@ module.exports = (handlers) => {
       '的鼓舞。',
     ]);
     await me.say_and_wait('你们应该来到这里，应该还有其他想说的吧？');
-    await era.printAndWait(['接着，', digital.sex, '们宣布了……']);
+    await era.printAndWait(['接着，', digital.couple_title, '宣布了……']);
     await opera.say_and_wait([
       '我和 ',
       sys_get_colored_callname(15, 58),
@@ -483,8 +483,8 @@ module.exports = (handlers) => {
     await digital.say_and_wait('我接受了！');
     await era.printAndWait([
       '所以',
-      digital.sex,
-      '们做出约定，',
+      digital.couple_title,
+      '做出约定，',
       opera.get_colored_name(),
       ' 和 ',
       dotou.get_colored_name(),
@@ -518,11 +518,15 @@ module.exports = (handlers) => {
       true,
     );
     await digital.say_and_wait(
-      ['即使是完全不同的赛道……', digital.sex, '们都始终拥有着不渝的光辉……'],
+      [
+        '即使是完全不同的赛道……',
+        digital.couple_title,
+        '都始终拥有着不渝的光辉……',
+      ],
       true,
     );
     await digital.say_and_wait(
-      ['不能在这里，辜负', digital.sex, '们的心啊！！！！'],
+      ['不能在这里，辜负', digital.couple_title, '的心啊！！！！'],
       true,
     );
     await digital.say_and_wait('哈啊啊啊啊啊啊啊！', true);
@@ -557,15 +561,15 @@ module.exports = (handlers) => {
     await digital.say_and_wait([digital.uma_sex_title, '酱，很尊。']);
     await digital.say_and_wait([
       '那么，',
-      digital.sex,
-      '们为何而可爱？',
-      digital.sex,
-      '们的哪里让我觉得伟大、无可救药地吸引着我？',
+      digital.couple_title,
+      '为何而可爱？',
+      digital.couple_title,
+      '的哪里让我觉得伟大、无可救药地吸引着我？',
     ]);
     await digital.say_and_wait([
       '今天终于明白了，我喜欢的是',
-      digital.sex,
-      '们『奋不顾身地为自己的梦想而拼搏』的样子啊！',
+      digital.couple_title,
+      '『奋不顾身地为自己的梦想而拼搏』的样子啊！',
     ]);
     await era.printAndWait([
       '咚咚咚地跺着脚，表达出 ',
@@ -584,15 +588,15 @@ module.exports = (handlers) => {
       '酱们一直都是一样的。',
     ]);
     await digital.say_and_wait([
-      digital.sex,
-      '们真的有想要的东西，想要成为的人，以那为目标，在拼命的努力着。',
+      digital.couple_title,
+      '真的有想要的东西，想要成为的人，以那为目标，在拼命的努力着。',
     ]);
     await era.printAndWait(
       '这种人，无论放在哪里，都是耀眼的，何况放在一起比赛呢？',
     );
     await digital.say_and_wait([
-      digital.sex,
-      '们全力互相联系，互相帮助……时而为同一个胜利斗争，但又不惧怕斗争，一直都在看着前方。',
+      digital.couple_title,
+      '全力互相联系，互相帮助……时而为同一个胜利斗争，但又不惧怕斗争，一直都在看着前方。',
     ]);
     await digital.say_and_wait('在一切都尘埃落定后，一起贴贴！');
     await me.say_and_wait('嘛，又是定番剧情呢。');

@@ -20,6 +20,11 @@ function get_display_width(str) {
 }
 
 module.exports = {
+  /**
+   * @param {{content:string}[]} _list
+   * @param {number} collapse_limit
+   * @returns {[]}
+   */
   collapse_list(_list, collapse_limit) {
     if (collapse_limit <= 0) {
       return _list;
@@ -31,7 +36,10 @@ module.exports = {
       for (let i = 0; i < _list.length; i++) {
         const c = _list[i];
         const ret = len + get_display_width(c.content);
-        if (len < collapse_limit && ret >= collapse_limit) {
+        if (
+          len + 2 + (_list.length - i).toString().length <= collapse_limit &&
+          ret + 2 + (_list.length - i + 1).toString().length > collapse_limit
+        ) {
           collapse_index = i;
           break;
         }

@@ -622,11 +622,19 @@ module.exports = (handlers) => {
         '来吧！',
         callname,
         '！为了那些孩子，必须要努力调配最适合',
-        tachyon.sex,
-        '们的药出来才行！',
+        tachyon.couple_title,
+        '的药出来才行！',
       ]);
-      await era.printAndWait(['不是，「为了实验，让', tachyon.sex, '们试药」']);
-      await era.printAndWait(['不是，「为了', tachyon.sex, '们，而调配药物」']);
+      await era.printAndWait([
+        '不是，「为了实验，让',
+        tachyon.couple_title,
+        '试药」',
+      ]);
+      await era.printAndWait([
+        '不是，「为了',
+        tachyon.couple_title,
+        '，而调配药物」',
+      ]);
       await say_by_passer_by_and_wait(
         tachyon.uma_sex_title + 'A',
         '果然是这样吧……以前那个温柔的速子前辈到底去哪里了……',
@@ -718,8 +726,8 @@ module.exports = (handlers) => {
         );
         await tachyon.say_and_wait([
           '现在是对于情感挑动方面的探查……举例来讲，要是我在这里亲你一下，',
-          tachyon.sex,
-          '们的反应会如何呢？',
+          tachyon.couple_title,
+          '的反应会如何呢？',
         ]);
         era.println();
         await era.printAndWait([
@@ -746,8 +754,8 @@ module.exports = (handlers) => {
           '真是……不可思议。',
           callname,
           '，不知道为什么，听见',
-          tachyon.sex,
-          '们的声音之后，我感觉自己似乎更有行动的欲望了',
+          tachyon.couple_title,
+          '的声音之后，我感觉自己似乎更有行动的欲望了',
         ]);
         await tachyon.say_and_wait(
           '是卡里古拉效应吗？由于在公共场所进行这样的事会使人感到害羞，因此反而增加了行为的欲望',

@@ -95,8 +95,8 @@ module.exports = async (hook) => {
           '朝着',
           tachyon.uma_sex_title,
           '靠近，针对',
-          tachyon.sex,
-          '们内心弱小处的黑影。',
+          tachyon.couple_title,
+          '内心弱小处的黑影。',
         ]);
         await say_by_passer_by_and_wait(
           `${tachyon.uma_sex_title}A`,
@@ -181,8 +181,8 @@ module.exports = async (hook) => {
           '不过，',
           tachyon.get_colored_name(),
           ' 的话应该不会伤害',
-          tachyon.sex,
-          '们……吗？',
+          tachyon.couple_title,
+          '……吗？',
         ]);
         await tachyon.say_and_wait(['不说这个，', callname, '，快走吧。']);
         await era.printAndWait('怎么这么突然……肯定不是良心发现之类的吧？');

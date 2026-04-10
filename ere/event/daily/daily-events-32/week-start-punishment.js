@@ -788,8 +788,8 @@ module.exports = (handlers) => {
     era.println();
     await tachyon.say_and_wait([
       '看你爽的这德性，被写上字的时候，是不是还要求',
-      tachyon.sex,
-      '们一字一句念出来给你听啊？嗯？骚货，贱狗，为了精液能跪在地上舔鞋子的母猪？',
+      tachyon.couple_title,
+      '一字一句念出来给你听啊？嗯？骚货，贱狗，为了精液能跪在地上舔鞋子的母猪？',
     ]);
     era.println();
     await era.printAndWait(`每说一句，${me.name} 的下面就不由得涌出一阵潮水。`);

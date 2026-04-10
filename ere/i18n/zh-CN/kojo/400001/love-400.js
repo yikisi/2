@@ -219,8 +219,8 @@ module.exports = {
   async 74(silence, you, callname) {
     await silence.say_and_wait([
       '结果……结果我依旧是一个可悲的失败者……连',
-      silence.sex,
-      '们的愿望都没有办法完成，对不起对不起对不起对不起……',
+      silence.couple_title,
+      '的愿望都没有办法完成，对不起对不起对不起对不起……',
     ]);
     await silence.say_and_wait('………');
     await era.printAndWait([
@@ -270,10 +270,10 @@ module.exports = {
     ]);
     await you.say_and_wait([
       '或许你失败了，或许你没有完成',
-      silence.sex,
-      '们最后的愿望……但是，如果是你最好的朋友们的话，',
-      silence.sex,
-      '们是不会希望你像现在这样的……不是吗？',
+      silence.couple_title,
+      '最后的愿望……但是，如果是你最好的朋友们的话，',
+      silence.couple_title,
+      '是不会希望你像现在这样的……不是吗？',
     ]);
     await era.printAndWait([
       silence.get_colored_name(),
@@ -285,8 +285,8 @@ module.exports = {
     ]);
     await silence.say_and_wait([
       '我不知道……',
-      silence.sex,
-      '们和我谈起赛',
+      silence.couple_title,
+      '和我谈起赛',
       silence.uma_sex_title,
       '的时候，那种就好像是发光一样的眼神，',
     ]);

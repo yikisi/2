@@ -1383,7 +1383,7 @@ cl_fans_in_edu:
       content:
         - fontWeight: bold
           content: %CHARA%
-        - 「麦昆%SEX%们说不定还在等我……不，在等我们哦」
+        - 「麦昆%THEY%说不定还在等我……不，在等我们哦」
     - 伸出手的善信，不带一丝遗憾的笑了
 
 # 已育成版本

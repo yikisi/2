@@ -21,11 +21,6 @@ module.exports = class extends CustomizedDaily {
     return generate_dictionary(this.id, { call: !0, uma: !0 });
   }
 
-  #get_callname(id) {
-    get_chara_talk(id);
-    return sys_get_callname(this.id, id);
-  }
-
   good_morning() {
     if (era.get('status:0:生日') > 0) {
       this.#kojo['select_in_birthday'](this.#dict);
@@ -49,13 +44,13 @@ module.exports = class extends CustomizedDaily {
   async talk() {
     await this.#kojo['talk']({
       ...this.#dict,
-      CALL_21: this.#get_callname(21),
-      CALL_32: this.#get_callname(32),
-      CALL_6: this.#get_callname(6),
-      CALL_64: this.#get_callname(64),
-      CALL_69: this.#get_callname(69),
-      CALL_72: this.#get_callname(72),
-      CALL_86: this.#get_callname(86),
+      CALL_21: sys_get_callname(this.id, 21),
+      CALL_32: sys_get_callname(this.id, 32),
+      CALL_6: sys_get_callname(this.id, 6),
+      CALL_64: sys_get_callname(this.id, 64),
+      CALL_69: sys_get_callname(this.id, 69),
+      CALL_72: sys_get_callname(this.id, 72),
+      CALL_86: sys_get_callname(this.id, 86),
     });
   }
 

@@ -36,8 +36,8 @@ module.exports = {
       '虽然工作绝对称不上轻松，但是不匪的物质收入（包揽食宿，以特殊的【马币】结算的高额工资）和精神财富（帮助',
       teio.uma_sex_title,
       '学生们成长，进步，看到',
-      teio.sex,
-      '们拼搏实现梦想后发自内心的笑容）足以抵消负面情绪。',
+      teio.couple_title,
+      '拼搏实现梦想后发自内心的笑容）足以抵消负面情绪。',
     ]);
     await you.say_and_wait(
       '今天下午，似乎也有一次出道战来着，嗯，应该去看看，物色一下担当人选吧……',
@@ -313,8 +313,8 @@ module.exports = {
     era.println();
     await era.printAndWait('要怎么办呢？');
     era.println();
-    era.printButton('大声说出帝王的名字，要求成为担当', 1);
-    era.printButton('还是算了吧……', 2);
+    era.printButton('大声说出帝王的名字，要求成为担当（继续招募）', 1);
+    era.printButton('还是算了吧……（停止招募）', 2);
     ret.push(await era.input());
     if (ret[1] === 1) {
       await era.printAndWait([

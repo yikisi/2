@@ -48,8 +48,8 @@ module.exports = (handlers) => {
     await digital.say_and_wait([
       callname,
       '，我感觉到了，这种感觉，就像是被所有人加持了的勇者！这样一来，就能和',
-      digital.sex,
-      '们对决了！',
+      digital.couple_title,
+      '对决了！',
     ]);
     await me.say_and_wait('能赢吗？');
     await digital.say_and_wait(
@@ -555,8 +555,8 @@ module.exports = (handlers) => {
       '跳舞的Coser。',
     ]);
     await era.printAndWait([
-      digital.sex,
-      '们有些是带着假耳的普通',
+      digital.couple_title,
+      '有些是带着假耳的普通',
       digital.phy_sex_title,
       '，也有一些是直接戴上Cos耳套的',
       digital.uma_sex_title,
@@ -564,8 +564,8 @@ module.exports = (handlers) => {
     ]);
     await era.printAndWait([
       '眼见着',
-      digital.sex,
-      '们翩翩起舞，',
+      digital.couple_title,
+      '翩翩起舞，',
       digital.get_colored_name(),
       '……',
     ]);
@@ -584,8 +584,8 @@ module.exports = (handlers) => {
     ]);
     await me.say_and_wait([
       '我要谢谢多伯和君主，是',
-      digital.sex,
-      '们让我这个 ',
+      digital.couple_title,
+      '让我这个 ',
       callname,
       ' 想起来了。',
     ]);

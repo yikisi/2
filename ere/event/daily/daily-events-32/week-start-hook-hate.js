@@ -267,13 +267,13 @@ module.exports = (handlers) => {
       '所有',
       tachyon.uma_sex_title,
       '都开始暴走了！',
-      tachyon.sex,
-      '们不知道为什么忽然开始缠着自己的训练员要便当！',
+      tachyon.couple_title,
+      '不知道为什么忽然开始缠着自己的训练员要便当！',
     ]);
     await say_by_passer_by_and_wait('路人训练员A', [
       '不是亲手做的就不行！天杀的，',
-      tachyon.sex,
-      '们到底是怎么分辨出便当是不是训练员做的！',
+      tachyon.couple_title,
+      '到底是怎么分辨出便当是不是训练员做的！',
     ]);
     era.println();
     await era.printAndWait([

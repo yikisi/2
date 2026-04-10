@@ -224,16 +224,16 @@ week_end_handlers[47 + 24] = async (ss, me, callname, flags, event_object) => {
     await ss.say_and_wait('……我不知道自己是怎么撑过来的，车翻了……');
     await ss.say_and_wait([
       '我们出不去……一开始',
-      ss.sex,
-      '们还会和我说话安慰我握着我的手……',
+      ss.couple_title,
+      '还会和我说话安慰我握着我的手……',
     ]);
     await ss.say_and_wait(
       '但是……但是……好安静，我……我好像喝了什么东西……慢慢就睡过去了……明明说好不放手的',
     );
     await ss.say_and_wait([
       '是我……是我放手了……如果我没有放手的话……',
-      ss.sex,
-      '们说不定……说不定就。',
+      ss.couple_title,
+      '说不定……说不定就。',
     ]);
     await era.printAndWait([
       '那是 ',

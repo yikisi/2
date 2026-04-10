@@ -430,8 +430,8 @@ module.exports = (handlers) => {
       );
       await era.printAndWait([
         '成熟的马娘「这不会是正确的，但青春正盛的',
-        urara.sex,
-        '们又有几个能免俗呢？就连当时的我也不例外……」',
+        urara.couple_title,
+        '又有几个能免俗呢？就连当时的我也不例外……」',
       ]);
     }
     era.printButton('「那个……很抱歉打断您，但是您到底……？」', 1);

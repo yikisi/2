@@ -202,8 +202,8 @@ module.exports = (handlers) => {
       '你与',
       digital.sex,
       '，与',
-      digital.sex,
-      '们的差距，比你想象中的小哦！',
+      digital.couple_title,
+      '的差距，比你想象中的小哦！',
     ]);
     await me.say_and_wait([
       '正是你每日的观察，才能看到 ',
@@ -366,8 +366,8 @@ module.exports = (handlers) => {
         ' 和 ',
         sys_get_colored_callname(19, 58),
         ' 吗……是因为',
-        digital.sex,
-        '们是特别的吗？',
+        digital.couple_title,
+        '是特别的吗？',
       ],
       true,
     );
@@ -921,8 +921,8 @@ module.exports = (handlers) => {
     await era.printAndWait('不过，这……');
     await digital.say_and_wait([
       '的确……我也不想将',
-      digital.sex,
-      '们拉到我身边的泥塘……果然还得是堂堂正正地比一场。',
+      digital.couple_title,
+      '拉到我身边的泥塘……果然还得是堂堂正正地比一场。',
     ]);
     await era.printAndWait([
       '和现在已经不仅仅是自称霸王的 ',

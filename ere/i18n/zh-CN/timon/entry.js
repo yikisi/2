@@ -539,8 +539,8 @@ class I18nTimon {
     '【',
     you.get_colored_name(),
     ' 尝试讨好 ',
-    chara.sex,
-    '们】',
+    chara.couple_title,
+    '】',
   ];
   /** @param {CharaTalk} you */
   get_it_unlock_success = (you) => [

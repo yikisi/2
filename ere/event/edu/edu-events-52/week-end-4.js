@@ -711,8 +711,8 @@ module.exports = (handlers) => {
     era.println();
     await in_urara.say_as_unknown_and_wait([
       '我知道哦，但乌拉拉也明白不是吗？',
-      urara.sex,
-      '们其实没法真正的帮到你。',
+      urara.couple_title,
+      '其实没法真正的帮到你。',
     ]);
     await in_urara.say_as_unknown_and_wait(
       '虽然可以借鉴，但是抄不来别人的答案，一路走过来的也是乌拉拉和训练员不是吗？',

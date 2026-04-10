@@ -139,8 +139,8 @@ function cur_chara_component(cid, type, location_npc) {
     location_npc &&
       (temp = CharaTitles.get(location_npc).get_colored_curr_title());
     era.setVerticalAlign('middle');
-    const image_switch = era.get('flag:立绘类型'),
-      status_list = get_status(cid, 24);
+    const image_switch = era.get('flag:立绘类型');
+    const status_list = get_status(cid, 24);
     era.printInColRows(
       {
         columns: [

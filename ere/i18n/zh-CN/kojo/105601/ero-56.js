@@ -2062,8 +2062,8 @@ module.exports = {
         ]);
         await kitaru.say_and_wait([
           '要在这里做吗……万一被风纪委员',
-          kitaru.sex,
-          '们发现的话？',
+          kitaru.couple_title,
+          '发现的话？',
         ]);
         await kitaru.say_and_wait(['咕唔！啾❤️……啾啊❤️']);
         await era.printAndWait([

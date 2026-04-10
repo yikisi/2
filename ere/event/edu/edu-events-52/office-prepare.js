@@ -171,8 +171,8 @@ module.exports = (handlers) => {
     }
     await era.printAndWait([
       '没错，训练员正是帮助选择奔跑的「',
-      urara.sex,
-      '们」把握梦想的职业，而 ',
+      urara.couple_title,
+      '」把握梦想的职业，而 ',
       me.get_colored_name(),
       ' 也正是 ',
       urara.get_colored_name(),

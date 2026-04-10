@@ -23,13 +23,17 @@ module.exports = {
         '需要完成象征家的夙愿。',
       ]);
       await luna.print_and_wait([
-        luna.sex,
-        '们需要永远强大，永远震慑人心。简单来说，就是要追求胜利。',
+        luna.couple_title,
+        '需要永远强大，永远震慑人心。简单来说，就是要追求胜利。',
       ]);
       await luna.print_and_wait(
         '除此之外，为了胜利，一切都是可选、非必要、能抛弃的。',
       );
-      await luna.print_and_wait(['换句话说，', luna.sex, '们也可以肆意妄为。']);
+      await luna.print_and_wait([
+        '换句话说，',
+        luna.couple_title,
+        '也可以肆意妄为。',
+      ]);
       await luna.print_and_wait('那个叔母沉迷于情欲。');
       await luna.print_and_wait('那个阿姨沉迷于酒精。');
       await luna.print_and_wait('那个姐姐沉迷于暴力。');
@@ -229,10 +233,10 @@ module.exports = {
       await luna.print_and_wait([
         you.get_colored_actual_name(),
         ' 已经沉沉地睡去了。这里只有',
-        you.sex,
-        '们，只有 ',
-        you.sex,
-        '们……',
+        you.couple_title,
+        '，只有 ',
+        you.couple_title,
+        '……',
       ]);
       await luna.print_and_wait(
         '露娜摒住了呼吸，往后微微一躺，半掩着的门就发出咔擦一声，紧紧关上。',

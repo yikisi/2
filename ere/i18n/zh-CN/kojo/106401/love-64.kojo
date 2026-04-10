@@ -473,7 +473,7 @@ happy:
     - color: %COLOR%
       content: 陷入黏腻恋爱的特雷森%UMA%们，总会有无法与恋人相遇的时间
     - color: %COLOR%
-      content: 每当这时，%SEX%们的室友便会默契地在合适的时候离开寝室，留给%SEX%们一些私人时间——就连葛城也不例外
+      content: 每当这时，%THEY%的室友便会默契地在合适的时候离开寝室，留给%THEY%一些私人时间——就连葛城也不例外
     -
     - color: %COLOR_104%
       content:
@@ -1661,7 +1661,7 @@ endless_escape:
       content:
         - fontWeight: bold
           content: %CHARA%
-        - 「麦昆和莱恩%SEX%们……」
+        - 「麦昆和莱恩%THEY%……」
     - color: %COLOR%
       content:
         - fontWeight: bold
@@ -3888,7 +3888,7 @@ concern_end:
       - 「是，是呢」
   - 浑身沾满了各种液体的两只雌性，张开的大腿中间还流淌着白灼的液体
   - 两双迷离的眼睛，模糊不清的看着 %YOU% 正贴在两个人的脸前，沾满了爱液的凶器
-  - %YOU% 轻轻抚摸着爱马的头发，催促着%SEX%们
+  - %YOU% 轻轻抚摸着爱马的头发，催促着%THEY%
   - color: %COLOR_27%
     content:
       - fontWeight: bold

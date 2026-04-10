@@ -109,16 +109,16 @@ module.exports = (handlers) => {
     era.println();
     await tachyon.say_and_wait([
       '刚刚的对话只是植入种子，等到待会的比赛赢下今天的对话就能在',
-      tachyon.sex,
-      '们心底生根发芽',
+      tachyon.couple_title,
+      '心底生根发芽',
     ]);
     await tachyon.say_and_wait(
       '未来碰到问题时，自然会来寻找『亲切的速子前辈』来解答了，',
     );
     await tachyon.say_and_wait([
       '而仁慈的我，当然会无偿帮助',
-      tachyon.sex,
-      '们',
+      tachyon.couple_title,
+      '',
     ]);
     await tachyon.say_and_wait(
       '不过，作为答谢让我纪录点实验数据也是应当的吧？',

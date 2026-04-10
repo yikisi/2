@@ -74,8 +74,8 @@ race_start_handlers[race_enum.begin_race] = async (digital, me, callname) => {
   ]);
   await digital.say_and_wait([
     '吸溜溜，我想说的是',
-    digital.sex,
-    '们还能到什么地步啊！尊力检测仪都已经爆表了，而我，居然能够混入其中！',
+    digital.couple_title,
+    '还能到什么地步啊！尊力检测仪都已经爆表了，而我，居然能够混入其中！',
   ]);
   await digital.say_and_wait('哈～要，尊死了……数码……就要变成灰了……');
   await me.say_and_wait('现在可是要比赛了哦！');
@@ -84,8 +84,8 @@ race_start_handlers[race_enum.begin_race] = async (digital, me, callname) => {
     '现在的我，也是和',
     digital.uma_sex_title,
     '酱们肩并肩的存在，绝不能让我的存在使',
-    digital.sex,
-    '们蒙上阴影！',
+    digital.couple_title,
+    '蒙上阴影！',
   ]);
   await digital.say_and_wait(
     '我会努力的！能量充足，检查完备！尊力机能100%运作！',
@@ -330,8 +330,8 @@ race_start_handlers[race_enum.mile_cha] = async (digital) => {
     ' 和 ',
     digital.get_colored_name(),
     ' 有说有笑，在这里，能看出',
-    digital.sex,
-    '们一定能给出一场无法述说的比赛。',
+    digital.couple_title,
+    '一定能给出一场无法述说的比赛。',
   ]);
   await digital.say_and_wait('你真正的想法，我想要在今天的比赛里，弄明白！');
   await halo.say_and_wait([

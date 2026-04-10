@@ -378,8 +378,8 @@ module.exports = (handlers, check_tachyon_plan_b) => {
       '的提问，',
       coffee.get_colored_name(),
       ' 却能给所有人都提出充满灵性的建议，并且确实帮到',
-      coffee.sex,
-      '们。',
+      coffee.couple_title,
+      '。',
     ]);
     await era.printAndWait([
       '这点连身为训练员的 ',

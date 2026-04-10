@@ -897,9 +897,7 @@ module.exports = (handlers) => {
           '带来快乐。',
         ]);
         await era.printAndWait([
-          '轻柔而享受的含住从胸前的山谷中探出的扶',
-          urara.sex,
-
+          '轻柔而享受的含住从胸前的山谷中探出的扶她',
           urara.uma_sex_title,
           '的龟头，',
           me.get_colored_name(),

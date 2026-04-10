@@ -17,14 +17,14 @@ const { i18n } = require('#/i18n/selector');
  * @returns {Promise<{item: number, part: number}>}
  */
 async function use_ero_item(chara) {
-  const cur_location = era.get('flag:当前位置');
-  const cur_lover = chara.id;
-  const penis_size = get_penis_size(cur_lover);
-  const virgin_size = era.get(`cflag:${cur_lover}:阴道尺寸`);
+  const cur_loc = era.get('flag:当前位置');
+  const lover = chara.id;
+  const penis_size = get_penis_size(lover);
+  const virgin_size = era.get(`cflag:${lover}:阴道尺寸`);
   const item_list = [
     {
       a: item_enum.gag,
-      e: era.get(`tequip:${cur_lover}:口腔`) === -1,
+      e: era.get(`tequip:${lover}:口腔`) === -1,
     },
     { a: item_enum.clamps },
     {
@@ -34,42 +34,42 @@ async function use_ero_item(chara) {
     {
       a: item_enum.milk_pump,
       e:
-        era.get(`tequip:${cur_lover}:胸部`) === -1 &&
-        (era.get(`talent:${cur_lover}:乳头类型`) !== 2 ||
-          era.get(`tcvar:${cur_lover}:乳突`)),
+        era.get(`tequip:${lover}:胸部`) === -1 &&
+        (era.get(`talent:${lover}:乳头类型`) !== 2 ||
+          era.get(`tcvar:${lover}:乳突`)),
     },
     { a: item_enum.love_eggs },
     { a: item_enum.dildo },
     {
       a: item_enum.artificial_virgin,
-      e: penis_size && era.get(`tequip:${cur_lover}:阴茎`) === -1,
+      e: penis_size && era.get(`tequip:${lover}:阴茎`) === -1,
     },
     {
       a: item_enum.butt_plug,
-      e: era.get(`tequip:${cur_lover}:肛门`) === -1,
+      e: era.get(`tequip:${lover}:肛门`) === -1,
     },
     {
       a: item_enum.anal_beads,
-      e: era.get(`tequip:${cur_lover}:肛门`) === -1,
+      e: era.get(`tequip:${lover}:肛门`) === -1,
     },
     {
       a: item_enum.blindfold,
-      e: era.get(`tequip:${cur_lover}:眼罩`) === -1,
+      e: era.get(`tequip:${lover}:眼罩`) === -1,
     },
     {
       a: item_enum.collar,
-      e: era.get(`tequip:${cur_lover}:项圈`) === -1,
+      e: era.get(`tequip:${lover}:项圈`) === -1,
     },
     {
       a: item_enum.mirror,
       e:
         !era.get('tflag:全身镜') &&
-        (cur_location === location_enum.restroom ||
-          cur_location === location_enum.basement ||
-          cur_location === location_enum.home ||
-          cur_location === location_enum.hotel ||
-          cur_location === location_enum.love_hotel ||
-          cur_location === location_enum.summer_home),
+        (cur_loc === location_enum.restroom ||
+          cur_loc === location_enum.basement ||
+          cur_loc === location_enum.home ||
+          cur_loc === location_enum.hotel ||
+          cur_loc === location_enum.love_hotel ||
+          cur_loc === location_enum.summer_home),
     },
   ]
     .map((e) => ({ ...e, n: i18n().tb_item[e.a], c: era.get(`item:${e.a}`) }))
@@ -113,9 +113,9 @@ async function use_ero_item(chara) {
           a: part_enum.breast,
           d:
             era.get('item:夹子') < 2 ||
-            era.get(`tequip:${cur_lover}:胸部`) !== -1 ||
-            (era.get(`talent:${cur_lover}:乳头类型`) === 2 &&
-              !era.get(`tcvar:${cur_lover}:乳突`)),
+            era.get(`tequip:${lover}:胸部`) !== -1 ||
+            (era.get(`talent:${lover}:乳头类型`) === 2 &&
+              !era.get(`tcvar:${lover}:乳突`)),
           n: 's_nipple',
         },
         {
@@ -123,7 +123,7 @@ async function use_ero_item(chara) {
           d:
             !virgin_size ||
             penis_size ||
-            era.get(`tequip:${cur_lover}:外阴`) !== -1,
+            era.get(`tequip:${lover}:外阴`) !== -1,
           n: 's_clitoris',
         },
       ];
@@ -133,13 +133,13 @@ async function use_ero_item(chara) {
         {
           a: part_enum.breast,
           d:
-            era.get(`talent:${cur_lover}:乳头类型`) === 2 &&
-            !era.get(`tcvar:${cur_lover}:乳突`),
+            era.get(`talent:${lover}:乳头类型`) === 2 &&
+            !era.get(`tcvar:${lover}:乳突`),
           n: 's_nipple',
         },
         {
           a: part_enum.penis,
-          d: !penis_size || era.get(`tequip:${cur_lover}:阴茎`) !== -1,
+          d: !penis_size || era.get(`tequip:${lover}:阴茎`) !== -1,
           n: 's_penis',
         },
         {
@@ -158,9 +158,9 @@ async function use_ero_item(chara) {
           a: part_enum.breast,
           d:
             era.get('item:跳蛋') < 2 ||
-            era.get(`tequip:${cur_lover}:胸部`) !== -1 ||
-            (era.get(`talent:${cur_lover}:乳头类型`) === 2 &&
-              !era.get(`tcvar:${cur_lover}:乳突`)),
+            era.get(`tequip:${lover}:胸部`) !== -1 ||
+            (era.get(`talent:${lover}:乳头类型`) === 2 &&
+              !era.get(`tcvar:${lover}:乳突`)),
           n: 's_nipple',
         },
         {
@@ -168,17 +168,17 @@ async function use_ero_item(chara) {
           d:
             !virgin_size ||
             penis_size ||
-            era.get(`tequip:${cur_lover}:外阴`) !== -1,
+            era.get(`tequip:${lover}:外阴`) !== -1,
           n: 's_clitoris',
         },
         {
           a: part_enum.virgin,
-          d: !virgin_size || era.get(`tequip:${cur_lover}:阴道`) !== -1,
+          d: !virgin_size || era.get(`tequip:${lover}:阴道`) !== -1,
           n: 's_virgin',
         },
         {
           a: part_enum.anal,
-          d: era.get(`tequip:${cur_lover}:肛门`) !== -1,
+          d: era.get(`tequip:${lover}:肛门`) !== -1,
           n: 's_anal',
         },
       ];
@@ -189,17 +189,15 @@ async function use_ero_item(chara) {
           a: part_enum.virgin,
           d:
             !virgin_size ||
-            // TEQUIPNAME:8 = 阴道
-            era.get(`tequip:${cur_lover}:8`) !== -1 ||
+            era.get(`tequip:${lover}:阴道`) !== -1 ||
             // TALENTNAME:31 = 处女
-            era.get(`talent:${cur_lover}:31`) > vp_status_enum.no ||
-            era.get(`talent:${cur_lover}:31`) === vp_status_enum.i_think,
+            era.get(`talent:${lover}:31`) > vp_status_enum.no ||
+            era.get(`talent:${lover}:31`) === vp_status_enum.i_think,
           n: 's_virgin',
         },
         {
           a: part_enum.anal,
-          // TEQUIPNAME:9 = 肛门
-          d: era.get(`tequip:${cur_lover}:9`) !== -1,
+          d: era.get(`tequip:${lover}:肛门`) !== -1,
           n: 's_anal',
         },
       ];

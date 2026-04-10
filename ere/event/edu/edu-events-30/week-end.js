@@ -300,8 +300,8 @@ module.exports = (handlers) => {
     await rice.say_and_wait('……是的！');
     await era.printAndWait([
       '然后',
-      rice.sex,
-      '们便开始了奔跑，向着即将到来的 ',
+      rice.couple_title,
+      '便开始了奔跑，向着即将到来的 ',
       race_infos[race_enum.tenn_spr].get_colored_name(),
       '——！',
     ]);

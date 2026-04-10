@@ -363,11 +363,13 @@ module.exports = {
           ' 的衣服，毫不在意斑斑点点的下体，径直捅了进去。',
         ]);
         print([
-          '在',
           uma,
-          '一边抽送一边对 ',
+          '一边抽送，一边戏谑地问 ',
           you.get_colored_name(),
-          ' 提出是否每天训练前都会被担当射进一整天的存货的低问中，',
+          ' 每天训练前是否都会被担当射进一整天的存货',
+        ]);
+        print([
+          '在极度的快感和羞耻中，',
           you.get_colored_name(),
           ' 失去了意识……',
         ]);
@@ -595,7 +597,6 @@ module.exports = {
       ]);
       await printAndWait(['这就是，身为孕袋的幸福啊。']);
       println();
-      println();
       await printAndWait(['——————']);
       println();
       await printAndWait(['可惜，欢乐的时光不会永远持续，']);
@@ -607,6 +608,11 @@ module.exports = {
       await printAndWait([
         '…………哪怕，那只是在五秒后，下一根肉棒插入进来时便会遗忘的记忆。',
       ]);
+      println();
+      await printAndWait(
+        '【在精液的浇灌下，泛着妖艳粉光的淫纹悄然改变了形状】',
+        { color: buff_colors[2] },
+      );
     };
     f.title = [{ color: buff_colors[2], content: '孕袋职责之惩戒' }];
     return f;
@@ -791,6 +797,11 @@ module.exports = {
           ' 送上了无声的祝福。',
         ]);
       }
+      println();
+      await printAndWait(
+        '【在精液的浇灌下，泛着妖艳粉光的淫纹悄然改变了形状】',
+        { color: buff_colors[2] },
+      );
     };
     f.title = [{ color: buff_colors[2], content: '孕袋职责之惩戒' }];
     return f;

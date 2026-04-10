@@ -15,8 +15,6 @@ const generate_dictionary = require('#/event/snippets/generate-dictionary');
 const print_event_name = require('#/event/snippets/print-event-name');
 const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
-
 const ArdanLifeMarks = require('#/data/event/life-event-marks/life-event-marks-71');
 
 const { i18n } = require('#/i18n/selector');
@@ -68,7 +66,6 @@ module.exports = class extends CustomizedLove {
       add_event(stage, event_object);
       return;
     }
-    get_chara_talk(86);
     await print_title_with_kojo(this.#kojo, 'theater', ardan, {
       ...this.#dict,
       CALL_86: sys_get_callname(this.id, 86),

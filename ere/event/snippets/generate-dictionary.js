@@ -25,8 +25,8 @@ function generate_dictionary(
     title: false,
     uma: false,
     your_name: false,
-    your_sex: false,
     your_phy: false,
+    your_sex: false,
   },
 ) {
   const ret = { id: cid, _g: true };

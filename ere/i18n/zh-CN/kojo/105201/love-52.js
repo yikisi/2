@@ -2835,8 +2835,8 @@ module.exports = {
         '体能超群的',
         urara.uma_sex_title,
         '们不会被区区门窗所阻拦，从对方那里拿到的物件对',
-        urara.sex,
-        '们来说也更多的是象征意义。',
+        urara.couple_title,
+        '来说也更多的是象征意义。',
       ]);
       await era.printAndWait([
         '但即使能够无需承担后果的行动，',

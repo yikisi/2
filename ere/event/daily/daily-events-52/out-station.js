@@ -940,8 +940,8 @@ module.exports = async (hook) => {
             ]);
             await urara.say_and_wait([
               '找其他同学一起？可是',
-              urara.sex,
-              '们最近都没空哦？',
+              urara.couple_title,
+              '最近都没空哦？',
               callname,
               '，再帮我一下……',
             ]);

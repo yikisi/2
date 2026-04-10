@@ -954,7 +954,7 @@ birthday_dependence:
       content:
         - fontWeight: bold
           content: %CHARA%
-        - 「%CALLNAME%，宇宙就像是%UMA%们的历史，每一个闪烁的星星都像是一位在历史上留下璀璨光辉的%UMA%们，%SEX%们是如此的闪耀而又美丽。」
+        - 「%CALLNAME%，宇宙就像是%UMA%们的历史，每一个闪烁的星星都像是一位在历史上留下璀璨光辉的%UMA%们，%THEY%是如此的闪耀而又美丽。」
     - color: %COLOR%
       content:
         - fontWeight: bold

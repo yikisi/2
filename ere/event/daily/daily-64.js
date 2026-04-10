@@ -77,11 +77,6 @@ module.exports = class extends CustomizedDaily {
   }
 
   async talk() {
-    get_chara_talk(59);
-    get_chara_talk(65);
-    get_chara_talk(71);
-    get_chara_talk(74);
-    get_chara_talk(86);
     await this.#kojo['talk']({
       ...this.#dict,
       CALL_59: sys_get_callname(this.id, 59),

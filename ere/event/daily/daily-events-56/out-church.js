@@ -12,7 +12,11 @@ module.exports = async () => {
   const kitaru = get_chara_talk(56),
     me = get_chara_talk(0),
     callname = sys_get_callname(56, 0);
-  await era.printAndWait(['和担当一起来到了', kitaru.sex, '们家的神社。']);
+  await era.printAndWait([
+    '和担当一起来到了',
+    kitaru.couple_title,
+    '家的神社。',
+  ]);
   await kitaru.say_and_wait('那么，是求签的时候了！');
   await kitaru.say_and_wait('我看看！今天的运势是！');
   await kitaru.say_and_wait('白兴大人～白兴大人～');

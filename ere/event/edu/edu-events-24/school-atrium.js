@@ -376,7 +376,11 @@ module.exports = (handlers) => {
         ' 的喜好！',
       ]);
       await maya.say_and_wait(
-        ['为了赢过', maya.sex, '们两个，人家一定要靠自己做出更厉害的料理！'],
+        [
+          '为了赢过',
+          maya.couple_title,
+          '两个，人家一定要靠自己做出更厉害的料理！',
+        ],
         true,
       );
       await maya.say_and_wait('呜、呜呜呜～');
@@ -416,14 +420,14 @@ module.exports = (handlers) => {
     } else {
       await era.printAndWait([
         '看着',
-        maya.sex,
-        '们下厨的样子，连 ',
+        maya.couple_title,
+        '下厨的样子，连 ',
         me.get_colored_name(),
         ' 自己也想动手做了。',
         me.get_colored_name(),
         ' 这么告诉',
-        maya.sex,
-        '们之后──',
+        maya.couple_title,
+        '之后──',
       ]);
       await flower.say_and_wait(
         '呃，有兴趣的话要一起做吗？我可以告诉你步骤……！',

@@ -214,11 +214,15 @@ module.exports = (handlers) => {
     await era.printAndWait([
       '在看见那超越光速的身姿，以及如同漆黑的猎犬一般撕咬前者的跑法时，终于理解了',
     ]);
-    await era.printAndWait(['早在第一次看见', tachyon.sex, '们跑步的模样时']);
+    await era.printAndWait([
+      '早在第一次看见',
+      tachyon.couple_title,
+      '跑步的模样时',
+    ]);
     await era.printAndWait([
       '自己，就已经深深爱上',
-      tachyon.sex,
-      '们',
+      tachyon.couple_title,
+      '',
       era.get('love:25') >= 75 && love >= 75 ? '' : '的跑法',
       '了',
     ]);
@@ -231,15 +235,15 @@ module.exports = (handlers) => {
     await era.printAndWait('想要分出强弱……不，只是想要看同场的竞技');
     await era.printAndWait([
       '强还是弱那都不是重点，只是想看',
-      tachyon.sex,
-      '们奔跑的模样',
+      tachyon.couple_title,
+      '奔跑的模样',
     ]);
     era.println();
     await era.printAndWait('希望终点前的这段直线可以永远不要结束');
     await era.printAndWait([
       '希望可以永远看着',
-      tachyon.sex,
-      '们在赛场上奔驰的这一幕',
+      tachyon.couple_title,
+      '在赛场上奔驰的这一幕',
     ]);
     await era.printAndWait(['不知不觉，', me.get_colored_name(), ' 流下泪来']);
     era.println();
@@ -805,8 +809,8 @@ module.exports = (handlers) => {
       '身为训练员，应该要理智的为',
       tachyon.uma_sex_title,
       '考虑对',
-      tachyon.sex,
-      '们最好的选项',
+      tachyon.couple_title,
+      '最好的选项',
     ]);
     await era.printAndWait([
       '但自己，只是为了看见最美的跑法，最强的跑姿，就放任自己的负责',

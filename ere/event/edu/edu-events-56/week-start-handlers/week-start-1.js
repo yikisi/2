@@ -196,8 +196,8 @@ module.exports = (handlers) => {
       ' 与 ',
       kitaru.get_colored_name(),
       ' 相遇的神社，正巧是由',
-      kitaru.sex,
-      '们家运营的。',
+      kitaru.couple_title,
+      '家运营的。',
     ]);
     await kitaru.say_and_wait(['欸！', callname, ' 很感兴趣吗？']);
     await kitaru.say_and_wait('今天我恰好也要去工作呢！');

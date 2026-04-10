@@ -196,14 +196,14 @@ module.exports = (handlers) => {
     era.drawLine();
     await maya.say_and_wait([
       '大概就是这样，我教',
-      maya.sex,
-      '们我会的部分！',
-      maya.sex,
-      '们都很开心！',
+      maya.couple_title,
+      '我会的部分！',
+      maya.couple_title,
+      '都很开心！',
     ]);
     await maya.say_and_wait([
-      maya.sex,
-      '们还说『下次也麻烦你了』！嘿嘿，受欢迎的',
+      maya.couple_title,
+      '还说『下次也麻烦你了』！嘿嘿，受欢迎的',
       maya.phy_sex_title,
       '还真辛苦啊～♪',
     ]);
@@ -229,14 +229,18 @@ module.exports = (handlers) => {
       ]);
       await maya.say_and_wait('啊！！人家完全忘记了！');
       await maya.say_and_wait('回礼吗～♪要求什么好呢～？');
-      await maya.say_and_wait(['……对了！请', maya.sex, '们陪我玩好了！']);
+      await maya.say_and_wait([
+        '……对了！请',
+        maya.couple_title,
+        '陪我玩好了！',
+      ]);
       await maya.say_and_wait('考试期间大家都要念书，都没有人要陪我玩～');
       era.printButton(
         '「多亏你教' + maya.sex + '们，' + maya.sex + '们有空了呢」',
         1,
       );
       await era.input();
-      await maya.say_and_wait(['没错没错！我明天去问', maya.sex, '们♪']);
+      await maya.say_and_wait(['没错没错！我明天去问', maya.couple_title, '♪']);
       era.drawLine();
       await say_by_passer_by_and_wait(
         '赛' + maya.uma_sex_title + 'A',
