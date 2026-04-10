@@ -654,8 +654,9 @@ class CustomizedDaily extends CustomizedEvent {
    * @protected
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
+   * @param {HookArg} hook
    */
-  async cl_fans(chara, me) {
+  async cl_fans(chara, me, hook) {
     await print_title_with_kojo(i18n().timon.daily, 'cl_fans', chara, me);
   }
 
