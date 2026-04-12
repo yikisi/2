@@ -117,6 +117,7 @@ class I18nClothes {
   104002 = 'Boho Flare';
   104043 = '秋樱舞者';
   104101 = '樱花，前进！';
+  104120 = '春雷韦驮天';
   104150 = '炽红☆领队';
   104201 = 'Rocket☆Star';
   104240 = 'Be♪Witched';
@@ -199,6 +200,7 @@ class I18nClothes {
   108002 = '宵暗新神乐';
   108101 = 'Red Devil Gear';
   108201 = 'Looking Fly!';
+  108220 = '水色一瞬';
   108301 = 'Onyx Soldier';
   108340 = 'Jetblack Automaton';
   108401 = '身披雷霆';
@@ -259,12 +261,14 @@ class I18nClothes {
   112410 = '晓光';
   112701 = '义心黑焰';
   112901 = 'The Changer';
+  113001 = '万折不挠之缠';
   113101 = 'Smile My Way!';
   113201 = '9927 Wishes';
-  113202 = 'New Scenario';
+  113202 = 'Love-Linked Aster';
   113301 = '光彩陆离的编纂者';
   113501 = 'Sunlit Outsider';
   113701 = 'Miracle Author';
+  114301 = 'Lueur Angélique';
   // GENERATED END
 }
 

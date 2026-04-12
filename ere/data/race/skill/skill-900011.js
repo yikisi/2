@@ -12,11 +12,11 @@ module.exports = new UmaSkill(
     (args) =>
       args.phase >= 2 &&
       args.order >= 1 &&
-      args.order_rate <= 50 &&
+      args.order_rate <= 70 &&
       args.change_order_onetime < 0,
     () => false,
   ],
-  [3, 0],
+  [3.6, 0],
   [500, 0],
   [
     UmaSkill.ability_time_usage_enum.normal,

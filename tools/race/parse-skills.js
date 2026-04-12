@@ -48,6 +48,7 @@ const icon2skill_color = {
   10034: get_skill_color(skill_name_enum.debuff, skill_border_enum.normal),
   10036: get_skill_color(skill_name_enum.buff, skill_border_enum.evol),
   10041: get_skill_color(skill_name_enum.buff, skill_border_enum.normal),
+  10044: get_skill_color(skill_name_enum.debuff, skill_border_enum.normal),
   10051: get_skill_color(skill_name_enum.buff, skill_border_enum.normal),
   10052: get_skill_color(skill_name_enum.buff, skill_border_enum.advanced),
   10054: get_skill_color(skill_name_enum.debuff, skill_border_enum.normal),
@@ -69,6 +70,7 @@ const icon2skill_color = {
   20046: get_skill_color(skill_name_enum.speed, skill_border_enum.evol),
   20051: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
   20052: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
+  20056: get_skill_color(skill_name_enum.speed, skill_border_enum.evol),
   20061: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
   20062: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
   20064: get_skill_color(skill_name_enum.debuff, skill_border_enum.normal),
@@ -123,6 +125,7 @@ const icon2skill_color = {
   20326: get_skill_color(skill_name_enum.speed, skill_border_enum.evol),
   20331: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
   20332: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
+  20346: get_skill_color(skill_name_enum.speed, skill_border_enum.evol),
   20351: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
   30011: get_skill_color(skill_name_enum.control, skill_border_enum.normal),
   30012: get_skill_color(skill_name_enum.control, skill_border_enum.advanced),
@@ -136,7 +139,23 @@ const icon2skill_color = {
   30072: get_skill_color(skill_name_enum.control, skill_border_enum.advanced),
   40012: get_skill_color(skill_name_enum.buff, skill_border_enum.advanced),
   2010010: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
+  2010011: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
   2010016: get_skill_color(skill_name_enum.speed, skill_border_enum.evol),
+};
+
+const skill2skill_color = {
+  101301: get_skill_color(skill_name_enum.speed, skill_border_enum.spe),
+  101431: get_skill_color(skill_name_enum.speed, skill_border_enum.spe),
+  204271: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
+  204272: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
+  204282: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
+  204311: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
+  204312: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
+  204322: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
+  901301: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
+  901431: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
+  114301111: get_skill_color(skill_name_enum.speed, skill_border_enum.evol),
+  114301211: get_skill_color(skill_name_enum.speed, skill_border_enum.evol),
 };
 
 // 新增通用可学习技能，数据库里没有，所以需要在最后单独生成注册条目
@@ -164,6 +183,8 @@ const used_skill_condition_dict = {
     '(args)=>args.furlong===3&&args.order_rate<=50&&args.is_used_skill_id.includes(203061)&&args.is_used_skill_id.includes(203071)',
   101371:
     '(args)=>args.order_rate<=70&&args.phase_firsthalf===1&&args.is_used_skill_id.includes(202051)',
+  113701111:
+    '(args)=>args.running_style===1&&args.phase_laterhalf_random===0&&args.is_used_skill_id.includes(202051)',
 };
 const ability_tag_dict = {
   203781:
@@ -537,7 +558,7 @@ async function chara_skill() {
   ).forEach((s_list) => {
     s_list.forEach((e) => {
       e.name = skill_text[e.id][47];
-      e.category = icon2skill_color[e.icon_id];
+      e.category = icon2skill_color[e.icon_id] ?? skill2skill_color[e.id];
     });
     s_list
       .sort((a, b) => get_skill_group_level(a) - get_skill_group_level(b))

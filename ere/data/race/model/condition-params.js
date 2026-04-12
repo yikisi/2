@@ -88,6 +88,7 @@ class ConditionParams {
   phase_firsthalf_random;
   phase_firstquarter;
   phase_firstquarter_random;
+  phase_laterhalf;
   phase_laterhalf_random;
   phase_random;
   phase_straight_random;

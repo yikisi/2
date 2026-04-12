@@ -20,7 +20,7 @@ module.exports = new UmaSkill(
   ],
   [
     [
-      UmaSkill.ability_type_enum.Unknown,
+      UmaSkill.ability_type_enum.AccelFullSpeed,
       UmaSkill.ability_type_enum.no,
       UmaSkill.ability_type_enum.no,
     ],

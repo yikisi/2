@@ -39,12 +39,14 @@ function sys_prepare_race(list_chara, team_list, race_info) {
   const running_style_counts = [0, 0, 0, 0];
   const skill_counts = {};
   list_chara.forEach((uma) => running_style_counts[uma.style]++);
+  // 同理心、一匹狼
   [201631, 201641].forEach(
     (e) =>
       (skill_counts[e] = list_chara.filter((uma) =>
         uma.list_skill.some((s) => s.data.id === e),
       ).length),
   );
+  // 同调
   if (
     list_chara.some((uma) => uma.list_skill.some((s) => s.data.id === 201632))
   ) {
@@ -129,6 +131,10 @@ function sys_prepare_race(list_chara, team_list, race_info) {
 
   const team_total_attrs = new Array(5).fill(0),
     half_attr_border = max_attr - 2 * race_info.extra_attr;
+
+  const count_204322 = list_chara.filter((u) =>
+    u.list_skill.some((s) => s.data.id === 204322),
+  ).length;
 
   for (const uma of list_chara) {
     uma.base.skill_count = uma.list_skill.length;
@@ -403,6 +409,11 @@ function sys_prepare_race(list_chara, team_list, race_info) {
         }
       }
     });
+
+    // 阿哞合拍的计数
+    // 目前只有此技能需要计算持有相同技能的马娘然后影响效果变化，所以只在这里处理
+    // 如果出现其他技能，则挪到 sub-simulate-skill.js 中
+    uma.race.conditionParams.same_skill_horse_count = count_204322;
 
     // 位置意识概率
     uma.probs.loc_mind =
