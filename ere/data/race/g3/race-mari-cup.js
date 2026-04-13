@@ -1,1 +1,20 @@
-// GENERATED STARTconst RaceInfo = require('#/data/race/model/race-info');module.exports = new RaceInfo(  52,  RaceInfo.class_enum.G3,  RaceInfo.track_enum.funabashi,  RaceInfo.ground_enum.mud,  1600,  RaceInfo.distance_enum.mile,  RaceInfo.rotation_enum.left,  14,  [],  RaceInfo.limit_enum.post3,  14,  4,  937,  11402,);// GENERATED END
+// GENERATED START
+const RaceInfo = require('#/data/race/model/race-info');
+
+module.exports = new RaceInfo(
+  52,
+  RaceInfo.class_enum.G3,
+  RaceInfo.track_enum.funabashi,
+  RaceInfo.ground_enum.mud,
+  1600,
+  RaceInfo.distance_enum.mile,
+  RaceInfo.rotation_enum.left,
+  14,
+  [],
+  RaceInfo.limit_enum.post3,
+  14,
+  4,
+  937,
+  11402,
+);
+// GENERATED END

@@ -174,5 +174,14 @@ module.exports = class extends I18nRaces {
   169 = 'Dubai Turf';
   170 = 'Al Quoz Sprint';
   171 = 'Fuyou Stakes';
+  172 = "Breeders' Cup Turf Sprint";
+  173 = "Breeders' Cup Mile";
+  174 = "Breeders' Cup Filly & Mare Turf";
+  175 = "Breeders' Cup Turf";
+  176 = "Breeders' Cup Sprint";
+  177 = "Breeders' Cup Filly & Mare Sprint";
+  178 = "Breeders' Cup Dirt Mile";
+  179 = "Breeders' Cup Distaff";
+  180 = "Breeders' Cup Classic";
   // GENERATED END
 };

@@ -1,8 +1,8 @@
 const { execSync } = require('child_process');
-const { readFileSync, writeFileSync } = require('fs');
+const { readFileSync } = require('fs');
 const { join, resolve } = require('path');
 
-const { generate_content } = require('../libs');
+const { read_and_write_generated } = require('../libs');
 
 let csv = readFileSync(join(__dirname, '../../common/race/races.csv'), 'utf-8');
 csv = csv
@@ -41,11 +41,10 @@ csv.forEach((e) => {
   output += `race_infos[race_enum.${e[1]}] = require('#/data/race/${e[8].toLowerCase()}/race-${e[6]}');`;
 });
 
-const file_path = join(__dirname, '../../ere/data/race/race-const.js');
-
-writeFileSync(
-  file_path,
-  generate_content(readFileSync(file_path, 'utf-8'), '//', output),
+read_and_write_generated(
+  join(__dirname, '../../ere/data/race/race-const.js'),
+  '//',
+  output,
 );
 
 const distance_dict = {};
@@ -79,6 +78,7 @@ track_dict['宾利高'] = 'baltimore';
 track_dict['贝蒙园'] = 'new_york';
 track_dict['圣安妮塔公园'] = 'santa_anita';
 track_dict['迈丹'] = 'meydan';
+track_dict['德尔玛'] = 'del_mar';
 
 const rotation_dict = {};
 rotation_dict['右'] = 'right';
@@ -149,31 +149,30 @@ csv.forEach((e, i) => {
   // 参数号
   output += `${e[0]},\n`;
   output += ');';
-  const file_path = join(
-    __dirname,
-    `../../ere/data/race/${e[8].toLowerCase()}/race-${e[6]}.js`,
-  );
-  writeFileSync(
-    file_path,
-    generate_content(readFileSync(file_path, 'utf-8'), '//', output),
+  read_and_write_generated(
+    join(
+      __dirname,
+      `../../ere/data/race/${e[8].toLowerCase()}/race-${e[6]}.js`,
+    ),
+    '//',
+    output,
   );
 });
 
-const i18n_c = join(__dirname, '../../ere/i18n/zh-CN/race/races.js');
-const i18n_e = join(__dirname, '../../ere/i18n/en-US/race/races.js');
-const i18n_j = join(__dirname, '../../ere/i18n/ja-JP/race/races.js');
-
-writeFileSync(
-  i18n_c,
-  generate_content(readFileSync(i18n_c, 'utf-8'), '//', c_out),
+read_and_write_generated(
+  join(__dirname, '../../ere/i18n/zh-CN/race/races.js'),
+  '//',
+  c_out,
 );
-writeFileSync(
-  i18n_e,
-  generate_content(readFileSync(i18n_e, 'utf-8'), '//', e_out),
+read_and_write_generated(
+  join(__dirname, '../../ere/i18n/ja-JP/race/races.js'),
+  '//',
+  j_out,
 );
-writeFileSync(
-  i18n_j,
-  generate_content(readFileSync(i18n_j, 'utf-8'), '//', j_out),
+read_and_write_generated(
+  join(__dirname, '../../ere/i18n/en-US/race/races.js'),
+  '//',
+  e_out,
 );
 
 try {

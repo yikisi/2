@@ -272,7 +272,7 @@ const race_enum = {
   fant_sta: 132,
   // 日本育马场杯短途赛
   jbc_spr: 133,
-  // 日本育马场杯雌马经典赛
+  // 日本育马场杯皇冠经典赛
   jbc_lad: 134,
   // 日本育马场经典赛
   jbc_cls: 135,
@@ -348,6 +348,24 @@ const race_enum = {
   alqu_spr: 170,
   // 芙蓉锦标
   fuyo_sta: 171,
+  // 育马者杯草地短途赛
+  bc_tsp: 172,
+  // 育马者杯英里赛
+  bc_mil: 173,
+  // 育马者杯皇冠草地赛
+  bc_fmt: 174,
+  // 育马者杯草地赛
+  bc_tur: 175,
+  // 育马者杯短途赛
+  bc_spr: 176,
+  // 育马者杯皇冠短途赛
+  bc_fms: 177,
+  // 育马者杯泥地英里赛
+  bc_dml: 178,
+  // 育马者杯皇冠泥地赛
+  bc_dis: 179,
+  // 育马者杯经典赛
+  bc_cls: 180,
 };
 
 const current = new Date().getTime();
@@ -525,6 +543,15 @@ race_infos[race_enum.duba_cls] = require('#/data/race/g1/race-duba-cls');
 race_infos[race_enum.duba_tur] = require('#/data/race/g1/race-duba-tur');
 race_infos[race_enum.alqu_spr] = require('#/data/race/g1/race-alqu-spr');
 race_infos[race_enum.fuyo_sta] = require('#/data/race/op/race-fuyo-sta');
+race_infos[race_enum.bc_tsp] = require('#/data/race/g1/race-bc-tsp');
+race_infos[race_enum.bc_mil] = require('#/data/race/g1/race-bc-mil');
+race_infos[race_enum.bc_fmt] = require('#/data/race/g1/race-bc-fmt');
+race_infos[race_enum.bc_tur] = require('#/data/race/g1/race-bc-tur');
+race_infos[race_enum.bc_spr] = require('#/data/race/g1/race-bc-spr');
+race_infos[race_enum.bc_fms] = require('#/data/race/g1/race-bc-fms');
+race_infos[race_enum.bc_dml] = require('#/data/race/g1/race-bc-dml');
+race_infos[race_enum.bc_dis] = require('#/data/race/g1/race-bc-dis');
+race_infos[race_enum.bc_cls] = require('#/data/race/g1/race-bc-cls');
 // GENERATED END
 
 race_infos.forEach((e) => {

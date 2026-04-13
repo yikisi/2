@@ -30,6 +30,7 @@ track2location[track_enum.kentucky] =
   track2location[track_enum.baltimore] =
   track2location[track_enum.new_york] =
   track2location[track_enum.santa_anita] =
+  track2location[track_enum.del_mar] =
     { con: 'c_america', lan: 6, loc: location_enum.new_york };
 track2location[track_enum.longchamp] =
   track2location[track_enum.chantilly] =

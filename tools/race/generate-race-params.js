@@ -1,7 +1,6 @@
-const { readFileSync, writeFileSync } = require('fs');
 const { join } = require('path');
 
-const { generate_content } = require('../libs');
+const { read_and_write_generated } = require('../libs');
 
 /** @type {{id:number,lane:{type:string,start:number,length:number,end:number,name:string}[],slopes:{type:string,start:number,length:number,end:number,slope:number}[]}[]} */
 const data = require('../../common/race/CourseParams.json');
@@ -18,7 +17,7 @@ data.forEach((e) => {
   // lane
   for (let i = 0; i < e.lane.length; ++i) {
     const lane = e.lane[i];
-    const is_last = lane.name.startsWith('终');
+    const is_last = lane.name !== undefined && lane.name.startsWith('终');
     const corner = lane.type.startsWith('弯');
 
     if (!i && lane.start !== 0) {
@@ -74,10 +73,10 @@ data.forEach((e) => {
 
 output += `lane_params: {${lane_output}},\nslope_params: {${slope_output}}};`;
 
-const param_path = join(__dirname, '../../ere/data/race/race-params.js');
-writeFileSync(
-  param_path,
-  generate_content(readFileSync(param_path, 'utf-8'), '//', output),
+read_and_write_generated(
+  join(__dirname, '../../ere/data/race/race-params.js'),
+  '//',
+  output,
 );
 
 /** @type {{id:number,status_id:number}[]} */
@@ -106,8 +105,8 @@ output +=
   '    [attr_enum.toughness, attr_enum.intelligence],\n' +
   '  ],}';
 
-const bonus_path = join(__dirname, '../../ere/data/race/race-attr-bonus.js');
-writeFileSync(
-  bonus_path,
-  generate_content(readFileSync(bonus_path, 'utf-8'), '//', output),
+read_and_write_generated(
+  join(__dirname, '../../ere/data/race/race-attr-bonus.js'),
+  '//',
+  output,
 );

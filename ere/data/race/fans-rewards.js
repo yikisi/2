@@ -59,6 +59,16 @@ race2fans_reward[race_enum.duba_cls] = 27000;
 race2fans_reward[race_enum.duba_tur] = 27000;
 race2fans_reward[race_enum.alqu_spr] = 27000;
 
+race2fans_reward[race_enum.bc_tsp] = 26000;
+race2fans_reward[race_enum.bc_mil] = 29000;
+race2fans_reward[race_enum.bc_fmt] = 30000;
+race2fans_reward[race_enum.bc_tur] = 30000;
+race2fans_reward[race_enum.bc_spr] = 27000;
+race2fans_reward[race_enum.bc_fms] = 28000;
+race2fans_reward[race_enum.bc_dml] = 29000;
+race2fans_reward[race_enum.bc_dis] = 29000;
+race2fans_reward[race_enum.bc_cls] = 31000;
+
 Object.values(race_enum)
   .filter(
     (e) => race_infos[e].race_class === class_enum.G1 && !race2fans_reward[e],
