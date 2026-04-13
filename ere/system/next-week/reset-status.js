@@ -347,12 +347,15 @@ async function reset_status(
           await era.waitAnyKey();
         } else if (edu_weeks < 3 * 48) {
           if (edu_weeks > 0 && edu_weeks % 48 === 0) {
-            const skill_control = CharaSkills.get(cid),
-              available_control = CharaAvailableSkills.get(cid),
-              to_get = available_control.get().slice(0, 2);
+            const skill_control = CharaSkills.get(cid);
+            const available_control = CharaAvailableSkills.get(cid);
+            let to_get = available_control.get();
             if (to_get.length === 0) {
               era.add(`exp:${cid}:技能点数`, 400);
             } else {
+              if (edu_weeks < 96) {
+                to_get = to_get.slice(0, Math.floor(to_get.length / 2));
+              }
               available_control.remove(...to_get);
               get_skills_and_print_in_event(cid, to_get, skill_control);
             }

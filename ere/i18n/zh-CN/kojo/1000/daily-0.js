@@ -66,28 +66,28 @@ module.exports = {
   async o_s_drawing(you) {
     await printAndWait([
       you.get_colored_name(),
-      ' 独自来到商店街卡拉OK，为什么要做这么无聊的事呢……',
+      ' 独自来到商店街抽奖，来抽点好东西吧！',
     ]);
   },
   /** @param {CharaTalk} you 玩家 */
   async o_s_ktv(you) {
     await printAndWait([
       you.get_colored_name(),
-      ' 独自来到商店街看电影，在人群中格格不入的感觉挥之不去。',
+      ' 独自来到商店街卡拉OK，为什么要做这么无聊的事呢……',
     ]);
   },
   /** @param {CharaTalk} you 玩家 */
   async o_s_movie(you) {
     await printAndWait([
       you.get_colored_name(),
-      ' 独自来到商店街，径直走向了那家不起眼的粉红的小店……',
+      ' 独自来到商店街看电影，在人群中格格不入的感觉挥之不去。',
     ]);
   },
   /** @param {CharaTalk} you 玩家 */
   async o_s_ero_item(you) {
     await printAndWait([
       you.get_colored_name(),
-      ' 独自来到商店街抽奖，来抽点好东西吧！',
+      ' 独自来到商店街，径直走向了那家不起眼的粉红的小店……',
     ]);
   },
   /**

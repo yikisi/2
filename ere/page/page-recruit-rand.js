@@ -333,20 +333,21 @@ async function print_rec_page() {
       }
       skill_buffer.push({ content: [], type: 'text' });
       if (available_list.length > 0) {
+        const splitter = Math.floor(available_list.length / 2);
         skill_buffer.push(
           {
             config: { width: 3 },
             content: i18n().ui_rec_e_skill_classic,
             type: 'text',
           },
-          ...available_list.slice(0, 2),
+          ...available_list.slice(0, splitter),
           { content: [], type: 'text' },
           {
             config: { width: 3 },
             content: i18n().ui_rec_e_skill_senior,
             type: 'text',
           },
-          ...available_list.slice(2),
+          ...available_list.slice(splitter),
         );
       } else {
         skill_buffer.push(
