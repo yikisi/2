@@ -626,8 +626,9 @@ class CustomizedDaily extends CustomizedEvent {
    * @protected
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
+   * @param {HookArg} hook
    */
-  async cl_new_year(chara, me) {
+  async cl_new_year(chara, me, hook) {
     await print_title_with_kojo(i18n().timon.daily, 'cl_new_year', chara, me);
   }
 
@@ -688,8 +689,9 @@ class CustomizedDaily extends CustomizedEvent {
    * @protected
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
+   * @param {HookArg} hook
    */
-  async cl_christmas(chara, me) {
+  async cl_christmas(chara, me, hook) {
     await print_title_with_kojo(i18n().timon.daily, 'cl_christmas', chara, me);
   }
 
