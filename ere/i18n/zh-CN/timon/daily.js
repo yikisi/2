@@ -20,7 +20,7 @@ module.exports = {
    * @param {CharaTalk} minoru
    */
   good_morning(chara, you, minoru) {
-    const talk = [
+    const buffer = [
       /** @author 雞雞 */
       {
         h() {
@@ -547,7 +547,7 @@ module.exports = {
         },
       },
     ];
-    get_random_entry(talk.filter((t) => !t.c || t.c())).h();
+    get_random_entry(buffer.filter((t) => !t.c || t.c())).h();
   },
   /**
    * @author 雞雞
@@ -559,7 +559,7 @@ module.exports = {
     if (is_sleep) {
       era.print([chara.get_colored_name(), ' 正沉睡着。']);
     } else {
-      const talk = [
+      const buffer = [
         {
           h() {
             era.print([
@@ -581,7 +581,7 @@ module.exports = {
           },
         },
       ];
-      get_random_entry(talk).h();
+      get_random_entry(buffer).h();
     }
   },
   /**
@@ -676,53 +676,17 @@ module.exports = {
     }
   },
   /**
+   * @author 雞雞
    * @param {CharaTalk} chara
    * @param {CharaTalk} you
    */
   async office_study(chara, you) {
-    const talk = [
-      {
-        /** @author 雞雞 */
-        async h() {
-          await era.printAndWait([
-            you.get_colored_name(),
-            ' 在训练员室里指导 ',
-            chara.get_colored_name(),
-            ` 学习，成功指导${chara.sex}解开了不会的题目。`,
-          ]);
-        },
-      },
-      {
-        // FLAGNAME:35 = 惩戒力度
-        c: () => era.get('flag:35') >= 2,
-        /** @author 幽白書 */
-        async h() {
-          await era.printAndWait([
-            '在指导了 ',
-            chara.get_colored_name(),
-            ' 课业方面的知识后，',
-            chara.get_colored_name(),
-            ' 红着脸颊望着 ',
-            you.get_colored_name(),
-            '，接下来，该轮到性教育的时间了。',
-          ]);
-          await era.printAndWait([
-            '明明 ',
-            you.get_colored_name(),
-            ' 才是指导者，但 ',
-            chara.get_colored_name(),
-            ' 却比 ',
-            you.get_colored_name(),
-            ' 自己都了解自己的身体，在 ',
-            chara.get_colored_name(),
-            ' 的手中，',
-            you.get_colored_name(),
-            ' 被迫理解了自己身体的每个敏感点，以及它们被触碰时自己会做出的羞人反应。',
-          ]);
-        },
-      },
-    ];
-    await get_random_entry(talk.filter((t) => !t.c || t.c())).h();
+    await era.printAndWait([
+      you.get_colored_name(),
+      ' 在训练员室里指导 ',
+      chara.get_colored_name(),
+      ` 学习，成功指导${chara.sex}解开了不会的题目。`,
+    ]);
   },
   /**
    * @author 雞雞
@@ -756,7 +720,7 @@ module.exports = {
         era.get(`base:${chara.id}:0`) < 0.45 * era.get(`maxbase:${chara.id}:0`);
       // CFLAGNAME:48 = 育成回合计时
       const in_edu = era.get(`cflag:${chara.id}:48`) < 3 * 48;
-      const talk = [
+      const buffer = [
         {
           c: () => low_stamina,
           async h() {
@@ -833,7 +797,7 @@ module.exports = {
           },
         },
       ];
-      await get_random_entry(talk.filter((t) => !t.c || t.c())).h();
+      await get_random_entry(buffer.filter((t) => !t.c || t.c())).h();
     }
   },
   /**
@@ -920,157 +884,50 @@ module.exports = {
     ]);
   },
   /**
+   * @author 雞雞
    * @param {CharaTalk} chara
    * @param {CharaTalk} you
    */
   async s_a_tree_hollow(chara, you) {
-    const talk = [
-      {
-        /** @author 雞雞 */
-        async h() {
-          await era.printAndWait([
-            you.get_colored_name(),
-            ' 与 ',
-            chara.get_colored_name(),
-            ' 一起来到中庭枯树洞。',
-          ]);
-          await era.printAndWait([
-            `看着${chara.sex}朝枯树洞里咆哮的样子，`,
-            you.get_colored_name(),
-            ' 也坚定了要帮助 ',
-            chara.get_colored_name(),
-            ' 成为最强的决心。',
-          ]);
-        },
-      },
-      {
-        // FLAGNAME:35 = 惩戒力度
-        c: () => era.get('flag:35') >= 2,
-        /** @author 幽白書 */
-        async h() {
-          await era.printAndWait([
-            chara.get_colored_name(),
-            ' 带着 ',
-            you.get_colored_name(),
-            ' 到枯树洞旁，',
-          ]);
-          await era.printAndWait([
-            '正当 ',
-            you.get_colored_name(),
-            ` 以为${chara.sex}是最近有压力想宣泄时，却被措不及防的推倒在树桩上。`,
-          ]);
-          await era.printAndWait([
-            '随后 ',
-            you.get_colored_name(),
-            ' 下半身的衣装被缓缓脱下，温热的肉柱抵住了自己的穴口。',
-          ]);
-          await era.printAndWait([
-            '如果发出声音的话，树洞的回音效果一定会让 ',
-            you.get_colored_name(),
-            ' 的声音响彻校园吧。',
-          ]);
-          await era.printAndWait([
-            `要是被自己的负责${chara.uma_sex_title}按在枯树洞上干的事情传出去的话，`,
-            you.get_colored_name(),
-            ' 身为训练员的声名就完蛋了吧……',
-          ]);
-          await era.printAndWait('不过，本来那种东西也早就没有了。');
-          await era.printAndWait([
-            you.get_colored_name(),
-            ' 在枯树洞旁浪叫着，但对身为',
-            era.get('flag:35') === 2 ? '性奴' : '孕袋',
-            '的 ',
-            you.get_colored_name(),
-            ' 而言，这也不过是平常的一天罢了。',
-          ]);
-        },
-      },
-    ];
-    await get_random_entry(talk.filter((t) => !t.c || t.c())).h();
+    await era.printAndWait([
+      you.get_colored_name(),
+      ' 与 ',
+      chara.get_colored_name(),
+      ' 一起来到中庭枯树洞。',
+    ]);
+    await era.printAndWait([
+      `看着${chara.sex}朝枯树洞里咆哮的样子，`,
+      you.get_colored_name(),
+      ' 也坚定了要帮助 ',
+      chara.get_colored_name(),
+      ' 成为最强的决心。',
+    ]);
   },
   /**
+   * @author 雞雞
    * @param {CharaTalk} chara
    * @param {CharaTalk} you
    */
   async s_a_dating(chara, you) {
-    const talk = [
-      {
-        /** @author 雞雞 */
-        async h() {
-          await era.printAndWait([
-            you.get_colored_name(),
-            ' 与 ',
-            chara.get_colored_name(),
-            ' 一起来到中庭约会，你们的组合让周围的学生忍不住议论纷纷。',
-          ]);
-        },
-      },
-      {
-        // FLAGNAME:35 = 惩戒力度
-        c: () => era.get('flag:35') >= 2,
-        /** @author 幽白書 */
-        async h() {
-          await era.printAndWait([
-            chara.get_colored_name(),
-            ' 牵着 ',
-            you.get_colored_name(),
-            ' 的手，一起到中庭约会。',
-          ]);
-          await era.printAndWait([
-            you.get_colored_name(),
-            ' 夹着双腿，大腿两侧白色的液体缓缓流下，脸上的口罩仿佛被什么液体浸润过，湿漉漉的贴着 ',
-            you.get_colored_name(),
-            ` 的口鼻，身上那股发情的气味连路过的${chara.uma_sex_title}都不禁红着脸捏起鼻子。`,
-          ]);
-        },
-      },
-    ];
-    await get_random_entry(talk.filter((t) => !t.c || t.c())).h();
+    await era.printAndWait([
+      you.get_colored_name(),
+      ' 与 ',
+      chara.get_colored_name(),
+      ' 一起来到中庭约会，你们的组合让周围的学生忍不住议论纷纷。',
+    ]);
   },
   /**
+   * @author 雞雞
    * @param {CharaTalk} chara
    * @param {CharaTalk} you
-   * @param {boolean} is_sex
    */
-  async s_r_lunch(chara, you, is_sex) {
-    if (!is_sex) {
-      /** @author 雞雞 */
-      await era.printAndWait([
-        you.get_colored_name(),
-        ' 与 ',
-        chara.get_colored_name(),
-        ' 一起来到天台吃便当，你们互相交换了便当盒里的美食。',
-      ]);
-    } else {
-      /** @author 幽白書 */
-      await era.printAndWait([
-        '在天台上的公开露出……如果有人在此时抬起头的话，',
-        you.get_colored_name(),
-        ' 绝对会忍不住的。',
-      ]);
-      await era.printAndWait(
-        `天台下方，训练场上奔跑着的${chara.uma_sex_title}们。`,
-      );
-      await era.printAndWait(
-        '要是被看到的话，一定会忍不住高潮的，喷出的潮水会如雨水一样落在下面的人身上……',
-      );
-      await era.printAndWait([
-        '然而，被 ',
-        chara.get_colored_name(),
-        ' 抬起一条腿，维持着无从施力的姿势的 ',
-        you.get_colored_name(),
-        ' 只能依靠着天台上保护用的栅栏网，任凭铁丝在乳房上压出红色的印痕。',
-      ]);
-      // TALENTNAME:32 = 泌乳
-      if (era.get('talent:0:32') > 0) {
-        await era.printAndWait('啊啊，居然被挤出来了……');
-        await era.printAndWait([
-          `在私处的潮水涌出前，先一步落在下面${chara.uma_sex_title}头上的是从 `,
-          you.get_colored_name(),
-          ' 的乳头细流涌出的乳汁。',
-        ]);
-      }
-    }
+  async s_r_lunch(chara, you) {
+    await era.printAndWait([
+      you.get_colored_name(),
+      ' 与 ',
+      chara.get_colored_name(),
+      ' 一起来到天台吃便当，你们互相交换了便当盒里的美食。',
+    ]);
   },
   /**
    * @author 雞雞
@@ -1584,7 +1441,7 @@ module.exports = {
       chara.get_colored_name(),
       ' 筹备了一场盛大的生日派对！',
     ]);
-    const talk = [
+    const buffer = [
       {
         async h() {
           await era.printAndWait([
@@ -1745,7 +1602,7 @@ module.exports = {
         },
       },
     ];
-    await get_random_entry(talk.filter((t) => !t.c || t.c())).h();
+    await get_random_entry(buffer.filter((t) => !t.c || t.c())).h();
   },
   /**
    * @author 黑奴队长

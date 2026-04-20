@@ -119,10 +119,11 @@ class CustomizedDaily extends CustomizedEvent {
   async growth(stage) {}
 
   async office_study() {
-    await i18n().timon.daily.office_study(
-      get_chara_talk(this.id),
-      get_chara_talk(0),
-    );
+    await (
+      era.get('flag:惩戒力度') >= 2 && Math.random() < 0.5
+        ? i18n().timon.pregnant_slave.office_study
+        : i18n().timon.daily.office_study
+    )(get_chara_talk(this.id), get_chara_talk(0));
   }
 
   async office_prepare() {
@@ -254,7 +255,11 @@ class CustomizedDaily extends CustomizedEvent {
    * @param {CharaTalk} me
    */
   async s_a_tree_hollow(chara, me) {
-    await i18n().timon.daily.s_a_tree_hollow(chara, me);
+    await (
+      era.get('flag:惩戒力度') >= 2 && Math.random() < 0.5
+        ? i18n().timon.pregnant_slave.s_a_tree_hollow
+        : i18n().timon.daily.s_a_tree_hollow
+    )(chara, me);
   }
 
   /**
@@ -263,7 +268,11 @@ class CustomizedDaily extends CustomizedEvent {
    * @param {CharaTalk} me
    */
   async s_a_dating(chara, me) {
-    await i18n().timon.daily.s_a_dating(chara, me);
+    await (
+      era.get('flag:惩戒力度') >= 2 && Math.random() < 0.5
+        ? i18n().timon.pregnant_slave.s_a_dating
+        : i18n().timon.daily.s_a_dating
+    )(chara, me);
   }
 
   /** @param {HookArg} hook */
@@ -321,7 +330,11 @@ class CustomizedDaily extends CustomizedEvent {
   async s_r_lunch(chara, me) {
     // FLAGNAME:35 = 惩戒力度
     const is_sex = era.get('flag:35') >= 2 && Math.random() < 0.5;
-    await i18n().timon.daily.s_r_lunch(chara, me, is_sex);
+    await (
+      is_sex
+        ? i18n().timon.pregnant_slave.school_rooftop
+        : i18n().timon.daily.s_r_lunch
+    )(chara, me);
     return is_sex;
   }
 

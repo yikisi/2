@@ -1,7 +1,6 @@
 /**
  * @file 育成地文
  * @author 雞雞
- * @author 幽白書
  * @author 黑奴队长
  */
 const era = require('#/era-electron');
@@ -446,38 +445,12 @@ module.exports = {
      */
     const f = async (chara, you, item, do_sex) => {
       if (!item) {
-        if (!do_sex) {
-          /** @author 雞雞 */
-          const talk = [
-            async () => await you.say_and_wait('尽全力就好！'),
-            async () => await you.say_and_wait('跑出自己的气势来！'),
-          ];
-          await get_random_entry(talk)();
-        } else {
-          /** @author 幽白書 */
-          await era.printAndWait([
-            `当其他训练员都在为自己的负责${chara.uma_sex_title}做最后叮嘱时，`,
-            you.get_colored_name(),
-            ' 却在吞吐着 ',
-            chara.get_colored_name(),
-            ' 的肉棒，',
-          ]);
-          await era.printAndWait([
-            '沉醉于赛前热血气氛中的 ',
-            chara.get_colored_name(),
-            // FLAGNAME:35 = 惩戒力度
-            ` 那硬朗的下体自然需要解决，这也是身为${era.get('flag:35') === 2 ? '性奴' : '孕袋'}的 `,
-            you.get_colored_name(),
-            ' 不可缺少的职责。',
-          ]);
-          await era.printAndWait([
-            '在将所有精液吞入口中后，',
-            you.get_colored_name(),
-            ' 为 ',
-            chara.get_colored_name(),
-            ' 的肉棒献上祈祷比赛顺利的吻作为祝福。',
-          ]);
-        }
+        /** @author 雞雞 */
+        const buffer = [
+          async () => await you.say_and_wait('尽全力就好！'),
+          async () => await you.say_and_wait('跑出自己的气势来！'),
+        ];
+        await get_random_entry(buffer)();
       } else {
         /** @author 黑奴队长 */
         await era.printAndWait([

@@ -85,14 +85,15 @@ class EroNormalCommunications extends EroCommunications {
    * @param {{[success]:boolean}} extra
    */
   async resist(attacker, defender, hook, extra) {
+    extra.success = EroCommunications.check_resist_success(
+      attacker.id,
+      defender.id,
+    );
     await i18n().timon.ero_c.resist(
       attacker,
       defender,
       hook.arg,
-      (extra.success = EroCommunications.check_resist_success(
-        attacker.id,
-        defender.id,
-      )),
+      extra.success,
       sys_get_colored_callname(attacker.id, defender.id),
     );
   }

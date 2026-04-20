@@ -21,6 +21,163 @@ const { pregnant_stage_enum } = require('#/data/ero/status-const');
 const { degeneration_to_evil } = require('#/i18n/zh-CN/snippets');
 
 module.exports = {
+  /**
+   * @author 幽白書
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} you
+   */
+  async office_study(chara, you) {
+    await printAndWait([
+      '在指导了 ',
+      chara.get_colored_name(),
+      ' 课业方面的知识后，',
+      chara.get_colored_name(),
+      ' 红着脸颊望着 ',
+      you.get_colored_name(),
+      '，接下来，该轮到性教育的时间了。',
+    ]);
+    await printAndWait([
+      '明明 ',
+      you.get_colored_name(),
+      ' 才是指导者，但 ',
+      chara.get_colored_name(),
+      ' 却比 ',
+      you.get_colored_name(),
+      ' 自己都了解自己的身体，在 ',
+      chara.get_colored_name(),
+      ' 的手中，',
+      you.get_colored_name(),
+      ' 被迫理解了自己身体的每个敏感点，以及它们被触碰时自己会做出的羞人反应。',
+    ]);
+  },
+  /**
+   * @author 幽白書
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} you
+   */
+  async s_a_tree_hollow(chara, you) {
+    await printAndWait([
+      chara.get_colored_name(),
+      ' 带着 ',
+      you.get_colored_name(),
+      ' 到枯树洞旁，',
+    ]);
+    await printAndWait([
+      '正当 ',
+      you.get_colored_name(),
+      ` 以为${chara.sex}是最近有压力想宣泄时，却被措不及防的推倒在树桩上。`,
+    ]);
+    await printAndWait([
+      '随后 ',
+      you.get_colored_name(),
+      ' 下半身的衣装被缓缓脱下，温热的肉柱抵住了自己的穴口。',
+    ]);
+    await printAndWait([
+      '如果发出声音的话，树洞的回音效果一定会让 ',
+      you.get_colored_name(),
+      ' 的声音响彻校园吧。',
+    ]);
+    await printAndWait([
+      `要是被自己的负责${chara.uma_sex_title}按在枯树洞上干的事情传出去的话，`,
+      you.get_colored_name(),
+      ' 身为训练员的声名就完蛋了吧……',
+    ]);
+    await printAndWait('不过，本来那种东西也早就没有了。');
+    await printAndWait([
+      you.get_colored_name(),
+      ' 在枯树洞旁浪叫着，但对身为',
+      get('flag:35') === 2 ? '性奴' : '孕袋',
+      '的 ',
+      you.get_colored_name(),
+      ' 而言，这也不过是平常的一天罢了。',
+    ]);
+  },
+  /**
+   * @author 幽白書
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} you
+   */
+  async s_a_dating(chara, you) {
+    await printAndWait([
+      chara.get_colored_name(),
+      ' 牵着 ',
+      you.get_colored_name(),
+      ' 的手，一起到中庭约会。',
+    ]);
+    await printAndWait([
+      you.get_colored_name(),
+      ' 夹着双腿，大腿两侧白色的液体缓缓流下，脸上的口罩仿佛被什么液体浸润过，湿漉漉的贴着 ',
+      you.get_colored_name(),
+      ` 的口鼻，身上那股发情的气味连路过的${chara.uma_sex_title}都不禁红着脸捏起鼻子。`,
+    ]);
+  },
+  /**
+   * @author 幽白書
+   * @param {CharaTalk} chara
+   * @param {CharaTalk} you
+   */
+  async school_rooftop(chara, you) {
+    await printAndWait([
+      '在天台上的公开露出……如果有人在此时抬起头的话，',
+      you.get_colored_name(),
+      ' 绝对会忍不住的。',
+    ]);
+    await printAndWait(`天台下方，训练场上奔跑着的${chara.uma_sex_title}们。`);
+    await printAndWait(
+      '要是被看到的话，一定会忍不住高潮的，喷出的潮水会如雨水一样落在下面的人身上……',
+    );
+    await printAndWait([
+      '然而，被 ',
+      chara.get_colored_name(),
+      ' 抬起一条腿，维持着无从施力的姿势的 ',
+      you.get_colored_name(),
+      ' 只能依靠着天台上保护用的栅栏网，任凭铁丝在乳房上压出红色的印痕。',
+    ]);
+    // TALENTNAME:32 = 泌乳
+    if (get('talent:0:32') > 0) {
+      await printAndWait('啊啊，居然被挤出来了……');
+      await printAndWait([
+        `在私处的潮水涌出前，先一步落在下面${chara.uma_sex_title}头上的是从 `,
+        you.get_colored_name(),
+        ' 的乳头细流涌出的乳汁。',
+      ]);
+    }
+  },
+  race_start: (() => {
+    /**
+     * @author 幽白書
+     * @param {CharaTalk} chara
+     * @param {CharaTalk} you
+     */
+    const f = async (chara, you) => {
+      await printAndWait([
+        `当其他训练员都在为自己的负责${chara.uma_sex_title}做最后叮嘱时，`,
+        you.get_colored_name(),
+        ' 却在吞吐着 ',
+        chara.get_colored_name(),
+        ' 的肉棒，',
+      ]);
+      await printAndWait([
+        '沉醉于赛前热血气氛中的 ',
+        chara.get_colored_name(),
+        // FLAGNAME:35 = 惩戒力度
+        ' 那硬朗的下体自然需要解决，这也是身为',
+        get('flag:35') === 2 ? '性奴' : '孕袋',
+        '的 ',
+        you.get_colored_name(),
+        ' 不可缺少的职责。',
+      ]);
+      await printAndWait([
+        '在将所有精液吞入口中后，',
+        you.get_colored_name(),
+        ' 为 ',
+        chara.get_colored_name(),
+        ' 的肉棒献上祈祷比赛顺利的吻作为祝福。',
+      ]);
+    };
+    f.title = '竞赛之前';
+    return f;
+  })(),
   oyakodon: (() => {
     /**
      * @author 幽白書

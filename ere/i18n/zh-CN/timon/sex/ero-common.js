@@ -4,6 +4,7 @@
  * @author 雞雞
  * @author 天马闪光蹄
  * @author 黑衣剑士-星爆气流斩准备就绪
+ * @author 幽白書
  * @author 黑奴队长
  */
 const era = require('#/era-electron');
@@ -175,6 +176,7 @@ module.exports = {
   },
   /**
    * @author O口口口口口
+   * @author 幽白書
    * @param {CharaTalk} attacker 主动方
    * @param {CharaTalk} defender 被动方
    * @param {boolean} is_first 是否是连续反抗的初次行动
@@ -183,6 +185,7 @@ module.exports = {
    */
   async resist(attacker, defender, is_first, success, a_call_d) {
     if (era.get('flag:惩戒力度') === 3) {
+      // @author 幽白書
       if (attacker.id === 0) {
         // 孕袋反抗主人
         if (success) {
@@ -227,6 +230,7 @@ module.exports = {
         ]);
       }
     } else {
+      // @author O口口口口口
       if (is_first) {
         await defender.say_and_wait('不要动会比较好哦。');
         await attacker.print_and_wait([

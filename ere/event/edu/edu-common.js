@@ -647,7 +647,7 @@ class CustomizedEdu extends CustomizedEvent {
       extra.motivation_change = 1;
     }
     await print_title_with_kojo(
-      i18n().timon.edu,
+      !item && do_sex ? i18n().timon.pregnant_slave : i18n().timon.edu,
       'race_start',
       chara,
       me,
