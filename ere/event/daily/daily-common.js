@@ -573,7 +573,7 @@ class CustomizedDaily extends CustomizedEvent {
         h = this.o_s_shopping;
     }
     if (h) {
-      await h.call(this, get_chara_talk(this.id), get_chara_talk(0));
+      await h.call(this, get_chara_talk(this.id), get_chara_talk(0), hook);
     }
   }
 
@@ -600,7 +600,7 @@ class CustomizedDaily extends CustomizedEvent {
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    */
-  async o_s_shopping(chara, me) {
+  async o_s_shopping(chara, me, hook) {
     await i18n().timon.daily.o_s_shopping(chara, me);
   }
 
