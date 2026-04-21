@@ -1,7 +1,3 @@
-/**
- * @file 黄金船 - 育成
- * @author 雞雞
- */
 const era = require('#/era-electron');
 
 const {
@@ -19,13 +15,12 @@ const {
 
 const print_ero_page = require('#/page/page-ero');
 
-const kojo = require('#/event/edu/edu-7.kojo');
 const Edu7UntilWeekStart = require('#/event/edu/edu-events-7/week-start');
 const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
-const print_name_and_show_kojo = require('#/event/snippets/print-name-and-show-kojo');
+const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
@@ -33,29 +28,28 @@ const color_7 = require('#/data/chara-colors').chara_colors[7];
 const { lust_border } = require('#/data/ero/orgasm-const');
 const recruit_flags = require('#/data/event/recruit-flags');
 
+const { i18n } = require('#/i18n/selector');
+
 module.exports = class extends Edu7UntilWeekStart {
-  get #dict() {
-    const o = {};
-    o['你'] = era.get('callname:0:-2');
-    const gold_ship = get_chara_talk(this.id);
-    o['她'] = gold_ship.sex;
-    o['马娘'] = gold_ship.uma_sex_title;
-    o['代表色'] = gold_ship.color;
-    return o;
+  get #kojo() {
+    return i18n().kojo[this.id].edu;
   }
 
   async crazy_fan_end() {
-    await kojo['crazy_fan_end'](this.#dict);
+    await print_title_with_kojo.ending(
+      this.#kojo,
+      'crazy_fan_end',
+      get_chara_talk(this.id),
+      get_chara_talk(0),
+    );
   }
 
-  /** @param {CharaTalk} gold_ship */
-  async hoverboard(gold_ship) {
-    await print_name_and_show_kojo(
-      '小金船号，爆诞！',
-      gold_ship,
-      kojo,
-      this.#dict,
-    );
+  /**
+   * @param {CharaTalk} gold_ship
+   * @param {CharaTalk} me
+   */
+  async hoverboard(gold_ship, me) {
+    await print_title_with_kojo(this.#kojo, 'hoverboard', gold_ship, me);
     era.set('item:小金船号', 1);
   }
 
@@ -331,8 +325,8 @@ module.exports = class extends Edu7UntilWeekStart {
         );
         await gold_ship.say_and_wait('哈！那我就在终点旁边等着你了！');
       } else {
-        await festa.say_and_wait('……你♡！');
-        await gold_ship.say_and_wait('……♡');
+        await festa.say_and_wait('……你❤️！');
+        await gold_ship.say_and_wait('……❤️');
         era.println();
 
         await era.printAndWait(
@@ -618,10 +612,8 @@ module.exports = class extends Edu7UntilWeekStart {
       era.println();
       await era.printAndWait(
         `糟糕……以${
-          era.get('cflag:7:性别') - 1 && era.get('cflag:49:性别') - 1
-            ? '她'
-            : '他'
-        }们的性格，等搞定之后午饭都要凉透了！怎么办，该阻止吗……？！`,
+          gold_ship.couple_title
+        }的性格，等搞定之后午饭都要凉透了！怎么办，该阻止吗……？！`,
       );
       era.printButton('「不，就由我来顶上吧！」（体力+100）', 1);
       era.printButton(
