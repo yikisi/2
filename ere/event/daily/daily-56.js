@@ -16,7 +16,7 @@ const quick_into_sex = require('#/event/snippets/quick-into-sex');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
-const { get_date_obj } = require('#/data/event/date-obj');
+const { get_date_obj } = require('#/data/date-indicator');
 const FukuEventMarks = require('#/data/event/edu-event-marks/edu-event-marks-56');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');

@@ -15,11 +15,13 @@ const name = {
   base: 'basement',
 };
 
-for (const kojoId of kojoDir) {
+let entryOut = '';
+for (const charaPath of kojoDir) {
+  const kojoId = charaPath.replace(/\D+/, '').trim();
   if (kojoId.length !== 6) {
     continue;
   }
-  const p = join(kojoPath, kojoId);
+  const p = join(kojoPath, charaPath);
   if (!statSync(p).isDirectory()) {
     continue;
   }
@@ -37,6 +39,7 @@ for (const kojoId of kojoDir) {
       cid = temp - 1000;
     }
   }
+  entryOut += `${cid} = new (require('#/i18n/zh-CN/kojo/${charaPath}/entry'))();`;
   const suffixDict = {};
   files.forEach((t) => (suffixDict[t.substring(t.indexOf('.'))] = 1));
   if (Object.keys(suffixDict).length === 0) {
@@ -59,18 +62,20 @@ for (const kojoId of kojoDir) {
   const entries = suffix.endsWith('js')
     ? files.map(
         (t) =>
-          `${name[t.substring(0, t.length - suffix.length - 1)] ?? t.substring(0, t.length - suffix.length - 1)} = proxy_kojo_js(require('${basePath + '/' + kojoId + '/' + t}'));`,
+          `${name[t.substring(0, t.length - suffix.length - 1)] ?? t.substring(0, t.length - suffix.length - 1)} = proxy_kojo_js(require('${basePath + '/' + charaPath + '/' + t}'));`,
       )
     : files.map(
         (t) =>
-          `/** @type {KojoFile} */\n${name[t.substring(0, t.length - suffix.length - 1)] ?? t.substring(0, t.length - suffix.length - 1)} = require('${basePath + '/' + kojoId + '/' + t}');`,
+          `/** @type {KojoFile} */\n${name[t.substring(0, t.length - suffix.length - 1)] ?? t.substring(0, t.length - suffix.length - 1)} = require('${basePath + '/' + charaPath + '/' + t}');`,
       );
   read_and_write_generated(
     join(p, 'entry.js'),
     '//',
     `class ${className} {\n${entries.join('\n')}`,
   );
-  // console.log(cid, className);
+  // console.log(cid, className, charaPath);
 }
+
+read_and_write_generated(join(kojoPath, 'entry.js'), '//', entryOut);
 
 console.log('done!');
