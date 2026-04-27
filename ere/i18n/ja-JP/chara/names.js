@@ -23,6 +23,7 @@ module.exports = class extends I18nNames {
   danna = '旦那';
   dear = 'あなた';
 
+  101702 = 'ルナ';
   102511 = 'カフェ君';
   105211 = 'ウララ';
   900111 = '駿川さん';

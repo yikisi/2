@@ -1,50 +1,27 @@
-/**
- * @file 目白阿尔丹 - 育成
- * @author 洛洛
- */
 const era = require('#/era-electron');
 
-const { sys_get_callname } = require('#/system/sys-calc-chara-others');
+const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
-const kojo = require('#/event/edu/edu-71.kojo');
 const CustomizedEdu = require('#/event/edu/edu-common');
 const { add_event, cb_enum } = require('#/event/queue');
 const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
-const print_name_and_show_kojo = require('#/event/snippets/print-name-and-show-kojo');
+const generate_dictionary = require('#/event/snippets/generate-dictionary');
+const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 
-const CharaTalk = require('#/utils/chara-talk');
-
-const { get_chara_color } = require('#/data/chara-colors');
 const ArdanEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-71');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const { race_enum } = require('#/data/race/race-const');
 
+const { i18n } = require('#/i18n/selector');
+
 module.exports = class extends CustomizedEdu {
-  get #dict() {
-    const o = {};
-    o['代表色'] = get_chara_color(this.id);
-    if (era.get(`cflag:${this.id}:性别`) === 1) {
-      o['她'] = '他';
-      o['马娘'] = '马郎';
-      o['姐姐'] = '兄长';
-    } else {
-      o['她'] = '她';
-      o['马娘'] = '马娘';
-      o['姐姐'] = '姐姐';
-    }
-    o['你'] = era.get('callname:0:-2');
-    o['称呼'] = sys_get_callname(this.id, 0);
-    return o;
+  get #kojo() {
+    return i18n().kojo[this.id].edu;
   }
 
-  get #cdict() {
-    const o = this.#dict;
-    CharaTalk.init_chara(69);
-    o['阿尔丹称呼千代王'] = sys_get_callname(this.id, 69);
-    CharaTalk.init_chara(72);
-    o['阿尔丹称呼八重无敌'] = sys_get_callname(this.id, 72);
-    return o;
+  get #dict() {
+    return generate_dictionary(this.id, { call: !0, uma: !0 });
   }
 
   /**
@@ -56,7 +33,7 @@ module.exports = class extends CustomizedEdu {
    * @param {EventObject} event_object
    */
   async beginning(ardan, me, callname, hook, extra_flag, event_object) {
-    await print_name_and_show_kojo('起始的画笔', ardan, kojo, this.#dict);
+    await print_title_with_kojo(this.#kojo, 'beginning', ardan, this.#dict);
     add_event(hook.hook, event_object.set_arg('beginning2'));
     if (
       all_reward_in_event(this.id, {
@@ -74,13 +51,8 @@ module.exports = class extends CustomizedEdu {
     let wait_flag;
     if (
       (
-        await print_name_and_show_kojo(
-          '出道赛前的努力',
-          ardan,
-          kojo,
-          this.#dict,
-        )
-      )[1] === 1
+        await print_title_with_kojo(this.#kojo, 'beginning2', ardan, this.#dict)
+      )['select'] === 1
     ) {
       wait_flag = all_reward_in_event(this.id, {
         attr: [10, 10],
@@ -108,18 +80,13 @@ module.exports = class extends CustomizedEdu {
    */
   async gap(ardan, me, callname, hook, extra_flag, event_object) {
     add_event(event_hooks.out_start, event_object.set_arg('together'));
-    const dict = this.#dict;
-    if (era.get('cflag:0:性别') === 1) {
-      dict['先生'] = '先生';
-    } else {
-      dict['先生'] = '小姐';
-    }
-    if (era.get(`cflag:${this.id}:性别`) === 1) {
-      dict['小姐'] = '少爷';
-    } else {
-      dict['小姐'] = '小姐';
-    }
-    await print_name_and_show_kojo('初更的夹缝中', ardan, kojo, dict);
+    await print_title_with_kojo(this.#kojo, 'gap', ardan, {
+      ...generate_dictionary(this.id, { call: !0, sir: !0 }),
+      YOUNG_LADY:
+        ardan.sex_code === 1
+          ? i18n().name.young_master
+          : i18n().name.young_lady,
+    });
     if (
       all_reward_in_event(this.id, {
         attr: [0, 0, 0, 5],
@@ -134,7 +101,7 @@ module.exports = class extends CustomizedEdu {
 
   /** @param {CharaTalk} ardan */
   async together(ardan) {
-    await print_name_and_show_kojo('一起同行的未来', ardan, kojo, this.#dict);
+    await print_title_with_kojo(this.#kojo, 'together', ardan, this.#dict);
     new ArdanEduMarks().sick = 0;
     if (
       all_reward_in_event(this.id, {
@@ -154,13 +121,12 @@ module.exports = class extends CustomizedEdu {
     let wait_flag;
     if (
       (
-        await print_name_and_show_kojo(
-          '见证我们的羁绊',
-          ardan,
-          kojo,
-          this.#cdict,
-        )
-      )[1] === 1
+        await print_title_with_kojo(this.#kojo, 'tie', ardan, {
+          ...this.#dict,
+          CALL_69: sys_get_colored_callname(this.id, 69).content,
+          CALL_72: sys_get_colored_callname(this.id, 72).content,
+        })
+      )['select'] === 1
     ) {
       wait_flag = all_reward_in_event(this.id, {
         relation: 20,
@@ -183,8 +149,12 @@ module.exports = class extends CustomizedEdu {
   async separate_way(ardan) {
     if (
       (
-        await print_name_and_show_kojo('道路的分歧处', ardan, kojo, this.#cdict)
-      )[1] === 1
+        await print_title_with_kojo(this.#kojo, 'separate_way', ardan, {
+          ...this.#dict,
+          CALL_69: sys_get_colored_callname(this.id, 69).content,
+          CALL_72: sys_get_colored_callname(this.id, 72).content,
+        })
+      )['select'] === 1
     ) {
       new ArdanEduMarks().kiku_sho = 1;
     }
@@ -208,12 +178,12 @@ module.exports = class extends CustomizedEdu {
   async race_start(ardan, me, callname, hook, extra_flag) {
     const edu_weeks = era.get(`cflag:${this.id}:育成回合计时`);
     extra_flag.relation_change = 0;
-    let name;
+    let key;
     switch (extra_flag.race) {
       case race_enum.begin_race:
         if (edu_weeks === 23) {
-          name = '出道赛赛前';
-          if ((await kojo[name](this.#dict))[0] === 1) {
+          key = 'begin_race';
+          if ((await this.#kojo[key](this.#dict))['select'] === 1) {
             extra_flag.love_change = 2;
           } else {
             extra_flag.relation_change = 10;
@@ -222,65 +192,72 @@ module.exports = class extends CustomizedEdu {
         }
         break;
       case race_enum.sats_sho:
-        name = '皋月赏赛前';
-        await kojo[name](this.#dict);
+        key = 'sats_sho';
+        await this.#kojo[key](this.#dict);
         extra_flag.relation_change = 10;
         extra_flag.motivation_change = 1;
         break;
       case race_enum.aoba_sho:
-        name = '青叶赏赛前';
-        await kojo[name](this.#dict);
+        key = 'aoba_sho';
+        await this.#kojo[key](this.#dict);
         extra_flag.relation_change = 10;
         extra_flag.motivation_change = 1;
         break;
       case race_enum.toky_yus:
-        name = '日本德比赛前';
-        await kojo[name](this.#dict);
+        key = 'toky_yus';
+        await this.#kojo[key](this.#dict);
         extra_flag.relation_change = 10;
         extra_flag.motivation_change = 1;
         break;
       case race_enum.kiku_sho:
-        name = '菊花赏赛前';
-        await kojo[name](this.#dict);
+        key = 'kiku_sho';
+        await this.#kojo[key]({
+          ...this.#dict,
+          ELDER_SISTER: ardan.elder_sibling_sex_title,
+        });
         extra_flag.relation_change = 10;
         extra_flag.motivation_change = 1;
         break;
       case race_enum.tenn_sho:
         if (edu_weeks < 96) {
-          name = '经典年秋季天皇赏赛前';
+          key = 'classical_tenn_sho';
         } else {
-          name = '资深年秋季天皇赏赛前';
+          key = 'senior_tenn_sho';
         }
-        await kojo[name](this.#dict);
+        await this.#kojo[key](this.#dict);
         extra_flag.relation_change = 10;
         extra_flag.motivation_change = 1;
         break;
       case race_enum.sank_hai:
-        name = '大阪杯赛前';
-        await kojo[name](this.#cdict);
+        key = 'sank_hai';
+        await this.#kojo[key]({
+          ...this.#dict,
+          CALL_69: sys_get_colored_callname(this.id, 69).content,
+          CALL_72: sys_get_colored_callname(this.id, 72).content,
+        });
         extra_flag.relation_change = 10;
         extra_flag.motivation_change = 1;
         break;
       case race_enum.takz_kin:
         if (edu_weeks > 96) {
-          name = '宝冢纪念赛前';
-          await kojo[name](this.#dict);
+          key = 'takz_kin';
+          await this.#kojo[key](this.#dict);
           extra_flag.relation_change = 10;
           extra_flag.motivation_change = 1;
         }
         break;
       case race_enum.main_oka:
         if (edu_weeks > 96) {
-          name = '每日王冠赛前';
-          await kojo[name](this.#dict);
+          key = 'main_oka';
+          await this.#kojo[key](this.#dict);
           extra_flag.relation_change = 10;
           extra_flag.motivation_change = 1;
         }
         break;
     }
-    if (name === undefined) {
-      name = '通用赛前';
-      await kojo[name](this.#dict);
+    if (key === undefined) {
+      key = 'race_start';
+      await this.#kojo[key](this.#dict);
       extra_flag.relation_change = 10;
     }
   }
@@ -288,12 +265,12 @@ module.exports = class extends CustomizedEdu {
   async race_end(ardan, me, callname, hook, extra_flag) {
     const edu_marks = new ArdanEduMarks();
     const edu_weeks = era.get(`cflag:${this.id}:育成回合计时`);
-    let name;
+    let key;
     switch (extra_flag.race) {
       case race_enum.begin_race:
         if (extra_flag.rank === 1) {
-          name = '出道赛赛后';
-          await kojo[name](this.#dict);
+          key = 'begin_race_win';
+          await this.#kojo[key](this.#dict);
           extra_flag.attr_change = new Array(5).fill(5);
           extra_flag.pt_change = 60;
           edu_marks.sick = 1;
@@ -305,21 +282,21 @@ module.exports = class extends CustomizedEdu {
         break;
       case race_enum.sats_sho:
         if (extra_flag.rank === 1) {
-          name = '皋月赏1着';
-          await kojo[name](this.#dict);
+          key = 'sats_sho_win';
+          await this.#kojo[key](this.#dict);
           extra_flag.attr_change = new Array(5).fill(5);
           extra_flag.pt_change = 60;
         } else if (extra_flag.rank <= 5) {
-          name = '皋月赏入着';
-          await kojo[name](this.#dict);
+          key = 'sats_sho_5';
+          await this.#kojo[key](this.#dict);
           extra_flag.attr_change = new Array(5).fill(3);
           extra_flag.pt_change = 30;
         }
         break;
       case race_enum.aoba_sho:
         if (extra_flag.rank <= 5) {
-          name = '青叶赏赛后';
-          await kojo[name](this.#dict);
+          key = 'aoba_sho_win';
+          await this.#kojo[key](this.#dict);
           extra_flag.attr_change = new Array(5).fill(5);
           extra_flag.pt_change = 60;
           add_event(
@@ -330,13 +307,21 @@ module.exports = class extends CustomizedEdu {
         break;
       case race_enum.toky_yus:
         if (extra_flag.rank === 1) {
-          name = '日本德比1着';
-          await kojo[name](this.#cdict);
+          key = 'toky_yus_win';
+          await this.#kojo[key]({
+            ...this.#dict,
+            CALL_69: sys_get_colored_callname(this.id, 69).content,
+            CALL_72: sys_get_colored_callname(this.id, 72).content,
+          });
           extra_flag.attr_change = new Array(5).fill(5);
           extra_flag.pt_change = 60;
         } else if (extra_flag.rank <= 5) {
-          name = '日本德比入着';
-          await kojo[name](this.#cdict);
+          key = 'toky_yus_5';
+          await this.#kojo[key]({
+            ...this.#dict,
+            CALL_69: sys_get_colored_callname(this.id, 69).content,
+            CALL_72: sys_get_colored_callname(this.id, 72).content,
+          });
           extra_flag.attr_change = new Array(5).fill(3);
           extra_flag.pt_change = 30;
         }
@@ -352,13 +337,13 @@ module.exports = class extends CustomizedEdu {
         break;
       case race_enum.kiku_sho:
         if (extra_flag.rank === 1) {
-          name = '菊花赏1着';
-          await kojo[name](this.#dict);
+          key = 'kiku_sho_win';
+          await this.#kojo[key](this.#dict);
           extra_flag.attr_change = new Array(5).fill(5);
           extra_flag.pt_change = 60;
         } else if (extra_flag.rank <= 5) {
-          name = '菊花赏入着';
-          await kojo[name](this.#dict);
+          key = 'kiku_sho_5';
+          await this.#kojo[key](this.#dict);
           extra_flag.attr_change = new Array(5).fill(3);
           extra_flag.pt_change = 30;
         }
@@ -366,60 +351,64 @@ module.exports = class extends CustomizedEdu {
       case race_enum.tenn_sho:
         if (edu_weeks < 96) {
           if (extra_flag.rank === 1) {
-            name = '经典年秋季天皇赏1着';
-            await kojo[name](this.#dict);
+            key = 'classical_tenn_sho_win';
+            await this.#kojo[key](this.#dict);
             extra_flag.attr_change = new Array(5).fill(5);
             extra_flag.pt_change = 60;
           } else if (extra_flag.rank <= 3) {
-            name = '经典年秋季天皇赏前三';
-            await kojo[name](this.#dict);
+            key = 'classical_tenn_sho_3';
+            await this.#kojo[key](this.#dict);
             extra_flag.attr_change = new Array(5).fill(3);
             extra_flag.pt_change = 30;
           }
         } else if (extra_flag.rank === 1) {
-          name = '资深年秋季天皇赏赛后';
-          await kojo[name](this.#dict);
+          key = 'senior_tenn_sho_win';
+          await this.#kojo[key](this.#dict);
           extra_flag.attr_change = new Array(5).fill(30);
           extra_flag.pt_change = 150;
         }
         break;
       case race_enum.sank_hai:
         if (extra_flag.rank <= 3) {
-          name = '大阪杯赛后';
-          await kojo[name](this.#cdict);
+          key = 'sank_hai_3';
+          await this.#kojo[key]({
+            ...this.#dict,
+            CALL_69: sys_get_colored_callname(this.id, 69).content,
+            CALL_72: sys_get_colored_callname(this.id, 72).content,
+          });
           extra_flag.attr_change = new Array(5).fill(5);
           extra_flag.pt_change = 60;
         }
         break;
       case race_enum.takz_kin:
         if (edu_weeks > 96 && extra_flag.rank <= 3) {
-          name = '宝冢纪念赛后';
-          await kojo[name](this.#dict);
+          key = 'takz_kin_3';
+          await this.#kojo[key](this.#dict);
           extra_flag.attr_change = new Array(5).fill(5);
           extra_flag.pt_change = 60;
         }
         break;
       case race_enum.main_oka:
         if (edu_weeks > 96 && extra_flag.rank <= 3) {
-          name = '每日王冠赛后';
-          await kojo[name](this.#dict);
+          key = 'main_oka_3';
+          await this.#kojo[key](this.#dict);
           extra_flag.attr_change = new Array(5).fill(5);
           extra_flag.pt_change = 60;
         }
         break;
     }
-    if (name === undefined) {
+    if (key === undefined) {
       if (extra_flag.rank === 1) {
-        name = '通用1着';
+        key = 'race_end_win';
         extra_flag.attr_change = new Array(5).fill(3);
         extra_flag.pt_change = 30;
       } else {
-        name = '通用非1着';
+        key = 'race_end_lose';
         extra_flag.attr_change = new Array(5).fill(2);
         extra_flag.pt_change = 15;
       }
       extra_flag.relation_change = 10;
-      await kojo[name](this.#dict);
+      await this.#kojo[key](this.#dict);
     } else {
       extra_flag.relation_change = 10;
       extra_flag.love_change = extra_flag.rank === 1 ? 2 : 1;
