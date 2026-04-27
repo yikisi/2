@@ -1,4 +1,4 @@
-const { readdirSync, statSync } = require('fs');
+const { existsSync, readdirSync, statSync } = require('fs');
 
 const { read_and_write_generated } = require('../libs');
 const { join } = require('path');
@@ -22,7 +22,7 @@ for (const charaPath of kojoDir) {
     continue;
   }
   const p = join(kojoPath, charaPath);
-  if (!statSync(p).isDirectory()) {
+  if (!statSync(p).isDirectory() || !existsSync(join(p, 'entry.js'))) {
     continue;
   }
   const files = readdirSync(p).filter((t) => t !== 'entry.js');
