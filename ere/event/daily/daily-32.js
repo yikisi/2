@@ -11,7 +11,6 @@ const {
 } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
-const kojo = require('#/event/daily/daily-32.kojo');
 const CustomizedDaily = require('#/event/daily/daily-common');
 const tachyon_out_church = require('#/event/daily/daily-events-32/out-church');
 const tachyon_out_station = require('#/event/daily/daily-events-32/out-station');
@@ -26,6 +25,8 @@ const { get_random_entry } = require('#/utils/list-utils');
 
 const TachyonEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32');
 const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks-32');
+
+const { i18n } = require('#/i18n/selector');
 
 /** @type {Record<string,function(CharaTalk,CharaTalk,string,number,number)>} */
 const week_start_handlers = {};
@@ -50,13 +51,8 @@ function common_escape(tachyon, life_marks) {
 }
 
 module.exports = class extends CustomizedDaily {
-  get #dict() {
-    const ret = {};
-    const tachyon = get_chara_talk(this.id);
-    ret['代表色'] = tachyon.color;
-    ret['称呼'] = sys_get_callname(this.id, 0);
-    ret['她'] = tachyon.sex;
-    return ret;
+  get #kojo() {
+    return i18n().kojo[this.id].daily;
   }
 
   async week_start(_, extra_flag, event_object) {
@@ -898,7 +894,13 @@ module.exports = class extends CustomizedDaily {
     return await tachyon_slave_end();
   }
 
-  async end_talk() {
-    await kojo['end_talk'](this.#dict);
+  async end_talk(hentai) {
+    await this.#kojo.end_talk(
+      get_chara_talk(this.id),
+      sys_get_colored_callname(this.id, 0),
+      hentai,
+      era.get(`cflag:${this.id}:育成回合计时`) >= 47 + 25,
+      new TachyonEduMarks().plan_b > 0,
+    );
   }
 };

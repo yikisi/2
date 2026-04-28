@@ -4,16 +4,17 @@
  */
 const era = require('#/era-electron');
 
-const kojo = require('#/event/edu/edu-100.kojo');
 const CustomizedEdu = require('#/event/edu/edu-common');
-const generate_dictionary = require('#/event/snippets/generate-dictionary');
 const print_event_name = require('#/event/snippets/print-event-name');
+const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const { buff_colors } = require('#/data/color-const');
+const { get_trainer_title } = require('#/data/info-generator');
 const { race_enum } = require('#/data/race/race-const');
 const { attr_enum } = require('#/data/train-const');
+
+const { i18n } = require('#/i18n/selector');
 
 /** @type {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean}):Promise<boolean|void>>} */
 const w_s_handlers = {};
@@ -27,8 +28,8 @@ const w_s_handlers = {};
 ].forEach((f) => f(w_s_handlers));
 
 module.exports = class extends CustomizedEdu {
-  get #dict() {
-    return generate_dictionary(this.id, { title: !0, uma: !0 });
+  get #kojo() {
+    return i18n().kojo[this.id].edu;
   }
 
   async race_end(acute, me, callname, hook, extra_flag) {
@@ -333,12 +334,12 @@ module.exports = class extends CustomizedEdu {
   }
 
   async crazy_fan_end() {
-    const name = '粉丝袭击';
-    const dict = this.#dict;
-    await kojo[name](dict);
-    await print_event_name(
-      [{ color: buff_colors[3], content: name }],
+    await print_title_with_kojo.ending(
+      this.#kojo,
+      'crazy_fan_end',
       get_chara_talk(this.id),
+      get_chara_talk(0),
+      get_trainer_title().prefix(),
     );
   }
 };
