@@ -348,8 +348,8 @@ class CustomizedDaily extends CustomizedEvent {
     const me = get_chara_talk(0);
     hook.arg = (await select_action_around_river()) > 0;
     if (!hook.arg) {
-      await this.o_r_fishing(chara, me);
       extra_flag.jpy = get_random_value(0, 5);
+      await this.o_r_fishing(chara, me, hook, extra_flag);
     } else {
       if (
         era.get(`love:${this.id}`) >= 50 &&
@@ -387,7 +387,7 @@ class CustomizedDaily extends CustomizedEvent {
         }
         return;
       }
-      await this.o_r_walking(chara, me);
+      await this.o_r_walking(chara, me, hook, extra_flag);
     }
   }
 
@@ -395,8 +395,10 @@ class CustomizedDaily extends CustomizedEvent {
    * @protected
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
+   * @param {HookArg} hook
+   * @param {{[jpy]:number}} extra
    */
-  async o_r_fishing(chara, me) {
+  async o_r_fishing(chara, me, hook, extra) {
     await i18n().timon.daily.o_r_fishing(chara, me);
   }
 
@@ -476,7 +478,7 @@ class CustomizedDaily extends CustomizedEvent {
         h = this.o_s_movie;
     }
     if (h) {
-      await h.call(this, chara, me);
+      await h.call(this, chara, me, hook);
     }
   }
 
@@ -484,8 +486,9 @@ class CustomizedDaily extends CustomizedEvent {
    * @protected
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
+   * @param {HookArg} hook
    */
-  async o_s_arcade(chara, me) {
+  async o_s_arcade(chara, me, hook) {
     await i18n().timon.daily.o_s_arcade(chara, me);
   }
 
@@ -590,8 +593,9 @@ class CustomizedDaily extends CustomizedEvent {
    * @protected
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
+   * @param {HookArg} hook
    */
-  async o_s_dating(chara, me) {
+  async o_s_dating(chara, me, hook) {
     await i18n().timon.daily.o_s_dating(chara, me);
   }
 
@@ -599,6 +603,7 @@ class CustomizedDaily extends CustomizedEvent {
    * @protected
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
+   * @param {HookArg} hook
    */
   async o_s_shopping(chara, me, hook) {
     await i18n().timon.daily.o_s_shopping(chara, me);
