@@ -144,15 +144,23 @@ const icon2skill_color = {
 };
 
 const skill2skill_color = {
+  101181: get_skill_color(skill_name_enum.speed, skill_border_enum.spe),
   101301: get_skill_color(skill_name_enum.speed, skill_border_enum.spe),
   101431: get_skill_color(skill_name_enum.speed, skill_border_enum.spe),
+  203401: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
   204271: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
   204272: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
   204282: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
   204311: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
   204312: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
   204322: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
+  204342: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
+  204351: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
+  204352: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
+  204362: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
+  204372: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
   901301: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
+  901181: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
   901431: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
   114301111: get_skill_color(skill_name_enum.speed, skill_border_enum.evol),
   114301211: get_skill_color(skill_name_enum.speed, skill_border_enum.evol),
