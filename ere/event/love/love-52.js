@@ -17,16 +17,16 @@ const sys_filter_chara = require('#/system/sys-filter-chara');
 const CustomizedLove = require('#/event/love/love-common');
 const punish_rejecting_love = require('#/event/love/snippets/punish-rejecting-love');
 const { add_event } = require('#/event/queue');
+const {
+  check_high_relation,
+  get_inner_urara,
+} = require('#/event/snippets/105201');
 const masturbate = require('#/event/snippets/masturbate');
 const print_event_name = require('#/event/snippets/print-event-name');
 const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
-
-const { chara_colors } = require('#/data/chara-colors');
 const { get_date_obj } = require('#/data/date-indicator');
 const { lust_from_palam } = require('#/data/ero/orgasm-const');
-const UraraEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-52');
 const event_hooks = require('#/data/event/event-hooks');
 const UraraLifeMarks = require('#/data/event/life-event-marks/life-event-marks-52');
 const recruit_flags = require('#/data/event/recruit-flags');
@@ -39,26 +39,17 @@ module.exports = class extends CustomizedLove {
     return i18n().kojo[this.id].love;
   }
 
-  #get_event_vars() {
-    return {
-      self_name: sys_get_callname(52, 52),
-      inner_urara: get_chara_talk(52, chara_colors[52][1]),
-      relation: new UraraEduMarks().loop === 2 ? 150 : era.get('relation:52:0'),
-    };
-  }
-
   async 49(urara, me, callname) {
-    const { self_name, inner_urara } = this.#get_event_vars();
     if (
       (
         await print_title_with_kojo(
           this.#kojo,
           '49',
           urara,
-          inner_urara,
+          get_inner_urara(),
           me,
           callname,
-          self_name,
+          sys_get_callname(this.id, this.id),
           sys_get_colored_callname(this.id, 64),
         )
       )[0] === 1
@@ -80,16 +71,15 @@ module.exports = class extends CustomizedLove {
    * @param {string} callname
    */
   async 50(urara, me, callname) {
-    const { inner_urara, relation } = this.#get_event_vars();
     new UraraLifeMarks().fuck_buddy = 1;
     await print_title_with_kojo(
       this.#kojo,
       '50',
       urara,
-      inner_urara,
+      get_inner_urara(),
       me,
       callname,
-      relation,
+      check_high_relation(),
     );
     sys_change_lust(0, lust_from_palam * 2);
     sys_change_lust(52, lust_from_palam * 4);
@@ -100,7 +90,6 @@ module.exports = class extends CustomizedLove {
   }
 
   async 74(urara, me, callname, stage, extra_flag, event_object) {
-    const { inner_urara, relation, self_name } = this.#get_event_vars();
     const life_marks = new UraraLifeMarks();
     const has_lover = sys_filter_chara(
       'cflag',
@@ -121,12 +110,12 @@ module.exports = class extends CustomizedLove {
               this.#kojo,
               '74-1',
               urara,
-              inner_urara,
+              get_inner_urara(),
               me,
               callname,
-              self_name,
+              sys_get_callname(52, 52),
               sys_get_colored_callname(this.id, 61),
-              relation,
+              check_high_relation(),
               has_lover,
             )
           )[0] === 1
@@ -142,7 +131,7 @@ module.exports = class extends CustomizedLove {
       } else {
         const h = this.#kojo['74-2'];
         await print_event_name(h.title(urara), urara);
-        await h(urara, inner_urara, me, relation, has_lover);
+        await h(urara, get_inner_urara(), me, check_high_relation(), has_lover);
         await sys_love_uma_in_event(52);
       }
     } else if (stage === event_hooks.week_start) {
@@ -152,10 +141,10 @@ module.exports = class extends CustomizedLove {
             this.#kojo,
             '74-3',
             urara,
-            inner_urara,
+            get_inner_urara(),
             me,
             callname,
-            relation,
+            check_high_relation(),
             has_lover,
           )
         )[0] === 1
@@ -174,15 +163,14 @@ module.exports = class extends CustomizedLove {
    * @param {CharaTalk} me
    */
   async 75(urara, me) {
-    const { inner_urara, relation } = this.#get_event_vars();
     new UraraLifeMarks().girl_friend = 1;
     await print_title_with_kojo(
       this.#kojo,
       '75',
       urara,
-      inner_urara,
+      get_inner_urara(),
       me,
-      relation,
+      check_high_relation(),
       (era.get('cflag:30:招募状态') === recruit_flags.yes &&
         era.get('love:30')) >= 75 && sys_get_colored_callname(this.id, 30),
       (era.get('cflag:61:招募状态') === recruit_flags.yes &&
@@ -191,7 +179,6 @@ module.exports = class extends CustomizedLove {
   }
 
   async 89(urara, me, callname, stage, extra, ebj) {
-    const { inner_urara, relation } = this.#get_event_vars();
     const life_marks = new UraraLifeMarks();
     const has_lover = sys_filter_chara(
       'cflag',
@@ -212,11 +199,11 @@ module.exports = class extends CustomizedLove {
               this.#kojo,
               '89-1',
               urara,
-              inner_urara,
+              get_inner_urara(),
               me,
               callname,
               sys_get_colored_callname(this.id, 61),
-              relation,
+              check_high_relation(),
               has_lover,
             )
           )[0] === 1
@@ -234,10 +221,10 @@ module.exports = class extends CustomizedLove {
           this.#kojo,
           '89-2',
           urara,
-          inner_urara,
+          get_inner_urara(),
           me,
           callname,
-          relation,
+          check_high_relation(),
           has_lover,
         );
         await sys_love_uma_in_event(52);
@@ -246,8 +233,16 @@ module.exports = class extends CustomizedLove {
       const h = this.#kojo['89-3'];
       await print_event_name(h.title(urara), urara);
       if (
-        (await h(urara, inner_urara, me, callname, relation, has_lover))[0] ===
-        1
+        (
+          await h(
+            urara,
+            get_inner_urara(),
+            me,
+            callname,
+            check_high_relation(),
+            has_lover,
+          )
+        )[0] === 1
       ) {
         await sys_love_uma_in_event(52);
       } else {
@@ -264,12 +259,11 @@ module.exports = class extends CustomizedLove {
    * @param {string} callname
    */
   async 90(urara, me, callname) {
-    const { inner_urara } = this.#get_event_vars();
     await print_title_with_kojo(
       this.#kojo,
       '90',
       urara,
-      inner_urara,
+      get_inner_urara(),
       me,
       callname,
       (era.get('cflag:30:招募状态') === recruit_flags.yes &&
@@ -287,17 +281,16 @@ module.exports = class extends CustomizedLove {
   }
 
   async 99(urara, me, callname) {
-    const { relation, inner_urara } = this.#get_event_vars();
     if (
       (
         await print_title_with_kojo(
           this.#kojo,
           '99',
           urara,
-          inner_urara,
+          get_inner_urara(),
           me,
           callname,
-          relation,
+          check_high_relation(),
         )
       )[0] === 1
     ) {
@@ -310,15 +303,14 @@ module.exports = class extends CustomizedLove {
   }
 
   async 101(urara, me, callname) {
-    const { self_name, inner_urara } = this.#get_event_vars();
     await print_title_with_kojo(
       this.#kojo,
       '101',
       urara,
-      inner_urara,
+      get_inner_urara(),
       me,
       callname,
-      self_name,
+      sys_get_callname(52, 52),
     );
     new UraraLifeMarks().want_you = 1;
   }

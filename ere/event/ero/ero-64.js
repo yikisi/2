@@ -9,7 +9,7 @@ const EroNormalMakingOuts = require('#/event/ero/common/normal/making-outs');
 const NormalCommandLines = require('#/event/ero/common/normal/normal-common');
 const EroNormalSm = require('#/event/ero/common/normal/sm');
 const CustomizedEro = require('#/event/ero/ero-common');
-const { i_pama_yandere } = require('#/event/snippets/64');
+const { i_pama_yandere } = require('#/event/snippets/106401');
 const generate_dictionary = require('#/event/snippets/generate-dictionary');
 const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 

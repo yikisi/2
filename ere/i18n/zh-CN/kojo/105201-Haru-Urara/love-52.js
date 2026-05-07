@@ -160,9 +160,9 @@ module.exports = {
      * @param {CharaTalk} inner_urara 「春乌拉拉」
      * @param {CharaTalk} you 玩家
      * @param {string} callname 春乌拉拉对玩家的称呼
-     * @param {number} relation 春乌拉拉对玩家的好感度
+     * @param {boolean} high_relation 是否为高好感度（不低于融洽且不处于三周循环内）
      */
-    const f = async (urara, inner_urara, you, callname, relation) => {
+    const f = async (urara, inner_urara, you, callname, high_relation) => {
       await inner_urara.say_as_unknown_and_wait('虽然不太愿面对……');
       await inner_urara.say_as_unknown_and_wait(
         '但在爱欲的浇灌下，青涩的果实总会成熟为妖艳的蛇果。',
@@ -251,7 +251,7 @@ module.exports = {
         urara.teen_sex_title,
         '，正无助又期待地向看不见的某人展示着自己的身体最不堪的一面。',
       ]);
-      if (relation > 150) {
+      if (high_relation) {
         await urara.say_and_wait([
           you.sex,
           '还在等着我的……明明不可以的，万一让',
@@ -361,7 +361,7 @@ module.exports = {
      * @param {string} callname 春乌拉拉对玩家的称呼
      * @param {string} self_name 春乌拉拉的自称
      * @param {PrintedSpan} u_call_h 春乌拉拉对圣王光环的称呼
-     * @param {number} relation 春乌拉拉对玩家的好感度
+     * @param {boolean} high_relation 是否为高好感度（不低于融洽且不处于三周循环内）
      * @param {boolean} has_lover 是否已经有热恋以上关系的队伍成员
      */
     const f = async (
@@ -371,7 +371,7 @@ module.exports = {
       callname,
       self_name,
       u_call_h,
-      relation,
+      high_relation,
       has_lover,
     ) => {
       await inner_urara.say_as_unknown_and_wait([
@@ -409,7 +409,7 @@ module.exports = {
         urara.sex,
         '走到了现在的人……',
       ]);
-      if (relation > 150) {
+      if (high_relation) {
         await urara.print_and_wait([
           '回过头来的时候，已经想象不到没有 ',
           callname,
@@ -520,7 +520,7 @@ module.exports = {
           callname,
           ' 拒绝，也能够和往常一样甘心的接受——',
         ]);
-        if (relation > 150) {
+        if (high_relation) {
           await urara.print_and_wait([
             '因为 ',
             self_name,
@@ -668,10 +668,10 @@ module.exports = {
      * @param {CharaTalk} urara 春乌拉拉
      * @param {CharaTalk} inner_urara 「春乌拉拉」
      * @param {CharaTalk} you 玩家
-     * @param {number} relation 春乌拉拉对玩家的好感度
+     * @param {boolean} high_relation 是否为高好感度（不低于融洽且不处于三周循环内）
      * @param {boolean} has_lover 是否已经有热恋以上关系的队伍成员
      */
-    const f = async (urara, inner_urara, you, relation, has_lover) => {
+    const f = async (urara, inner_urara, you, high_relation, has_lover) => {
       await era.printAndWait([
         '或许是因为那天遇上了很多事情，',
         you.get_colored_name(),
@@ -748,7 +748,7 @@ module.exports = {
         ' 主动告白时的那样。',
       ]);
       era.println();
-      if (relation > 150) {
+      if (high_relation) {
         await urara.say_and_wait(
           '虽然比想象中的稍微有些晚了，但是乌拉拉依旧这样喜欢着训练员哦！',
         );
@@ -818,7 +818,7 @@ module.exports = {
      * @param {CharaTalk} inner_urara 「春乌拉拉」
      * @param {CharaTalk} you 玩家
      * @param {string} callname 春乌拉拉对玩家的称呼
-     * @param {number} relation 春乌拉拉对玩家的好感度
+     * @param {boolean} high_relation 是否为高好感度（不低于融洽且不处于三周循环内）
      * @param {boolean} has_lover 是否已经有热恋以上关系的队伍成员
      */
     const f = async (
@@ -826,7 +826,7 @@ module.exports = {
       inner_urara,
       you,
       callname,
-      relation,
+      high_relation,
       has_lover,
     ) => {
       await inner_urara.say_as_unknown_and_wait(
@@ -985,7 +985,7 @@ module.exports = {
           ' 在一起的经历也绝非虚假。',
         ]);
         era.println();
-        if (relation > 150) {
+        if (high_relation) {
           await urara.say_and_wait(
             '训练员，不要因为乌拉拉贬低自己哦？因为这也是乌拉拉做出的选择。',
           );
@@ -1087,7 +1087,7 @@ module.exports = {
           '所以到时候，如果训练员哪天想好了的话，一定要跟乌拉拉说啊！',
         );
         era.println();
-        if (relation > 150) {
+        if (high_relation) {
           await era.printAndWait([
             '没有失落的样子，只是和平常一样普通的笑着，小',
             urara.uma_sex_title,
@@ -1144,11 +1144,18 @@ module.exports = {
      * @param {CharaTalk} urara 春乌拉拉
      * @param {CharaTalk} inner_urara 「春乌拉拉」
      * @param {CharaTalk} you 玩家
-     * @param {number} relation 春乌拉拉对玩家的好感度
+     * @param {boolean} high_relation 是否为高好感度（不低于融洽且不处于三周循环内）
      * @param {PrintedSpan|false} u_call_r 春乌拉拉对米浴的称呼，当米浴的爱慕值不足时为 false
      * @param {PrintedSpan|false} u_call_h 春乌拉拉对圣王光环的称呼，当圣王光环的爱慕值不足时为 false
      */
-    const f = async (urara, inner_urara, you, relation, u_call_r, u_call_h) => {
+    const f = async (
+      urara,
+      inner_urara,
+      you,
+      high_relation,
+      u_call_r,
+      u_call_h,
+    ) => {
       await inner_urara.say_as_unknown_and_wait(
         '就算遮遮掩掩，感情也总有一天会开花结果。',
       );
@@ -1197,7 +1204,7 @@ module.exports = {
         '只是这次相遇的再现中，不管是身体还是心灵，乌拉拉都最初相比发生了彻底的改变。',
       ]);
       era.println();
-      if (relation > 75) {
+      if (high_relation) {
         await urara.say_and_wait(
           '以前的时候还不懂，但现在呢，我果然喜欢着训练员。',
         );
@@ -1484,7 +1491,7 @@ module.exports = {
      * @param {CharaTalk} you 玩家
      * @param {string} callname 春乌拉拉对玩家的称呼
      * @param {PrintedSpan} u_call_h 春乌拉拉对圣王光环的称呼
-     * @param {number} relation 春乌拉拉对玩家的好感度
+     * @param {boolean} high_relation 是否为高好感度（不低于融洽且不处于三周循环内）
      * @param {boolean} has_lover 是否已经有热恋以上关系的队伍成员
      */
     const f = async (
@@ -1493,7 +1500,7 @@ module.exports = {
       you,
       callname,
       u_call_h,
-      relation,
+      high_relation,
       has_lover,
     ) => {
       await urara.print_and_wait(
@@ -1560,7 +1567,7 @@ module.exports = {
         ]);
       }
       era.println();
-      if (relation > 150) {
+      if (high_relation) {
         await urara.say_and_wait([
           '但是就算这样，我也不想讨厌 ',
           callname,
@@ -1738,7 +1745,7 @@ module.exports = {
      * @param {CharaTalk} inner_urara 「春乌拉拉」
      * @param {CharaTalk} you 玩家
      * @param {string} callname 春乌拉拉对玩家的称呼
-     * @param {number} relation 春乌拉拉对玩家的好感度
+     * @param {boolean} high_relation 是否为高好感度（不低于融洽且不处于三周循环内）
      * @param {boolean} has_lover 是否已经有热恋以上关系的队伍成员
      */
     const f = async (
@@ -1746,7 +1753,7 @@ module.exports = {
       inner_urara,
       you,
       callname,
-      relation,
+      high_relation,
       has_lover,
     ) => {
       await urara.say_and_wait([callname, '，这里已经什么都没有了啊。']);
@@ -1832,7 +1839,7 @@ module.exports = {
       ]);
       era.println();
 
-      if (relation > 150) {
+      if (high_relation) {
         await urara.say_and_wait(
           '和想象中的不太一样呢，但是终于等到了，所以我也很满足哦？',
         );
@@ -1943,7 +1950,7 @@ module.exports = {
      * @param {CharaTalk} inner_urara 「春乌拉拉」
      * @param {CharaTalk} you 玩家
      * @param {string} callname 春乌拉拉对玩家的称呼
-     * @param {number} relation 春乌拉拉对玩家的好感度
+     * @param {boolean} high_relation 是否为高好感度（不低于融洽且不处于三周循环内）
      * @param {boolean} has_lover 是否已经有热恋以上关系的队伍成员
      */
     const f = async (
@@ -1951,7 +1958,7 @@ module.exports = {
       inner_urara,
       you,
       callname,
-      relation,
+      high_relation,
       has_lover,
     ) => {
       await inner_urara.say_as_unknown_and_wait(
@@ -1995,7 +2002,7 @@ module.exports = {
       );
       era.println();
 
-      if (relation > 150) {
+      if (high_relation) {
         await urara.say_and_wait([callname, '，在想什么呢？']);
         await era.printAndWait([
           urara.get_colored_name(),
@@ -2119,7 +2126,7 @@ module.exports = {
         );
         await era.printAndWait('只是一点承诺都没有，这样真的就好了吗？');
         era.println();
-        if (relation > 150) {
+        if (high_relation) {
           await urara.say_and_wait([
             '原来是这样，身为大人不得不隐藏想法，可 ',
             callname,
@@ -2283,7 +2290,7 @@ module.exports = {
           ' 颤抖的声音停下了，红红的眼睛里透着些许疑惑。',
         ]);
         era.println();
-        if (relation > 150) {
+        if (high_relation) {
           await urara.say_and_wait([
             '乌拉拉还以为 ',
             callname,
@@ -2627,9 +2634,9 @@ module.exports = {
      * @param {CharaTalk} inner_urara 「春乌拉拉」
      * @param {CharaTalk} you 玩家
      * @param {string} callname 春乌拉拉对玩家的称呼
-     * @param {number} relation 春乌拉拉对玩家的好感度
+     * @param {boolean} high_relation 是否为高好感度（不低于融洽且不处于三周循环内）
      */
-    const f = async (urara, inner_urara, you, callname, relation) => {
+    const f = async (urara, inner_urara, you, callname, high_relation) => {
       await inner_urara.say_as_unknown_and_wait(
         '钥匙是个方便的好东西，可以开启什么，也可以锁住什么。',
       );
@@ -2699,7 +2706,7 @@ module.exports = {
         '，虽然乌拉拉不介意，但在这里做的话，会被发现哦？',
       ]);
       era.println();
-      if (relation > 150) {
+      if (high_relation) {
         await era.printAndWait([
           '被 ',
           you.get_colored_name(),

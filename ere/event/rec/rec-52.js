@@ -8,11 +8,11 @@ const {
 
 const { add_event, cb_enum } = require('#/event/queue');
 const CustomizedRecruit = require('#/event/rec/rec-common');
+const { get_inner_urara } = require('#/event/snippets/105201');
 const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const { chara_colors } = require('#/data/chara-colors');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const UraraLifeMarks = require('#/data/event/life-event-marks/life-event-marks-52');
@@ -26,12 +26,11 @@ module.exports = class extends CustomizedRecruit {
     const me = get_chara_talk(0);
     const callname = sys_get_callname(this.id, 0);
     const urara = get_chara_talk(this.id);
-    const inner_urara = get_chara_talk(this.id, chara_colors[52][1]);
     const kojo = i18n().kojo[this.id].recruit;
     era.set('callname:0:52', '105202');
     const ret = await kojo.recruit(
       urara,
-      inner_urara,
+      get_inner_urara(),
       me,
       callname,
       life_marks.rec,

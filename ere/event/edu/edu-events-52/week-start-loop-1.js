@@ -9,10 +9,7 @@ const print_event_name = require('#/event/snippets/print-event-name');
  * @param {string} callname
  */
 module.exports = async (urara, me, in_urara, callname) => {
-  await print_event_name(
-    ['「', { color: in_urara.color, content: in_urara.sex }, '」的祈愿'],
-    urara,
-  );
+  await print_event_name(['「', in_urara.get_colored_sex(), '」的祈愿'], urara);
   await me.say_and_wait(
     '怎么回事，我记得自己晚上是在住处睡着的来着？这是……学园三女神像前？我为什么睡在这里？',
     true,

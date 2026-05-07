@@ -8,7 +8,7 @@ const {
 
 const CustomizedEdu = require('#/event/edu/edu-common');
 const { add_event, cb_enum } = require('#/event/queue');
-const { i_pama_yandere } = require('#/event/snippets/64');
+const { i_pama_yandere } = require('#/event/snippets/106401');
 const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 const generate_dictionary = require('#/event/snippets/generate-dictionary');

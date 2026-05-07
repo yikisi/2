@@ -246,15 +246,16 @@ class CustomizedDaily extends CustomizedEvent {
     } else {
       h = this.s_a_dating;
     }
-    await h.call(this, get_chara_talk(this.id), get_chara_talk(0));
+    await h.call(this, get_chara_talk(this.id), get_chara_talk(0), hook);
   }
 
   /**
    * @protected
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
+   * @param {HookArg} hook
    */
-  async s_a_tree_hollow(chara, me) {
+  async s_a_tree_hollow(chara, me, hook) {
     await (
       era.get('flag:惩戒力度') >= 2 && Math.random() < 0.5
         ? i18n().timon.pregnant_slave.s_a_tree_hollow
@@ -266,8 +267,9 @@ class CustomizedDaily extends CustomizedEvent {
    * @protected
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
+   * @param {HookArg} hook
    */
-  async s_a_dating(chara, me) {
+  async s_a_dating(chara, me, hook) {
     await (
       era.get('flag:惩戒力度') >= 2 && Math.random() < 0.5
         ? i18n().timon.pregnant_slave.s_a_dating
@@ -496,8 +498,9 @@ class CustomizedDaily extends CustomizedEvent {
    * @protected
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
+   * @param {HookArg} hook
    */
-  async o_s_drawing(chara, me) {
+  async o_s_drawing(chara, me, hook) {
     await i18n().timon.daily.o_s_drawing(chara, me);
   }
 
@@ -505,8 +508,9 @@ class CustomizedDaily extends CustomizedEvent {
    * @protected
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
+   * @param {HookArg} hook
    */
-  async o_s_ktv(chara, me) {
+  async o_s_ktv(chara, me, hook) {
     await i18n().timon.daily.o_s_ktv(chara, me);
   }
 
@@ -514,8 +518,9 @@ class CustomizedDaily extends CustomizedEvent {
    * @protected
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
+   * @param {HookArg} hook
    */
-  async o_s_movie(chara, me) {
+  async o_s_movie(chara, me, hook) {
     await i18n().timon.daily.o_s_movie(chara, me);
   }
 
@@ -529,7 +534,7 @@ class CustomizedDaily extends CustomizedEvent {
     if (dice < 0.05 && this.id === 0 && dice >= 0.01 && dice < 0.03) {
       dice = 0.04;
     }
-    await this.o_c_pray(chara, me, dice);
+    await this.o_c_pray(chara, me, dice, hook);
     if (dice < 0.05) {
       await i18n().timon.daily.oc_great_luck(chara, dice);
       // FLAGNAME:122 = 强奸抵抗
@@ -556,8 +561,9 @@ class CustomizedDaily extends CustomizedEvent {
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {number} dice
+   * @param {HookArg} hook
    */
-  async o_c_pray(chara, me, dice) {
+  async o_c_pray(chara, me, dice, hook) {
     await i18n().timon.daily.o_c_pray(chara, me, dice);
   }
 
@@ -584,8 +590,9 @@ class CustomizedDaily extends CustomizedEvent {
    * @protected
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
+   * @param {HookArg} hook
    */
-  async o_s_restaurant(chara, me) {
+  async o_s_restaurant(chara, me, hook) {
     await i18n().timon.daily.o_s_restaurant(chara, me);
   }
 

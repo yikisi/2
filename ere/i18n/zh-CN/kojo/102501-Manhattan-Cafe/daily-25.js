@@ -792,7 +792,7 @@ module.exports = {
    * @param {CharaTalk} coffee 曼城茶座
    * @param {CharaTalk} you 玩家
    * @param {PrintedSpan} callname 曼城茶座对玩家的称呼
-   * @param {number} check 求爱检定值，如果是大成功则不会允许选择同意还是拒绝
+   * @param {number} check 求爱检定值，如果是大成功则默认同意
    */
   async good_night_sex(coffee, you, callname, check) {
     era.print([

@@ -1,7 +1,7 @@
 const era = require('#/era-electron');
 
 const CustomizedMec = require('#/event/mec/mec-common');
-const { i_pama_yandere } = require('#/event/snippets/64');
+const { i_pama_yandere } = require('#/event/snippets/106401');
 
 const { get_chara_color } = require('#/data/chara-colors');
 

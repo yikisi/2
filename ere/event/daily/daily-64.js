@@ -18,7 +18,7 @@ const {
 
 const { get_custom_check } = require('#/event/check/check-factory');
 const CustomizedDaily = require('#/event/daily/daily-common');
-const { i_pama_yandere } = require('#/event/snippets/64');
+const { i_pama_yandere } = require('#/event/snippets/106401');
 const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
 const generate_dictionary = require('#/event/snippets/generate-dictionary');
 const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
