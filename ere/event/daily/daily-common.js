@@ -537,9 +537,8 @@ class CustomizedDaily extends CustomizedEvent {
     await this.o_c_pray(chara, me, dice, hook);
     if (dice < 0.05) {
       await i18n().timon.daily.oc_great_luck(chara, dice);
-      // FLAGNAME:122 = 强奸抵抗
-      if (dice < 0.0001 && era.get('flag:122') === 1) {
-        era.set('flag:122', '');
+      if (dice < 0.0001 && era.get('flag:强奸抵抗') === 1) {
+        era.set('flag:强奸抵抗', '');
       } else if (dice < 0.01) {
         const item = get_random_entry([0, 1, 2, 3, 12]);
         era.add(`item:${item}`, 1);
@@ -549,11 +548,9 @@ class CustomizedDaily extends CustomizedEvent {
       } else if (dice < 0.03 && chara.sex_code !== 1) {
         sys_change_lust(this.id, 1500);
       } else {
-        // FLAGNAME:16 = 当前马币
-        era.add('flag:16', 150);
+        era.add('flag:当前马币', 150);
       }
     }
-    hook.arg = dice < 0.5;
   }
 
   /**

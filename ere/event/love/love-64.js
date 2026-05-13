@@ -29,7 +29,6 @@ const generate_dictionary = require('#/event/snippets/generate-dictionary');
 const masturbate = require('#/event/snippets/masturbate');
 const print_event_name = require('#/event/snippets/print-event-name');
 const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
-const quick_into_3p = require('#/event/snippets/quick-into-3p');
 const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -513,7 +512,7 @@ module.exports = class extends CustomizedLove {
       } else {
         supporter = 71;
       }
-      await quick_into_3p(lover, supporter, master);
+      await quick_into_sex.quick_into_3p(lover, supporter, master);
       await this.#kojo['movie_end'](dict);
     }
     era.set('flag:当前位置', cache);
@@ -694,7 +693,7 @@ module.exports = class extends CustomizedLove {
         supporter = 27;
         master = this.id;
     }
-    await quick_into_3p(lover, supporter, master);
+    await quick_into_sex.quick_into_3p(lover, supporter, master);
     await this.#kojo['concern_end'](dict);
   }
 
@@ -729,7 +728,7 @@ module.exports = class extends CustomizedLove {
     ) {
       master = 13;
     }
-    await quick_into_3p(13, this.id, master);
+    await quick_into_sex.quick_into_3p(13, this.id, master);
     await this.#kojo['dessert_end'](dict);
   }
 
@@ -764,7 +763,7 @@ module.exports = class extends CustomizedLove {
     ) {
       master = this.id;
     }
-    await quick_into_3p(this.id, 65, master);
+    await quick_into_sex.quick_into_3p(this.id, 65, master);
     await this.#kojo['party_end'](dict);
     return true;
   }

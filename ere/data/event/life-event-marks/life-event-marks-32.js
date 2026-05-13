@@ -9,6 +9,8 @@ class TachyonLifeMarks extends LifeEventMarks {
   l_cook;
   // 闲聊次数
   talk;
+  // 关于称呼的闲聊次数
+  talk_call;
   // 反抗3
   hate;
   // 暧昧
