@@ -214,7 +214,7 @@ module.exports = {
    * @param {CharaTalk} maya 摩耶重炮
    * @param {PrintedSpan} callname 摩耶重炮对玩家的称呼
    */
-  async school_rooftop(maya, callname) {
+  async s_r_lunch(maya, callname) {
     await maya.say_and_wait(['Maya给 ', callname, ' 做了便当哦，来一起吃吧！']);
   },
   /**

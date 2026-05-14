@@ -90,10 +90,8 @@ module.exports = class extends CustomizedDaily {
     await this.#kojo['s_a_dating'](this.#dict);
   }
 
-  async school_rooftop() {
-    await this.#kojo['school_rooftop'](
-      generate_dictionary(this.id, { call: !0 }),
-    );
+  async s_r_lunch(tama, me) {
+    await this.#kojo['s_r_lunch'](generate_dictionary(this.id, { call: !0 }));
   }
 
   async office_cook() {

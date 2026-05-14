@@ -260,7 +260,7 @@ module.exports = {
    * @param {CharaTalk} coffee 曼城茶座
    * @param {PrintedSpan} callname 曼城茶座对玩家的称呼
    */
-  async school_rooftop(coffee, callname) {
+  async s_r_lunch(coffee, callname) {
     if (Math.random() < 0.5) {
       await coffee.say_and_wait([
         callname,
@@ -441,7 +441,7 @@ module.exports = {
    * @param {CharaTalk} coffee 曼城茶座
    * @param {CharaTalk} you 玩家
    * @param {PrintedSpan} callname 曼城茶座对玩家的称呼
-   * @param {number} dice 祈祷掷骰结果
+   * @param {number} dice 祈祷掷骰结果，0-1 之间的小数，越小越好
    */
   async o_c_pray(coffee, you, callname, dice) {
     await era.printAndWait([

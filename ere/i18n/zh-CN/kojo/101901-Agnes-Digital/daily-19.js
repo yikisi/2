@@ -349,7 +349,7 @@ module.exports = {
    * @param {CharaTalk} digital 爱丽数码
    * @param {PrintedSpan} callname 爱丽数码对玩家的称呼
    */
-  async school_rooftop(digital, callname) {
+  async s_r_lunch(digital, callname) {
     const buffer = [
       () =>
         digital.say_and_wait([

@@ -122,8 +122,8 @@ module.exports = class extends CustomizedDaily {
     );
   }
 
-  async school_rooftop() {
-    await this.#kojo.school_rooftop(
+  async s_r_lunch() {
+    await this.#kojo.s_r_lunch(
       get_chara_talk(this.id),
       sys_get_colored_callname(this.id, 0),
     );
@@ -138,7 +138,7 @@ module.exports = class extends CustomizedDaily {
   }
 
   async o_r_walking(coffee) {
-    await this.#kojo.school_rooftop(coffee);
+    await this.#kojo.o_r_walking(coffee);
   }
 
   async o_c_pray(coffee, me, dice) {

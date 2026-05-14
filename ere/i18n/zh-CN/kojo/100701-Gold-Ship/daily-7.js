@@ -319,7 +319,7 @@ module.exports = {
     }
   },
   /** @param {CharaTalk} gs 黄金船 */
-  async school_rooftop(gs) {
+  async s_r_lunch(gs) {
     await era.printAndWait(['与 ', gs.get_colored_name(), ' 一起吃了便当……']);
     if (Math.random() < 0.5) {
       await gs.say_and_wait('这个土豆泥好吃吧？是用粉末泡出来的哦。');
@@ -454,7 +454,7 @@ module.exports = {
   /**
    * @param {CharaTalk} gs 黄金船
    * @param {CharaTalk} you 玩家
-   * @param {number} dice 祈祷掷骰结果，0-1之间的小数
+   * @param {number} dice 祈祷掷骰结果，0-1 之间的小数，越小越好
    */
   async o_c_pray(gs, you, dice) {
     await gs.say_and_wait([{ color: gold_color, content: '哈——唏唷唏唷！' }]);

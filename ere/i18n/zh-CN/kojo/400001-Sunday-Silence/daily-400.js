@@ -491,7 +491,7 @@ module.exports = {
    * @param {CharaTalk} you 玩家
    * @param {string} callname 周日宁静对玩家的称呼
    */
-  async school_rooftop(ss, you, callname) {
+  async s_r_lunch(ss, you, callname) {
     await era.printAndWait([
       you.get_colored_name(),
       ' 和 ',
@@ -781,7 +781,7 @@ module.exports = {
    * @param {CharaTalk} ss 周日宁静
    * @param {CharaTalk} you 玩家
    * @param {string} callname 周日宁静对玩家的称呼
-   * @param {number} dice 祈祷结果掷骰
+   * @param {number} dice 祈祷掷骰结果，0-1 之间的小数，越小越好
    */
   async o_c_pray(ss, you, callname, dice) {
     await era.printAndWait([

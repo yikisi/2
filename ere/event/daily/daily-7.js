@@ -53,8 +53,8 @@ module.exports = class extends CustomizedDaily {
     await this.#kojo.s_a_dating(gold_ship);
   }
 
-  async school_rooftop() {
-    await this.#kojo.school_rooftop(get_chara_talk(this.id));
+  async s_r_lunch() {
+    await this.#kojo.s_r_lunch(get_chara_talk(this.id));
   }
 
   select() {

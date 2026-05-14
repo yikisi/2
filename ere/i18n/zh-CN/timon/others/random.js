@@ -32,7 +32,7 @@ module.exports = {
     /**
      * @author イーウィヤ
      * @param {CharaTalk} _ 无意义参数，但必须留着
-     * @param {number} dice 结果掷色，越小越好
+     * @param {number} dice 祈祷掷骰结果，0-1 之间的小数，越小越好
      * @param {number|undefined} god 随机女神的ID（抽中随机女神的好感的情况），如果所有女神都已经受肉这里会是 undefined
      */
     const f = async (_, dice, god) => {

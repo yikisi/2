@@ -52,8 +52,8 @@ module.exports = class extends CustomizedDaily {
     await this.#kojo.s_a_dating(maya, sys_get_colored_callname(this.id, 0));
   }
 
-  async school_rooftop(hook) {
-    await this.#kojo.school_rooftop(
+  async s_r_lunch(hook) {
+    await this.#kojo.s_r_lunch(
       get_chara_talk(this.id),
       sys_get_colored_callname(this.id, 0),
     );

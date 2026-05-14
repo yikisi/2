@@ -656,7 +656,7 @@ s_a_dating:
             content: %CHARA%
           - 「嗯哼～」
 
-school_rooftop:
+s_r_lunch:
   - if: d.check > 0
     lines:
       - color: %COLOR%

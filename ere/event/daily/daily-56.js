@@ -142,8 +142,8 @@ module.exports = class extends CustomizedDaily {
     await this.#kojo.s_a_dating(kitaru, me);
   }
 
-  async school_rooftop(kitaru, me) {
-    await this.#kojo.school_rooftop(
+  async s_r_lunch(kitaru, me) {
+    await this.#kojo.s_r_lunch(
       kitaru,
       me,
       sys_get_colored_callname(this.id, 0),

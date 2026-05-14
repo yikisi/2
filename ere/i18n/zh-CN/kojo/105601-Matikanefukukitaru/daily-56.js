@@ -889,7 +889,7 @@ module.exports = {
    * @param {CharaTalk} you 玩家
    * @param {PrintedSpan} callname 待兼福来对玩家的称呼
    */
-  async school_rooftop(kitaru, you, callname) {
+  async s_r_lunch(kitaru, you, callname) {
     const buffer = [];
     buffer.push(async () => {
       await kitaru.say_and_wait('喔喔喔喔喔！！！');

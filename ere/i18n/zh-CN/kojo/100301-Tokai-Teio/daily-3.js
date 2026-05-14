@@ -278,7 +278,7 @@ module.exports = {
     );
   },
   /** @param {CharaTalk} teio 东海帝王 */
-  async school_rooftop(teio) {
+  async s_r_lunch(teio) {
     await teio.say_and_wait('到这里吃饭意外地有感觉呢！');
     await era.printAndWait(
       '你们将食盒摊放在……「天花板」上？一起享受起了美好的午饭时间。',
@@ -396,7 +396,7 @@ module.exports = {
    * @param {CharaTalk} teio 东海帝王
    * @param {CharaTalk} you 玩家
    * @param {PrintedSpan} callname 东海帝王对玩家的称呼
-   * @param {number} dice 祈祷结果掷色
+   * @param {number} dice 祈祷掷骰结果，0-1 之间的小数，越小越好
    */
   async o_c_pray(teio, you, callname, dice) {
     await teio.say_and_wait([callname, '～快点快点，一起来抽一次吧！']);

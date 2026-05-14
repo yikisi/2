@@ -206,11 +206,11 @@ module.exports = class extends CustomizedDaily {
   }
 
   async s_a_dating(teio, me) {
-    await this.#kojo.s_a_tree_hollow(teio, me);
+    await this.#kojo.s_a_dating(teio, me);
   }
 
-  async school_rooftop() {
-    await this.#kojo.s_a_tree_hollow(get_chara_talk(this.id));
+  async s_r_lunch() {
+    await this.#kojo.s_r_lunch(get_chara_talk(this.id));
   }
 
   select() {

@@ -532,7 +532,7 @@ s_a_dating:
             content: %CHARA%
           - 「%CALLNAME%？感觉紧张过头了哦，来～跟我一起做深呼吸，放松下吧。」
 
-school_rooftop:
+s_r_lunch:
   - random: true
     lines:
       - 今天与阿尔丹一起吃起了便当，阿尔丹特意也为%YOU%准备了一份。

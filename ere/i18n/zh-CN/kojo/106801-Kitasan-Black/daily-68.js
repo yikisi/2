@@ -988,7 +988,7 @@ module.exports = {
    * @param {CharaTalk} you 玩家
    * @param {PrintedSpan} callname 北部玄驹对玩家的称呼
    * @param {PrintedSpan} call_98 北部玄驹对小林历奇的称呼
-   * @param {number} dice 祈祷掷骰
+   * @param {number} dice 祈祷掷骰结果，0-1 之间的小数，越小越好
    */
   async o_c_pray(kita, you, callname, call_98, dice) {
     await era.printAndWait([

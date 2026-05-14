@@ -329,7 +329,7 @@ s_a_dating:
             content: %CHARA%
           - 「约会……呼唉……？」
 
-school_rooftop:
+s_r_lunch:
   - random: true
     lines:
       - color: %COLOR%

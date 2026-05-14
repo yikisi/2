@@ -328,6 +328,7 @@ class CustomizedDaily extends CustomizedEvent {
    * @protected
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
+   * @returns {Promise<boolean|void>}
    */
   async s_r_lunch(chara, me) {
     // FLAGNAME:35 = 惩戒力度

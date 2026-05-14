@@ -92,7 +92,7 @@ module.exports = {
   },
   /**
    * @param {CharaTalk} you 玩家
-   * @param {number} dice 祈福结果掷色，越小越好
+   * @param {number} dice 祈祷掷骰结果，0-1 之间的小数，越小越好
    */
   async o_c_pray(you, dice) {
     await printAndWait([you.get_colored_name(), ' 独自来到神社祈福。']);

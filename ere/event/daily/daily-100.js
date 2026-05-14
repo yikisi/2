@@ -111,8 +111,8 @@ module.exports = class extends CustomizedDaily {
     await this.#kojo.s_a_dating(acute, me);
   }
 
-  async school_rooftop() {
-    await this.#kojo.rooftop(get_chara_talk(this.id), get_chara_talk(0));
+  async s_r_lunch() {
+    await this.#kojo.s_r_lunch(get_chara_talk(this.id), get_chara_talk(0));
   }
 
   async o_r_fishing(acute, me, hook, extra) {

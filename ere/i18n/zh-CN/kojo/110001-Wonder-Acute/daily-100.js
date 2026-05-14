@@ -540,7 +540,7 @@ module.exports = {
    * @param {CharaTalk} acute 奇锐骏
    * @param {CharaTalk} me 玩家
    */
-  async school_rooftop(acute, me) {
+  async s_r_lunch(acute, me) {
     await era.printAndWait([
       '午休时分，与 ',
       acute.get_colored_name(),
@@ -846,7 +846,7 @@ module.exports = {
    * @param {CharaTalk} acute 奇锐骏
    * @param {CharaTalk} you 玩家
    * @param {PrintedSpan} callname 奇锐骏对玩家的称呼
-   * @param {number} dice 祈祷掷骰
+   * @param {number} dice 祈祷掷骰结果，0-1 之间的小数，越小越好
    */
   async o_c_pray(acute, you, callname, dice) {
     await acute.say_and_wait('阿拉拉……要去神社祈福吗？');

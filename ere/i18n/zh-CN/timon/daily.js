@@ -1011,7 +1011,7 @@ module.exports = {
    * @author 雞雞
    * @param {CharaTalk} chara
    * @param {CharaTalk} you
-   * @param {number} dice
+   * @param {number} dice 祈祷掷骰结果，0-1 之间的小数，越小越好
    */
   async o_c_pray(chara, you, dice) {
     await era.printAndWait([
@@ -1035,7 +1035,7 @@ module.exports = {
   /**
    * @author Mr.E.
    * @param {CharaTalk} chara
-   * @param {number} dice
+   * @param {number} dice 祈祷掷骰结果，0-0.05 之间的小数，这里根据数值计算大成功的类型
    */
   async oc_great_luck(chara, dice) {
     // FLAGNAME:122 = 强奸抵抗

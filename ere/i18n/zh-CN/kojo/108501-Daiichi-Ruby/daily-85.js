@@ -395,7 +395,7 @@ module.exports = {
    * @param {CharaTalk} ruby 第一红宝石
    * @param {CharaTalk} you 玩家
    */
-  async school_rooftop(ruby, you) {
+  async s_r_lunch(ruby, you) {
     const buffer = [];
     buffer.push(() =>
       era.printAndWait([

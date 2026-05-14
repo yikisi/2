@@ -570,7 +570,7 @@ s_a_dating:
             content: Oguri Cap
           - 「Say... do you want to kiss?」
 
-school_rooftop:
+s_r_lunch:
   - random: true
     lines:
       - color: %COLOR%

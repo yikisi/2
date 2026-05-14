@@ -569,7 +569,7 @@ s_a_dating:
             content: 小栗帽
           - 「我说……要来亲亲吗？」
 
-school_rooftop:
+s_r_lunch:
   - random: true
     lines:
       - color: %COLOR%

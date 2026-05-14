@@ -565,7 +565,7 @@ s_a_dating:
             content: %CHARA%
           - 「感觉有好多人看着着我们啊，要冷静，冷静……」
 
-school_rooftop:
+s_r_lunch:
   - random: true
     lines:
       - 今天与麦昆一起上了天台，麦昆带来了便当过来与%YOU%一同共享。

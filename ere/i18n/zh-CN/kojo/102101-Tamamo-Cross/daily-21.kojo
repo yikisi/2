@@ -394,7 +394,7 @@ s_a_dating:
             content: %CHARA%
           - 「呣，咱真是上错贼船了……」
 
-school_rooftop:
+s_r_lunch:
   - random: true
     lines:
       - color: %COLOR%

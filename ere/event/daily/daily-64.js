@@ -158,7 +158,7 @@ module.exports = class extends CustomizedDaily {
     await this.#kojo['s_a_tree_hollow'](this.#dict);
   }
 
-  async school_rooftop() {
+  async s_r_lunch(pama, me) {
     const dict = this.#dict;
     const life_marks = new PamaLifeMarks();
     if (era.get(`love:${this.id}`) >= 50 && !life_marks.love_rooftop) {
@@ -166,7 +166,7 @@ module.exports = class extends CustomizedDaily {
       dict.check = 1;
     }
     if (
-      (await this.#kojo['school_rooftop'](dict))[0] === 2 &&
+      (await this.#kojo['s_r_lunch'](dict))[0] === 2 &&
       sys_love_uma(this.id, 1)
     ) {
       await era.waitAnyKey();

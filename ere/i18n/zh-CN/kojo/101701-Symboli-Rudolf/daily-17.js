@@ -504,7 +504,7 @@ module.exports = {
   /**
    * @param {CharaTalk} luna 鲁铎象征/露娜
    * @param {CharaTalk} you 玩家
-   * @param {number} dice 祈祷掷骰
+   * @param {number} dice 祈祷掷骰结果，0-1 之间的小数，越小越好
    */
   async o_c_pray_luna(luna, you, dice) {
     await era.printAndWait(
@@ -559,7 +559,7 @@ module.exports = {
   /**
    * @param {CharaTalk} emperor 皇帝
    * @param {CharaTalk} you 玩家
-   * @param {number} dice 祈祷掷骰
+   * @param {number} dice 祈祷掷骰结果，0-1 之间的小数，越小越好
    */
   async o_c_pray_emperor(emperor, you, dice) {
     await era.printAndWait(
