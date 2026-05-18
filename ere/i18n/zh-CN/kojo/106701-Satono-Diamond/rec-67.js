@@ -353,6 +353,7 @@ module.exports = {
     await daiya.say_as_unknown_and_wait('训练员，你 是 绝 对 逃 不 掉 的 哦？');
   },
   rec_out: (() => {
+    const title = '便服派对';
     /**
      * @param {CharaTalk} daiya
      * @param {CharaTalk} mcqueen
@@ -559,7 +560,7 @@ module.exports = {
       }
       return ret;
     };
-    f.title = '便服派对';
+    f.title = title;
     return f;
   })(),
 };

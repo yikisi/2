@@ -597,6 +597,7 @@ class CustomizedEdu extends CustomizedEvent {
    * @param {HookArg} hook
    * @param extra_flag
    * @param {EventObject} event_object
+   * @returns {Promise<boolean|void>}
    */
   async week_start(chara, me, callname, hook, extra_flag, event_object) {
     switch (event_object?.arg) {
