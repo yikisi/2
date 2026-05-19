@@ -400,6 +400,7 @@ class CustomizedEdu extends CustomizedEvent {
    * @param {HookArg} hook
    * @param extra
    * @param {EventObject} event_object
+   * @returns {Promise<boolean|void>}
    */
   async foreign_travel(chara, me, callname, hook, extra, event_object) {
     await i18n().timon.edu.foreign_travel(
