@@ -1,6 +1,5 @@
 const proxy_kojo_js = require('#/i18n/proxy');
 
-// GENERATED START
 class I18nKojo103201 {
   recruit = proxy_kojo_js(
     require('#/i18n/zh-CN/kojo/103201-Agnes-Tachyon/rec-32.js'),
@@ -20,7 +19,6 @@ class I18nKojo103201 {
   basement = proxy_kojo_js(
     require('#/i18n/zh-CN/kojo/103201-Agnes-Tachyon/base-32.js'),
   );
-  // GENERATED END
 
   uma_limit = (uma) => `${uma}的极限`;
   uma_limit_desc = (uma) =>

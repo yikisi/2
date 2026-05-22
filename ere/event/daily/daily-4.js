@@ -14,34 +14,32 @@ module.exports = class extends CustomizedDaily {
   }
 
   select() {
-    const zensky = get_chara_talk(this.id);
+    const maru = get_chara_talk(this.id);
     const me = get_chara_talk(0);
     const callname = sys_get_callname(this.id, 0);
     const edu_marks = new MaEduMarks();
     if (edu_marks.after_recruit > 0) {
-      this.#kojo.select_after_recruit(zensky, me, callname);
+      this.#kojo.select_after_recruit(maru, me, callname);
       edu_marks.after_recruit = 1;
     } else if (edu_marks.sister_annoyance > 0) {
-      this.#kojo.select_sister_annoyance(zensky);
+      this.#kojo.select_sister_annoyance(maru);
       edu_marks.sister_annoyance = 0;
     } else if (edu_marks.girls_blue > 0) {
-      this.#kojo.select_girls_blue(zensky, callname);
+      this.#kojo.select_girls_blue(maru, callname);
       edu_marks.girls_blue = 0;
-    } else if (edu_marks.true_end > 0) {
-      this.#kojo.select_true_end(zensky);
-      edu_marks.true_end = 0;
-    } else if (edu_marks.good_end > 0) {
-      this.#kojo.select_good_end(zensky, me, callname);
-      edu_marks.good_end = 0;
-    } else if (
-      !this.#kojo.select_by_wind(zensky, me, callname, edu_marks.wind)
-    ) {
+    } else if (edu_marks.true_end_notify > 0) {
+      this.#kojo.select_true_end(maru);
+      edu_marks.true_end_notify = 0;
+    } else if (edu_marks.good_end_notify > 0) {
+      this.#kojo.select_good_end(maru, me, callname);
+      edu_marks.good_end_notify = 0;
+    } else if (!this.#kojo.select_by_wind(maru, me, callname, edu_marks.wind)) {
       if (edu_marks.Self_contempt > 0) {
-        this.#kojo.select_Self_contempt(zensky, callname);
+        this.#kojo.select_Self_contempt(maru, callname);
       } else if (edu_marks.happiness_day > 0) {
-        this.#kojo.select_happiness_day(zensky, callname);
+        this.#kojo.select_happiness_day(maru, callname);
       } else {
-        this.#kojo.select(zensky, me, callname);
+        this.#kojo.select(maru, me, callname);
       }
     }
   }

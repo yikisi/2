@@ -12,7 +12,7 @@ const { get_random_value } = require('#/utils/value-utils');
 /**
  * @param {number} cid
  * @param {object} changes
- * @param {number[]} changes.attr=([])
+ * @param {number[]|Record<string,number>} changes.attr=([])
  * @param {number} changes.pt=0
  * @param {number[]} changes.base=([])
  * @param {number[]} changes.skills=([])

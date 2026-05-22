@@ -20,8 +20,6 @@ class MaEduMarks extends EduEventMarks {
   girls_blue;
   // 与丸善斯基于黄昏之时在海边观看日落
   find_love;
-  //离别(粉丝袭击)
-  crazy_fan;
   // 焦鹿梦
   dream;
   //木
@@ -30,7 +28,7 @@ class MaEduMarks extends EduEventMarks {
   Self_contempt;
   // BAD END 2 丸善斯基的信
   broken_tears;
-  //NORMAL END 1 平淡的每一天
+  // NORMAL END 1 平淡的每一天
   happiness_day;
   // NORMAL END 2 梦的远方
   girls_dream;
@@ -39,9 +37,9 @@ class MaEduMarks extends EduEventMarks {
   // GOOD END 误入乐园的旅人
   fall_heaven;
   // TE导航
-  true_end;
+  true_end_notify;
   // GE导航
-  good_end;
+  good_end_notify;
   // 迷茫
   mygo;
   // 丸善斯基老师，请指导我！

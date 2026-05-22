@@ -14,6 +14,7 @@ const name = {
   rec: 'recruit',
   base: 'basement',
 };
+const skip = { 103201: 1 };
 
 let entryOut = '';
 for (const charaPath of kojoDir) {
@@ -40,39 +41,41 @@ for (const charaPath of kojoDir) {
     }
   }
   entryOut += `${cid} = new (require('#/i18n/zh-CN/kojo/${charaPath}/entry'))();`;
-  const suffixDict = {};
-  files.forEach((t) => (suffixDict[t.substring(t.indexOf('.'))] = 1));
-  if (Object.keys(suffixDict).length === 0) {
-    continue;
-  } else if (Object.keys(suffixDict).length > 1) {
-    console.error(cid, 'conflicts!');
-    continue;
+  if (!skip[kojoId]) {
+    const suffixDict = {};
+    files.forEach((t) => (suffixDict[t.substring(t.indexOf('.'))] = 1));
+    if (Object.keys(suffixDict).length === 0) {
+      continue;
+    } else if (Object.keys(suffixDict).length > 1) {
+      console.error(cid, 'conflicts!');
+      continue;
+    }
+    const suffix = cid + Object.keys(suffixDict)[0];
+    if (files.some((t) => !t.endsWith(suffix))) {
+      console.error(cid, 'suffix error!');
+      continue;
+    }
+    files.sort(
+      (a, b) =>
+        order.indexOf(a.substring(0, a.length - suffix.length - 1)) -
+        order.indexOf(b.substring(0, b.length - suffix.length - 1)),
+    );
+    const className = 'I18nKojo' + kojoId;
+    const entries = suffix.endsWith('js')
+      ? files.map(
+          (t) =>
+            `${name[t.substring(0, t.length - suffix.length - 1)] ?? t.substring(0, t.length - suffix.length - 1)} = proxy_kojo_js(require('${basePath + '/' + charaPath + '/' + t}'));`,
+        )
+      : files.map(
+          (t) =>
+            `/** @type {KojoFile} */\n${name[t.substring(0, t.length - suffix.length - 1)] ?? t.substring(0, t.length - suffix.length - 1)} = require('${basePath + '/' + charaPath + '/' + t}');`,
+        );
+    read_and_write_generated(
+      join(p, 'entry.js'),
+      '//',
+      `class ${className} {\n${entries.join('\n')}`,
+    );
   }
-  const suffix = cid + Object.keys(suffixDict)[0];
-  if (files.some((t) => !t.endsWith(suffix))) {
-    console.error(cid, 'suffix error!');
-    continue;
-  }
-  files.sort(
-    (a, b) =>
-      order.indexOf(a.substring(0, a.length - suffix.length - 1)) -
-      order.indexOf(b.substring(0, b.length - suffix.length - 1)),
-  );
-  const className = 'I18nKojo' + kojoId;
-  const entries = suffix.endsWith('js')
-    ? files.map(
-        (t) =>
-          `${name[t.substring(0, t.length - suffix.length - 1)] ?? t.substring(0, t.length - suffix.length - 1)} = proxy_kojo_js(require('${basePath + '/' + charaPath + '/' + t}'));`,
-      )
-    : files.map(
-        (t) =>
-          `/** @type {KojoFile} */\n${name[t.substring(0, t.length - suffix.length - 1)] ?? t.substring(0, t.length - suffix.length - 1)} = require('${basePath + '/' + charaPath + '/' + t}');`,
-      );
-  read_and_write_generated(
-    join(p, 'entry.js'),
-    '//',
-    `class ${className} {\n${entries.join('\n')}`,
-  );
   // console.log(cid, className, charaPath);
 }
 

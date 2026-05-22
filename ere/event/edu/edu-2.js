@@ -588,7 +588,7 @@ module.exports = class extends CustomizedEdu {
       await print_title_with_kojo.ending(
         this.#kojo,
         'crazy_fan',
-        get_chara_talk(2),
+        get_chara_talk(this.id),
         this.#dict,
       );
     } else {

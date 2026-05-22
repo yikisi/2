@@ -210,7 +210,9 @@ module.exports = {
    * @param {string} callname 丸善斯基对玩家的称呼
    */
   select_after_recruit(maru, you, callname) {
-    maru.say(`嗨～${you.sex_code !== 1 ? '美眉' : '帅锅'}我是${maru.name}哦。`);
+    maru.say(
+      `嗨～${you.sex_code !== 1 ? '美眉' : '帅锅'}我是 ${maru.name} 哦。`,
+    );
     maru.say(
       `希望能在赛场上让憧憬着我的后辈们看到${maru.elder_sibling_sex_title}我帅气的背影呢。`,
     );
@@ -447,7 +449,7 @@ module.exports = {
         () =>
           maru.say_and_wait(
             `可爱的后辈们如同春天开放的花朵一样弥散着香气呢，我希望${
-              maru.sex_code - 1 ? '她' : '他'
+              maru.sex
             }们的香气能够弥漫到这个世界的每一处角落。`,
           ),
       );
@@ -863,7 +865,7 @@ module.exports = {
     );
     await maru.say_and_wait(
       `听说当神社内挂着的铃铛会响起的时候，虔诚祈祷的人们会得到三女神的祝福，${
-        maru.sex_code - 1 ? '美眉' : '帅锅'
+        maru.sex_code !== 1 ? '美眉' : '帅锅'
       }我也想试试看呢。`,
     );
     await era.printAndWait(

@@ -97,7 +97,7 @@ module.exports = class extends CustomizedLove {
         if (era.get('flag:声望不足替换')) {
           era.set('flag:当前声望', 0);
         } else {
-          era.set('flag:强制BE', 32);
+          era.set('flag:强制BE', this.id);
         }
     }
   }

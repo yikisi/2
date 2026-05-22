@@ -4,7 +4,8 @@ const { sys_change_attr_and_print } = require('#/system/sys-calc-base-cflag');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const { attr_enum } = require('#/data/train-const');
+const { attr_enum, base_attr_list } = require('#/data/train-const');
+
 const { i18n } = require('#/i18n/selector');
 
 /**
@@ -25,12 +26,9 @@ function get_attr_and_print_in_event(
   if (!skip_line_break) {
     era.println();
   }
-  if (attr_change.length > 5) {
-    attr_change = attr_change.slice(0, 5);
-  }
-  let buffer = attr_change
-    .map((e, i) => sys_change_attr_and_print(cid, i, e))
-    .filter((e) => e.length > 0);
+  let buffer = base_attr_list
+    .map((i) => sys_change_attr_and_print(cid, i, attr_change[i] ?? 0))
+    .filter(({ length }) => length > 0);
   let ret;
   if ((pt_change ||= 0) > 0) {
     buffer.push([
