@@ -62,6 +62,7 @@ class ConditionParams {
   is_temptation;
   is_tight_track;
   is_used_skill_id;
+  is_used_skill_id_with_detail_one;
   item;
   lane_type;
   last_straight_random;

@@ -232,6 +232,7 @@ module.exports = class extends I18nClothes {
   111001 = 'Future Weaver';
   111026 = 'Twinbell Queen';
   111101 = 'Inherited Hope';
+  111201 = 'Daring Darling!';
   111301 = 'Assorted Cuteness♡';
   111401 = 'Heroína Inocente';
   111501 = '総攬';
@@ -252,6 +253,7 @@ module.exports = class extends I18nClothes {
   113202 = 'Love-Linked Aster';
   113301 = '陸離の編纂者';
   113501 = 'Sunlit Outsider';
+  113601 = 'Divine Raiment';
   113701 = 'Miracle Author';
   114301 = 'Lueur Angélique';
   // GENERATED END

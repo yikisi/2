@@ -144,9 +144,12 @@ const icon2skill_color = {
 };
 
 const skill2skill_color = {
+  101121: get_skill_color(skill_name_enum.speed, skill_border_enum.spe),
   101181: get_skill_color(skill_name_enum.speed, skill_border_enum.spe),
   101301: get_skill_color(skill_name_enum.speed, skill_border_enum.spe),
+  101361: get_skill_color(skill_name_enum.speed, skill_border_enum.spe),
   101431: get_skill_color(skill_name_enum.speed, skill_border_enum.spe),
+  203321: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
   203401: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
   204271: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
   204272: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
@@ -154,13 +157,18 @@ const skill2skill_color = {
   204311: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
   204312: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
   204322: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
+  204331: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
+  204332: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
   204342: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
   204351: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
   204352: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
   204362: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
   204372: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
-  901301: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
+  204412: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
+  901121: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
   901181: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
+  901301: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
+  901361: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
   901431: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
   114301111: get_skill_color(skill_name_enum.speed, skill_border_enum.evol),
   114301211: get_skill_color(skill_name_enum.speed, skill_border_enum.evol),
@@ -193,6 +201,10 @@ const used_skill_condition_dict = {
     '(args)=>args.order_rate<=70&&args.phase_firsthalf===1&&args.is_used_skill_id.includes(202051)',
   113701111:
     '(args)=>args.running_style===1&&args.phase_laterhalf_random===0&&args.is_used_skill_id.includes(202051)',
+};
+const used_skill_condition_dict_2 = {
+  101361:
+    '(args)=>args.is_activate_other_skill_detail===1&&args.run_at_full_speed_random===1&&args.is_used_skill_id_with_detail_one.includes(204452)',
 };
 const ability_tag_dict = {
   203781:
@@ -615,7 +627,7 @@ async function chara_skill() {
       sbuffer += `${e.category},`;
       sbuffer += `${e.grade_value},`;
       sbuffer += `[${parse_condition(e.precondition_1, true)},${parse_condition(e.precondition_2, true)}],`;
-      sbuffer += `[${used_skill_condition_dict[id] || parse_condition(e.condition_1)},${parse_condition(e.condition_2)}],`;
+      sbuffer += `[${used_skill_condition_dict[id] || parse_condition(e.condition_1)},${used_skill_condition_dict_2[id] || parse_condition(e.condition_2)}],`;
       sbuffer += `[${e.float_ability_time_1 / 10000},${e.float_ability_time_2 / 10000}],`;
       sbuffer += `[${e.float_cooldown_time_1 / 10000},${e.float_cooldown_time_2 / 10000}],`;
       sbuffer += `[${get_ability_time_usage(e.ability_time_usage_1)},${get_ability_time_usage(e.ability_time_usage_2)}],`;

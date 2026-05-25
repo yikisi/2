@@ -60,7 +60,6 @@ function sub_simulate_skill(
   const top_loc_ir = list_in_race[0].race.location;
   const con_len = top_loc_ir - list_in_race.at(-1).race.location || 1;
   const rs_temp = [0, 0, 0, 0];
-
   // 模拟技能触发
   list_in_race.forEach((uma, i, l) => {
     const cur_lane = race_info.lanes.find(
@@ -84,7 +83,6 @@ function sub_simulate_skill(
       top_lane = cur_lane;
       top_slope = uma.race.slope;
     }
-
     dynamic_table.at(-1).push(
       get_table_row(
         uma,
@@ -139,12 +137,10 @@ function sub_simulate_skill(
     statistics.loc[uma.index_race].data.push(uma.race.location - top_loc_ir);
     statistics.speed[uma.index_race].data.push(uma.race.velocityReal);
     statistics.stamina[uma.index_race].data.push(uma.race.stamina);
-
     uma.race.conditionParams.furlong = 0;
     if (uma.race.location < 800) {
       uma.race.conditionParams.furlong = Math.floor(uma.race.location / 200);
     }
-
     while (
       uma.race.conditionParams.phase < 3 &&
       uma.race.location >= race_info.phases[uma.race.conditionParams.phase]
@@ -182,7 +178,6 @@ function sub_simulate_skill(
       uma.race.conditionParams.is_temptation = 1;
       uma.race.conditionParams.temptation_count++;
     }
-
     uma.race.conditionParams.accumulatetime = timer;
     if (i === 0) {
       uma.race.conditionParams.blocked_front = 0;
@@ -674,6 +669,13 @@ function sub_simulate_skill(
             case 203061:
             case 203071:
               uma.race.conditionParams.is_used_skill_id.push(skill.data.id);
+              break;
+            case 204452:
+              if (i === 0) {
+                uma.race.conditionParams.is_used_skill_id_with_detail_one.push(
+                  skill.data.id,
+                );
+              }
           }
           uma.race.conditionParams.is_activate_any_skill = 1;
           skill.count[i]++;
