@@ -1605,10 +1605,10 @@ module.exports = {
      * @param {CharaTalk} chara 卷入事件的角色，不会是爱丽速子
      * @param {CharaTalk} tachyon 爱丽速子
      * @param {PrintedSpan} callname 角色对你的称呼
-     * @param {PrintedSpan} t_call_y 爱丽速子对你的称呼
+     * @param {PrintedSpan} callname_32 爱丽速子对你的称呼
      * @param {string[]} med_list 药水列表，是 名称 × 数量 的形式
      */
-    const f = async (you, chara, tachyon, callname, t_call_y, med_list) => {
+    const f = async (you, chara, tachyon, callname, callname_32, med_list) => {
       await printAndWait([
         you.get_colored_name(),
         ' 照常起来，又发现身体不太对劲。',
@@ -2193,7 +2193,7 @@ module.exports = {
           you.get_colored_name(),
           ' 的大腿，心里暗自期待。',
         ]);
-        await tachyon.say_and_wait(['呜呜呜，不要啊，', t_call_y, '。']);
+        await tachyon.say_and_wait(['呜呜呜，不要啊，', callname_32, '。']);
         await printAndWait([
           you.get_colored_name(),
           ' 向着解药走去，不小心用脚踢到了',

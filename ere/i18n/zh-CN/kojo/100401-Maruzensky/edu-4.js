@@ -7,6 +7,10 @@ const era = require('#/era-electron');
 const { buff_colors } = require('#/data/color-const');
 
 module.exports = {
+  /**
+   * @param {CharaTalk} maru 丸善斯基
+   * @param {string} train 训练的基础属性（已经过 i18n 翻译）
+   */
   get_ts_content(maru, train) {
     era.print([maru.get_colored_name(), ' 的 ', train, ' 训练顺利结束了']);
   },

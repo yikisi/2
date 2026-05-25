@@ -839,9 +839,9 @@ module.exports = {
      * @param {CharaTalk} coffee 曼城茶座
      * @param {CharaTalk} you 玩家
      * @param {PrintedSpan} callname 爱丽速子对玩家的称呼
-     * @param {PrintedSpan} c_call_y 曼城茶座对玩家的称呼
+     * @param {PrintedSpan} callname_25 曼城茶座对玩家的称呼
      */
-    const f = async (tachyon, coffee, you, callname, c_call_y) => {
+    const f = async (tachyon, coffee, you, callname, callname_25) => {
       await tachyon.say_and_wait(['哈啊……哈啊……']);
       era.println();
 
@@ -937,7 +937,7 @@ module.exports = {
       await tachyon.print_and_wait(['然后也请变成，只属于我的……']);
       era.println();
 
-      await coffee.say_and_wait(['嗯……啊……', c_call_y, '……请……']);
+      await coffee.say_and_wait(['嗯……啊……', callname_25, '……请……']);
       era.println();
 
       await tachyon.print_and_wait(['心中的妄想，被隔壁实验室的娇吟声打断。']);
@@ -953,7 +953,7 @@ module.exports = {
       await tachyon.print_and_wait(['黑发金瞳，不变的却是眼中充满的爱意。']);
       era.println();
 
-      await coffee.say_and_wait([c_call_y, '……请将我……填满。']);
+      await coffee.say_and_wait([callname_25, '……请将我……填满。']);
       era.println();
 
       await tachyon.print_and_wait([
@@ -1025,7 +1025,7 @@ module.exports = {
       await tachyon.print_and_wait(['所以住手……']);
       era.println();
 
-      await coffee.say_and_wait([c_call_y, '……用力……请更用力的……爱我。']);
+      await coffee.say_and_wait([callname_25, '……用力……请更用力的……爱我。']);
       era.println();
 
       await tachyon.print_and_wait(['啊啊……']);
@@ -1072,7 +1072,7 @@ module.exports = {
      * @param {CharaTalk} you 玩家
      * @param {PrintedSpan} callname 爱丽速子对玩家的称呼
      * @param {PrintedSpan} t_call_c 爱丽速子对曼城茶座的称呼
-     * @param {PrintedSpan} c_call_y 曼城茶座对玩家的称呼
+     * @param {PrintedSpan} callname_25 曼城茶座对玩家的称呼
      * @param {PrintedSpan} c_call_t 曼城茶座对爱丽速子的称呼
      * @param {string} y_call_t 玩家对爱丽速子的称呼
      * @param {PrintedSpan} item 「嫁衣」道具
@@ -1083,7 +1083,7 @@ module.exports = {
       you,
       callname,
       t_call_c,
-      c_call_y,
+      callname_25,
       c_call_t,
       y_call_t,
       item,
@@ -1142,7 +1142,7 @@ module.exports = {
         '喊的那么大声……也就只有不是',
         tachyon.uma_sex_title,
         '的 ',
-        c_call_y,
+        callname_25,
         ' 会没发现吧。',
       ]);
       era.println();
@@ -1163,7 +1163,7 @@ module.exports = {
       await tachyon.say_and_wait([callname, ' ', you.sex, '……']);
       await coffee.say_and_wait([
         '不用担心……我和 ',
-        c_call_y,
+        callname_25,
         ' 说了，我是出来拿东西的。',
       ]);
       await coffee.say_and_wait([
@@ -1243,7 +1243,7 @@ module.exports = {
       await tachyon.say_and_wait([t_call_c, '……']);
       await coffee.say_and_wait([
         '放心吧……朋友已经帮忙盖住了 ',
-        c_call_y,
+        callname_25,
         ' 的眼睛和耳朵……现在的',
         you.sex,
         '看不见，也听不见我们。',
@@ -1393,12 +1393,12 @@ module.exports = {
 
         await coffee.say_and_wait([
           '今天……就先让给她吧……',
-          c_call_y,
+          callname_25,
           '，请好好安慰她直到她满足吧。',
         ]);
         await coffee.say_and_wait([
           '相对的……今天拿到了很有用的药呢……',
-          c_call_y,
+          callname_25,
           '，明天请要给予我，同等的爱哦。',
         ]);
         await era.printAndWait([
@@ -1439,7 +1439,7 @@ module.exports = {
         await coffee.say_and_wait(['……如果这就是你的选择的话。']);
         await coffee.say_and_wait([
           '我没什么关系就是……毕竟我也不想，把 ',
-          c_call_y,
+          callname_25,
           ' 让给其他人。',
         ]);
         await coffee.say_and_wait(['只是……真是，可悲。']);
@@ -1458,7 +1458,7 @@ module.exports = {
         await tachyon.print_and_wait(['自己竟然……露出了笑容。']);
         era.println();
 
-        await coffee.say_and_wait(['抱歉……', c_call_y, '，让您久等了。']);
+        await coffee.say_and_wait(['抱歉……', callname_25, '，让您久等了。']);
         await coffee.say_and_wait([
           '嗯？没什么……只是，想起之前委托 ',
           c_call_t,
@@ -1471,7 +1471,7 @@ module.exports = {
         ]);
         await coffee.say_and_wait([
           '咕啾……啾噜……噗哈……',
-          c_call_y,
+          callname_25,
           '……请在……嘴里出来吧，这样正好能够……和药一起……',
         ]);
         await coffee.say_and_wait([
@@ -1497,7 +1497,7 @@ module.exports = {
         await tachyon.print_and_wait(['绝对，不会是其中的任何一个吧。']);
         era.println();
 
-        await coffee.say_and_wait([c_call_y, '……', c_call_y, '……']);
+        await coffee.say_and_wait([callname_25, '……', callname_25, '……']);
         era.println();
 
         await tachyon.print_and_wait([
@@ -1522,7 +1522,7 @@ module.exports = {
         await tachyon.print_and_wait(['被妓女都不如的存在按在身下骑的模样。']);
         era.println();
 
-        await coffee.say_and_wait(['呐……', c_call_y, '……不，训练员君……']);
+        await coffee.say_and_wait(['呐……', callname_25, '……不，训练员君……']);
         era.println();
 
         await tachyon.print_and_wait([
@@ -1537,7 +1537,7 @@ module.exports = {
 
         await coffee.say_and_wait([
           '哦呀，',
-          c_call_y,
+          callname_25,
           '……怎么，忽然变得这么用力呢？',
         ]);
         await coffee.say_and_wait(['难道……是透过我，看见了什么人吗？']);
@@ -1560,7 +1560,7 @@ module.exports = {
         await tachyon.print_and_wait([t_call_c, '，你——————。']);
         era.println();
 
-        await coffee.say_and_wait(['很过分吧，', c_call_y, '。']);
+        await coffee.say_and_wait(['很过分吧，', callname_25, '。']);
         era.println();
 
         await tachyon.print_and_wait(['忽然，', t_call_c, ' 的声音恢复原状。']);
@@ -1578,7 +1578,7 @@ module.exports = {
 
         await coffee.say_and_wait([
           '明明，',
-          c_call_y,
+          callname_25,
           ' 对 ',
           c_call_t,
           ' 奉献了那么多。',
@@ -1590,7 +1590,7 @@ module.exports = {
         ]);
         await coffee.say_and_wait([
           '但是……她还是在我提出，『这个药是要和 ',
-          c_call_y,
+          callname_25,
           ' 一起用的』时……干脆地把药交出来了哦。',
         ]);
         era.println();
@@ -1607,7 +1607,7 @@ module.exports = {
         era.println();
 
         await coffee.say_and_wait(['唔……忽然……忽然这么用力……❤️。']);
-        await coffee.say_and_wait(['呐……', c_call_y, '……里面……在里面……']);
+        await coffee.say_and_wait(['呐……', callname_25, '……里面……在里面……']);
         await coffee.say_and_wait([
           c_call_t,
           ' 不愿意的，我都会让您做……',
@@ -1716,7 +1716,7 @@ module.exports = {
 
         await coffee.say_and_wait([
           '她是……一名同样，憧憬着 ',
-          c_call_y,
+          callname_25,
           ' 的孩子。',
         ]);
         await coffee.say_and_wait([
@@ -1724,7 +1724,7 @@ module.exports = {
         ]);
         await coffee.say_and_wait([
           '还是说……',
-          c_call_y,
+          callname_25,
           ' 想看看她的模样吗？',
         ]);
         era.println();
@@ -1737,7 +1737,7 @@ module.exports = {
         era.println();
 
         await you.say_and_wait('不……如果不想要被看到的话……还是不要勉强吧。');
-        await coffee.say_and_wait([c_call_y, '……真温柔呢……']);
+        await coffee.say_and_wait([callname_25, '……真温柔呢……']);
         era.println();
 
         await tachyon.print_and_wait(['是啊……']);
@@ -1776,12 +1776,12 @@ module.exports = {
 
         await coffee.say_and_wait([
           '不过……这孩子真的很喜欢 ',
-          c_call_y,
+          callname_25,
           ' 呢。',
         ]);
         await coffee.say_and_wait([
           '所以，',
-          c_call_y,
+          callname_25,
           ' 不介意的话……可以让这孩子，在旁边看着吗？',
         ]);
         await coffee.say_and_wait([

@@ -1,941 +1,772 @@
-/**
- * @file 醒目飞鹰 - 育成
- * @author 黑奴一号
- */
 const era = require('#/era-electron');
 
+const { sys_get_callname } = require('#/system/sys-calc-chara-others');
+
 const CustomizedEdu = require('#/event/edu/edu-common');
-const falcon_crazy_fan_end = require('#/event/edu/edu-events-46/crazy-fan-end');
-const falcon_race_end = require('#/event/edu/edu-events-46/race-end');
-const falcon_race_start = require('#/event/edu/edu-events-46/race-start');
 const { add_event } = require('#/event/queue');
-const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
+const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
+const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const FalconEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-46');
 const event_hooks = require('#/data/event/event-hooks');
-const recruit_flags = require('#/data/event/recruit-flags');
-const { attr_enum, attr_names, fumble_result } = require('#/data/train-const');
+const { location_enum } = require('#/data/locations');
+const { race_enum } = require('#/data/race/race-const');
+const { attr_enum, fumble_result } = require('#/data/train-const');
 
-/** @type {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},number,number,FalconEduMarks,EventObject):Promise>} */
-const week_start_handlers = {};
-
-[
-  require('#/event/edu/edu-events-46/week-start-0'),
-  require('#/event/edu/edu-events-46/week-start-1'),
-  require('#/event/edu/edu-events-46/week-start-2'),
-].forEach((f) => f(week_start_handlers));
-
-/** @type {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},number,number,FalconEduMarks,EventObject):Promise>} */
-const week_end_handlers = {};
-
-[
-  require('#/event/edu/edu-events-46/week-end'),
-  require('#/event/edu/edu-events-46/week-end-1'),
-  require('#/event/edu/edu-events-46/week-end-2'),
-].forEach((f) => f(week_end_handlers));
+const di18n = require('#/i18n/extended-def');
+const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends CustomizedEdu {
-  async race_start(falcon, me, callname, hook, extra_flag) {
-    return await falcon_race_start(hook, extra_flag);
+  get #kojo() {
+    return i18n().kojo[this.id].edu;
   }
 
-  async race_end(falcon, me, callname, hook, extra_flag) {
-    return await falcon_race_end(hook, extra_flag);
-  }
-
-  async week_start(falcon, me, callname, hook, extra_flag, event_object) {
-    if (week_start_handlers[event_object.arg] !== void 0) {
-      const flags = { wait_flag: false },
-        ret = await week_start_handlers[event_object.arg].call(
-          this,
+  async race_start(falcon, me, callname, hook, extra) {
+    const edu_weeks = era.get(`cflag:${this.id}:育成回合计时`);
+    let _default = true;
+    switch (extra.race) {
+      case race_enum.begin_race:
+        if (edu_weeks < 48) {
+          _default = false;
+          await print_title_with_kojo(
+            this.#kojo,
+            'before_begin_race',
+            falcon,
+            me,
+            callname,
+          );
+        }
+        break;
+      case race_enum.sats_sho:
+        _default = false;
+        await print_title_with_kojo(
+          this.#kojo,
+          'before_sats_sho',
           falcon,
           me,
           callname,
-          flags,
-          new FalconEduMarks(),
-          event_object,
         );
-      flags.wait_flag && (await era.waitAnyKey());
-      return ret;
+        break;
+      case race_enum.japa_dir:
+        _default = false;
+        await print_title_with_kojo(
+          this.#kojo,
+          'before_japa_dir',
+          falcon,
+          get_chara_talk(301),
+          me,
+          callname,
+        );
+        break;
+      case race_enum.jbc_cls:
+        _default = false;
+        await print_title_with_kojo(
+          this.#kojo,
+          edu_weeks < 96 ? 'before_jbc_cls_c' : 'before_jbc_cls_s',
+          falcon,
+          me,
+          callname,
+        );
+        break;
+      case race_enum.toky_dai:
+        _default = false;
+        await print_title_with_kojo(
+          this.#kojo,
+          edu_weeks < 96 ? 'before_toky_dai_c' : 'before_toky_dai_s',
+          falcon,
+          me,
+          callname,
+        );
+        break;
+      case race_enum.febr_sta:
+        _default = false;
+        await print_title_with_kojo(this.#kojo, 'before_febr_sta', falcon);
+        break;
+      case race_enum.teio_sho:
+        _default = false;
+        await print_title_with_kojo(
+          this.#kojo,
+          'before_teio_sho',
+          falcon,
+          me,
+          callname,
+        );
+        break;
+      case race_enum.cham_cup:
+        if (edu_weeks > 96) {
+          _default = false;
+          await print_title_with_kojo(
+            this.#kojo,
+            'before_cham_cup_s',
+            falcon,
+            me,
+          );
+        }
     }
-    return await super.week_start(
+    if (_default) {
+      return await super.race_start(falcon, me, callname, hook, extra);
+    }
+  }
+
+  async race_end(falcon, me, callname, hook, extra) {
+    const edu_weeks = era.get(`cflag:${this.id}:育成回合计时`);
+    let _default = true;
+    switch (extra.race) {
+      case race_enum.begin_race:
+        if (edu_weeks < 48 && extra.rank === 1) {
+          await print_title_with_kojo(
+            this.#kojo,
+            'begin_race_win',
+            falcon,
+            me,
+            callname,
+          );
+        }
+        break;
+      case race_enum.sats_sho:
+        _default = false;
+        if (extra.rank === 1) {
+          await print_title_with_kojo(
+            this.#kojo,
+            'sats_sho_win',
+            falcon,
+            get_chara_talk(2),
+            me,
+            callname,
+          );
+        } else {
+          await print_title_with_kojo(this.#kojo, 'sats_sho_lose', falcon, me);
+        }
+        break;
+      case race_enum.japa_dir:
+        if (extra.rank === 1) {
+          await print_title_with_kojo(
+            this.#kojo,
+            'japa_dir_win',
+            falcon,
+            me,
+            callname,
+          );
+        }
+        break;
+      case race_enum.jbc_cls:
+        if (extra.rank === 1) {
+          _default = false;
+          await print_title_with_kojo(
+            this.#kojo,
+            edu_weeks < 96 ? 'jbc_cls_win_c' : 'jbc_cls_win_s',
+            falcon,
+            me,
+            callname,
+          );
+        }
+        break;
+      case race_enum.toky_dai:
+        if (extra.rank === 1) {
+          _default = false;
+          await print_title_with_kojo(
+            this.#kojo,
+            edu_weeks < 96 ? 'toky_dai_win_c' : 'toky_dai_win_s',
+            falcon,
+            me,
+            callname,
+          );
+        }
+        break;
+      case race_enum.febr_sta:
+        if (extra.rank === 1) {
+          _default = false;
+          await print_title_with_kojo(
+            this.#kojo,
+            'febr_sta_win',
+            falcon,
+            me,
+            callname,
+          );
+        }
+        break;
+      case race_enum.teio_sho:
+        _default = false;
+        await print_title_with_kojo(
+          this.#kojo,
+          'teio_sho_win',
+          falcon,
+          get_chara_talk(4),
+          me,
+          callname,
+        );
+        break;
+      case race_enum.cham_cup:
+        if (edu_weeks > 96 && extra.rank === 1) {
+          await print_title_with_kojo(
+            this.#kojo,
+            'cham_cup_win_s',
+            falcon,
+            me,
+            callname,
+          );
+        }
+    }
+    if (_default) {
+      return await super.race_end(falcon, me, callname, hook, extra);
+    }
+  }
+
+  async week_start(falcon, me, callname, hook, extra, ebj) {
+    let wait = false;
+    switch (ebj?.arg) {
+      case 'next_beginning':
+        await print_title_with_kojo(this.#kojo, ebj.arg, falcon, me, callname);
+        break;
+      case 9:
+        await print_title_with_kojo(
+          this.#kojo,
+          'ws_9',
+          falcon,
+          get_chara_talk(301),
+          me,
+          callname,
+        );
+        break;
+      case 18:
+        await print_title_with_kojo(this.#kojo, 'ws_18', falcon, me, callname);
+        wait = all_reward_in_event(this.id, {
+          attr: new Array(5).fill(10),
+          pt: 10,
+        });
+        break;
+      case 24:
+        await print_title_with_kojo(this.#kojo, 'ws_24', falcon, me, callname);
+        wait = all_reward_in_event(this.id, { attr: [0, 0, 10] });
+        break;
+      case 30:
+        await print_title_with_kojo(this.#kojo, 'ws_30', falcon, me, callname);
+        wait = all_reward_in_event(this.id, {
+          attr: new Array(5).fill(10),
+          pt: 10,
+        });
+        break;
+      case 40:
+        await print_title_with_kojo(this.#kojo, 'ws_40', falcon, me, callname);
+        wait = all_reward_in_event(this.id, {
+          attr: new Array(5).fill(10),
+          pt: 10,
+        });
+        break;
+      case 47 + 1:
+        era.set('cflag:46:节日事件标记', 0);
+        switch (
+          (
+            await print_title_with_kojo(
+              this.#kojo,
+              'ws_47_1',
+              falcon,
+              me,
+              callname,
+            )
+          )[0]
+        ) {
+          case 1:
+            wait = all_reward_in_event(this.id, {
+              attr: new Array(5).fill(10),
+            });
+            break;
+          case 2:
+            wait = all_reward_in_event(this.id, { pt: 100 });
+            break;
+          case 3:
+            wait = all_reward_in_event(this.id, { base: [600] });
+        }
+        break;
+      case 47 + 6:
+        era.set('cflag:46:节日事件标记', 0);
+        await print_title_with_kojo(
+          this.#kojo,
+          'ws_47_6',
+          falcon,
+          me,
+          callname,
+        );
+        break;
+      case 47 + 9:
+        await print_title_with_kojo(
+          this.#kojo,
+          'ws_47_9',
+          falcon,
+          get_chara_talk(2),
+          me,
+          callname,
+        );
+        break;
+      case 47 + 15:
+        await print_title_with_kojo(
+          this.#kojo,
+          'ws_47_15',
+          falcon,
+          me,
+          callname,
+        );
+        break;
+      case 47 + 29:
+        if (
+          era.get('cflag:0:位置') !== location_enum.beach ||
+          era.get('cflag:0:位置') !== era.get('cflag:46:位置')
+        ) {
+          add_event(hook.hook, ebj);
+          return;
+        }
+        await print_title_with_kojo(
+          this.#kojo,
+          'ws_47_29',
+          falcon,
+          me,
+          callname,
+        );
+        break;
+      case 47 + 30:
+        if (
+          era.get('cflag:0:位置') !== location_enum.beach ||
+          era.get('cflag:0:位置') !== era.get('cflag:46:位置')
+        ) {
+          add_event(hook.hook, ebj);
+          return;
+        }
+        era.set('cflag:46:节日事件标记', 0);
+        await print_title_with_kojo(
+          this.#kojo,
+          'ws_47_30',
+          falcon,
+          me,
+          callname,
+        );
+        break;
+      case 47 + 39:
+        await print_title_with_kojo(
+          this.#kojo,
+          'ws_47_39',
+          falcon,
+          me,
+          callname,
+        );
+        break;
+      case 47 + 40:
+        await print_title_with_kojo(
+          this.#kojo,
+          'ws_47_40',
+          falcon,
+          me,
+          callname,
+        );
+        break;
+      case 47 + 41:
+        await print_title_with_kojo(
+          this.#kojo,
+          'ws_47_41',
+          falcon,
+          me,
+          callname,
+        );
+        break;
+      case 47 + 42:
+        await print_title_with_kojo(
+          this.#kojo,
+          'ws_47_42',
+          falcon,
+          me,
+          callname,
+        );
+        break;
+      case 47 + 48:
+        era.set('cflag:46:节日事件标记', 0);
+        await print_title_with_kojo(
+          this.#kojo,
+          'ws_47_48',
+          falcon,
+          me,
+          callname,
+        );
+        break;
+      case 95 + 6:
+        era.set('cflag:46:节日事件标记', 0);
+        await print_title_with_kojo(
+          this.#kojo,
+          'ws_95_6',
+          falcon,
+          me,
+          callname,
+        );
+        break;
+      case 95 + 9:
+        await print_title_with_kojo(
+          this.#kojo,
+          'ws_95_9',
+          falcon,
+          me,
+          callname,
+        );
+        break;
+      case 95 + 14:
+        era.set('cflag:46:节日事件标记', 0);
+        await print_title_with_kojo(this.#kojo, 'ws_95_14', falcon, me);
+        break;
+      case 95 + 18:
+        await print_title_with_kojo(
+          this.#kojo,
+          'ws_95_18',
+          falcon,
+          me,
+          callname,
+        );
+        break;
+      case 95 + 29:
+        if (
+          era.get('cflag:46:位置') !== location_enum.beach ||
+          era.get('cflag:46:位置') !== era.get('cflag:0:位置')
+        ) {
+          add_event(event_hooks.week_start, ebj);
+          return;
+        }
+        await print_title_with_kojo(
+          this.#kojo,
+          'ws_95_29',
+          falcon,
+          me,
+          callname,
+        );
+        break;
+      case 95 + 30:
+        if (
+          era.get('cflag:46:位置') !== location_enum.beach ||
+          era.get('cflag:46:位置') !== era.get('cflag:0:位置')
+        ) {
+          add_event(event_hooks.week_start, ebj);
+          return;
+        }
+        era.set('cflag:46:节日事件标记', 0);
+        await print_title_with_kojo(
+          this.#kojo,
+          'ws_95_30',
+          falcon,
+          me,
+          callname,
+        );
+        break;
+      case 95 + 48:
+        era.set('cflag:46:节日事件标记', 0);
+        await print_title_with_kojo(
+          this.#kojo,
+          'ws_95_48',
+          falcon,
+          me,
+          callname,
+        );
+        break;
+      default:
+        return await super.week_start(falcon, me, callname, hook, extra, ebj);
+    }
+    wait && (await era.waitAnyKey());
+  }
+
+  async week_end(falcon, me, callname, hook, extra, ebj) {
+    let wait;
+    switch (ebj?.arg) {
+      case 'beginning':
+        await print_title_with_kojo(
+          this.#kojo,
+          ebj.arg,
+          falcon,
+          get_chara_talk(37),
+          me,
+          sys_get_callname(37, 0),
+        );
+        add_event(event_hooks.week_start, ebj.set_arg('next_beginning'));
+        break;
+      case 34:
+        await print_title_with_kojo(this.#kojo, 'we_34', falcon, me);
+        break;
+      case 47 + 15:
+        await print_title_with_kojo(
+          this.#kojo,
+          'we_47_15',
+          falcon,
+          me,
+          callname,
+        );
+        break;
+      case 47 + 21:
+        await print_title_with_kojo(
+          this.#kojo,
+          'we_47_21',
+          falcon,
+          me,
+          callname,
+        );
+        break;
+      case 47 + 32:
+        if (
+          era.get('cflag:0:位置') !== location_enum.beach ||
+          era.get('cflag:0:位置') !== era.get('cflag:46:位置')
+        ) {
+          add_event(hook.hook, ebj);
+          return;
+        }
+        await print_title_with_kojo(
+          this.#kojo,
+          'we_47_32',
+          falcon,
+          me,
+          callname,
+        );
+        break;
+      case 95 + 10:
+        await print_title_with_kojo(
+          this.#kojo,
+          'we_95_10',
+          falcon,
+          me,
+          callname,
+        );
+        break;
+      case 95 + 17:
+        await print_title_with_kojo(
+          this.#kojo,
+          'we_95_17',
+          falcon,
+          me,
+          callname,
+        );
+        break;
+      case 95 + 23:
+        await print_title_with_kojo(
+          this.#kojo,
+          'we_95_23',
+          falcon,
+          get_chara_talk(4),
+          me,
+          callname,
+          sys_get_callname(4, 0),
+        );
+        break;
+      case 95 + 32:
+        if (
+          era.get('cflag:0:位置') !== location_enum.beach ||
+          era.get('cflag:0:位置') !== era.get('cflag:46:位置')
+        ) {
+          add_event(hook.hook, ebj);
+          return;
+        }
+        await print_title_with_kojo(
+          this.#kojo,
+          'we_95_32',
+          falcon,
+          me,
+          callname,
+        );
+        break;
+      case 95 + 37:
+        await print_title_with_kojo(
+          this.#kojo,
+          'we_95_37',
+          falcon,
+          get_chara_talk(301),
+          me,
+          callname,
+        );
+        break;
+      case 95 + 38:
+        await print_title_with_kojo(this.#kojo, 'we_95_38', falcon, me);
+        break;
+      case 95 + 40:
+        await print_title_with_kojo(
+          this.#kojo,
+          'we_95_40',
+          falcon,
+          me,
+          callname,
+        );
+        break;
+      case 95 + 45:
+        await print_title_with_kojo(
+          this.#kojo,
+          'we_95_45',
+          falcon,
+          me,
+          callname,
+        );
+        break;
+      case 95 + 47:
+        await print_title_with_kojo(
+          this.#kojo,
+          'we_95_47',
+          falcon,
+          me,
+          callname,
+        );
+    }
+    wait && (await era.waitAnyKey());
+  }
+
+  train_success_content(falcon, me, callname, hook, extra) {
+    this.#kojo.get_ts_content(falcon, di18n.n_attr[extra.train]);
+  }
+
+  async train_success_add(falcon, me, callname, hook, extra) {
+    return (
+      (
+        await print_title_with_kojo(this.#kojo, 'ts_add', falcon, me, callname)
+      )[0] === 1
+    );
+  }
+
+  async train_fail(falcon, me, callname, hook, extra) {
+    if (extra.train === attr_enum.intelligence) {
+      return;
+    }
+    extra.args = extra.fumble ? fumble_result.fumble : fumble_result.fail;
+    const key = extra.fumble ? 'train_fumble' : 'train_fail';
+    const fail_again = Math.random() < extra.args.ratio.fail_again;
+    const [ret] = await print_title_with_kojo(
+      this.#kojo,
+      key,
       falcon,
       me,
       callname,
-      hook,
-      extra_flag,
-      event_object,
+      fail_again,
     );
-  }
-
-  async week_end(falcon, me, callname, hook, extra_flag, event_object) {
-    if (week_end_handlers[event_object.arg]) {
-      const flags = { wait_flag: false };
-      const ret = await week_end_handlers[event_object.arg](
-        falcon,
-        me,
-        callname,
-        flags,
-        new FalconEduMarks(),
-        era.get('relation:46:0'),
-        era.get('love:46'),
-        event_object,
-      );
-      flags.wait_flag && (await era.waitAnyKey());
-      return ret;
-    }
-  }
-
-  async train_success(falcon, me, callname, hook, extra_flag) {
-    era.print(
-      `${falcon.name} 的 ${attr_names[extra_flag.train]} 训练顺利成功了……`,
-    );
-    if (Math.random() < 0.3 * extra_flag.stamina_ratio) {
-      await print_event_name('额外的自主训练', falcon);
-      await era.printAndWait(`预定的计划全部结束之后`);
-      await falcon.say_and_wait(`${callname}！看到闪闪发光的飞鹰子了吗？`);
-      await era.printAndWait(
-        `在泥地上挥洒着汗水，满身尘土的${falcon.name}，眼神却是闪闪发光。`,
-      );
-      await me.say_and_wait(`预定计划都顺利完成了，飞鹰子辛苦了。`);
-      await falcon.say_and_wait(`${callname}也觉得飞鹰子在闪耀吗！太好了⭐`);
-      await era.printAndWait(
-        `从${me.actual_name}的手上接过洗好的毛巾擦去了脸上的泥污，慢慢靠近了正在整理数据的${me.actual_name}。`,
-      );
-      await falcon.say_and_wait(`嗯，那个，${callname}，`);
-      await era.printAndWait(
-        `微风吹动了路边生长的小草，${falcon.name} 的神情被夕阳的光线被隐藏。`,
-      );
-      await falcon.say_and_wait(
-        `可以再稍微练习一会吗？飞鹰子还有想要完成的目标哦！`,
-      );
-      await falcon.say_and_wait(
-        `而且，作为${falcon.uma_sex_title}偶像的话，目标稍微~定高一样也没关系吧？`,
-      );
-      await falcon.say_and_wait(`那么，${callname}又是怎么想呢？`);
-      era.printButton(`这样的话`, 1);
-      await era.input();
-      await era.printAndWait(
-        `虽然飞鹰子现在的状态很好可以额外训练，不过训练量突然加大会不会影响第二天的训练呢？`,
-      );
-      await falcon.say_and_wait(`${callname}？`);
-      await era.printAndWait(`即使是路边生长的小草，也渴望着茁壮成长吗？`);
-      era.printButton(`「那么加油哦，未来的${falcon.uma_sex_title}偶像」`, 1);
-      era.printButton('「……今天的话就训练到这里了」', 2);
-      hook.arg = (await era.input()) === 1;
-      if (hook.arg) {
-        await falcon.say_and_wait(`嗯！额外训练也请多关照了，${callname}！`);
-        era.printButton(
-          `能看着飞鹰子一步步走向顶级偶像的道路，我也很高兴哦。`,
-          1,
-        );
-        await era.input();
-        await me.say_and_wait(`接下来的话`);
-        await era.printAndWait(
-          `一直训练到快门禁后，${callname} 抱着跑不动的飞鹰子到了宿舍门口。`,
-        );
-      } else {
-        await falcon.say_and_wait(`可是……`);
-        await me.say_and_wait(
-          `成为${falcon.uma_sex_title}偶像的道路不是一蹴而就的，过度的训练只会适得其反！`,
-        );
-        await falcon.say_and_wait('诶？');
-        await me.say_and_wait(
-          `过度训练之后容易因为疲惫疏忽训练方法不当使得腿部受伤甚至骨折。`,
-        );
-        await me.say_and_wait(
-          `所以作为飞鹰子的训练员我不能犯这么高风险的事情。`,
-        );
-        await falcon.say_and_wait(
-          `飞鹰子真是个笨蛋呢，居然没想到这么简单的事情。`,
-        );
-        await era.printAndWait(
-          `看着低着头不敢直视 ${callname} 的飞鹰子，${callname} 叹了口气，摸了摸${falcon.sex}的头。`,
-        );
-        await me.say_and_wait(`接下来的话先回训练室吧稍微休息一会吧。`);
-        await falcon.say_and_wait(`好！`);
-        await era.printAndWait(
-          `之后${me.actual_name}在训练室中一边帮着飞鹰子做着腿部按摩一边讨论着最近的流行趋势。`,
-        );
-      }
-      era.println();
-    }
-  }
-
-  async train_fail(falcon, me, callname, hook, extra_flag) {
-    extra_flag['args'] = extra_flag.fumble
-      ? fumble_result.fumble
-      : fumble_result.fail;
-    if (extra_flag.train === attr_enum.intelligence) {
-      return;
-    }
-    if (extra_flag.fumble) {
-      await print_event_name('严禁逞强！', falcon);
-      await falcon.say_and_wait(`${callname}……`);
-      await era.printAndWait(`飞鹰子在训练的时候不甚扭到了脚`);
-      await falcon.say_and_wait(`抱歉，飞鹰子太累了所以……`);
-      await era.printAndWait(`可能是接连不断的突击live大量消耗了飞鹰子的体力`);
-      era.printButton('「接下来的街头live需要暂时停止了。」', 1);
-      era.printButton('「试试看街头演出吧？」', 2);
-      if ((await era.input()) === 1) {
-        await falcon.say_and_wait(`呜~那些期待着飞鹰子的粉丝们该怎么办呢？`);
-        era.printButton(
-          '「就这样挺着受伤的腿强行表演的话，粉丝们也会担心的吧？」',
-          1,
-        );
-        await era.input();
-        await falcon.say_and_wait('……看来只能这样稍微暂停一会了');
-        await falcon.say_and_wait(
-          '那么，为了打起精神来，一起在训练室看有马胜者舞台的表演吧！',
-        );
-        era.printButton('「注意受伤的部位不要用力。」', 1);
-        await era.input();
-        await falcon.say_and_wait(`知道了！${callname}可以抱着我吗？`);
-        era.printButton(`「嘿咻！」`, 1);
-        await era.input();
-        await falcon.say_and_wait(`呜哇，真的抱起来了`, true);
-        await falcon.say_and_wait(`身上有种很好闻的气味而且靠的好近`, true);
-        await era.printAndWait(`因为腿伤需要休息所以回到状态需要一点时间。`);
-        era.println();
-        hook.args = -1;
-      } else {
-        await era.printAndWait(
-          `如果能伴随着音乐的节拍，说不定能让飞鹰子好的快一点？`,
-        );
-        await era.printAndWait('想了一会后，决定还是试试。');
-        era.printButton(
-          '「如果心情愉悦的话伤口也会好的快一点，所以去开live吧！」',
-          1,
-        );
-        await era.input();
-        await falcon.say_and_wait(`诶，原来还有这种方法吗？飞鹰子会加油的！`);
-        if (Math.random() < extra_flag['args'].ratio.fail_again) {
-          await era.printAndWait(
-            `像以往一样，趁绿色恶魔被${callname} 缠住的时候，飞鹰子的例行演出又开始了。`,
-          );
-          await falcon.say_and_wait(
-            `各位！看这边！飞鹰子的live现在就要开始了！`,
-          );
-          await era.printAndWait(
-            `在这边不停伴随着节奏的跳着舞蹈的飞鹰子，像是根本没有受过伤一样。`,
-          );
-          await falcon.say_and_wait(`太好了！总算吸引到几个粉丝了！`, true);
-          await era.printAndWait(
-            `因为大脑在思考的时候反应慢了一拍，不小心摔了一跤。`,
-          );
-          await falcon.say_and_wait(`呜，飞鹰子没关系的⭐`);
-          await era.printAndWait(
-            `等到${callname} 勉强摆脱手纲小姐时，飞鹰子的伤口好像恶化了。`,
-          );
-          hook.args = -1;
-        } else {
-          await era.printAndWait(`演出的效果意外的好`);
-          await falcon.say_and_wait('大家！这边！都看过来！');
-          await era.printAndWait(
-            `以平地作为舞台，取出随身携带的麦克风，飞鹰子的小小舞台就出现了。`,
-          );
-          await falcon.say_and_wait(`♪`);
-          await era.printAndWait(
-            `慢慢的，从无人问津，到稀疏的人群，再到人们纷纷聚集在一起。`,
-          );
-          await era.printAndWait(`河岸边的草地上聚满了人群。`);
-          era.printButton('「看来效果很好啊」', 1);
-          await era.input();
-          await era.printAndWait(
-            `${callname} 也站在不时喝彩的人群之中，静静看着飞鹰子的演出。`,
-          );
-          await era.printAndWait(
-            `演出作战看上去大获成功，${falcon.name}的伤口也恢复得更快了.`,
-          );
-          hook.args = 0;
-        }
-      }
+    if (ret === 1) {
+      hook.arg = 0;
+    } else if (fail_again) {
+      hook.arg = -1;
     } else {
-      await print_event_name('保重身体！', falcon);
-      await falcon.say_and_wait(`……${callname}`);
-      await era.printAndWait(`飞鹰子`);
-      await era.printAndWait(
-        `校医「${callname} 是${falcon.sex} 的训练员吧，为什么${falcon.sex} 这么疲惫还要冒这份风险？」`,
-      );
-      await era.printAndWait(
-        `无言以对，${me.actual_name}只能默默地听着${falcon.sex} 的训斥。`,
-      );
-      await falcon.say_and_wait(`不对，是我自己要求的。`);
-      await era.printAndWait(
-        `校医「${callname} 不知道受伤的话有可能会产生后遗症吗？」`,
-      );
-      await era.printAndWait(
-        `训练员手册上也记载了因为平时训练受伤留下后遗症的缘故不得不退役的案例。`,
-      );
-      await era.printAndWait(`尽管如此。`);
-      await me.say_and_wait(`抱歉，下次我会注意的。`);
-      await era.printAndWait(`校医「不要打扰病人休息」`);
-      await era.printAndWait(
-        `校医叹了口气，顺手关上了门，医务室里沉默的二人对视着。`,
-      );
-      era.printButton('「没关系的，飞鹰子就这样好好休息吧」', 1);
-      era.printButton('「……」', 2);
-      if ((await era.input()) === 1) {
-        await falcon.say_and_wait(`……嗯，飞鹰子一定很快会好起来的。`);
-        await falcon.say_and_wait(
-          `飞鹰子有的时候也过于急躁了，所以不全是${callname}的错哦。`,
-        );
-        era.printButton('「谢谢你，飞鹰子」', 1);
-        await era.input();
-        await falcon.say_and_wait(
-          `嗯，${callname}，可以把放在训练室中的杂志帮我拿过来吗？`,
-        );
-        await me.say_and_wait(`好的，飞鹰子也要好好休息。`);
-        await falcon.say_and_wait(`嗯。`);
-        await era.printAndWait(`轻轻关上了医务室的门，飞鹰子似乎已经睡下了。`);
-        hook.arg = 0;
-      } else if (Math.random() < extra_flag['args'].ratio.fail_again) {
-        await falcon.say_and_wait(`${callname}。`);
-        await era.printAndWait(`飞鹰子抢在${callname} 之前打破了沉默。`);
-        await falcon.say_and_wait(`可以握着我的手吗？`);
-        await era.printAndWait(`飞鹰子的目光从天花板慢慢移向了窗外。`);
-        await falcon.say_and_wait(`与朋友们分开，也是在这个夕阳的时候。`);
-        await falcon.say_and_wait('好痛！');
-        await me.say_and_wait(`飞鹰子！`);
-        await falcon.say_and_wait(`${callname}，可以再稍微靠近一点吗？`);
-        await falcon.say_and_wait(
-          `已经与那么多朋友分开了，我不想再失去${callname}了。`,
-        );
-        await era.printAndWait(
-          `紧紧抱住了哽咽着的飞鹰子，${me.actual_name}看着巨大的金黄色物体慢慢被地平线吞没。`,
-        );
-        await era.printAndWait(`漫长的黑夜要到了。`);
-        hook.arg = -1;
-      } else {
-        await falcon.say_and_wait(`${callname}`);
-        await era.printAndWait(`飞鹰子呼唤着${callname} 的名字。`);
-        await era.printAndWait(
-          `不知为何，${callname} 紧紧握住了${falcon.sex} 的手。`,
-        );
-        await falcon.say_and_wait(`我能感受到，${callname}那温暖的大手`);
-        await falcon.say_and_wait(`感觉稍微好点了。`);
-        await me.say_and_wait(`我就在这里，哪里也不会去！`);
-        await falcon.say_and_wait(`${callname}，真温柔呢。`);
-        await era.printAndWait(`飞鹰子将大手放到了自己的脸庞`);
-        await falcon.say_and_wait(`就这样，好好休息一会吧。`);
-        await era.printAndWait(`没过多久，飞鹰子就这样睡着了。`);
-        await era.printAndWait(`悄悄关上房门后，${callname} 离开了医务室。`);
-        await era.printAndWait(`飞鹰子很快就恢复了活力。`);
-        hook.arg = 0;
-      }
+      hook.arg = 1;
     }
   }
 
-  async out_start(falcon, me, callname, hook, extra_flag, event_object) {
+  async out_start(falcon, me, callname, hook, extra, ebj) {
     if (era.get('flag:当前互动角色') !== 46) {
-      add_event(hook.hook, event_object);
+      add_event(hook.hook, ebj);
       return;
     }
-    const event_marks = new FalconEduMarks();
-    if (event_marks.idol_ice_cream === 1) {
-      event_marks.idol_ice_cream++;
+    if (ebj?.arg !== 'idol_ice_cream') {
+      return;
     }
-    await print_event_name('飞鹰子·约会大作战', falcon);
-    await falcon.say_and_wait(`${callname}！`);
-    await era.printAndWait(`还没进门就听见了飞鹰子充满活力的声音。`);
-    await me.say_and_wait(`这就是所谓的未闻其名先闻其声吗？`, true);
-    await era.printAndWait(`当然不是。`);
-    await falcon.say_and_wait(
-      `飞鹰子打算推荐给支持自己的粉丝们性价比高的一种甜品，${callname}知道哪里有吗？`,
-    );
-    await era.printAndWait(`说起来偶像也要给一直支持自己的粉丝表达感谢之情。`);
-    await me.say_and_wait(`甜品的话，去附近的商场看看吧？`);
-    await me.say_and_wait(`或者在马推上看下生活博主推荐的店铺？`);
-    await era.printAndWait(`飞鹰子也陷入了思考之中`);
-    await falcon.say_and_wait(`嗯……飞鹰子还是觉得去看看才能做出决定吧？`);
-    await falcon.say_and_wait(`所以${callname}……`);
-    await era.printAndWait(`偷偷观察着${callname} 的反应的飞鹰子。`);
-    await falcon.say_and_wait(`……还是飞鹰子一个人过去吧⭐`);
-    await me.say_and_wait(`啊好。`);
-    await era.printAndWait(`故意装作没听清的样子。`);
-    await falcon.say_and_wait(`欸？！怎么可以这样！`);
-    await era.printAndWait(
-      `因为搬起石头砸自己的脚而气急败坏的飞鹰子终于暴露出了真实想法。`,
-    );
-    await me.say_and_wait(`抱歉刚才没听清，可以再说一遍吗？`);
-    await falcon.say_and_wait(`飞鹰子想邀请${callname}一起出发。`);
-    await me.say_and_wait(`既然是可爱飞鹰子的请求当然可以了。`);
-    await falcon.say_and_wait(`太好了⭐`);
-    await era.printAndWait(`之后两人一起品尝了附近的甜品店。`);
+    await print_title_with_kojo(this.#kojo, ebj.arg, falcon, me, callname);
     return true;
   }
 
-  async office_study(falcon, me, callname, hook, extra_flag, event_object) {
+  async office_study(falcon, me, callname, hook, extra, ebj) {
     if (era.get('flag:当前互动角色') !== 46) {
-      add_event(hook.hook, event_object);
+      add_event(hook.hook, ebj);
       return;
     }
-    const event_marks = new FalconEduMarks();
-    if (event_marks.deadline_fight === 1) {
-      event_marks.deadline_fight++;
+    if (ebj?.arg !== 'deadline_fight') {
+      return;
     }
-    await print_event_name('期末大作战！', falcon);
-    await falcon.say_and_wait(`呜———好难`);
-    await era.printAndWait(`看着手里的挂科的试卷，飞鹰子陷入了沉默中。`);
-    await falcon.say_and_wait(
-      `再这样下去的话，不止是课后留级这样子了，搞不好就要挂科了。`,
-    );
-    await era.printAndWait(
-      `飞鹰子开始急得团团转，然后突然想起了${me.actual_name}。`,
-    );
-    await era.printAndWait(`不如去问问${callname}吧。`);
-    era.drawLine({ content: '训练室' });
-    await era.printAndWait(
-      `看着眼前的分数，${callname} 也和飞鹰子一样陷入了沉默之中。`,
-    );
-    await me.say_and_wait(`……飞鹰子？`);
-    await era.printAndWait(
-      `看着低着头不好意思的飞鹰子，${callname} 长叹了一口气。`,
-    );
-    await me.say_and_wait(`那么，一起来分析一下错误的问题吧`);
-    await era.printAndWait(
-      `让飞鹰子坐在了${callname} 的位置，${callname} 另外搬了一把椅子坐在了${falcon.sex} 的旁边。`,
-    );
-    await me.say_and_wait(
-      `要想及格的话，重要的不是细枝末节的东西，而是理解作为"树干"部分的思维或者思路`,
-    );
-    await me.say_and_wait(
-      `对于哪一项需要优先，哪一项回头再说也可以需要冷静的做出判断。`,
-    );
-    await me.say_and_wait(`那么，对于这一部分……`);
-    await era.printAndWait(`一整个下午，你们都在与错误进行斗争。`);
-    era.drawLine({ content: '黄昏之后' });
-    await me.say_and_wait(`差不多就是这样了……飞鹰子？`);
-    await falcon.say_and_wait(`……啊，是。`);
-    await era.printAndWait(`不知从何时开始，飞鹰子的思绪似乎飘到了其他地方。`);
-    await me.say_and_wait(`……算了，今天的话就到这里了。`);
-    await era.printAndWait(
-      `长叹一口气后，${callname} 将飞鹰子的试卷收到了自己的文件夹中。`,
-    );
-    await me.say_and_wait(
-      `接下来的话，在补考及格之前，禁止${callname} 开演唱会。`,
-    );
-    await falcon.say_and_wait(`欸？`);
-    await falcon.say_and_wait(`${callname}不要啊！！！`);
-    await era.printAndWait(`飞鹰子的悲鸣响彻了整个教学楼。`);
+    await print_title_with_kojo(this.#kojo, ebj.arg, falcon, me, callname);
     return true;
   }
 
-  async out_river(falcon, me, callname, hook, extra_flag, event_object) {
+  async out_river(falcon, me, callname, hook, extra, ebj) {
     if (era.get('flag:当前互动角色') !== 46) {
-      add_event(event_hooks.out_river, event_object);
+      add_event(event_hooks.out_river, ebj);
       return;
     }
-    const event_marks = new FalconEduMarks();
-    if (event_marks.loneliness_girl === 1) {
-      event_marks.loneliness_girl++;
+    if (ebj?.arg !== 'loneliness_girl') {
+      return;
     }
-    await print_event_name(`河岸边的偶像`, falcon);
-    await era.printAndWait(`岸边的草地上`);
-    await falcon.say_and_wait(`${callname}，这里的空气真清新呢`);
-    await falcon.say_and_wait(`岸边的草地上，清新的空气似乎很适合人们放松呢。`);
-    await falcon.say_and_wait(
-      `！对啊，在这种地方开演唱会的话发到马推上，粉丝数也会一口气增加的吧。`,
-    );
-    await falcon.say_and_wait(`${callname}又是怎么想的呢？`);
-    await era.printAndWait(`看着飞鹰子深呼吸后对着未来憧憬的样子`);
-    await me.say_and_wait(`是啊，呼吸着清新的空气，粉丝们也会很高兴吧。`);
-    await falcon.say_and_wait(`……${callname}也高兴吗？`);
-    await me.say_and_wait(`？是啊。`);
-    await falcon.say_and_wait(`飞鹰子也很高兴呦⭐`);
-    await era.printAndWait(
-      `与捂着嘴偷偷笑着的飞鹰子漫步在河岸边，感受着从水面吹向陆地的微风，生长在水陆交界之处的种种植物也跟着微风的吹拂摇摆着身体。`,
-    );
-    await era.printAndWait(`植物们也期待着风与水的浸润。`);
-    await falcon.say_and_wait(`${callname}，快看这边！`);
-    await era.printAndWait(`发现了新鲜事物的飞鹰子跑向了河边，然后蹲了下来。`);
-    await era.printAndWait(
-      `紧跟着飞鹰子来到岸边，${callname} 也随着飞鹰子的视线向那边看去。`,
-    );
-    await era.printAndWait(`靠近着河边顽强生长的白色小花丛，正随风摇曳着。`);
-    await falcon.say_and_wait(`这花真像飞鹰子呢。`);
-    await era.printAndWait(
-      `想要轻轻触碰，却担心自己过大的力量将花朵折下，只能静静地看着被白色花瓣保护着的黄色花芯。`,
-    );
-    era.printButton(`好像叫做洋甘菊`, 1);
-    await era.input();
-    await me.say_and_wait(
-      `古埃及人称呼${falcon.sex} 为月亮的药草，具有清凉安神的效果。`,
-    );
-    await me.say_and_wait(`花语的话是……`);
-    await era.printAndWait(`悄悄打开手机输入洋甘菊`);
-    await me.say_and_wait(`苦难中的力量。`);
-    await falcon.say_and_wait(`飞鹰子希望也能像洋甘菊一样绽放。`);
-    await era.printAndWait(`看着时不时被河水冲刷的湿润陆地。`);
-    await falcon.say_and_wait(`将根深深扎进泥土之中，将绽放的花朵献给大家。`);
-    await falcon.say_and_wait(`所以，飞鹰子也要努力才行呢。`);
-    await era.printAndWait(
-      `伸出手打算抚摸着飞鹰子的脑袋，却被后者巧妙的躲开了。`,
-    );
-    await falcon.say_and_wait(`如果想抓住逃走的飞鹰子的话，那就来追赶我吧！`);
-    await me.say_and_wait(`飞鹰子我要抓到${callname} ！`);
-    await falcon.say_and_wait(`${callname}永远抓不到飞鹰子的⭐`);
-    await era.printAndWait(
-      `喧闹的草地逐渐归于宁静，只有轻轻摇曳着的花朵发出的声音在风的耳边缓缓流淌着。`,
+    await print_title_with_kojo(this.#kojo, ebj.arg, falcon, me, callname);
+    return true;
+  }
+
+  async out_station(falcon, me, callname, hook, extra, ebj) {
+    if (era.get('flag:当前互动角色') !== 46) {
+      add_event(event_hooks.out_station, ebj);
+      return;
+    }
+    if (ebj?.arg !== 'shine_girl') {
+      return;
+    }
+    await print_title_with_kojo(
+      this.#kojo,
+      ebj.arg,
+      falcon,
+      get_chara_talk(4),
+      me,
+      sys_get_callname(4, 0),
     );
     return true;
   }
 
-  async out_station(falcon, me, callname, hook, extra_flag, event_object) {
+  async out_shopping(falcon, me, callname, hook, extra, ebj) {
     if (era.get('flag:当前互动角色') !== 46) {
-      add_event(event_hooks.out_station, event_object);
+      add_event(event_hooks.out_shopping, ebj);
       return;
     }
-    const maru = get_chara_talk(4),
-      event_marks = new FalconEduMarks();
-    if (event_marks.shine_girl === 1) {
-      event_marks.shine_girl++;
+    if (ebj?.arg !== 'curiosity_girl') {
+      return;
     }
-    await print_event_name(`车站宣传`, falcon);
-    await era.printAndWait(`休息日的某一天`);
-    await falcon.say_and_wait(`这里是目标为顶级偶像的${falcon.name} ！`);
-    await falcon.say_and_wait(`希望大家多多支持作为偶像的飞鹰子♪`);
-    await era.printAndWait(
-      `休息日的时候${me.actual_name}被${falcon.name} 拉着来到了车站`,
-    );
-    await me.say_and_wait(`瞄准了车站人流量大进行粉丝宣传吗？`);
-    await me.say_and_wait(`如果把这种热情放在学习上的话就好了。`);
-    await era.printAndWait(`然而大多数人都是奇怪的看了一眼之后就离开了。`);
-    era.drawLine({ content: '到了中午' });
-    await falcon.say_and_wait(`呜~到了中午没有新的粉丝增加啊。`);
-    await era.printAndWait(
-      `不如说大家都有自己的事情要去做，能无忧无虑作为粉丝的也只有学生了。`,
-    );
-    await era.printAndWait(`而且`);
-    await maru.say_and_wait(`这不是飞鹰子吗？`);
-    await era.printAndWait(`意外的人出现了。`);
-    await falcon.say_and_wait(`欸？丸善前辈为什么来这边了？`);
-    await era.printAndWait(`穿着特雷森制服的丸善斯基带着充裕的笑容看着你们。`);
-    if (
-      era.get('cflag:4:招募状态') === recruit_flags.yes &&
-      era.get('cflag:4:育成回合计时') >= 47
-    ) {
-      await maru.say_and_wait(`到处找不到训练员君，原来在这里啊？`);
-      await era.printAndWait(`${callname} 当然记得这位外表亲和的姐姐大人`);
-      await maru.say_and_wait(`一段时间看不到训练员君，姐姐我好伤心啊？`);
-      era.printButton(`要一起来吗？`, 1);
-      await era.input();
-      await maru.say_and_wait(
-        `帮助可爱的后辈是我的荣幸哦，那么我应该做什么呢？`,
-      );
-      await era.printAndWait(
-        `既享受着奔跑的快乐，也为了能让更多的${falcon.uma_sex_title}追逐着自己的背影，`,
-      );
-    }
-    await falcon.say_and_wait(`飞鹰子的话，正在车站进行粉丝劝诱呢⭐`);
-    await falcon.say_and_wait(`所以也希望丸善学姐也能帮我做下宣传。`);
-    await maru.say_and_wait(
-      `这么可爱的后辈姐姐我当然要帮忙了，就让你们看下姐姐我的宣传方式吧`,
-    );
-    await era.printAndWait(`等到下一班列车到达时`);
-    await maru.say_and_wait(
-      `哈喽！各位帅锅美眉看过来，这边这么可爱的菇凉不打算抢个沙发吗？`,
-    );
-    await maru.say_and_wait(`亚历山大也没关系，毕竟神马都是浮云呦~`);
-    await falcon.say_and_wait(`……好怀念的用法啊。`);
-    await era.printAndWait(
-      `${me.actual_name}想到了自己初中时上网冲浪时当时人们这么互相称呼的环境。`,
-    );
-    await era.printAndWait(
-      `此举一出，所有人都加快了自己的脚步，不少人还双手掩面像是被雷到了一样。`,
-    );
-    await maru.say_and_wait(`唔~连个抢沙发的人都没有啊`);
-    await era.printAndWait(`看着一脸遗憾的丸善斯基，飞鹰子向前安慰到。`);
-    await falcon.say_and_wait(`没，没关系的，已经帮了飞鹰子大忙了。`);
-    await falcon.say_and_wait(`总之，非常感谢。`);
-    await maru.say_and_wait(`既然这样的话……我也能做飞鹰子的粉丝吗？`);
-    await falcon.say_and_wait(`欸？丸善学姐是我的粉丝……非常感谢！`);
-    await era.printAndWait(`看着收获了粉丝的飞鹰子，${me.name} 也觉得很开心。`);
-    if (
-      era.get('cflag:4:招募状态') === recruit_flags.yes &&
-      era.get('cflag:4:育成回合计时') >= 96
-    ) {
-      await maru.say_and_wait(`飞鹰子，可以拜托${callname} 一件事吗？`);
-      await era.printAndWait(
-        `带着充裕表情的丸善斯基看着${callname} 和${falcon.name} 之间的互动。`,
-      );
-      await falcon.say_and_wait(`飞鹰子能帮上忙的话也很高兴！`);
-      await maru.say_and_wait(
-        `太好了！可以去附近的商场帮我买一份最近流行的可可芭蕾吗？(巧克力与冰淇淋混合在一起的一种饮料)`,
-      );
-      await falcon.say_and_wait(`当然可以，不过飞鹰子还在劝诱粉丝呢。`);
-      await maru.say_and_wait(
-        `我也会帮忙的呦？所以拜托了飞鹰子，请听听看刚刚作为飞鹰子粉丝的请求吧！`,
-      );
-      await falcon.say_and_wait(
-        `嗯——好！即热是丸善学姐的要求的话，飞鹰子会努力的！`,
-      );
-      await falcon.say_and_wait(`那么，飞鹰子出发了！`);
-      await era.printAndWait(
-        `看着逐渐远去的飞鹰子，车站只剩下了${callname} 和丸善斯基。`,
-      );
-      await maru.say_and_wait(`既然没事的话，就让我多占据一下训练员君吧♪`);
-      await era.printAndWait(
-        `忍不住将${callname} 抱在怀里温柔抚摸的丸善斯基很开心的样子。`,
-      );
-    }
+    await print_title_with_kojo(this.#kojo, ebj.arg, falcon, me, callname);
     return true;
   }
 
-  async out_shopping(falcon, me, callname, hook, extra_flag, event_object) {
+  async school_rooftop(falcon, me, callname, hook, extra, ebj) {
     if (era.get('flag:当前互动角色') !== 46) {
-      add_event(event_hooks.out_shopping, event_object);
+      add_event(hook.hook, ebj);
       return;
     }
-    const event_marks = new FalconEduMarks();
-    if (event_marks.curiosity_girl === 1) {
-      event_marks.curiosity_girl++;
+    if (ebj?.arg !== 'rooftop_idol') {
+      return;
     }
-    await print_event_name(`黄金菊`, falcon);
-    await era.printAndWait(`休息日的某一天`);
-    await falcon.say_and_wait(`${callname},可以过来一下吗？`);
-    await era.printAndWait(`飞鹰子对着放在训练室的等身镜打扮着自己。`);
-    await falcon.say_and_wait(
-      `那个，飞鹰子想试试看将头发放下来后梳马尾将蝴蝶结固定在头发上。`,
-    );
-    await era.printAndWait(
-      `似乎因为自己看不到头发后面，所以想借助${callname} 的手`,
-    );
-    await me.say_and_wait(`——这样吗？`);
-    await falcon.say_and_wait(`嗯——再上去一点。`);
-    await era.printAndWait(`小心翼翼的将蝴蝶夹子放到稍高一点的位置。`);
-    await me.say_and_wait(`——这样的话可以吗？`);
-    await falcon.say_and_wait(`嗯——差不多了。`);
-    await era.printAndWait(`看着换了发型的飞鹰子，感觉和之前不太一样了。`);
-    await falcon.say_and_wait(`不过总觉得哪里还差了一点。`);
-    await era.printAndWait(`然后又开始有些在意了。`);
-    await falcon.say_and_wait(
-      `${callname}！接下来的话可以和我一起去趟商店街吗？`,
-    );
-    await falcon.say_and_wait(`我想去买一点小装饰品。`);
-    await era.printAndWait(`想要看看自己的魅力最终能到那种极限吗？`);
-    await me.say_and_wait(`好！`);
-    era.drawLine({ content: '商店街' });
-    await era.printAndWait(
-      `因为是周末的缘故，商店街来来往往的人群也比工作日出不少`,
-    );
-    await falcon.say_and_wait(`那么去这家店看一下吧！`);
-    await era.printAndWait(
-      `似乎是最近冲上热搜的网红店，前来打量小饰品的情侣的比例意外很高。`,
-    );
-    await me.say_and_wait(`好多情侣啊。`);
-    await falcon.say_and_wait(
-      `飞鹰子和${callname}混在里面一点违和感都没有呢。`,
-    );
-    await era.printAndWait(
-      `拉着${callname} 手臂的飞鹰子转了一圈后，在头绳那边停下了脚步。`,
-    );
-    await falcon.say_and_wait(`都很可爱啊,不过哪种比较好呢？`);
-    await era.printAndWait(`飞鹰子似乎很喜欢这些手绳。`);
-    await me.say_and_wait(`既然这么纠结的话心仪的全部买走吧？`);
-    await era.printAndWait(
-      `最近刚发了工资的${callname} 说话就是有底气（大概？）。`,
-    );
-    await falcon.say_and_wait(`真的可以吗？${callname}真好呢！`);
-    await falcon.say_and_wait(`不过，${callname}喜欢哪种呢？`);
-    era.printButton(`系上了绿色蝴蝶结的白色头绳`, 1);
-    era.printButton(`白色小兔子装饰的绿色头绳`, 2);
-    era.printButton(`白色玫瑰装饰的黑色头绳`, 3);
-    const ret1 = await era.input();
-    if (ret1 === 1) {
-      await falcon.say_and_wait(`嗯——飞鹰子也喜欢这种清新的感觉呢。`);
-      await falcon.say_and_wait(`像是在绿色田野漫步的样子充满活力⭐`);
-    } else if (ret1 === 2) {
-      await falcon.say_and_wait(`可爱风吗？不如说飞鹰子也是这么想的！`);
-      await falcon.say_and_wait(`据说小兔子也有象征渴望爱情的隐语呢。`);
-      await falcon.say_and_wait(`飞鹰子什么都没说哦⭐。`);
-    } else {
-      await falcon.say_and_wait(`吼吼吼！飞鹰子也是小恶魔系的偶像呢！`);
-      await era.printAndWait(`虽然怎么看都不太像`);
-      await falcon.say_and_wait(`既然训练员挑选的话，那我就认真考虑下吧。`);
-      await era.printAndWait(
-        `轻轻敲了下${falcon.sex} 的小脑袋，爆发出了悲鸣。`,
-      );
-      await falcon.say_and_wait(`对不起，下次不会这么说话了！`);
-    }
-    await era.printAndWait(
-      `将挑选完的手绳放入了购物袋之中，你们继续享受着购物的乐趣。`,
-    );
+    await print_title_with_kojo(this.#kojo, ebj.arg, falcon, me);
     return true;
   }
 
-  async school_rooftop(falcon, me, callname, hook, extra_flag, event_object) {
+  async school_atrium(falcon, me, callname, hook, extra, ebj) {
     if (era.get('flag:当前互动角色') !== 46) {
-      add_event(hook.hook, event_object);
+      add_event(hook.hook, ebj);
       return;
     }
-    const event_marks = new FalconEduMarks();
-    if (event_marks.rooftop_idol === 1) {
-      event_marks.rooftop_idol++;
-      await print_event_name(`天台上的偶像`, falcon);
-      await era.printAndWait(`放学后的某一天`);
-      await era.printAndWait(
-        `整理完${falcon.name} 最近的数据后，如释重负的${callname} 终于长长的呼了一口气。`,
-      );
-      era.printButton(`接下来的话去天台走走吧`, 1);
-      await era.input();
-      await era.printAndWait(
-        `不知何时${callname} 也养成了对着镜子自言自语的习惯。`,
-      );
-      await me.say_and_wait(`所谓的两个人在一起迟早会继承对方的习惯吗？`, true);
-      await era.printAndWait(
-        `虽然想尽力将这个念头埋入情感的最深处，但它却像是和${callname} 来劲了一样开始不断上浮。`,
-      );
-      await era.printAndWait(`最后的结论是——`);
-      await me.say_and_wait(`其实我喜欢作为飞鹰子的${falcon.name}。`, true);
-      await era.printAndWait(
-        `乐观，积极向上，一直盯着目标不断前行的${falcon.sex} 将乐观的希望带给了${callname} 与粉丝们。`,
-      );
-      await me.say_and_wait(`这样的${falcon.uma_sex_title}真的存在吗？`, true);
-      await era.printAndWait(`${callname} 的内心一直在怀疑这一点。`);
-      await era.printAndWait(
-        `想要一直保持作为偶像这一身份所遭受的痛苦与精神上的折磨。`,
-      );
-      await me.say_and_wait(
-        `${falcon.sex} 只是不愿意将消极的一面展示给我看吧`,
-        true,
-      );
-      await era.printAndWait(`不知不觉间走上了天台。`);
-      await era.printAndWait(
-        `夕阳缓缓地落入地平线，凉爽的气息从四周传递过来，温度又降了一个台阶。`,
-      );
-      await me.say_and_wait(`差不多也该回去了吧`);
-      await era.printAndWait(`正准备回去的时候，意外看到了熟悉的身影。`);
-      await falcon.say_and_wait(`举头能望见，伸手是虚空。`);
-      await falcon.say_and_wait(`好似月中桂，高居碧海中。`);
-      await era.printAndWait(
-        `忧郁的歌声被风托到了身边，忧郁的眼神看着夕阳远去的方向。`,
-      );
-      await me.say_and_wait(`飞鹰子？`, true);
-      await era.printAndWait(`凭着对声音的好奇，循着源头看去。`);
-      await era.printAndWait(
-        `被风吹拂的${falcon.name} 任凭长发飘逸，忧郁的目光望着虚无。`,
-      );
-      await era.printAndWait(`正想向其搭话的时候，但还是愣在原地。`);
-      await era.printAndWait(`${falcon.name} 终于还是离开了天台。`);
-      return true;
-    }
-  }
-
-  async school_atrium(falcon, me, callname, hook, extra_flag, event_object) {
-    if (era.get('flag:当前互动角色') !== 46) {
-      add_event(hook.hook, event_object);
+    if (ebj?.arg !== 'petrichor_girl') {
       return;
     }
-    const event_marks = new FalconEduMarks();
-    if (event_marks.petrichor_girl === 1) {
-      event_marks.petrichor_girl++;
-    }
-    await print_event_name(`带着青草气息的${falcon.uma_sex_title}们`, falcon);
-    await era.printAndWait(`今天是校园开放日。`);
-    await falcon.say_and_wait(
-      `这里是${falcon.name} 姐姐，接下来的话就让我来带领大家参观特雷森吧♪`,
-    );
-    await era.printAndWait(
-      `附近小学的小${falcon.uma_sex_title}们来到特雷森学院进行参观。`,
-    );
-    era.printButton(
-      `说不定之后这些小${falcon.uma_sex_title}们其中也有人会成为我的担当${falcon.uma_sex_title}呢`,
-      1,
-    );
-    await era.input();
-    await era.printAndWait(`小${falcon.uma_sex_title}A「这里就是特雷森吗？」`);
-    await era.printAndWait(`小${falcon.uma_sex_title}B「哇！好大的学院啊！」`);
-    await era.printAndWait(
-      `小${falcon.uma_sex_title}C「${
-        falcon.name
-      } 姐姐可以讲一下特雷森学院的历史吗？」`,
-    );
-    await falcon.say_and_wait(
-      `作为偶像的飞鹰子当然会给粉丝们耐心的讲解的♪首先是……`,
-    );
-    await era.printAndWait(
-      `充满活力的${falcon.name} 耐心讲解着与特雷森相关的事情。`,
-    );
-    await era.printAndWait(`小${falcon.uma_sex_title}A「那边的人影是？」`);
-    await era.printAndWait(
-      `簇拥在${
-        falcon.name
-      } 周围蹦蹦跳跳的小${falcon.uma_sex_title}发现了${callname}。`,
-    );
-    await falcon.say_and_wait(
-      `即使是特雷森学院的${falcon.uma_sex_title}们，想要取得G1也是很辛苦的一件事呢……欸？等一下`,
-    );
-    await era.printAndWait(
-      `小${falcon.uma_sex_title}A「那边的训练员看起来很帅气呢？」`,
-    );
-    await era.printAndWait(
-      `刚还围绕在${
-        falcon.name
-      } 身边的${falcon.uma_sex_title}们呼啦一下全部围到了${callname} 身边。`,
-    );
-    await falcon.say_and_wait(`训，${callname}！`);
-    await era.printAndWait(
-      `小${falcon.uma_sex_title}B「等我进入特雷森的话，可以做我的钻数训练员吗？」`,
-    );
-    await era.printAndWait(
-      `小${falcon.uma_sex_title}A「不要！明明应该是我先看到他的！」`,
-    );
-    await era.printAndWait(
-      `小${falcon.uma_sex_title}B「是我先提出来的，所以应该跟我一起！」`,
-    );
-    await era.printAndWait(
-      `小${falcon.uma_sex_title}们像是抢心爱的玩具一样拉着${callname} 的双手`,
-    );
-    era.printButton(`好，好痛啊！`, 1);
-    await era.input();
-    await era.printAndWait(
-      `众所周知${falcon.uma_sex_title}的力气是成年人类的三倍。`,
-    );
-    await era.printAndWait(
-      `为了避免控制不住自己力量造成危险的发生，作为${falcon.uma_sex_title}有一门必修课。`,
-    );
-    await era.printAndWait(`就是学会控制自己的力量。`);
-    await era.printAndWait(
-      `对于大多数${falcon.uma_sex_title}来说初中时就开始有意识控制自己的力量。`,
-    );
-    await era.printAndWait(
-      `但对于连心智都尚处在发育阶段的小${falcon.uma_sex_title}们来说。`,
-    );
-    await era.printAndWait(
-      `${callname} 像是被两个肌肉壮汉当成玩具一样拽来拽去。`,
-    );
-    await falcon.say_and_wait(`${callname}！`);
-    await era.printAndWait(`所幸，${falcon.name} 及时赶到了。`);
-    await falcon.say_and_wait(`你们两个给我说清楚怎么回事！`);
-    await era.printAndWait(
-      `两名小${falcon.uma_sex_title}突然被一股巨大的力量提到了空中，想要查看发生了什么的时候就迎来了${
-        falcon.name
-      } 像修罗一样的表情。`,
-    );
-    await era.printAndWait(`小${falcon.uma_sex_title}A「唔啊啊啊！」`);
-    await era.printAndWait(`小${falcon.uma_sex_title}B「不要吃我啊！」`);
-    await era.printAndWait(
-      `刚刚还在争吵的两人现在又蜷缩在了一起瑟瑟发抖地听着${falcon.name} 的训斥。`,
-    );
-    await falcon.say_and_wait(`${callname}！${callname} 没事吧？`);
-    await era.printAndWait(
-      `说教结束之后，${falcon.name} 担心的向${callname} 询问。`,
-    );
-    era.printButton(`没关系，不过是小朋友们淘气了一点。`, 1);
-    await era.input();
-    await era.printAndWait(`忍着剧痛来到了小朋友旁边。`);
-    await era.printAndWait(`小${falcon.uma_sex_title}A「呜——」`);
-    await era.printAndWait(`小${falcon.uma_sex_title}B「嗯？」`);
-    era.printButton(
-      `人类比起${falcon.uma_sex_title}来说是很脆弱的生物，所以下次一定要控制住自己的力量才行。`,
-      1,
-    );
-    await era.input();
-    era.printButton(
-      `如果可以的话，希望在特雷森的时候也能看到你们活泼的样子。`,
-      1,
-    );
-    await era.input();
-    await me.say_as_passer_by_and_wait(`小${falcon.uma_sex_title}A`, '嗯嗯。');
-    await me.say_as_passer_by_and_wait(
-      `小${falcon.uma_sex_title}B`,
-      '我们知道了。',
-    );
-    await era.printAndWait(
-      '带队老师这时才姗姗来迟，在了解经过之后向你们道歉。',
-    );
-    era.drawLine({ content: '结束后' });
-    await falcon.say_and_wait(
-      `比起自己更关心其他人的感受，这样的话很容易受伤的！`,
-    );
-    await era.printAndWait([
-      '乖乖听着飞鹰子说教的 ',
-      me.get_colored_name(),
-      ' 活动着双手。',
-    ]);
-    await me.say_and_wait(`飞鹰子原来这么关心我吗？`);
-    await falcon.say_and_wait(`作为偶像当然要关心粉丝才行呢！`);
-    await falcon.say_and_wait(`更别说${callname} 是我的……`);
-    await era.printAndWait(`像是意识到了什么一样，飞鹰子的脸渐渐红了起来。`);
-    await falcon.say_and_wait(`呀啊！${callname}欺负人！`);
-    await era.printAndWait(`在打闹之中，今天的日常结束了。`);
+    await print_event_name(this.#kojo.petrichor_girl.title(falcon), falcon);
+    await this.#kojo.petrichor_girl(falcon, me, callname);
     return true;
   }
 
   async crazy_fan_end() {
-    if (era.get('flag:强制BE') !== 46) {
-      return await super.crazy_fan_end();
-    }
-    await falcon_crazy_fan_end();
+    await print_title_with_kojo(
+      this.#kojo,
+      'be_crazy_fan',
+      get_chara_talk(this.id),
+      get_chara_talk(0),
+      sys_get_callname(this.id, 0),
+    );
   }
 
-  async out_church(falcon, me, callname, hook, extra_flag, event_object) {
+  async out_church(falcon, me, callname, hook, extra, ebj) {
     if (era.get('flag:当前互动角色') !== 46) {
-      add_event(hook.hook, event_object);
+      add_event(hook.hook, ebj);
       return;
     }
-    const edu_weeks = era.get('cflag:46:育成回合计时');
-    if (edu_weeks === 95 + 1) {
-      await print_event_name('神社祈愿', falcon);
-      await falcon.say_and_wait(`不管来多少次，这里看起来都是这么安静呢⭐`);
-      await falcon.say_and_wait(
-        `唔——虽然干脆让神明大人也来看飞鹰子的演唱会吧！`,
-      );
-      era.printButton(`犯傻也要适可而止！`, 1);
-      await era.input();
-      await era.printAndWait(
-        `${callname} 轻轻敲了敲${falcon.name}的脑袋，随着后者发出唔嗯一声，涟漪的水面又恢复了平静。`,
-      );
-      await era.printAndWait(
-        `抬头再次看向排成长队的香客，一阵无力感袭击了全身。`,
-      );
-      era.printButton(`前来参拜的游客比想象之中多得多啊。`, 1);
-      await era.input();
-      await falcon.say_and_wait(`因为大家都要宁愿花费时间也要实现的愿望呢。`);
-      await falcon.say_and_wait(
-        `不过飞鹰子会给作为粉丝们（预定）的大家努力加油的！`,
-      );
-      await era.printAndWait(
-        `看着大量人群向着同一处前进，化为本能的偶像意识让${falcon.name}一瞬间就兴奋起来。`,
-      );
-      await me.say_and_wait(`……至少先参拜完再说吧。`);
-      await era.printAndWait(
-        `看着旁边精力似乎永远花不完的${falcon.teen_sex_title}，${callname} 稍微有些头疼。`,
-      );
-      await era.printAndWait(
-        `既不是因为随意举办临时演唱会造成的困扰，也不是因为对接下来的泥地G1全部胜利的苛刻要求感到头疼。`,
-      );
-      await me.say_and_wait(`那个笑容，怎么看都是挤出来的。`, true);
-      era.drawLine();
-      await era.printAndWait(`漫长的等待过后，你们站在了奉纳箱前。`);
-      await era.printAndWait(
-        `看着近在咫尺的三女神雕像，向三女神祈求繁荣的河神传说浮现在脑海之中。`,
-      );
-      await era.printAndWait(`……祈求着繁荣的河神吗？`);
-      await era.printAndWait(`思考在时间面前来回踱步。`);
-      await falcon.say_and_wait(`三女神大人——`);
-      await era.printAndWait(`身体模仿着旁边的物体做出了相同的动作。`);
-      await era.printAndWait(`在这霎那之间，${callname} 思考的结果是`);
-      era.printButton(`河神祈求土地的人们健康`, 1);
-      era.printButton(`河神祈求土地的人们勇敢`, 2);
-      era.printButton(`河神祈求土地的人们智慧`, 3);
-      const ret1 = await era.input();
-      if (ret1 === 1) {
-        get_attr_and_print_in_event(46, [0, 0, 0, 0, 0], 0, [600]) &&
-          (await era.waitAnyKey());
-      } else if (ret1 === 2) {
-        get_attr_and_print_in_event(46, [10, 10, 10, 10, 10], 0) &&
-          (await era.waitAnyKey());
-      } else {
-        get_attr_and_print_in_event(46, [0, 0, 10, 0, 0], 100) &&
-          (await era.waitAnyKey());
-      }
-      await era.printAndWait(`之后，${callname} 的耳边传来了三女神的低语。`);
-      era.set('cflag:46:节日事件标记', 0);
+    if (ebj?.arg !== 95 + 1) {
+      return;
     }
+    let wait = false;
+    era.set('cflag:46:节日事件标记', 0);
+    switch ((await print_title_with_kojo(this.#kojo, ebj.arg, falcon, me))[0]) {
+      case 1:
+        wait = all_reward_in_event(this.id, { base: [600] });
+        break;
+      case 2:
+        wait = all_reward_in_event(this.id, { attr: new Array(5).fill(10) });
+        break;
+      case 3:
+        wait = all_reward_in_event(this.id, { attr: [0, 0, 10], pt: 100 });
+    }
+    wait && (await era.waitAnyKey());
+    return true;
   }
 };

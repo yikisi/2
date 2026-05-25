@@ -8,7 +8,6 @@ const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const FalconEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-46');
-const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
 const { i18n } = require('#/i18n/selector');
 
@@ -18,7 +17,7 @@ module.exports = class extends CustomizedDaily {
   }
 
   select() {
-    const falcon = get_chara_talk(46);
+    const falcon = get_chara_talk(this.id);
     const me = get_chara_talk(0);
     if (new FalconEduMarks().after_recruit > 0) {
       this.#kojo.select_after_recruit(falcon, me);
@@ -92,15 +91,15 @@ module.exports = class extends CustomizedDaily {
     );
   }
 
-  async s_a_tree_hollow(falcon) {
+  async s_a_tree_hollow(falcon, me, hook) {
     await this.#kojo.s_a_tree_hollow(falcon);
   }
 
-  async s_a_dating(falcon) {
+  async s_a_dating(falcon, me, hook) {
     await this.#kojo.s_a_dating(falcon, sys_get_callname(this.id, 0));
   }
 
-  async school_rooftop() {
+  async school_rooftop(hook) {
     await this.#kojo.school_rooftop(
       get_chara_talk(this.id),
       sys_get_callname(this.id, 0),
@@ -108,7 +107,7 @@ module.exports = class extends CustomizedDaily {
   }
 
   async out_church(hook) {
-    if (era.get('cflag:46:育成回合计时') < 47 + 15) {
+    if (era.get(`cflag:${this.id}:育成回合计时`) < 47 + 15) {
       hook.override = true;
       const edu_marks = new FalconEduMarks();
       if (!edu_marks.idol) {
@@ -122,7 +121,7 @@ module.exports = class extends CustomizedDaily {
           get_chara_talk(0),
           sys_get_callname(this.id, 0),
         );
-        if (era.get('love:46') >= 75) {
+        if (era.get(`love:${this.id}`) >= 75) {
           edu_marks.idol = 1;
         }
         return;
@@ -131,15 +130,15 @@ module.exports = class extends CustomizedDaily {
     return super.out_church(hook);
   }
 
-  async o_s_arcade(falcon, me) {
+  async o_s_arcade(falcon, me, hook) {
     await this.#kojo.o_s_arcade(falcon, me, sys_get_callname(this.id, 0));
   }
 
-  async o_s_drawing(falcon, me) {
-    const life_marks = LifeEventMarks.get_marks(this.id);
+  async o_s_drawing(falcon, me, hook) {
+    const edu_marks = new FalconEduMarks();
     let hot_spring = false;
-    if (!life_marks.get('hot_spring') && Math.random() < 0.05) {
-      life_marks.set('hot_spring', 1);
+    if (!edu_marks.hot_spring && Math.random() < 0.05) {
+      edu_marks.hot_spring = 1;
       hot_spring = true;
     }
     await this.#kojo.o_s_drawing(
@@ -150,31 +149,31 @@ module.exports = class extends CustomizedDaily {
     );
   }
 
-  async o_s_ktv(falcon, me) {
+  async o_s_ktv(falcon, me, hook) {
     await this.#kojo.o_s_ktv(falcon, me, sys_get_callname(this.id, 0));
   }
 
-  async o_s_movie(falcon, me) {
+  async o_s_movie(falcon, me, hook) {
     await this.#kojo.o_s_movie(falcon, me, sys_get_callname(this.id, 0));
   }
 
-  async o_s_restaurant(falcon, me) {
+  async o_s_restaurant(falcon, me, hook) {
     await this.#kojo.o_s_restaurant(falcon, me);
   }
 
-  async o_s_dating(falcon) {
+  async o_s_dating(falcon, me, hook) {
     await this.#kojo.o_s_dating(falcon);
   }
 
-  async o_s_shopping(falcon) {
+  async o_s_shopping(falcon, me, hook) {
     await this.#kojo.o_s_shopping(falcon);
   }
 
-  async o_r_fishing(falcon) {
+  async o_r_fishing(falcon, me, hook, extra) {
     await this.#kojo.o_r_fishing(falcon);
   }
 
-  async o_r_walking(falcon) {
+  async o_r_walking(falcon, me) {
     await this.#kojo.o_r_walking(falcon);
   }
 };

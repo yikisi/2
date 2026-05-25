@@ -33,10 +33,7 @@ module.exports = {
     } else {
       buffer.push(() => {
         maru.say('今天的训练计划是什么呢？');
-        maru.say([
-          era.get('cflag:4:性别') - 1 ? '美眉' : '帅锅',
-          '我已经准备好了哦',
-        ]);
+        maru.say([maru.sex_code === 1 ? '帅锅' : '美眉', '我已经准备好了哦']);
         era.print(`${maru.name}一副跃跃欲试的样子`);
       });
       buffer.push(() => {
@@ -269,9 +266,7 @@ module.exports = {
         maru.say(`接下来也请多多指教了。${callname}♪`);
         break;
       case 5:
-        maru.say(
-          `这是给${era.get('cflag:4:性别') - 1 ? '美眉' : '帅锅'}我的吗？`,
-        );
+        maru.say(`这是给${maru.sex_code === 1 ? '帅锅' : '美眉'}我的吗？`);
         maru.say(`那就谢谢${callname}了♪`);
         maru.say('呵呵～看起来真漂亮呢。');
         break;
@@ -283,7 +278,7 @@ module.exports = {
         maru.say('风停了。');
         break;
       case 15:
-        maru.say(`在特雷森的那个夜晚，在草场上奔跑的${callname}们。`);
+        maru.say(`在特雷森的那个夜晚，在草场上奔跑的${maru.uma_sex_title}们。`);
         maru.say(`支持着我的后辈们，还有身边的${callname}。`);
         maru.say('我由衷的感到了幸福。');
         break;
@@ -409,7 +404,7 @@ module.exports = {
             () =>
               maru.say_and_wait(
                 `如果 ${callname} 有什么问题的话可以来找我倾诉哦，不如说${
-                  era.get('cflag:4:性别') - 1 ? '美眉' : '帅锅'
+                  maru.sex_code === 1 ? '帅锅' : '美眉'
                 }我非常欢迎呢♪`,
               ),
           );

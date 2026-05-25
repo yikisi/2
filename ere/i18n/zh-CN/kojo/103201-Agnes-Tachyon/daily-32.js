@@ -4577,14 +4577,14 @@ module.exports = {
         era.println();
       }
       if (child) {
-        const c_call_y =
+        const callname_c =
           era.get(`cflag:${child.id}:父方角色`) === 0 ? '爸爸' : '妈妈';
         await tachyon.say_and_wait([
           child.get_colored_name(),
           '……真不愧是我的',
           child.sex_code === 1 ? '儿子' : '女儿',
           '，这么快就无师自通用上了『',
-          c_call_y,
+          callname_c,
           '』的穴……不过小孩子嘛，独占欲强点也是可以理解的。',
         ]);
         era.println();
@@ -4593,7 +4593,7 @@ module.exports = {
           '速子拍着 ',
           you.get_colored_name(),
           ' 的屁股，上面用稚嫩的笔迹写着『',
-          c_call_y,
+          callname_c,
           '是我专用的便器』，也不知道这孩子是不是真的理解了话中的意思……听见速子念出这句话，想到孩子若是在理解了这句话的意思的情况下写下来的……',
           you.get_colored_name(),
           ' 又忍不住陷入了高潮。',

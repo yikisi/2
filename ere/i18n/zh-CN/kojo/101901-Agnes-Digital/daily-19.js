@@ -687,7 +687,7 @@ module.exports = {
      * @param {CharaTalk} you 玩家
      * @param {PrintedSpan} callname 爱丽数码对玩家的称呼
      * @param {PrintedSpan} call_20 爱丽数码对青云天空的称呼
-     * @param {PrintedSpan} s_call_y 青云天空对玩家的称呼
+     * @param {PrintedSpan} callname_20 青云天空对玩家的称呼
      * @param {PrintedSpan} s_call_s 青云天空对特别周的称呼
      * @param {PrintedSpan} s_call_d 青云天空对爱丽数码的称呼
      */
@@ -698,9 +698,9 @@ module.exports = {
       you,
       callname,
       call_20,
+      callname_20,
       s_call_s,
       s_call_d,
-      s_call_y,
     ) => {
       const ret = [];
       await era.printAndWait(
@@ -749,7 +749,7 @@ module.exports = {
       if (era.get('cflag:20:招募状态') === recruit_flags.yes) {
         await sky.say_and_wait([
           '哦呀哦呀，没想到 ',
-          s_call_y,
+          callname_20,
           ' 今天有闲情跟 ',
           s_call_d,
           ' 出来钓鱼啊，哟吼吼，居然不是我一起哟……哭哭',
@@ -886,7 +886,7 @@ module.exports = {
       ]);
       era.println();
       if (era.get('cflag:20:招募状态') === recruit_flags.yes) {
-        await sky.say_and_wait([s_call_y, ' 哟！']);
+        await sky.say_and_wait([callname_20, ' 哟！']);
         await era.printAndWait([
           sky.get_colored_name(),
           ' 转向了 ',
@@ -908,7 +908,7 @@ module.exports = {
         ]);
         await sky.say_and_wait([
           '哦呀哦呀，',
-          s_call_y,
+          callname_20,
           ' 居然还会吃醋的吗？该吃醋的是我吧？',
         ]);
         era.printButton('妥协（青云天空好感+40）', 1);
