@@ -177,11 +177,11 @@ module.exports = {
     const title = '严禁逞强！';
     /**
      * @param {CharaTalk} falcon 醒目飞鹰
-     * @param {CharaTalk} me 玩家
+     * @param {CharaTalk} you 玩家
      * @param {string} callname 醒目飞鹰对玩家的称呼
      * @param {number} fail_again 如果选努力的话是否再次失败
      */
-    const f = async (falcon, me, callname, fail_again) => {
+    const f = async (falcon, you, callname, fail_again) => {
       await falcon.say_and_wait(`${callname}……`);
       await era.printAndWait(`飞鹰子在训练的时候不甚扭到了脚`);
       await falcon.say_and_wait(`抱歉，飞鹰子太累了所以……`);
@@ -4876,26 +4876,28 @@ module.exports = {
     const title = '夏季合宿结束';
     /**
      * @param {CharaTalk} falcon 醒目飞鹰
-     * @param {CharaTalk} me 玩家
+     * @param {CharaTalk} you 玩家
      * @param {string} callname 醒目飞鹰对玩家的称呼
      */
-    const f = async (falcon, me, callname) => {
+    const f = async (falcon, you, callname) => {
       await era.printAndWait(`${falcon.name}的第三年夏季合宿结束了。`);
       await falcon.say_and_wait(`向着顶级偶像的道路一刻不停的前进♪`);
       await era.printAndWait(
-        `从庆祝夏季合宿结束的宴会上借口喝多离开的${me.name}遇到了同样从宴会上离开的${falcon.teen_sex_title}。`,
+        `从庆祝夏季合宿结束的宴会上借口喝多离开的${you.name}遇到了同样从宴会上离开的${falcon.teen_sex_title}。`,
       );
-      await me.say_and_wait(`作为知名偶像的飞鹰子像这样离开宴会还真是少见呢。`);
+      await you.say_and_wait(
+        `作为知名偶像的飞鹰子像这样离开宴会还真是少见呢。`,
+      );
       await falcon.say_and_wait(
         `毕竟一号粉丝不在的话，偶像活动也会突然黯淡许多呢。`,
       );
       await era.printAndWait(`原来如此。`);
-      await me.say_and_wait(`飞鹰子已经不害怕孤独了吗？`);
+      await you.say_and_wait(`飞鹰子已经不害怕孤独了吗？`);
       await falcon.say_and_wait(
         `……说实话还是很害怕，但已经没有以前那么害怕了。`,
       );
       await falcon.say_and_wait(`毕竟${callname}一直在我身边呢。`);
-      await me.say_and_wait(`……这就是飞鹰子的决定吗。`, true);
+      await you.say_and_wait(`……这就是飞鹰子的决定吗。`, true);
       await era.printAndWait(
         `${falcon.name}的身体向前微倾，右手食指竖在嘴唇中心，眨了眨右眼。`,
       );
@@ -4912,10 +4914,10 @@ module.exports = {
         `为此努力的每一天，都是为了将这个梦想实现而度过的。`,
       );
       await falcon.say_and_wait(`踏上的道路，周围渐渐能看到一望无际的草原了。`);
-      await me.say_and_wait(`为了成为顶级偶像，接下来的比赛也不能松懈！`);
+      await you.say_and_wait(`为了成为顶级偶像，接下来的比赛也不能松懈！`);
       await falcon.say_and_wait(`不对！`);
-      await era.printAndWait(`${falcon.name}说出了令${me.name}吃惊的话。`);
-      await me.say_and_wait(`飞鹰子的意思是？`);
+      await era.printAndWait(`${falcon.name}说出了令${you.name}吃惊的话。`);
+      await you.say_and_wait(`飞鹰子的意思是？`);
       await falcon.say_and_wait(
         `就跟${callname}之前说过的一样，每个人都要为自己的选择负起责任。`,
       );
@@ -4940,7 +4942,7 @@ module.exports = {
       );
       era.printButton(`飞鹰子？`, 1);
       await era.input();
-      await era.printAndWait(`然后紧紧的抱住了${me.name}。`);
+      await era.printAndWait(`然后紧紧的抱住了${you.name}。`);
       await falcon.say_and_wait(`谢谢你，${callname}。`);
       await era.printAndWait(`${falcon.name}不再孤单了。`);
     };
@@ -5043,18 +5045,18 @@ module.exports = {
     const title = '铭记的镜子';
     /**
      * @param {CharaTalk} falcon 醒目飞鹰
-     * @param {CharaTalk} me 玩家
+     * @param {CharaTalk} you 玩家
      * @param {string} callname 醒目飞鹰对玩家的称呼
      */
-    const f = async (falcon, me, callname) => {
-      await me.used_to_say_and_wait(`${falcon.uma_sex_title}偶像？`);
-      await me.used_to_say_and_wait(
+    const f = async (falcon, you, callname) => {
+      await you.used_to_say_and_wait(`${falcon.uma_sex_title}偶像？`);
+      await you.used_to_say_and_wait(
         `${falcon.uma_sex_title}偶像的概念似乎有些笼统啊。`,
       );
-      await me.used_to_say_and_wait(
+      await you.used_to_say_and_wait(
         `如果是积极参与比赛，并且闪闪发光的话，所有在赛场上奔驰的${falcon.uma_sex_title}都是一样的。`,
       );
-      await me.used_to_say_and_wait(
+      await you.used_to_say_and_wait(
         `作为${falcon.uma_sex_title}偶像的特殊之处又在哪里呢？`,
       );
       era.drawLine();
@@ -5853,11 +5855,11 @@ module.exports = {
     const title = '圣诞节♪';
     /**
      * @param {CharaTalk} falcon 醒目飞鹰
-     * @param {CharaTalk} me 玩家
+     * @param {CharaTalk} you 玩家
      * @param {string} callname 醒目飞鹰对玩家的称呼
      */
-    const f = async (falcon, me, callname) => {
-      await era.printAndWait(`${me.name}与${falcon.name}度过的第三个圣诞。`);
+    const f = async (falcon, you, callname) => {
+      await era.printAndWait(`${you.name}与${falcon.name}度过的第三个圣诞。`);
       await falcon.say_and_wait(`谢谢大家！`);
       await era.printAndWait(
         `在圣诞当天依然举办着演唱会感谢着作为粉丝的大家。`,
@@ -5880,7 +5882,7 @@ module.exports = {
         `粉丝D「虽然来晚了，没得到礼物，不过之后我也会一直支持飞鹰子的！」`,
       );
       await era.printAndWait(
-        `等到粉丝们纷纷散去之后，现场只剩下了${me.name}和飞鹰子两人。`,
+        `等到粉丝们纷纷散去之后，现场只剩下了${you.name}和飞鹰子两人。`,
       );
       await falcon.say_and_wait(`终于结束了！`);
       era.printButton(`收到礼物的粉丝们一定会很开心的`, 1);
@@ -5890,7 +5892,7 @@ module.exports = {
         `从一开始一个粉丝也没有一直到成为闪耀的偶像，没有${callname}的帮助，飞鹰子是不可能做到这一步的！`,
       );
       await era.printAndWait(
-        `低头向${me.name}鞠躬的飞鹰子让${me.name}有点意外。`,
+        `低头向${you.name}鞠躬的飞鹰子让${you.name}有点意外。`,
       );
       era.printButton(
         `不，再怎么说也是飞鹰子的功劳，我只是做了分内的事情罢了`,
@@ -5904,9 +5906,9 @@ module.exports = {
       await falcon.say_and_wait(`接下来一起去哪里逛逛吧？`);
       await falcon.say_and_wait(`外宿许可也已经申请了哦！`);
       await era.printAndWait(
-        `轻轻牵起${me.name}的手的${falcon.name}拉着${me.name}前进。`,
+        `轻轻牵起${you.name}的手的${falcon.name}拉着${you.name}前进。`,
       );
-      await me.say_and_wait(`这边的摆放的道具呢？`);
+      await you.say_and_wait(`这边的摆放的道具呢？`);
       await falcon.say_and_wait(`没关系的！`);
       await era.printAndWait(
         `从充满暖气的房间里走出来后，立刻感受到了寒冷的气息。`,
@@ -5915,7 +5917,7 @@ module.exports = {
       await era.printAndWait(
         `尽管戴上了保暖的手套，还是有冷气从摩擦的细缝之中溜了进来。`,
       );
-      await me.say_and_wait(`一起去萨莉亚吃一顿大餐吧？`);
+      await you.say_and_wait(`一起去萨莉亚吃一顿大餐吧？`);
       await era.printAndWait(
         `经济实惠的萨莉亚对饥肠辘辘的两人来说具有非常大的吸引力。`,
       );
@@ -5924,12 +5926,12 @@ module.exports = {
           falcon.name
         }也这么想的呢，而且和${callname}一起吃饭的话，兴致突然就高涨起来了⭐`,
       );
-      await me.say_and_wait(`那么我们加快脚步吧！`);
+      await you.say_and_wait(`那么我们加快脚步吧！`);
       era.drawLine();
       await era.printAndWait([
         falcon.get_colored_name(),
         '/',
-        me.get_colored_name(),
+        you.get_colored_name(),
         '「',
         { content: '干', color: falcon.color },
         '杯！」',
@@ -5938,30 +5940,32 @@ module.exports = {
         `在暖色调的灯光下，餐厅嘈杂的人声伴随着叮叮铛铛的道具碰撞声形成了独特的声音。`,
       );
       await falcon.say_and_wait(`萨莉亚的食物比想象中还要美味呢`);
-      await me.say_and_wait(`是因为节日的缘故吧？这里的人都洋溢着快乐的气息。`);
+      await you.say_and_wait(
+        `是因为节日的缘故吧？这里的人都洋溢着快乐的气息。`,
+      );
       await falcon.say_and_wait(
         `也有这一部分的缘故，不过更多的还是像普通${falcon.uma_sex_title}一样享受着节日的气息。`,
       );
-      await me.say_and_wait(`飞鹰子对偶像感到疲惫了吗？`);
+      await you.say_and_wait(`飞鹰子对偶像感到疲惫了吗？`);
       await falcon.say_and_wait(`不会哦？不如说飞鹰子很享受呢！`);
       await era.printAndWait(`睁大了眼睛的飞鹰子露出了疑惑的神情。`);
-      await me.say_and_wait(`接下来的路飞鹰子也要努力才行。`);
+      await you.say_and_wait(`接下来的路飞鹰子也要努力才行。`);
       await falcon.say_and_wait(`梦之杯吗？`);
-      await me.say_and_wait(
+      await you.say_and_wait(
         `除了比赛之外，还要注意自己的日程表不要过度劳累才行！`,
       );
       await era.printAndWait(`不知不觉恢复了平时说教的状态。`);
       await falcon.say_and_wait(`咕～这种气氛下你真是木头呢。`);
       await era.printAndWait(
-        `咕噜咕噜搅拌着还剩下一半果汁发出了不满声音的飞鹰子看着${me.name}。`,
+        `咕噜咕噜搅拌着还剩下一半果汁发出了不满声音的飞鹰子看着${you.name}。`,
       );
       await falcon.say_and_wait(
         `不过，也许就是这样的${callname}，${falcon.name}才最喜欢了呢！`,
       );
       await era.printAndWait(`突然之间笑出来的飞鹰子看起来额外可爱。`);
       await falcon.say_and_wait(`嗯——可以靠过来一点吗？`);
-      await era.printAndWait(`说着将自己的身体靠近了${me.name}坐着的位子。`);
-      await me.say_and_wait(`……`);
+      await era.printAndWait(`说着将自己的身体靠近了${you.name}坐着的位子。`);
+      await you.say_and_wait(`……`);
       await falcon.say_and_wait(`那么！一、二、三！`);
       await era.printAndWait(`在手机上拍下了接吻瞬间的${falcon.name}。`);
       await era.printAndWait(`作为偶像来说绝对NG的吧？`);

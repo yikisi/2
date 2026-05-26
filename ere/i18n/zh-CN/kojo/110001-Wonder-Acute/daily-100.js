@@ -645,10 +645,10 @@ module.exports = {
   },
   /**
    * @param {CharaTalk} acute 奇锐骏
-   * @param {CharaTalk} me 玩家
+   * @param {CharaTalk} you 玩家
    * @param {PrintedSpan} callname 奇锐骏对玩家的称呼
    */
-  async o_s_arcade(acute, me, callname) {
+  async o_s_arcade(acute, you, callname) {
     await era.printAndWait([
       '与 ',
       acute.get_colored_name(),
@@ -1067,11 +1067,11 @@ module.exports = {
   },
   /**
    * @param {CharaTalk} acute 奇锐骏
-   * @param {CharaTalk} me 玩家
+   * @param {CharaTalk} you 玩家
    * @param {PrintedSpan} callname 奇锐骏对玩家的称呼
    * @param {boolean} sex 是否性爱
    */
-  async o_s_dating(acute, me, callname, sex) {
+  async o_s_dating(acute, you, callname, sex) {
     await era.printAndWait([
       '休息日与 ',
       acute.get_colored_name(),
@@ -1089,7 +1089,7 @@ module.exports = {
         '正说着，',
         acute.get_colored_name(),
         ' 在街上毫不客气的拍了拍 ',
-        me.get_colored_name(),
+        you.get_colored_name(),
         ' 的腰，脸上浮现出了颇有深意的笑容。',
       ]);
       await era.printAndWait('………………');

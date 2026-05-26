@@ -66,10 +66,10 @@ module.exports = class extends CustomizedCheck {
         new KitaEduMarks().g1_count >= 7)
     ) {
       titles.push({
-        c: get_chara_color(68),
+        c: get_chara_color(this.id),
         n: this.get_personal_titles()[0],
       });
-      aim_check && sys_personal_achievement.set(68, 1);
+      aim_check && sys_personal_achievement.set(this.id, 1);
     }
     return titles;
   }
