@@ -20,6 +20,8 @@ class I18nKojo {
   25 = new (require('#/i18n/zh-CN/kojo/102501-Manhattan-Cafe/entry'))();
   30 = new (require('#/i18n/zh-CN/kojo/103001-Rice-Shower/entry'))();
   32 = new (require('#/i18n/zh-CN/kojo/103201-Agnes-Tachyon/entry'))();
+  33 = new (require('#/i18n/zh-CN/kojo/103301-Admire-Vega/entry'))();
+  34 = new (require('#/i18n/zh-CN/kojo/103401-Inari-One/entry'))();
   35 = new (require('#/i18n/zh-CN/kojo/103501-Winning-Ticket/entry'))();
   36 = new (require('#/i18n/zh-CN/kojo/103601-Air-Shakur/entry'))();
   37 = new (require('#/i18n/zh-CN/kojo/103701-Eishin-Flash/entry'))();

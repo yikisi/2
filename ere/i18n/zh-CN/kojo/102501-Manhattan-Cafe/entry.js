@@ -21,6 +21,18 @@ class I18nKojo102501 {
     require('#/i18n/zh-CN/kojo/102501-Manhattan-Cafe/base-25.js'),
   );
   // GENERATED END
+
+  report_arim_kin = (cafe) => [
+    {
+      color: cafe.color,
+      content: '获胜的是 ',
+    },
+    cafe.get_colored_name(),
+    {
+      color: cafe.color,
+      content: '！世代交替，由此证明！',
+    },
+  ];
 }
 
 module.exports = I18nKojo102501;

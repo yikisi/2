@@ -2,8 +2,8 @@ const era = require('#/era-electron');
 
 const sys_filter_chara = require('#/system/sys-filter-chara');
 
-const typing = require('#/event/edu/edu-events-56/snippets/typing');
 const { add_event } = require('#/event/queue');
+const { typing } = require('#/event/snippets/105601');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
 

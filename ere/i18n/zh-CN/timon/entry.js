@@ -43,6 +43,16 @@ class I18nTimon {
   strange_desc = (debuff) =>
     `彼此还很不熟悉……训练效果-${debuff}%；改善关系或与担当训练员谈论此事可改善该状态。`;
 
+  report_tenn_spr = '春季的长距离之王诞生！';
+  report_tenn_sho = (uma) => ['在此，府中秋天的魔物被 ', uma, ' 击灭了！'];
+  report_invincible_g1 = (uma) => [
+    '强者就是强大，强者就是强大！',
+    uma,
+    ' 无伤称霸G1！',
+  ];
+  report_invincible_three_crowns =
+    '这是无败三冠！赛马娘历史永不磨灭的大记录达成啦！！！';
+
   npc_select = '要和谁交谈？';
   npc_talk = '聊天';
   npc_sex = '求爱';

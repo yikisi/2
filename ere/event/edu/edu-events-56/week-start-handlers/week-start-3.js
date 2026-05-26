@@ -13,8 +13,8 @@ const {
 
 const print_ero_page = require('#/page/page-ero');
 
-const typing = require('#/event/edu/edu-events-56/snippets/typing');
 const { add_event } = require('#/event/queue');
+const { typing } = require('#/event/snippets/105601');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');

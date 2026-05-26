@@ -5,6 +5,8 @@ const CustomizedMec = require('#/event/mec/mec-common');
 const LegendUmaSelector = require('#/data/race/model/legend-uma-selector');
 const { race_enum } = require('#/data/race/race-const');
 
+const { i18n } = require('#/i18n/selector');
+
 module.exports = class extends CustomizedMec {
   get_race_contestants(info) {
     if (
@@ -21,7 +23,7 @@ module.exports = class extends CustomizedMec {
       race_id === race_enum.arim_kin &&
       get(`cflag:${this.id}:育成回合计时`) > 96
     ) {
-      return [{ color: uma.color, content: '这就是！巨星的谢幕之际！' }];
+      return i18n().kojo[this.id].report_arim_kin(uma.get_colored_name());
     }
     return super.get_race_finish_report(uma, race_id);
   }

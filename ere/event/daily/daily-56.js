@@ -8,8 +8,8 @@ const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
 const CustomizedDaily = require('#/event/daily/daily-common');
-const set_luck_result = require('#/event/edu/edu-events-56/snippets/set-luck-result');
 const { add_event, cb_enum } = require('#/event/queue');
+const { set_luck_result } = require('#/event/snippets/105601');
 const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 const quick_into_sex = require('#/event/snippets/quick-into-sex');
 

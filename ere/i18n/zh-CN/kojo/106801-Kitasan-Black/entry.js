@@ -15,6 +15,10 @@ class I18nKojo106801 {
     require('#/i18n/zh-CN/kojo/106801-Kitasan-Black/love-68.js'),
   );
   // GENERATED END
+
+  report_arim_kin = (kita) => [
+    { color: kita.color, content: '这就是！巨星的谢幕之际！' },
+  ];
 }
 
 module.exports = I18nKojo106801;
