@@ -81,6 +81,7 @@ class I18nClothes {
   102440 = 'Rock in☆MewMeow';
   102501 = 'Creeping Black';
   102513 = '柳绿小夜';
+  102526 = '幽玄薔薇';
   102601 = 'MB-19890425';
   102613 = 'CODE: Glaçage';
   102701 = 'Straight・Line';
@@ -255,6 +256,7 @@ class I18nClothes {
   111401 = 'Heroína Inocente';
   111501 = '总览';
   111601 = 'Regina dei fiori';
+  111626 = 'La dama perfetta';
   111701 = '戏剧性的芭蕾裙';
   111801 = 'Glacial Queen';
   111901 = '梦境的尽头';
