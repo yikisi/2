@@ -20,7 +20,7 @@ module.exports = class extends CustomizedMec {
 
   get_race_contestants(info) {
     // FLAGNAME:7 = 当前赛事
-    // CFLAGNAME:48 = 48
+    // CFLAGNAME:48 = 育成回合计时
     switch (era.get('flag:7')) {
       case race_enum.hoch_sho:
       case race_enum.sats_sho:

@@ -131,7 +131,7 @@ module.exports = {
    * @param {PrintedSpan} call_9 爱丽速子对大和赤骥的称呼
    * @param {PrintedSpan} call_25 爱丽速子对大和赤骥的称呼
    * @param {PrintedSpan} y_call_s 玩家对青云天空的称呼
-   * @param {number} relation 爱丽速子对玩家的好感
+   * @param {number} relation 爱丽速子对玩家的好感度
    * @param {number} love 爱丽速子对玩家的爱慕
    * @param {number} talk_times 本周的聊天次数
    * @param {number} cook_times 给爱丽速子做饭的次数

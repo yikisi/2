@@ -43,6 +43,9 @@ module.exports = class extends CustomizedLove {
   }
 
   async 74(tachyon, me, callname) {
+    if (era.get(`love:${this.id}`) === 75) {
+      return;
+    }
     let h;
     switch (
       (await print_title_with_kojo(this.#kojo, '74', tachyon, me, callname))[0]

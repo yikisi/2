@@ -3,6 +3,7 @@ const era = require('#/era-electron');
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
 const print_event_name = require('#/event/snippets/print-event-name');
+const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 
 const {
   get_chara_talk,
@@ -10,7 +11,10 @@ const {
 } = require('#/utils/chara-talk-factory');
 
 const CoffeeEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-25');
+const TachyonEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32');
 const { race_enum, race_infos } = require('#/data/race/race-const');
+
+const { i18n } = require('#/i18n/selector');
 
 /**
  * @param {Record<string,function(CharaTalk,CharaTalk,string,RaceEndParams):Promise<boolean|void>>} handlers
@@ -412,13 +416,12 @@ module.exports = (handlers, check_tachyon_plan_b) => {
     extra_flag.love_change = 3;
   };
 
-  handlers[race_enum.arim_kin] = async (coffee, me, callname, extra_flag) => {
-    if (extra_flag.rank !== 1) {
+  handlers[race_enum.arim_kin] = async (coffee, me, callname, extra) => {
+    if (extra.rank !== 1) {
       return true;
     }
     if (era.get('cflag:25:育成回合计时') < 96) {
       await print_event_name('妖异', coffee);
-
       await say_by_passer_by_and_wait('解说员', [
         '夺下今年 ',
         race_infos[race_enum.arim_kin].get_colored_name(),
@@ -520,8 +523,8 @@ module.exports = (handlers, check_tachyon_plan_b) => {
         me.get_colored_name(),
         ' 自己的意志吗？',
       ]);
-      extra_flag.attr_change = new Array(5).fill(10);
-      extra_flag.pt_change = 45;
+      extra.attr_change = new Array(5).fill(10);
+      extra.pt_change = 45;
     } else {
       await print_event_name('摩天楼', coffee);
       await say_by_passer_by_and_wait('解说员', [
@@ -606,10 +609,25 @@ module.exports = (handlers, check_tachyon_plan_b) => {
       await era.printAndWait([
         '你们并肩仰望着天空，细细体会着，两人的这个目标是多么珍贵且无边无际……',
       ]);
-      extra_flag.attr_change = new Array(5).fill(10);
-      extra_flag.pt_change = 45;
-      extra_flag.relation_change = 30;
-      extra_flag.love_change = 5;
+      if (new TachyonEduMarks().plan_b > 0) {
+        era.drawLine();
+        await print_title_with_kojo(
+          i18n().kojo[32].edu,
+          'before_arim_kin_b',
+          get_chara_talk(32),
+          coffee,
+          me,
+          sys_get_colored_callname(32, 0),
+          sys_get_colored_callname(32, this.id),
+          callname,
+          sys_get_colored_callname(this.id, 32),
+          race_infos[race_enum.arim_kin].get_colored_name(),
+        );
+      }
+      extra.attr_change = new Array(5).fill(10);
+      extra.pt_change = 45;
+      extra.relation_change = 30;
+      extra.love_change = 5;
     }
   };
 };

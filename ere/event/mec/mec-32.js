@@ -5,6 +5,8 @@ const CustomizedMec = require('#/event/mec/mec-common');
 const { get_chara_color } = require('#/data/chara-colors');
 const TachyonEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-32');
 const recruit_flags = require('#/data/event/recruit-flags');
+const LegendUmaSelector = require('#/data/race/model/legend-uma-selector');
+const { race_enum } = require('#/data/race/race-const');
 
 const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
@@ -23,6 +25,22 @@ module.exports = class extends CustomizedMec {
   is_train_enabled() {
     const edu_marks = new TachyonEduMarks();
     return !edu_marks.train_stop && !edu_marks.glass_leg;
+  }
+
+  get_race_contestants(info) {
+    switch (get('flag:当前赛事')) {
+      case race_enum.sats_sho:
+        return [new LegendUmaSelector(25, 1.05)];
+      case race_enum.toky_yus:
+        return [new LegendUmaSelector(94, 1.05)];
+      case race_enum.kiku_sho:
+        return [new LegendUmaSelector(25, 1.05)];
+      case race_enum.arim_kin:
+        if (get('cflag:32:育成回合计时') > 96) {
+          return [new LegendUmaSelector(25, 1.05)];
+        }
+    }
+    return super.get_race_contestants(info);
   }
 
   set_callname() {

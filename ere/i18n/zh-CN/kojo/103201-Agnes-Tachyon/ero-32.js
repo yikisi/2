@@ -835,6 +835,7 @@ module.exports = {
   },
   betrayed1: (() => {
     /**
+     * 机制上属于曼城茶座的调教结束事件
      * @param {CharaTalk} tachyon 爱丽速子
      * @param {CharaTalk} coffee 曼城茶座
      * @param {CharaTalk} you 玩家
@@ -1067,6 +1068,7 @@ module.exports = {
   })(),
   betrayed2: (() => {
     /**
+     * 机制上属于曼城茶座的调教结束事件
      * @param {CharaTalk} tachyon 爱丽速子
      * @param {CharaTalk} coffee 曼城茶座
      * @param {CharaTalk} you 玩家

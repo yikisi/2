@@ -194,7 +194,10 @@ class CustomizedEdu extends CustomizedEvent {
     await i18n().timon.edu.tf_info(chara, attr, is_fumble);
   }
 
-  /** @param {number} attr */
+  /**
+   * @param {number} attr
+   * @returns {Promise<boolean|void>}
+   */
   async train(attr) {
     await i18n().timon.edu.train(
       get_chara_talk(this.id),
@@ -220,8 +223,7 @@ class CustomizedEdu extends CustomizedEvent {
       return;
     }
     if (
-      // STATUSNAME:2 = 摸鱼
-      !era.get(`status:${this.id}:2`) &&
+      !era.get(`status:${this.id}:摸鱼`) &&
       Math.random() < 0.2 * extra.stamina_ratio
     ) {
       if (sys_check_remote(this.id)) {

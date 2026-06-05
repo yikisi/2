@@ -24,8 +24,7 @@ const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
 /** @type {Record<string,number>[]} */
-const aim_races = [];
-aim_races.push({}, {});
+const aim_races = [{}, {}];
 
 // planA:
 aim_races[0][race_enum.begin_race] = 3;
@@ -55,19 +54,19 @@ function get_coffee_aim_entry(coffee, entry) {
 }
 
 module.exports = class extends CustomizedCheck {
-  check_after_betrayed(partners) {
+  check_after_betrayed(partners, ia) {
     if (
-      new TachyonEduMarks().plan_b &&
-      partners.indexOf(25) !== -1 &&
+      new TachyonEduMarks().plan_b > 0 &&
+      partners.includes(25) &&
       era.get('cflag:0:性别') > 0 &&
       era.get('cflag:32:性别') !== 1
     ) {
       const life_marks = new TachyonLifeMarks();
       if (life_marks.ntr_mark < 3) {
         life_marks.betrayed++;
-        if (life_marks.ntr_mark === 0 && life_marks.betrayed >= 5) {
+        if (life_marks.ntr_mark === 0 && life_marks.betrayed >= 3) {
           life_marks.ntr_mark = 1;
-        } else if (life_marks.ntr_mark === 2 && life_marks.betrayed >= 10) {
+        } else if (life_marks.ntr_mark === 2 && life_marks.betrayed >= 6) {
           life_marks.ntr_mark = 3;
           life_marks.betrayed = 0;
         }
@@ -101,11 +100,11 @@ module.exports = class extends CustomizedCheck {
     );
   }
 
-  check_after_race(extra_flag) {
+  check_after_race(extra) {
     const edu_marks = new TachyonEduMarks();
     if (
-      extra_flag.edu_weeks <= 47 + race_infos[race_enum.sats_sho].date &&
-      extra_flag.rank !== 1
+      extra.edu_weeks <= 47 + race_infos[race_enum.sats_sho].date &&
+      extra.rank !== 1
     ) {
       edu_marks.title_check = 1;
     }
@@ -113,22 +112,22 @@ module.exports = class extends CustomizedCheck {
     if (
       check_aim_race(race_history, race_enum.sats_sho, 1, 1) &&
       check_aim_race(race_history, race_enum.toky_yus, 1, 1) &&
-      extra_flag.race === race_enum.kiku_sho &&
-      extra_flag.rank === 1
+      extra.race === race_enum.kiku_sho &&
+      extra.rank === 1
     ) {
       add_event(
         event_hooks.week_end,
-        new EventObject(32, cb_enum.edu).set_arg('triple_crown'),
+        new EventObject(32, cb_enum.edu).set_arg('triple_crowns'),
       );
     }
-    if (edu_marks.plan_b && extra_flag.race === race_enum.tenn_spr) {
+    if (edu_marks.plan_b && extra.race === race_enum.tenn_spr) {
       edu_marks.tenn_spr = 1;
     }
     if (
-      extra_flag.contestants.find((e) => e.index_chara === 25)?.rank?.curr <
-      extra_flag.rank
+      extra.contestants.find((e) => e.index_chara === 25)?.rank?.curr <
+      extra.rank
     ) {
-      new TachyonEduMarks().beat_c = 1;
+      edu_marks.beat_c = 1;
     }
   }
 
@@ -210,17 +209,15 @@ module.exports = class extends CustomizedCheck {
     if (edu_weeks < 3 * 48) {
       edu_marks.train_stop = 0;
       edu_marks.train_fail = Math.min(edu_marks.train_fail, 2);
-      const event_obj = new EventObject(32, cb_enum.edu),
-        event_obj_special = new EventObject(32, cb_enum.edu, true).set_arg(
-          edu_weeks,
-        ),
-        year_begin = cur_round - (cur_round % 48);
+      const ebj = new EventObject(32, cb_enum.edu);
+      const ebj_s = new EventObject(32, cb_enum.edu, true).set_arg(edu_weeks);
+      const year_begin = cur_round - (cur_round % 48);
       if (
         Math.random() < 0.2 &&
-        era.get('cflag:32:位置') === location_enum.office &&
+        era.get('cflag:32:位置') === 0 &&
         era.get('cflag:0:位置') === era.get('cflag:32:位置')
       ) {
-        add_event(event_hooks.week_start, event_obj.copy().set_arg('try_drug'));
+        add_event(event_hooks.week_start, ebj.copy().set_arg('try_drug'));
       }
       switch (edu_weeks) {
         case 15: // 实验课题拟定
@@ -233,15 +230,15 @@ module.exports = class extends CustomizedCheck {
         case 95 + 14: // 粉丝感谢祭
         case 95 + 31: // 他人的可能性 or 再度闪耀的光子
         case 95 + 39: // 最终因素的寻求 or 超越极限……？
-          add_event(event_hooks.week_start, event_obj_special);
+          add_event(event_hooks.week_start, ebj_s);
           break;
         case 95 + 35:
           if (edu_marks.plan_b) {
             // 法国（？）
-            add_event(event_hooks.week_start, event_obj_special);
+            add_event(event_hooks.week_start, ebj_s);
           } else {
             // 因素 · 旁观者设置
-            add_event(event_hooks.week_end, event_obj_special);
+            add_event(event_hooks.week_end, ebj_s);
           }
           break;
         case 47 + 15:
@@ -250,7 +247,7 @@ module.exports = class extends CustomizedCheck {
           }
           break;
         case 47 + 23: // 最速？最强？
-          add_event(event_hooks.week_end, event_obj_special);
+          add_event(event_hooks.week_end, ebj_s);
           break;
         case 47 + 40: // 不同的可能性
           if (
@@ -263,23 +260,23 @@ module.exports = class extends CustomizedCheck {
                   sys_reg_race(cid).curr.race === race_enum.kiku_sho,
               )
           ) {
-            add_event(event_hooks.week_start, event_obj_special);
+            add_event(event_hooks.week_start, ebj_s);
           }
           break;
-        case 47 + 41: // 第二次年度考核
         case 47 + 29: // 媒体应对办法
+        case 47 + 41: // 第二次年度考核
           if (!edu_marks.plan_b) {
-            add_event(event_hooks.week_start, event_obj_special);
+            add_event(event_hooks.week_start, ebj_s);
           }
           break;
         case 47 + 47: // 黯淡的光辉
         case 95 + 15: // 闪烁的光子
           if (edu_marks.plan_b) {
-            add_event(event_hooks.week_end, event_obj_special);
+            add_event(event_hooks.week_end, ebj_s);
           }
           break;
         case 95 + 1: // 第二次年度审核报告 or 下定决心的新年
-          add_event(event_hooks.week_start, event_obj_special);
+          add_event(event_hooks.week_start, ebj_s);
           if (edu_marks.plan_b) {
             sys_reg_race(32).curr = {
               race: race_enum.tenn_spr,
@@ -288,7 +285,7 @@ module.exports = class extends CustomizedCheck {
           }
           break;
         case 95 + 3: // 抽奖与代偿剂效应
-          add_event(event_hooks.out_shopping, event_obj_special);
+          add_event(event_hooks.out_shopping, ebj_s);
           break;
         case 95 + 5:
           if (edu_marks.plan_b) {
@@ -308,7 +305,7 @@ module.exports = class extends CustomizedCheck {
           break;
         case 95 + 18: // 重新绽放的光子
           if (edu_marks.tenn_spr) {
-            add_event(event_hooks.week_end, event_obj_special);
+            add_event(event_hooks.week_end, ebj_s);
           }
           break;
         case 95 + 19:
@@ -335,12 +332,12 @@ module.exports = class extends CustomizedCheck {
               week: year_begin + race_infos[race_enum.prix_lat].date,
             };
           }
-          add_event(event_hooks.week_start, event_obj_special);
+          add_event(event_hooks.week_start, ebj_s);
           break;
         case 95 + 32: // 换位实验
         case 95 + 43: // 完全燃起的胜负心
           if (!edu_marks.plan_b) {
-            add_event(event_hooks.week_end, event_obj_special);
+            add_event(event_hooks.week_end, ebj_s);
           }
           break;
         case 95 + 36: // 决心
@@ -348,7 +345,7 @@ module.exports = class extends CustomizedCheck {
             edu_marks.plan_b &&
             era.get('cflag:25:位置') !== location_enum.paris
           ) {
-            add_event(event_hooks.week_end, event_obj_special);
+            add_event(event_hooks.week_end, ebj_s);
           }
           break;
         case 95 + 37: // 极限的标准
@@ -356,7 +353,7 @@ module.exports = class extends CustomizedCheck {
             edu_marks.plan_b &&
             era.get('cflag:25:位置') !== location_enum.paris
           ) {
-            add_event(event_hooks.week_start, event_obj_special);
+            add_event(event_hooks.week_start, ebj_s);
           }
           break;
         case 95 + 38:
@@ -364,20 +361,12 @@ module.exports = class extends CustomizedCheck {
             edu_marks.glass_leg = 1;
           }
           break;
-        case 95 + 40: // 完全燃起的胜负心
-          if (
-            edu_marks.plan_b &&
-            check_aim_race(RaceHistory.get(25).get(), race_enum.japa_cup, 2, 1)
-          ) {
-            add_event(event_hooks.week_end, event_obj_special);
-          }
-          break;
         case 95 + 47: // 被超越的极限
           if (
             edu_marks.plan_b &&
             check_aim_race(RaceHistory.get(25).get(), race_enum.japa_cup, 2, 3)
           ) {
-            add_event(event_hooks.week_start, event_obj_special);
+            add_event(event_hooks.week_start, ebj_s);
           }
           break;
         case 95 + 48: // 临夜的圣诞老人 or 圣夜的诺言
@@ -392,12 +381,12 @@ module.exports = class extends CustomizedCheck {
               sys_reg_race(25).curr.race === race_enum.arim_kin &&
               check_aim_race(RaceHistory.get(32).get(), race_enum.prix_lat, 2))
           ) {
-            add_event(event_hooks.week_start, event_obj_special);
+            add_event(event_hooks.week_start, ebj_s);
           }
       }
       check_and_register_aim_race(32, aim_races[edu_marks.plan_b]);
     } else if (edu_weeks === 143 + 9) {
-      // 极限的彼方 or PlanB的未来
+      // 极限的彼方 or PlanB 的未来
       add_event(
         event_hooks.week_start,
         new EventObject(32, cb_enum.edu).set_arg('palace'),
@@ -480,7 +469,7 @@ module.exports = class extends CustomizedCheck {
     buffer.push(check_aim_and_get_entry(races, race_enum.hoch_sho, 1, 3));
     buffer.push(check_aim_and_get_entry(races, race_enum.sats_sho, 1, 3));
     buffer.push(check_aim_and_get_entry(races, race_enum.toky_yus, 1, 1));
-    if (plan_b) {
+    if (plan_b > 0) {
       const edu_weeks = era.get('cflag:32:育成回合计时');
       if (edu_weeks >= 95 + 1) {
         buffer.push(check_aim_and_get_entry(races, race_enum.tenn_spr, 2, 3));

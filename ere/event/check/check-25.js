@@ -36,29 +36,29 @@ aim_races[get_aim_race_index(race_enum.japa_cup, 2)] = 3;
 aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 3;
 
 module.exports = class extends CustomizedCheck {
-  check_after_race(extra_flag) {
+  check_after_race(extra) {
     if (
       new TachyonEduMarks().plan_b === 1 &&
       era.get('cflag:32:育成回合计时') < 3 * 48
     ) {
-      if (extra_flag.race === race_enum.kiku_sho) {
+      if (extra.race === race_enum.kiku_sho) {
         add_event(
           event_hooks.week_end,
           new EventObject(32, cb_enum.edu).set_arg('limited_tachyon'),
         );
       } else if (
-        extra_flag.race === race_enum.japa_cup &&
+        extra.race === race_enum.japa_cup &&
         era.get('cflag:25:育成回合计时') >= 96 &&
-        extra_flag.rank === 1
+        extra.rank === 1
       ) {
         add_event(
           event_hooks.week_end,
-          new EventObject(32, cb_enum.edu).set_arg('japa_cup'),
+          new EventObject(32, cb_enum.edu).set_arg('cf_japa_cup'),
         );
       } else if (
-        extra_flag.race === race_enum.arim_kin &&
+        extra.race === race_enum.arim_kin &&
         era.get('cflag:25:育成回合计时') >= 96 &&
-        extra_flag.rank === 1
+        extra.rank === 1
       ) {
         add_event(
           event_hooks.week_end,
