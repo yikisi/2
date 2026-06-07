@@ -353,10 +353,6 @@ module.exports = {
           ' 刚刚张开一点嘴唇，那根肉棒就迫不及待地捅了进来。',
         ]);
         await printAndWait([
-          you.get_colored_name(),
-          ' 刚刚张开一点嘴唇，那根肉棒就迫不及待地捅了进来。',
-        ]);
-        await printAndWait([
           '在 ',
           chara.get_colored_name(),
           ' 肆意地使用之下，',
