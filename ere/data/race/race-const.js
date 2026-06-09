@@ -232,7 +232,7 @@ const race_enum = {
   keis_han: 112,
   // 玫瑰锦标
   rose_sta: 113,
-  // 圣列特纪念赛
+  // 圣烈特纪念赛
   stli_kin: 114,
   // 神户新闻杯
   kobe_hai: 115,

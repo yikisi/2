@@ -15,7 +15,7 @@ module.exports = {
   ...require('#/i18n/zh-CN/kojo/103201-Agnes-Tachyon/edu-32-plan-b'),
   /**
    * @param {CharaTalk} tachyon 爱丽速子
-   * @param {CharaTalk} me 玩家
+   * @param {CharaTalk} you 玩家
    * @param {string} callname 爱丽速子对玩家的称呼
    * @param {string} call_25 爱丽速子对曼城茶座的称呼
    * @param {number} rel 爱丽速子对玩家的好感度
@@ -23,7 +23,7 @@ module.exports = {
    * @param {number} moti 爱丽速子的干劲
    * @param {number} stmn_rat 爱丽速子的体力百分比
    */
-  async train(tachyon, me, callname, call_25, rel, love, moti, stmn_rat) {
+  async train(tachyon, you, callname, call_25, rel, love, moti, stmn_rat) {
     const buffer = [];
     if (love >= 90 && rel > 75 && stmn_rat > 0.45) {
       buffer.push(
@@ -44,7 +44,7 @@ module.exports = {
           await tachyon.say_and_wait('……当然，其他方面的状态也是❤️');
         },
       );
-      if (tachyon.sex_code !== 1 && me.sex_code > 0) {
+      if (tachyon.sex_code !== 1 && you.sex_code > 0) {
         buffer.push(async () => {
           await tachyon.say_and_wait([callname, '～～今天的训练可不能马虎哦']);
           await tachyon.say_and_wait(
@@ -280,7 +280,7 @@ module.exports = {
               await tachyon.say_and_wait(
                 '但既然你提到了这个话题，那我们也可以顺带代入进去来看，所以今天的训练……',
               );
-              await era.printAndWait([me.get_colored_name(), ' 摇了摇头']);
+              await era.printAndWait([you.get_colored_name(), ' 摇了摇头']);
               await tachyon.say_and_wait('切');
               await era.printAndWait([tachyon.get_colored_name(), ' 啧了一声']);
             },
@@ -292,7 +292,7 @@ module.exports = {
                 '最后，在 ',
                 tachyon.get_colored_name(),
                 ' 来训练前 ',
-                me.get_colored_name(),
+                you.get_colored_name(),
                 ' 等了足足三个小时，直到太阳下山',
                 tachyon.sex,
                 '才出现在训练场上',
@@ -324,7 +324,7 @@ module.exports = {
             await era.printAndWait([
               tachyon.get_colored_name(),
               ' 没有说话，但 ',
-              me.get_colored_name(),
+              you.get_colored_name(),
               ' 看得出',
               tachyon.sex,
               '身上满溢的干劲。',
@@ -346,7 +346,7 @@ module.exports = {
             await era.printAndWait([
               tachyon.get_colored_name(),
               ' 用危险的眼神看着 ',
-              me.get_colored_name(),
+              you.get_colored_name(),
               '。',
             ]);
           },

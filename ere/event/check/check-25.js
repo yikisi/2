@@ -104,8 +104,8 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_next_week() {
-    const edu_marks = new CoffeeEduMarks(),
-      edu_weeks = era.get('cflag:25:育成回合计时');
+    const edu_marks = new CoffeeEduMarks();
+    const edu_weeks = era.get('cflag:25:育成回合计时');
     if (
       era.get('cflag:25:招募状态') === recruit_flags.yes &&
       era.get('love:25') === 74 &&
@@ -118,9 +118,7 @@ module.exports = class extends CustomizedCheck {
       );
     }
     if (edu_weeks < 3 * 48) {
-      const event_obj_special = new EventObject(25, cb_enum.edu, true).set_arg(
-        edu_weeks,
-      );
+      const ebj_s = new EventObject(25, cb_enum.edu, true).set_arg(edu_weeks);
       check_and_add_event(
         edu_marks,
         edu_weeks,
@@ -136,23 +134,23 @@ module.exports = class extends CustomizedCheck {
         case 47 + 29: // 夏合宿（经典年）开始
         case 95 + 19: // 别离
         case 95 + 29: // 夏合宿（资深年）开始
-          add_event(event_hooks.week_start, event_obj_special);
+          add_event(event_hooks.week_start, ebj_s);
           break;
         case 47 + 30:
           if (
             era.get('cflag:32:育成回合计时') < 3 * 48 &&
             new TachyonEduMarks().plan_b
           ) {
-            add_event(event_hooks.week_start, event_obj_special);
+            add_event(event_hooks.week_start, ebj_s);
           }
           break;
         case 47 + 31: // 朋友
         case 47 + 32: // 夏季合宿（经典年）结束
         case 95 + 32: // 夏季合宿（资深年）结束
-          add_event(event_hooks.week_end, event_obj_special);
+          add_event(event_hooks.week_end, ebj_s);
           break;
         case 95 + 1: // 新年的抱负
-          add_event(event_hooks.out_church, event_obj_special);
+          add_event(event_hooks.out_church, ebj_s);
       }
       check_and_register_aim_race(25, aim_races, edu_weeks);
       let temp;
