@@ -93,6 +93,11 @@ function find_key_by_value(dict, val) {
  * @return {Promise<boolean>} if true, tell main.js to call homepage
  */
 module.exports = async () => {
+  const save_count = Math.min(
+    era.get('gameconfig')?.system.saveFiles ?? 10,
+    50,
+  );
+
   let flag_load_game = true;
   let msg_notification = '';
 
@@ -115,7 +120,7 @@ module.exports = async () => {
       config: { content: i18n().ui_load_game_header },
       type: 'divider',
     });
-    new Array(11).fill(0).forEach((_, e) => {
+    new Array(save_count + 1).fill(0).forEach((_, e) => {
       let comm_desc = era.get(`global:saves:${e}`);
       const enabled = comm_desc && !comm_desc.startsWith('(FILE LOST)');
       buffer.push({

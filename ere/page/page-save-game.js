@@ -11,6 +11,11 @@ const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 module.exports = async () => {
+  const save_count = Math.min(
+    era.get('gameconfig')?.system.saveFiles ?? 10,
+    50,
+  );
+
   let flag_save_game = true;
   let msg_notification = '';
 
@@ -33,8 +38,8 @@ module.exports = async () => {
       config: { content: i18n().ui_save_game_header },
       type: 'divider',
     });
-    new Array(10).fill(0).forEach((_, e) => {
-      const ind = e + 1;
+    new Array(save_count).fill(0).forEach((_, i) => {
+      const ind = i + 1;
       const comm_desc = era.get(`global:saves:${ind}`);
       buffer.push({
         accelerator: ind,
