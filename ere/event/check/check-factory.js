@@ -133,6 +133,7 @@ cons_dict[130] = require('#/event/check/check-130');
 cons_dict[131] = require('#/event/check/check-131');
 cons_dict[132] = require('#/event/check/check-132');
 cons_dict[133] = require('#/event/check/check-133');
+cons_dict[134] = require('#/event/check/check-134');
 cons_dict[135] = require('#/event/check/check-135');
 cons_dict[136] = require('#/event/check/check-136');
 cons_dict[137] = require('#/event/check/check-137');

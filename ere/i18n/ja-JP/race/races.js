@@ -231,5 +231,6 @@ module.exports = class extends I18nRaces {
   178 = 'BCダートマイル';
   179 = 'BCディスタフ';
   180 = 'BCクラシック';
+  181 = 'スイートピーステークス';
   // GENERATED END
 };

@@ -366,6 +366,8 @@ const race_enum = {
   bc_dis: 179,
   // 育马者杯经典赛
   bc_cls: 180,
+  // 香豌豆锦标
+  swep_sta: 181,
 };
 
 const current = new Date().getTime();
@@ -552,6 +554,7 @@ race_infos[race_enum.bc_fms] = require('#/data/race/g1/race-bc-fms');
 race_infos[race_enum.bc_dml] = require('#/data/race/g1/race-bc-dml');
 race_infos[race_enum.bc_dis] = require('#/data/race/g1/race-bc-dis');
 race_infos[race_enum.bc_cls] = require('#/data/race/g1/race-bc-cls');
+race_infos[race_enum.swep_sta] = require('#/data/race/op/race-swep-sta');
 // GENERATED END
 
 race_infos.forEach((e) => {

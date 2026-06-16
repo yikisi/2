@@ -183,5 +183,6 @@ module.exports = class extends I18nRaces {
   178 = "Breeders' Cup Dirt Mile";
   179 = "Breeders' Cup Distaff";
   180 = "Breeders' Cup Classic";
+  181 = 'Sweet Pea Stakes';
   // GENERATED END
 };

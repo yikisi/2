@@ -272,6 +272,7 @@ class I18nClothes {
   113201 = '9927 Wishes';
   113202 = 'Love-Linked Aster';
   113301 = '光彩陆离的编纂者';
+  113401 = '花宿之裁';
   113501 = 'Sunlit Outsider';
   113601 = 'Divine Raiment';
   113701 = 'Miracle Author';

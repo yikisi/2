@@ -143,35 +143,47 @@ const icon2skill_color = {
   2010016: get_skill_color(skill_name_enum.speed, skill_border_enum.evol),
 };
 
-const skill2skill_color = {
-  101121: get_skill_color(skill_name_enum.speed, skill_border_enum.spe),
-  101181: get_skill_color(skill_name_enum.speed, skill_border_enum.spe),
-  101301: get_skill_color(skill_name_enum.speed, skill_border_enum.spe),
-  101361: get_skill_color(skill_name_enum.speed, skill_border_enum.spe),
-  101431: get_skill_color(skill_name_enum.speed, skill_border_enum.spe),
-  203321: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
-  203401: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
-  204271: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
-  204272: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
-  204282: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
-  204311: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
-  204312: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
-  204322: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
-  204331: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
-  204332: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
-  204342: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
-  204351: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
-  204352: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
-  204362: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
-  204372: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
-  204412: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
-  901121: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
-  901181: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
-  901301: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
-  901361: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
-  901431: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
-  114301111: get_skill_color(skill_name_enum.speed, skill_border_enum.evol),
-  114301211: get_skill_color(skill_name_enum.speed, skill_border_enum.evol),
+const skill2skill_type = {
+  101121: skill_name_enum.speed,
+  101181: skill_name_enum.speed,
+  101301: skill_name_enum.speed,
+  101341: skill_name_enum.speed,
+  101361: skill_name_enum.speed,
+  101431: skill_name_enum.speed,
+  203321: skill_name_enum.speed,
+  203401: skill_name_enum.speed,
+  203561: skill_name_enum.speed,
+  204171: skill_name_enum.speed,
+  204271: skill_name_enum.speed,
+  204272: skill_name_enum.speed,
+  204282: skill_name_enum.speed,
+  204292: skill_name_enum.heal,
+  204293: skill_name_enum.heal,
+  204311: skill_name_enum.speed,
+  204312: skill_name_enum.speed,
+  204322: skill_name_enum.speed,
+  204331: skill_name_enum.speed,
+  204332: skill_name_enum.speed,
+  204342: skill_name_enum.speed,
+  204351: skill_name_enum.speed,
+  204352: skill_name_enum.speed,
+  204362: skill_name_enum.speed,
+  204372: skill_name_enum.speed,
+  204381: skill_name_enum.speed,
+  204382: skill_name_enum.speed,
+  204412: skill_name_enum.speed,
+  204431: skill_name_enum.speed,
+  204432: skill_name_enum.speed,
+  204442: skill_name_enum.speed,
+  204462: skill_name_enum.speed,
+  901121: skill_name_enum.speed,
+  901181: skill_name_enum.speed,
+  901301: skill_name_enum.speed,
+  901341: skill_name_enum.speed,
+  901361: skill_name_enum.speed,
+  901431: skill_name_enum.speed,
+  114301111: skill_name_enum.speed,
+  114301211: skill_name_enum.speed,
 };
 
 // 新增通用可学习技能，数据库里没有，所以需要在最后单独生成注册条目
@@ -570,6 +582,19 @@ async function chara_skill() {
 
   buffer += '\n\nconst current = new Date().getTime();\n\n';
 
+  function rarity2border(rarity) {
+    switch (rarity) {
+      case 5:
+        return skill_border_enum.spe;
+      case 2:
+        return skill_border_enum.advanced;
+      case 1:
+        return skill_border_enum.normal;
+      case 6:
+        return skill_border_enum.evol;
+    }
+  }
+
   Object.values(
     skill_data.reduce((p, c) => {
       (p[c.group_id] || (p[c.group_id] = [])).push(c);
@@ -578,7 +603,9 @@ async function chara_skill() {
   ).forEach((s_list) => {
     s_list.forEach((e) => {
       e.name = skill_text[e.id][47];
-      e.category = icon2skill_color[e.icon_id] ?? skill2skill_color[e.id];
+      e.category =
+        icon2skill_color[e.icon_id] ??
+        get_skill_color(skill2skill_type[e.id], rarity2border(e.rarity));
     });
     s_list
       .sort((a, b) => get_skill_group_level(a) - get_skill_group_level(b))

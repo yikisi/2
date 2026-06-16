@@ -515,6 +515,7 @@ model card_rarity_data {
 
 model card_talent_hint_upgrade {
   id                Int @id @default(autoincrement())
+  card_id           Int
   rarity            Int
   talent_level      Int
   item_category_1   Int
@@ -533,9 +534,18 @@ model card_talent_hint_upgrade {
   item_id_4         Int
   item_disp_order_4 Int
   item_num_4        Int
+  item_category_5   Int
+  item_id_5         Int
+  item_disp_order_5 Int
+  item_num_5        Int
+  item_category_6   Int
+  item_id_6         Int
+  item_disp_order_6 Int
+  item_num_6        Int
   money_num         Int
 
   @@index([rarity, talent_level], map: "card_talent_hint_upgrade_0_rarity_1_talent_level")
+  @@index([card_id, rarity, talent_level], map: "card_talent_hint_upgrade_0_card_id_1_rarity_2_talent_level")
 }
 
 model challenge_match_boss_npc {
@@ -996,10 +1006,12 @@ model character_system_text {
   use_gallery                 Int
   card_id                     Int
   lip_sync_data               String
+  lip_sync_flag               Int
   gender                      Int
   motion_second_set           Int
   motion_second_start         Int
   gallery_key_usage_condition Int
+  prop_system_text_id         Int
   start_date                  Int
 
   @@id([character_id, voice_id])
@@ -1169,17 +1181,18 @@ model collect_raid_story {
 }
 
 model collect_raid_top_data {
-  id                Int    @id @default(autoincrement())
-  collect_raid_id   Int
-  cut_id            Int
-  cut_sub_id        Int
-  bgm_cue_name      String
-  bgm_cuesheet_name String
-  env_cue_name      String
-  env_cuesheet_name String
-  segment_cutt_id   Int
-  condition_type    Int
-  condition_value   Int
+  id                    Int    @id @default(autoincrement())
+  collect_raid_id       Int
+  cut_id                Int
+  cut_sub_id            Int
+  random_chara_group_id Int
+  bgm_cue_name          String
+  bgm_cuesheet_name     String
+  env_cue_name          String
+  env_cuesheet_name     String
+  segment_cutt_id       Int
+  condition_type        Int
+  condition_value       Int
 
   @@index([collect_raid_id], map: "collect_raid_top_data_0_collect_raid_id")
 }
@@ -1728,6 +1741,7 @@ model heroes_data {
   heroes_id            Int @id @default(autoincrement())
   info_detail_1        Int
   info_detail_2        Int
+  info_detail_3        Int
   ticket_add           Int
   ticket_max           Int
   race_item_limit      Int
@@ -2032,10 +2046,13 @@ model home_story_trigger {
 model home_walk_group {
   id           Int @id @default(autoincrement())
   chara_id_1   Int
+  dress_id_1   Int
   enable_eat_1 Int
   chara_id_2   Int
+  dress_id_2   Int
   enable_eat_2 Int
   chara_id_3   Int
+  dress_id_3   Int
   enable_eat_3 Int
 }
 
@@ -3119,12 +3136,14 @@ model race_bib_color {
 }
 
 model race_condition {
-  id      Int @id @default(autoincrement())
-  area    Int
-  season  Int
-  weather Int
-  ground  Int
-  rate    Int
+  id          Int @id @default(autoincrement())
+  area        Int
+  season      Int
+  weather     Int
+  sub_weather Int
+  ground_type Int
+  ground      Int
+  rate        Int
 
   @@index([ground, weather], map: "race_condition_0_ground_1_weather")
   @@index([weather, ground], map: "race_condition_0_weather_1_ground")
@@ -3139,8 +3158,10 @@ model race_course_set {
   ground                       Int
   inout                        Int
   turn                         Int
+  tight_track                  Int
   run_outside                  Int
   ex_camera                    Int
+  run_up                       Int
   fence_set                    Int
   float_lane_max               Int
   course_set_status_id         Int
@@ -3375,6 +3396,7 @@ model race_track {
   turf_vision_type         Int
   footsmoke_color_type     Int
   area                     Int
+  overrun_result_type      Int
   flag_type                Int
   gate_panel_type          Int
   gate_lamp_type           Int
@@ -4176,6 +4198,7 @@ model single_mode_preview_bgm {
   cuesheet_name String
 
   @@index([scenario_id], map: "single_mode_preview_bgm_0_scenario_id")
+  @@index([scenario_id, preview_order], map: "single_mode_preview_bgm_0_scenario_id_1_preview_order")
 }
 
 model single_mode_program {
@@ -4198,6 +4221,7 @@ model single_mode_program {
   reward_set_id       Int
 
   @@index([program_group], map: "single_mode_program_0_program_group")
+  @@index([race_instance_id], map: "single_mode_program_0_race_instance_id")
 }
 
 model single_mode_race_group {
@@ -4319,21 +4343,22 @@ model single_mode_route_condition {
 }
 
 model single_mode_route_race {
-  id                      Int @id @default(autoincrement())
-  race_set_id             Int
-  scenario_group_id       Int
-  target_type             Int
-  sort_id                 Int
-  turn                    Int
-  race_type               Int
-  condition_type          Int
-  condition_id            Int
-  condition_value_1       Int
-  condition_value_2       Int
-  determine_race          Int
-  determine_race_flag     Int
-  alt_determine_race      Int
-  alt_determine_race_flag Int
+  id                          Int @id @default(autoincrement())
+  race_set_id                 Int
+  scenario_group_id           Int
+  target_type                 Int
+  sort_id                     Int
+  turn                        Int
+  race_type                   Int
+  condition_type              Int
+  condition_id                Int
+  condition_value_1           Int
+  condition_value_2           Int
+  determine_race              Int
+  determine_race_flag         Int
+  alt_determine_race          Int
+  alt_determine_race_flag     Int
+  determine_race_for_generate Int
 
   @@index([race_set_id], map: "single_mode_route_race_0_race_set_id")
 }
@@ -4363,6 +4388,12 @@ model single_mode_scenario {
   max_wiz                   Int
   gimmick_discount_rate     Int
   skill_upgrade_num         Int
+  upper_limit_speed         Int
+  upper_limit_stamina       Int
+  upper_limit_pow           Int
+  upper_limit_guts          Int
+  upper_limit_wiz           Int
+  max_skill_point           Int
 }
 
 model single_mode_scenario_group {
@@ -4663,6 +4694,7 @@ model single_mode_top_bg_chara {
   motion_set_id Int
 
   @@index([bg_id, scenario_id], map: "single_mode_top_bg_chara_0_bg_id_1_scenario_id")
+  @@index([scenario_id], map: "single_mode_top_bg_chara_0_scenario_id")
 }
 
 model single_mode_training {
@@ -4746,6 +4778,7 @@ model single_mode_turn {
   story_bg_sub_id          Int
 
   @@index([turn_set_id], map: "single_mode_turn_0_turn_set_id")
+  @@index([turn_set_id, turn], map: "single_mode_turn_0_turn_set_id_1_turn")
 }
 
 model single_mode_unique_chara {
@@ -4809,6 +4842,7 @@ model single_mode_wins_saddle {
   id                 Int @id @default(autoincrement())
   priority           Int
   group_id           Int
+  relation_group_id  Int
   condition          Int
   win_saddle_type    Int
   race_instance_id_1 Int
@@ -4898,6 +4932,7 @@ model skill_data {
   disable_singlemode            Int
   disable_count_condition       Int
   is_general_skill              Int
+  greater_value_skill_detail    Int
   start_date                    Int
   end_date                      Int
 
@@ -5228,9 +5263,10 @@ model story_event_top_chara {
 }
 
 model story_extra_data {
-  story_extra_id Int @id @default(autoincrement())
-  start_date     Int
-  end_date       Int
+  story_extra_id   Int @id @default(autoincrement())
+  story_extra_type Int
+  start_date       Int
+  end_date         Int
 }
 
 model story_extra_movie_data {
@@ -5342,6 +5378,7 @@ model succession_factor {
   end_date                 Int
 
   @@unique([factor_group_id, rarity], map: "succession_factor_0_factor_group_id_1_rarity")
+  @@index([factor_group_id], map: "succession_factor_0_factor_group_id")
 }
 
 model succession_factor_effect {
@@ -5354,6 +5391,7 @@ model succession_factor_effect {
 
   @@index([factor_group_id, effect_id], map: "succession_factor_effect_0_factor_group_id_1_effect_id")
   @@index([factor_group_id], map: "succession_factor_effect_0_factor_group_id")
+  @@index([target_type], map: "succession_factor_effect_0_target_type")
 }
 
 model succession_initial_factor {
@@ -5508,20 +5546,21 @@ model support_card_team_score_bonus {
 }
 
 model support_card_unique_effect {
-  id        Int @id @default(autoincrement())
-  lv        Int
-  type_0    Int
-  value_0   Int
-  value_0_1 Int
-  value_0_2 Int
-  value_0_3 Int
-  value_0_4 Int
-  type_1    Int
-  value_1   Int
-  value_1_1 Int
-  value_1_2 Int
-  value_1_3 Int
-  value_1_4 Int
+  id                 Int @id @default(autoincrement())
+  lv                 Int
+  type_0             Int
+  value_0            Int
+  value_0_1          Int
+  value_0_2          Int
+  value_0_3          Int
+  value_0_4          Int
+  type_1             Int
+  value_1            Int
+  value_1_1          Int
+  value_1_2          Int
+  value_1_3          Int
+  value_1_4          Int
+  idle_mode_sub_rate Int
 }
 
 model team_building_chara_count {
@@ -5841,6 +5880,7 @@ model text_data {
   text     String
 
   @@id([category, index])
+  @@index([category], map: "text_data_0_category")
 }
 
 model timezone_data {
@@ -5897,24 +5937,27 @@ model training_challenge_exam {
 }
 
 model training_challenge_master {
-  id                   Int @id @default(autoincrement())
-  target_main_scenario Int
-  exam_id_1            Int
-  exam_id_2            Int
-  exam_id_3            Int
-  exam_id_4            Int
-  exam_id_5            Int
-  ex_exam_id           Int
-  free_exam_id         Int
-  shop_id              Int
-  rental_value         Int
-  consume_tp_ratio     Int
-  bonus_reward_ratio   Int
-  notice_date          Int
-  start_date           Int
-  end_date             Int
-  start_result_date    Int
-  end_result_date      Int
+  id                              Int @id @default(autoincrement())
+  target_main_scenario            Int
+  exam_id_1                       Int
+  exam_id_2                       Int
+  exam_id_3                       Int
+  exam_id_4                       Int
+  exam_id_5                       Int
+  ex_exam_id                      Int
+  free_exam_id                    Int
+  shop_id                         Int
+  rental_value                    Int
+  consume_tp_ratio                Int
+  bonus_reward_ratio              Int
+  ranking_entry_love_point_reward Int
+  ranking_entry_change_num        Int
+  notice_date                     Int
+  start_date                      Int
+  ranking_entry_end_date          Int
+  end_date                        Int
+  start_result_date               Int
+  end_result_date                 Int
 }
 
 model training_challenge_score {
@@ -6175,6 +6218,7 @@ model ultimate_race_contents {
   @@index([id], map: "ultimate_race_contents_0_id")
   @@index([group_id], map: "ultimate_race_contents_0_group_id")
   @@index([race_instance_id], map: "ultimate_race_contents_0_race_instance_id")
+  @@index([event_id, group_id], map: "ultimate_race_contents_0_event_id_1_group_id")
   @@ignore
 }
 
@@ -6786,15 +6830,16 @@ model room_match_training_rank {
 }
 
 model subscription_effect {
-  id              Int @id @default(autoincrement())
-  target_type     Int
-  effect_type_1   Int
-  effect_value_1  Int
-  user_show       Int
-  image_icon_id   Int
-  transition_type Int
-  start_time      Int
-  end_time        Int
+  id                Int @id @default(autoincrement())
+  subscription_type Int
+  target_type       Int
+  effect_type_1     Int
+  effect_value_1    Int
+  user_show         Int
+  image_icon_id     Int
+  transition_type   Int
+  start_time        Int
+  end_time          Int
 
   @@index([target_type], map: "subscription_effect_0_target_type")
 }
@@ -7312,6 +7357,8 @@ model ultimate_race_unlock_condition {
   cutt_dress_id_2              Int
   cutt_chara_id_3              Int
   cutt_dress_id_3              Int
+  txt_position_x               Int
+  txt_position_y               Int
 }
 
 model gacha_stampsheet {
@@ -7612,6 +7659,7 @@ model omakase_outing_base_pt {
   add_value        Int
 
   @@index([scenario_id, chara_id], map: "omakase_outing_base_pt_0_scenario_id_1_chara_id")
+  @@index([scenario_id], map: "omakase_outing_base_pt_0_scenario_id")
 }
 
 model single_mode_12_assistant_effect {
@@ -7745,4 +7793,450 @@ model single_mode_12_stratum {
   stratum_volume Int
 
   @@index([onsen_id], map: "single_mode_12_stratum_0_onsen_id")
+}
+
+model chara_type_event_cut {
+  id             Int @id @default(autoincrement())
+  event_category Int
+  event_id       Int
+  chara_id       Int
+  cut_id         Int
+  cut_sub_id     Int
+  motion_type    Int
+
+  @@index([event_category, event_id], map: "chara_type_event_cut_0_event_category_1_event_id")
+}
+
+model character_prop_system_text {
+  id            Int    @id @default(autoincrement())
+  prop_id       Int
+  lip_sync_data String
+}
+
+model collect_raid_message {
+  id              Int @id @default(autoincrement())
+  collect_raid_id Int
+  category_id     Int
+
+  @@index([collect_raid_id], map: "collect_raid_message_0_collect_raid_id")
+}
+
+model collect_raid_top_random_chara_group {
+  id       Int @id @default(autoincrement())
+  group_id Int
+  chara_id Int
+
+  @@index([group_id], map: "collect_raid_top_random_chara_group_0_group_id")
+}
+
+model generate_succession_trained_chara_trade_item {
+  id                  Int @id @default(autoincrement())
+  min_value           Int
+  max_value           Int
+  trade_item_category Int
+  trade_item_id       Int
+  trade_item_num      Int
+}
+
+model heroes_ranking_border {
+  id         Int @id @default(autoincrement())
+  rank_start Int
+  rank_end   Int
+}
+
+model heroes_ranking_reward {
+  id                       Int @id @default(autoincrement())
+  heroes_id                Int
+  heroes_ranking_border_id Int
+  item_category            Int
+  item_id                  Int
+  item_num                 Int
+
+  @@index([heroes_id, heroes_ranking_border_id], map: "heroes_ranking_reward_0_heroes_id_1_heroes_ranking_border_id")
+}
+
+model home_walk_path_restriction {
+  id       Int    @id @default(autoincrement())
+  chara_id Int
+  route    String
+
+  @@index([route], map: "home_walk_path_restriction_0_route")
+}
+
+model idle_single_mode_training_cut {
+  id                  Int @id @default(autoincrement())
+  scenario_id         Int
+  command_id          Int
+  max_training_lv     Int
+  designated_chara_id Int
+
+  @@index([scenario_id], map: "idle_single_mode_training_cut_0_scenario_id")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model live_recommend_formation {
+  id                 Int
+  music_id           Int
+  position_id        Int
+  chara_type         Int
+  chara_id           Int
+  dress_id           Int
+  dress_color        Int
+  second_dress_id    Int
+  second_dress_color Int
+
+  @@index([music_id], map: "live_recommend_formation_0_music_id")
+  @@ignore
+}
+
+model nickname_hide {
+  id          Int @id @default(autoincrement())
+  nickname_id Int
+  chara_id    Int
+
+  @@index([chara_id], map: "nickname_hide_0_chara_id")
+}
+
+model single_mode_13_add_dream_point {
+  id              Int @id @default(autoincrement())
+  deck_id         Int
+  condition_type  Int
+  condition_value Int
+  value           Int
+
+  @@index([deck_id, condition_type, condition_value], map: "single_mode_13_add_dream_point_0_deck_id_1_condition_type_2_condition_value")
+}
+
+model single_mode_13_bc_program_flag {
+  id                  Int @id @default(autoincrement())
+  bc_group_id         Int
+  program_id          Int
+  determine_race_flag Int
+  skill_id            Int
+
+  @@index([bc_group_id], map: "single_mode_13_bc_program_flag_0_bc_group_id")
+  @@index([program_id], map: "single_mode_13_bc_program_flag_0_program_id")
+}
+
+model single_mode_13_member {
+  id          Int @id @default(autoincrement())
+  chara_id    Int
+  bc_group_id Int
+  bc_npc_id   Int
+
+  @@index([chara_id], map: "single_mode_13_member_0_chara_id")
+}
+
+model single_mode_13_rank {
+  id                         Int @id @default(autoincrement())
+  rank_id                    Int
+  rank_exp                   Int
+  rank_bonus_effect_group_id Int
+
+  @@index([rank_id], map: "single_mode_13_rank_0_rank_id")
+}
+
+model single_mode_13_rank_bonus_effect_group {
+  id             Int @id @default(autoincrement())
+  group_id       Int
+  condition_type Int
+  effect_type    Int
+  effect_value   Int
+
+  @@index([group_id], map: "single_mode_13_rank_bonus_effect_group_0_group_id")
+}
+
+model single_mode_13_schedule {
+  id             Int @id @default(autoincrement())
+  meeting_turn   Int
+  start_turn     Int
+  end_turn       Int
+  need_team_rank Int
+  team_sp_lv     Int
+
+  @@index([meeting_turn], map: "single_mode_13_schedule_0_meeting_turn")
+}
+
+model single_mode_13_team_rank {
+  id           Int @id @default(autoincrement())
+  rank_group   Int
+  effect_type  Int
+  effect_value Int
+
+  @@index([rank_group], map: "single_mode_13_team_rank_0_rank_group")
+}
+
+model single_mode_13_team_sp_effect {
+  id               Int @id @default(autoincrement())
+  group_type       Int
+  effect_group     Int
+  effect_type      Int
+  num_support_type Int
+  effect_value     Int
+
+  @@index([effect_group], map: "single_mode_13_team_sp_effect_0_effect_group")
+  @@index([group_type, effect_group], map: "single_mode_13_team_sp_effect_0_group_type_1_effect_group")
+  @@index([group_type], map: "single_mode_13_team_sp_effect_0_group_type")
+}
+
+model single_mode_13_team_sp_level {
+  id           Int @id @default(autoincrement())
+  group_type   Int
+  level        Int
+  need_point   Int
+  effect_group Int
+
+  @@index([group_type], map: "single_mode_13_team_sp_level_0_group_type")
+  @@index([group_type, level], map: "single_mode_13_team_sp_level_0_group_type_1_level")
+}
+
+model single_mode_13_top_bg_chara {
+  id                     Int @id @default(autoincrement())
+  cut_id                 Int
+  required_team_progress Int
+  member_id              Int
+  rate                   Int
+}
+
+model single_mode_14_basic_effect {
+  id                Int @id @default(autoincrement())
+  check_point_type  Int
+  effect_type       Int
+  effect_value      Int
+  condition_type_1  Int
+  condition_value_1 Int
+  condition_type_2  Int
+  condition_value_2 Int
+  condition_type_3  Int
+  condition_value_3 Int
+
+  @@index([check_point_type], map: "single_mode_14_basic_effect_0_check_point_type")
+}
+
+model single_mode_14_check_point {
+  id               Int @id @default(autoincrement())
+  check_point_type Int
+  turn             Int
+  success_pt       Int
+  great_success_pt Int
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model single_mode_14_check_point_effect {
+  id                Int
+  check_point_type  Int
+  result_state      Int
+  effect_type       Int
+  effect_value      Int
+  condition_type_1  Int
+  condition_value_1 Int
+  condition_type_2  Int
+  condition_value_2 Int
+  condition_type_3  Int
+  condition_value_3 Int
+
+  @@index([check_point_type, result_state], map: "single_mode_14_check_point_effect_0_check_point_type_1_result_state")
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model single_mode_14_check_point_pt {
+  id               Int
+  check_point_type Int
+  gain_pt          Int
+
+  @@index([check_point_type], map: "single_mode_14_check_point_pt_0_check_point_type")
+  @@ignore
+}
+
+model single_mode_14_check_point_pt_effect {
+  id                Int @id @default(autoincrement())
+  pt_min            Int
+  pt_max            Int
+  effect_type       Int
+  effect_value      Int
+  condition_type_1  Int
+  condition_value_1 Int
+  condition_type_2  Int
+  condition_value_2 Int
+  condition_type_3  Int
+  condition_value_3 Int
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model single_mode_14_deck_info {
+  id              Int
+  deck_type       Int
+  support_card_id Int
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model single_mode_14_feeling_bonus {
+  id              Int
+  feeling_num_min Int
+  feeling_num_max Int
+  add_value       Int
+
+  @@ignore
+}
+
+model single_mode_14_finals_effect {
+  id                Int @id @default(autoincrement())
+  text_group_id     Int
+  select_type       Int
+  effect_type       Int
+  effect_value      Int
+  condition_type_1  Int
+  condition_value_1 Int
+  condition_type_2  Int
+  condition_value_2 Int
+  condition_type_3  Int
+  condition_value_3 Int
+
+  @@index([select_type], map: "single_mode_14_finals_effect_0_select_type")
+}
+
+model single_mode_14_finals_gain_skill {
+  id                        Int @id @default(autoincrement())
+  select_type               Int
+  skill_id                  Int
+  skill_level_normal        Int
+  skill_level_success       Int
+  skill_level_great_success Int
+}
+
+model single_mode_14_outing_effect {
+  id                  Int @id @default(autoincrement())
+  support_card_id     Int
+  story_step          Int
+  special_feeling_num Int
+}
+
+model single_mode_14_region_effect {
+  id                Int @id @default(autoincrement())
+  region_id         Int
+  text_group_id     Int
+  effect_type       Int
+  effect_value      Int
+  condition_type_1  Int
+  condition_value_1 Int
+  condition_type_2  Int
+  condition_value_2 Int
+  condition_type_3  Int
+  condition_value_3 Int
+
+  @@index([region_id], map: "single_mode_14_region_effect_0_region_id")
+}
+
+model single_mode_14_region_effect_bonus {
+  id          Int @id @default(autoincrement())
+  region_id   Int
+  effect_type Int
+  min_pt      Int
+  max_pt      Int
+  add_value   Int
+}
+
+model single_mode_14_region_feeling {
+  id                 Int @id @default(autoincrement())
+  region_id          Int
+  region_select_type Int
+  feeling_id         Int
+  feeling_num        Int
+
+  @@index([region_select_type], map: "single_mode_14_region_feeling_0_region_select_type")
+  @@index([region_id], map: "single_mode_14_region_feeling_0_region_id")
+}
+
+model single_mode_14_region_select {
+  id                 Int @id @default(autoincrement())
+  region_select_type Int
+  turn               Int
+}
+
+model single_mode_14_special_gain_turn {
+  id    Int @id @default(autoincrement())
+  turn  Int
+  count Int
+}
+
+model single_mode_14_twinkle_ramen {
+  id               Int @id @default(autoincrement())
+  text_group       Int
+  text_number      Int
+  check_point_type Int
+  result_state     Int
+  text_type        Int
+  text_type_value  Int
+}
+
+model single_mode_hide_story_control {
+  id              Int @id @default(autoincrement())
+  support_card_id Int
+  story_id        Int
+
+  @@index([support_card_id], map: "single_mode_hide_story_control_0_support_card_id")
+}
+
+model single_mode_race_unique_condition {
+  id                Int @id @default(autoincrement())
+  chara_id          Int
+  year              Int
+  race_program_id   Int
+  race_condition_id Int
+  frame_order       Int
+  finish_order_0    Int
+
+  @@index([chara_id], map: "single_mode_race_unique_condition_0_chara_id")
+}
+
+model single_mode_select_skip {
+  story_id            Int @id @default(autoincrement())
+  auto_selected_index Int
+}
+
+model story_extra_event_movie {
+  id            Int @id @default(autoincrement())
+  story_data_id Int
+}
+
+model story_race_track_bg_replace {
+  id            Int @id @default(autoincrement())
+  story_id      Int
+  bg_group_id   Int
+  race_track_id Int
+  bg_id         Int
+  bg_sub_id     Int
+
+  @@unique([bg_group_id, race_track_id], map: "story_race_track_bg_replace_0_bg_group_id_1_race_track_id")
+  @@unique([story_id, bg_id, bg_sub_id], map: "sqlite_autoindex_story_race_track_bg_replace_1")
+  @@index([bg_group_id], map: "story_race_track_bg_replace_0_bg_group_id")
+  @@index([bg_id, bg_sub_id], map: "story_race_track_bg_replace_0_bg_id_1_bg_sub_id")
+}
+
+model system_voice_standby_motion {
+  chara_id            Int @id @default(autoincrement())
+  standby_motion_id_1 Int
+  standby_motion_id_2 Int
+}
+
+model training_challenge_ranking_border {
+  id                           Int @id @default(autoincrement())
+  training_challenge_master_id Int
+  rank_start                   Int
+  rank_end                     Int
+
+  @@index([training_challenge_master_id], map: "training_challenge_ranking_border_0_training_challenge_master_id")
+}
+
+model training_challenge_ranking_reward {
+  id                                   Int @id @default(autoincrement())
+  training_challenge_ranking_border_id Int
+  item_category                        Int
+  item_id                              Int
+  item_num                             Int
+
+  @@index([training_challenge_ranking_border_id], map: "training_challenge_ranking_reward_0_training_challenge_ranking_border_id")
 }
