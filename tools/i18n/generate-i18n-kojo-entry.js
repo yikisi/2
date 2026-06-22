@@ -14,12 +14,13 @@ const name = {
   rec: 'recruit',
   base: 'basement',
 };
+const skipEntry = { 106799: 1 };
 const skip = { 103201: 1 };
 
 let entryOut = '';
 for (const charaPath of kojoDir) {
   const kojoId = charaPath.replace(/\D+/, '').trim();
-  if (kojoId.length !== 6) {
+  if (kojoId.length !== 6 || skipEntry[kojoId]) {
     continue;
   }
   const p = join(kojoPath, charaPath);

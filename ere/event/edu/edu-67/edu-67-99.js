@@ -1,52 +1,54 @@
-/**
- * @file 里见光钻 - 育成
- * @author 某知名手游公司编剧
- * @author 黑奴二号（改编）
- * @author 黑奴队长（修订）
- */
 const era = require('#/era-electron');
 
 const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
+const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 
+const daiya_week_end = require('#/event/edu/edu-67/week-end');
 const CustomizedEdu = require('#/event/edu/edu-common');
-const Edu67UntilSchoolAtrium = require('#/event/edu/edu-events-67-1/school-atrium');
-const daiya_week_end = require('#/event/edu/edu-events-67-1/week-end');
 const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
+const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_value } = require('#/utils/value-utils');
 
-const DaiyaEduMarks1 = require('#/data/event/edu-event-marks/edu-event-marks-67-1');
+const DaiyaEduMarks99 = require('#/data/event/edu-event-marks/edu-event-marks-67-99');
 const event_hooks = require('#/data/event/event-hooks');
 const { attr_enum, fumble_result } = require('#/data/train-const');
-const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
+
+const { class_enum } = require('#/data/race/model/race-info');
+const { race_infos } = require('#/data/race/race-const');
+const { i18n } = require('#/i18n/selector');
 
 /** @type {Record<string,function(CharaTalk,CharaTalk,{wait:boolean}):Promise<void>>} */
 const week_start_handlers = {};
 
-require('#/event/edu/edu-events-67-1/week-start-1')(week_start_handlers);
-require('#/event/edu/edu-events-67-1/week-start-2')(week_start_handlers);
-require('#/event/edu/edu-events-67-1/week-start-3')(week_start_handlers);
+require('#/event/edu/edu-67/week-start-1')(week_start_handlers);
+require('#/event/edu/edu-67/week-start-2')(week_start_handlers);
+require('#/event/edu/edu-67/week-start-3')(week_start_handlers);
 
 const race_end_handlers = {};
 
-require('#/event/edu/edu-events-67-1/race-end-1')(race_end_handlers);
-require('#/event/edu/edu-events-67-1/race-end-2')(race_end_handlers);
+require('#/event/edu/edu-67/race-end-1')(race_end_handlers);
+require('#/event/edu/edu-67/race-end-2')(race_end_handlers);
 
-module.exports = class extends Edu67UntilSchoolAtrium {
-  async office_cook(daiya, me, callname, hook, extra_flag, event_object) {
+module.exports = class extends CustomizedEdu {
+  get #kojo() {
+    return i18n().kojo[this.id][99].edu;
+  }
+
+  async office_cook(daiya, me, callname, hook, extra, event_object) {
     if (era.get('flag:当前互动角色') !== 67) {
       add_event(event_hooks.office_cook, event_object);
       return;
     }
-    const edu_marks = new DaiyaEduMarks1();
+    const edu_marks = new DaiyaEduMarks99();
     if (edu_marks.banned_coffee !== 1) {
       return;
     }
     const coffee = get_chara_talk(25);
-    let wait_flag;
+    let wait;
     edu_marks.banned_coffee++;
     await print_event_name('禁忌特调', daiya);
     await era.printAndWait(
@@ -137,7 +139,7 @@ module.exports = class extends Edu67UntilSchoolAtrium {
         '里见光钻忍住了自己的好奇心，成功煮出了美味的咖啡！',
       );
       era.println();
-      wait_flag = get_attr_and_print_in_event(67, [0, 0, 0, 20, 0], 0);
+      wait = get_attr_and_print_in_event(67, [0, 0, 0, 20, 0], 0);
     } else {
       await daiya.say_and_wait('没问题！敬请期待吧！');
       await coffee.say_and_wait(
@@ -157,23 +159,23 @@ module.exports = class extends Edu67UntilSchoolAtrium {
       await coffee.say_and_wait('……是啊……呵呵。');
       await era.printAndWait('虽然味道不怎么样，却是能带来欢笑的一杯咖啡！');
       era.println();
-      wait_flag = get_attr_and_print_in_event(67, [0, 0, 0, 0, 20], 0);
+      wait = get_attr_and_print_in_event(67, [0, 0, 0, 0, 20], 0);
     }
-    wait_flag && (await era.waitAnyKey());
+    wait && (await era.waitAnyKey());
     return true;
   }
 
-  async office_study(daiya, me, callname, hook, extra_flag, event_object) {
+  async office_study(daiya, me, callname, hook, extra, event_object) {
     if (era.get('flag:当前互动角色') !== 67) {
       add_event(hook.hook, event_object);
       return;
     }
-    const edu_marks = new DaiyaEduMarks1();
+    const edu_marks = new DaiyaEduMarks99();
     if (edu_marks.dance_practice !== 1) {
       return;
     }
     const teio = get_chara_talk(3);
-    let wait_flag;
+    let wait;
     edu_marks.dance_practice++;
     await print_event_name('舞蹈练习', daiya);
 
@@ -240,7 +242,7 @@ module.exports = class extends Edu67UntilSchoolAtrium {
         '经过东海帝王的指导后，里见光钻的动作变得比原本轻柔了。',
       );
       era.println();
-      wait_flag = get_attr_and_print_in_event(67, [20, 0, 0, 0, 0], 0);
+      wait = get_attr_and_print_in_event(67, [20, 0, 0, 0, 0], 0);
     } else {
       await daiya.say_and_wait('哎呀，跳小北的歌吗……？这我倒是没有想过！');
       await daiya.say_and_wait(
@@ -263,13 +265,13 @@ module.exports = class extends Edu67UntilSchoolAtrium {
         `虽然有点让人担心……但${daiya.sex}的舞步感觉变得非常地利落！`,
       );
       era.println();
-      wait_flag = get_attr_and_print_in_event(67, [0, 0, 20, 0, 0], 0);
+      wait = get_attr_and_print_in_event(67, [0, 0, 20, 0, 0], 0);
     }
-    wait_flag && (await era.waitAnyKey());
+    wait && (await era.waitAnyKey());
     return true;
   }
 
-  async out_shopping(daiya, me, callname, hook, extra_flag, event_object) {
+  async out_shopping(daiya, me, callname, hook, extra, event_object) {
     if (
       era.get('flag:当前互动角色') !== 67 ||
       era.get('cflag:67:育成回合计时') !== 95 + 2
@@ -277,7 +279,7 @@ module.exports = class extends Edu67UntilSchoolAtrium {
       add_event(hook.hook, event_object);
       return false;
     }
-    let wait_flag = false;
+    let wait = false;
     await print_event_name('抽奖试手气！', daiya);
     await era.printAndWait(`回程路上，${me.name} 和里见光钻经过商店街时──`);
     await era.printAndWait(
@@ -349,13 +351,8 @@ module.exports = class extends Edu67UntilSchoolAtrium {
         `你们约好要在资深级这一年留下满意的成绩。完成之后再一起使用这张旅游券。`,
       );
       era.println();
-      wait_flag = sys_change_motivation(67, 2) || wait_flag;
-      wait_flag = get_attr_and_print_in_event(
-        67,
-        new Array(5).fill(10),
-        0,
-        [300],
-      );
+      wait = sys_change_motivation(67, 2) || wait;
+      wait = get_attr_and_print_in_event(67, new Array(5).fill(10), 0, [300]);
     } else if (gacha === 9) {
       await era.printAndWait(
         '商店街人员「很可惜，没抽中！参加奖是『卫生纸』喔～」',
@@ -386,8 +383,8 @@ module.exports = class extends Edu67UntilSchoolAtrium {
         `这天，里见光钻似乎把钱包放在宿舍忘了带出门。多亏如此，才浇熄了${daiya.sex}想继续拼抽奖的念头。`,
       );
       era.println();
-      wait_flag = sys_change_motivation(67, -1) || wait_flag;
-      wait_flag = get_attr_and_print_in_event(67, undefined, 0, [300]);
+      wait = sys_change_motivation(67, -1) || wait;
+      wait = get_attr_and_print_in_event(67, undefined, 0, [300]);
     } else if (gacha === 1) {
       await era.printAndWait(
         '商店街人员「恭喜抽到一等奖～！奖品是『特等胡萝卜汉堡排』！」',
@@ -425,13 +422,8 @@ module.exports = class extends Edu67UntilSchoolAtrium {
         `后来，里见光钻传授 ${me.name} ${daiya.sex}的秘技，让 ${me.name} 学会了不让胡萝卜倒下的吃法！`,
       );
       era.println();
-      wait_flag = sys_change_motivation(67, 2) || wait_flag;
-      wait_flag = get_attr_and_print_in_event(
-        67,
-        new Array(5).fill(10),
-        0,
-        [300],
-      );
+      wait = sys_change_motivation(67, 2) || wait;
+      wait = get_attr_and_print_in_event(67, new Array(5).fill(10), 0, [300]);
     } else if (gacha < 5) {
       await era.printAndWait(
         '商店街人员「二等奖～！！奖品是『一整堆胡萝卜』！」',
@@ -471,9 +463,8 @@ module.exports = class extends Edu67UntilSchoolAtrium {
         `隔天──里见光钻向 ${me.name} 报告，栗东宿舍的大家非常喜欢「胡萝卜鲷鱼烧」的事情。`,
       );
       era.println();
-      wait_flag = sys_change_motivation(67, 1);
-      wait_flag =
-        get_attr_and_print_in_event(67, undefined, 0, [200]) || wait_flag;
+      wait = sys_change_motivation(67, 1);
+      wait = get_attr_and_print_in_event(67, undefined, 0, [200]) || wait;
     } else {
       await era.printAndWait('商店街人员「三等奖～！奖品是『一根胡萝卜』！」');
       await era.printAndWait('获得了「一根胡萝卜」。');
@@ -496,140 +487,62 @@ module.exports = class extends Edu67UntilSchoolAtrium {
         '里见光钻开心比什么都重要。──但商店街的人却因为世界第一的美味这句话而倍感压力。',
       );
       era.println();
-      wait_flag =
-        get_attr_and_print_in_event(67, undefined, 0, [200]) || wait_flag;
+      wait = get_attr_and_print_in_event(67, undefined, 0, [200]) || wait;
     }
-    wait_flag && (await era.waitAnyKey());
+    wait && (await era.waitAnyKey());
     return true;
   }
 
-  async race_end(daiya, me, callname, hook, extra_flag) {
-    const edu_marks = new DaiyaEduMarks1(),
-      edu_weeks = era.get('cflag:67:育成回合计时');
-    if (
-      !race_end_handlers[extra_flag.race] ||
-      (await race_end_handlers[extra_flag.race](
-        daiya,
-        me,
-        edu_weeks,
-        extra_flag,
-        edu_marks,
-      ))
-    ) {
-      if (extra_flag.rank === 1) {
-        await print_event_name('竞赛获胜！', daiya);
-        await daiya.say_and_wait(
-          '成功了！我成功了！你有看到我的表现吗？训练员！',
-        );
-        await daiya.say_and_wait(
-          '我完全发挥了现有的所有实力……我觉得我跑出了最好的表现！',
-        );
-        era.printButton('「真的跑出了最棒的表现哟！」', 1);
-        era.printButton('「保持这个感觉继续向前进！」', 2);
-        const ret = await era.input();
-        if (ret === 1) {
-          await daiya.say_and_wait(
-            '哇啊……！谢谢你！能听到训练员这么说，我……！',
-          );
-          await daiya.say_and_wait(
-            '呵呵……那我下一次一定要跑出更耀眼的表现！这是我和训练员之间的约定喔！',
-          );
-        } else {
-          await daiya.say_and_wait('是！朝梦想直直前进……！');
-          await daiya.say_and_wait(
-            '呵呵，现在我有一种，好像伸手就能触及的感觉呢。',
-          );
-        }
-      } else if (extra_flag.rank <= 5) {
-        await print_event_name('竞赛上榜', daiya);
-        await daiya.say_and_wait('上榜……总算是没有给里见家丢脸的成绩。');
-        await daiya.say_and_wait('不过，距离获胜……还差了一步呢。');
-        era.printButton('「已经是很棒的结果了」', 1);
-        era.printButton('「把这次经验活用在下次比赛吧！」', 2);
-        const ret = await era.input();
-        if (ret === 1) {
-          await daiya.say_and_wait('呵呵，谢谢夸奖♪');
-          await daiya.say_and_wait(
-            '可是，我的梦想不只是这样而已。我要变得更强更强……！',
-          );
-        } else {
-          await daiya.say_and_wait('嗯！我们一起同心协力，下次一定要赢！');
-          await daiya.say_and_wait(
-            '回学园之后就要开始作战会议了呢！一定要彻底找出我现在的弱点！',
-          );
-        }
-      } else if (extra_flag.rank <= 10) {
-        await print_event_name('竞赛败北', daiya);
-        await daiya.say_and_wait('…………这就是我现在的实力……');
-        await daiya.say_and_wait('……很抱歉。我辜负了你的期望。');
-        await daiya.say_and_wait(
-          '实力、步调的预测都失误……看来我还有很多课题要完成呢。',
-        );
-        era.printButton('「我们一起解决吧」', 1);
-        era.printButton('「一起朝目标重新出发吧」', 2);
-        const ret = await era.input();
-        if (ret === 1) {
-          await daiya.say_and_wait('好的！就要再麻烦你了！训练员！');
-          await daiya.say_and_wait(
-            '一定要不停锻炼、不停锻炼……下一次一定要跑出最耀眼灿烂的表现！',
-          );
-        } else {
-          await daiya.say_and_wait(
-            '嗯嗯，这是当然的！我还没有丢失该实现的梦想呢。',
-          );
-          await daiya.say_and_wait('为了实现梦想……一定要再次精进自己！');
-        }
-      } else if (extra_flag.rank > 10) {
-        await print_event_name('下次不会输了！', daiya);
-        await daiya.say_and_wait('……没能做到。没能跑赢。我又输了……');
-        await daiya.say_and_wait(
-          '我辜负了好多人的期望。父亲、母亲、里见家的所有人……还有训练员也是。',
-        );
-        await daiya.say_and_wait(
-          '……我会抱持着从零开始的心态努力的。如果之前的努力都还不够，那我就要更努力、更努力……所以──',
-        );
-        era.printButton('「不用这么焦急」', 1);
-        era.printButton('「一起两人三脚向前冲刺！」', 1);
-        const ret = await era.input();
-        if (ret === 1) {
-          await daiya.say_and_wait(
-            '没关系的！为了下次一定能跑赢，无论是什么样的训练，我都一定能完成的……！',
-          );
-          era.printButton('「那就先深呼吸吧」', 1);
-          await era.input();
-          await daiya.say_and_wait('是！');
-          await daiya.say_and_wait('吸……吐……！吸……吐……');
-          era.printButton('「……冷静下来了吗？」', 1);
-          await era.input();
-          await daiya.say_and_wait('……啊！是、是。');
-          era.printButton('「不要逞强，继续往前迈进吧」', 1);
-          await era.input();
-          await daiya.say_and_wait('训练员……！……嗯！');
-          await daiya.say_and_wait(
-            '嗯！无论多少次，我都会重新爬起来的……！我想要和你一起努力！',
-          );
-        } else {
-          await daiya.say_and_wait('那么……总之现在需要一条可以缠脚的布呢！');
-          await daiya.say_and_wait('我现在就去找！');
-          await era.printAndWait(
-            '……虽然『两人三脚』不过就只是比喻而已，但似乎让她打起了精神。再继续一起努力吧──',
-          );
-        }
+  async race_end(daiya, me, callname, hook, extra) {
+    //const edu_marks = new DaiyaEduMarks99();
+    let key;
+    let args = [me, callname];
+    switch (extra.race) {
+      default:
+    }
+    if (!key) {
+      if (extra.rank === 1) {
+        key = 'race_end_win';
+      } else if (extra.rank <= 5) {
+        key = 'race_end_5';
+      } else if (extra.rank <= 10) {
+        key = 'race_end_10';
+      } else {
+        key = 'race_end_lose';
       }
     }
+    await print_title_with_kojo(this.#kojo, key, daiya, ...args);
   }
 
-  async train_fail(daiya, me, callname, hook, extra_flag) {
-    extra_flag['args'] = extra_flag.fumble
-      ? fumble_result.fumble
-      : fumble_result.fail;
+  async race_start(daiya, me, callname, hook, extra) {
+    const edu_marks = new DaiyaEduMarks99();
+    let key;
+    let args = [me, callname];
+    switch (extra.race) {
+      default:
+    }
+    if (!key) {
+      if (
+        race_infos[extra.race].race_class === class_enum.G1 &&
+        edu_marks.run_g1 !== 1
+      ) {
+        key = 'before_g1';
+      } else {
+        return await super.race_start(daiya, me, callname, hook, extra);
+      }
+    }
+    await print_title_with_kojo(this.#kojo, key, daiya, ...args);
+  }
+
+  async train_fail(daiya, me, callname, hook, extra) {
+    extra['args'] = extra.fumble ? fumble_result.fumble : fumble_result.fail;
     await CustomizedEdu.print_fail_info_in_train(
       daiya,
-      extra_flag.train,
-      extra_flag.fumble,
+      extra.train,
+      extra.fumble,
     );
-    if (extra_flag.train !== attr_enum.intelligence) {
-      if (extra_flag.fumble) {
+    if (extra.train !== attr_enum.intelligence) {
+      if (extra.fumble) {
         await print_event_name('严禁逞强！', daiya);
         await era.printAndWait([
           '里见光钻在训练中受伤了，所以 ',
@@ -668,7 +581,7 @@ module.exports = class extends Edu67UntilSchoolAtrium {
             '里见光钻在处理完伤势后，一脸遗憾地回宿舍了。',
           );
           hook.arg = 0;
-        } else if (Math.random() < extra_flag['args'].ratio.fail_again) {
+        } else if (Math.random() < extra['args'].ratio.fail_again) {
           await daiya.say_and_wait('谢谢！那我们回到赛道上吧。');
           await daiya.say_and_wait('──没事的，就这点小伤而已……！', true);
           await daiya.say_and_wait('唔！？', true);
@@ -724,7 +637,7 @@ module.exports = class extends Edu67UntilSchoolAtrium {
             `里见光钻因为充满干劲，所以相对地也就对不能训练感到很失望，但${daiya.sex}还是乖乖地回宿舍休息了。`,
           );
           hook.arg = 0;
-        } else if (Math.random() < extra_flag['args'].ratio.fail_again) {
+        } else if (Math.random() < extra['args'].ratio.fail_again) {
           await daiya.say_and_wait('嗯！我想把今天的训练内容全都做完！');
           await era.printAndWait([
             me.get_colored_name(),
@@ -762,89 +675,28 @@ module.exports = class extends Edu67UntilSchoolAtrium {
     }
   }
 
-  async train_success_add(daiya, me, callname) {
-    await print_event_name('额外的自主训练', daiya);
-    const kita = get_chara_talk(68);
-    const d_call_k = sys_get_colored_callname(this.id, 68);
-    await era.printAndWait('结束了一整天的训练后──');
-    await daiya.say_and_wait(['辛苦了，', callname, '。今天也谢谢你的指导。']);
-    await daiya.say_and_wait('……啊。');
-    await era.printAndWait([
-      me.get_colored_name(),
-      '追着 ',
-      daiya.get_colored_name(),
-      ' 的视线看过去……看到了正在努力做训练的 ',
-      kita.get_colored_name(),
-      '。',
-    ]);
-    await kita.say_and_wait('呼、呼……！还不够还不够！我要再多跑一圈！');
-    await daiya.say_and_wait(
-      '……那个，不好意思。我还是决定要做额外训练了，可以吗？',
+  async train_success_add(daiya, me, callname, hook, extra) {
+    return (
+      (
+        await print_title_with_kojo(
+          this.#kojo,
+          'ts_add',
+          daiya,
+          get_chara_talk(68),
+          me,
+          callname,
+          sys_get_colored_callname(this.id, 68),
+        )
+      )[0] === 1
     );
-    era.printButton('「还是不要太过勉强……」', 1);
-    await era.input();
-    await daiya.say_and_wait([
-      '……其实我昨天才刚看过 ',
-      d_call_k,
-      ' 比赛的影片──',
-    ]);
-    await daiya.say_and_wait([
-      d_call_k,
-      ' 现在的表现真的变得越来越快，实力越来越坚强了……',
-    ]);
-    await daiya.say_and_wait(
-      '虽然我承认是真的有点心急没错，但是……更多的是想要奔跑的冲动！',
-    );
-    await daiya.say_and_wait('有种斗志被燃起的感觉！所以……拜托了！');
-    era.printButton('「那就来跑吧！」', 1);
-    era.printButton('「这股斗志还是留着明天再用吧」', 2);
-    if ((await era.input()) === 1) {
-      await daiya.say_and_wait(['嘿嘿，不愧是 ', callname, '！']);
-      await daiya.say_and_wait('谢谢！那我也去跑步了！');
-      await daiya.say_and_wait(['──', d_call_k, '。我……不会输给你的！']);
-      await era.printAndWait([
-        '于是，',
-        daiya.get_colored_name(),
-        ' 就这样怀抱着对对手的斗志，完成了 ',
-        daiya.sex,
-        ' 的额外训练。',
-      ]);
-      return true;
-    } else {
-      await daiya.say_and_wait(
-        '留着明天再用吗……？唔唔，可是我没有自信自己一定忍得住……！',
-      );
-      era.printButton('「把斗志储蓄下来，最后再一次爆发吧」', 1);
-      await era.input();
-      await daiya.say_and_wait(
-        '……我明白了。那就这么说好了哦。明天一定要让我彻底训练……！',
-      );
-      await daiya.say_and_wait(
-        '……对了！不然我们现在就回训练员室一起看比赛的影片吧！',
-      );
-      await daiya.say_and_wait(
-        '这样的话，心里的那股冲动就会越来越高昂，明天一定就能非常地努力了！',
-      );
-      era.printButton('「那我们就一起看吧！」', 1);
-      await era.input();
-      await daiya.say_and_wait('嗯♪');
-      await era.printAndWait([
-        '于是，在 ',
-        daiya.get_colored_name(),
-        ' 热情的解说下，你们一起看完了以 ',
-        kita.get_colored_name(),
-        ' 为重点的比赛影片。',
-      ]);
-    }
-    return false;
   }
 
-  async week_end(daiya, me, callname, hook, extra_flag, event_object) {
+  async week_end(daiya, me, callname, hook, extra, event_object) {
     return await daiya_week_end(daiya, me, hook, event_object);
   }
 
-  async week_start(daiya, me, callname, hook, extra_flag, event_object) {
-    const edu_marks = new DaiyaEduMarks1(),
+  async week_start(daiya, me, callname, hook, extra, event_object) {
+    const edu_marks = new DaiyaEduMarks99(),
       edu_weeks = era.get('cflag:67:育成回合计时'),
       flags = { wait: false };
     if (week_start_handlers[edu_weeks]) {
@@ -860,7 +712,7 @@ module.exports = class extends Edu67UntilSchoolAtrium {
         me,
         callname,
         hook,
-        extra_flag,
+        extra,
         event_object,
       );
     }

@@ -1,6 +1,6 @@
 const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
 
-class DaiyaEduMarks1 extends EduEventMarks {
+class DaiyaEduMarks99 extends EduEventMarks {
   // 不停打嗝SOS
   sos;
   // Sweepy5☆入团测验！
@@ -42,4 +42,4 @@ class DaiyaEduMarks1 extends EduEventMarks {
   }
 }
 
-module.exports = DaiyaEduMarks1;
+module.exports = DaiyaEduMarks99;

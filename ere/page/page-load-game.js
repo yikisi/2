@@ -696,6 +696,9 @@ module.exports = async () => {
                   era.add('flag:怀孕计数', 1);
                 }
               });
+              if (era.get('cflag:67:招募状态') === recruit_flags.yes) {
+                era.set('cflag:67:多口上', 99);
+              }
             }
             if (version < era.get('gamebase').version) {
               set_image_t(7);

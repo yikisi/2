@@ -1,22 +1,22 @@
 const era = require('#/era-electron');
 
-const Edu67UntilRaceStart = require('#/event/edu/edu-events-67-1/race-start');
+const Edu67UntilRaceStart = require('#/event/edu/edu-67/race-start');
 const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const DaiyaEduMarks1 = require('#/data/event/edu-event-marks/edu-event-marks-67-1');
+const DaiyaEduMarks1 = require('#/data/event/edu-event-marks/edu-event-marks-67-99');
 
 module.exports = class extends Edu67UntilRaceStart {
-  async school_atrium(daiya, me, callname, hook, extra_flag, event_object) {
+  async school_atrium(daiya, me, callname, hook, extra, event_object) {
     if (era.get('flag:当前互动角色') !== 67) {
       add_event(hook.hook, event_object);
       return;
     }
     const event_marks = new DaiyaEduMarks1();
-    let wait_flag = false;
+    let wait = false;
     if (event_marks.sos === 1) {
       event_marks.sos++;
       await print_event_name('不停打嗝SOS', daiya);
@@ -84,7 +84,7 @@ module.exports = class extends Edu67UntilRaceStart {
           '里见光钻非常卖力的模样看起来比平常还要更加可靠。',
         );
         era.println();
-        wait_flag = get_attr_and_print_in_event(67, [0, 20, 0, 0, 0], 0);
+        wait = get_attr_and_print_in_event(67, [0, 20, 0, 0, 0], 0);
       } else {
         await daiya.say_and_wait('原来如此，应该要再稍微低调一点行事比较好。');
         await daiya.say_and_wait(
@@ -95,7 +95,7 @@ module.exports = class extends Edu67UntilRaceStart {
           `想法异于常人的里见光钻真是让 ${me.name} 震惊不已。`,
         );
         era.println();
-        wait_flag = get_attr_and_print_in_event(67, [0, 0, 20, 0, 0], 0);
+        wait = get_attr_and_print_in_event(67, [0, 0, 20, 0, 0], 0);
       }
     } else if (event_marks.sweepy5 === 1) {
       event_marks.sweepy5++;
@@ -187,7 +187,7 @@ module.exports = class extends Edu67UntilRaceStart {
           `虽然我不太懂魔法相关的东西，但看到几个同龄的学生玩得这么开心的模样，让 ${me.name} 不由得也跟着开心了起来。`,
         );
         era.println();
-        wait_flag = get_attr_and_print_in_event(67, [20, 0, 0, 0, 0], 0);
+        wait = get_attr_and_print_in_event(67, [20, 0, 0, 0, 0], 0);
       } else {
         await tachyon.say_and_wait(
           '呵呵呵，选得好！那么里见，首先要用药物来强化身体。一口气吞下去吧。',
@@ -231,7 +231,7 @@ module.exports = class extends Edu67UntilRaceStart {
           `${daiya.sex}偷偷地把实情告诉 ${me.name}。原来是在逞强啊，这样和${daiya.sex}年龄相符的举止令 ${me.name} 会心一笑。`,
         );
         era.println();
-        wait_flag = get_attr_and_print_in_event(67, [0, 0, 10, 0, 0], 15);
+        wait = get_attr_and_print_in_event(67, [0, 0, 10, 0, 0], 15);
       }
     } else if (event_marks.high_dream === 1) {
       event_marks.high_dream++;
@@ -304,7 +304,7 @@ module.exports = class extends Edu67UntilRaceStart {
           `两人用力地握手约定。等到正式执行那天……${me.name} 再努力阻止她们吧。`,
         );
         era.println();
-        wait_flag = get_attr_and_print_in_event(67, [0, 0, 20, 0, 0], 0);
+        wait = get_attr_and_print_in_event(67, [0, 0, 20, 0, 0], 0);
       } else {
         await daiya.say_and_wait('这样的话……是不是应该要做一份企划书呢？');
         await gold_ship.say_and_wait('好主意！提出具体的内容就会更有说服力！');
@@ -316,7 +316,7 @@ module.exports = class extends Edu67UntilRaceStart {
           '后来，虽然计划没能实现，对里见光钻来说却是一次不错的经验！',
         );
         era.println();
-        wait_flag = get_attr_and_print_in_event(67, [0, 0, 0, 0, 20], 0);
+        wait = get_attr_and_print_in_event(67, [0, 0, 0, 0, 20], 0);
       }
     } else if (event_marks.chase === 1) {
       event_marks.chase++;
@@ -387,7 +387,7 @@ module.exports = class extends Edu67UntilRaceStart {
           '里见光钻透过用最极限的声量唱歌，学会了超热血歌曲。',
         );
         era.println();
-        wait_flag = get_attr_and_print_in_event(67, [0, 0, 0, 20, 0], 0);
+        wait = get_attr_and_print_in_event(67, [0, 0, 0, 20, 0], 0);
       } else if (ret === 2) {
         await daiya.say_and_wait(
           '呵呵呵，我忍不住就想像了一下那个画面了呢。那我们走吧。',
@@ -438,7 +438,7 @@ module.exports = class extends Edu67UntilRaceStart {
           '两人一起经过苦思后做出选择，一起品尝了美味的甜点！',
         );
         era.println();
-        wait_flag = get_attr_and_print_in_event(67, [0, 0, 0, 0, 10], 0, [100]);
+        wait = get_attr_and_print_in_event(67, [0, 0, 0, 0, 10], 0, [100]);
       } else {
         await daiya.say_and_wait('是秘密特训的必做项目呢。我们去看看吧……！');
         await mcqueen.say_and_wait('请问……你在赛道的正中间做什么呢？');
@@ -490,10 +490,10 @@ module.exports = class extends Edu67UntilRaceStart {
           '里见光钻因为进行奇妙的搞笑训练，意外地锻炼到了肌肉！',
         );
         era.println();
-        wait_flag = get_attr_and_print_in_event(67, [0, 0, 20, 0, 0], 0);
+        wait = get_attr_and_print_in_event(67, [0, 0, 20, 0, 0], 0);
       }
     }
-    wait_flag && (await era.waitAnyKey());
+    wait && (await era.waitAnyKey());
     return true;
   }
 };

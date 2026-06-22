@@ -1,6 +1,7 @@
 class I18nKojo {
   0 = new (require('#/i18n/zh-CN/kojo/1000-Player/entry'))();
   av_sister = new (require('#/i18n/zh-CN/kojo/av-sister/entry'))();
+  67 = { 99: new (require('#/i18n/zh-CN/kojo/106799-Satono-Diamond/entry'))() };
   // GENERATED START
   1 = new (require('#/i18n/zh-CN/kojo/100101-Special-Week/entry'))();
   2 = new (require('#/i18n/zh-CN/kojo/100201-Silence-Suzuka/entry'))();
@@ -38,7 +39,6 @@ class I18nKojo {
   64 = new (require('#/i18n/zh-CN/kojo/106401-Mejiro-Palmer/entry'))();
   65 = new (require('#/i18n/zh-CN/kojo/106501-Daitaku-Helios/entry'))();
   66 = new (require('#/i18n/zh-CN/kojo/106601-Twin-Turbo/entry'))();
-  67 = new (require('#/i18n/zh-CN/kojo/106701-Satono-Diamond/entry'))();
   68 = new (require('#/i18n/zh-CN/kojo/106801-Kitasan-Black/entry'))();
   70 = new (require('#/i18n/zh-CN/kojo/107001-Sirius-Symboli/entry'))();
   71 = new (require('#/i18n/zh-CN/kojo/107101-Mejiro-Ardan/entry'))();

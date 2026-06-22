@@ -7,11 +7,11 @@ const print_event_name = require('#/event/snippets/print-event-name');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const DaiyaEduMarks1 = require('#/data/event/edu-event-marks/edu-event-marks-67-1');
+const DaiyaEduMarks1 = require('#/data/event/edu-event-marks/edu-event-marks-67-99');
 const { location_enum } = require('#/data/locations');
 
 module.exports = class extends CustomizedEdu {
-  async back_school(daiya, me, callname, hook, extra_flag, event_object) {
+  async back_school(daiya, me, callname, hook, extra, event_object) {
     if (
       era.get('flag:当前互动角色') !== 67 ||
       era.get('flag:当前位置') !== location_enum.gate
@@ -23,7 +23,7 @@ module.exports = class extends CustomizedEdu {
       return;
     }
     const edu_marks = new DaiyaEduMarks1();
-    let wait_flag = false;
+    let wait = false;
     if (edu_marks.street_adv === 1) {
       edu_marks.street_adv++;
       await print_event_name('巷子大冒险', daiya);
@@ -112,7 +112,7 @@ module.exports = class extends CustomizedEdu {
           `因为里见光钻看起来很落寞的样子，所以 ${me.name} 也不忍心再多责备。`,
         );
         era.println();
-        wait_flag = get_attr_and_print_in_event(67, [0, 0, 0, 0, 20], 0);
+        wait = get_attr_and_print_in_event(67, [0, 0, 0, 0, 20], 0);
       } else {
         await daiya.say_and_wait('我那么做的确是有失礼仪……抱歉，是我失礼了。');
         await era.printAndWait(
@@ -128,7 +128,7 @@ module.exports = class extends CustomizedEdu {
         await jordan.say_and_wait('真假？小见也太强了吧！？');
         await era.printAndWait('后来，里见光钻充满好奇地听着不良少女说话。');
         era.println();
-        wait_flag = get_attr_and_print_in_event(67, [0, 0, 20, 0, 0], 0);
+        wait = get_attr_and_print_in_event(67, [0, 0, 20, 0, 0], 0);
       }
     } else if (edu_marks.shopping === 1) {
       edu_marks.shopping++;
@@ -232,7 +232,7 @@ module.exports = class extends CustomizedEdu {
           '比起就发生在身边的战争，里见光钻更优先于自己的好奇心……我算是又更清楚见识到了她的单纯。',
         );
         era.println();
-        wait_flag = get_attr_and_print_in_event(67, [0, 20, 0, 0, 0], 0);
+        wait = get_attr_and_print_in_event(67, [0, 20, 0, 0, 0], 0);
       } else {
         await daiya.say_and_wait(
           '特意要选这样的挑战是吧！感觉很有趣，那我要拆开啰──',
@@ -308,7 +308,7 @@ module.exports = class extends CustomizedEdu {
           `里见光钻连面对前辈的时候，也是无所畏惧地积极前进。${me.name} 似乎又重新明白${daiya.sex}有多坚强。`,
         );
         era.println();
-        wait_flag = get_attr_and_print_in_event(67, [0, 0, 0, 20, 0], 0);
+        wait = get_attr_and_print_in_event(67, [0, 0, 0, 20, 0], 0);
       }
     } else if (edu_marks.in_colorful === 1) {
       edu_marks.in_colorful++;
@@ -392,7 +392,7 @@ module.exports = class extends CustomizedEdu {
           '呵呵，你们两个都好可爱喔～聊得这么开心的模样♪',
         );
         era.println();
-        wait_flag = get_attr_and_print_in_event(67, [20, 0, 0, 0, 0], 0);
+        wait = get_attr_and_print_in_event(67, [20, 0, 0, 0, 0], 0);
       } else {
         await daiya.say_and_wait(
           '原来如此……！毕竟不适合本人的话就没有意义了嘛！',
@@ -442,10 +442,10 @@ module.exports = class extends CustomizedEdu {
           `后来，你们四个人就这样一起度过了开心的挑选衣服时间。`,
         );
         era.println();
-        wait_flag = get_attr_and_print_in_event(67, [0, 0, 0, 20, 0], 0);
+        wait = get_attr_and_print_in_event(67, [0, 0, 0, 20, 0], 0);
       }
     }
-    wait_flag && (await era.waitAnyKey());
+    wait && (await era.waitAnyKey());
     return true;
   }
 };

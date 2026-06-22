@@ -1,144 +1,19 @@
 const era = require('#/era-electron');
 
-const Edu67UntilOutStart = require('#/event/edu/edu-events-67-1/out-start');
+const Edu67UntilOutStart = require('#/event/edu/edu-67/out-start');
 const print_event_name = require('#/event/snippets/print-event-name');
 
 const { say_by_passer_by_and_wait } = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const DaiyaEduMarks1 = require('#/data/event/edu-event-marks/edu-event-marks-67-1');
-const { class_enum } = require('#/data/race/model/race-info');
+const DaiyaEduMarks1 = require('#/data/event/edu-event-marks/edu-event-marks-67-99');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 
-/** @param {CharaTalk} daiya */
-async function first_g1_event(daiya) {
-  era.printButton('「衣服带了吗？」', 1);
-  await era.input();
-  await daiya.say_and_wait(
-    '带了，已经装进包包里了。也没有忘记要再多带一双备用的鞋子。',
-  );
-  era.printButton('「蹄铁呢？」', 1);
-  await era.input();
-  await daiya.say_and_wait('当然也已经钉好了……训练员，你不要那么紧张嘛。');
-  await era.printAndWait(`本想缓和${daiya.sex}的紧张，结果反倒被安抚了。`);
-  await era.printAndWait('嗡嗡嗡嗡嗡……');
-  await daiya.say_and_wait('哎呀，手机响了……是电话。我先接一下。');
-  await daiya.say_and_wait('喂，父亲吗？嗯，我很有精神地正在做准备呢──');
-  await era.printAndWait('……');
-  await daiya.say_and_wait('讲到一半突然接电话真不好意思。');
-  era.printButton('「是你的双亲打来为你加油吗？」', 1);
-  await era.input();
-  await daiya.say_and_wait(
-    '是的……呵呵呵！父亲也跟训练员一样，一直担心我有没有遗漏什么东西。',
-  );
-  await daiya.say_and_wait(
-    '每次到了比赛前，都是身边的人比我还要更紧张的感觉呢。',
-  );
-  await daiya.say_and_wait(
-    '……我说『一定会将胜利带回来』，但他们却只希望我安全，不要受伤就好。',
-  );
-  era.printButton('「他们一定也是真心不希望你受伤的」', 1);
-  await era.input();
-  await daiya.say_and_wait(
-    '是呀。父亲和母亲从来都没有要求我『要赢』。就只是以父母的身份很温柔地对待我。',
-  );
-  await daiya.say_and_wait('这样反而让我……更想在明天的比赛中跑赢。');
-  await daiya.say_and_wait(
-    `身为他们女儿的我成为『知名赛${daiya.uma_sex_title}』，把里见家一直梦寐以求的第一个荣耀献给他们。`,
-  );
-  await daiya.say_and_wait(
-    `父亲和母亲无论多忙碌，也都不忘为赛${daiya.uma_sex_title}界的发展尽心尽力。`,
-  );
-  await daiya.say_and_wait('所以，我觉得他们的努力是值得获得『奖励』的♪');
-  era.printButton('「一定要把最棒的奖励带给他们！」', 1);
-  await era.input();
-  await daiya.say_and_wait('嗯！里见家首次的G1胜利，我一定会达成的！');
-}
-
-/**
- * @param {CharaTalk} daiya
- * @param {CharaTalk} me
- */
-async function sats_sho_event(daiya, me) {
-  era.printButton('「听说明天会有暴风雨……」', 1);
-  await era.input();
-  await daiya.say_and_wait(
-    '好像是这样呢。但请放心吧！我有做好面对极差路况的准备！',
-  );
-  await era.printAndWait(
-    `里见光钻给了 ${me.name} 相当可靠的回答。保险起见，${me.name} 决定明天要提早从特雷森学园出发。`,
-  );
-  era.drawLine({ content: '隔天早上' });
-  await era.printAndWait('雨并没有预期中的大，但确实吹着不间断的强风。');
-  await era.printAndWait(
-    `感觉电车很有可能因为强风而停驶。于是，${me.name} 决定搭乘出租车前往中山赛场。`,
-  );
-  await era.printAndWait(
-    '然而，高速公路也受到天气的影响而拥塞。连到了预定抵达赛场的时间，也还尚未脱离高速公路──',
-  );
-  await era.printAndWait(
-    '下交流道后的路况也依旧拥塞，再这样下去就要迟到了……！',
-  );
-  era.printButton('「只能下车用跑的去赛场了！」', 1);
-  await era.input();
-  await daiya.say_and_wait('好的！那我先出发了！');
-  await daiya.say_and_wait('唔……！风好大……！');
-  await era.printAndWait(
-    '强风大到差点把里见光钻给吹倒。算是这个时期罕见的春季暴风雨。没有想到居然会因为天气而被困在半路上，并差点迟到──',
-  );
-  await daiya.say_and_wait(
-    '罕见的春季暴风雨……塞车……偏偏在今天发生这么多不好的事情……',
-    true,
-  );
-  await daiya.say_and_wait('……难道是…………因为魔咒？', true);
-  await daiya.say_and_wait(
-    '照这样下去，能不能参赛都是个问题……而这股慌张也会影响我的表现……！',
-    true,
-  );
-  await daiya.say_and_wait(
-    `我成为『知名赛${daiya.uma_sex_title}』的这条必经之路，难道魔咒正在阻止我前进吗……！？`,
-    true,
-  );
-  await daiya.say_and_wait('……唔！那我是绝对不会认输的！！', true);
-  await daiya.say_and_wait('喝啊啊啊啊！');
-  await era.printAndWait(
-    `里见光钻一边呐喊着，一边在赛${daiya.uma_sex_title}专用道路上狂奔。`,
-  );
-  era.printButton('「一定要赶上呀……！」', 1);
-  await era.input();
-  era.drawLine();
-  await era.printAndWait(
-    '抵达中山赛场的时候，已经是『皋月赏』开赛的前三十分钟。',
-  );
-  await era.printAndWait(
-    `${me.name} 一边祈祷${daiya.sex}有顺利赶上──一边朝着亮相圈前进。`,
-  );
-  await era.printAndWait(`里见光钻${daiya.sex}人在……`);
-  await daiya.say_and_wait('……唔！');
-  era.printButton('（太好了……！）', 1);
-  await era.input();
-  await daiya.say_and_wait('……呼……');
-  await daiya.say_and_wait('啊，训练员！');
-  era.printButton('「你还好吧？」', 1);
-  await era.input();
-  await daiya.say_and_wait('嗯，总算是勉强赶上了！');
-  await daiya.say_and_wait(
-    '虽然步调被稍微打乱了……但我反而因为这样变得更冷静了的样子！',
-  );
-  await era.printAndWait(
-    `里见光钻露出了微笑。${daiya.sex}精神层面的强韧又再次让 ${me.name} 感到惊讶。`,
-  );
-  await daiya.say_and_wait('经典三冠的第一冠……我绝对不能输！！');
-  await era.printAndWait(
-    `或许是和${daiya.sex}的干劲互相呼应吧。厚重的雨云在不知不觉间散去，耀眼的阳光回到了场上。`,
-  );
-}
-
 module.exports = class extends Edu67UntilOutStart {
-  async race_start(daiya, me, callname, hook, extra_flag) {
+  async race_start(daiya, me, callname, hook, extra) {
     const edu_marks = new DaiyaEduMarks1(),
       edu_weeks = era.get('cflag:67:育成回合计时');
-    if (extra_flag.race === race_enum.begin_race && edu_weeks < 48) {
+    if (extra.race === race_enum.begin_race && edu_weeks < 48) {
       const mcqueen = get_chara_talk(13);
       await print_event_name('迎向出道战', daiya);
       await era.printAndWait(
@@ -257,27 +132,216 @@ module.exports = class extends Edu67UntilOutStart {
       era.printButton('「去吧！」', 1);
       await era.input();
       await daiya.say_and_wait('是！里见光钻要上场了！');
-    } else if (extra_flag.race === race_enum.sats_sho) {
+    } else if (extra.race === race_enum.sats_sho) {
       await print_event_name('迎向皋月赏', daiya);
       if (edu_marks.run_g1 === 1) {
         await era.printAndWait(
           '明天就是期待已久的皋月赏了。然而天气预报的却不太乐观。',
         );
-        await sats_sho_event(daiya, me);
+
+        era.printButton('「听说明天会有暴风雨……」', 1);
+        await era.input();
+        await daiya.say_and_wait(
+          '好像是这样呢。但请放心吧！我有做好面对极差路况的准备！',
+        );
+        await era.printAndWait(
+          `里见光钻给了 ${me.name} 相当可靠的回答。保险起见，${me.name} 决定明天要提早从特雷森学园出发。`,
+        );
+        era.drawLine({ content: '隔天早上' });
+        await era.printAndWait('雨并没有预期中的大，但确实吹着不间断的强风。');
+        await era.printAndWait(
+          `感觉电车很有可能因为强风而停驶。于是，${me.name} 决定搭乘出租车前往中山赛场。`,
+        );
+        await era.printAndWait(
+          '然而，高速公路也受到天气的影响而拥塞。连到了预定抵达赛场的时间，也还尚未脱离高速公路──',
+        );
+        await era.printAndWait(
+          '下交流道后的路况也依旧拥塞，再这样下去就要迟到了……！',
+        );
+        era.printButton('「只能下车用跑的去赛场了！」', 1);
+        await era.input();
+        await daiya.say_and_wait('好的！那我先出发了！');
+        await daiya.say_and_wait('唔……！风好大……！');
+        await era.printAndWait(
+          '强风大到差点把里见光钻给吹倒。算是这个时期罕见的春季暴风雨。没有想到居然会因为天气而被困在半路上，并差点迟到──',
+        );
+        await daiya.say_and_wait(
+          '罕见的春季暴风雨……塞车……偏偏在今天发生这么多不好的事情……',
+          true,
+        );
+        await daiya.say_and_wait('……难道是…………因为魔咒？', true);
+        await daiya.say_and_wait(
+          '照这样下去，能不能参赛都是个问题……而这股慌张也会影响我的表现……！',
+          true,
+        );
+        await daiya.say_and_wait(
+          `我成为『知名赛${daiya.uma_sex_title}』的这条必经之路，难道魔咒正在阻止我前进吗……！？`,
+          true,
+        );
+        await daiya.say_and_wait('……唔！那我是绝对不会认输的！！', true);
+        await daiya.say_and_wait('喝啊啊啊啊！');
+        await era.printAndWait(
+          `里见光钻一边呐喊着，一边在赛${daiya.uma_sex_title}专用道路上狂奔。`,
+        );
+        era.printButton('「一定要赶上呀……！」', 1);
+        await era.input();
+        era.drawLine();
+        await era.printAndWait(
+          '抵达中山赛场的时候，已经是『皋月赏』开赛的前三十分钟。',
+        );
+        await era.printAndWait(
+          `${me.name} 一边祈祷${daiya.sex}有顺利赶上──一边朝着亮相圈前进。`,
+        );
+        await era.printAndWait(`里见光钻${daiya.sex}人在……`);
+        await daiya.say_and_wait('……唔！');
+        era.printButton('（太好了……！）', 1);
+        await era.input();
+        await daiya.say_and_wait('……呼……');
+        await daiya.say_and_wait('啊，训练员！');
+        era.printButton('「你还好吧？」', 1);
+        await era.input();
+        await daiya.say_and_wait('嗯，总算是勉强赶上了！');
+        await daiya.say_and_wait(
+          '虽然步调被稍微打乱了……但我反而因为这样变得更冷静了的样子！',
+        );
+        await era.printAndWait(
+          `里见光钻露出了微笑。${daiya.sex}精神层面的强韧又再次让 ${me.name} 感到惊讶。`,
+        );
+        await daiya.say_and_wait('经典三冠的第一冠……我绝对不能输！！');
+        await era.printAndWait(
+          `或许是和${daiya.sex}的干劲互相呼应吧。厚重的雨云在不知不觉间散去，耀眼的阳光回到了场上。`,
+        );
       } else {
         await era.printAndWait(
           '明天是期待已久的里见光钻首场G1竞赛『皋月赏』的日子。',
         );
-        await first_g1_event(daiya);
+
+        era.printButton('「衣服带了吗？」', 1);
+        await era.input();
+        await daiya.say_and_wait(
+          '带了，已经装进包包里了。也没有忘记要再多带一双备用的鞋子。',
+        );
+        era.printButton('「蹄铁呢？」', 1);
+        await era.input();
+        await daiya.say_and_wait(
+          '当然也已经钉好了……训练员，你不要那么紧张嘛。',
+        );
+        await era.printAndWait(
+          `本想缓和${daiya.sex}的紧张，结果反倒被安抚了。`,
+        );
+        await era.printAndWait('嗡嗡嗡嗡嗡……');
+        await daiya.say_and_wait('哎呀，手机响了……是电话。我先接一下。');
+        await daiya.say_and_wait('喂，父亲吗？嗯，我很有精神地正在做准备呢──');
+        await era.printAndWait('……');
+        await daiya.say_and_wait('讲到一半突然接电话真不好意思。');
+        era.printButton('「是你的双亲打来为你加油吗？」', 1);
+        await era.input();
+        await daiya.say_and_wait(
+          '是的……呵呵呵！父亲也跟训练员一样，一直担心我有没有遗漏什么东西。',
+        );
+        await daiya.say_and_wait(
+          '每次到了比赛前，都是身边的人比我还要更紧张的感觉呢。',
+        );
+        await daiya.say_and_wait(
+          '……我说『一定会将胜利带回来』，但他们却只希望我安全，不要受伤就好。',
+        );
+        era.printButton('「他们一定也是真心不希望你受伤的」', 1);
+        await era.input();
+        await daiya.say_and_wait(
+          '是呀。父亲和母亲从来都没有要求我『要赢』。就只是以父母的身份很温柔地对待我。',
+        );
+        await daiya.say_and_wait('这样反而让我……更想在明天的比赛中跑赢。');
+        await daiya.say_and_wait(
+          `身为他们女儿的我成为『知名赛${daiya.uma_sex_title}』，把里见家一直梦寐以求的第一个荣耀献给他们。`,
+        );
+        await daiya.say_and_wait(
+          `父亲和母亲无论多忙碌，也都不忘为赛${daiya.uma_sex_title}界的发展尽心尽力。`,
+        );
+        await daiya.say_and_wait('所以，我觉得他们的努力是值得获得『奖励』的♪');
+        era.printButton('「一定要把最棒的奖励带给他们！」', 1);
+        await era.input();
+        await daiya.say_and_wait('嗯！里见家首次的G1胜利，我一定会达成的！');
         await era.printAndWait(
           `你们对于在『皋月赏』获胜更加充满了干劲。很期待她能顺利赢得第一个G1胜利。`,
         );
         await era.printAndWait(
           '──然而，就像是老天爷要泼我们冷水一般，电视上的天气预报显示出令人担忧的资讯。',
         );
-        await sats_sho_event(daiya, me);
+
+        era.printButton('「听说明天会有暴风雨……」', 1);
+        await era.input();
+        await daiya.say_and_wait(
+          '好像是这样呢。但请放心吧！我有做好面对极差路况的准备！',
+        );
+        await era.printAndWait(
+          `里见光钻给了 ${me.name} 相当可靠的回答。保险起见，${me.name} 决定明天要提早从特雷森学园出发。`,
+        );
+        era.drawLine({ content: '隔天早上' });
+        await era.printAndWait('雨并没有预期中的大，但确实吹着不间断的强风。');
+        await era.printAndWait(
+          `感觉电车很有可能因为强风而停驶。于是，${me.name} 决定搭乘出租车前往中山赛场。`,
+        );
+        await era.printAndWait(
+          '然而，高速公路也受到天气的影响而拥塞。连到了预定抵达赛场的时间，也还尚未脱离高速公路──',
+        );
+        await era.printAndWait(
+          '下交流道后的路况也依旧拥塞，再这样下去就要迟到了……！',
+        );
+        era.printButton('「只能下车用跑的去赛场了！」', 1);
+        await era.input();
+        await daiya.say_and_wait('好的！那我先出发了！');
+        await daiya.say_and_wait('唔……！风好大……！');
+        await era.printAndWait(
+          '强风大到差点把里见光钻给吹倒。算是这个时期罕见的春季暴风雨。没有想到居然会因为天气而被困在半路上，并差点迟到──',
+        );
+        await daiya.say_and_wait(
+          '罕见的春季暴风雨……塞车……偏偏在今天发生这么多不好的事情……',
+          true,
+        );
+        await daiya.say_and_wait('……难道是…………因为魔咒？', true);
+        await daiya.say_and_wait(
+          '照这样下去，能不能参赛都是个问题……而这股慌张也会影响我的表现……！',
+          true,
+        );
+        await daiya.say_and_wait(
+          `我成为『知名赛${daiya.uma_sex_title}』的这条必经之路，难道魔咒正在阻止我前进吗……！？`,
+          true,
+        );
+        await daiya.say_and_wait('……唔！那我是绝对不会认输的！！', true);
+        await daiya.say_and_wait('喝啊啊啊啊！');
+        await era.printAndWait(
+          `里见光钻一边呐喊着，一边在赛${daiya.uma_sex_title}专用道路上狂奔。`,
+        );
+        era.printButton('「一定要赶上呀……！」', 1);
+        await era.input();
+        era.drawLine();
+        await era.printAndWait(
+          '抵达中山赛场的时候，已经是『皋月赏』开赛的前三十分钟。',
+        );
+        await era.printAndWait(
+          `${me.name} 一边祈祷${daiya.sex}有顺利赶上──一边朝着亮相圈前进。`,
+        );
+        await era.printAndWait(`里见光钻${daiya.sex}人在……`);
+        await daiya.say_and_wait('……唔！');
+        era.printButton('（太好了……！）', 1);
+        await era.input();
+        await daiya.say_and_wait('……呼……');
+        await daiya.say_and_wait('啊，训练员！');
+        era.printButton('「你还好吧？」', 1);
+        await era.input();
+        await daiya.say_and_wait('嗯，总算是勉强赶上了！');
+        await daiya.say_and_wait(
+          '虽然步调被稍微打乱了……但我反而因为这样变得更冷静了的样子！',
+        );
+        await era.printAndWait(
+          `里见光钻露出了微笑。${daiya.sex}精神层面的强韧又再次让 ${me.name} 感到惊讶。`,
+        );
+        await daiya.say_and_wait('经典三冠的第一冠……我绝对不能输！！');
+        await era.printAndWait(
+          `或许是和${daiya.sex}的干劲互相呼应吧。厚重的雨云在不知不觉间散去，耀眼的阳光回到了场上。`,
+        );
       }
-    } else if (extra_flag.race === race_enum.toky_yus) {
+    } else if (extra.race === race_enum.toky_yus) {
       await print_event_name('迎向日本德比', daiya);
       await era.printAndWait(
         `众多赛${daiya.uma_sex_title}梦想中的舞台──『日本德比』。面对明天就要正式开始的比赛，里见光钻看起来比平时又更有干劲。`,
@@ -338,7 +402,7 @@ module.exports = class extends Edu67UntilOutStart {
         race_infos[race_enum.toky_yus].get_colored_name(),
         ' 的！绝对会！！',
       ]);
-    } else if (extra_flag.race === race_enum.kiku_sho) {
+    } else if (extra.race === race_enum.kiku_sho) {
       const kita = get_chara_talk(68);
       await print_event_name('迎向菊花赏', daiya);
       await daiya.say_and_wait(
@@ -390,7 +454,7 @@ module.exports = class extends Edu67UntilOutStart {
       await kita.say_and_wait(
         '因为，这是我第一次看到小钻露出这么专注的表情……！',
       );
-    } else if (extra_flag.race === race_enum.arim_kin && edu_weeks < 96) {
+    } else if (extra.race === race_enum.arim_kin && edu_weeks < 96) {
       const kita = get_chara_talk(68);
       await print_event_name('迎向有马纪念', daiya);
       await era.printAndWait(
@@ -447,7 +511,7 @@ module.exports = class extends Edu67UntilOutStart {
       );
       await daiya.say_and_wait('不对，我会一口气超越小北的！');
       await kita.say_and_wait('我不会让出领先的位置的！！一决胜负吧，小钻！');
-    } else if (extra_flag.race === race_enum.sank_hai) {
+    } else if (extra.race === race_enum.sank_hai) {
       const kita = get_chara_talk(68);
       await print_event_name('迎向大阪杯', daiya);
       await era.printAndWait(
@@ -524,7 +588,7 @@ module.exports = class extends Edu67UntilOutStart {
       era.printButton(`「光钻，不能输给${kita.sex}！！」`, 1);
       await era.input();
       await daiya.say_and_wait('是！我一定会赢的！！');
-    } else if (extra_flag.race === race_enum.tenn_spr) {
+    } else if (extra.race === race_enum.tenn_spr) {
       const teio = get_chara_talk(3);
       const mcqueen = get_chara_talk(13);
       await print_event_name('迎向天皇赏（春）', daiya);
@@ -601,7 +665,7 @@ module.exports = class extends Edu67UntilOutStart {
       await daiya.say_and_wait(
         `我要跑赢这场比赛，成为让大家都认可实力的赛${daiya.uma_sex_title}！`,
       );
-    } else if (extra_flag.race === race_enum.kyot_dai && edu_weeks >= 96) {
+    } else if (extra.race === race_enum.kyot_dai && edu_weeks >= 96) {
       await print_event_name('迎向京都大赏典', daiya);
       await era.printAndWait(
         '『京都大赏典』开始前。观众间弥漫着一股担忧的氛围。',
@@ -661,7 +725,7 @@ module.exports = class extends Edu67UntilOutStart {
         `所以，今天我只会将我想成为『知名赛${daiya.uma_sex_title}』的梦想，放在心中并前去比赛。`,
       );
       await daiya.say_and_wait('──跑出里见光钻的风格。');
-    } else if (extra_flag.race === race_enum.takz_kin && edu_weeks >= 96) {
+    } else if (extra.race === race_enum.takz_kin && edu_weeks >= 96) {
       await print_event_name('迎向宝冢纪念', daiya);
       const kita = get_chara_talk(68);
       await daiya.say_and_wait('……呼、呼……');
@@ -696,7 +760,7 @@ module.exports = class extends Edu67UntilOutStart {
         true,
       );
       await daiya.say_and_wait('希望只是我多想了……', true);
-    } else if (extra_flag.race === race_enum.tenn_sho) {
+    } else if (extra.race === race_enum.tenn_sho) {
       await print_event_name('迎向天皇赏（秋）', daiya);
       const kita = get_chara_talk(68);
       await kita.say_and_wait('──终于到这天了……『天皇赏（秋）』。');
@@ -752,7 +816,7 @@ module.exports = class extends Edu67UntilOutStart {
       await daiya.say_and_wait('是呀！如果是顺利走到今天的我们的话！');
       await daiya.say_and_wait('一定能赢过麦昆的！');
       await era.printAndWait('两人「第一名是我的！！第一名是我的！！」');
-    } else if (extra_flag.race === race_enum.japa_cup && edu_weeks > 95) {
+    } else if (extra.race === race_enum.japa_cup && edu_weeks > 95) {
       await print_event_name('迎向日本杯', daiya);
       const kita = get_chara_talk(68);
       const teio = get_chara_talk(3);
@@ -787,7 +851,7 @@ module.exports = class extends Edu67UntilOutStart {
       await teio.say_and_wait('我会让你们见识我的实力！');
       await teio.say_and_wait('小北、小钻！你们尽管用全力来挑战吧！！');
       await era.printAndWait('两人「我不会输的！！」');
-    } else if (extra_flag.race === race_enum.arim_kin && edu_weeks > 95) {
+    } else if (extra.race === race_enum.arim_kin && edu_weeks > 95) {
       await print_event_name('迎向有马纪念', daiya);
       const kita = get_chara_talk(68);
       await daiya.say_and_wait(
@@ -836,17 +900,6 @@ module.exports = class extends Edu67UntilOutStart {
       await daiya.say_and_wait(
         '为了不辜负大家对我的心意──这场比赛我一定要赢！',
       );
-    } else if (
-      race_infos[extra_flag.race].race_class === class_enum.G1 &&
-      edu_marks.run_g1 !== 1
-    ) {
-      await print_event_name('属于我的温暖', daiya);
-      await era.printAndWait(
-        '距离里见光钻首次挑战的G1竞赛终于只剩下一天的时间。',
-      );
-      await first_g1_event(daiya);
-    } else {
-      return await super.race_start(daiya, me, callname, hook, extra_flag);
     }
   }
 };

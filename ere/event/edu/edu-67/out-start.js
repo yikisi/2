@@ -1,6 +1,6 @@
 const era = require('#/era-electron');
 
-const Edu67BackSchool = require('#/event/edu/edu-events-67-1/back-school');
+const Edu67BackSchool = require('#/event/edu/edu-67/back-school');
 const { add_event } = require('#/event/queue');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
@@ -8,17 +8,17 @@ const print_event_name = require('#/event/snippets/print-event-name');
 const { say_by_passer_by_and_wait } = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
-const DaiyaEduMarks1 = require('#/data/event/edu-event-marks/edu-event-marks-67-1');
+const DaiyaEduMarks1 = require('#/data/event/edu-event-marks/edu-event-marks-67-99');
 
 module.exports = class extends Edu67BackSchool {
-  async out_start(daiya, me, callname, hook, extra_flag, event_object) {
+  async out_start(daiya, me, callname, hook, extra, event_object) {
     if (era.get('flag:当前互动角色') !== 67) {
       add_event(hook.hook, event_object);
       return;
     }
     const edu_marks = new DaiyaEduMarks1();
     const edu_weeks = era.get('cflag:67:育成回合计时');
-    let wait_flag = false;
+    let wait = false;
     if (edu_marks.win_g1 === 1) {
       await print_event_name('支持我的大家', daiya);
       const kita = get_chara_talk(68);
@@ -249,7 +249,7 @@ module.exports = class extends Edu67BackSchool {
           `从${daiya.sex}不仅考量着现在也规划着未来的眼神中，${me.name} 仿佛可以预见${daiya.sex}将来活跃的姿态。`,
         );
         era.println();
-        wait_flag = get_attr_and_print_in_event(67, [0, 0, 0, 0, 20], 0);
+        wait = get_attr_and_print_in_event(67, [0, 0, 0, 0, 20], 0);
       } else {
         era.drawLine();
         await bright.say_and_wait(
@@ -272,7 +272,7 @@ module.exports = class extends Edu67BackSchool {
           '看来都是些个性很相像的人参加呢。啊哈哈，到时候真不知道会是什么情况……',
         );
         era.println();
-        wait_flag = get_attr_and_print_in_event(67, [0, 10, 10, 0, 0], 0);
+        wait = get_attr_and_print_in_event(67, [0, 10, 10, 0, 0], 0);
       }
     } else if (edu_marks.diamond_cotton === 1) {
       edu_marks.diamond_cotton++;
@@ -322,7 +322,7 @@ module.exports = class extends Edu67BackSchool {
           `${daiya.sex}在说这些话时的眼神中，浮现着和她钻石饰品一样坚强的信念和意志。`,
         );
         era.println();
-        wait_flag = get_attr_and_print_in_event(67, [0, 0, 0, 20, 0], 0);
+        wait = get_attr_and_print_in_event(67, [0, 0, 0, 20, 0], 0);
       } else {
         await daiya.say_and_wait('哎呀，你竟然注意到了这点！');
         await daiya.say_and_wait(
@@ -377,7 +377,7 @@ module.exports = class extends Edu67BackSchool {
           `${daiya.sex}有非常稳重可靠的一面，也有与之相反的部分。这次让 ${me.name} 重新慎重地决定今后一定要好好守着${daiya.sex}。`,
         );
         era.println();
-        wait_flag = get_attr_and_print_in_event(67, [0, 20, 0, 0, 0], 0);
+        wait = get_attr_and_print_in_event(67, [0, 20, 0, 0, 0], 0);
       }
     } else if (edu_marks.high_place === 1) {
       edu_marks.high_place++;
@@ -435,7 +435,7 @@ module.exports = class extends Edu67BackSchool {
           '后来，里见光钻点了目白麦昆推荐的甜点……这是考量了热量问题后的选择。',
         );
         era.println();
-        wait_flag = get_attr_and_print_in_event(67, undefined, 0, [100]);
+        wait = get_attr_and_print_in_event(67, undefined, 0, [100]);
       } else {
         await daiya.say_and_wait('是！我一定会追上麦昆的！');
         await daiya.say_and_wait(
@@ -456,7 +456,7 @@ module.exports = class extends Edu67BackSchool {
         );
         era.add(`base:67:体重偏差`, 500);
         era.println();
-        wait_flag = get_attr_and_print_in_event(67, undefined, 0, [300]);
+        wait = get_attr_and_print_in_event(67, undefined, 0, [300]);
       }
     } else if (edu_marks.fresh === 1) {
       edu_marks.fresh++;
@@ -539,7 +539,7 @@ module.exports = class extends Edu67BackSchool {
         await kita.say_and_wait('我也要、我也要！去问问商店街的其他人看看吧！');
         await era.printAndWait(`你们三人一起走在商店街上，寻找着未知的魔咒！`);
         era.println();
-        wait_flag = get_attr_and_print_in_event(67, [20, 0, 0, 0, 0], 0);
+        wait = get_attr_and_print_in_event(67, [20, 0, 0, 0, 0], 0);
       } else {
         await daiya.say_and_wait(
           '啊，你该不会不相信吧？那我就再破除一个魔咒给你看！',
@@ -557,7 +557,7 @@ module.exports = class extends Edu67BackSchool {
           '现场教学贩卖受到了好评，里见光钻等人顺利把小黄瓜也卖完了！',
         );
         era.println();
-        wait_flag = get_attr_and_print_in_event(67, [0, 20, 0, 0, 0], 0);
+        wait = get_attr_and_print_in_event(67, [0, 20, 0, 0, 0], 0);
       }
     } else if (edu_marks.heartbeat_excite === 1) {
       edu_marks.heartbeat_excite++;
@@ -641,7 +641,7 @@ module.exports = class extends Edu67BackSchool {
           `等到那天来临时，${me.name} 一定要努力鼓起勇气。为了${daiya.sex}的笑容，${me.name} 在心里这么发誓！`,
         );
         era.println();
-        wait_flag = get_attr_and_print_in_event(67, [0, 20, 0, 0, 0], 0);
+        wait = get_attr_and_print_in_event(67, [0, 20, 0, 0, 0], 0);
       } else if (ret === 2) {
         await daiya.say_and_wait('哇～我就等你说这句话呢！走吧、走吧！');
         await era.printAndWait('咖当咖当咖当咖当……咻──────！');
@@ -656,7 +656,7 @@ module.exports = class extends Edu67BackSchool {
           `你们一直重复排队，直到能坐最前面的位子，度过了既好玩又累到头昏眼花的一天！`,
         );
         era.println();
-        wait_flag = get_attr_and_print_in_event(67, [0, 0, 0, 20, 0], 0);
+        wait = get_attr_and_print_in_event(67, [0, 0, 0, 20, 0], 0);
       } else {
         await daiya.say_and_wait(
           '哎呀，这个主意不错呢！其实其他游乐设施我也很感兴趣喔♪',
@@ -668,7 +668,7 @@ module.exports = class extends Edu67BackSchool {
           `即使没有玩云霄飞车，${me.name} 还是和里见光钻一起度过了快乐的时光！`,
         );
         era.println();
-        wait_flag = get_attr_and_print_in_event(67, [0, 0, 0, 0, 20], 0);
+        wait = get_attr_and_print_in_event(67, [0, 0, 0, 0, 20], 0);
       }
     } else if (edu_weeks === 95 + 1) {
       await print_event_name('新年参拜', daiya);
@@ -822,7 +822,7 @@ module.exports = class extends Edu67BackSchool {
           `于是──你们一起享用了用新干线外送过来的美味鳗鱼饭。`,
         );
         era.println();
-        wait_flag = get_attr_and_print_in_event(67, undefined, 0, [300]);
+        wait = get_attr_and_print_in_event(67, undefined, 0, [300]);
       } else if (ret === 2) {
         await daiya.say_and_wait(
           '福袋！那个真的会让人充满期待呢！我也想要买！',
@@ -859,7 +859,7 @@ module.exports = class extends Edu67BackSchool {
           `你们一起度过了愉快的排队时间，也顺利买到了福袋！`,
         );
         era.println();
-        wait_flag = get_attr_and_print_in_event(67, new Array(5).fill(10), 0);
+        wait = get_attr_and_print_in_event(67, new Array(5).fill(10), 0);
       } else {
         await daiya.say_and_wait(
           '写新年抱负吗……既然如此的话，那我想要写一幅大张的！',
@@ -882,11 +882,11 @@ module.exports = class extends Edu67BackSchool {
           `于是，${daiya.sex}用非常优美的字体，写出了『成就宿愿』四个大字！`,
         );
         era.println();
-        wait_flag = get_attr_and_print_in_event(67, undefined, 70);
+        wait = get_attr_and_print_in_event(67, undefined, 70);
       }
       era.set('cflag:67:节日事件标记', 0);
     }
-    wait_flag && (await era.waitAnyKey());
+    wait && (await era.waitAnyKey());
     return true;
   }
 };

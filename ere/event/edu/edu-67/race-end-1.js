@@ -16,10 +16,10 @@ module.exports = (handlers) => {
     daiya,
     me,
     edu_weeks,
-    extra_flag,
+    extra,
     edu_marks,
   ) => {
-    if (edu_weeks >= 48 || extra_flag.rank !== 1) {
+    if (edu_weeks >= 48 || extra.rank !== 1) {
       return true;
     }
     await print_event_name('黎明', daiya);
@@ -101,7 +101,7 @@ module.exports = (handlers) => {
     add_event(event_hooks.week_start, new EventObject(67, cb_enum.edu));
   };
 
-  handlers[race_enum.sats_sho] = async (daiya, me, edu_weeks, extra_flag) => {
+  handlers[race_enum.sats_sho] = async (daiya, me, edu_weeks, extra) => {
     await print_event_name('厄运', daiya);
     await say_by_passer_by_and_wait('实况', '选手们从第四弯道进入直线！');
     await daiya.say_and_wait('──这里！从这里……！', true);
@@ -111,7 +111,7 @@ module.exports = (handlers) => {
       true,
     );
     await daiya.say_and_wait('唔唔唔唔唔啊啊啊啊啊……！');
-    if (extra_flag.rank === 1) {
+    if (extra.rank === 1) {
       await era.printAndWait(
         '实况「抵达终点！第一名是里见光钻！！这颗钻石在暴风雨过后的阳光下闪耀！」',
       );
@@ -153,7 +153,7 @@ module.exports = (handlers) => {
       '……光是跑完2000米就觉得到极限了……这种表现怎么可能跑第一……',
       true,
     );
-    if (extra_flag.rank === 1) {
+    if (extra.rank === 1) {
       await daiya.say_and_wait(
         '实际上最后阶段我真的觉得很辛苦……完全没能发挥尾段加速的实力……',
         true,
@@ -178,7 +178,7 @@ module.exports = (handlers) => {
     await era.input();
     await daiya.say_and_wait('咦！？训练员不需要为这件事道歉呀！');
     await daiya.say_and_wait('当时的状况，我自己也觉得下车用跑的比较好！');
-    if (extra_flag.rank === 1) {
+    if (extra.rank === 1) {
       await daiya.say_and_wait(
         '……可是……刚好今天遇上了坏天气。才没能发挥100%的实力……',
       );
@@ -212,7 +212,7 @@ module.exports = (handlers) => {
     );
   };
 
-  handlers[race_enum.toky_yus] = async (daiya, me, edu_weeks, extra_flag) => {
+  handlers[race_enum.toky_yus] = async (daiya, me, edu_weeks, extra) => {
     await print_event_name('惭愧', daiya);
     await daiya.say_and_wait('……没事的！鞋也已经换过了！', true);
     await daiya.say_and_wait(
@@ -225,7 +225,7 @@ module.exports = (handlers) => {
     await era.printAndWait(
       '像是摆脱了什么般的……真切的咆哮。里见光钻展现惊人的气势，在草地上奔驰。',
     );
-    if (extra_flag.rank === 1) {
+    if (extra.rank === 1) {
       await say_by_passer_by_and_wait(
         '实况',
         `领先的是……里见光钻──！今年的德比赛${daiya.uma_sex_title}是里见光钻！`,
@@ -253,7 +253,7 @@ module.exports = (handlers) => {
       true,
     );
     await daiya.say_and_wait('真是不堪的表现……！！', true);
-    if (extra_flag.rank === 1) {
+    if (extra.rank === 1) {
       const reporter = get_chara_talk(303);
       await reporter.say_and_wait(
         `里见光钻${daiya.adult_sex_title}，恭喜你！请问你成为德比赛${daiya.uma_sex_title}的感想是？`,
@@ -313,7 +313,7 @@ module.exports = (handlers) => {
       '明明就完全没有任何异状，我也亲自检查过好多遍，确定没有问题了！',
     );
     await daiya.say_and_wait('……当下的我……就是太害怕魔咒了……');
-    if (extra_flag.rank === 1) {
+    if (extra.rank === 1) {
       await daiya.say_and_wait(`因为被魔咒分心，所以没有跑出最佳状态！`);
       await daiya.say_and_wait('我不能原谅这样的自己！！');
     } else {
@@ -428,7 +428,7 @@ module.exports = (handlers) => {
     );
   };
 
-  handlers[race_enum.kiku_sho] = async (daiya, me, edu_weeks, extra_flag) => {
+  handlers[race_enum.kiku_sho] = async (daiya, me, edu_weeks, extra) => {
     await print_event_name('克己', daiya);
     const kita = get_chara_talk(68);
     await daiya.say_and_wait(
@@ -444,7 +444,7 @@ module.exports = (handlers) => {
     await era.printAndWait(
       '实况「来了──！！是里见光钻！发动了她利落的尾段加速能力──！」',
     );
-    if (extra_flag.rank === 1) {
+    if (extra.rank === 1) {
       await era.printAndWait(
         `实况「第一名是里见光钻！！${daiya.sex}用金刚石无坚不摧的实力打破了所有障碍──！」`,
       );
@@ -491,7 +491,7 @@ module.exports = (handlers) => {
     await daiya.say_and_wait('我……', true);
     await daiya.say_and_wait('我…………唔！', true);
     await daiya.say_and_wait('训练员……！');
-    if (extra_flag.rank === 1) {
+    if (extra.rank === 1) {
       era.printButton('「恭喜你第一名！表现得真的很好哟！」', 1);
       await era.input();
       await daiya.say_and_wait('是……！谢谢你！！');
@@ -530,7 +530,7 @@ module.exports = (handlers) => {
     );
     await kita.say_and_wait('我可不会让你轻易得逞喔！');
     await daiya.say_and_wait('小北！');
-    if (extra_flag.rank === 1) {
+    if (extra.rank === 1) {
       await kita.say_and_wait('恭喜你在『菊花赏』拿第一名，小钻！');
       await daiya.say_and_wait(
         '谢谢！去年小北跑赢的比赛……我也跑赢了喔！所以我现在要很有自信地说出口！',
@@ -606,11 +606,11 @@ module.exports = (handlers) => {
     );
   };
 
-  handlers[race_enum.arim_kin] = async (daiya, me, edu_weeks, extra_flag) => {
+  handlers[race_enum.arim_kin] = async (daiya, me, edu_weeks, extra) => {
     if (edu_weeks < 96) {
       await print_event_name('昂扬', daiya);
       const kita = get_chara_talk(68);
-      if (extra_flag.rank === 1) {
+      if (extra.rank === 1) {
         await daiya.say_and_wait('我一直不停地追逐着前面的背影。', true);
         await daiya.say_and_wait('我现在──要超越这个背影！！', true);
         await daiya.say_and_wait('呀啊啊啊啊啊啊啊啊！！');
@@ -754,7 +754,7 @@ module.exports = (handlers) => {
       await daiya.say_and_wait(
         '是的。毕竟『大阪杯』也是G1竞赛，所以没有问题。',
       );
-      if (extra_flag.rank === 1) {
+      if (extra.rank === 1) {
         await daiya.say_and_wait(
           `今天，看到小北在优胜者区域的表现……又让我认知到${kita.sex}有多了不起。`,
         );
@@ -812,7 +812,7 @@ module.exports = (handlers) => {
           me.name
         } 和里见光钻即将要迈入资深级。`,
       );
-    } else if (extra_flag.rank === 1) {
+    } else if (extra.rank === 1) {
       await print_event_name('至宝', daiya);
       const kita = get_chara_talk(68);
       const mcqueen = get_chara_talk(13);

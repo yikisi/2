@@ -11,7 +11,7 @@ const { add_event, cb_enum } = require('#/event/queue');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 
 const { get_chara_color } = require('#/data/chara-colors');
-const DaiyaEduMarks1 = require('#/data/event/edu-event-marks/edu-event-marks-67-1');
+const DaiyaEduMarks99 = require('#/data/event/edu-event-marks/edu-event-marks-67-99');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
 const RaceHistory = require('#/data/race/model/race-history');
@@ -36,7 +36,7 @@ aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 3;
 
 module.exports = class extends CustomizedCheck {
   check_after_race(extra_flag) {
-    const edu_marks = new DaiyaEduMarks1();
+    const edu_marks = new DaiyaEduMarks99();
     if (race_infos[extra_flag.race].race_class === class_enum.G1) {
       if (!edu_marks.run_g1) {
         edu_marks.run_g1 = 1;
@@ -73,7 +73,7 @@ module.exports = class extends CustomizedCheck {
     const event_obj = new EventObject(67, cb_enum.edu);
     const edu_weeks = era.get('cflag:67:育成回合计时');
     if (edu_weeks < 3 * 48) {
-      const edu_event_marks = new DaiyaEduMarks1();
+      const edu_event_marks = new DaiyaEduMarks99();
       const event_obj_special = new EventObject(67, cb_enum.edu, true);
       check_and_add_event(
         edu_event_marks,
