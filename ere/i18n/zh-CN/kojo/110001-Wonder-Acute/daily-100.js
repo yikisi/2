@@ -1069,9 +1069,9 @@ module.exports = {
    * @param {CharaTalk} acute 奇锐骏
    * @param {CharaTalk} you 玩家
    * @param {PrintedSpan} callname 奇锐骏对玩家的称呼
-   * @param {boolean} sex 是否性爱
+   * @param {boolean} do_sex 是否性爱
    */
-  async o_s_dating(acute, you, callname, sex) {
+  async o_s_dating(acute, you, callname, do_sex) {
     await era.printAndWait([
       '休息日与 ',
       acute.get_colored_name(),
@@ -1083,7 +1083,7 @@ module.exports = {
       acute.get_colored_name(),
       ' 突然说道。',
     ]);
-    if (sex) {
+    if (do_sex) {
       await acute.say_and_wait([callname, '，今天晚上，可以帮我放松一下吗？']);
       await era.printAndWait([
         '正说着，',

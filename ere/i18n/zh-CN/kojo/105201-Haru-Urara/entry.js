@@ -18,6 +18,47 @@ class I18nKojo105201 {
   );
   // GENERATED END
 
+  notify_fan_reward = (urara, fan) => [
+    urara.get_colored_name(),
+    ' 的粉丝数增长了 ',
+    fan,
+    '！',
+  ];
+  notify_break_loop = (urara) => [
+    urara.get_colored_name(),
+    ' 能从粉丝的支持中获取更强的力量了！',
+  ];
+  notify_bs_dance = (urara) => [
+    '据说 ',
+    urara.get_colored_name(),
+    ' 会在放学后独自进行舞蹈练习……下次独自出行的时候注意去看看吧',
+  ];
+  notify_os_all_like = (urara) => [
+    '听说 ',
+    urara.get_colored_name(),
+    ' 最近经常去学园附近的小公园……下次独自出行的时候注意一下吧',
+  ];
+  notify_bs_stair =
+    '据说学生中有关于阶梯数的怪谈……下次独自前往理事长办公室的时候注意一下吧';
+  notify_bs_mother =
+    '据说理事长办公室附近最近有陌生人出没……下次独自前往理事长办公室的时候接触一下吧';
+  notify_sa_vs =
+    '据说最近有些学生会在学校中庭展开掰手腕对决……下次独自出行的时候注意一下吧';
+  notify_bs_challenge =
+    '据说最近学生们在进行特别的挑战，下次独自行动的时候注意一下吧……';
+  notify_bs_park = (urara, you) => [
+    urara.get_colored_name(),
+    ' 最近想和 ',
+    you.get_colored_name(),
+    ' 一起去商店街……',
+  ];
+  notify_back_school_event = (urara, you) => [
+    urara.get_colored_name(),
+    ' 最近似乎想和 ',
+    you.get_colored_name(),
+    ' 一起外出……',
+  ];
+
   echo = (c) => `回响(${c})`;
   echo_desc = (_, g_buff, d_buff) =>
     `？？？「若能相互理解，现实也能予以共鸣。」参赛时：${[

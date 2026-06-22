@@ -1,735 +1,1395 @@
-/**
- * @file 春乌拉拉 - 育成
- * @author 99
- */
 const era = require('#/era-electron');
 
+const sys_get_chara_pseudo = require('#/system/chara/sys-get-chara-pseudo');
+const { update_kiss_exp } = require('#/system/ero/sys-calc-ero-exp');
+const { get_sex_acceptable } = require('#/system/ero/sys-calc-ero-status');
+const { sys_change_weight } = require('#/system/sys-calc-base-cflag');
 const {
   sys_get_callname,
   sys_get_colored_callname,
+  sys_like_chara,
 } = require('#/system/sys-calc-chara-others');
 
 const CustomizedEdu = require('#/event/edu/edu-common');
-const urara_crazy_fan_end = require('#/event/edu/edu-events-52/crazy-fan-end');
-const urara_out_church = require('#/event/edu/edu-events-52/out-church');
-const urara_out_start = require('#/event/edu/edu-events-52/out-start');
-const urara_train_fail = require('#/event/edu/edu-events-52/train-fail');
-const urara_loop1 = require('#/event/edu/edu-events-52/week-start-loop-1');
-const urara_loop2 = require('#/event/edu/edu-events-52/week-start-loop-2');
-const urara_loop3 = require('#/event/edu/edu-events-52/week-start-loop-3');
 const { add_event } = require('#/event/queue');
+const {
+  check_high_relation,
+  get_inner_urara,
+} = require('#/event/snippets/105201');
+const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
+const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
+const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
+const quick_into_sex = require('#/event/snippets/quick-into-sex');
+const simulation_game_in_event = require('#/event/snippets/simulation-game-in-event');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
-const { get_random_entry } = require('#/utils/list-utils');
+const { gacha, get_random_entry } = require('#/utils/list-utils');
 
-const chara_colors = require('#/data/chara-colors').chara_colors[52];
+const { get_date_obj } = require('#/data/date-indicator');
+const crazy_fans = require('#/data/event/crazy-fans');
 const UraraEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-52');
 const event_hooks = require('#/data/event/event-hooks');
+const EventMarks = require('#/data/event/event-marks');
+const { location_enum } = require('#/data/locations');
+const PseudoUma = require('#/data/race/model/pseudo-uma');
+const RaceHistory = require('#/data/race/model/race-history');
+const { class_enum } = require('#/data/race/model/race-info');
+const { race_enum, race_infos } = require('#/data/race/race-const');
+const {
+  attr_enum,
+  base_attr_list,
+  fumble_result,
+} = require('#/data/train-const');
 
-/** @type {Record<string,function(CharaTalk,CharaTalk,CharaTalk,string,UraraEduMarks,EventObject):Promise<*>>} */
-const week_start_handlers = {};
-
-[
-  require('#/event/edu/edu-events-52/week-start-1'),
-  require('#/event/edu/edu-events-52/week-start-2'),
-  require('#/event/edu/edu-events-52/week-start-3'),
-  require('#/event/edu/edu-events-52/week-start-4'),
-  require('#/event/edu/edu-events-52/week-start-5'),
-].forEach((f) => f(week_start_handlers));
-
-week_start_handlers[95 + 46] = async (
-  urara,
-  me,
-  in_urara,
-  callname,
-  edu_marks,
-  event_object,
-) => {
-  switch (edu_marks.loop) {
-    case 2:
-      await urara_loop1(urara, me, in_urara, callname);
-      await era.saveData(52);
-      add_event(event_hooks.week_end, event_object);
-      break;
-    case 1:
-      await urara_loop2(urara, me, in_urara, callname);
-      await era.saveData(52);
-      add_event(event_hooks.week_end, event_object);
-      break;
-    case 0:
-      if (await urara_loop3(urara, me, in_urara, callname)) {
-        edu_marks.sbuff = 1;
-        await era.printAndWait([
-          { isBr: true },
-          urara.get_colored_name(),
-          ' 能从粉丝的支持中获取更强的力量了！',
-        ]);
-      } else {
-        edu_marks.loop = 2;
-        await era.saveData(52);
-        add_event(event_hooks.week_end, event_object);
-      }
-  }
-};
-
-/** @type {Record<string,function(CharaTalk,CharaTalk,CharaTalk,string,UraraEduMarks,EventObject):Promise<*>>} */
-const week_end_handlers = {};
-
-[
-  require('#/event/edu/edu-events-52/week-end-1'),
-  require('#/event/edu/edu-events-52/week-end-2'),
-  require('#/event/edu/edu-events-52/week-end-3'),
-  require('#/event/edu/edu-events-52/week-end-4'),
-  require('#/event/edu/edu-events-52/week-end-5'),
-].forEach((f) => f(week_end_handlers));
-
-/** @type {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},EventObject):Promise<*>>} */
-const office_prepare_handlers = {};
-
-require('#/event/edu/edu-events-52/office-prepare')(office_prepare_handlers);
-
-/** @type {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},EventObject):Promise<*>>} */
-const school_atrium_handlers = {};
-
-require('#/event/edu/edu-events-52/school-atrium')(school_atrium_handlers);
-
-/** @type {Record<string,function(CharaTalk,CharaTalk,CharaTalk,string,UraraEduMarks,{wait_flag:boolean},EventObject):Promise<*>>} */
-const out_shopping_handlers = {};
-
-[
-  require('#/event/edu/edu-events-52/out-shopping-1'),
-  require('#/event/edu/edu-events-52/out-shopping-2'),
-  require('#/event/edu/edu-events-52/out-shopping-3'),
-].forEach((f) => f(out_shopping_handlers));
-
-/** @type {Record<string,function(CharaTalk,CharaTalk,string,{wait_flag:boolean},{loc:number},EventObject):Promise<*>>} */
-const back_school_handlers = {};
-
-[
-  require('#/event/edu/edu-events-52/back-school-1'),
-  require('#/event/edu/edu-events-52/back-school-2'),
-].forEach((f) => f(back_school_handlers));
-
-/** @type {Record<string,function(CharaTalk,CharaTalk,CharaTalk,string,UraraEduMarks,HookArg):Promise<*>>} */
-const race_start_handlers = {};
-
-[
-  require('#/event/edu/edu-events-52/race-start-1'),
-  require('#/event/edu/edu-events-52/race-start-2'),
-].forEach((f) => f(race_start_handlers));
-
-/** @type {Record<string,function(CharaTalk,CharaTalk,CharaTalk,string,{race:number,rank:number,relation_change:number,love_change:number,attr_change:number[],pt_change:number},UraraEduMarks):Promise<*>>} */
-const race_end_handlers = {};
-
-[
-  require('#/event/edu/edu-events-52/race-end-1'),
-  require('#/event/edu/edu-events-52/race-end-2'),
-  require('#/event/edu/edu-events-52/race-end-3'),
-].forEach((f) => f(race_end_handlers));
+const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends CustomizedEdu {
-  async back_school(urara, me, callname, hook, extra_flag, event_object) {
-    if (back_school_handlers[event_object.arg]) {
-      const flags = { wait_flag: false },
-        ret = await back_school_handlers[event_object.arg](
+  get #kojo() {
+    return i18n().kojo[this.id].edu;
+  }
+
+  async back_school(urara, me, callname, hook, extra, ebj) {
+    let wait = false;
+    switch (ebj?.arg) {
+      case 'teach':
+        if (
+          era.get('flag:当前互动角色') !== 52 ||
+          extra.loc !== location_enum.shopping
+        ) {
+          add_event(event_hooks.back_school, ebj);
+          return;
+        }
+        EventMarks.get(52).sub(event_hooks.out_shopping);
+        await print_title_with_kojo(
+          this.#kojo,
+          'bs_teach',
           urara,
           me,
           callname,
-          flags,
-          extra_flag,
-          event_object,
         );
-      flags.wait_flag && (await era.waitAnyKey());
-      return !ret;
+        wait = all_reward_in_event(this.id, {
+          attr: {
+            [attr_enum.toughness]: 10,
+          },
+          motivation: 1,
+        });
+        break;
+      case 'dance':
+        if (era.get('flag:当前互动角色') > 0) {
+          await era.printAndWait(i18n().kojo[this.id].notify_bs_dance(urara));
+          add_event(event_hooks.back_school, ebj);
+          return;
+        }
+        EventMarks.get(0).sub(event_hooks.back_school);
+        wait = all_reward_in_event(this.id, {
+          attr:
+            (
+              await print_title_with_kojo(
+                this.#kojo,
+                'bs_dance',
+                urara,
+                me,
+                callname,
+              )
+            )[0] === 1
+              ? { [attr_enum.speed]: 10 }
+              : { [attr_enum.intelligence]: 10 },
+          motivation: 1,
+        });
+        break;
+      case 'stair':
+        if (extra.loc !== location_enum.chairman) {
+          await era.printAndWait(i18n().kojo[this.id].notify_bs_stair);
+          add_event(event_hooks.back_school, ebj);
+          return true;
+        }
+        EventMarks.get(0).sub(event_hooks.school_chairman);
+        await print_title_with_kojo(
+          this.#kojo,
+          'bs_stair',
+          urara,
+          me,
+          callname,
+        );
+        wait = all_reward_in_event(this.id, {
+          attr: { [attr_enum.intelligence]: 20 },
+          base: [-100],
+          motivation: -1,
+        });
+        break;
+      case 'mother':
+        if (extra.loc !== location_enum.chairman) {
+          await era.printAndWait(i18n().kojo[this.id].notify_bs_mother);
+          add_event(event_hooks.back_school, ebj);
+          return true;
+        }
+        EventMarks.get(0).sub(event_hooks.school_chairman);
+        await print_title_with_kojo(
+          this.#kojo,
+          'bs_mother',
+          urara,
+          get_inner_urara(),
+          me,
+          callname,
+          era.get('relation:52:0') > 150 && new UraraEduMarks().loop < 2,
+        );
+        wait = all_reward_in_event(this.id, {
+          attr: new Array(5).fill(5),
+          pt: 100,
+          motivation: 1,
+        });
+        break;
+      case 'challenge':
+        if (era.get('flag:当前互动角色') > 0) {
+          await era.printAndWait(i18n().kojo[this.id].notify_bs_challenge);
+          add_event(event_hooks.back_school, ebj);
+          return true;
+        }
+        EventMarks.get(0).sub(event_hooks.back_school);
+        if (
+          (
+            await print_title_with_kojo(
+              this.#kojo,
+              'bs_challenge',
+              urara,
+              get_chara_talk(1),
+              get_chara_talk(11),
+              me,
+              callname,
+              sys_get_colored_callname(this.id, 1),
+              sys_get_colored_callname(this.id, 11),
+              sys_get_colored_callname(11, 0),
+              sys_get_colored_callname(11, 1),
+              sys_get_colored_callname(11, this.id),
+            )
+          )[0] === 1
+        ) {
+          wait = all_reward_in_event(this.id, { pt: 5, base: [100] });
+        } else {
+          sys_change_weight(0, 100);
+          sys_change_weight(52, 100);
+          wait = all_reward_in_event(this.id, { pt: 10, base: [300] });
+          wait = sys_like_chara(11, 52, 100) || wait;
+          wait = sys_like_chara(52, 11, 50) || wait;
+        }
+        break;
+      case 'farthest':
+        if (
+          era.get('flag:当前互动角色') !== 52 ||
+          (extra.loc !== location_enum.river &&
+            extra.loc !== location_enum.church &&
+            extra.loc !== location_enum.shopping &&
+            extra.loc !== location_enum.station &&
+            extra.loc !== location_enum.mejiro)
+        ) {
+          await era.printAndWait(
+            i18n().kojo[this.id].notify_back_school_event(urara, me),
+          );
+          add_event(event_hooks.back_school, ebj);
+          return true;
+        }
+        wait = all_reward_in_event(
+          this.id,
+          (
+            await print_title_with_kojo(
+              this.#kojo,
+              'bs_farthest',
+              urara,
+              me,
+              callname,
+            )
+          )[0] === 1
+            ? { pt: 30 }
+            : { attr: { [attr_enum.endurance]: 10 } },
+        );
+        break;
+      case 'park':
+        if (
+          era.get('flag:当前互动角色') !== 52 ||
+          extra.loc !== location_enum.shopping
+        ) {
+          await era.printAndWait(
+            i18n().kojo[this.id].notify_bs_park(urara, me),
+          );
+          add_event(event_hooks.back_school, ebj);
+          return true;
+        }
+        EventMarks.get(52).sub(event_hooks.out_shopping);
+        wait = all_reward_in_event(this.id, {
+          attr: (
+            await print_title_with_kojo(
+              this.#kojo,
+              'bs_park',
+              urara,
+              me,
+              callname,
+            )
+          )[0]
+            ? { [attr_enum.speed]: 10 }
+            : { [attr_enum.strength]: 10 },
+        });
+        break;
+      case 'forget':
+        if (
+          era.get('flag:当前互动角色') !== 52 ||
+          (extra.loc !== location_enum.river &&
+            extra.loc !== location_enum.church &&
+            extra.loc !== location_enum.shopping &&
+            extra.loc !== location_enum.station &&
+            extra.loc !== location_enum.mejiro)
+        ) {
+          await era.printAndWait(
+            i18n().kojo[this.id].notify_back_school_event(urara, me),
+          );
+          add_event(event_hooks.back_school, ebj);
+          return true;
+        }
+        wait = all_reward_in_event(this.id, {
+          attr:
+            (
+              await print_title_with_kojo(
+                this.#kojo,
+                'bs_forget',
+                urara,
+                me,
+                callname,
+              )
+            )[0] === 1
+              ? { [attr_enum.toughness]: 10 }
+              : { [attr_enum.endurance]: 10 },
+        });
     }
+    wait && (await era.waitAnyKey());
   }
 
   async crazy_fan_end() {
-    await urara_crazy_fan_end();
+    const race_history = RaceHistory.get(this.id);
+    await print_title_with_kojo.ending(
+      this.#kojo,
+      'be_crazy_fan',
+      get_chara_talk(this.id),
+      get_inner_urara(),
+      get_chara_talk(0),
+      sys_get_colored_callname(this.id, 0),
+      race_history.check_begin(),
+      race_history.get_result(47 + 48)?.race === race_enum.arim_kin,
+    );
   }
 
-  async office_prepare(urara, me, callname, hook, extra_flag, event_object) {
+  async office_prepare(urara, me, callname, hook, extra, ebj) {
     if (era.get('flag:当前互动角色') !== 52) {
-      add_event(hook.hook, event_object);
+      add_event(hook.hook, ebj);
       return false;
     }
-    if (office_prepare_handlers[event_object.arg]) {
-      const flags = { wait_flag: false },
-        ret = await office_prepare_handlers[event_object.arg](
+    let wait = false;
+    switch (ebj?.arg) {
+      case 'fans_letr':
+        await print_title_with_kojo(
+          this.#kojo,
+          'op_fans_letr',
           urara,
           me,
           callname,
-          flags,
-          event_object,
         );
-      flags.wait_flag && (await era.waitAnyKey());
-      return !ret;
+        wait = all_reward_in_event(this.id, { pt: 30, motivation: 1 });
+        break;
+      case 'race_clothe':
+        wait = all_reward_in_event(this.id, {
+          attr:
+            (
+              await print_title_with_kojo(
+                this.#kojo,
+                'op_race_clothe',
+                urara,
+                me,
+                callname,
+              )
+            )[0] === 1
+              ? { [attr_enum.speed]: 10 }
+              : { [attr_enum.strength]: 10 },
+        });
+        break;
     }
+    wait && (await era.waitAnyKey());
   }
 
-  async out_church(urara, me, callname, hook, extra_flag, event_object) {
-    return await urara_out_church(
-      urara,
-      me,
-      callname,
-      extra_flag,
-      event_object,
-    );
-  }
-
-  async out_shopping(urara, me, callname, hook, extra_flag, event_object) {
+  async out_church(urara, me, callname, hook, extra, ebj) {
     if (era.get('flag:当前互动角色') !== 52) {
-      add_event(hook.hook, event_object);
+      add_event(hook.hook, ebj);
       return false;
     }
-    if (out_shopping_handlers[event_object.arg]) {
-      const flags = { wait_flag: false };
-      await out_shopping_handlers[event_object.arg](
-        urara,
-        me,
-        get_chara_talk(52, chara_colors[1]),
-        callname,
-        new UraraEduMarks(),
-        flags,
-        event_object,
-      );
-      flags.wait_flag && (await era.waitAnyKey());
-      return true;
+    if (ebj?.arg !== 95 + 1) {
+      return false;
     }
-  }
-
-  async out_start(urara, me, callname, hook, extra_flag, event_object) {
-    return await urara_out_start(urara, me, callname, hook, event_object);
-  }
-
-  async race_end(urara, me, callname, hook, extra_flag) {
-    const key = `${extra_flag.race}_${era.get('cflag:52:育成回合计时')}`;
-    const handler =
-      race_end_handlers[extra_flag.race] || race_end_handlers[key];
-    if (handler) {
-      return await handler(
-        urara,
-        me,
-        get_chara_talk(52, chara_colors[1]),
-        callname,
-        extra_flag,
-        new UraraEduMarks(),
-      );
-    } else if (extra_flag.rank === 1) {
-      await print_event_name('竞赛获胜！', urara);
-      let talk_arr = [
-        `嗯？诶……太棒了！赢了！${callname}！看到了吗？我赢了呦！`,
-        '哇啊……！我拿到一着了！我真的拿到一着了！',
-        '我成功了哦！拿到一着的话，就是说大家的期待都传达到了！',
-        `${callname}！看到了吗？我刚才有嗖——的一声冲过终点哦！`,
-        `果然就像平常的时候一样就好了！这次我也赢了哦 ${callname}！`,
-        '做到了……我做到了哦！我真的做到了哦！',
-      ];
-      await urara.say_and_wait(get_random_entry(talk_arr));
-      era.drawLine();
-      await era.printAndWait([
-        '抹掉脸上的汗水，',
-        urara.get_colored_name(),
-        ' 在比赛结束后立刻一路小跑地冲到了 ',
-        me.get_colored_name(),
-        ' 所等候的围栏前面。',
-      ]);
-      await era.printAndWait([
-        '在众人的欢呼声中扬起蓄满阳光的小脸，小',
-        urara.uma_sex_title,
-        '对送出毛巾和水的 ',
-        me.get_colored_name(),
-        ' 露出了胜利的笑容。',
-      ]);
-      await urara.say_and_wait(
-        '嘿嘿～刚才好像都听到叔叔们在喊万岁的声音了，乌拉拉真的有那么厉害吗？',
-      );
-
-      await urara.say_and_wait([
-        '对了，',
-        callname,
-        '！刚才看到了吗？乌拉拉好像赢了哦！',
-      ]);
-      era.printButton('「没错，乌拉拉做到了，今天是第一名！」', 1);
-      era.printButton('「大家很开心哦？不过接下来还有更要紧的事！」', 2);
-      if ((await era.input()) === 1) {
-        await era.printAndWait([
-          '得到 ',
-          me.get_colored_name(),
-          ' 的肯定，',
-          urara.get_colored_name(),
-          ' 开心地摇起耳朵和尾巴，可爱的笑脸变得更加灿烂了。',
-        ]);
-        await urara.say_and_wait(
-          '果然是这样！那么为了大家的笑容，我下次也一定要拿下一着！',
-        );
-        await urara.say_and_wait([
-          callname,
-          ' 也是哦！因为现在的 ',
-          callname,
-          ' 笑起来的样子也非常好看！',
-        ]);
-        await era.printAndWait(
-          '在胜利之后闪闪发光的樱瞳中，此刻正微笑的映照着所有人的笑容。',
-        );
-      } else {
-        await era.printAndWait([
-          '迅速擦掉脸上的汗水，',
-          urara.get_colored_name(),
-          ' 用力竖起耳朵，脸上的笑容也更加坚定了。',
-        ]);
-        await urara.say_and_wait(
-          '嗯！我也是这么觉得！因为乌拉拉也还跑得不太够哦！',
-        );
-        await urara.say_and_wait([
-          callname,
-          '，接下来要跑什么比赛，可以让乌拉拉期待一下吗？',
-        ]);
-        await era.printAndWait([
-          '在胜利之后闪闪发光的樱瞳中，',
-          me.get_colored_name(),
-          ' 看到其中的火苗比以往更加旺盛。',
-        ]);
-      }
-      era.drawLine();
-      talk_arr = [
-        `Live要开始了哦！${callname} 很期待吗？我也很期待哦！`,
-        '一会一定要看着我哦！我也会努力跳舞的！',
-        '大家看上去都准备好了！我也兴奋起来了哦！',
-      ];
-      if (era.get('love:52') >= 75) {
-        talk_arr.push(
-          `我也会不输给的大家的！绝对、绝对能好好迷住 ${callname} 的！`,
-        );
-      }
-      if (era.get('love:52') === 100) {
-        talk_arr.push(`${callname}！待会在舞台上也要一直看着乌拉拉哦！`);
-      }
-      await urara.say_and_wait(get_random_entry(talk_arr));
-    } else if (extra_flag.rank <= 5) {
-      await print_event_name('竞赛上榜！', urara);
-      const talk_arr = [
-        '大家都很厉害呢！但下次我一定不会输的！',
-        '虽然没能拿到一着，但果然很开心呢！下次再来跑吧！',
-        `嘿嘿～这次没能拿到一着，我会继续努力的，${callname} 也别伤心哦！`,
-      ];
-      switch (extra_flag.rank) {
-        case 2:
-          talk_arr.push(`看到了吗 ${callname}！我竟然是第二名哦──！`);
-          break;
-        case 3:
-          talk_arr.push('我是第三名！很厉害吧！');
-      }
-      await urara.say_and_wait(get_random_entry(talk_arr));
-      await era.printAndWait([
-        '在大家的祝贺声中，',
-        urara.get_colored_name(),
-        ' 依旧面带笑容地快步跑到了 ',
-        me.get_colored_name(),
-        ' 所在的围栏旁边。',
-      ]);
-      await urara.say_and_wait(
-        '嘿嘿～跟大家比赛果然很开心，而且真的能感觉到自己变强了！',
-      );
-      await urara.say_and_wait('虽然现在的乌拉拉距离拿下一着果然还是不够呢……');
-
-      await urara.say_and_wait([callname, ' 觉得怎么样？我这次只差一点了！']);
-      era.printButton('「辛苦了乌拉拉，已经做得很不错了。」', 1);
-      era.printButton('「先休息一下吧，这次感觉怎么样？」', 2);
-      if ((await era.input()) === 1) {
-        await urara.say_and_wait([
-          '谢谢 ',
-          callname,
-          '！但是这次总感觉有点可惜，是差在哪里了？',
-        ]);
-        await urara.say_and_wait(
-          '不过按照现在的节奏努力下去，我下次应该能拿到第一名吧！',
-        );
-      } else {
-        await urara.say_and_wait(
-          '这次跑得很开心！而且能逐渐追上大家了，但是还差一点！',
-        );
-        await urara.say_and_wait([
-          '但是现在就问 ',
-          callname,
-          ' 的意见好像太早了，那回去之后？',
-        ]);
-      }
-      era.printButton('「就是这样，回去之后一起思考下次对策吧。」', 1);
-      await era.input();
-
-      await urara.say_and_wait(
-        '嗯！我知道了！乌拉拉也会更加努力，为了下次的一着！',
-      );
-    } else if (extra_flag.rank <= 10) {
-      await print_event_name('竞赛失败！', urara);
-      await urara.say_and_wait(
-        get_random_entry([
-          '大家都很厉害呢！但下次我一定不会输的！',
-          '虽然没能拿到一着，但果然很开心呢！下次再来跑吧！',
-          `嘿嘿～这次没能拿到一着，我会继续努力的，${callname} 也别伤心哦！`,
-        ]),
-      );
-      await era.printAndWait([
-        '摇摇晃晃地来到 ',
-        me.get_colored_name(),
-        ' 身边，不知是否是疲惫所致，',
-        urara.get_colored_name(),
-        ' 沾满汗水的笑容似乎有些勉强。',
-      ]);
-      await urara.say_and_wait('结果这次又跑输了呢，总觉得有些不好意思了……');
-      await urara.say_and_wait(
-        '就在我觉得『今天的大家都好快～』的时候，下一瞬间就被超越了！',
-      );
-      await urara.say_and_wait(
-        '不过我也听到了哦？对乌拉拉的加油声一直没停下过！',
-      );
-
-      await urara.say_and_wait(
-        '虽然我努力跑到终点了，但是乌拉拉到底有没有回应大家的期待呢……',
-      );
-      era.printButton('「别灰心，这次其实做得还不错。」', 1);
-      era.printButton('「下次就拿出成果来回应他们吧。」', 2);
-      await era.input();
-
-      await era.printAndWait([
-        '在 ',
-        me.get_colored_name(),
-        ' 的帮助下用毛巾抹干脸上的汗水，小',
-        urara.uma_sex_title,
-        '伴随着 ',
-        me.get_colored_name(),
-        ' 的鼓励用力点了点头。',
-      ]);
-      await urara.say_and_wait(
-        '没错！只是一次失败而已，还能继续跑的话就没问题，下次比赛要努力取胜了哦！',
-      );
-      await era.printAndWait([
-        '在下一场奔跑到来前，',
-        me.get_colored_name(),
-        ' 与 ',
-        urara.get_colored_name(),
-        ' 立下了「下次一定要超越大家」的约定。',
-      ]);
-      await urara.say_and_wait(
-        '嘿嘿～大家说习惯失败算不上好事，但至少乌拉拉还可以继续跑下去！',
-      );
-    } else {
-      await print_event_name('下次不会输了！', urara);
-      await urara.say_and_wait('奔跑真开心啊，但果然稍微有些不甘心呢……');
-
-      await era.printAndWait([
-        '失落的贴在 ',
-        me.get_colored_name(),
-        ' 的身边，今天的 ',
-        urara.get_colored_name(),
-        ' 好像因为比赛失利而失去了以往的笑脸。',
-      ]);
-      await urara.say_and_wait('乌拉拉又输了啊……我还以为这次一定没问题的……');
-      await urara.say_and_wait(
-        '虽然比赛很快乐，但拿到第一名的心情果然是不一样的！',
-      );
-      await urara.say_and_wait('心里有些热又有些闷，如果能再去跑一次就好了……');
-
-      urara.say([callname, '，这个时候要怎么才能赢呢？']);
-      era.printButton('「调整好心态，下次把不甘赢回来。」', 1);
-      era.printButton('「别着急，总之回去后就开始训练吧。」', 2);
-      if ((await era.input()) === 1) {
-        await urara.say_and_wait(
-          '嗯！只要把不开心化为斗志就好了，大家都是这么说的！',
-        );
-        await urara.say_and_wait([
-          '在跑赢之前绝对不可以松懈！',
-          callname,
-          ' 也一起来调整坏习惯吧！',
-        ]);
-        await era.printAndWait([
-          '结果在回去后，为了互相督促，',
-          me.get_colored_name(),
-          ' 的零食也被 ',
-          urara.get_colored_name(),
-          ' 削减了。',
-        ]);
-      } else {
-        await urara.say_and_wait(
-          '说的也是，只要现在开始努力，下次一定可以跑赢！',
-        );
-        await urara.say_and_wait([
-          '所以 ',
-          callname,
-          '，现在快点回去吧！快点的话说不定今天就能继续训练哦？',
-        ]);
-        await era.printAndWait([
-          '结果在回去后，',
-          urara.get_colored_name(),
-          ' 真的立刻拉着 ',
-          me.get_colored_name(),
-          ' 进行了追加训练。',
-        ]);
-      }
-    }
-  }
-
-  async race_start(urara, me, callname, hook, extra_flag) {
-    if (
-      !race_start_handlers[extra_flag.race] ||
-      (await race_start_handlers[extra_flag.race](
-        urara,
-        me,
-        get_chara_talk(52, chara_colors[1]),
-        callname,
-        new UraraEduMarks(),
-        hook,
-      ))
-    ) {
-      if (extra_flag.race < 0) {
-        await print_event_name('武者震颤', urara);
-        await urara.say_and_wait([
-          '哦——！',
-          callname,
-          '！今天我感觉充满了力量哦！',
-        ]);
-        await era.printAndWait([
-          '站在 ',
-          me.get_colored_name(),
-          ' 的身边，',
-          urara.get_colored_name(),
-          ' 兴奋地看着前方。',
-        ]);
-
-        era.printButton('「那一会儿要加油上了！」', 1);
-        era.printButton('「嗯，让大家看见你的成长。」', 2);
-        await era.input();
-
-        await urara.say_and_wait('好！大家的期待，绝对会回应的呦！');
-        await era.printAndWait([
-          urara.get_colored_name(),
-          ' 兴奋地向前一跃，随后冲向了赛场。',
-        ]);
-      } else {
-        await print_event_name('赛前鼓励', urara);
-        const talk_arr = [
-          '好！要参赛了──！',
-          '大家都很厉害的样子！那乌拉拉也不能输！',
-          `${callname}！这次也请好好看着我的奔跑吧！`,
-          '只要和平常一样去跑就可以了吧？我明白了！',
-          `别担心哦 ${callname}，只要拼命去跑一定可以做到的！`,
-        ];
-        switch (era.get('cflag:52:干劲')) {
-          case -1:
-            talk_arr.push('虽然能参加很多比赛很开心，但现在身体好重……');
-            break;
-          case -2:
-            talk_arr.push('又要比赛了……我、我会努力的……');
-        }
-        await get_chara_talk(52).say_and_wait(get_random_entry(talk_arr));
-      }
-    }
-  }
-
-  async school_atrium(urara, me, callname, hook, extra_flag, event_object) {
-    if (school_atrium_handlers[event_object.arg]) {
-      const flags = { wait_flag: false };
-      const ret = await school_atrium_handlers[event_object.arg](
-        urara,
-        me,
-        callname,
-        flags,
-        event_object,
-      );
-      flags.wait_flag && (await era.waitAnyKey());
-      return !ret;
-    }
-  }
-
-  async train() {
-    const talk_arr = [
-      '交给我吧！要上了哦！',
-      `哦！要上了 ${sys_get_callname(52, 0)}！`,
-      '要开始努力了呢！',
-      '这次感觉能行！我要开始了！',
-      '好！乌拉拉！要加油了！',
-    ];
-    return get_chara_talk(52).say_and_wait(get_random_entry(talk_arr));
-  }
-
-  async train_fail(urara, me, callname, hook, extra_flag) {
-    await urara_train_fail(urara, me, callname, hook, extra_flag);
-  }
-
-  async train_success_add(urara, me, callname) {
-    const opera = get_chara_talk(15);
-    const u_call_o = sys_get_colored_callname(52, 15);
-    await era.waitAnyKey();
-    await print_event_name('额外自主训练！', urara);
-    await era.printAndWait([
-      '在今天的训练结束后，',
-      urara.get_colored_name(),
-      ' 与 ',
-      me.get_colored_name(),
-      ' 一同回到训练场的跑道旁边休息。',
-    ]);
-    await urara.say_and_wait([
-      '今天也很努力的在练习呢！',
-      callname,
-      '，待会一起去食堂……嗯？那里的人是？',
-    ]);
-    await era.printAndWait([
-      '顺着 ',
-      urara.get_colored_name(),
-      ' 晃动耳朵的方向，',
-      me.get_colored_name(),
-      ' 看到了另外一位正站在训练场中的身影。',
-    ]);
-    await urara.say_and_wait([
-      '啊！是 ',
-      u_call_o,
-      '！',
-      u_call_o,
-      ' 也要去休息了吗？',
-    ]);
-    await era.printAndWait([
-      '小',
-      urara.uma_sex_title,
-      '在对方面前站定，而行事风格戏剧化的霸王也转向了 ',
-      me.get_colored_name(),
-      ' 与 ',
-      urara.get_colored_name(),
-      ' 的方向。',
-    ]);
-    await opera.say_and_wait([
-      '哦！这不是乌拉拉和 ',
-      sys_get_callname(15, 0),
-      ' 吗？我正要去练跑！和黄昏之星一起！',
-    ]);
-    await urara.say_and_wait([
-      '和黄昏之星一起练跑？很有 ',
-      u_call_o,
-      ' 的风格呢，而且听起来好厉害！',
-    ]);
-    if (era.get('cflag:15:殿堂')) {
-      await opera.say_and_wait(
-        '是怎样呢？是为了在繁星下再次擦亮光辉？还是在怠惰后驱散迷惘呢？',
-      );
-      await urara.say_and_wait(
-        '原来如此，乌拉拉也明白的哦！大人也有大人的辛苦呢～',
-      );
-    } else {
-      await opera.say_and_wait(
-        '没错！我要用繁星的光辉磨练我的美貌与这双腿！为了明日的闪耀！',
-      );
-      await urara.say_and_wait([
-        '是这样啊，乌拉拉明白了，这么努力的 ',
-        u_call_o,
-        ' 果然很了不起！',
-      ]);
-    }
-    await urara.say_and_wait([
-      '嗯……那样的话，',
-      callname,
-      '，时间还有一些，我们也试试看吗？',
-    ]);
-    era.printButton('「走吧，一起试试看。」', 1);
-    era.printButton('「好好休息也很重要哦？」', 2);
-    if ((await era.input()) === 1) {
-      await era.printAndWait([
-        '在听到 ',
-        me.get_colored_name(),
-        ' 对 ',
-        urara.get_colored_name(),
-        ' 的回应后，',
-        opera.get_colored_name(),
-        ' 也立刻领会精神的打出了响指。',
-      ]);
-      await opera.say_and_wait([
-        `欢迎你！不过我可不会把最闪耀的王座${era.get('love:15') >= 90 ? '和最爱的眷属' : ''}让给你哦——尽全力来拿吧！`,
-      ]);
-      await urara.say_and_wait([
-        '嗯！既然 ',
-        u_call_o,
-        ' 这么说了，那乌拉拉也会尽全力赶上去的！',
-      ]);
-      await opera.say_and_wait([
-        '哈──哈哈哈！看来今天的练跑会相当有趣哦！你说是吧，',
-        sys_get_callname(15, 0),
-        '？',
-      ]);
-      await era.printAndWait([
-        '于是虽然意料之中的没能跟上 ',
-        opera.get_colored_name(),
-        ' 的步伐，但 ',
-        urara.get_colored_name(),
-        ' 却顽强的坚持到了加训最后。',
-      ]);
-      return true;
-    } else {
-      await urara.say_and_wait([
-        '诶？是这样吗？我还以为 ',
-        callname,
-        ' 一定会同意的来着？',
-      ]);
-      await era.printAndWait([
-        '而在 ',
-        urara.get_colored_name(),
-        ' 提出疑问后，紧接的便是 ',
-        opera.get_colored_name(),
-        ' 表示理解的劝说。',
-      ]);
-      await opera.say_and_wait(
-        '就是这样！不会休养连光芒也蒙上阴影，我也一样，昨天我悠闲地泡了玫瑰花瓣浴呢！',
-      );
-      await urara.say_and_wait(
-        '哦！我知道了！为了变强我会好好休息的！不过，玫瑰花瓣浴……？',
-      );
-      await era.printAndWait([
-        '最终，在 ',
-        opera.get_colored_name(),
-        ' 承诺稍后会分',
-        urara.sex,
-        '一些玫瑰后，',
-        urara.get_colored_name(),
-        ' 也在和 ',
-        opera.get_colored_name(),
-        ' 挥手告别后拉着 ',
-        me.get_colored_name(),
-        ' 向食堂跑去……',
-      ]);
-    }
-    return false;
-  }
-
-  async week_end(urara, me, callname, hook, extra_flag, event_object) {
-    if (week_end_handlers[event_object.arg]) {
-      return await week_end_handlers[event_object.arg](
-        urara,
-        me,
-        get_chara_talk(52, chara_colors[1]),
-        callname,
-        new UraraEduMarks(),
-        event_object,
-      );
-    }
-  }
-
-  async week_start(urara, me, callname, hook, extra_flag, event_object) {
-    if (!week_start_handlers[event_object.arg]) {
-      return await super.week_start(
-        urara,
-        me,
-        callname,
-        hook,
-        extra_flag,
-        event_object,
-      );
-    }
-    return await week_start_handlers[event_object.arg](
+    era.set('cflag:52:节日事件标记', 0);
+    const [rel_input, attr_input, ad_input] = await print_title_with_kojo(
+      this.#kojo,
+      'oc_95_1',
       urara,
+      get_inner_urara(),
       me,
-      get_chara_talk(52, chara_colors[1]),
       callname,
-      new UraraEduMarks(),
-      event_object,
     );
+    const attr = new Array(5).fill(0);
+    let pt = 0;
+    switch (attr_input) {
+      case 1:
+        attr[attr_enum.endurance] = 30;
+        break;
+      case 2:
+        attr.fill(5);
+        break;
+      case 3:
+        pt = 35;
+    }
+    if (ad_input === 1) {
+      new UraraEduMarks().dad++;
+    } else {
+      new UraraEduMarks().gad++;
+    }
+    if (
+      all_reward_in_event(this.id, {
+        attr,
+        pt,
+        ...(rel_input === 1 ? { relation: 20 } : { love: 5 }),
+      })
+    ) {
+      await era.waitAnyKey();
+    }
+    return true;
+  }
+
+  async out_shopping(urara, me, callname, hook, extra, ebj) {
+    if (era.get('flag:当前互动角色') !== 52) {
+      add_event(hook.hook, ebj);
+      return false;
+    }
+    const edu_marks = new UraraEduMarks();
+    let wait = false;
+    let temp;
+    switch (ebj?.arg) {
+      case 34:
+        wait = all_reward_in_event(this.id, {
+          attr: {
+            [attr_enum.toughness]: 5,
+            [attr_enum.intelligence]: 5,
+          },
+          ...((
+            await print_title_with_kojo(
+              this.#kojo,
+              'os_34',
+              urara,
+              get_inner_urara(),
+              me,
+              callname,
+              check_high_relation(),
+            )
+          )[0] === 1
+            ? { relation: 20 }
+            : { love: 5 }),
+        });
+        edu_marks.fan_buff += 5;
+        break;
+      case 47 + 12:
+        temp = new Array(5).fill(0);
+        switch (
+          (
+            await print_title_with_kojo(
+              this.#kojo,
+              'os_47_12',
+              urara,
+              get_chara_talk(60),
+              get_inner_urara(),
+              me,
+              callname,
+              sys_get_colored_callname(this.id, 61),
+            )
+          )[0]
+        ) {
+          case 1:
+            edu_marks.dad++;
+            break;
+          case 2:
+            edu_marks.gad++;
+            break;
+          case 3:
+            era.set(
+              'talent:52:练习X手',
+              Math.min(era.get('talent:52:练习X手') + 1, 2),
+            );
+            temp.fill(2);
+        }
+        temp[attr_enum.toughness] += 5;
+        temp[
+          get_random_entry(
+            base_attr_list.filter((e) => e !== attr_enum.toughness),
+          )
+        ] += 5;
+        edu_marks.fan_buff += 5;
+        wait = all_reward_in_event(this.id, { attr: temp, motivation: 1 });
+        break;
+      case 47 + 27:
+        edu_marks.fan_buff += 5;
+        wait = all_reward_in_event(this.id, {
+          attr: new Array(5).fill(3),
+          pt: 20,
+          ...((
+            await print_title_with_kojo(
+              this.#kojo,
+              'os_47_27',
+              urara,
+              get_inner_urara(),
+              me,
+              callname,
+              sys_get_colored_callname(this.id, 61),
+              check_high_relation(),
+            )
+          )[0] === 1
+            ? { relation: 10 }
+            : { love: 2 }),
+        });
+        break;
+      case 95 + 14:
+        era.set('cflag:52:节日事件标记', 0);
+        edu_marks.fan_buff += 5;
+        wait = all_reward_in_event(
+          this.id,
+          (
+            await print_title_with_kojo(
+              this.#kojo,
+              'os_95_14',
+              urara,
+              get_inner_urara(),
+              me,
+              callname,
+              RaceHistory.get(this.id).get_result(47 + 48)?.race ===
+                race_enum.arim_kin,
+            )
+          )[0] === 1
+            ? { relation: 10 }
+            : { love: 2 },
+        );
+        break;
+      case 95 + 15:
+        temp = RaceHistory.get(this.id);
+        wait = all_reward_in_event(this.id, {
+          attr: [0, 5, 0, 5],
+          ...((
+            await print_title_with_kojo(
+              this.#kojo,
+              'os_95_15',
+              urara,
+              get_inner_urara(),
+              me,
+              callname,
+              temp.get_result(47 + 48) !== void 0,
+              temp.get_result(95 + 7)?.race === race_enum.febr_sta &&
+                temp.get_result(95 + 7).rank,
+              race_infos[race_enum.arim_kin].get_colored_name(),
+              race_infos[race_enum.febr_sta].get_colored_name(),
+            )
+          )[0] === 1
+            ? { relation: 20 }
+            : { love: 5 }),
+        });
+        break;
+      case 'food':
+        await print_title_with_kojo(this.#kojo, 'os_food', urara, me, callname);
+        wait = all_reward_in_event(this.id, { motivation: 1 });
+    }
+    wait && (await era.waitAnyKey());
+    return true;
+  }
+
+  async out_start(urara, me, callname, hook, extra, ebj) {
+    if (era.get('flag:当前互动角色') > 0) {
+      await era.printAndWait(i18n().kojo[this.id].notify_os_all_like(urara));
+      add_event(hook.hook, ebj);
+      return false;
+    }
+    if (ebj.arg !== 'all_like') {
+      return false;
+    }
+    EventMarks.get(0).sub(event_hooks.out_start);
+    await print_title_with_kojo(this.#kojo, 'os_all_like', urara, me, callname);
+    return true;
+  }
+
+  async race_end(urara, me, callname, hook, extra) {
+    let key;
+    let temp;
+    /** @type {[]} */
+    let args = [get_inner_urara(), me, callname, check_high_relation()];
+    switch (extra.race) {
+      case race_enum.begin_race:
+        if (era.get('cflag:52:育成回合计时') === 23) {
+          if (extra.rank === 1) {
+            key = 'begin_race_win_first';
+            extra.relation_change = 50;
+          } else {
+            key = 'begin_race_lose_first';
+          }
+        } else {
+          if (extra.rank === 1) {
+            key = 'begin_race_win';
+          } else {
+            crazy_fans.push(52);
+          }
+        }
+        break;
+      case race_enum.arim_kin:
+        if (era.get('cflag:52:育成回合计时') < 96) {
+          await print_event_name(
+            this.#kojo.arim_kin_end_c.title(get_inner_urara()),
+            urara,
+          );
+          await this.#kojo.arim_kin_end_c(
+            urara,
+            get_inner_urara(),
+            me,
+            callname,
+            extra.rank,
+          );
+          update_kiss_exp(get_date_obj(), this.id, 0);
+          return;
+        }
+        break;
+      case race_enum.negi_sta:
+        temp = RaceHistory.get(this.id);
+        args = [
+          args[0],
+          me,
+          Math.min(
+            ...temp
+              .get_values()
+              .filter((r) => race_infos[r.race].race_class === class_enum.G1)
+              .map((e) => e.rank),
+          ),
+          temp.get_result(47 + 48)?.race === race_enum.arim_kin &&
+            temp.get_result(47 + 48).rank,
+          race_infos[race_enum.arim_kin].get_colored_name(),
+        ];
+        extra.pt_change = 37;
+        if (extra.rank === 1) {
+          key = 'negi_sta_win';
+          args.splice(2, 0, callname);
+          extra.attr_change = new Array(5).fill(3);
+          extra.relation_change = 50;
+        } else {
+          key = 'negi_sta_lose';
+          extra.attr_change = gacha(base_attr_list, 4).reduce((p, c) => {
+            p[c] = 2;
+            return p;
+          }, {});
+        }
+        break;
+      case race_enum.febr_sta:
+        extra.pt_change = 45;
+        if (extra.rank === 1) {
+          key = 'febr_sta_win';
+          extra.attr_change = new Array(5).fill(3);
+          extra.relation_change = 50;
+        } else {
+          key = 'febr_sta_lose';
+          extra.attr_change = new Array(5)
+            .fill(1)
+            .map((e) => e + (Math.random() > 0.5));
+        }
+        args = [
+          get_inner_urara(),
+          me,
+          callname,
+          check_high_relation(),
+          RaceHistory.get(this.id).get_result(47 + 48)?.race ===
+            race_enum.arim_kin,
+          race_infos[race_enum.arim_kin].get_colored_name(),
+          race_infos[race_enum.elm_sta].get_colored_name(),
+        ];
+        break;
+      case race_enum.elm_sta:
+        if (era.get('cflag:52:育成回合计时') > 96) {
+          if (extra.rank === 1) {
+            extra.attr_change = new Array(5).fill(3);
+            extra.pt_change = 45;
+            key = 'elm_sta_win_s';
+          } else {
+            extra.attr_change = new Array(5)
+              .fill(1)
+              .map((e) => e + (Math.random() < 0.5));
+            extra.pt_change = 30;
+            key = 'elm_sta_lose_s';
+          }
+        }
+        break;
+      case race_enum.jbc_cls:
+        if (era.get('cflag:52:育成回合计时') > 96) {
+          extra.attr_change = new Array(5).fill(3);
+          extra.pt_change = 45;
+          extra.skill_change = [201002];
+          if (extra.rank === 1) {
+            key = 'jbc_cls_win_s';
+          } else {
+            key = 'jbc_cls_lose_s';
+            crazy_fans.push(52);
+          }
+        }
+    }
+    if (!key) {
+      if (extra.rank === 1) {
+        key = 'race_end_win';
+      } else if (extra.rank <= 5) {
+        key = 'race_end_5';
+        args.push(extra.rank);
+      } else if (extra.rank <= 10) {
+        key = 'race_end_10';
+      } else {
+        key = 'race_end_lose';
+      }
+    }
+    await print_title_with_kojo(this.#kojo, key, urara, ...args);
+  }
+
+  async race_start(urara, me, callname, hook, extra) {
+    let key;
+    let temp;
+    /** @type {[]} */
+    let args = [get_inner_urara(), me, callname, check_high_relation()];
+    switch (extra.race) {
+      case race_enum.begin_race:
+        if (era.get('cflag:52:育成回合计时') === 23) {
+          key = 'before_begin_race_first';
+        } else {
+          key = 'before_begin_race';
+        }
+        break;
+      case race_enum.arim_kin:
+        if (era.get('cflag:52:育成回合计时') < 96) {
+          hook.override = true;
+          key = 'before_arim_kin_c';
+          args.push(
+            Math.min(
+              ...RaceHistory.get(52)
+                .get_values()
+                .filter((e) => race_infos[e.race].race_class <= class_enum.G3)
+                .map((e) => e.rank),
+            ),
+            race_infos[race_enum.arim_kin].get_colored_name(),
+          );
+        } else {
+          key = 'before_arim_kin_s';
+        }
+        break;
+      case race_enum.negi_sta:
+        key = 'before_negi_sta';
+        temp = RaceHistory.get(this.id);
+        args = [
+          args[0],
+          me,
+          callname,
+          temp
+            .get_values()
+            .some((r) => race_infos[r.race].race_class <= class_enum.G3),
+          temp.get_result(47 + 48)?.race === race_enum.arim_kin &&
+            temp.get_result(47 + 48).rank,
+          race_infos[race_enum.arim_kin].get_colored_name(),
+          race_infos[race_enum.negi_sta].get_colored_name(),
+        ];
+        break;
+      case race_enum.febr_sta:
+        key = 'before_febr_sta';
+        break;
+      case race_enum.elm_sta:
+        if (era.get('cflag:52:育成回合计时') > 96) {
+          key = 'before_elm_sta_s';
+        }
+        break;
+      case race_enum.jbc_cls:
+        if (era.get('cflag:52:育成回合计时') > 96) {
+          key = 'before_jbc_cls_s';
+          args = [
+            args[0],
+            me,
+            callname,
+            RaceHistory.get(this.id).get_result(47 + 48)?.race ===
+              race_enum.arim_kin,
+            new UraraEduMarks().fans,
+          ];
+        }
+    }
+    if (!key) {
+      if (era.get('cflag:52:干劲') === 2 && Math.random() < 0.5) {
+        key = 'race_start_high_moti';
+        args = [me, callname];
+      } else {
+        key = 'race_start';
+        args = [callname];
+      }
+    }
+    await print_title_with_kojo(this.#kojo, key, urara, ...args);
+  }
+
+  async school_atrium(urara, me, callname, hook, extra, ebj) {
+    let wait = false;
+    switch (ebj?.arg) {
+      case 'vs':
+        if (era.get('flag:当前互动角色') > 0) {
+          await era.printAndWait(i18n().kojo[this.id].notify_sa_vs);
+          add_event(event_hooks.school_atrium, ebj);
+          return true;
+        }
+        EventMarks.get(0).sub(event_hooks.school_atrium);
+        wait = all_reward_in_event(this.id, {
+          attr:
+            (
+              await print_title_with_kojo(
+                this.#kojo,
+                'sa_vs',
+                urara,
+                get_chara_talk(1),
+                get_chara_talk(20),
+                me,
+                callname,
+                sys_get_colored_callname(this.id, 1),
+                sys_get_colored_callname(20, 0),
+              )
+            )[0] === 1
+              ? { [attr_enum.intelligence]: 10 }
+              : { [attr_enum.strength]: 10 },
+        });
+        wait = sys_like_chara(1, 52, 100) || wait;
+        wait = sys_like_chara(20, 52, 100) || wait;
+        wait = sys_like_chara(52, 1, 50) || wait;
+        wait = sys_like_chara(52, 20, 50) || wait;
+        break;
+      case 'lost_found':
+        if (era.get('flag:当前互动角色') !== 52) {
+          add_event(event_hooks.school_atrium, ebj);
+          return true;
+        }
+        wait = all_reward_in_event(
+          this.id,
+          (
+            await print_title_with_kojo(
+              this.#kojo,
+              'sa_lost_found',
+              urara,
+              get_chara_talk(30),
+              me,
+              callname,
+              sys_get_colored_callname(this.id, 30),
+              sys_get_colored_callname(30, 0),
+              sys_get_colored_callname(30, this.id),
+            )
+          )[0] === 1
+            ? { attr: [0, 0, 0, 20], base: [-100] }
+            : { attr: [0, 10] },
+        );
+        break;
+      case 'interview':
+        if (era.get('flag:当前互动角色') !== 52) {
+          add_event(event_hooks.school_atrium, ebj);
+          return true;
+        }
+        wait = all_reward_in_event(this.id, {
+          attr: (await print_title_with_kojo(this.#kojo, 'sa_interview', urara))
+            ? { [attr_enum.strength]: 20 }
+            : { [attr_enum.endurance]: 20 },
+        });
+        wait = sys_like_chara(52, 30, 100) || wait;
+        wait = sys_like_chara(30, 52, 100) || wait;
+    }
+    wait && (await era.waitAnyKey());
+    return true;
+  }
+
+  async train(attr) {
+    await this.#kojo.train(
+      get_chara_talk(this.id),
+      sys_get_callname(this.id, 0),
+    );
+  }
+
+  async train_fail(urara, me, callname, hook, extra) {
+    extra.args = extra.fumble ? fumble_result.fumble : fumble_result.fail;
+    const fail_again = Math.random() < extra.args.ratio.fail_again;
+    this.#kojo.tf_message(urara, callname, extra.train);
+    if (extra.train !== attr_enum.intelligence) {
+      era.println();
+      if (
+        (
+          await print_title_with_kojo(
+            this.#kojo,
+            extra.fumble ? 'train_fumble' : 'train_fail',
+            urara,
+            me,
+            callname,
+            fail_again,
+          )
+        )[0] === 1
+      ) {
+        hook.arg = 0;
+      } else if (fail_again) {
+        hook.arg = -1;
+      } else {
+        hook.arg = 1;
+      }
+    }
+  }
+
+  async train_success_add(urara, me, callname, hook, extra) {
+    return (
+      (
+        await print_title_with_kojo(
+          this.#kojo,
+          'ts_add',
+          urara,
+          get_chara_talk(15),
+          me,
+          callname,
+          sys_get_colored_callname(this.id, 15),
+          sys_get_colored_callname(15, 0),
+        )
+      )[0] === 1
+    );
+  }
+
+  async week_end(urara, me, callname, hook, extra, ebj) {
+    const edu_marks = new UraraEduMarks();
+    let wait = false;
+    let temp;
+    switch (ebj?.arg) {
+      case 'after_begin':
+        wait = all_reward_in_event(
+          this.id,
+          (
+            await print_title_with_kojo(
+              this.#kojo,
+              'we_after_begin',
+              urara,
+              get_inner_urara(),
+              me,
+              callname,
+            )
+          )[0] === 1
+            ? { relation: 20 }
+            : { love: 5 },
+        );
+        add_event(event_hooks.week_start, ebj);
+        break;
+      case 47:
+        temp = await print_title_with_kojo(
+          this.#kojo,
+          'we_47',
+          urara,
+          get_inner_urara(),
+          me,
+          callname,
+          sys_get_colored_callname(this.id, 30),
+          sys_get_colored_callname(this.id, 61),
+          check_high_relation(),
+        );
+        if (temp[0] === 1) {
+          edu_marks.gad++;
+        } else {
+          edu_marks.dad++;
+        }
+        sys_change_weight(this.id, 20);
+        sys_change_weight(0, 20);
+        wait = all_reward_in_event(this.id, {
+          base: [400],
+          ...(temp[1] === 1 ? { relation: 20 } : { love: 5 }),
+        });
+        wait = all_reward_in_event(0, { base: [400] }) || wait;
+        break;
+      case 47 + 29:
+        if (
+          era.get('cflag:0:位置') !== location_enum.beach ||
+          era.get('cflag:52:位置') !== era.get('cflag:0:位置')
+        ) {
+          add_event(hook.hook, ebj);
+          return false;
+        }
+        temp = await print_title_with_kojo(
+          this.#kojo,
+          'we_47_29',
+          urara,
+          get_inner_urara(),
+          get_chara_talk(30),
+          me,
+          callname,
+          sys_get_colored_callname(this.id, 30),
+          sys_get_colored_callname(this.id, 61),
+          sys_get_colored_callname(30, 0),
+          sys_get_colored_callname(30, this.id),
+          check_high_relation(),
+        );
+        wait = all_reward_in_event(this.id, {
+          attr: {
+            ...(temp[0] === 1
+              ? { [attr_enum.intelligence]: 10 }
+              : { [attr_enum.speed]: 10 }),
+            ...(temp[1] === 1
+              ? { [attr_enum.strength]: 10 }
+              : { [attr_enum.endurance]: 10 }),
+          },
+        });
+        break;
+      case 47 + 32:
+        if (
+          era.get('cflag:0:位置') !== location_enum.beach ||
+          era.get('cflag:52:位置') !== era.get('cflag:0:位置')
+        ) {
+          add_event(hook.hook, ebj);
+          return false;
+        }
+        [temp] = await print_title_with_kojo(
+          this.#kojo,
+          'we_47_32',
+          urara,
+          get_inner_urara(),
+          me,
+          callname,
+          check_high_relation(),
+          get_sex_acceptable(this.id) >= 0,
+        );
+        if (temp === 3) {
+          if (era.get('flag:惩戒力度') >= 2 && urara.sex_code === 0) {
+            era.set('status:52:弗隆K', 1);
+          }
+          await quick_into_sex(this.id);
+        }
+        await this.#kojo.we_47_32_after_sex(
+          urara,
+          get_inner_urara(),
+          me,
+          temp === 3,
+        );
+        wait = all_reward_in_event(this.id, {
+          attr: gacha(base_attr_list, 3).reduce((p, c) => {
+            p[c] = 5;
+            return p;
+          }, {}),
+          relation: temp !== 2 ? 10 : 0,
+          love: temp >= 2 ? 2 : 0,
+        });
+        break;
+      case 47 + 48:
+        era.set('cflag:52:节日事件标记', 0);
+        if (RaceHistory.get(this.id).get_result(47 + 48)) {
+          await this.#kojo.we_47_48_or_else(get_inner_urara(), me);
+          return;
+        }
+        await print_event_name(
+          this.#kojo.we_47_48.title(get_inner_urara()),
+          urara,
+        );
+        await this.#kojo.we_47_48(
+          urara,
+          get_inner_urara(),
+          me,
+          callname,
+          sys_get_colored_callname(this.id, 30),
+          edu_marks.fans,
+          race_infos[race_enum.arim_kin].get_colored_name(),
+        );
+        break;
+      case 95 + 19:
+        await print_title_with_kojo(
+          this.#kojo,
+          'we_95_19',
+          urara,
+          get_inner_urara(),
+          get_chara_talk(30),
+          get_chara_talk(61),
+          me,
+          callname,
+          sys_get_colored_callname(this.id, 30),
+          sys_get_colored_callname(this.id, 61),
+          sys_get_colored_callname(30, this.id),
+          sys_get_colored_callname(61, 0),
+          sys_get_colored_callname(61, this.id),
+        );
+        wait = get_attr_and_print_in_event(52, [0, 0, 0, 5, 5], 0);
+        wait = sys_like_chara(30, 52, 100) || wait;
+        wait = sys_like_chara(61, 52, 100) || wait;
+        wait = sys_like_chara(52, 30, 50) || wait;
+        wait = sys_like_chara(52, 61, 50) || wait;
+        break;
+      case 95 + 32:
+        if (
+          era.get('cflag:0:位置') !== location_enum.beach ||
+          era.get('cflag:52:位置') !== era.get('cflag:0:位置')
+        ) {
+          add_event(hook.hook, ebj);
+          return false;
+        }
+        [temp] = await print_title_with_kojo(
+          this.#kojo,
+          'we_95_32',
+          urara,
+          get_inner_urara(),
+          me,
+          callname,
+          check_high_relation(),
+          get_sex_acceptable(this.id) >= 0,
+          race_infos[race_enum.arim_kin].get_colored_name(),
+        );
+        if (temp === 1) {
+          await quick_into_sex(this.id);
+        }
+        wait = all_reward_in_event(this.id, {
+          attr: new Array(5).fill(5),
+          ...(temp === 1 ? { love: 5 } : { relation: 20 }),
+        });
+        break;
+      case 95 + 46:
+        if (edu_marks.loop > 0) {
+          const attr_cache = new Array(5)
+            .fill(0)
+            .map((_, i) => era.get(`base:52:${5 + i}`));
+          // CFLAGNAME:40 = 干劲
+          const motivation_cache = era.get('cflag:52:40');
+          if (await era.loadData(52)) {
+            CustomizedEdu.load_game();
+          }
+          attr_cache.forEach((e, i) => era.set(`base:52:${5 + i}`, e));
+          era.set('cflag:52:40', motivation_cache);
+          new UraraEduMarks().loop--;
+          add_event(event_hooks.week_start, ebj);
+          return true;
+        }
+        break;
+      case 95 + 47:
+        temp = get_inner_urara();
+        await print_event_name(this.#kojo.we_95_47.title(urara.temp), urara);
+        temp = await this.#kojo.we_95_47(
+          urara,
+          temp,
+          me,
+          callname,
+          check_high_relation(),
+          RaceHistory.get(this.id).get_result(47 + 48)?.race ===
+            race_enum.arim_kin,
+          race_infos[race_enum.arim_kin].get_colored_name(),
+        );
+        switch (temp[0]) {
+          case 2:
+            edu_marks.gad++;
+            break;
+          case 3:
+            edu_marks.dad++;
+        }
+        wait = all_reward_in_event(this.id, {
+          attr: temp[0] === 1 ? new Array(5).fill(5) : void 0,
+          ...(temp[1] === 1 ? { love: 2 } : { relation: 10 }),
+        });
+    }
+    wait && (await era.waitAnyKey());
+  }
+
+  async week_start(urara, me, callname, hook, extra, ebj) {
+    const edu_marks = new UraraEduMarks();
+    let temp;
+    let wait = false;
+    switch (ebj?.arg) {
+      case 'after_begin':
+        await print_title_with_kojo(
+          this.#kojo,
+          'ws_after_begin',
+          urara,
+          get_inner_urara(),
+          me,
+          callname,
+          {
+            spe: get_chara_talk(1),
+            sp_call_u: sys_get_colored_callname(1, this.id),
+            opera: get_chara_talk(15),
+            sky: get_chara_talk(20),
+            callname_20: sys_get_colored_callname(20, 0),
+            sk_call_u: sys_get_colored_callname(20, this.id),
+            rice: get_chara_talk(30),
+            ri_call_u: sys_get_colored_callname(30, this.id),
+            doto: get_chara_talk(58),
+            d_call_u: sys_get_colored_callname(58, this.id),
+            halo: get_chara_talk(61),
+            h_call_u: sys_get_colored_callname(61, this.id),
+            road: get_chara_talk(77),
+            ro_call_u: sys_get_colored_callname(77, this.id),
+          },
+        );
+        wait = all_reward_in_event(this.id, {
+          attr: {
+            [attr_enum.strength]: 5,
+            [attr_enum.toughness]: 5,
+          },
+        });
+        break;
+      case 47 + 1:
+        era.set('cflag:52:节日事件标记', 0);
+        temp = await print_title_with_kojo(
+          this.#kojo,
+          'ws_47_1',
+          urara,
+          get_inner_urara(),
+          get_chara_talk(15),
+          me,
+          callname,
+          sys_get_colored_callname(this.id, 15),
+          sys_get_colored_callname(this.id, 30),
+          sys_get_colored_callname(this.id, 61),
+          sys_get_colored_callname(this.id, 77),
+          check_high_relation(),
+        );
+        switch (temp[0]) {
+          case 1:
+            wait = all_reward_in_event(this.id, {
+              attr: { [attr_enum.toughness]: 10 },
+              ...(temp[1] === 1 ? { relation: 20 } : { love: 5 }),
+            });
+            break;
+          case 2:
+            wait = all_reward_in_event(this.id, {
+              attr: { [attr_enum.endurance]: 10 },
+              ...(temp[1] === 1 ? { relation: 20 } : { love: 5 }),
+            });
+            break;
+          case 3:
+            wait = all_reward_in_event(this.id, {
+              pt: 20,
+              ...(temp[1] === 1 ? { relation: 20 } : { love: 5 }),
+            });
+        }
+        break;
+      case 47 + 6:
+        era.add('item:情人节巧克力', 1);
+        era.set('cflag:52:节日事件标记', 0);
+        wait = all_reward_in_event(
+          this.id,
+          (
+            await print_title_with_kojo(
+              this.#kojo,
+              'ws_47_6',
+              urara,
+              get_inner_urara(),
+              me,
+              callname,
+              check_high_relation(),
+            )
+          )[0] === 1
+            ? { relation: 20 }
+            : { love: 5 },
+        );
+        break;
+      case 47 + 29:
+        if (
+          era.get('cflag:0:位置') !== location_enum.beach ||
+          era.get('cflag:52:位置') !== era.get('cflag:0:位置')
+        ) {
+          add_event(hook.hook, ebj);
+          return false;
+        }
+        edu_marks.summer1 = 1;
+        await print_title_with_kojo(
+          this.#kojo,
+          'ws_47_29',
+          urara,
+          get_inner_urara(),
+          me,
+          callname,
+          check_high_relation(),
+        );
+        break;
+      case 47 + 43:
+        temp = await print_title_with_kojo(
+          this.#kojo,
+          'ws_47_43',
+          urara,
+          get_inner_urara(),
+          me,
+          callname,
+          edu_marks.summer1 > 0,
+          edu_marks.fans,
+          Math.min(
+            ...RaceHistory.get(this.id)
+              .get_values()
+              .filter((e) => race_infos[e.race].race_class <= class_enum.G3)
+              .map((e) => e.rank),
+          ),
+          race_infos[race_enum.negi_sta].get_colored_name(),
+        );
+        wait = all_reward_in_event(this.id, {
+          attr: new Array(5).fill(3),
+          relation: temp[0] === 1 ? 15 : 0,
+          love: temp[0] === 2 ? 3 : 0,
+        });
+        if (temp[1] === 1) {
+          edu_marks.dad++;
+        } else {
+          edu_marks.gad++;
+        }
+        break;
+      case 95 + 6:
+        temp = await print_title_with_kojo(
+          this.#kojo,
+          'ws_95_6',
+          urara,
+          get_inner_urara(),
+          me,
+          callname,
+          check_high_relation(),
+        );
+        if (era.get('love:52') >= 50) {
+          update_kiss_exp(get_date_obj(), this.id, 0);
+          if (temp[0] === 1) {
+            await quick_into_sex(this.id);
+          }
+        }
+        wait = all_reward_in_event(this.id, {
+          base: [2000],
+          ...(temp[0] === 1 ? { love: 5 } : { relation: 20 }),
+        });
+        wait = all_reward_in_event(0, { base: [2000] }) || wait;
+        era.set('cflag:52:节日事件标记', 0);
+        era.add('item:情人节巧克力', 1);
+        break;
+      case 95 + 29:
+        if (
+          era.get('cflag:0:位置') !== location_enum.beach ||
+          era.get('cflag:52:位置') !== era.get('cflag:0:位置')
+        ) {
+          add_event(hook.hook, ebj);
+          return false;
+        }
+        await print_title_with_kojo(
+          this.#kojo,
+          'ws_95_29',
+          urara,
+          get_inner_urara(),
+          me,
+          callname,
+          check_high_relation(),
+        );
+        break;
+      case 95 + 46:
+        switch (edu_marks.loop) {
+          case 2:
+            await print_event_name(
+              this.#kojo.ws_95_46_1.title(get_inner_urara()),
+              urara,
+            );
+            await this.#kojo.ws_95_46_1(
+              urara,
+              get_inner_urara(),
+              me,
+              callname,
+              check_high_relation(),
+            );
+            await era.saveData(52);
+            add_event(event_hooks.week_end, ebj);
+            break;
+          case 1:
+            await print_title_with_kojo(
+              this.#kojo,
+              'ws_95_46_2',
+              urara,
+              get_inner_urara(),
+              me,
+              callname,
+            );
+            await era.saveData(52);
+            add_event(event_hooks.week_end, ebj);
+            break;
+          case 0: {
+            const inner_urara = get_inner_urara();
+            await print_title_with_kojo(
+              this.#kojo,
+              'ws_95_46_3',
+              urara,
+              inner_urara,
+              me,
+              callname,
+            );
+            const pesudo = sys_get_chara_pseudo(52);
+            const p = new PseudoUma(
+              -1,
+              i18n().name[105202],
+              inner_urara.color,
+              pesudo.motivation,
+              new Array(5)
+                .fill(0)
+                .map((_, i) => Math.min(era.get(`base:52:${5 + i}`), 1200)),
+              pesudo.style,
+              [...pesudo.adapt_style_list],
+              [...pesudo.adapt_distance_list],
+              [...pesudo.adapt_ground_list],
+              pesudo.list_skill.map((e) => e.data),
+            );
+            p.legend = true;
+            await simulation_game_in_event(pesudo, [p], race_enum.arim_kin);
+            if (pesudo.rank.curr === 1) {
+              await this.#kojo.ws_95_46_3_win(
+                urara,
+                inner_urara,
+                get_chara_talk(26),
+                get_chara_talk(30),
+                me,
+                callname,
+              );
+              await era.rmData(52);
+              wait = all_reward_in_event(this.id, {
+                attr: {
+                  [get_random_entry(base_attr_list)]: 10,
+                },
+                pt: 45,
+                motivation: 1,
+              });
+              edu_marks.sbuff = 1;
+              era.println();
+              await era.printAndWait(
+                i18n().kojo[this.id].notify_break_loop(urara),
+              );
+            } else {
+              edu_marks.loop = 2;
+              await era.saveData(52);
+              add_event(event_hooks.week_end, ebj);
+            }
+          }
+        }
+        break;
+      case 143 + 1:
+        await print_title_with_kojo(
+          this.#kojo,
+          'ws_143_1',
+          urara,
+          get_inner_urara(),
+          me,
+          callname,
+          RaceHistory.get(this.id).get_result(95 + 48)?.race ===
+            race_enum.arim_kin &&
+            RaceHistory.get(this.id).get_result(95 + 48).rank,
+          race_infos[race_enum.arim_kin].get_colored_name(),
+        );
+        wait = all_reward_in_event(this.id, { relation: 20, love: 5 });
+        break;
+      case 'ticket':
+        await print_title_with_kojo(
+          this.#kojo,
+          'ws_ticket',
+          urara,
+          get_inner_urara(),
+          me,
+          callname,
+          check_high_relation(),
+          era
+            .getAddedCharacters()
+            .some(
+              (cid) =>
+                era.get(`cflag:${cid}:父方角色`) === this.id ||
+                era.get(`cflag:${cid}:母方角色`) === this.id,
+            ),
+        );
+    }
+    wait && (await era.waitAnyKey());
   }
 };

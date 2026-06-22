@@ -5,6 +5,7 @@ const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 const CustomizedEdu = require('#/event/edu/edu-common');
 const { add_event, cb_enum } = require('#/event/queue');
 const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
+const check_aim_race = require('#/event/snippets/check-aim-race');
 const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -21,7 +22,7 @@ const { location_enum } = require('#/data/locations');
 const { attr_enum, base_attr_list } = require('#/data/train-const');
 
 const RaceHistory = require('#/data/race/model/race-history');
-const check_aim_race = require('#/event/snippets/check-aim-race');
+
 const { i18n } = require('#/i18n/selector');
 
 function check_tachyon_plan_b() {

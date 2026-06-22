@@ -11,6 +11,7 @@ const { add_event, cb_enum } = require('#/event/queue');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { get_abbr_number } = require('#/utils/value-utils');
 
 const { get_chara_color } = require('#/data/chara-colors');
 const { attr_change_colors } = require('#/data/color-const');
@@ -65,29 +66,26 @@ module.exports = class extends CustomizedCheck {
     }
   }
 
-  check_after_race(extra_flag) {
+  check_after_race(extra) {
     let reward = 0;
-    switch (race_infos[extra_flag.race].race_class) {
+    switch (race_infos[extra.race].race_class) {
       case RaceInfo.class_enum.G1:
-        reward = get_fans_reward(
-          race2fans_reward[extra_flag.race],
-          extra_flag.rank,
-        );
+        reward = get_fans_reward(race2fans_reward[extra.race], extra.rank);
         break;
       case RaceInfo.class_enum.G2:
-        reward = get_fans_reward(6000, extra_flag.rank);
+        reward = get_fans_reward(6000, extra.rank);
         break;
       case RaceInfo.class_enum.G3:
-        reward = get_fans_reward(4000, extra_flag.rank);
+        reward = get_fans_reward(4000, extra.rank);
         break;
       case RaceInfo.class_enum.OP:
-        reward = get_fans_reward(2500, extra_flag.rank);
+        reward = get_fans_reward(2500, extra.rank);
         break;
       case RaceInfo.class_enum['Pre-OP']:
-        reward = get_fans_reward(1000, extra_flag.rank);
+        reward = get_fans_reward(1000, extra.rank);
         break;
       case RaceInfo.class_enum.Spe:
-        if (extra_flag.rank === 1) {
+        if (extra.rank === 1) {
           reward = 1000;
         }
     }
@@ -95,16 +93,13 @@ module.exports = class extends CustomizedCheck {
     reward *= (100 + edu_marks.fan_buff) / 100;
     edu_marks.fans += reward || 7000;
     if (reward) {
-      era.print([
-        get_chara_talk(52).get_colored_name(),
-        ' 的粉丝数增长了 ',
-        {
+      era.print(
+        i18n().kojo[this.id].notify_fan_reward(get_chara_talk(this.id), {
+          ...get_abbr_number(reward),
           color: attr_change_colors.up,
-          content: reward.toLocaleString(),
           fontWeight: 'bold',
-        },
-        '！',
-      ]);
+        }),
+      );
     }
   }
 
@@ -156,13 +151,13 @@ module.exports = class extends CustomizedCheck {
     const edu_marks = new UraraEduMarks(),
       edu_weeks = era.get('cflag:52:育成回合计时');
     if (edu_weeks < 3 * 48) {
-      const event_obj = new EventObject(52, cb_enum.edu);
+      const ebj = new EventObject(52, cb_enum.edu);
       check_and_add_event(
         edu_marks,
         edu_weeks,
         'teach',
         event_hooks.back_school,
-        event_obj,
+        ebj,
         () => EventMarks.get(52).add(event_hooks.out_shopping),
       );
       check_and_add_event(
@@ -170,7 +165,7 @@ module.exports = class extends CustomizedCheck {
         edu_weeks,
         'dance',
         event_hooks.back_school,
-        event_obj,
+        ebj,
         () => EventMarks.get(0).add(event_hooks.back_school),
       );
       check_and_add_event(
@@ -178,14 +173,14 @@ module.exports = class extends CustomizedCheck {
         edu_weeks,
         'fans_letr',
         event_hooks.office_prepare,
-        event_obj,
+        ebj,
       );
       check_and_add_event(
         edu_marks,
         edu_weeks,
         'all_like',
         event_hooks.out_start,
-        event_obj,
+        ebj,
         () => EventMarks.get(0).add(event_hooks.out_start),
       );
       check_and_add_event(
@@ -193,14 +188,14 @@ module.exports = class extends CustomizedCheck {
         edu_weeks,
         'food',
         event_hooks.out_shopping,
-        event_obj,
+        ebj,
       );
       check_and_add_event(
         edu_marks,
         edu_weeks,
         'stair',
         event_hooks.back_school,
-        event_obj,
+        ebj,
         () => EventMarks.get(0).add(event_hooks.school_chairman),
       );
       check_and_add_event(
@@ -208,7 +203,7 @@ module.exports = class extends CustomizedCheck {
         edu_weeks,
         'mother',
         event_hooks.back_school,
-        event_obj,
+        ebj,
         () => EventMarks.get(0).add(event_hooks.school_chairman),
       );
       check_and_add_event(
@@ -216,7 +211,7 @@ module.exports = class extends CustomizedCheck {
         edu_weeks,
         'vs',
         event_hooks.school_atrium,
-        event_obj,
+        ebj,
         () => EventMarks.get(0).add(event_hooks.school_atrium),
       );
       check_and_add_event(
@@ -224,7 +219,7 @@ module.exports = class extends CustomizedCheck {
         edu_weeks,
         'lost_found',
         event_hooks.school_atrium,
-        event_obj,
+        ebj,
       );
       if (era.get('cstr:52:决胜服') !== -1) {
         check_and_add_event(
@@ -232,7 +227,7 @@ module.exports = class extends CustomizedCheck {
           edu_weeks,
           'race_clothe',
           event_hooks.office_prepare,
-          event_obj,
+          ebj,
         );
       }
       check_and_add_event(
@@ -240,14 +235,14 @@ module.exports = class extends CustomizedCheck {
         edu_weeks,
         'interview',
         event_hooks.school_atrium,
-        event_obj,
+        ebj,
       );
       check_and_add_event(
         edu_marks,
         edu_weeks,
         'challenge',
         event_hooks.back_school,
-        event_obj,
+        ebj,
         () => EventMarks.get(0).add(event_hooks.back_school),
       );
       check_and_add_event(
@@ -255,14 +250,14 @@ module.exports = class extends CustomizedCheck {
         edu_weeks,
         'farthest',
         event_hooks.back_school,
-        event_obj,
+        ebj,
       );
       check_and_add_event(
         edu_marks,
         edu_weeks,
         'park',
         event_hooks.back_school,
-        event_obj,
+        ebj,
         () => EventMarks.get(52).add(event_hooks.out_shopping),
       );
       check_and_add_event(
@@ -270,54 +265,50 @@ module.exports = class extends CustomizedCheck {
         edu_weeks,
         'forget',
         event_hooks.back_school,
-        event_obj,
+        ebj,
       );
-      const event_object_special = new EventObject(
-        52,
-        cb_enum.edu,
-        true,
-      ).set_arg(edu_weeks);
+      const ebj_s = new EventObject(52, cb_enum.edu, true).set_arg(edu_weeks);
       switch (edu_weeks) {
         case 34: // 9月第三周 大家最喜欢的笑容？
         case 47 + 12: // 经典年3月4周 商店街的偶像！
         case 95 + 14: // 资深年4月2周 粉丝感谢祭！
         case 95 + 15: // 资深年4月3周 后援会•暴走！
-          add_event(event_hooks.out_shopping, event_object_special);
+          add_event(event_hooks.out_shopping, ebj_s);
           break;
         case 47: // 12月第四周 圣诞节后 意外的年末相谈！
         case 47 + 32: // 经典年8月4周 夏合宿（经典年）结束
         case 47 + 48: // 经典年12月4周 「她」的话语、「她」的名字
-        case 95 + 19: // 资深年5月3周 「深夜的聊天室记录」
+        case 95 + 19: // 资深年5月3周 「深夜的聊天记录」
         case 95 + 32: // 资深年8月4周 夏合宿（资深年）结束
         case 95 + 47: // 资深年12月3周 「她们」的礼物
-          add_event(event_hooks.week_end, event_object_special);
+          add_event(event_hooks.week_end, ebj_s);
           break;
         case 47 + 1: // 经典年1月1周 新年的抱负
         case 47 + 6: // 经典年2月2周 突袭的心意！
         case 95 + 6: // 资深年2月2周 心意突袭！II！
         case 95 + 29: // 资深年8月1周 夏合宿（资深年）开始
         case 95 + 46: // 资深年12月2周 三周循环
-          add_event(event_hooks.week_start, event_object_special);
+          add_event(event_hooks.week_start, ebj_s);
           break;
         case 47 + 27: // 经典年7月3周 应援会！？
           edu_marks.fans1 = edu_marks.fans;
           if (edu_marks.fans1 >= 5000) {
-            add_event(event_hooks.out_shopping, event_object_special);
+            add_event(event_hooks.out_shopping, ebj_s);
           }
           break;
         case 47 + 29: // 经典年8月1周 夏合宿（经典年）开始/夏合宿（经典年）途中
-          add_event(event_hooks.week_start, event_object_special);
-          add_event(event_hooks.week_end, event_object_special.copy());
+          add_event(event_hooks.week_start, ebj_s);
+          add_event(event_hooks.week_end, ebj_s.copy());
           break;
         case 47 + 43: // 经典年11月3周 「改变」&「选择」
           edu_marks.fans2 = edu_marks.fans;
           if (edu_marks.fans2 >= 9000) {
-            add_event(event_hooks.week_start, event_object_special);
+            add_event(event_hooks.week_start, ebj_s);
           }
           break;
         case 95 + 1: // 资深年1月1周 新年参拜
           edu_marks.fans3 = edu_marks.fans;
-          add_event(event_hooks.out_church, event_object_special);
+          add_event(event_hooks.out_church, ebj_s);
           break;
         case 95 + 42:
           edu_marks.loop = 2;
