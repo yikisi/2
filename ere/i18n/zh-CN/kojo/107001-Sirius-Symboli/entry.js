@@ -1,5 +1,0 @@
-class I18nKojo107001 {
-  achieve_track_aim_template = '日本德比 3 马身以上获胜：%STATUS%';
-}
-
-module.exports = I18nKojo107001;

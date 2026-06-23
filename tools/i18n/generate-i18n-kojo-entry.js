@@ -15,7 +15,7 @@ const name = {
   base: 'basement',
 };
 const skipEntry = { 106799: 1 };
-const skip = { 103201: 1 };
+const skip = { 103200: 1 };
 
 let entryOut = '';
 for (const charaPath of kojoDir) {
@@ -45,9 +45,7 @@ for (const charaPath of kojoDir) {
   if (!skip[kojoId]) {
     const suffixDict = {};
     files.forEach((t) => (suffixDict[t.substring(t.indexOf('.'))] = 1));
-    if (Object.keys(suffixDict).length === 0) {
-      continue;
-    } else if (Object.keys(suffixDict).length > 1) {
+    if (Object.keys(suffixDict).length > 1) {
       console.error(cid, 'conflicts!');
       continue;
     }
@@ -56,21 +54,26 @@ for (const charaPath of kojoDir) {
       console.error(cid, 'suffix error!');
       continue;
     }
-    files.sort(
-      (a, b) =>
-        order.indexOf(a.substring(0, a.length - suffix.length - 1)) -
-        order.indexOf(b.substring(0, b.length - suffix.length - 1)),
-    );
+    const entries = [];
     const className = 'I18nKojo' + kojoId;
-    const entries = suffix.endsWith('js')
-      ? files.map(
-          (t) =>
-            `${name[t.substring(0, t.length - suffix.length - 1)] ?? t.substring(0, t.length - suffix.length - 1)} = proxy_kojo_js(require('${basePath + '/' + charaPath + '/' + t}'));`,
-        )
-      : files.map(
-          (t) =>
-            `/** @type {KojoFile} */\n${name[t.substring(0, t.length - suffix.length - 1)] ?? t.substring(0, t.length - suffix.length - 1)} = require('${basePath + '/' + charaPath + '/' + t}');`,
-        );
+    if (Object.keys(suffixDict).length > 0) {
+      files.sort(
+        (a, b) =>
+          order.indexOf(a.substring(0, a.length - suffix.length - 1)) -
+          order.indexOf(b.substring(0, b.length - suffix.length - 1)),
+      );
+      entries.push(
+        ...(suffix.endsWith('js')
+          ? files.map(
+              (t) =>
+                `${name[t.substring(0, t.length - suffix.length - 1)] ?? t.substring(0, t.length - suffix.length - 1)} = proxy_kojo_js(require('${basePath + '/' + charaPath + '/' + t}'));`,
+            )
+          : files.map(
+              (t) =>
+                `/** @type {KojoFile} */\n${name[t.substring(0, t.length - suffix.length - 1)] ?? t.substring(0, t.length - suffix.length - 1)} = require('${basePath + '/' + charaPath + '/' + t}');`,
+            )),
+      );
+    }
     read_and_write_generated(
       join(p, 'entry.js'),
       '//',
