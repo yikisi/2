@@ -53,6 +53,7 @@ module.exports = class extends CustomizedEdu {
                 this.#kojo,
                 'bs_street_adv',
                 daiya,
+                get_chara_talk(48),
                 me,
               )
             )[0] === 1
@@ -88,11 +89,13 @@ module.exports = class extends CustomizedEdu {
                 this.#kojo,
                 'bs_in_colorful',
                 daiya,
+                get_chara_talk(24),
+                get_chara_talk(45),
                 me,
               )
             )[0] === 1
-              ? { [attr_enum.intelligence]: 20 }
-              : { [attr_enum.strength]: 20 },
+              ? { [attr_enum.speed]: 20 }
+              : { [attr_enum.toughness]: 20 },
         });
     }
     wait && (await era.waitAnyKey());
@@ -112,7 +115,7 @@ module.exports = class extends CustomizedEdu {
       (
         await print_title_with_kojo(
           this.#kojo,
-          'os_banned',
+          'oc_banned_coffee',
           daiya,
           get_chara_talk(25),
         )
@@ -276,7 +279,14 @@ module.exports = class extends CustomizedEdu {
       case 'high_place':
         if (
           (
-            await print_title_with_kojo(this.#kojo, 'os_high_place', daiya, me)
+            await print_title_with_kojo(
+              this.#kojo,
+              'os_high_place',
+              daiya,
+              get_chara_talk(7),
+              get_chara_talk(13),
+              me,
+            )
           )[0] === 1
         ) {
           wait = all_reward_in_event(this.id, { base: [100] });
@@ -328,7 +338,7 @@ module.exports = class extends CustomizedEdu {
         }
         break;
       case 'satono_uma':
-        await print_event_name(this.#kojo.os_satono_uma.title(daiya));
+        await print_event_name(this.#kojo.os_satono_uma.title(daiya), daiya);
         wait = all_reward_in_event(this.id, {
           attr:
             (

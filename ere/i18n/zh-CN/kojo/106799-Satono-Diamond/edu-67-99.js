@@ -6896,6 +6896,7 @@ module.exports = {
             '里见光钻因为进行奇妙的搞笑训练，意外地锻炼到了肌肉！',
           );
       }
+      return [ret];
     };
     f.title = title;
     return f;
