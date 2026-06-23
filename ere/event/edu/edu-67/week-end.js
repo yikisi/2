@@ -15,9 +15,9 @@ const { race_enum, race_infos } = require('#/data/race/race-const');
  * @param {CharaTalk} daiya
  * @param {CharaTalk} me
  * @param {HookArg} hook
- * @param {EventObject} event_object
+ * @param {EventObject} ebj
  */
-module.exports = async (daiya, me, hook, event_object) => {
+module.exports = async (daiya, me, hook, ebj) => {
   const edu_weeks = era.get('cflag:67:育成回合计时'),
     races = era.get('cflag:67:育成成绩');
   let wait = false;
@@ -26,7 +26,7 @@ module.exports = async (daiya, me, hook, event_object) => {
       era.get('cflag:0:位置') !== location_enum.beach ||
       era.get('cflag:67:位置') !== era.get('cflag:0:位置')
     ) {
-      add_event(hook.hook, event_object);
+      add_event(hook.hook, ebj);
       return;
     }
     await print_event_name('夏季集训（经典年）结束', daiya);
@@ -70,22 +70,22 @@ module.exports = async (daiya, me, hook, event_object) => {
     const kita = get_chara_talk(68);
     await era.printAndWait([
       `${me.name} 和里见光钻一起，来观战北部玄驹出赛的 `,
-      race_infos[race_enum.takz_kin].get_colored_name(),
+      takz_kin,
       '。',
     ]);
     await daiya.say_and_wait([
       '可以依照计划顺利参加 ',
-      race_infos[race_enum.takz_kin].get_colored_name(),
+      takz_kin,
       '，小北真的是很坚韧呢。',
     ]);
     await era.printAndWait([
       '其实这次 ',
-      race_infos[race_enum.takz_kin].get_colored_name(),
+      takz_kin,
       ' 的粉丝票选结果，里见光钻也是有获得参赛资格的。',
     ]);
     await era.printAndWait([
       '只是受到 ',
-      race_infos[race_enum.tenn_spr].get_colored_name(),
+      tenn_spr,
       ` 激战过后的影响，让${daiya.sex}累积了相当大的疲劳，保险起见，才选择放弃这次的参赛机会。`,
     ]);
     await era.printAndWait(
@@ -266,7 +266,7 @@ module.exports = async (daiya, me, hook, event_object) => {
       era.get('cflag:0:位置') !== location_enum.beach ||
       era.get('cflag:67:位置') !== era.get('cflag:0:位置')
     ) {
-      add_event(hook.hook, event_object);
+      add_event(hook.hook, ebj);
       return;
     }
     await print_event_name('夏季集训（资深年）结束', daiya);
@@ -320,7 +320,7 @@ module.exports = async (daiya, me, hook, event_object) => {
     const teio = get_chara_talk(3);
     await era.printAndWait([
       `${me.name} 和里见光钻一起来观战 `,
-      race_infos[race_enum.japa_cup].get_colored_name(),
+      japa_cup,
       '。',
     ]);
     await kita.say_and_wait('帝王……！我真的要跟崇拜的帝王一起……！');
@@ -463,11 +463,11 @@ module.exports = async (daiya, me, hook, event_object) => {
     await print_event_name('跟着憧憬一起', daiya);
     const mcqueen = get_chara_talk(13);
     await era.printAndWait([
-      race_infos[race_enum.tenn_sho].get_colored_name(),
+      tenn_sho,
       '、',
-      race_infos[race_enum.japa_cup].get_colored_name(),
+      japa_cup,
       '，以及',
-      race_infos[race_enum.arim_kin].get_colored_name(),
+      arim_kin,
       '。',
     ]);
     await era.printAndWait(

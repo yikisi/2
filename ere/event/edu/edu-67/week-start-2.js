@@ -373,11 +373,7 @@ module.exports = (handlers) => {
     await era.printAndWait('每年惯例的夏季集训也在今年开始了！');
     await kita.say_and_wait('小钻，有空吗？');
     await daiya.say_and_wait('怎么了？');
-    await kita.say_and_wait([
-      '就是……你在 ',
-      race_infos[race_enum.takz_kin].get_colored_name(),
-      ' 跟我说过的。',
-    ]);
+    await kita.say_and_wait(['就是……你在 ', takz_kin, ' 跟我说过的。']);
     await kita.say_and_wait('你说大家都对我充满『期待』……');
     await daiya.say_and_wait('嗯。');
     await kita.say_and_wait('我自己想了一下，大家对我的『期待』究竟是什么。');
@@ -394,11 +390,11 @@ module.exports = (handlers) => {
     await daiya.say_and_wait('呵呵呵！这才是小北没错！');
     await kita.say_and_wait([
       '所以，我的目标是要在 ',
-      race_infos[race_enum.tenn_spr].get_colored_name(),
+      tenn_spr,
       '、',
-      race_infos[race_enum.japa_cup].get_colored_name(),
+      japa_cup,
       '、',
-      race_infos[race_enum.arim_kin].get_colored_name(),
+      arim_kin,
       ' 全部跑赢！',
     ]);
     await kita.say_and_wait('这就代表，我一定会跑赢帝王跟麦昆的！！');
@@ -410,7 +406,7 @@ module.exports = (handlers) => {
     );
     await kita.say_and_wait([
       '因为我在 ',
-      race_infos[race_enum.takz_kin].get_colored_name(),
+      takz_kin,
       ' 的时候让大家失望了，所以我想让大家看到我超越崇拜对象的样子！',
     ]);
     await daiya.say_and_wait('……我也是一样的想法。我也想超越崇拜的对象。');
@@ -490,25 +486,22 @@ module.exports = (handlers) => {
     await daiya.say_and_wait('………………训练员。');
     await daiya.say_and_wait([
       '我这样来得及在 ',
-      race_infos[race_enum.tenn_sho].get_colored_name(),
+      tenn_sho,
       ' 之前把状态调整好吗……？',
     ]);
     era.printButton('「现在开始调整的话或许还能勉强赶上吧」', 1);
     await era.input();
     await era.printAndWait([
       '虽然是不一定要以100％完整状态去迎战作为前哨战的 ',
-      race_infos[race_enum.kyot_dai].get_colored_name(),
+      kyot_dai,
       '，但距离 ',
-      race_infos[race_enum.tenn_sho].get_colored_name(),
+      tenn_sho,
       ' 也已经没有时间了。',
     ]);
     await daiya.say_and_wait('…………');
     await daiya.say_and_wait('……我会先把跑法给调整回来的。');
     await daiya.say_and_wait('毕竟，我可不能用这种状态去迎战跟麦昆的比赛……！');
-    era.printButton(
-      `「是啊，要赶在 ${race_infos[race_enum.tenn_spr].name} 之前调整好！」`,
-      1,
-    );
+    era.printButton(`「是啊，要赶在春季天皇赏之前调整好！」`, 1);
     await era.input();
     await era.printAndWait(
       `这对她来说也是很痛苦的决定吧。为了不辜负她的这片心意，${me.name} 一定要让${daiya.sex}以万全的状态迎战「天皇赏（秋）」！`,
@@ -543,7 +536,7 @@ module.exports = (handlers) => {
     await daiya.say_and_wait('要我跟小北一起跑吗？');
     await kita.say_and_wait([
       '对！跑跟 ',
-      race_infos[race_enum.takz_kin].get_colored_name(),
+      takz_kin,
       ' 一样的2200米。我想要复习当时的状况。',
     ]);
     await daiya.say_and_wait('……训练员。');
@@ -551,9 +544,9 @@ module.exports = (handlers) => {
     await era.input();
     await daiya.say_and_wait([
       '……说得也是。刚好距离也是 ',
-      race_infos[race_enum.tenn_sho].get_colored_name(),
+      tenn_sho,
       ' 和 ',
-      race_infos[race_enum.kyot_dai].get_colored_name(),
+      kyot_dai,
       ' 的中间。对我来说也是不错的锻炼。',
     ]);
     await kita.say_and_wait('谢谢你，小钻！！');

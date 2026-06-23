@@ -11,7 +11,7 @@ const DaiyaEduMarks1 = require('#/data/event/edu-event-marks/edu-event-marks-67-
 const { location_enum } = require('#/data/locations');
 
 module.exports = class extends CustomizedEdu {
-  async back_school(daiya, me, callname, hook, extra, event_object) {
+  async back_school(daiya, me, callname, hook, extra, ebj) {
     if (
       era.get('flag:当前互动角色') !== 67 ||
       era.get('flag:当前位置') !== location_enum.gate
@@ -19,7 +19,7 @@ module.exports = class extends CustomizedEdu {
       if (era.get('flag:当前互动角色') === 67) {
         await era.printAndWait([daiya.get_colored_name(), ' 期待着外出……']);
       }
-      add_event(hook.hook, event_object);
+      add_event(hook.hook, ebj);
       return;
     }
     const edu_marks = new DaiyaEduMarks1();

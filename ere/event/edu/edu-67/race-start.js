@@ -13,126 +13,7 @@ module.exports = class extends Edu67UntilOutStart {
   async race_start(daiya, me, callname, hook, extra) {
     const edu_marks = new DaiyaEduMarks1(),
       edu_weeks = era.get('cflag:67:育成回合计时');
-    if (extra.race === race_enum.begin_race && edu_weeks < 48) {
-      const mcqueen = get_chara_talk(13);
-      await print_event_name('迎向出道战', daiya);
-      await era.printAndWait(
-        `站在出道战的看台上，${me.name} 不由想起出道战已经近在眼前的某天──`,
-      );
-      era.drawLine();
-      await mcqueen.say_and_wait('──打扰了。');
-      era.printButton('「麦昆？」', 1);
-      await era.input();
-      await mcqueen.say_and_wait(
-        '虽然可能有点多管闲事，但有件事情，我觉得还是要让你知道比较好。',
-      );
-      await mcqueen.say_and_wait('里见的出道战，似乎会受到更多的瞩目哦。');
-      await era.printAndWait(
-        `『RKST评分总计五亿的出道战！！』目白麦昆交给 ${me.name} 的杂志上写着这样斗大的标题。`,
-      );
-      await era.printAndWait('『Rookie Knowledge,Stats, and Talent』');
-      await era.printAndWait(
-        `所谓的RKST评分是每年七月时公布的针对出道前赛${daiya.uma_sex_title}的评价分数。`,
-      );
-      await era.printAndWait(
-        `是由引退的训练员和赛${daiya.uma_sex_title}评论家等人士，针对赛${daiya.uma_sex_title}的能力进行分析，将综合评价数值化的评分。`,
-      );
-      await era.printAndWait(
-        '里见光钻获得了两亿三千万分，是评分纪录史上压倒性的高分。因此，在出道前就倍受瞩目。',
-      );
-      await mcqueen.say_and_wait(
-        `据说获得比里见更高评分的赛${daiya.uma_sex_title}也会参加同一场出道战。`,
-      );
-      await mcqueen.say_and_wait(
-        `另外似乎也有其他获得高评分的赛${daiya.uma_sex_title}参赛，所以才会变成总计评分五亿分的出道战呢。`,
-      );
-      era.printButton('「所以才会说是五亿对决啊」', 1);
-      await era.input();
-      await mcqueen.say_and_wait(
-        '虽然说无论受到多少人的注意，里见应该都是没有问题的……',
-      );
-      era.printButton('「谢谢你，我会多加注意的」', 1);
-      await era.input();
-      await era.printAndWait(
-        '虽说里见光钻是个稳重的人，但毕竟是出道战。谨慎行事总是再好不过了。',
-      );
-      await mcqueen.say_and_wait(
-        '嗯。毕竟受到这么多人的瞩目……自然就会衍生出各式各样的声音。',
-      );
-      await daiya.say_and_wait('训练员，今天也请多多指教了！');
-      await say_by_passer_by_and_wait('记者A', '喂，里见光钻出现了！');
-      await daiya.say_and_wait('……今天好像来了很多记者呢。');
-      await say_by_passer_by_and_wait(
-        '记者B',
-        '里见光钻小姐，请问方便接受采访吗？',
-      );
-      era.printButton('「我们接下来要去训练，所以……」', 1);
-      await era.input();
-      await daiya.say_and_wait('训练员，没关系的。短暂的采访是没问题的。');
-      await say_by_passer_by_and_wait(
-        '记者B',
-        `谢谢你！出道战将会是场高分赛${daiya.uma_sex_title}们的对决，对此请发表你对这场比赛的抱负！`,
-      );
-      await daiya.say_and_wait('哎呀，原来是被如此称呼的呢。');
-      await daiya.say_and_wait(
-        '能受到瞩目是值得开心的事情。我会努力带给大家符合评价表现的出道战。',
-      );
-      await say_by_passer_by_and_wait('记者B', '请问你有感受到压力吗？');
-      await daiya.say_and_wait('这点我想大家都是一样的。');
-      await era.printAndWait(
-        `里见光钻面对采访，回答得无懈可击。看起来似乎没有特别在意高分赛${daiya.uma_sex_title}对决这件事情。`,
-      );
-      await daiya.say_and_wait('呼……抱歉久等了，采访结束了。');
-      era.printButton('「你还好吗？」', 1);
-      await era.input();
-      await daiya.say_and_wait('嘿嘿，是觉得有点口渴了。');
-      era.printButton('「要不要请学园帮忙阻挡记者采访？」', 1);
-      await era.input();
-      await era.printAndWait(
-        '毕竟现在是准备出道战的重要时期。去拜托手纲小姐的话，应该会帮我们把采访控管在适当的范围内。',
-      );
-      await daiya.say_and_wait(
-        `没关系，不用这样。毕竟接受采访也是赛${daiya.uma_sex_title}应尽的责任。`,
-      );
-      await daiya.say_and_wait(
-        '我的出道战能带来话题跟热度的话，不如说是很值得开心的事情。',
-      );
-      await daiya.say_and_wait('我想，里见家的各位应该也都乐见这样的状况。');
-      era.printButton('「这么多的瞩目会不会造成你的负担？」', 1);
-      await era.input();
-      await daiya.say_and_wait(
-        '呵呵，这我已经习惯了。毕竟我从小就是里见家中最受瞩目的存在了。',
-      );
-      await daiya.say_and_wait(
-        '在一些派对当中也会被问到──目前的成绩如何？将来会就读特雷森学园吗？之类的问题。',
-      );
-      await daiya.say_and_wait(
-        `和我同年的亲戚跟赛${daiya.uma_sex_title}们甚至埋怨过只有我一个人受到瞩目真不公平之类的话，觉得很羡慕我呢♪`,
-      );
-      await era.printAndWait(
-        `${daiya.sex}看起来没有在逞强的样子。看来${daiya.sex}说习惯受到瞩目的事情是真的。`,
-      );
-      await daiya.say_and_wait('该不会……这样的状况让训练员觉得困扰了吗？');
-      await daiya.say_and_wait(
-        '如果觉得会影响到训练的话，拒绝采访也是可以的。',
-      );
-      era.printButton('「只要你不介意就没问题……！」', 1);
-      await era.input();
-      await era.printAndWait(
-        `反倒让${daiya.sex}担心 ${me.name} 了。既然${daiya.sex}本人丝毫不在意，那 ${me.name} 也就不需要过度担心。`,
-      );
-      era.drawLine();
-      await era.printAndWait('于是，到了出道战当天──');
-      await daiya.say_and_wait('──终于要开始了。');
-      era.printButton('「你好像很开心呢」', 1);
-      await era.input();
-      await daiya.say_and_wait('是的，一想到我的闪耀系列赛就要开始了……');
-      await daiya.say_and_wait('我就兴奋得起鸡皮疙瘩呢……！');
-      await era.printAndWait('里见光钻丝毫没有半点紧张，只有恰到好处的干劲。');
-      era.printButton('「去吧！」', 1);
-      await era.input();
-      await daiya.say_and_wait('是！里见光钻要上场了！');
-    } else if (extra.race === race_enum.sats_sho) {
+    if (extra.race === race_enum.sats_sho) {
       await print_event_name('迎向皋月赏', daiya);
       if (edu_marks.run_g1 === 1) {
         await era.printAndWait(
@@ -355,7 +236,7 @@ module.exports = class extends Edu67UntilOutStart {
       );
       await daiya.say_and_wait('──明天似乎会是好天气呢。');
       era.drawLine({
-        content: `${race_infos[race_enum.toky_yus].name} 当天`,
+        content: `日本德比当天`,
       });
       await daiya.say_and_wait('时间差不多了。呵呵，今天一切都很顺利呢♪');
       await era.printAndWait(
@@ -385,9 +266,9 @@ module.exports = class extends Edu67UntilOutStart {
       await era.input();
       await daiya.say_and_wait('又发生了平常不会发生的事情……');
       await daiya.say_and_wait([
-        race_infos[race_enum.sats_sho].get_colored_name(),
+        sats_sho,
         ' 和 ',
-        race_infos[race_enum.toky_yus].get_colored_name(),
+        toky_yus,
         ' 都是这样，偏偏都在重要的经典三冠赛事时发生，为什么会这样……！',
       ]);
       await daiya.say_and_wait('仿佛就像是为了妨碍里见家达成宿愿一样。');
@@ -397,11 +278,7 @@ module.exports = class extends Edu67UntilOutStart {
       await era.input();
       await daiya.say_and_wait('但是呢！！我是不会输的！我会破除所有魔咒！！');
       await daiya.say_and_wait('我发誓一定会做到的！！所以……！');
-      await daiya.say_and_wait([
-        '我会跑赢 ',
-        race_infos[race_enum.toky_yus].get_colored_name(),
-        ' 的！绝对会！！',
-      ]);
+      await daiya.say_and_wait(['我会跑赢 ', toky_yus, ' 的！绝对会！！']);
     } else if (extra.race === race_enum.kiku_sho) {
       const kita = get_chara_talk(68);
       await print_event_name('迎向菊花赏', daiya);
@@ -429,18 +306,18 @@ module.exports = class extends Edu67UntilOutStart {
         `${me.name} 认为这对里见光钻来说，是一个相当好的预兆。`,
       );
       await kita.say_and_wait('啊，小钻出来了！');
-      await say_by_passer_by_and_wait(
+      await me.say_as_passer_by_and_wait(
         '观众A',
         '喔，是里见光钻！看起来很有干劲的样子，感觉很不错！',
       );
-      await say_by_passer_by_and_wait('观众B', [
+      await me.say_as_passer_by_and_wait('观众B', [
         `照${daiya.sex}采访时说的话来看，${daiya.sex}好像觉得在`,
-        race_infos[race_enum.sats_sho].get_colored_name(),
+        sats_sho,
         ' 和 ',
-        race_infos[race_enum.toky_yus].get_colored_name(),
+        toky_yus,
         ' 的时候，都没有完全发挥到真正的实力。',
       ]);
-      await say_by_passer_by_and_wait(
+      await me.say_as_passer_by_and_wait(
         '观众B',
         `那我还真想看看${daiya.sex}最佳状态会是什么样子呢！`,
       );
@@ -804,7 +681,7 @@ module.exports = class extends Edu67UntilOutStart {
       await era.printAndWait(
         `实况「曾经达成『天皇赏（春）』连霸成就的赛${daiya.uma_sex_title}，目白麦昆！！」`,
       );
-      await say_by_passer_by_and_wait('观众', '喔喔喔喔喔喔喔喔！！');
+      await me.say_as_passer_by_and_wait('观众', '喔喔喔喔喔喔喔喔！！');
       await era.printAndWait(
         '实况「请各位听听看现场的欢呼声！震撼了整座东京赛场啊！！」',
       );

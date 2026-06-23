@@ -11,9 +11,9 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const DaiyaEduMarks1 = require('#/data/event/edu-event-marks/edu-event-marks-67-99');
 
 module.exports = class extends Edu67BackSchool {
-  async out_start(daiya, me, callname, hook, extra, event_object) {
+  async out_start(daiya, me, callname, hook, extra, ebj) {
     if (era.get('flag:当前互动角色') !== 67) {
-      add_event(hook.hook, event_object);
+      add_event(hook.hook, ebj);
       return;
     }
     const edu_marks = new DaiyaEduMarks1();
@@ -23,7 +23,7 @@ module.exports = class extends Edu67BackSchool {
       await print_event_name('支持我的大家', daiya);
       const kita = get_chara_talk(68);
       await era.printAndWait('里见光钻拿下首次G1胜利后的某天。走在街上时──');
-      await say_by_passer_by_and_wait(
+      await me.say_as_passer_by_and_wait(
         '游戏厅的工作人员',
         '每人可以免费挑战一次抽豪华奖品的机会！目前正在举办『里见光钻G1获胜纪念活动』喔──！！」',
       );

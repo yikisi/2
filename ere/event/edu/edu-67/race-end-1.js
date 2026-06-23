@@ -1,109 +1,15 @@
 const era = require('#/era-electron');
 
-const { add_event, cb_enum } = require('#/event/queue');
 const print_event_name = require('#/event/snippets/print-event-name');
 
-const { say_by_passer_by_and_wait } = require('#/utils/chara-talk');
-
-const event_hooks = require('#/data/event/event-hooks');
-const EventObject = require('#/data/event/event-object');
-const { race_enum, race_infos } = require('#/data/race/race-const');
+const { race_enum } = require('#/data/race/race-const');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 /** @param {Record<string,function(CharaTalk,CharaTalk,number,{race:number,rank:number},DaiyaEduMarks):Promise<void>>} handlers */
 module.exports = (handlers) => {
-  handlers[race_enum.begin_race] = async (
-    daiya,
-    me,
-    edu_weeks,
-    extra,
-    edu_marks,
-  ) => {
-    if (edu_weeks >= 48 || extra.rank !== 1) {
-      return true;
-    }
-    await print_event_name('黎明', daiya);
-    await daiya.say_and_wait('呼、呼、呼……');
-    await daiya.say_and_wait('…………嗯！');
-    await say_by_passer_by_and_wait(
-      '观众A',
-      '喔喔～里见光钻表现得很好嘛……！不愧是得到那么高评分的选手！',
-    );
-    await say_by_passer_by_and_wait(
-      '观众B',
-      '她的安定感完全不是出道战级别的呢。感觉很有前途喔！',
-    );
-    await say_by_passer_by_and_wait(
-      '观众A',
-      '要是在G1也能跑赢就好了！！打破『里见家的魔咒』……！',
-    );
-    await daiya.say_and_wait('训练员！！');
-    await daiya.say_and_wait('我终于顺利出道了呢！');
-    era.printButton('「是啊」', 1);
-    await era.input();
-    await daiya.say_and_wait('跑完之后，才总算觉得有真实感了。');
-    await daiya.say_and_wait(
-      '比赛时听到大家的欢呼声……其他选手的施压、喘息。毛囊深处都能感受到的紧张感……',
-    );
-    await daiya.say_and_wait(
-      '都是我从来没有感受过的氛围。这就是，真正的比赛呢……！',
-    );
-    await daiya.say_and_wait('麦昆和小北，她们也都是在这种氛围下跑步的……');
-    await daiya.say_and_wait('我也总算踏上了跟她们一样的赛场……！');
-    await era.printAndWait(
-      `里见光钻表现得相当兴奋。这也代表这场出道战让${daiya.sex}有很深的感触吧。`,
-    );
-    await daiya.say_and_wait(
-      '……我要用这双脚继续奔跑、跑赢比赛，再继续赢下去。一定要完成里见家的宿愿！',
-    );
-    await era.printAndWait(`你们跟着散场的人潮，从赛场慢慢走向车站。`);
-    await say_by_passer_by_and_wait(
-      '观众C',
-      `那个叫里见光钻的赛${daiya.uma_sex_title}，${
-        daiya.sex
-      }跑步的样子真的好漂亮喔！就是那场五亿对决的！」`,
-    );
-    await say_by_passer_by_and_wait(
-      '观众A',
-      `${daiya.sex}的尾段加速感觉很厉害喔！」`,
-    );
-    await say_by_passer_by_and_wait('观众C', [
-      '说不定不久后就会参加G1竞赛了吧。感觉 ',
-      race_infos[race_enum.toky_yus].get_colored_name(),
-      ' 也很有希望呢！」',
-    ]);
-    await era.printAndWait(
-      `观众B「……嗯？是说──里见集团有出过跑赢G1的赛${daiya.uma_sex_title}吗……？」`,
-    );
-    await era.printAndWait(
-      `观众A「从来没有啊。以前还蛮多里见家的赛${daiya.uma_sex_title}参赛的，但从来没人赢过G1。」`,
-    );
-    await era.printAndWait(
-      `观众A「所以才会在杂志上看到──『至今没有G1赛${daiya.uma_sex_title}的里见家魔咒』这样的标语……」`,
-    );
-    await era.printAndWait(
-      '观众C「是喔──还有这种传闻喔。所以是因为魔咒的关系才赢不了G1啰？」',
-    );
-    await era.printAndWait(
-      `观众A「对啊。里见光钻是里见家久违出现的赛${daiya.uma_sex_title}，希望她能够跑赢G1呢。」`,
-    );
-    await era.printAndWait(
-      `${me.name} 一边听着走在前面的人所说的话，一边偷偷看向里见光钻。`,
-    );
-    await daiya.say_and_wait('呵呵，我一定会破除魔咒的！');
-    await era.printAndWait(
-      `里见光钻露出开朗的微笑，对 ${me.name} 比出一个充满气势的加油手势。`,
-    );
-    await era.printAndWait(
-      `${me.name} 想，心志坚强又坚定的${daiya.sex}，一定能消除这些传闻跟魔咒的吧。`,
-    );
-    edu_marks.after_begin = 1;
-    add_event(event_hooks.week_start, new EventObject(67, cb_enum.edu));
-  };
-
   handlers[race_enum.sats_sho] = async (daiya, me, edu_weeks, extra) => {
     await print_event_name('厄运', daiya);
-    await say_by_passer_by_and_wait('实况', '选手们从第四弯道进入直线！');
+    await me.say_as_passer_by_and_wait('实况', '选手们从第四弯道进入直线！');
     await daiya.say_and_wait('──这里！从这里……！', true);
     await daiya.say_and_wait('咦……？');
     await daiya.say_and_wait(
@@ -115,13 +21,13 @@ module.exports = (handlers) => {
       await era.printAndWait(
         '实况「抵达终点！第一名是里见光钻！！这颗钻石在暴风雨过后的阳光下闪耀！」',
       );
-      await say_by_passer_by_and_wait('观众', '哇啊啊啊啊啊啊啊啊！');
+      await me.say_as_passer_by_and_wait('观众', '哇啊啊啊啊啊啊啊啊！');
       await daiya.say_and_wait('呼、呼……呼、呼……');
-      await say_by_passer_by_and_wait(
+      await me.say_as_passer_by_and_wait(
         '观众A',
         '很厉害嘛，里见光钻！！感觉之后还会继续成长呢，真令人期待！',
       );
-      await say_by_passer_by_and_wait(
+      await me.say_as_passer_by_and_wait(
         '观众B',
         '虽然最后看起来很辛苦的样子，但她撑过了！',
       );
@@ -187,7 +93,7 @@ module.exports = (handlers) => {
       await daiya.say_and_wait('那就由我去破除它！');
       await daiya.say_and_wait([
         '在下一场 ',
-        race_infos[race_enum.toky_yus].get_colored_name(),
+        toky_yus,
         ' 战胜魔咒！展现出我最完美的表现！赢得胜利给大家看！！',
       ]);
     } else {
@@ -203,7 +109,7 @@ module.exports = (handlers) => {
       await daiya.say_and_wait('我一定会破除魔咒的！！');
       await daiya.say_and_wait([
         '下一场 ',
-        race_infos[race_enum.toky_yus].get_colored_name(),
+        toky_yus,
         '！我一定会战胜魔咒，赢得胜利给大家看！！',
       ]);
     }
@@ -226,21 +132,21 @@ module.exports = (handlers) => {
       '像是摆脱了什么般的……真切的咆哮。里见光钻展现惊人的气势，在草地上奔驰。',
     );
     if (extra.rank === 1) {
-      await say_by_passer_by_and_wait(
+      await me.say_as_passer_by_and_wait(
         '实况',
         `领先的是……里见光钻──！今年的德比赛${daiya.uma_sex_title}是里见光钻！`,
       );
-      await say_by_passer_by_and_wait('观众', '哇啊啊啊啊啊啊啊！');
-      await say_by_passer_by_and_wait(
+      await me.say_as_passer_by_and_wait('观众', '哇啊啊啊啊啊啊啊！');
+      await me.say_as_passer_by_and_wait(
         '观众A',
         '里见光钻是第一名！！真是惊人的尾段加速实力！',
       );
-      await say_by_passer_by_and_wait(
+      await me.say_as_passer_by_and_wait(
         '观众B',
         '持久力的部分也完全还有余裕的感觉，『菊花赏』应该也没问题了吧！',
       );
     } else {
-      await say_by_passer_by_and_wait(
+      await me.say_as_passer_by_and_wait(
         '实况',
         `……里见光钻没能做到！成为德比赛${daiya.uma_sex_title}的梦想离${
           daiya.sex
@@ -277,7 +183,7 @@ module.exports = (handlers) => {
       );
       await era.printAndWait('观众A「喔喔，我很期待喔──！」');
       await daiya.say_and_wait('嗯！一定会！！');
-      await say_by_passer_by_and_wait('观众', '哇啊啊啊啊啊啊啊……');
+      await me.say_as_passer_by_and_wait('观众', '哇啊啊啊啊啊啊啊……');
       await daiya.say_and_wait('……呼……');
       await era.printAndWait(
         '走进地下道后，里见光钻原本紧张的情绪获得缓解。在一个长长的叹气后，恢复到了平时的表情。',
@@ -364,38 +270,38 @@ module.exports = (handlers) => {
     await era.input();
     await daiya.say_and_wait('呵呵，再加就要装不下了。感谢你的招待，训练员♪');
     await era.printAndWait('──这时，听到旁边座位谈到熟悉的名字。');
-    await say_by_passer_by_and_wait('刚观战完的男性观众A', [
+    await me.say_as_passer_by_and_wait('刚观战完的男性观众A', [
       '上次 ',
-      race_infos[race_enum.takz_kin].get_colored_name(),
+      takz_kin,
       ' 粉丝票选的中间发表结果！第一名是北部玄驹！」',
     ]);
-    await say_by_passer_by_and_wait(
+    await me.say_as_passer_by_and_wait(
       '刚观战完的男性观众B',
       `没错没错！我也是投给${daiya.sex}，所以超开心的！」`,
     );
     await era.printAndWait([
       '参赛选手由粉丝投票选出的 ',
-      race_infos[race_enum.takz_kin].get_colored_name(),
+      takz_kin,
       '。名次的中间发表结果中，北部玄驹得到了第一名。',
     ]);
-    await say_by_passer_by_and_wait('刚观战完的男性观众A', [
+    await me.say_as_passer_by_and_wait('刚观战完的男性观众A', [
       `${daiya.sex}在 `,
-      race_infos[race_enum.tenn_spr].get_colored_name(),
+      tenn_spr,
       ' 的表现真的很棒！北部玄驹明明一度被超越了，却又在最后反超回来，以鼻差夺得第一！！」',
     ]);
-    await say_by_passer_by_and_wait(
+    await me.say_as_passer_by_and_wait(
       '刚观战完的男性观众B',
       `那场比赛真的很刺激～！最后还是${daiya.sex}顽强的意志力获胜了！！`,
     );
-    await say_by_passer_by_and_wait(
+    await me.say_as_passer_by_and_wait(
       '刚观战完的男性观众A',
       `因为${daiya.sex}真的跑得很拼命的样子，那种坚定不移的感觉会让人忍不住想支持${daiya.sex}吧。`,
     );
-    await say_by_passer_by_and_wait(
+    await me.say_as_passer_by_and_wait(
       '刚观战完的男性观众B',
       `我懂我懂！因为${daiya.sex}本身也没什么特别亮眼的地方，就是很普通、很接近我们的感觉。」`,
     );
-    await say_by_passer_by_and_wait(
+    await me.say_as_passer_by_and_wait(
       '刚观战完的男性观众B',
       `所以反而更希望${daiya.sex}能够跑赢！就像是看到自己获得成就的感觉！`,
     );
@@ -448,18 +354,18 @@ module.exports = (handlers) => {
       await era.printAndWait(
         `实况「第一名是里见光钻！！${daiya.sex}用金刚石无坚不摧的实力打破了所有障碍──！」`,
       );
-      await say_by_passer_by_and_wait('观众', '哇啊啊啊啊啊啊啊啊！');
+      await me.say_as_passer_by_and_wait('观众', '哇啊啊啊啊啊啊啊啊！');
       await kita.say_and_wait('好耶！太好了、太好了、太好啦──────！！');
       await kita.say_and_wait('小钻！你成功了，小钻！！');
-      await say_by_passer_by_and_wait(
+      await me.say_as_passer_by_and_wait(
         '观众A',
         '真厉害……我起鸡皮疙瘩了……！里见光钻真的好强啊！！',
       );
-      await say_by_passer_by_and_wait('观众B', [
+      await me.say_as_passer_by_and_wait('观众B', [
         `哈哈，原来这才是${daiya.sex}真正的实力啊！这也难怪${daiya.sex}会说 `,
-        race_infos[race_enum.sats_sho].get_colored_name(),
+        sats_sho,
         ' 和 ',
-        race_infos[race_enum.toky_yus].get_colored_name(),
+        toky_yus,
         ' 时，不满意自己的表现了！',
       ]);
       await kita.say_and_wait('……小钻果然真的很厉害！');
@@ -467,21 +373,21 @@ module.exports = (handlers) => {
       await era.printAndWait(
         '实况「里见光钻虽然错过了成为第一名的机会，却展现出了最高级钻石该有的精彩表现！！」',
       );
-      await say_by_passer_by_and_wait('观众', '啪啪啪啪啪！');
+      await me.say_as_passer_by_and_wait('观众', '啪啪啪啪啪！');
       await kita.say_and_wait('好厉害……小钻竟然在我不知不觉间成长成这样了……！');
       await kita.say_and_wait('嘿嘿嘿！好期待能跟她一起比赛喔！');
-      await say_by_passer_by_and_wait(
+      await me.say_as_passer_by_and_wait(
         '观众A',
         '我好像……都起鸡皮疙瘩了……里见光钻的表现真的棒啊。',
       );
-      await say_by_passer_by_and_wait('观众B', [
+      await me.say_as_passer_by_and_wait('观众B', [
         '跟 ',
-        race_infos[race_enum.sats_sho].get_colored_name(),
+        sats_sho,
         ' 和 ',
-        race_infos[race_enum.toky_yus].get_colored_name(),
+        toky_yus,
         ' 时完全不一样！原来这才是里见光钻真正的实力……！',
       ]);
-      await say_by_passer_by_and_wait(
+      await me.say_as_passer_by_and_wait(
         '观众A',
         `让我好期待${daiya.sex}的下一场比赛呢！`,
       );
@@ -560,7 +466,7 @@ module.exports = (handlers) => {
     );
     await daiya.say_and_wait('呵呵，我很期待那天喔！');
     await daiya.say_and_wait([
-      race_infos[race_enum.arim_kin].get_colored_name(),
+      arim_kin,
       '……让其成为对现在的我们能跑出的最棒的一场对决吧！',
     ]);
     era.drawLine();
@@ -571,7 +477,7 @@ module.exports = (handlers) => {
     await daiya.say_and_wait('是的，现在也是。');
     await daiya.say_and_wait([
       '一想到可以跟小北一起跑 ',
-      race_infos[race_enum.arim_kin].get_colored_name(),
+      arim_kin,
       '，心跳就一直快得不得了。啊，比起兴奋，更大的应该是期待才对。',
     ]);
     await daiya.say_and_wait(
@@ -614,11 +520,11 @@ module.exports = (handlers) => {
         await daiya.say_and_wait('我一直不停地追逐着前面的背影。', true);
         await daiya.say_and_wait('我现在──要超越这个背影！！', true);
         await daiya.say_and_wait('呀啊啊啊啊啊啊啊啊！！');
-        await say_by_passer_by_and_wait(
+        await me.say_as_passer_by_and_wait(
           '实况',
           `里见光钻领先冲过终点！！凭着${daiya.sex}钻石般的坚硬，击败了其他对手──！`,
         );
-        await say_by_passer_by_and_wait('观众', '哇啊啊啊啊啊啊啊啊！');
+        await me.say_as_passer_by_and_wait('观众', '哇啊啊啊啊啊啊啊啊！');
         await daiya.say_and_wait('呼、呼、呼……');
         await kita.say_and_wait('……啊────！好不甘心喔！我输了────！！');
         await kita.say_and_wait('可是，真的跑得超────开心的！！');
@@ -626,11 +532,11 @@ module.exports = (handlers) => {
           '呵呵呵呵！我也是！我也真的跑得超────开心的！！',
         );
         await daiya.say_and_wait('以后就可以常常体验到这么开心的感觉了呢！');
-        await say_by_passer_by_and_wait(
+        await me.say_as_passer_by_and_wait(
           '观众C',
           '光钻，恭喜你────！你刚才真的很帅气喔────！！',
         );
-        await say_by_passer_by_and_wait(
+        await me.say_as_passer_by_and_wait(
           '观众D',
           '这是一场最棒的比赛！！刚刚真的表现得很好喔，里见──！',
         );
@@ -651,7 +557,7 @@ module.exports = (handlers) => {
         await reporter.say_and_wait('具体来说是怎样的事情呢？');
         await daiya.say_and_wait([
           '像是在 ',
-          race_infos[race_enum.sats_sho].get_colored_name(),
+          sats_sho,
           ' 的时候遇到坏天气……当时真的是超乎想像的恶劣天气。',
         ]);
         await daiya.say_and_wait(
@@ -663,22 +569,19 @@ module.exports = (handlers) => {
         await kita.say_and_wait(
           '嘿嘿嘿，我才要跟你说谢谢呢！但我下次可不会再输啰，小钻！！',
         );
-        await say_by_passer_by_and_wait(
+        await me.say_as_passer_by_and_wait(
           '观众A',
           '喔，说得好啊──！北部！下次我也会为你加油的！',
         );
-        await say_by_passer_by_and_wait('观众C', '光钻也要加油喔──！');
+        await me.say_as_passer_by_and_wait('观众C', '光钻也要加油喔──！');
         await reporter.say_and_wait(
           '两位是从小一起长大的儿时玩伴，之前也对外宣布彼此是竞争对手呢！你们的下一场对决已经决定好了吗？',
         );
         await daiya.say_and_wait('不，还没……');
-        await kita.say_and_wait([
-          race_infos[race_enum.sank_hai].get_colored_name(),
-          '！',
-        ]);
+        await kita.say_and_wait([sank_hai, '！']);
         await kita.say_and_wait([
           '我要参加 ',
-          race_infos[race_enum.sank_hai].get_colored_name(),
+          sank_hai,
           ' 喔！我要在那边雪耻！！',
         ]);
       } else {
@@ -694,19 +597,19 @@ module.exports = (handlers) => {
           '之后我就可以常常像今天一样，跟小钻对决了呢！真的好期待喔！',
         );
         await daiya.say_and_wait('是呀！以后就可以一直跟小北一起比赛了！');
-        await say_by_passer_by_and_wait(
+        await me.say_as_passer_by_and_wait(
           '观众A',
           '很好喔──！北部！下次我也会为你加油的！',
         );
-        await say_by_passer_by_and_wait('观众C', '光钻也要加油喔──！');
+        await me.say_as_passer_by_and_wait('观众C', '光钻也要加油喔──！');
         await kita.say_and_wait([
           '是！！谢谢大家！我的下一场比赛是……',
-          race_infos[race_enum.sank_hai].get_colored_name(),
+          sank_hai,
           '！',
         ]);
       }
-      await say_by_passer_by_and_wait('观众', '喔喔喔喔喔喔喔！');
-      await say_by_passer_by_and_wait(
+      await me.say_as_passer_by_and_wait('观众', '喔喔喔喔喔喔喔！');
+      await me.say_as_passer_by_and_wait(
         '观众A',
         '也就是『春季资深三冠』了吧！一定要拿下啊，北部！！',
       );
@@ -720,17 +623,13 @@ module.exports = (handlers) => {
       await era.printAndWait(
         `然而，里见光钻在看了 ${me.name} 一眼之后，又朝着观众席再重复了一次。`,
       );
-      await daiya.say_and_wait([
-        '我要在 ',
-        race_infos[race_enum.sank_hai].get_colored_name(),
-        ' 和小北对决！！',
-      ]);
-      await say_by_passer_by_and_wait(
+      await daiya.say_and_wait(['我要在 ', sank_hai, ' 和小北对决！！']);
+      await me.say_as_passer_by_and_wait(
         '观众B',
         `里见光钻对北部玄驹，${daiya.couple_title}的对决还要继续啊！`,
       );
-      await say_by_passer_by_and_wait('观众A', [
-        race_infos[race_enum.arim_kin].get_colored_name(),
+      await me.say_as_passer_by_and_wait('观众A', [
+        arim_kin,
         '只是一个开始……喔喔喔！今后我也会追看你们的对决的！！',
       ]);
       await era.printAndWait(
@@ -740,7 +639,7 @@ module.exports = (handlers) => {
         `赛${daiya.uma_sex_title}排成一列面对着观众席。举起双手大大地左右挥动。`,
       );
       await kita.say_and_wait('各位，明年也麻烦继续支持我们了──！！');
-      await say_by_passer_by_and_wait('观众', '哇啊啊啊啊啊啊啊啊啊！');
+      await me.say_as_passer_by_and_wait('观众', '哇啊啊啊啊啊啊啊啊啊！');
       era.drawLine();
       await daiya.say_and_wait('……我擅自做决定，真的很抱歉。');
       await era.printAndWait('回到休息室后，里见光钻深深地鞠躬道歉。');

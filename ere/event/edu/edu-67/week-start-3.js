@@ -46,7 +46,7 @@ module.exports = (handlers) => {
     );
     await daiya.say_and_wait([
       '如果可以的话，我希望能以万全的状态挑战 ',
-      race_infos[race_enum.sats_sho].get_colored_name(),
+      sats_sho,
       '。',
     ]);
     era.printButton('「下一个目标是『皋月赏』？」', 1);
@@ -103,16 +103,16 @@ module.exports = (handlers) => {
     await daiya.say_and_wait('谢谢你！那我们的第一战就是『皋月赏』了呢。');
     await era.printAndWait([
       '决定要挑战经典三冠的话，就必须做好准备面对比 ',
-      race_infos[race_enum.sats_sho].get_colored_name(),
+      sats_sho,
       ' 距离更长的 ',
-      race_infos[race_enum.toky_yus].get_colored_name(),
+      toky_yus,
       ' 和 ',
-      race_infos[race_enum.kiku_sho].get_colored_name(),
+      kiku_sho,
       '。',
     ]);
     await era.printAndWait([
       `现在开始的话，就能有足够的时间仔细准备。你们就一边思考着更以后的目标，一边为明年的 `,
-      race_infos[race_enum.sats_sho].get_colored_name(),
+      sats_sho,
       ' 做好准备吧。',
     ]);
     era.drawLine();
@@ -145,11 +145,11 @@ module.exports = (handlers) => {
     );
     await kita.say_and_wait([
       '虽然我错过了 ',
-      race_infos[race_enum.sats_sho].get_colored_name(),
+      sats_sho,
       ' 和 ',
-      race_infos[race_enum.toky_yus].get_colored_name(),
+      toky_yus,
       '，但 ',
-      race_infos[race_enum.kiku_sho].get_colored_name(),
+      kiku_sho,
       ' 我一定会赢的！！',
     ]);
     await kita.say_and_wait('身为小钻的姐姐，我一定要先在G1拿下胜利才行！');
@@ -157,7 +157,7 @@ module.exports = (handlers) => {
     await kita.say_and_wait('咦！？是喔！？');
     await daiya.say_and_wait([
       '嗯，所以小北在 ',
-      race_infos[race_enum.kiku_sho].get_colored_name(),
+      kiku_sho,
       ' 的表现……请让我好好参考一番吧。',
     ]);
     await kita.say_and_wait(
@@ -194,9 +194,9 @@ module.exports = (handlers) => {
     await era.input();
     await daiya.say_and_wait([
       '呵呵呵，是吧？虽然 ',
-      race_infos[race_enum.sats_sho].get_colored_name(),
+      sats_sho,
       ' 和 ',
-      race_infos[race_enum.toky_yus].get_colored_name(),
+      toky_yus,
       ` ${kita.sex}都很可惜地跑输了……`,
     ]);
     await daiya.say_and_wait(

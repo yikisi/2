@@ -10,9 +10,9 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const DaiyaEduMarks1 = require('#/data/event/edu-event-marks/edu-event-marks-67-99');
 
 module.exports = class extends Edu67UntilRaceStart {
-  async school_atrium(daiya, me, callname, hook, extra, event_object) {
+  async school_atrium(daiya, me, callname, hook, extra, ebj) {
     if (era.get('flag:当前互动角色') !== 67) {
-      add_event(hook.hook, event_object);
+      add_event(hook.hook, ebj);
       return;
     }
     const event_marks = new DaiyaEduMarks1();
