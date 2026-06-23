@@ -7876,7 +7876,7 @@ module.exports = {
      * @param {CharaTalk} inner_urara 「春乌拉拉」
      * @param {CharaTalk} you 玩家
      * @param {string} callname 春乌拉拉对玩家的称呼
-     * @param {number} rank 春乌拉拉的名次
+     * @param {number} rank 比赛名次
      */
     const f = async (urara, inner_urara, you, callname, rank) => {
       await inner_urara.print_and_wait('这个故事，要从哪说起呢？');

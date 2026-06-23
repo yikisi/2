@@ -232,7 +232,7 @@ module.exports = {
   sys_change_pressure,
   /**
    * @param {number} cid
-   * @param {number} val
+   * @param {number} val 实际值/10
    */
   sys_change_weight(cid, val) {
     // BASENAME:12 = 体重偏差

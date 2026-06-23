@@ -29,8 +29,6 @@ class DaiyaEduMarks99 extends EduEventMarks {
   shopping;
   // 在缤纷色彩之中
   in_colorful;
-  // 成就我的存在
-  after_begin;
   // 首次赢G1
   win_g1;
   // 首次跑G1

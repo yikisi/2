@@ -304,7 +304,7 @@ module.exports = class extends CustomizedEdu {
       )['select'] === 1
     ) {
       wait = all_reward_in_event(this.id, { motivation: 1, relation: 10 });
-      sys_change_weight(this.id, get_random_value(800, 1200));
+      sys_change_weight(this.id, get_random_value(80, 120));
     } else {
       wait = all_reward_in_event(this.id, { attr: [0, 0, 0, 10] });
     }

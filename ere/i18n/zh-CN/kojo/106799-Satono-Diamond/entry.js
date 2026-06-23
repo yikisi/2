@@ -1,6 +1,5 @@
 const proxy_kojo_js = require('#/i18n/proxy');
 
-// GENERATED START
 class I18nKojo106799 {
   recruit = proxy_kojo_js(
     require('#/i18n/zh-CN/kojo/106799-Satono-Diamond/rec-67-99.js'),
@@ -8,7 +7,8 @@ class I18nKojo106799 {
   edu = proxy_kojo_js(
     require('#/i18n/zh-CN/kojo/106799-Satono-Diamond/edu-67-99.js'),
   );
-  // GENERATED END
+
+  notify_bs_event = (daiya) => [daiya.get_colored_name(), ' 期待外出……'];
 }
 
 module.exports = I18nKojo106799;
