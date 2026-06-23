@@ -3,7 +3,7 @@ const { get } = require('#/era-electron');
 const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-get-entry');
 const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
 
-const RickyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-55');
+const RickyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-98');
 const { class_enum, ground_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
 

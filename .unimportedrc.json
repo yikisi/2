@@ -1,0 +1,17 @@
+{
+  "entry": [
+    "ere/main.js"
+  ],
+  "extensions": [
+    ".js"
+  ],
+  "ignorePatterns": [
+    "ci/**",
+    "common/**",
+    "engine/**",
+    "node_modules/**",
+    "res/**",
+    "tools/**",
+    "**/*.config.js"
+  ]
+}

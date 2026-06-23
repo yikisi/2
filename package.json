@@ -26,6 +26,7 @@
     "lint-staged": "^15.5.2",
     "prettier": "^3.8.0",
     "prisma": "^5.22.0",
+    "unimported": "^1.31.1",
     "webpack": "^5.104.1",
     "webpack-cli": "^5.1.4",
     "yamljs": "^0.3.0"
@@ -51,5 +52,5 @@
     "webpack": "webpack"
   },
   "type": "commonjs",
-  "version": "3000"
+  "version": "3.0.0"
 }
