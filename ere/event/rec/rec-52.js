@@ -8,7 +8,7 @@ const {
 
 const { add_event, cb_enum } = require('#/event/queue');
 const CustomizedRecruit = require('#/event/rec/rec-common');
-const { get_inner_urara } = require('#/event/snippets/105201');
+const { get_inner_urara } = require('#/event/snippets/105200');
 const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');

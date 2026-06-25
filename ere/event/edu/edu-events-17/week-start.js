@@ -9,7 +9,7 @@ const {
   handle_debuff,
   normal_end,
   transform,
-} = require('#/event/snippets/101701');
+} = require('#/event/snippets/101700');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');

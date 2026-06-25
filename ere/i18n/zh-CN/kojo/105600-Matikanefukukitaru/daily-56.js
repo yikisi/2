@@ -826,7 +826,7 @@ module.exports = {
       //判断 所谓白兴大人
       buffer.push(async () => {
         await kitaru.say_and_wait([
-          kitaru.get_bigger_sibling_sex_title(),
+          kitaru.elder_sibling_sex_title,
           '！我一定会成为一名优秀的赛',
           kitaru.uma_sex_title,
           '的！',
@@ -1490,7 +1490,7 @@ module.exports = {
       ]);
       await kitaru.say_and_wait([
         '小学的时候倒是试着留过长发，但照镜子的时候，总是会想到照片里的',
-        kitaru.get_bigger_sibling_sex_title(),
+        kitaru.elder_sibling_sex_title,
       ]);
       await kitaru.say_and_wait(['不过，如果 ', callname, ' 喜欢的话！']);
       await era.printAndWait([

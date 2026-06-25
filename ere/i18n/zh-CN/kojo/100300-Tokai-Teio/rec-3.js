@@ -81,7 +81,7 @@ module.exports = {
     ]);
     await era.printAndWait([
       '小女孩「哇，谢谢',
-      teio.get_bigger_sibling_sex_title(),
+      teio.elder_sibling_sex_title,
       '！刚刚那个跳跃，好帅气啊！」',
     ]);
     await teio.say_as_unknown_and_wait(
@@ -133,7 +133,7 @@ module.exports = {
     await era.printAndWait([you.get_colored_name(), ' 将身体微向后侧靠。']);
     era.println();
     era.printButton(
-      `「小妹妹，听${teio.get_bigger_sibling_sex_title()}的话吧，你妈妈跟你分开久了会着急的。看，她就在那边向你挥手呢！」`,
+      `「小妹妹，听${teio.elder_sibling_sex_title}的话吧，你妈妈跟你分开久了会着急的。看，她就在那边向你挥手呢！」`,
       1,
     );
     await era.input();

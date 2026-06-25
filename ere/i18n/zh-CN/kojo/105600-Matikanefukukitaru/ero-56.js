@@ -2577,7 +2577,7 @@ module.exports = {
           await kitaru.say_and_wait('命定之人……');
           await kitaru.say_and_wait([
             '……',
-            kitaru.get_bigger_sibling_sex_title(),
+            kitaru.elder_sibling_sex_title,
             '，我……',
           ]);
           await kitaru.say_and_wait('我该怎么办……');

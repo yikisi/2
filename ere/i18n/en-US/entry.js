@@ -95,6 +95,9 @@ module.exports = class extends I18nEntry {
   ui_money_template = '¥%MONEY%';
   ui_get_date = (year, month, week) => ['Week ', week, ' ', month, '/', year];
   ui_month_template = '%MONTH% months';
+  ui_all = 'ALL';
+  ui_end = 'END';
+  ui_cancel = 'CANCEL';
 
   get_ui_cur_chara_info = (
     title,
@@ -128,6 +131,7 @@ module.exports = class extends I18nEntry {
   name = new (require('#/i18n/en-US/chara/names'))();
 
   kojo = new (require('#/i18n/en-US/kojo/entry'))();
+  timon = new (require('#/i18n/en-US/timon/entry'))();
 
   tb_abl = new (require('#/i18n/en-US/table/abl'))();
 

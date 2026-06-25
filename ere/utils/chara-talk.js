@@ -214,14 +214,6 @@ class CharaTalk {
     };
   }
 
-  get_bigger_sibling_sex_title = () =>
-    this.sex_code === 1 ? i18n().name.elder_brother : i18n().name.elder_sister;
-
-  get_smaller_sibling_sex_title = () =>
-    this.sex_code === 1
-      ? i18n().name.younger_brother
-      : i18n().name.younger_sister;
-
   /**
    * 事件从该角色视角展开时的旁白
    * @param {TextContent} _content

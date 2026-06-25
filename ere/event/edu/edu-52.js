@@ -15,7 +15,7 @@ const { add_event } = require('#/event/queue');
 const {
   check_high_relation,
   get_inner_urara,
-} = require('#/event/snippets/105201');
+} = require('#/event/snippets/105200');
 const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');

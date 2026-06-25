@@ -317,7 +317,7 @@ module.exports = class extends CustomizedEdu {
       case 'beginning':
         await print_title_with_kojo(
           this.#kojo,
-          'beginning',
+          'we_beginning',
           kita,
           me,
           callname,

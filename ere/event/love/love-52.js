@@ -20,7 +20,7 @@ const { add_event } = require('#/event/queue');
 const {
   check_high_relation,
   get_inner_urara,
-} = require('#/event/snippets/105201');
+} = require('#/event/snippets/105200');
 const masturbate = require('#/event/snippets/masturbate');
 const print_event_name = require('#/event/snippets/print-event-name');
 const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');

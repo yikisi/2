@@ -22,7 +22,7 @@ const CustomizedDaily = require('#/event/daily/daily-common');
 const {
   check_high_relation,
   get_inner_urara,
-} = require('#/event/snippets/105201');
+} = require('#/event/snippets/105200');
 const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
 const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');

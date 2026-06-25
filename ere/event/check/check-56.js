@@ -142,13 +142,11 @@ module.exports = class extends CustomizedCheck {
     if (era.get('cflag:56:招募状态') !== recruit_flags.yes) {
       return;
     }
-    const edu_weeks = era.get('cflag:56:育成回合计时'),
-      event_obj_special = new EventObject(56, cb_enum.edu, true).set_arg(
-        edu_weeks,
-      ),
-      event_obj = new EventObject(56, cb_enum.edu),
-      edu_marks = new KitaruEduMarks(),
-      love = era.get('love:56');
+    const edu_weeks = era.get('cflag:56:育成回合计时');
+    const ebj_s = new EventObject(56, cb_enum.edu, true).set_arg(edu_weeks);
+    const ebj = new EventObject(56, cb_enum.edu);
+    const edu_marks = new KitaruEduMarks();
+    const love = era.get('love:56');
     if (!edu_marks.love25 && love >= 25) {
       edu_marks.love25 = 1;
       add_event(
@@ -163,21 +161,21 @@ module.exports = class extends CustomizedCheck {
           edu_weeks,
           'hot_line',
           event_hooks.out_start,
-          event_obj,
+          ebj,
         );
         check_and_add_event(
           edu_marks,
           edu_weeks,
           'god_study',
           event_hooks.office_study,
-          event_obj,
+          ebj,
         );
         check_and_add_event(
           edu_marks,
           edu_weeks,
           'luck_name',
           event_hooks.office_study,
-          event_obj,
+          ebj,
         );
       }
       if (love > 49) {
@@ -186,25 +184,24 @@ module.exports = class extends CustomizedCheck {
           edu_weeks,
           'miso_fortune',
           event_hooks.office_cook,
-          event_obj,
+          ebj,
         );
       }
       if (
         edu_marks.game_times === 5 &&
-        era.get(`exp:56:性交次数`) > 3 &&
-        era.get(`exp:56:性爱次数`) > era.get('exp:56:睡奸次数') &&
+        era.get(`exp:56:性交次数`) - era.get('exp:56:睡奸次数') > 3 &&
         era.get('love:56') >= 75
       ) {
         edu_marks.game_times = 6;
         add_event(
           event_hooks.office_game,
-          event_obj.copy().set_arg('fortune_game_duel_2'),
+          ebj.copy().set_arg('fortune_game_duel_2'),
         );
       }
       edu_marks.luck_train = get_random_entry(base_attr_list) + 1;
       switch (edu_weeks) {
         case 14: // 入局
-          add_event(event_hooks.week_start, event_obj_special);
+          add_event(event_hooks.week_start, ebj_s);
           break;
         // 出道战前后剧情
         case 28: // 橱窗里的既视感
@@ -213,74 +210,68 @@ module.exports = class extends CustomizedCheck {
         case 42: // 所谓白兴大人
         case 47 + 1: // 选召之人
         case 47 + 5: // 仪式理论 -> 这里解锁有关待兼福来上buff系统
-          add_event(event_hooks.week_start, event_obj_special);
+          add_event(event_hooks.week_start, ebj_s);
           break;
         // 青叶赏前后剧情
         case 47 + 18: // 门槛前
-          add_event(event_hooks.week_start, event_obj_special);
+          add_event(event_hooks.week_start, ebj_s);
           break;
         // 日本德比前后剧情
         case 47 + 21: //开运投射
         case 47 + 29: // 夏季合宿（经典年）
         case 47 + 32: // 坠入凡间的星
-          add_event(event_hooks.week_start, event_obj_special);
+          add_event(event_hooks.week_start, ebj_s);
           break;
         // 神户新闻杯前后剧情
         case 47 + 39: // 两世之间
-          add_event(event_hooks.week_start, event_obj_special);
+          add_event(event_hooks.week_start, ebj_s);
           break;
         // 菊花赏前后剧情
         case 47 + 41: // 神化
           if (
             check_aim_race(RaceHistory.get(56).get(), race_enum.kiku_sho, 1, 1)
           ) {
-            add_event(event_hooks.week_start, event_obj_special);
+            add_event(event_hooks.week_start, ebj_s);
           }
           break;
         case 95 + 1: // 神乐
         case 95 + 6: // 圣瓦伦汀的局外人
-          add_event(event_hooks.week_start, event_obj_special);
+          add_event(event_hooks.week_start, ebj_s);
           break;
         // 金鯱赏前后剧情
         case 95 + 11: // 不稳定星等
         case 95 + 12: // 落入鲸鱼之腹
         case 95 + 14: // 背负众人愿望的少女
-          add_event(event_hooks.week_start, event_obj_special);
+          add_event(event_hooks.week_start, ebj_s);
           break;
         // 宝冢纪念前后剧情
         case 95 + 25: // 无愿之愿
         case 95 + 29: // 第二次夏季合宿
-          add_event(event_hooks.week_start, event_obj_special);
+          add_event(event_hooks.week_start, ebj_s);
           break;
         case 95 + 31: // 林中参拜
         case 95 + 37: // 每个人的天命
           if (
             check_aim_race(RaceHistory.get(56).get(), race_enum.kiku_sho, 1, 1)
           ) {
-            add_event(event_hooks.week_start, event_obj_special);
+            add_event(event_hooks.week_start, ebj_s);
           }
           break;
         case 95 + 48: // 摘下胜利之星 or 名叫待兼福来的星星
-          add_event(event_hooks.celebration, event_obj_special);
+          add_event(event_hooks.celebration, ebj_s);
       }
       check_and_register_aim_race(56, aim_races, edu_weeks);
       if (era.get('status:56:运势依赖')) {
-        add_event(
-          event_hooks.week_start,
-          event_obj.copy().set_arg('fortune_week'),
-        );
+        add_event(event_hooks.week_start, ebj.copy().set_arg('fortune_week'));
       }
     } else if (edu_weeks === 143 + 1) {
       // Farewell Matikane……
-      add_event(event_hooks.week_start, event_obj_special);
+      add_event(event_hooks.week_start, ebj_s);
       // 了局
-      add_event(event_hooks.week_end, event_obj_special);
+      add_event(event_hooks.week_end, ebj_s);
     } else if (edu_weeks === 143 + 9) {
       // 两个世界的主人
-      add_event(
-        event_hooks.week_start,
-        event_obj_special.copy().set_arg('palace'),
-      );
+      add_event(event_hooks.week_start, ebj_s.copy().set_arg('palace'));
     }
   }
 

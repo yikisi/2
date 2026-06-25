@@ -110,7 +110,7 @@ module.exports = {
       await era.printAndWait(`${you.name} 会说——`);
       era.printButton(`「……或许不是我现在这个身份能说的」（升级关系）`, 1);
       era.printButton(
-        `「一个优秀活泼可爱，但淘气的${teio.child_sex_title}……或者${teio.get_smaller_sibling_sex_title()}吧」（暂不升级）`,
+        `「一个优秀活泼可爱，但淘气的${teio.child_sex_title}……或者${teio.younger_sibling_sex_title}吧」（暂不升级）`,
         2,
       );
       ret.push(await era.input());

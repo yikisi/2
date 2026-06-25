@@ -9,7 +9,7 @@ const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
 const CustomizedDaily = require('#/event/daily/daily-common');
 const { add_event, cb_enum } = require('#/event/queue');
-const { set_luck_result } = require('#/event/snippets/105601');
+const { set_luck_result } = require('#/event/snippets/105600');
 const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 const quick_into_sex = require('#/event/snippets/quick-into-sex');
 

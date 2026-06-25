@@ -8,7 +8,7 @@ const check_and_add_event = require('#/event/check/snippets/check-and-add-event'
 const check_and_register_aim_race = require('#/event/check/snippets/check-and-register-aim-race');
 const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
 const { add_event, cb_enum } = require('#/event/queue');
-const { i_pama_yandere } = require('#/event/snippets/106401');
+const { i_pama_yandere } = require('#/event/snippets/106400');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 
 const { get_random_entry } = require('#/utils/list-utils');

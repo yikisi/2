@@ -1671,7 +1671,7 @@ module.exports = {
       await maru.say_and_wait(
         `——说起来，小特${
           maru.couple_title
-        }成长的比预想之中还要迅速呢，看到后辈们这么努力的样子，连${maru.get_bigger_sibling_sex_title()}我也有些兴奋起来了呢。`,
+        }成长的比预想之中还要迅速呢，看到后辈们这么努力的样子，连${maru.elder_sibling_sex_title}我也有些兴奋起来了呢。`,
       );
       await era.printAndWait(
         `想着一定要找个借口抱着${maru.uma_sex_title}取暖，缩着身体忍受着寒冷。`,
@@ -1954,7 +1954,7 @@ module.exports = {
           break;
         case 2:
           await maru.say_and_wait(
-            `虾米？${callname}是想和${maru.get_bigger_sibling_sex_title()}我约会吗?`,
+            `虾米？${callname}是想和${maru.elder_sibling_sex_title}我约会吗?`,
           );
           await maru.say_and_wait('真心急呢，不好好计划一下约会的路线可不行呢');
           await maru.say_and_wait('那么就开着小塔');
@@ -2054,7 +2054,7 @@ module.exports = {
       await maru.say_and_wait(`不过从${callname}的反应看来。`);
       await maru.say_and_wait(`似乎很受欢迎的样子。`);
       await maru.say_and_wait(
-        `嗯，看上去${maru.get_bigger_sibling_sex_title()}我也一直站在潮流的第一线呢。`,
+        `嗯，看上去${maru.elder_sibling_sex_title}我也一直站在潮流的第一线呢。`,
       );
       await era.printAndWait(`${maru.sex}的心情似乎变得更好了。`);
       await you.say_and_wait(
@@ -2082,7 +2082,7 @@ module.exports = {
           `像是遇到了什么头疼的事情，${maru.name}直直的盯着${you.name}看。`,
         );
         await maru.say_and_wait(
-          `如果 ${callname} 变成这样放荡的人，${maru.get_bigger_sibling_sex_title()}我也是会伤心的哦？`,
+          `如果 ${callname} 变成这样放荡的人，${maru.elder_sibling_sex_title}我也是会伤心的哦？`,
         );
         await you.say_and_wait(`非常抱歉，绝对没有下次了。`);
         await maru.say_and_wait(
@@ -2092,7 +2092,7 @@ module.exports = {
       await you.say_and_wait(`说起来，${maru.name}。`);
       await you.say_and_wait(`虽然有些突兀，不过有个问题困扰了我很久。`);
       await maru.say_and_wait(
-        `哎呀，${callname}也有向${maru.get_bigger_sibling_sex_title()}我请教的时刻吗？`,
+        `哎呀，${callname}也有向${maru.elder_sibling_sex_title}我请教的时刻吗？`,
       );
       await maru.say_and_wait(
         `放心吧，我会好好把我知道的部分都告诉${you.name}的。`,
@@ -2429,7 +2429,7 @@ module.exports = {
       await era.input();
       await maru.say_and_wait(`虾米？${callname}对我的评价这么高吗？`);
       era.printButton(
-        `像这样温柔又成熟的大${maru.get_bigger_sibling_sex_title()}可是相当少见呢。`,
+        `像这样温柔又成熟的大${maru.elder_sibling_sex_title}可是相当少见呢。`,
         1,
       );
       await era.input();
@@ -4024,7 +4024,7 @@ module.exports = {
       );
       await you.say_and_wait(`所以比平常要更加认真一点吧。`);
       await maru.say_and_wait(
-        `我倒。既然${callname}都这么说了，那么${maru.get_bigger_sibling_sex_title()}我不认真一点也不行呢⭐`,
+        `我倒。既然${callname}都这么说了，那么${maru.elder_sibling_sex_title}我不认真一点也不行呢⭐`,
       );
       era.printButton(`「这不是当然的吗？」`, 1);
       await era.input();
@@ -4142,7 +4142,7 @@ module.exports = {
       await maru.say_and_wait(
         `虽然自认不会错过${callname}的身影，不过左看右看都找不到${
           callname
-        }的身影，${maru.get_bigger_sibling_sex_title()}我还真是有点生无可恋呢><。`,
+        }的身影，${maru.elder_sibling_sex_title}我还真是有点生无可恋呢><。`,
       );
       await era.printAndWait(
         `是搞错了入口吧，不，说不定大概${you.name}也搞错了？`,
@@ -4220,7 +4220,7 @@ module.exports = {
         `像是心中的一块大石终于落到了地上，${you.name}长长的呼出了一口气。`,
       );
       await maru.say_and_wait(
-        `总算找到${you.name}了，${maru.get_bigger_sibling_sex_title()}我也是松了一口气呢。`,
+        `总算找到${you.name}了，${maru.elder_sibling_sex_title}我也是松了一口气呢。`,
       );
       await you.say_and_wait(`抱歉，虽然我也想尽快和${maru.name}汇合，不过——`);
       await maru.say_and_wait(
@@ -4236,7 +4236,7 @@ module.exports = {
       );
       await maru.say_and_wait(`哎呀，这是什么新型告白方式吗？`);
       await maru.say_and_wait(
-        `${maru.get_bigger_sibling_sex_title()}我也是稍～微有点心动了呢。`,
+        `${maru.elder_sibling_sex_title}我也是稍～微有点心动了呢。`,
       );
       await maru.say_and_wait(`既然这样的话，${callname}就不要离开我了哦？`);
       await era.printAndWait(
@@ -4519,7 +4519,7 @@ module.exports = {
         );
         await you.say_and_wait(`但是${you.name}`);
         await you.say_and_wait(
-          `虽然也是作为知心大${maru.get_bigger_sibling_sex_title()}帮助困扰的${maru.uma_sex_title}们。`,
+          `虽然也是作为知心大${maru.elder_sibling_sex_title}帮助困扰的${maru.uma_sex_title}们。`,
         );
         await you.say_and_wait(
           `但是没有做好善后工作，完全没有意识到${maru.uma_sex_title}们把${you.name}当成了逃避一切问题用的避风港。`,
@@ -6566,7 +6566,7 @@ module.exports = {
       await you.say_and_wait(`一起去糖果店吧？`);
       await era.printAndWait(`平静的语气连自己都感到了害怕。`);
       await maru.say_and_wait(
-        `是呢。哎呀～${maru.get_bigger_sibling_sex_title()}都差点忘了呢，真实多亏${callname}了♪`,
+        `是呢。哎呀～${maru.elder_sibling_sex_title}都差点忘了呢，真实多亏${callname}了♪`,
       );
       await era.printAndWait(
         `刚才的压迫感就像什么也没发生一样消失了，话说${
@@ -6959,7 +6959,7 @@ module.exports = {
         }这么活泼.`,
       );
       await era.printAndWait(
-        `虽然一直以成熟的${maru.get_bigger_sibling_sex_title()}自居,不过在${you.name}面前也开始展现出了${maru.sex}的另一面.`,
+        `虽然一直以成熟的${maru.elder_sibling_sex_title}自居,不过在${you.name}面前也开始展现出了${maru.sex}的另一面.`,
       );
       await maru.say_and_wait(
         `虽说也有我按捺不住兴奋的心情提前了一个小时到这里太无聊心血来潮的缘故.`,
@@ -8697,13 +8697,13 @@ module.exports = {
       );
       await maru.say_and_wait(`不愧是${callname}呢，一下子就猜出了我是谁。`);
       await maru.say_and_wait(
-        `${maru.get_bigger_sibling_sex_title()}我从没有这么喜欢过一个人呢♪`,
+        `${maru.elder_sibling_sex_title}我从没有这么喜欢过一个人呢♪`,
       );
       await maru.say_and_wait(`这就是所谓的爱吗♪`);
       era.printButton(`「${maru.name}我有话想对${you.name}说，所以」`, 1);
       await era.input();
       await maru.say_and_wait(
-        `哼哼～${callname}想对${maru.get_bigger_sibling_sex_title()}撒娇吗？`,
+        `哼哼～${callname}想对${maru.elder_sibling_sex_title}撒娇吗？`,
       );
       await maru.say_and_wait(`不管是什么恶……`);
       era.printButton(`「请跟我永远生活在一起」`, 1);
@@ -8923,7 +8923,7 @@ module.exports = {
       await maru.say_and_wait(
         `嗯嗯，已经有两个小时没看到${
           callname
-        }了，${maru.get_bigger_sibling_sex_title()}我真的好寂寞呢～`,
+        }了，${maru.elder_sibling_sex_title}我真的好寂寞呢～`,
       );
       await maru.say_and_wait(`作为补偿的话，今天下午和我一起约会吧♪`);
       era.printButton(`「其实我也因为好～久没看到${maru.name}所以不安了」`, 1);
