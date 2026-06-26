@@ -2,7 +2,10 @@ const era = require('#/era-electron');
 
 const sys_get_chara_pseudo = require('#/system/chara/sys-get-chara-pseudo');
 const { update_kiss_exp } = require('#/system/ero/sys-calc-ero-exp');
-const { get_sex_acceptable } = require('#/system/ero/sys-calc-ero-status');
+const {
+  check_pregnant_unprotect,
+  get_sex_acceptable,
+} = require('#/system/ero/sys-calc-ero-status');
 const { sys_change_weight } = require('#/system/sys-calc-base-cflag');
 const {
   sys_get_callname,
@@ -951,7 +954,7 @@ module.exports = class extends CustomizedEdu {
           me,
           callname,
           check_high_relation(),
-          get_sex_acceptable(this.id) >= 0,
+          get_sex_acceptable(this.id) >= 0 && check_pregnant_unprotect(0),
         );
         if (temp === 3) {
           if (era.get('flag:惩戒力度') >= 2 && urara.sex_code === 0) {
@@ -1032,7 +1035,7 @@ module.exports = class extends CustomizedEdu {
           me,
           callname,
           check_high_relation(),
-          get_sex_acceptable(this.id) >= 0,
+          get_sex_acceptable(this.id) >= 0 && check_pregnant_unprotect(0),
           race_infos[race_enum.arim_kin].get_colored_name(),
         );
         if (temp === 1) {

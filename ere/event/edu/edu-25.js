@@ -611,6 +611,16 @@ module.exports = class extends CustomizedEdu {
           add_event(hook.hook, ebj);
           return;
         }
+        await print_title_with_kojo(
+          this.#kojo,
+          'ws_47_29',
+          coffee,
+          get_chara_talk(32),
+          me,
+          callname,
+          sys_get_colored_callname(32, 0),
+          sys_get_colored_callname(32, this.id),
+        );
         break;
       case 47 + 30:
         if (

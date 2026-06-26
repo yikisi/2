@@ -1,6 +1,9 @@
 const era = require('#/era-electron');
 
-const { get_sex_acceptable } = require('#/system/ero/sys-calc-ero-status');
+const {
+  check_pregnant_unprotect,
+  get_sex_acceptable,
+} = require('#/system/ero/sys-calc-ero-status');
 const {
   sys_change_lust,
   sys_change_motivation,
@@ -116,7 +119,7 @@ class CustomizedEdu extends CustomizedEvent {
         'pl_future',
         chara,
         me,
-        get_sex_acceptable(chara.id) >= 0,
+        get_sex_acceptable(chara.id) >= 0 && check_pregnant_unprotect(0),
       );
       era.set('flag:4', location_enum.office);
     }
@@ -261,7 +264,9 @@ class CustomizedEdu extends CustomizedEvent {
       } else if (Math.random() < 0.02) {
         await era.waitAnyKey();
         const want_sex =
-          era.get(`love:${this.id}`) >= 50 && get_sex_acceptable(this.id) >= 0;
+          era.get(`love:${this.id}`) >= 50 &&
+          get_sex_acceptable(this.id) >= 0 &&
+          check_pregnant_unprotect(0);
         if (
           (
             await print_title_with_kojo(
@@ -682,12 +687,24 @@ class CustomizedEdu extends CustomizedEvent {
     }
     await print_title_with_kojo(i18n().timon.edu, key, chara, me);
   }
+
   async crazy_fan_end() {
     await print_title_with_kojo.ending(
       i18n().timon.ending,
       'crazy_fan_end',
       get_chara_talk(this.id),
       get_chara_talk(0),
+    );
+  }
+
+  /**
+   * 检查夏合宿事件时是否不位于海边或处于远程状态
+   * @returns {boolean}
+   */
+  get summer_non_beach() {
+    return (
+      era.get(`cflag:${this.id}:位置`) !== location_enum.beach ||
+      era.get(`cflag:${this.id}:位置`) !== era.get('cflag:0:位置')
     );
   }
 

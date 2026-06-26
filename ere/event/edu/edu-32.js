@@ -3,7 +3,10 @@ const era = require('#/era-electron');
 const sys_hurt_uma = require('#/system/chara/sys-hurt-uma');
 const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
 const { update_kiss_exp } = require('#/system/ero/sys-calc-ero-exp');
-const { get_sex_acceptable } = require('#/system/ero/sys-calc-ero-status');
+const {
+  check_pregnant_unprotect,
+  get_sex_acceptable,
+} = require('#/system/ero/sys-calc-ero-status');
 const {
   begin_and_init_ero,
   end_ero_and_show_result,
@@ -828,7 +831,8 @@ module.exports = class extends CustomizedEdu {
           get_random_value(1, 5),
           era.get('exp:32:性爱次数') > 0 &&
             era.get('relation:32:0') > 225 &&
-            get_sex_acceptable(this.id),
+            get_sex_acceptable(this.id) >= 0 &&
+            check_pregnant_unprotect(0),
         ];
         await print_title_with_kojo(
           this.#kojo,

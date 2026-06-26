@@ -69,94 +69,92 @@ module.exports = class extends CustomizedCheck {
       );
     }
     if (edu_weeks < 3 * 48) {
-      const event_marks = new MayaEduMarks();
-      const event_obj = new EventObject(24, cb_enum.edu);
-      const event_obj_special = new EventObject(24, cb_enum.edu, true).set_arg(
-        edu_weeks,
-      );
+      const edu_marks = new MayaEduMarks();
+      const ebj = new EventObject(24, cb_enum.edu);
+      const ebj_s = new EventObject(24, cb_enum.edu, true).set_arg(edu_weeks);
       check_and_add_event(
-        event_marks,
+        edu_marks,
         edu_weeks,
-        'adventure_game',
+        'adv_game',
         event_hooks.school_atrium,
-        event_obj,
+        ebj,
       );
       check_and_add_event(
-        event_marks,
+        edu_marks,
         edu_weeks,
         'star_wish',
         event_hooks.school_atrium,
-        event_obj,
+        ebj,
       );
       check_and_add_event(
-        event_marks,
+        edu_marks,
         edu_weeks,
         'sweet_present',
         event_hooks.school_atrium,
-        event_obj,
+        ebj,
       );
       check_and_add_event(
-        event_marks,
+        edu_marks,
         edu_weeks,
         'dokidoki_live',
         event_hooks.back_school,
-        event_obj,
+        ebj,
       );
-      if (event_marks.dokidoki_live === 2) {
+      if (edu_marks.dokidoki_live === 2) {
         check_and_add_event(
-          event_marks,
+          edu_marks,
           edu_weeks,
           'excited_live',
           event_hooks.back_school,
-          event_obj,
+          ebj,
         );
       }
-      if (event_marks.excited_live === 2) {
+      if (edu_marks.excited_live === 2) {
         check_and_add_event(
-          event_marks,
+          edu_marks,
           edu_weeks,
           'kirakira_kessin',
           event_hooks.out_start,
-          event_obj,
+          ebj,
         );
       }
       check_and_add_event(
-        event_marks,
+        edu_marks,
         edu_weeks,
         'taisecu_hito',
         event_hooks.back_school,
-        event_obj,
+        ebj,
       );
       check_and_add_event(
-        event_marks,
+        edu_marks,
         edu_weeks,
         'race_lesson',
         event_hooks.back_school,
-        event_obj,
+        ebj,
       );
       check_and_add_event(
-        event_marks,
+        edu_marks,
         edu_weeks,
         'model_secret',
         event_hooks.office_study,
-        event_obj,
+        ebj,
       );
       check_and_add_event(
-        event_marks,
+        edu_marks,
         edu_weeks,
         'maya_reading',
         event_hooks.office_study,
-        event_obj,
+        ebj,
       );
       if (
         race_infos[sys_reg_race(24).curr.race]?.race_class === class_enum.G1
       ) {
         check_and_add_event(
-          event_marks,
+          edu_marks,
           edu_weeks,
           'maya_takeoff',
           event_hooks.office_study,
-          event_obj,
+          ebj,
         );
       }
 
@@ -167,10 +165,7 @@ module.exports = class extends CustomizedCheck {
           .findLast((e) => e.race === race_enum.begin_race)?.weeks +
           4
       ) {
-        add_event(
-          event_hooks.week_start,
-          event_obj_special.copy().set_arg('date'),
-        );
+        add_event(event_hooks.week_start, ebj_s.copy().set_arg('date'));
       }
 
       switch (edu_weeks) {
@@ -186,17 +181,17 @@ module.exports = class extends CustomizedCheck {
         case 95 + 20: // 迈向夕阳
         case 95 + 29: // 夏季合宿（资深年）
         case 95 + 48: // 圣诞节
-          add_event(event_hooks.week_start, event_obj_special);
+          add_event(event_hooks.week_start, ebj_s);
           break;
         case 47 + 32: // 夏季合宿（经典年）结束
         case 95 + 32: // 夏季合宿（资深年）结束
-          add_event(event_hooks.week_end, event_obj_special);
+          add_event(event_hooks.week_end, ebj_s);
           break;
         case 95 + 1: // 新年参拜
-          add_event(event_hooks.out_church, event_obj_special);
+          add_event(event_hooks.out_church, ebj_s);
           break;
         case 95 + 2: // 抽奖试手气
-          add_event(event_hooks.out_start, event_obj_special);
+          add_event(event_hooks.out_start, ebj_s);
       }
       check_and_register_aim_race(24, aim_races, edu_weeks);
     } else if (edu_weeks === 143 + 9) {

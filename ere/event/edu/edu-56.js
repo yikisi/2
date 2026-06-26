@@ -3,6 +3,10 @@ const era = require('#/era-electron');
 const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
 const { update_kiss_exp } = require('#/system/ero/sys-calc-ero-exp');
 const {
+  check_pregnant_unprotect,
+  get_sex_acceptable,
+} = require('#/system/ero/sys-calc-ero-status');
+const {
   begin_and_init_ero,
   end_ero_and_train,
   set_palam_to_max,
@@ -42,7 +46,6 @@ const {
 } = require('#/data/train-const');
 
 const { i18n } = require('#/i18n/selector');
-const { get_sex_acceptable } = require('#/system/ero/sys-calc-ero-status');
 
 module.exports = class extends CustomizedEdu {
   get #kojo() {
@@ -72,7 +75,7 @@ module.exports = class extends CustomizedEdu {
             kitaru,
             me,
             callname,
-            get_sex_acceptable(this.id),
+            get_sex_acceptable(this.id) && check_pregnant_unprotect(0),
           )
         )[0] === 2
       ) {

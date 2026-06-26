@@ -3819,7 +3819,7 @@ module.exports = {
         era.println();
 
         era.printButton('「身为速子的豚鼠，应该如此……」', 1);
-        era.printButton('「……但是，我会努力去追上速子的！」', 1);
+        era.printButton('「……但是，我会努力去追上速子的！」', 2);
         await era.input();
 
         await era.printAndWait([

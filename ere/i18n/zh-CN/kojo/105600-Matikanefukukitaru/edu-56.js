@@ -2552,18 +2552,18 @@ module.exports = {
     const title = '影中的福';
     /**
      * @param {CharaTalk} kitaru 待兼福来
-     * @param {CharaTalk} me 玩家
+     * @param {CharaTalk} you 玩家
      * @param {string} callname 待兼福来对玩家的称呼
      * @param {number} rank 比赛名次
      */
-    const f = async (kitaru, me, callname, rank) => {
+    const f = async (kitaru, you, callname, rank) => {
       await era.printAndWait([
         '开始，',
         kitaru.get_colored_name(),
         ' 的走位和步态控制都很优秀，尽管平日里的',
         kitaru.sex,
         '是一个脱线的性格，但 ',
-        me.get_colored_name(),
+        you.get_colored_name(),
         ' 的教导，',
         kitaru.sex,
         '还是有铭记于心的。',
@@ -2585,7 +2585,7 @@ module.exports = {
           ' 跑姿出现了明显的变形。」',
         ]);
         await era.printAndWait([
-          me.get_colored_name(),
+          you.get_colored_name(),
           ' 听见广播里如此解说。',
         ]);
         await era.printAndWait([
@@ -2606,7 +2606,7 @@ module.exports = {
           '在 ',
           kitaru.get_colored_name(),
           ' 以一种几近踉跄的跑姿冲过终点线之后，',
-          me.get_colored_name(),
+          you.get_colored_name(),
           ' 几乎是一步没停的冲向了赛场，在和周围待命的医生确认没有问题之后，直接抱着',
           kitaru.sex,
           '来到了休息室。',
@@ -2618,14 +2618,14 @@ module.exports = {
           ' 的速度突然下降了」',
         ]);
         await era.printAndWait([
-          me.get_colored_name(),
+          you.get_colored_name(),
           ' 听见广播里如此解说。',
         ]);
         await era.printAndWait([
           '在 ',
           kitaru.get_colored_name(),
           ' 以一种几近踉跄的跑姿冲过终点线之后，',
-          me.get_colored_name(),
+          you.get_colored_name(),
           ' 几乎是一步没停的冲向了赛场，在和周围待命的医生确认没有问题之后，直接抱着',
           kitaru.sex,
           '来到了休息室。',
@@ -2640,7 +2640,7 @@ module.exports = {
         '，正双脚赤裸的坐在椅子上。',
       ]);
       await era.printAndWait([
-        me.get_colored_name(),
+        you.get_colored_name(),
         ' 不放心，还是让',
         kitaru.sex,
         '脱下鞋袜仔细检查，也就是进行触诊。',
@@ -2650,7 +2650,7 @@ module.exports = {
       );
       await era.printAndWait([
         '不过 ',
-        me.get_colored_name(),
+        you.get_colored_name(),
         ' 并没有多少心思去欣赏 ',
         kitaru.get_colored_name(),
         ' 的双足，只是再三确认刚才的情况并非骨折或者是扭伤。',
@@ -2660,7 +2660,7 @@ module.exports = {
       await era.input();
       await era.printAndWait([
         '似曾相识，开始选拔赛的时候也有类似的情况，只不过，',
-        me.get_colored_name(),
+        you.get_colored_name(),
         ' 当时只当成是 ',
         kitaru.get_colored_name(),
         ' 对冲刺时机的掌握并不熟练。',
@@ -2679,7 +2679,7 @@ module.exports = {
       await kitaru.say_and_wait('不要……');
       await era.printAndWait([kitaru.sex, '双唇紧抿，几乎要咬出血来。']);
       await era.printAndWait([
-        me.get_colored_name(),
+        you.get_colored_name(),
         ' 鲜少在这位赛',
         kitaru.uma_sex_title,
         '口中听到过拒绝。',
@@ -2706,7 +2706,7 @@ module.exports = {
         await era.printAndWait('触景生情，以及选择性遗忘，典型的PTSD症状。');
       } else {
         await era.printAndWait([
-          me.get_colored_name(),
+          you.get_colored_name(),
           ' 尝试以更为柔和的口吻，继续追问，直到……',
         ]);
         await kitaru.say_and_wait('不！不！不是我的错！');
@@ -2740,12 +2740,12 @@ module.exports = {
           '结结实实的一下，陷入应激状态的 ',
           kitaru.get_colored_name(),
           ' 给了 ',
-          me.get_colored_name(),
+          you.get_colored_name(),
           ' 一拳。',
         ]);
         await era.printAndWait([
           '幸好，在看到 ',
-          me.get_colored_name(),
+          you.get_colored_name(),
           ' 倒在地上的同时，',
           kitaru.uma_sex_title,
           '原本浑浊的双眼总算恢复了清明。',
@@ -2754,7 +2754,7 @@ module.exports = {
         await kitaru.say_and_wait([callname, '！没事吧！我现在就去叫医生！']);
         await era.printAndWait([
           '并无大碍？',
-          me.get_colored_name(),
+          you.get_colored_name(),
           ' 也的确得到了自己想要知道的东西。',
         ]);
         await era.printAndWait(
@@ -2762,7 +2762,7 @@ module.exports = {
         );
       }
       await era.printAndWait([
-        me.get_colored_name(),
+        you.get_colored_name(),
         ' 陷入了沉思，精神上的缺陷远比肉体上的问题更加棘手。',
       ]);
       era.println();
@@ -3785,18 +3785,18 @@ module.exports = {
     const title = '绑定';
     /**
      * @param {CharaTalk} kitaru 待兼福来
-     * @param {CharaTalk} me 玩家
+     * @param {CharaTalk} you 玩家
      * @param {string} callname 待兼福来对玩家的称呼
      */
-    const f = async (kitaru, me, callname) => {
-      await me.say_as_passer_by_and_wait('解说', [
+    const f = async (kitaru, you, callname) => {
+      await you.say_as_passer_by_and_wait('解说', [
         kitaru.get_colored_name(),
         ' 能追赶上吗？',
       ]);
-      await me.say_as_passer_by_and_wait('解说', '好快！好快！太快了！');
-      await me.say_as_passer_by_and_wait('解说', '五马身！三马身！一马身！');
-      await me.say_as_passer_by_and_wait('解说', '超越了！');
-      await me.say_as_passer_by_and_wait('解说', [
+      await you.say_as_passer_by_and_wait('解说', '好快！好快！太快了！');
+      await you.say_as_passer_by_and_wait('解说', '五马身！三马身！一马身！');
+      await you.say_as_passer_by_and_wait('解说', '超越了！');
+      await you.say_as_passer_by_and_wait('解说', [
         '获胜者是 ',
         kitaru.get_colored_name(),
         '！',
@@ -3815,18 +3815,18 @@ module.exports = {
       if (era.get('love:56') >= 50) {
         await era.printAndWait([
           '没等 ',
-          me.get_colored_name(),
+          you.get_colored_name(),
           ' 回答，',
           kitaru.get_colored_name(),
           ' 就已经跳到了 ',
-          me.get_colored_name(),
+          you.get_colored_name(),
           ' 的身上。',
         ]);
         await era.printAndWait([
           '坐在了 ',
-          me.get_colored_name(),
+          you.get_colored_name(),
           ' 的腿上，等着 ',
-          me.get_colored_name(),
+          you.get_colored_name(),
           ' 用毛巾开始擦拭起',
           kitaru.sex,
           '汗津津的头发。',
@@ -3835,7 +3835,7 @@ module.exports = {
           '终于，在察觉到怀中',
           kitaru.uma_sex_title,
           '的臀部开始不安分的磨蹭起来的时候，',
-          me.get_colored_name(),
+          you.get_colored_name(),
           ' 拍了一下 ',
           kitaru.get_colored_name(),
           ' 的头，示意',
@@ -4794,11 +4794,11 @@ module.exports = {
     const title = '圣瓦伦汀的局外人';
     /**
      * @param {CharaTalk} kitaru 待兼福来
-     * @param {CharaTalk} me 玩家
+     * @param {CharaTalk} you 玩家
      * @param {string} callname 待兼福来对玩家的称呼
      * @param {number} teem_count 担当数量
      */
-    const f = async (kitaru, me, callname, teem_count) => {
+    const f = async (kitaru, you, callname, teem_count) => {
       const ret = [];
       await era.printAndWait(
         '圣瓦伦汀之日的特雷森学院，一如既往的被微妙的桃色氛围所笼罩。',
@@ -4816,7 +4816,7 @@ module.exports = {
       if (teem_count >= 2) {
         await era.printAndWait([
           '今天一天品尝了不少担当送 ',
-          me.get_colored_name(),
+          you.get_colored_name(),
           ' 的巧克力，也有可能是担当本身。',
         ]);
         await era.printAndWait([
@@ -4827,7 +4827,7 @@ module.exports = {
       } else {
         await era.printAndWait([
           '不过，',
-          me.get_colored_name(),
+          you.get_colored_name(),
           ' 似乎是那个例外。',
         ]);
         await era.printAndWait([
@@ -4844,7 +4844,7 @@ module.exports = {
         ]);
         await era.printAndWait([
           '短信……没有消息，电话……也没有接通，',
-          me.get_colored_name(),
+          you.get_colored_name(),
           ' 甚至询问了',
           kitaru.sex,
           '的舍友，',
@@ -4852,19 +4852,19 @@ module.exports = {
           '并没有向舍友透露自己今天的行程。',
         ]);
         await era.printAndWait('有些失落的回到了家中。');
-        era.drawLine({ content: me.name + '的自宅' });
+        era.drawLine({ content: you.name + '的自宅' });
         await era.printAndWait(
           '靠在沙发上，静看电子钟的数位屏显示的时间愈发逼近0点。',
         );
         await era.printAndWait([
           '有些失望……当 ',
-          me.get_colored_name(),
+          you.get_colored_name(),
           ' 无意间扫过几件 ',
           kitaru.get_colored_name(),
           ' 送给 ',
-          me.get_colored_name(),
+          you.get_colored_name(),
           ' 的开运物品时，',
-          me.get_colored_name(),
+          you.get_colored_name(),
           ' 如此想着。',
         ]);
         era.printButton('聆听检定', 1);
@@ -4877,14 +4877,14 @@ module.exports = {
             result,
             '/??',
             { isDivider: true },
-            me.get_colored_name(),
+            you.get_colored_name(),
             ' 的聆听检定: 失败',
           ]);
           await era.printAndWait('没听见什么，天气倒是让人昏昏欲睡。');
         }
         await era.printAndWait([
           '就当 ',
-          me.get_colored_name(),
+          you.get_colored_name(),
           ' 要在沙发上沉沉睡去时，窗户那边似乎有插销声响起，而后……',
         ]);
         await kitaru.say_and_wait('呼啊！');
@@ -4893,9 +4893,9 @@ module.exports = {
           '不知何时，',
           kitaru.get_colored_name(),
           ' 出现在了 ',
-          me.get_colored_name(),
+          you.get_colored_name(),
           ' 的面前，而更令 ',
-          me.get_colored_name(),
+          you.get_colored_name(),
           ' 感到躁动的则是',
           kitaru.sex,
           '糟糕的姿势。',
@@ -4904,13 +4904,13 @@ module.exports = {
           '橘色头发的',
           kitaru.teen_sex_title,
           '正骑在 ',
-          me.get_colored_name(),
+          you.get_colored_name(),
           ' 的腰间，',
-          me.get_colored_name(),
+          you.get_colored_name(),
           ' 能察觉到',
           kitaru.sex,
           '被裙子遮住的臀部摩擦 ',
-          me.get_colored_name(),
+          you.get_colored_name(),
           ' 裤子布料的声音。',
         ]);
         await era.printAndWait([
@@ -4932,7 +4932,7 @@ module.exports = {
         await era.printAndWait([
           kitaru.sex,
           '从背后拿出了一个带着折皱的礼盒，放在了 ',
-          me.get_colored_name(),
+          you.get_colored_name(),
           ' 的胸口上。',
         ]);
         await kitaru.say_and_wait('请看！');
@@ -4963,9 +4963,9 @@ module.exports = {
           ' 的面色也愈发的绯红起来。',
         ]);
         await era.printAndWait([
-          me.get_colored_name(),
+          you.get_colored_name(),
           '看着那盒摊开放在 ',
-          me.get_colored_name(),
+          you.get_colored_name(),
           ' 胸口的巧克力，一丝欲望自心底升起。',
         ]);
         era.printButton('「想要奖励吗？」', 1, {
@@ -4984,7 +4984,7 @@ module.exports = {
             '后知后觉的意识到了自己此时的姿势和所谓的骑乘位没什么两样，',
             kitaru.teen_sex_title,
             '的面色更加的红润，尾巴有意无意地拍了几下 ',
-            me.get_colored_name(),
+            you.get_colored_name(),
             ' 的腿。',
           ]);
           await era.printAndWait('随后是细若蚊鸣的回应传来。');
@@ -4994,13 +4994,13 @@ module.exports = {
           await kitaru.say_and_wait('唔……巧克力还没吃呢……');
           await era.printAndWait([
             '听到回答，',
-            me.get_colored_name(),
+            you.get_colored_name(),
             ' 松开右手。',
           ]);
           await era.printAndWait('啪！');
           await kitaru.say_and_wait('咿呀！');
           await era.printAndWait([
-            me.get_colored_name(),
+            you.get_colored_name(),
             '的手指拢齐，并作成手掌，以不轻不重的力道，极快地在',
             kitaru.teen_sex_title,
             '挺翘的臀部上打了一下。',
@@ -5010,7 +5010,7 @@ module.exports = {
             '接下来，趁着',
             kitaru.teen_sex_title,
             '分神的瞬间，',
-            me.get_colored_name(),
+            you.get_colored_name(),
             ' 伸出双手，和骑在自己身上的',
             kitaru.teen_sex_title,
             '的双手相扣。',
@@ -5021,9 +5021,9 @@ module.exports = {
           await era.printAndWait([
             kitaru.teen_sex_title,
             '柔若无骨的双手被 ',
-            me.get_colored_name(),
+            you.get_colored_name(),
             ' 握着，自然是没有办法用手喂 ',
-            me.get_colored_name(),
+            you.get_colored_name(),
             ' 的。',
           ]);
           await kitaru.say_and_wait('我明白了……');
@@ -5034,7 +5034,7 @@ module.exports = {
           ]);
           await era.printAndWait([
             '衔起了一块巧克力，抿紧嘴唇轻轻的送到了 ',
-            me.get_colored_name(),
+            you.get_colored_name(),
             ' 的嘴边。',
           ]);
           await era.printAndWait('咔嚓。');
@@ -5043,7 +5043,7 @@ module.exports = {
           );
           await era.printAndWait([
             '碎屑落在了 ',
-            me.get_colored_name(),
+            you.get_colored_name(),
             ' 的身上，又被',
             kitaru.teen_sex_title,
             '小心地用舌尖拭去。',
@@ -5054,7 +5054,7 @@ module.exports = {
           ]);
           await era.printAndWait([
             '本来处于半躺状态的 ',
-            me.get_colored_name(),
+            you.get_colored_name(),
             ' 趁着',
             kitaru.teen_sex_title,
             '对付巧克力的分神，坐了起来。',
@@ -5083,7 +5083,7 @@ module.exports = {
           ]);
           await era.printAndWait([
             '而身前已经在方才可可味的激吻中被 ',
-            me.get_colored_name(),
+            you.get_colored_name(),
             ' 弄到有些失神的 ',
             kitaru.get_colored_name(),
             '，正满足地喘息着。',
@@ -5099,7 +5099,7 @@ module.exports = {
             ' 的好心。',
           ]);
           await era.printAndWait([
-            me.get_colored_name(),
+            you.get_colored_name(),
             '认真的吃起了巧克力。',
           ]);
         }
@@ -5118,11 +5118,11 @@ module.exports = {
         ]);
         await kitaru.say_and_wait(['啊！', callname, '，不好了！不好了！']);
         await era.printAndWait([
-          me.get_colored_name(),
+          you.get_colored_name(),
           '见着橘色头发的',
           kitaru.teen_sex_title,
           '焦急的向 ',
-          me.get_colored_name(),
+          you.get_colored_name(),
           ' 跑过来。',
         ]);
         await era.printAndWait([
@@ -5137,11 +5137,11 @@ module.exports = {
         await era.printAndWait([
           kitaru.sex,
           '把藏在背后的礼盒向 ',
-          me.get_colored_name(),
+          you.get_colored_name(),
           ' 递上。',
         ]);
         await era.printAndWait([
-          me.get_colored_name(),
+          you.get_colored_name(),
           '配合的露出了惊喜的表情。',
         ]);
         era.printButton('接过礼盒', 1);
@@ -5154,7 +5154,7 @@ module.exports = {
           '在',
           kitaru.sex,
           '热切的目光下，',
-          me.get_colored_name(),
+          you.get_colored_name(),
           ' 打开了礼盒。',
         ]);
         await era.printAndWait([
@@ -5188,7 +5188,7 @@ module.exports = {
           '似乎是无自觉的说出了似乎有些不符合师生关系的发言，',
           kitaru.get_colored_name(),
           ' 双手合十的看着 ',
-          me.get_colored_name(),
+          you.get_colored_name(),
           '。',
         ]);
         era.printButton('点头', 1);
@@ -5458,10 +5458,10 @@ module.exports = {
     const title = '不稳定星等';
     /**
      * @param {CharaTalk} kitaru 待兼福来
-     * @param {CharaTalk} me 玩家
+     * @param {CharaTalk} you 玩家
      * @param {string} callname 待兼福来对玩家的称呼
      */
-    const f = async (kitaru, me, callname) => {
+    const f = async (kitaru, you, callname) => {
       await era.printAndWait([
         '接连获得胜利的 ',
         kitaru.get_colored_name(),
@@ -5493,7 +5493,7 @@ module.exports = {
         '一起接受采访，况且……',
       ]);
       await era.printAndWait([
-        me.get_colored_name(),
+        you.get_colored_name(),
         ' 想起了',
         kitaru.sex,
         '在金號赏后的表现，似乎在那次比赛之后，意识到什么的 ',
@@ -5508,7 +5508,7 @@ module.exports = {
         '在赛后的采访中，',
         kitaru.get_colored_name(),
         ' 回答的颇为勉强，多亏了 ',
-        me.get_colored_name(),
+        you.get_colored_name(),
         ' 打的圆场，才让话题风向往着 ',
         kitaru.get_colored_name(),
         ' 是一个冷静而沉默寡言的',
@@ -5519,12 +5519,12 @@ module.exports = {
         '冷静，沉默寡言会和 ',
         kitaru.get_colored_name(),
         ' 关联到一起？真是令 ',
-        me.get_colored_name(),
+        you.get_colored_name(),
         ' 难以想象。',
       ]);
       await era.printAndWait([
         '好在眼看着这场考验就要抵达尽头，',
-        me.get_colored_name(),
+        you.get_colored_name(),
         ' 已经开始计划着之后针对 ',
         kitaru.get_colored_name(),
         ' 的疗愈方案。',
@@ -5535,8 +5535,8 @@ module.exports = {
         ' 被汗浸润的橘发贴在额头上，马耳像是受惊了般竖起来。',
       ]);
       await era.printAndWait('必须要叫停了，然而下一个问题已经被抛了出来。');
-      await me.say_as_passer_by_and_wait('女主持人', '那么，我想问一下……');
-      await me.say_as_passer_by_and_wait('女主持人', [
+      await you.say_as_passer_by_and_wait('女主持人', '那么，我想问一下……');
+      await you.say_as_passer_by_and_wait('女主持人', [
         kitaru.get_colored_name(),
         ' 选手目前是为了什么在奔跑呢？',
       ]);
@@ -5545,7 +5545,7 @@ module.exports = {
       await kitaru.say_and_wait('奖金吗？', true);
       await kitaru.say_and_wait('还是别的什么？', true);
       await kitaru.say_and_wait([kitaru.elder_sibling_sex_title, '？']);
-      await me.say_as_passer_by_and_wait(
+      await you.say_as_passer_by_and_wait(
         '女主持人',
         '嗯？抱歉，能再说一遍吗？',
       );
@@ -5572,7 +5572,7 @@ module.exports = {
         '在昏迷的 ',
         kitaru.get_colored_name(),
         ' 向后栽倒在地上前，',
-        me.get_colored_name(),
+        you.get_colored_name(),
         ' 冲了上去，及时扶住了',
         kitaru.sex,
         '。',
@@ -5582,11 +5582,11 @@ module.exports = {
       await era.printAndWait(['检查并无大碍，只是需要多休息。']);
       await kitaru.say_and_wait(['抱歉，又麻烦 ', callname, ' 了。']);
       await era.printAndWait([
-        me.get_colored_name(),
+        you.get_colored_name(),
         ' 听着沙发上病怏怏的 ',
         kitaru.get_colored_name(),
         ' 对 ',
-        me.get_colored_name(),
+        you.get_colored_name(),
         ' 说着抱歉。',
       ]);
       await era.printAndWait(
@@ -5596,7 +5596,7 @@ module.exports = {
         '晕倒在演播室的 ',
         kitaru.get_colored_name(),
         '，无疑把 ',
-        me.get_colored_name(),
+        you.get_colored_name(),
         ' 推上了风口浪尖。',
       ]);
       await era.printAndWait([
@@ -6996,10 +6996,10 @@ module.exports = {
     const title = '福来今至';
     /**
      * @param {CharaTalk} kitaru 待兼福来
-     * @param {CharaTalk} me 玩家
+     * @param {CharaTalk} you 玩家
      * @param {string} callname 待兼福来对玩家的称呼
      */
-    const f = async (kitaru, me, callname) => {
+    const f = async (kitaru, you, callname) => {
       await kitaru.print_and_wait([
         '从前，有一位赛',
         kitaru.uma_sex_title,
@@ -7030,7 +7030,7 @@ module.exports = {
       await era.printAndWait([
         kitaru.get_colored_name(),
         ' 在赛后如此对 ',
-        me.get_colored_name(),
+        you.get_colored_name(),
         ' 布道着。',
       ]);
       await kitaru.say_and_wait([callname, '！我们成功了喔！']);
@@ -7039,27 +7039,27 @@ module.exports = {
       era.printButton('「那是当然了！」', 1);
       await era.input();
       await kitaru.say_and_wait('呜啊！我就想听这句话！');
-      await me.say_and_wait('唔！？');
+      await you.say_and_wait('唔！？');
       await era.printAndWait([
         '激动不已的 ',
         kitaru.get_colored_name(),
         ' 径直扑进了 ',
-        me.get_colored_name(),
+        you.get_colored_name(),
         ' 的怀中，毫无顾忌的将身上的汗水洒在了 ',
-        me.get_colored_name(),
+        you.get_colored_name(),
         ' 的衬衣上。',
       ]);
       if (kitaru.sex_code !== 1) {
         await era.printAndWait([
           kitaru.uma_sex_title,
           '比赛后湿热的甜腻体味被 ',
-          me.get_colored_name(),
+          you.get_colored_name(),
           ' 吸入，而胸前的那对乳肉被挤压的柔软感觉由于运动后的体温更是明显。',
         ]);
       }
       await era.printAndWait([
         '过于的亲密的动作以至于受到了其他选手和训练员的侧目，',
-        me.get_colored_name(),
+        you.get_colored_name(),
         ' 只得拍了拍 ',
         kitaru.get_colored_name(),
         ' 的背，示意',
@@ -7086,7 +7086,7 @@ module.exports = {
         '而站在',
         kitaru.sex,
         '身后一同接受采访的 ',
-        me.get_colored_name(),
+        you.get_colored_name(),
         '，之后也与为众人祈愿的 ',
         kitaru.get_colored_name(),
         ' 一起登上了许多家媒体的报纸。',

@@ -67,10 +67,7 @@ out_church_handlers[47 + 1] = async (ruby, me, r_call_m, m_call_r, flags) => {
   era.printButton('「尽管交给我吧。」', 1);
   await era.input();
   await ruby.say_and_wait('嗯。');
-  era.printButton(
-    `「不过，${sys_get_callname(0, 85)} 之后应该还要去和其他人打招呼吧？」`,
-    1,
-  );
+  era.printButton(`「不过，露比之后应该还要去和其他人打招呼吧？」`, 1);
   await era.input();
   await era.printAndWait(
     '不难想象，作为财政界声名远播的一族的末裔，年初会很忙碌。',
@@ -463,7 +460,7 @@ module.exports = class extends Edu85CrazyFanEnd {
     await ruby.say_and_wait('失陪一下。');
     await era.printAndWait([ruby.get_colored_name(), ' 转身掏出手机。']);
     await ruby.say_and_wait('对，是我。请现在立刻派辆车到学校来。');
-    era.printButton(`「${sys_get_callname(0, 85)}？？？」`, 1);
+    era.printButton(`「露比？？？」`, 1);
     await era.input();
     await ruby.say_and_wait('那么——跟我来吧。');
     await era.printAndWait([
@@ -500,7 +497,7 @@ module.exports = class extends Edu85CrazyFanEnd {
       me.get_colored_name(),
       ' 来说已经很足够了。',
     ]);
-    era.printButton(`「谢谢你，${sys_get_callname(0, 85)}。」`, 1);
+    era.printButton(`「谢谢你，露比。」`, 1);
     await era.input();
     await ruby.say_and_wait('我觉得我并没有做什么值得您感谢的事情。');
     await era.printAndWait([
