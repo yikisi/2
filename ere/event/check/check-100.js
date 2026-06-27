@@ -50,7 +50,7 @@ module.exports = class extends CustomizedCheck {
     ) {
       titles.push({
         c: get_chara_color(this.id),
-        n: '坚韧不拔的熏银',
+        n: this.get_personal_titles()[0],
       });
       aim_check && sys_personal_achievement.set(100, 1);
     }

@@ -53,7 +53,7 @@ module.exports = class extends CustomizedCheck {
     ) {
       titles.push({
         c,
-        n: '破天荒',
+        n: '100701',
       });
       aim_check && sys_personal_achievement.set(7, 1);
       edu_marks.hoverboard = 1;
@@ -61,7 +61,7 @@ module.exports = class extends CustomizedCheck {
     if (edu_marks.title_check === 2) {
       titles.push({
         c,
-        n: '粉丝服务',
+        n: '100702',
       });
     }
     return titles;
