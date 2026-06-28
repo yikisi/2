@@ -16,6 +16,11 @@ class I18nKojo103700 {
   );
   // GENERATED END
 
+  notify_black_treasure = (flash) => [
+    flash.get_colored_name(),
+    ' 好像对这里很关注的样子……下次独自出行偶遇的时候问问吧',
+  ];
+
   weak = '虚弱';
   week_desc = '干劲上限下降一阶段。';
 

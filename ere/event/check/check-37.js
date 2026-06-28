@@ -58,17 +58,15 @@ module.exports = class extends CustomizedCheck {
   check_next_week() {
     const edu_weeks = era.get('cflag:37:育成回合计时');
     if (edu_weeks < 3 * 48) {
-      const edu_event_marks = new FlashEduMarks();
-      const event_obj = new EventObject(37, cb_enum.edu);
-      const event_obj_special = new EventObject(37, cb_enum.edu, true).set_arg(
-        edu_weeks,
-      );
+      const edu_marks = new FlashEduMarks();
+      const ebj = new EventObject(37, cb_enum.edu);
+      const ebj_s = new EventObject(37, cb_enum.edu, true).set_arg(edu_weeks);
       check_and_add_event(
-        edu_event_marks,
+        edu_marks,
         edu_weeks,
         'black_treasure',
         event_hooks.out_shopping,
-        event_obj,
+        ebj,
         () => EventMarks.get(0).add(event_hooks.out_shopping),
       );
 
@@ -84,26 +82,26 @@ module.exports = class extends CustomizedCheck {
         case 95 + 14: // 粉丝感谢祭
         case 95 + 23: // 未来之事 · 一
         case 95 + 29: // 未来之事 · 二
-          add_event(event_hooks.week_start, event_obj_special);
+          add_event(event_hooks.week_start, ebj_s);
           break;
         case 47 + 13: // 突如之灾
           if (
             check_aim_race(RaceHistory.get(37).get(), race_enum.keis_hai, 1, 5)
           ) {
-            add_event(event_hooks.week_start, event_obj_special);
+            add_event(event_hooks.week_start, ebj_s);
           }
           break;
         case 47 + 21: // 两难之择 · 一
           era.set('status:37:荣耀德比', 0);
-          add_event(event_hooks.week_start, event_obj_special);
+          add_event(event_hooks.week_start, ebj_s);
           break;
         case 47 + 32: // 交心之谈 · 二
         case 95 + 32:
-          add_event(event_hooks.week_end, event_obj_special);
+          add_event(event_hooks.week_end, ebj_s);
           break;
         case 95 + 6: // 遇见之花
           if (era.get(`relation:37:0`) > 225) {
-            add_event(event_hooks.out_start, event_obj_special);
+            add_event(event_hooks.out_start, ebj_s);
           }
           break;
         case 95 + 24:
@@ -115,9 +113,10 @@ module.exports = class extends CustomizedCheck {
           }
       }
       check_and_register_aim_race(37, aim_races, edu_weeks);
+      const reg = sys_reg_race(37).curr;
       if (
-        sys_reg_race(37).curr.race === race_enum.toky_yus &&
-        sys_reg_race(37).curr.week === era.get('flag:当前回合数')
+        reg.race === race_enum.toky_yus &&
+        reg.week === era.get('flag:当前回合数')
       ) {
         era.set('status:37:荣耀德比', 1);
       }

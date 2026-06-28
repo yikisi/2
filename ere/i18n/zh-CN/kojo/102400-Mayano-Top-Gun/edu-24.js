@@ -3297,7 +3297,7 @@ module.exports = {
    * @param {PrintedSpan} call_12 摩耶重炮对菱亚马逊的称呼
    * @param {PrintedSpan} callname_12 菱亚马逊对玩家的称呼
    * @param {PrintedSpan} a_call_m 菱亚马逊对摩耶重炮的称呼
-   * @param {number} rank 摩耶重炮的模拟赛成绩
+   * @param {number} rank 摩耶重炮的模拟赛名次
    */
   async ws_95_14_end(
     maya,
