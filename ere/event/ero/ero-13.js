@@ -24,7 +24,7 @@ function kojo() {
 }
 
 function dict() {
-  return generate_dictionary(this.id, { call: !0 });
+  return generate_dictionary(13, { call: !0 });
 }
 
 class NormalCom extends EroNormalCommunications {

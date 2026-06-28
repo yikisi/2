@@ -14,7 +14,7 @@ module.exports = class extends CustomizedCheck {
   get this() {
     let ret = this.instances[era.get(`cflag:${this.id}:多口上`)];
     if (!ret) {
-      ret = this.instances[era.set(`cflag:${this.id}:多口上`, 99)];
+      ret = this.instances[era.set(`cflag:${this.id}:多口上`, 99) ?? 99];
     }
     return ret;
   }
