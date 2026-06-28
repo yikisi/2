@@ -1,6 +1,5 @@
 const proxy_kojo_js = require('#/i18n/proxy');
 
-// GENERATED START
 class I18nKojo100300 {
   recruit = proxy_kojo_js(
     require('#/i18n/zh-CN/kojo/100300-Tokai-Teio/rec-3.js'),
@@ -16,7 +15,13 @@ class I18nKojo100300 {
   basement = proxy_kojo_js(
     require('#/i18n/zh-CN/kojo/100300-Tokai-Teio/base-3.js'),
   );
-  // GENERATED END
+
+  notify_leg_hurt = (teio, s_hurt) => [
+    teio.get_colored_name(),
+    ' 罹患了 ',
+    s_hurt,
+    '……',
+  ];
 
   hurt = '腿伤！';
   hurt_desc =

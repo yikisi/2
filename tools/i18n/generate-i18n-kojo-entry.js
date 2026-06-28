@@ -15,7 +15,7 @@ const name = {
   base: 'basement',
 };
 const skipEntry = { 106799: 1 };
-const skip = { 103200: 1 };
+const skip = { 100300: 1, 103200: 1 };
 
 let entryOut = '';
 for (const charaPath of kojoDir) {

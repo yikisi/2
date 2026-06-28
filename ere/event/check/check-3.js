@@ -17,11 +17,8 @@ const { add_event, cb_enum } = require('#/event/queue');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
 
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
-
 const { get_chara_color } = require('#/data/chara-colors');
 const CharaTitles = require('#/data/chara-titles');
-const { buff_colors } = require('#/data/color-const');
 const TeioEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-3');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
@@ -134,69 +131,67 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_next_week() {
-    const event_marks = new TeioEduMarks();
+    const edu_marks = new TeioEduMarks();
     const edu_weeks = era.get(`cflag:${this.id}:育成回合计时`);
-    const event_obj = new EventObject(this.id, cb_enum.edu).set_arg(edu_weeks);
+    const ebj = new EventObject(this.id, cb_enum.edu).set_arg(edu_weeks);
     if (edu_weeks < 3 * 48) {
-      const event_obj_special = new EventObject(
-        this.id,
-        cb_enum.edu,
-        true,
-      ).set_arg(edu_weeks);
+      const ebj_s = new EventObject(this.id, cb_enum.edu, true).set_arg(
+        edu_weeks,
+      );
       let temp;
       check_and_add_event(
-        event_marks,
+        edu_marks,
         edu_weeks,
         'lets_go_together',
         event_hooks.out_start,
-        event_obj,
+        ebj,
       );
       check_and_add_event(
-        event_marks,
+        edu_marks,
         edu_weeks,
         'dance_or_kongfu',
         event_hooks.out_start,
-        event_obj,
+        ebj,
       );
       if (edu_weeks >= 48) {
         check_and_add_event(
-          event_marks,
+          edu_marks,
           edu_weeks,
           'honey_power',
           event_hooks.out_shopping,
-          event_obj,
+          ebj,
         );
         check_and_add_event(
-          event_marks,
+          edu_marks,
           edu_weeks,
           'wing_and_sky',
           event_hooks.school_rooftop,
-          event_obj,
+          ebj,
         );
       }
       if (era.get(`status:${this.id}:腿伤`) > 0) {
         check_and_add_event(
-          event_marks,
+          edu_marks,
           edu_weeks,
           'rehabilitation',
           event_hooks.office_prepare,
-          event_obj,
+          ebj,
         );
       }
       if (edu_weeks >= 96) {
         check_and_add_event(
-          event_marks,
+          edu_marks,
           edu_weeks,
           'the_days_together',
           event_hooks.school_atrium,
-          event_obj,
+          ebj,
         );
         check_and_add_event(
-          event_marks,
+          edu_marks,
           edu_weeks,
           'uma_shopping',
           event_hooks.out_shopping,
-          event_obj,
+          ebj,
         );
       }
       switch (edu_weeks) {
@@ -204,63 +199,38 @@ module.exports = class extends CustomizedCheck {
         case 47 + 12: // 记者招待会
         case 95 + 5: // 天皇赏春前 · 放弃
         case 95 + 14: //粉丝感谢祭
-          add_event(event_hooks.week_start, event_obj_special);
+          add_event(event_hooks.week_start, ebj_s);
           break;
         case 95 + 17: // 腿伤发布会
-          !event_marks.give_up &&
-            add_event(event_hooks.week_start, event_obj_special);
+          !edu_marks.give_up && add_event(event_hooks.week_start, ebj_s);
           break;
         case 95 + 19: // 交涉
           if (
-            !event_marks.give_up &&
+            !edu_marks.give_up &&
             RaceHistory.get(3)
               .get_entries()
               .filter((e) => e.weeks >= 48 && e.weeks < 96 && e.rank === 1)
               .length >= 3
           ) {
-            add_event(event_hooks.week_start, event_obj_special);
+            add_event(event_hooks.week_start, ebj_s);
           }
           break;
         case 95 + 20: // 回归
-          !event_marks.give_up &&
-            add_event(event_hooks.school_atrium, event_obj_special);
+          !edu_marks.give_up && add_event(event_hooks.school_atrium, ebj_s);
           break;
         case 95 + 25: // 春之帝王
           if (
             RaceHistory.get(3)
               .get_entries()
-              .filter(
-                (e) =>
-                  e.weeks > race_infos[race_enum.tenn_spr].date + 95 &&
-                  race_infos[e.race].race_class === RaceInfo.class_enum.G1 &&
-                  e.rank === 1,
-              ).length
+              .some(
+                (r) =>
+                  r.weeks > race_infos[race_enum.tenn_spr].date + 95 &&
+                  race_infos[r.race].race_class === RaceInfo.class_enum.G1 &&
+                  r.rank === 1,
+              )
           ) {
-            event_marks.spring_teio++;
-            add_event(event_hooks.school_atrium, event_obj_special);
-          }
-          break;
-        case 95 + race_infos[race_enum.tenn_spr].date + 1:
-          if (
-            !event_marks.give_up &&
-            RaceHistory.get(3).get_result(
-              95 + race_infos[race_enum.tenn_spr].date,
-            )?.race === race_enum.tenn_spr &&
-            !era.get(`status:${this.id}:腿伤`)
-          ) {
-            era.set(`talent:${this.id}:自信程度`, 1);
-            era.set(`talent:${this.id}:淫乱`, 1);
-            era.set(`talent:${this.id}:身体素质`, 0);
-            era.set(`status:${this.id}:腿伤`, 1);
-            era.print([
-              get_chara_talk(3).get_colored_name(),
-              ' 罹患了 ',
-              {
-                color: buff_colors[3],
-                content: '[腿伤]',
-              },
-              '……',
-            ]);
+            edu_marks.spring_teio++;
+            add_event(event_hooks.school_atrium, ebj_s);
           }
           break;
         case 95 + 48:
@@ -272,10 +242,10 @@ module.exports = class extends CustomizedCheck {
           }
           break;
         case 47 + 5: // 所以，衣服是怎样啦！
-          add_event(event_hooks.school_atrium, event_obj_special);
+          add_event(event_hooks.school_atrium, ebj_s);
           break;
         case 47 + 25: // 定时刷新的小兽
-          add_event(event_hooks.office_rest, event_obj_special);
+          add_event(event_hooks.office_rest, ebj_s);
       }
 
       check_and_register_aim_race(this.id, aim_races, edu_weeks);
@@ -283,29 +253,29 @@ module.exports = class extends CustomizedCheck {
       if (
         edu_weeks === 95 + race_infos[race_enum.tenn_spr].date &&
         (temp = sys_reg_race(this.id)).curr.race === race_enum.tenn_spr &&
-        event_marks.give_up === 1
+        edu_marks.give_up === 1
       ) {
         temp.curr = temp.last = {
           race: -1,
           week: -1,
         };
       }
-      if (!event_marks.famous_in_famous && edu_weeks >= 96) {
+      if (!edu_marks.famous_in_famous && edu_weeks >= 96) {
         const titles = CharaTitles.get(this.id).get();
         if (titles.some((t) => t.n === 'r_3crown_c')) {
-          event_marks.famous_in_famous++;
+          edu_marks.famous_in_famous++;
           add_event(
             event_hooks.out_start,
-            event_obj.copy().set_arg('famous_in_famous'),
+            ebj.copy().set_arg('famous_in_famous'),
           );
         } else {
-          event_marks.famous_in_famous = -1;
+          edu_marks.famous_in_famous = -1;
         }
       }
-    } else if (edu_weeks === 143 + 5 && event_marks.good_end === 1) {
-      add_event(event_hooks.week_end, event_obj);
+    } else if (edu_weeks === 143 + 5 && edu_marks.good_end === 1) {
+      add_event(event_hooks.week_end, ebj);
     } else if (edu_weeks === 143 + 9) {
-      add_event(event_hooks.week_start, event_obj);
+      add_event(event_hooks.week_start, ebj.copy().set_arg('palace'));
     }
   }
 

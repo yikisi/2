@@ -1,31 +1,78 @@
-/**
- * @file 东海帝王 - 育成
- * @author 天马闪光蹄
- */
 const era = require('#/era-electron');
 
-const { sys_change_motivation } = require('#/system/sys-calc-base-cflag');
+const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
 const {
+  begin_and_init_ero,
+  end_ero_and_show_result,
+  set_palam_to_max,
+} = require('#/system/ero/sys-prepare-ero');
+const {
+  sys_get_colored_callname,
   sys_like_chara,
-  sys_love_uma,
 } = require('#/system/sys-calc-chara-others');
+const { sys_change_fame, sys_change_money } = require('#/system/sys-calc-flag');
 
-const teio_crazy_fan_end = require('#/event/edu/edu-events-3/crazy-fan-end');
-const Edu3UntilWeekStart = require('#/event/edu/edu-events-3/week-start');
+const print_ero_page = require('#/page/page-ero');
+
+const CustomizedEdu = require('#/event/edu/edu-common');
 const { add_event } = require('#/event/queue');
+const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
+const check_aim_race = require('#/event/snippets/check-aim-race');
 const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
 const print_event_name = require('#/event/snippets/print-event-name');
+const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { gacha } = require('#/utils/list-utils');
 const { get_random_value } = require('#/utils/value-utils');
 
 const { buff_colors } = require('#/data/color-const');
+const EroParticipant = require('#/data/ero/ero-participant');
+const { get_skill_list, part_enum } = require('#/data/ero/part-const');
+const TeioEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-3');
+const event_hooks = require('#/data/event/event-hooks');
+const recruit_flags = require('#/data/event/recruit-flags');
+const { get_filtered_talents } = require('#/data/info-generator');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum, race_infos } = require('#/data/race/race-const');
-const { attr_enum, fumble_result } = require('#/data/train-const');
+const {
+  attr_enum,
+  base_attr_list,
+  fumble_result,
+} = require('#/data/train-const');
 
-module.exports = class extends Edu3UntilWeekStart {
-  async back_school(teio, me, callname, hook, extra_flag, event_object) {
-    if (event_object?.arg !== 'broken') {
+const di18n = require('#/i18n/extended-def');
+const { i18n } = require('#/i18n/selector');
+
+/** @param {RaceEndParams} extra  */
+function fill_common_rewards(extra) {
+  extra.attr_change = new Array(5);
+  if (extra.rank === 1) {
+    extra.attr_change.fill(10);
+    extra.pt_change = 50;
+    extra.relation_change = 10;
+    extra.love_change = 1;
+  } else if (extra.rank === 2) {
+    extra.attr_change.fill(5);
+    extra.pt_change = 40;
+    extra.relation_change = 10;
+  } else if (extra.rank === 3) {
+    extra.attr_change.fill(3);
+    extra.pt_change = 25;
+    extra.relation_change = 5;
+  } else if (extra.rank <= 5) {
+    extra.attr_change.fill(1);
+    extra.pt_change = 10;
+  }
+}
+
+module.exports = class extends CustomizedEdu {
+  get #kojo() {
+    return i18n().kojo[this.id].edu;
+  }
+
+  async back_school(teio, me, callname, hook, extra, ebj) {
+    if (ebj?.arg !== 'broken') {
       return false;
     }
     await print_event_name('折翼', teio);
@@ -118,532 +165,627 @@ module.exports = class extends Edu3UntilWeekStart {
     if (!era.get('status:3:腿伤')) {
       return await super.crazy_fan_end();
     }
-    await teio_crazy_fan_end();
-  }
-
-  async office_prepare(teio, me, callname, hook, extra_flag, event_object) {
-    if (era.get('flag:当前互动角色') !== 3) {
-      add_event(hook.hook, event_object);
-      return;
-    }
-    let wait_flag = false;
-    if (event_object?.arg !== 'rehabilitation') {
-      return false;
-    }
-    await print_event_name('康复训练', teio);
-    await era.printAndWait(
-      `木制的大桶里盛满温热的水，${me.name} 抓住爱马赤裸的双足，将其慢慢浸入水中。`,
-    );
-    await era.printAndWait(
-      `对准穴道，捏捏抓抓。晶莹白润的腿脚被刺激，充血变红，${me.name} 埋头干着例行的公事。`,
-    );
-    await era.printAndWait(
-      '和医生讨论出的一套帮助帝王恢复双腿的计划，每天都要严格执行，现在做的是每晚最后一步。',
-    );
-    await era.printAndWait(
-      `看着${teio.teen_sex_title}外表完美的双腿，${
-        me.name
-      } 还是心疼了起来。内里的伤，恐怕很难痊愈了吧。`,
-    );
-    await era.printAndWait(
-      '说到底，自己的努力，真的有意义吗，还是说只不过是对双方的心理安慰？',
-    );
-    era.println();
-
-    await era.printAndWait(
-      `${
-        me.name
-      } 想起医生私下跟自己说的一些类似病症的${teio.uma_sex_title}们，${
-        teio.couple_title
-      }无一例外没能再次康复，选择了退役。那么帝王……`,
-    );
-    era.println();
-
-    await teio.say_and_wait('训练员。');
-    era.println();
-
-    await era.printAndWait(
-      `比平常低声的话语音冲开升腾的热气，飘进 ${me.name} 的耳朵。`,
-    );
-    era.println();
-
-    await teio.say_and_wait(
-      `我……虽然我知道这个问题很蠢，但我还是想听到 ${me.name} 亲口告诉我……我们现在做的这些，真的有用吗？`,
-    );
-
-    era.printButton('低下头去（耐力&根性&智力+15）', 1);
-    era.printButton(
-      '「我们的信念一定会得到回应。」（速度&力量+15，好感+5，干劲上升）',
-      2,
-    );
-    const ret = await era.input(),
-      time_change = get_random_value(0, 50);
-    era.println();
-    if (ret === 1) {
-      await era.printAndWait([
-        me.get_colored_name(),
-        ' 低下头去，不愿或者不敢搭话，只顾对',
-        teio.uma_sex_title,
-        '的腿部进行护理',
-      ]);
-      wait_flag =
-        get_attr_and_print_in_event(3, [0, 15, 0, 15, 15], 0, [
-          0,
-          time_change,
-        ]) || wait_flag;
+    if (era.get('cflag:3:招募状态') === recruit_flags.yes) {
+      await print_title_with_kojo.ending(
+        this.#kojo,
+        'be_dead',
+        get_chara_talk(this.id),
+        get_chara_talk(68),
+        get_chara_talk(0),
+        sys_get_colored_callname(68, this.id),
+      );
+      await this.#kojo.be_dead_end();
     } else {
-      wait_flag =
-        get_attr_and_print_in_event(3, [15, 0, 15], 0, [0, time_change]) ||
-        wait_flag;
-      wait_flag = sys_change_motivation(3, 1) || wait_flag;
-      wait_flag = sys_like_chara(3, 0, 5) || wait_flag;
+      await print_title_with_kojo.ending(
+        this.#kojo,
+        'be_normal',
+        get_chara_talk(this.id),
+        get_chara_talk(0),
+      );
     }
-    wait_flag && (await era.waitAnyKey());
-    return true;
   }
 
-  async office_rest(teio, me, callname, hook, extra_flag, event_object) {
+  async office_prepare(teio, me, callname, hook, extra, ebj) {
     if (era.get('flag:当前互动角色') !== 3) {
-      add_event(hook.hook, event_object);
+      add_event(hook.hook, ebj);
       return;
     }
-    if (event_object?.arg !== 47 + 25) {
+    let wait = false;
+    if (ebj?.arg !== 'rehabilitation') {
       return false;
     }
-    let wait_flag = false;
-    await print_event_name('定时刷新的小兽', teio);
-    await teio.say_and_wait('呜啊。');
-    era.println();
-    await era.printAndWait(
-      `${me.name} 缓慢地，恰到好处地抚摸着趴在 ${
-        me.name
-      } 大腿上，整个人蜷缩起来的担当${teio.uma_sex_title}。`,
-    );
-    await era.printAndWait(
-      `自从有次 ${me.name} 帮${teio.sex}按摩之后，${teio.sex}便食髓知味，不仅要求 ${me.name} 帮忙梳理毛发（倒也合理），还会偷偷溜进 ${me.name} 的办公室里，不管 ${me.name} 在不在工作，一定要往 ${me.name} 身上蹭，要求 ${me.name} 缓解${teio.sex}的身体疲劳。`,
-    );
-    await era.printAndWait(
-      `${me.name} 心不在焉地挠了挠${teio.sex}的下巴，${teio.sex}发出一阵满足的咕噜声，眯起了眼睛。`,
-    );
-    await me.say_and_wait('你是猫吗', true);
-    await era.printAndWait(
-      `${me.name} 不禁在心里吐槽起来，腿上的${teio.teen_sex_title}好像真把 ${
-        me.name
-      } 这地方当成自己的窝了。`,
-    );
-    era.println();
-
-    era.print(`${me.name} 接下来要怎样对${teio.sex}呢——`);
-    era.printButton(
-      '缓慢地，从发根轻柔地往下抚摸，直至尾稍末端（技能点数+30，体力+50～100，好感+5）',
-      1,
-    );
-    era.printButton(
-      `因为太累……不知不觉中 ${me.name} 和${teio.sex}都睡着了。（耐力&根性+20）`,
-      2,
-    );
-    if (era.get('love:3') >= 50) {
-      era.printButton('坏心思的恶作剧（速度&力量&智力+20，爱慕+1）', 3);
-    }
-    const ret = await era.input();
     const time_change = get_random_value(0, 50);
-    if (ret === 1) {
-      await era.printAndWait(
-        `${me.name} 五指并作掌，用刚好的力度从头到尾顺了一遍毛，掌间传来一阵松软，让 ${me.name} 的心情也愉快了起来。`,
-      );
-      wait_flag =
-        get_attr_and_print_in_event(3, undefined, 30, [
-          get_random_value(50, 100),
-          time_change,
-        ]) || wait_flag;
-      wait_flag = sys_like_chara(3, 0, 5) || wait_flag;
-    } else if (ret === 2) {
-      wait_flag =
-        get_attr_and_print_in_event(3, [0, 20, 0, 20, 0], 30, [
-          0,
-          time_change,
-        ]) || wait_flag;
-    } else {
-      await era.printAndWait([
-        me.get_colored_name(),
-        ' 起了坏心眼，先挠了挠',
-        teio.sex,
-        '的耳根和尻里（控制尾巴的内侧无毛处），小',
-        teio.uma_sex_title,
-        '浑身颤抖时 ',
-        me.get_colored_name(),
-        ' 又改变了策略，用按摩手法捏遍',
-        teio.sex,
-        '的全身……',
+    if (
+      (
+        await print_title_with_kojo(this.#kojo, 'op_rehabilitation', teio, me)
+      )[0] === 1
+    ) {
+      wait = get_attr_and_print_in_event(3, [0, 15, 0, 15, 15], 0, [
+        0,
+        time_change,
       ]);
-      wait_flag =
-        get_attr_and_print_in_event(3, [20, 0, 20, 0, 20], 0, [
-          0,
-          time_change,
-        ]) || wait_flag;
-      wait_flag = sys_love_uma(3, 1) || wait_flag;
-    }
-    wait_flag && (await era.waitAnyKey());
-    return true;
-  }
-
-  async out_shopping(teio, me, callname, hook, extra_flag, event_object) {
-    if (era.get('flag:当前互动角色') !== 3) {
-      add_event(hook.hook, event_object);
-      return;
-    }
-    const love = era.get('love:3');
-    let wait_flag = false;
-    if (event_object?.arg === 'honey_power') {
-      await print_event_name('蜂蜜的力量', teio);
-
-      await era.printAndWait(
-        `总感觉跟${teio.sex}一起外出时候总会碰到什么事，${me.name} 一边想着，一边看着在旁边挽着 ${me.name} 胳膊的担当。`,
-      );
-      await era.printAndWait(
-        `或者说，拽着 ${me.name} 更为确切。有时候 ${
-          me.name
-        } 也很好奇自己是怎么在保持思考的状态下跟上活蹦乱跳的${teio.uma_sex_title}${teio.teen_sex_title}的步伐的，或许是 ${
-          me.name
-        } 在相处之中也耳濡目染会了些帝王舞步的技巧。`,
-      );
-      await era.printAndWait(
-        '相处之中，很多事情都会潜移默化地互相影响啊……比如说口味。',
-      );
-      era.println();
-
-      await era.printAndWait(
-        `${me.name} 的担当带 ${me.name} 到了长椅下，开始大口啜饮一刻钟前在常去的饮品摊位前买的特制蜂蜜特饮。`,
-      );
-      await era.printAndWait(
-        `浓浆从${teio.sex}的喉咙处吞入，滑过脖颈形成小小的曲线，阳光照向${teio.sex}的一侧，让粉白的皮肤更添一层质感，同时凸出了肌肉在吞咽时每一个细小的动作……`,
-      );
-      await era.printAndWait(
-        `刚刚买的时候 ${me.name} 并无什么想法，现在却感口舌干燥，也想喝点什么润润。`,
-      );
-      era.println();
-
-      await teio.say_and_wait('训练员？');
-      era.println();
-
-      await era.printAndWait(`${me.name} 赶忙应声。`);
-      era.println();
-
-      await teio.say_and_wait(
-        `训练员？感觉 ${me.name} 也很渴吧，要不要喝点东西呢？`,
-      );
-      await era.printAndWait(
-        `${teio.sex}嘻嘻笑着，把还剩半杯的蜂蜜特饮举到 ${me.name} 的眼前，仿佛是在邀请 ${me.name}。`,
-      );
-
-      await era.printAndWait(`${me.name} 会——`);
-      era.printButton('再买一杯（智力+20，好感+5）', 1);
-      era.printButton(
-        '「其实我比较喜欢喝无糖无味的茶水……」（耐力&根性+15）',
-        2,
-      );
-      if (love > 50) {
-        era.printButton(
-          `接过${teio.sex}手中的杯子，用上面的吸管品尝完后再还给${teio.sex}（速度&力量+15，体力+150，爱慕+1）`,
-          3,
-        );
-      }
-      const ret = await era.input();
-      if (ret === 1) {
-        await era.printAndWait(
-          `${me.name} 笑着摸了摸${
-            teio.sex
-          }的头，转身去给自己买了一杯。举起蜂蜜特饮放在唇边，指间残留着的${teio.uma_sex_title}发香和甜美的蜂蜜味道混在一起，让人陶醉……`,
-        );
-        wait_flag =
-          get_attr_and_print_in_event(3, [0, 0, 0, 0, 20], 0) || wait_flag;
-        wait_flag = sys_like_chara(3, 0, 5) || wait_flag;
-      } else if (ret === 2) {
-        await era.printAndWait(
-          `${me.name} 略显尴尬地清了清嗓子，婉言拒绝了自家担当的邀请。${teio.sex}眯起眼睛，似乎笑得更愉快了。`,
-        );
-        wait_flag =
-          get_attr_and_print_in_event(3, [0, 15, 0, 15, 0], 0) || wait_flag;
-      } else {
-        await teio.say_and_wait('///////');
-        era.println();
-
-        await era.printAndWait(
-          `${me.name} 不由得起了坏心眼，将${teio.sex}手上的杯子拿了过来，顺势痛饮一大口，再跟无事发生一样把杯子放回宕机的${teio.sex}的手里。`,
-        );
-        era.println();
-
-        await teio.say_and_wait('唔嗯嗯——');
-        era.println();
-
-        await era.printAndWait('……好像玩大了。');
-        await era.printAndWait(
-          `后来好好道歉了十分钟，红透了脸的${teio.sex}才停止了唔唔，起身靠到 ${me.name} 旁边。`,
-        );
-        await era.printAndWait(
-          `继续行走之前，${me.name} 注意到${teio.sex}似乎刻意规避 ${me.name} 的视线，小心地又用吸管喝了几口饮料……`,
-        );
-        wait_flag =
-          get_attr_and_print_in_event(3, [15, 0, 15, 0, 0], 0, [150]) ||
-          wait_flag;
-        wait_flag = sys_love_uma(3, 1) || wait_flag;
-      }
-    } else if (event_object?.arg === 'uma_shopping') {
-      await print_event_name(`${teio.uma_sex_title}的……血拼！`, teio);
-      await era.printAndWait('陪女人逛街，辛苦。');
-      await era.printAndWait('陪女人进商业中心，疲惫。');
-      await era.printAndWait(`陪${teio.uma_sex_title}买东西，累麻了。`);
-      await era.printAndWait(`很不幸，${me.name} 现在就在这第三个层级。`);
-      await era.printAndWait(
-        `推着购物车——速度比起${teio.sex}来说简直不是一个级别——一边对照列的清单一边查点货架上的东西。光是如此倒也不失为一种悠闲。`,
-      );
-      await era.printAndWait(
-        `不过，${me.name} 看着一眨眼就被不知道从哪来的东西填满的购物车，和耳边不停的穿梭气流声，不由自主地叹起气来。`,
-      );
-      era.println();
-      await teio.say_and_wait(
-        '训练员，快一点！还有要买的东西，我一个人拿不了那么多，需要你帮忙装啊！再不来，就要被抢光了！',
-      );
-      await era.printAndWait(
-        ` ${me.name} 仰天长啸，算是认了命，催动双腿向声音来源处靠拢——`,
-      );
-      era.printButton(
-        '拼命跟上帝王的节奏（速度&力量&根性+20，体力+200，好感+10）',
-        1,
-      );
-      era.printButton(
-        '按照事先划好的路线，先一步到达目标位置，等待帝王出现，装好东西后再来一轮（耐力+20，智力+30，好感+5）',
-        2,
-      );
-      if ((await era.input()) === 1) {
-        wait_flag =
-          get_attr_and_print_in_event(3, [20, 0, 20, 20, 0], 0, [200]) ||
-          wait_flag;
-        wait_flag = sys_like_chara(3, 0, 10) || wait_flag;
-      } else {
-        wait_flag =
-          get_attr_and_print_in_event(3, [0, 20, 0, 0, 30], 0) || wait_flag;
-        wait_flag = sys_like_chara(3, 0, 5) || wait_flag;
-      }
-    }
-    wait_flag && (await era.waitAnyKey());
-    return true;
-  }
-
-  async race_start(teio, me, callname, hook, extra_flag) {
-    const relation = era.get(`relation:3:0`),
-      edu_weeks = era.get('cflag:3:育成回合计时');
-    if (extra_flag.race === race_enum.arim_kin && edu_weeks >= 96) {
-      if (era.get('status:3:腿伤')) {
-        await print_event_name('奇迹复活（上）', teio);
-
-        era.printButton('「准备好了吗」', 1);
-        await era.input();
-
-        await teio.say_and_wait('我希望……我能够真的拥有这一切。');
-        era.println();
-
-        await teio.say_and_wait(
-          '能在这个地方写下属于你我，以及所有支持我们的人们的，帝王的传说。',
-        );
-        era.println();
-
-        await teio.say_and_wait(
-          '我想……这是如同做梦一样的事情。但是光会做梦对于我们来说又有什么用呢？',
-        );
-        era.println();
-        era.printButton(`「没什么用（笑），不过我们还是走到了这一步。」`, 1);
-        await era.input();
-
-        await teio.say_and_wait('是啊，我们即将得到这一切了。');
-        era.println();
-
-        era.printButton(`「好了，你看起来像是准备好了。」`, 1);
-        await era.input();
-
-        await teio.say_and_wait(
-          '这一年来，我们失去了一切，只是抱着一点希望和执念不断地继续奔跑——',
-        );
-        era.println();
-
-        era.printButton(
-          '「正因如此，我们已经有了必需的东西，除了继续奔跑下去还有什么选择呢？」',
-          1,
-        );
-        await era.input();
-
-        await era.printAndWait(
-          `${teio.teen_sex_title}嘴角翘起，抬头与 ${me.name} 对视——`,
-        );
-        if (relation > 150) {
-          await era.printAndWait(
-            `${teio.sex}伸出双手，置于 ${me.name} 张开的掌心上，${
-              me.name
-            } 轻轻捏住担当的手，温热的触感传来，指尖感受到${teio.teen_sex_title}健康而有弹性的肌肤，还有下面跳动着的，有些加速的脉搏。`,
-          );
-          await era.printAndWait(
-            ` ${me.name} 望向${
-              teio.sex
-            }如蓝宝石一般晶莹清澈的，${teio.teen_sex_title}的坚韧，信念，希冀，折射进 ${
-              me.name
-            } 的瞳孔。${me.name} 也笑了起来，却感觉，眼眶有些湿润。`,
-          );
-          era.println();
-
-          era.printButton('「去吧，让你的名字响彻云霄。」', 1);
-          await era.input();
-
-          await teio.say_and_wait('一定。');
-          era.println();
-
-          await era.printAndWait(
-            `踏地的足音回荡在小房间里，${teio.teen_sex_title}潇洒地一转身，挥了挥手，坚定地迈步向前。`,
-          );
-        } else {
-          await era.printAndWait(`你们二人默契地伸出惯用手，松握成拳，相碰。`);
-          await era.printAndWait(
-            `小小躯体中蕴藏的力量，以及如太阳般的温暖从触碰的表面传来。你们看着对方，不禁都笑出了声。`,
-          );
-          era.println();
-
-          era.printButton('「祝你武运昌隆」', 1);
-          await era.input();
-
-          await teio.say_and_wait('好好看着吧，我的奔跑。');
-          await era.printAndWait(
-            `${teio.sex}收回手臂，干净利落地一转身，走进阳光里。`,
-          );
-        }
-      } else {
-        await print_event_name('奔跑的夙愿（上）', teio);
-
-        await teio.say_and_wait(
-          '训练员，你还记得吗，我们初次比赛之后……你说，要跟我一起跑下去。',
-        );
-        era.println();
-
-        await era.printAndWait(
-          `阳光从入口处洒入，将${teio.sex}的全身笼罩在一片金光中，${teio.sex}回头微笑着，对 ${me.name} 诉说。`,
-        );
-        era.println();
-
-        await teio.say_and_wait(
-          '我可是很认真的哦……现在，我再问你一次，你会跟我一起跑吗？',
-        );
-        era.println();
-
-        era.printButton('「会的，一定会……一直会的！」', 1);
-        await era.input();
-        await era.printAndWait(
-          `${teio.teen_sex_title}轻点下颌，转身，大幅度地挥舞起手臂，披风刷地摆起，如同一团升腾的火焰，踏步入场，融入前方的光明。`,
-        );
-      }
     } else {
-      return await super.race_start(teio, me, callname, hook, extra_flag);
+      wait = all_reward_in_event(this.id, {
+        attr: [15, 0, 15],
+        base: [0, time_change],
+        motivation: 1,
+        relation: 5,
+      });
     }
+    wait && (await era.waitAnyKey());
+    return true;
   }
 
-  async school_rooftop(teio, me, callname, hook, extra_flag, event_object) {
+  async office_rest(teio, me, callname, hook, extra, ebj) {
     if (era.get('flag:当前互动角色') !== 3) {
-      add_event(hook.hook, event_object);
+      add_event(hook.hook, ebj);
       return;
     }
-    let wait_flag = false;
-    if (event_object?.arg !== 'wing_and_sky') {
+    if (ebj?.arg !== 47 + 25) {
       return false;
     }
-    await print_event_name('身负双翼，触及青天', teio);
-
-    await me.say_and_wait('天台啊，真是有点久违。', true);
-    await era.printAndWait(`${me.name} 带着食盒，走到门外。`);
-    await era.printAndWait(
-      `门已经大开，在 ${me.name} 眼前的，是 ${me.name} 的爱马，${teio.name}。`,
-    );
-    era.println();
-
-    await teio.say_and_wait(`果然还是这里舒服啊～在高处真自在。`);
-    era.println();
-
-    await me.say_and_wait('你开心就好咯。');
-    era.println();
-
-    await era.printAndWait(
-      `说着，${me.name} 放下食盒，开始整理。${me.name} 的担当又不知起了什么兴致，拉 ${me.name} 到天台上开什么二人下午茶会，${me.name} 只好带了些点心，自己泡了壶果茶，跟着${teio.sex}来了。`,
-    );
-    era.println();
-
-    await teio.say_and_wait('我说啊——');
-    era.println();
-
-    await era.printAndWait(
-      `一阵轻风拂过，${
-        me.name
-      } 昂首，看到${teio.uma_sex_title}脚步一拧，双手略扬，转了个身，眼神与 ${
-        me.name
-      } 对视，说道`,
-    );
-    era.println();
-
-    await teio.say_and_wait(
-      '训练员你是知道的吧，我那攀到高处的梦想。现在，经我们二人之手，虚幻的念想已经逐渐变成现实的阶梯，送我们向上，接下来……',
-    );
-    era.println();
-
-    era.print(`${me.name} 回答道——`);
-    era.printButton(
-      '「我一直都会是你的助力」（速度&耐力&智力+20，体力+200，爱慕+1）',
-      1,
-    );
-    era.printButton(
-      '「祝成功，等到圆梦之后，我们再回到这里聚一下吧」（速度+15，力量&根性+20，好感+5）',
-      2,
-    );
-    if ((await era.input()) === 1) {
-      await era.printAndWait(
-        `${teio.teen_sex_title}躬身，冲 ${me.name} 灿烂一笑。`,
-      );
-      wait_flag =
-        get_attr_and_print_in_event(3, [20, 20, 0, 0, 20], 0, [200]) ||
-        wait_flag;
-      wait_flag = sys_love_uma(3, 1) || wait_flag;
-    } else {
-      await teio.say_and_wait('又是一个约定，记好了哦～');
-      wait_flag =
-        get_attr_and_print_in_event(3, [15, 0, 20, 20, 0], 0) || wait_flag;
-      wait_flag = sys_like_chara(3, 0, 5) || wait_flag;
+    const time_change = get_random_value(0, 50);
+    let wait = false;
+    switch (
+      (await print_title_with_kojo(this.#kojo, 'or_47_25', teio, me))[0]
+    ) {
+      case 1:
+        wait = all_reward_in_event(this.id, {
+          base: [get_random_value(50, 100), time_change],
+          pt: 30,
+          relation: 5,
+        });
+        break;
+      case 2:
+        wait = all_reward_in_event(this.id, {
+          attr: [0, 20, 0, 20],
+          base: [0, time_change],
+          pt: 30,
+        });
+        break;
+      case 3:
+        wait = all_reward_in_event(this.id, {
+          attr: [20, 0, 20, 0, 20],
+          base: [0, time_change],
+          love: 1,
+        });
     }
-    wait_flag && (await era.waitAnyKey());
+    wait && (await era.waitAnyKey());
     return true;
   }
 
-  async train_fail(teio, me, callname, hook, extra_flag) {
-    extra_flag.args = extra_flag.fumble
-      ? fumble_result.fumble
-      : fumble_result.fail;
-    if (extra_flag.train === attr_enum.intelligence) {
-      await teio.say_and_wait('看来帝王的传说……不得不在此处稍作休止了……');
-      await era.printAndWait([
-        teio.get_colored_name(),
-        ' 趴在桌面上，失去了学习动力。',
-      ]);
-      await me.say_and_wait('果然有些事情不会骗人，不会就是不会。', true);
-    } else {
-      if (era.get('status:3:腿伤') > 0) {
-        await teio.say_and_wait('啊！唔……');
-        await era.printAndWait(
-          `平时充满活力带着几分娇气的音色在痛苦的影响下扭曲成尖锐的叫声，直扎 ${me.name} 的耳膜和心房，${me.name} 三步并作两步飞奔过去，小心翼翼地安抚着${teio.sex}，仔细检查身体，同时轻揉患处。`,
-        );
+  async out_shopping(teio, me, callname, hook, extra, ebj) {
+    if (era.get('flag:当前互动角色') !== 3) {
+      add_event(hook.hook, ebj);
+      return;
+    }
+    let wait = false;
+    switch (ebj?.arg) {
+      case 'honey_power':
+        switch (
+          (
+            await print_title_with_kojo(this.#kojo, 'os_honey_power', teio, me)
+          )[0]
+        ) {
+          case 1:
+            wait = all_reward_in_event(this.id, {
+              attr: { [attr_enum.intelligence]: 20 },
+              relation: 5,
+            });
+            break;
+          case 2:
+            wait = all_reward_in_event(this.id, { attr: [0, 15, 0, 15] });
+            break;
+          case 3:
+            wait = all_reward_in_event(this.id, {
+              attr: [15, 0, 15],
+              love: 1,
+            });
+        }
+        break;
+      case 'uma_shopping':
+        await print_event_name(this.#kojo.os_uma_shopping.title(teio), teio);
+        if ((await this.#kojo.os_uma_shopping(teio, me))[0] === 1) {
+          wait = all_reward_in_event(this.id, {
+            attr: [20, 0, 20, 20, 0],
+            base: [200],
+            relation: 10,
+          });
+        } else {
+          wait = all_reward_in_event(this.id, {
+            attr: [0, 20, 0, 0, 30],
+            relation: 5,
+          });
+        }
+    }
+    wait && (await era.waitAnyKey());
+    return true;
+  }
+
+  async out_start(teio, me, callname, hook, extra, ebj) {
+    if (era.get('flag:当前互动角色') !== 3) {
+      add_event(hook.hook, ebj);
+      return;
+    }
+    let wait = false;
+    switch (ebj?.arg) {
+      case 'famous_in_famous':
+        if (
+          (
+            await print_title_with_kojo(
+              this.#kojo,
+              'os_famous_in_famous',
+              teio,
+              me,
+            )
+          )[0] === 1
+        ) {
+          wait = all_reward_in_event(this.id, {
+            attr: { [attr_enum.intelligence]: 30 },
+            pt: 10,
+            relation: 5,
+          });
+        } else {
+          wait = all_reward_in_event(this.id, {
+            attr: gacha(base_attr_list, 3).reduce((p, c) => {
+              p[c] = 15;
+              return p;
+            }, {}),
+            pt: 10,
+            relation: 5,
+          });
+        }
+        break;
+      case 'lets_go_together':
+        if (
+          (
+            await print_title_with_kojo(
+              this.#kojo,
+              'os_lets_go_together',
+              teio,
+              me,
+            )
+          )[0] === 1
+        ) {
+          wait = all_reward_in_event(this.id, { attr: [0, 15], relation: 5 });
+        } else {
+          wait = all_reward_in_event(this.id, {
+            attr: [0, 0, 0, 15],
+            relation: 5,
+          });
+        }
+        break;
+      case 'dance_or_kongfu':
+        switch (
+          (
+            await print_title_with_kojo(
+              this.#kojo,
+              'os_dance_or_kongfu',
+              teio,
+              me,
+            )
+          )[0]
+        ) {
+          case 1:
+            wait = get_attr_and_print_in_event(3, [0, 0, 20, 20, 0], 15);
+            break;
+          case 2:
+            wait = get_attr_and_print_in_event(3, [30], 15, [200]);
+            break;
+          case 3:
+            wait = get_attr_and_print_in_event(3, [15, 20, 0, 0, 30], 30);
+        }
+    }
+    wait && (await era.waitAnyKey());
+    return true;
+  }
+
+  async race_end(teio, me, callname, hook, extra) {
+    let key = '';
+    let args = [me, callname];
+    let temp;
+    switch (extra.race) {
+      case race_enum.begin_race:
+        if (extra.rank === 1) {
+          key = 'begin_race_win';
+          extra.attr_change = [0, 0, 0, 0, 3];
+          extra.pt_change = 30;
+          extra.relation_change = 5;
+          extra.love_change = 1;
+        }
+        break;
+      case race_enum.waka_sta:
+        if (extra.rank === 1) {
+          key = 'waka_sta_win';
+          temp = 15;
+          extra.pt_change = 30;
+          extra.relation_change = 5;
+          extra.love_change = 1;
+        } else if (extra.rank === 2) {
+          temp = 10;
+          extra.pt_change = 20;
+          extra.relation_change = 3;
+          extra.love_change = 1;
+        } else if (extra.rank === 3) {
+          temp = 5;
+          extra.pt_change = 10;
+          extra.relation_change = 2;
+        }
+        extra.attr_change = [0, 0, 0, temp, 0];
+        break;
+      case race_enum.sats_sho:
+        if (extra.rank <= 5) {
+          fill_common_rewards(extra);
+          extra.attr_change[attr_enum.endurance] += 15;
+          extra.attr_change[attr_enum.toughness] += 5;
+        }
+        break;
+      case race_enum.toky_yus:
+        if (extra.rank <= 5) {
+          fill_common_rewards(extra);
+          if (
+            extra.rank === 1 &&
+            check_aim_race(RaceHistory.get(this.id), race_enum.sats_sho, 1, 1)
+          ) {
+            extra.pt_change += 20;
+            extra.relation_change = (extra.relation_change || 0) + 10;
+            extra.love_change = (extra.love_change || 0) + 1;
+          }
+        }
+        break;
+      case race_enum.kiku_sho:
+        if (extra.rank === 1) {
+          key = 'kiku_sho_win';
+          fill_common_rewards(extra);
+          const race_history = RaceHistory.get(this.id).get();
+          if (
+            extra.rank === 1 &&
+            check_aim_race(race_history, race_enum.sats_sho, 1, 1) &&
+            check_aim_race(race_history, race_enum.toky_yus, 1, 1)
+          ) {
+            extra.attr_change[attr_enum.strength] += 15;
+            extra.pt_change += 30;
+            extra.relation_change = (extra.relation_change || 0) + 20;
+            extra.love_change = (extra.love_change || 0) + 2;
+          }
+        }
+        break;
+      case race_enum.tenn_spr:
+        if (extra.rank === 1) {
+          extra.pt_change = 100;
+        }
+        break;
+      case race_enum.japa_cup:
+        if (
+          era.get('cflag:3:育成回合计时') > 96 &&
+          extra.rank === 1 &&
+          era.get('status:3:腿伤') > 0
+        ) {
+          key = 'japa_cup_win_s';
+          extra.pt_change = 20;
+          extra.relation_change = 12;
+          extra.love_change = 1;
+        }
+        break;
+      case race_enum.arim_kin:
+        if (era.get('cflag:3:育成回合计时') > 96 && extra.rank === 1) {
+          key =
+            era.get('status:3:腿伤') > 0
+              ? 'arim_kin_win_h_s'
+              : 'arim_kin_win_g_s';
+          extra.relation_change = 20;
+          extra.love_change = 2;
+        }
+    }
+    if (!key) {
+      if (extra.rank === 1) {
+        key = 'race_end_win';
+      } else if (extra.rank <= 5) {
+        key = 'race_end_5';
       } else {
-        await teio.say_and_wait('咿——');
-        await era.printAndWait([
-          '伴随着一声长音，',
-          me.get_colored_name(),
-          ' 的担当不小心摔倒了。',
-          me.get_colored_name(),
-          ' 赶忙过去查看情况。',
-        ]);
+        key = 'race_end_lose';
       }
+    }
+    await print_title_with_kojo(this.#kojo, key, teio, ...args);
+  }
+
+  async race_start(teio, me, callname, hook, extra) {
+    if (
+      extra.race === race_enum.arim_kin &&
+      era.get('cflag:3:育成回合计时') >= 96
+    ) {
+      await print_title_with_kojo(
+        this.#kojo,
+        era.get('status:3:腿伤') > 0
+          ? 'before_arim_kin_h_s'
+          : 'before_arim_kin_g_s',
+        teio,
+        me,
+      );
+    } else {
+      return await super.race_start(teio, me, callname, hook, extra);
+    }
+  }
+
+  async school_atrium(teio, me, callname, hook, extra, ebj) {
+    if (era.get('flag:当前互动角色') !== 3) {
+      add_event(hook.hook, ebj);
+      return;
+    }
+    let wait = false;
+    switch (ebj?.arg) {
+      case 47 + 5:
+        switch (
+          (await print_title_with_kojo(this.#kojo, 'sa_47_5', teio, me))[0]
+        ) {
+          case 1:
+            wait = all_reward_in_event(this.id, { base: [150] });
+            break;
+          case 2:
+            wait = all_reward_in_event(this.id, { attr: [20] });
+            break;
+          case 3:
+            wait = all_reward_in_event(this.id, { attr: [0, 0, 20] });
+        }
+        break;
+      case 95 + 20:
+        await print_title_with_kojo(this.#kojo, 'sa_95_20_h', teio, me);
+        if (
+          all_reward_in_event(this.id, {
+            attr: [0, 0, 0, 20, 15],
+            base: [150],
+            relation: 10,
+          })
+        ) {
+          await era.waitAnyKey();
+        }
+        return false;
+      case 95 + 25:
+        await print_title_with_kojo(this.#kojo, 'sa_95_25', teio, me);
+        wait = all_reward_in_event(this.id, {
+          attr: [35, 0, 35],
+          base: [350],
+          love: 1,
+          relation: 10,
+        });
+        break;
+      case 'the_days_together':
+        if (
+          (
+            await print_title_with_kojo(
+              this.#kojo,
+              'sa_the_days_together',
+              teio,
+              me,
+            )
+          )[0] === 1
+        ) {
+          wait = all_reward_in_event(this.id, {
+            attr: base_attr_list.map(() => 5),
+            relation: 10,
+          });
+        } else {
+          wait = all_reward_in_event(this.id, {
+            attr: gacha(base_attr_list, 2).reduce((p, c) => {
+              p[c] = 10;
+              return p;
+            }, {}),
+            motivation: 1,
+            love: 1,
+          });
+        }
+    }
+    wait && (await era.waitAnyKey());
+    return true;
+  }
+
+  async school_rooftop(teio, me, callname, hook, extra, ebj) {
+    if (era.get('flag:当前互动角色') !== 3) {
+      add_event(hook.hook, ebj);
+      return;
+    }
+    let wait = false;
+    if (ebj?.arg !== 'wing_and_sky') {
+      return false;
+    }
+    if (
+      (
+        await print_title_with_kojo(this.#kojo, 'sr_wing_and_sky', teio, me)
+      )[0] === 1
+    ) {
+      wait = all_reward_in_event(this.id, {
+        attr: [20, 20, 0, 0, 20],
+        base: [200],
+        love: 1,
+      });
+    } else {
+      wait = all_reward_in_event(this.id, {
+        attr: [15, 0, 20, 20, 0],
+        relation: 5,
+      });
+    }
+    wait && (await era.waitAnyKey());
+    return true;
+  }
+
+  async train_fail(teio, me, callname, hook, extra) {
+    extra.args = extra.fumble ? fumble_result.fumble : fumble_result.fail;
+    if (extra.train === attr_enum.intelligence) {
+      await this.#kojo.train_fail_intel(teio, me);
+    } else {
+      await this.#kojo.train_fail(teio, me);
       hook.arg = 0;
     }
+  }
+
+  async week_end(teio, me, callname, hook, extra, ebj) {
+    let wait = false;
+    switch (ebj?.arg) {
+      case 95 + 17:
+        if (
+          (
+            await print_title_with_kojo(this.#kojo, 'we_95_17_h', teio, me)
+          )[0] === 2
+        ) {
+          new TeioEduMarks().abandon_disabled = 1;
+
+          begin_and_init_ero(0, 3);
+          await quick_make_love(
+            new EroParticipant(0, part_enum.mouth),
+            new EroParticipant(3, part_enum.mouth),
+            false,
+          );
+          if (teio.sex_code !== 1) {
+            set_palam_to_max(3, part_enum.virgin);
+          } else {
+            set_palam_to_max(3, part_enum.penis);
+          }
+          await quick_make_love(
+            new EroParticipant(0, part_enum.hand),
+            new EroParticipant(3, part_enum.breast),
+            false,
+          );
+          await print_ero_page(3, true);
+          await end_ero_and_show_result();
+
+          await this.#kojo.we_95_17_h_sex_end(teio, me);
+
+          get_skill_list(teio.sex_code).forEach((aid) =>
+            era.set(`abl:3:${aid}`, Math.min(era.get(`abl:3:${aid}`) + 1, 5)),
+          );
+          get_filtered_talents(teio.sex_code, 60)
+            .filter((tid) => era.get(`talent:3:${tid}`) < 1)
+            .forEach((tid) => era.set(`talent:3:${tid}`, 1));
+          sys_like_chara(3, 0, 12, true, 1) && (await era.waitAnyKey());
+        }
+        break;
+      case 143 + 5:
+        await print_title_with_kojo(this.#kojo, 'ws_143_5_h', teio, me);
+        era.set('status:3:腿伤', 0);
+        if (era.get('talent:3:自信程度') === 1) {
+          era.set('talent:3:自信程度', 0);
+        }
+        sys_like_chara(this.id, 0, 20, true, 2);
+        wait = true;
+        break;
+      case 'palace':
+        await CustomizedEdu.common_palace(teio, me);
+        await CustomizedEdu.common_palace_relation(teio, me);
+        era.println();
+        await (
+          new TeioEduMarks().give_up > 0
+            ? this.#kojo.ws_palace_g
+            : this.#kojo.ws_palace_h
+        )(teio);
+    }
+    wait && (await era.waitAnyKey());
+  }
+
+  async week_start(teio, me, callname, hook, extra, ebj) {
+    let wait = false;
+    switch (ebj?.arg) {
+      case 47 + 1:
+        era.set('cflag:3:节日事件标记', 0);
+        switch (
+          (await print_title_with_kojo(this.#kojo, 'ws_47_1', teio, me))[0]
+        ) {
+          case 1:
+            wait = all_reward_in_event(this.id, {
+              attr: { [attr_enum.toughness]: 20 },
+            });
+            break;
+          case 2:
+            wait = all_reward_in_event(this.id, {
+              attr: { [attr_enum.endurance]: 20 },
+            });
+            break;
+          case 3:
+            wait = all_reward_in_event(this.id, { pt: 20 });
+        }
+        break;
+      case 47 + 12:
+        await print_title_with_kojo(this.#kojo, 'ws_47_12', teio, me);
+        wait = all_reward_in_event(this.id, {
+          attr: [15, 0, 0, 10],
+          relation: 5,
+        });
+        break;
+      case 95 + 5:
+        if (
+          (await print_title_with_kojo(this.#kojo, 'ws_95_5', teio, me))[0] ===
+          1
+        ) {
+          wait = all_reward_in_event(this.id, {
+            attr: base_attr_list.map(() => 5),
+            pt: 20,
+            skills: [100039],
+          });
+          new TeioEduMarks().give_up = 1;
+        } else {
+          wait = all_reward_in_event(this.id, {
+            base: [-150, -50],
+            love: 1,
+            relation: 10,
+          });
+        }
+        break;
+      case 95 + 14:
+        era.set('cflag:3:节日事件标记', 0);
+        await print_title_with_kojo(
+          this.#kojo,
+          new TeioEduMarks().give_up > 0 ? 'ws_95_14_g' : 'ws_95_14_h',
+          teio,
+          me,
+        );
+        break;
+      case 95 + 17:
+        if (
+          (
+            await print_title_with_kojo(this.#kojo, 'ws_95_17_h', teio, me)
+          )[0] === 2 &&
+          era.get('love:3') >= 75
+        ) {
+          add_event(event_hooks.week_end, ebj);
+        }
+        if (
+          !new TeioEduMarks().give_up &&
+          RaceHistory.get(3).get_result(95 + 16)?.race === race_enum.tenn_spr &&
+          !era.get(`status:${this.id}:腿伤`) > 0
+        ) {
+          era.set(`talent:${this.id}:自信程度`, 1);
+          era.set(`talent:${this.id}:淫乱`, 1);
+          era.set(`talent:${this.id}:身体素质`, 0);
+          era.set(`status:${this.id}:腿伤`, 1);
+          era.print(
+            i18n().kojo[this.id].notify_leg_hurt(teio, {
+              ...di18n.kojo.get_titled_content(this.id, 'hurt'),
+              color: buff_colors[3],
+            }),
+          );
+        }
+        break;
+      case 95 + 19:
+        if (
+          (
+            await print_title_with_kojo(
+              this.#kojo,
+              'ws_95_19_h',
+              teio,
+              me,
+              new TeioEduMarks().abandon_disabled > 0,
+            )
+          )[0] === 1
+        ) {
+          era.set('flag:强制BE', 3);
+          era.set('cflag:3:招募状态', recruit_flags.no);
+        } else {
+          sys_change_fame(10);
+          sys_change_money(300);
+        }
+        break;
+      default:
+        return await super.week_start(teio, me, callname, hook, extra, ebj);
+    }
+    wait && (await era.waitAnyKey());
   }
 };
