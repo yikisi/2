@@ -17,8 +17,11 @@ const { add_event, cb_enum } = require('#/event/queue');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
 
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
+
 const { get_chara_color } = require('#/data/chara-colors');
 const CharaTitles = require('#/data/chara-titles');
+const { buff_colors } = require('#/data/color-const');
 const TeioEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-3');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
@@ -26,6 +29,9 @@ const TeioLifeMarks = require('#/data/event/life-event-marks/life-event-marks-3'
 const RaceHistory = require('#/data/race/model/race-history');
 const RaceInfo = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
+
+const di18n = require('#/i18n/extended-def');
+const { i18n } = require('#/i18n/selector');
 
 const aim_races = {};
 aim_races[race_enum.begin_race] = 2;
@@ -202,7 +208,25 @@ module.exports = class extends CustomizedCheck {
           add_event(event_hooks.week_start, ebj_s);
           break;
         case 95 + 17: // 腿伤发布会
-          !edu_marks.give_up && add_event(event_hooks.week_start, ebj_s);
+          if (!edu_marks.give_up) {
+            add_event(event_hooks.week_start, ebj_s);
+            if (
+              RaceHistory.get(3).get_result(95 + 16)?.race ===
+                race_enum.tenn_spr &&
+              !era.get(`status:${this.id}:腿伤`) > 0
+            ) {
+              era.set(`talent:${this.id}:自信程度`, 1);
+              era.set(`talent:${this.id}:淫乱`, 1);
+              era.set(`talent:${this.id}:身体素质`, 0);
+              era.set(`status:${this.id}:腿伤`, 1);
+              era.print(
+                i18n().kojo[this.id].notify_leg_hurt(get_chara_talk(this.id), {
+                  ...di18n.kojo.get_titled_content(this.id, 'hurt'),
+                  color: buff_colors[3],
+                }),
+              );
+            }
+          }
           break;
         case 95 + 19: // 交涉
           if (

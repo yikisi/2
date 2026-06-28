@@ -41,7 +41,6 @@ const {
   fumble_result,
 } = require('#/data/train-const');
 
-const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 /** @param {RaceEndParams} extra  */
@@ -746,22 +745,6 @@ module.exports = class extends CustomizedEdu {
           era.get('love:3') >= 75
         ) {
           add_event(event_hooks.week_end, ebj);
-        }
-        if (
-          !new TeioEduMarks().give_up &&
-          RaceHistory.get(3).get_result(95 + 16)?.race === race_enum.tenn_spr &&
-          !era.get(`status:${this.id}:腿伤`) > 0
-        ) {
-          era.set(`talent:${this.id}:自信程度`, 1);
-          era.set(`talent:${this.id}:淫乱`, 1);
-          era.set(`talent:${this.id}:身体素质`, 0);
-          era.set(`status:${this.id}:腿伤`, 1);
-          era.print(
-            i18n().kojo[this.id].notify_leg_hurt(teio, {
-              ...di18n.kojo.get_titled_content(this.id, 'hurt'),
-              color: buff_colors[3],
-            }),
-          );
         }
         break;
       case 95 + 19:
