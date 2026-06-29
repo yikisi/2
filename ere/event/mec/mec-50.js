@@ -2,8 +2,12 @@ const era = require('#/era-electron');
 
 const CustomizedMec = require('#/event/mec/mec-common');
 
+const { get_chara_color } = require('#/data/chara-colors');
 const LegendUmaSelector = require('#/data/race/model/legend-uma-selector');
 const { race_enum } = require('#/data/race/race-const');
+
+const di18n = require('#/i18n/extended-def');
+const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends CustomizedMec {
   get_race_contestants(info) {
@@ -19,5 +23,26 @@ module.exports = class extends CustomizedMec {
         }
     }
     return super.get_race_contestants(info);
+  }
+
+  get_talents() {
+    return [
+      {
+        ...di18n.kojo.get_titled_content(this.id, 'swim_up'),
+        color: get_chara_color(this.id),
+      },
+    ];
+  }
+
+  set_callname() {
+    if (!this.set_callname_from_src()) {
+      era.set(`callname:${this.id}:0`, 'trainer');
+    }
+  }
+
+  set_pseudo_uma(uma) {
+    uma.attr_buffs.forEach((l) =>
+      l.push(['+0.5%', i18n().kojo[this.id].swim_up]),
+    );
   }
 };

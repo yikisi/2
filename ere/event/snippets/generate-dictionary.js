@@ -3,9 +3,9 @@ const era = require('#/era-electron');
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
 const get_display_name = require('#/utils/calc-display-name');
+const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { get_trainer_title } = require('#/data/info-generator');
-const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const { i18n } = require('#/i18n/selector');
 

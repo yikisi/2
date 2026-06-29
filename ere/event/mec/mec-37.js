@@ -89,7 +89,7 @@ module.exports = class extends CustomizedMec {
   }
 
   set_pseudo_uma(uma) {
-    if (era.get('status:37:荣耀德比')) {
+    if (era.get('status:37:荣耀德比') > 0) {
       uma.attr_buffs.forEach((l) =>
         l.push(['+50%', i18n().kojo[this.id].derby]),
       );

@@ -29,6 +29,7 @@ cons_dict[32] = require('#/event/daily/daily-32');
 cons_dict[35] = require('#/event/daily/daily-35');
 cons_dict[37] = require('#/event/daily/daily-37');
 cons_dict[46] = require('#/event/daily/daily-46');
+cons_dict[50] = require('#/event/daily/daily-50');
 cons_dict[52] = require('#/event/daily/daily-52');
 cons_dict[56] = require('#/event/daily/daily-56');
 cons_dict[60] = require('#/event/daily/daily-60');

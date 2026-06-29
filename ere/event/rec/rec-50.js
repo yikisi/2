@@ -10,6 +10,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
+const TaishinLifeMarks = require('#/data/event/life-event-marks/life-event-marks-50');
 const recruit_flags = require('#/data/event/recruit-flags');
 
 const { i18n } = require('#/i18n/selector');
@@ -43,6 +44,7 @@ module.exports = class extends CustomizedRecruit {
         // CFLAGNAME:66 = 招募状态
         era.set(`cflag:${this.id}:66`, recruit_flags.yes);
         era.set('callname:0:50', '105011');
+        new TaishinLifeMarks().after_recruit = 1;
       }
     }
   }
