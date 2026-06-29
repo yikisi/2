@@ -5,6 +5,7 @@ const { sys_check_remote } = require('#/system/sys-calc-chara-param');
 
 const { get_custom_mec } = require('#/event/mec/mec-factory');
 
+const { get_random_entry } = require('#/utils/list-utils');
 const { collapse_list } = require('#/utils/value-utils');
 
 const { get_chara_color } = require('#/data/chara-colors');
@@ -13,6 +14,8 @@ const CharaInmon = require('#/data/ero/chara-inmon');
 const { mark_enum } = require('#/data/ero/mark-const');
 const { lust_border } = require('#/data/ero/orgasm-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
+const event_hooks = require('#/data/event/event-hooks');
+const EventMarks = require('#/data/event/event-marks');
 const DarleyLifeMarks = require('#/data/event/life-event-marks/life-event-marks-340');
 const GodolphinLifeMarks = require('#/data/event/life-event-marks/life-event-marks-341');
 const ByerleyLifeMarks = require('#/data/event/life-event-marks/life-event-marks-342');
@@ -51,6 +54,12 @@ function sys_get_status(cid, collapse_limit = 0) {
   }
   // 个人状态
   status_list.push(...get_custom_mec(cid).get_status(show_train_buff));
+  if (cid > 0 && EventMarks.get(cid).check(event_hooks.out_mejiro)) {
+    status_list.push({
+      color: get_chara_color(get_random_entry([13, 27, 59, 64, 71, 74, 86])),
+      ...di18n.tb_status.get_titled_status('cum'),
+    });
+  }
   // 重要的短期状态：远程、沉睡、熬夜、摸鱼
   if (sys_check_remote(cid)) {
     status_list.push({

@@ -40,6 +40,8 @@ class I18nStatus {
   train_buff_1 = '精于训练';
   train_buff_2 = '极擅训练';
 
+  cum = '呼唤';
+
   1 = '熬夜';
   2 = '摸鱼';
   3 = '发胖';

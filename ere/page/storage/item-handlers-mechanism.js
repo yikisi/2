@@ -2,7 +2,9 @@ const era = require('#/era-electron');
 
 const { cb_enum, count_events, get: get_queue } = require('#/event/queue');
 
+const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
+const { max_chara_id } = require('#/data/other-const');
 
 const { i18n } = require('#/i18n/selector');
 
@@ -12,7 +14,9 @@ module.exports = (handlers) => {
     era.println();
     await era.printAndWait(i18n().timon.storage.fixer_start);
     const events = get_queue();
-    const chara_list = era.getAddedCharacters().filter((cid) => cid > 0);
+    const chara_list = era
+      .getAddedCharacters()
+      .filter((cid) => cid > 0 && cid < max_chara_id);
 
     const ev_dict = {};
     // 事件标识修复
@@ -30,10 +34,16 @@ module.exports = (handlers) => {
       const raw = marks.raw();
       if (ev_dict[cid] === void 0) {
         for (const hook in raw) {
+          if (Number(hook) === event_hooks.out_mejiro) {
+            continue;
+          }
           marks.set(hook, 0);
         }
       } else {
         for (const hook in raw) {
+          if (Number(hook) === event_hooks.out_mejiro) {
+            continue;
+          }
           if (!ev_dict[cid][hook]) {
             marks.set(hook, 0);
           } else if (raw[hook] !== ev_dict[cid][hook]) {
@@ -41,7 +51,7 @@ module.exports = (handlers) => {
           }
         }
         for (const hook in ev_dict[cid]) {
-          if (ev_dict[cid][hook] > 0 && !raw[hook]) {
+          if (ev_dict[cid][hook] > 0) {
             marks.set(hook, ev_dict[cid][hook]);
           }
         }

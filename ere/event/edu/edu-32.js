@@ -720,10 +720,7 @@ module.exports = class extends CustomizedEdu {
         wait = all_reward_in_event(this.id, { motivation: 1, pt: 20 });
         break;
       case 95 + 32:
-        if (
-          era.get('cflag:0:位置') !== location_enum.beach ||
-          era.get('cflag:32:位置') !== era.get('cflag:0:位置')
-        ) {
+        if (this.summer_non_beach) {
           add_event(hook.hook, ebj);
           return false;
         }
@@ -984,10 +981,7 @@ module.exports = class extends CustomizedEdu {
         }
         break;
       case 47 + 29:
-        if (
-          era.get('cflag:0:位置') !== location_enum.beach ||
-          era.get('cflag:32:位置') !== era.get('cflag:0:位置')
-        ) {
+        if (this.summer_non_beach) {
           add_event(hook.hook, ebj);
           return false;
         }
@@ -1003,8 +997,7 @@ module.exports = class extends CustomizedEdu {
         break;
       case 47 + 31:
         if (
-          era.get('cflag:0:位置') !== location_enum.beach ||
-          era.get('cflag:32:位置') !== era.get('cflag:0:位置') ||
+          this.summer_non_beach ||
           (edu_marks.plan_b > 0 &&
             era.get('cflag:25:位置') !== era.get('cflag:0:位置'))
         ) {
@@ -1166,10 +1159,7 @@ module.exports = class extends CustomizedEdu {
         wait = edu_marks.plan_b > 0 && sys_change_motivation(this.id, 1);
         break;
       case 95 + 29:
-        if (
-          era.get('cflag:0:位置') !== location_enum.beach ||
-          era.get('cflag:32:位置') !== era.get('cflag:0:位置')
-        ) {
+        if (this.summer_non_beach) {
           add_event(hook.hook, ebj);
           return false;
         }
@@ -1206,10 +1196,7 @@ module.exports = class extends CustomizedEdu {
         }
         break;
       case 95 + 31:
-        if (
-          era.get('cflag:0:位置') !== location_enum.beach ||
-          era.get('cflag:32:位置') !== era.get('cflag:0:位置')
-        ) {
+        if (this.summer_non_beach) {
           add_event(hook.hook, ebj);
           return false;
         }
