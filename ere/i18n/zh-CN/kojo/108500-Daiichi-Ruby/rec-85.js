@@ -95,7 +95,7 @@ module.exports = {
     era.println();
 
     era.print(`${you.name} 自己——`);
-    era.printButton('没有那样的自信。（停止招募）', 1);
+    era.printButton('没有那样的自信。（放弃招募）', 1);
     era.printButton('（看到那样的奔驰，哪能停滞不前！）', 2);
     era.printButton('（白丝萝莉香香……）', 3);
     ret.push((ret['hentai2'] = await era.input()));
@@ -137,7 +137,7 @@ module.exports = {
       era.print(
         '校外离学园最近的道场便是第一会场。尽管测试内容和训练员的工作毫无关系，但前辈训练员已经换好衣服出发了，要去参加吗？',
       );
-      era.printButton('（还是算了。）（停止招募）', 1);
+      era.printButton('（还是算了。）（放弃招募）', 1);
       era.printButton('（……这也许可以说是个大好机会吧。）', 2);
       ret.push((ret['select'] = await era.input()));
       if (ret['select'] === 2) {
@@ -262,7 +262,7 @@ module.exports = {
     era.println();
 
     era.print('随着测试的进行，主动放弃的人数甚至超过了测试不合格的人数。');
-    era.printButton('我也放弃了。（停止招募）', 1);
+    era.printButton('我也放弃了。（放弃招募）', 1);
     era.printButton('就是有必要，才会要我们做的。', 2);
     ret.push((ret['select'] = await era.input()));
     if (ret['select'] === 2) {
@@ -279,7 +279,7 @@ module.exports = {
         `遗憾的是现实让 ${you.name} 理解，自己与 ${ruby.name} 之间的鸿沟是多么得遥远、难以跨越。`,
       );
       era.print(`${ruby.sex}是生在陡峭的悬崖之上，谁人都无法触碰的高岭之花。`);
-      era.printButton('（自己配不上她的，放弃吧。）（停止招募）', 1);
+      era.printButton('（自己配不上她的，放弃吧。）（放弃招募）', 1);
       era.printButton(
         '（……但是，那出色的奔跑，那抹身姿恐怕此生都难以忘怀。）',
         2,

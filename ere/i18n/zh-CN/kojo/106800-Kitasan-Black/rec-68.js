@@ -215,7 +215,7 @@ module.exports = {
     era.printButton(`（我想要……做${kita.sex}的训练员啊！）`, 1);
     era.print('（继续招募）', { offset: 1, width: 12 });
     era.printButton(`（或许，我应该让${kita.sex}得到更好的训练员……）`, 2);
-    era.print('（取消招募）', { offset: 1, width: 12 });
+    era.print('（放弃招募）', { offset: 1, width: 12 });
     const ret = await era.input();
     if (ret === 1) {
       await era.printAndWait(

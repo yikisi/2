@@ -15,6 +15,7 @@ class I18nKojo {
   13 = new (require('#/i18n/zh-CN/kojo/101300-Mejiro-McQueen/entry'))();
   17 = new (require('#/i18n/zh-CN/kojo/101700-Symboli-Rudolf/entry'))();
   19 = new (require('#/i18n/zh-CN/kojo/101900-Agnes-Digital/entry'))();
+  20 = new (require('#/i18n/zh-CN/kojo/102000-Seiun-Sky/entry'))();
   21 = new (require('#/i18n/zh-CN/kojo/102100-Tamamo-Cross/entry'))();
   22 = new (require('#/i18n/zh-CN/kojo/102200-Fine-Motion/entry'))();
   24 = new (require('#/i18n/zh-CN/kojo/102400-Mayano-Top-Gun/entry'))();
@@ -27,6 +28,7 @@ class I18nKojo {
   36 = new (require('#/i18n/zh-CN/kojo/103600-Air-Shakur/entry'))();
   37 = new (require('#/i18n/zh-CN/kojo/103700-Eishin-Flash/entry'))();
   40 = new (require('#/i18n/zh-CN/kojo/104000-Gold-City/entry'))();
+  44 = new (require('#/i18n/zh-CN/kojo/104400-Sweep-Tosho/entry'))();
   46 = new (require('#/i18n/zh-CN/kojo/104600-Smart-Falcon/entry'))();
   47 = new (require('#/i18n/zh-CN/kojo/104700-Zenno-Rob-Roy/entry'))();
   49 = new (require('#/i18n/zh-CN/kojo/104900-Nakayama-Festa/entry'))();
@@ -35,6 +37,7 @@ class I18nKojo {
   55 = new (require('#/i18n/zh-CN/kojo/105500-Marvelous-Sunday/entry'))();
   56 = new (require('#/i18n/zh-CN/kojo/105600-Matikanefukukitaru/entry'))();
   60 = new (require('#/i18n/zh-CN/kojo/106000-Nice-Nature/entry'))();
+  61 = new (require('#/i18n/zh-CN/kojo/106100-King-Halo/entry'))();
   62 = new (require('#/i18n/zh-CN/kojo/106200-Matikanetannhauser/entry'))();
   64 = new (require('#/i18n/zh-CN/kojo/106400-Mejiro-Palmer/entry'))();
   65 = new (require('#/i18n/zh-CN/kojo/106500-Daitaku-Helios/entry'))();

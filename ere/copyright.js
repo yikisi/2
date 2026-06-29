@@ -154,7 +154,7 @@ function generate_copyrights() {
       '幽白書',
     ],
     [[get_copyright_entry(400)], '黑衣剑士-星爆气流斩准备就绪'],
-    [[get_copyright_entry(304)], '魔法亚瑟'],
+    // [[get_copyright_entry(304)], '魔法亚瑟'],
     [
       [get_copyright_entry(303, i18n().cr_kojo_suffix_part)],
       ['雞雞', { isDivider: true }, '幽白書'],

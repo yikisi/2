@@ -388,7 +388,7 @@ module.exports = {
       '还是尝试着想要挤出微笑，可骰子投出的结果只有失败，栗色的马尾无精打采地垂于双腿之间。',
     ]);
     era.printButton(`（我要成为 ${kitaru.name} 的担当）（尝试招募）`, 1);
-    era.printButton('（还是算了吧……）（停止招募）', 2);
+    era.printButton('（还是算了吧……）（放弃招募）', 2);
     const ret = await era.input();
     if (ret === 1) {
       era.printButton(`「${kitaru.name}！」`, 1);

@@ -314,7 +314,7 @@ module.exports = {
     await era.printAndWait('要怎么办呢？');
     era.println();
     era.printButton('大声说出帝王的名字，要求成为担当（继续招募）', 1);
-    era.printButton('还是算了吧……（停止招募）', 2);
+    era.printButton('还是算了吧……（放弃招募）', 2);
     ret.push(await era.input());
     if (ret[1] === 1) {
       await era.printAndWait([

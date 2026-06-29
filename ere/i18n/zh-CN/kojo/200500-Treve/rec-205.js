@@ -316,7 +316,7 @@ module.exports = {
       await era.printAndWait(
         `${you.name} 一边想着太直率也是问题，一边继续说。`,
       );
-      era.printButton('「我可以把你介绍给其他训练员……」（停止招募）', 1);
+      era.printButton('「我可以把你介绍给其他训练员……」（放弃招募）', 1);
       era.printButton('「你那么想赢凯旋门赏吗？」', 2);
       ret.push((ret['select'] = await era.input()));
       if (ret['select'] === 2) {
@@ -384,7 +384,7 @@ module.exports = {
         await era.printAndWait(
           `${treve.name} 依旧继续抬头看着 ${you.name}，${you.name}……`,
         );
-        era.printButton('「还是另请高明吧。」（停止招募）', 1);
+        era.printButton('「还是另请高明吧。」（放弃招募）', 1);
         era.printButton(`握住那只使劲把 ${you.name} 拉向赛场的手。`, 2);
         ret.push((ret['select'] = await era.input()));
         if (ret['select'] === 2) {

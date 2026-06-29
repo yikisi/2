@@ -268,7 +268,7 @@ module.exports = {
     era.printButton(
       `「重要的是寻找担当赛${flash.uma_sex_title}，安慰${
         flash.sex
-      }的事情之后再说。」（停止招募）`,
+      }的事情之后再说。」（放弃招募）`,
       2,
     );
     ret = (await era.input()) === 1;
@@ -929,7 +929,7 @@ module.exports = {
       }
       era.printButton('「我知道了，那我们就一起努力吧。」（招募成功）', 1);
       era.printButton(
-        '「很抱歉，我的能力可能没有你想得那么厉害，还请另寻高见吧。」（停止招募）',
+        '「很抱歉，我的能力可能没有你想得那么厉害，还请另寻高见吧。」（放弃招募）',
         2,
       );
       ret = (await era.input()) === 1;
