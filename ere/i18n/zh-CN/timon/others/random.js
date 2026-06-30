@@ -1458,11 +1458,11 @@ module.exports = {
      * @param {CharaTalk} chara 卷入事件的担当，可能是爱丽速子
      * @param {CharaTalk|false} tachyon 爱丽速子，如果 chara 是爱丽速子则是 false
      * @param {CharaTalk|false} minoru 骏川缰绳/丰收时刻，如果 chara 是骏川缰绳/丰收时刻则是 false
-     * @param {CharaTalk|false} dotou 名将怒涛，如果 chara 是名将怒涛则是 false
+     * @param {CharaTalk|false} doto 名将怒涛，如果 chara 是名将怒涛则是 false
      * @param {CharaTalk|false} maya 摩耶重炮，如果 chara 是摩耶重炮则是 false
      * @param {CharaTalk|false} sky 青云天空，如果 chara 是青云天空则是 false
      */
-    const f = async (you, chara, tachyon, minoru, dotou, maya, sky) => {
+    const f = async (you, chara, tachyon, minoru, doto, maya, sky) => {
       await printAndWait([
         '早上，',
         you.get_colored_name(),
@@ -1486,9 +1486,9 @@ module.exports = {
         ' 感觉有点怪异，却无法说出来。',
       ]);
       println();
-      if (dotou) {
-        await dotou.say_and_wait('(๑•́ωก̀๑)');
-        await printAndWait([dotou.sex, '怎么又哭了？']);
+      if (doto) {
+        await doto.say_and_wait('(๑•́ωก̀๑)');
+        await printAndWait([doto.sex, '怎么又哭了？']);
         println();
       }
       if (maya) {

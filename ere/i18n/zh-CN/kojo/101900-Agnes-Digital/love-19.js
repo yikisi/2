@@ -452,7 +452,7 @@ module.exports = {
      * @param {CharaTalk} teio 东海帝王
      * @param {CharaTalk} mcqueen 目白麦昆
      * @param {CharaTalk} opera 好歌剧
-     * @param {CharaTalk} dotou 名将怒涛
+     * @param {CharaTalk} doto 名将怒涛
      * @param {CharaTalk} palmer 目白善信
      * @param {CharaTalk} helios 大拓太阳神
      * @param {CharaTalk} taste 秋川弥生/北方风味
@@ -465,7 +465,7 @@ module.exports = {
       teio,
       mcqueen,
       opera,
-      dotou,
+      doto,
       palmer,
       helios,
       taste,
@@ -475,7 +475,7 @@ module.exports = {
     ) => {
       teio.name = '看起来比较孩子气的' + teio.uma_sex_title;
       opera.name = '看起来毫不在意的' + opera.uma_sex_title;
-      dotou.name = '看起来很冒失的' + dotou.uma_sex_title;
+      doto.name = '看起来很冒失的' + doto.uma_sex_title;
       mcqueen.name = '某个浅紫色芦毛' + mcqueen.uma_sex_title;
       palmer.name = '某个栗毛' + palmer.uma_sex_title;
       helios.name = '看起来像是染了蓝毛的' + helios.uma_sex_title;
@@ -608,7 +608,7 @@ module.exports = {
         digital.get_colored_name(),
         ' 正在擦的时候，眼睛又瞄到那边的海之家了。',
       ]);
-      await dotou.say_and_wait('对对对对不起！居然会把酱汁滴到你身上！');
+      await doto.say_and_wait('对对对对不起！居然会把酱汁滴到你身上！');
       await opera.say_and_wait(
         '啊，我的光辉可不会因此般而暗淡，仅会因瑕疵而更耀眼！',
       );

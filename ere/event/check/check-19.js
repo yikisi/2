@@ -79,9 +79,9 @@ module.exports = class extends CustomizedCheck {
   check_next_week() {
     const edu_weeks = era.get('cflag:19:育成回合计时');
     if (era.get('cflag:19:招募状态') === recruit_flags.yes) {
-      const life_marks = new AgLifeMarks(),
-        love = era.get('love:19'),
-        relation = era.get('relation:19:0');
+      const life_marks = new AgLifeMarks();
+      const love = era.get('love:19');
+      const relation = era.get('relation:19:0');
       if (!life_marks.shine && (relation > 75 || love >= 10)) {
         life_marks.shine = 1;
         add_event(
@@ -103,10 +103,8 @@ module.exports = class extends CustomizedCheck {
       }
     }
     if (edu_weeks < 3 * 48) {
-      const event_marks = new AgEduMarks();
-      const event_obj_special = new EventObject(19, cb_enum.edu, true).set_arg(
-        edu_weeks,
-      );
+      const edu_marks = new AgEduMarks();
+      const ebj_s = new EventObject(19, cb_enum.edu, true).set_arg(edu_weeks);
       let temp;
       switch (edu_weeks) {
         case 42: // 观战英里冠军赛
@@ -114,16 +112,16 @@ module.exports = class extends CustomizedCheck {
         case 47 + 37: // 一流的条件
         case 95 + 17: // 观战NHK英里杯
         case 95 + 32: // 资深年夏季合宿结束
-          add_event(event_hooks.week_end, event_obj_special);
+          add_event(event_hooks.week_end, ebj_s);
           break;
         case 47 + 1: // 新年的抱负
         case 95 + 6: // 情人节
         case 95 + 14: // 粉丝感谢祭
         case 95 + 29: // 资深年夏季合宿
-          add_event(event_hooks.week_start, event_obj_special);
+          add_event(event_hooks.week_start, ebj_s);
           break;
         case 95 + 48: // 圣诞节
-          add_event(event_hooks.week_start, event_obj_special);
+          add_event(event_hooks.week_start, ebj_s);
           temp = RaceHistory.get(19).get();
           if (
             check_aim_race(temp, race_enum.hyac_sta, 1) &&
@@ -133,24 +131,24 @@ module.exports = class extends CustomizedCheck {
               !check_aim_race(temp, race_enum.mile_cha, 1, 1) ||
               !check_aim_race(temp, race_enum.tenn_sho, 2, 1))
           ) {
-            add_event(event_hooks.week_end, event_obj_special);
+            add_event(event_hooks.week_end, ebj_s);
           }
           break;
         case 47 + 24: // 观战宝冢纪念
           if (sys_reg_race(19).curr.race !== race_enum.takz_kin) {
-            add_event(event_hooks.week_end, event_obj_special);
+            add_event(event_hooks.week_end, ebj_s);
           }
           break;
         case 47 + 29: // 夏季合宿 + 夏合宿途中
-          add_event(event_hooks.week_start, event_obj_special);
-          add_event(event_hooks.week_end, event_obj_special);
+          add_event(event_hooks.week_start, ebj_s);
+          add_event(event_hooks.week_end, ebj_s);
           break;
         case 95 + 1: // 初诣
-          add_event(event_hooks.out_church, event_obj_special);
+          add_event(event_hooks.out_church, ebj_s);
           break;
         case 95 + 23: // 勇者挑战
-          if (event_marks.yuusha_fight === 3) {
-            add_event(event_hooks.week_end, event_obj_special);
+          if (edu_marks.yuusha_fight === 3) {
+            add_event(event_hooks.week_end, ebj_s);
           }
           break;
       }
