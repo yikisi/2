@@ -197,7 +197,7 @@ rec:
         content:
           - fontWeight: bold
             content: %CHARA%
-          - 「哼哼～♪ 从今以后，你就是天才%魔法少女%sweepy大人专属的使魔了！」
+          - 「哼哼～♪ 从今以后，你就是天才魔法%TEEN%sweepy大人专属的使魔了！」
       - color: %COLOR%
         content:
           - fontWeight: bold

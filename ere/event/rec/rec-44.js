@@ -12,7 +12,7 @@ module.exports = class extends CustomizedRecruit {
     if (
       (
         await i18n().kojo[this.id].recruit.rec(
-          generate_dictionary(this.id, { uma: !0 }),
+          generate_dictionary(this.id, { teen: !0, uma: !0 }),
         )
       )['rec'] === 1
     ) {
