@@ -6,7 +6,6 @@ class RubyEduMarks extends EduEventMarks {
 
   rest_day;
   wait_station;
-  sugu;
   shopping_together;
 
   constructor() {

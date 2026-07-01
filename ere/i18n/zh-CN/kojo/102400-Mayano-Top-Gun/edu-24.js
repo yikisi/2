@@ -813,11 +813,11 @@ module.exports = {
     const title = '新年的抱负';
     /**
      * @param {CharaTalk} maya 摩耶重炮
-     * @param {CharaTalk} me 玩家
+     * @param {CharaTalk} you 玩家
      * @param {string} callname 摩耶重炮对玩家的称呼
      * @param {PrintedSpan} call_5 摩耶重炮对富士奇石的称呼
      */
-    const f = async (maya, me, callname, call_5) => {
+    const f = async (maya, you, callname, call_5) => {
       await era.printAndWait([
         '从今年起就要开始挑战经典赛了。你们为了决定新年的抱负，相约碰面──',
       ]);
@@ -898,7 +898,7 @@ module.exports = {
           ]);
           await era.printAndWait([
             '……',
-            me.get_colored_name(),
+            you.get_colored_name(),
             ' 理所当然地阻止',
             maya.sex,
             '，之后送 ',
@@ -915,14 +915,14 @@ module.exports = {
           ]);
           await maya.say_and_wait('…………');
           await maya.say_and_wait('这里对我来说会不会太成熟了……？没问题吗？');
-          await me.say_as_passer_by_and_wait(
+          await you.say_as_passer_by_and_wait(
             '和食料理店的老板娘',
             '哎呀哎呀，来了一位好可爱的客人呢。欢迎光临，呵呵。',
           );
           await maya.say_and_wait('呜、呜呀！？');
           await era.printAndWait([
             '于是 ',
-            me.get_colored_name(),
+            you.get_colored_name(),
             ' 就和紧张的 ',
             maya.get_colored_name(),
             ' 享受了一场年菜约会。',
@@ -944,7 +944,7 @@ module.exports = {
           await era.input();
           await maya.say_and_wait('咦，狡猾好狡猾。告诉我啦！');
           await era.printAndWait([
-            me.get_colored_name(),
+            you.get_colored_name(),
             ' 打从心底祈祷，希望 ',
             maya.get_colored_name(),
             ' 之后能够实现',

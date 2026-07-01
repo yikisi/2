@@ -1330,25 +1330,24 @@ module.exports = {
     /**
      * @param {CharaTalk} teio 东海帝王
      * @param {CharaTalk} you 玩家
-     * @param {string} callname 东海帝王对玩家的称呼
      */
-    const f = async (teio, me, callname) => {
+    const f = async (teio, you) => {
       await era.printAndWait('陪女人逛街，辛苦。');
       await era.printAndWait('陪女人进商业中心，疲惫。');
       await era.printAndWait(`陪${teio.uma_sex_title}买东西，累麻了。`);
-      await era.printAndWait(`很不幸，${me.name} 现在就在这第三个层级。`);
+      await era.printAndWait(`很不幸，${you.name} 现在就在这第三个层级。`);
       await era.printAndWait(
         `推着购物车——速度比起${teio.sex}来说简直不是一个级别——一边对照列的清单一边查点货架上的东西。光是如此倒也不失为一种悠闲。`,
       );
       await era.printAndWait(
-        `不过，${me.name} 看着一眨眼就被不知道从哪来的东西填满的购物车，和耳边不停的穿梭气流声，不由自主地叹起气来。`,
+        `不过，${you.name} 看着一眨眼就被不知道从哪来的东西填满的购物车，和耳边不停的穿梭气流声，不由自主地叹起气来。`,
       );
       era.println();
       await teio.say_and_wait(
         '训练员，快一点！还有要买的东西，我一个人拿不了那么多，需要你帮忙装啊！再不来，就要被抢光了！',
       );
       await era.printAndWait(
-        ` ${me.name} 仰天长啸，算是认了命，催动双腿向声音来源处靠拢——`,
+        ` ${you.name} 仰天长啸，算是认了命，催动双腿向声音来源处靠拢——`,
       );
       era.printButton(
         '拼命跟上帝王的节奏（速度&力量&根性+20，体力+200，好感+10）',

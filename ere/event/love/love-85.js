@@ -17,6 +17,7 @@ const print_ero_page = require('#/page/page-ero');
 
 const CustomizedLove = require('#/event/love/love-common');
 const punish_rejecting_love = require('#/event/love/snippets/punish-rejecting-love');
+const { get_mother } = require('#/event/snippets/108500');
 const masturbate = require('#/event/snippets/masturbate');
 const print_event_name = require('#/event/snippets/print-event-name');
 const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
@@ -28,23 +29,8 @@ const {
   pregnant_stage_enum,
   vp_status_enum,
 } = require('#/data/ero/status-const');
-const ruby_color = require('#/data/chara-colors').get_chara_color(85);
 
 const { i18n } = require('#/i18n/selector');
-
-/** @param {array|string} _content */
-async function say_by_mother(_content) {
-  const content = Array.isArray(_content) ? _content : [_content];
-  await era.printAndWait(
-    [
-      { content: i18n().name.ruby_mother, fontWeight: 'bold' },
-      i18n().tk_speak_border[0],
-      ...content,
-      i18n().tk_speak_border[1],
-    ],
-    { color: ruby_color },
-  );
-}
 
 module.exports = class extends CustomizedLove {
   get #kojo() {
@@ -84,18 +70,14 @@ module.exports = class extends CustomizedLove {
       this.#kojo,
       '74',
       ruby,
+      get_mother(),
       me,
       callname,
-      say_by_mother,
     );
 
-    if (ret[0] === 1) {
-      if (ret[1] === 1) {
-        era.set('flag:强制BE', this.id);
-        return;
-      }
-    } else {
-      await era.printAndWait(['训练员室成了你们今天挥洒汗水锻炼的场所。']);
+    if (ret[0] === 1 && ret[1] === 1) {
+      era.set('flag:强制BE', this.id);
+      return;
     }
 
     begin_and_init_ero(0, this.id);
@@ -123,7 +105,7 @@ module.exports = class extends CustomizedLove {
     }
     era.set('talent:85:淫壶', cache2);
     era.set('abl:85:阴道耐性', cache1);
-    await this.#kojo['74-after'](ruby, me, callname, say_by_mother);
+    await this.#kojo['74-after'](ruby, get_mother(), me, callname);
     await sys_love_uma_in_event(this.id);
   }
 

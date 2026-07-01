@@ -157,11 +157,11 @@ module.exports = {
     const title = '母亲的消息';
     /**
      * @param {CharaTalk} ruby 第一红宝石
+     * @param {CharaTalk} mother 第一红宝石的母亲（剧情 NPC）
      * @param {CharaTalk} you 玩家
      * @param {CharaTalk} callname 第一红宝石对玩家的称呼
-     * @param {function} say_by_mother 以第一红宝石母亲的身份发言
      */
-    const f = async (ruby, you, callname, say_by_mother) => {
+    const f = async (ruby, mother, you, callname) => {
       const ret = [];
       await ruby.print_and_wait([
         '那是某个休息日发生的故事，',
@@ -186,8 +186,10 @@ module.exports = {
       ]);
       await ruby.say_and_wait('是什么样的男性？');
       await ruby.print_and_wait('大概是还有所抵抗吧，自然地提问了。');
-      await say_by_mother('是个非常棒的人哦？我擅自提出申请，对方好像很犹豫。');
-      await say_by_mother(
+      await mother.say_and_wait(
+        '是个非常棒的人哦？我擅自提出申请，对方好像很犹豫。',
+      );
+      await mother.say_and_wait(
         '但是，作为一族之长与你的母亲，我认为会是很棒的婚事。',
       );
       await ruby.print_and_wait(
@@ -311,10 +313,10 @@ module.exports = {
           await era.input();
           era.printButton('「请把令爱交给我。」', 1);
           await era.input();
-          await say_by_mother('……啊啦啊啦，是心灵感应吗？');
-          await say_by_mother('还是……那孩子对你说了些什么？');
-          await say_by_mother('哈啊……');
-          await say_by_mother('请来府上一趟吧，我安排其他的管家去接你。');
+          await mother.say_and_wait('……啊啦啊啦，是心灵感应吗？');
+          await mother.say_and_wait('还是……那孩子对你说了些什么？');
+          await mother.say_and_wait('哈啊……');
+          await mother.say_and_wait('请来府上一趟吧，我安排其他的管家去接你。');
           era.drawLine();
           await era.printAndWait([
             '前往 ',
@@ -639,11 +641,11 @@ module.exports = {
   })(),
   /**
    * @param {CharaTalk} ruby 第一红宝石
+   * @param {CharaTalk} mother 第一红宝石的母亲（剧情 NPC）
    * @param {CharaTalk} you 玩家
    * @param {CharaTalk} callname 第一红宝石对玩家的称呼
-   * @param {function} say_by_mother 以第一红宝石母亲的身份发言
    */
-  async '74-after'(ruby, you, callname, say_by_mother) {
+  async '74-after'(ruby, mother, you, callname) {
     era.drawLine();
     await era.printAndWait([
       '云收雨歇，',
@@ -703,7 +705,7 @@ module.exports = {
     era.printButton('「初次见面，红宝石女士。」', 1);
     await era.input();
     await ruby.say_and_wait(['为什么，', callname, ' 会在这里……？']);
-    await say_by_mother('真是感慨啊，露比。这个场景实在是似曾相识。');
+    await mother.say_and_wait('真是感慨啊，露比。这个场景实在是似曾相识。');
     await era.printAndWait([
       '母亲好像注意到了 ',
       ruby.get_colored_name(),
@@ -714,7 +716,7 @@ module.exports = {
       you.get_colored_name(),
       '这么优秀的人才逃跑。',
     ]);
-    await say_by_mother('没有提前和你说清楚，真是对不起。');
+    await mother.say_and_wait('没有提前和你说清楚，真是对不起。');
     await era.printAndWait([
       '对于母亲道歉的话语，',
       ruby.get_colored_name(),

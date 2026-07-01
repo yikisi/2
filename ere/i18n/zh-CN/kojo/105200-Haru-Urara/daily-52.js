@@ -2747,9 +2747,9 @@ module.exports = {
    * @param {CharaTalk} urara 春乌拉拉
    * @param {CharaTalk} you 玩家
    * @param {string} callname 春乌拉拉对玩家的称呼
-   * @param {boolean} ticket 是否抽到温泉旅行券
+   * @param {boolean} has_ticket 是否抽到温泉旅行券
    */
-  async o_s_drawing(urara, you, callname, ticket) {
+  async o_s_drawing(urara, you, callname, has_ticket) {
     await era.printAndWait([
       '为了补充训练员室冰箱内缺少的食材，',
       you.get_colored_name(),
@@ -2803,7 +2803,7 @@ module.exports = {
       urara.uma_sex_title,
       '充满期待的注视中，盒子在旋转中不断发出着不同的脆响，随后——',
     ]);
-    if (ticket) {
+    if (has_ticket) {
       await you.say_as_passer_by_and_wait(
         '工作人员A',
         '恭喜啊小乌拉拉！抽到特等奖『温泉旅游券』了！！',

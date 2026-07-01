@@ -151,59 +151,50 @@ module.exports = class extends CustomizedCheck {
       );
       rec_status.round = era.get('flag:当前回合数');
     } else if (edu_weeks < 3 * 48) {
-      const edu_event_marks = new RubyEduMarks(),
-        edu_event = new EventObject(this.id, cb_enum.edu),
-        event_obj_special = new EventObject(this.id, cb_enum.edu, true).set_arg(
-          edu_weeks,
-        );
+      const edu_marks = new RubyEduMarks();
+      const ebj = new EventObject(this.id, cb_enum.edu);
+      const ebj_s = new EventObject(this.id, cb_enum.edu, true).set_arg(
+        edu_weeks,
+      );
       check_and_add_event(
-        edu_event_marks,
+        edu_marks,
         edu_weeks,
         'rest_day',
         event_hooks.office_study,
-        edu_event,
+        ebj,
       );
       check_and_add_event(
-        edu_event_marks,
+        edu_marks,
         edu_weeks,
         'wait_station',
         event_hooks.out_station,
-        edu_event,
+        ebj,
       );
       if (era.get('love:85') >= 75) {
         check_and_add_event(
-          edu_event_marks,
+          edu_marks,
           edu_weeks,
           'station',
           event_hooks.out_station,
-          edu_event,
-        );
-      }
-      if (edu_event_marks.get('sugu')) {
-        check_and_add_event(
-          edu_event_marks,
-          edu_weeks,
-          'sugu',
-          event_hooks.week_start,
-          edu_event,
+          ebj,
         );
       }
       if (edu_weeks >= 96) {
         check_and_add_event(
-          edu_event_marks,
+          edu_marks,
           edu_weeks,
           'shopping_together',
           event_hooks.out_shopping,
-          edu_event,
+          ebj,
         );
       }
       if (era.get('love:85') >= 75 && edu_weeks > 95 + 24) {
         check_and_add_event(
-          edu_event_marks,
+          edu_marks,
           edu_weeks,
           'hot_spring_event',
           event_hooks.out_start,
-          edu_event,
+          ebj,
         );
       }
       switch (edu_weeks) {
@@ -212,19 +203,21 @@ module.exports = class extends CustomizedCheck {
         case 47 + 19: // 只是凝视着前方
         case 47 + 29: // 夏季合宿（经典年）
         case 95 + 43: // 「华丽一族」的训练员
-          add_event(event_hooks.week_start, event_obj_special);
+          add_event(event_hooks.week_start, ebj_s);
           break;
         case 47 + 1: // 新年
         case 95 + 1: // 神社参拜
-          add_event(event_hooks.out_church, event_obj_special);
+          add_event(event_hooks.out_church, ebj_s);
           break;
         case 47 + 32: // 得到的启示
         case 95 + 32: // 夏季合宿结束（资深年）
-          add_event(event_hooks.week_end, event_obj_special);
+          add_event(event_hooks.week_end, ebj_s);
           break;
         case 95 + 29: // 夏季合宿（资深年）
-          add_event(event_hooks.week_start, event_obj_special);
-          add_event(event_hooks.week_end, event_obj_special);
+          add_event(event_hooks.week_start, ebj_s);
+          break;
+        case 95 + 30:
+          add_event(event_hooks.week_end, ebj_s);
       }
       check_and_register_aim_race(this.id, aim_races, edu_weeks);
     } else if (edu_weeks === 143 + 9) {

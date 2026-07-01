@@ -14,8 +14,14 @@ const name = {
   rec: 'recruit',
   base: 'basement',
 };
-const skipEntry = { 106799: 1 };
-const skip = { 100300: 1, 103200: 1 };
+const skipEntry = [106799].reduce((p, c) => {
+  p[c] = 1;
+  return p;
+}, {});
+const skip = [100300, 103200, 108500].reduce((p, c) => {
+  p[c] = 1;
+  return p;
+}, {});
 
 let entryOut = '';
 for (const charaPath of kojoDir) {
