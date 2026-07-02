@@ -25,10 +25,10 @@ class I18nKojo102100 {
     '电流衰弱；训练效果-20%，体力精力上限-200，消耗+10%，压力获取+10%';
 
   thundercloud = '雷云';
-  thundercloud_desc = '山雨欲来，目前只能参与OP级比赛';
+  thundercloud_desc = '山雨欲来，目前只能参与 OP 级比赛';
 
   pilot = '先导';
-  pilot_desc = '雷光初成，目前只能参与OP-G3级比赛';
+  pilot_desc = '雷光初成，目前只能参与 OP-G3 级比赛';
 
   spartan = '斯巴达式';
   spartan_desc = '训练效果+20%，体力精力消耗+5%';

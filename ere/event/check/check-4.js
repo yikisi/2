@@ -140,7 +140,7 @@ module.exports = class extends CustomizedCheck {
         case 34: //礼物 (已完成)  wind = 4
           add_event(event_hooks.week_start, ebj_s);
           break;
-        case 40: //万圣节 (已完成)
+        case 39: //万圣节 (已完成)
           add_event(event_hooks.week_end, ebj_s);
           break;
         case 41: //训练员与担当马娘 (已完成) wind = 5

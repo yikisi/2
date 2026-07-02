@@ -17,10 +17,11 @@ class I18nKojo100300 {
   );
 
   notify_leg_hurt = (teio, s_hurt) => [
+    '【',
     teio.get_colored_name(),
     ' 罹患了 ',
     s_hurt,
-    '……',
+    '！】',
   ];
 
   hurt = '腿伤！';

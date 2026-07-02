@@ -41,7 +41,7 @@ module.exports = class extends CustomizedRecruit {
           CALLNAME_51: sys_get_callname(51, 0),
           F_CALL_S: sys_get_callname(51, this.id),
           TASTE: taste.name,
-          COLOR_301: taste.color,
+          COLOR_302: taste.color,
         },
       );
       if (flower_high_rel || ret === 1) {

@@ -37,7 +37,7 @@ function all_reward_in_event(
   let ret = get_attr_and_print_in_event(cid, attr, pt, base, skip_line_break);
   ret = get_skills_and_print_in_event(cid, skills) || ret;
   ret = sys_change_motivation(cid, motivation) || ret;
-  if (relation > 0) {
+  if (relation !== 0 && relation !== void 0) {
     ret = sys_like_chara(cid, 0, relation, true, love);
   } else if (love > 0) {
     ret = sys_love_uma(cid, love);

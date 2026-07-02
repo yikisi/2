@@ -131,28 +131,33 @@ module.exports = class extends CustomizedEdu {
     era.set('talent:3:身体素质', 0);
     era.set('status:3:腿伤', 1);
     era.printMultiColumns([
-      { content: [teio.get_colored_name(), ' 不再 [体壮] 了！'], type: 'text' },
+      {
+        content: ['【', teio.get_colored_name(), ' 不再 [体壮] 了！】'],
+        type: 'text',
+      },
       {
         content: [
+          '【',
           teio.get_colored_name(),
           ' 变得 [自卑] 与 ',
           {
             color: buff_colors[2],
             content: '[淫乱]',
           },
-          ' 了！',
+          ' 了！】',
         ],
         type: 'text',
       },
       {
         content: [
+          '【',
           teio.get_colored_name(),
           ' 罹患了 ',
           {
             color: buff_colors[3],
             content: '[腿伤]',
           },
-          '！',
+          '！】',
         ],
         type: 'text',
       },

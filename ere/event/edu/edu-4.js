@@ -283,8 +283,8 @@ module.exports = class extends CustomizedEdu {
       case 'beginning':
         await print_title_with_kojo(this.#kojo, ebj.arg, maru, me, callname);
         break;
-      case 40:
-        await print_title_with_kojo(this.#kojo, 'we_40', maru, me, callname);
+      case 39:
+        await print_title_with_kojo(this.#kojo, 'we_39', maru, me, callname);
         wait = all_reward_in_event(this.id, { attr: [0, 0, 0, 0, 20] });
         break;
       case 41:

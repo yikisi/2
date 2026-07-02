@@ -1,7 +1,8 @@
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
 class TaishinLifeMarks extends LifeEventMarks {
-  after_recruit;
+  // 波光粼粼的水底
+  aquarium;
 
   constructor() {
     super(50);

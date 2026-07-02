@@ -1,11 +1,10 @@
 const era = require('#/era-electron');
 
-const TaishinLifeMarks = require('#/data/event/life-event-marks/life-event-marks-50');
 const CustomizedDaily = require('#/event/daily/daily-common');
 const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
 const generate_dictionary = require('#/event/snippets/generate-dictionary');
 
-const EduEventMarks = require('#/data/event/edu-event-marks/marks-class');
+const TaishinEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-50');
 
 const { i18n } = require('#/i18n/selector');
 
@@ -19,9 +18,9 @@ module.exports = class extends CustomizedDaily {
   }
 
   good_morning() {
-    const life_marks = new TaishinLifeMarks();
-    if (life_marks.after_recruit > 0) {
-      life_marks.after_recruit = 0;
+    const edu_marks = new TaishinEduMarks();
+    if (edu_marks.after_recruit > 0) {
+      edu_marks.after_recruit = 0;
       this.#kojo.select_after_recruit(this.#dict);
     } else {
       super.good_morning();
@@ -29,9 +28,9 @@ module.exports = class extends CustomizedDaily {
   }
 
   select() {
-    const life_marks = new TaishinLifeMarks();
-    if (life_marks.after_recruit > 0) {
-      life_marks.after_recruit = 0;
+    const edu_marks = new TaishinEduMarks();
+    if (edu_marks.after_recruit > 0) {
+      edu_marks.after_recruit = 0;
       this.#kojo.select_after_recruit(this.#dict);
     } else {
       super.select();
@@ -80,7 +79,7 @@ module.exports = class extends CustomizedDaily {
 
   async o_s_drawing(taishin, me, hook) {
     hook.override = true;
-    const edu_marks = EduEventMarks.get_marks(this.id);
+    const edu_marks = new TaishinEduMarks();
     let wait = false;
     let dice = Math.random();
     if (dice < 0.05 && !edu_marks.hot_spring) {

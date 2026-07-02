@@ -617,8 +617,7 @@ class CustomizedDaily extends CustomizedEvent {
   /** @param {HookArg} hook */
   async celebration(hook) {
     let h;
-    // FLAGNAME:0 = 当前回合数
-    switch (era.get('flag:0') % 48) {
+    switch (era.get('flag:当前回合数') % 48) {
       case 1:
         h = this.cl_new_year;
         break;
@@ -631,7 +630,7 @@ class CustomizedDaily extends CustomizedEvent {
       case 14:
         h = this.cl_fans;
         break;
-      case 29:
+      case 30:
         h = this.cl_temple_fair;
         break;
       case 40:

@@ -1179,7 +1179,7 @@ module.exports = {
     f.title = title;
     return f;
   })(),
-  we_40: (() => {
+  we_39: (() => {
     const title = '万圣夜';
     /**
      * @param {CharaTalk} maru 丸善斯基

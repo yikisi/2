@@ -146,8 +146,8 @@ module.exports = class extends CustomizedCheck {
       edu_marks = new TachyonEduMarks(),
       life_marks = new TachyonLifeMarks();
     if (era.get('cflag:32:招募状态') === recruit_flags.yes) {
-      const daily_event_object = new EventObject(32, cb_enum.daily),
-        relation = era.get('relation:32:0');
+      const ebj_d = new EventObject(32, cb_enum.daily);
+      const relation = era.get('relation:32:0');
       let temp;
       if (
         era.get('mark:32:反抗') === 3 &&
@@ -155,7 +155,7 @@ module.exports = class extends CustomizedCheck {
         Math.random() < 0.2
       ) {
         life_marks.hate = 1;
-        add_event(event_hooks.week_start, daily_event_object.set_arg('hate'));
+        add_event(event_hooks.week_start, ebj_d.set_arg('hate'));
       }
       life_marks.talk = 0;
       // 做饭检查
@@ -169,7 +169,7 @@ module.exports = class extends CustomizedCheck {
             temp <= 4 &&
             add_event(
               event_hooks.week_start,
-              daily_event_object
+              ebj_d
                 .copy()
                 .set_arg(`cook${Number(life_marks.cook >= 5)}${temp - 1}`),
             );
@@ -177,7 +177,7 @@ module.exports = class extends CustomizedCheck {
           (temp = cur_round - life_marks.l_cook) > 1 &&
             add_event(
               event_hooks.week_start,
-              daily_event_object.copy().set_arg(`cook2${temp - 1}`),
+              ebj_d.copy().set_arg(`cook2${temp - 1}`),
             );
         }
       }

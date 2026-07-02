@@ -28,7 +28,7 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
     ) {
       if (extra_flag.edu_weeks < 48 + 16) {
         new LaurelEduMarks().goal_1++;
-      } else if (extra_flag.edu_weeks < 48 + 44) {
+      } else if (extra_flag.edu_weeks < 47 + 44) {
         new LaurelEduMarks().goal_2++;
       }
     }
