@@ -1,36 +1,39 @@
 const era = require('#/era-electron');
 
+const { update_kiss_exp } = require('#/system/ero/sys-calc-ero-exp');
 const {
   begin_and_init_ero,
   end_ero_and_show_result,
 } = require('#/system/ero/sys-prepare-ero');
-const {
-  sys_change_motivation,
-  sys_change_pressure,
-} = require('#/system/sys-calc-base-cflag');
-const {
-  sys_get_callname,
-  sys_like_chara,
-} = require('#/system/sys-calc-chara-others');
+const { sys_change_pressure } = require('#/system/sys-calc-base-cflag');
+const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
+const { sys_change_money } = require('#/system/sys-calc-flag');
 
 const print_ero_page = require('#/page/page-ero');
 
-const Edu7UntilWeekStart = require('#/event/edu/edu-events-7/week-start');
+const CustomizedEdu = require('#/event/edu/edu-common');
 const { add_event } = require('#/event/queue');
-const get_attr_and_print_in_event = require('#/event/snippets/get-attr-and-print-in-event');
-const get_skills_and_print_in_event = require('#/event/snippets/get-skills-and-print-in-event');
+const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
+const check_aim_race = require('#/event/snippets/check-aim-race');
 const print_event_name = require('#/event/snippets/print-event-name');
 const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
+const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
+const CharaTalk = require('#/utils/chara-talk');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { gacha } = require('#/utils/list-utils');
 
 const color_7 = require('#/data/chara-colors').chara_colors[7];
+const { get_date_obj } = require('#/data/date-indicator');
 const { lust_border } = require('#/data/ero/orgasm-const');
-const recruit_flags = require('#/data/event/recruit-flags');
+const GoldShipEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-7');
+const RaceHistory = require('#/data/race/model/race-history');
+const { race_enum } = require('#/data/race/race-const');
+const { attr_enum, base_attr_list } = require('#/data/train-const');
 
 const { i18n } = require('#/i18n/selector');
 
-module.exports = class extends Edu7UntilWeekStart {
+module.exports = class extends CustomizedEdu {
   get #kojo() {
     return i18n().kojo[this.id].edu;
   }
@@ -44,558 +47,283 @@ module.exports = class extends Edu7UntilWeekStart {
     );
   }
 
-  /**
-   * @param {CharaTalk} gold_ship
-   * @param {CharaTalk} me
-   */
-  async hoverboard(gold_ship, me) {
-    await print_title_with_kojo(this.#kojo, 'hoverboard', gold_ship, me);
-    era.set('item:小金船号', 1);
-  }
-
-  async out_church(gold_ship, me, callname, hook, extra_flag, event_object) {
+  async out_church(gs, me, callname, hook, extra, ebj) {
     if (era.get('flag:当前互动角色') !== 7) {
-      add_event(hook.hook, event_object);
+      add_event(hook.hook, ebj);
       return;
     }
-    if (event_object.arg !== 95 + 1) {
+    if (ebj.arg !== 95 + 1) {
       return;
     }
-    await print_event_name(
-      [{ color: color_7[1], content: '新年参拜' }],
-      gold_ship,
-    );
-
-    await gold_ship.say_and_wait('阿训——！我又来啦！');
-    await gold_ship.say_and_wait('怎么样？！怎么样怎么样怎么样？！');
-    era.println();
-
-    await era.printAndWait(
-      `出乎意料地，${gold_ship.name} 并没有穿着普通的学校制服，而是一袭黑色的时尚衣裳。`,
-    );
-    era.println();
-
-    await gold_ship.say_and_wait('这是本船我亲自设计、亲自缝制的登台服装哦！');
-    await gold_ship.say_and_wait('目标可是在巴黎时装周上走秀呢！');
-    era.println();
-
-    era.printButton('「要说美不美，确实美……」', 1);
-    await era.input();
-
-    await era.printAndWait(
-      `${gold_ship.sex}嘿嘿笑着，挽住了 ${me.name} 的手臂，丰满的乳房随之压在 ${me.name} 上。`,
-    );
-    era.println();
-
-    await gold_ship.say_and_wait('那～明天我们就穿着盛装华服去神社过年吧！');
-    era.println();
-
-    era.printButton('「……咦？我也要穿吗？」', 1);
-    await era.input();
-
-    await era.printAndWait(
-      `隔天，${me.name} 被强行套上了豪华的武士铠甲，与穿着西洋贵妇风的黄金船在当地的神社一起被好奇的群众团团围住了。`,
-    );
-    era.println();
-
-    await era.printAndWait(
-      `与 ${gold_ship.name} 一起度过的第二年新年也让人完全不省心。`,
-    );
-    era.println();
-    let wait_flag = sys_like_chara(7, 0, 10);
-    sys_change_pressure(7, -2500);
-    wait_flag = sys_change_motivation(7, 1) || wait_flag;
-    wait_flag && (await era.waitAnyKey());
     era.set('cflag:7:节日事件标记', 0);
+    await print_event_name(
+      [{ color: color_7[1], content: this.#kojo.oc_95_1.title }],
+      gs,
+    );
+    await this.#kojo.oc_95_1(gs, me);
+    if (all_reward_in_event(this.id, { relation: 10, motivation: 1 })) {
+      await era.waitAnyKey();
+    }
+    sys_change_pressure(7, -2500);
     return true;
   }
 
-  async out_start(gold_ship, me, callname, hook, extra_flag, event_object) {
+  async out_start(gs, me, callname, hook, extra, ebj) {
     if (era.get('flag:当前互动角色') !== 7) {
-      add_event(hook.hook, event_object);
+      add_event(hook.hook, ebj);
       return;
     }
-    if (event_object?.arg !== 'golden_ship_date') {
+    if (ebj?.arg !== 'golden_ship_date') {
       return;
     }
+    let wait;
     await print_event_name(
-      [{ color: color_7[1], content: '阿船流约会' }],
-      gold_ship,
+      [{ color: color_7[1], content: this.#kojo.os_golden_ship_date.title }],
+      gs,
     );
-
-    await era.printAndWait(
-      `某天，${me.name} 与 ${gold_ship.name} 偶然在校门附近碰个正着——`,
-    );
-    era.println();
-
-    await gold_ship.say_and_wait('嘎！气死我嘞！');
-    await gold_ship.say_and_wait(
-      `${sys_get_callname(7, 0)}，佐敦那家伙竟然说我不懂怎么约会啊啊啊！`,
-    );
-    await gold_ship.say_and_wait(
-      `你反正也闲着没事吧？！现在跟老${
-        gold_ship.sex_code - 1 ? '娘' : '子'
-      }去约会啦！`,
-    );
-    era.println();
-
-    await era.printAndWait(`结果被${gold_ship.sex}强行拉到大街上约会去了……`);
-    await era.printAndWait(
-      '经过一天的胡闹后，你们二人来到归程的公园里稍事休息。',
-    );
-    era.println();
-
-    await gold_ship.say_and_wait('呼～我也有点累了。之后要干嘛好？');
-    era.printButton('「我去买饮料吧。」（耐力+20）', 1);
-    era.printButton('「延长赛！比到我赢为止！。」（力量+20）', 2);
-    const ret = await era.input();
-    if (ret === 1) {
-      await era.printAndWait(
-        `${me.name} 为 ${gold_ship.sex} 买了饮料，然后两人一起慢慢地走回宿舍去了。`,
-      );
-      era.println();
-
-      get_attr_and_print_in_event(7, [0, 20, 0, 0, 0], 0) &&
-        (await era.waitAnyKey());
+    if ((await this.#kojo.os_golden_ship_date(gs, me, callname))[0] === 1) {
+      wait = all_reward_in_event(this.id, { attr: [0, 20] });
     } else {
-      await era.printAndWait(
-        `${me.name} 与 ${gold_ship.name} 的奇妙游戏还在继续……`,
-      );
-      era.println();
-
-      get_attr_and_print_in_event(7, [0, 0, 20, 0, 0], 0) &&
-        (await era.waitAnyKey());
+      wait = all_reward_in_event(this.id, { attr: [0, 0, 20] });
     }
+    wait && (await era.waitAnyKey());
     return true;
   }
 
-  async school_atrium(gold_ship, me, callname, hook, extra_flag, event_object) {
-    if (era.get('flag:当前互动角色') !== 7) {
-      add_event(hook.hook, event_object);
-      return;
-    }
-    const event_arg = event_object?.arg;
-    if (event_arg === 47 + 3) {
-      await print_event_name(
-        [{ color: color_7[1], content: '母亲比神还要强编' }],
-        gold_ship,
-      );
-
-      const creek = get_chara_talk(45);
-
-      await era.printAndWait('？？？「沉睡于海底的黄金之船……」', {
-        color: color_7[1],
-      });
-      await era.printAndWait('？？？「如今正是觉醒的时候……」', {
-        color: color_7[1],
-      });
-      await era.printAndWait('？？？「发挥你的力量到达前无古人的境界吧……」', {
-        color: color_7[1],
-      });
-      era.println();
-
-      await gold_ship.say_and_wait('……嗯？刚才那是什么声音……？');
-      era.println();
-
-      era.printButton('「终于开始幻听了？」', 1);
-      await era.input();
-
-      await gold_ship.say_and_wait(
-        '我听到了自称神的声音，还是说那是小金船我体内的第二人格？',
-      );
-      era.println();
-      era.printButton('「我给你预约一下心理专家好了……」', 1);
-      await era.input();
-
-      await gold_ship.say_and_wait('不是啦，那家伙要我去什么『伊甸园』来着……');
-      era.println();
-
-      await era.printAndWait(
-        `经典三冠首战的皋月赏就快到了，还是不要想布丁吧……但 ${gold_ship.name} 还是自顾自地一溜烟冲出去寻找那个所谓的「伊甸园」了。`,
-      );
-      era.println();
-
-      await gold_ship.say_and_wait('I AM GODSHIP（我是神金船）——！');
-      era.println();
-
-      await era.printAndWait(
-        `${me.name} 只能发挥自己在室内变向过弯的速度勉强跟在 ${
-          gold_ship.name
-        } 身后一段距离——然后${
-          gold_ship.sex
-        }一头撞到了另一位${gold_ship.uma_sex_title}身上，又被跟随在后的 ${
-          me.name
-        } 夹到了中间。`,
-      );
-      era.println();
-
-      await gold_ship.say_and_wait('我……我看到……金星……金星上有公园……');
-      await gold_ship.say_and_wait(
-        '不对，你是谁！竟然能承受我神金船的冲击……！',
-      );
-      await creek.say_and_wait(
-        `哎呀哎啊，你好，${gold_ship.name} 同学。今天也很精神呢。！`,
-      );
-      era.println();
-
-      await era.printAndWait(
-        `竟然能承受如此巨大的冲击力，实在是奶……不对，实在是耐性超群的${creek.uma_sex_title}！`,
-      );
-      era.println();
-
-      era.printButton('「看来，哪怕是神也敌不过妈妈啊……」', 1);
-      await era.input();
-
-      await era.printAndWait(
-        `${me.name} 在向 ${creek.name} 致歉后，把昏头转向的 ${gold_ship.name} 拖回了训练室。`,
-      );
-      era.println();
-
-      get_attr_and_print_in_event(7, new Array(5).fill(3), 45) &&
-        (await era.waitAnyKey());
-    } else if (event_arg === 95 + 41) {
-      const festa = get_chara_talk(49);
-      await print_event_name(
-        [{ color: color_7[1], content: '认真对决编' }],
-        gold_ship,
-      );
-
-      await era.printAndWait(`引导 ${me.name} 与黄金船前往伊甸园的神秘人物……`);
-      era.println();
-
-      await era.printAndWait(
-        '那个人应该是为了让黄金船鼓起出赛干劲才如此大费周章吧。不管怎么样，只要能转换成黄金船的原动力……那就是三赢的局面呢。',
-      );
-      era.println();
-
-      era.printButton('（所以这些家伙又在干什么啊……）', 1);
-      await era.input();
-
-      await era.printAndWait(
-        `${
-          me.name
-        } 的眼前站着两个栩栩如生的${gold_ship.uma_sex_title}雕像……但与其说是栩栩如生，不如说就是本人。`,
-      );
-      era.println();
-
-      await gold_ship.say_and_wait('……');
-      await festa.say_and_wait('……');
-      era.println();
-
-      await era.printAndWait(
-        '二人伫立在人来人往的中庭，虽然一动不动，不过反而甚是显眼。',
-      );
-      era.println();
-
-      await festa.say_and_wait('……');
-      await gold_ship.say_and_wait('……');
-      era.println();
-
-      await era.printAndWait(
-        `也许是又在进行什么莫名其妙的对决了吧，什么不能动挑战之类的。这时候，${me.name} 想到了有趣的事情。`,
-      );
-      era.println();
-
-      era.printButton('「呜哇，老大不小了还在玩木头人啊。」', 1);
-      await era.input();
-
-      await gold_ship.say_and_wait('……');
-      await festa.say_and_wait('……！');
-      era.println();
-
-      era.printButton('「对了，要不要趁这个机会做点恶作剧呢～？」', 1);
-      await era.input();
-
-      await festa.say_and_wait('……呣！');
-      await gold_ship.say_and_wait('……');
-      era.println();
-
-      era.printButton('「哎唷，那不是旅程同学吗！」', 1);
-      era.printButton('爱抚二人腰间敏感的地方。', 2, {
-        disabled:
-          era.get('cflag:49:招募状态') !== recruit_flags.yes ||
-          era.get('love:49') < 50,
-      });
-
-      if ((await era.input()) === 1) {
-        await festa.say_and_wait('妈的，被看到了吗？！……你骗我！');
-        await gold_ship.say_and_wait('好，是我赢了！！');
-        await festa.say_and_wait(
-          '靠！可恶的黄金船！你行！下次就在我擅长的领域堂堂正正地打倒你！',
-        );
-        await gold_ship.say_and_wait('哈！那我就在终点旁边等着你了！');
-      } else {
-        await festa.say_and_wait('……你❤️！');
-        await gold_ship.say_and_wait('……❤️');
-        era.println();
-
-        await era.printAndWait(
-          `${me.name} 刻意的抚摸弄得二人心里焦躁万分，渐趋激烈的呼吸以及香唇里吐出的些许娇声，随着 ${me.name} 的双手逐渐往禁区推进而变得更加急促，胜负的结果已经不再重要了……`,
-        );
-
-        era.set(
-          'base:7:性欲',
-          Math.max(era.get('base:7:性欲'), lust_border.itch),
-        );
-        era.set(
-          'base:49:性欲',
-          Math.max(era.get('base:49:性欲'), lust_border.itch),
-        );
-        begin_and_init_ero(0, 7, 49);
-        await print_ero_page(7, true);
-        await end_ero_and_show_result(true);
+  async race_end(gs, me, callname, hook, extra) {
+    let key;
+    let args = [me, callname];
+    if (extra.rank === 1) {
+      switch (extra.race) {
+        case race_enum.begin_race:
+          if (era.get(`cflag:${this.id}:育成回合计时`) < 48) {
+            key = 'begin_race_win';
+            extra.attr_change = gacha(base_attr_list, 3).reduce((p, c) => {
+              p[c] = 3;
+              return p;
+            }, {});
+            extra.pt_change = 30;
+          }
+          break;
+        case race_enum.hope_sta:
+          extra.relation_change = 0;
+          extra.love_change = 0;
+          await print_event_name(
+            [{ color: color_7[1], content: this.#kojo.hope_sta_win.title }],
+            gs,
+          );
+          for (const s of await this.#kojo.hope_sta_win(gs, me)) {
+            if (s === 1) {
+              extra.love_change += 2;
+            } else {
+              extra.relation_change += 10;
+            }
+          }
+          extra.attr_change = base_attr_list.map(() => 3);
+          extra.pt_change = 45;
+          return;
+        case race_enum.sats_sho:
+          key = 'sats_sho_win';
+          extra.attr_change = [0, 0, 3];
+          break;
+        case race_enum.kiku_sho:
+          key = 'kiku_sho_win';
+          args = [get_chara_talk(37), me];
+          extra.attr_change = base_attr_list.map(() => 3);
+          extra.pt_change = 45;
+          break;
+        case race_enum.arim_kin:
+          if (era.get(`cflag:${this.id}:育成回合计时`) < 96) {
+            key = 'arim_kin_win_c';
+            extra.attr_change = base_attr_list.map(() => 3);
+            extra.pt_change = 45;
+          } else {
+            key = 'arim_kin_win_s';
+            new GoldShipEduMarks().keywords++;
+            extra.attr_change = base_attr_list.map(() => 3);
+            extra.pt_change = 45;
+          }
+          break;
+        case race_enum.tenn_spr:
+          key = 'tenn_spr_win';
+          args = [get_chara_talk(37), me];
+          new GoldShipEduMarks().keywords++;
+          extra.attr_change = base_attr_list.map(() => 3);
+          extra.pt_change = 45;
+          break;
+        case race_enum.takz_kin:
+          if (era.get(`cflag:${this.id}:育成回合计时`) > 96) {
+            await print_event_name(
+              [
+                {
+                  color: color_7[1],
+                  content: this.#kojo.takz_kin_win_s.title,
+                },
+              ],
+              gs,
+            );
+            const bad_result = Math.random() < 0.2;
+            const ret =
+              (await this.#kojo.takz_kin_win_s(
+                gs,
+                get_chara_talk(37),
+                get_chara_talk(48),
+                me,
+                callname,
+                check_aim_race(
+                  RaceHistory.get(this.id).get(),
+                  race_enum.takz_kin,
+                  1,
+                  1,
+                ),
+                bad_result,
+              )) ?? [];
+            if (ret[0] === 1) {
+              extra.attr_change = new Array(5).fill(3);
+              extra.attr_change[attr_enum.strength] += 15;
+              extra.pt_change = 45;
+              extra.motivation_change = 1;
+            } else if (ret[0] === 2) {
+              if (bad_result) {
+                extra.attr_change = new Array(5).fill(3);
+                extra.pt_change = 45;
+                extra.motivation_change = 1;
+                extra.skill_change = [200433];
+              } else {
+                extra.attr_change = new Array(5).fill(8);
+                extra.pt_change = 75;
+                extra.motivation_change = 1;
+              }
+            }
+            new GoldShipEduMarks().keywords++;
+            return;
+          }
+          break;
+        case race_enum.tenn_sho:
+          if (era.get(`cflag:${this.id}:育成回合计时`) > 96) {
+            key = 'tenn_sho_win_s';
+            new GoldShipEduMarks().keywords++;
+            extra.attr_change = [3, 13, 3, 3, 3];
+            extra.pt_change = 45;
+          }
+          break;
+        default:
+          key = 'race_end_win';
       }
-
-      get_attr_and_print_in_event(7, [0, 0, 0, 5, 0], 0) &&
-        (await era.waitAnyKey());
-    } else if (event_arg === 'heroine_red') {
-      await print_event_name(
-        [{ color: color_7[1], content: '主角的红色！' }],
-        gold_ship,
-      );
-
-      await era.printAndWait(`某天，${me.name} 走在中庭，看到——`);
-      await era.printAndWait(`身穿决胜服的 ${gold_ship.name}。`);
-      era.println();
-
-      await gold_ship.say_and_wait(
-        `啊，你不是 ${me.actual_name} 吗。今天也要精神地用鳃呼吸哦。`,
-      );
-      era.printButton('「……比起那个，你为啥穿着决胜服？」', 1);
-      await era.input();
-      await gold_ship.say_and_wait('这个是为了获得红色的主角之力。');
-      await gold_ship.say_and_wait(
-        '你那什么表情啊？仔细想想吧，小时候看的战队英雄、热血漫画的主角都是一身红色的对吧？',
-      );
-      await gold_ship.say_and_wait(
-        '穿红色的家伙就是主角，而且一定会获得最后的胜利！',
-      );
-      era.println();
-
-      await era.printAndWait(
-        `虽然有所偏差，但 ${gold_ship.name} 说得倒没错……但要不要借这个机会教育教育一下呢？`,
-      );
-      era.printButton('「世界上也有很多种红色。」（智力+20）', 1);
-      era.printButton('「要贯彻自己的信念！」（根性+20）', 2);
-      const ret = await era.input();
-      if (ret === 1) {
-        await gold_ship.say_and_wait('你说世上也有香艳的红色和反派的红色？！');
-        await gold_ship.say_and_wait('这样啊，原来是我小瞧了红色的力量……');
-        await gold_ship.say_and_wait(
-          '我从一开始，就已经获得了能担当主角，也能担当反派的力量了！',
-        );
-        await gold_ship.say_and_wait('而且……还附带香艳属性魅力没法挡哦♥');
-        era.println();
-
-        await era.printAndWait(
-          `${gold_ship.name} 留下魅惑的眼神，兴奋地离开了。`,
-        );
-        era.println();
-
-        get_attr_and_print_in_event(7, [0, 0, 0, 0, 20], 0) &&
-          (await era.waitAnyKey());
-      } else {
-        await gold_ship.say_and_wait(
-          `说得对啊！老${gold_ship.sex_code - 1 ? '娘' : '子'}，参上！`,
-        );
-        era.println();
-
-        await era.printAndWait(`${gold_ship.name} 活力四射地离开了。`);
-        era.println();
-
-        get_attr_and_print_in_event(7, [0, 0, 0, 20, 0], 0) &&
-          (await era.waitAnyKey());
-      }
-    } else if (event_arg === 'sudden_look_back') {
-      await print_event_name(
-        [{ color: color_7[1], content: '阿船的突然追忆过去篇！' }],
-        gold_ship,
-      );
-
-      await era.printAndWait(
-        `饿了。想来食堂里的拉面似乎备受好评的样子，${me.name} 便决定前往特雷森食堂治一治腹中饥饿。`,
-      );
-      era.println();
-
-      await era.printAndWait(
-        `在途中，${me.name} 远远看去便认出了在中庭坐着的黄金船。阳光自摇曳的枝叶间洒落到沉默的美人身上，熠熠生辉。`,
-      );
-      era.println();
-
-      await gold_ship.say_and_wait(`啊，是 ${me.actual_name}。`);
-      era.println();
-
-      era.printButton('你在这干嘛啊？不吃饭吗？', 1);
-      await era.input();
-
-      await gold_ship.say_and_wait('怎么说呢，我在回忆往事。');
-      await gold_ship.say_and_wait(
-        '很久以前的一个风雪夜，幼小的我为了给家中的螺丝工厂补贴生意，于是独自在街上卖金属球棒……',
-      );
-      era.println();
-
-      era.printButton('倒是打螺丝啊。', 1);
-      await era.input();
-
-      await gold_ship.say_and_wait(
-        '不过，在中途我就被彻骨的冷风冻得不成人形，都已经冷得哭出来了。',
-      );
-      await gold_ship.say_and_wait(
-        `然后……一位改变我命运的${gold_ship.uma_sex_title}出现了。`,
-      );
-      await gold_ship.say_and_wait(
-        `${gold_ship.sex}来到我的面前，向我递出了一碗温暖的拉面汤底泡饭。`,
-      );
-      era.println();
-
-      era.printButton('你要不要听听看你现在到底在讲什么？', 1);
-      await era.input();
-
-      await gold_ship.say_and_wait(
-        `${
-          gold_ship.sex
-        }是这么对我说的：『我虽然也是${gold_ship.uma_sex_title}，但不擅长跑步，于是现在开了一家拉面店，你也要记得自由地选择人生的目标哦。』`,
-      );
-      await gold_ship.say_and_wait(
-        `那个${gold_ship.uma_sex_title}对我说的话让我意识到了，原来我是可以不继承老家的螺丝工厂的！`,
-      );
-      era.println();
-
-      await era.printAndWait(
-        '不为他人所左右，坚决走出自己的道路……这一点确实十分的黄金船啊。',
-      );
-      era.println();
-
-      era.printButton('「试着重现当时的汤头吧？」（耐力 & 智力+10）', 1);
-      era.printButton('「到当时的地方再看看吧？」（速度+20）', 2);
-      const ret = await era.input();
-
-      if (ret === 1) {
-        await gold_ship.say_and_wait('重现汤底……我做得到吗？');
-        await gold_ship.say_and_wait(
-          '……哼，历经锻炼后的我怎么会做不到呢？我还记得那个放了一堆大蒜的味道！',
-        );
-        await gold_ship.say_and_wait(`随我来！`);
-        era.println();
-
-        await era.printAndWait(
-          `${me.name} 被黄金船带到了食堂厨房，二人在众目睽睽下抢占一角研究起来拉面汤底。`,
-        );
-        era.println();
-
-        await gold_ship.say_and_wait(
-          '好！完成了！全是大蒜的拉面！我们一起试味吧！',
-        );
-        era.println();
-
-        era.printButton('「辣死人啦————！！大蒜放太多了根本不能吃！」', 1);
-        await era.input();
-
-        await era.printAndWait(
-          `${me.name} 与黄金船事后检讨，认为当天之所以能顺利咽下那么重口味的汤泡饭是因为天气寒冷的极端案例。`,
-        );
-      } else {
-        await gold_ship.say_and_wait('当时的地方……没错了！我记得是在河堤边！');
-        await gold_ship.say_and_wait(
-          '假如一切如常的话，那个拉面摊子应该还在！',
-        );
-        era.println();
-
-        await era.printAndWait(
-          `${me.name} 被黄金船带到河堤寻找神秘的拉面摊子，一直到了晚上都颗粒无收……`,
-        );
-      }
-      era.println();
-
-      await era.printAndWait(
-        `之后的某天，${me.name} 在训练员室一直待到了晚上。身为黄金船的训练员，为${gold_ship.sex}管理粉丝信件也是自己的要务。${me.name} 机械式地翻开了其中一张信件，上头写着一些意味深长的话……`,
-      );
-      era.println();
-
-      await era.printAndWait(
-        '？？？「看来你确实有自由自在地选择自己的道路嘛，我也会一直守望着你的哦。」',
-      );
-      era.println();
-
-      era.printButton('这封信，就给阿船看看吧……', 1);
-      await era.input();
-
-      await era.printAndWait(
-        `信件上只有这些句子，上款下款从缺。但 ${me.name} 不禁想到了黄金船关于那个充满了大蒜味的，寒冬故事。`,
-      );
-      era.println();
-
-      if (ret === 1) {
-        get_attr_and_print_in_event(7, [0, 10, 0, 0, 10], 50) &&
-          (await era.waitAnyKey());
-      } else {
-        get_attr_and_print_in_event(7, [20, 0, 0, 0, 0], 50) &&
-          (await era.waitAnyKey());
-      }
+    } else {
+      return await super.race_end(gs, me, callname, hook, extra);
     }
-    return true;
-  }
-
-  async school_rooftop(
-    gold_ship,
-    me,
-    callname,
-    hook,
-    extra_flag,
-    event_object,
-  ) {
-    if (era.get('flag:当前互动角色') !== 7) {
-      add_event(hook.hook, event_object);
-      return;
-    }
-    if (event_object?.arg !== 'shoubu') {
-      return;
-    }
-    const festa = get_chara_talk(49);
     await print_event_name(
-      [{ color: color_7[1], content: '来认真一决胜负！' }],
-      gold_ship,
+      [{ color: color_7[1], content: this.#kojo[key].title }],
+      gs,
     );
-    await era.printAndWait(
-      `${me.name} 与 ${gold_ship.name} 一起在天台享受着小休……这段时间本来应该就这样毫无波澜地度过的——但 ${me.name} 看到了 ${festa.name}。`,
+    await this.#kojo[key](gs, ...args);
+  }
+
+  async school_atrium(gs, me, callname, hook, extra, ebj) {
+    if (era.get('flag:当前互动角色') !== 7) {
+      add_event(hook.hook, ebj);
+      return;
+    }
+    let wait = false;
+    switch (ebj?.arg) {
+      case 47 + 3:
+        await print_event_name(
+          [{ color: color_7[1], content: this.#kojo.sa_47_3.title }],
+          gs,
+        );
+        await this.#kojo.sa_47_3(
+          gs,
+          new CharaTalk(this.id, color_7[1]),
+          get_chara_talk(45),
+          me,
+        );
+        wait = all_reward_in_event(this.id, {
+          attr: base_attr_list.map(() => 3),
+          pt: 45,
+        });
+        break;
+      case 95 + 41:
+        await print_event_name(
+          [{ color: color_7[1], content: this.#kojo.sa_95_41.title }],
+          gs,
+        );
+        if ((await this.#kojo.sa_95_41(gs, get_chara_talk(49), me))[1] === 2) {
+          era.set(
+            'base:7:性欲',
+            Math.max(era.get('base:7:性欲'), lust_border.itch),
+          );
+          era.set(
+            'base:49:性欲',
+            Math.max(era.get('base:49:性欲'), lust_border.itch),
+          );
+          begin_and_init_ero(0, 7, 49);
+          await print_ero_page(7, true);
+          await end_ero_and_show_result(true);
+        }
+        wait = all_reward_in_event(this.id, {
+          attr: { [attr_enum.toughness]: 5 },
+        });
+        break;
+      case 'heroine_red':
+        await print_event_name(
+          [{ color: color_7[1], content: this.#kojo.sa_heroine_red.title }],
+          gs,
+        );
+        if ((await this.#kojo.sa_heroine_red(gs, me))[0] === 1) {
+          wait = all_reward_in_event(this.id, {
+            attr: { [attr_enum.intelligence]: 20 },
+          });
+        } else {
+          wait = all_reward_in_event(this.id, {
+            attr: { [attr_enum.toughness]: 20 },
+          });
+        }
+        break;
+      case 'sudden_look_back':
+        await print_event_name(
+          [
+            {
+              color: color_7[1],
+              content: this.#kojo.sa_sudden_look_back.title,
+            },
+          ],
+          gs,
+        );
+        if ((await this.#kojo.sa_sudden_look_back(gs, me))[0] === 1) {
+          wait = all_reward_in_event(this.id, {
+            attr: { [attr_enum.endurance]: 10, [attr_enum.intelligence]: 10 },
+          });
+        } else {
+          wait = all_reward_in_event(this.id, { attr: [20] });
+        }
+    }
+    wait && (await era.waitAnyKey());
+    return true;
+  }
+
+  async school_rooftop(gs, me, callname, hook, extra, ebj) {
+    if (era.get('flag:当前互动角色') !== 7) {
+      add_event(hook.hook, ebj);
+      return;
+    }
+    if (ebj?.arg !== 'shoubu') {
+      return;
+    }
+    let wait = false;
+    await print_event_name(
+      [{ color: color_7[1], content: this.#kojo.sr_shoubu.title }],
+      gs,
     );
-    era.println();
-
-    await festa.say_and_wait('……哟，你们今天心情也挺好的嘛。');
-    await gold_ship.say_and_wait(`${era.get('callname:7:49')}……！！`);
-    era.println();
-
-    await era.printAndWait(
-      `刹那间！你们的血液冻结了！是 ${festa.name} 身上那股赌徒的气势，让那 ${gold_ship.name} 都被压倒了吔……！！`,
+    const success = Math.random() < 0.8;
+    const ret = await this.#kojo.sr_shoubu(
+      gs,
+      get_chara_talk(49),
+      me,
+      sys_get_colored_callname(this.id, 49),
+      success,
     );
-    era.println();
-
-    await festa.say_and_wait(
-      '哼哼……不要露出这种表情嘛，你们这样会让我很想马上来对决一把的。',
-    );
-    await gold_ship.say_and_wait('对决……？！');
-
-    era.printButton('「庆典，你在说什么……！」', 1);
-    await era.input();
-
-    await festa.say_and_wait('当然是……');
-    era.println();
-    era.printButton(`${festa.name}「限定猜拳……！」`, 1);
-    era.printButton(`${festa.name}「皇帝牌……！」`, 2);
-    era.printButton(`${festa.name}「……性爱♡」`, 3, {
-      disabled:
-        era.get('cflag:49:招募状态') !== recruit_flags.yes ||
-        era.get('love:49') < 50,
-    });
-    let ret = await era.input();
-    if (ret === 3) {
-      await era.printAndWait(
-        `${me.name} 与黄金船被突如其来的做爱邀请惊呆在原地，但中山庆典眼中的欲火说明她已经迫不及待了……`,
-      );
-      era.println();
-      await festa.say_and_wait(
-        '我说，光是想像就已经让我下面都濡湿了……快来跟我决胜负吧♡♡♡',
-      );
+    if (ret[0] === 3) {
       era.set(
         'base:49:性欲',
         Math.max(era.get('base:49:性欲'), lust_border.absent_mind),
@@ -603,119 +331,202 @@ module.exports = class extends Edu7UntilWeekStart {
       begin_and_init_ero(0, 7, 49);
       await print_ero_page(49, true);
       await end_ero_and_show_result(true);
+    } else if (ret[1] === 1) {
+      wait = all_reward_in_event(this.id, { base: [100] });
+    } else if (Math.random() < 0.5) {
+      wait = all_reward_in_event(this.id, { skills: [200142], pt: 60 });
     } else {
-      await era.printAndWait(
-        ret === 1
-          ? '限定猜拳……！！使用卡牌以猜拳的方式夺取对手生命的可怕游戏……稍有不慎就会落入深渊！！'
-          : '皇帝牌……！！使用卡牌以比大小的方式来决定生死的可怕游戏……稍有不慎就会落入深渊！！',
-      );
-      era.println();
-      await era.printAndWait(
-        `糟糕……以${
-          gold_ship.couple_title
-        }的性格，等搞定之后午饭都要凉透了！怎么办，该阻止吗……？！`,
-      );
-      era.printButton('「不，就由我来顶上吧！」（体力+100）', 1);
-      era.printButton(
-        '「加油啊……！」（习得【非根干距离○】、技能点数+60 or 技能点数+15）',
-        2,
-      );
-      ret = await era.input();
-      if (ret === 1) {
-        await festa.say_and_wait('什么？没想到你竟然还挺勇的嘛……有趣！');
-        await festa.say_and_wait('好！今天我就陪你玩玩！');
-        await gold_ship.say_and_wait('喂喂不是吧？！就我一个被排挤了？！');
-        era.println();
-
-        await era.printAndWait(`${me.name} 使出了浑身解数，总算绝处逢生……`);
-        await era.printAndWait('但午休还是在不知不觉间过去了！');
-        era.println();
-
-        get_attr_and_print_in_event(7, undefined, 0, [100]) &&
-          (await era.waitAnyKey());
-      } else {
-        if (Math.random() < 0.5) {
-          await era.printAndWait(
-            `${gold_ship.name} 使出了浑身解数，总算绝处逢生……`,
-          );
-          await era.printAndWait('但午休还是在不知不觉间过去了！');
-          era.println();
-
-          get_skills_and_print_in_event(7, [200142]) &&
-            (await era.waitAnyKey());
-          get_attr_and_print_in_event(7, undefined, 60) &&
-            (await era.waitAnyKey());
-        } else {
-          await era.printAndWait(
-            `${gold_ship.name} 使出了浑身解数，但还是没赢过 ${festa.name}……`,
-          );
-          await era.printAndWait('而且午休还是在不知不觉间过去了！');
-          era.println();
-
-          get_attr_and_print_in_event(7, undefined, 15) &&
-            (await era.waitAnyKey());
-          era.set('status:7:摸鱼', 1);
-        }
-      }
+      wait = all_reward_in_event(this.id, { pt: 15 });
+      era.set('status:7:摸鱼', 1);
     }
+    wait && (await era.waitAnyKey());
     return true;
   }
 
-  async train_success_add(gold_ship, me, callname) {
+  async train_success_add(gs, me, callname, hook, extra) {
     await print_event_name(
-      [{ color: color_7[1], content: '额外的自主训练' }],
-      gold_ship,
+      [{ color: color_7[1], content: this.#kojo.ts_add.title }],
+      gs,
     );
-    await era.printAndWait([
-      '今天，与 ',
-      gold_ship.get_colored_name(),
-      ' 的训练总算结束了。',
-    ]);
-    era.println();
+    return (await this.#kojo.ts_add(gs, me, callname))[0] === 1;
+  }
 
-    await gold_ship.say_and_wait('辛苦了——！拜拜，拜拜！');
-    era.println();
+  async week_start(gs, me, callname, hook, extra, ebj) {
+    let wait = false;
+    let temp;
+    switch (ebj?.arg) {
+      case 47 + 1:
+        era.set('cflag:7:节日事件标记', 0);
+        await print_event_name(
+          [{ color: color_7[1], content: this.#kojo.ws_47_1.title }],
+          gs,
+        );
+        switch ((await this.#kojo.ws_41_1(gs, me))[0]) {
+          case 1:
+            wait = all_reward_in_event(this.id, { attr: [0, 40] });
+            break;
+          case 2:
+            wait = all_reward_in_event(this.id, {
+              attr: { [attr_enum.intelligence]: 40 },
+            });
+            break;
+          case 3:
+            wait = all_reward_in_event(this.id, { pt: 50 });
+        }
+        break;
+      case 47 + 29:
+        if (this.summer_non_beach) {
+          add_event(hook.hook, ebj);
+          return;
+        }
+        await print_event_name(
+          [{ color: color_7[1], content: this.#kojo.ws_47_29.title }],
+          gs,
+        );
+        await era.printAndWait(
+          '夏季合宿，对赛马娘而言是一段寓教于乐的时光。每逢暑假，绝大部份的特雷森学生都会来到海边享受阳光、海滩，以及可能的一点点地狱式锻炼。',
+        );
+        await era.printAndWait(
+          `而理所当然的，每到了这种时候，${me.name} 那位特立独行的爱马 ${gs.name} 都会特别来劲。`,
+        );
+        era.println();
 
-    await era.printAndWait([
-      gold_ship.get_colored_name(),
-      ' 伸了个懒腰便小跑着离开——然后又跑了回来。',
-    ]);
-    era.println();
+        await gs.say_and_wait(
+          '哦哦哦哦哦！说到夏天就是大海啊！让我们一起朝海边出发啦！！！',
+        );
+        await gs.say_and_wait('Zzzzzzz……');
+        era.println();
 
-    await gold_ship.say_and_wait('好嘞，来追加训练！我现在嗨得不行啊！');
-    await gold_ship.say_and_wait([
-      callname,
-      ' 你该不会不知道什么叫追加训练吧？大雄消息真不灵通啊——',
-    ]);
-    await gold_ship.say_and_wait(
-      '追加训练就是追加训练的简称啦——是遍布全宇宙一千万人的阿船圈中特别流行的玩意！',
-    );
-    await gold_ship.say_and_wait(
-      '身为我的训练员，你应该更深入研究一下这个的说。',
-    );
+        await era.printAndWait(
+          `${me.name} 看着在大巴上睡得像头死猪一样的 ${gs.name}，心想这家伙的干劲真是和 ${gs.sex} 本人一样来无影去无踪。`,
+        );
+        era.println();
 
-    era.printButton('「那我们可不能跟不上潮流呢。」', 1);
-    era.printButton('「不对，现在的流行是CD（Cool Down）！」', 2);
-    if ((await era.input()) === 1) {
-      await gold_ship.say_and_wait([
-        '好！很有精神！',
-        me.actual_name,
-        ' 队员，随我来——！',
-      ]);
-      era.println();
-      await era.printAndWait('你们在夕阳下也一直奔跑着。');
-      return true;
-    } else {
-      await gold_ship.say_and_wait(
-        'CD……？那啥玩意，很火的？在训练员圈里很火……？',
-      );
-      await gold_ship.say_and_wait('CD就是冷却的意思吗……嘿！那不简单吗！');
-      await gold_ship.say_and_wait(
-        '边吃着刨冰边CD就好了！简称『Cool Down CD』！',
-      );
-      era.println();
-      await era.printAndWait('于是你们好好地休息了一番。');
+        era.printButton('「起床啦！！！太阳晒屁股了！！！」', 1);
+        await era.input();
+
+        await gs.say_and_wait(
+          '呜哇～吓死我了！我刚才梦到了自己在大巴上等着去海滩合宿呢！你要怎么赔啊！',
+        );
+        era.println();
+
+        await era.printAndWait(
+          `${me.name} 没好气地用拇指指向窗外示意你们已经到了，注意到这点的 ${gs.name} 马上兴高采烈地一绷一跳地下了车。`,
+        );
+        era.println();
+
+        await era.printAndWait(
+          `你们渡过了几天不错的假期，训练也十分充实。但今天已经到了训练的时间，${gs.name} 还是没有出现。为了寻找 ${gs.sex} 的踪影，你来到了海边。`,
+        );
+        era.println();
+
+        await era.printAndWait('然后——');
+        era.println();
+
+        await gs.say_and_wait('哎走过路过不要错过哟～好吃的炒面大平卖哟～！！');
+        await gs.say_and_wait('有甜酸苦辣～就跟人生一样哟～！！');
+        era.println();
+
+        era.printButton('「为什么跑这里卖炒面来了啊……！！」', 1);
+        await era.input();
+
+        await era.printAndWait(
+          `${me.name} 气匆匆地走到摊子前面想要质问这个摸鱼的家伙。`,
+        );
+        era.println();
+
+        await gs.say_and_wait('啊～这不训练员吗～你要特辣的对吧？');
+        era.println();
+
+        era.printButton('「我是来叫你去训练的啊。」', 1);
+        await era.input();
+
+        await gs.say_and_wait(
+          '哎呀～我这不是在给店主大叔代班吗～人家腰酸背疼的，你忍心让大叔在大太阳下烤一天吗？',
+        );
+        await gs.say_and_wait(
+          '所以今天我一定要把这些面都卖完！不然的话大叔的腰就治不好了！',
+        );
+        era.println();
+
+        await era.printAndWait(
+          `${me.name} 知道以 ${gs.sex} 说一不二的性格是劝不动的，于是只好无奈地点了一盘甜酸味的炒面，坐到旁边的太阳椅上边吃边监视 ${gs.name} 以防 ${gs.sex} 又一次失踪。`,
+        );
+        temp = base_attr_list.map(() => 3);
+        gacha(base_attr_list, 3).forEach((a) => (temp[a] = 8));
+        wait = all_reward_in_event(this.id, { attr: temp, pt: 45 });
+        break;
+      case 47 + 41:
+        await print_event_name(
+          [{ color: color_7[1], content: this.#kojo.ws_47_41.title }],
+          gs,
+        );
+        await this.#kojo.ws_47_41(gs, get_chara_talk(15), me);
+        wait = all_reward_in_event(this.id, { attr: [0, 5] });
+        break;
+      case 95 + 3:
+        await print_event_name(
+          [{ color: color_7[1], content: this.#kojo.ws_95_3.title }],
+          gs,
+        );
+        await this.#kojo.ws_47_41(gs, get_chara_talk(35), me);
+        wait = all_reward_in_event(this.id, {
+          attr: {
+            [attr_enum.toughness]: 5,
+          },
+        });
+        break;
+      case 95 + 29:
+        if (this.summer_non_beach) {
+          add_event(hook.hook, ebj);
+          return;
+        }
+        await print_event_name(
+          [{ color: color_7[1], content: this.#kojo.ws_95_29.title }],
+          gs,
+        );
+        await this.#kojo.ws_95_29(gs, me, callname);
+        sys_change_money(-5, this.id);
+        wait = all_reward_in_event(this.id, { relation: 10, love: 2 });
+        if (era.get('love:7') >= 75) {
+          update_kiss_exp(get_date_obj(), this.id, 0);
+        }
+        break;
+      case 'eden':
+        new GoldShipEduMarks().keywords++;
+        await print_event_name(
+          [{ color: color_7[1], content: this.#kojo.ws_eden.title }],
+          gs,
+        );
+        if (
+          (
+            await this.#kojo.ws_eden(gs, get_chara_talk(302), me, callname)
+          )[0] === 1
+        ) {
+          await quick_into_sex(this.id);
+          await this.#kojo.ws_eden_sex_end(gs, me);
+        }
+        wait = all_reward_in_event(this.id, { relation: 200 });
+        break;
+      case 'hoverboard':
+        await print_title_with_kojo(this.#kojo, 'hoverboard', gs, me);
+        era.set('item:小金船号', 1);
+        break;
+      case 'carrot':
+        if (
+          (
+            await print_title_with_kojo(
+              i18n().timon.random_events,
+              'gs_carrot',
+              gs,
+            )
+          )[0] === 1
+        ) {
+          sys_change_money(20);
+        } else {
+          wait = all_reward_in_event(0, { base: [100] });
+        }
     }
-    return false;
+    wait && (await era.waitAnyKey());
   }
 };
