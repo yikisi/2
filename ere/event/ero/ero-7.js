@@ -9,6 +9,8 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends CustomizedEro {
+  static CHECK = false;
+
   async report_pregnant_between_weeks(
     gold_ship,
     me,

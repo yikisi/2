@@ -27,6 +27,8 @@ const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends CustomizedEro {
+  static CHECK = false;
+
   async ero_start(h) {
     if (
       sys_check_awake(25) &&

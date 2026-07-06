@@ -15,6 +15,8 @@ const chara_colors = require('#/data/chara-colors').chara_colors[52];
 const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends CustomizedEro {
+  static CHECK = false;
+
   async zero_stamina(urara, me, callname) {
     i18n().kojo[this.id].ero.zero_stamina(urara, me);
   }

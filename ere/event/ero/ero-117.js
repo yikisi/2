@@ -28,6 +28,8 @@ class VariationRapeLines extends RapeCommandLines {
 }
 
 module.exports = class extends CustomizedEro {
+  static CHECK = false;
+
   constructor(arg) {
     super(arg, { rape: true });
     this.rape = new VariationRapeLines(this);

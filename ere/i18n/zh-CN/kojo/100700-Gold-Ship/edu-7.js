@@ -1549,12 +1549,12 @@ module.exports = {
     const title = '阿船流约会';
     /**
      * @param {CharaTalk} gs 黄金船
-     * @param {CharaTalk} me 玩家
+     * @param {CharaTalk} you 玩家
      * @param {string} callname 黄金船对玩家的称呼
      */
-    const f = async (gs, me, callname) => {
+    const f = async (gs, you, callname) => {
       await era.printAndWait(
-        `某天，${me.name} 与 ${gs.name} 偶然在校门附近碰个正着——`,
+        `某天，${you.name} 与 ${gs.name} 偶然在校门附近碰个正着——`,
       );
       era.println();
 
@@ -1581,10 +1581,12 @@ module.exports = {
       const ret = await era.input();
       if (ret === 1) {
         await era.printAndWait(
-          `${me.name} 为 ${gs.sex} 买了饮料，然后两人一起慢慢地走回宿舍去了。`,
+          `${you.name} 为 ${gs.sex} 买了饮料，然后两人一起慢慢地走回宿舍去了。`,
         );
       } else {
-        await era.printAndWait(`${me.name} 与 ${gs.name} 的奇妙游戏还在继续……`);
+        await era.printAndWait(
+          `${you.name} 与 ${gs.name} 的奇妙游戏还在继续……`,
+        );
       }
       return [ret];
     };

@@ -64,19 +64,11 @@ class EduFactory extends CommonKojoFactory {
   }
 
   /**
-   * @param {number} chara_id
-   * @returns {boolean}
-   */
-  check_edu_script(chara_id) {
-    return this.check(chara_id);
-  }
-
-  /**
-   * @param {number} id
+   * @param {number} cid
    * @returns {CustomizedEdu}
    */
-  get_custom_edu(id) {
-    return this.get(id);
+  get_custom_edu(cid) {
+    return this.get(cid);
   }
 
   /**
@@ -98,7 +90,6 @@ class EduFactory extends CommonKojoFactory {
 }
 
 const edu_factory = new EduFactory();
-edu_factory.check_edu_script = edu_factory.check_edu_script.bind(edu_factory);
 edu_factory.get_custom_edu = edu_factory.get_custom_edu.bind(edu_factory);
 edu_factory.run_custom_edu = edu_factory.run_custom_edu.bind(edu_factory);
 

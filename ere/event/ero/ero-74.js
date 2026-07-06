@@ -23,6 +23,8 @@ function check_mejiro(lover) {
 }
 
 module.exports = class extends CustomizedEro {
+  static CHECK = false;
+
   get #kojo() {
     return i18n().kojo[this.id].ero;
   }

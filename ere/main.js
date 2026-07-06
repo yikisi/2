@@ -26,8 +26,7 @@ const homepage = require('#/page/page-homepage');
 const load_game = require('#/page/page-load-game');
 
 const { get_custom_check } = require('#/event/check/check-factory');
-const { check_edu_script } = require('#/event/edu/edu-factory');
-const { check_rec_script } = require('#/event/rec/rec-factory');
+const { check: check_edu_script } = require('#/event/edu/edu-factory');
 
 const get_display_name = require('#/utils/calc-display-name');
 const { say_by_passer_by } = require('#/utils/chara-talk');
@@ -159,9 +158,7 @@ module.exports = async () => {
                 color: get_chara_color(e),
                 width: 6,
               },
-              content: `${get_display_name(era.get(`static:${e}:name`))}${
-                check_rec_script(e) && check_edu_script(e) ? '*' : ''
-              }`,
+              content: `${get_display_name(era.get(`static:${e}:name`))}${check_edu_script(e) ? '*' : ''}`,
               type: 'button',
             })),
             {

@@ -81,11 +81,11 @@ module.exports = {
   },
   /**
    * @param {CharaTalk} luna 鲁铎象征/露娜
-   * @param {CharaTalk} me 玩家
+   * @param {CharaTalk} you 玩家
    */
-  select_luna(luna, me) {
+  select_luna(luna, you) {
     const buffer = [
-      () => luna.say(`${me.actual_name}？`),
+      () => luna.say(`${you.actual_name}？`),
       () => luna.say('想不出冷笑话呢……'),
       () => luna.say('今天的行程是？'),
     ];
@@ -671,36 +671,36 @@ module.exports = {
     await get_random_entry(buffer)();
   },
   /**
-   * @param {CharaTalk} chara 鲁铎象征/露娜/皇帝
+   * @param {CharaTalk} chara17 鲁铎象征/露娜/皇帝
    * @param {CharaTalk} you 玩家
    * @param {boolean} is_good_end 是否是 GE（鲁铎象征形态）
-   * @param {boolean} is_emperor 是否是皇帝形态（否则为露娜）
+   * @param {boolean} i_emperor 是否是皇帝形态（否则为露娜）
    */
-  async load_talk(chara, you, is_good_end, is_emperor) {
+  async load_talk(chara17, you, is_good_end, i_emperor) {
     if (is_good_end) {
-      await chara.say_and_wait('愿太阳和月亮能继续陪伴着你');
-      await chara.say_and_wait('……但，请不要忘了皇帝，和露娜');
-      await chara.print_and_wait([
-        chara.get_colored_name(),
+      await chara17.say_and_wait('愿太阳和月亮能继续陪伴着你');
+      await chara17.say_and_wait('……但，请不要忘了皇帝，和露娜');
+      await chara17.print_and_wait([
+        chara17.get_colored_name(),
         ' 转过身去，颤抖着',
       ]);
-      await chara.say_and_wait('注意……安全，我们会再相遇的（抽泣）');
-    } else if (is_emperor) {
-      await chara.say_and_wait('弄臣，无用功还要一次再一次了？');
+      await chara17.say_and_wait('注意……安全，我们会再相遇的（抽泣）');
+    } else if (i_emperor) {
+      await chara17.say_and_wait('弄臣，无用功还要一次再一次了？');
     } else if (era.get('love:17') >= 75) {
-      await chara.print_and_wait([
-        chara.get_colored_name(),
+      await chara17.print_and_wait([
+        chara17.get_colored_name(),
         ' 嘴唇微张，但发不出一丝声音',
       ]);
-      await chara.say_and_wait('——！');
-      await chara.say_and_wait('——不要走……');
-      await chara.print_and_wait([
-        chara.get_colored_name(),
+      await chara17.say_and_wait('——！');
+      await chara17.say_and_wait('——不要走……');
+      await chara17.print_and_wait([
+        chara17.get_colored_name(),
         ' 抽泣着，但 ',
         you.get_colored_name(),
         ' 已远去……',
       ]);
-      await chara.say_and_wait('明明你答应过我……无论发生什么都不会离开——');
+      await chara17.say_and_wait('明明你答应过我……无论发生什么都不会离开——');
     }
   },
 };

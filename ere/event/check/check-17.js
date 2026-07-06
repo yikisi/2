@@ -7,6 +7,11 @@ const check_aim_and_get_entry = require('#/event/check/snippets/check-aim-and-ge
 const check_and_register_aim_race = require('#/event/check/snippets/check-and-register-aim-race');
 const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
 const { add_event, cb_enum } = require('#/event/queue');
+const {
+  get_luna_talk_tools,
+  i_emperor,
+  normal_end,
+} = require('#/event/snippets/101700');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
@@ -18,6 +23,8 @@ const EventObject = require('#/data/event/event-object');
 const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
+
+const { i18n } = require('#/i18n/selector');
 
 const aim_races = {};
 aim_races[race_enum.begin_race] = 2;
@@ -31,7 +38,7 @@ aim_races[get_aim_race_index(race_enum.arim_kin, 1)] = 0b01;
 
 aim_races[get_aim_race_index(race_enum.tenn_spr, 2)] = 0b100;
 aim_races[get_aim_race_index(race_enum.japa_cup, 2)] = 3;
-aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 2;
+aim_races[get_aim_race_index(race_enum.arim_kin, 2)] = 0b10;
 
 const edu_weeks_kiku_sho = 48 + race_infos[race_enum.kiku_sho].date;
 module.exports = class extends CustomizedCheck {
@@ -73,29 +80,35 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_next_week() {
-    const edu_weeks = era.get('cflag:17:育成回合计时'),
-      edu_object = new EventObject(17, cb_enum.edu).set_arg(edu_weeks),
-      edu_object_spe = new EventObject(17, cb_enum.edu, true).set_arg(
-        edu_weeks,
-      );
+    const edu_weeks = era.get('cflag:17:育成回合计时');
+    const ebj = new EventObject(17, cb_enum.edu).set_arg(edu_weeks);
+    const ebj_s = new EventObject(17, cb_enum.edu, true).set_arg(edu_weeks);
     if (edu_weeks < 3 * 48) {
-      add_event(event_hooks.week_start, edu_object);
+      add_event(event_hooks.week_start, ebj);
       if (
         edu_weeks === 47 + 41 &&
         check_aim_race(RaceHistory.get(17).get(), race_enum.kiku_sho, 1, 1)
       ) {
-        add_event(event_hooks.week_end, edu_object_spe);
+        add_event(event_hooks.week_end, ebj_s);
       } else if (edu_weeks === 95 + 1) {
-        add_event(
-          event_hooks.out_church,
-          new EventObject(17, cb_enum.edu, true),
-        );
+        add_event(event_hooks.out_church, ebj_s);
       } else if (edu_weeks === 95 + 10) {
-        add_event(event_hooks.week_end, edu_object_spe);
+        add_event(event_hooks.week_end, ebj_s);
       }
       check_and_register_aim_race(17, aim_races, edu_weeks);
-    } else if (edu_weeks === 143 + 1 || edu_weeks === 143 + 9) {
-      add_event(event_hooks.week_start, edu_object);
+    } else if (edu_weeks === 143 + 1) {
+      const edu_marks = new LunaEduMarks();
+      if (!edu_marks.good_end) {
+        const luna = get_luna_talk_tools();
+        // 没跑有马或者没触发赛后事件，直接按NE计算
+        normal_end(
+          edu_marks,
+          !era.get(`status:${luna.id}:神经衰弱`) &&
+            era.get(`love:${luna.id}`) >= 90,
+        );
+      }
+    } else if (edu_weeks === 143 + 9) {
+      add_event(event_hooks.week_start, ebj);
     }
   }
 
@@ -129,33 +142,19 @@ module.exports = class extends CustomizedCheck {
       era.get('cflag:0:位置') === 0
     ) {
       return {
-        name: '日月交替',
+        name: i18n().kojo[this.id].pa_button,
         handle() {
           const event_marks = new LunaEduMarks();
           event_marks.want_emperor = 1 - event_marks.want_emperor;
-          const { luna, emperor } = event_marks.emperor
-              ? { luna: 9017, emperor: 17 }
-              : { luna: 17, emperor: 9017 },
-            aim_talk = get_chara_talk(
-              event_marks.want_emperor ? emperor : luna,
-            ),
-            chara = get_chara_talk(17);
+          const { luna, emperor } = get_luna_talk_tools();
+          const chara = get_chara_talk(17);
           era.print(
-            event_marks.want_emperor === event_marks.emperor
-              ? [
-                  '下周 ',
-                  chara.get_colored_name(),
-                  ' 将尝试保持 ',
-                  aim_talk.get_colored_name(),
-                  ' 形态……',
-                ]
-              : [
-                  '下周 ',
-                  chara.get_colored_name(),
-                  ' 将尝试转换为 ',
-                  aim_talk.get_colored_name(),
-                  ' 形态……',
-                ],
+            (event_marks.want_emperor === event_marks.emperor
+              ? i18n().kojo[this.id].pa_notify_keep
+              : i18n().kojo[this.id].pa_notify_transform)(
+              chara,
+              luna.id === this.id ? emperor : luna,
+            ),
           );
         },
       };
@@ -173,14 +172,14 @@ module.exports = class extends CustomizedCheck {
         rank > 1 &&
         !event_marks.faith_collapse
       ) {
-        return 2;
+        return ret | 0b10;
       } else if (
-        event_marks.emperor &&
+        i_emperor() &&
         race_infos[race].race_class === class_enum.G1 &&
-        era.get('status:9017:神经衰弱') &&
+        era.get('status:9017:神经衰弱') > 0 &&
         !event_marks.fall_into_hell
       ) {
-        return 1;
+        return ret | 0b01;
       }
     }
     return ret;

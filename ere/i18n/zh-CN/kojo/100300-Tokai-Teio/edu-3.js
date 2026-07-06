@@ -26,13 +26,13 @@ module.exports = {
       ]);
     }
   },
-  async train_fail_intel(teio, me) {
+  async train_fail_intel(teio, you) {
     await teio.say_and_wait('看来帝王的传说……不得不在此处稍作休止了……');
     await era.printAndWait([
       teio.get_colored_name(),
       ' 趴在桌面上，失去了学习动力。',
     ]);
-    await me.say_and_wait('果然有些事情不会骗人，不会就是不会。', true);
+    await you.say_and_wait('果然有些事情不会骗人，不会就是不会。', true);
   },
   race_end_win: (() => {
     const title = '竞赛获胜';

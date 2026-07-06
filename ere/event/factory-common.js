@@ -15,10 +15,15 @@ class CommonKojoFactory {
     this.#cons = cons;
     this.#common = common;
     this.#child = child;
+    this.check = this.check.bind(this);
   }
 
+  /**
+   * @param {number} cid
+   * @returns {boolean}
+   */
   check(cid) {
-    return this.#cons[cid] !== void 0;
+    return this.#cons[cid] !== void 0 && this.#cons[cid]['CHECK'] === true;
   }
 
   clean() {

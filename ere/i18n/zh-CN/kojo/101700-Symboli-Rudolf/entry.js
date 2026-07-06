@@ -16,6 +16,39 @@ class I18nKojo101700 {
   );
   // GENERATED END
 
+  notify_get_worse = (luna) => [
+    luna.get_colored_name(),
+    ' 的精神状态变得更糟了……',
+  ];
+
+  pa_button = '日月交替';
+  pa_notify_keep = (chara) => [
+    '下周 ',
+    chara.get_colored_name(),
+    ' 将尝试保持 ',
+    chara.get_colored_name(),
+    ' 形态……',
+  ];
+  pa_notify_transform = (chara, aim) => [
+    '下周 ',
+    chara.get_colored_name(),
+    ' 将尝试转换为 ',
+    aim.get_colored_name(),
+    ' 形态……',
+  ];
+  notify_punish_for_important = (emperor, race) => [
+    emperor.get_colored_name(),
+    ' 对 ',
+    race,
+    ' 的失利极为不满……',
+  ];
+  notify_punish_for_avoid = (emperor, race) => [
+    emperor.get_colored_name(),
+    ' 对在 ',
+    race,
+    ' 的缺席极为不满……',
+  ];
+
   self_destruct = '自毁';
   self_destruct_desc =
     '对宿命的抗拒使其陷入自我毁灭；训练成功率-5%，训练效果-8%，参赛时属性-5%。';

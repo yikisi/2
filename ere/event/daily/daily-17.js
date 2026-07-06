@@ -1,6 +1,7 @@
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const CustomizedDaily = require('#/event/daily/daily-common');
+const { i_emperor } = require('#/event/snippets/101700');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
@@ -201,7 +202,7 @@ module.exports = class extends CustomizedDaily {
       get_chara_talk(this.id),
       get_chara_talk(0),
       edu_marks.good_end > 0,
-      edu_marks.emperor > 0,
+      i_emperor(),
     );
   }
 };

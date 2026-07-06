@@ -56,7 +56,10 @@ function generate_copyrights() {
   }
 
   const kojo_copyrights = [
-    [[get_copyright_entry(1, i18n().cr_kojo_suffix_recruit)], 'wwm'],
+    [
+      [get_copyright_entry(1, i18n().timon.others.star_drew_bt_filter_kojo_r)],
+      'wwm',
+    ],
     [
       [get_copyright_entry(2), { isDivider: true }, get_copyright_entry(61)],
       '牛蛙煲',
@@ -94,11 +97,14 @@ function generate_copyrights() {
     ],
     [[get_copyright_entry(32)], '幽白書'],
     [[get_copyright_entry(35, i18n().cr_kojo_suffix_part)], '幽白書'],
-    [[get_copyright_entry(36, i18n().cr_kojo_suffix_recruit)], '幽白書'],
+    [
+      [get_copyright_entry(36, i18n().timon.others.star_drew_bt_filter_kojo_r)],
+      '幽白書',
+    ],
     [[get_copyright_entry(37)], '爱放箭的袁本初'],
     [[get_copyright_entry(44)], '阿格尼斯数码公司'],
     [
-      [get_copyright_entry(47, i18n().cr_kojo_suffix_recruit)],
+      [get_copyright_entry(47, i18n().timon.others.star_drew_bt_filter_kojo_r)],
       '某不思议的大嘴鸥',
     ],
     [[get_copyright_entry(50)], '卡特曼'],
@@ -133,22 +139,30 @@ function generate_copyrights() {
       [
         get_copyright_entry(
           89,
-          i18n().cr_kojo_suffix_recruit +
+          i18n().timon.others.star_drew_bt_filter_kojo_r +
             i18n().ui_comma2 +
-            i18n().cr_kojo_suffix_basement,
+            i18n().timon.others.star_drew_bt_filter_kojo_b,
         ),
       ],
       '無奈',
     ],
     [[get_copyright_entry(100)], '夕阳红艺术团小组长-赤红彗星红桃爵士Q先生'],
-    [[get_copyright_entry(116, i18n().cr_kojo_suffix_recruit)], 'AraP'],
+    [
+      [
+        get_copyright_entry(
+          116,
+          i18n().timon.others.star_drew_bt_filter_kojo_r,
+        ),
+      ],
+      'AraP',
+    ],
     [
       [
         get_copyright_entry(
           119,
-          i18n().cr_kojo_suffix_recruit +
+          i18n().timon.others.star_drew_bt_filter_kojo_r +
             i18n().ui_comma2 +
-            i18n().cr_kojo_suffix_basement,
+            i18n().timon.others.star_drew_bt_filter_kojo_b,
         ),
       ],
       '幽白書',
@@ -159,10 +173,31 @@ function generate_copyrights() {
       [get_copyright_entry(303, i18n().cr_kojo_suffix_part)],
       ['雞雞', { isDivider: true }, '幽白書'],
     ],
-    [[get_copyright_entry(340, i18n().cr_kojo_suffix_recruit)], 'O口口口口口'],
-    [[get_copyright_entry(341, i18n().cr_kojo_suffix_recruit)], 'フィンランド'],
     [
-      [get_copyright_entry(342, i18n().cr_kojo_suffix_recruit)],
+      [
+        get_copyright_entry(
+          340,
+          i18n().timon.others.star_drew_bt_filter_kojo_r,
+        ),
+      ],
+      'O口口口口口',
+    ],
+    [
+      [
+        get_copyright_entry(
+          341,
+          i18n().timon.others.star_drew_bt_filter_kojo_r,
+        ),
+      ],
+      'フィンランド',
+    ],
+    [
+      [
+        get_copyright_entry(
+          342,
+          i18n().timon.others.star_drew_bt_filter_kojo_r,
+        ),
+      ],
       '黑衣剑士-星爆气流斩准备就绪',
     ],
     [

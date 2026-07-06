@@ -538,9 +538,9 @@ module.exports = {
   },
   /**
    * @param {CharaTalk} acute 奇锐骏
-   * @param {CharaTalk} me 玩家
+   * @param {CharaTalk} you 玩家
    */
-  async s_r_lunch(acute, me) {
+  async s_r_lunch(acute, you) {
     await era.printAndWait([
       '午休时分，与 ',
       acute.get_colored_name(),
@@ -559,7 +559,7 @@ module.exports = {
       await era.printAndWait('似乎比日常更多了些许咸味的口感——');
       await acute.say_and_wait([
         '最近天气有些热呢，出很多汗的话身体的盐分就会不足哦？所以多加了一些盐呢——',
-        me.get_colored_name(),
+        you.get_colored_name(),
         '，喜欢吗？',
       ]);
       await era.printAndWait('那还用说吗？当然是喜欢的。');

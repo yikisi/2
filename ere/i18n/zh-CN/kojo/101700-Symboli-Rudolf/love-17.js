@@ -7,7 +7,7 @@ const era = require('#/era-electron');
 module.exports = {
   49: (() => {
     /**
-     * @param {CharaTalk} luna 露娜（鲁铎象征）
+     * @param {CharaTalk} luna 露娜/鲁铎象征
      * @param {CharaTalk} you 玩家
      */
     const f = async (luna, you) => {
@@ -108,7 +108,7 @@ module.exports = {
   })(),
   74: (() => {
     /**
-     * @param {CharaTalk} luna 露娜（鲁铎象征）
+     * @param {CharaTalk} luna 露娜/鲁铎象征
      * @param {CharaTalk} you 玩家
      */
     const f = async (luna, you) => {
@@ -174,7 +174,7 @@ module.exports = {
   })(),
   89: (() => {
     /**
-     * @param {CharaTalk} luna 露娜（鲁铎象征）
+     * @param {CharaTalk} luna 露娜/鲁铎象征
      * @param {CharaTalk} you 玩家
      */
     const f = async (luna, you) => {
@@ -305,9 +305,9 @@ module.exports = {
   })(),
   99: (() => {
     /**
-     * @param {CharaTalk} luna 露娜（鲁铎象征）
+     * @param {CharaTalk} luna 露娜/鲁铎象征
      * @param {CharaTalk} you 玩家
-     * @param {string} callname 露娜（鲁铎象征）对玩家的称呼
+     * @param {string} callname 露娜/鲁铎象征对玩家的称呼
      */
     const f = async (luna, you, callname) => {
       await luna.print_and_wait('露娜躺在床上辗转反侧。');

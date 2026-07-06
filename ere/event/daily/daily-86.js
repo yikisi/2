@@ -8,6 +8,8 @@ const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends CustomizedDaily {
+  static CHECK = false;
+
   get #kojo() {
     return i18n().kojo[this.id].daily;
   }

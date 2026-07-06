@@ -1,6 +1,8 @@
 const era = require('#/era-electron');
 
 class CustomizedEvent {
+  static CHECK = true;
+
   /** @type {number} */
   id;
 

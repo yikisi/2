@@ -19,9 +19,12 @@ const {
 } = require('#/page/exp/snippets');
 
 const { get_custom_check } = require('#/event/check/check-factory');
-const { check_edu_script } = require('#/event/edu/edu-factory');
+const { check: check_edu_script } = require('#/event/edu/edu-factory');
 const game_guides = require('#/event/others/game-guides');
-const { check_rec_script, run_custom_rec } = require('#/event/rec/rec-factory');
+const {
+  check: check_rec_script,
+  run_custom_rec,
+} = require('#/event/rec/rec-factory');
 
 const get_display_name = require('#/utils/calc-display-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');

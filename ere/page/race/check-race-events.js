@@ -17,8 +17,7 @@ const { sys_check_remote } = require('#/system/sys-calc-chara-param');
 const page_ero = require('#/page/page-ero');
 const { get_track_full_name } = require('#/page/race/get-track-name');
 
-const { check_edu_script } = require('#/event/edu/edu-factory');
-const { check_rec_script } = require('#/event/rec/rec-factory');
+const { check: check_edu_script } = require('#/event/edu/edu-factory');
 const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
 const generate_dictionary = require('#/event/snippets/generate-dictionary');
 const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
@@ -194,7 +193,7 @@ async function check_race_events(race, info, team) {
     get(`cflag:${mvp_id}:性别`) !== 1 &&
     !my_marks.we_are_one &&
     mvp_id > 0 &&
-    (!check_rec_script(mvp_id) || !check_edu_script(mvp_id)) &&
+    !check_edu_script(mvp_id) &&
     !sys_check_remote(mvp_id) &&
     best === 1 &&
     get(`love:${mvp_id}`) >= 75 &&

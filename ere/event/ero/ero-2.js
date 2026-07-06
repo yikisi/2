@@ -8,6 +8,8 @@ const generate_dictionary = require('#/event/snippets/generate-dictionary');
 const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends CustomizedEro {
+  static CHECK = false;
+
   async ero_start(h) {
     // STATUSNAME:38 = 超马跳Z
     if (!sys_check_awake(this.id) || era.get(`status:${this.id}:38`) > 0) {

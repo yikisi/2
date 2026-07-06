@@ -14,6 +14,8 @@ const TreveLifeMarks = require('#/data/event/life-event-marks/life-event-marks-2
 const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends CustomizedEro {
+  static CHECK = false;
+
   async ero_start(h) {
     const life_marks = new TreveLifeMarks();
     const treve = get_chara_talk(this.id);

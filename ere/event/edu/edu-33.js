@@ -14,6 +14,8 @@ const recruit_flags = require('#/data/event/recruit-flags');
 const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends CustomizedEdu {
+  static CHECK = false;
+
   /**
    * @param {CharaTalk} vega
    * @param {CharaTalk} me

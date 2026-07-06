@@ -20,8 +20,14 @@ const npc_common = require('#/page/components/npc-common');
 const print_page_header = require('#/page/components/page-header');
 const print_out_page = require('#/page/page-out');
 
-const { check_edu_script } = require('#/event/edu/edu-factory');
-const { check_rec_script } = require('#/event/rec/rec-factory');
+const {
+  check: check_base_script,
+} = require('#/event/basement/basement-factory');
+const { check: check_daily_script } = require('#/event/daily/daily-factory');
+const { check: check_edu_script } = require('#/event/edu/edu-factory');
+const { check: check_ero_script } = require('#/event/ero/ero-factory');
+const { check: check_love_script } = require('#/event/love/love-factory');
+const { check: check_rec_script } = require('#/event/rec/rec-factory');
 const generate_dictionary = require('#/event/snippets/generate-dictionary');
 
 const get_display_name = require('#/utils/calc-display-name');
@@ -40,7 +46,7 @@ const { location_enum } = require('#/data/locations');
 const { max_chara_id } = require('#/data/other-const');
 
 const di18n = require('#/i18n/extended-def');
-const { i18n } = require('#/i18n/selector');
+const { __, i18n } = require('#/i18n/selector');
 
 async function page_chairman_office() {
   let flag_page = true;
@@ -161,10 +167,23 @@ async function page_chairman_office() {
                       };
                       const curr = era.getLineCount();
                       const filter_cb = [
-                        (cid) => check_rec_script(cid) && check_edu_script(cid),
+                        (cid) => check_rec_script(cid),
+                        (cid) => check_daily_script(cid),
+                        (cid) => check_edu_script(cid),
+                        (cid) => check_love_script(cid),
+                        (cid) => check_ero_script(cid),
+                        (cid) => check_base_script(cid),
                         (cid) => check_chara_ero_image(cid),
                       ];
-                      const filters = [true, false];
+                      const filters = [
+                        false,
+                        false,
+                        true,
+                        false,
+                        false,
+                        false,
+                        false,
+                      ];
                       while (temp === -1) {
                         await era.clear(era.getLineCount() - curr);
                         const filter_enable = filters.reduce((p, c) => p || c);
@@ -186,19 +205,33 @@ async function page_chairman_office() {
                           two_list[1] = temp_list;
                         }
                         if (filter_enable) {
+                          const header_f_kojo = join_to_string(
+                            [
+                              i18n().timon.others.star_drew_bt_filter_kojo_r,
+                              i18n().timon.others.star_drew_bt_filter_kojo_d,
+                              i18n().timon.others.star_drew_bt_filter_kojo_ed,
+                              i18n().timon.others.star_drew_bt_filter_kojo_l,
+                              i18n().timon.others.star_drew_bt_filter_kojo_er,
+                              i18n().timon.others.star_drew_bt_filter_kojo_b,
+                            ].filter((e, i) => e && filters[i]),
+                            i18n().ui_comma2,
+                          );
                           era.drawLine({
                             content:
                               i18n().timon.others.star_drew_filter_template.replace(
                                 '%FILTERS%',
                                 join_to_string(
                                   [
-                                    filters[0] &&
-                                      i18n().timon.others.star_drew_filter_kojo,
-                                    filters[1] &&
+                                    header_f_kojo &&
+                                      i18n().timon.others.star_drew_filter_kojo_template.replace(
+                                        '%KOJO%',
+                                        header_f_kojo,
+                                      ),
+                                    filters.at(-1) &&
                                       i18n().timon.others
                                         .star_drew_filter_image,
                                   ].filter((e) => e),
-                                  i18n().ui_comma,
+                                  i18n().ui_semicolon,
                                 ),
                               ),
                           });
@@ -214,30 +247,42 @@ async function page_chairman_office() {
                                   ? i18n().timon.others.star_drew_other_chara
                                   : i18n().timon.others.star_drew_all_chara,
                                 position: 'left',
-                                width: 20,
+                                width: 24 - filter_cb.length * 2,
                               },
                               type: 'divider',
                             },
-                            {
-                              accelerator: 1000,
+                            ...[
+                              'kojo_r',
+                              'kojo_d',
+                              'kojo_ed',
+                              'kojo_l',
+                              'kojo_er',
+                              'kojo_b',
+                            ].map((e, i) => ({
+                              accelerator: 1000 + i,
                               config: {
                                 align: 'center',
-                                buttonType: filters[0] ? 'warning' : 'info',
+                                buttonType: filters[i] ? 'warning' : 'info',
                                 showAcc: false,
+                                title: __(`timon.others.sd_f_title_${e}`),
                                 width: 2,
                               },
-                              content:
-                                i18n().timon.others.star_drew_filter_kojo,
+                              content: __(
+                                `timon.others.star_drew_bt_filter_${e}`,
+                              ),
                               type: 'button',
-                            },
+                            })),
                             {
-                              accelerator: 1001,
+                              accelerator: 1000 + filter_cb.length - 1,
                               config: {
                                 align: 'center',
-                                buttonType: filters[1] ? 'warning' : 'info',
-                                showAcc: false,
-                                width: 2,
+                                buttonType: filters[filter_cb.length - 1]
+                                  ? 'warning'
+                                  : 'info',
                                 disabled: !era.checkImage('通用_裸'),
+                                showAcc: false,
+                                title: i18n().timon.others.sd_f_title_image,
+                                width: 2,
                               },
                               content:
                                 i18n().timon.others.star_drew_bt_filter_image,

@@ -5,6 +5,8 @@ const CustomizedEro = require('#/event/ero/ero-common');
 const { ero_hook_tags, ero_hooks } = require('#/data/event/ero-hooks');
 
 module.exports = class extends CustomizedEro {
+  static CHECK = false;
+
   set_preference(attacker_parts, defender_parts) {
     defender_parts[ero_hook_tags.anal] = 1;
   }

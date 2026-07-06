@@ -1,14 +1,16 @@
 const era = require('#/era-electron');
 
 const global_achievement = require('#/system/global/sys-calc-achievement');
-const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
 const { add_event, cb_enum } = require('#/event/queue');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const LunaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-17');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
+
+const { i18n } = require('#/i18n/selector');
 
 /**
  * @param {string} p1
@@ -20,9 +22,13 @@ function flip_params(p1, p2) {
   era.set(p2, tmp);
 }
 
-/** @param {LunaEduMarks} event_marks */
-function transform(event_marks) {
-  event_marks.emperor = 1 - event_marks.emperor;
+function i_emperor() {
+  return new LunaEduMarks().emperor > 0;
+}
+
+/** @param {LunaEduMarks} edu_marks */
+function transform(edu_marks) {
+  edu_marks.emperor = 1 - edu_marks.emperor;
   flip_params('cflag:17:干劲', 'cflag:9017:干劲');
   flip_params('status:17:自毁', 'status:9017:自毁');
   flip_params('status:17:迷恋', 'status:9017:迷恋');
@@ -53,6 +59,12 @@ function transform(event_marks) {
 }
 
 module.exports = {
+  get_luna_talk_tools() {
+    const { lid, eid } = i_emperor()
+      ? { eid: 17, lid: 9017 }
+      : { eid: 9017, lid: 17 };
+    return { emperor: get_chara_talk(eid), luna: get_chara_talk(lid) };
+  },
   /** @param {LunaEduMarks} edu_marks */
   good_end(edu_marks) {
     global_achievement.c_luna1 = 1;
@@ -68,46 +80,45 @@ module.exports = {
     new Array(7).fill(0).forEach((_, i) => era.set(`status:17:${110 + i}`, 0));
     era.set('status:17:工口意愿', 0);
     era.set('status:17:抖S', 1);
-    sys_like_chara(17, 0, 800, true, 10);
   },
   /**
-   * @param {LunaEduMarks} event_marks
+   * @param {LunaEduMarks} edu_marks
    * @param {number} luna
    * @param {number} [extra_punish]
    */
-  async handle_debuff(event_marks, luna, extra_punish) {
+  async handle_debuff(edu_marks, luna, extra_punish = 1) {
     let debuff = era.set(
       'status:17:精神损伤',
-      Math.min(era.get('status:17:精神损伤') + (extra_punish || 1), 10),
+      Math.min(era.get('status:17:精神损伤') + extra_punish, 10),
     );
     era.println();
-    await era.printAndWait([
-      get_chara_talk(luna).get_colored_name(),
-      ' 的精神状态变得更糟了……',
-    ]);
-    if (!event_marks.wax_and_wane) {
-      event_marks.wax_and_wane++;
+    await era.printAndWait(
+      i18n().kojo[17].notify_get_worse(get_chara_talk(luna)),
+    );
+    if (!edu_marks.wax_and_wane) {
+      edu_marks.wax_and_wane = 1;
       add_event(
         event_hooks.week_end,
         new EventObject(17, cb_enum.edu).set_arg('wax_and_wane'),
       );
     }
-    if (debuff >= 3 && !event_marks.a_stones_throw) {
-      event_marks.a_stones_throw++;
+    if (debuff >= 3 && !edu_marks.a_stones_throw) {
+      edu_marks.a_stones_throw = 1;
     }
     if (debuff >= 6) {
       era.set(`status:${luna}:神经衰弱`, 1);
     }
   },
+  i_emperor,
   /**
-   * @param {LunaEduMarks} event_marks
+   * @param {LunaEduMarks} edu_marks
    * @param {boolean} luna_end
    */
-  normal_end(event_marks, luna_end) {
-    if (event_marks.emperor === Number(luna_end)) {
-      transform(event_marks);
+  normal_end(edu_marks, luna_end) {
+    if (edu_marks.emperor === Number(luna_end)) {
+      transform(edu_marks);
     }
-    era.set('callname:17:-1', era.set('callname:17:-2', '101701'));
+    era.set('callname:17:-1', '101701');
     era.set('status:17:领域', 0);
   },
   transform,

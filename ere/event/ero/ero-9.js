@@ -14,6 +14,8 @@ const { ero_hooks } = require('#/data/event/ero-hooks');
 const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends CustomizedEro {
+  static CHECK = false;
+
   get #kojo() {
     return i18n().kojo[this.id].ero;
   }

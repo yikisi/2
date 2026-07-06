@@ -75,14 +75,6 @@ class RecFactory extends CommonKojoFactory {
 
   /**
    * @param {number} cid
-   * @returns {boolean}
-   */
-  check_rec_script(cid) {
-    return this.check(cid);
-  }
-
-  /**
-   * @param {number} cid
    * @param {number} stage
    * @param [_]
    * @param {EventObject} [ebj]
@@ -104,7 +96,6 @@ class RecFactory extends CommonKojoFactory {
 }
 
 const rec_factory = new RecFactory();
-rec_factory.check_rec_script = rec_factory.check_rec_script.bind(rec_factory);
 rec_factory.run_custom_rec = rec_factory.run_custom_rec.bind(rec_factory);
 
 module.exports = rec_factory;

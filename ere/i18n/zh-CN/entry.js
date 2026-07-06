@@ -159,8 +159,6 @@ class I18nEntry {
   cr_kojo_tip = '以负责角色ID最小值排序';
   cr_thanks_detail = '详细鸣谢';
   cr_kojo_suffix_template = '（%SUFFIX%）';
-  cr_kojo_suffix_recruit = '招募';
-  cr_kojo_suffix_basement = '地下室';
   cr_kojo_suffix_temporary = '临时';
   cr_kojo_suffix_part = '部分';
   cr_timon_recruit = '招募地文';
@@ -198,6 +196,7 @@ class I18nEntry {
   ui_exclamation = '！';
   ui_conjunction = ' 和 ';
   ui_ellipses = '……';
+  ui_semicolon = '；';
   ui_back = '返回';
   ui_back_title = '返回标题';
   ui_achieve_title = '获得新成就！';

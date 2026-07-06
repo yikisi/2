@@ -11,6 +11,8 @@ const { stain_enum } = require('#/data/ero/stain-const');
 const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends CustomizedEro {
+  static CHECK = false;
+
   async orgasm(bouquetd) {
     if (
       sys_check_awake(this.id) &&
