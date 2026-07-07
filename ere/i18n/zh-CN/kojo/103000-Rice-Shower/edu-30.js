@@ -121,11 +121,11 @@ module.exports = {
     const title = '参赛之前';
     /**
      * @param {CharaTalk} rice 米浴
-     * @param {CharaTalk} me 玩家
+     * @param {CharaTalk} you 玩家
      * @param {string} callname 米浴对玩家的称呼
      * @param {string} self_name 米浴的自称
      */
-    const f = async (rice, me, callname, self_name) => {
+    const f = async (rice, you, callname, self_name) => {
       const buffer = [
         () =>
           rice.say_and_wait(['再来就只要尽力奔跑，没错吧？', callname, '！']),
@@ -3142,22 +3142,22 @@ module.exports = {
     const title = '舞蹈课';
     /**
      * @param {CharaTalk} rice 米浴
-     * @param {CharaTalk} me 玩家
+     * @param {CharaTalk} you 玩家
      * @param {string} callname 米浴对玩家的称呼
      * @param {string} self_name 米浴的自称
      */
-    const f = async (rice, me, callname, self_name) => {
+    const f = async (rice, you, callname, self_name) => {
       await rice.say_and_wait('一、二，一、二，这里要将脚——');
       await rice.say_and_wait('呀啊！');
       await rice.say_and_wait('啊呜呜，又失败了……得再多练习才行……');
-      await me.say_and_wait('你很努力呢。');
+      await you.say_and_wait('你很努力呢。');
       await rice.say_and_wait(['呜啊！？', callname, '！？被、被你看到了……']);
       await rice.say_and_wait([
         '对不起，那个……',
         self_name,
         ' 本来想趁没人在的时候练习。',
       ]);
-      await me.say_and_wait('为什么一个人练习？');
+      await you.say_and_wait('为什么一个人练习？');
       await rice.say_and_wait('因为，之前全班一起上课的时候，舞蹈室……停电了');
       await rice.say_and_wait([
         '大家的课就此中断。大概，是因为 ',
@@ -3181,7 +3181,7 @@ module.exports = {
           callname,
           ' 不会让我觉得困扰的！',
         ]);
-        await me.say_and_wait('那就让我帮你的忙吧。');
+        await you.say_and_wait('那就让我帮你的忙吧。');
         await rice.say_and_wait([callname, '……']);
         await rice.say_and_wait('谢谢。');
         await rice.say_and_wait([
@@ -3190,11 +3190,11 @@ module.exports = {
           callname,
           ' 可以说出来。',
         ]);
-        await me.say_and_wait('一起加油吧。');
+        await you.say_and_wait('一起加油吧。');
         await rice.say_and_wait('嗯！');
         await era.printAndWait([
           '之后，',
-          me.get_colored_name(),
+          you.get_colored_name(),
           ' 和 ',
           rice.get_colored_name(),
           ' 一起，彻底将',
@@ -3207,14 +3207,14 @@ module.exports = {
           callname,
           ' 的困扰！',
         ]);
-        await me.say_and_wait([self_name, ' 一个人烦恼才会让我觉得困扰。']);
+        await you.say_and_wait([self_name, ' 一个人烦恼才会让我觉得困扰。']);
         await rice.say_and_wait([callname, '……']);
         await rice.say_and_wait('可以陪我一起，讨论练习中的问题吗？');
-        await me.say_and_wait('当然可以！');
+        await you.say_and_wait('当然可以！');
         await rice.say_and_wait('谢谢你！其实，有一个很困难的舞步……');
         await era.printAndWait([
           '之后直到很晚，',
-          me.get_colored_name(),
+          you.get_colored_name(),
           ' 都在陪 ',
           rice.get_colored_name(),
           ' 讨论舞蹈练习的问题。',
