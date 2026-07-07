@@ -232,6 +232,15 @@ class I18nTimon {
   /** @param {string} uma */
   get_it_no_chara_in_recruit = (uma) => ['【训练场没有引人注目的', uma, '】'];
 
+  rec_kojo_mark_border = ['[', ']'];
+  rec_km_r = '募';
+  rec_km_d = '常';
+  rec_km_ed = '育';
+  rec_km_l = '爱';
+  rec_km_er = '性';
+  rec_km_b = '监';
+  rec_km_i = '绘';
+
   /** @param {CharaTalk} chara */
   get_it_heal_yandere = (chara) => [
     '【',

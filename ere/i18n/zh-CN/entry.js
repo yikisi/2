@@ -450,7 +450,6 @@ class I18nEntry {
   ui_foreign_train_max_tip = '已完全适应跑道';
   ui_celebration_remote_tip = '无法远程庆祝';
 
-  ui_recruit_tip = '* 招募按钮显示为红色的角色有口上';
   ui_rec_chara_info = '个人情报';
   ui_rec_edu_info = '育成预览';
   ui_rec_exit = '直接离开';

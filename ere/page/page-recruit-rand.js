@@ -1,6 +1,7 @@
 const era = require('#/era-electron');
 
 const sys_check_team_limit = require('#/system/chara/sys-check-team-limit');
+const { check_chara_ero_image } = require('#/system/ero/sys-calc-ero-image');
 const sys_get_star_premium_draw = require('#/system/flag/sys-get-star-premium-draw');
 const sys_personal_achievement = require('#/system/global/sys-calc-personal-achievement');
 const { get_image } = require('#/system/sys-calc-image');
@@ -18,8 +19,14 @@ const {
   get_shared_com_edu_adapt,
 } = require('#/page/exp/snippets');
 
+const {
+  check: check_base_script,
+} = require('#/event/basement/basement-factory');
 const { get_custom_check } = require('#/event/check/check-factory');
+const { check: check_daily_script } = require('#/event/daily/daily-factory');
 const { check: check_edu_script } = require('#/event/edu/edu-factory');
+const { check: check_ero_script } = require('#/event/ero/ero-factory');
+const { check: check_love_script } = require('#/event/love/love-factory');
 const game_guides = require('#/event/others/game-guides');
 const {
   check: check_rec_script,
@@ -28,7 +35,7 @@ const {
 
 const get_display_name = require('#/utils/calc-display-name');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
-const { gacha, get_random_entry } = require('#/utils/list-utils');
+const { gacha, get_random_entry, join_list } = require('#/utils/list-utils');
 
 const CharaAvailableSkills = require('#/data/chara-available-skills');
 const { get_chara_color } = require('#/data/chara-colors');
@@ -46,7 +53,6 @@ const { skills_dict } = require('#/data/race/skill/skill-const');
 
 const di18n = require('#/i18n/extended-def');
 const { __, i18n } = require('#/i18n/selector');
-const { check_chara_ero_image } = require('#/system/ero/sys-calc-ero-image');
 
 async function print_rec_page() {
   const me = get_chara_talk(0);
@@ -115,6 +121,35 @@ async function print_rec_page() {
       buffer.push(
         ...today_list.map((cid) => {
           const name = era.get(`static:${cid}:name`);
+          /** @type {TextContent} */
+          let mark = [
+            check_rec_script(cid) && 'r',
+            check_daily_script(cid) && 'd',
+            check_edu_script(cid) && 'ed',
+            check_love_script(cid) && 'l',
+            check_ero_script(cid) && 'er',
+            check_base_script(cid) && 'b',
+          ]
+            .filter((e) => e)
+            .map((m) => ({
+              content: __(`timon.rec_km_${m}`),
+              title: __(`timon.others.sd_f_title_kojo_${m}`),
+            }));
+          if (era.checkImage('通用_裸') && check_chara_ero_image(cid)) {
+            mark.push({
+              content: i18n().timon.rec_km_i,
+              title: i18n().timon.others.sd_f_title_image,
+            });
+          }
+          if (mark.length > 0) {
+            mark = [
+              i18n().timon.rec_kojo_mark_border[0],
+              ...mark,
+              i18n().timon.rec_kojo_mark_border[1],
+            ];
+          } else {
+            mark.push({ isBr: 1 });
+          }
           return {
             columns: [
               {
@@ -127,14 +162,15 @@ async function print_rec_page() {
                 accelerator: cid,
                 config: {
                   align: 'center',
-                  buttonType:
-                    check_rec_script(cid) && check_edu_script(cid)
-                      ? 'danger'
-                      : 'warning',
                   disabled: flag_limit || (cur_recruit && cur_recruit !== cid),
                 },
                 content: __(`name.${name}`, name),
                 type: 'button',
+              },
+              {
+                config: { align: 'center', fontSize: '0.85rem' },
+                content: join_list(mark, ' '),
+                type: 'text',
               },
               {
                 accelerator: cid + 1000,
@@ -152,12 +188,6 @@ async function print_rec_page() {
             config: { width: 4 },
           };
         }),
-        [
-          {
-            content: [{ isBr: true }, i18n().ui_recruit_tip],
-            type: 'text',
-          },
-        ],
       );
     } else {
       buffer[0].push({
