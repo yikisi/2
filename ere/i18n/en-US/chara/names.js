@@ -26,6 +26,7 @@ module.exports = class extends I18nNames {
 
   101702 = 'Luna';
   101703 = 'Emperor';
+  103002 = 'Rice';
   900111 = 'Miss. Hayakawa';
   900112 = 'Mr. Hayakawa';
   900311 = 'Miss. Otonashi';

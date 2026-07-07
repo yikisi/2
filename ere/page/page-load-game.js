@@ -600,7 +600,8 @@ module.exports = async () => {
             }
             // i18n - 将游戏存档内所有字符串改成 i18n 框架内的内容
             if (version <= 2210) {
-              era.getAddedCharacters().forEach((cid) => {
+              const added = era.getAddedCharacters();
+              added.forEach((cid) => {
                 if (check_chara_ero_image(cid)) {
                   era.set(
                     `cstr:${cid}:头像T`,
@@ -696,8 +697,11 @@ module.exports = async () => {
                   era.add('flag:怀孕计数', 1);
                 }
               });
-              if (era.get('cflag:67:招募状态') === recruit_flags.yes) {
+              if (added.includes(67)) {
                 era.set('cflag:67:多口上', 99);
+              }
+              if (added.includes(30)) {
+                era.set('callname:30:30', '103002');
               }
             }
             if (version < era.get('gamebase').version) {

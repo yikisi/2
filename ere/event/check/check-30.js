@@ -131,7 +131,6 @@ module.exports = class extends CustomizedCheck {
           break;
         case 95 + 48:
           add_event(event_hooks.week_start, event_obj_special);
-          break;
       }
       check_and_register_aim_race(30, aim_races, edu_weeks);
     } else if (edu_weeks === 143 + 9) {
