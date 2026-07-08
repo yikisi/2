@@ -1,3 +1,5 @@
+const era = require('#/era-electron');
+
 const { add_event, cb_enum } = require('#/event/queue');
 const CustomizedRecruit = require('#/event/rec/rec-common');
 const generate_dictionary = require('#/event/snippets/generate-dictionary');
@@ -8,6 +10,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
+const recruit_flags = require('#/data/event/recruit-flags');
 
 const { i18n } = require('#/i18n/selector');
 
@@ -30,7 +33,7 @@ module.exports = class extends CustomizedRecruit {
       EventMarks.get(0).add(event_hooks.recruit_start);
       return true;
     } else {
-      EventMarks.sub(0).add(event_hooks.recruit_start);
+      EventMarks.get(0).sub(event_hooks.recruit_start);
       if (
         (
           await print_title_with_kojo(
@@ -41,10 +44,8 @@ module.exports = class extends CustomizedRecruit {
           )
         )['rec'] === 1
       ) {
-        add_event(
-          event_hooks.recruit_start,
-          new EventObject(this.id, cb_enum.recruit),
-        );
+        era.set(`cflag:${this.id}:招募状态`, recruit_flags.yes);
+        await this.recruit_end();
         return true;
       }
     }

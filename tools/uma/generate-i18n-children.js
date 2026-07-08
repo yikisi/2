@@ -16,7 +16,7 @@ const output = {};
 
 for (const k in names) {
   const n = names[k];
-  dict[n] = k;
+  !dict[n] && (dict[n] = k);
 }
 
 const trans_dict = {};

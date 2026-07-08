@@ -703,6 +703,9 @@ module.exports = async () => {
               if (added.includes(30)) {
                 era.set('callname:30:30', '103002');
               }
+              if (added.includes(44)) {
+                era.set('abl:44:英语', Math.max(era.get('abl:44:英语'), 1));
+              }
             }
             if (version < era.get('gamebase').version) {
               set_image_t(7);

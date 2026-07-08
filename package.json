@@ -1,14 +1,12 @@
 {
   "author": "UmaERA <erauma@tutanota.com>",
-  "dependencies": {
-    "@prisma/client": "^5.22.0"
-  },
   "description": "愛若駑馬（EraUma）是以某頁遊公司旗下馬耳學生妹作品爲世界觀製作的一款同人文字冒險遊戲。該世界觀的核心圍繞娘化的名賽馬和歷史上曾發生過的比賽展開。玩家將在遊戲中扮演訓練員——即負責訓練馬娘的角色——與諸多馬娘邂逅並創作獨屬於玩家和其負責馬娘的故事。",
   "devDependencies": {
     "7zip-bin": "^5.2.0",
     "@babel/core": "^7.28.6",
     "@babel/preset-env": "^7.28.6",
     "@eslint/js": "^9.39.2",
+    "@prisma/client": "^5.22.0",
     "archiver": "^7.0.1",
     "archiver-zip-encrypted": "^2.0.0",
     "babel-loader": "^9.2.1",

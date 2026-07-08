@@ -1,6 +1,7 @@
 const era = require('#/era-electron');
 
 const CustomizedRecruit = require('#/event/rec/rec-common');
+const { fill_moho_in_dict } = require('#/event/snippets/104400');
 const generate_dictionary = require('#/event/snippets/generate-dictionary');
 
 const recruit_flags = require('#/data/event/recruit-flags');
@@ -12,7 +13,7 @@ module.exports = class extends CustomizedRecruit {
     if (
       (
         await i18n().kojo[this.id].recruit.rec(
-          generate_dictionary(this.id, { teen: !0, uma: !0 }),
+          fill_moho_in_dict(generate_dictionary(this.id, { uma: !0 })),
         )
       )['rec'] === 1
     ) {

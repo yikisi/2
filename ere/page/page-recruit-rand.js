@@ -168,7 +168,7 @@ async function print_rec_page() {
                 type: 'button',
               },
               {
-                config: { align: 'center', fontSize: '0.85rem' },
+                config: { align: 'center', fontSize: '0.8rem' },
                 content: join_list(mark, ' '),
                 type: 'text',
               },
