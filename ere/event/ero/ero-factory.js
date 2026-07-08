@@ -34,6 +34,7 @@ cons_dict[32] = require('#/event/ero/ero-32');
 cons_dict[36] = require('#/event/ero/ero-36');
 cons_dict[52] = require('#/event/ero/ero-52');
 cons_dict[56] = require('#/event/ero/ero-56');
+cons_dict[61] = require('#/event/ero/ero-61');
 cons_dict[64] = require('#/event/ero/ero-64');
 cons_dict[74] = require('#/event/ero/ero-74');
 cons_dict[94] = require('#/event/ero/ero-94');

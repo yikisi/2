@@ -12,6 +12,8 @@ const TamaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-21');
 const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends CustomizedEro {
+  static CHECK = false;
+
   get #kojo() {
     return i18n().kojo[this.id].ero;
   }

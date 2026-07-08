@@ -15,6 +15,7 @@ const masturbate = require('#/event/snippets/masturbate');
 const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 
 const event_hooks = require('#/data/event/event-hooks');
+
 const { i18n } = require('#/i18n/selector');
 
 module.exports = class extends CustomizedLove {

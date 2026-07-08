@@ -15,6 +15,7 @@ const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
+const EroTouch = require('#/data/ero/ero-touch');
 const { mark_enum } = require('#/data/ero/mark-const');
 const { base_enum, motion_enum, part_enum } = require('#/data/ero/part-const');
 const { unexpected_pregnant_enum } = require('#/data/ero/status-const');
@@ -22,7 +23,6 @@ const PamaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-64');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 
-const EroTouch = require('#/data/ero/ero-touch');
 const { i18n } = require('#/i18n/selector');
 
 function kojo() {
