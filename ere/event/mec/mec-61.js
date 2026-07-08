@@ -8,4 +8,8 @@ module.exports = class extends CustomizedMec {
       era.set('callname:61:0', 'trainer');
     }
   }
+
+  is_anger_for_unfaithful(partners) {
+    return !(partners.includes(52) && era.get('love:52') >= 75);
+  }
 };

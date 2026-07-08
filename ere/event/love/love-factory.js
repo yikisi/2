@@ -28,6 +28,7 @@ cons_dict[50] = require('#/event/love/love-50');
 cons_dict[52] = require('#/event/love/love-52');
 cons_dict[56] = require('#/event/love/love-56');
 cons_dict[60] = require('#/event/love/love-60');
+cons_dict[61] = require('#/event/love/love-61');
 cons_dict[64] = require('#/event/love/love-64');
 cons_dict[68] = require('#/event/love/love-68');
 cons_dict[71] = require('#/event/love/love-71');
