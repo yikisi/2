@@ -9,7 +9,7 @@ module.exports = class extends CustomizedInit {
   init(is_reset) {
     if (!is_reset) {
       CustomizedInit.init_chara(9017);
-      era.set('callname:9017:0', '100011');
+      era.set('callname:9017:0', 'trainer17');
       era.set('relation:9017:0', -95);
       era.set('status:17:自毁', 1);
       era.set('status:17:迷恋', 1);

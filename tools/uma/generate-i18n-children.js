@@ -16,7 +16,10 @@ const output = {};
 
 for (const k in names) {
   const n = names[k];
-  !dict[n] && (dict[n] = k);
+  if (dict[n]) {
+    console.log(`duplicate! ${dict[n]} and ${k} = ${n}`);
+  }
+  dict[n] = k;
 }
 
 const trans_dict = {};

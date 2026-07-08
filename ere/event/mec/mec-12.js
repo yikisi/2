@@ -7,7 +7,7 @@ module.exports = class extends CustomizedMec {
     if (!this.set_callname_from_src()) {
       era.set(
         `callname:${this.id}:0`,
-        era.get('cflag:0:0') === 1 ? '100014' : 'trainer',
+        era.get('cflag:0:0') === 1 ? 'trainer12' : 'trainer',
       );
     }
   }

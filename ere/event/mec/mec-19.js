@@ -7,8 +7,6 @@ module.exports = class extends CustomizedMec {
     if (era.get('relation:19:0') > 375) {
       era.set('callname:19:0', ['comrade', 'trainer']);
     } else if (!this.set_callname_from_src()) {
-      super.set_callname();
-    } else {
       era.set('callname:19:0', 'trainer');
     }
   }
