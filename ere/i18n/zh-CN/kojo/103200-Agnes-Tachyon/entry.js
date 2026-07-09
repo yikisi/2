@@ -1,6 +1,8 @@
 const { proxy_kojo_js } = require('#/i18n/tools');
 
 class I18nKojo103200 {
+  static _ = new I18nKojo103200();
+
   recruit = proxy_kojo_js(
     require('#/i18n/zh-CN/kojo/103200-Agnes-Tachyon/rec-32.js'),
   );

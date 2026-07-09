@@ -1,6 +1,4 @@
-const I18nEntry = require('#/i18n/zh-CN/entry');
-
-module.exports = class extends I18nEntry {
+module.exports = class extends require('#/i18n/zh-CN/entry') {
   language = '日本語';
 
   speed = 'スピード';

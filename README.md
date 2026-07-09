@@ -6,6 +6,8 @@ EraUma 和 ERE 引擎（EraElectron、ere.app）将保持开源，请各位开�
 
 Change Logs: [v3 ryuki](CHANGELOG-v3-ryuki.md) [v2 (agito)](CHANGELOG-v2-agito) [v1 (kuuga)](CHANGELOG-v1-kuuga) [test](CHANGELOG-test)
 
+[How to make language library](i18n-template/README.md) (for the i18n framework)
+
 ## LICENSE
 本项目采用GNU通用公共许可证 2.0 版本（GPLv2）许可。
 完整的许可证文本请参见 [LICENSE](LICENSE) 文件。

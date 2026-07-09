@@ -2662,5 +2662,5 @@ module.exports = {
     f.title = title;
     return f;
   })(),
-  ...require('./edu-85-be-ntr'),
+  ...require('#/i18n/zh-CN/kojo/108500-Daiichi-Ruby/edu-85-be-ntr'),
 };

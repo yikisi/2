@@ -345,18 +345,62 @@ module.exports = async () => {
   ];
   const lan_list = lans();
   if (lan_list.length > 1) {
-    buttons.push({
-      c: () => '语言/Language',
-      async h() {
-        era.drawLine();
-        for (let i = 0; i < lan_list.length; ++i) {
-          era.printButton(i18n(lan_list[i]).language, i + 1);
-        }
-        set_lan(era.set('global:3', lan_list[(await era.input()) - 1]));
-        await era.saveGlobal();
-        set_lan_for_value(lan());
+    buttons.push(
+      {
+        c: () => '语言/Language',
+        async h() {
+          era.drawLine();
+          for (let i = 0; i < lan_list.length; ++i) {
+            era.printButton(i18n(lan_list[i]).language, i + 1);
+          }
+          set_lan(era.set('global:3', lan_list[(await era.input()) - 1]));
+          await era.saveGlobal();
+          set_lan_for_value(lan());
+        },
       },
-    });
+      {
+        c: () => 'Check Lan Lib',
+        async h() {
+          era.print('check if the library you input has all content:');
+          const lan = await era.input();
+          if (!lan_list.includes(lan)) {
+            await era.printAndWait(`No such language! ${lan}`);
+            return;
+          }
+          if (lan === 'zh-CN') {
+            await era.printAndWait('Do not need to check the zh-CN library!');
+            return;
+          }
+
+          function do_check(key_path, aim_lib, cn_lib) {
+            for (const k in cn_lib) {
+              const _path = `${k} <- ${key_path}`;
+              if (aim_lib[k] === cn_lib[k]) {
+                era.print(`[WARN] miss or equal: ${_path}`);
+              } else if (typeof cn_lib[k] !== typeof aim_lib[k]) {
+                era.print(
+                  `[ERROR] not same type: ${_path} (${typeof aim_lib[k]} -> ${typeof cn_lib[k]})`,
+                );
+              } else if (
+                typeof cn_lib[k] === 'object' &&
+                !Array.isArray(cn_lib[k])
+              ) {
+                do_check(_path, aim_lib[k], cn_lib[k]);
+              }
+            }
+            for (const k in aim_lib) {
+              if (cn_lib[k] === void 0) {
+                era.print(`[WARN] unused: ${k} <- ${key_path}`);
+              }
+            }
+          }
+
+          do_check('root', i18n(lan), i18n('zh-CN'));
+          era.printButton('End', 1);
+          await era.input();
+        },
+      },
+    );
   }
   while (flag_title) {
     await era.clear();
