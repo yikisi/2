@@ -395,6 +395,8 @@ ability_tag_enum_names[ability_type_enum.TemptationEndTime] =
   ability_tag_enum.temp;
 ability_tag_enum_names[ability_type_enum.LaneMoveSpeed] =
   ability_tag_enum.laneMove;
+ability_tag_enum_names[ability_type_enum.AccelFullSpeed] =
+  ability_tag_enum.accelFull;
 
 function get_ability_time_usage(v) {
   if (!ability_time_usage_names[v]) {

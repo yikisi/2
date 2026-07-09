@@ -876,3 +876,234 @@ good_night_sex:
                 content: %CHARA%
               - 「喂！」
           - %YOU%笑着对被宿舍长带走的圣王光环挥了挥手。
+
+cl_valentine:
+  title: 情人节
+  lines:
+    - 今天是情人节，%YOU%早早地就意识到了这一点，于是%YOU%开始刻意放缓收拾训练员室的速度。
+    - 终于，在%YOU%第六十一次抬头看表后，训练员室的门被敲响了。
+    - 尽管%YOU%一个箭步就冲到了门前，但%YOU%还是矜持地等了一会才开门。
+    - 门外是有些疑惑不解的圣王光环。
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「%CALLNAME%，这是在干什么？你为什么要盯着圣王？」
+    - %YOU%意识到圣王光环可能不知道今天是情人节，有些失望。
+    - 直到圣王光环掏出来一袋什么朝%YOU%丢了过来。
+    - %YOU%手忙脚乱地接住，惊喜地发现这是一袋包装精美的巧克力。
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「圣王可不会忘记任何一个节日！这是我随便从便利店买的，%CALLNAME%也不用太感动了。」
+    - 圣王光环有些脸红地把脸扭到一边，抱起双臂。
+    - 而%YOU%却发现%SEX%的右手手背上有一片烫伤的水泡。
+    - acc: 1
+      key: select
+      content: 「谢谢你圣王，我很喜欢！」（好感+20）
+      lines:
+        - %YOU%决定不过多追问。
+        - 之后，%YOU%当着圣王光环的面拿出一颗巧克力来，送入口中。
+        - acc: 1
+          content: 「巧克力很好吃，真的是很完美的情人节礼物呢。」
+        - 圣王光环看起来很开心，但是%SEX%很快又把情绪压了下去。
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「好啦，我知道很好吃了，下次再给你做……不是，再给你买！」
+        - %YOU%假装没有听到圣王光环的口误。
+    - acc: 2
+      content: 「圣王，还疼吗？」（爱慕+3）
+      lines:
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「什么疼？」
+        - 圣王光环没反应过来%YOU%在说什么，直到%YOU%走上前去轻轻抬起了%SEX%的右手。
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「倒、倒也没有很疼啦。而且巧克力做好那么久了，到现在已经快要没有感觉了。」
+        - 圣王光环见被%YOU%揭穿，有些不好意思地低下了头。
+        - acc: 1
+          content: 「谢谢你，圣王，我很感动。」
+        - 没想到圣王光环又换上了傲娇的面孔。
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「那就感恩戴德地拿去吃掉吧！顺带一提，圣王完全不在乎%CALLNAME%的评价！」
+        - 圣王光环扭过头去，但%YOU%注意到%SEX%的余光还是聚焦在%YOU%的身上。
+        - 于是%YOU%拿出一颗巧克力放入口中，露出了满足的表情。
+        - 圣王光环这才放心地移开了视线。
+
+cl_halloween:
+  title: 万圣节
+  lines:
+    - 今天乃是万圣节，%YOU%早就通过路上光怪陆离的「妖魔鬼怪」们确认了这一点。
+    - %YOU%好不容易从热情的各路妖魔中挣脱了出来，回到了自己的训练员室。
+    - 好在训练员室里还有不少的散装糖果，足以应付这些贪婪的%UMA%。
+    - 另外，%YOU%还为某人特地准备了一袋精装糖果，就放在抽屉的深处。
+    - 突然，训练员室的门被敲响了。%YOU%吓了一跳，差点把笔掉到地上。
+    - %YOU%调整了一下呼吸，颇为期待地走上前去，大力拉开了训练员室的门——
+    - acc: 1
+      content: 「请进，圣王……」
+    - 但门外不是圣王。
+    - content:
+        - fontWeight: bold
+          content: %UMA%A
+        - 「不给糖，就捣蛋！」
+    - 是一位可爱的扮成某种怪物的%UMA%。
+    - %YOU%愣了一下，从自己的抽屉中取了一些早就准备好的散装糖果。
+    - %YOU%把为数不少的糖果装进%UMA%的篮子里，看着%SEX%非常惊喜地向你鞠躬然后跑去敲另一位训练员的门。
+    - %YOU%长长地吐了一口气，回到了自己的座位上去。
+    - 很快，敲门声再次响起。
+    - content:
+        - fontWeight: bold
+          content: %UMA%B
+        - 「不给糖，就捣蛋！」
+    - 依旧不是圣王，%YOU%在将糖果送给%UMA%的时候颇有些失望地想着。
+    - 直到又过去了许久，%YOU%抽屉中的散装糖果已经分发完毕，圣王光环才优雅地敲开了训练员室的门。
+    - %YOU%的手已经伸进抽屉里了，突然又缩了回来。
+    - acc: 1
+      content: 「圣王，你的万圣节服装呢？」
+    - %YOU%疑惑地挠挠头，看着眼前穿着常服的圣王光环。
+    - 圣王光环微不可察地脸红了一下。
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「什么话！圣王才没有忘记今天是万圣节！%CALLNAME%你看，现在站在你面前的，乃是装扮成一流%UMA%的圣王光环！」
+    - 圣王光环捏着衣服边在%YOU%眼前转了两圈。
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「怎么样？是不是很像？」
+    - %YOU%差点被圣王光环的小巧思气笑了。
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「那么，我的糖呢？」
+    - 圣王光环看到%YOU%没有对%SEX%所谓的万圣节服装加以评价，便开始肆无忌惮地向%YOU%讨要糖果。
+    - acc: 1
+      content: 「哦，有的有的。」
+    - %YOU%来到桌子前，拉开抽屉，把一个精美的糖果包装袋递给圣王光环。
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「哦——呵呵呵！万圣节作战大成……功？」
+    - 圣王光环笑着接过了包装袋，随后笑容便凝固在了脸上。
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「%CALLNAME%，这里面怎么什么也没有啊？」
+    - 圣王光环气鼓鼓地质问着%YOU%。
+    - acc: 1
+      content: 「有的哦，不过我准备的是只有一流%UMA%才能看到的一流糖果哦。」
+    - %YOU%故意板着脸，用一个颇为悠闲的姿势坐在椅子上，盯着圣王光环。
+    - %YOU%看着圣王光环的表情变得红白交加，心里已经是笑得十分灿烂，但还是保持着严肃的表情。
+    - acc: 1
+      content: 「扮成了一流%UMA%的一流圣王，拿到了一流训练员的一流糖果，这个过程难道不很一流吗？」
+    - %YOU%忍着笑意又添了把火。
+    - 终于，圣王光环忍不住了，%SEX%走上前来抓住了%YOU%的肩膀开始摇晃。
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「%CALLNAME%不许再逗圣王了！我承认我确实忘记今天是万圣节了！」
+    - 此刻，%YOU%再也忍不住了，大声地笑了出来。
+    - 直到圣王光环看向%YOU%的眼神仿佛能杀人了，%YOU%才勉强止住笑意，从抽屉中拿出为圣王光环准备好的精装糖果。
+    - acc: 1
+      content: 「来，圣王，万圣节快乐哦？」
+    - 圣王光环谨慎地接了过去，确认了一下袋子的重量。
+    - %YOU%看着这一幕，差点再次笑出声来。
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「哼，算%CALLNAME%还有点良心！万圣节快乐！」
+    - 今年的万圣节也在一种奇异的氛围内度过了。
+
+cl_christmas_in_edu:
+  title: 圣诞节
+  lines:
+    - 圣诞节当天，圣王光环来到了训练员室。
+    - 看到%YOU%正坐在沙发上思考着什么，%SEX%便径直走了过来坐到%YOU%身边。
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「记得把今天的预定都推掉！我赐予你在圣诞节为圣王安排追加训练的权利！」
+    - 圣王光环倚在%YOU%身上，挤得%YOU%的身体向一边倾斜。
+    - %YOU%抬起头来看了圣王光环一眼。
+    - acc: 1
+      content: 「抱歉，恕难从命，今天已经有约了。」
+    - 圣王光环从沙发上蹦了起来，就像一只炸毛的猫。
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「什什么？你再说一遍？」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「你居然敢把我晾在一边，到底想干什么？」
+    - acc: 1
+      content: 「因为我要跟某位%UMA%约会去啊。」
+    - 圣王光环，出离愤怒了。
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「你给我讲清楚！你什么时候，和谁要约会！」
+    - 圣王光环抓住了%YOU%的肩膀开始猛烈摇晃。
+    - %YOU%噗嗤一声笑了出来，赶在圣王光环对%YOU%的肩膀进行下一轮攻势之前拍了拍%SEX%的手，示意%SEX%松开%YOU%。
+    - acc: 1
+      content: 「当然是一流的圣王光环啦！难道说圣王忘记了吗？这还是你自己要求的呢。」
+    - 圣王光环怔怔地松开了%YOU%，隐约记起了自己上一周似乎确实是这么要求的。
+    - %YOU%整理了一下凌乱的衣领，面带笑意地看着圣王光环的脸色由红转白。
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「好像确实有这回事……其实这都是圣王给%CALLNAME%设置的考验！圣王明明是在检验%CALLNAME%还记不记得圣王的要求。」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「现在看来，%CALLNAME%不愧是圣王的一流训练员，记得很清楚嘛，圣王很高兴！」
+    - %YOU%看着瞬间就找好借口的圣王光环，大受震撼。
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「作为通过考验的奖励，圣王决定把今天日程的安排权交给%CALLNAME%！就由称呼做决定吧。」
+    - %YOU%立刻摆出了一副夸张的感恩戴德的姿势来，结果又挨了圣王光环的一个白眼。
+    - acc: 1
+      key: select
+      content: 「那就来进行一流的圣诞约会吧。」（好感+20，爱慕+3）
+      lines:
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「那就换好衣服出门吧！恰好有几家店铺圣王很想去看看呢。」
+        - %YOU%在圣王光环的催促之下换好了出门的衣服，被%SEX%拖着离开了训练员室。
+    - acc: 2
+      content: 「那就来进行一流的圣诞加练吧。」（速度or耐力or力量or根性+20）
+      lines:
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「一流的圣王哪怕是圣诞节也不能懈怠！」
+        - 之后在几乎空无一人的训练场上进行了热血沸腾的追加训练。

@@ -4866,6 +4866,7 @@ module.exports = {
             ' 主动抛弃的东西。',
           ]);
         }
+        era.setColor();
       }
     };
     f.title = title;

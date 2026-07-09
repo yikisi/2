@@ -346,7 +346,6 @@ module.exports = {
       ]);
       ret.push(await degeneration_to_evil('顺从地含住', '厌恶地扭过脸去'));
       if (ret[0] === 1) {
-        setColor(akuochi[1]);
         await printAndWait([
           '其实不劳费心，',
           you.get_colored_name(),
@@ -366,7 +365,6 @@ module.exports = {
           '，今天也牢记着自己的职责……',
         ]);
       } else {
-        setColor(akuochi[0]);
         await printAndWait([
           '即使沦落到这步田地，',
           you.get_colored_name(),
@@ -611,7 +609,7 @@ module.exports = {
         you.get_colored_name(),
         ' 那已经被两人先行使用，白浆还在涓涓流出的红肿小穴，迎来了新的客人。',
       ]);
-      const ret = await degeneration_to_evil('服从', '不屈');
+      const ret = await degeneration_to_evil('服从', '不屈', false);
       await printAndWait([
         '被戴上眼罩和口球的 ',
         you.get_colored_name(),
@@ -797,7 +795,6 @@ module.exports = {
         '明明如果停留在那一步，还可以自己选择孩子的父亲是谁，',
       ]);
       if ((await degeneration_to_evil('服从', '不屈')) === 1) {
-        setColor(akuochi[1]);
         await printAndWait([
           '所以，故意走到这一步的 ',
           you.get_colored_name(),
@@ -808,7 +805,6 @@ module.exports = {
         ]);
         await printAndWait(['忘不了纯粹被当成性处理工具的感觉。']);
       } else {
-        setColor(akuochi[0]);
         await printAndWait([
           '所以，走到这一步的 ',
           you.get_colored_name(),
@@ -960,6 +956,7 @@ module.exports = {
     return f;
   })(),
   report_preg_duty: (() => {
+    const title = '职责';
     /**
      * @author 幽白書
      * @param {CharaTalk} you
@@ -982,7 +979,6 @@ module.exports = {
         '无奈地接受事实',
       );
       if (ret === 1) {
-        setColor(akuochi[1]);
         await printAndWait([you.get_colored_name(), ' 欣喜地畅想着']);
         await printAndWait('有了孩子之后的未来、孩子出生之后的教育……');
         await printAndWait([
@@ -1051,7 +1047,6 @@ module.exports = {
           '，下体又忍不住一阵痉挛，无法控制的潮吹在阳光下竟生成了彩虹，仿佛在恭贺着自己的怀孕一般',
         ]);
       } else {
-        setColor(akuochi[0]);
         await printAndWait('没有什么好意外的');
         await printAndWait(
           '———每天就连上个厕所都会被五六根肉棒堵在门外，最后只能自己将混杂着潮水、精液以及失禁的尿液的地板仔细舔舐干净的生活，怀孕真的有那么难以想像吗？',
@@ -1105,11 +1100,13 @@ module.exports = {
       setColor();
       return [ret];
     };
-    f.title = '职责';
+    f.title = title;
     return f;
   })(),
   have_baby_in_sleep: (() => {
+    const title = '新生命';
     /**
+     * 孕袋被睡奸生子
      * @author 幽白書
      * @param {CharaTalk} you
      * @param {CharaTalk} father
@@ -1120,7 +1117,6 @@ module.exports = {
       await printAndWait([you.get_colored_name(), ' 抱起了孩子——']);
       const ret = await degeneration_to_evil('慈爱地轻抚', '无声地反抗');
       if (ret === 1) {
-        setColor(akuochi[1]);
         await printAndWait([you.get_colored_name(), ' 的心中满是疼爱']);
         await printAndWait('孩子的父亲是谁已经不重要了');
         await printAndWait([
@@ -1164,7 +1160,6 @@ module.exports = {
           '————该怎么做，才能将这孩子养育成最适合调教自己的主人呢？',
         );
       } else {
-        setColor(akuochi[0]);
         await printAndWait(
           '对这个孩子，理论上身为母亲应该要有的感情都变得淡漠',
         );
@@ -1250,11 +1245,13 @@ module.exports = {
       setColor();
       return [ret];
     };
-    f.title = '新生命';
+    f.title = title;
     return f;
   })(),
   have_baby_after_raped: (() => {
+    const title = '新生命';
     /**
+     * 孕袋被强奸生子
      * @author 幽白書
      * @param {CharaTalk} you
      * @param {CharaTalk} father
@@ -1266,7 +1263,6 @@ module.exports = {
         '不，我自己也能照顾的来',
       );
       if (ret === 1) {
-        setColor(akuochi[1]);
         await printAndWait('……无论如何，自己或许可以一个人过');
         await printAndWait('但最起码，还是想让孩子有个完整的家庭');
         println();
@@ -1315,7 +1311,6 @@ module.exports = {
         ]);
         await printAndWait('开始期待起那样的明天');
       } else {
-        setColor(akuochi[0]);
         await printAndWait([
           you.get_colored_name(),
           ' 瞪着当初痛快在自己体内释放欲望，毫无责任感的在自己体内中出的 ',
@@ -1362,14 +1357,119 @@ module.exports = {
       setColor();
       return [ret];
     };
-    f.title = '新生命';
+    f.title = title;
     return f;
   })(),
   have_baby_dedicate: (() => {
-    const f = async () => {
-      await printAndWait('TODO 自愿献身生子');
+    const title = '新生命';
+    /**
+     * 孕袋主动献身生子
+     * @author 幽白書
+     * @param {CharaTalk} you
+     * @param {CharaTalk} father
+     */
+    const f = async (you, father) => {
+      await printAndWait([you.get_colored_name(), ' 抱起了孩子——']);
+      const ret = await degeneration_to_evil('回忆欢愉', '泛起母爱');
+      if (ret === 1) {
+        await printAndWait([
+          you.get_colored_name(),
+          ' 抱着孩子，心中涌起某种激荡',
+        ]);
+        await printAndWait([
+          '这是 ',
+          you.get_colored_name(),
+          ' 和 ',
+          father.get_colored_name(),
+          ' 结合诞下的孩子',
+        ]);
+        await printAndWait('……不……不是结合');
+        await printAndWait([
+          '而是 ',
+          you.get_colored_name(),
+          ' 的基因主动臣服，跪伏在 ',
+          father.get_colored_name(),
+          ' 的基因下诞生出的产物 ',
+          you.get_colored_name(),
+          ' 的身体，无法抗拒身体的相性，无法抵抗基因底层的渴望',
+        ]);
+        await printAndWait([
+          '看着这孩子的模样，',
+          you.get_colored_name(),
+          ' 心中百般怜爱',
+        ]);
+        await printAndWait([
+          '每个从它身上看出的，来自 ',
+          father.get_colored_name(),
+          ' 的影子，都代表着一次又一次强烈而毫不留情的甜蜜侵犯',
+        ]);
+        await printAndWait([
+          '想到未来带着这孩子出门的画面，就仿彿带着自己是 ',
+          father.get_colored_name(),
+          ' 的专属孕袋的证明出行……',
+        ]);
+        await printAndWait([you.get_colored_name(), ' 的下体忍不住颤抖了起来']);
+      } else {
+        await printAndWait([
+          you.get_colored_name(),
+          ' 抱着孩子，心中涌起某种波澜',
+        ]);
+        await printAndWait([
+          '这是 ',
+          you.get_colored_name(),
+          ' 与 ',
+          father.get_colored_name(),
+          ' 结合诞下的孩子',
+        ]);
+        await printAndWait('不……不是结合');
+        await printAndWait([
+          '而是 ',
+          father.get_colored_name(),
+          ' 的基因侵犯了 ',
+          you.get_colored_name(),
+          ' 的基因后诞生出的产物',
+        ]);
+        await printAndWait([
+          '难以反抗这具身体天生的奴性，哪怕心底无法接受，甚至厌恶这一切，经过改造的身体也会自己把小宝宝的房间敞开，做好被 ',
+          father.get_colored_name(),
+          ' 播种的一切准备',
+        ]);
+        await printAndWait([
+          '看着怀中的孩子，',
+          you.get_colored_name(),
+          ' 应该要恨的',
+        ]);
+        await printAndWait([
+          '每个从它身上看出的，来自 ',
+          father.get_colored_name(),
+          ' 的影子，都代表着一次又一次强烈而毫不留情的侵犯',
+        ]);
+        await printAndWait([
+          '在怀上这孩子的那个晚上，在 ',
+          father.get_colored_name(),
+          ' 要求下，',
+          you.get_colored_name(),
+          ' 像小狗一样趴着，直到灌满了精液，双手再无力支撑身体， ',
+          father.get_colored_name(),
+          ' 才把肉棒拔出，塞进 ',
+          you.get_colored_name(),
+          ' 的嘴里作为结束',
+        ]);
+        await printAndWait([
+          '然而或许两人之间的基因就是如此登对，',
+          you.get_colored_name(),
+          ' 发现自己恨不起来，心中涌现的只有名母爱的感情',
+        ]);
+        await printAndWait([
+          '——只是，',
+          you.get_colored_name(),
+          ' 尚不知道，在这孩子成长之后，这种感情会再度演化为基因上的屈服……',
+        ]);
+      }
+      setColor();
+      return [ret];
     };
-    f.title = '新生命';
+    f.title = title;
     return f;
   })(),
 };

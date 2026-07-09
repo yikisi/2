@@ -77,6 +77,6 @@ module.exports = new UmaSkill(
   true,
   false,
   [0, 4],
-  [UmaSkill.ability_tag_enum.currentSpeed],
+  [UmaSkill.ability_tag_enum.currentSpeed, UmaSkill.ability_tag_enum.accelFull],
 );
 // GENERATED END

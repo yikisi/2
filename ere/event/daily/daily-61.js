@@ -1,7 +1,12 @@
+const era = require('#/era-electron');
+
 const CustomizedDaily = require('#/event/daily/daily-common');
+const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
 const generate_dictionary = require('#/event/snippets/generate-dictionary');
+const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
+const { get_random_value } = require('#/utils/value-utils');
 
 const { i18n } = require('#/i18n/selector');
 
@@ -113,5 +118,53 @@ module.exports = class extends CustomizedDaily {
       (await this.#kojo['good_night_sex']({ ...this.#dict, check }))['sex'] ===
       1
     );
+  }
+
+  async cl_valentine(halo, me, hook) {
+    hook.override = true;
+    era.set(`status:${this.id}:节日事件标记`, 0);
+    if (
+      all_reward_in_event(
+        this.id,
+        (
+          await print_title_with_kojo(
+            this.#dict,
+            'cl_valentine',
+            halo,
+            this.#dict,
+          )
+        )['select'] === 1
+          ? { relation: 20 }
+          : { love: 3 },
+      )
+    ) {
+      await era.waitAnyKey();
+    }
+  }
+
+  async cl_halloween(halo, me, hook) {
+    await print_title_with_kojo(this.#dict, 'cl_halloween', halo, this.#dict);
+  }
+
+  async cl_christmas(halo, me, hook) {
+    hook.override = true;
+    era.set(`status:${this.id}:节日事件标记`, 0);
+    if (
+      all_reward_in_event(
+        this.id,
+        (
+          await print_title_with_kojo(
+            this.#dict,
+            'cl_christmas_in_edu',
+            halo,
+            this.#dict,
+          )
+        )['select'] === 1
+          ? { relation: 20, love: 3 }
+          : { attr: { [get_random_value(0, 3)]: 20 } },
+      )
+    ) {
+      await era.waitAnyKey();
+    }
   }
 };

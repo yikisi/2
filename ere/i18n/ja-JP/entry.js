@@ -77,13 +77,11 @@ module.exports = class extends I18nEntry {
   relation_6 = '親密';
   relation_7 = '不変';
 
-  tt_birthday_notify = (birth_list) => [
-    '今日は',
-    ...birth_list,
-    'の誕生日です',
-  ];
+  tt_birthday_notify = (birth_list) => ['今日は', ...birth_list, 'の誕生日！'];
   tt_new_game = 'ニューゲーム';
   tt_load_game = 'ロード';
+  tt_achieve = '実績';
+  tt_chara_achieve = 'キャラ実績';
   tt_help = 'チュートリアル';
   tt_copyrights = 'クレジット';
 
@@ -187,6 +185,48 @@ module.exports = class extends I18nEntry {
   get_ui_curr_race_indicator = (race) => ['(今週開催: ', race, ')'];
 
   ui_change_image = '立ち絵切替';
+  ui_show_team = 'チームの確認';
+  ui_train = 'トレーニング';
+  ui_self_train = '自主トレーニング';
+  ui_goto_sex = '夜のお誘い';
+  ui_next_turn = '1週間を終える';
+  ui_office_study = '学習指導';
+  ui_office_prepare = '試合前の準備';
+  ui_talk = '会話';
+  ui_office_gift = 'プレゼントを贈る';
+  ui_self_cook = '食事';
+  ui_office_cook = '一緒に食事';
+  ui_self_rest = '少し休憩';
+  ui_office_rest = '一緒に少し休憩';
+  ui_self_game = 'ゲーム';
+  ui_office_game = '一緒にゲーム';
+  ui_self_update = '自分のエッチスキル向上';
+  ui_ero_update = 'お互いのエッチスキル向上';
+  ui_borrow_money = 'お金を借りる';
+  ui_celebration_template = '一緒にお祝い %CELEBRATION%';
+  ui_birthday = '誕生日を祝う';
+  ui_check_love = '恋愛関係に進む';
+  ui_recruit = '練習場 (募集)';
+  ui_trainer_office = 'トレーナー室';
+  ui_clinic = '保健室';
+  ui_god_together = '一緒に三女神像';
+  ui_god_alone = '三女神像';
+  ui_atrium_together = '一緒に中庭';
+  ui_atrium_alone = '中庭';
+  ui_rooftop_together = '一緒に屋上';
+  ui_rooftop_alone = '屋上';
+  ui_chairman_office = '理事長室';
+  ui_visitors = '来客応接室';
+  ui_school_shop = '売店';
+  ui_out_together = '一緒に外出';
+  ui_out_alone = '外出';
+  ui_info_page = 'キャラ情報';
+  ui_storage = '持ち物';
+  ui_races = 'レース記録';
+  ui_office_filter_template = 'トレ室活動を除外 [%STATUS%]';
+  ui_out_filter_template = '外出活動を除外 [%STATUS%]';
+  ui_save_game = 'セーブ';
+  ui_load_game = 'ロード';
 
   name = new (require('#/i18n/ja-JP/chara/names'))();
   title = new (require('#/i18n/ja-JP/chara/titles'))();

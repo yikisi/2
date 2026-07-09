@@ -31,11 +31,12 @@ module.exports = {
     }
   },
   /**
-   * 用于输出恶堕选项的工具函数
+   * 用于输出恶堕选项的工具函数，注意如果有变色的话在最后要再执行一次 era.setColor 清除颜色
    * @param {string} bt_yes 选择恶堕的选项名
    * @param {string} bt_no 选择抗拒的选项名
+   * @param {boolean} change_color 是否变更颜色，默认 true，延迟变更传入 false 然后自行处理
    */
-  async degeneration_to_evil(bt_yes, bt_no) {
+  async degeneration_to_evil(bt_yes, bt_no, change_color = true) {
     const flag = era.get('flag:恶堕');
     era.printButton(bt_yes, 1, {
       buttonType: '',
@@ -60,8 +61,10 @@ module.exports = {
     const ret = await era.input();
     if (ret === 1) {
       era.set('flag:恶堕', 2);
+      change_color && era.setColor(akuochi[1]);
     } else {
       era.set('flag:恶堕', 1);
+      change_color && era.setColor(akuochi[0]);
     }
     return ret;
   },

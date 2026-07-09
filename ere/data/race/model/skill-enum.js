@@ -28,6 +28,7 @@ const ability_tag_enum = {
   temp: 1,
   laneMove: 1,
   ero: 0,
+  accelFull: 0,
 };
 Object.keys(ability_tag_enum).forEach((k, i) => (ability_tag_enum[k] = i));
 

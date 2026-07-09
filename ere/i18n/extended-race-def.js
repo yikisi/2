@@ -74,6 +74,7 @@ const _race_def = {
         _.t_temp,
         _.t_laneMove,
         _.t_ero,
+        _.t_accelFull,
       ];
     },
   },

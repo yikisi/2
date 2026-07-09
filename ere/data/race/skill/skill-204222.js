@@ -69,6 +69,6 @@ module.exports = new UmaSkill(
   false,
   false,
   [4],
-  [],
+  [UmaSkill.ability_tag_enum.accelFull],
 );
 // GENERATED END

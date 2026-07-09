@@ -112,16 +112,15 @@ module.exports = async (cid, next_cb, flags) => {
       growth_stage,
       is_remote,
       async () => {
-        // FLAGNAME:4 = 当前位置
-        era.set('flag:4', location_enum.playground);
+        era.set('flag:当前位置', location_enum.playground);
         await print_train_page();
-        era.set('flag:4', location_enum.office);
+        era.set('flag:当前位置', location_enum.office);
       },
       async () => {
         if (await goto_sex(cid, location_enum.restroom)) {
           flags.week_start = true;
         }
-        era.set('flag:4', location_enum.office);
+        era.set('flag:当前位置', location_enum.office);
       },
     ),
   );

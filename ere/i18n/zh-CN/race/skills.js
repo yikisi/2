@@ -34,6 +34,7 @@ class I18nSkills {
   t_temp = '焦躁';
   t_laneMove = '突围';
   t_ero = '调教';
+  t_accelFull = '冲刺力';
 
   borders = ['【', '】'];
   tag_template = '＜%TAG%＞';
