@@ -1,4 +1,6 @@
 class I18nStatus {
+  static _ = new I18nStatus();
+
   template = '[%NAME%]';
 
   n_status = '状态';

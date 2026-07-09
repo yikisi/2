@@ -1,7 +1,8 @@
-const proxy_kojo_js = require('#/i18n/proxy');
+const { proxy_kojo_js } = require('#/i18n/tools');
 
 // GENERATED START
 class I18nKojo200500 {
+  static _ = new I18nKojo200500();
   recruit = proxy_kojo_js(require('#/i18n/zh-CN/kojo/200500-Treve/rec-205.js'));
   daily = proxy_kojo_js(require('#/i18n/zh-CN/kojo/200500-Treve/daily-205.js'));
   edu = proxy_kojo_js(require('#/i18n/zh-CN/kojo/200500-Treve/edu-205.js'));

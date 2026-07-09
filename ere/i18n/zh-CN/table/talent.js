@@ -1,4 +1,6 @@
 class I18nTalent {
+  static _ = new I18nTalent();
+
   template = '[%NAME%]';
   shop_template = '%NAME% [%STATUS%]';
 

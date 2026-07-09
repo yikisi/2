@@ -1,5 +1,6 @@
 // GENERATED START
 class I18nKojo900300 {
+  static _ = new I18nKojo900300();
   /** @type {KojoFile} */
   recruit = require('#/i18n/zh-CN/kojo/900300-Otonashi-Etsuko/rec-303.kojo');
   /** @type {KojoFile} */

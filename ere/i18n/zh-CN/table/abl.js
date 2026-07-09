@@ -1,4 +1,6 @@
 class I18nAbl {
+  static _ = new I18nAbl();
+
   lv_template = 'Lv.%LEVEL%';
   // 这里使用 getter，使 template 和 bordered_template 能正确使用当前语言库的 lv_template
   get template() {

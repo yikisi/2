@@ -1,5 +1,7 @@
 // GENERATED START
 class I18nKojo904800 {
+  static _ = new I18nKojo904800();
+
   // GENERATED END
   get_achieve_track_aim = (honour) => ['从 G1 赛事获胜中争得声望：', honour];
 

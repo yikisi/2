@@ -1,4 +1,6 @@
 class I18nStain {
+  static _ = new I18nStain();
+
   template = '<%STAIN%>';
 
   n_saliva = '唾液';

@@ -47,7 +47,7 @@ for (const charaPath of kojoDir) {
       cid = temp - 1000;
     }
   }
-  entryOut += `${cid} = new (require('#/i18n/zh-CN/kojo/${charaPath}/entry'))();`;
+  entryOut += `${cid} = require('#/i18n/zh-CN/kojo/${charaPath}/entry')._;`;
   if (!skip[kojoId]) {
     const suffixDict = {};
     files.forEach((t) => (suffixDict[t.substring(t.indexOf('.'))] = 1));
@@ -83,7 +83,7 @@ for (const charaPath of kojoDir) {
     read_and_write_generated(
       join(p, 'entry.js'),
       '//',
-      `class ${className} {\n${entries.join('\n')}`,
+      `class ${className} {\n\nstatic _ = new ${className}();\n${entries.join('\n')}`,
     );
   }
   // console.log(cid, className, charaPath);

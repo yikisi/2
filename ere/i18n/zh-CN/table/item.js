@@ -1,4 +1,6 @@
 class I18nItem {
+  static _ = new I18nItem();
+
   template = '【%NAME%】';
   got_template = '获得了道具%INAME%！';
 

@@ -1,4 +1,6 @@
 class I18nExp {
+  static _ = new I18nExp();
+
   33 = '口腔高潮次数';
   35 = '被颜射精液量';
   36 = '饮精量(ml)';

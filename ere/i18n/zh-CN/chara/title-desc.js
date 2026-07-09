@@ -1,4 +1,6 @@
 class I18nTitleDesc {
+  static _ = new I18nTitleDesc();
+
   undef = '赢取了六次以上的 G1 比赛胜利';
   got = '已获得 ✔';
   personal_template = '在一次育成周期内%DESC%';

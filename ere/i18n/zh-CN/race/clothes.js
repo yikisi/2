@@ -1,4 +1,6 @@
 class I18nClothes {
+  static _ = new I18nClothes();
+
   n_clothe = '决胜服';
   chosen_clothe_template = '决胜服 (%CLOTHE%)';
   only_one_clothe_template = '决胜服：%CLOTHE%';

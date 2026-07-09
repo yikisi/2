@@ -1,6 +1,8 @@
-const proxy_kojo_js = require('#/i18n/proxy');
+const { proxy_kojo_js } = require('#/i18n/tools');
 
 class I18nKojo1000 {
+  static _ = new I18nKojo1000();
+
   daily = proxy_kojo_js(require('#/i18n/zh-CN/kojo/1000-Player/daily-0'));
   edu = proxy_kojo_js(require('#/i18n/zh-CN/kojo/1000-Player/edu-0'));
   ero = proxy_kojo_js(require('#/i18n/zh-CN/kojo/1000-Player/ero-0'));

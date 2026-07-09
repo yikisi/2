@@ -1,4 +1,4 @@
-const proxy_kojo_js = require('#/i18n/proxy');
+const { proxy_kojo_js } = require('#/i18n/tools');
 
 class I18nKojo108500 {
   recruit = proxy_kojo_js(

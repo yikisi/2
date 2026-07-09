@@ -1,4 +1,6 @@
 class I18nAchievements {
+  static _ = new I18nAchievements();
+
   type_edu = '育成';
   type_race = '赛事';
   type_love = '爱慕';

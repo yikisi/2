@@ -1,4 +1,6 @@
 class I18nRaces {
+  static _ = new I18nRaces();
+
   name_with_class_template = '%NAME% (%CLASS%)';
 
   g1 = 'G1';

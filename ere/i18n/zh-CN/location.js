@@ -1,4 +1,6 @@
 class I18nLocation {
+  static _ = new I18nLocation();
+
   office = '训练室';
   playground = '训练场';
   atrium = '中庭';

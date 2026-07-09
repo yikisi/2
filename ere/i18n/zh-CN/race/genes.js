@@ -1,4 +1,6 @@
 class I18nGenes {
+  static _ = new I18nGenes();
+
   t_adapt = '适性';
   t_base = '属性';
   t_skill = '技巧';

@@ -1,4 +1,6 @@
 class I18nVehicle {
+  static _ = new I18nVehicle();
+
   use_vehicle_template = '%VERB% %VEHICLE%';
 
   skateboard = '滑板';

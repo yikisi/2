@@ -865,7 +865,7 @@ module.exports = {
       ]);
     });
     if (era.get('love:56') >= 75) {
-      buffer.push(async function () {
+      buffer.push(async () => {
         await era.printAndWait([
           kitaru.get_colored_name(),
           ' 挽起了 ',
@@ -1211,7 +1211,7 @@ module.exports = {
       },
     ];
     if (era.get('love:56') >= 50) {
-      buffer.push(async function () {
+      buffer.push(async () => {
         await era.printAndWait('甜腻的爱情喜剧');
         await kitaru.say_and_wait([
           '哈哈哈！这种事情我好像也对 ',

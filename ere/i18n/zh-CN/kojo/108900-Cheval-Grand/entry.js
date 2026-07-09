@@ -2,6 +2,7 @@ const era = require('#/era-electron');
 
 // GENERATED START
 class I18nKojo108900 {
+  static _ = new I18nKojo108900();
   /** @type {KojoFile} */
   recruit = require('#/i18n/zh-CN/kojo/108900-Cheval-Grand/rec-89.kojo');
   /** @type {KojoFile} */

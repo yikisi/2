@@ -1,5 +1,7 @@
 // GENERATED START
 class I18nKojo103300 {
+  static _ = new I18nKojo103300();
+
   // GENERATED END
 
   report_common_win = (vega) => [

@@ -1,4 +1,6 @@
 class I18nCharaFeature {
+  static _ = new I18nCharaFeature();
+
   hair_color_template = '%COLOR%发';
   uma_hair_color_template = '%COLOR%毛';
   ahoge_hair_template = '%LONG%呆毛';

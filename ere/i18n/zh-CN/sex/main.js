@@ -1,4 +1,6 @@
 class I18nSex {
+  static _ = new I18nSex();
+
   n_lust = '欲';
   l_mejiro = '一心同体';
 

@@ -1,5 +1,7 @@
 // GENERATED START
 class I18nKojo904900 {
+  static _ = new I18nKojo904900();
+
   // GENERATED END
   buff = '投资顾问';
   buff_desc = (buff) =>

@@ -1,5 +1,6 @@
 // GENERATED START
 class I18nKojo900100 {
+  static _ = new I18nKojo900100();
   /** @type {KojoFile} */
   daily = require('#/i18n/zh-CN/kojo/900100-Hayakawa-Tazuna/daily-301.kojo');
   /** @type {KojoFile} */

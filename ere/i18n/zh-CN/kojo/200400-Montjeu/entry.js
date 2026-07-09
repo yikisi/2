@@ -1,5 +1,7 @@
 // GENERATED START
 class I18nKojo200400 {
+  static _ = new I18nKojo200400();
+
   // GENERATED END
   /**
    * @param {CharaTalk} montjeu

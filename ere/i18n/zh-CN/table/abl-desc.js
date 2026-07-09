@@ -1,4 +1,6 @@
 class I18nAblDesc {
+  static _ = new I18nAblDesc();
+
   abl_above = '臻至非人之境';
   abl_ex = '宛若神之才能';
 

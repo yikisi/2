@@ -1,4 +1,6 @@
 class I18nItemDesc {
+  static _ = new I18nItemDesc();
+
   0 =
     '浓缩的蔬菜汁，很有营养，但是味道很怪\n体力+50%，本回合体力上限-100，干劲下降。';
   1 =

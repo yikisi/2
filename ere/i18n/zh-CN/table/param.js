@@ -1,4 +1,6 @@
 class I18nParam {
+  static _ = new I18nParam();
+
   get_jewel_count = (jewel, count) => [jewel, '：', count];
   jewel_with_count = '%JEWEL%×%COUNT%';
 

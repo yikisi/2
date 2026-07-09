@@ -1,4 +1,6 @@
 class I18nSkillDesc {
+  static _ = new I18nSkillDesc();
+
   disabled_template = '（未启用）%DESC%';
 
   100039 = '在比赛终盘中幅提升速度，并恢复冷静';

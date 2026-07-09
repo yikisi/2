@@ -1,4 +1,6 @@
 class I18nDetail {
+  static _ = new I18nDetail();
+
   base_title = '个人情报';
   get_base_summary_info = (
     skin,

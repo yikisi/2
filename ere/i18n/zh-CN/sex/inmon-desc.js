@@ -1,4 +1,6 @@
 class I18nInmonDesc {
+  static _ = new I18nInmonDesc();
+
   // GENERATED START
   10111 = '口腔快感获取+100%。';
   10112 = '口腔快感获取+200%。';

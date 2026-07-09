@@ -1,4 +1,6 @@
 class I18nSkills {
+  static _ = new I18nSkills();
+
   n_type = '技能类型';
   n_t_buff = '常时';
   n_t_heal = '恢复';

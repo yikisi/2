@@ -1,4 +1,6 @@
 class I18nStatusDesc {
+  static _ = new I18nStatusDesc();
+
   template = '[%NAME%]：%DESC%';
 
   remote =

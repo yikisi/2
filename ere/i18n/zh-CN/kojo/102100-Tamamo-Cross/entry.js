@@ -1,5 +1,6 @@
 // GENERATED START
 class I18nKojo102100 {
+  static _ = new I18nKojo102100();
   /** @type {KojoFile} */
   recruit = require('#/i18n/zh-CN/kojo/102100-Tamamo-Cross/rec-21.kojo');
   /** @type {KojoFile} */

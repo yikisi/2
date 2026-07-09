@@ -1,4 +1,6 @@
 class I18nNames {
+  static _ = new I18nNames();
+
   sir_template = '%NAME%先生';
   madam_template = '%NAME%小姐';
   chan_template = '小%NAME%';

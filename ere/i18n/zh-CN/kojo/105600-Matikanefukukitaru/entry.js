@@ -1,7 +1,8 @@
-const proxy_kojo_js = require('#/i18n/proxy');
+const { proxy_kojo_js } = require('#/i18n/tools');
 
 // GENERATED START
 class I18nKojo105600 {
+  static _ = new I18nKojo105600();
   recruit = proxy_kojo_js(
     require('#/i18n/zh-CN/kojo/105600-Matikanefukukitaru/rec-56.js'),
   );

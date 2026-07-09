@@ -1,5 +1,7 @@
 // GENERATED START
 class I18nKojo200600 {
+  static _ = new I18nKojo200600();
+
   // GENERATED END
   /**
    * @param {CharaTalk} brave

@@ -1,4 +1,6 @@
 class I18nTitles {
+  static _ = new I18nTitles();
+
   n_title = '称号';
 
   ui_chara_achieve = '角色成就获取情况';

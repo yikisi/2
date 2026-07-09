@@ -1,4 +1,6 @@
-class I18nDesc {
+class I18nGeneDesc {
+  static _ = new I18nGeneDesc();
+
   300000 = '技能点数+600';
   // GENERATED START
   100000 = '草地适性提高';
@@ -34,4 +36,4 @@ class I18nDesc {
   // GENERATED END
 }
 
-module.exports = I18nDesc;
+module.exports = I18nGeneDesc;

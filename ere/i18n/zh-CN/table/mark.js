@@ -1,4 +1,6 @@
 class I18nMark {
+  static _ = new I18nMark();
+
   name_template = '%NAME%刻印';
   lv_template = 'Lv.%LEVEL%';
 

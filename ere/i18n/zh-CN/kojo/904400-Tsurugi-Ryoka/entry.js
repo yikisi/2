@@ -1,5 +1,7 @@
 // GENERATED START
 class I18nKojo904400 {
+  static _ = new I18nKojo904400();
+
   // GENERATED END
   photographer = '光影捕手';
   photographer_desc = (buff) =>

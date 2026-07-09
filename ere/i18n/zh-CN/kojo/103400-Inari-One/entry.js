@@ -1,5 +1,7 @@
 // GENERATED START
 class I18nKojo103400 {
+  static _ = new I18nKojo103400();
+
   // GENERATED END
 
   report_tenn_spr = (inari) => [

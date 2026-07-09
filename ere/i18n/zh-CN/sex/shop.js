@@ -1,4 +1,6 @@
 class I18nJewelShop {
+  static _ = new I18nJewelShop();
+
   abl_tab = '能力学习';
   talent_tab = '特性变更';
   mark_tab = (has_inmon) => (has_inmon ? '刻印定制' : '刻印消除');

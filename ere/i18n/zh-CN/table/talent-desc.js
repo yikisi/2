@@ -1,4 +1,6 @@
 class I18nTalentDesc {
+  static _ = new I18nTalentDesc();
+
   template = '[%NAME%]：%DESC%';
 
   '0_1' = '全情感因子获取+30%，干劲下降时+1阶段。';

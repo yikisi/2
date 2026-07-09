@@ -1,5 +1,7 @@
 // GENERATED START
 class I18nKojo904700 {
+  static _ = new I18nKojo904700();
+
   // GENERATED END
   buff = '远征先驱';
   buff_desc = (buff) =>

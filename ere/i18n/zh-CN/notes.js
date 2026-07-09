@@ -1,4 +1,6 @@
 class I18nNotes {
+  static _ = new I18nNotes();
+
   2 = [
     [
       '？？？',

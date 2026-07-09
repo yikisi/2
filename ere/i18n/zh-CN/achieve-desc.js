@@ -1,4 +1,6 @@
 class I18nAchieveDesc {
+  static _ = new I18nAchieveDesc();
+
   abbr_template = '%DESC%……';
 
   edu_one = '完成一次育成。';

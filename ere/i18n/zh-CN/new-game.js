@@ -1,4 +1,6 @@
 class I18nNewGame {
+  static _ = new I18nNewGame();
+
   rp_select = '选择要扮演的角色';
   rp_select_me = '我自己';
   rp_select_tip_1 = '带有 * 号后缀的角色有口上';

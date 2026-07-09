@@ -1,5 +1,6 @@
 // GENERATED START
 class I18nKojo100200 {
+  static _ = new I18nKojo100200();
   /** @type {KojoFile} */
   recruit = require('#/i18n/zh-CN/kojo/100200-Silence-Suzuka/rec-2.kojo');
   /** @type {KojoFile} */

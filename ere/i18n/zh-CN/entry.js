@@ -754,49 +754,49 @@ class I18nEntry {
   ui_load_fail_template = '未能成功读取 %NO% 号栏位的存档';
   ui_load_remove_success_template = '成功删除 %NO% 号栏位的存档';
 
-  name = new (require('#/i18n/zh-CN/chara/names'))();
-  title = new (require('#/i18n/zh-CN/chara/titles'))();
-  title_desc = new (require('#/i18n/zh-CN/chara/title-desc'))();
-  feature = new (require('#/i18n/zh-CN/chara/feature'))();
-  detail = new (require('#/i18n/zh-CN/chara/detail'))();
+  name = require('#/i18n/zh-CN/chara/names')._;
+  title = require('#/i18n/zh-CN/chara/titles')._;
+  title_desc = require('#/i18n/zh-CN/chara/title-desc')._;
+  feature = require('#/i18n/zh-CN/chara/feature')._;
+  detail = require('#/i18n/zh-CN/chara/detail')._;
 
-  kojo = new (require('#/i18n/zh-CN/kojo/entry'))();
-  timon = new (require('#/i18n/zh-CN/timon/entry'))();
+  kojo = require('#/i18n/zh-CN/kojo/entry')._;
+  timon = require('#/i18n/zh-CN/timon/entry')._;
 
-  new_game = new (require('#/i18n/zh-CN/new-game'))();
-  location = new (require('#/i18n/zh-CN/location'))();
-  vehicle = new (require('#/i18n/zh-CN/vehicle'))();
-  note = new (require('#/i18n/zh-CN/notes'))();
-  achievement = new (require('#/i18n/zh-CN/achieve'))();
-  achieve_desc = new (require('#/i18n/zh-CN/achieve-desc'))();
+  new_game = require('#/i18n/zh-CN/new-game')._;
+  location = require('#/i18n/zh-CN/location')._;
+  vehicle = require('#/i18n/zh-CN/vehicle')._;
+  note = require('#/i18n/zh-CN/notes')._;
+  achievement = require('#/i18n/zh-CN/achieve')._;
+  achieve_desc = require('#/i18n/zh-CN/achieve-desc')._;
 
-  tb_abl = new (require('#/i18n/zh-CN/table/abl'))();
-  tb_exp = new (require('#/i18n/zh-CN/table/exp'))();
-  tb_item = new (require('#/i18n/zh-CN/table/item'))();
-  tb_mark = new (require('#/i18n/zh-CN/table/mark'))();
-  tb_param = new (require('#/i18n/zh-CN/table/param'))();
-  tb_stain = new (require('#/i18n/zh-CN/table/stain'))();
-  tb_status = new (require('#/i18n/zh-CN/table/status'))();
-  tb_talent = new (require('#/i18n/zh-CN/table/talent'))();
-  abl_desc = new (require('#/i18n/zh-CN/table/abl-desc'))();
-  item_desc = new (require('#/i18n/zh-CN/table/item-desc'))();
-  status_desc = new (require('#/i18n/zh-CN/table/status-desc'))();
-  talent_desc = new (require('#/i18n/zh-CN/table/talent-desc'))();
+  tb_abl = require('#/i18n/zh-CN/table/abl')._;
+  tb_exp = require('#/i18n/zh-CN/table/exp')._;
+  tb_item = require('#/i18n/zh-CN/table/item')._;
+  tb_mark = require('#/i18n/zh-CN/table/mark')._;
+  tb_param = require('#/i18n/zh-CN/table/param')._;
+  tb_stain = require('#/i18n/zh-CN/table/stain')._;
+  tb_status = require('#/i18n/zh-CN/table/status')._;
+  tb_talent = require('#/i18n/zh-CN/table/talent')._;
+  abl_desc = require('#/i18n/zh-CN/table/abl-desc')._;
+  item_desc = require('#/i18n/zh-CN/table/item-desc')._;
+  status_desc = require('#/i18n/zh-CN/table/status-desc')._;
+  talent_desc = require('#/i18n/zh-CN/table/talent-desc')._;
 
-  sex = new (require('#/i18n/zh-CN/sex/main'))();
-  train_action = new (require('#/i18n/zh-CN/sex/actions'))();
-  body_part = new (require('#/i18n/zh-CN/sex/parts'))();
-  jewel_shop = new (require('#/i18n/zh-CN/sex/shop'))();
-  inmon = new (require('#/i18n/zh-CN/sex/inmons'))();
-  inmon_desc = new (require('#/i18n/zh-CN/sex/inmon-desc'))();
+  sex = require('#/i18n/zh-CN/sex/main')._;
+  train_action = require('#/i18n/zh-CN/sex/actions')._;
+  body_part = require('#/i18n/zh-CN/sex/parts')._;
+  jewel_shop = require('#/i18n/zh-CN/sex/shop')._;
+  inmon = require('#/i18n/zh-CN/sex/inmons')._;
+  inmon_desc = require('#/i18n/zh-CN/sex/inmon-desc')._;
 
-  clothe = new (require('#/i18n/zh-CN/race/clothes'))();
-  race = new (require('#/i18n/zh-CN/race/races'))();
-  skill = new (require('#/i18n/zh-CN/race/skills'))();
-  skill_desc = new (require('#/i18n/zh-CN/race/skill-desc'))();
-  inherit_shop = new (require('#/i18n/zh-CN/race/inherit'))();
-  gene = new (require('#/i18n/zh-CN/race/genes'))();
-  gene_desc = new (require('#/i18n/zh-CN/race/gene-desc'))();
+  clothe = require('#/i18n/zh-CN/race/clothes')._;
+  race = require('#/i18n/zh-CN/race/races')._;
+  skill = require('#/i18n/zh-CN/race/skills')._;
+  skill_desc = require('#/i18n/zh-CN/race/skill-desc')._;
+  inherit_shop = require('#/i18n/zh-CN/race/inherit')._;
+  gene = require('#/i18n/zh-CN/race/genes')._;
+  gene_desc = require('#/i18n/zh-CN/race/gene-desc')._;
   mob = require('#/i18n/zh-CN/race/uma-mob.json');
 }
 

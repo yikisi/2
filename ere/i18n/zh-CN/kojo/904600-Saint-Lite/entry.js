@@ -1,5 +1,7 @@
 // GENERATED START
 class I18nKojo904600 {
+  static _ = new I18nKojo904600();
+
   // GENERATED END
   buff = '三冠传奇';
   buff_desc = (buff) =>

@@ -1,4 +1,6 @@
 class I18nInheritShop {
+  static _ = new I18nInheritShop();
+
   addition_jewel = ' (+%COUNT%)';
   gene_available_template = '还可以继承 %COUNT% 次';
 

@@ -1,5 +1,7 @@
 // GENERATED START
 class I18nKojo200700 {
+  static _ = new I18nKojo200700();
+
   // GENERATED END
   uaf_star = 'U.A.F.之星';
   uaf_star_desc = (buff, you) =>

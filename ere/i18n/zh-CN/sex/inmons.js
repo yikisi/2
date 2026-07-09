@@ -1,4 +1,6 @@
 class I18nInmon {
+  static _ = new I18nInmon();
+
   bordered_name_template = '[%NAME%]';
   tip_template = '【%NAME%】（%GROUP% · 等级 %LEVEL% · %SLOT% 插槽）\n%DESC%';
   level_template = 'Lv. %LEVEL%';

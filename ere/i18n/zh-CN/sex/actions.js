@@ -1,4 +1,6 @@
 class I18nTrainActions {
+  static _ = new I18nTrainActions();
+
   go_on = '放弃挣扎';
   kiss = '接吻';
   french_kiss = '舌吻';

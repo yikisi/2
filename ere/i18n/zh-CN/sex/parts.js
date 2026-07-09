@@ -1,4 +1,6 @@
 class I18nBodyParts {
+  static _ = new I18nBodyParts();
+
   // 学名
   mouth = '口腔';
   breast = '胸部';
