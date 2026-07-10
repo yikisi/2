@@ -52,6 +52,7 @@ module.exports = async () => {
 
   era.printMultiColumns(
     [
+      { type: 'divider' },
       {
         config: {
           align: 'center',
@@ -395,7 +396,7 @@ module.exports = async () => {
             }
           }
 
-          do_check('root', i18n(lan), i18n('zh-CN'));
+          do_check(`${lan}-entrypoint`, i18n(lan), i18n('zh-CN'));
           era.printButton('End', 1);
           await era.input();
         },

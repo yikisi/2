@@ -24,7 +24,7 @@ class GameGuides {
    */
   check(con) {
     const obj = this.#obj;
-    if (obj[con]) {
+    if (obj[con] > 0) {
       delete obj[con];
       return true;
     }
@@ -33,6 +33,7 @@ class GameGuides {
 
   init() {
     this.#obj[this.game_start.name] = 1;
+    this.#obj[this.office_sex.name] = 1;
   }
 
   async game_start() {
@@ -200,6 +201,7 @@ class GameGuides {
         get_chara_talk(301),
         get_chara_talk(0),
       );
+      delete this.#obj[this.office_sex.name];
       era.drawLine();
       EventMarks.get(0).sub(event_hooks.out_start);
     }

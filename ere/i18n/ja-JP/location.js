@@ -7,7 +7,7 @@ module.exports = class extends I18nLocation {
   rooftop = '屋上';
   restroom = '休憩室';
   chairman = '理事長室';
-  gate = '学園正門';
+  gate = '学園の門';
   basement = '地下室';
   river = '川辺';
   church = '神社';
@@ -30,7 +30,7 @@ module.exports = class extends I18nLocation {
   hot_spring = '温泉';
   god = '三女神像';
   trainer = 'トレーナー室';
-  visitor = '応接室';
+  visitor = '来客応接室';
   clinic = '保健室';
   dubai = 'ドバイ';
 };
