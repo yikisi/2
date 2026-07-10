@@ -1389,7 +1389,9 @@ module.exports = {
           you.get_colored_name(),
           ' 的基因主动臣服，跪伏在 ',
           father.get_colored_name(),
-          ' 的基因下诞生出的产物 ',
+          ' 的基因下诞生出的产物',
+        ]);
+        await printAndWait([
           you.get_colored_name(),
           ' 的身体，无法抗拒身体的相性，无法抵抗基因底层的渴望',
         ]);
@@ -1449,7 +1451,7 @@ module.exports = {
           father.get_colored_name(),
           ' 要求下，',
           you.get_colored_name(),
-          ' 像小狗一样趴着，直到灌满了精液，双手再无力支撑身体， ',
+          ' 像小狗一样趴着，直到灌满了精液，双手再无力支撑身体，',
           father.get_colored_name(),
           ' 才把肉棒拔出，塞进 ',
           you.get_colored_name(),

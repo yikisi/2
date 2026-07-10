@@ -86,7 +86,7 @@ async function reset_status(
           chara,
           i18n().tb_status.template.replace('%NAME%', i18n().tb_status[3]),
         ),
-        { color: buff_colors[2] },
+        { color: buff_colors[0] },
       );
       sys_change_pressure(cid, 1000);
     } else if (era.get(`status:${cid}:发胖`)) {
