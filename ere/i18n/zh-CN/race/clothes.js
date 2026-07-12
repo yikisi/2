@@ -74,6 +74,7 @@ class I18nClothes {
   102101 = '疾风迅雷';
   102143 = '勇猛鸣神';
   102201 = '高贵三叶草';
+  102202 = '面华煌彩传・极';
   102226 = 'Titania';
   102301 = 'pf.Victory formula…';
   102302 = 'Engineered Victory';
@@ -196,6 +197,7 @@ class I18nClothes {
   107601 = 'Saisir le rêve';
   107610 = 'Nouvelle pousse';
   107701 = 'The Proud Road';
+  107702 = '万福龙汤传・顶';
   107746 = 'Celestial Road';
   107801 = 'Fluttertail Spirit';
   107813 = 'Sugar Wind';
