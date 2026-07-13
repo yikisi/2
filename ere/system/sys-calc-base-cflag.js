@@ -231,6 +231,7 @@ module.exports = {
   sys_change_motivation,
   sys_change_pressure,
   /**
+   * 变更体重，体重最大值 1000，一般 4000 左右开始发胖
    * @param {number} cid
    * @param {number} val 实际值/10
    */

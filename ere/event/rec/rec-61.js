@@ -45,6 +45,10 @@ module.exports = class extends CustomizedRecruit {
         )['rec'] === 1
       ) {
         era.set(`cflag:${this.id}:招募状态`, recruit_flags.yes);
+        add_event(
+          event_hooks.week_start,
+          new EventObject(this.id, cb_enum.edu).set_arg('ws_cloudy'),
+        );
         await this.recruit_end();
         return true;
       }

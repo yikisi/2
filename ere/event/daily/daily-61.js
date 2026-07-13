@@ -122,13 +122,13 @@ module.exports = class extends CustomizedDaily {
 
   async cl_valentine(halo, me, hook) {
     hook.override = true;
-    era.set(`status:${this.id}:节日事件标记`, 0);
+    era.set(`cflag:${this.id}:节日事件标记`, 0);
     if (
       all_reward_in_event(
         this.id,
         (
           await print_title_with_kojo(
-            this.#dict,
+            this.#kojo,
             'cl_valentine',
             halo,
             this.#dict,
@@ -143,18 +143,18 @@ module.exports = class extends CustomizedDaily {
   }
 
   async cl_halloween(halo, me, hook) {
-    await print_title_with_kojo(this.#dict, 'cl_halloween', halo, this.#dict);
+    await print_title_with_kojo(this.#kojo, 'cl_halloween', halo, this.#dict);
   }
 
   async cl_christmas(halo, me, hook) {
     hook.override = true;
-    era.set(`status:${this.id}:节日事件标记`, 0);
+    era.set(`cflag:${this.id}:节日事件标记`, 0);
     if (
       all_reward_in_event(
         this.id,
         (
           await print_title_with_kojo(
-            this.#dict,
+            this.#kojo,
             'cl_christmas_in_edu',
             halo,
             this.#dict,

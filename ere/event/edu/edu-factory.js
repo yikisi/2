@@ -33,6 +33,7 @@ cons_dict[50] = require('#/event/edu/edu-50');
 cons_dict[52] = require('#/event/edu/edu-52');
 cons_dict[56] = require('#/event/edu/edu-56');
 cons_dict[60] = require('#/event/edu/edu-60');
+cons_dict[61] = require('#/event/edu/edu-61');
 cons_dict[64] = require('#/event/edu/edu-64');
 cons_dict[67] = require('#/event/edu/edu-67');
 cons_dict[68] = require('#/event/edu/edu-68');

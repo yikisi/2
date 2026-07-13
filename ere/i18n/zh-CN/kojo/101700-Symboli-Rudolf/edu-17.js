@@ -207,7 +207,7 @@ module.exports = {
       await era.input();
       await era.printAndWait(`${you.name} 哈哈大笑。`);
       era.printButton(`「露娜，${luna.sex}要将世界席卷。」`, 1);
-      era.printButton('「皇帝，${luna.sex}要将世界席卷！」', 2);
+      era.printButton(`「皇帝，${luna.sex}要将世界席卷！」`, 2);
       await era.input();
       await era.printAndWait('那天，所有人都被夺取了心智。');
       await era.printAndWait(
