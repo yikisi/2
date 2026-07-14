@@ -1,9 +1,9 @@
 [submodule "engine"]
 	path = engine
-	url = https://gitgud.io/umaera/engine/era-electron.git
+	url = https://gitgoon.dev/UmaERA/era-electron.git
 [submodule "common"]
 	path = common
-	url = https://gitgud.io/umaera/data/uma-common.git
+	url = https://gitgoon.dev/UmaERA/data-common.git
 [submodule "res"]
 	path = res
-	url = https://gitgud.io/umaera/data/uma-resource.git
+	url = https://gitgoon.dev/UmaERA/data-uma-resource.git
