@@ -1,6 +1,6 @@
 # @file Oguri Cap - Daily
 # @author 雞雞
-# @translator 雞雞
+# @author 雞雞 (Translator)
 good_morning:
   sync: true
   lines:

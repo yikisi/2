@@ -1,6 +1,6 @@
 # @file Oguri Cap - Recruit
 # @author 雞雞
-# @translator 雞雞
+# @author 雞雞 (Translator)
 rec:
   - Oguri Cap, Oguri Cap.
   - To Central Tracen, that is an unfamiliar name, but %YOU% have never forgotten it over the past year. No, a more accurate way to put it would be... the results of this Race %UMA%.

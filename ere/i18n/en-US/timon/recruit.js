@@ -1,7 +1,7 @@
 /**
  * @file Recruit Timon
  * @author 雞雞
- * @translator 黑奴队长
+ * @author Copilot (translator)
  */
 const era = require('#/era-electron');
 
