@@ -161,7 +161,7 @@ function get_sex_acceptable(cid) {
     50 * (era.get('flag:惩戒力度') >= 2) +
     15 * era.get(`talent:${cid}:工口意愿`) -
     10 * era.get(`talent:${cid}:贞洁看法`) -
-    50 +
+    60 +
     100 * era.get(`status:${cid}:超马跳Z`) -
     100 * !check_pregnant_unprotect(cid)
   );

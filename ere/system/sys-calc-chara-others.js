@@ -153,7 +153,7 @@ function like_chara(target, aim, val, shown = true, extra_love = 0) {
       if (shield > 0) {
         const love = era.get(`love:${target}`);
         if (love > 50) {
-          shield *= (love - 50) / 50;
+          shield *= 1 + (love - 50) / 50;
         }
         while (shield >= temp) {
           shield -= temp;
@@ -165,6 +165,7 @@ function like_chara(target, aim, val, shown = true, extra_love = 0) {
         if (temp >= 0) {
           era.set(`cflag:${target}:好感盾`, temp);
         } else {
+          era.set(`cflag:${target}:好感盾`, 0);
           val = Math.ceil(temp);
         }
       }
