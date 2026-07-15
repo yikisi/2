@@ -364,8 +364,7 @@ async function page_visitors() {
   await arrive_location(era.set('flag:当前位置', location_enum.visitor));
   let visitor_list = loc_characters.get(location_enum.visitor);
   if (visitor_list.length > 0) {
-    const celebration = get_celebration(),
-      me = get_chara_talk(0);
+    const celebration = get_celebration();
     while (flag_page) {
       era.setHorizontalAlign('space-around');
       era.printInColRows(
@@ -426,7 +425,7 @@ async function page_visitors() {
               print_out_page,
             },
             { name: di18n.kojo.get_npc_celebration(cid, celebration) },
-            handlers[cid](chara, me),
+            handlers[cid](),
             { name: di18n.kojo.get_npc_bye(cid) },
           );
           if ((flag_visitor &&= temp_flag)) {

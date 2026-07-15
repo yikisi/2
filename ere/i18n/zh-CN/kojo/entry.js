@@ -88,6 +88,8 @@ class I18nKojo {
   347 = require('#/i18n/zh-CN/kojo/904700-Speed-Symboli/entry')._;
   348 = require('#/i18n/zh-CN/kojo/904800-Haiseiko/entry')._;
   349 = require('#/i18n/zh-CN/kojo/904900-Tucker-Bryne/entry')._;
+  350 = require('#/i18n/zh-CN/kojo/905000-Hoshina-Kiyoko/entry')._;
+  351 = require('#/i18n/zh-CN/kojo/905100-Yunohana-Bloom/entry')._;
   // GENERATED END
 }
 

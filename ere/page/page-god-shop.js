@@ -12,6 +12,7 @@ const print_curr_chara = require('#/page/components/cur-chara-info');
 const get_back_button_tip = require('#/page/components/get-back-button-tip');
 const print_page_header = require('#/page/components/page-header');
 
+const { get_custom_check } = require('#/event/check/check-factory');
 const { add_event, cb_enum } = require('#/event/queue');
 const {
   generate_common_dict,
@@ -294,8 +295,10 @@ module.exports = async () => {
                 era.set(`status:${cur_id}:偏头痛`, 0);
                 era.set(`status:${cur_id}:伤病`, 0);
                 era.set(`status:${cur_id}:疲惫`, 0);
-                sys_change_motivation(cur_id, 4) && (await era.waitAnyKey());
                 era.set(`status:${cur_id}:练习X手`, 2);
+                get_custom_check(cur_id).check_lay_on_hands();
+                sys_change_motivation(cur_id, 4);
+                await era.waitAnyKey();
                 era.add('flag:当前声望', -800);
                 relation += 400;
               }

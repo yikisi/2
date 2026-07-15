@@ -10,6 +10,10 @@ const EventMarks = require('#/data/event/event-marks');
 const { get_love_info } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 
+const loc_characters = require('#/data/event/loc-characters');
+const moon_well = require('#/data/event/moon-well');
+const recruit_flags = require('#/data/event/recruit-flags');
+
 const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
@@ -155,6 +159,31 @@ class MejiroCity {
         0,
         temp,
         umy < 10 && i18n().ui_cost_money_tip_template.replace('%MONEY%', '10'),
+      ),
+    });
+
+    temp = sys_get_move_cost(location_enum.moon_well, cid);
+    temp.mark = sys_check_act_disabled(temp, p_base, c_base);
+    ret.push({
+      d:
+        (umy < moon_well.cost &&
+          era.get('cflag:350:招募状态') !== recruit_flags.yes &&
+          era.get('cflag:351:招募状态') !== recruit_flags.yes) ||
+        !loc_characters.get(location_enum.moon_well).length ||
+        temp.mark > 0,
+      l: location_enum.moon_well,
+      t: di18n.get_act_tip(
+        false,
+        temp,
+        !loc_characters.get(location_enum.moon_well).length &&
+          i18n().ui_moon_well_close_tip,
+        umy < moon_well.cost &&
+          era.get('cflag:350:招募状态') !== recruit_flags.yes &&
+          era.get('cflag:351:招募状态') !== recruit_flags.yes &&
+          i18n().ui_cost_money_tip_template.replace(
+            '%MONEY%',
+            moon_well.cost.toString(),
+          ),
       ),
     });
 

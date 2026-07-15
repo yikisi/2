@@ -33,6 +33,7 @@ class I18nLocation {
   visitor = '访客接待室';
   clinic = '保健室';
   dubai = '迪拜';
+  moon_well = '秘汤';
 }
 
 module.exports = I18nLocation;

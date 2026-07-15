@@ -245,8 +245,9 @@ module.exports = class extends CustomizedCheck {
                   era.set(`status:${ret[1]}:偏头痛`, 0);
                   era.set(`status:${ret[1]}:伤病`, 0);
                   era.set(`status:${ret[1]}:疲惫`, 0);
-                  sys_change_motivation(ret[1], 4);
                   era.set(`status:${ret[1]}:练习X手`, 2);
+                  CustomizedCheck.get_custom_check(ret[1]).check_lay_on_hands();
+                  sys_change_motivation(ret[1], 4);
                   era.add('flag:当前声望', -800);
                   relation = 400;
                 }

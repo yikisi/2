@@ -63,6 +63,8 @@ const location_enum = {
   visitor: 0,
   // 迪拜
   dubai: 0,
+  // 秘汤
+  moon_well: 0,
 };
 Object.keys(location_enum).forEach((k, i) => (location_enum[k] = i));
 location_enum.keys = Object.keys(location_enum);

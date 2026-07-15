@@ -187,7 +187,7 @@ class CheckFactory extends CommonKojoFactory {
 }
 
 const check_factory = new CheckFactory();
-check_factory.get_custom_check =
+CustomizedCheck.get_custom_check = check_factory.get_custom_check =
   check_factory.get_custom_check.bind(check_factory);
 
 module.exports = check_factory;

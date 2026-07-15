@@ -33,4 +33,5 @@ module.exports = class extends I18nLocation {
   visitor = '来客応接室';
   clinic = '保健室';
   dubai = 'ドバイ';
+  moon_well = '秘湯';
 };

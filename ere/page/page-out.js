@@ -11,6 +11,7 @@ const npc_common = require('#/page/components/npc-common');
 const print_page_header = require('#/page/components/page-header');
 const { get_c_base } = require('#/page/homepage/snippets');
 const MejiroCity = require('#/page/mejiro/mejiro-common');
+const page_moon_well = require('#/page/page-moon-well');
 
 const { run_custom_daily } = require('#/event/daily/daily-factory');
 const game_guides = require('#/event/others/game-guides');
@@ -247,6 +248,8 @@ async function out_page() {
         era.set('flag:当前位置', positions[aim - 1].l);
         if (positions[aim - 1].l === location_enum.mejiro) {
           await MejiroCity.instance().page(cid);
+        } else if (positions[aim - 1].l === location_enum.moon_well) {
+          await page_moon_well(cid, out_page);
         } else if (!(await sys_get_random_event(positions[aim - 1].e, cid)())) {
           await run_custom_daily(cid, positions[aim - 1].e);
         }

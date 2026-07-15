@@ -6,8 +6,7 @@ const CustomizedMec = require('#/event/mec/mec-common');
 
 class MecNpc extends CustomizedMec {
   init_love() {
-    // CFLAGNAME:1 = 种族
-    if (get(`cflag:${this.id}:1`) > 0) {
+    if (get(`cflag:${this.id}:种族`) > 0) {
       set(
         `love:${this.id}`,
         Math.min(
@@ -23,14 +22,13 @@ class MecNpc extends CustomizedMec {
 
   is_able_to_be_selected() {
     return (
-      // CFLAGNAME:45 = 位置
-      // CFLAGNAME:48 = 育成回合计时
-      get(`cflag:${this.id}:`) > 0 || get(`cflag:${this.id}:48`) < 3 * 48
+      get(`cflag:${this.id}:位置`) > 0 ||
+      get(`cflag:${this.id}:育成回合计时`) < 3 * 48
     );
   }
 
   set_my_sex() {
-    if (get(`cflag:${this.id}:1`) > 0) {
+    if (get(`cflag:${this.id}:种族`) > 0) {
       return super.set_my_sex();
     }
     return 0;

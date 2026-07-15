@@ -44,10 +44,10 @@ const { i18n } = require('#/i18n/selector');
  * @param {CharaTalk} chara
  * @param {{color:string,content:string,[title]:string}|string|undefined} title
  * @param {{name:string,[handle]:function():Promise}} talk_cb
- * @param {{name:string,handle:function():Promise}|{name:string,[loc]:number,fail_cb:function()}} sex_cb
- * @param {{name:string,handle:function():Promise}|{name:string,loc:number,print_out_page:function():Promise}} out_cb
- * @param {{name:string,[handle]:function():Promise}} cele_cb
- * @param {{name:string,handle:function():Promise,[disabled]:boolean}|{}} func_cb
+ * @param {{name:string,handle:function():Promise}|{[d]:boolean,name:string,[loc]:number,fail_cb:function()}} sex_cb
+ * @param {{name:string,handle:function():Promise}|{[d]:boolean,name:string,loc:number,print_out_page:function():Promise}} out_cb
+ * @param {{[d]:boolean,name:string,[handle]:function():Promise}} cele_cb
+ * @param {{name:string,handle:function():Promise,[disabled]:boolean,[title]:string}|{}} func_cb
  * @param {{name:string,[config]:ButtonConfig,[handle]:function():Promise}} bye_cb
  * @param {function()} [birth_cb]
  * @returns {Promise<boolean|void>}
@@ -91,12 +91,15 @@ async function npc_common(
     time: 200,
   };
   const jpy = era.get('flag:当前马币');
+  /** @type {{b:{[config]:ButtonConfig,content:string},h():Promise<void>}[]} */
   const buttons = [
     {
       b: {
-        config: { disabled: cost_info.mark > 0 || !is_awake },
+        config: {
+          disabled: cost_info.mark > 0 || !is_awake,
+          title: di18n.get_act_tip(false, cost_info),
+        },
         content: talk_cb.name,
-        title: di18n.get_act_tip(false, cost_info),
       },
       async h() {
         sys_change_attr_and_print(0, attr_enum.tp, -200);
@@ -107,7 +110,13 @@ async function npc_common(
       },
     },
     {
-      b: { content: sex_cb.name },
+      b: {
+        config: {
+          disabled: !!sex_cb.d,
+          title: sex_cb.d ? i18n().ui_moon_well_partner_tip : void 0,
+        },
+        content: sex_cb.name,
+      },
       async h() {
         if (sex_cb.handle) {
           await sex_cb.handle();
@@ -130,14 +139,16 @@ async function npc_common(
     },
     {
       b: {
-        config: { disabled: cost_info.mark > 0 || !is_awake || jpy < 0 },
+        config: {
+          disabled: cost_info.mark > 0 || !is_awake || jpy < 0,
+          title: di18n.get_act_tip(
+            false,
+            cost_info,
+            jpy < 10 &&
+              i18n().ui_cost_money_tip_template.replace('%MONEY%', '10'),
+          ),
+        },
         content: i18n().ui_office_gift,
-        title: di18n.get_act_tip(
-          false,
-          cost_info,
-          jpy < 10 &&
-            i18n().ui_cost_money_tip_template.replace('%MONEY%', '10'),
-        ),
       },
       async h() {
         era.drawLine();
@@ -153,7 +164,8 @@ async function npc_common(
   buttons.push({
     b: {
       config: {
-        disabled: !is_awake || cost_info.mark > 0 || relation_check,
+        disabled:
+          !is_awake || cost_info.mark > 0 || relation_check || !!out_cb.d,
         buttonType: c_marks.check(
           event_hooks.out_start,
           event_hooks.out_river,
@@ -177,6 +189,7 @@ async function npc_common(
           0,
           cost_info,
           relation_tip,
+          out_cb.d && i18n().ui_moon_well_partner_tip,
         ),
       },
       content: out_cb.name,
@@ -201,7 +214,10 @@ async function npc_common(
   if (func_cb.handle !== void 0) {
     buttons.push({
       b: {
-        config: { disabled: !is_awake || func_cb.disabled },
+        config: {
+          disabled: !is_awake || func_cb.disabled,
+          title: func_cb.title,
+        },
         content: func_cb.name,
       },
       h: func_cb.handle,
@@ -220,11 +236,13 @@ async function npc_common(
       b: {
         config: {
           buttonType: 'danger',
-          disabled: !is_awake || cost_info.mark > 0 || relation_check,
+          disabled:
+            !is_awake || cost_info.mark > 0 || relation_check || !!cele_cb.d,
           title: di18n.get_act_tip(
             c_marks.check(event_hooks.celebration),
             cost_info,
             relation_tip,
+            cele_cb.d && i18n().ui_moon_well_partner_tip,
           ),
         },
         content: cele_cb.name,
@@ -304,11 +322,7 @@ async function npc_common(
     });
   }
   era.printInColRows(
-    [
-      {
-        type: 'divider',
-      },
-    ],
+    [{ type: 'divider' }],
     {
       columns: [
         {

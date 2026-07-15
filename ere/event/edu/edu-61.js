@@ -54,7 +54,7 @@ module.exports = class extends CustomizedEdu {
       return await super.train_fail(halo, me, callname, hook, extra);
     }
     hook.arg = 0;
-    await print_title_with_kojo(this.#kojo, 'ts_fail', halo, this.#dict);
+    await print_title_with_kojo(this.#kojo, 'train_fail', halo, this.#dict);
   }
 
   /**

@@ -789,7 +789,7 @@ ws_new_year_c:
       content:
         - fontWeight: bold
           content: %CHARA%
-        - 「盯着圣王干什么？赶快关门呀！冻死了！」、
+        - 「盯着圣王干什么？赶快关门呀！冻死了！」
     - %YOU%赶忙去关上了门。
     - 圣王光环毫不客气地把%YOU%的文件挪到地上，然后把袋子放在桌子上。
     - 下一刻，年菜的香气开始在并不算空旷的训练员室内扩散。
@@ -1652,7 +1652,7 @@ ws_summer_end_c:
       content:
         - fontWeight: bold
           content: %CHARA%
-        - 「只有这样，我才能彻底拜托她带给我的阴影，才能成为受人景仰的圣王。」
+        - 「只有这样，我才能彻底摆脱她带给我的阴影，才能成为受人景仰的圣王。」
     - color: %COLOR%
       content:
         - fontWeight: bold

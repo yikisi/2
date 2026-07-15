@@ -77,6 +77,7 @@ class CustomizedCheck extends CustomizedEvent {
   static like_chara;
   static love_uma;
   static common_no_action_check = common_no_action_check;
+  static get_custom_check;
 
   /**
    * 玩家出轨后进行检查
@@ -127,6 +128,12 @@ class CustomizedCheck extends CustomizedEvent {
    * 角色出生后进行检查
    */
   check_birth() {}
+
+  /**
+   * 通过三女神祈祷或者月亮井吃圣疗完全恢复的时候进行检查
+   * 可以清除专属状态并触发事件
+   */
+  check_lay_on_hands() {}
 
   /**
    * 角色爱慕达到升级门槛（49、74、89、99）时进行检查

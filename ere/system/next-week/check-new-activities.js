@@ -33,6 +33,7 @@ const { slavery_enum } = require('#/data/ero/mark-const');
 const MyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-0');
 const MayLifeMarks = require('#/data/event/life-event-marks/life-event-marks-343');
 const loc_characters = require('#/data/event/loc-characters');
+const moon_well = require('#/data/event/moon-well');
 const recruit_flags = require('#/data/event/recruit-flags');
 const yandere_list = require('#/data/event/yandere-list');
 const { get_celebration } = require('#/data/info-generator');
@@ -489,19 +490,25 @@ async function check_new_activities(cur_round, in_team_list) {
       ),
     );
 
-  [345, 349].forEach((cid) => {
-    if (
-      sys_check_npc_working(cid) &&
-      (era.get(`cflag:${cid}:招募状态`) === recruit_flags.yes ||
-        era.get(`love:${cid}`) >= 30 ||
-        Math.random() < 0.5)
-    ) {
-      loc_characters.get(location_enum.visitor).push(cid);
-    }
-  });
+  loc_characters
+    .get(location_enum.visitor)
+    .push(
+      ...[345, 349].filter(
+        (cid) =>
+          sys_check_npc_working(cid) &&
+          (era.get(`cflag:${cid}:招募状态`) === recruit_flags.yes ||
+            era.get(`love:${cid}`) >= 30 ||
+            Math.random() < 0.5),
+      ),
+    );
+
   loc_characters.set(
     location_enum.visitor,
     sort_list(loc_characters.get(location_enum.visitor), (e) => e, true),
+  );
+  loc_characters.set(
+    location_enum.moon_well,
+    [350, 351].filter(sys_check_npc_working),
   );
   yandere_list.set(
     in_team_list.filter((e) => sys_check_yandere(e, (y) => y > 0)),
@@ -512,6 +519,19 @@ async function check_new_activities(cur_round, in_team_list) {
     my_edu_marks.we_are_one--;
   }
   await MejiroCity.instance().next_week();
+  if (
+    moon_well.times < moon_well.limit &&
+    (moon_well.cooldown -= moon_well.limit) <= 0
+  ) {
+    if (!moon_well.times) {
+      era.print(i18n().timon.it_nt_moon_well_cool_down);
+    }
+    if (++moon_well.times === moon_well.limit) {
+      moon_well.cooldown = moon_well.cd;
+    } else {
+      moon_well.cooldown += moon_well.cd;
+    }
+  }
 }
 
 module.exports = check_new_activities;

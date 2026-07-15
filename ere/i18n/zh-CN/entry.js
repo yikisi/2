@@ -450,6 +450,8 @@ class I18nEntry {
   ui_foreign_train_max_tip = '已完全适应跑道';
   ui_celebration_remote_tip = '无法远程庆祝';
 
+  ui_moon_well_partner_tip = '身边还有其他人';
+
   ui_rec_chara_info = '个人情报';
   ui_rec_edu_info = '育成预览';
   ui_rec_exit = '直接离开';
@@ -634,6 +636,7 @@ class I18nEntry {
     you,
     ' 离开了】',
   ];
+  ui_moon_well_close_tip = '秘汤暂不营业';
   ui_mejiro_city_alone_tip = '目白城不欢迎独身的旅客';
   ui_mejiro_city_love_tip_template =
     '关系并未达到如此程度 (需要：%REQUIRE%以上，当前：%CURRENT%)';

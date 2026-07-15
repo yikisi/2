@@ -81,6 +81,19 @@ module.exports = class extends CustomizedCheck {
     return ret;
   }
 
+  check_lay_on_hands() {
+    const edu_marks = new TaishinEduMarks();
+    if (edu_marks.debuff > 0) {
+      edu_marks.debuff = 0;
+      era.print(
+        i18n().kojo[this.id].notify_remove_debuff(get_chara_talk(this.id), {
+          ...di18n.kojo.get_titled_content(this.id, 'debuff'),
+          color: buff_colors[3],
+        }),
+      );
+    }
+  }
+
   check_love_events() {
     const love = era.get(`love:${this.id}`);
     const ebj_l = new EventObject(this.id, cb_enum.love).set_arg([love]);

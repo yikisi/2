@@ -51,6 +51,7 @@ location_move_cost[location_enum.river] = 50;
 location_move_cost[location_enum.shopping] = 100;
 location_move_cost[location_enum.church] = 150;
 location_move_cost[location_enum.station] = 200;
+location_move_cost[location_enum.moon_well] = 350;
 location_move_cost[location_enum.mejiro] = 500;
 
 module.exports = {
