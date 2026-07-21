@@ -59,7 +59,7 @@ class CustomizedMec extends CustomizedEvent {
 
   /**
    * 获取行动体力精力消耗DEBUFF
-   * @returns {number} DEBUFF的数值%，大于0时增加消耗
+   * @returns {number} DEBUFF的数值，大于0时增加消耗
    */
   get_action_debuff() {
     return 0;

@@ -1,6 +1,7 @@
 const era = require('#/era-electron');
 
 const {
+  sys_check_train_disabled,
   sys_check_train_enabled,
   sys_get_debuff,
   sys_get_discount,
@@ -47,17 +48,17 @@ const { i18n } = require('#/i18n/selector');
 const skill_limit = 27;
 
 /**
- * @param {number} chara_id
+ * @param {number} cid
  * @param {CharaSkills} skill_control
  * @param {number} pt
  * @param {number} discount
  */
-function get_skill_buffer(chara_id, skill_control, pt, discount) {
+function get_skill_buffer(cid, skill_control, pt, discount) {
   const unused_group2level = {};
   let available_skills = {},
     got_skills = {};
   common_skills.forEach((e) => (available_skills[e] = 1));
-  CharaAvailableSkills.get(chara_id)
+  CharaAvailableSkills.get(cid)
     .get()
     .forEach((e) => {
       const s = skills_dict[e];
@@ -381,27 +382,35 @@ module.exports = async () => {
     const chara_stamina = era.get(`base:${cid}:体力`) || 0;
     /** @type {number[]} */
     const debuff = [0, cid].map(sys_get_debuff);
-    if (debuff[1] >= 0.5) {
-      debuff[1] = 1000;
-    }
+    const train_disabled = sys_check_train_disabled(cid);
     const beach_level =
       (era.get(`cflag:${cid}:位置`) === location_enum.beach) * 5;
-    const train_enabled = sys_check_train_enabled(cid);
+    const train_enabled = sys_check_train_enabled(cid) && !train_disabled;
     era.printMultiColumns(
       new Array(5).fill(0).map((_, i) => {
         // ABLNAME:0 - 4 = 速度训练等级 - 智力训练等级
         const train_level = beach_level || era.get(`abl:${cid}:${i}`);
-        const train_cost = time_cost[train_level - 1] * (1 + debuff[1]);
+        const train_cost = time_cost[train_level - 1];
+        const cost = {
+          mark: 0,
+          time: (train_cost * (1 + debuff[0])) / 2,
+        };
+        if (!cid) {
+          cost.time = train_cost * (1 + debuff[1]);
+          cost.mark = (player_time < cost.time) * 0b10;
+        } else {
+          cost.ctime = train_cost * (1 + debuff[1]);
+          cost.mark =
+            (player_time < cost.time) * 0b10 +
+            (chara_time < cost.ctime) * 0b1000;
+        }
         return {
           accelerator: 200 + i,
           config: {
             width: 4,
             disabled:
-              !race ||
-              player_time < train_cost / 2 ||
-              chara_time < train_cost ||
-              chara_stamina === 0 ||
-              !train_enabled,
+              !race || cost.mark > 0 || chara_stamina === 0 || !train_enabled,
+            title: di18n.get_act_tip(false, cost),
           },
           content: i18n()
             .ui_train_with_s_rate_template.replace('%ATTR%', di18n.n_attr[i])

@@ -72,6 +72,24 @@ function sys_check_train_enabled(cid = 0) {
   );
 }
 
+const pg_stage_train_disabled =
+  (1 << pregnant_stage_enum.resume) +
+  (1 << pregnant_stage_enum.late) +
+  (1 << pregnant_stage_enum.pre_birth);
+
+function check_train_disabled(
+  cid,
+  pg_stage = era.get(`cflag:${cid}:妊娠阶段`),
+) {
+  return (
+    (era.get(`status:${cid}:超马跳Z`) ||
+      era.get(`status:${cid}:马跳S`) ||
+      era.get(`status:${cid}:沉睡`)) *
+      0b10 +
+    (pg_stage & pg_stage_train_disabled)
+  );
+}
+
 /**
  * @param {number} cid
  * @returns {number}
@@ -88,10 +106,7 @@ function sys_get_debuff(cid) {
     ret = 1000;
   } else if (
     // 恢复期和孕晚期之后不许训
-    (pregnant_stage &
-      ((1 << pregnant_stage_enum.resume) +
-        (1 << pregnant_stage_enum.late) +
-        (1 << pregnant_stage_enum.pre_birth))) >
+    (pregnant_stage & pg_stage_train_disabled) >
     0
   ) {
     ret = 0.5;
@@ -269,6 +284,7 @@ module.exports = {
     );
   },
   sys_check_train_enabled,
+  sys_check_train_disabled: check_train_disabled,
   sys_get_debuff,
   sys_get_discount(cid) {
     // CFLAGNAME:49 = 育成次数
