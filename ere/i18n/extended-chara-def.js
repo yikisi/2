@@ -1,3 +1,8 @@
+/**
+ * @file i18n 衍生 - 角色相关
+ * 可以理解为辅助 i18n 的工具函数组
+ * 不需要任何修改或者翻译（也没有任何可以修改的地方）
+ */
 const { __, i18n } = require('#/i18n/selector');
 
 const _chara_def = {

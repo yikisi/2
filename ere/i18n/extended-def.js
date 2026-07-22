@@ -1,3 +1,8 @@
+/**
+ * @file i18n 衍生
+ * 可以理解为辅助 i18n 的工具函数组
+ * 不需要任何修改或者翻译（也没有任何可以修改的地方）
+ */
 const get_titled_content = require('#/i18n/get-titled-content');
 const { __, i18n, lan } = require('#/i18n/selector');
 
@@ -18,7 +23,7 @@ function fill_cost_info(ret, cost_info, _) {
   if (!cost_info) {
     return;
   }
-  if ((cost_info.mark & (1 << 0)) > 0) {
+  if ((cost_info.mark & 0b1) > 0) {
     ret.push(
       _.ui_cost_you_stamina_tip_template.replace(
         '%STAMINA%',
@@ -26,7 +31,7 @@ function fill_cost_info(ret, cost_info, _) {
       ),
     );
   }
-  if ((cost_info.mark & (1 << 1)) > 0) {
+  if ((cost_info.mark & 0b10) > 0) {
     ret.push(
       _.ui_cost_you_time_tip_template.replace(
         '%TIME%',
@@ -34,7 +39,7 @@ function fill_cost_info(ret, cost_info, _) {
       ),
     );
   }
-  if ((cost_info.mark & (1 << 2)) > 0) {
+  if ((cost_info.mark & 0b100) > 0) {
     ret.push(
       _.ui_cost_chara_stamina_tip_template.replace(
         '%STAMINA%',
@@ -42,7 +47,7 @@ function fill_cost_info(ret, cost_info, _) {
       ),
     );
   }
-  if ((cost_info.mark & (1 << 3)) > 0) {
+  if ((cost_info.mark & 0b1000) > 0) {
     ret.push(
       _.ui_cost_chara_time_tip_template.replace(
         '%TIME%',
@@ -52,7 +57,6 @@ function fill_cost_info(ret, cost_info, _) {
   }
 }
 
-/** 基于 i18n 衍生的定义，不需要修改 */
 const di18n = {
   get n_attr() {
     const _ = i18n();

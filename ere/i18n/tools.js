@@ -1,7 +1,12 @@
+/**
+ * @file i18n 衍生工具
+ */
+
 const era = require('#/era-electron');
 
 module.exports = {
   /**
+   * js 包装器，使其具有加载后的 kojo 类似的容错性
    * @Template T
    * @param {T} kojo
    * @return {T}

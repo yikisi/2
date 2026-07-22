@@ -18,6 +18,7 @@ cons_dict[12] = require('#/event/mec/mec-12');
 cons_dict[13] = require('#/event/mec/mec-13');
 cons_dict[17] = require('#/event/mec/mec-17');
 cons_dict[19] = require('#/event/mec/mec-19');
+cons_dict[20] = require('#/event/mec/mec-20');
 cons_dict[21] = require('#/event/mec/mec-21');
 cons_dict[24] = require('#/event/mec/mec-24');
 cons_dict[25] = require('#/event/mec/mec-25');

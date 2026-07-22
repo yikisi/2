@@ -376,6 +376,8 @@ function generate_copyrights() {
         get_copyright_entry(127),
         { isDivider: true },
         get_copyright_entry(135),
+        { isDivider: true },
+        get_copyright_entry(143),
       ],
       '西蟹瓜',
     ],

@@ -1,3 +1,8 @@
+/**
+ * @file i18n 衍生 - 数据表相关
+ * 可以理解为辅助 i18n 的工具函数组
+ * 不需要任何修改或者翻译（也没有任何可以修改的地方）
+ */
 const get_titled_content = require('#/i18n/get-titled-content');
 const { __, i18n } = require('#/i18n/selector');
 
