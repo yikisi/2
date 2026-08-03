@@ -1,6 +1,6 @@
-const I18nKojo100600 = require('#/i18n/zh-CN/kojo/100600-Oguri-Cap/entry');
-
-module.exports = class extends I18nKojo100600 {
+module.exports = class extends (
+  require('#/i18n/zh-CN/kojo/100600-Oguri-Cap/entry')
+) {
   /** @type {KojoFile} */
   recruit = require('#/i18n/en-US/kojo/100600-Oguri-Cap/rec-6.kojo');
   /** @type {KojoFile} */

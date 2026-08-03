@@ -1,6 +1,4 @@
-const I18nRaces = require('#/i18n/zh-CN/race/races');
-
-module.exports = class extends I18nRaces {
+module.exports = class extends require('#/i18n/zh-CN/race/races') {
   0 = 'Begin Race';
   // GENERATED START
   1 = 'Junior Cup';

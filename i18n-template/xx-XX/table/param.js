@@ -53,7 +53,6 @@ module.exports = class extends require('#/i18n/zh-CN/table/param') {
   jewel21 = '蓝因子';
   jewel22 = '白因子';
 
-  // 以下不能改，程序逻辑依赖这些中文名，和csv里注册的是相同的
   0 = '口腔';
   1 = '胸部';
   2 = '身体';
