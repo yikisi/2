@@ -201,7 +201,7 @@ module.exports = class extends CustomizedEdu {
           } else {
             await print_title_with_kojo(
               this.#kojo,
-              're_bad_end_emperor',
+              're_re_bad_end_emperor',
               emperor,
               luna,
               chara17,

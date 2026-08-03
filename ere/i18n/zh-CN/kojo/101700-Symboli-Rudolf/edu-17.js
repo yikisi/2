@@ -1843,7 +1843,7 @@ module.exports = {
     f.title = title;
     return f;
   })(),
-  bad_end_emperor: (() => {
+  re_bad_end_emperor: (() => {
     const title = '皇帝君临';
     /**
      * @param {CharaTalk} luna 露娜

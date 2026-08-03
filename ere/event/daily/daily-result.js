@@ -204,7 +204,10 @@ handlers[event_hooks.out_river] = async (cid, hook, extra_flag) => {
     // 钓鱼
     const got_jpy = extra_flag?.jpy ?? get_random_value(0, 5);
     wait_flag ||= got_jpy > 0;
-    got_jpy && era.print(`钓到的鱼卖出了 ${got_jpy} 马币……`);
+    got_jpy &&
+      era.print(
+        i18n().timon.it_sell_fish_template.replace('MONEY', got_jpy.toString()),
+      );
     sys_change_money(got_jpy);
     wait_flag =
       (cid && sys_like_chara(cid, 0, get_random_value(5, 10))) || wait_flag;

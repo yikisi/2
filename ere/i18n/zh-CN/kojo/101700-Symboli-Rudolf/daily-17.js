@@ -101,9 +101,9 @@ module.exports = {
     ];
     get_random_entry(buffer)();
   },
-  /** @param {CharaTalk} luna 鲁铎象征/露娜/皇帝 */
-  select_sleep(luna) {
-    luna.say('嘶……呼……');
+  /** @param {CharaTalk} chara17 鲁铎象征/露娜/皇帝 */
+  select_sleep(chara17) {
+    chara17.say('嘶……呼……');
   },
   /** @param {CharaTalk} luna 鲁铎象征/露娜 */
   async office_study_luna(luna) {
