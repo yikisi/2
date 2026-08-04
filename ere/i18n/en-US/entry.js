@@ -1,3 +1,6 @@
+/**
+ * @author Katze (translator)
+ */
 module.exports = class extends require('#/i18n/zh-CN/entry') {
   language = 'English';
 
@@ -129,7 +132,7 @@ module.exports = class extends require('#/i18n/zh-CN/entry') {
   ];
   tt_disclaimer_accept =
     'I read and understand all 8 points. I take responsibility for myself. I will not delete it. I want to play.';
-  tt_disclaimer_reject = 'Gender pairing nonsense! Not playing!';
+  tt_disclaimer_reject = "Nonsense! I'm not gonna play!";
   tt_birthday_notify = (birth_list) => [
     'Today is the birthday of ',
     ...birth_list,

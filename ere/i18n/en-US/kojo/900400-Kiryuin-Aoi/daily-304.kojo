@@ -9,4 +9,4 @@ npc_talk_about_meek_in_edu:
 
 npc_talk_about_meek:
   - %CHARA% said there was nothing in particular to report.
-  - However, ${chara.sex.toLowerCase()} asked %YOU% to help %H_NAME% make up for the past if there was any way to give the %H_UMA% a second chance.
+  - However, she asked %YOU% to help %H_NAME% make up for the past if there was any way to give the %H_UMA% a second chance.

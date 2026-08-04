@@ -18,13 +18,13 @@ recruit:
         - fontWeight: bold
           content: ???
         - 「As a trainer, you still have a long way to go. Still, you do have your merits.」
-    - %YOU% turned to find the commanding ${chara.uma_sex_title} from the dream standing there once more, with dark brown hair, beautiful eyes, and the same scar over ${chara.sex === "She" ? "Her":"His"} right eye. ${chara.sex} looked %YOU% up and down until ${chara.sex === "She" ? "Her":"His"} gaze reached %YOU%'s crotch.
+    - %YOU% turned to find the commanding Umamusume from the dream standing there once more, with dark brown hair, beautiful eyes, and the same scar over her right eye. She looked %YOU% up and down until her gaze reached %YOU%'s crotch.
     - color: %COLOR%
       content:
         - fontWeight: bold
           content: %CHARA%
         - 「As a trainer, you still have a long way to go. Still, you do have your merits.」
-    - The words sounded aloof, but %YOU% sensed a trace of shyness, reminiscent of the softness ${chara.sex.toLowerCase()} had shown after %YOU% broke through ${chara.sex === "She" ? "Her":"His"} defenses.
+    - The words sounded aloof, but %YOU% sensed a trace of shyness, reminiscent of the softness she had shown after %YOU% broke through her defenses.
     - Your eyes met. Then %CHARA% smiled with quiet satisfaction and spoke.
     - color: %COLOR%
       content:

@@ -1,6 +1,4 @@
 module.exports = class extends require('#/i18n/zh-CN/race/gene-desc') {
-  300000 = 'Skill Points (SP) +600';
-
   100000 = 'Turf Aptitude increased';
   100001 = 'Dirt Aptitude increased';
   100002 = 'Sprint Aptitude increased';
@@ -11,6 +9,7 @@ module.exports = class extends require('#/i18n/zh-CN/race/gene-desc') {
   100007 = 'Pace Chaser Aptitude increased';
   100008 = 'Late Surger Aptitude increased';
   100009 = 'End Closer Aptitude increased';
+
   200000 = 'Speed and Speed cap +25';
   200001 = 'Speed and Speed cap +50';
   200002 = 'Speed and Speed cap +75';
@@ -31,4 +30,6 @@ module.exports = class extends require('#/i18n/zh-CN/race/gene-desc') {
   200041 = 'Wit and Wit cap +50';
   200042 = 'Wit and Wit cap +75';
   200043 = 'Wit and Wit cap +100';
+
+  300000 = 'Skill Points (SP) +600';
 };

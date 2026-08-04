@@ -1,6 +1,5 @@
 module.exports = class extends require('#/i18n/zh-CN/table/param') {
   get_jewel_count = (jewel, count) => [jewel, ': ', count];
-  jewel_with_count = '%JEWEL%×%COUNT%';
 
   n_jewel = 'Factor';
 
@@ -53,24 +52,24 @@ module.exports = class extends require('#/i18n/zh-CN/table/param') {
   jewel21 = 'Blue Factor';
   jewel22 = 'White Factor';
 
-  0 = '口腔';
-  1 = '胸部';
-  2 = '身体';
-  3 = '阴茎';
-  4 = '外阴';
-  5 = '阴道';
-  6 = '肛门';
-  7 = '施虐';
-  8 = '受虐';
+  0 = 'Oral';
+  1 = 'Breast';
+  2 = 'Body';
+  3 = 'Penis';
+  4 = 'Clitoris';
+  5 = 'Vagina';
+  6 = 'Anus';
+  7 = 'Sadism';
+  8 = 'Masochism';
 
-  10 = '顺从';
-  11 = '痛苦';
-  12 = '恐惧';
-  13 = '羞耻';
-  14 = '反感';
-  15 = '自卫';
+  10 = 'Submission';
+  11 = 'Pain';
+  12 = 'Fear';
+  13 = 'Shame';
+  14 = 'Aversion';
+  15 = 'Self-Defense';
 
-  20 = '粉';
-  21 = '蓝';
-  22 = '白';
+  20 = 'Pink';
+  21 = 'Blue';
+  22 = 'White';
 };

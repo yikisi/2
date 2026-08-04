@@ -1,10 +1,13 @@
 module.exports = class extends require('#/i18n/zh-CN/race/inherit') {
+  addition_jewel = ' (+%COUNT%)';
   gene_available_template = '%COUNT% inheritances remaining';
 
   ui_inherit_enabled = 'Spark Inheritance available';
   select_inherit_or_god = 'Spark Inheritance is available! Proceed?';
   sig_inherit = 'Inherit Sparks!';
   sig_god = 'Pay respects as usual';
+
+  get_jewel_list = (pink, blue, white) => [pink, ' · ', blue, ' · ', white];
 
   header_template = 'Inherit Sparks for %NAME%';
   get_gene_list = (genes) => ['Spark effects:', ...genes];

@@ -1,3 +1,6 @@
+/**
+ * @author Katze (translator)
+ */
 module.exports = class extends require('#/i18n/zh-CN/chara/detail') {
   base_title = 'Personal Info';
   get_base_summary_info = (

@@ -86,16 +86,16 @@ rape_after_race:
     - Or perhaps... they would have found it perfectly ordinary?
     - After all, such things had become commonplace at Tracen Academy.
     -
-    - Beneath the table where %CHARA% and %CHAMPION% conducted their interview, a shapely ${chara.uma_sex_title} was servicing them both.
-    - The ${chara.uma_sex_title} wore what might once have passed for a Tracen Academy trainer's suit. Only the jacket draped over the back still resembled clothing. The white shirt had been torn apart by enormous breasts and a semen-swollen belly, while the stockings below were stained with cum and riddled with ragged tears. They were closer to rags or fetish wear than actual clothes.
-    - With %CHARA%'s massive cock in the mouth, the ${chara.uma_sex_title} took %CHAMPION%'s punishing slaps and thrusts from behind.
-    - Anyone familiar with the race roster would recognize the ${chara.uma_sex_title} at the center of this obscene scene, trapped between the two, as %YOU%, trainer to the victorious %CHAMPION% and %C_SEX%.
+    - Beneath the table where %CHARA% and %CHAMPION% conducted their interview, a shapely Umamusume was servicing them both.
+    - The Umamusume wore what might once have passed for a Tracen Academy trainer's suit. Only the jacket draped over the back still resembled clothing. The white shirt had been torn apart by enormous breasts and a semen-swollen belly, while the stockings below were stained with cum and riddled with ragged tears. They were closer to rags or fetish wear than actual clothes.
+    - With %CHARA%'s massive cock in the mouth, the Umamusume took %CHAMPION%'s punishing slaps and thrusts from behind.
+    - Anyone familiar with the race roster would recognize the Umamusume at the center of this obscene scene, trapped between the two, as %YOU%, trainer to the victorious %CHAMPION% and %C_SEX%.
     -
     - %CHARA% lifted %YOU%'s head and carefully admired the handiwork.
     - The neat tally mark on the forehead displayed %CHARA%'s discipline as a reporter.
     - The lifelike penis on the left cheek showcased the reporter's skill as an artist.
     - The cute turtle on the right revealed a touch of childlike whimsy.
-    - Unfortunately, the face was now completely covered. Where could ${chara.sex.toLowerCase()} draw next?
+    - Unfortunately, the face was now completely covered. Where could she draw next?
     -
     - Just then, %CHAMPION%'s fierce thrusting made %YOU%'s pale breasts sway back and forth, catching %CHARA%'s eye.
     -
@@ -104,15 +104,15 @@ rape_after_race:
         - fontWeight: bold
           content: %CHARA%
         - 「There we are. This spot is still blank!」
-    - %CHARA% lifted %YOU%'s huge breasts onto ${chara.sex === "She" ? "Her":"His"} lap, making %YOU% squeeze ${chara.sex === "She" ? "Her":"His"} cock between them.
+    - %CHARA% lifted %YOU%'s huge breasts onto her lap, making %YOU% squeeze her cock between them.
     - Raising %YOU%'s entire upper body also drove the cock in the mouth upward, banging the head against the table. Annoyed, %CHAMPION% delivered several more hard slaps to %YOU%'s ass.
     - To keep from hitting the table, %YOU% desperately swallowed the massive shaft until it filled the throat completely.
     -
-    - %CHARA% paid none of that any mind. ${chara.sex === "She" ? "Her":"His"} eyes were fixed on %YOU%'s ivory-white breasts, a fresh canvas for ${chara.sex === "She" ? "Her":"His"} art.
-    - After some thought, %CHARA% traced a circle around ${chara.sex === "She" ? "Her":"His"} thick cock where it pressed between the breasts, then drew a lifelike pussy along the outline. %YOU%'s modified body had become the perfect sex toy, and the pressure of this makeshift tit-pussy rivaled the real thing. It lacked vaginal folds, but the expertly altered mouth and throat offered service that was every bit as good, if not better.
+    - %CHARA% paid none of that any mind. Her eyes were fixed on %YOU%'s ivory-white breasts, a fresh canvas for her art.
+    - After some thought, %CHARA% traced a circle around her thick cock where it pressed between the breasts, then drew a lifelike pussy along the outline. %YOU%'s modified body had become the perfect sex toy, and the pressure of this makeshift tit-pussy rivaled the real thing. It lacked vaginal folds, but the expertly altered mouth and throat offered service that was every bit as good, if not better.
     - %CHARA% admired the finished work with satisfaction. It was hardly tasteful, but still more refined than %CHAMPION%'s childish scrawl of ``Sow``, ``Public Toilet``, ``Cum Dump``, and ``Unfit Trainer`` across the trainer's ass.
     -
-    - Before long, %CHARA% shuddered. Knowing ${chara.sex.toLowerCase()} was about to come, %YOU% redoubled every effort on the massive cock.
+    - Before long, %CHARA% shuddered. Knowing she was about to come, %YOU% redoubled every effort on the massive cock.
     - Then the cannon fired. A milky salvo instantly flooded %YOU%'s throat and kept pouring out until thick seed seeped between %YOU%'s lips and teeth.
     - acc: 1
       content: 「Cough... cough, cough.」
@@ -127,7 +127,7 @@ rape_after_race:
     - %YOU%'s writhing also made %CHAMPION%'s cock slip from the clenching hole behind. No longer held up by the shaft in the mouth, %YOU% collapsed to the floor. The swollen belly struck first, and the pressure forced semen from the abused hole.
     - %YOU% hurriedly prostrated before them, begging forgiveness. The trembling body involuntarily spurted another thin stream of white from behind, leaving a stain on the floor. Of course, cleaning the racers' lounge was also one of %YOU%'s duties. The last intact suit jacket had been meant for that, but now it was soaked in semen... It seemed the dear trainer would have to wipe the floor clean with that body instead.
     -
-    - %CHARA% shook ${chara.sex === "She" ? "Her":"His"} head, showing that such a minor slip did not matter.
+    - %CHARA% shook her head, showing that such a minor slip did not matter.
     -
     - color: %COLOR%
       content:
@@ -162,4 +162,4 @@ rape_after_race:
     - %CHARA% nodded in satisfaction.
     -
     - A trainer willing to give everything for the %UMA% in their care, and an %UMA% who trusted that trainer yet never hesitated to correct a mistake, surely made a partnership with a bright future ahead.
-    - %CHARA% believed it wholeheartedly. As if agreeing with ${chara.sex === "She" ? "Her":"His"} thoughts, the massive cock between ${chara.sex === "She" ? "Her":"His"} legs stirred and slowly rose.
+    - %CHARA% believed it wholeheartedly. As if agreeing with her thoughts, the massive cock between her legs stirred and slowly rose.

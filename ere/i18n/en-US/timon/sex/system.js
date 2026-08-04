@@ -8,7 +8,6 @@ const { get, input, printAndWait, printButton } = require('#/era-electron');
 
 const { buff_colors } = require('#/data/color-const');
 const { part_enum } = require('#/data/ero/part-const');
-const era = require('#/era-electron');
 
 module.exports = {
   /**
@@ -637,7 +636,7 @@ module.exports = {
       case 101:
         actions.push('toward ', ...targets, "'s cock");
     }
-    if (era.get(`nowex:${cid}:潮吹`) > 0) {
+    if (get(`nowex:${cid}:潮吹`) > 0) {
       actions.unshift('squirts ');
     } else {
       switch (part) {

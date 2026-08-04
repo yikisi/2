@@ -1,5 +1,5 @@
 module.exports = class extends (
-  require('#/i18n/zh-CN/kojo/900500-Anshinzawa-Sasami')
+  require('#/i18n/zh-CN/kojo/900500-Anshinzawa-Sasami/entry')
 ) {
   doctor = 'Master Acupuncturist';
   doctor_desc =

@@ -119,7 +119,7 @@ module.exports = {
     );
     era.println();
     await era.printAndWait(
-      `n ${luna.uma_sex_title} lay crumpled on the ground, hands pressed to ${luna.sex === 'She' ? 'her' : 'his'} head like the pain was splitting ${luna.sex === 'She' ? 'her' : 'him'} apart.`,
+      `An ${luna.uma_sex_title} lay crumpled on the ground, hands pressed to ${luna.sex === 'She' ? 'her' : 'his'} head like the pain was splitting ${luna.sex === 'She' ? 'her' : 'him'} apart.`,
     );
     await era.printAndWait(
       `${you.name} was about to ask what happened, but they froze in place.`,
@@ -233,7 +233,7 @@ module.exports = {
       `As if accepting fate, Luna gave a bitter smile. Then ${luna.sex} wept from joy.`,
     );
     await luna.say_and_wait(
-      '如If only you’d come sooner, maybe I wouldn’t have... Go. Keep this to yourself. An Emperor is not allowed to be weak.',
+      'If only you’d come sooner, maybe I wouldn’t have... Go. Keep this to yourself. An Emperor is not allowed to be weak.',
     );
     await era.printAndWait(
       `Before Luna could finish—or before ${you.name} could answer—${luna.sex} puShed you out of that place.`,

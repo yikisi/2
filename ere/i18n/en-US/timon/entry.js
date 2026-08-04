@@ -1,6 +1,6 @@
-﻿const proxy_kojo_js = require('#/i18n/proxy');
+﻿const { proxy_kojo_js } = require('#/i18n/tools');
 
-module.exports = class extends require('#/i18n/zh-CN/timon') {
+module.exports = class extends require('#/i18n/zh-CN/timon/entry') {
   recruit = proxy_kojo_js(require('#/i18n/en-US/timon/recruit'));
   daily = proxy_kojo_js(require('#/i18n/en-US/timon/daily'));
   edu = proxy_kojo_js(require('#/i18n/en-US/timon/edu'));

@@ -139,35 +139,33 @@ module.exports = class extends require('#/i18n/zh-CN/new-game') {
   set_cs_2_desc = 'Ladies... ladies?';
   set_cs_3_desc = 'What does earring placement mean?';
 
-  set_relation = 'Initial Affection';
+  set_relation = 'Initial Liking';
 
-  set_relation_buff = 'Affection Gain Difficulty';
-  set_love_buff = 'Love Gain Difficulty';
+  set_relation_buff = 'Liking Gain Difficulty';
+  set_love_buff = 'Affection Gain Difficulty';
   set_diff_easy = 'Easy';
   set_diff_normal = 'Normal';
   set_diff_hard = 'Hard';
   set_diff_easy_desc = 'Gain +50%';
   set_diff_hard_desc = 'Gain -50%';
 
-  set_relation_change = 'Affection Over Time';
+  set_relation_change = 'Liking Over Time';
   set_rc_0 = 'Growing Daily';
-  set_rc_1 = 'Gentleman Distance';
+  set_rc_1 = "A Gentleman' Distance";
   set_rc_2 = 'Souring Look';
-  set_rc_0_desc =
-    'Umamusume Affection for you grows daily; Affection +5 each turn';
-  set_rc_1_desc = 'Umamusume Affection for you is not affected by time';
-  set_rc_2_desc =
-    'Umamusume slowly grow to dislike you; Affection -10 each turn';
+  set_rc_0_desc = 'Umamusume Liking for you grows daily; Liking +5 each turn';
+  set_rc_1_desc = 'Umamusume Liking for you is not affected by time';
+  set_rc_2_desc = 'Umamusume slowly grow to dislike you; Liking -10 each turn';
 
-  set_love = 'Initial Love';
+  set_love = 'Initial Affection';
 
-  set_love_change = 'Love Over Time';
+  set_love_change = 'Affection Over Time';
   set_lc_0 = 'Dare Not Dream';
   set_lc_1 = 'Drawn In';
   set_lc_0_desc =
-    'Only active choices make Umamusume fall for you; Love rank-up events can trigger';
+    'Only active choices make Umamusume fall for you; Affection rank-up events can trigger';
   set_lc_1_desc =
-    'Umamusume slowly fall for you until Dependence... even if you do nothing; Love +1 each turn, no Love rank-up events';
+    'Umamusume slowly fall for you until Dependence... even if you do nothing; Affection +1 each turn, no Affection rank-up events';
 
   set_unfaith = 'View on Cheating';
   set_uf_0 = 'Open-Minded';
@@ -175,7 +173,7 @@ module.exports = class extends require('#/i18n/zh-CN/new-game') {
   set_uf_0_desc = 'Umamusume only care about the time spent with you';
   set_uf_1_desc = 'Watch that possessiveness...';
 
-  set_extreme = 'Umamusume Extreme Acts';
+  set_extreme = 'Extreme Actions of Umamusume';
   set_eb_0 = 'Never';
   set_eb_1 = 'Possible';
   set_eb_2 = 'Try to Restrain';
@@ -213,7 +211,7 @@ module.exports = class extends require('#/i18n/zh-CN/new-game') {
   set_ei_1_desc =
     'A spectator: "Running with eyes rolled back, track all wet—this is the Arima Kinen, show some respect!"; racing with toys: base stats -25%';
 
-  set_mejiro_style = 'Mejiro Castle Style';
+  set_mejiro_style = 'MEJIRO';
   set_ms_0 = 'Free';
   set_ms_1 = 'Loving';
   set_ms_0_desc = 'As you like ❤️';
@@ -235,7 +233,7 @@ module.exports = class extends require('#/i18n/zh-CN/new-game') {
   set_hg_2_desc = 'Giant Umamusume cannot be beaten!';
 
   set_gd_0 = 'I already know everything!';
-  set_gd_1 = 'Show it the first time';
+  set_gd_1 = 'Show it';
 
   cus_intro_header = 'Character creation time! Generate a random character?';
   bt_cus_random = 'Randomize';

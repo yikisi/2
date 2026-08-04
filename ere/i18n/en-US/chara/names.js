@@ -424,7 +424,7 @@ module.exports = class extends require('#/i18n/zh-CN/chara/names') {
   900103 = 'Above All';
   900202 = 'Northern Taste';
   904302 = 'Dictus';
-  // GENERATED START
+
   100101 = 'Special Week';
   100201 = 'Silence Suzuka';
   100301 = 'Tokai Teio';
@@ -568,7 +568,7 @@ module.exports = class extends require('#/i18n/zh-CN/chara/names') {
   114501 = 'Rulership';
   200101 = 'Happy Meek';
   200201 = 'Bitter Glasse';
-  200301 = 'Little Cocon';
+  200301 = 'Cocon';
   200401 = 'Montjeu';
   200501 = 'Treve';
   200601 = 'Dancing Brave';
@@ -594,9 +594,7 @@ module.exports = class extends require('#/i18n/zh-CN/chara/names') {
   905001 = 'Hoshina Kiyoko';
   905101 = 'Yunohana Bloom';
   113901 = 'Casino Drive';
-  // GENERATED END
 
-  // CHILDREN GENERATED START
   10010100 = 'Reach the Crown';
   10010101 = 'Toho Jackal';
   10020100 = 'Suzuhara Snowstep';
@@ -1079,8 +1077,6 @@ module.exports = class extends require('#/i18n/zh-CN/chara/names') {
   20050109 = 'Josephine';
   20050110 = 'Goddess Reborn';
   20060100 = 'Rigantona';
-  4000011600 = 'Satono Reinas';
-  // CHILDREN GENERATED END
   40000100 = 'Sincere';
   40000101 = 'Dance Partner';
   40000102 = 'Ishino Sunday';
@@ -1116,4 +1112,5 @@ module.exports = class extends require('#/i18n/zh-CN/chara/names') {
   90410100 = 'Mahzan';
   90420100 = 'Herod';
   1020010000 = 'Nishino Flowey';
+  4000011600 = 'Satono Reinas';
 };

@@ -9,6 +9,104 @@ module.exports = {
   /**
    * @param {CharaTalk} attacker active
    * @param {CharaTalk} defender passive
+   */
+  async kiss(attacker, defender) {
+    await printAndWait([
+      '[',
+      attacker.get_colored_name(),
+      ' forcibly kisses ',
+      defender.get_colored_name(),
+      ' on the lips]',
+    ]);
+  },
+  /**
+   * @param {CharaTalk} attacker active
+   * @param {CharaTalk} defender passive
+   */
+  async french_kiss(attacker, defender) {
+    await printAndWait([
+      '[',
+      attacker.get_colored_name(),
+      ' forces a deep kiss on ',
+      defender.get_colored_name(),
+      ']',
+    ]);
+  },
+  /**
+   * @param {CharaTalk} attacker active
+   * @param {CharaTalk} defender passive
+   */
+  async relax(attacker, defender) {
+    await printAndWait([
+      '[',
+      attacker.get_colored_name(),
+      ' calmly admires ',
+      defender.get_colored_name(),
+      "'s current state]",
+    ]);
+  },
+  /**
+   * @param {CharaTalk} attacker active
+   * @param {CharaTalk} defender passive
+   */
+  async talk(attacker, defender) {
+    await printAndWait([
+      '[',
+      attacker.get_colored_name(),
+      ' speaks to ',
+      defender.get_colored_name(),
+      ']',
+    ]);
+  },
+  /**
+   * @param {CharaTalk} attacker active
+   * @param {CharaTalk} defender passive
+   * @param {boolean} is_first first action in a continuous sequence
+   */
+  async force_cunnilingus(attacker, defender, is_first) {
+    if (is_first)
+      await printAndWait([
+        '[',
+        attacker.get_colored_name(),
+        ' forces their clit against ',
+        defender.get_colored_name(),
+        "'s face]",
+      ]);
+    else
+      await printAndWait([
+        '[',
+        attacker.get_colored_name(),
+        ' grinds their clit against ',
+        defender.get_colored_name(),
+        "'s lips and tongue]",
+      ]);
+  },
+  /**
+   * @param {CharaTalk} attacker active
+   * @param {CharaTalk} defender passive
+   * @param {boolean} is_first first action in a continuous sequence
+   */
+  async force_suck_virgin(attacker, defender, is_first) {
+    if (is_first)
+      await printAndWait([
+        '[',
+        attacker.get_colored_name(),
+        ' forces their pussy against ',
+        defender.get_colored_name(),
+        "'s lips]",
+      ]);
+    else
+      await printAndWait([
+        '[',
+        attacker.get_colored_name(),
+        ' grinds their pussy against ',
+        defender.get_colored_name(),
+        "'s lips and tongue]",
+      ]);
+  },
+  /**
+   * @param {CharaTalk} attacker active
+   * @param {CharaTalk} defender passive
    * @param {boolean} is_first first action in a continuous sequence
    */
   async fuck(attacker, defender, is_first) {

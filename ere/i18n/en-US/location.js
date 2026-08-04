@@ -1,4 +1,4 @@
-module.exports = class extends require('#i18n/zh-CN/location') {
+module.exports = class extends require('#/i18n/zh-CN/location') {
   office = 'Training Room';
   playground = 'Training Grounds';
   atrium = 'Courtyard';

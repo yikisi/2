@@ -1,4 +1,4 @@
-const proxy_kojo_js = require('#/i18n/proxy');
+const { proxy_kojo_js } = require('#/i18n/tools');
 
 module.exports = class extends require('#/i18n/zh-CN/kojo/1000-Player/entry') {
   daily = proxy_kojo_js(require('#/i18n/en-US/kojo/1000-Player/daily-0'));

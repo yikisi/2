@@ -1,4 +1,4 @@
-const proxy_kojo_js = require('#/i18n/proxy');
+const { proxy_kojo_js } = require('#/i18n/tools');
 
 module.exports = class extends (
   require('#/i18n/zh-CN/kojo/101700-Symboli-Rudolf/entry')

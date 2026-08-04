@@ -23,11 +23,11 @@ pray:
     - (Click.)
     - Though there was no door, a latch turned. Then a familiar face came into view.
     - A gentle smile, long aqua hair, and... beneath the draped cloth, glimpses of a body as beautiful as any sculpture.
-    - The Goddess who appeared in the dream offered neither divine majesty nor miracles. Instead, ${chara.sex.toLowerCase()} sat gently beside %YOU%, leaned down, and pressed ${chara.sex === "She" ? "Her":"His"} lips to %YOU%'s.
+    - The Goddess who appeared in the dream offered neither divine majesty nor miracles. Instead, she sat gently beside %YOU%, leaned down, and pressed her lips to %YOU%'s.
     - if: era.get('cflag:0:性别') === 1
-      content: ${chara.sex === "She" ? "Her":"His"} fingers slipped between %YOU%'s legs, wrapped around the rigid cock, and began to stroke it gently...
+      content: Her fingers slipped between %YOU%'s legs, wrapped around the rigid cock, and began to stroke it gently...
     - if: era.get('cflag:0:性别') !== 1
-      content: ${chara.sex === "She" ? "Her":"His"} fingers slipped between %YOU%'s legs and entered the warm, slick depths within...
+      content: Her fingers slipped between %YOU%'s legs and entered the warm, slick depths within...
     - acc: 1
       key: selected
       content: Follow Your Instincts (Impregnate the Goddess)
@@ -35,15 +35,15 @@ pray:
         - if: era.get('cflag:0:性别') > 0
           lines:
             - Lips and hands alone could no longer satisfy %YOU%'s swelling desire.
-            - Driven by instinct beneath the Goddess's silent gaze, %YOU% seized ${chara.sex === "She" ? "Her":"His"} wrists and roughly forced ${chara.sex === "She" ? "Her":"Him"} down.
-            - ${chara.sex} neither struggled nor resisted, simply yielding to %YOU%'s touch. Cloth slipped from ${chara.sex === "She" ? "Her":"His"} pale body with a faint rustle, soon drowned beneath %YOU%'s bestial panting...
+            - Driven by instinct beneath the Goddess's silent gaze, %YOU% seized her wrists and roughly forced her down.
+            - She neither struggled nor resisted, simply yielding to %YOU%'s touch. Cloth slipped from her pale body with a faint rustle, soon drowned beneath %YOU%'s bestial panting...
         - if: "!era.get('cflag:0:性别')"
           lines:
             - The instant that thought flashed through the mind, something changed.
             - Was it the dream, or a trick of the Goddess?
             - A foreign organ had sprouted between %YOU%'s legs. Beside the alluring Goddess ahead, however, it hardly seemed to matter.
-            - %YOU% seized the Goddess's wrists and pinned ${chara.sex === "She" ? "Her":"Him"} down.
-            - ${chara.sex} neither struggled nor resisted, simply yielding to %YOU%'s touch and even guiding %YOU% in the use of the unfamiliar cock...
+            - %YOU% seized the Goddess's wrists and pinned her down.
+            - She neither struggled nor resisted, simply yielding to %YOU%'s touch and even guiding %YOU% in the use of the unfamiliar cock...
     - if: era.get('cflag:0:性别') !== 1
       acc: 2
       content: Submit to Divine Will (%FUCKMEBUTTON%)
@@ -51,7 +51,7 @@ pray:
         - Amid the haze and rising lust, %YOU% slowly lost all sense of self.
         - Empty the mind. Let every limb relax. That was all it took.
         - Offer body, heart, and soul to the Goddess.
-        - The Goddess's garments slipped away, whispering sweetly against ${chara.sex === "She" ? "Her":"His"} skin.
+        - The Goddess's garments slipped away, whispering sweetly against her skin.
         - %YOU% closed their eyes, ready to give the Goddess everything.
     - acc: 3
       content: Heaven Preserve Me

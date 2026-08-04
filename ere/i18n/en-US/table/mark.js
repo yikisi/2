@@ -1,5 +1,5 @@
 module.exports = class extends require('#/i18n/zh-CN/table/mark') {
-  name_template = 'Mark %NAME%';
+  name_template = '%NAME% Mark';
   lv_template = 'Lv.%LEVEL%';
 
   n_pleasure = 'Pleasure';
@@ -40,7 +40,7 @@ module.exports = class extends require('#/i18n/zh-CN/table/mark') {
   s_option_name = 'Tag';
 
   s_o_no = 'None';
-  s_o_milk = 'Milk Slave';
+  s_o_milk = 'Milking Slave';
   s_o_pregnant = 'Breeding Slave';
   s_o_worker = 'Coin Slave';
   s_o_inherit = 'Spark Slave';

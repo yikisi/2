@@ -116,7 +116,7 @@ module.exports = {
    */
   get_lose_virginity: (chara, is_virgin) => [
     chara.get_colored_name(),
-    is_virgin ? ' loses virginity!' : ' loses that first time!',
+    is_virgin ? ' loses virginity!' : ' loses virginity!',
   ],
   /**
    * Prompt when player chooses where they cum

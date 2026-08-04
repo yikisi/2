@@ -94,14 +94,13 @@ module.exports = class extends require('#/i18n/zh-CN/sex/inmon-desc') {
   60115 = 'Temperament becomes "Proud".';
   60116 = 'Temperament becomes "Stubborn".';
   60117 = 'Temperament becomes "Hot-Blooded".';
-  60211 =
-    'Base stats from sex x6, can gain skill points, all training bonus -50%.';
+  60211 = 'Stats from sex x6, gains sp., all training bonus -50%.';
   60212 =
-    'Base stats from sex x16, can gain skill points, no longer self-trains and all training bonuses drop to minimum.';
+    'Stats from sex x16, gains sp., no longer self-trains and all training bonuses drop to minimum.';
   60221 = 'When trained by the player, success rate and effect +10%.';
   60222 = 'When trained by the player, success rate and effect +20%.';
   60223 =
-    'When trained by the player, success rate and effect +270%, drain all Stamina and Energy, gain 1 injury stack, Fame -1.';
+    'Trained by player: success rate&effect +270%, drain all Energy&Focus, 1= injury stack, Fame -1.';
   70111 = 'No longer reacts during training.';
   70112 = 'No longer initiates advances, and no longer reacts during training.';
   70211 = 'No effect yet.';
