@@ -140,11 +140,11 @@ class I18nEntry {
   tt_help = '帮助说明';
   tt_copyrights = '制作鸣谢';
   tt_links = '相关链接：';
-  tt_link_release = 'EraUma 游戏发布页';
-  tt_link_desk_engine = 'EraElectron 引擎（PC 版）发布页';
-  tt_link_app_engine = 'ere.app 引擎（安卓版）发布页';
-  tt_link_community = 'ERA 特雷森学园（Discord 社区）';
-  tt_link_wiki = 'Wiki（使用说明/游戏设定/口上写作指引……）';
+  tt_link_release = 'EraUma 游戏发布页（🪜）';
+  tt_link_desk_engine = 'EraElectron 引擎（PC 版）发布页（🪜）';
+  tt_link_app_engine = 'ere.app 引擎（安卓版）发布页（🪜）';
+  tt_link_community = 'ERA 特雷森学园（Discord 社区🪜）';
+  tt_link_wiki = 'Wiki（使用说明/游戏设定/口上写作指引……🪜）';
 
   cr_title_copyrights = '鸣谢';
   cr_header_susai = '主催';

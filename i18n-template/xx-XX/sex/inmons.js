@@ -29,7 +29,6 @@ module.exports = class extends require('#/i18n/zh-CN/sex/inmons') {
   701 = '行为限制';
   702 = '常识转换';
 
-  // GENERATED START
   10111 = '口感觉Ⅰ';
   10112 = '口感觉Ⅱ';
   10113 = '口感觉Ⅲ';
