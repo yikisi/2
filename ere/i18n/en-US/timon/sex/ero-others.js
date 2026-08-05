@@ -480,7 +480,21 @@ module.exports = {
       }
     }
   },
-  report_love_preg: (() => {
+  /**
+   * Conception is immediately detected by the crest after internal ejaculation.
+   * @param {CharaTalk} mother conceiving parent
+   * @param {CharaTalk} father ejaculating parent
+   */
+  be_pregnant(mother, father) {
+    era.print([
+      `After `,
+      father.get_colored_name(),
+      ` came inside `,
+      mother.get_colored_name(),
+      `, the crest on ${mother.sex === 'She' ? 'her' : 'his'} belly begins to look strange…`,
+    ]);
+  },
+  report_preg_in_love: (() => {
     /**
      * Pregnancy while love is high
      * @author 雞雞
@@ -492,49 +506,49 @@ module.exports = {
       if (era.get(`mark:${mother.id}:淫纹`) === 3) {
         await era.printAndWait([
           mother.get_colored_name(),
-          ' joyfully watches the pregnancy mark on the belly crest and cheerfully reports the good news to ',
+          ` beams at the pregnancy symbol on the belly crest, then eagerly shares the good news with `,
           father.get_colored_name(),
-          '.',
+          `.`,
         ]);
       } else {
         await era.printAndWait([
           mother.get_colored_name(),
-          ' joyfully stares at the pregnancy test and cheerfully reports the good news to ',
+          ` beams at the positive pregnancy test, then eagerly shares the good news with `,
           father.get_colored_name(),
-          '.',
+          `.`,
         ]);
       }
       if (unexpected_pregnant === unexpected_pregnant_enum.father_sleep) {
         await era.printAndWait([
           father.get_colored_name(),
-          ' asks again and again, and still gets the answer that the child is ',
+          ` checks again and again, only to hear the same answer: the child is `,
           father.sex === 'She' ? 'hers' : 'his',
-          '.',
+          `.`,
         ]);
         await era.printAndWait([
-          'But ',
+          `But `,
           father.get_colored_name(),
-          ' has no memory of it…',
+          ` has no memory of any of it…`,
         ]);
       } else {
         if (unexpected_pregnant === unexpected_pregnant_enum.mother_sleep) {
           await era.printAndWait([
-            'Though there is no memory of how it happened, ',
+            `Despite having no memory of how it happened, `,
             mother.get_colored_name(),
-            ' is sure the father can only be beloved ',
+            ` is certain the child's father could only be the one ${mother.sex.toLowerCase()} loves: `,
             father.get_colored_name(),
-            '.',
+            `.`,
           ]);
         }
         await era.printAndWait([
           father.get_colored_name(),
-          ' carefully embraces ',
+          ` gently pulls `,
           mother.get_colored_name(),
-          ', celebrating the new life taking root…',
+          ` into an embrace, and together they celebrate the new life growing within…`,
         ]);
       }
     };
-    f.title = 'Conception';
+    f.title = `A New Life`;
     return f;
   })(),
   report_preg: (() => {
