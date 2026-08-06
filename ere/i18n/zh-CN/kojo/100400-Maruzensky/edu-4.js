@@ -3488,6 +3488,7 @@ module.exports = {
         await you.say_and_wait(`……抱歉，${maru.name}。`);
         await you.say_and_wait(`无论如何我都要过去一趟。`);
       }
+      return [ret];
     };
     f.title = title;
     return f;
@@ -3583,6 +3584,7 @@ module.exports = {
         await you.say_and_wait(`……抱歉，${maru.name}。`);
         await you.say_and_wait(`无论如何我都要过去一趟。`);
       }
+      return [ret];
     };
     f.title = title;
     return f;
