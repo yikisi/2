@@ -34,7 +34,7 @@ module.exports = {
      * @author イーウィヤ
      * @param {CharaTalk} _ Unused parameter; must be retained
      * @param {number} dice Prayer roll result between 0 and 1; lower is better
-     * @param {number|undefined} god ID of a random goddess if Affection is awarded; undefined if all goddesses have already manifested
+     * @param {number|undefined} god ID of a random goddess if Fondness is awarded; undefined if all goddesses have already manifested
      */
     const f = async (_, dice, god) => {
       await printAndWait('Toss in a coin and make a wish...');
@@ -240,7 +240,7 @@ module.exports = {
         ', has lost her cat! The chairwoman is so depressed that Tracen’s overall efficiency has plummeted!',
       ]);
       printButton(
-        '“Mobilize everyone! We must find that cat!” (Motivation -50, Affection +40–60)',
+        '“Mobilize everyone! We must find that cat!” (Motivation -50, Fondness +40–60)',
         1,
       );
       printButton('“And?”', 2);
@@ -1015,8 +1015,11 @@ module.exports = {
       await printAndWait(
         'Still slightly flushed, the trainee smiles and takes two steps back.',
       );
-      printButton('“Let’s head back.” (Affection +10)', 1);
-      printButton('“Maybe... we could stay a little longer...” (Love +1)', 2);
+      printButton('“Let’s head back.” (Fondness +10)', 1);
+      printButton(
+        '“Maybe... we could stay a little longer...” (Infatuation +1)',
+        2,
+      );
       ret.push(await input());
       if (ret[0] === 1) {
         await printAndWait([
@@ -1155,11 +1158,11 @@ module.exports = {
         ', leaving a flicker of awkwardness in both gazes.',
       ]);
       printButton(
-        '"Let`s... just cool off a little." (Motivation up, Bond +10)',
+        '"Let`s... just cool off a little." (Motivation up, Fondness +10)',
         1,
       );
       printButton(
-        '"Let`s... get out of here." (Motivation up greatly, Love +1)',
+        '"Let`s... get out of here." (Motivation up greatly, Infatuation +1)',
         2,
       );
       ret.push(await input());
@@ -1420,7 +1423,7 @@ module.exports = {
         await chara.say_and_wait('—that we`re one and the same.');
         await printAndWait('...');
         printButton(
-          `Pull ${chara.sex === 'She' ? 'her' : 'him'} into a warm hug and show your thanks. (Bond +25)`,
+          `Pull ${chara.sex === 'She' ? 'her' : 'him'} into a warm hug and show your thanks. (Fondness +25)`,
           1,
         );
         printButton(
@@ -2505,7 +2508,7 @@ module.exports = {
       printButton('“What beautiful weather.” (Trainee Mood +1)', 1);
       if (race_week) {
         printButton(
-          '“I hope today’s race goes well too.” (??? Affection +50)',
+          '“I hope today’s race goes well too.” (??? Fondness +50)',
           2,
         );
       }
@@ -2541,7 +2544,7 @@ module.exports = {
         '“You worked hard today. Get some rest, then let’s go have fun!”',
         1,
       );
-      print('(Mood -1, Affection +50)');
+      print('(Mood -1, Fondness +50)');
       printButton('“So, what reward do you want?”', 2);
       const ret = [await input()];
       if (ret[0] === 2) {
@@ -2618,8 +2621,8 @@ module.exports = {
     /**
      * @author Mr.E.
      * @param {CharaTalk} you Player
-     * @param {number} max_lover Character with the highest Love among Air Shakur, Transcend, and Dream Journey
-     * @param {number} max_love Highest Love among Air Shakur, Transcend, and Dream Journey; -1 if none have been recruited
+     * @param {number} max_lover Character with the highest Infatuation among Air Shakur, Transcend, and Dream Journey
+     * @param {number} max_love Highest Infatuation among Air Shakur, Transcend, and Dream Journey; -1 if none have been recruited
      */
     const f = async (you, max_lover, max_love) => {
       await printAndWait(

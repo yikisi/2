@@ -114,9 +114,9 @@ module.exports = class extends require('#/i18n/zh-CN/table/item-desc') {
   83 =
     'Lets you drink in every detail of Sleeping Beauty. 「Want to do something with me?」\nSleep sex chance +50% (ignores extreme-act limits).';
   84 =
-    'For this turn only, gain Lewd Crest Mark Lv.3. Characters with low Love or Affection cannot use it.';
+    'For this turn only, gain Lewd Crest Mark Lv.3. Characters with low Infatuation or Fondness cannot use it.';
   85 =
-    'For this turn only, gain Lewd Crest Mark Lv.3 and 1,666 Obedience Factors. The extra Obedience Factors are removed at the start of next turn. Characters with low Love or Affection cannot use it.';
+    'For this turn only, gain Lewd Crest Mark Lv.3 and 1,666 Obedience Factors. The extra Obedience Factors are removed at the start of next turn. Characters with low Infatuation or Fondness cannot use it.';
 
   100 = 'Restores Energy, but may cause weight gain.';
   101 = `Worried passion might end \${chara.sex === "She" ? "Her" : "His"} racing days? Only want the pleasure without the responsibility? For half-hearted you, Sokuko presents special condoms!\nTougher and more pressure-resistant than ordinary ones—strong enough to survive an Umamusume force without breaking. No impact is enough to cause a safety failure. Essential for safe sex (totally).\nWarning: If a condom fails, you clearly bought an expired one. We accept no responsibility and reserve final interpretation.`;

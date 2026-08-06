@@ -55,14 +55,14 @@ module.exports = class extends (
 
   crush = 'Enamored';
   crush_desc =
-    'the surging feelings for you have grown impossible to conceal or contain. Initial Affection +40, Affection Gain +20%.';
+    'the surging feelings for you have grown impossible to conceal or contain. Initial Infatuation +40, Infatuation Gain +20%.';
 
   emperor = 'Emperor';
   emperor_desc = `The Emperor reigns here. Kneel. Training Success Rate +5%, Training Effect +4%, Race Stats +2%. Gains 1 layer of [Mental Damage] every 7 turns spent active in this form.`;
 
   intention = 'Sovereign Intent';
   intention_desc =
-    'Do not question her; simply yield. Liking Gain −20%, Affection Cap set to 40.';
+    'Do not question her; simply yield. Fondness Gain −20%, Infatuation Cap set to 40.';
 
   moral_damage = (c) => `Mental Damage${c === 1 ? '' : `(${c})`}`;
   moral_damage_desc = (c, debuff, buff) =>

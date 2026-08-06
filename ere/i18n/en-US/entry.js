@@ -63,9 +63,9 @@ module.exports = class extends require('#/i18n/zh-CN/entry') {
   ui_rl_mark_with_value = '%MARK% (%VAL%)';
 
   ui_love_icon = '❤️';
-  ui_love = 'Love';
-  ui_love_template = 'Love: %LOVEINFO%';
-  get_ui_colored_love = (love) => ['Love: ', love];
+  ui_love = 'Infatuation';
+  ui_love_template = 'Infatuation: %LOVEINFO%';
+  get_ui_colored_love = (love) => ['Infatuation: ', love];
   love_u = '?';
   love_0 = 'Neutral';
   love_1 = 'Faint';
@@ -76,9 +76,9 @@ module.exports = class extends require('#/i18n/zh-CN/entry') {
   love_6 = 'Dependence';
 
   ui_relation_icon = '🤝';
-  ui_relation = 'Affection';
-  ui_relation_template = 'Affection: %RELATIONINFO%';
-  get_ui_colored_relation = (relation) => ['Affection: ', relation];
+  ui_relation = 'Fondness';
+  ui_relation_template = 'Fondness: %RELATIONINFO%';
+  get_ui_colored_relation = (relation) => ['Fondness: ', relation];
   relation_u = '?';
   relation_0 = 'Disappointed';
   relation_1 = 'Suspicious';
@@ -171,7 +171,7 @@ module.exports = class extends require('#/i18n/zh-CN/entry') {
   cr_timon_recruit = 'Recruitment Text';
   cr_timon_daily = 'Daily Text';
   cr_timon_edu = 'Career Text';
-  cr_timon_love = 'Love Text';
+  cr_timon_love = 'Infatuation Text';
   cr_timon_ero = 'Training Text';
   cr_timon_basement = 'Basement Text';
   cr_timon_special = 'Special Characters (Temporary)';
@@ -260,7 +260,7 @@ module.exports = class extends require('#/i18n/zh-CN/entry') {
   ];
   get_ui_change_relation = (chara, target, change_mark, val, result) => [
     chara,
-    "'s Affection toward ",
+    "'s Fondness toward ",
     target,
     ' ',
     change_mark,
@@ -277,7 +277,7 @@ module.exports = class extends require('#/i18n/zh-CN/entry') {
   ];
   get_ui_change_love = (chara, you, change_mark, val, result) => [
     chara,
-    "'s Love for ",
+    "'s Infatuation for ",
     you,
     ' ',
     change_mark,
@@ -407,7 +407,7 @@ module.exports = class extends require('#/i18n/zh-CN/entry') {
   ui_borrow_money = 'Borrow Money';
   ui_celebration_template = 'Celebrate %CELEBRATION% Together';
   ui_birthday = 'Celebrate Birthday';
-  ui_check_love = 'Retrigger Love Event';
+  ui_check_love = 'Retrigger Infatuation Event';
   ui_basement_me = 'Beg for Mad Love';
   ui_recruit = 'Go to Training Grounds (Recruit)';
   ui_trainer_office = 'Go to Trainer Office';
@@ -644,7 +644,7 @@ module.exports = class extends require('#/i18n/zh-CN/entry') {
   ui_out_self_confirm = 'Where do you want to go alone?';
   get_ui_bt_talk_with_npc_template = 'Chat with %NAME%';
   ui_deep_interact_with_npc_template =
-    'Relationship is not that close yet (need: %R_REQUIRE%+ Affection, current: %R_CURRENT%; or %L_REQUIRE%+ Love, current: %L_CURRENT%)';
+    'Relationship is not that close yet (need: %R_REQUIRE%+ Fondness, current: %R_CURRENT%; or %L_REQUIRE%+ Infatuation, current: %L_CURRENT%)';
   get_ui_out_bye = (chara, you) => [
     '[After saying goodbye to ',
     chara,

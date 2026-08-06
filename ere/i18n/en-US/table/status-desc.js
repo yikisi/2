@@ -2,7 +2,7 @@ module.exports = class extends require('#/i18n/zh-CN/table/status-desc') {
   template = '[%NAME%]: %DESC%';
 
   remote =
-    'Remote coaching; Trainer training bonuses do nothing, cannot train slackers, Affection gain -25%, Affection loss +50%.';
+    'Remote coaching; Trainer training bonuses do nothing, cannot train slackers, Fondness gain -25%, Fondness loss +50%.';
 
   pr_1 = 'Not really into it; Motivation cap drops by 1 stage.';
   pr_2 = 'Something weighing on the mind; Motivation cap drops by 2 stages.';
@@ -57,7 +57,7 @@ module.exports = class extends require('#/i18n/zh-CN/table/status-desc') {
 
   1 = 'The price of staying up all night; Energy and Focus cost +10%.';
   2 =
-    'Does not want to train—just wants a break. Motivation bonuses do nothing, Training success rate -10%, Training effect -20%, and Affection drops after training.';
+    'Does not want to train—just wants a break. Motivation bonuses do nothing, Training success rate -10%, Training effect -20%, and Fondness drops after training.';
   3 =
     'Too heavy—the track is crying out; Energy and Focus cost +10%, Speed gain -100%.';
   4 =
@@ -76,17 +76,18 @@ module.exports = class extends require('#/i18n/zh-CN/table/status-desc') {
   15 = 'Energy and Focus cost +10%, race stats +5%.';
   16 =
     'Detoxed and light on the feet; weight loss works better, drugs clear faster.';
-  17 = 'Birthday—Affection changes are doubled.';
+  17 = 'Birthday—Fondness changes are doubled.';
 
   20 =
-    'Hiding affection deep inside... Love gain +50%, sleep sex chance +20%, confinement chance +10%. Will not confess unless it is a Great Success.';
+    'Hiding affection deep inside... Infatuation gain +50%, sleep sex chance +20%, confinement chance +10%. Will not confess unless it is a Great Success.';
   21 =
-    'Growing disgust toward you... is it the drug, or what you have done? Affection gain -50%, Affection loss +50%, and Affection falls each week.';
-  22 = 'Drugs have forced a temporary calm—Love will not rise... for now.';
+    'Growing disgust toward you... is it the drug, or what you have done? Fondness gain -50%, Fondness loss +50%, and Fondness falls each week.';
+  22 =
+    'Drugs have forced a temporary calm—Infatuation will not rise... for now.';
   23 =
     'A weird app that shows names, numbers, s... sexual history, and... nudes (nosebleed).';
   24 =
-    'Two strange numbers float above every head... showing real Affection and Love.';
+    'Two strange numbers float above every head... showing real Fondness and Infatuation.';
   25 =
     'Strange text floats above every head... showing all sexual abilities and experience.';
   26 =

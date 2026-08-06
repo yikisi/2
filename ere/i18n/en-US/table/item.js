@@ -24,7 +24,7 @@ module.exports = class extends require('#/i18n/zh-CN/table/item') {
 
   25 = 'Horse Whisperer';
   26 = 'Universal Frames';
-  27 = 'Affection Lens';
+  27 = 'Fondness Lens';
   28 = 'Umapyoi Count Lens';
   29 = 'X-Ray Lens';
   30 = 'Condoms (5-pack)';

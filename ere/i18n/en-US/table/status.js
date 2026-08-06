@@ -59,7 +59,7 @@ module.exports = class extends require('#/i18n/zh-CN/table/status') {
   21 = 'Hate Drug';
   22 = 'Suppressant';
   23 = (t) => `Horse Whisperer (${t})`;
-  24 = 'Affection Glasses';
+  24 = 'Fondness Glasses';
   25 = 'Uma Jump Count Glasses';
   26 = 'X-Ray Glasses';
 

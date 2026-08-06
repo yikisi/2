@@ -5,11 +5,11 @@ module.exports = class extends require('#/i18n/zh-CN/achieve-desc') {
   edu_thr = 'Complete three careers.';
   edu_nrg = 'Complete seven careers.';
   edu_1_ex =
-    'Complete one career with your trainee at [Passionate] Love or higher.';
+    'Complete one career with your trainee at [Passionate] Infatuation or higher.';
   edu_sex =
     'Complete one career where your trainee meets at least one of the following:\n● Reach [Soulmates] or higher;\n● Gain a Lv.3 Bond Mark with no negative marks;\n● Gain a Lv.3 Lewd Crest.';
   edu_tch =
-    'Complete one career where your trainee meets all of the following:\n● No blood relation to the Trainer;\n● Love stays at [Faint] or lower;\n● No sexual contact of any kind, including sleep sex.';
+    'Complete one career where your trainee meets all of the following:\n● No blood relation to the Trainer;\n● Infatuation stays at [Faint] or lower;\n● No sexual contact of any kind, including sleep sex.';
   chan_sec = 'Complete a second career with the same character.';
   chan_thr = 'Run three or more repeat careers.';
   chan_mor =

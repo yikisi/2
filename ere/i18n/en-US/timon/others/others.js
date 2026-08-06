@@ -442,7 +442,7 @@ module.exports = {
   star_drew_bt_filter_kojo_r: 'Recruitment',
   star_drew_bt_filter_kojo_d: 'Daily',
   star_drew_bt_filter_kojo_ed: 'Career',
-  star_drew_bt_filter_kojo_l: 'Affection',
+  star_drew_bt_filter_kojo_l: 'Infatuation',
   star_drew_bt_filter_kojo_er: 'Training',
   star_drew_bt_filter_kojo_b: 'Basement',
   star_drew_bt_filter_image: 'Portraits',
@@ -453,7 +453,7 @@ module.exports = {
   sd_f_title_kojo_ed:
     'Career Dialogue: Exclusive story events and plotlines that unfold during the character’s career.',
   sd_f_title_kojo_l:
-    'Affection Dialogue: Exclusive scenes and events triggered when the character’s Affection reaches certain milestones.',
+    'Infatuation Dialogue: Exclusive scenes and events triggered when the character’s Infatuation reaches certain milestones.',
   sd_f_title_kojo_er:
     'Training Dialogue: Exclusive scenes and dialogue triggered during sexual training with the character.',
   sd_f_title_kojo_b:

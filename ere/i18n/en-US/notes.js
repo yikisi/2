@@ -284,7 +284,7 @@ module.exports = class extends require('#/i18n/zh-CN/notes') {
     ],
     [
       'Note #19',
-      "Want better training results? Raise your trainee's Affection or ask another Trainer for help!",
+      "Want better training results? Raise your trainee's Fondness or ask another Trainer for help!",
     ],
     ['Note #22', ''],
     [

@@ -295,5 +295,5 @@ module.exports = class extends require('#/i18n/zh-CN/table/abl-desc') {
     'How well this character can endure masochistic orgasms.\nHigher levels cost less Energy and Focus on masochism orgasm.\nUpgrade with Masochism Factors.\n\nCharacters born with [Verbal Masochist], [Pain Masochist], [Saint], or similar traits prioritize this ability.';
 
   40 =
-    'Makes flirting more likely to get a better reaction. Characters with [Lustful], [Slutty], [Outgoing], [Social Butterfly], or similar traits, or with Love at Passionate or higher, prioritize this ability.';
+    'Makes flirting more likely to get a better reaction. Characters with [Lustful], [Slutty], [Outgoing], [Social Butterfly], or similar traits, or with Infatuation at Passionate or higher, prioritize this ability.';
 };

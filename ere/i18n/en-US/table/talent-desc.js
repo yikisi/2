@@ -6,9 +6,9 @@ module.exports = class extends require('#/i18n/zh-CN/table/talent-desc') {
   '0_-1' =
     'Why does everyone else notice but me? All emotion Factors gain -30%. When Motivation falls, it falls 1 less stage.';
   '1_1' =
-    'On my own I still cannot do anything; Obedience Factor gain +30%, Affection gain +3, Affection loss -3.';
+    'On my own I still cannot do anything; Obedience Factor gain +30%, Fondness gain +3, Fondness loss -3.';
   '1_-1' =
-    'Legendary Umamusume? Overrated~ Obedience Factor gain -30%, Affection gain -3, Affection loss +3.';
+    'Legendary Umamusume? Overrated~ Obedience Factor gain -30%, Fondness gain -3, Fondness loss +3.';
   '2_1' = 'More sensitive to pain; Pain Factor gain +30%.';
   '2_-1' = 'A scratch like this is nothing; Pain Factor gain -30%.';
   '3_1' = '... Fear Factor gain +30%.';
@@ -62,7 +62,7 @@ module.exports = class extends require('#/i18n/zh-CN/table/talent-desc') {
   20 = 'Harder to read.';
   21 = 'I love you. Please let me love you, and please love me too...';
   22 =
-    'You NTR me? Everyone, come NTR me! Gains Affection from a partner cheating.';
+    'You NTR me? Everyone, come NTR me! Gains Fondness from a partner cheating.';
 
   no_yand = 'Calmed down.';
   re_yand = 'Twisted further.';

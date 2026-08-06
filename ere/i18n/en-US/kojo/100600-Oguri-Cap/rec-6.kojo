@@ -47,7 +47,7 @@ rec:
       - This stoicism doesn't refer to emotions or desires, but rather that %SEX%'s pursuit of racing is extremely pure and unblemished.
       - Unlike many Race %UMA%, Oguri Cap doesn't run for fame or profit, but steps onto the track simply embracing a love for racing and a competitive spirit.
   - acc: 2
-    content: 「A prodigy, huh... How does she compare to you?」(%T_NAME% Affection -20, Love +2)
+    content: 「A prodigy, huh... How does she compare to you?」(%T_NAME% Fondness -20, Infatuation +2)
     if: era.get('cflag:301:57')?.who_am_i >= 1
     lines:
       - color: %T_COLOR%
@@ -78,7 +78,7 @@ rec:
   - acc: 1
     content: (What's wrong?) (Oguri Cap Motivation +1)
   - acc: 2
-    content: (...This girl's intuition is really sharp.) (%T_NAME% Affection -20, Love +5)
+    content: (...This girl's intuition is really sharp.) (%T_NAME% Fondness -20, Infatuation +5)
     if: era.get('cflag:301:57')?.who_am_i >= 1
     lines:
       - %YOU% whispered at a volume only %T_NAME% could hear, and was immediately kicked covertly in the calf by %SEX%.

@@ -1,7 +1,7 @@
 module.exports = class extends require('#/i18n/zh-CN/achieve') {
   type_edu = 'Career';
   type_race = 'Racing';
-  type_love = 'Love';
+  type_love = 'Infatuation';
   type_sex = 'Training';
   type_birth = 'Birth';
   type_end = 'Ending';

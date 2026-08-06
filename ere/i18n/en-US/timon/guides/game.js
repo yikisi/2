@@ -50,11 +50,7 @@ module.exports = {
     }
     era.println();
 
-    await minoru.say_as_unknown_and_wait([
-      'Welcome, new Trainer',
-      you.adult_sex_title,
-      '.',
-    ]);
+    await minoru.say_as_unknown_and_wait(['Welcome, new Trainer.']);
     await minoru.say_as_unknown_and_wait(
       "I'm Tazuna Hayakawa, the chairperson's secretary.",
     );
@@ -164,9 +160,7 @@ module.exports = {
         ' with their new partner.',
       ]);
       await minoru.say_and_wait([
-        'Trainer',
-        you.adult_sex_title,
-        ", you've found yourself a trainee. In that case...",
+        "Trainer, you've found yourself a trainee. In that case...",
       ]);
       await era.printAndWait([
         minoru.get_colored_name(),
@@ -182,11 +176,7 @@ module.exports = {
         minoru.get_colored_name(),
         '.',
       ]);
-      await minoru.say_and_wait([
-        'Trainer',
-        you.adult_sex_title,
-        ', did you find a suitable partner?',
-      ]);
+      await minoru.say_and_wait(['Trainer, did you find a suitable partner?']);
       era.printButton('`All the good candidates were already taken.`', 1);
       era.printButton(
         '`Embarrassing as it is, I guess no one was interested in me.`',
@@ -269,9 +259,7 @@ module.exports = {
       "...Some unscrupulous Trainers have ignored their trainees' condition and forced them through grueling strings of races...",
     );
     await minoru.say_and_wait([
-      'This will not win races and may leave your trainee injured. Trainer',
-      you.adult_sex_title,
-      ', please avoid such tactics.',
+      'This will not win races and may leave your trainee injured. Trainer, please avoid such tactics.',
     ]);
     await minoru.say_and_wait(
       'If something unexpected arises before a race, such as an injury or scheduling conflict, withdrawing is always an option.',
@@ -374,9 +362,7 @@ module.exports = {
       'Some people come here specifically to shout into the hollow and vent their frustrations.',
     );
     await minoru.say_and_wait([
-      'So if you hear someone yelling nearby, Trainer',
-      you.adult_sex_title,
-      ", don't be alarmed.",
+      "So if you hear someone yelling nearby, Trainer, don't be alarmed.",
     ]);
   },
   /** @param {CharaTalk} minoru */
@@ -400,9 +386,7 @@ module.exports = {
       ' here.',
     ]);
     await minoru.say_and_wait([
-      "Getting on the chairperson's good side could do wonders for your career, Trainer",
-      you.adult_sex_title,
-      '.',
+      "Getting on the chairperson's good side could do wonders for your career, Trainer.",
     ]);
     era.println();
 
@@ -422,9 +406,7 @@ module.exports = {
       'When visitors come from outside the academy, meetings are held in these rooms.',
     );
     await minoru.say_and_wait([
-      "I'm sure plenty of reporters will come to interview you in the future, Trainer",
-      you.adult_sex_title,
-      '.',
+      "I'm sure plenty of reporters will come to interview you in the future, Trainer.",
     ]);
   },
   /**
@@ -433,9 +415,7 @@ module.exports = {
    */
   async out(minoru, you) {
     await minoru.say_and_wait([
-      "Beyond Tracen's gates, you can visit the riverbank, shopping district, shrine, station plaza, and more. As for the details... I leave those for you to discover, Trainer",
-      you.adult_sex_title,
-      '.',
+      "Beyond Tracen's gates, you can visit the riverbank, shopping district, shrine, station plaza, and more. As for the details... I leave those for you to discover, Trainer.",
     ]);
     await minoru.say_and_wait(
       "When I'm not handling academy business, I'm usually by the front gate. Come find me here if you need anything.",

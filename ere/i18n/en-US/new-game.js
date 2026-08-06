@@ -139,33 +139,35 @@ module.exports = class extends require('#/i18n/zh-CN/new-game') {
   set_cs_2_desc = 'Ladies... ladies?';
   set_cs_3_desc = 'What does earring placement mean?';
 
-  set_relation = 'Initial Liking';
+  set_relation = 'Initial Fondness';
 
-  set_relation_buff = 'Liking Gain Difficulty';
-  set_love_buff = 'Affection Gain Difficulty';
+  set_relation_buff = 'Fondness Gain Difficulty';
+  set_love_buff = 'Infatuation Gain Difficulty';
   set_diff_easy = 'Easy';
   set_diff_normal = 'Normal';
   set_diff_hard = 'Hard';
   set_diff_easy_desc = 'Gain +50%';
   set_diff_hard_desc = 'Gain -50%';
 
-  set_relation_change = 'Liking Over Time';
+  set_relation_change = 'Fondness Over Time';
   set_rc_0 = 'Growing Daily';
   set_rc_1 = "A Gentleman' Distance";
   set_rc_2 = 'Souring Look';
-  set_rc_0_desc = 'Umamusume Liking for you grows daily; Liking +5 each turn';
-  set_rc_1_desc = 'Umamusume Liking for you is not affected by time';
-  set_rc_2_desc = 'Umamusume slowly grow to dislike you; Liking -10 each turn';
+  set_rc_0_desc =
+    'Umamusume Fondness for you grows daily; Fondness +5 each turn';
+  set_rc_1_desc = 'Umamusume Fondness for you is not affected by time';
+  set_rc_2_desc =
+    'Umamusume slowly grow to dislike you; Fondness -10 each turn';
 
-  set_love = 'Initial Affection';
+  set_love = 'Initial Infatuation';
 
-  set_love_change = 'Affection Over Time';
+  set_love_change = 'Infatuation Over Time';
   set_lc_0 = 'Dare Not Dream';
   set_lc_1 = 'Drawn In';
   set_lc_0_desc =
-    'Only active choices make Umamusume fall for you; Affection rank-up events can trigger';
+    'Only active choices make Umamusume fall for you; Infatuation rank-up events can trigger';
   set_lc_1_desc =
-    'Umamusume slowly fall for you until Dependence... even if you do nothing; Affection +1 each turn, no Affection rank-up events';
+    'Umamusume slowly fall for you until Dependence... even if you do nothing; Infatuation +1 each turn, no Infatuation rank-up events';
 
   set_unfaith = 'View on Cheating';
   set_uf_0 = 'Open-Minded';
