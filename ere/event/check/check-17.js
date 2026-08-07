@@ -141,8 +141,9 @@ module.exports = class extends CustomizedCheck {
       era.get('cflag:17:位置') === 0 &&
       era.get('cflag:0:位置') === 0
     ) {
+      const _this_id = this.id;
       return {
-        name: i18n().kojo[this.id].pa_button,
+        name: i18n().kojo[_this_id].pa_button,
         handle() {
           const event_marks = new LunaEduMarks();
           event_marks.want_emperor = 1 - event_marks.want_emperor;
@@ -150,10 +151,10 @@ module.exports = class extends CustomizedCheck {
           const chara = get_chara_talk(17);
           era.print(
             (event_marks.want_emperor === event_marks.emperor
-              ? i18n().kojo[this.id].pa_notify_keep
-              : i18n().kojo[this.id].pa_notify_transform)(
+              ? i18n().kojo[_this_id].pa_notify_keep
+              : i18n().kojo[_this_id].pa_notify_transform)(
               chara,
-              luna.id === this.id ? emperor : luna,
+              luna.id === _this_id ? emperor : luna,
             ),
           );
         },
