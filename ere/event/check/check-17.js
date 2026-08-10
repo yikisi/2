@@ -143,13 +143,13 @@ module.exports = class extends CustomizedCheck {
     ) {
       return {
         name: i18n().kojo[this.id].pa_button,
-        handle() {
-          const event_marks = new LunaEduMarks();
-          event_marks.want_emperor = 1 - event_marks.want_emperor;
+        handle: () => {
+          const edu_marks = new LunaEduMarks();
+          edu_marks.want_emperor = 1 - edu_marks.want_emperor;
           const { luna, emperor } = get_luna_talk_tools();
           const chara = get_chara_talk(17);
           era.print(
-            (event_marks.want_emperor === event_marks.emperor
+            (edu_marks.want_emperor === edu_marks.emperor
               ? i18n().kojo[this.id].pa_notify_keep
               : i18n().kojo[this.id].pa_notify_transform)(
               chara,
