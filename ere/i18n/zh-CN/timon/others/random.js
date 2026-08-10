@@ -2564,6 +2564,7 @@ module.exports = {
           }
         }
       }
+      return ret;
     };
     f.title = '欢乐周末开始啦！';
     return f;
