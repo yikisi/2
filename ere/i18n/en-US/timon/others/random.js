@@ -2844,6 +2844,7 @@ module.exports = {
           }
         }
       }
+      return ret;
     };
     f.title = 'Happy Weekend Starts Now!';
     return f;
