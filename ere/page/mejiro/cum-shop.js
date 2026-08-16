@@ -19,6 +19,7 @@ const CharaInmon = require('#/data/ero/chara-inmon');
 const { mark_colors, slavery_enum } = require('#/data/ero/mark-const');
 const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
 const {
+  pregnant_stage_enum,
   unexpected_pregnant_enum,
   vp_status_enum,
 } = require('#/data/ero/status-const');
@@ -211,7 +212,11 @@ async function cum_shop(chara, me) {
                   },
                 });
               }
-              if (era.get(`talent:${target.id}:处女`) === vp_status_enum.no) {
+              if (
+                era.get(`talent:${target.id}:处女`) === vp_status_enum.no &&
+                era.get(`talent:${target.id}:妊娠阶段`) ===
+                  1 << pregnant_stage_enum.no
+              ) {
                 buttons.push({
                   c: i18n().timon.cum.city_bs_re_virgin,
                   h() {
