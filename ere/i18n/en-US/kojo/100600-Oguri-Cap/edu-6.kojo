@@ -1533,7 +1533,7 @@ arim_kin_final_win:
     - %YOU%'s jaw dropped. Both hands white-knuckled the railing.
     -
     - The shackles fate had clamped on %SEX%—ripped apart. The iron wall God had erected—smashed through headfirst.
-    - "Impossible!" In the equally stunned eyes of %SEX%'s rivals, Oguri Cap broke past %SEX%'s own limits once more, leaving %THEY% far behind...
+    - 「Impossible!」In the equally stunned eyes of %SEX%'s rivals, Oguri Cap broke past %SEX%'s own limits once more, leaving %THEY% far behind...
     -
     - acc: 1
       content: 「GO!!」
@@ -1814,7 +1814,7 @@ palace_end:
 sats_sho:
   title: Before the Satsuki Sho
   lines:
-    - "Satsuki" is an elegant name for April, and the race named after it signals the opening of spring's competitive season.
+    - 「Satsuki」is an elegant name for April, and the race named after it signals the opening of spring's competitive season.
     - It's both the prologue to the Classic Triple Crown and the starting line for countless %UMA% on the road to the summit.
     -
     - Right now, contestant Oguri Cap sat in the locker room chair, buzzing with excitement.
