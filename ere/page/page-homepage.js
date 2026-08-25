@@ -54,6 +54,7 @@ const {
 const CharaInmon = require('#/data/ero/chara-inmon');
 const { lust_border } = require('#/data/ero/orgasm-const');
 const { plugin_enum } = require('#/data/ero/plugin/plugin-const');
+const { vp_status_enum } = require('#/data/ero/status-const');
 const BasementAction = require('#/data/event/basement-action');
 const basement_owners = require('#/data/event/basement-owners');
 const event_hooks = require('#/data/event/event-hooks');
@@ -149,7 +150,10 @@ async function save_and_next_week(cid, cur_loc, rest_loc) {
   era.set('flag:当前位置', rest_loc);
   let lover = +(sys_check_awake(0) && era.get('flag:床伴'));
   era.set('flag:床伴', lover);
-  const punish = era.get('flag:惩戒力度') >= 2 && check_pregnant_unprotect(0);
+  const punish =
+    era.get('flag:惩戒力度') >= 2 &&
+    era.get('talent:0:处女') === vp_status_enum.no &&
+    check_pregnant_unprotect(0);
   if (punish) {
     i18n().timon.pregnant_slave.work(
       get_chara_talk(0),

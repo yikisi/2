@@ -12,6 +12,7 @@
     "node_modules/**",
     "res/**",
     "tools/**",
-    "**/*.config.js"
+    "**/*.config.js",
+    "i18n-template/**"
   ]
 }

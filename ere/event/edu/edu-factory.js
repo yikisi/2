@@ -20,6 +20,7 @@ cons_dict[7] = require('#/event/edu/edu-7');
 cons_dict[13] = require('#/event/edu/edu-13');
 cons_dict[17] = require('#/event/edu/edu-17');
 cons_dict[19] = require('#/event/edu/edu-19');
+cons_dict[20] = require('#/event/edu/edu-20');
 cons_dict[21] = require('#/event/edu/edu-21');
 cons_dict[24] = require('#/event/edu/edu-24');
 cons_dict[25] = require('#/event/edu/edu-25');
