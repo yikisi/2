@@ -367,11 +367,16 @@ module.exports = class extends CustomizedDaily {
     } else {
       await this.#kojo.talk(
         tachyon,
+        get_chara_talk(25),
         me,
         callname,
+        sys_get_colored_callname(this.id, 9),
+        sys_get_colored_callname(0, 20),
+        sys_get_colored_callname(this.id, 25),
         relation,
         love,
         life_marks.talk++,
+        life_marks.cook,
       );
     }
   }
