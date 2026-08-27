@@ -66,7 +66,7 @@ module.exports = class extends CustomizedLove {
         callname,
       );
       await quick_into_sex(this.id, this.id, true);
-      const ret = this.#kojo['74-2-end'](gold_ship, me, callname);
+      const ret = await this.#kojo['74-2-end'](gold_ship, me, callname);
       if (ret[0] === 1) {
         era.println();
         if (ret[1] === 1) {
@@ -93,7 +93,7 @@ module.exports = class extends CustomizedLove {
    * @param {string} callname
    */
   async golden_ship_attack(gold_ship, me, callname) {
-    const ret = print_title_with_kojo(
+    const ret = await print_title_with_kojo(
       this.#kojo,
       'golden_ship_attack',
       gold_ship,
