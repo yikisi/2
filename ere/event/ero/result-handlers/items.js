@@ -92,7 +92,7 @@ module.exports = (handlers) => {
         );
         era.set(`palam:${extra_flag.user}:外阴快感`, 0);
         era.set(
-          `status:${extra_flag.user}:${i18n().tb_item[extra_flag.item]}`,
+          `status:${extra_flag.user}:${i18n('zh-CN').tb_item[extra_flag.item]}`,
           1,
         );
         break;
