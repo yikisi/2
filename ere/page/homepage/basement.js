@@ -497,7 +497,7 @@ module.exports = async (_, save_and_next_week, flags) => {
         await get_custom_basement(chara_list[1]).ask_time(
           my_life_marks.b_timer / minutes_in_a_day + 1,
           Math.floor((my_life_marks.b_timer % minutes_in_a_day) / 60),
-          my_life_marks.b_timer % 60,
+          Math.round(my_life_marks.b_timer % 60),
         );
       },
       n: i18n().ui_bs_clock,
