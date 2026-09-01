@@ -10,6 +10,7 @@ const dict = {};
 dict['zh-CN'] = new (require('./zh-CN/entry'))();
 dict['ja-JP'] = new (require('./ja-JP/entry'))();
 dict['en-US'] = new (require('./en-US/entry'))();
+dict['ru-RU'] = new (require('./ru-RU/entry'))();
 
 module.exports = {
   /**
