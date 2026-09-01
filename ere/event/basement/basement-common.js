@@ -23,7 +23,7 @@ class CustomizedBase extends CustomizedEvent {
    * @param {boolean} [base_12]
    */
   static get_cur_time(hours, minutes, base_12 = false) {
-    return this.#timon.get_clock(hours, minutes, base_12);
+    return i18n().timon.basement.get_clock(hours, minutes, base_12);
   }
 
   /** 初入地下室的欢迎 - 无人版本 */
