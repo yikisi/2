@@ -31,4 +31,5 @@ module.exports = class extends require('#i18n/zh-CN/location') {
   visitor = '访客接待室';
   clinic = '保健室';
   dubai = '迪拜';
+  moon_well = '秘汤';
 };
