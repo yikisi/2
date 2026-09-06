@@ -361,7 +361,7 @@ module.exports = class extends CustomizedEdu {
           [{ color: color_7[1], content: this.#kojo.ws_47_1.title }],
           gs,
         );
-        switch ((await this.#kojo.ws_41_1(gs, me))[0]) {
+        switch ((await this.#kojo.ws_47_1(gs, me))[0]) {
           case 1:
             wait = all_reward_in_event(this.id, { attr: [0, 40] });
             break;
