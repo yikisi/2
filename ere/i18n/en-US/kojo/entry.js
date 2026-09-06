@@ -4,6 +4,7 @@ module.exports = class extends I18nKojo {
   0 = new (require('#/i18n/en-US/kojo/1000-Player/entry'))();
   6 = new (require('#/i18n/en-US/kojo/100600-Oguri-Cap/entry'))();
   17 = new (require('#/i18n/en-US/kojo/101700-Symboli-Rudolf/entry'))();
+  19 = new (require('#/i18n/en-US/kojo/101900-Agnes-Digital/entry'))();
   301 = new (require('#/i18n/en-US/kojo/900100-Hayakawa-Tazuna/entry'))();
   302 = new (require('#/i18n/en-US/kojo/900200-Akikawa-Yayoi/entry'))();
   303 = new (require('#/i18n/en-US/kojo/900300-Otonashi-Etsuko/entry'))();

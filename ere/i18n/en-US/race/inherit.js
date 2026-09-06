@@ -26,7 +26,7 @@ module.exports = class extends require('#/i18n/zh-CN/race/inherit') {
 
   bt_remove_genes = 'Forget All Spark Effects';
   player_genes_limit_tip_template =
-    '* ${chara.uma_sex_title} Trainers can inherit up to %COUNT% Spark effects';
+    '* Umamusume Trainers can inherit up to %COUNT% Spark effects';
 
   inherit_chara_header = 'Eligible Legacies';
 

@@ -34,7 +34,7 @@ module.exports = {
         ),
       () =>
         luna.say(
-          'You think that my racing silks are ravishing? ...I do not believe the sutible adjective to describe a prison would be ravishing.',
+          'You think that my racing silks are ravishing? ...I do not believe the suitable adjective to describe a prison would be ravishing.',
         ),
     ];
     if (
@@ -51,7 +51,7 @@ module.exports = {
       era.get('status:9017:神经衰弱') > 0
     ) {
       buffer.push(
-        () => luna.say('Never ever leave my sight! I cant feel you anymore.'),
+        () => luna.say("Never ever leave my sight! I can't feel you anymore."),
         () =>
           luna.say(
             `${you.actual_name}，Are you still watching Luna? I... no longer feel myself.`,
@@ -65,7 +65,7 @@ module.exports = {
     const buffer = [
       () => emperor.say('Thee shalt not waste thy owneth time.'),
       () => emperor.say('Thee shalt not make mistakes.'),
-      () => emperor.say('Thee shalt not dissapoint me.'),
+      () => emperor.say('Thee shalt not disappoint me.'),
     ];
     if (
       era.get('status:17:精神损伤') > 0 ||
@@ -74,7 +74,7 @@ module.exports = {
       buffer.push(
         () =>
           emperor.say('Valorous thing yond i falleth asleep less and less.'),
-        () => emperor.say('Arrangeth hunts for me, thee loyal courtior'),
+        () => emperor.say('Arrange hunts for me, thou loyal courtier.'),
       );
     }
     if (
@@ -109,14 +109,14 @@ module.exports = {
   /** @param {CharaTalk} emperor Emperor */
   select_emperor(emperor) {
     const buffer = [
-      () => emperor.say('Ah. Its thee, mine own courtior'),
+      () => emperor.say("Ah. 'Tis thee, mine own courtier."),
       () =>
         emperor.say(
           'I hast bright moods. thee shouldnst maketh me disappointed',
         ),
       () =>
         emperor.say(
-          'Evrything yond hast a beginning hast an endeth, and coequal shalt i falleth, i shouldst leaveth the most wondrous for future',
+          'Everything yond hath a beginning hath an end, and so shall I fall. I should leave the most wondrous for the future.',
         ),
     ];
     get_random_entry(buffer)();
@@ -143,7 +143,7 @@ module.exports = {
       () => emperor.say_and_wait('I needeth not foolish mentors.'),
       () =>
         emperor.say_and_wait(
-          'The person with wisdom shouldst receiveth the respect, nay matter the era.',
+          'The person with wisdom should receive respect, no matter the era.',
         ),
     ];
     await get_random_entry(buffer)();
@@ -197,7 +197,7 @@ module.exports = {
           buffer.push(
             () =>
               luna.say_and_wait(
-                'Its important to accumulate your skills daily.',
+                "It's important to accumulate your skills daily.",
               ),
             () =>
               luna.say_and_wait(
@@ -213,7 +213,7 @@ module.exports = {
               ),
             () =>
               luna.say_and_wait(
-                'Lets do it step by step. I think i can keep up with that.',
+                "Let's do it step by step. I think I can keep up with that.",
               ),
           );
           break;
@@ -249,7 +249,7 @@ module.exports = {
     const buffer = [];
     if (era.get('base:17:体力') < 0.4 * era.get('maxbase:17:体力')) {
       buffer.push(
-        () => emperor.say_and_wait('I feeleth being exhaused'),
+        () => emperor.say_and_wait('I feeleth exhausted.'),
         () =>
           emperor.say_and_wait(
             'Thee needeth not to believeth me. Just followeth mine own path.',
@@ -268,14 +268,14 @@ module.exports = {
           break;
         case 1:
           buffer.push(
-            () => emperor.say_and_wait('Rome wasnt hath built in a day.'),
+            () => emperor.say_and_wait("Rome wasn't built in a day."),
             () => emperor.say_and_wait('Hmm... Courtior, bid me a gleek.'),
           );
           break;
         case 0:
           buffer.push(
             () => emperor.say_and_wait('Uninterested, perhaps.'),
-            () => emperor.say_and_wait('Dissapoint me not.'),
+            () => emperor.say_and_wait('Disappoint me not.'),
           );
           break;
         case -1:
@@ -288,7 +288,7 @@ module.exports = {
           buffer.push(
             () =>
               emperor.say_and_wait(
-                'Courtior, thee seemeth to hast messd evrything up?',
+                'Courtier, thee seemeth to hast messed everything up?',
               ),
             () => emperor.say_and_wait('Hold me in thine esteem.'),
           );
@@ -327,7 +327,7 @@ module.exports = {
     const buffer = [
       () =>
         luna.say_and_wait(
-          'Its always joyful to cook delicacies. Especially with you.',
+          "It's always joyful to cook delicacies, especially with you.",
         ),
       () =>
         luna.say_and_wait(
@@ -361,7 +361,7 @@ module.exports = {
       () => emperor.say_and_wait('Sleep...sleep...zzz...'),
       () =>
         emperor.say_and_wait(
-          'Shalt thee findeth tricky problems to solveth, waketh me up, Courtior',
+          'Shouldst thou find tricky problems to solve, wake me up, courtier.',
         ),
     ];
     await get_random_entry(buffer)();
@@ -374,7 +374,7 @@ module.exports = {
           'Games...？You have always hugged and played with me when I am a kid.',
         ),
       () =>
-        luna.say_and_wait("It's fine to play as long as we dont waste time."),
+        luna.say_and_wait("It's fine to play as long as we don't waste time."),
     ];
     await get_random_entry(buffer)();
   },
@@ -417,7 +417,7 @@ module.exports = {
         ),
       () =>
         luna.say_and_wait(
-          "It's long since we seperated apart. From now on, its best for us to stick around.",
+          "It's been a long time since we separated. From now on, it's best for us to stick together.",
         ),
     ];
     await get_random_entry(buffer)();
@@ -431,7 +431,7 @@ module.exports = {
         ),
       () =>
         emperor.say_and_wait(
-          'I shalt giveth thee the honour as longeth as thee serve me, courtior.',
+          'I shalt giveth thee the honour as longeth as thee serve me, courtier.',
         ),
     ];
     await get_random_entry(buffer)();
@@ -467,7 +467,7 @@ module.exports = {
         ),
       () =>
         luna.say_and_wait(
-          'Please only just photo and release the fish when you caught one. Its school propety.',
+          "Please just photograph and release the fish when you catch one. It's school property.",
         ),
     ];
     await get_random_entry(buffer)();
@@ -477,7 +477,7 @@ module.exports = {
     const buffer = [
       () =>
         emperor.say_and_wait(
-          'Isnt racing on the field considered to beest fishing?',
+          "Isn't racing on the field considered to be fishing?",
         ),
       () => emperor.say_and_wait("Liveth of the wat'rs..."),
     ];
@@ -502,7 +502,7 @@ module.exports = {
     const buffer = [
       () =>
         emperor.say_and_wait(
-          'Its the duty of the emperor to inspecteth hs lands.',
+          "'Tis the duty of the Emperor to inspect his lands.",
         ),
       () =>
         emperor.say_and_wait(
@@ -650,7 +650,7 @@ module.exports = {
       );
     } else {
       await luna.say_and_wait(
-        'We might face problems in the midway of our jounneys.',
+        'We might face problems midway through our journeys.',
       );
       await era.printAndWait([
         luna.get_colored_name(),
@@ -661,9 +661,9 @@ module.exports = {
       await era.printAndWait([you.get_colored_name(), ' mood went dark']);
       await era.printAndWait([you.get_colored_name(), ' knows.']);
       await era.printAndWait(
-        'If you dont see how twisted the future pathways are, but bear the punishment from the godnesses...',
+        "If you don't see how twisted the paths of the future are, bear the punishment from the goddesses...",
       );
-      await era.printAndWait('It doesnt feels comfortable.');
+      await era.printAndWait("It doesn't feel comfortable.");
     }
   },
   /**
@@ -694,7 +694,7 @@ module.exports = {
     era.println();
     if (dice < 0.5) {
       await emperor.say_and_wait(
-        'as longeth mine power is palmy, coequal godness shall bendeth towards tou',
+        'As long as mine power is palmy, the goddesses shall bend to me.',
       );
       await era.printAndWait([
         emperor.get_colored_name(),
@@ -723,9 +723,9 @@ module.exports = {
       ]);
       await era.printAndWait([you.get_colored_name(), ' K N O W S']);
       await era.printAndWait(
-        'If you dont see how twisted the future pathways are, but bear the punishment from the godnesses...',
+        "If you don't see how twisted the paths of the future are, bear the punishment from the goddesses...",
       );
-      await era.printAndWait('It doesnt feels C O M F O R T A B L E.');
+      await era.printAndWait("It doesn't feel C O M F O R T A B L E.");
     }
   },
   /** @param {CharaTalk} luna Symboli-Rudolf/Luna */
@@ -762,7 +762,7 @@ module.exports = {
         ),
       () =>
         luna.say_and_wait(
-          'When you feel depressed, watch the leaves [fall]... so your mood dont [fall]... Hehe, what a masterpiece.',
+          "When you feel depressed, watch the leaves [fall]... so your mood doesn't [fall]... Hehe, what a masterpiece.",
         ),
     ];
     await get_random_entry(buffer)();
@@ -773,7 +773,7 @@ module.exports = {
       () => emperor.say_and_wait('Entertain me, thee courtier!'),
       () =>
         emperor.say_and_wait(
-          '...Coequal not serve me if ts be true thee cant tipeth thy toes for me.',
+          "...It would not serve me if 'tis true that thee can't even tiptoe for me.",
         ),
     ];
     await get_random_entry(buffer)();
@@ -783,9 +783,9 @@ module.exports = {
     const buffer = [
       () =>
         luna.say_and_wait(
-          'The shops are such modern nowadays? No wonder the kids gets attracted.',
+          'The shops are so modern nowadays? No wonder the kids are attracted.',
         ),
-      () => luna.say_and_wait('Its bustling over there. should we go see?'),
+      () => luna.say_and_wait("It's bustling over there. Should we go see?"),
     ];
     await get_random_entry(buffer)();
   },
@@ -809,7 +809,7 @@ module.exports = {
         'May the solis and luna accompanies you forever...',
       );
       await chara17.say_and_wait(
-        '...but, please dont ever forget about the emperor and Luna.',
+        "...but please don't ever forget about the Emperor and Luna.",
       );
       await chara17.print_and_wait([
         chara17.get_colored_name(),
@@ -820,15 +820,15 @@ module.exports = {
       );
     } else if (i_emperor) {
       await chara17.say_and_wait(
-        'Stand ho paying meaningless efforts, courtior.',
+        'Stand ho paying meaningless efforts, courtier.',
       );
     } else if (era.get('love:17') >= 75) {
       await chara17.print_and_wait([
         chara17.get_colored_name(),
-        ' Lips open, but not a inch of sound could be made.',
+        ' Lips open, but not an inch of sound could be made.',
       ]);
       await chara17.say_and_wait('——！');
-      await chara17.say_and_wait('——Dont go...');
+      await chara17.say_and_wait("——Don't go...");
       await chara17.print_and_wait([
         chara17.get_colored_name(),
         ' Sobbing, but ',
@@ -836,7 +836,7 @@ module.exports = {
         ' is long gone...',
       ]);
       await chara17.say_and_wait(
-        'BUT YOU HAVE promis e d  m E... You... You wont go... go GO no MATTeR what——',
+        "BUT YOU HAVE PROMISED ME... You... You won't go... go GO no matter what——",
       );
     }
   },

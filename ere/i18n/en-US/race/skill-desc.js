@@ -66,7 +66,7 @@ module.exports = class extends require('#/i18n/zh-CN/race/skill-desc') {
     'Increase own velocity after entering Late-Race. Conserve some stamina if the finish is not yet in sight.';
   990011 = 'Massively increase velocity and recover endurance in Late-Race.';
   990021 =
-    'In Late-Race, immediately lose velocity and nearly climax while imagining a humiliating look of disgust. If ${chara.sex.toLowerCase()} climaxed earlier, all runners lose velocity as well.';
+    'In Late-Race, immediately lose velocity and nearly climax while imagining a humiliating look of disgust. If the skill user climaxed earlier, all runners lose velocity as well.';
   10071 = 'Begin a long spurt in Mid-Race and somewhat increase velocity.';
   100011 =
     "If you're not in the back of the pack and overtake someone during Late-Race or beyond, you will get a velocity boost and your acceleration will slightly increase.";
@@ -87,7 +87,7 @@ module.exports = class extends require('#/i18n/zh-CN/race/skill-desc') {
   100101 =
     "If you're in the middle of the pack during the second half of the final corner, your acceleration will increase.";
   100111 =
-    "If you're not in the front and overtake another runner during the final straight, your velocity slightly increase.";
+    "If you're not in the front and overtake another runner during the final straight, your velocity will slightly increase.";
   100121 =
     'During the final corner or beyond, if you were in the back of the pack and passed someone from the outside, then during the final straight, your velocity will increase.';
   100131 =
@@ -153,7 +153,7 @@ module.exports = class extends require('#/i18n/zh-CN/race/skill-desc') {
   100431 =
     'When directly competing for position on the final straight in a Showdown, your velocity will increase; on dirt tracks, your acceleration will increase too.';
   100441 =
-    "If you stay in the second half of the pack for the entire race without panicking, you will velocity up on the final corner or beyond when there's 300 m remaining in the race.";
+    "If you stay in the second half of the pack for the entire race without panicking, your velocity will increase on the final corner or beyond when there's 300 m remaining in the race.";
   100451 =
     "At a random point during Mid-Race, if you're in the top 40% but not first, your endurance will greatly recover.";
   100461 =
@@ -197,7 +197,7 @@ module.exports = class extends require('#/i18n/zh-CN/race/skill-desc') {
   100661 =
     "If you're leading by at least one length one-third through the race, your velocity will slightly increase, but then during the Last Spurt, it will marginally decrease.";
   100671 =
-    'Upon entering the final straight, increase velocity with fierce determination when well-positioned. If close to the leading ${chara.uma_sex_title}, greatly increase velocity instead.';
+    'Upon entering the final straight, increase velocity with fierce determination when well-positioned. If close to the leading Umamusume, greatly increase velocity instead.';
   100681 =
     "If you're in front of the pack, your velocity will increase at the third corner (if it's in the second half of the race), or alternatively, your acceleration will increase near the end of the race.";
   100691 =
@@ -237,7 +237,7 @@ module.exports = class extends require('#/i18n/zh-CN/race/skill-desc') {
   100871 =
     "With less than 400 meters remaining, if you're in the front and someone is about to overtake you, your velocity and acceleration will increase.";
   100881 =
-    'If you were in the middle of the pack during the final corner, then with 400 m remaining the in race, your velocity will increase; bonus velocity if the race is Medium distance and you overtook someone during Mid-Race.';
+    'If you were in the middle of the pack during the final corner, then with 400 m remaining in the race, your velocity will increase; bonus velocity if the race is Medium distance and you overtook someone during Mid-Race.';
   100891 =
     "Around the middle of the race, if you're near the front but not leading, your velocity will increase and your endurance will slightly recover; bonus endurance recovery in races of at least 2400 m.";
   100901 =
@@ -337,7 +337,7 @@ module.exports = class extends require('#/i18n/zh-CN/race/skill-desc') {
   110091 =
     "If you're in front during any second half straight, your velocity will increase; bonus velocity if you're first and there's another runner right behind you.";
   110101 =
-    "With 200 meters remaining in the race, your target velocity will increase if you're near the front, and you will also immediately velocity up if you're close to the first position.";
+    "With 200 meters remaining in the race, your target velocity will increase if you're near the front, and your velocity will also immediately increase if you're close to the first position.";
   110131 =
     "During the final corner or beyond, if you're in the top 4 and someone is about to overtake you, your velocity will increase.";
   110141 =
@@ -389,7 +389,7 @@ module.exports = class extends require('#/i18n/zh-CN/race/skill-desc') {
   110441 =
     "If you're in the second half of the pack on any downhill during Mid-Race or later, you will use a little extra endurance to get a velocity boost; then, during the final straight, if your motivation is at least Good, your velocity will increase.";
   110451 =
-    'When well-positioned on the final straight and very close to the ${chara.uma_sex_title} ahead, overtaking becomes easier.';
+    'When well-positioned on the final straight and very close to the Umamusume ahead, overtaking becomes easier.';
   110461 =
     "Halfway through the race, if you're near the front, your velocity will increase; if this is a dirt race, you will also recover endurance.";
   110481 =
@@ -397,7 +397,7 @@ module.exports = class extends require('#/i18n/zh-CN/race/skill-desc') {
   110501 =
     "If you're in the middle of the pack during the second half of the final corner in Late-Race, your velocity will increase.";
   110511 =
-    "With 200 meters remaining in the race, if you're not in the lead but also not in the back of the pack, your velocity will increase; if there are at 3 other runners around you, you will also get an velocity boost.";
+    "With 200 meters remaining in the race, if you're not in the lead but also not in the back of the pack, your velocity will increase; if there are at least 3 other runners around you, you will also get a velocity boost.";
   110531 =
     "If you're in the first half of the pack (but not in the lead) with 200 m remaining, your velocity will increase; bonus velocity if the race is Sprint and you've overtaken someone since entering Late-Race.";
   110561 =
@@ -1089,9 +1089,9 @@ module.exports = class extends require('#/i18n/zh-CN/race/skill-desc') {
   202122 =
     "If you're in the middle of the pack at a random point during the second half of the race, your velocity and acceleration will slightly increase.";
   202131 =
-    "Medium・If you're in the front during Mid-Race, you will drain the velocity of the runners behind you and velocity up yourself.";
+    "Medium・If you're in the front during Mid-Race, you will drain the velocity of the runners behind you and increase your own velocity.";
   202132 =
-    "Medium・If you're in the front during Mid-Race, you will slightly drain the velocity of the runners behind you and slightly velocity up yourself.";
+    "Medium・If you're in the front during Mid-Race, you will slightly drain the velocity of the runners behind you and slightly increase your own velocity.";
   202151 =
     'At a random point during Mid-Race, use a little extra endurance to increase your velocity greatly.';
   202152 =
@@ -1163,13 +1163,13 @@ module.exports = class extends require('#/i18n/zh-CN/race/skill-desc') {
   202343 =
     'Dirt・Your Speed stat is increased by 40 in races with Heavy or Bad track condition.';
   202351 =
-    "Dirt・If you're in the lead during Early-Race and there's another runner right behind you, ${chara.sex.toLowerCase()} will slow down.";
+    "Dirt・If you're in the lead during Early-Race and there's another runner right behind you, the skill user will slow down.";
   202352 =
-    "Dirt・If you're in the lead during Early-Race and there's another runner right behind you, ${chara.sex.toLowerCase()} will slow down a little.";
+    "Dirt・If you're in the lead during Early-Race and there's another runner right behind you, the skill user will slow down a little.";
   202361 =
-    'In the second half of the race, intimidate any ${chara.uma_sex_title} who recovers endurance.';
+    'In the second half of the race, intimidate any Umamusume who recovers endurance.';
   202362 =
-    'In the second half of the race, mildly intimidate any ${chara.uma_sex_title} who recovers endurance.';
+    'In the second half of the race, mildly intimidate any Umamusume who recovers endurance.';
   202371 = 'At a random point during Mid-Race, your velocity will increase.';
   202372 =
     'At a random point during Mid-Race, your velocity will slightly increase.';
@@ -1848,7 +1848,7 @@ module.exports = class extends require('#/i18n/zh-CN/race/skill-desc') {
   204312 =
     "Sprint・If you're in the first half of the pack at a random point during the first half of Late-Race, your acceleration will slightly increase.";
   204322 =
-    'Somewhat increase velocity in Mid-Race. If at least 2 ${chara.uma_sex_title} in the race have ``Perfect Harmony``, mildly increase velocity instead.';
+    'Somewhat increase velocity in Mid-Race. If at least 2 Umamusume in the race have ``Perfect Harmony``, mildly increase velocity instead.';
   204331 = 'At a random point during Mid-Race, your velocity will increase.';
   204332 =
     'At a random point during Mid-Race, your velocity will slightly increase.';
@@ -2202,7 +2202,7 @@ module.exports = class extends require('#/i18n/zh-CN/race/skill-desc') {
   901001 =
     "Very slightly increase velocity when positioned toward the front with 300m remaining. If it's a dirt race and the skill user is close to the lead, also very slightly surge ahead.";
   901021 =
-    'If an ${chara.uma_sex_title} remains close ahead or behind for a long time while in midpack during the first half of the race, recover a very small amount of endurance. Then, slightly increase velocity for a short time on a straight around Mid-Race.';
+    'If an Umamusume remains close ahead or behind for a long time while in midpack during the first half of the race, recover a very small amount of endurance. Then, slightly increase velocity for a short time on a straight around Mid-Race.';
   901031 =
     'When contending toward the front in Mid-Race, mildly increase velocity for a short time. Then, if a Showdown occurs, fractionally surge forward for a short time.';
   901041 =
@@ -2254,7 +2254,7 @@ module.exports = class extends require('#/i18n/zh-CN/race/skill-desc') {
   901321 = 'Somewhat increase velocity at some point approaching Late-Race.';
   901331 = 'Very slightly increase velocity for a short time around Mid-Race.';
   901341 =
-    'In Mid-Race, steadily increase velocity somewhat when positioned toward the front with at least 2 ${chara.uma_sex_title} nearby.';
+    'In Mid-Race, steadily increase velocity somewhat when positioned toward the front with at least 2 Umamusume nearby.';
   901351 =
     'Steadily increase velocity somewhat in the second half of the race. In races of 2000m or longer, somewhat increase acceleration for a short time during the Final Spurt.';
   901361 =
@@ -2456,7 +2456,7 @@ module.exports = class extends require('#/i18n/zh-CN/race/skill-desc') {
   108501111 =
     "At a random point on the final corner, if you're not in the front, your velocity will greatly increase, and you will slow down three closest runners both ahead and behind you.";
   108501211 =
-    "Sprint/Mile・If you're about to overtake someone in the second half of the pack during Late-Race, your acceleration will increase and you will slow down runners around(?) you.";
+    "Sprint/Mile・If you're about to overtake someone in the second half of the pack during Late-Race, your acceleration will increase and you will slow down the runners around you.";
   108601111 =
     "Mile/Medium・If you're in the first half of the pack during the 3rd corner, your velocity will greatly increase.";
   108601211 =

@@ -60,7 +60,7 @@ module.exports = class extends require('#/i18n/zh-CN/table/status') {
   22 = 'Suppressant';
   23 = (t) => `Horse Whisperer (${t})`;
   24 = 'Fondness Glasses';
-  25 = 'Uma Jump Count Glasses';
+  25 = 'Umapyoi Count Glasses';
   26 = 'X-Ray Glasses';
 
   30 = 'Period';
@@ -68,11 +68,11 @@ module.exports = class extends require('#/i18n/zh-CN/table/status') {
   32 = 'Special Leave';
   33 = 'Lewd Crest Sticker';
 
-  35 = 'Uma Jump Z';
-  36 = 'Furon K';
-  37 = 'Furon P';
-  38 = 'Super Uma Jump Z';
-  39 = 'Uma Jump S';
+  35 = 'Umapyoi Z';
+  36 = 'Furlong K';
+  37 = 'Furlong P';
+  38 = 'Super Umapyoi Z';
+  39 = 'Umapyoi S';
   40 = 'Condom Dissolved!';
   41 = 'Contraception';
   42 = 'Contraception';

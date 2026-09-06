@@ -25,9 +25,9 @@ module.exports = class extends (
   pa_notify_keep = (chara) => [
     'Next week, ',
     chara.get_colored_name(),
-    ' will try to stay in  ',
+    ' will try to stay in ',
     chara.get_colored_name(),
-    ' current form…',
+    "'s current form…",
   ];
   pa_notify_transform = (chara, aim) => [
     'Next week, ',
@@ -66,7 +66,7 @@ module.exports = class extends (
 
   moral_damage = (c) => `Mental Damage${c === 1 ? '' : `(${c})`}`;
   moral_damage_desc = (c, debuff, buff) =>
-    `Training effects of Luna-${debuff}%，Training effects of the Emperor+${buff}%${c < 6 ? '；6 layers of [Mental Damage] gives [Nervous Breakdown]' : ''}.`;
+    `Training effects of Luna-${debuff}%, Training effects of the Emperor+${buff}%${c < 6 ? '; 6 layers of [Mental Damage] gives [Nervous Breakdown]' : ''}.`;
 
   r_fallen = 'Nervous Breakdown';
   fallen = 'Nervous breakdown!';

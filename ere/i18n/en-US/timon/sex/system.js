@@ -82,7 +82,7 @@ module.exports = {
   use_medicine_header: 'Which drug to use?',
   no_medicine_notification: 'No drugs available',
   /**
-   * Use Super Uma Jump Z
+   * Use Super Umapyoi Z
    * @param {CharaTalk} chara
    * @param {string} item
    */
@@ -99,7 +99,7 @@ module.exports = {
     ]);
   },
   /**
-   * Use Uma Jump S
+   * Use Umapyoi S
    * @param {CharaTalk} chara
    * @param {string} item
    */
@@ -206,7 +206,7 @@ module.exports = {
    * No consent/mark: choose drugs
    * @param {CharaTalk} chara target
    * @param {CharaTalk} you player
-   * @param {1|2} medicine_type 1 Super Uma Jump Z, 2 Uma Jump S
+   * @param {1|2} medicine_type 1 Super Umapyoi Z, 2 Umapyoi S
    * @param {boolean} success whether it succeeds
    */
   async drug(chara, you, medicine_type, success) {
@@ -247,7 +247,7 @@ module.exports = {
     }
   },
   /**
-   * Special scene after rape via Super Uma Jump Z
+   * Special scene after rape via Super Umapyoi Z
    * @param {CharaTalk} chara
    * @returns {Promise<void>}
    */
@@ -701,19 +701,19 @@ module.exports = {
    */
   async ero_report(taste, minoru, riko, glasse, cocon) {
     taste.say_as_unknown('A N N O U N C I N G! Climax Report~♫');
-    minoru.say_as_unknown('Here is a quick recap of this Uma Jump session~');
+    minoru.say_as_unknown('Here is a quick recap of this Umapyoi session~');
     // 1% chance Riko freezes up and Glasse/Cocon cheer
     if (Math.random() < 0.01) {
       await riko.say_as_unknown_and_wait("I… if you don't like it…");
       await cocon.say_as_unknown_and_wait('Trainer~');
       await glasse.say_as_unknown_and_wait('Go, Trainer~ go!');
       await riko.say_as_unknown_and_wait(
-        '…Please turn on [Uma Jump Result Briefing] in the settings during the next Uma Jump…',
+        '…Please turn on [Umapyoi Result Briefing] in the settings during the next Umapyoi…',
       );
       await riko.say_as_unknown_and_wait('…Oh~');
     } else {
       await riko.say_as_unknown_and_wait(
-        "If you don't like this, please turn on [Uma Jump Result Briefing] in the settings during the next Uma Jump~",
+        "If you don't like this, please turn on [Umapyoi Result Briefing] in the settings during the next Umapyoi~",
       );
     }
   },

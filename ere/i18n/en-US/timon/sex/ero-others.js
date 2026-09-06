@@ -821,7 +821,7 @@ module.exports = {
         chara.uma_sex_title,
         "'s nose is sharp, and the lewd scent on ",
         you.get_colored_name(),
-        ' advertises that recent Uma Jump to anyone nearby.',
+        ' advertises that recent Umapyoi to anyone nearby.',
       ]);
       era.print([
         'Catching the scent, ',
@@ -840,7 +840,7 @@ module.exports = {
       era.print([
         'The lewd scent on ',
         you.get_colored_name(),
-        ' advertises that recent Uma Jump to anyone nearby.',
+        ' advertises that recent Umapyoi to anyone nearby.',
       ]);
       era.print([
         'Noticing it, ',

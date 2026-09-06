@@ -353,7 +353,7 @@ module.exports = {
         ' could not simply come along.',
       ]);
       await luna.print_and_wait(
-        'Even on paths ${luna.sex} knew by heart, Luna kept drifting off course.',
+        `Even on paths ${luna.sex} knew by heart, Luna kept drifting off course.`,
       );
       await luna.print_and_wait([
         `${luna.sex} suddenly realized ${luna.sex} had grown used to someone standing beside ${luna.sex === 'She' ? 'her' : 'him'}—someone who endured every selfish lean.`,
@@ -375,7 +375,7 @@ module.exports = {
       await luna.print_and_wait([
         'If ',
         you.get_colored_actual_name(),
-        ' were here, lying in this bed beside ${luna.sex === "she" ? "her" : "him"}... then...',
+        ` were here, lying in this bed beside ${luna.sex === 'she' ? 'her' : 'him'}... then...`,
       ]);
       await luna.print_and_wait(
         '—One kiss would become another, until neither of them wanted to breathe apart.',
@@ -384,7 +384,7 @@ module.exports = {
         '—The breath would be so close, so warm, it would leave no room for loneliness.',
       );
       await luna.print_and_wait(
-        'Marks would linger on ${luna.sex === "she" ? "her" : "his"} shoulders and collarbone.',
+        `Marks would linger on ${luna.sex === 'she' ? 'her' : 'his'} shoulders and collarbone.`,
       );
       if (luna.sex_code - 1) {
         await luna.print_and_wait(
@@ -392,7 +392,7 @@ module.exports = {
         );
       }
       await luna.print_and_wait(
-        '—Even ${luna.sex === "she" ? "her" : "his"} long legs would be drawn into that slow, lingering touch.',
+        `—Even ${luna.sex === 'she' ? 'her' : 'his'} long legs would be drawn into that slow, lingering touch.`,
       );
       await luna.print_and_wait(
         '—Neither of them would stop reaching for more.',

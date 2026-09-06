@@ -1,4 +1,4 @@
-# Translator Explainations
+# Translator Explanations
 
 First, Massive thanks to the Author for the marvellous plot of Symboli Rudolf.
 
@@ -9,6 +9,6 @@ In edu-17:
 * the last event, I used a part of the Poem "The Drop Dies In The Water" By Mirza Ghalib. I was inspired by "The Drop" by the Latvian composer Andris Dzenītis.
 
 In love-17:
-* eally appreciated the use of 阴晴圆缺 in the titles for the 4 events, which is famous from a famous poet, according to my friend. To translate that, I utilised the I Ching Hexagram 55 "Feng" Translated by Sir James Legge. I think this fits well.
+* Really appreciated the use of 阴晴圆缺 in the titles for the 4 events, which is famous from a famous poet, according to my friend. To translate that, I utilised the I Ching Hexagram 55 "Feng" translated by Sir James Legge. I think this fits well.
 
 All in all, this entire kojo is absolutely stunning and amazing, my appreciations :)

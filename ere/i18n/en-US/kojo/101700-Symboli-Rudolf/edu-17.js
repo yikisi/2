@@ -89,7 +89,7 @@ module.exports = {
           );
         } else {
           await chara17.say_and_wait(
-            'I don;t have such high of an expectation.',
+            "I don't have such high of an expectation.",
           );
         }
       }
@@ -121,7 +121,7 @@ module.exports = {
         `${you.name} dashes towards the changing room, knowing that all umas would've returned to the changing room after the race ends.`,
       );
       await era.printAndWait(
-        `${you.name} arrived before the doors of the chaning room of ${luna.name}, but found out that you can't open the door no matter what.`,
+        `${you.name} arrived before the doors of the changing room of ${luna.name}, but found out that you can't open the door no matter what.`,
       );
       era.printButton('「Luna?!」', 1);
       era.printButton('「My Lord!!!」', 2);
@@ -251,7 +251,7 @@ module.exports = {
         1,
       );
       era.printButton(
-        '「The Emperor shall engulf the world! ${luna.sex} shall engulf the world!」',
+        `「The Emperor shall engulf the world! ${luna.sex} shall engulf the world!」`,
         2,
       );
       await era.input();
@@ -263,7 +263,7 @@ module.exports = {
         `In that day, Japanese umas lost the Japan cup once more.`,
       );
       await era.printAndWait(
-        'Its fine... Its fine. Everything will evovle better eventually with Luna.',
+        "It's fine... It's fine. Everything will evolve better eventually with Luna.",
       );
       await era.printAndWait(
         `${you.name} comforted Luna, erasing her worries and distress.`,
@@ -329,7 +329,7 @@ module.exports = {
       era.printButton('「The might of the Emperor will be proven.」', 2);
       const ret = await era.input();
       await era.printAndWait(
-        `Suprised by the words of ${you.name}, ${chara17.name} beamed.`,
+        `Surprised by the words of ${you.name}, ${chara17.name} beamed.`,
       );
       if (i_emperor) {
         await chara17.say_and_wait(
@@ -337,7 +337,7 @@ module.exports = {
         );
       } else {
         await chara17.say_and_wait(
-          "Perhaps that's my instinct from the stimuli? I still feel the tremour even though I don't run anymore.",
+          "Perhaps that's my instinct from the stimuli? I still feel the tremor even though I don't run anymore.",
         );
       }
       return [ret];
@@ -353,10 +353,10 @@ module.exports = {
      */
     const f = async (luna, you) => {
       await era.printAndWait(
-        'Its a new year since you have became comrades with Rudolf.',
+        "It's a new year since you have become comrades with Rudolf.",
       );
       await era.printAndWait(
-        `Unstoppping tremours and fears have made ${you.name} toss and turn every night.`,
+        `Unstopping tremors and fears have made ${you.name} toss and turn every night.`,
       );
       await era.printAndWait(
         `But the cold breeze of the new year have encouraged ${you.name}.`,
@@ -708,7 +708,7 @@ module.exports = {
         `After ${you.name} and ${chara17.name} went their separate ways, ${chara17.sex} quietly made her way to the academy courtyard alone.`,
       );
       await chara17.print_and_wait(
-        'As she gazed at the statues of the Three Goddesses, reliving the sight of her entry into the Realm, the greatest ${chara17.uma_sex_title} of the generation slowly clenched her fist.',
+        `As she gazed at the statues of the Three Goddesses, reliving the sight of her entry into the Realm, the greatest ${chara17.uma_sex_title} of the generation slowly clenched her fist.`,
       );
       if (i_emperor) {
         await chara17.say_and_wait("N'y shackles ought e'er to exist. Ne'er.");
@@ -903,7 +903,7 @@ module.exports = {
       await era.printAndWait(
         `Hidden away from the world, ${you.name} bowed and finally let their tears flow freely.`,
       );
-      era.printButton('「Congradulations...」', 1);
+      era.printButton('「Congratulations...」', 1);
       era.printButton(
         '「The greatest achievement... The world has ever seen...」',
         2,
@@ -1058,7 +1058,7 @@ module.exports = {
       );
       await luna.say_and_wait("I'm fine...", true);
       await era.printAndWait(
-        `${you.name} understood the words spoken only through ${luna.sex}'s lips. Never had been able to defy her will... not from childhood until now...`,
+        `${you.name} understood the words spoken only through ${luna.sex}'s lips. They had never been able to defy her will... not from childhood until now...`,
       );
       era.printButton("「No... it's nothing serious.」", 1);
       era.printButton('「My bad...」', 2);
@@ -1352,7 +1352,7 @@ module.exports = {
         "By April, the fan appreciation festival — the one everyone's been waiting for — will finally begin.",
       );
       await era.printAndWait(
-        `${you.name} isn't thrilled about it, but like it or not, an mock match will follow the opening ceremony.`,
+        `${you.name} isn't thrilled about it, but like it or not, a mock match will follow the opening ceremony.`,
       );
       await era.printAndWait(
         `Though only a mock race, it promises to be every bit as fierce as the real thing.`,
@@ -1368,7 +1368,7 @@ module.exports = {
         `As the mock race drew near, the sight of Luna's fatigue made ${you.name} flinch.`,
       );
       await era.printAndWait(
-        'Training alone would have been enough, but add to that her student council duties and the burden of running the entire event — iy had simply asked too much of Luna.',
+        'Training alone would have been enough, but add to that her student council duties and the burden of running the entire event — it had simply asked too much of Luna.',
       );
       await era.printAndWait("—Take a break, won't you?");
       await era.printAndWait(
@@ -1701,7 +1701,7 @@ module.exports = {
       await chara17.print_and_wait('Huff... Huff...');
       await chara17.print_and_wait('Ha... a... gh...');
       await chara17.print_and_wait(
-        `The world before ${chara17.name}'s eyes tremours; everything in ${chara17.sex} sight blurs into haze.`,
+        `The world before ${chara17.name}'s eyes trembles; everything in ${chara17.sex}'s sight blurs into a haze.`,
       );
       await chara17.print_and_wait(
         `Vertigo and agony wash in like the sea, wave after wave. The Zone is casting her out — ${chara17.name} realizes it now.`,
@@ -1836,7 +1836,7 @@ module.exports = {
       await chara17.print_and_wait('Huff... Huff...');
       await chara17.print_and_wait('Ha... a... gh...');
       await chara17.print_and_wait(
-        `The world before ${chara17.name}'s eyes tremours; everything in ${chara17.sex} sight blurs into haze.`,
+        `The world before ${chara17.name}'s eyes trembles; everything in ${chara17.sex}'s sight blurs into a haze.`,
       );
       await chara17.print_and_wait(
         `Vertigo and agony wash in like the sea, wave after wave. The Zone is casting her out — ${chara17.name} realizes it now.`,
@@ -1969,7 +1969,7 @@ module.exports = {
         `The ${chara17.uma_sex_title}「【Elysium】... when I first heard it, I had no idea a single name could hold a sight so vast and so beautiful.」`,
       );
       await luna.print_and_wait(
-        'The ${chara17.uma_sex_title}「Z nového světa. A new world.」',
+        `The ${chara17.uma_sex_title}「Z nového světa. A new world.」`,
       );
       await luna.print_and_wait(
         `The ${chara17.uma_sex_title}「Maybe living things dwell here as well, feeling all that we feel.」`,
@@ -1978,7 +1978,7 @@ module.exports = {
         `The ${chara17.uma_sex_title}「Full of vivid tales and blazing hopes; of romance and love and hard-fought battles.」`,
       );
       await luna.print_and_wait(
-        'The ${chara17.uma_sex_title}「At last, I have arrived—」',
+        `The ${chara17.uma_sex_title}「At last, I have arrived—」`,
       );
       await luna.print_and_wait(
         `The ${chara17.uma_sex_title}'s gallop fades to a walk, the walk to stillness; she halts before the Goddesses.'`,
@@ -2295,7 +2295,7 @@ module.exports = {
         `Even if it means the two of us will never meet again'... so ${chara17.sex} said... ${chara17.sex} would still give up everything, gladly, all of it.`,
       );
       await era.printAndWait(
-        `The Emperor's sharp eyes are clouded with bewilderment. Try as ${chara17.sex} might, ${chara17.sex} cannot recall who it was that dared prattle so loudly inside the own mind.`,
+        `The Emperor's sharp eyes are clouded with bewilderment. Try as ${chara17.sex} might, ${chara17.sex} cannot recall who it was that dared prattle so loudly inside their own mind.`,
       );
       await emperor.say_and_wait(`And who, then, was ${chara17.sex}?`);
       await era.printAndWait(
