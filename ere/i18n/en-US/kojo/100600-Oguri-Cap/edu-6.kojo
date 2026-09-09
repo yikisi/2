@@ -275,7 +275,7 @@ worry:
     - %YOU% could only pretend to look down at the stopwatch to hide the flush of discomfort.
     -
     - acc: 1
-      content: 「...1:35.6. Not bad at all.」
+      content: '「...1:35.6. Not bad at all.」'
     -
     - color: %COLOR%
       content:
@@ -295,7 +295,7 @@ worry:
     -
     - Central's competitive level is absurdly high. Even an Umamusume considered weak by URA standards could dominate once dropped to the local scene.
     - Tenka Touitsu, Naimurabully, Fukenpoem—all examples of exactly that.
-    - There was once a Central-to-local transfer named Marukawa Senyou who, when interviewed, told an upstart junior: "The gap between you and me is wider than the gap between me and Symbol Rudolf!"
+    - 'There was once a Central-to-local transfer named Marukawa Senyou who, when interviewed, told an upstart junior: "The gap between you and me is wider than the gap between me and Symbol Rudolf!"'
     -
     - In other words, Oguri Cap going the other direction—local to Central—might not maintain that same dominance once the scales tipped against %SEX%.
     -
@@ -540,7 +540,7 @@ sea:
           content: Tamamo Cross
         - 「Judging by that face, she's probably doing it on her own, huh.」
     -
-    - Tamamo Cross explained briefly: Oguri had done a pace-running drill with Super Creek on the beach, and afterward %SEX% had stubbornly refused to leave.
+    - "Tamamo Cross explained briefly: Oguri had done a pace-running drill with Super Creek on the beach, and afterward %SEX% had stubbornly refused to leave."
     - After parting with Tamamo Cross, %YOU% rushed to the beach and spotted a flash of white fur blazing under the moonlight.
     - %YOU% called out the moment %SEX% stopped.
     -
@@ -725,7 +725,7 @@ mile_cha_win:
         - 「Ah... yeah, I do miss Kasamatsu and the people there.」
     -
     - Oguri Cap hailed from Kasamatsu in Gifu—a run-down little town whose population never really cracked twenty thousand.
-    - Kasamatsu's streets were the opposite of flashy Tokyo: quiet.
+    - "Kasamatsu's streets were the opposite of flashy Tokyo: quiet."
     - Back there, Oguri Cap could sprint freely down the roads. In Tokyo, %SEX% was stuck on speed-limited Umamusume-only lanes.
     - Life at Trésen was busy—glory and applause had become routine, every day bringing something new.
     - But in idle moments, Oguri Cap would sometimes stare off in one particular direction—toward Kasamatsu.
@@ -768,7 +768,7 @@ back_home1:
     - The moment they reached the front door, both their expressions froze.
     -
     - acc: 1
-      content: 「...Did we remember to tell your mother we were coming?」
+      content: '「...Did we remember to tell your mother we were coming?」'
     -
     - They stared at each other, equally blank, then simultaneously slapped their foreheads.
     - A triumphant homecoming—and they'd forgotten to give a heads-up.
@@ -826,7 +826,7 @@ back_home1:
     - acc: 1
       content: 「That's not—!」（Adoration +2）
     -
-    - Face burning, %YOU% scrambled to explain: what Oguri meant was the daily management and race scheduling between trainer and %UMA%.
+    - "Face burning, %YOU% scrambled to explain: what Oguri meant was the daily management and race scheduling between trainer and %UMA%."
     - In the panic, %YOU% might have accidentally let slip some internal information that shouldn't have been shared—hopefully Oguri's mom could keep a secret.
     - Meanwhile, the instigator herself simply smiled and half-listened to the explanation.
     - Setting aside Oguri Cap's baffling answer, %YOU% was certain the mom had done that on purpose.
@@ -891,7 +891,7 @@ back_home2:
 arim_kin_1:
   title: Oguri Samba (Part 1)
   lines:
-    - The year's grandest event: the Arima Kinen. Fan vote result—second place. Oguri Cap in the flesh was in the paddock doing stretches.
+    - "The year's grandest event: the Arima Kinen. Fan vote result—second place. Oguri Cap in the flesh was in the paddock doing stretches."
     - The first-place finisher in the vote, Tamamo Cross, sauntered over after finishing the parade lap, wearing a mischievous grin.
     -
     - color: %T_COLOR%
@@ -1295,8 +1295,8 @@ elephant:
   lines:
     - This era where even people's attention spans are treated as economic commodities is hard to stomach.
     - Oguri Cap's recurring injuries and upcoming retirement had become a traffic goldmine under the double assault of traditional and social media.
-    - Even people who barely followed the %UMA% industry were posting tributes on social media—things like: "Saluting legendary basketball star Oguri Cap!"
-    - As laughable as the complete cluelessness of such posts was, the fact remained: %SEX%'s fame had reached that level.
+    - 'Even people who barely followed the %UMA% industry were posting tributes on social media—things like: "Saluting legendary basketball star Oguri Cap!"'
+    - "As laughable as the complete cluelessness of such posts was, the fact remained: %SEX%'s fame had reached that level."
     -
     - content:
         - fontWeight: bold
@@ -1406,7 +1406,7 @@ arim_kin_final:
     -
     - %YOU% drew a deep breath, trying to tamp down the emotions churning inside, and stepped to the trackside to check Oguri's condition.
     - Three years hadn't left visible marks on %SEX%'s body. Those legs were still powerful. But both of them knew how much damage the long grind had truly done.
-    - Compared to the battle-worn veteran Oguri Cap, the other standout entry in this Arima Kinen was the Classic-year supernova: Mejiro Ryan.
+    - "Compared to the battle-worn veteran Oguri Cap, the other standout entry in this Arima Kinen was the Classic-year supernova: Mejiro Ryan."
     -
     - Mejiro Ryan had been on fire lately—third in the Satsuki Sho, second in the Derby, third in the Kikuka Sho.
     - %SEX% hadn't claimed the Triple Crown, but placing top three in all three legs was nothing to scoff at.
@@ -1545,7 +1545,7 @@ arim_kin_final_win:
     -
     - After the grand curtain call, Oguri Cap's era would end.
     -
-    - Some time later, %YOU% heard someone say: "In that Arima Kinen, it was a god running inside Oguri Cap."
+    - 'Some time later, %YOU% heard someone say: "In that Arima Kinen, it was a god running inside Oguri Cap."'
     - %YOU% neither agreed nor disagreed.
     -
     - In that moment, %YOU% hadn't seen a god in %SEX%.
@@ -1718,7 +1718,7 @@ palace_start:
     -
     - Oguri Cap nodded firmly. %YOU% knew that even without a word of encouragement, %SEX% would never refuse a clash of titans.
     - Go, Oguri.
-    - Show the world: it wasn't you who missed the Derby—it was the Derby that missed you!
+    - "Show the world: it wasn't you who missed the Derby—it was the Derby that missed you!"
 
 #资深级 ？月 第？周 （G？） 拟・日本德比 出走 东京 芝 2400m（中距离）左·内
 #指定强敌：Symboli Rudolf、千明代表、天狼象征、樱花千代王、Tamamo Cross、八重无敌
@@ -1735,7 +1735,7 @@ palace_end:
     - %SEX% panted hard, pace gradually slowing, drifting toward %YOU% out of habit.
     -
     - acc: 1
-      content: 「...Well done, Oguri.」
+      content: '「...Well done, Oguri.」'
     -
     - %YOU% handed over a towel and an energy drink, nodding to the other runners in acknowledgment.
     -
@@ -1936,7 +1936,7 @@ nightmare:
   title: Nightmare
   lines:
     - Something was off about Oguri Cap. %YOU% could tell %SEX% was more distracted than usual, but didn't call it out directly.
-    - For example, right now: whenever %YOU% browsed Classic Triple Crown news on the computer, %SEX% would drift behind %YOU%'s shoulder to read along—thinking %YOU% hadn't noticed.
+    - "For example, right now: whenever %YOU% browsed Classic Triple Crown news on the computer, %SEX% would drift behind %YOU%'s shoulder to read along—thinking %YOU% hadn't noticed."
     - Clearly still hung up on the Classic races.
     -
     - acc: 1
@@ -1983,7 +1983,7 @@ nightmare:
     -
     - Oguri Cap's world spun. Impossible... %SEX% clearly remembered that back then—!
     - On the third shelf, dead center of the elegant cabinet, a jaw-dropping trophy stood quietly. Beside it, a championship pennant folded crisp as a block of tofu.
-    - And engraved on that trophy's heavy base, in exquisite lettering: Satsuki Sho—Champion.
+    - "And engraved on that trophy's heavy base, in exquisite lettering: Satsuki Sho—Champion."
 
 #（隐藏）4月 第4周
 #训练员室
@@ -2216,7 +2216,7 @@ truth:
     - Finally, the searing heat of the gold light. A blinding golden chain coiled around %YOU%'s legs, turning every bone into gravity's prisoner.
     - %YOU%'s body lost all support, slowly sinking into burning earth...
     -
-    - Under tension that nearly exceeded the limits of a heartbeat, %YOU% finally understood: this was the true form of the Three Goddesses worshipped in %UMA% faith.
+    - "Under tension that nearly exceeded the limits of a heartbeat, %YOU% finally understood: this was the true form of the Three Goddesses worshipped in %UMA% faith."
     -
     - if: era.get('cflag:340:66') === 1 || era.get('cflag:341:66') === 1 || era.get('cflag:342:66') === 1
       lines:
@@ -2292,7 +2292,7 @@ truth:
     -
     - And yet, all of this was too vast—%YOU% looked at %SEX%'s forced composure facing the orb, and squeezed Oguri Cap's hand again.
     -
-    - No matter what this world truly was, no matter what the Three Goddesses had planned—for %YOU%, only one thing mattered:
+    - "No matter what this world truly was, no matter what the Three Goddesses had planned—for %YOU%, only one thing mattered:"
     -
     - acc: 1
       content: 「HAAH—!」
@@ -2304,7 +2304,7 @@ truth:
     - %YOU% shouted to reclaim %YOU%'s own strength—to shield the %UMA% who'd entrusted %SEX%'s future to %YOU%.
     -
     - acc: 1
-      content: 「...So why did you make Oguri dream those dreams?」
+      content: '「...So why did you make Oguri dream those dreams?」'
     -
     - %YOU%'s breathing was ragged—a caged beast, chest heaving from the shock of facing divinity head-on.
     -
@@ -2351,6 +2351,7 @@ prepare:
     -
     - The entire burden fell on Oguri Cap alone.
     - All %YOU% could do was prepare Oguri Cap in the real world as best as possible.
+
 #（隐藏）经典级 10月 第4周 （G1） 菊花赏
 #？？？
 #指定强敌：Darley Arabian、Godolphin Barb、Byerley Turk
@@ -2397,7 +2398,7 @@ kiku_sho:
           content: Godolphin Barb
         - 「Good morning, Oguri.」
     -
-    - The first: Godolphin Barb in blue, nodding with a smile—warmth and severity both in that gaze.
+    - "The first: Godolphin Barb in blue, nodding with a smile—warmth and severity both in that gaze."
     -
     - color: %B_COLOR%
       content:
@@ -2405,7 +2406,7 @@ kiku_sho:
           content: Byerley Turk
         - 「A 3000-meter Kikuka Sho is no joke. Have you and your Trainer prepared properly?」
     -
-    - The second: Byerly Turk, standing tall, not a trace of a smile on that stern face.
+    - "The second: Byerly Turk, standing tall, not a trace of a smile on that stern face."
     - %SEX% simply snorted, arms crossed over %SEX%'s chest. Oguri Cap couldn't shake the feeling that Byerly Turk reminded %SEX% of the Student Council President.
     -
     - acc: 1

@@ -99,7 +99,7 @@
         - 「I want to eat you.」
     -
     - acc: 1
-      content: 「...Huh?」
+      content: '「...Huh?」'
     -
     - The line was so wild it knocked every thought out of %YOU%'s head. Only one sound made it out.
     -
@@ -149,7 +149,7 @@
         - The frenzy was gone. %SEX% couldn't even make an excuse for something that stupid. Both ears and the tail—the parts that show an %UMA%'s mood—hung low, regret and fear all over Oguri.
         -
         - acc: 1
-          content: 「...Oguri.」
+          content: '「...Oguri.」'
         -
         - color: %COLOR%
           content:
@@ -192,7 +192,7 @@
         - The frenzy was gone. %SEX% couldn't even make an excuse for something that stupid. Both ears and the tail—the parts that show an %UMA%'s mood—hung low, regret and fear all over Oguri.
         -
         - acc: 1
-          content: 「...Oguri.」
+          content: '「...Oguri.」'
         -
         - color: %COLOR%
           content:

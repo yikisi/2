@@ -14,7 +14,7 @@ module.exports = {
     const f = async (luna, you) => {
       await luna.print_and_wait('Her fate was fixed the instant she was born.');
       await luna.print_and_wait([
-        'Luna, an Uma',
+        'Luna, an ',
         luna.uma_sex_title,
         ' born into the Symboli Studs.',
       ]);
