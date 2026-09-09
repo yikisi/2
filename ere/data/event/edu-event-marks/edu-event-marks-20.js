@@ -11,6 +11,11 @@ class SkyEduMarks extends EduEventMarks {
   // 前回行动
   action;
 
+  // 商店街 - 抽奖 - 特等奖
+  o_s_reward;
+  // 车站 - 约会
+  o_s_dating;
+
   constructor() {
     super(20);
     EduEventMarks.register_marks(this);

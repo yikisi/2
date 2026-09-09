@@ -6,6 +6,7 @@ const get_aim_race_index = require('#/event/check/snippets/get-aim-race-index');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 
 const { get_chara_color } = require('#/data/chara-colors');
+const SkyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-20');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
 
@@ -47,6 +48,8 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_next_week() {
+    const edu_marks = new SkyEduMarks();
+    edu_marks.action = 0;
     super.check_next_week();
   }
 
