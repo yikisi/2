@@ -213,7 +213,7 @@ module.exports = class extends CustomizedLove {
       ruby,
       me,
     );
-    await print_event_name('一起洗澡', ruby);
+    await print_event_name(this.#kojo.non_penetration.title, ruby);
     let _relation = 0,
       _love = 0;
     begin_and_init_ero(0, 85);

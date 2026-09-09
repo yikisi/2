@@ -13,6 +13,9 @@ class I18nKojo107100 {
 
   achieve_track_aim_template_1 = '训练失败次数：%COUNT%';
   achieve_track_aim_template_2 = '以非极佳干劲完赛次数：%COUNT%';
+
+  sick = '生病';
+  sick_desc = '不能训练与参赛';
 }
 
 module.exports = I18nKojo107100;

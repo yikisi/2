@@ -495,7 +495,7 @@ module.exports = class extends CustomizedEdu {
           dict.CALL_18 = sys_get_callname(this.id, 18);
         } else {
           dict.A_NAME = dict.UMA + 'A';
-          dict.CALL_18 = 'A同学';
+          dict.CALL_18 = i18n().name.classmate_a;
         }
         key = 'takz_kin';
       } else if (extra.race === race_enum.tenn_sho) {

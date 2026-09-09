@@ -327,11 +327,27 @@ module.exports = class extends CustomizedEdu {
         }
         era.println();
         if (era.get(`talent:${this.id}:身体素质`) === -1) {
-          era.print([ardan.get_colored_name(), ' 不再 [体弱多病] 了……']);
+          era.print(
+            i18n().get_ui_lose_talent(
+              ardan.get_colored_name(),
+              i18n().tb_talent.template.replace(
+                '%NAME%',
+                i18n().tb_talent['17_-1'],
+              ),
+            ),
+          );
           era.set(`talent:${this.id}:身体素质`, 0);
         }
         if (era.get(`talent:${this.id}:痛苦感受`) !== -1) {
-          era.print([ardan.get_colored_name(), ' 变得 [坚强] 了……']);
+          era.print(
+            i18n().get_ui_gain_talent(
+              ardan.get_colored_name(),
+              i18n().tb_talent.template.replace(
+                '%NAME%',
+                i18n().tb_talent['2_-1'],
+              ),
+            ),
+          );
           era.set(`talent:${this.id}:痛苦感受`, -1);
         }
         break;

@@ -3,7 +3,7 @@
  * i18n 框架的核心，负责注册语言库，并根据当前语言配置自动选择语言库并获取其中的词条
  */
 
-let lan = 'zh-CN';
+let lan = 'ja-JP';
 
 /** @type {Record<string,I18nEntry>} */
 const dict = {};

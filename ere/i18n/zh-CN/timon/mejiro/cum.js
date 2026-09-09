@@ -373,6 +373,7 @@ module.exports = {
     target.get_colored_name(),
     ' 做完按摩后，身体变得更润滑了……',
   ],
+  city_massage_bye: '请一路顺风～',
   city_bt_library: '「图书馆」',
   city_library_welcome: '欢迎来到目白城市立大图书馆！请问要借阅什么书籍呢？',
   // 玩家学钢之意志
@@ -450,6 +451,7 @@ module.exports = {
   city_bn_result_template: '好的，取款 %MONEY% 马币，马上为您办理～',
   city_bn_bye: '请慢走～',
   city_bt_gov: '「市政府」',
+  city_gov_tip: '可切换目白城风格，暂未开放',
   /**
    * 市政府，转换目白城形态
    * @param {CharaTalk} mayor

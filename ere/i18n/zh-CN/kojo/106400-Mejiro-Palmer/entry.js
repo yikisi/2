@@ -17,6 +17,9 @@ class I18nKojo106400 {
 
   aim_desc = '经典年 6 月第 2 周前 G3 以上比赛 1 着';
 
+  dependence = '依存心';
+  dependence_desc = '唯有你……';
+
   /**
    * @param {CharaTalk} pama
    * @param {CharaTalk} you

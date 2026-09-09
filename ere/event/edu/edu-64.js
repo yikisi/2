@@ -750,7 +750,7 @@ module.exports = class extends CustomizedEdu {
     if (era.get('flag:当前互动角色') !== this.id) {
       add_event(hook.hook, event_object);
       await era.printAndWait(
-        ['【和 ', pama.get_colored_name(), ' 去买东西吧！】'],
+        i18n().get_ui_go_shopping(pama.get_colored_name()),
         {
           color: pama.color,
         },

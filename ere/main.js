@@ -44,7 +44,7 @@ const { res_version } = require('#/versions');
 
 module.exports = async () => {
   // GLOBALNAME:3 = 语言
-  set_lan(era.get('global:3') || era.set('global:3', 'zh-CN'));
+  set_lan(era.get('global:3') || era.set('global:3', 'ja-JP'));
   set_lan_for_value(lan());
 
   let flag_title = true;

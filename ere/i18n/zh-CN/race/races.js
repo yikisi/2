@@ -311,6 +311,9 @@ class I18nRaces {
   180 = '育马者杯经典赛';
   181 = '香豌豆锦标';
   // GENERATED END
+
+  meet_dubai = '迪拜世界杯赛马日';
+  meet_hongkong = '香港国际赛事';
 }
 
 module.exports = I18nRaces;

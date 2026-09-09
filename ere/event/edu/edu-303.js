@@ -289,7 +289,7 @@ module.exports = class extends CustomizedEdu {
             printMultiColumns([
               {
                 config: { fontSize: '1.5rem', isParagraph: true },
-                content: [me.actual_name, '训练员'],
+                content: [me.actual_name, i18n().title_0],
                 type: 'text',
               },
               {

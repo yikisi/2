@@ -49,18 +49,20 @@ const { attr_enum } = require('#/data/train-const');
 
 const { i18n } = require('#/i18n/selector');
 
-const track2race = {
-  [track_enum.meydan]: {
-    color: adaptability_colors.at(-2 - class_enum.G1),
-    content: '迪拜世界杯赛马日',
-    fontWeight: 'bold',
-  },
-  [track_enum.shatin]: {
-    color: adaptability_colors.at(-2 - class_enum.G1),
-    content: '香港国际赛事',
-    fontWeight: 'bold',
-  },
-};
+function get_track2race() {
+  return {
+    [track_enum.meydan]: {
+      color: adaptability_colors.at(-2 - class_enum.G1),
+      content: i18n().race.meet_dubai,
+      fontWeight: 'bold',
+    },
+    [track_enum.shatin]: {
+      color: adaptability_colors.at(-2 - class_enum.G1),
+      content: i18n().race.meet_hongkong,
+      fontWeight: 'bold',
+    },
+  };
+}
 
 /**
  * @param {number} cid
@@ -99,7 +101,7 @@ async function check_new_activities(cur_round, in_team_list) {
       }),
     );
     era.set('cflag:0:节日事件标记', 0);
-    if (celebration === '庙会') {
+    if (cur_round % 48 === 30) {
       in_team_list.forEach((cid) =>
         era.set(
           `cflag:${cid}:节日事件标记`,
@@ -132,7 +134,7 @@ async function check_new_activities(cur_round, in_team_list) {
       sys_get_billings().reduce((p, c) => p + c.repay, 0) <=
       0
   ) {
-    era.print(['【', get_chara_talk(0).get_colored_name(), ' 即将破产！】']);
+    era.print(i18n().get_ui_bankrupt_warn(get_chara_talk(0).get_colored_name()));
   }
   /** @type {Record<string,{no_hurt:boolean,no_preg:boolean}>} */
   const in_team_status_dict = {};
@@ -169,7 +171,7 @@ async function check_new_activities(cur_round, in_team_list) {
     const info = race_infos[race];
     const location = track2location[info.track];
     const race_colored_name =
-      track2race[info.track] || info.get_colored_name_with_class();
+      get_track2race()[info.track] || info.get_colored_name_with_class();
     if (entry[1]) {
       // 远征开始
       let foreign_list = in_team_list.filter((e) => {

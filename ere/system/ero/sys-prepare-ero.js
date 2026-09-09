@@ -625,7 +625,9 @@ function end_ero(skip_jewels, log_jewels, ids) {
     let pt = era.get(`ex:${cid}:技能点获取`);
     if (pt > 0) {
       pt = Math.floor(pt / get_random_value(8, 12));
-      ret.attr[cid].push(`获得了 ${pt.toLocaleString()} 点技能点数`);
+      ret.attr[cid].push(
+        i18n().ui_get_pt_template.replace('%PT%', pt.toLocaleString()),
+      );
       era.add(`exp:${cid}:技能点数`, pt);
     }
   }

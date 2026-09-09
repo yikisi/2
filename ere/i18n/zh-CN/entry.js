@@ -300,6 +300,8 @@ class I18nEntry {
     ' 在疲惫之下受了更加严重的伤！】',
   ];
   get_ui_add_titles = (chara) => ['【', chara, ' 获得了新称号！】'];
+  get_ui_race_exhausted = (chara) => [chara, ' 深陷疲惫……'];
+  get_ui_bankrupt_warn = (you) => ['【', you, ' 即将破产！】'];
   get_ui_ignore_event_punish = (chara, you) => [
     '【因为 ',
     you,
@@ -314,6 +316,11 @@ class I18nEntry {
     chara,
     ' 无比失望】',
   ];
+  get_ui_lose_talent = (chara, talent) => [chara, ' 不再 ', talent, ' 了……'];
+  get_ui_gain_talent = (chara, talent) => [chara, ' 变得 ', talent, ' 了……'];
+  get_ui_go_shopping = (chara) => ['【和 ', chara, ' 去买东西吧！】'];
+  get_ui_wait_rooftop = (chara) => ['【', chara, ' 在天台等待】'];
+  get_ui_while_asleep = (chara) => ['【在 ', chara, ' 睡着的时候……】'];
 
   ui_time_flow = '【时间开始流动】';
   ui_new_week = '【新的一周开始了】';

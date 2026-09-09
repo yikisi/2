@@ -233,4 +233,7 @@ module.exports = class extends I18nRaces {
   180 = 'BCクラシック';
   181 = 'スイートピーステークス';
   // GENERATED END
+
+  meet_dubai = 'ドバイワールドカップミーティング';
+  meet_hongkong = '香港国際競走';
 };

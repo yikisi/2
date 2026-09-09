@@ -7,15 +7,16 @@ const ArdanEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-71')
 const LegendUmaSelector = require('#/data/race/model/legend-uma-selector');
 const { race_enum } = require('#/data/race/race-const');
 
+const di18n = require('#/i18n/extended-def');
+
 module.exports = class extends CustomizedMec {
   get_status(show_train_buff) {
     if (show_train_buff && new ArdanEduMarks().sick > 0) {
       return [
         {
+          ...di18n.kojo.get_titled_content(this.id, 'sick'),
           color: buff_colors[3],
-          content: '生病',
           fontWeight: 'bold',
-          title: '不能训练与参赛',
         },
       ];
     }

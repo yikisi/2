@@ -24,7 +24,7 @@ module.exports = class extends CustomizedLove {
   }
 
   async 49(silence, me, callname) {
-    await print_event_name('爱欲', silence);
+    await print_event_name(this.#kojo[49].title, silence);
     await print_title_with_kojo(this.#kojo, '49', silence, me, callname);
     begin_and_init_ero(400);
     await masturbate(400);

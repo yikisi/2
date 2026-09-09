@@ -77,6 +77,7 @@ class I18nDetail {
   base_clothe_change_confirm = '要更换吗？';
   base_clothe_bt_auto_select = '即时选择';
   base_clothe_bt_keep_current = '保持不变';
+  base_bt_comb_hair = '梳头';
 
   edu_title = '育成情况';
   get_edu_score = (score) => ['评价：', score];
@@ -105,6 +106,16 @@ class I18nDetail {
   edu_aim_require_20 = '出走';
   edu_aim_mark_done = '✔';
   edu_aim_mark_no = '✘';
+  get_edu_palace_end = (chara) => ['【', chara, ' 的育成结束了】'];
+  get_edu_palace_aim_header = (chara) => [chara, ' 的育成目标完成情况：'];
+  edu_palace_aim_done = '完成！';
+  get_edu_palace_miss = (chara, count) => [
+    '错过了 ',
+    chara,
+    ' 的 ',
+    count,
+    ' 个育成事件……',
+  ];
   edu_header_language = '语言技能';
 
   skill_title = '比赛技巧';

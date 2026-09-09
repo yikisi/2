@@ -37,7 +37,7 @@ function sys_handle_palace(cid) {
   /** @type {*[]} */
   const buffer = [
     {
-      content: ['【', chara.get_colored_name(), ' 的育成结束了】'],
+      content: i18n().detail.get_edu_palace_end(chara.get_colored_name()),
       type: 'text',
     },
   ];
@@ -55,12 +55,11 @@ function sys_handle_palace(cid) {
     buffer.push(
       {
         content: [
-          chara.get_colored_name(),
-          ' 的育成目标完成情况：',
+          ...i18n().detail.get_edu_palace_aim_header(chara.get_colored_name()),
           aim_count === aim_check.length
             ? {
                 color: attr_change_colors.up,
-                content: '完成！',
+                content: i18n().detail.edu_palace_aim_done,
                 fontWeight: 'bold',
               }
             : {
@@ -83,16 +82,10 @@ function sys_handle_palace(cid) {
   }
   if (miss_count) {
     buffer.push({
-      content: [
-        '错过了 ',
-        chara.get_colored_name(),
-        ' 的 ',
-        {
-          content: miss_count.toString(),
-          color: buff_colors[3],
-        },
-        ' 个育成事件……',
-      ],
+      content: i18n().detail.get_edu_palace_miss(chara.get_colored_name(), {
+        content: miss_count.toString(),
+        color: buff_colors[3],
+      }),
       type: 'text',
     });
   }

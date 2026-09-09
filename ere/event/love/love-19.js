@@ -135,7 +135,7 @@ module.exports = class extends CustomizedLove {
       me,
       callname,
       sys_get_colored_callname(0, this.id),
-      digital.sex_code === 1 ? '儿子' : '女儿',
+      digital.sex_code === 1 ? i18n().name.son : i18n().name.daughter,
     );
     await sys_love_uma_in_event(this.id);
     await quick_into_sex(this.id);

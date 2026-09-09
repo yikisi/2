@@ -44,6 +44,7 @@ class I18nNames {
   uma_girl = '马娘';
   young_master = '少爷';
   young_lady = '大小姐';
+  classmate_a = 'A同学';
   big_master = '主人大人';
   big_brother = '哥哥大人';
   big_sister = '姐姐大人';
