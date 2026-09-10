@@ -1319,7 +1319,7 @@ o_s_arcade:
             content:
               - fontWeight: bold
                 content: %CHARA%
-              - 「训练员！我们把小花、小特、光辉、小草还有神鹰%SEX%们都叫来吧！」
+              - 「训练员！我们把小花、小特、光辉、小草还有神鹰%THEY%都叫来吧！」
           - color: %COLOR%
             content:
               - fontWeight: bold
@@ -2762,3 +2762,70 @@ cl_christmas:
     - 彩灯在头顶一闪一闪的，%SEX%的手指在你掌心里，温温的，软软的。
     - %YOU%突然想一件事
     - 红酒没拿！
+
+
+# 玩家生日 回合开始时触发 好感大于200
+ws_happy_birthday:
+  title: 生日快乐！！！
+  lines:
+    - 近期繁忙的工作让%YOU%感到心力憔悴。
+    - 「哈……改完这一摞，还有……十摞……」
+    - 「最近的工作怎么这么多……下午还有青云天空的训练……」
+    - 「午饭的话……就随便买个三明治吧……」
+    -
+    - 下午——
+    - %YOU%准时来到的训练室的门前，心里边祈祷着青云天空不要迟到边拉开门。
+    - 砰！！！
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「生日快乐！训练员！！！」
+    - 「呜！」
+    - %YOU%推开门的同时一场礼花雨也落了下来，突然的爆破声让%YOU%呆愣在原地。
+    - %YOU%用目光扫了下房间，并没有什么华丽的装饰，在桌子上立了一个大大的生日快乐牌子，旁边还有有一个不算好看但堆料满满的蛋糕。
+    - （生日？）
+    - （哦对，今天是我的生日……）
+    - （天空这家伙……竟然还记得……）
+    - （这蛋糕的造型真别致……）
+    - （上面的都是……）
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「嗯？喂——训练员——摩西摩西？」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「奇怪，怎么没反应？难道是礼花崩到头了！！！训练员！！！」
+    - 以为闯祸的青云天空连忙摇晃着%YOU%的肩膀。
+    - 「停停停——天空天空，好啦我没事，只是没反应过来……」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「唔……真是的，没事就给点反应啊……」
+    - 青云天空不满的揉揉%YOU%的脸
+    - 「哈哈，抱歉抱歉，最近有点忙……」
+    - 「小青，谢谢你，我很开心……」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「嗯……的确……看你这重重的黑眼圈，最近应该很辛苦吧……」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「快来尝尝蛋糕！我亲手做的哦～不过造型嘛，可能差了点，但料我可是没少放哦～」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「今天就好好放松下吧～」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「那最后再来一遍——生日快乐！训练员！」

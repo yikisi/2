@@ -28,6 +28,13 @@ module.exports = class extends CustomizedDaily {
     return new SkyEduMarks();
   }
 
+  #sub_easy_go(val = 1) {
+    if (era.get(`cflag:${this.id}:育成回合计时`) < 3 * 48) {
+      this.#marks.easy_go = Math.max(this.#marks.easy_go - val, 0);
+      this.#marks.radiant = Math.min(this.#marks.radiant + 1, 10);
+    }
+  }
+
   good_morning() {
     this.#kojo['good_morning'](this.#dict);
   }
@@ -54,25 +61,30 @@ module.exports = class extends CustomizedDaily {
   async office_gift() {
     await this.#kojo['office_gift'](this.#dict);
     this.#marks.action = event_hooks.office_gift;
+    this.#sub_easy_go();
   }
 
   async office_cook() {
     await this.#kojo['office_cook']({ ...this.#dict, eh: event_hooks });
     this.#marks.action = event_hooks.office_cook;
+    this.#sub_easy_go();
   }
 
   async office_rest() {
     await this.#kojo['office_rest']({ ...this.#dict, eh: event_hooks });
     this.#marks.action = event_hooks.office_rest;
+    this.#sub_easy_go(2);
   }
 
   async office_game() {
     this.#marks.action = event_hooks.office_game;
+    this.#sub_easy_go();
     return await super.office_game();
   }
 
   async school_atrium(hook) {
     this.#marks.action = event_hooks.school_atrium;
+    this.#sub_easy_go();
     return await super.school_atrium(hook);
   }
 
@@ -84,11 +96,12 @@ module.exports = class extends CustomizedDaily {
     await this.#kojo['s_a_dating'](this.#dict);
   }
 
-  async school_rooftop() {
+  async school_rooftop(hook) {
     await this.#kojo['school_rooftop'](
       generate_dictionary(this.id, { uma: !0 }),
     );
     this.#marks.action = event_hooks.school_rooftop;
+    this.#sub_easy_go();
   }
 
   async out_river(hook, extra) {
@@ -98,10 +111,17 @@ module.exports = class extends CustomizedDaily {
 
   async o_r_walking(sky, me) {
     await this.#kojo['o_r_walking'](this.#dict);
+    this.#sub_easy_go();
+  }
+
+  async o_r_fishing(sky, me, hook, extra) {
+    this.#sub_easy_go(2);
+    return await super.o_r_fishing(sky, me, hook, extra);
   }
 
   async out_shopping(hook) {
     this.#marks.action = event_hooks.out_shopping;
+    this.#sub_easy_go();
     return await super.out_shopping(hook);
   }
 
@@ -160,10 +180,12 @@ module.exports = class extends CustomizedDaily {
   async o_c_pray(sky, me, dice, hook) {
     await this.#kojo['o_c_pray'](this.#dict);
     this.#marks.action = event_hooks.out_church;
+    this.#sub_easy_go();
   }
 
   async out_station(hook) {
     this.#marks.action = event_hooks.out_station;
+    this.#sub_easy_go();
     return await super.out_station(hook);
   }
 
@@ -269,5 +291,16 @@ module.exports = class extends CustomizedDaily {
       get_chara_talk(this.id),
       this.#dict,
     );
+  }
+
+  async week_start(hook, extra, ebj) {
+    if (ebj.arg === 'ws_happy_birthday') {
+      await print_title_with_kojo(
+        this.#kojo,
+        'ws_happy_birthday',
+        get_chara_talk(this.id),
+        this.#dict,
+      );
+    }
   }
 };

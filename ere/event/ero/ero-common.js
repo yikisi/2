@@ -188,6 +188,13 @@ class CustomizedEro extends CustomizedEvent {
   async next_round() {}
 
   /**
+   * 定制过夜后事件
+   * @param {(function(CharaTalk,CharaTalk):Promise)[]} buffer 过夜后事件列表，地文有：隔日清晨之早安口交、隔日清晨之裸体围裙、隔日清晨之义务履行
+   * @param {function(number):Promise} quick_into_sex 快速进入调教的函数
+   */
+  cus_morning_sex(buffer, quick_into_sex) {}
+
+  /**
    * @param {CharaTalk} chara
    * @param {CharaTalk} me
    * @param {string} callname

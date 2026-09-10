@@ -13,7 +13,9 @@ const { sys_check_remote } = require('#/system/sys-calc-chara-param');
 const print_ero_page = require('#/page/page-ero');
 
 const { get_custom_check } = require('#/event/check/check-factory');
+const { get_custom_ero } = require('#/event/ero/ero-factory');
 const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
+const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const { get_random_entry } = require('#/utils/list-utils');
@@ -142,8 +144,8 @@ async function morning_sex() {
     get(`mark:${cid}:反抗`) === 0 &&
     get(`mark:${cid}:羞耻`) === 0
   ) {
-    const buffer = [],
-      love = get(`love:${cid}`);
+    const buffer = [];
+    const love = get(`love:${cid}`);
     if (get('flag:惩戒力度') >= 2) {
       buffer.push(duty);
     } else if (love >= 75 || get(`mark:${cid}:欢愉`) >= 1) {
@@ -154,13 +156,14 @@ async function morning_sex() {
         buffer.push(naked_apron);
       }
     }
+    get_custom_ero(cid).cus_morning_sex(buffer, quick_into_sex);
     const handler = get_random_entry(buffer);
     if (handler) {
-      const my_cache = { s: get('base:0:体力'), t: get('base:0:精力') },
-        chara_cache = {
-          s: get(`base:${cid}:体力`),
-          t: get(`base:${cid}:精力`),
-        };
+      const my_cache = { s: get('base:0:体力'), t: get('base:0:精力') };
+      const chara_cache = {
+        s: get(`base:${cid}:体力`),
+        t: get(`base:${cid}:精力`),
+      };
       drawLine();
       await handler(get_chara_talk(cid), get_chara_talk(0));
       set(`status:0:沉睡`, 0);
