@@ -71,14 +71,17 @@ module.exports = class extends CustomizedDaily {
     return await super.office_game();
   }
 
+  async school_atrium(hook) {
+    this.#marks.action = event_hooks.school_atrium;
+    return await super.school_atrium(hook);
+  }
+
   async s_a_tree_hollow(sky, me, hook) {
     await this.#kojo['a_s_a_tree_hollow'](this.#dict);
-    this.#marks.action = event_hooks.school_atrium;
   }
 
   async s_a_dating(sky, me, hook) {
     await this.#kojo['s_a_dating'](this.#dict);
-    this.#marks.action = event_hooks.school_atrium;
   }
 
   async school_rooftop() {
@@ -88,9 +91,18 @@ module.exports = class extends CustomizedDaily {
     this.#marks.action = event_hooks.school_rooftop;
   }
 
+  async out_river(hook, extra) {
+    this.#marks.action = event_hooks.out_river;
+    return await super.out_river(hook, extra);
+  }
+
   async o_r_walking(sky, me) {
     await this.#kojo['o_r_walking'](this.#dict);
-    this.#marks.action = event_hooks.out_river;
+  }
+
+  async out_shopping(hook) {
+    this.#marks.action = event_hooks.out_shopping;
+    return await super.out_shopping(hook);
   }
 
   async o_s_arcade(sky, me, hook) {
@@ -139,12 +151,10 @@ module.exports = class extends CustomizedDaily {
       }
       wait && (await era.waitAnyKey());
     }
-    this.#marks.action = event_hooks.out_shopping;
   }
 
   async o_s_movie(sky, me, hook) {
     await this.#kojo['o_s_movie'](this.#dict);
-    this.#marks.action = event_hooks.out_shopping;
   }
 
   async o_c_pray(sky, me, dice, hook) {
@@ -152,13 +162,16 @@ module.exports = class extends CustomizedDaily {
     this.#marks.action = event_hooks.out_church;
   }
 
+  async out_station(hook) {
+    this.#marks.action = event_hooks.out_station;
+    return await super.out_station(hook);
+  }
+
   async o_s_restaurant(sky, me, hook) {
     await this.#kojo['o_s_restaurant'](this.#dict);
-    this.#marks.action = event_hooks.out_station;
   }
 
   async o_s_dating(sky, me, hook) {
-    this.#marks.action = event_hooks.out_station;
     switch (this.#marks.o_s_dating) {
       case 0:
       case 1:

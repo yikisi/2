@@ -65,6 +65,7 @@ module.exports = class extends CustomizedDaily {
   async office_prepare() {
     await this.#kojo.office_prepare(
       get_chara_talk(this.id),
+      get_chara_talk(3),
       get_chara_talk(0),
       sys_get_colored_callname(this.id, 0),
     );
@@ -79,7 +80,7 @@ module.exports = class extends CustomizedDaily {
     );
   }
 
-  async o_s_arcade(kita, me) {
+  async o_s_arcade(kita, me, hook) {
     await this.#kojo.o_s_arcade(
       kita,
       me,
@@ -89,7 +90,7 @@ module.exports = class extends CustomizedDaily {
     );
   }
 
-  async o_s_drawing(kita, me) {
+  async o_s_drawing(kita, me, hook) {
     const edu_marks = new KitaEduMarks();
     let hot_spring = !edu_marks.hot_spring && Math.random() < 0.2;
 
