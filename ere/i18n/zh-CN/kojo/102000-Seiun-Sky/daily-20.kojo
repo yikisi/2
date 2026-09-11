@@ -131,35 +131,40 @@ office_study:
 
 office_prepare:
   - random: true
-    color: %COLOR%
-    content:
-      - fontWeight: bold
-        content: %CHARA%
-      - 「训练员，相信我吧，我的计策，有你相信就够了……」
+    lines:
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「训练员，相信我吧，我的计策，有你相信就够了……」
   - random: true
-    color: %COLOR%
-    content:
-      - fontWeight: bold
-        content: %CHARA%
-      - 「无论采取什么战术，都要具备跑步所需的体力。让我来快速结束战斗吧！」
+    lines:
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「无论采取什么战术，都要具备跑步所需的体力。让我来快速结束战斗吧！」
   - random: true
-    color: %COLOR%
-    content:
-      - fontWeight: bold
-        content: %CHARA%
-      - 「作战名称是『全心全意，适当摸鱼』。让其他选手放松警惕，趁机获得胜利吧～」
+    lines:
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「作战名称是『全心全意，适当摸鱼』。让其他选手放松警惕，趁机获得胜利吧～」
   - random: true
-    color: %COLOR%
-    content:
-      - fontWeight: bold
-        content: %CHARA%
-      - 「我早就做好准备了。那么，准备钓一杆大鱼啦！」
+    lines:
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「我早就做好准备了。那么，准备钓一杆大鱼啦！」
   - random: true
-    color: %COLOR%
-    content:
-      - fontWeight: bold
-        content: %CHARA%
-      - 「不是都说太逞强了不好嘛。所以要保持平常心啦，平常心～喵哈哈～」
+    lines:
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「不是都说太逞强了不好嘛。所以要保持平常心啦，平常心～喵哈哈～」
 
 talk:
   # 上一步进行过「一起打游戏」
@@ -1192,25 +1197,28 @@ school_rooftop:
 
 o_r_walking:
   - random: true
-    color: %COLOR%
-    content:
-      - fontWeight: bold
-        content: %CHARA%
-      - 「哇～训练员～河里好多小鱼呢～咱们光散步是不是有点浪费时间？」
+    lines:
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「哇～训练员～河里好多小鱼呢～咱们光散步是不是有点浪费时间？」
   - random: true
-    color: %COLOR%
-    content:
-      - fontWeight: bold
-        content: %CHARA%
-      - 「训练员的体力不错啊，下次要不要一起跑跑？」
+    lines:
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「训练员的体力不错啊，下次要不要一起跑跑？」
   - random: true
-    color: %COLOR%
-    content:
-      - fontWeight: bold
-        content: %CHARA%
-      - 「河边有小猫诶，呐～训练员你知道吗？小青我可是会猫语的哦～」
+    lines:
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「河边有小猫诶，呐～训练员你知道吗？小青我可是会猫语的哦～」
 
-o_s_arcade:
+o_s_drawing:
   - 商业街周末集市，喧闹的人声中
   - color: %COLOR%
     content:

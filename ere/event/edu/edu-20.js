@@ -41,6 +41,11 @@ module.exports = class extends CustomizedEdu {
     return await super.train(attr);
   }
 
+  async train_success(sky, me, callname, hook, extra) {
+    extra.pt_change = (extra.pt_change || 0) + new SkyEduMarks().radiant;
+    return await super.train_success(sky, me, callname, hook, extra);
+  }
+
   async train_success_add(sky, me, callname, hook, extra) {
     return (
       (
@@ -60,7 +65,10 @@ module.exports = class extends CustomizedEdu {
   async ws_find_you(sky, me, callname, hook, extra, ebj) {
     await print_title_with_kojo(this.#kojo, 'ws_find_you', sky, this.#dict);
     add_event(event_hooks.week_end, ebj.set_arg('we_free_cloud'));
-    era.set(`status:${this.id}:摸鱼`, 1);
+    era.set(`cflag:${this.id}:招募状态`, -1);
+    if (era.get('flag:当前互动角色') === this.id) {
+      era.set('flag:当前互动角色', 0);
+    }
   }
 
   /**
@@ -85,10 +93,14 @@ module.exports = class extends CustomizedEdu {
       era.get(`cflag:${flower.id}:招募状态`) !== recruit_flags.yes &&
         era.get(`relation:${flower.id}:0`) <= 75
         ? 'ws_cloud_wind_no_flw'
-        : 'ws_cloud_win_flw',
+        : 'ws_cloud_wind_flw',
       sky,
       dict,
     );
+    era.set(`cflag:${this.id}:招募状态`, recruit_flags.yes);
+    if (!era.get('flag:当前互动角色')) {
+      era.set('flag:当前互动角色', this.id);
+    }
   }
 
   /** @param {CharaTalk} sky */
@@ -187,6 +199,7 @@ module.exports = class extends CustomizedEdu {
     if (all_reward_in_event(this.id, { relation: 50, love: 2 })) {
       await era.waitAnyKey();
     }
+    this.#marks.jess = 0;
   }
 
   /** @param {CharaTalk} sky */
@@ -399,7 +412,7 @@ module.exports = class extends CustomizedEdu {
         key = 'before_kiku_sho';
         break;
       case race_enum.arim_kin:
-        if (edu_weeks < 3 * 48) {
+        if (edu_weeks < 96) {
           key = 'before_arim_kin_c';
         }
         break;
@@ -415,12 +428,12 @@ module.exports = class extends CustomizedEdu {
         }
         break;
       case race_enum.sapp_kin:
-        if (edu_weeks > 3 * 48) {
+        if (edu_weeks > 96) {
           key = 'before_sapp_kin_s';
         }
         break;
       case race_enum.tenn_sho:
-        if (edu_weeks > 3 * 48) {
+        if (edu_weeks > 96) {
           key = 'before_tenn_sho_s';
         }
     }
@@ -462,7 +475,7 @@ module.exports = class extends CustomizedEdu {
         dict.RANK = extra.rank.toString();
         break;
       case race_enum.arim_kin:
-        if (edu_weeks < 3 * 48) {
+        if (edu_weeks < 96) {
           key = extra.rank === 1 ? 'arim_kin_win_c' : 'arim_kin_lose_c';
         }
         break;
@@ -478,12 +491,12 @@ module.exports = class extends CustomizedEdu {
         }
         break;
       case race_enum.sapp_kin:
-        if (edu_weeks > 3 * 48 && extra.rank === 1) {
+        if (edu_weeks > 96 && extra.rank === 1) {
           key = 'sapp_kin_win_s';
         }
         break;
       case race_enum.tenn_sho:
-        if (edu_weeks > 3 * 48 && extra.rank === 1) {
+        if (edu_weeks > 96 && extra.rank === 1) {
           key = 'tenn_sho_win_s';
           const spe = get_chara_talk(1);
           dict.SPE = spe.name;

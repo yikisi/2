@@ -79,7 +79,7 @@ module.exports = class extends CustomizedDaily {
   async office_game() {
     this.#marks.action = event_hooks.office_game;
     this.#sub_easy_go();
-    return await super.office_game();
+    await this.#kojo['office_game']({ ...this.#dict, eh: event_hooks });
   }
 
   async school_atrium(hook) {
@@ -89,7 +89,7 @@ module.exports = class extends CustomizedDaily {
   }
 
   async s_a_tree_hollow(sky, me, hook) {
-    await this.#kojo['a_s_a_tree_hollow'](this.#dict);
+    await this.#kojo['s_a_tree_hollow'](this.#dict);
   }
 
   async s_a_dating(sky, me, hook) {
@@ -125,7 +125,7 @@ module.exports = class extends CustomizedDaily {
     return await super.out_shopping(hook);
   }
 
-  async o_s_arcade(sky, me, hook) {
+  async o_s_drawing(sky, me, hook) {
     let dice = Math.random();
     if (dice < 0.05 && !this.#marks.o_s_reward) {
       dice = 0;
@@ -139,7 +139,7 @@ module.exports = class extends CustomizedDaily {
     } else {
       dice = 4;
     }
-    const ret = await this.#kojo['o_s_arcade']({ ...this.#dict, dice });
+    const ret = await this.#kojo['o_s_drawing']({ ...this.#dict, dice });
     if (ret['arcade'] === 2) {
       hook.override = true;
       let wait = false;

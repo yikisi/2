@@ -78,71 +78,76 @@ module.exports = class extends CustomizedCheck {
         new EventObject(this.id, cb_enum.daily).set_arg('ws_happy_birthday'),
       );
     }
+    if (edu_marks.jess > 0 && era.get(`status:${this.id}:摸鱼`) > 0) {
+      era.set(`status:${this.id}:摸鱼`, 0);
+    }
     const ebj = new EventObject(this.id, cb_enum.edu);
-    if (edu_weeks >= 16) {
-      check_and_add_event(
-        edu_marks,
-        edu_weeks,
-        'ws_next_time',
-        event_hooks.week_start,
-        ebj,
-      );
-    }
-    if (edu_weeks >= 40) {
-      check_and_add_event(
-        edu_marks,
-        edu_weeks,
-        'ws_punish',
-        event_hooks.week_start,
-        ebj,
-      );
-    }
-    if (edu_weeks >= 32) {
-      check_and_add_event(
-        edu_marks,
-        edu_weeks,
-        'ws_hidden_menu',
-        event_hooks.week_start,
-        ebj,
-      );
-    }
-    if (edu_weeks >= 40) {
-      check_and_add_event(
-        edu_marks,
-        edu_weeks,
-        'ws_punish',
-        event_hooks.week_start,
-        ebj,
-      );
-    }
-    if (edu_weeks >= 47 + 33) {
-      check_and_add_event(
-        edu_marks,
-        edu_weeks,
-        'ws_party',
-        event_hooks.week_start,
-        ebj,
-      );
-    }
-    if (edu_weeks >= 95 + 17) {
-      check_and_add_event(
-        edu_marks,
-        edu_weeks,
-        'ws_ramen',
-        event_hooks.week_start,
-        ebj,
-      );
-    }
-    if (edu_marks.o_s_dating >= 3 && !edu_marks.sword_vs_shield) {
-      edu_marks.sword_vs_shield = 1;
-      add_event(event_hooks.week_end, ebj.set_arg('we_sword_vs_shield_1'));
-    }
-    if (edu_marks.o_s_dating >= 5 && edu_marks.sword_vs_shield === 2) {
-      edu_marks.sword_vs_shield = 3;
-      add_event(event_hooks.week_end, ebj.set_arg('we_sword_vs_shield_2'));
-    }
-    if (edu_marks.ws_party === 2 && edu_marks.o_s_dating === 5) {
-      edu_marks.o_s_dating = 6;
+    if (era.get(`cflag:${this.id}:招募状态`) === recruit_flags.yes) {
+      if (edu_weeks >= 16) {
+        check_and_add_event(
+          edu_marks,
+          edu_weeks,
+          'ws_next_time',
+          event_hooks.week_start,
+          ebj,
+        );
+      }
+      if (edu_weeks >= 40) {
+        check_and_add_event(
+          edu_marks,
+          edu_weeks,
+          'ws_punish',
+          event_hooks.week_start,
+          ebj,
+        );
+      }
+      if (edu_weeks >= 32) {
+        check_and_add_event(
+          edu_marks,
+          edu_weeks,
+          'ws_hidden_menu',
+          event_hooks.week_start,
+          ebj,
+        );
+      }
+      if (edu_weeks >= 40) {
+        check_and_add_event(
+          edu_marks,
+          edu_weeks,
+          'ws_punish',
+          event_hooks.week_start,
+          ebj,
+        );
+      }
+      if (edu_weeks >= 47 + 33) {
+        check_and_add_event(
+          edu_marks,
+          edu_weeks,
+          'ws_party',
+          event_hooks.week_start,
+          ebj,
+        );
+      }
+      if (edu_weeks >= 95 + 17) {
+        check_and_add_event(
+          edu_marks,
+          edu_weeks,
+          'ws_ramen',
+          event_hooks.week_start,
+          ebj,
+        );
+      }
+      if (edu_marks.o_s_dating >= 3 && !edu_marks.sword_vs_shield) {
+        edu_marks.sword_vs_shield = 1;
+        add_event(event_hooks.week_end, ebj.set_arg('we_sword_vs_shield_1'));
+      }
+      if (edu_marks.o_s_dating >= 5 && edu_marks.sword_vs_shield === 2) {
+        edu_marks.sword_vs_shield = 3;
+        add_event(event_hooks.week_end, ebj.set_arg('we_sword_vs_shield_2'));
+      }
+      if (edu_marks.ws_party === 2 && edu_marks.o_s_dating === 5) {
+        edu_marks.o_s_dating = 6;
+      }
     }
     if (edu_weeks < 3 * 48 && !edu_marks.soft_be) {
       if (era.get(`status:${this.id}:摸鱼`) > 0 && edu_weeks >= 12) {
@@ -197,20 +202,19 @@ module.exports = class extends CustomizedCheck {
         case 95 + 5:
           add_event(
             event_hooks.week_start,
-            ebj_s.set_arg(
-              check_aim_race(
-                RaceHistory.get(this.id).get(),
-                race_enum.arim_kin,
-                1,
-                1,
-              )
-                ? 'ws_cloud_mot_aw'
-                : 'ws_lost_al',
-            ),
+            ebj
+              .copy()
+              .set_arg(
+                check_aim_race(
+                  RaceHistory.get(this.id).get(),
+                  race_enum.arim_kin,
+                  1,
+                  1,
+                )
+                  ? 'ws_cloud_mot_aw'
+                  : 'ws_lost_al',
+              ),
           );
-          break;
-        case 95 + 6:
-          edu_marks.jess = 0;
       }
       check_and_register_aim_race(this.id, this.get_aim_races(), edu_weeks);
     } else if (edu_weeks === 143 + 9) {
