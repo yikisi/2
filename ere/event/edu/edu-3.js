@@ -41,6 +41,7 @@ const {
   fumble_result,
 } = require('#/data/train-const');
 
+const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 /** @param {RaceEndParams} extra  */
@@ -74,47 +75,15 @@ module.exports = class extends CustomizedEdu {
     if (ebj?.arg !== 'broken') {
       return false;
     }
-    await print_event_name('折翼', teio);
-    await era.printAndWait(
-      `医生的存在就是为了救死扶伤，我心爱的人一定会好起来的——不错，人们站在病房的门口，往往就会这么想。可是，这种想法，到底有几分真实，几分自我安慰呢？如果能够挽救的话，那么即使有医生的存在，这个世界依然无法避免伤亡的出现，难道是因为医生不够活跃？不够尽心？不……或者只是因为自己运气不好罢了。`,
-    );
-    era.println();
-    await era.printAndWait(
-      `如此想着，${me.name} 不自觉拿惯用手扶了扶额，呆呆地望着面前穿着白色大褂的中年男人。他的嘴唇在翕动——说话？他有在说什么吗？闲置的手处传来毛发的触感，不，不似以往，精心打理的柔顺马尾仿佛受惊一般，从内部炸开，掌心处传来一阵瘙痒。${me.name} 有点想笑，这孩子，怎么跑个步把自己搞成这样，一会得好好——`,
-    );
-    await era.printAndWait(
-      `${me.name} 转头，努力微笑着看向自家担当，随后看到了那双无神的双眸，将 ${me.name} 的思想吸回现实。`,
-    );
-    era.println();
-    await me.say_as_passer_by_and_wait(
-      '主治医生',
-      `${teio.actual_name_with_title}，以及 ${
-        me.actual_name_with_title
-      }，${teio.sex}的训练员，我必须再次强调一遍，要做好此生放弃赛跑的准备。`,
-    );
-    era.println();
-    await era.printAndWait(
-      '——任何逃避的想法，终究抵挡不住现实的车轮。现实就在眼前，除了接受之外别无二选。',
-    );
-    era.println();
-    await era.printAndWait(
-      `${me.name} 看着主治医生拿出一根金属小杖，再度在屏幕显示的照片上指点起来。之前不愿接受而自主屏蔽的回忆与现在的影像重叠，${me.name} 完全知道他都说了些什么。「髌骨脱位」「习惯性骨折」「裂纹」「小腿」……不错，所有地方 ${me.name} 都知道，所有情况 ${me.name} 都清楚。`,
-    );
-    era.println();
-    await era.printAndWait(
-      `可是这种事情依然发生了。${me.name} 忍住了情绪，尽力将自己压在原地。`,
-    );
-    await era.printAndWait('马尾在动，似要抽离。');
-    await me.say_and_wait(
-      '对我感到失望了吗，也没关系，是我作为训练员的失职',
-      true,
-    );
-    await era.printAndWait(
-      `${me.name} 这么想着，主动将手往回缩了一点……但失败了。`,
-    );
-    era.println();
-    await era.printAndWait(
-      `一只与蕴含力量不相称的小手放在了 ${me.name} 的掌面上，接着是从下方握住的另一只。一阵温暖传来，而同时，${me.name} 又感觉到了一股轻颤，如孩童扯住亲密的人衣角一般，${teio.name} 拉着 ${me.name} 的手。${me.name} 长叹一声，回握住${teio.sex}，再未松开。`,
+    await print_title_with_kojo(
+      this.#kojo,
+      'bs_broken',
+      teio,
+      me,
+      i18n().kojo[this.id].notify_leg_hurt(get_chara_talk(this.id), {
+        ...di18n.kojo.get_titled_content(this.id, 'hurt'),
+        color: buff_colors[3],
+      }),
     );
     era.println();
     sys_like_chara(3, 0, 10, true, 1);
@@ -130,38 +99,6 @@ module.exports = class extends CustomizedEdu {
     era.set('talent:3:淫乱', 1);
     era.set('talent:3:身体素质', 0);
     era.set('status:3:腿伤', 1);
-    era.printMultiColumns([
-      {
-        content: ['【', teio.get_colored_name(), ' 不再 [体壮] 了！】'],
-        type: 'text',
-      },
-      {
-        content: [
-          '【',
-          teio.get_colored_name(),
-          ' 变得 [自卑] 与 ',
-          {
-            color: buff_colors[2],
-            content: '[淫乱]',
-          },
-          ' 了！】',
-        ],
-        type: 'text',
-      },
-      {
-        content: [
-          '【',
-          teio.get_colored_name(),
-          ' 罹患了 ',
-          {
-            color: buff_colors[3],
-            content: '[腿伤]',
-          },
-          '！】',
-        ],
-        type: 'text',
-      },
-    ]);
     await era.waitAnyKey();
   }
 

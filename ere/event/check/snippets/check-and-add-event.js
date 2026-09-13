@@ -20,6 +20,7 @@ function check_and_add_event(
 ) {
   if (
     !edu_marks.get(param_name) &&
+    weeks >= 0 &&
     (weeks >= 143 ||
       (edu_marks._r_e_check > 0 &&
         Math.random() < Math.log(weeks) / log_edu_weeks))

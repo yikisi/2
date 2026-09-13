@@ -51,8 +51,22 @@ module.exports = class extends CustomizedMec {
           color,
         });
       }
+      if (edu_marks.soft_be > 0) {
+        buffer.push({
+          ...di18n.kojo.get_titled_content(this.id, 'soft_be'),
+          color,
+        });
+      }
       return buffer;
     }
     return super.get_status(show_train_buff);
+  }
+
+  is_train_enabled() {
+    return !new SkyEduMarks().soft_be;
+  }
+
+  is_race_register_enabled() {
+    return !new SkyEduMarks().soft_be;
   }
 };
