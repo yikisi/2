@@ -487,6 +487,13 @@ module.exports = class extends require('#/i18n/zh-CN/timon') {
   it_nt_summer_chara_list_follow = '今年以下人员会跟随参加夏合宿：';
   it_nt_back_info_summer = '【前往夏合宿的人员回到特雷森了】';
 
+  it_nt_moon_well_cool_down = '【秘汤的效力恢复了】';
+  get_it_moon_well_together = (chara) => [
+    '【和 ',
+    chara.get_colored_name(),
+    ' 在秘汤前台】',
+  ];
+
   /**
    * @param {string} title
    * @param {[]} chara_list

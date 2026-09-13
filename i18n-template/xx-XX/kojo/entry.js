@@ -86,4 +86,6 @@ module.exports = class extends require('#/i18n/zh-CN/kojo/entry') {
   347 = new (require('#/i18n/xx-XX/kojo/904700-Speed-Symboli/entry'))();
   348 = new (require('#/i18n/xx-XX/kojo/904800-Haiseiko/entry'))();
   349 = new (require('#/i18n/xx-XX/kojo/904900-Tucker-Bryne/entry'))();
+  350 = new (require('#/i18n/xx-XX/kojo/905000-Hoshina-Kiyoko/entry'))();
+  351 = new (require('#/i18n/xx-XX/kojo/905100-Yunohana-Bloom/entry'))();
 };

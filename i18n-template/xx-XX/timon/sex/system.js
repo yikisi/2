@@ -8,7 +8,6 @@ const { get, input, printAndWait, printButton } = require('#/era-electron');
 const { buff_colors } = require('#/data/color-const');
 const { item_enum } = require('#/data/ero/item-const');
 const { part_enum } = require('#/data/ero/part-const');
-const era = require('#/era-electron');
 
 module.exports = {
   /**
@@ -608,7 +607,7 @@ module.exports = {
       case 101:
         actions.push('朝 ', ...targets, ' 的肉棒');
     }
-    if (era.get(`nowex:${cid}:潮吹`) > 0) {
+    if (get(`nowex:${cid}:潮吹`) > 0) {
       actions.push('喷出了 ');
     } else {
       switch (part) {

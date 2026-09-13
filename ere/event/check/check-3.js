@@ -213,7 +213,7 @@ module.exports = class extends CustomizedCheck {
             if (
               RaceHistory.get(3).get_result(95 + 16)?.race ===
                 race_enum.tenn_spr &&
-              !era.get(`status:${this.id}:腿伤`) > 0
+              !era.get(`status:${this.id}:腿伤`)
             ) {
               era.set(`talent:${this.id}:自信程度`, 1);
               era.set(`talent:${this.id}:淫乱`, 1);
