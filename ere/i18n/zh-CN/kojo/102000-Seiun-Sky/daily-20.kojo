@@ -127,7 +127,7 @@ office_study:
         content:
           - fontWeight: bold
             content: %CHARA%
-          - 「嘿嘿～训练员讲课太辛苦了～要不要休息会？」
+          - 「嘿嘿～训练员讲课太辛苦了～要不要休息会啊？」
 
 office_prepare:
   - random: true
@@ -279,7 +279,7 @@ talk:
             content:
               - fontWeight: bold
                 content: %CHARA%
-              - 「训练员～我去躺会儿，有紧急情况的话……等我睡醒再说～」
+              - 「训练员～我去躺会儿，有紧急情况的话……睡醒再说～」
       - if: era.get('love:20') >= 50 && era.get('love:20') < 90
         random: true
         lines:
@@ -876,7 +876,7 @@ office_rest:
             content:
               - fontWeight: bold
                 content: %CHARA%
-              - 「费用是什么？嘿嘿～下回再告诉你～」
+              - 「费用是什么？嘿嘿～到时候再告诉你～」
       - if: era.get('love:20') >= 90
         random: true
         lines:
@@ -1010,7 +1010,7 @@ s_a_tree_hollow:
         content:
           - fontWeight: bold
             content: %CHARA%
-          - 「呜啊……里面又黑又窄，一看就不适合睡觉……」
+          - 「呜欸……里面又黑又窄，一看就不适合睡觉……」
   - random: true
     lines:
       - color: %COLOR%
@@ -1269,7 +1269,7 @@ o_s_drawing:
       - 青云天空在抽奖箱里一通摸索，拿出来了一个球，打开后抽到了——
       - if: d.dice === 4
         lines:
-          - 谢谢参与 # 30% 无奖励
+          - 什么也没有！！！ # 30% 无奖励
           - 青云天空看着空白的奖券，沉默了几秒。
           - color: %COLOR%
             content:
@@ -1283,35 +1283,40 @@ o_s_drawing:
               - 「训练员，我们去隔壁买真的胡萝卜吧，至少能吃。」
       - if: d.dice === 3
         lines:
-          - 三等奖 一根「大」胡萝卜 # 30% 全属性+8
+          - 一根「大」胡萝卜！！！ # 30% 全属性+8
           - color: %COLOR%
             content:
               - fontWeight: bold
                 content: %CHARA%
               - 「呜啊！好大的胡萝卜！」
-          - 虽然只有一根，但比一般的胡萝卜大了一圈。
+          - 虽然只有一根，但比一般的胡萝卜大了一大圈。
           - color: %COLOR%
             content:
               - fontWeight: bold
                 content: %CHARA%
-              - 「嗯……够喂学院后院那只兔子了。」
+              - 「嗯……明天不用去食堂了～」
       - if: d.dice === 2
         lines:
-          - 二等奖 一堆大萝卜 # 20% 全属性+15 技能点数+15
+          - 一箱大萝卜！！！ # 20% 全属性+15 技能点数+15
           - 青云天空抱着一大箱萝卜。
           - color: %COLOR%
             content:
               - fontWeight: bold
                 content: %CHARA%
-              - 「好多啊……这得吃多久……」
+              - 「好多啊……而且还这么大……这得吃多久……」
           - color: %COLOR%
             content:
               - fontWeight: bold
                 content: %CHARA%
               - 「训练员，你家有泡菜坛子吗？」
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「没有的话，咱俩下个月的菜单可就只有胡萝卜了……」
       - if: d.dice === 1
         lines:
-          - 一等奖 胡萝卜汉堡肉排套餐周券 # 15% 全属性+25 技能点数+25 干劲+2
+          - 胡萝卜汉堡肉排套餐周券！！！ # 15% 全属性+25 技能点数+25 干劲+2
           - color: %COLOR%
             content:
               - fontWeight: bold
@@ -1340,7 +1345,7 @@ o_s_drawing:
               - 「这种『幸运』要分给大家才有趣嘛～」
       - if: d.dice === 0
         lines:
-          - 特等奖金萝卜 # %5 全属性+30 技能点数+50 干劲+4 耐力&智力额外+20（仅触发一次）
+          - 金胡萝卜！！！ # %5 全属性+30 技能点数+50 干劲+4 耐力&智力额外+20（仅触发一次）
           - color: %COLOR%
             content:
               - fontWeight: bold
@@ -1384,7 +1389,7 @@ o_s_drawing:
             content:
               - fontWeight: bold
                 content: %CHARA%
-              - 「感觉……好奇妙。」
+              - 「等等……感觉……好奇妙！」
           - color: %COLOR%
             content:
               - fontWeight: bold

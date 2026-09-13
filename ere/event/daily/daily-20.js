@@ -77,9 +77,9 @@ module.exports = class extends CustomizedDaily {
   }
 
   async office_game() {
+    await this.#kojo['office_game']({ ...this.#dict, eh: event_hooks });
     this.#marks.action = event_hooks.office_game;
     this.#sub_easy_go();
-    await this.#kojo['office_game']({ ...this.#dict, eh: event_hooks });
   }
 
   async school_atrium(hook) {

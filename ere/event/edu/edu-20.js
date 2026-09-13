@@ -90,10 +90,10 @@ module.exports = class extends CustomizedEdu {
     const dict = { ...this.#dict, FLOWER: flower.name, COLOR_51: flower.color };
     await print_title_with_kojo(
       this.#kojo,
-      era.get(`cflag:${flower.id}:招募状态`) !== recruit_flags.yes &&
-        era.get(`relation:${flower.id}:0`) <= 75
-        ? 'ws_cloud_wind_no_flw'
-        : 'ws_cloud_wind_flw',
+      era.get(`cflag:${flower.id}:招募状态`) === recruit_flags.yes &&
+        era.get(`relation:${flower.id}:0`) > 75
+        ? 'ws_cloud_wind_flw'
+        : 'ws_cloud_wind_no_flw',
       sky,
       dict,
     );

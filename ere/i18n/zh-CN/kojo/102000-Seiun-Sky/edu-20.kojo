@@ -463,7 +463,7 @@ ws_cloud_wind_flw:
     - color: %COLOR_51%
       content:
         - fontWeight: bold
-          content: 娇小的%UMA%
+          content: %FLOWER%
         - 「啊，训练员，是您啊！青云天空跟我说您已经和%SEX%签约了。」
     - 「是的，当时废了不少劲呢。」
     - %YOU%笑了笑
@@ -472,7 +472,7 @@ ws_cloud_wind_flw:
     - color: %COLOR_51%
       content:
         - fontWeight: bold
-          content: 娇小的%UMA%
+          content: %FLOWER%
         - 「不不不，是我该感谢您，谢谢您愿意帮助青云天空。」
     - %YOU%不好意思的挠挠头，犹豫了一下，但还是求助道。
     - 「说到这个，我还想向你请教一下。青云天空这孩子……我有点应付不来。」
@@ -5648,7 +5648,7 @@ ws_ending:
       content:
         - fontWeight: bold
           content: %CHARA%
-        - 「骗你的啦～」
+        - 「欸——训练员好坏……骗你的啦～」
     - color: %COLOR%
       content:
         - fontWeight: bold
@@ -6837,7 +6837,7 @@ ws_party:
       content:
         - fontWeight: bold
           content: %CHARA%
-        - 「小草！我知道有一家甜品店的补丁可好吃了！我带你们尝尝去。」
+        - 「小草！我知道有一家甜品店的布丁可好吃了！我带你们尝尝去。」
     - color: %COLOR_11%
       content:
         - fontWeight: bold
