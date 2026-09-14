@@ -374,6 +374,7 @@ class PseudoUma {
     return this;
   }
 
+  /** @return {PrintedSpan} */
   get_colored_name() {
     return { color: this.color, content: this.name, fontWeight: 'bold' };
   }
