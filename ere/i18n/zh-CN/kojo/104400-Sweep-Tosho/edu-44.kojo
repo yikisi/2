@@ -334,7 +334,7 @@ re_win:
           - 「下次再这样，主人就不参加比赛了！！」
       -
       - 在这之后，%YOU%和%CHARA%一起返回了特雷森学院
-  - if: era.get('status:44:疲惫') >= 3
+  - if: era.get('status:44:疲惫') < 3
     lines:
       # 魔法之梦（资深年7月第1周回合开始事件）之后
       - if: (t = era.get('cflag:44:育成回合计时')) >= 95 + 25
@@ -1413,7 +1413,6 @@ re_hans_fil_lose_2:
     - %YOU%急忙把%CHARA%带离了现场……
 
 
-
 # 经典年第一周开始
 ws_new_year_c:
   title: 新年的计划
@@ -1603,7 +1602,7 @@ ws_ny_sub_reject:
             content: %CHARA%
           - 「Freesia★Dogwood，说出来吧～！」
   - if: d.reject === 1
-  - lines:
+    lines:
       - %CHARA%拿着魔杖的手明显地颤抖了一下
       - 皱了皱眉，装作咳了两下，%CHARA%再次挥动魔法杖
       - color: %COLOR%
@@ -2379,7 +2378,7 @@ we_summer_end_c:
         - 「……那是什么？信？」
     - %YOU%举起信封，将有字的一面转向%CHARA%
     -
-    - 上面写着:
+    - 上面写着：
     - 致，我最亲爱的孙女
     -
     - color: %COLOR%

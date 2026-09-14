@@ -43,7 +43,7 @@ module.exports = class extends CustomizedEdu {
     await this.#kojo['train'](this.#dict);
   }
 
-  async ts_add() {
+  async train_success_add(chara, me, callname, hook, extra) {
     return (await this.#kojo['ts_add'](this.#dict))[0] === 1;
   }
 
@@ -197,6 +197,9 @@ module.exports = class extends CustomizedEdu {
 
   /** @param {CharaTalk} sweep */
   async we_asphodel(sweep) {
+    if (era.get('flag:强制BE') > 0) {
+      return;
+    }
     const zob_zoy = get_chara_talk(47);
     await print_title_with_kojo(this.#kojo, 'we_asphodel', sweep, {
       ZOB_ZOY: zob_zoy.name,
@@ -417,6 +420,8 @@ module.exports = class extends CustomizedEdu {
         break;
       case race_enum.tenn_sho:
         if (edu_weeks > 96) {
+          const zob_zoy = get_chara_talk(47);
+          dict.ZOB_ZOY = zob_zoy.name;
           key = 'rs_tenn_sho_s';
         }
         break;
