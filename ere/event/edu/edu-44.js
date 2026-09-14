@@ -43,7 +43,7 @@ module.exports = class extends CustomizedEdu {
     await this.#kojo['train'](this.#dict);
   }
 
-  async train_success_add(chara, me, callname, hook, extra) {
+  async train_success_add(sweep, me, callname, hook, extra) {
     return (await this.#kojo['ts_add'](this.#dict))[0] === 1;
   }
 
@@ -103,7 +103,7 @@ module.exports = class extends CustomizedEdu {
       }
     }
     const op = {};
-    switch ((await this.#kojo['ws_ny_sub_option'])['select']) {
+    switch ((await this.#kojo['ws_ny_sub_option'](dict))['select']) {
       case 1:
         op.attr = base_attr_list.map(() => 20);
         break;
