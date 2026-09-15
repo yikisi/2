@@ -9,6 +9,8 @@ class I18nKojo104400 {
   edu = require('#/i18n/zh-CN/kojo/104400-Sweep-Tosho/edu-44.kojo');
   /** @type {KojoFile} */
   love = require('#/i18n/zh-CN/kojo/104400-Sweep-Tosho/love-44.kojo');
+  /** @type {KojoFile} */
+  ero = require('#/i18n/zh-CN/kojo/104400-Sweep-Tosho/ero-44.kojo');
   // GENERATED END
 
   agreement = '大魔法师的约定';
