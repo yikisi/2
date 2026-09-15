@@ -446,7 +446,7 @@ re_lose:
           - 「那种事情才不重要！……我是说，这是使魔压榨主人导致的吧！？」
       -
       - 在这之后，%YOU%和%CHARA%一起返回了特雷森学院
-  - if: era.get('status:44:疲惫') >= 3
+  - if: era.get('status:44:疲惫') < 3
     lines:
       # 魔法之梦（资深年7月第1周回合开始事件）之后
       - if: (t = era.get('cflag:44:育成回合计时')) >= 95 + 25
@@ -1342,37 +1342,7 @@ re_hans_fil_win:
     - %YOU%急忙把%CHARA%带离了现场……
 
 
-# 获胜者不为其他玩家马娘
-# TODO 差分条件和事件剧情对不上
-re_hans_fil_lose_1:
-  title: 阪神皇冠大赛失败
-  lines:
-    - 虽然%CHARA%斗志昂扬地参加了这场比赛
-    - 可惜的是，并没有如%SEX%自己所说的那样，完成了对宿敌的讨伐
-    -
-    - 此刻，之前的那名赛%UMA%正站在领奖台上，满面春风地向其他人打招呼
-    - %CHARA%，则龇牙咧嘴地盯着站在领奖台上的那名赛%UMA%
-    -
-    - color: #对应角色颜色
-      content:
-        - fontWeight: bold
-          content: 获胜的赛%UMA%
-        - 「……」
-    - 不知为何看向了台下的这边
-    -
-    - color: %COLOR%
-      content:
-        - fontWeight: bold
-          content: %CHARA%
-        - 「……」
-    - 只是一直死死地盯回去
-    -
-    - 为了避免赛后的宝贵时间变成激烈的眼神交流大赛
-    - %YOU%急忙把%CHARA%带离了现场……
-
-
-# 获胜者为其他玩家马娘
-re_hans_fil_lose_2:
+re_hans_fil_lose:
   title: 阪神皇冠大赛失败
   lines:
     - 虽然%CHARA%斗志昂扬地参加了这场比赛

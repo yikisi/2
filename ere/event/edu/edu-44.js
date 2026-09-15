@@ -15,9 +15,7 @@ const SweepEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-44')
 const event_hooks = require('#/data/event/event-hooks');
 const { attr_enum, base_attr_list } = require('#/data/train-const');
 
-const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
-const { max_chara_id } = require('#/data/other-const');
 const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
@@ -455,22 +453,7 @@ module.exports = class extends CustomizedEdu {
         }
         break;
       case race_enum.hans_fil:
-        if (extra.rank === 1) {
-          key = 're_hans_fil_win';
-        } else {
-          const cham_id = extra.contestants.find(
-            (u) => u.rank.curr === 1,
-          )?.index_chara;
-          if (
-            cham_id > 0 &&
-            cham_id < max_chara_id &&
-            era.get(`cflag:${cham_id}:招募状态`) === recruit_flags.yes
-          ) {
-            key = 're_hans_fil_lose_2';
-          } else {
-            key = 're_hans_fil_lose_1';
-          }
-        }
+        key = extra.rank === 1 ? 're_hans_fil_win' : 're_hans_fil_lose';
         break;
       case race_enum.oka_sho:
         key = extra.rank === 1 ? 're_oka_sho_win' : 're_oka_sho_lose';
