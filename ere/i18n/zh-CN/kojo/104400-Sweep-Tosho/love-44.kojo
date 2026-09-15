@@ -348,7 +348,6 @@
           - 虽然这条商店街并没有的样子，但似乎，其他地区的商店有在贩卖
       - random: true
         lines:
-          - 在商店街询问着一家家店的店主，而后，在路上偶遇了热心的路人
           - color: %COLOR_52%
             content:
               - fontWeight: bold
@@ -908,223 +907,344 @@
     -
     - 窗外阳光明媚，微风吹散了热意，只留下温暖的舒适感
     - 这样的平静之中，总感觉缺了些什么
+
+
+89_loop:
+  -
+  - 到底是……缺了些什么呢？
+  - acc: 1
+    content: （训练）
+    lines:
+      - 虽然很重要，但今天就饶过%UMA%们吧
+  - acc: 2
+    content: （沉默之日）
+    lines:
+      - 不需要沉默。而且今天也没到。
+  - acc: 3
+    content: （魔法探险）
+    lines:
+      - 或许，平静和没有意外，只是没有「魔法」的人眼中的世界
+      - 而「魔法探险」，正是「魔法」的具体表现之一
+      -
+
+
+89_marry:
+  - 叫上在一旁读魔法书的 %CHARA%，对她说道——
+  - acc: 1
+    content: 「主人，我想到一个绝妙的主意」
+  -
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「……？」
+  - 看着突然站起来做出决定的%YOU%，眼前的小%UMA%反而显得有些疑惑
+  - 就这样，%YOU%带着她走出了校门——
+  -
+  - acc: 1
+    content: 「按照『地图』的指示，这里，就是『巨人的庭园』了」
+  - 按照从旅游手册上撕下的一页纸的指引，%YOU%带%CHARA%来到了一个偏僻的公园里
+  - 四周，是秋千，滑梯，以及几只摇摇驴
+  -
+  - 「按照指引……%CALLNAME%，得先于主人挑战这些『试炼』」
+  - 于是，在%CHARA%的面前，%YOU%只是坐上了那个摇摇驴
+  - 而后，努力驱使起来——
+  -
+  - 「降服吧妖兽！变成我的%CALLNAME%……！」
+  -
+  - %CHARA%，一刹那似乎对%YOU%的行为有些震惊，睁大眼睛看着%YOU%
+  - 不过，眼神马上就又变得闪闪发光
+  -
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「……什么呀%CALLNAME%！」
+  - 这样说着
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「这种挑战，虽然%CALLNAME%你要打头阵，但不代表主人就不能给你多指点指点了！」
+  -
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「看好了%CALLNAME%！这边这个试炼，应该这样通过——」
+  - %CHARA%，走到那架秋千旁
+  -
+  - 于是，%CHARA%坐上了秋千，努力晃荡起来——
+  -
+  - acc: 1
+    content: 「接下来……按照『地图』的指引，我们来到的是『时之迷宫』」
+  - %YOU%指着眼前的跳蚤市场，和%CHARA%讲道
+  - 「我能察觉到……这里有着被施加了『平凡的诅咒』的宝物，可以用来突破下一段旅程……」
+  -
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「哼！这种事情还不简单！」
+  - 充满自信地说着
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「天才%MOHOSHOJO%，两下子就能找到的！」
+  -
+  - %CHARA%兴致盎然地跑来跑去，看看这个，看看那个
+  - 最后，蹲下身去，捡起一个摊位上的——
+  - 一个小玻璃弹珠
+  -
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「哼哼～！%CALLNAME%！主人找到了！这个就是传说中的魔法神器！」
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「无论怎样的对手，它都能以小胜大，乒乒乓乓地为我们夺得最终的珍宝！」
+  - %CHARA%，将那颗弹珠高举起来，眼睛如同弹珠般透亮——
+  -
+  - acc: 1
+    content: 「最后，据说『巨人』的体内，有着『宝藏』——」
+  - 乘坐电车，来到了乡下的一个风车面前
+  -
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「冲啊%CALLNAME%！为了魔法的胜利！！！」
+  - 小%UMA%骑在%YOU%背上，用魔杖指着远处的风车
+  - 两人一齐呼喊着，冲进了风车的大门
+  -
+  - 可惜，装饰用的风车内部并没有传说中的魔法圣物，有的，只是对外国历史技术的文字介绍
+  - 不久，%YOU%和%CHARA%就因为在未开放时间进入展览馆，被风车的管理人员请了出来
+  -
+  - 时间总是过得很快，转眼已是黄昏
+  - 此刻的%YOU%，正同%CHARA%走在回到特雷森学院的路上
+  -
+  - 此时此刻，%YOU%的抉择是——
+  - acc: 1
+    key: update
+    content: （献上「宝物」）（升级关系）
+    lines:
+      - 或许，已经是时候了吧
+      - %YOU%摸了摸口袋，其中，确乎有个小小的盒子
+      -
+      - acc: 1
+        content: （将它从口袋中拿出，端在手掌中央）
+      -
+      - 「主人，其实，我发现了这样一个宝物，但因为事发突然，没能及时向主人汇报」
+      - 「据说，它可以进一步增强我们两人之前的牵绊，增强主人的魔法力量」
+      -
+      - %YOU%跪下身子，缓缓打开手中的红色盒子
+      - 呈现其中的，是一颗闪亮的钻石戒指，就如同有着魔法一般
+      -
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「哇——」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「哼哼～真不愧是我的%CALLNAME%！居然连这样的宝物都能够找到！」
+      - %CHARA% 十分惊喜的样子，伸出手就要把戒指拿走——
+      -
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「……！」
+      - 然后，突然意识到了什么，双脸刷的一下变得通红
+      -
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「使……%CALLNAME%——！你，你到底是在哪里找到这种东西的！！！」
+      - 结结巴巴地说着，明明用着理直气壮的语气，却不知为何，身体有些颤抖
+      -
+      - acc: 1
+        content: 「实不相瞒，是在路边的魔法店里……经过多日观察，才确定了这件宝物」
+      - 「如果可以的话，还请主人收下」
+      - 这么说道
+      -
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「你……你！！！」
+      - 似乎颤抖得更加明显了，连目光都有些不稳定
+      -
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「……哼！」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「既然%CALLNAME%那么关心主人的话，就自己帮主人戴上好了！」
+      - 将目光移到一旁，好像很不情愿地将左手伸到%YOU%面前，时不时偷偷瞟上几眼
+      -
+      - 回去路上，%YOU%偷偷看着%CHARA%双脸通红抚摸自己无名指上戒指的样子
+  - acc: 2
+    content: （凯旋归家）（暂不升级）
+    lines:
+      - 经历了一天的玩闹，或许，已经是回去的时候了
+      - 于是，%YOU%继续背着小%UMA%，就这么走在路上
+      -
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「呐！%CALLNAME%——」
+      - 突然发现了什么
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「我要吃那个。」
+      -
+      - 背上的%CHARA%指向一旁，是一家卖苹果棒糖的店
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「让我下去。我要买两个。」
+      -
+      - 于是，%YOU%稍作蹲踞，小%UMA%马上从%YOU%的背上下来，奔向了那个小摊贩
+      - 不久之后，一手拿着一根苹果棒糖，跑了回来
+      -
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「给你一根，你是%CALLNAME%，不许说不。吃吧。」
+      - 将右手的苹果棒糖递给%YOU%，虽然语气冷冰冰的，不知为何却又有几分温柔
+      -
+      - %YOU%只是收下了那根苹果棒糖
+      -
+      - 在这之后，%YOU%和%CHARA%并排走着，一起吃着苹果棒糖，一边慢慢走回了特雷森学院
+
+
+# 恋慕75及以上，被发现3次及以上同他人的性行为后，作为过回合的随机事件触发
+get_cuckold:
+  title: 没有与不是
+  lines:
+    - 随着%YOU%在特雷森所呆的时日渐多，%YOU%的人际关系网逐渐变得复杂
+    - 和各种性格迥异的赛%UMA%们建立关系，甚至，不仅仅是平凡的关系——
     -
-    - 到底是……缺了些什么呢？
+    - 而在这些错综复杂的关系中，不管是误会还是现实，总会有一些「被发现」的情况
+    - 大多数时候，这种「被发现」都会带来非常微妙或者严峻的后果
+    - 但是，在%CHARA%身上，%YOU%却似乎发现了与这种传统观念，有微妙参差的行为模式
+    -
+    - 时至今日，因为各种疏忽或者偶然，%CHARA%已经发现了%YOU%的数次「背地行为」
+    - 如果是换一个%UMA%的话，说不定，不仅生气，已经打算开始进行某些极端行为了
+    - 但是，%CHARA%，似乎却表现出了略带反常的行为模式
+    - 每次被%CHARA%发现后，虽然会任性一下，但大多没有更多其它的进一步要求
+    -
+    - 到底是为什么呢……？
+    - 如果是%SEX%的话……直接问，说不定也没有问题……？
+    - 一个平凡的下午，训练结束后，部分抱着对自己人身安全的关切——
+    -
+    - 「你……不生气吗？」
+    - 在%CHARA%面前小心翼翼地提了出来
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「……生气？生什么气？」
+    - 显得有些迷惑，面前的小%UMA%只是用紫色的瞳孔着%YOU%
+    -
     - acc: 1
-      content: （训练）
-      lines:
-        - 虽然很重要，但今天就饶过%UMA%们吧
-    - acc: 2
-      content: （沉默之日）
-      lines:
-        - 不需要沉默。而且今天也没到。
-    - acc: 3
-      content: （魔法探险）
-      lines:
-        - 或许，平静和没有意外，只是没有「魔法」的人眼中的世界
-        - 而「魔法探险」，正是「魔法」的具体表现之一
-        -
-        - 叫上在一旁读魔法书的 %CHARA%，对她说道——
-        - acc: 1
-          content: 「主人，我想到一个绝妙的主意」
-        -
-        - color: %COLOR%
-          content:
-            - fontWeight: bold
-              content: %CHARA%
-            - 「……？」
-        - 看着突然站起来做出决定的%YOU%，眼前的小%UMA%反而显得有些疑惑
-        - 就这样，%YOU%带着她走出了校门——
-        -
-        - acc: 1
-          content: 「按照『地图』的指示，这里，就是『巨人的庭园』了」
-        - 按照从旅游手册上撕下的一页纸的指引，%YOU%带%CHARA%来到了一个偏僻的公园里
-        - 四周，是秋千，滑梯，以及几只摇摇驴
-        -
-        - 「按照指引……%CALLNAME%，得先于主人挑战这些『试炼』」
-        - 于是，在%CHARA%的面前，%YOU%只是坐上了那个摇摇驴
-        - 而后，努力驱使起来——
-        -
-        - 「降服吧妖兽！变成我的%CALLNAME%……！」
-        -
-        - %CHARA%，一刹那似乎对%YOU%的行为有些震惊，睁大眼睛看着%YOU%
-        - 不过，眼神马上就又变得闪闪发光
-        -
-        - color: %COLOR%
-          content:
-            - fontWeight: bold
-              content: %CHARA%
-            - 「……什么呀%CALLNAME%！」
-        - 这样说着
-        - color: %COLOR%
-          content:
-            - fontWeight: bold
-              content: %CHARA%
-            - 「这种挑战，虽然%CALLNAME%你要打头阵，但不代表主人就不能给你多指点指点了！」
-        -
-        - color: %COLOR%
-          content:
-            - fontWeight: bold
-              content: %CHARA%
-            - 「看好了%CALLNAME%！这边这个试炼，应该这样通过——」
-        - %CHARA%，走到那架秋千旁
-        -
-        - 于是，%CHARA%坐上了秋千，努力晃荡起来——
-        -
-        - acc: 1
-          content: 「接下来……按照『地图』的指引，我们来到的是『时之迷宫』」
-        - %YOU%指着眼前的跳蚤市场，和%CHARA%讲道
-        - 「我能察觉到……这里有着被施加了『平凡的诅咒』的宝物，可以用来突破下一段旅程……」
-        -
-        - color: %COLOR%
-          content:
-            - fontWeight: bold
-              content: %CHARA%
-            - 「哼！这种事情还不简单！」
-        - 充满自信地说着
-        - color: %COLOR%
-          content:
-            - fontWeight: bold
-              content: %CHARA%
-            - 「天才%MOHOSHOJO%，两下子就能找到的！」
-        -
-        - %CHARA%兴致盎然地跑来跑去，看看这个，看看那个
-        - 最后，蹲下身去，捡起一个摊位上的——
-        - 一个小玻璃弹珠
-        -
-        - color: %COLOR%
-          content:
-            - fontWeight: bold
-              content: %CHARA%
-            - 「哼哼～！%CALLNAME%！主人找到了！这个就是传说中的魔法神器！」
-        - color: %COLOR%
-          content:
-            - fontWeight: bold
-              content: %CHARA%
-            - 「无论怎样的对手，它都能以小胜大，乒乒乓乓地为我们夺得最终的珍宝！」
-        - %CHARA%，将那颗弹珠高举起来，眼睛如同弹珠般透亮——
-        -
-        - acc: 1
-          content: 「最后，据说『巨人』的体内，有着『宝藏』——」
-        - 乘坐电车，来到了乡下的一个风车面前
-        -
-        - color: %COLOR%
-          content:
-            - fontWeight: bold
-              content: %CHARA%
-            - 「冲啊%CALLNAME%！为了魔法的胜利！！！」
-        - 小%UMA%骑在%YOU%背上，用魔杖指着远处的风车
-        - 两人一齐呼喊着，冲进了风车的大门
-        -
-        - 可惜，装饰用的风车内部并没有传说中的魔法圣物，有的，只是对外国历史技术的文字介绍
-        - 不久，%YOU%和%CHARA%就因为在未开放时间进入展览馆，被风车的管理人员请了出来
-        -
-        - 时间总是过得很快，转眼已是黄昏
-        - 此刻的%YOU%，正同%CHARA%走在回到特雷森学院的路上
-        -
-        - 此时此刻，%YOU%的抉择是——
-        - acc: 1
-          key: update
-          content: （献上「宝物」）（升级关系）
-          lines:
-            - 或许，已经是时候了吧
-            - %YOU%摸了摸口袋，其中，确乎有个小小的盒子
-            -
-            - acc: 1
-              content: （将它从口袋中拿出，端在手掌中央）
-            -
-            - 「主人，其实，我发现了这样一个宝物，但因为事发突然，没能及时向主人汇报」
-            - 「据说，它可以进一步增强我们两人之前的牵绊，增强主人的魔法力量」
-            -
-            - %YOU%跪下身子，缓缓打开手中的红色盒子
-            - 呈现其中的，是一颗闪亮的钻石戒指，就如同有着魔法一般
-            -
-            - color: %COLOR%
-              content:
-                - fontWeight: bold
-                  content: %CHARA%
-                - 「哇——」
-            - color: %COLOR%
-              content:
-                - fontWeight: bold
-                  content: %CHARA%
-                - 「哼哼～真不愧是我的%CALLNAME%！居然连这样的宝物都能够找到！」
-            - %CHARA% 十分惊喜的样子，伸出手就要把戒指拿走——
-            -
-            - color: %COLOR%
-              content:
-                - fontWeight: bold
-                  content: %CHARA%
-                - 「……！」
-            - 然后，突然意识到了什么，双脸刷的一下变得通红
-            -
-            - color: %COLOR%
-              content:
-                - fontWeight: bold
-                  content: %CHARA%
-                - 「使……%CALLNAME%——！你，你到底是在哪里找到这种东西的！！！」
-            - 结结巴巴地说着，明明用着理直气壮的语气，却不知为何，身体有些颤抖
-            -
-            - acc: 1
-              content: 「实不相瞒，是在路边的魔法店里……经过多日观察，才确定了这件宝物」
-            - 「如果可以的话，还请主人收下」
-            - 这么说道
-            -
-            - color: %COLOR%
-              content:
-                - fontWeight: bold
-                  content: %CHARA%
-                - 「你……你！！！」
-            - 似乎颤抖得更加明显了，连目光都有些不稳定
-            -
-            - color: %COLOR%
-              content:
-                - fontWeight: bold
-                  content: %CHARA%
-                - 「……哼！」
-            - color: %COLOR%
-              content:
-                - fontWeight: bold
-                  content: %CHARA%
-                - 「既然%CALLNAME%那么关心主人的话，就自己帮主人戴上好了！」
-            - 将目光移到一旁，好像很不情愿地将左手伸到%YOU%面前，时不时偷偷瞟上几眼
-            -
-            - 回去路上，%YOU%偷偷看着%CHARA%双脸通红抚摸自己无名指上戒指的样子
-        - acc: 2
-          content: （凯旋归家）（暂不升级）
-          lines:
-            - 经历了一天的玩闹，或许，已经是回去的时候了
-            - 于是，%YOU%继续背着小%UMA%，就这么走在路上
-            -
-            - color: %COLOR%
-              content:
-                - fontWeight: bold
-                  content: %CHARA%
-                - 「呐！%CALLNAME%——」
-            - 突然发现了什么
-            - color: %COLOR%
-              content:
-                - fontWeight: bold
-                  content: %CHARA%
-                - 「我要吃那个。」
-            -
-            - 背上的%CHARA%指向一旁，是一家卖苹果棒糖的店
-            - color: %COLOR%
-              content:
-                - fontWeight: bold
-                  content: %CHARA%
-                - 「让我下去。我要买两个。」
-            -
-            - 于是，%YOU%稍作蹲踞，小%UMA%马上从%YOU%的背上下来，奔向了那个小摊贩
-            - 不久之后，一手拿着一根苹果棒糖，跑了回来
-            -
-            - color: %COLOR%
-              content:
-                - fontWeight: bold
-                  content: %CHARA%
-                - 「给你一根，你是%CALLNAME%，不许说不。吃吧。」
-            - 将右手的苹果棒糖递给%YOU%，虽然语气冷冰冰的，不知为何却又有几分温柔
-            -
-            - %YOU%只是收下了那根苹果棒糖
-            -
-            - 在这之后，%YOU%和%CHARA%并排走着，一起吃着苹果棒糖，一边慢慢走回了特雷森学院
+      content: 「我背着你……偷偷和别人交往……什么的。」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「……什么啊，原来是这种事啊。」
+    - %CHARA%用半鄙夷的眼神看着%YOU%
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「这种事，主人为什么要生气啊。」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「%CALLNAME%，天天就盼着主人心胸狭隘什么的。」
+    - 就这样，双臂环抱在了胸前，开始了说明——
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「虽然，sweepy大人之前确实对%CALLNAME%背着主人和别人交往这种事感到不解！焦虑！甚至有一点～点的不安！」
+    - 说了一连串的话
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「但那是因为，担心%CALLNAME%离家出走！迷路了！没法为主人好好服务了！」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「绝～对不是因为什么怕%CALLNAME%被拐跑了！」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「这是，不会生气的理由其一！」
+    - 居然是其一吗……
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「然后，主人要是因为这种事情就生气的话——」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「不就和%CALLNAME%的伴侣没有区别了吗！？」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「这是，不会生气的理由其二！」
+    - 原来不认为自己是伴侣吗……
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「吼啦吼啦～既然，%CALLNAME%还知道自己跑回来的话巴结主人的话！」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「就和主人一起出去怎么样？！」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「为了防止%CALLNAME%在外面走丢，一～刻都不能松开主人的手哦！」
+    -
+    - 在之后，被%CHARA%以不容置疑的态度搭上了手，在外面一直逛到深夜才脱了身

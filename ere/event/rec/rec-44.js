@@ -2,7 +2,10 @@ const era = require('#/era-electron');
 
 const { add_event, cb_enum } = require('#/event/queue');
 const CustomizedRecruit = require('#/event/rec/rec-common');
-const { fill_moho_in_dict } = require('#/event/snippets/104400');
+const {
+  fill_moho_in_dict,
+  reset_no_action,
+} = require('#/event/snippets/104400');
 const generate_dictionary = require('#/event/snippets/generate-dictionary');
 
 const event_hooks = require('#/data/event/event-hooks');
@@ -26,6 +29,7 @@ module.exports = class extends CustomizedRecruit {
         event_hooks.week_end,
         new EventObject(this.id, cb_enum.edu).set_arg('we_blue_enchan_tress'),
       );
+      reset_no_action();
     }
   }
 };

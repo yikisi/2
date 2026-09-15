@@ -14,6 +14,8 @@ const { get_chara_color } = require('#/data/chara-colors');
 const SweepEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-44');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
+const SweepLifeMarks = require('#/data/event/life-event-marks/life-event-marks-44');
+const recruit_flags = require('#/data/event/recruit-flags');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
 
@@ -28,6 +30,7 @@ const aims = [
   [race_enum.tenn_sho, 2, 3, 0b11],
   [race_enum.eliz_cup, 2, 1, 0b11],
 
+  [race_enum.tuli_sho, 1, 1, -4],
   [race_enum.arim_kin, 2, 1, -3],
 ];
 const aim_races = { [race_enum.begin_race]: 0b11 };
@@ -67,10 +70,33 @@ module.exports = class extends CustomizedCheck {
     return titles;
   }
 
+  check_after_betrayed(partners, is_aware) {
+    const edu_marks = new SweepEduMarks();
+    if (
+      is_aware &&
+      era.get(`love:${this.id}`) >= 75 &&
+      ++edu_marks.betrayed === 3
+    ) {
+      add_event(
+        event_hooks.week_end,
+        new EventObject(this.id, cb_enum.love).set_arg('get_cuckold'),
+      );
+    }
+  }
+
   check_next_week() {
     const edu_marks = new SweepEduMarks();
     const edu_weeks = era.get(`cflag:${this.id}:育成回合计时`);
     const ebj = new EventObject(this.id, cb_enum.edu);
+    if (era.get(`cflag:${this.id}:招募状态`) === recruit_flags.yes) {
+      const life_marks = new SweepLifeMarks();
+      if (life_marks.no_action > 0 && !--life_marks.no_action) {
+        add_event(
+          event_hooks.week_end,
+          new EventObject(this.id, cb_enum.daily).set_arg('no_action_check'),
+        );
+      }
+    }
     if (edu_weeks < 3 * 48) {
       const ebj_s = new EventObject(this.id, cb_enum.edu, true);
       switch (edu_weeks) {
@@ -125,9 +151,11 @@ module.exports = class extends CustomizedCheck {
     const races = RaceHistory.get(this.id).get();
     return [
       check_aim_and_get_entry(races, race_enum.begin_race),
-      ...aims.map(([race, year, rank]) =>
-        check_aim_and_get_entry(races, race, year, rank),
-      ),
+      ...aims
+        .filter((a) => a[3] > 0)
+        .map(([race, year, rank]) =>
+          check_aim_and_get_entry(races, race, year, rank),
+        ),
     ];
   }
 };

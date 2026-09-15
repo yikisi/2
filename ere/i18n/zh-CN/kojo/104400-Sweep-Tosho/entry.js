@@ -16,6 +16,9 @@ class I18nKojo104400 {
   agreement = '大魔法师的约定';
   agreement_desc = '似乎是某个重要的约定。为了遵守约定而干劲高亢。';
 
+  cuckold = '「魔法癖」';
+  cuckold_desc = '「为什么，为什么不能叫魔法癖！」';
+
   report_takz_kin_s = (sweep) => [
     sweep,
     '，是 ',

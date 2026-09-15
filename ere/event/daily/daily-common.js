@@ -787,6 +787,13 @@ class CustomizedDaily extends CustomizedEvent {
    * @param extra_flag
    * @param {EventObject} event_object
    */
+  async week_end(hook, extra_flag, event_object) {}
+
+  /**
+   * @param {HookArg} hook
+   * @param extra_flag
+   * @param {EventObject} event_object
+   */
   async run(hook, extra_flag, event_object) {
     if (this[event_hooks.keys[hook.hook]] !== undefined) {
       return await this[event_hooks.keys[hook.hook]].call(

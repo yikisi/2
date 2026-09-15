@@ -95,34 +95,39 @@ module.exports = class extends CustomizedLove {
       dict,
     );
     if (ret === 1) {
-      begin_and_init_ero(0, this.id);
+      const check_in_ero = () => {
+        const cit = era.getCharactersInTrain();
+        return Array.isArray(cit) && cit.includes(0);
+      };
+
+      const safely_sex = async (p1, p2) => {
+        if (!check_in_ero()) {
+          begin_and_init_ero(0, this.id);
+        }
+        await quick_make_love(
+          new EroParticipant(0, p1),
+          new EroParticipant(this.id, p2),
+          false,
+        );
+      };
+
       let r;
       while (r !== 5) {
         r = (await this.#kojo['74_accept_pet'](dict))[0];
         switch (r) {
           case 2:
-            await quick_make_love(
-              new EroParticipant(0, part_enum.hand),
-              new EroParticipant(this.id, part_enum.breast),
-              false,
-            );
+            await safely_sex(part_enum.hand, part_enum.breast);
             break;
           case 3:
-            await quick_make_love(
-              new EroParticipant(0, part_enum.hand),
-              new EroParticipant(this.id, part_enum.body),
-              false,
-            );
+            await safely_sex(part_enum.hand, part_enum.body);
             break;
           case 4:
-            await quick_make_love(
-              new EroParticipant(0, part_enum.hand),
-              new EroParticipant(this.id, part_enum.virgin),
-              false,
-            );
+            await safely_sex(part_enum.hand, part_enum.virgin);
         }
       }
-      end_ero_and_train();
+      if (check_in_ero()) {
+        end_ero_and_train();
+      }
       await sys_love_uma_in_event(this.id);
     } else {
       await punish_rejecting_love(this.id);
@@ -137,12 +142,12 @@ module.exports = class extends CustomizedLove {
       era.set(`cflag:${this.id}:爱慕暂拒`, 89);
       return;
     }
-    const { update: ret } = await print_title_with_kojo(
-      this.#kojo,
-      '89',
-      sweep,
-      dict,
-    );
+    await print_title_with_kojo(this.#kojo, '89', sweep, dict);
+    let r;
+    while (r !== 3) {
+      r = (await this.#kojo['89_loop'](dict))[0];
+    }
+    const { update: ret } = await this.#kojo['89_marry'](dict);
     if (ret === 1) {
       await sys_love_uma_in_event(this.id);
     } else {
@@ -153,5 +158,11 @@ module.exports = class extends CustomizedLove {
       }
       era.set(`cflag:${this.id}:爱慕暂拒`, 89);
     }
+  }
+
+  /** @param {CharaTalk} sweep */
+  async get_cuckold(sweep) {
+    await print_title_with_kojo(this.#kojo, 'get_cuckold', sweep, this.#dict);
+    era.set(`talent:${this.id}:绿帽癖`, 1);
   }
 };

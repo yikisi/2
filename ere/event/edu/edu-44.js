@@ -2,7 +2,10 @@ const era = require('#/era-electron');
 
 const CustomizedEdu = require('#/event/edu/edu-common');
 const { add_event } = require('#/event/queue');
-const { fill_moho_in_dict } = require('#/event/snippets/104400');
+const {
+  fill_moho_in_dict,
+  reset_no_action,
+} = require('#/event/snippets/104400');
 const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
 const check_aim_race = require('#/event/snippets/check-aim-race');
 const generate_dictionary = require('#/event/snippets/generate-dictionary');
@@ -38,6 +41,7 @@ module.exports = class extends CustomizedEdu {
   }
 
   async train(attr) {
+    reset_no_action();
     await this.#kojo['train'](this.#dict);
   }
 

@@ -3,6 +3,7 @@ const era = require('#/era-electron');
 const CustomizedMec = require('#/event/mec/mec-common');
 
 const { get_chara_color } = require('#/data/chara-colors');
+const { el_success_color } = require('#/data/color-const');
 const SweepEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-44');
 const { race_enum } = require('#/data/race/race-const');
 
@@ -38,5 +39,17 @@ module.exports = class extends CustomizedMec {
       ];
     }
     return super.get_status(show_train_buff);
+  }
+
+  get_talents() {
+    if (era.get(`talent:${this.id}:绿帽癖`) > 0) {
+      return [
+        {
+          ...di18n.kojo.get_titled_content(this.id, 'cuckold'),
+          color: el_success_color,
+        },
+      ];
+    }
+    return super.get_talents();
   }
 };

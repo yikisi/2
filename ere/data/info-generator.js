@@ -837,6 +837,7 @@ module.exports = {
         ret.push(di18n.tb_talent.get_titled_talent(37));
       }
     }
+    // TALENTNAME:22 = 绿帽癖
     if (sys_check_cuckold(cid)) {
       ret.push({
         ...di18n.tb_talent.get_titled_talent(22),
