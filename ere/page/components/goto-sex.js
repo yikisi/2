@@ -337,7 +337,6 @@ async function goto_sex(cid, sex_loc) {
         } else {
           ret = await select_medicine();
           // 下药迷奸的情况作为非合意的标记
-          era.set('tflag:强奸', 0);
           if (!ret) {
             return;
           }
@@ -356,6 +355,7 @@ async function goto_sex(cid, sex_loc) {
             era.set(`status:${cid}:${i18n('zh-CN').tb_item[ret]}`, 1);
             era.set('flag:当前位置', sex_loc);
             begin_and_init_ero(0, cid);
+            era.set('tflag:强奸', 0);
           } else {
             return await fail(chara);
           }

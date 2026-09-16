@@ -6089,7 +6089,7 @@ ws_witch_potion:
       content:
         - fontWeight: bold
           content: %CHARA%
-        - 「在给 %%FUJI%% 不知道哪里搞来的，看起来就是在应付我的旧铁锅施上魔法之后」
+        - 「在给 %CALL_5% 不知道哪里搞来的，看起来就是在应付我的旧铁锅施上魔法之后」
     - color: %COLOR%
       content:
         - fontWeight: bold
@@ -6328,7 +6328,7 @@ og_phantom_thief:
         - 「既然你是我的%CALLNAME%，那配合主人也是理所当然的吧？我们，就这样做——」
     -
     - 新的一天，以带着面具的样子堂而皇之地出现在特雷森学院内
-    - ……两个人，正一同在 %KIT% 的面前做着提前排练好的Pose
+    - ……两个人，正一同在 %KITA% 的面前做着提前排练好的Pose
     -
     - acc: 1
       content: 「我是……Joker。」
@@ -6341,11 +6341,11 @@ og_phantom_thief:
     - color: %COLOR_68%
       content:
         - fontWeight: bold
-          content: %KIT%
+          content: %KITA%
         - 「？我，我是……Black！？？」
     - 不明所以地回应着
     -
-    - 给%KIT%分发了提前准备好的面具
+    - 给%KITA%分发了提前准备好的面具
     -
     - ……
     -
@@ -6364,7 +6364,7 @@ og_phantom_thief:
     - color: %COLOR_68%
       content:
         - fontWeight: bold
-          content: %KIT%
+          content: %KITA%
         - 「为了人们以自己的意志开拓和选择的未来——」
     -
     - acc: 1

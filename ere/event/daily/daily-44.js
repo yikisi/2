@@ -20,6 +20,7 @@ const EventObject = require('#/data/event/event-object');
 const SweepLifeMarks = require('#/data/event/life-event-marks/life-event-marks-44');
 
 const { i18n } = require('#/i18n/selector');
+const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 module.exports = class extends CustomizedDaily {
   get #kojo() {
@@ -46,7 +47,14 @@ module.exports = class extends CustomizedDaily {
     return false;
   }
 
+  good_morning() {
+    this.select();
+  }
+
   select() {
+    if (!sys_check_awake(this.id)) {
+      return this.#kojo['gn_normal_sleep'](this.#dict);
+    }
     get_chara_talk(68);
     this.#kojo['select']({
       CALL_68: sys_get_callname(this.id, 68),
@@ -63,6 +71,11 @@ module.exports = class extends CustomizedDaily {
   }
 
   async talk() {
+    if (!sys_check_awake(this.id)) {
+      this.#kojo['gn_normal_sleep'](this.#dict);
+      await era.waitAnyKey();
+      return;
+    }
     await this.#kojo['talk'](this.#dict);
   }
 
@@ -80,7 +93,9 @@ module.exports = class extends CustomizedDaily {
 
   async office_game() {
     await this.#kojo['office_game']({ game: this.#marks.game, ...this.#dict });
-    this.#marks.game++;
+    if (this.edu_weeks >= 12) {
+      this.#marks.game++;
+    }
   }
 
   async borrow_money() {
@@ -89,7 +104,7 @@ module.exports = class extends CustomizedDaily {
       borrow,
       ...this.#dict,
     });
-    if (era.get(`cflag:${this.id}:育成回合计时`) > 12) {
+    if (this.edu_weeks >= 12) {
       if (!borrow) {
         era.add('flag:当前马币', 100);
       }
@@ -102,7 +117,9 @@ module.exports = class extends CustomizedDaily {
       tree_hollow: this.#marks.tree_hollow,
       ...this.#dict,
     });
-    this.#marks.tree_hollow++;
+    if (this.edu_weeks >= 12) {
+      this.#marks.tree_hollow++;
+    }
   }
 
   async s_a_dating(sweep, me, hook) {
@@ -201,16 +218,10 @@ module.exports = class extends CustomizedDaily {
   }
 
   async good_night_sex(sweep, me, check) {
-    if (
-      era.get(`exp:${this.id}:性爱次数`) > era.get(`exp:${this.id}:睡奸次数`)
-    ) {
-      return (
-        (await this.#kojo['good_night_sex']({ check, ...this.#dict }))[
-          'sex'
-        ] === 1
-      );
-    }
-    return await super.good_night_sex(sweep, me, check);
+    return (
+      (await this.#kojo['good_night_sex']({ check, ...this.#dict }))['sex'] ===
+      1
+    );
   }
 
   async birthday(hook) {

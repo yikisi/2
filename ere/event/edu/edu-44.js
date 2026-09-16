@@ -612,12 +612,10 @@ module.exports = class extends CustomizedEdu {
 
   /** @param {CharaTalk} sweep */
   async ws_witch_potion(sweep) {
-    await print_title_with_kojo(
-      this.#kojo,
-      'ws_witch_potion',
-      sweep,
-      this.#dict,
-    );
+    await print_title_with_kojo(this.#kojo, 'ws_witch_potion', sweep, {
+      CALL_5: sys_get_callname(this.id, 5),
+      ...this.#dict,
+    });
     let wait = all_reward_in_event(this.id, {
       relation: get_random_value(20, 30),
     });

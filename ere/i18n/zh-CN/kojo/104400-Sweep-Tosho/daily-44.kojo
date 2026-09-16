@@ -1255,51 +1255,51 @@ office_game:
                     content: %CHARA%
                   - 「就叫……sweepy流怪物召唤术！」
               - 说到底在TRPG游戏中只会召唤怪物没有用的吧……
-      # 魔法之梦（资深年7月第1周回合开始事件）之后
-      - if: era.get('cflag:44:育成回合计时') >= 95 + 25
-        random: true
-        lines:
-          - 和%CHARA%一起玩着格斗游戏
-          - color: %COLOR%
-            content:
-              - fontWeight: bold
-                content: %CHARA%
-              - 「太弱了太弱了！我的黑白魔法使，肯定是要强于你的红白女巫的！！」
-          - color: %COLOR%
-            content:
-              - fontWeight: bold
-                content: %CHARA%
-              - 「Tosho★Spark！！！」
-      # 魔法之梦（资深年7月第1周回合开始事件）之后
-      - if: era.get('cflag:44:育成回合计时') >= 95 + 25
-        random: true
-        lines:
-          - 和%CHARA%一起玩着卡牌游戏
-          - color: %COLOR%
-            content:
-              - fontWeight: bold
-                content: %CHARA%
-              - 「不要不要不要！为什么你带了那么多手牌发动的陷阱卡啊！！」
-          - color: %COLOR%
-            content:
-              - fontWeight: bold
-                content: %CHARA%
-              - 「为什么我就一张都没抽到啊！！！」
-      # 魔法之梦（资深年7月第1周回合开始事件）之后
-      - if: era.get('cflag:44:育成回合计时') >= 95 + 25
-        random: true
-        lines:
-          - 和%CHARA%一起玩着角色扮演类游戏
-          - color: %COLOR%
-            content:
-              - fontWeight: bold
-                content: %CHARA%
-              - 「不要不要不要！为什么要花时间去上学啊！」
-          - color: %COLOR%
-            content:
-              - fontWeight: bold
-                content: %CHARA%
-              - 「不呆在殿堂里的话，我怎么去获得更强的人格啊！」
+          # 魔法之梦（资深年7月第1周回合开始事件）之后
+          - if: era.get('cflag:44:育成回合计时') >= 95 + 25
+            random: true
+            lines:
+              - 和%CHARA%一起玩着格斗游戏
+              - color: %COLOR%
+                content:
+                  - fontWeight: bold
+                    content: %CHARA%
+                  - 「太弱了太弱了！我的黑白魔法使，肯定是要强于你的红白女巫的！！」
+              - color: %COLOR%
+                content:
+                  - fontWeight: bold
+                    content: %CHARA%
+                  - 「Tosho★Spark！！！」
+          # 魔法之梦（资深年7月第1周回合开始事件）之后
+          - if: era.get('cflag:44:育成回合计时') >= 95 + 25
+            random: true
+            lines:
+              - 和%CHARA%一起玩着卡牌游戏
+              - color: %COLOR%
+                content:
+                  - fontWeight: bold
+                    content: %CHARA%
+                  - 「不要不要不要！为什么你带了那么多手牌发动的陷阱卡啊！！」
+              - color: %COLOR%
+                content:
+                  - fontWeight: bold
+                    content: %CHARA%
+                  - 「为什么我就一张都没抽到啊！！！」
+          # 魔法之梦（资深年7月第1周回合开始事件）之后
+          - if: era.get('cflag:44:育成回合计时') >= 95 + 25
+            random: true
+            lines:
+              - 和%CHARA%一起玩着角色扮演类游戏
+              - color: %COLOR%
+                content:
+                  - fontWeight: bold
+                    content: %CHARA%
+                  - 「不要不要不要！为什么要花时间去上学啊！」
+              - color: %COLOR%
+                content:
+                  - fontWeight: bold
+                    content: %CHARA%
+                  - 「不呆在殿堂里的话，我怎么去获得更强的人格啊！」
 
 
 borrow_money:
@@ -1469,7 +1469,7 @@ s_a_tree_hollow:
               - 「彩——椒——好——难——吃——→」
           - 在确定周围没有人之后，%CHARA%对枯树洞喊着这样的话语
       # 新生的Asphodel（经典年11月第2周回合结束事件）之后
-      - if: "!t && era.get('cflag:44:育成回合计时') > 47 + 42"
+      - if: era.get('cflag:44:育成回合计时') > 47 + 42
         random: true
         lines:
           - color: %COLOR%
@@ -1478,7 +1478,7 @@ s_a_tree_hollow:
                 content: %CHARA%
               - 「我——会——证——明——→」
           - 在确定周围没有人之后，%CHARA%对枯树洞喊着这样的话语
-      - if: "!t && era.get('cflag:44:育成回合计时') > 47 + 42"
+      - if: era.get('cflag:44:育成回合计时') > 47 + 42
         random: true
         lines:
           - color: %COLOR%
@@ -1488,7 +1488,7 @@ s_a_tree_hollow:
               - 「好——好——看——着——吧——→」
           - 在确定周围没有人之后，%CHARA%对枯树洞喊着这样的话语
       # 魔法之梦（资深年7月第1周回合开始事件）之后
-      - if: "!t && era.get('cflag:44:育成回合计时') >= 95 + 25"
+      - if: era.get('cflag:44:育成回合计时') >= 95 + 25
         random: true
         lines:
           - color: %COLOR%
@@ -1498,7 +1498,7 @@ s_a_tree_hollow:
               - 「魔——法——是——真——的——↑」
           - 在确定周围没有人之后，%CHARA%对枯树洞喊着这样的话语
       # 魔法之梦（资深年7月第1周回合开始事件）之后
-      - if: "!t && era.get('cflag:44:育成回合计时') >= 95 + 25"
+      - if: era.get('cflag:44:育成回合计时') >= 95 + 25
         random: true
         lines:
           - color: %COLOR%
@@ -2211,7 +2211,7 @@ o_s_movie:
 
 o_c_pray:
   # 新秀年4月之前
-  - if: (t = era.get('cflag:44:育成回合计时')) < 12
+  - if: era.get('cflag:44:育成回合计时') < 12
     lines:
       - color: %COLOR%
         content:
@@ -2226,10 +2226,10 @@ o_c_pray:
       -
       - 对着神龛念咒大概也算是一种参拜吧……
   # 新秀年4月之后
-  - if: t >= 12
+  - if: era.get('cflag:44:育成回合计时') >= 12
     lines:
       # 新生的Asphodel（经典年11月第2周回合结束事件）之前
-      - if: t <= 47 + 42
+      - if: era.get('cflag:44:育成回合计时') <= 47 + 42
         lines:
           - color: %COLOR%
             content:
@@ -2242,7 +2242,7 @@ o_c_pray:
                 content: %CHARA%
               - 「……所以说，%CALLNAME%，这次抽到的是什么……？」
       # 新生的Asphodel（经典年11月第2周回合结束事件）之后，魔法之梦（资深年7月第1周回合开始事件）之前
-      - if: t > 47 + 42 && t < 95 + 25
+      - if: era.get('cflag:44:育成回合计时') > 47 + 42 && era.get('cflag:44:育成回合计时') < 95 + 25
         lines:
           - color: %COLOR%
             content:
@@ -2255,7 +2255,7 @@ o_c_pray:
                 content: %CHARA%
               - 「下次，对着天才%MOHOSHOJO%sweepy大人直接许愿不就好了嘛！」
       # 魔法之梦（资深年7月第1周回合开始事件）之后
-      - if: t >= 95 + 25
+      - if: era.get('cflag:44:育成回合计时') >= 95 + 25
         lines:
           - color: %COLOR%
             content:
@@ -2276,7 +2276,7 @@ o_c_pray:
       - if: d.dice >= 0.95
         content: 抽到了[大凶]！
       -
-      - if: t < 47 + 42 && d.dice < 0.5
+      - if: era.get('cflag:44:育成回合计时') < 47 + 42 && d.dice < 0.5
         lines:
           - color: %COLOR%
             content:
@@ -2285,7 +2285,7 @@ o_c_pray:
               - 「没错吧没错吧！我就说，成为天才%MOHOSHOJO%的%CALLNAME%肯定能带来好运气～！」
           -
           - 大概和这种事没有关系……
-      - if: t < 47 + 42 && d.dice >= 0.5
+      - if: era.get('cflag:44:育成回合计时') < 47 + 42 && d.dice >= 0.5
         lines:
           - color: %COLOR%
             content:
@@ -2294,7 +2294,7 @@ o_c_pray:
               - 「不是要被别人捡走了之类的问题，不要跑回来找主人。」
           -
           - 相比于突然开始信抽签的%CHARA%，%YOU%突然开始不想相信抽签的效力了……
-      - if: t >= 47 + 42 && t < 95 + 25 && d.dice < 0.5
+      - if: era.get('cflag:44:育成回合计时') >= 47 + 42 && era.get('cflag:44:育成回合计时') < 95 + 25 && d.dice < 0.5
         lines:
           - color: %COLOR%
             content:
@@ -2303,7 +2303,7 @@ o_c_pray:
               - 「说吧说吧！想要实现什么愿望，%CALLNAME%？」
           -
           - %YOU%不太认为自己所祭拜的神明是%CHARA%……
-      - if: t >= 47 + 42 && t < 95 + 25 && d.dice >= 0.5
+      - if: era.get('cflag:44:育成回合计时') >= 47 + 42 && era.get('cflag:44:育成回合计时') < 95 + 25 && d.dice >= 0.5
         lines:
           - color: %COLOR%
             content:
@@ -2312,7 +2312,7 @@ o_c_pray:
               - 「既然这样，那就没有愿望能为%CALLNAME%实现了！」
           -
           - %YOU%不太认为自己所祭拜的神明是%CHARA%……
-      - if: t >= 95 + 25 && d.dice < 0.5
+      - if: era.get('cflag:44:育成回合计时') >= 95 + 25 && d.dice < 0.5
         lines:
           - color: %COLOR%
             content:
@@ -2321,7 +2321,7 @@ o_c_pray:
               - 「没错吧没错吧？跟主人在一起，果然运气会更好一点～！」
           -
           - 说不定会有着这样的效果呢
-      - if: t >= 95 + 25 && d.dice >= 0.5
+      - if: era.get('cflag:44:育成回合计时') >= 95 + 25 && d.dice >= 0.5
         lines:
           - color: %COLOR%
             content:
