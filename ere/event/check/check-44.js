@@ -98,8 +98,9 @@ module.exports = class extends CustomizedCheck {
         );
       }
       if (
-        [38, 115, 119, 121].every((cid) => era.get(`cflag:${cid}:招募状态`)) ===
-        recruit_flags.yes
+        [38, 115, 119, 121].every(
+          (cid) => era.get(`cflag:${cid}:招募状态`) === recruit_flags.yes,
+        )
       ) {
         check_and_add_event(
           edu_marks,

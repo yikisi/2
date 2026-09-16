@@ -7867,147 +7867,149 @@ ws_mother:
 # 爱如往昔入队，新秀年4月及之后
 # 东商变革和爱如往昔互相之间的好感+75，对玩家角色的好感同时+75，干劲均提升
 ws_tea_party:
-  - 一个平静的下午，和%SIL%一起坐在茶桌边
-  -
-  - color: %COLOR_97%
-    content:
-      - fontWeight: bold
-        content: %SIL%
-      - 「说起来，训练员先生为什么会突然想要和我一起喝下午茶呢？」
-  -
-  - acc: 1
-    content: 「因为有空……稍微想找几个人一起聚一下」
-  - 这样回答着，和%SIL%一起等待着
-  -
-  - color: %COLOR_97%
-    content:
-      - fontWeight: bold
-        content: %SIL%
-      - 「啊……！这位……是……」
-  - %SIL%看向不远处走来的一名小%UMA%
-  -
-  - color: %COLOR%
-    content:
-      - fontWeight: bold
-        content: %CHARA%
-      - 「喂！%CALLNAME%！为什么突然叫我来喝下午茶啊！」
-  - 一如既往的样子
-  -
-  - color: %COLOR%
-    content:
-      - fontWeight: bold
-        content: %CHARA%
-      - 「……『还有人』？那是什么意思？」
-  - 向桌旁张望的%CHARA%，偶然间和%SIL%深红的眼眸在一刹那相视
-  -
-  - color: %COLOR%
-    content:
-      - fontWeight: bold
-        content: %CHARA%
-      - 「啊……」
-  - color: %COLOR%
-    content:
-      - fontWeight: bold
-        content: %CHARA%
-      - 「吸……」
-  - 脸色一下子变得不对起来
-  -
-  - color: %COLOR%
-    content:
-      - fontWeight: bold
-        content: %CHARA%
-      - 「呐～%CALLNAME%～今天的下午茶，要不主人暂时就不参加了吧？」
-  - 突然开始撒娇了——
-  -
-  - 不管怎样，还是和%SIL%，%CHARA%，一同坐在了茶桌旁
-  - 除去%YOU%在勤勤恳恳地泡茶之外，在场的另外两人，不知为何陷入了微妙的沉默
-  -
-  - color: %COLOR_97%
-    content:
-      - fontWeight: bold
-        content: %SIL%
-      - 「……」
-  - 原本就不高的存在感，似乎因为克制显得更加稀薄
-  -
-  - color: %COLOR%
-    content:
-      - fontWeight: bold
-        content: %CHARA%
-      - 「……」
-  - 即使喝着有点苦的花茶，都没有什么反应了
-  -
-  - color: %COLOR_97%
-    content:
-      - fontWeight: bold
-        content: %SIL%
-      - 「那个……」
-  - color: %COLOR_97%
-    content:
-      - fontWeight: bold
-        content: %SIL%
-      - 「东商同学……要试试这一款茶水吗？」
-  - 还是打破了沉默
-  -
-  - %SIL%将泡有自己爱喝红茶的茶壶拿起来，为%CHARA%倒了一杯茶水
-  - 鲜红的液体，赫然摆在%CHARA%面前
-  -
-  - 有些犹豫的%CHARA%，稍微看了一眼%YOU%，又看了一眼%SIL%
-  - 只是端起茶杯，稍稍喝了一口
-  - color: %COLOR%
-    content:
-      - fontWeight: bold
-        content: %CHARA%
-      - 「唔……呜……」
-  - 虽然没有多说什么，但表情，明显对这味道十分抗拒的样子
-  -
-  - color: %COLOR_97%
-    content:
-      - fontWeight: bold
-        content: %SIL%
-      - 「啊……！」
-  - color: %COLOR_97%
-    content:
-      - fontWeight: bold
-        content: %SIL%
-      - 「我居然忘了，东商同学不是很喜欢苦的东西……」
-  - 有些愧疚的样子
-  -
-  - color: %COLOR_97%
-    content:
-      - fontWeight: bold
-        content: %SIL%
-      - 「说起来……有一种搭配，之前也给训练员先生介绍过……」
-  - color: %COLOR_97%
-    content:
-      - fontWeight: bold
-        content: %SIL%
-      - 「或许，对东商同学会好一点……」
-  -
-  - %SIL%从桌子的茶盒边拿起一瓶饮料，稍稍倾倒了一些，掺入了那杯茶水
-  - 最终，勾兑出来的液体，更加猩红——
-  -
-  - 看到这猩红的液体，%CHARA%的脸色，稍稍有一点发白
-  - 但在察觉%SIL%有些发怯和失落的眼神后，小%UMA%还是接过了那杯茶
-  - 慢慢地，慢慢地，抿了一口
-  -
-  - color: %COLOR_97%
-    content:
-      - fontWeight: bold
-        content: %SIL%
-      - 「会……好一点吗？」
-  - %SIL%轻声地问道
-  -
-  - color: %COLOR%
-    content:
-      - fontWeight: bold
-        content: %CHARA%
-      - 「……嗯。还可以……」
-  - color: %COLOR%
-    content:
-      - fontWeight: bold
-        content: %CHARA%
-      - 「虽然会苦，但甜了好多……」
-  - %CHARA%一边说着，一边轻轻地又抿了一口
-  -
-  - 慢慢地和两位%UMA%一起度过了平和的下午茶时光
-  - 在这之后，特雷森学院里流传开了「%MAJO%」，「妖精小姐」和 「故事家」的茶会传说
+  title: 女巫与吸血鬼的茶会
+  lines:
+    - 一个平静的下午，和%SIL%一起坐在茶桌边
+    -
+    - color: %COLOR_97%
+      content:
+        - fontWeight: bold
+          content: %SIL%
+        - 「说起来，训练员先生为什么会突然想要和我一起喝下午茶呢？」
+    -
+    - acc: 1
+      content: 「因为有空……稍微想找几个人一起聚一下」
+    - 这样回答着，和%SIL%一起等待着
+    -
+    - color: %COLOR_97%
+      content:
+        - fontWeight: bold
+          content: %SIL%
+        - 「啊……！这位……是……」
+    - %SIL%看向不远处走来的一名小%UMA%
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「喂！%CALLNAME%！为什么突然叫我来喝下午茶啊！」
+    - 一如既往的样子
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「……『还有人』？那是什么意思？」
+    - 向桌旁张望的%CHARA%，偶然间和%SIL%深红的眼眸在一刹那相视
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「啊……」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「吸……」
+    - 脸色一下子变得不对起来
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「呐～%CALLNAME%～今天的下午茶，要不主人暂时就不参加了吧？」
+    - 突然开始撒娇了——
+    -
+    - 不管怎样，还是和%SIL%，%CHARA%，一同坐在了茶桌旁
+    - 除去%YOU%在勤勤恳恳地泡茶之外，在场的另外两人，不知为何陷入了微妙的沉默
+    -
+    - color: %COLOR_97%
+      content:
+        - fontWeight: bold
+          content: %SIL%
+        - 「……」
+    - 原本就不高的存在感，似乎因为克制显得更加稀薄
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「……」
+    - 即使喝着有点苦的花茶，都没有什么反应了
+    -
+    - color: %COLOR_97%
+      content:
+        - fontWeight: bold
+          content: %SIL%
+        - 「那个……」
+    - color: %COLOR_97%
+      content:
+        - fontWeight: bold
+          content: %SIL%
+        - 「东商同学……要试试这一款茶水吗？」
+    - 还是打破了沉默
+    -
+    - %SIL%将泡有自己爱喝红茶的茶壶拿起来，为%CHARA%倒了一杯茶水
+    - 鲜红的液体，赫然摆在%CHARA%面前
+    -
+    - 有些犹豫的%CHARA%，稍微看了一眼%YOU%，又看了一眼%SIL%
+    - 只是端起茶杯，稍稍喝了一口
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「唔……呜……」
+    - 虽然没有多说什么，但表情，明显对这味道十分抗拒的样子
+    -
+    - color: %COLOR_97%
+      content:
+        - fontWeight: bold
+          content: %SIL%
+        - 「啊……！」
+    - color: %COLOR_97%
+      content:
+        - fontWeight: bold
+          content: %SIL%
+        - 「我居然忘了，东商同学不是很喜欢苦的东西……」
+    - 有些愧疚的样子
+    -
+    - color: %COLOR_97%
+      content:
+        - fontWeight: bold
+          content: %SIL%
+        - 「说起来……有一种搭配，之前也给训练员先生介绍过……」
+    - color: %COLOR_97%
+      content:
+        - fontWeight: bold
+          content: %SIL%
+        - 「或许，对东商同学会好一点……」
+    -
+    - %SIL%从桌子的茶盒边拿起一瓶饮料，稍稍倾倒了一些，掺入了那杯茶水
+    - 最终，勾兑出来的液体，更加猩红——
+    -
+    - 看到这猩红的液体，%CHARA%的脸色，稍稍有一点发白
+    - 但在察觉%SIL%有些发怯和失落的眼神后，小%UMA%还是接过了那杯茶
+    - 慢慢地，慢慢地，抿了一口
+    -
+    - color: %COLOR_97%
+      content:
+        - fontWeight: bold
+          content: %SIL%
+        - 「会……好一点吗？」
+    - %SIL%轻声地问道
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「……嗯。还可以……」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「虽然会苦，但甜了好多……」
+    - %CHARA%一边说着，一边轻轻地又抿了一口
+    -
+    - 慢慢地和两位%UMA%一起度过了平和的下午茶时光
+    - 在这之后，特雷森学院里流传开了「%MAJO%」，「妖精小姐」和 「故事家」的茶会传说

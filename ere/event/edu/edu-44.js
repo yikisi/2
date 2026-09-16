@@ -869,7 +869,7 @@ module.exports = class extends CustomizedEdu {
   /** @param {CharaTalk} sweep */
   async ws_tea_party(sweep) {
     const sil = get_chara_talk(97);
-    await print_title_with_kojo(this.#kojo, 'ws_mother', sweep, {
+    await print_title_with_kojo(this.#kojo, 'ws_tea_party', sweep, {
       SIL: sil.name,
       COLOR_97: sil.color,
       ...this.#dict,
