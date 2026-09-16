@@ -35,7 +35,7 @@ module.exports = class extends CustomizedEro {
           await this.#kojo['es_drug'](dict);
           delete dict.DRUG_NAME;
           if (!edu_marks.uma_s) {
-            await this.#kojo['es_drug_umz_s'](dict);
+            await this.#kojo['es_drug_umz_s_first'](dict);
           } else {
             await this.#kojo['es_drug_umz_s'](dict);
           }

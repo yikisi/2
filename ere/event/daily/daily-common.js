@@ -179,14 +179,12 @@ class CustomizedDaily extends CustomizedEvent {
         columns: [
           i18n().ui_no,
           ...money_list.slice(1).map((m) => di18n.get_money_content(m)),
-        ].map((e, i) => {
-          return {
-            accelerator: i,
-            config: { align: 'center', width: 6 },
-            content: e,
-            type: 'button',
-          };
-        }),
+        ].map((e, i) => ({
+          accelerator: i,
+          config: { align: 'center', width: 6 },
+          content: e,
+          type: 'button',
+        })),
       },
     );
     let amount = money_list[await era.input()];

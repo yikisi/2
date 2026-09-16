@@ -4,6 +4,15 @@ class SweepEduMarks extends EduEventMarks {
   // 状态：大魔法师的约定
   agreement;
 
+  // 一起玩游戏的次数
+  game;
+  // 借钱次数
+  borrow;
+  // 枯树洞次数
+  tree_hollow;
+  // 抽奖次数
+  drawing;
+
   // 绿帽癖获得事件
   betrayed;
   // 强奸 Play 次数

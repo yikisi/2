@@ -190,7 +190,19 @@ es_drug:
 
 
 # 下药迷奸 - 马跳S - 初次
-# TODO 所以再次的差分呢？
+es_drug_umz_s_first:
+  - 吃下一半甜品的%CHARA%，似乎有些晕眩
+  - 而后，好像意识到了什么
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「唔……唔……%CALLNAME%，你居然……」
+  - 话还没有说完的%CHARA%，只是慢慢地倒在了%YOU%的怀里
+
+
+# 下药迷奸 - 马跳S - 再次
+# TODO 补在这里
 es_drug_umz_s:
   - 吃下一半甜品的%CHARA%，似乎有些晕眩
   - 而后，好像意识到了什么
