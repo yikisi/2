@@ -287,6 +287,7 @@ class I18nClothes {
   113701 = 'Miracle Author';
   114101 = "Fate's Chosen Star";
   114301 = 'Lueur Angélique';
+  114501 = 'Monochrome GM';
   114901 = '绝佳晓暗';
   // GENERATED END
 }
