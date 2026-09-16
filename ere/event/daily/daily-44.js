@@ -3,10 +3,12 @@ const era = require('#/era-electron');
 const { sys_get_callname } = require('#/system/sys-calc-chara-others');
 
 const CustomizedDaily = require('#/event/daily/daily-common');
+const { add_event, cb_enum } = require('#/event/queue');
 const {
   fill_moho_in_dict,
   reset_no_action,
 } = require('#/event/snippets/104400');
+const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
 const generate_dictionary = require('#/event/snippets/generate-dictionary');
 const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 
@@ -14,6 +16,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const SweepEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-44');
 const event_hooks = require('#/data/event/event-hooks');
+const EventObject = require('#/data/event/event-object');
 const SweepLifeMarks = require('#/data/event/life-event-marks/life-event-marks-44');
 
 const { i18n } = require('#/i18n/selector');
@@ -141,7 +144,7 @@ module.exports = class extends CustomizedDaily {
     this.#marks.drawing++;
     let r;
     while (r !== 2) {
-      await this.#kojo['osd_loop'](dict);
+      r = (await this.#kojo['osd_loop'](dict))[0];
     }
   }
 
@@ -184,7 +187,13 @@ module.exports = class extends CustomizedDaily {
   }
 
   good_night_normal(sweep, me, c_awake, m_awake) {
-    if (!c_awake) {
+    if (this.edu_weeks >= 12 && !m_awake && !this.#marks.slave_rest) {
+      add_event(
+        event_hooks.week_end,
+        new EventObject(this.id, cb_enum.daily).set_arg('slave_rest'),
+      );
+      this.#marks.slave_rest = 1;
+    } else if (!c_awake) {
       this.#kojo['gn_normal_sleep'](this.#dict);
     } else {
       return super.good_night_normal(sweep, me, c_awake, m_awake);
@@ -230,6 +239,16 @@ module.exports = class extends CustomizedDaily {
       if (!life_marks.no_action) {
         await this.#kojo['ws_no_action_2_weeks'](this.#dict);
         life_marks.no_action = 2;
+      }
+    } else if (ebj?.arg === 'slave_rest') {
+      await print_title_with_kojo(
+        this.#kojo,
+        'gn_rest',
+        get_chara_talk(this.id),
+        this.#dict,
+      );
+      if (all_reward_in_event(0, { attr: [100, 200] })) {
+        await era.waitAnyKey();
       }
     }
   }

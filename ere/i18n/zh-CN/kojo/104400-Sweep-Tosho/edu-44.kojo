@@ -1643,6 +1643,194 @@ we_new_turn:
     - 但不管怎样，至少是让 %CHARA% 有了明确的目标……
 
 
+# 好感+20，爱慕+1，干劲+1，技能点数+50
+ws_valentine_c:
+  title: 心跳不止Chocolate？！
+  lines:
+    - 今天是一年一度的情人节，按照特雷森学院的校园传统，%YOU%准备了一盒巧克力
+    - acc: 1
+      content: 「巧克力的话……是每个人送一个，还是送给一个人好呢……」
+    -
+    - 按照特雷森学院的惯例，%YOU%思考着今年的做法
+    - 在路上走着的时候，突然看到了 %CHARA%
+    -
+    - acc: 1
+      content: （打个招呼吧。）
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「喂！%CALLNAME%！我正好要找你呢。」
+    - 结果，被 %CHARA% 先打了招呼
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「那些人真是的！一天到晚只会说魔法不存在什么的」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「明明，只是自己没有能够学会魔法的天赋罢了！」
+    - 马上发起了牢骚
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「哈啊……！害得我一晚上都没睡好觉，也没能好好练习魔法！」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「呐！%CALLNAME%，我现在就想吃甜品！赶快给我找一家甜品店啦～！！」
+    - 结果，绕回了任性的话题上……
+    -
+    - 在%YOU%一大早就有点汗颜的时候，%CHARA%突然注意到了些什么
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「……等一下，%CALLNAME%，你手里拿着的，是甜品对吧？」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「一直拿在手里，也不吃什么的，难不成……是私藏的魔法甜点？！」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「正好，清早是%MAJO%补充魔力的时刻！」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「呐！%CALLNAME%，这些甜品，就算给主人吃掉也没有问题吧？」
+    - %CHARA%，用闪亮亮的双眼看着%YOU%
+    -
+    - acc: 1
+      content: 「这个……不太好吧……」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「哼！我就知道%CALLNAME%不会那么轻易让出来的！」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「不要不要！我就要吃这个甜点啦！！」
+    - %CHARA%在%YOU%面前不断撒着娇
+    -
+    - acc: 1
+      content: 「那……」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「啊！果然还是同意了对吧！不愧是我的%CALLNAME%！」
+    -
+    - ……其实并不是这个意思，但%CHARA%在%YOU%解释清楚前就一把抢走%YOU%手中的巧克力
+    - 而后，毫无顾忌地拆开了%YOU%准备的精致礼盒……
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「哼哼～甜品，美味的甜品～」
+    - %CHARA%，哼着小曲打开巧克力的包装……
+    -
+    - acc: 1
+      content: 「今天，是情人节来着……」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「没错！今天，就是传说中一年里爱之魔力最充沛的时刻！」
+    - %CHARA%把一颗巧克力随手丢入嘴中
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「奶奶说过，只要在这个时候让对方吃下『充满魔力的食物』，就能施展出爱情的强大魔法，让两个人永远都不再分开！」
+    - %CHARA%，大口大口嚼着%YOU%的巧克力
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「只要能借到厨房，我肯定也能做出那样的食物！」
+    - %CHARA%，不一会就把%YOU%的巧克力吃了个精光
+    - acc: 1
+      content: 「那么，变革到底想要做什么食物呢？」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「哼哼～那还用说，当然是——」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「……！！！」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「使……%CALLNAME%！！！！！」
+    - 像是突然想到了什么东西，双脸变的通红
+    -
+    - %CHARA% 龇牙咧嘴地看向%YOU%
+    - 而后，慌慌张张地拿出魔杖，向着%YOU%舞动起来
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「Poppy★Asphodel，忘掉一切吧！！」
+    -
+    - acc: 1
+      content: 「额！？」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「怎么样，刚才发生了什么，都忘掉了吧，%CALLNAME%！」
+    - %CHARA%紧张而关切地盯着%YOU%
+    -
+    - acc: 1
+      content: 「是……是的……」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「哈——哈啊！真是的！」
+    - 稍稍松了一口气的样子
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「下次，不许再在情人节给主人带一大堆巧克力，明白了吗！！」
+    -
+    - acc: 1
+      content: 「好的？？？」
+    - 看着 %CHARA% 那不知为何通红依旧的双脸，%YOU%只是顺承着讲话
+    -
+    - 这样，%YOU%的情人节礼物一大早就全部被%CHARA%吃光了……
+
+
 rs_oka_sho:
   title: 樱花赏前·温和的 Cherry Blossom
   lines:
@@ -5054,6 +5242,167 @@ rs_arim_kin_s:
     - %CHARA%，在全场观众的注视中进入了闸机
 
 
+# 好感+30，干劲+1，技能点数+50
+ws_christmas_s:
+  title: 天才圣诞老人
+  lines:
+    - 圣诞夜之际，%CHARA%突然跑进%YOU%的训练员室里
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「喂！%CALLNAME%，跟我走吧！」
+    -
+    - acc: 1
+      content: 「去收礼物吗？」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「你在说什么啊%CALLNAME%。是那个啊，当然是那个啊」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「说到圣诞夜果然就是圣诞老人吧！」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「一直以来，圣诞老人都是『不明真身』的存在」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「作为天才%MOHOSHOJO%sweepy，当然要在这一天找到圣诞老人！」
+    -
+    - 刚勉强来得及带了些圣诞夜出行的物资，%YOU%就被%CHARA%一直拉到了学院外
+    -
+    - 虽然在十二月的后半，却并没有遇上大雪纷飞的日子
+    - 有着白雪皑皑，树影幢幢，人海漫漫，街灯点点
+    -
+    - 或许，在这样重要的日子里换换方式，到外面来走走也不错
+    - 不知为何有了这样的想法
+    -
+    - 但是……
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「天才%MOHOSHOJO%sweepy肯定！你们家里，一定有圣诞老人——！」
+    - 这样说着，经过主人同意的%SEX%，马上闯进了别人的家里……
+    -
+    - acc: 1
+      content: 「啊啊……」
+    - 看着闯入别人家中开始乱逛，和第一次见面的人自然聊天，以及像万圣节讨要糖果一样撒娇要圣诞蛋糕的%CHARA%
+    - %YOU%感到一阵想揉太阳穴的冲动
+    -
+    - 「非常抱歉打扰了……」
+    -
+    - 「那个……如果不介意的话，请收下这个作为歉意……」
+    - 虽然被打扰的对方很开心的样子，但临走之际，为了礼节，还是将算是提前准备的礼物递给了房子的主人
+    -
+    - 看着眼前自顾自带路的小小女巫
+    - 到底是圣诞节还是万圣节什么的已经不重要了，总之先好好地度过再说吧……
+    -
+    - 在这之后，%CHARA%一直执拗地要到各种地方去找圣诞老人，结果也理所当然地打扰了不少人家
+    -
+    - 或许并没有对别人造成什么实际的影响
+    - 但%YOU%确实感到阵阵不知去向何方的晕眩……
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「真是的真是的真是的！区区圣诞老人，怎么敢让我找不到的啊！！」
+    - 逛了许久，还是找不到想要的答案
+    -
+    - 不管对%CHARA%还是对%YOU%而言，这样下去或许都不是办法……
+    - 揉了揉太阳穴想了想
+    - 「其实……可能不是找不到……」
+    -
+    - 「因为……」
+    -
+    - 「我可能也算是一名圣诞老人？？」
+    -
+    - 到底是以什么心情说出这句话的呢
+    - 但至今为止已经送出了无数礼物，不得不说确实算是某种程度的验证
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「……什么？你？%CALLNAME%？」
+    - 一时有点疑惑和惊讶
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「……啊，原来是这样啊。结果，圣诞老人是这样的家伙啊」
+    - 然后，马上露出了鄙夷的表情
+    -
+    - 也没必要那么露骨地厌弃这样的圣诞老人吧……
+    - 「毕竟，圣诞老人就是在圣诞夜给别人派发礼物的存在嘛……」
+    - 「而且，听说，圣诞老人虽然一开始只有一个」
+    - 「但后来发展成为一个团体，在不断增加新的成员……」
+    - 「我的话，应该算是新成员吧」
+    - 自认的成员也是成员，总之是没问题的
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「什么嘛！圣诞老人一直就在身边，而且还是我的%CALLNAME%什么的，真是无聊嘛！！」
+    - 看上去很失望的样子
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「……等一下，圣诞老人是我的%CALLNAME%……我是圣诞老人的主人……」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「也就是说——」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「难不成，我也可以是圣诞老人！？？」
+    - 眼睛突然闪闪发光
+    -
+    - 到底是怎么联想到的……
+    - acc: 1
+      content: 「会不会太年轻了点……」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「才不重要呢！%CALLNAME%，你知道这意味着什么吗！！」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「这意味着，天才%MOHOSHOJO%sweepy，一到圣诞夜就可以施展『圣诞魔法』，变身成万人敬仰的圣诞老人！！」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「好啦好啦！快点和我一起去派发礼物啦！圣诞老人二号！！！」
+    -
+    - 也没必要刻意强调二号……
+    -
+    - 不管怎样，在那之后，一起给许多人派发了礼物，收到了众多感谢
+    - 身边的小%UMA%看上去很高兴的样子
+
+
 # 结局，未赢下3G1（即仅赢下2G1或更少）的场合
 ending_majo_journey:
   title: %MAJO%之旅
@@ -5330,6 +5679,7 @@ ending_forever_eyebright:
     -
     - 这个，充满「魔法」的世界。
 
+
 be_dull_dream:
   title: 平淡之梦
   lines:
@@ -5515,3 +5865,2149 @@ be_dull_dream:
     -
     - 无论在那之后的人生如何辉煌或惨淡，%CHARA%又是否到达了那个可能性的彼端
     - %YOU%只记得，这就是%YOU%作为中央特雷森训练员的生涯结尾。
+
+
+######## 随机事件 ########
+# 新秀年4月及以后，回合结束
+# 好感+30~50，速度&耐力+5
+we_slave_and_master:
+  title: 使魔与主人
+  lines:
+    - 又是一次莫名其妙的探险，在训练的空余时间，%YOU%被%CHARA%强行拉到了森林里
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「喂！%CALLNAME%！快点跟上来！」
+    - 被%CHARA%拼命使唤着，此刻的%YOU%与%CHARA%，正走在森林中的小道上
+    -
+    - 说是要找什么「自然魔法」的线索，结果两个人都没什么头绪
+    - 只好在森林里走着，努力搜寻周围的一切蛛丝马迹
+    -
+    - 走着走着，树林渐渐变得茂密起来
+    - 阳光透过树叶的缝隙，在地上投下斑驳的光影
+    -
+    - 在阳光斑驳的树影下，灌木丛后有什么沙沙的声响
+    - 然后，突然扑出一个黑影——！
+    -
+    - 是一只小狐狸。
+    - 晃了晃身子，看向了这边
+    -
+    - acc: 1
+      content: 「是狐狸呢……」
+    - 至少不是什么猛兽，%YOU%松了一口气
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「狐狸什么的不是很好吗？」
+    - %CHARA%想的东西完全不一样的样子
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「刻意跑到面前什么的，肯定是对天才%MOHOSHOJO%sweepy感兴趣，想要成为我的%CALLNAME%！」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「哼哼！作为天才%MOHOSHOJO%，肯定不能只有一个%CALLNAME%，这种千载难逢的机会可不能错过！」
+    -
+    - %CHARA%拿出魔法杖，挥舞起来
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「Iris★Ipomoea，成为我的%CALLNAME%吧！」
+    -
+    - 狐狸只是静静看着
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「Iris★Ipomoea，成为我的%CALLNAME%吧！！！」
+    -
+    - 狐狸挠了挠痒
+    - acc: 1
+      content: 「好像，它不是特别想当你的%CALLNAME%的样子……」
+    - 看着狐狸不为所动的样子，%YOU%有几分无奈地说着
+    -
+    - 就在%YOU%这么说的时候，原本好好站着的狐狸，莫名对%YOU%感起了兴趣
+    - 蹲踞一下，向%YOU%扑来……！
+    -
+    - 「……！」
+    - 但是，不知为何，只是扑到%YOU%因紧张而伸出的双臂上
+    - 最终，静静待在%YOU%双手抱着的怀里，像是睡着了一样
+    - acc: 1
+      content: 「说不定，这狐狸也会点魔法……」
+    - 感受着怀里狐狸轻轻的剐蹭，%YOU%莫名感觉有些惬意
+    -
+    - 不知道为什么，听了这句话后，原本只是不屑看着的%CHARA%，瞳孔突然缩小，耳朵树立起来
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「！不要不要不要！你本来应该只是我的%CALLNAME%的！！！」
+    -
+    - %CHARA%扑到%YOU%面前，同%YOU%争抢起怀里的狐狸
+    - 结果，狐狸理所当然惊得挣脱开来，没两下就消失在树林中了……
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「呐！%CALLNAME%，看着我，回答我！我是你的什么！」
+    - %CHARA%急切地问道
+    -
+    - acc: 1
+      content: 「主人。」
+    - acc: 2
+      content: 「担当……主人」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「呼……吓死我了……」
+    - 松了一口气
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「听好了，%CALLNAME%，从今以后，不许再被动物驯服，明白了吗！」
+    - 说到底人为什么会被动物驯服呢……不解的%YOU%，总之答应了%CHARA%的请求
+
+
+# 新秀年4月及以后，回合开始
+# 好感+30~50，耐力&根性+5
+ws_phalaenopsis:
+  title: 独一份的Phalaenopsis
+  lines:
+    - 想着%CHARA%可能会对花感兴趣，带着%CHARA%来到了花店
+    -
+    - 对花店里一朵朵的红色玫瑰，%CHARA%的目光没有停留一下
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「怎么了%CALLNAME%？为什么要带我看这些到处都有的花？」
+    -
+    - 无数盛开的风信子出现在面前，%CHARA%只是漠然
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「我才不要！这些说到底都是没有魔力的花吧？」
+    -
+    - 看着出现在眼前一丛丛的蓝色妖姬，%CHARA%不为所动
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「这些才不是什么魔女之花呢。」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「只有那一朵才是。」
+    -
+    - 结果，还是一点兴趣都没有的样子……
+    -
+    - 不管怎么样，既然来了就不能白来吧
+    - 虽然被%CHARA%用很微妙的眼神看着，但%YOU%还是坚持买了一盆蝴蝶兰
+    -
+    - acc: 1
+      content: 「和它聊聊天的话，说不定它也会懂点你说给它的魔法？」
+    - 这样说着
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「哼。」
+    - 虽然满脸不屑，但%CHARA%还是接过了%YOU%所买的盆栽
+    -
+    - 回去的路上不时和花讲着莫名其妙话语的%CHARA%
+    - 之后，难得好好地把蝴蝶兰放在宿舍里照顾着……
+
+
+# 新秀年4月及以后，回合开始
+# 好感+20~30
+# 玩家体力+100，精力+200
+ws_witch_potion:
+  title: 女巫的魔药
+  lines:
+    - 普通的一天，%YOU%正走在特雷森学院的操场上
+    - 远远地，一名小%UMA%飞快地朝%YOU%跑了过来
+    - %SEX%的手上，拿着一瓶内含绿色的，脉动的，却又有着微妙流动性的物质的玻璃瓶
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「%CALLNAME%～！快喝快喝——！」
+    - 一凑到跟前就开门见山，讲着奇怪无比的话
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「喝下这个天才%MOHOSHOJO%sweepy发明的药水……森林就会与你同在！」
+    -
+    - %CHARA%晃了晃玻璃瓶，极力对%YOU%推销着眼前的浓稠可疑绿色药水
+    - 明明看上去并不灼热，却不知为何好像内部仍在翻滚
+    -
+    - acc: 1
+      content: 「你是……在哪里做……的……？」
+      lines:
+        - %YOU%只是断断续续地说出这句话
+        -
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「当然是宿舍里了。」
+    - acc: 2
+      content: 「这是……哪里……搞……来的……？」
+      lines:
+        - %YOU%只是断断续续地说出这句话
+        -
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「我自己发明的啊。」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「在给 %%FUJI%% 不知道哪里搞来的，看起来就是在应付我的旧铁锅施上魔法之后」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「就算在宿舍的厨房里，主人也能够做出上好的药剂了！」
+    -
+    - 居然还能得到宿舍长的许可……
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「话不多说！%CALLNAME%，先来试试这个到底怎么样！？」
+    - %CHARA%，把那瓶药水继续推到%YOU%的面前——
+    -
+    - 在那之后，%YOU%让那瓶浓稠的绿色液体缓缓流入喉咙
+    - 好像，马上在特雷森校园的操场上，看见了广袤的森林和无尽的精灵
+
+
+# 新秀年4月及以后，回合结束
+# 好感+20~30，智力+10
+we_sweet_carrot:
+  title: 最甜的胡萝卜
+  lines:
+    - 「很久很久以前，有一只兔子
+    - 兔子有一名兔子奶奶，兔子奶奶每天出去回来，总会带来几个很甜的胡萝卜给%SEX%吃
+    - 久而久之，兔子想道，既然奶奶可以找得到这么甜的胡萝卜，那我也能找得到
+    - 于是，它走出了家门
+    -
+    - 兔子在路上碰到了一只狐狸
+    - 狐狸说，你跑得那么快，为什么一定要去找天底下最甜的胡萝卜呢？
+    - 兔子说，因为胡萝卜就是那么甜啊，你试试就知道了
+    - 狐狸说，我不吃胡萝卜
+    - 兔子把带着的胡萝卜塞到狐狸嘴里，狐狸只得说甜
+    -
+    - 兔子于是带着狐狸一起继续找着天底下最甜的胡萝卜
+    - 兔子总是跑得太快，回过头去责骂气喘吁吁跟上来的狐狸
+    - 终于，它们在一个山头找到了传说中最好吃的胡萝卜
+    - 兔子开心地把它带回家里，要给兔子奶奶看看
+    - 兔子奶奶笑了笑，带着它走进了厨房，要给兔子和狐狸做一桌盛宴
+    -
+    - 兔子等了又等，心急如焚
+    - 它悄悄走近厨房，发现兔子奶奶悄悄把胡萝卜换了一根
+    - 而那根它带回来的胡萝卜，则悄悄地种进了奶奶的菜园子里
+    -
+    - 原来，最甜的胡萝卜，一直都在，兔子奶奶的菜园里
+    - 兔子奶奶，总是在天不亮时就悄悄出门，给胡萝卜浇最新鲜的露水
+    - 兔子奶奶，总是在天不亮时就悄悄出门，给胡萝卜找最好的肥料
+    - 兔子奶奶，拜托了狐狸，让它带着兔子出去冒险，不要发现这里的秘密
+    -
+    - 兔子做了个决定
+    - 它要自己种一片胡萝卜田
+    - 每天用最新鲜的露水浇灌，用最好的肥料滋养
+    - 它使唤狐狸，天不亮就要准时叫醒兔子，然后拉着狐狸一起到外面寻找能种出最甜胡萝卜的方法
+    - 但是，它还是天天和兔子奶奶叫着要吃最甜的胡萝卜
+    - 最后，当它的田地收获时，每个小动物，包括狐狸，都认可了
+    - 兔子种出的胡萝卜，就是最甜的胡萝卜——」
+    -
+    - acc: 1
+      content: 「大概，就是这样子了」
+    - 总算是满足了%CHARA%突发奇想，想听故事的要求
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「……这样子就结束了？」
+    - 结果，好像很不满意的样子
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「什么啊……不要，好无聊！就算换成什么猫魔法师找魔法鱼的故事也能讲得通吧！！」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「使——魔——！！！就没有其他故事了吗？！！！」
+    -
+    - 在%CHARA%的要求下，%YOU%只得在故事书上重新找了一个故事讲给%CHARA%听……
+
+
+# 经典年及之后，回合结束
+# +放学后的专家
+we_in_school:
+  title: 上学时的快乐
+  lines:
+    - 一个普通的工作日，%YOU%正像平常的任何一天一样走在路上
+    -
+    - 迎面而来的，是一个熟悉的鹿毛小%UMA%——
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「啊，%CALLNAME%，我正好要找你呢。」
+    -
+    - 是%CHARA%。今天的训练计划正好要和%SEX%谈谈呢
+    - %YOU%抬起头，看了看头顶的太阳，再看了看一旁坐满%UMA%们的教学楼
+
+
+wis_loop:
+  -
+  - acc: 1
+    content: （来的好早啊）
+    lines:
+      - 按%CHARA%平常的脾气，能这么早来真是谢天谢地
+      - 但是，好像有哪里不对？？
+  - acc: 2
+    content: （%UMA%们的课业也挺重的呢）
+    lines:
+      - 不知道%CHARA%在课堂上会不会好好听讲，也许意外有着乖巧的一面
+      - 但是，好像有哪里不对？？
+  - acc: 3
+    content: 「现在不是在上课时间——？？」
+    lines:
+      - 发觉问题的%YOU%，马上叫了起来
+      -
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「嘘——！！！」
+      - %CHARA%连忙赶上来，用双手捂住了%YOU%的嘴巴
+      -
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「%CALLNAME%！为什么那么大声的喊出来啊！！」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「要是把老师引过来了，我不是就得回去了吗！？」
+      -
+      - 原来知道自己是在逃课么！？
+      -
+      - acc: 1
+        content: 「你……不上课了？？」
+        lines:
+          - %YOU%用稍微小声一些的话语问道
+          -
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「才没有不上课！」
+      - acc: 2
+        content: 「你……终于逃课了？？」
+        lines:
+          - %YOU%用稍微小声一些的话语问道
+          -
+          - color: %COLOR%
+            content:
+              - fontWeight: bold
+                content: %CHARA%
+              - 「什么逃课啊！只是换个地方学习魔法而已！」
+      -
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「我是说，英语课有什么好呆在教室里的啊？」
+      -
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「讲的东西我全都会，又老是干巴巴的谈些和魔法没什么关系的东西」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「有那个时间，我早就能掌握一门新的魔法了！」
+      -
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「%CALLNAME%，今天的练习到底是什么？赶快告诉我！」
+      -
+      - 虽然对训练来说是好事，但是%CHARA%的老师到底会怎么想呢……
+      - 后来，得知%CHARA%每次英语考试都能拿到传说中的满分后，稍微对%SEX%有了点改观
+
+
+# 经典年及之后，一起打游戏
+# 好感+20～30，智力增加10，Pt+50
+og_phantom_thief:
+  title: 天才怪盗Sweep
+  lines:
+    - 和%CHARA%一起玩着角色扮演类游戏
+    - 屏幕上正播放着酷炫的特写动画，%CHARA%似乎对那个核心设定产生了浓厚的兴趣
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「取走扭曲的欲望，让人悔改……什么呀什么呀！这不就是魔法嘛！」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「这么厉害的魔法，居然被说成是只能在游戏里发生的事情，太浪费了吧？！」
+    - %SEX%放下手柄，有些不满地嘟囔着
+    -
+    - acc: 1
+      content: 「毕竟现实中很难像游戏里那样潜入人心嘛……」
+    - %YOU%试图用常识回应%SEX%
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「笨蛋%CALLNAME%！那是你做不到，不代表天才%MOHOSHOJO%sweepy做不到！」
+    - 似乎反而激起了奇怪的胜负欲
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「只要是魔法，那在现实中就肯定有办法复现！」
+    - %CHARA%盯着屏幕思考了一会，而后，缓缓将目光移向了%YOU%
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「喂！%CALLNAME%，听好了！主人想到了一个绝妙的魔法仪式！」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「既然你是我的%CALLNAME%，那配合主人也是理所当然的吧？我们，就这样做——」
+    -
+    - 新的一天，以带着面具的样子堂而皇之地出现在特雷森学院内
+    - ……两个人，正一同在 %KIT% 的面前做着提前排练好的Pose
+    -
+    - acc: 1
+      content: 「我是……Joker。」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「我是……Sweep。」
+    -
+    - color: %COLOR_68%
+      content:
+        - fontWeight: bold
+          content: %KIT%
+        - 「？我，我是……Black！？？」
+    - 不明所以地回应着
+    -
+    - 给%KIT%分发了提前准备好的面具
+    -
+    - ……
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「三，二，一——」
+    - acc: 1
+      content: 「我们，乃传说中的『怪盗团』」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「为了取走世人因『凡俗』而扭曲的欲望——」
+    - color: %COLOR_68%
+      content:
+        - fontWeight: bold
+          content: %KIT%
+        - 「为了人们以自己的意志开拓和选择的未来——」
+    -
+    - acc: 1
+      content: 「纯净而果敢的『Maya』呦，我们，需要你的帮助！」
+    -
+    - color: %COLOR_24%
+      content:
+        - fontWeight: bold
+          content: %MAYA%
+        - 「？？？？？？」
+    - color: %COLOR_24%
+      content:
+        - fontWeight: bold
+          content: %MAYA%
+        - 「这……这是什么成为大人的新方式么！？？」
+    - 用两根手指拼命怼着太阳穴，思考着
+    -
+    - 给%MAYA%分发了提前准备好的面具
+    -
+    - ……
+    -
+    - color: %COLOR_5%
+      content:
+        - fontWeight: bold
+          content: %FUJI%
+        - 「听起来似乎挺不错的呢」
+    - color: %COLOR_5%
+      content:
+        - fontWeight: bold
+          content: %FUJI%
+        - 「如果需要的话，也请允许我加入吧」
+    - 给%FUJI%分发了提前准备好的面具
+    -
+    - ……
+    -
+    - color: %COLOR_47%
+      content:
+        - fontWeight: bold
+          content: %ZOB_ZOY%
+        - 「那个……」
+    - color: %COLOR_47%
+      content:
+        - fontWeight: bold
+          content: %ZOB_ZOY%
+        - 「就算是设定集，我也还没看过……」
+    - 还是给%ZOB_ZOY%发了面具
+    -
+    - ……
+    -
+    - 临近黄昏的时候，「怪盗团」已经发展到了一个相当巨大的规模
+    -
+    - color: 对应角色颜色
+      content:
+        - fontWeight: bold
+          content: 路过的%UMA%A
+        - 「最……最近到了百鬼日行的季节了么！？」
+    - color: 对应角色颜色
+      content:
+        - fontWeight: bold
+          content: 路过的%UMA%B
+        - 「百鬼日行是什么啊？！」
+    -
+    - ……
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「可惜，一到夜晚，天才怪盗Sweep还是需要回归%SEX%的本职」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「作为天才%MOHOSHOJO%sweepy，去研究魔法！！」
+    - %CHARA%在%YOU%的训练员室里自顾自写着日记
+    -
+    - 这样无休止的角色扮演，到底到什么时候才会停下来呢
+    - 至少这次，应该过两天就会玩腻的吧……
+
+
+# 经典年11月2周后，回合开始
+# 好感度+20~30，技能点数+20
+ws_magic_origin:
+  title: 魔法的起源
+  lines:
+    - 风和日丽的一天，%CHARA%，又突然闯进%YOU%的训练员室
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「喂。%CALLNAME%。跟我走。」
+    -
+    - 带领着%YOU%上了地铁，可以看出，地铁的目标，似乎是%CHARA%的奶奶家
+    -
+    - acc: 1
+      content: 「我们……是要去干什么呢？」
+    - 轻轻地问道
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「哼哼～当然是——要给奶奶一个惊喜了！」
+    - 非常直白地回答了
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「奶奶那家伙，虽然是大魔法师，但是却老是出尔反尔！」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「这一次，一定要在她知道之前，来个措手不及！！」
+    -
+    - color: # TODO:对应角色颜色
+      content:
+        - fontWeight: bold
+          content: 奶奶
+        - 「呵呵，来了呢，茶已经泡好了哦」
+    - 在花园的圆桌上，摆放着精致的茶具
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「不要不要不要，到底是怎么知道我要来的啊！！」
+    - 似乎因为意外之外的迎接，表现出生气的样子
+    -
+    - 奶奶微笑着悄悄看了一眼%YOU%
+    -
+    - 在那之后，和%CHARA%还有奶奶一起围坐在圆桌旁，在花香中一边喝着茶，一边聊着天
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「喂，奶奶，我们是不是还没有那什么来着？那什么。」
+    - 突然挑起一个话题
+    -
+    - 虽然语气都表情都刻意显得冷峻，但似乎在目标明确地暗示着什么
+    -
+    - color: 对应角色颜色
+      content:
+        - fontWeight: bold
+          content: 奶奶
+        - 「啊，是那个啊」
+    - color: 对应角色颜色
+      content:
+        - fontWeight: bold
+          content: 奶奶
+        - 「呵呵……果然一回来最想要还是那个呢」
+    - 马上就明白了%CHARA%的意图，奶奶，意味深长地笑了笑
+    -
+    - 奶奶缓缓走进屋内，打开一个抽屉，从抽屉里拿出一本积满灰尘的书，走了出来
+    - color: 对应角色颜色
+      content:
+        - fontWeight: bold
+          content: 奶奶
+        - 「那么，就开始吧」
+    -
+    - 但是，并没有打开书，只是拂了拂书上的灰尘
+    - 而后，滔滔不绝地讲了起来——
+    -
+    - 仿佛她并不是正在讲一个故事，而是在回忆一段若有若无的经历
+    -
+    - 一段书上有着的，有关魔法师之间的浪漫相遇
+    - 一段一直以来流传的孩童如何求得魔药治好母亲的故事
+    - 一段，关于魔法的纯真幻想——
+    -
+    - color: 对应角色颜色
+      content:
+        - fontWeight: bold
+          content: 奶奶
+        - 「果然，一直就像，奶奶小时候一样呢」
+    - 不知为何笑着喃喃自语，讲故事的环节，不知不觉中就结束了
+    -
+    - 将要同%CHARA%回去的时候，悄悄转头看了看屋内的马娘老人
+    -
+    - 她，拿着书本缓缓走到书桌旁，打开了抽屉
+    - 但是，却没有马上把书放回去，而是默默凝视着书的封面
+    -
+    - 最终，拂了拂书上的尘埃，而后，将它小心翼翼地放回抽屉
+    - 在抽屉里，似乎还有许许多多积满灰尘的书
+
+
+# 经典年11月2周后，回合开始
+# 技能Pt+50，耐力+5，智力+5
+ws_paper_plane:
+  title: 魔法的纸飞机
+  lines:
+    - 新的一天，有着新的工作
+    - 因为一些特殊的情况，学院高层需要%YOU%处理一些%UMA%们的建议
+    - 却又没讲清楚，到底处理到什么地步
+    -
+    - acc: 1
+      content: 「或许，这就是『现实』吧……」
+    - 怀着对高层和%UMA%们各自的谅解，%YOU%开始阅览这些文件
+    -
+    - 就在这时，训练员室的门被打开了——
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「喂！%CALLNAME%，跟我走——」
+    - 是%CHARA%。
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「喂——！」
+    - %YOU%没有马上理%SEX%
+    -
+    - acc: 1
+      content: 「虽然很对不起，但是我得先处理这些文件……」
+    - %YOU%缓缓抬起头，指了指虽然不厚但依然有一定量的建议
+    - 算是，拒绝了%CHARA%的提议
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「……『文件』？……是凡人的『魔法建议』？」
+    - 稍微有些惊讶
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「天才%MOHOSHOJO%sweepy的%CALLNAME%，居然会被这种事情烦扰？？」
+    -
+    - acc: 1
+      content: 「这个……是『上级』的安排……」
+    - %YOU%只是这样告知
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「上级？理事长？是大魔法师吗？比天才%MOHOSHOJO%sweepy厉害吗？」
+    - %CHARA%用富有压迫感的眼神盯了过来……
+    -
+    - 比起惹%SEX%生气，或许，还是让%SEX%安分一点好……
+    - acc: 1
+      content: 「没有变革厉害啦……」
+    - 违心地讲着
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「那就对了，%CALLNAME%！」
+    - 眼神温和下来，马上恢复了平和的状态
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「和天才%MOHOSHOJO%sweepy在一起，就不该被这些杂务所烦扰！」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「这些乱七八糟的魔法提议，就应该这样——」
+    - %CHARA%突然凑到桌前，揽过那些文件，飞快地翻阅起来
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「『花圃里种胡萝卜等等等等』『校园墙涂鸦等等等等』『食堂新菜品等等等等』……」
+    - %CHARA%拿出一张白纸，飞快地在上面写下文字
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「把这些无聊的凡人的建议，全部总结完。」
+    - 那张纸上，井井有条地写满了一个个建议的不漏细节的缩略版
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「然后——」
+    -
+    - %CHARA%，把那张%SEX%刚刚总结的各种建议的大纲折成了纸飞机
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「Anemone★Wallflower，去到那里吧！」
+    - 哈了一口气，%CHARA%，将纸飞机从训练员室窗户用力地向外丢出——
+    -
+    - 那只纸飞机，受风的影响，飘飘忽忽，混乱地转来转去
+    - 但是，不知怎么，似乎又稳定地向着一个地方前进
+    - 最终，不偏不倚，飞进了理事长办公室打开的窗户，落在了桌子上
+    -
+    - acc: 1
+      content: 「这是……？」
+    - %YOU%只是惊讶
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「什么啊笨蛋%CALLNAME%！你不会真的想自己替那些家伙做全部决定吧！？」
+    - 马上回应道
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「不会魔法的%CALLNAME%，怎么可能造福凡人嘛！」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「跟我走，%CALLNAME%！」
+    - 不容置疑地推动了话题
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「既然你这么想学魔法，那主人就教你一些吧！」
+    -
+    - 在这之后，被%CHARA%拉去了一个活动现场
+    - 在那里，和%CHARA%一起配合，给别人表演了魔术
+
+
+# 资深年7月1周后，回合结束
+# 好感度+20~30，速度+5，耐力+5
+we_buttercup:
+  title: 永远的Buttercup
+  lines:
+    - 一个普通的下午，%YOU%和%CHARA%，只是在校园里面一起走着
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「喂。%CALLNAME%，帮我拿着。」
+    - %CHARA%不知为何突然脱下头上的帽子，向%YOU%传递过来
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「干什么？天才%MOHOSHOJO%sweepy在休息，现在是%SEX%的里人格%CHARA%在和你说话！」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「……怎么了？%CHARA%，也不过只是个小%UMA%吧？」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「哼。你不愿意拿着的话，我自己拿着，略略略」
+    - %CHARA%一下子把帽子抢回去，拉下一只眼睛的眼皮，对着%YOU%做起了鬼脸
+    -
+    - %CHARA%坐在花坛边上，轻轻闭上眼睛，慢悠悠地前后晃着两条小腿
+    - 阳光照在%SEX%的面庞上
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「喂！你这家伙！让我躺一下。」
+    - 突然下了命令
+    -
+    - 就这样，%CHARA%把头枕在%YOU%的大腿上，默默地闭着眼睛，静静地躺着
+    - 两只棕色的耳朵不时微微转动
+    -
+    - 不知为何缓缓睁开了眼睛，和%YOU%对视起来
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「……你不说些什么吗？我这样子什么的。」
+    - 虽然冷冰冰的，但也意外地有几分轻柔
+    -
+    - acc: 1
+      content: 「也没什么好说的吧」
+      lines:
+        - 「确实就像小孩子一样……」
+        - 不经意间露出了无奈的表情
+        -
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「哼。大人就是这样，老是看不起小孩子。」
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「但凡自己当过一次小孩子就明白了。」
+        -
+        - 得到了冷冷的回复，%CHARA%又默默闭上眼睛，静静躺在%YOU%的腿上
+        - 阳光洒落在%YOU%和%CHARA%身上
+        -
+        - 直到黄昏，%CHARA%才起身戴上帽子，领着%YOU%回到了训练室
+    - acc: 2
+      content: 「反正……从一开始，不论哪个%CHARA%就都是这个样子……」
+      lines:
+        - 不经意间露出了无奈的表情
+        -
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「……！什，什么意思！？」
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「喂！讲清楚啊%CALLNAME%！我怎么就一直都是这个样！子！了！！」
+        -
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「哼！」
+        - 一下子起了身，%CHARA%有几分生气地把放在一边的帽子戴上
+        -
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「不休息了！叫%CHARA%的小%UMA%已经回去了！」
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「现在，是
+            - fontWeight: bold
+              content: 一开始
+            - 的天才%MOHOSHOJO%sweepy在和你说话！」
+        -
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「还想跟%SEX%聊天的话，%CALLNAME%下次自己珍惜点吧！」
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「要不然，以后可能都没法再见到了！」
+        -
+        - 就这样，%YOU%又被%CHARA%硬生生地推回了训练室……
+
+
+# 资深年7月1周后，持有淫纹，回合开始
+ws_night_shade:
+  title: 不可言说的Nightshade！
+  lines:
+    - 新的一天，%YOU%在办公室里工作的时候，一名小%UMA%拿着一本厚厚的书走了进来
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「呐，这本书，你帮我拿走吧。」
+    - 开门见山地提出了请求
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「前段时间，不知道为什么有人把它给了我，好像非常想要我看这本书。但是我不想看。」
+    -
+    - 看了一眼书的封面，名为《魔法的本质及其实践》
+    -
+    - acc: 1
+      content: 「不是挺好的吗，为什么不看呢？」
+    - %YOU%这样回应道
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「不要。这本书感觉阴森森的，我才不要看这种阴森森的书。」
+    - 似乎有某种直觉似地，%CHARA%给出了拒绝的理由
+    -
+    - ……其实，这本书，作为训练员的%YOU%曾经看过
+    - 或许之前给%CHARA%看稍微有些太早了，但现在的话，或许让%SEX%知道一下也不错——
+    -
+    - 「不看的话，拿来就没有意义了吧」
+    - 继续这样说着
+    - 「毕竟，了解魔法的本质，不是对天才%MOHOSHOJO%sweepy很有帮助的东西么？」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「……什么啊！怎么你也是这个态度啊！」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「哼！既然%CALLNAME%这么说，我就姑且看两眼到底是什么书好了。」
+    - 在%YOU%的鼓励下，%CHARA%装作勉为其难地打开书本，从目录那页翻读起来
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「目录，第一章，关系魔法。」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「第一节，淫纹的zhong……lei……ji……」
+    -
+    - 不知道为什么，%CHARA%阅读的声音越来越小，眼睛里的光芒也逐渐黯淡下去
+    - 就这样，在难以形容的静寂中，一直看到了第一节的结尾
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「……呐～！%CALLNAME%！我突然想到——！」
+    - 不知为何突然开始卖可爱的 %CHARA%，用%UMA%的力量把%YOU%硬生生拉去探险了……
+    -
+    - 据%FUJI%宿舍长说，那之后的一周，一向熬夜研究魔法的%CHARA%开始每晚仰面朝天，好好睡起了觉
+    - 看起来安详无比……
+  # we_gypsonphila
+
+
+# ws_night_shade 同回合，回合结束
+# +炽热视线
+we_gypsonphila:
+  title: 应当追求的Gypsophila！
+  lines:
+    - 平凡的一天，热热闹闹的，下课的教室里
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「呐。听好了，大家。」
+    - 一名小%UMA%突然从座位上跑到讲台桌那里去，发起了宣言
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「关于魔法的本质，我有着不得不告诉大家的消息……」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「台下的某些人，或许已经知道了传说中『魔法』的真谛」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「也许，一些人正尝试使用这种『魔法』从中受益……」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「但是！」
+    - %CHARA%突然爬上讲台桌
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「这样的『魔法』，终究不过是『黑魔法』罢了！！！」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「根据天才%MOHOSHOJO%sweepy的研究，魔法，其实有着更好的一面！」
+    - %CHARA%跳下讲台，抓起粉笔，在黑板上不断书写着一连串令人不明所以的咒语
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「这样的，那样的，还有这个——」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「所有的这些，才是——」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「不要不要不要！让我说完～！！！」
+    - 结果，自顾自胡闹的%CHARA%，被老师当场逮住，只得在课上继续偷偷向旁桌传播%SEX%的魔法理论
+
+
+# 好感+20~30，技能点数+50，体力&精力+600
+ws_strange_day:
+  title: 可笑しい日
+  lines:
+    - 一日早上，%YOU%感觉有些不太对劲，但仍然打算迎接美满的一天。
+    - 「(ง •̀_•́)ง」
+    - %YOU%没有在意那么多，在洗漱完毕后出门了
+    - color: %COLOR_301%
+      content:
+        - fontWeight: bold
+          content: %MINORU%
+        - 「Y(^_^)Y」
+    - %SEX%还是一如既往在校门口欢迎每一个人
+    - ……？
+    - 「눈_눈」
+    - %YOU%感觉有点怪异，却无法说出来
+    - color: %COLOR_58%
+      content:
+        - fontWeight: bold
+          content: %DOTOU%
+        - 「(๑•́ωก̀๑)」
+    - %SEX%怎么又哭了
+    - color: %COLOR_24%
+      content:
+        - fontWeight: bold
+          content: %MAYA%
+        - 「(～0～)」
+    - 这位小祖宗又熬夜了吧
+    - color: %COLOR_20%
+      content:
+        - fontWeight: bold
+          content: %SKY%
+        - 「<(★ΦωΦ★)>」
+    - ……这都是什么表情。
+    - ……！
+    - 「(#ﾟДﾟ)」
+    - %YOU%终于注意到，%YOU%这一路上都没听到一句话，反而是一些颜文字浮现在脑中。
+    -
+    - 这可怎么办呢……
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「(｢･ω･)｢嘿」
+    - 在路上碰见了%CHARA%
+    -
+    - acc: 1
+      content: ｢(｢･ω･)｢嘿」
+    - acc: 2
+      content: ｢ヾ(＾。^★)」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「(〇_ｏ)」
+    - 看样子好像没有理解%YOU%在干什么。
+    -
+    - acc: 1
+      content: 向%SEX%解释现在的状态
+      lines:
+        - (「(´ﾟωﾟ｀)」)
+        - (「⁽⁽◝( •௰• )◜⁾⁾，₍₍◞( •௰• )◟₎₎（手舞足蹈中）」)
+        -
+        - (「╮（╯＿╰）╭」)
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「(┯_┯)」
+    - 过了一时半会，终于理解了意思
+    - 但是，却被带着去了训练员室
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「(★^ω^★)/♪∪」
+    - 用魔杖指着一瓶黏糊糊的草药汁液
+    -
+    - acc: 1
+      content: 「(●—●)」
+    - %YOU%只是感到一阵踌躇……
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「(┯_┯)/ ∪」
+    - 用魔杖明确地示意了那瓶未知物
+    -
+    - acc: 1
+      content: 「(๑˙ー˙๑)」
+    -
+    - 在不到一个小时的时间里不断试着药
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「(★^ω^★)/
+        - color: rgba(72, 217, 70, 1)
+          content: ∪
+        - 」
+    - 「(´×ω×`)」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「( ^ _ ^ )/
+        - color: rgba(191, 8, 173, 1)
+          content: ∪
+        - 」
+    - 「(´×ω×`)」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「( ｰ̀ д ｰ́ )/
+        - color: rgba(28, 8, 204, 1)
+          content: ∪
+        - 」
+    - 「(´×ω×`)」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「( 눈 _ 눈 )/
+        - color: rgba(239, 223, 6, 1)
+          content: ∪
+        - 」
+    - 「(´×ω×`)」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「(  ◣д◢ )/
+        - color: rgba(225, 32, 2, 1)
+          content: ∪
+        - 」
+    - 「(´×ω×`)」
+    - 完全没有效果
+    -
+    - 明明是在尝试解除不明所以的诅咒
+    - 不知为何却有了一种成为实验小白鼠的感觉……
+    -
+    - if: era.get('cflag:32:招募状态') === 1
+      lines:
+        - ……等一下，或许并不是诅咒
+        - 说到「小白鼠」——
+        -
+        - 想起了名为%TACHYON%的%UMA%
+        - 也许，又是不打招呼的实验……
+        -
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「(◣д◢)」
+        - 而这份气没有消的样子，或许利用一下也不错
+        -
+        - 来到了%TACHYON%的实验室，穿着白大褂的%UMA%果然就在那里
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「╰（‵□′）╯」
+        - color: %COLOR_32%
+          content:
+            - fontWeight: bold
+              content: %TACHYON%
+            - 「( ^ω^ )」
+        -
+        - acc: 1
+          content: (「╭( ′• o •′ )╭☞( ^ω^ )」)
+        -
+        - color: %COLOR_32%
+          content:
+            - fontWeight: bold
+              content: %TACHYON%
+            - 「(눈_눈)」
+        -
+        - acc: 1
+          content: (「(～￣▽￣)→(눈_눈)」)
+        -
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「（╯‵□′）╯︵┴─┴(눈_눈)」
+        -
+        - 咚咚啪！轰轰轰——！！
+        - color: %COLOR_32%
+          content:
+            - fontWeight: bold
+              content: %TACHYON%
+            - 「嗷(∩∀°╭嗷∀∀嗷∀∀°)嗷嗷」
+        - （感谢汤姆老师的配音）
+        -
+        - color: %COLOR_32%
+          content:
+            - fontWeight: bold
+              content: %TACHYON%
+            - 「( ✘_✘ )」
+        -
+        - 在%YOU%与%CHARA%的共同压制下，眼前的栗毛%UMA%不久就答应交出这一次的解药
+        - 之后，虽然不多，但%YOU%的生活恢复了某种程度的正常
+    - if: era.get('cflag:32:招募状态') !== 1
+      lines:
+        - ……等一下，或许并不是诅咒
+        - 想起之前在学校的小卖部领取了免费的饮品——
+        -
+        - acc: 1
+          content: (「(◣д◢)」)
+        -
+        - 带着还在生气的%CHARA%来到小卖部，身穿白大褂的栗毛%UMA%就在那里
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「╰（‵□′）╯」
+        - color: %COLOR_32%
+          content:
+            - fontWeight: bold
+              content: ？？？
+            - 「(★∩ω∩)」
+        -
+        - acc: 1
+          content: (「╭( ′• o •′ )╭☞(★∩ω∩)」)
+        -
+        - color: %COLOR_32%
+          content:
+            - fontWeight: bold
+              content: ？？？
+            - 「(눈_눈)」
+        -
+        - acc: 1
+          content: (「(～￣▽￣)→(눈_눈)」)
+        -
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「（╯‵□′）╯︵┴─┴(눈_눈)」
+        -
+        - 咚咚啪！轰轰轰——！！
+        - color: %COLOR_32%
+          content:
+            - fontWeight: bold
+              content: ？？？
+            - 「嗷(∩∀°╭嗷∀∀嗷∀∀°)嗷嗷」
+        - （感谢汤姆老师的配音）
+        -
+        - color: %COLOR_32%
+          content:
+            - fontWeight: bold
+              content: ？？？
+            - 「( ✘_✘ )」
+        -
+        - 在%YOU%与%CHARA%的共同压制下，眼前的栗毛%UMA%不久就交出了解药
+        - 之后，%YOU%的生活恢复了正常
+
+
+# 招募东商变革，黄金巨匠，杜兰达尔，真机伶，梦之旅五名马娘后，过回合随机触发
+# +干劲
+ws_branches:
+  title: 树枝
+  lines:
+    - 日子一天天地过去，随着时间的推移，%YOU%名下的%UMA%逐渐变得越来越多
+    - %CHARA%，%ORFEVRE%，%DURANDAL%，%CURREN%，%JOURNEY%
+    -
+    - 转眼之间，%YOU%的名下，已经有了这么多出色的赛%UMA%们
+    -
+    - 为了不辜负赛%UMA%们的天赋，新的一天，像往常一样来到了操场上，集结赛%UMA%们，对%THEY%的训练进行指导——
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「凭什么啊！凭什么我要和别人一起练习啊！」
+    - 安抚的事情等下再做，总之先让%SEX%待在现场……
+    -
+    - color: %COLOR_115%
+      content:
+        - fontWeight: bold
+          content: %ORFEVRE%
+        - 「臣希望，余同此等子民共事？有什么有趣的地方？」
+    - 马上说出了令人担心的话语
+    - 但是，不是抗拒的话应该真的更多是好奇吧……
+    -
+    - color: %COLOR_121%
+      content:
+        - fontWeight: bold
+          content: %DURANDAL%
+        - 「主君！今天，我会使用这根利剑来守护你！」
+    - 似乎因为找到了趁手的树枝，非常激动的样子
+    - 希望训练的时候可以暂时放在一旁……
+    -
+    - color: %COLOR_38%
+      content:
+        - fontWeight: bold
+          content: %CURREN%
+        - 「%CALLNAME_38%，无论说什么机伶都会听的哦～♪」
+    - 只是说着直白而可靠的话语
+    -
+    - color: %COLOR_119%
+      content:
+        - fontWeight: bold
+          content: %JOURNEY%
+        - 「纵使旅途中有众多风景，我相信，您的归处，仍然会是唯一且幸福的……」
+    - color: %COLOR_119%
+      content:
+        - fontWeight: bold
+          content: %JOURNEY%
+        - 「……呵呵，只是些许希冀而已，不必在意……」
+    - 只是说着令人迷糊的话
+    -
+    - color: %COLOR_38%
+      content:
+        - fontWeight: bold
+          content: %CURREN%
+        - 「欸～～，梦旅前辈，居然会这么说么～」
+    - 不知为何对%JOURNEY%的话马上起了反应
+    - color: %COLOR_38%
+      content:
+        - fontWeight: bold
+          content: %CURREN%
+        - 「会不会有点，太没有『分享心』了呢——」
+    -
+    - %CURREN%和%JOURNEY%，开始了微妙的眼神对决……
+    - 开始训练的时候应该会停下来所以先放心吧……
+    -
+    - 向%CURREN%和%JOURNEY%先说了有关训练事宜的安排
+    - 回头望去，%DURANDAL%，%ORFEVRE%，还有%CHARA%居然在各自拿着树枝进行决斗……！
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「%CALLNAME%——！为什么不过来帮主人战斗啊！！」
+    - 似乎是察觉到了这边看向那里的目光，一边奋战一边呼喊道
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「Rosa★Thistle，倒在天才%MOHOSHOJO%sweepy的剑刃之下吧！！！」
+    -
+    - color: %COLOR_121%
+      content:
+        - fontWeight: bold
+          content: %DURANDAL%
+        - 「呃啊……！」
+    - color: %COLOR_121%
+      content:
+        - fontWeight: bold
+          content: %DURANDAL%
+        - 「对不起，主君……今后，臣可能没法再侍奉您了……」
+    - %DURANDAL%被魔法剑和王之刃一齐击中，HP归零了……
+    -
+    - color: %COLOR_115%
+      content:
+        - fontWeight: bold
+          content: %ORFEVRE%
+        - 「如此，最强大的反叛者已经消灭——暂时同盟的条件，便已破裂」
+    - %ORFEVRE%将树枝别在腰间一条不知从哪里要来的腰带上
+    - %SEX%对举着树枝的%CHARA%，冷静而不失威严地说道
+    - color: %COLOR_115%
+      content:
+        - fontWeight: bold
+          content: %ORFEVRE%
+        - 「除掉你，亦是成王道路上，必然的选择」
+    -
+    - color: %COLOR_115%
+      content:
+        - fontWeight: bold
+          content: %ORFEVRE%
+        - 「臣，将被余之子民所铭记——」
+    - color: %COLOR_115%
+      content:
+        - fontWeight: bold
+          content: %ORFEVRE%
+        - 「以反叛者之姿。」
+    -
+    - %CHARA%和%ORFEVRE%拿好树枝，互相向着对方冲锋
+    - 刹那间的交锋——
+    -
+    - %CHARA%手中的树枝，清脆地断成了两截
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「……！！」
+    -
+    - 失去了武器的（剑客）魔法师，面对王的逼近，不自觉地后退……！
+    -
+    - color: %COLOR_38%
+      content:
+        - fontWeight: bold
+          content: %CURREN%
+        - 「欸～～～这样子就结束了吗～」
+    - %CURREN%，不知何时出现在了%CHARA%旁边
+    -
+    - 给%CHARA%，递上了一根全新的树枝
+    - color: %COLOR_38%
+      content:
+        - fontWeight: bold
+          content: %CURREN%
+        - 「如果是想成为『威严的王』——」
+    -
+    - color: %COLOR_38%
+      content:
+        - fontWeight: bold
+          content: %CURREN%
+        - 「『可爱的机伶』，说什么也不会让出王位的哦？」
+    - if: era.get('cflag:38:性别') === 1
+      content: 轻巧地用树枝指向对方，王和他的（剑客）魔法师，整装待发……！
+    - if: era.get('cflag:38:性别') !== 1
+      content: 轻巧地用树枝指向对方，女王和她的（剑客）魔法师，整装待发……！
+    -
+    - color: %COLOR_119%
+      content:
+        - fontWeight: bold
+          content: %JOURNEY%
+        - 「……那么，也请准许我加入战斗——」
+    - %JOURNEY%带着%SEX%的树枝站到%ORFEVRE%身边
+    -
+    - color: %COLOR_119%
+      content:
+        - fontWeight: bold
+          content: %JOURNEY%
+        - 「此刻，我即是……王的骑士。」
+    - 王和%SEX%的骑士，严阵以待……！
+    -
+    - color: %COLOR_121%
+      content:
+        - fontWeight: bold
+          content: %DURANDAL%
+        - （可恶，乱臣贼子居然也能成为骑士！）
+    - color: %COLOR_121%
+      content:
+        - fontWeight: bold
+          content: %DURANDAL%
+        - （但是，此刻复活的话，可能还是会被围攻……！！）
+    - %DURANDAL%的眼神中，透露出焦急……
+    -
+    - 「所以，这……」
+    -
+    - 「就是特雷森学院……」
+    -
+    - 也许，大概，一定，只是%YOU%手下的赛%UMA%恰好都太奇特了吧……
+    - 一定是这样的……
+
+
+# 触发条件为东商变革+真机伶入队，杜兰达尔+黄金巨匠+梦之旅入学后，过回合随机触发
+# 东商变革和真机伶互相之间的好感+50，对玩家角色的好感均+50，干劲均提升
+ws_mother:
+  title: 妈妈
+  lines:
+    - 一个普通的早晨，训练员室的桌子上，多了一封写着「致sweepy酱」，画着可爱简笔画的信
+    -
+    - 打开信封，发现信纸上面写着很多嘘寒问暖的话语，夹杂着一些可爱的图片
+    -
+    - 信的结尾，则写着：
+    - 「——你的妈妈
+    - Curren（可爱）的机伶♥」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「不要不要！我什么时候多了个妈妈啊？！！！」
+    - 看到这封信的%CHARA%，几乎是马上就跑到了%CURREN%面前
+    -
+    - color: %COLOR_38%
+      content:
+        - fontWeight: bold
+          content: %CURREN%
+        - 「欸～～，sweepy酱，有哪里不满意吗？机伶，觉得挺好的哦～？」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「哪里有这样随便就变成别人妈妈的家伙啊？！」
+    - %CHARA%马上反驳着
+    -
+    - color: %COLOR_38%
+      content:
+        - fontWeight: bold
+          content: %CURREN%
+        - 「因为，机伶，之前跟着sweepy酱完成了%MOHOSHOJO%的修行……」
+    - color: %COLOR_38%
+      content:
+        - fontWeight: bold
+          content: %CURREN%
+        - 「所以——现在要实现sweepy酱的愿望，成为%SEX%的妈妈！」
+    - 笃定地回答着
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「这是什么理由啊！？」
+    - 吐槽个不停
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「不要！绝对不要！我才没有许过这种愿望！而且也没有那么需要照顾吧！？」
+    -
+    - color: %COLOR_38%
+      content:
+        - fontWeight: bold
+          content: %CURREN%
+        - 「呜呜……sweepy酱，真的不想要机伶当妈妈吗？」
+    - color: %COLOR_38%
+      content:
+        - fontWeight: bold
+          content: %CURREN%
+        - （眼泪汪汪）
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「所以说不要突然开始哭啊！？？」
+    - 在%CHARA%有些不知道如何是好的时候
+    - %CURREN%，揉干了眼泪
+    -
+    - color: %COLOR_38%
+      content:
+        - fontWeight: bold
+          content: %CURREN%
+        - 「这样吧！sweepy酱……如果真的找到了能够替代机伶的妈妈」
+    - color: %COLOR_38%
+      content:
+        - fontWeight: bold
+          content: %CURREN%
+        - 「机伶，就愿意把妈妈的名额让出去！」
+    -
+    - color: %COLOR_38%
+      content:
+        - fontWeight: bold
+          content: %CURREN%
+        - 「不过，有一个条件——」
+    - %CURREN%把一张写着三个名字的纸递给%CHARA%
+    - color: %COLOR_38%
+      content:
+        - fontWeight: bold
+          content: %CURREN%
+        - 「记得，不要弄丢哦♪」
+    -
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「什么啊什么啊！凭什么我要被安排找这几个人啊！」
+    - 被%CURREN%安排完一切，走在路上的时候，这样自言自语着
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「哼！算了！不就是让%THEY%中的随便一个当我一天『妈妈』吗！天才%MOHOSHOJO%，肯定做得到！」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「喂！那边那个！……我是说『杜兰达』，你是这个名单上的第一个。」
+    - %CHARA%，在%YOU%的带领下来到了%DURANDAL%附近
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「……虽然说起来很奇怪。」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「你。可以当我的『妈妈』吗？」
+    -
+    - color: %COLOR_121%
+      content:
+        - fontWeight: bold
+          content: %DURANDAL%
+        - （妈？！妈妈！？？为什么是我！？）
+    - color: %COLOR_121%
+      content:
+        - fontWeight: bold
+          content: %DURANDAL%
+        - （我……我真的有什么妈妈的……特质吗……？）
+    - 不知为何，%DURANDAL%脸上似乎有些半尴尬半羞涩的红晕……
+    -
+    - color: %COLOR_121%
+      content:
+        - fontWeight: bold
+          content: %DURANDAL%
+        - （不行！这种情况绝对不行！被后辈当作妈妈什么的！）
+    - color: %COLOR_121%
+      content:
+        - fontWeight: bold
+          content: %DURANDAL%
+        - （再怎么样……也得是『骑士』才行……！）
+    -
+    - color: %COLOR_121%
+      content:
+        - fontWeight: bold
+          content: %DURANDAL%
+        - 「没问题的！如果是后辈的请求的话，当然没问题！」
+    - color: %COLOR_121%
+      content:
+        - fontWeight: bold
+          content: %DURANDAL%
+        - （不对！我为什么接受了啊！？？）
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「既然你同意了……那就来试试……让我骑一下走好了。」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「如果成了就去芦毛那家伙那里！不许有问题！」
+    -
+    - color: %COLOR_121%
+      content:
+        - fontWeight: bold
+          content: %DURANDAL%
+        - （呜……得找个办法补救……！）
+    - color: %COLOR_121%
+      content:
+        - fontWeight: bold
+          content: %DURANDAL%
+        - 「是！明白了！今天的……『主君』！」
+    - color: %COLOR_121%
+      content:
+        - fontWeight: bold
+          content: %DURANDAL%
+        - 「我，现在就带主君前往您的目的地！！」
+    -
+    - %DURANDAL%说完，背起%CHARA%，像风一样向前跑去——
+    - 只是，且不论奔跑的方向是否正确，速度，首先就有些太快了
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「！？？？？？」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「不——要～～～～～！！！」
+    - 在%CHARA%的惊叫结束之前，%DURANDAL%，已经不小心绊到了一块石头，两个人一齐倒在了柔软的草地上
+    - %CHARA%，在那之后狠狠地把%DURANDAL%的名字从那张纸上划掉了
+    -
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「……『奥鲁菲』……啊。」
+    - 走在路上的时候，对着那张名单上的下一个名字面露难色
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「居然要，让『奥鲁菲』当我的妈妈。」
+    -
+    - 不管怎样，带着%CHARA%去见了%ORFEVRE%
+    - 高大的金鹿毛%UMA%就站在那里，即使想要相视，也只得抬头才能做到
+    -
+    - color: %COLOR_115%
+      content:
+        - fontWeight: bold
+          content: %ORFEVRE%
+        - 「……」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「……」
+    - 而后，是无尽的沉默
+    -
+    - color: %COLOR_115%
+      content:
+        - fontWeight: bold
+          content: %ORFEVRE%
+        - 「既然觐见，余同臣问好。」
+    - %ORFEVRE%打破沉默，向%CHARA%伸出了一只手
+    - %CHARA%，只是看着那只手，脸上的表情就变得复杂起来
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「……%CALLNAME%，如果主人回不来了，记得照顾好爸爸妈妈。」
+    - 而后，抱着视死如归的眼神，将自己的手同%ORFEVRE%的手搭上去——
+    -
+    - %ORFEVRE%，只是好好地和%CHARA%握了握手
+    - 不过，几乎要吓哭出来的%CHARA%，拉着%YOU%转头就跑走了
+    - %CHARA%，还没和%ORFEVRE%说上话，就把%ORFEVRE%的名字从那张纸上划掉了
+    -
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「啊。接下来是……这位……啊……嗯……」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「只要，能让%SEX%做我的……所谓的『妈妈』……」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「首先……」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「先从，『接触』开始……」
+    -
+    - %CHARA%把魔杖从腰间拿出来，拿在手里
+    - 重心努力向着拿着魔杖的手倾斜，一只脚平踏在地上作为支撑，另一只脚，则只有脚尖点地
+    - 小心翼翼地把身体凑过去，把魔杖伸过去——
+    -
+    - 戳。戳。
+    -
+    - color: %COLOR_119%
+      content:
+        - fontWeight: bold
+          content: %JOURNEY%
+        - 「没关系的哦……？」
+    - 对这种小心翼翼的「试探」，%JOURNEY%没有什么反感的样子
+    -
+    - color: %COLOR_119%
+      content:
+        - fontWeight: bold
+          content: %JOURNEY%
+        - 「如果是和别人有赌约……或者单纯赌气的话……」
+    - color: %COLOR_119%
+      content:
+        - fontWeight: bold
+          content: %JOURNEY%
+        - 「我……可以在能力范围里适当陪同一下。」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「不要！为什么和芦毛那家伙一样好像我想什么你都能知道啊！？？」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「这样的『妈妈』，我才不要！！」
+    - %CHARA%，毅然决然地把%JOURNEY%的名字从那张纸上划掉了
+    -
+    -
+    - 总之，返回了%CURREN%那里
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「不要不要不要！为什么会这么夸张啊——」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「说到底，你给我安排的人选，就没有一个真的懂照顾人的吧！？？」
+    - 直截了当地给出了%SEX%自己的感受
+    -
+    - color: %COLOR_38%
+      content:
+        - fontWeight: bold
+          content: %CURREN%
+        - 「才～没有那回事！杜兰达酱，奥鲁菲，梦旅酱，在竞赛上都『很靠谱』，不是吗？」
+    - 只是这样答复着
+    - color: %COLOR_38%
+      content:
+        - fontWeight: bold
+          content: %CURREN%
+        - 「如果，%THEY%都不能让sweepy酱满意的话——」
+    - color: %COLOR_38%
+      content:
+        - fontWeight: bold
+          content: %CURREN%
+        - 「这不正说明，机伶，是这个世界上最好的妈妈吗！？」
+    -
+    - color: %COLOR_38%
+      content:
+        - fontWeight: bold
+          content: %CURREN%
+        - 「机伶，不管是全力撒娇，还是求摸摸，都完全没有问题哦♪」
+    - 说着完全不像妈妈的话的%CURREN%，一副计谋得逞的样子
+    - 而%CHARA%，只是用两根手指顶着太阳穴，拼命思考着
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「……不对。还有说法。」
+    - 突然笃定地下了结论
+    -
+    - color: %COLOR_38%
+      content:
+        - fontWeight: bold
+          content: %CURREN%
+        - 「？」
+    - 似乎对预料之外的发展有些惊讶
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「……我也在那张纸上，签了自己的名字。」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「因为你说『不要弄丢』。」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「看。」
+    - %CHARA%把那张纸拿起来，在纸的右下角，有着一个小小的用作记号的名字
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「我在你讲清楚之前写的。也就是说，你说『纸上都可以选』的时候，它已经在那里了」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「所以！『%CHARA%』，
+        - fontWeight: bold
+          content: 也是可以选的对象——」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「也就是说——」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「从今天起，我，就是我自己的妈妈！！」
+    -
+    - color: %COLOR_38%
+      content:
+        - fontWeight: bold
+          content: %CURREN%
+        - 「？？？」
+    -
+    - acc: 1
+      content: 「其实你自己也是一个『麻烦』……」
+    - %YOU%只是就这么对%CHARA%补充道。
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「才不许你说这种事！%CALLNAME%——！！！」
+    - 马上反驳过来
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「总之，我才不要什么奇怪的芦毛%UMA%当我的妈妈！！！」
+    -
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「%CALLNAME%！『妈妈』今天要给『孩子』加餐冰激凌，明白了吗？！」
+    - 所以说为什么是%YOU%来承担……
+    -
+    - 事后，%CURREN%带%YOU%和%CHARA%一起吃了一顿甜品作为补偿
+
+
+# 爱如往昔入队，新秀年4月及之后
+# 东商变革和爱如往昔互相之间的好感+75，对玩家角色的好感同时+75，干劲均提升
+ws_tea_party:
+  - 一个平静的下午，和%SIL%一起坐在茶桌边
+  -
+  - color: %COLOR_97%
+    content:
+      - fontWeight: bold
+        content: %SIL%
+      - 「说起来，训练员先生为什么会突然想要和我一起喝下午茶呢？」
+  -
+  - acc: 1
+    content: 「因为有空……稍微想找几个人一起聚一下」
+  - 这样回答着，和%SIL%一起等待着
+  -
+  - color: %COLOR_97%
+    content:
+      - fontWeight: bold
+        content: %SIL%
+      - 「啊……！这位……是……」
+  - %SIL%看向不远处走来的一名小%UMA%
+  -
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「喂！%CALLNAME%！为什么突然叫我来喝下午茶啊！」
+  - 一如既往的样子
+  -
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「……『还有人』？那是什么意思？」
+  - 向桌旁张望的%CHARA%，偶然间和%SIL%深红的眼眸在一刹那相视
+  -
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「啊……」
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「吸……」
+  - 脸色一下子变得不对起来
+  -
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「呐～%CALLNAME%～今天的下午茶，要不主人暂时就不参加了吧？」
+  - 突然开始撒娇了——
+  -
+  - 不管怎样，还是和%SIL%，%CHARA%，一同坐在了茶桌旁
+  - 除去%YOU%在勤勤恳恳地泡茶之外，在场的另外两人，不知为何陷入了微妙的沉默
+  -
+  - color: %COLOR_97%
+    content:
+      - fontWeight: bold
+        content: %SIL%
+      - 「……」
+  - 原本就不高的存在感，似乎因为克制显得更加稀薄
+  -
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「……」
+  - 即使喝着有点苦的花茶，都没有什么反应了
+  -
+  - color: %COLOR_97%
+    content:
+      - fontWeight: bold
+        content: %SIL%
+      - 「那个……」
+  - color: %COLOR_97%
+    content:
+      - fontWeight: bold
+        content: %SIL%
+      - 「东商同学……要试试这一款茶水吗？」
+  - 还是打破了沉默
+  -
+  - %SIL%将泡有自己爱喝红茶的茶壶拿起来，为%CHARA%倒了一杯茶水
+  - 鲜红的液体，赫然摆在%CHARA%面前
+  -
+  - 有些犹豫的%CHARA%，稍微看了一眼%YOU%，又看了一眼%SIL%
+  - 只是端起茶杯，稍稍喝了一口
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「唔……呜……」
+  - 虽然没有多说什么，但表情，明显对这味道十分抗拒的样子
+  -
+  - color: %COLOR_97%
+    content:
+      - fontWeight: bold
+        content: %SIL%
+      - 「啊……！」
+  - color: %COLOR_97%
+    content:
+      - fontWeight: bold
+        content: %SIL%
+      - 「我居然忘了，东商同学不是很喜欢苦的东西……」
+  - 有些愧疚的样子
+  -
+  - color: %COLOR_97%
+    content:
+      - fontWeight: bold
+        content: %SIL%
+      - 「说起来……有一种搭配，之前也给训练员先生介绍过……」
+  - color: %COLOR_97%
+    content:
+      - fontWeight: bold
+        content: %SIL%
+      - 「或许，对东商同学会好一点……」
+  -
+  - %SIL%从桌子的茶盒边拿起一瓶饮料，稍稍倾倒了一些，掺入了那杯茶水
+  - 最终，勾兑出来的液体，更加猩红——
+  -
+  - 看到这猩红的液体，%CHARA%的脸色，稍稍有一点发白
+  - 但在察觉%SIL%有些发怯和失落的眼神后，小%UMA%还是接过了那杯茶
+  - 慢慢地，慢慢地，抿了一口
+  -
+  - color: %COLOR_97%
+    content:
+      - fontWeight: bold
+        content: %SIL%
+      - 「会……好一点吗？」
+  - %SIL%轻声地问道
+  -
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「……嗯。还可以……」
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「虽然会苦，但甜了好多……」
+  - %CHARA%一边说着，一边轻轻地又抿了一口
+  -
+  - 慢慢地和两位%UMA%一起度过了平和的下午茶时光
+  - 在这之后，特雷森学院里流传开了「%MAJO%」，「妖精小姐」和 「故事家」的茶会传说

@@ -12,6 +12,8 @@ class SweepEduMarks extends EduEventMarks {
   tree_hollow;
   // 抽奖次数
   drawing;
+  // 使魔的意外小憩
+  slave_rest;
 
   // 绿帽癖获得事件
   betrayed;

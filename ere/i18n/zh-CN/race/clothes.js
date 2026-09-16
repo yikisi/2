@@ -285,7 +285,9 @@ class I18nClothes {
   113501 = 'Sunlit Outsider';
   113601 = 'Divine Raiment';
   113701 = 'Miracle Author';
+  114101 = "Fate's Chosen Star";
   114301 = 'Lueur Angélique';
+  114901 = '绝佳晓暗';
   // GENERATED END
 }
 

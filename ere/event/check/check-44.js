@@ -18,6 +18,7 @@ const SweepLifeMarks = require('#/data/event/life-event-marks/life-event-marks-4
 const recruit_flags = require('#/data/event/recruit-flags');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
+const check_and_add_event = require('#/event/check/snippets/check-and-add-event');
 
 const aims = [
   [race_enum.hans_fil, 0, 5, 0b11],
@@ -96,13 +97,139 @@ module.exports = class extends CustomizedCheck {
           new EventObject(this.id, cb_enum.daily).set_arg('no_action_check'),
         );
       }
+      if (
+        [38, 115, 119, 121].every((cid) => era.get(`cflag:${cid}:招募状态`)) ===
+        recruit_flags.yes
+      ) {
+        check_and_add_event(
+          edu_marks,
+          edu_weeks,
+          'ws_branches',
+          event_hooks.week_start,
+          ebj,
+        );
+      }
+      const added_list = era.getAddedCharacters();
+      if (
+        era.get('cflag:38:招募状态') === recruit_flags.yes &&
+        added_list.includes(115) &&
+        added_list.includes(119) &&
+        added_list.includes(121)
+      ) {
+        check_and_add_event(
+          edu_marks,
+          edu_weeks,
+          'ws_mother',
+          event_hooks.week_start,
+          ebj,
+        );
+      }
     }
     if (edu_weeks < 3 * 48) {
       const ebj_s = new EventObject(this.id, cb_enum.edu, true);
+      if (edu_weeks >= 12) {
+        check_and_add_event(
+          edu_marks,
+          edu_weeks,
+          'we_slave_and_master',
+          event_hooks.week_end,
+          ebj,
+        );
+        check_and_add_event(
+          edu_marks,
+          edu_weeks,
+          'ws_phalaenopsis',
+          event_hooks.week_start,
+          ebj,
+        );
+        check_and_add_event(
+          edu_marks,
+          edu_weeks,
+          'ws_witch_potion',
+          event_hooks.week_start,
+          ebj,
+        );
+        check_and_add_event(
+          edu_marks,
+          edu_weeks,
+          'we_sweet_carrot',
+          event_hooks.week_end,
+          ebj,
+        );
+      }
+      if (edu_weeks >= 48) {
+        check_and_add_event(
+          edu_marks,
+          edu_weeks,
+          'we_in_school',
+          event_hooks.week_end,
+          ebj,
+        );
+        check_and_add_event(
+          edu_marks,
+          edu_weeks,
+          'og_phantom_thief',
+          event_hooks.office_game,
+          ebj,
+        );
+        if (era.get('cflag:97:招募状态') === recruit_flags.yes) {
+          check_and_add_event(
+            edu_marks,
+            edu_weeks,
+            'ws_tea_party',
+            event_hooks.week_start,
+            ebj,
+          );
+        }
+      }
+      if (edu_weeks > 47 + 42) {
+        check_and_add_event(
+          edu_marks,
+          edu_weeks,
+          'ws_magic_origin',
+          event_hooks.week_start,
+          ebj,
+        );
+        check_and_add_event(
+          edu_marks,
+          edu_weeks,
+          'ws_paper_plane',
+          event_hooks.week_start,
+          ebj,
+        );
+      }
+      if (edu_weeks > 95 + 25) {
+        check_and_add_event(
+          edu_marks,
+          edu_weeks,
+          'we_buttercup',
+          event_hooks.week_end,
+          ebj,
+        );
+        if (era.get(`mark:${this.id}:淫纹`) > 0) {
+          check_and_add_event(
+            edu_marks,
+            edu_weeks,
+            'ws_night_shade',
+            event_hooks.week_start,
+            ebj,
+          );
+        }
+      }
+      check_and_add_event(
+        edu_marks,
+        edu_weeks,
+        'ws_strange_day',
+        event_hooks.week_start,
+        ebj,
+      );
       switch (edu_weeks) {
         case 47 + 1:
           add_event(event_hooks.week_start, ebj_s.set_arg('ws_new_year_c'));
           add_event(event_hooks.week_end, ebj_s.copy().set_arg('we_new_turn'));
+          break;
+        case 47 + 6:
+          add_event(event_hooks.week_start, ebj_s.set_arg('ws_valentine_c'));
           break;
         case 47 + 29:
           add_event(event_hooks.week_start, ebj_s.set_arg('ws_summer_start_c'));
@@ -133,6 +260,9 @@ module.exports = class extends CustomizedCheck {
           break;
         case 95 + 29:
           add_event(event_hooks.week_start, ebj_s.set_arg('ws_summer_start_s'));
+          break;
+        case 95 + 48:
+          add_event(event_hooks.week_start, ebj_s.set_arg('ws_christmas_s'));
       }
       if (edu_marks.agreement > 0) {
         sys_change_motivation(this.id, 4);

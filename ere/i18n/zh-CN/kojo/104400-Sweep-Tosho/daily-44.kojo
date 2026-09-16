@@ -3,7 +3,7 @@
 
 # 关键节点：
 # 难解的 Blue Enchantress：招募后当回合结束，因招募时间不定，简化为新秀年4月（育成回合计时>=12）及之后
-# 新生的 Asphodel：经典年11月第2周（育成回合计时=47+42）回合结束，之前为<=，之后为>
+# 新生的 Asphodel：伊丽莎白二世女皇杯当回合，即经典年11月第2周（育成回合计时=47+42）回合结束，之前为<=，之后为>
 # 魔法之梦：宝冢纪念下一回合，即资深年7月第1周（育成回合计时=95+25）回合开始，之前为<，之后为>=
 
 select:
@@ -2595,6 +2595,190 @@ gn_normal_sleep:
               content: %CHARA%
             - 「哼呼……天才%MOHOSHOJO%swee……果然……大魔法师……」
         - %CHARA%在长椅上躺着睡着了，似乎在自言自语着什么
+
+
+# 新秀年4月及之后，晚安，玩家沉睡，仅一次
+# 玩家体力+100，精力+200
+gn_rest:
+  title: 使魔的意外小憩
+  lines:
+    - if: era.get('love:44') < 50
+      lines:
+        - 像往常一样，在训练员室里工作
+        - 但是，或许是前段时间没睡好，又或者是有些劳累过度，也许是药物的影响
+        - 工作的时候，%YOU%似乎就那么倒在了座位上，不知道后来发生了什么
+        -
+        - ……
+        -
+        - 朦胧之中，听到了稀稀簌簌的移动声，倒水声，还有富有顿挫感的话语声
+        -
+        - 慢慢地睁开了眼睛，发现自己已然仰卧在了训练员室的沙发上，被好好地盖上了毯子
+        - 转头，看见了在沙发边用夹杂着好奇，紧张和焦虑的眼神看着%YOU%的%CHARA%——
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「咿呀！！！僵，僵尸啊！！！」
+        -
+        - 但是，为什么一张口就是奇怪的话语……
+        - acc: 1
+          content: 「我还活着……」
+        -
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「啊。原……原来是活着的%CALLNAME%啊……！」
+        - %CHARA%松了一口气
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「还以为，我的『死灵法术』真的生效了……」
+        -
+        - 又是一句奇怪的话语……
+        - %YOU%好歹是 %CHARA% 的训练员吧……怎么能用「死灵法术」呢……
+        -
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「但，既然『死灵法术』没有生效……」
+        - 就在%YOU%汗颜的时候，%CHARA%接着说了起来
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「也就代表着，我的『治愈魔法』，在精进后，有了巨大的提升！」
+        -
+        - acc: 1
+          content: 「『治愈魔法……？』」
+        -
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「对！就是奶奶亲手教我的，能够让生病的我都重新变得充满活力的药水！」
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「经过天才%MOHOSHOJO%sweepy的彻底改良，现在对%CALLNAME%也有治愈的作用！」
+        -
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「哼哼～既然%CALLNAME%那么感兴趣的话」
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「从今天起，我就要为%CALLNAME%一直制作sweepy特制魔法药！」
+        -
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「这样子，%CALLNAME%再怎么加班也不会晕倒了！」
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「哼哼，不愧是天才%MOHOSHOJO%sweepy！」
+        -
+        - 在那以后，%CHARA%几乎每天都会带着一瓶秘制的鱼腥草茶来找%YOU%
+        - 并且，一定要亲眼看到喝完才肯放过%YOU%……
+    - if: era.get('love:44') >= 50
+      lines:
+        - 像往常一样，在训练员室里工作
+        - 但是，或许是前段时间没睡好，又或者是有些劳累过度，也许是药物的影响
+        - 工作的时候，%YOU%似乎就那么倒在了座位上，不知道后来发生了什么
+        -
+        - ……
+        -
+        - 朦胧之中，听到了稀稀簌簌的移动声，倒水声，以及细微的呜咽声
+        - ？？？？「呜呜……呜呜呜……」
+        -
+        - 慢慢地睁开了眼睛——
+        - 发现自己已然仰卧在了训练员室的沙发上，被好好地盖上了毯子
+        - 转头，看见了沙发边站着的，四周东西堆得乱七八糟，一边手忙脚乱一边哭着的鹿毛小%UMA%
+        -
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「咿呀！！僵，僵尸啊！！！」
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「不对……是%CALLNAME%？！」
+        -
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「……呜……呜呜……醒，醒了啊——！！！！」
+        - 突然感受到一股冲击力，回过神来时，%CHARA% 已经紧紧地抱在了%YOU%身上
+        - 而且，因为抱得有点紧，脊柱稍微有点嘎吱作响的感觉
+        -
+        - acc: 1
+          content: 「那个……」
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「不要！我不会动的！！疼什么的我才不知道！！！疼就给我忍住，笨蛋%CALLNAME%！！！！！」
+        - 隐隐有种被抱得更紧的感觉……%YOU%马上闭上了嘴
+        -
+        - 许久之后，%CHARA% 才缓缓松开%YOU%，退到床边，眼角还带着泪花
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「真是的！既然好端端的，就给我早点起来啊！！！」
+        -
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「呜呜……才没有哭！%CALLNAME%让主人哭什么的，才不可能发生呢！」
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「而且，说到底都是%CALLNAME%的错吧！」
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「明明只是%CALLNAME%，却突然倒下，让我吓了一跳，也不回答我！」
+        -
+        - acc: 1
+          content: 「难不成，是在关心——」
+        -
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「才没有关心！%CALLNAME%要让主人困扰什么的，还早了一百年呢！！」
+        - 马上打断了%YOU%的话语
+        -
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「……鱼腥草水，我用很大的宝特瓶装满了三瓶，把冰箱装满了」
+        - 自言自语着什么
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「才不管你怎么想！给我喝完！几周，几个月，我才不管！我会盯着的！！不许反悔！！」
+        -
+        - 在这之后，%CHARA%几乎每天都会带把秘制的鱼腥草茶热完倒给%YOU%喝
+        - 并且，一定要亲眼看到喝完才肯放过%YOU%
 
 
 good_night_sex:
