@@ -40,6 +40,7 @@ module.exports = {
     stamina: 3,
     order_change: 4,
     blocked_side_continuetime: 5,
+    up_slope: 8,
   },
   ability_type_enum: {
     no: 0,
@@ -144,6 +145,7 @@ module.exports = {
     MultiplyHotSpring: 32,
     MultiplyDisMedium: 36,
     MultiplyTeamTotal: 37,
+    MultiplyRamen: 40,
     MultiplyCount: 99,
   },
   /**

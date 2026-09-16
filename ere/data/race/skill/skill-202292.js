@@ -11,7 +11,7 @@ module.exports = new UmaSkill(
   [
     (args) =>
       args.ground_type === 2 &&
-      args.order_rate >= 50 &&
+      args.order_rate >= 40 &&
       args.activate_count_heal >= 1 &&
       args.distance_rate <= 42 &&
       args.phase === 1,

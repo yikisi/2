@@ -9,8 +9,8 @@ module.exports = new UmaSkill(
   508,
   [() => true, () => true],
   [
-    (args) => args.popularity <= 3 && args.random_lot <= 30,
-    (args) => args.popularity >= 4 && args.random_lot <= 60,
+    (args) => args.popularity >= 4 && args.random_lot_shared <= 60,
+    (args) => args.popularity <= 3 && args.random_lot_shared <= 30,
   ],
   [-0.0001, -0.0001],
   [0, 0],

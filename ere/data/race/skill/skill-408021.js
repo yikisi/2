@@ -12,11 +12,11 @@ module.exports = new UmaSkill(
     (args) =>
       (args.distance_type === 1 &&
         args.phase >= 2 &&
-        args.order_rate >= 50 &&
+        args.order_rate >= 40 &&
         args.is_overtake === 1) ||
       (args.distance_type === 2 &&
         args.phase >= 2 &&
-        args.order_rate >= 50 &&
+        args.order_rate >= 40 &&
         args.is_overtake === 1),
     (args) =>
       args.is_activate_other_skill_detail === 1 && args.remain_distance <= 200,
