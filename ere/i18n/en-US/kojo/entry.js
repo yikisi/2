@@ -1,7 +1,8 @@
-const I18nKojo = require('#/i18n/zh-CN/kojo/entry');
+﻿st I18nKojo = require('#/i18n/zh-CN/kojo/entry');
 
 module.exports = class extends I18nKojo {
   0 = new (require('#/i18n/en-US/kojo/1000-Player/entry'))();
+  2 = new (require('#/i18n/en-US/kojo/100200-Silence-Suzuka/entry'))();
   6 = new (require('#/i18n/en-US/kojo/100600-Oguri-Cap/entry'))();
   17 = new (require('#/i18n/en-US/kojo/101700-Symboli-Rudolf/entry'))();
   19 = new (require('#/i18n/en-US/kojo/101900-Agnes-Digital/entry'))();
