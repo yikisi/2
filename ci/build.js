@@ -1,6 +1,5 @@
 const { execSync } = require('child_process');
 const {
-  createWriteStream,
   mkdirSync,
   readFileSync,
   readdirSync,
@@ -13,7 +12,6 @@ const os = require('os');
 const { join, resolve } = require('path');
 
 const { path7za } = require('7zip-bin');
-const { zip } = require('compressing');
 const { copySync } = require('fs-extra');
 
 const work_dir = resolve('.');
@@ -70,11 +68,6 @@ switch (os.platform()) {
   case 'win32':
 }
 execSync(`${path7za} a -pera ${game_all_zip} ${game_all_dir}`);
-process.stdout.write(
-  execSync(
-    `curl --fail-with-body --header "JOB-TOKEN: ${process.env.CI_JOB_TOKEN}" --upload-file ${game_all_zip} "${process.env.GAME_ZIP_URL}"`,
-  ),
-);
 
 rmSync(game_dir, { force: true, recursive: true });
 copySync(join(game_all_dir, 'game'), game_dir);
@@ -83,14 +76,6 @@ rmSync(game_zip, { force: true });
 execSync(`${path7za} a -pera ${process.env.GAME_ZIP} ${process.env.GAME_DIR}`, {
   cwd: game_all_dir,
 });
-process.stdout.write(
-  execSync(
-    `curl --fail-with-body --header "JOB-TOKEN: ${process.env.CI_JOB_TOKEN}" --upload-file ${game_zip} "${process.env.GAME_URL}"`,
-    {
-      cwd: game_all_dir,
-    },
-  ),
-);
 
 // 检查是否要生成最小更新用的基础包
 // 如果当前版本和最小更新的最低支持版本相同就不生成，因为用不到
@@ -107,20 +92,10 @@ const game_version = readFileSync(join(work_dir, 'csv/GameBase.csv'), 'utf-8')
 if (min_version !== game_version) {
   const base_zip = join(game_all_dir, 'game', 'base.zip');
   rmSync(base_zip, { force: true });
-  const zip_stream = new zip.Stream();
   // 基础包里只需要一个静态数据文件夹（这里是csv）和游戏脚本集（ere）
-  zip_stream.addEntry(join(game_all_dir, 'game', 'csv'));
-  zip_stream.addEntry(join(game_all_dir, 'game', 'ere'));
-  const write_stream = createWriteStream(base_zip);
-  zip_stream.pipe(write_stream);
-  write_stream.on('finish', () =>
-    // 基础包生成后上传
-    process.stdout.write(
-      execSync(
-        `curl --fail-with-body --header "JOB-TOKEN: ${process.env.CI_JOB_TOKEN}" --upload-file ${base_zip} "${process.env.BASE_URL}"`,
-      ),
-    ),
-  );
+  execSync(`${path7za} a ${base_zip} csv ere`, {
+    cwd: join(game_all_dir, 'game'),
+  });
 }
 
 const res_path = join(work_dir, 'res');

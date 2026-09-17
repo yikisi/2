@@ -1,15 +1,23 @@
 const { execSync } = require('child_process');
-const { createWriteStream, renameSync, rmSync } = require('fs');
+const { renameSync, rmSync } = require('fs');
+const os = require('os');
 const { join, resolve } = require('path');
 
-const archiver = require('archiver');
+const { path7za } = require('7zip-bin');
 const { copySync } = require('fs-extra');
 const webpack = require('webpack');
-archiver.registerFormat('zip-encrypted', require('archiver-zip-encrypted'));
 
 const config = require('../webpack.config');
 
 rmSync('./dist', { force: true });
+
+switch (os.platform()) {
+  case 'linux':
+  case 'darwin':
+    execSync(`chmod +x ${path7za}`);
+    break;
+  case 'win32':
+}
 
 webpack(config, (err, stats) => {
   if (err || stats.hasErrors()) {
@@ -38,20 +46,8 @@ webpack(config, (err, stats) => {
     rmSync(game_dir, { force: true, recursive: true });
     renameSync('./dist', game_dir);
     rmSync(bundle_zip, { force: true });
-    const zip_file = archiver('zip-encrypted', {
-      encryptionMethod: 'aes256',
-      password: 'era',
-      zlib: { level: 9 },
-    });
-    const out_stream = createWriteStream(bundle_zip);
-    zip_file.pipe(out_stream);
-    zip_file.directory(game_dir, process.env.GAME_BUNDLE_DIR);
-    out_stream.on('finish', () =>
-      // 安卓游戏包生成后上传
-      execSync(
-        `curl --fail-with-body --header "JOB-TOKEN: ${process.env.CI_JOB_TOKEN}" --upload-file ${bundle_zip} "${process.env.GAME_BUNDLE_URL}"`,
-      ),
+    execSync(
+      `${path7za} a -tzip -pera -mem=AES256 ${bundle_zip} ${process.env.GAME_BUNDLE_DIR}`,
     );
-    zip_file.finalize().then();
   }
 });

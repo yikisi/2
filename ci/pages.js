@@ -19,7 +19,3 @@ const game_version = readFileSync('csv/GameBase.csv', 'utf-8')
 
 // 生成版本检查用的文件
 writeFileSync('public/RELEASE', `${game_version}\n${min_version}`);
-writeFileSync(
-  'public/index.html',
-  `<meta http-equiv="refresh" content="3; url= ${process.env.GAME_ZIP_URL}">`,
-);
