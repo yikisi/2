@@ -1,4 +1,4 @@
-﻿st I18nKojo = require('#/i18n/zh-CN/kojo/entry');
+﻿const I18nKojo = require('#/i18n/zh-CN/kojo/entry');
 
 module.exports = class extends I18nKojo {
   0 = new (require('#/i18n/en-US/kojo/1000-Player/entry'))();
