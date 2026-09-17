@@ -134,7 +134,12 @@ csv.forEach((e, i) => {
   // 参赛人数
   output += `${e[16]},\n`;
   // 传奇人数
-  output += `[${(e[15] || '').split(/\s+/).join(',')}],\n`;
+  output += `[${(e[15] || '')
+    .split(/\s+/)
+    .filter((e) => e)
+    .map(Number)
+    .sort((a, b) => a - b)
+    .join(',')}],\n`;
   // 年龄限制
   output += `RaceInfo.limit_enum.${getValueInDict(limit_dict, e[14], e)},\n`;
   // 时间

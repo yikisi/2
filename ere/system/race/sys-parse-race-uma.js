@@ -554,7 +554,7 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
     // 横向距离砍掉了：固定内道
     uma.race.conditionParams.lane_type = 0;
     uma.race.conditionParams.motivation = uma.motivation + 3;
-    uma.race.conditionParams.random_lot = get_random_value(0, 99);
+    uma.race.conditionParams.random_lot_shared = get_random_value(1, 100);
     uma.race.conditionParams.rotation = info.rotation + 1;
     reset_running_style(uma, running_style_counts, ret.length);
     uma.race.conditionParams.straight_front_type = straight_front_type;
@@ -569,6 +569,9 @@ function sys_parse_for_race(team_chara, race, info, contestants) {
       info.track === 10103 ||
       info.track === 10104;
     uma.race.conditionParams.weather = info.weather + 1;
+    uma.race.conditionParams.succession_skill_count = uma.list_skill.filter(
+      (s) => s.data.is_generated,
+    ).length;
   });
 
   ret = sort_list(ret, Math.random);

@@ -174,6 +174,8 @@ class PseudoUma {
     order_change: 0,
     overtakeAim: void 0,
     slope: 0,
+    // 爬坡次数，用于时间延长结算
+    slopesPassed: [],
     stamina: 0,
     staminaCost: 0,
     // 用于阻挡计算的实时力量
@@ -374,6 +376,7 @@ class PseudoUma {
     return this;
   }
 
+  /** @return {PrintedSpan} */
   get_colored_name() {
     return { color: this.color, content: this.name, fontWeight: 'bold' };
   }

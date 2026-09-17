@@ -10,11 +10,14 @@ module.exports = new UmaSkill(
   [() => true, () => true],
   [
     (args) =>
-      args.is_last_straight === 1 && args.hp_per >= 30 && args.order <= 2,
-    () => false,
+      args.is_last_straight === 1 &&
+      args.order_rate <= 40 &&
+      args.course_distance === 2400 &&
+      args.lastspurt === 2,
+    (args) => args.is_last_straight === 1 && args.order_rate <= 40,
   ],
-  [5, 0],
-  [500, 0],
+  [5, 5],
+  [500, 500],
   [
     UmaSkill.ability_time_usage_enum.normal,
     UmaSkill.ability_time_usage_enum.normal,
@@ -22,14 +25,14 @@ module.exports = new UmaSkill(
   [
     [
       UmaSkill.ability_type_enum.TargetSpeed,
+      UmaSkill.ability_type_enum.HpRate,
+      UmaSkill.ability_type_enum.no,
+    ],
+    [
+      UmaSkill.ability_type_enum.TargetSpeed,
       UmaSkill.ability_type_enum.Accel,
       UmaSkill.ability_type_enum.no,
     ],
-    [
-      UmaSkill.ability_type_enum.no,
-      UmaSkill.ability_type_enum.no,
-      UmaSkill.ability_type_enum.no,
-    ],
   ],
   [
     [
@@ -44,8 +47,8 @@ module.exports = new UmaSkill(
     ],
   ],
   [
+    [0.55, -0.04, 0],
     [0.25, 0.3, 0],
-    [0, 0, 0],
   ],
   [
     [
@@ -54,8 +57,8 @@ module.exports = new UmaSkill(
       UmaSkill.target_type_enum.no,
     ],
     [
-      UmaSkill.target_type_enum.no,
-      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.Self,
+      UmaSkill.target_type_enum.Self,
       UmaSkill.target_type_enum.no,
     ],
   ],
@@ -70,6 +73,10 @@ module.exports = new UmaSkill(
   false,
   false,
   [],
-  [UmaSkill.ability_tag_enum.targetSpeed, UmaSkill.ability_tag_enum.accel],
+  [
+    UmaSkill.ability_tag_enum.hpRate,
+    UmaSkill.ability_tag_enum.targetSpeed,
+    UmaSkill.ability_tag_enum.accel,
+  ],
 );
 // GENERATED END

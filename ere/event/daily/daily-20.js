@@ -83,9 +83,10 @@ module.exports = class extends CustomizedDaily {
   }
 
   async school_atrium(hook) {
+    const ret = await super.school_atrium(hook);
     this.#marks.action = event_hooks.school_atrium;
     this.#sub_easy_go();
-    return await super.school_atrium(hook);
+    return ret;
   }
 
   async s_a_tree_hollow(sky, me, hook) {
@@ -115,14 +116,16 @@ module.exports = class extends CustomizedDaily {
   }
 
   async o_r_fishing(sky, me, hook, extra) {
+    const ret = await super.o_r_fishing(sky, me, hook, extra);
     this.#sub_easy_go(2);
-    return await super.o_r_fishing(sky, me, hook, extra);
+    return ret;
   }
 
   async out_shopping(hook) {
+    const ret = await super.out_shopping(hook);
     this.#marks.action = event_hooks.out_shopping;
     this.#sub_easy_go();
-    return await super.out_shopping(hook);
+    return ret;
   }
 
   async o_s_drawing(sky, me, hook) {

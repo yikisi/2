@@ -8,11 +8,7 @@ module.exports = new UmaSkill(
   16,
   180,
   [() => true, () => true],
-  [
-    (args) =>
-      args.is_last_straight === 1 && args.hp_per >= 30 && args.order <= 2,
-    () => false,
-  ],
+  [(args) => args.is_last_straight === 1 && args.order_rate <= 40, () => false],
   [3, 0],
   [500, 0],
   [

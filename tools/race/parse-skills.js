@@ -201,7 +201,7 @@ const added_chara_skills = [
 // 这些技能的效果都根据游戏修改过，所以在从数据库中获取描述时需要跳过
 const skip_translate_skills = [
   101321, 110071, 210071, 210072, 210291, 210301, 210321, 210341, 210351,
-  210361, 210371, 210381,
+  210361, 210371, 210381, 210391,
 ];
 
 const used_skill_condition_dict = {
@@ -213,10 +213,14 @@ const used_skill_condition_dict = {
     '(args)=>args.order_rate<=70&&args.phase_firsthalf===1&&args.is_used_skill_id.includes(202051)',
   113701111:
     '(args)=>args.running_style===1&&args.phase_laterhalf_random===0&&args.is_used_skill_id.includes(202051)',
+  202441: '(args)=>args.popularity>=4&&args.random_lot_shared<=60',
+  202442: '(args)=>args.popularity>=4&&args.random_lot_shared<=30',
 };
 const used_skill_condition_dict_2 = {
   101361:
     '(args)=>args.is_activate_other_skill_detail===1&&args.run_at_full_speed_random===1&&args.is_used_skill_id_with_detail_one.includes(204452)',
+  202441: '(args)=>args.popularity<=3&&args.random_lot_shared<=30',
+  202442: '(args)=>args.popularity<=3&&args.random_lot_shared<=15',
 };
 const ability_tag_dict = {
   203781:
@@ -735,15 +739,16 @@ async function chara_skill() {
         ',',
       )}];\n\nmodule.exports = {chara_skill_dict,common_skills,skills_dict,skill_sets};`,
   );
-  buffer = 'class ConditionParams { ';
+  buffer = '';
   c_dict['orgasm'] = c_dict['milk'] = c_dict['item'] = 1;
+  delete c_dict['random_lot'];
   Object.keys(c_dict)
     .sort()
     .forEach((k) => (buffer += `${k};`));
   read_and_write_generated(
     join(__dirname, '../../ere/data/race/model/condition-params.js'),
     '//',
-    `${buffer};};\n\nmodule.exports = ConditionParams;`,
+    `${buffer};`,
   );
   console.log('条件参数', Object.keys(c_dict).length, '个');
 
