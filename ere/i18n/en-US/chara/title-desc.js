@@ -127,8 +127,6 @@ module.exports = class extends require('#/i18n/zh-CN/chara/title-desc') {
   101801 = 'Won the Japanese Oaks and Tenno Sho (Autumn).';
   101901 =
     'Won the Japan Dirt Derby, Mile Championship, February Stakes, Yasuda Kinen, Tenno Sho (Autumn), and senior-year Arima Kinen.';
-  102001 =
-    'Won the Satsuki Sho, Kikuka Sho, Tenno Sho (Spring), and senior-year Arima Kinen with a front-running strategy.';
   102101 =
     'Won 8 graded stakes including the Tenno Sho (Spring), senior-year Takarazuka Kinen, and senior-year Tenno Sho (Autumn).';
   102201 =
