@@ -2,7 +2,7 @@
 # @author 阿格尼斯数码公司
 train:
   # 低体力
-  - if: t = [false, false], t[0] = (era.get('base:44:体力') / era.get('maxbase:44:体力') < 0.4)
+  - if: t = [false, false, false], t[0] = (era.get('base:44:体力') / era.get('maxbase:44:体力') < 0.4)
     lines:
       # 魔法之梦（资深年7月第1周回合开始事件）之前
       - if: era.get('cflag:44:育成回合计时') < 95 + 25
@@ -11,16 +11,24 @@ train:
             content:
               - fontWeight: bold
                 content: %CHARA%
-              - 「唔唔……为什么动不了了……不要不要！%CALLNAME%，我们今天该回去了！！」
+              - 「唔唔……为什么动不了了……不要不要！%CALLNAME%，我们今天该回去休息了！！」
       - if: era.get('cflag:44:育成回合计时') >= 95 + 25
         lines:
           - color: %COLOR%
             content:
               - fontWeight: bold
                 content: %CHARA%
-              - 「唔唔……好累！不要不要！！%CALLNAME%，我不许你继续这样使唤主人了！！！」
+              - 「唔唔……好累！不要不要！！%CALLNAME%，我不许你继续这样使唤主人又不让休息了！！！」
+  # 大魔法师的约定
+  - if: t[1] = era.get('cflag:44:育成用变量')?.agreement > 0, !t[0] && t[1]
+    lines:
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「还愣在那里干什么！？下一个练习是什么，赶快告诉我！！！」
   # 低干劲
-  - if: t[1] = era.get('cflag:44:干劲') < 0, !t[0] && t[1]
+  - if: t[2] = era.get('cflag:44:干劲') < 0, !t[0] && !t[1] && t[2]
     lines:
       - random: true
         lines:
@@ -28,15 +36,15 @@ train:
             content:
               - fontWeight: bold
                 content: %CHARA%
-              - 「不要不要！我今天就是不想练……不对！总之我今天才不想练习啦！！」
+              - 「不要不要！使魔对主人这么不好，我今天就是不想练……不对！总之我今天才不想练习啦！！」
       - random: true
         lines:
           - color: %COLOR%
             content:
               - fontWeight: bold
                 content: %CHARA%
-              - 「不要不要！为什么要成为大魔法师的我要做这种练习啊！」
-  - if: '!t[0] && !t[1]'
+              - 「不要不要！为什么要成为大魔法师的我要在这种状态下做这种练习啊！」
+  - if: '!t[0] && !t[1] && !t[2]'
     lines:
       # 新生的Asphodel（经典年11月第2周回合结束事件）之后
       - if: (t = era.get('cflag:44:育成回合计时')) > 47 + 42
@@ -106,14 +114,6 @@ train:
                   - fontWeight: bold
                     content: %CHARA%
                   - 「今天练习之后要跟我一起去找『治愈草』和『水之花』，知道了吗，%CALLNAME%！？」
-          - if: era.get('cflag:44:育成用变量')?.agreement > 0
-            random: true
-            lines:
-              - color: %COLOR%
-                content:
-                  - fontWeight: bold
-                    content: %CHARA%
-                  - 「还愣在那里干什么！？下一个练习是什么，赶快告诉我！！！」
 
 
 ts_add:
@@ -1058,7 +1058,7 @@ rs_begin_race:
 
 
 re_begin_race_win:
-  title: 出道战获胜
+  title: 出道战后·魔法等级评定仪式
   lines:
     - 终于让 %CHARA% 顺利完成了出道战……
     - 按照和%SEX%的约定，%YOU%提前请来人手，准备好给 %CHARA% 举行魔法等级评定仪式
@@ -1138,7 +1138,7 @@ re_begin_race_win:
 
 
 re_begin_race_lose:
-  title: 出道战失败
+  title: 出道战后·未成真的仪式
   lines:
     - color: %COLOR%
       content:
@@ -1312,7 +1312,7 @@ rs_hans_fil:
 
 
 re_hans_fil_win:
-  title: 阪神皇冠大赛获胜
+  title: 阪神皇冠大赛后·赛后的新大赛
   lines:
     - %CHARA%，漂亮地赢下了这场不管%YOU%原先有没有计划应该都会闹着参加的比赛
     - 不久，就到了赛后的颁奖环节
@@ -1343,7 +1343,7 @@ re_hans_fil_win:
 
 
 re_hans_fil_lose:
-  title: 阪神皇冠大赛失败
+  title: 阪神皇冠大赛后·赛后的新大赛
   lines:
     - 虽然%CHARA%斗志昂扬地参加了这场比赛
     - 可惜的是，并没有如%SEX%自己所说的那样，完成了对宿敌的讨伐
@@ -1911,7 +1911,7 @@ rs_oka_sho:
 
 
 re_oka_sho_win:
-  title: 赢得樱花赏
+  title: 樱花赏后·樱花的魔力
   lines:
     - content:
         - color: %COLOR%
@@ -2013,7 +2013,7 @@ re_oka_sho_win:
 
 
 re_oka_sho_lose:
-  title: 输掉樱花赏
+  title: 樱花赏后·魔法的另一面
   lines:
     - content:
         - color: %COLOR%
@@ -2258,7 +2258,7 @@ rs_yh_select:
 
 
 re_yush_him_win:
-  title: 日本橡树大赛胜利
+  title: 日本橡树大赛后·任性的OakLeaf
   lines:
     - %CHARA%，漂亮地在日本橡树大赛中夺得了冠军
     - 意味着，%SEX%证明了自己拥有后三冠选手中拔尖的实力，夺得了所谓的「橡树魔法之力」
@@ -2344,7 +2344,7 @@ re_yush_him_win:
 
 
 re_yush_him_lose:
-  title: 日本橡树大赛落败
+  title: 日本橡树大赛后·不必饮用的良药苦口
   lines:
     - %CHARA%，遗憾地在日本橡树大赛中落败
     - color: %COLOR%
@@ -2681,7 +2681,7 @@ rs_shuk_sho:
 
 
 re_shuk_sho_win:
-  title: 赢下秋华赏
+  title: 秋华赏后·期望未来的魔法
   lines:
     - 凭借着高亢的干劲和许久以来的努力，%CHARA%，顺利在『魔法三冠』的最后一冠中取得冠军
     -
@@ -2709,7 +2709,7 @@ re_shuk_sho_win:
 
 
 re_shuk_sho_lose:
-  title: 输掉秋华赏
+  title: 秋华赏后·走向未知的魔法
   lines:
     - 即使有着高亢的干劲和许久的努力，%CHARA%，也还是阴差阳错地没能在『魔法三冠』的最后一冠中取得冠军
     - 不甘地想着为什么的小%UMA%，此刻正和%YOU%并排走着，用两根手指分别怼着太阳穴
@@ -2911,7 +2911,7 @@ rs_eliz_cup_c:
 
 
 re_eliz_cup_win_c:
-  title: 伊丽莎白二世女皇杯胜利
+  title: 伊丽莎白女皇杯后·魔法之夜的真相？
   lines:
     - %CHARA%在伊丽莎白二世女皇杯中漂亮地取得了胜利
     - 原本，对于这样出色的新秀，应该会有相当长时间的采访
@@ -3022,7 +3022,7 @@ re_eliz_cup_win_c:
 
 
 re_eliz_cup_lose_c:
-  title: 伊丽莎白二世女皇杯失败
+  title: 伊丽莎白女皇杯后·魔法之夜的自相矛盾
   lines:
     - %CHARA%，最终是没能赢过资历深厚的前辈们，在伊丽莎白二世女皇杯中落败
     - 比赛结束后，%YOU%在赛场出口默默等待着%CHARA%
@@ -3769,7 +3769,7 @@ rs_yasu_kin_s:
 
 
 re_yasu_kin_win_s:
-  title: 赢下安田纪念
+  title: 安田纪念后·任性的大言不惭
   lines:
     - %CHARA%，成功在甚至有香港顶级赛%UMA%在内众多强者参赛的安田纪念中取得了冠军
     -
@@ -3818,7 +3818,7 @@ re_yasu_kin_win_s:
 
 
 re_yasu_kin_lose_s:
-  title: 输掉安田纪念的场合
+  title: 安田纪念后·任性的执意向前
   lines:
     - 强者云集的安田纪念最终还是没有那么容易取胜
     - %CHARA%，遗憾地在众多强者逐鹿的安田纪念中落败
@@ -4367,8 +4367,7 @@ ws_md_w_3:
       content: %CHARA%戴好帽子站在训练场的跑道上，摆好起跑姿势——
     -
     - fontStyle: italic
-      content:
-        那份奇迹般的速度，无论看上几次，都只会让人确定一个事实:
+      content: 那份奇迹般的速度，无论看上几次，都只会让人确定一个事实：
     - fontStyle: italic
       content: 「这就是，『魔法』——」
     -
@@ -4759,7 +4758,7 @@ rs_tenn_sho_s:
 
 
 re_tenn_sho_win_s:
-  title: 赢下秋季天皇赏的场合
+  title: 秋季天皇赏后·向前的魔法
   lines:
     - %CHARA%，如%SEX%所说一般漂亮地赢下了秋季天皇赏
     - color: %COLOR%
@@ -4827,7 +4826,7 @@ re_tenn_sho_win_s:
 
 
 re_tenn_sho_lose_s:
-  title: 输掉秋季天皇赏的场合
+  title: 秋季天皇赏后·约定的魔法
   lines:
     - %CHARA%，非常遗憾地在秋季天皇赏中落败
     - 作为败者，走完赛事结束的流程，%YOU%和%CHARA%只是走在回去的路上
@@ -5022,7 +5021,7 @@ rs_eliz_cup_s:
 
 
 re_eliz_cup_win_s:
-  title: 赢下伊丽莎白二世女皇杯的场合
+  title: 伊丽莎白女皇杯后·奇迹与当下
   lines:
     - 或许真的是『魔法』，又或者是『奇迹』，无论如何，%CHARA%赢下了伊丽莎白二世女皇杯
     - 即使再多的质疑声，在这份无可置疑的发挥面前，也只能留下惊讶的赞赏
@@ -5102,7 +5101,7 @@ re_eliz_cup_win_s:
 
 
 re_eliz_cup_lose_s:
-  title: 输去伊丽莎白二世女皇杯的场合
+  title: 伊丽莎白女皇杯后·每一刻的奇迹
   lines:
     - 尽管做出了如此多的努力和准备
     - %CHARA%，仍然非常遗憾地在资深年的伊丽莎白二世女皇杯中落败
@@ -5198,7 +5197,7 @@ re_eliz_cup_lose_s:
 
 
 rs_arim_kin_s:
-  title: 有马纪念
+  title: 有马纪念前·最后的魔法？
   lines:
     - 有马纪念，处于全日本关注度顶峰的，资深级的长距离G1赛事
     - 在这样充满关注度的，应该是%CHARA%梦寐以求的比赛中——

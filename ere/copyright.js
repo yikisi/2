@@ -399,10 +399,16 @@ function generate_copyrights() {
       ],
       '颜色可以叫颜',
     ],
-    // [
-    //   [get_copyright_entry(71), { isDivider: true }, get_copyright_entry(86)],
-    //   'gmddst',
-    // ],
+    [
+      [
+        get_copyright_entry(71),
+        { isDivider: true },
+        get_copyright_entry(86),
+        { isDivider: true },
+        get_copyright_entry(131),
+      ],
+      'gmddst',
+    ],
     [
       [i18n().cr_image_common, { isDivider: true }, i18n().cr_image_gif],
       'kxmodel',

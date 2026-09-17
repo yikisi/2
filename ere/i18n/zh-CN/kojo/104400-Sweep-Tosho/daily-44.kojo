@@ -21,10 +21,71 @@ select:
             - fontWeight: bold
               content: %CHARA%
             - 「虽然从没想过废柴%CALLNAME%能做些什么，但如果有甜品的话就赶快拿出来吧～！」
-    - if: "!era.get('status:44:生日') && era.get('status:44:熬夜') > 0"
+    - if: t = era.get('cflag:44:育成用变量')?.agreement > 0 # 大魔法师的约定状态
       lines:
+        - random: true
+          lines:
+            - color: %COLOR%
+              content:
+                - fontWeight: bold
+                  content: %CHARA%
+                - 「『魔女之夜』当然和平常不一样了！就算说了你也不会明白的！」
+        - random: true
+          lines:
+            - color: %COLOR%
+              content:
+                - fontWeight: bold
+                  content: %CHARA%
+                - 「为了『魔女之夜』，不论是主人还是 %CALLNAME% 都得尽心尽力」
+            - color: %COLOR%
+              content:
+                - fontWeight: bold
+                  content: %CHARA%
+                - 「你要是敢偷懒……魔法饼干以后就不给你了！！」
+        - random: true
+          lines:
+            - color: %COLOR%
+              content:
+                - fontWeight: bold
+                  content: %CHARA%
+                - 「只要，能在那一天…………」
+            - color: %COLOR%
+              content:
+                - fontWeight: bold
+                  content: %CHARA%
+                - 「…才没有说什么！不许这样盯着主人看！我现在就要开始练习…！！」
+    - if: "!era.get('status:44:生日') && !t && era.get('status:44:熬夜') > 0"
+      lines:
+        # 新生的Asphodel（经典年11月第2周回合结束事件）之前
+        - if: t <= 47 + 42
+          lines:
+            - color: %COLOR%
+              content:
+                - fontWeight: bold
+                  content: %CHARA%
+                - 「呼……唔……唔……嗯嗯……」
+            - color: %COLOR%
+              content:
+                - fontWeight: bold
+                  content: %CHARA%
+                - 「唔……！没错！！那个%MOHOSHOJO%，后来……！！！」
+            - %CHARA% 昨晚熬夜读书了的样子
+        # 新生的Asphodel（经典年11月第2周回合结束事件）之后，魔法之梦（资深年7月第1周回合开始事件）之前
+        - if: t > 47 + 42 && t < 95 + 25
+          lines:
+            - color: %COLOR%
+              content:
+                - fontWeight: bold
+                  content: %CHARA%
+                - 「呼……唔……唔……嗯嗯……」
+            - color: %COLOR%
+              content:
+                - fontWeight: bold
+                  content: %CHARA%
+                - 「唔……！不对不对！%CALLNAME%，快来看看这个魔法怎么样！！」
+            - %CHARA% 昨晚熬夜研究了些什么的样子
         # 魔法之梦（资深年7月第1周回合开始事件）之后
-        - if: era.get('cflag:44:育成回合计时') >= 95 + 25
+        - if: t >= 95 + 25
           lines:
             - color: %COLOR%
               content:
@@ -37,37 +98,7 @@ select:
                   content: %CHARA%
                 - 「唔……！不要不要！我今天不要训练了啦～！！」
             - 不管%CHARA%昨晚到底做了什么……总之熬夜了的样子
-        - if: era.get('cflag:44:育成回合计时') < 95 + 25
-          lines:
-            - random: true
-              lines:
-                - color: %COLOR%
-                  content:
-                    - fontWeight: bold
-                      content: %CHARA%
-                    - 「呼……唔……唔……嗯嗯……」
-                - color: %COLOR%
-                  content:
-                    - fontWeight: bold
-                      content: %CHARA%
-                    - 「唔……！没错！！那个%MOHOSHOJO%，后来……！！！」
-                - %CHARA% 昨晚熬夜读书了的样子
-            # 新生的Asphodel（经典年11月第2周回合结束事件）之后
-            - if: era.get('cflag:44:育成回合计时') > 47 + 42
-              random: true
-              lines:
-                - color: %COLOR%
-                  content:
-                    - fontWeight: bold
-                      content: %CHARA%
-                    - 「呼……唔……唔……嗯嗯……」
-                - color: %COLOR%
-                  content:
-                    - fontWeight: bold
-                      content: %CHARA%
-                    - 「唔……！不对不对！%CALLNAME%，快来看看这个魔法怎么样！！」
-                - %CHARA% 昨晚熬夜研究了些什么的样子
-    - if: "!era.get('status:44:生日') && !era.get('status:44:熬夜')"
+    - if: "!era.get('status:44:生日') && !t && !era.get('status:44:熬夜')"
       lines:
         # 魔法之梦（资深年7月第1周回合开始事件）之后
         - if: era.get('cflag:44:育成回合计时') >= 95 + 25
@@ -197,14 +228,6 @@ select:
                     - fontWeight: bold
                       content: %CHARA%
                     - 「为什么啊！？%CALL_68%喝了也就去了趟保健室的药水，为什么不能给%CALLNAME%喝啊！」
-            - if: era.get('cflag:44:育成用变量')?.agreement > 0 # 大魔法师的约定状态
-              random: true
-              lines:
-                - color: %COLOR%
-                  content:
-                    - fontWeight: bold
-                      content: %CHARA%
-                    - 「『魔女之夜』当然和平常不一样了！就算说了你也不会明白的！」
             # 新生的Asphodel（经典年11月第2周回合结束事件）之后
             - if: era.get('cflag:44:育成回合计时') > 47 + 42
               random: true
@@ -2787,15 +2810,15 @@ good_night_sex:
     content:
       - fontWeight: bold
         content: %CHARA%
-      - 「……喂。%CALLNAME%。跟我走吧。去休息室。做你喜欢做的那种事。」
+      - 「……%CALLNAME%。跟我走吧。去休息室。做你喜欢做的那种事。」
   - 直截了当地提出了请求
   -
   - color: %COLOR%
     content:
       - fontWeight: bold
         content: %CHARA%
-      - 「……为什么一副惊讶的表情？走，还是不走？」
-  - %CHARA%只是用紫色的眼眸看着%YOU%
+      - 「……不许一副惊讶的表情……走，还是不走？」
+  - %CHARA%似乎在尽力克制着脸上的红晕，只是用紫色的眼眸看着%YOU%
   -
   - 对于%CHARA%的请求，%YOU%的回应是
   -
@@ -2814,8 +2837,8 @@ good_night_sex:
         content:
           - fontWeight: bold
             content: %CHARA%
-          - 「走。」
-      - 就这样，%YOU%跟在%CHARA%的身后，一起进了休息室
+          - 「不许反悔哦。」
+      - 就这样，%YOU%跟在不知迈着轻松还是一如既往脚步的%CHARA%身后，一起进了休息室
   - acc: 2
     content: 「拒绝」
     lines:
@@ -2861,18 +2884,18 @@ good_night_sex:
                 content:
                   - fontWeight: bold
                     content: %CHARA%
-                  - 「不要不要！我才不接受！%CALLNAME%你之前对我……干那种事情的时候，才不是这样子的！！」
+                  - 「不要不要！我才不接受！%CALLNAME%你……应该像是魔法少女书里的反派一样才对…！！」
               - 突然叫起来
               - color: %COLOR%
                 content:
                   - fontWeight: bold
                     content: %CHARA%
-                  - 「%CALLNAME%！我命令你，今天就跟我进休息室啦！！！」
+                  - 「……不不对我才没有说什么书！总之，%CALLNAME%！主人命令你，今天就跟我进休息室啦！！！」
               -
-              - （%CHARA%发起了意志力判定！）
+              - （满地打滚的%CHARA%发起了意志力判定！）
               - 【意志正在经受磨练……】
               - 【通过检定了！】
-              - -
+              - 
               - 纵使%CHARA%满地打滚……某些事情也不是说做就能随时去做的
               - 在承诺给%SEX%一份甜品后，至少是搪塞了过去
       - if: d.check === 2 # 大成功转强奸
@@ -2881,15 +2904,15 @@ good_night_sex:
             content:
               - fontWeight: bold
                 content: %CHARA%
-              - 「不要不要！我才不接受！%CALLNAME%你之前对我……干那种事情的时候，才不是这样子的！！」
+              - 「不要不要！我才不接受！%CALLNAME%你……应该像是魔法少女书里的反派一样才对…！！」
           - 突然叫起来
           - color: %COLOR%
             content:
               - fontWeight: bold
                 content: %CHARA%
-              - 「%CALLNAME%！我命令你，今天就跟我进休息室啦！！！」
+              - 「……不不对我才没有说什么书！总之，%CALLNAME%！主人命令你，今天就跟我进休息室啦！！」
           -
-          - （%CHARA%发起了意志力判定！）
+          - （满地打滚的%CHARA%发起了意志力判定！）
           -
           - 【意志正在经受磨练……】
           - 【检定……失败了！】
@@ -2897,7 +2920,7 @@ good_night_sex:
           - 即使提出了甜品的建议，对方依然不接受的样子
           - 在和%SEX%以「意志力」互相僵持了许久后，%YOU%终究是拗不过满地打滚的%CHARA%
           -
-          - 最终，%YOU%只是跟在%CHARA%身后进了休息室
+          - 最终，%YOU%只是跟在踏着不知是轻松还是一如既往脚步的%CHARA%身后进了休息室
 
 
 birthday:

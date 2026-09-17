@@ -19179,7 +19179,7 @@
         "44|5": 100513,
         "44|24": 102412,
         "44|47": 104712,
-        "44|67": 106711,
+        "44|68": 106811,
         "46|2": 100216,
         "46|4": 100414,
         "46|19": 101915,
@@ -19597,7 +19597,7 @@
         "44|5": 0,
         "44|24": 100,
         "44|47": 80,
-        "44|67": 150,
+        "44|68": 150,
         "46|0": 225,
         "46|2": 150,
         "46|4": 150,
@@ -25292,6 +25292,366 @@
       "posY": 0,
       "type": 0
     },
+    "阿尔丹_裸": {
+      "path": "res/ero/107101/body/无毛.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "阿尔丹_裸_汗": {
+      "path": "res/ero/107101/body/汗.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "阿尔丹_裸_腋毛": {
+      "path": "res/ero/107101/body/腋毛.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "阿尔丹_裸_阴毛": {
+      "path": "res/ero/107101/body/阴毛.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "阿尔丹_裸_孕": {
+      "path": "res/ero/107101/body/孕肚.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "阿尔丹_裸_雾气": {
+      "path": "res/ero/107101/body/雾气.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "阿尔丹_头_发": {
+      "path": "res/ero/107101/head/头发.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "阿尔丹_头_汗": {
+      "path": "res/ero/107101/head/汗.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "阿尔丹_头_泪": {
+      "path": "res/ero/107101/head/眼泪.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "阿尔丹_头": {
+      "path": "res/ero/107101/head/脸底.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "阿尔丹_头_腮红": {
+      "path": "res/ero/107101/head/腮红.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "阿尔丹_脸_一般": {
+      "path": "res/ero/107101/head/face/普通.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "阿尔丹_脸_害羞": {
+      "path": "res/ero/107101/head/face/羞涩.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "阿尔丹_脸_痛苦": {
+      "path": "res/ero/107101/head/face/痛苦.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "阿尔丹_脸_高潮": {
+      "path": "res/ero/107101/head/face/高潮.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "阿尔丹_脸_嫌恶": {
+      "path": "res/ero/107101/head/face/嫌恶.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "阿尔丹_脸_兴奋": {
+      "path": "res/ero/107101/head/face/兴奋.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "阿尔丹_脸_睡": {
+      "path": "res/ero/107101/head/face/睡着.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "阿尔丹2_裸": {
+      "path": "res/ero/107102/body/无毛.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "阿尔丹2_裸_汗": {
+      "path": "res/ero/107102/body/汗.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "阿尔丹2_裸_腋毛": {
+      "path": "res/ero/107102/body/腋毛.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "阿尔丹2_裸_阴毛": {
+      "path": "res/ero/107102/body/阴毛.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "阿尔丹2_裸_孕": {
+      "path": "res/ero/107102/body/孕肚.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "阿尔丹2_裸_雾气": {
+      "path": "res/ero/107102/body/雾气.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "阿尔丹2_头_发": {
+      "path": "res/ero/107102/head/头发.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "阿尔丹2_头_汗": {
+      "path": "res/ero/107102/head/汗.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "阿尔丹2_头_泪": {
+      "path": "res/ero/107102/head/眼泪.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "阿尔丹2_头": {
+      "path": "res/ero/107102/head/脸底.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "阿尔丹2_头_腮红": {
+      "path": "res/ero/107102/head/腮红.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "阿尔丹2_脸_一般": {
+      "path": "res/ero/107102/head/face/普通.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "阿尔丹2_脸_害羞": {
+      "path": "res/ero/107102/head/face/羞涩.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "阿尔丹2_脸_痛苦": {
+      "path": "res/ero/107102/head/face/痛苦.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "阿尔丹2_脸_高潮": {
+      "path": "res/ero/107102/head/face/高潮.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "阿尔丹2_脸_嫌恶": {
+      "path": "res/ero/107102/head/face/嫌恶.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "阿尔丹2_脸_兴奋": {
+      "path": "res/ero/107102/head/face/兴奋.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "阿尔丹2_脸_睡": {
+      "path": "res/ero/107102/head/face/睡着.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
     "光明_裸": {
       "path": "res/ero/107401/body/无毛.png",
       "x": 0,
@@ -25454,6 +25814,186 @@
     },
     "光明_脸_睡": {
       "path": "res/ero/107401/head/face/睡着.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "高峰_裸": {
+      "path": "res/ero/108601/body/无毛.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "高峰_裸_汗": {
+      "path": "res/ero/108601/body/汗.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "高峰_裸_腋毛": {
+      "path": "res/ero/108601/body/腋毛.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "高峰_裸_阴毛": {
+      "path": "res/ero/108601/body/阴毛.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "高峰_裸_孕": {
+      "path": "res/ero/108601/body/孕肚.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "高峰_裸_雾气": {
+      "path": "res/ero/108601/body/雾气.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "高峰_头_发": {
+      "path": "res/ero/108601/head/头发.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "高峰_头_汗": {
+      "path": "res/ero/108601/head/汗.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "高峰_头_泪": {
+      "path": "res/ero/108601/head/眼泪.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "高峰_头": {
+      "path": "res/ero/108601/head/脸底.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "高峰_头_腮红": {
+      "path": "res/ero/108601/head/腮红.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "高峰_脸_一般": {
+      "path": "res/ero/108601/head/face/普通.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "高峰_脸_害羞": {
+      "path": "res/ero/108601/head/face/羞涩.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "高峰_脸_痛苦": {
+      "path": "res/ero/108601/head/face/痛苦.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "高峰_脸_高潮": {
+      "path": "res/ero/108601/head/face/高潮.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "高峰_脸_嫌恶": {
+      "path": "res/ero/108601/head/face/嫌恶.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "高峰_脸_兴奋": {
+      "path": "res/ero/108601/head/face/兴奋.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "高峰_脸_睡": {
+      "path": "res/ero/108601/head/face/睡着.png",
       "x": 0,
       "y": 0,
       "width": 720,
@@ -27674,6 +28214,176 @@
     },
     "杏目_脸_睡": {
       "path": "res/ero/112901/head/face/睡着.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "欢呼_裸": {
+      "path": "res/ero/113101/body/无毛.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "欢呼_裸_汗": {
+      "path": "res/ero/113101/body/汗.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "欢呼_裸_腋毛": {
+      "path": "res/ero/113101/body/腋毛.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "欢呼_裸_阴毛": {
+      "path": "res/ero/113101/body/阴毛.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "欢呼_裸_孕": {
+      "path": "res/ero/113101/body/孕肚.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "欢呼_头_发": {
+      "path": "res/ero/113101/head/头发.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "欢呼_头_汗": {
+      "path": "res/ero/113101/head/汗.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "欢呼_头_泪": {
+      "path": "res/ero/113101/head/眼泪.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "欢呼_头": {
+      "path": "res/ero/113101/head/脸底.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "欢呼_头_腮红": {
+      "path": "res/ero/113101/head/腮红.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "欢呼_脸_一般": {
+      "path": "res/ero/113101/head/face/普通.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "欢呼_脸_害羞": {
+      "path": "res/ero/113101/head/face/羞涩.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "欢呼_脸_痛苦": {
+      "path": "res/ero/113101/head/face/痛苦.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "欢呼_脸_高潮": {
+      "path": "res/ero/113101/head/face/高潮.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "欢呼_脸_嫌恶": {
+      "path": "res/ero/113101/head/face/嫌恶.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "欢呼_脸_兴奋": {
+      "path": "res/ero/113101/head/face/兴奋.png",
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 720,
+      "posX": 0,
+      "posY": 0,
+      "type": 0
+    },
+    "欢呼_脸_睡": {
+      "path": "res/ero/113101/head/face/睡着.png",
       "x": 0,
       "y": 0,
       "width": 720,
