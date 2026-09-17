@@ -16,7 +16,7 @@ module.exports = new UmaSkill(
       args.bashin_diff_behind >= 1,
     (args) => args.phase === 3 && args.is_activate_other_skill_detail === 1,
   ],
-  [13, 500],
+  [13, -0.0001],
   [500, 500],
   [
     UmaSkill.ability_time_usage_enum.normal,

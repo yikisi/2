@@ -296,6 +296,8 @@ function sys_sim_race(list_chara, info, race_id, shown = true) {
     uma.race.conditionParams.is_badstart = Number(
       start_delay[uma.index_race] >= 0.08,
     );
+    uma.race.conditionParams.is_goodstart =
+      1 - uma.race.conditionParams.is_badstart;
 
     dynamic_table[0].push(
       get_table_row(uma, fron_records[uma.index_race].slice(0, fron_cols), {
@@ -306,7 +308,7 @@ function sys_sim_race(list_chara, info, race_id, shown = true) {
           offset: 1,
           width: progress_width,
         },
-        inContent: uma.race.conditionParams.is_badstart
+        inContent: uma.race.conditionParams.is_goodstart
           ? i18n().ui_race_start
           : i18n().ui_race_bad_start,
         percentage: 0,

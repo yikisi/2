@@ -65,10 +65,17 @@ function sub_simulate_skill(
     const cur_lane = race_info.lanes.find(
       (e) => uma.race.location >= e.start && uma.race.location < e.end,
     );
-    uma.race.slope =
-      race_info.slopes.find(
-        (e) => uma.race.location >= e.start && uma.race.location < e.end,
-      )?.slope || 0;
+    const cur_slope = race_info.slopes.find(
+      (e) => uma.race.location >= e.start && uma.race.location < e.end,
+    );
+    if (cur_slope) {
+      uma.race.slope = cur_slope.slope;
+      if (uma.race.slope > 0 && !uma.race.slopesPassed.includes(cur_slope)) {
+        uma.race.slopesPassed.push(cur_slope);
+      }
+    } else {
+      uma.race.slope = 0;
+    }
     if (uma.rank.curr === 1) {
       cur_lane !== top_lane &&
         report_cache
@@ -722,6 +729,10 @@ function sub_simulate_skill(
                   Math.floor(uma.race.middleBlockedContinueTime / 2),
                   3,
                 ) + 1;
+              break;
+            case ability_time_usage_enum.up_slope:
+              skill.ability_time[i] *=
+                Math.min(uma.race.slopesPassed.length, 4) + 1;
           }
           for (let j = 0; j < skill.data.ability_types[i].length; ++j) {
             if (skill.data.ability_types[i][j] > 0) {

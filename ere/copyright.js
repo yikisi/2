@@ -399,10 +399,16 @@ function generate_copyrights() {
       ],
       '颜色可以叫颜',
     ],
-    // [
-    //   [get_copyright_entry(71), { isDivider: true }, get_copyright_entry(86)],
-    //   'gmddst',
-    // ],
+    [
+      [
+        get_copyright_entry(71),
+        { isDivider: true },
+        get_copyright_entry(86),
+        { isDivider: true },
+        get_copyright_entry(131),
+      ],
+      'gmddst',
+    ],
     [
       [i18n().cr_image_common, { isDivider: true }, i18n().cr_image_gif],
       'kxmodel',
@@ -573,6 +579,37 @@ function generate_copyrights() {
   ]);
   push_copyrights(img_copyrights, 2);
   buffer.push(
+    [
+      {
+        config: {
+          color: item_title_color,
+          fontSize: '1.25rem',
+          isParagraph: true,
+          offset: 3,
+          width: 9,
+        },
+        content: i18n().cr_header_lib_en_us,
+      },
+      {
+        config: {
+          color: item_title_color,
+          fontSize: '1.25rem',
+          isParagraph: true,
+          width: 9,
+        },
+        content: i18n().cr_header_lib_ru_ru,
+      },
+    ],
+    [
+      {
+        config: { offset: 3, width: 9 },
+        content: 'Katze',
+      },
+      {
+        config: { width: 9 },
+        content: 'Agnes Impera',
+      },
+    ],
     [
       {
         config: {

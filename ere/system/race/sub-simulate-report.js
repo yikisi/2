@@ -217,7 +217,15 @@ function sub_simulate_report(events, in_race_list, info, race_id) {
           race_id,
         ))
       ) {
-        return temp;
+        return Array.isArray(temp)
+          ? temp.map((e) =>
+              typeof e === 'string'
+                ? { color: champion.color, content: e }
+                : e.color === void 0
+                  ? { color: champion.color, ...e }
+                  : e,
+            )
+          : temp;
       } else {
         ret_list.push(
           ...(race_id === race_enum.begin_race

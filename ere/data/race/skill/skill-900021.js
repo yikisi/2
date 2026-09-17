@@ -9,14 +9,15 @@ module.exports = new UmaSkill(
   180,
   [() => true, () => true],
   [
+    (args) => args.distance_rate >= 50 && args.order === 1,
     (args) =>
-      args.distance_rate >= 50 &&
+      args.is_activate_other_skill_detail === 1 &&
+      args.phase === 3 &&
       args.order === 1 &&
       args.bashin_diff_behind >= 1,
-    () => false,
   ],
-  [3, 0],
-  [500, 0],
+  [3, 2.4],
+  [500, 500],
   [
     UmaSkill.ability_time_usage_enum.normal,
     UmaSkill.ability_time_usage_enum.normal,
@@ -28,7 +29,7 @@ module.exports = new UmaSkill(
       UmaSkill.ability_type_enum.no,
     ],
     [
-      UmaSkill.ability_type_enum.no,
+      UmaSkill.ability_type_enum.TargetSpeed,
       UmaSkill.ability_type_enum.no,
       UmaSkill.ability_type_enum.no,
     ],
@@ -47,7 +48,7 @@ module.exports = new UmaSkill(
   ],
   [
     [0.15, 0, 0],
-    [0, 0, 0],
+    [0.035, 0, 0],
   ],
   [
     [
@@ -56,7 +57,7 @@ module.exports = new UmaSkill(
       UmaSkill.target_type_enum.no,
     ],
     [
-      UmaSkill.target_type_enum.no,
+      UmaSkill.target_type_enum.Self,
       UmaSkill.target_type_enum.no,
       UmaSkill.target_type_enum.no,
     ],
@@ -69,7 +70,7 @@ module.exports = new UmaSkill(
   [15, 0],
   1,
   200,
-  false,
+  true,
   true,
   [],
   [UmaSkill.ability_tag_enum.targetSpeed],
