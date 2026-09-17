@@ -71,6 +71,7 @@ class I18nClothes {
   101940 = '爱丽♡僵尸';
   102001 = '青云Thumbing';
   102020 = '猫咪舞会';
+  102030 = '海边的随性之橙';
   102101 = '疾风迅雷';
   102143 = '勇猛鸣神';
   102201 = '高贵三叶草';
@@ -127,6 +128,7 @@ class I18nClothes {
   104201 = 'Rocket☆Star';
   104240 = 'Be♪Witched';
   104301 = 'Wicked Punk';
+  104323 = '咕噜咕噜☆野营';
   104401 = '悬铃木・魔女';
   104426 = 'Realize・Rune';
   104501 = '潺潺溪流';
@@ -193,6 +195,7 @@ class I18nClothes {
   107250 = '黑将Zen';
   107301 = '志向，高远，坚定';
   107401 = 'Brunissage・Line';
+  107430 = '海边的优雅雪纺';
   107446 = '星辰般澄澈的Snow Lolita';
   107601 = 'Saisir le rêve';
   107610 = 'Nouvelle pousse';
@@ -257,6 +260,7 @@ class I18nClothes {
   111101 = 'Inherited Hope';
   111201 = 'Daring Darling!';
   111301 = 'Assorted Cuteness♡';
+  111330 = "Snatchin' Hearts ♡";
   111401 = 'Heroína Inocente';
   111501 = '总览';
   111601 = 'Regina dei fiori';
@@ -270,6 +274,7 @@ class I18nClothes {
   112401 = 'POPPING!';
   112410 = '晓光';
   112701 = '义心黑焰';
+  112723 = '刚毅紫焰';
   112901 = 'The Changer';
   113001 = '万折不挠之缠';
   113101 = 'Smile My Way!';
@@ -280,7 +285,9 @@ class I18nClothes {
   113501 = 'Sunlit Outsider';
   113601 = 'Divine Raiment';
   113701 = 'Miracle Author';
+  114101 = "Fate's Chosen Star";
   114301 = 'Lueur Angélique';
+  114901 = '绝佳晓暗';
   // GENERATED END
 }
 
