@@ -12,10 +12,10 @@ module.exports = {
    */
   fill_moho_in_dict(dict, sex_code = era.get('cflag:44:性别')) {
     if (sex_code === 1) {
+      dict.MOHOSHOJO = dict.MAJO = i18n().name.majutsushi;
+    } else {
       dict.MOHOSHOJO = i18n().name.moho_shojo;
       dict.MAJO = i18n().name.majo;
-    } else {
-      dict.MOHOSHOJO = dict.MAJO = i18n().name.majutsushi;
     }
     return dict;
   },

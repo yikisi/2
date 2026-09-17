@@ -57,7 +57,7 @@ select:
     - if: "!era.get('status:44:生日') && !t && era.get('status:44:熬夜') > 0"
       lines:
         # 新生的Asphodel（经典年11月第2周回合结束事件）之前
-        - if: t <= 47 + 42
+        - if: (t = era.get('cflag:44:育成回合计时')) <= 47 + 42
           lines:
             - color: %COLOR%
               content:
