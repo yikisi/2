@@ -26,7 +26,7 @@ module.exports = {
           return ['文本构造器缺失'];
         };
         f.toString = () => '文本缺失';
-        console.error(`口上内容缺失：${k} in ${path}`);
+        console.error(`口上内容缺失：${k} ${path}`);
         return f;
       },
     });
