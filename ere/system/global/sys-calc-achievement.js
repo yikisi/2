@@ -102,9 +102,30 @@ class GlobalAchievement {
   c_pama1 = [7, types.hidden, void 0, get_chara_color(64)];
 
   constructor() {
+    function notify(m, color, desc) {
+      era.notify(
+        [
+          {
+            color,
+            content: i18n()
+              .achievement.name_template.replace(
+                '%RARITY%',
+                di18n.achievement.get_rarity_name(dict[m][0]),
+              )
+              .replace('%NAME%', i18n().achievement[m]),
+            fontSize: '1rem',
+            fontWeight: 'bold',
+          },
+          { isBr: true },
+          ...join_list(desc.split('\n'), { isBr: true }),
+        ],
+        i18n().ui_achieve_title,
+        'success',
+        50000,
+      );
+    }
     this.#fields.forEach((m) => {
       dict[m] = this[m];
-      const rarity = dict[m][0];
       const p_type = dict[m][2];
       Object.defineProperty(this, m, {
         get() {
@@ -112,37 +133,18 @@ class GlobalAchievement {
         },
         set(v) {
           if (!this.#bean[m] && v > 0) {
-            era.notify(
-              [
-                {
-                  color: this.get_color(m),
-                  content: i18n()
-                    .achievement.name_template.replace(
-                      '%RARITY%',
-                      di18n.achievement.get_rarity_name(rarity),
-                    )
-                    .replace('%NAME%', i18n().achievement[m]),
-                  fontSize: '1rem',
-                  fontWeight: 'bold',
-                },
-                { isBr: true },
-                ...join_list(this.get_desc(m).split('\n'), { isBr: true }),
-              ],
-              i18n().ui_achieve_title,
-              'success',
-              50000,
-            );
+            this.#bean[m] = new Date().getTime();
+            notify(m, this.get_color(m), this.get_desc(m));
             const p_key = platinum_type.keys[p_type];
-            if (di18n.achievement.n_platinum[p_type] && !this.#bean[p_key]) {
-              const index = this.#fields.findIndex(
-                (m) => !this[m] && dict[m][2] === p_type,
-              );
-              if (index === -1) {
-                this.#bean[p_key] = new Date().getTime();
-              }
+            if (
+              di18n.achievement.n_platinum[p_type] &&
+              !this.#bean[p_key] &&
+              this.#fields.every((m) => this[m] > 0 || dict[m][2] !== p_type)
+            ) {
+              this.#bean[p_key] = new Date().getTime();
+              notify(p_key, this.get_color(p_key), this.get_desc(p_key));
             }
           }
-          this.#bean[m] = new Date().getTime();
         },
       });
     });
