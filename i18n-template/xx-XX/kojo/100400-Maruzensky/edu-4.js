@@ -2371,6 +2371,7 @@ module.exports = {
       await era.printAndWait(
         `带着苦涩笑容的${maru.uma_sex_title}轻轻关上了训练室的门。`,
       );
+      return [ret];
     };
     f.title = title;
     return f;
