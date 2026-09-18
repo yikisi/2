@@ -41,11 +41,11 @@ Change Logs: [v3 ryuki](CHANGELOG-v3-ryuki.md) [v2 (agito)](CHANGELOG-v2-agito) 
 
 > **任何情况下都只需要下载相应的游戏包和资源包，不需要下载源代码（Source code）！**<br>
 > 各系统具体使用说明：
-> * Win8及以上Windows系统：直接下载 [PC绿色版](https://umaera.gitgud.site/erauma/index.html)，需要显示图片的额外下载 [资源包](https://gitgud.io/umaera/erauma/-/archive/master/erauma-master.zip?path=res)；
-> * Win7：下载 [PC游戏包](https://gitgud.io/umaera/erauma/-/releases/permalink/latest) 和 [EraElectron相应的发布版](https://gitgud.io/umaera/engine/era-electron/-/releases/permalink/latest)，打开引擎后打开PC游戏包解压出的文件夹（或者将PC游戏包解压出的文件夹改名为game然后放到引擎解压出的文件夹下，和.exe文件同级），需要显示图片的额外下载 [资源包](https://gitgud.io/umaera/erauma/-/archive/master/erauma-master.zip?path=res)；
-> * Mac：下载 [PC游戏包](https://gitgud.io/umaera/erauma/-/releases/permalink/latest) 和 [EraElectron相应的发布版](https://gitgud.io/umaera/engine/era-electron/-/releases/permalink/latest)（注意芯片类型），安装 .dmg 后打开引擎，然后打开PC游戏包解压出的文件夹，需要显示图片的额外下载 [资源包](https://gitgud.io/umaera/erauma/-/archive/master/erauma-master.zip?path=res)；
-> * Linux：……用 Linux 的仁兄装个 node.js 自己构建吧，npm run electron:build，然后下载 [PC游戏包](https://gitgud.io/umaera/erauma/-/releases/permalink/latest) ，打开引擎后打开PC游戏包解压出的文件夹，需要显示图片的额外下载 [资源包](https://gitgud.io/umaera/erauma/-/archive/master/erauma-master.zip?path=res)；
-> * 安卓：下载 [安卓游戏包](https://gitgud.io/umaera/erauma/-/releases/permalink/latest) 和 [安卓版引擎](https://gitgud.io/umaera/engine/ere-app/-/releases/permalink/latest)，需要显示图片的额外下载 [资源包](https://gitgud.io/umaera/erauma/-/archive/master/erauma-master.zip?path=res)。
+> * Win8及以上Windows系统：直接下载 [PC绿色版](https://umaera.gitgud.site/erauma/index.html)，需要显示图片的额外下载 [资源包](https://umaera.gitgud.site/data/uma-resource/full.html)；
+> * Win7：下载 [PC游戏包](https://gitgud.io/umaera/erauma/-/releases/permalink/latest) 和 [EraElectron相应的发布版](https://gitgud.io/umaera/engine/era-electron/-/releases/permalink/latest)，打开引擎后打开PC游戏包解压出的文件夹（或者将PC游戏包解压出的文件夹改名为game然后放到引擎解压出的文件夹下，和.exe文件同级），需要显示图片的额外下载 [资源包](https://umaera.gitgud.site/data/uma-resource/full.html)；
+> * Mac：下载 [PC游戏包](https://gitgud.io/umaera/erauma/-/releases/permalink/latest) 和 [EraElectron相应的发布版](https://gitgud.io/umaera/engine/era-electron/-/releases/permalink/latest)（注意芯片类型），安装 .dmg 后打开引擎，然后打开PC游戏包解压出的文件夹，需要显示图片的额外下载 [资源包](https://umaera.gitgud.site/data/uma-resource/full.html)；
+> * Linux：……用 Linux 的仁兄装个 node.js 自己构建吧，npm run electron:build，然后下载 [PC游戏包](https://gitgud.io/umaera/erauma/-/releases/permalink/latest) ，打开引擎后打开PC游戏包解压出的文件夹，需要显示图片的额外下载 [资源包](https://umaera.gitgud.site/data/uma-resource/full.html)；
+> * 安卓：下载 [安卓游戏包](https://gitgud.io/umaera/erauma/-/releases/permalink/latest) 和 [安卓版引擎](https://gitgud.io/umaera/engine/ere-app/-/releases/permalink/latest)，需要显示图片的额外下载 [资源包](https://umaera.gitgud.site/data/uma-resource/full.html)。
 
 ### PC
 

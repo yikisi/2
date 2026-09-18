@@ -10,17 +10,14 @@ variables:
   CALL_SIGN: 'ryuki'
   GIT_LFS_SKIP_SMUDGE: "1"
 
-before_script:
-  - export GAME_ALL_ZIP="${GAME_ALL_DIR}-win-x64.7z"
-  - export GAME_ZIP="${GAME_DIR}.7z"
-  - export GAME_BUNDLE_ZIP="${GAME_BUNDLE_DIR}.zip"
-
 build:
   stage: build
   tags:
     - shell
   variables:
     NODE_OPTIONS: "--openssl-legacy-provider"
+    GAME_ALL_ZIP: '${GAME_ALL_DIR}-win-x64.7z'
+    GAME_ZIP: '${GAME_DIR}.7z'
   script:
     - pnpm install
     - node ci/build.js
@@ -36,6 +33,8 @@ android:
   stage: build
   tags:
     - shell
+  variables:
+    GAME_BUNDLE_ZIP: '${GAME_BUNDLE_DIR}.zip'
   script:
     - pnpm install
     - node ci/android.js
