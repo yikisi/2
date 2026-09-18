@@ -403,6 +403,8 @@ function generate_copyrights() {
       [
         get_copyright_entry(71),
         { isDivider: true },
+        get_copyright_entry(71, '2'),
+        { isDivider: true },
         get_copyright_entry(86),
         { isDivider: true },
         get_copyright_entry(131),
