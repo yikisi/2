@@ -31,6 +31,7 @@ module.exports = class extends CustomizedDaily {
   good_morning() {
     this.#kojo.good_morning(
       get_chara_talk(this.id),
+      get_chara_talk(67),
       get_chara_talk(0),
       sys_get_colored_callname(this.id, 0),
       sys_get_colored_callname(this.id, 3),
