@@ -38,6 +38,7 @@ webpack(config, (err, stats) => {
       'CHANGELOG-test.md',
       'CHANGELOG-v1-kuuga.md',
       'CHANGELOG-v2-agito.md',
+      'CHANGELOG-v3-ryuki.md',
       'RELEASE.md',
       'LICENSE',
       'README.md',
