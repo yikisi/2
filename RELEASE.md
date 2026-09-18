@@ -1,8 +1,8 @@
 # [EraUma v3.0 (agito)](https://gitgud.io/umaera/erauma/-/releases/3.0)
 
-_incoming_
+_2026/9/19_
 
-适配 [EraElectron v4.7.0 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.4.0) 与 [ere.app v1.2.8 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.2.8) 及以上版本
+适配 [EraElectron v4.8.2 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.8.2) 与 [ere.app v1.3.1 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.3.1) 及以上版本
 
 ## Added
 
@@ -25,6 +25,15 @@ _incoming_
       * 性经历在新版本游戏下生成后切换到其他语言时会按照相应语言库的设置显示
       * 部分称号在对应语言库下生成后切换到任何语言都保持原语言
   * 可以通过制作语言库放置在 #/i18n 文件夹下为 EraUma 增加更多语言支持（见 [How to create a language pack](i18n-template/README.md)）
+    * 已实装英语本地化，包含以下角色口上：(English localization has been implemented, including the following character stories:) Thanks to Katze!
+      * 无声铃鹿 (Silence Suzuka)
+      * 小栗帽 (Oguri Cap)
+      * 鲁铎象征 (Symboli Rudolf)
+      * 爱丽数码 (Agnes Digital)
+    * 已实装俄语本地化，包含以下角色口上：(Русская локализация уже добавлена, включая следующие истории персонажей:) Благодарим Agnes Impera!
+      * 东海帝王 (Токай Тэйо)
+      * 丸善斯基 (Марузенски)
+      * ……
 * 新增秘汤地点与机制
   * 外出时可以选择新地点【秘汤】，距离比车站远，比目白城近
   * 可以付出一定的马币进行秘汤疗养：

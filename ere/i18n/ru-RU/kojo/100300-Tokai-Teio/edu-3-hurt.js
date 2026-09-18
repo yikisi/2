@@ -35,6 +35,80 @@ module.exports = {
     f.title = title;
     return f;
   })(),
+  // TODO
+  bs_broken: () => {
+    const title = '折翼';
+    /**
+     * @param {CharaTalk} teio 东海帝王
+     * @param {CharaTalk} you 玩家
+     * @param {TextContent} leg_hurt_notification 腿伤的提示信息
+     */
+    const f = async (teio, you, leg_hurt_notification) => {
+      await era.printAndWait(
+        `医生的存在就是为了救死扶伤，我心爱的人一定会好起来的——不错，人们站在病房的门口，往往就会这么想。可是，这种想法，到底有几分真实，几分自我安慰呢？如果能够挽救的话，那么即使有医生的存在，这个世界依然无法避免伤亡的出现，难道是因为医生不够活跃？不够尽心？不……或者只是因为自己运气不好罢了。`,
+      );
+      era.println();
+      await era.printAndWait(
+        `如此想着，${you.name} 不自觉拿惯用手扶了扶额，呆呆地望着面前穿着白色大褂的中年男人。他的嘴唇在翕动——说话？他有在说什么吗？闲置的手处传来毛发的触感，不，不似以往，精心打理的柔顺马尾仿佛受惊一般，从内部炸开，掌心处传来一阵瘙痒。${you.name} 有点想笑，这孩子，怎么跑个步把自己搞成这样，一会得好好——`,
+      );
+      await era.printAndWait(
+        `${you.name} 转头，努力微笑着看向自家担当，随后看到了那双无神的双眸，将 ${you.name} 的思想吸回现实。`,
+      );
+      era.println();
+      await you.say_as_passer_by_and_wait(
+        '主治医生',
+        `${teio.actual_name_with_title}，以及 ${
+          you.actual_name_with_title
+        }，${teio.sex}的训练员，我必须再次强调一遍，要做好此生放弃赛跑的准备。`,
+      );
+      era.println();
+      await era.printAndWait(
+        '——任何逃避的想法，终究抵挡不住现实的车轮。现实就在眼前，除了接受之外别无二选。',
+      );
+      era.println();
+      await era.printAndWait(
+        `${you.name} 看着主治医生拿出一根金属小杖，再度在屏幕显示的照片上指点起来。之前不愿接受而自主屏蔽的回忆与现在的影像重叠，${you.name} 完全知道他都说了些什么。「髌骨脱位」「习惯性骨折」「裂纹」「小腿」……不错，所有地方 ${you.name} 都知道，所有情况 ${you.name} 都清楚。`,
+      );
+      era.println();
+      await era.printAndWait(
+        `可是这种事情依然发生了。${you.name} 忍住了情绪，尽力将自己压在原地。`,
+      );
+      await era.printAndWait('马尾在动，似要抽离。');
+      await you.say_and_wait(
+        '对我感到失望了吗，也没关系，是我作为训练员的失职',
+        true,
+      );
+      await era.printAndWait(
+        `${you.name} 这么想着，主动将手往回缩了一点……但失败了。`,
+      );
+      era.println();
+      await era.printAndWait(
+        `一只与蕴含力量不相称的小手放在了 ${you.name} 的掌面上，接着是从下方握住的另一只。一阵温暖传来，而同时，${you.name} 又感觉到了一股轻颤，如孩童扯住亲密的人衣角一般，${teio.name} 拉着 ${you.name} 的手。${you.name} 长叹一声，回握住${teio.sex}，再未松开。`,
+      );
+      era.println();
+      if (era.get('talent:3:身体素质') === 1) {
+        era.print(['【', teio.get_colored_name(), ' 不再 [体壮] 了！】']);
+      }
+      if (era.get('talent:3:自信程度') !== 1) {
+        era.print(['【', teio.get_colored_name(), ' 变得 [自卑] 了！】']);
+      }
+      if (era.get('talent:3:淫乱') !== 1) {
+        era.print([
+          '【',
+          teio.get_colored_name(),
+          ' 变得 ',
+          {
+            color: buff_colors[2],
+            content: '[淫乱]',
+          },
+          ' 了！】',
+        ]);
+      }
+      era.print(leg_hurt_notification);
+    };
+    f.title = title;
+    return f;
+  },
   ws_95_17_h: (() => {
     const title = 'Пресс-конференция';
     /**
