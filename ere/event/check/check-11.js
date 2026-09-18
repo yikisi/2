@@ -33,7 +33,7 @@ module.exports = require('#/event/check/snippets/check-uma-common-generator')(
   },
   () => new GrassWonderEduMarks().aim_count === 4,
   aim_races,
-  (buffer, races) => {
+  function (buffer, races) {
     buffer.push({
       content: i18n().kojo[this.id].achieve_track_aim_template.replace(
         '%COUNT%',
