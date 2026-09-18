@@ -5,7 +5,7 @@ module.exports = new UmaSkill(
   204702,
   20470,
   1,
-  0,
+  16,
   263,
   [() => true, () => true],
   [(args) => args.phase_random === 1, () => false],

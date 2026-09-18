@@ -5,7 +5,7 @@ module.exports = new UmaSkill(
   901411,
   90141,
   1,
-  0,
+  16,
   180,
   [(args) => args.running_style === 1 || args.running_style === 2, () => true],
   [

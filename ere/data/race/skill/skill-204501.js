@@ -5,7 +5,7 @@ module.exports = new UmaSkill(
   204501,
   20450,
   2,
-  1,
+  17,
   633,
   [() => true, () => true],
   [

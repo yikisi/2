@@ -127,6 +127,9 @@ const icon2skill_color = {
   20332: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
   20346: get_skill_color(skill_name_enum.speed, skill_border_enum.evol),
   20351: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
+  20361: get_skill_color(skill_name_enum.speed, skill_border_enum.normal),
+  20362: get_skill_color(skill_name_enum.speed, skill_border_enum.advanced),
+  20366: get_skill_color(skill_name_enum.speed, skill_border_enum.evol),
   30011: get_skill_color(skill_name_enum.control, skill_border_enum.normal),
   30012: get_skill_color(skill_name_enum.control, skill_border_enum.advanced),
   30021: get_skill_color(skill_name_enum.control, skill_border_enum.normal),
@@ -149,10 +152,18 @@ const skill2skill_type = {
   101301: skill_name_enum.speed,
   101341: skill_name_enum.speed,
   101361: skill_name_enum.speed,
+  101411: skill_name_enum.speed,
   101431: skill_name_enum.speed,
+  101441: skill_name_enum.speed,
+  101451: skill_name_enum.speed,
+  101491: skill_name_enum.speed,
+  120201: skill_name_enum.speed,
+  120251: skill_name_enum.heal,
+  120411: skill_name_enum.speed,
   203321: skill_name_enum.speed,
   203401: skill_name_enum.speed,
   203561: skill_name_enum.speed,
+  203641: skill_name_enum.speed,
   204171: skill_name_enum.speed,
   204271: skill_name_enum.speed,
   204272: skill_name_enum.speed,
@@ -171,17 +182,63 @@ const skill2skill_type = {
   204372: skill_name_enum.speed,
   204381: skill_name_enum.speed,
   204382: skill_name_enum.speed,
+  204391: skill_name_enum.heal,
+  204392: skill_name_enum.heal,
   204412: skill_name_enum.speed,
   204431: skill_name_enum.speed,
   204432: skill_name_enum.speed,
   204442: skill_name_enum.speed,
   204462: skill_name_enum.speed,
+  204472: skill_name_enum.speed,
+  204481: skill_name_enum.speed,
+  204482: skill_name_enum.speed,
+  204492: skill_name_enum.speed,
+  204501: skill_name_enum.speed,
+  204502: skill_name_enum.speed,
+  204511: skill_name_enum.speed,
+  204512: skill_name_enum.speed,
+  204521: skill_name_enum.speed,
+  204522: skill_name_enum.speed,
+  204531: skill_name_enum.speed,
+  204532: skill_name_enum.speed,
+  204541: skill_name_enum.speed,
+  204542: skill_name_enum.speed,
+  204552: skill_name_enum.speed,
+  204562: skill_name_enum.speed,
+  204571: skill_name_enum.speed,
+  204572: skill_name_enum.speed,
+  204622: skill_name_enum.speed,
+  204632: skill_name_enum.speed,
+  204642: skill_name_enum.speed,
+  204661: skill_name_enum.speed,
+  204662: skill_name_enum.speed,
+  204671: skill_name_enum.speed,
+  204672: skill_name_enum.speed,
+  204682: skill_name_enum.speed,
+  204691: skill_name_enum.speed,
+  204692: skill_name_enum.speed,
+  204701: skill_name_enum.speed,
+  204702: skill_name_enum.speed,
+  204711: skill_name_enum.speed,
+  204712: skill_name_enum.speed,
   901121: skill_name_enum.speed,
   901181: skill_name_enum.speed,
   901301: skill_name_enum.speed,
   901341: skill_name_enum.speed,
   901361: skill_name_enum.speed,
+  901411: skill_name_enum.speed,
   901431: skill_name_enum.speed,
+  901441: skill_name_enum.speed,
+  901451: skill_name_enum.speed,
+  901491: skill_name_enum.speed,
+  100101311: skill_name_enum.speed,
+  100201311: skill_name_enum.buff,
+  102003111: skill_name_enum.speed,
+  102003211: skill_name_enum.speed,
+  102503111: skill_name_enum.speed,
+  102503211: skill_name_enum.speed,
+  104103111: skill_name_enum.speed,
+  104103211: skill_name_enum.speed,
   114301111: skill_name_enum.speed,
   114301211: skill_name_enum.speed,
 };
@@ -211,10 +268,10 @@ const used_skill_condition_dict = {
     '(args)=>args.furlong===3&&args.order_rate<=50&&args.is_used_skill_id.includes(203061)&&args.is_used_skill_id.includes(203071)',
   101371:
     '(args)=>args.order_rate<=70&&args.phase_firsthalf===1&&args.is_used_skill_id.includes(202051)',
-  113701111:
-    '(args)=>args.running_style===1&&args.phase_laterhalf_random===0&&args.is_used_skill_id.includes(202051)',
   202441: '(args)=>args.popularity>=4&&args.random_lot_shared<=60',
   202442: '(args)=>args.popularity>=4&&args.random_lot_shared<=30',
+  113701111:
+    '(args)=>args.running_style===1&&args.phase_laterhalf_random===0&&args.is_used_skill_id.includes(202051)',
 };
 const used_skill_condition_dict_2 = {
   101361:
@@ -612,9 +669,11 @@ async function chara_skill() {
   ).forEach((s_list) => {
     s_list.forEach((e) => {
       e.name = skill_text[e.id][47];
-      e.category =
-        icon2skill_color[e.icon_id] ??
-        get_skill_color(skill2skill_type[e.id], rarity2border(e.rarity));
+      if (e.icon_id in icon2skill_color || e.id in skill2skill_type) {
+        e.category =
+          icon2skill_color[e.icon_id] ??
+          get_skill_color(skill2skill_type[e.id], rarity2border(e.rarity));
+      }
     });
     s_list
       .sort((a, b) => get_skill_group_level(a) - get_skill_group_level(b))

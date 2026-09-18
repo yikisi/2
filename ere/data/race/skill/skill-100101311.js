@@ -5,7 +5,7 @@ module.exports = new UmaSkill(
   100101311,
   10010131,
   1,
-  3,
+  19,
   633,
   [
     (args) => args.track_id === 10006 && args.course_distance === 2400,
