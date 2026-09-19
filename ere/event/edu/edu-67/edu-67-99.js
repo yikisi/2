@@ -137,7 +137,7 @@ module.exports = class extends CustomizedEdu {
     if (ebj?.arg !== 'dance_practice') {
       return;
     }
-    let wait = false;
+    let wait;
     if (
       (
         await print_title_with_kojo(
@@ -465,7 +465,7 @@ module.exports = class extends CustomizedEdu {
         break;
       case race_enum.japa_cup:
         if (era.get('cflag:67:育成回合计时') > 96 && extra.rank === 1) {
-          key = 'tenn_sho_win_s';
+          key = 'japa_cup_win_s';
           args = [
             get_chara_talk(3),
             get_chara_talk(68),
