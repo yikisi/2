@@ -71,31 +71,31 @@ module.exports = class extends CustomizedDaily {
   }
 
   async o_s_arcade() {
-    await this.kojo['o_s_arcade'](this.#dict);
+    await this.#kojo['o_s_arcade'](this.#dict);
   }
 
   async o_s_drawing() {
-    await this.kojo['o_s_drawing'](this.#dict);
+    await this.#kojo['o_s_drawing'](this.#dict);
   }
 
   async o_s_ktv() {
-    await this.kojo['o_s_ktv'](this.#dict);
+    await this.#kojo['o_s_ktv'](this.#dict);
   }
 
   async o_s_movie() {
-    await this.kojo['o_s_movie'](this.#dict);
+    await this.#kojo['o_s_movie'](this.#dict);
   }
 
   async o_s_restaurant() {
-    await this.kojo['o_s_restaurant'](this.#dict);
+    await this.#kojo['o_s_restaurant'](this.#dict);
   }
 
   async o_s_dating() {
-    await this.kojo['o_s_dating'](this.#dict);
+    await this.#kojo['o_s_dating'](this.#dict);
   }
 
   async o_s_shopping() {
-    await this.kojo['o_s_shopping'](this.#dict);
+    await this.#kojo['o_s_shopping'](this.#dict);
   }
 
   async s_a_tree_hollow() {
