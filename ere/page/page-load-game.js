@@ -660,16 +660,6 @@ module.exports = async () => {
                       .join('+'),
                   );
                 }
-                const birth = era.get(`cstr:${cid}:出生经历`);
-                if (birth && birth.startsWith('出生于')) {
-                  era.set(
-                    `cstr:${cid}:出生经历`,
-                    birth.replace(
-                      /出生于 (\d+) 年 (\d+) 月 第 (\d+) 周/,
-                      (_, _y) => `${_y}`,
-                    ),
-                  );
-                }
 
                 // 尝试修复三女神的出生时间
                 if (cid >= 340 && cid <= 342) {
@@ -706,6 +696,17 @@ module.exports = async () => {
               if (added.includes(44)) {
                 era.set('abl:44:英语', Math.max(era.get('abl:44:英语'), 1));
               }
+            }
+            if (version <= 3001) {
+              era.getAddedCharacters().forEach((cid) => {
+                const birth = era.get(`cstr:${cid}:出生经历`);
+                if (birth && birth.startsWith('出生于')) {
+                  era.set(
+                    `cstr:${cid}:出生经历`,
+                    birth.replace(/出生于 (\d+) 年/, (_, _y) => `${_y}`),
+                  );
+                }
+              });
             }
             if (version < era.get('gamebase').version) {
               set_image_t(7);
