@@ -665,6 +665,15 @@ module.exports = {
       val,
     };
   },
+  get_save_file_count() {
+    try {
+      const n = require('../../ere.config.json')?.system?.saveFiles;
+      if (typeof n === 'number' && n > 0) {
+        return Math.min(n, 50);
+      }
+    } catch (_) {}
+    return 10;
+  },
   get_save_name() {
     // FLAGNAME:65 = 存档名
     const prefix =

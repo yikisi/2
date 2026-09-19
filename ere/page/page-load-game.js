@@ -39,6 +39,7 @@ const LifeEventMarks = require('#/data/event/life-event-marks/marks-class');
 const recruit_flags = require('#/data/event/recruit-flags');
 const {
   get_filtered_talents,
+  get_save_file_count,
   get_trainer_level,
 } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
@@ -93,10 +94,7 @@ function find_key_by_value(dict, val) {
  * @return {Promise<boolean>} if true, tell main.js to call homepage
  */
 module.exports = async () => {
-  const save_count = Math.min(
-    era.get('gameconfig')?.system.saveFiles ?? 10,
-    50,
-  );
+  const save_count = get_save_file_count();
 
   let flag_load_game = true;
   let msg_notification = '';

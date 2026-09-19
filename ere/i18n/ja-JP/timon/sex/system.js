@@ -200,15 +200,13 @@ module.exports = {
       } else {
         await printAndWait([
           chara.get_colored_name(),
-          ' はその仕込み茶を飲み、深く眠った……',
+          ' はその仕込み茶を飲み、徐々に意識を失った……',
         ]);
       }
     } else {
       await printAndWait([
-        you.get_colored_name(),
-        ' は機敏に異変を見つけた ',
         chara.get_colored_name(),
-        '……',
+        ' は機敏に異変を見つけた……',
       ]);
       await printAndWait([
         chara.get_colored_name(),

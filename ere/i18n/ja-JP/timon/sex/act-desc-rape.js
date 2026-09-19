@@ -67,7 +67,7 @@ module.exports = {
       await printAndWait([
         '【',
         attacker.get_colored_name(),
-        ' は強引に陰核を '
+        ' は強引に陰核を ',
         defender.get_colored_name(),
         ' の顔へ押し当てた】',
       ]);
@@ -75,7 +75,7 @@ module.exports = {
       await printAndWait([
         '【',
         attacker.get_colored_name(),
-        ' は強引に陰核で '
+        ' は強引に陰核で ',
         defender.get_colored_name(),
         ' の唇と舌を擦った】',
       ]);
@@ -90,7 +90,7 @@ module.exports = {
       await printAndWait([
         '【',
         attacker.get_colored_name(),
-        ' は強引に秘部を '
+        ' は強引に秘部を ',
         defender.get_colored_name(),
         ' の唇へ押し当てた】',
       ]);
@@ -98,7 +98,7 @@ module.exports = {
       await printAndWait([
         '【',
         attacker.get_colored_name(),
-        ' は強引に秘部で '
+        ' は強引に秘部で ',
         defender.get_colored_name(),
         ' の唇と舌を擦った】',
       ]);

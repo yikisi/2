@@ -34,7 +34,7 @@ module.exports = {
     await era.printAndWait([
       '理事長の幼馴染——',
       may.get_colored_name(),
-      ' が、最初から最後まで '
+      ' が、最初から最後まで ',
       you.get_colored_name(),
       ' を補佐する。',
     ]);

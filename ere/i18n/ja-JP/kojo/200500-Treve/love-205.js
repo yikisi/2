@@ -289,7 +289,7 @@ module.exports = {
         await era.printAndWait([
           `${treve.sex}はここで気づく。自分はもう手を上げて後ろの `,
           you.get_colored_name(),
-          ' の頭を抱いている。降伏のような姿勢だ。`,
+          ' の頭を抱いている。降伏のような姿勢だ。',
         ]);
         await era.printAndWait([
           'そして ',

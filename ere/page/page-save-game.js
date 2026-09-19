@@ -5,16 +5,13 @@ const select_yes_or_no = require('#/page/components/select-yes-or-no');
 
 const { get_display_width } = require('#/utils/value-utils');
 
-const { get_save_name } = require('#/data/info-generator');
+const { get_save_file_count, get_save_name } = require('#/data/info-generator');
 
 const di18n = require('#/i18n/extended-def');
 const { i18n } = require('#/i18n/selector');
 
 module.exports = async () => {
-  const save_count = Math.min(
-    era.get('gameconfig')?.system.saveFiles ?? 10,
-    50,
-  );
+  const save_count = get_save_file_count();
 
   let flag_save_game = true;
   let msg_notification = '';
