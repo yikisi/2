@@ -89,7 +89,7 @@ module.exports = class extends CustomizedLove {
     );
     await print_ero_page(68, true);
     await end_ero_and_show_result(true);
-    await this.#kojo.m_kita_end(kita);
+    await this.#kojo.m_kita_end(me);
     era.println();
     add_jewel_reward(68, 10, 100);
     await era.waitAnyKey();
