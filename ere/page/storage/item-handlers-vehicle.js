@@ -52,7 +52,7 @@ async function single_vehicle(item, vid = item - 60 + 1) {
     if (ret) {
       await era.printAndWait(
         i18n().timon.storage.single_vehicle_equip_template.replace(
-          '%NEW%',
+          '%ITEM%',
           item_name,
         ),
       );
@@ -107,7 +107,7 @@ async function multiple_vehicle(item, vid = item - 60 + 1) {
     if (ret) {
       await era.printAndWait(
         i18n().timon.storage.multiple_vehicle_equip_template.replace(
-          '%NEW%',
+          '%ITEM%',
           item_name,
         ),
       );

@@ -93,6 +93,7 @@ module.exports = {
           ' 为重点的比赛影片。',
         ]);
       }
+      return [ret];
     };
     f.title = title;
     return f;
