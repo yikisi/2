@@ -703,7 +703,7 @@ module.exports = async () => {
                 if (birth && birth.startsWith('出生于')) {
                   era.set(
                     `cstr:${cid}:出生经历`,
-                    birth.replace(/出生于 (\d+) 年/, (_, _y) => `${_y}`),
+                    birth.match(/出生于 (\d+) 年/)[1],
                   );
                 }
               });
