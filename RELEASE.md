@@ -1,4 +1,4 @@
-# [EraUma v3.002 (agito)](https://gitgud.io/umaera/erauma/-/releases/3.002)
+# [EraUma v3.002 (ryuki)](https://gitgud.io/umaera/erauma/-/releases/3.002)
 
 _2026/9/19_
 
