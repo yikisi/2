@@ -59,14 +59,14 @@ module.exports = class extends CustomizedMec {
     }
     const info = race_infos[era.get('flag:当前赛事')];
     if (gad && info.ground === ground_enum.grass) {
-      uma.ground_buffs.push([`+${gad}`, i18n().kojo[this.id](gad)]);
+      uma.ground_buffs.push([`+${gad}`, i18n().kojo[this.id].echo(gad)]);
     }
     if (
       dad &&
       (info.distance === distance_enum.long ||
         info.distance === distance_enum.medium)
     ) {
-      uma.dis_buffs.push([`+${dad}`, i18n().kojo[this.id](dad)]);
+      uma.dis_buffs.push([`+${dad}`, i18n().kojo[this.id].echo(dad)]);
     }
   }
 };

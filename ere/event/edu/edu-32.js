@@ -468,13 +468,26 @@ module.exports = class extends CustomizedEdu {
         break;
       case race_enum.arim_kin:
         if (era.get('cflag:32:育成回合计时') > 96) {
-          key = 'before_arim_kin_a';
-          args = [
-            get_chara_talk(25),
-            me,
-            callname,
-            sys_get_colored_callname(this.id, 25),
-          ];
+          if (new TachyonEduMarks().plan_b > 0) {
+            key = 'before_arim_kin_b';
+            args = [
+              get_chara_talk(25),
+              me,
+              callname,
+              sys_get_colored_callname(this.id, 25),
+              sys_get_callname(25, 0),
+              sys_get_colored_callname(25, this.id),
+              race_infos[race_enum.arim_kin].get_colored_name(),
+            ];
+          } else {
+            key = 'before_arim_kin_a';
+            args = [
+              get_chara_talk(25),
+              me,
+              callname,
+              sys_get_colored_callname(this.id, 25),
+            ];
+          }
         }
     }
     if (key) {
@@ -682,7 +695,7 @@ module.exports = class extends CustomizedEdu {
       case 47 + 47:
         await print_title_with_kojo(
           this.#kojo,
-          'we_47_47',
+          'we_b_47_47',
           tachyon,
           get_chara_talk(25),
           me,
@@ -1395,7 +1408,7 @@ module.exports = class extends CustomizedEdu {
           } else {
             await print_title_with_kojo(
               this.#kojo,
-              'palace_b',
+              'palace_a',
               tachyon,
               get_chara_talk(25),
               me,
