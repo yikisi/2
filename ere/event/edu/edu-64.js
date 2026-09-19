@@ -71,7 +71,7 @@ module.exports = class extends CustomizedEdu {
 
   /** @param {CharaTalk} pama */
   async beginning(pama) {
-    await print_title_with_kojo(this.#kojo, 'beginning！', pama, this.#dict);
+    await print_title_with_kojo(this.#kojo, 'beginning', pama, this.#dict);
     if (all_reward_in_event(this.id, { relation: get_random_value(25, 75) })) {
       await era.waitAnyKey();
     }
@@ -298,7 +298,7 @@ module.exports = class extends CustomizedEdu {
       add_event(hook.hook, event_object);
       return;
     }
-    const mcqueen = get_chara_talk(64);
+    const mcqueen = get_chara_talk(13);
     await print_title_with_kojo(this.#kojo, 'summer_end_1', pama, {
       ...this.#dict,
       COLOR_13: mcqueen.color,
@@ -886,7 +886,7 @@ module.exports = class extends CustomizedEdu {
     switch (extra_flag.race) {
       case race_enum.begin_race:
         if (extra_flag.rank === 1) {
-          key = 'begin_race_win！';
+          key = 'begin_race_win';
         }
         break;
       case race_enum.sats_sho:
