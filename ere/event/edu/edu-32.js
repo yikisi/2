@@ -214,10 +214,10 @@ module.exports = class extends CustomizedEdu {
         break;
       case race_enum.hope_sta:
         if (extra.rank === 1) {
-          key = 'hope_race_win';
+          key = 'hope_sta_win';
           args = [me, race_infos[extra.race].get_colored_name()];
         } else {
-          key = 'hope_race_lose';
+          key = 'hope_sta_lose';
           if (relation > 225) {
             extra.attr_change = [0, 0, 3, 0, 0];
           }

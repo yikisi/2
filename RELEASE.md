@@ -1,12 +1,8 @@
 # [EraUma v3.002 (agito)](https://gitgud.io/umaera/erauma/-/releases/3.002)
 
-_incoming_
+_2026/9/19_
 
 适配 [EraElectron v4.8.2 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.8.2) 与 [ere.app v1.3.1 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.3.1) 及以上版本
-
-## Added
-
-## Changed
 
 ## Fixed
 
@@ -18,4 +14,5 @@ _incoming_
 * 修复了里见光钻育成事件【额外的自主训练】无法正确结束的错误
 * 修复了里见光钻育成事件【挑战】无法正常播放的错误
 * 修复了春乌拉拉育成事件【与好友一起接受采访】无法正常播放的错误
+* 修复了爱丽速子育成事件【希望】无法正确播放的错误
 * 其他 i18n 文本替换错误
