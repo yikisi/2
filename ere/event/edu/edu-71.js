@@ -295,8 +295,7 @@ module.exports = class extends CustomizedEdu {
         break;
       case race_enum.aoba_sho:
         if (extra_flag.rank <= 5) {
-          key = 'aoba_sho_win';
-          await this.#kojo[key](this.#dict);
+          await this.#kojo[(key = 'aoba_sho_win')](this.#dict);
           extra_flag.attr_change = new Array(5).fill(5);
           extra_flag.pt_change = 60;
           add_event(
@@ -327,11 +326,9 @@ module.exports = class extends CustomizedEdu {
         }
         era.println();
         if (era.get(`talent:${this.id}:身体素质`) === -1) {
-          era.print([ardan.get_colored_name(), ' 不再 [体弱多病] 了……']);
           era.set(`talent:${this.id}:身体素质`, 0);
         }
         if (era.get(`talent:${this.id}:痛苦感受`) !== -1) {
-          era.print([ardan.get_colored_name(), ' 变得 [坚强] 了……']);
           era.set(`talent:${this.id}:痛苦感受`, -1);
         }
         break;
