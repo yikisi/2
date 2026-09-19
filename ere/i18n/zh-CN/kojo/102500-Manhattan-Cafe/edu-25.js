@@ -1927,6 +1927,7 @@ module.exports = {
           '。',
         ]);
       }
+      return [ret];
     };
     f.title = title;
     return f;
