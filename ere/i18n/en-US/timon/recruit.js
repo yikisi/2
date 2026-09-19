@@ -29,11 +29,11 @@ module.exports = {
   async rec(chara, you) {
     await era.printAndWait([
       you.get_colored_name(),
-      ' are attempting to recruit ',
+      ' is attempting to recruit ',
       chara.get_colored_name(),
       '...',
     ]);
-    await era.printAndWait([chara.get_colored_name(), ' smiles gracefully--']);
+    await era.printAndWait([chara.get_colored_name(), ' smiles gracefully...']);
     await era.printAndWait([chara.sex, ' accepts!']);
   },
   /** @param {CharaTalk} chara */

@@ -21,6 +21,11 @@ class CustomizedEvent {
     }
     return this;
   }
+
+  /** @returns {number} */
+  get edu_weeks() {
+    return era.get(`cflag:${this.id}:育成回合计时`);
+  }
 }
 
 module.exports = CustomizedEvent;

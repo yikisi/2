@@ -496,7 +496,7 @@ const era = {
    * @param {Object} [config]
    * @param {number} config.[opacity]
    * @param {OBPosition} config.[position]
-   * @param {'contain'|'cover'} config.[fit]
+   * @param {'contain'|'cover'|'fit'|string} config.[fit]
    */
   setBack(name, config) {},
   /**
@@ -527,7 +527,7 @@ const era = {
    * @param {Object} [config]
    * @param {number} config.[opacity]
    * @param {OBPosition} config.[position]
-   * @param {'contain'|'cover'} config.[fit]
+   * @param {'contain'|'cover'|'fit'|string} config.[fit]
    */
   setOverlay(name, config) {},
   /**
@@ -560,7 +560,7 @@ const era = {
    * @returns {boolean} if debug
    */
   toggleDebug() {},
-  version: { sdk: '4.7.0', engine: void 0 },
+  version: { sdk: '4.8.2', engine: void 0 },
   /**
    * wait any key from user
    * @returns {Promise<void>} a promise of nothing, please use await

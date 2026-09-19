@@ -795,7 +795,18 @@ module.exports = class extends CustomizedEdu {
           return true;
         }
         wait = all_reward_in_event(this.id, {
-          attr: (await print_title_with_kojo(this.#kojo, 'sa_interview', urara))
+          attr: (await print_title_with_kojo(
+            this.#kojo,
+            'sa_interview',
+            urara,
+            get_chara_talk(30),
+            get_chara_talk(301),
+            me,
+            callname,
+            sys_get_colored_callname(this.id, 30),
+            sys_get_callname(30, 0),
+            sys_get_colored_callname(30, this.id),
+          ))
             ? { [attr_enum.strength]: 20 }
             : { [attr_enum.endurance]: 20 },
         });

@@ -279,9 +279,9 @@ async function page_moon_well(cid, print_out_page) {
     drawLine();
     await printAndWait(i18n().timon.it_force_back_office);
   }
-  loc_characters.set(location_enum.trainer, npc_list);
+  loc_characters.set(location_enum.moon_well, npc_list);
   await sys_get_random_event(event_hooks.back_school)({
-    loc: location_enum.trainer,
+    loc: location_enum.moon_well,
   });
   set('flag:当前位置', location_enum.office);
 }

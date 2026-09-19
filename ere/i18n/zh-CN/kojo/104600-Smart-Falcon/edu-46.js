@@ -169,6 +169,7 @@ module.exports = {
         await era.printAndWait(`悄悄关上房门后，${callname} 离开了医务室。`);
         await era.printAndWait(`飞鹰子很快就恢复了活力。`);
       }
+      return [ret];
     };
     f.title = title;
     return f;
@@ -258,6 +259,7 @@ module.exports = {
           );
         }
       }
+      return [ret];
     };
     f.title = title;
     return f;

@@ -457,7 +457,7 @@ module.exports = class extends CustomizedLove {
       await era.clear(1);
       return;
     }
-    const ret = await print_title_with_kojo(this.kojo, 'leisure', pama, {
+    const ret = await print_title_with_kojo(this.#kojo, 'leisure', pama, {
       ...this.#dict,
       SELF_CALL: sys_get_callname(this.id, this.id),
     });

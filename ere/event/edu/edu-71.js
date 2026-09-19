@@ -121,7 +121,7 @@ module.exports = class extends CustomizedEdu {
     let wait_flag;
     if (
       (
-        await print_title_with_kojo(this.#kojo, 'tie', ardan, {
+        await print_title_with_kojo(this.#kojo, 'ws_tie', ardan, {
           ...this.#dict,
           CALL_69: sys_get_colored_callname(this.id, 69).content,
           CALL_72: sys_get_colored_callname(this.id, 72).content,
@@ -295,8 +295,7 @@ module.exports = class extends CustomizedEdu {
         break;
       case race_enum.aoba_sho:
         if (extra_flag.rank <= 5) {
-          key = 'aoba_sho_win';
-          await this.#kojo[key](this.#dict);
+          await this.#kojo[(key = 'aoba_sho_win')](this.#dict);
           extra_flag.attr_change = new Array(5).fill(5);
           extra_flag.pt_change = 60;
           add_event(

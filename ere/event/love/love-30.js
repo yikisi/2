@@ -39,6 +39,7 @@ module.exports = class extends CustomizedLove {
     await print_title_with_kojo(
       this.#kojo,
       '74',
+      rice,
       me,
       callname,
       sys_get_callname(this.id, this.id),
@@ -51,6 +52,7 @@ module.exports = class extends CustomizedLove {
     await print_title_with_kojo(
       this.#kojo,
       '89',
+      rice,
       me,
       callname,
       sys_get_callname(this.id, this.id),
@@ -62,6 +64,7 @@ module.exports = class extends CustomizedLove {
     await print_title_with_kojo(
       this.#kojo,
       '99',
+      rice,
       me,
       callname,
       sys_get_callname(this.id, this.id),

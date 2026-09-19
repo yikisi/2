@@ -610,6 +610,17 @@ module.exports = {
         skill.values[i][j] =
           skill.data.ability_values[i][j] * (0.98 + 0.01 * count);
         break;
+      case ability_usage_enum.MultiplyRamen:
+        skill.values[i][j] = skill.data.ability_values[i][j];
+        if (get(`cflag:${cid}:66`) === recruit_flags.yes) {
+          const weight = get(`base:${cid}:体重偏差`);
+          if (weight < 4000) {
+            skill.values[i][j] *= 1 + (weight * 0.2) / 4000;
+          } else {
+            skill.values[i][j] *= 1.21;
+          }
+        }
+        break;
       default:
         skill.values[i][j] = skill.data.ability_values[i][j];
         logger.debug(

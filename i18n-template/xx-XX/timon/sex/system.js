@@ -201,16 +201,11 @@ module.exports = {
       } else {
         await printAndWait([
           chara.get_colored_name(),
-          ' 饮下了那杯加料茶水，然后沉沉睡去……',
+          ' 饮下了那杯加料茶水，然后渐渐失神……',
         ]);
       }
     } else {
-      await printAndWait([
-        you.get_colored_name(),
-        ' 机敏地发现了异样 ',
-        chara.get_colored_name(),
-        '……',
-      ]);
+      await printAndWait([chara.get_colored_name(), ' 机敏地发现了异样……']);
       await printAndWait([
         chara.get_colored_name(),
         ' 将 ',

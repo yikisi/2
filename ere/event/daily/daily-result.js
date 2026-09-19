@@ -206,7 +206,10 @@ handlers[event_hooks.out_river] = async (cid, hook, extra_flag) => {
     wait_flag ||= got_jpy > 0;
     got_jpy &&
       era.print(
-        i18n().timon.it_sell_fish_template.replace('MONEY', got_jpy.toString()),
+        i18n().timon.it_sell_fish_template.replace(
+          '%MONEY%',
+          got_jpy.toString(),
+        ),
       );
     sys_change_money(got_jpy);
     wait_flag =

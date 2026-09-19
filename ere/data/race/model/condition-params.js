@@ -1,5 +1,8 @@
-// GENERATED START
 class ConditionParams {
+  get random_lot() {
+    return Math.floor(100 * Math.random()) + 1;
+  }
+  // GENERATED START
   accumulatetime;
   activate_count_all;
   activate_count_end_after;
@@ -52,6 +55,7 @@ class ConditionParams {
   is_finalcorner;
   is_finalcorner_laterhalf;
   is_finalcorner_random;
+  is_goodstart;
   is_last_straight;
   is_last_straight_onetime;
   is_lastspurt;
@@ -95,7 +99,7 @@ class ConditionParams {
   phase_straight_random;
   popularity;
   post_number;
-  random_lot;
+  random_lot_shared;
   remain_distance;
   rotation;
   run_at_full_speed_random;
@@ -116,6 +120,7 @@ class ConditionParams {
   slope;
   straight_front_type;
   straight_random;
+  succession_skill_count;
   temptation_count;
   temptation_opponent_count_behind;
   temptation_opponent_count_infront;
@@ -124,7 +129,7 @@ class ConditionParams {
   up_slope_random;
   visiblehorse;
   weather;
+  // GENERATED END
 }
 
 module.exports = ConditionParams;
-// GENERATED END

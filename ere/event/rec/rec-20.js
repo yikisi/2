@@ -67,8 +67,12 @@ module.exports = class extends CustomizedRecruit {
       my_marks.sub(event_hooks.recruit_start);
       await print_title_with_kojo(kojo, 'rec3', sky, dict);
       era.set(`cflag:${this.id}:招募状态`, recruit_flags.yes);
-      era.set('flag:物色对象', this.id);
+      era.set('flag:物色对象', 0);
       await this.recruit_end();
+      add_event(
+        event_hooks.week_start,
+        new EventObject(this.id, cb_enum.edu).set_arg('ws_find_you'),
+      );
     }
     return true;
   }

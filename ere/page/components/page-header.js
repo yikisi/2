@@ -59,7 +59,7 @@ function page_header(enable_race_info) {
     const rec_trainers = [304, 306]
       .filter((cid) => era.get(`cflag:${cid}:招募状态`) === recruit_flags.yes)
       .map((cid) =>
-        i18n().tb_talent.template.replace('%%NAME', i18n().kojo[cid].buff),
+        i18n().tb_talent.template.replace('%NAME%', i18n().kojo[cid].buff),
       );
     let billings = i18n().ui_billing_title_start;
     let money_change = 0;

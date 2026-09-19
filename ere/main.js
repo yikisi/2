@@ -36,6 +36,11 @@ const { set_lan: set_lan_for_value } = require('#/utils/value-utils');
 
 const { generate_copyrights, get_copyright_entry } = require('#/copyright');
 const { get_chara_color } = require('#/data/chara-colors');
+const {
+  adaptability_colors,
+  buff_colors,
+  el_danger_color,
+} = require('#/data/color-const');
 const { first_child_id } = require('#/data/other-const');
 
 const { __, i18n, lan, lans, set_lan } = require('#/i18n/selector');
@@ -376,11 +381,16 @@ module.exports = async () => {
           function do_check(key_path, aim_lib, cn_lib) {
             for (const k in cn_lib) {
               const _path = `${k} <- ${key_path}`;
-              if (aim_lib[k] === cn_lib[k]) {
-                era.print(`[WARN] miss or equal: ${_path}`);
+              if (!(k in aim_lib)) {
+                era.print(`[WARN] miss: ${_path}`, { color: buff_colors[3] });
+              } else if (aim_lib[k] === cn_lib[k]) {
+                era.print(`[WARN] miss or equal: ${_path}`, {
+                  color: buff_colors[1],
+                });
               } else if (typeof cn_lib[k] !== typeof aim_lib[k]) {
                 era.print(
                   `[ERROR] not same type: ${_path} (${typeof aim_lib[k]} -> ${typeof cn_lib[k]})`,
+                  { color: el_danger_color },
                 );
               } else if (
                 typeof cn_lib[k] === 'object' &&
@@ -390,8 +400,10 @@ module.exports = async () => {
               }
             }
             for (const k in aim_lib) {
-              if (cn_lib[k] === void 0) {
-                era.print(`[WARN] unused: ${k} <- ${key_path}`);
+              if (!(k in cn_lib)) {
+                era.print(`[WARN] unused: ${k} <- ${key_path}`, {
+                  color: adaptability_colors.at(-2),
+                });
               }
             }
           }
