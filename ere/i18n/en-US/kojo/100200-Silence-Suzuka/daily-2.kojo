@@ -736,7 +736,7 @@ halloween:
   - Standing on the threshold is Suzuka, adorably dressed as a little witch.
   - Noticing her flushed cheeks and slightly ragged breath, %YOU% shakes your head with affectionate amusement.
   - acc: 1
-    content: 「Let me guess: you went running again, didn't you?」
+    content: "「Let me guess: you went running again, didn't you?」"
   - Suzuka freezes, her blush deepening in an instant.
   - color: %COLOR%
     content:

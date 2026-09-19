@@ -1253,7 +1253,7 @@ takz_kin:
           content: %G_NAME%
         - 「My, my, what a lively gathering we have here.」
     - color: %A_COLOR%
-      content: %CHARA% and %A_NAME% turn together to see another formidable presence: their rival %G_NAME%.
+      content: "%CHARA% and %A_NAME% turn together to see another formidable presence: their rival %G_NAME%."
     - color: %A_COLOR%
       content: Though %G_NAME% is %CHARA% and %A_NAME%'s junior, her credentials brook no condescension, having seized major honors throughout her Classic campaign.
     - color: %A_COLOR%
@@ -1742,7 +1742,7 @@ choice:
       lines:
         - %YOU% exhales a shuddering breath.
         - acc: 1
-          content: 「Just promise me: the moment you cross the wire, you come straight back to me...」
+          content: "「Just promise me: the moment you cross the wire, you come straight back to me...」"
         - color: %COLOR%
           content:
             - fontWeight: bold
