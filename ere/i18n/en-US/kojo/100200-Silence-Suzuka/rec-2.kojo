@@ -183,7 +183,7 @@ start:
       acc: 2
       content: A top-tier trainer never lets a generational talent slip away. (Pursue Recruitment) # Reputation: Mid-rank / Elite / Legendary
       lines:
-        - Having witnessed %CHARA%'s breathtaking runaway showcase, %YOU% was utterly convinced: this girl was born to be a superstar.
+        - "Having witnessed %CHARA%'s breathtaking runaway showcase, %YOU% was utterly convinced: this girl was born to be a superstar."
         - All she needed was a trainer seasoned enough to guide that brilliance.
         - And %YOU% was precisely one of those respected %TITLE% trainers.
         - There was no way in the world %YOU% was going to hand %CHARA% over to anyone else.
@@ -226,7 +226,7 @@ start:
               content: %CHARA%
             - 「Um... everyone...」
         - Sensing the palpable tension in the air, %CHARA% tried to ease the mood, but her timid voice barely made a dent.
-        - 「How about this: since neither of us is willing to concede, we each take a day to coach %CHARA%, and let her performance decide who trains her. Fair?」
+        - "「How about this: since neither of us is willing to concede, we each take a day to coach %CHARA%, and let her performance decide who trains her. Fair?」"
         - %YOU% pitched the proposal right on the spot.
         - The senior trainer and %CHARA% both perked up, eyes widening.
         - content:
@@ -460,7 +460,7 @@ after: # Rookie / Experienced, next visit to training ground
       content:
         - fontWeight: bold
           content: %CHARA%
-        - 「The moment you told me to run the way my heart truly desired, something shifted deep inside me. When I let go and ran free along that riverbank, I felt that pure, quiet joy from my morning runs wash over me again. Right then and there, I decided: wherever you lead, that's where I want to run.」
+        - "「The moment you told me to run the way my heart truly desired, something shifted deep inside me. When I let go and ran free along that riverbank, I felt that pure, quiet joy from my morning runs wash over me again. Right then and there, I decided: wherever you lead, that's where I want to run.」"
     - Drawing in a deep, grateful breath, %YOU% smiled back.
     - acc: 1
       content: 「In that case, Miss %CHARA%, I look forward to working with you!」
@@ -561,7 +561,7 @@ tomorrow_after_tomorrow: # After [The Day After Selection], same week, training 
         - 「During my morning runs, I can fully take in the view out in front and along the sides. Before I know it, I've run so far, and I never feel tired at all when I finish.」
     - That seemed to pinpoint the exact heart of the matter.
     - acc: 1
-      content: 「One last question: what guidance did the senior give you?」
+      content: "「One last question: what guidance did the senior give you?」"
     - color: %COLOR%
       content:
         - fontWeight: bold

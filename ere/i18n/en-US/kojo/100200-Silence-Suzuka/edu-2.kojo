@@ -359,7 +359,7 @@ new_year_classical:
       - fontWeight: bold
         content: %CHARA%
       - 「Hehe... sorry! I just got a little too excited...」
-  - And just like that, %YOU% and %CHARA% locked in your first official Classic objective: the Yayoi Sho.
+  - "And just like that, %YOU% and %CHARA% locked in your first official Classic objective: the Yayoi Sho."
 
 # 第一次G1前
 race_clothe:
@@ -669,7 +669,7 @@ turn_cloudy:
   title: Overcast Turning Cloudy
   lines:
     - The annual summer training camp has officially drawn to a close. Everyone is packing their gear in high spirits, buzzing with excitement about returning to Tracen.
-    - Yet %YOU% is puzzled: your trainee %CHARA% is nowhere among the chattering %UMA%, and her bags remain completely unpacked.
+    - "Yet %YOU% is puzzled: your trainee %CHARA% is nowhere among the chattering %UMA%, and her bags remain completely unpacked."
     - Asking around, several girls mention that Suzuka headed out for a dawn run and hasn't returned since. Unable to sit still, %YOU% sets out to find her.
     - acc: 1
       content: 「Suzuka! Suzuka, where are you—Suzuka—!」
@@ -720,7 +720,7 @@ turn_cloudy:
           content: 「In any real race, winners and losers are completely natural. You never need to shoulder guilt over that.」
         - Suzuka turns her head, her conflicted eyes meeting %YOU%'s unwavering gaze.
         - acc: 1
-          content: 「Think of it this way, Suzuka: if you faced a fierce rival who stole your open horizon in every race, what would you do?」
+          content: "「Think of it this way, Suzuka: if you faced a fierce rival who stole your open horizon in every race, what would you do?」"
         - color: %COLOR%
           content:
             - fontWeight: bold
@@ -932,12 +932,12 @@ first_step:
       content:
         - fontWeight: bold
           content: %CHARA%
-        - 「%CALLNAME%, I've decided: I want to enter the Tenno Sho Autumn!」
+        - "「%CALLNAME%, I've decided: I want to enter the Tenno Sho Autumn!」"
     - acc: 1
       content: 「A wonderful target, Suzuka. Having set our sights on it, we'll need to work tirelessly to get there.」
     - Her choice comes as no real surprise to %YOU%.
     - As a centerpiece of the Autumn Senior Triple Crown, the Tenno Sho Autumn is among the most prestigious 2,000-meter G1 showdowns on the racing calendar.
-    - Crucially, it imposes no seniority barriers: Classic Year contenders can duel seasoned Senior Year titans on an equal stage.
+    - "Crucially, it imposes no seniority barriers: Classic Year contenders can duel seasoned Senior Year titans on an equal stage."
     - %YOU% doesn't ask which year's edition she has in mind; the Classic edition is less than a month away, making entry virtually impossible.
     - However, the Senior Year edition sits over twelve months down the road, and that intervening window cannot be wasted.
     - Flipping back through the calendar, %YOU%'s finger lands on an ideal interim target.
@@ -949,7 +949,7 @@ first_step:
         - fontWeight: bold
           content: %CHARA%
         - 「Understood—the Kinko Sho it is! Please place your faith in me, %CALLNAME%! I will bring home victory and take another giant stride toward the open horizon...」
-    - And so, %YOU% and Suzuka solidified your primary dream—the Tenno Sho Autumn—and the trial milestone preceding it: the Kinko Sho.
+    - "And so, %YOU% and Suzuka solidified your primary dream—the Tenno Sho Autumn—and the trial milestone preceding it: the Kinko Sho."
 
 # -失意/难过
 new_year_senior:
@@ -1321,7 +1321,7 @@ takz_kin_win:
       content:
         - fontWeight: bold
           content: %A_NAME%
-        - 「Consider this an early declaration of war, Suzuka: the next time we meet on the turf, I'll bring tenfold the pressure!」
+        - "「Consider this an early declaration of war, Suzuka: the next time we meet on the turf, I'll bring tenfold the pressure!」"
     - color: %G_COLOR%
       content:
         - fontWeight: bold
@@ -1490,11 +1490,11 @@ curse:
     - Despite getting in line at dawn, the queue stretched on for hours. By the time %YOU% secured the box, broad daylight had settled over the city.
     - Fortunately, %YOU% had briefed Suzuka on the morning drills in advance. Glancing up absently, %YOU%'s gaze catches the giant electronic jumbotron mounted on a nearby skyscraper.
     - Right then, the morning news concludes, and portraits of several prominent %UMA% flash across the giant screen.
-    - %YOU% stops dead in %YOU%'s tracks: front and center of the broadcast is a brilliant, high-resolution portrait of Suzuka.
+    - "%YOU% stops dead in %YOU%'s tracks: front and center of the broadcast is a brilliant, high-resolution portrait of Suzuka."
     - content:
         - fontWeight: bold
           content: News Anchor
-        - 「The undisputed overwhelming fan favorite for the upcoming clash: Silence Suzuka! With her peerless, blistering runaway pace, she has dominated wire to wire without letting a single rival draw near!」
+        - "「The undisputed overwhelming fan favorite for the upcoming clash: Silence Suzuka! With her peerless, blistering runaway pace, she has dominated wire to wire without letting a single rival draw near!」"
     - A swelling wave of pride warms %YOU%'s chest. Having your own trainee lauded on a citywide billboard is an honor few trainers ever experience.
     - She stands as the uncontested number-one favorite for the Tenno Sho Autumn—a status completely consistent with her dominance.
     - Picking up the pace, %YOU% feels eager to bring the fresh carrot biscuits straight to Suzuka.
@@ -1533,7 +1533,7 @@ curse:
     - content:
         - fontWeight: bold
           content: Pedestrian A
-        - 「You might not know this, but the Tenno Sho Autumn carries a notorious, persistent curse: the top favorite never wins.」
+        - "「You might not know this, but the Tenno Sho Autumn carries a notorious, persistent curse: the top favorite never wins.」"
     - Unable to stomach the superstition, %YOU% steps forward.
     - acc: 1
       content: 「Excuse me... where did that rumor come from?」
@@ -1558,7 +1558,7 @@ curse:
     - content:
         - fontWeight: bold
           content: Pedestrian A
-        - 「Yet the moment the gates open, it's as if a dark shadow descends: missed breaks, swerving wide, panic in the pack...」
+        - "「Yet the moment the gates open, it's as if a dark shadow descends: missed breaks, swerving wide, panic in the pack...」"
     - content:
         - fontWeight: bold
           content: Pedestrian A
@@ -1577,7 +1577,7 @@ bad_omen:
   title: Bad Omen
   lines:
     - That night, %YOU% tosses and turns, unable to shake the pedestrian's ominous warning from %YOU%'s thoughts.
-    - Finally drifting off in the early morning hours, %YOU% plunges into a vivid, suffocating nightmare:
+    - "Finally drifting off in the early morning hours, %YOU% plunges into a vivid, suffocating nightmare:"
     - divider: true
     - Tokyo Racecourse, packed to the rafters with roaring spectators.
     - Standing in the owner's box, %YOU% watches "Suzuka" burst from the starting gate with her customary explosive speed.
@@ -1604,12 +1604,12 @@ bad_omen:
     - divider: true
     - Waking in the hallucination, %YOU% find yourself standing directly on the Tokyo turf course.
     - Sirens wail as medical carts and veterinary staff rush toward the far bend.
-    - Terror propelling your feet, %YOU% sprints alongside them, only to witness the cruelest sight imaginable:
+    - "Terror propelling your feet, %YOU% sprints alongside them, only to witness the cruelest sight imaginable:"
     - Suzuka lies collapsed on the grass, her left foreleg bent at an unnatural, shattered angle.
     - Her face is deathly pale, a pool of crimson spreading across the turf.
     - Her chest barely rises, her emerald eyes staring blankly at the sky in cold, lifeless tranquility.
     - Paralyzed with horror, %YOU% collapses to %YOU%'s knees, the phantom heart pain tearing %YOU% apart once more.
-    - The last word drifting from the medics before darkness swallows everything:
+    - "The last word drifting from the medics before darkness swallows everything:"
     - "Comminuted fracture."
     - divider: true
     - acc: 1
@@ -1619,7 +1619,7 @@ bad_omen:
       content: 「It was... a nightmare...?」
     - Clutching your chest, the phantom pain is gone, yet the raw terror remains etched into %YOU%'s soul.
     - It felt terrifyingly real—too real to simply dismiss as a dream.
-    - Glancing at the clock: 2:00 AM.
+    - "Glancing at the clock: 2:00 AM."
     - %YOU% changes the sweat-soaked sheets and tries to sleep again, but closing %YOU%'s eyes only summons that bloody turf...
     - And so %YOU% lies awake until dawn.
 
@@ -1646,7 +1646,7 @@ choice:
           content: %CHARA%
         - 「Ah, %CALLNAME%! You're here!」
     - Catching sight of the dazed %YOU%, %CHARA% jogs over with a bright greeting, rescuing %YOU% from the downward spiral.
-    - Instead of greeting her, %YOU% gazes intently at her, tracing every detail:
+    - "Instead of greeting her, %YOU% gazes intently at her, tracing every detail:"
     - From the green ear covers to the silky orange hair, emerald eyes, and slender, powerful legs...
     - color: %COLOR%
       content:
@@ -1848,7 +1848,7 @@ wing_clipped:
         - fontWeight: bold
           content: Announcer
         - 「Wait! Silence Suzuka has slowed down behind the zelkova tree!」
-    - Ears deaf to the world, %YOU% sprints full tilt along the turf course:
+    - "Ears deaf to the world, %YOU% sprints full tilt along the turf course:"
     - acc: 1
       content: 「Suzuka! Suzuka!」
     - Dodging past startled runners, %YOU% rounds the zelkova tree.
@@ -1953,7 +1953,7 @@ tenn_sho_lose:
         - fontWeight: bold
           content: Announcer
         - 「Approaching Tokyo's famous zelkova tree! The true test begins here!」
-    - Driven by instinct, %YOU% jumps to %YOU%'s feet, roaring toward the tree with everything in your lungs:
+    - "Driven by instinct, %YOU% jumps to %YOU%'s feet, roaring toward the tree with everything in your lungs:"
     - acc: 1
       content: 「Suzuka! Suzuka—!」
     - Though swallowed by the crowd, that desperate cry reaches her ears!
@@ -2368,9 +2368,9 @@ run_together:
           content: %CHARA%
         - 「Eh?!」
     - Staring in disbelief, she waited for the punchline.
-    - With a sly grin, %YOU% laid down two non-negotiable ground rules:
+    - "With a sly grin, %YOU% laid down two non-negotiable ground rules:"
     - acc: 1
-      content: 「Rule one: I'm running with you. Rule two: you are strictly forbidden from passing me.」
+      content: "「Rule one: I'm running with you. Rule two: you are strictly forbidden from passing me.」"
     - Suzuka blinked, utterly baffled. But her craving for the track won out over her suspicion.
     - color: %COLOR%
       content:

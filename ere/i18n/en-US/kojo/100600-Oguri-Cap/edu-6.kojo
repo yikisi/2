@@ -583,7 +583,7 @@ sea:
     -
     - If Oguri Cap couldn't beat Super Creek at 2000 meters, then at longer distances %SEX% would crumble from lack of stamina.
     - Simple, brute-force logic—and not necessarily correct.
-    - There's a mountain of variables you can extract from a single race:
+    - "There's a mountain of variables you can extract from a single race:"
     - Weather, runner condition, pacing, inside vs. outside lane, snap decisions, even how torn up the turf was from the previous race—
     - For trainers, there's never enough data. Only ever too little.
     - So the scenario Oguri Cap imagined was just one possibility, not a certainty.
@@ -799,11 +799,11 @@ back_home1:
         - 「Hello, Trainer %YOURNAME%.」
     -
     - She ushered them in warmly. %YOU% could only sit at the dining table, smiling politely and unable to refuse the hospitality.
-    - The interior was simple and lived-in: a traditional tatami floor, elegant wooden walls, adorned with framed newspaper clippings of Oguri Cap's race victories.
+    - "The interior was simple and lived-in: a traditional tatami floor, elegant wooden walls, adorned with framed newspaper clippings of Oguri Cap's race victories."
     - People still make scrapbooks in this day and age?—%YOU% thought idly.
     - On closer inspection, there were even clippings from the two races Fuji Kiseki March had won—the ones where Oguri Cap took second.
     - Pushing aside stray thoughts, they chatted pleasantly. The topics seemed trivial, even mundane, but every word carried the warmth of family reunited after too long.
-    - For example:
+    - "For example:"
     -
     - color: %COLOR%
       content:
@@ -812,7 +812,7 @@ back_home1:
         - 「So, dear—how far along are things between you and Trainer %YOURNAME%?」
     -
     - Oguri's mom's eyes sparkled with curiosity.
-    - For a moment, %YOU% didn't even register what the question meant. Oguri Cap, however, answered without missing a beat:
+    - "For a moment, %YOU% didn't even register what the question meant. Oguri Cap, however, answered without missing a beat:"
     -
     - color: %COLOR%
       content:

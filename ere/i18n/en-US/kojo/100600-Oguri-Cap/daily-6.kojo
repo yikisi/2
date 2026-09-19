@@ -311,7 +311,7 @@ office_study:
           - 「Trainer, I got a 69 on this exam... ❤️」
 
 out_church:
-  - One day, Oguri Cap took %YOU% to a shrine near Tracen Academy... %YOU% asked curiously:
+  - "One day, Oguri Cap took %YOU% to a shrine near Tracen Academy... %YOU% asked curiously:"
   -
   - acc: 1
     content: 「Why did we come to the shrine?」
