@@ -23,7 +23,7 @@ const { get_random_entry } = require('#/utils/list-utils');
 const { akuochi, buff_colors } = require('#/data/color-const');
 const { pregnant_stage_enum } = require('#/data/ero/status-const');
 
-const { degeneration_to_evil } = require('#/i18n/zh-CN/snippets');
+const { degeneration_to_evil } = require('#/i18n/en-US/snippets');
 
 module.exports = {
   /**

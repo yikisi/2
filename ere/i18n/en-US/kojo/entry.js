@@ -23,4 +23,6 @@ module.exports = class extends I18nKojo {
   347 = new (require('#/i18n/en-US/kojo/904700-Speed-Symboli/entry'))();
   348 = new (require('#/i18n/en-US/kojo/904800-Haiseiko/entry'))();
   349 = new (require('#/i18n/en-US/kojo/904900-Tucker-Bryne/entry'))();
+  350 = new (require('#/i18n/en-US/kojo/905000-Hoshina-Kiyoko/entry'))();
+  351 = new (require('#/i18n/en-US/kojo/905100-Yunohana-Bloom/entry'))();
 };
