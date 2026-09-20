@@ -2,6 +2,7 @@
 node_modules
 /dist
 
+/.ai
 /sav
 /ere.config.json
 /.idea

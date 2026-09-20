@@ -385,7 +385,7 @@ module.exports = class extends CustomizedEdu {
         break;
       case race_enum.japa_cup:
         if (era.get('cflag:25:育成回合计时') > 96) {
-          key = 'before_japa_cup';
+          key = 'before_japa_cup_s';
           args = [
             me,
             callname,

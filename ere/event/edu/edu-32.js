@@ -435,6 +435,13 @@ module.exports = class extends CustomizedEdu {
         break;
       case race_enum.sank_hai:
         key = 'before_sank_hai';
+        args = [
+          me,
+          callname,
+          sys_get_colored_callname(this.id, 5),
+          love,
+          extra.contestants.some((u) => u.index_chara === 25),
+        ];
         if (love >= 75 && tachyon.sex_code !== 1 && me.sex_code > 0) {
           begin_and_init_ero(0, 32);
           if (
@@ -1217,6 +1224,7 @@ module.exports = class extends CustomizedEdu {
           await print_title_with_kojo(
             this.#kojo,
             'ws_b_95_31',
+            tachyon,
             get_chara_talk(25),
             me,
             callname,
@@ -1237,6 +1245,7 @@ module.exports = class extends CustomizedEdu {
           await print_title_with_kojo(
             this.#kojo,
             'ws_a_95_31',
+            tachyon,
             me,
             callname,
             sys_get_colored_callname(this.id, 2),

@@ -251,7 +251,7 @@ module.exports = class extends CustomizedEdu {
           } else {
             await print_title_with_kojo(
               this.#kojo,
-              'ws_palace_ge',
+              'ws_palace_ne',
               acute,
               get_chara_talk(301),
               get_chara_talk(302),

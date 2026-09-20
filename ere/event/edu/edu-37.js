@@ -130,11 +130,7 @@ module.exports = class extends CustomizedEdu {
         return await super.race_end(flash, me, callname, hook, extra);
     }
     if (!key) {
-      if (extra.rank === 1) {
-        key = 'race_end_win';
-      } else {
-        key = 'race_end_lose';
-      }
+      return await super.race_end(flash, me, callname, hook, extra);
     }
     await print_title_with_kojo(this.#kojo, key, flash, ...args);
   }
@@ -195,7 +191,7 @@ module.exports = class extends CustomizedEdu {
         return await super.race_start(flash, me, callname, hook, extra);
     }
     if (!key) {
-      key = 'race_start';
+      return await super.race_start(flash, me, callname, hook, extra);
     }
     await print_title_with_kojo(this.#kojo, key, flash, ...args);
   }

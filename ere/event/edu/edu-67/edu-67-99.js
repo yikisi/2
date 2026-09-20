@@ -240,14 +240,7 @@ module.exports = class extends CustomizedEdu {
       case 95 + 1:
         era.set('cflag:67:节日事件标记', 0);
         switch (
-          (
-            await print_title_with_kojo(
-              this.#kojo,
-              'os_95_1',
-              daiya,
-              get_chara_talk(68),
-            )
-          )[0]
+          (await print_title_with_kojo(this.#kojo, 'os_95_1', daiya, me))[0]
         ) {
           case 1:
             wait = all_reward_in_event(this.id, { base: [300] });
@@ -317,7 +310,7 @@ module.exports = class extends CustomizedEdu {
               this.#kojo,
               'os_heartbeat_excite',
               daiya,
-              get_chara_talk(68),
+              me,
             )
           )[0]
         ) {
@@ -496,6 +489,7 @@ module.exports = class extends CustomizedEdu {
       case race_enum.begin_race:
         if (era.get('cflag:67:育成回合计时') > 48) {
           key = 'before_begin_race';
+          args = [get_chara_talk(13), me];
         }
         break;
       case race_enum.sats_sho:
@@ -524,7 +518,7 @@ module.exports = class extends CustomizedEdu {
           key = 'before_arim_kin_c';
           args = [get_chara_talk(68)];
         } else {
-          key = 'before_arm_kin_s';
+          key = 'before_arim_kin_s';
           args = [get_chara_talk(68)];
         }
         break;

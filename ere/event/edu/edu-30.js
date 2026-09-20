@@ -101,6 +101,7 @@ module.exports = class extends CustomizedEdu {
           me,
           callname,
           sys_get_callname(this.id, this.id),
+          race_infos[race_enum.tenn_spr].get_colored_name(),
         )
       )[0]
     ) {
@@ -498,6 +499,7 @@ module.exports = class extends CustomizedEdu {
               rice,
               get_chara_talk(26),
               get_chara_talk(41),
+              get_chara_talk(52),
               me,
               callname,
               self_name,

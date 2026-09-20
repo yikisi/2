@@ -192,7 +192,7 @@ module.exports = class extends CustomizedEdu {
         break;
       case race_enum.mile_cha:
         if (era.get(`cflag:${this.id}:育成回合计时`) < 96) {
-          key = 'before_mile_cha';
+          key = 'before_mile_cha_c';
           args = [get_chara_talk(61), sys_get_colored_callname(61, this.id)];
         }
         break;

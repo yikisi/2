@@ -245,6 +245,7 @@ module.exports = class extends CustomizedEdu {
               ruby,
               me,
               callname,
+              race_infos[race_enum.rose_sta].get_colored_name(),
               race_infos[race_enum.shuk_sho].get_colored_name(),
             )
           )[0] === 1

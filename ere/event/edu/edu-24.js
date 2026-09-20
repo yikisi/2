@@ -125,6 +125,7 @@ module.exports = class extends CustomizedEdu {
                 maya,
                 get_chara_talk(29),
                 get_chara_talk(40),
+                me,
                 callname,
                 sys_get_colored_callname(this.id, 29),
                 sys_get_colored_callname(this.id, 40),
@@ -351,7 +352,7 @@ module.exports = class extends CustomizedEdu {
         ];
         break;
       case race_enum.tenn_spr:
-        key = extra.rank === 1 ? 'tenn_spr_win' : 'tenn_spr_c';
+        key = extra.rank === 1 ? 'tenn_spr_win' : 'tenn_spr_lose';
         args = [
           get_chara_talk(12),
           get_chara_talk(16),
@@ -607,6 +608,8 @@ module.exports = class extends CustomizedEdu {
           callname,
           sys_get_colored_callname(this.id, 3),
           sys_get_colored_callname(this.id, 17),
+          sys_get_colored_callname(3, 17),
+          sys_get_colored_callname(3, this.id),
         )
       )[0] === 1
     );
@@ -713,6 +716,9 @@ module.exports = class extends CustomizedEdu {
           me,
           callname,
           sys_get_colored_callname(this.id, 16),
+          race_infos[race_enum.sats_sho].get_colored_name(),
+          race_infos[race_enum.toky_yus].get_colored_name(),
+          race_infos[race_enum.kiku_sho].get_colored_name(),
         );
         break;
       case 47 + 31:
@@ -731,6 +737,12 @@ module.exports = class extends CustomizedEdu {
                 get_chara_talk(60),
                 me,
                 callname,
+                sys_get_colored_callname(this.id, 55),
+                sys_get_colored_callname(this.id, 60),
+                sys_get_colored_callname(55, this.id),
+                sys_get_colored_callname(55, 60),
+                sys_get_colored_callname(60, 55),
+                race_infos[race_enum.kiku_sho].get_colored_name(),
               )
             )[0] === 1
               ? { [attr_enum.strength]: 20 }
@@ -776,6 +788,7 @@ module.exports = class extends CustomizedEdu {
         await print_title_with_kojo(
           this.#kojo,
           'ws_95_14',
+          maya,
           get_chara_talk(6),
           get_chara_talk(12),
           get_chara_talk(40),

@@ -417,7 +417,7 @@ module.exports = class extends CustomizedEdu {
       case 95 + 9:
         await print_title_with_kojo(
           this.#kojo,
-          'ws_95_9',
+          'we_95_9',
           maru,
           get_chara_talk(17, chara_colors[17][1]),
           me,
@@ -599,7 +599,7 @@ module.exports = class extends CustomizedEdu {
       case race_enum.asah_sta:
         if (extra.rank === 1) {
           _default = false;
-          await print_title_with_kojo(this.#kojo, 'asah_sta', maru, me);
+          await print_title_with_kojo(this.#kojo, 'asah_sta_win', maru, me);
         } else if (extra.rank <= 5) {
           _default = false;
           await print_title_with_kojo(
@@ -685,7 +685,7 @@ module.exports = class extends CustomizedEdu {
           _default = false;
           await print_title_with_kojo(
             this.#kojo,
-            extra.rank === 1 ? 'arim_kin_win_c' : 'aim_kin_lose_c',
+            extra.rank === 1 ? 'arim_kin_win_c' : 'arim_kin_lose_c',
             maru,
             me,
             callname,

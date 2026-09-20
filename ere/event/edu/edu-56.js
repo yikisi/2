@@ -433,7 +433,7 @@ module.exports = class extends CustomizedEdu {
         key = 'before_kiku_sho';
         break;
       case race_enum.kink_sho:
-        key = 'before_kika_sho';
+        key = 'before_kink_sho';
         if (era.get('love:56') >= 75) {
           update_kiss_exp(get_date_obj(), 0, this.id);
           edu_marks.kink_shoKISS = 1;
@@ -446,7 +446,7 @@ module.exports = class extends CustomizedEdu {
         break;
       case race_enum.arim_kin:
         if (era.get('cflag:56:育成回合计时') > 96) {
-          key = 'before_aim_kin_s';
+          key = 'before_arim_kin_s';
         }
     }
     if (!key) {

@@ -192,6 +192,7 @@ module.exports = class extends CustomizedEdu {
           extra.pt_change = 10;
           break;
         case race_enum.stli_kin:
+          key = 'stli_kin_win';
           args = [get_chara_talk(67), me, callname];
           extra.relation_change = 10;
           extra.attr_change[get_random_entry(base_attr_list)] = 10;
@@ -250,7 +251,7 @@ module.exports = class extends CustomizedEdu {
           break;
         case race_enum.japa_cup:
           if (edu_weeks > 96) {
-            key = 'tenn_sho_s';
+            key = 'japa_cup_s';
             extra.attr_change.fill(3);
             extra.pt_change = 15;
           }
@@ -343,7 +344,7 @@ module.exports = class extends CustomizedEdu {
         break;
       case 95 + 10:
         new KitaEduMarks().senior_valentine++;
-        await print_title_with_kojo(this.#kojo, 'we_95_10', kita, me, callname);
+        await print_title_with_kojo(this.#kojo, 'we_95_10', kita, me);
         begin_and_init_ero(0, 68);
         era.set('palam:68:受虐快感', era.get('tcvar:68:受虐快感上限'));
         await masturbate(this.id);

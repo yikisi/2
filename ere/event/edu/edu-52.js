@@ -1077,7 +1077,7 @@ module.exports = class extends CustomizedEdu {
         break;
       case 95 + 47:
         temp = get_inner_urara();
-        await print_event_name(this.#kojo.we_95_47.title(urara.temp), urara);
+        await print_event_name(this.#kojo.we_95_47.title(urara, temp), urara);
         temp = await this.#kojo.we_95_47(
           urara,
           temp,

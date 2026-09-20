@@ -353,7 +353,7 @@ module.exports = class extends CustomizedEdu {
       add_event(hook.hook, event_object);
       return false;
     }
-    await print_title_with_kojo(this.#kojo, 'ws_se', nature, callname);
+    await print_title_with_kojo(this.#kojo, 'we_se', nature, callname);
     era.println();
     sys_like_chara(60, 0, 50) && (await era.waitAnyKey());
   }

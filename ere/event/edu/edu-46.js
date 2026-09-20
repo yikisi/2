@@ -342,15 +342,6 @@ module.exports = class extends CustomizedEdu {
           callname,
         );
         break;
-      case 47 + 39:
-        await print_title_with_kojo(
-          this.#kojo,
-          'ws_47_39',
-          falcon,
-          me,
-          callname,
-        );
-        break;
       case 47 + 40:
         await print_title_with_kojo(
           this.#kojo,
@@ -520,6 +511,9 @@ module.exports = class extends CustomizedEdu {
           callname,
         );
         break;
+      case 47 + 39:
+        await print_title_with_kojo(this.#kojo, 'we_47_39', falcon, me);
+        break;
       case 95 + 10:
         await print_title_with_kojo(
           this.#kojo,
@@ -576,7 +570,13 @@ module.exports = class extends CustomizedEdu {
         );
         break;
       case 95 + 38:
-        await print_title_with_kojo(this.#kojo, 'we_95_38', falcon, me);
+        await print_title_with_kojo(
+          this.#kojo,
+          'we_95_38',
+          falcon,
+          me,
+          callname,
+        );
         break;
       case 95 + 40:
         await print_title_with_kojo(
@@ -756,7 +756,9 @@ module.exports = class extends CustomizedEdu {
     }
     let wait = false;
     era.set('cflag:46:节日事件标记', 0);
-    switch ((await print_title_with_kojo(this.#kojo, ebj.arg, falcon, me))[0]) {
+    switch (
+      (await print_title_with_kojo(this.#kojo, 'oc_95_1', falcon, me))[0]
+    ) {
       case 1:
         wait = all_reward_in_event(this.id, { base: [600] });
         break;
