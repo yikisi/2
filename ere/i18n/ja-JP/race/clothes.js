@@ -1,6 +1,8 @@
 const I18nClothes = require('#/i18n/zh-CN/race/clothes');
 
 module.exports = class extends I18nClothes {
+  904501 = 'ST2';
+  904502 = 'ゼロからゼロへ';
   // GENERATED START
   100101 = 'スペシャルドリーマー';
   100102 = '日之本一の総大将';
@@ -270,7 +272,5 @@ module.exports = class extends I18nClothes {
   114401 = 'Éclat de Roseraie';
   114501 = 'Monochrome GM';
   114901 = '絶佳の暁闇';
-  904501 = 'ST2';
-  904502 = 'ゼロからゼロへ';
   // GENERATED END
 };
