@@ -9,7 +9,7 @@
       "audio": 0,
       "autoMax": false,
       "height": 916,
-      "width": 1000
+      "width": 1200
     }
   },
   "extend": {
@@ -18778,8 +18778,8 @@
       "title": "EraUma",
       "gameCode": 29407,
       "defaultChara": 0,
-      "version": 3003,
-      "versionName": "3.003 (ryuki)",
+      "version": 3004,
+      "versionName": "3.004 (ryuki)",
       "allowVersion": 1000,
       "site": "https://gitgud.io/umaera/erauma/-/releases/permalink/latest",
       "versionCheck": "https://umaera.gitgud.site/erauma/RELEASE",

@@ -79,4 +79,4 @@ release:
       --description "$(cat ./RELEASE.md)"
       --assets-link "{\"name\":\"[游戏包] EraUma ${CI_COMMIT_TAG}（Win10 绿色版 / PC 游戏包 / 安卓游戏包，解压密码：era）\",\"url\":\"${MEGA_URL}\",\"link_type\":\"package\"}"
       --assets-link "{\"name\":\"[通用资源包] uma-resource-${RES_VERSION}.zip (版本号 ${RES_VERSION}，原地解压之后将解压出的 res 放到游戏文件夹下，在游戏设置中启用资源)\",\"url\":\"https://umaera.gitgud.site/data/uma-resource/full.html\"}"
-      --assets-link "{\"name\":\"[资源差分包] erauma-res-${RES_VERSION}-${OLD_VERSION}.zip (原地解压之后将解压出的 res 文件和游戏文件夹下的 res 文件夹合并，仅用于升级 ${OLD_VERSION} 版本的资源包)\",\"url\":\"https://umaera.gitgud.site/data/uma-resource/index.html\"}"
+      --assets-link "{\"name\":\"[资源差分包] erauma-res-${RES_VERSION}-${OLD_VERSION}.zip (原地解压之后将解压出的 res 文件和游戏文件夹下的 res 文件夹合并，冲突项选覆盖，仅用于升级 ${OLD_VERSION} 版本的资源包)\",\"url\":\"https://umaera.gitgud.site/data/uma-resource/index.html\"}"
