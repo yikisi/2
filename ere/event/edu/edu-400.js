@@ -125,8 +125,8 @@ module.exports = class extends CustomizedEdu {
   }
 
   async race_end(ss, me, callname, hook, extra) {
-    let _default = false;
     if (extra.rank === 1) {
+      let _default = false;
       switch (extra.race) {
         case race_enum.begin_race:
           extra.attr_change = new Array(5).fill(0);
@@ -181,6 +181,8 @@ module.exports = class extends CustomizedEdu {
               (e) => (extra.attr_change[e] = 10),
             );
             extra.relation_change = 30;
+          } else {
+            _default = true;
           }
           break;
         case race_enum.belm_sta:
@@ -202,6 +204,8 @@ module.exports = class extends CustomizedEdu {
             extra.attr_change = new Array(5).fill(10);
             extra.motivation_change = 1;
             extra.pt_change = 45;
+          } else {
+            _default = true;
           }
           break;
         case race_enum.arim_kin:
@@ -252,16 +256,18 @@ module.exports = class extends CustomizedEdu {
               callname,
             );
             extra.attr_change = new Array(5).fill(5);
+          } else {
+            _default = true;
           }
           break;
         default:
           _default = true;
       }
-    }
-    if (_default) {
-      if (extra.rank === 1) {
+      if (_default) {
         await print_title_with_kojo(this.#kojo, 'race_end_win', ss, me);
-      } else if (extra.rank <= 5) {
+      }
+    } else {
+      if (extra.rank <= 5) {
         await print_title_with_kojo(this.#kojo, 'race_end_5', ss, me);
       } else if (extra.rank <= 10) {
         await print_title_with_kojo(

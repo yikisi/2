@@ -94,11 +94,11 @@ module.exports = class extends CustomizedDaily {
   }
 
   async office_rest() {
-    await this.#kojo.office_rest(get_chara_talk(this.id));
+    await this.#kojo.office_rest(get_chara_talk(this.id), get_chara_talk(0));
   }
 
   async office_prepare() {
-    await this.#kojo.office_study(
+    await this.#kojo.office_prepare(
       get_chara_talk(this.id),
       sys_get_callname(this.id, 0),
     );
