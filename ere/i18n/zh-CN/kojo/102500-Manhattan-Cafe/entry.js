@@ -23,17 +23,7 @@ class I18nKojo102500 {
   );
   // GENERATED END
 
-  report_arim_kin = (cafe) => [
-    {
-      color: cafe.color,
-      content: '获胜的是 ',
-    },
-    cafe.get_colored_name(),
-    {
-      color: cafe.color,
-      content: '！世代交替，由此证明！',
-    },
-  ];
+  report_arim_kin = (cafe) => ['获胜的是 ', cafe, '！世代交替，由此证明！'];
 }
 
 module.exports = I18nKojo102500;

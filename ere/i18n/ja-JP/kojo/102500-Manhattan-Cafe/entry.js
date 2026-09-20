@@ -23,14 +23,8 @@ module.exports = class extends (
   );
 
   report_arim_kin = (cafe) => [
-    {
-      color: cafe.color,
-      content: '勝ったのは ',
-    },
-    cafe.get_colored_name(),
-    {
-      color: cafe.color,
-      content: '！世代交代は、ここで証明された！',
-    },
+    '勝ったのは ',
+    cafe,
+    '！世代交代は、ここで証明された！',
   ];
 };

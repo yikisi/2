@@ -22,15 +22,5 @@ module.exports = class extends (
     require('#/i18n/xx-XX/kojo/102500-Manhattan-Cafe/base-25.js'),
   );
 
-  report_arim_kin = (cafe) => [
-    {
-      color: cafe.color,
-      content: '获胜的是 ',
-    },
-    cafe.get_colored_name(),
-    {
-      color: cafe.color,
-      content: '！世代交替，由此证明！',
-    },
-  ];
+  report_arim_kin = (cafe) => ['获胜的是 ', cafe, '！世代交替，由此证明！'];
 };
