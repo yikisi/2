@@ -421,6 +421,7 @@ module.exports = class extends require('#/i18n/zh-CN/chara/names') {
   900202 = 'Northern Taste';
   904302 = 'Dictus';
 
+  // GENERATED START
   100101 = 'Special Week';
   100201 = 'Silence Suzuka';
   100301 = 'Tokai Teio';
@@ -567,7 +568,7 @@ module.exports = class extends require('#/i18n/zh-CN/chara/names') {
   114901 = 'Phalaenopsis';
   200101 = 'Happy Meek';
   200201 = 'Bitter Glasse';
-  200301 = 'Cocon';
+  200301 = 'Little Cocon';
   200401 = 'Montjeu';
   200501 = 'Treve';
   200601 = 'Dancing Brave';
@@ -593,7 +594,9 @@ module.exports = class extends require('#/i18n/zh-CN/chara/names') {
   905001 = 'Hoshina Kiyoko';
   905101 = 'Yunohana Bloom';
   113901 = 'Casino Drive';
+  // GENERATED END
 
+  // CHILDREN GENERATED START
   10010100 = 'Reach the Crown';
   10010101 = 'Toho Jackal';
   10020100 = 'Suzuhara Snowstep';
@@ -816,7 +819,7 @@ module.exports = class extends require('#/i18n/zh-CN/chara/names') {
   10440105 = 'Sweep Celeritas';
   10440106 = 'Clean Sweep';
   10440107 = 'Piedra de Luna';
-  10450100 = 'Super Creek';
+  10450100 = 'Super Stream';
   10470100 = 'Pelusa';
   10470101 = 'Pioneer';
   10470102 = 'Nomura Victory';
@@ -1089,7 +1092,7 @@ module.exports = class extends require('#/i18n/zh-CN/chara/names') {
   40000112 = 'Just a Way';
   40000113 = 'Dance in the Mood';
   40000114 = 'Triple Crown';
-  40000115 = 'Suzuka Phoenix';
+  40000115 = 'Suzuka Mambo';
   40000116 = 'Deep Impact';
   40000117 = 'Suzuka Phoenix';
   40000118 = 'Van Gogh Exhibition';
@@ -1110,4 +1113,5 @@ module.exports = class extends require('#/i18n/zh-CN/chara/names') {
   90420100 = 'Herod';
   1020010000 = 'Nishino Flowey';
   4000011600 = 'Satono Reinas';
+  // CHILDREN GENERATED END
 };
