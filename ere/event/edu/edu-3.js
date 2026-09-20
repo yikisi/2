@@ -356,6 +356,7 @@ module.exports = class extends CustomizedEdu {
         break;
       case race_enum.sats_sho:
         if (extra.rank <= 5) {
+          key = 'sats_sho_5';
           fill_common_rewards(extra);
           extra.attr_change[attr_enum.endurance] += 15;
           extra.attr_change[attr_enum.toughness] += 5;
@@ -363,10 +364,16 @@ module.exports = class extends CustomizedEdu {
         break;
       case race_enum.toky_yus:
         if (extra.rank <= 5) {
+          key = 'toky_yus_5';
           fill_common_rewards(extra);
           if (
             extra.rank === 1 &&
-            check_aim_race(RaceHistory.get(this.id), race_enum.sats_sho, 1, 1)
+            check_aim_race(
+              RaceHistory.get(this.id).get(),
+              race_enum.sats_sho,
+              1,
+              1,
+            )
           ) {
             extra.pt_change += 20;
             extra.relation_change = (extra.relation_change || 0) + 10;
@@ -402,7 +409,7 @@ module.exports = class extends CustomizedEdu {
           extra.rank === 1 &&
           era.get('status:3:腿伤') > 0
         ) {
-          key = 'japa_cup_win_s';
+          key = 'japa_cup_win_h_s';
           extra.pt_change = 20;
           extra.relation_change = 12;
           extra.love_change = 1;
@@ -601,7 +608,7 @@ module.exports = class extends CustomizedEdu {
         }
         break;
       case 143 + 5:
-        await print_title_with_kojo(this.#kojo, 'ws_143_5_h', teio, me);
+        await print_title_with_kojo(this.#kojo, 'we_143_5_h', teio, me);
         era.set('status:3:腿伤', 0);
         if (era.get('talent:3:自信程度') === 1) {
           era.set('talent:3:自信程度', 0);
