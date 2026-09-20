@@ -373,7 +373,7 @@ module.exports = class extends CustomizedLove {
    */
   async s_feeling(pama, me, callname, stage, extra, event_object) {
     if (era.get('flag:当前互动角色') !== this.id) {
-      await era.printAndWait(['【', pama.get_colored_name(), ' 在天台等待】']);
+      await pama.print_and_wait(i18n().kojo[this.id].notify_rooftop(pama));
       add_event(stage, event_object);
       await era.clear(1);
       return;
@@ -608,11 +608,7 @@ module.exports = class extends CustomizedLove {
       era.get(`status:${this.id}:马跳S`) > 0
     ) {
       add_event(stage, event_object);
-      await era.printAndWait([
-        '【在 ',
-        pama.get_colored_name(),
-        ' 睡着的时候……】',
-      ]);
+      await pama.print_and_wait(i18n().kojo[this.id].notify_asleep(pama));
       return;
     }
     const ace = get_chara_talk(104);

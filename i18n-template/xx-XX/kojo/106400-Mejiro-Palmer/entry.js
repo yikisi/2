@@ -14,6 +14,21 @@ module.exports = class extends (
   /** @type {KojoFile} */
   basement = require('#/i18n/xx-XX/kojo/106400-Mejiro-Palmer/base-64.kojo');
 
+  dependence = '依存心';
+  dependence_desc = '唯有你……';
+
+  notify_go_shopping = (pama) => [
+    '【和 ',
+    pama.get_colored_name(),
+    ' 去买东西吧！】',
+  ];
+  notify_rooftop = (pama) => ['【', pama.get_colored_name(), ' 在天台等待】'];
+  notify_asleep = (pama) => [
+    '【在 ',
+    pama.get_colored_name(),
+    ' 睡着的时候……】',
+  ];
+
   aim_desc = '经典年 6 月第 2 周前 G3 以上比赛 1 着';
 
   /**

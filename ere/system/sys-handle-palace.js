@@ -24,6 +24,7 @@ const { get_chara_score } = require('#/data/info-generator');
 const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_infos } = require('#/data/race/race-const');
+
 const { i18n } = require('#/i18n/selector');
 
 /** @param {number} cid */
@@ -37,7 +38,7 @@ function sys_handle_palace(cid) {
   /** @type {*[]} */
   const buffer = [
     {
-      content: ['【', chara.get_colored_name(), ' 的育成结束了】'],
+      content: i18n().get_ui_edu_end(chara.get_colored_name()),
       type: 'text',
     },
   ];
@@ -55,12 +56,11 @@ function sys_handle_palace(cid) {
     buffer.push(
       {
         content: [
-          chara.get_colored_name(),
-          ' 的育成目标完成情况：',
+          ...i18n().get_ui_edu_aim_summary_header(chara.get_colored_name()),
           aim_count === aim_check.length
             ? {
                 color: attr_change_colors.up,
-                content: '完成！',
+                content: i18n().edu_aim_done,
                 fontWeight: 'bold',
               }
             : {
@@ -83,16 +83,10 @@ function sys_handle_palace(cid) {
   }
   if (miss_count) {
     buffer.push({
-      content: [
-        '错过了 ',
-        chara.get_colored_name(),
-        ' 的 ',
-        {
-          content: miss_count.toString(),
-          color: buff_colors[3],
-        },
-        ' 个育成事件……',
-      ],
+      content: i18n().get_ui_edu_ignore_aim(chara.get_colored_name(), {
+        content: miss_count.toString(),
+        color: buff_colors[3],
+      }),
       type: 'text',
     });
   }

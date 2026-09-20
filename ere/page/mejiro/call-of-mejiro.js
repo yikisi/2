@@ -383,7 +383,9 @@ class CallOfMejiro extends MejiroCity {
                   ? {
                       accelerator: e.a,
                       config: {
-                        ...(e.d ? { disabled: true, title: '体力不足' } : {}),
+                        ...(e.d
+                          ? { disabled: true, title: i18n().tb_status.r_hp_ins }
+                          : {}),
                         width: 12,
                       },
                       content: e.c,

@@ -289,7 +289,10 @@ module.exports = class extends CustomizedEdu {
             printMultiColumns([
               {
                 config: { fontSize: '1.5rem', isParagraph: true },
-                content: [me.actual_name, '训练员'],
+                content: i18n().name.trainer_template.replace(
+                  '%NAME%',
+                  me.actual_name,
+                ),
                 type: 'text',
               },
               {

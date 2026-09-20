@@ -270,5 +270,7 @@ module.exports = class extends I18nClothes {
   114401 = 'Éclat de Roseraie';
   114501 = 'Monochrome GM';
   114901 = '絶佳の暁闇';
+  904501 = 'ST2';
+  904502 = 'ゼロからゼロへ';
   // GENERATED END
 };

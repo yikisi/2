@@ -46,6 +46,7 @@ class I18nDetail {
     ' · H',
     hip,
   ];
+  base_bt_comb_hair = '梳头';
   /** @param {CharaTalk} chara */
   get_base_hair_select = (chara) => [
     '请选择 ',

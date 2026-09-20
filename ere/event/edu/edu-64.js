@@ -749,12 +749,7 @@ module.exports = class extends CustomizedEdu {
   async choice(pama, me, callname, hook, extra, event_object) {
     if (era.get('flag:当前互动角色') !== this.id) {
       add_event(hook.hook, event_object);
-      await era.printAndWait(
-        ['【和 ', pama.get_colored_name(), ' 去买东西吧！】'],
-        {
-          color: pama.color,
-        },
-      );
+      await pama.print_and_wait(i18n().kojo[this.id].notify_go_shopping(pama));
       await era.clear(1);
       return;
     }

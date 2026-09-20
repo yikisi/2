@@ -123,6 +123,9 @@ module.exports = class extends require('#/i18n/zh-CN/race/races') {
   d_oosa = '大差';
   d_bashin_template = '%DIS% 马身';
 
+  dubai_series = '迪拜世界杯赛马日';
+  hongkong_series = '香港国际赛事';
+
   sim = '模拟赛';
 
   0 = '出道战';

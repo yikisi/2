@@ -138,7 +138,7 @@ module.exports = {
       action_buffer.push({
         accelerator: 100,
         config: { width: 4 },
-        content: '梳头',
+        content: i18n().detail.base_bt_comb_hair,
         type: 'button',
       });
     }

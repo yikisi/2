@@ -255,7 +255,7 @@ module.exports = async (_, save_and_next_week, flags) => {
             await era.printAndWait(i18n().timon.get_it_unlock_success(me));
           }
         } else {
-          await era.printAndWait([me.get_colored_name(), ' 未能破解机关……']);
+          await era.printAndWait(i18n().timon.get_it_unlock_fail(me));
         }
       },
       n: i18n().ui_bs_unlock,

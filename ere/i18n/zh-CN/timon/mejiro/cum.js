@@ -373,6 +373,7 @@ module.exports = {
     target.get_colored_name(),
     ' 做完按摩后，身体变得更润滑了……',
   ],
+  city_mg_bye: '请一路顺风～',
   city_bt_library: '「图书馆」',
   city_library_welcome: '欢迎来到目白城市立大图书馆！请问要借阅什么书籍呢？',
   // 玩家学钢之意志

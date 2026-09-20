@@ -69,7 +69,10 @@ module.exports = class extends CustomizedEdu {
           R_COLOR: ryan.color,
           R_NAME: ryan.name,
           SIR: me.adult_sex_title,
-          YOUNG_LADY: bright.sex_code === 1 ? '少爷' : '大小姐',
+          YOUNG_LADY:
+            bright.sex_code === 1
+              ? i18n().name.young_master
+              : i18n().name.young_lady,
         })
       )['relation'] === 1
     ) {

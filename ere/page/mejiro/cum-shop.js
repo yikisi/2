@@ -679,7 +679,7 @@ async function cum_shop(chara, me) {
             }
             _flag &&= money > 0;
           }
-          await say_by_waiter_and_wait('请一路顺风～');
+          await say_by_waiter_and_wait(i18n().timon.cum.city_mg_bye);
         },
       },
       {
@@ -913,6 +913,7 @@ async function cum_shop(chara, me) {
             era.set('item:「恩宠」', 0);
           }
         },
+        // DO NOT TRANSLATE
         t: '可切换目白城风格，暂未开放',
       },
       {

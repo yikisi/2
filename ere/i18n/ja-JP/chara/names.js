@@ -5,6 +5,7 @@ module.exports = class extends I18nNames {
   madam_template = '%NAME%さん';
   chan_template = '%NAME%ちゃん';
   kun_template = '%NAME%君';
+  classmate_template = '%NAME%さん';
 
   mr = 'さん';
   miss = 'さん';
@@ -22,9 +23,13 @@ module.exports = class extends I18nNames {
   trainer_f = 'トレーナーさん';
   danna = '旦那';
   dear = 'あなた';
+  son = '息子';
+  daughter = '娘';
+  young_master = '坊ちゃん';
+  young_lady = 'お嬢様';
 
   101702 = 'ルナ';
-  102312 = 'ハヤヒデ先辈';
+  102312 = 'ハヤヒデ先輩';
   102313 = 'ハヤヒデさん';
   102314 = 'ハヤヒデ';
   102511 = 'カフェ君';

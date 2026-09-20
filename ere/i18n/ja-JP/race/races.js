@@ -49,6 +49,9 @@ module.exports = class extends I18nRaces {
   chart_splitter_loc_mind = '位置取り意識終了';
   chart_slope_name = '坂';
 
+  dubai_series = 'ドバイワールドカップミーティング';
+  hongkong_series = '香港国際競走';
+
   0 = 'メイクデビューに';
   // GENERATED START
   1 = 'ジュニアカップ';

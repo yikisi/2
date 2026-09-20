@@ -574,6 +574,8 @@ module.exports = class extends require('#/i18n/zh-CN/timon') {
     ' 破解了一层机关！',
   ];
   /** @param {CharaTalk} you */
+  get_it_unlock_fail = (you) => [you.get_colored_name(), ' 未能破解机关……'];
+  /** @param {CharaTalk} you */
   get_it_unlock_escape = (you) => [
     you.get_colored_name(),
     ' 成功解除了机关，逃离了地下室！',

@@ -150,7 +150,7 @@ async function race_page(race) {
     const id = uma.index_chara;
     const tired = era.get(`status:${id}:疲惫`);
     if (tired >= 5) {
-      era.print([get_chara_talk(id).get_colored_name(), ' 深陷疲惫……']);
+      era.print(i18n().get_ui_too_tired(get_chara_talk(id).get_colored_name()));
       w_flag =
         sys_change_motivation(
           id,

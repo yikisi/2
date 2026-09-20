@@ -302,6 +302,7 @@ class I18nEntry {
     ' 在疲惫之下受了更加严重的伤！】',
   ];
   get_ui_add_titles = (chara) => ['【', chara, ' 获得了新称号！】'];
+  get_ui_too_tired = (chara) => ['【', chara, ' 深陷疲惫！】'];
   get_ui_ignore_event_punish = (chara, you) => [
     '【因为 ',
     you,
@@ -315,6 +316,17 @@ class I18nEntry {
     ' 的忽视，',
     chara,
     ' 无比失望】',
+  ];
+  get_ui_bankrupt_warn = (you) => ['【', you, ' 即将破产！】'];
+  get_ui_edu_end = (chara) => ['【', chara, ' 的育成结束了】'];
+  get_ui_edu_aim_summary_header = (chara) => [chara, ' 的育成目标完成情况：'];
+  edu_aim_done = '完成！';
+  get_ui_edu_ignore_aim = (chara, count) => [
+    '错过了 ',
+    chara,
+    ' 的 ',
+    count,
+    ' 个育成事件……',
   ];
 
   ui_time_flow = '【时间开始流动】';

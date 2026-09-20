@@ -789,7 +789,7 @@ module.exports = class extends CustomizedEdu {
           temp,
           void 0,
           race_enum.siri_sta,
-          '粉丝感谢祭',
+          i18n().cl_fans,
         );
         await this.#kojo.ws_95_14_end(
           maya,

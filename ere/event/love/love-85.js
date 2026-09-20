@@ -19,7 +19,6 @@ const CustomizedLove = require('#/event/love/love-common');
 const punish_rejecting_love = require('#/event/love/snippets/punish-rejecting-love');
 const { get_mother } = require('#/event/snippets/108500');
 const masturbate = require('#/event/snippets/masturbate');
-const print_event_name = require('#/event/snippets/print-event-name');
 const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 const quick_into_sex = require('#/event/snippets/quick-into-sex');
 
@@ -213,7 +212,6 @@ module.exports = class extends CustomizedLove {
       ruby,
       me,
     );
-    await print_event_name('一起洗澡', ruby);
     let _relation = 0,
       _love = 0;
     begin_and_init_ero(0, 85);
