@@ -84,7 +84,7 @@ function check_inmon(in_team_list) {
           Object.entries(jewels).filter((e) => e[1] > 0),
         ) || [get_random_value(0, 2)])[0];
         val = Math.max(Math.floor(jewels[jid] / 10), 1);
-        jid += 20;
+        jid = +jid + 20;
       } else {
         jid = get_random_value(20, 22);
         val = Math.floor(

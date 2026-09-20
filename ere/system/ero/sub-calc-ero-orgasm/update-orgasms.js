@@ -302,6 +302,31 @@ function common_orgasm(cid) {
     }
   }
   buffer.forEach((c) => era.print(c));
+  const a_orgasm =
+    era.get(`nowex:${cid}:肛门高潮`) + era.get(`nowex:${cid}:无自觉肛门高潮`);
+  buffer = [];
+  if (a_orgasm > 0) {
+    era.print(
+      i18n().timon.ero_sys.get_chara_part_orgasm(
+        chara,
+        {
+          content: i18n().tb_param[part2jid[part_enum.anal]],
+          color: buff_colors[2],
+        },
+        {
+          content:
+            a_orgasm > 1
+              ? i18n().timon.ero_sys.orgasm_template.replace(
+                  '%TIME%',
+                  a_orgasm.toString(),
+                )
+              : i18n().timon.ero_sys.orgasm,
+          color: get_color(a_orgasm),
+        },
+      ),
+    );
+  }
+  buffer.forEach((c) => era.print(c));
   let semen = era.get(`nowex:${cid}:射精量`);
   if (semen > 0) {
     const semen_loc = era.get(`tcvar:${cid}:射精位置`) || {};

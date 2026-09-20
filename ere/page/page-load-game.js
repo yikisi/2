@@ -665,8 +665,12 @@ module.exports = async () => {
                 if (cid >= 340 && cid <= 342) {
                   const fc_exp = era.get(`cstr:${cid}:长子女经历`);
                   if (Array.isArray(fc_exp)) {
-                    const y = fc_exp[1].substring(0, 4);
-                    era.set(`cstr:${cid}:出生经历`, fc_exp[1].substring(0, 4));
+                    const y = era.set(
+                      `cstr:${cid}:出生经历`,
+                      fc_exp
+                        .find((x) => typeof x === 'string' && /^\d+ 年/.test(x))
+                        .substring(0, 4),
+                    );
                     era.set(`cstr:${cid}:长子女经历`, {
                       y,
                       m: era.get(`cflag:${cid}:出生月份`).toString(),
