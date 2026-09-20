@@ -118,22 +118,23 @@ module.exports = {
         case -2:
           buffer.push(
             () =>
-              coffee.say([
+              coffee.say_and_wait([
                 callname,
                 '、『彼ら』が来ます……！ 私の傍を、離れないで……！',
               ]),
-            () => coffee.say('調子が、よくない……影に、呑まれそうです。'),
+            () =>
+              coffee.say_and_wait('調子が、よくない……影に、呑まれそうです。'),
           );
           break;
         case -1:
           buffer.push(
             () =>
-              coffee.say([
+              coffee.say_and_wait([
                 callname,
                 '……すみません、いまは調子が……コーヒーが、一杯あれば……',
               ]),
             () =>
-              coffee.say(
+              coffee.say_and_wait(
                 'もしかしたら……私たちが辿ってきたこと全部、蜃気楼のような夢なのかも……',
               ),
           );
@@ -141,11 +142,11 @@ module.exports = {
         case 0:
           buffer.push(
             () =>
-              coffee.say(
+              coffee.say_and_wait(
                 '時間は戻せません……できるのは、いまを尽くすことだけです。',
               ),
             () =>
-              coffee.say(
+              coffee.say_and_wait(
                 '……あなたは、彼らに憑かれやすいみたいです……変なことがあったら、すぐ教えてください。',
               ),
           );
@@ -153,15 +154,15 @@ module.exports = {
         case 1:
           buffer.push(
             () =>
-              coffee.say(
+              coffee.say_and_wait(
                 '小さい頃から、友達は傍にいました……ずっと背中を追ってきた私は、いつか、きっと……',
               ),
             () =>
-              coffee.say(
+              coffee.say_and_wait(
                 '友達がいまどこか、ですか……？ ふふ、後ろを見てみますか。',
               ),
             () =>
-              coffee.say(
+              coffee.say_and_wait(
                 'さっき、あなたの影がひとりで動きました……ふふ、冗談です。',
               ),
           );
@@ -169,21 +170,21 @@ module.exports = {
         case 2:
           buffer.push(
             () =>
-              coffee.say(
+              coffee.say_and_wait(
                 '鯨が七色の翼を生やして、ラピスラズリの空へ飛んでいく……ふふ、夢の世界は面白いですね。',
               ),
             () =>
-              coffee.say([
+              coffee.say_and_wait([
                 callname,
                 '、いまのあなたは……ええ、調子がいい。彼らには、遭わなさそうです。',
               ]),
             () =>
-              coffee.say(
+              coffee.say_and_wait(
                 '今日のために選んだ、特別なコーヒーです……縞瑪瑙のように艶やかで……よければ、一緒に味わいませんか？',
               ),
           );
       }
-      get_random_entry(buffer)();
+      await get_random_entry(buffer)();
     }
   },
   /**

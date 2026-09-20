@@ -112,26 +112,34 @@ module.exports = {
         case -2:
           buffer.push(
             () =>
-              coffee.say([callname, '，『他们』来了……！不要离开我的身边……！']),
-            () => coffee.say('状态，很不好……感觉会被影子……吞噬。'),
+              coffee.say_and_wait([
+                callname,
+                '，『他们』来了……！不要离开我的身边……！',
+              ]),
+            () => coffee.say_and_wait('状态，很不好……感觉会被影子……吞噬。'),
           );
           break;
         case -1:
           buffer.push(
             () =>
-              coffee.say([
+              coffee.say_and_wait([
                 callname,
                 '……抱歉，现在的状态不太好……要是能有一杯咖啡的话……',
               ]),
             () =>
-              coffee.say('说不定……我们经历的这一切，都只是海市蜃楼般的梦……'),
+              coffee.say_and_wait(
+                '说不定……我们经历的这一切，都只是海市蜃楼般的梦……',
+              ),
           );
           break;
         case 0:
           buffer.push(
-            () => coffee.say('我没法倒转时间……唯一能做的，就是尽力做到最好。'),
             () =>
-              coffee.say(
+              coffee.say_and_wait(
+                '我没法倒转时间……唯一能做的，就是尽力做到最好。',
+              ),
+            () =>
+              coffee.say_and_wait(
                 '……你好像很容易被他们缠上……如果有什么奇怪的事，请马上告诉我。',
               ),
           );
@@ -139,31 +147,35 @@ module.exports = {
         case 1:
           buffer.push(
             () =>
-              coffee.say(
+              coffee.say_and_wait(
                 '从小时候开始，朋友就在我身边了……一直都在追逐着朋友的背影的我，总有一天，一定会……',
               ),
-            () => coffee.say('朋友现在在哪吗……？呵呵，看看背后怎么样。'),
-            () => coffee.say('刚刚，你的影子自己动起来了……呵呵，开玩笑的。'),
+            () =>
+              coffee.say_and_wait('朋友现在在哪吗……？呵呵，看看背后怎么样。'),
+            () =>
+              coffee.say_and_wait(
+                '刚刚，你的影子自己动起来了……呵呵，开玩笑的。',
+              ),
           );
           break;
         case 2:
           buffer.push(
             () =>
-              coffee.say(
+              coffee.say_and_wait(
                 '鲸鱼长出七色的翅膀飞向青金石的天空……呵呵，梦里的世界还真是有趣。',
               ),
             () =>
-              coffee.say([
+              coffee.say_and_wait([
                 callname,
                 '，你现在……嗯，状态不错，看来是不会遇上他们。',
               ]),
             () =>
-              coffee.say(
+              coffee.say_and_wait(
                 '这是为了今天所选的特别咖啡……如缟玛瑙一般艳丽……可以的话，来一起品尝吧？',
               ),
           );
       }
-      get_random_entry(buffer)();
+      await get_random_entry(buffer)();
     }
   },
   /**

@@ -209,12 +209,12 @@ module.exports = class extends CustomizedEdu {
             extra.pt_change = 45;
             args = [get_chara_talk(48), me];
           }
-          break;
-        default:
-          key = 'race_end_win';
       }
     } else {
       return await super.race_end(gs, me, callname, hook, extra);
+    }
+    if (!key) {
+      key = 'race_end_win';
     }
     await print_event_name(
       [{ color: color_7[1], content: this.#kojo[key].title }],
