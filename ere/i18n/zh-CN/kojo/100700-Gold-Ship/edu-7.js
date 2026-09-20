@@ -168,7 +168,7 @@ module.exports = {
       await era.printAndWait(
         `如此这般，${you.name} 与 ${gs.name} 慢慢地回到休息室——`,
       );
-      return [ret];
+      return ret;
     };
     f.title = title;
     return f;

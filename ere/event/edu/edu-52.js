@@ -649,6 +649,7 @@ module.exports = class extends CustomizedEdu {
       } else {
         key = 'race_end_lose';
       }
+      args = [me, callname, extra.rank];
     }
     await print_title_with_kojo(this.#kojo, key, urara, ...args);
   }

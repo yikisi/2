@@ -137,11 +137,13 @@ module.exports = class extends CustomizedEdu {
             key = 'arim_kin_win_c';
             extra.attr_change = base_attr_list.map(() => 3);
             extra.pt_change = 45;
+            args = [get_chara_talk(37), me];
           } else {
             key = 'arim_kin_win_s';
             new GoldShipEduMarks().keywords++;
             extra.attr_change = base_attr_list.map(() => 3);
             extra.pt_change = 45;
+            args = [get_chara_talk(37), get_chara_talk(48), me, callname];
           }
           break;
         case race_enum.tenn_spr:
@@ -205,6 +207,7 @@ module.exports = class extends CustomizedEdu {
             new GoldShipEduMarks().keywords++;
             extra.attr_change = [3, 13, 3, 3, 3];
             extra.pt_change = 45;
+            args = [get_chara_talk(48), me];
           }
           break;
         default:
@@ -248,7 +251,7 @@ module.exports = class extends CustomizedEdu {
           [{ color: color_7[1], content: this.#kojo.sa_95_41.title }],
           gs,
         );
-        if ((await this.#kojo.sa_95_41(gs, get_chara_talk(49), me))[1] === 2) {
+        if ((await this.#kojo.sa_95_41(gs, get_chara_talk(49), me))[0] === 2) {
           era.set(
             'base:7:性欲',
             Math.max(era.get('base:7:性欲'), lust_border.itch),
@@ -469,7 +472,7 @@ module.exports = class extends CustomizedEdu {
           [{ color: color_7[1], content: this.#kojo.ws_95_3.title }],
           gs,
         );
-        await this.#kojo.ws_47_41(gs, get_chara_talk(35), me);
+        await this.#kojo.ws_95_3(gs, get_chara_talk(35), me);
         wait = all_reward_in_event(this.id, {
           attr: {
             [attr_enum.toughness]: 5,
