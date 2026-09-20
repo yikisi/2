@@ -587,8 +587,7 @@ function generate_copyrights() {
           color: item_title_color,
           fontSize: '1.25rem',
           isParagraph: true,
-          offset: 3,
-          width: 9,
+          width: 8,
         },
         content: i18n().cr_header_lib_en_us,
       },
@@ -597,19 +596,32 @@ function generate_copyrights() {
           color: item_title_color,
           fontSize: '1.25rem',
           isParagraph: true,
-          width: 9,
+          width: 8,
         },
         content: i18n().cr_header_lib_ru_ru,
+      },
+      {
+        config: {
+          color: item_title_color,
+          fontSize: '1.25rem',
+          isParagraph: true,
+          width: 8,
+        },
+        content: i18n().cr_header_lib_ja_jp,
       },
     ],
     [
       {
-        config: { offset: 3, width: 9 },
+        config: { width: 8 },
         content: 'Katze',
       },
       {
-        config: { width: 9 },
+        config: { width: 8 },
         content: 'Agnes Impera',
+      },
+      {
+        config: { width: 8 },
+        content: 'gamera',
       },
     ],
     [

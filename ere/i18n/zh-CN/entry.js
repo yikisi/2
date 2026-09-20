@@ -177,6 +177,7 @@ class I18nEntry {
   cr_image_gif = '指令动画';
   cr_header_lib_en_us = '英语本地化';
   cr_header_lib_ru_ru = '俄语本地化';
+  cr_header_lib_ja_jp = '日语本地化';
   cr_header_kojo_make = '口上制作';
   cr_header_test = '测试反馈';
   cr_header_community_management = '社区管理';

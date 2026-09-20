@@ -185,6 +185,7 @@ module.exports = class extends require('#/i18n/zh-CN/entry') {
   cr_image_gif = 'Анимации команд';
   cr_header_lib_en_us = 'Английская локализация';
   cr_header_lib_ru_ru = 'Русская локализация';
+  cr_header_lib_ja_jp = 'Японская локализация';
   cr_header_kojo_make = 'Скрипты коджо';
   cr_header_test = 'Тесты и отзывы';
   cr_header_community_management = 'Модерация сообщества';
