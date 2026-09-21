@@ -348,7 +348,7 @@ module.exports = class extends CustomizedLove {
     }
     let title;
     if (new PamaEduMarks().only_you > 3) {
-      title = this.#kojo['root_top_3'].title;
+      title = this.#kojo['rooftop_3'].title;
     } else {
       title = this.#kojo['rooftop'].title;
     }
@@ -608,7 +608,7 @@ module.exports = class extends CustomizedLove {
       era.get(`status:${this.id}:马跳S`) > 0
     ) {
       add_event(stage, event_object);
-      await pama.print_and_wait(i18n().kojo[this.id].notify_asleep(pama));
+      await this.#kojo['pre-joke'](this.#dict);
       return;
     }
     const ace = get_chara_talk(104);

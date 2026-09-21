@@ -42,7 +42,7 @@ module.exports = class extends CustomizedLove {
   }
 
   async 99(falcon, me, callname) {
-    await print_title_with_kojo(this.#kojo, '99', falcon, me, callname);
+    await print_title_with_kojo(this.#kojo, '99', falcon, me);
     await sys_love_uma_in_event(this.id);
   }
 };

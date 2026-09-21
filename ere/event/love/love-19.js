@@ -40,13 +40,7 @@ module.exports = class extends CustomizedLove {
     if (life_marks.again_74) {
       if (
         (
-          await print_title_with_kojo(
-            this.#kojo,
-            '74-after',
-            digital,
-            me,
-            callname,
-          )
+          await print_title_with_kojo(this.#kojo, '74-after', digital, me)
         )[0] === 1
       ) {
         await sys_love_uma_in_event(this.id);
@@ -166,6 +160,7 @@ module.exports = class extends CustomizedLove {
   async univ(digital, me, callname) {
     await print_title_with_kojo(
       this.#kojo,
+      'univ',
       digital,
       me,
       callname,

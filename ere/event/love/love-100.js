@@ -44,11 +44,11 @@ module.exports = class extends CustomizedLove {
 
   async 74(acute, me, callname, stage, extra_flag, event_object) {
     if (stage === event_hooks.week_end) {
-      await this.#kojo['49-before'](acute);
+      await this.#kojo['74-before'](acute);
       add_event(event_hooks.out_station, event_object);
     } else if (stage === event_hooks.out_station) {
       if (era.get('flag:当前互动角色') !== this.id) {
-        await this.#kojo['49-before'](acute);
+        await this.#kojo['74-before'](acute);
         add_event(stage, event_object);
         return;
       }
