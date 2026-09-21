@@ -7695,6 +7695,7 @@ module.exports = {
           'В общем, прошу вас ещё раз всё хорошенько обдумать, очень прошу…',
         );
       }
+      return ret;
     };
     f.title = title;
     return f;

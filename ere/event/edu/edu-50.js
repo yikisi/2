@@ -596,7 +596,7 @@ module.exports = class extends CustomizedEdu {
         fill_bw_in_dict(dict, { h: true });
       }
     } else if (extra.race === race_enum.tenn_sho) {
-      if (era.get(`cflag:${this.id}:育成回合计时`) > 96) {
+      if (era.get(`cflag:${this.id}:育成回合计时`) > 96 && extra.rank === 1) {
         key = 'tenn_sho_win_s';
         fill_bw_in_dict(dict, { w: !0 });
       }

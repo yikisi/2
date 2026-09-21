@@ -176,7 +176,7 @@ module.exports = class extends CustomizedEdu {
               : i18n().name.young_lady;
           break;
         case race_enum.kiku_sho:
-          key = 'kuku_sho_win';
+          key = 'kiku_sho_win';
           break;
         case race_enum.tenn_spr:
           key = 'tenn_spr_win';

@@ -356,6 +356,7 @@ module.exports = class extends CustomizedEdu {
               race_infos[race_enum.arim_kin].get_colored_name(),
             );
           }
+          return;
         }
         break;
       case race_enum.tenn_spr:

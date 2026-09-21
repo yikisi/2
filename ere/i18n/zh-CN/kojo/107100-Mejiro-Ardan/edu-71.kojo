@@ -467,7 +467,7 @@ aoba_sho:
 
 #前5名
 #青叶赏赛后庆祝
-aoba_sho_win:
+aoba_sho_5:
   - 阿尔丹在「青叶赏」取得了不错的成绩，但是不知道为何一直处于忧愁中，甚至在%YOU%讲新的训练规划时失神
   - color: %COLOR%
     content:

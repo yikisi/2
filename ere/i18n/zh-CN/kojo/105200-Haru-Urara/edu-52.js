@@ -7459,6 +7459,7 @@ module.exports = {
           '总之，请您再仔细考虑一下，拜托了……',
         );
       }
+      return ret;
     };
     f.title = title;
     return f;

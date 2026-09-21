@@ -366,7 +366,7 @@ module.exports = class extends CustomizedEdu {
   async we_sword_vs_shield_2(sky) {
     const luna = get_chara_talk(17);
     const halo = get_chara_talk(61);
-    await print_title_with_kojo(this.#kojo, 'we_sword_vs_shield_1', sky, {
+    await print_title_with_kojo(this.#kojo, 'we_sword_vs_shield_2', sky, {
       ...this.#dict,
       LUNA: luna.name,
       COLOR_17: luna.color,

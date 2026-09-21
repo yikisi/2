@@ -295,7 +295,7 @@ module.exports = class extends CustomizedEdu {
         break;
       case race_enum.aoba_sho:
         if (extra_flag.rank <= 5) {
-          await this.#kojo[(key = 'aoba_sho_win')](this.#dict);
+          await this.#kojo[(key = 'aoba_sho_5')](this.#dict);
           extra_flag.attr_change = new Array(5).fill(5);
           extra_flag.pt_change = 60;
           add_event(

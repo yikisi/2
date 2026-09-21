@@ -327,8 +327,8 @@ module.exports = class extends CustomizedEdu {
       ...this.#dict,
       COLOR_4: maru.color,
       COLOR_70: sirius.color,
-      MARU: maru.color,
-      SIRIUS: sirius.color,
+      MARU: maru.name,
+      SIRIUS: sirius.name,
     });
     let attr;
     let base;

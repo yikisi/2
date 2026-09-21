@@ -7441,6 +7441,7 @@ module.exports = {
           'どうか、もう一度よく考えてください。お願いします……',
         );
       }
+      return ret;
     };
     f.title = title;
     return f;

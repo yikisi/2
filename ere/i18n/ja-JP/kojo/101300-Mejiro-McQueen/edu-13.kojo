@@ -606,7 +606,7 @@ kiku_sho:
       content: 「行け。信じている。」
     - メジロマックイーンは%YOU%に小さく頷き、メジロライアンと準備室を出た。
 
-kuku_sho_win:
+kiku_sho_win:
   title: 見事な一戦
   lines:
     # 菊花賞後

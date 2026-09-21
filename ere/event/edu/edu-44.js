@@ -266,6 +266,9 @@ module.exports = class extends CustomizedEdu {
       case 3:
         op.base = [800];
     }
+    if (all_reward_in_event(this.id, op)) {
+      await era.waitAnyKey();
+    }
   }
 
   /** @param {CharaTalk} sweep */

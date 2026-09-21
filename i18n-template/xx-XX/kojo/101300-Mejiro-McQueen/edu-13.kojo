@@ -605,7 +605,7 @@ kiku_sho:
       content: 「上吧，我相信你。」
     - 目白麦昆 对着%YOU%点了一下头，便与 目白莱恩 从准备室出去。
 
-kuku_sho_win:
+kiku_sho_win:
   title: 精彩的对局
   lines:
     # 菊花赏后
