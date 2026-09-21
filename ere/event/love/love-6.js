@@ -73,6 +73,7 @@ module.exports = class extends CustomizedLove {
         )['update'] === 1
       ) {
         update_kiss_exp(get_date_obj(), this.id, 0);
+        await sys_love_uma_in_event(this.id);
       } else {
         era.set(`cflag:${this.id}:46`, 74);
         await punish_rejecting_love(this.id);

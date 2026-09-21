@@ -33,6 +33,7 @@ module.exports = class extends CustomizedLove {
       sys_get_colored_callname(this.id, 32),
       sys_get_colored_callname(32, this.id),
     );
+    await sys_love_uma_in_event(this.id);
   }
 
   async 74(digital, me, callname) {
