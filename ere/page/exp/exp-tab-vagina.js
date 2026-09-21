@@ -4,7 +4,9 @@ const {
   get_penis_size,
   get_pregnant_ratio,
 } = require('#/system/ero/sys-calc-ero-status');
-const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
+const {
+  sys_get_colored_full_callname,
+} = require('#/system/sys-calc-chara-others');
 
 const {
   get_filled_exp_str,
@@ -403,7 +405,7 @@ module.exports = {
         if (flags.true_mark_level === 3 || !life_marks.report) {
           vagina_exp_list.push(
             i18n().detail.get_exp_vagina_pregnant_father(
-              sys_get_colored_callname(chara.id, life_marks.sperm),
+              sys_get_colored_full_callname(chara.id, life_marks.sperm),
             ),
           );
         }
@@ -416,7 +418,7 @@ module.exports = {
       } else if (life_marks.report === -1) {
         vagina_exp_list.push(
           i18n().detail.get_exp_vagina_pregnant_father(
-            sys_get_colored_callname(chara.id, life_marks.sperm),
+            sys_get_colored_full_callname(chara.id, life_marks.sperm),
           ),
         );
       }

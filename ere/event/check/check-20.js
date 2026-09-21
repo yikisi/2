@@ -69,20 +69,20 @@ module.exports = class extends CustomizedCheck {
     const edu_marks = new SkyEduMarks();
     const edu_weeks = era.get(`cflag:${this.id}:育成回合计时`);
     edu_marks.action = 0;
-    if (
-      era.get(`status:0:生日`) > 0 &&
-      era.get(`relation:${this.id}:0`) > 225
-    ) {
-      add_event(
-        event_hooks.week_start,
-        new EventObject(this.id, cb_enum.daily).set_arg('ws_happy_birthday'),
-      );
-    }
-    if (edu_marks.jess > 0 && era.get(`status:${this.id}:摸鱼`) > 0) {
-      era.set(`status:${this.id}:摸鱼`, 0);
-    }
     const ebj = new EventObject(this.id, cb_enum.edu);
     if (era.get(`cflag:${this.id}:招募状态`) === recruit_flags.yes) {
+      if (
+        era.get(`status:0:生日`) > 0 &&
+        era.get(`relation:${this.id}:0`) > 225
+      ) {
+        add_event(
+          event_hooks.week_start,
+          new EventObject(this.id, cb_enum.daily).set_arg('ws_happy_birthday'),
+        );
+      }
+      if (edu_marks.jess > 0 && era.get(`status:${this.id}:摸鱼`) > 0) {
+        era.set(`status:${this.id}:摸鱼`, 0);
+      }
       if (edu_weeks >= 16) {
         check_and_add_event(
           edu_marks,
