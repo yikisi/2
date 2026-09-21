@@ -329,8 +329,8 @@ class PseudoUma {
     this.adapt_ground_list[cur_ground] =
       this.o_a_ground_list[cur_ground] +
       this.ground_buffs.reduce((p, c) => p + Number(c[0]), 0);
-    this.adapt_distance_list[cur_ground] =
-      this.o_a_dis_list[cur_ground] +
+    this.adapt_distance_list[cur_dis] =
+      this.o_a_dis_list[cur_dis] +
       this.dis_buffs.reduce((p, c) => p + Number(c[0]), 0);
     this.attr_buffs = this.attr_buffs.map((l, i) => {
       const buffs = l.map((buff) => {
