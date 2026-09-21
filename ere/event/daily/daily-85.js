@@ -109,7 +109,7 @@ module.exports = class extends CustomizedDaily {
     if (!sys_check_awake(85)) {
       return await super.talk();
     }
-    await this.#kojo.talk();
+    await this.#kojo.talk(get_chara_talk(this.id), get_chara_talk(0));
   }
 
   async office_gift() {

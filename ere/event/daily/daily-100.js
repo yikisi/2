@@ -124,7 +124,12 @@ module.exports = class extends CustomizedDaily {
   }
 
   async o_c_pray(acute, me, dice) {
-    await this.#kojo.o_c_pray(acute, me, dice);
+    await this.#kojo.o_c_pray(
+      acute,
+      me,
+      sys_get_colored_callname(this.id, 0),
+      dice,
+    );
   }
 
   async o_s_arcade(acute, me, hook) {
@@ -178,11 +183,15 @@ module.exports = class extends CustomizedDaily {
   }
 
   async o_s_movie(acute) {
-    await this.#kojo.o_s_movie(acute);
+    await this.#kojo.o_s_movie(acute, sys_get_colored_callname(this.id, 0));
   }
 
   async o_s_restaurant(acute, me) {
-    await this.#kojo.o_s_ktv(acute, me, sys_get_colored_callname(this.id, 0));
+    await this.#kojo.o_s_restaurant(
+      acute,
+      me,
+      sys_get_colored_callname(this.id, 0),
+    );
   }
 
   async o_s_dating(acute, me, hook) {

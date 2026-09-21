@@ -401,7 +401,7 @@ module.exports = class extends CustomizedDaily {
   }
 
   async s_a_dating(urara, me) {
-    await this.#kojo.s_a_tree_hollow(
+    await this.#kojo.s_a_dating(
       urara,
       me,
       sys_get_colored_callname(this.id, 0),

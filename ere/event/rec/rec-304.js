@@ -51,7 +51,7 @@ module.exports = class extends CustomizedRecruit {
       };
       await print_title_with_kojo(
         i18n().kojo[this.id].recruit,
-        'recruit',
+        'recruit_hentai',
         aoi,
         dict,
       );

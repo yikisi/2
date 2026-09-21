@@ -1,6 +1,9 @@
 const era = require('#/era-electron');
 
-const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
+const {
+  sys_get_callname,
+  sys_get_colored_callname,
+} = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const select_yes_or_no = require('#/page/components/select-yes-or-no');
@@ -94,7 +97,7 @@ module.exports = class extends CustomizedDaily {
   }
 
   good_night_normal(teio, me) {
-    this.#kojo.good_night_normal(teio, me);
+    this.#kojo.good_night_normal(teio, me, sys_get_callname(this.id, 0));
   }
 
   async good_night_sex(teio, me, check) {

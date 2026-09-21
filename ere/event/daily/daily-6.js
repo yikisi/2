@@ -37,7 +37,7 @@ module.exports = class extends CustomizedDaily {
   }
 
   async office_rest() {
-    await this.#kojo['office_prepare'](generate_dictionary(this.id));
+    await this.#kojo['office_rest'](generate_dictionary(this.id));
   }
 
   async office_study() {

@@ -51,7 +51,7 @@ module.exports = class extends CustomizedBase {
 
   find_escape(out_of_prison, s_level_up, is_back) {
     if (!out_of_prison) {
-      this.#kojo['battle_escape']({ ...this.#dict, is_back });
+      this.#kojo['find_escape']({ ...this.#dict, is_back });
     } else {
       super.find_escape(out_of_prison, s_level_up, is_back);
     }
@@ -66,7 +66,7 @@ module.exports = class extends CustomizedBase {
 
   back_basement() {
     const life_marks = LifeEventMarks.get_marks(this.id);
-    this.#kojo['get_up']({
+    this.#kojo['back_basement']({
       ...this.#dict,
       b_start: life_marks.b_start,
     });

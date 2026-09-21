@@ -92,7 +92,7 @@ module.exports = class extends CustomizedDaily {
   }
 
   async o_r_fishing(digital) {
-    await this.#kojo.o_r_walking(
+    await this.#kojo.o_r_fishing(
       digital,
       sys_get_colored_callname(this.id, 0),
       sys_get_colored_callname(this.id, 20),

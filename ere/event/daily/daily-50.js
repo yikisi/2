@@ -65,6 +65,10 @@ module.exports = class extends CustomizedDaily {
     await this.#kojo.s_a_dating(this.#dict);
   }
 
+  async school_rooftop(hook) {
+    await this.#kojo.school_rooftop(this.#dict);
+  }
+
   async o_r_fishing(taishin, me, hook, extra) {
     await this.#kojo.o_r_fishing(this.#dict);
   }

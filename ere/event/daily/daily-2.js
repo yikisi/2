@@ -183,7 +183,7 @@ module.exports = class extends CustomizedDaily {
   }
 
   async cl_halloween(chara, me) {
-    await this.#kojo['cl_halloween'](
+    await this.#kojo['halloween'](
       generate_dictionary(this.id, { call: !0, uma: !0 }),
     );
   }

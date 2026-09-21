@@ -140,6 +140,10 @@ module.exports = class extends CustomizedDaily {
     await this.#kojo.o_s_ktv(flash, me);
   }
 
+  async o_s_movie(flash, me, hook) {
+    await this.#kojo.o_s_movie(flash, me, sys_get_callname(this.id, 0));
+  }
+
   async o_s_restaurant(flash, me, hook) {
     await this.#kojo.o_s_restaurant(flash, me);
   }

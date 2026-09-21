@@ -40,11 +40,13 @@ module.exports = class extends CustomizedDaily {
     life_marks.b_escape = 0;
   }
 
-  good_night_normal(coffee, me) {
+  good_night_normal(coffee, me, c_awake, m_awake) {
     this.#kojo.good_night_normal(
       coffee,
       me,
       sys_get_colored_callname(this.id, 0),
+      m_awake,
+      c_awake,
     );
   }
 

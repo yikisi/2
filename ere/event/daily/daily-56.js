@@ -29,7 +29,11 @@ module.exports = class extends CustomizedDaily {
   }
 
   select() {
-    this.#kojo.select(get_chara_talk(this.id), get_chara_talk(0));
+    this.#kojo.select(
+      get_chara_talk(this.id),
+      get_chara_talk(0),
+      sys_get_colored_callname(this.id, 0),
+    );
   }
 
   good_morning() {
@@ -84,7 +88,7 @@ module.exports = class extends CustomizedDaily {
   }
 
   async office_cook() {
-    await this.#kojo.office_gift(
+    await this.#kojo.office_cook(
       get_chara_talk(this.id),
       get_chara_talk(0),
       sys_get_colored_callname(this.id, 0),
@@ -101,9 +105,8 @@ module.exports = class extends CustomizedDaily {
   }
 
   async office_rest() {
-    await this.#kojo.office_study(
+    await this.#kojo.office_rest(
       get_chara_talk(this.id),
-      get_chara_talk(1),
       get_chara_talk(0),
       sys_get_colored_callname(this.id, 0),
     );
@@ -118,7 +121,7 @@ module.exports = class extends CustomizedDaily {
 
   async office_game() {
     const edu_marks = new FukuEventMarks();
-    await this.#kojo.office_prepare(
+    await this.#kojo.office_game(
       get_chara_talk(this.id),
       get_chara_talk(0),
       sys_get_colored_callname(this.id, 0),
@@ -258,7 +261,7 @@ module.exports = class extends CustomizedDaily {
       }
       sys_change_hair(this.id);
     } else {
-      await this.#kojo.o_s_dating(
+      await this.#kojo.o_s_shopping(
         kitaru,
         me,
         sys_get_colored_callname(this.id, 0),

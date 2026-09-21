@@ -155,7 +155,7 @@ module.exports = class extends CustomizedDaily {
   }
 
   async s_a_dating() {
-    await this.#kojo['s_a_tree_hollow'](this.#dict);
+    await this.#kojo['s_a_dating'](this.#dict);
   }
 
   async s_r_lunch(pama, me) {
