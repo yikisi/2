@@ -137,7 +137,7 @@ module.exports = {
     f.title = '変態だ！ ……そうなの？（前編）';
     return f;
   })(),
-  rec_end: () => {
+  rec_end: (() => {
     /**
      * @param {CharaTalk} digital
      * @param {CharaTalk} you
@@ -299,5 +299,5 @@ module.exports = {
     };
     f.title = '変態だ！ ……そうなの？（後編）';
     return f;
-  },
+  })(),
 };

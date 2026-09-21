@@ -35,7 +35,7 @@ module.exports = {
     f.title = title;
     return f;
   })(),
-  bs_broken: () => {
+  bs_broken: (() => {
     const title = '折れた翼';
     /**
      * @param {CharaTalk} teio トウカイテイオー
@@ -113,7 +113,7 @@ module.exports = {
     };
     f.title = title;
     return f;
-  },
+  })(),
   ws_95_17_h: (() => {
     const title = '記者会見';
     /**

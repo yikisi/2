@@ -142,7 +142,7 @@ module.exports = {
     f.title = 'Извращенка! Да… да? (Первая часть)';
     return f;
   })(),
-  rec_end: () => {
+  rec_end: (() => {
     /**
      * @param {CharaTalk} digital
      * @param {CharaTalk} you
@@ -318,5 +318,5 @@ module.exports = {
     };
     f.title = 'Извращенка! Это... так? (окончание)';
     return f;
-  },
+  })(),
 };

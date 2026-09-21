@@ -33,7 +33,7 @@ module.exports = {
     f.title = title;
     return f;
   })(),
-  bs_broken: () => {
+  bs_broken: (() => {
     const title = '折翼';
     /**
      * @param {CharaTalk} teio 东海帝王
@@ -105,7 +105,7 @@ module.exports = {
     };
     f.title = title;
     return f;
-  },
+  })(),
   ws_95_17_h: (() => {
     const title = '新闻发布会';
     /**
