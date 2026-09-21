@@ -1452,6 +1452,7 @@ module.exports = {
           await falcon.say_and_wait(`飞鹰子似乎也没有很好的主意呢？`);
           await era.printAndWait(`${you.name} 也没有什么好主意。`);
       }
+      return [ret];
     };
     f.title = title;
     return f;
