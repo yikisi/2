@@ -9406,6 +9406,7 @@ module.exports = {
       await inner_urara.say_as_unknown_and_wait(
         'それから、神社の件。あれもわたくしではございませんよ？',
       );
+      return ret;
     };
     f.title = title;
     return f;

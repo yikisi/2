@@ -9725,6 +9725,7 @@ module.exports = {
       await inner_urara.say_as_unknown_and_wait(
         'И ещё: насчёт святилища — это тоже не я делала, ясно?',
       );
+      return ret;
     };
     f.title = title;
     return f;

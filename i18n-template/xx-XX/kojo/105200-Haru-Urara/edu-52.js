@@ -9441,6 +9441,7 @@ module.exports = {
       await inner_urara.say_as_unknown_and_wait(
         '还有，神社的事，那也不是我做的哦？',
       );
+      return ret;
     };
     f.title = title;
     return f;
