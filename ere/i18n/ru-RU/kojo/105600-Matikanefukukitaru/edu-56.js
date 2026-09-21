@@ -5100,7 +5100,7 @@ module.exports = {
           ]);
           await era.printAndWait([
             you.get_colored_name(),
-            '认真的吃起了巧克力。',
+            ' 认真的吃起了巧克力。',
           ]);
         }
       } else {
@@ -5201,6 +5201,7 @@ module.exports = {
         await kitaru.say_and_wait('呼啊！比想象中还要甜呢！');
         await kitaru.say_and_wait([callname, '，祝你情人节快乐！']);
       }
+      return ret;
     };
     f.title = title;
     return f;

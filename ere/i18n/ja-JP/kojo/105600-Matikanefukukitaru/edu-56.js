@@ -5287,6 +5287,7 @@ module.exports = {
         await kitaru.say_and_wait('ふあっ！ 思ったより甘いです！');
         await kitaru.say_and_wait([callname, '、ハッピーバレンタイン！']);
       }
+      return ret;
     };
     f.title = title;
     return f;

@@ -74,8 +74,8 @@ module.exports = class extends CustomizedLove {
       }
       await this.#kojo[89](acute, get_chara_talk(20), me, callname);
       era.println();
-      get_attr_and_print_in_event(100, [0, 0, 0, 10], 0, undefined, true);
-      await sys_love_uma_in_event(100);
+      get_attr_and_print_in_event(100, [0, 0, 0, 10], 0, void 0, true);
+      await sys_love_uma_in_event(this.id);
       return true;
     }
   }
@@ -107,7 +107,7 @@ module.exports = class extends CustomizedLove {
       await quick_into_sex(100);
       await this.#kojo['99-end'](acute, callname);
       era.println();
-      get_attr_and_print_in_event(100, undefined, 66, true);
+      get_attr_and_print_in_event(100, void 0, 66, void 0, true);
       add_jewel_reward(100, 10, 200);
       era.set('mark:100:苦痛', 0);
       era.set('mark:100:羞耻', 0);
