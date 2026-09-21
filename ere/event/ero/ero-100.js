@@ -24,10 +24,10 @@ const { i18n } = require('#/i18n/selector');
 
 class AcuteNormalCommunications extends EroNormalCommunications {
   async kiss(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.kiss(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.kiss(
+    await i18n().kojo[this.id].ero.kiss(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -37,10 +37,10 @@ class AcuteNormalCommunications extends EroNormalCommunications {
   }
 
   async french_kiss(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.french_kiss(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.french_kiss(
+    await i18n().kojo[this.id].ero.french_kiss(
       defender,
       attacker,
       sys_get_colored_callname(attacker.id, defender.id),
@@ -49,10 +49,10 @@ class AcuteNormalCommunications extends EroNormalCommunications {
   }
 
   async relax(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.relax(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.relax(
+    await i18n().kojo[this.id].ero.relax(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -61,16 +61,16 @@ class AcuteNormalCommunications extends EroNormalCommunications {
   }
 
   async lure(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.lure(attacker, defender, hook);
     }
     hook.arg = EroNormalCommunications.check_lure_success(
       attacker.id,
       defender.id,
     );
-    await i18n().kojo[100].ero.lure(
-      defender.id,
-      attacker.id,
+    await i18n().kojo[this.id].ero.lure(
+      defender,
+      attacker,
       sys_get_colored_callname(defender.id, attacker.id),
       sys_get_colored_callname(attacker.id, defender.id),
       hook.arg,
@@ -78,41 +78,41 @@ class AcuteNormalCommunications extends EroNormalCommunications {
   }
 
   async talk(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.talk(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.talk(
-      defender.id,
-      attacker.id,
+    await i18n().kojo[this.id].ero.talk(
+      defender,
+      attacker,
       sys_get_colored_callname(defender.id, attacker.id),
       sys_get_colored_callname(attacker.id, defender.id),
     );
   }
 
   async switch(attacker, defender) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.switch(attacker, defender);
     }
-    await i18n().kojo[100].ero.talk(
-      defender.id,
-      attacker.id,
+    await i18n().kojo[this.id].ero.switch(
+      defender,
+      attacker,
       sys_get_colored_callname(defender.id, attacker.id),
       sys_get_colored_callname(attacker.id, defender.id),
     );
   }
 
   async resist(attacker, defender, hook, extra_flag) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.resist(attacker, defender, hook, extra_flag);
     }
-    await i18n().kojo[100].ero.talk(
-      defender.id,
-      attacker.id,
+    await i18n().kojo[this.id].ero.resist(
+      defender,
+      attacker,
       sys_get_colored_callname(defender.id, attacker.id),
       sys_get_colored_callname(attacker.id, defender.id),
       (extra_flag.success = EroNormalCommunications.check_resist_success(
         0,
-        100,
+        this.id,
       )),
     );
   }
@@ -122,11 +122,11 @@ class AcuteNormalCommunications extends EroNormalCommunications {
       attacker.id === 0
         ? { me: attacker, acute: defender }
         : { me: defender, acute: attacker };
-    await i18n().kojo[100].ero.gargle(
+    await i18n().kojo[this.id].ero.gargle(
       acute,
       me,
-      sys_get_colored_callname(100, 0),
-      sys_get_colored_callname(0, 100),
+      sys_get_colored_callname(this.id, 0),
+      sys_get_colored_callname(0, this.id),
     );
   }
 
@@ -135,21 +135,21 @@ class AcuteNormalCommunications extends EroNormalCommunications {
       attacker.id === 0
         ? { me: attacker, acute: defender }
         : { me: defender, acute: attacker };
-    await i18n().kojo[100].ero.wipe_body(
+    await i18n().kojo[this.id].ero.wipe_body(
       acute,
       me,
-      sys_get_colored_callname(100, 0),
-      sys_get_colored_callname(0, 100),
+      sys_get_colored_callname(this.id, 0),
+      sys_get_colored_callname(0, this.id),
     );
   }
 }
 
 class AcuteNormalMakingOuts extends EroNormalMakingOuts {
   async pet_ear(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.pet_ear(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.pet_ear(
+    await i18n().kojo[this.id].ero.pet_ear(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -159,10 +159,10 @@ class AcuteNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async pull_ear(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.pull_ear(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.pull_ear(
+    await i18n().kojo[this.id].ero.pull_ear(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -171,24 +171,24 @@ class AcuteNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async pet_breast(attacker, defender, hook) {
-    if (defender.id !== 100 || defender.sex_code === 1) {
+    if (defender.id !== this.id || defender.sex_code === 1) {
       return await super.pet_breast(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.pet_breast(
+    await i18n().kojo[this.id].ero.pet_breast(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
       sys_get_colored_callname(attacker.id, defender.id),
       hook.arg,
-      get_breast_cup(100, true) >= 'C',
+      get_breast_cup(this.id, true) >= 'C',
     );
   }
 
   async pet_nipple(attacker, defender, hook) {
-    if (defender.id !== 100 || defender.sex_code === 1) {
+    if (defender.id !== this.id || defender.sex_code === 1) {
       return await super.pet_nipple(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.pet_nipple(
+    await i18n().kojo[this.id].ero.pet_nipple(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -198,10 +198,10 @@ class AcuteNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async pet_clitoris(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.pet_clitoris(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.pet_clitoris(
+    await i18n().kojo[this.id].ero.pet_clitoris(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -211,10 +211,10 @@ class AcuteNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async finger_fuck(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.finger_fuck(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.finger_fuck(
+    await i18n().kojo[this.id].ero.finger_fuck(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -224,10 +224,10 @@ class AcuteNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async prepare_virgin(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.prepare_virgin(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.prepare_virgin(
+    await i18n().kojo[this.id].ero.prepare_virgin(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -235,10 +235,10 @@ class AcuteNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async stimulate_g_spot_by_finger(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.stimulate_g_spot_by_finger(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.stimulate_g_spot_by_finger(
+    await i18n().kojo[this.id].ero.stimulate_g_spot_by_finger(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -248,10 +248,10 @@ class AcuteNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async pet_anal(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.pet_anal(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.pet_anal(
+    await i18n().kojo[this.id].ero.pet_anal(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -261,10 +261,10 @@ class AcuteNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async prepare_anal(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.prepare_anal(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.prepare_anal(
+    await i18n().kojo[this.id].ero.prepare_anal(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -273,10 +273,10 @@ class AcuteNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async pet_leg(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.pet_leg(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.pet_leg(
+    await i18n().kojo[this.id].ero.pet_leg(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -286,10 +286,10 @@ class AcuteNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async pet_tail(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.pet_tail(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.pet_tail(
+    await i18n().kojo[this.id].ero.pet_tail(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -299,10 +299,10 @@ class AcuteNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async pull_tail(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.pull_tail(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.pull_tail(
+    await i18n().kojo[this.id].ero.pull_tail(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -311,10 +311,10 @@ class AcuteNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async cunnilingus(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.cunnilingus(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.cunnilingus(
+    await i18n().kojo[this.id].ero.cunnilingus(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -323,10 +323,10 @@ class AcuteNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async suck_virgin(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.suck_virgin(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.suck_virgin(
+    await i18n().kojo[this.id].ero.suck_virgin(
       defender,
       attacker,
       sys_get_colored_callname(attacker.id, defender.id),
@@ -334,10 +334,10 @@ class AcuteNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async ask_blow_job(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.ask_blow_job(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.ask_blow_job(
+    await i18n().kojo[this.id].ero.ask_blow_job(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -346,10 +346,10 @@ class AcuteNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async ask_deep_blow_job(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.ask_deep_blow_job(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.ask_deep_blow_job(
+    await i18n().kojo[this.id].ero.ask_deep_blow_job(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -357,10 +357,10 @@ class AcuteNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async force_blow_job(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.force_blow_job(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.force_blow_job(
+    await i18n().kojo[this.id].ero.force_blow_job(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -369,17 +369,17 @@ class AcuteNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async force_deep_blow_job(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.force_deep_blow_job(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.force_deep_blow_job(defender);
+    await i18n().kojo[this.id].ero.force_deep_blow_job(defender);
   }
 
   async ask_hand_job(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.ask_hand_job(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.ask_hand_job(
+    await i18n().kojo[this.id].ero.ask_hand_job(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -388,10 +388,10 @@ class AcuteNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async ask_hand_and_blow_job(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.ask_hand_and_blow_job(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.ask_hand_and_blow_job(
+    await i18n().kojo[this.id].ero.ask_hand_and_blow_job(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -399,10 +399,10 @@ class AcuteNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async force_hand_job(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.force_hand_job(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.force_hand_job(
+    await i18n().kojo[this.id].ero.force_hand_job(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -411,10 +411,10 @@ class AcuteNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async force_hand_and_blow_job(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.force_hand_and_blow_job(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.force_hand_and_blow_job(
+    await i18n().kojo[this.id].ero.force_hand_and_blow_job(
       defender,
       attacker,
       sys_get_colored_callname(attacker.id, defender.id),
@@ -422,43 +422,43 @@ class AcuteNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async ask_tit_job(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.ask_tit_job(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.ask_tit_job(
+    await i18n().kojo[this.id].ero.ask_tit_job(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
       sys_get_colored_callname(attacker.id, defender.id),
-      get_breast_cup(100, true) >= 'C',
+      get_breast_cup(this.id, true) >= 'C',
     );
   }
 
   async ask_tit_and_blow_job(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.ask_tit_and_blow_job(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.ask_tit_and_blow_job(defender, attacker);
+    await i18n().kojo[this.id].ero.ask_tit_and_blow_job(defender, attacker);
   }
 
   async fuck_tit(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.fuck_tit(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.fuck_tit(
+    await i18n().kojo[this.id].ero.fuck_tit(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
       sys_get_colored_callname(attacker.id, defender.id),
-      get_breast_cup(100, true) >= 'C',
+      get_breast_cup(this.id, true) >= 'C',
     );
   }
 
   async fuck_tit_and_mouth(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.fuck_tit_and_mouth(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.fuck_tit_and_mouth(
+    await i18n().kojo[this.id].ero.fuck_tit_and_mouth(
       defender,
       attacker,
       sys_get_colored_callname(attacker.id, defender.id),
@@ -466,10 +466,10 @@ class AcuteNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async suck_anal(attacker, defender, hook) {
-    if (attacker.id !== 100) {
+    if (attacker.id !== this.id) {
       return await super.suck_anal(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.suck_anal(
+    await i18n().kojo[this.id].ero.suck_anal(
       attacker,
       defender,
       sys_get_colored_callname(attacker.id, defender.id),
@@ -478,10 +478,10 @@ class AcuteNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async suck_nipple(attacker, defender, hook) {
-    if (defender.id !== 100 || defender.sex_code === 1) {
+    if (defender.id !== this.id || defender.sex_code === 1) {
       return await super.suck_nipple(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.suck_nipple(
+    await i18n().kojo[this.id].ero.suck_nipple(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -490,10 +490,10 @@ class AcuteNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async bite_nipple(attacker, defender, hook) {
-    if (defender.id !== 100 || defender.sex_code === 1) {
+    if (defender.id !== this.id || defender.sex_code === 1) {
       return await super.bite_nipple(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.bite_nipple(
+    await i18n().kojo[this.id].ero.bite_nipple(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -502,10 +502,10 @@ class AcuteNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async ask_milk_and_hand_job(attacker, defender, hook) {
-    if (defender.id !== 100 || defender.sex_code === 1) {
+    if (defender.id !== this.id || defender.sex_code === 1) {
       return await super.ask_milk_and_hand_job(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.ask_milk_and_hand_job(
+    await i18n().kojo[this.id].ero.ask_milk_and_hand_job(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -514,10 +514,10 @@ class AcuteNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async milk(attacker, defender, hook) {
-    if (attacker.id !== 100 || attacker.sex_code === 1) {
+    if (attacker.id !== this.id || attacker.sex_code === 1) {
       return await super.milk(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.milk(
+    await i18n().kojo[this.id].ero.milk(
       attacker,
       defender,
       sys_get_colored_callname(attacker.id, defender.id),
@@ -526,10 +526,10 @@ class AcuteNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async ask_non_penetrative(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.ask_non_penetrative(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.ask_non_penetrative(
+    await i18n().kojo[this.id].ero.ask_non_penetrative(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -539,10 +539,10 @@ class AcuteNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async sixty_nine(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.sixty_nine(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.sixty_nine(
+    await i18n().kojo[this.id].ero.sixty_nine(
       defender,
       attacker,
       sys_get_colored_callname(attacker.id, defender.id),
@@ -550,10 +550,10 @@ class AcuteNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async ask_hair_fuck(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.ask_hair_fuck(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.ask_hair_fuck(
+    await i18n().kojo[this.id].ero.ask_hair_fuck(
       defender,
       attacker,
       sys_get_colored_callname(attacker.id, defender.id),
@@ -562,10 +562,10 @@ class AcuteNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async force_hair_fuck(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.force_hair_fuck(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.force_hair_fuck(
+    await i18n().kojo[this.id].ero.force_hair_fuck(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -574,10 +574,10 @@ class AcuteNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async ask_armpit_intercourse(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.ask_armpit_intercourse(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.ask_armpit_intercourse(
+    await i18n().kojo[this.id].ero.ask_armpit_intercourse(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -586,10 +586,10 @@ class AcuteNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async force_armpit_intercourse(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.force_armpit_intercourse(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.force_armpit_intercourse(
+    await i18n().kojo[this.id].ero.force_armpit_intercourse(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -598,10 +598,10 @@ class AcuteNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async ask_foot_job(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.ask_foot_job(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.ask_foot_job(
+    await i18n().kojo[this.id].ero.ask_foot_job(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -609,10 +609,10 @@ class AcuteNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async force_foot_job(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.force_foot_job(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.force_foot_job(
+    await i18n().kojo[this.id].ero.force_foot_job(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -620,10 +620,10 @@ class AcuteNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async ask_tail_job(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.ask_tail_job(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.ask_tail_job(
+    await i18n().kojo[this.id].ero.ask_tail_job(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -632,10 +632,10 @@ class AcuteNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async force_tail_job(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.force_tail_job(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.force_tail_job(
+    await i18n().kojo[this.id].ero.force_tail_job(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -646,10 +646,10 @@ class AcuteNormalMakingOuts extends EroNormalMakingOuts {
 
 class AcuteNormalFucking extends EroNormalFucking {
   async missionary(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.missionary(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.missionary(
+    await i18n().kojo[this.id].ero.missionary(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -659,10 +659,10 @@ class AcuteNormalFucking extends EroNormalFucking {
   }
 
   async missionary_anal_sex(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.missionary_anal_sex(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.missionary_anal_sex(
+    await i18n().kojo[this.id].ero.missionary_anal_sex(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -688,10 +688,10 @@ class AcuteNormalFucking extends EroNormalFucking {
   }
 
   async doggy_style(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.doggy_style(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.doggy_style(
+    await i18n().kojo[this.id].ero.doggy_style(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -701,10 +701,10 @@ class AcuteNormalFucking extends EroNormalFucking {
   }
 
   async doggy_style_anal_sex(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.doggy_style_anal_sex(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.doggy_style_anal_sex(
+    await i18n().kojo[this.id].ero.doggy_style_anal_sex(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -726,10 +726,10 @@ class AcuteNormalFucking extends EroNormalFucking {
   }
 
   async sitting(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.sitting(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.sitting(
+    await i18n().kojo[this.id].ero.sitting(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -739,10 +739,10 @@ class AcuteNormalFucking extends EroNormalFucking {
   }
 
   async hug_sitting(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.hug_sitting(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.hug_sitting(
+    await i18n().kojo[this.id].ero.hug_sitting(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -752,10 +752,10 @@ class AcuteNormalFucking extends EroNormalFucking {
   }
 
   async standing(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.standing(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.standing(
+    await i18n().kojo[this.id].ero.standing(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -765,10 +765,10 @@ class AcuteNormalFucking extends EroNormalFucking {
   }
 
   async hug_standing(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.hug_standing(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.hug_standing(
+    await i18n().kojo[this.id].ero.hug_standing(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -778,10 +778,10 @@ class AcuteNormalFucking extends EroNormalFucking {
   }
 
   async suspended_congress(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.suspended_congress(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.suspended_congress(
+    await i18n().kojo[this.id].ero.suspended_congress(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -791,10 +791,10 @@ class AcuteNormalFucking extends EroNormalFucking {
   }
 
   async fucked_suspended_congress(attacker, defender, hook) {
-    if (attacker.id !== 100) {
+    if (attacker.id !== this.id) {
       return await super.fucked_suspended_congress(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.fucked_suspended_congress(
+    await i18n().kojo[this.id].ero.fucked_suspended_congress(
       attacker,
       defender,
       sys_get_colored_callname(attacker.id, defender.id),
@@ -804,10 +804,10 @@ class AcuteNormalFucking extends EroNormalFucking {
   }
 
   async hug_suspended_congress(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.hug_suspended_congress(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.hug_suspended_congress(
+    await i18n().kojo[this.id].ero.hug_suspended_congress(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -818,10 +818,10 @@ class AcuteNormalFucking extends EroNormalFucking {
   }
 
   async ask_cowgirl(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.ask_cowgirl(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.ask_cowgirl(
+    await i18n().kojo[this.id].ero.ask_cowgirl(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -831,10 +831,10 @@ class AcuteNormalFucking extends EroNormalFucking {
   }
 
   async stimulate_g_spot(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.stimulate_g_spot(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.stimulate_g_spot(
+    await i18n().kojo[this.id].ero.stimulate_g_spot(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -842,10 +842,10 @@ class AcuteNormalFucking extends EroNormalFucking {
   }
 
   async stimulate_large_intestine(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.stimulate_large_intestine(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.stimulate_large_intestine(
+    await i18n().kojo[this.id].ero.stimulate_large_intestine(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -854,14 +854,13 @@ class AcuteNormalFucking extends EroNormalFucking {
   }
 
   async stimulate_womb(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.stimulate_womb(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.stimulate_womb(
+    await i18n().kojo[this.id].ero.stimulate_womb(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
-      sys_get_colored_callname(attacker.id, defender.id),
     );
   }
 
@@ -872,10 +871,10 @@ class AcuteNormalFucking extends EroNormalFucking {
 
 class AcuteNormalSm extends EroNormalSm {
   async insult(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.insult(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.insult(
+    await i18n().kojo[this.id].ero.insult(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -896,13 +895,13 @@ class AcuteNormalSm extends EroNormalSm {
   }
 
   async hit_anal(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.hit_anal(attacker, defender, hook);
     }
     if (hook.arg && defender.sex_code === 1) {
       return;
     }
-    await i18n().kojo[100].ero.hit_anal(
+    await i18n().kojo[this.id].ero.hit_anal(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -924,10 +923,10 @@ class AcuteNormalSm extends EroNormalSm {
   }
 
   async hit_anal_hard(attacker, defender, hook) {
-    if (defender.id !== 100 || defender.sex_code === 1) {
+    if (defender.id !== this.id || defender.sex_code === 1) {
       return await super.hit_anal_hard(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.hit_anal_hard(
+    await i18n().kojo[this.id].ero.hit_anal_hard(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -935,10 +934,10 @@ class AcuteNormalSm extends EroNormalSm {
   }
 
   async hit_face_by_penis(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.hit_face_by_penis(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.hit_face_by_penis(
+    await i18n().kojo[this.id].ero.hit_face_by_penis(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -950,7 +949,7 @@ class AcuteNormalSm extends EroNormalSm {
 
 class AcuteNormalOrgy extends EroNormalOrgy {
   async ask_double_blow_job(attacker, defender, supporter, hook) {
-    if (attacker.id !== 0 || defender.id !== 100) {
+    if (attacker.id !== 0 || defender.id !== this.id) {
       return await super.ask_double_blow_job(
         attacker,
         defender,
@@ -958,7 +957,7 @@ class AcuteNormalOrgy extends EroNormalOrgy {
         hook,
       );
     }
-    await i18n().kojo[100].ero.ask_double_blow_job(
+    await i18n().kojo[this.id].ero.ask_double_blow_job(
       defender,
       attacker,
       supporter,
@@ -975,7 +974,11 @@ class AcuteNormalOrgy extends EroNormalOrgy {
   }
 
   async double_suck_nipple(attacker, defender, supporter, hook) {
-    if (attacker.id !== 0 || defender.id !== 100 || defender.sex_code === 1) {
+    if (
+      attacker.id !== 0 ||
+      defender.id !== this.id ||
+      defender.sex_code === 1
+    ) {
       return await super.double_suck_nipple(
         attacker,
         defender,
@@ -983,7 +986,7 @@ class AcuteNormalOrgy extends EroNormalOrgy {
         hook,
       );
     }
-    await i18n().kojo[100].ero.double_suck_nipple(
+    await i18n().kojo[this.id].ero.double_suck_nipple(
       defender,
       attacker,
       supporter,
@@ -1015,10 +1018,10 @@ class AcuteNormalLines extends NormalCommandLines {
 
 class AcuteSleepCommunications extends EroSleepCommunications {
   async kiss(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.kiss(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.sleep_kiss(
+    await i18n().kojo[this.id].ero.sleep_kiss(
       defender,
       attacker,
       sys_get_colored_callname(attacker.id, defender.id),
@@ -1026,10 +1029,10 @@ class AcuteSleepCommunications extends EroSleepCommunications {
   }
 
   async french_kiss(attacker, defender, hook) {
-    if (defender.id !== 100) {
+    if (defender.id !== this.id) {
       return await super.french_kiss(attacker, defender, hook);
     }
-    await i18n().kojo[100].ero.sleep_french_kiss(
+    await i18n().kojo[this.id].ero.sleep_french_kiss(
       defender,
       attacker,
       sys_get_colored_callname(attacker.id, defender.id),

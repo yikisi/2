@@ -44,7 +44,7 @@ const kojo = () => i18n().kojo[32].ero;
 
 class TachyonNormalCommunications extends EroNormalCommunications {
   async kiss(attacker, defender, hook) {
-    if (attacker.id !== 32) {
+    if (attacker.id !== this.id) {
       return await super.kiss(attacker, defender, hook);
     }
     await kojo().kiss(
@@ -55,7 +55,7 @@ class TachyonNormalCommunications extends EroNormalCommunications {
   }
 
   async lure(attacker, defender, hook) {
-    if (attacker.id === 32) {
+    if (attacker.id === this.id) {
       await kojo().lure_by_tachyon(
         attacker,
         defender,
@@ -79,14 +79,14 @@ class TachyonNormalCommunications extends EroNormalCommunications {
 
 class TachyonNormalMakingOuts extends EroNormalMakingOuts {
   async pet_breast(attacker, defender, hook) {
-    if (defender.id !== 32 || defender.sex_code === 1) {
+    if (defender.id !== this.id || defender.sex_code === 1) {
       return await super.pet_breast(attacker, defender, hook);
     }
     await kojo().pet_breast(defender, attacker);
   }
 
   async finger_fuck(attacker, defender, hook) {
-    if (defender.id !== 32) {
+    if (defender.id !== this.id) {
       return await super.finger_fuck(attacker, defender, hook);
     }
     await kojo().finger_fuck(
@@ -99,7 +99,7 @@ class TachyonNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async prepare_virgin(attacker, defender, hook) {
-    if (defender.id !== 32) {
+    if (defender.id !== this.id) {
       return await super.prepare_virgin(attacker, defender, hook);
     }
     await kojo().prepare_virgin(
@@ -111,7 +111,7 @@ class TachyonNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async pet_anal(attacker, defender, hook) {
-    if (defender.id !== 32 || !hook.arg) {
+    if (defender.id !== this.id || !hook.arg) {
       return await super.pet_anal(attacker, defender, hook);
     }
     await kojo().pet_anal(
@@ -123,7 +123,7 @@ class TachyonNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async prepare_anal(attacker, defender, hook) {
-    if (defender.id !== 32 || !hook.arg) {
+    if (defender.id !== this.id || !hook.arg) {
       return await super.prepare_anal(attacker, defender, hook);
     }
     await kojo().prepare_anal(
@@ -135,14 +135,14 @@ class TachyonNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async ask_blow_job(attacker, defender, hook) {
-    if (defender.id !== 32 || !hook.arg) {
+    if (defender.id !== this.id || !hook.arg) {
       return await super.ask_blow_job(attacker, defender, hook);
     }
     await kojo().ask_blow_job(defender);
   }
 
   async ask_deep_blow_job(attacker, defender, hook) {
-    if (defender.id !== 32 || !hook.arg) {
+    if (defender.id !== this.id || !hook.arg) {
       return await super.ask_deep_blow_job(attacker, defender, hook);
     }
     await kojo().ask_deep_blow_job(
@@ -153,7 +153,7 @@ class TachyonNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async force_blow_job(attacker, defender, hook) {
-    if (defender.id !== 32 || !hook.arg) {
+    if (defender.id !== this.id || !hook.arg) {
       return await super.force_blow_job(attacker, defender, hook);
     }
     await kojo().force_blow_job(
@@ -165,7 +165,7 @@ class TachyonNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async force_deep_blow_job(attacker, defender, hook) {
-    if (defender.id !== 32 || !hook.arg) {
+    if (defender.id !== this.id || !hook.arg) {
       return await super.force_deep_blow_job(attacker, defender, hook);
     }
     await kojo().force_deep_blow_job(
@@ -175,7 +175,7 @@ class TachyonNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async blow_job(attacker, defender, hook) {
-    if (attacker.id !== 32) {
+    if (attacker.id !== this.id) {
       return await super.blow_job(attacker, defender, hook);
     }
     await kojo().blow_job(
@@ -188,14 +188,14 @@ class TachyonNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async ask_hand_job(attacker, defender, hook) {
-    if (defender.id !== 32 || !hook.arg) {
+    if (defender.id !== this.id || !hook.arg) {
       return await super.ask_hand_job(attacker, defender, hook);
     }
     await kojo().ask_hand_job(defender);
   }
 
   async ask_tit_job(attacker, defender, hook) {
-    if (defender.id !== 32 || !hook.arg) {
+    if (defender.id !== this.id || !hook.arg) {
       return await super.ask_tit_job(attacker, defender, hook);
     }
     await kojo().ask_tit_job(
@@ -207,7 +207,7 @@ class TachyonNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async fuck_tit(attacker, defender, hook) {
-    if (defender.id !== 32) {
+    if (defender.id !== this.id) {
       return await super.fuck_tit(attacker, defender, hook);
     }
     await kojo().fuck_tit(
@@ -220,7 +220,7 @@ class TachyonNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async tit_job(attacker, defender, hook) {
-    if (attacker.id !== 32 || !hook.arg) {
+    if (attacker.id !== this.id || !hook.arg) {
       return await super.tit_job(attacker, defender, hook);
     }
     await kojo().tit_job(
@@ -233,7 +233,7 @@ class TachyonNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async tit_and_blow_job(attacker, defender, hook) {
-    if (attacker.id !== 32 || !hook.arg) {
+    if (attacker.id !== this.id || !hook.arg) {
       return await super.tit_and_blow_job(attacker, defender, hook);
     }
     await kojo().tit_and_blow_job(
@@ -243,7 +243,7 @@ class TachyonNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async ask_non_penetrative(attacker, defender, hook) {
-    if (defender.id !== 32) {
+    if (defender.id !== this.id) {
       return await super.ask_non_penetrative(attacker, defender, hook);
     }
     await kojo().ask_non_penetrative(defender);
@@ -254,7 +254,11 @@ class TachyonNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async self_finger_fuck(attacker, defender, hook) {
-    if (attacker.id !== 32 || defender.id !== 0 || defender.sex_code === 0) {
+    if (
+      attacker.id !== this.id ||
+      defender.id !== 0 ||
+      defender.sex_code === 0
+    ) {
       return await super.self_finger_fuck(attacker, defender, hook);
     }
     await kojo().self_finger_fuck(
@@ -295,14 +299,14 @@ class TachyonNormalFucking extends EroNormalFucking {
   }
 
   async hug_standing(attacker, defender, hook) {
-    if (defender.id !== 32 || !hook.arg) {
+    if (defender.id !== this.id || !hook.arg) {
       return await super.hug_standing(attacker, defender, hook);
     }
     await kojo().hug_standing(defender);
   }
 
   async stimulate_g_spot(attacker, defender, hook) {
-    if (defender.id !== 32 || !hook.arg) {
+    if (defender.id !== this.id || !hook.arg) {
       return await super.stimulate_g_spot(attacker, defender, hook);
     }
     await kojo().stimulate_g_spot(
@@ -312,7 +316,7 @@ class TachyonNormalFucking extends EroNormalFucking {
   }
 
   async ask_stimulate_glans_by_virgin(attacker, defender, hook) {
-    if (defender.id !== 32 || !hook.arg) {
+    if (defender.id !== this.id || !hook.arg) {
       return await super.ask_stimulate_glans_by_virgin(
         attacker,
         defender,
@@ -323,7 +327,7 @@ class TachyonNormalFucking extends EroNormalFucking {
   }
 
   async ask_fuck(attacker, defender, hook) {
-    if (attacker.id !== 32 || !hook.arg) {
+    if (attacker.id !== this.id || !hook.arg) {
       return await super.ask_fuck(attacker, defender, hook);
     }
     if (Math.random() < 0.5) {
@@ -341,7 +345,7 @@ class TachyonNormalFucking extends EroNormalFucking {
 
 class TachyonNormalSm extends EroNormalSm {
   async hit_anal(attacker, defender, hook) {
-    if (defender.id !== 32) {
+    if (defender.id !== this.id) {
       return await super.hit_anal(attacker, defender, hook);
     }
     await kojo().hit_anal(
@@ -354,7 +358,7 @@ class TachyonNormalSm extends EroNormalSm {
   }
 
   async hit_face(attacker, defender, hook) {
-    if (defender.id !== 32) {
+    if (defender.id !== this.id) {
       return await super.hit_face(attacker, defender, hook);
     }
     await kojo().hit_face(
@@ -370,7 +374,7 @@ class TachyonNormalItems extends EroNormalItems {
   async use_item(attacker, defender, hook, extra_flag) {
     if (
       attacker.id === 0 &&
-      defender.id === 32 &&
+      defender.id === this.id &&
       extra_flag.stay === void 0 &&
       extra_flag.item === item_enum.love_eggs &&
       extra_flag.part === part_enum.anal
@@ -412,20 +416,20 @@ module.exports = class extends CustomizedEro {
     const callname = sys_get_colored_callname(this.id, 0);
     const life_marks = new TachyonLifeMarks();
     const me = get_chara_talk(0);
-    const tachyon = get_chara_talk(32);
+    const tachyon = get_chara_talk(this.id);
     if (
       sys_check_awake(0) &&
-      sys_check_awake(32) &&
+      sys_check_awake(this.id) &&
       me.sex_code > 0 &&
       tachyon.sex_code !== 1
     ) {
       if (era.getCharactersInTrain().length === 2) {
         if (
           check_pregnant_unprotect(0) &&
-          check_pregnant_unprotect(32) &&
-          era.get('love:32') >= 75 &&
+          check_pregnant_unprotect(this.id) &&
+          era.get(`love:${this.id}`) >= 75 &&
           life_marks.reward < 3 &&
-          era.get('cflag:32:位置') === 0
+          era.get(`cflag:${this.id}:位置`) === 0
         ) {
           life_marks.reward++;
           switch (life_marks.reward) {
@@ -438,37 +442,39 @@ module.exports = class extends CustomizedEro {
                 callname,
               );
               set_stain(0, part_enum.penis, stain_enum.semen);
-              set_stain(32, part_enum.virgin, stain_enum.secretion);
+              set_stain(this.id, part_enum.virgin, stain_enum.secretion);
               await quick_make_love(
-                new EroParticipant(32, part_enum.hand),
-                new EroParticipant(32, part_enum.virgin),
+                new EroParticipant(this.id, part_enum.hand),
+                new EroParticipant(this.id, part_enum.virgin),
                 false,
               );
               await quick_make_love(
                 new EroParticipant(0, part_enum.penis),
-                new EroParticipant(32, part_enum.body),
+                new EroParticipant(this.id, part_enum.body),
                 false,
               );
               await quick_make_love(
-                new EroParticipant(32, part_enum.hit),
-                new EroParticipant(32, part_enum.mouth, -0.5),
+                new EroParticipant(this.id, part_enum.hit),
+                new EroParticipant(this.id, part_enum.mouth, -0.5),
                 false,
               );
               await quick_make_love(
-                new EroParticipant(32, part_enum.mouth),
+                new EroParticipant(this.id, part_enum.mouth),
                 new EroParticipant(0, part_enum.penis),
                 false,
               );
               set_palam_to_max(0, part_enum.penis);
-              set_palam_to_max(32, part_enum.mouth);
+              set_palam_to_max(this.id, part_enum.mouth);
               await quick_make_love(
-                new EroParticipant(32, part_enum.mouth),
+                new EroParticipant(this.id, part_enum.mouth),
                 new EroParticipant(0, part_enum.penis),
                 false,
               );
               break;
             case 2:
-              if (get_expansion(get_penis_size(0), 32, part_enum.virgin) > 1) {
+              if (
+                get_expansion(get_penis_size(0), this.id, part_enum.virgin) > 1
+              ) {
                 life_marks.reward--;
                 return;
               }
@@ -480,37 +486,39 @@ module.exports = class extends CustomizedEro {
                 callname,
               );
               set_stain(0, part_enum.penis, stain_enum.semen);
-              set_stain(32, part_enum.virgin, stain_enum.secretion);
+              set_stain(this.id, part_enum.virgin, stain_enum.secretion);
               await quick_make_love(
                 new EroParticipant(0, part_enum.penis),
-                new EroParticipant(32, part_enum.virgin),
+                new EroParticipant(this.id, part_enum.virgin),
                 false,
               );
               await quick_make_love(
                 new EroParticipant(0, part_enum.hit),
-                new EroParticipant(32, part_enum.anal),
+                new EroParticipant(this.id, part_enum.anal),
                 false,
               );
               await quick_make_love(
                 new EroParticipant(0, part_enum.hand),
-                new EroParticipant(32, part_enum.breast),
+                new EroParticipant(this.id, part_enum.breast),
                 false,
               );
               set_palam_to_max(0, part_enum.penis);
-              set_palam_to_max(32, part_enum.virgin);
+              set_palam_to_max(this.id, part_enum.virgin);
               await quick_make_love(
                 new EroParticipant(0, part_enum.penis),
-                new EroParticipant(32, part_enum.virgin),
+                new EroParticipant(this.id, part_enum.virgin),
                 false,
               );
               await quick_make_love(
-                new EroParticipant(32, part_enum.mouth),
+                new EroParticipant(this.id, part_enum.mouth),
                 new EroParticipant(0, part_enum.penis),
                 false,
               );
               break;
             case 3:
-              if (get_expansion(get_penis_size(0), 32, part_enum.anal) > 1) {
+              if (
+                get_expansion(get_penis_size(0), this.id, part_enum.anal) > 1
+              ) {
                 life_marks.reward--;
                 return;
               }
@@ -522,29 +530,29 @@ module.exports = class extends CustomizedEro {
                 callname,
               );
               set_stain(0, part_enum.penis, stain_enum.semen);
-              set_stain(32, part_enum.anal, stain_enum.anal);
+              set_stain(this.id, part_enum.anal, stain_enum.anal);
               await quick_make_love(
                 new EroParticipant(0, part_enum.penis),
-                new EroParticipant(32, part_enum.anal),
+                new EroParticipant(this.id, part_enum.anal),
                 false,
               );
               await quick_make_love(
                 new EroParticipant(0, part_enum.hand),
-                new EroParticipant(32, part_enum.anal),
+                new EroParticipant(this.id, part_enum.anal),
                 false,
               );
               set_palam_to_max(0, part_enum.penis);
-              set_palam_to_max(32, part_enum.anal);
+              set_palam_to_max(this.id, part_enum.anal);
               if (tachyon.sex_code === 0) {
-                set_palam_to_max(32, part_enum.clitoris);
+                set_palam_to_max(this.id, part_enum.clitoris);
               }
               await quick_make_love(
                 new EroParticipant(0, part_enum.penis),
-                new EroParticipant(32, part_enum.anal),
+                new EroParticipant(this.id, part_enum.anal),
                 false,
               );
           }
-        } else if (sys_check_cuckold(32)) {
+        } else if (sys_check_cuckold(this.id)) {
           await kojo().ero_start_cuckold(
             tachyon,
             callname,
@@ -568,7 +576,7 @@ module.exports = class extends CustomizedEro {
     if (
       era.get('flag:角色性别') !== 1 &&
       era.get('cflag:0:性别') > 0 &&
-      sys_check_awake(32) &&
+      sys_check_awake(this.id) &&
       era.getCharactersInTrain().includes(25) &&
       sys_check_awake(25) &&
       sys_check_cuckold(25)
@@ -585,9 +593,9 @@ module.exports = class extends CustomizedEro {
     const penis_touched_part = era.get('tcvar:0:阴茎接触部位');
     const motion = sys_get_motion(0, this.id);
     if (
-      sys_check_awake(32) &&
+      sys_check_awake(this.id) &&
       era.get('tflag:强奸') !== 0 &&
-      penis_touched_part.owner === 32
+      penis_touched_part.owner === this.id
     ) {
       const last_action = era.get('tflag:前回行动'),
         other_action = era.get('tflag:对手行动'),
@@ -595,11 +603,11 @@ module.exports = class extends CustomizedEro {
       if (
         penis_touched_part.part === part_enum.mouth &&
         era.get('nowex:0:阴茎高潮') > 0 &&
-        era.get('nowex:32:饮精量') > 0
+        era.get(`nowex:${this.id}:饮精量`) > 0
       ) {
         if (
           (master === 0 && last_action === ero_hooks.ask_tit_and_blow_job) ||
-          (master === 32 && other_action === ero_hooks.tit_and_blow_job)
+          (master === this.id && other_action === ero_hooks.tit_and_blow_job)
         ) {
           await kojo().cum_in_mouth_tr_tit(tachyon, me, callname);
         } else if (
@@ -609,7 +617,7 @@ module.exports = class extends CustomizedEro {
           await kojo().cum_in_throat_force(tachyon, me);
         } else if (
           (master !== 0 || last_action !== ero_hooks.ask_deep_blow_job) &&
-          (master !== 32 || other_action !== ero_hooks.deep_blow_job)
+          (master !== this.id || other_action !== ero_hooks.deep_blow_job)
         ) {
           await kojo().cum_in_throat(tachyon, me, callname);
         }
@@ -620,13 +628,15 @@ module.exports = class extends CustomizedEro {
         await kojo().cum_in_tit(tachyon, me, callname);
       } else if (
         penis_touched_part.part === part_enum.clitoris &&
-        era.get('nowex:32:外阴高潮') + era.get('nowex:32:阴道高潮') > 0
+        era.get(`nowex:${this.id}:外阴高潮`) +
+          era.get(`nowex:${this.id}:阴道高潮`) >
+          0
       ) {
         await kojo().orgasm_non_penetrative(tachyon, callname);
       } else if (
         penis_touched_part.part === part_enum.virgin &&
         era.get('nowex:0:阴茎高潮') > 0 &&
-        era.get('nowex:32:膣内精液') > 0 &&
+        era.get(`nowex:${this.id}:膣内精液`) > 0 &&
         !master &&
         era.get('tcvar:0:上下') === up_enum.up
       ) {
@@ -642,7 +652,7 @@ module.exports = class extends CustomizedEro {
       } else if (
         penis_touched_part.part === part_enum.anal &&
         era.get('nowex:0:阴茎高潮') > 0 &&
-        era.get('nowex:32:肠内精液') > 0 &&
+        era.get(`nowex:${this.id}:肠内精液`) > 0 &&
         !master &&
         era.get('tcvar:0:上下') === up_enum.up &&
         (motion === base_enum.same || motion === base_enum.s_tri)
@@ -656,13 +666,13 @@ module.exports = class extends CustomizedEro {
     if (!sys_check_awake(this.id) || type === mark_enum.ero) {
       return await super.get_mark(level, type, _new);
     }
-    const callname = sys_get_colored_callname(32, 0);
-    const love = era.get('love:32');
-    const tachyon = get_chara_talk(32);
+    const callname = sys_get_colored_callname(this.id, 0);
+    const love = era.get(`love:${this.id}`);
+    const tachyon = get_chara_talk(this.id);
     switch (type) {
       case mark_enum.meek:
         if (level === 3) {
-          get_custom_mec(32).set_callname();
+          get_custom_mec(this.id).set_callname();
         }
       // eslint-disable-next-line no-fallthrough
       case mark_enum.pleasure:

@@ -27,8 +27,8 @@ module.exports = class extends CustomizedEro {
     if (era.get('tflag:强奸') === -1) {
       key = 'ero_start_normal';
     } else if (era.get('tflag:强奸') === 0) {
-      const check_s = era.get('status:44:马跳S') > 0;
-      const check_z = era.get('status:44:超马跳Z') > 0;
+      const check_s = era.get(`status:${this.id}:马跳S`) > 0;
+      const check_z = era.get(`status:${this.id}:超马跳Z`) > 0;
       if (check_s || check_z) {
         if (check_s) {
           dict.DRUG_NAME = di18n.tb_item.get_name(medicine_enum.uma_s);
@@ -53,7 +53,7 @@ module.exports = class extends CustomizedEro {
         }
         return;
       }
-      if (era.get('love:44') < 70) {
+      if (era.get(`love:${this.id}`) < 70) {
         key = 'es_rape';
       } else {
         if (!edu_marks.rape) {

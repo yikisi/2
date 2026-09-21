@@ -28,7 +28,7 @@ module.exports = class extends CustomizedEro {
       !edu_marks.chained_heart &&
       era.get(`love:${this.id}`) >= 50 &&
       era.get(`cflag:${this.id}:性别`) !== 1 &&
-      era.get('tflag:强奸') !== 21
+      era.get('tflag:强奸') !== this.id
     ) {
       edu_marks.chained_heart = 1;
       await print_title_with_kojo(

@@ -38,7 +38,7 @@ function dict() {
 
 class PamaNormalCommunications extends EroNormalCommunications {
   async kiss(attacker, defender, hook) {
-    if (defender.id !== 64 || !hook.arg || defender.sex_code === 1) {
+    if (defender.id !== this.id || !hook.arg || defender.sex_code === 1) {
       return await super.kiss(attacker, defender, hook);
     }
     const edu_marks = new PamaEduMarks();
@@ -50,7 +50,7 @@ class PamaNormalCommunications extends EroNormalCommunications {
   }
 
   async lure(attacker, defender, hook) {
-    if (defender.id !== 64) {
+    if (defender.id !== this.id) {
       return await super.lure(attacker, defender, hook);
     }
     hook.arg = EroNormalCommunications.check_lure_success(
@@ -65,7 +65,7 @@ class PamaNormalCommunications extends EroNormalCommunications {
 
 class PamaNormalMakingOuts extends EroNormalMakingOuts {
   async pet_breast(attacker, defender, hook) {
-    if (defender.id !== 64) {
+    if (defender.id !== this.id) {
       return await super.pet_breast(attacker, defender, hook);
     }
     const edu_marks = new PamaEduMarks();
@@ -78,7 +78,7 @@ class PamaNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async prepare_anal(attacker, defender, hook) {
-    if (defender.id !== 64) {
+    if (defender.id !== this.id) {
       return await super.prepare_anal(attacker, defender, hook);
     }
     const edu_marks = new PamaEduMarks();
@@ -91,7 +91,7 @@ class PamaNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async cunnilingus(attacker, defender, hook) {
-    if (defender.id !== 64) {
+    if (defender.id !== this.id) {
       return await super.cunnilingus(attacker, defender, hook);
     }
     const edu_marks = new PamaEduMarks();
@@ -103,7 +103,7 @@ class PamaNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async ask_blow_job(attacker, defender, hook) {
-    if (defender.id !== 64) {
+    if (defender.id !== this.id) {
       return await super.ask_blow_job(attacker, defender, hook);
     }
     const edu_marks = new PamaEduMarks();
@@ -116,7 +116,7 @@ class PamaNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async ask_deep_blow_job(attacker, defender, hook) {
-    if (defender.id !== 64) {
+    if (defender.id !== this.id) {
       return await super.ask_deep_blow_job(attacker, defender, hook);
     }
     await kojo()['ask_deep_blow_job']({
@@ -126,7 +126,7 @@ class PamaNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async sixty_nine(attacker, defender, hook) {
-    if (defender.id !== 64) {
+    if (defender.id !== this.id) {
       return await super.sixty_nine(attacker, defender, hook);
     }
     const edu_marks = new PamaEduMarks();
@@ -138,7 +138,7 @@ class PamaNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async ask_foot_job(attacker, defender, hook) {
-    if (defender.id !== 64) {
+    if (defender.id !== this.id) {
       return await super.ask_foot_job(attacker, defender, hook);
     }
     const edu_marks = new PamaEduMarks();
@@ -153,7 +153,7 @@ class PamaNormalMakingOuts extends EroNormalMakingOuts {
 
 class PamaNormalFucking extends EroNormalFucking {
   async missionary(attacker, defender, hook) {
-    if (defender.id !== 64) {
+    if (defender.id !== this.id) {
       return await super.missionary(attacker, defender, hook);
     }
     const edu_marks = new PamaEduMarks();
@@ -166,7 +166,7 @@ class PamaNormalFucking extends EroNormalFucking {
   }
 
   async doggy_style(attacker, defender, hook) {
-    if (defender.id !== 64) {
+    if (defender.id !== this.id) {
       return await super.doggy_style(attacker, defender, hook);
     }
     const edu_marks = new PamaEduMarks();
@@ -179,7 +179,7 @@ class PamaNormalFucking extends EroNormalFucking {
   }
 
   async sitting(attacker, defender, hook) {
-    if (defender.id !== 64) {
+    if (defender.id !== this.id) {
       return await super.sitting(attacker, defender, hook);
     }
     const edu_marks = new PamaEduMarks();
@@ -192,7 +192,7 @@ class PamaNormalFucking extends EroNormalFucking {
   }
 
   async hug_standing(attacker, defender, hook) {
-    if (defender.id !== 64) {
+    if (defender.id !== this.id) {
       return await super.hug_standing(attacker, defender, hook);
     }
     const edu_marks = new PamaEduMarks();
@@ -205,7 +205,7 @@ class PamaNormalFucking extends EroNormalFucking {
   }
 
   async ask_cowgirl(attacker, defender, hook) {
-    if (defender.id !== 64) {
+    if (defender.id !== this.id) {
       return await super.ask_cowgirl(attacker, defender, hook);
     }
     const edu_marks = new PamaEduMarks();
@@ -220,7 +220,7 @@ class PamaNormalFucking extends EroNormalFucking {
 
 class PamaNormalSm extends EroNormalSm {
   async hit_anal(attacker, defender, hook) {
-    if (defender.id !== 64) {
+    if (defender.id !== this.id) {
       return await super.hit_anal(attacker, defender, hook);
     }
     const edu_marks = new PamaEduMarks();
@@ -276,7 +276,7 @@ module.exports = class extends CustomizedEro {
     if (!sys_check_awake(this.id) || era.get(`status:${this.id}:超马跳Z`) > 0) {
       return super.ero_start(handle_ero_act);
     }
-    await kojo()()['ero_start'](dict());
+    await kojo()['ero_start'](dict());
   }
 
   async raping_start(supporter) {
@@ -307,7 +307,7 @@ module.exports = class extends CustomizedEro {
   }
 
   async get_mark(level, type, _new) {
-    if (!sys_check_awake(64)) {
+    if (!sys_check_awake(this.id)) {
       return await super.get_mark(level, type, _new);
     }
     switch (type) {
@@ -369,22 +369,22 @@ module.exports = class extends CustomizedEro {
   }
 
   async orgasm(pama, me, callname) {
-    if (era.get('love:64') < 50) {
+    if (era.get(`love:${this.id}`) < 50) {
       return;
     }
     const last_action = era.get('tflag:前回行动');
     const master = era.get('tflag:主导权');
     const motion = sys_get_motion(0, this.id);
     if (era.get('nowex:0:阴茎高潮') > 0) {
-      if (era.get('nowex:64:饮精量') > 0) {
+      if (era.get(`nowex:${this.id}:饮精量`) > 0) {
         if (
           (master === 0 && last_action === ero_hooks.ask_blow_job) ||
-          (master === 64 && last_action === ero_hooks.blow_job)
+          (master === this.id && last_action === ero_hooks.blow_job)
         ) {
           await kojo()['get_semen_blow_job'](dict());
         } else if (
           (master === 0 && last_action === ero_hooks.ask_deep_blow_job) ||
-          (master === 64 && last_action === ero_hooks.deep_blow_job)
+          (master === this.id && last_action === ero_hooks.deep_blow_job)
         ) {
           await kojo()['get_semen_deep_blow_job'](dict());
         } else if (motion === base_enum.diff && pama.sex_code === 0) {
@@ -395,7 +395,7 @@ module.exports = class extends CustomizedEro {
         new EroTouch(0, part_enum.penis).check(this.id, part_enum.foot)
       ) {
         await kojo()['get_semen_foot_job'](dict());
-      } else if (era.get('nowex:64:膣内精液') > 0) {
+      } else if (era.get(`nowex:${this.id}:膣内精液`) > 0) {
         switch (motion) {
           case base_enum.same:
           case base_enum.s_tri:

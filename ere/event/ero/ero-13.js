@@ -229,9 +229,9 @@ class NormalSm extends EroNormalSm {
       return await super.hit_anal(attacker, defender, hook);
     }
     const penis = new EroTouch(0, part_enum.penis);
-    const motion = sys_get_motion(0, 13);
+    const motion = sys_get_motion(0, this.id);
     if (
-      penis.owner !== 13 ||
+      penis.owner !== this.id ||
       penis.part !== part_enum.virgin ||
       (motion !== base_enum.b_same && motion !== base_enum.b_tri)
     ) {

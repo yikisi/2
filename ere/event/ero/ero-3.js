@@ -11,10 +11,10 @@ const { i18n } = require('#/i18n/selector');
 
 class TeioNormalCommunications extends EroNormalCommunications {
   async talk(attacker, defender, hook) {
-    if (defender.id !== 3 || !era.get('status:3:腿伤')) {
+    if (defender.id !== this.id || !era.get('status:3:腿伤')) {
       return await super.talk(attacker, defender, hook);
     }
-    await i18n().kojo[3].ero.talk_with_hurt(
+    await i18n().kojo[this.id].ero.talk_with_hurt(
       defender,
       attacker,
       sys_get_colored_callname(attacker.id, defender.id),
@@ -22,10 +22,10 @@ class TeioNormalCommunications extends EroNormalCommunications {
   }
 
   async lure(attacker, defender, hook) {
-    if (defender.id !== 3) {
+    if (defender.id !== this.id) {
       return await super.lure(attacker, defender, hook);
     }
-    await i18n().kojo[3].ero.lure(
+    await i18n().kojo[this.id].ero.lure(
       defender,
       attacker,
       (hook.arg = EroNormalCommunications.check_lure_success(
@@ -36,19 +36,23 @@ class TeioNormalCommunications extends EroNormalCommunications {
   }
 
   async switch(attacker, defender) {
-    if (defender.id !== 3) {
+    if (defender.id !== this.id) {
       return await super.switch(attacker, defender);
     }
-    await i18n().kojo[3].ero.switch(defender, attacker);
+    await i18n().kojo[this.id].ero.switch(
+      defender,
+      attacker,
+      sys_get_colored_callname(defender.id, attacker.id),
+    );
   }
 }
 
 class TeioNormalMakingOuts extends EroNormalMakingOuts {
   async pet_anal(attacker, defender, hook) {
-    if (defender.id !== 3 || !hook.arg) {
+    if (defender.id !== this.id || !hook.arg) {
       return await super.pet_anal(attacker, defender, hook);
     }
-    await i18n().kojo[3].ero.pet_anal(
+    await i18n().kojo[this.id].ero.pet_anal(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -56,17 +60,17 @@ class TeioNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async prepare_anal(attacker, defender, hook) {
-    if (defender.id !== 3) {
+    if (defender.id !== this.id) {
       return await super.prepare_anal(attacker, defender, hook);
     }
-    await i18n().kojo[3].ero.prepare_anal(defender, attacker);
+    await i18n().kojo[this.id].ero.prepare_anal(defender, attacker);
   }
 
   async ask_foot_job(attacker, defender, hook) {
-    if (defender.id !== 3 || !era.get('status:3:腿伤') || !hook.arg) {
+    if (defender.id !== this.id || !era.get('status:3:腿伤') || !hook.arg) {
       return await super.ask_foot_job(attacker, defender, hook);
     }
-    await i18n().kojo[3].ero.ask_foot_job_with_hurt(
+    await i18n().kojo[this.id].ero.ask_foot_job_with_hurt(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -74,10 +78,10 @@ class TeioNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async force_foot_job(attacker, defender, hook) {
-    if (defender.id !== 3 || !era.get('status:3:腿伤') || !hook.arg) {
+    if (defender.id !== this.id || !era.get('status:3:腿伤') || !hook.arg) {
       return await super.force_foot_job(attacker, defender, hook);
     }
-    await i18n().kojo[3].ero.ask_foot_job_with_hurt(
+    await i18n().kojo[this.id].ero.ask_foot_job_with_hurt(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -85,17 +89,17 @@ class TeioNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async ask_tail_job(attacker, defender, hook) {
-    if (defender.id !== 3) {
+    if (defender.id !== this.id) {
       return await super.ask_tail_job(attacker, defender, hook);
     }
-    await i18n().kojo[3].ero.ask_tail_job(defender, attacker, hook.arg);
+    await i18n().kojo[this.id].ero.ask_tail_job(defender, attacker, hook.arg);
   }
 
   async force_tail_job(attacker, defender, hook) {
-    if (defender.id !== 3) {
+    if (defender.id !== this.id) {
       return await super.force_tail_job(attacker, defender, hook);
     }
-    await i18n().kojo[3].ero.ask_tail_job(defender, attacker, hook.arg);
+    await i18n().kojo[this.id].ero.ask_tail_job(defender, attacker, hook.arg);
   }
 }
 

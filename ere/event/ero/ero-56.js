@@ -30,7 +30,7 @@ const kojo = () => i18n().kojo[56].ero;
 
 class KitaruNormalCommunications extends EroNormalCommunications {
   async kiss(attacker, defender, hook) {
-    if (defender.id !== 56) {
+    if (defender.id !== this.id) {
       return await super.kiss(attacker, defender, hook);
     }
     await kojo().kiss(
@@ -43,7 +43,7 @@ class KitaruNormalCommunications extends EroNormalCommunications {
   }
 
   async french_kiss(attacker, defender, hook) {
-    if (defender.id !== 56) {
+    if (defender.id !== this.id) {
       return await super.french_kiss(attacker, defender, hook);
     }
     await kojo().french_kiss(
@@ -56,7 +56,7 @@ class KitaruNormalCommunications extends EroNormalCommunications {
   }
 
   async talk(attacker, defender, hook) {
-    if (defender.id !== 56) {
+    if (defender.id !== this.id) {
       return await super.talk(attacker, defender, hook);
     }
     await kojo().talk(
@@ -68,10 +68,10 @@ class KitaruNormalCommunications extends EroNormalCommunications {
   }
 
   async lure(attacker, defender, hook) {
-    if (defender.id !== 56) {
+    if (defender.id !== this.id) {
       return await super.lure(attacker, defender, hook);
     }
-    await kojo().talk(
+    await kojo().lure(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -86,7 +86,7 @@ class KitaruNormalCommunications extends EroNormalCommunications {
 
 class KitaruNormalMakingOuts extends EroNormalMakingOuts {
   async pet_ear(attacker, defender, hook) {
-    if (defender.id !== 56) {
+    if (defender.id !== this.id) {
       return await super.pet_ear(attacker, defender, hook);
     }
     await kojo().pet_ear(
@@ -99,7 +99,7 @@ class KitaruNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async pull_ear(attacker, defender, hook) {
-    if (defender.id !== 56) {
+    if (defender.id !== this.id) {
       return await super.pull_ear(attacker, defender, hook);
     }
     await kojo().pull_ear(
@@ -111,7 +111,7 @@ class KitaruNormalMakingOuts extends EroNormalMakingOuts {
 
   async pet_breast(attacker, defender, hook) {
     if (attacker.id === 0) {
-      if (new EroTouch(56, part_enum.virgin).check(0, part_enum.penis)) {
+      if (new EroTouch(this.id, part_enum.virgin).check(0, part_enum.penis)) {
         await kojo().pet_breast_from_back(
           defender,
           attacker,
@@ -136,7 +136,7 @@ class KitaruNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async pet_nipple(attacker, defender, hook) {
-    if (defender.id !== 56) {
+    if (defender.id !== this.id) {
       return await super.pet_nipple(attacker, defender, hook);
     }
     await kojo().pet_nipple(
@@ -148,14 +148,14 @@ class KitaruNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async finger_fuck(attacker, defender, hook) {
-    if (defender.id !== 56) {
+    if (defender.id !== this.id) {
       return await super.finger_fuck(attacker, defender, hook);
     }
     await kojo().finger_fuck(defender, attacker);
   }
 
   async blow_job(attacker, defender, hook) {
-    if (attacker.id !== 56) {
+    if (attacker.id !== this.id) {
       return await super.blow_job(attacker, defender, hook);
     }
     await kojo().blow_job(
@@ -167,7 +167,7 @@ class KitaruNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async ask_blow_job(attacker, defender, hook) {
-    if (defender.id !== 56) {
+    if (defender.id !== this.id) {
       return await super.ask_blow_job(attacker, defender, hook);
     }
     await kojo().ask_blow_job(
@@ -180,7 +180,7 @@ class KitaruNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async force_blow_job(attacker, defender, hook) {
-    await kojo().ask_blow_job(
+    await kojo().force_blow_job(
       defender,
       attacker,
       sys_get_colored_callname(defender.id, attacker.id),
@@ -189,7 +189,7 @@ class KitaruNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async deep_blow_job(attacker, defender, hook) {
-    if (attacker.id !== 56) {
+    if (attacker.id !== this.id) {
       return await super.deep_blow_job(attacker, defender, hook);
     }
     await kojo().deep_blow_job(
@@ -202,7 +202,7 @@ class KitaruNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async ask_deep_blow_job(attacker, defender, hook) {
-    if (defender.id !== 56) {
+    if (defender.id !== this.id) {
       return await super.ask_deep_blow_job(attacker, defender, hook);
     }
     await kojo().ask_deep_blow_job(
@@ -215,7 +215,7 @@ class KitaruNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async force_deep_blow_job(attacker, defender, hook) {
-    if (defender.id !== 56) {
+    if (defender.id !== this.id) {
       return await super.force_deep_blow_job(attacker, defender, hook);
     }
     await kojo().force_deep_blow_job(
@@ -228,7 +228,7 @@ class KitaruNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async hand_job(attacker, defender, hook) {
-    if (attacker.id !== 56) {
+    if (attacker.id !== this.id) {
       return await super.hand_job(attacker, defender, hook);
     }
     await kojo().hand_job(
@@ -240,7 +240,7 @@ class KitaruNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async ask_hand_job(attacker, defender, hook) {
-    if (defender.id !== 56) {
+    if (defender.id !== this.id) {
       return await super.ask_hand_job(attacker, defender, hook);
     }
     await kojo().ask_hand_job(
@@ -252,7 +252,7 @@ class KitaruNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async force_hand_job(attacker, defender, hook) {
-    if (defender.id !== 56) {
+    if (defender.id !== this.id) {
       return await super.force_hand_job(attacker, defender, hook);
     }
     await kojo().force_hand_job(
@@ -265,7 +265,7 @@ class KitaruNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async hand_and_blow_job(attacker, defender, hook) {
-    if (attacker.id !== 56) {
+    if (attacker.id !== this.id) {
       return await super.hand_and_blow_job(attacker, defender, hook);
     }
     await kojo().hand_and_blow_job(
@@ -278,7 +278,7 @@ class KitaruNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async ask_hand_and_blow_job(attacker, defender, hook) {
-    if (defender.id !== 56) {
+    if (defender.id !== this.id) {
       return await super.ask_hand_and_blow_job(attacker, defender, hook);
     }
     await kojo().ask_hand_and_blow_job(
@@ -291,7 +291,7 @@ class KitaruNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async force_hand_and_blow_job(attacker, defender, hook) {
-    if (defender.id !== 56) {
+    if (defender.id !== this.id) {
       return await super.force_hand_and_blow_job(attacker, defender, hook);
     }
     await kojo().force_hand_and_blow_job(
@@ -304,7 +304,7 @@ class KitaruNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async tit_job(attacker, defender, hook) {
-    if (attacker.id !== 56) {
+    if (attacker.id !== this.id) {
       return await super.tit_job(attacker, defender, hook);
     }
     await kojo().tit_job(
@@ -316,7 +316,7 @@ class KitaruNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async ask_tit_job(attacker, defender, hook) {
-    if (defender.id !== 56) {
+    if (defender.id !== this.id) {
       return await super.ask_tit_job(attacker, defender, hook);
     }
     await kojo().ask_tit_job(
@@ -329,7 +329,7 @@ class KitaruNormalMakingOuts extends EroNormalMakingOuts {
   }
 
   async tit_and_blow_job(attacker, defender, hook) {
-    if (attacker.id !== 56) {
+    if (attacker.id !== this.id) {
       return await super.tit_and_blow_job(attacker, defender, hook);
     }
     await kojo().tit_and_blow_job(
@@ -361,7 +361,7 @@ class KitaruNormalMakingOuts extends EroNormalMakingOuts {
 
 class KitaruNormalFucking extends EroNormalFucking {
   async missionary(attacker, defender, hook) {
-    if (defender.id !== 56) {
+    if (defender.id !== this.id) {
       return await super.missionary(attacker, defender, hook);
     }
     if (hook.arg) {
@@ -381,7 +381,7 @@ class KitaruNormalFucking extends EroNormalFucking {
   }
 
   async doggy_style(attacker, defender, hook) {
-    if (defender.id !== 56) {
+    if (defender.id !== this.id) {
       return await super.doggy_style(attacker, defender, hook);
     }
     if (hook.arg) {
@@ -400,7 +400,7 @@ class KitaruNormalFucking extends EroNormalFucking {
   }
 
   async sitting(attacker, defender, hook) {
-    if (defender.id !== 56) {
+    if (defender.id !== this.id) {
       return await super.sitting(attacker, defender, hook);
     }
     if (hook.arg) {
@@ -420,7 +420,7 @@ class KitaruNormalFucking extends EroNormalFucking {
   }
 
   async hug_sitting(attacker, defender, hook) {
-    if (defender.id !== 56) {
+    if (defender.id !== this.id) {
       return await super.hug_sitting(attacker, defender, hook);
     }
     if (hook.arg) {
@@ -439,7 +439,7 @@ class KitaruNormalFucking extends EroNormalFucking {
   }
 
   async standing(attacker, defender, hook) {
-    if (defender.id !== 56) {
+    if (defender.id !== this.id) {
       return await super.standing(attacker, defender, hook);
     }
     await kojo().standing(
@@ -452,7 +452,7 @@ class KitaruNormalFucking extends EroNormalFucking {
   }
 
   async hug_standing(attacker, defender, hook) {
-    if (defender.id !== 56) {
+    if (defender.id !== this.id) {
       return await super.hug_standing(attacker, defender, hook);
     }
     await kojo().hug_standing(
@@ -465,7 +465,7 @@ class KitaruNormalFucking extends EroNormalFucking {
   }
 
   async suspended_congress(attacker, defender, hook) {
-    if (defender.id !== 56) {
+    if (defender.id !== this.id) {
       return await super.suspended_congress(attacker, defender, hook);
     }
     if (hook.arg) {
@@ -485,7 +485,7 @@ class KitaruNormalFucking extends EroNormalFucking {
   }
 
   async hug_suspended_congress(attacker, defender, hook) {
-    if (defender.id !== 56) {
+    if (defender.id !== this.id) {
       return await super.hug_suspended_congress(attacker, defender, hook);
     }
     if (hook.arg) {
@@ -504,7 +504,7 @@ class KitaruNormalFucking extends EroNormalFucking {
   }
 
   async ask_cowgirl(attacker, defender, hook) {
-    if (defender.id !== 56) {
+    if (defender.id !== this.id) {
       return await super.ask_cowgirl(attacker, defender, hook);
     }
     if (hook.arg) {
@@ -524,7 +524,7 @@ class KitaruNormalFucking extends EroNormalFucking {
   }
 
   async ask_stimulate_glans_by_virgin(attacker, defender, hook) {
-    if (defender.id !== 56) {
+    if (defender.id !== this.id) {
       return await super.ask_stimulate_glans_by_virgin(
         attacker,
         defender,
@@ -551,7 +551,7 @@ class KitaruNormalFucking extends EroNormalFucking {
   }
 
   async stimulate_g_spot(attacker, defender, hook) {
-    if (defender.id !== 56) {
+    if (defender.id !== this.id) {
       return await super.stimulate_g_spot(attacker, defender, hook);
     }
     if (hook.arg) {
@@ -570,7 +570,7 @@ class KitaruNormalFucking extends EroNormalFucking {
   }
 
   async ask_fuck(attacker, defender, hook) {
-    if (attacker.id !== 56) {
+    if (attacker.id !== this.id) {
       return await super.ask_fuck(attacker, defender, hook);
     }
     if (
@@ -601,7 +601,7 @@ class KitaruNormalFucking extends EroNormalFucking {
   }
 
   async cowgirl(attacker, defender, hook) {
-    if (attacker.id !== 56) {
+    if (attacker.id !== this.id) {
       return await super.cowgirl(attacker, defender, hook);
     }
     if (hook.arg) {
@@ -620,7 +620,7 @@ class KitaruNormalFucking extends EroNormalFucking {
   }
 
   async stimulate_glans_by_virgin(attacker, defender, hook) {
-    if (attacker.id !== 56) {
+    if (attacker.id !== this.id) {
       return await super.stimulate_glans_by_virgin(attacker, defender, hook);
     }
     await kojo().stimulate_glans_by_virgin(
@@ -632,7 +632,7 @@ class KitaruNormalFucking extends EroNormalFucking {
   }
 
   async ask_stimulate_g_spot(attacker, defender, hook) {
-    if (attacker.id !== 56) {
+    if (attacker.id !== this.id) {
       return await super.ask_stimulate_g_spot(attacker, defender, hook);
     }
     if (
@@ -662,7 +662,7 @@ class KitaruNormalFucking extends EroNormalFucking {
 
 class KitaruNormalSm extends EroNormalSm {
   async ask_insult(attacker, defender, hook) {
-    if (attacker.id !== 56) {
+    if (attacker.id !== this.id) {
       return await super.ask_insult(attacker, defender, hook);
     }
     if (hook.arg && (await ask_action(attacker.id))) {
@@ -681,7 +681,7 @@ class KitaruNormalSm extends EroNormalSm {
   }
 
   async ask_hit_anal(attacker, defender, hook) {
-    if (attacker.id !== 56) {
+    if (attacker.id !== this.id) {
       return await super.ask_hit_anal(attacker, defender, hook);
     }
     if (hook.arg && (await ask_action(attacker.id))) {
@@ -717,7 +717,7 @@ class KitaruNormalLines extends NormalCommandLines {
 
 class KitaruSleepFucking extends EroSleepFucking {
   async stimulate_glans_by_virgin(attacker, defender, hook) {
-    if (attacker.id !== 56) {
+    if (attacker.id !== this.id) {
       return await super.stimulate_glans_by_virgin(attacker, defender, hook);
     }
     if (hook.arg) {
@@ -751,7 +751,7 @@ module.exports = class extends CustomizedEro {
   }
 
   async ero_start(h) {
-    if (era.get('tflag:强奸') >= 0 || !sys_check_awake(56)) {
+    if (era.get('tflag:强奸') >= 0 || !sys_check_awake(this.id)) {
       return;
     }
     await kojo().ero_start(
@@ -764,9 +764,9 @@ module.exports = class extends CustomizedEro {
   async orgasm(kitaru, me, _call) {
     if (era.get('tflag:主导权') === 0) {
       if (
-        era.get('nowex:56:阴道高潮') > 0 &&
+        era.get(`nowex:${this.id}:阴道高潮`) > 0 &&
         era.get('tcvar:0:体位') === motion_enum.stand &&
-        era.get('tcvar:56:体位') === motion_enum.stand
+        era.get(`tcvar:${this.id}:体位`) === motion_enum.stand
       ) {
         switch (sys_get_motion(0, this.id)) {
           case base_enum.same:
@@ -786,11 +786,11 @@ module.exports = class extends CustomizedEro {
   }
 
   async get_mark(level, type, _new) {
-    if (!sys_check_awake(56)) {
+    if (!sys_check_awake(this.id)) {
       return await super.get_mark(level, type, _new);
     }
-    const callname = sys_get_colored_callname(56, 0),
-      kitaru = get_chara_talk(56),
+    const callname = sys_get_colored_callname(this.id, 0),
+      kitaru = get_chara_talk(this.id),
       me = get_chara_talk(0);
     switch (type) {
       case mark_enum.pleasure:

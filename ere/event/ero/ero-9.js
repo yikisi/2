@@ -24,25 +24,25 @@ module.exports = class extends CustomizedEro {
     if (
       era.getCharactersInTrain().length === 2 &&
       sys_check_awake(0) &&
-      sys_check_awake(9) &&
-      !era.get('cflag:9:性别') &&
-      era.get('love:9') >= 50 &&
+      sys_check_awake(this.id) &&
+      !era.get(`cflag:${this.id}:性别`) &&
+      era.get(`love:${this.id}`) >= 50 &&
       era.get('status:0:发情') &&
-      !era.get('exp:9:性爱次数') &&
-      !era.get('status:9:弗隆K') &&
-      !era.get('status:9:弗隆P') &&
+      !era.get(`exp:${this.id}:性爱次数`) &&
+      !era.get(`status:${this.id}:弗隆K`) &&
+      !era.get(`status:${this.id}:弗隆P`) &&
       (era.get('item:弗隆K') || era.get('item:弗隆P'))
     ) {
       era.set('tflag:TS大和T', 1);
-      era.set('tflag:主导权', 9);
+      era.set('tflag:主导权', this.id);
       let item = medicine_enum.fron_k;
       if (!era.get('item:弗隆K')) {
         item = medicine_enum.fron_p;
       }
       era.add(`item:${item}`, -1);
-      await CustomizedEro.run_custom_ero(9, ero_hooks.use_medicine, {
+      await CustomizedEro.run_custom_ero(this.id, ero_hooks.use_medicine, {
         item,
-        user: 9,
+        user: this.id,
         shown: false,
       });
       await print_title_with_kojo(
@@ -73,7 +73,10 @@ module.exports = class extends CustomizedEro {
           default_filter,
           false,
         );
-        if (era.get('tcvar:9:脱力') > 0 || era.get('tcvar:9:逃跑') > 0) {
+        if (
+          era.get(`tcvar:${this.id}:脱力`) > 0 ||
+          era.get(`tcvar:${this.id}:逃跑`) > 0
+        ) {
           flag_rape = false;
         }
       }

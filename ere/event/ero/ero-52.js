@@ -22,7 +22,7 @@ module.exports = class extends CustomizedEro {
   }
 
   async prison(urara, me, callname, hook) {
-    if (!era.get('exp:52:监禁次数')) {
+    if (!era.get(`exp:${this.id}:监禁次数`)) {
       if (
         (await i18n().kojo[this.id].basement.first_prison(
           urara,
@@ -33,17 +33,17 @@ module.exports = class extends CustomizedEro {
       ) {
         era.println();
         const relation_delta =
-          era.get('love:52') * (era.get('flag:极端行为限制') || 1) -
-          era.get('relation:52:0') +
+          era.get(`love:${this.id}`) * (era.get('flag:极端行为限制') || 1) -
+          era.get(`relation:${this.id}:0`) +
           10;
-        if (relation_delta > 0 && sys_like_chara(52, 0, relation_delta)) {
+        if (relation_delta > 0 && sys_like_chara(this.id, 0, relation_delta)) {
           await era.waitAnyKey();
         }
       } else {
-        era.set('exp:52:监禁次数', 1);
+        era.set(`exp:${this.id}:监禁次数`, 1);
         hook.override = true;
         era.println();
-        sys_like_chara(52, 0, -get_random_value(75, 125)) &&
+        sys_like_chara(this.id, 0, -get_random_value(75, 125)) &&
           (await era.waitAnyKey());
       }
     }

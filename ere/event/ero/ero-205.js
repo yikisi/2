@@ -22,42 +22,42 @@ module.exports = class extends CustomizedEro {
     if (
       treve.sex_code === 0 &&
       !life_marks.slavery &&
-      era.get('love:205') < 50 &&
-      era.get('mark:205:欢愉') >= 2 &&
-      era.get('mark:205:同心') >= 2 &&
-      era.get('tcvar:205:发情') &&
+      era.get(`love:${this.id}`) < 50 &&
+      era.get(`mark:${this.id}:欢愉`) >= 2 &&
+      era.get(`mark:${this.id}:同心`) >= 2 &&
+      era.get(`tcvar:${this.id}:发情`) &&
       era.get('tflag:强奸') <= 0
     ) {
       life_marks.slavery = 1;
       await i18n().kojo[this.id].ero.ero_start(treve, get_chara_talk(0));
       await quick_make_love(
         new EroParticipant(0, part_enum.mouth),
-        new EroParticipant(205, part_enum.breast),
+        new EroParticipant(this.id, part_enum.breast),
         false,
       );
       await quick_make_love(
         new EroParticipant(0, part_enum.mouth),
-        new EroParticipant(205, part_enum.breast),
+        new EroParticipant(this.id, part_enum.breast),
         false,
       );
       await quick_make_love(
         new EroParticipant(0, part_enum.hand),
-        new EroParticipant(205, part_enum.breast),
+        new EroParticipant(this.id, part_enum.breast),
         false,
       );
       await quick_make_love(
         new EroParticipant(0, part_enum.abuse),
-        new EroParticipant(205, part_enum.masochism),
+        new EroParticipant(this.id, part_enum.masochism),
         false,
       );
       await quick_make_love(
         new EroParticipant(0, part_enum.hand),
-        new EroParticipant(205, part_enum.virgin),
+        new EroParticipant(this.id, part_enum.virgin),
         false,
       );
       await quick_make_love(
         new EroParticipant(0, part_enum.hand),
-        new EroParticipant(205, part_enum.body),
+        new EroParticipant(this.id, part_enum.body),
         false,
       );
     }
@@ -77,19 +77,19 @@ module.exports = class extends CustomizedEro {
       );
       await quick_make_love(
         new EroParticipant(0, part_enum.mouth),
-        new EroParticipant(205, part_enum.body),
+        new EroParticipant(this.id, part_enum.body),
         false,
       );
       await quick_make_love(
         new EroParticipant(0, part_enum.abuse),
-        new EroParticipant(205, part_enum.masochism),
+        new EroParticipant(this.id, part_enum.masochism),
         false,
       );
-      set_palam_to_max(205, part_enum.clitoris);
-      set_palam_to_max(205, part_enum.virgin);
+      set_palam_to_max(this.id, part_enum.clitoris);
+      set_palam_to_max(this.id, part_enum.virgin);
       await quick_make_love(
         new EroParticipant(0, part_enum.foot),
-        new EroParticipant(205, part_enum.clitoris),
+        new EroParticipant(this.id, part_enum.clitoris),
         false,
       );
     }

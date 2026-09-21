@@ -18,7 +18,7 @@ module.exports = class extends CustomizedEro {
     hook,
     extra_flag,
   ) {
-    if (extra_flag.mother_id !== 7) {
+    if (extra_flag.mother_id !== this.id) {
       return super.report_pregnant_between_weeks(
         gold_ship,
         me,
@@ -39,7 +39,7 @@ module.exports = class extends CustomizedEro {
   }
 
   async have_baby(father, mother, child) {
-    if (mother.id !== 7 || father.id > 0) {
+    if (mother.id !== this.id || father.id > 0) {
       return await super.have_baby(father, mother, child);
     }
     era.drawLine();

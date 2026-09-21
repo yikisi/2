@@ -8,8 +8,8 @@ const { i18n } = require('#/i18n/selector');
 
 class VariationRapeFucking extends EroRapeFucking {
   async standing(attacker, defender, hook) {
-    if (hook.arg && defender.id === 117) {
-      return i18n().kojo[134].ero['rape_standing']({
+    if (hook.arg && defender.id === this.id) {
+      return i18n().kojo[defender.id].ero['rape_standing']({
         CALL_117: sys_get_callname(defender.id, attacker.id),
         CHARA: defender.name,
         COLOR: defender.color,

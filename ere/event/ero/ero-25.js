@@ -31,9 +31,9 @@ module.exports = class extends CustomizedEro {
 
   async ero_start(h) {
     if (
-      sys_check_awake(25) &&
+      sys_check_awake(this.id) &&
       sys_check_awake(0) &&
-      era.getCharactersInTrain().indexOf(25) !== -1 &&
+      era.getCharactersInTrain().indexOf(this.id) !== -1 &&
       era.getCharactersInTrain().indexOf(32) !== -1 &&
       sys_check_cuckold(32)
     ) {
@@ -47,10 +47,10 @@ module.exports = class extends CustomizedEro {
 
   async ero_end(h) {
     if (
-      sys_check_awake(25) &&
+      sys_check_awake(this.id) &&
       sys_check_awake(32) &&
       sys_check_awake(0) &&
-      era.get('love:25') >= 90 &&
+      era.get(`love:${this.id}`) >= 90 &&
       era.get('love:32') >= 90 &&
       era.getCharactersInTrain().length === 2
     ) {
@@ -62,16 +62,16 @@ module.exports = class extends CustomizedEro {
           i18n().kojo[32].ero,
           'betrayed1',
           get_chara_talk(32),
-          get_chara_talk(25),
+          get_chara_talk(this.id),
           get_chara_talk(0),
           sys_get_colored_callname(32, 0),
-          sys_get_colored_callname(25, 0),
+          sys_get_colored_callname(this.id, 0),
         );
         init_ero(32);
         await masturbate(32);
       } else if (
         tachyon_marks.ntr_mark === 3 &&
-        era.get('cflag:25:妊娠回合计时') === 0 &&
+        era.get(`cflag:${this.id}:妊娠回合计时`) === 0 &&
         era.get('cflag:32:妊娠回合计时') === 0
       ) {
         tachyon_marks.ntr_mark = 4;
@@ -79,12 +79,12 @@ module.exports = class extends CustomizedEro {
           i18n().kojo[32].ero,
           'betrayed2',
           get_chara_talk(32),
-          get_chara_talk(25),
+          get_chara_talk(this.id),
           get_chara_talk(0),
           sys_get_colored_callname(32, 0),
-          sys_get_colored_callname(32, 25),
-          sys_get_colored_callname(25, 0),
-          sys_get_colored_callname(25, 32),
+          sys_get_colored_callname(32, this.id),
+          sys_get_colored_callname(this.id, 0),
+          sys_get_colored_callname(this.id, 32),
           sys_get_callname(0, 32),
           {
             ...di18n.tb_item.get_titled_item(103),
@@ -103,11 +103,11 @@ module.exports = class extends CustomizedEro {
           );
         } else {
           set_palam_to_max(0, part_enum.penis);
-          set_palam_to_max(25, part_enum.virgin);
+          set_palam_to_max(this.id, part_enum.virgin);
           set_palam_to_max(32, part_enum.virgin);
           await quick_make_love(
             new EroParticipant(0, part_enum.penis),
-            new EroParticipant(25, part_enum.virgin),
+            new EroParticipant(this.id, part_enum.virgin),
             false,
           );
           await quick_make_love(
@@ -117,12 +117,12 @@ module.exports = class extends CustomizedEro {
           );
           await quick_make_love(
             new EroParticipant(32, part_enum.mouth),
-            new EroParticipant(25, part_enum.virgin),
+            new EroParticipant(this.id, part_enum.virgin),
             false,
           );
           await quick_make_love(
             new EroParticipant(32, part_enum.mouth),
-            new EroParticipant(25, part_enum.foot),
+            new EroParticipant(this.id, part_enum.foot),
             false,
           );
           era.set('talent:32:绿帽癖', 1);
