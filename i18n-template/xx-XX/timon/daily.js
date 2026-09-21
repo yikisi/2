@@ -807,9 +807,9 @@ module.exports = {
    */
   async office_gift(chara, you) {
     await era.printAndWait([
-      you.get_colored_name(),
-      ' 与 ',
       chara.get_colored_name(),
+      ' 收到了 ',
+      you.get_colored_name(),
       ' 的礼物，感到十分的高兴。',
     ]);
   },

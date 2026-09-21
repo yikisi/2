@@ -816,9 +816,9 @@ module.exports = {
    */
   async office_gift(chara, you) {
     await era.printAndWait([
-      you.get_colored_name(),
-      ' is delighted by the gift from ',
       chara.get_colored_name(),
+      ' is delighted by the gift from ',
+      you.get_colored_name(),
       '.',
     ]);
   },
