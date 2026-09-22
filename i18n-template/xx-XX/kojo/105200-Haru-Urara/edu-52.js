@@ -12624,11 +12624,7 @@ module.exports = {
           '结果呢，周围全都是失望的叹息声，还有很多人因此生气了，很没道理吧……',
         );
         era.println();
-        await urara_say_in_lines([
-          '嗯，那时 ',
-          call_30,
-          ' 受了很多委屈呢……',
-        ]);
+        await urara_say_in_lines(['嗯，那时 ', call_30, ' 受了很多委屈呢……']);
         era.println();
         await rice.say_and_wait(['但是，米浴现在果然还是胜利者吧……']);
         await rice.say_and_wait([
@@ -12778,9 +12774,7 @@ module.exports = {
         '又是这样呢，所谓的朋友依旧净说些只为了关心的话。',
       );
       era.println();
-      await urara_say_in_lines(
-        '不可以这么说哦？而且你也是乌拉拉的朋友嘛。',
-      );
+      await urara_say_in_lines('不可以这么说哦？而且你也是乌拉拉的朋友嘛。');
       era.println();
       await inner_urara.say_as_unknown_and_wait([
         '我知道哦，但乌拉拉也明白不是吗？',
