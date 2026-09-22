@@ -5,6 +5,10 @@ const EreWebpackPlugin = require('ere-webpack-plugin');
 const out_type = 'self';
 
 module.exports = {
+  cache: {
+    type: 'filesystem',
+    cacheDirectory: resolve(__dirname, 'node_modules/.cache/webpack'),
+  },
   context: resolve(__dirname, 'ere/'),
   entry: {
     era: {
