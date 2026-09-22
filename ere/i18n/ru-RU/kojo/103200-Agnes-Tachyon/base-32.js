@@ -1,7 +1,6 @@
 /**
  * @file 爱丽速子 - 地下室
  * @author 幽白書
- * @author Matemi
  */
 const era = require('#/era-electron');
 

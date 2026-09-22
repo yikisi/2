@@ -279,4 +279,12 @@ module.exports = class extends require('#/i18n/zh-CN/race/clothes') {
   113601 = 'Divine Raiment';
   113701 = 'Miracle Author';
   114301 = 'Lueur Angélique';
+  102030 = 'Капризный оранж у моря';
+  104323 = 'Кусь-кусь☆озорница';
+  107430 = 'Элегантный шифон у моря';
+  111330 = "Snatchin' Hearts ♡";
+  112723 = 'Стойкое пурпурное пламя';
+  114101 = "Fate's Chosen Star";
+  114501 = 'Monochrome GM';
+  114901 = 'Дивная тьма перед рассветом';
 };

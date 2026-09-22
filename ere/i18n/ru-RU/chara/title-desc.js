@@ -347,4 +347,10 @@ module.exports = class extends require('#/i18n/zh-CN/chara/title-desc') {
     "Выиграть Takarazuka Kinen, Prix de l'Arc de Triomphe, Tenno Sho (Spring) и дважды подряд Arima Kinen.";
   904801 =
     'Победами в G1 принести тренеру 500 и более очков общественной репутации.';
+  114101 =
+    'Выиграть тройную корону (Satsuki Sho, Japan Derby, Kikuka Sho) и Japan Cup старшего года, а базовый параметр силы довести до 1 200 и выше.';
+  114501 =
+    'Выиграть Mainichi Hai, тройную корону (Satsuki Sho, Japan Derby, Kikuka Sho), Takarazuka Kinen, Tenno Sho (Autumn), Japan Cup и Arima Kinen, а базовый параметр интеллекта довести до 1 200 и выше.';
+  114901 =
+    'Выиграть тройную корону кобыл (Oka Sho, Yushun Himba, Shuka Sho) и Queen Elizabeth II Cup старшего года, а базовый параметр воли довести до 1 200 и выше.';
 };

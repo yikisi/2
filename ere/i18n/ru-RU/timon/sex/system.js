@@ -218,15 +218,13 @@ module.exports = {
       } else {
         await printAndWait([
           chara.get_colored_name(),
-          ' выпила подмешанный чай и провалилась в сон…',
+          ' выпила подмешанный чай и постепенно потеряла сознание…',
         ]);
       }
     } else {
       await printAndWait([
-        you.get_colored_name(),
-        ' чутко заметила неладное ',
         chara.get_colored_name(),
-        '……',
+        ' чутко заметила неладное……',
       ]);
       await printAndWait([
         chara.get_colored_name(),

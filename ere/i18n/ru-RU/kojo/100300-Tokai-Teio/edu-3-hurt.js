@@ -35,7 +35,7 @@ module.exports = {
     f.title = title;
     return f;
   })(),
-  // TODO
+  // TODO Synced from the current i18n template; this new scene is not translated yet.
   bs_broken: (() => {
     const title = '折翼';
     /**

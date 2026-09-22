@@ -488,88 +488,88 @@ aoba_sho_5:
 ws_tie:
   title: 见证我们的羁绊
   lines:
-    - 阿尔丹最近一直以前所未有的气势强迫着自己进行训练。
-    - %YOU%担心这样下去恐怕会在德比之前就会倒下，于是%YOU%叫住了%SEX%，打算让%SEX%休息下。
-    - acc: 1
-      content: 「阿尔丹，休息一下吧。」
-    - color: %COLOR%
-      content:
-        - fontWeight: bold
-          content: %CHARA%
-        - 「……请让我再练一下，我没事……的……」
-    - 还没有说完阿尔丹突然向前倒下，千钧一发之前%YOU%伸手扶住了%SEX%。
-    - color: %COLOR%
-      content:
-        - fontWeight: bold
-          content: %CHARA%
-        - 「%CALLNAME%……十分……抱歉……」
-    - 「到这里就已经是极限了，阿尔丹……你最近在压榨透支自己的身体极限。」
-    - color: %COLOR%
-      content:
-        - fontWeight: bold
-          content: %CHARA%
-        - 「我……我想要，击碎名为极限的障壁！我不想就此后退，我不愿，因名为极限的词语，而就此放弃！」
-    - color: %COLOR%
-      content:
-        - fontWeight: bold
-          content: %CHARA%
-        - 「不去超越『现在』的话，就无法赢下『日本德比』吧，我就再也无法做到超越姐姐大人的光迹这种……理想呢……」
-    - 阿尔丹抬起头，紫色的眼瞳里满是坚定。
-    - color: %COLOR%
-      content:
-        - fontWeight: bold
-          content: %CHARA%
-        - 「我和%CALL_69%和%CALL_72%的关系一直都很好，正因如此我才确信，%THEY%二人会带着无法比拟光辉出现在『日本德比』。」
-    - color: %COLOR%
-      content:
-        - fontWeight: bold
-          content: %CHARA%
-        - 「而依旧停留在『青叶赏』的我绝不会是%THEY%的对手，也不可能超越姐姐大人的威光，这近乎只是我个人的直感，所以……」
-    - acc: 1
-      key: select
-      content: 「……超越极限吗……」
-      comment: （全属性+5，技能点数+30，好感+20，爱慕+2）
-      lines:
-        - （阿尔丹一定正确的捕捉到自己与樱花千代王%THEY%的差距，而樱花千代王那边也相信着阿尔丹一定会追上%THEY%）
-        - （这场『日本德比』会成为%THEY%想要实现的愿望和彼此的羁绊也是激烈交锋的战场，如果为了让阿尔丹取得胜利，独立于她姐姐的光芒的话……）
-        - acc: 1
-          content: 「尽全力锻炼到最后一刻吧，阿尔丹最后的防线，就由我来守护。」
-        - color: %COLOR%
-          content:
-            - fontWeight: bold
-              content: %CHARA%
-            - 「——！%CALLNAME%，您……一直，都在和我见证同样的景色呢。」
-        - 「毕竟我是你的训练员。休息一下，检查一下状态再开始锻炼吧。」
-        - color: %COLOR%
-          content:
-            - fontWeight: bold
-              content: %CHARA%
-            - 「是！那就让我把『日本德比』之前还剩下的时间全部化作为我的光辉，闪耀于穹顶的极光……就用我的光辉，来击坠她的灿烂与辉耀吧。」
-        #增加好感20和爱慕2，全属性+5，技能点+30
-    - acc: 2
-      content: 「但是你已经到极限了。」
-      comment: （全属性+3，技能点数+15）
-      lines:
-        - color: %COLOR%
-          content:
-            - fontWeight: bold
-              content: %CHARA%
-            - 「但是……我——」
-        - 「不，这个计划已经是你现在的极限了，你现在应该立刻休息，确保不会在比赛前就将自己累倒。」
-        - 看着似乎还想继续的阿尔丹，担心%SEX%身体的%YOU%严词拒绝了%SEX%。
-        - color: %COLOR%
-          content:
-            - fontWeight: bold
-              content: %CHARA%
-            - 「……！……我知道了，谢谢您今天的指导，是我太过于急躁了，对不起，%CALLNAME%。」
-        - 「我知道你很期待和你最好的朋友一决胜负的心情，但是如果在参赛前就倒下那才是最糟糕的。」
-        - color: %COLOR%
-          content:
-            - fontWeight: bold
-              content: %CHARA%
-            - 「是，谢谢%CALLNAME%您对我的开导。那么今天我就先休息了，明天见。」
-        - 阿尔丹对%YOU%微微鞠躬后，便回去了。
-        #全属性+3，技能点+15
+  - 阿尔丹最近一直以前所未有的气势强迫着自己进行训练。
+  - %YOU%担心这样下去恐怕会在德比之前就会倒下，于是%YOU%叫住了%SEX%，打算让%SEX%休息下。
+  - acc: 1
+    content: 「阿尔丹，休息一下吧。」
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「……请让我再练一下，我没事……的……」
+  - 还没有说完阿尔丹突然向前倒下，千钧一发之前%YOU%伸手扶住了%SEX%。
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「%CALLNAME%……十分……抱歉……」
+  - 「到这里就已经是极限了，阿尔丹……你最近在压榨透支自己的身体极限。」
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「我……我想要，击碎名为极限的障壁！我不想就此后退，我不愿，因名为极限的词语，而就此放弃！」
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「不去超越『现在』的话，就无法赢下『日本德比』吧，我就再也无法做到超越姐姐大人的光迹这种……理想呢……」
+  - 阿尔丹抬起头，紫色的眼瞳里满是坚定。
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「我和%CALL_69%和%CALL_72%的关系一直都很好，正因如此我才确信，%THEY%二人会带着无法比拟光辉出现在『日本德比』。」
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「而依旧停留在『青叶赏』的我绝不会是%THEY%的对手，也不可能超越姐姐大人的威光，这近乎只是我个人的直感，所以……」
+  - acc: 1
+    key: select
+    content: 「……超越极限吗……」
+    comment: （全属性+5，技能点数+30，好感+20，爱慕+2）
+    lines:
+      - （阿尔丹一定正确的捕捉到自己与樱花千代王%THEY%的差距，而樱花千代王那边也相信着阿尔丹一定会追上%THEY%）
+      - （这场『日本德比』会成为%THEY%想要实现的愿望和彼此的羁绊也是激烈交锋的战场，如果为了让阿尔丹取得胜利，独立于她姐姐的光芒的话……）
+      - acc: 1
+        content: 「尽全力锻炼到最后一刻吧，阿尔丹最后的防线，就由我来守护。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「——！%CALLNAME%，您……一直，都在和我见证同样的景色呢。」
+      - 「毕竟我是你的训练员。休息一下，检查一下状态再开始锻炼吧。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「是！那就让我把『日本德比』之前还剩下的时间全部化作为我的光辉，闪耀于穹顶的极光……就用我的光辉，来击坠她的灿烂与辉耀吧。」
+      #增加好感20和爱慕2，全属性+5，技能点+30
+  - acc: 2
+    content: 「但是你已经到极限了。」
+    comment: （全属性+3，技能点数+15）
+    lines:
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「但是……我——」
+      - 「不，这个计划已经是你现在的极限了，你现在应该立刻休息，确保不会在比赛前就将自己累倒。」
+      - 看着似乎还想继续的阿尔丹，担心%SEX%身体的%YOU%严词拒绝了%SEX%。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「……！……我知道了，谢谢您今天的指导，是我太过于急躁了，对不起，%CALLNAME%。」
+      - 「我知道你很期待和你最好的朋友一决胜负的心情，但是如果在参赛前就倒下那才是最糟糕的。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「是，谢谢%CALLNAME%您对我的开导。那么今天我就先休息了，明天见。」
+      - 阿尔丹对%YOU%微微鞠躬后，便回去了。
+      #全属性+3，技能点+15
 
 # 日本德比赛前鼓励
 toky_yus:
