@@ -379,54 +379,54 @@ module.exports = {
               ),
           );
       }
-      if (era.get('flag:当前月') >= 3 && era.get('flag:当前月') <= 5) {
-        buffer.push(
-          () =>
-            falcon.say_and_wait(
-              `万物萌发之时正适合现在的飞鹰子呢！春天的飞鹰子也会茁壮成长吧！`,
-            ),
-          () =>
-            falcon.say_and_wait(
-              '看着努力破土而出的小草们，飞鹰子不知道为什么非常感动呢！',
-            ),
-        );
-      }
-      if (era.get('flag:当前月') >= 6 && era.get('flag:当前月') <= 8) {
-        buffer.push(
-          () =>
-            falcon.say_and_wait(
-              `说起夏天的话就会让人想到海滩，和煦的海风吹走炎热的气息，浪涛带来的潮湿气息让人心情澎拜呢。真想赶快飞到沙滩呢！`,
-            ),
-          () =>
-            falcon.say_and_wait(
-              `夏天的话就让飞鹰子带给大家凉爽与快乐的演出吧！等到夏季合宿的时候在海滩边举行的演唱会一定会让大家更加关注我呢！`,
-            ),
-        );
-      }
-      if (era.get('flag:当前月') >= 9 && era.get('flag:当前月') <= 11) {
-        buffer.push(
-          () =>
-            falcon.say_and_wait(
-              `艺术之秋，食欲之秋……还有${falcon.uma_sex_title}偶像之秋⭐在红杏之下举办一场演唱会吧！`,
-            ),
-          () =>
-            falcon.say_and_wait(
-              `${callname}要一起去看赏叶吗？秋天一直被大家认为是多愁善感的季节呢……不过飞鹰子会让大家都露出笑容的！`,
-            ),
-        );
-      }
-      if (era.get('flag:当前月') >= 12 || era.get('flag:当前月') <= 2) {
-        buffer.push(
-          () =>
-            falcon.say_and_wait(
-              `冬天让粉丝们的大家都瑟瑟发抖了呢……所以作为${falcon.uma_sex_title}偶像的飞鹰子要将这份温暖从冬天手里交还到粉丝们的手中！现在就去开演唱会吧！`,
-            ),
-          () =>
-            falcon.say_and_wait(
-              `冬天适合坐在温暖的围炉之前，吃着橘子看着电视上的艺人们进行表演，就这样期待着春天的到来。`,
-            ),
-        );
-      }
+    }
+    if (era.get('flag:当前月') >= 3 && era.get('flag:当前月') <= 5) {
+      buffer.push(
+        () =>
+          falcon.say_and_wait(
+            `万物萌发之时正适合现在的飞鹰子呢！春天的飞鹰子也会茁壮成长吧！`,
+          ),
+        () =>
+          falcon.say_and_wait(
+            '看着努力破土而出的小草们，飞鹰子不知道为什么非常感动呢！',
+          ),
+      );
+    }
+    if (era.get('flag:当前月') >= 6 && era.get('flag:当前月') <= 8) {
+      buffer.push(
+        () =>
+          falcon.say_and_wait(
+            `说起夏天的话就会让人想到海滩，和煦的海风吹走炎热的气息，浪涛带来的潮湿气息让人心情澎拜呢。真想赶快飞到沙滩呢！`,
+          ),
+        () =>
+          falcon.say_and_wait(
+            `夏天的话就让飞鹰子带给大家凉爽与快乐的演出吧！等到夏季合宿的时候在海滩边举行的演唱会一定会让大家更加关注我呢！`,
+          ),
+      );
+    }
+    if (era.get('flag:当前月') >= 9 && era.get('flag:当前月') <= 11) {
+      buffer.push(
+        () =>
+          falcon.say_and_wait(
+            `艺术之秋，食欲之秋……还有${falcon.uma_sex_title}偶像之秋⭐在红杏之下举办一场演唱会吧！`,
+          ),
+        () =>
+          falcon.say_and_wait(
+            `${callname}要一起去看赏叶吗？秋天一直被大家认为是多愁善感的季节呢……不过飞鹰子会让大家都露出笑容的！`,
+          ),
+      );
+    }
+    if (era.get('flag:当前月') >= 12 || era.get('flag:当前月') <= 2) {
+      buffer.push(
+        () =>
+          falcon.say_and_wait(
+            `冬天让粉丝们的大家都瑟瑟发抖了呢……所以作为${falcon.uma_sex_title}偶像的飞鹰子要将这份温暖从冬天手里交还到粉丝们的手中！现在就去开演唱会吧！`,
+          ),
+        () =>
+          falcon.say_and_wait(
+            `冬天适合坐在温暖的围炉之前，吃着橘子看着电视上的艺人们进行表演，就这样期待着春天的到来。`,
+          ),
+      );
     }
     await get_random_entry(buffer)();
   },

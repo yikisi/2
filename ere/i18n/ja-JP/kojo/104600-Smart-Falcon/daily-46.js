@@ -408,54 +408,54 @@ module.exports = {
               ),
           );
       }
-      if (era.get('flag:当前月') >= 3 && era.get('flag:当前月') <= 5) {
-        buffer.push(
-          () =>
-            falcon.say_and_wait(
-              `万物が芽吹く季節は、今のファル子にぴったりだよ！ 春のファル子も、ぐんぐん育つはず！`,
-            ),
-          () =>
-            falcon.say_and_wait(
-              '土を割って出てくる小さな草を見てると、ファル子、なんでかすごく感動しちゃう！',
-            ),
-        );
-      }
-      if (era.get('flag:当前月') >= 6 && era.get('flag:当前月') <= 8) {
-        buffer.push(
-          () =>
-            falcon.say_and_wait(
-              `夏といえばビーチだよね。優しい潮風が暑さをさらって、波の湿った匂いが胸を高鳴らせるよ。早く砂浜に飛び込みたい！`,
-            ),
-          () =>
-            falcon.say_and_wait(
-              `夏なら、ファル子がみんなに涼しさと楽しさを届けるライブだよ！ 夏合宿のとき、ビーチで開くコンサートなら、もっと注目されるはず！`,
-            ),
-        );
-      }
-      if (era.get('flag:当前月') >= 9 && era.get('flag:当前月') <= 11) {
-        buffer.push(
-          () =>
-            falcon.say_and_wait(
-              `芸術の秋、食欲の秋……それから${falcon.uma_sex_title}アイドルの秋⭐ 紅葉の下でライブしよ！`,
-            ),
-          () =>
-            falcon.say_and_wait(
-              `${callname}、一緒に紅葉見に行かない？ 秋って、みんな物思いに沈む季節だって言うけど……ファル子はみんなを笑顔にするよ！`,
-            ),
-        );
-      }
-      if (era.get('flag:当前月') >= 12 || era.get('flag:当前月') <= 2) {
-        buffer.push(
-          () =>
-            falcon.say_and_wait(
-              `冬はファンのみんなも震えてるよね……だから${falcon.uma_sex_title}アイドルのファル子が、この暖かさを冬の手からファンの手へ返すよ！ 今からライブ行こ！`,
-            ),
-          () =>
-            falcon.say_and_wait(
-              `冬は温かいこたつの前に座って、みかんを食べながらテレビの芸人さんを見るのが似合うね。そうやって春を待つんだ。`,
-            ),
-        );
-      }
+    }
+    if (era.get('flag:当前月') >= 3 && era.get('flag:当前月') <= 5) {
+      buffer.push(
+        () =>
+          falcon.say_and_wait(
+            `万物が芽吹く季節は、今のファル子にぴったりだよ！ 春のファル子も、ぐんぐん育つはず！`,
+          ),
+        () =>
+          falcon.say_and_wait(
+            '土を割って出てくる小さな草を見てると、ファル子、なんでかすごく感動しちゃう！',
+          ),
+      );
+    }
+    if (era.get('flag:当前月') >= 6 && era.get('flag:当前月') <= 8) {
+      buffer.push(
+        () =>
+          falcon.say_and_wait(
+            `夏といえばビーチだよね。優しい潮風が暑さをさらって、波の湿った匂いが胸を高鳴らせるよ。早く砂浜に飛び込みたい！`,
+          ),
+        () =>
+          falcon.say_and_wait(
+            `夏なら、ファル子がみんなに涼しさと楽しさを届けるライブだよ！ 夏合宿のとき、ビーチで開くコンサートなら、もっと注目されるはず！`,
+          ),
+      );
+    }
+    if (era.get('flag:当前月') >= 9 && era.get('flag:当前月') <= 11) {
+      buffer.push(
+        () =>
+          falcon.say_and_wait(
+            `芸術の秋、食欲の秋……それから${falcon.uma_sex_title}アイドルの秋⭐ 紅葉の下でライブしよ！`,
+          ),
+        () =>
+          falcon.say_and_wait(
+            `${callname}、一緒に紅葉見に行かない？ 秋って、みんな物思いに沈む季節だって言うけど……ファル子はみんなを笑顔にするよ！`,
+          ),
+      );
+    }
+    if (era.get('flag:当前月') >= 12 || era.get('flag:当前月') <= 2) {
+      buffer.push(
+        () =>
+          falcon.say_and_wait(
+            `冬はファンのみんなも震えてるよね……だから${falcon.uma_sex_title}アイドルのファル子が、この暖かさを冬の手からファンの手へ返すよ！ 今からライブ行こ！`,
+          ),
+        () =>
+          falcon.say_and_wait(
+            `冬は温かいこたつの前に座って、みかんを食べながらテレビの芸人さんを見るのが似合うね。そうやって春を待つんだ。`,
+          ),
+      );
     }
     await get_random_entry(buffer)();
   },
