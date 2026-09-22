@@ -1807,12 +1807,17 @@ before_toky_yus:
       content:
         - fontWeight: bold
           content: %CHARA%
-        - 「你知道我的发卡……是什么花吗？」
-    - 青云天空忽然开口，神秘兮兮的向%YOU%问道。
-    - %YOU%看着%SEX%，发丝柔软地垂在耳边。
-    - 那枚小小的雏菊发卡就嵌在发间，花瓣圆润，簇拥在一起。
+        - 「过来过来～把眼睛闭上～」
+    - 青云天空忽然开口，神秘兮兮的向%YOU%喊道。
+    - %YOU%乖乖的走过去闭上眼，好奇%SEX%在整什么花活。
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「好啦～睁开看看～」
+    - %YOU%睁开眼，看到一个由白色小花组成的花环戴在%SEX%头上
     - 风偶尔吹过，带起几缕碎发，衬得%SEX%整个人像一幅刚画好的水彩。
-    - 「头发很好看。」
+    - 「真美……」
     - %YOU%脱口而出。
     - 青云天空愣了一下。
     - color: %COLOR%
@@ -1823,7 +1828,7 @@ before_toky_yus:
     - 「咳咳——」
     - %YOU%移开视线，清了清嗓子。
     - 「我是说——」
-    - 「发卡——雏菊对吧？」
+    - 「花环——对吧？」
     - color: %COLOR%
       content:
         - fontWeight: bold
@@ -1842,13 +1847,13 @@ before_toky_yus:
         - fontWeight: bold
           content: %CHARA%
         - 「奖励你一朵哦～」
-    - 青云天空笑着把那朵野花举到%YOU%面前。
-    - 轻轻把手中的雏菊别到%YOU%的头上。
+    - 青云天空笑着摘下一朵野花举到%YOU%面前。
+    - 轻轻的别到%YOU%的头上。
     - color: %COLOR%
       content:
         - fontWeight: bold
           content: %CHARA%
-        - 「哼哼～训练员～」
+        - 「训练员～这是雏菊哦～我最喜欢的花～」
     - color: %COLOR%
       content:
         - fontWeight: bold
@@ -2324,7 +2329,7 @@ toky_yus_lose:
         - 「我要靠我自己的策略，一雪前耻。」
     - 说完，%SEX%将毛巾搭在肩上，迈步朝通道深处走去。
     - 脚步不再有丝毫犹豫或沉重，反而比来时更加沉稳、坚定。
-    - 那枚雏菊发卡在%SEX%发间微微一闪，映着通道昏暗的灯光。
+    - 那朵雏菊在%SEX%发间微微一闪。
     - 像一枚沉默的誓言，祝福着%SEX%。
 
 
@@ -2334,7 +2339,7 @@ before_kiku_sho:
     - fontSize: 1.2rem
       content: 比赛的三天前，训练室内——
     - 青云天空站在门口，背着光，看不清表情。
-    - 但%SEX%站得很直，比以往任何时候都要直，那枚雏菊发卡在%SEX%鬓边别得端端正正。
+    - 但%SEX%站得很直，比以往任何时候都要直，那枚菊花发卡在%SEX%鬓边别得端端正正。
     - 青云天空走进来，反手关上门，将门外遥远的喧闹隔成模糊的背景音。
     - %SEX%没有立刻说话，而是在房间里慢慢走了一圈。
     - 指尖依次划过摆放整齐的装备、战术板（上面画着打败小特）、还有窗台。
@@ -3254,7 +3259,7 @@ before_arim_kin_c:
     - fontSize: 1.2rem
       content: 参赛当日，选手准备室——
     - 阳光透过百叶窗，在木地板上切出明暗相间的条纹。
-    - 青云天空已经换好了决胜服，正对着镜子调整头上雏菊发卡。动作一丝不苟，甚至比菊花赏那天更仔细。
+    - 青云天空已经换好了决胜服，正对着镜子调整头上菊花发卡。动作一丝不苟，甚至比菊花赏那天更仔细。
     - 电视里，早间赛事预热节目正以极高的音量播放着：
     - 「……而最大的焦点，无疑是我们的『谋略之星』青云天空！在菊花赏创造了历史性大逃后，%SEX%将如何面对气槽女帝的经验压制、草上飞的精密计算、以及圣王光环王者归来的雪耻斗志？我们有理由相信，%SEX%早已成竹在胸！」
     - 主持人转向嘉宾：「您认为%SEX%今天会采用什么战术？」
@@ -5616,7 +5621,213 @@ tenn_sho_win_s:
 
 
 # 结局
-ws_ending:
+# 完美结局 生涯目标全胜
+perfect_ending:
+  title: 万里远航，征帆归岸
+  lines:
+    - 水面铺满橙红色的霞光，碎金般晃动着。
+    - 短信上写着「速来」，外加一个地址。
+    - 青云天空坐在那截伸出水面的老旧栈桥尽头——你们初次相遇的地方。
+    - 钓竿斜插在身旁，浮漂许久未动。
+    - %SEX%的姿态看起来和当年没什么不同：背带裤一边肩带滑落，头发被晚风吹得有些乱，双脚泡在水里轻轻晃荡。
+    - 但当%YOU%走近时，%SEX%睁开眼看向%YOU%，但和当初的眼神，已经不一样了。
+    - 那里面依然有慵懒和轻松，却多了些别的东西——像水面下的暗流，沉静而深邃。
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「训练员～今天鱼群全体罢工哦。」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「我听见它们在秘密会议，商量怎么对付小青这个钓得太准的「青色恶魔」哦～」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「是不是你昨晚偷偷来给它们特训了？」
+    - 「我要是能叫它们让你空军。」
+    - 「这三年你得补上多少训练。」
+    - %YOU%边调侃边在%SEX%身旁坐下。
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「骗你的啦～」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「其实是午睡时一翻身，把整罐饵料都打翻进水里了。」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「唉～马失前蹄咯～」
+    - 晚风拂过水面，带起层层细密的涟漪。
+    - 青云天空的笑声渐渐歇了，目光投向远处泛起橙金波纹的水面，忽然安静下来。
+    - 浮漂在暮色中一动不动，完美的融入沉默中。
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「……三年了呢。」
+    - 「是啊，好快。」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「呐——训练员。」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「记得吗？三年前坐在这里，我说『比赛就是让鱼觉得是它自己想咬钩』。」
+    - 青云天空看向水面，好像看见了当年的自己。
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「那时候的我，真的只把比赛当成一场……大一点的钓鱼游戏。」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「赢了开心，输了也无所谓，反正还有明天的鱼可以钓。」
+    - 青云天空转头看向%YOU%，霞光给%SEX%侧脸镀上温柔的轮廓，睫毛在眼下投出浅浅的阴影。
+    - 「然后你成功了。」
+    - 「把它们用在了最精彩的赛场上。」
+    - 青云天空点点头，嘴角扬起一个淡淡的、带着怀念的笑。
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「但我变贪心了。」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「不再只想「赢」，而是想赢得……像一片云飘过天空那么自然。」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「想让对手一脸惊讶的看到，作为策士也能赢。」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「想让所有人明白，我自由自在的奔跑——也能赢」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「想让所有人记住，有个叫青云天空的赛%UMA%，是用最懒散的样子，跑出了最聪明，最自由的比赛。」
+    - 暮色渐沉，池边的路灯一盏盏亮起，在水面投下长长的、摇晃的光柱。
+    - %SEX%转过头看%YOU%，霞光映在%SEX%眼底。
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「而这一切——」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「都是因为三年前，有个训练员……」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「没对我说「你要努力」，而是问我——」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「想不想钓更大的鱼……」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「没有像拷上枷锁一样，要求我应该怎样跑，而是问我——」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「你想怎么赢。」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「你一直陪在小青身边呢，一直都在。」
+    - 水面平静如镜，倒映着逐渐暗下来的天空，和岸边越来越亮的灯火。
+    - 青云天空看了%YOU%很久，然后忽然笑起来——
+    - 一个干净、明亮、毫无保留的笑容。
+    - 青云天空转身在旁边的手提箱里翻出一个精致的——相册？
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「这可是我最珍贵的东西哦～」
+    - 青云天空向%YOU%怀里靠了靠，开始翻开那本相册一页页的介绍了起来。
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「看，这是训练员第一次钓到鱼的照片，你都没发现吧，嘿嘿～」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「啊！这是咱俩赢得三冠后一起去澳大利亚的照片」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「这张是咱俩回老家，咱俩在后山的湖边拍的。」
+    - ……
+    - …
+    - 相册翻到最后一页，照片也定格在了青云天空生涯最后一场比赛的领奖台。
+    - 合上相册，就像合上了你们这三年的点点滴滴……
+    - 这三年很长，足够%YOU%与%SEX%相识到相伴
+    - 这三年又很短，短到一本相册被%YOU%捧在手心。
+    - 「这三年好快呢」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「合上相册的时候，莫名有些伤感呢……」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「所以我准备了这个！」
+    - 青云天空不知从哪掏出来一本更大更厚的相册，啪的一下扔到%YOU%怀里。
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「将将！还早着呢！我都标好了！下次是亚马逊，再下次是佛罗里达……」
+    - 在%YOU%震惊的说道
+    - 「真是条贼船～」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「哼哼～已经来不及条船了哦～」
+    - 「那我要当船长！」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「不行！船长是我的……」
+    - ……
+    - %YOU%和青云天空在金黄色的夕阳下开心的讨论着。
+    - 从坎坷的过去到辉煌的现在，再到你们一起期待的未来……
+
+
+normal_ending:
   title: 万里远航，征帆归岸
   lines:
     - 水面铺满橙红色的霞光，碎金般晃动着。

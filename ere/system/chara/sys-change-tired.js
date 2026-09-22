@@ -12,7 +12,13 @@ function sys_change_tired(cid, num) {
   if (inmon.on(plugin_enum.no_tired) || inmon.on(plugin_enum.no_preg)) {
     return;
   }
-  era.add(`status:${cid}:疲惫`, num - era.get(`talent:${cid}:身体素质`));
+  const val = era.add(
+    `status:${cid}:疲惫`,
+    num - era.get(`talent:${cid}:身体素质`),
+  );
+  if (val < 0) {
+    era.set(`status:${cid}:疲惫`, 0);
+  }
 }
 
 module.exports = sys_change_tired;

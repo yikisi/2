@@ -2,6 +2,7 @@ const era = require('#/era-electron');
 
 const { sys_like_chara } = require('#/system/sys-calc-chara-others');
 
+const { get_custom_check } = require('#/event/check/check-factory');
 const CustomizedEdu = require('#/event/edu/edu-common');
 const { add_event } = require('#/event/queue');
 const all_reward_in_event = require('#/event/snippets/all-reward-in-event');
@@ -14,6 +15,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const SkyEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-20');
 const event_hooks = require('#/data/event/event-hooks');
 const recruit_flags = require('#/data/event/recruit-flags');
+const { location_enum } = require('#/data/locations');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
 const { attr_enum, base_attr_list } = require('#/data/train-const');
@@ -222,10 +224,24 @@ module.exports = class extends CustomizedEdu {
    */
   async palace(sky, me) {
     await CustomizedEdu.common_palace(sky, me);
+    era.drawLine();
+    era.set('flag:当前位置', location_enum.gate);
     if (!this.#marks.soft_be) {
-      era.drawLine();
-      await print_title_with_kojo(this.#kojo, 'ws_ending', sky, this.#dict);
+      let key;
+      if (
+        get_custom_check(this.id)
+          .get_edu_aims()
+          .every((e) => e.check === 1)
+      ) {
+        key = 'perfect_ending';
+      } else {
+        key = 'ws_ending';
+      }
+      await print_title_with_kojo(this.#kojo, key, sky, this.#dict);
+    } else {
+      await CustomizedEdu.common_palace_relation(sky, me);
     }
+    era.set('flag:当前位置', location_enum.office);
   }
 
   /** @param {CharaTalk} sky */

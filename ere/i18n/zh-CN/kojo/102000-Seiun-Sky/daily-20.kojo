@@ -1195,6 +1195,1767 @@ school_rooftop:
             content: %CHARA%
           - （……反正我也吃不完）
 
+
+o_r_fishing:
+  - random: true
+    lines:
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「训练员～今天小青训练的很努力了哦～」
+      - 「嗯嗯……的确，今天效率很高呢，说吧，想去哪玩？」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「那当然是——钓鱼！」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「还有，什么叫玩！我那是去拯救那些在水底受苦的生物～罚你今天和我一起去！」
+      - 「好好好～那咱今天去哪拯救它们呢？伟大的青云圣女……」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「嗯……让我想想」
+  - random: true
+    lines:
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「训练员～～想我了吗～～」
+      - 「嗯？你今天不是休息吗，怎么没出去放松放松？」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「诶呀，这不是看训练员太辛苦了，特意来陪陪你啦～」
+      - 「那正好，陪我整理数据吧。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「才不要！训练员你也是，大周末的就别卷了！要劳逸结合——」
+      - 「也是……那咱俩——去钓会儿鱼？」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「嗯？好主意！走，去哪钓？」
+  - random: true
+    lines:
+      - 「小青！走！出发吧！」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「呜啊！训练员，你这一身什么打扮，你今天中邪了？」
+      - 「说什么呢，你上次说的，比赛赢了带你去钓鱼。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「额……那也不用这么激动吧，这样的训练员……我有点不习惯……」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「不过训练员都这么热情了，那咱们出发！」
+      - 「好嘞！今天路费我包，你想去哪钓都可以。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「嘿嘿～既然训练员今天这么大方，那我可得好好想想……」
+
+
+orf_loc:
+  - acc: 1
+    content: 小溪（影响体力、精力、干劲、技能点数）
+  - if: era.get('cflag:20:育成回合计时') < 3 * 48
+    acc: 2
+    content: 河口（影响基础属性）
+  - acc: 3
+    content: 湖泊（影响马币）
+  - acc: 4
+    content: 近海（影响声望）
+
+
+orf_creek:
+  - %YOU%和青云天空来到了附近的一条小溪。
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「就这里了！训练员，要加油哦。」
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「今晚的晚饭全看咱俩的技术了！」
+  - %YOU%和青云天空开始了悠闲的钓鱼时光。
+  - ………
+  - ……
+  - …
+  - 一段时间后
+  -
+  - if: d.fish === 1
+    lines: # 空军 20% 干劲-1
+      - 青云看着空荡荡的桶。
+      - 「……看来今天适合放生。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「走！去超市买一条！」
+      - 青云天空拎起桶就往回走，步伐坚毅，果断，一往无前。
+      - ——资深钓鱼佬，永不空军！
+  - if: d.fish === 2
+    lines: # 小杂鱼 8% 体力精力恢复5% 技能点数+5
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - （看着桶里一群不到五厘米长的小鱼，陷入沉思）
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「……面拖油炸吧。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「撒点海苔粉，应该也挺香。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「或者炖鱼汤，再不济做成猫饭……」
+      - 「额……不如放了吧……」
+  - if: d.fish === 3
+    lines: # 雅罗鱼 8% 体力精力恢复10% 技能点数+5
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「今天的是雅罗鱼啊，训练员，想不想吃烧烤？」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「小青我烤这种鱼可是一把好手哦～」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「先用盐搓洗去掉土腥味，再将鱼串好撒盐用炭火烤制，外皮香脆，鱼肉鲜嫩——」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「嗯～～光想想我口水都要流下来了，就这么定了，盐烤！」
+  - if: d.fish === 4
+    lines: # 白条鱼 8% 体力精力恢复15% 技能点数+5
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「全是小白条呢，这回就简单点做吧。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「处理完后，先调味去腥，然后裹上面粉炸一下就行。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「训练员，今天就交给你来做吧——」
+  - if: d.fish === 5
+    lines: # 马口鱼 8% 干劲+1 技能点数+5
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「大丰收欸！全是马口鱼！」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「这种鱼抢食抢的可凶了，亮片一扔就咬，数量还多。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「这么多一回可吃不完，拿回去给大家分分吧，剩下的做成甘露煮。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「马口鱼的肉质紧实，做成甘露煮一定很下饭！」
+  - if: d.fish === 6
+    lines: # 虾虎鱼 8% 干劲+1 技能点数+10
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「唔啊！这么全是小虾虎鱼！我说今天的空勾怎么这么多！」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「这群小家伙，看着个头不大，饵料却都被偷走了。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「不能白白便宜了它们，训练员！我今天要吃炸鱼！」
+  - if: d.fish === 7
+    lines: # 宽鳍鱲 8% 减少一层疲劳 技能点数+5
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「今天都是宽鳍鱲欸，还不少呢。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「训练员，你知道吗，宽鳍鱲在我们老家叫溪哥，它们在繁殖期颜色很漂亮哦。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「这鱼的口感跟马口鱼很像，要不也做成甘露煮吧。」
+  - if: d.fish === 8
+    lines: # 石斑鱼（溪流种） 8% 减少一层疲劳 技能点数+10
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「哼哼～怎么样，小青我厉害吧，这种小溪里的石斑鱼都喜欢躲石缝里，一般来说可不好钓。」
+      - 「我记得海里的石斑鱼挺大的。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「嗯……确实。淡水里的石斑鱼很小呢，跟海里的没法比」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「这种鱼肉质紧实，风味清甜，但刺比较多，做成刺身太麻烦了。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「还是做成佃煮吧，回头慢慢吃。」
+  - if: d.fish === 9
+    lines: # 香鱼 7% 感到神清气爽（清除药物残留） 技能点数+10
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「训练员，看！这就是淡水鱼之王——香鱼！」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「果然今天的这片水域很好，香鱼对水质要求可是极高的。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「一定要盐烤！这是原则性问题！」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「整条鱼不去内脏直接串起，只撒盐用炭火烤制。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「鱼皮焦香酥脆，鱼肉细嫩多汁，内脏的微苦回甘与鱼肉的清甜形成绝妙平衡，这才是香鱼料理的最高境界！」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「悄悄告诉你，小青我可是香鱼的铁粉哦～」
+  - if: d.fish === 10
+    lines: # 虹鳟 7% 干劲恢复到最佳 技能点数+10
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「虹鳟！野生的虹鳟！训练员你看！这么大一条！今晚加餐了！」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「盐烤！不对——油煎！不行——刺身！等等——」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「唔啊～我都不知道怎么选了～」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「不！小孩子才做选择，我全都要！」
+  - if: d.fish === 11
+    lines: # 花羔红点鲑 7% 体力精力恢复20% 技能点数+10
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「难道说！难道说！是传说中的冷水鱼之王——花羔红点鲑！」
+      - 「这么厉害？我看看。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「欸欸欸！等等！那这种鱼可娇贵了！轻点捧。」
+      - 「好小气哦……」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「当然了！这可是溪流钓的终极目标之一！」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「也是最高级的食材之一。」
+      - 「这个要怎么吃？」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「当然是最高级的享用方式——寿司。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「这顿大餐一定要给大家尝尝。」
+  - if: d.fish === 12
+    lines: # 山女鱼 3% 感到精神焕发（消除偏头疼以及药物残留） 干劲恢复到最佳 技能点数+20
+      - 青云天空的鱼漂轻轻点了一下，又点了一下，然后猛地沉了下去。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「嗯？！来勾了！」
+      - 青云天空手腕一抖，开始和水下的生物较劲。
+      - 鱼线被一点一点地拉出去，那家伙不急不躁，就是闷头往水底钻。
+      - 一阵拉扯过后，鱼慢慢被拉到了上游。
+      - 这时水面翻了一个不大的水花，一抹黄褐色的影子在水下一闪而过——
+      - 那鱼的身形流畅而优雅，身上的斑纹整齐有序，侧线泛着一条淡淡的粉红色光泽，像涂了一层极薄的胭脂，背部是素雅的黄褐色，腹部雪白点名了它的身份。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「山女鱼……」
+      - 青云天空呆愣了起来。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「山女鱼！山女鱼！训练员！是山女鱼！」
+      - %SEX%突然惊叫起来，嗓子都劈了，尾巴在身后疯狂地甩，把旁白的水桶都掀翻，水花溅了%YOU%一身。
+      - 「轻点轻点！别把竿子弄断了！」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「我知道我知道我知道——」
+      - %SEX%深吸一口气，拼命让自己冷静下来，但握着竿子的手在发抖，嘴唇也在发抖。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「山女鱼啊，训练员……你知道山女鱼是什么概念吗……」
+      - 青云天空跟着它的节奏，放一点线，收一点线，顺着溪岸来回走了十几步，鞋里全是水，裤腿湿到大腿根，但%SEX%浑然不觉。
+      - 终于，鱼开始松劲了，那个溪流中的贵族慢慢被拉向岸边，青云天空蹲下身，用抄网轻轻一舀。
+      - 夕阳的光从树缝间漏下来，落在山女鱼的身上。
+      - 它大约三十厘米出头，体型修长流畅，身上一排暗青色的大斑如同一个个暗纹勋章，侧身那条淡淡的粉红色带子在光线下若隐若现。
+      - 它的鳞片细小而紧密，排列得整整齐齐，每一片都在夕阳下折射出柔和的光晕。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「这就是，溪流女王……」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「好美……」
+      - 泪水不自觉的从两侧滑落。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「训练员……我都不敢呼吸了……」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「……我想就这样看一辈子。」
+      - %YOU%用手机拍照留做纪念，然后问道
+      - 「所以……」
+      - 「这个你打算怎么吃？」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「吃你个头！」
+      - 青云天空翻了个白眼。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「这鱼比我都金贵！」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「当然要放生。」
+      - 在训完%YOU%后，青云天空有如痴如醉的看着桶里的山女鱼。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「再看一会吧，再看一会再放……」
+
+
+orf_river:
+  - %YOU%和青云天空来到了近海的一处河口。
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「训练员快点！晚了就没好位置了！」
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「河口的鱼可是很考验技术的！」
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「所以小青平时来钓鱼可不是为了偷懒，是在训练呢，喵哈哈～」
+  - %YOU%和青云天空开始了悠闲的钓鱼时光。
+  - ………
+  - ……
+  - …
+  - 一段时间后
+  -
+  - if: d.fish === 1
+    lines: # 空军 20% 全属性-1
+      - 青云看着空荡荡的桶。
+      - 「……看来今天适合放生。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「走！去超市买一条！」
+      - 青云天空拎起桶就往回走，步伐坚毅，果断，一往无前。
+      - ——资深钓鱼佬，永不空军！
+  - if: d.fish === 2
+    lines: # 小杂鱼 7% 全属性+1
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - （看着桶里一群不到五厘米长的小鱼，陷入沉思）
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「今天不少钓呢，就是没有大鱼……」
+      - 「至少今天咱们钓的很开心……」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「训练员没想到你还挺豁达的嘛～」
+  - if: d.fish === 3
+    lines: # 梭子魚 7% 全属性+1~2
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「早上的梭鱼就是多。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「钓这种鱼小青我可是有独家秘方的……」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「看！又来了，看我一抽！」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「当当！厉害吧～训练员你要学的还很多呢～」
+  - if: d.fish === 4
+    lines: # 鲈鱼 7% 全属性+2
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「这鲈鱼好大一条，比我宿舍楼下那只橘猫还肥！」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「这我可得想想怎么解决……」
+      - 「可以用煮付，然后多叫几个人来一起解决。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「好主意！就让小花来吧，%SEX%做菜有一手！」
+  - if: d.fish === 5
+    lines: # 鲭鱼 6% 速度+5
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「哇，今天好多鲭鱼。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「训练员，你别看他小，肉质很紧实的。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「这种鱼最新鲜的时候就要用最新鲜的吃法——刺身」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「一般搁店里吃可贵了，属于高级货。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「不过今天小青这里大促销，管够！」
+  - if: d.fish === 6
+    lines: # 竹荚鱼 6% 耐力+5
+      - 刚开始钓没多久，%YOU%的浮漂就有了反应。
+      - 「这不是竹荚鱼吗，我在超市买过。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「训练员你还挺厉害，这么快就有口了。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「看来今天运气不错啊，多钓几条，晚上请你吃寿司～」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「这鱼肉质紧实、风味清爽，做寿司最是一绝！」
+  - if: d.fish === 7
+    lines: # 河豚 6% 力量+5
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「呜啊！，是河豚，这必须要小心。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「训练员，你看它气鼓鼓的样子，想不想小特～」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「不过这个可不是咱们能料理的，野生的谁也不好说，还是放了吧。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「想吃咱们过会找个专业的饭店。」
+  - if: d.fish === 8
+    lines: # 多春鱼 6% 根性+5
+      - %YOU%钓上来一条银色的小鱼。
+      - 「这是——多春鱼？」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「这是公鱼，确实是咱平常见的多春鱼，但是是引进的。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「还有种比较稀少的柳叶鱼，这才是我们本土的多春鱼。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「这种小鱼一钓一个准。」
+  - if: d.fish === 9
+    lines: # 鲻鱼 6% 智力+5
+      - %YOU%费尽九牛二虎之力钓上一条体长一米二的鲻鱼。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「竟然这么大……」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「呜……好不甘心……这为什么不是我钓的……」
+      - 「小青，这么大的鱼该怎么吃啊～」
+      - 青云天空瞥了你一眼。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「哼，自己解决！你等着，我要钓个比你还大的！」
+  - if: d.fish === 10
+    lines: # 黑鲷 5% 速度+10
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「好大一条黑鲷，看来咱俩的福气很旺呢～」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「这鱼可狡猾了，还被称为「水中的狐狸」」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「要有精细的钓组，准确的潮水判断和持续的诱饵策略。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「等你也钓上来一条时，就算出师啦～」
+  - if: d.fish === 11
+    lines: # 香鱼 5% 耐力+10
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「训练员，我钓到香鱼了！」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「它们出现在河口，说明它们的产卵期到了。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「亲鱼死亡，幼鱼入海，产卵后，大部分亲鱼会力竭而死。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「所有香鱼除了淡水女王，还被称为「年鱼」」
+      - 「听起来好悲伤……」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「但这也是它们生命的起点啊。」
+  - if: d.fish === 12
+    lines: # 河鳗 5% 力量+10
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「是河鳗！训练员！是河鳗！」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「这种鱼尤其喜欢泥沙底质的缓水域、石缝和洞穴里」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「而且野生的河鳗数量已经很少了。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「今天竟然能钓到一条，算是圆满了～」
+  - if: d.fish === 13
+    lines: # 柳叶鱼 5% 根性+10
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「这是——柳叶鱼！好久没有见到了。」
+      - 「和公鱼很像呢。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「的确，但这是这是濒危物种，公鱼是引进的平民鱼种。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「就这一条也不够咱俩分，还是放了吧。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「想吃可以回头买几条公鱼，味道也差不多～」
+  - if: d.fish === 14
+    lines: # 石狗公 5% 智力+10
+      - %YOU%钓上来一条体色呈红褐色，头部宽大，布满棘刺的鱼，刚想取下鱼钩。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「训练员，取的时候小心点，石狗公身上的棘刺上有毒腺！」
+      - 青云天空从包里翻出个手套和剪刀。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「唉～关键时刻还是得靠小青～不然你手被扎一下就得肿一片……」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「不过河口竟然有石狗公？偶入的吧。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「作为差点刺伤训练员的罪魁祸首，赐你盐烤之刑！由小青亲自执行！」
+  - if: d.fish === 15
+    lines: # 天竺鲷 4% 全属性+10
+      - 钓了一整天，浮漂一动不动。
+      - 从清晨到日暮，%YOU%和青云天空坐在河口的堤岸上，换了三个钓点，换了四种饵料，鱼桶里的水始终是空的。
+      - 青云天空从一开始的兴致勃勃，到中午的昏昏欲睡，再到下午的沉默不语——
+      - %SEX%的耳朵从竖着变成耷拉着，尾巴也从悠闲地摇晃变成了拖在地上。
+      - 天色一点一点暗下来，河面上的金光被灰蓝色吞没，远处的路灯次第亮起。
+      - %YOU%看了一眼手机，又看了一眼眼睛直直盯着水面的青云天空。
+      - 「天空，要不今天先这样？」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「不要！」
+      - 「明天还有训练呢，而且大晚上你也看不清。」
+      - 青云天空转身从包里翻出两个夜钓灯。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「训练员，再夜钓会，行吗……」
+      - %YOU%看着奋斗一天却毫无收获的青云天空，%SEX%的眼神楚楚可怜，充满了祈求。
+      - 「唉，好吧，就今天一次哦～」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「嘿嘿，最喜欢训练员了～」
+      -
+      - 夜钓的河岸很安静。
+      - 青云天空的侧脸被夜钓灯的光晕染成暖橘色，眼睛死死盯着那颗绿光，像猫盯着老鼠洞。
+      - 就在%YOU%快要打瞌睡的时候，青云天空突然动了。
+      - 「有了！」
+      - 收线很轻松，没有怎么发力，看来鱼不大。
+      - 青云天空的眉头微微皱了一下，%SEX%加快收线的速度，鱼线在水面上划出一道细长的波纹。
+      - 夜光漂已经被拉到了水下的某个深度，只能隐约看见一点微弱的绿光在黑暗中晃动。
+      - 几秒钟后，那道银光破水而出。
+      - 青云天空伸手接住落在堤岸上的鱼，托在掌心里。
+      - 「是条小鱼呢，不过今天也算圆满了。」
+      - 青云天空没有回应。
+      - 「天空？」
+      - %YOU%又喊了一声，但青云天空还是没有回应。
+      - %YOU%走到%SEX%身旁，发现%SEX%在喃喃自语。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「……天竺鲷。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「我钓到天竺鲷了……」
+      - %YOU%好奇的看了看青云天空手里的小鱼。
+      - 那条鱼还没有%SEX%手掌宽，身体呈灰白色半透明，一条贯穿眼睛和身体的黑色纵带，就像毛笔从吻部到尾巴画了一道流畅的墨线，干脆利落，尾柄还有个黑色圆点，干净，精致。
+      - 「这是……」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「我钓到天竺鲷了，是弓线天竺鲷！！！」
+      - 青云天空突然的大叫吓了%YOU%一大跳。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「训练员你知道吗，这是弓线天竺鲷！特别稀有！」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「技术和运气缺一不可！我钓到了！」
+      - 在短暂的兴奋爆发后，青云天空慢慢冷静了下来。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「训练员，你看，它真美……」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「我感觉……好幸福……」
+      - 青云天空轻轻把那条珍贵的弓线天竺鲷放进鱼桶，然后转身抱住了%YOU%。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「训练员，谢谢你……谢谢你陪我夜钓……」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「我今天……实在是……太幸福了！」
+
+
+orf_lake:
+  - %YOU%和青云天空来到了一片天然湖泊。
+  - 「哇哦，这片湖真漂亮啊」
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「是欸，跟我老家后山的那片湖一样，大鱼绝对少不了！」
+  - 「如果收获不错咱还可以支个小摊卖一卖～」
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「那咱俩加油！把下个的零食费赚出来！」
+  - %YOU%和青云天空开始了悠闲的钓鱼时光。
+  - ………
+  - ……
+  - …
+  - 一段时间后
+  -
+  - if: d.fish === 1
+    lines: # 空军 20% 马币-5
+      - 青云看着空荡荡的桶。
+      - 「……看来今天适合放生。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「走！去超市买一条！」
+      - 青云天空拎起桶就往回走，步伐坚毅，果断，一往无前。
+      - ——资深钓鱼佬，永不空军！
+  - if: d.fish === 2
+    lines: # 小杂鱼 7% +1马币
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - （看着桶里一群不到五厘米长的小鱼，陷入沉思）
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「额……这些应该卖不了吧……」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「唉……没办法，小鱼啊小鱼，今天算你们运气好。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「走吧……等长大了别忘了回来报恩哦——」
+      - 回去的路上，一阵风吹过，一张马币奇迹般随风飘到你们手中。
+  - if: d.fish === 3
+    lines: # 鲫鱼 7% +2马币
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「唔啊！这条鲫鱼好肥！感觉至少有1斤！」
+      - 「我这里也上来条大的！」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「看来今天口正！赶紧继续！」
+  - if: d.fish === 4
+    lines: # 鲤鱼 7% +3马币
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「欸，是鲤鱼啊……」
+      - 「怎么了，觉得太普通？」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「那不可能，我钓到什么鱼都很开心啦……」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「感觉卖不太出去呢，毕竟咱这边吃的并不多……」
+  - if: d.fish === 5
+    lines: # 鲶鱼 7% +4马币
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「……滑溜溜的，抓都抓不住。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「嘿嘿～每次看鲶鱼都觉得它长得好喜感～」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「看这大嘴唇，还有这胡须，还有这呆呆的眼神～」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「长这么肥，一看就很贪吃。」
+      - 「它听到会伤心的……」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「它温暖的泪水会化为冰冷的马币～」
+  - if: d.fish === 6
+    lines: # 黄颡鱼 7% +5马币
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「呼啊！大丰收！满满一桶的昂刺！」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「走！找个有缘人收了。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「赚到的给咱晚上加个餐！」
+  - if: d.fish === 7
+    lines: # 乌鳢 7% +6马币
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「好大一条黑鱼！起码有两斤！」
+      - 「这鱼也太凶了，捞上来的时候还给了我一尾巴……」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「没事吧！疼不疼？」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「黑鱼就这样，攻击性很强。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「训练员你今天辛苦了，回头请你吃冰淇淋～」
+  - if: d.fish === 8
+    lines: # 公鱼 7% +7马币
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「好多公鱼！一条接着一条的来！」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「看来咱们今天的运气不错啊～」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「训练员你也加加油，多钓点。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「上次收鱼的大叔说就好这口～」
+  - if: d.fish === 9
+    lines: # 雅罗鱼 7% +8马币
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「是雅罗鱼啊，最近还挺常见的。」
+      - 「咱们前两天还在天妇罗店吃过呢。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「嗯？你说这个我想个好主意。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「咱再多钓几条直接去店里吧，让他们帮忙加工～」
+  - if: d.fish === 10
+    lines: # 香鱼 6% +15马币
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「训练员！快看我钓到什么了！」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「溪流之王——香鱼！」
+      - 「品相好好，这么新鲜的香鱼，要不要做成刺身？」
+      - 青云天空一把将鱼拉回来，放回鱼桶里。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「才不要呢！学校附近新开的高级自助餐我馋好久了。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「这条鱼可是承载了我自助餐的重担！才不给你吃～」
+  - if: d.fish === 11
+    lines: # 青鱼 6% +16马币
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「训练员！救命！快来帮帮我！！！」
+      - 「来了来了！撑住！小青！」
+      - %YOU%和青云天空废了好大的劲拉上来一条10公斤的巨物。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「啊哈～我的天哪，好恐怖，这么大的淡水鱼一看就是青鱼……」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「这片湖还真是不养咸鱼……」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「这么重，按市场最低价咱也不少赚了～喵哈哈～」
+  - if: d.fish === 12
+    lines: # 河鳗 6% +17马币
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「一条黑色的河鳗在桶里不断翻腾。」
+      - %YOU%和青云天空蹲在桶边看着它不断折腾。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「训练员，竟然是河鳗，而且这玩意儿还是野生的，可贵了。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「鳗鱼饭………………」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「训练员，这个不吃了，回去的时候拿到市场那边去问问吧。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「鳗鱼饭………………」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「品相好的野生河鳗，一条能卖一万多円呢。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「鳗鱼饭………………」
+      - 「要不……晚上我请你吃鳗鱼饭？」
+  - if: d.fish === 13
+    lines: # 锦鲤 4% 马币获取+1%
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「呀！是锦鲤呢……」
+      - 「附近锦鲤好像挺多，毕竟有很多的放生的。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「确实，但还是放回去吧，据说会有好运呢。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「说不定回去买彩排就能抽到大奖，从此过上美妙的躺平生活呢，喵哈哈～」
+  - if: d.fish === 14
+    lines: # 远东哲罗鱼 2% 马币+30 马币获取+1%
+      - 从清晨到日暮，%YOU%和青云天空在湖边上坐了整整一天。
+      - 浮漂纹丝不动，就像钉在水面上一样。旁边的水桶空空荡荡，连条小杂鱼都没混上。
+      - 青云天空打了个哈欠，丢下鱼竿，慢悠悠地走到%YOU%身边蹲下来。
+      - %SEX%探头往%YOU%的鱼桶里看了一眼，和%SEX%的一样，清澈见底。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「看来咱俩今天又得去超市买鱼了，喵哈哈～」
+      - %SEX%自嘲地笑了笑，下巴搁在膝盖上，呆呆的看着桶里平静的水面。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「训练员，你说咱俩今天是不是犯冲啊，坐一起一天都没口。」
+      - 「可能是天气的事。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「得了吧，早上你说气压低，中午你说水温高，下午你说太阳太晒——」
+      - %SEX%掰着手指数，尾巴在身后慢悠悠地晃着，开始有一句没一句地聊起来。
+      - 说昨天在运气好抢到了限量的布丁，说西野花最近在养新品种的花，说神鹰前段时间抽奖赢了五千円……
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「……所以说啊，训练员，运气这东西，我感觉像守恒的。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「就像你玩游戏抽卡总是吃井，那是因为你太过幸运遇到了小青我～」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「所以啊……」
+      - 「等一下。」
+      - %YOU%忽然打断%SEX%，身体不自觉地绷紧，感受着手中钓竿异样的震动。
+      - 「我好像……上钩了。来了！」
+      - %YOU%下意识地提起鱼竿，竿梢瞬间弯成了一张满弓。
+      - 一股蛮横的力量从水下传来，直直地往下拽，鱼线紧绷着，发出令人紧张的吱吱声。
+      - %YOU%双手死死握住竿柄，整个人被拽得往前踉跄了半步。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「等等等等——真的假的？！」
+      - 青云天空愣住了，然后猛地站起来，迅速抓起旁边的抄网。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「训练员你稳住！别把线绷断！」
+      - 「我知道！」
+      - 鱼竿轮座的卸力声尖锐地响着，%YOU%感觉自己的手臂在发抖。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「是什么鱼啊——这力气也太大了吧——」
+      - 青云天空抱着抄网站在%YOU%旁边，不断摇晃的尾巴带着掩饰不住的兴奋。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「训练员你中午是不是偷吃了能量棒，怎么还没被拽下去——」
+      - 「闭嘴——帮忙——」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「我在帮啊！网都准备好了！」
+      - 卸力声渐渐变小，%YOU%趁机开始收线，一圈一圈地往回摇，水下那个东西似乎也累了，挣扎的幅度小了一些。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「感觉今天咱俩的运气全集中在这条大鱼上了啊——」
+      - 青云天空兴奋地念叨着，身体跟着鱼线的移动左右晃动，尾巴摇得像螺旋桨。
+      - 鱼终于被拖到了浅水区，水下一道暗色的影子缓缓浮上来，轮廓越来越大，越来越清晰。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「来了来了来了——」
+      - 青云天空把抄网探进水里，眼睛死死盯着水下那道影子。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「看到头了！好大——」
+      - %SEX%的话忽然卡住了，网兜停在水里，一动不动。
+      - %YOU%还在兴奋地喊「捞啊！快捞啊！」
+      - 那条鱼被拖到网口上方，一个甩尾，几乎要从网口滑出去。
+      - 「青云天空！」
+      - %YOU%大喊了一声。
+      - 青云天空猛地回过神来，抄网猛地往上一兜，把整条鱼兜进了网里，迅速往回收。
+      - 岸边，%SEX%双手抱着网柄踉跄了两步，差点一屁股坐到地上。
+      - 鱼在网里剧烈地翻腾，溅了两人一身的水。
+      - 青云天空抓着网，低头看着网里的鱼，眼睛瞪得浑圆，嘴巴一张一合，就是发不出声音。
+      - 然后%SEX%突然尖叫起来。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「啊啊啊啊啊啊——！训练员训练员训练员——！」
+      - 「你冷静——一条大鱼而已——」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「冷静不了！！！」
+      - 把网放到地上蹲下来，眼睛死死盯着网里那条还在扑腾的鱼，声音都在发颤。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「对不起对不起——我刚才看呆了，还以为自己看错了——」
+      - %SEX%深吸一口气，扭头看向%YOU%，眼眶居然有点泛红。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「训练员，你知道这是什么鱼吗……」
+      - %YOU%仔细观察起网里的巨物。
+      - 网里的鱼大概有七十多厘米长，鱼身粗壮浑圆，背部是银灰带棕褐色的，上面散布着橘红色的小斑点。
+      - 它的吻部比较钝圆，嘴巴很大，微微上翘的嘴角让它看起来像是带着一丝傲慢的表情。
+      - 「不太了解，力气倒是真的大……」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「这可是远东哲罗鱼啊，训练员。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「这鱼现在在日本的野生种群已经很少了，是『极危』物种！」
+      - 「所以说这条鱼……」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「——不是值不值钱的问题，这鱼可是严禁捕获与交易的！」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「但能钓到一次，真的是此生有幸……」
+      - 青云天空擦了擦眼角的泪光，稳定了下情绪。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「不过话说回来——」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「咱俩今天的时运还真全集中在这一条上面了。」
+      - %SEX%低头看了一眼空荡荡的鱼桶，又看了一眼网里那条还在喘气的大家伙   。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「空军一整天，换来一条远东哲罗鱼……训练员，这买卖其实也不亏？」
+
+
+orf_sea:
+  - 在青云天空的强烈要求下，你们来到了海边，一路上青云天空一脸烦躁的翻着手机。
+  - 「怎么了？小脸皱着一路了。」
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「训练员！你看！」
+  - 青云天空把手机举到%YOU%面前，上面是一个钓鱼爱好者的群聊，一群钓鱼佬在炫耀在近海钓到的大鱼。
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「呜……很不服气！对不对？」
+  - color: %COLOR%
+    content:
+      - fontWeight: bold
+        content: %CHARA%
+      - 「今天咱俩也要钓条大的好好涨涨威望！！！」
+  - （斗志这么强的青酱真少见……）
+  - %YOU%和青云天空开始了悠闲的钓鱼时光。
+  - ………
+  - ……
+  - …
+  - 一段时间后
+  -
+  - if: d.fish === 1
+    lines: # 空军 20% -3声望
+      - 青云看着空荡荡的桶。
+      - 「……看来今天适合放生。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「走！去超市买一条！」
+      - 青云天空拎起桶就往回走，步伐坚毅，果断，一往无前。
+      - ——资深钓鱼佬，永不空军！
+  - if: d.fish === 2
+    lines: # 小杂鱼 7% +2声望
+      - 青云天空一脸不爽的望着桶里的各种小杂鱼
+      - 「不拍照炫耀一下吗？」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「不！这绝对不是我的实力！绝对！」
+      - 「所以……把它们放了？」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「放了？哼哼～小鱼们～最好觉悟吧！」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「你们将成为我钓上超级大鱼的饵料！加入光荣的进化吧！荣耀会记录你们每一条鱼！」
+      - 「…………」
+  - if: d.fish === 3
+    lines: # 沙丁鱼 7% +2声望
+      - 「小青！我钓上来好多沙丁鱼！」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「挺厉害的嘛～训练员。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「不过……发照片还是算了。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「他们大概率会回『这玩意儿海边一网兜的事』的吧～」
+      - 「还真是不留情呢……」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「没办法……钓鱼的世界……就是这么残酷……」
+  - if: d.fish === 4
+    lines: # 竹荚鱼 7% +2声望
+      - 「小青！你看——竹荚鱼！」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「哇，恭喜恭喜，啪唧啪唧～」
+      - 「好敷衍哦～哭哭～」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「嗯……那给你来点激情的——」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「训练员！恭喜你！钓鱼水平达到小孩了呢～」
+      - 「更伤心了，嘤嘤嘤……」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「开玩笑的啦～喵哈哈～」
+  - if: d.fish === 5
+    lines: # 鲭鱼 7% +2声望
+      - 「小青，收获怎么样？」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「一般般吧。」
+      - 青云天空用着满不在乎的语气踢了踢旁边沉甸甸的鱼桶。
+      - 「好家伙，这也叫一般般？都满满一桶的鲭鱼了。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「这种简单的对我来说小意思～我的目标可是海里的巨物！」
+  - if: d.fish === 6
+    lines: # 白姑鱼 7% +2声望
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「身白鳃黑，一看就是白姑鱼」
+      - 「还挺漂亮，放水里都不容易看见。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「还不错，趁热打铁！」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「不过比起炫耀，这鱼被关注的点更多在吃上吧～」
+  - if: d.fish === 7
+    lines: # 海鲈鱼 7% +2声望
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「这花鲈力气还挺大，差点脱钩！」
+      - 「这个应该挺稀有吧。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「嗯……还凑合……拍照留个纪念吧～」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「来训练员，我捧着它，你帮我拍。」
+      - 钓友评价：「可以啊，这么大的海鲈鱼。」
+  - if: d.fish === 8
+    lines: # 黑鲷 6% +4声望
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「哦！是黑鲷！我说怎么这么难钓」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「训练员，来来来，这个角度。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「嗯……拍的不错～标题就写，小小黑鲷，拿下拿下～」
+      - 钓友评价：「钓手技术不错」
+  - if: d.fish === 9
+    lines: # 隆头鱼 6% +4声望
+      - 「小青，你来看，我钓了条长得很像你的鱼。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「像我？」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「这不是隆头鱼嘛，等等……哪里像我了！！！」
+      - 「你上次搁树上睡觉结果一个翻身滚了下来，脑袋磕个大包时跟这鱼一模一样～」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「唔……你等着！我这就掉条石狗公给你照照镜子！」
+      - 钓友评价：「好漂亮的隆头鱼，在哪钓的？」
+  - if: d.fish === 10
+    lines: # 真鲷 6% +4声望
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「哦！出大货了！」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「训练员！看！真鲷！」
+      - 「好漂亮的鱼，红白色的。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「钓到真鲷可是个，感觉跟过春节一样～」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「这我肯定要在论坛上炫耀一番～」
+      - 钓友评价：「接接接！」
+  - if: d.fish === 11
+    lines: # 海鳗 6% +4声望
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「呜啊啊！！！训练员！快拿网！！！」
+      - 「来了来了！这条海鳗也太凶了」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「呼——真不容易，训练员，看在你这么及时的份上，这条海鳗归你了～」
+      - 「你把钩摘下来再给我……」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「这是你的海鳗了，当然你来摘……」
+      - 「不不不，这份荣誉当然要由钓上来的幸运儿来了～」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「可是……可是……」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「可是小青怕被咬嘛……小青可是很崇拜训练员的呢～训练员这——么厉害，就帮帮……」
+      - 「装可怜不管用哦～还是把线剪了吧……」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「哼——小气鬼——」
+      - 钓友评价：「狠人，这玩意也敢摘钩」
+  - if: d.fish === 12
+    lines: # 海鞘 6% +4声望
+      - 「水草？珊瑚？这是什么玩意？扔了扔了……」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「嗯？训练员，等等！」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「这可不是珊瑚，这是海鞘，你是怎么钓上来的！？」
+      - 「大概感觉很沉，一使劲就上来了？」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「太离谱了，我拍照要发推特上～」
+      - 钓友评价：「不信……」
+  - if: d.fish === 13
+    lines: # 龙虾 6% +1%声望获取率
+      - 「是龙虾啊，好像是被勾上来的？扔了扔了～」
+      - 被仍在一旁的龙虾对岸上新奇的环境感到陌生，开始漫无目的的游走。
+      - 走着走着，它看见一束青色的东西在晃来晃去。
+      - 也许是出于对新事物的好奇，也许的对这来历不明的物体感到害怕。
+      - 它的本能告诉它，夹住这青色的物体！
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「呜啊！！！」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「训练员！！！尾、尾巴！！！夹、夹住啦——！！！」
+      - %YOU%闻讯赶了过来，只见青云天空拼命甩着尾巴，那只龙虾跟荡秋千似的前后晃荡，钳子纹丝不动。
+      - %YOU%赶紧上前帮忙解围。
+      - 回去的路上……
+      - 「小青～我真的错了，别生气了呗～」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「哼——」
+      - 青云天空抱着尾巴脸扭向一边。
+      - 「回去我请你吃龙虾刺身！咱一定把这个仇报了！」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「这还差不多～」
+  - if: d.fish === 14
+    lines: # 横带石鲷 2% +10声望 +1%声望获取率
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「训练员，我跟你说，今天感觉超级好。」
+      - 「嗯？指的是？」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「就像赢下比赛那种感觉，超级棒的感觉～」
+      - %YOU%笑了一声，表示加油。
+      - 接下来的4个小时，青云天空的表现让%YOU%开始怀疑%SEX%是不是真的能预判什么。
+      - 各种鱼一杆接着一杆，甚至有条幼狮鱼。
+      - 而%YOU%的鱼桶里始终空空如也，偶尔浮漂一沉，拉上来的也只有孤零零的鱼钩，鱼饵已然不见……
+      - 青云天空每钓上来一条，都要举起来朝%YOU%晃一晃，脸上写满了「快看快看快看」。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「训练员——你那边怎么样啊——」
+      - %SEX%的声音从堤防那头飘过来，带着明显的得意。
+      - 「……在等着」
+      - %YOU%没平静地回了一句。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「那就是没口咯？」
+      - 青云天空重新挂好饵，把竿抛了出去，眯起眼睛，尾巴在身后悠闲地画着圈。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「训练员～要是实在钓不到，用不用我匀你几条啊～喵哈哈～」
+      - 就在青云天空跟%YOU%得意的炫耀时，%SEX%的竿梢猛地一沉。
+      - 鱼竿的尾部从栏杆上弹了起来，几乎要飞出去。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「诶——！」
+      - 青云天空的反应比%SEX%的脑子快。%SEX%整个人扑过去，双手死死抓住竿柄，身体被那股突如其来的力量拽得往前一踉跄。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「训练员——！救命！！」
+      - 没等青云天空喊完，%YOU%已经丢了手里的竿子跑了过来。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「稳杆！先稳杆！」
+      - %YOU%蹲到%SEX%身边，一手按住竿尾，一手托住竿身的中段。
+      - 两个人的力量加上去，鱼竿才勉强稳住，但竿梢依然弯成了一张满弓，在水面上剧烈地颤动。
+      - 泄力器发出尖锐的嘶鸣声，鱼线被疯狂地往外拉。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「什么东西……这什么东西……」
+      - 青云天空的声音带着一丝慌乱，但更多的是兴奋。
+      - 泄力器叫了十几秒，终于停了。
+      - 青云天空开始收线，一圈一圈，速度不快但是很稳。
+      - 收到一半的时候，那股力量又爆发了，这次是横向冲刺，鱼线在水面上划出一道长长的水花。
+      - 「换边！跟着它走！」
+      - 青云天空侧过身，把竿往鱼冲刺的反方向压，整个人跟着在堤防上移动了几步。
+      - 这时鱼线的方向变了，水下那个东西被迫转了个弯，但还是在拼命地往下钻。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「是不是挂到礁石了？」
+      - 青云天空的声音带着一丝紧张。
+      - 「没有，还在动——收线，别停。」
+      - %SEX%咬着嘴唇，继续摇轮。每摇一圈都要付出很大的力气，手臂上的肌肉绷得紧紧的，额头上的汗水顺着鬓角往下流。
+      - 鱼被慢慢拖到了浅层，这时它又挣扎了一次，但已经是强弩之末，侧着身子被拖到堤防边缘，背鳍的硬棘在水面上划出一排细小的波纹。
+      - %YOU%拿起抄网，对准鱼头的方向，等青云天空把鱼带进网口，手腕一翻，兜住了整条鱼。
+      - 汗水朦胧了青云天空的双眼，待%SEX%擦去时，%SEX%看清了这条鱼的全貌。
+      - 这条鱼大概只有四十多厘米。身体侧扁得像一块厚钢板，背部银灰带棕色，腹部偏白。
+      - 最显眼的是那十来条暗色的横带，从背部延伸到腹部，像穿着一件条纹外套。
+      - 突然，%SEX%丢下鱼竿，一屁股坐在了水泥地上。
+      - 「才不到半米，力气怎么这么大。」
+      - 「嗯？小青？你怎么了？」
+      - 抄网里的鱼还在拼命翻腾，拍打着网兜，溅了%SEX%一脸的海水。
+      - 但%SEX%没有躲，就那么跪在地上，爬了过去，眼睛瞪得溜圆。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「横带石鲷。」
+      - 青云天空的声音发飘，像是从很远的地方传来的。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「这就是……矶钓之王……」
+      - %SEX%伸出手，小心翼翼地碰了碰鱼的背鳍，被硬棘扎了一下，立刻缩了回去……。
+      - 「训练员……」
+      - 青云天空的声音带着压不住的颤抖。
+      - %SEX%盯着网里那条还在喘气的鱼，沉默了两秒，然后突然发出一声尖叫。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「钓到啦————！」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「横带石鲷！横带石鲷！我钓到横带石鲷了啊啊啊！」
+      - 青云天空双手举过头顶，朝着大海疯狂的大喊。
+      - 旁边几个钓友都看了过来，有人已经掏出手机在拍了。
+      - %YOU%蹲在旁边，看着%SEX%这副彻底放飞自我的样子，忍不住笑了。
+      - 「看来你今天的感觉真的没错～」
+      - %SEX%慢慢抬起头，脸上的表情从狂喜变成心虚，又从心虚变成理直气壮。
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「这条也在预料之中～」
+      - 钓友评价：「太幸运了！回去把这跟杆子供起来！」
+
+
 o_r_walking:
   - random: true
     lines:
@@ -2058,6 +3819,80 @@ good_night_normal:
         - ฅ (^ ω ^ ฅ) ～ ﾉｼ
         - 「可是现在才刚吃完午饭！」
         - 无能的训练员只能看着搭档消失在午后的阳光下。
+
+
+# 75 爱慕以上
+gn_sex:
+  title: 叫春
+  lines:
+    - 在一天忙碌的工作结束后，%YOU%回到了公寓。
+    - 刚打开门，%YOU%就听到一股奇怪的声音从卧室内传来。
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: ？？？
+        - 「嗅哧～～嗅哧～～」
+    - %YOU%瞬间警惕起来，蹑手蹑脚的走近，那奇怪的声音也愈发清晰。
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: ？？？
+        - 「嗅哈～～嗅哈～～」
+    - 这时，%YOU%听到了一个熟悉的声音。
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「唔——呼——嗯哼～～～」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「训练员的气味，喜欢～～嘿嘿～～」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「喜欢～喜欢～喜欢～喜欢～喜欢～」
+    - （小青吗……）
+    - %YOU%走进卧室，啪一下把灯打开。
+    - if: d.check === 2
+      lines:
+        - 但%YOU%的目光所及只有凌乱的床单，却不见目标人物。
+        - 砰！
+        - 身后的门被突然关上，%YOU%心头一紧，一双手从背后紧紧的抱住了%YOU%。
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「训练员好过分哦～这么长时间都没有跟小青亲热……」
+        - 说完便抱着%YOU%扑到了床上。
+        - 「小青——唔——」
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「嘘——今天——谁也跑不掉哦～～」
+    - if: d.check < 2
+      lines:
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「呜啊！！」
+        - 只见青云天空光着身子，身上披着%YOU%未洗的衬衫，床上被她搅的十分凌乱。
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「训练员……那个……」
+        - 她抱着你的枕头害羞的蜷缩着。
+        - 看到自己搭档可爱的模样，这时%YOU%——
+        - acc: 1
+          content: 忍不了了！
+        - acc: 2
+          content: 默默关上门……（拒绝）
+
 
 birthday:
   title: 生日
