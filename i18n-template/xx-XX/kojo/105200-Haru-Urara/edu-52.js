@@ -12490,7 +12490,7 @@ module.exports = {
      * @param {PrintedSpan} call_30 春乌拉拉对米浴的称呼
      * @param {PrintedSpan} call_61 春乌拉拉对圣王光环的称呼
      * @param {PrintedSpan} r_call_u 米浴对春乌拉拉的称呼
-     * @param {PrintedSpan} callname_61 春乌拉拉对圣王光环的称呼
+     * @param {PrintedSpan} callname_61 圣王光环对玩家的称呼
      * @param {PrintedSpan} h_call_u 圣王光环对春乌拉拉的称呼
      */
     const f = async (
@@ -12523,10 +12523,9 @@ module.exports = {
       ]);
       era.println();
       await urara_say_in_lines(
-        urara,
         '嗯！最近有点睡不着，结果每次回过神来的时候就到这个时间了！',
       );
-      await urara_say_in_lines(urara, [
+      await urara_say_in_lines([
         '不过已经是这个时间了，',
         call_30,
         ' 那边有什么事吗？',
@@ -12538,7 +12537,7 @@ module.exports = {
         ' 还是觉得很难受吗？',
       ]);
       era.println();
-      await urara_say_in_lines(urara, [
+      await urara_say_in_lines([
         '咦？诶？乌拉拉并没有没有哦？',
         call_30,
         ' 为什么这么说？',
@@ -12550,7 +12549,7 @@ module.exports = {
         ' 不擅长伪装自己呢，最近总是没什么精神，就连米浴每天都跟在身后都没发现哦？',
       ]);
       era.println();
-      await urara_say_in_lines(urara, '诶、跟在身后？是这样吗？我完全没发现！');
+      await urara_say_in_lines('诶、跟在身后？是这样吗？我完全没发现！');
       era.println();
       await rice.say_and_wait([
         '对不起！那个、因为 ',
@@ -12558,13 +12557,12 @@ module.exports = {
         ' 最近好像没什么精神，但是总找不到搭话的机会……',
       ]);
       era.println();
-      await urara_say_in_lines(urara, [
+      await urara_say_in_lines([
         '没关系的！而且 ',
         call_30,
         ' 又没错哦？但我自己也搞不太清楚，所以不知道要怎么做才好。',
       ]);
       await urara_say_in_lines(
-        urara,
         '我也觉得再这样下去是不行的，可是我只要一想起那天的事情，眼泪就又要掉下来了……',
       );
       era.println();
@@ -12579,7 +12577,7 @@ module.exports = {
         ' 愿意的话，可以听米浴说说吗？',
       ]);
       era.println();
-      await urara_say_in_lines(urara, [
+      await urara_say_in_lines([
         call_30,
         ' 真冷静啊，难道 ',
         call_30,
@@ -12598,7 +12596,7 @@ module.exports = {
           '结果呢，那时周围全都是失望的叹息声，还有很多人因此生气了，很没道理吧？',
         );
         era.println();
-        await urara_say_in_lines(urara, [
+        await urara_say_in_lines([
           '嗯，那时 ',
           call_30,
           ' 一定受了很多委屈吧……',
@@ -12626,7 +12624,7 @@ module.exports = {
           '结果呢，周围全都是失望的叹息声，还有很多人因此生气了，很没道理吧……',
         );
         era.println();
-        await urara_say_in_lines(urara, [
+        await urara_say_in_lines([
           '嗯，那时 ',
           call_30,
           ' 受了很多委屈呢……',
@@ -12658,7 +12656,7 @@ module.exports = {
         ' 也会为难的吧？',
       ]);
       era.println();
-      await urara_say_in_lines(urara, ['但是，', call_61, ' 不是也没睡吗？']);
+      await urara_say_in_lines(['但是，', call_61, ' 不是也没睡吗？']);
       era.println();
       if (era.get('cflag:61:殿堂') > 0) {
         await halo.say_and_wait(
@@ -12670,7 +12668,7 @@ module.exports = {
           '。对面的床上，手机的光从被子下漏出来了。',
         ]);
         era.println();
-        await urara_say_in_lines(urara, [call_61, ' 是生气了吗……']);
+        await urara_say_in_lines([call_61, ' 是生气了吗……']);
         era.println();
         await halo.say_and_wait([
           '才没有啊，只是最近看 ',
@@ -12685,7 +12683,7 @@ module.exports = {
           '我说有过吧，就算要在夜里看手机也不要把亮度调那么高。',
         );
         era.println();
-        await urara_say_in_lines(urara, '对不起哦……');
+        await urara_say_in_lines('对不起哦……');
         era.println();
         await halo.say_and_wait([
           '不是要你道歉啦，只是最近 ',
@@ -12694,17 +12692,16 @@ module.exports = {
         ]);
       }
       era.println();
-      await urara_say_in_lines(urara, '嗯，其实——');
-      await urara_say_in_lines(urara, '——');
+      await urara_say_in_lines('嗯，其实——');
+      await urara_say_in_lines('——');
 
       era.drawLine({ content: '【5月XX日「乌拉拉」与「小圣王」11:13】' });
-      await urara_say_in_lines(urara, ['就是这样，', call_30, ' 是这么说的……']);
-      await urara_say_in_lines(urara, [
+      await urara_say_in_lines(['就是这样，', call_30, ' 是这么说的……']);
+      await urara_say_in_lines([
         call_61,
         '，你说我只要更加努力，大家就不会难过了吗？',
       ]);
       await urara_say_in_lines(
-        urara,
         '只要我坚持下去，就不会有人再觉得『乌拉拉不该去比赛』了吗？',
       );
       era.println();
@@ -12714,7 +12711,7 @@ module.exports = {
         '，我应该更早和你说的，而且米浴的方法，也不完全适合你的情况。',
       ]);
       era.println();
-      await urara_say_in_lines(urara, ['诶？', call_61, '，这是什么意思？']);
+      await urara_say_in_lines(['诶？', call_61, '，这是什么意思？']);
       era.println();
       await halo.say_and_wait([
         '唉……虽然我接下来要说的事可能会让 ',
@@ -12738,7 +12735,7 @@ module.exports = {
         '虽然听上去可能很过分，但只要选择去争夺胜利，就不可能让所有人都幸福。',
       );
       era.println();
-      await urara_say_in_lines(urara, ['怎么会这样……那小圣王也？']);
+      await urara_say_in_lines(['怎么会这样……那小圣王也？']);
       era.println();
       await halo.say_and_wait(
         '所以我会接受那些来自他人的诅咒，并堂堂正正的跑下去，就算这并不公正也好。',
@@ -12758,7 +12755,6 @@ module.exports = {
       await halo.say_and_wait([h_call_u, '，你之前说过想赢对吧。']);
       era.println();
       await urara_say_in_lines(
-        urara,
         '嗯，不只是为了大家，现在的乌拉拉也想要赢下去，但是却发生了那样的事。',
       );
       era.println();
@@ -12767,7 +12763,7 @@ module.exports = {
       );
       await halo.say_and_wait(['所以，', h_call_u, ' 也不必一直为此伤心。']);
       era.println();
-      await urara_say_in_lines(urara, [
+      await urara_say_in_lines([
         call_61,
         ' 的话总是很难懂啊，不过既然 ',
         call_61,
@@ -12783,7 +12779,6 @@ module.exports = {
       );
       era.println();
       await urara_say_in_lines(
-        urara,
         '不可以这么说哦？而且你也是乌拉拉的朋友嘛。',
       );
       era.println();
@@ -12800,11 +12795,9 @@ module.exports = {
       );
       era.println();
       await urara_say_in_lines(
-        urara,
         '……嘿嘿～又来了呢，真狡猾啊，总是对着朋友说这样过分的真心话。',
       );
       await urara_say_in_lines(
-        urara,
         '而且如果我答应了你的请求，你就可以露出真正开心的笑容了吗？',
       );
       era.println();
@@ -12813,7 +12806,6 @@ module.exports = {
       );
       era.println();
       await urara_say_in_lines(
-        urara,
         '可是如果要乌拉拉来作答的话，我不会觉得你的方法是正确的哦？',
       );
       era.println();
@@ -12826,7 +12818,6 @@ module.exports = {
       );
       era.println();
       await urara_say_in_lines(
-        urara,
         '嗯，我们一直相信着彼此，所以乌拉拉无论何时都不能答应你的请求哦？',
       );
       era.println();
@@ -12870,8 +12861,8 @@ module.exports = {
       ]);
       await urara.print_and_wait(['所以，', callname, '，请接起来——']);
       era.drawLine({ content: `【5月XX日「乌拉拉」与「${callname}」11:50】` });
-      await urara_say_in_lines(urara, '——');
-      await urara_say_in_lines(urara, [callname, '，还在吗？']);
+      await urara_say_in_lines('——');
+      await urara_say_in_lines([callname, '，还在吗？']);
     };
     f.title = title;
     return f;

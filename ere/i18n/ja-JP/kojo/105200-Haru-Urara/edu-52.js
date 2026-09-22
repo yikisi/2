@@ -12472,10 +12472,9 @@ module.exports = {
       ]);
       era.println();
       await urara_say_in_lines(
-        urara,
         'うん！最近ちょっと眠れなくて、気づくといつもこの時間になっちゃう！',
       );
-      await urara_say_in_lines(urara, [
+      await urara_say_in_lines([
         'でももうこんな時間だよ。',
         call_30,
         ' のほう、何かあった？',
@@ -12483,7 +12482,7 @@ module.exports = {
       era.println();
       await rice.say_and_wait(['この前のこと、', r_call_u, '、まだつらい？']);
       era.println();
-      await urara_say_in_lines(urara, [
+      await urara_say_in_lines([
         'え？えっ？ウララ、そんなことないよ？',
         call_30,
         '、なんでそう思うの？',
@@ -12495,7 +12494,6 @@ module.exports = {
       ]);
       era.println();
       await urara_say_in_lines(
-        urara,
         'えっ、後ろについてたの？そうだったの？全然気づかなかった！',
       );
       era.println();
@@ -12505,13 +12503,12 @@ module.exports = {
         ' が最近元気ないみたいで、でも話しかけるタイミングが……',
       ]);
       era.println();
-      await urara_say_in_lines(urara, [
+      await urara_say_in_lines([
         '大丈夫だよ！',
         call_30,
         ' は悪くないよ？でもウララもよくわからなくて、どうしたらいいかわからないんだ。',
       ]);
       await urara_say_in_lines(
-        urara,
         'このままじゃだめだって思う。でもあの日のことを思い出すと、また涙が出ちゃう……',
       );
       era.println();
@@ -12526,7 +12523,7 @@ module.exports = {
         ' がよければ、ライスの話、聞いてもらえる？',
       ]);
       era.println();
-      await urara_say_in_lines(urara, [
+      await urara_say_in_lines([
         call_30,
         '、すごく落ち着いてるね。',
         call_30,
@@ -12545,7 +12542,7 @@ module.exports = {
           'そしたら周りはがっかりしたため息ばかりで、怒ってる人もたくさんいて……おかしいよね？',
         );
         era.println();
-        await urara_say_in_lines(urara, [
+        await urara_say_in_lines([
           'うん。あのとき ',
           call_30,
           '、すごくつらい目にあったんだね……',
@@ -12573,7 +12570,7 @@ module.exports = {
           'そしたら周りはがっかりしたため息ばかりで、怒ってる人もたくさんいて……おかしいよね……',
         );
         era.println();
-        await urara_say_in_lines(urara, [
+        await urara_say_in_lines([
           'うん。あのとき ',
           call_30,
           '、すごくつらい目にあったんだね……',
@@ -12605,7 +12602,7 @@ module.exports = {
         ' も困るでしょう？',
       ]);
       era.println();
-      await urara_say_in_lines(urara, ['でも、', call_61, ' も起きてるよね？']);
+      await urara_say_in_lines(['でも、', call_61, ' も起きてるよね？']);
       era.println();
       if (era.get('cflag:61:殿堂') > 0) {
         await halo.say_and_wait(
@@ -12617,7 +12614,7 @@ module.exports = {
           '。向かいのベッド、布団の下から携帯の光が漏れてる。',
         ]);
         era.println();
-        await urara_say_in_lines(urara, [call_61, '、怒ってる……？']);
+        await urara_say_in_lines([call_61, '、怒ってる……？']);
         era.println();
         await halo.say_and_wait([
           '怒ってないわ。ただ最近、',
@@ -12632,7 +12629,7 @@ module.exports = {
           '言ったでしょう。夜に携帯を見るなら、輝度をそんなに上げないで。',
         );
         era.println();
-        await urara_say_in_lines(urara, 'ごめんね……');
+        await urara_say_in_lines('ごめんね……');
         era.println();
         await halo.say_and_wait([
           '謝ってほしいわけじゃないわ。ただ最近の ',
@@ -12641,21 +12638,20 @@ module.exports = {
         ]);
       }
       era.println();
-      await urara_say_in_lines(urara, 'うん、実は——');
-      await urara_say_in_lines(urara, '——');
+      await urara_say_in_lines('うん、実は——');
+      await urara_say_in_lines('——');
 
       era.drawLine({ content: '【5月XX日「ウララ」と「キング」11:13】' });
-      await urara_say_in_lines(urara, [
+      await urara_say_in_lines([
         'そういうわけで、',
         call_30,
         ' はそう言ってた……',
       ]);
-      await urara_say_in_lines(urara, [
+      await urara_say_in_lines([
         call_61,
         '、ウララがもっとがんばれば、みんなは悲しまなくなるの？',
       ]);
       await urara_say_in_lines(
-        urara,
         'ウララが続けてたら、もう誰も『ウララはレースに出ちゃだめ』って思わなくなる？',
       );
       era.println();
@@ -12665,7 +12661,7 @@ module.exports = {
         '。もっと早く言うべきだった。それにライスのやり方は、あなたの状況には完全には合わないわ。',
       ]);
       era.println();
-      await urara_say_in_lines(urara, ['え？', call_61, '、どういう意味？']);
+      await urara_say_in_lines(['え？', call_61, '、どういう意味？']);
       era.println();
       await halo.say_and_wait([
         '……これから言うことは、',
@@ -12689,7 +12685,7 @@ module.exports = {
         'ひどく聞こえるかもしれないけど、勝ちを取りに行くなら、全員を幸せにはできない。',
       );
       era.println();
-      await urara_say_in_lines(urara, ['そんな……じゃあキングも？']);
+      await urara_say_in_lines(['そんな……じゃあキングも？']);
       era.println();
       await halo.say_and_wait(
         'だから私は、他人からの呪いを受け止めて、胸を張って走る。それが公正じゃなくても。',
@@ -12709,7 +12705,6 @@ module.exports = {
       await halo.say_and_wait([h_call_u, '、前に勝ちたいって言ったわね。']);
       era.println();
       await urara_say_in_lines(
-        urara,
         'うん。みんなのためだけじゃなくて、今のウララも勝ちたい。でも、あんなことが起きちゃった。',
       );
       era.println();
@@ -12722,7 +12717,7 @@ module.exports = {
         ' も、ずっとこれで沈んでなくていい。',
       ]);
       era.println();
-      await urara_say_in_lines(urara, [
+      await urara_say_in_lines([
         call_61,
         ' の話、いつも難しいね。でも ',
         call_61,
@@ -12742,7 +12737,6 @@ module.exports = {
       );
       era.println();
       await urara_say_in_lines(
-        urara,
         'そんなこと言っちゃだめだよ？ あなたもウララの友だちでしょ。',
       );
       era.println();
@@ -12759,11 +12753,9 @@ module.exports = {
       );
       era.println();
       await urara_say_in_lines(
-        urara,
         '……えへへ～また来たね。ずるいよ。友だちにあんなにひどい本音ばっかり。',
       );
       await urara_say_in_lines(
-        urara,
         'それに、ウララがお願いを聞いたら、あなたは本当に嬉しい顔になれるの？',
       );
       era.println();
@@ -12772,7 +12764,6 @@ module.exports = {
       );
       era.println();
       await urara_say_in_lines(
-        urara,
         'でもウララが答えるなら、あなたのやり方は正しいとは思えないよ？',
       );
       era.println();
@@ -12785,7 +12776,6 @@ module.exports = {
       );
       era.println();
       await urara_say_in_lines(
-        urara,
         'うん。ずっと信じあってる。だからウララは、いつでもあなたのお願いを聞けないよ？',
       );
       era.println();
@@ -12831,8 +12821,8 @@ module.exports = {
       ]);
       await urara.print_and_wait(['だから、', callname, '、出て——']);
       era.drawLine({ content: `【5月XX日「ウララ」と「${callname}」11:50】` });
-      await urara_say_in_lines(urara, '——');
-      await urara_say_in_lines(urara, [callname, '、まだいる？']);
+      await urara_say_in_lines('——');
+      await urara_say_in_lines([callname, '、まだいる？']);
     };
     f.title = title;
     return f;
