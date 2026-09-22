@@ -1038,6 +1038,7 @@ module.exports = {
       }
       await era.printAndWait(`真是……`);
       await era.printAndWait(`${you.name} 红着脸，欣然接受了露娜的小小报复。`);
+      return [ret];
     };
     f.title = title;
     return f;
@@ -2248,6 +2249,7 @@ module.exports = {
       );
       await era.printAndWait('抱歉……已经没法回头了。');
       await era.printAndWait(`${you.name} 失去了意识。`);
+      return [ret];
     };
     f.title = title;
     return f;

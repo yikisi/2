@@ -2169,6 +2169,7 @@ module.exports = {
           '很好，有新的发现那么这次的实验就不至于白费了',
         );
       }
+      return [];
     };
     f.title = title;
     return f;

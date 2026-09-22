@@ -4758,6 +4758,7 @@ module.exports = {
       ]);
       era.println();
       await era.printAndWait(['年关将至，接下来，就是有马纪念了']);
+      return [];
     };
     f.title = title;
     return f;

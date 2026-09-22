@@ -1282,6 +1282,7 @@ module.exports = {
       await era.printAndWait(
         `Cheeks burning, ${you.name} gladly accepts Luna's little act of revenge.`,
       );
+      return [ret];
     };
     f.title = title;
     return f;
@@ -2747,6 +2748,7 @@ module.exports = {
         'Forgive me... the current has already carried us too far.',
       );
       await era.printAndWait(`Darkness closes over ${you.name} completely.`);
+      return [ret];
     };
     f.title = title;
     return f;

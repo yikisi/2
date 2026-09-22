@@ -1200,6 +1200,7 @@ module.exports = {
       await era.printAndWait(
         `${you.name} вспыхнул и с охотой принял маленькую месть Луны.`,
       );
+      return [ret];
     };
     f.title = title;
     return f;
@@ -2560,6 +2561,7 @@ module.exports = {
       );
       await era.printAndWait('Прости… пути назад уже нет.');
       await era.printAndWait(`${you.name}  потерял сознание.`);
+      return [ret];
     };
     f.title = title;
     return f;

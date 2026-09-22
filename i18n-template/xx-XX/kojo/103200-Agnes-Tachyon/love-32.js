@@ -1629,6 +1629,7 @@ module.exports = {
         tachyon.sex_code - 1 ? '公主' : '王子',
         '大人',
       ]);
+      return [];
     };
     f.title = title;
     return f;

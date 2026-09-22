@@ -2286,6 +2286,7 @@ module.exports = {
           'Хорошо. Есть новая находка — так этот опыт не зря',
         );
       }
+      return [];
     };
     f.title = title;
     return f;

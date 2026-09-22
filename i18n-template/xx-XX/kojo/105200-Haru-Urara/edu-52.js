@@ -10378,6 +10378,7 @@ module.exports = {
       era.drawLine();
       await inner_urara.say_as_unknown_and_wait('……');
       await inner_urara.say_as_unknown_and_wait('我、我没关系哦……？唉……');
+      return ret;
     };
     f.title = title;
     return f;

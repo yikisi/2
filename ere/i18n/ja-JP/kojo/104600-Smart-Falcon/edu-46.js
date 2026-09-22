@@ -186,6 +186,7 @@ module.exports = {
         await era.printAndWait(`そっと扉を閉めて、${callname}は保健室を出た。`);
         await era.printAndWait(`ファル子はすぐに元気を取り戻した。`);
       }
+      return [ret];
     };
     f.title = title;
     return f;
@@ -288,6 +289,7 @@ module.exports = {
           );
         }
       }
+      return [ret];
     };
     f.title = title;
     return f;
@@ -625,8 +627,7 @@ module.exports = {
       await falcon.say_and_wait(`そういえば、${callname}も一緒に来る？`);
       era.printButton(`僕も手伝いたい`, 1);
       era.printButton(`行きたいけど、こっちに仕事が残ってる`, 2);
-      const ret = await era.input();
-      if (ret === 1) {
+      if ((await era.input()) === 1) {
         await falcon.say_and_wait(`やった！`);
         await falcon.say_and_wait(`じゃあ今すぐ出発！`);
         await era.printAndWait(
@@ -660,11 +661,10 @@ module.exports = {
         await era.printAndWait(
           `ゴミの大半は${falcon.name}が処理した。「助かった」は謙遜にすぎない。`,
         );
-        await era.printAndWait(`なんて返そう。\n`);
+        era.print(`なんて返そう。`);
         era.printButton(`ファル子のライブ、先に見てもいい？`, 1);
         era.printButton(`次の中間テスト、全部合格！`, 2);
-        const ret1 = await era.input();
-        if (ret1 === 1) {
+        if ((await era.input()) === 1) {
           await falcon.say_and_wait(
             `え？ それでいいの？ ${callname}のお願いなら。`,
           );
@@ -684,7 +684,7 @@ module.exports = {
           await era.printAndWait(
             `まだ残る白い息、白んだ空、小さな空き地で、ライブが始まる。`,
           );
-        } else if (ret1 === 2) {
+        } else {
           await falcon.say_and_wait(`えええ？ そのお願い？`);
           await you.say_and_wait(
             `わからないところは僕も見る。だからファル子、逃げるのはなしだ。`,
@@ -789,8 +789,7 @@ module.exports = {
       await era.printAndWait(`少し考えたあと、${you.name}は——\n`);
       era.printButton(`他のお店を当たってみない？`, 1);
       era.printButton(`大事なのは、ファル子のアイドルの心だ！`, 2);
-      const ret = await era.input();
-      if (ret === 1) {
+      if ((await era.input()) === 1) {
         await era.printAndWait(`${falcon.name}が積み上げてきた人気を思えば。`);
         await you.say_and_wait(
           `${falcon.uma_sex_title}アイドルとして、商店街のお店でイベントして経費を集めるのはどう？`,
@@ -1345,8 +1344,7 @@ module.exports = {
       await era.printAndWait(`もう深夜だ。こんな時間に、出るべきか。`);
       era.printButton(`出る`, 1);
       era.printButton(`出ない`, 2);
-      const ret = await era.input();
-      if (ret === 1) {
+      if ((await era.input()) === 1) {
         await era.printAndWait(
           `深夜のメッセージなら、出ない理由はないだろう。`,
         );

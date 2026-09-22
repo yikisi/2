@@ -4985,6 +4985,7 @@ module.exports = {
       ]);
       era.println();
       await era.printAndWait(['年の瀬が近い。次は、有馬記念だ']);
+      return [];
     };
     f.title = title;
     return f;

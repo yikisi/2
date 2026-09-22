@@ -1899,6 +1899,7 @@ module.exports = {
           'を守る心があるのかどうかは、よくわからない。',
         ]);
       }
+      return [ret];
     };
     f.title = title;
     return f;

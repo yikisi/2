@@ -1776,6 +1776,7 @@ module.exports = {
         tachyon.sex_code - 1 ? 'моя принцесса' : 'мой принц',
         '.',
       ]);
+      return [];
     };
     f.title = title;
     return f;

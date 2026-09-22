@@ -579,8 +579,7 @@ module.exports = {
       await falcon.say_and_wait(`说起来，${callname}打算一起来吗？`);
       era.printButton(`我也想出一份力`, 1);
       era.printButton(`虽然很想去，但是这边还有工作要做`, 2);
-      const ret = await era.input();
-      if (ret === 1) {
+      if ((await era.input()) === 1) {
         await falcon.say_and_wait(`那真是太好了！`);
         await falcon.say_and_wait(`事不宜迟现在就出发吧！`);
         await era.printAndWait(
@@ -612,11 +611,10 @@ module.exports = {
         await era.printAndWait(
           `大部分的垃圾都是${falcon.name}处理的，帮了大忙只是一种谦辞罢了。`,
         );
-        await era.printAndWait(`该怎么回复好呢？\n`);
+        era.print(`该怎么回复好呢？`);
         era.printButton(`可以让我提前欣赏到飞鹰子的演出吗？`, 1);
         era.printButton(`接下来的期中考试全部及格！`, 2);
-        const ret1 = await era.input();
-        if (ret1 === 1) {
+        if ((await era.input()) === 1) {
           await falcon.say_and_wait(
             `咦？这样就好了吗？既然是${callname}的要求的话。`,
           );
@@ -636,7 +634,7 @@ module.exports = {
           await era.printAndWait(
             `尚未消散的白雾，泛白的天空，以及小小的空地所组成的演唱会现在开始。`,
           );
-        } else if (ret1 === 2) {
+        } else {
           await falcon.say_and_wait(`咦咦咦？居然是这个要求。`);
           await you.say_and_wait(
             `有什么不会的地方我也会辅导你的，所以飞鹰子不要想着逃跑这种事情了。`,
@@ -737,8 +735,7 @@ module.exports = {
       await era.printAndWait(`短暂思考过后，${you.name}决定\n`);
       era.printButton(`试着考虑一下其他店铺？`, 1);
       era.printButton(`最重要是飞鹰子作为偶像的心！`, 2);
-      const ret = await era.input();
-      if (ret === 1) {
+      if ((await era.input()) === 1) {
         await era.printAndWait(`如果考虑到${falcon.name}积攒下来的人气。`);
         await you.say_and_wait(
           `作为${falcon.uma_sex_title}偶像向商业街的店铺开展活动筹集经费怎么样？`,
@@ -1246,8 +1243,7 @@ module.exports = {
       await era.printAndWait(`已经是深夜了，这种时候要接电话吗？`);
       era.printButton(`接`, 1);
       era.printButton(`不接`, 2);
-      const ret = await era.input();
-      if (ret === 1) {
+      if ((await era.input()) === 1) {
         await era.printAndWait(`既然是深夜发来的短信，没有不接的道理吧？`);
         await era.printAndWait(`这么想着${you.name}打开了手机。`);
         await falcon.say_and_wait(`晚上好！${callname}睡着了吗？`);

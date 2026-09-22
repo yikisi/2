@@ -1792,6 +1792,7 @@ module.exports = {
       await era.printAndWait(`细腻优美的字迹仿佛是在与本人进行对话。`);
       await you.say_and_wait(`3q，${maru.name}。`);
       await era.printAndWait(`不知何时${you.name}也被同化了。`);
+      return [ret];
     };
     f.title = title;
     return f;
@@ -2250,6 +2251,7 @@ module.exports = {
         `${you.name}接过了从${maru.name}那里得到的巧克力。`,
       );
       await maru.say_and_wait(`今后也请和${maru.name}一同前行吧，${callname}♪`);
+      return [ret];
     };
     f.title = title;
     return f;

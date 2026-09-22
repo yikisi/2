@@ -2257,6 +2257,7 @@ module.exports = {
           'よろしい。新しい発見があれば、今回の実験も無駄ではありませんわ',
         );
       }
+      return [];
     };
     f.title = title;
     return f;

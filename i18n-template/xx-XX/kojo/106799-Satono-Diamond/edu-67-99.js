@@ -2331,6 +2331,7 @@ module.exports = {
           '里见光钻似乎在共同训练中锻炼到忍耐力，并且也成功转换了心情。',
         );
       }
+      return [ret];
     };
     f.title = title;
     return f;

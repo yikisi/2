@@ -1913,6 +1913,7 @@ module.exports = {
       await era.printAndWait(`繊細で美しい字は、本人と話しているようだ。`);
       await you.say_and_wait(`サンキュー、${maru.name}。`);
       await era.printAndWait(`いつの間にか${you.name}も同化していた。`);
+      return [ret];
     };
     f.title = title;
     return f;
@@ -2420,6 +2421,7 @@ module.exports = {
       await maru.say_and_wait(
         `この先も${maru.name}と一緒に進んでね、${callname}♪`,
       );
+      return [ret];
     };
     f.title = title;
     return f;
@@ -2549,6 +2551,7 @@ module.exports = {
       await era.printAndWait(
         `苦い笑顔の${maru.uma_sex_title}は、トレーニング室の扉をそっと閉めた。`,
       );
+      return [ret];
     };
     f.title = title;
     return f;

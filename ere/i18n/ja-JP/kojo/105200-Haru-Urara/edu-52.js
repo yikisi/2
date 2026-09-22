@@ -10353,6 +10353,7 @@ module.exports = {
       await inner_urara.say_as_unknown_and_wait(
         'わ、わたくしは大丈夫ですよ……？ ……',
       );
+      return ret;
     };
     f.title = title;
     return f;

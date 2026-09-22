@@ -1442,6 +1442,7 @@ module.exports = {
           `どうやら ${you.name} がゴルシに使われる生活は、まだまだ長く続きそうだ……`,
         );
       }
+      return [ret];
     };
     f.title = title;
     return f;

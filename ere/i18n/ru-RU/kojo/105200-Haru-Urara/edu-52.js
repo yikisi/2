@@ -10702,6 +10702,7 @@ module.exports = {
       era.drawLine();
       await inner_urara.say_as_unknown_and_wait('……');
       await inner_urara.say_as_unknown_and_wait('Я-я в порядке же…? Эх…');
+      return ret;
     };
     f.title = title;
     return f;

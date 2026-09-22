@@ -1350,6 +1350,7 @@ module.exports = {
           `看来，${you.name} 被小金船使来唤去的生活还要持续很久很久……`,
         );
       }
+      return [ret];
     };
     f.title = title;
     return f;

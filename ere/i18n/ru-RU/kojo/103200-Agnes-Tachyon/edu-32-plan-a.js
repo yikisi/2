@@ -5148,6 +5148,7 @@ module.exports = {
       ]);
       era.println();
       await era.printAndWait(['конец года на носу, а дальше — Arima Kinen']);
+      return [];
     };
     f.title = title;
     return f;

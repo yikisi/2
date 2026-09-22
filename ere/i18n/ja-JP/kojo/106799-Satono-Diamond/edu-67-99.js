@@ -100,6 +100,7 @@ module.exports = {
           ' を軸にしたレース映像を一緒に見届けた。',
         ]);
       }
+      return [ret];
     };
     f.title = title;
     return f;
@@ -2525,6 +2526,7 @@ module.exports = {
           'サトノダイヤモンドは合同トレーニングで忍耐を鍛え、気分転換にも成功したようだ。',
         );
       }
+      return [ret];
     };
     f.title = title;
     return f;

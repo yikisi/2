@@ -1162,6 +1162,7 @@ module.exports = {
       await era.printAndWait(
         `${you.name} は頰を赤らめ、ルナの小さな仕返しを欣然と受けた。`,
       );
+      return [ret];
     };
     f.title = title;
     return f;
@@ -2472,6 +2473,7 @@ module.exports = {
       );
       await era.printAndWait('すまない……もう引き返せない。');
       await era.printAndWait(`${you.name} は意識を失った。`);
+      return [ret];
     };
     f.title = title;
     return f;

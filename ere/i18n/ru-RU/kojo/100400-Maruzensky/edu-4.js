@@ -2024,6 +2024,7 @@ module.exports = {
       await era.printAndWait(
         `Неизвестно, когда ${you.name} тоже этому поддался(ась).`,
       );
+      return [ret];
     };
     f.title = title;
     return f;
@@ -2596,6 +2597,7 @@ module.exports = {
       await maru.say_and_wait(
         `И впредь прошу идти вперёд вместе с ${maru.name}, ${callname} ♪`,
       );
+      return [ret];
     };
     f.title = title;
     return f;
