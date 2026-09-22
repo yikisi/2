@@ -24,7 +24,7 @@ module.exports = {
         await era.printAndWait([
           '仿佛被玩坏的洋娃娃，昏迷的 ',
           urara.get_colored_name(),
-          '不住地痉挛着',
+          ' 不住地痉挛着',
         ]);
       }
     } else {
