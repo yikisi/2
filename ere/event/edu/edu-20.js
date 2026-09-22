@@ -224,9 +224,9 @@ module.exports = class extends CustomizedEdu {
    */
   async palace(sky, me) {
     await CustomizedEdu.common_palace(sky, me);
-    era.drawLine();
     era.set('flag:当前位置', location_enum.gate);
     if (!this.#marks.soft_be) {
+      era.drawLine();
       let key;
       if (
         get_custom_check(this.id)
@@ -235,7 +235,7 @@ module.exports = class extends CustomizedEdu {
       ) {
         key = 'perfect_ending';
       } else {
-        key = 'ws_ending';
+        key = 'normal_ending';
       }
       await print_title_with_kojo(this.#kojo, key, sky, this.#dict);
     } else {
