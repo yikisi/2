@@ -298,7 +298,9 @@ module.exports = {
       you.get_colored_name(),
       ' 担当的',
       acute.teen_sex_title,
-      '，奇瑞骏。',
+      '，',
+      acute.get_colored_name(),
+      '。',
     ]);
     await era.printAndWait('聊了许多、许多的话——');
     era.println();

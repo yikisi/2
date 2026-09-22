@@ -197,7 +197,7 @@ rec:
         content:
           - fontWeight: bold
             content: %CHARA%
-          - 「哼哼～♪ 从今以后，你就是天才%MAHOSHOJO% sweepy 大人专属的使魔了！」
+          - 「哼哼～♪ 从今以后，你就是天才%MOHOSHOJO% sweepy 大人专属的使魔了！」
       - color: %COLOR%
         content:
           - fontWeight: bold

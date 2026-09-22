@@ -28,7 +28,7 @@ recruit:
   title: Results
   lines:
     - After %B_NAME% and %L_NAME% both achieved respectable results, %CHARA% found %YOU% and praised %YOU%'s achievements.
-    - %CHRA% invited %YOU% to form a team and carry her management-first philosophy forward.
+    - %CHARA% invited %YOU% to form a team and carry her management-first philosophy forward.
 
 recruit_hentai:
   title: 「Results」

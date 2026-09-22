@@ -27,7 +27,7 @@ recruit:
   title: 成果
   lines:
     - %B_NAME% 和 %L_NAME% 都取得一定的成绩后，%CHARA% 找到 %YOU%，称赞 %YOU% 取得的成果。
-    - %CHRA% 邀请 %YOU% 共同组成一个团队，把她的管理主义理念继续发扬下去。
+    - %CHARA% 邀请 %YOU% 共同组成一个团队，把她的管理主义理念继续发扬下去。
 
 recruit_hentai:
   title: 「成果」

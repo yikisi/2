@@ -319,7 +319,9 @@ module.exports = {
       you.get_colored_name(),
       ' の担当となる',
       acute.teen_sex_title,
-      '、ワンダーアキュートと。',
+      '、',
+      acute.get_colored_name(),
+      '。',
     ]);
     await era.printAndWait('たくさん、たくさんの話をした——');
     era.println();

@@ -310,7 +310,9 @@ module.exports = {
       you.get_colored_name(),
       ' — ',
       acute.teen_sex_title,
-      ' Вандер Акют.',
+      ' ',
+      acute.get_colored_name(),
+      '.',
     ]);
     await era.printAndWait('Наговорили много-много —');
     era.println();

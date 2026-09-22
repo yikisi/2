@@ -198,7 +198,7 @@ rec:
         content:
           - fontWeight: bold
             content: %CHARA%
-          - 「ふんふん～♪ 今日からあなたは、天才%MAHOSHOJO% sweepy 様専用の使い魔よ！」
+          - 「ふんふん～♪ 今日からあなたは、天才%MOHOSHOJO% sweepy 様専用の使い魔よ！」
       - color: %COLOR%
         content:
           - fontWeight: bold
