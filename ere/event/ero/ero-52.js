@@ -18,7 +18,7 @@ module.exports = class extends CustomizedEro {
   static CHECK = false;
 
   async zero_stamina(urara, me, callname) {
-    i18n().kojo[this.id].ero.zero_stamina(urara, me);
+    await i18n().kojo[this.id].ero.zero_stamina(urara, me);
   }
 
   async prison(urara, me, callname, hook) {
