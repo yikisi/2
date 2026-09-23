@@ -27,7 +27,7 @@ module.exports = class extends CustomizedRecruit {
     const callname = sys_get_callname(this.id, 0);
     const urara = get_chara_talk(this.id);
     const kojo = i18n().kojo[this.id].recruit;
-    era.set('callname:0:52', '105202');
+    era.set('callname:0:52', '105211');
     const ret = await kojo.recruit(
       urara,
       get_inner_urara(),

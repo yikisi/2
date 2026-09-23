@@ -712,6 +712,11 @@ module.exports = async () => {
                 }
               });
             }
+            if (version <= 3110) {
+              if (era.get('callname:0:52') === '105202') {
+                era.set('callname:0:52', '105211');
+              }
+            }
             if (version < era.get('gamebase').version) {
               set_image_t(7);
               set_image_t(21);
