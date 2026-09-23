@@ -15633,9 +15633,9 @@ module.exports = {
     return f;
   })(),
   ws_95_46_3: (() => {
-    const title = (you) => [
+    const title = (urara) => [
       '「みんな」の願い、',
-      { color: you.color, content: `「${you.actual_name}」` },
+      { color: urara.color, content: `「${urara.actual_name}」` },
       'の願い',
     ];
     /**

@@ -1317,14 +1317,11 @@ module.exports = class extends CustomizedEdu {
             break;
           case 0: {
             const inner_urara = get_inner_urara();
-            await print_title_with_kojo(
-              this.#kojo,
-              'ws_95_46_3',
+            await print_event_name(
+              this.#kojo['ws_95_46_3'].title(urara),
               urara,
-              inner_urara,
-              me,
-              callname,
             );
+            await this.#kojo['ws_95_46_3'](urara, inner_urara, me, callname);
             const pesudo = sys_get_chara_pseudo(52);
             const p = new PseudoUma(
               -1,

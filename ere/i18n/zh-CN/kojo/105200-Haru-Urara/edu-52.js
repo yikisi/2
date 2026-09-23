@@ -15716,9 +15716,9 @@ module.exports = {
     return f;
   })(),
   ws_95_46_3: (() => {
-    const title = (you) => [
+    const title = (urara) => [
       '「大家」的祈愿、',
-      { color: you.color, content: `「${you.actual_name}」` },
+      { color: urara.color, content: `「${urara.actual_name}」` },
       '的祈愿',
     ];
     /**

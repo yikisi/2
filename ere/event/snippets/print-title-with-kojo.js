@@ -10,7 +10,7 @@ const { buff_colors } = require('#/data/color-const');
  * @returns {Promise<number[]>}
  */
 async function print_title_with_kojo(kojo, key, chara, ...args) {
-  if (kojo[key].title !== void 0) {
+  if ('title' in kojo[key]) {
     await print_event_name(kojo[key].title ?? 'TITLE LOST!', chara);
   }
   return args.length === 1 && args[0]._g
@@ -30,7 +30,7 @@ print_title_with_kojo.ending = async (kojo, key, chara, ...args) => {
     args.length === 1 && args[0]._g
       ? await kojo[key](args[0])
       : await kojo[key](chara, ...args);
-  if (kojo[key].title !== void 0) {
+  if ('title' in kojo[key]) {
     await print_event_name(
       [{ content: kojo[key].title, color: buff_colors[3] }],
       chara,
