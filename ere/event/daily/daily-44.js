@@ -155,10 +155,9 @@ module.exports = class extends CustomizedDaily {
   async o_s_drawing(sweep, me, hook) {
     const dict = this.#dict;
     await this.#kojo['o_s_drawing']({
-      drawing: this.#marks.drawing,
+      drawing: this.#marks.drawing++,
       ...dict,
     });
-    this.#marks.drawing++;
     let r;
     while (r !== 2) {
       r = (await this.#kojo['osd_loop'](dict))[0];

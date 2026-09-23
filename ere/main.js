@@ -436,7 +436,7 @@ module.exports = async () => {
               i18n().tt_version_resource,
               {
                 content: res_version,
-                url: `https://gitgud.io/umaera/data/uma-resource/-/archive/${res_version}/uma-resource-${res_version}.zip`,
+                url: 'https://umaera.gitgud.site/data/uma-resource/full.html',
               },
             ],
             type: 'text',
