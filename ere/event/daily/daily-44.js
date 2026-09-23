@@ -155,7 +155,7 @@ module.exports = class extends CustomizedDaily {
   async o_s_drawing(sweep, me, hook) {
     const dict = this.#dict;
     await this.#kojo['o_s_drawing']({
-      tree_hollow: this.#marks.drawing,
+      drawing: this.#marks.drawing,
       ...dict,
     });
     this.#marks.drawing++;
