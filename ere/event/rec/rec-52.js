@@ -27,7 +27,7 @@ module.exports = class extends CustomizedRecruit {
     const callname = sys_get_callname(this.id, 0);
     const urara = get_chara_talk(this.id);
     const kojo = i18n().kojo[this.id].recruit;
-    era.set('callname:0:52', '105211');
+    era.set('callname:0:52', '105202');
     const ret = await kojo.recruit(
       urara,
       get_inner_urara(),
@@ -50,7 +50,7 @@ module.exports = class extends CustomizedRecruit {
     }
     era.set('cflag:52:招募状态', recruit_flags.yes);
     era.set('callname:52:0', 'trainer');
-    era.set('callname:0:52', '105202');
+    era.set('callname:0:52', '105211');
     era.set('flag:当前互动角色', 52);
     add_event(
       event_hooks.week_end,
