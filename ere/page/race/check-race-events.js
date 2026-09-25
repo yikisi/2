@@ -73,7 +73,7 @@ async function check_race_events(race, info, team) {
   if (best === 1) {
     (rec_list[race] || []).forEach((cid) => {
       // CFLAGNAME:66 = 招募状态
-      if (!get(`cflag:${cid}:66`) && get(`cflag:${cid}:66`) <= 0) {
+      if (!get(`cflag:${cid}:66`) && get(`cflag:${cid}:67`) <= 0) {
         // CFLAGNAME:67 = 随机招募
         add(`cflag:${cid}:67`, -1);
       }

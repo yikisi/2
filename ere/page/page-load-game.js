@@ -1,6 +1,7 @@
 const era = require('#/era-electron');
 
 const sys_add_titles = require('#/system/chara/sys-add-titles');
+const { check_chara_ero_image } = require('#/system/ero/sys-calc-ero-image');
 const {
   sys_get_billings,
   sys_reg_race,
@@ -52,7 +53,6 @@ const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
 
 const { i18n } = require('#/i18n/selector');
-const { check_chara_ero_image } = require('#/system/ero/sys-calc-ero-image');
 
 function check_titles(...ids) {
   ids
@@ -70,14 +70,6 @@ function check_titles(...ids) {
         ),
       );
     });
-}
-
-function set_image_t(cid) {
-  // CSTRNAME:13 = 头像T
-  if (era.getAddedCharacters().includes(cid) && !era.get(`cstr:${cid}:13`)) {
-    // CSTRNAME:10 = 头像
-    era.set(`cstr:${cid}:13`, era.get(`staticcstr:${cid}:10`));
-  }
 }
 
 function find_key_by_value(dict, val) {
@@ -166,6 +158,7 @@ module.exports = async () => {
             flag_load_game = false;
             sys_load_game();
             // 向前兼容
+            const added = era.getAddedCharacters();
             const version = era.get('version');
             if (version < 1011) {
               // 大拓太阳神育成目标错误、贵妇人称号错误
@@ -191,7 +184,7 @@ module.exports = async () => {
                   }
                 }),
               );
-              era.getAddedCharacters().forEach((e) => {
+              added.forEach((e) => {
                 if (
                   era.get(`cflag:${e}:种族`) &&
                   era.get(`cflag:${e}:成长阶段`) === 5 &&
@@ -207,7 +200,7 @@ module.exports = async () => {
               new MyEduMarks().strange_day = get_random_value(4, 8);
             }
             if (version < 1101) {
-              era.getAddedCharacters().forEach((e) => {
+              added.forEach((e) => {
                 if (era.get(`cflag:${e}:育成回合计时`) < 143 + 9) {
                   era.set(`cflag:${e}:可再次育成`, 0);
                 }
@@ -331,9 +324,9 @@ module.exports = async () => {
                 );
             }
             if (version <= 1211) {
-              era.getAddedCharacters().forEach((id) => {
-                if (id > 0 && era.get(`cflag:${id}:种族`) === 0) {
-                  era.set(`cflag:${id}:可再次育成`, 1);
+              added.forEach((cid) => {
+                if (cid > 0 && era.get(`cflag:${cid}:种族`) === 0) {
+                  era.set(`cflag:${cid}:可再次育成`, 1);
                 }
               });
               if (
@@ -354,8 +347,8 @@ module.exports = async () => {
             }
             if (version <= 1300) {
               let basement_cd = era.get('flag:地下室冷却') || 0;
-              era.getAddedCharacters().forEach((id) => {
-                const life_marks = LifeEventMarks.get_marks(id);
+              added.forEach((cid) => {
+                const life_marks = LifeEventMarks.get_marks(cid);
                 const b_cd = life_marks.get('b_cd');
                 if (b_cd > 0) {
                   era.set('flag:地下室冷却', Math.max(b_cd, basement_cd));
@@ -367,20 +360,20 @@ module.exports = async () => {
               new MyEduMarks().kamen_rider = 1;
             }
             if (version <= 1311) {
-              era.getAddedCharacters().forEach((e) => {
-                const titles = era.get(`cstr:${e}:称号`);
+              added.forEach((cid) => {
+                const titles = era.get(`cstr:${cid}:称号`);
                 if (Array.isArray(titles)) {
                   titles.forEach((t) => t.s === false && delete t.s);
                 }
                 if (
-                  e > 0 &&
-                  e < 1000 &&
-                  era.get(`cflag:${e}:种族`) > 0 &&
-                  era.get(`cflag:${e}:招募状态`) === recruit_flags.yes &&
-                  era.get(`cflag:${e}:育成回合计时`) > 143 + 9 &&
-                  era.get(`cflag:${e}:可再次育成`) === 0
+                  cid > 0 &&
+                  cid < 1000 &&
+                  era.get(`cflag:${cid}:种族`) > 0 &&
+                  era.get(`cflag:${cid}:招募状态`) === recruit_flags.yes &&
+                  era.get(`cflag:${cid}:育成回合计时`) > 143 + 9 &&
+                  era.get(`cflag:${cid}:可再次育成`) === 0
                 ) {
-                  era.set(`cflag:${e}:育成回合计时`, 'x');
+                  era.set(`cflag:${cid}:育成回合计时`, 'x');
                 }
               });
             }
@@ -406,7 +399,7 @@ module.exports = async () => {
               } else {
                 clean_actions(() => true);
               }
-              era.getAddedCharacters().forEach((cid) =>
+              added.forEach((cid) =>
                 new Array(5).fill(0).forEach((_, i) => {
                   if (era.get(`abl:${cid}:${i}`) > 5) {
                     era.set(`abl:${cid}:${i}`, 5);
@@ -423,8 +416,7 @@ module.exports = async () => {
               }
             }
             if (version <= 1340) {
-              const chara_list = era.getAddedCharacters();
-              chara_list.forEach((cid) => {
+              added.forEach((cid) => {
                 // EQUIPNAME:1 = 淫纹奴役
                 era.set(`equip:${cid}:1`, era.get(`equip:${cid}:10`));
                 if (era.get(`exp:${cid}:性爱次数`) > 0) {
@@ -600,7 +592,6 @@ module.exports = async () => {
             }
             // i18n - 将游戏存档内所有字符串改成 i18n 框架内的内容
             if (version <= 2210) {
-              const added = era.getAddedCharacters();
               added.forEach((cid) => {
                 if (check_chara_ero_image(cid)) {
                   era.set(
@@ -702,7 +693,7 @@ module.exports = async () => {
               }
             }
             if (version <= 3001) {
-              era.getAddedCharacters().forEach((cid) => {
+              added.forEach((cid) => {
                 const birth = era.get(`cstr:${cid}:出生经历`);
                 if (birth && birth.startsWith('出生于')) {
                   era.set(
@@ -716,13 +707,35 @@ module.exports = async () => {
               if (era.get('callname:0:52') === '105202') {
                 era.set('callname:0:52', '105211');
               }
+              const ws_queue = get_queue()[event_hooks.week_start] ?? [];
+              for (const cid of [7, 24, 52]) {
+                if (
+                  era.get(`cflag:${cid}:招募状态`) === recruit_flags.yes &&
+                  era.get(`cflag:${cid}:育成回合计时`) >= 143 + 9 &&
+                  era.get(`cflag:${cid}:殿堂`) > 0 &&
+                  era.get(`cflag:${cid}:可再次育成`) === 0 &&
+                  ws_queue.every(
+                    (e) =>
+                      e.chara_id !== cid ||
+                      e.type !== cb_enum.edu ||
+                      e.arg !== 'palace',
+                  )
+                ) {
+                  add_event(
+                    event_hooks.week_start,
+                    new EventObject(cid, cb_enum.edu).set_arg('palace'),
+                  );
+                }
+              }
             }
             if (version < era.get('gamebase').version) {
-              set_image_t(7);
-              set_image_t(21);
-              set_image_t(25);
-              set_image_t(302);
-              const added = era.getAddedCharacters();
+              for (const cid of [7, 21, 25, 302]) {
+                // CSTRNAME:13 = 头像T
+                if (added.includes(cid) && !era.get(`cstr:${cid}:13`)) {
+                  // CSTRNAME:10 = 头像
+                  era.set(`cstr:${cid}:13`, era.get(`staticcstr:${cid}:10`));
+                }
+              }
               added.forEach((cid) => {
                 if (cid > 0) {
                   const t_table = era.get(`chara:${cid}`)?.talent;

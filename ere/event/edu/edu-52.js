@@ -1401,6 +1401,9 @@ module.exports = class extends CustomizedEdu {
                 era.get(`cflag:${cid}:母方角色`) === this.id,
             ),
         );
+        break;
+      default:
+        return await super.week_start(urara, me, callname, hook, extra, ebj);
     }
     wait && (await era.waitAnyKey());
   }

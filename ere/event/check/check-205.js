@@ -54,7 +54,7 @@ module.exports = class extends CustomizedCheck {
   }
 
   check_next_week() {
-    if (era.get('cflag:205:招募状态') !== 0) {
+    if (era.get('cflag:205:招募状态') !== recruit_flags.no) {
       const edu_weeks = era.get('cflag:205:育成回合计时');
       const race_history = RaceHistory.get(205).get();
       if (edu_weeks < 3 * 48) {

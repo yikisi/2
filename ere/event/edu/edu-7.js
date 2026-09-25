@@ -529,6 +529,9 @@ module.exports = class extends CustomizedEdu {
         } else {
           wait = all_reward_in_event(0, { base: [100] });
         }
+        break;
+      default:
+        return await super.week_start(gs, me, callname, hook, extra, ebj);
     }
     wait && (await era.waitAnyKey());
   }

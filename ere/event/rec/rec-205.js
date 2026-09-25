@@ -34,7 +34,7 @@ module.exports = class extends CustomizedRecruit {
         return true;
       }
       add_event(event_hooks.week_start, new EventObject(205, cb_enum.recruit));
-      era.set('cflag:205:随机招募', recruit_flags.no);
+      era.set('cflag:205:随机招募', 0);
       era.set('flag:物色对象', 205);
       return true;
     } else if (stage === event_hooks.week_start) {

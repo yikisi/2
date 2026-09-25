@@ -850,6 +850,9 @@ module.exports = class extends CustomizedEdu {
           callname,
           race_infos[race_enum.arim_kin].get_colored_name(),
         );
+        break;
+      default:
+        return await super.week_start(maya, me, callname, hook, extra, ebj);
     }
     wait && (await era.waitAnyKey());
   }
