@@ -386,75 +386,7 @@ module.exports = class extends CustomizedEdu {
           [{ color: color_7[1], content: this.#kojo.ws_47_29.title }],
           gs,
         );
-        await era.printAndWait(
-          '夏季合宿，对赛马娘而言是一段寓教于乐的时光。每逢暑假，绝大部份的特雷森学生都会来到海边享受阳光、海滩，以及可能的一点点地狱式锻炼。',
-        );
-        await era.printAndWait(
-          `而理所当然的，每到了这种时候，${me.name} 那位特立独行的爱马 ${gs.name} 都会特别来劲。`,
-        );
-        era.println();
-
-        await gs.say_and_wait(
-          '哦哦哦哦哦！说到夏天就是大海啊！让我们一起朝海边出发啦！！！',
-        );
-        await gs.say_and_wait('Zzzzzzz……');
-        era.println();
-
-        await era.printAndWait(
-          `${me.name} 看着在大巴上睡得像头死猪一样的 ${gs.name}，心想这家伙的干劲真是和 ${gs.sex} 本人一样来无影去无踪。`,
-        );
-        era.println();
-
-        era.printButton('「起床啦！！！太阳晒屁股了！！！」', 1);
-        await era.input();
-
-        await gs.say_and_wait(
-          '呜哇～吓死我了！我刚才梦到了自己在大巴上等着去海滩合宿呢！你要怎么赔啊！',
-        );
-        era.println();
-
-        await era.printAndWait(
-          `${me.name} 没好气地用拇指指向窗外示意你们已经到了，注意到这点的 ${gs.name} 马上兴高采烈地一绷一跳地下了车。`,
-        );
-        era.println();
-
-        await era.printAndWait(
-          `你们渡过了几天不错的假期，训练也十分充实。但今天已经到了训练的时间，${gs.name} 还是没有出现。为了寻找 ${gs.sex} 的踪影，你来到了海边。`,
-        );
-        era.println();
-
-        await era.printAndWait('然后——');
-        era.println();
-
-        await gs.say_and_wait('哎走过路过不要错过哟～好吃的炒面大平卖哟～！！');
-        await gs.say_and_wait('有甜酸苦辣～就跟人生一样哟～！！');
-        era.println();
-
-        era.printButton('「为什么跑这里卖炒面来了啊……！！」', 1);
-        await era.input();
-
-        await era.printAndWait(
-          `${me.name} 气匆匆地走到摊子前面想要质问这个摸鱼的家伙。`,
-        );
-        era.println();
-
-        await gs.say_and_wait('啊～这不训练员吗～你要特辣的对吧？');
-        era.println();
-
-        era.printButton('「我是来叫你去训练的啊。」', 1);
-        await era.input();
-
-        await gs.say_and_wait(
-          '哎呀～我这不是在给店主大叔代班吗～人家腰酸背疼的，你忍心让大叔在大太阳下烤一天吗？',
-        );
-        await gs.say_and_wait(
-          '所以今天我一定要把这些面都卖完！不然的话大叔的腰就治不好了！',
-        );
-        era.println();
-
-        await era.printAndWait(
-          `${me.name} 知道以 ${gs.sex} 说一不二的性格是劝不动的，于是只好无奈地点了一盘甜酸味的炒面，坐到旁边的太阳椅上边吃边监视 ${gs.name} 以防 ${gs.sex} 又一次失踪。`,
-        );
+        await this.#kojo.ws_47_29(gs, me);
         temp = base_attr_list.map(() => 3);
         gacha(base_attr_list, 3).forEach((a) => (temp[a] = 8));
         wait = all_reward_in_event(this.id, { attr: temp, pt: 45 });
