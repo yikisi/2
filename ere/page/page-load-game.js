@@ -707,6 +707,9 @@ module.exports = async () => {
               if (era.get('callname:0:52') === '105202') {
                 era.set('callname:0:52', '105211');
               }
+              if (era.get('callname:24:52') === '105202') {
+                era.set('callname:24:52', '105211');
+              }
               const ws_queue = get_queue()[event_hooks.week_start] ?? [];
               for (const cid of [7, 24, 52]) {
                 if (
