@@ -1,6 +1,6 @@
 const era = require('#/era-electron');
 
-const { sys_get_motion } = require('#/system/ero/sys-calc-distance');
+const { sys_get_base } = require('#/system/ero/sys-calc-distance');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
 const EroNormalCommunications = require('#/event/ero/common/normal/communications');
@@ -374,7 +374,7 @@ module.exports = class extends CustomizedEro {
     }
     const last_action = era.get('tflag:前回行动');
     const master = era.get('tflag:主导权');
-    const motion = sys_get_motion(0, this.id);
+    const base = sys_get_base(0, this.id);
     if (era.get('nowex:0:阴茎高潮') > 0) {
       if (era.get(`nowex:${this.id}:饮精量`) > 0) {
         if (
@@ -387,7 +387,7 @@ module.exports = class extends CustomizedEro {
           (master === this.id && last_action === ero_hooks.deep_blow_job)
         ) {
           await kojo()['get_semen_deep_blow_job'](dict());
-        } else if (motion === base_enum.diff && pama.sex_code === 0) {
+        } else if (base === base_enum.diff && pama.sex_code === 0) {
           await kojo()['get_semen_sixty_nine'](dict());
         }
       } else if (
@@ -396,7 +396,7 @@ module.exports = class extends CustomizedEro {
       ) {
         await kojo()['get_semen_foot_job'](dict());
       } else if (era.get(`nowex:${this.id}:膣内精液`) > 0) {
-        switch (motion) {
+        switch (base) {
           case base_enum.same:
           case base_enum.s_tri:
             switch (era.get(`tcvar:${this.id}:体位`)) {

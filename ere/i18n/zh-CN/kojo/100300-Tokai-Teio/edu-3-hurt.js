@@ -374,7 +374,7 @@ module.exports = {
       const ret = await era.input();
       if (ret === 1) {
         await era.printAndWait(
-          `${you.name} 扶住${teio.sex}的双肩，用肢体表达了自己的回答。随后叫了辆出粗车，护送${teio.sex}回到学校，一路无言——或许也只是 ${you.name} 无法面对${teio.sex}的脸。`,
+          `${you.name} 扶住${teio.sex}的双肩，用肢体表达了自己的回答。随后叫了辆出租车，护送${teio.sex}回到学校，一路无言——或许也只是 ${you.name} 无法面对${teio.sex}的脸。`,
         );
       } else {
         await era.printAndWait(

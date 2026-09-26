@@ -1,6 +1,6 @@
 const era = require('#/era-electron');
 
-const { sys_get_motion } = require('#/system/ero/sys-calc-distance');
+const { sys_get_base } = require('#/system/ero/sys-calc-distance');
 const { sys_get_colored_callname } = require('#/system/sys-calc-chara-others');
 const { sys_check_awake } = require('#/system/sys-calc-chara-param');
 
@@ -768,7 +768,7 @@ module.exports = class extends CustomizedEro {
         era.get('tcvar:0:体位') === motion_enum.stand &&
         era.get(`tcvar:${this.id}:体位`) === motion_enum.stand
       ) {
-        switch (sys_get_motion(0, this.id)) {
+        switch (sys_get_base(0, this.id)) {
           case base_enum.same:
             await kojo().orgasm_standing(
               get_chara_talk(this.id),

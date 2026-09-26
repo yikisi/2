@@ -42,7 +42,7 @@ function change_com_tri_motion(cid, oid, cpart, opart, is_ask = false) {
         0,
       )
     ) {
-      compatible_motions.push([base_enum.s_tri, base_enum.d_tri]);
+      compatible_motions.push(base_enum.s_tri, base_enum.d_tri);
     }
   } else {
     compatible_motions.push(base_enum.b_same);
@@ -61,7 +61,7 @@ function change_com_tri_motion(cid, oid, cpart, opart, is_ask = false) {
         1,
       )
     ) {
-      compatible_motions.push([base_enum.s_tri, base_enum.b_tri]);
+      compatible_motions.push(base_enum.s_tri, base_enum.b_tri);
     }
   }
   sys_cm_b_and_cop(cid, oid, compatible_motions, { a: cpart, d: opart });

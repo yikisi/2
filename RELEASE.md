@@ -9,3 +9,5 @@ _incoming_
 ## Changed
 
 ## Fixed
+
+* 修复了导致体位系统工作不符合预期的大量错误

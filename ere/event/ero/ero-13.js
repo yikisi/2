@@ -1,6 +1,6 @@
 const era = require('#/era-electron');
 
-const { sys_get_motion } = require('#/system/ero/sys-calc-distance');
+const { sys_get_base } = require('#/system/ero/sys-calc-distance');
 
 const EroNormalCommunications = require('#/event/ero/common/normal/communications');
 const EroNormalFucking = require('#/event/ero/common/normal/fucking');
@@ -229,11 +229,11 @@ class NormalSm extends EroNormalSm {
       return await super.hit_anal(attacker, defender, hook);
     }
     const penis = new EroTouch(0, part_enum.penis);
-    const motion = sys_get_motion(0, this.id);
+    const base = sys_get_base(0, this.id);
     if (
       penis.owner !== this.id ||
       penis.part !== part_enum.virgin ||
-      (motion !== base_enum.b_same && motion !== base_enum.b_tri)
+      (base !== base_enum.b_same && base !== base_enum.b_tri)
     ) {
       return await super.hit_anal(attacker, defender, hook);
     }

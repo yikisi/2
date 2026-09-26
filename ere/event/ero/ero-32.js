@@ -2,7 +2,7 @@ const era = require('#/era-electron');
 
 const { sys_check_cuckold } = require('#/system/chara/sys-calc-cheat');
 const quick_make_love = require('#/system/ero/calc-sex/quick-make-love');
-const { sys_get_motion } = require('#/system/ero/sys-calc-distance');
+const { sys_get_base } = require('#/system/ero/sys-calc-distance');
 const {
   check_pregnant_unprotect,
   get_expansion,
@@ -33,7 +33,7 @@ const { get_chara_talk } = require('#/utils/chara-talk-factory');
 const EroParticipant = require('#/data/ero/ero-participant');
 const { item_enum } = require('#/data/ero/item-const');
 const { mark_enum } = require('#/data/ero/mark-const');
-const { base_enum, part_enum, up_enum } = require('#/data/ero/part-const');
+const { base_enum, part_enum } = require('#/data/ero/part-const');
 const { stain_enum } = require('#/data/ero/stain-const');
 const { ero_hooks } = require('#/data/event/ero-hooks');
 const TachyonLifeMarks = require('#/data/event/life-event-marks/life-event-marks-32');
@@ -591,7 +591,7 @@ module.exports = class extends CustomizedEro {
   async orgasm(tachyon, me, callname) {
     callname = sys_get_colored_callname(this.id, 0);
     const penis_touched_part = era.get('tcvar:0:阴茎接触部位');
-    const motion = sys_get_motion(0, this.id);
+    const base = sys_get_base(0, this.id);
     if (
       sys_check_awake(this.id) &&
       era.get('tflag:强奸') !== 0 &&
@@ -638,9 +638,9 @@ module.exports = class extends CustomizedEro {
         era.get('nowex:0:阴茎高潮') > 0 &&
         era.get(`nowex:${this.id}:膣内精液`) > 0 &&
         !master &&
-        era.get('tcvar:0:上下') === up_enum.up
+        era.get('tcvar:0:上下') > era.get(`tcvar:${this.id}:上下`)
       ) {
-        switch (motion) {
+        switch (base) {
           case base_enum.same:
           case base_enum.s_tri:
             await kojo().cum_in_missionary(tachyon, me);
@@ -654,8 +654,8 @@ module.exports = class extends CustomizedEro {
         era.get('nowex:0:阴茎高潮') > 0 &&
         era.get(`nowex:${this.id}:肠内精液`) > 0 &&
         !master &&
-        era.get('tcvar:0:上下') === up_enum.up &&
-        (motion === base_enum.same || motion === base_enum.s_tri)
+        era.get('tcvar:0:上下') > era.get(`tcvar:${this.id}:上下`) &&
+        (base === base_enum.same || base === base_enum.s_tri)
       ) {
         await kojo().cum_in_anal_missionary(tachyon, me);
       }
