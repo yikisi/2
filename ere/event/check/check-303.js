@@ -1,4 +1,4 @@
-const { get } = require('#/era-electron');
+const { get, set } = require('#/era-electron');
 
 const CustomizedCheck = require('#/event/check/check-common');
 const { add_event, cb_enum } = require('#/event/queue');
@@ -25,6 +25,7 @@ module.exports = class extends CustomizedCheck {
     }
     if (get('cflag:303:招募状态') === -1 && get('love:303') >= 25) {
       add_event(event_hooks.week_start, new EventObject(303, cb_enum.recruit));
+      set('cflag:303:招募状态', -2);
     }
     super.check_next_week();
   }
