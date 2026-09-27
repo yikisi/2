@@ -1,3 +1,5 @@
+const era = require('#/era-electron');
+
 const { sys_love_uma_in_event } = require('#/system/sys-calc-chara-others');
 
 const CustomizedLove = require('#/event/love/love-common');
@@ -35,6 +37,7 @@ module.exports = class extends CustomizedLove {
     ) {
       await sys_love_uma_in_event(this.id);
     } else {
+      era.set(`cflag:${this.id}:爱慕暂拒`, 74);
       await punish_rejecting_love(this.id);
     }
   }
@@ -52,6 +55,7 @@ module.exports = class extends CustomizedLove {
     ) {
       await sys_love_uma_in_event(this.id);
     } else {
+      era.set(`cflag:${this.id}:爱慕暂拒`, 89);
       await punish_rejecting_love(this.id);
     }
   }

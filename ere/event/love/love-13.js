@@ -97,6 +97,7 @@ module.exports = class extends CustomizedLove {
       ) {
         await sys_love_uma_in_event(this.id);
       } else {
+        era.set(`cflag:${this.id}:爱慕暂拒`, 74);
         await punish_rejecting_love(this.id);
         m_life.reject_74 = 1;
       }
@@ -125,6 +126,7 @@ module.exports = class extends CustomizedLove {
         }
         await sys_love_uma_in_event(this.id);
       } else {
+        era.set(`cflag:${this.id}:爱慕暂拒`, 89);
         await punish_rejecting_love(this.id);
       }
     } else {

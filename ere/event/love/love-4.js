@@ -54,7 +54,7 @@ module.exports = class extends CustomizedLove {
         update_kiss_exp(get_date_obj(), 0, this.id);
         await sys_love_uma_in_event(this.id);
       } else {
-        era.set('cflag:4:爱慕暂拒', 49);
+        era.set('cflag:4:爱慕暂拒', 74);
       }
     }
   }
