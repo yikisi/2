@@ -85,7 +85,11 @@ class CustomizedMec extends CustomizedEvent {
    * @returns {number} 0-100之间的整数，返回0时表示不限制
    */
   get_love_limit() {
-    if (era.get(`cflag:${this.id}:招募状态`) === recruit_flags.yes) {
+    const status = era.get(`cflag:${this.id}:招募状态`);
+    if (
+      status === recruit_flags.yes ||
+      status === recruit_flags.temporary_leave
+    ) {
       return 0;
     }
     const love = era.get(`love:${this.id}`);

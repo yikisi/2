@@ -14,6 +14,7 @@ const { get_chara_color } = require('#/data/chara-colors');
 const SuzukaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-2');
 const event_hooks = require('#/data/event/event-hooks');
 const EventObject = require('#/data/event/event-object');
+const recruit_flags = require('#/data/event/recruit-flags');
 const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum } = require('#/data/race/model/race-info');
 const { race_enum, race_infos } = require('#/data/race/race-const');
@@ -159,7 +160,9 @@ module.exports = class extends CustomizedCheck {
           }
           break;
         case 95 + 41:
-          if (era.get(`cflag:${this.id}:66`) === -1) {
+          if (
+            era.get(`cflag:${this.id}:66`) === recruit_flags.temporary_leave
+          ) {
             add_event(event_hooks.week_start, ebj.set_arg('ending'));
           } else {
             const tenn_sho = RaceHistory.get(this.id).get_result(95 + 40);
@@ -173,7 +176,9 @@ module.exports = class extends CustomizedCheck {
           }
           break;
         case 95 + 48:
-          if (era.get(`cflag:${this.id}:66`) === -1) {
+          if (
+            era.get(`cflag:${this.id}:66`) === recruit_flags.temporary_leave
+          ) {
             add_event(event_hooks.week_start, ebj.set_arg('hope'));
           } else {
             add_event(event_hooks.week_start, ebj.set_arg('christmas'));

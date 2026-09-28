@@ -14,6 +14,7 @@ const HaloEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-61');
 const event_hooks = require('#/data/event/event-hooks');
 const EventMarks = require('#/data/event/event-marks');
 const EventObject = require('#/data/event/event-object');
+const HaloLifeMarks = require('#/data/event/life-event-marks/life-event-marks-61');
 const recruit_flags = require('#/data/event/recruit-flags');
 const RaceHistory = require('#/data/race/model/race-history');
 const { class_enum, distance_enum } = require('#/data/race/model/race-info');
@@ -64,7 +65,13 @@ module.exports = class extends CustomizedCheck {
 
   check_next_week() {
     if (!era.get('flag:回合爱慕惩罚')) {
-      if (era.get('love:61') >= 75 && era.get('love:52') >= 75) {
+      const life_marks = new HaloLifeMarks();
+      if (
+        !life_marks.fraternity &&
+        era.get('love:61') >= 75 &&
+        era.get('love:52') >= 75
+      ) {
+        life_marks.fraternity = 1;
         add_event(
           event_hooks.week_start,
           new EventObject(this.id, cb_enum.love).set_arg('fraternity'),
@@ -166,7 +173,7 @@ module.exports = class extends CustomizedCheck {
               ebj_s.set_arg('ws_special_letter'),
             );
           } else if (!era.get('flag:强制BE')) {
-            era.set(`cflag:${this.id}:招募状态`, -1);
+            era.set(`cflag:${this.id}:招募状态`, recruit_flags.temporary_leave);
             add_event(event_hooks.week_start, ebj_s.set_arg('ws_crisis'));
           }
           break;

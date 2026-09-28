@@ -731,6 +731,30 @@ module.exports = async () => {
                 }
               }
             }
+            if (version <= 3112) {
+              // CFLAGNAME:66 = 招募状态
+              // 新增 temporary_leave(2) 表示入队后临时离队，迁移旧存档里的旧值
+              // 未入队角色的育成回合计时为 4800，故用 < 3 * 48 区分；0 只有在育成中才表示临时离队
+              const old_temp_leave_flags = {
+                2: [-1],
+                20: [-1, 0],
+                50: [0],
+                61: [-1],
+                205: [-2],
+              };
+              Object.entries(old_temp_leave_flags).forEach(([cid, values]) => {
+                if (
+                  Number(cid) !== era.get('flag:强制BE') &&
+                  era.get(`cflag:${cid}:育成回合计时`) < 3 * 48 &&
+                  values.includes(era.get(`cflag:${cid}:招募状态`))
+                ) {
+                  era.set(
+                    `cflag:${cid}:招募状态`,
+                    recruit_flags.temporary_leave,
+                  );
+                }
+              });
+            }
             if (version < era.get('gamebase').version) {
               for (const cid of [7, 21, 25, 302]) {
                 // CSTRNAME:13 = 头像T

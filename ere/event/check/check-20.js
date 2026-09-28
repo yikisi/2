@@ -178,7 +178,7 @@ module.exports = class extends CustomizedCheck {
               1,
             )
           ) {
-            era.set(`cflag:${this.id}:招募状态`, recruit_flags.no);
+            era.set(`cflag:${this.id}:招募状态`, recruit_flags.temporary_leave);
             add_event(event_hooks.week_end, ebj_s.set_arg('soft_be'));
           }
           break;

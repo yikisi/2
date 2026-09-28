@@ -18,6 +18,7 @@ const print_title_with_kojo = require('#/event/snippets/print-title-with-kojo');
 const { get_chara_talk } = require('#/utils/chara-talk-factory');
 
 const SuzukaEduMarks = require('#/data/event/edu-event-marks/edu-event-marks-2');
+const recruit_flags = require('#/data/event/recruit-flags');
 const { location_enum } = require('#/data/locations');
 const RaceHistory = require('#/data/race/model/race-history');
 const { race_enum } = require('#/data/race/race-const');
@@ -334,7 +335,7 @@ module.exports = class extends CustomizedEdu {
       generate_dictionary(this.id, { call: !0, uma: !0 }),
     );
     // CFLAGNAME:66 = 招募状态
-    era.set(`cflag:${this.id}:66`, -1);
+    era.set(`cflag:${this.id}:66`, recruit_flags.temporary_leave);
     // FLAGNAME:5 = 当前互动角色
     if (era.get('flag:5') === 2) {
       era.set('flag:5', 0);
@@ -454,8 +455,8 @@ module.exports = class extends CustomizedEdu {
       key = 'normal_ending';
       dict = generate_dictionary(this.id, { uma: !0 });
     }
-    if (era.get(`cflag:${this.id}:66`) === -1) {
-      era.set(`cflag:${this.id}:66`, 1);
+    if (era.get(`cflag:${this.id}:66`) === recruit_flags.temporary_leave) {
+      era.set(`cflag:${this.id}:66`, recruit_flags.yes);
       edu_marks.debuff = 3;
     }
     await print_title_with_kojo(this.#kojo, key, suzuka, dict);

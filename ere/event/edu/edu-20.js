@@ -67,7 +67,7 @@ module.exports = class extends CustomizedEdu {
   async ws_find_you(sky, me, callname, hook, extra, ebj) {
     await print_title_with_kojo(this.#kojo, 'ws_find_you', sky, this.#dict);
     add_event(event_hooks.week_end, ebj.set_arg('we_free_cloud'));
-    era.set(`cflag:${this.id}:招募状态`, -1);
+    era.set(`cflag:${this.id}:招募状态`, recruit_flags.temporary_leave);
     if (era.get('flag:当前互动角色') === this.id) {
       era.set('flag:当前互动角色', 0);
     }

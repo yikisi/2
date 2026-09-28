@@ -159,7 +159,7 @@ module.exports = class extends CustomizedEdu {
           get_chara_talk(204),
           me,
         );
-        era.set('cflag:205:招募状态', -2);
+        era.set('cflag:205:招募状态', recruit_flags.temporary_leave);
         break;
       case 95 + 33:
         if (
@@ -259,7 +259,7 @@ module.exports = class extends CustomizedEdu {
         break;
       case 95 + 25:
         await print_title_with_kojo(this.#kojo, 'ws_95_25', treve, me);
-        era.set('cflag:205:招募状态', -2);
+        era.set('cflag:205:招募状态', recruit_flags.temporary_leave);
         if (era.get('flag:当前互动角色') === 205) {
           era.set('flag:当前互动角色', 0);
         }

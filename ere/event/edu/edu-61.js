@@ -710,7 +710,7 @@ module.exports = class extends CustomizedEdu {
           key = 'takm_kin_win';
         } else {
           key = 'takm_kin_lose';
-          era.set(`cflag:${this.id}:招募状态`, -1);
+          era.set(`cflag:${this.id}:招募状态`, recruit_flags.temporary_leave);
         }
         break;
       case race_enum.yasu_kin:

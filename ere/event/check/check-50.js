@@ -246,12 +246,15 @@ module.exports = class extends CustomizedCheck {
         case 47 + 43:
           if (!edu_marks.choice) {
             add_event(event_hooks.week_end, ebj_s.set_arg('back_home'));
-            era.set(`cflag:${this.id}:招募状态`, recruit_flags.no);
+            era.set(`cflag:${this.id}:招募状态`, recruit_flags.temporary_leave);
           }
           break;
         case 47 + 45:
           edu_marks.frog = 0;
-          if (era.get(`cflag:${this.id}:招募状态`) === recruit_flags.no) {
+          if (
+            era.get(`cflag:${this.id}:招募状态`) ===
+            recruit_flags.temporary_leave
+          ) {
             era.set(`cflag:${this.id}:招募状态`, recruit_flags.yes);
             add_event(event_hooks.week_start, ebj_s.set_arg('letter'));
             edu_marks.new_goal = 1;
