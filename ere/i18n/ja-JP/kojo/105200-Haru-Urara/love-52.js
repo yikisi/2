@@ -125,7 +125,7 @@ module.exports = {
           `ざわつく体をこらえ、尻尾を力づくで脇へ引き、小${urara.uma_sex_title}は苦労して寝返りを打つ。`,
         );
         await urara.print_and_wait(
-          `布団と枕で耳を覆い、ひと騒動したあと、${callname} はルームメイトの途切れ途切れの吐息の中で、ようやく夢に落ちた。`,
+          `布団と枕で耳を覆い、ひと騒動したあと、${urara.name} はルームメイトの途切れ途切れの吐息の中で、ようやく夢に落ちた。`,
         );
         await urara.print_and_wait(
           `それでも夢の中で、小${urara.uma_sex_title}はまた見た。「${urara.phy_sex_title}」を見るみたいに熱く、${
