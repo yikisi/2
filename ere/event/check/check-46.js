@@ -88,20 +88,6 @@ module.exports = class extends CustomizedCheck {
     return titles;
   }
 
-  check_love_events() {
-    const love = era.get('love:46'),
-      event_obj = new EventObject(46, cb_enum.love);
-    if (love === 49) {
-      add_event(event_hooks.week_end, event_obj);
-    } else if (love === 74) {
-      add_event(event_hooks.week_end, event_obj);
-    } else if (love === 89) {
-      add_event(event_hooks.week_end, event_obj);
-    } else if (love === 99) {
-      add_event(event_hooks.week_end, event_obj);
-    }
-  }
-
   check_next_week() {
     const edu_weeks = era.get(`cflag:${this.id}:育成回合计时`);
     if (edu_weeks < 3 * 48) {
