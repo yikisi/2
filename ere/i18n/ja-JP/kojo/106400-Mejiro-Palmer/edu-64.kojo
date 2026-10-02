@@ -2930,8 +2930,9 @@ new_year_2:
               content: %CHARA%
             - 「うわあ～、あの子ほんと可愛い」
         - if: era.get('cflag:85:66') === 1
-          acc: 1
-          content: 「可愛いのは、たしかにな」
+          lines:
+            - acc: 1
+              content: 「可愛いのは、たしかにな」
         - color: %COLOR%
           content:
             - fontWeight: bold

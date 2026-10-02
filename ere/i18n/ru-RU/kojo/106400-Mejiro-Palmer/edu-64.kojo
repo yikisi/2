@@ -1,4 +1,4 @@
-# @file %CHARA% - 育成
+# @file Мэдзиро Палмер - 育成
 # @author KUN
 train:
   # BASENAME:0 = 体力
@@ -2929,8 +2929,9 @@ new_year_2:
               content: %CHARA%
             - "「Ува~ эта девчонка правда милая」"
         - if: era.get('cflag:85:66') === 1
-          acc: 1
-          content: "「Милая — да」"
+          lines:
+            - acc: 1
+              content: "「Милая — да」"
         - color: %COLOR%
           content:
             - fontWeight: bold

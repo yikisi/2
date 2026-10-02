@@ -1,4 +1,4 @@
-# @file %CHARA% - 育成
+# @file 目白善信 - 育成
 # @author KUN
 train:
   # BASENAME:0 = 体力
@@ -2929,8 +2929,9 @@ new_year_2:
               content: %CHARA%
             - 「呜哇～那孩子真可爱」
         - if: era.get('cflag:85:66') === 1
-          acc: 1
-          content: 「可爱的话，确实」
+          lines:
+            - acc: 1
+              content: 「可爱的话，确实」
         - color: %COLOR%
           content:
             - fontWeight: bold

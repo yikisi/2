@@ -51,15 +51,15 @@ class SysPersonalAchievement {
         [
           {
             color,
-            content: __(`name.${name}`, name),
+            content: `[${__(`name.${name}`, name)}]`,
             fontSize: '1.25rem',
-            fontWeight: 'bold',
           },
           ' ',
           {
             color,
-            content: `[${__(`title.${title}`, title)}]`,
+            content: __(`title.${title}`, title),
             fontSize: '1.25rem',
+            fontWeight: 'bold',
           },
           { isBr: true },
           this.describe(cid, title),
