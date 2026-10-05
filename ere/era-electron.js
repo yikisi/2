@@ -325,7 +325,7 @@ const era = {
    * @param {string|({[color]:string,content:string,[fontSize]:string,[fontWeight]:string}|{isBlank:number}|{isBr:number}|string)[]} content content of the notification
    * @param {string} [title] title of the notification
    * @param {'success'|'info'|'warning'|'error'|''} [type] type of the notification, see the enum
-   * @param {number} [duration] duration of the notification, microsecond
+   * @param {number} [duration] duration of the notification, millisecond
    */
   notify(content, title, type, duration) {},
   /**
@@ -334,7 +334,7 @@ const era = {
    * @param [config]
    * @param {boolean} config.[loop] if the music is played in loop
    * @param {boolean} config.[fade] if the music needs fade-in and fade-out
-   * @param {number} config.[fadeInternal] the internal of fade-in and fade-out, microsecond, default 200ms
+   * @param {number} config.[fadeInternal] the internal of fade-in and fade-out, millisecond, default 200ms
    * @returns {boolean} if the playing succeeds
    */
   playMusic(names, config) {},
@@ -511,7 +511,7 @@ const era = {
    */
   setHorizontalAlign(align) {},
   /**
-   * @deprecated replaced with setOpacity
+   * @deprecated replaced with setOverlay
    * @param {string} [maskName]
    * @param {number} [opacity]
    */

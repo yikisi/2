@@ -1,5 +1,4 @@
 const {
-  add,
   clear,
   drawLine,
   get,
@@ -200,7 +199,7 @@ async function page_moon_well(cid, print_out_page) {
                             set(`status:${c}:伤病`, 0);
                             set(`status:${c}:疲惫`, 0);
                             if (get(`cflag:${c}:育成回合计时`) < 3 * 48) {
-                              add(
+                              set(
                                 `status:${c}:练习X手`,
                                 Math.min(get(`status:${c}:练习X手`) + 1, 2),
                               );
