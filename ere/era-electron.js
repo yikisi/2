@@ -6,14 +6,15 @@
  * @property {'primary'|'success'|'warning'|'danger'|'info'|''} [buttonType] type of the button in element-plus, 'warning' in default when isButton is false
  * @property {string} [color] color of the button, isButton must be false
  * @property {boolean} [disabled] if the button is disabled, false in default
- * @property {boolean} [disableContinue] if the button is disabled, false in default
+ * @property {boolean} [disableContinue] if the continue is disabled after clicking the button, false in default
  * @property {boolean} [disableWarning] if disable warning when accelerator has been set, false in default
+ * @property {string} [fontSize] font size of the text in the button
  * @property {'left'|'center'|'right'} [inTextAlign] align of the text in the button, 'center' in default
  * @property {boolean} [isButton] if the button is a button, otherwise is a link
  * @property {number} [offset] offset of the button, 0-23, 0 in default
  * @property {boolean} [showAcc] if show the accelerator, true in default on PC, and is always false on Android
  * @property {string} [title] tooltip of the button
- * @property {number} [width] width of the button, 1-24, 1 in default
+ * @property {number} [width] width of the button, 1-24, 24 in default
  */
 /**
  * @typedef ButtonObject
@@ -26,10 +27,10 @@
  * type of the param 'config' in era.drawLine
  * @typedef DividerConfig
  * @property {string} [content] content of the divider
- * @property {'left'|'center'|'right'} [position] position of the divider
- * @property {boolean} [isSolid] if the divider is solid
- * @property {number} [offset] offset of the divider
- * @property {number} [width] width of the divider
+ * @property {'left'|'center'|'right'} [position] position of the divider, 'center' in default
+ * @property {boolean} [isSolid] if the divider is solid, false in default
+ * @property {number} [offset] offset of the divider, 0-23, 0 in default
+ * @property {number} [width] width of the divider, 1-24, 24 in default
  */
 /**
  * @typedef DividerObject
@@ -38,7 +39,10 @@
  */
 /**
  * @typedef ImageObject
- * @property {string|string[]} names
+ * @property {Object} [config] config of the image line
+ * @property {number} [config.offset] offset of the image line, 0-23, 0 in default
+ * @property {number} [config.width] width of the image line, 1-24, 24 in default
+ * @property {string|string[]} names names of the images, a name may contain several alternatives split by '\t'
  * @property {'image'} type
  */
 /**
@@ -72,6 +76,9 @@
  * @property {string} [fontSize]
  * @property {string} [fontStyle]
  * @property {string} [fontWeight]
+ * @property {number} [opacity] opacity of the span, 1 in default
+ * @property {string} [textAlignLast] CSS text-align-last of the span
+ * @property {string} [textShadow] CSS text-shadow of the span
  * @property {string} [title]
  * @property {string} [url]
  */
@@ -81,6 +88,8 @@
  * @property {'left'|'center'|'right'} [align] align of the line, 'left' in default
  * @property {string} [color] color of the line, '#ffffff' in default
  * @property {string} [fontSize] font size of the line, '1rem' in default
+ * @property {string} [fontStyle] CSS font-style of the line
+ * @property {string} [fontWeight] CSS font-weight of the line
  * @property {boolean} [isParagraph] if the line is in a paragraph, false in default
  * @property {number} [offset] offset of the line, 0-23, 0 in default
  * @property {number} [width] width of the line, 1-24, 24 in default
@@ -114,12 +123,11 @@
 /**
  * @typedef ColumnConfig
  * @type {Object}
- * @property {number} [gutter]
- * @property {'start'|'center'|'end'|'space-between'|'space-around'|'space-evenly'} [horizontalAlign]
- * @property {number} [offset]
- * @property {'top'|'middle'|'bottom'} [verticalAlign]
- * @property {number} [width]
- * @property {boolean} [flush]
+ * @property {number} [gutter] gutter between columns, 0 in default
+ * @property {'start'|'center'|'end'|'space-between'|'space-around'|'space-evenly'} [horizontalAlign] horizontal align of the columns, 'start' in default
+ * @property {number} [offset] offset of the row, 0-23, 0 in default
+ * @property {'top'|'middle'|'bottom'} [verticalAlign] vertical align of the columns, 'top' in default
+ * @property {number} [width] width of the row, 1-24, 24 in default
  * @see https://element-plus.org/zh-CN/component/layout.html
  */
 /**
@@ -148,40 +156,46 @@ const era = {
    * @param {any} val REQUIRED the value to be added
    * @returns {any|undefined} the new value of the variable, or undefined if failed
    */
+
   add(varName, val) {},
   /**
    * add some characters
-   * @param {number | number[]} charaId REQUIRED id of the character defined in chara*.csv
-   *     <br>if it is an array, is means add the character charaId[0] with the data of the character charaId[1]
+   * @param {...(number|number[])} charaId REQUIRED id of the character defined in chara*.csv
+   *     <br>each id may be an array [dstId, srcId], which means add the character dstId with the data of the character srcId
    * @returns {boolean | boolean[]}
    */
+
   addCharacter(...charaId) {},
   /**
    * initialize data of some characters for training
    * @param {...number} charaId REQUIRED ids of the characters defined in chara*.csv
    * @returns {void} */
+
   addCharacterForTrain(...charaId) {},
   /**
    * initialize training and character data
    * @param {...number} charaId REQUIRED ids of the characters defined in chara*.csv
    */
+
   beginTrain(...charaId) {},
   /**
    * check if a or some images are loaded
-   * @param name the name of the image
-   * @returns {boolean|boolean[]}
+   * @param {...string} names REQUIRED names of the images
+   * @returns {boolean|boolean[]} if there is only one name, returns a boolean; otherwise an array of boolean
    */
-  checkImage(...name) {},
+
+  checkImage(...names) {},
   /**
    * clear printed lines
    * @param {number} [lineCount] how many lines to be cleared, leave undefined to clear all
    * @returns {Promise<number>} new line count
    */
+
   async clear(lineCount) {},
   /**
    * make the current function to wait for some time
-   * @param delay time to delay, ms
-   * @return {Promise<unknown>}
+   * @param {number} delay REQUIRED time to delay, ms
+   * @returns {Promise<unknown>}
    */
   delay: (function () {
     function f(delay) {
@@ -195,6 +209,7 @@ const era = {
    * @param {DividerConfig} [config] config of the line
    * @returns {number} line number of the printed
    */
+
   drawLine(config) {},
   /**
    * end training, add gotjewel table into jewel table, and destroy temporary data
@@ -205,6 +220,7 @@ const era = {
    * @param {string} varName REQUIRED the name of variable, String, like 'callname:1:2'
    * @returns {any|undefined} the variable, or undefined if failed
    */
+
   get(varName) {},
   /**
    * get all added characters
@@ -227,15 +243,15 @@ const era = {
    */
   getLineCount() {},
   /**
-   * wait for use's input, the engine will try to return number
-   * @param [config] config of input, like rule
+   * wait for user's input, the engine will try to return number
+   * @param {Object} [config] config of input, like rule
    * @param {boolean} config.[disableBefore] if disable before buttons
+   * @param {boolean} config.[hideInput] if hide the input content
    * @param {string} config.[rule] the regex string of the rule
    * @param {boolean} config.[useRule] if use the rule
-   * @param {boolean} config.[hideInput] if hide the input content
-   * @param {boolean} config.[show] (for Android) if show the input element when using buttons
    * @returns {Promise<any>} a promise of the user input, please use await
    */
+
   async input(config) {},
   /**
    * check if is debug mode
@@ -253,6 +269,7 @@ const era = {
    * @param {number} savIndex REQUIRED the index of the save file
    * @returns {Promise<boolean>} if the loading succeeds
    */
+
   async loadData(savIndex) {},
   /**
    * load global variables from save file
@@ -260,13 +277,20 @@ const era = {
    */
   async loadGlobal() {},
   logger: {
+    /**
+     * to log an assert error into program logs as warn level when checkVal !== aimVal
+     * @param {any} checkVal the value to be checked
+     * @param {any} aimVal the aim value
+     */
     assert(checkVal, aimVal) {
-      if (checkVal !== aimVal && era.version.engine === void 0) {
-        console.debug(
-          '[ASSERT]',
-          new Error(`assert failed! aim val: ${aimVal}, got val: ${checkVal}`)
-            .stack,
-        );
+      if (era.version.engine === void 0) {
+        if (checkVal !== aimVal) {
+          console.debug(
+            '[ASSERT]',
+            new Error(`assert failed! aim val: ${aimVal}, got val: ${checkVal}`)
+              .stack,
+          );
+        }
         return;
       }
       return era.logger.assert(checkVal, aimVal);
@@ -324,21 +348,23 @@ const era = {
   nextTurnInTrain() {},
   /**
    * show a notification
-   * @param {string|({[color]:string,content:string,[fontSize]:string,[fontWeight]:string}|{isBlank:number}|{isBr:number}|string)[]} content content of the notification
+   * @param {string|({color?:string,content:string,fontSize?:string,fontWeight?:string}|{isBlank:number|true}|{isBr:number|true}|string)[]} content content of the notification
    * @param {string} [title] title of the notification
    * @param {'success'|'info'|'warning'|'error'|''} [type] type of the notification, see the enum
-   * @param {number} [duration] duration of the notification, millisecond
+   * @param {number} [duration] duration of the notification, millisecond, 5000 in default
    */
+
   notify(content, title, type, duration) {},
   /**
    * play the music that must be declared in csv files in directory res
    * @param {string[]|string} names REQUIRED music name, the engine will play the first available music in the array
-   * @param [config]
+   * @param {Object} [config] config of the music
    * @param {boolean} config.[loop] if the music is played in loop
    * @param {boolean} config.[fade] if the music needs fade-in and fade-out
-   * @param {number} config.[fadeInternal] the internal of fade-in and fade-out, millisecond, default 200ms
+   * @param {number} config.[fadeInternal] the interval of fade-in and fade-out, millisecond, 100-500, 100 in default
    * @returns {boolean} if the playing succeeds
    */
+
   playMusic(names, config) {},
   /**
    * print some text
@@ -346,6 +372,7 @@ const era = {
    * @param {TextConfig} [config] config of the printed line
    * @returns {number} line number of the printed line
    */
+
   print(content, config) {},
   /**
    * print some text and wait any key from user
@@ -353,6 +380,7 @@ const era = {
    * @param {TextConfig} [config] config of the printed line
    * @returns {Promise<number>} line number of the printed line
    */
+
   async printAndWait(content, config) {},
   /**
    * print a button
@@ -361,12 +389,14 @@ const era = {
    * @param {ButtonConfig} [config] config of the printed button
    * @returns {number} line number of the printed
    */
+
   printButton(content, accelerator, config) {},
   /**
    * print images that must be declared in csv files in directory res
-   * @param {string} names REQUIRED image names
+   * @param {...string} names REQUIRED image names, a name may contain several alternatives split by '\t'
    * @returns {number} line number of the printed
    */
+
   printImage(...names) {},
   /**
    * @param {...ColumnObject|GridObject[]} columnObjects
@@ -378,14 +408,16 @@ const era = {
    * @see printProgress
    * @see printWholeImage
    */
+
   printInColRows(...columnObjects) {},
   /**
    * print a line chart by chart.js
    * <br/> see: chart.js, chartjs-plugin-annotation, vue-chartjs
    * <br/> note: options.scales.x.ticks.callback and options.scales.y.ticks.callback is the argument array used to create Function
-   * @param {*} config
+   * @param {Object} config REQUIRED config of the line chart, see chart.js
    * @returns {number} line number of the printed
    */
+
   printLineChart(config) {},
   /**
    * print multiple columns into a row, excluding inputs
@@ -399,6 +431,7 @@ const era = {
    * @see printProgress
    * @see printWholeImage
    */
+
   printMultiColumns(columnObjects, config) {},
   /**
    * print a progress bar
@@ -408,6 +441,7 @@ const era = {
    * @param {ProgressConfig} [config] config of the printed progress
    * @returns {number} line number of the printed
    */
+
   printProgress(percentage, inContent, outContent, config) {},
   /**
    * print the whole image
@@ -415,6 +449,7 @@ const era = {
    * @param {WholeImageConfig} [config]
    * @returns {number} line number of the printed
    */
+
   printWholeImage(names, config) {},
   /**
    * print a line break, if just used to print enter at the end of a line, please use print('*** \n') to replace
@@ -425,15 +460,17 @@ const era = {
   quit() {},
   /**
    * DANGER remove the character
-   * @param {number} charaId REQUIRED id of the character
+   * @param {...number} charaId REQUIRED ids of the characters defined in chara*.csv
    * @returns {void}
    */
+
   removeCharacter(...charaId) {},
   /**
    * DANGER replace the line just printed with a new in-col-row line
    * @param {...ColumnObject|GridObject[]} columnObjects
    * @returns {number} line number of the printed
    */
+
   replaceInColRows(...columnObjects) {},
   /**
    * DANGER replace the line just printed with a new text line
@@ -441,13 +478,15 @@ const era = {
    * @param {TextConfig} [config] config of the printed line
    * @returns {number} line number of the printed
    */
+
   replaceText(content, config) {},
   /**
    * reset the data of a character
-   * @param {number | number[]} charaId REQUIRED id of the character defined in chara*.csv
-   *     <br>if it is an array, is means reset the character charaId[0] with the data of the character charaId[1]
+   * @param {...(number|number[])} charaId REQUIRED id of the character defined in chara*.csv
+   *     <br>each id may be an array [dstId, srcId], which means reset the character dstId with the data of the character srcId
    * @returns {void}
    */
+
   resetCharacter(...charaId) {},
   /**
    * reset all data of the save
@@ -466,6 +505,7 @@ const era = {
    * @param {number} savIndex REQUIRED the index of the save file
    * @returns {Promise<boolean>} if the removing succeeds
    */
+
   async rmData(savIndex) {},
   /**
    * save data into a save file
@@ -473,6 +513,7 @@ const era = {
    * @param {string} [comment] the comment of the save
    * @returns {Promise<boolean>} if the saving succeeds
    */
+
   async saveData(savIndex, comment) {},
   /**
    * save global variables into save file
@@ -486,12 +527,14 @@ const era = {
    * @param {T} val REQUIRED the new value of the variable
    * @returns {T} the new value of the variable, or undefined if failed
    */
+
   set(varName, val) {},
   /**
    * set default text-align
    * @param {'center'|'left'|'right'} textAlign REQUIRED the text-align: center, left or right used in usual
    * @returns {void}
    */
+
   setAlign(textAlign) {},
   /**
    * @param {string} [name] set undefined to clear background
@@ -500,29 +543,34 @@ const era = {
    * @param {OBPosition} config.[position]
    * @param {'contain'|'cover'|'fit'|string} config.[fit]
    */
+
   setBack(name, config) {},
   /**
    * Set default text color.
    * @param {string} [color]
    */
+
   setColor(color) {},
   /**
    * set default horizontal align of inColRows
-   * @param {'start'|'end'|'center'|'space-around'|'space-between'|'space-evenly'} align REQUIRED the vertical align: start (default), end, center, space-around, space-between or space-evenly
+   * @param {'start'|'end'|'center'|'space-around'|'space-between'|'space-evenly'} align REQUIRED the horizontal align: start (default), end, center, space-around, space-between or space-evenly
    * @returns {void}
    */
+
   setHorizontalAlign(align) {},
   /**
    * @deprecated replaced with setOverlay
-   * @param {string} [maskName]
-   * @param {number} [opacity]
+   * @param {string} [name] set undefined to clear the mask
+   * @param {Object|number} [config] config of the mask, or opacity in old versions
    */
-  setMask(maskName, opacity) {},
+
+  setMask(name, config) {},
   /**
    * set default offset
    * @param {number} offset REQUIRED an integer between 0 and 23
    * @returns {void}
    */
+
   setOffset(offset) {},
   /**
    * @param {string} [name] set undefined to clear overlay
@@ -531,12 +579,14 @@ const era = {
    * @param {OBPosition} config.[position]
    * @param {'contain'|'cover'|'fit'|string} config.[fit]
    */
+
   setOverlay(name, config) {},
   /**
    * set the title of the window
    * @param {string} title REQUIRED
    * @returns {void}
    */
+
   setTitle(title) {},
   /**
    * print an empty block and make the following lines shown in the bottom
@@ -548,12 +598,14 @@ const era = {
    * @param {'top'|'middle'|'bottom'} align REQUIRED the vertical align: top (default), middle or bottom
    * @returns {void}
    */
+
   setVerticalAlign(align) {},
   /**
    * set default width
    * @param {number} width REQUIRED an integer between 1 and 24
    * @returns {void}
    */
+
   setWidth(width) {},
   /** pause the music in the playing */
   stopMusic() {},
