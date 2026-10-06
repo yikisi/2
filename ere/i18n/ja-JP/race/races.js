@@ -51,6 +51,7 @@ module.exports = class extends I18nRaces {
 
   dubai_series = 'ドバイワールドカップミーティング';
   hongkong_series = '香港国際競走';
+  breeders_series = 'ブリーダーズカップ';
 
   0 = 'メイクデビューに';
   // GENERATED START

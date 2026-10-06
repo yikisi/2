@@ -125,6 +125,7 @@ module.exports = class extends require('#/i18n/zh-CN/race/races') {
 
   dubai_series = '迪拜世界杯赛马日';
   hongkong_series = '香港国际赛事';
+  breeders_series = '育马者杯赛马日';
 
   sim = '模拟赛';
 

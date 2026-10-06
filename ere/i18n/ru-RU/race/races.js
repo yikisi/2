@@ -123,6 +123,10 @@ module.exports = class extends require('#/i18n/zh-CN/race/races') {
   d_oosa = 'большой отрыв';
   d_bashin_template = '%DIS% корпуса';
 
+  dubai_series = 'Всемирный кубок в Дубае';
+  hongkong_series = 'Международные скачки в Гонконге';
+  breeders_series = 'Кубок Бридеров';
+
   sim = 'Симуляция';
 
   0 = 'Дебют';

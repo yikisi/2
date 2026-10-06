@@ -305,7 +305,7 @@ class CustomizedMec extends CustomizedEvent {
     if (before_race) {
       // STATUSNAME:9 = 客场作战
       // TALENTNAME:1 = 自信程度
-      era.set(`status:${this.id}:`, 4 + era.get(`talent:${this.id}:1`));
+      era.set(`status:${this.id}:9`, 4 + era.get(`talent:${this.id}:1`));
     }
   }
 

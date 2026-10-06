@@ -39,8 +39,8 @@ const yandere_list = require('#/data/event/yandere-list');
 const { get_celebration } = require('#/data/info-generator');
 const { location_enum } = require('#/data/locations');
 const { expedition_weeks } = require('#/data/move-const');
-const { class_enum, track_enum } = require('#/data/race/model/race-info');
-const { race_infos } = require('#/data/race/race-const');
+const { class_enum } = require('#/data/race/model/race-info');
+const { race_enum, race_infos } = require('#/data/race/race-const');
 const {
   foreign_race_list,
   track2location,
@@ -49,23 +49,30 @@ const { attr_enum } = require('#/data/train-const');
 
 const { i18n } = require('#/i18n/selector');
 
-function get_track2race(track) {
-  let ret = void 0;
-  switch (track) {
-    case track_enum.meydan:
-      ret = i18n().race.dubai_series;
-      break;
-    case track_enum.shatin:
-      ret = i18n().race.hongkong_series;
+/** @type {Record<string, string>} 赛马日（地点 + 举办周）到系列赛事文案 key 的映射 */
+const series_race_days = {
+  [`${location_enum.dubai}_${race_infos[race_enum.duba_cup].date}`]:
+    'dubai_series',
+  [`${location_enum.hongkong}_${race_infos[race_enum.hk_cup].date}`]:
+    'hongkong_series',
+  [`${location_enum.new_york}_${race_infos[race_enum.bc_cls].date}`]:
+    'breeders_series',
+};
+
+/**
+ * @param {number} loc
+ * @param {number} date
+ */
+function get_race_series(loc, date) {
+  const series = i18n().race[series_race_days[`${loc}_${date}`]];
+  if (!series) {
+    return void 0;
   }
-  if (ret) {
-    ret = {
-      color: adaptability_colors.at(-2 - class_enum.G1),
-      content: ret,
-      fontWeight: 'bold',
-    };
-  }
-  return ret;
+  return {
+    color: adaptability_colors.at(-2 - class_enum.G1),
+    content: series,
+    fontWeight: 'bold',
+  };
 }
 
 /**
@@ -166,10 +173,11 @@ async function check_new_activities(cur_round, in_team_list) {
     curr_race_list = {};
   foreign_race_list.forEach((race) => {
     const { date, track } = race_infos[race];
+    const loc = track2location[track].loc;
     if (event_weeks === date - expedition_weeks) {
-      curr_race_list[`${track}_1`] = [race, true];
+      curr_race_list[`${loc}_1`] = [race, true];
     } else if (event_weeks === date) {
-      curr_race_list[`${track}_0`] = [race, false];
+      curr_race_list[`${loc}_0`] = [race, false];
     }
   });
   for (const entry of Object.values(curr_race_list)) {
@@ -177,13 +185,15 @@ async function check_new_activities(cur_round, in_team_list) {
     const info = race_infos[race];
     const location = track2location[info.track];
     const race_colored_name =
-      get_track2race(info.track) || info.get_colored_name_with_class();
+      get_race_series(location.loc, info.date) ||
+      info.get_colored_name_with_class();
     if (entry[1]) {
       // 远征开始
       let foreign_list = in_team_list.filter((e) => {
+        const member_race = race_infos[sys_reg_race(e).curr.race];
         return (
-          race_infos[sys_reg_race(e).curr.race]?.track ===
-          race_infos[race].track
+          member_race?.date === info.date &&
+          track2location[member_race.track]?.loc === location.loc
         );
       });
       const punish_list = [];
@@ -226,13 +236,20 @@ async function check_new_activities(cur_round, in_team_list) {
           }),
         ]);
       }
+      const my_race = race_infos[sys_reg_race(0).curr.race];
       const me_in_race =
         era.get('cflag:0:种族') &&
-        race_infos[sys_reg_race(0).curr.race]?.track === race_infos[race].track;
+        my_race?.date === info.date &&
+        track2location[my_race.track]?.loc === location.loc;
+      // 玩家本人正在参加其他海外赛事时，不允许转场
+      const me_on_own_race =
+        !!my_race &&
+        track2location[my_race.track]?.loc === era.get('flag:当前位置');
       let temp =
         era.get('flag:当前位置') === location_enum.basement ||
         era.get('cflag:0:妊娠回合计时') >=
           (CharaInmon.get(0).slave === slavery_enum.pregnant ? 30 : 33) ||
+        me_on_own_race ||
         (!foreign_list.length && !me_in_race);
       if (!temp) {
         temp =
