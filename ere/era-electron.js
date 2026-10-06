@@ -47,6 +47,8 @@
  * @property {'left'|'center'|'right'} [align] align of the text shown next to the progress bar, 'left' in default
  * @property {number} [barWidth] width of the progress bar, 0-24, 24 in default
  * @property {string} [color] color of the progress bar
+ * @property {number} [duration] duration(second) of the bar easing, 0.6 in default, set 0 to disable easing
+ * @property {string} [easing] css easing function of the bar easing, 'ease' in default
  * @property {string} [fontColor] color of the font in the progress bar
  * @property {number} [height] height of the progress bar, 6-30(px), 24(px) in default
  * @property {number} [offset] offset of the progress, 0-23, 0 in default
@@ -560,7 +562,7 @@ const era = {
    * @returns {boolean} if debug
    */
   toggleDebug() {},
-  version: { sdk: '4.8.2', engine: void 0 },
+  version: { sdk: '4.8.4', engine: void 0 },
   /**
    * wait any key from user
    * @returns {Promise<void>} a promise of nothing, please use await

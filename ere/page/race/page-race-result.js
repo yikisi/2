@@ -120,10 +120,18 @@ async function page_race_result(contestants, info, race_id) {
     );
     let c_line = era.getLineCount();
 
+    /**
+     * @param {Record<string,*>} e
+     */
+    const without_transition = (e) =>
+      e.type === 'progress'
+        ? { ...e, config: { ...e.config, duration: 0 } }
+        : e;
+
     era.playMusic(audio_list);
 
     while (flag_res && index < result.dynamic_table.length) {
-      let table = result.dynamic_table[index];
+      let table = result.dynamic_table[index].map(without_transition);
       if (sum) {
         table = table.slice(0, 5);
       }
@@ -163,7 +171,7 @@ async function page_race_result(contestants, info, race_id) {
     }
     await era.clear(era.getLineCount() - c_line);
     era.replaceInColRows(
-      ...result.dynamic_table.at(-1),
+      ...result.dynamic_table.at(-1).map(without_transition),
       [{ content: [{ isBr: true }], type: 'text' }],
       {
         columns: [result.buffer.report[0]],
