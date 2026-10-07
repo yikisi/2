@@ -67,11 +67,11 @@ function randomly_interact(in_team_list) {
         const teach_chara = era.get(`cflag:${cid}:照看`);
         const train =
           stamina_ratio >= fail_sta_border.other
-            ? get_random_entry(
+            ? (get_random_entry(
                 train_need_attrs.filter(
                   (attr) => attr !== attr_enum.intelligence,
                 ),
-              )
+              ) ?? attr_enum.intelligence)
             : attr_enum.intelligence;
         // ABLNAME:0 - 4 = 速度训练等级 - 智力训练等级
         const level = in_beach ? 5 : era.get(`abl:${cid}:${train}`) || 1;

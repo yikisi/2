@@ -482,7 +482,7 @@ module.exports = class extends CustomizedEdu {
           )
         )[0] === 1
       ) {
-        extra.relation_change -= 10;
+        extra.relation_change = -10;
         extra.love_change = 1;
         extra.motivation_change = 2;
         EduEventMarks.get_marks(this.id).add('sats_sho');

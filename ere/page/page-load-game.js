@@ -755,6 +755,11 @@ module.exports = async () => {
                 }
               });
             }
+            if (version <= 3112) {
+              if (isNaN(era.get('relation:50:0'))) {
+                era.set('relation:50:0', 350);
+              }
+            }
             if (version < era.get('gamebase').version) {
               for (const cid of [7, 21, 25, 302]) {
                 // CSTRNAME:13 = 头像T
