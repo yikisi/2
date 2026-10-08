@@ -51,6 +51,7 @@ module.exports = class extends CustomizedDaily {
       check_pregnant_unprotect(0) &&
       check_pregnant_unprotect(2)
     ) {
+      edu_marks.forbid_running = 1;
       begin_and_init_ero(0, this.id);
       if (
         (
