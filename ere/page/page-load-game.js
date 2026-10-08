@@ -755,11 +755,6 @@ module.exports = async () => {
                 }
               });
             }
-            if (version <= 3112) {
-              if (isNaN(era.get('relation:50:0'))) {
-                era.set('relation:50:0', 350);
-              }
-            }
             if (version < era.get('gamebase').version) {
               for (const cid of [7, 21, 25, 302]) {
                 // CSTRNAME:13 = 头像T
@@ -770,6 +765,12 @@ module.exports = async () => {
               }
               added.forEach((cid) => {
                 if (cid > 0) {
+                  if (
+                    cid < max_chara_id &&
+                    isNaN(era.get(`relation:${cid}:0`))
+                  ) {
+                    era.set(`relation:${cid}:0`, 350);
+                  }
                   const t_table = era.get(`chara:${cid}`)?.talent;
                   if (
                     typeof t_table === 'object' &&
