@@ -34,6 +34,7 @@ android:
   tags:
     - shell
   variables:
+    NODE_OPTIONS: '--max-old-space-size=8192'
     GAME_BUNDLE_ZIP: '${GAME_BUNDLE_DIR}.zip'
   script:
     - pnpm install
