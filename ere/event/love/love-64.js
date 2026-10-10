@@ -257,7 +257,7 @@ module.exports = class extends CustomizedLove {
 
   /** @param {CharaTalk} pama */
   async escape(pama) {
-    const ret = print_title_with_kojo(this.#kojo, 'escape', pama, {
+    const ret = await print_title_with_kojo(this.#kojo, 'escape', pama, {
       ...this.#dict,
       SELF_CALL: sys_get_callname(this.id, this.id),
     });

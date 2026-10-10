@@ -391,7 +391,9 @@ module.exports = class extends CustomizedDaily {
       era.set('flag:当前位置', location_enum.home);
       await quick_into_sex(this.id);
       era.set('flag:当前位置', cache);
-      await this.#kojo['cl_christmas_sex_end'](this.#dict);
+      await this.#kojo['cl_christmas_sex_end'](
+        generate_dictionary(this.id, { your_name: !0 }),
+      );
     }
   }
 

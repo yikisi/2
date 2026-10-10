@@ -2971,8 +2971,7 @@ new_year_2:
             - fontWeight: bold
               content: %MARU%
             - 「来一起跳舞吧，哼，哼～」
-        - divider: true
-          content: %MARU%，深爱昭和怀旧风格和泡沫时期文化的赛%UMA%
+        - %MARU%，深爱昭和怀旧风格和泡沫时期文化的赛%UMA%
         - color: %COLOR_4%
           content:
             - fontWeight: bold

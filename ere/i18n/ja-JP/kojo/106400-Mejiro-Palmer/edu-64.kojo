@@ -2972,8 +2972,7 @@ new_year_2:
             - fontWeight: bold
               content: %MARU%
             - 「いっしょに踊ろ、ふん、ふん～」
-        - divider: true
-          content: %MARU%、昭和レトロとバブルの文化を愛する%UMA%
+        - %MARU%、昭和レトロとバブルの文化を愛する%UMA%
         - color: %COLOR_4%
           content:
             - fontWeight: bold

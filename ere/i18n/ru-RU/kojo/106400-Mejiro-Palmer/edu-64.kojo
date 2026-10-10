@@ -2971,8 +2971,7 @@ new_year_2:
             - fontWeight: bold
               content: %MARU%
             - "「Потанцуем, хм, хм~」"
-        - divider: true
-          content: "%MARU%, скаковая %UMA%, влюблённая в ретро Сёва и эпоху пузыря"
+        - "%MARU%, скаковая %UMA%, влюблённая в ретро Сёва и эпоху пузыря"
         - color: %COLOR_4%
           content:
             - fontWeight: bold
