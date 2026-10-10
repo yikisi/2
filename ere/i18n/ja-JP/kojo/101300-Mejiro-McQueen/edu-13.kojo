@@ -13,18 +13,20 @@ train_success:
   sync: true
   lines:
     - random: true
-      color: %COLOR%
-      content:
-        - fontWeight: bold
-          content: %CHARA%
-        - 「うふふ、%CALLNAME%、また勝利に一歩近づきましたわね。」
+      lines:
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「うふふ、%CALLNAME%、また勝利に一歩近づきましたわね。」
     - random: true
-      color: %COLOR%
-      content:
-        - fontWeight: bold
-          content: %CHARA%
-        - 「いかがです？ 今日の%CALLNAME%も、わたくしの走りに見惚れていらっしゃいます？」
-        - 結局%YOU%が数分間も話し続け、マックイーンに軽く蹴られてようやく終わった。
+      lines:
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「いかがです？ 今日の%CALLNAME%も、わたくしの走りに見惚れていらっしゃいます？」
+            - 結局%YOU%が数分間も話し続け、マックイーンに軽く蹴られてようやく終わった。
     -
 
 train_fail:

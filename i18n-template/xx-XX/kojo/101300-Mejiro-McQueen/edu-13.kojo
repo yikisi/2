@@ -12,18 +12,20 @@ train_success:
   sync: true
   lines:
     - random: true
-      color: %COLOR%
-      content:
-        - fontWeight: bold
-          content: %CHARA%
-        - 「呵呵%CALLNAME%又离胜利更近一步了呢。」
+      lines:
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「呵呵%CALLNAME%又离胜利更近一步了呢。」
     - random: true
-      color: %COLOR%
-      content:
-        - fontWeight: bold
-          content: %CHARA%
-        - 「怎么样呢，今天的%CALLNAME%也有没有被我的跑姿迷到呢？」
-        - 结果被%YOU%滔滔不绝地说了好几分钟，在麦昆的轻踢下得以结束。
+      lines:
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「怎么样呢，今天的%CALLNAME%也有没有被我的跑姿迷到呢？」
+            - 结果被%YOU%滔滔不绝地说了好几分钟，在麦昆的轻踢下得以结束。
     -
 
 train_fail:

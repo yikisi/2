@@ -158,11 +158,11 @@ race_start:
           - 「I'm feeling in peak condition. I almost wish the bell would ring right now, hehe.」
   - random: true
     lines:
-  - color: %COLOR%
-    content:
-      - fontWeight: bold
-        content: %CHARA%
-      - 「Keep your eyes on me, %CALLNAME%. I'll reach that wire before anyone else can even come close.」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「Keep your eyes on me, %CALLNAME%. I'll reach that wire before anyone else can even come close.」
 
 race_end:
   - if: d.rank === 1

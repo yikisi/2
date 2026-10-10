@@ -63,12 +63,12 @@ g_chair:
           lines:
             - 在调整了一会儿后，一旁的 %CHARA% 站起身来，想要去主动去买些饮料。
             - 于是在 %CHARA% 回来之前，%YOU%靠在椅背上，闭目养神了片刻。（%YOU%性欲--）
-        - acc: 1
+        - acc: 2
           content: 让 %CHARA% 单独待一会
           lines:
             - %YOU%站起身来主动要求去买些饮料，而归来时，还在几米之外%CHARA%就欣然起身迎向了%YOU%。
             - 在修整片刻后，两人将空瓶丢进垃圾箱，随后便兴致高涨地再次上路。（%CHARA%性欲--）
-        - acc: 2
+        - acc: 3
           content: 聊聊天
           lines:
             - %YOU%笑着向身边的%SEX%搭话，而 %CHARA% 同样以笑容会迎来了%YOU%。

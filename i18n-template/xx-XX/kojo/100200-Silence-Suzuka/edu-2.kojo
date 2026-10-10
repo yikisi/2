@@ -157,11 +157,11 @@ race_start:
           - 「状态相当不错，比赛能不能早些开始呢，呵呵。」
   - random: true
     lines:
-  - color: %COLOR%
-    content:
-      - fontWeight: bold
-        content: %CHARA%
-      - 「请期待着吧，%CALLNAME%，我会比任何一个对手都更早地冲线的。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「请期待着吧，%CALLNAME%，我会比任何一个对手都更早地冲线的。」
 
 race_end:
   - if: d.rank === 1

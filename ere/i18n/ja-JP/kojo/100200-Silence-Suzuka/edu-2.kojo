@@ -157,11 +157,11 @@ race_start:
           - 「調子はとても良いです。レース、もっと早く始まらないでしょうか。ふふ。」
   - random: true
     lines:
-  - color: %COLOR%
-    content:
-      - fontWeight: bold
-        content: %CHARA%
-      - 「見ていてください、%CALLNAME%。どの相手よりも先に、ゴールします。」
+      - color: %COLOR%
+        content:
+          - fontWeight: bold
+            content: %CHARA%
+          - 「見ていてください、%CALLNAME%。どの相手よりも先に、ゴールします。」
 
 race_end:
   - if: d.rank === 1

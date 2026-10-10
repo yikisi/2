@@ -64,12 +64,12 @@ g_chair:
           lines:
             - After settling in for a bit, %CHARA% stands up and offers to go buy drinks.
             - Until %CHARA% gets back, %YOU% leans into the bench and rests with eyes closed. (%YOU% Lust--)
-        - acc: 1
+        - acc: 2
           content: Give %CHARA% a moment alone
           lines:
             - %YOU% stands and offers to fetch drinks. On the way back, %CHARA% is already rising to meet %YOU% from several meters away.
             - After a short break you toss the empty bottles and hit the road in high spirits. (%CHARA% Lust--)
-        - acc: 2
+        - acc: 3
           content: Chat a while
           lines:
             - %YOU% smiles and strikes up a chat with the %SEX% beside you, and %CHARA% answers with a smile of their own.
