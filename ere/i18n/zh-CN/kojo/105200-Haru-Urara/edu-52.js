@@ -8229,7 +8229,7 @@ module.exports = {
           '嗯！明年我还要再试一次！我会让大家看到乌拉拉的成长的！',
         );
       }
-      await era.printAndWait(
+      await era.printAndWait([
         '还真是和「那个',
         urara.sex,
         '」说的一样，现在就算 ',
@@ -8237,7 +8237,7 @@ module.exports = {
         ' 停下来，',
         urara.get_colored_name(),
         ' 也还是会选择这场比赛……',
-      );
+      ]);
       await era.printAndWait([
         '等下！对了，还有「那个',
         urara.sex,
@@ -8848,7 +8848,7 @@ module.exports = {
       await era.printAndWait(
         '……总觉得听到了不太对劲的内容，不过这个不是重点就算了。',
       );
-      await era.printAndWait(
+      await era.printAndWait([
         '不过，还真是和「那个',
         urara.sex,
         '」说的一样，现在就算 ',
@@ -8856,7 +8856,7 @@ module.exports = {
         ' 停下来，',
         urara.get_colored_name(),
         ' 也还是会选择这场比赛……',
-      );
+      ]);
       await era.printAndWait([
         '等下，对了，还有「那个',
         urara.sex,

@@ -4179,7 +4179,7 @@ module.exports = {
       await era.printAndWait('Плохо, скоро тренировка;');
       await era.printAndWait([
         'Как зрелый тренер нельзя, чтобы ',
-        you.get_colored_name(),
+        acute.get_colored_name(),
         ' видел эту ленивую сторону—',
       ]);
       await acute.say_and_wait([callname, '?']);

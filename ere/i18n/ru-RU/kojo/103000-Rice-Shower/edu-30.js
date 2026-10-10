@@ -293,7 +293,7 @@ module.exports = {
         ' 失望了吧……',
       ]);
       era.printButton('「下次还有机会。」', 1);
-      era.printButton('「来探讨输掉的原因吧」', 1);
+      era.printButton('「来探讨输掉的原因吧」', 2);
       if ((await era.input()) === 1) {
         await rice.say_and_wait(['那个……嗯。', callname, ' 说的没错。']);
         await rice.say_and_wait([

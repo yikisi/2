@@ -86,7 +86,7 @@ module.exports = class extends CustomizedCheck {
     const edu_weeks = era.get('cflag:67:育成回合计时');
     if (edu_weeks < 3 * 48) {
       const edu_marks = new DaiyaEduMarks99();
-      const ebj_s = new EventObject(67, cb_enum.edu, true);
+      const ebj_s = new EventObject(67, cb_enum.edu, true).set_arg(edu_weeks);
       check_and_add_event(
         edu_marks,
         edu_weeks,

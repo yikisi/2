@@ -3885,7 +3885,7 @@ module.exports = {
       await era.printAndWait('真糟糕，马上就是训练的时间了；');
       await era.printAndWait([
         '作为一名成熟的训练员，可不能让 ',
-        you.get_colored_name(),
+        acute.get_colored_name(),
         ' 看到懒散的这一面——',
       ]);
       await acute.say_and_wait([callname, '？']);

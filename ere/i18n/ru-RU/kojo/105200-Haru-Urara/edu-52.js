@@ -8475,7 +8475,7 @@ module.exports = {
           'Ага! В следующем году я ещё раз попробую! Я покажу всем, как выросла Урара!',
         );
       }
-      await era.printAndWait(
+      await era.printAndWait([
         'И правда, как «та ',
         urara.sex,
         '» сказала, сейчас даже если ',
@@ -8483,7 +8483,7 @@ module.exports = {
         ' остановится, ',
         urara.get_colored_name(),
         ' всё равно выберет эту скачку…',
-      );
+      ]);
       await era.printAndWait([
         'Стоп! Точно, ещё «та ',
         urara.sex,
@@ -9108,7 +9108,7 @@ module.exports = {
       await era.printAndWait(
         '…Что-то в этом звучит не так, но это не главное — ладно.',
       );
-      await era.printAndWait(
+      await era.printAndWait([
         'Впрочем, и правда, как「та ',
         urara.sex,
         '」 говорила, сейчас даже если ',
@@ -9116,7 +9116,7 @@ module.exports = {
         '  остановится, ',
         urara.get_colored_name(),
         '  всё равно выберет эти скачки…',
-      );
+      ]);
       await era.printAndWait([
         'Стоп, точно, ещё「та ',
         urara.sex,

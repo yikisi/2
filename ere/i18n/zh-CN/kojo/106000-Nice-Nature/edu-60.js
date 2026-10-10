@@ -820,7 +820,7 @@ module.exports = {
       await nature.say_and_wait('……这……这样啊。那个帝王竟然……');
       await era.printAndWait('之后的训练中，优秀素质看起来若有所思。');
       await era.printAndWait(
-        `──而在训练结束后，${teio.sex}缓缓地对 ${you.name} 说出了自己的心情。`,
+        `──而在训练结束后，${nature.sex}缓缓地对 ${you.name} 说出了自己的心情。`,
       );
       await nature.say_and_wait(
         '……我一直以来都误解了。不对，我可能是……故意这么误解的。',
