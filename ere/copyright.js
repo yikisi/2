@@ -6,7 +6,7 @@ const item_title_color =
   require('#/data/color-const').adaptability_colors.at(-1);
 const { get_chara_color } = require('#/data/chara-colors');
 
-const { i18n } = require('#/i18n/selector');
+const { __, i18n } = require('#/i18n/selector');
 
 /**
  * @param {number} cid
@@ -427,6 +427,13 @@ function generate_copyrights() {
     ],
   ];
 
+  const local_copyrights = [
+    ['en_us', 'Katze'],
+    ['ru_ru', 'Agnes Impera'],
+    ['ja_jp', 'gamera'],
+    ['ko_kr', 'SpAR'],
+  ];
+
   buffer.push(
     [
       {
@@ -591,49 +598,19 @@ function generate_copyrights() {
   ]);
   push_copyrights(img_copyrights, 2);
   buffer.push(
-    [
-      {
-        config: {
-          color: item_title_color,
-          fontSize: '1.25rem',
-          isParagraph: true,
-          width: 8,
-        },
-        content: i18n().cr_header_lib_en_us,
+    local_copyrights.map(([l]) => ({
+      config: {
+        color: item_title_color,
+        fontSize: '1.25rem',
+        isParagraph: true,
+        width: Math.floor(24 / local_copyrights.length),
       },
-      {
-        config: {
-          color: item_title_color,
-          fontSize: '1.25rem',
-          isParagraph: true,
-          width: 8,
-        },
-        content: i18n().cr_header_lib_ru_ru,
-      },
-      {
-        config: {
-          color: item_title_color,
-          fontSize: '1.25rem',
-          isParagraph: true,
-          width: 8,
-        },
-        content: i18n().cr_header_lib_ja_jp,
-      },
-    ],
-    [
-      {
-        config: { width: 8 },
-        content: 'Katze',
-      },
-      {
-        config: { width: 8 },
-        content: 'Agnes Impera',
-      },
-      {
-        config: { width: 8 },
-        content: 'gamera',
-      },
-    ],
+      content: __(`cr_header_lib_${l}`),
+    })),
+    local_copyrights.map((a) => ({
+      config: { width: Math.floor(24 / local_copyrights.length) },
+      content: a[1],
+    })),
     [
       {
         config: {
