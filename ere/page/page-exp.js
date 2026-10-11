@@ -13,7 +13,7 @@ const recruit_flags = require('#/data/event/recruit-flags');
 
 const { i18n } = require('#/i18n/selector');
 
-/** @type {{generate:function(CharaTalk,{in_growth:boolean,mark_level:number,show_all_exp:boolean,show_body:boolean,show_exp:boolean}):{print:function:*[],[handle]:function(number)},name:string,[vagina]:boolean,[uma]:boolean}[]} */
+/** @type {{generate:function(CharaTalk,{in_growth:boolean,mark_level:number,show_all_exp:boolean,show_body:boolean,show_exp:boolean}):{print:function:*[],[handle]:function(number)},name:()=>string,[vagina]:boolean,[uma]:boolean}[]} */
 const handlers = [
   require('#/page/exp/base-tab'),
   require('#/page/exp/edu-tab'),
@@ -103,7 +103,7 @@ async function print_chara_info(_id, chara_list, _page) {
                   offset: 2,
                   width: 22,
                 },
-                content: e.name,
+                content: e.name(),
                 type: 'button',
               }))
             : [],

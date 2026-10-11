@@ -336,5 +336,5 @@ module.exports = {
       ],
     };
   },
-  name: i18n().detail.relation_title,
+  name: () => i18n().detail.relation_title,
 };

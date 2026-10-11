@@ -259,5 +259,5 @@ module.exports = {
       ],
     };
   },
-  name: i18n().detail.exp_mouth_title,
+  name: () => i18n().detail.exp_mouth_title,
 };

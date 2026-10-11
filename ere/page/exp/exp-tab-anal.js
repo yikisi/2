@@ -125,5 +125,5 @@ module.exports = {
       ],
     };
   },
-  name: i18n().detail.exp_anal_title,
+  name: () => i18n().detail.exp_anal_title,
 };

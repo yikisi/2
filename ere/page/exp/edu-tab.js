@@ -195,5 +195,5 @@ module.exports = {
       print: () => aim_list,
     };
   },
-  name: i18n().detail.edu_title,
+  name: () => i18n().detail.edu_title,
 };
