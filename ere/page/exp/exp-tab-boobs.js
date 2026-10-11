@@ -211,5 +211,5 @@ module.exports = {
       ],
     };
   },
-  name: i18n().detail.exp_breast_title,
+  name: () => i18n().detail.exp_breast_title,
 };

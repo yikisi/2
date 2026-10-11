@@ -199,5 +199,5 @@ module.exports = {
       },
     };
   },
-  name: i18n().detail.exp_hf_title,
+  name: () => i18n().detail.exp_hf_title,
 };

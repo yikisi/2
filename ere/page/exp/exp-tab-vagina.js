@@ -435,6 +435,6 @@ module.exports = {
       ],
     };
   },
-  name: i18n().detail.exp_vagina_title,
+  name: () => i18n().detail.exp_vagina_title,
   vagina: true,
 };

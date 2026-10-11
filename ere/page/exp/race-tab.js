@@ -149,6 +149,6 @@ module.exports = {
       print: () => race_info_list,
     };
   },
-  name: i18n().detail.race_title,
+  name: () => i18n().detail.race_title,
   uma: true,
 };

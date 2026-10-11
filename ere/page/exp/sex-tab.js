@@ -405,5 +405,5 @@ module.exports = {
       print: () => sex_info_list,
     };
   },
-  name: i18n().detail.sex_title,
+  name: () => i18n().detail.sex_title,
 };
