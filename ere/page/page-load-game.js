@@ -755,7 +755,7 @@ module.exports = async () => {
                 }
               });
             }
-            if (version < era.get('gamebase').version) {
+            if (version <= 3121) {
               for (const cid of [7, 21, 25, 302]) {
                 // CSTRNAME:13 = 头像T
                 if (added.includes(cid) && !era.get(`cstr:${cid}:13`)) {
@@ -763,14 +763,19 @@ module.exports = async () => {
                   era.set(`cstr:${cid}:13`, era.get(`staticcstr:${cid}:10`));
                 }
               }
+            }
+            if (version < era.get('gamebase').version) {
+              added.forEach((cid) => {
+                if (
+                  cid > 0 &&
+                  cid < max_chara_id &&
+                  isNaN(era.get(`relation:${cid}:0`))
+                ) {
+                  era.set(`relation:${cid}:0`, 350);
+                }
+              });
               added.forEach((cid) => {
                 if (cid > 0) {
-                  if (
-                    cid < max_chara_id &&
-                    isNaN(era.get(`relation:${cid}:0`))
-                  ) {
-                    era.set(`relation:${cid}:0`, 350);
-                  }
                   const t_table = era.get(`chara:${cid}`)?.talent;
                   if (
                     typeof t_table === 'object' &&
