@@ -30,14 +30,14 @@ module.exports = {
    */
   async lure(teio, you, success) {
     await you.print_and_wait([
-      "눈앞의 사랑스러운 모습을 보고 있자니, 저절로 ",
+      '눈앞의 사랑스러운 모습을 보고 있자니, 저절로 ',
       teio.sex,
-      "을(를) 품에 안고 머리카락을 만지작거리며 머리를 쓰다듬고 있었다.",
+      '을(를) 품에 안고 머리카락을 만지작거리며 머리를 쓰다듬고 있었다.',
     ]);
-    await teio.say_and_wait("뭐야…… 또 어린애 취급이야……");
+    await teio.say_and_wait('뭐야…… 또 어린애 취급이야……');
     if (success || era.get(`tcvar:${teio.id}:发情`) > 0) {
-      await you.print_and_wait("그렇게 말하면서도…… 꼬리는 살랑거리고 있다.");
-      await you.print_and_wait("계속해 줬으면 하는 표정이다.");
+      await you.print_and_wait('그렇게 말하면서도…… 꼬리는 살랑거리고 있다.');
+      await you.print_and_wait('계속해 줬으면 하는 표정이다.');
     }
   },
   /**
@@ -45,7 +45,7 @@ module.exports = {
    * @param {CharaTalk} you プレイヤー
    * @param {PrintedSpan} callname トウカイテイオーがプレイヤーを呼ぶ名
    */
-async switch(teio, you, callname) {
+  async switch(teio, you, callname) {
     await teio.say_and_wait([callname, '! 또 짓궂게 굴었네——']);
     await you.print_and_wait([
       '볼을 부풀린 작은 우마무스메를 보며 웃고, 양손으로 ',
@@ -76,9 +76,7 @@ async switch(teio, you, callname) {
         '장난기가 샘솟아 손가락을 뻗어 이 비밀스러운 곳을 문지르고, 때때로 자물쇠를 억지로 열려고 한다.',
       ]);
       await teio.say_and_wait(['앗…… 응, ', callname, '!']);
-      await you.print_and_wait(
-        '……거부라기보다는 기쁨과 재촉이 섞여 있다.',
-      );
+      await you.print_and_wait('……거부라기보다는 기쁨과 재촉이 섞여 있다.');
       await you.print_and_wait([
         '설마, 이 멋진 작은 ',
         teio.sex_code === 1 ? '왕자님' : '공주님',
@@ -106,8 +104,12 @@ async switch(teio, you, callname) {
       teio.teen_sex_title,
       '은 평소와 달리 한마디도 하지 않는다.',
     ]);
-    await you.print_and_wait(['꼬리를 들어 올리고 그 비밀스러운 곳을 찬찬히 바라본다.']);
-    await you.print_and_wait(['사랑스러운 엉덩이가 떨리고, 창백하고 깨끗한 구멍이 열려 있다……']);
+    await you.print_and_wait([
+      '꼬리를 들어 올리고 그 비밀스러운 곳을 찬찬히 바라본다.',
+    ]);
+    await you.print_and_wait([
+      '사랑스러운 엉덩이가 떨리고, 창백하고 깨끗한 구멍이 열려 있다……',
+    ]);
   },
   /**
    * @param {CharaTalk} teio 토카이 테이오
@@ -190,55 +192,55 @@ async switch(teio, you, callname) {
     if (era.get('status:3:腿伤') > 0) {
       await era.printAndWait([
         you.get_colored_name(),
-        "은(는) 손에 든 보고서를 내려다보며 거기에 적힌 사실을 받아들였다. 그러고는 창가에 앉은 담당을 향해 고개를 들었다.",
+        '은(는) 손에 든 보고서를 내려다보며 거기에 적힌 사실을 받아들였다. 그러고는 창가에 앉은 담당을 향해 고개를 들었다.',
       ]);
       await era.printAndWait([
-        "석양이 방 안으로 비스듬히 들어와 ",
+        '석양이 방 안으로 비스듬히 들어와 ',
         teio.sex,
-        "가 아랫배를 쓰다듬는 손과 힘없이 흔들리는 종아리를 비추었다.",
+        '가 아랫배를 쓰다듬는 손과 힘없이 흔들리는 종아리를 비추었다.',
       ]);
-      await teio.say_and_wait(["트레이너…… 트레이너."]);
+      await teio.say_and_wait(['트레이너…… 트레이너.']);
       await era.printAndWait([
         teio.sex,
-        "는 미소를 지으며 자기 배를 가리키고 ",
+        '는 미소를 지으며 자기 배를 가리키고 ',
         you.get_colored_name(),
-        "에게 손짓했다.",
+        '에게 손짓했다.',
       ]);
       await era.printAndWait([
         you.get_colored_name(),
-        "은(는) 마음을 다잡고 그림자를 밟으며 다가갔다.",
+        '은(는) 마음을 다잡고 그림자를 밟으며 다가갔다.',
       ]);
-      await era.printAndWait("두 사람은 가족이다.");
+      await era.printAndWait('두 사람은 가족이다.');
     } else {
-      await teio.say_and_wait(["트레이너, 트레이너──"]);
+      await teio.say_and_wait(['트레이너, 트레이너──']);
       await era.printAndWait([
         you.get_colored_name(),
-        "은(는) 무슨 일인지 알기도 전에 다급히 달려오는 담당을 무의식중에 두 팔로 받아 냈다. 잠시 뒤에야 ",
+        '은(는) 무슨 일인지 알기도 전에 다급히 달려오는 담당을 무의식중에 두 팔로 받아 냈다. 잠시 뒤에야 ',
         teio.sex,
-        "가 두 손에 쥔 서류의 의미를 이해했다.",
+        '가 두 손에 쥔 서류의 의미를 이해했다.',
       ]);
-      await era.printAndWait(["그런 거였구나……"]);
+      await era.printAndWait(['그런 거였구나……']);
       await era.printAndWait([
         you.get_colored_name(),
-        "은(는) 시선을 내려 ",
+        '은(는) 시선을 내려 ',
         teio.sex,
-        "의 아랫배를 보았다.",
+        '의 아랫배를 보았다.',
       ]);
-      await you.say_and_wait(["저 안에 ", teio.sex, "와 나의……"], true);
+      await you.say_and_wait(['저 안에 ', teio.sex, '와 나의……'], true);
       await era.printAndWait([
         you.get_colored_name(),
-        "의 품에 안긴 존재가 한 번 몸을 떨자 ",
+        '의 품에 안긴 존재가 한 번 몸을 떨자 ',
         you.get_colored_name(),
-        "은(는) 정신을 차리고 담당의 두 눈을 마주했다. ",
+        '은(는) 정신을 차리고 담당의 두 눈을 마주했다. ',
         teio.sex,
-        "도 ",
+        '도 ',
         you.get_colored_name(),
-        "을(를) 마주 보았다. 그 표정이 점점 차분하고 어른스러워졌다.",
+        '을(를) 마주 보았다. 그 표정이 점점 차분하고 어른스러워졌다.',
       ]);
       await era.printAndWait([
-        "좋아, 하고 ",
+        '좋아, 하고 ',
         you.get_colored_name(),
-        "은(는) 생각했다. 앞으로 세울 계획은 트레이닝만으로 끝나지 않을 것이다.",
+        '은(는) 생각했다. 앞으로 세울 계획은 트레이닝만으로 끝나지 않을 것이다.',
       ]);
     }
   },

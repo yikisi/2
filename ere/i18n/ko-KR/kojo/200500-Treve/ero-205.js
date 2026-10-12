@@ -52,7 +52,10 @@ module.exports = {
       `미끄러지듯 부드러운 감촉과, ${treve.teen_sex_title}이(가) 억누를 수 없는 낮은 신음 소리가 어우러지며 ${you.name}은(는) 다른 쪽 둥근 언덕에서도 힘을 더해 주무른다. ${treve.teen_sex_title}의 아랫배가 짧게 파도치며, 하얀 피부의 한 치 한 치가 흥분의 충격에 파도처럼 흔들린다.`,
     );
     era.printButton('「네 몸이 얼마나 음탕한지, 이제 알겠지?」', 1);
-    era.printButton('「를 만나지 않았더라도, 네가 저항할 수 있었을 거라고 생각하니?」', 2);
+    era.printButton(
+      '「를 만나지 않았더라도, 네가 저항할 수 있었을 거라고 생각하니?」',
+      2,
+    );
     if ((await era.input()) === 1) {
       await treve.say_and_wait('당신……말도 안 돼요. 굴복하지 않아요.');
     } else {

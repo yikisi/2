@@ -19,7 +19,7 @@ module.exports = {
       if (era.get('love:46') >= 75) {
         buffer.push(() => {
           falcon.say(`하아~ 아침엔 정말 졸리지.`);
-          falcon.say("어제 라이브에서 그만 늦게까지 노래해 버렸어.");
+          falcon.say('어제 라이브에서 그만 늦게까지 노래해 버렸어.');
           falcon.say(`오늘 트레이닝은 조금 늦춰도 될까?`);
           era.print([
             you.get_colored_name(),
@@ -32,11 +32,11 @@ module.exports = {
             `이 정도는 ${falcon.uma_sex_title} 아이돌 팔코에게 아무것도 아니야⭐`,
           );
           era.print([
-            "말은 그렇게 해도 휘청이는 몸이 속마음을 드러내자 어쩔 수 없이 ",
+            '말은 그렇게 해도 휘청이는 몸이 속마음을 드러내자 어쩔 수 없이 ',
             you.get_colored_name(),
-            "은(는) ",
+            '은(는) ',
             falcon.sex,
-            "를 소파에서 먼저 쉬게 했다.",
+            '를 소파에서 먼저 쉬게 했다.',
           ]);
         });
       }
@@ -48,7 +48,7 @@ module.exports = {
         },
         () => {
           falcon.say(
-            "더트를 달릴 때 묵직한 느낌은 귀여운 팔코랑 조금 안 어울릴지도……",
+            '더트를 달릴 때 묵직한 느낌은 귀여운 팔코랑 조금 안 어울릴지도……',
           );
           falcon.say(
             `강한 팔코도 귀엽다고? 역시 1호팬인 ${callname}답네! 평소 트레이닝에서도 팔코는 빛날 거야!`,
@@ -93,9 +93,7 @@ module.exports = {
           },
           () => {
             falcon.say(`아이돌의 길은 늘 괴로움과 아픔으로 가득해.`);
-            falcon.say(
-              "팔코도 가끔은 계속할 수 있을지 모르겠어.",
-            );
+            falcon.say('팔코도 가끔은 계속할 수 있을지 모르겠어.');
             era.print(
               `트레이너실에서 팔코와 잡담하던 중 ${falcon.sex}는 ${you.name}에게 고민을 털어놓았다.`,
             );
@@ -125,23 +123,21 @@ module.exports = {
     const buffer = [];
     if (era.get('base:46:体力') < era.get('maxbase:46:体力') / 3) {
       buffer.push(() => {
-        falcon.say("으음, 조금 지쳤네.");
-        falcon.say("기운 내야지! 팔코는 팬들의 기대에 응해야 하니까!");
-        falcon.say("팔코, 힘낼게!");
+        falcon.say('으음, 조금 지쳤네.');
+        falcon.say('기운 내야지! 팔코는 팬들의 기대에 응해야 하니까!');
+        falcon.say('팔코, 힘낼게!');
         era.print([
-          "억지로 기운을 짜낸 ",
+          '억지로 기운을 짜낸 ',
           falcon.get_colored_name(),
-          "가 조금 지친 얼굴로 ",
+          '가 조금 지친 얼굴로 ',
           you.get_colored_name(),
-          "을(를) 본다.",
+          '을(를) 본다.',
         ]);
       });
     } else {
       buffer.push(
         () => {
-          falcon.say(
-            `팔코는 바로 그런 ${falcon.uma_sex_title}야!`,
-          );
+          falcon.say(`팔코는 바로 그런 ${falcon.uma_sex_title}야!`);
           falcon.say(`${callname}, 오늘 트레이닝 메뉴는 뭐야?`);
           era.print(
             `일찍 트레이너실에 온 ${falcon.name}가 ${you.name}의 지시를 기다리고 있다.`,
@@ -154,9 +150,7 @@ module.exports = {
           falcon.say(
             `……응? 아이돌 활동이 길어져 통금 시간을 못 맞출 것 같아서 이번 달에 ${callname}는 벌써 ${f_call_m}에게 세 번이나 혼났어.`,
           );
-          falcon.say(
-            `으음──그렇구나. 그럼 오늘 라이브는 시간을 잘 봐야겠네!`,
-          );
+          falcon.say(`으음──그렇구나. 그럼 오늘 라이브는 시간을 잘 봐야겠네!`);
           era.print(
             `그 뒤 강변에서 연 게릴라 라이브는 또다시 통금 직전까지 이어졌다.`,
           );
@@ -194,9 +188,7 @@ module.exports = {
             `요즘 길거리 라이브에 오는 팬이 늘었어. 팔코, 톱 아이돌도 머지않았을지 몰라.`,
           );
           falcon.say(`……그래도 ${callname}에게는 약한 소리 해도 되지?`);
-          falcon.say(
-            `……동작을 틀리면 팬들이 팔코에게 실망할까?`,
-          );
+          falcon.say(`……동작을 틀리면 팬들이 팔코에게 실망할까?`);
           era.print(`망설임과 괴로움.`);
         });
       } else if (era.get('love:46') >= 50) {
@@ -228,9 +220,7 @@ module.exports = {
           falcon.say(
             `아이돌의 비결을 공부할까? 아니면 어제 배운 스텝부터 연습할까?`,
           );
-          falcon.say(
-            `어느 쪽이 좋을까? 으으~ 팔코가 둘로 나뉘면 좋을 텐데.`,
-          );
+          falcon.say(`어느 쪽이 좋을까? 으으~ 팔코가 둘로 나뉘면 좋을 텐데.`);
           era.print(
             `트레이닝 중에 한눈을 팔면 톱 ${falcon.uma_sex_title} 아이돌은 될 수 없다.`,
           );
@@ -247,9 +237,7 @@ module.exports = {
     falcon.say(
       `하나, 둘, 노·려·라! TOP UMAIDOL(톱 ${falcon.uma_sex_title}돌)⭐`,
     );
-    falcon.say(
-      `가장 크고 가장 빛나는 무대 한가운데를 향해 단숨에 스퍼트♪`,
-    );
+    falcon.say(`가장 크고 가장 빛나는 무대 한가운데를 향해 단숨에 스퍼트♪`);
     falcon.say(`팔코는 그런 ${falcon.uma_sex_title}야!`);
     falcon.say(
       `지금은 아직 어디에나 있는 무명 아이돌. 그·래·도 팔코가 무대 한가운데 서면 관객들의 시선을 전부 사로잡을 수 있어!`,
@@ -269,7 +257,7 @@ module.exports = {
     buffer.push(
       () =>
         falcon.say_and_wait(
-          "으으, 팔코는 책 읽는 게 서툴러. 시험은 플래시가 준 요점 노트를 전날 벼락치기해서 겨우 통과하거든.",
+          '으으, 팔코는 책 읽는 게 서툴러. 시험은 플래시가 준 요점 노트를 전날 벼락치기해서 겨우 통과하거든.',
         ),
       () =>
         falcon.say_and_wait(
@@ -417,7 +405,7 @@ module.exports = {
           ),
         () =>
           falcon.say_and_wait(
-            "흙을 뚫고 돋아나는 작은 풀을 보면 팔코는 왠지 엄청 감동해!",
+            '흙을 뚫고 돋아나는 작은 풀을 보면 팔코는 왠지 엄청 감동해!',
           ),
       );
     }
@@ -508,7 +496,7 @@ module.exports = {
     buffer.push(
       () =>
         falcon.say_and_wait(
-          "레시피대로 만드는 것보다 팔코는 다른 방법도 시도하고 싶어. 자주 실패하지만……",
+          '레시피대로 만드는 것보다 팔코는 다른 방법도 시도하고 싶어. 자주 실패하지만……',
         ),
       () =>
         falcon.say_and_wait(
@@ -551,10 +539,7 @@ module.exports = {
         falcon.say_and_wait(
           `아이돌에게는 휴식도 중요해! 그러니까 ${callname}도 제대로 쉬어!`,
         ),
-      () =>
-        falcon.say_and_wait(
-          `가끔 골드 시티가 부러워. 아이돌로서 말이야.`,
-        ),
+      () => falcon.say_and_wait(`가끔 골드 시티가 부러워. 아이돌로서 말이야.`),
     );
     if (era.get('love:46') === 100) {
       buffer.push(
@@ -690,9 +675,9 @@ module.exports = {
         await era.printAndWait(
           [
             falcon.get_colored_name(),
-            "「만약 언젠가 팬과 ",
+            '「만약 언젠가 팬과 ',
             callname,
-            " 중에서 골라야 한다면……」",
+            ' 중에서 골라야 한다면……」',
           ],
           { color: falcon.color, fontSize: '0.75rem' },
         );
@@ -727,7 +712,9 @@ module.exports = {
   async o_r_walking(falcon) {
     const buffer = [
       async () => {
-        await falcon.say_and_wait(`강변 잔디에서 라이브 하게 해 주는 데 대한 보답이야.`);
+        await falcon.say_and_wait(
+          `강변 잔디에서 라이브 하게 해 주는 데 대한 보답이야.`,
+        );
         await falcon.say_and_wait(
           `팔코는 쉴 때 가끔 고가교 밑에서 봉사 활동을 하거든.`,
         );
@@ -760,9 +747,7 @@ module.exports = {
         await falcon.say_and_wait(
           `${callname}, 팔코가 활약하는 모습 잘 봐 줘!`,
         );
-        await falcon.say_and_wait(
-          `새로운 일도 전력을 다할게. 팔코, 힘낼게♪`,
-        );
+        await falcon.say_and_wait(`새로운 일도 전력을 다할게. 팔코, 힘낼게♪`);
         await era.printAndWait(
           `올 퍼펙트를 낸 ${falcon.name}와 간신히 완주한 자신을 보며 ${you.name}은(는) 말이 없어졌다.`,
         );
@@ -813,9 +798,7 @@ module.exports = {
       `잡화점 주인`,
       `들어온 입구 쪽에서 그 할아버지를 찾아 이 표를 드리면 돼.`,
     );
-    await falcon.say_and_wait(
-      `감사합니다. 오늘은 팔코의 행운의 날인가 봐⭐`,
-    );
+    await falcon.say_and_wait(`감사합니다. 오늘은 팔코의 행운의 날인가 봐⭐`);
     await you.say_as_passer_by_and_wait(
       `잡화점 주인`,
       `행운의 별 ${falcon.adult_sex_title}, 다음에도 기운차게 와. 조심해서 가고.`,
@@ -875,7 +858,10 @@ module.exports = {
           );
         },
         async () => {
-          await you.say_as_passer_by_and_wait(`가게 주인`, `삼등상, 당근 한 개!`);
+          await you.say_as_passer_by_and_wait(
+            `가게 주인`,
+            `삼등상, 당근 한 개!`,
+          );
           await era.printAndWait(
             `추첨기에서 떨어진 노란 공을 흘끗 보고 주인은 손에 든 종을 울렸다.`,
           );
@@ -894,7 +880,10 @@ module.exports = {
           );
         },
         async () => {
-          await you.say_as_passer_by_and_wait(`가게 주인`, `이등상, 당근 한가득!`);
+          await you.say_as_passer_by_and_wait(
+            `가게 주인`,
+            `이등상, 당근 한가득!`,
+          );
           await era.printAndWait(
             `추첨기에서 떨어진 당근색 공을 흘끗 보고 주인은 손에 든 종을 울렸다.`,
           );
@@ -902,12 +891,8 @@ module.exports = {
             `${you.name}은(는) 주인에게 당근 상자를 받고 어떻게 가져갈지 고민했다. 그때.`,
           );
           await era.printAndWait(`작은 손이 골칫거리를 가볍게 들어 올렸다.`);
-          await falcon.say_and_wait(
-            `와……당근이 생각보다 많네. 보름은 먹겠어.`,
-          );
-          await falcon.say_and_wait(
-            `다음 라이브에 오는 팬들에게 선물하자!`,
-          );
+          await falcon.say_and_wait(`와……당근이 생각보다 많네. 보름은 먹겠어.`);
+          await falcon.say_and_wait(`다음 라이브에 오는 팬들에게 선물하자!`);
           era.printButton(
             `당근을 세워 가상 관객으로 삼고 아이돌 연습을 하자!`,
             1,
@@ -940,7 +925,10 @@ module.exports = {
           );
         },
         async () => {
-          await you.say_as_passer_by_and_wait(`가게 주인`, `일등상, 당근 버거!`);
+          await you.say_as_passer_by_and_wait(
+            `가게 주인`,
+            `일등상, 당근 버거!`,
+          );
           await era.printAndWait(
             `추첨기에서 떨어진 빨간 공을 조심스레 집어 들고 주인은 손에 든 종을 울렸다.`,
           );
@@ -1039,7 +1027,7 @@ module.exports = {
     await get_random_entry(buffer)();
   },
   church_idol: (() => {
-    const title = "무녀 아르바이트";
+    const title = '무녀 아르바이트';
     /**
      * @param {CharaTalk} falcon スマートファルコン
      * @param {CharaTalk} darley ダーレーアラビアン
@@ -1053,9 +1041,9 @@ module.exports = {
       // 古代の人々はその小川を囲んで神社を建て、参拝する人は事業や恋の成就を祈った
       // 宣伝するなら、なぜファル子はボランティアや巫女のバイトをしないのか？
       // こういう場所で活躍すれば、スマートファルコンの印象に残る人は多いはず
-      darley.name = "다정한 여신";
-      godolphin.name = "지혜의 여신";
-      byerley.name = "엄숙한 여신";
+      darley.name = '다정한 여신';
+      godolphin.name = '지혜의 여신';
+      byerley.name = '엄숙한 여신';
       await era.printAndWait(`쉬는 날 오전.`);
       await era.printAndWait(
         `스스로 신사 봉사 활동을 신청한 ${falcon.name}가 ${you.name}의 손을 잡고 신사로 왔다.`,
@@ -1170,7 +1158,9 @@ module.exports = {
         `신관`,
         `봉사해 주신 보답으로, 그렇군요──`,
       );
-      await era.printAndWait(`잠시 준비한 뒤 그는 삼여신상에 기도하기 시작했다.`);
+      await era.printAndWait(
+        `잠시 준비한 뒤 그는 삼여신상에 기도하기 시작했다.`,
+      );
       await you.say_as_passer_by_and_wait(
         `신관`,
         `아름답고 자비로운 삼여신이여, 종인 저의 말을 들어 주소서.`,
@@ -1193,14 +1183,14 @@ module.exports = {
         await you.say_as_passer_by_and_wait(`신관`, `그럼 제 안내에 따라……`);
         await era.printAndWait(`능숙한 안내에 따라 두 사람은 눈을 감았다.`);
         const buffer = [
-          () => darley.say_and_wait("……강한 아이구나."),
+          () => darley.say_and_wait('……강한 아이구나.'),
           () =>
             godolphin.say_and_wait(
-              "사랑스러운 아이야, 모든 것을 혼자 짊어지지 말거라.",
+              '사랑스러운 아이야, 모든 것을 혼자 짊어지지 말거라.',
             ),
           () =>
             byerley.say_and_wait(
-              "모든 물음의 끝, 그것은 에덴에 있다. 멈추지 말고 달려라.",
+              '모든 물음의 끝, 그것은 에덴에 있다. 멈추지 말고 달려라.',
             ),
         ];
         await get_random_entry(buffer)();
@@ -1219,14 +1209,17 @@ module.exports = {
         await era.printAndWait(
           `의식이 끝나고 신관은 품에서 부적 한 장을 꺼냈다.`,
         );
-        await you.say_as_passer_by_and_wait(`신관`, `변변치 않지만 받아 주세요.`);
+        await you.say_as_passer_by_and_wait(
+          `신관`,
+          `변변치 않지만 받아 주세요.`,
+        );
         await era.printAndWait([
           falcon.get_colored_name(),
           '/',
           you.get_colored_name(),
           '「',
-          { content: "정말 ", color: falcon.color },
-          "감사합니다!」",
+          { content: '정말 ', color: falcon.color },
+          '감사합니다!」',
         ]);
         await you.say_as_passer_by_and_wait(
           `신관`,
@@ -1301,9 +1294,7 @@ module.exports = {
         await era.printAndWait(
           `쇼핑몰을 돌아다니다 ${falcon.uma_sex_title} 굿즈 가게 앞을 지났다.`,
         );
-        await falcon.say_and_wait(
-          `팔코 굿즈, 지난주보다 조금 늘었어♪`,
-        );
+        await falcon.say_and_wait(`팔코 굿즈, 지난주보다 조금 늘었어♪`);
         await era.printAndWait(
           `더트 테마 진열대에는 ${falcon.name}의 인형이 줄지어 있었다.`,
         );

@@ -14,38 +14,40 @@ module.exports = {
      */
     const f = async (daiwa, you, callname) => {
       await era.printAndWait(
-        "아침부터 어쩐지 몸이 뜨겁다. 그렇다고 열이 나는 것도 아니라 대수롭지 않게 넘겼다.",
+        '아침부터 어쩐지 몸이 뜨겁다. 그렇다고 열이 나는 것도 아니라 대수롭지 않게 넘겼다.',
       );
-      await era.printAndWait("기분 탓이겠지?");
-      await era.printAndWait("——그렇게 생각했는데……");
-      await you.say_and_wait("……이상하네…… 아침에는 아무렇지도 않았는데……");
+      await era.printAndWait('기분 탓이겠지?');
+      await era.printAndWait('——그렇게 생각했는데……');
+      await you.say_and_wait('……이상하네…… 아침에는 아무렇지도 않았는데……');
       await era.printAndWait(
-        "——갑자기 몸 상태가 나빠졌다. 온몸이 뜨겁고, 심장도 진정될 기미가 없다……",
+        '——갑자기 몸 상태가 나빠졌다. 온몸이 뜨겁고, 심장도 진정될 기미가 없다……',
       );
       await era.printAndWait([
         you.get_colored_name(),
-        "은 트레이너실 소파에 앉아 가슴께의 단추를 풀었다.",
+        '은 트레이너실 소파에 앉아 가슴께의 단추를 풀었다.',
       ]);
       await era.printAndWait(
         '배 속 깊은 곳에서 묘하게 쑤시는 듯한 통증이 느껴졌다. 당장 옷을 모두 벗고 밖을 뛰어다니고 싶었다—— 그런, 제정신이 아닌 기분이었다.',
       );
       era.println();
-      await daiwa.say_and_wait(["안녕하세요, ", callname, '。']);
+      await daiwa.say_and_wait(['안녕하세요, ', callname, '。']);
       era.println();
       await era.printAndWait([
-        "어느새 ",
+        '어느새 ',
         daiwa.get_colored_name(),
-        "이 찾아올 시간이 되었다.",
+        '이 찾아올 시간이 되었다.',
       ]);
       era.println();
-      await you.say_and_wait("아…… 응…… 안녕…… 다이와……");
+      await you.say_and_wait('아…… 응…… 안녕…… 다이와……');
       await daiwa.say_and_wait('……');
       era.println();
-      await era.printAndWait("쿵, 하는 소리와 함께 다이와의 가방이 바닥에 떨어졌다.");
+      await era.printAndWait(
+        '쿵, 하는 소리와 함께 다이와의 가방이 바닥에 떨어졌다.',
+      );
       await era.printAndWait('아, 그러고 보니, 지금 차림은 좀……');
       era.println();
       await daiwa.say_and_wait([callname, '……？']);
-      await you.say_and_wait("아…… 잠깐만……");
+      await you.say_and_wait('아…… 잠깐만……');
       era.println();
       await era.printAndWait([
         '머리로는 빨리 옷을 차려입어야 한다는 걸 알면서도, 단추가 도저히 채워지지 않는다. 한참을 허둥대던 끝에, 눈앞에 ',
@@ -53,11 +55,11 @@ module.exports = {
         '의 얼굴이 다가와 있었다.',
       ]);
       era.println();
-      await you.say_and_wait("……응? 왜 그래?");
+      await you.say_and_wait('……응? 왜 그래?');
       await daiwa.say_and_wait(
         '당신…… 아침부터 줄곧 그런 냄새를 풍기고 계셨나요?',
       );
-      await you.say_and_wait("……냄새?");
+      await you.say_and_wait('……냄새?');
       era.println();
       await era.printAndWait([
         '그러고 보니, 오늘은 왠지 달콤한 냄새가 감도는 것 같아. 게다가 ',
@@ -96,7 +98,7 @@ module.exports = {
         '목덜미에서 풍겨오는 그녀의 향기와, 아까보다 더 진한 달콤한 향기가 콧속을 자극한다……',
       );
     };
-    f.title = "트레이너의 컨디션 난조!?";
+    f.title = '트레이너의 컨디션 난조!?';
     return f;
   })(),
   ts_end: (() => {
@@ -109,18 +111,18 @@ module.exports = {
     const f = async (daiwa, you, callname) => {
       await era.printAndWait([
         you.get_colored_name(),
-        "가 눈을 떴을 때는 이미 휴게실 침대 위였다.",
+        '가 눈을 떴을 때는 이미 휴게실 침대 위였다.',
       ]);
       await era.printAndWait([
-        "멍하던 머릿속이 차츰 맑아지자,",
+        '멍하던 머릿속이 차츰 맑아지자,',
         you.get_colored_name(),
         '은(는) 허리가 유난히 무겁다는 것을 깨닫고, 그제야 시트의 처참한 모습을 발견했다.',
       ]);
       era.println();
       await era.printAndWait([
-        "옆을 보니,",
+        '옆을 보니,',
         daiwa.get_colored_name(),
-        "이 얼굴을 감싸고 무언가 중얼거리고 있었다.",
+        '이 얼굴을 감싸고 무언가 중얼거리고 있었다.',
       ]);
       await daiwa.say_and_wait(
         '어떻게 하지…… 합의…… 그래요, 합의한 거니까…… 트레이너도 그렇게 흥분해 있었으니까…… 하지만, 트레이너가 출산 휴가에 들어가면…… 아아……',
@@ -129,7 +131,7 @@ module.exports = {
       await era.printAndWait([
         '그녀는 무언가를 고민하고 있는 듯했다. 정오까지 이어졌던 열은 이미 가라앉았고 ',
         you.get_colored_name(),
-        "은(는) 무슨 일이 일어났는지, 자신이 무슨 일을 당했는지 조금씩 떠올렸다.",
+        '은(는) 무슨 일이 일어났는지, 자신이 무슨 일을 당했는지 조금씩 떠올렸다.',
       ]);
       await era.printAndWait([
         '맞아. 그 후 ',
@@ -140,41 +142,39 @@ module.exports = {
       await era.printAndWait(
         '아래를 내려다보니, 여느 때처럼 눈에 띄는 가슴과 비정상적으로 부풀어 오른 배가 있다.',
       );
-      await era.printAndWait("탁자 위에는 빈 병 하나가 놓여 있었다.");
+      await era.printAndWait('탁자 위에는 빈 병 하나가 놓여 있었다.');
       era.println();
-      await you.say_and_wait("……다이와……");
+      await you.say_and_wait('……다이와……');
       await daiwa.say_and_wait([
-        "히익! 죄, 죄송해요, ",
+        '히익! 죄, 죄송해요, ',
         callname,
-        "! 제가……너무 심하게 해 버렸어요……읏, 으으……",
+        '! 제가……너무 심하게 해 버렸어요……읏, 으으……',
       ]);
-      await you.say_and_wait("그래, 그래. 알았어. 괜찮아, 괜찮아.");
+      await you.say_and_wait('그래, 그래. 알았어. 괜찮아, 괜찮아.');
       era.println();
       await era.printAndWait([
         you.get_colored_name(),
-        "는 사과하는 ",
+        '는 사과하는 ',
         daiwa.get_colored_name(),
-        "을 품에 안고 머리를 쓰다듬었다.",
+        '을 품에 안고 머리를 쓰다듬었다.',
       ]);
       era.println();
       await daiwa.say_and_wait('하지만, 하지만……호, 혹시 아이가 생겼다면……');
-      await you.say_and_wait("응, 마신 건 한 병뿐이지?");
-      await daiwa.say_and_wait("네, 네에……");
+      await you.say_and_wait('응, 마신 건 한 병뿐이지?');
+      await daiwa.say_and_wait('네, 네에……');
       era.println();
       await era.printAndWait([
         you.get_colored_name(),
-        "는 침대에서 내려와 빈 병의 라벨을 확인했다. 응, 역시 그렇다.",
+        '는 침대에서 내려와 빈 병의 라벨을 확인했다. 응, 역시 그렇다.',
       ]);
       era.println();
       if (era.get('status:9:弗隆K')) {
-        await you.say_and_wait("자, 다이와. 여기, 잘 읽어 봐.");
-        await daiwa.say_and_wait("여기요?");
+        await you.say_and_wait('자, 다이와. 여기, 잘 읽어 봐.');
+        await daiwa.say_and_wait('여기요?');
         await you.say_and_wait(
           '제대로 적혀 있잖아? 이 약으로 인해 생긴, 남성 생식기와 매우 흡사한 것에는 생식 능력이 없다고.',
         );
-        await daiwa.say_and_wait(
-          '……응? 엑? 그럼, 당신 뱃속에 있는 건 뭐예요?',
-        );
+        await daiwa.say_and_wait('……응? 엑? 그럼, 당신 뱃속에 있는 건 뭐예요?');
         await you.say_and_wait(
           '그게—— 아마 정장액 아닐까? 원래 정액은 투명한 정장과 정자가 섞여서 불투명하게 보이거든. 하얗게 탁한 부분이 없으니까 아마 정자가 없으니 투명해 보이고. 그러니까 다이와는 걱정하지 않아도 돼, 아이는 생기지 않을 거야…… 으왓?!',
         );
@@ -192,9 +192,7 @@ module.exports = {
         );
         await you.say_and_wait('아…… 응, 맞아.');
       } else {
-        await you.say_and_wait(
-          '응, 다이와, 괜찮아. 꼭 임신하는 건 아니니까.',
-        );
+        await you.say_and_wait('응, 다이와, 괜찮아. 꼭 임신하는 건 아니니까.');
         await you.say_and_wait('게다가, 다이와 아이를 임신한다면, 대환영이야~');
         await daiwa.say_and_wait([callname, '……']);
         await you.say_and_wait('러니까, 이리 와?');

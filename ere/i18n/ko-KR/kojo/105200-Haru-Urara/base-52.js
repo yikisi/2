@@ -79,9 +79,7 @@ module.exports = {
         you.get_colored_name(),
         '을 부드럽게 눕힌다. ',
       ]);
-      await urara.say_and_wait([
-        '',
-      ]);
+      await urara.say_and_wait(['']);
       era.drawLine();
       await inner_urara.say_as_unknown_and_wait([
         '보이다시피, 이곳으로 끌려와서도',

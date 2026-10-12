@@ -9,7 +9,7 @@ const { buff_colors } = require('#/data/color-const');
 
 module.exports = {
   be_ntr: (() => {
-    const title = "「루비는 트레이너를 바꿀지도 모릅니다.」";
+    const title = '「루비는 트레이너를 바꿀지도 모릅니다.」';
     /**
      * @param {CharaTalk} ruby ダイイチルビー
      * @param {CharaTalk} you プレイヤー
@@ -17,7 +17,7 @@ module.exports = {
      */
     const f = async (ruby, you, callname) => {
       await era.printAndWait(
-        "[WARNING]\n!!!!NTR 주의!!!!\n이 결말에는 강한 NTR 요소가 포함되어 있습니다. 계속하시겠습니까?",
+        '[WARNING]\n!!!!NTR 주의!!!!\n이 결말에는 강한 NTR 요소가 포함되어 있습니다. 계속하시겠습니까?',
         {
           align: 'center',
           color: buff_colors[3],
@@ -27,7 +27,7 @@ module.exports = {
         },
       );
       era.printMultiColumns(
-        ["어서 보여줘.", "역시 그만둘래……"].map((e, i) => ({
+        ['어서 보여줘.', '역시 그만둘래……'].map((e, i) => ({
           accelerator: i * 100,
           config: { width: 12, align: 'center' },
           content: e,
@@ -36,7 +36,7 @@ module.exports = {
       );
       const ret = await era.input();
       if (ret === 0) {
-        await era.printAndWait("(분명히 경고했습니다.)", {
+        await era.printAndWait('(분명히 경고했습니다.)', {
           align: 'center',
           color: buff_colors[3],
           fontSize: '2rem',
@@ -44,17 +44,14 @@ module.exports = {
           isParagraph: true,
         });
         await era.printAndWait([
-          "그 후 어느 날, ",
+          '그 후 어느 날, ',
           you.get_colored_name(),
-          "은(는) ",
+          '은(는) ',
           ruby.get_colored_name(),
-          "이(가) 집사를 통해 보낸 CD를 받았다.",
+          '이(가) 집사를 통해 보낸 CD를 받았다.',
         ]);
         era.println();
-        await you.say_as_passer_by_and_wait(
-          "약혼자",
-          '좋아, 루비. 벗어.',
-        );
+        await you.say_as_passer_by_and_wait('약혼자', '좋아, 루비. 벗어.');
         await ruby.say_and_wait('……네, 알겠습니다.');
         await era.printAndWait([
           ruby.get_colored_name(),
@@ -119,9 +116,7 @@ module.exports = {
         ]);
         await ruby.say_and_wait('당신 쪽이…… 더 커요.');
         await era.printAndWait('약혼자 「누구보다 좋아? 제대로 말해.」');
-        await ruby.say_and_wait(
-          '당신 쪽이……! 트레이너보다 크고 훌륭해요……!',
-        );
+        await ruby.say_and_wait('당신 쪽이……! 트레이너보다 크고 훌륭해요……!');
         await era.printAndWait('약혼자 「잘 말했다.」');
         await era.printAndWait([
           '조금 전의 표정과는 판이하게 달라져, 그는 부드러운 얼굴로 ',
@@ -202,7 +197,9 @@ module.exports = {
           ruby.get_colored_name(),
           '이(가) 이런 더러운 목소리로 처량하게 헐떡이다니.',
         ]);
-        await era.printAndWait('거대한 검은빛의 수컷이 하얀 암컷을 범하고 있다.');
+        await era.printAndWait(
+          '거대한 검은빛의 수컷이 하얀 암컷을 범하고 있다.',
+        );
         await era.printAndWait(
           '수컷은 위에서 누르고 허리를 강하게 흔들며, 암컷은 저속한 신음을 흘리면서 다리를 수컷의 허리에 감아 매달려 있었다.',
         );
@@ -216,7 +213,9 @@ module.exports = {
         await era.printAndWait(
           '서로 바라볼 때마다 몇 번이고 깊은 입맞춤을 나눈다. 친밀도가 높은 체위는 본래 연인 사이에서나 하는 것이다.',
         );
-        await ruby.say_and_wait('오♥오♥옷! 대단해요♥ 가장 깊은 곳까지 닿아요♥ 우오오옷!');
+        await ruby.say_and_wait(
+          '오♥오♥옷! 대단해요♥ 가장 깊은 곳까지 닿아요♥ 우오오옷!',
+        );
         await era.printAndWait(
           '그녀가 저속하게 그렇게 외치자, 약혼자는 기쁜 듯이 물었다.',
         );
@@ -226,9 +225,7 @@ module.exports = {
         await ruby.say_and_wait(
           '앗! 이쪽이에요! 이쪽의 큰 편♥ 트레이너가 닿지 않는 곳까지 닿아요♥',
         );
-        await era.printAndWait(
-          '약혼자 「하하, 정말로 거근을 좋아하는구나!」',
-        );
+        await era.printAndWait('약혼자 「하하, 정말로 거근을 좋아하는구나!」');
         await ruby.say_and_wait(
           '좋아해요!♥ 큰 게 좋아요!♥ 조그만 트레이너와는 생물로서의 격이 달라요♥',
         );
@@ -246,10 +243,10 @@ module.exports = {
           ruby.get_colored_name(),
           '은(는) 헐떡이며 그렇게 외치고, 그것을 들은 그의 허리는 더욱 빠르게 움직이며 스퍼트를 시작했다.',
         ]);
-        await ruby.say_and_wait('와아앗♥ 안 돼♥ 안 돼♥ 안 돼♥ 갈 것 같아요~♥♥♥');
-        await era.printAndWait(
-          '그 후, 약혼자도 몸을 떨며 사정하기 시작했다.',
+        await ruby.say_and_wait(
+          '와아앗♥ 안 돼♥ 안 돼♥ 안 돼♥ 갈 것 같아요~♥♥♥',
         );
+        await era.printAndWait('그 후, 약혼자도 몸을 떨며 사정하기 시작했다.');
         await era.printAndWait([
           ruby.get_colored_name(),
           '은(는) 「호홋호홋♥」 하며 헐떡이고, 감은 양다리를 뻗으며 쾌감에 떨었다.',

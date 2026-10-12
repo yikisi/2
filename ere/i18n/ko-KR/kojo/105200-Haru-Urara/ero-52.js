@@ -12,7 +12,7 @@ module.exports = {
    */
   async zero_stamina(urara, you) {
     if (Math.random() < 0.5) {
-      await urara.say_and_wait("……아……아……");
+      await urara.say_and_wait('……아……아……');
       if (era.get('flag:主导权') === 0) {
         await era.printAndWait([
           '망가진 인형처럼 기절한 ',

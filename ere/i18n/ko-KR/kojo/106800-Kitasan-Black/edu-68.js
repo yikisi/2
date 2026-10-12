@@ -8,25 +8,32 @@ const recruit_flags = require('#/data/event/recruit-flags');
 
 module.exports = {
   ts_add: (() => {
-    const title = "추가 자율 트레이닝!";
+    const title = '추가 자율 트레이닝!';
     /**
      * @param {CharaTalk} kita キタサンブラック
      * @param {string} callname キタサンのプレイヤーへの呼び方
      */
     const f = async (kita, callname) => {
-      await era.printAndWait(["훈련이 끝난 후에도, ", kita.get_colored_name(), "은 여전히 의욕이 넘치는 듯 보였다."]);
-      await era.printAndWait([kita.sex, "는 저 멀리 지평선을 바라보았다. 석양이 지고 마지막 잔광이 대지를 적시고 있었다."]);
+      await era.printAndWait([
+        '훈련이 끝난 후에도, ',
+        kita.get_colored_name(),
+        '은 여전히 의욕이 넘치는 듯 보였다.',
+      ]);
+      await era.printAndWait([
+        kita.sex,
+        '는 저 멀리 지평선을 바라보았다. 석양이 지고 마지막 잔광이 대지를 적시고 있었다.',
+      ]);
       await era.printAndWait(
-        "곧 날이 어두워지겠지만, 아직 부족하다. 아직 한계에 도달하지 않았다.",
+        '곧 날이 어두워지겠지만, 아직 부족하다. 아직 한계에 도달하지 않았다.',
       );
-      era.printButton("「계속 훈련하자!」", 1);
-      era.printButton("「오늘은 여기까지 하자.」", 2);
+      era.printButton('「계속 훈련하자!」', 1);
+      era.printButton('「오늘은 여기까지 하자.」', 2);
       const ret = await era.input();
       if (ret === 1) {
         await kita.say_and_wait([
-          "알겠어요! 그럼 ",
+          '알겠어요! 그럼 ',
           callname,
-          ", 제대로 지켜봐 주세요!",
+          ', 제대로 지켜봐 주세요!',
         ]);
       } else {
         await kita.say_and_wait(
@@ -39,7 +46,7 @@ module.exports = {
     return f;
   })(),
   train_fail: (() => {
-    const title = "몸을 소중히!";
+    const title = '몸을 소중히!';
     /**
      * @param {CharaTalk} kita キタサンブラック
      * @param {CharaTalk} you プレイヤー
@@ -65,7 +72,7 @@ module.exports = {
     return f;
   })(),
   train_fumble: (() => {
-    const title = "무리는 금물!";
+    const title = '무리는 금물!';
     /**
      * @param {CharaTalk} kita キタサンブラック
      * @param {CharaTalk} you プレイヤー
@@ -102,7 +109,7 @@ module.exports = {
     return f;
   })(),
   race_win: (() => {
-    const title = "레이스 승리!";
+    const title = '레이스 승리!';
     /**
      * @param {CharaTalk} kita キタサンブラック
      * @param {CharaTalk} you プレイヤー
@@ -131,7 +138,7 @@ module.exports = {
     return f;
   })(),
   race_end_5: (() => {
-    const title = "레이스 입상!";
+    const title = '레이스 입상!';
     /**
      * 汎用・入着
      * @param {CharaTalk} kita キタサンブラック
@@ -159,13 +166,13 @@ module.exports = {
           you.name
         }은(는) 안도하는 동시에 마음 깊이 다짐했다.`,
       );
-      await era.printAndWait("다음에는 반드시 이기겠다고.");
+      await era.printAndWait('다음에는 반드시 이기겠다고.');
     };
     f.title = title;
     return f;
   })(),
   race_end_10: (() => {
-    const title = "레이스 패배!";
+    const title = '레이스 패배!';
     /**
      * @param {CharaTalk} kita キタサンブラック
      * @param {CharaTalk} you プレイヤー
@@ -199,20 +206,20 @@ module.exports = {
     return f;
   })(),
   race_lose: (() => {
-    const title = "레이스 패배!";
+    const title = '레이스 패배!';
     /** @param {CharaTalk} kita キタサンブラック */
     const f = async (kita) => {
-      await kita.say_and_wait("으으으으…… 또 져 버렸어요……");
+      await kita.say_and_wait('으으으으…… 또 져 버렸어요……');
       await era.printAndWait(
-        "축 처진 키타는 빨대로 주스에 거품을 만들며 시무룩한 표정을 짓고 있었다.",
+        '축 처진 키타는 빨대로 주스에 거품을 만들며 시무룩한 표정을 짓고 있었다.',
       );
-      await kita.say_and_wait("분하다…… 다음에는 꼭 만회할 거예요……");
+      await kita.say_and_wait('분하다…… 다음에는 꼭 만회할 거예요……');
     };
     f.title = title;
     return f;
   })(),
   we_beginning: (() => {
-    const title = "키타산 블랙 등장";
+    const title = '키타산 블랙 등장';
     /**
      * @param {CharaTalk} kita キタサンブラック
      * @param {CharaTalk} you プレイヤー
@@ -220,7 +227,7 @@ module.exports = {
      */
     const f = async (kita, you, callname) => {
       await era.printAndWait(
-        "새 학기를 앞둔 마지막 날. 봄볕이 기분 좋은 날이었다.",
+        '새 학기를 앞둔 마지막 날. 봄볕이 기분 좋은 날이었다.',
       );
       await era.printAndWait(
         `트레센에서는 선수 생활의 시작이 이토록 좋은 날씨와 겹쳐 ${kita.uma_sex_title}들도 기분이 좋았다.`,
@@ -242,7 +249,7 @@ module.exports = {
         }은(는) ${kita.teen_sex_title}의 힘을 믿을 수 있었다.`,
       );
       await era.printAndWait(
-        "햇살이 내리쬐는 트레이닝장은 눈부셨고, 푸른 잔디 코스의 냄새가 가슴을 뛰게 했다.",
+        '햇살이 내리쬐는 트레이닝장은 눈부셨고, 푸른 잔디 코스의 냄새가 가슴을 뛰게 했다.',
       );
       await era.printAndWait(
         `한창 사춘기인 ${kita.uma_sex_title}와 어떻게 지낼지, 앞으로의 트레이닝 메뉴와 출주 일정은 어떻게 짤지, 패배한 뒤에는 담당을 어떻게 대할지. 그런 일은 미래의 자신에게 맡기자.`,
@@ -293,14 +300,16 @@ module.exports = {
         `${callname}, 준비 운동 끝났어요. 다음 메뉴는 뭔가요!?`,
       );
       await kita.say_and_wait(
-        "스피드 트레이닝? 스태미나 트레이닝? 어느 쪽이든 괜찮아요.",
+        '스피드 트레이닝? 스태미나 트레이닝? 어느 쪽이든 괜찮아요.',
       );
       await era.printAndWait(
         `준비 운동으로 볼이 살짝 붉어진 ${kita.uma_sex_title}가 코스에 서서 이쪽을 향해 큰 소리로 물었다.`,
       );
-      await era.printAndWait(`두 번째. ${kita.sex}는 계획을 세우는 데 아주 서툴다.`);
       await era.printAndWait(
-        "트레이닝 도중 한눈을 파는 것은 아니다. 좋게 말하면 그때그때 상황에 맞춰 움직일 줄 안다.",
+        `두 번째. ${kita.sex}는 계획을 세우는 데 아주 서툴다.`,
+      );
+      await era.printAndWait(
+        '트레이닝 도중 한눈을 파는 것은 아니다. 좋게 말하면 그때그때 상황에 맞춰 움직일 줄 안다.',
       );
       await era.printAndWait(
         `하지만 ${
@@ -309,14 +318,16 @@ module.exports = {
       );
       era.println();
 
-      era.printButton("「키타에게 맞는 달리기를 알아보는 트레이닝이야.」", 1);
+      era.printButton('「키타에게 맞는 달리기를 알아보는 트레이닝이야.」', 1);
       await era.input();
       await era.printAndWait(
         `그렇게 말하며 ${you.name}은(는) 노트로 시선을 돌렸다. 그리고 가장 큰 문제가 남아 있다.`,
       );
-      await kita.say_and_wait("적성을 알아보는 거군요? 알겠어요! 전력을 보여 드릴게요!");
+      await kita.say_and_wait(
+        '적성을 알아보는 거군요? 알겠어요! 전력을 보여 드릴게요!',
+      );
       await era.printAndWait(
-        "의욕에 찬 키타는 꼬리를 흔들며 흰 페인트로 그어진 출발선 뒤로 가볍게 뛰어갔다.",
+        '의욕에 찬 키타는 꼬리를 흔들며 흰 페인트로 그어진 출발선 뒤로 가볍게 뛰어갔다.',
       );
       await era.printAndWait(
         `귀가 울릴 만큼 큰 출발 신호와 함께 검은 ${kita.uma_sex_title}는 첫발을 내디디고 앞으로 달려 나갔다.`,
@@ -329,9 +340,11 @@ module.exports = {
       );
       era.println();
 
-      era.printButton("「하지만……」", 1);
+      era.printButton('「하지만……」', 1);
       await era.input();
-      await era.printAndWait(`하지만 확실하게 승리를 거머쥘 무기는 보이지 않는다.`);
+      await era.printAndWait(
+        `하지만 확실하게 승리를 거머쥘 무기는 보이지 않는다.`,
+      );
       await era.printAndWait(
         `${
           you.name
@@ -340,7 +353,7 @@ module.exports = {
       await era.printAndWait(
         `${kita.sex}의 기본 역량은 나무랄 데 없다. 하지만 중앙에는 실력자가 넘쳐난다. ${kita.sex}들을 뛰어넘을 무기가 없다면……`,
       );
-      await kita.say_and_wait("후, 후, 후……");
+      await kita.say_and_wait('후, 후, 후……');
       await era.printAndWait(
         `${
           you.name
@@ -348,7 +361,7 @@ module.exports = {
           kita.sex
         }의 모습이 ${you.name}의 망막 위로 점점 가까워졌다.`,
       );
-      await era.printAndWait("기본 역량만으로는 멀리 갈 수 없다.");
+      await era.printAndWait('기본 역량만으로는 멀리 갈 수 없다.');
       await era.printAndWait(
         `${you.name}은(는) 스톱워치를 멈췄다. 중상위권 정도의 기록이었다.`,
       );
@@ -360,7 +373,7 @@ module.exports = {
     return f;
   })(),
   begin_race_win: (() => {
-    const title = "처음으로!";
+    const title = '처음으로!';
     /**
      * @param {CharaTalk} kita キタサンブラック
      * @param {CharaTalk} you プレイヤー
@@ -385,10 +398,10 @@ module.exports = {
       await era.printAndWait(
         `뜨거운 열기와 함께 바짝 다가온 ${kita.name}은 애타는 표정으로 ${you.name}에게 물었다.`,
       );
-      await kita.say_and_wait("꿈이 아니죠!");
+      await kita.say_and_wait('꿈이 아니죠!');
       era.println();
 
-      era.printButton("「이겼어, 키타.」", 1);
+      era.printButton('「이겼어, 키타.」', 1);
       await era.input();
       await era.printAndWait(
         `경기장을 가득 채운 함성과 찬사를 들으며 ${you.name}은(는) 승리에 목말랐던 담당에게 그렇게 대답했다.`,
@@ -410,7 +423,7 @@ module.exports = {
         `위험해…… 변변치 못한 생각이 떠오르기 전에, ${you.name}은(는) 재빨리 수건을 펼쳐 키타에게 둘러 주고 ${kita.sex}의 몸을 꼼꼼히 가렸다.`,
       );
       await era.printAndWait(
-        "???「오후 첫 번째 레이스가 종료되었습니다. 멋진 레이스였습니다.」",
+        '???「오후 첫 번째 레이스가 종료되었습니다. 멋진 레이스였습니다.」',
       );
       await era.printAndWait(`???「그럼 다음 레이스는……」`);
       await era.printAndWait(
@@ -421,20 +434,20 @@ module.exports = {
     return f;
   })(),
   begin_race_win_after: (() => {
-    const title = "처음으로……";
+    const title = '처음으로……';
     /**
      * @param {CharaTalk} kita キタサンブラック
      * @param {CharaTalk} you プレイヤー
      */
     const f = async (kita, you) => {
-      await kita.say_and_wait("저…… 이겼어요? 이번에는 정말 이긴 거예요……?");
+      await kita.say_and_wait('저…… 이겼어요? 이번에는 정말 이긴 거예요……?');
       await era.printAndWait(
         `결승선 너머에서 ${kita.name}은 크게 숨을 내쉬며 눈앞의 사실을 믿을 수 없다는 표정을 지었다.`,
       );
       await era.printAndWait(
         `한참 그 자리에 서 있던 끝에 드디어 ${you.name}의 담당은 웃었다.`,
       );
-      await kita.say_and_wait("저, 이겼어요……");
+      await kita.say_and_wait('저, 이겼어요……');
       await era.printAndWait(
         `${kita.uma_sex_title}들과 경기장 출구를 향해 걸어가며 ${
           kita.name
@@ -445,7 +458,7 @@ module.exports = {
     return f;
   })(),
   ws_38: (() => {
-    const title = "나이스 네이처 등장";
+    const title = '나이스 네이처 등장';
     /**
      * @param {CharaTalk} kita キタサンブラック
      * @param {CharaTalk} nature ナイスネイチャ
@@ -453,7 +466,7 @@ module.exports = {
      * @param {string} callname キタサンのプレイヤーへの呼び方
      */
     const f = async (kita, nature, you, callname) => {
-      await era.printAndWait("시월 후반 어느 날 오전.");
+      await era.printAndWait('시월 후반 어느 날 오전.');
       await era.printAndWait(
         `메이크 데뷔로부터 석 달 반이 지났다. ${you.name}와(과) 키타는 평소처럼 코스에서 병주 트레이닝을 하고 있었다.`,
       );
@@ -474,11 +487,13 @@ module.exports = {
       await kita.say_and_wait(
         `오늘 잘 부탁드려요, 네이처 ${nature.adult_sex_title}！`,
       );
-      await nature.say_and_wait(`그렇게 격식 차리지 않아도 돼. 그냥 네이처라고 불러~`);
+      await nature.say_and_wait(
+        `그렇게 격식 차리지 않아도 돼. 그냥 네이처라고 불러~`,
+      );
       await era.printAndWait(
         `십 분쯤 가볍게 몸을 푼 뒤 ${nature.name}와 ${kita.name}은 차례로 코스에 들어가 오늘의 트레이닝을 시작했다.`,
       );
-      era.drawLine({ content: "잠시 후" });
+      era.drawLine({ content: '잠시 후' });
       await era.printAndWait(`결과부터 말하자면 그리 좋지 않았다.`);
       await nature.say_and_wait(`우와~ 키타, ${you.name}, 괜찮아~? 다리는?`);
       await kita.say_and_wait(
@@ -502,7 +517,7 @@ module.exports = {
     return f;
   })(),
   sa_42: (() => {
-    const title = "느긋한 오후";
+    const title = '느긋한 오후';
     /**
      * @param {CharaTalk} kita キタサンブラック
      * @param {CharaTalk} you プレイヤー
@@ -514,7 +529,7 @@ module.exports = {
       );
       await kita.say_and_wait(`아~ ${callname}, 안녕하세요!`);
       await era.printAndWait(
-        "키타산은 캔음료 박스 두 개를 번쩍 들고, 꼬리를 살랑거리며 이쪽을 향해 인사했다.",
+        '키타산은 캔음료 박스 두 개를 번쩍 들고, 꼬리를 살랑거리며 이쪽을 향해 인사했다.',
       );
       await era.printAndWait(
         `${
@@ -522,7 +537,7 @@ module.exports = {
         }은(는) ${kita.teen_sex_title}의 뒤를 보았다. 평소에는 닫혀 있는 식당 뒷문을 막대로 받쳐 놓았고, 음료 상자 일곱여덟 개가 산처럼 쌓여 있었다…… 뭘 하는 걸까.`,
       );
       await kita.say_and_wait(
-        "아, 식당 매점 아주머니께서 음료 상자를 옮기다가 허리를 삐끗하셨거든요. 그래서 제가 대신 창고까지 옮겨 드리려고요.",
+        '아, 식당 매점 아주머니께서 음료 상자를 옮기다가 허리를 삐끗하셨거든요. 그래서 제가 대신 창고까지 옮겨 드리려고요.',
       );
       await kita.say_and_wait(
         `에헤헤…… ${callname}께 이런 모습을 들키다니, 조금 부끄럽네요……`,
@@ -530,9 +545,11 @@ module.exports = {
       await era.printAndWait(
         `${you.name}의 놀란 얼굴을 보고, ${kita.name}은 쑥스러운 듯 에헤헤 웃으며 상자로 얼굴을 가렸다.`,
       );
-      await kita.say_and_wait(`${callname}, 나중에 다시 이야기해요! 저 마저 옮겨야 해서요.`);
+      await kita.say_and_wait(
+        `${callname}, 나중에 다시 이야기해요! 저 마저 옮겨야 해서요.`,
+      );
       await era.printAndWait(
-        "그렇게 말하며 키타산은 박스 몇 개를 겹쳐 들고는, 아주 가뿐하게 쪽문 안으로 들어갔다.",
+        '그렇게 말하며 키타산은 박스 몇 개를 겹쳐 들고는, 아주 가뿐하게 쪽문 안으로 들어갔다.',
       );
       await era.printAndWait(
         `${you.name}은(는) 키타산의 작지만 듬직한 뒷모습을 보며, 묘한 생각에 잠겼다.`,
@@ -542,7 +559,7 @@ module.exports = {
     return f;
   })(),
   oc_47_1: (() => {
-    const title = "새해 포부";
+    const title = '새해 포부';
     /**
      * @param {CharaTalk} kita キタサンブラック
      * @param {CharaTalk} you プレイヤー
@@ -552,17 +569,15 @@ module.exports = {
       await era.printAndWait(
         `신사의 토리이 옆 구석에서, ${you.name}은(는) 열의에 가득 찬 ${kita.name}을 발견했다. 꽤나 오랫동안 ${you.name}을(를) 기다린 듯한 기색이었다.`,
       );
-      await kita.say_and_wait(
-        `${callname}, 올해도 잘 부탁드려요! 에헤헤~`,
-      );
+      await kita.say_and_wait(`${callname}, 올해도 잘 부탁드려요! 에헤헤~`);
       await era.printAndWait(
         `${kita.name}은 ${you.name}에게 인사하며 타다닥 달려왔다. 작은 부츠가 돌바닥에 경쾌한 소리를 냈다.`,
       );
       await era.printAndWait(
-        "클래식급 한 해가 무사히 지나가기를 비는 연례행사에 잔뜩 들뜬 모양이다.",
+        '클래식급 한 해가 무사히 지나가기를 비는 연례행사에 잔뜩 들뜬 모양이다.',
       );
       await kita.say_and_wait(
-        "그럼 올해도 잘 풀리도록 얼른 신사에서 참배해요!",
+        '그럼 올해도 잘 풀리도록 얼른 신사에서 참배해요!',
       );
       await era.printAndWait(
         `짙은 색 유카타를 입은 ${kita.name}은 귀여운 말 귀를 움직이며 소매를 잡아당기고 웃으며 재촉했다.`,
@@ -570,7 +585,7 @@ module.exports = {
       await era.printAndWait(
         `${you.name}은(는) 키타의 머리를 쓰다듬고 ${kita.sex}와 나란히 신전의 떠들썩한 소리를 들으며 이끼 낀 긴 돌계단을 올랐다.`,
       );
-      await era.printAndWait("타닥, 타닥, 타닥……");
+      await era.printAndWait('타닥, 타닥, 타닥……');
       await era.printAndWait(
         `두 사람의 조용하고 단조로운 발소리를 들으며 ${you.name}와(과) ${kita.name}은 모서리가 닳은 여든여덟 계단을 밟았다.`,
       );
@@ -578,35 +593,29 @@ module.exports = {
         `앞서 서두른 ${kita.teen_sex_title}을(를) 따라 마지막 몇 계단을 넘자 눈앞에는 웃음소리로 가득한 풍경이 펼쳐졌다.`,
       );
       await kita.say_and_wait(
-        "우하하~ 도쿄 신사도 고향 신사랑 별로 다르지 않네요~",
+        '우하하~ 도쿄 신사도 고향 신사랑 별로 다르지 않네요~',
       );
       await era.printAndWait(
         `${kita.name}은 장식 등롱이 늘어선 길을 지나 새전함 앞으로 가볍게 뛰어가 진지하게 손뼉을 두 번 치고 인사했다.`,
       );
       await kita.say_and_wait(
-        "으음…… 내년 삼월에는 팬 수가 충분해서 레이스에 나갈 수 있게 해 주세요. 여러분, 꼭 보러 와 주세요……",
+        '으음…… 내년 삼월에는 팬 수가 충분해서 레이스에 나갈 수 있게 해 주세요. 여러분, 꼭 보러 와 주세요……',
       );
       await era.printAndWait(
         `${kita.uma_sex_title}가 작게 소원을 비는 것을 들으며 ${
           you.name
         }도 손뼉을 치고 기도하기 시작했다.`,
       );
-      era.printButton("（키타산이 더 빠르게 달릴 수 있기를）", 1);
-      era.printButton(
-        "（키타산이 더 긴 레이스를 견딜 수 있기를）",
-        2,
-      );
-      era.printButton(
-        "（키타산이 더 많은 기술을 익힐 수 있기를）",
-        3,
-      );
+      era.printButton('（키타산이 더 빠르게 달릴 수 있기를）', 1);
+      era.printButton('（키타산이 더 긴 레이스를 견딜 수 있기를）', 2);
+      era.printButton('（키타산이 더 많은 기술을 익힐 수 있기를）', 3);
       return [await era.input()];
     };
     f.title = title;
     return f;
   })(),
   ws_47_7: (() => {
-    const title = "가족은 소중해";
+    const title = '가족은 소중해';
     /**
      * @param {CharaTalk} kita キタサンブラック
      * @param {CharaTalk} you プレイヤー
@@ -620,15 +629,11 @@ module.exports = {
         `트레이닝 일정이 없어 키타는 심심한 듯 소파에 엎드려 고향에 전화를 걸고 ${you.name}이(가) 내일의 트레이닝 계획표를 정리하기를 기다리고 있었다.`,
       );
       await kita.say_and_wait(`응? 요즘 그런 일도 있었어? 대단하다……`);
-      await kita.say_and_wait(
-        `우헤헤. 엄마도 다들 너무 응석 받아 주지는 마.`,
-      );
+      await kita.say_and_wait(`우헤헤. 엄마도 다들 너무 응석 받아 주지는 마.`);
       await era.printAndWait(
         `고향 식구들과 즐겁게 통화하는 ${kita.name}을 보며 ${you.name}은(는) 문득 키타의 어머니가 궁금해졌다.`,
       );
-      await era.printAndWait(
-        `${kita.name}의 어머니는 어떤 분일까.`,
-      );
+      await era.printAndWait(`${kita.name}의 어머니는 어떤 분일까.`);
       await kita.say_and_wait(`네, 저희 엄마요?`);
       await era.printAndWait(
         `호기심을 참지 못한 ${you.name}은(는) 키타가 전화를 끊자 먼저 물었다.`,
@@ -653,7 +658,7 @@ module.exports = {
     return f;
   })(),
   ws_47_10: (() => {
-    const title = "악의 없는 작은 장난";
+    const title = '악의 없는 작은 장난';
     /**
      * @param {CharaTalk} kita キタサンブラック
      * @param {CharaTalk} you プレイヤー
@@ -664,7 +669,9 @@ module.exports = {
         `화이트데이. ${you.name}은(는) 이른 아침부터 잔디 코스에서 ${kita.name}을 기다리고 있었다.`,
       );
       await kita.say_and_wait(`${callname}! 일찍 오셨네요~`);
-      await era.printAndWait(`얼마 기다리지 않아 키타가 잔디를 밟으며 달려왔다.`);
+      await era.printAndWait(
+        `얼마 기다리지 않아 키타가 잔디를 밟으며 달려왔다.`,
+      );
       await era.printAndWait(
         `맑은 공기를 들이마시며 ${
           you.name
@@ -679,7 +686,7 @@ module.exports = {
       );
       era.println();
       era.printButton(
-        "「화이트데이 축하해, 키타~ 트레이너가 주는 선물이야~」",
+        '「화이트데이 축하해, 키타~ 트레이너가 주는 선물이야~」',
         1,
       );
       await era.input();
@@ -709,7 +716,7 @@ module.exports = {
     return f;
   })(),
   ws_47_11: (() => {
-    const title = "든든한 버팀목과 사츠키상의 그늘";
+    const title = '든든한 버팀목과 사츠키상의 그늘';
     /**
      * @param {CharaTalk} kita キタサンブラック
      * @param {CharaTalk} teio トウカイテイオー
@@ -759,7 +766,7 @@ module.exports = {
     return f;
   })(),
   sats_sho_win: (() => {
-    const title = "승리의 큰 무대";
+    const title = '승리의 큰 무대';
     /**
      * @param {CharaTalk} kita キタサンブラック
      * @param {CharaTalk} you プレイヤー
@@ -784,7 +791,7 @@ module.exports = {
     return f;
   })(),
   toky_yus_win: (() => {
-    const title = "피로의 이유";
+    const title = '피로의 이유';
     /**
      * @param {CharaTalk} kita キタサンブラック
      * @param {CharaTalk} baku サクラバクシンオー
@@ -808,7 +815,7 @@ module.exports = {
       );
       await kita.say_and_wait(`${callname}, 일본 더비는 정말 대단하네요……`);
       era.println();
-      era.printButton("「좀 진정됐어, 키타?」", 1);
+      era.printButton('「좀 진정됐어, 키타?」', 1);
       await era.input();
 
       await kita.say_and_wait(
@@ -857,7 +864,7 @@ module.exports = {
     return f;
   })(),
   ws_summer_start: (() => {
-    const title = "여름 합숙";
+    const title = '여름 합숙';
     /**
      * @param {CharaTalk} kita キタサンブラック
      * @param {CharaTalk} you プレイヤー
@@ -898,7 +905,7 @@ module.exports = {
     return f;
   })(),
   we_summer_end: (() => {
-    const title = "여름 합숙 종료";
+    const title = '여름 합숙 종료';
     /**
      * @param {CharaTalk} kita キタサンブラック
      * @param {CharaTalk} you プレイヤー
@@ -924,7 +931,7 @@ module.exports = {
     return f;
   })(),
   stli_kin_win: (() => {
-    const title = "승천하는 용과 웅크린 용";
+    const title = '승천하는 용과 웅크린 용';
     /**
      * @param {CharaTalk} kita キタサンブラック
      * @param {CharaTalk} daiya サトノダイヤモンド
@@ -937,7 +944,7 @@ module.exports = {
       );
       await era.printAndWait(
         `${kita.name}의 소꿉친구, 사토노 가문의 ${
-          daiya.sex_code - 1 ? "아가씨" : "도련님"
+          daiya.sex_code - 1 ? '아가씨' : '도련님'
         }인 다이아가 꿀 드링크 두 잔을 품에 안고 복도 저편에 서 있었다.`,
       );
       await era.printAndWait(
@@ -982,7 +989,7 @@ module.exports = {
     return f;
   })(),
   three_crowns: (() => {
-    const title = "갈채! 삼관의 축제!";
+    const title = '갈채! 삼관의 축제!';
     /**
      * @param {CharaTalk} kita キタサンブラック
      * @param {CharaTalk} you プレイヤー
@@ -992,9 +999,7 @@ module.exports = {
         `${kita.name}이 결승선을 통과했을 때 경기장을 가득 채운 함성을 들으니 눈물이 날 것 같았다.`,
       );
       await era.printAndWait(
-        `처음의 ${
-          kita.name
-        }은 팬 한 명 없는 평범한 ${kita.uma_sex_title}였다.`,
+        `처음의 ${kita.name}은 팬 한 명 없는 평범한 ${kita.uma_sex_title}였다.`,
       );
       await era.printAndWait(
         `재능은 트레이너들도 인정했다. 하지만 화려함 없는 수수한 체격 때문에 달리기를 막 시작한 키타는 마땅히 받아야 할 인기를 얻지 못했다.`,
@@ -1027,7 +1032,7 @@ module.exports = {
     return f;
   })(),
   kiku_sho_win: (() => {
-    const title = "보라! 키타산 축제!";
+    const title = '보라! 키타산 축제!';
     /**
      * @param {CharaTalk} kita キタサンブラック
      * @param {CharaTalk} you プレイヤー
@@ -1040,7 +1045,9 @@ module.exports = {
       await era.printAndWait(
         `가장 빠른 ${kita.uma_sex_title}만이 이길 수 있는 레이스. 강자들도 한숨을 쉬고, 부상과 아쉬움에 운명을 원망하는 『국화상』.`,
       );
-      await era.printAndWait(`지금 ${kita.name}이 자신의 다리로 그 승리를 거머쥐었다.`);
+      await era.printAndWait(
+        `지금 ${kita.name}이 자신의 다리로 그 승리를 거머쥐었다.`,
+      );
       await era.printAndWait(
         `처음에는 수수한 성격과 몸밖에 없었던 ${kita.uma_sex_title}가 혹독한 단련 끝에 이길 수 있는 선수로 바뀌었다.`,
       );
@@ -1051,9 +1058,7 @@ module.exports = {
         `키타가 복도 안쪽으로 사라진 뒤에도 그 여운은 들려왔다.`,
       );
       era.println();
-      await kita.say_and_wait(
-        `${callname}, 여기서 잠깐 같이 앉아 주실래요?`,
-      );
+      await kita.say_and_wait(`${callname}, 여기서 잠깐 같이 앉아 주실래요?`);
       await era.printAndWait(
         `복도 모퉁이에서 검은 ${kita.uma_sex_title}는 손으로 더듬어 플라스틱 의자에 앉았다.`,
       );
@@ -1080,7 +1085,7 @@ module.exports = {
     return f;
   })(),
   ws_47_48: (() => {
-    const title = "성야의 저녁 식사";
+    const title = '성야의 저녁 식사';
     /**
      * @param {CharaTalk} kita キタサンブラック
      * @param {CharaTalk} you プレイヤー
@@ -1110,22 +1115,19 @@ module.exports = {
       );
       await era.printAndWait([
         you.get_colored_name(),
-        "은(는) 콜라를 마시며 주위를 둘러보았다. 똑같이 산더미처럼 쌓아 놓고 먹는 아이들이 드문드문 보였다. 젊다면 이 정도 주문해도 이상하지 않은 건가……",
+        '은(는) 콜라를 마시며 주위를 둘러보았다. 똑같이 산더미처럼 쌓아 놓고 먹는 아이들이 드문드문 보였다. 젊다면 이 정도 주문해도 이상하지 않은 건가……',
       ]);
       await era.printAndWait([
         you.get_colored_name(),
-        "이(가) 시선을 돌리자 ",
+        '이(가) 시선을 돌리자 ',
         kita.get_colored_name(),
-        "은 ",
+        '은 ',
         you.get_colored_name(),
-        "의 앞에서 감자튀김을 조금씩 먹고 있었다. 평범한 서민 음식일 뿐인데도 행복해 보였다.",
+        '의 앞에서 감자튀김을 조금씩 먹고 있었다. 평범한 서민 음식일 뿐인데도 행복해 보였다.',
       ]);
       era.println();
-      era.printButton("「키타는 감자튀김이 잘 어울리네.」(호감+10)", 1);
-      era.printButton(
-        "「키타는 햄버거가 잘 어울리네.」(호감+5, 연모+2)",
-        2,
-      );
+      era.printButton('「키타는 감자튀김이 잘 어울리네.」(호감+10)', 1);
+      era.printButton('「키타는 햄버거가 잘 어울리네.」(호감+5, 연모+2)', 2);
       const ret = await era.input();
       if (ret === 1) {
         await kita.say_and_wait(`네? 감자튀김이 잘 어울린다고요?`);
@@ -1223,7 +1225,7 @@ module.exports = {
     return f;
   })(),
   arim_kin_c: (() => {
-    const title = "진짜 축제";
+    const title = '진짜 축제';
     /**
      * @param {CharaTalk} kita キタサンブラック
      * @param {CharaTalk} daiya サトノダイヤモンド
@@ -1237,7 +1239,9 @@ module.exports = {
       await era.printAndWait(
         `힘 있는 달리기. 눈에 보이는 열기. 그리고 ${kita.name}의 온갖 마음.`,
       );
-      await era.printAndWait(`경기장에서 다시 키타를 지켜보는 모두에게 전해졌다.`);
+      await era.printAndWait(
+        `경기장에서 다시 키타를 지켜보는 모두에게 전해졌다.`,
+      );
       await era.printAndWait(`${you.name}에게도.`);
       await daiya.say_and_wait(`멋진 승리예요, ${callname}。`);
       await era.printAndWait(
@@ -1266,7 +1270,7 @@ module.exports = {
     return f;
   })(),
   ws_95_1: (() => {
-    const title = "키타의 지인?";
+    const title = '키타의 지인?';
     /**
      * @param {CharaTalk} kita キタサンブラック
      * @param {CharaTalk} minoru 駿川たづな／ハーヴェストスカイ
@@ -1274,21 +1278,19 @@ module.exports = {
      * @param {string} callname キタサンのプレイヤーへの呼び方
      */
     const f = async (kita, minoru, you, callname) => {
-      await era.printAndWait("일 년은 순식간에 지나고 벌써 새해다.");
+      await era.printAndWait('일 년은 순식간에 지나고 벌써 새해다.');
       await era.printAndWait(
         `${you.name}의 담당인 ${kita.name}에게 앞으로의 일 년은 강화된 트레이닝과 출주 일정 때문에 상당히 중요한 한 해가 될 것이다.`,
       );
-      await kita.say_and_wait(
-        `흥흥흥~ 흥흥흥~ 흥흥, 흥흥흥~`,
-      );
+      await kita.say_and_wait(`흥흥흥~ 흥흥흥~ 흥흥, 흥흥흥~`);
       await era.printAndWait(
         `잠옷 차림의 ${kita.name}이 문밖에서 콧노래를 부르며 무언가 하고 있었다. ${you.name}은(는) 방 안에서 새해맞이 전골을 준비하고 있었다.`,
       );
       await era.printAndWait(
-        "새해 첫날만큼은 제대로 보내야 한다. 기대가 크다고 키타에게 너무 부담을 줘서는 안 된다.",
+        '새해 첫날만큼은 제대로 보내야 한다. 기대가 크다고 키타에게 너무 부담을 줘서는 안 된다.',
       );
       await era.printAndWait(
-        "트레이너실에서 전골을 먹고 이불을 펴고 자는 것은 아무리 생각해도 조금 이상하지만.",
+        '트레이너실에서 전골을 먹고 이불을 펴고 자는 것은 아무리 생각해도 조금 이상하지만.',
       );
       await era.printAndWait(
         `귤과 코타츠를 준비하던 ${
@@ -1296,13 +1298,13 @@ module.exports = {
         }은(는) ${kita.teen_sex_title}이(가) 문을 여는 소리와 여러 사람의 발소리를 들었다.`,
       );
       era.println();
-      era.printButton("「어서 와, 키…… 키타!?」", 1);
+      era.printButton('「어서 와, 키…… 키타!?」', 1);
       await era.input();
       await era.printAndWait(
         `${you.name}이(가) 돌아보니 서 있는 것은 덩치 큰 남자 두 명이었다.`,
       );
       await era.printAndWait(
-        "두 사람 다 비정상적으로 건장한 체격에 흰 정장 차림이었다. 안경을 쓴 남자는 온 얼굴이 흉터투성이였고, 다른 한 명은 턱에 짧은 수염을 기르고 있었다.",
+        '두 사람 다 비정상적으로 건장한 체격에 흰 정장 차림이었다. 안경을 쓴 남자는 온 얼굴이 흉터투성이였고, 다른 한 명은 턱에 짧은 수염을 기르고 있었다.',
       );
       await era.printAndWait(
         `냉혹한 분위기와 상대를 가늠하는 눈빛…… 아무리 봐도 조직폭력배다! 하야카와 씨는 어떻게 이 사람들을 들여보낸 거지!? ${you.name}은(는) 의아했다.`,
@@ -1319,15 +1321,15 @@ module.exports = {
       await kita.say_and_wait(
         `에헤헤, 얼굴은 무서워도 키타랑 친한 좋은 분들이니까 겁내지 마세요.`,
       );
-      await era.printAndWait("하나야마「어.」");
-      await era.printAndWait("키류「음.」");
+      await era.printAndWait('하나야마「어.」');
+      await era.printAndWait('키류「음.」');
       await era.printAndWait(
         `두 남자는 나란히 고개를 끄덕이고 키타의 뒤에서 ${you.name}에게 수수한 미소를 보이며 상점가에서 사 온 양고기 봉투 몇 개를 들어 올렸다.`,
       );
       await era.printAndWait(
         `키타의 말에 따라 ${you.name}은(는) 전설적인 조직폭력배들과 그들만의 편안한 시간을 보냈다.`,
       );
-      era.drawLine({ content: "잠시 후" });
+      era.drawLine({ content: '잠시 후' });
       await kita.say_and_wait(`내년에 또 만나요! 키류 형님, 하나야마 형님!`);
       await era.printAndWait(
         `전골을 먹고 몇 시간 동안 뒷세계의 전설을 이야기한 뒤 ${you.name}와(과) 키타는 두 형님이 교문으로 향하는 모습을 배웅했다.`,
@@ -1343,16 +1345,14 @@ module.exports = {
     return f;
   })(),
   os_95_1: (() => {
-    const title = "새해 인사";
+    const title = '새해 인사';
     /**
      * @param {CharaTalk} kita キタサンブラック
      * @param {CharaTalk} you プレイヤー
      * @param {string} callname キタサンのプレイヤーへの呼び方
      */
     const f = async (kita, you, callname) => {
-      await era.printAndWait(
-        "제자들「스승님, 새해 복 많이 받으십시오!!!」",
-      );
+      await era.printAndWait('제자들「스승님, 새해 복 많이 받으십시오!!!」');
       await era.printAndWait(
         `오후 세 시 십오 분. 트레이너인 ${you.name}은(는) ${kita.name}의 아버지 제자들이 외치는 우렁찬 인사를 듣고 겨우 숨을 내쉬었다.`,
       );
@@ -1379,7 +1379,7 @@ module.exports = {
     return f;
   })(),
   ws_95_6: (() => {
-    const title = "조금 부서진 감주의 맛";
+    const title = '조금 부서진 감주의 맛';
     /**
      * @param {CharaTalk} kita キタサンブラック
      * @param {CharaTalk} you プレイヤー
@@ -1428,7 +1428,7 @@ module.exports = {
     return f;
   })(),
   we_95_10: (() => {
-    const title = "「상」";
+    const title = '「상」';
     /**
      * @param {CharaTalk} kita キタサンブラック
      * @param {CharaTalk} you プレイヤー
@@ -1444,14 +1444,14 @@ module.exports = {
         `상이요? 평범한 초콜릿이면…… 아니, 그게…… 상이라면……`,
       );
       await kita.say_and_wait(`다른 방식으로, 칭찬해 주시면 안 될까요……?`);
-      era.drawLine({ content: "밤" });
+      era.drawLine({ content: '밤' });
       await kita.say_and_wait(`트레이너…… 학원에서 이런 거… 들키지 않겠죠…♡`);
       await era.printAndWait([
-        "밤의 트레센 학원 복도에서, ",
+        '밤의 트레센 학원 복도에서, ',
         you.get_colored_name(),
-        "은 알몸인 ",
+        '은 알몸인 ',
         kita.get_colored_name(),
-        "과 오늘의 데이트를 즐기고 있다.",
+        '과 오늘의 데이트를 즐기고 있다.',
       ]);
       await era.printAndWait(
         `발정한 체취가 밴 개 목줄이 ${kita.uma_sex_title}의 하얀 목에 단단히 채워져 있고, 이어진 줄은 ${
@@ -1495,7 +1495,7 @@ module.exports = {
     return f;
   })(),
   os_95_14: (() => {
-    const title = "팬 감사제!";
+    const title = '팬 감사제!';
     /**
      * @param {CharaTalk} kita キタサンブラック
      * @param {CharaTalk} you プレイヤー
@@ -1505,21 +1505,21 @@ module.exports = {
         `팬들의 성원에 보답하기 위해, ${you.name}과(와) 키타산은 상점가 식당에서 감사 이벤트를 열었다.`,
       );
       await era.printAndWait(
-        "박스를 쌓아 만든 임시 무대 뒤에서, 키타산은 마이크를 잡고 경쾌한 목소리로 트레센 타령을 부르고 있었다.",
+        '박스를 쌓아 만든 임시 무대 뒤에서, 키타산은 마이크를 잡고 경쾌한 목소리로 트레센 타령을 부르고 있었다.',
       );
-      await kita.say_and_wait("흔ー들흔들 하ー늘하늘 휘날리는 유카타~♪");
+      await kita.say_and_wait('흔ー들흔들 하ー늘하늘 휘날리는 유카타~♪');
       await era.printAndWait(
         `박자에 맞춰 몸을 흔들며 즐겁게 노래하는 키타산의 모습을, ${you.name}은(는) 무대 뒤에 앉아 묵묵히 지켜보았다. 오직 ${you.name}만이 볼 수 있는 소중한 모습이었다.`,
       );
       await era.printAndWait(
-        "키타산이 평소 도와주던 상점가 사람들의 응원 덕분에, 이번 감사제도 무사히 막을 내렸다.",
+        '키타산이 평소 도와주던 상점가 사람들의 응원 덕분에, 이번 감사제도 무사히 막을 내렸다.',
       );
     };
     f.title = title;
     return f;
   })(),
   sank_hai: (() => {
-    const title = "라이벌 없는 세계";
+    const title = '라이벌 없는 세계';
     /**
      * @param {CharaTalk} kita キタサンブラック
      * @param {CharaTalk} you プレイヤー
@@ -1530,9 +1530,9 @@ module.exports = {
         `레이스 전에는 사실 ${kita.name}이 『오사카배』에서 우승할 수 있을지 걱정도 했다.`,
       );
       await era.printAndWait(
-        "G2에서 G1으로 승격된 레이스인 만큼 『오사카배』에는 불확실한 요소가 많다. 출주 선수들도 강적투성이다.",
+        'G2에서 G1으로 승격된 레이스인 만큼 『오사카배』에는 불확실한 요소가 많다. 출주 선수들도 강적투성이다.',
       );
-      await era.printAndWait("그래서 우승한 뒤 키타도 조금 놀란 듯 보였다.");
+      await era.printAndWait('그래서 우승한 뒤 키타도 조금 놀란 듯 보였다.');
       await era.printAndWait(
         `놀라움 너머로 ${kita.name}의 얼굴에는 그보다 더 큰 기쁨과 흥분이 드러나 있었다.`,
       );
@@ -1541,7 +1541,7 @@ module.exports = {
         `트레이너의 손을 붙잡고 ${kita.name}은 흥분하며 말했다.`,
       );
       await era.printAndWait(
-        "딱히 자랑할 만한 장점도 없고 눈에 띄는 실적을 가진 아이도 아니라고 생각했다.",
+        '딱히 자랑할 만한 장점도 없고 눈에 띄는 실적을 가진 아이도 아니라고 생각했다.',
       );
       await era.printAndWait(
         `하지만 어려운 레이스도 ${kita.name}의 노력으로 ${kita.sex}는 극복했다.`,
@@ -1553,21 +1553,21 @@ module.exports = {
         `${callname}! 네! 못 할 일은 없어요! 끝까지 달리지 못할 레이스도 없고요!`,
       );
       await kita.say_and_wait(
-        "이번에 해냈으니 다음에도 반드시 해낼 거예요! 그러니까 다음 『텐노상(봄)』도 기대해 주세요!",
+        '이번에 해냈으니 다음에도 반드시 해낼 거예요! 그러니까 다음 『텐노상(봄)』도 기대해 주세요!',
       );
       await kita.say_and_wait(
-        "다음 레이스에서는 승리의 영광을 바칠게요! 해내고 말 거예요! 노력하면 못 할 일은 없다는 것을 증명할게요!",
+        '다음 레이스에서는 승리의 영광을 바칠게요! 해내고 말 거예요! 노력하면 못 할 일은 없다는 것을 증명할게요!',
       );
       await era.printAndWait(
         `그 말의 열기가 가슴을 데웠다. 평소처럼 따뜻한 미소 속에서 ${you.name}은(는) 남몰래 결심했다.`,
       );
-      await era.printAndWait("담당을 반드시 우승시키겠다고.");
+      await era.printAndWait('담당을 반드시 우승시키겠다고.');
     };
     f.title = title;
     return f;
   })(),
   tenn_spr: (() => {
-    const title = "우뚝 솟은 절벽";
+    const title = '우뚝 솟은 절벽';
     /**
      * @param {CharaTalk} kita キタサンブラック
      * @param {CharaTalk} ag エアグルーヴ
@@ -1590,7 +1590,9 @@ module.exports = {
         `이쪽을 바라보는 사람들 중에는 이번 승리 뒤에 ${kita.name}의 지기 싫어하며 노력하는 모습에 동경을 품고, 삶의 방식을 조금 바꾸는 사람도 있을 것이다.`,
       );
       await era.printAndWait(`하지만——`);
-      await ag.say_and_wait(`${kita.name}의 ${callname}, 잠시 이야기할 수 있을까요?`);
+      await ag.say_and_wait(
+        `${kita.name}의 ${callname}, 잠시 이야기할 수 있을까요?`,
+      );
       await era.printAndWait(
         `음악이 울려 퍼지는 순간 ${you.name}의 귓가에 여성의 목소리가 들려왔다.`,
       );
@@ -1601,7 +1603,7 @@ module.exports = {
         `${kita.name} 씨의 위닝 라이브를 즐기고 싶은 마음은 이해합니다. 그러니 두어 마디만 전하고 물러가겠습니다. 괜찮겠지요?`,
       );
       era.println();
-      era.printButton("「괜찮습니다. 말씀하세요.」", 1);
+      era.printButton('「괜찮습니다. 말씀하세요.」', 1);
       await era.input();
       await ag.say_and_wait(
         `감사합니다. 현 세대 최강이자 세대를 대표하는 ${kita.uma_sex_title} 중 한 명으로서 ${
@@ -1646,7 +1648,7 @@ module.exports = {
     return f;
   })(),
   takz_kin_s: (() => {
-    const title = "건네받은 바통";
+    const title = '건네받은 바통';
     /**
      * @param {CharaTalk} kita キタサンブラック
      * @param {CharaTalk} you プレイヤー
@@ -1704,7 +1706,7 @@ module.exports = {
     return f;
   })(),
   tenn_sho_s: (() => {
-    const title = "진흙 너머의 꽃길";
+    const title = '진흙 너머의 꽃길';
     /**
      * @param {CharaTalk} kita キタサンブラック
      * @param {CharaTalk} you プレイヤー
@@ -1748,7 +1750,7 @@ module.exports = {
       );
       await kita.print_and_wait(
         `우와, 싫어…… 다이아를 비롯한 ${kita.couple_title}처럼 반짝이는 ${
-          kita.sex_code - 1 ? "아가씨" : "스타"
+          kita.sex_code - 1 ? '아가씨' : '스타'
         }로 있고 싶었는데, 이래서야 어른스럽지 못하잖아……`,
       );
       await kita.say_and_wait(
@@ -1761,7 +1763,7 @@ module.exports = {
         }은 조금 떨어진 곳에서 ${you.name}이(가) 울타리를 넘어 이쪽으로 달려오는 모습을 발견했다.`,
       );
       era.println();
-      era.printButton("「키타! 얼굴! 코! 괜찮아!」", 1);
+      era.printButton('「키타! 얼굴! 코! 괜찮아!」', 1);
       await era.input();
       await kita.print_and_wait(
         `？ ${callname}까지 무슨 말인지 모르겠는 소리를 하네……? 아, 레이스 감상이요?`,
@@ -1778,7 +1780,7 @@ module.exports = {
     return f;
   })(),
   japa_cup_s: (() => {
-    const title = "하나로 만나는 물줄기";
+    const title = '하나로 만나는 물줄기';
     /**
      * @param {CharaTalk} kita キタサンブラック
      * @param {CharaTalk} you プレイヤー
@@ -1802,7 +1804,7 @@ module.exports = {
     return f;
   })(),
   arim_kin_s: (() => {
-    const title = "미소라는 이름의 불꽃";
+    const title = '미소라는 이름의 불꽃';
     /**
      * @param {CharaTalk} kita キタサンブラック
      * @param {CharaTalk} you プレイヤー
@@ -1825,7 +1827,7 @@ module.exports = {
         }은(는) 이미 키타의 곁으로 다가가 수건으로 ${kita.teen_sex_title}의 이마에 맺힌 땀을 안쓰러운 듯 닦아 주고 있었다.`,
       );
       era.println();
-      era.printButton("「키타, 상태는 어때?」", 1);
+      era.printButton('「키타, 상태는 어때?」', 1);
       await era.input();
       await kita.say_and_wait(
         `머릿속이 뒤죽박죽이에요. 솔직히 키타는 머리가 별로 좋지 않아서 달리기랑 생각하기 중 하나밖에 못 하거든요……`,
@@ -1856,7 +1858,7 @@ module.exports = {
     return f;
   })(),
   we_95_48: (() => {
-    const title = "키타산 블랙과 보내는 바의 밤";
+    const title = '키타산 블랙과 보내는 바의 밤';
     /**
      * @param {CharaTalk} kita キタサンブラック
      * @param {CharaTalk} you プレイヤー
@@ -1915,16 +1917,14 @@ module.exports = {
     return f;
   })(),
   kitasan_touch: (() => {
-    const title = "긴급 개점·키타 마사지!";
+    const title = '긴급 개점·키타 마사지!';
     /**
      * @param {CharaTalk} kita キタサンブラック
      * @param {CharaTalk} you プレイヤー
      * @param {string} callname キタサンのプレイヤーへの呼び方
      */
     const f = async (kita, you, callname) => {
-      await kita.say_and_wait(
-        `${callname}! 어서 오세요, 키타 마사지점입니다!`,
-      );
+      await kita.say_and_wait(`${callname}! 어서 오세요, 키타 마사지점입니다!`);
       await era.printAndWait(
         `트레이너실 문을 열자 기모노 차림의 ${kita.name}이 문 안쪽에 무릎을 꿇고 있었다. 뒤쪽 책상에는 흰 천이 덮여 있었다.`,
       );
@@ -1938,19 +1938,19 @@ module.exports = {
       );
       await kita.say_and_wait(
         `그래서…… 네, 맞아요. 오늘 키타는 임시 마사지 담당이에요. ${callname}의 몸을 풀어 드릴 마사지점 ${
-          kita.sex_code - 1 ? "여주인" : "주인장"
+          kita.sex_code - 1 ? '여주인' : '주인장'
         }, 키타입니다!`,
       );
       await era.printAndWait(
-        "그렇게 말한 키타는 이마를 바닥에 대고 그 앞에 세 손가락을 가지런히 모았다. 매끄럽고 부드러운 등이 드러났다.",
+        '그렇게 말한 키타는 이마를 바닥에 대고 그 앞에 세 손가락을 가지런히 모았다. 매끄럽고 부드러운 등이 드러났다.',
       );
       await era.printAndWait(
         `${
           you.name
         }은 그제야 알아차렸다. 키타가 입은 옷은 배가리개처럼 등이 트인 옷이라, 몸을 숙이면 ${kita.uma_sex_title}의 등이 자아내는 색기가 고스란히 드러났다.`,
       );
-      era.printButton("「아니, 아니, 아무리 그래도 이건 이상하잖아……」", 1);
-      era.printButton("「그럼 부탁할게.」", 2);
+      era.printButton('「아니, 아니, 아무리 그래도 이건 이상하잖아……」', 1);
+      era.printButton('「그럼 부탁할게.」', 2);
       if ((await era.input()) === 1) {
         await era.printAndWait(
           `${you.name}은(는) 뒤로 물러나 도망치려 했지만 척추가 삐걱거리는 소리와 감각에 ${you.name}은(는) 고통스럽게 허리를 굽혔다.`,
@@ -1963,7 +1963,7 @@ module.exports = {
         );
         era.drawLine();
         await era.printAndWait(
-          "몸 곳곳에서 삐걱거리는 소리가 나지만 가끔 아픈 것만 빼면 기분이 좋다.",
+          '몸 곳곳에서 삐걱거리는 소리가 나지만 가끔 아픈 것만 빼면 기분이 좋다.',
         );
         await era.printAndWait(
           `지친 몸이 키타의 손가락 아래에서 가벼워졌다. 부드러우면서도 힘 있는 마사지가 몸을 풀어 주었다. 역시 키타다…… 그렇게 생각하던 ${you.name}은(는) 졸음을 이기지 못하고 그대로 잠들었다.`,
@@ -1986,7 +1986,7 @@ module.exports = {
           `${callname}의 몸, 정말 많이 뭉쳤네요…… ${kita.uma_sex_title}와는 다르니까 몸은 제대로 쉬게 해 주세요.`,
         );
         await era.printAndWait(
-          "몸 곳곳에서 삐걱거리는 소리가 나지만 가끔 아픈 것만 빼면 기분이 좋다.",
+          '몸 곳곳에서 삐걱거리는 소리가 나지만 가끔 아픈 것만 빼면 기분이 좋다.',
         );
         await era.printAndWait(
           `지친 몸이 키타의 손가락 아래에서 가벼워졌다. 부드러우면서도 힘 있는 마사지가 몸을 풀어 주었다. 역시 키타다…… 그렇게 생각하던 ${you.name}은(는) 졸음을 이기지 못하고 그대로 잠들었다.`,
@@ -1997,7 +1997,7 @@ module.exports = {
     return f;
   })(),
   hot_spring_event: (() => {
-    const title = "온천 여행";
+    const title = '온천 여행';
     /**
      * @param {CharaTalk} kita キタサンブラック
      * @param {CharaTalk} you プレイヤー
@@ -2005,7 +2005,9 @@ module.exports = {
      * @param {boolean} has_ticket 温泉旅行券を持っている（商店街の抽選）
      */
     const f = async (kita, you, callname, has_ticket) => {
-      await era.printAndWait(`${you.name}은(는) 트레이너실에서 서류를 정리하고 있었다……`);
+      await era.printAndWait(
+        `${you.name}은(는) 트레이너실에서 서류를 정리하고 있었다……`,
+      );
       await kita.say_and_wait(`${callname}! 저기, 온천 여행권 말인데요!`);
       await kita.say_and_wait(`지난 삼 년 동안 저, 열심히 했죠!`);
       await kita.say_and_wait(`그렇죠, ${callname}！`);
@@ -2014,14 +2016,14 @@ module.exports = {
         `갑자기 트레이너실로 뛰어 들어온 키타가 그렇게 큰 소리로 ${you.name}에게 물었다.`,
       );
       await era.printAndWait([
-        "갑자기 무슨 말을 하는 거지? ",
+        '갑자기 무슨 말을 하는 거지? ',
         you.get_colored_name(),
-        "은(는) 조금 놀라 눈앞의 ",
+        '은(는) 조금 놀라 눈앞의 ',
         kita.teen_sex_title,
-        "을(를) 바라보았다.",
+        '을(를) 바라보았다.',
       ]);
       era.println();
-      era.printButton("「응, 열심히 했지.」", 1);
+      era.printButton('「응, 열심히 했지.」', 1);
       await era.input();
       await era.printAndWait(
         `어쨌든 지난 삼 년의 승리는 누구의 눈에도 분명했다.`,
@@ -2042,9 +2044,9 @@ module.exports = {
       );
       if (has_ticket) {
         await kita.say_and_wait([
-          "그러니까 ",
+          '그러니까 ',
           callname,
-          ", 전에 받은 여행권으로 온천 가요!",
+          ', 전에 받은 여행권으로 온천 가요!',
         ]);
         era.println();
         era.printButton(
@@ -2053,20 +2055,20 @@ module.exports = {
         );
         await era.input();
         await era.printAndWait([
-          "그렇게 말하며 ",
+          '그렇게 말하며 ',
           you.get_colored_name(),
-          "은(는) 서둘러 서랍에 넣어 두었던 온천 여행권을 꺼내 ",
+          '은(는) 서둘러 서랍에 넣어 두었던 온천 여행권을 꺼내 ',
           kita.get_colored_name(),
-          "의 앞에서 흔들었다.",
+          '의 앞에서 흔들었다.',
         ]);
       } else {
-        await kita.say_and_wait(["그러니까 ", callname, ", 온천 가요!"]);
+        await kita.say_and_wait(['그러니까 ', callname, ', 온천 가요!']);
         await era.printAndWait([
           kita.get_colored_name(),
-          "은 그렇게 말하며 온천 여행권 한 장을 보여 주었다. 희미하게 「키타」로 시작하는 글자가 찍혀 있었다……",
+          '은 그렇게 말하며 온천 여행권 한 장을 보여 주었다. 희미하게 「키타」로 시작하는 글자가 찍혀 있었다……',
         ]);
       }
-      era.drawLine({ content: "온천 여관" });
+      era.drawLine({ content: '온천 여관' });
       await era.printAndWait(
         `상을 받고 싶어 안달 난 키타가 무슨 엄청난 일을 벌이기 전에 ${you.name}은(는) 키타와 온천 여관에 왔다.`,
       );
@@ -2100,7 +2102,7 @@ module.exports = {
     return f;
   })(),
   ge_wife_end: (() => {
-    const title = "당신만의 검은 석양";
+    const title = '당신만의 검은 석양';
     /**
      * @param {CharaTalk} kita キタサンブラック
      * @param {CharaTalk} you プレイヤー
@@ -2110,9 +2112,7 @@ module.exports = {
       await era.printAndWait(
         `삼 년은 순식간에 지나고 ${you.name}와(과) ${kita.name}은 이별의 날을 맞았다.`,
       );
-      await kita.say_and_wait(
-        `며칠 뒤면 헤어지네요. 어쩐지 불안해요.`,
-      );
+      await kita.say_and_wait(`며칠 뒤면 헤어지네요. 어쩐지 불안해요.`);
       await kita.say_and_wait(
         `${callname}, 몇 달 뒤면 새로운 아이를 맞아서 그 아이의 전담 트레이너가 되시겠죠.`,
       );
@@ -2126,7 +2126,9 @@ module.exports = {
       await era.printAndWait(
         `몇 번이나 나란히 걸었는지 모를 길인데 오늘은 유난히 길었다.`,
       );
-      await era.printAndWait(`아무래도 ${kita.name}은 고향으로 돌아갈 예정이니까.`);
+      await era.printAndWait(
+        `아무래도 ${kita.name}은 고향으로 돌아갈 예정이니까.`,
+      );
       await era.printAndWait(
         `연세가 드신 아버지에게 무사하다고 알리러 갈 뿐이고 돌아오지 않겠다고 정해진 것도 아니다. 하지만 트레센으로 돌아와도 ${kita.teen_sex_title}이(가) 당신과 계속 함께할 것이라는 보장은 없다.`,
       );
@@ -2156,11 +2158,11 @@ module.exports = {
         `조용한 복도에는 두 사람의 발소리만 남았다. 볼을 물들인 석양은 아직 가시지 않은 모양이다.`,
       );
       era.println();
-      era.printButton("「키타.」", 1);
+      era.printButton('「키타.」', 1);
       await era.input();
       await kita.say_and_wait(`네.`);
       era.println();
-      era.printButton("「나도, 쭉, 네가 제일 좋았어.」", 1);
+      era.printButton('「나도, 쭉, 네가 제일 좋았어.」', 1);
       await era.input();
       await era.printAndWait(
         `발소리는 뚝 멎었고, 석양의 심장만 더욱 세차게 뛰었다.`,
@@ -2170,7 +2172,7 @@ module.exports = {
     return f;
   })(),
   ge_love_end: (() => {
-    const title = "키타산 블랙의 작은 축제";
+    const title = '키타산 블랙의 작은 축제';
     /**
      * @param {CharaTalk} kita キタサンブラック
      * @param {CharaTalk} you プレイヤー
@@ -2239,7 +2241,7 @@ module.exports = {
     return f;
   })(),
   be_back_home: (() => {
-    const title = "고향으로 돌아가는 키타산 블랙";
+    const title = '고향으로 돌아가는 키타산 블랙';
     /**
      * @param {CharaTalk} kita キタサンブラック
      * @param {CharaTalk} you プレイヤー
@@ -2257,7 +2259,7 @@ module.exports = {
         `레이스에서 진 탓에 분노한 팬들이 학원으로 몰려와 「원흉」인 ${you.name}을(를) 처분하라고 요구했다.`,
       );
       await era.printAndWait(
-        "마지막에는 어째서인지 잠잠해졌다. 하지만 키타는 더는 트레센 학원에서 트레이닝을 이어 갈 수 없게 되었다.",
+        '마지막에는 어째서인지 잠잠해졌다. 하지만 키타는 더는 트레센 학원에서 트레이닝을 이어 갈 수 없게 되었다.',
       );
       era.println();
       era.printButton(`「미안해, 키타.」`, 1);
@@ -2275,9 +2277,11 @@ module.exports = {
         `역시 키타는 이길 수 있는 ${kita.uma_sex_title}가 아니었어요.`,
       );
       await kita.say_and_wait(
-        "얼굴도 평범하고 튼튼한 것밖에 장점이 없어서요. 죄송해요, 이렇게 오랜 시간을 허비하게 해서.",
+        '얼굴도 평범하고 튼튼한 것밖에 장점이 없어서요. 죄송해요, 이렇게 오랜 시간을 허비하게 해서.',
       );
-      await kita.say_and_wait(`책임은 제가 질게요. 안녕히 계세요, ${callname}。`);
+      await kita.say_and_wait(
+        `책임은 제가 질게요. 안녕히 계세요, ${callname}。`,
+      );
       await era.printAndWait(
         `고향으로 가는 버스에 올라탄 ${kita.name}은 쉴 새 없이 울리는 휴대전화에 한마디를 중얼거렸다.`,
       );

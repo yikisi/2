@@ -353,7 +353,7 @@ module.exports = {
           },
           () => {
             urara.say(
-             `요즘 또 새로운 요리를 배웠어! 앞으로 ${callname}의 배를 든든하게 채워줄 수 있도록, ${self_call}가 힘낼게! 그런 말 하지 말라고? 혹시 ${callname}도 ${self_call}의 몸을 가득 채워주고 싶은 거야? 어른을 놀리지 말라고? 알았어……`,
+              `요즘 또 새로운 요리를 배웠어! 앞으로 ${callname}의 배를 든든하게 채워줄 수 있도록, ${self_call}가 힘낼게! 그런 말 하지 말라고? 혹시 ${callname}도 ${self_call}의 몸을 가득 채워주고 싶은 거야? 어른을 놀리지 말라고? 알았어……`,
             );
             era.print([
               you.get_colored_name(),
@@ -704,7 +704,6 @@ module.exports = {
               urara.uma_sex_title,
               '의 뺨은 붉어져 있다. 그럴 때는 뭐라고 말할 생각일까?',
             ]);
-
           },
         );
       }
@@ -908,19 +907,19 @@ module.exports = {
             ]);
           },
         );
-    if (love >= 50) {
-      buffer.push(() => {
-        urara.say(
-          `${callname}……윽……엑? ${callname}! 오, 오늘도 같이 힘내자!`,
-        );
-        era.print([
-          urara.get_colored_name(),
-          '은(는) 소곤소곤 무언가를 하고 있었는지 ',
-          you.get_colored_name(),
-          `이(가) ${urara.sex}의 뒤에 와서야 겨우 얼굴을 붉히며 알아차렸다.`,
-        ]);
-      });
-    }
+        if (love >= 50) {
+          buffer.push(() => {
+            urara.say(
+              `${callname}……윽……엑? ${callname}! 오, 오늘도 같이 힘내자!`,
+            );
+            era.print([
+              urara.get_colored_name(),
+              '은(는) 소곤소곤 무언가를 하고 있었는지 ',
+              you.get_colored_name(),
+              `이(가) ${urara.sex}의 뒤에 와서야 겨우 얼굴을 붉히며 알아차렸다.`,
+            ]);
+          });
+        }
         if (love >= 75) {
           buffer.push(() => {
             urara.say(
@@ -1420,27 +1419,26 @@ module.exports = {
       era.get('status:52:弗隆K') ||
       era.get('status:52:弗隆P')
     ) {
-buffer.push(
-  () =>
-    era.printAndWait([
-      '약의 영향으로, 잠들어 있는 ',
-      urara.get_colored_name(),
-      '의 숨결이 점점 달콤하고 색기 있게 변해간다.',
-    ]),
-  () =>
-    era.printAndWait([
-      '비열한 약에 굴복하여 의식을 잃은 ',
-      urara.teen_sex_title,
-      '은(는) 지금은 쓰임받기를 기다리는 육인형이다.',
-    ]),
-  () =>
-    era.printAndWait([
-      '손발은 꿈속에서 저항하듯 몸을 뒤틀고 있지만, 작은 ',
-      urara.uma_sex_title,
-      '의 가랑이는 벌써 솔직하게 축축하게 젖어 있다.',
-    ]),
-);
-
+      buffer.push(
+        () =>
+          era.printAndWait([
+            '약의 영향으로, 잠들어 있는 ',
+            urara.get_colored_name(),
+            '의 숨결이 점점 달콤하고 색기 있게 변해간다.',
+          ]),
+        () =>
+          era.printAndWait([
+            '비열한 약에 굴복하여 의식을 잃은 ',
+            urara.teen_sex_title,
+            '은(는) 지금은 쓰임받기를 기다리는 육인형이다.',
+          ]),
+        () =>
+          era.printAndWait([
+            '손발은 꿈속에서 저항하듯 몸을 뒤틀고 있지만, 작은 ',
+            urara.uma_sex_title,
+            '의 가랑이는 벌써 솔직하게 축축하게 젖어 있다.',
+          ]),
+      );
     } else {
       buffer.push(
         () =>
@@ -1567,20 +1565,20 @@ buffer.push(
     }
     if (love >= 50) {
       buffer.push(
-async () => {
-  await urara.say_and_wait([
-    '잘 모르겠지만 ',
-    callname,
-    '의 선물을 받으면 몸이 포근포근해져! 왜 그럴까……',
-  ]);
-  await era.printAndWait([
-    '선물의 이야기를 하고 있는데, 얼굴을 붉힌 ',
-    urara.get_colored_name(),
-    '은(는) 열기 어린 눈으로 ',
-    you.get_colored_name(),
-    '의 눈을 계속 바라보고 있다.',
-  ]);
-},
+        async () => {
+          await urara.say_and_wait([
+            '잘 모르겠지만 ',
+            callname,
+            '의 선물을 받으면 몸이 포근포근해져! 왜 그럴까……',
+          ]);
+          await era.printAndWait([
+            '선물의 이야기를 하고 있는데, 얼굴을 붉힌 ',
+            urara.get_colored_name(),
+            '은(는) 열기 어린 눈으로 ',
+            you.get_colored_name(),
+            '의 눈을 계속 바라보고 있다.',
+          ]);
+        },
 
         async () => {
           await urara.say_and_wait([
@@ -1658,28 +1656,27 @@ async () => {
             '의 모습이 흔들리고 있다……',
           ]);
         },
-async () => {
-  await urara.say_and_wait([
-    '……',
-    callname,
-    ', 지금뿐만 아니라 우라라의 앞으로의 보답도, 꼭 기대해 줘?',
-  ]);
-  await era.printAndWait([
-    '선물을 받은 ',
-    urara.get_colored_name(),
-    '은(는) 조용히 손을 아랫배 위에 포개고, 얼굴을 붉히며 ',
-    you.get_colored_name(),
-    '에게 모호한 질문을 던진다.',
-  ]);
-  await era.printAndWait([
-    '작은 ',
-    urara.uma_sex_title,
-    '이(가) 답을 바라고 있는 게 아니라는 걸 알고 있기에 ',
-    you.get_colored_name(),
-    '은(는) 어쩔 수 없이 일어날 수 있는 미래를 받아들일 각오를 다진다.',
-  ]);
-},
-
+        async () => {
+          await urara.say_and_wait([
+            '……',
+            callname,
+            ', 지금뿐만 아니라 우라라의 앞으로의 보답도, 꼭 기대해 줘?',
+          ]);
+          await era.printAndWait([
+            '선물을 받은 ',
+            urara.get_colored_name(),
+            '은(는) 조용히 손을 아랫배 위에 포개고, 얼굴을 붉히며 ',
+            you.get_colored_name(),
+            '에게 모호한 질문을 던진다.',
+          ]);
+          await era.printAndWait([
+            '작은 ',
+            urara.uma_sex_title,
+            '이(가) 답을 바라고 있는 게 아니라는 걸 알고 있기에 ',
+            you.get_colored_name(),
+            '은(는) 어쩔 수 없이 일어날 수 있는 미래를 받아들일 각오를 다진다.',
+          ]);
+        },
       );
     }
     await get_random_entry(buffer)();
@@ -3129,11 +3126,7 @@ async () => {
     );
     if (love >= 50) {
       buffer.push(async () => {
-        await urara.say_and_wait([
-          '……에, 엣?',
-          callname,
-          ', 옆방에서 대체……?',
-        ]);
+        await urara.say_and_wait(['……에, 엣?', callname, ', 옆방에서 대체……?']);
         await era.printAndWait([
           '옆 개인실에서 끊임없이 들려오는 물소리와 신음 소리에,',
           you.get_colored_name(),
@@ -4597,7 +4590,12 @@ async () => {
         '에게 두 번째 질문을 던진다.',
       ]);
     } else {
-      urara.say([callname, '、', self_call, ' 의 몸이 좀 이상해…… 안 가면 안될까?']);
+      urara.say([
+        callname,
+        '、',
+        self_call,
+        ' 의 몸이 좀 이상해…… 안 가면 안될까?',
+      ]);
       era.print([
         '내키지 않으면서도, 작은 ',
         urara.uma_sex_title,
@@ -5524,7 +5522,9 @@ async () => {
         urara.sex,
         '은 멍하니 구석에서 스커트와 상의를 걷어 올린다……',
       ]);
-      await urara.say_and_wait('괘, 괜찮아…… 잠깐, 잠깐 시험해 보는 것뿐이야……');
+      await urara.say_and_wait(
+        '괘, 괜찮아…… 잠깐, 잠깐 시험해 보는 것뿐이야……',
+      );
       await urara.print_and_wait([
         '작은 목소리로 스스로를 다독이며,',
         urara.get_colored_name(),
@@ -5887,7 +5887,9 @@ async () => {
       era.printButton('「……！」', 1);
       await era.input();
 
-      await era.printAndWait('안 돼, 이대로라면 사회적 사망 사태가 벌어질 거야!');
+      await era.printAndWait(
+        '안 돼, 이대로라면 사회적 사망 사태가 벌어질 거야!',
+      );
       await era.printAndWait([
         '상황이 심상치 않음을 감지한 ',
         you.get_colored_name(),
@@ -6560,7 +6562,7 @@ async () => {
      */
     const f = async (urara, inner_urara, you, callname, high_relation) => {
       await era.printAndWait([
-       '하루 동안의 외출과 식사를 마치고 계산하려던 ',
+        '하루 동안의 외출과 식사를 마치고 계산하려던 ',
         you.get_colored_name(),
         ' 은(는) 점원이 제시하는 특수한 조건을 멍하니 듣고 있다.',
       ]);
@@ -6655,7 +6657,7 @@ async () => {
         urara.uma_sex_title,
         '의 힘으로 얼굴을 끼어 눌리게 된다.',
       ]);
-     await era.printAndWait('이러다간 사회적으로 정말 끝장이다……');
+      await era.printAndWait('이러다간 사회적으로 정말 끝장이다……');
       await era.printAndWait([
         '폭주한 담당에게 붙잡혀 꼼짝달싹 못 하는 ',
         you.get_colored_name(),
@@ -6688,7 +6690,7 @@ async () => {
           you.get_colored_name(),
           ' 은 정신이 아득해질 지경이 된다.',
         ]);
-        
+
         await era.printAndWait([
           '처음에는 ',
           you.get_colored_name(),
@@ -6718,7 +6720,7 @@ async () => {
           you.get_colored_name(),
           '의 정면으로 곧장 부딪쳐 온다.',
         ]);
-await urara.say_and_wait('으앗, 아파! 입술이랑 이가 부딪혔어……');
+        await urara.say_and_wait('으앗, 아파! 입술이랑 이가 부딪혔어……');
         await era.printAndWait([
           '하지만 첫 번째 실수에도 ',
           urara.get_colored_name(),
@@ -6784,7 +6786,7 @@ await urara.say_and_wait('으앗, 아파! 입술이랑 이가 부딪혔어……
       );
       await urara.say_and_wait(['그러니까 ', callname, ', ……한번 더 할까?']);
       await you.say_and_wait(
-       `그만해 줘, 우라라. ${callname}는 정말이지 이제 한계야! 적어도, 적어도 사회적으로 매장당한 뒤에 목숨을 부지할 탈출구 정도는 남겨 줘!`,
+        `그만해 줘, 우라라. ${callname}는 정말이지 이제 한계야! 적어도, 적어도 사회적으로 매장당한 뒤에 목숨을 부지할 탈출구 정도는 남겨 줘!`,
         true,
       );
       await era.printAndWait([
@@ -7151,9 +7153,7 @@ await urara.say_and_wait('으앗, 아파! 입술이랑 이가 부딪혔어……
         urara.uma_sex_title,
         ' 쪽이 새빨개지는 얼굴을 감싸 쥔다.',
       ]);
-      await urara.say_and_wait(
-        '미, 미안해, 우라라가 좀 과했나 봐, 아마도……',
-      );
+      await urara.say_and_wait('미, 미안해, 우라라가 좀 과했나 봐, 아마도……');
       await era.printAndWait([
         '작은 서큐버스는 그 상태로 잠시 머뭇거리더니, 이내 바로 옆 탈의실 커튼 뒤로 도망쳐 버린다. 부끄러움에 눈가가 촉촉해진 ',
         urara.get_colored_name(),
@@ -7213,7 +7213,10 @@ await urara.say_and_wait('으앗, 아파! 입술이랑 이가 부딪혔어……
         urara.get_colored_name(),
         '은 평소의 알기 힘든 미소와는 다른 웃음만을 지어 보인다.',
       ]);
-      await era.printAndWait([urara.sex, '은 도대체 무슨 생각을 하고 있는 걸까……']);
+      await era.printAndWait([
+        urara.sex,
+        '은 도대체 무슨 생각을 하고 있는 걸까……',
+      ]);
       era.drawLine();
       await urara.say_and_wait([
         '별로 내키지 않는 것 같았지만,',
@@ -7817,7 +7820,7 @@ await urara.say_and_wait('으앗, 아파! 입술이랑 이가 부딪혔어……
               urara.say_and_wait([
                 '다음에 다시 함께할 수 있다면, ',
                 callname,
-                ' 님과 즐거운 시간을 보내면 정말 좋겠어요—'
+                ' 님과 즐거운 시간을 보내면 정말 좋겠어요—',
               ]),
           );
         }

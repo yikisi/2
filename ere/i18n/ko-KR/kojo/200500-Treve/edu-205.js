@@ -9,7 +9,7 @@ const { get_random_entry } = require('#/utils/list-utils');
 
 module.exports = {
   race_start: (() => {
-    const title = "레이스 전";
+    const title = '레이스 전';
     /**
      * @param {CharaTalk} treve トレヴ
      * @param {CharaTalk} you プレイヤー
@@ -18,10 +18,10 @@ module.exports = {
       const buffer = [
         () =>
           treve.say_and_wait(
-            "오늘의 승리는 제가 가져갈 거예요. 프랑스의 모두를 위해서.",
+            '오늘의 승리는 제가 가져갈 거예요. 프랑스의 모두를 위해서.',
           ),
-        () => treve.say_and_wait("영광은 이미 제 손안에 있어요."),
-        () => treve.say_and_wait("가슴 뛰는 승부를 펼쳐 봐요!"),
+        () => treve.say_and_wait('영광은 이미 제 손안에 있어요.'),
+        () => treve.say_and_wait('가슴 뛰는 승부를 펼쳐 봐요!'),
       ];
       if (era.get('love:205') >= 50) {
         buffer.push(() =>
@@ -36,16 +36,16 @@ module.exports = {
     return f;
   })(),
   race_win: (() => {
-    const title = "레이스 승리";
+    const title = '레이스 승리';
     /** @param {CharaTalk} treve トレヴ */
     const f = async (treve) => {
       const buffer = [
-        () => treve.say_and_wait("골인! 이겼어요~"),
-        () => treve.say_and_wait("메르시 보쿠! 모두 고마워요!"),
-        () => treve.say_and_wait("모두 축하해 주셔서 고마워요!"),
+        () => treve.say_and_wait('골인! 이겼어요~'),
+        () => treve.say_and_wait('메르시 보쿠! 모두 고마워요!'),
+        () => treve.say_and_wait('모두 축하해 주셔서 고마워요!'),
         () =>
           treve.say_and_wait(
-            "이것도 제가 이 영광을 얻을 수 있었던 이유예요. 모두에게 최고의 선물을 드릴게요.",
+            '이것도 제가 이 영광을 얻을 수 있었던 이유예요. 모두에게 최고의 선물을 드릴게요.',
           ),
       ];
       await get_random_entry(buffer)();
@@ -54,7 +54,7 @@ module.exports = {
     return f;
   })(),
   ws_47_24: (() => {
-    const title = "푸른 하늘 위를 날다";
+    const title = '푸른 하늘 위를 날다';
     /**
      * @param {CharaTalk} treve トレヴ
      * @param {CharaTalk} you プレイヤー
@@ -64,16 +64,16 @@ module.exports = {
     const f = async (treve, you, prix_prb, prix_dia) => {
       await era.printAndWait([
         treve.name,
-        "는 해가 바뀌고 봄이 지나간 오월, 메이크 데뷔와 같은 1600미터 거리의 ",
+        '는 해가 바뀌고 봄이 지나간 오월, 메이크 데뷔와 같은 1600미터 거리의 ',
         prix_prb,
-        "에서 압승을 거두었다.",
+        '에서 압승을 거두었다.',
       ]);
       await era.printAndWait([
-        "본인이 강하게 희망하기도 해서, ",
+        '본인이 강하게 희망하기도 해서, ',
         treve.sex,
-        "는 거리가 500미터가량 더 긴 ",
+        '는 거리가 500미터가량 더 긴 ',
         prix_dia,
-        "에도 출전했다.",
+        '에도 출전했다.',
       ]);
       await era.printAndWait(
         `${you.name}을(를) 비롯한 많은 관객의 예상을 뒤엎고, 삼관급 레이스에서 압도적인 승리를 거두었다.`,
@@ -86,7 +86,7 @@ module.exports = {
         `하나를 들으면 열을 아는 ${treve.name}는 가르쳐 주지 않아도 자연스레 정답에 도달하곤 했다.`,
       );
       await era.printAndWait(
-        "노련한 트레이너조차 알아차리지 못하는 점을 스스로 고쳐 버렸다.",
+        '노련한 트레이너조차 알아차리지 못하는 점을 스스로 고쳐 버렸다.',
       );
       await era.printAndWait(
         `다른 트레이너들에게 방임주의라는 비난을 받기도 했지만, ${you.name}은(는) ${treve.sex}에게는 이 방식이 옳다고 생각했다.`,
@@ -96,7 +96,7 @@ module.exports = {
     return f;
   })(),
   ws_47_33: (() => {
-    const title = "가난하면 타향으로";
+    const title = '가난하면 타향으로';
     /**
      * @param {CharaTalk} treve トレヴ
      * @param {CharaTalk} you プレイヤー
@@ -108,7 +108,9 @@ module.exports = {
       await era.printAndWait(
         `프랑스 오크스를 제패한 지 얼마 지나지도 않은 것 같은데, 어느새 또 G1이었다.`,
       );
-      await era.printAndWait(`다음에 나갈 레이스는 ${treve.sex}가 그토록 기다리던 개선문상.`);
+      await era.printAndWait(
+        `다음에 나갈 레이스는 ${treve.sex}가 그토록 기다리던 개선문상.`,
+      );
       await era.printAndWait(
         `지금까지 보여 준 강함만 보면 ${treve.name}가 그 영광을 차지해도 이상하지 않았다.`,
       );
@@ -159,7 +161,7 @@ module.exports = {
     return f;
   })(),
   we_47_33: (() => {
-    const title = "먼 곳을 향해";
+    const title = '먼 곳을 향해';
     /**
      * @param {CharaTalk} treve トレヴ
      * @param {CharaTalk} you プレイヤー
@@ -172,14 +174,19 @@ module.exports = {
       await era.printAndWait(
         `상대는 ${treve.name}의 스승이다. 빈손으로 찾아갈 수는 없다.`,
       );
-      await era.printAndWait(`바구니에는 자신이 마시려고 사려는 찻잎 통이 담겨 있었다.`);
+      await era.printAndWait(
+        `바구니에는 자신이 마시려고 사려는 찻잎 통이 담겨 있었다.`,
+      );
       await era.printAndWait(
         `시선을 조금 올리니 품이 넉넉한 코트를 입은 ${treve.name}가 물건을 찬찬히 살펴보고 있었다.`,
       );
       await era.printAndWait(
         `몇 가지 차의 향을 맡아 보는 ${treve.sex}에게 ${you.name}은(는) 조금 다가갔다.`,
       );
-      era.printButton(`「……트레이너실에 꽃차가 얼마 안 남았어. 보충 좀 부탁해.」`, 1);
+      era.printButton(
+        `「……트레이너실에 꽃차가 얼마 안 남았어. 보충 좀 부탁해.」`,
+        1,
+      );
       await era.input();
       await era.printAndWait(
         `${treve.name}는 귀를 세우고 기쁜 듯 꼬리를 흔들며 차를 고르기 시작했다.`,
@@ -201,9 +208,11 @@ module.exports = {
       await era.printAndWait(
         `${you.name}이(가) 찻잎 통 세 개가 담긴 바구니를 계산대에 놓자, 안면 있는 주인이 놀란 표정을 지었다.`,
       );
-      await era.printAndWait(`그는 계산대를 손가락으로 두드리며 눈썹을 치켜올렸다.`);
+      await era.printAndWait(
+        `그는 계산대를 손가락으로 두드리며 눈썹을 치켜올렸다.`,
+      );
       await you.say_as_passer_by_and_wait(
-        "찻잎 가게 주인",
+        '찻잎 가게 주인',
         `오랜만이군. 그 ${treve.child_sex_title}가 새 담당인가?`,
       );
       await era.printAndWait(`주인은 ${you.name}의 어깨 너머를 바라보았다.`);
@@ -220,7 +229,7 @@ module.exports = {
       era.printButton(`「왜 그래?」`, 1);
       await era.input();
       await you.say_as_passer_by_and_wait(
-        "찻잎 가게 주인",
+        '찻잎 가게 주인',
         `${treve.sex}는 제법 인기 있잖아?`,
       );
       await era.printAndWait(
@@ -240,13 +249,15 @@ module.exports = {
       await era.printAndWait(
         `팬이 아직 적던 시절에도 열성적으로 ${treve.sex}를 응원하는 사람들은 있었다.`,
       );
-      await era.printAndWait(`그런 생각을 하는 사이 종이봉투 두 개가 계산대에 놓였다.`);
+      await era.printAndWait(
+        `그런 생각을 하는 사이 종이봉투 두 개가 계산대에 놓였다.`,
+      );
       await era.printAndWait(
         `지갑에서 지폐 두세 장을 꺼내 건넬 무렵, ${treve.name}는 ${you.name}의 곁으로 돌아왔다.`,
       );
       await you.say_as_passer_by_and_wait(
-        "찻잎 가게 주인",
-        "여기 거스름돈일세. 앞으로도 잘 부탁하네.",
+        '찻잎 가게 주인',
+        '여기 거스름돈일세. 앞으로도 잘 부탁하네.',
       );
       await era.printAndWait(
         `${you.name}은(는) 개인용 찻잎이 든 봉투를 ${treve.sex}에게 건네고 가게를 나섰다.`,
@@ -289,9 +300,7 @@ module.exports = {
       await era.printAndWait(
         `그리고 ${treve.sex}의 현재 목표는 샹젤리제 거리 끝의 거대한 건축물이 상징하는 그 레이스였다.`,
       );
-      await era.printAndWait(
-        `나폴레옹이 세운 개선문. 높이 솟은 승리의 상징.`,
-      );
+      await era.printAndWait(`나폴레옹이 세운 개선문. 높이 솟은 승리의 상징.`);
       await era.printAndWait(
         `${treve.sex}는 반드시 그 너머에 나타나, 그 이름을 딴 세계 최고의 무대에서 빛날 것이다.`,
       );
@@ -310,7 +319,7 @@ module.exports = {
     return f;
   })(),
   foreign_travel: (() => {
-    const title = "베르사유의 장미";
+    const title = '베르사유의 장미';
     /**
      * @param {CharaTalk} treve トレヴ
      * @param {CharaTalk} montjeu モンジュー
@@ -327,7 +336,9 @@ module.exports = {
       await era.printAndWait(
         `${you.name}이(가) 고개를 들자 인사하는 목소리가 들렸다.`,
       );
-      await montjeu.say_and_wait("왔구나. 다만 내가 할 이야기는 주로 저 사람에게 할 말이야.");
+      await montjeu.say_and_wait(
+        '왔구나. 다만 내가 할 이야기는 주로 저 사람에게 할 말이야.',
+      );
       await era.printAndWait(
         `신중함과 지혜가 묻어나는 몬쥬${montjeu.adult_sex_title}의 목소리였다.`,
       );
@@ -340,7 +351,9 @@ module.exports = {
       await era.printAndWait(`——전설.`);
       await treve.say_and_wait(`스승님!`);
       await era.printAndWait(`${treve.name}는 눈을 반짝이며 그 사람을 불렀다.`);
-      await era.printAndWait(`${you.name}은(는) 온몸이 굳어 한 발짝도 움직이지 못했다.`);
+      await era.printAndWait(
+        `${you.name}은(는) 온몸이 굳어 한 발짝도 움직이지 못했다.`,
+      );
       await era.printAndWait(`빠른 심장 박동이 경보처럼 머릿속을 가득 채웠다.`);
       await montjeu.say_and_wait(`그럼.`);
       await era.printAndWait(
@@ -362,7 +375,9 @@ module.exports = {
       await era.printAndWait(
         `${montjeu.name}는 대답 없이 바람에 흔들리는 나무를 바라보았다.`,
       );
-      await era.printAndWait(`그 너머에는 햇살을 받은 센강의 푸른 물빛이 보였다.`);
+      await era.printAndWait(
+        `그 너머에는 햇살을 받은 센강의 푸른 물빛이 보였다.`,
+      );
       await era.printAndWait(`가을이 되었으니 더위는 느껴지지 않아야 할 텐데.`);
       await era.printAndWait(
         `하지만 ${you.name}의 관자놀이에서 뺨을 따라 땀 한 방울이 천천히, 그 존재를 새기듯 흘러내렸다.`,
@@ -393,7 +408,9 @@ module.exports = {
       await era.printAndWait(
         `지금까지 자신의 기술을 믿고 담당 ${treve.uma_sex_title}를 신뢰해 왔다. 그렇다면 완벽한 ${treve.uma_sex_title}에게 부족한 자신이 어떻게 손을 댈 수 있을까.`,
       );
-      await era.printAndWait(`${you.name}은(는) ${treve.sex}를 어떻게 바라봐야 할까.`);
+      await era.printAndWait(
+        `${you.name}은(는) ${treve.sex}를 어떻게 바라봐야 할까.`,
+      );
       await era.printAndWait(`${montjeu.name}는 말을 이었다.`);
       await montjeu.say_and_wait(
         `개선문상은 높은 벽이야. 프랑스의 천재라 해도 그렇게 쉽게 차지할 수는 없어.`,
@@ -404,9 +421,7 @@ module.exports = {
       await era.printAndWait(
         `멀리서 ${treve.name}가 들판을 달리고 있었다. 어느새 늘어난 소년 소녀들도 그 뒤를 쫓듯 달렸다.`,
       );
-      await era.printAndWait(
-        `${treve.sex}가 그렇게 달리면 누구나 매료되리라.`,
-      );
+      await era.printAndWait(`${treve.sex}가 그렇게 달리면 누구나 매료되리라.`);
       await era.printAndWait(
         `그리고 그 마음을 어렵지 않게 힘으로 바꾸어, 천재적인 능력으로 레이스에서도 이길 것이다.`,
       );
@@ -447,7 +462,7 @@ module.exports = {
     return f;
   })(),
   before_prix_lat_classical: (() => {
-    const title = "『폭군』마저 꺾고……";
+    const title = '『폭군』마저 꺾고……';
     /**
      * @param {CharaTalk} treve トレヴ
      * @param {CharaTalk} you プレイヤー
@@ -473,7 +488,9 @@ module.exports = {
       await era.printAndWait(`누구나 아는 프랑스 국기의 세 가지 색이다.`);
       await era.printAndWait(`그것을 승부복의 기본 색으로 삼는다.`);
       await era.printAndWait(`그 제안에 고개를 끄덕인 것은 바로……`);
-      await era.printAndWait(`${treve.sex}라면 무엇을 짊어져도 해낼 수 있으리라 생각했기 때문이다.`);
+      await era.printAndWait(
+        `${treve.sex}라면 무엇을 짊어져도 해낼 수 있으리라 생각했기 때문이다.`,
+      );
       await era.printAndWait(
         `대기실에서 마지막으로 점검하는 ${treve.name}는 한 군데도 흐트러지지 않은 승부복을 확인하고, 거울 앞에서 자신의 모습을 진지하게 바라보았다.`,
       );
@@ -504,17 +521,19 @@ module.exports = {
         `이 개선문상 무대 앞에서 ${you.name}은(는) ${treve.sex}의 특별한 재능을 이해했다.`,
       );
       await era.printAndWait(`그것은 신체 능력도, 정신적 안정감도 아니었다.`);
-      await era.printAndWait(`훈련을 통해 얻을 수 있는 것과는 다른, 타고난 재능이었다.`);
-      await era.printAndWait(`다른 사람의 기대를 짊어지는 데 조금도 부담을 느끼지 않는 것.`);
+      await era.printAndWait(
+        `훈련을 통해 얻을 수 있는 것과는 다른, 타고난 재능이었다.`,
+      );
+      await era.printAndWait(
+        `다른 사람의 기대를 짊어지는 데 조금도 부담을 느끼지 않는 것.`,
+      );
       await era.printAndWait(
         `거대한 그릇처럼 사람들의 신뢰와 희망을 끝없이 힘으로 바꿀 수 있는 것.`,
       );
       await era.printAndWait(
         `드문 완성도와 높은 경지에서 비롯된 그 재능은 온갖 부정적인 생각을 끊어 내고, ${treve.name}를 앞으로 나아가게 했다.`,
       );
-      await era.printAndWait(
-        `${you.name}은(는) 다시 자신에게 물어야 했다.`,
-      );
+      await era.printAndWait(`${you.name}은(는) 다시 자신에게 물어야 했다.`);
       await era.printAndWait(`왜 자신은 ${treve.sex}의 트레이너인가.`);
       await era.printAndWait(
         `문손잡이에 손을 얹은 ${treve.sex}가 다시 한번 ${you.name}을(를) 돌아보며 그 말을 꺼냈다.`,
@@ -530,7 +549,7 @@ module.exports = {
     return f;
   })(),
   prix_lat_win_classical: (() => {
-    const title = "최강";
+    const title = '최강';
     /**
      * @param {CharaTalk} treve トレヴ
      * @param {CharaTalk} montjeu モンジュー
@@ -630,7 +649,7 @@ module.exports = {
     return f;
   })(),
   ws_95_25: (() => {
-    const title = "갈림길.";
+    const title = '갈림길.';
     /**
      * @param {CharaTalk} treve トレヴ
      * @param {CharaTalk} you プレイヤー
@@ -651,7 +670,9 @@ module.exports = {
           treve.sex
         }는 프랑스를 짊어진 ${treve.teen_sex_title}(으)로 이름 높았다.`,
       );
-      await era.printAndWait(`하지만 그렇다고 레이스 결과가 달라지는 것은 아니었다.`);
+      await era.printAndWait(
+        `하지만 그렇다고 레이스 결과가 달라지는 것은 아니었다.`,
+      );
       await era.printAndWait(
         `${treve.name}의 사유물이 작년보다 훨씬 늘어난 트레이너실. 더위가 스며드는 열기 속에서.`,
       );
@@ -662,8 +683,12 @@ module.exports = {
       await era.printAndWait(
         `눈앞의 컴퓨터에서는 봄과 초여름에 출전한 두 G1의 영상이 반복 재생되고 있었다.`,
       );
-      await era.printAndWait(`거리는 작년과 같았고, 주로 상태도 특별히 나쁘지 않았다.`);
-      await era.printAndWait(`그런데도 앞선 레이스에서는 이착, 그다음에는 삼착이었다.`);
+      await era.printAndWait(
+        `거리는 작년과 같았고, 주로 상태도 특별히 나쁘지 않았다.`,
+      );
+      await era.printAndWait(
+        `그런데도 앞선 레이스에서는 이착, 그다음에는 삼착이었다.`,
+      );
       await era.printAndWait(
         `${treve.name}는 연습을 계속하고 있었다. 하지만 뚜렷한 해결책이 없는 한, 연패를 노리는 다음 베르메유상도 불안했다.`,
       );
@@ -706,28 +731,28 @@ module.exports = {
         `${you.name}은(는) 일어서고서야 배가 고프다는 사실을 깨달았다.`,
       );
       await era.printAndWait(`（……홍차면 될까?）`);
-      await era.printAndWait(`찻잎 통이 놓인 선반. 가볍고 산뜻한 향이 머릿속 깊은 곳을 자극했다.`);
+      await era.printAndWait(
+        `찻잎 통이 놓인 선반. 가볍고 산뜻한 향이 머릿속 깊은 곳을 자극했다.`,
+      );
       await era.printAndWait(
         `머릿속이 텅 비는 듯 자연스럽게, ${you.name}은(는) 통 하나를 집었다.`,
       );
       await era.printAndWait(
         `안에는 거의 아무것도 없었다. 얼마 남지 않은 찻잎과 통에 밴 향뿐. 레몬 향이었다.`,
       );
-      await era.printAndWait(
-        `그날 이후 ${treve.name}는 이 차를 좋아했다.`,
-      );
+      await era.printAndWait(`그날 이후 ${treve.name}는 이 차를 좋아했다.`);
       await era.printAndWait(
         `가끔 트레이너실에 올 때면 이 차를 끓이는 일이 많았다.`,
       );
       await era.printAndWait(`가을이 오면 추운 날도 늘 것이다.`);
       await era.printAndWait(`${you.name}은(는) 말없이 통을 닫았다.`);
-      await you.say_and_wait("혼자 사러 갈까……", true);
+      await you.say_and_wait('혼자 사러 갈까……', true);
     };
     f.title = title;
     return f;
   })(),
   o_s_95_25: (() => {
-    const title = "다 써 버리고";
+    const title = '다 써 버리고';
     /**
      * @param {CharaTalk} treve トレヴ
      * @param {CharaTalk} you プレイヤー
@@ -739,7 +764,10 @@ module.exports = {
       await era.printAndWait(
         `그 찻잎 가게로 들어가자 주인은 ${you.name}을(를) 보고 다시 눈썹을 치켜올렸다.`,
       );
-      await you.say_as_passer_by_and_wait("찻잎 가게 주인", "음? 이번에는 혼자인가?");
+      await you.say_as_passer_by_and_wait(
+        '찻잎 가게 주인',
+        '음? 이번에는 혼자인가?',
+      );
       era.printButton(`「신경 쓰지 마.」`, 1);
       await era.input();
       await era.printAndWait(
@@ -751,12 +779,14 @@ module.exports = {
       await era.printAndWait(
         `그 순서대로 L(lemon)까지 왔을 때, ${you.name}의 손가락이 가리킨 곳은 빈 선반이었다.`,
       );
-      await era.printAndWait(`구불구불한 선반 사이를 빠져나와 주인을 바라보았다.`);
+      await era.printAndWait(
+        `구불구불한 선반 사이를 빠져나와 주인을 바라보았다.`,
+      );
       era.printButton(`「……레몬 향은 없어?」`, 1);
       await era.input();
       await you.say_as_passer_by_and_wait(
-        "찻잎 가게 주인",
-        "아, 이 계절에는 생산이 잘 안돼. 프랑스 브랜드라 원래도 유통량이 적고. 예약금 받은 물량이 조금 남아 있을 뿐이야.",
+        '찻잎 가게 주인',
+        '아, 이 계절에는 생산이 잘 안돼. 프랑스 브랜드라 원래도 유통량이 적고. 예약금 받은 물량이 조금 남아 있을 뿐이야.',
       );
       await era.printAndWait(
         `그 말이 맞았다. 이 제품은 이 남자의 가게 말고는 본 적이 없었다.`,
@@ -764,8 +794,8 @@ module.exports = {
       era.printButton(`「입고 예정은?」`, 1);
       await era.input();
       await you.say_as_passer_by_and_wait(
-        "찻잎 가게 주인",
-        "당분간 없어. 도매상에도 재고가 없다는군.",
+        '찻잎 가게 주인',
+        '당분간 없어. 도매상에도 재고가 없다는군.',
       );
       era.printButton(`「그렇군——아니, 고마워.」`, 1);
       await era.input();
@@ -773,18 +803,18 @@ module.exports = {
         `${you.name}은(는) 그대로 가게를 나가려다가 한마디에 붙잡혔다.`,
       );
       await you.say_as_passer_by_and_wait(
-        "찻잎 가게 주인",
+        '찻잎 가게 주인',
         `${treve.sex}는 잘 지내나?`,
       );
       await era.printAndWait(`그렇다고도, 아니라고도 할 수 없었다.`);
       await era.printAndWait(
         `${treve.name}가 G1에서 아깝게 패배한 일을 실제로 어떻게 생각하는지, ${you.name}은(는) 잘 알지 못했다.`,
       );
-      await you.say_and_wait("도움이 되지 못하는 트레이너였다.", true);
+      await you.say_and_wait('도움이 되지 못하는 트레이너였다.', true);
       await era.printAndWait(`남자는 계산대에서 안절부절못했다.`);
       await you.say_as_passer_by_and_wait(
-        "찻잎 가게 주인",
-        "자네는 그나마 괜찮아. 나는 그쪽 상태가 더 걱정일세. 다른 가게에 그 차가 있는지 물어봐 두지.",
+        '찻잎 가게 주인',
+        '자네는 그나마 괜찮아. 나는 그쪽 상태가 더 걱정일세. 다른 가게에 그 차가 있는지 물어봐 두지.',
       );
       era.printButton(`「기억하고 있었어?」`, 1);
       await era.input();
@@ -792,28 +822,32 @@ module.exports = {
         `그 차가 ${treve.name}의 취향이라고 언론에 밝힌 기억은 없었다. 하지만 남자는 쓴웃음을 지으며 말했다.`,
       );
       await you.say_as_passer_by_and_wait(
-        "찻잎 가게 주인",
-        "단골이 데려온 손님인데 잊을 수가 있겠나.",
+        '찻잎 가게 주인',
+        '단골이 데려온 손님인데 잊을 수가 있겠나.',
       );
       era.printButton(`「정말이지……」`, 1);
       await era.input();
       await you.say_as_passer_by_and_wait(
-        "찻잎 가게 주인",
+        '찻잎 가게 주인',
         `뭐, 내가 ${treve.sex}의 팬이기도 하지만……`,
       );
-      await era.printAndWait(`남자는 휴대전화 화면을 두드리며 묘한 표정으로 중얼거렸다.`);
+      await era.printAndWait(
+        `남자는 휴대전화 화면을 두드리며 묘한 표정으로 중얼거렸다.`,
+      );
       await era.printAndWait(
         `${treve.name}는 많은 사람의 기대를 짊어지고 있었다. 자신이 할 수 있는 일을 하려고 애쓰는 사람들도 있었다.`,
       );
       await era.printAndWait(`다시 한번 ${you.name}은(는) 물어야 했다.`);
       await era.printAndWait(`왜 자신은 ${treve.name}의 트레이너인가.`);
-      await era.printAndWait(`${you.name}은(는) 어떻게 나아가야 할지 알 수 없었다.`);
+      await era.printAndWait(
+        `${you.name}은(는) 어떻게 나아가야 할지 알 수 없었다.`,
+      );
     };
     f.title = title;
     return f;
   })(),
   we_95_28: (() => {
-    const title = "정상 아래에서";
+    const title = '정상 아래에서';
     /**
      * @param {CharaTalk} treve トレヴ
      * @param {CharaTalk} montjeu モンジュー
@@ -823,15 +857,19 @@ module.exports = {
       await era.printAndWait(
         `정신을 차려보니 ${you.name}은(는) 이미 샹젤리제 거리를 걷고 있었다.`,
       );
-      await era.printAndWait(`동쪽 하늘로 달이 떠오르고, 어둠이 짙어지는 거리에 가로등이 하나둘 켜졌다.`);
-      await montjeu.say_and_wait("답은 찾았나?");
+      await era.printAndWait(
+        `동쪽 하늘로 달이 떠오르고, 어둠이 짙어지는 거리에 가로등이 하나둘 켜졌다.`,
+      );
+      await montjeu.say_and_wait('답은 찾았나?');
       await era.printAndWait(
         `고개를 저었다. 하지만 ${montjeu.name}는 이미 예상했다는 듯 타하지 않고 조용히 말을 이어갔다.`,
       );
-      await montjeu.say_and_wait("그렇다면——");
+      await montjeu.say_and_wait('그렇다면——');
       era.printButton(`「잠깐.」`, 1);
       await era.input();
-      await era.printAndWait(`${you.name}은(는) ${montjeu.sex}의 눈을 똑바로 응시했다.`);
+      await era.printAndWait(
+        `${you.name}은(는) ${montjeu.sex}의 눈을 똑바로 응시했다.`,
+      );
       await era.printAndWait(
         `몇 년 전이든 반년 전이든, 도저히 정면으로 마주할 수 없었던 ${montjeu.sex}의 눈이었다.`,
       );
@@ -853,13 +891,13 @@ module.exports = {
         `이윽고 ${montjeu.sex}는 두세 걸음 걸어가 ${you.name}을(를) 이끌며 벤치에 앉았다.`,
       );
       await era.printAndWait(`곁에 앉자, ${montjeu.name}가 서두를 꺼냈다.`);
-      await montjeu.say_and_wait("내 앞에서 듣기 좋은 말만 늘어놓아 봐야……");
+      await montjeu.say_and_wait('내 앞에서 듣기 좋은 말만 늘어놓아 봐야……');
       era.printButton(
         `「그런 날이 오면, ${treve.name}에게도 똑같이 말할 거야.」`,
         1,
       );
       await era.input();
-      await montjeu.say_and_wait("……알겠어.");
+      await montjeu.say_and_wait('……알겠어.');
       await era.printAndWait(
         `${you.name}은(는) 그렇게 함으로써 자신과 마주하고자 했다.`,
       );
@@ -899,13 +937,13 @@ module.exports = {
       await montjeu.say_and_wait(
         `그런데 그 타고난 성질이 ${treve.sex}의 가치관을 만들었다면, 넌 어떻게 생각해?`,
       );
-      await era.printAndWait(`${montjeu.name}는 시선을 ${you.name}에게 돌렸다.`);
+      await era.printAndWait(
+        `${montjeu.name}는 시선을 ${you.name}에게 돌렸다.`,
+      );
       await era.printAndWait(
         `기대란 본래 귀한 것이다. 끊임없는 노력과 뛰어난 성과가 있어야 비로소 얻을 수 있는 것이지, 당연한 것이 아니다.`,
       );
-      await era.printAndWait(
-        `하지만 ${treve.name}에게는 그것이 당연했다.`,
-      );
+      await era.printAndWait(`하지만 ${treve.name}에게는 그것이 당연했다.`);
       await era.printAndWait(
         `${
           treve.sex
@@ -938,7 +976,7 @@ module.exports = {
       await era.printAndWait(
         `앞으로도 계속 『고통』에 시달릴 사람에 대한 연민일까.`,
       );
-      await montjeu.say_and_wait("내 역할은 여기까지야.");
+      await montjeu.say_and_wait('내 역할은 여기까지야.');
       era.printButton(`「……죄송합니다.」`, 1);
       await era.input();
       await era.printAndWait(
@@ -968,7 +1006,9 @@ module.exports = {
       await era.printAndWait(
         `${treve.name}가 잘 풀리지 않는 이유를 하나씩 짚어 보았다. 하지만 그 밖에도 문제가 있었다.`,
       );
-      await era.printAndWait(`${you.name}은(는) 최근 레이스의 최종 직선을 다시 보았다.`);
+      await era.printAndWait(
+        `${you.name}은(는) 최근 레이스의 최종 직선을 다시 보았다.`,
+      );
       await era.printAndWait(
         `${treve.name}는 이전처럼 선두 집단에서 앞으로 빠져나가려 애쓰고 있었다.`,
       );
@@ -998,7 +1038,7 @@ module.exports = {
     return f;
   })(),
   we_95_33: (() => {
-    const title = "오직, 단 하나";
+    const title = '오직, 단 하나';
     /**
      * @param {CharaTalk} treve トレヴ
      * @param {CharaTalk} montjeu モンジュー
@@ -1009,7 +1049,9 @@ module.exports = {
       await era.printAndWait(
         `그날 이후로 ${treve.name}가 ${you.name}의 곁에 오지 않는 날이 늘었다.`,
       );
-      await era.printAndWait(`연락도 서서히 끊겨, 최근에는 편지가 왔다는 알림조차 받지 못했다.`);
+      await era.printAndWait(
+        `연락도 서서히 끊겨, 최근에는 편지가 왔다는 알림조차 받지 못했다.`,
+      );
       await era.printAndWait(`이런 상황에서 ${you.name}은(는)……`);
       era.printButton(`심하게 나무랄 자격 따위는 없겠지.`, 1);
       era.printButton(`가만히 내버려 둘 수는 없다.`, 2);
@@ -1109,11 +1151,10 @@ module.exports = {
         await era.printAndWait(
           `『우리』에게는 없는 가능성을 안고 태어난 『${treve.couple_title}』과 만난 날부터.`,
         );
-        await era.printAndWait(`한 사람의 인간으로서 ${you.name}은(는) 바랐다.`);
-        era.printButton(
-          `「${treve.name}, 내 영혼을 불태워 줘.」(연모+5)`,
-          1,
+        await era.printAndWait(
+          `한 사람의 인간으로서 ${you.name}은(는) 바랐다.`,
         );
+        era.printButton(`「${treve.name}, 내 영혼을 불태워 줘.」(연모+5)`, 1);
         await era.input();
         await era.printAndWait(
           `사람은 언젠가 자신의 모든 것을 바꿀 존재를 만난다.`,
@@ -1159,7 +1200,7 @@ module.exports = {
     return f;
   })(),
   prix_lat_win_senior: (() => {
-    const title = "정상으로, 그리고 다시 승리";
+    const title = '정상으로, 그리고 다시 승리';
     /**
      * @param {CharaTalk} treve トレヴ
      * @param {CharaTalk} montjeu モンジュー
@@ -1171,7 +1212,9 @@ module.exports = {
         `세계 최고봉의 ${treve.uma_sex_title}들을 맞이하는 이 레이스에 어울리는 날씨였다.`,
       );
       await era.printAndWait(`늘 입던 코트를 걸치고 왔지만 조금 더웠다.`);
-      await era.printAndWait(`관중석 맨 앞에서 난간을 붙잡는 것도 두 번째였다.`);
+      await era.printAndWait(
+        `관중석 맨 앞에서 난간을 붙잡는 것도 두 번째였다.`,
+      );
       await era.printAndWait(
         `시간은 눈 깜짝할 사이에 흐른 듯했지만, 이곳에 다시 서기까지 겪은 모든 일은 두 사람에게 꼭 필요한 것이었다.`,
       );
@@ -1180,7 +1223,9 @@ module.exports = {
         `그 모든 것이 ${you.name}이(가) 이곳에 있는 이유가 되어 지금 이 순간을 지탱하고 있었다.`,
       );
       await montjeu.say_and_wait(`이렇게 일찍 올 줄은 몰랐네.`);
-      await era.printAndWait(`마부 옆에 선 인물이 ${you.name}에게 미소를 지었다.`);
+      await era.printAndWait(
+        `마부 옆에 선 인물이 ${you.name}에게 미소를 지었다.`,
+      );
       await era.printAndWait(
         `${you.name}은(는) 마침내 ${montjeu.name}에게 그때의 답을 보여 줄 수 있겠다고 생각했다.`,
       );
@@ -1236,7 +1281,9 @@ module.exports = {
       await era.printAndWait(
         `실제로 선두 집단에 합류하는 데까지는 ${treve.name}도 성공했지만, 앞으로 나갈 길은 모두 막혀 있었다.`,
       );
-      await era.printAndWait(`분명 막혀 있었다——최종 직선에 들어가기 전까지는.`);
+      await era.printAndWait(
+        `분명 막혀 있었다——최종 직선에 들어가기 전까지는.`,
+      );
       await era.printAndWait(`코너를 돌아 레이스는 중반에 접어들었다.`);
       await era.printAndWait(
         `평소에는 선두 집단 앞에서 페이스를 만들었지만, ${treve.name}는 뒤로 밀려난 채 집단을 쫓고 있었다.`,
@@ -1298,9 +1345,7 @@ module.exports = {
       await era.printAndWait(
         `불안이 하나라도 남으면 ${treve.sex}에게 부담이 된다는 것을 ${you.name}은(는) 알고 있었다.`,
       );
-      await era.printAndWait(
-        `그렇기에 완벽한 상태로 ${treve.sex}를 내보냈다.`,
-      );
+      await era.printAndWait(`그렇기에 완벽한 상태로 ${treve.sex}를 내보냈다.`);
       await era.printAndWait(
         `선행책은 ${treve.name} 스스로 원했던 것이지만, 옆에 있는 ${you.name}은(는) 알고 있었다. ${treve.sex}의 다리에는 어떤 승부수에도 통할 힘이 있다는 것을.`,
       );
@@ -1323,7 +1368,9 @@ module.exports = {
       await era.printAndWait(
         `마지막 순간의 집중력은 날카롭게 벼린 칼끝처럼 선두를 겨누었다.`,
       );
-      await era.printAndWait(`${treve.name}는 바깥쪽에서 단숨에 치고 올라갔다.`);
+      await era.printAndWait(
+        `${treve.name}는 바깥쪽에서 단숨에 치고 올라갔다.`,
+      );
       await era.printAndWait(
         `지금까지와는 전혀 다른 전술에 관중들의 술렁임이 크게 번졌다.`,
       );
@@ -1334,7 +1381,9 @@ module.exports = {
       await era.printAndWait(
         `다만 포위망을 피하려면 일단 뒤로 물러났다가 다시 출발하는 우회로를 택할 수밖에 없었다.`,
       );
-      await era.printAndWait(`최종 직선에서 상대들이 틈을 내주는 것을 두려워한다는 점을 이용했다.`);
+      await era.printAndWait(
+        `최종 직선에서 상대들이 틈을 내주는 것을 두려워한다는 점을 이용했다.`,
+      );
       await era.printAndWait(`${treve.name}는 순식간에 선행 집단을 넘어섰다.`);
       await era.printAndWait(
         `전혀 예상할 수 없었던, ${treve.sex}의 선행책 이외의 기습이 달아나려는 상대들을 흔들었다.`,
@@ -1354,7 +1403,9 @@ module.exports = {
       await era.printAndWait(
         `그리고 피어난 모든 희망을 짊어지고 인간이 닿을 수 없는 곳으로 달려갔다.`,
       );
-      await era.printAndWait(`아무리 많은 소망을 잊어도, 마음 어딘가에서는 반드시 기억하고 있다.`);
+      await era.printAndWait(
+        `아무리 많은 소망을 잊어도, 마음 어딘가에서는 반드시 기억하고 있다.`,
+      );
       await era.printAndWait(`이 세상을 바꿀 빛을 줄곧 찾아 헤매던 누군가.`);
       await era.printAndWait(`그리고 마침내 ${treve.sex}와 만났다.`);
       await era.printAndWait(`${treve.name}의 외침이 들렸다.`);
@@ -1420,7 +1471,7 @@ module.exports = {
     return f;
   })(),
   we_95_42: (() => {
-    const title = "영원히 당신의 것";
+    const title = '영원히 당신의 것';
     /**
      * @param {CharaTalk} treve トレヴ
      * @param {CharaTalk} you プレイヤー
@@ -1477,7 +1528,9 @@ module.exports = {
       await era.printAndWait(
         `그때의 아이는 자랐다. 키가 커지고 점점 늘씬한 모델 같은 체형이 되어 가고 있었다.`,
       );
-      await era.printAndWait(`머리카락은 끝까지 가지런히 정돈되어 인형처럼 단정했다.`);
+      await era.printAndWait(
+        `머리카락은 끝까지 가지런히 정돈되어 인형처럼 단정했다.`,
+      );
       await era.printAndWait(`그야말로 미인이었다.`);
       await treve.say_and_wait(`${callname}。`);
       await treve.say_and_wait(`돌아가고 싶지 않아요.`);
@@ -1506,14 +1559,18 @@ module.exports = {
           `그것이 ${you.name}이(가) 바라던 모습인데도 왠지 보고 있을 수가 없었다.`,
         );
         await era.printAndWait(`왜일까. 아니, 이유는 명백했다.`);
-        await era.printAndWait(`——몸과 마음을 꿰뚫는 허탈감이 천천히 안쪽을 태웠다.`);
+        await era.printAndWait(
+          `——몸과 마음을 꿰뚫는 허탈감이 천천히 안쪽을 태웠다.`,
+        );
         await era.printAndWait(
           `손을 뻗지 않아도 괜찮을까. 어디선가 그런 목소리가 들렸다.`,
         );
         await era.printAndWait(
           `뻗고 싶었지만 ${you.name} 스스로 주저했다. 결국 ${you.name}은(는) 아무것도 하지 않았다.`,
         );
-        await era.printAndWait(`${you.name}은(는) 마음을 돌리려는 듯 집으로 돌아갔다.`);
+        await era.printAndWait(
+          `${you.name}은(는) 마음을 돌리려는 듯 집으로 돌아갔다.`,
+        );
       } else {
         era.drawLine();
         await era.printAndWait(
@@ -1539,7 +1596,9 @@ module.exports = {
         await era.printAndWait(
           `문득 돌아보니 사람들 사이에 섞인 ${treve.sex}의 얼굴에는 진흙 속에 핀 꽃처럼 아름다운 미소가 있었다.`,
         );
-        await era.printAndWait(`휴일이라 행인이 많았다. 가족 단위로 나온 사람들도 많았다.`);
+        await era.printAndWait(
+          `휴일이라 행인이 많았다. 가족 단위로 나온 사람들도 많았다.`,
+        );
         await era.printAndWait(
           `엄마 손을 잡은 아이가 두리번거리며 주변을 구경하고 있었다. ${treve.name}는 그 아이에게서 좀처럼 눈을 떼지 못했다.`,
         );
@@ -1581,7 +1640,7 @@ module.exports = {
         await treve.say_and_wait(
           `${treve.couple_title}에게는 큰 무대예요. 그 무대를 위해 준비하고 이곳에 와요. 자신의 영혼을 걸어요. 그러니까——`,
         );
-        await you.say_and_wait("골인했네.", true);
+        await you.say_and_wait('골인했네.', true);
         era.printButton(`「……그런가?」`, 1);
         await era.input();
         await era.printAndWait(
@@ -1615,21 +1674,27 @@ module.exports = {
           `나라나 인종 같은 건 잘 모르겠어요. 하지만 트레이너님과 함께라면 즐거울 것 같아요.`,
         );
         await era.printAndWait(`이것이 ${you.name}의 죄목이었다.`);
-        await era.printAndWait(`가슴이 희미하게 아파 왔지만 ${you.name}은(는) 아무렇지 않은 척했다.`);
+        await era.printAndWait(
+          `가슴이 희미하게 아파 왔지만 ${you.name}은(는) 아무렇지 않은 척했다.`,
+        );
         await treve.say_and_wait(`사랑해요.`);
         await treve.say_and_wait(`언제까지나 사랑해요.`);
         await era.printAndWait(`말은 막힘없이 흘러나왔다.`);
         await era.printAndWait(
           `몇 번이나 연습했을 것이 틀림없었다. ${you.name}을(를) 위해, 일부러.`,
         );
-        await era.printAndWait(`머릿속이 새하얘졌다. 가슴이 두근거렸다. 숨도 거칠어진 걸까.`);
+        await era.printAndWait(
+          `머릿속이 새하얘졌다. 가슴이 두근거렸다. 숨도 거칠어진 걸까.`,
+        );
         await era.printAndWait(
           `${treve.sex}가 속마음을 드러낼 때마다 ${you.name}의 마음도 드러났다.`,
         );
         await era.printAndWait(
           `실타래를 풀듯 ${treve.name}의 말은 장막을 한 겹씩 벗겨 ${you.name}의 마음까지 숨김없이 드러냈다.`,
         );
-        await era.printAndWait(`${you.name}은(는) 어찌할 수 없는 안타까움을 느꼈다.`);
+        await era.printAndWait(
+          `${you.name}은(는) 어찌할 수 없는 안타까움을 느꼈다.`,
+        );
         await era.printAndWait(`${treve.name}는 거듭 말을 이었다.`);
         await treve.say_and_wait(
           `……저기, ${
@@ -1701,7 +1766,9 @@ module.exports = {
         await era.printAndWait(
           `${you.name}은(는) ${treve.name}가 등 뒤로 떠나는 발소리를 들었다.`,
         );
-        await era.printAndWait(`${you.name}은(는) 비틀거리며 도쿄 경마장으로 왔다.`);
+        await era.printAndWait(
+          `${you.name}은(는) 비틀거리며 도쿄 경마장으로 왔다.`,
+        );
         await era.printAndWait(
           `경마장은 차가웠다. 주변의 소란이 되살아나는 듯했다. 차가 달리는 소리와 나뭇잎 흔들리는 소리.`,
         );
@@ -1714,7 +1781,9 @@ module.exports = {
         era.printButton(`「잊어 줘……」`, 1);
         await era.input();
         await era.printAndWait(`——몇 분이나 지났을까.`);
-        await era.printAndWait(`하늘은 이미 어두워졌다. 밤이 도쿄 경마장에 내려앉았다.`);
+        await era.printAndWait(
+          `하늘은 이미 어두워졌다. 밤이 도쿄 경마장에 내려앉았다.`,
+        );
         await era.printAndWait(`방송을 들으니 곧 문을 닫을 시간인 듯했다.`);
         await era.printAndWait(`가슴에 구멍이 뚫린 것 같았다.`);
         await era.printAndWait(
@@ -1770,11 +1839,11 @@ module.exports = {
         await era.input();
         await era.printAndWait([
           you.get_colored_name(),
-          "은(는) 정말로 ",
+          '은(는) 정말로 ',
           treve.uma_sex_title,
-          " 특유의 괴력에 짓눌릴 것 같아 ",
+          ' 특유의 괴력에 짓눌릴 것 같아 ',
           treve.get_colored_name(),
-          "의 등을 가볍게 두드렸다.",
+          '의 등을 가볍게 두드렸다.',
         ]);
         await era.printAndWait(
           `『abandonne』(그만해)라고 말했는데도 ${treve.name}는 조금도 떨어지려 하지 않았다. 통곡하는 ${treve.sex}는 오히려 팔에 힘을 더 주었다.`,
@@ -1806,9 +1875,14 @@ module.exports = {
         );
         await treve.say_and_wait(`대담하네요……`);
         await treve.say_and_wait(`밖에서라니…… 그래도 당신이라면——`);
-        era.printButton(`「이상한 소리 하지 마! 결혼 이야기를 한 게 아니잖아!」`, 1);
+        era.printButton(
+          `「이상한 소리 하지 마! 결혼 이야기를 한 게 아니잖아!」`,
+          1,
+        );
         await era.input();
-        await treve.say_and_wait(`그러니까 먼저 연인이 되자는 거군요. 감동했어요!`);
+        await treve.say_and_wait(
+          `그러니까 먼저 연인이 되자는 거군요. 감동했어요!`,
+        );
         await treve.say_and_wait(
           `주변 사람들도 분명 이해하고 받아들여 줄 거예요! 안 그러면 아이가 정말 힘들어질 테니까요!`,
         );
@@ -1889,7 +1963,9 @@ module.exports = {
         await era.printAndWait(
           `${you.name}은(는) 자신보다 열 살 어린 ${treve.child_sex_title}를 울리고 말았다.`,
         );
-        await era.printAndWait(`밤은 조금 쌀쌀했다. 낮에 더웠기에 옷차림도 얇았다.`);
+        await era.printAndWait(
+          `밤은 조금 쌀쌀했다. 낮에 더웠기에 옷차림도 얇았다.`,
+        );
         await era.printAndWait(
           `그래도 둘이 기대앉아 작은 벌레들처럼 서로의 체온을 나누면 춥지 않았다.`,
         );
@@ -1908,9 +1984,7 @@ module.exports = {
         await era.printAndWait(
           `${treve.sex}는 ${you.name}의 말대로 함께 걸었다.`,
         );
-        await era.printAndWait(
-          `반짝이는 조명이 두 사람의 뒷모습을 비췄다.`,
-        );
+        await era.printAndWait(`반짝이는 조명이 두 사람의 뒷모습을 비췄다.`);
         era.drawLine();
         era.printButton(`「${treve.name}, 이게 도대체 무슨……!?」`, 1);
         await era.input();
@@ -1996,9 +2070,7 @@ module.exports = {
         `어둠 속에서 눈을 뜨자 낯선, 아니 완전히 낯설지만은 않은 천장이 보였다.`,
       );
       await era.printAndWait(`머리가 붕 뜬 것 같아 상황이 이해되지 않았다.`);
-      await era.printAndWait(
-        `늘 있던 곳과는 전혀 다른 장소에 있는 듯했다.`,
-      );
+      await era.printAndWait(`늘 있던 곳과는 전혀 다른 장소에 있는 듯했다.`);
       await era.printAndWait(
         `멍한 머리로 허공을 바라보고 있으니 은은한 향기가 코끝을 스쳤다.`,
       );
@@ -2010,7 +2082,9 @@ module.exports = {
         `그리고 ${treve.sex}의 얼굴에는 아기를 바라보듯 다정한 미소가 떠올라 있었다.`,
       );
       await treve.say_and_wait(`봉주르, 잘 주무셨어요?`);
-      await era.printAndWait(`어루만지는 듯한 부드러운 목소리에 다시 졸음이 밀려왔다.`);
+      await era.printAndWait(
+        `어루만지는 듯한 부드러운 목소리에 다시 졸음이 밀려왔다.`,
+      );
       await era.printAndWait(
         `상대의 얼굴을 보고서야 ${you.name}은(는) 겨우 상황을 이해하고 정신을 차리려 했다.`,
       );
@@ -2050,7 +2124,9 @@ module.exports = {
         `참치와 안초비, 올리브 등을 넣어 푸짐하게 만든 샐러드.`,
       );
       await era.printAndWait(`따끈하고 진한 수프가 근사한 향을 풍겼다.`);
-      await era.printAndWait(`어느 것 하나 눈길을 끌지 않는 것이 없었지만, 유독 두드러지는 음식이 있었다.`);
+      await era.printAndWait(
+        `어느 것 하나 눈길을 끌지 않는 것이 없었지만, 유독 두드러지는 음식이 있었다.`,
+      );
       await era.printAndWait(`두툼한 햄과 치즈를 듬뿍 넣은 핫 샌드위치.`);
       await era.printAndWait(
         `${treve.name}에게 「잘 먹겠습니다」라고 말한 뒤 허겁지겁 먹기 시작했다.`,
@@ -2068,15 +2144,11 @@ module.exports = {
         `하지만 이 정도로 재현해 내다니, 역시 ${treve.sex}답다.`,
       );
       await treve.say_and_wait(`……${callname}, 상을 줄 거지?`);
-      await era.printAndWait(
-        `미소 짓던 ${treve.name}이 이내 입을 벌린다.`,
-      );
+      await era.printAndWait(`미소 짓던 ${treve.name}이 이내 입을 벌린다.`);
       await era.printAndWait(
         `${you.name}은 선명하게 붉은 입안과 혀를 보고, 어째서인지 심장이 멎는 듯하다.`,
       );
-      await era.printAndWait(
-        `봐서는 안 될 것을 보는 듯한 죄책감이 든다.`,
-      );
+      await era.printAndWait(`봐서는 안 될 것을 보는 듯한 죄책감이 든다.`);
       await treve.say_and_wait(`아……♪`);
       await era.printAndWait(
         `그렇게 ${treve.name}은 귀와 꼬리를 움직이며, 기대에 차서 ${you.name}을 바라본다.`,
@@ -2115,18 +2187,24 @@ module.exports = {
       await era.printAndWait(
         `${treve.name}은 활짝 웃으며 고마움을 전하고, 혀로 입술을 한 바퀴 훑는다.`,
       );
-      await era.printAndWait(`${you.name}은 젖은 손가락을 의식하지 않을 수 없다.`);
-      await era.printAndWait(`${treve.name}은 그 모습을 보며, 작게 중얼거린다.`);
+      await era.printAndWait(
+        `${you.name}은 젖은 손가락을 의식하지 않을 수 없다.`,
+      );
+      await era.printAndWait(
+        `${treve.name}은 그 모습을 보며, 작게 중얼거린다.`,
+      );
       await treve.say_and_wait(`……버릇될 것 같아.`);
       await era.printAndWait(`못 들은 척하자.`);
       era.drawLine();
       await treve.say_and_wait(`……또 밤까지 일하고 계셨네요.`);
-      await era.printAndWait(`양어깨에 따뜻한 손이 얹히고 위에서 목소리가 들렸다.`);
+      await era.printAndWait(
+        `양어깨에 따뜻한 손이 얹히고 위에서 목소리가 들렸다.`,
+      );
       await era.printAndWait(
         `올려다보니 목욕한 뒤의 온기가 남아 있는 ${treve.name}가 진지한 눈으로 ${you.name}을(를) 내려다보고 있었다.`,
       );
       await era.printAndWait(`이제 시간이 됐다. 방으로 돌아가야 했다.`);
-      era.printButton("「오늘은 잘게. 잘 자, 베누스 파크.」", 1);
+      era.printButton('「오늘은 잘게. 잘 자, 베누스 파크.」', 1);
       await era.input();
       await treve.say_and_wait(`아……`);
       await era.printAndWait(`옷자락이 당겨졌다.`);
@@ -2148,10 +2226,10 @@ module.exports = {
       );
       await era.printAndWait(`성녀처럼 맑은 ${treve.sex}。`);
       await era.printAndWait(`여신처럼 고결한 ${treve.sex}。`);
+      await era.printAndWait(`조금은 칠칠맞고 의외로 친근한 ${treve.sex}。`);
       await era.printAndWait(
-        `조금은 칠칠맞고 의외로 친근한 ${treve.sex}。`,
+        `그리고 남들보다 외로움을 많이 타는 ${treve.sex}。`,
       );
-      await era.printAndWait(`그리고 남들보다 외로움을 많이 타는 ${treve.sex}。`);
       era.printButton(`「네가 곁에 있어 주기만 한다면——」`, 1);
       await era.input();
       await era.printAndWait(`간결하고 분명하게 전했다.`);
@@ -2189,7 +2267,9 @@ module.exports = {
         `살며시 손을 ${you.name}의 양 볼에 대고 가만히 ${you.name}을(를) 바라보았다.`,
       );
       await treve.say_and_wait(`어쩔 수 없네요. 알겠어요. 당신 곁에 설게요.`);
-      await era.printAndWait(`그렇게 말하며 ${treve.name}는 얼굴을 더 가까이 가져왔다.`);
+      await era.printAndWait(
+        `그렇게 말하며 ${treve.name}는 얼굴을 더 가까이 가져왔다.`,
+      );
       await era.printAndWait(
         `눈앞에는 ${treve.sex}의 단정한 얼굴이 있었다. 달콤한 향기가 피부에 온기를 느낄 만큼 가까이 다가왔다.`,
       );
@@ -2219,34 +2299,60 @@ module.exports = {
     return f;
   })(),
   crazy_fan_end: (() => {
-    const title = "낯선 이국의 공주";
+    const title = '낯선 이국의 공주';
     /**
      * @param {CharaTalk} treve トレヴ
      * @param {CharaTalk} montjeu モンジュー
      * @param {CharaTalk} you プレイヤー
      */
     const f = async (treve, montjeu, you) => {
-      await era.printAndWait(["마침내, 어느 순간을 경계로 ", you.get_colored_name(), "과(와) ", treve.get_colored_name(), "의 연락은 완전히 끊어졌다."]);
+      await era.printAndWait([
+        '마침내, 어느 순간을 경계로 ',
+        you.get_colored_name(),
+        '과(와) ',
+        treve.get_colored_name(),
+        '의 연락은 완전히 끊어졌다.',
+      ]);
       await era.printAndWait(
-        "담당은 트레이너를 만나고 싶어 하지 않았고, 트레이너는 담당을 만날 엄두를 내지 못했다.",
+        '담당은 트레이너를 만나고 싶어 하지 않았고, 트레이너는 담당을 만날 엄두를 내지 못했다.',
       );
-      await era.printAndWait(["하지만 여러 가지 영향을 고려한 탓인지, ", you.get_colored_name(), "과(와) ", treve.get_colored_name(), "의 계약을 이어받겠다고 나서는 사람은 없었다."]);
-      await era.printAndWait(["아무래도 ", montjeu.get_colored_name(), "가 다시 한 번 프랑스의 공주를 돌보는 중책을 짊어진 것 같았다."]);
+      await era.printAndWait([
+        '하지만 여러 가지 영향을 고려한 탓인지, ',
+        you.get_colored_name(),
+        '과(와) ',
+        treve.get_colored_name(),
+        '의 계약을 이어받겠다고 나서는 사람은 없었다.',
+      ]);
+      await era.printAndWait([
+        '아무래도 ',
+        montjeu.get_colored_name(),
+        '가 다시 한 번 프랑스의 공주를 돌보는 중책을 짊어진 것 같았다.',
+      ]);
       era.println();
       await era.printAndWait([
-        "공적인 일로 우연히 ",
+        '공적인 일로 우연히 ',
         montjeu.get_colored_name(),
-        "와 만났을 때 ",
+        '와 만났을 때 ',
         you.get_colored_name(),
-        "이(가) 받은 것은 비난이 아니라 ",
+        '이(가) 받은 것은 비난이 아니라 ',
       ]);
-      await era.printAndWait("——동정 어린 시선이었다.");
-      await era.printAndWait([you.get_colored_name(), "은(는) 서둘러 인사를 한 뒤 자리를 떠날 수밖에 없었다."]);
+      await era.printAndWait('——동정 어린 시선이었다.');
+      await era.printAndWait([
+        you.get_colored_name(),
+        '은(는) 서둘러 인사를 한 뒤 자리를 떠날 수밖에 없었다.',
+      ]);
       await era.printAndWait(
-        "이 영문을 알 수 없는 동정에 불안함을 느꼈기 때문일까, 아니면 두려웠기 때문일까……",
+        '이 영문을 알 수 없는 동정에 불안함을 느꼈기 때문일까, 아니면 두려웠기 때문일까……',
       );
-      await era.printAndWait("어느 기자와 공주의 결말과 비슷하면서도 사뭇 달랐다.");
-      await era.printAndWait([you.get_colored_name(), "과(와) ", treve.get_colored_name(), "는 두 번 다시 만나지 않았다."]);
+      await era.printAndWait(
+        '어느 기자와 공주의 결말과 비슷하면서도 사뭇 달랐다.',
+      );
+      await era.printAndWait([
+        you.get_colored_name(),
+        '과(와) ',
+        treve.get_colored_name(),
+        '는 두 번 다시 만나지 않았다.',
+      ]);
     };
     f.title = title;
     return f;
