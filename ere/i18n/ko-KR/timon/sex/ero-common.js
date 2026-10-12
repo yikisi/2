@@ -1417,7 +1417,7 @@ module.exports = {
       await attacker.print_and_wait('정말 이것만으로 괜찮은 걸까……');
       await attacker.print_and_wait([
         attacker.child_sex_title,
-        'の手に肉棒を包まれて扱かれるだけで満足できる……？',
+        '의 손에 자지가 감싸여 문질러지기만 해도 만족할 수 있을까……？',
       ]);
       await attacker.print_and_wait('……');
       await attacker.print_and_wait('정말……달리 하고 싶은 건 없는 걸까……');
@@ -1457,7 +1457,7 @@ module.exports = {
       await defender.print_and_wait('정말 이것만으로 괜찮은 걸까……');
       await defender.print_and_wait([
         defender.child_sex_title,
-        'の手に肉棒を包まれて扱かれるだけで満足できる……？',
+        '의 손에 자지가 감싸여 문질러지기만 해도 만족할 수 있을까……？',
       ]);
       await defender.print_and_wait('……');
       await defender.print_and_wait('정말……달리 하고 싶은 건 없는 걸까……');
@@ -1500,7 +1500,7 @@ module.exports = {
       await defender.print_and_wait('정말 이것만으로 괜찮은 걸까……');
       await defender.print_and_wait([
         defender.child_sex_title,
-        'の手に肉棒を包まれて扱かれるだけで満足できる……？',
+        '의 손에 자지가 감싸여 문질러지기만 해도 만족할 수 있을까……？',
       ]);
       await defender.print_and_wait('……');
       await defender.print_and_wait('정말……달리 하고 싶은 건 없는 걸까……');

@@ -715,7 +715,7 @@ module.exports = {
       await era.printAndWait(['오늘, 트레센 도박 전설이 세상을 뒤흔든다!']);
       await era.printAndWait(['여러분, 기대하시라!']);
 
-      era.drawLine({ content: '三女神像の前' });
+      era.drawLine({ content: '삼여신상 앞' });
       await acute.say_and_wait([
         '그래서, ',
         you.actual_name,
@@ -750,7 +750,7 @@ module.exports = {
         '이(가) 오기 전까지는.',
       ]);
 
-      era.drawLine({ content: 'トレセン教職員執務室' });
+      era.drawLine({ content: '트레센 교직원 집무실' });
       await minoru.used_to_say_and_wait([
         '호오…… 1980년 서독에서 수입한 최신 기술, 투시가 가능한 X선 안경이군요……',
       ]);
@@ -787,7 +787,7 @@ module.exports = {
         ' 님, 저와 한 판 하시겠어요?',
       ]);
 
-      era.drawLine({ content: '三女神像の前' });
+      era.drawLine({ content: '삼여신상 앞' });
       await acute.say_and_wait([
         '음…… ',
         call_301,
@@ -814,7 +814,7 @@ module.exports = {
       ]);
       await era.printAndWait(['그건……']);
 
-      era.drawLine({ content: 'トレセン教職員執務室' });
+      era.drawLine({ content: '트레센 교직원 집무실' });
       await era.printAndWait([
         you.get_colored_name(),
         '이(가) 딴 돈이 「3000」 우마 코인까지 줄었을 때, ',
@@ -905,7 +905,7 @@ module.exports = {
         '의 쌍절곤이 되어 있었다.',
       ]);
 
-      era.drawLine({ content: '三女神像の前' });
+      era.drawLine({ content: '삼여신상 앞' });
       await acute.say_and_wait([
         '어머나…… 알몸이 보이는 안경을 쓰고, 알몸에는 관심이 없다고 말하다니. 감옥에 갈 일인 데다 죄질도 꽤 나쁘구나, ',
         callname,
@@ -1560,7 +1560,7 @@ module.exports = {
         callname,
         '은(는) 유난히 늦게 돌아온다.',
       ]);
-      era.drawLine({ content: 'トレセンの外・交番' });
+      era.drawLine({ content: '트레센 밖 · 파출소' });
       era.printButton(
         `「경찰관님, 믿어 주세요. 담당 ${acute.uma_sex_title}가 걱정돼서 뒤를 따라갔을 뿐이에요. 미행하는 변태가 아니라고요!」`,
         1,
@@ -1810,46 +1810,46 @@ module.exports = {
             '은(는) 고개를 들어 뒤에 서 있는 이쪽을 의아하게 바라본다.',
           ]);
           await era.printAndWait([
-            'そのとき、',
+            '그때, ',
             you.get_colored_name(),
-            ' の罪深い両手が ',
+            '의 죄 많은 두 손이 ',
             acute.get_colored_name(),
-            ' の体へ伸びる——',
+            '의 몸을 향해 뻗는다——',
           ]);
-          await era.printAndWait('——そっと摘む。');
-          await acute.say_and_wait('あっ？❤️');
+          await era.printAndWait('——살며시 주무른다.');
+          await acute.say_and_wait('앗?❤️');
           await era.printAndWait([
-            '小さな手で優しく揉むと、',
+            '작은 손으로 부드럽게 주무르자, ',
             acute.get_colored_name(),
-            ' の尻尾が、一瞬でピンと伸びる。',
+            '의 꼬리가 순식간에 꼿꼿이 선다.',
           ]);
           await era.printAndWait([
-            '……なるほど、ここが ',
+            '……그렇군, 여기가 ',
             acute.get_colored_name(),
-            ' の弱点か。',
+            '의 약점인가.',
           ]);
-          await acute.say_and_wait(['そ、それは❤️……', callname, '……これは？']);
+          await acute.say_and_wait(['그, 그건❤️……', callname, '……이건 뭐니?']);
           era.printButton(
-            `「動かないで、${acute.name}。ずっと忙しかったんだから、マッサージしてあげる。」`,
+            `「가만히 있어, ${acute.name}. 계속 바빴으니까 마사지해 줄게.」`,
             1,
           );
           await era.input();
-          await acute.say_and_wait('で、でもそこは……あっ❤️～');
+          await acute.say_and_wait('하, 하지만 거기는……앗❤️~');
           await era.printAndWait([
-            '少し強く摘むと、許しを乞うような声が ',
+            '조금 세게 주무르자 봐 달라는 듯한 목소리가 ',
             acute.get_colored_name(),
-            ' の口から漏れる。',
+            '의 입에서 새어 나온다.',
           ]);
           await era.printAndWait([
-            '力を入れるたび、',
+            '힘을 줄 때마다 ',
             acute.get_colored_name(),
-            ' は思わず短い声を上げる。',
+            '은(는) 자기도 모르게 짧은 소리를 낸다.',
           ]);
-          await era.printAndWait('なぜか、妙な興奮と背徳感がある。');
+          await era.printAndWait('어째서인지 묘한 흥분과 배덕감이 느껴진다.');
           await era.printAndWait([
-            'こうして、二人だけの休憩室で、',
+            '그렇게 단둘뿐인 휴게실에서 ',
             acute.get_colored_name(),
-            ' のマッサージを存分にした。',
+            '에게 마음껏 마사지를 해 주었다.',
           ]);
       }
       return [ret];
@@ -1997,52 +1997,59 @@ module.exports = {
       await era.printAndWait('【쏴아아아——】');
       await era.printAndWait('틈새로 물소리가 새어 나온다……');
       await you.say_and_wait('…………', true);
-      era.printButton('（まったく、油断しすぎだ。）', 1);
+      era.printButton('(정말이지, 너무 방심하는 거 아냐.)', 1);
       await era.input();
-      await era.printAndWait('ちょっと……見てみるか？');
+      await era.printAndWait('살짝……들여다볼까?');
       await era.printAndWait(
-        'こたつから苦労して這い出し、腹ばいで、よからぬ密事へ向かう。',
-      );
-      await era.printAndWait(
-        '居間を横切り、廊下を這い、反対側の浴室の前まで来る。',
+        '힘겹게 코타츠에서 기어 나와, 배를 깔고 엎드린 채 못된 일을 하러 향한다.',
       );
       await era.printAndWait(
-        '滴る水音が、目の前の隙間から聞こえる。軽く押せば、峰の輝きが望める。',
+        '거실을 가로질러 복도를 기어가, 맞은편 욕실 앞까지 다다른다.',
       );
-      await you.say_and_wait('もちろん、これは変態行為ではない。', true);
-      await you.say_and_wait(
-        ['ただ ', acute.get_colored_name(), ' は、風呂に三十分かかる。'],
-        true,
+      await era.printAndWait(
+        '눈앞의 틈새로 물방울 떨어지는 소리가 들린다. 살짝 밀기만 하면 봉우리의 자태를 볼 수 있다.',
       );
-      await you.say_and_wait('三十分待つなら、おとなしく待つしかない。', true);
+      await you.say_and_wait('물론, 이건 변태 짓이 아니다.', true);
       await you.say_and_wait(
         [
-          'だが三十分待つなら、なぜ ',
+          '그저 ',
           acute.get_colored_name(),
-          ' のいる浴室の前で待ってはいけないのか。',
+          '의 목욕에는 삼십 분이 걸릴 뿐이다.',
         ],
         true,
       );
       await you.say_and_wait(
-        '扉が閉まっていないので、閉めてあげようとして、うっかり中が見えてしまった——それくらい、合理的だろう～',
+        '삼십 분을 기다려야 한다면 얌전히 기다리는 수밖에.',
         true,
       );
-      await you.say_and_wait('おお———！', true);
-      await era.printAndWait('仙境の中、雲と霧が漂う。');
+      await you.say_and_wait(
+        [
+          '하지만 어차피 삼십 분을 기다릴 거라면, 왜 ',
+          acute.get_colored_name(),
+          '이(가) 있는 욕실 앞에서 기다리면 안 되는 걸까.',
+        ],
+        true,
+      );
+      await you.say_and_wait(
+        '문이 닫히지 않았길래 닫아 주려다가, 실수로 안이 보이고 말았다——그 정도면 합리적이지 않은가~',
+        true,
+      );
+      await you.say_and_wait('오오———!', true);
+      await era.printAndWait('선경에 구름과 안개가 감돈다.');
       await era.printAndWait(
-        '天から銀河の水が落ち、双峰を流れ、平らな湖を越え、浅葱へ入り、やがて大河へ帰る。',
+        '하늘에서 은하수가 쏟아져 두 봉우리를 타고 흐르고, 잔잔한 호수를 넘어 옅은 풀숲으로 스며들었다가, 마침내 큰 강으로 돌아간다.',
       );
       await era.printAndWait(
-        '古来、仁者は山を好む。白い谷、玉の峰、白い霧が雲を渡る。苦心した者だけが、頂へ登れる。',
+        '예부터 어진 이는 산을 좋아한다고 했다. 흰 골짜기와 옥빛 봉우리, 흰 안개가 구름을 건넌다. 애쓴 자만이 정상에 오를 수 있다.',
       );
       await era.printAndWait(
-        '智者は水を好む。灰色の髪の下に銀の流れ、滴る玉は髄となる。縁ある者だけが、味わえる。',
+        '지혜로운 이는 물을 좋아한다고 했다. 회색 머리칼 아래로 은빛 물줄기가 흐르고, 떨어지는 옥구슬은 진수가 된다. 인연 있는 자만이 맛볼 수 있다.',
       );
       await era.printAndWait(
-        'この仙人の景色は、光を盗む者だけのもの。平視でも充分、仰ぎ見ればさらにいい。一言で「いい」では足りない。',
+        "이 신선의 풍경은 몰래 엿보는 자만의 것. 눈높이에서 보아도 충분하지만, 올려다보면 더욱 좋다. 그저 '좋다'는 한마디로는 부족하다.",
       );
-      await you.say_and_wait('最高～～～～！', true);
-      era.printButton('（では、もう少し、もう少し近づいて……）', 1);
+      await you.say_and_wait('최고다~~~~!', true);
+      era.printButton('(그럼 조금만 더, 조금만 더 가까이……)', 1);
       await era.input();
       await era.printAndWait('그런데 그때, 덜컥 하며 휴게실 현관문이 열린다——');
       await minoru.say_and_wait([
@@ -2097,14 +2104,14 @@ module.exports = {
       await era.input();
       await era.printAndWait([
         you.get_colored_name(),
-        ' にバスローブを味わう余裕がないわけではない。ただ先ほど ',
+        '에게 목욕 가운을 감상할 여유가 없는 것은 아니다. 다만 조금 전 ',
         minoru.get_colored_name(),
-        ' に、「裸をもう一度見たら七孔から血を噴いて爆散死する」急所を封じられている。',
+        "에게 '알몸을 한 번 더 보면 칠공에서 피를 뿜고 폭사하는' 혈도를 짚였을 뿐이다.",
       ]);
       await era.printAndWait([
-        '命のためにも、',
+        '목숨을 위해서라도 ',
         acute.get_colored_name(),
-        ' には早く着替えてもらった方がいい——',
+        '에게 얼른 옷을 갈아입어 달라고 하는 게 좋겠다——',
       ]);
       await acute.say_and_wait(
         '연말 선물이냐고? 아니란다, 오늘은 발렌타인이잖니? 초콜릿을 서로 선물하는 날이지……',
@@ -2119,19 +2126,19 @@ module.exports = {
       );
       era.printButton('「으음…… 싫은 건 아닌데——」', 1);
       await era.input();
-      await era.printAndWait('……くそっ、これはもう誘惑だろう。');
+      await era.printAndWait('……젠장, 이건 그냥 유혹이잖아.');
       await era.printAndWait(
-        'トレーナー室で風呂に入り、バスローブでトレーナーの前を歩く。これは完全に「誘惑」だろう。',
+        "트레이너실에서 목욕하고, 목욕 가운 차림으로 트레이너 앞을 돌아다닌다. 이건 완전히 '유혹'이잖아.",
       );
       await era.printAndWait([
-        'それとも「あれ」か。「あれ」——したい≠同意、みたいな……',
+        "아니면 '그거'인가. 하고 싶다는 것과 동의한다는 건 다르다는, '그거'……",
       ]);
       await era.printAndWait([
-        'くそっ……一瞬の迷いがなければ、',
+        '젠장……그 순간 망설이지만 않았어도 ',
         minoru.get_colored_name(),
-        ' に急所を封じられることもなく、',
+        '에게 혈도를 짚이지 않고, ',
         you.get_colored_name(),
-        ' は今すぐ赤い形態に変身して無限の戦神を召喚していた……',
+        '은(는) 지금 당장 붉은 형태로 변신해 무한의 전신을 소환했을 텐데……',
       ]);
       await era.printAndWait('…………');
       await era.printAndWait('뭐, 됐다. 잡념은 여기까지만 하자.');
@@ -2185,14 +2192,14 @@ module.exports = {
         '은(는) 꽃다발을 안은 채 휴게실을 뛰쳐나갔다.',
       ]);
       await era.printAndWait('……물론 목욕 가운 차림 그대로.');
-      era.drawLine({ content: '校舎' });
+      era.drawLine({ content: '교사' });
       await acute.say_and_wait([call_48, '、', call_48, ', 큰일이란다!~']);
       await jordan.say_and_wait([
         '왜 그래, ',
         j_call_a,
         '——우와, 왜 유카타…… 아니, 목욕 가운을 입고 있어!?',
       ]);
-      era.drawLine({ content: '中庭' });
+      era.drawLine({ content: '중정' });
       await acute.say_and_wait([call_49, '、', call_49, ', 큰일이란다!~']);
       await festa.say_and_wait([
         '목욕 가운?…… 그 꽃다발은 내가 ',
@@ -2201,14 +2208,14 @@ module.exports = {
         f_call_a,
         '한테 줄 발렌타인 선물로 추천한 건데…… 그렇군. 전설의 권법가는 곧 은퇴하겠군——',
       ]);
-      era.drawLine({ content: 'トレセン学園 · 廊下' });
+      era.drawLine({ content: '트레센 학원 · 복도' });
       await acute.say_and_wait([call_19, '、', call_19, ', 큰일이란다!~']);
       await digital.say_and_wait([
         '에에엣!? 목욕 가운 차림으로 복도를 뛰어다니는 ',
         d_call_a,
         '!? 이것도 존귀해! 그런데 이 광경, 설마!?',
       ]);
-      era.drawLine({ content: '屋上' });
+      era.drawLine({ content: '옥상' });
       await era.printAndWait(
         '너덜너덜한 몸을 끌고, 겨우 옥상에서 목욕 가운 차림의 뒷모습을 따라잡았다.',
       );
@@ -2266,7 +2273,7 @@ module.exports = {
         acute.get_colored_name(),
         '과(와) 있으면 이런 뜻밖의 일이 자주 생긴다——',
       ]);
-      era.drawLine({ content: '地下取調室' });
+      era.drawLine({ content: '지하 취조실' });
       await minoru.say_and_wait('최근 학생에게서 신고가 들어왔어요.');
       await minoru.say_and_wait([
         acute.get_colored_name(),
@@ -3289,7 +3296,7 @@ module.exports = {
         acute.get_colored_name(),
         '이(가) 홋카이도로 휴가를 온 첫날이기도 하다.',
       ]);
-      era.drawLine({ content: '北海道 温泉旅館' });
+      era.drawLine({ content: '홋카이도 온천 여관' });
       await acute.say_and_wait('와아~ 살아 있는 왕게는 처음 보는구나——');
       await era.printAndWait([
         '눈앞에 차려진 진수성찬에 ',
@@ -3654,7 +3661,7 @@ module.exports = {
         acute.get_colored_name(),
         '이(가) 이제 서로 떨어져 지낼 첫해이기도 하다.',
       ]);
-      era.drawLine({ content: '東京 国際空港' });
+      era.drawLine({ content: '도쿄 국제공항' });
       era.printButton('「여기까지면 돼요.」', 1);
       await era.input();
       await you.say_and_wait([

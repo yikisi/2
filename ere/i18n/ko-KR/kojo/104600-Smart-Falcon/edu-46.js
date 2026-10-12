@@ -1011,7 +1011,7 @@ module.exports = {
       await falcon.say_and_wait(
         `이렇게 팔코의 홈에서 관객들의 마음을 전~부 빼앗을게♪ 팔코는 세상에서 가장 빛나는 ${falcon.uma_sex_title} 아이돌이니까⭐`,
       );
-      era.drawLine({ content: 'ウィンナーズステージ' });
+      era.drawLine({ content: '위너스 스테이지' });
       await falcon.say_and_wait(`이게 위닝 라이브……?`, true);
       await era.printAndWait(
         `스태프의 안내에 따라 정해 둔 대형 그대로 승강기에 올랐다.`,
@@ -1263,7 +1263,7 @@ module.exports = {
         `${falcon.name}가 ${you.name}의 손을 잡은 순간 ${you.name}은(는) 불길한 예감이 들었다.`,
       );
       await falcon.say_and_wait(`──3, 1! 스타트!`);
-      era.drawLine({ content: 'ラーメン店内' });
+      era.drawLine({ content: '라멘 가게 안' });
       await falcon.say_and_wait(
         `와──아아! 생각보다 훨씬 맛있어! 팔코, 에너지 충전 완료⭐`,
       );
@@ -1809,7 +1809,7 @@ module.exports = {
       await era.printAndWait(
         `그 뒤 ${falcon.name}는 석양을 받으며 탈의실로 달려갔다.`,
       );
-      era.drawLine({ content: 'ライブ終了後' });
+      era.drawLine({ content: '라이브 종료 후' });
       await falcon.say_and_wait(`고마워요⭐ 오늘 라이브도 대호평이네요⭐`);
       await you.say_as_passer_by_and_wait(`팬`, `팔코! 팔코!`);
       await era.printAndWait(`주변에서 드문드문 박수가 들렸다.`);
@@ -2021,7 +2021,7 @@ module.exports = {
       await era.printAndWait(
         `${you.name}은(는) 의자에 기대 한참 동안 정신을 차리지 못했다.`,
       );
-      era.drawLine({ content: 'ウィンナーズステージ終了後' });
+      era.drawLine({ content: '위너스 스테이지 종료 후' });
       await you.say_and_wait(`수고했어.`);
       await era.printAndWait(
         `${you.name}은(는) 준비한 수건을 김이 오르는 ${falcon.name}에게 건넸다.`,
@@ -2830,7 +2830,7 @@ module.exports = {
       await falcon.say_and_wait(
         `${callname}에게도 그렇구나……팔코는 지금 에너지 가득해!`,
       );
-      era.drawLine({ content: 'ライブ終了後' });
+      era.drawLine({ content: '라이브 종료 후' });
       await falcon.say_and_wait(`~~~~♪ 고마워요, 여러분!`);
       await you.say_as_passer_by_and_wait(`팬`, `팔코! 팔코!`);
       await era.printAndWait(
@@ -3587,7 +3587,7 @@ module.exports = {
       );
       await falcon.say_and_wait(`스칼렛의 승부복은 TV로 볼 때보다 아름다워!`);
       await you.say_and_wait(`이번에는 ${falcon.sex}가 어떻게 달릴까?`);
-      era.drawLine({ content: 'ウィンナーズステージ後' });
+      era.drawLine({ content: '위너스 스테이지 후' });
       await era.printAndWait(`다이와 스칼렛은 멋지게 일착을 차지했다.`);
       await era.printAndWait(`무대에서의 퍼포먼스도 가슴을 뜨겁게 했다.`);
       await era.printAndWait(`그것이 끝난 뒤,`);
@@ -5813,7 +5813,7 @@ module.exports = {
       await era.printAndWait(
         `영상 속의${falcon.name}이(가) 홀로 위너스 스테이지로 향한다.`,
       );
-      era.drawLine({ content: 'ウィンナーズステージのあと' });
+      era.drawLine({ content: '위너스 스테이지 후' });
       await falcon.say_and_wait(`올해 목표는 이제 도쿄 대상전만 남았다.`);
       await era.printAndWait(
         `팔코의 무대는 상상 이상이어서 팬들의 기세가 무대를 뒤집을 듯했다.`,
@@ -6550,7 +6550,7 @@ module.exports = {
         `팔코는 당황해서 빙빙 돌다가 문득 ${callname}을(를) 떠올렸다.`,
       );
       await falcon.say_and_wait(`${callname}에게 물어보자.`);
-      era.drawLine({ content: 'トレーナー室' });
+      era.drawLine({ content: '트레이너실' });
       await era.printAndWait(
         `눈앞의 점수를 보고,${you.name}도 팔코처럼 말을 잃었다.`,
       );
@@ -6570,7 +6570,7 @@ module.exports = {
       );
       await you.say_and_wait(`그럼 이 부분은……`);
       await era.printAndWait(`오후 내내 오답과 싸웠다.`);
-      era.drawLine({ content: '黄昏のあと' });
+      era.drawLine({ content: '해 질 녘이 지나고' });
       await you.say_and_wait(`대략 이 정도야……팔코?`);
       await falcon.say_and_wait(`……아, 네.`);
       await era.printAndWait(`어느새 팔코의 정신은 다른 곳에 가 있었다.`);
@@ -6716,7 +6716,7 @@ module.exports = {
       await you.say_and_wait(`역의 유동 인구를 노려 팬을 모으려는 건가?`);
       await you.say_and_wait(`이 열정을 공부에 쏟을 수 있다면 좋을 텐데.`);
       await era.printAndWait(`하지만 대부분은 이상한 눈으로 보고 지나쳐 간다.`);
-      era.drawLine({ content: '昼になる' });
+      era.drawLine({ content: '낮이 되고' });
       await falcon.say_and_wait(`으～벌써 점심인데 새 팬이 안 늘어.`);
       await era.printAndWait(
         `다들 볼일이 있으니까. 팬 활동을 할 여유가 있는 건 학생 정도겠지.`,
@@ -6852,7 +6852,7 @@ module.exports = {
       await falcon.say_and_wait(`작은 장식을 사고 싶어.`);
       await era.printAndWait(`자기 매력의 한계를 보고 싶은 걸까.`);
       await you.say_and_wait(`좋아!`);
-      era.drawLine({ content: '商店街' });
+      era.drawLine({ content: '상점가' });
       await era.printAndWait(`주말이라 상점가에는 평일보다 훨씬 사람이 많다.`);
       await falcon.say_and_wait(`그럼 이 가게부터 보자!`);
       await era.printAndWait(
@@ -7097,7 +7097,7 @@ module.exports = {
         '알겠어.',
       );
       await era.printAndWait('인솔 교사가 뒤늦게 와서 사정을 듣고 사과했다.');
-      era.drawLine({ content: '終了後' });
+      era.drawLine({ content: '종료 후' });
       await falcon.say_and_wait(
         `자기 자신보다 남의 기분을 더 걱정하다니, 그러다간 금방 다치고 말 거야!`,
       );

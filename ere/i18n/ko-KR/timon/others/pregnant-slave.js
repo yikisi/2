@@ -539,19 +539,19 @@ module.exports = {
       () => {
         print([
           you.get_colored_name(),
-          ' は仕事へ向かう途中、小学部の',
+          '은(는) 출근하던 중 초등부의',
           uma,
-          'に塞がれた。',
+          '에게 가로막혔다.',
         ]);
         print([
-          '拒む暇もなく、まだ幼い',
+          '거절할 틈도 없이, 아직 어린 ',
           uma,
-          'は、年齢にそぐわない巨きな肉棒を出した。',
+          '는 나이에 어울리지 않는 거대한 성기를 꺼냈다.',
         ]);
         print([
-          '改造された体の本能に屈し、',
+          '개조된 몸의 본능에 굴복하여 ',
           you.get_colored_name(),
-          ' は半ば押し切られる形で地に押さえられ、秘部が巨物に出入りされる感覚を味わった……',
+          '은(는) 밀려서 땅에 깔린 채, 은밀한 부위가 거대한 물체에 드나드는 감각을 맛보았다……',
         ]);
       },
     ];
@@ -1038,7 +1038,7 @@ module.exports = {
         }
         if (children_count > 0) {
           await printAndWait(
-            'あるいは、印象ではまだ子供なのに、母の腹から出てきた道を覚えているかのように、いつも役立たずの母をアヘ顔の雌豚にする、心優しい宝物？',
+            '아니면, 겉보기엔 아직 어린아이인데도, 엄마 뱃속에서 나온 길을 기억하는 듯, 항상 무능한 엄마를 황홀한 표정을 짓는 암퇘지로 만들어 버리는, 마음씨 따뜻한 보물일까?',
           );
         }
         println();
@@ -1108,33 +1108,37 @@ module.exports = {
         ]);
         if (children_count > 0) {
           await printAndWait(
-            `あの子の幼い頃を思い出す。つい先日のようだったのに、${father.sex}は無垢な目の幼児から、自分が生まれた穴を欲の目で見る獣になっていた`,
+            `그 아이의 어린 시절이 떠오른다. 마치 엊그제 일처럼 느껴지는데 ${father.sex}은(는) 순수한 눈빛을 가진 유아에서, 자신이 태어난 곳을 탐욕스러운 눈으로 바라보는 짐승이 되어 있었다.`,
           );
           await printAndWait([
             you.get_colored_name(),
-            ' は、また子に弄ばれ、母とは呼べない恥ずかしい姿になるのではないかと心配した',
+            '은(는) 아이에게 놀림당해, 어머니라고 부를 수 없는 부끄러운 모습이 되지 않을까 걱정했다',
           ]);
         } else {
           await printAndWait(
-            `これから生まれるこの子は、ほかの${father.uma_sex_title}たちと同じように、自分を孕袋として扱うのだろうか……`,
+            `이제 태어날 이 아이는, 다른 ${father.uma_sex_title}들처럼, 나를 임신 주머니로 취급할까……?`,
           );
           await printAndWait(
-            '……だめだ。務めを果たさねば。少なくとも、この子はきちんと育て上げる',
+            '……안 돼. 내 임무를 다해야 해. 적어도 이 아이는 제대로 키워내야지',
           );
         }
         println();
-        await printAndWait('孕袋が育てた子が、まともに大人になれるのか？');
         await printAndWait(
-          `毎日、母がさまざまな${father.elder_sibling_sex_title}に犯され、涎を垂らし、尊厳なく許しを請う姿を見て`,
+          '임신 주머니가 키운 아이가 제대로 된 어른이 될 수 있을까?',
         );
-        await printAndWait('そんな子が、屈せず健やかに育つはずがあるのか？');
-        await printAndWait('だが、笑う資格もない');
+        await printAndWait(
+          `매일, 어머니가 온갖 ${father.elder_sibling_sex_title}들에게 강간당하고, 침을 흘리며, 존엄성 없이 용서를 구하는 모습을 보며`,
+        );
+        await printAndWait(
+          '그런 아이가 굴복하지 않고 건강하게 자랄 수 있겠는가?',
+        );
+        await printAndWait('하지만 걱정할 자격도 없다');
         await printAndWait([
-          'いま、トイレの前を通りかかった小学部の',
+          '지금, 화장실 앞을 지나가던 초등부 ',
           father.uma_sex_title,
-          'に地へ押さえられ、肉棒に奉仕している ',
+          '에게 땅에 짓눌려, 성기에 봉사하고 있는 ',
           you.get_colored_name(),
-          ' は、その薄い光に希望を託すしかなかった',
+          '은(는) 그 희미한 빛에 희망을 걸 수밖에 없었다',
         ]);
       }
       setColor();
@@ -1169,7 +1173,7 @@ module.exports = {
         ]);
         await printAndWait('아이의 아버지가 누구인지는 이제 아무래도 좋다.');
         await printAndWait([
-          'むしろ、孕袋のいつもの仕事をしているだけで、こんなに可愛い子が得られる……',
+          '오히려, 임신 주머니의 평소 일을 하고 있을 뿐인데, 이렇게 귀여운 아이가 생기다니……',
           you.get_colored_name(),
           '은(는) 마음속으로, 얼굴도 모르는 아버지에게 고마워했다.',
         ]);
@@ -1182,31 +1186,37 @@ module.exports = {
         printButton('「！」', 1);
         await input();
         await printAndWait([
-          '突然の水が、',
+          '갑작스레 쏟아진 물이 ',
           you.get_colored_name(),
-          ' を幻想から叩き起こした',
+          '을(를) 환상에서 깨워냈다',
         ]);
-        await printAndWait('抱き上げた子が、母へ人生最初の尿をかけた');
+        await printAndWait(
+          '안아 올린 아이가, 어머니에게 인생 첫 오줌을 싸버렸다',
+        );
         await printAndWait([
-          '自分の子に便所にされたこと——たとえ偶然でも——に、',
+          '자신의 아이가 자신을 변기로 삼은 일——비록 우연이라 해도—— ',
           you.get_colored_name(),
-          ' は言いようのない快感を覚えた。この子が自分を便所として使えるように生まれてきたのだ、とさえ思えた',
+          '은(는)언할 수 없는 쾌감을 느꼈다. 이 아이가 자신을 변기로 사용할 수 있도록 태어난 것이라고까지 생각했다',
         ]);
         await printAndWait([
           you.get_colored_name(),
-          ' は優しく子の秘部を舐め、体にかかった液を残らず口へ運び、満足げに指を舐めた',
+          '은(는)부드럽게 아이의 사타구니를 핥고, 몸에 묻은 액체를 남김없이 입으로 옮긴 뒤, 만족스러운 표정으로 손가락을 핥았다',
         ]);
         println();
-        await printAndWait('これほど卑しい姿は、最下等の孕袋でもこの程度だ');
-        await printAndWait('こんな自分が、元の生活へ戻れるはずがない');
-        await printAndWait('そんな生活へ戻ることなど、もう耐えられない');
+        await printAndWait(
+          '이토록 비천한 모습은, 최하급의 임신 주머니에서도 이 정도일 뿐이다',
+        );
+        await printAndWait('이런 내가, 예전의 삶으로 돌아갈 리가 없다');
+        await printAndWait(
+          '그런 삶으로 돌아가는 것 따위는, 더 이상 견딜 수 없다',
+        );
         await printAndWait([
           you.get_colored_name(),
           '은(는) 품 안의 아이를 다정하게 바라보고 있다. 표정은 변하지 않는다.',
         ]);
         await printAndWait('하지만 마음속은 이미 달라졌다.');
         await printAndWait(
-          '————どうすれば、この子を、自分を調教するのにいちばん向いた主人に育てられるだろう？',
+          '————어떻게 해야 이 아이를, 나를 훈련시키는 데 가장 적합한 주인으로 키울 수 있을까?',
         );
       } else {
         await printAndWait(
@@ -1236,10 +1246,10 @@ module.exports = {
         ]);
         println();
         await printAndWait(
-          `朝、両脚を開いて蹲り、眠気の残る${father.uma_sex_title}の朝勃ちを口で処理し、一日の初精と初尿を腹へ飲み込んだ経験`,
+          `아침, 두 다리를 벌리고 쪼그려 앉아, 아직 졸음이 가시지 않은 ${father.uma_sex_title}의 아침 발기를 입으로 처리하고, 하루의 첫 정액과 첫 소변을 배 속으로 삼킨 경험`,
         );
         await printAndWait(
-          `夕方、トレーニング場で練習を終えた${father.uma_sex_title}たちに欲の処理を懇願され、一日分の汗と垢のついた肉棒を口に含み、${father.couple_title}の疲れを口のなかへ吐き出させた経験`,
+          `저녁, 훈련장에서 연습을 마친 ${father.uma_sex_title}들에게 욕구를 해소해 달라고 명령받아, 하루 동안 땀과 때로 범벅이 된 성기를 입에 물고 ${father.couple_title}의 피로를 입안으로 토해내게 한 경험`,
         );
         if (children_count > 0 || edu_count > 0) {
           await printAndWait([
@@ -1247,9 +1257,9 @@ module.exports = {
             '은(는) 슬픈 마음으로 며칠 전 밤을 떠올렸다.',
           ]);
           await printAndWait([
-            '自分の',
-            children_count > 0 ? '子' : `担当${father.uma_sex_title}`,
-            'が夢遊で部屋へ入り、半睡のなかで秘部を満たしたあと、眠っている唇を無理に開いて掃除したときも、自分は目覚められなかった',
+            '자신의',
+            children_count > 0 ? '아이' : `담당 ${father.uma_sex_title}`,
+            '이(가) 몽유병에 걸려 방으로 들어와, 반쯤 잠든 상태에서 성기를 채운 뒤, 잠든 입술을 억지로 벌려 닦아냈을 때도, 나는 깨어나지 못했다',
           ]);
           println();
           await printAndWait([
@@ -1272,17 +1282,17 @@ module.exports = {
         println();
         await printAndWait('아이가 주변의 행동을 배우는 능력을 잊고 있다.');
         await printAndWait(
-          `孕袋が奉仕する相手が、身分を問わない「すべての${father.uma_sex_title}」であることも、忘れている`,
+          `임신 주머니가 봉사해야 하는 상대는 신분고하를 가리지 않고 ‘모든 ${father.uma_sex_title}」이라는 사실도 잊고 있었다`,
         );
         await printAndWait(
-          '傍らの看護師が、もう孕袋の口奉仕を欲しがっていることにも気づかない',
+          '곁에 있는 간호사가 이미 임신 주머니의 구강 봉사를 원하고 있다는 사실도 눈치채지 못한다',
         );
         await printAndWait(
-          '無意識に、実の子がかけた尿を舐め取っていることにも気づかない',
+          '무의식적으로 친자식이 흘린 오줌을 핥아내고 있다는 사실조차 눈치채지 못한다',
         );
         await printAndWait([
           you.get_colored_name(),
-          ' は子を抱き、看護師のスカートの下の太いものを吸わされても、瞳の光は消えなかった',
+          '은(는)아이를 안은 채, 간호사의 치마 아래에 있는 굵은 것을 빨게 되어도 눈빛은 꺼지지 않았다',
         ]);
         println();
         if (get('exp:0:生产次数') > 0) {
@@ -1347,39 +1357,39 @@ module.exports = {
         println();
         await printAndWait('하지만……');
         await printAndWait([
-          '孕袋としての職業本能が、',
+          '임신 주머니로서의 직업적 본능이 ',
           you.get_colored_name(),
-          ' に見逃させなかった',
+          '이(가) 이를 간과하지 못하게 했다',
         ]);
         await printAndWait([
-          '自分が乳をやるのを見て、',
+          '내가 젖을 먹이는 모습을 보고 ',
           father.get_colored_name(),
-          ' の股が震える様子を',
+          '의 허벅지가 떨리는 모습을 ',
         ]);
         println();
-        await printAndWait('家庭生活……いい口実だ');
+        await printAndWait('가정생활……참 좋은 핑계다');
         await printAndWait(
-          'これなら、子に乳をやりながら肉棒を口へ入れられても、「栄養補給」で片づけられる',
+          '이 정도면, 아이에게 젖을 먹이면서 성기를 입에 넣어도 「영양 보충」이라고 치부할 수 있을 것이다',
         );
         await printAndWait([
-          '夫である ',
+          '남편인 ',
           father.get_colored_name(),
-          ' が、子を抱く自分を優しく抱きしめる絵は、家庭に疑問を持つ誰も疑念を捨てるだろう……下で濡れた秘部を太い肉棒が塞いでいることに気づかなければ',
+          '이(가) 아이를 안고 있는 나를 다정하게 껴안는 그림은, 가정에 의문을 품는 누구라도 의심을 떨쳐버릴 것이다…… 아래에서 젖은 은밀한 부위를 굵은 성기가 막고 있다는 사실을 눈치채지 못한다면 말이다',
         ]);
         await printAndWait(
-          'いつか子が大きくなったら……子と、子の父に一緒に使われ、挟まれて、雄の肉棒に溺れる……',
+          '언젠가 아이가 자라면…… 아이와 아이의 아버지에게 함께 이용당하고, 끼여들며, 수컷의 성기에 빠져들게 될 것이다……',
         );
         println();
         await printAndWait([
-          'そんな未来を思い、',
+          '그런 미래를 떠올리며 ',
           you.get_colored_name(),
-          ' は思わず唇を舐めた……',
+          '은(는) 무심코 입술을 핥았다……',
         ]);
-        await printAndWait('そんな明日を、待ち始める');
+        await printAndWait('그런 내일을, 기다리기 시작한다');
       } else {
         await printAndWait([
           you.get_colored_name(),
-          ' は、欲を吐き出すだけ吐き、責任など考えず中に出した ',
+          '은(는) 욕망을 마음껏 토해내고, 책임 따위는 생각하지 않은 채 안에 쏟아부은',
           father.get_colored_name(),
           '을(를) 노려보았다.',
         ]);
@@ -1390,7 +1400,7 @@ module.exports = {
           '필요한 것은 치욕 속에서도 자신과 아이를 지탱하고, 아이를 지켜 줄 상대다.',
         );
         await printAndWait(
-          '自分が欲の処理道具にされているとき、最後の声の出口まで肉棒で塞ぐ屑ではない',
+          '자신이 욕망의 도구로 이용당할 때, 마지막 목소리가 나올 수 있는 곳까지 자지로 막아버리는 쓰레기는 아니다',
         );
         println();
         await printAndWait('나 혼자라도 이 아이를 키울 것이다.');
@@ -1402,22 +1412,22 @@ module.exports = {
         println();
         await printAndWait('갑자기 품 안의 아이가 울기 시작했다.');
         await printAndWait('배가 고픈 걸까? 젖을 먹고 싶은 걸까?');
-        await printAndWait('ならば……調教され尽くした今のこの体は');
+        await printAndWait('그렇다면…… 완전히 조교당한 지금의 이 몸은');
         await printAndWait(
-          `乳首を吸われた瞬間、自分の乳首を噛み、舐めた${father.uma_sex_title}たちを思い出すだろう`,
+          `젖꼭지를 빨리는 순간, 자신의 젖꼭지를 깨물고 핥았던 ${father.uma_sex_title}들을 떠올릴 것이다`,
         );
         await printAndWait(
-          '胸を含ませた瞬間、揉まれ搾られた夜を思い出して、すぐに果てるだろう',
+          '슴을 물린 순간, 주무르고 짜내던 밤을 떠올리며 곧 절정에 달할 것이다',
         );
         await printAndWait(
-          '子が乳を飲み終わり、胸に寄りかかったとき……赤ん坊の体温に近い肉棒が胸の前で主権を示し、最後に口へ濃い白濁を注いだ夜を、思い出さないだろうか？',
+          '아이가 젖을 다 마시고 가슴에 기대었을 때…… 아기의 체온과 비슷한 성기가 가슴 앞에서 주권을 과시하며, 마지막에 입 안으로 진한 흰 액체를 쏟아부었던 그 밤을, 떠올리지 않을까?',
         );
         println();
         await printAndWait(
-          'そして、それを乗り越え、ようやくこの子を育て上げたとして……',
+          '그리고, 그 모든 것을 극복하고 드디어 이 아이를 키워냈다고 치더라도……',
         );
         await printAndWait(
-          '愛が何かを知る前に、本能で性を理解した目を、子が自分へ向けたとき',
+          '사랑이 무엇인지 알기도 전에, 본능적으로 성을 이해한 눈빛을 아이가 나를 향해 던졌을 때',
         );
         await printAndWait('나는 어떻게 해야 할까.');
         println();
@@ -1442,7 +1452,10 @@ module.exports = {
         you.get_colored_name(),
         '은(는) 아이를 품에 안았다——',
       ]);
-      const ret = await degeneration_to_evil('歓びを思い出す', '母性が湧く');
+      const ret = await degeneration_to_evil(
+        '기쁜 생각이 들었다',
+        '모성이 솟아올랐다',
+      );
       if (ret === 1) {
         await printAndWait([
           you.get_colored_name(),
@@ -1455,16 +1468,16 @@ module.exports = {
           father.get_colored_name(),
           '이(가) 맺어져 태어난 아이다.',
         ]);
-        await printAndWait('……違う。結ばれたのではない');
+        await printAndWait('……아니야. 맺어진 게 아니다');
         await printAndWait([
           you.get_colored_name(),
-          ' の遺伝子が自ら服し、',
+          '의 유전자가 스스로 굴복하고 ',
           father.get_colored_name(),
-          ' の遺伝子の下に跪いて生まれた産物だ',
+          '의 유전자 아래에 무릎 꿇고 태어난 산물이다',
         ]);
         await printAndWait([
           you.get_colored_name(),
-          ' の体は、相性に抗えず、遺伝子の奥の渇望に抗えない',
+          '의 몸은, 궁합을 이겨낼 수 없고, 유전자의 깊은 갈망을 이겨낼 수 없다',
         ]);
         await printAndWait([
           '이 아이의 얼굴을 보자,',
@@ -1472,16 +1485,19 @@ module.exports = {
           '의 마음은 갖가지 애정으로 가득 찬다.',
         ]);
         await printAndWait([
-          'そこに見える ',
+          '저기 보이는 ',
           father.get_colored_name(),
-          ' の影の一つひとつが、強く容赦のない甘い侵犯を何度も思い出させる',
+          '의 그림자 하나하나가, 강렬하고 무자비한 달콤한 침범을 몇 번이고 떠올리게 한다',
         ]);
         await printAndWait([
-          'この子を連れて外へ出る絵を思うと、自分が ',
+          '이 아이를 데리고 밖으로 나가는 모습을 상상하면, 마치 자신이 ',
           father.get_colored_name(),
-          ' の専属孕袋である証明を持ち歩いているようで……',
+          '의 전속 임신 주머니라는 증거를 들고 다니는 것 같아서……',
         ]);
-        await printAndWait([you.get_colored_name(), ' の下は、思わず震えた']);
+        await printAndWait([
+          you.get_colored_name(),
+          '의 아래를 보니, 저도 모르게 떨렸다',
+        ]);
       } else {
         await printAndWait([
           you.get_colored_name(),
@@ -1494,17 +1510,17 @@ module.exports = {
           father.get_colored_name(),
           '이(가) 맺어져 태어난 아이다.',
         ]);
-        await printAndWait('違う。結ばれたのではない');
+        await printAndWait('틀렸다. 맺어진 것이 아니다');
         await printAndWait([
           father.get_colored_name(),
-          ' の遺伝子が ',
+          '의 유전자가 ',
           you.get_colored_name(),
-          ' の遺伝子を侵して生まれた産物だ',
+          '의 유전자를 침범하여 태어난 산물이다',
         ]);
         await printAndWait([
-          'この体に生まれつきの奴隷性に抗いがたい。心底では受け入れられず、嫌悪していても、改造された体は子のための部屋を自ら開き、',
+          '이 몸은 타고난 노예성에 저항하기 어렵다. 마음 깊은 곳에서는 받아들이지 못하고 혐오하더라도, 조교된 몸은 아이를 위한 공간을 스스로 열고 ',
           father.get_colored_name(),
-          ' に種を播かれる準備を整える',
+          '에게 씨를 뿌려질 준비를 갖춘다',
         ]);
         await printAndWait([
           '품 안의 아이를 보며,',
@@ -1512,20 +1528,20 @@ module.exports = {
           '은(는) 원망했어야 했다.',
         ]);
         await printAndWait([
-          'そこに見える ',
+          '저기 보이는 ',
           father.get_colored_name(),
-          ' の影の一つひとつが、強く容赦のない侵犯を何度も思い出させる',
+          '의 그림자 하나하나가, 강렬하고 무자비한 침해를 몇 번이고 떠올리게 한다',
         ]);
         await printAndWait([
-          'この子を宿した夜、',
+          '이 아이를 잉태한 밤 ',
           father.get_colored_name(),
-          ' の求めで、',
+          '의 요구로 ',
           you.get_colored_name(),
-          ' は子犬のように四つん這いになり、精で満たされ、両手が体を支えられなくなるまで続き、',
+          '은(는) 암캐처럼 네 발로 기어갔고, 정액으로 가득 차 양손으로 몸을 지탱할 수 없을 때까지 계속되었고',
           father.get_colored_name(),
-          ' はやっと肉棒を抜き、',
+          '은(는) 드디어 성기를 빼내어 ',
           you.get_colored_name(),
-          ' の口へ入れて終わりにした',
+          '의 입에 넣으며 끝을 냈다',
         ]);
         await printAndWait([
           '하지만 두 사람의 유전자는 그토록 잘 맞았던 걸까.',
@@ -1533,9 +1549,9 @@ module.exports = {
           '은(는) 끝내 미워할 수 없었고, 마음속에는 어머니라 불리는 감정만이 솟아올랐다.',
         ]);
         await printAndWait([
-          '——ただ、',
+          '——하지만 ',
           you.get_colored_name(),
-          ' はまだ知らない。この子が育ったあと、その感情は再び遺伝子上の屈服へと変わる……',
+          '은(는)아직 모른다. 이 아이가 자란 뒤, 그 감정은 다시 유전적 굴복으로 변할 것이다……',
         ]);
       }
       setColor();

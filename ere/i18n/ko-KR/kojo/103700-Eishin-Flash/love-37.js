@@ -62,7 +62,7 @@ module.exports = {
         await era.printAndWait(
           `다만 기분 탓일지도 모르지만, ${you.name}의 착각인지 모르겠지만, 지금의 에이신 플래시는 평소보다 감정의 동요가 조금 과해 보였다.`,
         );
-        era.drawLine({ content: '日曜日' });
+        era.drawLine({ content: '일요일' });
         await era.printAndWait(
           `${you.name}은(는) 에이신 플래시와 약속한 만남의 장소로 향했다.`,
         );

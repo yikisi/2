@@ -173,7 +173,7 @@ module.exports = {
     await era.printAndWait(
       `교사는 ${callname}에게 손을 흔들고 교무실로 향했다.${callname}은(는) 대화에서 얻은 정보를 정리하며 복도로 불어오는 찬바람에 목을 움츠렸다.`,
     );
-    era.drawLine({ content: '翌日' });
+    era.drawLine({ content: '다음 날' });
     await era.printAndWait(
       `${callname}은(는) 평소처럼 트레이너실 앞에 왔다가 문에 무언가 붙어 있는 것을 발견했다.`,
     );

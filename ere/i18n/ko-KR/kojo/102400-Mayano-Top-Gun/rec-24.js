@@ -114,10 +114,10 @@ module.exports = {
       );
       await maya.say_and_wait('자, 자, 이제 울지 마……');
       await era.printAndWait(
-        `少女は不器用に ${you.name} を抱き寄せた。まだ発達しきっていない胸でも、十分に温かく、柔らかい。`,
+        `소녀는 서툴게 ${you.name}을(를) 품에 안았다. 아직 완전히 발달하지 않은 가슴이었지만, 충분히 따뜻하고 부드러웠다.`,
       );
       await era.printAndWait(
-        `ウマ娘から漂う淡い香りに包まれ、${you.name} は妙な安心を覚えた。`,
+        `우마무스메에게서 풍기는 은은한 향기에 감싸인 ${you.name}은(는) 묘한 안도감을 느꼈다.`,
       );
       era.printButton('「엄마……」', 1);
       await era.input();

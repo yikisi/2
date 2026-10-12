@@ -272,7 +272,7 @@ module.exports = {
     await kitaru.say_and_wait(
       '반드시 트레이너님과 계약하고 말겠어요! 꼭 보러 와 주세요～!',
     );
-    era.drawLine({ content: '翌日' });
+    era.drawLine({ content: '다음 날' });
     await era.printAndWait([
       kitaru.get_colored_name(),
       '의 선발 레이스가 마침내 시작되었다.',
@@ -326,7 +326,7 @@ module.exports = {
       kitaru.get_colored_name(),
       '은(는) 게이트에 들어갔다.',
     ]);
-    era.drawLine({ content: '選抜レース終了後' });
+    era.drawLine({ content: '선발 레이스 종료 후' });
     await era.printAndWait('참패……');
     await era.printAndWait([
       '참패라고 해도 좋았다. 칭찬할 만한 점이라면,',

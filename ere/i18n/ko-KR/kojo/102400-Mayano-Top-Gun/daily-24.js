@@ -331,7 +331,7 @@ module.exports = {
         ]);
         await maya.say_and_wait('어때, 마야의 매력이 전해졌어?');
         era.printButton('「귀여워!」', 1);
-        era.printButton('「セクシーだ！」', 2);
+        era.printButton('「섹시해!」', 2);
         if ((await era.input()) === 1) {
           await maya.say_and_wait([
             '으으……! ',
@@ -341,7 +341,7 @@ module.exports = {
           era.printButton('「그런 뜻은 아니야.」', 1);
           await era.input();
           await maya.say_and_wait(
-            'うんうん……つまりマヤの魅力、セクシーだけじゃないってこと！',
+            '응응……그러니까 마야의 매력은 섹시함뿐만이 아니라는 거지!',
           );
           await era.printAndWait([
             '조금 엇갈린 것 같지만, ',

@@ -896,9 +896,9 @@ module.exports = {
    * @param {string} callname マルゼンスキーのプレイヤーへの呼び方
    */
   async out_church(maru, darley, godolphin, byerley, you, callname) {
-    darley.name = '優しい女神';
-    godolphin.name = '賢い女神';
-    byerley.name = '厳しい女神';
+    darley.name = '다정한 여신';
+    godolphin.name = '지혜의 여신';
+    byerley.name = '엄숙한 여신';
     await maru.say_and_wait(`${callname}, 다 왔어.`);
     await era.printAndWait(`어느 휴일, 두 사람은 신사에 참배하러 가기로 했다.`);
     await era.printAndWait(

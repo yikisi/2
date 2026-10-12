@@ -6067,7 +6067,7 @@ module.exports = {
       await tachyon.say_and_wait(['아, 찾았군. ', callname, ', 보게나']);
       era.println();
       await era.printAndWait('진짜로 있네! 상점가 대단한데!');
-      era.drawLine({ content: '時間を、少しだけ戻す' });
+      era.drawLine({ content: '시간을 조금만 되돌려서' });
       era.println();
       await era.printAndWait([
         '이날 ',

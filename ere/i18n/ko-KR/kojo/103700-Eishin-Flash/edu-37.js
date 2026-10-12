@@ -580,7 +580,7 @@ module.exports = {
         '행인B',
         '응응, 힘내라! 에이신 플래시!!',
       );
-      era.drawLine({ content: 'レース当日、選手控え室' });
+      era.drawLine({ content: '레이스 당일, 선수 대기실' });
       await flash.say_and_wait('……최고 인기 후보가 될 줄은 몰랐어요.');
       await era.printAndWait(
         `오늘자 신문의 레이스 예측을 보며, ${you.name}은(는) 에이신 플래시의 미간이 살짝 찌푸려진 것을 발견했다.`,
@@ -1249,7 +1249,7 @@ module.exports = {
       await flash.say_and_wait(
         '게다가... 저도 기대되는걸요. 더 강한 상대와의 대결이.',
       );
-      era.drawLine({ content: '約束の日' });
+      era.drawLine({ content: '약속한 날' });
       await era.printAndWait(
         `${you.name}과(와) 에이신 플래시는 함께 트레센 학원의 운동장으로 향했다.`,
       );
@@ -3027,7 +3027,7 @@ module.exports = {
       );
       era.printButton('「조심해서 가.」', 1);
       await era.input();
-      era.drawLine({ content: 'バレンタイン当日' });
+      era.drawLine({ content: '밸런타인 당일' });
       await flash.say_and_wait(`Guten Morgen、${callname}。`);
       await era.printAndWait(
         `트레이닝실 문을 열자마자 ${you.name}은(는) 책상 옆 꽃병에 꽂힌 싱싱하고 아름다운 파란색 꽃 한 송이를 발견했다.`,

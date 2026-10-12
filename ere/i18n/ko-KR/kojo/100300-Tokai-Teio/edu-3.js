@@ -342,13 +342,13 @@ module.exports = {
 
       await era.printAndWait('분위기가 조금 어색하다.');
       await era.printAndWait(
-        `${you.name} は思わず余光で隣の小さな${teio.uma_sex_title}を見る。外に出た白い肌、私服の下に覗く桃色の肩紐……いけない。これ以上見ると師徳に傷がつく。`,
+        `${you.name}은(는) 무심코 눈길로 옆에 있는 작은 ${teio.uma_sex_title}를 보았다. 드러난 하얀 피부, 사복 아래로 비치는 복숭아빛 어깨끈…… 안 돼. 더 보고 있다간 스승으로서의 도리에 어긋나겠어.`,
       );
       await era.printAndWait(
-        `まして${teio.sex}のその格好は、色とりどりのビーチウェアのような子供服で、${you.name} の罪悪感をさらに増す。`,
+        `게다가 ${teio.sex}의 그 차림은 알록달록한 비치웨어 같은 아동복이라 ${you.name}의 죄책감을 더욱 키운다.`,
       );
       await era.printAndWait(
-        `これほど愛らしい${teio.uma_sex_title}が、${you.name} と担当契約を結んだ相手だ……`,
+        `이렇게 사랑스러운 ${teio.uma_sex_title}가 ${you.name}와(과) 담당 계약을 맺은 상대라니……`,
       );
       era.println();
 
@@ -557,15 +557,15 @@ module.exports = {
         case 3:
           await era.printAndWait([
             you.get_colored_name(),
-            ' は悪戯心を起こし、まず',
+            '은(는) 장난기가 발동해 먼저 ',
             teio.sex,
-            'の耳の根と尻の内側（尻尾を操る無毛の部分）を掻く。小さな',
+            '의 귀 뿌리와 엉덩이 안쪽(꼬리를 움직이는 털 없는 부분)을 긁어 준다. 작은 ',
             teio.uma_sex_title,
-            'が全身を震わせたところで ',
+            '가 온몸을 부르르 떨자 ',
             you.get_colored_name(),
-            ' は方針を変え、マッサージの手つきで',
+            '은(는) 방향을 바꾸어 마사지하듯 ',
             teio.sex,
-            'の全身を摘む……',
+            '의 온몸을 주무른다……',
           ]);
       }
       return [ret];

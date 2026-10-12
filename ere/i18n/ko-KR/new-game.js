@@ -94,7 +94,7 @@ module.exports = class extends require('#/i18n/zh-CN/new-game') {
   set_sex_skill_price = '조교 스킬의 인자 소모';
   set_race_skill_price = '레이스 능력의 인자 소모';
   set_sp_0 = '낮음';
-  set_sp_1 = '중거리';
+  set_sp_1 = '보통';
   set_sp_2 = '높음';
   set_sp_0_desc = '인자 소모량-50%';
   set_sp_2_desc = '인자 소모량+100%';
@@ -206,9 +206,9 @@ module.exports = class extends require('#/i18n/zh-CN/new-game') {
   set_ei_0 = '물살을 가르며 돌진';
   set_ei_1 = '한 발짝도 못 감';
   set_ei_0_desc =
-    '어느 관객「가끔 레이스가 좀 이상해져. 선수들의 안색이나 옷이 젖은 정도 같은 게…… 그래도 볼만하긴 해」';
+    '어느 관객 「가끔 레이스가 좀 이상해져. 선수들의 안색이나 옷이 젖은 정도 같은 게…… 그래도 볼만하긴 해」';
   set_ei_1_desc =
-    '어느 관객「눈이 뒤집힌 채 비틀거리며 달리고, 코스까지 젖어 있잖아——아리마 기념인데 좀 예의를 갖춰!」; 도구 장착 시 기초 능력-25%';
+    '어느 관객 「눈이 뒤집힌 채 비틀거리며 달리고, 코스까지 젖어 있잖아——아리마 기념인데 좀 예의를 갖춰!」; 도구 장착 시 기초 능력-25%';
 
   set_mejiro_style = '메지로 시티의 방식';
   set_ms_0 = '자유';
@@ -227,7 +227,7 @@ module.exports = class extends require('#/i18n/zh-CN/new-game') {
   set_hg_0 = '키가 이렇게 작은 엄마';
   set_hg_1 = '보통이면 충분';
   set_hg_2 = '지배당하고 싶어!';
-  set_hg_0_desc = 'ロリに囲まれた天国……';
+  set_hg_0_desc = '로리들에게 둘러싸인 천국……';
   set_hg_1_desc = '우마무스메의 키가 자연스럽게 분포한다';
   set_hg_2_desc = '거대한 우마무스메는 무적!';
 
@@ -262,7 +262,7 @@ module.exports = class extends require('#/i18n/zh-CN/new-game') {
   cus_breast_5 = '모든 것을 내려다보고 싶어요 (아님)';
 
   cus_penis_header =
-    '당신의「범행 도구」의 크기는?\nPS: 크다고 해서 좋은 건 아닙니다!';
+    '당신의 「범행 도구」의 크기는?\nPS: 크다고 해서 좋은 건 아닙니다!';
   cus_penis_1 = '누구나 받아들일 수 있는 크기!';
   cus_penis_2 = '그것보다 조금 큰 정도면 돼요';
   cus_penis_3 = '보통이면 충분해요';

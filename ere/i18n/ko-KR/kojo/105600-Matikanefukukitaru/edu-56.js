@@ -68,7 +68,7 @@ module.exports = {
             '은(는) 별로 교훈을 얻지 못한 모양이다.',
           ]);
         } else {
-          era.drawLine({ content: '翌日' });
+          era.drawLine({ content: '다음 날' });
           await kitaru.say_and_wait(['오오! ', callname, ', 원인을 알았어요!']);
           await era.printAndWait([
             you.get_colored_name(),
@@ -1257,7 +1257,7 @@ module.exports = {
         kitaru.get_colored_name(),
         '은(는) 본전 옆의 작은 방으로 향했다.',
       ]);
-      era.drawLine({ content: '数分後' });
+      era.drawLine({ content: '몇 분 후' });
       await era.printAndWait('댕!');
       await era.printAndWait([
         you.get_colored_name(),
@@ -1838,7 +1838,7 @@ module.exports = {
       await era.input();
       await kitaru.say_and_wait('네?');
       await kitaru.say_and_wait('네에!!!!!!');
-      era.drawLine({ content: 'トレセン学園 寮裏の焼却炉' });
+      era.drawLine({ content: '트레센 학원 기숙사 뒤 소각로' });
       await era.printAndWait([
         '산처럼 쌓인 개운 도구 앞에서,',
         you.get_colored_name(),
@@ -2279,7 +2279,9 @@ module.exports = {
         you.get_colored_name(),
         '에게는 꽤 의외였다.',
       ]);
-      era.drawLine({ content: 'マチカネフクキタル家の神社 神楽のあと' });
+      era.drawLine({
+        content: '마치카네 후쿠키타루 집안의 신사, 카구라가 끝난 뒤',
+      });
       await era.printAndWait([
         '벌써 동이 틀 무렵이다. 집안의 신사를 위해 분주히 뛰어다니던 ',
         kitaru.get_colored_name(),
@@ -2355,7 +2357,7 @@ module.exports = {
       await era.printAndWait('그러더니 주변 세상이 거의 새하얗게 뒤덮였다.');
       era.drawLine({ content: '？？？' });
       await typing(
-        '選ばれし者／選ばれた者よ、お前／我らの願い／御意は何か？',
+        '선택받은 자／선택된 자여, 너의／우리의 소망／뜻은 무엇인가?',
         kitaru.color,
       );
       era.println();
@@ -2542,7 +2544,7 @@ module.exports = {
           '에게도 상당한 중압감이었다.',
         ]);
       }
-      era.drawLine({ content: '東京競馬場 控え室の前' });
+      era.drawLine({ content: '도쿄 경기장 대기실 앞' });
       era.printButton('문을 연다', 1);
       await era.input();
       await era.printAndWait([
@@ -2678,7 +2680,7 @@ module.exports = {
         ]);
       }
 
-      era.drawLine({ content: '東京競馬場 控え室内' });
+      era.drawLine({ content: '도쿄 경기장 대기실 안' });
       await kitaru.say_and_wait('에헤헤! 괜찮다고 했잖아요!');
       await era.printAndWait([
         '레이스가 끝나고 대기실 의자에 앉은 ',
@@ -3262,7 +3264,7 @@ module.exports = {
       await era.printAndWait(
         '아오바상에서 갑자기 속도가 떨어진 것을 비판한 언론도 한두 곳이 아니었다.',
       );
-      era.drawLine({ content: '東京競馬場 控え室の前' });
+      era.drawLine({ content: '도쿄 경기장 대기실 앞' });
       era.printButton('문을 연다', 1);
       await era.input();
       await era.printAndWait([kitaru.sex, '은(는) 방 안에 서 있다.']);
@@ -3418,7 +3420,7 @@ module.exports = {
         callname,
         '이(가) 곁에 있는 저는 대길이에요!',
       ]);
-      era.drawLine({ content: '東京競馬場 控え室内' });
+      era.drawLine({ content: '도쿄 경기장 대기실 안' });
       await kitaru.say_and_wait(['후……', callname, ', 치고 나갑니다!']);
       await kitaru.say_and_wait(
         '네! 살아 있어요! 아무튼 지금은 정말 행복해요! 정말 충만해요!',
@@ -3622,7 +3624,7 @@ module.exports = {
         callname,
         '에게 거절당하면 오늘 하루가 대흉이 되잖아요!',
       ]);
-      era.drawLine({ content: '無人島 数時間後' });
+      era.drawLine({ content: '무인도, 몇 시간 후' });
       await era.printAndWait([
         you.get_colored_name(),
         '이(가) 급히 피운 모닥불이 타닥타닥 소리를 낸다.',
@@ -3668,7 +3670,7 @@ module.exports = {
         ]);
       }
       if (era.get('love:56') >= 49) {
-        era.drawLine({ content: 'しばらくして' });
+        era.drawLine({ content: '잠시 후' });
         if (ret[0] === 1) {
           await era.printAndWait([
             '달리기를 마치고 힘이 다한 ',
@@ -3883,7 +3885,7 @@ module.exports = {
         '두려움도 망설임도 없이, 평소의 훈련과 쌓아 온 노력을 종반에 모두 쏟아냈다.',
       );
       await kitaru.print_and_wait('아주 좋다. 그렇지 않은가?');
-      era.drawLine({ content: '阪神競馬場 控え室' });
+      era.drawLine({ content: '한신 경기장 대기실' });
       await kitaru.say_and_wait('후우!!!');
       era.printButton('「수고했어!」', 1);
       await era.input();
@@ -3974,7 +3976,7 @@ module.exports = {
         callname,
         '와(과) 가고 싶었던 곳이 있어요.',
       ]);
-      era.drawLine({ content: '郊外の墓地 奥へ続く小道' });
+      era.drawLine({ content: '교외 묘지, 안쪽으로 이어지는 오솔길' });
       await era.printAndWait('버스를 타고 교외의 묘지에 왔다.');
       await era.printAndWait([
         '안으로 들어갈수록 늘 쾌활한 ',
@@ -4051,7 +4053,7 @@ module.exports = {
         kitaru.elder_sibling_sex_title,
         '에게 두 사람의 발자취를 전하는 것을 들었다.',
       ]);
-      era.drawLine({ content: 'しばらくして' });
+      era.drawLine({ content: '잠시 후' });
       await kitaru.say_and_wait('다음 주는 국화상이에요!');
       await kitaru.say_and_wait(
         '모두 제대로 떠올리기까지 정말 오래 걸렸어요……',
@@ -4232,7 +4234,7 @@ module.exports = {
       } else {
         await you.say_as_passer_by_and_wait('중계', '골인!');
       }
-      era.drawLine({ content: '京都競馬場 菊花賞のあと' });
+      era.drawLine({ content: '교토 경기장, 국화상 후' });
       await kitaru.say_and_wait([callname, '！！']);
       await kitaru.say_and_wait('저……이겼어요! 이겼다고요……!');
       await era.printAndWait([
@@ -4462,18 +4464,21 @@ module.exports = {
       era.println();
       if (win_kiku_sho) {
         await typing(
-          '良好／期待どおり。' +
+          '양호／기대대로군. ' +
             kitaru.sex +
-            'の補助者／伴侶となる資格／能力あり',
+            '의 조력자／반려자가 될 자격／능력이 있음',
           kitaru.color,
         );
         era.println();
-        await typing('汝の旨意／願いは何か？', kitaru.color);
+        await typing('그대의 뜻／소망은 무엇인가?', kitaru.color);
       } else {
-        await typing('期待以下／応答未達。補助者／伴侶は想定外', kitaru.color);
+        await typing(
+          '기대 이하／응답 미달. 조력자／반려자는 예상 밖',
+          kitaru.color,
+        );
         era.println();
         await typing(
-          'パラメータ／選択肢はなお最適化／置換が必要',
+          '매개변수／선택지는 아직 최적화／교체가 필요함',
           kitaru.color,
         );
       }
@@ -4551,7 +4556,7 @@ module.exports = {
         await kitaru.say_and_wait(['우후후! ', callname, ', 반하셨어요?']);
         await kitaru.say_and_wait('운명의 사람을 위해 일부러 고른 거예요!');
         await kitaru.say_and_wait('그럼 오늘 밤 신악을 기대해 주세요!');
-        era.drawLine({ content: 'フクキタル家の神社 拝殿の前' });
+        era.drawLine({ content: '후쿠키타루 집안의 신사, 배전 앞' });
         await era.printAndWait([
           '새해의 신사.',
           kitaru.get_colored_name(),
@@ -4599,7 +4604,7 @@ module.exports = {
         await era.printAndWait(
           '한 곡이 끝나자 무대 위의 현인신은 중앙에 서서 사방의 사람들에게 인사했다.',
         );
-        era.drawLine({ content: 'しばらくして' });
+        era.drawLine({ content: '잠시 후' });
         await kitaru.say_and_wait('후우……드디어 끝났어요!');
         await kitaru.say_and_wait([
           '오늘 도와주셔서 고마워요,',
@@ -4924,7 +4929,7 @@ module.exports = {
           '은(는) 오늘 일정을 아무에게도 말하지 않았다.',
         ]);
         await era.printAndWait('조금 풀이 죽어 집으로 돌아왔다.');
-        era.drawLine({ content: you.name + 'の自宅' });
+        era.drawLine({ content: you.name + '의 집' });
         await era.printAndWait(
           '소파에 기대어 전자시계의 숫자가 0시에 가까워지는 것을 말없이 바라본다.',
         );
@@ -5174,7 +5179,7 @@ module.exports = {
           '에게서 전화가 왔다.',
         ]);
         await kitaru.say_and_wait('저기, 학원 근처 공원에서 만날 수 있나요?');
-        era.drawLine({ content: '公園' });
+        era.drawLine({ content: '공원' });
         await era.printAndWait([
           '잠시 기다리자 입구에서 황급히 달려오는 ',
           kitaru.get_colored_name(),
@@ -5397,7 +5402,7 @@ module.exports = {
         kitaru.elder_sibling_sex_title,
         '은(는) 분명 기뻐할 거예요.',
       ]);
-      era.drawLine({ content: 'しばらくして トレセンの寮' });
+      era.drawLine({ content: '잠시 후, 트레센 기숙사' });
       await kitaru.say_and_wait('……');
       await kitaru.print_and_wait('그런 건가.');
       await kitaru.print_and_wait(
@@ -5424,7 +5429,7 @@ module.exports = {
       await kitaru.print_and_wait(
         '알 수 없는 메스꺼움. 위와 장이 하나로 뒤틀린 것 같다.',
       );
-      era.drawLine({ content: '翌日 ' + you.name + ' の事務所' });
+      era.drawLine({ content: '다음 날, ' + you.name + '의 사무실' });
       era.printButton('「빈 껍데기?」', 1);
       await era.input();
       await era.printAndWait([
@@ -5488,7 +5493,7 @@ module.exports = {
         '을(를) 품에 안았다.',
       ]);
       await kitaru.say_and_wait(['우으……', callname, '……']);
-      era.drawLine({ content: '翌日 ' + you.name + ' の事務所' });
+      era.drawLine({ content: '다음 날, ' + you.name + '의 사무실' });
       era.printButton('「빈 껍데기?」', 1);
       await era.input();
       await era.printAndWait([
@@ -5565,7 +5570,7 @@ module.exports = {
         kitaru.get_colored_name(),
         '은(는) 다시 정신이 불안정해졌다.',
       ]);
-      era.drawLine({ content: 'スタジオ' });
+      era.drawLine({ content: '스튜디오' });
       await kitaru.say_and_wait('네, 맞아요.');
       await kitaru.say_and_wait('아마도요.');
       await kitaru.say_and_wait('……');
@@ -5646,7 +5651,7 @@ module.exports = {
         '을(를) 받쳤다.',
       ]);
       await era.printAndWait(['인터뷰는 중단되었다.']);
-      era.drawLine({ content: '数日後' });
+      era.drawLine({ content: '며칠 후' });
       await era.printAndWait(['검사 결과 이상은 없다. 휴식이 필요할 뿐이다.']);
       await kitaru.say_and_wait(['죄송해요. 또 ', callname, '에게 폐를……']);
       await era.printAndWait([
@@ -5732,7 +5737,7 @@ module.exports = {
       await era.printAndWait([
         '아니다. 자주 참배하는 신사도, 학원 학생들이 자주 가는 고목의 구멍도 아니다.',
       ]);
-      era.drawLine({ content: '郊外の墓地' });
+      era.drawLine({ content: '교외 묘지' });
       await era.printAndWait([
         '주황색의 ',
         kitaru.uma_sex_title,
@@ -5941,7 +5946,7 @@ module.exports = {
         kitaru.get_colored_name(),
         '은(는) 앞으로 걸었다.',
       ]);
-      era.drawLine({ content: 'しばらくして' });
+      era.drawLine({ content: '잠시 후' });
       await era.printAndWait([
         kitaru.get_colored_name(),
         '은(는) URA 문장이 장식된 인터뷰 배경 앞에 서 있다.',
@@ -6107,7 +6112,7 @@ module.exports = {
         '의 오늘 달리기는 그 말 자체다.',
       ]);
       era.println();
-      era.drawLine({ content: '阪神競馬場 控え室' });
+      era.drawLine({ content: '한신 경기장 대기실' });
       await kitaru.say_and_wait([callname, '! 이겼어요! 이겼어요!']);
       era.printButton('「그래! 팬들도 기뻐해!」', 1);
       await era.input();
@@ -6249,7 +6254,7 @@ module.exports = {
       ]);
       await kitaru.say_and_wait('어! 네에～? 어라?');
       await era.printAndWait('그러더니 연기처럼 신사를 뛰쳐나갔다.');
-      era.drawLine({ content: you.name + ' の事務所' });
+      era.drawLine({ content: you.name + '의 사무실' });
       await era.printAndWait([
         '주황색 머리의 ',
         kitaru.teen_sex_title,
@@ -6289,7 +6294,7 @@ module.exports = {
         );
         await kitaru.say_and_wait('정했어요! 아리마 기념이에요!');
       }
-      era.drawLine({ content: 'フクキタル家の神社' });
+      era.drawLine({ content: '후쿠키타루 집안의 신사' });
       await kitaru.say_and_wait(
         '지난 타카라즈카 기념은 신도 같은 팬들이 자비를 베풀어 주셔서 나갈 수 있었어요.',
       );
@@ -6423,7 +6428,7 @@ module.exports = {
         kitaru.sex,
         '의 개운 도구를 흘려보내기 시작했다.',
       ]);
-      era.drawLine({ content: 'しばらくして' });
+      era.drawLine({ content: '잠시 후' });
       await kitaru.say_and_wait(['그럼 이 종이 등롱으로 오늘을 마칠까요.']);
       await era.printAndWait([
         '불빛으로 따뜻한 주황색을 띤 네모난 종이 등롱이 물 위에 뜬다. 하지만 등롱은 못 박힌 듯 강 한가운데서 움직이지 않는다.',
@@ -6490,7 +6495,7 @@ module.exports = {
       era.printButton('손을 내민다', 1);
       era.printButton('당연히 손을 내민다', 2);
       await era.input();
-      era.drawLine({ content: 'しばらくして' });
+      era.drawLine({ content: '잠시 후' });
       await era.printAndWait('큰길로 돌아온 모양이다.');
       let direction = 0,
         temp;
@@ -6570,7 +6575,7 @@ module.exports = {
           ]);
           era.printButton('「넌 누구야?」', 1);
           await era.input();
-          kitaru.name = 'マチカネフクキタル？';
+          kitaru.name = '마치카네 후쿠키타루?';
           await kitaru.say_and_wait([
             '……아하하. 역시 그 아이의 ',
             callname,
@@ -6682,7 +6687,7 @@ module.exports = {
             '의 품에 쓰러졌다.',
           ]);
           await typing(
-            'この子を頼む。' + kitaru.sex + 'の運命の人よ',
+            '이 아이를 부탁하네. ' + kitaru.sex + '의 운명의 사람이여',
             kitaru.color,
           );
           await era.printAndWait([
@@ -6886,7 +6891,7 @@ module.exports = {
         callname,
         '에게 밖에 같이 나가 달라고 할 수밖에요.',
       ]);
-      era.drawLine({ content: 'トレセン学園 屋上' });
+      era.drawLine({ content: '트레센 학원 옥상' });
       await era.printAndWait([
         kitaru.get_colored_name(),
         '와(과) 늘 가던 옥상에 왔다. 겨울바람에 ',
@@ -7043,7 +7048,7 @@ module.exports = {
         '이(가) 지하 통로를 빠져나가 괴물의 입을 넘어, 하늘에서 내리는 흰빛에 감싸이는 것을 배웅했다.',
       ]);
       await era.printAndWait('울려 퍼지는 함성 속에서 게이트로 들어간다.');
-      era.drawLine({ content: '中山競馬場 ゲートの中' });
+      era.drawLine({ content: '나카야마 경기장 게이트 안' });
       await kitaru.print_and_wait(
         '전에는 행운이 제 편이면 여기까지 올 수 있을 줄 알았어요!',
       );
@@ -7110,7 +7115,7 @@ module.exports = {
         kitaru.child_sex_title,
         '은(는) 신이 되어 말의 경계를 넘어 신의 영역에 들어갔고, 그 뒤 한 줄기 흰빛이 되었어요……',
       ]);
-      era.drawLine({ content: '中山競馬場 地下通路' });
+      era.drawLine({ content: '나카야마 경기장 지하 통로' });
       await era.printAndWait([
         kitaru.get_colored_name(),
         '은(는) 레이스 뒤,',
@@ -7149,7 +7154,7 @@ module.exports = {
         '의 등을 두드려 얼른 그만두라고 신호했다.',
       ]);
       await kitaru.say_and_wait('좋아요, 이 기세로 승자 인터뷰에 가요!');
-      era.drawLine({ content: '有馬記念後の取材会場' });
+      era.drawLine({ content: '아리마 기념 후 취재장' });
       await kitaru.say_and_wait('오늘! 여기서 이 말을 해야 해요!');
       await kitaru.say_and_wait(
         '국화의 무대에 이어! 복은 나카야마에도 왔어요!',
@@ -7246,7 +7251,7 @@ module.exports = {
         callname,
         '에게 밖에 같이 나가 달라고 할 수밖에요.',
       ]);
-      era.drawLine({ content: 'トレセン学園 屋上' });
+      era.drawLine({ content: '트레센 학원 옥상' });
       await era.printAndWait([
         kitaru.get_colored_name(),
         '와(과) 늘 가던 옥상에 왔다. 겨울바람에 ',
@@ -7703,7 +7708,7 @@ module.exports = {
         kitaru.get_colored_name(),
         '의 지휘 아래 새해 신사 준비에 합류했다.',
       ]);
-      era.drawLine({ content: '翌日 郊外の墓地' });
+      era.drawLine({ content: '다음 날, 교외 묘지' });
       await era.printAndWait([
         '같은 떡갈나무 아래, 묘비 옆.',
         you.get_colored_actual_name(),
@@ -8105,7 +8110,7 @@ module.exports = {
         you.get_colored_name(),
         '의 팔을 꽉 붙들어, 도망칠 엄두도 내지 못하게 한다.',
       ]);
-      era.drawLine({ content: 'しばらくして' });
+      era.drawLine({ content: '잠시 후' });
       await kitaru.say_and_wait('후우……');
       await era.printAndWait([
         kitaru.get_colored_name(),
@@ -8142,7 +8147,7 @@ module.exports = {
           case 1:
             a = b = c = false;
             await era.printAndWait('뚜루루…… 뚜루루……');
-            era.drawLine({ content: '数秒後' });
+            era.drawLine({ content: '몇 초 후' });
             break;
           case 2:
             b = false;
@@ -8256,7 +8261,7 @@ module.exports = {
             }
             era.println();
             await typing(
-              `マチカネフクキタルを大切に ${you.actual_name}トレーナー`,
+              `마치카네 후쿠키타루를 소중히 대해 주게, ${you.actual_name} 트레이너`,
               kitaru.color,
             );
             era.println();
@@ -8300,7 +8305,7 @@ module.exports = {
             await kitaru.say_and_wait(
               '마, 맞아요…… 저도 이건 좀 그렇다고 생각해요……',
             );
-            era.drawLine({ content: 'しばらくして' });
+            era.drawLine({ content: '잠시 후' });
             await era.printAndWait('따르릉…… 따르릉……');
             await kitaru.say_and_wait(
               '에에엑?! 왜 또 여기로 돌아온 거예요!!!!',

@@ -64,16 +64,16 @@ module.exports = {
             '실내든, 옥상이든, 역이든, 트레이닝장이든. 어디라도 괜찮단다?',
           );
           era.print([
-            '他の子が必要なら、わたしが手伝います。ほかの子にとっては初めては少し痛いかもしれませんが、優しくしてあげれば、本能で ',
+            '다른 아이가 필요하다면 내가 도와줄게. 다른 아이들에게는 처음이라 조금 아플지도 모르지만, 부드럽게 대해 주면 본능적으로 ',
             callname,
-            ' の魅力が分かるはずです。',
+            '의 매력을 알게 될 거란다.',
           ]);
         });
         break;
       case 2:
         buffer.push(() =>
           acute.say(
-            'ふふっ～今度はそう簡単に下へは押し倒させませんよ？ 拳法には、そこそこ自信がありますから。',
+            '후후~ 이번에는 그렇게 쉽게 깔아 눕히게 두지 않을 거란다? 권법에는 제법 자신이 있거든.',
           ),
         );
         break;
@@ -114,36 +114,36 @@ module.exports = {
         buffer.push(() => {
           acute.say('후후후~ 오늘도 산책이니? 그럼 다른 아이들도 데려가겠니?');
           era.print([
-            '全裸の ',
+            '알몸인 ',
             acute.get_colored_name(),
-            ' は静かに地面へ伏せ、',
+            '은(는) 조용히 바닥에 엎드려 있다가, ',
             you.get_colored_name(),
-            ' が近づいて初めて、',
+            '이(가) 다가오고 나서야 ',
             acute.sex,
-            'は耳を左右に揺らしながら、口に咥えた首輪を ',
+            '는 귀를 좌우로 살랑이며 입에 문 목줄을 ',
             you.get_colored_name(),
-            ' の手元へ差し出した。',
+            '의 손에 내밀었다.',
           ]);
         });
         break;
       case 2:
         buffer.push(() => {
-          acute.say('むむむ……敗者は勝者に従う。自然界の必然ですね。');
+          acute.say('으음……패자는 승자를 따르는 법. 자연의 섭리란다.');
           era.print([
-            'そう言いながら、',
+            '그렇게 말하며 ',
             acute.get_colored_name(),
-            ' は落ち着いて、今日分の首輪を自分でつけた。',
+            '은(는) 태연하게 오늘 몫의 목줄을 스스로 찼다.',
           ]);
         });
         break;
       case 3:
         buffer.push(() => {
-          acute.say(['あらあら……我慢してくださいね？', callname, '～']);
+          acute.say(['어머어머……조금만 참으렴?', callname, '～']);
           era.print([
             you.get_colored_name(),
-            ' の熱い下腹を押さえ、時おり下へ探るように触れながら、',
+            '의 뜨거운 아랫배를 누르며 이따금 아래쪽을 더듬는 ',
             acute.get_colored_name(),
-            ' の顔には意味深な笑みが浮かんでいる。',
+            '의 얼굴에 의미심장한 미소가 떠오른다.',
           ]);
         });
     }
@@ -309,16 +309,16 @@ module.exports = {
             '어머나…… 오늘도 트레센 안을 산책하는 게니?',
           );
           await acute.say_and_wait(
-            '全裸で、首の首輪と手綱に繋がれたまま公共の場を歩かされるのは、心臓がどきどきして……これが、若者がよく言う『ロマン』なのでしょうか。',
+            "알몸으로 목줄과 고삐에 매인 채 사람들이 있는 곳을 걷게 되니 가슴이 두근거려서……이런 게 젊은 사람들이 말하는 '로망'인 걸까.",
           );
           await acute.say_and_wait(
-            '根性も鍛えられて、ロマンも快楽も感じられるなんて。こんな優れた調教法は、広めないともったいないですね。',
+            '근성도 단련하고, 로망도 쾌감도 느낄 수 있다니. 이렇게 훌륭한 조교법을 널리 알리지 않으면 아깝겠구나.',
           );
           await acute.say_and_wait([
             call_301,
-            ' や、理事長',
+            ', 이사장님',
             acute.couple_title,
-            'なんて、すぐに沈んでしまいそうですね。',
+            '이라니, 금방 가라앉을 것 같구나.',
           ]);
         });
         break;
@@ -331,30 +331,32 @@ module.exports = {
             '빨래하고, 이불 널고, 단무지 담그고…… 후후, 오늘 할 일이 생각보다 많구먼.',
           );
           await acute.say_and_wait([
-            'ですから、',
+            '그러니까 ',
             callname,
-            '。今日は、わたしを強姦してはいけませんよ？',
+            '. 오늘은 나를 덮치면 안 된단다?',
           ]);
           await acute.say_and_wait(
-            '皆が調教している最中に中庭の枯れ木の洞へ連れていかれるのも、昼休みに屋上へ連れていかれるのも、午後のお出かけで駅の路地へ、というのも、今日はだめですよ？',
+            '모두가 트레이닝하는 중에 중정의 고목 구멍으로 데려가는 것도, 점심시간에 옥상으로 데려가는 것도, 오후에 외출해서 역 골목으로 데려가는 것도 오늘은 안 된단다?',
           );
         });
         break;
       case 3:
         buffer.push(async () => {
           await acute.say_and_wait(
-            '今日は調子がとてもいいので、夜はわたしがあなたを可愛がります。',
+            '오늘은 몸 상태가 아주 좋으니, 밤에는 내가 너를 귀여워해 줄게.',
           );
           await acute.say_and_wait([
-            'ですから、',
+            '그러니까 ',
             callname,
-            '。体のすみずみまで、きちんと洗って待っていてくださいね。',
+            '. 몸 구석구석 깨끗이 씻고 기다리고 있으렴.',
           ]);
-          await era.printAndWait('いつもの笑顔なのに、拒めない迫力がある。');
+          await era.printAndWait(
+            '평소와 같은 미소인데도 거절할 수 없는 박력이 느껴진다.',
+          );
           await era.printAndWait([
-            '今夜、',
+            '오늘 밤, ',
             you.get_colored_name(),
-            ' はどうなってしまうのだろう……',
+            '은(는) 어떻게 되어 버리는 걸까……',
           ]);
         });
     }
@@ -780,9 +782,9 @@ module.exports = {
       ]);
       await era.printAndWait('………………');
       await era.printAndWait([
-        'なお、',
+        '참고로 ',
         acute.get_colored_name(),
-        ' が闘魂注入鞭（S用）の正しい使い方を知ったあと「大活躍」する、辛くて熱くて桃色の尻まで混ざる後日譚は、また別の話——',
+        "이(가) 투혼 주입 채찍(S용)의 올바른 사용법을 안 뒤 '대활약'하는, 따갑고 화끈거리는 데다 분홍빛 엉덩이까지 등장하는 후일담은 또 다른 이야기——",
       ]);
     } else {
       const buffer = [
@@ -1152,48 +1154,48 @@ module.exports = {
       await era.printAndWait('………………');
       if (era.get('item:斗魂注入鞭（S用）') > 0) {
         await acute.say_and_wait([
-          'ねえ。',
+          '저기, ',
           callname,
-          '、今夜は……【あれ】を使ってもいいですか？',
+          '. 오늘 밤에는……【그거】를 써도 되겠니?',
         ]);
         await era.printAndWait([
-          '桃色の唇に透明な汁が光り、',
+          '분홍빛 입술에 투명한 물기가 반짝이고, ',
           acute.teen_sex_title,
-          'である猛獣が、',
+          '라는 맹수가 ',
           acute.sex,
-          'の牙を見せた。',
+          '의 송곳니를 드러냈다.',
         ]);
         await era.printAndWait([
-          '察して、',
+          '눈치를 채고 ',
           acute.get_colored_name(),
-          ' を駅の人気のない隅へ、こっそり連れていく……',
+          '을(를) 역의 인적 드문 구석으로 몰래 데려간다……',
         ]);
-        await era.printAndWait('猛獣を調える闘魂注入鞭を取り出した——');
+        await era.printAndWait('맹수를 길들이는 투혼 주입 채찍을 꺼냈다——');
         await acute.say_and_wait('…………');
         await acute.say_and_wait('！');
         await acute.say_and_wait('————');
         await acute.say_and_wait('❤️～');
       } else {
-        await era.printAndWait('言い終わる前に、すでに抱きつかれていた。');
+        await era.printAndWait('말을 마치기도 전에 이미 끌어안겨 있었다.');
         await era.printAndWait([
           acute.teen_sex_title,
-          'である猛獣に強く抱かれ、逃げる余地はない。',
+          '라는 맹수에게 세게 안겨, 빠져나갈 틈이 없다.',
         ]);
         await era.printAndWait(
-          '古来、「獣」を馴らす仕事の中で、給餌は極めて危険だ。',
+          "예부터 '짐승'을 길들이는 일 가운데 먹이를 주는 일은 지극히 위험했다.",
         );
         await era.printAndWait(
-          '相手を満足させられなければ、給餌する側が猛獣の餌になる——',
+          '상대를 만족시키지 못하면, 먹이를 주던 쪽이 맹수의 먹이가 된다——',
         );
         await acute.say_and_wait('❤️——————');
-        await era.printAndWait('深い瞳が、桃色の光を散らす。');
+        await era.printAndWait('깊은 눈동자에서 분홍빛이 흩어진다.');
         await era.printAndWait([
-          'それが、',
+          '그것이 ',
           acute.get_colored_actual_name(),
-          ' という猛獣の「捕食」の合図だ。',
+          "라는 맹수의 '포식' 신호다.",
         ]);
         await era.printAndWait('………………');
-        await era.printAndWait('今夜は、生死を分ける決闘になりそうだ。');
+        await era.printAndWait('오늘 밤은 생사를 가르는 결투가 될 것 같다.');
       }
     } else {
       await era.printAndWait([
@@ -1202,11 +1204,11 @@ module.exports = {
         '에게 거절당했다……',
       ]);
       await acute.say_and_wait(
-        'ええ……ふわふわしたマッサージより、もっと刺激のある治療がいいですね——',
+        '그래……부드러운 마사지보다는 좀 더 자극적인 치료가 좋겠구나——',
       );
       await era.printAndWait([
         acute.get_colored_name(),
-        ' はいつもどおりふわふわと話し、視線は駅の隅のSM用具店へ流れていく。',
+        '은(는) 평소처럼 나긋나긋하게 말하며 역 구석의 SM 용품점으로 시선을 돌린다.',
       ]);
       await era.printAndWait('………………');
       await era.printAndWait('기분 탓이겠지.');
@@ -1327,23 +1329,23 @@ module.exports = {
    */
   async possessive(acute, callname) {
     await acute.print_and_wait(['또 고목 구멍으로 왔다……']);
-    await acute.print_and_wait([callname, ' の体に、跡を残したい。']);
-    await acute.print_and_wait(['キスだけじゃない。他の場所にも。']);
+    await acute.print_and_wait([callname, '의 몸에 흔적을 남기고 싶다.']);
+    await acute.print_and_wait(['입맞춤만이 아니라, 다른 곳에도.']);
     await acute.print_and_wait([
-      '耳たぶ、頬、顎、首、胸……全部に、わたしの跡を残したい。',
+      '귓불, 뺨, 턱, 목, 가슴……모든 곳에 내 흔적을 남기고 싶다.',
     ]);
     await acute.print_and_wait([
-      'これが占有欲、というものなのでしょうか。正直、よく分かりません。',
+      '이런 게 소유욕이라는 걸까. 솔직히 잘 모르겠다.',
     ]);
     await acute.print_and_wait([
       callname,
-      ' の唇へ近づきたい。鼻と唇の吐息を交差させたい。左の心臓がどきどきと鳴り、すべてが耐えがたい。',
+      '의 입술에 다가가고 싶다. 코와 입술에서 새는 숨결을 맞대고 싶다. 왼쪽 가슴이 두근거려, 무엇 하나 견디기 힘들다.',
     ]);
-    await acute.print_and_wait(['恋人同士のキス……危険な行いですね。']);
+    await acute.print_and_wait(['연인끼리의 입맞춤……위험한 일이구나.']);
     await acute.print_and_wait([
-      '本当に口づけて、体が ',
+      '정말 입을 맞췄다가, 몸이 ',
       callname,
-      ' への依存になってしまったら、そのとき……わたしはどうなるのでしょう。',
+      '에게 의존하게 된다면, 그때……나는 어떻게 되는 걸까.',
     ]);
     await acute.print_and_wait([callname, '……책임져 주겠니.']);
   },
@@ -1372,21 +1374,23 @@ module.exports = {
       '의 기대 어린 눈빛이 느껴진다.',
     ]);
     await era.printAndWait('………………');
-    await era.printAndWait('人通りの多い中庭で、愛し合う二人が互いを求める。');
     await era.printAndWait(
-      '周囲の目などもう気にせず、激しい唾液が相愛の契約を交わす。',
+      '사람이 많이 오가는 중정에서, 사랑하는 두 사람이 서로를 원한다.',
+    );
+    await era.printAndWait(
+      '이제 주위의 시선은 아랑곳하지 않고, 뜨겁게 타액을 주고받으며 서로의 사랑을 맹세한다.',
     );
     await acute.say_and_wait('……❤️');
     await era.printAndWait([
-      '小さな両手が ',
+      '작은 두 손이 ',
       you.get_colored_name(),
-      ' の頭を抱き、桃色に光る視線が、昼も夜も ',
+      '의 머리를 감싸고, 분홍빛으로 빛나는 시선은 밤낮으로 ',
       you.get_colored_name(),
-      ' ひとりだけを見つめている。',
+      '만을 바라본다.',
     ]);
     await era.printAndWait([
       you.get_colored_name(),
-      ' も、いちばん熱い愛と、いちばん激しい口づけで応える——昼も夜も、互いを強く抱きしめて——',
+      '도 가장 뜨거운 사랑과 가장 격렬한 입맞춤으로 화답한다——밤낮으로 서로를 힘껏 끌어안으며——',
     ]);
     await era.printAndWait('………………');
     await you.say_as_passer_by_and_wait(
@@ -1427,30 +1431,30 @@ module.exports = {
       '의 눈에 지금은 투지가 타오르고 있다.',
     ]);
     await era.printAndWait([
-      '……後ろから、かがんで持ち上がった ',
+      '……뒤에서 몸을 숙이며 올라간 ',
       acute.get_colored_name(),
-      ' の豊かな尻を見て、胸に邪悪な考えが湧く。',
+      '의 풍성한 엉덩이를 보자 마음속에 사악한 생각이 솟는다.',
     ]);
     await era.printAndWait([
-      'パンチングマシンに集中している ',
+      '펀치 머신에 집중하고 있는 ',
       acute.get_colored_name(),
-      ' へそっと近づき、',
+      '에게 살며시 다가가, ',
       acute.sex,
-      'が拳を振るう準備で尻を突き出した隙に、罪深い右手を静かに溜める——',
+      '가 주먹을 휘두르려고 엉덩이를 내민 틈에 죄 많은 오른손에 조용히 힘을 모은다——',
     ]);
-    era.printButton('「ぱっ！」', 1);
+    era.printButton('「찰싹!」', 1);
     await era.input();
-    await acute.say_and_wait('ひゃあっ～！？');
-    await era.printAndWait('恥じらいと、どこか興奮の混ざった顫音。');
+    await acute.say_and_wait('꺄앗~!?');
+    await era.printAndWait('부끄러움에 어딘가 흥분까지 섞인 떨리는 목소리.');
     await era.printAndWait([
-      '普段なら、年かさな ',
+      '평소라면 나이 지긋한 ',
       acute.get_colored_name(),
-      ' がこんな小さな',
+      '이(가) 이렇게 어린 ',
       acute.child_sex_title,
-      'みたいな声を出すとは、とても想像できない。',
+      ' 같은 목소리를 낼 줄은 상상도 못 했을 것이다.',
     ]);
     await era.printAndWait(
-      '豊かな尻の、弾む感触がまだ新しく、忘れがたい。満足と罪悪の混ざった加虐心が、胸の高鳴りを鎮められない。',
+      '풍성한 엉덩이의 탄력 있는 감촉이 아직도 생생해 잊히지 않는다. 만족감과 죄책감이 뒤섞인 가학심에 가슴의 고동이 가라앉지 않는다.',
     );
     await era.printAndWait([
       '하지만 아직 가슴에 감동이 남아 있을 때, ',
@@ -1458,7 +1462,7 @@ module.exports = {
       '이(가) 준비하던 주먹이 소리 없이 뻗어 나갔다.',
     ]);
     await era.printAndWait('쾅!!!!!!!');
-    await era.printAndWait('尻への一撃より、はるかに激しい音。');
+    await era.printAndWait('엉덩이를 때렸을 때보다 훨씬 요란한 소리.');
     await era.printAndWait(
       '기계의 팔은 휘고 액정은 깨졌으며, 펀치 머신에서 탄내 나는 흰 연기가 피어올랐다.',
     );
@@ -1477,15 +1481,15 @@ module.exports = {
     ]);
     await acute.say_and_wait('으으~ 으음——!');
     await era.printAndWait([
-      '片手で自分の豊かな尻を押さえた ',
+      '한 손으로 자신의 풍성한 엉덩이를 감싼 ',
       acute.get_colored_name(),
-      ' が、ゆっくり振り返る。涙は浮かべていても泣いてはおらず、恥じらいとも嫌悪ともつかない、一言では言えない色が混ざっている。',
+      '이(가) 천천히 돌아본다. 눈물이 맺혔지만 울지는 않고, 부끄러움인지 불쾌함인지 한마디로 표현하기 어려운 기색이 뒤섞여 있다.',
     ]);
     await era.printAndWait([
       acute.sex,
-      'は口を尖らせ、小さな息で頬を膨らませる。',
+      '는 입술을 삐죽 내밀고 작게 숨을 불어 볼을 부풀린다.',
       acute.sex,
-      'がいちばん生き生きして、同年代らしくかわいく見える瞬間だ。',
+      '가 가장 생기 있고 또래답게 귀여워 보이는 순간이다.',
     ]);
     await era.printAndWait(
       '——천천히 주먹을 쥐고 치켜드는 오른손만 없었다면 말이다.',
@@ -1544,50 +1548,50 @@ module.exports = {
         '이쪽은 아직 공포에 빠져 있는데, 기적 같은 문 앞의 잿빛 그림자는 여느 때와 같다. 온화한 목소리가 닫힌 방 안에 울려 퍼진다.',
       );
       await acute.say_and_wait([
-        '実はね、',
+        '사실 말이야, ',
         callname,
-        '、わたしはずっと耐えていたのですよ？ あなたを傷つけたくなかったから、回数も頻度も、自分で抑えていました。',
+        '. 나는 계속 참아 왔단다? 너를 다치게 하고 싶지 않아서 횟수도 빈도도 스스로 줄이고 있었지.',
       ]);
       await acute.say_and_wait([
-        'それなのに、',
+        '그런데도 ',
         callname,
-        ' は他の子たちと仲睦まじくしていたい、と考えている……',
+        '은(는) 다른 아이들과 정답게 지내고 싶다고 생각하는구나……',
       ]);
       await acute.say_and_wait([
         callname,
-        ' が、自分の本当の気持ちに従うと言うなら……',
+        '이(가) 자기 마음에 솔직해지겠다면……',
       ]);
-      await acute.say_and_wait('わたしも、少し本気を出しても……いいですよね？');
+      await acute.say_and_wait('나도 조금은 진심을 내보여도……되겠지?');
       await era.printAndWait([
-        'そう言って、',
+        '그렇게 말하며 ',
         acute.get_colored_name(),
-        ' はポケットから、畳むと親指一本分ほどの長さになった分解済みの小さな傘を取り出した。',
+        '은(는) 주머니에서 접으면 엄지손가락 하나 길이쯤 되는, 분해된 작은 우산을 꺼냈다.',
       ]);
       await era.printAndWait([
-        'それから、細い両手を ',
+        '그러고는 가느다란 두 손을 ',
         you.get_colored_name(),
-        ' の眼前へ伸ばし、指一本分の厚さの小さな傘を、親指と人差し指で ',
+        '의 눈앞으로 뻗어, 손가락 하나 두께의 작은 우산을 엄지와 검지로 집어 ',
         you.get_colored_name(),
-        ' の前へ差し出す。',
+        '의 앞에 내밀었다.',
       ]);
-      await era.printAndWait('「じりじり……」');
-      await era.printAndWait('ゴム製品が、ゴムでは絶対に出さない音を立てる。');
+      await era.printAndWait('「찌지직……」');
+      await era.printAndWait(
+        '고무 제품에서 고무라면 절대 나지 않을 소리가 났다.',
+      );
       await era.printAndWait([
-        '指一本分の厚さのゴムの傘が、',
+        '손가락 하나 두께의 고무 우산이 ',
         you.get_colored_name(),
-        ' の眼前で真っ二つに裂け、屑のように床へ落ちた。',
+        '의 눈앞에서 두 동강이 나, 부스러기처럼 바닥에 떨어졌다.',
       ]);
       await acute.say_and_wait(
-        '……今日は、わたしが飽きるまで、絶対に休ませませんよ。',
+        '……오늘은 내가 만족할 때까지 절대로 쉬게 두지 않을 거란다.',
       );
       await acute.say_and_wait([callname, { color: 'pink', content: '❤️～' }]);
       await era.printAndWait('…………');
       await era.printAndWait('………');
       await era.printAndWait('……');
-      await era.printAndWait('暗い瞳に、桃色の輪が光る。');
-      await era.printAndWait(
-        'まもなく、閉じた部屋のあちこちへ、純白の血が流れる……',
-      );
+      await era.printAndWait('어두운 눈동자에 분홍빛 고리가 빛난다.');
+      await era.printAndWait('곧 닫힌 방 곳곳에 새하얀 피가 흐르리라……');
     };
     f.title = title;
     return f;
@@ -1732,7 +1736,7 @@ module.exports = {
       // 二人とも男性ではない
       if (acute.sex_code * you.sex_code !== 1) {
         await era.printAndWait(
-          'それに口づけ、愛撫、出産、育児、二子、三子といった追加手当……今は家事賃金表に表立っては書いていないが、もうすぐ書かれるだろう。',
+          '거기에 입맞춤, 애무, 출산, 육아, 둘째, 셋째 같은 추가 수당까지……지금은 가사 임금표에 대놓고 적혀 있지 않지만, 머지않아 적히게 될 것이다.',
         );
       }
       await era.printAndWait([

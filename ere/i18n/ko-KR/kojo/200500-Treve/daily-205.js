@@ -626,24 +626,24 @@ module.exports = {
         '이(가) 잘못하신 거예요.',
       ]);
       await era.printAndWait(
-        `${treve.name} は動けない ${you.name} の手に指を絡める。それからゆっくり ${you.name} の顔へ近づき、息が詰まる距離で ${you.name} を見つめる。`,
+        `${treve.name}은(는) 움직일 수 없는 ${you.name}의 손에 손가락을 얽는다. 그리고 천천히 ${you.name}의 얼굴로 다가와, 숨이 막힐 듯한 거리에서 ${you.name}을(를) 응시했다.`,
       );
       await treve.say_and_wait([
-        '私は ',
+        '저는 ',
         callname,
-        ' に一目惚れした。それからずっと ',
+        '에게 첫눈에 반했어요. 그 후로 줄곧 ',
         callname,
-        ' のことだけ考えて、胸が苦しくて、とても好きで。',
+        '만 생각하면 가슴이 답답하고, 정말 좋아해서.',
       ]);
       await era.printAndWait(
-        `${you.name} に跨った ${treve.name} が、手を ${you.name} の胸に置く。`,
+        `${you.name} 위에 올라탄 ${treve.name}이(가) 손을 ${you.name}의 가슴에 얹었다.`,
       );
       await era.printAndWait(
-        `本能がこのままでは危険だと叫ぶ。だがどれだけ暴れても手錠は外れない。${treve.uma_sex_title}に力で勝つことなど、なおさらあり得ない。`,
+        `본능이 이대로는 위험하다고 외친다. 하지만 아무리 몸부림쳐도 수갑은 풀리지 않는다. ${treve.uma_sex_title}을(를) 힘으로 이기는 것 따위는, 더더욱 있을 수 없는 일이다.`,
       );
       await treve.say_and_wait([
         callname,
-        '、あなたはもう日本のものじゃない……ずっと私のもの。私のためだけに生きる人になるでしょ……？',
+        ' 당신은 이제 일본의 것이 아니에요…… 영원히 저의 것. 저만을 위해 사는 사람이 될 거죠……?',
       ]);
       await era.printAndWait(
         `${treve.name}는 황홀한 미소를 지으며 요염한 눈빛을 보냈다. 발그레하게 상기된 뺨을 한 채 ${you.name}의 얼굴로 바짝 다가온 ${treve.sex}는, 이내 숨결마저 삼켜버릴 듯 밀착한 거리에서 나지막이 속삭였다.`,
@@ -656,7 +656,7 @@ module.exports = {
         '가 나쁜 거예요.',
       ]);
       await era.printAndWait(
-        `顔を逸らそうとしても、${treve.name} の手に押さえられる。それから ${treve.name} は容赦なく、唇を ${you.name} に重ねる。柔らかい感触が唇を塞ぎ、温かい感覚が脳を支配する。${treve.name} の舌が ${you.name} の固く閉じた唇を無理に開き、${you.name} の舌に絡む。`,
+        `시선을 돌리려 해도, ${treve.name}의 손에 제지당한다. 그리고 ${treve.name}은(는) 가차 없이 ${you.name}의 입술에 자신의 입술을 겹쳤다`,
       );
       await treve.say_and_wait(['읍, 으응……', callname, '……']);
       await era.printAndWait(
@@ -665,18 +665,18 @@ module.exports = {
       await era.printAndWait(
         `이윽고 숨이 가빠와 한계에 달했을 때가 되어서야, ${treve.sex}는 서서히 입술을 떼어냈다.`,
       );
-      await treve.say_and_wait(`ああ、ああ、${treve.name}……もう——`);
+      await treve.say_and_wait(`아, 아, ${treve.name}…… 이제 그만——`);
       await era.printAndWait(
-        `思考が止まり、口に出そうとした瞬間、${treve.name} がまた唇を重ね、${you.name} の言葉を塞ぐ。`,
+        `생각이 멈추고, 입 밖으로 내뱉으려던 순간, ${treve.name}이(가) 다시 입술을 맞대며 ${you.name}의 말을 막았다.`,
       );
       await era.printAndWait(
-        `呼吸が苦しい。逃げようとしても、${treve.name} は ${you.name} を放さない。`,
+        `숨이 막힌다. 도망치려 해도, ${treve.name}은(는) ${you.name}을(를) 놓아주지 않는다.`,
       );
       await era.printAndWait(
-        `ずっと、ずっと、ずっと、${treve.name} の愛は限りを知らず、唇を重ね、舌を絡め、愛を求める。`,
+        `계속, 계속, 계속, ${treve.name}의 사랑은 끝이 없이, 입술을 맞대고, 혀를 얽으며, 사랑을 갈구한다.`,
       );
       await era.printAndWait(
-        `${treve.name} は離れ、遠く伸びた舌から糸を引く唾を呑み、笑う。`,
+        `${treve.name}은 물러나, 멀리 뻗은 혀에서 실처럼 늘어지는 침을 삼키며 웃는다.`,
       );
       await treve.say_and_wait([
         callname,

@@ -552,7 +552,7 @@ module.exports = {
       ]);
       await kitaru.say_and_wait('으……');
       await kitaru.say_and_wait('❤️대길❤️');
-      era.drawLine({ content: 'しばらくして' });
+      era.drawLine({ content: '잠시 후' });
       await era.printAndWait(
         '하는 동안에는 뒷정리가 얼마나 힘들지 생각하지 않았다. 체액으로 끈적해진 교복과 트레이너의 옷이 덜컹거리는 세탁기에 던져진다.',
       );
@@ -653,7 +653,7 @@ module.exports = {
         '의 시선을 끌었다.',
       ]);
       await kitaru.say_and_wait('응……');
-      era.drawLine({ content: '数分後' });
+      era.drawLine({ content: '몇 분 후' });
       era.printButton('손을 뻗는다', 1);
       await era.input();
       await kitaru.print_and_wait([
@@ -781,7 +781,7 @@ module.exports = {
       await era.printAndWait([
         '걸쭉하고 끈적한 정액이, 육봉이 빠져나가는 순간 무녀의 입구에서 쏟아져 나와 본전 안에 음란한 냄새를 채웠다.',
       ]);
-      era.drawLine({ content: 'しばらくして' });
+      era.drawLine({ content: '잠시 후' });
       await kitaru.say_and_wait('정말 격렬했네요……');
       await era.printAndWait([
         '차분한 척해도 무녀복에 말라붙은 액체 자국이 방금의 음란한',

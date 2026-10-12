@@ -1270,7 +1270,7 @@ module.exports = {
         brian.get_colored_name(),
         '에게 맞설 만한 호적수가 나타난다면 그때는 상황이 달라질지도 모른다.',
       ]);
-      era.drawLine({ content: '翌日' });
+      era.drawLine({ content: '다음 날' });
       await you.say_as_passer_by_and_wait('텔레비전', [
         '얼마나 강한 ',
         maya.uma_sex_title,
@@ -4510,7 +4510,7 @@ module.exports = {
       await maya.say_and_wait(
         '모두들 분명 마야가 훨씬 더 빛날 수 있을 거라 생각할 거야♪',
       );
-      era.drawLine({ content: '数日後' });
+      era.drawLine({ content: '며칠 뒤' });
       await maya.say_and_wait('후우…… 후우…… 응, 또 기록 경신이야!');
       await maya.say_and_wait(['이걸로 『', arim_kin, '』도──']);
       await maya.say_and_wait('……아.');
@@ -5501,7 +5501,7 @@ module.exports = {
         you.get_colored_name(),
         '은(는) 다음 방송을 보기로 약속했다.',
       ]);
-      era.drawLine({ content: '数日後' });
+      era.drawLine({ content: '며칠 뒤' });
       await era.printAndWait([
         you.get_colored_name(),
         '은(는) ',
@@ -5719,7 +5719,7 @@ module.exports = {
         await maya.say_and_wait(
           '어머, 다들 정말~♪ 그럼 마야의 라이브 시작한다!',
         );
-        await maya.say_and_wait('いち、に☆キラ、キラ☆ヘビー☆セクシー☆');
+        await maya.say_and_wait('하나, 둘☆반짝, 반짝☆헤비☆섹시☆');
         await maya.say_and_wait('마지막은 귀엽게 착지!');
         await you.say_as_passer_by_and_wait('시청자I', '너~무~ 귀~여~워~!!');
         await you.say_as_passer_by_and_wait(
@@ -5773,7 +5773,7 @@ module.exports = {
           '한테 평소의 두 배만큼 트레이닝을 시켰다.',
         ]);
       }
-      era.drawLine({ content: '翌日' });
+      era.drawLine({ content: '다음 날' });
       await maya.say_and_wait('와~! 시청자가 또 늘었어♪');
       await maya.say_and_wait('댓글 수도 지금까지 중에 제일 많아!');
       era.printButton(`「잘됐네, 마야!」`, 1);
@@ -6379,7 +6379,7 @@ module.exports = {
         await maya.say_and_wait('그때가 되면 그냥 쭉 앞으로 돌진☆');
         await urara.say_and_wait('알았어! 그렇게 해볼게♪');
       }
-      era.drawLine({ content: '翌日' });
+      era.drawLine({ content: '다음 날' });
       await urara.say_and_wait('내 말 좀 들어봐! 나 한 명 앞질렀어!');
       await maya.say_and_wait('와, 대단해~! 한 명을 앞지르다니──');
       await maya.say_and_wait('한 명!?');

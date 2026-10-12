@@ -349,9 +349,9 @@ module.exports = {
       await teio.say_and_wait('그럼…… 내 것도 받아 줘.');
       era.println();
       await era.printAndWait(
-        `細い指が慎重に ${you.name} の襟へ入り、鎖骨を伝って胸へ下り、${you.name} は肌がすっと縮むのを感じる。`,
+        `가느다란 손가락이 조심스럽게 ${you.name}의 옷깃 사이로 파고들어, 쇄골을 따라 가슴으로 내려오고 ${you.name}은(는) 살결이 매끄럽게 수축하는 것을 느낀다.`,
       );
-      await era.printAndWait(`${you.name} は決める——`);
+      await era.printAndWait(`${you.name}은(는) 결정했다——`);
       era.printButton(`${teio.sex}를 밀어내고 일어선다.`, 1);
       era.printButton('고개를 끄덕인다.', 2);
       const ret = await era.input();
@@ -361,196 +361,194 @@ module.exports = {
         );
       } else {
         await era.printAndWait(
-          `躊躇。${teio.sex}が指す言外の意味に、${you.name} は単純な喜びを感じる。興奮も。`,
+          `${teio.sex}이(가) 가리키는 말하지 않은 의미에 ${you.name}은(는) 단순한 기쁨을 느낀다. 흥분도.`,
         );
         await era.printAndWait(
-          `だが、このうねりに体を預けていいのか。それで本当にこの${teio.teen_sex_title}を救えるのか。`,
+          `하지만 이 물결에 몸을 맡겨도 괜찮은 걸까. 그렇게 정말로 ${teio.teen_sex_title}을(를) 구할 수 있을까.`,
         );
         await era.printAndWait(
-          `——そうは言っても、${you.name} はすでにすべてを${teio.sex}自身の決断に委ねると決めたのではなかったか。`,
+          `——렇게 말은 해도 ${you.name}은(는) 이미 모든 것을 ${teio.sex} 자신의 결단에 맡기기로 결정하지 않았었나.`,
         );
         await era.printAndWait(
-          `その決断が${teio.sex}のものであるなら、${you.name} がすべきは——${teio.sex}の決断を尊重することだけだろう。`,
+          `그 결단이 ${teio.sex}의 것이라면, ${you.name}이(가) 해야 할 일은—— ${teio.sex}의 결단을 존중하는 것뿐이겠지.`,
         );
         era.println();
 
-        await you.say_and_wait(
-          '自分は、そんなに優しい人間ではないかもしれない',
+        await you.say_and_wait('나는 그렇게 상냥한 사람은 아닐지도 모른다.');
+        era.println();
+
+        await teio.say_and_wait('괜찮아…… 나는, 으응!');
+        era.println();
+        await era.printAndWait(
+          `{you.name}은(는) ${teio.sex}의 턱을 들어 올려, ${teio.sex}의 입술에 입을 맞춘다. 예의라기보다는, ${teio.sex}의 기분을 조금 완화하기 위해서다..`,
+        );
+        await era.printAndWait(
+          `하지만 그 몸짓은 ${you.name}의 내면에 잠재되어 있던 것을 해방한다.`,
+        );
+        await era.printAndWait(
+          `뜨겁고 부드러운 감촉으로, ${you.name}은(는) ${teio.uma_sex_title}의 맛을 알게 된다. 그렇다, 타인에게 탐해지기 위해 태어난 생명체다. 빠져들게 만드는 매혹이 ${you.name}의 욕망을 끌어낸다.`,
+        );
+        await era.printAndWait(
+          `${teio.sex}을(를) 아래로 밀어 넣고, 몸을 지배하고 싶은 충동—— 거부할 수 없는 파도가 이 순간에 솟구쳐, 심장에서 사지의 끝까지 달린다.`,
+        );
+        await era.printAndWait('정신의 일부가 짐승으로 변하고 있다.');
+        await era.printAndWait(
+          `${you.name}의 변화를 느꼈는지, 팔 안의 ${teio.name}이 떨린다. 개의치 않고, ${you.name}은(는) 시작한 동작을 계속한다—— 혀를 내밀어 ${teio.teen_sex_title}의 입술을 열고 침입한다.`,
+        );
+        await era.printAndWait(
+          `매끄러운 치아부터 탄력 있는 잇몸까지 핥는다. 혀가 ${teio.teen_sex_title}의 윗입술을 감싸고, 안쪽을 핥는다.`,
+        );
+        await era.printAndWait(
+          `${teio.teen_sex_title}에 대한 올바른 취급이라 말하기는 어렵다. 하지만 그렇게 하고 싶은 충동은 억누를 수 없다.`,
+        );
+        await era.printAndWait(
+          `${teio.name}은(는) 분명 겁을 먹고 있을 것이다. 하지만 ${teio.sex}은(는) 복종적이다. 거스르지 않고, 피하지 않으며, 순순히 몸을 ${you.name}에게 맡긴다.`,
+        );
+        await era.printAndWait(
+          `그 태도가 더욱 ${you.name}의 짐승성을 불태운다.`,
+        );
+        await era.printAndWait(
+          `$${you.name}은(는) 얼굴을 가까이 대고, 담당과 입술과 혀를 맞대며 체액이 양측의 입에서 뒤섞인다. 구강을 용서 없이 침범당한 작은 우마무스메는 떨면서도 패배를 인정하지 않고 부드러운 혀를 내밀어, 침입자인 ${you.name}에게 얽힌다.`,
+        );
+        await era.printAndWait('피가 끓는다. 뇌는 사고 기능을 잃는다.');
+        await era.printAndWait(
+          `${teio.teen_sex_title}의 얇은 혀는 속수무책으로 농락당한다. 과도한 폭력성에 눈동자가 눈물을 머금고—— 방울이 밀착된 입술 위로 떨어지며, 예기치 못한 거친 대우를 받았다는 사실을 전한다.`,
         );
         era.println();
 
-        await teio.say_and_wait('大丈夫……ボク、んっ！');
-        era.println();
+        await era.printAndWait('——무척 달다.');
+        await era.printAndWait(`${you.name}의 내면이 만족의 포효를 올린다.`);
+        await era.printAndWait(`${teio.sex_slave_title} 한 마리일 뿐이다.`);
         await era.printAndWait(
-          `${you.name} は${teio.sex}の顎を上げ、${teio.sex}の唇に口づける。礼儀というより、${teio.sex}の気持ちを少し和らげるためだ。`,
+          `그 생각이 떠오른 순간, ${you.name}에게 남아 있던 「트레이너로서의 체면」은 더욱 찾아볼 수 없게 된다.`,
         );
         await era.printAndWait(
-          `だがその仕草は、${you.name} の奥に潜んでいたものを解放する。`,
+          `입술이 일정한 리듬으로 흡입하며, 살과 살 사이의 좁은 틈에서 샘솟는 액체를 홀짝인다. 음란한 소리가 울려 퍼진다. 힘을 잃고 ${you.name}에게 반쯤 안긴 ${teio.teen_sex_title}의 몸이 갑자기 열기를 띤다—— 부끄러움 때문일 것이다.`,
+        );
+        await era.printAndWait(`그것이 더욱 ${you.name}의 욕망을 부채질한다.`);
+        await era.printAndWait(
+          `${you.name}은(는) 구강을 계속 독점하며, ${teio.name}의 입이 마를 때까지. 아니, 아직 부족하다.`,
         );
         await era.printAndWait(
-          `熱く柔らかい感触で、${you.name} は${teio.uma_sex_title}の味を知る。そうだ、人に貪られるために生まれた生き物だ。耽溺させる魅惑が ${you.name} の欲を引き出す。`,
+          `${you.name}은(는) ${teio.teen_sex_title}의 혀와 얽히며 자신의 입으로 사로잡는다. 살짝 깨물어 먹잇감의 움직임을 봉쇄한다.`,
         );
         await era.printAndWait(
-          `${teio.sex}を下に押し、体を支配したい衝動——抗えない波がこの瞬間に沸き、心臓から四肢の末端まで走る。`,
+          `자신을 어떻게 다룰 것인가. ${teio.sex}은(는) 굳어버린 몸을 움츠리며, ${you.name}에게 무언의 질문을 던진다.`,
         );
-        await era.printAndWait('精神の一部が、獣へ変じている。');
+        await era.printAndWait('——후후.');
+        await era.printAndWait('말할 필요도 없겠지.');
         await era.printAndWait(
-          `${you.name} の変化を感じたのか、腕のなかの${teio.name}が震える。構わず、${you.name} は始めた動作を続ける——舌を伸ばして${teio.teen_sex_title}の唇を開き、侵入する。`,
-        );
-        await era.printAndWait(
-          `滑らかな歯から弾力のある歯茎まで舐める。舌が${teio.teen_sex_title}の上唇を巻き、内側を舐る。`,
-        );
-        await era.printAndWait(
-          `${teio.teen_sex_title}への正しい扱いとは言い難い。だがそうしたい衝動は抑えられない。`,
-        );
-        await era.printAndWait(
-          `${teio.name}はきっと怯えているだろう。だが${teio.sex}は従順だ。逆らわず、躱さず、素直に体を ${you.name} へ預ける。`,
-        );
-        await era.printAndWait(
-          `その態度が、さらに ${you.name} の獣性を燃やす。`,
-        );
-        await era.printAndWait(
-          `${you.name} は顔を寄せ、担当と唇と舌を合わせ、体液が双方の口で翻る。口腔を容赦なく侵された小さなウマは、震えながらも負けを認めず柔舌を伸ばし、侵入者である ${you.name} に絡む。`,
-        );
-        await era.printAndWait('血が沸騰する。脳は考える機能を失う。');
-        await era.printAndWait(
-          `${teio.teen_sex_title}の薄い舌は為す術なく弄ばれる。過剰な暴虐に瞳が涙を含み——雫が密着した唇へ落ち、予期せぬ粗暴な扱いを受けた事実を伝える。`,
+          `충동은 멈추지 않는다. 멈출 리도 없다. 마지막 장식처럼, ${you.name}은(는) 혀끝으로 끈적한 ${teio.name}의 혀 안쪽—— 그 가늘고 부드러운 영역——을 문지른다.`,
         );
         era.println();
 
-        await era.printAndWait('——ひどく甘い。');
-        await era.printAndWait(`${you.name} の奥が、満足の咆哮を上げる。`);
-        await era.printAndWait(`${teio.sex_slave_title}一匹にすぎない。`);
-        await era.printAndWait(
-          `その念が出た瞬間、${you.name} に残っていた「教師としての体裁」はさらに見当たらなくなる。`,
-        );
-        await era.printAndWait(
-          `唇が一定のリズムで吸い、肉と肉の狭い隙間から湧く液体を啜る。淫らな音が響く。力を失い、${you.name} に半分抱えられた${teio.teen_sex_title}の体が、いきなり熱を帯びる——羞恥のせいだろう。`,
-        );
-        await era.printAndWait(`それがさらに ${you.name} の欲を煽る。`);
-        await era.printAndWait(
-          `${you.name} は口腔を独占し続け、${teio.name}の口が渇くまで。いや、まだ足りない。`,
-        );
-        await era.printAndWait(
-          `${you.name} は${teio.teen_sex_title}の舌に絡み、自分の口へ虜にする。軽く噛み、獲物の動きを封じる。`,
-        );
-        await era.printAndWait(
-          `自分をどう扱うのか。${teio.sex}は硬直した体を縮め、${you.name} へ無声の問いを投げる。`,
-        );
-        await era.printAndWait('——ふふ。');
-        await era.printAndWait('言うまでもないだろう。');
-        await era.printAndWait(
-          `衝動は止まない。止まるはずもない。最後の飾りのように、${you.name} は舌先で粘く ${teio.name}の舌の内側——その細く柔らかい領地——を擦る。`,
-        );
-        era.println();
-
-        await teio.say_and_wait(`——んあっ！`);
+        await teio.say_and_wait(`——응앗!`);
         era.println();
 
         await era.printAndWait(
-          `この秘所まで略奪されたと気づき、${teio.teen_sex_title}は慌てる。${teio.sex}は為す術なく、無意識に抜け出そうとするが、${you.name} が両腕を強く閉じ、抗うなという意思を込めれば、${teio.sex}は静かになる……両目に怯え、困惑、だがそれらに構っていられない表情が映る。`,
+          `비소까지 약탈당했다는 것을 깨닫고, ${teio.teen_sex_title}은(는) 당황한다. ${teio.sex}은(는) 속수무책으로 무의식중에 빠져나가려 하지만, ${you.name}이 양팔을 강하게 닫고 저항하지 말라는 의지를 담자 ${teio.sex}이(가) 조용해진다…… 양눈에는 겁과 당혹감이 서리지만, 그것들에 신경 쓸 겨를 없는 표정이 비친다.`,
         );
         await era.printAndWait(
-          '普段は一本気で子供っぽい担当が、今は壊れそうなほど柔らかい塊に縮んでいる。',
+          '평소에는 한결같은 성격에 어린아이 같은 담당이, 지금은 부서질 듯 부드러운 덩어리로 움츠러들어 있다.',
         );
         era.println();
 
-        await you.say_and_wait('キミにも、そんな目があるんだな！', true);
+        await you.say_and_wait('너에게도 그런 눈이 있었구나.', true);
         era.println();
 
         await era.printAndWait(
-          `内心の声が上がる。こう強制的にひとりの${teio.uma_sex_title}を征服することが、${you.name} を陶然とさせる。${you.name} は我を忘れて、口のなかの自分だけのものになった柔らかさを吸い、${teio.sex}の体液を搾り、収奪する。`,
+          `내면의 목소리가 터져 나온다. 이렇게 강제적으로 한 마리의 ${teio.uma_sex_title}을 정복하는 것이, ${you.name}을 황홀하게 만든다. ${you.name}은(는) 자아를 잊고 입안에서 오직 자신만의 것이 된 부드러움을 빨아들이며, ${teio.sex}의 체액을 짜내어 수탈한다.`,
         );
         await you.say_and_wait(
-          'キミのせいだ。自分たちを今の姿にしたのは。',
+          '네 탓이야. 우리를 지금의 모습으로 만든 것은.',
           true,
         );
         await you.say_and_wait(
-          'キミの我儘と、自分の甘やかしが、この惨めな結末を招いた。',
+          '너의 제멋대로인 성질과, 나의 응석이 이 비참한 결말을 초래했다.',
           true,
         );
-        await you.say_and_wait('だから、代償は回収する。', true);
+        await you.say_and_wait('그러니 대가는 회수하겠다.', true);
         await era.printAndWait(
-          `${teio.name}が ${you.name} の背に回した手は力なく撫でる。指先が、抵抗なく許しを請うだけだ。`,
+          `${teio.name}이(가) ${you.name}의 등 뒤로 돌린 손은 힘없이 쓸어내린다. 손끝은 저항 없이 그저 허락을 구할 뿐이다.`,
         );
-        await era.printAndWait('構わない。');
+        await era.printAndWait('상관없다.');
         await era.printAndWait(
-          `突然、${teio.teen_sex_title}が激しく震える。肌が熱に浮かされたように灼ける。`,
-        );
-        await era.printAndWait(
-          `${you.name} の手のなかで、強制的に挑まれた反応だ。`,
-        );
-        await era.printAndWait(`……絶頂したのだろう。`);
-        await era.printAndWait(
-          `その極めて卑俗な言葉が、${you.name} の胸で低く響く。`,
-        );
-        await era.printAndWait(`続ける。まだ遠く足りない。`);
-        await era.printAndWait(
-          `${teio.name}もそう思っているはずだ。衣がすべて落ちる前に止められるのは、${teio.sex}の望むところではない。`,
+          `갑자기, ${teio.teen_sex_title}이(가) 격렬하게 떨린다. 피부가 열기에 휩싸인 듯 타오른다.`,
         );
         await era.printAndWait(
-          `${teio.sex}は ${you.name} にこうしてほしいと言った。${you.name} が今しているのは、自分の欲を満たすのでも感情を晴らすのでもなく、${teio.teen_sex_title}の気持ちに従っているだけだ。`,
+          `${you.name}의 손 안에서 강제로 자극받은 반응이다.`,
         );
-        await era.printAndWait('なら、次の段へ進もう。');
+        await era.printAndWait(`……절정에 달한 것이겠지.`);
         await era.printAndWait(
-          `${teio.teen_sex_title}の視線は散って定まらず、${you.name} は${teio.sex}の注視のなか、両手を${teio.sex}の衣へ伸ばす。`,
+          `그 매우 저속한 단어가 ${you.name}의 가슴 속에서 낮게 울린다.`,
         );
+        await era.printAndWait(`계속한다. 아직 한참 부족하다.`);
         await era.printAndWait(
-          `${teio.teen_sex_title}の体はすでに充分熱く、往時のようだ。`,
-        );
-        await you.say_and_wait(`${teio.name}——やはり、そういう女だ！`, true);
-        await era.printAndWait(
-          `頭のなかが黒いもので埋まり、${you.name} は口を歪めて${teio.sex}の肌に触れる。舌を伸ばす。口づけを${teio.sex}の首筋に置き、汗を吸う。勢いで肌を舐め、柔らかな肉を吸い——醜い痕を残す。`,
-        );
-        era.println();
-        await teio.say_and_wait('ああ……');
-        era.println();
-        await era.printAndWait(
-          `また小さな略奪を受け、${teio.teen_sex_title}は夢うつつに呻く。`,
+          `${teio.name}도 그렇게 생각하고 있을 것이다. 옷이 모두 벗겨지기 전에 멈추는 것은 ${teio.sex}이(가) 바라는 바가 아니다.`,
         );
         await era.printAndWait(
-          `普段あれほど誇り高く固執し、レース場で舞い上がるウマ——所詮はこういう${teio.phy_sex_title}だ！`,
+          `${teio.sex}은(는) ${you.name}에게 이렇게 해주길 바랐다. ${you.name}이 지금 하고 있는 것은 자신의 욕심을 채우는 것도, 감정을 해소하는 것도 아니며, 단지 ${teio.teen_sex_title}의 기분에 따르고 있을 뿐이다.`,
+        );
+        await era.printAndWait('그렇다면 다음 단계로 나아가자.');
+        await era.printAndWait(
+          `${teio.teen_sex_title}의 시선은 흩어져 머물지 못하고, ${you.name}은(는) ${teio.sex}의 주시 속에서 양손을 ${teio.sex}의 옷 위로 뻗는다.`,
         );
         await era.printAndWait(
-          `${you.name} を苦しめた小さなものが、今は甘く柔らかい贄の子羊として ${you.name} の前に並んでいる！`,
+          `${teio.teen_sex_title}의 몸은 이미 충분히 뜨거워져, 예전과 같았다.`,
         );
+        await you.say_and_wait(`${teio.name}——역시 그런 여자구나!`, true);
         await era.printAndWait(
-          `${you.name} が抑えきれない内心の一角がどれほど醜くても……${teio.sex}に責任は一片もないのか！影は太陽の下に現れる。それが真理ではないのか！`,
-        );
-        await era.printAndWait(
-          `${you.name} は手を白い肌のうえを走らせる。大きくはない胸の隆起を覆う。`,
-        );
-        await era.printAndWait(
-          '掌をそのうえに置き、軽く弄る。指の腹で桃色の突起を撫でる。',
-        );
-        await era.printAndWait(
-          `${teio.teen_sex_title}は焦れて体をよじる。これは絶対に ${you.name} を誘っている。${you.name} はそう思い、${teio.teen_sex_title}の患部を避け、${teio.sex}のまだ育ちきっていない尻を擦り、他の部位へ手を伸ばして力を加える。予告なく、まだ硬い小さな丘を残酷に蹂躙し始める。`,
+          `머릿속이 검은 것들로 가득 차고 ${you.name}은(는) 입술을 비틀며 ${teio.sex}의 피부에 닿는다. 혀를 내민다. 입맞춤을 ${teio.sex}의 목덜미에 새기고, 땀을 빨아들인다. 기세 좋게 피부를 핥고 부드러운 살결을 빨며—— 추한 흔적을 남긴다.`,
         );
         era.println();
-        await teio.say_and_wait('やっ……');
+        await teio.say_and_wait('아아……');
         era.println();
         await era.printAndWait(
-          `${teio.name}が小さく驚く。当然だ。${teio.name}の体は、この扱いをこなすほど熟練していない。`,
+          `다시 작은 약탈을 당하며, ${teio.teen_sex_title}은(는) 꿈결인 듯 신음한다.`,
         );
         await era.printAndWait(
-          `${you.name} は知りつつ、わざとやる。この悲痛を求めて、こうしている。`,
+          `평소에 그토록 자랑스럽게 집착하고, 레이스장에서 날아오르는 말—— 결국은 이런 ${teio.phy_sex_title}이다!`,
         );
         await era.printAndWait(
-          `だから続ける。徹底して粗く、${teio.teen_sex_title}の第二の秘所を揉む。欲が高まり、胸のうえは油を塗ったように艶めき、${teio.sex}のちょうどいい寸法と相まって、火加減のいい目玉焼きのように誘う。`,
+          `${you.name}을(를) 괴롭혔던 작은 것이 지금은 달콤하고 부드러운 제물인 어린 양이 되어 ${you.name} 앞에 놓여 있다!`,
         );
         await era.printAndWait(
-          `${you.name} は唇をもう一方の隆起へ移し、吸い、また猥褻な痕を残す。`,
+          `${you.name}이(가) 억누를 수 없는 내면의 한구석이 아무리 추하더라도 …… ${teio.sex}에게는 책임이 단 한 조각도 없는 것인가! 그림자는 태양 아래에서 드러난다. 그것이 진리가 아닌가!`,
         );
         await era.printAndWait(
-          `${teio.name}が楚々と ${you.name} を見る。瞬間、血が逆流する。`,
+          `$${you.name}은(는) 손을 하얀 피부 위로 미끄러뜨린다. 크지 않은 가슴의 굴곡을 덮는다.`,
         );
         await era.printAndWait(
-          `暗い面が、抵抗しないこの${teio.teen_sex_title}を前に極限まで発揮する。`,
+          '손바닥을 그 위에 올리고 가볍게 만진다. 손가락 끝으로 분홍빛 돌기를 쓰다듬는다.',
         );
         await era.printAndWait(
-          `うん、きっと${teio.sex}はわざと ${you.name} の情熱を煽っている。完璧な小さな雌獣だ。`,
+          `${teio.teen_sex_title}은(는) 애타는 듯 몸을 비튼다. 이것은 분명히 ${you.name}을(를) 유혹하고 있다. ${you.name}은(는) 그렇게 생각하며, ${teio.teen_sex_title}의 환부를 피하고 ${teio.sex}의 아직 다 자라지 않은 엉덩이를 문지르며 다른 부위로 손을 뻗어 힘을 가한다. 예고 없이 아직 딱딱한 작은 언덕을 잔혹하게 유린하기 시작한다.`,
         );
-        await era.printAndWait('では……本題へ入ろう。');
+        era.println();
+        await teio.say_and_wait('앗……');
+        era.println();
+        await era.printAndWait(
+          `${teio.name}이(가) 살짝 놀란다. 당연하다. ${teio.name}의 몸은 이 정도 대우를 소화할 만큼 숙련되어 있지 않다.`,
+        );
+        await era.printAndWait(
+          `${you.name}은(는) 알면서도 일부러 그렇게 한다. 이 비통함을 원해서 이렇게 하고 있는 것이다.`,
+        );
+        await era.printAndWait(
+          `그래서 계속한다. 철저하게 거칠게 ${teio.teen_sex_title}의 비소를 주무른다. 욕망이 고조되어 가슴 위는 기름을 바른 듯 윤기가 흐르고, ${teio.sex}의 딱 적당한 치수와 어우러져 불 조절이 잘 된 계란 프라이처럼 유혹한다.`,
+        );
+        await era.printAndWait(
+          `${you.name}은(는) 입술을 다른 한쪽의 돌기로 옮겨 빨며 다시 음란한 흔적을 남긴다.`,
+        );
+        await era.printAndWait(
+          `${teio.name}이(가) 초연하게 ${you.name}을(를) 바라본다. 순간, 피가 역류한다.`,
+        );
+        await era.printAndWait(
+          `어두운 면이 저항하지 않는 이 ${teio.teen_sex_title} 앞에서 극한까지 발휘된다.`,
+        );
+        await era.printAndWait(
+          `응, 분명 ${teio.sex}은(는) 일부러 ${you.name}의 열정을 부채질하고 있다. 완벽한 작은 암컷 짐승이다.`,
+        );
+        await era.printAndWait('그럼…… 본론으로 들어가지.');
       }
       return [ret];
     };
@@ -558,20 +556,22 @@ module.exports = {
     return f;
   })(),
   async we_95_17_h_sex_end(teio, you) {
-    era.printButton('「すまない」', 1);
+    era.printButton('「미안해」', 1);
     await era.input();
 
-    await teio.say_and_wait('んぅん——！');
+    await teio.say_and_wait('으응——！');
     era.println();
     await era.printAndWait(
-      `結局、${you.name} はまる四時間自分を抑えられず、少しやりすぎた。`,
+      `결국, ${you.name}은(는) 무려 4시간 동안 자신을 억제하지 못하고 조금 과하게 했다.`,
     );
     await era.printAndWait(
-      `${you.name} の絶え間ない謝罪と保証のなか、小さな${teio.uma_sex_title}はようやく ${you.name} の詫びを受け入れ、ベッドで眠る。`,
+      `${you.name}의 끊임없는 사죄와 보장 속에서, 작은 ${teio.uma_sex_title}은(는) 마침내 ${you.name}의 사과를 받아들이고 침대에서 잠든다.`,
     );
-    await era.printAndWait(`${you.name} も身支度して、服のまま横になる。`);
     await era.printAndWait(
-      `目を閉じたとき、何かが寄ってきて ${you.name} の体に貼りつく気がした。`,
+      `${you.name}도 몸단장을 하고 옷을 입은 채로 옆으로 눕는다.`,
+    );
+    await era.printAndWait(
+      `눈을 감았을 때, 무언가가 다가와 ${you.name}의 몸에 달라붙는 느낌이 들었다.`,
     );
   },
   ws_95_19_h: (() => {

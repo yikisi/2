@@ -1041,9 +1041,9 @@ module.exports = {
       // 古代の人々はその小川を囲んで神社を建て、参拝する人は事業や恋の成就を祈った
       // 宣伝するなら、なぜファル子はボランティアや巫女のバイトをしないのか？
       // こういう場所で活躍すれば、スマートファルコンの印象に残る人は多いはず
-      darley.name = '優しい女神';
-      godolphin.name = '叡智の女神';
-      byerley.name = '厳格な女神';
+      darley.name = '다정한 여신';
+      godolphin.name = '지혜의 여신';
+      byerley.name = '엄숙한 여신';
       await era.printAndWait(`쉬는 날 오전.`);
       await era.printAndWait(
         `스스로 신사 봉사 활동을 신청한 ${falcon.name}가 ${you.name}의 손을 잡고 신사로 왔다.`,

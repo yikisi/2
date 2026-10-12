@@ -43,7 +43,7 @@ module.exports = {
       await era.printAndWait(
         `트레이너실 문을 조용히 닫고,${falcon.name}의 안내를 따라 트레센을 나섰다.`,
       );
-      era.drawLine({ content: 'しばらくして' });
+      era.drawLine({ content: '잠시 후' });
       await falcon.say_and_wait(`준비됐어!`);
       await era.printAndWait(`근처 공원에 도착했다.`);
       era.printButton(`잔디밭에서 소풍 즐기는 사람이 많네.`, 1);
@@ -276,7 +276,7 @@ module.exports = {
           await era.printAndWait(
             `생각할 틈도 없이,${you.actual_name}은(는) 곧장 그쪽으로 달렸다.`,
           );
-          era.drawLine({ content: '屋上' });
+          era.drawLine({ content: '옥상' });
           await era.printAndWait(
             `빗속에 선 조각상처럼,${falcon.name}은(는) 미동도 하지 않는다.`,
           );
@@ -656,7 +656,7 @@ module.exports = {
       await falcon.say_and_wait(`게다가 팔코는 오늘보다 내일이 더 기대돼!`);
       await you.say_and_wait(`나도!`);
       await era.printAndWait(`그 뒤 두 사람은 근처 공원에서 데이트를 즐겼다.`);
-      era.drawLine({ content: '黄昏どき' });
+      era.drawLine({ content: '해 질 녘' });
       await falcon.say_and_wait(`팔코, 이제 슬슬 돌아가야 해!`);
       await era.printAndWait(
         `아쉬운 듯 맞잡은 손을 놓은${falcon.name}이(가) 붉어진 뺨으로 당신을 바라본다.`,
@@ -669,7 +669,7 @@ module.exports = {
       await era.printAndWait(`황혼 속에서 두 사람은 행복하게 입을 맞췄다.`);
       await falcon.say_and_wait(`팔코, 내일이 기다려져⭐`);
       await falcon.say_and_wait(`트레이너${you.adult_sex_title}, 내일 봐⭐`);
-      era.drawLine({ content: '翌日' });
+      era.drawLine({ content: '다음 날' });
       await era.printAndWait(
         `너무 긴장해서 잠을 못 잘 줄 알았는데,${you.actual_name}은(는) 평소보다 깊이 잠들었다.`,
       );

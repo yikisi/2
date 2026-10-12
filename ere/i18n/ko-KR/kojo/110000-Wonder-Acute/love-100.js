@@ -117,15 +117,15 @@ module.exports = {
     ]);
     await era.printAndWait([
       acute.sex,
-      'はうつむき、正面を遮る豊かな実を通して ',
+      '는 고개를 숙여, 앞을 가리는 풍성한 열매 너머로 ',
       you.get_colored_name(),
-      ' を見る。',
+      '을(를) 바라본다.',
     ]);
     await era.printAndWait([
       you.get_colored_name(),
-      ' は顔を上げ、できるだけその実の隙間から',
+      '은(는) 고개를 들어, 어떻게든 그 열매 사이로 ',
       acute.sex,
-      'を見る。',
+      '를 바라본다.',
     ]);
     await era.printAndWait('……');
     await era.printAndWait([
@@ -499,7 +499,7 @@ module.exports = {
       '입술 위로 또 다른 입술이 포개지고, 달콤한 기운이 가슴 깊이 스며든다.',
     );
     await era.printAndWait(
-      '一方は強く、一方は迷い、やがて門が叩かれ、激しい交換が始まる——',
+      '한쪽은 거세게 밀어붙이고, 다른 쪽은 망설인다. 이윽고 문을 두드리며 격렬한 교환이 시작된다——',
     );
     await era.printAndWait('…………');
     await you.say_as_passer_by_and_wait(
@@ -718,51 +718,53 @@ module.exports = {
       '이것은 단순한 감사의 포옹이 아니다. 마음까지 독차지하고 싶은 뜨거운 욕심이다.',
     );
     await era.printAndWait(
-      'つま先が立ち、きれいな鼻筋が顎の剃り残しを上下に撫で、桜色の痕が赤白い首筋に吸いつく。',
+      '발끝을 세우자 고운 콧날이 턱의 덜 깎인 수염을 위아래로 스치고, 붉고 흰 목덜미에는 벚꽃빛 자국이 달라붙는다.',
     );
     await era.printAndWait([
-      '揺れる両耳が、',
+      '살랑이는 두 귀가 ',
       you.get_colored_name(),
-      ' の口元を滑る。',
+      '의 입가를 스친다.',
     ]);
-    await era.printAndWait(
-      '桃色のものが蠕き、深い灰色を飲み込みたがっている——',
-    );
+    await era.printAndWait('분홍빛이 꿈틀거리며 짙은 회색을 삼키려 한다——');
   },
   async '99-end'(acute, callname) {
     await era.printAndWait([
-      '熱い液体の交換のあと、まだ溢れる泉を構わず、',
+      '뜨거운 체액을 주고받은 뒤, 아직 넘쳐 흐르는 샘물도 아랑곳하지 않고 ',
       acute.get_colored_name(),
-      ' は下を包む白い布を身につけた。',
+      '은(는) 아래를 가리는 흰 천을 걸쳤다.',
     ]);
-    await era.printAndWait('月明かりの下、下腹の刻印が桃色の微光を放つ。');
+    await era.printAndWait(
+      '달빛 아래, 아랫배의 각인이 분홍빛으로 희미하게 빛난다.',
+    );
     await era.printAndWait([
       acute.get_colored_name(),
-      ' は言う。これはトレセンの最近の流行だ、と。この刻印を体に持つ',
+      '의 말로는 요즘 트레센에서 유행하는 것이라고 한다. 이 각인을 몸에 새긴 ',
       acute.uma_sex_title,
-      'は、刻印の主だけのものになる、と。',
+      '는 각인의 주인만의 것이 된다고.',
     ]);
-    await era.printAndWait('そして今、刻印はあと一歩だ。');
-    await acute.say_and_wait(['……ねえ、', callname, '？']);
     await era.printAndWait(
-      '長いスカートを咥え、白い腹を見せ、言葉にならない欲を訴える。',
+      '그리고 지금, 각인이 완성되기까지는 한 걸음만 남았다.',
+    );
+    await acute.say_and_wait(['……저기, ', callname, '？']);
+    await era.printAndWait(
+      '긴 치맛자락을 입에 물고 흰 배를 드러내며, 말로 다 하지 못한 욕망을 호소한다.',
     );
     await era.printAndWait(
-      '開いた胸は豊かな赤い実を晒し、両手に捧げる銀の輪は献上の宝物のようだ。',
+      '벌어진 가슴팍에는 풍성하고 붉은 열매가 드러나 있고, 두 손으로 받쳐 든 은빛 고리는 바치는 보물 같다.',
     );
     await era.printAndWait(
-      '野の鳥が慈悲を請うようでも、主を認めた家畜のようでもある。目尻の銀の珠が、胸の高ぶりを止められない。',
+      '자비를 구하는 들새 같기도, 주인을 인정한 가축 같기도 하다. 눈가에 맺힌 은빛 구슬이 가슴의 고동을 더욱 부추긴다.',
     );
     await era.printAndWait([
-      'その精緻な銀の輪を受け取り、自分の両手で、',
+      '그 정교한 은빛 고리를 받아, 직접 두 손으로 ',
       acute.get_colored_name(),
-      ' の首にかける。',
+      '의 목에 걸어 준다.',
     ]);
     await era.printAndWait([
-      'それから、満ち足りた ',
+      '그러자 만족한 ',
       acute.get_colored_name(),
-      ' は、微笑んで蹲る。',
+      '은(는) 미소를 지으며 쪼그려 앉는다.',
     ]);
-    await era.printAndWait('赤い舌を出し、獰猛な主獣に仕える。');
+    await era.printAndWait('붉은 혀를 내밀어 사나운 주인 짐승을 섬긴다.');
   },
 };

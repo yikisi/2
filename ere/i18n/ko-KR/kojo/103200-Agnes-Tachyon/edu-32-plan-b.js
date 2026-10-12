@@ -5394,7 +5394,7 @@ module.exports = {
         tachyon.get_colored_name(),
         '의 얼굴에 떠오른 미소',
       ]);
-      era.drawLine({ content: 'トレセン学園へ戻ってから' });
+      era.drawLine({ content: '트레센 학원으로 돌아온 뒤' });
       await coffee.say_and_wait('……오늘 아리마에서 이긴 건 제가 맞죠');
       await tachyon.say_and_wait([
         '물론이지, ',

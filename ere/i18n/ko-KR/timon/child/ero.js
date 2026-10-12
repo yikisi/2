@@ -11,9 +11,9 @@ module.exports = {
    */
   async estrus_for_slave(child, callname) {
     await child.say_and_wait([
-      'はぁ……はぁ……どうしてだろう、',
+      '하아……하아…… 왜일까 ',
       callname,
-      'を見ると、下が熱くて苦しい……もう……我慢できない！',
+      '을(를) 보면, 아래쪽이 뜨거워서 괴로워…… 이제…… 참을 수 없어!',
     ]);
   },
 };

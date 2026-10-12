@@ -1404,7 +1404,7 @@ module.exports = {
         await era.printAndWait(
           `사토노 다이아몬드의 대답은 무척 믿음직했다. 만일을 대비해 ${you.name}은(는) 내일 트레센 학원에서 일찍 출발하기로 했다.`,
         );
-        era.drawLine({ content: '翌朝' });
+        era.drawLine({ content: '다음 날 아침' });
         await era.printAndWait(
           '비는 예상만큼 내리지 않았지만 강풍이 끊임없이 불고 있다.',
         );
@@ -1485,7 +1485,7 @@ module.exports = {
         await era.printAndWait(
           `사토노 다이아몬드의 대답은 무척 믿음직했다. 만일을 대비해 ${you.name}은(는) 내일 트레센 학원에서 일찍 출발하기로 했다.`,
         );
-        era.drawLine({ content: '翌朝' });
+        era.drawLine({ content: '다음 날 아침' });
         await era.printAndWait(
           '비는 예상만큼 내리지 않았지만 강풍이 끊임없이 불고 있다.',
         );
@@ -1852,7 +1852,7 @@ module.exports = {
       );
       await daiya.say_and_wait('──내일은 날씨도 좋을 것 같아요.');
       era.drawLine({
-        content: `日本ダービー当日`,
+        content: `일본 더비 당일`,
       });
       await daiya.say_and_wait(
         '슬슬 시간이네요. 후후, 오늘은 모든 게 순조롭네요♪',
@@ -2682,7 +2682,7 @@ module.exports = {
       await daiya.say_and_wait(
         '트……트레이너님!! 아까 마신 벌꿀 레몬의 열량을……추가 트레이닝으로 소모하게 해 주세요~!',
       );
-      era.drawLine({ content: '翌日' });
+      era.drawLine({ content: '다음 날' });
       await daiya.say_and_wait([
         '저……어젯밤에 ',
         kiku_sho,
@@ -8299,7 +8299,7 @@ module.exports = {
           '와아, 흰색 상의에 남색 치마! 기본에 충실하고 단정해서 어른스러워~!',
         );
         await maya.say_and_wait(
-          'ハイウエストだから、脚も長く見えて、セクシーな感じ♪',
+          '하이웨이스트라 다리도 길어 보이고, 섹시한 느낌이야♪',
         );
         await maya.say_and_wait('이런 조합도 있구나~! 많이 배웠어☆');
         await daiya.say_and_wait('후후, 마음에 든다니 다행이에요.');
@@ -8357,7 +8357,7 @@ module.exports = {
           '바지가 짧으니 부츠도 짧은 걸 고르면 다리가 더 길어 보이죠!',
         );
         await maya.say_and_wait(
-          'うんうん、わかる～！ 脚を出すとセクシーな感じもするし。',
+          '응응, 알겠어~! 다리를 드러내면 섹시한 느낌도 나니까.',
         );
         await maya.say_and_wait(
           '마야랑 다이아는 취향이 잘 맞을 것 같아☆ 있잖아, 더 같이 조합을 찾아보자!',

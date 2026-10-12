@@ -605,37 +605,39 @@ module.exports = {
       );
       await teio.say_and_wait(`트레——이너——`);
       await era.printAndWait(
-        `${teio.teen_sex_title}は、幼さをすべて可愛さへ変え、どこか色気も匂わせる浴衣に着替え、${you.name} の前で一回転する。`,
+        `${teio.teen_sex_title}은(는) 어린 느낌을 모두 귀여움으로 바꾸고, 어딘가 관능미도 풍기는 유카타로 갈아입은 뒤 ${you.name} 앞에서 한 바퀴 돌았다.`,
       );
-      await teio.say_and_wait(`この格好、どう？`);
-      era.printButton('「うん……」', 1);
+      await teio.say_and_wait(`이 차림, 어때?`);
+      era.printButton('「응……」', 1);
       await era.input();
-      await era.printAndWait(`答えにくい。`);
-      await era.printAndWait(`胸の奥で、何かがプツリと切れた気がする。`);
+      await era.printAndWait(`대답하기 어렵네.`);
       await era.printAndWait(
-        `小柄な${teio.teen_sex_title}が着ると、まだ育ちきっていないが、それでも充分に色気のある体つきが透けて見える。`,
+        `가슴 깊은 곳에서 무언가가 툭 하고 끊어진 것 같은 기분이 들어.`,
       );
       await era.printAndWait(
-        `いちばん上の純白の耳当てが、小さな${teio.uma_sex_title}を純情な生徒だと指名しているようだ。その下、ゆったりした布は曲線を強調するほど体に密着せず、脇と側腹を透けさせている。`,
+        `몸집이 작은 ${teio.teen_sex_title}이(가) 입으니, 아직 다 자라지는 않았지만 그럼에도 충분히 관능적인 몸매가 비쳐 보인다.`,
       );
       await era.printAndWait(
-        `普段は隠れている、滑らかで白い敏感な肌が、今は ${you.name} の視線にさらされている。${you.name} が望めば、手を伸ばして感触を確かめることすらできる……`,
+        `머리에 달고 있는 순백의 귀마개가, 작은 ${teio.uma_sex_title}을(를) 마치 순진한 학생인 것처럼 표현해 준다. 그 아래로 이어지는 여유로운 옷감은 몸에 딱 달라붙어 곡선을 드러내기보다는, 옆구리와 측면을 자연스럽게 비치고 있다.`,
       );
-      await teio.say_and_wait(`んっ？`);
+      await era.printAndWait(
+        `평소엔 가려져 있던 매끄럽고 하얀 민감한 피부가 이제는 ${you.name}의 시선 속에 놓여 있다. ${you.name}이(가) 원하기만 한다면, 손을 뻗어 그 감촉을 느껴보는 것조차 가능하다……`,
+      );
+      await teio.say_and_wait(`엑?`);
       await era.printAndWait([
         you.get_colored_name(),
-        ' は',
+        '은(는) ',
         teio.teen_sex_title,
-        'の美しさに沈み、しばらく抜けられない。',
+        '의 아름다움에 빠져 한동안 빠져나올 수 없었다.',
       ]);
-      era.printButton('我慢できない！', 1, {
+      era.printButton('참을 수 없어!', 1, {
         disabled: era.get('love:3') < 75,
       });
       era.printButton('강철 같은 의지!', 2);
       const ret = await era.input();
       if (ret === 1) {
         await era.printAndWait(
-          `${you.name} は大きく息を吸い、重くなった体で${teio.uma_sex_title}のそばへ歩み、大きな手を伸ばす——`,
+          `${you.name}은(는) 크게 숨을 들이마시고, 무거워진 몸을 이끌고 ${teio.uma_sex_title}의 옆에 다가가 큰 손을 내민다——`,
         );
       }
       return [ret];

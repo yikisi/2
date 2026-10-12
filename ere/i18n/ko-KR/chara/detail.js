@@ -482,7 +482,7 @@ module.exports = class extends require('#/i18n/zh-CN/chara/detail') {
     '따뜻한 정액이 묻을 때마다 피부가 행복하게 근질거린다';
   get_exp_body_orgasm = (count) => ['절정 횟수 ', count];
 
-  exp_hf_title = '육체정보[손발]';
+  exp_hf_title = '정보[손발]';
   exp_hf_header_hand = '정보【손】';
   exp_hand_gift_desc =
     '애무 기술이 신의 경지에 달해, 손가락 놀림만으로 상대의 넋을 빼놓는다';
