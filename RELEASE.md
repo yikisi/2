@@ -4,6 +4,11 @@ _incoming_
 
 适配 [EraElectron v4.8.4 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.8.4) 与 [ere.app v1.3.4 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.3.4) 及以上版本
 
+## Added
+
+* 追加实装以下角色的口上事件
+    * 目白善信：【高傲的姐姐】
+
 ## Fixed
 
 * 修复了无声铃鹿日常事件【禁止跑步！】反复触发的错误

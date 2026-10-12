@@ -66,6 +66,8 @@ class PamaEduMarks extends EduEventMarks {
   choice;
   // 向前迈出的一步
   a_step;
+  // 高傲的姐姐
+  arrogant_sister;
 
   constructor() {
     super(64);

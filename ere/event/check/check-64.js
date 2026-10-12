@@ -271,6 +271,16 @@ module.exports = class extends CustomizedCheck {
           new EventObject(this.id, cb_enum.love).set_arg('travel'),
         );
       }
+      if (
+        !edu_marks.arrogant_sister &&
+        era.get('cflag:86:招募状态') === recruit_flags.yes
+      ) {
+        edu_marks.arrogant_sister = 1;
+        add_event(
+          event_hooks.week_end,
+          new EventObject(this.id, cb_enum.love).set_arg('we_arrogant_sister'),
+        );
+      }
     }
     if (love >= 85 && !edu_marks.joke) {
       edu_marks.joke = 1;

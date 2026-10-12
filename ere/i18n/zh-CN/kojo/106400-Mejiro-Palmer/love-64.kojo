@@ -4637,3 +4637,169 @@ party_end:
   - 在两边的视线下，%YOU% 深吸了一口气。
   - 张开双手，用力抱住了两位马娘。
   - 「你们都是我的爱马！」
+
+
+# 触发条件：男T马娘，同队目白高峰，自身爱慕＞74，进入下一周
+we_arrogant_sister:
+  title: 高傲的姐姐
+  lines:
+    - color: %COLOR_86%
+      content:
+        - fontWeight: bold
+          content: %RAMONU%
+        - 「明白了，晚些再说。」
+    - color: %COLOR_86%
+      content:
+        - fontWeight: bold
+          content: %RAMONU%
+        - 「家族里还有事情，我先走了。」
+    - 她将红色的训练外套脱下，手掌扇着风离开了训练场。
+    - 无论何时的目白高峰总是充满那种压不住的成熟感，让 %YOU% 略带一丝感叹。
+    - 目白家真的很厉害，能培养出那么优秀的马娘。
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「那个……」
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「现在有时间吗？」
+    - 当 %YOU% 还在感叹的时候，身后传来了一个弱气的声音。
+    - 目白善信带着一幅不自信的表情，从 %YOU% 的身旁轻轻拉了一下衣袖。
+    - color: %COLOR%
+      content:
+        - fontWeight: bold
+          content: %CHARA%
+        - 「姐姐她没有为难你吧？」
+    - acc: 1
+      content: 「没有，平时就是这样。」
+      lines:
+        - 不以为然的 %YOU% 看着远方的背影，没多想就回复了。
+        - 但很快 %YOU% 就意识到，身边的目白善信似乎不太开心的样子。
+        - 似乎对于姐姐，目白善信并不是那么平淡。
+        - acc: 1
+          content: 「善信你……不喜欢姐姐吗？」
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「啊，被发现……」
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「应该是被看出来了啊。」
+        - 僵硬的身体略微乏力，软下来靠在 %YOU% 的手臂上。
+        - 耳朵没精神的塌下来，似乎是没有精神维持这边的体面。
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「以前，在家里的时候，高峰姐姐就总是招人喜欢的一个。」
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「不知不觉间，姐姐她越来越厉害，大家总是以她作为标杆。」
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「麦昆，莱恩，阿尔丹……大家总是以高峰姐姐作为榜样。」
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「……当然我也是！」
+        - 似乎是担心 %YOU% 误解什么，目白善信胡乱挥手想要驱散掉阴郁的气息。
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「但是大家都很厉害，渐渐地……」
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「感觉我已经谁都追不上了，啊哈哈……」
+        - 想要用笑声活络一下气氛，但脸上的表情可不是笑着。
+        - 那幅表情里虽然不是难受，却始终有一点纠结。
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「那个，训练员。」
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「你不会因为姐姐很厉害……就不管我吧？」
+        - acc: 1
+          content: 「怎么会呢，善信可是我最骄傲的马娘。」
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「真的？」
+        - 脸上略带紧张和急切，紧紧拉着 %YOU% 的手臂。
+        - 似乎 %YOU% 不确定，这双手就不会松开。
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「姐姐她……太优秀了，所以……」
+        - color: %COLOR%
+          content:
+            - fontWeight: bold
+              content: %CHARA%
+            - 「请你证明一下，不会迷上姐姐，可以吗？」
+        - acc: 1
+          key: select
+          content: 语言证明
+          lines:
+            - 「那我发誓。」
+            - %YOU% 举起手，一幅正经的样子。
+            - 「无论何时，我一定会先站在善信的身边。」
+            - 耷拉下去的耳朵一抖一抖的，立了起来。
+            - 灰暗的眼神重新闪烁起来，看着 %YOU% 的时候重新挂上了笑意。
+            - 轻轻一跳，抱住了 %YOU% 的肩膀。
+            - color: %COLOR%
+              content:
+                - fontWeight: bold
+                  content: %CHARA%
+                - 「好！我知道了！」
+          # 好感+30
+        - acc: 2
+          content: 行为证明
+          lines:
+            - %YOU% 一言不发，张开双臂。
+            - 在目白善信还没有反应的时候，被重重的抱住了。
+            - color: %COLOR%
+              content:
+                - fontWeight: bold
+                  content: %CHARA%
+                - 「！？」
+            - 原本略微发白的脸突然染上绯红，表情逐渐慌乱起来。
+            - 尾巴猛的直立起来，在身后摇晃个不停。
+            - 手臂僵硬的伸直，直到反应过来了才下意识想要反过来抱回去。
+            - color: %COLOR%
+              content:
+                - fontWeight: bold
+                  content: %CHARA%
+                - 「那，那么突然就……」
+            - 「这就是证明。」
+            - 「善信总是我的第一哦。」
+            - color: %COLOR%
+              content:
+                - fontWeight: bold
+                  content: %CHARA%
+                - 「姆……」
+            - 红透的小脸往 %YOU% 的胸口用力埋进去，蹭了两下。
+            - color: %COLOR%
+              content:
+                - fontWeight: bold
+                  content: %CHARA%
+                - 「笨蛋。」
+          # 好感+50

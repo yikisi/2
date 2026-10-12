@@ -763,4 +763,24 @@ module.exports = class extends CustomizedLove {
     await this.#kojo['party_end'](dict);
     return true;
   }
+
+  /** @param {CharaTalk} pama */
+  async we_arrogant_sister(pama) {
+    let relation = 30;
+    const ramonu = get_chara_talk(86);
+    if (
+      (
+        await print_title_with_kojo(this.#kojo, 'we_arrogant_sister', pama, {
+          ...this.#dict,
+          RAMONU: ramonu.name,
+          COLOR_86: ramonu.color,
+        })
+      )['select'] === 2
+    ) {
+      relation = 50;
+    }
+    if (all_reward_in_event(this.id, { relation })) {
+      await era.waitAnyKey();
+    }
+  }
 };
