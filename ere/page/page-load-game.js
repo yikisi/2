@@ -80,6 +80,27 @@ function find_key_by_value(dict, val) {
   return val;
 }
 
+function check_palace(...ids) {
+  const ws_queue = get_queue()[event_hooks.week_start] ?? [];
+  for (const cid of ids) {
+    if (
+      era.get(`cflag:${cid}:招募状态`) === recruit_flags.yes &&
+      era.get(`cflag:${cid}:育成回合计时`) >= 143 + 9 &&
+      era.get(`cflag:${cid}:殿堂`) > 0 &&
+      era.get(`cflag:${cid}:可再次育成`) === 0 &&
+      ws_queue.every(
+        (e) =>
+          e.chara_id !== cid || e.type !== cb_enum.edu || e.arg !== 'palace',
+      )
+    ) {
+      add_event(
+        event_hooks.week_start,
+        new EventObject(cid, cb_enum.edu).set_arg('palace'),
+      );
+    }
+  }
+}
+
 /**
  * load game
  * @return {Promise<boolean>} if true, tell main.js to call homepage
@@ -710,26 +731,7 @@ module.exports = async () => {
               if (era.get('callname:24:52') === '105202') {
                 era.set('callname:24:52', '105211');
               }
-              const ws_queue = get_queue()[event_hooks.week_start] ?? [];
-              for (const cid of [7, 24, 52]) {
-                if (
-                  era.get(`cflag:${cid}:招募状态`) === recruit_flags.yes &&
-                  era.get(`cflag:${cid}:育成回合计时`) >= 143 + 9 &&
-                  era.get(`cflag:${cid}:殿堂`) > 0 &&
-                  era.get(`cflag:${cid}:可再次育成`) === 0 &&
-                  ws_queue.every(
-                    (e) =>
-                      e.chara_id !== cid ||
-                      e.type !== cb_enum.edu ||
-                      e.arg !== 'palace',
-                  )
-                ) {
-                  add_event(
-                    event_hooks.week_start,
-                    new EventObject(cid, cb_enum.edu).set_arg('palace'),
-                  );
-                }
-              }
+              check_palace(7, 24, 52);
             }
             if (version <= 3112) {
               // CFLAGNAME:66 = 招募状态
@@ -763,6 +765,7 @@ module.exports = async () => {
                   era.set(`cstr:${cid}:13`, era.get(`staticcstr:${cid}:10`));
                 }
               }
+              check_palace(50);
             }
             if (version < era.get('gamebase').version) {
               added.forEach((cid) => {

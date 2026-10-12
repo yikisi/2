@@ -281,6 +281,11 @@ module.exports = class extends CustomizedCheck {
       if (edu_weeks !== 47 + 40 || !edu_marks.choice) {
         check_and_register_aim_race(this.id, this.get_aim_races(), edu_weeks);
       }
+    } else if (edu_weeks === 143 + 9) {
+      add_event(
+        event_hooks.week_start,
+        new EventObject(this.id, cb_enum.edu).set_arg('palace'),
+      );
     }
   }
 
