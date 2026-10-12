@@ -1164,7 +1164,7 @@ module.exports = {
         '그녀가 손으로 ',
         you.get_colored_name(),
         '의 옆구리를 움켜쥐기 전까지,',
-        you.get__colored_name(),
+        you.get_colored_name(),
         '은(는) 자신이 너무 많이 키스했다는 것을 깨닫지 못했다.',
       ]);
       await era.printAndWait([
@@ -3038,7 +3038,7 @@ module.exports = {
         '은(는) ',
         ruby.get_colored_name(),
         '이 말하는 대로 가슴을 빨기만 해도,',
-        ruby.get_colored__name(),
+        ruby.get_colored_name(),
         '은(는) 계속 ',
         you.get_colored_name(),
         '을(를) 쓰다듬으며 칭찬했다.',
@@ -3717,7 +3717,7 @@ module.exports = {
           '은(는) 비틀거리며 ',
           you.get_colored_name(),
           '을(를) 보았다. 이 망아지는 줄어들면,',
-          you.get_colored_내용,
+          you.get_colored_name(),
           '의 몸의 절반도 되지 않는다.',
         ]);
         await era.printAndWait([
