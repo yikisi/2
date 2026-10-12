@@ -18,6 +18,7 @@ const event_hooks = require('#/data/event/event-hooks');
 const { attr_enum, base_attr_list } = require('#/data/train-const');
 
 const { i18n } = require('#/i18n/selector');
+const { sys_change_money } = require('#/system/sys-calc-flag');
 
 module.exports = class extends CustomizedDaily {
   get #kojo() {
@@ -369,6 +370,7 @@ module.exports = class extends CustomizedDaily {
     }
     const ret = await this.#kojo['o_s_drawing']({ ...this.#dict, dice });
     if (ret['arcade'] === 2) {
+      sys_change_money(-30, this.id);
       hook.override = true;
       let wait = false;
       switch (dice) {
