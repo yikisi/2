@@ -5983,25 +5983,6 @@ async () => {
         '의 몸에 바싹 붙어 더 편히 잘 수 있는 자세로 바꾼다.',
       ]);
       await era.printAndWait([
-        '담당자가 손을 놓은 순간 ',
-        you.get_colored_name(),
-        ' 은 후회하지만, 지금 기숙사로 뛰어들어간 ',
-        urara.sex,
-        ' 를 쫓아가는 건 이미 무리다.',
-      ]);
-      await era.printAndWait(
-        '호기심 왕성한 나이라 뭐든 시도해보고 싶은 건 어쩔 수 없지만, 이건 좀 심하잖아……',
-      );
-      await era.printAndWait([
-        '나중에 기회를 봐서 ',
-        halo.get_colored_name(),
-        ' 에게 한마디 해둬야겠어.',
-      ]);
-      era.drawLine();
-      await inner_urara.say_as_unknown_and_wait(
-        '……하지만 걱정할 필요는 없을 거예요. 젊은 날의 실수 정도로 해둘까요?',
-      );
-      await era.printAndWait([
         '꼬리를 천천히 ',
         you.get_colored_name(),
         '의 허벅지에 감으며,',
