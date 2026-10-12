@@ -2806,40 +2806,40 @@ gn_rest:
 
 
 good_night_sex:
-  - ある日、トレーニングのあと、%CHARA%が突然寄ってきて、%YOU%の服の裾を引っ張った
+  - 어느 날, 훈련이 끝난 후, %CHARA%이(가) 갑자기 다가와 %YOU%의 옷자락을 잡아당겼다
   - color: %COLOR%
     content:
       - fontWeight: bold
         content: %CHARA%
-      - 「……%CALLNAME%。ついてきて。休憩室。あなたが好きな、あのこと。」
-  - 単刀直入に頼んできた
+      - 「……%CALLNAME%. 따라와. 휴게실로. 네가 좋아하는, 그 일.」
+  - 단도직입적으로 부탁해 왔다
   -
   - color: %COLOR%
     content:
       - fontWeight: bold
         content: %CHARA%
-      - 「……そんな驚いた顔、しないで……行くの、行かないの？」
-  - %CHARA%は顔の赤みを必死に押さえ、紫の瞳だけで%YOU%を見ている
+      - 「……그렇게 놀란 표정 짓지 마…… 갈 거야, 안 갈 거야?」
+  - %CHARA%은(는) 얼굴에 번진 홍조를 필사적으로 감추며, 보라색 눈동자만으로 %YOU%을(를) 바라보고 있다
   -
-  - %CHARA%の頼みに、%YOU%の返事は
+  - %CHARA%의 부탁에, %YOU%의 대답은
   -
   - acc: 1
     key: sex
-    content: 「受け入れる」
+    content: 「수락한다」
     lines:
-      - %CHARA%の頼みを受け入れた
+      - %CHARA%의 부탁을 받아들였다
       -
       - color: %COLOR%
         content:
           - fontWeight: bold
             content: %CHARA%
-          - 「……ふん。%CALLNAME%って、やっぱりそういうやつ。」
+          - 「……흥. %CALLNAME%은(는) 역시 그런 녀석이구나.」
       - color: %COLOR%
         content:
           - fontWeight: bold
             content: %CHARA%
-          - 「後悔しないでよね。」
-      - こうして、%YOU%は、軽い足取りなのかいつもの歩幅なのか分からない%CHARA%の後ろについて、一緒に休憩室へ入った
+          - 「후회하지 마.」
+      - 그렇게 %YOU%은(는) 가벼운 발걸음인지 평소의 보폭인지 알 수 없는 %CHARA%의 뒤를 따라, 함께 휴게실로 들어갔다
   - acc: 2
     content: "「거절한다」"
     lines:
@@ -2871,7 +2871,7 @@ good_night_sex:
                 content:
                   - fontWeight: bold
                     content: %CHARA%
-                  - 「だって、使い魔がそういうことをしたくないなら——別のところで主人に償わないと！」
+                  - 「왜냐면, 사역마가 그런 일을 하고 싶지 않다면—— 다른 부분에서 주인에게 보상해야 하니까!」
               - color: %COLOR%
                 content:
                   - fontWeight: bold
@@ -2885,33 +2885,33 @@ good_night_sex:
                 content:
                   - fontWeight: bold
                     content: %CHARA%
-                  - 「やだやだ！ 認めない！ %CALLNAME%は……魔法少女の本の悪役みたいであるべきなのよ…！！」
-              - 突然、声を上げた
+                  - 「싫어, 싫어! 인정 못 해! %CALLNAME%은……마법소녀 책에 나오는 악당 같아야 한단 말이야…!!」
+              - 갑자기 소리를 질렀다.
               - color: %COLOR%
                 content:
                   - fontWeight: bold
                     content: %CHARA%
-                  - 「……ちがうちがう、本の話なんてしてない！ とにかく%CALLNAME%！ 主人の命令よ、今日は休憩室に入りなさい！！！」
+                  - 「……아냐, 아냐! 책 얘기 같은 건 안 했어! 아무튼 %CALLNAME%! 주인님의 명령이야, 오늘은 휴게실로 들어가!!!」
               -
               - "(바닥을 데굴데굴 구르는 %CHARA%이 의지력 판정을 걸어왔다!)"
               - "【의지가 단련되고 있다……】"
               - "【판정에 성공했다!】"
               -
-              - %CHARA%が床を転げ回っても……そういうことは、したいときにすぐできるものではない
-              - %SEX%にスイーツを約束して、とりあえずその場はごまかした
+              - %CHARA%이(가) 바닥을 구르더라도…… 그런 건 하고 싶을 때 바로 할 수 있는 게 아니다
+              - %SEX%에게 디저트를 주겠다고 약속하고, 일단 그 자리는 얼버무렸다
       - if: d.check === 2 # 大成功で強姦へ
         lines:
           - color: %COLOR%
             content:
               - fontWeight: bold
                 content: %CHARA%
-              - 「やだやだ！ 認めない！ %CALLNAME%は……魔法少女の本の悪役みたいであるべきなのよ…！！」
-          - 突然、声を上げた
+              - 「싫어, 싫어! 인정 못 해! %CALLNAME%은……마법소녀 책에 나오는 악당 같아야 한단 말이야…!!」
+          - 갑자기 소리를 질렀다.
           - color: %COLOR%
             content:
               - fontWeight: bold
                 content: %CHARA%
-              - 「……ちがうちがう、本の話なんてしてない！ とにかく%CALLNAME%！ 主人の命令よ、今日は休憩室に入りなさい！！」
+              - 「……아냐, 아냐! 책 얘기 같은 건 안 했어! 아무튼 %CALLNAME%! 주인님의 명령이야, 오늘은 휴게실로 들어가!!!」
           -
           - "(바닥을 데굴데굴 구르는 %CHARA%이 의지력 판정을 걸어왔다!)"
           -
@@ -2921,7 +2921,7 @@ good_night_sex:
           - "디저트를 제안해도 상대는 받아들일 생각이 없는 모양이다"
           - "「의지력」으로 %SEX%과 오랫동안 맞선 끝에, %YOU%은 바닥을 데굴데굴 구르는 %CHARA%을 끝내 이기지 못했다"
           -
-          - 結局、%YOU%は、軽い足取りなのかいつもの歩幅なのか分からない%CHARA%の後ろについて、休憩室へ入った
+          - 결국 %YOU%은(는) 발걸음이 가벼운 건지 평소 걸음걸이인 건지 알 수 없는 %CHARA%의 뒤를 따라 휴게실로 들어갔다.
 
 
 birthday:

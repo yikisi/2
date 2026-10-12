@@ -6,53 +6,55 @@ const era = require('#/era-electron');
 
 module.exports = {
   '49-1': (() => {
-    const title = 'Un amour à taire (숨겨야 할 사랑)';
+    const title = "Un amour à taire (숨겨야 할 사랑)";
     /**
      * @param {CharaTalk} treve トレヴ
      * @param {CharaTalk} you プレイヤー
      */
     const f = async (treve, you) => {
       await treve.print_and_wait([
-        '어느 날 밤, ',
+        "어느 날 밤, ",
         treve.get_colored_name(),
-        '는 기숙사에서 ',
+        "는 기숙사에서 ",
         you.get_colored_name(),
-        '와(과) 프랑스에서 함께 들었던 노래를 떠올렸다.',
+        "와(과) 프랑스에서 함께 들었던 노래를 떠올렸다.",
       ]);
       era.setColor(treve.color);
       era.setAlign('center');
       await era.printAndWait(
-        '지나간 날들이 우리를 앞으로 이끌고, 더 또렷한 눈으로 바라보게 하네.',
+        "지나간 날들이 우리를 앞으로 이끌고, 더 또렷한 눈으로 바라보게 하네.",
       );
       await era.printAndWait(
-        '의심은 위태롭고, 때로는 치명적이지. 감정은 그토록 여리니까.',
+        "의심은 위태롭고, 때로는 치명적이지. 감정은 그토록 여리니까.",
       );
-      await era.printAndWait('희망에 가득 차 있든, 운에 맡기든.');
+      await era.printAndWait("희망에 가득 차 있든, 운에 맡기든.");
       await era.printAndWait(
-        '모든 것은 하늘의 뜻대로. 그렇다면 흐름에 몸을 맡기자.',
+        "모든 것은 하늘의 뜻대로. 그렇다면 흐름에 몸을 맡기자.",
       );
-      await era.printAndWait('이별과 재회는 우리가 함께 간직한 기억.');
-      await era.printAndWait('사랑은 우리가 생각하는 것보다 훨씬 단단해.');
-      await era.printAndWait('내 곁에 있을 때, 당신은 무엇을 하고 있나요?');
-      await era.printAndWait('시간이 신비로운 빛깔을 두르네.');
-      await era.printAndWait('부드러운 밤바람이 천천히 지나가네.');
-      await era.printAndWait('사랑은 우리가 생각하는 것보다 훨씬 단단해.');
-      await era.printAndWait('아니면 새장 안에서 행복하게 살아갈까.');
-      await era.printAndWait('우리가 없다면 그들의 선택에 무슨 의미가 있을까?');
-      await era.printAndWait('사랑은 우리보다 훨씬 강해……');
+      await era.printAndWait("이별과 재회는 우리가 함께 간직한 기억.");
+      await era.printAndWait("사랑은 우리가 생각하는 것보다 훨씬 단단해.");
+      await era.printAndWait("내 곁에 있을 때, 당신은 무엇을 하고 있나요?");
+      await era.printAndWait("시간이 신비로운 빛깔을 두르네.");
+      await era.printAndWait("부드러운 밤바람이 천천히 지나가네.");
+      await era.printAndWait("사랑은 우리가 생각하는 것보다 훨씬 단단해.");
+      await era.printAndWait("아니면 새장 안에서 행복하게 살아갈까.");
       await era.printAndWait(
-        '사람들은 그것으로 충분하다고 해. 더 사랑하기 위해 그렇게 말하지.',
+        "우리가 없다면 그들의 선택에 무슨 의미가 있을까?",
       );
+      await era.printAndWait("사랑은 우리보다 훨씬 강해……");
       await era.printAndWait(
-        '하지만 이것은 우리의 사랑이어야 해. 우리보다 강한 그 사랑.',
-      );
-      await era.printAndWait(
-        '함께할 수 있는 통행증만 있다면 충분하다고 나는 믿어.',
+        "사람들은 그것으로 충분하다고 해. 더 사랑하기 위해 그렇게 말하지.",
       );
       await era.printAndWait(
-        '또렷한 목소리로 말해야 해. 이 모든 것은 우리 때문이라고.',
+        "하지만 이것은 우리의 사랑이어야 해. 우리보다 강한 그 사랑.",
       );
-      await era.printAndWait('사랑은 우리보다 훨씬 강해……');
+      await era.printAndWait(
+        "함께할 수 있는 통행증만 있다면 충분하다고 나는 믿어.",
+      );
+      await era.printAndWait(
+        "또렷한 목소리로 말해야 해. 이 모든 것은 우리 때문이라고.",
+      );
+      await era.printAndWait("사랑은 우리보다 훨씬 강해……");
       era.setAlign('left');
       era.setColor();
       era.println();
@@ -61,7 +63,7 @@ module.exports = {
         1,
       );
       era.printButton(
-        '「쓸데없는 생각은 그만하자. 안 자면 스승님께 혼나겠어.」(당분간 진전시키지 않는다)',
+        "「쓸데없는 생각은 그만하자. 안 자면 스승님께 혼나겠어.」(당분간 진전시키지 않는다)",
         2,
       );
       return [await era.input()];
@@ -70,7 +72,7 @@ module.exports = {
     return f;
   })(),
   '49-2': (() => {
-    const title = 'La fée (평범한 사람을 사랑한 요정)';
+    const title = "La fée (평범한 사람을 사랑한 요정)";
     /**
      * @param {CharaTalk} treve トレヴ
      * @param {CharaTalk} you プレイヤー
@@ -80,1269 +82,1270 @@ module.exports = {
     const f = async (treve, you, callname, cup) => {
       const ret = [];
       await era.printAndWait([
-        '바람이 불어 ',
+        "바람이 불어 ",
         treve.get_colored_name(),
-        `의 금빛 머리카락을 흔든다.${treve.sex}の肌は、明るい雪のようだ。`,
+        `의 금빛 머리카락을 흔든다.${treve.sex}의 피부는 밝은 눈과 같다.`,
       ]);
-      await era.printAndWait('紺碧の瞳は艶やかで、それでいて少しだけ軽い。');
-      await era.printAndWait('潤んで光る唇は、ほぼ透明な美しさを見せる。');
+      await era.printAndWait('감청색 눈동자는 윤기가 흐르면서도, 그윽하면서도 살짝 가벼운 느낌이다.');
+      await era.printAndWait('촉촉하게 빛나는 입술은 거의 투명한 아름다움을 보여준다.');
       await era.printAndWait(
-        '貌には年齢を超えた色気があり、一目で沈み込ませる。',
+        '얼굴에는 나이를 초월한 매력이 있어, 한눈에 빠져들게 한다.',
       );
       await era.printAndWait(
-        '빛깔 고운 짧은 금발은 낮게 두 갈래로 틀어 올려져, 섬세한 윤기를 띤다.',
+        "빛깔 고운 짧은 금발은 낮게 두 갈래로 틀어 올려져, 섬세한 윤기를 띤다.",
       );
       await era.printAndWait(
-        '少女の白タイツの太ももは細くて柔らかい。フランス風の学生靴を踏み、女子らしい元気がある。',
+        '소녀의 흰 타이츠를 입은 허벅지는 가늘고 부드럽다. 프랑스풍의 학생화를 신고, 소녀다운 활기가 넘친다.',
       );
       await era.printAndWait(
-        '하지만 눈썹과 이마는 조각한 듯 단정해, 평범한 집안에서는 감히 범접하기 어려운 얼굴이다.',
+        "하지만 눈썹과 이마는 조각한 듯 단정해, 평범한 집안에서는 감히 범접하기 어려운 얼굴이다.",
+      );
+      await era.printAndWait([
+        treve.get_colored_name(),
+        "은(는) ",
+        you.get_colored_name(),
+        "에게 미소를 지으며, ",
+        you.get_colored_name(),
+        "의 무례에 화가 난 기색은 없다.",
+      ]);
+      await era.printAndWait(
+        `${treve.sex}는 원피스를 입고 있다. 어깨끈이 옷깃에서 교차해 목의 흰 레이스 칼라로 이어진다.`,
+      );
+      await era.printAndWait("상반신은 대체로 흰색이며, 가슴을 감싸고 있다.");
+      await era.printAndWait([
+        treve.get_colored_name(),
+        "의 허리도 가늘다. 파란 가죽 벨트를 매고 있다.",
+      ]);
+      await era.printAndWait("허리 아래로는 파란 치마가 펼쳐진다.");
+      await era.printAndWait("겉감은 보석 같은 파란색으로, 위쪽 겹을 이룬다.");
+      await era.printAndWait(
+        "그 아래에는 흰 페티코트가 있으며, 마찬가지로 레이스와 테두리 장식이 달려 있다.",
+      );
+      await era.printAndWait("치마는 길지 않아 허벅지 중간까지 내려온다.");
+      await era.printAndWait([
+        treve.get_colored_name(),
+        '의 다리가 가늘다. 다리에는 하얀 무릎까지 오는 양말—— 반투명하다',
+      ]);
+      await era.printAndWait('양말과 치마 사이로 드러난 다리도 유난히 매혹적이다.');
+      await era.printAndWait("오른쪽 다리에는 흰 가터가 있다.");
+      await era.printAndWait(
+        "발에는 파란 구두를 신고 있다. 흰 끈 여러 가닥이 발목을 감싸고, 리본 매듭까지 달려 있다.",
+      );
+      era.printButton("「예쁘네.」", 1);
+      await era.input();
+      await treve.say_and_wait("고마워.");
+      era.printButton("「그런데 프랑스에는 금발에 푸른 눈을 가진 사람이 많잖아……」", 1);
+      await era.input();
+      await treve.say_and_wait("나, 안 예뻐? 봐 봐, 잘 봐!");
+      await era.printAndWait([
+        treve.get_colored_name(),
+        '은(는) 다가와 상체를 숙이고 고개를 든다.',
+      ]);
+      await era.printAndWait([
+        you.get_colored_name(),
+        '와(과) ',
+        treve.get_colored_name(),
+        '의 코끝은 한 치도 채 되지 않는 거리다.',
+      ]);
+      await era.printAndWait([
+        '고개를 숙이면, 이 각도에서는 딱 ',
+        treve.get_colored_name(),
+        '의 가슴이 보인다.',
+      ]);
+      if (cup < 'D') {
+        await era.printAndWait(
+          `${treve.sex}의 가슴은 크지 않다. 대충 보면 B~C 사이의 작은 가슴이다.`,
+        );
+      }
+      await era.printAndWait(
+        `하지만 지금 ${treve.sex}이(가) 앞으로 숙이면, 보이는 모습이 달라진다.`,
+      );
+      await era.printAndWait(
+        '원피스에 감싸인 반구와, 목의 칼라로 이어지는 두 개의 리본이, 금방이라도 끊어질 듯 팽팽하게 당겨져 있다.',
+      );
+      if (you.sex_code === 1) {
+        await era.printAndWait([
+          '남자와 여자, 단 둘이서라도 ',
+          treve.sex,
+          '은(는) ',
+          you.get_colored_name(),
+          '이(가) 선을 넘는 것을 두려워하지 않는다.',
+        ]);
+      }
+      await era.printAndWait([
+        you.get_colored_name(),
+        `은(는) 눈앞의 ${treve.teen_sex_title}을 바라보았다. 눈가에는 `,
+        you.get_colored_name(),
+        '을(를)만나기 위해 일부러 바른 립스틱이 묻어 있어 귀엽다.',
+      ]);
+      await era.printAndWait([
+        '아쉬운 점은 원피스를 입은 ',
+        treve.get_colored_name(),
+        '의 배꼽이 보이지 않는다는 것이다.',
+      ]);
+      await era.printAndWait('하지만 신은 한 문을 닫을 때, 다른 창문을 열어준다.');
+      await era.printAndWait([
+        '——',
+        treve.get_colored_name(),
+        '의 옷에는 소매가 없다.',
+      ]);
+      era.printButton('「옆구리를 만져도 될까?」', 1);
+      await era.input();
+      await treve.say_and_wait('Non，Trousseur de jupons.');
+      era.printButton('「무슨 말인지 모르겠는데, 그럼 만져볼게.」', 1);
+      await era.input();
+      await era.printAndWait([
+        you.get_colored_name(),
+        '은(는) 번개처럼 양손을 뻗어 ',
+        treve.get_colored_name(),
+        '의 양옆구리를 덮쳤다.',
+      ]);
+      await treve.say_and_wait('핫! 아하하하……');
+      await era.printAndWait([
+        treve.get_colored_name(),
+        '은(는) 양손을 재빨리 내리고, 겨드랑이를 꽉 조인다.',
+      ]);
+      await era.printAndWait([
+        you.get_colored_name(),
+        '의 손가락을 세게 끼고, 그 후 웃기 시작했다.',
+      ]);
+      await era.printAndWait('때로는 고개를 들고, 때로는 숙이려고 한다.');
+      await era.printAndWait(
+        '어린 우마무스메의 겨드랑이는 유난히 부드러워, 갓 만든 두부 같다.',
       );
       await era.printAndWait([
         treve.get_colored_name(),
         '은(는) ',
         you.get_colored_name(),
-        '에게 미소를 지으며, ',
+        '에게 진퇴양난에 빠져, 좌우로 움직일 수 없다. 양옆이 단단히 막혀 있다.',
+      ]);
+      await era.printAndWait([
+        '등은 이미 벽에 닿아 있다. 앞에는 ',
         you.get_colored_name(),
-        '의 무례에 화가 난 기색은 없다.',
-      ]);
-      await era.printAndWait(
-        `${treve.sex}는 원피스를 입고 있다. 어깨끈이 옷깃에서 교차해 목의 흰 레이스 칼라로 이어진다.`,
-      );
-      await era.printAndWait('상반신은 대체로 흰색이며, 가슴을 감싸고 있다.');
-      await era.printAndWait([
-        treve.get_colored_name(),
-        '의 허리도 가늘다. 파란 가죽 벨트를 매고 있다.',
-      ]);
-      await era.printAndWait('허리 아래로는 파란 치마가 펼쳐진다.');
-      await era.printAndWait('겉감은 보석 같은 파란색으로, 위쪽 겹을 이룬다.');
-      await era.printAndWait(
-        '그 아래에는 흰 페티코트가 있으며, 마찬가지로 레이스와 테두리 장식이 달려 있다.',
-      );
-      await era.printAndWait('치마는 길지 않아 허벅지 중간까지 내려온다.');
-      await era.printAndWait([
-        treve.get_colored_name(),
-        ' の脚は細い。脚には白いニーハイ——半透明だ。',
-      ]);
-      await era.printAndWait('靴下とスカートのあいだの脚も、格別に誘う。');
-      await era.printAndWait('右脚には、白いガーターがある。');
-      await era.printAndWait(
-        '足元は青い靴で、白い紐が何本か足首に結ばれ、蝶結びまで付いている。',
-      );
-      era.printButton('「きれいだ。」', 1);
-      await era.input();
-      await treve.say_and_wait('ありがとう。');
-      era.printButton('「でもフランスには金髪碧眼が多い……」', 1);
-      await era.input();
-      await treve.say_and_wait('私、きれいじゃないの？見て、見て！');
-      await era.printAndWait([
-        treve.get_colored_name(),
-        ' は寄ってきて、上体を伏せ、顔を上げる。',
-      ]);
-      await era.printAndWait([
-        you.get_colored_name(),
-        ' と ',
-        treve.get_colored_name(),
-        ' の鼻先は、一寸にも満たない距離だ。',
-      ]);
-      await era.printAndWait([
-        '下を向くと、この角度ではちょうど ',
-        treve.get_colored_name(),
-        ' の胸が見える。',
-      ]);
-      if (cup < 'D') {
-        await era.printAndWait(
-          `${treve.sex}の胸は大きくない。ざっと見ればBCのあいだの小鳥だ。`,
-        );
-      }
-      await era.printAndWait(
-        `だがいま${treve.sex}が前へ伏せると、見え方が変わる。`,
-      );
-      await era.printAndWait(
-        'ワンピースに包まれた南半球と、首のカラーにつながる二本のリボンが、今にも切れそうに張っている。',
-      );
-      if (you.sex_code === 1) {
-        await era.printAndWait([
-          '男と女、二人きりでも、',
-          treve.sex,
-          ' は ',
-          you.get_colored_name(),
-          ' が度を超すことを恐れていない。',
-        ]);
-      }
-      await era.printAndWait([
-        you.get_colored_name(),
-        ` は目の前の${treve.teen_sex_title}を見る。目元には、`,
-        you.get_colored_name(),
-        ' に会うためにわざわざ付けた紅があり、かわいい。',
-      ]);
-      await era.printAndWait([
-        '惜しいのは、ワンピースの ',
-        treve.get_colored_name(),
-        ' では臍が見えないことだ。',
-      ]);
-      await era.printAndWait('だが神は一つの扉を閉じるとき、別の窓を開ける。');
-      await era.printAndWait([
-        '——',
-        treve.get_colored_name(),
-        ' の服に袖がない。',
-      ]);
-      era.printButton('「脇を触っていいか？」', 1);
-      await era.input();
-      await treve.say_and_wait('Non，Trousseur de jupons.');
-      era.printButton('「分からない。じゃあ触る。」', 1);
-      await era.input();
-      await era.printAndWait([
-        you.get_colored_name(),
-        ' は電光石火で両手を伸ばし、',
-        treve.get_colored_name(),
-        ' の両脇を襲った。',
-      ]);
-      await treve.say_and_wait('あっ！はははは……');
-      await era.printAndWait([
-        treve.get_colored_name(),
-        ' は両手を素早く下ろし、脇を締め付ける。',
-      ]);
-      await era.printAndWait([
-        you.get_colored_name(),
-        ' の指をきつく挟み、それから笑い出す。',
-      ]);
-      await era.printAndWait('時には顔を上げ、時には伏せようとする。');
-      await era.printAndWait(
-        '幼いウマ娘の脇は格別に柔らかく、できたての豆腐のようだ。',
-      );
-      await era.printAndWait([
-        treve.get_colored_name(),
-        ' は ',
-        you.get_colored_name(),
-        ' に進退窮められ、左も右も取れない。両脇をがっちり押さえられている。',
-      ]);
-      await era.printAndWait([
-        '背はすでに壁に付いている。前は ',
-        you.get_colored_name(),
-        ' という元凶の胸だ。',
+        '이라는 원흉이 가로막고 있다.',
       ]);
       await treve.say_and_wait([
-        `${callname}、やめて……はははは……もう、もういい！`,
+        `${callname}, 잠깐……아하하하……이제, 이제 그만!`,
       ]);
       await treve.say_and_wait([
-        'お願い……ははははは……',
+        '제발……아하하하……',
         treve.get_colored_name(),
-        '、お願い',
+        '제발요…',
       ]);
       await era.printAndWait([
         you.get_colored_name(),
-        ' の振る舞いはますます図太くなり、',
+        '의 행동은 점점 더 뻔뻔해지며 ',
         treve.get_colored_name(),
-        ' が自分の唾でむせるまで大笑いする。',
+        '이(가) 자신의 침에 질식할 때까지 크게 웃게 만들었다.',
       ]);
       await era.printAndWait([
         you.get_colored_name(),
-        ' は、横を向いて二度咳をした ',
+        '은(는) 고개를 돌리고 두어 번 헛기침을 한 뒤 ',
         treve.get_colored_name(),
-        ' を放した。',
+        '을(를) 놓아주었다.',
       ]);
-      era.printButton('「どうしてガーターを付けようと思った？」', 1);
+      era.printButton('「왜 가터를 착용하려고 했어?」', 1);
       await era.input();
-      await treve.say_and_wait('ん？きれいだから。');
-      era.printButton('「それが何を意味するか、知ってる？」', 1);
+      await treve.say_and_wait('응? 예쁘니까요.');
+      era.printButton('「그게 무슨 뜻인지 알아?」', 1);
       await era.input();
-      await treve.say_and_wait('知らない。');
-      await era.printAndWait('彼女は小さく首を振り、短い髪が揺れる。');
-      era.printButton('「男を誘う、という意味だ。」', 1);
+      await treve.say_and_wait('모르겠는데요?');
+      await era.printAndWait('그녀가 고개를 살짝 저으니, 짧은 머리가 흔들린다.');
+      era.printButton('「남자를 유혹한다는 뜻이야.」', 1);
       era.printButton(
-        '「土地によっては、娼婦が服を脱いで男と寝たあと、勘定をガーターに挟む。」',
+        '「지역에 따라서는 창녀가 옷을 벗고 남자와 잠자리를 한 뒤, 대금을 가터벨트에 끼워 둬.」',
         2,
       );
       await era.input();
-      await treve.say_and_wait('そ、それなら外すわ……');
-      era.printButton('「これから人前では付けるな。」', 1);
-      era.printButton('「私の前では必ず付けろ。」', 2);
+      await treve.say_and_wait('그, 그럼 벗을게요……');
+      era.printButton('「이제부터는 사람들 앞에서는 착용하지 마.」', 1);
+      era.printButton('「내 앞에서는 반드시 착용해.」', 2);
       await era.input();
-      await treve.say_and_wait('いいわ。でも、どうして？');
-      era.printButton('「私の目には、君は小さな色っぽい子だ。salope だ。」', 1);
+      await treve.say_and_wait('알았어요. 그런데 어째서인가요?');
+      era.printButton('「내 눈에 비친 너는, 작고 요염한 아이야. 나의 살로프(salope).」', 1);
       era.printButton(
-        '「人前では快活なかわいい姫君、夜中は男とくっついている……」',
+        '「남들 앞에서는 생기 넘치는 사랑스러운 공주님인데, 밤이 되면 남자에게 매달려 있구나……」',
         2,
       );
       if ((await era.input()) === 1) {
-        await treve.say_and_wait('うっ……そんなふうに言わないで……');
+        await treve.say_and_wait('으읏…… 그렇게 말하지 마세요……');
       } else {
-        await treve.say_and_wait('違う、私が誘ったわけじゃない……');
+        await treve.say_and_wait('아니에요, 제가 먼저 꼬신 게 아니라……');
       }
       era.print([
-        '喉を詰まらせて泣きそうな洋種のウマ娘に、',
+        '목이 메어 울 것 같은 서양계 우마무스메에게 ',
         you.get_colored_name(),
-        ' は……',
+        '은(는)……',
       ]);
-      era.printButton('胸を揉む', 1);
-      era.printButton('脚を触る', 2);
+      era.printButton('가슴을 만진다', 1);
+      era.printButton('다리를 만진다', 2);
       ret.push(await era.input());
       if (ret.at(-1)) {
         await era.printAndWait([
           you.get_colored_name(),
-          ' は ',
+          '은(는) ',
           treve.get_colored_name(),
-          ' に靴を脱がせてベッドへ上がらせ、脚をちょうどよく開いて跪かせた。',
+          '의 신발을 벗기고 침대로 올라가게 한 뒤, 다리를 적당히 벌리고 무릎을 꿇게 했다.',
         ]);
         await era.printAndWait([
-          `${treve.teen_sex_title}は滑らかに座り、青い裾が小さな円に広がる。`,
+          `${treve.teen_sex_title}은(는) 부드럽게 앉았고, 파란 옷자락이 작은 원을 그리며 퍼져 나갔다.`,
         ]);
         await era.printAndWait([
           you.get_colored_name(),
-          ' は ',
+          '은(는) ',
           treve.get_colored_name(),
-          ' の後ろへ回る。滑らかな背中は、とてもきれいだ。',
+          '의 뒤로 돌아갔다. 매끄러운 등은 정말 아름답다.',
         ]);
-        await era.printAndWait(['両手を力を入れて握り、体の両側に支える。']);
+        await era.printAndWait(['양손에 힘을 주고, 몸 양옆으로 받쳐준다.']);
         await era.printAndWait([
-          '本格化した ',
+          '본격화된 ',
           treve.get_colored_name(),
-          ' は抵抗せず、',
+          '은(는) 저항하지 않고',
           you.get_colored_name(),
-          ' のままにされる。',
-        ]);
-        await era.printAndWait([
-          you.get_colored_name(),
-          ' は ',
-          treve.get_colored_name(),
-          ' の両胸を掴み、料理の量を見るように測る。',
-        ]);
-        await era.printAndWait([
-          'それから乱れた揉み方で捏ねる。手つきは『軽く寄せ、ゆっくり捻り、撫で、また弾く』といったところだ。',
-        ]);
-        await era.printAndWait([
-          treve.get_colored_name(),
-          ' は頭を下げなくても、自分の胸が露出していると分かる。',
-        ]);
-        await era.printAndWait(['円を描き、弾き、押し……']);
-        await era.printAndWait([
-          treve.get_colored_name(),
-          ' は乳輪から途切れない快感を受けながら、姿勢を保つ。',
-        ]);
-        await era.printAndWait([
-          `${treve.sex}はここで気づく。自分はもう手を上げて後ろの `,
-          you.get_colored_name(),
-          ' の頭を抱いている。降伏のような姿勢だ。',
-        ]);
-        await era.printAndWait([
-          'そして ',
-          you.get_colored_name(),
-          ' は口を歪めて笑い、かなり意地が悪い。',
-        ]);
-        await treve.say_and_wait('やめて……');
-        await era.printAndWait([
-          treve.get_colored_name(),
-          ' は小さく喘ぎ、両目にはすでに恋慕の色が出ている。',
+          '의 뜻대로 눕혀진다',
         ]);
         await era.printAndWait([
           you.get_colored_name(),
-          ' が軽く触れただけで、',
+          '은(는) ',
           treve.get_colored_name(),
-          ' は快感が後頭部まで衝き上げる。',
+          '의 양쪽 가슴을 움켜쥐고, 요리 양을 재듯이 측정했다.',
         ]);
-        era.printButton('「さあ、胸を張って、腹を引け。」', 1);
+        await era.printAndWait([
+          '그런 다음 거칠게 주물렀다. 손놀림은 『가볍게 모으고, 천천히 비틀고, 쓰다듬고, 다시 튕긴다』는 식이다.',
+        ]);
+        await era.printAndWait([
+          treve.get_colored_name(),
+          '은(는) 고개를 숙이지 않아도 자신의 가슴이 드러나 있다는 것을 알 수 있다.',
+        ]);
+        await era.printAndWait(['원을 그리며, 튕기고, 누르고……']);
+        await era.printAndWait([
+          treve.get_colored_name(),
+          '은(는) 유륜에서 끊이지 않는 쾌감을 느끼며 자세를 유지한다.',
+        ]);
+        await era.printAndWait([
+          `${treve.sex}은(는) 이 때 깨달았다. 자신은 이미 손을 들고 뒤의`,
+          you.get_colored_name(),
+          '의 머리를 감싸 안고 있었다. 마치 항복하는 듯한 자세다.',
+        ]);
+        await era.printAndWait([
+          '그리고 ',
+          you.get_colored_name(),
+          '은(는) 입을 일그러뜨리며 웃고 있는데, 꽤나 심술궂다.',
+        ]);
+        await treve.say_and_wait('그만해요……');
+        await era.printAndWait([
+          treve.get_colored_name(),
+          '은(는) 가냘프게 신음하고, 두 눈에는 이미 애틋한 빛이 비치고 있다.',
+        ]);
+        await era.printAndWait([
+          you.get_colored_name(),
+          '이(가) 가볍게 스치기만 해도 ',
+          treve.get_colored_name(),
+          '에게는 쾌감이 뒤통수까지 치밀어 오른다.',
+        ]);
+        era.printButton('「자, 가슴을 펴고, 배를 집어넣어.」', 1);
         await era.input();
         await era.printAndWait([
           treve.get_colored_name(),
-          ' は ',
+          '은(는) ',
           you.get_colored_name(),
-          ' の手に従い、順に姿勢を整える。',
+          '의 손에 따라 차례로 자세를 바로잡는다.',
         ]);
         await era.printAndWait(
-          `息を一度ついたあと、${treve.sex}の腹はまた一回り小さくなった。`,
+          `한 번 숨을 고른 뒤, ${treve.sex}의 배는 다시 한 뼘 정도 줄어들었다.`,
         );
         await era.printAndWait([
           you.get_colored_name(),
-          ' は ',
+          '은(는) ',
           treve.get_colored_name(),
-          ' の腰を撫で、ベルトの位置を確かめ、そっと引く。',
+          '의 허리를 쓰다듬고, 벨트 위치를 확인한 뒤, 살며시 당겼다.',
         ]);
-        await era.printAndWait('*カチカチ*');
+        await era.printAndWait('*찰칵찰칵*');
         await era.printAndWait(
-          `白いベルトが縮み、${treve.sex}の腰腹に再びぴたりと付くまで。`,
+          `하얀 벨트가 줄어들어, ${treve.sex}의 허리와 배에 다시 딱 달라붙을 때까지.`,
         );
-        await treve.say_and_wait('きつい……');
-        era.printButton('「きつくてこそ、立つんだ。」', 1);
+        await treve.say_and_wait('꽉 조여요……');
+        era.printButton('「꽉 조여야 비로소 일어설 수 있는 거야.」', 1);
         await era.input();
         await era.printAndWait([
           treve.get_colored_name(),
-          ' は腰を締められ、胸までより立つように見える。',
+          '은(는) 허리가 조여져, 가슴까지 더 솟아오른 것처럼 보인다.',
         ]);
         await era.printAndWait([
           you.get_colored_name(),
-          ` は後ろから${treve.sex}を抱き、両手を交差させて白い兎を一対、握る。`,
+          `은(는) 뒤에서 ${treve.sex}을(를) 껴안고, 양손을 교차시켜 흰 토끼 한 쌍을 꽉 쥐었다.`,
         ]);
-        era.printButton('「瑞々しい。」', 1);
+        era.printButton('「생기가 넘치네.」', 1);
         era.printButton(
-          `「${treve.name} がこんなに遠慮なく胸を揉まれるのは、初めてだろう。」`,
+          `「${treve.name}은(는) 이렇게 거리낌 없이 가슴을 만져지는 건 처음일 텐데.」`,
           2,
         );
         if ((await era.input()) === 1) {
-          await treve.say_and_wait('何その形容詞！');
+          await treve.say_and_wait('그게 무슨 뜻인가요!');
         } else {
-          await treve.say_and_wait('……うん。');
+          await treve.say_and_wait('……으응.');
         }
         await era.printAndWait([
-          '張り出した両胸が、',
+          '볼록 튀어나온 두 가슴이 ',
           you.get_colored_name(),
-          ' にさまざまな形へ掴まれる。',
+          '에 의해 다양한 모양으로 움켜잡힌다.',
         ]);
-        await era.printAndWait('柔らかく、水風船のようだ。');
+        await era.printAndWait('부드럽고, 물풍선 같다.');
       } else {
-        era.printButton('「それじゃ足りない。肉に食い込んでこそ淑女だ。」', 1);
+        era.printButton('「그 정도론 부족해. 살에 파고들어야 비로소 숙녀지.」', 1);
         await era.input();
-        await treve.say_and_wait('肉に、食い込む？');
+        await treve.say_and_wait('살에, 파고들다뇨?');
         await era.printAndWait([
           treve.get_colored_name(),
-          ' が理解する前に、',
+          '이(가) 이해하기도 전에 ',
           you.get_colored_name(),
-          ' はガーターのバックルを引いた。',
+          '은(는) 가터의 버클을 풀었다.',
         ]);
-        await treve.say_and_wait('脚……だめ……');
+        await treve.say_and_wait('다리……안 돼요……');
         await era.printAndWait([
-          'さっき脇を襲ったとき、',
+          '방금 겨드랑이를 공격했을 때 ',
           you.get_colored_name(),
-          ' は彼女がくすぐったがりだと気づいていた。',
+          '은(는) 그녀가 간지럼을 잘 탄다는 것을 눈치챘다.',
         ]);
-        await era.printAndWait('いまも両脚が震え、体が一瞬、戦慄する。');
-        await treve.say_and_wait('やめて！');
-        await treve.say_and_wait(`${callname}……やめてよ、ばか！`);
+        await era.printAndWait('지금도 두 다리가 떨리고, 몸이 순간 전율한다.');
+        await treve.say_and_wait('그만해요!');
+        await treve.say_and_wait(`${callname}…… 그만해요, 바보!`);
         era.printButton(
-          `「トレヴの罵り方はそんなに優しいの？付き合いやすいね。」`,
+          `「파크의 욕설은 상냥하네. 사귀기 좋겠는걸.」`,
           1,
         );
         await era.input();
-        await treve.say_and_wait('太もも内側は触らないで！やめて……');
+        await treve.say_and_wait('허벅지 안쪽은 만지지 마세요! 그만해요……');
         await era.printAndWait([
           treve.get_colored_name(),
-          ' は下唇を噛み、美しい胸を上下に揺らす。',
+          '은(는) 아랫입술을 깨물며, 아름다운 가슴을 위아래로 흔들었다.',
         ]);
       }
-      era.printButton('「私が聞きたい言葉を言え。」', 1);
-      era.printButton('「いい言葉を言ってみせる？」', 2);
+      era.printButton('「내가 듣고 싶은 말을 해 봐.」', 1);
+      era.printButton('「좋은 말을 해줄까?」', 2);
       await era.input();
       await treve.say_and_wait('……');
-      await treve.say_and_wait(`${callname}……${you.actual_name}……好き……`);
-      await treve.say_and_wait(`私、${callname} の担当が羨ましい……`);
+      await treve.say_and_wait(`${callname}……${you.actual_name}……좋아해요……`);
+      await treve.say_and_wait(`저 ${callname}의 담당이 부러워서……`);
       await treve.say_and_wait(
-        `${treve.name} は ${you.actual_name} を見るだけで膝が緩む……`,
+        `${treve.name}은(는) ${you.actual_name}을(를) 보는 것만으로도 무릎이 풀려요……`,
       );
-      era.printButton('「まだ足りない。」', 1);
-      era.printButton('「君自身は？」', 2);
+      era.printButton('「아직 부족해.」', 1);
+      era.printButton('「너 자신은?」', 2);
       if ((await era.input()) === 1) {
-        await treve.say_and_wait('ああああ……');
-        await treve.say_and_wait(`${you.actual_name} は衆目の的のトレーナー！`);
+        await treve.say_and_wait('아아아아……');
+        await treve.say_and_wait(`${you.actual_name}은(는) 모든 이의 시선을 한 몸에 받는 트레이너!`);
         await treve.say_and_wait(
-          `${treve.name} は進んで ${you.actual_name} の足元にひれ伏す……`,
+          `${treve.name}은(는) 기꺼이 ${you.actual_name}의 발치에 엎드릴게요……`,
         );
       } else {
-        await treve.say_and_wait(`${treve.name}、${treve.name} 自身が大ばか！`);
+        await treve.say_and_wait(`${treve.name}, ${treve.name} 저는 완전 바보에요!`);
         await treve.say_and_wait(
-          `私……${callname} を見るだけで発情して、頭の中は糊だらけ……`,
+          `저……${callname}을(를) 보는 것만으로도 발정 나서 머릿 속이 엉망이고……`,
         );
       }
-      era.printButton(`「トレヴのおしっこのところを見たい。」`, 1);
+      era.printButton(`「파크가 오줌 싸는 걸 보고 싶네.」`, 1);
       await era.input();
-      await treve.say_and_wait('変態！');
-      era.printButton('「誰が変態だ？」', 1);
+      await treve.say_and_wait('변태!');
+      era.printButton('「누가 변태야?」', 1);
       await era.input();
       await era.printAndWait([
         treve.get_colored_name(),
-        ' は満面、不満そうに口を尖らせる。',
+        '은(는) 얼굴에 불만을 가득 담은 채 입을 삐죽 내민다.',
       ]);
-      await treve.say_and_wait(`${treve.name} が変態。`);
+      await treve.say_and_wait(`${treve.name}이(가) 변태에요.`);
       era.drawLine();
       await era.printAndWait([
-        '下着を脱ぎ、',
+        '속옷을 벗고 ',
         treve.get_colored_name(),
-        ' はベッドに横たわる。',
+        '은(는) 침대에 누워 있다.',
       ]);
       await era.printAndWait([
         you.get_colored_name(),
-        ' の要求どおり、両脚を脇へ置き、膝を折る。',
+        '의 요구대로, 양다리를 옆으로 벌리고 무릎을 굽힌다.',
       ]);
       await era.printAndWait(
-        '踵は腿の付け根にぴったり付き、足裏を完全に伸ばして弛めさせない。',
+        '발뒤꿈치는 허벅지 뿌리에 딱 붙이고, 발바닥을 완전히 펴서 이완시키지 않는다.',
       );
       await era.printAndWait([
         treve.get_colored_name(),
-        ' の秘所は、門戸を大きく開けて ',
+        '의 은밀한 곳은 문을 활짝 열고 ',
         you.get_colored_name(),
-        ' に向いている。',
+        '에게 향해 있다.',
       ]);
       await era.printAndWait(
-        '鮑のような秘所。疎らな金毛の下で、淡い両唇が呼吸に合わせて開閉する。',
+        '전복 같은 은밀한 곳. 드문드문한 금발 아래에서, 연한 두 입술이 호흡에 맞춰 열리고 닫힌다.',
       );
       await era.printAndWait([
         treve.get_colored_name(),
-        ' は自ら手を枕の下に置き、抵抗しない。',
+        '은(는) 스스로 손을 베개 밑에 두고, 저항하지 않는다.',
       ]);
       await era.printAndWait([
         you.get_colored_name(),
-        ' は頭を埋め、十数センチ隔てただけでウマ娘の『発情期』の気配を嗅ぐ。',
+        '은(는) 머리를 파묻고, 십여 센티미터밖에 떨어져 있지 않은 거리에서 우마무스메의 『발정기』 냄새를 맡았다.',
       ]);
-      await era.printAndWait('淡く、少し生臭く、少し少女の芳香がある。');
+      await era.printAndWait('옅고, 조금 비릿한 향이 나며, 소녀 특유의 향기가 난다.');
       await era.printAndWait(
-        '二つの大陰唇の隙間には、さらに水々しい小陰唇がある。',
+        '두 개의 대음순 사이에는 더욱 촉촉한 소음순이 있다.',
       );
-      await era.printAndWait('薄い縁は、近くで見ると格別に誘う。');
-      await treve.say_and_wait('あっ……やめて……');
-      await era.printAndWait('彼女は呼吸を速め、息が続かない。');
-      era.printButton(`${treve.name} の陰唇を、リズムよく舐める。`, 1);
+      await era.printAndWait('옅은 가장자리는 가까이서 보면 유난히 유혹적이다.');
+      await treve.say_and_wait('앗…… 그만……');
+      await era.printAndWait('그녀는 숨을 가쁘게 쉬며 헐떡였다.');
+      era.printButton(`${treve.name}의 음순을 리듬감 있게 핥는다.`, 1);
       await era.input();
       await era.printAndWait([
-        '淡い塩味が ',
+        '은은한 짠맛이 ',
         you.get_colored_name(),
-        ' の舌先に広がる。だが、これでは足りない。',
+        '의 혀끝에 퍼진다. 하지만, 이 정도로는 부족하다.',
       ]);
-      era.printButton(`${treve.name} の陰唇を開く。`, 1);
+      era.printButton(`${treve.name}의 음순을 벌린다.`, 1);
       await era.input();
-      await treve.say_and_wait('やめて……');
+      await treve.say_and_wait('그만해요……');
       await era.printAndWait([
         you.get_colored_name(),
-        ' の前にあるのは、さらに赤い柔らかい肉だ。',
+        '의 앞에 있는 것은, 더욱 붉고 부드러운 살이다.',
       ]);
-      await era.printAndWait('表面には水の層が付き、見た目は極上だ。');
-      await treve.say_and_wait(`まだ……処女……${you.actual_name}、まだ……`);
-      era.printButton('「分かった。いまは中には入らない」', 1);
+      await era.printAndWait('표면에는 조금 젖어 있어 보기에 최고다.');
+      await treve.say_and_wait(`아직……처녀니까……${you.actual_name}, 아직은……`);
+      era.printButton('「알았어. 지금은 넣지 않을게」', 1);
       await era.input();
-      await treve.say_and_wait('うん。');
+      await treve.say_and_wait('네에.');
       await era.printAndWait([
         treve.get_colored_name(),
-        ' の小陰唇は、完全に ',
+        '의 소음순은 완전히 ',
         you.get_colored_name(),
-        ' の舌に押されている。',
+        '의 혀에 눌려 있다.',
       ]);
       await era.printAndWait([
         you.get_colored_name(),
-        ' は続けて、陰唇に包まれて膨らんだ核に口を付け、強く吸い始める。',
+        '은(는) 이어서, 음순에 감싸여 부풀어 오른 핵에 입을 대고, 세게 빨기 시작했다.',
       ]);
       await era.printAndWait([
-        'これで、その一枚の肉が全部 ',
+        '이로써, 그 한 조각의 살이 전부 ',
         you.get_colored_name(),
-        ' の唇のあいだへ吸われる。',
+        '의 입술 사이로 빨려 들어간다.',
       ]);
-      await era.printAndWait('核は逃げ場がなく、丸く膨らむ。');
-      await treve.say_and_wait('だめ……吸かないでええええ……');
-      await treve.say_and_wait('赤ちゃん、まだ産めない……');
+      await era.printAndWait('음핵은 도망칠 곳이 없어 둥글게 부풀어 오른다.');
+      await treve.say_and_wait('안 돼……빨지 말아요오오……');
+      await treve.say_and_wait('아기, 아직 낳을 수 없어요……');
       await era.printAndWait([
-        '何度も吸われ、',
+        '몇 번이나 빨리다 보니 ',
         treve.get_colored_name(),
-        ' は額まで汗だくになる。',
+        '의 이마는 땀으로 흠뻑 젖었다.',
       ]);
       await era.printAndWait([
-        'そのとき ',
+        '그러는 동안 ',
         you.get_colored_name(),
-        ' は、穴口を何度も撫でて通る。',
-      ]);
-      await era.printAndWait(
-        '触れて入らない緊張が、少女を絶頂の縁へ追い込む。',
-      );
-      await treve.say_and_wait('やめて……やめて……');
-      await treve.say_and_wait('止めて……');
-      await treve.say_and_wait('イっちゃう……いく！');
-      await treve.say_and_wait('明日、師匠に会わなきゃ……');
-      await era.printAndWait([
-        treve.get_colored_name(),
-        ' は支離滅裂に言い、そして。',
+        '은(는) 구멍 입구를 몇 번이나 쓰다듬으며 지나갔다.',
       ]);
       await era.printAndWait(
-        '——淡い白い蜜が柔らかい穴の口から流れ、続く数筋は直接飛び散る。',
+        '닿기만 해도 들어가지 못할 것 같은 긴장감이 소녀를 절정의 경계로 몰아넣는다.',
       );
-      await era.printAndWait('彼女は枕の下から手を抜き、自分の顔を覆う。');
-      await treve.say_and_wait(`${callname} のばか！`);
-      era.printButton('「私も我慢できない。先に起きて。」', 1);
+      await treve.say_and_wait('그만……그만해요……');
+      await treve.say_and_wait('멈춰……');
+      await treve.say_and_wait('가버릴 것 같아요……가요오!');
+      await treve.say_and_wait('내일, 스승님을 만나야 하는데……');
+      await era.printAndWait([
+        treve.get_colored_name(),
+        '은(는) 횡설수설하고, 그리고.',
+      ]);
+      await era.printAndWait(
+        '——옅은 흰색 꿀이 부드러운 구멍 입구에서 흘러나오고, 이어지는 몇 줄기는 직접 튀어 흩어졌다.',
+      );
+      await era.printAndWait('그녀는 베개 밑에서 손을 빼내어 자신의 얼굴을 가렸다.');
+      await treve.say_and_wait(`${callname}, 이 바보!`);
+      era.printButton('「나도 더 이상 참을 수 없어. 먼저 일어날게.」', 1);
       await era.input();
       await era.printAndWait([
         treve.get_colored_name(),
-        ' は怠げに起き上がり、すでに勃起した肉棒を見る。',
+        '은(는) 천천히 이미 발기한 성기를 바라보았다.',
       ]);
-      era.printButton('「さっき君のを見た。君も私のを見ろ。」', 1);
+      era.printButton('「방금 네 걸 봤으니까 너도 내 걸 봐.」', 1);
       await era.input();
-      await treve.say_and_wait('見て、何が面白いの。');
+      await treve.say_and_wait('봐도, 뭐가 재미있는 건가요.');
       era.drawLine();
       await treve.say_and_wait(
-        `……ごめんなさい、${you.actual_name} の肉棒……す、すごく大きい、太い、${treve.name}、好き……`,
+        `……죄송해요, ${you.actual_name}의 자지…… 괴, 굉장히 크고, 굵어서, ${treve.name}, 좋아해요……`,
       );
       await era.printAndWait([
         treve.get_colored_name(),
-        ' は床へ這って跪く。絨毯が敷いてあるので、膝も痛まない。',
+        '은(는) 바닥으로 기어 내려가 무릎을 꿇는다. 카펫이 깔려 있어서 무릎도 아프지 않다.',
       ]);
-      await treve.say_and_wait('ちょっと臭い……');
-      await era.printAndWait([treve.get_colored_name(), ' はそう評した。']);
-      era.printButton('「好きか？」', 1);
+      await treve.say_and_wait('조금 냄새가 나요……');
+      await era.printAndWait([treve.get_colored_name(), '은(는) 그렇게 평했다.']);
+      era.printButton('「마음에 들어?」', 1);
       await era.input();
-      await era.printAndWait([treve.get_colored_name(), ' は黙っている。']);
-      era.printButton('「好きらしいな。」', 1);
+      await era.printAndWait([treve.get_colored_name(), '은(는) 침묵했다.']);
+      era.printButton('「마음에 든 것 같네.」', 1);
       await era.input();
-      await treve.say_and_wait('そんなことない！');
+      await treve.say_and_wait('그럴 리가요!');
       await era.printAndWait([
-        '言い終わるか終わらないかのうちに、',
+        '말이 끝나기도 전에 ',
         you.get_colored_name(),
-        ' は肉棒を彼女の鼻へ真っ直ぐ押し当てる。',
+        '의 자지가 그녀의 코에 밀어붙여졌다.',
       ]);
-      await era.printAndWait(['——正確には人中、唇の上の溝だ。']);
-      await era.printAndWait(['亀頭が、両の鼻孔の空気の道を完全に塞ぐ。']);
+      await era.printAndWait(['——정확히 말하면 인중, 입술 위의 홈이다.']);
+      await era.printAndWait(['귀두가 양쪽 콧구멍의 공기 통로를 완전히 막았다.']);
       await era.printAndWait([
         treve.get_colored_name(),
-        ' は吸うたび、',
+        '이(가) 숨을 들이쉴 때마다 ',
         you.get_colored_name(),
-        ' の匂いを味わわざるを得ない。',
+        '의 냄새를 맡을 수밖에 없다.',
       ]);
-      era.printButton('「師匠が、君の歌は上手だと言っていた。」', 1);
+      era.printButton('「스승님이 네 노래 실력이 좋다고 하던데.」', 1);
       await era.input();
-      await treve.say_and_wait('歌？');
-      era.printButton('「パリのトレセンの校歌でいい。」', 1);
+      await treve.say_and_wait('노래요?');
+      era.printButton('「파리 트레센의 교가를 불러봐.」', 1);
       await era.input();
       await era.printAndWait([
         treve.get_colored_name(),
-        ' はそうして床に跪き、鼻を肉棒に突かれながら、校歌を歌う。',
+        '은(는) 바닥에 무릎을 꿇고, 코가 성기에 찔리는 동안 교가를 불렀다.',
       ]);
       await era.printAndWait([
-        'ようやく歌い終えるころ、',
+        '마침내 노래를 다 부를 무렵 ',
         you.get_colored_name(),
-        ' の雄の臭いは、完全に彼女の鼻腔へ入っていた。',
+        '의 수컷 냄새는 완전히 그녀의 콧구멍 속으로 스며들어 있었다.',
       ]);
       await era.printAndWait([
         you.get_colored_name(),
-        ' は身を屈めて ',
+        '은(는) 몸을 굽혀 ',
         treve.get_colored_name(),
-        ' を見る。',
+        '을(를) 바라보았다.',
       ]);
-      await era.printAndWait('両頬は白く、弾けそうに柔らかい。');
+      await era.printAndWait('양 볼은 하얗고, 터질 듯 부드럽다.');
       await era.printAndWait(
-        '瞳は宝玉のような青で、目尻には化粧があり、夜色の下で艶やかだ。',
+        '눈동자는 보석처럼 푸르고, 눈꼬리에는 화장이 되어 있어 밤빛 아래에서 더욱 매혹적이다.',
       );
-      await era.printAndWait('華麗な短い金髪。正真正銘の姫君だ。');
+      await era.printAndWait('화려한 짧은 금발. 그야말로 공주님이다.');
       await era.printAndWait([
         treve.get_colored_name(),
-        ' は ',
+        '은(는) ',
         you.get_colored_name(),
-        ' に見られて照れ、仕方なく舌を出す。',
+        '에게 들켜 부끄러워하며, 어쩔 수 없이 혀를 내밀었다.',
       ]);
       await era.printAndWait([
-        '彼女の舌は ',
+        '그녀의 혀는 ',
         you.get_colored_name(),
-        ' よりずっと尖り、細く、柔らかく、一度で ',
+        '보다 훨씬 더 뾰족하고, 가늘고, 부드러워서, 한 번에 ',
         you.get_colored_name(),
-        ' の馬眼まで届く。',
+        '의 눈까지 닿는다.',
       ]);
       await era.printAndWait([
-        'ひととおり舐めたあと、',
+        '한 번 핥아본 뒤, ',
         treve.get_colored_name(),
-        ' は ',
+        '은(는) ',
         you.get_colored_name(),
-        ' が動かないのを見て亀頭を含み、吸い始める。',
+        '이(가) 움직이지 않는 것을 보고 귀두를 입에 넣고 빨기 시작했다.',
       ]);
-      await era.printAndWait('生臭い匂いが口の中に広がり、歯の隙間まで潜る。');
+      await era.printAndWait('비린내가 입안으로 퍼져나가, 치아 사이사이까지 파고든다.');
       await era.printAndWait([
-        '吸うたび、',
+        '들이켤 때마다,',
         treve.get_colored_name(),
-        ' は羞恥でいっぱいになる。',
+        '은(는) 수치심으로 가득 차게 된다.',
       ]);
       await era.printAndWait([
-        '抑えきれなくなった ',
+        '더 이상 참지 못한 ',
         you.get_colored_name(),
-        ' は両手で ',
+        '은(는) 양손으로 ',
         treve.get_colored_name(),
-        ' の頭を抱え、口へ向けて抽送し始める。',
+        '의 머리를 감싸 쥐고, 입을 향해 밀어 넣기 시작한다.',
       ]);
-      await treve.say_and_wait('やめて……', true);
-      await treve.say_and_wait('苦しい……', true);
+      await treve.say_and_wait('그만해 주세요……', true);
+      await treve.say_and_wait('괴로워요……', true);
       await treve.say_and_wait(
-        '臭い！気持ち悪い。上顎に当たる！舌の根、だめ……吐きそう……吐きたい',
+        '냄새나요! 기분 나빠요. 혀뿌리, 안 돼…… 나올 것 같아요…… 내뱉고 싶어요.',
         true,
       );
       await era.printAndWait([
-        '力を入れて突き入れるたび、',
+        '힘을 주어 밀어 넣을 때마다,',
         you.get_colored_name(),
-        ' は亀頭を彼女の口腔の最深まで押し込む。',
+        '은(는) 귀두를 그녀의 구강 가장 깊은 곳까지 밀어 넣었다.',
       ]);
-      await era.printAndWait(['——軟口蓋と舌根のあいだ。']);
+      await era.printAndWait(['——연구개와 혀뿌리 사이.']);
       await era.printAndWait([
-        '舌根の隆起が、',
+        '혀뿌리의 돌출이 ',
         you.get_colored_name(),
-        ' の亀頭をさらに快くする。',
+        '의 귀두를 더욱 기분 좋게 한다.',
       ]);
       await era.printAndWait([
-        '惜しむらくは ',
+        '아쉬운 점은 ',
         treve.get_colored_name(),
-        ' がこの口淫で、屈辱のまま耐えるしかないことだ。',
+        '이(가) 이 구강성교 속에서 굴욕을 견뎌낼 수밖에 없다는 것이다.',
       ]);
-      era.printButton('我慢できない。', 1);
-      era.printButton('口の中へ出す。', 2);
+      era.printButton('참을 수 없다.', 1);
+      era.printButton('입안에 싼다.', 2);
       await era.input();
       await era.printAndWait([
         treve.get_colored_name(),
-        ' は口の中の陽物の震えに気づき、話そうとして、話せない。',
+        '은(는) 입안에 있는 성기의 떨림을 알아차리고, 말을 하려 하지만 할 수 없었다.',
       ]);
       await era.printAndWait(
-        '舌根を押さえられ、温かく生臭い液が最深へ直接注がれる。',
+        '혀뿌리가 눌리고, 따뜻하고 비린한 액체가 가장 깊은 곳으로 직접 부어진다.',
       );
-      await era.printAndWait('粘り気があり、喉を縫い閉じるようだ。');
+      await era.printAndWait('끈적임이 있어, 목구멍을 봉합하는 듯하다.');
       await era.printAndWait([
         treve.get_colored_name(),
-        ' は本能で白目を剥き、',
+        '은(는) 본능적으로 눈을 치켜뜨고 ',
         you.get_colored_name(),
-        ' の肉棒が抜けると、精液が数滴、絨毯へ落ちる。',
+        '의 육봉이 빠져나가자, 정액이 몇 방울 흘러내렸다.',
       ]);
       await era.printAndWait([
         treve.get_colored_name(),
-        ' は口を押さえ、素早く起き上がる。',
+        '은(는) 입을 가리고, 빠르게 일어섰다.',
       ]);
       await era.printAndWait(
-        '数滴の精液がすでに口角から溢れ、白い絹の手袋を汚している。',
+        '몇 방울의 정액이 이미 입가에서 넘쳐흘러, 하얀 실크 장갑을 더럽히고 있다.',
       );
-      await treve.say_and_wait('くっ……んっん、うっ。');
+      await treve.say_and_wait('윽……으음, 읍.');
       await era.printAndWait([
         treve.get_colored_name(),
-        ' はうつむき、喉が転がる',
+        '은(는) 고개를 숙이고, 목울대가 움직인다.',
       ]);
       await era.printAndWait([
-        '白い精液が口から少しずつ飲み下され、',
+        '하얀 정액이 입안에서 조금씩 삼켜지는데 ',
         you.get_colored_name(),
-        ' に口内射精されたときより気持ち悪い。',
+        '에게 구강 내 사정을 당했을 때보다 기분이 나쁘다.',
       ]);
-      await era.printAndWait('整った白い歯にも、一本ずつ精液が付く。');
+      await era.printAndWait('고른 하얀 치아에도 하나하나 정액이 묻는다.');
       await era.printAndWait(
-        '一部の精液は上の歯と下の歯に絡み、口の中で糸を引く。',
+        '일부의 정액은 위아래 치아에 엉겨 붙어, 입안에서 실처럼 늘어진다.',
       );
-      await treve.say_and_wait('はあっ……gros nigaud！');
-      era.printButton('「本当に悪い。」', 1);
+      await treve.say_and_wait('하아……gros nigaud!');
+      era.printButton('「정말 미안해.」', 1);
       await era.input();
       return ret;
     };
     f.title = title;
     return f;
+
   })(),
   74: (() => {
-    const title = 'Un heureux événement (행복한 일)';
+    const title = "Un heureux événement (행복한 일)";
     /**
      * @param {CharaTalk} treve トレヴ
      * @param {CharaTalk} you プレイヤー
      * @param {string} callname トレヴのプレイヤーへの呼び方
      */
-    const f = async (treve, you, callname) => {
+const f = async (treve, you, callname) => {
       await treve.print_and_wait(
-        `あの日、放課後に ${callname} が私を車へ引き上げ、国道沿いのラブホテルへ連れていった。`,
+        `그날, 방과 후에 ${callname}은(는) 저를 차에 태워 국도변의 러브호텔로 데려갔어요.`,
       );
-      await treve.print_and_wait('こんな場所、入ったことがなかった。');
+      await treve.print_and_wait('이런 곳은 들어본 적이 없었어요.');
       await treve.print_and_wait(
-        '外観は地味で、ロビーと廊下が一体になっていて、少し狭い。',
-      );
-      await treve.print_and_wait(
-        `${callname} はカウンターのタッチパネルで部屋を選ぶ。`,
-      );
-      await treve.print_and_wait('半自助だなんて。受付もいない。');
-      await treve.print_and_wait(
-        `この人とエレベーターの前に立つ。今からの数時間、私は人形として扱われ、${you.sex}の性欲の処理をする。`,
+        '외관은 수수하고, 로비와 복도가 하나로 이어져 있어서 조금 좁네요.',
       );
       await treve.print_and_wait(
-        `これまでの経験では、${you.sex}を出せば終わる。`,
+        `${callname}은(는) 카운터의 터치 패널에서 방을 골라요.`,
+      );
+      await treve.print_and_wait('반자율식이라니. 접수도 없네요.');
+      await treve.print_and_wait(
+        `이 사람과 엘리베이터 앞에 서요. 지금부터 몇 시간 동안, 저는 인형처럼 취급받으며 ${you.sex}의 성욕을 처리하게 될 거예요.`,
       );
       await treve.print_and_wait(
-        `部屋に入るとすぐ、${callname} はベッドに座って服を脱げと指示した。`,
+        `지금까지의 경험으로는, ${you.sex}만 내보내면 끝나는 거죠.`,
       );
-      await treve.say_and_wait('分かってるはずよ……');
-      await you.say_and_wait('ああ、約束は守る。コンドームは付ける。');
       await treve.print_and_wait(
-        '服を脱ぐ。どうあれ、こう見られるのは恥ずかしい。',
+        `방에 들어가자마자, ${callname}은(는) 침대에 앉아 옷을 벗으라고 지시했어요.`,
       );
-      await you.say_and_wait('すごいな。まったく垂れていない。');
+      await treve.say_and_wait('알고 있을 거예요……');
+      await you.say_and_wait('아아, 약속은 지킬게. 콘돔은 낄 테니까.');
       await treve.print_and_wait(
-        `${callname} を喜ばせる胸は、張りも一級品だ。${
+        '옷을 벗어요. 어찌 됐든, 이렇게 보여지는 건 부끄럽네요.',
+      );
+      await you.say_and_wait('대단하네. 전혀 쳐지지 않았어.');
+      await treve.print_and_wait(
+        `${callname}을(를) 기쁘게 할 가슴은 탄력도 일급품이에요. ${
           you.sex
-        } が一揉みすれば手に吸い付く、理想の胸。`,
+        }이(가) 한 번 주무르면 손에 착 달라붙는, 이상적인 가슴이죠.`,
       );
-      await treve.print_and_wait(`私は ${callname} 以外に触らせたくない。`);
-      await you.say_and_wait('表情が硬いな……肩、もう少し力を抜け。');
+      await treve.print_and_wait(`저는 ${callname} 말고 다른 사람에게는 닿고 싶지 않아요.`);
+      await you.say_and_wait('표정이 굳었네…… 어깨에 힘을 좀 더 빼.');
       await treve.print_and_wait(
-        'するなら早くしてほしい。手も口も膣も、使われるのは分かっている。',
-      );
-      await treve.print_and_wait(
-        `ときどき、自分は${you.sex}の自慰人形でしかないと思う。`,
-      );
-      await you.say_and_wait('まずベッドに横になって。そう、仰向け。');
-      await treve.print_and_wait('は？意味が分からない。種付け体位のつもり？');
-      await treve.print_and_wait(
-        `${you.sex}の指示どおり仰向けになると、${callname} はピアノを弾くような手つきで、私の体に指を滑らせ始める。`,
+        '할 거라면 빨리 해주셨으면 좋겠어요. 손도 입도 질도, 사용될 거라는 건 알고 있어요.',
       );
       await treve.print_and_wait(
-        '首、脇、鎖骨、脇腹。触れたとも言えない弱い力で、ときどき押し付ける。',
+        `가끔은 제 자신이 ${you.sex}의 자위용 인형일 뿐이라고 생각해요.`,
+      );
+      await you.say_and_wait('먼저 침대에 누워봐. 그래, 똑바로 누워서.');
+      await treve.print_and_wait('네? 무슨 뜻인지 모르겠어요. 교배 체위를 말씀하시는 건가요?');
+      await treve.print_and_wait(
+        `${you.sex}의 지시대로 똑바로 누우니, ${callname}은(는) 피아노를 치는 듯한 손길로 제 몸 위로 손가락을 미끄러뜨리기 시작해요.`,
       );
       await treve.print_and_wait(
-        '嫌になると思っていた。まったく、そうではなかった。',
+        '목, 겨드랑이, 쇄골, 옆구리. 닿았다고 말하기조차 힘든 약한 힘으로 가끔씩 눌러요.',
       );
       await treve.print_and_wait(
-        '代わりに来るのは、子どもがふざけ合うような、焦れる感覚だ。',
+        '싫어질 줄 알았어요. 전혀, 그렇지 않았죠.',
       );
       await treve.print_and_wait(
-        'というか、なぜこんなことをするのか分からない。',
+        '대신 찾아오는 것은 아이들이 장난치는 듯한, 애타는 감각이에요.',
       );
       await treve.print_and_wait(
-        '乳首と恥丘は避けながら、器用に指を滑らせる。',
-      );
-      await treve.print_and_wait('撫でられたところが、少しつっぱる。');
-      await treve.print_and_wait(
-        `${callname} は、女の体は金庫だと言っていた。`,
+        '그보다 왜 이런 걸 하는 건지 모르겠어요.',
       );
       await treve.print_and_wait(
-        '順番に鍵を外せば、いちばん良い状態で開く、と。',
+        '유두와 치구는 피하면서 능숙하게 손가락을 미끄러뜨려요.',
+      );
+      await treve.print_and_wait('쓰다듬어진 곳이 약간 팽팽해져요.');
+      await treve.print_and_wait(
+        `${callname}은(는) 여자의 몸은 금고라고 말했어요.`,
       );
       await treve.print_and_wait(
-        '指がようやく膣へ入る。入口へ挨拶しながら、奥へ進む。',
+        '순서대로 열쇠를 풀면 가장 좋은 상태로 열린다고요.',
       );
       await treve.print_and_wait(
-        'もう濡れているのかもしれない。指は滞りなく入る。',
+        '손가락이 겨우 질 안으로 들어와요. 입구에 인사를 건네듯 스치며 안쪽으로 나아가죠.',
       );
-      await treve.print_and_wait('意識を天井へ集め、ほかを忘れようとする。');
       await treve.print_and_wait(
-        'LEDの明かりだ。間接照明。天井の模様を数え始める。',
+        '이미 젖어 있는 걸지도 몰라요. 손가락은 막힘없이 들어와요.',
       );
-      await you.say_and_wait('だいたい、こんな感じだ。');
-      await treve.say_and_wait('ん？おぉあっ！あっ…あ？');
-      await treve.print_and_wait('いった、私……いま、イった？');
-      await treve.print_and_wait('え？あ？');
-      await you.say_and_wait('はは、白目まで剥いて。驚いたか？');
-      await treve.print_and_wait('変な薬を打たれた——そう思って周囲を見回す。');
+      await treve.print_and_wait('의식을 천장으로 모으고 다른 것은 잊으려 해요.');
       await treve.print_and_wait(
-        `${callname} の右手の指は膣の中にあり、左手は脇腹あたりを撫でている。`,
+        'LED 조명이에요. 간접 조명. 천장의 문양을 세기 시작해요.',
       );
-      await treve.print_and_wait('注射器のような変な道具はない。');
-      await treve.print_and_wait('異常なのは、私のそこだけだ。');
+      await you.say_and_wait('대충, 이런 느낌이야.');
+      await treve.say_and_wait('음? 오앗! 앗… 아?');
+      await treve.print_and_wait('갔어요, 저…… 방금, 갔나요?');
+      await treve.print_and_wait('에? 아?');
+      await you.say_and_wait('하하, 눈까지 뒤집히고. 놀랐어?');
+      await treve.print_and_wait('이상한 약을 맞았다—— 그렇게 생각하며 주변을 둘러봐요.');
       await treve.print_and_wait(
-        `腰まで痙攣し、${callname} の指を大口で咥え、愛液を垂らし、完全に媚びた姿だ。`,
+        `${callname}은(는) 오른손가락은 질 안에 있고, 왼손은 옆구리 언저리를 쓰다듬고 있어요.`,
       );
-      await treve.say_and_wait('私の体に、何をしたの？');
+      await treve.print_and_wait('주사기 같은 이상한 도구는 없어요.');
+      await treve.print_and_wait('이상한 것은, 제 그곳뿐이에요.');
+      await treve.print_and_wait(
+        `허리까지 경련하며, ${callname}은(는) 손가락을 입으로 크게 물고, 애액을 흘리며 완전히 아양을 떠는 모습이죠.`,
+      );
+      await treve.say_and_wait('제 몸에, 뭘 한 거예요?');
       await you.say_and_wait(
-        `首、脇、腹、脇腹。トレヴは本当に、全身が弱点だな。`,
+        `목, 겨드랑이, 배, 옆구리. 파크는 정말로 온몸이 약점이네.`,
       );
       await treve.print_and_wait(
-        `${you.sex}が指をわずかに動かすたび、何十倍もの力で持ち上げられる気がする。`,
+        `${you.sex}이(가) 손가락을 아주 조금 움직일 때마다, 수십 배의 힘으로 들어 올려지는 기분이 들어요.`,
       );
       await treve.print_and_wait(
-        `違う、私の体が魚のように跳ねている。${callname} に一掻きされるたび、めちゃくちゃに跳ねる。`,
+        `아니에요, 제 몸이 물고기처럼 튀어 오르고 있어요. ${callname}은(는) 한 번 쓸어낼 때마다 정신없이 튀어 올라요.`,
       );
-      await treve.say_and_wait('やめて！止めて！止めて！Arrêtez！');
-      await you.say_and_wait(`やはり、トレヴの表情は豊かだ。`);
+      await treve.say_and_wait('그만해 주세요! 멈춰줘요! 멈춰주세요! Arrêtez!');
+      await you.say_and_wait(`역시, 파크의 표정은 풍부하네.`);
       await treve.print_and_wait(
-        `最悪……終わった。${callname} を甘く見ていた。`,
-      );
-      await treve.print_and_wait(
-        `この人は、指先だけで女の子を魂まで蕩けさせ、${you.sex}の哀れな雌犬にできる。`,
-      );
-      await treve.print_and_wait('入口をいじめただけで、私のそこは降伏した。');
-      await treve.print_and_wait('腹の奥、子宮が渇いたようにざわつく。');
-      await treve.print_and_wait(
-        `どれほど熟練してるの？何人の女の子を泣かせたの？`,
+        `최악…… 끝났어요. ${callname}을(를) 너무 쉽게 생각했어요.`,
       );
       await treve.print_and_wait(
-        '私はまだ中学生よ…この歳でこんなことをされたら……',
+        `이 사람은 손끝만으로 소녀의 영혼까지 녹여버리고, ${you.sex}의 가련한 암캐로 만들 수 있어요.`,
       );
-      await treve.say_and_wait('待って、お願い、止めて……');
-      await you.say_and_wait('分かった。そこまでは、ここまでだ。');
-      await treve.print_and_wait('今度は乳首を撫でられる。');
+      await treve.print_and_wait('입구를 괴롭혔을 뿐인데, 제 그곳은 항복해 버렸어요.');
+      await treve.print_and_wait('배 안쪽, 자궁이 목마른 것처럼 술렁여요.');
       await treve.print_and_wait(
-        '膣内の余韻の中で、容赦ない指先が硬くなった乳首を刺激する。',
-      );
-      await treve.print_and_wait('私の乳首は勃起しすぎて、乳輪まで熱い。');
-      await treve.say_and_wait('あっ！んおぉぉぉ！乳首も！');
-      await treve.print_and_wait(`どんな女でも、泣いて止めろと言う。`);
-      await treve.say_and_wait('んむぅぅ！');
-      await you.say_and_wait('では、そこも…');
-      await treve.say_and_wait('んぅぅぅぅ……');
-      await treve.print_and_wait(
-        '避雷針とはこういう感覚だ。私のそこへ雷が落ちた。',
+        `얼마나 숙련된 거예요? 몇 명의 소녀를 울게 한 거죠?`,
       );
       await treve.print_and_wait(
-        '下半身だけが切り離され、別の生き物になったようだ。',
+        '전 아직 중학생이에요… 이 나이에 이런 일을 당하다니……',
+      );
+      await treve.say_and_wait('기다려 주세요, 부탁이에요, 멈춰주세요……');
+      await you.say_and_wait('알았어. 거기까지는 여기까지야.');
+      await treve.print_and_wait('이번에는 유두를 쓰다듬어 주네요.');
+      await treve.print_and_wait(
+        '질 안의 여운 속에서, 가차 없는 손가락 끝이 딱딱해진 유두를 자극해요.',
+      );
+      await treve.print_and_wait('제 유두는 너무 발기해서, 유륜까지 뜨거워요.');
+      await treve.say_and_wait('앗! 응아아앗! 유두도!');
+      await treve.print_and_wait(`어떤 여자라도 울면서 멈춰달라고 말해요.`);
+      await treve.say_and_wait('응으으읏!');
+      await you.say_and_wait('그럼, 그곳도…');
+      await treve.say_and_wait('으으으읏……');
+      await treve.print_and_wait(
+        '피뢰침이란 이런 감각이죠. 제 그곳에 번개가 떨어진 것 같아요.',
       );
       await treve.print_and_wait(
-        '喉からは、壊れたサイレンのような声しか出ない。',
+        '하반신만 분리되어, 다른 생명체가 된 것 같네요.',
       );
       await treve.print_and_wait(
-        '体の中で爆発しそうな何かを叫んで出さないと、私は耐えられない。',
+        '목에서는 고장 난 사이렌 같은 소리밖에 나오지 않아요.',
       );
       await treve.print_and_wait(
-        `私の体は、${callname} に好き勝手に壊されている。`,
-      );
-      await treve.print_and_wait('首は後ろへ反り、腰は勝手に前へ突き出る。');
-      await treve.print_and_wait(
-        `${callname} の指は容赦なく膣内を掘り、伸ばしたつま先は空を向く。`,
+        '몸속에서 폭발할 것 같은 무언가를 외쳐 내뱉지 않으면, 저는 견딜 수 없어요.',
       );
       await treve.print_and_wait(
-        'ずっと耐えていた『尿意』が限界に達し、決壊寸前の快感を数百倍にもする。',
+        `제 몸은, ${callname}에게 마음대로 부서지고 있어요.`,
       );
-      await treve.say_and_wait('おぉあああ、出て……出る！やめて、そんな……');
-      await you.say_and_wait('おしっこじゃない。出していい。');
+      await treve.print_and_wait('목은 뒤로 젖혀지고, 허리는 멋대로 앞으로 내밀어져요.');
       await treve.print_and_wait(
-        `${callname} が陰核を押すと腰が跳ね、水々しい透明な液体が散る。`,
-      );
-      await treve.print_and_wait(
-        '必死に力を入れて尿道を閉じようとするが、体はまったく言うことを聞かない。',
+        `${callname}의 손가락은 가차 없이 질 안을 파고들고, 뻗은 발가락 끝은 하늘을 향해요.`,
       );
       await treve.print_and_wait(
-        'シーツに染みが付き、尻まで水の冷気を感じる。',
+        '줄곧 견뎌왔던 『요의』가 한계에 달해, 결포 직전의 쾌감을 수백 배로 만들어요.',
       );
-      await you.say_and_wait(`初めての潮吹きか？トレヴは本当に感じやすい。`);
+      await treve.say_and_wait('아아아앗, 나와… 나와요! 그만해 주세요, 그런 건……');
+      await you.say_and_wait('소변 아니야. 내보내도 돼.');
+      await treve.print_and_wait(
+        `${callname}이(가) 음핵을 누르자 허리가 튀어 오르고, 촉촉하고 투명한 액체가 흩뿌려져요.`,
+      );
+      await treve.print_and_wait(
+        '필사적으로 힘을 주어 요도를 닫으려 하지만, 몸은 전혀 말을 듣지 않아요.',
+      );
+      await treve.print_and_wait(
+        '시트에는 얼룩이 생기고, 엉덩이까지 물의 냉기가 느껴져요.',
+      );
+      await you.say_and_wait(`처음으로 시오후키 하는 거야? 파크는 정말로 느끼기 쉽네.`);
       await treve.say_and_wait(
-        'あっ……あっ……はあっ……やめて、止めて、お願い止めて、そこを許して……',
+        '앗…… 앗…… 하앗…… 그만해 주세요, 멈춰줘요, 제발 멈춰주세요, 그곳을 허락해 주세요……',
       );
       await treve.print_and_wait(
-        '腰をずらしても逃げられない。弱点をいじめられ続け、掴まれて責められる。',
+        '허리를 비껴도 도망칠 수 없어요. 약점을 계속 괴롭힘당하며, 붙잡혀 공격받아요.',
       );
       await treve.print_and_wait(
-        `愛液を垂らして ${callname} の許しを乞う私の顔は、きっとひどい。`,
+        `애액을 흘리며 ${callname}에게 용서를 구하는 제 얼굴은, 분명 엉망일 거예요.`,
       );
       await treve.print_and_wait(
-        '涙と涎が飛び散り、世界でいちばん幸せな雌の顔に違いない。',
+        '눈물과 침이 흩뿌려지고, 세상에서 가장 행복한 암컷의 얼굴임에 틀림없어요.',
       );
       await treve.print_and_wait(
-        `${callname} の手が抜けるまで、私は何度も潮を吹かされた。`,
+        `${callname}의 손이 빠질 때까지, 저는 몇 번이고 분수를 했어요.`,
       );
       await treve.print_and_wait(
-        '全身が痙攣し、姿勢を変えることすらできない。',
+        '전신이 경련하고, 자세를 바꾸는 것조차 할 수 없어요.',
       );
       await treve.print_and_wait(
-        '神経を全部引き抜かれ、快楽を脳漿へ直接注がれているような感覚だ。',
+        '신경이 전부 뽑혀 나가고, 쾌락을 뇌액에 직접 부어지는 듯한 감각이에요.',
       );
-      await treve.print_and_wait(`${callname} はゆっくり私の腹を、髪を撫でる…`);
+      await treve.print_and_wait(`${callname}은(는) 천천히 제 배와 머리카락을 쓰다듬어요…`);
       await treve.print_and_wait(
-        '腹を晒したペットの犬を愛でるように、跳ねる子宮を優しく捏ねる。',
+        '배를 드러낸 반려견을 어루만지듯, 튀어 오르는 자궁을 부드럽게 주무르네요.',
       );
       await you.say_and_wait(
-        'ゆっくり覚えろ。最後には子宮も気持ちよくしてやる。',
+        '천천히 기억해. 마지막에는 자궁도 기분 좋게 해줄게.',
       );
-      await treve.say_and_wait('ああああ……');
+      await treve.say_and_wait('아아아아……');
       await treve.print_and_wait(
-        `だめ……雌の本能……強い雄に屈して、${you.sex}に支配されたい……`,
-      );
-      await treve.print_and_wait(
-        '師匠はこんなこと教えてくれなかった。全部奪われた。自尊心も、自信も……',
+        `안 돼…… 암컷의 본능…… 강한 수컷에게 굴복해서, ${you.sex}에게 지배당하고 싶어……`,
       );
       await treve.print_and_wait(
-        `これまで積んできたすべてが${you.sex}の色に塗られる。助けて……`,
-      );
-      await you.say_and_wait('そろそろ、こっちも頼みたい。');
-      await treve.print_and_wait(
-        `${callname} は下着を脱ぎ、屹立した陰茎を見せる。`,
+        '스승님은 이런 걸 가르쳐 주지 않았어요. 전부 빼앗겼어요. 자존심도, 자신감도……',
       );
       await treve.print_and_wait(
-        'どう見ても嘘みたいだ。太さ、長さ、血管まで浮き、映画で見たものとはまったく違う。',
+        `지금까지 쌓아온 모든 것이 ${you.sex}의 색으로 칠해져요. 도와주세요……`,
+      );
+      await you.say_and_wait('이제 슬슬, 이쪽도 부탁하고 싶어.');
+      await treve.print_and_wait(
+        `${callname}은(는) 속옷을 벗고, 우뚝 선 자지를 보여줘요.`,
       );
       await treve.print_and_wait(
-        '熱気のように立ち上り、鼻を突く雄の匂いが私の脳を焼く。',
+        '아무리 봐도 거짓말 같아요. 굵기, 길이, 혈관까지 드러나 있어서 영화에서 본 것과는 전혀 달라요.',
       );
       await treve.print_and_wait(
-        'その前に、体は完全に屈服し、子孫を残す支度をしている。',
+        '열기처럼 피어올라 코를 찌르는 수컷의 냄새가 제 뇌를 태워요.',
       );
       await treve.print_and_wait(
-        '引き締まった腹の奥がかすかに痛み、筋肉が勝手に子宮を引き下ろす。',
+        '그전에, 몸은 완전히 굴복해서 자손을 남길 준비를 하고 있어요.',
       );
-      await treve.print_and_wait('強い雄にだけ許された特権。');
       await treve.print_and_wait(
-        `${callname} の種に蹂躙されるのが、私の卵の義務。`,
+        '긴장된 배 안쪽이 희미하게 아프고, 근육이 멋대로 자궁을 끌어내려요.',
       );
-      await treve.print_and_wait('ください、これをください、あなたが欲しい。');
+      await treve.print_and_wait('강한 수컷에게만 허락된 특권.');
       await treve.print_and_wait(
-        '子宮は飢えで媚びて刺すように痛む。抵抗の意識は薄れ、涎を垂らす膣口にも気づかない。',
+        `${callname}의 종자에 유린당하는 것이 제 알의 의무예요.`,
       );
-      await you.say_and_wait('じっと見てる？そんなに好きか。');
-      await treve.print_and_wait('煽る、心底からの問い。');
       await treve.print_and_wait(
-        `最低、最低すぎる。あなたはきっと、こうして何人もの女を雌にしてきた。`,
+        '주세요, 이걸 주세요, 당신을 원해요.',
       );
+      await treve.print_and_wait(
+        '자궁은 굶주림에 아양을 떨며 찌르는 듯이 아파요. 저항하는 의식은 희미해지고, 침을 흘리는 질구조차 알아차리지 못해요.',
+      );
+      await you.say_and_wait('가만히 보고 있어? 그렇게 좋아해?');
+      await treve.print_and_wait('도발하는, 진심 어린 질문이에요.');
+      await treve.print_and_wait(
+        `최악, 너무나 최악이에요. 당신은 분명 이렇게 수많은 여자를 암컷으로 만들어 왔을 거예요.`,
+      );
+      await treve.say_and_wait('윽…… 멋지네요. 어쨌든 먼저 콘돔을……');
+      await you.say_and_wait(`그전에 펠라치오. 파크, 할 수 있지?`);
+      await treve.print_and_wait('따를 수밖에 없어요. 어쩔 수 없잖아요?');
+      await treve.print_and_wait(
+        '입에 머금는 순간, 코를 찌르는 수컷의 냄새에 머리가 타버리고 다시 분수를 해요.',
+      );
+      await treve.print_and_wait(
+        '이제 아양 떠는 것밖에 모르는 바보 같은 그곳은, 앞으로 관통당할 것을 기대하며 음란한 물을 심하게 흘려요.',
+      );
+      await treve.print_and_wait('너무 커서 절반 정도밖에 머금지 못해요.');
+      await treve.print_and_wait('치아가 닿지 않도록 턱을 내리고 입을 다물어요.');
+      await treve.print_and_wait('제대로 호흡하지 못해서 코호흡도 거칠어져요.');
+      await you.say_and_wait('네 얼굴, 의외네.');
       await treve.say_and_wait(
-        'くっ……格好はいいわね。とにかく先にコンドームを……',
+        '음오오오, 윽, 쉿, 우우, 하앗… 하앗, 아무.',
       );
-      await you.say_and_wait(`その前にフェラ。トレヴ、できるだろう？`);
-      await treve.print_and_wait('従うしかない。仕方ないでしょう？');
+      await you.say_and_wait(`파크가 노력하는 모습은 귀엽네.`);
+      await treve.print_and_wait('머리를 쓰다듬어지고, 귀가 만져져요.');
       await treve.print_and_wait(
-        '口に含んだ瞬間、鼻の雄臭で頭が焼け、また潮を吹く。',
-      );
-      await treve.print_and_wait(
-        'もう媚びることしか知らない馬鹿なそこは、これから貫かれるのを期待し、淫らな水をひどく流す。',
-      );
-      await treve.print_and_wait('大きすぎて、半分強しか含めない。');
-      await treve.print_and_wait('歯が当たらないよう顎を下げ、口を締める。');
-      await treve.print_and_wait('まともに呼吸できず、鼻息も荒くなる。');
-      await you.say_and_wait('君の顔、意外だな。');
-      await treve.say_and_wait(
-        'んおぉぉ、くっ、しっ、うう、はあっ…はあっ、あむ。',
-      );
-      await you.say_and_wait(`トレヴのがんばる姿はかわいいな。`);
-      await treve.print_and_wait('頭を撫でられ、耳を弄られる。');
-      await treve.print_and_wait(
-        'いつの間にかまた横になっていて、尻尾がハートの形に巻いている。',
+        '어느새 다시 옆으로 누워 있고, 꼬리가 하트 모양으로 말려 있어요.',
       );
       await treve.print_and_wait(
-        `${callname} が抜いた陰茎が、私の上に覆いかかる。`,
+        `${callname}의 빼낸 자지가 제 위로 덮여와요.`,
       );
-      await treve.print_and_wait('逃げられない。避けられない。抗えない。');
+      await treve.print_and_wait('도망칠 수 없어요. 피할 수도 없고, 저항할 수도 없어요.');
       await treve.print_and_wait(
-        '今から私は、頭がおかしくなるまでいじめられる。',
+        '지금부터 저는 머리가 이상해질 때까지 괴롭힘당할 거예요.',
       );
       await treve.print_and_wait(
-        'この生殖器を覚え、雄に勝てない雑魚の雌になる。',
+        '이 생식기를 기억하며, 수컷을 이기지 못하는 허접 암컷이 돼요.',
       );
-      await treve.print_and_wait('最悪……早く…');
-      await treve.say_and_wait('わおぉおぉおぉぉぉ！');
-      await treve.print_and_wait('一撃で倒された。');
-      await treve.print_and_wait('そこが、おかしくなる。');
+      await treve.print_and_wait('최악…… 빨리…');
+      await treve.say_and_wait('응아아아앗!');
+      await treve.print_and_wait('일격에 쓰러졌어요.');
+      await treve.print_and_wait('그곳이, 이상해져요.');
       await you.say_and_wait(
-        'こうして犯されるのは初めてだろう。できるだけ早く終わらせる。',
+        '이렇게 범해지는 건 처음이지? 최대한 빨리 끝내줄게.',
       );
-      await treve.say_and_wait('止めて、頭がおかしくなる！こんなの、知らない…');
+      await treve.say_and_wait('멈춰주세요, 머리가 이상해져요! 이런 건 모르는걸……');
       await treve.print_and_wait(
-        'Gスポットを押し出すように、最深へピストンする。',
-      );
-      await treve.print_and_wait(
-        '半狂乱で泣き叫んでも、容赦ない『ぱんぱん』は止まらない。',
+        'G스폿을 밀어내듯 가장 깊은 곳까지 피스톤해요.',
       );
       await treve.print_and_wait(
-        '意識がどこへ飛んだか分からない。何度イったかも分からない。強引に引き戻され、快楽を注がれる。',
+        '반광란 상태로 울부짖어도 가차 없는 『퍽퍽』 소리는 멈추지 않아요.',
       );
       await treve.print_and_wait(
-        `十数分の抽送のあと、${callname} はようやく射精した。`,
+        '의식이 어디로 날아갔는지 모르겠어요. 몇 번이나 갔는지도 모르겠어요. 강제로 끌어당겨지며 쾌락을 부어받아요.',
       );
       await treve.print_and_wait(
-        'ゴム一枚隔てているとは思えない熱さ。マグマを注がれたような一撃。',
+        `십여 분의 추송 끝에, ${callname}은(는) 드디어 사정했어요.`,
+      );
+      await treve.print_and_wait(
+        '콘돔 한 장을 사이에 두고 있다고는 믿기 힘든 뜨거움. 마그마를 부어받은 듯한 일격이에요.',
       );
       era.drawLine();
       await treve.print_and_wait(
-        '意識が戻ったときはすでに数時間経っていた。周囲にはティッシュ箱とコンドームの包装。',
+        '의식이 돌아왔을 때는 이미 몇 시간이 지나 있었어요. 주변에는 티슈 상자와 콘돔 포장지들.',
       );
       await treve.print_and_wait(
-        'ゴミ箱には結んだコンドームがいくつか。何度替えたか、もう分からない。',
+        '쓰레기통에는 묶인 콘돔이 몇 개 있어요. 몇 번이나 갈아 끼웠는지 이제는 모르겠어요.',
       );
       await treve.print_and_wait(
-        `覚えているのは、後ろからされたある回、${callname} が陰茎を抜いてコンドームを替えるとき、私が昏倒したこと。`,
+        `기억나는 건, 뒤에서 했던 어떤 회차에 ${callname}이(가) 자지를 빼내고 콘돔을 갈아 끼울 때 제가 혼절했던 거예요.`,
       );
       await treve.print_and_wait(
-        `${callname} に抱かれ、体を弄られ続けている。`,
+        `${callname}에게 안겨 몸이 계속 농락당하고 있어요.`,
       );
       await treve.print_and_wait(
-        '跳ねて離れたいが、いまの私は自分の力で立つことすらできない。',
+        '도망가고 싶지만, 지금의 저는 제 힘으로 일어서는 것조차 할 수 없어요.',
       );
       await you.say_and_wait(
-        `おはよう、トレヴ。体の相性はいい。気持ちよかっただろう？`,
+        `좋은 아침이야, 파크. 몸의 궁합이 좋네. 기분 좋았지?`,
       );
-      await treve.say_and_wait('はあっ……はあっ……終わったなら、先に放して。');
-      await you.say_and_wait(`トレヴの尻尾が絡んでるから、無理だな。`);
-      await treve.print_and_wait('え？');
-      await you.say_and_wait('負けず嫌いは、選手にはいいかもしれない。');
+      await treve.say_and_wait('하앗…… 하앗…… 끝났다면 먼저 놓아주세요.');
+      await you.say_and_wait(`파크 꼬리가 엉켜 있어서 무리네.`);
+      await treve.print_and_wait('에?');
+      await you.say_and_wait('지기 싫어하는 성격은 선수에겐 좋을지도 몰라.');
       await treve.print_and_wait(
-        `${callname} はそう言い、また手を私の陰核へ近づける。`,
+        `${callname}은(는) 그렇게 말하며 다시 손을 제 음핵으로 가져다 대요.`,
       );
-      await treve.print_and_wait('条件反射の体の反応で、息が止まる。');
+      await treve.print_and_wait('조건반사적인 몸의 반응으로 숨이 멎어요.');
       await treve.say_and_wait(
-        '待って！やめて……ごめんなさい！本当に気持ちよかった。',
+        '기다려 주세요! 그만해 주세요…… 죄송해요! 정말 기분 좋았어요.',
       );
       await treve.print_and_wait(
-        `${callname} は満足げに鼻で笑い、手を私の胸へ戻す。`,
+        `${callname}은(는) 만족스러운 듯 코웃음을 치며 손을 제 가슴으로 되돌려요.`,
       );
       await treve.print_and_wait(
-        '子どもが粘土をいじるように雑な揉み方なのに、私の体はそれにも反応して震える。',
+        '아이가 찰흙을 만지듯 투박한 주무름인데도 제 몸은 그것에도 반응하며 떨어요.',
       );
       await treve.print_and_wait(
-        'くそ……抱かれているのが気持ちよくて、逆らえない。フランスの皆も、こんな私は見たことがない。',
+        '빌어…… 안겨 있는 게 기분 좋아서 거역할 수가 없네요. 프랑스 분들도 이런 저를 본 적이 없을 거예요.',
       );
       await treve.print_and_wait(
-        '知らなかったさまざまな快楽が頭に注がれ、心底から喜びを感じる。',
+        '몰랐던 다양한 쾌락이 머릿속에 부어지고, 진심으로 기쁨을 느껴요.',
       );
       era.drawLine();
       await treve.print_and_wait(
-        `朝、${callname} に寮の前まで送られ、扉を開けてよろよろ歩く。`,
+        `아침, ${callname}은(는) 저를 기숙사 앞까지 데려다주었고, 문을 열고 비틀거리며 걸어와요.`,
       );
       await treve.print_and_wait(
-        '脚は鉛を流し込んだように重く、頭は煙に霞んだようにぼんやりしている。',
+        '다리는 납을 부은 것처럼 무겁고 머리는 안개에 가린 듯 멍해요.',
       );
       await treve.print_and_wait(
-        '携帯を開くと、不在着信と伝言が山のように溜まっている。',
+        '휴대폰을 열어보니 부재중 전화와 메시지가 산처럼 쌓여 있어요.',
       );
       await treve.print_and_wait(
-        '皆が私を心配しているあいだ、私は膣を撫でられて愛液をあちこちに吹いていた。',
+        '모두가 저를 걱정하는 동안 저는 질을 쓰다듬어지며 애액을 여기저기 뿜어내고 있었죠.',
       );
       await treve.print_and_wait(
-        '皆が私を心配しているあいだ、子宮をひたすらいじめられて嬉しかった。',
+        '모두가 저를 걱정하는 동안 자궁을 계속 괴롭힘당해서 기뻤어요.',
       );
       await treve.print_and_wait(
-        '皆が私を心配しているあいだ、私は雌としての最上の幸福を味わっていた。',
+        '모두가 저를 걱정하는 동안 저는 암컷으로서 최상의 행복을 맛보고 있었죠.',
       );
-      await treve.print_and_wait('私は、たくさんの人を裏切った…');
-      await treve.say_and_wait('あっ……ああ、んっ。');
-      await treve.print_and_wait('気づくと、下着がびしょ濡れだ。');
+      await treve.print_and_wait('저는 수많은 사람을 배신했어요…');
+      await treve.say_and_wait('앗…… 아아, 응.');
+      await treve.print_and_wait('정신을 차려보니 속옷이 흠뻑 젖어 있어요.');
       await treve.print_and_wait(
-        '右手が無意識に股へ伸び、割れ目を撫で、陰核で自慰している。',
-      );
-      await treve.print_and_wait(
-        '——ちっとも気持ちよくない。あのときみたいじゃない。なぜ？同じ場所なのに。',
+        '오른손이 무의식적으로 가랑이로 뻗어 틈새를 쓰다듬으며 음핵으로 자위하고 있어요.',
       );
       await treve.print_and_wait(
-        '机にうつ伏せになり、左手をブラの下へ入れ、硬くなった乳首を捏ねる。',
+        '——전혀 기분 좋지 않아요. 그때 같지 않거든요. 왜죠? 같은 장소인데.',
       );
       await treve.print_and_wait(
-        'ペン立てから少し太いボールペンを抜く。師匠がくれた贈り物だ。',
-      );
-      await treve.print_and_wait('浅い……届かない！全然足りない。');
-      await treve.print_and_wait(
-        '手淫に溺れ、あれこれ突っ込みながら、椅子まで濡らす。',
+        '책상에 엎드려 왼손을 브래지어 아래로 넣어 딱딱해진 유두를 주무르는 중이에요.',
       );
       await treve.print_and_wait(
-        'でもいけない。分かっている。『本物』を味わってしまったから。',
+        '펜꽂이에서 조금 굵은 볼펜을 뽑아요. 스승님이 주신 선물이죠.',
+      );
+      await treve.print_and_wait('얕아…… 닿지 않아요! 전혀 부족해요.');
+      await treve.print_and_wait(
+        '자위 속에 빠져 이런저런 생각을 하며 의자까지 적셔요.',
       );
       await treve.print_and_wait(
-        '呼吸すら塞ぎ、喉を抉るあの巨物が頭を掠める。',
+        '하지만 안 돼요. 알고 있어요. 『진짜』를 맛보아 버렸으니까요.',
+      );
+      await treve.print_and_wait(
+        '호흡마저 막히고 목을 파내던 그 거대한 것이 머릿속을 스쳐 지나가요.',
       );
       era.drawLine();
       await era.printAndWait([
         you.get_colored_name(),
-        ' は ',
+        ' 은(는) ',
         treve.get_colored_name(),
-        ' のメッセージを受け取った。',
+        '의 메시지를 받았어요.',
       ]);
-      await treve.say_and_wait('次は、いつ？');
+      await treve.say_and_wait('다음은 언제죠?');
     };
     f.title = title;
     return f;
   })(),
   89: (() => {
-    const title = 'Premier amour (첫사랑이라는 작은 일)';
+    const title = "Premier amour (첫사랑이라는 작은 일)";
     /**
      * @param {CharaTalk} treve トレヴ
      * @param {CharaTalk} you プレイヤー
      * @param {string} callname トレヴのプレイヤーへの呼び方
      */
-    const f = async (treve, you, callname) => {
+const f = async (treve, you, callname) => {
       await treve.print_and_wait(
-        `ある日、私は子宮に正直になり、${callname} の部屋へ行った。`,
+        `어느 날, 저는 제 자궁에 솔직해졌고, ${callname}의 방으로 갔어요.`,
       );
-      await you.say_and_wait('いきなりその格好で来るとは……どういうつもりだ？');
+      await you.say_and_wait('갑자기 그런 차림으로 오다니…… 무슨 생각이야?');
       await treve.print_and_wait(
-        '青と白の控えめな服。本来はG1で着る勝負服なのに、私はそのまま来てしまった。',
-      );
-      await treve.print_and_wait(
-        '優雅さのために通気の一部を犠牲にしている。全力で階段を駆け上がった私の汗は蒸発せず、下着へ染み、ひどく湿っている。',
-      );
-      await you.say_and_wait('一晩中やるぞ。覚悟しておけ。');
-      await treve.print_and_wait('最悪、もう濡れている。');
-      await treve.print_and_wait(
-        '二週間溜めた性欲と、段階の違う発情期で、そこはもう粘ついている。',
+        '파란색과 흰색의 수수한 옷. 원래는 G1에서 입는 승부복인데, 저는 그대로 입고 와버렸어요.',
       );
       await treve.print_and_wait(
-        '私はどうなるの。どう負け、どう媚び、どう壊されるのか。',
+        '우아함을 위해 통기성의 일부를 희생하고 있어요. 전력으로 계단을 뛰어 올라온 저의 땀은 증발하지 않고 속옷에 스며들어 아주 축축해요.',
+      );
+      await you.say_and_wait('밤새도록 할 거야. 각오해둬.');
+      await treve.print_and_wait('최악, 벌써 젖어 있어요.');
+      await treve.print_and_wait(
+        '2주 동안 쌓아온 성욕과, 단계가 다른 발정기 때문에 그곳은 이미 끈적거리고 있어요.',
       );
       await treve.print_and_wait(
-        `部屋に入って扉を閉めた瞬間、私はショールをハンガーに掛け、${callname} の前に座った。`,
-      );
-      await you.say_and_wait('落ち着け。逃げたりしない。');
-      await treve.print_and_wait(
-        `とぼけるこの人を黙らせるため、私は${you.sex}に口付けした。`,
+        '저는 어떻게 되는 걸까요. 어떻게 지고, 어떻게 아양을 떨며, 어떻게 부서지는 건지.',
       );
       await treve.print_and_wait(
-        '舌を入れて絡め、唾を流し込み、耳障りな水音を立てる。',
+        `방에 들어가 문을 닫은 순간, 저는 숄을 옷걸이에 걸고 ${callname}의 앞에 앉았어요.`,
       );
-      await you.say_and_wait(`トレヴは才能があるな。`);
-      await treve.print_and_wait('うるさい……');
-      await treve.print_and_wait('口の中を舐められ、未知の感触に少し驚く。');
+      await you.say_and_wait('진정해. 도망치지 않으니까.');
       await treve.print_and_wait(
-        `やはり ${callname} はキスが上手い。性愛で相手を喜ばせる方法を、すべて知っている。`,
+        `시치미 떼는 이 사람을 입 다물게 하기 위해, 저는 ${you.sex}에게 입을 맞췄어요.`,
       );
       await treve.print_and_wait(
-        `ショートブーツを脱いで傍らへ投げ、尻を ${callname} の顔へ向け、肉棒のそばへ寄る。`,
+        '혀를 넣어 얽고, 침을 흘려 넣으며, 거슬리는 물소리를 내요.',
+      );
+      await you.say_and_wait(`파크는 재능이 있네.`);
+      await treve.print_and_wait('시끄러워요……');
+      await treve.print_and_wait('입안을 핥아지며, 미지의 감촉에 조금 놀라요.');
+      await treve.print_and_wait(
+        `역시 ${callname}은(는) 키스가 능숙하네요. 성애로 상대를 기쁘게 하는 방법을 전부 알고 있어요.`,
       );
       await treve.print_and_wait(
-        '以前は考えることすらできなかった大胆な体臭。',
-      );
-      await treve.say_and_wait('あなたの生臭い匂い……大きい。');
-      await treve.print_and_wait(
-        '媚びた甘い言葉が口を出る。仕方ないでしょう？雌が勝てない肉棒だもの。',
-      );
-      await treve.print_and_wait(`まる二週間、頭は ${callname} で焦げていた。`);
-      await treve.print_and_wait(
-        `${callname} の半勃起の男根を含み、舌でゆっくり亀頭を半周する。`,
-      );
-      await treve.print_and_wait('口を閉じて「じゅるじゅる」と音を立てる。');
-      await treve.print_and_wait('勃起したそれが、すぐに私の喉の奥を貫く。');
-      await you.say_and_wait(`トレヴの足も臭いな。塩辛いのか、酸っぱいのか。`);
-      await treve.print_and_wait('変態、変、最低！');
-      await treve.print_and_wait('あなた以外、私のその臭いは誰も知らない。');
-      await treve.print_and_wait('舌で筋を丁寧に舐め、ゆっくり根元へ迫る。');
-      await treve.print_and_wait(
-        `期待のあまり陰核が包皮を押し開いて勝手に出てくる。私は太ももで ${callname} の頭を挟み、締め付ける。`,
+        '숏부츠를 벗어 옆으로 던지고, 엉덩이를 ${callname}의 얼굴 쪽으로 향하게 하여 자지 근처로 다가가요.',
       );
       await treve.print_and_wait(
-        '嗅いで、舐めて、早く！早く、噛んでもいい、そこを噛んで！',
+        '이전에는 생각조차 할 수 없었던 대담한 체취.',
+      );
+      await treve.say_and_wait('당신의 비린내 나는 냄새…… 커요.');
+      await treve.print_and_wait(
+        '아양 떠는 달콤한 말이 흘러나와요. 어쩔 수 없잖아요? 암컷이 이길 수 없는 육봉이니까요.',
+      );
+      await treve.print_and_wait(`꼬박 2주 동안 머리는 ${callname}으로 타버렸어요.`);
+      await treve.print_and_wait(
+        `${callname}의 반쯤 발기한 남근을 머금고, 혀로 천천히 귀두를 반 바퀴 돌려요.` ,
+      );
+      await treve.print_and_wait('입을 다물고 "쥬르륵" 소리를 내요.');
+      await treve.print_and_wait('발기한 그것이 곧바로 제 목구멍 깊숙한 곳을 관통해요.');
+      await you.say_and_wait(`파크의 발도 냄새나네. 짠 건가, 신 건가.`);
+      await treve.print_and_wait('변태, 변, 최악!');
+      await treve.print_and_wait('당신 말고는 제 그 냄새를 아무도 몰라요.');
+      await treve.print_and_wait('혀로 줄기를 정성껏 핥으며 천천히 뿌리 쪽으로 다가가요.');
+      await treve.print_and_wait(
+        `기대감에 음핵이 포피를 밀어 열고 멋대로 튀어나와요. 저는 허벅지로 ${callname}의 머리를 끼워 압박해요.`,
       );
       await treve.print_and_wait(
-        '自分でするときも触れなかった、小指の先ほどの栗。',
+        '냄새 맡고, 핥고, 빨리! 빨리 깨물어도 좋으니까 그곳을 깨물어줘요!',
       );
       await treve.print_and_wait(
-        '最近は脚を揃えて歩くだけで陰唇と下着に擦られ、勝手な下品な弱点になっている。',
+        '자신이 할 때도 건드리지 않았던 새끼손가락 끝 정도의 알.',
       );
       await treve.print_and_wait(
-        `責めが始まる。このまま ${callname} に吸われ、歯で軽く碾かれる。`,
+        '요즘은 다리를 모으고 걷는 것만으로 음순과 속옷에 쓸려서 멋대로 천박한 약점이 되어버렸어요.',
       );
       await treve.print_and_wait(
-        '普段は屋外の空気にすら触れない場所だ。耐えることなど不可能だ。',
+        `공격이 시작돼요. 이대로 ${callname}에게 빨리고, 치아로 가볍게 짓눌려요.`,
       );
       await treve.print_and_wait(
-        `私の腰は鯉の逆立ちのように跳ね、潮を${you.sex}の顔へ浴びせる。`,
-      );
-      await treve.print_and_wait('叫びたいが、口は完全に塞がれている。');
-      await treve.say_and_wait('んっ！んあああああ、んっ、おぉぉ。');
-      await treve.print_and_wait('感じるたび喉が収縮し、亀頭を搾る。');
-      await treve.print_and_wait(
-        '私はオナホールにされている。陰核を刺激すれば開閉できる、便利な道具だ。',
+        '평소에는 야외 공기조차 닿지 않는 곳이에요. 견뎌내는 것 따위 불가능해요.',
       );
       await treve.print_and_wait(
-        `${callname} の肉竿が口の中で震え、大量に精を吐く。`,
+        `제 허리는 잉어가 물구나무를 서는 것처럼 튀어 오르며, 애액을 ${you.sex}의 얼굴에 뿌려요.`,
+      );
+      await treve.print_and_wait('외치고 싶지만 입은 완전히 막혀 있어요.');
+      await treve.say_and_wait('응! 응아아앗, 읏, 오오오.');
+      await treve.print_and_wait('느낄 때마다 목구멍이 수축하며 귀두를 짜내요.');
+      await treve.print_and_wait(
+        '저는 오나홀이 되어버렸어요. 음핵을 자극하면 개폐할 수 있는 편리한 도구죠.',
       );
       await treve.print_and_wait(
-        '映画のような水流の射精ではない。練乳のように濃い精液だ。',
+        `${callname}의 육봉이 입안에서 떨리며 대량의 정액을 뿜어내요.` ,
       );
       await treve.print_and_wait(
-        '喉の奥に穴を開ける勢いで射出された精液を、私は力を入れて喉を動かし、飲み下す。',
+        '영화 같은 묽은 사정이 아니에요. 연유처럼 진한 정액이죠.',
       );
       await treve.print_and_wait(
-        'あなたのような雄に、精液を吐くことなどできない。',
-      );
-      await you.say_and_wait('フェラ、上手くなったな。ほら、水。');
-      await treve.print_and_wait(
-        `${callname} は少し驚いた様子で水を渡してくる。`,
+        '목구멍 깊숙이 구멍을 뚫는 기세로 뿜어져 나온 정액을, 저는 힘을 주어 목을 움직이며 삼켜요.',
       );
       await treve.print_and_wait(
-        `私は大きく口を開け、${you.sex}に喉の奥まで見せる。`,
+        '당신 같은 수컷에게 정액을 뿜는 것 따위 할 수 없어요.',
+      );
+      await you.say_and_wait('펠라치오, 능숙해졌네. 자, 물.');
+      await treve.print_and_wait(
+        `${callname}은(는) 조금 놀란 듯한 모습으로 물을 건네줘요.` ,
       );
       await treve.print_and_wait(
-        '見て、あなたのいちばん大事な子ども、全部私の胃に落ちたわよ？',
-      );
-      await treve.say_and_wait('あっ……');
-      await treve.print_and_wait('雄の臭いが食道から湧き、脳まで貫く。');
-      await treve.print_and_wait(
-        'そこからはすでに雪白の淫液が滴り、直接落ちず、粘って垂れる。',
+        `저는 입을 크게 벌려 ${you.sex}에게 목구멍 깊숙한 곳까지 보여줘요.`,
       );
       await treve.print_and_wait(
-        '私の子宮……子どもの指でも触れられるところまで下がっている。',
+        '봐요, 당신의 가장 소중한 아이, 전부 제 위장에 떨어졌다고요?',
       );
-      await treve.say_and_wait('今度は、膣の中に…');
+      await treve.say_and_wait('앗……');
+      await treve.print_and_wait('수컷의 냄새가 식도에서 피어올라 뇌까지 관통해요.');
       await treve.print_and_wait(
-        '私は蛙のように脚を開き、指で秘所を拡げ、媚びた笑みを試す。',
-      );
-      await treve.print_and_wait('見て、ここ、あなたを気持ちよくできる穴よ？');
-      await treve.print_and_wait('入れたら、いちばん気持ちいいわ。');
-      await treve.print_and_wait('粘つく牝馬の雌穴よ？');
-      await treve.print_and_wait('来る！');
-      await treve.say_and_wait('んっ……！あっ……！');
-      await treve.print_and_wait(
-        '一気に貫かれ、亀頭に突かれ、子宮と口付けし、おかしくなる。',
-      );
-      await treve.print_and_wait('熱い、形がいい。');
-      await treve.say_and_wait('そこ、もっと突いて……好き。');
-      await treve.print_and_wait(
-        'ピストンのたびがすごい。脳内の神経がショートしそう。',
+        '그곳에서는 이미 눈부시게 하얀 음액이 방울져서, 직접 떨어지지 않고 끈적하게 흘러요.',
       );
       await treve.print_and_wait(
-        `膣をきつく締めれば、${callname} も苦しげな顔をする。`,
+        '제 자궁…… 아이의 손가락이라도 닿을 수 있는 곳까지 내려가 있어요.',
+      );
+      await treve.say_and_wait('이번에는 질 안에…');
+      await treve.print_and_wait(
+        '저는 개구리처럼 다리를 벌리고, 손가락으로 비소를 넓히며 아양 떠는 미소를 지어 보여요.',
+      );
+      await treve.print_and_wait('봐요, 여기 당신을 기분 좋게 할 수 있는 구멍이에요.');
+      await treve.print_and_wait('넣으면 가장 기분 좋을 거예요.');
+      await treve.print_and_wait('끈적이는 암말의 암컷 구멍이죠?');
+      await treve.print_and_wait('온다!');
+      await treve.say_and_wait('응……! 아앗……!');
+      await treve.print_and_wait(
+        '단숨에 관통당하고, 귀두에 부딪히고, 자궁과 입맞춤하며 이상해져요.',
+      );
+      await treve.print_and_wait('뜨거워요, 모양이 좋네요.');
+      await treve.say_and_wait('그곳, 더 찔러줘…… 좋아해요.');
+      await treve.print_and_wait(
+        '피스톤 할 때마다 굉장해요. 뇌 속의 신경이 쇼트 날 것 같아요.',
       );
       await treve.print_and_wait(
-        `かわいい。ずっとこうして${you.sex}を締めたい。`,
+        `질을 꽉 조이면 ${callname}도 괴로운 표정을 지어요.` ,
       );
       await treve.print_and_wait(
-        '「ぷっ」という音がして、肉棒が抜けようとする……',
+        `귀여워요. 계속 이렇게 ${you.sex}를 조이고 싶어.`,
       );
       await treve.print_and_wait(
-        'だめ、だめ！もっと愛して、入れていないとだめ…',
-      );
-      await you.say_and_wait(`何だこれは。最上の名器だ、トレヴ！`);
-      await treve.print_and_wait('あっ……嬉しい。');
-      await treve.print_and_wait(
-        `${callname} に頭を撫でられ、這いつくばらされ、子犬のように後ろからされる。`,
-      );
-      await treve.print_and_wait('やあ！こんなの、獣の交尾じゃない。');
-      await treve.print_and_wait(
-        `汗で張り付いた髪を ${callname} が乱暴に掴み、取っ手のように握る。`,
+        '『푸슉』 하는 소리가 나며 육봉이 빠져나가려 해요……',
       );
       await treve.print_and_wait(
-        'ばか！女の子にとっていちばん大事なものの一つなのに、ひどすぎる。',
+        '안 돼, 안 돼! 더 사랑해줘요, 넣고 있지 않으면 안 돼요…',
+      );
+      await you.say_and_wait(`뭐야 이건. 최상의 명기네, 파크!`);
+      await treve.print_and_wait('앗…… 기뻐요.');
+      await treve.print_and_wait(
+        `${callname}에게 머리를 쓰다듬어지고, 엎드려진 채 강아지처럼 뒤에서 당해져요.` ,
+      );
+      await treve.print_and_wait('아앗! 이런 건 짐승의 교미가 아니에요.');
+      await treve.print_and_wait(
+        `땀으로 달라붙은 머리카락을 ${callname}이(가) 난폭하게 움켜쥐고 손잡이처럼 잡아요.` ,
       );
       await treve.print_and_wait(
-        '後ろから胸をきつく掴まれ、下半身がぶつかり合う。',
-      );
-      await treve.print_and_wait('私は力なく、顔を枕へ伏せる。');
-      await you.say_and_wait('いい尻だな。色っぽすぎる……');
-      await treve.print_and_wait('ばか、cruche、Imbécile……');
-      await treve.print_and_wait(
-        '腰を打たれるたび尻がいじめられる。少し痛いのに、気持ちいい。',
-      );
-      await treve.say_and_wait('……欲しい。');
-      await treve.print_and_wait(
-        '言い終わるとひっくり返され、舌を吸われ、それから……潮を吹いた。',
-      );
-      await treve.print_and_wait('呼吸が危ういのに、口は放さない。');
-      await treve.print_and_wait('「ちゅる、ちゅる」と音がする。');
-      await you.say_and_wait(`くそ、出すぞ、トレヴ！`);
-      await treve.print_and_wait(`私は脚を${you.sex}の腰に絡め、きつく抱く。`);
-      await treve.print_and_wait('逃げるな、全部子宮へ注いで。');
-      await treve.print_and_wait(
-        `${you.sex}の亀頭と、私の子宮口はとても合う。`,
-      );
-      await treve.print_and_wait('全部私に任せて、一滴も逃さない、全部……');
-      await treve.print_and_wait(`脚を締め、${you.sex}に肉棒を抜かせない。`);
-      await treve.print_and_wait('人間程度の力で抵抗しても無駄よ？');
-      await treve.print_and_wait(`${callname}、注精、完了。`);
-      await you.say_and_wait(`……はあっ、トレヴ、アフターサービスは？`);
-      await treve.print_and_wait(
-        'はは、こんな最低な人を、どうして好きになったのかしら。',
+        '바보! 여자에게 가장 중요한 것 중 하나인데, 너무해요.',
       );
       await treve.print_and_wait(
-        'でもわりと美味しいわ。仕方ない、掃除のフェラをしてあげる。',
+        '뒤에서 가슴을 꽉 붙잡히고 하반신이 부딪혀요.',
       );
-      await treve.print_and_wait('……足りない、足りない、足りない、足りない！');
+      await treve.print_and_wait('저는 힘없이 얼굴을 베개에 엎드려요.');
+      await you.say_and_wait('좋은 엉덩이네. 너무 섹시해……');
+      await treve.print_and_wait('바보, cruche, Imbécile……');
       await treve.print_and_wait(
-        `私は ${callname} の肩を掴んでひっくり返し、今度は私が上。`,
+        '허리를 맞을 때마다 엉덩이가 괴롭힘당해요. 조금 아픈데 기분 좋아요.',
       );
-      await you.say_and_wait('少し休ませてくれ？');
+      await treve.say_and_wait('……원해요.');
       await treve.print_and_wait(
-        '冗談でしょう。あなたなら、何度でもできるはずよ？',
+        '말이 끝나자마자 뒤집혀서, 혀를 빨리고, 그러고 나서…… 분수를 했어요.',
       );
+      await treve.print_and_wait('호흡이 위태로운데도 입은 놓아주지 않아요.');
+      await treve.print_and_wait('『츄릅, 츄릅』 하는 소리가 나요.');
+      await you.say_and_wait(`제길, 싼다, 파크!`);
+      await treve.print_and_wait(`저는 다리를 ${you.sex}의 허리에 감고 꽉 안아요.`);
+      await treve.print_and_wait('도망치지 말고 전부 자궁에 부어줘요.');
       await treve.print_and_wait(
-        '初めて騎乗位で搾る。色情動画の真似しかできない。',
+        `${you.sex}의 귀두와 제 자궁 입구는 매우 잘 맞아요.` ,
       );
-      await treve.print_and_wait('何度しても、慣れない。');
+      await treve.print_and_wait('전부 저에게 맡기고 한 방울도 놓치지 말고 전부……');
+      await treve.print_and_wait(`다리를 조여 ${you.sex}이(가) 육봉을 빼지 못하게 해요.`);
+      await treve.print_and_wait('인간 정도의 힘으로 저항해도 소용없어요?');
+      await treve.print_and_wait(`${callname}, 사정, 완료.`);
+      await you.say_and_wait(`……하앗, 파크, 애프터 서비스는?`);
       await treve.print_and_wait(
-        '尻を沈めて肉棒を体へ完全に埋めるだけで快感が滲み、意識が飛ばされる。',
-      );
-      await treve.print_and_wait(
-        'さあ、あなたも弛めないで。がんばれ～がんばれ～もっと私を満たして。',
-      );
-      await treve.print_and_wait('あなたの肉棒で、私を殺して。');
-      await treve.print_and_wait(
-        '頭が普通に戻ったとき、太陽は完全に昇っていた。',
-      );
-      await treve.print_and_wait(`${callname}は息も続かない様子。`);
-      await treve.print_and_wait(
-        'そのあとも私は求め続け、体位を変えて連戦し、少し休めばまた続ける。',
-      );
-      await treve.print_and_wait(
-        '口と膣に入れられた回数は、もう数えられない。',
+        '하하, 이런 최악인 사람을 어떻게 좋아하게 됐는지 모르겠네요.',
       );
       await treve.print_and_wait(
-        `尻も試したかったが、${callname} はそれは事前の準備が要ると言った。`,
+        '하지만 꽤 맛있어요. 어쩔 수 없죠, 청소용 펠라치오를 해줄게요.',
       );
-      await treve.print_and_wait('飢えと乾きは満たされた。でも……');
+      await treve.print_and_wait('……부족해, 부족해, 부족해, 부족해!');
       await treve.print_and_wait(
-        `私は ${callname} を再びベッドへ押し倒す。なぜなら：${you.sex}は朝勃ちしていた。`,
+        `저는 ${callname}의 어깨를 잡고 뒤집어엎으며 이번에는 제가 위예요.` ,
+      );
+      await you.say_and_wait('조금 쉬게 해줘.');
+      await treve.print_and_wait(
+        '농담이죠. 당신이라면 몇 번이고 할 수 있을 거잖아요?',
       );
       await treve.print_and_wait(
-        `私は${you.sex}の乾いた口に、貪欲な口付けを重ねる。`,
+        '처음으로 기승위로 짜내요. 색정 영상의 흉내밖에 못 내고 있어요.',
+      );
+      await treve.print_and_wait('몇 번을 해도 익숙해지지 않아요.');
+      await treve.print_and_wait(
+        '엉덩이를 가라앉히고 육봉을 몸에 완전히 파묻는 것만으로도 쾌감이 배어 나오고 의식이 날아가요.',
+      );
+      await treve.print_and_wait(
+        '자, 당신도 쉬지 마세요. 힘내요~ 힘내요~ 더 저를 만족시켜 주세요.',
+      );
+      await treve.print_and_wait('당신의 육봉으로 저를 죽여주세요.');
+      await treve.print_and_wait(
+        '머리가 정상으로 돌아왔을 때, 태양은 완전히 떠 있었어요.',
+      );
+      await treve.print_and_wait(`${callname}은(는) 숨도 못 쉴 것 같은 모습이에요.`);
+      await treve.print_and_wait(
+        '그 후에도 저는 계속 원하며 체위를 바꿔 연전하고, 조금 쉬면 다시 계속해요.',
+      );
+      await treve.print_and_wait(
+        '입과 질에 들어간 횟수는 이제 셀 수도 없어요.',
+      );
+      await treve.print_and_wait(
+        `엉덩이도 해보고 싶었지만, ${callname}은(는) 그건 사전 준비가 필요하다고 말했어요.` ,
+      );
+      await treve.print_and_wait('굶주림과 갈증은 채워졌어요. 하지만……');
+      await treve.print_and_wait(
+        `저는 ${callname}을(를) 다시 침대로 밀어 눕혀요. 왜냐하면: ${you.sex}이(가) 아침 발기를 하고 있었으니까요.` ,
+      );
+      await treve.print_and_wait(
+        `저는 ${you.sex}의 마른 입에 탐욕스러운 키스를 겹쳐요.` ,
       );
     };
     f.title = title;
     return f;
   })(),
-  '89-continue-confirm': '二戦目を始める？',
+  '89-continue-confirm': '두 번째를 시작할까요?',
   99: (() => {
     const title = "Ensemble, c'est tout (함께 있으면 그것으로 충분해)";
     /**
@@ -1351,364 +1354,364 @@ module.exports = {
      */
     const f = async (treve, you) => {
       const ret = [];
-      await era.printAndWait([
-        'ラブホテルに着くと、',
+       await era.printAndWait([
+        '러브호텔에 도착하자 ',
         you.get_colored_name(),
-        ' は ',
+        '은(는) ',
         treve.get_colored_name(),
-        ' をベッドへ押し倒し、唇を重ねる。',
+        '을(를) 침대로 밀어트리고 입술을 포갠다.',
       ]);
       await era.printAndWait([
-        '舌を絡められ、',
+        '혀가 얽히며 ',
         you.get_colored_name(),
-        ' は唾を流し込む。',
+        '은(는) 침을 흘려 넣는다.',
         treve.get_colored_name(),
-        ' は徐々に受け入れ、自ら求め始める。',
+        '은(는) 서서히 받아들이며 스스로 원하기 시작한다.',
       ]);
       await era.printAndWait(
-        '混ざった唾が口元から滴っても気にせず、キスを続ける。',
+        '섞인 침이 입가에서 떨어져도 개의치 않고 키스를 계속한다.',
       );
       await era.printAndWait([
-        'そのあと ',
+        '그 후 ',
         you.get_colored_name(),
-        ' は ',
+        '은(는) ',
         treve.get_colored_name(),
-        ' の首筋に吸い付き、赤い跡を残す。すべての印を加えるように。',
+        '의 목덜미에 달라붙어 붉은 흔적을 남긴다. 모든 표식을 새기듯이.',
       ]);
       await era.printAndWait([
         you.get_colored_name(),
-        ' の手が ',
+        '의 손이 ',
         treve.get_colored_name(),
-        ' の胸に触れ、ブラの上から捏ねる。',
+        '의 가슴에 닿아 브라 위로 주무른다.',
       ]);
       await era.printAndWait([
         treve.get_colored_name(),
-        ' は突然の刺激で声を出し、',
+        '은(는) 갑작스러운 자극에 목소리를 내고,',
         you.get_colored_name(),
-        ' は同時に二つの乳首を引く。',
+        '은(는) 동시에 두 개의 유두를 잡아당긴다.',
       ]);
-      await treve.say_and_wait('やああっ！');
+      await treve.say_and_wait('아아앗!');
       await era.printAndWait([
         you.get_colored_name(),
-        ' は続けて手をスカートの中へ入れ、太ももを撫でたあと下着の中へ探る。',
+        '은(는) 계속해서 손을 스커트 속으로 집어넣고 허벅지를 쓰다듬은 뒤 속옷 안쪽을 탐색한다.',
       ]);
       await era.printAndWait([
-        '割れ目を ',
+        '틈새를 ',
         you.get_colored_name(),
-        ' が撫でると、',
+        '이(가) 쓰다듬자,',
         treve.get_colored_name(),
-        ' の体が震える。',
+        '의 몸이 떨린다.',
       ]);
-      await treve.say_and_wait('触って……');
+      await treve.say_and_wait('만져줘요……');
       await era.printAndWait([
-        '望んだとおり、',
+        '바랐던 대로,',
         you.get_colored_name(),
-        ' の指が陰核に当たる。',
+        '의 손가락이 음핵에 닿는다.',
       ]);
-      await era.printAndWait('包皮を剥かれ、敏感な部分を優しく愛撫される。');
-      await treve.say_and_wait('あっ……はあっ……んっ！');
+      await era.printAndWait('포피가 벗겨지고 예민한 부분을 부드럽게 애무받는다.');
+      await treve.say_and_wait('앗…… 하앗…… 응!');
       await era.printAndWait([
         you.get_colored_name(),
-        ' のもう一方の手がまた ',
+        '의 다른 한 손이 다시 ',
         treve.get_colored_name(),
-        ' の胸へ入り、乳輪のまわりを撫でる。',
+        '의 가슴으로 들어가 유륜 주변을 쓰다듬는다.',
       ]);
-      await era.printAndWait('指先で円を描き、少しずつ中心へ向かう。');
+      await era.printAndWait('손가락 끝으로 원을 그리며 조금씩 중심을 향한다.');
       await era.printAndWait(
-        'ようやく乳首に達すると、親指と人差し指で軽く押し、転がし、あるいは爪を立てる。',
+        '마침내 유두에 도달하자, 엄지와 검지로 가볍게 누르고 굴리거나 혹은 손톱을 세운다.',
       );
-      await treve.say_and_wait('待、そこ！');
-      await era.printAndWait('好きなのに。');
+      await treve.say_and_wait('기다려요, 거기는!');
+      await era.printAndWait('좋아하는 곳인데.');
       await era.printAndWait([
         you.get_colored_name(),
-        ' は攻め続け、',
+        '은(는) 계속해서 몰아붙이고,',
         treve.get_colored_name(),
-        ' の頭がぼやけて何も考えられなくなるまで。',
+        '의 머리가 흐릿해져 아무것도 생각할 수 없게 될 때까지.',
       ]);
       await era.printAndWait([
-        'そして、我に返ると、',
+        '그리고 제정신으로 돌아왔을 때,',
         treve.get_colored_name(),
-        ' は自分で太ももを開いていた。',
-      ]);
-      await era.printAndWait([
-        you.get_colored_name(),
-        ' は満足げに下着を脱がせる。',
-      ]);
-      await era.printAndWait([
-        'このあとを期待しているのか、',
-        treve.get_colored_name(),
-        ' の子宮はずっとざわついている。',
+        '은(는) 스스로 허벅지를 벌리고 있었다.',
       ]);
       await era.printAndWait([
         you.get_colored_name(),
-        ' がズボンを脱ぎ、すでに勃起したそれを見せると、',
-        treve.get_colored_name(),
-        ' は小さく絶頂する。',
+        '은(는) 만족스러운 듯 속옷을 벗긴다.',
       ]);
-      await era.printAndWait('怖くても、逃げない。');
+      await era.printAndWait([
+        '이 다음을 기대하고 있는지,',
+        treve.get_colored_name(),
+        '의 자궁은 계속 술렁이고 있다.',
+      ]);
+      await era.printAndWait([
+        you.get_colored_name(),
+        '이(가) 바지를 벗고 이미 발기한 그것을 보여주자,',
+        treve.get_colored_name(),
+        '은(는) 작게 절정한다.',
+      ]);
+      await era.printAndWait('무서워도 도망치지 않는다.');
       if (!era.get('status:205:经期')) {
-        era.print('避妊する？');
-        era.printButton('避妊薬を飲ませる', 1);
-        era.printButton('生で中出し！', 2);
+        era.print('피임할까요?');
+        era.printButton('피임약을 먹인다', 1);
+        era.printButton('생으로 싼다!', 2);
         ret.push(await era.input());
       }
       await era.printAndWait([
         you.get_colored_name(),
-        ' は自分の陽物を掴み、',
+        '은(는) 자신의 성기를 잡고,',
         treve.get_colored_name(),
-        ' の膣口へ近づけ、ゆっくり挿入する。',
+        '의 질구에 가까이 대며 천천히 삽입한다.',
       ]);
       await era.printAndWait(
-        '亀頭が入ると、愛液が潤滑になり、肉棒全体が一気に奥まで入る。',
+        '귀두가 들어가자 애액이 윤활제가 되어 육봉 전체가 단숨에 안쪽까지 들어간다.',
       );
-      await treve.say_and_wait('ああああ！だめ！！');
+      await treve.say_and_wait('아아아아! 안 돼요!!');
       await era.printAndWait([
-        '根元近くまで飲み込んだのを確かめ、',
+        '뿌리 근처까지 집어삼킨 것을 확인하고,',
         you.get_colored_name(),
-        ' は動き始める。',
+        '은(는) 움직이기 시작한다.',
       ]);
-      await treve.say_and_wait('あっ！あっ！激しい……');
+      await treve.say_and_wait('앗! 앗! 격렬해요……');
       await era.printAndWait([
-        '腰に当たるたびにぱんという音がし、膣壁を擦られ、',
+        '허리에 부딪힐 때마다 퍽 하는 소리가 나며 질벽을 쓸리고,',
         treve.get_colored_name(),
-        ' は快感の中で喘ぐしかない。',
+        '은(는) 쾌감 속에서 신음할 수밖에 없다.',
       ]);
       await era.printAndWait(
-        `肉棒の動きに合わせ、${treve.sex}の体が上下する。`,
+        `육봉의 움직임에 맞춰, ${treve.sex}의 몸이 위아래로 움직인다.` ,
       );
       await era.printAndWait([
-        '表情の管理もすでに崩れているが、',
+        '표정 관리는 이미 무너졌지만,',
         treve.get_colored_name(),
-        ' はもう気にしていない。',
+        '은(는) 이제 신경 쓰지 않는다.',
       ]);
-      await treve.say_and_wait('いく！いく！あああ！！');
+      await treve.say_and_wait('가요! 가요! 아아아!!');
       await era.printAndWait([
         you.get_colored_name(),
-        ' のスパートで、二人は同時に頂点を迎え、温かい因子が ',
+        '의 스퍼트로 두 사람은 동시에 정점에 도달하고, 따뜻한 인자가 ',
         treve.get_colored_name(),
-        ' の沈んだ子宮を満たす。',
+        '의 가라앉은 자궁을 채운다.',
       ]);
       await era.printAndWait([
-        '射精は長く続き、そのあいだ ',
+        '사정은 길게 이어지고, 그동안 ',
         treve.get_colored_name(),
-        ' の子宮は亀頭に口付けされながら精液を注がれる。',
+        '의 자궁은 귀두와 입맞춤하며 정액을 부어받는다.',
       ]);
       await era.printAndWait([
-        'やがてすべて出し切ると、',
+        '마침내 전부 쏟아내자,',
         you.get_colored_name(),
-        ' は肉棒を抜く。同時に、白濁が逆流する。',
-      ]);
-      await era.printAndWait([
-        treve.get_colored_name(),
-        ' が自分の腹を見ていると、',
-        you.get_colored_name(),
-        ' がまた彼女の上へ圧し掛かる。',
-      ]);
-      await era.printAndWait('唇が重なり、舌が絡む。');
-      await era.printAndWait([
-        '熱いキスをしばらく続けたあと、',
-        you.get_colored_name(),
-        ' は再び元気を取り戻したそれを押し付ける。',
-      ]);
-      await treve.say_and_wait('あっ、だめ……');
-      await era.printAndWait([
-        'だめなことなどない。',
-        you.get_colored_name(),
-        ' は再びピストンを始める。',
-      ]);
-      await era.printAndWait([
-        you.get_colored_name(),
-        ' に強引に犯される ',
-        treve.get_colored_name(),
-        ' は必死に抵抗するが、力が入らない。',
-      ]);
-      await era.printAndWait([
-        '膣内の抽送が激しくなり、口も ',
-        you.get_colored_name(),
-        ' の舌に蹂躙される。',
+        '은(는) 육봉을 뽑는다. 동시에 백탁이 역류한다.',
       ]);
       await era.printAndWait([
         treve.get_colored_name(),
-        ' は ',
+        '이(가) 자신의 배를 보고 있을 때,',
         you.get_colored_name(),
-        ' の背中をきつく抱き、体を快楽に任せる。',
+        '이(가) 다시 그녀의 위로 압박해 온다.',
       ]);
-      await treve.say_and_wait('まったく……私、どうなってもいいの……');
+      await era.printAndWait('입술이 겹쳐지고 혀가 얽힌다.');
       await era.printAndWait([
-        'そんな ',
+        '뜨거운 키스를 잠시 계속한 뒤,',
+        you.get_colored_name(),
+        '은(는) 다시 기운을 차린 그것을 밀어 넣는다.',
+      ]);
+      await treve.say_and_wait('앗, 안 돼요……');
+      await era.printAndWait([
+        '안 될 것 따위는 없다.',
+        you.get_colored_name(),
+        '은(는) 다시 피스톤을 시작한다.',
+      ]);
+      await era.printAndWait([
+        you.get_colored_name(),
+        '에게 강제로 범해지는 ',
         treve.get_colored_name(),
-        ' を見て、',
-        you.get_colored_name(),
-        ' は満足げな笑顔を見せる。',
+        '은(는) 필사적으로 저항하지만 힘이 들어가지 않는다.',
       ]);
       await era.printAndWait([
-        treve.get_colored_name(),
-        ' は両脚で ',
+        '질 안의 추송이 격렬해지고, 입도 ',
         you.get_colored_name(),
-        ' の背を抱え、',
-        you.get_colored_name(),
-        ' を逃さない。',
-      ]);
-      await treve.say_and_wait('んっ！出して、全部ちょうだい。');
-      await era.printAndWait([
-        you.get_colored_name(),
-        ' は亀頭を子宮口に密着させたまま精子を吐く。',
-      ]);
-      await treve.say_and_wait('ほぉ……あっ……');
-      await era.printAndWait([
-        you.get_colored_name(),
-        ' の射精はまだ続き、脈打つたび ',
-        treve.get_colored_name(),
-        ' の体も痙攣する。',
+        '의 혀에 유린당한다.',
       ]);
       await era.printAndWait([
         treve.get_colored_name(),
-        ' の小さな子宮が裂けそうな量だと感じさせるほど出し、ようやく解放が終わる。',
-      ]);
-      await era.printAndWait([
+        '은(는) ',
         you.get_colored_name(),
-        ' は肉棒をゆっくり抜く。',
+        '의 등을 세게 껴안고 몸을 쾌락에 맡긴다.',
       ]);
-      await treve.say_and_wait('もう一度、いかせて……');
+      await treve.say_and_wait('정말…… 저, 어떻게 되어도 좋아요……');
       await era.printAndWait([
-        'そう言う ',
+        '그런 ',
         treve.get_colored_name(),
-        ' は、顔を ',
+        '을(를) 보고,',
         you.get_colored_name(),
-        ' の肉棒へ擦り寄せる。',
+        '은(는) 만족스러운 미소를 지은다.',
       ]);
-      await era.printAndWait('そのまま舌を出し、亀頭を口に含む。');
-      await era.printAndWait('尿道に残ったものまで吸い尽くす。');
+      await era.printAndWait([
+        treve.get_colored_name(),
+        '은(는) 양발로 ',
+        you.get_colored_name(),
+        '의 등을 안고,',
+        you.get_colored_name(),
+        '을 놓아주지 않는다.',
+      ]);
+      await treve.say_and_wait('응! 내보내줘요, 전부 줘요.');
       await era.printAndWait([
         you.get_colored_name(),
-        ' の肉棒は再びきれいに勃起し、',
-        treve.get_colored_name(),
-        ' に自分の秘所へ移される。',
+        '은(는) 귀두를 자궁구에 밀착시킨 채 정자를 뿜어낸다.',
       ]);
-      await treve.say_and_wait('今度は後ろから……');
-      await era.printAndWait('這い、後背の姿勢になる。');
-      await treve.say_and_wait('あっ！これだめ、突く場所が違う……');
-      await era.printAndWait('膣内の襞、一枚一枚が擦られる。');
+      await treve.say_and_wait('호오…… 앗……');
       await era.printAndWait([
         you.get_colored_name(),
-        ' の激しすぎる動きで、',
+        '의 사정은 아직 계속되고, 맥박이 칠 때마다 ',
         treve.get_colored_name(),
-        ' は腕の支えが崩れ、尻を突き出した形になる。',
+        '의 몸도 경련한다.',
       ]);
-      era.printButton('「トレヴのそこは気持ちいい。きつくて最高だ。」', 1);
+      await era.printAndWait([
+        treve.get_colored_name(),
+        '의 작은 자궁이 터질 듯한 양이라고 느끼게 할 정도로 내보내고 마침내 해방이 끝난다.',
+      ]);
+      await era.printAndWait([
+        you.get_colored_name(),
+        '은(는) 육봉을 천천히 뽑는다.',
+      ]);
+      await treve.say_and_wait('한 번 더, 가게 해줘요……');
+      await era.printAndWait([
+        '그렇게 말하는 ',
+        treve.get_colored_name(),
+        '은(는) 얼굴을 ',
+        you.get_colored_name(),
+        '의 육봉에 비빈다.',
+      ]);
+      await era.printAndWait('그대로 혀를 내밀고 귀두를 입안에 머금는다.');
+      await era.printAndWait('요도에 남은 것까지 다 빨아먹는다.');
+      await era.printAndWait([
+        you.get_colored_name(),
+        '의 육봉은 다시 깨끗하게 발기하고,',
+        treve.get_colored_name(),
+        '에게 자신의 비소로 옮겨진다.',
+      ]);
+      await treve.say_and_wait('이번에는 뒤에서……');
+      await era.printAndWait('기어서 후배 자세가 된다.');
+      await treve.say_and_wait('앗! 이거 안 돼요, 찌르는 곳이 달라요……');
+      await era.printAndWait('질 안의 주름 하나하나가 쓸린다.');
+      await era.printAndWait([
+        you.get_colored_name(),
+        '의 너무 격렬한 움직임에,',
+        treve.get_colored_name(),
+        '은(는) 팔의 지탱이 무너지고, 엉덩이를 내민 형태가 된다.',
+      ]);
+      era.printButton('「파크의 그곳은 기분 좋아. 꽉 조여서 최고야.」', 1);
       await era.input();
       await era.printAndWait([
-        '腰を打ち付けるたび、',
+        '허리를 부딪칠 때마다,',
         treve.get_colored_name(),
-        ' の体が震える。',
+        '의 몸이 떨린다.',
       ]);
       await era.printAndWait([
         you.get_colored_name(),
-        ' は腹を攻めるように、膣壁に沿って上へ押す。',
+        '은(는) 배를 공략하듯 질벽을 따라 위로 민다.',
       ]);
       await era.printAndWait([
-        'Gスポットを突かれた ',
+        'G스폿을 찔린 ',
         treve.get_colored_name(),
-        ' は、全身に電流が走ったように感じる。',
+        '은(는) 전신에 전류가 흐르는 듯한 것을 느낀다.',
       ]);
-      await treve.say_and_wait('そこ！だめ……また来る！');
-      await treve.say_and_wait('いく！出して！中に出して。');
+      await treve.say_and_wait('거기! 안 돼요…… 또 와요!');
+      await treve.say_and_wait('가요! 내보내줘요! 안에 내보내주세요.');
       await era.printAndWait([
-        '絶頂と同時に ',
+        '절정과 동시에 ',
         you.get_colored_name(),
-        ' に中出しされ、熱い因子汁を注がれる。',
+        '에게 안으로 사정당하며, 뜨거운 인자즙을 부어받는다.',
       ]);
       era.drawLine();
       await era.printAndWait([
-        'しばし休み、',
+        '잠시 쉬고,',
         you.get_colored_name(),
-        ' にサプライズだと言う ',
+        '에게 깜짝 선물이라고 말하는 ',
         treve.get_colored_name(),
-        ' は、小走りで傍らの更衣室へ入る。',
+        '은(는) 가볍게 달려 옆의 탈의실로 들어간다.',
       ]);
       await era.printAndWait([
-        'しばらくして、',
+        '잠시 후,',
         treve.get_colored_name(),
-        ' の小さな頭が更衣室の扉の隙間から弾ける。',
-      ]);
-      await era.printAndWait([
-        you.get_colored_name(),
-        ' には不安げな顔が見える。片手で扉の縁を強く支えている。',
+        '의 작은 머리가 탈의실 문틈 사이로 튀어나온다.',
       ]);
       await era.printAndWait([
         you.get_colored_name(),
-        ' は手を伸ばし、',
-        treve.get_colored_name(),
-        ' の口を覆う小さな手を掴み、引き寄せて後ろへ捻る。',
-      ]);
-      await era.printAndWait([
-        '小さな手が口を離れた瞬間、',
-        treve.get_colored_name(),
-        ' の、舌を出して熱い息を吐く小さな口が露わになる。',
-      ]);
-      await era.printAndWait([
-        '声を抑えきれないのを恐れているのか、',
-        treve.get_colored_name(),
-        ' は急いで下唇を噛む。',
-      ]);
-      await era.printAndWait([
-        treve.get_colored_name(),
-        ' は ',
-        you.get_colored_name(),
-        ' の手を叩く。',
+        '에게는 불안한 얼굴이 보인다. 한 손으로 문의 가장자리를 강하게 지탱하고 있다.',
       ]);
       await era.printAndWait([
         you.get_colored_name(),
-        ' が彼女を放すと、',
+        '은(는) 손을 뻗어,',
         treve.get_colored_name(),
-        ' は雌犬のように両手を床につき、首には目立って黒い革の首輪がある。',
+        '의 입을 가리는 작은 손을 잡고 끌어당겨 뒤로 비튼다.',
       ]);
       await era.printAndWait([
-        you.get_colored_name(),
-        ' は鎖を強く引き、',
+        '작은 손이 입에서 떨어진 순간,',
         treve.get_colored_name(),
-        ' の上半身全体を無理に反らせる。',
+        '의 혀를 내밀고 뜨거운 숨을 내뱉는 작은 입이 드러난다.',
       ]);
       await era.printAndWait([
-        '窒息は ',
+        '소리를 참지 못할 것을 두려워하는지,',
         treve.get_colored_name(),
-        ' の両頬を赤くし、両手で絶望的に首輪を引っ掻いて無駄に外そうとするだけでなく、快感の刺激も直線的に上げる。',
-      ]);
-      await era.printAndWait([
-        treve.get_colored_name(),
-        ' は両脚を震わせ、淫液が精液を巻き込んで何度も溢れ、太ももを伝って股間を完全に濡らす……',
-      ]);
-      await era.printAndWait([
-        '加虐の性向を満たした ',
-        you.get_colored_name(),
-        ' が鎖を緩めると、精も根も尽きた ',
-        treve.get_colored_name(),
-        ' は床に跪き、大きく息をする。',
+        '은(는) 급히 아랫입술을 깨문다.',
       ]);
       await era.printAndWait([
         treve.get_colored_name(),
-        ' は ',
+        '은(는) ',
         you.get_colored_name(),
-        ' の命令で小さな顔を床に付け、',
-        you.get_colored_name(),
-        ' に尻を高く上げ、二本の指で赤く腫れた両陰唇を開き、さっき中出しされたそこを ',
-        you.get_colored_name(),
-        ' に見せる。',
+        '의 손을 때린다.',
       ]);
       await era.printAndWait([
-        '精液が少しずつ床へ滑り落ち、',
         you.get_colored_name(),
-        ' は十分に満足する。',
+        '이(가) 그녀를 놓아주자,',
+        treve.get_colored_name(),
+        '은(는) 암캐처럼 양손을 바닥에 짚고, 목에는 눈에 띄게 검은 가죽 목줄이가 있다.',
       ]);
-      era.printButton('「賢い犬なら、次に何をすべきか分かるだろう。」', 1);
+      await era.printAndWait([
+        you.get_colored_name(),
+        '은(는) 사슬을 강하게 당겨,',
+        treve.get_colored_name(),
+        '의 상반신 전체를 억지로 뒤로 젖히게 한다.',
+      ]);
+      await era.printAndWait([
+        '질식은 ',
+        treve.get_colored_name(),
+        '의 양 볼을 붉게 만들고, 양손으로 절망적으로 목줄을 할퀴며 무의미하게 풀려고 애쓰는 것뿐만 아니라, 쾌감의 자극도 직선적으로 높인다.',
+      ]);
+      await era.printAndWait([
+        treve.get_colored_name(),
+        '은(는) 양다리를 떨며 음액이 정액을 휘말아 여러 번 넘쳐흐르고, 허벅지를 타고 가랑이를 완전히 적신다……',
+      ]);
+      await era.printAndWait([
+        '가학적인 성향을 채운 ',
+        you.get_colored_name(),
+        '이(가) 사슬을 느슨하게 풀자, 기력도 의지도 다한 ',
+        treve.get_colored_name(),
+        '은(는) 바닥에 무릎을 꿇고 크게 숨을 몰아쉰다.',
+      ]);
+      await era.printAndWait([
+        treve.get_colored_name(),
+        '은(는) ',
+        you.get_colored_name(),
+        '의 명령으로 작은 얼굴을 바닥에 대고,',
+        you.get_colored_name(),
+        '에게 엉덩이를 높게 치켜들고 두 손가락으로 붉게 부어오른 양 음순을 벌려 아까 안으로 사정당한 그곳을 ',
+        you.get_colored_name(),
+        '에게 보여준다.',
+      ]);
+      await era.printAndWait([
+        '정액이 조금씩 바닥으로 흘러내리고,',
+        you.get_colored_name(),
+        '은(는) 충분히 만족한다.',
+      ]);
+      era.printButton('「영리한 개라면 다음에 무엇을 해야 할지 알겠지.」', 1);
       await era.input();
       await treve.say_and_wait(
-        '私のオナホール蜜穴に、あなたの高貴な精液を注いでください❤️～',
+        '제 오나홀 보지에 당신의 고귀한 정액을 부어주세요❤️~',
       );
       await era.printAndWait([
-        '啄むような口付けとともに、',
+        '부리로 쪼는 듯한 키스와 함께,',
         you.get_colored_name(),
-        ' の肉棒は再び、愛馬への侵犯を始める。',
+        '의 육봉은 다시 애마를 침범하기 시작한다.',
       ]);
       return ret;
     };

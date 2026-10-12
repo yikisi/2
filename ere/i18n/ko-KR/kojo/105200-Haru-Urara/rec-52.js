@@ -18,10 +18,10 @@ module.exports = {
     if (era.get('cflag:52:育成次数') > 0) {
       await inner_urara.say_as_unknown_and_wait('……');
       await inner_urara.say_as_unknown_and_wait(
-        '또 왔구나. 같은 이야기를 다시 듣고 싶니? 아니면, 아직 끝내지 못한 미련이 있는 걸까?',
+        "또 왔구나. 같은 이야기를 다시 듣고 싶니? 아니면, 아직 끝내지 못한 미련이 있는 걸까?",
       );
       await inner_urara.say_as_unknown_and_wait(
-        '네가 원한다면 처음부터 다시 시작하자. 새로운 이야기에서 답을 찾을 수 있기를 바라.',
+        "네가 원한다면 처음부터 다시 시작하자. 새로운 이야기에서 답을 찾을 수 있기를 바라.",
       );
       await inner_urara.say_as_unknown_and_wait(
         `언제나처럼, 이건 더는 작아질 수도 없을 만큼 아주 작은 ${urara.uma_sex_title}의 이야기——`,
@@ -29,7 +29,7 @@ module.exports = {
     } else if (rec_mark) {
       await inner_urara.say_as_unknown_and_wait('……');
       await inner_urara.say_as_unknown_and_wait(
-        '이번에는 각오가 되어 있니? 이번만큼은 이야기를 끝까지 함께해 주면 좋겠어……기대하고 있을게.',
+        "이번에는 각오가 되어 있니? 이번만큼은 이야기를 끝까지 함께해 주면 좋겠어……기대하고 있을게.",
       );
       await inner_urara.say_as_unknown_and_wait(
         `그럼, 이건 더는 작아질 수도 없을 만큼 아주 작은 ${urara.uma_sex_title}의 이야기——`,
@@ -37,10 +37,10 @@ module.exports = {
     } else {
       await inner_urara.say_as_unknown_and_wait('……');
       await inner_urara.say_as_unknown_and_wait(
-        '있지, 들리니? 듣고 있다면 슬슬 이 이야기를 시작하자.',
+        "있지, 들리니? 듣고 있다면 슬슬 이 이야기를 시작하자.",
       );
       await inner_urara.say_as_unknown_and_wait(
-        '흔한 이야기일 수도, 조금 긴 이야기일 수도 있어. 그래도 선택한 이상 끝까지 들어 줘.',
+        "흔한 이야기일 수도, 조금 긴 이야기일 수도 있어. 그래도 선택한 이상 끝까지 들어 줘.",
       );
       await inner_urara.say_as_unknown_and_wait(
         `이건 더는 작아질 수도 없을 만큼 아주 작은 ${urara.uma_sex_title}의 이야기——`,
@@ -146,14 +146,14 @@ module.exports = {
       `코끝을 스치는 익숙한 약품 냄새와 함께, 멀어졌던 의식은 트레센 보건실에 누워 있는 육체를 서서히 되찾았다.`,
     );
     await era.printAndWait(
-      `ゆっくり目を覚ました ${you.name} は、朦朧としたまま傍らの柔らかさを味わっていた。硬いシーツのことではない。隣で眠っている少女の、その感触だ。`,
+      `천천히 눈을 뜬 ${you.name}은(는) 몽롱한 채로 곁의 부드러움을 느끼고 있었다. 딱딱한 시트 때문이 아니다.`,
     );
     await era.printAndWait(
-      `目を開けなくても、${
+      `눈을 뜨지 않아도 ${
         you.name
-      } は傍らの甘い気配でだいたい察しがついた。いま枕を並べているのは、倒れた ${
+      }은(는) 곁의 달콤한 기운으로 대충 짐작할 수 있었다. 지금 베개를 나란히 하고 있는 것은, 쓰러진 ${
         you.name
-      } を保健室まで運んでくれた小${urara.uma_sex_title}だ。`,
+      }을(를) 보건실까지 옮겨 준 작은 ${urara.uma_sex_title}다.`,
     );
     era.println();
 
@@ -167,65 +167,65 @@ module.exports = {
       1,
     );
     era.printButton(
-      `まだ、疲れてる。${you.name} は目を閉じたまま、得がたい温柔郷に浸ることにした。`,
+      `아직도 피곤하다. ${you.name}은(는) 눈을 감은 채, 좀처럼 누릴 수 없는 평온한 세계에 빠져들기로 했다.`,
       2,
       { disabled: urara.sex_code === 1 },
     );
 
     if ((await era.input()) === 2) {
       await era.printAndWait(
-        `こんなに安心できたのは、もうずいぶん久しぶりだった。`,
+        `이렇게 마음이 편안해진 건 정말 오랜만이었다.`,
       );
       await era.printAndWait(
-        `目を閉じたまま、${you.name} はその温もりの源へさらに身を寄せ、ほとんど${urara.sex}を抱き寄せそうになる。`,
+        `눈을 감은 채, ${you.name}은(는) 그 온기의 근원 쪽으로 몸을 더 가까이 기대어, 거의 ${urara.sex}을(를) 꼭 껴안을 기세였다.`,
       );
       await era.printAndWait(
-        `眠りの中の、柔らかくて健康な肉感。素朴な花のような体の匂い。どちらも ${you.name} の心をほどいていく。`,
+        `잠든 모습의 부드럽고 건강한 육감. 소박한 꽃 같은 몸의 향기. 둘 다 ${you.name}의 마음을 풀어준다.`,
       );
       await era.printAndWait(
-        `${urara.teen_sex_title}の吐息がすぐ近くで、無邪気に ${
+        `${urara.teen_sex_title}의 숨결이 바로 곁에서, 천진난만하게 ${
           you.name
-        } の首筋をくすぐる。距離感を失った接触に、${you.name} の意識は沈んでいった。`,
+        }의 목덜미를 간지럽힌다. 거리감을 잃은 접촉에 ${you.name}의 의식은 가라앉아 갔다.`,
       );
       await era.printAndWait(
-        `助けてくれた生徒にこんなことをするのは、とてもよろしくない。大人として、下品すぎる——${you.name} にもそれはわかっている。`,
+        `도와준 학생에게 이런 짓을 하는 건 정말 좋지 않다. 어른으로서 너무 저속하다—— ${you.name}도 그 사실을 알고 있다.`,
       );
       await era.printAndWait(
-        `それでも今の ${you.name} の頭は、心の飢えに従い、体へ『もう一歩』と命じ続けていた。`,
+        `그럼에도 지금 ${you.name} 의 머릿속은 마음의 갈증을 따라, 몸에게 『한 걸음 더』라고 계속 명령하고 있었다.`,
       );
       await era.printAndWait(
-        `恍惚の中、${you.name} の指が小${urara.uma_sex_title}の体へ這い上がる。`,
+        `황홀경 중, ${you.name}의 손가락이 어린 ${urara.uma_sex_title}의 몸을 타고 올라간다.`,
       );
       await era.printAndWait(
-        `指先から掌へ。${you.name} は触覚で、思いのほか小さな輪郭と、つぼみのような曲線を測っていく。`,
+        `손끝에서 손바닥으로. ${you.name}은(는) 촉각으로, 생각보다 작은 윤곽과 꽃봉오리 같은 곡선을 더듬어 간다.`,
       );
       await era.printAndWait(
-        `片手は${urara.teen_sex_title}の胸の丘を撫で、柔らかい頬と唇をかすめ、さらさらの髪を伝う。`,
+        `한 손은 ${urara.teen_sex_title}의 가슴 언덕을 쓰다듬고, 부드러운 뺨과 입술을 스치며, 매끄러운 머리카락을 따라 내려간다.`,
       );
       await era.printAndWait(
-        `指は耳カバーの内側を探り、小さな耳の柔らかさを味わう。`,
+        `손가락은 귀 덮개 안쪽을 더듬으며, 작은 귀의 부드러움을 음미한다.`,
       );
       await era.printAndWait(
-        `もう一方の手は柔らかい後頸と背筋を下り、毛に隠れた${urara.teen_sex_title}の尾の根元へ滑り込む。`,
+        `다른 한 손은 부드러운 목 뒤와 등줄기를 따라 내려가, 털에 가려진 ${urara.teen_sex_title}의 꼬리 뿌리 쪽으로 미끄러져 들어간다.`,
       );
       await era.printAndWait(
-        `敏感な根元だけでなく、指をひと曲げすれば、ブルマの穴からさらに奥へも届く。`,
+        `민감한 뿌리뿐만 아니라, 손가락을 살짝 구부리면 블루머의 구멍을 통해 더 깊은 곳까지 닿을 수 있다.`,
       );
       await era.printAndWait(
-        `衣を一枚めくれば、もっと深い秘密の『花園』にまで……`,
+        `옷 한 겹을 걷어내면, 더 깊은 비밀의 『꽃밭』까지……`,
       );
       await era.printAndWait(
-        `だが ${
+        `하지만 ${
           you.name
-        } がさらに深く入ろうとしたとき、眠りの中の小${urara.uma_sex_title}が耳と尻尾を震わせ始めた。`,
+        }이(가) 더 깊이 들어가려 했을 때, 잠든 작은 ${urara.uma_sex_title}의 귀와 꼬리가 떨리기 시작했다.`,
       );
       await era.printAndWait(
-        `体が小さく震え、喉から可愛い吐息が漏れる。夢から覚める前触れだ。`,
+        `몸이 살짝 떨리며, 목구멍에서 귀여운 숨소리가 새어 나온다. 꿈에서 깨어날 전조다.`,
       );
       await era.printAndWait(
-        `もう欲張りすぎてはいけない。半睡の ${you.name} はようやく理性を取り戻し、目を開けるべきだと気づいた——`,
+        `더 이상 욕심을 부려서는 안 된다. 반쯤 잠든 ${you.name}은(는) 드디어 이성을 되찾고, 눈을 떠야 한다는 것을 깨달았다——`,
       );
-      era.printButton('눈을 뜬다', 1);
+      era.printButton("눈을 뜬다", 1);
       await era.input();
     }
 
@@ -241,19 +241,19 @@ module.exports = {
       }보다 먼저 보건실 침대에서 상체를 일으켰다.`,
     );
     await era.printAndWait(
-      `肌に沿う体操服の下に、幼いのに意外と整った体つきが透ける。正座した太腿と尻は、幼い印象に似合わないほど豊かに丸い。`,
+      `피부에 밀착된 체육복 아래로, 어린 나이 치고는 의외로 균형 잡힌 몸매가 비쳐 보인다. 정좌한 허벅지와 엉덩이는 어린 인상에 어울리지 않을 만큼 풍만하고 둥글다.`,
     );
     await era.printAndWait(
-      `溢れんばかりの肉感が三角の下着を満たし、密着した布が腰と尻に生々しい食い込みを残している。`,
+      `넘칠 듯한 육감이 삼각 팬티를 가득 채우고, 밀착된 천이 허리와 엉덩이에 생생하게 파고든 자국을 남기고 있다.`,
     );
     await era.printAndWait(
-      `여기에 거리감을 잴 수 없는 동안의 얼굴이 더해져, 아직 미숙함에도 불구하고 ${urara.sex}는 자신만의 독특한『여성』으로서의 매력을 발산하고 있었다.`,
+      `여기에 거리감을 잴 수 없는 동안의 얼굴이 더해져, 아직 미숙함에도 불구하고 ${urara.sex}는 자신만의 독특한 『여성』으로서의 매력을 발산하고 있었다.`,
     );
     await era.printAndWait(
       `어쩔 수 없었다고 변명해 봐도, 그 사랑스러운 얼굴에 떠오른 티 없이 맑은 미소는 조금 전 ${urara.sex}와(과) 나란히 누워 응석을 부렸던 ${you.name}에게 피할 수 없는 죄책감을 남겼다.`,
     );
     await urara.say_as_unknown_and_wait(
-      '트레이너 맞지? 몸은 좀 어때? 트레이너라는 직업은 정말 힘들구나! 하지만 너무 무리하지 않아도 괜찮아!',
+      "트레이너 맞지? 몸은 좀 어때? 트레이너라는 직업은 정말 힘들구나! 하지만 너무 무리하지 않아도 괜찮아!",
     );
     await era.printAndWait(
       `귀여운 미소와 허물없는 걱정을 담아, 벚꽃빛의 작은 ${urara.uma_sex_title}이(가) 스스럼없이 ${
@@ -319,16 +319,16 @@ module.exports = {
     );
     era.drawLine();
     await you.say_as_passer_by_and_wait(
-      '트레이너 A',
-      '저 애는 사람을 끌어당기는 힘은 있지만, 역시……',
+      "트레이너 A",
+      "저 애는 사람을 끌어당기는 힘은 있지만, 역시……",
     );
     await you.say_as_passer_by_and_wait(
-      '트레이너 B',
+      "트레이너 B",
       `그러게. 저런 애를 키우려면 얼마나 힘들지 상상이 가네.${urara.sex}은(는) 여기에 안 맞는 것 아닐까.`,
     );
     await you.say_as_passer_by_and_wait(
-      '트레이너 C',
-      '분위기는 좋지. 하지만 그것만으로는 의미 없잖아.',
+      "트레이너 C",
+      "분위기는 좋지. 하지만 그것만으로는 의미 없잖아.",
     );
     await era.printAndWait(
       `주변의 수군거림에 이끌리듯, ${you.name}은(는) 코스로 눈을 돌렸다. 아니나 다를까, ${you.name}의 직감이 맞았다.`,
@@ -498,7 +498,9 @@ module.exports = {
           you.name
         }의 두 손을 잡았다.`,
       );
-      await urara.say_and_wait(`그러니까 기뻐! 앞으로 같이 힘내자, 트레이너!`);
+      await urara.say_and_wait(
+        `그러니까 기뻐! 앞으로 같이 힘내자, 트레이너!`,
+      );
       await era.printAndWait(
         `타오르기 시작한 작은 불씨는 그리 쉽게 꺼지지 않는다. 스스로를 똑바로 마주할 수 있다면, 달려갈 길은 앞으로도 이어질 수 있다.`,
       );
@@ -524,7 +526,7 @@ module.exports = {
       era.println();
       await era.printAndWait([
         urara.get_colored_name(),
-        '의 트레이너가 되었다!',
+        "의 트레이너가 되었다!",
       ]);
     } else {
       await era.printAndWait(

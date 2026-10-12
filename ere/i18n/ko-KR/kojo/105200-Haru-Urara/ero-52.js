@@ -12,37 +12,37 @@ module.exports = {
    */
   async zero_stamina(urara, you) {
     if (Math.random() < 0.5) {
-      await urara.say_and_wait('……아……아……');
+      await urara.say_and_wait("……아……아……");
       if (era.get('flag:主导权') === 0) {
         await era.printAndWait([
-          '壊された人形のように、気絶した ',
+          '망가진 인형처럼 기절한 ',
           urara.get_colored_name(),
-          ' が ',
+          '이(가) ',
           you.get_colored_name(),
-          ' の腕の中で、止まらず痙攣している',
+          '의 품 안에서 멈추지 않고 경련하고 있다',
         ]);
       } else {
         await era.printAndWait([
-          '壊された人形のように、気絶した ',
+          '망가진 인형처럼 기절한 ',
           urara.get_colored_name(),
-          ' が止まらず痙攣している',
+          '이(가) 멈추지 않고 경련하고 있다',
         ]);
       }
     } else {
       await urara.say_and_wait('……');
       if (era.get('flag:主导权') === 0) {
         await era.printAndWait([
-          '全身が力なく解け、',
+          '온몸의 힘이 풀려버린 채,',
           you.get_colored_name(),
-          ' にいじられ尽くした ',
+          '에게 철저히 농락당한 ',
           urara.get_colored_name(),
-          ' は、もうすっかり気を失っている',
+          '은(는) 완전히 의식을 잃었다',
         ]);
       } else {
         await era.printAndWait([
-          '全身が力なく解け、',
+          '온몸의 힘이 풀려버린 채, ',
           urara.get_colored_name(),
-          ' はもうすっかり気を失っている',
+          '은(는) 완전히 의식을 잃었다',
         ]);
       }
     }
