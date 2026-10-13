@@ -4644,165 +4644,165 @@ party_end:
 
 # TODO 触发条件：男T马娘，同队目白高峰，自身爱慕＞74，进入下一周
 we_arrogant_sister:
-  title: 高傲的姐姐
+  title: "고고한 언니"
   lines:
     - color: %COLOR_86%
       content:
         - fontWeight: bold
           content: %RAMONU%
-        - 「明白了，晚些再说。」
+        - "「알겠어. 이야기는 나중에 계속하지.」"
     - color: %COLOR_86%
       content:
         - fontWeight: bold
           content: %RAMONU%
-        - 「家族里还有事情，我先走了。」
-    - 她将红色的训练外套脱下，手掌扇着风离开了训练场。
-    - 无论何时的目白高峰总是充满那种压不住的成熟感，让 %YOU% 略带一丝感叹。
-    - 目白家真的很厉害，能培养出那么优秀的马娘。
+        - "「집안에 볼일이 있어서 먼저 가볼게.」"
+    - "그녀는 붉은 트레이닝복 상의를 벗고 손부채질을 하며 훈련장을 떠났다."
+    - "언제나 감출 수 없는 성숙한 분위기를 풍기는 메지로 라모누를 보며 %YOU%는 새삼 감탄한다."
+    - "저렇게 뛰어난 우마무스메를 길러내다니, 메지로 가문은 정말 대단하다."
     - color: %COLOR%
       content:
         - fontWeight: bold
           content: %CHARA%
-        - 「那个……」
+        - "「저기……」"
     - color: %COLOR%
       content:
         - fontWeight: bold
           content: %CHARA%
-        - 「现在有时间吗？」
-    - 当 %YOU% 还在感叹的时候，身后传来了一个弱气的声音。
-    - 目白善信带着一幅不自信的表情，从 %YOU% 的身旁轻轻拉了一下衣袖。
+        - "「지금 시간 있어?」"
+    - "%YOU%가 감탄하고 있을 때, 등 뒤에서 자신 없는 목소리가 들려왔다."
+    - "메지로 파머가 불안한 표정으로 다가와 %YOU%의 소매를 살짝 잡아당겼다."
     - color: %COLOR%
       content:
         - fontWeight: bold
           content: %CHARA%
-        - 「姐姐她没有为难你吧？」
+        - "「언니가 곤란하게 하지는 않았지?」"
     - acc: 1
-      content: 「没有，平时就是这样。」
+      content: "「아니, 평소에도 저런걸.」"
       lines:
-        - 不以为然的 %YOU% 看着远方的背影，没多想就回复了。
-        - 但很快 %YOU% 就意识到，身边的目白善信似乎不太开心的样子。
-        - 似乎对于姐姐，目白善信并不是那么平淡。
+        - "%YOU%는 멀어지는 뒷모습을 바라보며 별생각 없이 대답했다."
+        - "하지만 곧 %YOU%는 옆에 있는 메지로 파머의 표정이 그리 밝지 않다는 것을 알아차렸다."
+        - "메지로 파머는 언니를 마냥 담담하게 대할 수는 없는 모양이다."
         - acc: 1
-          content: 「善信你……不喜欢姐姐吗？」
+          content: "「파머는…… 언니가 싫어?」"
         - color: %COLOR%
           content:
             - fontWeight: bold
               content: %CHARA%
-            - 「啊，被发现……」
+            - "「아, 들켰……」"
         - color: %COLOR%
           content:
             - fontWeight: bold
               content: %CHARA%
-            - 「应该是被看出来了啊。」
-        - 僵硬的身体略微乏力，软下来靠在 %YOU% 的手臂上。
-        - 耳朵没精神的塌下来，似乎是没有精神维持这边的体面。
+            - "「아니, 티가 났나 보네.」"
+        - "뻣뻣하게 굳어 있던 몸에서 힘이 빠지더니, %YOU%의 팔에 살며시 기댔다."
+        - "애써 태연한 척할 기운도 없는지 귀가 축 처졌다."
         - color: %COLOR%
           content:
             - fontWeight: bold
               content: %CHARA%
-            - 「以前，在家里的时候，高峰姐姐就总是招人喜欢的一个。」
+            - "「예전에 집에 있을 때부터 라모누 언니는 늘 모두에게 사랑받았어.」"
         - color: %COLOR%
           content:
             - fontWeight: bold
               content: %CHARA%
-            - 「不知不觉间，姐姐她越来越厉害，大家总是以她作为标杆。」
+            - "「어느새 언니는 점점 더 대단해졌고, 다들 언니를 기준으로 삼았지.」"
         - color: %COLOR%
           content:
             - fontWeight: bold
               content: %CHARA%
-            - 「麦昆，莱恩，阿尔丹……大家总是以高峰姐姐作为榜样。」
+            - "「맥퀸, 라이언, 아르당…… 다들 라모누 언니를 본보기로 삼았어.」"
         - color: %COLOR%
           content:
             - fontWeight: bold
               content: %CHARA%
-            - 「……当然我也是！」
-        - 似乎是担心 %YOU% 误解什么，目白善信胡乱挥手想要驱散掉阴郁的气息。
+            - "「……물론 나도 그랬고!」"
+        - "%YOU%가 오해할까 걱정됐는지, 메지로 파머는 어두운 분위기를 떨쳐내려는 듯 손을 휘저었다."
         - color: %COLOR%
           content:
             - fontWeight: bold
               content: %CHARA%
-            - 「但是大家都很厉害，渐渐地……」
+            - "「그런데 다들 너무 대단해서, 점점……」"
         - color: %COLOR%
           content:
             - fontWeight: bold
               content: %CHARA%
-            - 「感觉我已经谁都追不上了，啊哈哈……」
-        - 想要用笑声活络一下气氛，但脸上的表情可不是笑着。
-        - 那幅表情里虽然不是难受，却始终有一点纠结。
+            - "「이제는 아무도 따라잡을 수 없을 것 같더라. 아하하……」"
+        - "웃음으로 분위기를 밝게 만들려 했지만, 표정은 웃고 있지 않았다."
+        - "괴로워 보이는 것은 아니었지만, 어딘가 복잡한 심정이 드러나는 표정이었다."
         - color: %COLOR%
           content:
             - fontWeight: bold
               content: %CHARA%
-            - 「那个，训练员。」
+            - "「저기, 트레이너.」"
         - color: %COLOR%
           content:
             - fontWeight: bold
               content: %CHARA%
-            - 「你不会因为姐姐很厉害……就不管我吧？」
+            - "「언니가 더 대단하다고…… 나를 내버려 두지는 않을 거지?」"
         - acc: 1
-          content: 「怎么会呢，善信可是我最骄傲的马娘。」
+          content: "「그럴 리가. 파머는 내가 가장 자랑스러워하는 우마무스메인걸.」"
         - color: %COLOR%
           content:
             - fontWeight: bold
               content: %CHARA%
-            - 「真的？」
-        - 脸上略带紧张和急切，紧紧拉着 %YOU% 的手臂。
-        - 似乎 %YOU% 不确定，这双手就不会松开。
+            - "「정말?」"
+        - "조금 긴장한 듯 간절한 표정으로 %YOU%의 팔을 꼭 붙잡았다."
+        - "%YOU%가 확답을 해주지 않으면 이 손을 놓지 않을 것만 같다."
         - color: %COLOR%
           content:
             - fontWeight: bold
               content: %CHARA%
-            - 「姐姐她……太优秀了，所以……」
+            - "「언니는…… 너무나도 뛰어나니까, 그래서……」"
         - color: %COLOR%
           content:
             - fontWeight: bold
               content: %CHARA%
-            - 「请你证明一下，不会迷上姐姐，可以吗？」
+            - "「언니한테 마음을 빼앗기지 않을 거라고 증명해 줄 수 있어?」"
         - acc: 1
           key: select
-          content: 语言证明
+          content: "말로 증명한다"
           lines:
-            - 「那我发誓。」
-            - %YOU% 举起手，一幅正经的样子。
-            - 「无论何时，我一定会先站在善信的身边。」
-            - 耷拉下去的耳朵一抖一抖的，立了起来。
-            - 灰暗的眼神重新闪烁起来，看着 %YOU% 的时候重新挂上了笑意。
-            - 轻轻一跳，抱住了 %YOU% 的肩膀。
+            - "「그럼 맹세할게.」"
+            - "%YOU%는 진지한 표정으로 손을 들었다."
+            - "「언제든 가장 먼저 파머 곁에 있어 줄게.」"
+            - "축 처져 있던 귀가 움찔거리더니 쫑긋 섰다."
+            - "어두웠던 눈빛이 다시 반짝이고, %YOU%를 바라보는 얼굴에 미소가 돌아왔다."
+            - "그녀는 가볍게 뛰어올라 %YOU%의 어깨를 끌어안았다."
             - color: %COLOR%
               content:
                 - fontWeight: bold
                   content: %CHARA%
-                - 「好！我知道了！」
+                - "「좋아! 알겠어!」"
           # 好感+30
         - acc: 2
-          content: 行为证明
+          content: "행동으로 증명한다"
           lines:
-            - %YOU% 一言不发，张开双臂。
-            - 在目白善信还没有反应的时候，被重重的抱住了。
+            - "%YOU%는 아무 말 없이 두 팔을 벌렸다."
+            - "메지로 파머가 미처 반응하기도 전에 그녀를 힘껏 끌어안았다."
             - color: %COLOR%
               content:
                 - fontWeight: bold
                   content: %CHARA%
                 - 「！？」
-            - 原本略微发白的脸突然染上绯红，表情逐渐慌乱起来。
-            - 尾巴猛的直立起来，在身后摇晃个不停。
-            - 手臂僵硬的伸直，直到反应过来了才下意识想要反过来抱回去。
+            - "조금 창백했던 얼굴이 갑자기 붉게 물들고, 당황한 기색이 번졌다."
+            - "꼬리가 빳빳하게 솟더니 등 뒤에서 쉴 새 없이 흔들렸다."
+            - "팔을 뻣뻣하게 뻗고 있던 그녀는 그제야 정신을 차리고 본능적으로 마주 안으려 했다."
             - color: %COLOR%
               content:
                 - fontWeight: bold
                   content: %CHARA%
-                - 「那，那么突然就……」
-            - 「这就是证明。」
-            - 「善信总是我的第一哦。」
+                - "「가, 갑자기 이러면……」"
+            - "「이게 바로 증거야.」"
+            - "「나한테는 언제나 파머가 제일이야.」"
             - color: %COLOR%
               content:
                 - fontWeight: bold
                   content: %CHARA%
-                - 「姆……」
-            - 红透的小脸往 %YOU% 的胸口用力埋进去，蹭了两下。
+                - "「으으……」"
+            - "새빨개진 얼굴을 %YOU%의 가슴에 푹 묻고 두어 번 비볐다."
             - color: %COLOR%
               content:
                 - fontWeight: bold
                   content: %CHARA%
-                - 「笨蛋。」
+                - "「바보.」"
           # 好感+50
