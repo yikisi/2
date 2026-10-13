@@ -261,7 +261,7 @@ async function check_new_activities(cur_round, in_team_list) {
           )) * 100;
       }
       if (!temp) {
-        handle_foreign_debuff(0, location.lan, location.loc, false);
+        handle_foreign_debuff(0, location.lan, location.loc, me_in_race);
         era.set('flag:当前位置', location.loc);
         foreign_list.forEach((id) => sys_change_pressure(id, -1000));
         foreign_list.push(0);

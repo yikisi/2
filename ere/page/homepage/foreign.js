@@ -160,7 +160,7 @@ module.exports = async (cid, save_and_next_week, flags) => {
         !awake.m ||
         temp.status ||
         temp.cost.mark > 0 ||
-        train_enabled,
+        !train_enabled,
       title: di18n.get_act_tip(
         false,
         temp.cost,
