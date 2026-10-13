@@ -8,8 +8,13 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 // the i18n entry modules to inert stubs. Without this, `#/i18n/selector` pulls
 // in the whole `.kojo` script graph, which plain Node cannot parse.
 const stub_modules = {
+  '#/era-electron': path.join(root, 'test/stubs/era-electron.js'),
   '#/i18n/selector': path.join(root, 'test/stubs/i18n-selector.js'),
   '#/i18n/extended-def': path.join(root, 'test/stubs/i18n-extended-def.js'),
+  '#/utils/chara-talk-factory': path.join(
+    root,
+    'test/stubs/chara-talk-factory.js',
+  ),
 };
 
 const original_resolve_filename = Module._resolveFilename;
