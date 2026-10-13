@@ -237,6 +237,7 @@ module.exports = class extends I18nClothes {
   110701 = 'GLITTER!';
   110720 = 'Tap! Tap! Tap!';
   110801 = 'Red in Black';
+  110840 = 'Claret Nosferatu';
   110901 = 'Dream Successor';
   110902 = 'Eternal Fairytale';
   111001 = 'Future Weaver';

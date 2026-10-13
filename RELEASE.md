@@ -1,13 +1,13 @@
 # [EraUma v3.122 (ryuki)](https://gitgud.io/umaera/erauma/-/releases/3.122)
+_2026/10/13_
 
-_incoming_
-
-适配 [EraElectron v4.8.4 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.8.4) 与 [ere.app v1.3.4 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.3.4) 及以上版本
+适配 [EraElectron v4.8.5 (x)](https://gitgud.io/umaera/engine/era-electron/-/releases/4.8.5) 与 [ere.app v1.3.5 (lipiah)](https://gitgud.io/umaera/engine/ere-app/-/releases/1.3.5) 及以上版本
 
 ## Added
 
 * 追加实装以下角色的口上事件
     * 目白善信：【高傲的姐姐】
+* 实装韩语本地化 (한국어 로컬라이제이션 구현)，SpAR 님께 감사드립니다!
 
 ## Fixed
 
