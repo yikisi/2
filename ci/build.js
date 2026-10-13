@@ -24,7 +24,9 @@ const game_all_zip = join(engine_path, process.env.GAME_ALL_ZIP);
 const game_dir = join(game_all_dir, process.env.GAME_DIR);
 const game_zip = join(game_all_dir, process.env.GAME_ZIP);
 
-execSync('git submodule update --init src/kojo-loader', { cwd: engine_path });
+execSync('git submodule update --init webpack-plugin src/kojo-loader', {
+  cwd: engine_path,
+});
 execSync('git lfs pull', { cwd: engine_path });
 execSync('pnpm install', { cwd: engine_path });
 execSync('pnpm run win:pack', { cwd: engine_path });
