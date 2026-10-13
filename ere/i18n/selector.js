@@ -11,6 +11,7 @@ dict['zh-CN'] = new (require('./zh-CN/entry'))();
 dict['en-US'] = new (require('./en-US/entry'))();
 dict['ru-RU'] = new (require('./ru-RU/entry'))();
 dict['ja-JP'] = new (require('./ja-JP/entry'))();
+dict['ko-KR'] = new (require('./ko-KR/entry'))();
 
 module.exports = {
   /**

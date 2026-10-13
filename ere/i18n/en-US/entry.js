@@ -185,6 +185,7 @@ module.exports = class extends require('#/i18n/zh-CN/entry') {
   cr_header_lib_en_us = 'English Localization';
   cr_header_lib_ru_ru = 'Russian Localization';
   cr_header_lib_ja_jp = 'Japanese Localization';
+  cr_header_lib_ko_kr = 'Korean Localization';
   cr_header_kojo_make = 'Kojo Production';
   cr_header_test = 'Testing Feedback';
   cr_header_community_management = 'Community Management';
