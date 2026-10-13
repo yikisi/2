@@ -45,12 +45,12 @@ module.exports = class extends require('#/i18n/zh-CN/entry') {
   oot_0 = '육성 완료';
   oot_1 = '전당 입성';
 
-  honour_m = '실격';
-  honour_0 = '신참';
-  honour_1 = '숙련';
-  honour_2 = '중견';
-  honour_3 = '거장';
-  honour_4 = '전설';
+  honour_m = '실격 ';
+  honour_0 = '신참 ';
+  honour_1 = '숙련 ';
+  honour_2 = '중견 ';
+  honour_3 = '거장 ';
+  honour_4 = '전설 ';
 
   title_0 = '트레이너';
   title_1 = '우마무스메';
@@ -348,7 +348,7 @@ module.exports = class extends require('#/i18n/zh-CN/entry') {
   ui_new_week = '【새로운 한 주가 시작되었다】';
 
   ui_hd_no_save = '현재 게임 중이 아닙니다';
-  get_ui_hd_location = (location) => ['현재위치 ', location];
+  get_ui_hd_location = (location) => ['현재 위치 ', location];
   get_ui_hd_honour = (honour) => ['명성 ', honour];
   ui_hd_income_template = '(%INCOME%)';
   get_ui_hd_money = (money, income = []) => [money, ...income, ' 우마코인'];
@@ -713,11 +713,11 @@ module.exports = class extends require('#/i18n/zh-CN/entry') {
     item,
     ' ',
     discount,
-    '！',
+    '!',
   ];
-  ui_shop_30_off = '30%off';
-  ui_shop_50_off = '50%off';
-  ui_shop_acc_switch_template = '단축키숨기기 [%STATUS%]';
+  ui_shop_30_off = '30% off';
+  ui_shop_50_off = '50% off';
+  ui_shop_acc_switch_template = '단축키 숨기기 [%STATUS%]';
   get_ui_shop_buy = (item, count) => [item, '을(를) ', count, '개 샀다'];
 
   get_ui_take_care = (chara) => [chara, '에게 누구를 돌봐 달라고 부탁할까?'];

@@ -209,9 +209,9 @@ class I18nTimon {
    * @param {string} uma
    */
   get_it_in_recruit = (you, uma) => [
-    '【트레이닝장에서 몇 명의',
+    '【트레이닝장에서 몇 명의 ',
     uma,
-    '를 볼 수 있었다. 누가 ',
+    '를 발견했다. 누가 ',
     you.get_colored_name(),
     '의 눈길을 끌었을까?】',
   ];

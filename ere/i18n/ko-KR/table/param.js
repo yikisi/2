@@ -49,9 +49,9 @@ module.exports = class extends require('#/i18n/zh-CN/table/param') {
   jewel14 = '반감 인자';
   jewel15 = '자기방어 인자';
 
-  jewel20 = '핑크 인자';
-  jewel21 = '블루 인자';
-  jewel22 = '화이트 인자';
+  jewel20 = '적인자';
+  jewel21 = '청인자';
+  jewel22 = '백인자';
 
   // CSV / ロジック用の数値キーは、zh-CN と同じ値を明示する。
   0 = '구강';
@@ -69,7 +69,7 @@ module.exports = class extends require('#/i18n/zh-CN/table/param') {
   13 = '수치';
   14 = '반감';
   15 = '자기방어';
-  20 = '분홍색';
-  21 = '푸른색';
-  22 = '흰색';
+  20 = '적';
+  21 = '청';
+  22 = '백';
 };

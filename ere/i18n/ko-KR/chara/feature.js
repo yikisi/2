@@ -119,12 +119,12 @@ module.exports = class extends require('#/i18n/zh-CN/chara/feature') {
   penis_5 = '두려움';
 
   n_chara = '성격';
-  'chara_-3' = '소심한';
+  'chara_-3' = '소심';
   'chara_-2' = '겁쟁이';
-  'chara_-1' = '성실한';
-  chara_0 = '평범한';
-  chara_1 = '자존심 강한';
-  chara_2 = '고집스러운';
+  'chara_-1' = '성실';
+  chara_0 = '평범';
+  chara_1 = '자존심';
+  chara_2 = '고집';
   chara_3 = '열혈';
 
   'chara_-3_desc' = '트레이닝과 조교 효과가 약간 상승';
