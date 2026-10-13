@@ -178,8 +178,14 @@ module.exports = {
         you.adult_sex_title,
         ', 좋은 파트너는 찾으셨나요?',
       ]);
-      era.printButton('「괜찮은 담당은 이미 다른 사람이 데려간 것 같습니다.」', 1);
-      era.printButton('「면목 없네요. 아무도 저한테 관심이 없는 것 같아요.」', 2);
+      era.printButton(
+        '「괜찮은 담당은 이미 다른 사람이 데려간 것 같습니다.」',
+        1,
+      );
+      era.printButton(
+        '「면목 없네요. 아무도 저한테 관심이 없는 것 같아요.」',
+        2,
+      );
       if ((await era.input()) === 1) {
         await era.printAndWait([
           you.get_colored_name(),
