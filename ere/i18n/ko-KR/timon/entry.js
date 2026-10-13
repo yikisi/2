@@ -165,10 +165,11 @@ class I18nTimon {
    */
   get_it_arrive_location = (vehicle, location) => [
     '【',
-    vehicle,
-    '은(는) ',
     location,
     '에 도착했다】',
+	'【',
+	vehicle,
+	'】',
   ];
   /**
    * @param {CharaTalk} chara
@@ -178,11 +179,12 @@ class I18nTimon {
   get_it_goto_location = (chara, vehicle, location) => [
     '【',
     chara.get_colored_name(),
-    '과(와) 함께',
-    vehicle,
-    '에서',
+    '과(와) 함께 ',
     location,
     '(으)로 향했다】',
+	'【',
+	vehicle,
+	'】',
   ];
   /**
    * @param {string} vehicle
