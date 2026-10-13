@@ -23,6 +23,7 @@
     "prettier": "^3.9.10",
     "prisma": "^5.22.0",
     "unimported": "^1.31.1",
+    "vitest": "^2.1.9",
     "webpack": "^5.111.1",
     "webpack-cli": "^5.1.4",
     "yamljs": "^0.3.0"
@@ -45,6 +46,8 @@
     "db:pull": "prisma db pull",
     "lint": "lint-staged",
     "prepare": "husky",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "webpack": "cross-env NODE_OPTIONS=--max-old-space-size=8192 webpack"
   },
   "type": "commonjs",

@@ -45,5 +45,12 @@ module.exports = [
       'sort-requires-by-path/sort-requires-by-path': 'warn',
     },
   },
+  {
+    files: ['test/**/*.js', '*.mjs'],
+    languageOptions: { sourceType: 'module' },
+    rules: {
+      'n/no-missing-import': 'off',
+    },
+  },
   prettierConfig,
 ];
