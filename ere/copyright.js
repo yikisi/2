@@ -431,7 +431,10 @@ function generate_copyrights() {
     ['en_us', 'Katze'],
     ['ru_ru', 'Agnes Impera'],
     ['ja_jp', 'gamera'],
-    ['ko_kr', 'SpAR'],
+    [
+      'ko_kr',
+      ['SpAR', { isDivider: true }, 'H HK', { isDivider: true }, 'Martyrs'],
+    ],
   ];
 
   buffer.push(
