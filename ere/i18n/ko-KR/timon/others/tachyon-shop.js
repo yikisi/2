@@ -574,9 +574,9 @@ module.exports = {
     }
     await tachyon.say_as_unknown_and_wait('그럼 오늘 준비한 것을 보여주지.');
     await printAndWait([
-      '밤색 머리의',
+      '밤색 머리의 ',
       tachyon.uma_sex_title,
-      '은(는)',
+      '는',
       tachyon.sex,
       '의 백의를 펼쳤다……',
     ]);

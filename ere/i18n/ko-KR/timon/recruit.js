@@ -7,9 +7,9 @@ const era = require('#/era-electron');
 module.exports = {
   /** @param {CharaTalk} chara */
   get_check_message: (chara) => [
-    '트레이너와',
+    '트레이너와 ',
     chara.uma_sex_title,
-    '의 계약은 서로의 일생을 좌우한다.',
+    '의 계약은 서로의 일생을 좌우합니다. ',
     chara.get_colored_name(),
     '을(를) 모집할까요?',
   ],

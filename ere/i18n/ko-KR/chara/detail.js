@@ -7,13 +7,13 @@ module.exports = class extends require('#/i18n/zh-CN/chara/detail') {
     characteristic,
     sex_title,
   ) => [
-    '피부색',
+    '피부색은 ',
     skin,
-    ' 의 ',
+    ', ',
     hair,
-    ' ',
+    '. ',
     body_hair,
-    ' ',
+    '을 가진 ',
     characteristic,
     ' ',
     sex_title,
@@ -35,7 +35,7 @@ module.exports = class extends require('#/i18n/zh-CN/chara/detail') {
   base_body_weight_normal = '잘 관리됨';
   base_body_hidden = '더 이상 정보가 없다....';
   get_base_female_info = (bust, cup, waist, hip) => [
-    '스리 사이즈：B',
+    '쓰리 사이즈：B',
     bust,
     ' (',
     cup,
@@ -48,7 +48,7 @@ module.exports = class extends require('#/i18n/zh-CN/chara/detail') {
   /** @param {CharaTalk} chara */
   get_base_hair_select = (chara) => [
     chara.get_colored_name(),
-    ' 의 새로운 헤어스타일 선택',
+    '의 헤어스타일 선택',
   ];
   /**
    * @param {CharaTalk} chara
@@ -482,7 +482,7 @@ module.exports = class extends require('#/i18n/zh-CN/chara/detail') {
     '따뜻한 정액이 묻을 때마다 피부가 행복하게 근질거린다';
   get_exp_body_orgasm = (count) => ['절정 횟수 ', count];
 
-  exp_hf_title = '정보[손발]';
+  exp_hf_title = '정보【손발】';
   exp_hf_header_hand = '정보【손】';
   exp_hand_gift_desc =
     '애무 기술이 신의 경지에 달해, 손가락 놀림만으로 상대의 넋을 빼놓는다';
@@ -852,7 +852,7 @@ module.exports = class extends require('#/i18n/zh-CN/chara/detail') {
     '따뜻한 정액이 쏟아져 들어올 때마다 직장이 행복하게 근질거린다';
   get_exp_anal_orgasm = (count) => ['절정 횟수 ', count];
 
-  exp_sm_title = '정보【가학·피학】';
+  exp_sm_title = '정보【SM】';
   exp_sm_sex_title_0 = '암말';
   exp_sm_sex_title_1 = '수말';
   exp_sm_sex_title_10 = '후타나리 암말';

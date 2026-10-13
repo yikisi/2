@@ -55,53 +55,53 @@ module.exports = class extends require('#/i18n/zh-CN/new-game') {
   set_option_header = '게임 옵션';
   set_next = '게임 시작';
 
-  set_train_diff = '훈련난이도';
-  set_td_0 = '손바닥 뒤집기';
-  set_td_1 = '간신히 해낼 만함';
-  set_td_2 = '한 걸음마다 고난';
+  set_train_diff = '훈련 난이도';
+  set_td_0 = '쉬움';
+  set_td_1 = '보통';
+  set_td_2 = '어려움';
   set_td_0_desc = '트레이닝 성공률+25%';
   set_td_2_desc = '트레이닝 성공률-25%';
 
-  set_train_buff = '트레이닝 보정';
-  set_tb_0 = '절반의 노력, 두 배의 성과';
-  set_tb_1 = '꾸준한 노력';
-  set_tb_2 = '두 배의 노력, 절반의 성과';
+  set_train_buff = '훈련 보정';
+  set_tb_0 = '쉬움';
+  set_tb_1 = '보통';
+  set_tb_2 = '어려움';
   set_tb_0_desc = '트레이닝 보정+25%';
   set_tb_2_desc = '트레이닝 보정-25%';
 
-  set_race_diff = '레이스난이도';
-  set_rd_0 = '한 방이면 충분';
-  set_rd_1 = '호각';
-  set_rd_2 = '강적들이 즐비';
+  set_race_diff = '경기 난이도';
+  set_rd_0 = '쉬움';
+  set_rd_1 = '보통';
+  set_rd_2 = '어려움';
   set_rd_0_desc = '상대 평가-20%';
   set_rd_2_desc = '상대 평가+10%; 전설의 강적 활성화';
 
-  set_hurt = '우마무스메의 부상 가능성';
-  set_ht_0 = '무사태평';
-  set_ht_1 = '위험이 도사림';
+  set_hurt = '부상 확률';
+  set_ht_0 = '안전함';
+  set_ht_1 = '위험함';
 
-  set_pressure = '우마무스메의 스트레스';
-  set_ps_0 = '가벼운 발걸음';
-  set_ps_1 = '무거운 짐을 지고';
+  set_pressure = '스트레스 가중';
+  set_ps_0 = '낮음';
+  set_ps_1 = '높음';
 
   set_money_price = '상점 주인';
-  set_mp_0 = '인심 좋은 상인';
-  set_mp_1 = '원칙대로';
+  set_mp_0 = '인심 좋음';
+  set_mp_1 = '원칙 고수';
   set_mp_2 = '악덕 상인';
-  set_mp_0_desc = '상점 아이템 가격-50%';
-  set_mp_2_desc = '상점 아이템 가격+100%';
+  set_mp_0_desc = '상점 아이템 가격 -50%';
+  set_mp_2_desc = '상점 아이템 가격 +100%';
 
-  set_sex_skill_price = '조교 스킬의 인자 소모';
-  set_race_skill_price = '레이스 능력의 인자 소모';
+  set_sex_skill_price = '조교 인자 소모';
+  set_race_skill_price = '레이스 인자 소모';
   set_sp_0 = '낮음';
   set_sp_1 = '보통';
   set_sp_2 = '높음';
-  set_sp_0_desc = '인자 소모량-50%';
-  set_sp_2_desc = '인자 소모량+100%';
+  set_sp_0_desc = '인자 소모량 -50%';
+  set_sp_2_desc = '인자 소모량 +100%';
 
   set_game_over = '게임오버';
   set_go_0 = '끝나지 않는 연회';
-  set_go_1 = '+팬의 습격';
+  set_go_1 = '+팬덤 습격';
   set_go_2 = '+돈의 노예';
   set_go_3 = '+사랑의 감옥';
   set_go_0_desc = '명성이 0이 될 때까지 트레이너 생활은 계속된다';
@@ -120,95 +120,95 @@ module.exports = class extends require('#/i18n/zh-CN/new-game') {
   set_hn_1_desc = '다른 요인이 없으면 명성은 변하지 않는다';
   set_hn_2_desc = '명성이 서서히 줄어든다. 매 턴 명성-1';
 
-  set_honour_empty = '명성이 바닥났을 때';
+  set_honour_empty = '명성 제로 엔드';
   set_he_0 = '쓸쓸한 퇴장';
   set_he_1 = '어둠의 거래';
   set_he_0_desc =
-    '명성이 0이 되었다. 모든 것이 끝났다…… 시스템아, 타이틀로 돌아가자';
+    '명성을 전부 잃고, 모든 것이 끝났습니다…… 곧바로 타이틀로 돌아갑니다.';
   set_he_1_desc =
-    '명성이 0이 되어도 계속하고 싶은가? 자신의 모든 것을 대가로 치르더라도?';
+    '명성이 제로가 된 후에도 계속하고 싶습니까? 설령 그 대가가 당신의 모든 것이더라도?';
 
   set_chara_sex = '우마무스메의 성별';
-  set_cs_0 = '미녀들에게 둘러싸여';
-  set_cs_1 = '넘치는 남성미';
+  set_cs_0 = '모두 여성';
+  set_cs_1 = '모두 남성';
   set_cs_2 = '음양의 조화';
-  set_cs_3 = '현실의 반영';
-  set_cs_0_desc = '미녀들에게 둘러싸였다!';
-  set_cs_1_desc = '청춘의 땀을 흘리는 멋진 남자들……';
-  set_cs_2_desc = '모두 여…… 여성분들이죠?';
-  set_cs_3_desc = '귀 장식의 위치는 무엇을 뜻할까?';
+  set_cs_3 = '현실 반영';
+  set_cs_0_desc = '미녀들에게 포위당했습니다!';
+  set_cs_1_desc = '청춘의 땀을 흘리고 있는 미남들……';
+  set_cs_2_desc = '신사 숙녀……아니, 수, 숙남녀 여러분??';
+  set_cs_3_desc = '귀 장식의 좌우 위치가 무엇을 의미하는지 아십니까?';
 
-  set_relation = '우마무스메의 초기 호감';
+  set_relation = '초기 호감도';
 
   set_relation_buff = '호감 상승 난이도';
   set_love_buff = '애정 상승 난이도';
   set_diff_easy = '쉬움';
   set_diff_normal = '보통';
   set_diff_hard = '어려움';
-  set_diff_easy_desc = '획득량+50%';
-  set_diff_hard_desc = '획득량-50%';
+  set_diff_easy_desc = '획득량 +50%';
+  set_diff_hard_desc = '획득량 -50%';
 
   set_relation_change = '호감 변화';
-  set_rc_0 = '날로 높아짐';
-  set_rc_1 = '담백한 사귐';
-  set_rc_2 = '볼수록 싫어짐';
-  set_rc_0_desc = '우마무스메들의 호감이 날로 높아진다. 매 턴 호감+5';
+  set_rc_0 = '자동 증가';
+  set_rc_1 = '현상유지';
+  set_rc_2 = '자동 감소';
+  set_rc_0_desc = '우마무스메들의 호감이 날로 높아진다. 매 턴 호감 +5';
   set_rc_1_desc = '우마무스메들의 호감은 시간에 따라 변하지 않는다';
-  set_rc_2_desc = '우마무스메들이 점차 당신을 싫어하게 된다. 매 턴 호감-10';
+  set_rc_2_desc = '우마무스메들이 점차 당신을 싫어하게 된다. 매 턴 호감 -10';
 
-  set_love = '우마무스메의 초기 애정';
+  set_love = '초기 애정';
 
   set_love_change = '애정 변화';
-  set_lc_0 = '감히 바라지 못함';
-  set_lc_1 = '서서히 끌림';
+  set_lc_0 = '연애 불감';
+  set_lc_1 = '청춘 소녀';
   set_lc_0_desc =
     '먼저 다가가야 우마무스메가 사랑에 빠진다. 애정 단계 상승 이벤트가 발생할 수 있다';
   set_lc_1_desc =
-    '아무것도 하지 않아도 우마무스메들이 점차 당신에게 끌려, 의존하게 된다. 매 턴 애정+1. 애정 단계 상승 이벤트는 발생하지 않는다';
+    '아무것도 하지 않아도 우마무스메들이 점차 당신에게 끌려, 의존하게 된다. 매 턴 애정 +1. 애정 단계 상승 이벤트는 발생하지 않는다';
 
-  set_unfaith = '바람에 대한 생각';
+  set_unfaith = '불륜에 대한 생각';
   set_uf_0 = '넓은 아량';
-  set_uf_1 = '용서할 수 없음';
-  set_uf_0_desc = '우마무스메는 당신과 함께 보낸 순간들만을 소중히 여긴다';
-  set_uf_1_desc = '독점욕을 조심하자……';
+  set_uf_1 = '용납 불가';
+  set_uf_0_desc = '우마무스메들은 단지 당신과 함께 있고 싶다는 사소한 소망을 품고 있을 뿐……';
+  set_uf_1_desc = '집착하는 우마무스메만큼 무서운 건 없을 겁니다……';
 
-  set_extreme = '우마무스메의 극단적인 행동';
+  set_extreme = '극단적인 행동';
   set_eb_0 = '하지 않음';
   set_eb_1 = '가능성 있음';
   set_eb_2 = '최대한 억제';
-  set_eb_3 = '적극적으로 행동';
-  set_eb_0_desc = '우마무스메는 당신에게 아무런 행동도 하지 않는다. 안전하다';
+  set_eb_3 = '적극적 행동';
+  set_eb_0_desc = '우마무스메들은 당신에게 절대 해를 끼치지 않을 것입니다. 안전합니다.';
   set_eb_1_desc =
-    '마음이 받아들여지지 않으면 아주 낮은 확률로 야습이나 납치가 일어난다';
+    '우마무스메들이 당신을 덮치거나 납치할 수는 있겠지만, 매우 낮은 확률로 일어날 것입니다.';
   set_eb_2_desc =
-    '우마무스메는 야습과 납치를 억제하려고 노력한다…… 하지만 한계가 있다';
-  set_eb_3_desc = '당신이 보지 못하는 곳에서 그녀들은 일그러진 미소를 짓는다……';
+    '우마무스메들은 당신을 덮치거나 납치하려는 욕구를 최대한 억누를 겁니다…… 오래 버티지는 못 하겠지만요.';
+  set_eb_3_desc = '당신이 보이지 않는 곳에서, 우마무스메들이 일그러진 웃음을 지으며 무언가를 준비하고 있습니다……';
 
   set_talent = '타고난 특성';
   set_tt_0 = '음란한 암말들';
-  set_tt_1 = '저마다 다른 태생';
-  set_tt_2 = '순수하고 흠 없이';
+  set_tt_1 = '각양각색';
+  set_tt_2 = '순수하고 청초';
   set_tt_3 = '돌처럼 단단한 마음';
-  set_tt_0_desc = '눈에 보이는 건 모두 암말';
-  set_tt_1_desc = '누구나 세상에 하나뿐인 존재다';
-  set_tt_2_desc = '우마무스메의 몸은 완벽해서 빈틈을 찾을 수 없다';
-  set_tt_3_desc = '쾌감을 주기가 매우 어렵다';
+  set_tt_0_desc = '모두 다 암말에 불과하다는 겁니다.';
+  set_tt_1_desc = '누구나 생애 하나 뿐인……';
+  set_tt_2_desc = '우마무스메의 몸은 흠잡을 데 없이 아주 완벽합니다.';
+  set_tt_3_desc = '우마무스메들이 쾌감을 느끼기에 극도로 힘들게 만듭니다.';
 
   set_abl_update = '캐릭터의 성적 기술 학습';
   set_au_0 = '흥미 없음';
-  set_au_1 = '총명하고 배우기를 좋아함';
+  set_au_1 = '적극 탐색';
 
   set_resist = '캐릭터의 강간 저항';
   set_rs_0 = '밀면 넘어감';
   set_rs_1 = '격렬하게 저항';
 
   set_ero_item = '도구의 영향';
-  set_ei_0 = '물살을 가르며 돌진';
-  set_ei_1 = '한 발짝도 못 감';
+  set_ei_0 = '강철의 의지';
+  set_ei_1 = '이건 못 이겨요';
   set_ei_0_desc =
     '어느 관객 「가끔 레이스가 좀 이상해져. 선수들의 안색이나 옷이 젖은 정도 같은 게…… 그래도 볼만하긴 해」';
   set_ei_1_desc =
-    '어느 관객 「눈이 뒤집힌 채 비틀거리며 달리고, 코스까지 젖어 있잖아——아리마 기념인데 좀 예의를 갖춰!」; 도구 장착 시 기초 능력-25%';
+    '어느 관객 「눈이 뒤집힌 채 비틀거리며 달리고, 코스까지 젖어 있잖아—— 아리마 기념인데 좀 예의를 갖춰!」; 도구 장착 시 기초 능력 -25%';
 
   set_mejiro_style = '메지로 시티의 방식';
   set_ms_0 = '자유';
@@ -217,22 +217,22 @@ module.exports = class extends require('#/i18n/zh-CN/new-game') {
   set_ms_1_desc = '메지로가 부르고 있다……';
 
   set_child_love = '금단의 사랑';
-  set_cl_0 = '허용하지 않음';
-  set_cl_1 = '허용함';
+  set_cl_0 = '금지';
+  set_cl_1 = '허용';
   set_cl_0_desc =
-    '자녀들이 품은 건 부모를 향한 애정뿐……당신이 먼저 그 관계를 깨뜨리지 않는 한';
-  set_cl_1_desc = '자녀들이 품은 건 부모를 향한 애정뿐……정말 그럴까?';
+    '아이들은 당신을 사랑하는 마음 뿐……설령 당신이 스스로 깨지 않는 한 말이죠.';
+  set_cl_1_desc = '아이들은 당신을 사랑하는 마음 뿐……일까요?';
 
   set_height = '우마무스메의 키';
-  set_hg_0 = '키가 이렇게 작은 엄마';
-  set_hg_1 = '보통이면 충분';
-  set_hg_2 = '지배당하고 싶어!';
+  set_hg_0 = '로리마망';
+  set_hg_1 = '보통';
+  set_hg_2 = '크고 아름다움';
   set_hg_0_desc = '로리들에게 둘러싸인 천국……';
-  set_hg_1_desc = '우마무스메의 키가 자연스럽게 분포한다';
+  set_hg_1_desc = '우마무스메들의 키는 자연히 분포할 것입니다.';
   set_hg_2_desc = '거대한 우마무스메는 무적!';
 
-  set_gd_0 = '이미 완벽하게 익혔어!';
-  set_gd_1 = '처음에만 보여 줘';
+  set_gd_0 = '비표시';
+  set_gd_1 = '표시';
 
   cus_intro_header = '캐릭터 생성 시간! 캐릭터를 무작위로 생성하시겠습니까?';
   bt_cus_random = '무작위 생성';
@@ -273,7 +273,7 @@ module.exports = class extends require('#/i18n/zh-CN/new-game') {
     '이제 상상의 시간! 우마무스메가 된다면 어떤 기성일 것 같나요?';
 
   cus_uma_color_header_template =
-    '그렇군요, %CHARA% 기성이군요…… 그렇다면 털색은 어떨까요?';
+    '그렇군요, %CHARA%의 기성이군요…… 그렇다면 털색은 어떨까요?';
 
   cus_call_header = '이제 호칭을 지어볼 차례군요!';
   cus_call_3 = '오오, 말발굽을 정말 좋아하는 이름을 지으셨네요!';
