@@ -197,9 +197,9 @@ module.exports = class extends require('#/i18n/zh-CN/entry') {
   nt_ask = '관련된 쪽지를 볼까요?';
   nt_no = '나중에 메인 페이지에서 본다';
 
-  ui_comma = '、';
+  ui_comma = ', ';
   ui_comma2 = '・';
-  ui_period = '。';
+  ui_period = '.';
   ui_exclamation = '！';
   ui_conjunction = ' 및 ';
   ui_ellipses = '……';
@@ -274,9 +274,9 @@ module.exports = class extends require('#/i18n/zh-CN/entry') {
     '의 ',
     target,
     '에 대한 호감이 ',
-    change_mark,
+	val,
     ' ',
-    val,
+	change_mark,
     '! 현재: ',
     result,
   ];
@@ -291,9 +291,9 @@ module.exports = class extends require('#/i18n/zh-CN/entry') {
     '의 ',
     you,
     '에 대한 애정이 ',
-    change_mark,
+	val,
     ' ',
-    val,
+	change_mark,
     '! 현재: ',
     result,
   ];

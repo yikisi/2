@@ -21,17 +21,17 @@ module.exports = {
     const ret = [];
     ret.push([
       chara.get_colored_name(),
-      ', 통산',
+      ', 통산 ',
       races,
-      '전',
+      '전 ',
       wins,
-      '승, 총 획득 상금',
+      '승, 총 획득 상금 ',
       reward,
-      '우마 코인',
+      ' 우마 코인',
     ]);
     if (race_names.length > 0) {
       ret.push([
-        '주요 우승 경력:',
+        '주요 우승 경력: ',
         ...join_list(race_names.slice(0, 5), ' '),
         race_names.length > 5 ? '……' : '',
       ]);
@@ -48,11 +48,11 @@ module.exports = {
      */
     const f = async (chara, you, result, title) => {
       await era.printAndWait(
-        `매년 1월, URA의${chara.uma_sex_title}전당에서는 은퇴한 우마무스메를 대상으로 투표를 시작한다.`,
+        `매년 1월, URA의 ${chara.uma_sex_title}전당에서는 은퇴한 우마무스메를 대상으로 투표를 시작한다.`,
       );
       era.println();
       await era.printAndWait(
-        `그리고 3월, 선수 생활을 마치고 엄격한 투표를 통과한${chara.uma_sex_title}이(가) 전당에 입성하며, 《현창${chara.uma_sex_title}》라는 최고의 영예를 얻는다.`,
+        `그리고 3월, 선수 생활을 마치고 엄격한 투표를 통과한 ${chara.uma_sex_title}이(가) 전당에 입성하며, 《현창 ${chara.uma_sex_title}》라는 최고의 영예를 얻는다.`,
       );
       era.println();
       await era.printAndWait([
@@ -67,7 +67,7 @@ module.exports = {
       }
       era.println();
       await era.printAndWait([
-        `${chara.sex}을(를) 본뜬 동상이 공개되고,`,
+        `${chara.sex}을(를) 본뜬 동상이 공개되고, `,
         ...title,
         chara.get_colored_name(),
         '의 전설은 영원히 전당에 새겨진다……',
@@ -113,7 +113,7 @@ module.exports = {
      */
     const f = async (chara, you, can_sex) => {
       await era.printAndWait([
-        '세월은 눈 깜짝할 사이에 흘러간다.',
+        '세월은 눈 깜짝할 사이에 흘러간다. ',
         chara.get_colored_name(),
         '과(와) 보낸 세월도 어느덧 몇 년. 조금만 더 지나면 새로운 장이 시작된다.',
       ]);
@@ -237,7 +237,7 @@ module.exports = {
         '은(는) 아직 부족한 모양이다. 자율 트레이닝을 하고 싶은 걸까?',
       ]);
       era.printButton('허락한다!', 1);
-      era.printButton('계획을 넘어서겠는데……', 2);
+      era.printButton('계획 밖인데……', 2);
       ret.push(await era.input());
       if (ret[0] === 1) {
         await era.printAndWait([
@@ -268,9 +268,9 @@ module.exports = {
   async tf_info(chara, attr, is_fumble) {
     if (attr === attr_enum.intelligence) {
       await era.printAndWait([
-        '이런! ',
+        '아차! ',
         chara.get_colored_name(),
-        `이(가)${is_fumble ? '기절했' : '잠들었'}아차!`,
+        `이(가) ${is_fumble ? '기절해' : '잠들어'} 버렸다!`,
       ]);
     } else {
       const buffer = [];
@@ -292,11 +292,11 @@ module.exports = {
           buffer.push('힘이 다했다', '허리를 삐었다', '굴러떨어졌다');
       }
       await era.printAndWait([
-        '큰일이다!',
+        '큰일이다! ',
         chara.get_colored_name(),
-        '이(가)',
+        '이(가) ',
         get_random_entry(buffer),
-        '！',
+        '!',
       ]);
     }
   },
@@ -314,7 +314,7 @@ module.exports = {
       era.println();
       era.print('어떻게 할까?');
       era.println();
-      era.printButton('「여기서 잠깐 쉬자」', 1);
+      era.printButton('「잠깐 쉬자」', 1);
       era.printButton('「반성회다!」', 2);
       ret.push(await era.input());
       return ret;
@@ -389,7 +389,7 @@ module.exports = {
       await era.printAndWait('벼락치기가 통했다!');
     } else {
       await era.printAndWait([
-        '큰일이다!',
+        '큰일이다! ',
         chara.get_colored_name(),
         '이(가) 잠들어 버렸다!',
       ]);
@@ -415,11 +415,11 @@ module.exports = {
   fs_update_language(chara, language, new_level) {
     era.print([
       chara.get_colored_name(),
-      '의',
+      '의 ',
       language,
-      '실력이 더욱 늘어, 지금은',
+      '실력이 더욱 늘어, 지금은 ',
       new_level,
-      '！',
+      '!',
     ]);
   },
   /**
@@ -465,8 +465,8 @@ module.exports = {
       '기분을 풀기 위해 ',
       you.get_colored_name(),
       ...(chara.id > 0
-        ? ['은(는) ', chara.get_colored_name(), '과(와) 함께']
-        : ['은(는) 혼자']),
+        ? ['은(는) ', chara.get_colored_name(), '과(와) 함께 ']
+        : ['은(는) 혼자 ']),
       loc_name,
       '을(를) 관광했다……',
     ]);
@@ -538,7 +538,7 @@ module.exports = {
     const f = async (chara, you) => {
       await era.printAndWait([
         you.get_colored_name(),
-        '은(는) 뺨을 붉힌',
+        '은(는) 뺨을 붉힌 ',
         chara.get_colored_name(),
         '을(를) 맞이해 휴게실로 안내했다.',
       ]);
@@ -568,7 +568,7 @@ module.exports = {
     const f = async (chara, you) => {
       await era.printAndWait([
         you.get_colored_name(),
-        '은(는) 고개를 숙인',
+        '은(는) 고개를 숙인 ',
         chara.get_colored_name(),
         '을(를) 맞이해 휴게실로 안내했다.',
       ]);
@@ -654,7 +654,7 @@ module.exports = {
       await era.printAndWait([
         '여름 하면 수영복과 바닷가. 물론 ',
         chara.get_colored_name(),
-        '과(와)',
+        '과(와) ',
         you.get_colored_name(),
         '은(는) 바다에서 쉬면서도 트레이닝을 게을리하지 않았다.',
       ]);

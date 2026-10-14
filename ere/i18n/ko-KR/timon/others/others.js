@@ -88,7 +88,7 @@ module.exports = {
       await report([
         '예년과 마찬가지로 주최 측은 여러 상을 마련해, 최고의 경기력으로 멋진 활약을 보여 준 각 ',
         uma,
-        '와(과) 그 뒤에서 힘써 주신 트레이너 여러분께 경의를 표합니다!',
+        '와 그 뒤에서 힘써 주신 트레이너 여러분께 경의를 표합니다!',
       ]);
       if (is_etusko) {
         await report([
@@ -126,7 +126,7 @@ module.exports = {
         '그럼 곧바로, 관심이 집중된 각 부문의 수상자를 발표하겠습니다!',
       );
       println();
-      await report('먼저…… 올해의 《최우수 트레이너상》입니다!');
+      await report('먼저…… 올해의 《최우수 트레이너》 상입니다!');
       println();
       if (typeof uma_list_cb.best_trainer === 'function') {
         uma_list_cb.best_trainer();
@@ -147,7 +147,7 @@ module.exports = {
         }
       }
       println();
-      await report('이어서…… 올해의 《최우수 주니어상》입니다!');
+      await report('이어서…… 올해의 《최우수 주니어》 상입니다!');
       println();
       if (typeof uma_list_cb.junior === 'function') {
         uma_list_cb.junior();
@@ -155,7 +155,7 @@ module.exports = {
       } else {
         await printAndWait(
           [
-            '(주니어급을 막 마친 선수의 이름과 사진. 아쉽게도',
+            '(주니어급을 막 마친 선수의 이름과 사진. 아쉽게도 ',
             you.get_colored_name(),
             '의 팀원은 아니다)',
           ],
@@ -165,7 +165,7 @@ module.exports = {
       println();
       await report('이 선수가 앞으로도 코스 위에서 빛나기를 바랍니다!');
       println();
-      await report('다음은…… 올해의 《최우수 클래식급상》입니다!');
+      await report('다음은…… 올해의 《최우수 클래식》 상입니다!');
       println();
       if (typeof uma_list_cb.classic === 'function') {
         uma_list_cb.classic();
@@ -173,7 +173,7 @@ module.exports = {
       } else {
         await printAndWait(
           [
-            '(클래식급을 막 마친 선수의 이름과 사진. 아쉽게도',
+            '(클래식급을 막 마친 선수의 이름과 사진. 아쉽게도 ',
             you.get_colored_name(),
             '의 팀원은 아니다)',
           ],
@@ -183,7 +183,7 @@ module.exports = {
       println();
       await report('벌써 중심을 이끌어 갈 풍격이 느껴지는군요!');
       println();
-      await report('그리고…… 올해의 《최우수 시니어급상》입니다!');
+      await report('그리고…… 올해의 《최우수 시니어》 상입니다!');
       println();
       if (typeof uma_list_cb.senior === 'function') {
         uma_list_cb.senior();
@@ -191,7 +191,7 @@ module.exports = {
       } else {
         await printAndWait(
           [
-            '(시니어급을 막 마친 선수의 이름과 사진. 아쉽게도',
+            '(시니어급을 막 마친 선수의 이름과 사진. 아쉽게도 ',
             you.get_colored_name(),
             '의 팀원은 아니다)',
           ],
@@ -206,7 +206,7 @@ module.exports = {
         uma,
         '…… 과연 누구일까요?!',
       ]);
-      await report(['《연도 대표 ', uma, '》. 이 마지막 영예는——']);
+      await report(['《연도 대표 ', uma, '》의 영예는——']);
       println();
       if (typeof uma_list_cb.uoty === 'function') {
         uma_list_cb.uoty();

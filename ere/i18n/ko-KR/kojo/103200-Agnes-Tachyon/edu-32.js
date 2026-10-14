@@ -2263,7 +2263,7 @@ module.exports = {
      */
     const f = async (tachyon, you) => {
       await era.printAndWait([
-        '이곳은 후추의 트레센 학원. 오늘도 ',
+        '이곳은 후추 시의 트레센 학원. 오늘도 ',
         you.get_colored_name(),
         '의 꿈은 이곳에서 계속 자라나고 있다',
       ]);
@@ -3630,7 +3630,7 @@ module.exports = {
       ]);
       era.println();
       await tachyon.say_and_wait(
-        '자네는 여기서 얌전히 내 개선을 기다리고 있으면 되네',
+        '자네는 여기서 얌전히 내 승전을 기다리고 있으면 되네',
       );
     };
     f.title = title;

@@ -33,7 +33,7 @@ module.exports = {
   async come_in_mejiro_city(chara, you) {
     await printAndWait([
       you.get_colored_name(),
-      '은(는)',
+      '은(는) ',
       chara.get_colored_name(),
       '과(와) 함께 메지로 시티에 들어갔다……',
     ]);
@@ -45,7 +45,7 @@ module.exports = {
    */
   get_header: (chara, location) => [
     chara.get_colored_name(),
-    '과(와)',
+    '과(와) ',
     location,
     '에 있다',
   ],
@@ -70,7 +70,7 @@ module.exports = {
     const lust = Math.max(get('base:0:性欲'), get(`base:${chara.id}:性欲`));
     ret.push([
       you.get_colored_name(),
-      '과(와)',
+      '과(와) ',
       chara.get_colored_name(),
       '은(는) 안개에 싸인 도시에 있다……',
     ]);
@@ -133,7 +133,7 @@ module.exports = {
     const ret = [];
     await printAndWait([
       you.get_colored_name(),
-      '과(와)',
+      '과(와) ',
       chara.get_colored_name(),
       '은(는) 안개에 완전히 둘러싸였다……',
     ]);
@@ -150,9 +150,9 @@ module.exports = {
         '은(는) 머릿속에서 피가 울리는 소리를 들었고, 자제력은 야릇한 상상의 공세에 무너져 내렸다……',
       ]);
       await printAndWait([
-        '옆의',
+        '옆의 ',
         chara.get_colored_name(),
-        '도 마찬가지로 볼을 붉히고 다리를 모으고 있다.',
+        '도 마찬가지로 볼을 붉히고 다리를 모으고 있다. ',
         you.get_colored_name(),
         '은(는) 마침내 생각에 몸을 맡겼다……',
       ]);
@@ -163,25 +163,25 @@ module.exports = {
       if (ret[0] === 1) {
         await printAndWait([
           you.get_colored_name(),
-          '은(는)',
+          '은(는) ',
           chara.get_colored_name(),
           '을(를) 보았다. 그 눈동자에는 어두운 물결이 일고 있었다……',
         ]);
         await printAndWait([
           you.get_colored_name(),
-          '은(는) 스스로 욕망의 수렁에 발을 들여놓고,',
+          '은(는) 스스로 욕망의 수렁에 발을 들여놓고 ',
         ]);
         await printAndWait([chara.sex, '과(와) 함께 끝없이 가라앉았다……']);
       } else {
         await printAndWait([
           you.get_colored_name(),
-          '은(는)',
+          '은(는) ',
           chara.get_colored_name(),
           '을(를) 보았다. 그 눈동자에는 어두운 물결이 일고 있었다……',
         ]);
         await printAndWait([
           you.get_colored_name(),
-          '은(는) 황급히 욕망의 수렁에서 발을 빼려 했지만,',
+          '은(는) 황급히 욕망의 수렁에서 발을 빼려 했지만 ',
         ]);
         await printAndWait('발을 디딜수록 더 깊이 빠져들어, 끝내 가라앉았다……');
       }
@@ -201,16 +201,16 @@ module.exports = {
       if (typeof vehicle === 'string') {
         await printAndWait([
           you.get_colored_name(),
-          '과(와)',
+          '과(와) ',
           chara.get_colored_name(),
-          '은(는) 안개를 벗어나,',
+          '은(는) 안개를 벗어나 ',
           vehicle,
           '옆에 있었다.',
         ]);
       } else {
         await printAndWait([
           you.get_colored_name(),
-          '과(와)',
+          '과(와) ',
           chara.get_colored_name(),
           '은(는) 안개를 벗어나 버스 옆에 있었다.',
         ]);
@@ -218,7 +218,7 @@ module.exports = {
     } else {
       await printAndWait([
         you.get_colored_name(),
-        '이(가) 정신을 차리자 메지로 시티 밖의 긴 의자였다. 옆에서는',
+        '이(가) 정신을 차리자 메지로 시티 밖의 긴 의자였다. 옆에서는 ',
         chara.get_colored_name(),
         '이(가) 자고 있었다.',
       ]);
@@ -227,7 +227,7 @@ module.exports = {
         '이(가) 깨어난 뒤 두 사람은 어디선가 들려오는 만족스러운 웃음소리를 뒤로하고 메지로 시티를 떠났다……',
       ]);
       await printAndWait([
-        '……하지만 그날 이후,',
+        '……하지만 그날 이후 ',
         chara.get_colored_name(),
         '은(는) 때때로 들릴 듯 말 듯한 속삭임을 듣는다……',
       ]);
@@ -260,7 +260,7 @@ module.exports = {
   print_city_info(chara, you) {
     print([
       you.get_colored_name(),
-      '과(와)',
+      '과(와) ',
       chara.get_colored_name(),
       '은(는) 깨끗한 거리에 서 있다.',
     ]);
@@ -334,7 +334,7 @@ module.exports = {
    * @param {string} medicine 买的药
    */
   async city_hospital_medicine(waiter_say_cb, medicine) {
-    await waiter_say_cb(['네,', medicine, '하나~']);
+    await waiter_say_cb(['네 ', medicine, '하나~']);
     await waiter_say_cb('1주 뒤에 효과가 나타납니다~');
   },
   /**
@@ -347,9 +347,9 @@ module.exports = {
     await waiter_say_cb('축하합니다. 아이가 얼마나 자랐는지 볼까요……');
     await printAndWait(
       [
-        '＜기계 화면에 아이의 영상이 비친다.',
+        '＜기계 화면에 아이의 영상이 비친다. ',
         you.get_colored_name(),
-        '은(는) 흑백 화면에서 어째서인지',
+        '은(는) 흑백 화면에서 어째서인지 ',
         father.get_colored_name(),
         '의 얼굴을 보았다＞',
       ],
@@ -373,7 +373,7 @@ module.exports = {
    */
   get_city_massage_get_talent: (target, talent) => [
     target.get_colored_name(),
-    '은(는)',
+    '은(는) ',
     talent,
     '을(를) 얻었다!',
   ],
@@ -419,14 +419,14 @@ module.exports = {
     } else if (get_or_rm) {
       await printAndWait([
         target.get_colored_name(),
-        '은(는)',
+        '은(는) ',
         iron_mind,
         '을(를) 습득했다!',
       ]);
     } else {
       await printAndWait([
         target.get_colored_name(),
-        '은(는)',
+        '은(는) ',
         iron_mind,
         '을(를) 잊었다!',
       ]);

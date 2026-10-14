@@ -124,7 +124,7 @@ class I18nTimon {
   get_it_celebration = (chara, celebration) => [
     '【',
     chara.get_colored_name(),
-    '과(와) 함께',
+    '과(와) 함께 ',
     celebration,
     '을(를) 축하했다】',
   ];
@@ -145,7 +145,7 @@ class I18nTimon {
    */
   get_it_basement_me = (chara, you) => [
     you.get_colored_name(),
-    '의 부탁을 듣고,',
+    '의 부탁을 듣고 ',
     chara.get_colored_name(),
     '은(는) 조금 마음이 움직인 듯하다……',
   ];
@@ -191,11 +191,12 @@ class I18nTimon {
    * @param {string} location
    */
   get_it_self_goto_location = (vehicle, location) => [
-    '【혼자',
-    vehicle,
-    '에서',
+    '【혼자 ',
     location,
     '(으)로 향했다】',
+	'【',
+	vehicle,
+	'】',
   ];
   it_back_office = '【복귀】';
   it_force_back_office = '【아무도 없는 것 같아 돌아왔다……】';
@@ -230,9 +231,9 @@ class I18nTimon {
   get_it_recruit_disabled = (you, uma) => [
     '【',
     you.get_colored_name(),
-    '에게는 이미 담당이 충분하다. 다른',
+    '에게는 이미 담당이 충분하다. 다른 ',
     uma,
-    '은(는) ',
+    '는 ',
     you.get_colored_name(),
     '의 모집에 응하지 않을 것이다】',
   ];
@@ -240,7 +241,7 @@ class I18nTimon {
   get_it_no_chara_in_recruit = (uma) => [
     '【트레이닝장에 눈길을 끄는',
     uma,
-    '은(는) 없다】',
+    '는 없었다】',
   ];
 
   rec_kojo_mark_border = ['[', ']'];
@@ -260,19 +261,19 @@ class I18nTimon {
   ];
   /** @param {PrintedSpan} income */
   get_it_income_invest = (income) => [
-    '【투자 수익',
+    '【투자 수익 ',
     income,
     '우마 코인을 받았다】',
   ];
   /** @param {PrintedSpan} income */
   get_it_income_annal_bonus = (income) => [
-    '【학원에서 트레이너 급여와 연말 상여금',
+    '【학원에서 트레이너 급여와 연말 상여금 ',
     income,
     '우마 코인을 받았다】',
   ];
   /** @param {PrintedSpan} income */
   get_it_income_salary = (income) => [
-    '【학원에서 트레이너 급여',
+    '【학원에서 트레이너 급여 ',
     income,
     '우마 코인을 받았다】',
   ];
@@ -284,7 +285,7 @@ class I18nTimon {
   get_it_punish_avoid_race = (you, chara_list) => [
     '【',
     ...chara_list,
-    '의 출전 취소로, 사회의',
+    '의 출전 취소로 ',
     you.get_colored_name(),
     '에 대한 평가가 떨어졌다!】',
   ];
@@ -312,7 +313,7 @@ class I18nTimon {
   get_it_train_take_care = (chara, teacher, train) => [
     '【',
     teacher.get_colored_name(),
-    '이(가) 지켜보는 가운데,',
+    '이(가) 지켜보는 가운데 ',
     chara.get_colored_name(),
     '은(는) ',
     train,
@@ -325,7 +326,7 @@ class I18nTimon {
   get_it_train_together = (chara_list, train) => [
     '【',
     ...chara_list,
-    '은(는) 함께',
+    '은(는) 함께 ',
     train,
     '자율 트레이닝을 했다】',
   ];
@@ -351,7 +352,7 @@ class I18nTimon {
     chara.get_colored_name(),
     '은(는) ',
     item,
-    '의 영향으로',
+    '의 영향으로 ',
     talent,
     '상태가 되었다!】',
   ];
@@ -393,7 +394,7 @@ class I18nTimon {
   get_it_nt_not_be_headache = (chara, status) => [
     '【',
     chara.get_colored_name(),
-    '의',
+    '의 ',
     status,
     '이(가) 나았다】',
   ];
@@ -410,9 +411,9 @@ class I18nTimon {
   get_it_nt_love_unlimit = (chara, you) => [
     '【',
     chara.get_colored_name(),
-    '에게 먹인 억제제의 효과가 끝났다……',
+    '에게 먹인 억제제의 효과가 끝났다…… ',
     chara.get_colored_name(),
-    '의',
+    '의 ',
     you.get_colored_name(),
     '을(를) 향한 연심이 한꺼번에 넘쳐흐른다】',
   ];
@@ -423,7 +424,7 @@ class I18nTimon {
   get_it_nt_train_level_up = (chara, up_info) => [
     '【',
     chara.get_colored_name(),
-    '의',
+    '의 ',
     up_info,
     '】',
   ];
@@ -454,13 +455,13 @@ class I18nTimon {
    */
   get_it_name_result = (mother, child) => [
     mother.get_colored_name(),
-    '의 아이 이름은',
+    '의 아이 이름은 ',
     child.get_colored_name(),
   ];
   it_hb_rename = '이름을 다시 지을까요?';
   /** @param {PrintedSpan} celebration */
   get_it_nt_celebration_notification = (celebration) => [
-    '【이번 주는',
+    '【이번 주는 ',
     celebration,
     '. 팀원들에게도 관심을 기울여야 할 행사가 있을지 모른다】',
   ];
@@ -469,9 +470,9 @@ class I18nTimon {
    * @param {PrintedSpan} race
    */
   get_it_nt_race_notification = (chara, race) => [
-    '【이번 주에는',
+    '【이번 주에는 ',
     chara.get_colored_name(),
-    '이(가) 출전 등록한',
+    '이(가) 출전 등록한 ',
     race,
     '이(가) 열린다】',
   ];
@@ -508,11 +509,11 @@ class I18nTimon {
   it_nt_back_info_summer =
     '【여름 합숙을 떠났던 인원들이 트레센으로 돌아왔다】';
 
-  it_nt_moon_well_cool_down = '【비탕의 효력이 회복되었습니다】';
+  it_nt_moon_well_cool_down = '【비밀 온천의 효력이 회복되었습니다】';
   get_it_moon_well_together = (chara) => [
     '【',
     chara.get_colored_name(),
-    '와 함께 비탕 안내 데스크에 있습니다】',
+    '와 함께 비밀 온천 안내 데스크에 있습니다】',
   ];
 
   /**
@@ -527,11 +528,11 @@ class I18nTimon {
           title,
           ' ',
           ...chara_list,
-          '은(는) 각각',
+          '은(는) 각각 ',
           item,
-          '한 잔을 바쳤다】',
+          ' 한 잔을 바쳤다】',
         ]
-      : ['【', title, ' ', ...chara_list, '은(는) ', item, '한 잔을 바쳤다】'];
+      : ['【', title, ' ', ...chara_list, '은(는) ', item, ' 한 잔을 바쳤다】'];
   /**
    * @param {string} title
    * @param {CharaTalk} chara

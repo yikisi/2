@@ -210,13 +210,13 @@ valentine:
           content: "오구리 캡"
         - "「오늘은 발렌타인데이라서, 수제 초콜릿을 만들어 봤어.」"
     -
-    - "%YOU%은(는) 감동하며 초콜릿을 받았다—— 그러자 곧바로 손을 잡힌 채 어딘가로 이끌려갔다."
+    - "%YOU%은(는) 감동하며 초콜릿을 받았다—— 그리고 곧바로 손을 잡힌 채 어딘가로 이끌려갔다."
     -
     - color: %COLOR%
       content:
         - fontWeight: bold
           content: "오구리 캡"
-        - "「자, 가자…… 어디 가냐고?」"
+        - "「자, 가자…… 어디에 가냐고?」"
     - color: %COLOR%
       content:
         - fontWeight: bold
@@ -241,7 +241,7 @@ valentine:
       content:
         - fontWeight: bold
           content: "오구리 캡"
-        - "「너무 많아서 학원까지는 못 가져왔어. 하지만 걱정 마. 냉장 보관 잘 해뒀으니까.」"
+        - "「너무 많아서 학원까지는 못 가져왔어. 하지만 걱정 마. 잘 냉장 보관 해뒀으니까.」"
     - color: %COLOR%
       content:
         - fontWeight: bold
