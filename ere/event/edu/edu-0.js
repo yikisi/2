@@ -338,9 +338,9 @@ module.exports = class extends CustomizedEdu {
    * @param _call
    * @param {HookArg} hook
    * @param _extra
-   * @param {EventObject} event_object
+   * @param {EventObject} ebj
    */
-  async breakfast(me, _me, _call, hook, _extra, event_object) {
+  async breakfast(me, _me, _call, hook, _extra, ebj) {
     const cid = get_random_entry(
       getAddedCharacters().filter(
         (cid) =>
@@ -352,7 +352,7 @@ module.exports = class extends CustomizedEdu {
       ),
     );
     if (!cid || get('flag:当前位置') !== location_enum.office) {
-      add_event(hook.hook, event_object);
+      add_event(hook.hook, ebj);
       return;
     }
     await print_title_with_kojo(
@@ -367,7 +367,7 @@ module.exports = class extends CustomizedEdu {
     if (sys_love_uma(cid, 1)) {
       await waitAnyKey();
     }
-    add_event(hook.hook, event_object.set_arg('privacy_1'));
+    add_event(hook.hook, ebj.set_arg('privacy_1'));
   }
 
   /** @param {CharaTalk} me */
@@ -540,8 +540,15 @@ module.exports = class extends CustomizedEdu {
     return true;
   }
 
-  /** @param {CharaTalk} me */
-  async justice(me) {
+  /**
+   * @param {CharaTalk} me
+   * @param _me
+   * @param _call
+   * @param {HookArg} hook
+   * @param _extra
+   * @param {EventObject} ebj
+   */
+  async justice(me, _me, _call, hook, _extra, ebj) {
     const minoru = get_chara_talk(301);
     const { min } = get_extremum_entry(
       sys_filter_chara('cflag', '招募状态', recruit_flags.yes).filter(
@@ -555,6 +562,10 @@ module.exports = class extends CustomizedEdu {
         get(`relation:${cid}:0`) -
         get(`love:${cid}`) * (get('flag:极端行为限制') || 1),
     );
+    if (min === void 0) {
+      add_event(hook.hook, ebj);
+      return;
+    }
     switch (
       (
         await print_title_with_kojo(

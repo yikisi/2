@@ -2760,6 +2760,7 @@ module.exports = {
     return f;
   })(),
   justice: (() => {
+    const title = '路见不平';
     /**
      * @author 牛蛙煲
      * @param {CharaTalk} you 玩家
@@ -2957,7 +2958,7 @@ module.exports = {
       }
       return [ret];
     };
-    f.title = '路见不平';
+    f.title = title;
     return f;
   })(),
 };
