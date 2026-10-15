@@ -33,7 +33,9 @@ function sub_simulate_ero(list_chara, timer_record, timer, events, reports) {
     let s_times = 0;
     if (uma.race.conditionParams.item === 1) {
       ['breast', 'penis', 'clitoris', 'virgin', 'anal'].forEach(
-        (p) => (uma.ero.param[p] += param_base * (1 + uma.ero.buff[p])),
+        (p) =>
+          uma.ero.item[p] > 0 &&
+          (uma.ero.param[p] += param_base * (1 + uma.ero.buff[p])),
       );
       let tmp;
       orgasm += tmp = Math.floor(uma.ero.param.breast / 10000);
@@ -57,10 +59,12 @@ function sub_simulate_ero(list_chara, timer_record, timer, events, reports) {
       uma.ero.param.clitoris %= 10000;
       s_times += tmp * (1 + uma.ero.cost.clitoris);
       era.add(`exp:${cid}:外阴高潮次数`, tmp);
-      era.add(
-        `exp:${cid}:爱液分泌量`,
-        Math.floor(get_random_value(...secretion_amount.virgin) / 2),
-      );
+      if (tmp > 0) {
+        era.add(
+          `exp:${cid}:爱液分泌量`,
+          Math.floor(get_random_value(...secretion_amount.virgin) / 2),
+        );
+      }
 
       uma.ero.main.forEach((p) => (uma.ero.param[p] += orgasm * 1000));
 
@@ -68,16 +72,23 @@ function sub_simulate_ero(list_chara, timer_record, timer, events, reports) {
       uma.ero.param.penis %= 10000;
       s_times += tmp * (1 + uma.ero.cost.penis);
       era.add(`exp:${cid}:阴茎高潮次数`, tmp);
-      era.add(`exp:${cid}:射精量`, get_random_value(...secretion_amount.penis));
+      if (tmp > 0) {
+        era.add(
+          `exp:${cid}:射精量`,
+          get_random_value(...secretion_amount.penis),
+        );
+      }
 
       orgasm += tmp = Math.floor(uma.ero.param.virgin / 10000);
       uma.ero.param.virgin %= 10000;
       s_times += tmp * (1 + uma.ero.cost.virgin);
       era.add(`exp:${cid}:阴道高潮次数`, tmp);
-      era.add(
-        `exp:${cid}:爱液分泌量`,
-        get_random_value(...secretion_amount.virgin),
-      );
+      if (tmp > 0) {
+        era.add(
+          `exp:${cid}:爱液分泌量`,
+          get_random_value(...secretion_amount.virgin),
+        );
+      }
     } else if (uma.ero.param.sex >= 10000) {
       s_times = orgasm = Math.floor(uma.ero.param.sex / 10000);
       uma.ero.param.sex %= 10000;
